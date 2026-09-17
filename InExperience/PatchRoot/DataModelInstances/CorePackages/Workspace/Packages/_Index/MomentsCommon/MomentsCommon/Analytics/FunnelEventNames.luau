@@ -5,6 +5,7 @@
 	TextOverlayEnhancement = "Text Enhancement",
 	StickerOverlayEnhancement = "Sticker Enhancement",
 	TrimEnhancement = "Trim Enhancement",
+	VoiceEnhancement = "Voice Enhancement",
 	DraftRecovery = "Draft Recovery"
 }
 local t_1 = {
@@ -40,6 +41,13 @@ local t_7 = {
 	TrimCompleted = "TrimCompleted"
 }
 local t_8 = {
+	VoiceButtonPressed = "VoiceButtonPressed",
+	VoiceTextEntered = "VoiceTextEntered",
+	VoiceGeneratePressed = "VoiceGeneratePressed",
+	VoiceGenerateSucceeded = "VoiceGenerateSucceeded",
+	VoiceApplied = "VoiceApplied"
+}
+local t_9 = {
 	DraftRestored = "DraftRestored",
 	DraftPublished = "DraftPublished"
 }
@@ -87,9 +95,16 @@ return {
 			[t_6.StickerOverlaySelected] = { stepNumber = 2, stepName = "Sticker Overlay Selected" },
 			[t_6.StickerOverlayCompleted] = { stepNumber = 3, stepName = "Sticker Overlay Completed" }
 		},
+		[t.VoiceEnhancement] = {
+			[t_8.VoiceButtonPressed] = { stepNumber = 1, stepName = "Voice Button Pressed" },
+			[t_8.VoiceTextEntered] = { stepNumber = 2, stepName = "Voice Text Entered" },
+			[t_8.VoiceGeneratePressed] = { stepNumber = 3, stepName = "Voice Generate Pressed" },
+			[t_8.VoiceGenerateSucceeded] = { stepNumber = 4, stepName = "Voice Generate Succeeded" },
+			[t_8.VoiceApplied] = { stepNumber = 5, stepName = "Voice Applied" }
+		},
 		[t.DraftRecovery] = {
-			[t_8.DraftRestored] = { stepNumber = 1, stepName = "Draft Restored" },
-			[t_8.DraftPublished] = { stepNumber = 2, stepName = "Draft Published" }
+			[t_9.DraftRestored] = { stepNumber = 1, stepName = "Draft Restored" },
+			[t_9.DraftPublished] = { stepNumber = 2, stepName = "Draft Published" }
 		}
 	},
 	CreationIntentSource = t_2,
@@ -99,5 +114,6 @@ return {
 	TrimEnhancementSteps = t_7,
 	TextOverlayEnhancementSteps = t_5,
 	StickerOverlayEnhancementSteps = t_6,
-	DraftRecoverySteps = t_8
+	VoiceEnhancementSteps = t_8,
+	DraftRecoverySteps = t_9
 }

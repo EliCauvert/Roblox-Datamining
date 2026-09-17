@@ -303,7 +303,7 @@ return function(p1)
 		if var18.onCommit ~= nil and var18.onCommit(var19, var1) == false then return end
 		store.setCommittedEdit(var18.kind, var19)
 		
-		if var18.cta.commitAnalyticsEvent ~= nil then
+		if var18.cta.commitAnalyticsEvent ~= nil and (not var18.cta.commitRequiresEdit or (if var18.toEdits ~= nil then next(var18.toEdits(var19)) ~= nil else true)) then
 			fireAnalyticsEventModule(var18.cta.commitAnalyticsEvent, withCreationSession(makeCreationEventFieldsModule.makeToolField(var18)))
 		end
 		setActiveSession(nil)
@@ -438,7 +438,7 @@ return function(p1)
 		getVoiceCoachmarkDismissed = var10,
 		dismissVoiceCoachmark = dismissVoiceCoachmark,
 		publish = function()
-			-- upvalues: store (ref), host (ref), var3 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), sessionManager (copy), funnelEventNames (copy), preview (ref), var4 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), dismiss (ref)
+			-- upvalues: store (ref), host (ref), var3 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), sessionManager (copy), funnelEventNames (copy), preview (ref), var4 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), getFFlagMomentsTTSAudioOverlayModule (copy), dismiss (ref)
 			local description = store.getDescription(false)
 			
 			if host.isTextFiltered ~= nil and host.isTextFiltered(description) then
@@ -496,6 +496,10 @@ return function(p1)
 				if description ~= nil and description ~= "" then
 					var19 += 1
 					textOverlayEdits.reportMomentsPublishedWithEdit("description")
+				end
+				if getFFlagMomentsTTSAudioOverlayModule and var18.tts ~= nil then
+					var19 += 1
+					textOverlayEdits.reportMomentsPublishedWithEdit("tts")
 				end
 				textOverlayEdits.reportMomentsPublishedEditCount(var19)
 				local selectedCapture = store.getSelectedCapture(false)

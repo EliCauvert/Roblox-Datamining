@@ -1,13 +1,12 @@
 ﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local getSduiTelemetryHandlerNameRegistry = require(parent.SduiCoreSystem).getSduiTelemetryHandlerNameRegistry
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppSduiOpenSearchResultsWithQueryAction = sharedFlagsModule.FFlagLuaAppSduiOpenSearchResultsWithQueryAction
 local fFlagLuaAppSduiQuerySuggestionClickedTelemetry = sharedFlagsModule.FFlagLuaAppSduiQuerySuggestionClickedTelemetry
 local fFlagLuaAppSduiGameTileFeedback = sharedFlagsModule.FFlagLuaAppSduiGameTileFeedback
 
 return function()
-	-- upvalues: getSduiTelemetryHandlerNameRegistry (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagLuaAppSduiOpenSearchResultsWithQueryAction (ref), fFlagLuaAppSduiQuerySuggestionClickedTelemetry (ref)
+	-- upvalues: getSduiTelemetryHandlerNameRegistry (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagLuaAppSduiOpenSearchResultsWithQueryAction (ref), fFlagLuaAppSduiQuerySuggestionClickedTelemetry (ref)
 	getSduiTelemetryHandlerNameRegistry().registerTelemetryHandlers({
 		LeavingRoblox = {
 			lazyHandler = function()
@@ -29,36 +28,36 @@ return function()
 				return require(script.Parent.SduiShareEventTelemetryHandler)
 			end
 		},
-		RequestRefundClick = if fFlagSduiExperienceDetailsSupport then {
+		RequestRefundClick = {
 			lazyHandler = function()
 				return require(script.Parent.SduiRequestRefundClickTelemetryHandler)
 			end
-		} else nil,
-		EdpStoreItemClick = if fFlagSduiExperienceDetailsSupport then {
+		},
+		EdpStoreItemClick = {
 			lazyHandler = function()
 				return require(script.Parent.SduiEdpStoreItemClickTelemetryHandler)
 			end
-		} else nil,
-		ExperienceDetailsJoinFriends = if fFlagSduiExperienceDetailsSupport then {
+		},
+		ExperienceDetailsJoinFriends = {
 			lazyHandler = function()
 				return require(script.Parent.SduiExperienceDetailsJoinFriendsTelemetryHandler)
 			end
-		} else nil,
-		ExperienceDetailsCreatePrivateServer = if fFlagSduiExperienceDetailsSupport then {
+		},
+		ExperienceDetailsCreatePrivateServer = {
 			lazyHandler = function()
 				return require(script.Parent.SduiExperienceDetailsCreatePrivateServerTelemetryHandler)
 			end
-		} else nil,
+		},
 		EdpStorePurchaseAttempt = {
 			lazyHandler = function()
 				return require(script.Parent.SduiEdpStorePurchaseAttemptTelemetryHandler)
 			end
 		},
-		GameDetailsSubpage = if fFlagSduiExperienceDetailsSupport then {
+		GameDetailsSubpage = {
 			lazyHandler = function()
 				return require(script.Parent.SduiGameDetailsSubpageTelemetryHandler)
 			end
-		} else nil,
+		},
 		GameTileOverflowMenu = if fFlagLuaAppSduiGameTileFeedback then {
 			lazyHandler = function()
 				return require(script.Parent.SduiGameTileOverflowMenuTelemetryHandler)

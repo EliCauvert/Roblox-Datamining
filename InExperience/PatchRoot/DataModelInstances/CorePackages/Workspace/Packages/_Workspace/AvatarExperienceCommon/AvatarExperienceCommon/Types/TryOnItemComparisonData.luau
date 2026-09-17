@@ -1,3 +1,3 @@
-﻿local _ = require(script.Parent.Parent.Enums.ItemTypeEnum)
+﻿local _ = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceModel)
 
 return {}

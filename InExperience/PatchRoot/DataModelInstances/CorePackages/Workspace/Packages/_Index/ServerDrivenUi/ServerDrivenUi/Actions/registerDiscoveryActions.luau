@@ -7,10 +7,8 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local getSduiActionHandlerRegistry = sduiCoreSystemModule.getSduiActionHandlerRegistry
 local fFlagSduiActionsUpdateFiresOwnTelemetry = require(parent.SharedFlags).FFlagSduiActionsUpdateFiresOwnTelemetry
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagSduiCommunitySectionSupport = require(parent.SharedFlags).FFlagSduiCommunitySectionSupport
 local fFlagSduiDevStoreSeeAllSupport = require(parent.SharedFlags).FFlagSduiDevStoreSeeAllSupport
-local fFlagSduiEventDetailsSupport = require(parent.SharedFlags).FFlagSduiEventDetailsSupport
 local fFlagSduiLaunchExperienceAction = require(parent.SharedFlags).FFlagSduiLaunchExperienceAction
 local fFlagLuaAppUnlockUpsellSupport = require(parent.SharedFlags).FFlagLuaAppUnlockUpsellSupport
 local fFlagRobloxPlusFAEFreeTrial = require(parent.SharedFlags).FFlagRobloxPlusFAEFreeTrial
@@ -21,7 +19,7 @@ local fFlagLuaAppSduiHomePageSupport = require(parent.SharedFlags).FFlagLuaAppSd
 local fFlagLuaAppSduiGameTileFeedback = require(parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 
 return function()
-	-- upvalues: sduiActionType (ref), serverDrivenUi (ref), fFlagRobloxPlusFAEFreeTrial (ref), fFlagSduiActionsUpdateFiresOwnTelemetry (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiOpenSearchResultsTabAction (ref), fFlagLuaAppSduiOpenSearchResultsWithQueryAction (ref), fFlagLuaAppUnlockUpsellSupport (ref), fFlagSduiAiOverviewEnabled (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagLuaAppSduiUpdateUserSettingsAction (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiLaunchExperienceAction (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref), fFlagSduiPinShortcutAction (ref), fFlagSduiCommunitySectionSupport (ref), getSduiActionHandlerRegistry (ref)
+	-- upvalues: sduiActionType (ref), serverDrivenUi (ref), fFlagRobloxPlusFAEFreeTrial (ref), fFlagSduiActionsUpdateFiresOwnTelemetry (ref), fFlagSduiOpenSearchResultsTabAction (ref), fFlagLuaAppSduiOpenSearchResultsWithQueryAction (ref), fFlagLuaAppUnlockUpsellSupport (ref), fFlagSduiAiOverviewEnabled (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagLuaAppSduiUpdateUserSettingsAction (ref), fFlagSduiLaunchExperienceAction (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref), fFlagSduiPinShortcutAction (ref), fFlagSduiCommunitySectionSupport (ref), getSduiActionHandlerRegistry (ref)
 	getSduiActionHandlerRegistry().registerActionHandlerConfigs({
 		[sduiActionType.DismissDialog] = {
 			skipUnifiedLogging = false,
@@ -65,7 +63,7 @@ return function()
 				return require(serverDrivenUi.Actions.SduiOpenBadgeDetailsAction)
 			end
 		},
-		[sduiActionType.OpenBadgesSeeAll] = if fFlagSduiExperienceDetailsSupport then {
+		[sduiActionType.OpenBadgesSeeAll] = {
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiOpenBadgesSeeAllAction)
@@ -74,8 +72,8 @@ return function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.TelemetryHandlers.SduiGameDetailsSubpageTelemetryHandler)
 			end
-		} else nil,
-		[sduiActionType.OpenExperienceStoreSeeAll] = if fFlagSduiExperienceDetailsSupport then {
+		},
+		[sduiActionType.OpenExperienceStoreSeeAll] = {
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiOpenExperienceStoreSeeAllAction)
@@ -84,7 +82,7 @@ return function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.TelemetryHandlers.SduiGameDetailsSubpageTelemetryHandler)
 			end
-		} else nil,
+		},
 		[sduiActionType.OpenProfile] = {
 			skipUnifiedLogging = false,
 			lazyHandler = function()
@@ -124,7 +122,7 @@ return function()
 				return require(serverDrivenUi.Actions.TelemetryHandlers.SduiOpenSearchResultsWithQueryTelemetryHandler)
 			end
 		} else nil,
-		[sduiActionType.OpenSocialLink] = if fFlagSduiExperienceDetailsSupport then {
+		[sduiActionType.OpenSocialLink] = {
 			skipUnifiedLogging = true,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
@@ -134,14 +132,14 @@ return function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.TelemetryHandlers.SduiLeavingRobloxTelemetryHandler)
 			end
-		} else nil,
-		[sduiActionType.OpenSongDetail] = if fFlagSduiExperienceDetailsSupport then {
+		},
+		[sduiActionType.OpenSongDetail] = {
 			skipUnifiedLogging = false,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiOpenSongDetailAction)
 			end
-		} else nil,
+		},
 		[sduiActionType.OpenAmpWizard] = if fFlagLuaAppUnlockUpsellSupport then {
 			skipUnifiedLogging = false,
 			lazyHandler = function()
@@ -149,36 +147,36 @@ return function()
 				return require(serverDrivenUi.Actions.SduiOpenAmpWizardAction)
 			end
 		} else nil,
-		[sduiActionType.ToggleExperienceFavorite] = if fFlagSduiExperienceDetailsSupport then {
+		[sduiActionType.ToggleExperienceFavorite] = {
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiToggleExperienceFavoriteAction)
 			end
-		} else nil,
-		[sduiActionType.ToggleExperienceFollow] = if fFlagSduiExperienceDetailsSupport then {
+		},
+		[sduiActionType.ToggleExperienceFollow] = {
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiToggleExperienceFollowAction)
 			end
-		} else nil,
-		[sduiActionType.ToggleExperienceVote] = if fFlagSduiExperienceDetailsSupport then {
+		},
+		[sduiActionType.ToggleExperienceVote] = {
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiToggleExperienceVoteAction)
 			end
-		} else nil,
-		[sduiActionType.DismissGameFeedback] = if fFlagSduiExperienceDetailsSupport then {
+		},
+		[sduiActionType.DismissGameFeedback] = {
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiDismissGameFeedbackAction)
 			end
-		} else nil,
-		[sduiActionType.OpenGameFeedbackForm] = if fFlagSduiExperienceDetailsSupport then {
+		},
+		[sduiActionType.OpenGameFeedbackForm] = {
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiOpenGameFeedbackFormAction)
 			end
-		} else nil,
+		},
 		[sduiActionType.AiOverviewFeedback] = if fFlagSduiAiOverviewEnabled then {
 			skipUnifiedLogging = true,
 			lazyHandler = function()
@@ -241,27 +239,27 @@ return function()
 				return require(serverDrivenUi.Actions.SduiRemoveBadgeFromInventoryAction)
 			end
 		},
-		[sduiActionType.RsvpToEvent] = if fFlagSduiEventDetailsSupport or fFlagSduiExperienceDetailsSupport then {
+		[sduiActionType.RsvpToEvent] = {
 			skipUnifiedLogging = false,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiRsvpToEventAction)
 			end
-		} else nil,
-		[sduiActionType.OpenEventDetails] = if fFlagSduiEventDetailsSupport or fFlagSduiExperienceDetailsSupport then {
+		},
+		[sduiActionType.OpenEventDetails] = {
 			firesOwnTelemetry = false,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiOpenEventDetailsAction)
 			end
-		} else nil,
-		[sduiActionType.OpenGameInvite] = if fFlagSduiExperienceDetailsSupport then {
+		},
+		[sduiActionType.OpenGameInvite] = {
 			skipUnifiedLogging = true,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiOpenGameInviteAction)
 			end
-		} else nil,
+		},
 		[sduiActionType.LaunchExperience] = if fFlagSduiLaunchExperienceAction then {
 			firesOwnTelemetry = false,
 			lazyHandler = function()
@@ -276,25 +274,25 @@ return function()
 				return require(serverDrivenUi.Actions.SduiOpenChartsSortDetailAction)
 			end
 		},
-		[sduiActionType.OpenPurchasePrompt] = if fFlagSduiExperienceDetailsSupport or fFlagSduiDevStoreSeeAllSupport then {
+		[sduiActionType.OpenPurchasePrompt] = {
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.OpenPurchasePrompt.SduiOpenPurchasePromptAction)
 			end
-		} else nil,
+		},
 		[sduiActionType.OpenSubscriptionPurchasePage] = if fFlagSduiDevStoreSeeAllSupport then {
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiOpenSubscriptionPurchasePageAction)
 			end
 		} else nil,
-		[sduiActionType.OpenSduiOverlay] = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then {
+		[sduiActionType.OpenSduiOverlay] = {
 			firesOwnTelemetry = false,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiOpenSduiOverlayAction)
 			end
-		} else nil,
+		},
 		[sduiActionType.ApplyChartsFilter] = {
 			skipUnifiedLogging = false,
 			lazyHandler = function()
@@ -302,39 +300,39 @@ return function()
 				return require(serverDrivenUi.Actions.SduiApplyChartsFilterAction)
 			end
 		},
-		[sduiActionType.RefreshGamePasses] = if fFlagSduiExperienceDetailsSupport then {
+		[sduiActionType.RefreshGamePasses] = {
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiRefreshGamePassesAction)
 			end
-		} else nil,
-		[sduiActionType.RefreshPlayability] = if fFlagSduiExperienceDetailsSupport then {
+		},
+		[sduiActionType.RefreshPlayability] = {
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiRefreshPlayabilityAction)
 			end
-		} else nil,
-		[sduiActionType.EnableEventNotifications] = if fFlagSduiEventDetailsSupport or fFlagSduiExperienceDetailsSupport then {
+		},
+		[sduiActionType.EnableEventNotifications] = {
 			skipUnifiedLogging = false,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiEnableEventNotificationsAction)
 			end
-		} else nil,
-		[sduiActionType.DismissEventNotificationsModal] = if fFlagSduiEventDetailsSupport or fFlagSduiExperienceDetailsSupport then {
+		},
+		[sduiActionType.DismissEventNotificationsModal] = {
 			skipUnifiedLogging = false,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiDismissEventNotificationsModalAction)
 			end
-		} else nil,
-		[sduiActionType.ReportSurfaceLoadTimeMilestone] = if fFlagSduiExperienceDetailsSupport then {
+		},
+		[sduiActionType.ReportSurfaceLoadTimeMilestone] = {
 			skipUnifiedLogging = true,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiReportSurfaceLoadTimeMilestoneAction)
 			end
-		} else nil,
+		},
 		[sduiActionType.RefreshOmniRecommendationFeedItem] = {
 			skipUnifiedLogging = false,
 			lazyHandler = function()

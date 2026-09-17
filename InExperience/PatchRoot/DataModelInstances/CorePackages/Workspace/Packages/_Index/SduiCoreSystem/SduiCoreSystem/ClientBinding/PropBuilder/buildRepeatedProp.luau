@@ -10,13 +10,10 @@ local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
 local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
 local sduiParseHelpersModule = require(sduiCoreSystem.SduiParseHelpers)
 local _ = require(sduiCoreSystem.SduiComponentType)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
-local fFlagSduiImprovedErrorDimensions = sharedFlagsModule.FFlagSduiImprovedErrorDimensions
-local sduiArrayMapSupport = game:DefineFastFlag("SduiArrayMapSupport", false)
+local fFlagSduiImprovedErrorDimensions = require(parent.SharedFlags).FFlagSduiImprovedErrorDimensions
 
 local function buildRepeatedProp(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), sduiPropUtilsModule (ref), sduiClientBindingBuilderModule (ref), propResultCategory (ref), fFlagSduiExperienceDetailsSupport (ref), sduiArrayMapSupport (ref), signalsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), tutilsModule (ref), buildRepeatedProp (ref)
+	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), sduiPropUtilsModule (ref), sduiClientBindingBuilderModule (ref), propResultCategory (ref), signalsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), tutilsModule (ref), buildRepeatedProp (ref)
 	local currentComponentType = nil
 	local currentParserName = nil
 	
@@ -44,7 +41,7 @@ local function buildRepeatedProp(p1, p2, p3, p4, p5, p6, p7)
 			
 			return sduiPropUtilsModule.resolveTablePropValue(p9, var1, var2, var3, p3, p5, p6, p4, sduiClientBindingBuilderModule.buildPropTable)
 		end), propResultCategory.PropSignal
-	elseif (fFlagSduiExperienceDetailsSupport or sduiArrayMapSupport) and p1 == "array_map" then
+	elseif p1 == "array_map" then
 		local type = p2.kind and p2.kind.type
 		local value = p2.kind and p2.kind.value
 		local itemHydrationSpecs = p2.item_hydration_specs

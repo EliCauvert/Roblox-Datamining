@@ -7,7 +7,6 @@ local _ = require(sduiCoreSystem.SduiComponentType)
 local _ = require(sduiCoreSystem.SduiConfigTypes)
 local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
 local validateInterfaceModule = require(sduiCoreSystem.validateInterface)
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local t = {}
 local t_1 = {
 	index = -1,
@@ -22,7 +21,7 @@ local t_2 = {
 	totalNumberOfItems = -1,
 	startRowNumber = -1,
 	collectionComponentType = "unknown",
-	refId = if fFlagSduiExperienceDetailsSupport then "unknown" else nil
+	refId = "unknown"
 }
 
 return {

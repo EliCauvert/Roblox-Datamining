@@ -7,7 +7,6 @@ local responsiveProvider = require(parent.Foundation).ResponsiveProvider
 local cryoModule = require(parent.Cryo)
 local luaAppInfoTableResponsiveProviderOverride = game:DefineFastFlag("LuaAppInfoTableResponsiveProviderOverride", false)
 local luaAppInfoTableResponsiveProviderOverride_1 = game:DefineFastFlag("LuaAppInfoTableWorkaroundGridJank2", false) and luaAppInfoTableResponsiveProviderOverride
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local breakpoint = foundationModule.Enums.Breakpoint
 
 local function buildColumnMajorChildren(p1, p2, p3)
@@ -32,7 +31,7 @@ local function buildColumnMajorChildren(p1, p2, p3)
 end
 
 return reactModule.memo(function(p4)
-	-- upvalues: luaAppInfoTableResponsiveProviderOverride_1 (ref), reactModule (ref), fFlagSduiExperienceDetailsSupport (ref), buildColumnMajorChildren (ref), foundationModule (ref), luaAppInfoTableResponsiveProviderOverride (ref), useResponsive (ref), cryoModule (ref), breakpoint (ref), useBreakpoint (ref), responsiveProvider (ref)
+	-- upvalues: luaAppInfoTableResponsiveProviderOverride_1 (ref), reactModule (ref), buildColumnMajorChildren (ref), foundationModule (ref), luaAppInfoTableResponsiveProviderOverride (ref), useResponsive (ref), cryoModule (ref), breakpoint (ref), useBreakpoint (ref), responsiveProvider (ref)
 	local var3 = if p4.numColumns and p4.numColumns > 0 then p4.numColumns else 1
 	local var4 = nil
 	local var5 = nil
@@ -51,7 +50,7 @@ return reactModule.memo(function(p4)
 	local var12 = 12 / var3
 	
 	if not luaAppInfoTableResponsiveProviderOverride_1 or var4 then
-		if fFlagSduiExperienceDetailsSupport and var3 > 1 then
+		if var3 > 1 then
 			t = buildColumnMajorChildren(p4.items, var3, var12)
 		else
 			for i, v in p4.items do

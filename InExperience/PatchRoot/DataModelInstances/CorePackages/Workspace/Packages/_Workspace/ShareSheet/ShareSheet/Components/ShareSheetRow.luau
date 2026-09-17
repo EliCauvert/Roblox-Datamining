@@ -2,13 +2,18 @@
 local parent = shareSheet.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
+local fFlagShareSheetScrollArrowsModule = require(shareSheet.Flags.FFlagShareSheetScrollArrows)
+local shareSheetRowWithScrollArrowsModule = require(script.Parent.ShareSheetRowWithScrollArrows)
 local scrollView = foundationModule.ScrollView
 local visibility = foundationModule.Enums.Visibility
 local useTokens = foundationModule.Hooks.useTokens
 local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), scrollView (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), visibility (ref)
+	-- upvalues: fFlagShareSheetScrollArrowsModule (ref), reactModule (ref), shareSheetRowWithScrollArrowsModule (ref), useTokens (ref), scrollView (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), visibility (ref)
+	if fFlagShareSheetScrollArrowsModule then
+		return reactModule.createElement(shareSheetRowWithScrollArrowsModule, p1)
+	end
 	local var1 = useTokens()
 	
 	return reactModule.createElement(scrollView, {

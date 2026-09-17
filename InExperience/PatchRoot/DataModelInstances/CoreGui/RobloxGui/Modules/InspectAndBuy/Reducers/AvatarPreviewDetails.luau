@@ -5,7 +5,7 @@ local parent = script.Parent.Parent
 local setAvatarPreviewDetailsModule = require(parent.Actions.SetAvatarPreviewDetails)
 local updateBulkPuchaseResultsModule = require(parent.Actions.UpdateBulkPuchaseResults)
 local _ = require(corePackagesService.Workspace.Packages.AvatarExperienceInspectAndBuy)
-local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon).Enums.ItemTypeEnum
+local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperienceModel).Enums.ItemTypeEnum
 
 return roduxModule.createReducer({}, {
 	[updateBulkPuchaseResultsModule.name] = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p1, p2)

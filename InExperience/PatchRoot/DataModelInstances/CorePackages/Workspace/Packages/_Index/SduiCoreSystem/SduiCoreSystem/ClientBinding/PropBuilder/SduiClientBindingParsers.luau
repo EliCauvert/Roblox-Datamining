@@ -11,7 +11,6 @@ local parsePymkItemsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.pa
 local fFlagSduiStringPropToString = require(parent.SharedFlags).FFlagSduiStringPropToString
 local fFlagSduiPropParsersShouldHandleTokens = require(parent.SharedFlags).FFlagSduiPropParsersShouldHandleTokens
 local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
-local fFlagSduiFocusNavActionsStructured = require(parent.SharedFlags).FFlagSduiFocusNavActionsStructured
 local fFlagSduiUnwrapStructPropEnvelope = require(parent.SharedFlags).FFlagSduiUnwrapStructPropEnvelope
 local fFlagSduiParseProtoGradientFields = require(parent.SharedFlags).FFlagSduiParseProtoGradientFields
 
@@ -356,7 +355,7 @@ return {
 	parseColorPropLegacy = if fFlagLuaAppSduiColorPropMigration then function(p8)
 		return if typeof(p8) == "string" then Color3.fromHex(p8) else p8
 	end else nil,
-	parseFocusNavActions = if fFlagSduiFocusNavActionsStructured then function(p8)
+	parseFocusNavActions = function(p8)
 		-- upvalues: inputHandlersModule (ref)
 		if typeof(p8) ~= "table" then
 			return nil
@@ -380,5 +379,5 @@ return {
 			end
 		end
 		return { keys = t, events = t_1 }
-	end else nil
+	end
 }

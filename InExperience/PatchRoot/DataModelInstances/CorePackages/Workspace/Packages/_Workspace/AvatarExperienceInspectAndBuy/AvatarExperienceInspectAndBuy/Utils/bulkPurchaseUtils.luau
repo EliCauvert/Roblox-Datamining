@@ -1,6 +1,5 @@
 ﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local itemTypeEnum = require(parent.AXCommon).Enums.ItemTypeEnum
+local itemTypeEnum = require(avatarExperienceInspectAndBuy.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local _ = require(avatarExperienceInspectAndBuy.Types)
 local convertAssetInfoToItemDataModule = require(avatarExperienceInspectAndBuy.Utils.convertAssetInfoToItemData)
 local convertBundleInfoToItemDataModule = require(avatarExperienceInspectAndBuy.Utils.convertBundleInfoToItemData)
@@ -8,7 +7,6 @@ local getPriceStatusModule = require(avatarExperienceInspectAndBuy.Utils.getPric
 local priceStatusModule = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
 local getPriceInRobux = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getPriceInRobux
 local _ = require(avatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
-local fFlagAXEnableIaBTimedOptionsBulkPurchase = require(parent.AvatarExperienceFlags).FFlagAXEnableIaBTimedOptionsBulkPurchase
 
 local function createBulkPurchaseRequestItem(p1)
 	-- upvalues: itemTypeEnum (ref)
@@ -38,7 +36,7 @@ return {
 	end,
 	createBulkPurchaseRequestItem = createBulkPurchaseRequestItem,
 	getBulkPurchaseEligibleItems = function(p1, p2, p3)
-		-- upvalues: itemTypeEnum (ref), convertAssetInfoToItemDataModule (ref), convertBundleInfoToItemDataModule (ref), getPriceStatusModule (ref), priceStatusModule (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref), getPriceInRobux (ref), createBulkPurchaseRequestItem (ref)
+		-- upvalues: itemTypeEnum (ref), convertAssetInfoToItemDataModule (ref), convertBundleInfoToItemDataModule (ref), getPriceStatusModule (ref), priceStatusModule (ref), getPriceInRobux (ref), createBulkPurchaseRequestItem (ref)
 		if not p1 then
 			return { totalPrice = 0, requestedItems = {} }
 		end
@@ -63,39 +61,33 @@ return {
 				
 				if var4 then
 					var4 = nil
+					local _ = nil
 					
-					if fFlagAXEnableIaBTimedOptionsBulkPurchase then
-						local _ = nil
+					if var2.id then
+						local id = p3[var2.id]
 						
-						if p3 and var2.id then
-							local id = p3[var2.id]
-							
-							if id and id.timedOptions then
-								for i_1, v_1 in id.timedOptions do
-									if v_1.selected then
-										var4 = getPriceInRobux(var2, var3)
-										local var5 = createBulkPurchaseRequestItem(var2)
-										
-										if v_1.days > 0 then
-											var4 = v_1.price
-											var5.PurchaseOptions = {
-												{
-													Type = Enum.PurchaseOption.TimedOption,
-													Value = v_1.days * 86400
-												}
+						if id and id.timedOptions then
+							for i_1, v_1 in id.timedOptions do
+								if v_1.selected then
+									var4 = getPriceInRobux(var2, var3)
+									local var5 = createBulkPurchaseRequestItem(var2)
+									
+									if v_1.days > 0 then
+										var4 = v_1.price
+										var5.PurchaseOptions = {
+											{
+												Type = Enum.PurchaseOption.TimedOption,
+												Value = v_1.days * 86400
 											}
-										end
-										table.insert(t, var5)
+										}
 									end
+									table.insert(t, var5)
 								end
-							else
-								var4 = getPriceInRobux(var2, var3)
-								table.insert(t, createBulkPurchaseRequestItem(var2))
 							end
+						else
+							var4 = getPriceInRobux(var2, var3)
+							table.insert(t, createBulkPurchaseRequestItem(var2))
 						end
-					else
-						table.insert(t, createBulkPurchaseRequestItem(var2))
-						var4 = getPriceInRobux(var2, var3)
 					end
 					if var4 ~= nil then
 						var1 += var4

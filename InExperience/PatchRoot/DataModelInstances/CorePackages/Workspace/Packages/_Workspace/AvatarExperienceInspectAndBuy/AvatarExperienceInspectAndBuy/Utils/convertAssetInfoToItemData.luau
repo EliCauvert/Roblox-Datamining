@@ -1,12 +1,10 @@
 ﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
 local _ = require(avatarExperienceInspectAndBuy.Types)
-local tutilsModule = require(parent.tutils)
-local itemTypeEnum = require(avatarExperienceInspectAndBuy.Parent.AXCommon).Enums.ItemTypeEnum
-local fFlagAXEnableIaBTimedOptionsBulkPurchase = require(parent.AvatarExperienceFlags).FFlagAXEnableIaBTimedOptionsBulkPurchase
+local tutilsModule = require(avatarExperienceInspectAndBuy.Parent.tutils)
+local itemTypeEnum = require(avatarExperienceInspectAndBuy.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 
 return function(p1, p2)
-	-- upvalues: tutilsModule (ref), itemTypeEnum (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref)
+	-- upvalues: tutilsModule (ref), itemTypeEnum (ref)
 	local t = {
 		id = p1.assetId,
 		name = p1.name,
@@ -50,7 +48,7 @@ return function(p1, p2)
 		numFavorites = p1.numFavorites,
 		isFavorited = p1.isFavorited
 	}
-	t.timedOptions = if fFlagAXEnableIaBTimedOptionsBulkPurchase then p1.timedOptions else nil
+	t.timedOptions = p1.timedOptions
 	
 	return t
 end

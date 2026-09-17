@@ -15,7 +15,6 @@ local useNavBarPlacement = appNavBarModule.useNavBarPlacement
 local compositionTags = require(parent.AppComposition).CompositionTags
 local detailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
 local detailsPageLayoutUtilsModule = require(script.Parent.DetailsPageLayoutUtils)
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
 local fFlagLuaAppEdpDirectionalGradientMidTransparency = sharedFlagsModule.FFlagLuaAppEdpDirectionalGradientMidTransparency
 local t = {
@@ -26,7 +25,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), withDefaults (ref), t (ref), compositionTags (ref), reactModule (ref), responsiveModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), useNavBarSize (ref), useNavBarPlacement (ref), displayModule (ref), appNavBarModule (ref), detailsPageLayoutUtilsModule (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), detailsPageLayoutContextModule (ref), view (ref), stateLayerAffordance (ref), fFlagSduiExperienceDetailsSupport (ref)
+	-- upvalues: useDeviceInsets (ref), useTokens (ref), withDefaults (ref), t (ref), compositionTags (ref), reactModule (ref), responsiveModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), useNavBarSize (ref), useNavBarPlacement (ref), displayModule (ref), appNavBarModule (ref), detailsPageLayoutUtilsModule (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), detailsPageLayoutContextModule (ref), view (ref), stateLayerAffordance (ref)
 	local var1 = useDeviceInsets()
 	local var2 = useTokens()
 	local var3 = withDefaults(p1, t)
@@ -210,14 +209,14 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		FullscreenOverlay = if var19 then reactModule.createElement(view, {
 			ZIndex = 10,
 			tag = "clip",
-			Size = if fFlagSduiExperienceDetailsSupport then var6:map(function(p3)
+			Size = var6:map(function(p3)
 				-- upvalues: var16 (ref)
 				return if p3 then UDim2.new(1, 0, 1, -var16) else UDim2.fromScale(1, 1)
-			end) else UDim2.new(1, 0, 1, -var16),
-			Position = if fFlagSduiExperienceDetailsSupport then var6:map(function(p3)
+			end),
+			Position = var6:map(function(p3)
 				-- upvalues: var16 (ref)
 				return if p3 then UDim2.fromOffset(0, var16) else UDim2.fromOffset(0, 0)
-			end) else UDim2.fromOffset(0, var16),
+			end),
 			testId = `{var3.testId}--fullscreen-overlay`
 		}, var17) else nil
 	}))

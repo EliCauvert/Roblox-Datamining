@@ -46,6 +46,7 @@ return reactModule.memo(function(p1)
 		scrollBarVisibility = "Auto",
 		Size = p1.Size or UDim2.fromScale(1, 1),
 		scrollingFrameRef = var1,
+		selection = if p1.selectableRows then { Selectable = false } else nil,
 		scroll = {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			CanvasSize = UDim2.fromScale(0, 0)

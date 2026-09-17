@@ -26,12 +26,11 @@ local fFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(parent.Parent.
 local fFlagUnifiedPurchaseAddSkeleton = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseAddSkeleton
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local fFlagPurchasePromptFetchCartPricing = require(parent.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
-local fFlagPurchasePromptFixOfferMarginUpsell = require(parent.Parent.SharedFlags).FFlagPurchasePromptFixOfferMarginUpsell
 local fFlagOffersOnlyAffordableLock = require(parent.Parent.SharedFlags).FFlagOffersOnlyAffordableLock
 local _ = require(script.Parent.cartPricingResponseLineItem)
 
 local function UnifiedProductPurchaseModalV2(p1)
-	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), urlBuilder (ref), unifiedPurchaseModalTypeEnumModule (ref), fFlagPurchasePromptFetchCartPricing (ref), useCartPricingModule (ref), reactModule (ref), useFocusNavigationRefsModule (ref), fFlagUnifiedPurchaseAddSkeleton (ref), fFlagPurchasePromptFixOfferMarginUpsell (ref), fFlagOffersOnlyAffordableLock (ref), checkbox (ref), subtitleComponentMapModule (ref), productDetailsContainerModule (ref), cartPricingProductDetailsModule (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), buttonVariant (ref), foundationModule (ref), dialog (ref), dialogSize (ref), blackbirdUpsellBanner (ref)
+	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), urlBuilder (ref), unifiedPurchaseModalTypeEnumModule (ref), fFlagPurchasePromptFetchCartPricing (ref), useCartPricingModule (ref), reactModule (ref), useFocusNavigationRefsModule (ref), fFlagUnifiedPurchaseAddSkeleton (ref), fFlagOffersOnlyAffordableLock (ref), checkbox (ref), subtitleComponentMapModule (ref), productDetailsContainerModule (ref), cartPricingProductDetailsModule (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), buttonVariant (ref), foundationModule (ref), dialog (ref), dialogSize (ref), blackbirdUpsellBanner (ref)
 	local var1 = useLocalization({
 		Buy = "IAPExperience.PurchasePrompt.Action.Buy",
 		Subscribe = "Feature.Subscription.Action.Subscribe",
@@ -81,15 +80,10 @@ local function UnifiedProductPurchaseModalV2(p1)
 	
 	if fFlagPurchasePromptFetchCartPricing then
 		isDisabled = p1.buttons.isDisabled or (if fFlagPurchasePromptFetchCartPricing then true else fFlagUnifiedPurchaseAddSkeleton and p1.isLoading == true)
-		
-		if fFlagPurchasePromptFixOfferMarginUpsell then
-			local priceWithoutOffersDiscounts = var3.priceWithoutOffersDiscounts
-			local priceAfterOffersDiscounts = var3.priceAfterOffersDiscounts
-			local var13 = priceWithoutOffersDiscounts ~= nil and p1.robuxBalanceAmount < priceWithoutOffersDiscounts
-			var11 = isDisabled or (var13 and (not fFlagOffersOnlyAffordableLock or (priceAfterOffersDiscounts ~= nil and priceAfterOffersDiscounts <= p1.robuxBalanceAmount)))
-		else
-			var11 = isDisabled
-		end
+		local priceWithoutOffersDiscounts = var3.priceWithoutOffersDiscounts
+		local priceAfterOffersDiscounts = var3.priceAfterOffersDiscounts
+		local var13 = priceWithoutOffersDiscounts ~= nil and p1.robuxBalanceAmount < priceWithoutOffersDiscounts
+		var11 = isDisabled or (var13 and (not fFlagOffersOnlyAffordableLock or (priceAfterOffersDiscounts ~= nil and priceAfterOffersDiscounts <= p1.robuxBalanceAmount)))
 		var12 = if var3.showCartOfferUi then #var3.cartPricingOffers else 0
 	end
 	local var14 = if not fFlagPurchasePromptFetchCartPricing then reactModule.useMemo(function()

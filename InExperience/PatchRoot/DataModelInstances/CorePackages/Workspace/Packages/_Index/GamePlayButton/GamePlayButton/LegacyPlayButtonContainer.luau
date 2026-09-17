@@ -45,7 +45,7 @@ local var1 = function(p1)
 				joinWithParty = "Feature.Squads.Action.JoinWithParty",
 				unavailable = "Feature.ExperienceDetails.PlayButtonText.Unavailable",
 				waitingForParty = "Feature.Squads.Action.WaitingForParty",
-				playtest = if fFlagLuaAppPlayButtonPrivatePT then "Feature.Build.Action.Playtest" else nil
+				playtest = if fFlagLuaAppPlayButtonPrivatePT then "Feature.ExperienceDetails.PlayButtonText.Playtest" else nil
 			}),
 			tokens = useTokens(),
 			onPlayButtonActivated = p1.onPlayButtonActivated,

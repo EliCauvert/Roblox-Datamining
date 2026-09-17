@@ -36,7 +36,6 @@ local filterPlayWithReward = experienceDetailsPageScopeFieldsModule.FilterPlayWi
 local isTenFoot = experienceDetailsPageScopeFieldsModule.IsTenFoot
 local compositionTags = require(parent.AppComposition).CompositionTags
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagSduiPageEntryUseSharedHooks = sharedFlagsModule.FFlagSduiPageEntryUseSharedHooks
 local fFlagSduiContainerQueries = sharedFlagsModule.FFlagSduiContainerQueries
 local fFlagSduiPlayWithRewardGapFix = sharedFlagsModule.FFlagSduiPlayWithRewardGapFix
@@ -57,7 +56,7 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: gameDetail (ref), experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), reactModule (ref), usePageScopeRef (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useTokens (ref), useGetCurrentLegacyRoute (ref), fFlagSduiPlayWithRewardGapFix (ref), filterPlayWithReward (ref), sduiEdpPageScopeIsTenFoot (ref), isTenFoot (ref), guiService (ref), removeGameDetailSessionIfDepartedModule (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), fFlagSduiContainerQueries (ref), usePublishContainerWidthModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), responsiveModule (ref), detailsPageLayout (ref), t (ref), edpBannerAspectRatioTenths (ref), edpDirectionalFullBleedOverlapOffset (ref), edpFullBleedOverlapOffset (ref), edpGradientTopBleedOffset (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), edpDirectionalGradientMidTransparencyHundredths (ref), edpDirectionalBannerBottomVisiblePercent (ref), edpBannerBottomVisiblePercent (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackBannerImageModule (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), fFlagSduiExperienceDetailsSupport (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref)
+	-- upvalues: gameDetail (ref), experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), reactModule (ref), usePageScopeRef (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useTokens (ref), useGetCurrentLegacyRoute (ref), fFlagSduiPlayWithRewardGapFix (ref), filterPlayWithReward (ref), sduiEdpPageScopeIsTenFoot (ref), isTenFoot (ref), guiService (ref), removeGameDetailSessionIfDepartedModule (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), fFlagSduiContainerQueries (ref), usePublishContainerWidthModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), responsiveModule (ref), detailsPageLayout (ref), t (ref), edpBannerAspectRatioTenths (ref), edpDirectionalFullBleedOverlapOffset (ref), edpFullBleedOverlapOffset (ref), edpGradientTopBleedOffset (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), edpDirectionalGradientMidTransparencyHundredths (ref), edpDirectionalBannerBottomVisiblePercent (ref), edpBannerBottomVisiblePercent (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackBannerImageModule (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref)
 	local var1
 	local useExperienceDetailsFocusNavigationModule = require(gameDetail.FocusNavigation.useExperienceDetailsFocusNavigation)
 	local universeId = experienceDetailsPageUtilsModule.getUniverseId(p1)
@@ -183,6 +182,8 @@ return reactModule.memo(function(p1)
 		Content = reactModule.createElement(detailsPageLayout.Content, { scrollingFrameRef = var3 }, {
 			Feed = reactModule.createElement(sduiPageEntryPoint, {
 				includeNavigationHeaderBar = false,
+				disableRootPadding = true,
+				clipsDescendantsOverride = false,
 				snackbarPortalLayoutOrder = 2147483647,
 				appPage = appPage.ExperienceDetail,
 				configKey = var2,
@@ -191,8 +192,6 @@ return reactModule.memo(function(p1)
 				scrollingFrameRef = var3,
 				scrollToSelectionRevealOnly = if fFlagLuaAppMediaGalleryGamepadSupport and var1 then true else nil,
 				backgroundStyle = var7.Color.None,
-				disableRootPadding = if fFlagSduiExperienceDetailsSupport then true else nil,
-				clipsDescendantsOverride = if fFlagSduiExperienceDetailsSupport then false else nil,
 				contentTag = compositionTags.ContentRegion.Body,
 				loadingSlot = reactModule.createElement(experienceDetailsFallbackFeedModule.Skeleton, {
 					launchSource = "ExperienceDetailsPage",

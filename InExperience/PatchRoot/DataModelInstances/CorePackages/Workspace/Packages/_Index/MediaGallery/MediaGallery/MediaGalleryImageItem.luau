@@ -9,10 +9,9 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local image = foundationModule.Image
 local _ = require(mediaGallery.MediaGalleryTypes)
 local getImageUriModule = require(mediaGallery.getImageUri)
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), getImageUriModule (ref), fFlagSduiExperienceDetailsSupport (ref), image (ref), iconButton (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), getImageUriModule (ref), image (ref), iconButton (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref)
 	local var1 = useTokens()
 	local imageId = p1.imageId
 	
@@ -45,12 +44,12 @@ return reactModule.memo(function(p1)
 			Size = UDim2.fromScale(1, 1),
 			Image = getImageUriModule(imageId),
 			ScaleType = Enum.ScaleType.Crop,
-			onLoaded = if fFlagSduiExperienceDetailsSupport and p1.onMediaResolved then if fFlagSduiExperienceDetailsSupport then reactModule.useCallback(function(p2)
+			onLoaded = if p1.onMediaResolved then reactModule.useCallback(function(p2)
 				-- upvalues: p1 (ref)
 				if p1.onMediaResolved then
 					p1.onMediaResolved(p2 == Enum.AssetFetchStatus.Success)
 				end
-			end, { p1.onMediaResolved }) else nil else nil
+			end, { p1.onMediaResolved }) else nil
 		}),
 		GradientOverlay = if p1.showGradient == false or not p1.gradientOverlayHeight then nil else reactModule.createElement("Frame", {
 			BorderSizePixel = 0,

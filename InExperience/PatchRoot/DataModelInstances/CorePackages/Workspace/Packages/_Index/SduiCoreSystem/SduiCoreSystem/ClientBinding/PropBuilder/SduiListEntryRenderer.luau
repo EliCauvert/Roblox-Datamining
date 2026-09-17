@@ -15,7 +15,6 @@ local _ = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryNormaliz
 local fFlagSduiPoolBackedFeed = require(parent.SharedFlags).FFlagSduiPoolBackedFeed
 local buildConfigForComponent = sduiClientBindingBuilderModule.buildConfigForComponent
 local sduiDeferredItemStubModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiDeferredItemStub)
-local fFlagSduiDeferredListItems = require(parent.SharedFlags).FFlagSduiDeferredListItems
 local t = {}
 
 local function captureErrorContext(p1)
@@ -106,7 +105,7 @@ return {
 		end else rawSlice
 	end,
 	buildEntryConfigs = function(p9, p10, p11, p12, p13, p14, p15, p16, p17, p18)
-		-- upvalues: fFlagSduiPoolBackedFeed (ref), sduiPropUtilsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiDeferredListItems (ref), sduiDeferredItemStubModule (ref), buildConfigForComponent (ref)
+		-- upvalues: fFlagSduiPoolBackedFeed (ref), sduiPropUtilsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiDeferredItemStubModule (ref), buildConfigForComponent (ref)
 		local t = {}
 		local t_1 = {}
 		local var1 = fFlagSduiPoolBackedFeed and p18 ~= nil
@@ -139,7 +138,7 @@ return {
 				local var4 = p10(v, v.isInline)
 				local var5 = if v.isInline then p15 else nil
 				
-				if fFlagSduiDeferredListItems and p17 and (not v.template or (not v.template.kind or (not v.template.kind.value or (not v.template.kind.value.shared or v.template.kind.value.shared.is_component_filtered == nil)))) then
+				if p17 and (not v.template or (not v.template.kind or (not v.template.kind.value or (not v.template.kind.value.shared or v.template.kind.value.shared.is_component_filtered == nil)))) then
 					local var6 = sduiDeferredItemStubModule.makeStub(v.template, var4, p12, p14, var5, p13)
 					
 					if var1 then

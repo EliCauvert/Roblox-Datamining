@@ -6,9 +6,10 @@ return function()
 	-- upvalues: reactModule (ref), avatarEditorStoresModule (ref), createAvatarEditorStoresModule (ref)
 	local var1 = reactModule.useContext(avatarEditorStoresModule)
 	
-	if not var1 then
-		warn("useAvatarEditorStores was used without an AvatarEditorStores context provider. Providing a temporary default value instead.")
-		var1 = createAvatarEditorStoresModule()
+	if var1 then
+		return var1
 	end
-	return var1
+	warn("useAvatarEditorStores was used without an AvatarEditorStores context provider. Providing a temporary default value instead.")
+	
+	return createAvatarEditorStoresModule()
 end

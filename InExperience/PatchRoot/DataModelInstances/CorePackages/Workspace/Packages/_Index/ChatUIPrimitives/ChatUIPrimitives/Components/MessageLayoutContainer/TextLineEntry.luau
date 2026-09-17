@@ -12,6 +12,12 @@ local rewriteToggleModule = require(script.Parent.RewriteToggle)
 local iconName = foundationModule.Enums.IconName
 local useSignalBinding = signalsReactModule.useSignalBinding
 
+local function noop() end
+
+local t = {
+	affordance = foundationModule.Enums.StateLayerAffordance.None
+}
+
 local function _(value)
 	local ceiled = math.ceil(value)
 	
@@ -34,7 +40,7 @@ local _ = function(value)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), signalsModule (ref), useStableSignalModule (ref), signalsReactModule (ref), textChannelWindowPerfTrackerModule (ref), useSignalBinding (ref), formatInlineIconModule (ref), iconName (ref), rewriteToggleModule (ref)
+	-- upvalues: foundationModule (ref), reactModule (ref), signalsModule (ref), useStableSignalModule (ref), signalsReactModule (ref), textChannelWindowPerfTrackerModule (ref), useSignalBinding (ref), formatInlineIconModule (ref), iconName (ref), noop (ref), t (ref), rewriteToggleModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = reactModule.useMemo(function()
 		-- upvalues: var1 (ref)
@@ -88,13 +94,20 @@ return reactModule.memo(function(p1)
 		
 		return var12(lightningBolt, t)
 	end, { var10, var1 })
+	local var12 = var10 ~= nil
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "col gap-xsmall auto-y",
 		Size = UDim2.new(1, 0, 0, 0),
 		backgroundStyle = { Transparency = 1, Color3 = Color3.new(0, 0, 0) },
 		LayoutOrder = var8,
-		Visible = var10 ~= nil
+		Visible = var12,
+		onActivated = if p1.selectableRows then noop else nil,
+		stateLayer = if p1.selectableRows then t else nil,
+		selection = if p1.selectableRows then {
+			Selectable = var12,
+			SelectionImageObject = p1.selectionCursor
+		} else nil
 	}, {
 		label = reactModule.createElement(foundationModule.Text, {
 			tag = "text-body-large text-wrap text-align-x-left text-align-y-top content-emphasis",
@@ -108,11 +121,11 @@ return reactModule.memo(function(p1)
 				local prefixText = var10.prefixText or ""
 				
 				if var10.messageType == "user" then
-					local var12 = var11
+					local var13 = var11
 					
-					return if var12 == "" then prefixText .. " " .. var21.content else `{prefixText} {var10.content} {var12}`
+					return if var13 == "" then prefixText .. " " .. var23.content else `{prefixText} {var10.content} {var13}`
 				end
-				return if var10.messageType == "system-roblox" then var10.content else var2 .. var21.content .. "</font>"
+				return if var10.messageType == "system-roblox" then var10.content else var2 .. var23.content .. "</font>"
 			end, { var10, var11, var2 }),
 			fontStyle = reactModule.useMemo(function()
 				-- upvalues: p1 (ref)

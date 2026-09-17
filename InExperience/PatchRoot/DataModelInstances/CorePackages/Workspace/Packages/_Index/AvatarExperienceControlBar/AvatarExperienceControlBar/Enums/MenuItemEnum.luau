@@ -33,6 +33,11 @@
 		Scenes = "PhotoboothScenes",
 		Screenshot = "PhotoboothScreenshot"
 	},
+	PhotoboothMoments = {
+		MyAvatars = "PhotoboothMomentsMyAvatars",
+		Backgrounds = "PhotoboothMomentsBackgrounds",
+		Emotes = "PhotoboothMomentsEmotes"
+	},
 	Reset = {
 		Reset = "Reset",
 		RestoreLastSaved = "RestoreLastSaved",

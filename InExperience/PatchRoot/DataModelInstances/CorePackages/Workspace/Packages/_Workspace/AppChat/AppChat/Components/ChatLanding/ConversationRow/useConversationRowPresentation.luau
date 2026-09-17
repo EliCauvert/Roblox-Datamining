@@ -13,8 +13,10 @@ local chatLandingTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatLan
 local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
 local getConversationViewModelStoreModule = require(appChat.Stores.GetConversationViewModelStore)
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
+local fFlagAppChatUseActivationOnFocus = require(parent.SharedFlags).FFlagAppChatUseActivationOnFocus
 local useIsRobloxSubscriber = require(parent.UserProfiles).Hooks.useIsRobloxSubscriber
 local useGetOneToOneFriendIdFromConversationIdModule = require(appChat.Hooks.useGetOneToOneFriendIdFromConversationId)
+local useActivationOnFocus = require(parent.FocusNavigationUtils).useActivationOnFocus
 local useConversationRowActivationModule = require(script.Parent.useConversationRowActivation)
 local normalizeConversationForTelemetryModule = require(script.Parent.normalizeConversationForTelemetry)
 
@@ -23,7 +25,7 @@ local function _(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: getConversationStoreModule (ref), getConversationViewModelStoreModule (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), useChatPagePaddingModule (ref), chatPlacementContextModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useRelativeTimestampBindingModule (ref), useLocalization (ref), useGetOneToOneFriendIdFromConversationIdModule (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), useConversationRowActivationModule (ref), reactFocusNavigationModule (ref), normalizeConversationForTelemetryModule (ref)
+	-- upvalues: getConversationStoreModule (ref), getConversationViewModelStoreModule (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), useChatPagePaddingModule (ref), chatPlacementContextModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useRelativeTimestampBindingModule (ref), useLocalization (ref), useGetOneToOneFriendIdFromConversationIdModule (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), useConversationRowActivationModule (ref), fFlagAppChatUseActivationOnFocus (ref), useActivationOnFocus (ref), reactFocusNavigationModule (ref), normalizeConversationForTelemetryModule (ref)
 	local var1 = getConversationStoreModule(false)
 	local var2 = getConversationViewModelStoreModule(false)
 	local var3 = reactModule.useMemo(function()
@@ -90,24 +92,32 @@ return function(p1)
 		var23.onActivated()
 	end, { var23.onActivated })
 	local var30 = p1.isWideMode == true
-	local var31 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-	reactModule.useEffect(function()
-		-- upvalues: var30 (ref), var31 (ref), var28 (ref), var29 (ref)
-		if var30 and var31 then
-			local var32 = var31.focusedGuiObject:subscribe(function(p2)
-				-- upvalues: var28 (copy), var29 (copy)
-				if var28.current and p2 == var28.current then
-					var29()
+	
+	if fFlagAppChatUseActivationOnFocus then
+		useActivationOnFocus(var30, var28, var29, nil, reactModule.useCallback(function()
+			-- upvalues: p1 (ref)
+			return p1.conversationId
+		end, { p1.conversationId }))
+	else
+		local var31 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
+		reactModule.useEffect(function()
+			-- upvalues: var30 (ref), var31 (ref), var28 (ref), var29 (ref)
+			if var30 and var31 then
+				local var32 = var31.focusedGuiObject:subscribe(function(p2)
+					-- upvalues: var28 (copy), var29 (copy)
+					if var28.current and p2 == var28.current then
+						var29()
+					end
+				end)
+				
+				return function()
+					-- upvalues: var32 (ref)
+					var32:unsubscribe()
 				end
-			end)
-			
-			return function()
-				-- upvalues: var32 (ref)
-				var32:unsubscribe()
 			end
-		end
-		return function() end
-	end, { var29, var30, var31 })
+			return function() end
+		end, { var29, var30, var31 })
+	end
 	local var32 = reactModule.useRef(p1.fireImpressionEvent)
 	local var33 = reactModule.useRef(nil)
 	var32.current = p1.fireImpressionEvent

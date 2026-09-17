@@ -7,7 +7,6 @@ local sduiErrors = sduiCoreSystemModule.SduiErrors
 local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
 local sduiParsers = sduiCoreSystemModule.SduiParsers
 local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagSduiSearchResultsPageEnabled = require(parent.SharedFlags).FFlagSduiSearchResultsPageEnabled
 local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local t = {}
@@ -27,7 +26,7 @@ local var1 = function(p1)
 end
 
 return function(p2, p3, p4, p5, p6)
-	-- upvalues: sduiErrors (ref), fFlagSduiFixSearchTelemetry (ref), t (ref), cryoModule (ref), var1 (ref), sduiParsers (ref), appPage (ref), fFlagSduiSearchResultsPageEnabled (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), fFlagSduiExperienceDetailsSupport (ref), sduiParseHelpers (ref)
+	-- upvalues: sduiErrors (ref), fFlagSduiFixSearchTelemetry (ref), t (ref), cryoModule (ref), var1 (ref), sduiParsers (ref), appPage (ref), fFlagSduiSearchResultsPageEnabled (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), sduiParseHelpers (ref)
 	if not p5 then
 		p2.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogGameImpressions, {
 			name = "SduiGameImpressionsHandler",
@@ -82,7 +81,7 @@ return function(p2, p3, p4, p5, p6)
 			}, p5.itemsPerRow, p6, if fFlagLuaAppAddComponentTypeToSearchImpressions then p5.isWideTiles or false else nil, if fFlagLuaAppAddComponentTypeToSearchImpressions then var6 else nil)
 			
 			return
-		elseif fFlagSduiExperienceDetailsSupport and (p2.appPage == appPage.ExperienceDetail or p2.appPage == appPage.GameDetail) then
+		elseif p2.appPage == appPage.ExperienceDetail or p2.appPage == appPage.GameDetail then
 			sendGameImpressions.sendFromGameDetails(p2.dependencies.eventIngest, p2.dependencies.appAnalytics, p3, t_1, tostring(p5.refId))
 			
 			return

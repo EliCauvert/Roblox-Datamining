@@ -22,13 +22,11 @@ local propResultCategory = sduiClientBindingTypesModule.PropResultCategory
 local applyFormatArgFormatter = require(sduiCoreSystem.ClientBinding.PropBuilder.applyFormatArgFormatter).applyFormatArgFormatter
 local dataStatus = dataHydrationModule.DataHydrationTypes.DataStatus
 local fFlagSduiImprovedErrorDimensions = require(parent.SharedFlags).FFlagSduiImprovedErrorDimensions
-local fFlagSduiFormatArgFormatters = require(parent.SharedFlags).FFlagSduiFormatArgFormatters
 local fFlagSduiInlineNestedComponentSchema = require(parent.SharedFlags).FFlagSduiInlineNestedComponentSchema
 local fFlagSduiIsEmptyConditions = require(parent.SharedFlags).FFlagSduiIsEmptyConditions
 local fFlagSduiDismissPromptPageScope = require(parent.SharedFlags).FFlagSduiDismissPromptPageScope
 local fFlagSduiHydrationFetchIfMissing = require(parent.SharedFlags).FFlagSduiHydrationFetchIfMissing
 local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
-local fFlagSduiFocusNavActionsStructured = require(parent.SharedFlags).FFlagSduiFocusNavActionsStructured
 local fFlagSduiFormatStringPercentSafeGsubModule = require(sduiCoreSystem.FFlagSduiFormatStringPercentSafeGsub)
 local frozen = table.freeze({ status = dataStatus.Failed })
 local frozen_1 = table.freeze({})
@@ -160,7 +158,7 @@ local function _(p5, p6, p7)
 end
 
 local function generateFormatStringPropValue(p5, p6, p7, p8, p9)
-	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), fFlagSduiFormatArgFormatters (ref), applyFormatArgFormatter (ref), frozen (ref), fFlagSduiFormatStringPercentSafeGsubModule (ref), generateDynamicBindingPropValue (ref), signalsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), tutilsModule (ref)
+	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), applyFormatArgFormatter (ref), frozen (ref), fFlagSduiFormatStringPercentSafeGsubModule (ref), generateDynamicBindingPropValue (ref), signalsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), tutilsModule (ref)
 	local currentComponentType = nil
 	local currentParserName = nil
 	
@@ -194,14 +192,14 @@ local function generateFormatStringPropValue(p5, p6, p7, p8, p9)
 			if type == "binding_path" then
 				t[i] = generateDynamicBindingPropValue(value, p6, p7, p8)
 				
-				if fFlagSduiFormatArgFormatters and v.formatter then
+				if v.formatter then
 					t_1[i] = v.formatter
 				end
 			else
 				warn(`Unrecognized argType in buildFormatString {type}`)
 			end
 		end
-		if fFlagSduiFormatArgFormatters and v.formatter then
+		if v.formatter then
 			local var3 = applyFormatArgFormatter(value, v.formatter, p7.appPage)
 			
 			if var3 ~= nil then
@@ -226,7 +224,7 @@ local function generateFormatStringPropValue(p5, p6, p7, p8, p9)
 		end
 	end
 	return signalsModule.createComputed(function(p10)
-		-- upvalues: str (write), t (ref), fFlagSduiFormatArgFormatters (copy), t_1 (ref), applyFormatArgFormatter (copy), p7 (ref), frozen (copy), fFlagSduiFormatStringPercentSafeGsubModule (copy), p9 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write)
+		-- upvalues: str (write), t (ref), t_1 (ref), applyFormatArgFormatter (copy), p7 (ref), frozen (copy), fFlagSduiFormatStringPercentSafeGsubModule (copy), p9 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write)
 		local var5 = str
 		
 		for i, v in t do
@@ -236,33 +234,34 @@ local function generateFormatStringPropValue(p5, p6, p7, p8, p9)
 			
 			if data ~= nil then
 				local var7
-				local var8 = if fFlagSduiFormatArgFormatters and t_1 then t_1[i] else nil
+				local var8 = if t_1 then t_1[i] else nil
 				
-				if var8 then
-					var7 = applyFormatArgFormatter(data, var8, p7.appPage)
-					
-					if var7 ~= nil then
-						var5 = if fFlagSduiFormatStringPercentSafeGsubModule then var5 and var5:gsub("{" .. i .. "}", function()
-							-- upvalues: var7 (ref)
-							return var7
-						end) else var5 and var5:gsub("{" .. i .. "}", var7)
+				if not var8 then
+					if fFlagSduiFormatStringPercentSafeGsubModule then
+						var7 = var5
+						
+						if var7 then
+							local var9 = tostring(data)
+							var7 = var5:gsub("{" .. i .. "}", function()
+								-- upvalues: var9 (ref)
+								return var9
+							end)
+						end
+						var5 = var7
+					else
+						var7 = var5 and var5:gsub("{" .. i .. "}", tostring(data))
+						var5 = var7
 					end
-					return frozen
-				elseif fFlagSduiFormatStringPercentSafeGsubModule then
-					var7 = var5
-					
-					if var7 then
-						local var9 = tostring(data)
-						var7 = var5:gsub("{" .. i .. "}", function()
-							-- upvalues: var9 (ref)
-							return var9
-						end)
-					end
-					var5 = var7
-				else
-					var7 = var5 and var5:gsub("{" .. i .. "}", tostring(data))
-					var5 = var7
 				end
+				var7 = applyFormatArgFormatter(data, var8, p7.appPage)
+				
+				if var7 ~= nil then
+					var5 = if fFlagSduiFormatStringPercentSafeGsubModule then var5 and var5:gsub("{" .. i .. "}", function()
+						-- upvalues: var7 (ref)
+						return var7
+					end) else var5 and var5:gsub("{" .. i .. "}", var7)
+				end
+				return frozen
 			end
 			return { status = status }
 		end
@@ -661,7 +660,7 @@ return {
 		end, tutilsModule.shallowEqual)
 	end,
 	generateTablePropSignalValue = function(value, p25, p26, p27, p28, p29, p30)
-		-- upvalues: fFlagSduiImprovedErrorDimensions (ref), signalsModule (ref), resolveTablePropValue (ref), fFlagSduiFocusNavActionsStructured (ref), sduiParseHelpersModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), frozen (ref), tutilsModule (ref)
+		-- upvalues: fFlagSduiImprovedErrorDimensions (ref), signalsModule (ref), resolveTablePropValue (ref), sduiParseHelpersModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), frozen (ref), tutilsModule (ref)
 		local currentComponentType = nil
 		local currentParserName = nil
 		
@@ -672,7 +671,7 @@ return {
 		local var46, var47, var48 = p29(value, p25, p28, p26, p27)
 		
 		return signalsModule.createComputed(function(p31)
-			-- upvalues: resolveTablePropValue (copy), var46 (ref), var47 (ref), var48 (ref), p25 (ref), p26 (ref), p27 (ref), p28 (ref), p29 (ref), fFlagSduiFocusNavActionsStructured (copy), p30 (ref), sduiParseHelpersModule (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy)
+			-- upvalues: resolveTablePropValue (copy), var46 (ref), var47 (ref), var48 (ref), p25 (ref), p26 (ref), p27 (ref), p28 (ref), p29 (ref), p30 (ref), sduiParseHelpersModule (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy)
 			local ok, status, var49 = pcall(function()
 				-- upvalues: resolveTablePropValue (copy), p31 (ref), var46 (copy), var47 (copy), var48 (copy), p25 (copy), p26 (copy), p27 (copy), p28 (copy), p29 (copy)
 				local var50, var51 = resolveTablePropValue(p31, var46, var47, var48, p25, p26, p27, p28, p29)
@@ -689,7 +688,7 @@ return {
 				}, p26.appPage)
 				
 				return frozen
-			elseif fFlagSduiFocusNavActionsStructured and p30 and status ~= nil then
+			elseif p30 and status ~= nil then
 				local ok_1, status_1 = pcall(function()
 					-- upvalues: p30 (copy), status (write)
 					return p30(status)

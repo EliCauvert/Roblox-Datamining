@@ -15,19 +15,18 @@ local gameFavorite = require(parent.DiscoveryAnalytics).Events.gameFavorite
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useLocalization = localizationModule.Hooks.useLocalization
 local useOptimisticUpdateStatusModule = require(serverDrivenUi.Content.ExperienceDetails.Hooks.useOptimisticUpdateStatus)
-local fFlagSduiFavoritesHydrationStructured = require(parent.SharedFlags).FFlagSduiFavoritesHydrationStructured
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), game (ref), signalsReactModule (ref), fFlagSduiFavoritesHydrationStructured (ref), useLocalization (ref), reactModule (ref), playersService (ref), gameFavorite (ref), setCurrentToastMessage (ref), toastType (ref), useOptimisticUpdateStatusModule (ref), sduiChip (ref), foundationModule (ref)
+	-- upvalues: useDispatch (ref), game (ref), signalsReactModule (ref), useLocalization (ref), reactModule (ref), playersService (ref), gameFavorite (ref), setCurrentToastMessage (ref), toastType (ref), useOptimisticUpdateStatusModule (ref), sduiChip (ref), foundationModule (ref)
 	local layoutOrder = p1.layoutOrder
 	local universeId = p1.universeId
 	local var1 = useDispatch()
 	local andFetchFavorite = game.getFavoritesStore(false).getAndFetchFavorite(universeId)
 	local var2 = signalsReactModule.useSignalState(function(p2)
-		-- upvalues: andFetchFavorite (ref), fFlagSduiFavoritesHydrationStructured (copy)
+		-- upvalues: andFetchFavorite (ref)
 		local var3 = andFetchFavorite.data(p2)
 		
-		return if fFlagSduiFavoritesHydrationStructured then var3 ~= nil and var3.isFavorited else var3 == true
+		return var3 ~= nil and var3.isFavorited
 	end)
 	local var3 = signalsReactModule.useSignalState(game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
 	local var4 = if var3 then var3.rootPlaceId else nil

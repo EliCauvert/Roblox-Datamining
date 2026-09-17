@@ -4,15 +4,17 @@ local dashModule = require(parent.Dash)
 local momentsCommonModule = require(parent.MomentsCommon)
 local constantsModule = require(momentsCreation.Constants)
 local _ = require(momentsCreation.Types.Music)
+local fFlagMomentsCreationSkipRecordingCodeFilterModule = require(momentsCreation.Flags.FFlagMomentsCreationSkipRecordingCodeFilter)
 local reportMusicSearchCounts = momentsCommonModule.Analytics.reportMusicSearchCounts
 
 local function formatMusic(p1)
+	-- upvalues: fFlagMomentsCreationSkipRecordingCodeFilterModule (ref)
 	local t = {}
 	
 	for i, v in p1 do
 		local var1 = tonumber(v.AssetId)
 		
-		if var1 ~= nil and v.RecordingCode ~= nil then
+		if var1 ~= nil and (fFlagMomentsCreationSkipRecordingCodeFilterModule or v.RecordingCode ~= nil) then
 			table.insert(t, {
 				Artist = v.Artist,
 				AssetId = var1,

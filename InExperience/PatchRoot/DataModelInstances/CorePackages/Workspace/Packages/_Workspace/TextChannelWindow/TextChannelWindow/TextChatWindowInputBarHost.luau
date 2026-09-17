@@ -1,4 +1,5 @@
-﻿local parent = script.Parent.Parent
+﻿local guiService = game:GetService("GuiService")
+local parent = script.Parent.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local chatUIPrimitivesModule = require(parent.ChatUIPrimitives)
@@ -14,14 +15,18 @@ local getFFlagExpChatUseChatMuteStoreModule = require(script.Parent.getFFlagExpC
 local fFlagExpChatTextChannelWindowThemeByBackgroundModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowThemeByBackground)
 local fFlagExpChatComposerFigmaParity = require(parent.SharedFlags).FFlagExpChatComposerFigmaParity
 local fFlagExpChatTextChannelWindowExpressionTrayModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowExpressionTray)
+local fFlagExpChatTextChannelWindowFocusNavModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFocusNav)
 local sendExpressionModule = require(script.Parent.TextChannelWindowExpressionTray.sendExpression)
 local chatInputBarView = chatUIPrimitivesModule.ChatInputBarView
 local useFocusInputBar = chatUIPrimitivesModule.Hooks.useFocusInputBar
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), useCanSendToChannel (ref), useInExperienceLocalization (ref), reactModule (ref), messageWriterContextModule (ref), getFFlagExpChatUseChatMuteStoreModule (ref), runVirtualChatCommandsModule (ref), messageModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), textChannelWindowAnalyticsModule (ref), loggerModule (ref), useFocusInputBar (ref), sendExpressionModule (ref), fFlagExpChatTextChannelWindowExpressionTrayModule (ref), fFlagExpChatComposerFigmaParity (ref), chatInputBarView (ref), fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref)
+	-- upvalues: foundationModule (ref), guiService (ref), useCanSendToChannel (ref), useInExperienceLocalization (ref), reactModule (ref), messageWriterContextModule (ref), getFFlagExpChatUseChatMuteStoreModule (ref), runVirtualChatCommandsModule (ref), messageModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), textChannelWindowAnalyticsModule (ref), loggerModule (ref), useFocusInputBar (ref), sendExpressionModule (ref), fFlagExpChatTextChannelWindowExpressionTrayModule (ref), fFlagExpChatComposerFigmaParity (ref), fFlagExpChatTextChannelWindowFocusNavModule (ref), chatInputBarView (ref), fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref)
 	local targetChannel = p1.targetChannel
 	local var1 = foundationModule.Hooks.useTokens()
+	local guiService_1 = p1.guiService or guiService
+	local focusNavEnabled = p1.focusNavEnabled
+	local textBoxRef = p1.textBoxRef
 	local var2 = useCanSendToChannel(p1.targetChannel, p1.localUserId)
 	local var3 = useInExperienceLocalization()
 	local var4 = reactModule.useMemo(function()
@@ -37,15 +42,22 @@ return reactModule.memo(function(p1)
 	local var5 = messageWriterContextModule.useMessageWriter()
 	local var6 = if targetChannel then targetChannel.Name else nil
 	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), targetChannel (ref), getFFlagExpChatUseChatMuteStoreModule (copy), p1 (ref), runVirtualChatCommandsModule (copy), var5 (ref), messageModule (copy), var3 (ref), getFFlagExpChatProtectedChatInternalAPIs (copy), textChannelWindowAnalyticsModule (copy), var6 (ref), loggerModule (copy)
+		-- upvalues: var2 (ref), targetChannel (ref), focusNavEnabled (ref), textBoxRef (ref), guiService_1 (ref), getFFlagExpChatUseChatMuteStoreModule (copy), p1 (ref), runVirtualChatCommandsModule (copy), var5 (ref), messageModule (copy), var3 (ref), getFFlagExpChatProtectedChatInternalAPIs (copy), textChannelWindowAnalyticsModule (copy), var6 (ref), loggerModule (copy)
 		if not var2 then return end
 		if targetChannel and p2 ~= "" then
-			if getFFlagExpChatUseChatMuteStoreModule() and p1.localUserId then
-				local var8 = runVirtualChatCommandsModule(p2, p1.localUserId)
+			if focusNavEnabled then
+				local var8 = if textBoxRef then textBoxRef.current else nil
 				
 				if var8 then
+					guiService_1.SelectedCoreObject = var8
+				end
+			end
+			if getFFlagExpChatUseChatMuteStoreModule() and p1.localUserId then
+				local var9 = runVirtualChatCommandsModule(p2, p1.localUserId)
+				
+				if var9 then
 					if var5 then
-						var5.write(messageModule.createSystemMessage(var3(var8.key, if next(var8.args) then var8.args else nil)))
+						var5.write(messageModule.createSystemMessage(var3(var9.key, if next(var9.args) then var9.args else nil)))
 					end
 					return
 				else
@@ -81,10 +93,11 @@ return reactModule.memo(function(p1)
 			end
 		end
 	end, {
-		targetChannel, var2, var3, p1.localUserId, var5, var6
+		targetChannel, var2, var3, p1.localUserId, var5, var6, focusNavEnabled,
+		textBoxRef, guiService_1
 	})
 	local var8 = p1.canLocalUserChat ~= nil or p1.canLocalUserChat
-	local var9 = useFocusInputBar()
+	local var9 = useFocusInputBar(p1.textBoxRef)
 	
 	return reactModule.createElement(chatInputBarView, {
 		maximumCharacterLimit = 200,
@@ -107,8 +120,11 @@ return reactModule.memo(function(p1)
 			canLocalUserChat = var8,
 			canSend = var2 and targetChannel ~= nil,
 			onKeyboardActivated = var9.focus,
-			footerText = var4.presetDisclaimer
+			footerText = var4.presetDisclaimer,
+			focusNavEnabled = focusNavEnabled == true and fFlagExpChatTextChannelWindowFocusNavModule,
+			onOpenChanged = if fFlagExpChatTextChannelWindowFocusNavModule then p1.onExpressionTrayOpenChanged else nil
 		} else nil,
-		composerLayout = fFlagExpChatComposerFigmaParity
+		composerLayout = fFlagExpChatComposerFigmaParity,
+		selectionImageObject = if focusNavEnabled then p1.selectionCursor else nil
 	})
 end)

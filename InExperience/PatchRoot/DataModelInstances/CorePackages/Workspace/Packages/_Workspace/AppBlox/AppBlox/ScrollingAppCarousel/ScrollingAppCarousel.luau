@@ -9,7 +9,6 @@ local argCheckModule = require(parent.ArgCheck)
 local appCarouselModule = require(script.Parent.AppCarousel)
 local scrollButtonModule = require(script.Parent.ScrollButton)
 local images = UIBloxModule.App.ImageSet.Images
-local fFlagAXScrollingCarouselWidgetIndexBugfix = require(parent.SharedFlags).FFlagAXScrollingCarouselWidgetIndexBugfix
 local AXFixScrollingCarouselShowRightButton = game:DefineFastFlag("AXFixScrollingCarouselShowRightButton", false)
 local cycleLeft = images["icons/actions/cycleLeft"]
 local cycleRight = images["icons/actions/cycleRight"]
@@ -184,37 +183,22 @@ function scrollingAppCarousel.willUnmount(p1)
 end
 
 function scrollingAppCarousel.render(p1)
-	-- upvalues: AXFixScrollingCarouselShowRightButton (ref), fFlagAXScrollingCarouselWidgetIndexBugfix (ref), roactModule (ref), scrollButtonModule (ref), cycleLeft (ref), cycleRight (ref), appCarouselModule (ref)
+	-- upvalues: AXFixScrollingCarouselShowRightButton (ref), roactModule (ref), scrollButtonModule (ref), cycleLeft (ref), cycleRight (ref), appCarouselModule (ref)
 	local carouselMargin = p1.props.carouselMargin
 	local carouselHeight = p1.props.carouselHeight
 	local var1 = nil
 	local var2 = nil
 	
 	if p1.state.hoveringCarousel then
-		local var3
 		local isScrollingDisabled = p1.props.isScrollingDisabled
-		local var4 = p1.props.index > 1 and not isScrollingDisabled
+		local var3 = p1.props.index > 1 and not isScrollingDisabled
 		local _ = nil
+		local var4 = if AXFixScrollingCarouselShowRightButton then p1.props.index + p1.state.maxNumOfItemsVisible < p1.props.itemCount and not isScrollingDisabled else p1.props.index + p1.state.maxNumOfItemsVisible < p1.props.itemCount
 		
-		if AXFixScrollingCarouselShowRightButton then
-			local var5
-			if fFlagAXScrollingCarouselWidgetIndexBugfix then
-				var5 = p1.props.index + p1.state.maxNumOfItemsVisible < p1.props.itemCount
-				var5 = nil
-			else
-				var5 = p1.props.index + p1.state.maxNumOfItemsVisible <= p1.props.itemCount
-			end
-			var3 = var5 and not isScrollingDisabled
-		elseif fFlagAXScrollingCarouselWidgetIndexBugfix then
-			var3 = p1.props.index + p1.state.maxNumOfItemsVisible < p1.props.itemCount
-			var3 = nil
-		else
-			var3 = p1.props.index + p1.state.maxNumOfItemsVisible <= p1.props.itemCount and not isScrollingDisabled
-		end
-		if var4 then
+		if var3 then
 			var1 = roactModule.createElement(scrollButtonModule, { icon = cycleLeft, callback = p1.scrollLeft })
 		end
-		if var3 then
+		if var4 then
 			var2 = roactModule.createElement(scrollButtonModule, { icon = cycleRight, callback = p1.scrollRight })
 		end
 	end

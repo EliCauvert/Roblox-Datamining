@@ -13,7 +13,6 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 local getLocalizedPriceModule = require(avatarExperienceUIKit.ItemCard.Utils.getLocalizedPrice)
 local fFlagAXDurablesFooter = avatarExperienceFlagsModule.FFlagAXDurablesFooter
 local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
-local fFlagAXEnableIaBTimedOptionsBulkPurchase = avatarExperienceFlagsModule.FFlagAXEnableIaBTimedOptionsBulkPurchase
 local fFlagAXItemCardComponentsMemo = avatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo
 
 local function renderIconTextPair(p1)
@@ -81,11 +80,11 @@ local function renderContentChildren(p1, p2, p3, p4, p5, p6, p7)
 end
 
 local function ItemCardPriceLine(p1)
-	-- upvalues: useTokens (ref), useDesignTokens (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref), reactModule (ref), badge (ref), badgeVariant (ref), fFlagAXMISEnableMultiShopping (ref), iconSize (ref), fFlagAXDurablesFooter (ref), renderContentChildren (ref), icon (ref), text (ref), getLocalizedPriceModule (ref)
+	-- upvalues: useTokens (ref), useDesignTokens (ref), reactModule (ref), badge (ref), badgeVariant (ref), fFlagAXMISEnableMultiShopping (ref), iconSize (ref), fFlagAXDurablesFooter (ref), renderContentChildren (ref), icon (ref), text (ref), getLocalizedPriceModule (ref)
 	local var1 = useTokens()
 	local var2 = useDesignTokens()
 	
-	if fFlagAXEnableIaBTimedOptionsBulkPurchase and p1.content.type == "badge" then
+	if p1.content.type == "badge" then
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -159,19 +158,19 @@ local function ItemCardPriceLine(p1)
 			})
 			var6 += 1
 		end
-		if fFlagAXEnableIaBTimedOptionsBulkPurchase and v.type == "badge" then
+		if v.type == "badge" then
 			t[`priceLine{i}Badge`] = reactModule.createElement(badge, {
 				text = v.text,
 				variant = badgeVariant.Neutral,
 				Position = UDim2.new(0, 0, 0, -var1.Gap.XXSmall)
 			})
 			var6 += 1
-		else
-			for i_1, v_1 in renderContentChildren(v, `priceLine{i}`, var6, var6 + 1, if v.colorStyle then v.colorStyle else var1.Color.Content.Emphasis, var1, var2) do
-				t[i_1] = v_1
-			end
-			var6 += 2
+			continue
 		end
+		for i_1, v_1 in renderContentChildren(v, `priceLine{i}`, var6, var6 + 1, if v.colorStyle then v.colorStyle else var1.Color.Content.Emphasis, var1, var2) do
+			t[i_1] = v_1
+		end
+		var6 += 2
 	end
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

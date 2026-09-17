@@ -17,7 +17,9 @@ return {
 		useFinishChatWindowMessageRenderIntervals = require(script.Hooks.useFinishChatWindowMessageRenderIntervals),
 		useFocusInputBar = require(script.Hooks.useFocusInputBar),
 		useInExperienceLocalization = require(script.Hooks.useInExperienceLocalization),
-		useLastInputGroup = require(script.Hooks.useLastInputGroup)
+		useLastInputGroup = require(script.Hooks.useLastInputGroup),
+		useCoreActionBind = require(script.Hooks.useCoreActionBind),
+		usePortalSelectionLinks = require(script.Hooks.usePortalSelectionLinks)
 	},
 	Telemetry = {
 		ExpChatPerfTracker = require(script.Telemetry.ExpChatPerfTracker),

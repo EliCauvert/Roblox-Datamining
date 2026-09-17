@@ -1,1 +1,1 @@
-﻿return require(script.Parent.makeActionCreator)(script.Name, "id", "equipIfPurchased")
+﻿return require(script.Parent.makeActionCreator)(script.Name, "id", "equipIfPurchased", "idempotencyKey")

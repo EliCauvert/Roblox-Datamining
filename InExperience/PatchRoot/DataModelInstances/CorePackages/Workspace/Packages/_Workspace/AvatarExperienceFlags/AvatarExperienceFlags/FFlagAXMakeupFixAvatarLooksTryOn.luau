@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXMakeupFixAvatarLooksTryOn", false) and require(script.Parent.FFlagAXMakeupEquipping)
+﻿return game:DefineFastFlag("AXMakeupFixAvatarLooksTryOn", false)

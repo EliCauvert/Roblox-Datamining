@@ -1,6 +1,5 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
 local dashModule = require(corePackagesService.Packages.Dash)
-local fFlagAXEnableIaBTimedOptionsBulkPurchase = require(corePackagesService.Workspace.Packages.AvatarExperienceFlags).FFlagAXEnableIaBTimedOptionsBulkPurchase
 local parent = script.Parent.Parent
 local mockIdModule = require(parent.MockId)
 local constantsModule = require(parent.Constants)
@@ -247,7 +246,7 @@ function t.fromGetEconomyProductInfo(p2, p3, p4, p5, p6)
 end
 
 function t.fromGetItemDetailsV2(p2)
-	-- upvalues: t (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref)
+	-- upvalues: t (ref)
 	local var2 = t.new()
 	var2.assetId = tostring(p2.id)
 	var2.isForSale = p2.isPurchasable
@@ -270,10 +269,8 @@ function t.fromGetItemDetailsV2(p2)
 	var2.saleLocationType = p2.saleLocationType
 	var2.numFavorites = p2.favoriteCount
 	var2.catalogPriceStatus = p2.priceStatus
+	var2.timedOptions = p2.timedOptions
 	
-	if fFlagAXEnableIaBTimedOptionsBulkPurchase then
-		var2.timedOptions = p2.timedOptions
-	end
 	return var2
 end
 

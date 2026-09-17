@@ -2,6 +2,7 @@
 local parent = momentsCreation.Parent
 local builderIconsModule = require(parent.BuilderIcons)
 local reactModule = require(parent.React)
+local eventNames = require(parent.MomentsCommon).Analytics.EventNames
 local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local createEditSessionModule = require(momentsCreation.Stores.createEditSession)
@@ -16,7 +17,11 @@ return {
 	cta = {
 		localizationKey = "Feature.Moments.Action.AddVoice",
 		order = 4,
-		icon = builderIconsModule.Icon.FiveVerticalLinesWave
+		commitRequiresEdit = true,
+		icon = builderIconsModule.Icon.FiveVerticalLinesWave,
+		analyticsEvent = eventNames.EditingFlowVoiceButtonPressed,
+		commitAnalyticsEvent = eventNames.EditingFlowVoiceDoneButtonPressed,
+		cancelAnalyticsEvent = eventNames.EditingFlowVoiceDeleteChangePressed
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video },
 	createSession = function()

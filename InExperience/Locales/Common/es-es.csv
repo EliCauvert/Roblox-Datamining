@@ -455,7 +455,6 @@ CommonUI.Features.Label.Unchecked,Sin verificar
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,Conectar a
-CommonUI.Features.Labels.Retry,
 CommonUI.Features.NavBar.Build,Construir
 CommonUI.Features.StudioCTA.Tooltip.Body,Descarga Studio gratuitamente.
 CommonUI.Features.StudioCTA.Tooltip.Title,Empieza a construir en Roblox
@@ -872,6 +871,7 @@ CoreScripts.InGameMenu.GameSettings.LanguageHeader,Chat e idioma
 CoreScripts.InGameMenu.GameSettings.LockedByDeveloper,Bloqueado por el desarrollador
 CoreScripts.InGameMenu.GameSettings.MainVolume,Volumen principal
 CoreScripts.InGameMenu.GameSettings.ManualGraphicsQuality,Nivel de calidad
+CoreScripts.InGameMenu.GameSettings.MoreSettingsAvailable,Hay más configuraciones disponibles en la aplicación o el sitio web de Roblox.
 CoreScripts.InGameMenu.GameSettings.MovementMode,Modo de movimiento
 CoreScripts.InGameMenu.GameSettings.Open,Abrir
 CoreScripts.InGameMenu.GameSettings.PlaceVersion,Versión del lugar: {PLACE_VERSION}
@@ -2094,7 +2094,6 @@ Feature.Build.Label.Building,Construyendo…
 Feature.Build.Label.CaptureLibrary,Biblioteca de capturas
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} de {MAX_SELECTIONS} seleccionados
 Feature.Build.Label.ContentRating,Clasificación de contenido
-Feature.Build.Label.Created,Creado el
 Feature.Build.Label.CreatedDate,"{DAY} {MONTH}, {YEAR}"
 Feature.Build.Label.CreatorHub,Centro de creación
 Feature.Build.Label.DateRange,{startDate} — {endDate}
@@ -2118,7 +2117,6 @@ Feature.Build.Label.GamePlays,Reproducciones del juego
 Feature.Build.Label.GetMoreBuildUsage,Obtener más uso de la compilación
 Feature.Build.Label.Hi,Hola
 Feature.Build.Label.IconThumbnails,Ícono y miniaturas
-Feature.Build.Label.Images2D,Imágenes 2D
 Feature.Build.Label.InProgress,En curso
 Feature.Build.Label.InputNeeded,Se necesita una entrada
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2128,7 +2126,6 @@ Feature.Build.Label.Loading,Cargando…
 Feature.Build.Label.ManagedPricing,Precios administrados
 Feature.Build.Label.ManagedPricingMixed,Combinado entre los productos actuales
 Feature.Build.Label.MaximizeForGamePlays,Maximizar para las reproducciones del juego
-Feature.Build.Label.Models3D,Modelos 3D
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Sin límite
 Feature.Build.Label.NotStarted,No iniciado
@@ -2146,7 +2143,6 @@ Feature.Build.Label.Private,Privada
 Feature.Build.Label.Public,Público
 Feature.Build.Label.PubliclyUnavailable,No disponible públicamente
 Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,
 Feature.Build.Label.RegionalPricing,Precio regional
 Feature.Build.Label.ResetsDaily,Se restablece diariamente
@@ -2155,14 +2151,11 @@ Feature.Build.Label.ResetsWeekly,Se restablece semanalmente
 Feature.Build.Label.RestoredVersion,Se restauró {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,Buscar recursos
 Feature.Build.Label.SearchGames,Buscar juegos
 Feature.Build.Label.SearchTasks,Buscar tareas
 Feature.Build.Label.SelectOption,Elige una opción
-Feature.Build.Label.Shared,Compartido
 Feature.Build.Label.ShopButton,Botón de la Tienda
 Feature.Build.Label.ShopUi,Interfaz de usuario de la Tienda
-Feature.Build.Label.Sounds,Sonidos
 Feature.Build.Label.TargetAllRobloxPlayers,Dirígete a todos los jugadores de Roblox
 Feature.Build.Label.Thinking,Pensando
 Feature.Build.Label.Title,Título
@@ -2232,7 +2225,6 @@ Feature.Build.Label.UniverseNumber,Universo {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Desconocido
 Feature.Build.Label.UnlimitedUsed,Se utilizaron {USED} • Sin límite
 Feature.Build.Label.UpdateTitleDesc,Actualizar título y descripción
-Feature.Build.Label.Updated,Actualizado
 Feature.Build.Label.Usage,Uso
 Feature.Build.Label.UsageUsed,Se usó {USED}
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2253,8 +2245,6 @@ Feature.Build.Message.AdsStatsEmpty,Aumenta tu público con una campaña publici
 Feature.Build.Message.AdsStatsEmptyFree,Aumenta tu público con una campaña publicitaria gratuita para que descubran tu juego
 Feature.Build.Message.AllFriendsAdded,Invitaste a todas tus amistades como evaluadores de juego.
 Feature.Build.Message.AnswerBuildQuestion,Responde la pregunta de la compilación a continuación.
-Feature.Build.Message.AssetDetailsUnavailable,Los detalles del recurso no están disponibles.
-Feature.Build.Message.AssetsLoadFailed,No se pueden cargar los recursos.
 Feature.Build.Message.AudienceIneligible,No es elegible para este público
 Feature.Build.Message.BuildAccountBlocked,"Por el momento, la compilación no está disponible en tu cuenta."
 Feature.Build.Message.BuildBusy,La compilación se está procesando. Espera un minuto e inténtalo de nuevo.
@@ -2286,7 +2276,6 @@ Feature.Build.Message.InvitesLoadFailed,No se pudieron cargar las invitaciones
 Feature.Build.Message.LimitBelowSpend,El límite no puede ser inferior a los {ALREADY_SPENT} Robux que ya se gastaron hoy.
 Feature.Build.Message.LinkCopied,Enlace copiado al portapapeles
 Feature.Build.Message.LoadingVersions,Cargando el historial de versiones…
-Feature.Build.Message.NoAssetsFound,No se encontraron recursos.
 Feature.Build.Message.NoCapturesAvailable,No hay capturas disponibles
 Feature.Build.Message.NoDescriptionProvided,No se proporcionó la descripción.
 Feature.Build.Message.NoFriendsToAdd,"Aún no tienes amistades. Primero, busca personas para añadir a Roblox."
@@ -2341,7 +2330,6 @@ Feature.Build.Title.AddImages,Añadir imágenes
 Feature.Build.Title.AdsStatsEmpty,Iniciar una campaña
 Feature.Build.Title.AdsStatsEmptyFree,Inicia tu primera campaña
 Feature.Build.Title.ArchiveThisGame,¿Quieres archivar este juego?
-Feature.Build.Title.AssetLibrary,Biblioteca
 Feature.Build.Title.Audience,
 Feature.Build.Title.BuildQuestion,La compilación tiene una pregunta
 Feature.Build.Title.BuildQuestions,La compilación tiene algunas preguntas
@@ -3309,7 +3297,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Eliminar de amistad de 
 Feature.Friends.TrustedFriend.AddBack.Header,Solicitud de amigo de confianza
 Feature.Friends.TrustedFriend.Info.Modal.Header,Nuevo amigo de confianza
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Agregar como amistad de confianza
-Feature.Friends.TrustedFriend.Label.Title,Amistad de confianza
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} ahora es una amistad de confianza
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Amistad de confianza eliminada
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Solicitud para ser amistad de confianza enviada
@@ -3547,7 +3534,9 @@ Feature.Moments.Action.AddVoice,Agregar voz
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
+Feature.Moments.Action.CreateVoiceover,Generar voz en off
 Feature.Moments.Action.Delete,
+Feature.Moments.Action.DiscardChange,Eliminar cambio
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Ampliar
 Feature.Moments.Action.GenerateText,Generar texto
@@ -3556,6 +3545,7 @@ Feature.Moments.Action.GenerateTextFeedbackPolicy,Inadecuado o infractor
 Feature.Moments.Action.Hide,Ocultar detalles
 Feature.Moments.Action.HowToCapture,Cómo capturar
 Feature.Moments.Action.Join,
+Feature.Moments.Action.KeepEditing,Continuar editando
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Minimizar
 Feature.Moments.Action.Ok,
@@ -3565,9 +3555,11 @@ Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
 Feature.Moments.Action.Return,Regresar a Galería
 Feature.Moments.Action.ReturnToEditing,Volver a Editar
+Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Mostrar detalles
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Recortar video
+Feature.Moments.Action.TryAgain,Inténtalo de nuevo
 Feature.Moments.Description.CommunityStandards,Consulta las Normas de la comunidad para obtener más información sobre lo que puedes y no puedes decir.
 Feature.Moments.Description.EmptyCapturesLibrary,Aquí es donde aparecerán tus Capturas.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Generado con IA. Revísalo antes de publicarlo: tú eres responsable de que publicas.
@@ -3587,7 +3579,10 @@ Feature.Moments.Label.AttemptingJoinExperience,Intentando unirte a {placeName}. 
 Feature.Moments.Label.CaptureLibrary,Tu biblioteca de Capturas
 Feature.Moments.Label.DeleteMomentBody,No puedes recuperar un Momento una vez que se elimina.
 Feature.Moments.Label.DeleteMomentTitle,¿Eliminar Momento?
+Feature.Moments.Label.DeleteVoiceoverBody,Esto borrará el texto y la voz en off. Puedes empezar de nuevo cuando quieras.
+Feature.Moments.Label.DeleteVoiceoverTitle,¿Quieres eliminar la voz en off?
 Feature.Moments.Label.Error,
+Feature.Moments.Label.ExceedsCharacterLimit,Supera el límite de caracteres
 Feature.Moments.Label.FeedEndBody,Vuelve más tarde o crea tu propio Momento.
 Feature.Moments.Label.FeedEndTitle,Estás al día
 Feature.Moments.Label.FeedFailedToLoad,No se pudo cargar el feed
@@ -3638,6 +3633,15 @@ Feature.Moments.Label.Tone.Funny,Divertido
 Feature.Moments.Label.Tone.Hype,Emocionante
 Feature.Moments.Label.Tone.Neutral,Neutro
 Feature.Moments.Label.Videos,
+Feature.Moments.Label.VoiceCoachmarkBody,Introduce un script para la narración del video
+Feature.Moments.Label.VoiceCoachmarkTitle,
+Feature.Moments.Label.VoiceGenerating,Generando tu voz en off…
+Feature.Moments.Label.VoiceGenerationFailedBody,Error en la generación de la voz en off.
+Feature.Moments.Label.VoiceHelperDefault,La voz se ajustó a la duración del video
+Feature.Moments.Label.VoiceLimitReachedBody,Espera un minuto y vuelve a intentarlo
+Feature.Moments.Label.VoiceModerationError,Tu script debe seguir las normas de seguridad
+Feature.Moments.Label.VoicePlaceholder,Escribe el guion de tu voz en off. Límite de caracteres: {maxCount}
+Feature.Moments.Label.VoiceTimeoutBody,Se agotó el tiempo de espera para la generación de la voz en off.
 Feature.Moments.Title.GenerateTextFeedbackReason,¿Qué salió mal?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,¿Salir de la creación de Momento?
@@ -4536,7 +4540,7 @@ Features.Transfers.Notification.ReceiveSuccess,Ya aceptaste los Robux
 Features.Transfers.RobuxTransfer.Action.Edit,
 Features.Transfers.RobuxTransfer.Action.Next,
 Features.Transfers.RobuxTransfer.Action.Send,
-Features.Transfers.RobuxTransfer.Action.TryAgain,Inténtalo de nuevo
+Features.Transfers.RobuxTransfer.Action.TryAgain,
 Features.Transfers.RobuxTransfer.Disclaimer.AgeEstimationTransfer,"Necesitas una comprobación de edad o el consentimiento de tus padres para enviar Robux. Una vez que envíes Robux, no podrás cancelar la acción."
 Features.Transfers.RobuxTransfer.Error.ReceiverNotAllowed,@{username} no puede recibir Robux en este momento.
 Features.Transfers.RobuxTransfer.Heading.SendRobux,Enviar Robux

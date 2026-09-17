@@ -76,7 +76,8 @@ return {
 		RequestToJoinParty = "RequestToJoinParty",
 		ClientNotification = "ClientNotification",
 		FriendRequestReceived = "FriendRequestReceived",
-		SecurityAlert = "SecurityAlert"
+		SecurityAlert = "SecurityAlert",
+		VoiceCallReceived = "VoiceCallReceived"
 	},
 	SnoozeActionEnum = { Mute = "Mute", Unmute = "Unmute" }
 }

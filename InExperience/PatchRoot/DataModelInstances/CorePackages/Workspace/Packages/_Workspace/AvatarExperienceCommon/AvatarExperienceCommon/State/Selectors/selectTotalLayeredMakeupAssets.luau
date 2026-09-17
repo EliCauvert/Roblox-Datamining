@@ -1,15 +1,9 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local avatarExperienceFlagsModule = require(avatarExperienceCommon.Parent.AvatarExperienceFlags)
-local isMakeupAssetTypeModule = require(avatarExperienceCommon.Utils.isMakeupAssetType)
+﻿local isMakeupAssetTypeModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Utils.isMakeupAssetType)
 local selectTryOnItemsModule = require(script.Parent.selectTryOnItems)
 local selectEquippedLayeredMakeupAssetsModule = require(script.Parent.selectEquippedLayeredMakeupAssets)
-local fFlagAXMakeupEquipping = avatarExperienceFlagsModule.FFlagAXMakeupEquipping
 
 return function(value)
-	-- upvalues: fFlagAXMakeupEquipping (ref), selectEquippedLayeredMakeupAssetsModule (ref), selectTryOnItemsModule (ref), isMakeupAssetTypeModule (ref)
-	if not fFlagAXMakeupEquipping then
-		return 0
-	end
+	-- upvalues: selectEquippedLayeredMakeupAssetsModule (ref), selectTryOnItemsModule (ref), isMakeupAssetTypeModule (ref)
 	local count = #selectEquippedLayeredMakeupAssetsModule(value)
 	local var1 = 0
 	

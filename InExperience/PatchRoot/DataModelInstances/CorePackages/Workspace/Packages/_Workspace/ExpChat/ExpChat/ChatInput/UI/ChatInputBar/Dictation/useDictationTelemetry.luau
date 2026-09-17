@@ -1,26 +1,36 @@
-﻿local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
+﻿local expChat = script:FindFirstAncestor("ExpChat")
+local reactModule = require(expChat.Parent.React)
 local dictationModeModule = require(script.Parent.DictationMode)
 local dictationAnalyticsModule = require(script.Parent.DictationAnalytics)
 local _ = require(script.Parent.requestMicPermission)
+local fFlagExpChatDictationGrafanaMetricsModule = require(expChat.Flags.FFlagExpChatDictationGrafanaMetrics)
 
 return function()
-	-- upvalues: reactModule (ref), dictationAnalyticsModule (ref), dictationModeModule (ref)
+	-- upvalues: reactModule (ref), dictationAnalyticsModule (ref), fFlagExpChatDictationGrafanaMetricsModule (ref), dictationModeModule (ref)
 	local var1 = reactModule.useRef(nil)
 	
 	return {
 		logMicClick = reactModule.useCallback(function(p1, p2)
-			-- upvalues: dictationAnalyticsModule (copy)
+			-- upvalues: dictationAnalyticsModule (copy), fFlagExpChatDictationGrafanaMetricsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.MicClick, {
 				[dictationAnalyticsModule.Properties.SttMode] = p1,
 				[dictationAnalyticsModule.Properties.EntryPoint] = p2
 			})
+			
+			if fFlagExpChatDictationGrafanaMetricsModule then
+				dictationAnalyticsModule.reportStartedCounter(p1, p2)
+			end
 		end, {}),
 		logPermissionResolved = reactModule.useCallback(function(p1, p2)
-			-- upvalues: dictationAnalyticsModule (copy)
+			-- upvalues: dictationAnalyticsModule (copy), fFlagExpChatDictationGrafanaMetricsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.PermissionPrompt, {
 				[dictationAnalyticsModule.Properties.SttMode] = p1,
 				[dictationAnalyticsModule.Properties.Status] = p2
 			})
+			
+			if fFlagExpChatDictationGrafanaMetricsModule then
+				dictationAnalyticsModule.reportPermissionCounter(p1, p2)
+			end
 		end, {}),
 		logRecordingStart = reactModule.useCallback(function(p1, p2)
 			-- upvalues: dictationAnalyticsModule (copy)
@@ -30,13 +40,17 @@ return function()
 			})
 		end, {}),
 		logRecordingStop = reactModule.useCallback(function(p1, p2, p3, p4)
-			-- upvalues: dictationAnalyticsModule (copy)
+			-- upvalues: dictationAnalyticsModule (copy), fFlagExpChatDictationGrafanaMetricsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.RecordingStop, {
 				[dictationAnalyticsModule.Properties.SttMode] = p1,
 				[dictationAnalyticsModule.Properties.TriggerType] = p2,
 				[dictationAnalyticsModule.Properties.DurationSeconds] = p3,
 				[dictationAnalyticsModule.Properties.CharCount] = p4
 			})
+			
+			if fFlagExpChatDictationGrafanaMetricsModule and p2 ~= dictationAnalyticsModule.TriggerTypes.AutoChunk then
+				dictationAnalyticsModule.reportEndedCounter(p1, p2)
+			end
 		end, {}),
 		logSpeechStarted = reactModule.useCallback(function()
 			-- upvalues: var1 (ref), dictationAnalyticsModule (copy), dictationModeModule (copy)
@@ -47,7 +61,7 @@ return function()
 			})
 		end, {}),
 		logTranscription = reactModule.useCallback(function(p1, p2, p3)
-			-- upvalues: dictationModeModule (copy), var1 (ref), dictationAnalyticsModule (copy)
+			-- upvalues: dictationModeModule (copy), var1 (ref), dictationAnalyticsModule (copy), fFlagExpChatDictationGrafanaMetricsModule (copy)
 			local p10Count = #p1
 			
 			if p2 == dictationModeModule.Continuous then
@@ -65,13 +79,21 @@ return function()
 				[dictationAnalyticsModule.Properties.Success] = p3,
 				[dictationAnalyticsModule.Properties.CharCount] = p10Count
 			})
+			
+			if fFlagExpChatDictationGrafanaMetricsModule then
+				dictationAnalyticsModule.reportTranscriptionCounter(p2, p3)
+			end
 		end, {}),
 		logTranscriptionFailed = reactModule.useCallback(function(p1)
-			-- upvalues: dictationAnalyticsModule (copy)
+			-- upvalues: dictationAnalyticsModule (copy), fFlagExpChatDictationGrafanaMetricsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.TranscriptionDone, {
 				[dictationAnalyticsModule.Properties.SttMode] = p1,
 				[dictationAnalyticsModule.Properties.Success] = false
 			})
+			
+			if fFlagExpChatDictationGrafanaMetricsModule then
+				dictationAnalyticsModule.reportTranscriptionCounter(p1, false)
+			end
 		end, {}),
 		logMicToastShown = reactModule.useCallback(function(p1, p2)
 			-- upvalues: dictationAnalyticsModule (copy)

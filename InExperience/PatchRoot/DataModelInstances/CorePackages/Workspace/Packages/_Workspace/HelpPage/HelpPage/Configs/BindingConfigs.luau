@@ -4,6 +4,7 @@ local extraKeysEnumModule = require(parent.Enums.ExtraKeysEnum)
 local touchControlsEnumModule = require(parent.Enums.TouchControlsEnum)
 local _ = require(script.Parent.ConfigTypes)
 local fFlagEnableConsoleExpControls = require(parent_1.SharedFlags).FFlagEnableConsoleExpControls
+local fFlagHelpPageCCLModule = require(parent.Flags.FFlagHelpPageCCL)
 local t = {
 	CharacterMovement = {
 		layoutOrder = 1,
@@ -16,14 +17,14 @@ local t = {
 		id = "Accessories"
 	},
 	Misc = {
-		layoutOrder = 3,
 		label = "CoreScripts.InGameMenu.Controls.MiscellaneousTitle",
-		id = "Misc"
+		id = "Misc",
+		layoutOrder = if fFlagHelpPageCCLModule then 4 else 3
 	},
 	CameraMovement = {
-		layoutOrder = 4,
 		label = "CoreScripts.InGameMenu.Controls.CameraMovementTitle",
-		id = "CameraMovement"
+		id = "CameraMovement",
+		layoutOrder = if fFlagHelpPageCCLModule then 3 else 4
 	},
 	MenuItems = {
 		layoutOrder = 5,

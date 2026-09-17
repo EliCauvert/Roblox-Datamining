@@ -6,7 +6,7 @@ local setBundlesModule = require(parent.Actions.SetBundles)
 local setFavoriteBundleModule = require(parent.Actions.SetFavoriteBundle)
 local updateBulkPuchaseResultsModule = require(parent.Actions.UpdateBulkPuchaseResults)
 local setAvatarPreviewDetailsModule = require(parent.Actions.SetAvatarPreviewDetails)
-local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon).Enums.ItemTypeEnum
+local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperienceModel).Enums.ItemTypeEnum
 local bundleInfoModule = require(parent.Models.BundleInfo)
 
 return roduxModule.createReducer({}, {

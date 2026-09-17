@@ -20,8 +20,15 @@ return {
 						p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonCall, { buttonSurface = p1.buttonSurface })
 					else
 						p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonCall, { buttonSurface = p1.buttonSurface })
-					end;
-					(p1.callingService or game:GetService("CallingService")):CreateCall({ tonumber(p1.profileId) }, "")
+					end
+					local callingService = p1.callingService or game:GetService("CallingService")
+					task.spawn(function()
+						-- upvalues: callingService (ref), p1 (copy)
+						pcall(function()
+							-- upvalues: callingService (copy), p1 (copy)
+							callingService:CreateCallAsync({ tonumber(p1.profileId) }, "")
+						end)
+					end)
 				end
 			}
 		}

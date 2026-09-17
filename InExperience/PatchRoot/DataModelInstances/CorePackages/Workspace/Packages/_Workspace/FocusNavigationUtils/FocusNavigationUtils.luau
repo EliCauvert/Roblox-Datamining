@@ -7,6 +7,7 @@
 	useFocusNavigableSurfaceRegistryConnection = require(script.useFocusNavigableSurfaceRegistryConnection),
 	useFocusedTextBox = require(script.useFocusedTextBox),
 	useFocusOnMount = require(script.useFocusOnMount),
+	useActivationOnFocus = require(script.useActivationOnFocus),
 	useFocusRoot = require(script.useFocusRoot),
 	useDefaultAppEventHandlers = require(script.useDefaultAppEventHandlers),
 	useDefaultFocusNavigationBindings = require(script.useDefaultFocusNavigationBindings),

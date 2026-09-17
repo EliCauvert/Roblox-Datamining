@@ -5,7 +5,6 @@ local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePo
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiCounterName = sduiCoreSystemModule.SduiErrors.SduiCounterName
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
 local function _()
 	-- upvalues: getAppFeaturePolicies (ref)
@@ -13,7 +12,7 @@ local function _()
 end
 
 return function(p1, p2, p3, p4)
-	-- upvalues: urlBuilder (ref), sduiErrorType (ref), getAppFeaturePolicies (ref), fFlagSduiExperienceDetailsSupport (ref), appPage (ref), sduiCounterName (ref)
+	-- upvalues: urlBuilder (ref), sduiErrorType (ref), getAppFeaturePolicies (ref), appPage (ref), sduiCounterName (ref)
 	local var1
 	local ok, status = pcall(function()
 		-- upvalues: urlBuilder (copy), p2 (ref)
@@ -32,9 +31,9 @@ return function(p1, p2, p3, p4)
 	end
 	local linkingProtocol = p1.dependencies.linkingProtocol
 	local ok_1, status_1 = pcall(function()
-		-- upvalues: linkingProtocol (ref), var1 (write), getAppFeaturePolicies (copy), p1 (ref), fFlagSduiExperienceDetailsSupport (copy), p3 (ref), p4 (ref), appPage (copy), sduiCounterName (copy)
+		-- upvalues: linkingProtocol (ref), var1 (write), getAppFeaturePolicies (copy), p1 (ref), p3 (ref), p4 (ref), appPage (copy), sduiCounterName (copy)
 		linkingProtocol:isURLRegistered(var1):andThen(function(p5)
-			-- upvalues: linkingProtocol (copy), var1 (copy), getAppFeaturePolicies (copy), p1 (copy), fFlagSduiExperienceDetailsSupport (copy), p3 (copy), p4 (copy), appPage (copy), sduiCounterName (copy)
+			-- upvalues: linkingProtocol (copy), var1 (copy), getAppFeaturePolicies (copy), p1 (copy), p3 (copy), p4 (copy), appPage (copy), sduiCounterName (copy)
 			if p5 then
 				linkingProtocol:detectURL(var1)
 				
@@ -45,18 +44,15 @@ return function(p1, p2, p3, p4)
 				return
 			end
 			local navigation = p1.dependencies.getNavigation()
-			local var2 = if fFlagSduiExperienceDetailsSupport then { titleKey = p3 } else nil
+			local t = { titleKey = p3 }
 			
-			if fFlagSduiExperienceDetailsSupport and var2 and p4 then
-				function var3.onClose()
+			if p4 then
+				function t.onClose()
 					-- upvalues: p4 (copy)
 					p4()
 				end
 			end
-			navigation.navigate(appPage.GenericWebPage, {
-				detail = var1,
-				extraProps = if fFlagSduiExperienceDetailsSupport then var2 else nil
-			})
+			navigation.navigate(appPage.GenericWebPage, { detail = var1, extraProps = t })
 		end)
 	end)
 	

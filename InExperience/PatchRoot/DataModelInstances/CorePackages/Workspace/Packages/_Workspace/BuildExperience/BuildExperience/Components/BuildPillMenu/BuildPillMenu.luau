@@ -2,11 +2,8 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local iconButton = foundationModule.IconButton
 local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
 local agentDetailMenuModule = require(script.Parent.AgentDetailMenu)
 local buildOverflowMenuButtonModule = require(script.Parent.BuildOverflowMenuButton)
 local stopPlaytestButtonModule = require(script.Parent.StopPlaytestButton)
@@ -14,12 +11,11 @@ local getBuildOverflowMenuStoreModule = require(buildExperience.Stores.GetBuildO
 local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local publishStatusModule = require(buildExperience.Chat.PublishStatus)
 local leaveExperienceModule = require(buildExperience.utils.leaveExperience)
-local fFlagBuildExperienceAssetLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceAssetLibrary)
 local fFlagBuildExperienceRemoveAgentTaskUiModule = require(buildExperience.Flags.FFlagBuildExperienceRemoveAgentTaskUi)
 local fFlagBuildExperienceMenuImprovementsModule = require(buildExperience.Flags.FFlagBuildExperienceMenuImprovements)
 
 return function(p1)
-	-- upvalues: getBuildOverflowMenuStoreModule (ref), publishStatusModule (ref), reactModule (ref), view (ref), fFlagBuildExperienceMenuImprovementsModule (ref), stopPlaytestButtonModule (ref), leaveExperienceModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), agentDetailMenuModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), buildOverflowMenuButtonModule (ref)
+	-- upvalues: getBuildOverflowMenuStoreModule (ref), publishStatusModule (ref), reactModule (ref), view (ref), fFlagBuildExperienceMenuImprovementsModule (ref), stopPlaytestButtonModule (ref), leaveExperienceModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), agentDetailMenuModule (ref), buildOverflowMenuButtonModule (ref), iconName (ref)
 	local var1 = publishStatusModule.usePublishStatus(p1.target)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
@@ -40,15 +36,6 @@ return function(p1)
 			AgentDetail = if not fFlagBuildExperienceRemoveAgentTaskUiModule then reactModule.createElement(agentDetailMenuModule, {
 				layoutOrder = 1,
 				onActivated = p1.onOpenAgentsPage or function() end
-			}) else nil,
-			AssetLibrary = if fFlagBuildExperienceAssetLibraryModule then reactModule.createElement(iconButton, {
-				LayoutOrder = 2,
-				isCircular = true,
-				testId = "build-header-asset-library-menu",
-				icon = iconName.SquaresGridPlus,
-				onActivated = p1.onOpenAssetLibraryPage,
-				size = inputSize.Medium,
-				variant = buttonVariant.Utility
 			}) else nil,
 			Overflow = reactModule.createElement(buildOverflowMenuButtonModule, {
 				layoutOrder = 3,

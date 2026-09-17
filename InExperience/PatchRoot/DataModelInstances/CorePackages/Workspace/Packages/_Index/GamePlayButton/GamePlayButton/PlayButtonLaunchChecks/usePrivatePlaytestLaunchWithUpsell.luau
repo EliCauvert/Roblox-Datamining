@@ -1,5 +1,6 @@
 ﻿local gamePlayButton = script:FindFirstAncestor("GamePlayButton")
 local fetchGamePlayButtonDataModule = require(gamePlayButton.FetchGamePlayButtonData)
+local playtestUnlockUpsellModule = require(gamePlayButton.PlaytestUnlockUpsell)
 local playButtonStatesModule = require(gamePlayButton.PlayButtonStates)
 local _ = require(gamePlayButton.PlayButtonTypes)
 local delayedAmpWizardCompletionCallbackOverrideModule = require(gamePlayButton.PlayButtonLaunchChecks.delayedAmpWizardCompletionCallbackOverride)
@@ -13,7 +14,6 @@ local useStore = roactUtilsModule.Hooks.RoactRodux.useStore
 local useRoactService = require(parent.RobloxAppHooks).useRoactService
 local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
 local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
-local playabilityStatusEnum = require(parent.DiscoveryTypes).PlayabilityStatusEnum
 local apiFetchPlayabilityStatus = require(parent.PlayabilityRodux).PlayabilityStatus.ApiFetchPlayabilityStatus
 local openAmpWizardContainer = require(parent.AmpUpsell).OpenAmpWizardContainer
 local unlockPlayIntent = require(parent.DiscoveryAnalytics).Events.unlockPlayIntent
@@ -23,9 +23,10 @@ local fStringLuaAppPlayButtonAgeCheckAmpNameSpace = require(parent.SharedFlags).
 local fFlagLuaAppPlayButtonWizardCloseDelay = require(parent.SharedFlags).FFlagLuaAppPlayButtonWizardCloseDelay
 local fIntLuaAppPlayButtonWizardCloseDelayMs = require(parent.SharedFlags).FIntLuaAppPlayButtonWizardCloseDelayMs
 local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
+local type = playtestUnlockUpsellModule.Type
 
 return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: useRoactService (ref), roactNetworking (ref), appEventIngestService (ref), useDispatch (ref), useStore (ref), useUpdatePlaytestSettingsUpsellModule (ref), useTrustedFriendsPlaytestUpsellModule (ref), reactModule (ref), fetchGamePlayButtonDataModule (ref), unlockPlayIntent (ref), invalidPlayIntent (ref), playButtonStatesModule (ref), openAmpWizardContainer (ref), fStringLuaAppPlayButtonAgeCheckAmpFeatureName (ref), fStringLuaAppPlayButtonAgeCheckAmpNameSpace (ref), fFlagLuaAppPlayButtonWizardCloseDelay (ref), delayedAmpWizardCompletionCallbackOverrideModule (ref), fIntLuaAppPlayButtonWizardCloseDelayMs (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), playabilityStatusEnum (ref), apiFetchPlayabilityStatus (ref)
+	-- upvalues: useRoactService (ref), roactNetworking (ref), appEventIngestService (ref), useDispatch (ref), useStore (ref), useUpdatePlaytestSettingsUpsellModule (ref), useTrustedFriendsPlaytestUpsellModule (ref), reactModule (ref), fetchGamePlayButtonDataModule (ref), unlockPlayIntent (ref), invalidPlayIntent (ref), playButtonStatesModule (ref), openAmpWizardContainer (ref), fStringLuaAppPlayButtonAgeCheckAmpFeatureName (ref), fStringLuaAppPlayButtonAgeCheckAmpNameSpace (ref), fFlagLuaAppPlayButtonWizardCloseDelay (ref), delayedAmpWizardCompletionCallbackOverrideModule (ref), fIntLuaAppPlayButtonWizardCloseDelayMs (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), playtestUnlockUpsellModule (ref), type (ref), apiFetchPlayabilityStatus (ref)
 	local var1 = useRoactService(roactNetworking)
 	local var2 = useRoactService(appEventIngestService)
 	local var3 = useDispatch()
@@ -60,14 +61,14 @@ return function(p1, p2, p3, p4, p5, p6)
 	end, { var3, var7, p5, var8 })
 	
 	return reactModule.useCallback(function(p7, p8)
-		-- upvalues: p3 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), var9 (ref), playabilityStatusEnum (copy), var10 (ref), var5 (ref), var8 (ref), var6 (ref), var3 (ref), apiFetchPlayabilityStatus (copy), var1 (ref), p2 (ref), var4 (ref), p1 (ref)
+		-- upvalues: p3 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), var9 (ref), playtestUnlockUpsellModule (copy), type (copy), var10 (ref), var5 (ref), var8 (ref), var6 (ref), var3 (ref), apiFetchPlayabilityStatus (copy), var1 (ref), p2 (ref), var4 (ref), p1 (ref)
 		local function _()
 			-- upvalues: p3 (copy), p7 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p8 (ref)
 			p3(p7, if fFlagLuaAppDemoModePlayButtonTelemetry then p8 else nil)
 		end
 		
 		local function handlePrivatePlaytestInfo(p9)
-			-- upvalues: var9 (copy), p3 (copy), p7 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p8 (ref), playabilityStatusEnum (copy), var10 (copy), var5 (copy), var8 (copy), var6 (copy)
+			-- upvalues: var9 (copy), p3 (copy), p7 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p8 (ref), playtestUnlockUpsellModule (copy), type (copy), var10 (copy), var5 (copy), var8 (copy), var6 (copy)
 			if p9 == nil then
 				var9(nil)
 				
@@ -78,17 +79,18 @@ return function(p1, p2, p3, p4, p5, p6)
 				return
 			end
 			local playabilityStatus = p9.playabilityStatus
+			local type_1 = playtestUnlockUpsellModule.getType(playabilityStatus)
 			
-			if playabilityStatus == playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser or playabilityStatus == playabilityStatusEnum.ContextualPlayabilityAgeCheckRequired then
+			if type_1 == type.AgeVerification then
 				var10(playabilityStatus)
 				
 				return
-			elseif playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRequireParentApproval or playabilityStatus == playabilityStatusEnum.ContextualPlayabilityPlaytestDisabled then
+			elseif type_1 == type.UpdatePlaytestSettings then
 				var5()
 				var8("UpdatePlaytestSettings", playabilityStatus)
 				
 				return
-			elseif playabilityStatus == playabilityStatusEnum.ContextualPlayabilityTrustedFriendRequired then
+			elseif type_1 == type.TrustedFriends then
 				var6()
 				var8("TrustedFriendRequired", playabilityStatus)
 				

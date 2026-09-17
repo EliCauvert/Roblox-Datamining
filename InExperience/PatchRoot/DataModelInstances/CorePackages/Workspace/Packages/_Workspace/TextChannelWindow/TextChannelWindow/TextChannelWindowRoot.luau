@@ -90,7 +90,8 @@ local function TextChannelWindowRoot(p1)
 		canLocalUserChat = var5.canChat,
 		backgroundColor = var2.backgroundColor,
 		fontFace = var2.fontOverride,
-		windowName = name
+		windowName = name,
+		windowInstance = p1.textChannelWindow
 	})
 end
 

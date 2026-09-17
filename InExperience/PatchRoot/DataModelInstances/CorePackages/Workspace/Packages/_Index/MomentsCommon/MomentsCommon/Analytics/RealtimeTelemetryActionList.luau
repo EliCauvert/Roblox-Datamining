@@ -84,7 +84,8 @@ local t_5 = {
 	trim = "trim",
 	text_overlay = "text_overlay",
 	sticker = "sticker",
-	description = "description"
+	description = "description",
+	tts = "tts"
 }
 
 local _ = function(p1)
@@ -97,7 +98,8 @@ local t_6 = {
 	trim = "trim",
 	text = "text",
 	sticker = "sticker",
-	generateText = "generateText"
+	generateText = "generateText",
+	voice = "voice"
 }
 
 local _ = function(p1)
@@ -407,7 +409,7 @@ return {
 		}
 	}),
 	[realtimeEventNamesModule.MomentsEditToolOpened] = telemetry.new({
-		description = "Counts creation edit-tool opens, dimensioned by bounded tool (music/trim/text/sticker/generateText).",
+		description = "Counts creation edit-tool opens, dimensioned by bounded tool (music/trim/text/sticker/generateText/voice).",
 		throttlingThousandths = 10000,
 		name = realtimeEventNamesModule.MomentsEditToolOpened,
 		lastUpdated = { 2026, 8, 5 },

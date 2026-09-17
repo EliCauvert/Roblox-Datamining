@@ -11,15 +11,17 @@ local textLineEntryModule = require(script.Parent.TextLineEntry)
 local bubbleEntryModule = require(script.Parent.BubbleEntry)
 local _ = require(chatUIPrimitives.Types)
 
-local function _(p1, p2, p3)
+local function _(p1, p2, p3, p4, p5)
 	-- upvalues: reactModule (ref)
-	return function(p4)
-		-- upvalues: reactModule (copy), p1 (ref), p2 (ref), p3 (ref)
+	return function(p6)
+		-- upvalues: reactModule (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref)
 		return reactModule.createElement(p1, {
-			getMessageId = p4.getMessageId,
-			getLayoutOrder = p4.getLayoutOrder,
+			getMessageId = p6.getMessageId,
+			getLayoutOrder = p6.getLayoutOrder,
 			getMessagesMap = p2,
-			fontFace = p3
+			fontFace = p3,
+			selectableRows = p4,
+			selectionCursor = p5
 		})
 	end
 end
@@ -49,17 +51,27 @@ return reactModule.memo(function(p1)
 		createSlotElement = reactModule.useMemo(function()
 			-- upvalues: var4 (ref), var3 (ref), p1 (ref), reactModule (copy)
 			local fontFace = p1.fontFace
+			local selectableRows = p1.selectableRows
+			local selectionCursor = p1.selectionCursor
 			
 			return function(p2)
-				-- upvalues: reactModule (copy), var4 (ref), var3 (ref), fontFace (ref)
+				-- upvalues: reactModule (copy), var4 (ref), var3 (ref), fontFace (ref), selectableRows (ref), selectionCursor (ref)
 				return reactModule.createElement(var4, {
 					getMessageId = p2.getMessageId,
 					getLayoutOrder = p2.getLayoutOrder,
 					getMessagesMap = var3,
-					fontFace = fontFace
+					fontFace = fontFace,
+					selectableRows = selectableRows,
+					selectionCursor = selectionCursor
 				})
 			end
-		end, { var4, var3, p1.fontFace or false })
+		end, {
+			var4,
+			var3,
+			p1.fontFace or false,
+			p1.selectableRows or false,
+			p1.selectionCursor or false
+		})
 	}))
 	
 	return reactModule.createElement(foundationModule.View, {
@@ -79,7 +91,8 @@ return reactModule.memo(function(p1)
 				
 				return cloned
 			end, { var5 }),
-			onScroll = p1.onScroll
+			onScroll = p1.onScroll,
+			selectableRows = p1.selectableRows
 		})
 	})
 end)

@@ -29,7 +29,8 @@ return reactModule.memo(function(p1)
 			onPressedOutside = p1.onPressedOutside
 		}, {
 			ContentWrapper = reactModule.createElement(foundationModule.View, {
-				Size = UDim2.fromOffset(p1.width or 360, p1.height or 240)
+				Size = UDim2.fromOffset(p1.width or 360, p1.height or 240),
+				ref = p1.contentRef
 			}, { Container = p1.content })
 		})
 	})

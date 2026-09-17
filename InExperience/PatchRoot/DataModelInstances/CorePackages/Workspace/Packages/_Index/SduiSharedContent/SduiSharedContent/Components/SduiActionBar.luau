@@ -2,10 +2,9 @@
 local reactModule = require(parent.React)
 local view = require(parent.Foundation).View
 local getSduiComponentWrapper = require(parent.SduiCoreSystem).getSduiComponentWrapper
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
 return reactModule.memo(function(p1)
-	-- upvalues: getSduiComponentWrapper (ref), reactModule (ref), view (ref), fFlagSduiExperienceDetailsSupport (ref)
+	-- upvalues: getSduiComponentWrapper (ref), reactModule (ref), view (ref)
 	if p1.items == nil or #p1.items == 0 then
 		return nil
 	end
@@ -37,6 +36,6 @@ return reactModule.memo(function(p1)
 			layoutOrder = 1,
 			tag = p1.rowTag or "row size-full-0 auto-y gap-small"
 		}, t),
-		Footer = if fFlagSduiExperienceDetailsSupport then p1.footer else reactModule.createElement(view, { tag = "size-full-0 auto-y", layoutOrder = 2 }, p1.footer)
+		Footer = p1.footer
 	})
 end)

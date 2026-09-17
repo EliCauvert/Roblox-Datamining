@@ -14,7 +14,6 @@ local fFlagLuaAppInExperienceDetailsPrompt = require(parent.SharedFlags).FFlagLu
 local fFlagLuaAppDataHydrationPlayerCountGameInfoStore = require(parent.SharedFlags).FFlagLuaAppDataHydrationPlayerCountGameInfoStore
 local getFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds = require(parent.SharedFlags).GetFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds
 local fFlagLuaAppDataHydrationUpdateItem = require(parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
 local var1 = if fFlagLuaAppInExperienceDetailsPrompt then getFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds() else nil
 
@@ -27,7 +26,7 @@ local function sanitizeGameInfo(p1)
 end
 
 return function()
-	-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (ref), createDataCacheModule (ref), var1 (ref), sanitizeGameInfo (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), dashModule (ref), fetchGameDetailsModule (ref), gameInfoStoreTypesModule (ref), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (ref), fFlagMigrateGameInfoToStore (ref), fFlagLuaAppDataHydrationUpdateItem (ref), fFlagSduiExperienceDetailsSupport (ref)
+	-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (ref), createDataCacheModule (ref), var1 (ref), sanitizeGameInfo (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), dashModule (ref), fetchGameDetailsModule (ref), gameInfoStoreTypesModule (ref), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (ref), fFlagMigrateGameInfoToStore (ref), fFlagLuaAppDataHydrationUpdateItem (ref)
 	local t = {}
 	
 	local function _(p1, p2)
@@ -177,7 +176,7 @@ return function()
 			-- upvalues: t (ref)
 			return t[tostring(p5)]
 		end else nil,
-		applyVoteChange = if fFlagSduiExperienceDetailsSupport then function(p5, p6, p7)
+		applyVoteChange = function(p5, p6, p7)
 			-- upvalues: var3 (ref), fFlagMigrateGameInfoToStore (copy), var2 (ref)
 			local cachedItem = var3.getCachedItem(p5)
 			local var7 = cachedItem and cachedItem.data(false)
@@ -208,7 +207,7 @@ return function()
 			})
 			
 			return t
-		end else nil,
+		end,
 		clear = if fFlagLuaAppInExperienceDetailsPrompt then var3.clear else function()
 			-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (copy), var2 (ref), var3 (ref)
 			if not fFlagLuaAppInExperienceDetailsPrompt then

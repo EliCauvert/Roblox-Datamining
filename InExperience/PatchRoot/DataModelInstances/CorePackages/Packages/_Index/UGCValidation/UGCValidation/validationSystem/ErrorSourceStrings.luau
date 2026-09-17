@@ -285,6 +285,7 @@
 		Extents_BoundsCalculationFailed = "Common.UGCValidation.ErrorLabel.Extents_BoundsCalculationFailed",
 		Extents_PartAboveParent = "Common.UGCValidation.ErrorLabel.Extents_PartAboveParent",
 		Extents_ParentBelowPart = "Common.UGCValidation.ErrorLabel.Extents_ParentBelowPart",
+		Extents_HeadBelowTorso = "Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso",
 		MeshSize_LoadFailed = "Common.UGCValidation.ErrorLabel.MeshSize_LoadFailed",
 		MeshSize_Mismatch = "Common.UGCValidation.ErrorLabel.MeshSize_Mismatch",
 		TestWorkflowMessageV2 = "Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2"
@@ -570,6 +571,7 @@
 		Extents_BoundsCalculationFailed = "Failed to calculate asset bounds data for extents check on '{assetName}'. Make sure the mesh data is available and try again.",
 		Extents_PartAboveParent = "{lowerPart} cannot extend above {upperPart}. You can adjust how the parts are put together by moving {attachmentName}",
 		Extents_ParentBelowPart = "{upperPart} cannot extend below {lowerPart}. You can adjust how the parts are put together by moving {attachmentName}",
+		Extents_HeadBelowTorso = "Head must be placed above UpperTorso. The head center is below the top of the torso, which indicates the head mesh is collapsed or misplaced.",
 		MeshSize_LoadFailed = "Mesh for '{meshName}' failed to load. Make sure the mesh exists and try again.",
 		MeshSize_Mismatch = "Calculated mesh size for {meshName} does not match MeshSize property value",
 		TestWorkflowMessageV2 = "Second test error string used to verify the Hub-first translation sync workflow end-to-end.",

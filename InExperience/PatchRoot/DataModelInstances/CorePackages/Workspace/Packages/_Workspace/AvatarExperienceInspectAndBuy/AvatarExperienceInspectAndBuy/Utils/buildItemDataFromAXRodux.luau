@@ -1,11 +1,10 @@
 ﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
 local parent = avatarExperienceInspectAndBuy.Parent
 local _ = require(avatarExperienceInspectAndBuy.Types)
-local AXCommonModule = require(parent.AXCommon)
+local _ = require(parent.AXCommon)
 local _ = require(parent.AvatarExperienceRodux)
-local _ = require(parent.AvatarExperienceModel)
 local tutilsModule = require(parent.tutils)
-local itemTypeEnum = AXCommonModule.Enums.ItemTypeEnum
+local itemTypeEnum = require(parent.AvatarExperienceModel).Enums.ItemTypeEnum
 
 local function buildCollectibleItemDetails(p1, p2)
 	-- upvalues: tutilsModule (ref)

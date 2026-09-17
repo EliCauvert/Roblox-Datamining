@@ -8,7 +8,6 @@ local videoPlaybackDetectionMethod = videoUtilsModule.VideoPlaybackDetectionMeth
 local videoPlaybackCoordinator = videoUtilsModule.VideoPlaybackCoordinator
 local videoPlaybackDetector = videoUtilsModule.VideoPlaybackDetector
 local videoPlayer = videoUtilsModule.VideoPlayer
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 local fFlagLuaAppGameTileSelectionVideoPlayback = require(parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
 local fFlagMediaGalleryVideoVisiblePercent = require(parent.SharedFlags).FFlagMediaGalleryVideoVisiblePercent
@@ -16,7 +15,7 @@ local getImageUriModule = require(mediaGallery.getImageUri)
 local mediaGalleryConstantsModule = require(mediaGallery.MediaGalleryConstants)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), getImageUriModule (ref), videoPlaybackCoordinator (ref), mediaGalleryConstantsModule (ref), fFlagMediaGalleryVideoVisiblePercent (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), reactModule (ref), fFlagSduiExperienceDetailsSupport (ref), videoPlayer (ref), videoPlaybackDetector (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), videoPlaybackDetectionMethod (ref)
+	-- upvalues: useTokens (ref), getImageUriModule (ref), videoPlaybackCoordinator (ref), mediaGalleryConstantsModule (ref), fFlagMediaGalleryVideoVisiblePercent (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), reactModule (ref), videoPlayer (ref), videoPlaybackDetector (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), videoPlaybackDetectionMethod (ref)
 	local var1 = useTokens()
 	local videoId = `rbxassetid://{p1.videoId}`
 	local var2 = getImageUriModule(p1.thumbnail or "")
@@ -81,16 +80,16 @@ return reactModule.memo(function(p1)
 			showProgressBar = if p1.showProgressBar ~= nil then isFullscreen else p1.showProgressBar,
 			videoAnalyticsContext = p1.videoAnalyticsContext,
 			onVideoLoaded = reactModule.useCallback(function(p2, p3)
-				-- upvalues: videoAnalytics (ref), p1 (ref), videoPlaybackCoordinator_1 (ref), fFlagSduiExperienceDetailsSupport (copy)
+				-- upvalues: videoAnalytics (ref), p1 (ref), videoPlaybackCoordinator_1 (ref)
 				if videoAnalytics then
 					videoAnalytics.reportVideoLoad(p1.itemIndex, videoPlaybackCoordinator_1.currentPlaybackSessionId, p2, p3)
 				end
-				if fFlagSduiExperienceDetailsSupport and p1.onMediaResolved then
+				if p1.onMediaResolved then
 					p1.onMediaResolved(true)
 				end
 			end, {
 				p1.itemIndex,
-				if fFlagSduiExperienceDetailsSupport then p1.onMediaResolved else nil,
+				p1.onMediaResolved,
 				videoAnalytics,
 				videoPlaybackCoordinator_1.currentPlaybackSessionId
 			}),

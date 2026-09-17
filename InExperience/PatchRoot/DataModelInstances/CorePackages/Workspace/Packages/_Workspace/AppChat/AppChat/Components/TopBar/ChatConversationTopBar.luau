@@ -52,7 +52,14 @@ return function(p1)
 		-- upvalues: fFlagFriendsCallingClientGateDEV (copy), var2 (ref), conversationChannelsModule (copy), conversationId (ref)
 		if not fFlagFriendsCallingClientGateDEV or var2 ~= conversationChannelsModule.CallButtonEligibility.Eligible then return end
 		if conversationId then
-			game:GetService("CallingService"):CreateCall({}, conversationId)
+			local callingService = game:GetService("CallingService")
+			task.spawn(function()
+				-- upvalues: callingService (ref), conversationId (copy)
+				pcall(function()
+					-- upvalues: callingService (copy), conversationId (copy)
+					callingService:CreateCallAsync({}, conversationId)
+				end)
+			end)
 		end
 	end, { conversationId or false, var2 or false })
 	local var7 = if fFlagFriendsCallingClientGateDEV and (conversationId ~= nil and var2 == conversationChannelsModule.CallButtonEligibility.Eligible) then function()

@@ -2,6 +2,7 @@
 local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
+local _ = require(parent.SduiCompat)
 local sduiContentRow = require(parent.SduiSharedContent).SduiContentRow
 local ageCheckUpsellDismissedData = require(parent.GameDetail).AgeCheckUpsellDismissedData
 local luaAppEdpFaeIxpEnabled = game:DefineFastFlag("LuaAppEdpFaeIxpEnabled", false)

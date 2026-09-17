@@ -1,5 +1,6 @@
 ﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
 local parent = momentsCommon.Parent
+local fFlagMomentsTextOverlayMultilineSupportModule = require(momentsCommon.Flags.FFlagMomentsTextOverlayMultilineSupport)
 local fFlagMomentsTextOverlayPreviewTransformModule = require(momentsCommon.Flags.FFlagMomentsTextOverlayPreviewTransform)
 local getFFlagMomentsStickerButtonModule = require(momentsCommon.Flags.GetFFlagMomentsStickerButton)
 local foundationModule = require(parent.Foundation)
@@ -20,7 +21,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: getFFlagMomentsStickerButtonModule (ref), fFlagMomentsTextOverlayPreviewTransformModule (ref), useState (ref), responsiveModule (ref), reactModule (ref), useCallback (ref), foundationModule (ref), view (ref), hexColor (ref), textOverlaySelectionControlsModule (ref)
+	-- upvalues: getFFlagMomentsStickerButtonModule (ref), fFlagMomentsTextOverlayPreviewTransformModule (ref), useState (ref), responsiveModule (ref), reactModule (ref), useCallback (ref), fFlagMomentsTextOverlayMultilineSupportModule (ref), foundationModule (ref), view (ref), hexColor (ref), textOverlaySelectionControlsModule (ref)
 	local _ = nil
 	local var1 = if getFFlagMomentsStickerButtonModule() then p1.overlayEdit or p1.textOverlayEdit else p1.textOverlayEdit
 	local var2 = nil
@@ -89,6 +90,7 @@ return function(p1)
 		ClipsDescendants = true,
 		Font = var1.textOverlayStyle.font,
 		Interactable = p1.editable == true,
+		MultiLine = fFlagMomentsTextOverlayMultilineSupportModule and p1.editable == true,
 		Text = var1.text,
 		TextColor3 = var1.textOverlayStyle.fontColor,
 		TextSize = var1.textOverlayStyle.fontSize,

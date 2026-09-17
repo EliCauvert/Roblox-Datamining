@@ -7,7 +7,6 @@ local useBackButtonBinding = require(parent.SduiSharedUtilities).useBackButtonBi
 local useUidRefString = require(parent.SduiCoreSystem).useUidRefString
 local _ = require(parent.SduiCompat)
 local foundationModule = require(parent.Foundation)
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppSduiGameTileFeedback = require(parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 
 local function addMenuItemTelemetry(p1)
@@ -39,7 +38,7 @@ local function addMenuItemTelemetry(p1)
 end
 
 return reactModule.memo(function(p2)
-	-- upvalues: useUidRefString (ref), fFlagLuaAppSduiGameTileFeedback (ref), reactModule (ref), addMenuItemTelemetry (ref), fFlagSduiExperienceDetailsSupport (ref), getOverflowMenuSignalStore (ref), useBackButtonBinding (ref), foundationModule (ref), overflowMenu (ref)
+	-- upvalues: useUidRefString (ref), fFlagLuaAppSduiGameTileFeedback (ref), reactModule (ref), addMenuItemTelemetry (ref), getOverflowMenuSignalStore (ref), useBackButtonBinding (ref), foundationModule (ref), overflowMenu (ref)
 	local var1 = if fFlagLuaAppSduiGameTileFeedback and p2.menuKey then p2.menuKey else `sdui-overflow-menu-{useUidRefString().current}`
 	local anchorPoint = p2.anchorPoint or Vector2.new(0, 0)
 	local position = p2.position or UDim2.new(0, 0, 0, 0)
@@ -50,55 +49,32 @@ return reactModule.memo(function(p2)
 		var2 = p2.hasOverflowButton == nil or p2.hasOverflowButton
 		var3 = p2.shouldShowAnchor == nil or p2.shouldShowAnchor
 	end
-	local var4 = if fFlagLuaAppSduiGameTileFeedback then reactModule.useMemo(function()
-		-- upvalues: p2 (ref), addMenuItemTelemetry (copy)
-		return if p2.includeMenuItemTelemetry then addMenuItemTelemetry(p2.items) else p2.items
-	end, { p2.items, p2.includeMenuItemTelemetry }) else nil
-	
-	if not fFlagSduiExperienceDetailsSupport then
-		return reactModule.createElement(overflowMenu, {
-			anchorPoint = anchorPoint,
-			anchorPosition = position,
-			menuItems = if fFlagLuaAppSduiGameTileFeedback then var4 else p2.items,
-			menuKey = var1,
-			buttonVariant = p2.buttonVariant,
-			buttonIconSize = p2.buttonSize,
-			buttonIcon = p2.buttonIcon,
-			buttonIconBackgroundStyle = p2.buttonIconBackgroundStyle,
-			menuItemSize = p2.menuItemSize,
-			popoverAlign = p2.popoverAlign,
-			popoverSide = p2.popoverSide,
-			menuWidth = p2.menuWidth,
-			hasOverflowButton = if fFlagLuaAppSduiGameTileFeedback then var2 else true,
-			shouldShowAnchor = if fFlagLuaAppSduiGameTileFeedback then var3 else true,
-			setFocusRef = if fFlagLuaAppSduiGameTileFeedback then p2.setFocusRef else nil,
-			onMenuOpenChanged = if fFlagLuaAppSduiGameTileFeedback then p2.onMenuOpenChanged else nil,
-			zIndex = if fFlagLuaAppSduiGameTileFeedback then p2.zIndex else nil
-		})
-	end
-	local var5 = useBackButtonBinding(reactModule.useCallback(function()
+	local var4 = useBackButtonBinding(reactModule.useCallback(function()
 		-- upvalues: getOverflowMenuSignalStore (copy), var1 (ref)
 		getOverflowMenuSignalStore().closeMenu(var1)
 	end, { var1 }))
-	local var6 = if fFlagLuaAppSduiGameTileFeedback then var4 else p2.items
-	local var7 = 0
+	local var5 = if fFlagLuaAppSduiGameTileFeedback then if fFlagLuaAppSduiGameTileFeedback then reactModule.useMemo(function()
+		-- upvalues: p2 (ref), addMenuItemTelemetry (copy)
+		return if p2.includeMenuItemTelemetry then addMenuItemTelemetry(p2.items) else p2.items
+	end, { p2.items, p2.includeMenuItemTelemetry }) else nil else p2.items
+	local var6 = 0
 	
-	for i in var6 do
-		var7 += 1
+	for i in var5 do
+		var6 += 1
 	end
-	if var7 ~= #var6 then
+	if var6 ~= #var5 then
 		local t = {}
 		
-		for i_1, v in var6 do
+		for i_1, v in var5 do
 			table.insert(t, v)
 		end
-		var6 = t
+		var5 = t
 	end
-	local var8 = p2.layoutOrder ~= nil
+	local var7 = p2.layoutOrder ~= nil
 	local t = {
-		anchorPoint = if var8 then nil else anchorPoint,
-		anchorPosition = if var8 then nil else position,
-		menuItems = var6,
+		anchorPoint = if var7 then nil else anchorPoint,
+		anchorPosition = if var7 then nil else position,
+		menuItems = var5,
 		menuKey = var1,
 		buttonVariant = p2.buttonVariant,
 		buttonIconSize = p2.buttonSize,
@@ -110,14 +86,14 @@ return reactModule.memo(function(p2)
 		menuWidth = p2.menuWidth,
 		hasOverflowButton = if fFlagLuaAppSduiGameTileFeedback then var2 else true,
 		shouldShowAnchor = if fFlagLuaAppSduiGameTileFeedback then var3 else true,
-		buttonIsCircular = if fFlagSduiExperienceDetailsSupport then p2.buttonIsCircular else nil,
-		buttonTag = if fFlagSduiExperienceDetailsSupport then p2.buttonTag else nil,
-		setFocusRef = if fFlagLuaAppSduiGameTileFeedback and p2.setFocusRef then p2.setFocusRef else var5,
+		buttonIsCircular = p2.buttonIsCircular,
+		buttonTag = p2.buttonTag,
+		setFocusRef = if fFlagLuaAppSduiGameTileFeedback and p2.setFocusRef then p2.setFocusRef else var4,
 		onMenuOpenChanged = if fFlagLuaAppSduiGameTileFeedback then p2.onMenuOpenChanged else nil,
 		zIndex = if fFlagLuaAppSduiGameTileFeedback then p2.zIndex else nil
 	}
 	
-	return if var8 then reactModule.createElement(foundationModule.View, { tag = "auto-xy", LayoutOrder = p2.layoutOrder }, {
+	return if var7 then reactModule.createElement(foundationModule.View, { tag = "auto-xy", LayoutOrder = p2.layoutOrder }, {
 		OverflowMenu = reactModule.createElement(overflowMenu, t)
 	}) else reactModule.createElement(overflowMenu, t)
 end)

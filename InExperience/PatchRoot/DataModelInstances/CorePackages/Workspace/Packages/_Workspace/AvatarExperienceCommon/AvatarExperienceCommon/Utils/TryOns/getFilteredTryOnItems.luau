@@ -1,4 +1,4 @@
-﻿local _ = require(script:FindFirstAncestor("AvatarExperienceCommon").Enums.ItemTypeEnum)
+﻿local _ = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceModel)
 local getTryOnItemComparisonDataModule = require(script.Parent.getTryOnItemComparisonData)
 local getShouldReplaceTryOnModule = require(script.Parent.getShouldReplaceTryOn)
 

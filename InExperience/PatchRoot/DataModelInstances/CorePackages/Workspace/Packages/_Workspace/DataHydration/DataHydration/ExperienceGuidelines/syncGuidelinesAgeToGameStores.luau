@@ -3,12 +3,11 @@ local parent = dataHydration.Parent
 local getGameInfoStoreModule = require(dataHydration.Game.GameInfo.getGameInfoStore)
 local getAgeRecommendationStoreModule = require(dataHydration.Game.AgeRecommendations.getAgeRecommendationStore)
 local fFlagLuaAppDataHydrationUpdateItem = require(parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local _ = require(script.Parent.ExperienceGuidelinesStoreTypes)
 
 return {
 	syncGuidelinesAgeToGameStores = function(p1, p2)
-		-- upvalues: fFlagLuaAppDataHydrationUpdateItem (ref), getGameInfoStoreModule (ref), fFlagSduiExperienceDetailsSupport (ref), getAgeRecommendationStoreModule (ref)
+		-- upvalues: fFlagLuaAppDataHydrationUpdateItem (ref), getGameInfoStoreModule (ref), getAgeRecommendationStoreModule (ref)
 		local ageRecommendationDetails = p2.ageRecommendationDetails
 		local ageRecommendationSummary = ageRecommendationDetails and ageRecommendationDetails.ageRecommendationSummary
 		local ageRecommendation = ageRecommendationSummary and ageRecommendationSummary.ageRecommendation
@@ -23,15 +22,13 @@ return {
 				contentMaturity = ageRecommendation.contentMaturity
 			})
 		end
-		if fFlagSduiExperienceDetailsSupport then
-			getAgeRecommendationStoreModule(false).updateAgeRecommendations({
-				[var1] = {
-					displayName = ageRecommendation.displayName,
-					displayNameWithHeaderShort = ageRecommendation.displayNameWithHeaderShort,
-					igrsRating = ageRecommendation.igrsRating,
-					igrsRatingDisplayMessage = ageRecommendation.igrsRatingDisplayMessage
-				}
-			})
-		end
+		getAgeRecommendationStoreModule(false).updateAgeRecommendations({
+			[var1] = {
+				displayName = ageRecommendation.displayName,
+				displayNameWithHeaderShort = ageRecommendation.displayNameWithHeaderShort,
+				igrsRating = ageRecommendation.igrsRating,
+				igrsRatingDisplayMessage = ageRecommendation.igrsRatingDisplayMessage
+			}
+		})
 	end
 }

@@ -8,7 +8,6 @@ local useCursor = foundationModule.Hooks.useCursor
 local cursorType = foundationModule.Enums.CursorType
 local appCommonLibModule = require(parent.AppCommonLib)
 local signal = appCommonLibModule.Signal
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 local responsiveModule = require(parent.Responsive)
 local useBreakpointXOrSmaller = responsiveModule.useBreakpointXOrSmaller
@@ -51,7 +50,7 @@ local function getVisibleIndices(p1, p2)
 end
 
 return reactModule.memo(function(p3)
-	-- upvalues: useTokens (ref), mediaGalleryConstantsModule (ref), reactModule (ref), isValidIdentifierModule (ref), isYouTubeVideoModule (ref), isAudioPlaybackAllowedForDeviceModule (ref), enableAudioPlaybackInApp (ref), useSnapScrollModule (ref), getVisibleIndices (ref), signal (ref), videoPlaybackCoordinator (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), useAutoAdvanceModule (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), useLastInput (ref), appCommonLibModule (ref), luaAppMediaGalleryGamepadSupportsPagingIcons (ref), useGamepadSupports (ref), var1 (ref), list (ref), useCursor (ref), cursorType (ref), useCarouselGamepadInputModule (ref), useTouchDragScrollModule (ref), fFlagSduiExperienceDetailsSupport (ref), mediaGalleryVideoItemModule (ref), mediaGalleryImageItemModule (ref), userInputService (ref), mediaGalleryPageIndicatorsModule (ref), carouselScrollButtons (ref), roundIconButton (ref)
+	-- upvalues: useTokens (ref), mediaGalleryConstantsModule (ref), reactModule (ref), isValidIdentifierModule (ref), isYouTubeVideoModule (ref), isAudioPlaybackAllowedForDeviceModule (ref), enableAudioPlaybackInApp (ref), useSnapScrollModule (ref), getVisibleIndices (ref), signal (ref), videoPlaybackCoordinator (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), useAutoAdvanceModule (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), useLastInput (ref), appCommonLibModule (ref), luaAppMediaGalleryGamepadSupportsPagingIcons (ref), useGamepadSupports (ref), var1 (ref), list (ref), useCursor (ref), cursorType (ref), useCarouselGamepadInputModule (ref), useTouchDragScrollModule (ref), mediaGalleryVideoItemModule (ref), mediaGalleryImageItemModule (ref), userInputService (ref), mediaGalleryPageIndicatorsModule (ref), carouselScrollButtons (ref), roundIconButton (ref)
 	local var3 = useTokens()
 	local itemPadding = p3.itemPadding or var3.Padding.Medium
 	local aspectRatio = p3.aspectRatio or mediaGalleryConstantsModule.ITEM_ASPECT_RATIO
@@ -250,7 +249,7 @@ return reactModule.memo(function(p3)
 					showPlayButton = p3.showPlayButton,
 					showProgressBar = p3.showProgressBar,
 					cornerRadius = cornerRadius,
-					onMediaResolved = if fFlagSduiExperienceDetailsSupport and v == 1 then p3.onMediaResolved else nil
+					onMediaResolved = if v == 1 then p3.onMediaResolved else nil
 				}
 				
 				if t_2.itemProps then
@@ -259,37 +258,38 @@ return reactModule.memo(function(p3)
 					end
 				end
 				var41 = reactModule.createElement(mediaGalleryVideoItemModule, t_1)
-				t["Item" .. v] = reactModule.createElement("Frame", {
-					BackgroundTransparency = 1,
-					BorderSizePixel = 0,
-					LayoutOrder = v,
-					Size = var5.absoluteSizeBinding:map(function(p4)
-						-- upvalues: aspectRatio (ref)
-						return UDim2.new(1, 0, 0, p4.X / aspectRatio)
-					end)
-				}, { Content = var41 })
-			end
-			local t_1 = {
-				imageId = t_2.imageId,
-				isYouTubeVideo = isYouTubeVideoModule(t_2.assetTypeId),
-				videoHash = t_2.videoHash,
-				videoTitle = t_2.videoTitle,
-				Size = UDim2.fromScale(1, 1),
-				itemIndex = v,
-				overlay = t_2.overlay,
-				cornerRadius = cornerRadius,
-				showGradient = p3.showGradient,
-				onYouTubeVideoPlay = p3.onYouTubeVideoPlay,
-				gradientOverlayHeight = gradientOverlayHeight,
-				onMediaResolved = if fFlagSduiExperienceDetailsSupport and v == 1 then p3.onMediaResolved else nil
-			}
-			
-			if t_2.itemProps then
-				for i_1, v_1 in t_2.itemProps do
-					t_1[i_1] = v_1
+			else
+				local t_1 = {
+					imageId = t_2.imageId,
+					isYouTubeVideo = isYouTubeVideoModule(t_2.assetTypeId),
+					videoHash = t_2.videoHash,
+					videoTitle = t_2.videoTitle,
+					Size = UDim2.fromScale(1, 1),
+					itemIndex = v,
+					overlay = t_2.overlay,
+					cornerRadius = cornerRadius,
+					showGradient = p3.showGradient,
+					onYouTubeVideoPlay = p3.onYouTubeVideoPlay,
+					gradientOverlayHeight = gradientOverlayHeight,
+					onMediaResolved = if v == 1 then p3.onMediaResolved else nil
+				}
+				
+				if t_2.itemProps then
+					for i_1, v_1 in t_2.itemProps do
+						t_1[i_1] = v_1
+					end
 				end
+				var41 = reactModule.createElement(mediaGalleryImageItemModule, t_1)
 			end
-			var41 = reactModule.createElement(mediaGalleryImageItemModule, t_1)
+			t["Item" .. v] = reactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				LayoutOrder = v,
+				Size = var5.absoluteSizeBinding:map(function(p4)
+					-- upvalues: aspectRatio (ref)
+					return UDim2.new(1, 0, 0, p4.X / aspectRatio)
+				end)
+			}, { Content = var41 })
 		end
 	end
 	local size500 = var3.Size.Size_500

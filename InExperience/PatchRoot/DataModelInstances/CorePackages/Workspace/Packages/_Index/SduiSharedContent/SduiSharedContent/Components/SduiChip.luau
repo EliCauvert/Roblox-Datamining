@@ -3,10 +3,9 @@ local reactModule = require(parent.React)
 local _ = require(parent.SduiCompat)
 local chip = require(parent.Foundation).Chip
 local fFlagSduiChipAccessoryProps = require(parent.SharedFlags).FFlagSduiChipAccessoryProps
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagSduiChipAccessoryProps (ref), reactModule (ref), chip (ref), fFlagSduiExperienceDetailsSupport (ref)
+	-- upvalues: fFlagSduiChipAccessoryProps (ref), reactModule (ref), chip (ref)
 	local layoutOrder = p1.layoutOrder
 	local anchorPoint = p1.anchorPoint
 	local position = p1.position
@@ -40,7 +39,7 @@ return reactModule.memo(function(p1)
 		trailing = var2,
 		onActivated = p1.onActivated,
 		isChecked = p1.isChecked,
-		Selectable = if fFlagSduiExperienceDetailsSupport then p1.selectable else nil,
+		Selectable = p1.selectable,
 		size = p1.size,
 		LayoutOrder = layoutOrder,
 		AnchorPoint = anchorPoint,

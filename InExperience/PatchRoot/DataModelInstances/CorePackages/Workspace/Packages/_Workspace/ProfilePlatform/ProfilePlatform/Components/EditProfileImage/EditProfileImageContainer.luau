@@ -16,14 +16,19 @@ local robloxAppHooksModule = require(parent.RobloxAppHooks)
 local fFlagEditProfileImageR15UpgradePrompt = require(parent.SharedFlags).FFlagEditProfileImageR15UpgradePrompt
 local fFlagEditProfileFramesEnabled = require(parent.SharedFlags).FFlagEditProfileFramesEnabled
 local fFlagEditProfileFramesImpression = require(parent.EditProfile).Flags.FFlagEditProfileFramesImpression
+local fFlagSignalsNavP3hMisc = require(parent.SharedFlags).FFlagSignalsNavP3hMisc
 local useReportFramesImpressionModule = require(profilePlatform.Hooks.useReportFramesImpression)
 local view = foundationModule.View
 local useScreenSize = robloxAppHooksModule.useScreenSize
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
+local useSignalState = require(parent.SignalsReact).useSignalState
+local signalsModule = require(parent.Signals)
 local selectors = navigationRoduxModule.Selectors
+local getLegacyNavigationStore = navigationRoduxModule.GetLegacyNavigationStore
 local appPage = robloxAppEnumsModule.AppPage
 local AXEditProfileImageFillCardHeight = game:DefineFastFlag("AXEditProfileImageFillCardHeight", false)
+local editProfileImageSignalsNavCurrentPage = game:DefineFastFlag("EditProfileImageSignalsNavCurrentPage", false)
 
 local function _(p1)
 	-- upvalues: appPage (ref)
@@ -31,16 +36,31 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useScreenSize (ref), useSelector (ref), selectors (ref), appPage (ref), useDispatch (ref), reactModule (ref), closeProfilePictureEditor (ref), showEditProfileImageToast (ref), enumsModule (ref), fFlagEditProfileImageR15UpgradePrompt (ref), fFlagEditProfileFramesImpression (ref), fFlagEditProfileFramesEnabled (ref), useReportFramesImpressionModule (ref), enums (ref), view (ref), AXEditProfileImageFillCardHeight (ref), editProfileImage (ref)
-	local var1 = useProfileWrapperContextModule()
-	local renderRecommendedEmotePurchaseFooter = var1.renderRecommendedEmotePurchaseFooter
+	-- upvalues: useProfileWrapperContextModule (ref), useScreenSize (ref), useSelector (ref), editProfileImageSignalsNavCurrentPage (ref), fFlagSignalsNavP3hMisc (ref), reactModule (ref), signalsModule (ref), getLegacyNavigationStore (ref), appPage (ref), useSignalState (ref), selectors (ref), useDispatch (ref), closeProfilePictureEditor (ref), showEditProfileImageToast (ref), enumsModule (ref), fFlagEditProfileImageR15UpgradePrompt (ref), fFlagEditProfileFramesImpression (ref), fFlagEditProfileFramesEnabled (ref), useReportFramesImpressionModule (ref), enums (ref), view (ref), AXEditProfileImageFillCardHeight (ref), editProfileImage (ref)
+	local var1
+	local var2 = useProfileWrapperContextModule()
+	local renderRecommendedEmotePurchaseFooter = var2.renderRecommendedEmotePurchaseFooter
 	assert(renderRecommendedEmotePurchaseFooter, "Edit Profile Image requires a host purchase-footer renderer")
-	local var2 = useScreenSize()
-	local var3 = useSelector(function(p2)
+	local var3 = useScreenSize()
+	local var4 = useSelector(function(p2)
 		return p2.GlobalGuiInset
 	end)
-	local var4 = useSelector(selectors.selectCurrentPageName)
-	local var5 = if var4 ~= appPage.AvatarExperienceWrapper then var4 == appPage.AvatarExperienceWrapperTransparent else true
+	local _ = nil
+	
+	if editProfileImageSignalsNavCurrentPage and fFlagSignalsNavP3hMisc then
+		var1 = useSignalState(reactModule.useMemo(function()
+			-- upvalues: signalsModule (copy), getLegacyNavigationStore (copy), appPage (copy)
+			return signalsModule.createComputed(function(p2)
+				-- upvalues: getLegacyNavigationStore (copy), appPage (copy)
+				local currentPageName = getLegacyNavigationStore(false).getCurrentPageName(p2)
+				
+				return if currentPageName ~= appPage.AvatarExperienceWrapper then currentPageName == appPage.AvatarExperienceWrapperTransparent else true
+			end)
+		end, {}))
+	else
+		local var5 = useSelector(selectors.selectCurrentPageName)
+		var1 = if var5 ~= appPage.AvatarExperienceWrapper then var5 == appPage.AvatarExperienceWrapperTransparent else true
+	end
 	local var6 = useDispatch()
 	local var7 = reactModule.useCallback(function()
 		-- upvalues: closeProfilePictureEditor (copy), p1 (ref)
@@ -52,8 +72,8 @@ return function(p1)
 		closeProfilePictureEditor(p1.navigation)
 	end, { var6, p1.navigation })
 	local var9 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), enumsModule (copy)
-		local navigateTo = var1.navigateTo
+		-- upvalues: var2 (ref), enumsModule (copy)
+		local navigateTo = var2.navigateTo
 		local t = { mountAnimation = true }
 		
 		if navigateTo.itemOrBundleDetails then
@@ -62,41 +82,41 @@ return function(p1)
 			return
 		end
 		navigateTo.itemDetails(p2, t)
-	end, { var1.navigateTo })
+	end, { var2.navigateTo })
 	local var10 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), enumsModule (copy)
-		local preparePurchaseItem = var1.navigateTo.preparePurchaseItem
+		-- upvalues: var2 (ref), enumsModule (copy)
+		local preparePurchaseItem = var2.navigateTo.preparePurchaseItem
 		
 		if preparePurchaseItem then
 			preparePurchaseItem(p2, enumsModule.ItemTypes.Asset)
 		end
-	end, { var1.navigateTo })
+	end, { var2.navigateTo })
 	local var11 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref)
-		local shopForMoreEmotes = var1.navigateTo.shopForMoreEmotes
+		-- upvalues: var2 (ref)
+		local shopForMoreEmotes = var2.navigateTo.shopForMoreEmotes
 		
 		if shopForMoreEmotes then
 			shopForMoreEmotes()
 		end
-	end, { var1.navigateTo })
+	end, { var2.navigateTo })
 	local var12 = if fFlagEditProfileImageR15UpgradePrompt then reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref)
-		local promptR15Upgrade = var1.navigateTo.promptR15Upgrade
+		-- upvalues: var2 (ref)
+		local promptR15Upgrade = var2.navigateTo.promptR15Upgrade
 		
 		if promptR15Upgrade then
 			promptR15Upgrade(p2)
 		end
-	end, { var1.navigateTo }) else nil
+	end, { var2.navigateTo }) else nil
 	
 	if fFlagEditProfileFramesImpression and fFlagEditProfileFramesEnabled then
 		useReportFramesImpressionModule()
 	end
-	local maxValue = math.max(0, var2.X - var3.left - var3.right)
+	local maxValue = math.max(0, var3.X - var4.left - var4.right)
 	
 	return reactModule.createElement(view, {
 		tag = "bg-surface-0",
-		Size = if AXEditProfileImageFillCardHeight then UDim2.new(0, maxValue, 1, 0) else UDim2.fromOffset(maxValue, var2.Y),
-		padding = { bottom = UDim.new(0, var3.bottom) }
+		Size = if AXEditProfileImageFillCardHeight then UDim2.new(0, maxValue, 1, 0) else UDim2.fromOffset(maxValue, var3.Y),
+		padding = { bottom = UDim.new(0, var4.bottom) }
 	}, {
 		Content = reactModule.createElement(view, { tag = "size-full-full" }, {
 			EditProfileImage = reactModule.createElement(editProfileImage, {
@@ -107,11 +127,11 @@ return function(p1)
 				onPrepareRecommendedEmotePurchase = var10,
 				onShopForMoreEmotes = var11,
 				onPromptR15Upgrade = var12,
-				accountRigType = if fFlagEditProfileImageR15UpgradePrompt then var1.accountRigType else nil,
+				accountRigType = if fFlagEditProfileImageR15UpgradePrompt then var2.accountRigType else nil,
 				renderRecommendedEmotePurchaseFooter = renderRecommendedEmotePurchaseFooter
 			})
 		}),
-		DetailsInputBlocker = if var5 then reactModule.createElement(view, {
+		DetailsInputBlocker = if var1 then reactModule.createElement(view, {
 			tag = "position-top-left size-full",
 			ZIndex = 10,
 			Active = true

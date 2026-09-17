@@ -16,9 +16,13 @@ local provider = require(parent.FocusNavigationUtils).FocusNavigableSurfaceRegis
 local UIBloxModule = require(parent.UIBlox)
 local selectionCursorProvider = UIBloxModule.App.SelectionImage.SelectionCursorProvider
 local cursorProvider = UIBloxModule.App.SelectionCursor.CursorProvider
+local universalAppPolicyModule = require(parent.UniversalAppPolicy)
+local universalAppPolicy = universalAppPolicyModule.UniversalAppPolicy
+local appFeaturePolicies = universalAppPolicyModule.AppFeaturePolicies
 local bulkPurchaseAppModule = require(bulkPurchaseApp.BulkPurchaseApp)
 local bulkPurchaseReducerModule = require(bulkPurchaseApp.Store.Reducers.BulkPurchaseReducer)
 local networkContext = require(parent.EconomyCommonCoreScriptHooks).NetworkContext
+local fFlagAXAddPlusUpsellToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
 local t = { themeName = "dark", fontName = "gotham" }
 
 local function _()
@@ -44,7 +48,7 @@ local _ = function()
 end
 
 return function()
-	-- upvalues: coreGuiService (ref), roduxModule (ref), bulkPurchaseReducerModule (ref), createNetworkImpl (ref), reactFocusNavigationModule (ref), reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), appStyleProvider (ref), t (ref), networkContext (ref), roactRoduxModule (ref), designTokenProvider (ref), selectionCursorProvider (ref), cursorProvider (ref), provider (ref), bulkPurchaseAppModule (ref), reactRobloxModule (ref)
+	-- upvalues: coreGuiService (ref), roduxModule (ref), bulkPurchaseReducerModule (ref), createNetworkImpl (ref), reactFocusNavigationModule (ref), reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), appStyleProvider (ref), t (ref), networkContext (ref), roactRoduxModule (ref), designTokenProvider (ref), selectionCursorProvider (ref), cursorProvider (ref), provider (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref), universalAppPolicy (ref), appFeaturePolicies (ref), bulkPurchaseAppModule (ref), reactRobloxModule (ref)
 	local bulkPurchaseApp = Instance.new("Folder")
 	bulkPurchaseApp.Name = "BulkPurchaseApp"
 	bulkPurchaseApp.Parent = coreGuiService
@@ -63,7 +67,11 @@ return function()
 								FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, {
 									value = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 								}, {
-									FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, {
+									FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, if fFlagAXAddPlusUpsellToBulkPurchaseModule then {
+										PolicyProvider = reactModule.createElement(universalAppPolicy.Provider, { policy = { appFeaturePolicies } }, {
+											BulkPurchaseApp = reactModule.createElement(bulkPurchaseAppModule)
+										})
+									} else {
 										BulkPurchaseApp = reactModule.createElement(bulkPurchaseAppModule)
 									})
 								})

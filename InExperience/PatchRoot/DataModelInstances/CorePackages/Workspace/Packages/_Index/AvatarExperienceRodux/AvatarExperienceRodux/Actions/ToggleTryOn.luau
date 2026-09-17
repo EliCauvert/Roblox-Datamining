@@ -2,6 +2,7 @@
 local parent = avatarExperienceRodux.Parent
 local roduxModule = require(parent.Rodux)
 local _ = require(parent.AvatarExperienceCommon)
+local _ = require(parent.AvatarExperienceModel)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
 local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS

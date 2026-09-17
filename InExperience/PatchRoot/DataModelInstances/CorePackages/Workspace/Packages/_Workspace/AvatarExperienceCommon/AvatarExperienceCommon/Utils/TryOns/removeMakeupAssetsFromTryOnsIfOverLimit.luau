@@ -1,6 +1,6 @@
 ﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local _ = require(avatarExperienceCommon.Parent.AvatarExperienceModel)
 local constantsModule = require(avatarExperienceCommon.Constants)
-local _ = require(avatarExperienceCommon.Enums.ItemTypeEnum)
 
 function removeMakeupAssetsFromTryOnsIfOverLimit(value)
 	-- upvalues: constantsModule (ref)

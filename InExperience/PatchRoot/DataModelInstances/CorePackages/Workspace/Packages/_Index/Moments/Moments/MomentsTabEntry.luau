@@ -18,7 +18,7 @@ local fFlagMomentsEmojiSetsApiModule = require(moments.Flags.FFlagMomentsEmojiSe
 local fStringMomentsExperienceJoinActionTextIxpLayerModule = require(moments.Flags.FStringMomentsExperienceJoinActionTextIxpLayer)
 local useMomentsTabIsVisibleModule = require(moments.Hooks.useMomentsTabIsVisible)
 local consumeEntrySourceModule = require(moments.Utils.consumeEntrySource)
-local logMomentsLayerExposureModule = require(moments.Utils.logMomentsLayerExposure)
+local logMomentsLayerExposure = momentsCommonModule.Utils.logMomentsLayerExposure
 local innerNavigatorModule = require(moments.Navigation.InnerNavigator)
 local momentsHostShellModule = require(moments.Components.MomentsHostShell)
 local useResetTeleportingOnGameLeaveModule = require(moments.Hooks.useResetTeleportingOnGameLeave)
@@ -219,7 +219,7 @@ local _ = function(p4, p5, p6)
 end
 
 local function MomentsTabEntry(p4)
-	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), useResetTeleportingOnGameLeaveModule (ref), getFFlagMomentsFixDeeplinkRefocusModule (ref), getDeepLinkRequest (ref), getDeepLinkStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), robloxAppEventsModule (ref), appPage (ref), consumeEntrySourceModule (ref), logMomentsLayerExposureModule (ref), fStringMomentsExperienceJoinActionTextIxpLayerModule (ref), fFlagMomentsEmojiSetsApiModule (ref), momentsGetMomentsReactionsStoreModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), analytics (ref), fFlagMomentsSessionHeartbeat (ref), t (ref), sessionManager (ref), funnelEventNames (ref), fireFunnelAnalyticsEvent (ref), momentsSurfaceLoadManager (ref), fFlagMomentsRealtimeObservability (ref), getExperienceDetailsSheetStoreModule (ref), getImmersiveChromeStoreModule (ref), roactNavigationModule (ref), useMomentsTabIsVisibleModule (ref), getFFlagMomentsFixPeekReturnChromeModule (ref), useMomentsGating (ref), canRenderNativeMoments (ref), innerNavigatorModule (ref), var1 (ref), momentsHostShellModule (ref)
+	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), useResetTeleportingOnGameLeaveModule (ref), getFFlagMomentsFixDeeplinkRefocusModule (ref), getDeepLinkRequest (ref), getDeepLinkStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), robloxAppEventsModule (ref), appPage (ref), consumeEntrySourceModule (ref), logMomentsLayerExposure (ref), fStringMomentsExperienceJoinActionTextIxpLayerModule (ref), fFlagMomentsEmojiSetsApiModule (ref), momentsGetMomentsReactionsStoreModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), analytics (ref), fFlagMomentsSessionHeartbeat (ref), t (ref), sessionManager (ref), funnelEventNames (ref), fireFunnelAnalyticsEvent (ref), momentsSurfaceLoadManager (ref), fFlagMomentsRealtimeObservability (ref), getExperienceDetailsSheetStoreModule (ref), getImmersiveChromeStoreModule (ref), roactNavigationModule (ref), useMomentsTabIsVisibleModule (ref), getFFlagMomentsFixPeekReturnChromeModule (ref), useMomentsGating (ref), canRenderNativeMoments (ref), innerNavigatorModule (ref), var1 (ref), momentsHostShellModule (ref)
 	local var10 = reactModule.useRef(p4)
 	var10.current = p4
 	local var11 = reactModule.useRef(false)
@@ -256,7 +256,7 @@ local function MomentsTabEntry(p4)
 		var12.current = true
 	end, { var19, var18, p4.navigation })
 	local var22 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), var13 (ref), var14 (ref), var16 (ref), consumeEntrySourceModule (copy), var10 (ref), logMomentsLayerExposureModule (copy), fStringMomentsExperienceJoinActionTextIxpLayerModule (copy), fFlagMomentsEmojiSetsApiModule (copy), momentsGetMomentsReactionsStoreModule (copy), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsRealtimeSessionTelemetry (copy), analytics (copy), fFlagMomentsSessionHeartbeat (copy), t (copy), sessionManager (copy), funnelEventNames (copy), fireFunnelAnalyticsEvent (copy)
+		-- upvalues: var11 (ref), var13 (ref), var14 (ref), var16 (ref), consumeEntrySourceModule (copy), var10 (ref), logMomentsLayerExposure (copy), fStringMomentsExperienceJoinActionTextIxpLayerModule (copy), fFlagMomentsEmojiSetsApiModule (copy), momentsGetMomentsReactionsStoreModule (copy), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsRealtimeSessionTelemetry (copy), analytics (copy), fFlagMomentsSessionHeartbeat (copy), t (copy), sessionManager (copy), funnelEventNames (copy), fireFunnelAnalyticsEvent (copy)
 		if var11.current then return end
 		local navigation, var23
 		var11.current = true
@@ -276,7 +276,7 @@ local function MomentsTabEntry(p4)
 		end
 		current.resetSession()
 		current.setSessionSource(var23)
-		logMomentsLayerExposureModule(fStringMomentsExperienceJoinActionTextIxpLayerModule)
+		logMomentsLayerExposure(fStringMomentsExperienceJoinActionTextIxpLayerModule)
 		
 		if fFlagMomentsEmojiSetsApiModule then
 			navigation = momentsGetMomentsReactionsStoreModule(false).getAndFetchEmojiSets

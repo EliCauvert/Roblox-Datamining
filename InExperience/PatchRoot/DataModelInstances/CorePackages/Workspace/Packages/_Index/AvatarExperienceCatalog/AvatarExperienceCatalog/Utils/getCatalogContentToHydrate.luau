@@ -1,6 +1,6 @@
 ﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
 local parent = avatarExperienceCatalog.Parent
-local itemTypeEnum = require(parent.AvatarExperienceCommon).Enums.ItemTypeEnum
+local itemTypeEnum = require(parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local fFlagAXMigrateAllTabToSduiDev = require(parent.AvatarExperienceFlags).FFlagAXMigrateAllTabToSduiDev
 local _ = require(avatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
 

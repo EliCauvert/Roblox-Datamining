@@ -13,9 +13,11 @@ local chatLandingTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatLan
 local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
 local getConversationViewModelStoreModule = require(appChat.Stores.GetConversationViewModelStore)
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
+local fFlagAppChatUseActivationOnFocus = require(parent.SharedFlags).FFlagAppChatUseActivationOnFocus
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local fFlagAppChatUseBindingConversationFacePileModule = require(appChat.Flags.FFlagAppChatUseBindingConversationFacePile)
 local getOtherParticipantsModule = require(appChat.Conversations.getOtherParticipants)
+local useActivationOnFocus = require(parent.FocusNavigationUtils).useActivationOnFocus
 local useConversationRowActivationModule = require(script.Parent.useConversationRowActivation)
 local useRelativeTimestampSignalBindingModule = require(script.Parent.useRelativeTimestampSignalBinding)
 local normalizeConversationForTelemetryModule = require(script.Parent.normalizeConversationForTelemetry)
@@ -64,7 +66,7 @@ local function useSubscriptionBadgeVisibility(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: getConversationStoreModule (ref), getConversationViewModelStoreModule (ref), useLocalization (ref), reactModule (ref), signalsModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), signalsReactModule (ref), useRelativeTimestampSignalBindingModule (ref), useSubscriptionBadgeVisibility (ref), useChatPagePaddingModule (ref), chatPlacementContextModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useConversationRowActivationModule (ref), reactFocusNavigationModule (ref), normalizeConversationForTelemetryModule (ref)
+	-- upvalues: getConversationStoreModule (ref), getConversationViewModelStoreModule (ref), useLocalization (ref), reactModule (ref), signalsModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), signalsReactModule (ref), useRelativeTimestampSignalBindingModule (ref), useSubscriptionBadgeVisibility (ref), useChatPagePaddingModule (ref), chatPlacementContextModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useConversationRowActivationModule (ref), fFlagAppChatUseActivationOnFocus (ref), useActivationOnFocus (ref), reactFocusNavigationModule (ref), normalizeConversationForTelemetryModule (ref)
 	local var1 = getConversationStoreModule(false)
 	local var2 = getConversationViewModelStoreModule(false)
 	local pendingSubtitleText = useLocalization({
@@ -191,25 +193,33 @@ return function(p1)
 	})
 	local var27 = reactModule.useRef(nil)
 	local onActivated = var26.onActivated
-	local var28 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-	local var29 = var4.isWideMode == true
-	reactModule.useEffect(function()
-		-- upvalues: var29 (ref), var28 (ref), var27 (ref), onActivated (ref)
-		if var29 and var28 then
-			local var30 = var28.focusedGuiObject:subscribe(function(p2)
-				-- upvalues: var27 (copy), onActivated (copy)
-				if var27.current and p2 == var27.current then
-					onActivated()
+	local var28 = var4.isWideMode == true
+	
+	if fFlagAppChatUseActivationOnFocus then
+		useActivationOnFocus(var28, var27, onActivated, nil, reactModule.useCallback(function()
+			-- upvalues: p1 (ref)
+			return p1.itemSignal(false).id
+		end, { p1.itemSignal }))
+	else
+		local var29 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
+		reactModule.useEffect(function()
+			-- upvalues: var28 (ref), var29 (ref), var27 (ref), onActivated (ref)
+			if var28 and var29 then
+				local var30 = var29.focusedGuiObject:subscribe(function(p2)
+					-- upvalues: var27 (copy), onActivated (copy)
+					if var27.current and p2 == var27.current then
+						onActivated()
+					end
+				end)
+				
+				return function()
+					-- upvalues: var30 (ref)
+					var30:unsubscribe()
 				end
-			end)
-			
-			return function()
-				-- upvalues: var30 (ref)
-				var30:unsubscribe()
 			end
-		end
-		return function() end
-	end, { onActivated, var29, var28, var27 })
+			return function() end
+		end, { onActivated, var28, var29, var27 })
+	end
 	local var30 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), p1 (ref), var30 (ref), var1 (ref), normalizeConversationForTelemetryModule (copy)

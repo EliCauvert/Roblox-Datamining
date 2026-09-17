@@ -39,7 +39,9 @@ return reactModule.memo(function(p1)
 		onScroll = reactModule.useMemo(function()
 			-- upvalues: textChannelWindowAnalyticsModule (copy), p1 (ref)
 			return textChannelWindowAnalyticsModule.createOnScrollCallback(p1.windowName)
-		end, { p1.windowName })
+		end, { p1.windowName }),
+		selectableRows = p1.selectableRows,
+		selectionCursor = p1.selectionCursor
 	}) else reactModule.createElement(foundationModule.Empty, {
 		icon = { name = "icons/status/oof_xlarge" },
 		text = var2("CoreScripts.TextChat.InputBar.Hint.ChatUnavailable")

@@ -8,7 +8,6 @@ local reactRobloxModule = require(parent.ReactRoblox)
 local signalsReactModule = require(parent.SignalsReact)
 local buildPillMenuModule = require(script.Parent.BuildPillMenu)
 local buildPillMenuPageHostModule = require(script.Parent.BuildPillMenuPageHost)
-local fFlagBuildExperienceAssetLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceAssetLibrary)
 local getBuildPillMenuPortalStoreModule = require(buildExperience.Stores.GetBuildPillMenuPortalStore)
 local fFlagBuildPublishNavigationSheetModule = require(buildExperience.Flags.FFlagBuildPublishNavigationSheet)
 local var2 = if fFlagBuildPublishNavigationSheetModule then require(buildExperience.Components.PublishSheet.PublishSheetController) else nil
@@ -28,7 +27,7 @@ local _ = function(p1, p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: getBuildPillMenuPortalStoreModule (ref), signalsReactModule (ref), useOverlay (ref), useStyleSheet (ref), fFlagBuildDesktopReadinessModule (ref), useTokens (ref), var1 (ref), reactModule (ref), fFlagBuildPublishNavigationSheetModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), view (ref), buildPillMenuModule (ref), reactRobloxModule (ref), buildPillMenuPageHostModule (ref), var2 (ref)
+	-- upvalues: getBuildPillMenuPortalStoreModule (ref), signalsReactModule (ref), useOverlay (ref), useStyleSheet (ref), fFlagBuildDesktopReadinessModule (ref), useTokens (ref), var1 (ref), reactModule (ref), fFlagBuildPublishNavigationSheetModule (ref), view (ref), buildPillMenuModule (ref), reactRobloxModule (ref), buildPillMenuPageHostModule (ref), var2 (ref)
 	local var3 = signalsReactModule.useSignalState(getBuildPillMenuPortalStoreModule().getPortalTarget)
 	local var4 = useOverlay()
 	local var5 = useStyleSheet()
@@ -68,39 +67,35 @@ return reactModule.memo(function(p1)
 		-- upvalues: var12 (ref)
 		var12({ type = "agents" })
 	end, {})
-	local var20 = if fFlagBuildExperienceAssetLibraryModule then reactModule.useCallback(function()
-		-- upvalues: var12 (ref)
-		var12({ type = "asset-library" })
-	end, {}) else nil
-	local var21 = reactModule.useCallback(function()
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref)
 		var12({ type = "invitePicker" })
 	end, {})
-	local var22 = reactModule.useCallback(function()
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref)
 		var12({ type = "playtestManagement" })
 	end, {})
-	local var23 = reactModule.useCallback(function()
+	local var22 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref)
 		var12({ type = "creator-credit" })
 	end, {})
-	local var24 = reactModule.useCallback(function()
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref)
 		var12(nil)
 	end, {})
-	local var25 = reactModule.useCallback(function(p2)
-		-- upvalues: var24 (ref), p1 (ref)
-		var24()
+	local var24 = reactModule.useCallback(function(p2)
+		-- upvalues: var23 (ref), p1 (ref)
+		var23()
 		
 		if p1.onOpenChat ~= nil then
 			p1.onOpenChat(p2)
 		end
-	end, { var24, p1.onOpenChat })
-	local var26 = reactModule.useCallback(function()
+	end, { var23, p1.onOpenChat })
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: var14 (ref)
 		var14(false)
 	end, {})
-	local var27 = reactModule.useCallback(function(p2, p3)
+	local var26 = reactModule.useCallback(function(p2, p3)
 		-- upvalues: var12 (ref)
 		var12({
 			type = "screen",
@@ -136,15 +131,15 @@ return reactModule.memo(function(p1)
 			return
 		end
 		var16()
-		local var28 = var3:GetPropertyChangedSignal("AbsolutePosition"):Connect(var16)
-		local var29 = if var4:IsA("GuiObject") then var4:GetPropertyChangedSignal("AbsolutePosition"):Connect(var16) else nil
+		local var27 = var3:GetPropertyChangedSignal("AbsolutePosition"):Connect(var16)
+		local var28 = if var4:IsA("GuiObject") then var4:GetPropertyChangedSignal("AbsolutePosition"):Connect(var16) else nil
 		
 		return function()
-			-- upvalues: var28 (ref), var29 (ref)
-			var28:Disconnect()
+			-- upvalues: var27 (ref), var28 (ref)
+			var27:Disconnect()
 			
-			if var29 ~= nil then
-				var29:Disconnect()
+			if var28 ~= nil then
+				var28:Disconnect()
 			end
 		end
 	end, {
@@ -172,10 +167,9 @@ return reactModule.memo(function(p1)
 				target = p1.target,
 				testId = p1.testId,
 				onOpenPage = var18,
-				onOpenInvitePicker = var21,
+				onOpenInvitePicker = var20,
 				onOpenAgentsPage = var19,
-				onOpenAssetLibraryPage = var20,
-				onOpenCreatorCreditPage = var23
+				onOpenCreatorCreditPage = var22
 			})
 		})
 	})
@@ -185,17 +179,17 @@ return reactModule.memo(function(p1)
 		Page = reactModule.createElement(buildPillMenuPageHostModule, {
 			activePage = var11,
 			target = p1.target,
-			onClose = var24,
-			onOpenChat = var25,
-			onInvitesSent = var22,
-			onOpenInvitePicker = var21
+			onClose = var23,
+			onOpenChat = var24,
+			onInvitesSent = var21,
+			onOpenInvitePicker = var20
 		}),
 		PublishSheet = if fFlagBuildPublishNavigationSheetModule then reactModule.createElement(var2, {
 			showPreviewButton = false,
 			isOpen = var13,
 			target = p1.target,
-			onClose = var26,
-			navigateToSubPage = var27
+			onClose = var25,
+			navigateToSubPage = var26
 		}) else nil
 	})
 end)

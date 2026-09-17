@@ -5,30 +5,24 @@ local view = foundationModule.View
 local divider = foundationModule.Divider
 local icon = foundationModule.Icon
 local enums = foundationModule.Enums
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
 local var1 = function() end
 
 local t = { affordance = enums.StateLayerAffordance.None }
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagSduiExperienceDetailsSupport (ref), reactModule (ref), view (ref), var1 (ref), t (ref), divider (ref), icon (ref), enums (ref)
+	-- upvalues: reactModule (ref), view (ref), var1 (ref), t (ref), divider (ref), icon (ref), enums (ref)
 	local var2 = (p1.numColumns or 1) == 1
-	local var3 = nil
-	local var4 = nil
+	local var3 = p1.selectable ~= false
 	
-	if fFlagSduiExperienceDetailsSupport then
-		var3 = p1.selectable ~= false
-		var4 = reactModule.useMemo(function()
-			-- upvalues: var3 (write), p1 (ref)
-			return if var3 then { Selectable = true, SelectionOrder = p1.selectionOrder } else nil
-		end, { var3, p1.selectionOrder })
-	end
 	return reactModule.createElement(view, {
 		tag = "col size-full-0 auto-y",
-		onActivated = if fFlagSduiExperienceDetailsSupport then p1.onActivated or (if var3 then var1 else nil) else p1.onActivated,
-		selection = if fFlagSduiExperienceDetailsSupport then var4 else nil,
-		stateLayer = if fFlagSduiExperienceDetailsSupport and var3 and not p1.onActivated then t else nil,
+		onActivated = p1.onActivated or (if var3 then var1 else nil),
+		selection = reactModule.useMemo(function()
+			-- upvalues: var3 (ref), p1 (ref)
+			return if var3 then { Selectable = true, SelectionOrder = p1.selectionOrder } else nil
+		end, { var3, p1.selectionOrder }),
+		stateLayer = if var3 and not p1.onActivated then t else nil,
 		testId = p1.testId
 	}, {
 		TopDivider = if not var2 then reactModule.createElement(divider, { LayoutOrder = 1 }) else nil,

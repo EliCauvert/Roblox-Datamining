@@ -1,9 +1,8 @@
 ﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
 local parent = avatarExperienceInspectAndBuy.Parent
 local _ = require(avatarExperienceInspectAndBuy.Types)
-local AXCommonModule = require(avatarExperienceInspectAndBuy.Parent.AXCommon)
-local itemTypeEnum = AXCommonModule.Enums.ItemTypeEnum
-local salesLocationType = AXCommonModule.Enums.SalesLocationType
+local itemTypeEnum = require(avatarExperienceInspectAndBuy.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local salesLocationType = require(avatarExperienceInspectAndBuy.Parent.AXCommon).Enums.SalesLocationType
 local tutilsModule = require(parent.tutils)
 
 return function(p1, p2)

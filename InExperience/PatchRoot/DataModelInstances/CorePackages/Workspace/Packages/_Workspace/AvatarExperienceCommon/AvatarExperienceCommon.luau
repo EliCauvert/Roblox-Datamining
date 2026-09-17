@@ -34,7 +34,6 @@ local selectHasDynamicHeadModule = require(script.State.Selectors.selectHasDynam
 local selectTryOnsLookIdModule = require(script.State.Selectors.selectTryOnsLookId)
 local itemDataModule = require(script.State.Selectors.ItemData)
 local robuxBalanceModule = require(script.Components.RobuxBalance.RobuxBalance)
-local itemTypeEnumModule = require(script.Enums.ItemTypeEnum)
 local catalogCategoriesModule = require(script.Enums.CatalogCategories)
 local catalogSubcategoriesModule = require(script.Enums.CatalogSubcategories)
 local catalogCategoryIdsModule = require(script.Enums.CatalogCategoryIds)
@@ -116,7 +115,6 @@ return {
 	},
 	Enums = {
 		OutfitTypes = require(script.Enums.OutfitTypes),
-		ItemTypeEnum = itemTypeEnumModule,
 		ItemRestrictions = itemRestrictionsModule,
 		ItemStatus = itemStatusModule,
 		SalesLocationType = salesLocationTypeModule,

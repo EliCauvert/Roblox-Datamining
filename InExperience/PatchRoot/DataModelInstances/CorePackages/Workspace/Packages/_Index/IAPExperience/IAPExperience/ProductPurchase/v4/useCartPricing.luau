@@ -7,10 +7,9 @@ local deriveCartPricingViewModule = require(script.Parent.deriveCartPricingView)
 local unifiedPurchaseModalTypeEnumModule = require(parent.Enums.UnifiedPurchaseModalTypeEnum)
 local _ = require(parent.ProductPurchase.PricingTypes)
 local fFlagPurchasePromptFetchCartPricing = require(parent.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
-local fFlagPurchasePromptFixOfferMarginUpsell = require(parent.Parent.SharedFlags).FFlagPurchasePromptFixOfferMarginUpsell
 
 return function(p1)
-	-- upvalues: reactModule (ref), fFlagPurchasePromptFetchCartPricing (ref), deriveCartPricingViewModule (ref), fFlagPurchasePromptFixOfferMarginUpsell (ref), unifiedPurchaseModalTypeEnumModule (ref)
+	-- upvalues: reactModule (ref), fFlagPurchasePromptFetchCartPricing (ref), deriveCartPricingViewModule (ref), unifiedPurchaseModalTypeEnumModule (ref)
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: fFlagPurchasePromptFetchCartPricing (copy), deriveCartPricingViewModule (copy), p1 (ref)
 		return if fFlagPurchasePromptFetchCartPricing then deriveCartPricingViewModule(p1.cartPricingResponse) else nil
@@ -22,7 +21,7 @@ return function(p1)
 		savingsRobux = var1.originalPrice - var1.priceAfterDiscount,
 		itemCount = var1.itemCount
 	}
-	local var4 = if fFlagPurchasePromptFixOfferMarginUpsell and var1 ~= nil then var1.priceWithoutOffersDiscounts else nil
+	local var4 = if var1 ~= nil then nil else var1.priceWithoutOffersDiscounts
 	local var5 = if var1 ~= nil then nil else var1.priceAfterDiscount
 	local var6 = fFlagPurchasePromptFetchCartPricing and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem
 	local var7 = if var3 == nil then #var2 > 0 else true

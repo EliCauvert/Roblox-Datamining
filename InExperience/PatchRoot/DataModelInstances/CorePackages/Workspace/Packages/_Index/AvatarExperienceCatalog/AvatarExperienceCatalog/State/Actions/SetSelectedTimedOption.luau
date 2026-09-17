@@ -1,5 +1,5 @@
 ﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local _ = require(parent.AvatarExperienceCommon)
+local _ = require(parent.AvatarExperienceModel)
 
 return require(parent.Rodux).makeActionCreator(script.Name, function(p1)
 	return {

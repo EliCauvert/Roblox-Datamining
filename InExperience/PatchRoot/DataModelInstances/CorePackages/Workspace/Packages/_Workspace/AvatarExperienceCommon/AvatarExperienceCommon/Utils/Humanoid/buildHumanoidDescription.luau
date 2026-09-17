@@ -1,14 +1,12 @@
 ﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local parent = avatarExperienceCommon.Parent
-local mutedError = require(parent.Loggers).mutedError
+local mutedError = require(avatarExperienceCommon.Parent.Loggers).mutedError
 local constantsModule = require(avatarExperienceCommon.Constants)
 local createHumanoidDescriptionAccessoryInfoModule = require(avatarExperienceCommon.Utils.Humanoid.createHumanoidDescriptionAccessoryInfo)
 local setMakeupDescriptionsModule = require(avatarExperienceCommon.Utils.Humanoid.setMakeupDescriptions)
 local isMakeupAssetTypeModule = require(avatarExperienceCommon.Utils.isMakeupAssetType)
-local fFlagAXMakeupEquipping = require(parent.AvatarExperienceFlags).FFlagAXMakeupEquipping
 
 local function applyCurrentAssets(value, p1)
-	-- upvalues: constantsModule (ref), createHumanoidDescriptionAccessoryInfoModule (ref), fFlagAXMakeupEquipping (ref), isMakeupAssetTypeModule (ref), mutedError (ref), setMakeupDescriptionsModule (ref)
+	-- upvalues: constantsModule (ref), createHumanoidDescriptionAccessoryInfoModule (ref), isMakeupAssetTypeModule (ref), mutedError (ref), setMakeupDescriptionsModule (ref)
 	if p1 then
 		local t = {}
 		
@@ -29,16 +27,13 @@ local function applyCurrentAssets(value, p1)
 				
 				if var2 then
 					value[var2] = joined
-				elseif i ~= constantsModule.ASSET_TYPE_NAME_TO_ID_STRING.Gear and (not fFlagAXMakeupEquipping or not isMakeupAssetTypeModule(i)) then
+				elseif i ~= constantsModule.ASSET_TYPE_NAME_TO_ID_STRING.Gear and not isMakeupAssetTypeModule(i) then
 					mutedError(string.format("assetTypeId: %s not recognized as member of humanoidDescription", tostring(i)))
 				end
 			end
 		end
 		value:SetAccessories(t, true)
-		
-		if fFlagAXMakeupEquipping then
-			setMakeupDescriptionsModule(value, p1)
-		end
+		setMakeupDescriptionsModule(value, p1)
 	end
 end
 

@@ -3,20 +3,22 @@ local analyticsKeysModule = require(buildExperience.Analytics.AnalyticsKeys)
 local metricGranularity = require(buildExperience.Parent.DataHydration.ExperienceAnalytics).MetricGranularity
 local t = { LastWeek = "LastWeek", LastMonth = "LastMonth" }
 
-local function _(p1, p2, p3)
+local function _(p1, p2, p3, p4)
 	-- upvalues: metricGranularity (ref)
 	return {
 		id = p1,
 		labelKey = p2,
 		lookbackSeconds = p3 * 86400,
 		days = p3,
-		granularity = metricGranularity.OneDay
+		granularity = metricGranularity.OneDay,
+		creatorHubRangeType = p4
 	}
 end
 
 local t_1 = {
 	lookbackSeconds = 604800,
 	days = 7,
+	creatorHubRangeType = "Last7Days",
 	id = t.LastWeek,
 	labelKey = analyticsKeysModule.ANALYTICS_WINDOW_LAST_WEEK,
 	granularity = metricGranularity.OneDay
@@ -24,6 +26,7 @@ local t_1 = {
 local t_2 = {
 	lookbackSeconds = 2419200,
 	days = 28,
+	creatorHubRangeType = "Last28Days",
 	id = t.LastMonth,
 	labelKey = analyticsKeysModule.ANALYTICS_WINDOW_LAST_MONTH,
 	granularity = metricGranularity.OneDay

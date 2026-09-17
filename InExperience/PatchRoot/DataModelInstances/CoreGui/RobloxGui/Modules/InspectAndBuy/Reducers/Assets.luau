@@ -3,7 +3,7 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local roduxModule = require(corePackagesService.Packages.Rodux)
 local parent = script.Parent.Parent
 local assetInfoModule = require(parent.Models.AssetInfo)
-local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon).Enums.ItemTypeEnum
+local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperienceModel).Enums.ItemTypeEnum
 
 return roduxModule.createReducer({}, {
 	[require(parent.Actions.SetFavoriteAsset).name] = function(p1, p2)

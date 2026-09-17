@@ -8,6 +8,7 @@ local musicEnhancementSteps = funnelEventNamesModule.MusicEnhancementSteps
 local trimEnhancementSteps = funnelEventNamesModule.TrimEnhancementSteps
 local textOverlayEnhancementSteps = funnelEventNamesModule.TextOverlayEnhancementSteps
 local stickerOverlayEnhancementSteps = funnelEventNamesModule.StickerOverlayEnhancementSteps
+local voiceEnhancementSteps = funnelEventNamesModule.VoiceEnhancementSteps
 local draftRecoverySteps = funnelEventNamesModule.DraftRecoverySteps
 
 return {
@@ -136,6 +137,43 @@ return {
 			funnelType = funnelTypes.TrimEnhancement
 		}
 	},
+	[eventNamesModule.EditingFlowVoiceButtonPressed] = {
+		{
+			funnelType = funnelTypes.VoiceEnhancement,
+			stepKey = voiceEnhancementSteps.VoiceButtonPressed
+		}
+	},
+	[eventNamesModule.EditingFlowVoiceTextEntered] = {
+		{
+			funnelType = funnelTypes.VoiceEnhancement,
+			stepKey = voiceEnhancementSteps.VoiceTextEntered
+		}
+	},
+	[eventNamesModule.EditingFlowVoiceGeneratePressed] = {
+		{
+			funnelType = funnelTypes.VoiceEnhancement,
+			stepKey = voiceEnhancementSteps.VoiceGeneratePressed
+		}
+	},
+	[eventNamesModule.EditingFlowVoiceGenerateSucceeded] = {
+		{
+			funnelType = funnelTypes.VoiceEnhancement,
+			stepKey = voiceEnhancementSteps.VoiceGenerateSucceeded
+		}
+	},
+	[eventNamesModule.EditingFlowVoiceDoneButtonPressed] = {
+		{
+			endSession = true,
+			funnelType = funnelTypes.VoiceEnhancement,
+			stepKey = voiceEnhancementSteps.VoiceApplied
+		}
+	},
+	[eventNamesModule.EditingFlowVoiceDeleteChangePressed] = {
+		{
+			endSession = true,
+			funnelType = funnelTypes.VoiceEnhancement
+		}
+	},
 	[eventNamesModule.MomentsEditingFlowExited] = if getFFlagMomentsCreationSaveDraftModule() then {
 		{ endSession = true, funnelType = funnelTypes.CreationFlow },
 		{
@@ -153,6 +191,10 @@ return {
 		{
 			endSession = true,
 			funnelType = funnelTypes.TrimEnhancement
+		},
+		{
+			endSession = true,
+			funnelType = funnelTypes.VoiceEnhancement
 		},
 		{
 			endSession = true,
@@ -176,6 +218,10 @@ return {
 		{
 			endSession = true,
 			funnelType = funnelTypes.TrimEnhancement
+		},
+		{
+			endSession = true,
+			funnelType = funnelTypes.VoiceEnhancement
 		}
 	},
 	[eventNamesModule.DraftRestoreSucceededEvent] = {

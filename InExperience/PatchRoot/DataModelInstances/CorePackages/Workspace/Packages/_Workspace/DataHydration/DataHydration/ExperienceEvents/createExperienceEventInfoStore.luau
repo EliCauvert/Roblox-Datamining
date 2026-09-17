@@ -11,12 +11,9 @@ local discoveryUtilsModule = require(parent.DiscoveryUtils)
 local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
 local logResponseError = discoveryUtilsModule.logResponseError
 local updateEventRsvpModule = require(script.Parent.updateEventRsvp)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
-local fFlagSduiEventDetailsSupport = sharedFlagsModule.FFlagSduiEventDetailsSupport
 
 return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), experienceEventDerivedFieldsModule (ref), experienceEventTypesModule (ref), updateEventRsvpModule (ref), logResponseError (ref), experienceEventsUrlBuilderModule (ref), discoveryEventErrorLogger (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref)
+	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), experienceEventDerivedFieldsModule (ref), experienceEventTypesModule (ref), updateEventRsvpModule (ref), logResponseError (ref), experienceEventsUrlBuilderModule (ref), discoveryEventErrorLogger (ref)
 	local var1 = createDataCacheModule()
 	local var2 = createDataResolverModule({
 		supportsMultiGet = false,
@@ -31,19 +28,19 @@ return function()
 		getExperienceEventInfo = var2.getCachedItem,
 		getExperienceEventInfos = var2.getCachedItems,
 		updateExperienceEventInfo = var1.updateItem,
-		updateExperienceEventInfos = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then function(p1)
+		updateExperienceEventInfos = function(p1)
 			-- upvalues: experienceEventDerivedFieldsModule (copy), var1 (ref)
 			for i, v in p1 do
 				p1[i] = experienceEventDerivedFieldsModule.enrichWithTimestamps(v)
 			end
 			var1.updateItems(p1)
-		end else var1.updateItems,
-		calculateDerivedField = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then experienceEventDerivedFieldsModule.calculateDerivedField else nil,
+		end,
+		calculateDerivedField = experienceEventDerivedFieldsModule.calculateDerivedField,
 		patchRsvpStatus = function(p2, p3)
-			-- upvalues: var2 (ref), experienceEventTypesModule (copy), updateEventRsvpModule (copy), var1 (ref), logResponseError (copy), experienceEventsUrlBuilderModule (copy), discoveryEventErrorLogger (copy), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy)
+			-- upvalues: var2 (ref), experienceEventTypesModule (copy), updateEventRsvpModule (copy), var1 (ref), logResponseError (copy), experienceEventsUrlBuilderModule (copy), discoveryEventErrorLogger (copy)
 			local var3 = var2.getCachedItem(p2).data()
 			
-			return if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then updateEventRsvpModule(p2, if p3 then experienceEventTypesModule.EventRsvpTypes.Going else experienceEventTypesModule.EventRsvpTypes.NotGoing):andThen(function(p4)
+			return updateEventRsvpModule(p2, if p3 then experienceEventTypesModule.EventRsvpTypes.Going else experienceEventTypesModule.EventRsvpTypes.NotGoing):andThen(function(p4)
 				-- upvalues: var3 (ref), p3 (ref), var1 (copy), p2 (ref)
 				if var3 then
 					var1.updateItem(p2, {
@@ -73,7 +70,7 @@ return function()
 					statusCode = var4,
 					statusMessage = var5
 				})
-			end) else nil
+			end)
 		end,
 		clear = var2.clear,
 		dispose = var2.dispose

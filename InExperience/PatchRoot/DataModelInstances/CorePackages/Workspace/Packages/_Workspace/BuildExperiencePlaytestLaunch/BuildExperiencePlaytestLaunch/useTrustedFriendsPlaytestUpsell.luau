@@ -19,9 +19,9 @@ return function(value)
 	local var1 = useDispatch()
 	local var2 = useNavigation()
 	local var3 = useLocalization({
-		title = "Feature.Friends.TrustedFriend.Label.Title",
+		title = "Feature.Friends.TrustedFriend.Label.AddTrustedFriend",
 		body = "Feature.Build.Message.TrustedFriendsRequiredForPlaytest",
-		addTrustedFriend = "Feature.Friends.TrustedFriend.Label.AddTrustedFriend",
+		add = "Feature.Friends.Action.Add",
 		cancel = "Feature.Build.Action.Cancel",
 		ok = "CommonUI.Controls.Action.OK"
 	})
@@ -34,7 +34,7 @@ return function(value)
 			orientButtonsVertically = true,
 			title = var3.title,
 			body = var3.body,
-			confirmButtonText = var3.addTrustedFriend,
+			confirmButtonText = var3.add,
 			cancelButtonText = if var4 then var3.cancel else var3.ok,
 			hideConfirmButton = not var4,
 			size = dialogSize.Small,
@@ -52,7 +52,6 @@ return function(value)
 			end
 		}))
 	end, {
-		var1, var2, value, var4, var3.title, var3.body, var3.addTrustedFriend,
-		var3.cancel, var3.ok
+		var1, var2, value, var4, var3.title, var3.body, var3.add, var3.cancel, var3.ok
 	})
 end

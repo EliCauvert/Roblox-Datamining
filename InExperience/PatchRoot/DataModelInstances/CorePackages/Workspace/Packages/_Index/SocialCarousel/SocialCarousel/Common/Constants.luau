@@ -52,6 +52,6 @@ return {
 			SHARE_QR = "ShareQRBtn"
 		}
 	},
-	TILE_TEXT_HEIGHT = if require(socialCarousel.Flags.FFlagSocialCarouselUpdateVerticalSpacing) then 32 else 45,
+	TILE_TEXT_HEIGHT = if require(socialCarousel.Flags.FFlagSocialCarouselUpdateVerticalSpacing) then 38 else 45,
 	TILE_TEXT_WIDTH = if fFlagSocialCarouselShareQREnabled then 30 else 125
 }

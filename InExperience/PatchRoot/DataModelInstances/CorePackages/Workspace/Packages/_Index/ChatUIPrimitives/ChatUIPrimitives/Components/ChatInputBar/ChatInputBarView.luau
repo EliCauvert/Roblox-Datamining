@@ -242,6 +242,8 @@ local function renderLegacy(p1)
 			t_11[reactModule.Event.Focused] = p1.onFocused
 			t_11[reactModule.Event.FocusLost] = p1.onFocusLost
 			t_11.ref = p1.textBoxRef
+			t_11.SelectionImageObject = props.selectionImageObject
+			t_11.Selectable = if props.selectionImageObject ~= nil then nil else true
 			t_10.TextBox = createElement_6(var8, t_11)
 			createElement_5 = createElement_5(view_4, t_9, t_10)
 		else
@@ -386,7 +388,9 @@ local function renderComposer(p1)
 				[reactModule.Event.ReturnPressedFromOnScreenKeyboard] = p1.onReturnPressedFromOnScreenKeyboard,
 				[reactModule.Event.Focused] = p1.onFocused,
 				[reactModule.Event.FocusLost] = p1.onFocusLost,
-				ref = p1.textBoxRef
+				ref = p1.textBoxRef,
+				SelectionImageObject = props.selectionImageObject,
+				Selectable = if props.selectionImageObject ~= nil then nil else true
 			})
 		}) else nil
 		createElement_3 = createElement_3(view_3, t_6, t_7)

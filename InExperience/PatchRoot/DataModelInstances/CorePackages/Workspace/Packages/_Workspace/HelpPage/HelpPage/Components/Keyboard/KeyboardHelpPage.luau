@@ -5,13 +5,15 @@ local foundationModule = require(parent_1.Foundation)
 local useKeybindsModule = require(parent.Hooks.useKeybinds)
 local keyboardGroupModule = require(script.Parent.KeyboardGroup)
 local _ = require(parent.Configs.ConfigTypes)
+local fFlagHelpPageCCLModule = require(parent.Flags.FFlagHelpPageCCL)
 local view = foundationModule.View
 
 return reactModule.memo(function()
-	-- upvalues: useKeybindsModule (ref), reactModule (ref), view (ref), keyboardGroupModule (ref)
-	local controls = useKeybindsModule().controls
-	local groups = useKeybindsModule().groups
-	local var1 = reactModule.useMemo(function()
+	-- upvalues: useKeybindsModule (ref), reactModule (ref), view (ref), keyboardGroupModule (ref), fFlagHelpPageCCLModule (ref)
+	local var1 = useKeybindsModule()
+	local controls = var1.controls
+	local groups = var1.groups
+	local var2 = reactModule.useMemo(function()
 		-- upvalues: controls (ref), groups (ref), reactModule (copy), view (copy), keyboardGroupModule (copy)
 		if controls == nil or groups == nil then
 			return nil
@@ -45,7 +47,10 @@ return reactModule.memo(function()
 		return t_1
 	end, { controls, groups })
 	
-	return if var1 == nil then nil else reactModule.createElement(view, {
-		tag = "row size-full-0 auto-y wrap align-x-left align-y-top"
-	}, var1)
+	return if var2 == nil then nil else reactModule.createElement(view, {
+		tag = {
+			["col wrap align-x-left align-y-top size-full-0 auto-y"] = fFlagHelpPageCCLModule,
+			["row wrap align-x-left align-y-top size-full-0 auto-y"] = not fFlagHelpPageCCLModule
+		}
+	}, var2)
 end)

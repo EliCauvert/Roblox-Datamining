@@ -10,11 +10,24 @@ local appStyleProvider = require(parent.UIBlox).App.Style.AppStyleProvider
 local foundationModule = require(parent.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
 local colorMode = foundationModule.Enums.ColorMode
+local themeName = foundationModule.Enums.ThemeName
 local getUIScale = require(parent.Display).GetDisplayStore(false).getUIScale
 local enableDisplaySize = game:DefineFastFlag("LuaAppEnableWindowsHandheldTokenScale", false) and game:GetEngineFeature("EnableDisplaySize") or game:DefineFastFlag("DebugLuaAppEnableTokenScale", false)
 local fFlagAppNavBarPerItemThemeOverride = require(parent.SharedFlags).FFlagAppNavBarPerItemThemeOverride
 local var1 = if fFlagAppNavBarPerItemThemeOverride then require(script.Parent.UiModeBrandThemeContext) else nil
-local t = { dark = colorMode.Dark, light = colorMode.Light }
+local appClassicThemeGreenButtonColors = game:DefineFastFlag("AppClassicThemeGreenButtonColors", false)
+local t = {
+	["Color.ActionEmphasis.Background.Color3"] = Color3.fromHex("#137F1F"),
+	["Color.ActionSoftEmphasis.Background.Color3"] = Color3.fromHex("#137F1F"),
+	["Color.ActionSoftEmphasis.Foreground.Color3"] = Color3.fromHex("#E2F8E3")
+}
+local t_1 = {
+	["Color.ActionEmphasis.Background.Color3"] = Color3.fromHex("#12891D"),
+	["Color.ActionEmphasis.Foreground.Color3"] = Color3.fromHex("#FFFFFF"),
+	["Color.ActionSoftEmphasis.Background.Color3"] = Color3.fromHex("#12891D"),
+	["Color.ActionSoftEmphasis.Foreground.Color3"] = Color3.fromHex("#022708")
+}
+local t_2 = { dark = colorMode.Dark, light = colorMode.Light }
 
 local function _()
 	-- upvalues: signalsReactModule (ref), getUIScale (ref)
@@ -22,7 +35,7 @@ local function _()
 end
 
 local function UiModeStyleProvider(p1)
-	-- upvalues: useDeviceType (ref), enableDisplaySize (ref), signalsReactModule (ref), getUIScale (ref), reactModule (ref), userGameSettingsService (ref), cryoModule (ref), foundationProvider (ref), t (ref), sceneOverridesRegistryModule (ref), appStyleProvider (ref)
+	-- upvalues: useDeviceType (ref), enableDisplaySize (ref), signalsReactModule (ref), getUIScale (ref), reactModule (ref), userGameSettingsService (ref), cryoModule (ref), appClassicThemeGreenButtonColors (ref), themeName (ref), t_2 (ref), colorMode (ref), t_1 (ref), t (ref), foundationProvider (ref), sceneOverridesRegistryModule (ref), appStyleProvider (ref)
 	local var2 = useDeviceType()
 	local var3 = if enableDisplaySize then signalsReactModule.useSignalState(getUIScale) else nil
 	local var4, var5 = reactModule.useState({
@@ -59,13 +72,23 @@ local function UiModeStyleProvider(p1)
 			settings = if enableDisplaySize then cryoModule.Dictionary.join(var4, { scale = var3 }) else var4
 		})
 	end, { style, var2, var4, var3 })
+	local var7 = var6.foundationThemeName ~= nil
+	local var8 = nil
 	
+	if appClassicThemeGreenButtonColors then
+		local foundationThemeName = var6.foundationThemeName
+		
+		if if foundationThemeName ~= themeName.Classic then foundationThemeName == themeName.KidsClassic else true then
+			var8 = if t_2[var6.themeName:lower()] == colorMode.Light then t_1 else t
+		end
+	end
 	return reactModule.createElement(foundationProvider, {
 		device = var6.deviceType,
-		colorMode = t[var6.themeName:lower()],
+		colorMode = t_2[var6.themeName:lower()],
 		themeName = var6.foundationThemeName,
-		preferences = var6.settings
-	}, reactModule.createElement(sceneOverridesRegistryModule, { isActive = var6.foundationThemeName ~= nil }, reactModule.createElement(appStyleProvider, { style = var6 }, p1.children)))
+		preferences = var6.settings,
+		tokenOverrides = var8
+	}, reactModule.createElement(sceneOverridesRegistryModule, { isActive = var7 }, reactModule.createElement(appStyleProvider, { style = var6 }, p1.children)))
 end
 
 return function(p1)

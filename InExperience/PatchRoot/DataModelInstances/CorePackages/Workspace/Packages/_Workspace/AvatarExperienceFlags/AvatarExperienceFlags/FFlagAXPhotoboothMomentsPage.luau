@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXPhotoboothMomentsPage", false)
+﻿return game:DefineFastFlag("AXPhotoboothMomentsPage3", false)

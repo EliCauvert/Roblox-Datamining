@@ -1,7 +1,7 @@
 ﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
 local parent = avatarExperienceInspectAndBuy.Parent
 local _ = require(avatarExperienceInspectAndBuy.Types)
-local AXCommonModule = require(avatarExperienceInspectAndBuy.Parent.AXCommon)
+local avatarExperienceModelModule = require(avatarExperienceInspectAndBuy.Parent.AvatarExperienceModel)
 local reactModule = require(parent.React)
 local useMemo = reactModule.useMemo
 local useCallback = reactModule.useCallback
@@ -11,7 +11,7 @@ local convertBundleInfoToItemDataModule = require(avatarExperienceInspectAndBuy.
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local tutilsModule = require(parent.tutils)
 local performFetch = require(parent.Http).PerformFetch
-local itemTypeEnum = AXCommonModule.Enums.ItemTypeEnum
+local itemTypeEnum = avatarExperienceModelModule.Enums.ItemTypeEnum
 local fFlagAXEnableBatchItemDetailsFetchV2 = require(parent.AvatarExperienceFlags).FFlagAXEnableBatchItemDetailsFetchV2
 local batchItemDetailsPerformFetchKey = require(avatarExperienceInspectAndBuy.Constants).BatchItemDetailsPerformFetchKey
 

@@ -159,6 +159,8 @@ Common.Presence.Label.Online,ऑनलाइन
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,ऐनिमेशन बहुत लंबा है ({duration} सेकंड). Emote ऐनिमेशन ज़्यादा-से-ज़्यादा {maxLength} सेकंड लंबे होने चाहिए.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,ऐनिमेशन बहुत छोटा है ({duration} सेकंड). Emote ऐनिमेशन {minLength} सेकंड से ज़्यादा लंबे होने चाहिए.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,{cageName} में केज पार्ट की प्लेसमेंट का उल्लंघन : {upperPart} को {lowerPart} के ऊपर सही ढंग से नहीं रखा गया है.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"{cageName} में मौजूद केज पार्ट {partName} में {actualCount} वर्टिसेस हैं, जबकि उम्मीद लगभग {expectedCount} वर्टिसेस के होने की थी. इससे यह पता लग सकता है कि उस बॉडी रीजन में कोई ज्योमेट्री मौजूद नहीं है या कोई डुप्लिकेट ज्योमेट्री है."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,आपके बॉडी में छोटे डिस्कनेक्टेड मेश कॉम्पोनेंट (मेश आइलैंड) मौजूद हैं. कृपया फ़्लोटिंग ज्योमेट्री हटा दें और पक्का करें कि सभी मेश पार्ट्स ठीक से जुड़े हुए हैं.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"ऐसेट की क्वॉलिटी : {partName} में {num_disconnected_components} डिस्कनेक्ट किए गए कॉम्पोनेंट हैं, जो मैक्सिमम {max_disconnected_components} की लिमिट से ज़्यादा हैं."
 Common.UGCValidation.ErrorLabel.AQSInputDataError,इनपुट डेटा गलत या अधूरा होने के कारण क्वॉलिटी स्कोर का हिसाब सही से नहीं लगाया जा सकता. कृपया अपना मॉडल चेक करें या बग रिपोर्ट फ़ाइल करें
@@ -436,7 +438,6 @@ CommonUI.Features.Label.Unchecked,अनचेक किया गया
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,इससे कनेक्ट करें
-CommonUI.Features.Labels.Retry,
 CommonUI.Features.NavBar.Build,बिल्ड
 CommonUI.Features.StudioCTA.Tooltip.Body,फ़्री में Studio डाउनलोड करें!
 CommonUI.Features.StudioCTA.Tooltip.Title,Roblox पर क्रिएट करना शुरू करें
@@ -853,6 +854,7 @@ CoreScripts.InGameMenu.GameSettings.LanguageHeader,चैट और भाषा
 CoreScripts.InGameMenu.GameSettings.LockedByDeveloper,डेवलपर ने लॉक किया है
 CoreScripts.InGameMenu.GameSettings.MainVolume,मुख्य वॉल्यूम
 CoreScripts.InGameMenu.GameSettings.ManualGraphicsQuality,क्वालिटी लेवल
+CoreScripts.InGameMenu.GameSettings.MoreSettingsAvailable,Roblox ऐप या वेबसाइट पर और सेटिंग्स उपलब्ध हैं.
 CoreScripts.InGameMenu.GameSettings.MovementMode,मूवमेंट मोड
 CoreScripts.InGameMenu.GameSettings.Open,खोलें
 CoreScripts.InGameMenu.GameSettings.PlaceVersion,प्लेस वर्ज़न: {PLACE_VERSION}
@@ -2074,7 +2076,6 @@ Feature.Build.Label.Building,बना रहा है...
 Feature.Build.Label.CaptureLibrary,कैप्चर लाइब्रेरी
 Feature.Build.Label.CaptureSelectionCount,{MAX_SELECTIONS} में से {SELECTED_COUNT} को चुना गया
 Feature.Build.Label.ContentRating,कॉन्टेंट रेटिंग
-Feature.Build.Label.Created,क्रिएट किया गया
 Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
 Feature.Build.Label.DateRange,{startDate} – {endDate}
@@ -2098,7 +2099,6 @@ Feature.Build.Label.GamePlays,गेम प्ले
 Feature.Build.Label.GetMoreBuildUsage,बिल्ड का और इस्तेमाल पाएँ
 Feature.Build.Label.Hi,हैलो
 Feature.Build.Label.IconThumbnails,आइकॉन और थंबनेल
-Feature.Build.Label.Images2D,2D इमेज
 Feature.Build.Label.InProgress,जारी है
 Feature.Build.Label.InputNeeded,इनपुट चाहिए
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2108,7 +2108,6 @@ Feature.Build.Label.Loading,लोड किया जा रहा है...
 Feature.Build.Label.ManagedPricing,मैनेज की जा रही कीमतें
 Feature.Build.Label.ManagedPricingMixed,मौजूदा प्रॉडक्ट्स में मिला-जुला
 Feature.Build.Label.MaximizeForGamePlays,गेम प्ले की संख्या ज़्यादा से ज़्यादा बढ़ाएँ
-Feature.Build.Label.Models3D,3D मॉडल
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,कोई लिमिट नहीं
 Feature.Build.Label.NotStarted,शुरू नहीं हुआ
@@ -2126,7 +2125,6 @@ Feature.Build.Label.Private,प्राइवेट
 Feature.Build.Label.Public,पब्लिक
 Feature.Build.Label.PubliclyUnavailable,सभी के लिए उपलब्ध नहीं है
 Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,तैयार
 Feature.Build.Label.RegionalPricing,इलाके के हिसाब से कीमत
 Feature.Build.Label.ResetsDaily,रोज़ाना रीसेट होता है
@@ -2135,14 +2133,11 @@ Feature.Build.Label.ResetsWeekly,हर हफ़्ते रीसेट ह�
 Feature.Build.Label.RestoredVersion,{VERSION} रीस्टोर किया गया
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,ऐसेट सर्च करें
 Feature.Build.Label.SearchGames,गेम्स सर्च करें
 Feature.Build.Label.SearchTasks,टास्क सर्च करें
 Feature.Build.Label.SelectOption,कोई विकल्प चुनें
-Feature.Build.Label.Shared,शेयर किया गया
 Feature.Build.Label.ShopButton,'शॉप' बटन
 Feature.Build.Label.ShopUi,'शॉप' UI
-Feature.Build.Label.Sounds,साउंड
 Feature.Build.Label.TargetAllRobloxPlayers,सभी Roblox प्लेयर्स को टार्गेट करें
 Feature.Build.Label.Thinking,प्रोसेस कर रहा है
 Feature.Build.Label.Title,टाइटल
@@ -2212,7 +2207,6 @@ Feature.Build.Label.UniverseNumber,यूनिवर्स {UNIVERSE_ID}
 Feature.Build.Label.Unknown,अज्ञात
 Feature.Build.Label.UnlimitedUsed,{USED} इस्तेमाल किए गए • कोई लिमिट नहीं
 Feature.Build.Label.UpdateTitleDesc,टाइटल और विवरण अपडेट करें
-Feature.Build.Label.Updated,अपडेट किया गया
 Feature.Build.Label.Usage,इस्तेमाल
 Feature.Build.Label.UsageUsed,{USED} इस्तेमाल किया गया
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2233,8 +2227,6 @@ Feature.Build.Message.AdsStatsEmpty,"ऐड कैंपेन की मदद 
 Feature.Build.Message.AdsStatsEmptyFree,"फ़्री ऐड कैंपेन की मदद से, अपनी ऑडियंस बढ़ाएँ और अपने गेम को लोगों की नज़रों में लाएँ"
 Feature.Build.Message.AllFriendsAdded,आपने अपने सभी फ़्रेंड्स को अर्ली टेस्टर्स के रूप में इनवाइट किया है.
 Feature.Build.Message.AnswerBuildQuestion,नीचे बिल्ड के सवाल का जवाब दें.
-Feature.Build.Message.AssetDetailsUnavailable,ऐसेट की जानकारी उपलब्ध नहीं है.
-Feature.Build.Message.AssetsLoadFailed,ऐसेट लोड नहीं हो सके.
 Feature.Build.Message.AudienceIneligible,इस ऑडियंस के लिए योग्य नहीं है
 Feature.Build.Message.BuildAccountBlocked,बिल्ड अभी आपके अकाउंट के लिए उपलब्ध नहीं है.
 Feature.Build.Message.BuildBusy,बिल्ड व्यस्त है. थोड़ी देर इंतज़ार करें और फिर से कोशिश करें.
@@ -2266,7 +2258,6 @@ Feature.Build.Message.InvitesLoadFailed,इनवाइट्स लोड न�
 Feature.Build.Message.LimitBelowSpend,लिमिट आज पहले से खर्च किए गए {ALREADY_SPENT} Robux से कम नहीं हो सकती.
 Feature.Build.Message.LinkCopied,लिंक को क्लिपबोर्ड पर कॉपी किया गया.
 Feature.Build.Message.LoadingVersions,वर्ज़न हिस्ट्री लोड हो रही है...
-Feature.Build.Message.NoAssetsFound,कोई ऐसेट नहीं मिला.
 Feature.Build.Message.NoCapturesAvailable,कोई कैप्चर उपलब्ध नहीं है
 Feature.Build.Message.NoDescriptionProvided,कोई जानकारी नहीं दी गई.
 Feature.Build.Message.NoFriendsToAdd,फ़िलहाल आपके पास इनवाइट करने के लिए कोई फ़्रेंड नहीं है. पहले Roblox पर लोगों से जुड़ें.
@@ -2321,7 +2312,6 @@ Feature.Build.Title.AddImages,इमेज जोड़ें
 Feature.Build.Title.AdsStatsEmpty,कैंपेन शुरू करें
 Feature.Build.Title.AdsStatsEmptyFree,अपना पहला कैंपेन शुरू करें
 Feature.Build.Title.ArchiveThisGame,इस गेम को आर्काइव में भेजना है?
-Feature.Build.Title.AssetLibrary,लाइब्रेरी
 Feature.Build.Title.Audience,ऑडियंस
 Feature.Build.Title.BuildQuestion,बिल्ड का एक सवाल है
 Feature.Build.Title.BuildQuestions,बिल्ड के कुछ सवाल हैं
@@ -3042,6 +3032,7 @@ Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,डेमो खेलें
+Feature.ExperienceDetails.PlayButtonText.Playtest,
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,अनलॉक करें
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -3289,7 +3280,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,भरोसेमं�
 Feature.Friends.TrustedFriend.AddBack.Header,भरोसेमंद फ़्रेंड की रिक्वेस्ट
 Feature.Friends.TrustedFriend.Info.Modal.Header,नया भरोसेमंद फ़्रेंड
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,भरोसेमंद फ़्रेंड जोड़ें
-Feature.Friends.TrustedFriend.Label.Title,भरोसेमंद फ़्रेंड
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} अब एक भरोसेमंद फ़्रेंड हैं
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,भरोसेमंद फ़्रेंड को हटाया गया
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,भरोसेमंद फ़्रेंड की रिक्वेस्ट भेजी गई
@@ -3324,7 +3314,7 @@ Feature.GameDetails.Label.SomethingElse,कुछ और
 Feature.GameDetails.Label.Store,स्टोर
 Feature.GameDetails.Label.TellUsMorePlaceholder,हमें और बताएँ
 Feature.GameDetails.Label.TooRepetitive,बहुत बार दोहराया गया है
-Feature.GameDetails.Label.Updated,
+Feature.GameDetails.Label.Updated,अपडेट किया गया
 Feature.GameDetails.Label.VoiceChat,
 Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
@@ -3527,7 +3517,9 @@ Feature.Moments.Action.AddVoice,वॉइस जोड़ें
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
+Feature.Moments.Action.CreateVoiceover,वॉइसओवर क्रिएट करें
 Feature.Moments.Action.Delete,
+Feature.Moments.Action.DiscardChange,बदलाव डिलीट करें
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,बड़ा करें
 Feature.Moments.Action.GenerateText,टेक्स्ट जेनरेट करें
@@ -3536,6 +3528,7 @@ Feature.Moments.Action.GenerateTextFeedbackPolicy,अनुचित या न�
 Feature.Moments.Action.Hide,जानकारी छिपाएँ
 Feature.Moments.Action.HowToCapture,कैप्चर कैसे करें
 Feature.Moments.Action.Join,
+Feature.Moments.Action.KeepEditing,एडिटिंग जारी रखें
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,छोटा करें
 Feature.Moments.Action.Ok,
@@ -3545,9 +3538,11 @@ Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
 Feature.Moments.Action.Return,गैलरी पर वापस जाएँ
 Feature.Moments.Action.ReturnToEditing,एडिटिंग पर वापस जाएँ
+Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,जानकारी दिखाएँ
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,वीडियो ट्रिम करें
+Feature.Moments.Action.TryAgain,
 Feature.Moments.Description.CommunityStandards,"क्या कहें और क्या न कहें, इस बारे में ज़्यादा जानकारी के लिए कम्यूनिटी स्टैंडर्ड देखें."
 Feature.Moments.Description.EmptyCapturesLibrary,आपके कैप्चर यहाँ दिखेंगे.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI से जेनरेट किया गया टेक्स्ट. पोस्ट करने से पहले रिव्यू करें — पब्लिश की गई किसी भी चीज़ के लिए आप ज़िम्मेदार हैं.
@@ -3567,7 +3562,10 @@ Feature.Moments.Label.AttemptingJoinExperience,{placeName} को जॉइन �
 Feature.Moments.Label.CaptureLibrary,आपकी 'कैप्चर' लाइब्रेरी
 Feature.Moments.Label.DeleteMomentBody,"कोई Moment मिट जाने पर, उसे रिकवर नहीं किया जा सकता."
 Feature.Moments.Label.DeleteMomentTitle,Moment डिलीट करना है?
+Feature.Moments.Label.DeleteVoiceoverBody,इससे आपका टेक्स्ट और वॉइसओवर मिट जाएगा. कभी भी फिर से शुरू करें.
+Feature.Moments.Label.DeleteVoiceoverTitle,वॉइसओवर डिलीट करना है?
 Feature.Moments.Label.Error,
+Feature.Moments.Label.ExceedsCharacterLimit,कैरेक्टर लिमिट पार हो चुकी है
 Feature.Moments.Label.FeedEndBody,बाद में फिर से चेक करें या अपना खुद का Moment क्रिएट करें.
 Feature.Moments.Label.FeedEndTitle,कोई नया Moment नहीं है
 Feature.Moments.Label.FeedFailedToLoad,फ़ीड लोड नहीं हो सकी
@@ -3618,6 +3616,15 @@ Feature.Moments.Label.Tone.Funny,मज़ेदार
 Feature.Moments.Label.Tone.Hype,हाइप
 Feature.Moments.Label.Tone.Neutral,न्यूट्रल
 Feature.Moments.Label.Videos,
+Feature.Moments.Label.VoiceCoachmarkBody,वीडियो नरेशन के लिए स्क्रिप्ट टाइप करें
+Feature.Moments.Label.VoiceCoachmarkTitle,
+Feature.Moments.Label.VoiceGenerating,आपका वॉइसओवर क्रिएट किया जा रहा है...
+Feature.Moments.Label.VoiceGenerationFailedBody,वॉइसओवर जेनरेट नहीं हो सका.
+Feature.Moments.Label.VoiceHelperDefault,वॉइस को वीडियो की लंबाई के अनुसार छोटा किया गया
+Feature.Moments.Label.VoiceLimitReachedBody,"थोड़ी देर इंतज़ार करें, फिर दोबारा कोशिश करें"
+Feature.Moments.Label.VoiceModerationError,आपकी स्क्रिप्ट में सुरक्षा संबंधी नियमों का पालन किया जाना चाहिए
+Feature.Moments.Label.VoicePlaceholder,अपनी वॉइसओवर स्क्रिप्ट टाइप करें. ज़्यादा-से-ज़्यादा {maxCount} कैरेक्टर होने चाहिए
+Feature.Moments.Label.VoiceTimeoutBody,वॉइसओवर जेनरेशन टाइम आउट हो गया.
 Feature.Moments.Title.GenerateTextFeedbackReason,क्या गड़बड़ी हुई?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?

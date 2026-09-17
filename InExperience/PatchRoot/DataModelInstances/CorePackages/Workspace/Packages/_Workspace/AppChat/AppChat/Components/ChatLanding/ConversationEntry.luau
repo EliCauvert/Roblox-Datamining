@@ -24,10 +24,12 @@ local squadComponentAccessWrapperModule = require(parent.Squads.SquadComponentAc
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local useNavigation = require(parent.Navigation).useNavigation
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
+local useActivationOnFocus = require(parent.FocusNavigationUtils).useActivationOnFocus
 local getFFlagDebugAppChatModule = require(appChat.Flags.getFFlagDebugAppChat)
 local fFlagAppChatSquadJoinButtonU13OSAModule = require(appChat.Flags.FFlagAppChatSquadJoinButtonU13OSA)
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local fFlagAppChatTimestampInSubtitleModule = require(appChat.Flags.FFlagAppChatTimestampInSubtitle)
+local fFlagAppChatUseActivationOnFocus = require(parent.SharedFlags).FFlagAppChatUseActivationOnFocus
 local useTelemetryModule = require(appChat.Telemetry.useTelemetry)
 local chatLandingTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatLandingTelemetryLayer)
 local constantsModule = require(appChat.Constants)
@@ -48,7 +50,7 @@ local t = {
 }
 
 return memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useTextSizeOffset (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useIsUserPendingModule (ref), getBoldTextThemeModule (ref), useDispatch (ref), useChatPlacementContext (ref), useChatPagePaddingModule (ref), useRelativeTimestampBindingModule (ref), useMemo (ref), text (ref), fFlagAppChatTimestampInSubtitleModule (ref), reactModule (ref), useNavigation (ref), getOverlayStoreModule (ref), enumScreensModule (ref), overlayTypesModule (ref), conversationModule (ref), removedConversationModule (ref), shouldShowU13ChatOptInForConversationModule (ref), constantsModule (ref), shouldShowOSAForConversationModule (ref), httpService (ref), fFlagAppChatSquadJoinButtonU13OSAModule (ref), reactFocusNavigationModule (ref), useCanAccessPartyModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), squadButtonSourceEnum (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), conversationCell (ref), getFFlagDebugAppChatModule (ref), conversationRelativeTimestampModule (ref), foundationModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useTextSizeOffset (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useIsUserPendingModule (ref), getBoldTextThemeModule (ref), useDispatch (ref), useChatPlacementContext (ref), useChatPagePaddingModule (ref), useRelativeTimestampBindingModule (ref), useMemo (ref), text (ref), fFlagAppChatTimestampInSubtitleModule (ref), reactModule (ref), useNavigation (ref), getOverlayStoreModule (ref), enumScreensModule (ref), overlayTypesModule (ref), conversationModule (ref), removedConversationModule (ref), shouldShowU13ChatOptInForConversationModule (ref), constantsModule (ref), shouldShowOSAForConversationModule (ref), httpService (ref), fFlagAppChatSquadJoinButtonU13OSAModule (ref), fFlagAppChatUseActivationOnFocus (ref), useActivationOnFocus (ref), reactFocusNavigationModule (ref), useCanAccessPartyModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), squadButtonSourceEnum (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), conversationCell (ref), getFFlagDebugAppChatModule (ref), conversationRelativeTimestampModule (ref), foundationModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2 = useStyle()
 	local var3 = useTokens()
@@ -152,24 +154,37 @@ return memo(function(p1)
 			onSquadJoinButtonActivated(p2)
 		end
 	end, { var21, conversation, onSquadJoinButtonActivated })
-	local var24 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-	reactModule.useEffect(function()
-		-- upvalues: wideMode (write), var22 (ref), var24 (ref), var16 (ref), conversation (ref)
-		if wideMode and var22 and var24 then
-			local var25 = var24.focusedGuiObject:subscribe(function(p2)
-				-- upvalues: var16 (copy), var22 (copy), conversation (copy)
-				if var16.current and p2 == var16.current.cell then
-					var22(conversation)
+	
+	if fFlagAppChatUseActivationOnFocus then
+		useActivationOnFocus(wideMode, var16, function()
+			-- upvalues: var22 (ref), conversation (ref)
+			var22(conversation)
+		end, function(p2)
+			return if p2 then p2.cell else nil
+		end, function()
+			-- upvalues: conversation (ref)
+			return conversation and conversation.id
+		end)
+	else
+		local var24 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
+		reactModule.useEffect(function()
+			-- upvalues: wideMode (write), var22 (ref), var24 (ref), var16 (ref), conversation (ref)
+			if wideMode and var22 and var24 then
+				local var25 = var24.focusedGuiObject:subscribe(function(p2)
+					-- upvalues: var16 (copy), var22 (copy), conversation (copy)
+					if var16.current and p2 == var16.current.cell then
+						var22(conversation)
+					end
+				end)
+				
+				return function()
+					-- upvalues: var25 (ref)
+					var25:unsubscribe()
 				end
-			end)
-			
-			return function()
-				-- upvalues: var25 (ref)
-				var25:unsubscribe()
 			end
-		end
-		return function() end
-	end, { var22, wideMode, var24 })
+			return function() end
+		end, { var22, wideMode, var24 })
+	end
 	local children = var1.children or {}
 	local size1900 = var3.Size.Size_1900
 	local _ = nil

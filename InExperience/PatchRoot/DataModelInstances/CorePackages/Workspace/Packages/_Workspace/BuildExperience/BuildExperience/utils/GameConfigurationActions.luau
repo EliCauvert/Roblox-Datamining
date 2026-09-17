@@ -22,9 +22,14 @@ local function getCreatorHubConfigureUrl(p1)
 	return var1({ universeId = p1 })
 end
 
-local function getCreatorHubAnalyticsUrl(p1, p2)
+local function getCreatorHubAnalyticsUrl(p1, p2, p3)
 	-- upvalues: urlBuilder (ref)
-	return urlBuilder.fromString(`create:dashboard/creations/experiences/\{universeId}/{p2}`)({ universeId = p1 })
+	local var3 = urlBuilder.fromString(`create:dashboard/creations/experiences/\{universeId}/{p2}`)({ universeId = p1 })
+	
+	if p3 ~= nil then
+		var3 = urlBuilder.addQueryString(var3, { rangeType = p3 })
+	end
+	return var3
 end
 
 local function getExperienceQuestionnaireUrl(p1)

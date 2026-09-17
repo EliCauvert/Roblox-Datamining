@@ -20,11 +20,10 @@ local view = foundationModule.View
 local getOverflowMenuSignalStoreModule = require(appBlox.OverflowMenu.getOverflowMenuSignalStore)
 local useOverflowMenuOpenModule = require(appBlox.OverflowMenu.useOverflowMenuOpen)
 local overflowMenuRemoveCloseMenuChecks = game:DefineFastFlag("OverflowMenuRemoveCloseMenuChecks", false)
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppSduiGameTileFeedback = sharedFlagsModule.FFlagLuaAppSduiGameTileFeedback
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), overflowMenuRemoveCloseMenuChecks (ref), getOverflowMenuSignalStoreModule (ref), useOverflowMenuOpenModule (ref), cryoModule (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref), view (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiExperienceDetailsSupport (ref), iconButton (ref), threeDotsHorizontal (ref), iconSize (ref), buttonVariant (ref), menu (ref), popoverAlign (ref), popoverSide (ref), inputSize (ref)
+	-- upvalues: reactModule (ref), overflowMenuRemoveCloseMenuChecks (ref), getOverflowMenuSignalStoreModule (ref), useOverflowMenuOpenModule (ref), cryoModule (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref), view (ref), fFlagLuaAppSduiGameTileFeedback (ref), iconButton (ref), threeDotsHorizontal (ref), iconSize (ref), buttonVariant (ref), menu (ref), popoverAlign (ref), popoverSide (ref), inputSize (ref)
 	local menuKey = p1.menuKey
 	local var1 = reactModule.useRef(nil)
 	local var2 = if overflowMenuRemoveCloseMenuChecks then nil else reactModule.useRef(nil)
@@ -102,56 +101,41 @@ return reactModule.memo(function(p1)
 	end, { p1.setFocusRef })
 	useFocusNavigableSurfaceRegistryConnection(var10, focusNavigableSurfaceIdentifierEnum.ContextualMenu, true)
 	
-	if not p1.shouldShowAnchor and not var4 then
-		return nil
-	end
-	local frame
-	local createElement = reactModule.createElement
-	local fragment = reactModule.Fragment
-	local var13 = nil
-	local t = {}
-	
-	if p1.hasOverflowButton and (p1.shouldShowAnchor or var4) then
-		frame = reactModule.createElement
-		frame = frame(view, {
+	return if not (not p1.shouldShowAnchor and not var4) then reactModule.createElement(reactModule.Fragment, nil, {
+		MenuAnchor = if p1.hasOverflowButton and (p1.shouldShowAnchor or var4) then reactModule.createElement(view, {
 			AnchorPoint = p1.anchorPoint,
 			Position = p1.anchorPosition,
 			ZIndex = if fFlagLuaAppSduiGameTileFeedback then p1.zIndex else nil,
 			onStateChanged = if overflowMenuRemoveCloseMenuChecks then nil else var9,
-			tag = if fFlagSduiExperienceDetailsSupport and p1.buttonTag ~= nil then p1.buttonTag else "auto-xy radius-circle",
+			tag = if p1.buttonTag ~= nil then "auto-xy radius-circle" else p1.buttonTag,
 			backgroundStyle = p1.buttonIconBackgroundStyle,
 			ref = var1
 		}, {
 			IconButton = reactModule.createElement(iconButton, {
 				icon = p1.buttonIcon or threeDotsHorizontal,
-				isCircular = if fFlagSduiExperienceDetailsSupport and p1.buttonIsCircular ~= nil then p1.buttonIsCircular else true,
+				isCircular = p1.buttonIsCircular ~= nil or p1.buttonIsCircular,
 				onActivated = var5,
 				size = p1.buttonIconSize or iconSize.Medium,
 				variant = p1.buttonVariant or buttonVariant.Utility
 			})
-		})
-	else
-		frame = reactModule.createElement("Frame", {
+		}) else reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AnchorPoint = p1.anchorPoint,
 			Position = p1.anchorPosition,
 			Size = UDim2.fromScale(0, 0),
 			ZIndex = if fFlagLuaAppSduiGameTileFeedback then p1.zIndex else nil,
 			ref = var1
-		})
-	end
-	t.MenuAnchor = frame
-	t.OverflowMenu = if var4 then reactModule.createElement(menu, {
-		isOpen = true,
-		align = p1.popoverAlign or popoverAlign.End,
-		items = var7,
-		onPressedOutside = var6,
-		side = p1.popoverSide or popoverSide.Bottom,
-		size = p1.menuItemSize or inputSize.Medium,
-		width = p1.menuWidth,
-		anchorRef = var1,
-		ref = var12
+		}),
+		OverflowMenu = if var4 then reactModule.createElement(menu, {
+			isOpen = true,
+			align = p1.popoverAlign or popoverAlign.End,
+			items = var7,
+			onPressedOutside = var6,
+			side = p1.popoverSide or popoverSide.Bottom,
+			size = p1.menuItemSize or inputSize.Medium,
+			width = p1.menuWidth,
+			anchorRef = var1,
+			ref = var12
+		}) else nil
 	}) else nil
-	
-	return createElement(fragment, var13, t)
 end)

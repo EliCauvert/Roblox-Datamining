@@ -7,6 +7,7 @@ local boundsDataUtilsModule = require(parent.util.BoundsDataUtils)
 local boundsCalculatorModule = require(parent.util.BoundsCalculator)
 local getFFlagUGCValidateMigratePoseBlockingModule = require(parent.flags.getFFlagUGCValidateMigratePoseBlocking)
 local getFFlagUGCValidateLegFullBodySeparationModule = require(parent.flags.getFFlagUGCValidateLegFullBodySeparation)
+local getFFlagUGCValidateHeadAboveTorsoModule = require(parent.flags.getFFlagUGCValidateHeadAboveTorso)
 local getFStringUGCValidateLegHipAttachmentRangeModule = require(parent.flags.GetFStringUGCValidateLegHipAttachmentRange)
 local getFStringUGCValidateAllowedLegOverlapMultiplierModule = require(parent.flags.GetFStringUGCValidateAllowedLegOverlapMultiplier)
 local t = {
@@ -17,10 +18,16 @@ local t = {
 	requiredData = {
 		validationEnumsModule.SharedDataMember.rootInstance,
 		validationEnumsModule.SharedDataMember.renderMeshesData
-	},
-	fflag = getFFlagUGCValidateMigratePoseBlockingModule,
-	expectedFailures = {}
+	}
 }
+
+if getFFlagUGCValidateHeadAboveTorsoModule() then
+	t.conditionalData = {
+		validationEnumsModule.SharedDataMember.fullBodyPartsMetrics
+	}
+end
+t.fflag = getFFlagUGCValidateMigratePoseBlockingModule
+t.expectedFailures = {}
 
 local function validateAttachmentPosition(p1, p2, p3)
 	-- upvalues: getFStringUGCValidateLegHipAttachmentRangeModule (ref), errorSourceStringsModule (ref)
@@ -85,48 +92,64 @@ local function createAllBodyPartsFromRootInstance(p4)
 	return t
 end
 
-local function validateFullBodySeparation(p5, p6)
-	-- upvalues: getFFlagUGCValidateLegFullBodySeparationModule (ref), createAllBodyPartsFromRootInstance (ref), buildEditableMeshesFromSharedData (ref), validationEnumsModule (ref), boundsCalculatorModule (ref), errorSourceStringsModule (ref), calculateBounds (ref), constantsModule (ref), boundsDataUtilsModule (ref), getFStringUGCValidateAllowedLegOverlapMultiplierModule (ref)
-	if not getFFlagUGCValidateLegFullBodySeparationModule() then return end
-	local var2, var3, var4 = boundsCalculatorModule.calculateIndividualFullBodyPartsData(createAllBodyPartsFromRootInstance(p6.rootInstance), {
-		isServer = p6.consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend,
-		editableMeshes = buildEditableMeshesFromSharedData(p6)
-	}, nil, false)
-	
-	if not var2 then
-		p5:fail(errorSourceStringsModule.Keys.LegsSeparated_BoundsCalculationFailed, {
-			details = if var3 then table.concat(var3, "; ") else "Unknown error"
-		})
-		
-		return
-	end
-	local var5 = calculateBounds(var4, {
+local function checkLegOverlap(p5, p6)
+	-- upvalues: calculateBounds (ref), constantsModule (ref), boundsDataUtilsModule (ref), getFStringUGCValidateAllowedLegOverlapMultiplierModule (ref), errorSourceStringsModule (ref)
+	local var2 = calculateBounds(p6, {
 		constantsModule.NAMED_R15_BODY_PARTS.LeftUpperLeg,
 		constantsModule.NAMED_R15_BODY_PARTS.LeftLowerLeg,
 		constantsModule.NAMED_R15_BODY_PARTS.LeftFoot
 	})
-	local var6 = boundsDataUtilsModule.calculateBoundsCenters(var5)
-	local var7 = boundsDataUtilsModule.calculateBoundsDimensions(var5)
-	local var8 = calculateBounds(var4, {
+	local var3 = boundsDataUtilsModule.calculateBoundsCenters(var2)
+	local var4 = boundsDataUtilsModule.calculateBoundsDimensions(var2)
+	local var5 = calculateBounds(p6, {
 		constantsModule.NAMED_R15_BODY_PARTS.RightUpperLeg,
 		constantsModule.NAMED_R15_BODY_PARTS.RightLowerLeg,
 		constantsModule.NAMED_R15_BODY_PARTS.RightFoot
 	})
-	local var9 = boundsDataUtilsModule.calculateBoundsCenters(var8)
-	local var10 = boundsDataUtilsModule.calculateBoundsDimensions(var8)
+	local var6 = boundsDataUtilsModule.calculateBoundsCenters(var5)
+	local var7 = boundsDataUtilsModule.calculateBoundsDimensions(var5)
 	
-	if not var6 or not var7 or (not var9 or not var10) then return end
-	local var11 = (var7.X + var10.X) * 0.5 - (var9.X - var6.X)
+	if not var3 or not var4 or (not var6 or not var7) then return end
+	local var8 = (var4.X + var7.X) * 0.5 - (var6.X - var3.X)
 	
-	if var11 <= 0 then return end
-	local var12 = var7.X * getFStringUGCValidateAllowedLegOverlapMultiplierModule.asNumber()
-	local var13 = var10.X * getFStringUGCValidateAllowedLegOverlapMultiplierModule.asNumber()
+	if var8 <= 0 then return end
+	local var9 = var4.X * getFStringUGCValidateAllowedLegOverlapMultiplierModule.asNumber()
+	local var10 = var7.X * getFStringUGCValidateAllowedLegOverlapMultiplierModule.asNumber()
 	
-	if var12 < var11 or var13 < var11 then
+	if var9 < var8 or var10 < var8 then
 		p5:fail(errorSourceStringsModule.Keys.LegsSeparated_LegsOverlap, {
-			overlap = string.format("%.2f", var11),
-			leftMax = string.format("%.2f", var12),
-			rightMax = string.format("%.2f", var13)
+			overlap = string.format("%.2f", var8),
+			leftMax = string.format("%.2f", var9),
+			rightMax = string.format("%.2f", var10)
+		})
+	end
+end
+
+local function validateFullBodySeparation(p5, p6)
+	-- upvalues: getFFlagUGCValidateLegFullBodySeparationModule (ref), getFFlagUGCValidateHeadAboveTorsoModule (ref), checkLegOverlap (ref), createAllBodyPartsFromRootInstance (ref), buildEditableMeshesFromSharedData (ref), validationEnumsModule (ref), boundsCalculatorModule (ref), errorSourceStringsModule (ref)
+	if not getFFlagUGCValidateLegFullBodySeparationModule() then return end
+	if getFFlagUGCValidateHeadAboveTorsoModule() then
+		local fullBodyPartsMetrics = p6.fullBodyPartsMetrics
+		
+		if fullBodyPartsMetrics and next(fullBodyPartsMetrics) then
+			checkLegOverlap(p5, fullBodyPartsMetrics)
+			
+			return
+		end
+		return
+	else
+		local var2, var3, var4 = boundsCalculatorModule.calculateIndividualFullBodyPartsData(createAllBodyPartsFromRootInstance(p6.rootInstance), {
+			isServer = p6.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
+			editableMeshes = buildEditableMeshesFromSharedData(p6)
+		}, nil, false)
+		
+		if var2 then
+			checkLegOverlap(p5, var4)
+			
+			return
+		end
+		p5:fail(errorSourceStringsModule.Keys.LegsSeparated_BoundsCalculationFailed, {
+			details = if var3 then table.concat(var3, "; ") else "Unknown error"
 		})
 	end
 end

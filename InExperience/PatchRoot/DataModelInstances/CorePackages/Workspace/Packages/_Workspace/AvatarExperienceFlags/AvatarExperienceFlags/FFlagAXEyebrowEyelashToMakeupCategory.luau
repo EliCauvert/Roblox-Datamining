@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXEyebrowEyelashToMakeupCategory", false) and require(script.Parent.FFlagAXMakeupEquipping)
+﻿return game:DefineFastFlag("AXEyebrowEyelashToMakeupCategory", false)

@@ -7,9 +7,12 @@ local _ = require(videoUtils.VideoPlaybackCoordinator)
 local videoEndReason = require(videoUtils.Analytics.Enums).VideoEndReason
 local getIsInstanceVisibleModule = require(videoUtils.getIsInstanceVisible)
 local viewportAutoplayCandidateTagModule = require(videoUtils.ViewportAutoplayCandidateTag)
+local getTileRowSpan = require(videoUtils.ViewportAutoplayHelpers).getTileRowSpan
 local fIntLuaAppGameTileVideoVisiblePercent = require(parent.SharedFlags).FIntLuaAppGameTileVideoVisiblePercent
+local fIntLuaAppOneByTwoTileVideoVisiblePercent = require(parent.SharedFlags).FIntLuaAppOneByTwoTileVideoVisiblePercent
 local fFlagLuaAppTileVideoKeepPlayingOnScroll = require(parent.SharedFlags).FFlagLuaAppTileVideoKeepPlayingOnScroll
 local fFlagLuaAppVideoAutoplayFeedElection = require(parent.SharedFlags).FFlagLuaAppVideoAutoplayFeedElection
+local fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate = require(parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate
 local fFlagLuaAppVideoAutoplayElectOnNewCandidateModule = require(script.Parent.FFlagLuaAppVideoAutoplayElectOnNewCandidate)
 local luaAppVideoAutoplayMaxDistanceToWinnerLinePercent = game:DefineFastInt("LuaAppVideoAutoplayMaxDistanceToWinnerLinePercent", 50)
 local t = { instance = nil, shouldUseDwell = true }
@@ -246,7 +249,7 @@ function t_1:_updateWinner(p1, p2, p3, p4)
 end
 
 function t_1:_selectWinner(p1, p2, p3)
-	-- upvalues: luaAppVideoAutoplayMaxDistanceToWinnerLinePercent (ref), fFlagLuaAppVideoAutoplayFeedElection (ref), collectionService (ref), viewportAutoplayCandidateTagModule (ref), getIsInstanceVisibleModule (ref), fIntLuaAppGameTileVideoVisiblePercent (ref), discoveryEventErrorLogger (ref), reportCandidateOverlap (ref)
+	-- upvalues: luaAppVideoAutoplayMaxDistanceToWinnerLinePercent (ref), fFlagLuaAppVideoAutoplayFeedElection (ref), collectionService (ref), viewportAutoplayCandidateTagModule (ref), fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate (ref), getTileRowSpan (ref), fIntLuaAppOneByTwoTileVideoVisiblePercent (ref), fIntLuaAppGameTileVideoVisiblePercent (ref), getIsInstanceVisibleModule (ref), discoveryEventErrorLogger (ref), reportCandidateOverlap (ref)
 	local viewPortBounds = self.viewPortBounds
 	
 	if not viewPortBounds then
@@ -317,111 +320,124 @@ function t_1:_selectWinner(p1, p2, p3)
 		end
 		
 		for i, v in collectionService:GetTagged(viewportAutoplayCandidateTagModule) do
-			if v:IsA("GuiObject") and v:IsDescendantOf(current) and getIsInstanceVisibleModule(v, viewPortBounds, fIntLuaAppGameTileVideoVisiblePercent) then
-				local x = v.AbsolutePosition.X
-				
-				if fFlagLuaAppVideoAutoplayFeedElection and self.preferTallestWinner then
-					local absValue = math.abs(math.clamp(var1, v.AbsolutePosition.Y, v.AbsolutePosition.Y + v.AbsoluteSize.Y) - var1)
-					local y = v.AbsoluteSize.Y
-					local absValue_1 = math.abs(v.AbsolutePosition.Y + x / maxValue * y - var1)
-					local var9 = false
+			if v:IsA("GuiObject") and v:IsDescendantOf(current) then
+				local var9
+				if fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate then
+					var9 = if getTileRowSpan(v) == 2 and not self.preferTallestWinner then fIntLuaAppOneByTwoTileVideoVisiblePercent else fIntLuaAppGameTileVideoVisiblePercent
 					
-					if absValue < var4 then
-						var9 = true
-					elseif absValue == var4 then
-						if var7 < y then
-							var9 = true
-						elseif y == var7 then
-							if p3 then
-								local var10
-								if x < var5 then
+					if getIsInstanceVisibleModule(v, viewPortBounds, var9) then
+						var9 = v.AbsolutePosition.X
+						
+						if fFlagLuaAppVideoAutoplayFeedElection and self.preferTallestWinner then
+							local absValue = math.abs(math.clamp(var1, v.AbsolutePosition.Y, v.AbsolutePosition.Y + v.AbsoluteSize.Y) - var1)
+							local y = v.AbsoluteSize.Y
+							local absValue_1 = math.abs(v.AbsolutePosition.Y + var9 / maxValue * y - var1)
+							local var10 = false
+							
+							if absValue < var4 then
+								var10 = true
+							elseif absValue == var4 then
+								if var7 < y then
 									var10 = true
-								elseif x == var5 and not var6 and var3 then
+								elseif y == var7 then
+									if p3 then
+										local var11
+										if var9 < var5 then
+											var11 = true
+										elseif var9 == var5 and not var6 and var3 then
+											var6 = true
+											reportCandidateOverlap(var3, v, var9)
+										end
+										var11 = false
+										if var11 then
+											var10 = true
+										end
+									elseif absValue_1 < var8 then
+										var10 = true
+									elseif absValue_1 == var8 then
+										local var12
+										if var9 < var5 then
+											var12 = true
+										elseif var9 == var5 and not var6 and var3 then
+											var6 = true
+											reportCandidateOverlap(var3, v, var9)
+										end
+										var12 = false
+										if var12 then
+											var10 = true
+										end
+									end
+								end
+							end
+							if var10 then
+								var4 = absValue
+								var7 = y
+								var8 = absValue_1
+								var5 = var9
+								var3 = v
+							end
+						else
+							local absValue = math.abs(v.AbsolutePosition.Y + var9 / maxValue * v.AbsoluteSize.Y - var1)
+							
+							if absValue < var4 then
+								var4 = absValue
+								var5 = var9
+								var3 = v
+							elseif absValue == var4 then
+								local var13
+								if var9 < var5 then
+									var13 = true
+								elseif var9 == var5 and not var6 and var3 then
 									var6 = true
-									reportCandidateOverlap(var3, v, x)
+									reportCandidateOverlap(var3, v, var9)
 								end
-								var10 = false
-								if var10 then
-									var9 = true
-								end
-							elseif absValue_1 < var8 then
-								var9 = true
-							elseif absValue_1 == var8 then
-								local var11
-								if x < var5 then
-									var11 = true
-								elseif x == var5 and not var6 and var3 then
-									var6 = true
-									reportCandidateOverlap(var3, v, x)
-								end
-								var11 = false
-								if var11 then
-									var9 = true
+								var13 = false
+								if var13 then
+									var4 = absValue
+									var5 = var9
+									var3 = v
 								end
 							end
 						end
 					end
-					if var9 then
-						var4 = absValue
-						var7 = y
-						var8 = absValue_1
-						var5 = x
-						var3 = v
-					end
-				else
-					local absValue = math.abs(v.AbsolutePosition.Y + x / maxValue * v.AbsoluteSize.Y - var1)
-					
-					if absValue < var4 then
-						var4 = absValue
-						var5 = x
-						var3 = v
-					elseif absValue == var4 then
-						local var12
-						if x < var5 then
-							var12 = true
-						elseif x == var5 and not var6 and var3 then
-							var6 = true
-							reportCandidateOverlap(var3, v, x)
-						end
-						var12 = false
-						if var12 then
-							var4 = absValue
-							var5 = x
-							var3 = v
-						end
-					end
+				elseif getIsInstanceVisibleModule(v, viewPortBounds, fIntLuaAppGameTileVideoVisiblePercent) then
 				end
 			end
 		end
 		return if var2 < var4 then nil else var3
 	else
 		for i, v in collectionService:GetTagged(viewportAutoplayCandidateTagModule) do
-			if v:IsA("GuiObject") and v:IsDescendantOf(current) and getIsInstanceVisibleModule(v, viewPortBounds, fIntLuaAppGameTileVideoVisiblePercent) then
-				local absValue = math.abs(v.AbsolutePosition.Y + v.AbsolutePosition.X / maxValue * v.AbsoluteSize.Y - var1)
-				local x = v.AbsolutePosition.X
-				local var13 = false
-				
-				if absValue < var4 then
-					var13 = true
-				elseif absValue == var4 then
-					if x < var5 then
-						var13 = true
-					elseif x == var5 and not var6 and var3 then
-						var6 = true
-						discoveryEventErrorLogger.reportError("ViewportAutoplayCandidateOverlap", "Two visible autoplay candidates share identical reading-order position and AbsolutePosition.X", {
-							candidateA = var3.Name,
-							candidateB = v.Name,
-							absolutePositionX = x,
-							absolutePositionY = v.AbsolutePosition.Y,
-							absoluteSizeX = v.AbsoluteSize.X,
-							absoluteSizeY = v.AbsoluteSize.Y
-						})
+			if v:IsA("GuiObject") and v:IsDescendantOf(current) then
+				if fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate then
+					if getIsInstanceVisibleModule(v, viewPortBounds, if getTileRowSpan(v) == 2 then fIntLuaAppOneByTwoTileVideoVisiblePercent else fIntLuaAppGameTileVideoVisiblePercent) then
+						local absValue = math.abs(v.AbsolutePosition.Y + v.AbsolutePosition.X / maxValue * v.AbsoluteSize.Y - var1)
+						local x = v.AbsolutePosition.X
+						local var14 = false
+						
+						if absValue < var4 then
+							var14 = true
+						elseif absValue == var4 then
+							if x < var5 then
+								var14 = true
+							elseif x == var5 and not var6 and var3 then
+								var6 = true
+								discoveryEventErrorLogger.reportError("ViewportAutoplayCandidateOverlap", "Two visible autoplay candidates share identical reading-order position and AbsolutePosition.X", {
+									candidateA = var3.Name,
+									candidateB = v.Name,
+									absolutePositionX = x,
+									absolutePositionY = v.AbsolutePosition.Y,
+									absoluteSizeX = v.AbsoluteSize.X,
+									absoluteSizeY = v.AbsoluteSize.Y
+								})
+							end
+						end
+						if var14 then
+							var4 = absValue
+							var5 = x
+							var3 = v
+						end
 					end
-				end
-				if var13 then
-					var4 = absValue
-					var5 = x
-					var3 = v
+				elseif getIsInstanceVisibleModule(v, viewPortBounds, fIntLuaAppGameTileVideoVisiblePercent) then
 				end
 			end
 		end

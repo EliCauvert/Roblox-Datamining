@@ -1,15 +1,15 @@
 ﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
 local parent = avatarExperienceInspectAndBuy.Parent
 local _ = require(avatarExperienceInspectAndBuy.Types)
-local AXCommonModule = require(parent.AXCommon)
-local constants = AXCommonModule.Constants
+local avatarExperienceModelModule = require(parent.AvatarExperienceModel)
+local constants = require(parent.AXCommon).Constants
 local ASSET_TYPE_TO_ACCESSORY_TYPE = constants.ASSET_TYPE_TO_ACCESSORY_TYPE
 local ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP = constants.ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP
 local LAYERED_ASSET_TYPES = constants.LAYERED_ASSET_TYPES
 local AVATAR_ANIMATIONS_BUNDLE_TYPE_ID = constants.AVATAR_ANIMATIONS_BUNDLE_TYPE_ID
 local SHOES_BUNDLE_TYPE_ID = constants.SHOES_BUNDLE_TYPE_ID
 local avatarBackground = constants.ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
-local itemTypeEnum = AXCommonModule.Enums.ItemTypeEnum
+local itemTypeEnum = avatarExperienceModelModule.Enums.ItemTypeEnum
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 
 return function(p1, p2)

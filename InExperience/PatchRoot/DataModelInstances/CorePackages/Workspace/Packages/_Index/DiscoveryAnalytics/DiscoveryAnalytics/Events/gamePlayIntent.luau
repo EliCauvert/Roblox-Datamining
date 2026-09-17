@@ -10,7 +10,6 @@ local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventE
 local fFlagLuaAppGamePlayIntentEventMobileAdsId = require(parent.SharedFlags).FFlagLuaAppGamePlayIntentEventMobileAdsId
 local fFlagTraversalHistoryDiscoveryTelemetry = require(parent.SharedFlags).FFlagTraversalHistoryDiscoveryTelemetry
 local luaAppRemoveNumericalSortIndexSearch = game:DefineFastFlag("LuaAppRemoveNumericalSortIndexSearch", false)
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppMigrateGameEventsTelemetryService = require(parent.SharedFlags).FFlagLuaAppMigrateGameEventsTelemetryService
 local fFlagLuaAppGameEventsTelemetryServiceShadowTraffic = require(parent.SharedFlags).FFlagLuaAppGameEventsTelemetryServiceShadowTraffic
 local fFlagLuaAppContinueSortInstantPlay = require(parent.SharedFlags).FFlagLuaAppContinueSortInstantPlay
@@ -65,7 +64,7 @@ local t = {
 		launchData = tModule.optional(tModule.string),
 		tileType = tModule.optional(tModule.string),
 		nativeAdData = tModule.optional(tModule.string),
-		pageName = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil,
+		pageName = tModule.optional(tModule.string),
 		actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then tModule.optional(tModule.string) else nil
 	}),
 	[constantsModule.Context.ExperienceTile] = var3,
@@ -92,14 +91,14 @@ local t = {
 		rootPlaceId = tModule.number,
 		joinAttemptId = tModule.optional(tModule.string),
 		friendId = tModule.string,
-		pageName = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil
+		pageName = tModule.optional(tModule.string)
 	}),
 	[constantsModule.Context.GamePlayIntentInPlacesList] = tModule.strictInterface({
 		placeId = tModule.string,
 		rootPlaceId = tModule.number,
 		joinAttemptId = tModule.optional(tModule.string),
 		friendId = tModule.string,
-		pageName = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil
+		pageName = tModule.optional(tModule.string)
 	}),
 	shareLinks = tModule.strictInterface({
 		placeId = tModule.union(tModule.string, tModule.number),
@@ -108,7 +107,7 @@ local t = {
 		linkType = tModule.string,
 		linkStatus = tModule.string,
 		joinAttemptId = tModule.optional(tModule.string),
-		pageName = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil
+		pageName = tModule.optional(tModule.string)
 	}),
 	PlayGameFromPlayTogether = tModule.strictInterface({
 		placeId = tModule.union(tModule.string, tModule.number),
@@ -125,14 +124,14 @@ local t = {
 		joinAttemptId = tModule.optional(tModule.string),
 		uid = tModule.optional(tModule.string),
 		launchData = tModule.optional(tModule.string),
-		pageName = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil
+		pageName = tModule.optional(tModule.string)
 	}),
 	PlayGameFromLinkCard = tModule.strictInterface({
 		placeId = tModule.string,
 		rootPlaceId = tModule.number,
 		joinAttemptId = tModule.optional(tModule.string),
 		conversationId = tModule.optional(tModule.string),
-		pageName = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil
+		pageName = tModule.optional(tModule.string)
 	}),
 	[constantsModule.Context.PlayerContextualMenu] = tModule.strictInterface({
 		friendId = tModule.string,
@@ -160,7 +159,7 @@ local t = {
 		placeId = tModule.string,
 		universeId = tModule.string,
 		sortEntryIndex = tModule.string,
-		pageName = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil
+		pageName = tModule.optional(tModule.string)
 	}) else nil else nil,
 	[constantsModule.Context.InstantPlay] = if fFlagLuaAppContinueSortInstantPlay then var3 else nil
 }

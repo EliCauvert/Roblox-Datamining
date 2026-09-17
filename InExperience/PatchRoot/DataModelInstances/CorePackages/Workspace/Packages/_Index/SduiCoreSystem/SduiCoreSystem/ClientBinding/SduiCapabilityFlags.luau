@@ -6,6 +6,7 @@ end
 
 return {
 	CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS = sharedFlagsModule.FFlagSduiHydrationClientHints,
+	CAPABILITY_SUPPORTS_MULTI_SIZE_POOL = sharedFlagsModule.FFlagSduiPerSectionPoolSizing,
 	CAPABILITY_SUPPORTS_EDP_PERSISTENT_ACTION_BAR_PLAY_BUTTON = sharedFlagsModule.FFlagSduiEdpPersistentActionBarPlayButton,
 	CAPABILITY_SUPPORTS_EDP_COMMUNITY_SECTION = sharedFlagsModule.FFlagSduiCommunitySectionSupport,
 	CAPABILITY_SUPPORTS_EDP_BUILD_TAG = sharedFlagsModule.FFlagLuaAppEdpShowBuildTag,

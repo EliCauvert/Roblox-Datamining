@@ -2,6 +2,7 @@
 local playButtonStatesModule = require(gamePlayButton.PlayButtonStates)
 local fetchGamePlayButtonDataModule = require(gamePlayButton.FetchGamePlayButtonData)
 local apiPostPreparePurchaseModule = require(gamePlayButton.ApiPostPreparePurchase)
+local playtestUnlockUpsellModule = require(gamePlayButton.PlaytestUnlockUpsell)
 local parent = gamePlayButton.Parent
 local fFlagEnableGameJoinEarlyAccess = require(parent.SharedFlags).FFlagEnableGameJoinEarlyAccess
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
@@ -42,43 +43,24 @@ local function selectPlayButtonState(p1, p2, p3, p4, p5, p6, p7, p8)
 	return var1
 end
 
-local function _(p1)
-	-- upvalues: playabilityStatusEnum (ref), fFlagLuaAppPlayButtonAmpAgeCheckFlow (ref), fFlagLuaAppParentApprovedExperiences (ref)
-	local var1 = true
-	
-	if p1.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser then
-		if fFlagLuaAppPlayButtonAmpAgeCheckFlow then
-			var1 = true
-			
-			if p1.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityAgeCheckRequired then
-				var1 = if p1.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityTrustedFriendRequired then if p1.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityPlaytestDisabled then fFlagLuaAppParentApprovedExperiences and p1.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRequireParentApproval else true else true
-			end
-		end
-	end
-	return var1
-end
-
 local function selectSecondaryPlayButtonState(p1, p2)
-	-- upvalues: playButtonStatesModule (ref), playabilityStatusEnum (ref), fFlagLuaAppPlayButtonPrivatePT (ref), fFlagLuaAppPlayButtonAmpAgeCheckFlow (ref), fFlagLuaAppParentApprovedExperiences (ref)
+	-- upvalues: fFlagLuaAppPlayButtonPrivatePT (ref), playtestUnlockUpsellModule (ref), playButtonStatesModule (ref), playabilityStatusEnum (ref)
+	local privatePlaytestInfo
 	if p2 == nil then
 		return nil
-	elseif (if p1 ~= playButtonStatesModule.PaidAccess then if p1 ~= playButtonStatesModule.FiatPaidAccess then p2.playabilityStatus == playabilityStatusEnum.FiatPurchaseDeviceRestricted or (p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRegionalAvailability and p1 == playButtonStatesModule.UnplayableOther) else true else true) and p2.demoModeAvailable then
-		return playButtonStatesModule.DemoMode
 	elseif fFlagLuaAppPlayButtonPrivatePT and p2.privatePlaytestInfo ~= nil then
-		local privatePlaytestInfo = p2.privatePlaytestInfo
-		local var1 = true
+		privatePlaytestInfo = p2.privatePlaytestInfo
+		local type = playtestUnlockUpsellModule.getType(privatePlaytestInfo.playabilityStatus)
 		
-		if privatePlaytestInfo.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser then
-			if fFlagLuaAppPlayButtonAmpAgeCheckFlow then
-				var1 = true
-				
-				if privatePlaytestInfo.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityAgeCheckRequired then
-					var1 = if privatePlaytestInfo.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityTrustedFriendRequired then if privatePlaytestInfo.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityPlaytestDisabled then fFlagLuaAppParentApprovedExperiences and privatePlaytestInfo.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRequireParentApproval else true else true
-				end
-			end
+		if p1 == playButtonStatesModule.ActionNeeded then
+			return nil
+		elseif privatePlaytestInfo.isPlayable or type ~= nil then
+			return playButtonStatesModule.Playtest
 		end
-		return if p1 == playButtonStatesModule.ActionNeeded then nil elseif privatePlaytestInfo.isPlayable or var1 then playButtonStatesModule.Playtest else nil
 	end
+	privatePlaytestInfo = if p1 ~= playButtonStatesModule.PaidAccess then if p1 ~= playButtonStatesModule.FiatPaidAccess then p2.playabilityStatus == playabilityStatusEnum.FiatPurchaseDeviceRestricted or (p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRegionalAvailability and p1 == playButtonStatesModule.UnplayableOther) else true else true
+	
+	return if privatePlaytestInfo and p2.demoModeAvailable then playButtonStatesModule.DemoMode else nil
 end
 
 return function(p1, p2, p3, p4, p5, p6, p7)

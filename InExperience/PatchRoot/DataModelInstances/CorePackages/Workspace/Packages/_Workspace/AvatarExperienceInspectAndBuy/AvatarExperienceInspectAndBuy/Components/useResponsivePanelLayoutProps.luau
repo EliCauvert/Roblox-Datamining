@@ -8,8 +8,6 @@ local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local verifiedBadgesModule = require(parent.VerifiedBadges)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useItemSelectionStore = require(avatarExperienceInspectAndBuy.Contexts.ItemSelectionStoreContext).useItemSelectionStore
-local _ = require(avatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
-local fFlagAXEnableIaBTimedOptionsBulkPurchase = require(parent.AvatarExperienceFlags).FFlagAXEnableIaBTimedOptionsBulkPurchase
 local _ = require(avatarExperienceInspectAndBuy.Components.Common.ResponsivePanelLayout)
 local avatarItemsViewLayoutModule = require(avatarExperienceInspectAndBuy.Components.ItemsView.AvatarItemsViewLayout)
 local itemDetailsLayoutModule = require(avatarExperienceInspectAndBuy.Components.ItemDetails.ItemDetailsLayout)
@@ -68,7 +66,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useSelector (ref), selectView (ref), tutilsModule (ref), viewTypeModule (ref), reactModule (ref), selectInspectPreviewDetails (ref), useRemoteBulkPurchaseEventModule (ref), useInspectPlayerModule (ref), formatNumberModule (ref), useTokens (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref), useItemSelectionStore (ref), useLocalization (ref), verifiedBadgesModule (ref), usePurchaseButtonPropsModule (ref), useEventConnection (ref), marketplaceService (ref), itemDetailsLayoutModule (ref), avatarItemsViewLayoutModule (ref), viewportLayoutModule (ref), getItemThumbnailUrlModule (ref), t (ref)
+	-- upvalues: useSelector (ref), selectView (ref), tutilsModule (ref), viewTypeModule (ref), reactModule (ref), selectInspectPreviewDetails (ref), useRemoteBulkPurchaseEventModule (ref), useInspectPlayerModule (ref), formatNumberModule (ref), useTokens (ref), useItemSelectionStore (ref), useLocalization (ref), verifiedBadgesModule (ref), usePurchaseButtonPropsModule (ref), useEventConnection (ref), marketplaceService (ref), itemDetailsLayoutModule (ref), avatarItemsViewLayoutModule (ref), viewportLayoutModule (ref), getItemThumbnailUrlModule (ref), t (ref)
 	local var1 = useSelector(selectView, tutilsModule.deepEqual)
 	local var2 = var1 == viewTypeModule.WideLandscape
 	local var3, var4 = reactModule.useState(nil)
@@ -78,7 +76,7 @@ return function(p1)
 	local var10 = useInspectPlayerModule()
 	local var11 = formatNumberModule(var9)
 	local var12 = useTokens()
-	local var13 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then useItemSelectionStore() else nil
+	local var13 = useItemSelectionStore()
 	local var14 = reactModule.useRef(nil)
 	local var15 = reactModule.useRef(0)
 	local var16 = useLocalization({
@@ -135,16 +133,16 @@ return function(p1)
 			p1.onItemDetailsOpened(var3)
 		end
 	end, { var3, p1.onItemDetailsOpened })
-	local var19 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then reactModule.useCallback(function()
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var13 (ref), p1 (ref)
 		var13.clearAll()
 		p1.onInspectMenuClosed()
-	end, { var13, p1.onInspectMenuClosed }) else nil
+	end, { var13, p1.onInspectMenuClosed })
 	
 	return {
 		view = var1,
 		renderFirstPanel = function()
-			-- upvalues: var3 (ref), reactModule (copy), itemDetailsLayoutModule (copy), var1 (ref), var4 (ref), var6 (ref), p1 (ref), viewTypeModule (copy), var18 (ref), var17 (ref), var5 (ref), formatNumberModule (copy), avatarItemsViewLayoutModule (copy), items (ref), var16 (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (copy), var19 (ref), var14 (ref), var15 (ref), var11 (ref)
+			-- upvalues: var3 (ref), reactModule (copy), itemDetailsLayoutModule (copy), var1 (ref), var4 (ref), var6 (ref), p1 (ref), viewTypeModule (copy), var18 (ref), var17 (ref), var5 (ref), formatNumberModule (copy), avatarItemsViewLayoutModule (copy), items (ref), var16 (ref), var19 (ref), var14 (ref), var15 (ref), var11 (ref)
 			return if var3 then reactModule.createElement(itemDetailsLayoutModule, {
 				itemDetailsViewProps = {
 					view = var1,
@@ -169,7 +167,7 @@ return function(p1)
 				view = var1,
 				items = items,
 				headerText = var16.headerText,
-				onInspectMenuClosed = if fFlagAXEnableIaBTimedOptionsBulkPurchase and var19 then var19 else p1.onInspectMenuClosed,
+				onInspectMenuClosed = var19,
 				onItemCardActivated = function(p2)
 					-- upvalues: var14 (copy), var15 (copy), var4 (copy)
 					if var14.current then

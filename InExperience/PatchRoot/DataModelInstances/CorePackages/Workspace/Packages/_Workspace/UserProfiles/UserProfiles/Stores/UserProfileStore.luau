@@ -10,10 +10,9 @@ local userProfileStoreBatchSize = game:DefineFastInt("UserProfileStoreBatchSize"
 local userProfileStoreQueueProcessDelay = game:DefineFastInt("UserProfileStoreQueueProcessDelay", 1)
 local fFlagEnableVerifiedBadgeStore = sharedFlagsModule.FFlagEnableVerifiedBadgeStore
 local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local userProfileModelModule = require(script.Parent.UserProfileModel)
 local var1 = createComputed(function(_)
-	-- upvalues: parent (ref), lumberyakModule (ref), userProfileStoreMaxLoggingLevel (ref), userProfileStoreHttpTimeout (ref), fFlagEnableVerifiedBadgeStore (ref), fFlagEnableBlackbirdCheck (ref), userProfileModelModule (ref), userProfileStoreBatchSize (ref), createSignal (ref), userProfileStoreQueueProcessDelay (ref), fFlagSduiExperienceDetailsSupport (ref)
+	-- upvalues: parent (ref), lumberyakModule (ref), userProfileStoreMaxLoggingLevel (ref), userProfileStoreHttpTimeout (ref), fFlagEnableVerifiedBadgeStore (ref), fFlagEnableBlackbirdCheck (ref), userProfileModelModule (ref), userProfileStoreBatchSize (ref), createSignal (ref), userProfileStoreQueueProcessDelay (ref)
 	local urlBuilderModule = require(parent.UrlBuilder)
 	local urlBuilder = urlBuilderModule.UrlBuilder
 	local urlBase = urlBuilderModule.UrlBase
@@ -310,7 +309,7 @@ local var1 = createComputed(function(_)
 			end
 			return fetchByUserIds(p10, list, p11)
 		end,
-		updateFromHydration = if fFlagSduiExperienceDetailsSupport then function(p10)
+		updateFromHydration = function(p10)
 			-- upvalues: t_1 (ref), userProfileStore (ref), userProfileModelModule (copy)
 			for i, v in p10 do
 				local var18
@@ -331,11 +330,11 @@ local var1 = createComputed(function(_)
 					isVerified = v.isVerified
 				})
 			end
-		end else nil,
-		getProfileByUserId = if fFlagSduiExperienceDetailsSupport then function(p11)
+		end,
+		getProfileByUserId = function(p11)
 			-- upvalues: t_1 (ref)
 			return t_1[p11]
-		end else nil,
+		end,
 		invalidateCachedNamesForUserIds = function(p11)
 			-- upvalues: t (ref), invalidateCachedProfiles (ref)
 			invalidateCachedProfiles({

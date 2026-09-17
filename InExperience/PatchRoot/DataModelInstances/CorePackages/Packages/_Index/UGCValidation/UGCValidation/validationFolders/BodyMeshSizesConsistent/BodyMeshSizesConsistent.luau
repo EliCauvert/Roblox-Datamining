@@ -22,7 +22,6 @@ local t = {
 		validationEnumsModule.SharedDataMember.renderMeshesData,
 		validationEnumsModule.SharedDataMember.outerCagesData
 	},
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateBodyPartBounds),
 	expectedFailures = {}
 }
 

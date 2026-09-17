@@ -24,6 +24,7 @@ local function noop() end
 local function _()
 	-- upvalues: playersService (ref)
 	return {
+		identifier = "create_moment",
 		userId = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0),
 		timestamp = tostring(os.time())
 	}
@@ -52,6 +53,7 @@ return function(p1, p2, p3)
 		-- upvalues: var8 (ref), fireAnalyticsEvent (copy), eventNames (copy), playersService (copy)
 		if var8 then
 			fireAnalyticsEvent(eventNames.FTUXTooltipImpression, {
+				identifier = "create_moment",
 				userId = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0),
 				timestamp = tostring(os.time())
 			})
@@ -60,6 +62,7 @@ return function(p1, p2, p3)
 	local var9 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), playersService (copy), onFtuxTooltipDismissed (ref)
 		fireAnalyticsEvent(eventNames.FTUXTooltipDismissed, {
+			identifier = "create_moment",
 			userId = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0),
 			timestamp = tostring(os.time())
 		})

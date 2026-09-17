@@ -9,10 +9,9 @@ local peekViewModule = require(script.Parent.PeekView)
 local peekViewStateModule = require(script.Parent.PeekViewState)
 local peekViewDismissedEventModule = require(script.Parent.analytics.peekViewDismissedEvent)
 local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
 return function(p1)
-	-- upvalues: useRoactService (ref), appEventIngestService (ref), useRouteName (ref), useStyle (ref), reactModule (ref), peekViewStateModule (ref), peekViewDismissedEventModule (ref), cryoModule (ref), peekViewModule (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagSduiExperienceDetailsSupport (ref)
+	-- upvalues: useRoactService (ref), appEventIngestService (ref), useRouteName (ref), useStyle (ref), reactModule (ref), peekViewStateModule (ref), peekViewDismissedEventModule (ref), cryoModule (ref), peekViewModule (ref), fFlagProfilePlatformNewProfileHeader (ref)
 	local var1 = useRoactService(appEventIngestService)
 	local var2 = useRouteName()
 	local var3 = useStyle()
@@ -83,7 +82,7 @@ return function(p1)
 					end
 				end,
 				hasSolidDragger = if fFlagProfilePlatformNewProfileHeader then p1.hasSolidDragger else nil,
-				scrollingFrameRef = if fFlagSduiExperienceDetailsSupport then p1.scrollingFrameRef else nil
+				scrollingFrameRef = p1.scrollingFrameRef
 			}, {
 				UIListLayout = reactModule.createElement("UIListLayout", {
 					Padding = UDim.new(0, 0),

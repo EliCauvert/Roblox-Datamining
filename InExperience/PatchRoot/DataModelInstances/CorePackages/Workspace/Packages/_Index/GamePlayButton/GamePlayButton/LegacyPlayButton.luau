@@ -164,7 +164,7 @@ function playButton.render(p1)
 		waitingForParty = "Feature.Squads.Action.WaitingForParty",
 		playDemo = "Feature.ExperienceDetails.PlayButtonText.PlayDemo",
 		play = if (fFlagLuaAppTextOnlyPlayButton or fFlagLuaAppIconTextPlayButton) and fFlagLuaAppUpdatePlayButtonText then "Feature.ExperienceDetails.PlayButtonText.Play" else nil,
-		playtest = if fFlagLuaAppPlayButtonPrivatePT then "Feature.Build.Action.Playtest" else nil
+		playtest = if fFlagLuaAppPlayButtonPrivatePT then "Feature.ExperienceDetails.PlayButtonText.Playtest" else nil
 	})(function(p2)
 		-- upvalues: p1 (ref)
 		return p1:renderWithLocalization(p2)

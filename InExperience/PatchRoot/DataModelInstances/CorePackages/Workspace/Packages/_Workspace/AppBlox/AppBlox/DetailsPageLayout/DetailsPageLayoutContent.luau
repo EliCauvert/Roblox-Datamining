@@ -3,7 +3,6 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local reactUtilsModule = require(parent.ReactUtils)
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppClampBannerPaddingToViewport = sharedFlagsModule.FFlagLuaAppClampBannerPaddingToViewport
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
 local fFlagLuaAppEdpDirectionalGradientMidTransparency = sharedFlagsModule.FFlagLuaAppEdpDirectionalGradientMidTransparency
@@ -16,7 +15,7 @@ local var1 = if fFlagLuaAppClampBannerPaddingToViewport then reactModule.createB
 local _ = nil
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), reactUtilsModule (ref), fFlagLuaAppClampBannerPaddingToViewport (ref), var1 (ref), detailsPageLayoutUtilsModule (ref), view (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), scrollView (ref), fFlagSduiExperienceDetailsSupport (ref), t (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref)
+	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), reactUtilsModule (ref), fFlagLuaAppClampBannerPaddingToViewport (ref), var1 (ref), detailsPageLayoutUtilsModule (ref), view (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), scrollView (ref), t (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref)
 	local var2 = reactModule.useContext(detailsPageLayoutContextModule)
 	local contentTopOffset = var2.contentTopOffset
 	local hasFullBleed = var2.hasFullBleed
@@ -162,7 +161,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			tag = "size-full clip",
 			ZIndex = 1,
 			scrollingFrameRef = var3,
-			selection = if fFlagSduiExperienceDetailsSupport then t else nil,
+			selection = t,
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 0, 0),

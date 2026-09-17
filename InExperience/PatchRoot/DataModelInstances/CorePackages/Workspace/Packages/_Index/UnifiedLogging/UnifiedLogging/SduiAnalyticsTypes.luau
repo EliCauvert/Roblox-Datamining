@@ -1,5 +1,4 @@
-﻿local parent = script:FindFirstAncestor("UnifiedLogging").Parent
-local tModule = require(parent.t)
+﻿local tModule = require(script:FindFirstAncestor("UnifiedLogging").Parent.t)
 
 return {
 	CollectionAnalyticsDataInterface = {
@@ -9,7 +8,7 @@ return {
 		collectionPosition = tModule.number,
 		startRowNumber = tModule.optional(tModule.number),
 		totalNumberOfItems = tModule.number,
-		refId = if require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil
+		refId = tModule.optional(tModule.string)
 	},
 	ItemAnalyticsDataInterface = {
 		id = tModule.union(tModule.number, tModule.string),

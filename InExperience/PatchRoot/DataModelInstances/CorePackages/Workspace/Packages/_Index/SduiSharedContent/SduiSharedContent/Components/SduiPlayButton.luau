@@ -11,13 +11,12 @@ local getSduiActionHandlerRegistry = sduiCoreSystemModule.getSduiActionHandlerRe
 local useSduiReportExperienceLaunchedModule = require(sduiSharedContent.Components.useSduiReportExperienceLaunched)
 local getSduiFocusActivationStore = require(parent.SduiSharedUtilities).getSduiFocusActivationStore
 local appPage = require(parent.RobloxAppEnums).AppPage
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppResetHoverOnSduiPlayButtonActivation = require(parent.SharedFlags).FFlagLuaAppResetHoverOnSduiPlayButtonActivation
 local fFlagLuaAppLaunchWhenLoadingEdp = require(parent.SharedFlags).FFlagLuaAppLaunchWhenLoadingEdp
 local fFlagEnableGameJoinEarlyAccess = require(parent.SharedFlags).FFlagEnableGameJoinEarlyAccess
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), getSduiActionHandlerRegistry (ref), sduiActionType (ref), findAnalyticsField (ref), fFlagSduiExperienceDetailsSupport (ref), useSduiReportExperienceLaunchedModule (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), executeAction (ref), getSduiFocusActivationStore (ref), fFlagEnableGameJoinEarlyAccess (ref), appPage (ref), playButton (ref), cryoModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref)
+	-- upvalues: reactModule (ref), getSduiActionHandlerRegistry (ref), sduiActionType (ref), findAnalyticsField (ref), useSduiReportExperienceLaunchedModule (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), executeAction (ref), getSduiFocusActivationStore (ref), fFlagEnableGameJoinEarlyAccess (ref), appPage (ref), playButton (ref), cryoModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref)
 	local analyticsContext = p1.analyticsContext
 	local var1 = reactModule.useCallback(function()
 		-- upvalues: getSduiActionHandlerRegistry (copy), sduiActionType (copy), p1 (ref)
@@ -34,20 +33,20 @@ return reactModule.memo(function(p1)
 		AnchorPoint = p1.anchorPoint,
 		LayoutOrder = p1.layoutOrder,
 		Position = p1.position,
-		tag = if fFlagSduiExperienceDetailsSupport then p1.tag else nil,
+		tag = p1.tag,
 		expandWidthForSecondaryPlayButton = p1.expandWidthForSecondaryPlayButton,
 		preferSecondaryPlayButton = p1.preferSecondaryPlayButton,
-		onRegisterActivation = if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport then reactModule.useCallback(function(p2)
+		onRegisterActivation = reactModule.useCallback(function(p2)
 			-- upvalues: p1 (ref), getSduiFocusActivationStore (copy)
 			local tag = p1.tag
 			
 			return if tag == nil then function() end else getSduiFocusActivationStore().register(tag, p2)
-		end, { p1.tag }) else nil else nil,
+		end, { p1.tag }),
 		fetchDelayInSeconds = p1.fetchDelayInSeconds or 0.1,
 		universeId = p1.universeId,
 		placeId = p1.placeId,
-		useUIBloxButton = if fFlagSduiExperienceDetailsSupport then p1.enableUiBloxButton else nil,
-		reportExperienceLaunched = useSduiReportExperienceLaunchedModule(p1.sduiContext, p1.analyticsContext, p1.universeId, placeId, p1.rootPlaceId or placeId, p1.appliedFilters, if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport and p1.experienceJoinData then p1.experienceJoinData.launchData else nil else nil),
+		useUIBloxButton = p1.enableUiBloxButton,
+		reportExperienceLaunched = useSduiReportExperienceLaunchedModule(p1.sduiContext, p1.analyticsContext, p1.universeId, placeId, p1.rootPlaceId or placeId, p1.appliedFilters, if p1.experienceJoinData then p1.experienceJoinData.launchData else nil),
 		onPurchaseRequiredCallback = if p1.openGameDetailsOnPurchaseRequired then var1 else nil,
 		onActivated = reactModule.useCallback(function()
 			-- upvalues: fFlagLuaAppResetHoverOnSduiPlayButtonActivation (copy), p1 (ref), sduiActionType (copy), executeAction (copy), analyticsContext (ref)
@@ -62,7 +61,7 @@ return reactModule.memo(function(p1)
 		}),
 		referralSource = findAnalyticsField("referralSource", analyticsContext.analyticsData),
 		eventContext = findAnalyticsField("eventContext", analyticsContext.analyticsData, "ExperienceTile"),
-		launchSource = if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport then findAnalyticsField("launchSource", analyticsContext.analyticsData) else nil else nil,
+		launchSource = findAnalyticsField("launchSource", analyticsContext.analyticsData),
 		launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then p1.launchWhenLoading else nil,
 		launchOnReleaseAfterUnmount = p1.launchOnReleaseAfterUnmount,
 		enableEarlyAccessPlusTooltip = if fFlagEnableGameJoinEarlyAccess and var2 then true else nil,

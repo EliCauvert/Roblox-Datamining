@@ -28,6 +28,7 @@ local getFFlagEnableAppChatInExperience = require(corePackagesService.Workspace.
 local getFFlagChromeCentralizedConfiguration = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagChromeCentralizedConfiguration
 local getFFlagEnableCrossExpVoice = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableCrossExpVoice
 local fStringReactSchedulingContext = require(corePackagesService.Workspace.Packages.SharedFlags).FStringReactSchedulingContext
+local fFlagFriendsCallingClientGateDEV = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagFriendsCallingClientGate_DEV
 local luaAppEnableToastNotificationsCoreScripts4 = game:DefineFastFlag("LuaAppEnableToastNotificationsCoreScripts4", false)
 local disableLuobuWarningToast = game:DefineFastFlag("DisableLuobuWarningToast", false)
 local fFlagDebugDisableExperienceChatMainModule = require(robloxGui.Modules.Flags.FFlagDebugDisableExperienceChatMain)
@@ -87,6 +88,9 @@ if game:GetEngineFeature("SoundServiceControlsDefaultListenerLocation") then
 end
 if getFFlagEnableAppChatInExperience() then
 	scriptContextService:AddCoreScriptLocal("CoreScripts/AppChatMain", robloxGui)
+end
+if fFlagFriendsCallingClientGateDEV then
+	scriptContextService:AddCoreScriptLocal("CoreScripts/FriendsCallingMain", robloxGui)
 end
 if getFFlagEnableCrossExpVoice() then
 	require(corePackagesService.Workspace.Packages.CrossExperienceVoice).IXPManager.default:initialize()

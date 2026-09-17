@@ -156,7 +156,7 @@ function appExperienceActionRow.render(p1)
 		unavailableText = "Feature.ExperienceDetails.PlayButtonText.Unavailable",
 		buyText = "Feature.ExperienceDetails.PlayButtonText.Buy",
 		playDemoText = "Feature.ExperienceDetails.PlayButtonText.PlayDemo",
-		playtestText = if fFlagLuaAppPlayButtonPrivatePT then "Feature.Build.Action.Playtest" else nil,
+		playtestText = if fFlagLuaAppPlayButtonPrivatePT then "Feature.ExperienceDetails.PlayButtonText.Playtest" else nil,
 		playText = if fFlagLuaAppTextOnlyPlayButton or fFlagLuaAppIconTextPlayButton then if fFlagLuaAppUpdatePlayButtonText then "Feature.ExperienceDetails.PlayButtonText.Play" else "Feature.ExperienceDetails.PlayButtonText.ActionNeeded" else nil
 	})(function(p2)
 		-- upvalues: roactModule (copy), experienceActionRow (copy), p1 (ref), fFlagLuaAppSupportDisablePlayableWhenLoading (copy), playButtonStates (copy), fFlagLuaAppEnablePlaySquadButton (copy), getFFlagUIBloxUseFoundationButton (copy), fFlagLuaAppPlayButtonOptOutFoundationButton (copy)

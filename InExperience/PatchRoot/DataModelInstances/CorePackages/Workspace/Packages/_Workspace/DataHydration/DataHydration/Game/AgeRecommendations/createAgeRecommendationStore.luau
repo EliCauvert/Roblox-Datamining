@@ -8,12 +8,10 @@ local createDataResolverModule = require(dataHydration.createDataResolver)
 local _ = require(dataHydration.DataHydrationTypes)
 local fetchAgeRecommendationModule = require(script.Parent.fetchAgeRecommendation)
 local ageRecommendationStoreTypesModule = require(script.Parent.AgeRecommendationStoreTypes)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
-local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
+local fFlagShowGameAgeRating = require(parent.SharedFlags).FFlagShowGameAgeRating
 
 return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), fetchAgeRecommendationModule (ref), ageRecommendationStoreTypesModule (ref), fFlagShowGameAgeRating (ref), fFlagSduiExperienceDetailsSupport (ref)
+	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), fetchAgeRecommendationModule (ref), ageRecommendationStoreTypesModule (ref), fFlagShowGameAgeRating (ref)
 	local var1 = createDataCacheModule()
 	local var2 = createDataResolverModule({
 		requestBatchSize = 1,
@@ -34,7 +32,7 @@ return function()
 			end
 		end,
 		fetchFn = function(p1)
-			-- upvalues: fetchAgeRecommendationModule (copy), ageRecommendationStoreTypesModule (copy), fFlagShowGameAgeRating (copy), fFlagSduiExperienceDetailsSupport (copy)
+			-- upvalues: fetchAgeRecommendationModule (copy), ageRecommendationStoreTypesModule (copy), fFlagShowGameAgeRating (copy)
 			local var3 = next(p1)
 			
 			if not var3 then
@@ -45,7 +43,7 @@ return function()
 				})
 			end
 			return fetchAgeRecommendationModule(var3):andThen(function(p2)
-				-- upvalues: var3 (ref), ageRecommendationStoreTypesModule (copy), fFlagShowGameAgeRating (copy), fFlagSduiExperienceDetailsSupport (copy)
+				-- upvalues: var3 (ref), ageRecommendationStoreTypesModule (copy), fFlagShowGameAgeRating (copy)
 				if not p2 or not p2.responseBody then
 					error({
 						errorType = "FetchAgeRecommendationResponseError",
@@ -76,8 +74,8 @@ return function()
 					displayName = ageRecommendation.displayName,
 					displayNameWithHeaderShort = ageRecommendation.displayNameWithHeaderShort,
 					minimumAgeDisplay = if fFlagShowGameAgeRating then ageRecommendation.minimumAgeDisplay else nil,
-					igrsRating = if fFlagSduiExperienceDetailsSupport then ageRecommendation.igrsRating else nil,
-					igrsRatingDisplayMessage = if fFlagSduiExperienceDetailsSupport then ageRecommendation.igrsRatingDisplayMessage else nil
+					igrsRating = ageRecommendation.igrsRating,
+					igrsRatingDisplayMessage = ageRecommendation.igrsRatingDisplayMessage
 				}
 				
 				return t
@@ -91,7 +89,7 @@ return function()
 		fetchAgeRecommendation = var2.fetchItem,
 		getAgeRecommendation = var2.getCachedItem,
 		getAndFetchAgeRecommendation = var2.getAndFetchItem,
-		updateAgeRecommendations = if fFlagSduiExperienceDetailsSupport then var1.updateItems else nil,
+		updateAgeRecommendations = var1.updateItems,
 		clear = var2.clear,
 		dispose = var2.dispose
 	}

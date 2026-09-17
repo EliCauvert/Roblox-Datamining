@@ -5,12 +5,10 @@ local runService = require(parent.MockableProxyServices).RunService
 local name = require(intervalPerformanceTracker.Logger):new(script.Name)
 local intervalPerformanceTrackerTelemetryConfigModule = require(script.Parent.IntervalPerformanceTrackerTelemetryConfig)
 game:DefineFastFlag("DebugPrintIntervalPerformanceTrackerResults", false)
-local getFFlagAXFPSEventStreamAndCounters = require(parent.SharedFlags).GetFFlagAXFPSEventStreamAndCounters
 local sendFPSStatModule = require(script.Parent.sendFPSStat)
 local sendScrollFrameCountersModule = require(script.Parent.sendScrollFrameCounters)
 local AXFixAverageFPSCasing = game:DefineFastFlag("AXFixAverageFPSCasing", false)
 local AXIntervalPerformanceTrackerFPSStandardDeviation = game:DefineFastFlag("AXIntervalPerformanceTrackerFPSStandardDeviation", false)
-local AXIntervalPerformanceTrackerScrollFrameTime = game:DefineFastFlag("AXIntervalPerformanceTrackerScrollFrameTime", false)
 local AXIntervalPerformanceTrackerScrollFrameCounters = game:DefineFastFlag("AXIntervalPerformanceTrackerScrollFrameCounters", false)
 local var1 = math.random(0, 1000) < require(parent.SharedFlags).GetFIntIntervalPerformanceTrackerEventStream()
 local t = {
@@ -130,176 +128,174 @@ v = function(p1, p2, p3)
 	end
 end
 
-if AXIntervalPerformanceTrackerScrollFrameTime then
-	local httpService = game:GetService("HttpService")
-	t.rawFrameTimesMs = {
-		reducer = function(p1, p2)
-			local frames = p1.frames or {}
-			local previousTime = p1.previousTime
-			
-			if previousTime ~= nil then
-				table.insert(frames, (p2 - previousTime) * 1000)
-			end
-			return { frames = frames, previousTime = p2 }
-		end,
-		getResult = function(p1)
-			-- upvalues: httpService (ref)
-			if p1.frames == nil or #p1.frames < 1 then
-				return nil
-			end
-			local t = {}
-			
-			for i, v in p1.frames do
-				table.insert(t, math.round(v * 100) / 100)
-			end
-			return httpService:JSONEncode(t)
+local httpService = game:GetService("HttpService")
+t.rawFrameTimesMs = {
+	reducer = function(p1, p2)
+		local frames = p1.frames or {}
+		local previousTime = p1.previousTime
+		
+		if previousTime ~= nil then
+			table.insert(frames, (p2 - previousTime) * 1000)
 		end
-	}
-	t.frameTimeAvgMs = {
-		reducer = function(p2, p3)
-			local framesCount = p2.framesCount or 0
-			local sumMs = p2.sumMs or 0
-			
-			if p2.previousTime ~= nil then
-				framesCount += 1
-				sumMs += (p3 - p2.previousTime) * 1000
-			end
-			return {
-				framesCount = framesCount,
-				sumMs = sumMs,
-				previousTime = p3
-			}
-		end,
-		getResult = function(p2)
-			return if p2.framesCount == nil or p2.framesCount < 1 then nil else p2.sumMs / p2.framesCount
+		return { frames = frames, previousTime = p2 }
+	end,
+	getResult = function(p1)
+		-- upvalues: httpService (ref)
+		if p1.frames == nil or #p1.frames < 1 then
+			return nil
 		end
-	}
-	t.frameTimeStdDevMs = {
-		reducer = function(p2, p3)
-			local framesCount = p2.framesCount or 0
-			local sumMs = p2.sumMs or 0
-			local sumSquaredMs = p2.sumSquaredMs or 0
-			
-			if p2.previousTime ~= nil then
-				local var3 = (p3 - p2.previousTime) * 1000
-				framesCount += 1
-				sumMs += var3
-				sumSquaredMs += var3 * var3
-			end
-			return {
-				framesCount = framesCount,
-				sumMs = sumMs,
-				sumSquaredMs = sumSquaredMs,
-				previousTime = p3
-			}
-		end,
-		getResult = function(p2)
-			if p2.framesCount == nil or p2.framesCount < 1 then
-				return nil
-			end
-			local var3 = p2.sumMs / p2.framesCount
-			
-			return math.sqrt(math.max(p2.sumSquaredMs / p2.framesCount - var3 * var3, 0))
+		local t = {}
+		
+		for i, v in p1.frames do
+			table.insert(t, math.round(v * 100) / 100)
 		end
-	}
-	t.frameTimeDistributionMs = {
-		reducer = function(p2, p3)
-			local frames = p2.frames or {}
-			local previousTime = p2.previousTime
-			
-			if previousTime ~= nil then
-				table.insert(frames, (p3 - previousTime) * 1000)
-			end
-			return { frames = frames, previousTime = p3 }
-		end,
-		getResult = function(p2)
-			-- upvalues: httpService (ref)
-			if p2.frames == nil or #p2.frames < 1 then
-				return nil
-			end
-			local cloned = table.clone(p2.frames)
-			table.sort(cloned)
-			local t = {}
-			local clonedCount = #cloned
-			local ceiled = math.ceil(clonedCount * 0.5)
-			
-			if ceiled < 1 then
-				ceiled = 1
-			elseif clonedCount < ceiled then
-				ceiled = clonedCount
-			end
-			t.p50 = math.round(cloned[ceiled] * 100) / 100
-			local clonedCount_1 = #cloned
-			local ceiled_1 = math.ceil(clonedCount_1 * 0.95)
-			
-			if ceiled_1 < 1 then
-				ceiled_1 = 1
-			elseif clonedCount_1 < ceiled_1 then
-				ceiled_1 = clonedCount_1
-			end
-			t.p95 = math.round(cloned[ceiled_1] * 100) / 100
-			local clonedCount_2 = #cloned
-			local ceiled_2 = math.ceil(clonedCount_2 * 0.99)
-			
-			if ceiled_2 < 1 then
-				ceiled_2 = 1
-			elseif clonedCount_2 < ceiled_2 then
-				ceiled_2 = clonedCount_2
-			end
-			t.p99 = math.round(cloned[ceiled_2] * 100) / 100
-			
-			return httpService:JSONEncode(t)
-		end
-	}
-	t.frameBuckets = {
-		reducer = function(p2, p3)
-			-- upvalues: var2 (ref)
-			local counts
-			local _ = nil
-			
-			if p2.counts == nil then
-				counts = {}
-				
-				for i, v in var2 do
-					counts[v] = 0
-				end
-			else
-				counts = p2.counts
-			end
-			if p2.previousTime ~= nil then
-				local var3 = (p3 - p2.previousTime) * 1000
-				counts[if var3 < 16 then "under_16" elseif var3 < 16.666666666667 then "16_to_16_7" elseif var3 < 17.5 then "16_7_to_17_5" elseif var3 < 18 then "17_5_to_18" elseif var3 < 21 then "18_to_21" elseif var3 < 25 then "21_to_25" else "over_25"] += 1
-			end
-			return { counts = counts, previousTime = p3 }
-		end,
-		getResult = function(p4)
-			-- upvalues: httpService (ref)
-			return if p4.counts == nil then nil else httpService:JSONEncode(p4.counts)
-		end
-	}
-	
-	for i_1, v_1 in {
-		"rawFrameTimesMs",
-		"frameTimeAvgMs",
-		"frameTimeStdDevMs",
-		"frameTimeDistributionMs",
-		"frameBuckets"
-	} do
-		t_1[v_1] = v_1
+		return httpService:JSONEncode(t)
 	end
+}
+t.frameTimeAvgMs = {
+	reducer = function(p2, p3)
+		local framesCount = p2.framesCount or 0
+		local sumMs = p2.sumMs or 0
+		
+		if p2.previousTime ~= nil then
+			framesCount += 1
+			sumMs += (p3 - p2.previousTime) * 1000
+		end
+		return {
+			framesCount = framesCount,
+			sumMs = sumMs,
+			previousTime = p3
+		}
+	end,
+	getResult = function(p2)
+		return if p2.framesCount == nil or p2.framesCount < 1 then nil else p2.sumMs / p2.framesCount
+	end
+}
+t.frameTimeStdDevMs = {
+	reducer = function(p2, p3)
+		local framesCount = p2.framesCount or 0
+		local sumMs = p2.sumMs or 0
+		local sumSquaredMs = p2.sumSquaredMs or 0
+		
+		if p2.previousTime ~= nil then
+			local var3 = (p3 - p2.previousTime) * 1000
+			framesCount += 1
+			sumMs += var3
+			sumSquaredMs += var3 * var3
+		end
+		return {
+			framesCount = framesCount,
+			sumMs = sumMs,
+			sumSquaredMs = sumSquaredMs,
+			previousTime = p3
+		}
+	end,
+	getResult = function(p2)
+		if p2.framesCount == nil or p2.framesCount < 1 then
+			return nil
+		end
+		local var3 = p2.sumMs / p2.framesCount
+		
+		return math.sqrt(math.max(p2.sumSquaredMs / p2.framesCount - var3 * var3, 0))
+	end
+}
+t.frameTimeDistributionMs = {
+	reducer = function(p2, p3)
+		local frames = p2.frames or {}
+		local previousTime = p2.previousTime
+		
+		if previousTime ~= nil then
+			table.insert(frames, (p3 - previousTime) * 1000)
+		end
+		return { frames = frames, previousTime = p3 }
+	end,
+	getResult = function(p2)
+		-- upvalues: httpService (ref)
+		if p2.frames == nil or #p2.frames < 1 then
+			return nil
+		end
+		local cloned = table.clone(p2.frames)
+		table.sort(cloned)
+		local t = {}
+		local clonedCount = #cloned
+		local ceiled = math.ceil(clonedCount * 0.5)
+		
+		if ceiled < 1 then
+			ceiled = 1
+		elseif clonedCount < ceiled then
+			ceiled = clonedCount
+		end
+		t.p50 = math.round(cloned[ceiled] * 100) / 100
+		local clonedCount_1 = #cloned
+		local ceiled_1 = math.ceil(clonedCount_1 * 0.95)
+		
+		if ceiled_1 < 1 then
+			ceiled_1 = 1
+		elseif clonedCount_1 < ceiled_1 then
+			ceiled_1 = clonedCount_1
+		end
+		t.p95 = math.round(cloned[ceiled_1] * 100) / 100
+		local clonedCount_2 = #cloned
+		local ceiled_2 = math.ceil(clonedCount_2 * 0.99)
+		
+		if ceiled_2 < 1 then
+			ceiled_2 = 1
+		elseif clonedCount_2 < ceiled_2 then
+			ceiled_2 = clonedCount_2
+		end
+		t.p99 = math.round(cloned[ceiled_2] * 100) / 100
+		
+		return httpService:JSONEncode(t)
+	end
+}
+t.frameBuckets = {
+	reducer = function(p2, p3)
+		-- upvalues: var2 (ref)
+		local counts
+		local _ = nil
+		
+		if p2.counts == nil then
+			counts = {}
+			
+			for i, v in var2 do
+				counts[v] = 0
+			end
+		else
+			counts = p2.counts
+		end
+		if p2.previousTime ~= nil then
+			local var3 = (p3 - p2.previousTime) * 1000
+			counts[if var3 < 16 then "under_16" elseif var3 < 16.666666666667 then "16_to_16_7" elseif var3 < 17.5 then "16_7_to_17_5" elseif var3 < 18 then "17_5_to_18" elseif var3 < 21 then "18_to_21" elseif var3 < 25 then "21_to_25" else "over_25"] += 1
+		end
+		return { counts = counts, previousTime = p3 }
+	end,
+	getResult = function(p4)
+		-- upvalues: httpService (ref)
+		return if p4.counts == nil then nil else httpService:JSONEncode(p4.counts)
+	end
+}
+
+for i_1, v_1 in {
+	"rawFrameTimesMs",
+	"frameTimeAvgMs",
+	"frameTimeStdDevMs",
+	"frameTimeDistributionMs",
+	"frameBuckets"
+} do
+	t_1[v_1] = v_1
 end
 local t_3 = {}
 t_3.__index = t_3
 
 function t_3.new(p4, p5, p6, p7, p8)
-	-- upvalues: getFFlagAXFPSEventStreamAndCounters (ref), t_3 (ref)
+	-- upvalues: t_3 (ref)
 	local t = {
 		_startTime = nil,
 		_metricsData = {},
 		_timeout = p4,
 		_metricsToTrack = p5,
-		_countersEnabled = if getFFlagAXFPSEventStreamAndCounters() then p6 else nil,
-		_eventStreamEnabled = if getFFlagAXFPSEventStreamAndCounters() then p7 else nil,
+		_countersEnabled = p6,
+		_eventStreamEnabled = p7,
 		_extraFields = p8
 	}
 	setmetatable(t, t_3)
@@ -317,20 +313,20 @@ function t_3:hasReachedTimeout()
 end
 
 function t_3:updateMetrics()
-	-- upvalues: AXIntervalPerformanceTrackerScrollFrameTime (ref), t (ref)
+	-- upvalues: t (ref)
 	if self._startTime == nil then
 		self._startTime = tick()
 	end
-	local var4 = if AXIntervalPerformanceTrackerScrollFrameTime then tick() else nil
+	local currentTime = tick()
 	
 	for i, v in self:getMetricsToTrack() do
-		local var5 = t[v]
+		local var4 = t[v]
 		
-		if var5 then
+		if var4 then
 			if not self._metricsData[v] then
 				self._metricsData[v] = {}
 			end
-			self._metricsData[v] = var5.reducer(self._metricsData[v], var4)
+			self._metricsData[v] = var4.reducer(self._metricsData[v], currentTime)
 		end
 	end
 end
@@ -340,10 +336,10 @@ function t_3:getResult()
 	local t_1 = {}
 	
 	for i, v in self:getMetricsToTrack() do
-		local var6 = t[v]
+		local var5 = t[v]
 		
-		if var6 then
-			t_1[v] = var6.getResult(self._metricsData[v])
+		if var5 then
+			t_1[v] = var5.getResult(self._metricsData[v])
 		end
 	end
 	return t_1
@@ -376,12 +372,12 @@ function t_4:_updateIntervals()
 end
 
 function t_4:startTracking(p4, p5, p6, p7, p8, p9)
-	-- upvalues: var1 (ref), t_3 (ref), getFFlagAXFPSEventStreamAndCounters (ref), runService (ref)
+	-- upvalues: var1 (ref), t_3 (ref), runService (ref)
 	if not var1 then return end
 	if not self._intervals[p4] then
-		local var7 = t_3.new(p5, p6, if getFFlagAXFPSEventStreamAndCounters() then p7 else nil, if getFFlagAXFPSEventStreamAndCounters() then p8 else nil, p9)
-		self._intervals[p4] = var7
-		var7:updateMetrics()
+		local var6 = t_3.new(p5, p6, p7, p8, p9)
+		self._intervals[p4] = var6
+		var6:updateMetrics()
 	end
 	if not self._renderSteppedConnection then
 		self._renderSteppedConnection = runService.RenderStepped:Connect(function()
@@ -397,15 +393,15 @@ function t_4:_fireStatsTracking(p4)
 	local framesCount = p4.framesCount
 	local longestFrameTime = p4.longestFrameTime
 	local intervalName = p4.intervalName
-	local var7 = self._intervals[intervalName]
+	local var6 = self._intervals[intervalName]
 	
-	if not var7 then
+	if not var6 then
 		name:warning(`Missing interval {intervalName}`)
 		
 		return
 	end
-	local countersEnabled = var7._countersEnabled
-	local eventStreamEnabled = var7._eventStreamEnabled
+	local countersEnabled = var6._countersEnabled
+	local eventStreamEnabled = var6._eventStreamEnabled
 	
 	local function _(p5, p6)
 		return "IntervalPerformanceTracker_" .. p44 .. "_" .. p45
@@ -436,7 +432,7 @@ function t_4:_fireStatsTracking(p4)
 			interval = framesCount
 		})
 	end
-	if longestFrameTime and var7._countersEnabled then
+	if longestFrameTime and var6._countersEnabled then
 		local text = "IntervalPerformanceTracker_" .. "LongestFrameTime" .. "_" .. intervalName
 		local cloned = table.clone(p4)
 		cloned.duration = longestFrameTime
@@ -460,28 +456,28 @@ function t_4:_fireStatsTracking(p4)
 end
 
 function t_4:stopAndLogTracking(p4)
-	-- upvalues: var1 (ref), AXIntervalPerformanceTrackerScrollFrameTime (ref), default (ref), intervalPerformanceTrackerTelemetryConfigModule (ref), getFFlagAXFPSEventStreamAndCounters (ref)
+	-- upvalues: var1 (ref), default (ref), intervalPerformanceTrackerTelemetryConfigModule (ref)
 	if not var1 then return end
-	local var7 = self._intervals[p4]
+	local var6 = self._intervals[p4]
 	
-	if var7 then
-		local result = var7:getResult()
+	if var6 then
+		local result = var6:getResult()
 		local t = { intervalName = p4 }
 		
-		if AXIntervalPerformanceTrackerScrollFrameTime and var7._extraFields then
-			for i, v in var7._extraFields do
+		if var6._extraFields then
+			for i, v in var6._extraFields do
 				t[i] = v
 			end
 		end
-		local var8 = 0
+		local var7 = 0
 		
 		for i, v in result do
 			if v ~= nil then
-				var8 += 1
+				var7 += 1
 			end
 			t[i] = v
 		end
-		if var8 > 0 then
+		if var7 > 0 then
 			default:logRobloxTelemetryEvent(intervalPerformanceTrackerTelemetryConfigModule, nil, t)
 			
 			if game:GetFastFlag("DebugPrintIntervalPerformanceTrackerResults") then
@@ -492,9 +488,7 @@ function t_4:stopAndLogTracking(p4)
 				end
 			end
 		end
-		if getFFlagAXFPSEventStreamAndCounters() then
-			self:_fireStatsTracking(t)
-		end
+		self:_fireStatsTracking(t)
 		self._intervals[p4] = nil
 	end
 	self:disconnectUnusedRenderStepped()

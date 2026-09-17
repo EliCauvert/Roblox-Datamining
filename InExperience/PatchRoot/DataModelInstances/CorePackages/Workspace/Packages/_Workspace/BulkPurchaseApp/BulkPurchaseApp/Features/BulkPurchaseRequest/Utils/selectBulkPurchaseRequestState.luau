@@ -4,9 +4,10 @@ local purchasableStateEnumModule = require(bulkPurchaseApp.Enums.PurchasableStat
 local createPurchasableItemModule = require(script.Parent.createPurchasableItem)
 local createOwnedItemModule = require(script.Parent.createOwnedItem)
 local createUnpurchasableItemModule = require(script.Parent.createUnpurchasableItem)
+local fFlagAXAddPlusUpsellToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
 
 return function(p1)
-	-- upvalues: purchasableStateEnumModule (ref), createPurchasableItemModule (ref), createOwnedItemModule (ref), createUnpurchasableItemModule (ref)
+	-- upvalues: purchasableStateEnumModule (ref), createPurchasableItemModule (ref), createOwnedItemModule (ref), createUnpurchasableItemModule (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref)
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
@@ -30,6 +31,7 @@ return function(p1)
 		ownedItems = t_1,
 		unpurchasableItems = t_2,
 		balance = p1.balance or 0,
-		discountInformation = p1.discountInformation
+		discountInformation = p1.discountInformation,
+		disablePurchase = if fFlagAXAddPlusUpsellToBulkPurchaseModule then p1.disablePurchase else nil
 	}
 end

@@ -9,13 +9,12 @@ local isMakeupAssetTypeModule = require(avatarExperienceCommon.Utils.isMakeupAss
 local isValidAssetTypeForOutfitTypeModule = require(avatarExperienceCommon.Utils.isValidAssetTypeForOutfitType)
 local constantsModule = require(avatarExperienceCommon.Constants)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXMakeupEquipping = avatarExperienceFlagsModule.FFlagAXMakeupEquipping
 local fFlagParseHeadShapeFromAPIResponse = avatarExperienceFlagsModule.FFlagParseHeadShapeFromAPIResponse
 local fFlagHeadRefinementFacialAnimationToggle = avatarExperienceFlagsModule.FFlagHeadRefinementFacialAnimationToggle
 local _ = require(avatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
 
 return function(p1, p2)
-	-- upvalues: isValidAssetTypeForOutfitTypeModule (ref), constantsModule (ref), createHumanoidDescriptionAccessoryInfoModule (ref), fFlagParseHeadShapeFromAPIResponse (ref), fFlagHeadRefinementFacialAnimationToggle (ref), fFlagAXMakeupEquipping (ref), isMakeupAssetTypeModule (ref), mutedError (ref), setMakeupDescriptionsModule (ref), HUMANOID_DESCRIPTION_SCALE_TO_NAME (ref), setHumanoidDescriptionColorsFromBodyColor3sModule (ref)
+	-- upvalues: isValidAssetTypeForOutfitTypeModule (ref), constantsModule (ref), createHumanoidDescriptionAccessoryInfoModule (ref), fFlagParseHeadShapeFromAPIResponse (ref), fFlagHeadRefinementFacialAnimationToggle (ref), isMakeupAssetTypeModule (ref), mutedError (ref), setMakeupDescriptionsModule (ref), HUMANOID_DESCRIPTION_SCALE_TO_NAME (ref), setHumanoidDescriptionColorsFromBodyColor3sModule (ref)
 	local humanoidDescription = Instance.new("HumanoidDescription")
 	local equippedAssets = p1.AvatarEditor.Character.EquippedAssets
 	local avatarScales = p1.AvatarEditor.Character.AvatarScales
@@ -69,17 +68,15 @@ return function(p1, p2)
 						else
 							humanoidDescription[var3] = joined
 						end
-					elseif i ~= constantsModule.ASSET_TYPE_NAME_TO_ID_STRING.Gear and (not fFlagAXMakeupEquipping or not isMakeupAssetTypeModule(i)) then
+					elseif i ~= constantsModule.ASSET_TYPE_NAME_TO_ID_STRING.Gear and not isMakeupAssetTypeModule(i) then
 						mutedError(string.format("assetTypeId: %s not recognized as member of humanoidDescription", tostring(i)))
 					end
 				end
 			end
 		end
 		humanoidDescription:SetAccessories(t, true)
+		setMakeupDescriptionsModule(humanoidDescription, equippedAssets)
 		
-		if fFlagAXMakeupEquipping then
-			setMakeupDescriptionsModule(humanoidDescription, equippedAssets)
-		end
 		if fFlagHeadRefinementFacialAnimationToggle and staticFacialAnimation ~= nil then
 			humanoidDescription[constantsModule.STATIC_FACIAL_ANIMATION] = staticFacialAnimation
 		end

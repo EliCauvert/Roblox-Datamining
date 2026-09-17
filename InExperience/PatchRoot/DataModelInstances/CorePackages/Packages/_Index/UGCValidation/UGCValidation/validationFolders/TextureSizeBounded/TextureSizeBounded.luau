@@ -15,7 +15,6 @@ local t = {
 	},
 	requiredData = {},
 	conditionalData = { validationEnumsModule.SharedDataMember.meshTextures },
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateTextureTransparency),
 	expectedFailures = {}
 }
 

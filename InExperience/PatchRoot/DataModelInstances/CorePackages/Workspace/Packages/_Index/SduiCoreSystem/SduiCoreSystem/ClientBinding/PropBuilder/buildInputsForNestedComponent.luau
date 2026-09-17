@@ -4,10 +4,9 @@ local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 local splitDottedPathModule = require(sduiCoreSystem.ClientBinding.splitDottedPath)
 local _ = require(parent.Signals)
-local fFlagSduiFormatArgFormatters = require(parent.SharedFlags).FFlagSduiFormatArgFormatters
 
 return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: splitDottedPathModule (ref), sduiPropUtilsModule (ref), fFlagSduiFormatArgFormatters (ref)
+	-- upvalues: splitDottedPathModule (ref), sduiPropUtilsModule (ref)
 	if p2 then
 		for i, v in p2 do
 			if v.kind then
@@ -27,7 +26,7 @@ return function(p1, p2, p3, p4, p5, p6)
 					if p6 and p6.resolveLocalizedLiteral then
 						p5[i] = p6.resolveLocalizedLiteral(v.kind.value)
 					end
-				elseif fFlagSduiFormatArgFormatters and type == "format" then
+				elseif type == "format" then
 					p5[i] = sduiPropUtilsModule.generateFormatStringPropValue(v.kind.value, p3, p6, p1)(p4 or false).data
 				else
 					error(`Unrecognized inputDataType for key {i}`)

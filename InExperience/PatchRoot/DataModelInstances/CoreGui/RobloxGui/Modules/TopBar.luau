@@ -5,6 +5,7 @@ local robloxGui = coreGuiService:WaitForChild("RobloxGui")
 local IXPService = game:GetService("IXPService")
 local localizationService = game:GetService("LocalizationService")
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
+local fFlagBuildExperienceInGameShell = sharedFlagsModule.FFlagBuildExperienceInGameShell
 local fFlagAddTopBarScrimModule = require(script.Flags.FFlagAddTopBarScrim)
 local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
 local localizationProvider = require(corePackagesService.Workspace.Packages.Localization).LocalizationProvider
@@ -15,6 +16,7 @@ local reactModule = require(corePackagesService.Packages.React)
 local roactModule = require(corePackagesService.Packages.Roact)
 local roduxModule = require(corePackagesService.Packages.Rodux)
 local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
+local var1 = if fFlagBuildExperienceInGameShell then require(corePackagesService.Packages.Signals) else nil
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
 local colorMode = require(corePackagesService.Packages.Foundation).Enums.ColorMode
 local universalAppPolicyModule = require(corePackagesService.Workspace.Packages.UniversalAppPolicy)
@@ -27,11 +29,11 @@ local voiceStateContextModule = require(robloxGui.Modules.VoiceChat.VoiceStateCo
 local utilityModule = require(robloxGui.Modules.Settings.Utility)
 local tenFootInterfaceModule = require(robloxGui.Modules.TenFootInterface)
 local isNewInGameMenuEnabledModule = require(robloxGui.Modules.isNewInGameMenuEnabled)
-local var1 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
+local var2 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
 local serviceModule = nil
 local topBarScrimModule = nil
 
-if var1 then
+if var2 then
 	serviceModule = require(robloxGui.Modules.Chrome.Service)
 	topBarScrimModule = require(script.Components.TopBarScrim)
 end
@@ -45,21 +47,40 @@ local fFlagTopBarDeprecateChatRoduxModule = require(script.Flags.FFlagTopBarDepr
 local fFlagTopBarDeprecateDisplayOptionsRoduxModule = require(script.Flags.FFlagTopBarDeprecateDisplayOptionsRodux)
 local fFlagTopBarRefactor = require(corePackagesService.Workspace.Packages.InExperienceTopBar).Flags.FFlagTopBarRefactor
 local fFlagEnablePlaytestModeUnibar = sharedFlagsModule.FFlagEnablePlaytestModeUnibar
+local var3 = nil
 
-if var1 then
-	(function()
-		-- upvalues: guiService (ref), constantsModule (ref), displayModule (ref)
-		local guiInset, guiInset_1 = guiService:GetGuiInset()
-		guiService:SetGlobalGuiInset(guiInset.X, constantsModule.ApplyDisplayScale(constantsModule.TopBarHeight), guiInset_1.X, guiInset_1.Y)
-		displayModule.GetDisplayStore().setGuiInset({
-			left = guiInset.X,
-			top = constantsModule.ApplyDisplayScale(constantsModule.TopBarHeight),
-			right = guiInset_1.X,
-			bottom = guiInset_1.Y
-		})
-	end)()
+if var2 then
+	if fFlagBuildExperienceInGameShell then
+		local displayStore = displayModule.GetDisplayStore(false)
+		displayStore.setGuiInset(function(p1)
+			-- upvalues: constantsModule (ref)
+			return {
+				left = p1.left,
+				top = constantsModule.ApplyDisplayScale(constantsModule.TopBarHeight),
+				right = p1.right,
+				bottom = p1.bottom
+			}
+		end)
+		var3 = var1.createEffect(function(p1)
+			-- upvalues: displayStore (ref), guiService (ref)
+			local guiInset = displayStore.getGuiInset(p1)
+			guiService:SetGlobalGuiInset(guiInset.left, guiInset.top, guiInset.right, guiInset.bottom)
+		end)
+	else
+		(function()
+			-- upvalues: guiService (ref), constantsModule (ref), displayModule (ref)
+			local guiInset, guiInset_1 = guiService:GetGuiInset()
+			guiService:SetGlobalGuiInset(guiInset.X, constantsModule.ApplyDisplayScale(constantsModule.TopBarHeight), guiInset_1.X, guiInset_1.Y)
+			displayModule.GetDisplayStore().setGuiInset({
+				left = guiInset.X,
+				top = constantsModule.ApplyDisplayScale(constantsModule.TopBarHeight),
+				right = guiInset_1.X,
+				bottom = guiInset_1.Y
+			})
+		end)()
+	end
 end
-local var2 = if fFlagTopBarRefactor then require(script.ComponentsV2.TopBarApp) else require(script.Components.TopBarApp)
+local var4 = if fFlagTopBarRefactor then require(script.ComponentsV2.TopBarApp) else require(script.Components.TopBarApp)
 local reducerModule = require(script.Reducer)
 local topBarAppPolicyModule = require(script.TopBarAppPolicy)
 local setSmallTouchDeviceModule = require(script.Actions.SetSmallTouchDevice)
@@ -89,26 +110,29 @@ local connectToIsSpatialChanged = require(corePackagesService.Workspace.Packages
 local fFlagStudioDeviceSimVRSwitchFixes = sharedFlagsModule.FFlagStudioDeviceSimVRSwitchFixes
 
 local function SpatialRemountGate()
-	-- upvalues: reactModule (ref), isSpatial (ref), connectToIsSpatialChanged (ref), var2 (ref)
-	local var3, var4 = reactModule.useState(isSpatial())
+	-- upvalues: reactModule (ref), isSpatial (ref), connectToIsSpatialChanged (ref), var4 (ref)
+	local var5, var6 = reactModule.useState(isSpatial())
 	reactModule.useEffect(function()
-		-- upvalues: connectToIsSpatialChanged (copy), var4 (ref)
-		local var5 = connectToIsSpatialChanged(var4, true)
+		-- upvalues: connectToIsSpatialChanged (copy), var6 (ref)
+		local var7 = connectToIsSpatialChanged(var6, true)
 		
 		return function()
-			-- upvalues: var5 (ref)
-			var5:Disconnect()
+			-- upvalues: var7 (ref)
+			var7:Disconnect()
 		end
 	end, {})
 	
-	return reactModule.createElement(reactModule.Fragment, { key = if var3 then "spatial" else "flat" }, { TopBarApp = reactModule.createElement(var2) })
+	return reactModule.createElement(reactModule.Fragment, { key = if var5 then "spatial" else "flat" }, { TopBarApp = reactModule.createElement(var4) })
 end
 
 local t = {}
 t.__index = t
 
+if fFlagBuildExperienceInGameShell then
+	t._disposeGlobalGuiInsetEffect = var3
+end
 function t.new()
-	-- upvalues: t (ref), globalConfigModule (ref), roactModule (ref), tenFootInterfaceModule (ref), var1 (ref), guiService (ref), constantsModule (ref), fFlagEnablePlaytestModeUnibar (ref), roduxModule (ref), reducerModule (ref), fFlagTopBarSignalizeSetCores (ref), registerSetCoresModule (ref), fFlagTopBarDeprecateChatRoduxModule (ref), getCanChatModule (ref), fFlagTopBarDeprecateGameInfoRoduxModule (ref), getGameNameModule (ref), getFFlagDebugEnableVRFTUXExperienceInStudioModule (ref), isRunningInStudio (ref), FTUXModule (ref), platformEnumModule (ref), getFFlagEnableVRFTUXExperienceModule (ref), isFTUXExperienceModule (ref), isNewInGameMenuEnabledModule (ref), robloxGui (ref), fFlagTopBarDeprecateDisplayOptionsRoduxModule (ref), setSmallTouchDeviceModule (ref), utilityModule (ref), colorMode (ref), constants (ref), uiModeStyleProvider (ref), fFlagStudioDeviceSimVRSwitchFixes (ref), SpatialRemountGate (ref), var2 (ref), fFlagAddMenuNavigationToggleDialog (ref), fFlagGamepadNavigationDialogABTestModule (ref), designTokenProvider (ref), menuNavigationPromptTokenMapperModule (ref), serviceModule (write), fFlagAddTopBarScrimModule (ref), reactModule (ref), topBarScrimModule (write), roactRoduxModule (ref), fFlagTopBarRefactor (ref), fFlagShowGameAgeRating (ref), roactAppPolicy (ref), topBarAppPolicyModule (ref), appFeaturePolicies (ref), localizationProvider (ref), localization (ref), localizationService (ref), roactAppExperimentModule (ref), IXPService (ref), getFFlagEnableCrossExpVoice (ref), component (ref), reactSceneUnderstandingModule (ref), voiceStateContextModule (ref), coreGuiService (ref), updateUnreadMessagesBadgeModule (ref), fFlagTopBarDeprecateGamepadNavigationDialogRoduxModule (ref)
+	-- upvalues: t (ref), globalConfigModule (ref), roactModule (ref), tenFootInterfaceModule (ref), var2 (ref), guiService (ref), constantsModule (ref), fFlagEnablePlaytestModeUnibar (ref), roduxModule (ref), reducerModule (ref), fFlagTopBarSignalizeSetCores (ref), registerSetCoresModule (ref), fFlagTopBarDeprecateChatRoduxModule (ref), getCanChatModule (ref), fFlagTopBarDeprecateGameInfoRoduxModule (ref), getGameNameModule (ref), getFFlagDebugEnableVRFTUXExperienceInStudioModule (ref), isRunningInStudio (ref), FTUXModule (ref), platformEnumModule (ref), getFFlagEnableVRFTUXExperienceModule (ref), isFTUXExperienceModule (ref), isNewInGameMenuEnabledModule (ref), robloxGui (ref), fFlagTopBarDeprecateDisplayOptionsRoduxModule (ref), setSmallTouchDeviceModule (ref), utilityModule (ref), colorMode (ref), constants (ref), uiModeStyleProvider (ref), fFlagStudioDeviceSimVRSwitchFixes (ref), SpatialRemountGate (ref), var4 (ref), fFlagAddMenuNavigationToggleDialog (ref), fFlagGamepadNavigationDialogABTestModule (ref), designTokenProvider (ref), menuNavigationPromptTokenMapperModule (ref), serviceModule (write), fFlagAddTopBarScrimModule (ref), reactModule (ref), topBarScrimModule (write), roactRoduxModule (ref), fFlagTopBarRefactor (ref), fFlagShowGameAgeRating (ref), roactAppPolicy (ref), topBarAppPolicyModule (ref), appFeaturePolicies (ref), localizationProvider (ref), localization (ref), localizationService (ref), roactAppExperimentModule (ref), IXPService (ref), getFFlagEnableCrossExpVoice (ref), component (ref), reactSceneUnderstandingModule (ref), voiceStateContextModule (ref), coreGuiService (ref), updateUnreadMessagesBadgeModule (ref), fFlagTopBarDeprecateGamepadNavigationDialogRoduxModule (ref)
 	local tbl = setmetatable({}, t)
 	
 	if globalConfigModule.propValidation then
@@ -117,7 +141,7 @@ function t.new()
 	if globalConfigModule.elementTracing then
 		roactModule.setGlobalConfig({ elementTracing = true })
 	end
-	if not tenFootInterfaceModule:IsEnabled() and not var1 then
+	if not tenFootInterfaceModule:IsEnabled() and not var2 then
 		guiService:SetGlobalGuiInset(0, constantsModule.TopBarHeight, 0, 0)
 	end
 	if fFlagEnablePlaytestModeUnibar then
@@ -161,14 +185,14 @@ function t.new()
 		}
 	end
 	
-	local var3 = if fFlagStudioDeviceSimVRSwitchFixes then roactModule.createElement(SpatialRemountGate) else roactModule.createElement(var2)
+	local var5 = if fFlagStudioDeviceSimVRSwitchFixes then roactModule.createElement(SpatialRemountGate) else roactModule.createElement(var4)
 	
 	if fFlagAddMenuNavigationToggleDialog or fFlagGamepadNavigationDialogABTestModule then
-		var3 = roactModule.createElement(designTokenProvider, {
+		var5 = roactModule.createElement(designTokenProvider, {
 			tokenMappers = {
 				MenuNavigationPrompt = if fFlagGamepadNavigationDialogABTestModule then menuNavigationPromptTokenMapperModule else nil
 			}
-		}, { TopBarApp = var3 })
+		}, { TopBarApp = var5 })
 	end
 	tbl.root = roactModule.createElement(roactRoduxModule.StoreProvider, { store = tbl.store }, {
 		PolicyProvider = roactModule.createElement(if fFlagTopBarRefactor or fFlagShowGameAgeRating then roactAppPolicy.Provider else topBarAppPolicyModule.Provider, {
@@ -179,7 +203,7 @@ function t.new()
 			}, {
 				ExperimentProvider = roactModule.createFragment({
 					RoactAppExperimentProvider = roactModule.createElement(roactAppExperimentModule.Provider, { value = IXPService }, {
-						TopBarApp = var3,
+						TopBarApp = var5,
 						TopBarScrim = serviceModule and (fFlagAddTopBarScrimModule and reactModule.createElement("ScreenGui", {
 							IgnoreGuiInset = true,
 							DisplayOrder = -2,

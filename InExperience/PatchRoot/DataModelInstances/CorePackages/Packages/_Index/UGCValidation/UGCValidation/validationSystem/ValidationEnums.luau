@@ -148,7 +148,8 @@ t.SharedDataMember = {
 	curveAnimComputedFrames = "curveAnimComputedFrames",
 	contentIds = "contentIds",
 	hsrAssets = "hsrAssets",
-	curveAnimBoneData = "curveAnimBoneData"
+	curveAnimBoneData = "curveAnimBoneData",
+	fullBodyPartsMetrics = "fullBodyPartsMetrics"
 }
 finalizeEnumTable("SharedDataMember")
 t.ValidationConfig = {

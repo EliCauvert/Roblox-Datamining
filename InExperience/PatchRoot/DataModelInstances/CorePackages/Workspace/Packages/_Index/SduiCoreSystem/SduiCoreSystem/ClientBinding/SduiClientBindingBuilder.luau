@@ -15,7 +15,6 @@ local fFlagSduiOneofPropSupport = sharedFlagsModule.FFlagSduiOneofPropSupport
 local fFlagSduiNestedComponentListProp = sharedFlagsModule.FFlagSduiNestedComponentListProp
 local fFlagSduiImprovedErrorDimensions = sharedFlagsModule.FFlagSduiImprovedErrorDimensions
 local fFlagSduiInlineNestedComponentSchema = sharedFlagsModule.FFlagSduiInlineNestedComponentSchema
-local fFlagSduiDeferredListItems = sharedFlagsModule.FFlagSduiDeferredListItems
 local fFlagSduiExperimentalComponent = sharedFlagsModule.FFlagSduiExperimentalComponent
 
 local function buildProp(p1, p2, p3, p4, p5)
@@ -173,7 +172,7 @@ return {
 	buildPropTable = buildPropTable,
 	buildProp = buildProp,
 	buildConfigForComponent = function(p11, p12, p13, p14, _, p15, p16)
-		-- upvalues: fFlagSduiImprovedErrorDimensions (ref), resolveComponentType (ref), fFlagSduiInlineNestedComponentSchema (ref), signalsModule (ref), buildDataBindingSourcesForTemplateModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), fFlagSduiDeferredListItems (ref), t (ref), buildPropTable (ref), buildAnalyticsContextForClientBindingModule (ref), fFlagSduiNestedComponentListProp (ref), buildProp (ref), propResultCategory (ref)
+		-- upvalues: fFlagSduiImprovedErrorDimensions (ref), resolveComponentType (ref), fFlagSduiInlineNestedComponentSchema (ref), signalsModule (ref), buildDataBindingSourcesForTemplateModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), t (ref), buildPropTable (ref), buildAnalyticsContextForClientBindingModule (ref), fFlagSduiNestedComponentListProp (ref), buildProp (ref), propResultCategory (ref)
 		if not p11 or not next(p11) then
 			error("Attempt to buildConfigForComponent with nil template")
 		end
@@ -213,21 +212,10 @@ return {
 		if not fFlagSduiImprovedErrorDimensions then
 			var9 = resolveComponentType(value)
 		end
-		local p16
-		local _ = nil
-		
-		if fFlagSduiDeferredListItems then
-			p16 = p16 or {}
-			p16.__processed = true
-			p16.__isClientBinding = true
-			p16.componentType = var9
-		else
-			p16 = {
-				__processed = true,
-				__isClientBinding = true,
-				componentType = var9
-			}
-		end
+		p16 = p16 or {}
+		p16.__processed = true
+		p16.__isClientBinding = true
+		p16.componentType = var9
 		setmetatable(p16, t)
 		local var12 = nil
 		local var13 = nil
@@ -262,7 +250,7 @@ return {
 		if value.shared and value.shared.is_component_filtered then
 			local isComponentFiltered = value.shared.is_component_filtered
 			local ok, status, var23, var24 = pcall(function()
-				-- upvalues: buildProp (copy), isComponentFiltered (ref), var10 (write), p12 (ref), p13 (ref), p16 (write)
+				-- upvalues: buildProp (copy), isComponentFiltered (ref), var10 (write), p12 (ref), p13 (ref), p16 (ref)
 				return buildProp(isComponentFiltered, var10, p12, p13, p16.analyticsContext)
 			end)
 			

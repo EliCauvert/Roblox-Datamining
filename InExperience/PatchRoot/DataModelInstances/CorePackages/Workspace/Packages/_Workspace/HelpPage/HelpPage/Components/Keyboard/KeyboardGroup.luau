@@ -5,19 +5,23 @@ local foundationModule = require(parent_1.Foundation)
 local _ = require(parent.Configs.ConfigTypes)
 local localizationModule = require(parent_1.Localization)
 local keyboardActionModule = require(script.Parent.KeyboardAction)
+local fFlagHelpPageCCLModule = require(parent.Flags.FFlagHelpPageCCL)
 local view = foundationModule.View
 local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = localizationModule.Hooks.useLocalization
 local var1 = reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref)
+	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref), fFlagHelpPageCCLModule (ref)
 	return reactModule.createElement(view, {
 		tag = "col align-y-center align-x-left size-full-0 auto-y padding-x-small padding-y-small",
 		LayoutOrder = p1.LayoutOrder
 	}, {
 		reactModule.createElement(text, {
-			tag = "text-title-medium text-align-x-left auto-xy text-wrap",
 			key = "title-text",
+			tag = {
+				["auto-xy text-title-small text-wrap text-align-x-left"] = fFlagHelpPageCCLModule,
+				["auto-xy text-title-medium text-wrap text-align-x-left"] = not fFlagHelpPageCCLModule
+			},
 			textStyle = useTokens().Color.Extended.White.White_100,
 			Text = useLocalization({ title = p1.title }).title
 		})

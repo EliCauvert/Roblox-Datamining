@@ -1,1 +1,1 @@
-﻿return require(script.Parent.FFlagAXMigrateMainNavigationInputBindings) and game:DefineFastFlag("AXItemDetailsIxpExposure2", false)
+﻿return game:DefineFastFlag("AXItemDetailsIxpExposure2", false)

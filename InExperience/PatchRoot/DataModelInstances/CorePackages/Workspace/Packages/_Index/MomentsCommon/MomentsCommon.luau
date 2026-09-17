@@ -22,7 +22,10 @@ return {
 		FFlagMomentsContentStatsTelemetry = require(script.Flags.FFlagMomentsContentStatsTelemetry),
 		FFlagMomentTextGenerationFilteredSignal = require(script.Flags.FFlagMomentTextGenerationFilteredSignal),
 		FFlagMomentsTextOverlayPreviewTransform = require(script.Flags.FFlagMomentsTextOverlayPreviewTransform),
-		GetFFlagMomentsUseUploadPostAsync = require(script.Flags.GetFFlagMomentsUseUploadPostAsync)
+		GetFFlagMomentsUseUploadPostAsync = require(script.Flags.GetFFlagMomentsUseUploadPostAsync),
+		GetFFlagMomentsCoachmarkPersistence = require(script.Flags.GetFFlagMomentsCoachmarkPersistence),
+		GetFIntMomentsCoachmarkMaxImpressions = require(script.Flags.GetFIntMomentsCoachmarkMaxImpressions),
+		GetFIntMomentsCoachmarkAutoDismissSeconds = require(script.Flags.GetFIntMomentsCoachmarkAutoDismissSeconds)
 	},
 	Components = {
 		GradientBackdrop = require(script.Components.GradientBackdrop),
@@ -80,6 +83,7 @@ return {
 		getFitSize = require(script.Utils.getFitSize),
 		getScale = require(script.Utils.getScale),
 		isStudio = require(script.Utils.isStudio),
+		logMomentsLayerExposure = require(script.Utils.logMomentsLayerExposure),
 		Oklab = require(script.Utils.Oklab)
 	},
 	["jest.config"] = script["jest.config"]

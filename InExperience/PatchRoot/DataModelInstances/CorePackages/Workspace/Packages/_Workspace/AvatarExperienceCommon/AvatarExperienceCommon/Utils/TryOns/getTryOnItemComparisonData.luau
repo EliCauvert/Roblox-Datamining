@@ -1,5 +1,5 @@
 ﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local itemTypeEnumModule = require(avatarExperienceCommon.Enums.ItemTypeEnum)
+local itemTypeEnum = require(avatarExperienceCommon.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local _ = require(avatarExperienceCommon.Types.TryOnItemComparisonData)
 local t = {
 	[tostring(Enum.AssetType.ShirtAccessory.Value)] = "LCTops",
@@ -11,7 +11,7 @@ local t = {
 }
 
 function getTryOnItemComparisonData(p1)
-	-- upvalues: t (ref), itemTypeEnumModule (ref)
+	-- upvalues: t (ref), itemTypeEnum (ref)
 	local t_1 = {}
 	local t_2 = {}
 	local var1 = false
@@ -27,7 +27,7 @@ function getTryOnItemComparisonData(p1)
 		end
 	end
 	
-	if p1.itemType == itemTypeEnumModule.Asset then
+	if p1.itemType == itemTypeEnum.Asset then
 		local itemSubType = p1.itemSubType
 		t_1[itemSubType] = true
 		local var3 = t[itemSubType]
@@ -38,7 +38,7 @@ function getTryOnItemComparisonData(p1)
 		if p1.itemSubType == tostring(Enum.AssetType.Head.Value) or p1.itemSubType == tostring(Enum.AssetType.Face.Value) then
 			var1 = true
 		end
-	elseif p1.itemType == itemTypeEnumModule.Bundle and p1.bundleInfo then
+	elseif p1.itemType == itemTypeEnum.Bundle and p1.bundleInfo then
 		if p1.itemSubType == tostring(Enum.BundleType.DynamicHead.Value) then
 			var2 = true
 		end

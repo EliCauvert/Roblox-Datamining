@@ -103,10 +103,7 @@
 			BuildMonetization = "BuildGameEarnRobux",
 			BuildStats = "BuildGameStats",
 			BuildGetUsers = "BuildGameGetUsers",
-			BuildSearch = "BuildGameSearch",
-			BuildAssetLibrary = "BuildAssetLibrary",
-			BuildAssetLibraryCategory = "BuildAssetCategory",
-			BuildAssetLibraryDetail = "BuildAssetDetails"
+			BuildSearch = "BuildGameSearch"
 		}
 	},
 	Metadata = {

@@ -1,10 +1,13 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
+﻿local sduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
+local parent = sduiSharedContent.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
+local _ = require(parent.SduiCompat)
+local fFlagSduiContentRowStateLayerModule = require(sduiSharedContent.Flags.FFlagSduiContentRowStateLayer)
 local view = foundationModule.View
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), view (ref), foundationModule (ref)
+	-- upvalues: reactModule (ref), view (ref), fFlagSduiContentRowStateLayerModule (ref), foundationModule (ref)
 	return reactModule.createElement(view, {
 		tag = if p1.tag then p1.tag else "row auto-y gap-large",
 		LayoutOrder = p1.layoutOrder,
@@ -14,7 +17,7 @@ return reactModule.memo(function(p1)
 		onActivated = p1.onActivated,
 		selection = { Selectable = false },
 		stateLayer = {
-			affordance = foundationModule.Enums.StateLayerAffordance.None
+			affordance = if fFlagSduiContentRowStateLayerModule then p1.stateLayerAffordance or foundationModule.Enums.StateLayerAffordance.None else foundationModule.Enums.StateLayerAffordance.None
 		},
 		testId = p1.testId
 	}, {

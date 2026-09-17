@@ -4,10 +4,10 @@ local foundationModule = require(parent.Foundation)
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local dialog = foundationModule.Dialog
 local orientation = foundationModule.Enums.Orientation
-local sduiDialogHeroMediaProps = game:DefineFastFlag("SduiDialogHeroMediaProps", false)
+local sduiDialogHeroMediaProps2 = game:DefineFastFlag("SduiDialogHeroMediaProps2", false)
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), buttonVariant (ref), dialog (ref), sduiDialogHeroMediaProps (ref), orientation (ref)
+	-- upvalues: reactModule (ref), buttonVariant (ref), dialog (ref), sduiDialogHeroMediaProps2 (ref), orientation (ref)
 	local bodyText = p1.bodyText or p1.bodyComponent
 	local var1 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
@@ -56,26 +56,39 @@ return reactModule.memo(function(p1)
 			inputDelay = p1.secondaryButtonInputDelay
 		})
 	end
-	return reactModule.createElement(dialog.Root, {
+	local createElement_1
+	local createElement = reactModule.createElement
+	local root = dialog.Root
+	local t = {
 		size = p1.size,
 		onClose = p1.onClose,
 		disablePortal = p1.disablePortal ~= nil or p1.disablePortal,
 		hasBackdrop = p1.hasBackdrop ~= nil or p1.hasBackdrop
-	}, {
-		DialogTitle = p1.titleText and reactModule.createElement(dialog.Title, { text = p1.titleText }) or nil,
-		DialogMedia = p1.image and reactModule.createElement(dialog.HeroMedia, {
+	}
+	local t_1 = {
+		DialogTitle = p1.titleText and reactModule.createElement(dialog.Title, { text = p1.titleText }) or nil
+	}
+	
+	if p1.image then
+		createElement_1 = reactModule.createElement
+		createElement_1 = createElement_1(dialog.HeroMedia, {
 			media = p1.image,
-			aspectRatio = p1.imageAspectRatio or 1.777777777778,
-			mediaStyle = if sduiDialogHeroMediaProps then p1.imageStyle else nil
-		}) or nil,
-		DialogContent = bodyText and (reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			BodyContent = if p1.bodyComponent then p1.bodyComponent elseif p1.bodyText then reactModule.createElement(dialog.Text, { Text = p1.bodyText }) else nil
-		}) or nil),
-		DialogActions = var3 and (reactModule.createElement(dialog.Actions, {
-			LayoutOrder = 3,
-			actions = var3,
-			label = p1.actionsLabel,
-			orientation = p1.actionsOrientation or orientation.Horizontal
-		}) or nil)
-	})
+			aspectRatio = if sduiDialogHeroMediaProps2 and p1.imageHeight ~= nil then p1.imageAspectRatio else p1.imageAspectRatio or 1.777777777778,
+			mediaStyle = if sduiDialogHeroMediaProps2 then p1.imageStyle else nil,
+			height = if sduiDialogHeroMediaProps2 then p1.imageHeight else nil,
+			scaleType = if sduiDialogHeroMediaProps2 then p1.imageScaleType else nil
+		}) or nil
+	end
+	t_1.DialogMedia = createElement_1
+	t_1.DialogContent = bodyText and (reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
+		BodyContent = if p1.bodyComponent then p1.bodyComponent elseif p1.bodyText then reactModule.createElement(dialog.Text, { Text = p1.bodyText }) else nil
+	}) or nil)
+	t_1.DialogActions = var3 and (reactModule.createElement(dialog.Actions, {
+		LayoutOrder = 3,
+		actions = var3,
+		label = p1.actionsLabel,
+		orientation = p1.actionsOrientation or orientation.Horizontal
+	}) or nil)
+	
+	return createElement(root, t, t_1)
 end)

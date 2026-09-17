@@ -1,9 +1,9 @@
 ﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local itemTypeEnumModule = require(avatarExperienceCommon.Enums.ItemTypeEnum)
+local itemTypeEnum = require(avatarExperienceCommon.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local avatarBackground = require(avatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
 
 return function(value)
-	-- upvalues: itemTypeEnumModule (ref), avatarBackground (ref)
+	-- upvalues: itemTypeEnum (ref), avatarBackground (ref)
 	local var1 = value and value.AvatarExperience
 	local avatarScene = var1 and var1.AvatarScene
 	local tryOnItems = avatarScene and (avatarScene.OutfitTryOn and avatarScene.OutfitTryOn.TryOnItems)
@@ -12,7 +12,7 @@ return function(value)
 		return nil
 	end
 	for i, v in tryOnItems do
-		if not v.isUnequipped and v.itemType == itemTypeEnumModule.Asset and v.itemSubType == avatarBackground then
+		if not v.isUnequipped and v.itemType == itemTypeEnum.Asset and v.itemSubType == avatarBackground then
 			local var2 = tonumber(v.itemId)
 			
 			if var2 then

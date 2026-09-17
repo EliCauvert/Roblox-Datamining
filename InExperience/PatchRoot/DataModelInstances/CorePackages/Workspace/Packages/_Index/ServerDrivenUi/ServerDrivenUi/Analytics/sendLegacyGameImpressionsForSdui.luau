@@ -11,12 +11,11 @@ local findAnalyticsFieldInAncestors = sduiCoreSystemModule.findAnalyticsFieldInA
 local appPage = require(parent.RobloxAppEnums).AppPage
 local _ = require(parent.DiscoveryTypes)
 local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local t = {}
 
 return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: fFlagSduiFixSearchTelemetry (ref), t (ref), cryoModule (ref), sduiParsers (ref), sduiBuilder (ref), appPage (ref), findAnalyticsFieldInAncestors (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), fFlagSduiExperienceDetailsSupport (ref), sduiParseHelpers (ref), sduiErrors (ref)
+	-- upvalues: fFlagSduiFixSearchTelemetry (ref), t (ref), cryoModule (ref), sduiParsers (ref), sduiBuilder (ref), appPage (ref), findAnalyticsFieldInAncestors (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), sduiParseHelpers (ref), sduiErrors (ref)
 	local t_1 = {}
 	local var1 = if fFlagSduiFixSearchTelemetry then 0 else nil
 	
@@ -56,7 +55,7 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 			}, p9, p6, if fFlagLuaAppAddComponentTypeToSearchImpressions then var4 or false else nil, if fFlagLuaAppAddComponentTypeToSearchImpressions then var3 else nil)
 			
 			return
-		elseif fFlagSduiExperienceDetailsSupport and (p7.appPage == appPage.ExperienceDetail or p7.appPage == appPage.GameDetail) then
+		elseif p7.appPage == appPage.ExperienceDetail or p7.appPage == appPage.GameDetail then
 			sendGameImpressions.sendFromGameDetails(p7.dependencies.eventIngest, p7.dependencies.appAnalytics, p1, t_1, tostring(p5.refId))
 			
 			return

@@ -458,7 +458,6 @@ CommonUI.Features.Label.Unchecked,Unchecked
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,Connect to
-CommonUI.Features.Labels.Retry,
 CommonUI.Features.NavBar.Build,Build
 CommonUI.Features.StudioCTA.Tooltip.Body,Download Studio for FREE!
 CommonUI.Features.StudioCTA.Tooltip.Title,Start creating on Roblox
@@ -875,6 +874,7 @@ CoreScripts.InGameMenu.GameSettings.LanguageHeader,Chat & Language
 CoreScripts.InGameMenu.GameSettings.LockedByDeveloper,Locked by Developer
 CoreScripts.InGameMenu.GameSettings.MainVolume,Main Volume
 CoreScripts.InGameMenu.GameSettings.ManualGraphicsQuality,Quality Level
+CoreScripts.InGameMenu.GameSettings.MoreSettingsAvailable,More settings are available on the Roblox app or website.
 CoreScripts.InGameMenu.GameSettings.MovementMode,Movement Mode
 CoreScripts.InGameMenu.GameSettings.Open,Open
 CoreScripts.InGameMenu.GameSettings.PlaceVersion,Place Version: {PLACE_VERSION}
@@ -2096,7 +2096,6 @@ Feature.Build.Label.Building,Building...
 Feature.Build.Label.CaptureLibrary,Capture library
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} of {MAX_SELECTIONS} selected
 Feature.Build.Label.ContentRating,Content rating
-Feature.Build.Label.Created,Created
 Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
 Feature.Build.Label.DateRange,{startDate} – {endDate}
@@ -2120,7 +2119,6 @@ Feature.Build.Label.GamePlays,Game plays
 Feature.Build.Label.GetMoreBuildUsage,Get more Build usage
 Feature.Build.Label.Hi,Hi
 Feature.Build.Label.IconThumbnails,Icon & thumbnails
-Feature.Build.Label.Images2D,2D Images
 Feature.Build.Label.InProgress,In progress
 Feature.Build.Label.InputNeeded,Input needed
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2130,7 +2128,6 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Managed pricing
 Feature.Build.Label.ManagedPricingMixed,Mixed across current products
 Feature.Build.Label.MaximizeForGamePlays,Maximize for game plays
-Feature.Build.Label.Models3D,3D Models
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,No limit
 Feature.Build.Label.NotStarted,Not started
@@ -2148,7 +2145,6 @@ Feature.Build.Label.Private,Private
 Feature.Build.Label.Public,Public
 Feature.Build.Label.PubliclyUnavailable,Publicly unavailable
 Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Ready
 Feature.Build.Label.RegionalPricing,Regional pricing
 Feature.Build.Label.ResetsDaily,Resets daily
@@ -2157,14 +2153,11 @@ Feature.Build.Label.ResetsWeekly,Resets weekly
 Feature.Build.Label.RestoredVersion,Restored {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,Search assets
 Feature.Build.Label.SearchGames,Search games
 Feature.Build.Label.SearchTasks,Search tasks
 Feature.Build.Label.SelectOption,Select an option
-Feature.Build.Label.Shared,Shared
 Feature.Build.Label.ShopButton,Shop button
 Feature.Build.Label.ShopUi,Shop UI
-Feature.Build.Label.Sounds,Sounds
 Feature.Build.Label.TargetAllRobloxPlayers,Target all Roblox players
 Feature.Build.Label.Thinking,Thinking
 Feature.Build.Label.Title,Title
@@ -2234,7 +2227,6 @@ Feature.Build.Label.UniverseNumber,Universe {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Unknown
 Feature.Build.Label.UnlimitedUsed,{USED} used • No limit
 Feature.Build.Label.UpdateTitleDesc,Update title & description
-Feature.Build.Label.Updated,Updated
 Feature.Build.Label.Usage,Usage
 Feature.Build.Label.UsageUsed,{USED} used
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2255,8 +2247,6 @@ Feature.Build.Message.AdsStatsEmpty,Boost your audience with an ad campaign and 
 Feature.Build.Message.AdsStatsEmptyFree,Boost your audience with a free ad campaign and get your game discovered
 Feature.Build.Message.AllFriendsAdded,You've invited all your friends as early testers.
 Feature.Build.Message.AnswerBuildQuestion,Answer Build's question below.
-Feature.Build.Message.AssetDetailsUnavailable,Asset details are unavailable.
-Feature.Build.Message.AssetsLoadFailed,Unable to load assets.
 Feature.Build.Message.AudienceIneligible,Not eligible for this audience
 Feature.Build.Message.BuildAccountBlocked,Build isn't available for your account right now.
 Feature.Build.Message.BuildBusy,Build is busy. Wait a minute and try again.
@@ -2288,7 +2278,6 @@ Feature.Build.Message.InvitesLoadFailed,Couldn't load invites
 Feature.Build.Message.LimitBelowSpend,Limit can't be below the {ALREADY_SPENT} Robux already spent today.
 Feature.Build.Message.LinkCopied,Link copied to clipboard.
 Feature.Build.Message.LoadingVersions,Loading version history...
-Feature.Build.Message.NoAssetsFound,No assets found.
 Feature.Build.Message.NoCapturesAvailable,No captures available
 Feature.Build.Message.NoDescriptionProvided,No description provided.
 Feature.Build.Message.NoFriendsToAdd,You don't have any friends to invite yet. Find people to connect with on Roblox first.
@@ -2343,7 +2332,6 @@ Feature.Build.Title.AddImages,Add images
 Feature.Build.Title.AdsStatsEmpty,Start a campaign
 Feature.Build.Title.AdsStatsEmptyFree,Start your first campaign
 Feature.Build.Title.ArchiveThisGame,Archive this game?
-Feature.Build.Title.AssetLibrary,Library
 Feature.Build.Title.Audience,Audience
 Feature.Build.Title.BuildQuestion,Build has a question
 Feature.Build.Title.BuildQuestions,Build has some questions
@@ -3065,6 +3053,7 @@ Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,Play Demo
+Feature.ExperienceDetails.PlayButtonText.Playtest,
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,Unlock
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -3312,7 +3301,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Remove trusted friend
 Feature.Friends.TrustedFriend.AddBack.Header,Trusted friend request
 Feature.Friends.TrustedFriend.Info.Modal.Header,New trusted friend
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Add trusted friend
-Feature.Friends.TrustedFriend.Label.Title,Trusted friend
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} is a trusted friend now
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Trusted friend removed
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Trusted friend request sent
@@ -3347,7 +3335,7 @@ Feature.GameDetails.Label.SomethingElse,Something else
 Feature.GameDetails.Label.Store,Store
 Feature.GameDetails.Label.TellUsMorePlaceholder,Tell us more
 Feature.GameDetails.Label.TooRepetitive,Too repetitive
-Feature.GameDetails.Label.Updated,
+Feature.GameDetails.Label.Updated,Updated
 Feature.GameDetails.Label.VoiceChat,
 Feature.GameDetails.Label.WhyThisAd,Why this ad?
 Feature.GameDetails.Label.Yes,
@@ -3550,7 +3538,9 @@ Feature.Moments.Action.AddVoice,Add Voice
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
+Feature.Moments.Action.CreateVoiceover,Create voiceover
 Feature.Moments.Action.Delete,
+Feature.Moments.Action.DiscardChange,Delete change
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Expand
 Feature.Moments.Action.GenerateText,Generate Text
@@ -3559,6 +3549,7 @@ Feature.Moments.Action.GenerateTextFeedbackPolicy,Inappropriate or Violative
 Feature.Moments.Action.Hide,Hide details
 Feature.Moments.Action.HowToCapture,How to Capture
 Feature.Moments.Action.Join,
+Feature.Moments.Action.KeepEditing,Continue editing
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Minimize
 Feature.Moments.Action.Ok,
@@ -3568,9 +3559,11 @@ Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
 Feature.Moments.Action.Return,Return to Gallery
 Feature.Moments.Action.ReturnToEditing,Return to Editing
+Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Show details
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Trim Video
+Feature.Moments.Action.TryAgain,Try again
 Feature.Moments.Description.CommunityStandards,Check the Community Standards for more info on what you can and can't say.
 Feature.Moments.Description.EmptyCapturesLibrary,This is where your Captures will appear.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI-generated. Review before posting — you're responsible for what's published.
@@ -3590,7 +3583,10 @@ Feature.Moments.Label.AttemptingJoinExperience,Attempting to join {placeName}. T
 Feature.Moments.Label.CaptureLibrary,Your Capture library
 Feature.Moments.Label.DeleteMomentBody,You can't recover a Moment once it's gone.
 Feature.Moments.Label.DeleteMomentTitle,Delete Moment?
+Feature.Moments.Label.DeleteVoiceoverBody,This clears your text and voiceover. You can start over anytime.
+Feature.Moments.Label.DeleteVoiceoverTitle,Delete voiceover?
 Feature.Moments.Label.Error,
+Feature.Moments.Label.ExceedsCharacterLimit,Exceeds character limit
 Feature.Moments.Label.FeedEndBody,Check back later or create your own Moment.
 Feature.Moments.Label.FeedEndTitle,You're all caught up
 Feature.Moments.Label.FeedFailedToLoad,Feed failed to load
@@ -3641,6 +3637,15 @@ Feature.Moments.Label.Tone.Funny,Funny
 Feature.Moments.Label.Tone.Hype,Hype
 Feature.Moments.Label.Tone.Neutral,Neutral
 Feature.Moments.Label.Videos,
+Feature.Moments.Label.VoiceCoachmarkBody,Type a script for video narration
+Feature.Moments.Label.VoiceCoachmarkTitle,Create a voiceover
+Feature.Moments.Label.VoiceGenerating,Creating your voiceover...
+Feature.Moments.Label.VoiceGenerationFailedBody,Voiceover generation failed.
+Feature.Moments.Label.VoiceHelperDefault,Voice trimmed to video length
+Feature.Moments.Label.VoiceLimitReachedBody,"Wait a minute, then try again"
+Feature.Moments.Label.VoiceModerationError,Your script must follow the safety rules
+Feature.Moments.Label.VoicePlaceholder,Type your voiceover script. {maxCount} character limit
+Feature.Moments.Label.VoiceTimeoutBody,Voiceover generation timed out.
 Feature.Moments.Title.GenerateTextFeedbackReason,What went wrong?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
@@ -4544,7 +4549,7 @@ Features.Transfers.Notification.ReceiveSuccess,You have already accepted the Rob
 Features.Transfers.RobuxTransfer.Action.Edit,
 Features.Transfers.RobuxTransfer.Action.Next,
 Features.Transfers.RobuxTransfer.Action.Send,
-Features.Transfers.RobuxTransfer.Action.TryAgain,Try again
+Features.Transfers.RobuxTransfer.Action.TryAgain,
 Features.Transfers.RobuxTransfer.Disclaimer.AgeEstimationTransfer,"You need an age check or parental consent to send Robux. Once you send, you cannot cancel."
 Features.Transfers.RobuxTransfer.Error.ReceiverNotAllowed,@{username} cannot receive Robux at the moment.
 Features.Transfers.RobuxTransfer.Heading.SendRobux,Send Robux

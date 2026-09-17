@@ -4,22 +4,21 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local infoTable = require(parent.AppBlox).InfoTable
 local view = require(parent.Foundation).View
 local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagSduiExperienceDetailsSupport (ref), getSduiComponentWrapper (ref), reactModule (ref), view (ref), infoTable (ref)
+	-- upvalues: getSduiComponentWrapper (ref), reactModule (ref), view (ref), infoTable (ref)
 	local layoutOrder = p1.layoutOrder
 	local t = {}
 	local var1 = if p1.numColumns and p1.numColumns > 0 then p1.numColumns else 1
 	local itemsCount = #p1.items
-	local var2 = if fFlagSduiExperienceDetailsSupport then math.ceil(itemsCount / var1) else nil
+	local ceiled = math.ceil(itemsCount / var1)
 	
 	for i, v in p1.items do
-		local var3
-		local var4 = getSduiComponentWrapper(v)
-		local var5 = if fFlagSduiExperienceDetailsSupport then ((i - 1) % var2 + 1 - 1) * var1 + (math.floor((i - 1) / var2) + 1) else nil
+		local var2
+		local var3 = getSduiComponentWrapper(v)
+		local var4 = ((i - 1) % ceiled + 1 - 1) * var1 + (math.floor((i - 1) / ceiled) + 1)
 		local createElement = reactModule.createElement
-		local var6 = var4
+		local var5 = var3
 		local t_1 = {
 			componentConfig = v,
 			sduiContext = p1.sduiContext,
@@ -28,17 +27,17 @@ return reactModule.memo(function(p1)
 		local t_2 = { numColumns = p1.numColumns }
 		
 		if var1 == 1 then
-			var3 = i == itemsCount
-			var3 = nil
+			var2 = i == itemsCount
+			var2 = nil
 		else
-			var3 = nil
+			var2 = nil
 		end
-		t_2.isLastInSingleColumn = var3
-		t_2.selectionOrder = var5
+		t_2.isLastInSingleColumn = var2
+		t_2.selectionOrder = var4
 		t_1.extraLocalProps = t_2
-		t[i] = createElement(var6, t_1)
+		t[i] = createElement(var5, t_1)
 	end
-	return if fFlagSduiExperienceDetailsSupport then reactModule.createElement(view, {
+	return reactModule.createElement(view, {
 		tag = if p1.tag then { [p1.tag] = true, ["col size-full-0 auto-y"] = true } else { ["col size-full-0 auto-y"] = true },
 		LayoutOrder = layoutOrder
 	}, {
@@ -49,10 +48,5 @@ return reactModule.memo(function(p1)
 			gridTag = p1.gridTag,
 			items = t
 		})
-	}) else reactModule.createElement(infoTable, {
-		LayoutOrder = layoutOrder,
-		numColumns = p1.numColumns,
-		gridTag = p1.gridTag,
-		items = t
 	})
 end)

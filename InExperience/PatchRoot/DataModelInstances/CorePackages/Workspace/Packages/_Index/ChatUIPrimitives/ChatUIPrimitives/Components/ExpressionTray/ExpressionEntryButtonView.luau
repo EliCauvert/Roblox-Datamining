@@ -11,7 +11,8 @@ return reactModule.memo(function(p1)
 			onActivated = p1.onActivated,
 			text = p1.text or "",
 			variant = foundationModule.Enums.ButtonVariant.Standard,
-			width = UDim.new(1, 0)
+			width = UDim.new(1, 0),
+			ref = p1.buttonRef
 		})
 	end
 	local icon = p1.icon or t
@@ -22,6 +23,7 @@ return reactModule.memo(function(p1)
 		icon = if p1.isActive then { variant = "Filled", name = icon.name } else icon,
 		variant = foundationModule.Enums.ButtonVariant.Standard,
 		size = if p1.size ~= nil then foundationModule.Enums.InputSize.Small else p1.size,
-		onActivated = p1.onActivated
+		onActivated = p1.onActivated,
+		ref = p1.buttonRef
 	})
 end)

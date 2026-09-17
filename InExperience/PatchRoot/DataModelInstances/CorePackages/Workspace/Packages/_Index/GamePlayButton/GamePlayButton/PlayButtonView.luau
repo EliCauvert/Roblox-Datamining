@@ -28,7 +28,6 @@ local fFlagLuaAppPlayButtonLoadingSkeleton = sharedFlagsModule.FFlagLuaAppPlayBu
 local fFlagLuaAppUnifiedPlayButtonSquadMenuDirection = sharedFlagsModule.FFlagLuaAppUnifiedPlayButtonSquadMenuDirection
 local getFFlagUIBloxUseFoundationButton = sharedFlagsModule.UIBlox.GetFFlagUIBloxUseFoundationButton
 local fFlagLuaAppPlayButtonOptOutFoundationButton = sharedFlagsModule.FFlagLuaAppPlayButtonOptOutFoundationButton
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
 local fFlagLuaAppTextOnlyPlayButton = sharedFlagsModule.FFlagLuaAppTextOnlyPlayButton
 local fFlagLuaAppIconTextPlayButton = sharedFlagsModule.FFlagLuaAppIconTextPlayButton
@@ -45,7 +44,7 @@ local var2 = function() end
 local buttonHeightSizeKeyByInputSizeModule = require(script.Parent.ButtonHeightSizeKeyByInputSize)
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagEnableGameJoinEarlyAccess (ref), reactModule (ref), earlyAccessPlusTooltipModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), collectionService (ref), fFlagSduiExperienceDetailsSupport (ref), inputSize (ref), fFlagLuaAppUseTokenHeightForPlayButton (ref), buttonHeightSizeKeyByInputSizeModule (ref), fillBehavior (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingSkeleton (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), skeleton (ref), radius (ref), buttonVariant (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppJoinTextPlayableButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), var1 (ref), fFlagLuaAppIconPlayButton (ref), getFFlagIsSquadEnabled (ref), play (ref), fFlagLuaAppPlayButtonPrivatePT (ref), comboButton (ref), fFlagLuaAppUnifiedPlayButtonSquadMenuDirection (ref), menuDirection (ref), truncationExpand (ref), truncationCollapse (ref), buttonType (ref), images (ref), button (ref), var2 (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref), iconButton (ref), button_1 (ref)
+	-- upvalues: fFlagEnableGameJoinEarlyAccess (ref), reactModule (ref), earlyAccessPlusTooltipModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), collectionService (ref), inputSize (ref), fFlagLuaAppUseTokenHeightForPlayButton (ref), buttonHeightSizeKeyByInputSizeModule (ref), fillBehavior (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingSkeleton (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), skeleton (ref), radius (ref), buttonVariant (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppJoinTextPlayableButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), var1 (ref), fFlagLuaAppIconPlayButton (ref), getFFlagIsSquadEnabled (ref), play (ref), fFlagLuaAppPlayButtonPrivatePT (ref), comboButton (ref), fFlagLuaAppUnifiedPlayButtonSquadMenuDirection (ref), menuDirection (ref), truncationExpand (ref), truncationCollapse (ref), buttonType (ref), images (ref), button (ref), var2 (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref), iconButton (ref), button_1 (ref)
 	local tokens = p1.tokens
 	local playButtonState = p1.playButtonState
 	local localized = p1.localized
@@ -84,7 +83,7 @@ return reactModule.memo(function(p1)
 		local playButtonCaptureRef = p1.playButtonCaptureRef
 		local var10 = reactModule.useRef(nil)
 		var9 = reactModule.useCallback(function(p2)
-			-- upvalues: var10 (ref), tag (ref), collectionService (copy), fFlagSduiExperienceDetailsSupport (copy), playButtonCaptureRef (ref)
+			-- upvalues: var10 (ref), tag (ref), collectionService (copy), playButtonCaptureRef (ref)
 			local current = var10.current
 			
 			if current ~= nil and current ~= p2 and tag ~= nil then
@@ -92,7 +91,7 @@ return reactModule.memo(function(p1)
 			end
 			var10.current = p2
 			
-			if fFlagSduiExperienceDetailsSupport and tag ~= nil and p2 ~= nil then
+			if tag ~= nil and p2 ~= nil then
 				collectionService:AddTag(p2, tag)
 			end
 			if type(playButtonCaptureRef) == "function" then
@@ -313,7 +312,7 @@ return reactModule.memo(function(p1)
 		AutomaticSize = if fFlagLuaAppUseTokenHeightForPlayButton then if var16 == "Fill" then nil else Enum.AutomaticSize.X elseif var16 == "Fill" then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		[reactModule.Tag] = if fFlagLuaAppMediaGalleryGamepadSupport then nil elseif fFlagSduiExperienceDetailsSupport then p1.tag else nil
+		[reactModule.Tag] = if fFlagLuaAppMediaGalleryGamepadSupport then nil else p1.tag
 	}, {
 		LoadingSkeleton = if playButtonState == playButtonStatesModule.Loading then textButton else nil,
 		PlayButton = var23,

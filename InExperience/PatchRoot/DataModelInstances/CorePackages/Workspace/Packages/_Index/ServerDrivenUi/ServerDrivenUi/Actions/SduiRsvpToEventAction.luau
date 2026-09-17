@@ -3,7 +3,6 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local dataHydrationModule = require(parent.DataHydration)
 local foundationModule = require(parent.Foundation)
 local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sharedFlagsModule = require(parent.SharedFlags)
 local virtualEventsModule = require(parent.VirtualEvents)
 local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
 local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
@@ -11,8 +10,6 @@ local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local getActionTelemetryFieldValue = sduiCoreSystemModule.getActionTelemetryFieldValue
 local getExperienceEventInfoStore = dataHydrationModule.ExperienceEvents.getExperienceEventInfoStore
 local getSduiPageEntrySnackbarStore = sduiSharedUtilitiesModule.getSduiPageEntrySnackbarStore
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
-local fFlagSduiEventDetailsSupport = sharedFlagsModule.FFlagSduiEventDetailsSupport
 
 local function showRsvpSuccessToast(p1, p2, p3, p4)
 	-- upvalues: getSduiPageEntrySnackbarStore (ref), foundationModule (ref)
@@ -23,7 +20,7 @@ local function showRsvpSuccessToast(p1, p2, p3, p4)
 end
 
 return function(p1, p2, p3, _)
-	-- upvalues: sduiErrorType (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), virtualEventsModule (ref), getActionTelemetryFieldValue (ref), getExperienceEventInfoStore (ref), setCentralOverlay (ref), centralOverlayType (ref), showRsvpSuccessToast (ref)
+	-- upvalues: sduiErrorType (ref), virtualEventsModule (ref), getActionTelemetryFieldValue (ref), getExperienceEventInfoStore (ref), setCentralOverlay (ref), centralOverlayType (ref), showRsvpSuccessToast (ref)
 	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
@@ -44,19 +41,16 @@ return function(p1, p2, p3, _)
 		return
 	end
 	local userRsvp = var1.userRsvp
-	
-	if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then
-		virtualEventsModule.fireVirtualEventRSVP({
-			virtualEventId = tostring(eventId),
-			universeId = tostring(getActionTelemetryFieldValue(p1, p2, "universeId", "")),
-			channel = tostring(getActionTelemetryFieldValue(p1, p2, "channel", "")),
-			status = if userRsvp then "going" else "notGoing"
-		})
-	end
+	virtualEventsModule.fireVirtualEventRSVP({
+		virtualEventId = tostring(eventId),
+		universeId = tostring(getActionTelemetryFieldValue(p1, p2, "universeId", "")),
+		channel = tostring(getActionTelemetryFieldValue(p1, p2, "channel", "")),
+		status = if userRsvp then "going" else "notGoing"
+	})
 	local var2 = getExperienceEventInfoStore(false)
 	local var3 = var2.patchRsvpStatus(eventId, userRsvp)
 	
-	if (fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport) and var3 then
+	if var3 then
 		local entryPointKey = var1.entryPointKey or p3.configKey
 		var3:andThen(function(p4)
 			-- upvalues: userRsvp (ref), entryPointKey (ref), var1 (ref), p3 (ref), setCentralOverlay (copy), centralOverlayType (copy), var2 (ref), eventId (ref), showRsvpSuccessToast (copy)

@@ -14,7 +14,6 @@ local productKind = purchasePromptLiteModule.Enums.ProductKind
 local sduiReportGamePlayIntent = require(parent.SduiSharedContent).sduiReportGamePlayIntent
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiDevStoreSeeAllSupport = sharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagEnableHomeGameItemOwnershipUpdate = sharedFlagsModule.FFlagEnableHomeGameItemOwnershipUpdate
 local fFlagEnableSearchGameItemOwnershipUpdate = sharedFlagsModule.FFlagEnableSearchGameItemOwnershipUpdate
 local fFlagEnableLaunchAfterPurchase = sharedFlagsModule.FFlagEnableLaunchAfterPurchase
@@ -168,7 +167,7 @@ local function buildPurchasePayload(p2)
 end
 
 return function(p2, p3, p4)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiDevStoreSeeAllSupport (ref), normalizeProductPayload (ref), enablePurchasePayloadForSduiPurchase (ref), t (ref), buildPurchasePayload (ref), purchasePromptLiteModule (ref), timeToInteractiveTracker (ref), setCentralOverlay (ref), centralOverlayType (ref), buildOnPurchaseSuccess (ref), promiseModule (ref), mapPriceDiscountDetails (ref), closeCentralOverlay (ref), enableJoinAfterBuyFromEDP (ref), productPurchaseSurface (ref), experienceService (ref), fFlagEnableLaunchAfterPurchase (ref), sduiCoreSystemModule (ref), sduiReportGamePlayIntent (ref)
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), normalizeProductPayload (ref), enablePurchasePayloadForSduiPurchase (ref), t (ref), buildPurchasePayload (ref), purchasePromptLiteModule (ref), timeToInteractiveTracker (ref), setCentralOverlay (ref), centralOverlayType (ref), buildOnPurchaseSuccess (ref), promiseModule (ref), mapPriceDiscountDetails (ref), closeCentralOverlay (ref), enableJoinAfterBuyFromEDP (ref), productPurchaseSurface (ref), experienceService (ref), fFlagEnableLaunchAfterPurchase (ref), sduiCoreSystemModule (ref), sduiReportGamePlayIntent (ref)
 	local logger = p4.dependencies.logger
 	local appPage = p4.appPage
 	local dispatch = p4.dependencies.dispatch
@@ -198,10 +197,7 @@ return function(p2, p3, p4)
 	end
 	local kind = productPayload.kind
 	local id = productPayload.id or productPayload.subscriptionId
-	
-	if fFlagSduiExperienceDetailsSupport or fFlagSduiDevStoreSeeAllSupport then
-		normalizeProductPayload(productPayload, kind)
-	end
+	normalizeProductPayload(productPayload, kind)
 	local surface = purchaseAnalyticsMetadata and purchaseAnalyticsMetadata.surface
 	
 	if enablePurchasePayloadForSduiPurchase and surface ~= nil then

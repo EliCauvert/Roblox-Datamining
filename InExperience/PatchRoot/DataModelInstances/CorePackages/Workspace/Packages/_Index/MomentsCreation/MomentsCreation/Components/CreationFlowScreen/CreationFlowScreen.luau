@@ -40,7 +40,11 @@ local getFFlagMomentsCreationBlockBackgroundInteractionModule = require(momentsC
 local getFFlagMomentsStickerButton = momentsCommonModule.Flags.GetFFlagMomentsStickerButton
 local getFFlagMomentsCreationTextOverlayResolutionScaleModule = require(momentsCreation.Flags.GetFFlagMomentsCreationTextOverlayResolutionScale)
 local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
+local getFFlagMomentsTTSCoachmarkModule = require(momentsCreation.Flags.GetFFlagMomentsTTSCoachmark)
 local getFFlagMomentsCreationCloseButtonZIndexFixModule = require(momentsCreation.Flags.GetFFlagMomentsCreationCloseButtonZIndexFix)
+local fFlagMomentsCreationToolsIxpEnabledModule = require(momentsCreation.Flags.FFlagMomentsCreationToolsIxpEnabled)
+local fStringMomentsCreationToolsIxpLayerModule = require(momentsCreation.Flags.FStringMomentsCreationToolsIxpLayer)
+local logMomentsLayerExposure = momentsCommonModule.Utils.logMomentsLayerExposure
 local stepStubModule = require(script.Parent.StepStub)
 local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
 local dialogTypeModule = require(momentsCreation.Enums.DialogType)
@@ -87,7 +91,7 @@ local function GallerySourceView(p1)
 end
 
 local function CreationFlowContent(p1)
-	-- upvalues: useCreationController (ref), getFFlagMomentsCreationSaveDraft (ref), useDraftRestoreEffectModule (ref), useDraftSaveEffectModule (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), useToggleState (ref), useAutoDismissStateModule (ref), useSignalState (ref), useDescriptionKeyboardInsetModule (ref), getFFlagMomentsDescriptionKeyboardAvoidanceModule (ref), creationFlowStateModule (ref), getFFlagMomentsTTSAudioOverlayModule (ref), useCallback (ref), sessionManager (ref), funnelEventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), dialogTypeModule (ref), useRef (ref), useEffect (ref), getFFlagMomentsStickerButton (ref), reactModule (ref), exitConfirmationDialogModule (ref), textFilteredDialogModule (ref), generateTextOptionsDialogModule (ref), voiceoverErrorDialogModule (ref), voiceoverDeleteConfirmDialogModule (ref), stepStubModule (ref), useMemo (ref), signalsModule (ref), getFFlagMomentsCreationBlockBackgroundInteractionModule (ref), view (ref), t (ref), formFactor (ref), noopActivated (ref), voiceBackControlsModule (ref), getFFlagMomentsCreationCloseButtonZIndexFixModule (ref), icon (ref), foundationModule (ref), captureViewModule (ref), getFFlagMomentsCreationTextOverlayResolutionScaleModule (ref), gradientBackdrop (ref), musicChipModule (ref), playbackControlsModule (ref), editCTABarModule (ref), getFFlagEnableMomentTextGeneration (ref), GallerySourceView (ref), galleryViewModule (ref), var2 (ref), previewViewModule (ref), descriptionViewModule (ref), creationMediaProviderModule (ref)
+	-- upvalues: useCreationController (ref), getFFlagMomentsCreationSaveDraft (ref), useDraftRestoreEffectModule (ref), useDraftSaveEffectModule (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), useToggleState (ref), useAutoDismissStateModule (ref), useSignalState (ref), useDescriptionKeyboardInsetModule (ref), getFFlagMomentsDescriptionKeyboardAvoidanceModule (ref), creationFlowStateModule (ref), getFFlagMomentsTTSAudioOverlayModule (ref), useCallback (ref), sessionManager (ref), funnelEventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), dialogTypeModule (ref), useRef (ref), useEffect (ref), getFFlagMomentsStickerButton (ref), fFlagMomentsCreationToolsIxpEnabledModule (ref), logMomentsLayerExposure (ref), fStringMomentsCreationToolsIxpLayerModule (ref), reactModule (ref), exitConfirmationDialogModule (ref), textFilteredDialogModule (ref), generateTextOptionsDialogModule (ref), voiceoverErrorDialogModule (ref), voiceoverDeleteConfirmDialogModule (ref), stepStubModule (ref), useMemo (ref), signalsModule (ref), getFFlagMomentsCreationBlockBackgroundInteractionModule (ref), view (ref), t (ref), formFactor (ref), noopActivated (ref), voiceBackControlsModule (ref), getFFlagMomentsCreationCloseButtonZIndexFixModule (ref), icon (ref), foundationModule (ref), captureViewModule (ref), getFFlagMomentsCreationTextOverlayResolutionScaleModule (ref), gradientBackdrop (ref), musicChipModule (ref), playbackControlsModule (ref), editCTABarModule (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSCoachmarkModule (ref), GallerySourceView (ref), galleryViewModule (ref), var2 (ref), previewViewModule (ref), descriptionViewModule (ref), creationMediaProviderModule (ref)
 	local var3 = useCreationController()
 	
 	if getFFlagMomentsCreationSaveDraft() then
@@ -187,7 +191,7 @@ local function CreationFlowContent(p1)
 	end, { var3, var12 })
 	local var29 = useRef(nil)
 	useEffect(function()
-		-- upvalues: var29 (ref), var11 (ref), creationFlowStateModule (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), getFFlagMomentsStickerButton (copy), getFFlagMomentsTTSAudioOverlayModule (copy)
+		-- upvalues: var29 (ref), var11 (ref), creationFlowStateModule (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), getFFlagMomentsStickerButton (copy), getFFlagMomentsTTSAudioOverlayModule (copy), fFlagMomentsCreationToolsIxpEnabledModule (copy), logMomentsLayerExposure (copy), fStringMomentsCreationToolsIxpLayerModule (copy)
 		local current = var29.current
 		var29.current = var11
 		
@@ -196,12 +200,14 @@ local function CreationFlowContent(p1)
 			
 			return
 		elseif var11 == creationFlowStateModule.Preview then
-			if if current ~= creationFlowStateModule.Trimming then if current ~= creationFlowStateModule.Music then if current ~= creationFlowStateModule.TextOverlay then if getFFlagMomentsStickerButton() then true else getFFlagMomentsTTSAudioOverlayModule and current == creationFlowStateModule.Voice else true else true else true then
-				return
-			else
+			if not (if current ~= creationFlowStateModule.Trimming then if current ~= creationFlowStateModule.Music then if current ~= creationFlowStateModule.TextOverlay then if getFFlagMomentsStickerButton() then true else getFFlagMomentsTTSAudioOverlayModule and current == creationFlowStateModule.Voice else true else true else true) then
 				fireAnalyticsEventModule(eventNames.EditingFlowEditPageAppear, withCreationSession(makeCreationEventFieldsModule.makeStepField(eventNames.EditingFlowEditPageAppear)))
 				
-				return
+				if fFlagMomentsCreationToolsIxpEnabledModule then
+					logMomentsLayerExposure(fStringMomentsCreationToolsIxpLayerModule)
+					
+					return
+				end
 			end
 		elseif var11 == creationFlowStateModule.Description then
 			fireAnalyticsEventModule(eventNames.EditingFlowPreviewPageAppear, withCreationSession(makeCreationEventFieldsModule.makeStepField(eventNames.EditingFlowPreviewPageAppear)))
@@ -427,11 +433,7 @@ local function CreationFlowContent(p1)
 			isLoadingMap = if var17 then { generateText = true } else nil,
 			isDisabledMap = if getFFlagEnableMomentTextGeneration() and var17 then { text = true } else nil,
 			onDisabledToolActivated = var3.onDisabledToolActivated,
-			coachmark = if getFFlagMomentsTTSAudioOverlayModule then {
-				kind = "voice",
-				title = "Narrate the video",
-				text = "Use text to speech to tell your story along with the video"
-			} else nil
+			coachmark = if getFFlagMomentsTTSAudioOverlayModule and getFFlagMomentsTTSCoachmarkModule() then require(script.Parent.makeVoiceCoachmarkConfig)(getFFlagMomentsTTSAudioOverlayModule, getFFlagMomentsTTSCoachmarkModule()) else nil
 		})
 	else
 		createElement_6 = nil

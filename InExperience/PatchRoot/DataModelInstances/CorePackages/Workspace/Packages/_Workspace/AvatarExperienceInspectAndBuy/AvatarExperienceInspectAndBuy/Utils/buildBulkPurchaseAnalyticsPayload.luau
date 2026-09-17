@@ -1,6 +1,6 @@
 ﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
 local _ = require(avatarExperienceInspectAndBuy.Types)
-local itemTypeEnum = require(avatarExperienceInspectAndBuy.Parent.AXCommon).Enums.ItemTypeEnum
+local itemTypeEnum = require(avatarExperienceInspectAndBuy.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local _ = require(avatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
 local convertAssetInfoToItemDataModule = require(avatarExperienceInspectAndBuy.Utils.convertAssetInfoToItemData)
 local convertBundleInfoToItemDataModule = require(avatarExperienceInspectAndBuy.Utils.convertBundleInfoToItemData)

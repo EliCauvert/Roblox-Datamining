@@ -12,12 +12,10 @@ local requestFavoriteUpdateModule = require(script.Parent.requestFavoriteUpdate)
 local signalsModule = require(parent.Signals)
 local favoritesUrlBuilderModule = require(script.Parent.FavoritesUrlBuilder)
 local _ = require(parent.LuauPolyfill)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppDataHydrationUpdateItem = sharedFlagsModule.FFlagLuaAppDataHydrationUpdateItem
-local fFlagSduiFavoritesHydrationStructured = sharedFlagsModule.FFlagSduiFavoritesHydrationStructured
+local fFlagLuaAppDataHydrationUpdateItem = require(parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
 
 return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), favoritesUrlBuilderModule (ref), fetchFavoriteModule (ref), favoritesStoreTypesModule (ref), discoveryEventErrorLogger (ref), fFlagSduiFavoritesHydrationStructured (ref), signalsModule (ref), requestFavoriteUpdateModule (ref), fFlagLuaAppDataHydrationUpdateItem (ref)
+	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), favoritesUrlBuilderModule (ref), fetchFavoriteModule (ref), favoritesStoreTypesModule (ref), discoveryEventErrorLogger (ref), signalsModule (ref), requestFavoriteUpdateModule (ref), fFlagLuaAppDataHydrationUpdateItem (ref)
 	local var1 = createDataCacheModule()
 	local var2 = createDataResolverModule({
 		supportsMultiGet = false,
@@ -27,16 +25,16 @@ return function()
 			logResponseError(favoritesUrlBuilderModule.FAVORITE_URL, p1)
 		end,
 		fetchFn = function(p1, _)
-			-- upvalues: fetchFavoriteModule (copy), favoritesStoreTypesModule (copy), discoveryEventErrorLogger (copy), fFlagSduiFavoritesHydrationStructured (copy)
+			-- upvalues: fetchFavoriteModule (copy), favoritesStoreTypesModule (copy), discoveryEventErrorLogger (copy)
 			return fetchFavoriteModule(p1):andThen(function(p2)
-				-- upvalues: favoritesStoreTypesModule (copy), discoveryEventErrorLogger (copy), p1 (ref), fFlagSduiFavoritesHydrationStructured (copy)
+				-- upvalues: favoritesStoreTypesModule (copy), discoveryEventErrorLogger (copy), p1 (ref)
 				local responseBody = p2.responseBody
 				
 				if not favoritesStoreTypesModule.favoriteResponseValidator(responseBody) then
 					discoveryEventErrorLogger.reportError("createFavoritesStore", "Invalid favorite response", { universeId = p1, responseBody = responseBody })
 					error({ StatusCode = p2.responseCode })
 				end
-				return if fFlagSduiFavoritesHydrationStructured then { isFavorited = responseBody.isFavorited } else responseBody.isFavorited
+				return { isFavorited = responseBody.isFavorited }
 			end)
 		end
 	})
@@ -49,15 +47,10 @@ return function()
 		getAndFetchFavorite = var2.getAndFetchItem,
 		getAndFetchFavorites = var2.getAndFetchItems,
 		updateFavorite = function(p1, p2)
-			-- upvalues: signalsModule (copy), var1 (ref), fFlagSduiFavoritesHydrationStructured (copy), requestFavoriteUpdateModule (copy), discoveryEventErrorLogger (copy), logResponseError (copy), favoritesUrlBuilderModule (copy)
+			-- upvalues: signalsModule (copy), var1 (ref), requestFavoriteUpdateModule (copy), discoveryEventErrorLogger (copy), logResponseError (copy), favoritesUrlBuilderModule (copy)
 			local var3, var4 = signalsModule.createSignal(nil)
 			local var5 = var1.getItem(p1).data(false)
-			
-			if fFlagSduiFavoritesHydrationStructured then
-				var1.updateItem(p1, { isFavorited = p2 })
-			else
-				var1.updateItem(p1, p2)
-			end
+			var1.updateItem(p1, { isFavorited = p2 })
 			requestFavoriteUpdateModule(p1, p2):andThen(function(_)
 				-- upvalues: var4 (ref), p2 (ref)
 				var4({ type = "success", isFavorited = p2 })
@@ -77,7 +70,7 @@ return function()
 			return var3
 		end,
 		updateItem = if fFlagLuaAppDataHydrationUpdateItem then var1.updateItem else nil,
-		updateItems = if fFlagSduiFavoritesHydrationStructured then var1.updateItems else nil,
+		updateItems = var1.updateItems,
 		clear = function()
 			-- upvalues: var1 (ref), var2 (ref)
 			var1.clear()

@@ -9,6 +9,7 @@ local iosAuthServiceLoginThrottlingHundredthsPercent = game:DefineFastInt("IosAu
 local iosAuthServiceHealthCounterThrottlingHundredthsPercent = game:DefineFastInt("IosAuthServiceHealthCounterThrottlingHundredthsPercent", 0)
 local luaLogoutThrottlingHundredthsPercent = game:DefineFastInt("LuaLogoutThrottlingHundredthsPercent", 0)
 local keystoreTelemetryThrottlingHundredthsPercent = game:DefineFastInt("KeystoreTelemetryThrottlingHundredthsPercent", 0)
+local timeToLoginThrottlingHundredthsPercent = game:DefineFastInt("TimeToLoginThrottlingHundredthsPercent", 0)
 local var1 = if game:DefineFastFlag("FixIosAuthServiceCredentialSheetBackends", false) then { loggingProtocolModule.TelemetryBackends.Counter } else {
 	loggingProtocolModule.TelemetryBackends.Counter,
 	loggingProtocolModule.TelemetryBackends.EventIngest
@@ -447,5 +448,21 @@ return {
 		backends = { loggingProtocolModule.TelemetryBackends.Counter },
 		throttlingPercentage = iosAuthServiceHealthCounterThrottlingHundredthsPercent,
 		lastUpdated = { 26, 6, 24 }
+	},
+	TimeToLoginStatConfig = {
+		eventName = "luaTimeToLogin",
+		description = "Time from credential submission until the Home page becomes interactive, in milliseconds. Tagged with twoStepVerification so attempts that included a human 2SV step can be excluded from latency alerting.",
+		links = "https://roblox.atlassian.net/browse/AA-7175",
+		backends = { loggingProtocolModule.TelemetryBackends.Stats },
+		throttlingPercentage = timeToLoginThrottlingHundredthsPercent,
+		lastUpdated = { 26, 9, 15 }
+	},
+	TimeToLoginInvalidDurationConfig = {
+		eventName = "luaTimeToLoginInvalidDuration",
+		description = "Report when a time-to-login measurement is discarded because the elapsed duration was negative or older than the staleness bound.",
+		links = "https://roblox.atlassian.net/browse/AA-7175",
+		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = timeToLoginThrottlingHundredthsPercent,
+		lastUpdated = { 26, 9, 15 }
 	}
 }

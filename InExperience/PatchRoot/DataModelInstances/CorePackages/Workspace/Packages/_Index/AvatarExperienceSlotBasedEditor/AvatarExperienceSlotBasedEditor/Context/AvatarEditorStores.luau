@@ -1,3 +1,3 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
+﻿local _ = require(script.Parent.Parent.Stores.createAvatarEditorStores)
 
-return require(parent.React).createContext(if require(parent.AvatarExperienceFlags).FFlagAXAvatarEditorStoresContext then require(script.Parent.Parent.Stores.createAvatarEditorStores)() else nil)
+return require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.React).createContext(nil)

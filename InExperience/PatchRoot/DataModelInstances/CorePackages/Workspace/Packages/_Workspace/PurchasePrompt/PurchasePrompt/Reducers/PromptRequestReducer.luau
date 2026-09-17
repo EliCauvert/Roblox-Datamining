@@ -17,6 +17,8 @@ local requestDeveloperSubscriptionPurchaseModule = require(purchasePrompt.Action
 local completeRequestModule = require(purchasePrompt.Actions.CompleteRequest)
 local refreshExpectedPriceModule = require(purchasePrompt.Actions.RefreshExpectedPrice)
 local requestTypeModule = require(purchasePrompt.Enums.RequestType)
+local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
+local fFlagStableIdempotencyKeyForProductAndGamePassModule = require(purchasePrompt.Flags.FFlagStableIdempotencyKeyForProductAndGamePass)
 local t = { requestType = requestTypeModule.None }
 
 return rodux.createReducer(t, {
@@ -42,22 +44,42 @@ return rodux.createReducer(t, {
 		}
 	end,
 	[requestGamepassPurchaseModule.name] = function(_, p1)
-		-- upvalues: requestTypeModule (ref)
-		return {
+		-- upvalues: requestTypeModule (ref), fFlagStableIdempotencyKeyForProductAndGamePassModule (ref), httpService (ref)
+		local t = {
 			isRobloxPurchase = false,
 			id = p1.id,
 			infoType = Enum.InfoType.GamePass,
 			requestType = requestTypeModule.GamePass
 		}
+		
+		if fFlagStableIdempotencyKeyForProductAndGamePassModule then
+			local idempotencyKey = p1.idempotencyKey
+			
+			if idempotencyKey == nil or idempotencyKey == "" then
+				idempotencyKey = httpService:GenerateGUID(false)
+			end
+			t.idempotencyKey = idempotencyKey
+		end
+		return t
 	end,
 	[requestProductPurchaseModule.name] = function(_, p1)
-		-- upvalues: requestTypeModule (ref)
-		return {
+		-- upvalues: requestTypeModule (ref), fFlagStableIdempotencyKeyForProductAndGamePassModule (ref), httpService (ref)
+		local t = {
 			isRobloxPurchase = false,
 			id = p1.id,
 			infoType = Enum.InfoType.Product,
 			requestType = requestTypeModule.Product
 		}
+		
+		if fFlagStableIdempotencyKeyForProductAndGamePassModule then
+			local idempotencyKey = p1.idempotencyKey
+			
+			if idempotencyKey == nil or idempotencyKey == "" then
+				idempotencyKey = httpService:GenerateGUID(false)
+			end
+			t.idempotencyKey = idempotencyKey
+		end
+		return t
 	end,
 	[requestBundlePurchaseModule.name] = function(_, p1)
 		-- upvalues: httpService (ref), requestTypeModule (ref)
@@ -106,7 +128,7 @@ return rodux.createReducer(t, {
 		-- upvalues: requestTypeModule (ref)
 		return { requestType = requestTypeModule.Look, lookId = p1.lookId }
 	end,
-	[requestRobuxUpsellPurchaseModule.name] = if sharedFlagsModule.FFlagAXMISWithBlackbird then function(_, _)
+	[requestRobuxUpsellPurchaseModule.name] = if fFlagAXMISWithBlackbird then function(_, _)
 		-- upvalues: requestTypeModule (ref)
 		return { requestType = requestTypeModule.RobuxUpsell }
 	end else nil,

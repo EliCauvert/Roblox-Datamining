@@ -1,5 +1,6 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
+local fFlagBuildExperienceInGameShell = require(parent.SharedFlags).FFlagBuildExperienceInGameShell
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
@@ -17,7 +18,7 @@ local popoverSide = foundationModule.Enums.PopoverSide
 local view = foundationModule.View
 
 return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getAssistantBuildStoreModule (ref), getPlayButtonStoreModule (ref), signalsReactModule (ref), reactModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), iconButton (ref), iconName (ref), inputSize (ref), view (ref), educationalTooltip (ref), popoverAlign (ref), popoverSide (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getAssistantBuildStoreModule (ref), getPlayButtonStoreModule (ref), signalsReactModule (ref), fFlagBuildExperienceInGameShell (ref), reactModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), iconButton (ref), iconName (ref), inputSize (ref), view (ref), educationalTooltip (ref), popoverAlign (ref), popoverSide (ref)
 	local var1 = useLocalization({
 		disabledTitle = localizationStringsModule.CHAT_ASSISTANT_DISABLED,
 		portraitRequired = localizationStringsModule.CHAT_PORTRAIT_REQUIRED
@@ -26,7 +27,8 @@ return reactModule.memo(function(p1)
 	local var3 = getPlayButtonStoreModule()
 	local var4 = signalsReactModule.useSignalState(var2.getIsDisabled)
 	local var5 = signalsReactModule.useSignalState(var2.getIsDisabledTooltipOpen)
-	local var6 = reactModule.useCallback(function()
+	local var6 = if fFlagBuildExperienceInGameShell then signalsReactModule.useSignalState(var2.getIsOverlayVisible) else nil
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref), var2 (ref), var5 (ref), var3 (ref)
 		if var4 then
 			var2.setIsDisabledTooltipOpen(not var5)
@@ -36,7 +38,7 @@ return reactModule.memo(function(p1)
 		var2.setIsDisabledTooltipOpen(false)
 		var3.setIsActive(true)
 	end, { var2, var4, var5, var3 })
-	local var7 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function()
+	local var8 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function()
 		-- upvalues: var2 (ref)
 		var2.setIsDisabledTooltipOpen(false)
 	end, { var2 }) else nil
@@ -49,14 +51,14 @@ return reactModule.memo(function(p1)
 		end
 		var2.setIsDisabledTooltipOpen(false)
 	end, { var2, var4, var3 })
-	local var8 = reactModule.createElement(iconButton, {
+	local var9 = reactModule.createElement(iconButton, {
 		isCircular = true,
 		testId = "build-header-play-button",
-		icon = iconName.Nebula,
+		icon = if fFlagBuildExperienceInGameShell then if var6 then iconName.TwoArrowsFromCenter else iconName.TwoArrowsToCenter else iconName.Nebula,
 		variant = p1.variant,
 		size = inputSize.Medium,
 		isDisabled = var4,
-		onActivated = var6
+		onActivated = if fFlagBuildExperienceInGameShell then var2.activate else var7
 	})
 	
 	return reactModule.createElement(view, {
@@ -68,7 +70,7 @@ return reactModule.memo(function(p1)
 			testId = "build-assistant-disabled-tooltip",
 			align = popoverAlign.Start,
 			isOpen = var5,
-			onPressedOutside = var7,
+			onPressedOutside = var8,
 			side = popoverSide.Bottom,
 			text = var1.portraitRequired,
 			title = var1.disabledTitle
@@ -76,9 +78,9 @@ return reactModule.memo(function(p1)
 			Button = reactModule.createElement(view, {
 				tag = "auto-xy",
 				testId = "build-header-play-button-disabled",
-				onActivated = var6
-			}, { Button = var8 })
+				onActivated = if fFlagBuildExperienceInGameShell then var2.activate else var7
+			}, { Button = var9 })
 		}) else nil,
-		Button = if not var4 then var8 else nil
+		Button = if not var4 then var9 else nil
 	})
 end)

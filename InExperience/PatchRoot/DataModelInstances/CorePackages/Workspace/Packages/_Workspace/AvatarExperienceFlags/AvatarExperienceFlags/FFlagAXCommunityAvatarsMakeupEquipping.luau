@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXCommunityAvatarsMakeupEquipping", false) and require(script.Parent.FFlagAXMakeupEquipping)
+﻿return game:DefineFastFlag("AXCommunityAvatarsMakeupEquipping", false)

@@ -8,7 +8,6 @@ local gameCollectionItemTypes = discoveryTypesModule.GameCollectionItemTypes
 local gameCollectionItemType = gameCollectionItemTypes.GameCollectionItemType
 local spanForItemType = gameCollectionItemTypes.SpanForItemType
 local fFlagLuaAppEnableNxMRoduxApportioning = sharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning
-local fFlagLuaAppApportioningInCollectionViews = sharedFlagsModule.FFlagLuaAppApportioningInCollectionViews
 local fFlagSduiPoolBackedFeed = sharedFlagsModule.FFlagSduiPoolBackedFeed
 local fFlagLuaAppEnableNxMApportioningExtraLogging = sharedFlagsModule.FFlagLuaAppEnableNxMApportioningExtraLogging
 local luaAppFixApportioningTileTailConflict = game:DefineFastFlag("LuaAppFixApportioningTileTailConflict", false)
@@ -29,7 +28,7 @@ local function defaultGetSpanConfig(p1)
 end
 
 local function processOneGrid(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: discoveryEventErrorLogger (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), fFlagSduiPoolBackedFeed (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (ref), apportioningDiagnosticTelemetry (ref), luaAppFixApportioningTileTailConflict (ref), fFlagLuaAppApportioningInCollectionViews (ref), defaultGetSpanConfig (ref)
+	-- upvalues: discoveryEventErrorLogger (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), fFlagSduiPoolBackedFeed (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (ref), apportioningDiagnosticTelemetry (ref), luaAppFixApportioningTileTailConflict (ref), defaultGetSpanConfig (ref)
 	local var1 = p5 * p4
 	local t = {}
 	local t_1 = {}
@@ -272,7 +271,7 @@ local function processOneGrid(p1, p2, p3, p4, p5, p6, p7)
 			continue
 		end
 		if var1 > var2 then
-			local var13 = if fFlagLuaAppApportioningInCollectionViews and p6 ~= nil then p6(var12, i_1) else defaultGetSpanConfig(var12)
+			local var13 = if p6 ~= nil then defaultGetSpanConfig(var12) else p6(var12, i_1)
 			
 			if var13 then
 				if #t_1 > 0 then
@@ -319,7 +318,7 @@ end
 
 return {
 	calculateSpanAwareGrids = function(p10, p11, p12, p13, p14)
-		-- upvalues: discoveryEventErrorLogger (ref), processOneGrid (ref), fFlagLuaAppApportioningInCollectionViews (ref), fFlagSduiPoolBackedFeed (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref)
+		-- upvalues: discoveryEventErrorLogger (ref), processOneGrid (ref), fFlagSduiPoolBackedFeed (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref)
 		if not p10 then
 			discoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_MissingEntries", "calculateSpanAwareGrids called without entries", { gridConfigsCount = #p11, itemsPerRow = p12 })
 			
@@ -357,7 +356,7 @@ return {
 			if not maxRows or maxRows <= 0 then
 				maxRows = 1e999
 			end
-			local var16 = processOneGrid(p10, var15, t_1, p12, maxRows, if fFlagLuaAppApportioningInCollectionViews then p13 else nil, if fFlagSduiPoolBackedFeed then p14 else nil)
+			local var16 = processOneGrid(p10, var15, t_1, p12, maxRows, p13, if fFlagSduiPoolBackedFeed then p14 else nil)
 			t[v.sortKey] = {
 				entryIndices = if fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p14 then nil else var16.placedIndices,
 				layout = if fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p14 then var16.layout else nil

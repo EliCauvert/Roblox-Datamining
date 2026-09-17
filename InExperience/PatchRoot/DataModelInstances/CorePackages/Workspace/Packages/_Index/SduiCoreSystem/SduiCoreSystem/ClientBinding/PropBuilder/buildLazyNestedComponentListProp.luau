@@ -17,14 +17,13 @@ local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
 local sduiParseHelpersModule = require(sduiCoreSystem.SduiParseHelpers)
 local _ = require(sduiCoreSystem.SduiComponentType)
 local fFlagSduiLazyNestedComponentArrayMapItemResolutionSupport = require(parent.SharedFlags).FFlagSduiLazyNestedComponentArrayMapItemResolutionSupport
-local fFlagSduiFixEmptyRobloxComponentInPropBuilder = require(parent.SharedFlags).FFlagSduiFixEmptyRobloxComponentInPropBuilder
 local fFlagSduiOrderedTemplateDataSupport = require(parent.SharedFlags).FFlagSduiOrderedTemplateDataSupport
 local fFlagSduiImprovedErrorDimensions = require(parent.SharedFlags).FFlagSduiImprovedErrorDimensions
 local fFlagSduiInlineNestedComponentSchema = require(parent.SharedFlags).FFlagSduiInlineNestedComponentSchema
 local t = {}
 
 local function buildItemList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: fFlagSduiInlineNestedComponentSchema (ref), fFlagSduiLazyNestedComponentArrayMapItemResolutionSupport (ref), fFlagSduiFixEmptyRobloxComponentInPropBuilder (ref), fFlagSduiOrderedTemplateDataSupport (ref), sduiPropUtilsModule (ref), signalsModule (ref), cryoModule (ref), t (ref), buildInputsForNestedComponentModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), fFlagSduiImprovedErrorDimensions (ref), buildConfigForComponent (ref)
+	-- upvalues: fFlagSduiInlineNestedComponentSchema (ref), fFlagSduiLazyNestedComponentArrayMapItemResolutionSupport (ref), fFlagSduiOrderedTemplateDataSupport (ref), sduiPropUtilsModule (ref), signalsModule (ref), cryoModule (ref), t (ref), buildInputsForNestedComponentModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), fFlagSduiImprovedErrorDimensions (ref), buildConfigForComponent (ref)
 	local t_1 = {}
 	
 	for i, v in p2 do
@@ -35,7 +34,7 @@ local function buildItemList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 		if fFlagSduiInlineNestedComponentSchema and v and v.inline_component ~= nil then
 			var1 = v.inline_component
 			var2 = true
-		elseif fFlagSduiLazyNestedComponentArrayMapItemResolutionSupport and v and v.roblox_component and (not fFlagSduiFixEmptyRobloxComponentInPropBuilder or v.roblox_component ~= "") then
+		elseif fFlagSduiLazyNestedComponentArrayMapItemResolutionSupport and v and (v.roblox_component and v.roblox_component ~= "") then
 			var1 = p5.getTemplateForRobloxComponent(v.roblox_component) or p1
 			var2 = false
 		else

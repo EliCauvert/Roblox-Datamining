@@ -1,4 +1,6 @@
-﻿local itemTypeEnum = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AvatarExperienceCommon).Enums.ItemTypeEnum
+﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local _ = require(parent.AvatarExperienceCommon)
+local itemTypeEnum = require(parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local selectHydratedWidgetDataModule = require(script.Parent.selectHydratedWidgetData)
 
 return function(p1, p2)

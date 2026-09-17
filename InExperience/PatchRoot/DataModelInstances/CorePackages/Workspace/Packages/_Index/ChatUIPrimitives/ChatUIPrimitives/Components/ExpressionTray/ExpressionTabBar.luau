@@ -15,13 +15,16 @@ return reactModule.memo(function(p1)
 		t["Tab_" .. v.id] = reactModule.createElement(foundationModule.View, {
 			tag = "auto-xy padding-x-small",
 			LayoutOrder = i,
+			testId = "expressionTab_" .. v.id,
 			stateLayer = {
 				affordance = foundationModule.Enums.StateLayerAffordance.None
 			},
 			onActivated = function()
 				-- upvalues: p1 (ref), v (ref)
 				p1.onTabActivated(v.id)
-			end
+			end,
+			selection = if p1.focusNavEnabled and not var2 then { Selectable = false } else nil,
+			ref = if p1.focusNavEnabled and var2 and i == 1 then p1.firstTabRef else nil
 		}, {
 			Label = reactModule.createElement(foundationModule.Text, {
 				Text = v.text,

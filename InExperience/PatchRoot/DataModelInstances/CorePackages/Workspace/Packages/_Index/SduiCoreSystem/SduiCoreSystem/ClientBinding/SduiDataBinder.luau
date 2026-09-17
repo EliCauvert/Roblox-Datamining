@@ -20,10 +20,8 @@ local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagSduiCommunitySectionSupport = sharedFlagsModule.FFlagSduiCommunitySectionSupport
 local fFlagLuaAppEdpKeepFullPageOnPortraitRotation = sharedFlagsModule.FFlagLuaAppEdpKeepFullPageOnPortraitRotation
-local fFlagSduiEventDetailsSupport = sharedFlagsModule.FFlagSduiEventDetailsSupport
 local fFlagSduiMarketplaceCatalogCategorySupport = sharedFlagsModule.FFlagSduiMarketplaceCatalogCategorySupport
 local fFlagSduiMarketplaceCatalogSortSupport = sharedFlagsModule.FFlagSduiMarketplaceCatalogSortSupport
 local fFlagSduiAddMarketplaceEntityDataHydration = sharedFlagsModule.FFlagSduiAddMarketplaceEntityDataHydration
@@ -35,8 +33,6 @@ local fFlagSduiCapabilityBindings = sharedFlagsModule.FFlagSduiCapabilityBinding
 local fFlagMigrateGameInfoToStore = sharedFlagsModule.FFlagMigrateGameInfoToStore
 local fFlagSduiSupportRatingNoPercent = sharedFlagsModule.FFlagSduiSupportRatingNoPercent
 local fFlagSduiNotificationBadgeHydration = sharedFlagsModule.FFlagSduiNotificationBadgeHydration
-local fFlagSduiExperienceDetailsSupport_1 = fFlagSduiExperienceDetailsSupport or fFlagSduiDevStoreSeeAllSupport
-local fFlagSduiEventDetailsSupport_1 = fFlagSduiEventDetailsSupport or fFlagSduiExperienceDetailsSupport
 local dataStatus = dataHydrationModule.DataHydrationTypes.DataStatus
 local protobufTimestampToLocalTimeString = sduiDataBinderTransformUtilsModule.protobufTimestampToLocalTimeString
 
@@ -193,7 +189,7 @@ local function calculateBadgeDerivedField(p2, p3, _)
 end
 
 local function calculateUniverseDerivedField(p2, p3, _)
-	-- upvalues: dataHydrationModule (ref), fFlagSduiSupportRatingNoPercent (ref), fFlagSduiExperienceDetailsSupport (ref), localizationService (ref), getZendeskUrl (ref)
+	-- upvalues: dataHydrationModule (ref), fFlagSduiSupportRatingNoPercent (ref), localizationService (ref), getZendeskUrl (ref)
 	if p2 == "rating_text_formatted_brief" then
 		local totalUpVotes = tonumber(p3.totalUpVotes) or 0
 		local totalDownVotes = tonumber(p3.totalDownVotes) or 0
@@ -213,7 +209,7 @@ local function calculateUniverseDerivedField(p2, p3, _)
 			rating = dataHydrationModule.Game.VotesUtils.calculateRating(totalUpVotes, totalDownVotes)
 		}, true)
 	end
-	return if fFlagSduiExperienceDetailsSupport and p2 == "refund_policy_learn_more_url" then getZendeskUrl(nil, localizationService.RobloxLocaleId, p3 and p3.refund_article_id) else nil
+	return if p2 == "refund_policy_learn_more_url" then getZendeskUrl(nil, localizationService.RobloxLocaleId, p3 and p3.refund_article_id) else nil
 end
 
 local function calculateAgeRecommendationDerivedField(p2, p3, _)
@@ -246,7 +242,7 @@ local function calculateAgeRecommendationDerivedField(p2, p3, _)
 end
 
 local function getDataObjectSignal(value, _, p4, p5)
-	-- upvalues: fFlagSduiHydrationFetchIfMissing (ref), dataHydrationModule (ref), fFlagSduiExperienceDetailsSupport (ref), sduiDataBindingContentTypeModule (ref), fFlagSduiCommunitySectionSupport (ref), fFlagSduiExperienceDetailsSupport_1 (ref), fFlagSduiEventDetailsSupport_1 (ref), fFlagSduiMarketplaceCatalogCategorySupport (ref), fFlagSduiMarketplaceCatalogSortSupport (ref), fFlagSduiAddMarketplaceEntityDataHydration (ref), fFlagSduiAddCollectibleItemDataHydration (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiNotificationBadgeHydration (ref)
+	-- upvalues: fFlagSduiHydrationFetchIfMissing (ref), dataHydrationModule (ref), sduiDataBindingContentTypeModule (ref), fFlagSduiCommunitySectionSupport (ref), fFlagSduiMarketplaceCatalogCategorySupport (ref), fFlagSduiMarketplaceCatalogSortSupport (ref), fFlagSduiAddMarketplaceEntityDataHydration (ref), fFlagSduiAddCollectibleItemDataHydration (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiNotificationBadgeHydration (ref)
 	p5 = fFlagSduiHydrationFetchIfMissing and p5
 	
 	if value == "badge" then
@@ -255,50 +251,48 @@ local function getDataObjectSignal(value, _, p4, p5)
 		return dataHydrationModule.Creator.getCreatorInfoStore(false).getCreatorInfo(p4)
 	elseif value == "universe" then
 		return if p5 then dataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(p4) else dataHydrationModule.Game.getGameInfoStore(false).getGameInfo(p4)
-	elseif fFlagSduiExperienceDetailsSupport then
-		if value == "ageRecommendation" then
-			return if p5 then dataHydrationModule.Game.getAgeRecommendationStore(false).getAndFetchAgeRecommendation(p4) else dataHydrationModule.Game.getAgeRecommendationStore(false).getAgeRecommendation(p4)
-		elseif value == "socialLink" then
-			return dataHydrationModule.SocialLink.getSocialLinkInfoStore(false).getSocialLinkInfo(p4)
-		elseif value == "mediaAsset" then
-			return dataHydrationModule.MediaAsset.getMediaAssetStore(false).getMediaAsset(p4)
-		elseif value == "playability" then
-			return if p5 then dataHydrationModule.Game.getPlayabilityStore(false).getAndFetchPlayability(tostring(p4)) else dataHydrationModule.Game.getPlayabilityStore(false).getPlayability(tostring(p4))
-		elseif value == sduiDataBindingContentTypeModule.universeUserVote then
-			return dataHydrationModule.Game.getVotesStore(false).getUserVote(p4)
-		elseif value == sduiDataBindingContentTypeModule.universeUserFavorite then
-			return if p5 then dataHydrationModule.Game.getFavoritesStore(false).getAndFetchFavorite(p4) else dataHydrationModule.Game.getFavoritesStore(false).getFavorite(p4)
-		elseif value == sduiDataBindingContentTypeModule.universeUserFollow then
-			return if p5 then dataHydrationModule.Game.getFollowingsStore(false).getAndFetchFollowing(p4) else dataHydrationModule.Game.getFollowingsStore(false).getFollowing(p4)
-		elseif value == sduiDataBindingContentTypeModule.universeUserVoteFeedbackMetadata then
-			return if p5 then dataHydrationModule.Game.getUserVoteFeedbackMetadataStore(false).getAndFetchUserVoteFeedbackMetadata(tostring(p4)) else dataHydrationModule.Game.getUserVoteFeedbackMetadataStore(false).getUserVoteFeedbackMetadata(tostring(p4))
-		elseif fFlagSduiCommunitySectionSupport then
-			if value == sduiDataBindingContentTypeModule.community then
-				return dataHydrationModule.Community.getCommunityInfoStore(false).getCommunityInfo(p4)
-			elseif value == sduiDataBindingContentTypeModule.communityUserMembership then
-				return dataHydrationModule.CommunityUserMembership.getCommunityUserMembershipStore(false).getMembership(p4)
-			elseif fFlagSduiExperienceDetailsSupport_1 and value == "gamePass" then
-				return dataHydrationModule.Game.getGamePassStore(false).getGamePassInfo(tostring(p4))
-			elseif fFlagSduiEventDetailsSupport_1 and value == "event" then
-				return dataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).getExperienceEventInfo(p4)
-			elseif fFlagSduiMarketplaceCatalogCategorySupport and value == "marketplaceCatalogCategory" then
-				return dataHydrationModule.MarketplaceCatalogCategory.getMarketplaceCatalogCategoryStore(false).getMarketplaceCatalogCategory(p4)
-			elseif fFlagSduiMarketplaceCatalogSortSupport and value == "marketplaceCatalogSort" then
-				return dataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false).getMarketplaceCatalogSort(p4)
-			elseif value == "song" then
-				return dataHydrationModule.Song.getSongInfoStore(false).getSongInfo(tostring(p4))
-			elseif fFlagSduiAddMarketplaceEntityDataHydration then
-				if value == "marketplaceAsset" then
-					return dataHydrationModule.MarketplaceAsset.getMarketplaceAssetStore(false).getMarketplaceAssetInfo(p4)
-				elseif value == "marketplaceBundle" then
-					return dataHydrationModule.MarketplaceBundle.getMarketplaceBundleStore(false).getMarketplaceBundleInfo(p4)
-				elseif value == "marketplaceLook" then
-					return dataHydrationModule.MarketplaceLook.getMarketplaceLookStore(false).getMarketplaceLookInfo(p4)
-				elseif fFlagSduiAddCollectibleItemDataHydration and value == "collectibleItem" then
-					return dataHydrationModule.CollectibleItem.getCollectibleItemStore(false).getCollectibleItemInfo(p4)
-				elseif fFlagSduiDevStoreSeeAllSupport then
-					return if value == "gameDeveloperProduct" then dataHydrationModule.Game.getGameDeveloperProductStore(false).getGameDeveloperProductInfo(tostring(p4)) elseif value == "gameSubscription" then dataHydrationModule.Game.getGameSubscriptionStore(false).getGameSubscriptionInfo(tostring(p4)) elseif fFlagSduiNotificationBadgeHydration and value == "notificationBadge" then dataHydrationModule.NotificationBadge.getNotificationBadgeStore(false).getNotificationBadge(tostring(p4)) else nil
-				end
+	elseif value == "ageRecommendation" then
+		return if p5 then dataHydrationModule.Game.getAgeRecommendationStore(false).getAndFetchAgeRecommendation(p4) else dataHydrationModule.Game.getAgeRecommendationStore(false).getAgeRecommendation(p4)
+	elseif value == "socialLink" then
+		return dataHydrationModule.SocialLink.getSocialLinkInfoStore(false).getSocialLinkInfo(p4)
+	elseif value == "mediaAsset" then
+		return dataHydrationModule.MediaAsset.getMediaAssetStore(false).getMediaAsset(p4)
+	elseif value == "playability" then
+		return if p5 then dataHydrationModule.Game.getPlayabilityStore(false).getAndFetchPlayability(tostring(p4)) else dataHydrationModule.Game.getPlayabilityStore(false).getPlayability(tostring(p4))
+	elseif value == sduiDataBindingContentTypeModule.universeUserVote then
+		return dataHydrationModule.Game.getVotesStore(false).getUserVote(p4)
+	elseif value == sduiDataBindingContentTypeModule.universeUserFavorite then
+		return if p5 then dataHydrationModule.Game.getFavoritesStore(false).getAndFetchFavorite(p4) else dataHydrationModule.Game.getFavoritesStore(false).getFavorite(p4)
+	elseif value == sduiDataBindingContentTypeModule.universeUserFollow then
+		return if p5 then dataHydrationModule.Game.getFollowingsStore(false).getAndFetchFollowing(p4) else dataHydrationModule.Game.getFollowingsStore(false).getFollowing(p4)
+	elseif value == sduiDataBindingContentTypeModule.universeUserVoteFeedbackMetadata then
+		return if p5 then dataHydrationModule.Game.getUserVoteFeedbackMetadataStore(false).getAndFetchUserVoteFeedbackMetadata(tostring(p4)) else dataHydrationModule.Game.getUserVoteFeedbackMetadataStore(false).getUserVoteFeedbackMetadata(tostring(p4))
+	elseif fFlagSduiCommunitySectionSupport then
+		if value == sduiDataBindingContentTypeModule.community then
+			return dataHydrationModule.Community.getCommunityInfoStore(false).getCommunityInfo(p4)
+		elseif value == sduiDataBindingContentTypeModule.communityUserMembership then
+			return dataHydrationModule.CommunityUserMembership.getCommunityUserMembershipStore(false).getMembership(p4)
+		elseif value == "gamePass" then
+			return dataHydrationModule.Game.getGamePassStore(false).getGamePassInfo(tostring(p4))
+		elseif value == "event" then
+			return dataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).getExperienceEventInfo(p4)
+		elseif fFlagSduiMarketplaceCatalogCategorySupport and value == "marketplaceCatalogCategory" then
+			return dataHydrationModule.MarketplaceCatalogCategory.getMarketplaceCatalogCategoryStore(false).getMarketplaceCatalogCategory(p4)
+		elseif fFlagSduiMarketplaceCatalogSortSupport and value == "marketplaceCatalogSort" then
+			return dataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false).getMarketplaceCatalogSort(p4)
+		elseif value == "song" then
+			return dataHydrationModule.Song.getSongInfoStore(false).getSongInfo(tostring(p4))
+		elseif fFlagSduiAddMarketplaceEntityDataHydration then
+			if value == "marketplaceAsset" then
+				return dataHydrationModule.MarketplaceAsset.getMarketplaceAssetStore(false).getMarketplaceAssetInfo(p4)
+			elseif value == "marketplaceBundle" then
+				return dataHydrationModule.MarketplaceBundle.getMarketplaceBundleStore(false).getMarketplaceBundleInfo(p4)
+			elseif value == "marketplaceLook" then
+				return dataHydrationModule.MarketplaceLook.getMarketplaceLookStore(false).getMarketplaceLookInfo(p4)
+			elseif fFlagSduiAddCollectibleItemDataHydration and value == "collectibleItem" then
+				return dataHydrationModule.CollectibleItem.getCollectibleItemStore(false).getCollectibleItemInfo(p4)
+			elseif fFlagSduiDevStoreSeeAllSupport then
+				return if value == "gameDeveloperProduct" then dataHydrationModule.Game.getGameDeveloperProductStore(false).getGameDeveloperProductInfo(tostring(p4)) elseif value == "gameSubscription" then dataHydrationModule.Game.getGameSubscriptionStore(false).getGameSubscriptionInfo(tostring(p4)) elseif fFlagSduiNotificationBadgeHydration and value == "notificationBadge" then dataHydrationModule.NotificationBadge.getNotificationBadgeStore(false).getNotificationBadge(tostring(p4)) else nil
 			end
 		end
 	end
@@ -317,7 +311,7 @@ local function isClientContentType(p4)
 end
 
 local function getFieldValueForClientContentType(p4, p5, p6, p7)
-	-- upvalues: sduiDataBindingContentTypeModule (ref), getSduiClientPageScopeModule (ref), sduiDataBindingResponsiveFieldName (ref), displayModule (ref), responsiveModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppEdpKeepFullPageOnPortraitRotation (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), fFlagSduiCapabilityBindings (ref), sduiCapabilitiesModule (ref), getSduiPolicyStoreModule (ref), resolveSduiPolicyFieldModule (ref), tryGetPathFromDataModule (ref)
+	-- upvalues: sduiDataBindingContentTypeModule (ref), getSduiClientPageScopeModule (ref), sduiDataBindingResponsiveFieldName (ref), displayModule (ref), responsiveModule (ref), fFlagLuaAppEdpKeepFullPageOnPortraitRotation (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), fFlagSduiCapabilityBindings (ref), sduiCapabilitiesModule (ref), getSduiPolicyStoreModule (ref), resolveSduiPolicyFieldModule (ref), tryGetPathFromDataModule (ref)
 	local var4
 	if p4 == sduiDataBindingContentTypeModule.clientPageScope then
 		var4 = if p7 then p7.configKey else nil
@@ -346,7 +340,7 @@ local function getFieldValueForClientContentType(p4, p5, p6, p7)
 			return responsiveModule.GetInputModeStore(p6).getLastInputType(p6)
 		elseif var4 == sduiDataBindingResponsiveFieldName.preferredInput then
 			return responsiveModule.GetInputModeStore(p6).getPreferredInputType(p6)
-		elseif fFlagSduiExperienceDetailsSupport and var4 == sduiDataBindingResponsiveFieldName.isCompactTouch then
+		elseif var4 == sduiDataBindingResponsiveFieldName.isCompactTouch then
 			if fFlagLuaAppEdpKeepFullPageOnPortraitRotation then
 				return responsiveModule.getIsCompactTouch(displayModule.GetDisplayStore(p6).getViewportSize(p6), responsiveModule.GetInputModeStore(p6).getPreferredInputType(p6))
 			end
@@ -389,12 +383,8 @@ local function getFieldValueForClientContentType(p4, p5, p6, p7)
 end
 
 local function calculateDerivedFieldValue(p8, p9, p10, p11)
-	-- upvalues: calculateBadgeDerivedField (ref), fFlagSduiExperienceDetailsSupport (ref), calculateUniverseDerivedField (ref), calculateAgeRecommendationDerivedField (ref), sduiDataBindingContentTypeModule (ref), dataHydrationModule (ref), fFlagSduiEventDetailsSupport (ref), getSduiServiceDependenciesStoreModule (ref)
-	if p8 == "badge" then
-		return calculateBadgeDerivedField(p9, p10, p11)
-	elseif fFlagSduiExperienceDetailsSupport then
-		return if p8 == "universe" then calculateUniverseDerivedField(p9, p10, p11) elseif p8 == "ageRecommendation" then calculateAgeRecommendationDerivedField(p9, p10, p11) elseif p8 == sduiDataBindingContentTypeModule.universeUserVoteFeedbackMetadata then dataHydrationModule.Game.getUserVoteFeedbackMetadataStore(false).calculateDerivedField(p9, p10, p11) elseif (fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport) and p8 == "event" then dataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).calculateDerivedField(p9, p10, p11, getSduiServiceDependenciesStoreModule().getDependencies("SduiDataBinder").localization) else nil
-	end
+	-- upvalues: calculateBadgeDerivedField (ref), calculateUniverseDerivedField (ref), calculateAgeRecommendationDerivedField (ref), sduiDataBindingContentTypeModule (ref), dataHydrationModule (ref), getSduiServiceDependenciesStoreModule (ref)
+	return if p8 == "badge" then calculateBadgeDerivedField(p9, p10, p11) elseif p8 == "universe" then calculateUniverseDerivedField(p9, p10, p11) elseif p8 == "ageRecommendation" then calculateAgeRecommendationDerivedField(p9, p10, p11) elseif p8 == sduiDataBindingContentTypeModule.universeUserVoteFeedbackMetadata then dataHydrationModule.Game.getUserVoteFeedbackMetadataStore(false).calculateDerivedField(p9, p10, p11) elseif p8 == "event" then dataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).calculateDerivedField(p9, p10, p11, getSduiServiceDependenciesStoreModule().getDependencies("SduiDataBinder").localization) else nil
 end
 
 local function getUniverseIcon(p8, p9, p10)
@@ -526,10 +516,10 @@ local t_1 = {
 			end
 		end
 	end else getDataHydrationField,
-	ageRecommendation = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
-	mediaAsset = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
-	socialLink = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
-	event = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then getDataHydrationField else nil,
+	ageRecommendation = getDataHydrationField,
+	mediaAsset = getDataHydrationField,
+	socialLink = getDataHydrationField,
+	event = getDataHydrationField,
 	marketplaceCatalogCategory = if fFlagSduiMarketplaceCatalogCategorySupport then getDataHydrationField else nil,
 	marketplaceCatalogSort = if fFlagSduiMarketplaceCatalogSortSupport then getDataHydrationField else nil,
 	marketplaceAsset = if fFlagSduiAddMarketplaceEntityDataHydration then getDataHydrationField else nil,
@@ -537,15 +527,15 @@ local t_1 = {
 	marketplaceLook = if fFlagSduiAddMarketplaceEntityDataHydration then getDataHydrationField else nil,
 	collectibleItem = if fFlagSduiAddCollectibleItemDataHydration then getDataHydrationField else nil,
 	song = getDataHydrationField,
-	gamePass = if fFlagSduiExperienceDetailsSupport or fFlagSduiDevStoreSeeAllSupport then getDataHydrationField else nil,
+	gamePass = getDataHydrationField,
 	gameDeveloperProduct = if fFlagSduiDevStoreSeeAllSupport then getDataHydrationField else nil,
 	gameSubscription = if fFlagSduiDevStoreSeeAllSupport then getDataHydrationField else nil,
-	playability = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
-	universeUserVote = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
-	universeUserFavorite = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
-	universeUserFollow = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
-	universeUserVoteFeedbackMetadata = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
-	userProfile = if fFlagSduiExperienceDetailsSupport then dataHydrationModule.UserProfile and dataHydrationModule.UserProfile.resolveField else nil,
+	playability = getDataHydrationField,
+	universeUserVote = getDataHydrationField,
+	universeUserFavorite = getDataHydrationField,
+	universeUserFollow = getDataHydrationField,
+	universeUserVoteFeedbackMetadata = getDataHydrationField,
+	userProfile = dataHydrationModule.UserProfile and dataHydrationModule.UserProfile.resolveField,
 	community = if fFlagSduiCommunitySectionSupport then getDataHydrationField else nil,
 	communityUserMembership = if fFlagSduiCommunitySectionSupport then getDataHydrationField else nil,
 	notificationBadge = if fFlagSduiNotificationBadgeHydration then getDataHydrationField else nil
@@ -553,7 +543,7 @@ local t_1 = {
 
 return {
 	updateDataStores = function(p13)
-		-- upvalues: dataHydrationModule (ref), fFlagMigrateGameInfoToStore (ref), updateVoteCountsFromUniverses (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiCommunitySectionSupport (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiMarketplaceCatalogCategorySupport (ref), fFlagSduiMarketplaceCatalogSortSupport (ref), fFlagSduiAddMarketplaceEntityDataHydration (ref), fFlagSduiAddCollectibleItemDataHydration (ref), fFlagSduiNotificationBadgeHydration (ref)
+		-- upvalues: dataHydrationModule (ref), fFlagMigrateGameInfoToStore (ref), updateVoteCountsFromUniverses (ref), fFlagSduiCommunitySectionSupport (ref), fFlagSduiMarketplaceCatalogCategorySupport (ref), fFlagSduiMarketplaceCatalogSortSupport (ref), fFlagSduiAddMarketplaceEntityDataHydration (ref), fFlagSduiAddCollectibleItemDataHydration (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiNotificationBadgeHydration (ref)
 		if p13.badge then
 			dataHydrationModule.Badges.getBadgeInfoStore(false).updateBadges(p13.badge)
 		end
@@ -572,28 +562,26 @@ return {
 				updateVoteCountsFromUniverses(p13.universe)
 			end
 		end
-		if fFlagSduiExperienceDetailsSupport then
-			if p13.ageRecommendation then
-				dataHydrationModule.Game.getAgeRecommendationStore(false).updateAgeRecommendations(p13.ageRecommendation)
-			end
-			if p13.socialLink then
-				dataHydrationModule.SocialLink.getSocialLinkInfoStore(false).updateSocialLinkInfos(p13.socialLink)
-			end
-			if p13.mediaAsset then
-				dataHydrationModule.MediaAsset.getMediaAssetStore(false).updateMediaAssets(p13.mediaAsset)
-			end
-			if p13.playability then
-				dataHydrationModule.Game.getPlayabilityStore(false).updatePlayabilities(p13.playability)
-			end
-			if p13.universeUserFavorite then
-				dataHydrationModule.Game.getFavoritesStore(false).updateItems(p13.universeUserFavorite)
-			end
-			if p13.universeUserVote then
-				dataHydrationModule.Game.getVotesStore(false).updateUserVoteItems(p13.universeUserVote)
-			end
-			if p13.userProfile then
-				dataHydrationModule.UserProfile.updateFromHydration(p13.userProfile)
-			end
+		if p13.ageRecommendation then
+			dataHydrationModule.Game.getAgeRecommendationStore(false).updateAgeRecommendations(p13.ageRecommendation)
+		end
+		if p13.socialLink then
+			dataHydrationModule.SocialLink.getSocialLinkInfoStore(false).updateSocialLinkInfos(p13.socialLink)
+		end
+		if p13.mediaAsset then
+			dataHydrationModule.MediaAsset.getMediaAssetStore(false).updateMediaAssets(p13.mediaAsset)
+		end
+		if p13.playability then
+			dataHydrationModule.Game.getPlayabilityStore(false).updatePlayabilities(p13.playability)
+		end
+		if p13.universeUserFavorite then
+			dataHydrationModule.Game.getFavoritesStore(false).updateItems(p13.universeUserFavorite)
+		end
+		if p13.universeUserVote then
+			dataHydrationModule.Game.getVotesStore(false).updateUserVoteItems(p13.universeUserVote)
+		end
+		if p13.userProfile then
+			dataHydrationModule.UserProfile.updateFromHydration(p13.userProfile)
 		end
 		if fFlagSduiCommunitySectionSupport then
 			if p13.community then
@@ -603,10 +591,10 @@ return {
 				dataHydrationModule.CommunityUserMembership.getCommunityUserMembershipStore(false).updateMemberships(p13.communityUserMembership)
 			end
 		end
-		if (fFlagSduiExperienceDetailsSupport or fFlagSduiDevStoreSeeAllSupport) and p13.gamePass then
+		if p13.gamePass then
 			dataHydrationModule.Game.getGamePassStore(false).updateGamePassInfos(p13.gamePass)
 		end
-		if (fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport) and p13.event then
+		if p13.event then
 			dataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).updateExperienceEventInfos(p13.event)
 		end
 		if fFlagSduiMarketplaceCatalogCategorySupport and p13.marketplaceCatalogCategory then

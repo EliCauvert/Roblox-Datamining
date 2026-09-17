@@ -1,15 +1,11 @@
 ﻿local parent = script.Parent.Parent
 local analyticsModule = require(parent.Analytics)
 local getFFlagDebugUGCDisableSurfaceAppearanceTestsModule = require(parent.flags.getFFlagDebugUGCDisableSurfaceAppearanceTests)
-local validateBodyPartMeshBoundsModule = require(parent.validation.validateBodyPartMeshBounds)
-local validateAssetBoundsModule = require(parent.validation.validateAssetBounds)
 local validateAccurateBoundingBoxRasterMethodModule = require(parent.validation.validateAccurateBoundingBoxRasterMethod)
 local validateBodyPartChildAttachmentBoundsModule = require(parent.validation.validateBodyPartChildAttachmentBounds)
 local validateBodyPartChildAttachmentOrientationsModule = require(parent.validation.validateBodyPartChildAttachmentOrientations)
-local validateBodyPartExtentsRelativeToParentModule = require(parent.validation.validateBodyPartExtentsRelativeToParent)
 local validateDependenciesModule = require(parent.validation.validateDependencies)
 local validateDescendantMeshMetricsModule = require(parent.validation.validateDescendantMeshMetrics)
-local validateDescendantTextureMetricsModule = require(parent.validation.validateDescendantTextureMetrics)
 local validateSurfaceAppearancesModule = require(parent.validation.validateSurfaceAppearances)
 local validateMaterialsModule = require(parent.validation.validateMaterials)
 local validateTagsModule = require(parent.validation.validateTags)
@@ -18,10 +14,8 @@ local validateAttributesModule = require(parent.validation.validateAttributes)
 local validateHSRModule = require(parent.validation.validateHSR)
 local validateBodyPartCollisionFidelityModule = require(parent.validation.validateBodyPartCollisionFidelity)
 local validateModerationModule = require(parent.validation.validateModeration)
-local validateAssetTransparencyModule = require(parent.validation.validateAssetTransparency)
 local validatePoseModule = require(parent.validation.validatePose)
 local validateBodyBlockingTestsModule = require(parent.util.ValidateBodyBlockingTests)
-local validateMeshSizePropertyModule = require(parent.validation.ValidateMeshSizeProperty)
 local validatePropertiesSensibleModule = require(parent.validation.ValidatePropertiesSensible)
 local validateLegsSeparationModule = require(parent.validation.ValidateLegsSeparation)
 local validateTexturePackModule = require(parent.validation.ValidateTexturePack)
@@ -35,13 +29,11 @@ local getFFlagUGCValidationEnableR15plusSkinningModule = require(parent.flags.ge
 local resetPhysicsDataModule = require(parent.util.resetPhysicsData)
 local _ = require(parent.util.Types)
 local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
-local getFFlagUGCValidateMigrateTextureTransparencyModule = require(parent.flags.getFFlagUGCValidateMigrateTextureTransparency)
-local getFFlagUGCValidateMigrateBodyPartBoundsModule = require(parent.flags.getFFlagUGCValidateMigrateBodyPartBounds)
 local getFFlagUGCValidateMigratePoseBlockingModule = require(parent.flags.getFFlagUGCValidateMigratePoseBlocking)
 local getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule = require(parent.flags.getFFlagUGCValidateMigrateSurfaceAppearanceMeshQuality)
 
 return function(p1, p2, p3)
-	-- upvalues: validateWithSchemaModule (ref), analyticsModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), getFFlagDebugUGCDisableSurfaceAppearanceTestsModule (ref), validateSurfaceAppearancesModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validateDependenciesModule (ref), resetPhysicsDataModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigratePoseBlockingModule (ref), validateBodyBlockingTestsModule (ref), getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), validateMeshSizePropertyModule (ref), failureReasonsAccumulatorModule (ref), validateBodyPartMeshBoundsModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), validateBodyPartChildAttachmentBoundsModule (ref), validateBodyPartExtentsRelativeToParentModule (ref), validateBodyPartChildAttachmentOrientationsModule (ref), validatePoseModule (ref), validateAssetBoundsModule (ref), validateLegsSeparationModule (ref), validateAccurateBoundingBoxRasterMethodModule (ref), bodyAssetMasksRendererModule (ref), validateDescendantMeshMetricsModule (ref), getFFlagUGCValidateMigrateTextureTransparencyModule (ref), validateDescendantTextureMetricsModule (ref), validateHSRModule (ref), validateAssetTransparencyModule (ref), validateMaterialsModule (ref), validatePropertyRequirementsModule (ref), validateBodyPartCollisionFidelityModule (ref), validateAttributesModule (ref), validateTagsModule (ref), getFFlagUGCValidationEnableR15plusSkinningModule (ref), validateMeshPartOnlySkinnedToR15Module (ref), validateModerationModule (ref)
+	-- upvalues: validateWithSchemaModule (ref), analyticsModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), getFFlagDebugUGCDisableSurfaceAppearanceTestsModule (ref), validateSurfaceAppearancesModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validateDependenciesModule (ref), resetPhysicsDataModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigratePoseBlockingModule (ref), validateBodyBlockingTestsModule (ref), failureReasonsAccumulatorModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), validateBodyPartChildAttachmentBoundsModule (ref), validateBodyPartChildAttachmentOrientationsModule (ref), validatePoseModule (ref), validateLegsSeparationModule (ref), validateAccurateBoundingBoxRasterMethodModule (ref), bodyAssetMasksRendererModule (ref), validateDescendantMeshMetricsModule (ref), validateHSRModule (ref), validateMaterialsModule (ref), validatePropertyRequirementsModule (ref), validateBodyPartCollisionFidelityModule (ref), validateAttributesModule (ref), validateTagsModule (ref), getFFlagUGCValidationEnableR15plusSkinningModule (ref), validateMeshPartOnlySkinnedToR15Module (ref), validateModerationModule (ref)
 	local isServer = p3.isServer
 	local assetTypeEnum = p3.assetTypeEnum
 	local allowUnreviewedAssets = p3.allowUnreviewedAssets
@@ -84,79 +76,56 @@ return function(p1, p2, p3)
 			
 			if not var10 then
 				return false, var11
-			elseif not getFFlagUGCValidateMigrateBodyPartBoundsModule() then
-				local var12, var13 = validateMeshSizePropertyModule.validateBodyAsset(p1, p3)
-				
-				if not var12 then
-					return false, var13
-				end
 			end
-			local var14 = failureReasonsAccumulatorModule.new()
-			
-			if not getFFlagUGCValidateMigrateBodyPartBoundsModule() then
-				var14:updateReasons(validateBodyPartMeshBoundsModule(p1, p3))
-			end
-			if not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() and getFFlagUGCValidateTexturePackModule() then
-				var14:updateReasons(validateTexturePackModule.validate(p1, true, p3))
-			end
-			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-				var14:updateReasons(validateBodyPartChildAttachmentBoundsModule(p1, p3))
-			end
-			if not getFFlagUGCValidateMigrateBodyPartBoundsModule() then
-				var14:updateReasons(validateBodyPartExtentsRelativeToParentModule.runValidation(p1, p3))
-			end
-			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-				var14:updateReasons(validateBodyPartChildAttachmentOrientationsModule.runValidation(p1, p3))
-			end
-			if not getFFlagUGCValidateMigratePoseBlockingModule() then
-				var14:updateReasons(validatePoseModule(p1, p3))
-			end
-			if not getFFlagUGCValidateMigrateBodyPartBoundsModule() then
-				var14:updateReasons(validateAssetBoundsModule(nil, p1, p3))
-			end
-			if not getFFlagUGCValidateMigratePoseBlockingModule() then
-				var14:updateReasons(validateLegsSeparationModule.validateAsset(p1, p3))
-			end
-			if not getFFlagUGCValidateMigratePoseBlockingModule() then
-				local _ = nil
-				local var15, var16 = bodyAssetMasksRendererModule.new(p1, validateAccurateBoundingBoxRasterMethodModule.getBoundsViewsForAssetType(assetTypeEnum), p3)
-				local var17 = var15
-				local var18 = var16
-				
-				if var17 then
-					var14:updateReasons(validateAccurateBoundingBoxRasterMethodModule.validate(p1, var18, p3))
-				else
-					var14:updateReasons(var17, var18)
-				end
-			end
-			var14:updateReasons(validateDescendantMeshMetricsModule(p1, p3))
-			
-			if not getFFlagUGCValidateMigrateTextureTransparencyModule() then
-				var14:updateReasons(validateDescendantTextureMetricsModule(p1, p3))
-			end
-			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-				var14:updateReasons(validateHSRModule(p1, p3))
-			end
-			if not getFFlagUGCValidateMigrateTextureTransparencyModule() then
-				local currentTime = tick()
-				var14:updateReasons(validateAssetTransparencyModule(p1, p3))
-				analyticsModule.recordScriptTime("validateAssetTransparency", currentTime, p3)
-			end
-			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-				var14:updateReasons(validateMaterialsModule(p1, p3))
-				var14:updateReasons(validatePropertyRequirementsModule(p1, assetTypeEnum, p3))
-				var14:updateReasons(validateBodyPartCollisionFidelityModule(p1, p3))
-				var14:updateReasons(validateAttributesModule(p1, p3))
-			end
-			var14:updateReasons(validateTagsModule(p1, p3))
-			
-			if not getFFlagUGCValidationEnableR15plusSkinningModule() and assetTypeEnum ~= Enum.AssetType.DynamicHead then
-				var14:updateReasons(validateMeshPartOnlySkinnedToR15Module.validateBodyParts(p1, p3))
-			end
-			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() and (if allowUnreviewedAssets then false else not isServer) then
-				var14:updateReasons(validateModerationModule(p1, restrictedUserIds, p3))
-			end
-			return var14:getFinalResults()
 		end
+		local var12 = failureReasonsAccumulatorModule.new()
+		
+		if not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() and getFFlagUGCValidateTexturePackModule() then
+			var12:updateReasons(validateTexturePackModule.validate(p1, true, p3))
+		end
+		if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
+			var12:updateReasons(validateBodyPartChildAttachmentBoundsModule(p1, p3))
+		end
+		if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
+			var12:updateReasons(validateBodyPartChildAttachmentOrientationsModule.runValidation(p1, p3))
+		end
+		if not getFFlagUGCValidateMigratePoseBlockingModule() then
+			var12:updateReasons(validatePoseModule(p1, p3))
+		end
+		if not getFFlagUGCValidateMigratePoseBlockingModule() then
+			var12:updateReasons(validateLegsSeparationModule.validateAsset(p1, p3))
+		end
+		if not getFFlagUGCValidateMigratePoseBlockingModule() then
+			local _ = nil
+			local var13, var14 = bodyAssetMasksRendererModule.new(p1, validateAccurateBoundingBoxRasterMethodModule.getBoundsViewsForAssetType(assetTypeEnum), p3)
+			local var15 = var13
+			local var16 = var14
+			
+			if var15 then
+				var12:updateReasons(validateAccurateBoundingBoxRasterMethodModule.validate(p1, var16, p3))
+			else
+				var12:updateReasons(var15, var16)
+			end
+		end
+		var12:updateReasons(validateDescendantMeshMetricsModule(p1, p3))
+		
+		if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
+			var12:updateReasons(validateHSRModule(p1, p3))
+		end
+		if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
+			var12:updateReasons(validateMaterialsModule(p1, p3))
+			var12:updateReasons(validatePropertyRequirementsModule(p1, assetTypeEnum, p3))
+			var12:updateReasons(validateBodyPartCollisionFidelityModule(p1, p3))
+			var12:updateReasons(validateAttributesModule(p1, p3))
+		end
+		var12:updateReasons(validateTagsModule(p1, p3))
+		
+		if not getFFlagUGCValidationEnableR15plusSkinningModule() and assetTypeEnum ~= Enum.AssetType.DynamicHead then
+			var12:updateReasons(validateMeshPartOnlySkinnedToR15Module.validateBodyParts(p1, p3))
+		end
+		if not getFFlagUGCValidateMigrateSchemaPropertiesModule() and (if allowUnreviewedAssets then false else not isServer) then
+			var12:updateReasons(validateModerationModule(p1, restrictedUserIds, p3))
+		end
+		return var12:getFinalResults()
 	end
 end

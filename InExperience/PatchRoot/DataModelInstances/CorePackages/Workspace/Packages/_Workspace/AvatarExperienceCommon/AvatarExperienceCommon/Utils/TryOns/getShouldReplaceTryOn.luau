@@ -1,17 +1,19 @@
 ﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local avatarExperienceFlagsModule = require(avatarExperienceCommon.Parent.AvatarExperienceFlags)
+local parent = avatarExperienceCommon.Parent
+local avatarExperienceModelModule = require(parent.AvatarExperienceModel)
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local _ = require(avatarExperienceCommon.Types.TryOnItemComparisonData)
 local constantsModule = require(avatarExperienceCommon.Constants)
-local itemTypeEnumModule = require(avatarExperienceCommon.Enums.ItemTypeEnum)
+local itemTypeEnum = avatarExperienceModelModule.Enums.ItemTypeEnum
 local fFlagAXCatalogMakeupSupport = avatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
 
 function shouldReplaceTryOn(p1, p2)
-	-- upvalues: itemTypeEnumModule (ref), fFlagAXCatalogMakeupSupport (ref), constantsModule (ref)
+	-- upvalues: itemTypeEnum (ref), fFlagAXCatalogMakeupSupport (ref), constantsModule (ref)
 	if p1.isDynamicHead and p2.isClassicHeadOrFace then
 		return true
 	elseif p1.isClassicHeadOrFace and p2.isDynamicHead then
 		return true
-	elseif p1.itemType == itemTypeEnumModule.Asset and p2.itemType == itemTypeEnumModule.Asset then
+	elseif p1.itemType == itemTypeEnum.Asset and p2.itemType == itemTypeEnum.Asset then
 		if p1.itemSubType == p2.itemSubType and (not fFlagAXCatalogMakeupSupport or not constantsModule.ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE[p2.itemSubType]) then
 			return true
 		end
@@ -21,11 +23,11 @@ function shouldReplaceTryOn(p1, p2)
 			end
 		end
 	end
-	if p1.itemType == itemTypeEnumModule.Bundle then
-		if p2.itemType == itemTypeEnumModule.Bundle and p1.itemSubType == p2.itemSubType then
+	if p1.itemType == itemTypeEnum.Bundle then
+		if p2.itemType == itemTypeEnum.Bundle and p1.itemSubType == p2.itemSubType then
 			return true
 		end
-		local var1 = p2.itemType == itemTypeEnumModule.Bundle and p2.itemSubType == tostring(Enum.BundleType.BodyParts.Value)
+		local var1 = p2.itemType == itemTypeEnum.Bundle and p2.itemSubType == tostring(Enum.BundleType.BodyParts.Value)
 		
 		for i, v in p1.assetTypes do
 			if p2.assetTypes[i] and not var1 then

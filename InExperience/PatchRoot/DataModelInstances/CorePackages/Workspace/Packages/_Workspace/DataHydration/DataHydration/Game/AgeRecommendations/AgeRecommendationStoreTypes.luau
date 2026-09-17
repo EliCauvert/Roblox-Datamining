@@ -2,14 +2,12 @@
 local parent = dataHydration.Parent
 local _ = require(dataHydration.DataHydrationTypes)
 local tModule = require(parent.t)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
-local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
+local fFlagShowGameAgeRating = require(parent.SharedFlags).FFlagShowGameAgeRating
 local var1 = tModule.interface({
 	displayName = tModule.optional(tModule.string),
 	displayNameWithHeaderShort = tModule.optional(tModule.string),
-	igrsRating = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil,
-	igrsRatingDisplayMessage = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil,
+	igrsRating = tModule.optional(tModule.string),
+	igrsRatingDisplayMessage = tModule.optional(tModule.string),
 	minimumAgeDisplay = if fFlagShowGameAgeRating then tModule.optional(tModule.string) else nil
 })
 

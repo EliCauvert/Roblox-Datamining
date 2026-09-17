@@ -12,7 +12,11 @@ local authButtonClick = authAnalyticsModule.Events.authButtonClick
 local usernameSuggestor = require(parent.AuthSignup).Thunks.UsernameSuggestor
 local fFlagAllowCurrentUsernameOnSignup = require(parent.SharedFlags).FFlagAllowCurrentUsernameOnSignup
 local dateHelper = require(parent.Time).DateHelper
+local accountUpgradeFieldModule = require(accountUpgrade.AccountUpgradeField)
+local accountUpgradeFlowModule = require(accountUpgrade.AccountUpgradeFlow)
+local getFlowSpec = require(accountUpgrade.FlowSpec).getFlowSpec
 local computeIsAccountUpgradeButtonEnabledModule = require(accountUpgrade.Utils.computeIsAccountUpgradeButtonEnabled)
+local resolveFieldStatesModule = require(accountUpgrade.Utils.resolveFieldStates)
 local useTextFieldValueModule = require(accountUpgrade.Hooks.useTextFieldValue)
 local fIntAccountUpgradeMinimumAgeModule = require(accountUpgrade.Flags.FIntAccountUpgradeMinimumAge)
 local _ = require(script.Parent.AccountUpgradeView)
@@ -20,46 +24,56 @@ local inputValidity = authCommonModule.Enums.InputValidity
 local userGender = authCommonModule.Enums.UserGender
 local usernameValidationContext = authCommonModule.Enums.UsernameValidationContext
 local isStringEmail = authCommonModule.Utils.isStringEmail
+local t = {
+	[accountUpgradeFieldModule.Birthday] = "Authentication.SignUp.Response.BirthdayMustBeSetFirst",
+	[accountUpgradeFieldModule.Username] = "Authentication.SignUp.Response.UsernameMustBeSetFirst"
+}
+
+local function _(p1, p2)
+	-- upvalues: t (ref)
+	local blockingField = p1.blockingField
+	
+	return if blockingField == nil then p2 else assert(t[blockingField], `Account upgrade field has no blocker error key: {blockingField}`)
+end
 
 local function reportEmail() end
 
 return function(p1)
-	-- upvalues: useRoactService (ref), roactNetworking (ref), fFlagAllowCurrentUsernameOnSignup (ref), reactModule (ref), inputValidity (ref), userGender (ref), useTextFieldValueModule (ref), reportEmail (ref), isStringEmail (ref), dateHelper (ref), fIntAccountUpgradeMinimumAgeModule (ref), useLocalization (ref), localizationService (ref), usernameValidationContext (ref), usernameSuggestor (ref), computeIsAccountUpgradeButtonEnabledModule (ref), authButtonClick (ref), eventStreamConstants (ref)
-	local var1 = useRoactService(roactNetworking)
-	local var2 = if fFlagAllowCurrentUsernameOnSignup then p1.currentUsername else nil
-	local var3, var4 = reactModule.useState(nil)
+	-- upvalues: accountUpgradeFlowModule (ref), getFlowSpec (ref), useRoactService (ref), roactNetworking (ref), fFlagAllowCurrentUsernameOnSignup (ref), reactModule (ref), inputValidity (ref), userGender (ref), useTextFieldValueModule (ref), reportEmail (ref), isStringEmail (ref), dateHelper (ref), fIntAccountUpgradeMinimumAgeModule (ref), useLocalization (ref), localizationService (ref), resolveFieldStatesModule (ref), accountUpgradeFieldModule (ref), usernameValidationContext (ref), usernameSuggestor (ref), computeIsAccountUpgradeButtonEnabledModule (ref), authButtonClick (ref), eventStreamConstants (ref), t (ref)
+	local flow = p1.flow or accountUpgradeFlowModule.Pioneer
+	local var1 = getFlowSpec(flow)
+	assert(var1 ~= nil, `Unsupported account upgrade flow: {flow}`)
+	local var2 = useRoactService(roactNetworking)
+	local var3 = if fFlagAllowCurrentUsernameOnSignup then p1.currentUsername else nil
+	local var4, var5 = reactModule.useState(nil)
 	local useState = reactModule.useState
-	local var5 = if var2 == nil or var2 == "" then inputValidity.Unvalidated else inputValidity.Valid
-	useState, var13 = useState(var5)
-	local var6, var7 = reactModule.useState(inputValidity.Unvalidated)
-	local var8, var9 = reactModule.useState(userGender.Unknown)
-	local var10, var11 = reactModule.useState(false)
-	local var12, var13 = reactModule.useState(false)
-	local var14, var15 = reactModule.useState(true)
-	local var16, var17 = reactModule.useState({})
-	local var18, var19 = reactModule.useState(false)
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), inputValidity (copy)
-		var7(inputValidity.Unvalidated)
+	local var6 = if var3 == nil or var3 == "" then inputValidity.Unvalidated else inputValidity.Valid
+	useState, var19 = useState(var6)
+	local var7, var8 = reactModule.useState(inputValidity.Unvalidated)
+	local var9, var10 = reactModule.useState(userGender.Unknown)
+	local var11, var12 = reactModule.useState(false)
+	local var13, var14 = reactModule.useState(false)
+	local var15, var16 = reactModule.useState(true)
+	local var17, var18 = reactModule.useState({})
+	local var19, var20 = reactModule.useState(false)
+	local var21 = reactModule.useCallback(function()
+		-- upvalues: var8 (ref), inputValidity (copy)
+		var8(inputValidity.Unvalidated)
 	end, {})
-	local var21 = useTextFieldValueModule(var2, reactModule.useCallback(function()
-		-- upvalues: var5 (ref), inputValidity (copy), var17 (ref)
-		var5(inputValidity.Unvalidated)
-		var17({})
+	local var22 = useTextFieldValueModule(var3, reactModule.useCallback(function()
+		-- upvalues: var6 (ref), inputValidity (copy), var18 (ref)
+		var6(inputValidity.Unvalidated)
+		var18({})
 	end, {}))
-	local var22 = reactModule.useRef(var2)
-	local var23 = useTextFieldValueModule(nil, var20)
-	local var24 = useTextFieldValueModule(nil, reportEmail)
-	local value = var21.value
-	local value_1 = var23.value
-	local value_2 = var24.value
-	local var25 = if value_2 ~= "" then isStringEmail(value_2) else true
-	local var26 = if value_2 == "" or var25 then nil else "Authentication.SignUp.Response.InvalidEmail"
-	local var27 = var3 ~= nil
-	local var28 = var27 and var3:GetAgeInYears() < fIntAccountUpgradeMinimumAgeModule
-	local var29 = useLocalization({
-		titleText = "Authentication.SignUp.Header.SetUpYourRobloxAccount",
-		subtitleText = "Authentication.SignUp.Subtitle.YourProgressCarriesOver",
+	local var23 = reactModule.useRef(var3)
+	local var24 = useTextFieldValueModule(nil, var21)
+	local var25 = useTextFieldValueModule(nil, reportEmail)
+	local value = var22.value
+	local value_1 = var24.value
+	local value_2 = var25.value
+	local var26 = if value_2 ~= "" then isStringEmail(value_2) else true
+	local var27 = var4 ~= nil and var4:GetAgeInYears() < fIntAccountUpgradeMinimumAgeModule
+	local var28 = useLocalization({
 		birthdayLabel = "Authentication.SignUp.Label.Birthday",
 		birthdayPlaceholder = "Authentication.SignUp.Description.BirthdayHint",
 		usernamePlaceholder = "Authentication.SignUp.Message.Username.NoRealNameUse",
@@ -71,139 +85,169 @@ return function(p1)
 		femaleText = "Authentication.SignUp.Label.GenderFemale",
 		maleText = "Authentication.SignUp.Label.GenderMale",
 		saveText = "Authentication.Login.Action.Save",
-		emailError = var26,
-		birthdayError = if var28 then "Authentication.SignUp.Label.Error.MinimumAgeNotMet" else nil,
-		monthText = if var3 then dateHelper.MonthsLocalizationKeys[var3.Month] else nil,
+		titleText = var1.titleTextKey,
+		subtitleText = var1.subtitleTextKey,
+		emailError = if value_2 == "" or var26 then nil else "Authentication.SignUp.Response.InvalidEmail",
+		birthdayError = if var27 then "Authentication.SignUp.Label.Error.MinimumAgeNotMet" else nil,
+		monthText = if var4 then dateHelper.MonthsLocalizationKeys[var4.Month] else nil,
 		dayAffix = dateHelper.DayAffixLocalizationKey,
 		yearAffix = dateHelper.YearAffixLocalizationKey
 	})
-	local var30 = if not (var3 == nil or var29.monthText == nil) then dateHelper:GetFormattedFullString(var29.monthText, var3.Day, var29.dayAffix, var3.Year, var29.yearAffix, " ", localizationService.RobloxLocaleId) else ""
-	local var31 = value ~= "" and useState ~= inputValidity.Invalid
-	local var32 = if var3 then var3:FormatForEndpoint() else ""
-	
-	return {
-		titleText = var29.titleText,
-		subtitleText = var29.subtitleText,
-		birthdayLabel = var29.birthdayLabel,
-		birthday = var3,
-		birthdayText = var30,
-		birthdayPlaceholder = var29.birthdayPlaceholder,
-		birthdayError = var29.birthdayError,
-		usernameTitleTextKey = "Authentication.Login.Label.Username",
-		usernameSummaryErrorTextKey = if var27 then "Authentication.SignUp.Label.ErrorsWithUsername" else "Authentication.SignUp.Response.BirthdayMustBeSetFirst",
-		isUsernamePrerequisiteMet = var27,
-		usernameValidatorAdditionalProps = reactModule.useMemo(function()
-			-- upvalues: var32 (ref), usernameValidationContext (copy), var2 (ref)
-			return {
-				birthday = var32,
-				context = usernameValidationContext.Signup,
-				currentUsername = var2
-			}
-		end, { var32, var2 }),
-		usernamePlaceholder = var29.usernamePlaceholder,
-		username = value,
-		prefilledUsername = var22.current,
-		usernameSuggestions = if useState == inputValidity.Invalid and #var16 > 0 then var16 else {},
-		usernameSuggestionPrompt = `{var29.usernameSuggestionPrompt}:`,
-		onUsernameSuggestionSelected = reactModule.useCallback(function(p2)
-			-- upvalues: var21 (ref), var17 (ref), authButtonClick (copy), eventStreamConstants (copy)
-			var21.onChanged(p2)
-			var17({})
-			authButtonClick(eventStreamConstants.Context.SinglePageSignUpScreen, eventStreamConstants.Button.UsernameSuggestion, p2)
-		end, { var21.onChanged }),
-		pillClicked = var18,
-		updatePillClicked = reactModule.useCallback(function()
-			-- upvalues: var19 (ref)
-			var19(true)
-		end, {}),
-		resetPillClicked = reactModule.useCallback(function()
-			-- upvalues: var19 (ref)
-			var19(false)
-		end, {}),
-		onUsernameValidated = reactModule.useCallback(function(p2, p3)
-			-- upvalues: var5 (ref), var27 (ref), usernameSuggestor (copy), var1 (ref), var32 (ref), usernameValidationContext (copy), var21 (ref), var17 (ref)
-			var5(p3)
-			
-			if var27 and p2 ~= "" then
-				usernameSuggestor.suggestUsernames(var1, p2, var32, usernameValidationContext.Signup):andThen(function(p4)
-					-- upvalues: var21 (copy), p2 (ref), var17 (copy)
-					if var21.valueRef.current == p2 and p4.shouldUpdateState then
-						var17(p4.suggestions or {})
-					end
-				end)
-				
-				return
+	local var29 = if not (var4 == nil or var28.monthText == nil) then dateHelper:GetFormattedFullString(var28.monthText, var4.Day, var28.dayAffix, var4.Year, var28.yearAffix, " ", localizationService.RobloxLocaleId) else ""
+	local var30 = resolveFieldStatesModule({
+		spec = var1,
+		isSatisfied = {
+			[accountUpgradeFieldModule.Birthday] = var4 ~= nil,
+			[accountUpgradeFieldModule.Username] = value ~= "" and useState ~= inputValidity.Invalid,
+			[accountUpgradeFieldModule.Password] = value_1 ~= "" and var7 == inputValidity.Valid
+		}
+	})
+	local username = var30[accountUpgradeFieldModule.Username]
+	local password = var30[accountUpgradeFieldModule.Password]
+	assert(username ~= nil, "Account upgrade flow must include a username state")
+	assert(password ~= nil, "Account upgrade flow must include a password state")
+	local var31 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), usernameValidationContext (copy), var3 (ref)
+		return {
+			birthday = if var4 then var4:FormatForEndpoint() else "",
+			context = usernameValidationContext.Signup,
+			currentUsername = var3
+		}
+	end, { var4, var3 })
+	local var32 = reactModule.useMemo(function()
+		-- upvalues: value (ref)
+		return { username = value }
+	end, { value })
+	local var33 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var6 (ref), var4 (ref), usernameSuggestor (copy), var2 (ref), usernameValidationContext (copy), var22 (ref), var18 (ref)
+		var6(p3)
+		
+		if var4 == nil or p2 == "" then
+			return
+		end
+		usernameSuggestor.suggestUsernames(var2, p2, var4:FormatForEndpoint(), usernameValidationContext.Signup):andThen(function(p4)
+			-- upvalues: var22 (copy), p2 (ref), var18 (copy)
+			if var22.valueRef.current == p2 and p4.shouldUpdateState then
+				var18(p4.suggestions or {})
 			end
-		end, { var1, var27, var32, var21.valueRef }),
-		passwordTitleTextKey = "CommonUI.Messages.Label.Password",
-		passwordSummaryErrorTextKey = if not var27 then "Authentication.SignUp.Response.BirthdayMustBeSetFirst" elseif not var31 then "Authentication.SignUp.Response.UsernameMustBeSetFirst" else "Authentication.SignUp.Label.ErrorsWithPassword",
-		isPasswordPrerequisiteMet = var27 and var31,
-		passwordValidatorAdditionalProps = reactModule.useMemo(function()
-			-- upvalues: value (ref)
-			return { username = value }
-		end, { value }),
-		passwordPlaceholder = var29.passwordPlaceholder,
-		onPasswordValidated = reactModule.useCallback(function(_, p2)
-			-- upvalues: var7 (ref)
-			var7(p2)
-		end, {}),
-		hidePassword = var14,
-		emailLabel = var29.emailLabel,
-		emailPlaceholder = var29.emailPlaceholder,
+		end)
+	end, { var2, var4, var22.valueRef })
+	local var34 = reactModule.useCallback(function(_, p2)
+		-- upvalues: var8 (ref)
+		var8(p2)
+	end, {})
+	local var35 = reactModule.useCallback(function()
+		-- upvalues: var12 (ref)
+		var12(true)
+	end, {})
+	local var36 = reactModule.useCallback(function()
+		-- upvalues: var12 (ref)
+		var12(false)
+	end, {})
+	local var37 = reactModule.useCallback(function(p2)
+		-- upvalues: var5 (ref), var12 (ref)
+		var5(p2)
+		var12(false)
+	end, {})
+	local var38 = computeIsAccountUpgradeButtonEnabledModule({
+		birthday = var4,
+		username = value,
+		password = value_1,
+		usernameValid = useState,
+		passwordValid = var7,
 		email = value_2,
-		emailError = var29.emailError,
-		genderLabel = var29.genderLabel,
-		femaleText = var29.femaleText,
-		maleText = var29.maleText,
-		gender = var8,
-		saveText = var29.saveText,
-		isSaveEnabled = computeIsAccountUpgradeButtonEnabledModule({
-			birthday = var3,
-			username = value,
-			password = value_1,
-			usernameValid = useState,
-			passwordValid = var6,
-			email = value_2,
-			emailValid = var25,
-			isBirthdayOldEnough = not var28,
-			isSubmitting = var12
-		}),
-		isSubmitting = var12,
-		isBirthdayPickerOpen = var10,
-		hasBackdrop = p1.hasBackdrop,
-		onClose = p1.onClose,
-		onBirthdayActivated = reactModule.useCallback(function()
-			-- upvalues: var11 (ref)
-			var11(true)
-		end, {}),
-		onBirthdayConfirmed = reactModule.useCallback(function(p2)
-			-- upvalues: var4 (ref), var11 (ref)
-			var4(p2)
-			var11(false)
-		end, {}),
-		onBirthdayPickerClosed = reactModule.useCallback(function()
-			-- upvalues: var11 (ref)
-			var11(false)
-		end, {}),
-		onUsernameChanged = var21.onChanged,
-		onPasswordChanged = var23.onChanged,
-		onEmailChanged = var24.onChanged,
-		onGenderChanged = var9,
-		onPasswordVisibilityToggle = reactModule.useCallback(function()
-			-- upvalues: var15 (ref)
-			var15(function(p2)
-				return not p2
-			end)
-		end, {}),
-		onSaveActivated = reactModule.useCallback(function()
-			-- upvalues: var12 (ref), var13 (ref), p1 (ref), var2 (ref), value (ref)
-			if var12 then return end
-			var13(true)
-			p1.onSignUpComplete({
-				isSuccess = true,
-				username = if var2 ~= nil then nil else value,
-				displayName = if var2 == nil or value == var2 then nil else value
-			})
-		end, { var2, var12, p1.onSignUpComplete, value })
+		emailValid = var26,
+		isBirthdayOldEnough = not var27,
+		isSubmitting = var13,
+		requiredFields = var1.requiredFields
+	})
+	local var39 = reactModule.useCallback(function()
+		-- upvalues: var16 (ref)
+		var16(function(p2)
+			return not p2
+		end)
+	end, {})
+	local var40 = reactModule.useCallback(function(p2)
+		-- upvalues: var22 (ref), var18 (ref), authButtonClick (copy), eventStreamConstants (copy)
+		var22.onChanged(p2)
+		var18({})
+		authButtonClick(eventStreamConstants.Context.SinglePageSignUpScreen, eventStreamConstants.Button.UsernameSuggestion, p2)
+	end, { var22.onChanged })
+	local var41 = reactModule.useCallback(function()
+		-- upvalues: var20 (ref)
+		var20(true)
+	end, {})
+	local var42 = reactModule.useCallback(function()
+		-- upvalues: var20 (ref)
+		var20(false)
+	end, {})
+	local var43 = if useState == inputValidity.Invalid and #var17 > 0 then var17 else {}
+	local var44 = reactModule.useCallback(function()
+		-- upvalues: var13 (ref), var14 (ref), p1 (ref), var3 (ref), value (ref)
+		if var13 then return end
+		var14(true)
+		p1.onSignUpComplete({
+			isSuccess = true,
+			username = if var3 ~= nil then nil else value,
+			displayName = if var3 == nil or value == var3 then nil else value
+		})
+	end, { var3, var13, p1.onSignUpComplete, value })
+	local t_1 = {
+		titleText = var28.titleText,
+		subtitleText = var28.subtitleText,
+		birthdayLabel = var28.birthdayLabel,
+		birthday = var4,
+		birthdayText = var29,
+		birthdayPlaceholder = var28.birthdayPlaceholder,
+		birthdayError = var28.birthdayError,
+		usernameTitleTextKey = "Authentication.Login.Label.Username"
 	}
+	local blockingField = username.blockingField
+	t_1.usernameSummaryErrorTextKey = if blockingField == nil then "Authentication.SignUp.Label.ErrorsWithUsername" else assert(t[blockingField], `Account upgrade field has no blocker error key: {blockingField}`)
+	t_1.isUsernamePrerequisiteMet = username.isUnlocked
+	t_1.fieldStates = var30
+	t_1.usernameValidatorAdditionalProps = var31
+	t_1.usernamePlaceholder = var28.usernamePlaceholder
+	t_1.username = value
+	t_1.prefilledUsername = var23.current
+	t_1.usernameSuggestions = var43
+	t_1.usernameSuggestionPrompt = `{var28.usernameSuggestionPrompt}:`
+	t_1.onUsernameSuggestionSelected = var40
+	t_1.pillClicked = var19
+	t_1.updatePillClicked = var41
+	t_1.resetPillClicked = var42
+	t_1.onUsernameValidated = var33
+	t_1.passwordTitleTextKey = "CommonUI.Messages.Label.Password"
+	local blockingField_1 = password.blockingField
+	t_1.passwordSummaryErrorTextKey = if blockingField_1 == nil then "Authentication.SignUp.Label.ErrorsWithPassword" else assert(t[blockingField_1], `Account upgrade field has no blocker error key: {blockingField_1}`)
+	t_1.isPasswordPrerequisiteMet = password.isUnlocked
+	t_1.passwordValidatorAdditionalProps = var32
+	t_1.passwordPlaceholder = var28.passwordPlaceholder
+	t_1.onPasswordValidated = var34
+	t_1.hidePassword = var15
+	t_1.emailLabel = var28.emailLabel
+	t_1.emailPlaceholder = var28.emailPlaceholder
+	t_1.email = value_2
+	t_1.emailError = var28.emailError
+	t_1.genderLabel = var28.genderLabel
+	t_1.femaleText = var28.femaleText
+	t_1.maleText = var28.maleText
+	t_1.gender = var9
+	t_1.saveText = var28.saveText
+	t_1.isSaveEnabled = var38
+	t_1.isSubmitting = var13
+	t_1.isBirthdayPickerOpen = var11
+	t_1.hasBackdrop = p1.hasBackdrop
+	t_1.onClose = if var1.canDismiss then p1.onClose else nil
+	t_1.onBirthdayActivated = var35
+	t_1.onBirthdayConfirmed = var37
+	t_1.onBirthdayPickerClosed = var36
+	t_1.onUsernameChanged = var22.onChanged
+	t_1.onPasswordChanged = var24.onChanged
+	t_1.onEmailChanged = var25.onChanged
+	t_1.onGenderChanged = var10
+	t_1.onPasswordVisibilityToggle = var39
+	t_1.onSaveActivated = var44
+	
+	return t_1
 end

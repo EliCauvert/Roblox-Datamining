@@ -1,7 +1,9 @@
 ﻿local momentsCommonModule = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsCommon)
 local eventNames = momentsCommonModule.Analytics.EventNames
+local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
+local sessionManager = momentsCommonModule.Analytics.SessionManager
 local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
-local creationFlowSteps = momentsCommonModule.Analytics.FunnelEventNames.CreationFlowSteps
+local creationFlowSteps = funnelEventNames.CreationFlowSteps
 local t = {
 	[eventNames.MomentsEditingFlowContinueToEditButtonPressed] = creationFlowSteps.GalleryItemSelectedContinuePressed,
 	[eventNames.MomentsEditingFlowContinueToDescriptionButtonPressed] = creationFlowSteps.EditingScreenContinuePressed,
@@ -39,28 +41,53 @@ return {
 	makeCreationBaseFields = function(p1)
 		return if p1 == nil then {} else { creationSessionId = p1 }
 	end,
-	makeCaptureDescriptorFields = function(p1)
+	makeVoiceEventFields = function(p1)
+		-- upvalues: sessionManager (ref), funnelEventNames (ref)
+		local t_1, var1, var2
+		local t = { tool = "voice" }
+		local sessionId = sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)
+		
+		if sessionId == nil then
+			t_1 = {}
+			var1 = nil
+			var2 = nil
+		else
+			t_1 = { creationSessionId = sessionId }
+			var1 = nil
+			var2 = nil
+		end
+		for i, v in t_1, var1, var2 do
+			t[i] = v
+		end
+		if p1 ~= nil then
+			for i_1, v_1 in p1 do
+				t[i_1] = v_1
+			end
+		end
+		return t
+	end,
+	makeCaptureDescriptorFields = function(p2)
 		local t = {
-			sourcePlaceId = tostring(p1.SourcePlaceId),
-			localId = tostring(p1.LocalId)
+			sourcePlaceId = tostring(p2.SourcePlaceId),
+			localId = tostring(p2.LocalId)
 		}
-		local captureType = p1.CaptureType
+		local captureType = p2.CaptureType
 		t.captureType = if typeof(captureType) == "EnumItem" then captureType.Name elseif captureType == nil then nil else tostring(captureType)
-		t.universeId = tostring(p1.SourceUniverseId)
+		t.universeId = tostring(p2.SourceUniverseId)
 		
 		return t
 	end,
-	makeGeneratedTextOutcomeFields = function(p1, p2, p3, p4)
+	makeGeneratedTextOutcomeFields = function(p2, p3, p4, p5)
 		-- upvalues: getFFlagEnableMomentTextGeneration (ref)
 		return if getFFlagEnableMomentTextGeneration() then {
-			generatedDescriptionOutcome = if p1 == nil then "none" elseif p2 == p1 then "verbatim" elseif p2 == nil or p2 == "" then "discarded" else "edited",
-			generatedSummaryOutcome = if p3 == nil then "none" elseif p4 == p3 then "verbatim" elseif p4 == nil or p4 == "" then "discarded" else "edited"
+			generatedDescriptionOutcome = if p2 == nil then "none" elseif p3 == p2 then "verbatim" elseif p3 == nil or p3 == "" then "discarded" else "edited",
+			generatedSummaryOutcome = if p4 == nil then "none" elseif p5 == p4 then "verbatim" elseif p5 == nil or p5 == "" then "discarded" else "edited"
 		} else {}
 	end,
-	classifyGeneratedTextOutcome = function(p1, p2)
-		return if p1 == nil then "none" elseif p2 == p1 then "verbatim" elseif p2 == nil or p2 == "" then "discarded" else "edited"
+	classifyGeneratedTextOutcome = function(p2, p3)
+		return if p2 == nil then "none" elseif p3 == p2 then "verbatim" elseif p3 == nil or p3 == "" then "discarded" else "edited"
 	end,
-	enumName = function(p1)
-		return if typeof(p1) == "EnumItem" then p1.Name elseif p1 == nil then nil else tostring(p1)
+	enumName = function(p2)
+		return if typeof(p2) == "EnumItem" then p2.Name elseif p2 == nil then nil else tostring(p2)
 	end
 }
