@@ -17,11 +17,10 @@ local findAnalyticsField = sduiCoreSystemModule.findAnalyticsField
 local sduiBuilder = sduiCoreSystemModule.SduiBuilder
 local sduiParsers = sduiCoreSystemModule.SduiParsers
 local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
-local fFlagSduiEdpStoreImpressionsLogging = require(parent.SharedFlags).FFlagSduiEdpStoreImpressionsLogging
 local t = {}
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), cryoModule (ref), t (ref), findAnalyticsField (ref), sduiBuilder (ref), sduiCollectionAnalyticsBuilder (ref), getImpressionsTagModule (ref), impressionsTagUtility (ref), reportUnifiedLoggingImpressions (ref), fFlagSduiEdpStoreImpressionsLogging (ref), sduiParsers (ref), sendGameImpressions (ref), getSduiComponentWrapper (ref), screenSizeImpressionsTracker (ref), waitForPropWrapper (ref)
+	-- upvalues: reactModule (ref), cryoModule (ref), t (ref), findAnalyticsField (ref), sduiBuilder (ref), sduiCollectionAnalyticsBuilder (ref), getImpressionsTagModule (ref), impressionsTagUtility (ref), reportUnifiedLoggingImpressions (ref), sduiParsers (ref), sendGameImpressions (ref), getSduiComponentWrapper (ref), screenSizeImpressionsTracker (ref), waitForPropWrapper (ref)
 	local layoutOrder = p1.layoutOrder
 	local anchorPoint = p1.anchorPoint
 	local automaticSize = p1.automaticSize
@@ -124,12 +123,12 @@ return reactModule.memo(function(p1)
 				impressionsTag = var5,
 				scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal,
 				sendImpressions = reactModule.useCallback(function(p2)
-					-- upvalues: p1 (ref), var1 (ref), reportUnifiedLoggingImpressions (copy), sduiContext (ref), var2 (ref), fFlagSduiEdpStoreImpressionsLogging (copy), var5 (ref), t (copy), cryoModule (copy), sduiParsers (copy), var4 (ref), sendGameImpressions (copy)
+					-- upvalues: p1 (ref), var1 (ref), reportUnifiedLoggingImpressions (copy), sduiContext (ref), var2 (ref), var5 (ref), t (copy), cryoModule (copy), sduiParsers (copy), var4 (ref), sendGameImpressions (copy)
 					if p1.item == nil then return end
 					assert(p1.item, "props.item must exist")
 					
 					if p1.impressionEventName or not var1.current or var1.current.contentType ~= "Game" then
-						reportUnifiedLoggingImpressions(sduiContext, p2, var2.current, var1.current, p1.startRow, p1.impressionEventName, p1.skipItemImpressionsLog, if fFlagSduiEdpStoreImpressionsLogging then var5 else nil)
+						reportUnifiedLoggingImpressions(sduiContext, p2, var2.current, var1.current, p1.startRow, p1.impressionEventName, p1.skipItemImpressionsLog, var5)
 						
 						return
 					elseif var1.current and (var1.current.contentType == "HeroUnit" or var1.current.contentType == "Game") and (p1.item.analyticsData and p1.item.analyticsData.universeId ~= nil) then
@@ -145,8 +144,7 @@ return reactModule.memo(function(p1)
 					reportUnifiedLoggingImpressions(sduiContext, p2, var2.current, var1.current)
 				end, {
 					p1.item, p1.index, p1.startRow, sduiContext, var1, var2, var4,
-					p1.impressionEventName, p1.skipItemImpressionsLog,
-					if fFlagSduiEdpStoreImpressionsLogging then var5 else nil
+					p1.impressionEventName, p1.skipItemImpressionsLog, var5
 				}),
 				dataUpdatedTimestamp = p1.sduiContext.dataUpdatedTimestamp
 			})

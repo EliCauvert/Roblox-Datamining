@@ -1,9 +1,8 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local parent = avatarExperienceCommon.Parent
 local reactModule = require(parent.React)
-local avatarExperienceUIKitModule = require(parent.AvatarExperienceUIKit)
-local builderIconsModule = require(parent.BuilderIcons)
 local responsiveModule = require(parent.Responsive)
-local itemCardComponents = avatarExperienceUIKitModule.ItemCardComponents
+local itemCardComponents = require(parent.AvatarExperienceUIKit).ItemCardComponents
 local itemCardFooter = itemCardComponents.ItemCardFooter
 local itemCardHeader = itemCardComponents.ItemCardHeader
 local itemCard = itemCardComponents.ItemCard
@@ -14,13 +13,20 @@ local _ = itemCardComponents.ItemCardPriceLine
 local itemCardIcon = itemCardComponents.ItemCardIcon
 local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
+local badgeSize = foundationModule.Enums.BadgeSize
 local iconSize = foundationModule.Enums.IconSize
 local icon = foundationModule.Icon
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local catalogItemCardItemTypeEnumModule = require(script.Parent.Enums.CatalogItemCardItemTypeEnum)
-local catalogItemCardItemInfoEnumModule = require(script.Parent.Enums.CatalogItemCardItemInfoEnum)
+local indicatorStackModule = require(avatarExperienceCommon.Components.IndicatorStack.IndicatorStack)
+local shouldRenderIndicatorStackModule = require(avatarExperienceCommon.Utils.shouldRenderIndicatorStack)
+local licensingBadgeModule = require(avatarExperienceCommon.Components.LicensingBadge.LicensingBadge)
+local _ = require(script.Parent.Enums.CatalogItemCardItemTypeEnum)
+local _ = require(script.Parent.Enums.CatalogItemCardItemInfoEnum)
 local catalogItemCardStatusIconTypeEnumModule = require(script.Parent.Enums.CatalogItemCardStatusIconTypeEnum)
+local itemStatusTypeEnumModule = require(script.Parent.Enums.ItemStatusTypeEnum)
+local catalogItemCardBadgeMapsModule = require(script.Parent.CatalogItemCardBadgeMaps)
 local catalogItemCardSelectedOverlayModule = require(script.Parent.CatalogItemCardSelectedOverlay)
+local useSelectedOverlayButtonModule = require(script.Parent.useSelectedOverlayButton)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXRootSlotBasedEditorFlag = require(parent.AvatarExperienceFlags).FFlagAXRootSlotBasedEditorFlag
 local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
@@ -30,35 +36,14 @@ local fFlagAXShowFaeUpsell = avatarExperienceFlagsModule.FFlagAXShowFaeUpsell
 local fFlagAXFixBadgeStatusConfigOptions = avatarExperienceFlagsModule.FFlagAXFixBadgeStatusConfigOptions
 local fFlagAXSelectedBorderWrapsBackground = avatarExperienceFlagsModule.FFlagAXSelectedBorderWrapsBackground
 local fFlagAXRemoveDynamicHeadBadge = avatarExperienceFlagsModule.FFlagAXRemoveDynamicHeadBadge
-local _ = {
-	Text = "text",
-	Icon = "icon",
-	Badge = "badge",
-	Placeholder = "placeholder"
-}
-local var1 = if fFlagAXModeratedItemIconUpdates then builderIconsModule.Icon.CircleI else "icons/actions/info_small"
-local var2 = if fFlagAXModeratedItemIconUpdates then builderIconsModule.Icon.ClockDashed else "icons/status/pending_small"
-local var3 = if fFlagAXModeratedItemIconUpdates then builderIconsModule.Icon.Clock else "icons/status/pending_small"
-local var4 = if fFlagAXShowFaeUpsell then if fFlagAXModeratedItemIconUpdates then builderIconsModule.Icon.LockClosed else "icons/status/private" else nil
-local t = {
-	[catalogItemCardStatusIconTypeEnumModule.Moderated] = var1,
-	[catalogItemCardStatusIconTypeEnumModule.PendingModeration] = var2,
-	[catalogItemCardStatusIconTypeEnumModule.Durable] = var3,
-	[catalogItemCardStatusIconTypeEnumModule.Info] = if fFlagAXModeratedItemIconUpdates then builderIconsModule.Icon.CircleI else "icons/actions/info_small",
-	[catalogItemCardStatusIconTypeEnumModule.Unavailable] = if fFlagAXModeratedItemIconUpdates then builderIconsModule.Icon.CircleI else "icons/status/warning_small",
-	[catalogItemCardStatusIconTypeEnumModule.Error] = if fFlagAXModeratedItemIconUpdates then builderIconsModule.Icon.TriangleExclamation else "icons/status/error_large",
-	[catalogItemCardStatusIconTypeEnumModule.FAE] = var4
-}
-local t_1 = {
-	[catalogItemCardItemTypeEnumModule.Limited] = { { type = "icon", icon = "icons/status/item/limited" } },
-	[catalogItemCardItemTypeEnumModule.Collectible] = {
-		{ type = "icon", icon = "icons/status/item/limited" },
-		{ type = "text", text = "#" }
-	}
-}
-local t_2 = {
-	[catalogItemCardItemInfoEnumModule.DynamicHead] = "icons/menu/clothing/dynamicHead"
-}
+local fFlagAXMarketplaceItemCardIndicatorStack = avatarExperienceFlagsModule.FFlagAXMarketplaceItemCardIndicatorStack
+local fFlagAXMarketplaceLicensingItemCards = avatarExperienceFlagsModule.FFlagAXMarketplaceLicensingItemCards
+local _ = require(parent.AvatarExperienceModel)
+local DURABLE_ICON = catalogItemCardBadgeMapsModule.DURABLE_ICON
+local FAE_ICON = catalogItemCardBadgeMapsModule.FAE_ICON
+local itemTypeToContentMap = catalogItemCardBadgeMapsModule.itemTypeToContentMap
+local itemInfoIconMap = catalogItemCardBadgeMapsModule.itemInfoIconMap
+local itemStatusIconTypeToIconMap = catalogItemCardBadgeMapsModule.itemStatusIconTypeToIconMap
 
 local function selectIsPortrait(p1)
 	-- upvalues: responsiveModule (ref)
@@ -74,56 +59,133 @@ local function buildBadgeStatusContent(p1, p2)
 	return list
 end
 
+local function buildItemStatusContent(p1, p2, p3, p4)
+	-- upvalues: itemStatusTypeEnumModule (ref), fFlagAXFixBadgeStatusConfigOptions (ref), fFlagAXShowFaeUpsell (ref), buildBadgeStatusContent (ref), catalogItemCardStatusIconTypeEnumModule (ref), fFlagAXInventoryDurablesSupport (ref), DURABLE_ICON (ref)
+	if p1 then
+		local var1 = if p1.type ~= itemStatusTypeEnumModule.Badge then if fFlagAXFixBadgeStatusConfigOptions or fFlagAXShowFaeUpsell then buildBadgeStatusContent(p2, p1.text) else {
+			{ type = "icon", icon = p2 },
+			{ type = "text", text = p1.text }
+		} else nil
+		
+		return if p1.type == itemStatusTypeEnumModule.Text and p1.text then { type = "text", text = p1.text } elseif p1.type == itemStatusTypeEnumModule.Badge and var1 then { type = "badge", displayBorder = true, content = var1 } elseif p2 then { type = "icon", icon = p2 } elseif not (not p4 or p1.iconType == catalogItemCardStatusIconTypeEnumModule.Moderated) then if fFlagAXInventoryDurablesSupport and p3 then {
+			type = "badge",
+			displayBorder = true,
+			content = {
+				{ type = "icon", icon = DURABLE_ICON },
+				{ type = "text", text = p3 }
+			}
+		} else nil else nil
+	end
+end
+
 local function buildSelectedOverlayBadge(p1, p2, p3)
-	-- upvalues: fFlagAXShowFaeUpsell (ref), catalogItemCardStatusIconTypeEnumModule (ref), var4 (ref), fFlagAXInventoryDurablesSupport (ref), var3 (ref)
+	-- upvalues: fFlagAXShowFaeUpsell (ref), catalogItemCardStatusIconTypeEnumModule (ref), FAE_ICON (ref), fFlagAXInventoryDurablesSupport (ref), DURABLE_ICON (ref)
 	local iconType = p1 and p1.iconType
 	local text = p1 and p1.text
 	
-	return if fFlagAXShowFaeUpsell and iconType == catalogItemCardStatusIconTypeEnumModule.FAE then { icon = var4 } elseif p2 and text then { icon = p2, text = text } elseif fFlagAXInventoryDurablesSupport and p3 and iconType ~= catalogItemCardStatusIconTypeEnumModule.Moderated then { icon = var3, text = p3 } else nil
+	return if fFlagAXShowFaeUpsell and iconType == catalogItemCardStatusIconTypeEnumModule.FAE then { icon = FAE_ICON } elseif p2 and text then { icon = p2, text = text } elseif fFlagAXInventoryDurablesSupport and p3 and iconType ~= catalogItemCardStatusIconTypeEnumModule.Moderated then { icon = DURABLE_ICON, text = p3 } else nil
+end
+
+local function SelectedIndicatorCorners(p1)
+	-- upvalues: useSelectedOverlayButtonModule (ref), reactModule (ref), itemCardHeaderCornersOverlay (ref), fFlagAXMarketplaceLicensingItemCards (ref)
+	local var1 = useSelectedOverlayButtonModule(p1.hasOverlayButton)
+	
+	return reactModule.createElement(itemCardHeaderCornersOverlay, {
+		topLeftSlot = if fFlagAXMarketplaceLicensingItemCards then p1.topLeftSlot else nil,
+		bottomRightSlot = p1.bottomRightSlot,
+		bottomInset = if var1.isVisible then var1.occupiedHeight else nil,
+		constrainTopLeftSlot = fFlagAXMarketplaceLicensingItemCards and p1.topLeftSlot ~= nil
+	})
 end
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: fFlagAXModeratedItemIconUpdates (ref), useTokens (ref), t_2 (ref), t_1 (ref), useSelector (ref), selectIsPortrait (ref), t (ref), fFlagAXSelectedBorderWrapsBackground (ref), reactModule (ref), foundationModule (ref), icon (ref), iconSize (ref), itemCard (ref), fFlagAXMISEnableMultiShopping (ref), itemCardHeader (ref), catalogItemCardSelectedOverlayModule (ref), fFlagAXFixBadgeStatusConfigOptions (ref), buildSelectedOverlayBadge (ref), fFlagAXShowFaeUpsell (ref), catalogItemCardStatusIconTypeEnumModule (ref), var4 (ref), fFlagAXInventoryDurablesSupport (ref), var3 (ref), itemCardHeaderCornersOverlay (ref), itemCardStatus (ref), itemCardBadge (ref), buildBadgeStatusContent (ref), itemCardIcon (ref), fFlagAXRemoveDynamicHeadBadge (ref), itemCardFooter (ref), fFlagAXRootSlotBasedEditorFlag (ref)
-	local var5
-	local var6 = if fFlagAXModeratedItemIconUpdates then useTokens() else nil
+	-- upvalues: fFlagAXModeratedItemIconUpdates (ref), fFlagAXMarketplaceLicensingItemCards (ref), useTokens (ref), reactModule (ref), itemInfoIconMap (ref), itemTypeToContentMap (ref), useSelector (ref), selectIsPortrait (ref), itemStatusTypeEnumModule (ref), itemStatusIconTypeToIconMap (ref), fFlagAXSelectedBorderWrapsBackground (ref), licensingBadgeModule (ref), badgeSize (ref), fFlagAXMarketplaceItemCardIndicatorStack (ref), buildItemStatusContent (ref), shouldRenderIndicatorStackModule (ref), indicatorStackModule (ref), foundationModule (ref), icon (ref), iconSize (ref), itemCard (ref), fFlagAXMISEnableMultiShopping (ref), itemCardHeader (ref), SelectedIndicatorCorners (ref), itemCardHeaderCornersOverlay (ref), catalogItemCardSelectedOverlayModule (ref), fFlagAXFixBadgeStatusConfigOptions (ref), buildSelectedOverlayBadge (ref), fFlagAXShowFaeUpsell (ref), catalogItemCardStatusIconTypeEnumModule (ref), FAE_ICON (ref), fFlagAXInventoryDurablesSupport (ref), DURABLE_ICON (ref), itemCardStatus (ref), itemCardBadge (ref), buildBadgeStatusContent (ref), itemCardIcon (ref), fFlagAXRemoveDynamicHeadBadge (ref), itemCardFooter (ref), fFlagAXRootSlotBasedEditorFlag (ref)
+	local var1 = if fFlagAXModeratedItemIconUpdates or fFlagAXMarketplaceLicensingItemCards then useTokens() else nil
+	local var2 = false
+	local var3 = p2
+	local var4 = nil
+	
+	if fFlagAXMarketplaceLicensingItemCards then
+		local size3000 = var1.Size.Size_3000
+		local var5, var6 = reactModule.useState(false)
+		var2 = var5
+		local var7 = reactModule.useRef(var5)
+		local var8 = reactModule.useRef(nil)
+		var3 = var8
+		reactModule.useImperativeHandle(p2, function()
+			-- upvalues: var8 (ref)
+			return var8.current
+		end, {})
+		local var9 = reactModule.useCallback(function(p3)
+			-- upvalues: size3000 (ref), var7 (ref), var6 (ref)
+			local x = p3.AbsoluteSize.X
+			
+			if x == 0 then return end
+			local var10 = x <= size3000
+			
+			if var10 ~= var7.current then
+				var7.current = var10
+				var6(var10)
+			end
+		end, { size3000 })
+		var4 = var9
+		reactModule.useLayoutEffect(function()
+			-- upvalues: var8 (ref), var9 (ref)
+			if var8.current then
+				var9(var8.current)
+			end
+		end, { var9 })
+	end
+	local var10
 	local title = p1.title or (p1.creator or p1.priceLineContent)
-	local var7 = if p1.itemInfo then t_2[p1.itemInfo] else nil
-	local var8 = if p1.itemType then t_1[p1.itemType] else nil
-	local var9 = if fFlagAXModeratedItemIconUpdates then useSelector(selectIsPortrait) else nil
-	local var10 = if p1.itemStatus and (p1.itemStatus.type == "icon" or p1.itemStatus.type == "badge") and p1.itemStatus.iconType then t[p1.itemStatus.iconType] else nil
+	local var11 = if p1.itemInfo then itemInfoIconMap[p1.itemInfo] else nil
+	local var12 = if p1.itemType then itemTypeToContentMap[p1.itemType] else nil
+	local var13 = if fFlagAXModeratedItemIconUpdates then useSelector(selectIsPortrait) else nil
+	local var14 = if p1.itemStatus and (p1.itemStatus.type == itemStatusTypeEnumModule.Icon or p1.itemStatus.type == itemStatusTypeEnumModule.Badge) and p1.itemStatus.iconType then itemStatusIconTypeToIconMap[p1.itemStatus.iconType] else nil
 	local backgroundLayers = p1.backgroundLayers
 	
 	if fFlagAXSelectedBorderWrapsBackground then
-		var5 = false
+		var10 = false
 		
 		if backgroundLayers ~= nil then
 			local _ = #backgroundLayers > 0
 		end
 	else
-		var5 = nil
+		var10 = nil
+	end
+	local var15 = if fFlagAXMarketplaceLicensingItemCards and p1.itemLicensingInfo then reactModule.createElement(licensingBadgeModule, {
+		isInteractive = false,
+		itemLicensingInfo = p1.itemLicensingInfo,
+		passiveSize = if var2 then badgeSize.XSmall else badgeSize.Small
+	}) else nil
+	local var16 = nil
+	
+	if fFlagAXMarketplaceItemCardIndicatorStack then
+		local var17 = buildItemStatusContent(p1.itemStatus, var14, p1.expirationTime, p1.isSelected)
+		var16 = if shouldRenderIndicatorStackModule(var17, var12) then reactModule.createElement(indicatorStackModule, { statusContent = var17, itemTypeContent = var12 }) else nil
 	end
 	local createElement_2
 	local function renderPresentationSlot()
-		-- upvalues: p1 (ref), reactModule (copy), foundationModule (copy), fFlagAXModeratedItemIconUpdates (copy), icon (copy), t (copy), var6 (ref), var9 (ref), iconSize (copy)
-		return if not (not p1.itemStatus or p1.itemStatus.type ~= "placeholder") then if p1.itemStatus.iconType then reactModule.createElement(foundationModule.View, {
+		-- upvalues: p1 (ref), itemStatusTypeEnumModule (copy), reactModule (copy), foundationModule (copy), fFlagAXModeratedItemIconUpdates (copy), icon (copy), itemStatusIconTypeToIconMap (copy), var1 (ref), var13 (ref), iconSize (copy)
+		return if not (not p1.itemStatus or p1.itemStatus.type ~= itemStatusTypeEnumModule.Placeholder) then if p1.itemStatus.iconType then reactModule.createElement(foundationModule.View, {
 			tag = "size-full clip radius-medium row align-x-center align-y-center"
 		}, {
 			icon = if fFlagAXModeratedItemIconUpdates then reactModule.createElement(icon, {
-				name = t[p1.itemStatus.iconType],
-				style = var6.Color.Content.Muted,
-				size = if var9 then iconSize.Large else 40
+				name = itemStatusIconTypeToIconMap[p1.itemStatus.iconType],
+				style = var1.Color.Content.Muted,
+				size = if var13 then iconSize.Large else 40
 			}) else reactModule.createElement(foundationModule.Image, {
-				Image = t[p1.itemStatus.iconType],
+				Image = itemStatusIconTypeToIconMap[p1.itemStatus.iconType],
 				Size = UDim2.fromScale(0.33, 0.33)
 			})
 		}) else nil else p1.presentationSlot
 	end
 	
 	local createElement = reactModule.createElement
-	local t_3 = {
+	local t = {
 		onActivated = p1.onActivated,
 		isDisabled = p1.isDisabled,
-		ref = p2,
+		ref = var3,
 		Size = p1.Size,
 		AutomaticSize = p1.AutomaticSize,
 		LayoutOrder = p1.LayoutOrder,
@@ -131,60 +193,97 @@ return reactModule.forwardRef(function(p1, p2)
 		Selectable = if fFlagAXMISEnableMultiShopping then p1.Selectable else nil,
 		showSelectionBorderWithBackground = if fFlagAXSelectedBorderWrapsBackground then p1.isSelected else nil,
 		backgroundLayers = backgroundLayers,
-		imageScaleType = p1.imageScaleType
+		imageScaleType = p1.imageScaleType,
+		onAbsoluteSizeChanged = var4
 	}
 	local createElement_1 = reactModule.createElement
-	local var11 = itemCardHeader
-	local t_4 = { aspectRatio = p1.headerAspectRatio }
+	local var18 = itemCardHeader
+	local t_1 = { aspectRatio = p1.headerAspectRatio }
 	
-	if p1.isSelected then
+	if fFlagAXMarketplaceItemCardIndicatorStack then
+		local var19
+		createElement_2 = reactModule.createElement
+		local fragment = reactModule.Fragment
+		local var20 = nil
+		local t_2 = {}
+		
+		if p1.isSelected and var16 then
+			var19 = reactModule.createElement
+			var19 = var19(SelectedIndicatorCorners, {
+				topLeftSlot = var15,
+				bottomRightSlot = var16,
+				hasOverlayButton = p1.onOverlayButtonActivated ~= nil and p1.overlayButtonText ~= nil
+			})
+		else
+			var19 = reactModule.createElement(itemCardHeaderCornersOverlay, {
+				topLeftSlot = var15,
+				bottomRightSlot = var16,
+				constrainTopLeftSlot = var15 ~= nil
+			})
+		end
+		local createElement_4
+		t_2.CatalogItemCardCorners = var19
+		
+		if p1.isSelected then
+			createElement_4 = reactModule.createElement
+			createElement_4 = createElement_4(catalogItemCardSelectedOverlayModule, if p1.onOverlayButtonActivated and p1.overlayButtonText then {
+				onActivated = p1.onOverlayButtonActivated,
+				buttonText = p1.overlayButtonText,
+				suppressBorder = if fFlagAXSelectedBorderWrapsBackground then var10 else nil
+			} elseif fFlagAXSelectedBorderWrapsBackground and var10 then { suppressBorder = true } else nil)
+		else
+			createElement_4 = nil
+		end
+		t_2.CatalogItemCardSelection = createElement_4
+		createElement_2 = createElement_2(fragment, var20, t_2)
+	elseif p1.isSelected then
 		createElement_2 = reactModule.createElement
 		createElement_2 = createElement_2(catalogItemCardSelectedOverlayModule, if p1.onOverlayButtonActivated and p1.overlayButtonText then {
 			onActivated = p1.onOverlayButtonActivated,
 			buttonText = p1.overlayButtonText,
-			suppressBorder = if fFlagAXSelectedBorderWrapsBackground then var5 else nil,
-			badge = if fFlagAXFixBadgeStatusConfigOptions then buildSelectedOverlayBadge(p1.itemStatus, var10, p1.expirationTime) elseif fFlagAXShowFaeUpsell and p1.itemStatus and p1.itemStatus.iconType == catalogItemCardStatusIconTypeEnumModule.FAE then { icon = var4 } elseif var10 and p1.itemStatus and p1.itemStatus.text then { icon = var10, text = p1.itemStatus.text } elseif fFlagAXInventoryDurablesSupport and p1.expirationTime and (not p1.itemStatus or p1.itemStatus.iconType ~= catalogItemCardStatusIconTypeEnumModule.Moderated) then { icon = var3, text = p1.expirationTime } else nil
-		} elseif fFlagAXInventoryDurablesSupport and var10 then {
-			itemStatusIcon = var10,
-			suppressBorder = if fFlagAXSelectedBorderWrapsBackground then var5 else nil
-		} elseif fFlagAXSelectedBorderWrapsBackground and var5 then { suppressBorder = true } else nil)
+			suppressBorder = if fFlagAXSelectedBorderWrapsBackground then var10 else nil,
+			badge = if fFlagAXFixBadgeStatusConfigOptions then buildSelectedOverlayBadge(p1.itemStatus, var14, p1.expirationTime) elseif fFlagAXShowFaeUpsell and p1.itemStatus and p1.itemStatus.iconType == catalogItemCardStatusIconTypeEnumModule.FAE then { icon = FAE_ICON } elseif var14 and p1.itemStatus and p1.itemStatus.text then { icon = var14, text = p1.itemStatus.text } elseif fFlagAXInventoryDurablesSupport and p1.expirationTime and (not p1.itemStatus or p1.itemStatus.iconType ~= catalogItemCardStatusIconTypeEnumModule.Moderated) then { icon = DURABLE_ICON, text = p1.expirationTime } else nil
+		} elseif fFlagAXInventoryDurablesSupport and var14 then {
+			itemStatusIcon = var14,
+			suppressBorder = if fFlagAXSelectedBorderWrapsBackground then var10 else nil
+		} elseif fFlagAXSelectedBorderWrapsBackground and var10 then { suppressBorder = true } else nil)
 	else
 		local createElement_3
 		createElement_2 = reactModule.createElement
-		local var12 = itemCardHeaderCornersOverlay
-		local t_5 = {}
+		local var21 = itemCardHeaderCornersOverlay
+		local t_2 = {}
 		
 		if p1.itemStatus then
-			if p1.itemStatus.type == "text" and p1.itemStatus.text then
+			if p1.itemStatus.type == itemStatusTypeEnumModule.Text and p1.itemStatus.text then
 				createElement_3 = reactModule.createElement(itemCardStatus, { text = p1.itemStatus.text })
-			elseif p1.itemStatus.type == "badge" then
+			elseif p1.itemStatus.type == itemStatusTypeEnumModule.Badge then
 				createElement_3 = reactModule.createElement
 				createElement_3 = createElement_3(itemCardBadge, {
 					displayBorder = true,
-					content = if fFlagAXFixBadgeStatusConfigOptions or fFlagAXShowFaeUpsell then buildBadgeStatusContent(var10, p1.itemStatus.text) else {
-						{ type = "icon", icon = var10 },
+					content = if fFlagAXFixBadgeStatusConfigOptions or fFlagAXShowFaeUpsell then buildBadgeStatusContent(var14, p1.itemStatus.text) else {
+						{ type = "icon", icon = var14 },
 						{ type = "text", text = p1.itemStatus.text }
 					}
 				})
 			else
-				createElement_3 = if var10 then reactModule.createElement(itemCardIcon, { icon = var10 }) else nil
+				createElement_3 = if var14 then reactModule.createElement(itemCardIcon, { icon = var14 }) else nil
 			end
 		createElement_3 = if fFlagAXInventoryDurablesSupport and p1.expirationTime then reactModule.createElement(itemCardBadge, {
 			displayBorder = true,
 			content = {
-				{ type = "icon", icon = var3 },
+				{ type = "icon", icon = DURABLE_ICON },
 				{ type = "text", text = p1.expirationTime }
 			}
-		}) elseif var8 then reactModule.createElement(itemCardBadge, { content = var8 }) else nil
-		t_5.topLeftSlot = createElement_3
-		t_5.bottomRightSlot = if fFlagAXRemoveDynamicHeadBadge then nil elseif var7 then reactModule.createElement(itemCardBadge, { content = { { type = "icon", icon = var7 } } }) else nil
-		createElement_2 = createElement_2(var12, t_5)
+		}) elseif var12 then reactModule.createElement(itemCardBadge, { content = var12 }) else nil
+		t_2.topLeftSlot = createElement_3
+		t_2.bottomRightSlot = if fFlagAXRemoveDynamicHeadBadge then nil elseif var11 then reactModule.createElement(itemCardBadge, { content = { { type = "icon", icon = var11 } } }) else nil
+		createElement_2 = createElement_2(var21, t_2)
 	end
-	t_4.overlaySlot = createElement_2
-	t_4.BackgroundTransparency = if backgroundLayers then 1 else nil
-	t_4.Size = p1.headerSize
-	t_3.headerSlot = createElement_1(var11, t_4, renderPresentationSlot())
-	t_3.footerSlot = if title then reactModule.createElement(itemCardFooter, {
+	t_1.overlaySlot = createElement_2
+	t_1.BackgroundTransparency = if backgroundLayers then 1 else nil
+	t_1.Size = p1.headerSize
+	t.headerSlot = createElement_1(var18, t_1, renderPresentationSlot())
+	t.footerSlot = if title then reactModule.createElement(itemCardFooter, {
 		LayoutOrder = 2,
 		title = p1.title,
 		creatorName = if p1.creator then p1.creator.name else nil,
@@ -193,5 +292,5 @@ return reactModule.forwardRef(function(p1, p2)
 		titleTextSize = if fFlagAXRootSlotBasedEditorFlag then p1.titleTextSize else nil
 	}) else nil
 	
-	return createElement(itemCard, t_3)
+	return createElement(itemCard, t)
 end)

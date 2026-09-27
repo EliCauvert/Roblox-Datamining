@@ -6,30 +6,22 @@ local runService = game:GetService("RunService")
 local userInputService = game:GetService("UserInputService")
 local gamepadService = game:GetService("GamepadService")
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableSnapInVirtualCursor = sharedFlagsModule.FFlagEnableSnapInVirtualCursor
+local fFlagEnableVirtualCursorMoveAssist = sharedFlagsModule.FFlagEnableVirtualCursorMoveAssist
 local fFlagVCWasDisabledFromMenuOpen = sharedFlagsModule.FFlagVCWasDisabledFromMenuOpen
 local fFlagEnableVirtualCursorDebugging = sharedFlagsModule.FFlagEnableVirtualCursorDebugging
 local inputControllerModule = require(virtualCursorModular.Controllers.InputController)
 local cursorControllerModule = require(virtualCursorModular.Controllers.CursorController)
 local selectionControllerModule = require(virtualCursorModular.Controllers.SelectionController)
-local snapControllerModule = require(virtualCursorModular.Controllers.SnapController)
+local moveAssistControllerModule = require(virtualCursorModular.Controllers.MoveAssistController)
 local enumsModule = require(virtualCursorModular.Enums)
-local propertiesModule = require(virtualCursorModular.Properties)
 local t = {}
 t.__index = t
 
 function t.new()
-	-- upvalues: cursorControllerModule (ref), inputControllerModule (ref), fFlagEnableSnapInVirtualCursor (ref), snapControllerModule (ref), selectionControllerModule (ref), enumsModule (ref), propertiesModule (ref), t (ref)
+	-- upvalues: cursorControllerModule (ref), inputControllerModule (ref), fFlagEnableVirtualCursorMoveAssist (ref), moveAssistControllerModule (ref), selectionControllerModule (ref), fFlagEnableVirtualCursorDebugging (ref), virtualCursorModular (ref), t (ref)
 	local var1 = cursorControllerModule.new()
 	local var2 = inputControllerModule.new(var1)
-	local var3 = if fFlagEnableSnapInVirtualCursor then snapControllerModule.new() else nil
-	local var4 = selectionControllerModule.new(var2, var1, var3)
-	
-	if fFlagEnableSnapInVirtualCursor and var3 then
-		var3:setMethodStrength(enumsModule.SnapAssistMethod.Friction, propertiesModule.SnapFrictionStrength)
-		var3:setMethodStrength(enumsModule.SnapAssistMethod.Tracking, propertiesModule.SnapTrackingStrength)
-		var3:setMethodStrength(enumsModule.SnapAssistMethod.Centering, propertiesModule.SnapCenteringStrength)
-	end
+	local var3 = if fFlagEnableVirtualCursorMoveAssist then moveAssistControllerModule.new() else nil
 	local tbl = setmetatable({
 		_selectedObject = nil,
 		_previouslySelectedObject = nil,
@@ -42,8 +34,9 @@ function t.new()
 		_cursorPosition = Vector2.new(),
 		_cursorController = var1,
 		_inputController = var2,
-		_selectionController = var4,
-		_snapController = var3
+		_selectionController = selectionControllerModule.new(var2, var1, var3),
+		_moveAssistController = var3,
+		_moveAssistDebugView = if fFlagEnableVirtualCursorDebugging and var3 then require(virtualCursorModular.Controllers.MoveAssistDebugView).new() else nil
 	}, t)
 	tbl:initialize()
 	
@@ -80,6 +73,10 @@ function t:Destroy()
 	if self._cursorController then
 		self._cursorController:Destroy()
 	end
+	if self._moveAssistDebugView then
+		self._moveAssistDebugView:Destroy()
+		self._moveAssistDebugView = nil
+	end
 end
 
 function t:UpdateGamepadCursor()
@@ -104,7 +101,7 @@ function t:initialize()
 			self._wasDisabledFromOtherInput = false
 		end
 		if fFlagEnableVirtualCursorDebugging then
-			print("LastInputTypeChanged", p1, gamepadService.GamepadCursorEnabled, self._wasDisabledFromOtherInput)
+			print("LastInputTypeChanged", p1, "GamepadCursorEnabled", gamepadService.GamepadCursorEnabled, "_wasDisabledFromOtherInput", self._wasDisabledFromOtherInput)
 		end
 	end)
 	self._gamepadCursorEnabledConnection = gamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function()
@@ -116,6 +113,12 @@ end
 
 function t:onRenderStep(p1)
 	self._selectionController:onRenderStep(p1)
+	local moveAssistDebugView = self._moveAssistDebugView
+	local moveAssistController = self._moveAssistController
+	
+	if moveAssistDebugView and moveAssistController then
+		moveAssistDebugView:update(moveAssistController._debugSnapshot, self._cursorController:GetCursorScreenGuiOffset())
+	end
 end
 
 function t:EnableVirtualCursor(p1)

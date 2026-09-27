@@ -17,6 +17,7 @@ local useLocalRobuxBalance = require(parent.RobloxAppHooks).useLocalRobuxBalance
 local useRealNamesInDisplayNamesEnabledModule = require(editProfile.Hooks.useRealNamesInDisplayNamesEnabled)
 local focusNavigatorWrapperModule = require(editProfile.Utils.FocusNavigatorWrapper)
 local fFlagEditProfilePPEStartOnEmotesPageModule = require(editProfile.Flags.FFlagEditProfilePPEStartOnEmotesPage)
+local fFlagEditProfileUsernameServerPriceModule = require(editProfile.Flags.FFlagEditProfileUsernameServerPrice)
 local useSignalState = require(parent.SignalsReact).useSignalState
 local dataHydrationTypes = require(parent.DataHydration).DataHydrationTypes
 local var2 = require(parent.Signals).createSignal("")
@@ -79,7 +80,7 @@ local function openEditProfileImageFromProfilePlatform(p3, p4)
 end
 
 return function(p3)
-	-- upvalues: useLocalUserId (ref), useRealNamesInDisplayNamesEnabledModule (ref), profileRefreshSignal (ref), reactModule (ref), focusNavigationUtilsModule (ref), reactFocusNavigationModule (ref), useEffect (ref), fFlagAXEnableProfileTab (ref), analyticsServiceV2Module (ref), enumsModule (ref), constantsModule (ref), useLocalRobuxBalance (ref), fFlagEditProfileImageV2Enabled (ref), openEditProfileImageFromProfilePlatform (ref), fFlagAXPPEReturnToEntrySurface (ref), fFlagEditProfilePPEStartOnEmotesPageModule (ref), getCoveredPage (ref), roactNavigationModule (ref), var1 (ref), useSignalState (ref), var2 (ref), editProfileStoreModule (ref), dataHydrationTypes (ref), focusNavigatorWrapperModule (ref), navigationEvents (ref), IXPService (ref), editProfileIXPLayer (ref), fFlagEditProfileLandingV2EnabledModule (ref), editProfileLandingV2Module (ref), cryoModule (ref), editProfileLandingModule (ref)
+	-- upvalues: useLocalUserId (ref), useRealNamesInDisplayNamesEnabledModule (ref), profileRefreshSignal (ref), reactModule (ref), focusNavigationUtilsModule (ref), reactFocusNavigationModule (ref), useEffect (ref), fFlagAXEnableProfileTab (ref), analyticsServiceV2Module (ref), enumsModule (ref), constantsModule (ref), useLocalRobuxBalance (ref), fFlagEditProfileUsernameServerPriceModule (ref), editProfileStoreModule (ref), useSignalState (ref), fFlagEditProfileImageV2Enabled (ref), openEditProfileImageFromProfilePlatform (ref), fFlagAXPPEReturnToEntrySurface (ref), fFlagEditProfilePPEStartOnEmotesPageModule (ref), getCoveredPage (ref), roactNavigationModule (ref), var1 (ref), var2 (ref), dataHydrationTypes (ref), focusNavigatorWrapperModule (ref), navigationEvents (ref), IXPService (ref), editProfileIXPLayer (ref), fFlagEditProfileLandingV2EnabledModule (ref), editProfileLandingV2Module (ref), cryoModule (ref), editProfileLandingModule (ref)
 	local var7 = useLocalUserId()
 	local var8 = useRealNamesInDisplayNamesEnabledModule()
 	
@@ -130,26 +131,29 @@ return function(p3)
 	end
 	
 	local var16 = useLocalRobuxBalance()
+	local var17 = if fFlagEditProfileUsernameServerPriceModule then useSignalState(editProfileStoreModule.getUsernameChangePrice(tostring(var7)).data) else nil
 	
-	local var17 = function()
-		-- upvalues: var16 (ref), constantsModule (copy), param (ref), showToast (ref), p3 (ref), enumsModule (copy), var15 (ref), analyticsServiceV2Module (copy)
-		if constantsModule.ChangeUsernamePrice <= var16 then
+	local var18 = function()
+		-- upvalues: fFlagEditProfileUsernameServerPriceModule (copy), var17 (write), constantsModule (copy), var16 (ref), param (ref), showToast (ref), p3 (ref), enumsModule (copy), var15 (ref), analyticsServiceV2Module (copy)
+		local var19 = if fFlagEditProfileUsernameServerPriceModule then var17 and var17.priceInRobux else constantsModule.ChangeUsernamePrice
+		
+		if (fFlagEditProfileUsernameServerPriceModule and (var17 ~= nil and var17.isFreeUsernameChange)) or var19 == nil or var19 <= var16 then
 			param(showToast)
 		else
 			p3.navigation.navigate(enumsModule.Screens.UsernameInsufficientFundsModal, {
-				robux = constantsModule.ChangeUsernamePrice - var16,
+				robux = var19 - var16,
 				navigateDownToPurchaseRobux = var15
 			})
 		end
 		analyticsServiceV2Module.sendEditUsernameOpened()
 	end
 	
-	local var18 = function()
+	local var19 = function()
 		-- upvalues: p3 (ref), enumsModule (copy), var13 (ref)
 		p3.navigation.navigate(enumsModule.Screens.EditProfileSubScreen, { screen = enumsModule.Screens.EditBio, fullBleed = var13 })
 	end
 	
-	local var19 = function()
+	local var20 = function()
 		-- upvalues: analyticsServiceV2Module (copy), fFlagEditProfileImageV2Enabled (copy), openEditProfileImageFromProfilePlatform (copy), p3 (ref), fFlagAXPPEReturnToEntrySurface (copy), fFlagEditProfilePPEStartOnEmotesPageModule (copy), enumsModule (copy), getCoveredPage (copy), roactNavigationModule (copy)
 		analyticsServiceV2Module.sendOpenAvatarMarketplace()
 		
@@ -158,23 +162,23 @@ return function(p3)
 			
 			return
 		elseif fFlagAXPPEReturnToEntrySurface then
-			local var20 = if fFlagEditProfilePPEStartOnEmotesPageModule then enumsModule.Screens.ProfilePictureEditorEmotes else enumsModule.Screens.ProfilePictureEditorCamera
-			local var21 = p3.navigation._dangerouslyGetParent()
-			local state = var21 and var21.state
-			local var22 = if state and state.routeName then state else nil
+			local var21 = if fFlagEditProfilePPEStartOnEmotesPageModule then enumsModule.Screens.ProfilePictureEditorEmotes else enumsModule.Screens.ProfilePictureEditorCamera
+			local var22 = p3.navigation._dangerouslyGetParent()
+			local state = var22 and var22.state
+			local var23 = if state and state.routeName then state else nil
 			
-			if var22 then
-				local var23, var24 = getCoveredPage(p3.navigation, var22)
-				p3.navigation.navigate(var20, {
+			if var23 then
+				local var24, var25 = getCoveredPage(p3.navigation, var23)
+				p3.navigation.navigate(var21, {
 					entryOrigin = {
-						screenName = var22.routeName,
-						screenParams = var22.params,
+						screenName = var23.routeName,
+						screenParams = var23.params,
 						reopenAction = roactNavigationModule.Actions.navigate({
 							routeName = p3.navigation.state.routeName,
 							params = p3.navigation.state.params
 						}),
-						coveredScreenName = var23,
-						coveredScreenParams = var24
+						coveredScreenName = var24,
+						coveredScreenParams = var25
 					}
 				})
 				
@@ -188,7 +192,7 @@ return function(p3)
 		end
 	end
 	
-	local var20 = reactModule.useMemo(function()
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: var1 (copy), var7 (ref)
 		return var1.fetchNamesByUserIds({ tostring(var7) })
 	end, { var7 })
@@ -196,25 +200,25 @@ return function(p3)
 		-- upvalues: analyticsServiceV2Module (copy)
 		analyticsServiceV2Module.sendEditProfileOpened()
 	end, {})
-	local var21 = useSignalState(var20)
-	local var22 = not var21 or var21.status ~= "success"
-	local var23 = var21 and (var21.data and var21.data[1])
+	local var22 = useSignalState(var21)
+	local var23 = not var22 or var22.status ~= "success"
+	local var24 = var22 and (var22.data and var22.data[1])
 	local description = editProfileStoreModule.getDescription(var7)
 	local t_1 = {
 		userId = var7,
 		fullBleed = var13,
 		onClose = var9,
-		username = useSignalState(if var23 then var23.names.getUsername else var2) or "",
-		displayName = useSignalState(if var23 then var23.names.getDisplayName else var2) or "",
-		areNamesLoading = var22,
+		username = useSignalState(if var24 then var24.names.getUsername else var2) or "",
+		displayName = useSignalState(if var24 then var24.names.getDisplayName else var2) or "",
+		areNamesLoading = var23,
 		bioText = useSignalState(description.data) or "",
 		isBioLoading = useSignalState(description.status) == dataHydrationTypes.DataStatus.NotReady,
 		isPolicyEnabled = var8,
 		settingButtonOnActivated = {
 			displayName = var14,
-			username = var17,
-			bio = var18,
-			avatar = var19
+			username = var18,
+			bio = var19,
+			avatar = var20
 		},
 		firstItemRef = var10
 	}

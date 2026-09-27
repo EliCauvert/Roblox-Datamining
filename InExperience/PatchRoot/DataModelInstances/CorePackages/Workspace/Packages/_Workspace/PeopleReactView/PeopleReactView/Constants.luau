@@ -4,6 +4,7 @@ local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnect
 return {
 	PEOPLEPAGE = {
 		PAGE_ID = "peoplepage",
+		STACKED_ROW_MAX_WINDOW_WIDTH = 800,
 		TAB_HEADER = {
 			NAME = "PeopleTab",
 			TEXT = "CoreScripts.InGameMenu.PageTitle.Players",
@@ -13,7 +14,8 @@ return {
 		PEOPLE_CARDS = {
 			MAX_CARD_COLUMNS = 5,
 			MIN_CARD_COLUMNS = 2,
-			MINIMUM_CARD_WIDTH = 136
+			MINIMUM_CARD_WIDTH = 136,
+			SIDE_SHEET_MINIMUM_CARD_WIDTH = 96
 		},
 		PERSON_ROW = {
 			PLATFORM_LOGO_IMAGE = "rbxasset://textures/ui/Shell/Icons/PlatformLogo@3x.png"

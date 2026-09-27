@@ -5,7 +5,6 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local curveAnimationHierarchyUtilsModule = require(parent.util.CurveAnimationHierarchyUtils)
 local curveAnimBoneHierarchyUtilsModule = require(parent.util.CurveAnimBoneHierarchyUtils)
 local getFFlagUGCValidateEmotesBonesAllowedModule = require(parent.flags.getFFlagUGCValidateEmotesBonesAllowed)
-local getFFlagUGCValidateDuplicatesInAnimationModule = require(parent.flags.getFFlagUGCValidateDuplicatesInAnimation)
 local getFFlagUGCValidateRestrictNumFaceControlsModule = require(parent.flags.getFFlagUGCValidateRestrictNumFaceControls)
 local getFIntUGCValidateMaxTotalFaceControlsModule = require(parent.flags.getFIntUGCValidateMaxTotalFaceControls)
 local getFFlagUGCValidateAnimBonesSupportModule = require(parent.flags.getFFlagUGCValidateAnimBonesSupport)
@@ -13,7 +12,7 @@ local t = {
 	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION }
 }
 
-if getFFlagUGCValidateAnimBonesSupportModule() and require(parent.flags.getFFlagUGCValidationAnimationPackSupport)() then
+if getFFlagUGCValidateAnimBonesSupportModule() then
 	table.insert(t.categories, validationEnumsModule.UploadCategory.ANIMATION)
 end
 t.requiredData = { validationEnumsModule.SharedDataMember.curveAnimations }
@@ -154,22 +153,13 @@ local function validateHierarchyTree(p8, p9, p10, p11)
 end
 
 function t.run(p12, p13)
-	-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (ref), curveAnimationHierarchyUtilsModule (ref), validateHierarchyTree (ref)
+	-- upvalues: curveAnimationHierarchyUtilsModule (ref), validateHierarchyTree (ref)
 	for i, v in p13.curveAnimations do
 		local t = {}
+		local bodyPartFolderRoot = curveAnimationHierarchyUtilsModule.getBodyPartFolderRoot(v)
 		
-		if getFFlagUGCValidateDuplicatesInAnimationModule() then
-			local bodyPartFolderRoot = curveAnimationHierarchyUtilsModule.getBodyPartFolderRoot(v)
-			
-			if bodyPartFolderRoot then
-				table.insert(t, bodyPartFolderRoot)
-			end
-		else
-			for i_1, v_1 in v:GetChildren() do
-				if v_1:IsA("Folder") and curveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(v_1.Name) then
-					table.insert(t, v_1)
-				end
-			end
+		if bodyPartFolderRoot then
+			table.insert(t, bodyPartFolderRoot)
 		end
 		for i_1, v_1 in t do
 			if curveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(v_1.Name) then

@@ -52,6 +52,7 @@ return reactModule.memo(function(p1)
 		onBuyActivated = var6,
 		showBorder = not fFlagEnableFlyoutMenuRobuxCardRefactor
 	}) else reactModule.createElement(foundationModule.View, {
+		testId = "--core-ui-flyout-robux-pill",
 		tag = if fFlagEnableFlyoutMenuRobuxCardRefactor then "size-full-0 auto-y padding-x-medium padding-y-xlarge" else "size-full-0 auto-y padding-xlarge",
 		onActivated = var6,
 		LayoutOrder = p1.layoutOrder
@@ -73,6 +74,7 @@ return reactModule.memo(function(p1)
 			})
 		}),
 		BuyRobuxButton = reactModule.createElement(button, {
+			testId = "--core-ui-flyout-button-buy-robux",
 			AnchorPoint = Vector2.new(1, 0.5),
 			Position = UDim2.new(1, 0, 0.5, 0),
 			text = var5.buyRobux,

@@ -1,11 +1,15 @@
 ﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
+local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local textSizeModule = require(parent.TextSize)
 
 return reactModule.memo(function(p1)
-	-- upvalues: textSizeModule (ref), useTokens (ref), reactModule (ref), imageSetLabel (ref)
+	-- upvalues: textSizeModule (ref), useTokens (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), reactModule (ref), imageSetLabel (ref)
 	local layoutOrder = p1.layoutOrder
 	local anchorPoint = p1.anchorPoint
 	local automaticSize = p1.automaticSize
@@ -16,14 +20,16 @@ return reactModule.memo(function(p1)
 	local textSizeOffset = textSizeModule.getTextSizeStore(false).getTextSizeOffset(false)
 	local var1 = useTokens()
 	local fontStyle = p1.fontStyle or var1.Typography.BodyMedium
+	local var2 = if foundationFontFaceMigration then nil else fontStyle.Font
+	local var3 = if foundationFontFaceMigration then normalizeFontFace(fontStyle.Font) else nil
 	local textColor = p1.textColor or var1.Color.Content.Default.Color3
-	local var2 = if p1.iconWidth then UDim2.new(0, p1.iconWidth, 0, p1.iconWidth) else UDim2.new(0, var1.Size.Size_350, 0, var1.Size.Size_350)
+	local var4 = if p1.iconWidth then UDim2.new(0, p1.iconWidth, 0, p1.iconWidth) else UDim2.new(0, var1.Size.Size_350, 0, var1.Size.Size_350)
 	local iconColor = p1.iconColor or textColor
 	local ceiled = math.ceil(fontStyle.LineHeight * fontStyle.FontSize + textSizeOffset)
 	local textIconGap = p1.textIconGap or var1.Gap.XSmall
-	local var3 = p1.onActivated ~= nil
+	local var5 = p1.onActivated ~= nil
 	
-	return if not p1.leftIcon and (not p1.leftIconComponent and (not p1.rightIcon and (not p1.rightIconComponent and not p1.rightText))) and not var3 then reactModule.createElement("TextLabel", {
+	return if not p1.leftIcon and (not p1.leftIconComponent and (not p1.rightIcon and (not p1.rightIconComponent and not p1.rightText))) and not var5 then reactModule.createElement("TextLabel", {
 		[reactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil,
 		Position = position,
 		AnchorPoint = anchorPoint,
@@ -34,7 +40,8 @@ return reactModule.memo(function(p1)
 		LayoutOrder = layoutOrder,
 		ZIndex = zIndex,
 		Text = p1.leftText or "",
-		Font = fontStyle.Font,
+		Font = var2,
+		FontFace = var3,
 		TextSize = fontStyle.FontSize,
 		TextTransparency = 0,
 		TextColor3 = textColor,
@@ -43,7 +50,7 @@ return reactModule.memo(function(p1)
 		TextXAlignment = Enum.TextXAlignment.Left
 	}, {
 		UIFlexItem = p1.leftTextFlexMode and reactModule.createElement("UIFlexItem", { FlexMode = p1.leftTextFlexMode }) or nil
-	}) else reactModule.createElement(if var3 then "TextButton" else "Frame", {
+	}) else reactModule.createElement(if var5 then "TextButton" else "Frame", {
 		[reactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil,
 		Position = position,
 		AnchorPoint = anchorPoint,
@@ -53,11 +60,11 @@ return reactModule.memo(function(p1)
 		BorderSizePixel = 0,
 		LayoutOrder = layoutOrder,
 		ZIndex = zIndex,
-		Text = if var3 then "" else nil,
-		TextTransparency = if var3 then 1 else nil,
-		AutoButtonColor = if var3 then false else nil,
-		[reactModule.Event.Activated] = if var3 then p1.onActivated else nil,
-		Active = var3,
+		Text = if var5 then "" else nil,
+		TextTransparency = if var5 then 1 else nil,
+		AutoButtonColor = if var5 then false else nil,
+		[reactModule.Event.Activated] = if var5 then p1.onActivated else nil,
+		Active = var5,
 		Selectable = if selectable ~= nil then false else selectable
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
@@ -71,7 +78,7 @@ return reactModule.memo(function(p1)
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			ImageTransparency = 0,
-			Size = var2,
+			Size = var4,
 			ImageColor3 = iconColor,
 			Image = p1.leftIcon
 		}) or nil),
@@ -83,7 +90,8 @@ return reactModule.memo(function(p1)
 			Text = p1.leftText or "",
 			AutomaticSize = Enum.AutomaticSize.X,
 			Size = UDim2.new(0, 0, 0, ceiled),
-			Font = fontStyle.Font,
+			Font = var2,
+			FontFace = var3,
 			TextSize = fontStyle.FontSize,
 			TextColor3 = textColor,
 			TextTruncate = Enum.TextTruncate.SplitWord,
@@ -98,7 +106,7 @@ return reactModule.memo(function(p1)
 			LayoutOrder = 3,
 			BackgroundTransparency = 1,
 			ImageTransparency = 0,
-			Size = var2,
+			Size = var4,
 			ImageColor3 = iconColor,
 			Image = p1.rightIcon
 		}) or nil),
@@ -110,7 +118,8 @@ return reactModule.memo(function(p1)
 			Text = p1.rightText or "",
 			AutomaticSize = Enum.AutomaticSize.X,
 			Size = UDim2.new(0, 0, 0, ceiled),
-			Font = fontStyle.Font,
+			Font = var2,
+			FontFace = var3,
 			TextSize = fontStyle.FontSize,
 			TextColor3 = textColor,
 			TextTruncate = Enum.TextTruncate.SplitWord,

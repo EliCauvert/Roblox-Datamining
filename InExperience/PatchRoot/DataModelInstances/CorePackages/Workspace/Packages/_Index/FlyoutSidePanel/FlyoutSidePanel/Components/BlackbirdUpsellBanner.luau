@@ -47,6 +47,7 @@ return function(p1)
 	
 	return if fixFlyoutMenuTextWrap and flyoutBlackbirdBannerFlexLayout then reactModule.createElement(foundationModule.View, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-x-medium padding-y-xlarge",
+		testId = "--core-ui-flyout-blackbird-upsell",
 		onActivated = var5,
 		LayoutOrder = p1.layoutOrder
 	}, {
@@ -69,6 +70,7 @@ return function(p1)
 		})
 	}) else reactModule.createElement(foundationModule.View, {
 		tag = "size-full-0 auto-y padding-x-medium padding-y-xlarge",
+		testId = "--core-ui-flyout-blackbird-upsell",
 		onActivated = var5,
 		LayoutOrder = p1.layoutOrder
 	}, {

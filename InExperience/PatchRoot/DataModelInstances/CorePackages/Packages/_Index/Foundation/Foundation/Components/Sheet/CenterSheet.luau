@@ -6,6 +6,7 @@ local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
 local useAnimatedBinding = require(parent.ReactOtter).useAnimatedBinding
 local closeAffordanceVariantModule = require(foundation.Enums.CloseAffordanceVariant)
+local flagsModule = require(foundation.Utility.Flags)
 local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
 local useOverlayModule = require(foundation.Providers.Overlay.useOverlay)
 local useScaledValueModule = require(foundation.Utility.useScaledValue)
@@ -33,7 +34,7 @@ local SHADOW_IMAGE = constantsModule.SHADOW_IMAGE
 local SHADOW_SIZE = constantsModule.SHADOW_SIZE
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useOverlayModule (ref), useTokensModule (ref), useElevationModule (ref), elevationLayerModule (ref), usePreferencesModule (ref), useScaledValueModule (ref), DIALOG_SIZES (ref), reactModule (ref), useAnimatedBinding (ref), childrenHasFullBleedModule (ref), otterModule (ref), dashModule (ref), sheetTypeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), typesModule (ref), sheetContextModule (ref), elevationOwnerScope (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref), reactRobloxModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useOverlayModule (ref), useTokensModule (ref), useElevationModule (ref), elevationLayerModule (ref), usePreferencesModule (ref), useScaledValueModule (ref), DIALOG_SIZES (ref), reactModule (ref), useAnimatedBinding (ref), childrenHasFullBleedModule (ref), otterModule (ref), dashModule (ref), sheetTypeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), typesModule (ref), sheetContextModule (ref), elevationOwnerScope (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref), reactRobloxModule (ref), flagsModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useOverlayModule()
 	local var3 = useTokensModule()
@@ -251,7 +252,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 						-- upvalues: size800 (ref)
 						return p3 / size800
 					end) else nil,
-					onAbsoluteSizeChanged = if var1.centerSheetHeight and var8 then function(p3)
+					onAbsoluteSizeChanged = if flagsModule.FoundationCenterSheetHeightFix or var1.centerSheetHeight and var8 then function(p3)
 						-- upvalues: var3 (ref), var8 (ref), var6 (ref)
 						var8(math.min(p3.AbsoluteSize.Y - var3.Margin.Medium * 2, var6))
 					end else nil

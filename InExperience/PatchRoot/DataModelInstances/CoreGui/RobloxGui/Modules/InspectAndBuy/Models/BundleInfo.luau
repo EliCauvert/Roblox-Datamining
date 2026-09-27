@@ -1,8 +1,13 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
+local cryoModule = require(corePackagesService.Packages.Cryo)
 local dashModule = require(corePackagesService.Packages.Dash)
+local fFlagAXMarketplaceLicensing = require(corePackagesService.Workspace.Packages.AvatarExperienceFlags).FFlagAXMarketplaceLicensing
 local constantsModule = require(script.Parent.Parent.Constants)
 local _ = require(corePackagesService.Workspace.Packages.AvatarExperienceInspectAndBuy)
-local itemRestrictions = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon).Enums.ItemRestrictions
+local avatarExperienceCommonModule = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon)
+local itemRestrictions = avatarExperienceCommonModule.Enums.ItemRestrictions
+local getRawItemLicensingInfo = avatarExperienceCommonModule.Utils.getRawItemLicensingInfo
+local parseItemLicensing = avatarExperienceCommonModule.Utils.parseItemLicensing
 local mockIdModule = require(script.Parent.Parent.MockId)
 local t = {
 	new = function()
@@ -66,7 +71,7 @@ function t.fromGetFavoriteForAsset(value, p1)
 end
 
 function t.fromAvatarPreviewItem(p1)
-	-- upvalues: t (ref)
+	-- upvalues: t (ref), fFlagAXMarketplaceLicensing (ref), parseItemLicensing (ref), getRawItemLicensingInfo (ref)
 	local var1 = t.new()
 	var1.name = p1.name
 	var1.description = p1.description
@@ -83,6 +88,10 @@ function t.fromAvatarPreviewItem(p1)
 	var1.bundleId = tostring(p1.id)
 	var1.bundleType = tostring(p1.bundleType)
 	var1.noPriceStatus = p1.noPriceStatus
+	
+	if fFlagAXMarketplaceLicensing then
+		var1.itemLicensingInfo = parseItemLicensing(getRawItemLicensingInfo(p1))
+	end
 	local t_1 = {}
 	
 	if p1.assetsInBundle then
@@ -146,7 +155,7 @@ function t.fromGetAssetBundles(value)
 end
 
 function t.fromGetItemDetailsV2(p2)
-	-- upvalues: t (ref)
+	-- upvalues: t (ref), getRawItemLicensingInfo (ref), fFlagAXMarketplaceLicensing (ref), parseItemLicensing (ref), cryoModule (ref)
 	local var3 = t.new()
 	var3.bundleId = tostring(p2.id)
 	var3.isForSale = p2.isPurchasable
@@ -160,6 +169,11 @@ function t.fromGetItemDetailsV2(p2)
 	var3.saleLocationType = p2.saleLocationType
 	var3.numFavorites = p2.favoriteCount
 	var3.catalogPriceStatus = p2.priceStatus
+	local var4 = getRawItemLicensingInfo(p2)
+	
+	if fFlagAXMarketplaceLicensing and var4 ~= nil then
+		var3.itemLicensingInfo = parseItemLicensing(var4) or cryoModule.None
+	end
 	local t_1 = {}
 	
 	if p2.bundledItems then
@@ -174,20 +188,20 @@ end
 
 function t.fromGetItemDetails(p3)
 	-- upvalues: t (ref)
-	local var4 = t.new()
-	var4.bundleId = tostring(p3.Id)
-	var4.owned = p3.Owned
-	var4.isForSale = p3.IsPurchasable
-	var4.price = p3.Price or 0
-	var4.hasResellers = p3.HasResellers
-	var4.collectibleItemId = p3.CollectibleItemId
-	var4.remaining = p3.UnitsAvailableForConsumption
-	var4.collectibleTotalQuantity = p3.TotalQuantity
-	var4.collectibleLowestResalePrice = p3.LowestResalePrice
-	var4.isOffSale = p3.IsOffSale
-	var4.saleLocationType = p3.SaleLocationType
-	var4.numFavorites = p3.FavoriteCount
-	var4.catalogPriceStatus = p3.PriceStatus
+	local var5 = t.new()
+	var5.bundleId = tostring(p3.Id)
+	var5.owned = p3.Owned
+	var5.isForSale = p3.IsPurchasable
+	var5.price = p3.Price or 0
+	var5.hasResellers = p3.HasResellers
+	var5.collectibleItemId = p3.CollectibleItemId
+	var5.remaining = p3.UnitsAvailableForConsumption
+	var5.collectibleTotalQuantity = p3.TotalQuantity
+	var5.collectibleLowestResalePrice = p3.LowestResalePrice
+	var5.isOffSale = p3.IsOffSale
+	var5.saleLocationType = p3.SaleLocationType
+	var5.numFavorites = p3.FavoriteCount
+	var5.catalogPriceStatus = p3.PriceStatus
 	local t_1 = {}
 	
 	if p3.BundledItems then
@@ -195,66 +209,66 @@ function t.fromGetItemDetails(p3)
 			table.insert(t_1, { id = tostring(v.Id), name = v.Name })
 		end
 	end
-	var4.assetsInBundle = t_1
+	var5.assetsInBundle = t_1
 	
-	return var4
+	return var5
 end
 
 function t.fromGetBundleFavoriteCount(p4, p5)
 	-- upvalues: t (ref)
-	local var5 = t.new()
-	var5.bundleId = tostring(p4)
-	var5.numFavorites = p5
+	local var6 = t.new()
+	var6.bundleId = tostring(p4)
+	var6.numFavorites = p5
 	
-	return var5
+	return var6
 end
 
 function t.fromGetEconomyProductInfo(p4, p5, p6, p7)
 	-- upvalues: t (ref)
-	local var5 = t.new()
-	var5.bundleId = tostring(p5)
-	var5.owned = p4
-	var5.price = p6
-	var5.isForSale = p7
+	local var6 = t.new()
+	var6.bundleId = tostring(p5)
+	var6.owned = p4
+	var6.price = p6
+	var6.isForSale = p7
 	
-	return var5
+	return var6
 end
 
 function t.fromPurchaseSuccess(p4)
 	-- upvalues: t (ref)
-	local var5 = t.new()
-	var5.bundleId = tostring(p4)
-	var5.owned = true
+	local var6 = t.new()
+	var6.bundleId = tostring(p4)
+	var6.owned = true
 	
-	return var5
+	return var6
 end
 
 function t.getSaleDetailsForCollectibles(p4)
 	-- upvalues: dashModule (ref), constantsModule (ref)
-	local var5 = dashModule.joinDeep({}, p4)
+	local var6 = dashModule.joinDeep({}, p4)
 	
 	if p4.productType == constantsModule.ProductType.CollectibleItem then
-		local saleLocation = var5.saleLocation
-		local var6 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ShopOnly
-		local var7 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ShopAndExperiencesById
-		local var8 = saleLocation and (saleLocation.saleLocationTypeId == constantsModule.SaleLocationType.ShopAndExperiencesById and (type(saleLocation.universeIds) == "table" and table.find(saleLocation.universeIds, game.GameId) ~= nil))
-		local var9 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ExperiencesDevApiOnly
-		local isForSale = var5.isForSale
+		local saleLocation = var6.saleLocation
+		local var7 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ShopOnly
+		local var8 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ShopAndExperiencesById
+		local var9 = saleLocation and (saleLocation.saleLocationTypeId == constantsModule.SaleLocationType.ShopAndExperiencesById and (type(saleLocation.universeIds) == "table" and table.find(saleLocation.universeIds, game.GameId) ~= nil))
+		local var10 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ExperiencesDevApiOnly
+		local isForSale = var6.isForSale
 		
 		if isForSale then
-			isForSale = var6
+			isForSale = var7
 			
-			if isForSale and not var7 then
-				isForSale = var8 and var9
+			if isForSale and not var8 then
+				isForSale = var9 and var10
 			end
 		end
-		var5.isForSale = isForSale
+		var6.isForSale = isForSale
 		
 		if not p4.collectibleIsLimited then
-			var5.isForSale = var5.isForSale and not var5.owned
+			var6.isForSale = var6.isForSale and not var6.owned
 		end
 	end
-	return var5
+	return var6
 end
 
 return t

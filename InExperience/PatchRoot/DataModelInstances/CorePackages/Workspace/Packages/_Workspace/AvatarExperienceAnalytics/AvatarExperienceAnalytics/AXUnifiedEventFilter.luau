@@ -7,6 +7,7 @@ local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.U
 local sendAXCounterV2Module = require(script.Parent.sendAXCounterV2)
 local fFlagAXUnifiedImpressionsOnThumbnail = require(parent.AvatarExperienceFlags).FFlagAXUnifiedImpressionsOnThumbnail
 local fFlagAXFixHomeAvatarsUnifiedPurchase = require(parent.SharedFlags).FFlagAXFixHomeAvatarsUnifiedPurchase
+local fFlagAXUnifiedEventCounters = require(parent.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
 local AXSendPurchaseAttempt = game:DefineFastFlag("AXSendPurchaseAttempt", false)
 local AXUnifiedFilterWidgetLoadedAndUIImpression = game:DefineFastFlag("AXUnifiedFilterWidgetLoadedAndUIImpression", false)
 local AXAlignUnifiedFilterSearchKeyword = game:DefineFastFlag("AXAlignUnifiedFilterSearchKeyword", false)
@@ -185,8 +186,8 @@ function t.hasValidEntityData(p1)
 	end
 end
 
-function t.filter(p1)
-	-- upvalues: t (ref), marketplaceUnifiedAction (ref), sendAXCounterV2Module (ref), unifiedLoggingSurface (ref)
+function t.filter(p1, p2)
+	-- upvalues: t (ref), fFlagAXUnifiedEventCounters (ref), marketplaceUnifiedAction (ref), sendAXCounterV2Module (ref), unifiedLoggingSurface (ref)
 	local var1 = t.hasItemId(p1)
 	local var2 = t.hasValidItemType(p1)
 	local var3 = t.hasValidAction(p1)
@@ -197,7 +198,9 @@ function t.filter(p1)
 	local var8 = t.hasValidEntityData(p1)
 	local var9 = var1 and (var2 and (var3 and (var4 and (var5 and (var6 and (var7 and var8))))))
 	
-	if not var9 then
+	if fFlagAXUnifiedEventCounters and p2 ~= nil and p2.skipReporting then
+		return var9
+	elseif not var9 then
 		local var10 = ""
 		
 		if not var1 then

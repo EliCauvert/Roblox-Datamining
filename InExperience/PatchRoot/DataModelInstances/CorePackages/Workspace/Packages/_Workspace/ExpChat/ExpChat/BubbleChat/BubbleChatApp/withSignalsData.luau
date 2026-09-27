@@ -6,7 +6,6 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local expChatSharedModule = require(parent.ExpChatShared)
 local getFFlagUseCharacterStore = expChatSharedModule.Flags.getFFlagUseCharacterStore
 local getFFlagExpChatUseVoiceParticipantsStore = sharedFlagsModule.GetFFlagExpChatUseVoiceParticipantsStore
-local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local getCharacterStoreModule = require(expChat.Stores.GetCharacterStore)
 local _ = require(expChat.Stores.GetCharacterStore.createCharacterStore)
 local getVoiceStoreModule = require(expChat.Stores.GetVoiceStore)
@@ -15,23 +14,20 @@ local var1 = if getFFlagUseCharacterStore() then getCharacterStoreModule(false) 
 local var2 = if getFFlagExpChatUseVoiceParticipantsStore() then getVoiceStoreModule(false) else nil
 
 return function(value)
-	-- upvalues: getFFlagUseCharacterStore (ref), var1 (ref), useSignalState (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), var2 (ref), fFlagExpChatUseMessagesStore (ref), expChatSharedModule (ref), reactModule (ref)
+	-- upvalues: getFFlagUseCharacterStore (ref), var1 (ref), useSignalState (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), var2 (ref), expChatSharedModule (ref), reactModule (ref)
 	return function(p1)
-		-- upvalues: getFFlagUseCharacterStore (copy), var1 (copy), useSignalState (copy), getFFlagExpChatUseVoiceParticipantsStore (copy), var2 (copy), fFlagExpChatUseMessagesStore (copy), expChatSharedModule (copy), reactModule (copy), value (ref)
+		-- upvalues: getFFlagUseCharacterStore (copy), var1 (copy), useSignalState (copy), getFFlagExpChatUseVoiceParticipantsStore (copy), var2 (copy), expChatSharedModule (copy), reactModule (copy), value (ref)
 		local _ = nil
 		local var3 = if getFFlagUseCharacterStore() and var1 then useSignalState(var1.getCharacters) else nil
 		local _ = nil
 		local var4 = if getFFlagExpChatUseVoiceParticipantsStore() and var2 then useSignalState(var2.getVoiceParticipants) else nil
 		local _ = nil
 		local var5 = nil
+		local context = expChatSharedModule.context
+		local messagesStore = context and context.messagesStore
 		
-		if fFlagExpChatUseMessagesStore then
-			local context = expChatSharedModule.context
-			local messagesStore = context and context.messagesStore
-			
-			if messagesStore then
-				var5 = useSignalState(messagesStore.getMockUserIdToPartOrModel)
-			end
+		if messagesStore then
+			var5 = useSignalState(messagesStore.getMockUserIdToPartOrModel)
 		end
 		local cloned = table.clone(p1)
 		
@@ -41,7 +37,7 @@ return function(value)
 		if getFFlagExpChatUseVoiceParticipantsStore() then
 			cloned.voiceParticipants = var4
 		end
-		if fFlagExpChatUseMessagesStore and var5 then
+		if var5 then
 			cloned.mockUserIdToPartOrModel = var5
 		end
 		return reactModule.createElement(value, cloned)

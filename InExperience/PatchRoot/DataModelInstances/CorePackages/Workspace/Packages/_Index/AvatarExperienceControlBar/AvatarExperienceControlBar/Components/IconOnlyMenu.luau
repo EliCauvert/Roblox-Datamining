@@ -6,16 +6,18 @@ local useSemanticTokensModule = require(avatarExperienceControlBar.Hooks.useSema
 local _ = require(avatarExperienceControlBar.ControlBarTypes)
 local iconItemModule = require(avatarExperienceControlBar.Components.Items.IconItem)
 local imageItemModule = require(avatarExperienceControlBar.Components.Items.ImageItem)
+local imageItemWithTooltipModule = require(avatarExperienceControlBar.Components.Items.ImageItemWithTooltip)
 local colorItemModule = require(avatarExperienceControlBar.Components.Items.ColorItem)
 local fFlagAXAddToolTipToIconItemMenu = require(parent.AvatarExperienceFlags).FFlagAXAddToolTipToIconItemMenu
 local fFlagAXMigrateBuilderIcons = require(parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
 local fFlagAXResetAvatarButton = require(parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
+local fFlagMeProfileEntryTooltipEnabled = require(parent.AvatarExperienceFlags).FFlagMeProfileEntryTooltipEnabled
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useSemanticTokensModule (ref), reactModule (ref), fFlagAXResetAvatarButton (ref), imageItemModule (ref), iconItemModule (ref), fFlagAXMigrateBuilderIcons (ref), fFlagAXAddToolTipToIconItemMenu (ref), colorItemModule (ref), foundationModule (ref)
+	-- upvalues: useSemanticTokensModule (ref), reactModule (ref), fFlagAXResetAvatarButton (ref), fFlagMeProfileEntryTooltipEnabled (ref), imageItemWithTooltipModule (ref), imageItemModule (ref), iconItemModule (ref), fFlagAXMigrateBuilderIcons (ref), fFlagAXAddToolTipToIconItemMenu (ref), colorItemModule (ref), foundationModule (ref)
 	local var1 = useSemanticTokensModule()
 	local var2 = reactModule.useCallback(function(p3)
-		-- upvalues: fFlagAXResetAvatarButton (copy), reactModule (copy), imageItemModule (copy), iconItemModule (copy), fFlagAXMigrateBuilderIcons (copy), fFlagAXAddToolTipToIconItemMenu (copy), p1 (ref), colorItemModule (copy), foundationModule (copy)
+		-- upvalues: fFlagAXResetAvatarButton (copy), reactModule (copy), fFlagMeProfileEntryTooltipEnabled (copy), imageItemWithTooltipModule (copy), imageItemModule (copy), iconItemModule (copy), fFlagAXMigrateBuilderIcons (copy), fFlagAXAddToolTipToIconItemMenu (copy), p1 (ref), colorItemModule (copy), foundationModule (copy)
 		local item = p3.item
 		local isActive = p3.isActive
 		local onItemActivated = p3.onItemActivated
@@ -29,7 +31,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			end
 		end
 		
-		return if item.type == "image" then reactModule.createElement(imageItemModule, {
+		return if item.type == "image" then reactModule.createElement(if fFlagMeProfileEntryTooltipEnabled and item.toolTipConfig then imageItemWithTooltipModule else imageItemModule, {
 			thumbnailUrl = item.thumbnailUrl,
 			isActive = isActive,
 			onActivated = var3,
@@ -38,7 +40,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			enableFocusAnimation = item.enableFocusAnimation,
 			Visible = item.visible,
 			LayoutOrder = p3.index,
-			hideIndicator = item.hideIndicator
+			hideIndicator = item.hideIndicator,
+			toolTipConfig = if fFlagMeProfileEntryTooltipEnabled then item.toolTipConfig else nil
 		}) elseif item.type == "icon" then reactModule.createElement(iconItemModule, {
 			icon = item.icon,
 			activeIcon = item.activeIcon,

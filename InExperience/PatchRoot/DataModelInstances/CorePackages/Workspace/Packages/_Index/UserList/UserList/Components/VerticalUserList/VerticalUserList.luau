@@ -9,6 +9,7 @@ local useEntitiesModule = require(userList.Hooks.useEntities)
 local useEntitySelectionHandlerModule = require(userList.Hooks.useEntitySelectionHandler)
 local useRenderEntityModule = require(userList.Hooks.useRenderEntity)
 local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
+local fFlagUserListComposeRenderRowWithCta = require(parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
 local var1 = if fFlagUserListCtaIntegrationEnabled then require(userList.Cta) else nil
 local t = {
 	BackgroundTransparency = 1,
@@ -87,9 +88,15 @@ local function VerticalUserList(p1)
 end
 
 return if fFlagUserListCtaIntegrationEnabled then function(p2)
-	-- upvalues: var1 (ref), reactModule (ref), VerticalUserList (ref)
-	return if var1 ~= nil and (p2.ctaConfig ~= nil and p2.renderRow == nil) then reactModule.createElement(var1.CtaRenderRowBridge, {
+	-- upvalues: var1 (ref), fFlagUserListComposeRenderRowWithCta (ref), reactModule (ref), VerticalUserList (ref)
+	local var7 = var1 ~= nil and (p2.ctaConfig ~= nil and p2.renderRow == nil)
+	
+	if fFlagUserListComposeRenderRowWithCta then
+		var7 = var1 ~= nil and p2.ctaConfig ~= nil
+	end
+	return if var7 then reactModule.createElement(var1.CtaRenderRowBridge, {
 		ctaConfig = p2.ctaConfig,
+		renderRow = if fFlagUserListComposeRenderRowWithCta then p2.renderRow else nil,
 		render = function(p3)
 			-- upvalues: p2 (ref), reactModule (copy), VerticalUserList (copy)
 			local cloned = table.clone(p2)

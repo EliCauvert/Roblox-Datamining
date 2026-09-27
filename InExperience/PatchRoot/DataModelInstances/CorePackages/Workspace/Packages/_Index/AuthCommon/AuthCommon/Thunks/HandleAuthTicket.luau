@@ -1,9 +1,7 @@
 ﻿local authCommon = script:FindFirstAncestor("AuthCommon")
 local parent = authCommon.Parent
-local httpService = game:GetService("HttpService")
 local guiService = game:GetService("GuiService")
 local notificationType = require(parent.RobloxAppEnums).NotificationType
-local url = require(parent.Http).Url
 local promiseModule = require(parent.Promise)
 local experienceService = require(parent.ExperienceService).ExperienceService
 local gameParams = require(parent.ExperienceService).GameParams
@@ -13,6 +11,7 @@ local fFlagLuaEnableLoginAndSignupDifferentiatedStatusValues = sharedFlagsModule
 local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
 local userModule = require(authCommon.Thunks.User)
 local accountSwitcherConstantsModule = require(authCommon.Common.AccountSwitcherConstants)
+local redeemAuthenticationTicketModule = require(authCommon.Http.Requests.RedeemAuthenticationTicket)
 
 local function _(p1)
 	local var1 = tonumber(p1)
@@ -44,14 +43,8 @@ local function parsePlaceLauncherUrl(p1)
 end
 
 return function(p2, p3, p4, p5, p6)
-	-- upvalues: url (ref), httpService (ref), fFlagEnableLuaAccountSwitch (ref), appStorageUtilitiesModule (ref), parsePlaceLauncherUrl (ref), gameParams (ref), userModule (ref), promiseModule (ref), fFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (ref), accountSwitcherConstantsModule (ref), guiService (ref), notificationType (ref), experienceService (ref)
-	return p2(string.format("%sv1/authentication-ticket/redeem", url.AUTH_URL), "POST", {
-		postBody = httpService:JSONEncode({
-			retainCurrentSession = true,
-			authenticationTicket = p3,
-			accountBlob = fFlagEnableLuaAccountSwitch and appStorageUtilitiesModule.getAccountBlob() or nil
-		})
-	}):andThen(function(p7)
+	-- upvalues: redeemAuthenticationTicketModule (ref), parsePlaceLauncherUrl (ref), gameParams (ref), appStorageUtilitiesModule (ref), userModule (ref), fFlagEnableLuaAccountSwitch (ref), promiseModule (ref), fFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (ref), accountSwitcherConstantsModule (ref), guiService (ref), notificationType (ref), experienceService (ref)
+	return redeemAuthenticationTicketModule(p2, p3):andThen(function(p7)
 		-- upvalues: parsePlaceLauncherUrl (copy), p4 (ref), gameParams (copy), appStorageUtilitiesModule (copy), userModule (copy), fFlagEnableLuaAccountSwitch (copy), promiseModule (copy), p6 (ref), fFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (copy), accountSwitcherConstantsModule (copy), guiService (copy), notificationType (copy), p5 (ref), experienceService (copy)
 		local var2 = parsePlaceLauncherUrl(p4)
 		local var3 = tonumber(var2.placeId)

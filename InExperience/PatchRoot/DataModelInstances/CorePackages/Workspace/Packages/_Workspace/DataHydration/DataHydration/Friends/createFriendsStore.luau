@@ -13,6 +13,7 @@ local fFlagSduiRequestFriendshipAction = sharedFlagsModule.FFlagSduiRequestFrien
 local fFlagEnableGetFriendshipStatus = sharedFlagsModule.FFlagEnableGetFriendshipStatus
 local fFlagFriendSortedByPresenceSignalsImplementation = sharedFlagsModule.FFlagFriendSortedByPresenceSignalsImplementation
 local fFlagFriendsStoreSortOnlineFriendsByRank = sharedFlagsModule.FFlagFriendsStoreSortOnlineFriendsByRank
+local fFlagPresenceRefetchTelemetryEnabledModule = require(dataHydration.Flags.FFlagPresenceRefetchTelemetryEnabled)
 local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
 local fFlagFriendsCountDataHydrationMigrationEnabled = sharedFlagsModule.FFlagFriendsCountDataHydrationMigrationEnabled or sharedFlagsModule.FFlagFriendsChatHasFriendsGate
 local requestsModule = require(dataHydration.Friends.Requests)
@@ -145,7 +146,7 @@ local _ = function(p5)
 end
 
 return function()
-	-- upvalues: presenceStoreModule (ref), fFlagFriendSortedByPresenceSignalsImplementation (ref), getLocalPlayerUserId (ref), createDataCacheModule (ref), onlineFriendsCacheTtlSec (ref), isFriendsWithCacheTtlSec (ref), allFriendsCacheTtlSec (ref), fFlagEnableGetFriendshipStatus (ref), fFlagSduiRequestFriendshipAction (ref), friendshipStatusCacheTtlSec (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), friendsCountCacheTtlSec (ref), localUserIdStore (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), mergeListsWithoutDuplicates (ref), mergeListsWithoutDuplicates_1 (ref), normalizePresenceRawDataModule (ref), presenceTypeModule (ref), normalizeStoredOnlineFriendRow (ref), normalizePresenceFromOnlineFriendsRow (ref), createDataResolverModule (ref), requestsModule (ref), mapFriendshipStatusToEnumModule (ref), cryoModule (ref), friendsPageSize (ref), initialFriendsPageSize (ref), findFriendsSortModule (ref), normalizeFindFriendsPageResponse (ref), mergeAllFriendsPage (ref), signalsModule (ref), fFlagFriendsStoreSortOnlineFriendsByRank (ref), dataStatus (ref)
+	-- upvalues: presenceStoreModule (ref), fFlagFriendSortedByPresenceSignalsImplementation (ref), getLocalPlayerUserId (ref), createDataCacheModule (ref), onlineFriendsCacheTtlSec (ref), isFriendsWithCacheTtlSec (ref), allFriendsCacheTtlSec (ref), fFlagEnableGetFriendshipStatus (ref), fFlagSduiRequestFriendshipAction (ref), friendshipStatusCacheTtlSec (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), friendsCountCacheTtlSec (ref), localUserIdStore (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), mergeListsWithoutDuplicates (ref), mergeListsWithoutDuplicates_1 (ref), normalizePresenceRawDataModule (ref), presenceTypeModule (ref), normalizeStoredOnlineFriendRow (ref), normalizePresenceFromOnlineFriendsRow (ref), createDataResolverModule (ref), requestsModule (ref), mapFriendshipStatusToEnumModule (ref), cryoModule (ref), friendsPageSize (ref), initialFriendsPageSize (ref), findFriendsSortModule (ref), normalizeFindFriendsPageResponse (ref), mergeAllFriendsPage (ref), signalsModule (ref), fFlagFriendsStoreSortOnlineFriendsByRank (ref), dataStatus (ref), fFlagPresenceRefetchTelemetryEnabledModule (ref)
 	local var5, var6
 	local var7 = presenceStoreModule.get()
 	local var8 = if fFlagFriendSortedByPresenceSignalsImplementation then nil else tostring(getLocalPlayerUserId())
@@ -172,7 +173,7 @@ return function()
 	end
 	var5 = {}
 	
-	local function var41(p5)
+	local function var42(p5)
 		-- upvalues: fFlagFriendSortedByPresenceSignalsImplementation (copy), localUserIdStore (copy), getLocalPlayerUserId (copy), var8 (ref), var12 (ref), fFlagAddFriendsPageTrustedFriendRequestSection (copy), mergeListsWithoutDuplicates (copy), mergeListsWithoutDuplicates_1 (copy)
 		local var15
 		if fFlagFriendSortedByPresenceSignalsImplementation then
@@ -732,6 +733,73 @@ return function()
 				error(p18)
 			end)
 		end,
+		_getCachedFriendsPresences = function()
+			-- upvalues: fFlagPresenceRefetchTelemetryEnabledModule (copy), localUserIdStore (copy), getLocalPlayerUserId (copy), var18 (ref), var7 (ref)
+			if not fFlagPresenceRefetchTelemetryEnabledModule then
+				return nil
+			end
+			local var49
+			local currentUserId = localUserIdStore.getCurrentUserId(false)
+			
+			if currentUserId == "" then
+				local var50 = getLocalPlayerUserId()
+				var49 = if var50 then tostring(var50) else ""
+			else
+				var49 = currentUserId
+			end
+			local var51 = var18.getCachedItem(var49).data(false)
+			
+			if var51 == nil then
+				return nil
+			end
+			local t = {}
+			
+			for i, v in pairs(var51) do
+				if v then
+					table.insert(t, {
+						id = v.id,
+						presence = var7.GetPresenceByUserId(v.id, { skipFetch = true }).data(false)
+					})
+				end
+			end
+			return t
+		end,
+		_getFetchedFriendIds = function()
+			-- upvalues: fFlagPresenceRefetchTelemetryEnabledModule (copy), localUserIdStore (copy), getLocalPlayerUserId (copy), var18 (ref), var33 (ref)
+			if not fFlagPresenceRefetchTelemetryEnabledModule then
+				return nil
+			end
+			local var52
+			local currentUserId = localUserIdStore.getCurrentUserId(false)
+			
+			if currentUserId == "" then
+				local var53 = getLocalPlayerUserId()
+				var52 = if var53 then tostring(var53) else ""
+			else
+				var52 = currentUserId
+			end
+			local var54 = var18.getCachedItem(var52).data(false)
+			local var55 = var33.getCachedItem(var52).data(false)
+			
+			if var54 == nil and var55 == nil then
+				return nil
+			end
+			local t = {}
+			
+			if var55 then
+				for i, v in var55.friends do
+					t[v.id] = true
+				end
+			end
+			if var54 then
+				for i, v in pairs(var54) do
+					if v then
+						t[v.id] = true
+					end
+				end
+			end
+			return t
+		end,
 		_updateFriendsPresences = function(p18, p19, _)
 			-- upvalues: normalizeStoredOnlineFriendRow (copy), normalizePresenceRawDataModule (copy), var7 (ref), var11 (ref), var14 (ref), fFlagEnableGetFriendshipStatus (copy), var6 (ref), var9 (ref), localUserIdStore (copy), getLocalPlayerUserId (copy)
 			if not p18 then return end
@@ -740,31 +808,31 @@ return function()
 			
 			for i, v in pairs(p18) do
 				local userId = v.userId
-				local var49 = if not userId then nil else tostring(userId)
+				local var56 = if not userId then nil else tostring(userId)
 				
-				if var49 then
-					local var50 = normalizePresenceRawDataModule(v)
-					t[var49] = normalizeStoredOnlineFriendRow({ id = var49, sortScore = p19[var49] })
-					var7.UpdateUserPresence(var49, var50, { isUpdatedRealtime = true })
-					var11.replaceItem(var49, true)
-					var14(var49)
+				if var56 then
+					local var57 = normalizePresenceRawDataModule(v)
+					t[var56] = normalizeStoredOnlineFriendRow({ id = var56, sortScore = p19[var56] })
+					var7.UpdateUserPresence(var56, var57, { isUpdatedRealtime = true })
+					var11.replaceItem(var56, true)
+					var14(var56)
 					
 					if fFlagEnableGetFriendshipStatus then
-						var6.replaceItem(var49, Enum.FriendStatus.Friend)
+						var6.replaceItem(var56, Enum.FriendStatus.Friend)
 					end
 				end
 			end
-			local var51
+			local var58
 			local updateItem = var9.updateItem
 			local currentUserId = localUserIdStore.getCurrentUserId(false)
 			
 			if currentUserId == "" then
-				local var52 = getLocalPlayerUserId()
-				var51 = if var52 then tostring(var52) else ""
+				local var59 = getLocalPlayerUserId()
+				var58 = if var59 then tostring(var59) else ""
 			else
-				var51 = currentUserId
+				var58 = currentUserId
 			end
-			updateItem(var51, t)
+			updateItem(var58, t)
 		end,
 		GetFriendshipStatus = function(p20, p21)
 			-- upvalues: fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var28 (ref)
@@ -798,12 +866,12 @@ return function()
 					
 					return
 				end
-				local var53 = p20
+				local var60 = p20
 				local friend = Enum.FriendStatus.Friend
 				
 				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
-					var6.replaceItem(var53, friend)
-					UpdateIsFriendsWith(var53, friend == Enum.FriendStatus.Friend)
+					var6.replaceItem(var60, friend)
+					UpdateIsFriendsWith(var60, friend == Enum.FriendStatus.Friend)
 					
 					return
 				end
@@ -828,12 +896,12 @@ return function()
 					
 					return
 				end
-				local var53 = p20
+				local var60 = p20
 				local friend = Enum.FriendStatus.Friend
 				
 				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
-					var6.replaceItem(var53, friend)
-					UpdateIsFriendsWith(var53, friend == Enum.FriendStatus.Friend)
+					var6.replaceItem(var60, friend)
+					UpdateIsFriendsWith(var60, friend == Enum.FriendStatus.Friend)
 					
 					return
 				end

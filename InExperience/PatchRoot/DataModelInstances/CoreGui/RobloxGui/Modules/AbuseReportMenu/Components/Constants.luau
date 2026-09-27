@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("AbuseReportMenu").Components.Types)
 local t = {
-	AbuseReportMenuRootName = "AbuseReportMenuNewRoot",
+	LegacyAbuseReportMenuRootName = "LegacyAbuseReportMenuRoot",
 	AbuseReportMenuPlaceholderFrame = "AbuseReportMenuPlaceholderFrame",
 	ModalBaseSelectorDialogRootName = "ModalBaseSelectorDialog",
 	ReportModes = { Classic = "Classic", SelectInScene = "SelectInScene" },

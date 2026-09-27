@@ -1,6 +1,9 @@
 ﻿local parent = script:FindFirstAncestor("PhoneUpsell").Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useStyle = UIBloxModule.Core.Style.useStyle
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local textField = UIBloxModule.App.Input.TextField
@@ -31,7 +34,7 @@ local function getButtonStackProps(p1, p2, p3, p4, p5)
 end
 
 return function(p1)
-	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), interactiveAlert (ref), getButtonStackProps (ref), textField (ref), getFFlagAddMorePhoneUpsellEvents (ref)
+	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), interactiveAlert (ref), getButtonStackProps (ref), textField (ref), getFFlagAddMorePhoneUpsellEvents (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = useStyle()
 	local tokens = var1.Tokens
 	local t = {
@@ -62,7 +65,7 @@ return function(p1)
 	return reactModule.createElement(interactiveAlert, {
 		title = var2.titleKey,
 		screenSize = p1.screenSize,
-		buttonStackInfo = getButtonStackProps(if var5 then var2.buttonDisabledKey .. " (" .. var7 .. ")" else var2.buttonKey, function()
+		buttonStackInfo = getButtonStackProps(if var5 then var2.buttonDisabledKey .. " (" .. var8 .. ")" else var2.buttonKey, function()
 			-- upvalues: p1 (ref), var4 (ref)
 			p1.onResendPhoneCode()
 			var4(10)
@@ -95,7 +98,7 @@ return function(p1)
 		position = p1.isKeyboardShowing and UDim2.new(0.5, 0, 1, -p1.keyboardHeight) or nil,
 		anchorPoint = p1.isKeyboardShowing and Vector2.new(0.5, 1) or nil,
 		middleContent = function()
-			-- upvalues: reactModule (copy), tokens (ref), textField (copy), p1 (ref), var6 (ref), getFFlagAddMorePhoneUpsellEvents (copy), var1 (ref), var2 (ref)
+			-- upvalues: reactModule (copy), tokens (ref), textField (copy), p1 (ref), var6 (ref), getFFlagAddMorePhoneUpsellEvents (copy), foundationFontFaceMigration (copy), var1 (ref), normalizeFontFace (copy), var2 (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -140,7 +143,8 @@ return function(p1)
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextYAlignment = Enum.TextYAlignment.Top,
 						TextColor3 = tokens.Color.System.Alert.Color3,
-						Font = var1.Font.Body.Font,
+						Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.BodyLarge.Font) else nil,
 						TextSize = var1.Font.BaseSize * var1.Font.CaptionSmall.RelativeSize,
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
@@ -154,7 +158,8 @@ return function(p1)
 					TextSize = var1.Font.BaseSize * var1.Font.CaptionHeader.RelativeSize,
 					TextColor3 = var1.Theme.TextDefault.Color,
 					TextTransparency = var1.Theme.TextDefault.Transparency,
-					Font = var1.Font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					AutomaticSize = Enum.AutomaticSize.Y,
 					Size = UDim2.new(1, 0, 0, 0)

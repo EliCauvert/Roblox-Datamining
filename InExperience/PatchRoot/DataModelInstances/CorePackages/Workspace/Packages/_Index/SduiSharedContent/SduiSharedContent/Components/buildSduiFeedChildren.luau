@@ -10,7 +10,6 @@ local sduiBuilder = sduiCoreSystemModule.SduiBuilder
 local sduiErrors = sduiCoreSystemModule.SduiErrors
 local sduiFeedItemModule = require(sduiSharedContent.Components.SduiFeedItem)
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiPoolBackedFeed = sharedFlagsModule.FFlagSduiPoolBackedFeed
 local fFlagSduiCollectionGridRevealRows = sharedFlagsModule.FFlagSduiCollectionGridRevealRows
 local fFlagAppPageShellScrollToTopFocus = sharedFlagsModule.FFlagAppPageShellScrollToTopFocus
 local fFlagLuaAppsDefaultSelection = sharedFlagsModule.FFlagLuaAppsDefaultSelection
@@ -20,7 +19,7 @@ local SORT_INDEX_SELECTION_ORDER_MULTIPLIER = discoveryTypesModule.Constants.SOR
 local t = {}
 
 return function(p1)
-	-- upvalues: findAnalyticsField (ref), t (ref), sduiBuilder (ref), sduiErrors (ref), getSduiComponentWrapper (ref), fFlagSduiPoolBackedFeed (ref), cryoModule (ref), fFlagSduiCollectionGridRevealRows (ref), sduiFeedIndexInExtraLocalProps (ref), fFlagAppPageShellScrollToTopFocus (ref), SORT_INDEX_SELECTION_ORDER_MULTIPLIER (ref), reactModule (ref), sduiFeedDebugNameWithImpressionsTag (ref), sduiFeedItemModule (ref), fFlagLuaAppsDefaultSelection (ref)
+	-- upvalues: findAnalyticsField (ref), t (ref), sduiBuilder (ref), sduiErrors (ref), getSduiComponentWrapper (ref), cryoModule (ref), fFlagSduiCollectionGridRevealRows (ref), sduiFeedIndexInExtraLocalProps (ref), fFlagAppPageShellScrollToTopFocus (ref), SORT_INDEX_SELECTION_ORDER_MULTIPLIER (ref), reactModule (ref), sduiFeedDebugNameWithImpressionsTag (ref), sduiFeedItemModule (ref), fFlagLuaAppsDefaultSelection (ref)
 	local t_1 = {}
 	local sduiContext = p1.sduiContext
 	local startRow = p1.extraLocalProps and p1.extraLocalProps.startRow
@@ -47,24 +46,20 @@ return function(p1)
 			componentType = componentType,
 			collectionPosition = i
 		}
-		local var3 = nil
-		local extraLocalProps = p1.extraLocalProps
+		local _ = nil
+		local _ = p1.extraLocalProps
+		local startRowGetter = v.startRowGetter
+		local var3 = if startRowGetter ~= nil then nil else { startRow = startRowGetter }
+		local var4 = cryoModule.Dictionary.join(p1.extraLocalProps or t, {
+			startRow = if startRowGetter ~= nil then var1 + i - 1 else cryoModule.None,
+			setDisplayedRowCount = if fFlagSduiCollectionGridRevealRows then v.setDisplayedRowCount else nil
+		})
 		
-		if fFlagSduiPoolBackedFeed then
-			local startRowGetter = v.startRowGetter
-			var3 = if startRowGetter ~= nil then nil else { startRow = startRowGetter }
-			extraLocalProps = cryoModule.Dictionary.join(p1.extraLocalProps or t, {
-				startRow = if startRowGetter ~= nil then var1 + i - 1 else cryoModule.None,
-				setDisplayedRowCount = if fFlagSduiCollectionGridRevealRows then v.setDisplayedRowCount else nil
-			})
-		else
-			extraLocalProps = cryoModule.Dictionary.join(extraLocalProps, { startRow = var1 + i - 1 })
-		end
 		if sduiFeedIndexInExtraLocalProps then
-			extraLocalProps = cryoModule.Dictionary.join(extraLocalProps, { index = i })
+			var4 = cryoModule.Dictionary.join(var4, { index = i })
 		end
 		if fFlagAppPageShellScrollToTopFocus and p1.selectionOrderBase ~= nil then
-			extraLocalProps = cryoModule.Dictionary.join(extraLocalProps, {
+			var4 = cryoModule.Dictionary.join(var4, {
 				selectionOrderBase = p1.selectionOrderBase + i * SORT_INDEX_SELECTION_ORDER_MULTIPLIER
 			})
 		end
@@ -74,8 +69,8 @@ return function(p1)
 			componentConfig = v,
 			sduiContext = sduiContext,
 			localAnalyticsData = t_2,
-			extraLocalProps = extraLocalProps,
-			extraLocalPropSignals = if fFlagSduiPoolBackedFeed then var3 else nil
+			extraLocalProps = var4,
+			extraLocalPropSignals = var3
 		})
 		t_1[componentType_1] = reactModule.createElement(sduiFeedItemModule, {
 			layoutOrder = if v.props and v.props.layoutOrder ~= nil then v.props.layoutOrder else i,

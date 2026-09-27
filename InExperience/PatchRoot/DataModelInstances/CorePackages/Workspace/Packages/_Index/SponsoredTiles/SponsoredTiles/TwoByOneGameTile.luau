@@ -8,7 +8,7 @@ local useNavigateToGameDetails = gameTileModule.useNavigateToGameDetails
 local gameTileThumbnailBadges = gameTileModule.GameTileThumbnailBadges
 local getAvailableGameTileOverflowMenuItems = gameTileModule.getAvailableGameTileOverflowMenuItems
 local spanTileOverflowMenuModule = require(sponsoredTiles.SpanTileOverflowMenu.SpanTileOverflowMenu)
-local twoByOneGameTileTelemetryModule = require(sponsoredTiles.TwoByOneGameTileTelemetry)
+local twoByOneGameTileTelemetry = require(parent.SponsoredTilesTelemetry).TwoByOneGameTileTelemetry
 local _ = require(sponsoredTiles.types)
 local hiddenTileContent = gameTileModule.HiddenTileContent
 local itemLayoutDataParsingUtils = gameTileModule.ItemLayoutDataParsingUtils
@@ -18,6 +18,7 @@ local foundationModule = require(parent.Foundation)
 local buttonSize = foundationModule.Enums.ButtonSize
 local useTokens = foundationModule.Hooks.useTokens
 local image = foundationModule.Image
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local responsiveModule = require(parent.Responsive)
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local gameInfosReducer = require(parent.GameInfosRodux).GameInfosReducer
@@ -44,6 +45,7 @@ local gameCollectionItemTypes = require(parent.DiscoveryTypes).GameCollectionIte
 local useValidTileBadges = gameTileModule.useValidTileBadges
 local useTagAsViewportAutoplayCandidate = require(parent.VideoUtils).useTagAsViewportAutoplayCandidate
 local useTagAsSponsoredAdViewabilityCandidate = require(parent.SponsoredAdViewability).useTagAsSponsoredAdViewabilityCandidate
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local luaAppTwoByOneTileSmallScreenBreakpoint = game:DefineFastInt("LuaAppTwoByOneTileSmallScreenBreakpoint", 600)
 local luaAppTwoByOneTileLogoHeightPercentLandscape = game:DefineFastInt("LuaAppTwoByOneTileLogoHeightPercentLandscape", 20)
 local luaAppTwoByOneTileLogoHeightPercentSquare = game:DefineFastInt("LuaAppTwoByOneTileLogoHeightPercentSquare", 36)
@@ -95,7 +97,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useNavigateToGameDetails (ref), useRoactService (ref), roactNetworking (ref), appSessionService (ref), useLocalization (ref), t (ref), useTokens (ref), responsiveModule (ref), luaAppTwoByOneTileSmallScreenBreakpoint (ref), buttonSize (ref), reactModule (ref), getTextSize (ref), var2 (ref), var3 (ref), useValidTileBadges (ref), useTriggerFeedback (ref), useOverflowMenuOpen (ref), useIsHoveredTile (ref), fFlagLuaAppSduiSponsoredTwoByOneTile (ref), sponsoredGamesRecordClick (ref), gameCollectionItemTypes (ref), twoByOneGameTileTelemetryModule (ref), getAvailableGameTileOverflowMenuItems (ref), fFlagLuaAppEnableReportExperience (ref), fFlagLuaAppHapticTriggeredTelemetry (ref), getOverflowMenuSignalStore (ref), setGamePlaySession (ref), sessionType (ref), hoverTileCoordinator (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), usePlayButtonState (ref), useOnPlayButtonCallback (ref), fFlagMigrateGameInfoToStore (ref), useSelector (ref), gameInfosReducer (ref), fFlagLuaAppHomeThumbnailPrefetch (ref), var1 (ref), formatExperienceThumbnail (ref), getGameTileLayoutData (ref), itemLayoutDataParsingUtils (ref), impressionsTagUtility (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppTileVideoCandidateOnly (ref), fFlagLuaAppSponsoredAdViewabilityEnabled (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), useTagAsSponsoredAdViewabilityCandidate (ref), hiddenTileContent (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), var6 (ref), color3 (ref), var4 (ref), var5 (ref), color3_1 (ref), gameTileThumbnailBadges (ref), image (ref), playButton (ref), spanTileOverflowMenuModule (ref), fFlagLuaAppNotInterestedReportPlaceId (ref)
+	-- upvalues: useNavigateToGameDetails (ref), useRoactService (ref), roactNetworking (ref), appSessionService (ref), useLocalization (ref), t (ref), useTokens (ref), responsiveModule (ref), luaAppTwoByOneTileSmallScreenBreakpoint (ref), buttonSize (ref), reactModule (ref), getTextSize (ref), var2 (ref), var3 (ref), useValidTileBadges (ref), useTriggerFeedback (ref), useOverflowMenuOpen (ref), useIsHoveredTile (ref), fFlagLuaAppSduiSponsoredTwoByOneTile (ref), sponsoredGamesRecordClick (ref), gameCollectionItemTypes (ref), twoByOneGameTileTelemetry (ref), getAvailableGameTileOverflowMenuItems (ref), fFlagLuaAppEnableReportExperience (ref), fFlagLuaAppHapticTriggeredTelemetry (ref), getOverflowMenuSignalStore (ref), setGamePlaySession (ref), sessionType (ref), hoverTileCoordinator (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), usePlayButtonState (ref), useOnPlayButtonCallback (ref), fFlagMigrateGameInfoToStore (ref), useSelector (ref), gameInfosReducer (ref), fFlagLuaAppHomeThumbnailPrefetch (ref), var1 (ref), formatExperienceThumbnail (ref), getGameTileLayoutData (ref), itemLayoutDataParsingUtils (ref), impressionsTagUtility (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppTileVideoCandidateOnly (ref), fFlagLuaAppSponsoredAdViewabilityEnabled (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), useTagAsSponsoredAdViewabilityCandidate (ref), hiddenTileContent (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), var6 (ref), color3 (ref), var4 (ref), var5 (ref), color3_1 (ref), gameTileThumbnailBadges (ref), image (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), playButton (ref), spanTileOverflowMenuModule (ref), fFlagLuaAppNotInterestedReportPlaceId (ref)
 	local large, large_1, headingMedium, bodyMedium, captionMedium, xSmall, medium, size1000, titleMedium
 	local var7 = useNavigateToGameDetails()
 	local var8 = useRoactService(roactNetworking)
@@ -180,7 +182,7 @@ return function(p1)
 		var26.current = false
 	end, {})
 	local var29 = reactModule.useCallback(function()
-		-- upvalues: fFlagLuaAppSduiSponsoredTwoByOneTile (copy), p1 (ref), gameCollectionItemTypes (copy), var7 (ref), universeId (ref), twoByOneGameTileTelemetryModule (copy)
+		-- upvalues: fFlagLuaAppSduiSponsoredTwoByOneTile (copy), p1 (ref), gameCollectionItemTypes (copy), var7 (ref), universeId (ref), twoByOneGameTileTelemetry (copy)
 		if fFlagLuaAppSduiSponsoredTwoByOneTile and p1.onOpenGameDetails then
 			p1.onOpenGameDetails()
 		else
@@ -195,14 +197,14 @@ return function(p1)
 			})
 			
 			if not fFlagLuaAppSduiSponsoredTwoByOneTile then
-				twoByOneGameTileTelemetryModule.logTwoByOneTileViewGameDetailsActivated()
+				twoByOneGameTileTelemetry.logTwoByOneTileViewGameDetailsActivated()
 			end
 			if p1.reportGameDetailOpened then
 				p1.reportGameDetailOpened(p1.index, universeId)
 			end
 		end
 		if fFlagLuaAppSduiSponsoredTwoByOneTile then
-			twoByOneGameTileTelemetryModule.logTwoByOneTileViewGameDetailsActivated()
+			twoByOneGameTileTelemetry.logTwoByOneTileViewGameDetailsActivated()
 		end
 	end, {
 		var7, universeId, p1.index, p1.placeIdOverride, p1.launchDataOverride,
@@ -290,24 +292,24 @@ return function(p1)
 		nativeAdData = p1.adId
 	}, if p1.placeIdOverride then p1.placeIdOverride else p1.placeId)
 	local var37 = reactModule.useCallback(function()
-		-- upvalues: twoByOneGameTileTelemetryModule (copy), var27 (ref)
-		twoByOneGameTileTelemetryModule.logTwoByOneTileGameJoinInitiated()
-		twoByOneGameTileTelemetryModule.logTwoByOneTileCtaActivated()
+		-- upvalues: twoByOneGameTileTelemetry (copy), var27 (ref)
+		twoByOneGameTileTelemetry.logTwoByOneTileGameJoinInitiated()
+		twoByOneGameTileTelemetry.logTwoByOneTileCtaActivated()
 		var27()
 	end, { var27 })
 	local var38 = reactModule.useCallback(function()
-		-- upvalues: twoByOneGameTileTelemetryModule (copy), var27 (ref), var29 (ref)
-		twoByOneGameTileTelemetryModule.logTwoByOneTileCtaActivated()
+		-- upvalues: twoByOneGameTileTelemetry (copy), var27 (ref), var29 (ref)
+		twoByOneGameTileTelemetry.logTwoByOneTileCtaActivated()
 		var27()
 		var29()
 	end, { var27, var29 })
 	local var39 = reactModule.useCallback(function()
-		-- upvalues: twoByOneGameTileTelemetryModule (copy), var36 (ref), var35 (ref), var34 (ref)
-		twoByOneGameTileTelemetryModule.logTwoByOneTileGameJoinInitiated()
+		-- upvalues: twoByOneGameTileTelemetry (copy), var36 (ref), var35 (ref), var34 (ref)
+		twoByOneGameTileTelemetry.logTwoByOneTileGameJoinInitiated()
 		var36(var35.playButtonState, var34)
 	end, { var36, var35.playButtonState, var34 })
 	local var40 = reactModule.useCallback(function()
-		-- upvalues: var26 (ref), var25 (ref), hoverTileCoordinator (copy), twoByOneGameTileTelemetryModule (copy), var27 (ref), tileVariant (ref), var29 (ref), var39 (ref)
+		-- upvalues: var26 (ref), var25 (ref), hoverTileCoordinator (copy), twoByOneGameTileTelemetry (copy), var27 (ref), tileVariant (ref), var29 (ref), var39 (ref)
 		if var26.current then
 			var26.current = false
 			
@@ -315,7 +317,7 @@ return function(p1)
 		elseif var25 then
 			hoverTileCoordinator.default:reset()
 		end
-		twoByOneGameTileTelemetryModule.logTwoByOneTileActivated()
+		twoByOneGameTileTelemetry.logTwoByOneTileActivated()
 		var27()
 		
 		if tileVariant.onTileActivation == "OpenEdp" then
@@ -519,7 +521,8 @@ return function(p1)
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					Text = p1.headline or "",
-					Font = headingMedium.Font,
+					Font = if foundationFontFaceMigration then nil else headingMedium.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(headingMedium.Font) else nil,
 					TextSize = headingMedium.FontSize,
 					TextColor3 = color3,
 					TextXAlignment = Enum.TextXAlignment.Left,
@@ -532,7 +535,8 @@ return function(p1)
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					Text = p1.subtitle or "",
-					Font = bodyMedium.Font,
+					Font = if foundationFontFaceMigration then nil else bodyMedium.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(bodyMedium.Font) else nil,
 					TextSize = bodyMedium.FontSize,
 					TextColor3 = color3,
 					TextXAlignment = Enum.TextXAlignment.Left,
@@ -569,7 +573,8 @@ return function(p1)
 				BackgroundTransparency = var15,
 				Text = var10,
 				TextColor3 = var11.LightMode.ActionOverMedia.Foreground.Color3,
-				Font = titleMedium.Font,
+				Font = if foundationFontFaceMigration then nil else titleMedium.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(titleMedium.Font) else nil,
 				TextSize = titleMedium.FontSize,
 				[reactModule.Event.Activated] = var38
 			}, {
@@ -581,7 +586,8 @@ return function(p1)
 				Size = UDim2.new(0, 0, 0, captionMedium.FontSize * captionMedium.LineHeight),
 				Text = var43,
 				TextSize = captionMedium.FontSize,
-				Font = captionMedium.Font,
+				Font = if foundationFontFaceMigration then nil else captionMedium.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(captionMedium.Font) else nil,
 				TextColor3 = var11.Color.Extended.Gray.Gray_400.Color3,
 				TextXAlignment = Enum.TextXAlignment.Right,
 				TextTruncate = Enum.TextTruncate.SplitWord,

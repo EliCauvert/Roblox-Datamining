@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("BuildAgentAdCampaignCard", false) and require(script.Parent.FFlagBuildAdUpsell)

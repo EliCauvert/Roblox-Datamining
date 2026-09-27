@@ -15,9 +15,10 @@ local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local conversationModerationTypeChangedModule = require(appChat.Conversations.Actions.ConversationModerationTypeChanged)
 local cryoModule = require(parent.Cryo)
 local name = require(appChat.Logger):new(script.Name)
+local fFlagAppChatConversationTrustedFriendUpsellBanner = require(parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useSelector (ref), useGetConversationFromIdModule (ref), useIsInExperienceModule (ref), useLocalUserId (ref), reactModule (ref), conversationChannelsModule (ref), refreshConversationUnfilteredThreadsDetailsModule (ref), cryoModule (ref), conversationModerationTypeChangedModule (ref), reloadMessagesForConversationsModule (ref), realtimeDeliveryModule (ref), trustedConnections (ref), name (ref)
+	-- upvalues: useDispatch (ref), useSelector (ref), useGetConversationFromIdModule (ref), useIsInExperienceModule (ref), useLocalUserId (ref), reactModule (ref), conversationChannelsModule (ref), refreshConversationUnfilteredThreadsDetailsModule (ref), cryoModule (ref), conversationModerationTypeChangedModule (ref), reloadMessagesForConversationsModule (ref), realtimeDeliveryModule (ref), trustedConnections (ref), name (ref), fFlagAppChatConversationTrustedFriendUpsellBanner (ref)
 	local var1 = useDispatch()
 	local var2 = useSelector(function(p2)
 		return p2.ChatAppReducer.Conversations
@@ -62,7 +63,7 @@ return function(p1)
 		var1(reloadMessagesForConversationsModule(t))
 	end, { var1, var2 })
 	realtimeDeliveryModule.useRealtimeNamespace(trustedConnections.Namespace, function(p6)
-		-- upvalues: name (copy), trustedConnections (copy), var5 (ref), var6 (ref), var7 (ref), conversationChannelsModule (copy), var8 (ref)
+		-- upvalues: name (copy), trustedConnections (copy), var5 (ref), var6 (ref), var7 (ref), conversationChannelsModule (copy), var8 (ref), fFlagAppChatConversationTrustedFriendUpsellBanner (copy)
 		name:debug("Received Realtime Event " .. trustedConnections.Namespace .. " -> Actor: " .. tostring(p6.Actor) .. ", Target: " .. tostring(p6.Target) .. ", EventType: " .. tostring(p6.EventType))
 		local var9 = tostring(p6.Actor)
 		local var10 = tostring(p6.Target)
@@ -81,10 +82,12 @@ return function(p1)
 			
 			return
 		elseif eventType == trustedConnections.EventTypes.TrustedConnectionRequestSent then
-			if var9 == var5 then
-				return
-			else
+			if var9 ~= var5 then
 				var6(var9)
+				
+				return
+			elseif fFlagAppChatConversationTrustedFriendUpsellBanner then
+				var6(var10)
 				
 				return
 			end

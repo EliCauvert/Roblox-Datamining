@@ -2,9 +2,10 @@
 local cryoModule = require(parent.Cryo)
 local createSignal = require(parent.Signals).createSignal
 local fFlagPlayerSearchEnableOnlineFrequents = require(parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
+local fFlagProfileInsightsParseClassmates = require(parent.SharedFlags).FFlagProfileInsightsParseClassmates
 
 local function createProfileInsight(p1, p2)
-	-- upvalues: cryoModule (ref), fFlagPlayerSearchEnableOnlineFrequents (ref)
+	-- upvalues: cryoModule (ref), fFlagPlayerSearchEnableOnlineFrequents (ref), fFlagProfileInsightsParseClassmates (ref)
 	local t = {
 		targetUserId = "",
 		isOfflineFrequents = false,
@@ -52,6 +53,9 @@ local function createProfileInsight(p1, p2)
 		if v.accountLocationInsight then
 			local accountLocationInsight = v.accountLocationInsight
 			t.localizedCountryName = if accountLocationInsight then accountLocationInsight.localizedCountryName else ""
+		end
+		if fFlagProfileInsightsParseClassmates and v.classmatesInsight then
+			t.isClassmate = v.classmatesInsight.isClassmate == true
 		end
 		if v.accountCreationDateInsight then
 			local accountCreationDateInsight = v.accountCreationDateInsight

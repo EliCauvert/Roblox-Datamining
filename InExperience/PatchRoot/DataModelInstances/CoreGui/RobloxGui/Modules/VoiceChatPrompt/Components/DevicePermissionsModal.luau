@@ -5,6 +5,8 @@ local tModule = require(corePackagesService.Packages.t)
 local argCheckModule = require(corePackagesService.Workspace.Packages.ArgCheck)
 local voiceChatModule = require(corePackagesService.Workspace.Packages.VoiceChat)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTextSize
+local foundationFontFaceMigration = require(corePackagesService.Packages.Foundation).Utility.Flags.FoundationFontFaceMigration
 local button = UIBloxModule.App.Button.Button
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local images = UIBloxModule.App.ImageSet.Images
@@ -30,17 +32,33 @@ local var4 = argCheckModule.wrap(tModule.strictInterface({
 }))
 
 local function DevicePermissionsModal(p1, p2)
-	-- upvalues: var4 (ref), getMicDeeplinkDirectionsModule (ref), getPrimingTextModule (ref), textService (ref), getFFlagSupportGamepadNavInVoiceModals (ref), reactModule (ref), UIBloxModule (ref), assetsModule (ref), microphone (ref), button (ref), buttonType (ref), var3 (ref), var1 (ref), var2 (ref)
+	-- upvalues: var4 (ref), getMicDeeplinkDirectionsModule (ref), getPrimingTextModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), getFFlagSupportGamepadNavInVoiceModals (ref), reactModule (ref), UIBloxModule (ref), assetsModule (ref), microphone (ref), button (ref), buttonType (ref), var3 (ref), var1 (ref), var2 (ref)
 	assert(var4(p1))
 	local var5 = getMicDeeplinkDirectionsModule(p1.settingsAppAvailable, p1.UserInputService)
 	local var6 = getPrimingTextModule(p1.UserInputService)
-	local var7 = 20 + textService:GetTextSize(p1.titleText, p1.promptStyle.Font.Header1.RelativeSize * p1.promptStyle.Font.BaseSize, p1.promptStyle.Font.Header1.Font, Vector2.new(325, 1e999)).Y
-	local var8 = 20 + textService:GetTextSize(p1.bodyText, p1.promptStyle.Font.Body.RelativeSize * p1.promptStyle.Font.BaseSize, p1.promptStyle.Font.Body.Font, Vector2.new(325, 1e999)).Y
-	local var9 = if var6 then 10 + textService:GetTextSize(var6, p1.promptStyle.Font.CaptionHeader.RelativeSize * p1.promptStyle.Font.BaseSize, p1.promptStyle.Font.CaptionHeader.Font, Vector2.new(325, 1e999)).Y else 0
-	local var10 = if var5 then (if var6 then 10 else 20) + textService:GetTextSize(var5, p1.promptStyle.Font.Body.RelativeSize * p1.promptStyle.Font.BaseSize, p1.promptStyle.Font.Body.Font, Vector2.new(325, 1e999)).Y else 0
-	local var11 = if var6 then 5.5 elseif var5 then 4.5 else 4
-	local var12 = if getFFlagSupportGamepadNavInVoiceModals() then Enum.SelectionBehavior.Stop else nil
-	local var13 = if getFFlagSupportGamepadNavInVoiceModals() then true else nil
+	local font = p1.promptStyle.Font.Header1.Font
+	local var7 = p1.promptStyle.Font.Header1.RelativeSize * p1.promptStyle.Font.BaseSize
+	local var8 = 20 + (if foundationFontFaceMigration then getTextSize(p1.titleText, var7, font, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(p1.titleText, var7, font, Vector2.new(325, 1e999)).Y)
+	local font_1 = p1.promptStyle.Font.Body.Font
+	local var9 = p1.promptStyle.Font.Body.RelativeSize * p1.promptStyle.Font.BaseSize
+	local var10 = 20 + (if foundationFontFaceMigration then getTextSize(p1.bodyText, var9, font_1, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(p1.bodyText, var9, font_1, Vector2.new(325, 1e999)).Y)
+	local var11 = 0
+	
+	if var6 then
+		local font_2 = p1.promptStyle.Font.CaptionHeader.Font
+		local var12 = p1.promptStyle.Font.CaptionHeader.RelativeSize * p1.promptStyle.Font.BaseSize
+		var11 = 10 + (if foundationFontFaceMigration then getTextSize(var6, var12, font_2, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(var6, var12, font_2, Vector2.new(325, 1e999)).Y)
+	end
+	local var13 = 0
+	
+	if var5 then
+		local font_2 = p1.promptStyle.Font.Body.Font
+		local var14 = p1.promptStyle.Font.Body.RelativeSize * p1.promptStyle.Font.BaseSize
+		var13 = (if var6 then 10 else 20) + (if foundationFontFaceMigration then getTextSize(var5, var14, font_2, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(var5, var14, font_2, Vector2.new(325, 1e999)).Y)
+	end
+	local var15 = if var6 then 5.5 elseif var5 then 4.5 else 4
+	local var16 = if getFFlagSupportGamepadNavInVoiceModals() then Enum.SelectionBehavior.Stop else nil
+	local var17 = if getFFlagSupportGamepadNavInVoiceModals() then true else nil
 	
 	return reactModule.createElement("ScreenGui", {
 		DisplayOrder = 8,
@@ -65,14 +83,14 @@ local function DevicePermissionsModal(p1, p2)
 			ImageTransparency = p1.promptStyle.Theme.BackgroundUIDefault.Transparency,
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			ScaleType = assetsModule.Images.RoundedRect.ScaleType,
-			Size = UDim2.new(0, 365, 0, var7 + 5 + var8 + 36 + var11 * 20 + var10 + 55 + var9),
+			Size = UDim2.new(0, 365, 0, var8 + 5 + var10 + 36 + var15 * 20 + var13 + 55 + var11),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			SliceCenter = assetsModule.Images.RoundedRect.SliceCenter,
-			SelectionBehaviorDown = var12,
-			SelectionBehaviorLeft = var12,
-			SelectionBehaviorRight = var12,
-			SelectionBehaviorUp = var12,
-			SelectionGroup = var13,
+			SelectionBehaviorDown = var16,
+			SelectionBehaviorLeft = var16,
+			SelectionBehaviorRight = var16,
+			SelectionBehaviorUp = var16,
+			SelectionGroup = var17,
 			ref = if getFFlagSupportGamepadNavInVoiceModals() then p2 else nil
 		}, {
 			Padding = reactModule.createElement("UIPadding", {
@@ -98,7 +116,7 @@ local function DevicePermissionsModal(p1, p2)
 			TitleTextContainer = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
-				Size = UDim2.new(1, 0, 0, var7),
+				Size = UDim2.new(1, 0, 0, var8),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
 				Padding = reactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 7) }),
@@ -125,7 +143,7 @@ local function DevicePermissionsModal(p1, p2)
 			BodyTextContainer = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 5,
-				Size = UDim2.new(1, 0, 0, var8)
+				Size = UDim2.new(1, 0, 0, var10)
 			}, {
 				BodyText = reactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
 					lineHeight = 1.2,
@@ -139,7 +157,7 @@ local function DevicePermissionsModal(p1, p2)
 			InfoTextContainer = if var5 then reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 6,
-				Size = UDim2.new(1, 0, 0, var10 + 20)
+				Size = UDim2.new(1, 0, 0, var13 + 20)
 			}, {
 				Padding = reactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, if var6 then 8 else 15),
@@ -148,7 +166,7 @@ local function DevicePermissionsModal(p1, p2)
 				TextContainer = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, var10)
+					Size = UDim2.new(1, 0, 0, var13)
 				}, {
 					InfoText = reactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
 						lineHeight = 1.25,
@@ -169,7 +187,7 @@ local function DevicePermissionsModal(p1, p2)
 			PrimingTextContainer = if var6 then reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 8,
-				Size = UDim2.new(1, 0, 0, var9)
+				Size = UDim2.new(1, 0, 0, var11)
 			}, {
 				PrimingText = reactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
 					lineHeight = 1.25,
@@ -204,7 +222,7 @@ local function DevicePermissionsModal(p1, p2)
 					size = UDim2.new(0.5, -5, 0, 36),
 					text = var3,
 					onActivated = p1.handleSecondaryActivated,
-					Selectable = var13
+					Selectable = var17
 				}) else nil,
 				ConfirmButton = reactModule.createElement(button, {
 					layoutOrder = 2,
@@ -212,7 +230,7 @@ local function DevicePermissionsModal(p1, p2)
 					size = UDim2.new(if p1.settingsAppAvailable then 0.5 else 1, -5, 0, 36),
 					text = if p1.settingsAppAvailable then var1 else var2,
 					onActivated = p1.handlePrimaryActivated,
-					Selectable = var13
+					Selectable = var17
 				})
 			})
 		})

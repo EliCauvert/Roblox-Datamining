@@ -1,12 +1,12 @@
 ﻿local parent = script.Parent.Parent
 local runService = game:GetService("RunService")
-local guiService = game:GetService("GuiService")
 local userInputService = game:GetService("UserInputService")
+local isTenFootInterface = require(parent.Parent.AppCommonLib).isTenFootInterface
 local getFFlagDisableRobuxUpsellModule = require(parent.Flags.GetFFlagDisableRobuxUpsell)
 
 return {
 	new = function()
-		-- upvalues: userInputService (ref), runService (ref), guiService (ref), getFFlagDisableRobuxUpsellModule (ref)
+		-- upvalues: userInputService (ref), runService (ref), isTenFootInterface (ref), getFFlagDisableRobuxUpsellModule (ref)
 		local t = {}
 		setmetatable(t, {
 			__tostring = function()
@@ -51,8 +51,8 @@ return {
 		end
 		
 		function t.isTenFootInterface()
-			-- upvalues: guiService (copy)
-			return guiService:IsTenFootInterface()
+			-- upvalues: isTenFootInterface (copy)
+			return isTenFootInterface()
 		end
 		
 		function t.getFFlagDisableRobuxUpsell()

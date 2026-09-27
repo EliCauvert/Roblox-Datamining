@@ -5,12 +5,12 @@ local reactModule = require(parent.React)
 local roactModule = require(parent.Roact)
 local text = require(parent.AppCommonLib).Text
 local memoize = require(parent.AppCommonLib).memoize
-local plainTextAutomaticSizeModule = require(script.Parent.PlainTextAutomaticSize)
+local plainTextModule = require(script.Parent.PlainText)
 local withStyle = require(parent.UIBlox).Style.withStyle
-local assetCardTempAutomaticSizeModule = require(script.Parent.AssetCardTempAutomaticSize)
+local assetCardModule = require(script.Parent.AssetCard)
 local hiddenMessageModule = require(script.Parent.HiddenMessage)
 local enumMessageTypesModule = require(appChat.Components.ChatConversation.EnumMessageTypes)
-local chatMessageContainerAutomaticSizeModule = require(script.Parent.ChatMessageContainerAutomaticSize)
+local chatMessageContainerModule = require(script.Parent.ChatMessageContainer)
 local loggerModule = require(script.Parent.Logger)
 local pruneConsecutiveNewLines = require(appChat.SocialLibraries).Utils.pruneConsecutiveNewLines
 local getModeratedMaskTextModule = require(appChat.Utils.getModeratedMaskText)
@@ -22,12 +22,12 @@ local t = {
 	[enumMessageTypesModule.PlainText] = {
 		name = "PlainText",
 		paddingOffset = 0,
-		component = plainTextAutomaticSizeModule
+		component = plainTextModule
 	},
 	[enumMessageTypesModule.Link] = {
 		name = "AssetCard",
 		paddingOffset = 0,
-		component = assetCardTempAutomaticSizeModule
+		component = assetCardModule
 	}
 }
 local t_1 = {
@@ -117,7 +117,7 @@ function chatMessage.init(p1)
 end
 
 function chatMessage.render(p1)
-	-- upvalues: messageModelModule (ref), t_1 (ref), t (ref), loggerModule (ref), pruneConsecutiveNewLines (ref), withStyle (ref), roactModule (ref), chatMessageContainerAutomaticSizeModule (ref), cryoModule (ref), reactModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), fFlagAppChatEnableAutotranslationModule (ref)
+	-- upvalues: messageModelModule (ref), t_1 (ref), t (ref), loggerModule (ref), pruneConsecutiveNewLines (ref), withStyle (ref), roactModule (ref), chatMessageContainerModule (ref), cryoModule (ref), reactModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), fFlagAppChatEnableAutotranslationModule (ref)
 	local props = p1.props
 	local var1 = if props and props.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[props.messageType]
 	props = p1.messageMaxWidth(p1.props.wideMode, p1.props.parentWidth)
@@ -128,12 +128,12 @@ function chatMessage.render(p1)
 		local content = p1.props.repliesTo and (p1.props.repliesTo.messageType and p1.props.repliesTo.content)
 		
 		return withStyle(function(p2)
-			-- upvalues: roactModule (copy), chatMessageContainerAutomaticSizeModule (copy), cryoModule (copy), p1 (ref), props (ref), var1 (ref), reactModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), content (ref), messageModelModule (copy), t_1 (copy), t (copy), fFlagAppChatEnableAutotranslationModule (copy), var2 (ref)
+			-- upvalues: roactModule (copy), chatMessageContainerModule (copy), cryoModule (copy), p1 (ref), props (ref), var1 (ref), reactModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), content (ref), messageModelModule (copy), t_1 (copy), t (copy), fFlagAppChatEnableAutotranslationModule (copy), var2 (ref)
 			local body = p2.Font.Body
 			local var3 = p2.Font.BaseSize * body.RelativeSize
 			local var4 = p2.Font.BaseSize * p2.Font.BodySmall.RelativeSize
 			
-			return roactModule.createElement(chatMessageContainerAutomaticSizeModule, cryoModule.Dictionary.join(p1.props, {
+			return roactModule.createElement(chatMessageContainerModule, cryoModule.Dictionary.join(p1.props, {
 				messageMaxWidth = props,
 				messageTypePaddingOffset = var1.paddingOffset,
 				messageId = p1.props.messageId,

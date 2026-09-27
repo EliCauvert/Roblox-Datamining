@@ -1,8 +1,10 @@
-﻿local groups = script:FindFirstAncestor("Groups")
+﻿local textService = game:GetService("TextService")
+local groups = script:FindFirstAncestor("Groups")
 local parent = groups.Parent
-local textService = game:GetService("TextService")
 local enumsModule = require(parent.ProfilePlatform.Enums)
 local foundationModule = require(parent.Foundation)
+local getTextSize = require(parent.Style).GetTextSize
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local localizationModule = require(parent.Localization)
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
@@ -39,7 +41,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useTokens (ref), useScreenSize (ref), constantsModule (ref), useLocalization (ref), reactModule (ref), mouseIconOverrideService (ref), enumsModule (ref), t (ref), textService (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), view (ref), loadableImage (ref), text (ref), skeleton (ref), verifiedBadgesModule (ref), useAbbreviatedNumberLocalization (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
+	-- upvalues: useTokens (ref), useScreenSize (ref), constantsModule (ref), useLocalization (ref), reactModule (ref), mouseIconOverrideService (ref), enumsModule (ref), t (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), view (ref), loadableImage (ref), text (ref), skeleton (ref), verifiedBadgesModule (ref), useAbbreviatedNumberLocalization (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
 	local var1 = useTokens()
 	local var2 = p1.enableInputDelayed ~= nil or p1.enableInputDelayed
 	local var3 = if useScreenSize().Y < constantsModule.SMALL_SCREEN_HEIGHT_THRESHOLD then constantsModule.THUMBNAIL_SIZE_SMALL else constantsModule.THUMBNAIL_SIZE
@@ -205,15 +207,15 @@ return function(p1)
 	local fontSize_1 = var1.Typography.BodyMedium.FontSize
 	local medium = var1.Padding.Medium
 	local var23 = reactModule.useMemo(function()
-		-- upvalues: var22 (ref), var16 (ref), textService (copy), fontSize (ref), font (ref)
-		return if var22 and var22 ~= "" and (var16 and var16 > 0) then textService:GetTextSize(var22, fontSize, font, Vector2.new(var16, 1e999)) else nil
+		-- upvalues: var22 (ref), var16 (ref), foundationFontFaceMigration (copy), getTextSize (copy), fontSize (ref), font (ref), textService (copy)
+		return if not (not var22 or var22 == "" or (not var16 or var16 <= 0)) then if foundationFontFaceMigration then getTextSize(var22, fontSize, font, Vector2.new(var16, 1e999), { addTemporaryPadding = false }) else textService:GetTextSize(var22, fontSize, font, Vector2.new(var16, 1e999)) else nil
 	end, { var22, var16, font, fontSize })
 	local var24 = reactModule.useMemo(function()
-		-- upvalues: var21 (ref), var19 (ref), medium (ref), textService (copy), fontSize_1 (ref), font_1 (ref)
+		-- upvalues: var21 (ref), var19 (ref), medium (ref), foundationFontFaceMigration (copy), getTextSize (copy), fontSize_1 (ref), font_1 (ref), textService (copy)
 		if var21 and var19 and var19 > 0 then
 			local var25 = var19 - medium * 2
 			
-			return if var25 > 0 then textService:GetTextSize(var21, fontSize_1, font_1, Vector2.new(var25, 1e999)) else nil
+			return if var25 > 0 then if foundationFontFaceMigration then getTextSize(var21, fontSize_1, font_1, Vector2.new(var25, 1e999), { addTemporaryPadding = false }) else textService:GetTextSize(var21, fontSize_1, font_1, Vector2.new(var25, 1e999)) else nil
 		end
 	end, {
 		var21,

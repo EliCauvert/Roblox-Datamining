@@ -22,14 +22,15 @@ local getFFlagNewPeoplePageIcons = flags.GetFFlagNewPeoplePageIcons
 local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 local fFlagStandardizeSafetyIcon = require(parent.SharedFlags).FFlagStandardizeSafetyIcon
+local fFlagPeopleListButtonOverflowModule = require(peopleReactView.Flags.FFlagPeopleListButtonOverflow)
 
 local function getPlaySessionId()
 	-- upvalues: rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref)
 	return if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else ""
 end
 
-return function(p1)
-	-- upvalues: peopleServiceModule (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), useLocalization (ref), constantsModule (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), playersService (ref), getPlaySessionId (ref), useSignalState (ref), getFFlagAddPeoplePageCardLayout (ref), constants (ref), getFFlagNewPeopleButtonOrder (ref), getFFlagNewPeoplePageIcons (ref), buttonVariant (ref), fFlagStandardizeSafetyIcon (ref), guiService (ref)
+return function(p1, p2)
+	-- upvalues: peopleServiceModule (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), fFlagPeopleListButtonOverflowModule (ref), useLocalization (ref), constantsModule (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), playersService (ref), getPlaySessionId (ref), useSignalState (ref), getFFlagAddPeoplePageCardLayout (ref), constants (ref), getFFlagNewPeopleButtonOrder (ref), getFFlagNewPeoplePageIcons (ref), buttonVariant (ref), fFlagStandardizeSafetyIcon (ref), guiService (ref)
 	local peopleVoiceChatStore = peopleServiceModule.getService("PeopleVoiceChatStore")
 	local peopleReportAbuseMenu = peopleServiceModule.getService("PeopleReportAbuseMenu")
 	local peopleAnalyticsManager = peopleServiceModule.getService("PeopleAnalyticsManager")
@@ -37,7 +38,7 @@ return function(p1)
 	local friendStatusStore = peopleServiceModule.getService("FriendStatusStore")
 	local peopleBlockStatusStore = peopleServiceModule.getService("PeopleBlockStatusStore")
 	local peopleUtility = peopleServiceModule.getService("PeopleUtility")
-	local var1 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait
+	local var1 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait or fFlagPeopleListButtonOverflowModule and p2 == true
 	local var2 = useLocalization({
 		requestSent = constantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.REQUEST_SENT,
 		friend = if fFlagConnectionsToFriendsRename then constantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.FRIEND else nil,
@@ -97,9 +98,9 @@ return function(p1)
 				-- upvalues: var6 (copy)
 				return var6
 			end,
-			onActivated = function(p2)
+			onActivated = function(p3)
 				-- upvalues: peopleAnalyticsManager (copy), p1 (copy), playerIsLocalMuted (copy), getFFlagAddPeoplePageCardLayout (copy), peopleVoiceChatStore (copy)
-				peopleAnalyticsManager:trackToggleMutePlayer(p1, playerIsLocalMuted(false), if getFFlagAddPeoplePageCardLayout() then p2 else nil)
+				peopleAnalyticsManager:trackToggleMutePlayer(p1, playerIsLocalMuted(false), if getFFlagAddPeoplePageCardLayout() then p3 else nil)
 				peopleVoiceChatStore.togglePlayerMute(p1)
 			end,
 			layoutOrder = if getFFlagNewPeopleButtonOrder() then 30 else 10,
@@ -119,15 +120,15 @@ return function(p1)
 				-- upvalues: var12 (copy)
 				return var12
 			end,
-			onActivated = function(p2)
+			onActivated = function(p3)
 				-- upvalues: var4 (copy), var11 (copy), peopleBlockStatusStore (copy), getFFlagAddPeoplePageCardLayout (copy)
 				if var4 then
 					if var11 then
-						peopleBlockStatusStore.unblockPlayer(var4, if getFFlagAddPeoplePageCardLayout() then p2 else nil)
+						peopleBlockStatusStore.unblockPlayer(var4, if getFFlagAddPeoplePageCardLayout() then p3 else nil)
 						
 						return
 					end
-					peopleBlockStatusStore.blockPlayer(var4, if getFFlagAddPeoplePageCardLayout() then p2 else nil)
+					peopleBlockStatusStore.blockPlayer(var4, if getFFlagAddPeoplePageCardLayout() then p3 else nil)
 				end
 			end,
 			buttonVariant = if var11 then buttonVariant.Subtle else nil,
@@ -152,9 +153,9 @@ return function(p1)
 				-- upvalues: var7 (copy)
 				return var7
 			end,
-			onActivated = function(p2)
+			onActivated = function(p3)
 				-- upvalues: peopleAnalyticsManager (copy), getFFlagAddPeoplePageCardLayout (copy), friendStatusStore (copy), var4 (copy)
-				peopleAnalyticsManager:trackRequestFriendship(if getFFlagAddPeoplePageCardLayout() then p2 else nil)
+				peopleAnalyticsManager:trackRequestFriendship(if getFFlagAddPeoplePageCardLayout() then p3 else nil)
 				friendStatusStore.sendFriendRequest(var4)
 			end,
 			isDisabled = friendStatusStore.getIsFriendButtonDisabled(p1),
@@ -174,10 +175,10 @@ return function(p1)
 				-- upvalues: var12 (copy)
 				return var12
 			end,
-			onActivated = function(p2)
+			onActivated = function(p3)
 				-- upvalues: var4 (copy), peopleReportAbuseMenu (copy), getFFlagAddPeoplePageCardLayout (copy)
 				if var4 then
-					peopleReportAbuseMenu:ReportPlayer(var4, if getFFlagAddPeoplePageCardLayout() then p2 else "MenuPlayerList")
+					peopleReportAbuseMenu:ReportPlayer(var4, if getFFlagAddPeoplePageCardLayout() then p3 else "MenuPlayerList")
 				end
 			end,
 			layoutOrder = if getFFlagNewPeopleButtonOrder() then 40 else 30,
@@ -197,11 +198,11 @@ return function(p1)
 				-- upvalues: guiService (copy)
 				return guiService:GetInspectMenuEnabled()
 			end,
-			onActivated = function(p2)
+			onActivated = function(p3)
 				-- upvalues: var4 (copy), getFFlagAddPeoplePageCardLayout (copy), peopleAnalyticsManager (copy), var5 (copy), guiService (copy), settingsHubService (copy)
 				if var4 then
 					if getFFlagAddPeoplePageCardLayout() then
-						peopleAnalyticsManager:trackInspectButton(game.GameId, var5, p2)
+						peopleAnalyticsManager:trackInspectButton(game.GameId, var5, p3)
 					else
 						peopleAnalyticsManager:trackInspectButton(game.GameId, var5)
 					end

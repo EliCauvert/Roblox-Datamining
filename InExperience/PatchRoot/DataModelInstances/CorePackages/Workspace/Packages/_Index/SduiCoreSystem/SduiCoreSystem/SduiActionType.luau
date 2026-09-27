@@ -29,6 +29,7 @@
 	OpenSeeAll = "OpenSeeAll",
 	OpenSearchResultsTab = "OpenSearchResultsTab",
 	OpenSearchResultsWithQuery = "OpenSearchResultsWithQuery",
+	OpenExternalLink = "OpenExternalLink",
 	OpenSocialLink = "OpenSocialLink",
 	OpenSocialProofUserListSheet = "OpenSocialProofUserListSheet",
 	OpenSongDetail = "OpenSongDetail",

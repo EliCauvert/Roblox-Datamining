@@ -31,15 +31,16 @@ function t.useBaseQuery(p1, p2, p3)
 	end, 0)
 	local var4 = boolean.toJSBoolean(p2) and object.assign({}, p2, { query = p1 }) or { query = p1 }
 	local var5 = useRef(nil)
-	local current = nil
-	current = var5.current or (function()
-		-- upvalues: var5 (ref), queryData (copy), var4 (ref), var1 (ref), boolean (copy), current (write), promiseModule (copy), var3 (ref)
+	local var6 = nil
+	local current = var5.current
+	
+	if not current then
 		var5.current = queryData.new({
 			options = var4,
 			context = var1,
 			onNewData = function(_)
-				-- upvalues: boolean (copy), current (copy), promiseModule (copy), var5 (copy), var3 (copy)
-				if boolean.toJSBoolean(current:ssrInitiated()) then
+				-- upvalues: boolean (copy), var6 (write), promiseModule (copy), var5 (ref), var3 (ref)
+				if boolean.toJSBoolean(var6:ssrInitiated()) then
 					var3(nil)
 					
 					return
@@ -53,43 +54,43 @@ function t.useBaseQuery(p1, p2, p3)
 				end)
 			end
 		})
-		
-		return var5.current
-	end)()
-	current:setOptions(var4)
-	current.context = var1
-	local var6 = useDeepMemo(function()
-		-- upvalues: p3 (write), current (write)
-		return if p3 then current:executeLazy() else current:execute()
+		current = var5.current
+	end
+	var6 = current
+	var6:setOptions(var4)
+	var6.context = var1
+	local var7 = useDeepMemo(function()
+		-- upvalues: p3 (write), var6 (write)
+		return if p3 then var6:executeLazy() else var6:execute()
 	end, {
 		options = object.assign({}, var4, { onError = object.None, onCompleted = object.None }),
 		context = var1,
 		tick = var2
 	})
-	local var7 = if p3 then var6[2] else var6
+	local var8 = if p3 then var7[2] else var7
 	
 	if _G.__DEV__ then
 		useAfterFastRefresh(var3)
 	end
 	useEffect(function()
-		-- upvalues: current (write), var5 (ref)
+		-- upvalues: var6 (write), var5 (ref)
 		return function()
-			-- upvalues: current (copy), var5 (copy)
-			current:cleanup()
+			-- upvalues: var6 (copy), var5 (copy)
+			var6:cleanup()
 			var5.current = nil
 		end
 	end, {})
 	useEffect(function()
-		-- upvalues: current (write), p3 (write)
-		return current:afterExecute({ lazy = p3 })
+		-- upvalues: var6 (write), p3 (write)
+		return var6:afterExecute({ lazy = p3 })
 	end, {
-		if var7.loading ~= nil then var7.loading else t_1,
-		if var7.networkStatus ~= nil then var7.networkStatus else t_1,
-		if var7.error ~= nil then var7.error else t_1,
-		if var7.data ~= nil then var7.data else t_1
+		if var8.loading ~= nil then var8.loading else t_1,
+		if var8.networkStatus ~= nil then var8.networkStatus else t_1,
+		if var8.error ~= nil then var8.error else t_1,
+		if var8.data ~= nil then var8.data else t_1
 	})
 	
-	return var6
+	return var7
 end
 
 return t

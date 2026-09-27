@@ -4,7 +4,7 @@ local dashModule = require(parent.Dash)
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local fFlagAbuseReportSelectItemAddId = require(parent.SharedFlags).FFlagAbuseReportSelectItemAddId
+local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
@@ -34,6 +34,7 @@ local textWithTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Tr
 local _ = require(genericAbuseReporting.BeduiV2.Utils.Translate.translate)
 local useArTranslation = require(genericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 local useGroupedListLoader = require(genericAbuseReporting.BeduiV2.Loaders.useLoader).useGroupedListLoader
+local formatErrorDetailForAnalytics = analyticsServiceModule.formatErrorDetailForAnalytics
 local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReportAnalytics
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
@@ -131,7 +132,7 @@ local function ErrorContent(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), useArTranslation (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), useGroupedListLoader (ref), scrollToItemModule (ref), telemetryEventType (ref), dashModule (ref), REPORT_MESSAGE_NOT_SHOWN_ITEM_ID (ref), useInExpFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), LoadingContent (ref), ErrorContent (ref), sheet (ref), view (ref), textWithTranslationModule (ref), text (ref), fixChatSelectorDropdownPadding (ref), inExpDropdownWithPopoverModule (ref), list (ref), icon (ref), iconName (ref), iconVariant (ref), fFlagAbuseReportSelectItemAddId (ref), listItemInputType (ref), footerModule (ref), dialogSize (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
+	-- upvalues: reactModule (ref), useArTranslation (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), useGroupedListLoader (ref), scrollToItemModule (ref), telemetryEventType (ref), fFlagAbuseReportImproveErrorEventsModule (ref), formatErrorDetailForAnalytics (ref), dashModule (ref), REPORT_MESSAGE_NOT_SHOWN_ITEM_ID (ref), useInExpFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), LoadingContent (ref), ErrorContent (ref), sheet (ref), view (ref), textWithTranslationModule (ref), text (ref), fixChatSelectorDropdownPadding (ref), inExpDropdownWithPopoverModule (ref), list (ref), icon (ref), iconName (ref), iconVariant (ref), listItemInputType (ref), footerModule (ref), dialogSize (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local var1, var2 = reactModule.useState(p1.initialValue or nil)
 	local var3 = reactModule.useRef(nil)
 	local var4, var5 = reactModule.useState(nil)
@@ -228,13 +229,13 @@ return reactModule.memo(function(p1)
 		end
 	end, { var15.loading })
 	reactModule.useEffect(function()
-		-- upvalues: var15 (ref), var13 (ref), sendEvent (ref), telemetryEventType (copy)
+		-- upvalues: var15 (ref), var13 (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy)
 		if var15.error and not var13.current then
 			var13.current = true
 			sendEvent({
 				sub_event_type = telemetryEventType.Error,
-				error_detail = {
-					error_message = "inExpChatSelection: load failed: " .. var38.error
+				error_detail = if fFlagAbuseReportImproveErrorEventsModule then formatErrorDetailForAnalytics("inExpChatSelection: load failed", var15.error) else {
+					error_message = "inExpChatSelection: load failed: " .. var39.error
 				}
 			})
 		end
@@ -451,7 +452,7 @@ return reactModule.memo(function(p1)
 					isContained = { isContained = false, hasMargin = true }
 				}, {
 					dashModule.map(var18, function(p2, p3)
-						-- upvalues: reactModule (copy), icon (copy), iconName (copy), iconVariant (copy), list (copy), translateIntoString (ref), var2 (ref), var3 (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportSelectItemAddId (copy), var18 (ref), var10 (ref), var11 (ref), listItemInputType (copy), var1 (ref), var8 (ref)
+						-- upvalues: reactModule (copy), icon (copy), iconName (copy), iconVariant (copy), list (copy), translateIntoString (ref), var2 (ref), var3 (ref), sendEvent (ref), telemetryEventType (copy), var18 (ref), var10 (ref), var11 (ref), listItemInputType (copy), var1 (ref), var8 (ref)
 						return reactModule.createElement(list.Item, {
 							description = translateIntoString(p2.label),
 							trailing = if p2.meta and p2.meta.presetId and p2.meta.presetId ~= "" then reactModule.createElement(icon, {
@@ -460,14 +461,14 @@ return reactModule.memo(function(p1)
 							}) else nil,
 							onActivated = {
 								onActivated = function()
-									-- upvalues: var2 (copy), p2 (ref), var3 (copy), sendEvent (copy), telemetryEventType (copy), p3 (ref), fFlagAbuseReportSelectItemAddId (copy), var18 (copy), var10 (copy), var11 (copy)
+									-- upvalues: var2 (copy), p2 (ref), var3 (copy), sendEvent (copy), telemetryEventType (copy), p3 (ref), var18 (copy), var10 (copy), var11 (copy)
 									var2(p2.id)
 									var3.current = p2
 									sendEvent({
 										sub_event_type = telemetryEventType.SelectItem,
 										select_item_detail = {
 											selected_index = p3,
-											selected_id = if fFlagAbuseReportSelectItemAddId then p2.id else nil,
+											selected_id = p2.id,
 											list_length = #var18,
 											has_scroll = var10.current,
 											did_scroll = var11.current

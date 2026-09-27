@@ -3,18 +3,22 @@ local parent = buildExperience.Parent
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local useChatPlaytestFooterModule = require(buildExperience.Chat.useChatPlaytestFooter)
+local useBuildPromptDraftModule = require(buildExperience.Chat.useBuildPromptDraft)
+local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local useChatSessionCoreModule = require(buildExperience.Chat.useChatSessionCore)
 local _ = require(buildExperience.Components.BuildPillMenu.BuildPillMenuPortal)
 local getAssistantBuildStoreModule = require(buildExperience.Stores.GetAssistantBuildStore)
 local getCreatorAgentResumeStoreModule = require(buildExperience.Stores.GetCreatorAgentResumeStore)
 local getCurrentExperienceProjectModule = require(buildExperience.utils.getCurrentExperienceProject)
 local _ = require(script.Parent.ChatSheetView)
-local fFlagBuildExperienceAnalytics = require(parent.SharedFlags).FFlagBuildExperienceAnalytics
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagBuildExperienceAnalytics = sharedFlagsModule.FFlagBuildExperienceAnalytics
+local fFlagBuildExperienceChatImageAttachments = sharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat and require(buildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 
 local function noop() end
 
 return function(p1)
-	-- upvalues: noop (ref), getAssistantBuildStoreModule (ref), signalsReactModule (ref), getCreatorAgentResumeStoreModule (ref), getCurrentExperienceProjectModule (ref), useChatSessionCoreModule (ref), useChatPlaytestFooterModule (ref), fFlagBuildExperienceAnalytics (ref), reactModule (ref)
+	-- upvalues: noop (ref), getAssistantBuildStoreModule (ref), signalsReactModule (ref), getCreatorAgentResumeStoreModule (ref), getCurrentExperienceProjectModule (ref), useChatSessionCoreModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), useBuildPromptDraftModule (ref), useChatPlaytestFooterModule (ref), fFlagBuildExperienceChatImageAttachments (ref), reactModule (ref), fFlagBuildExperienceAnalytics (ref)
 	local onClose = p1.onClose or noop
 	local var1 = p1.isOpen == nil or p1.isOpen
 	local var2 = signalsReactModule.useSignalState(getAssistantBuildStoreModule().getIsDisabled)
@@ -22,31 +26,61 @@ return function(p1)
 	local var4 = getCurrentExperienceProjectModule()
 	local universeId = p1.universeId or var4.universeId
 	local var5 = useChatSessionCoreModule({
-		autoFocusComposer = false,
 		universeId = universeId,
 		placeId = p1.placeId or var4.placeId,
 		sessionId = p1.sessionId,
+		autoFocusComposer = p1.autoFocusComposer == true,
+		focusComposerWhen = var1,
 		hydrateHistoryWhen = var1
 	})
+	
+	if fFlagBuildExperienceMonetizationNativeUIModule then
+		useBuildPromptDraftModule(universeId, p1.sessionId, var5.setComposerText, var5.sendMessage, var1 and not var2)
+	end
 	local var6 = useChatPlaytestFooterModule(var5, "ChatSheetPlaytestCta")
-	local var7 = noop
+	
+	if fFlagBuildExperienceChatImageAttachments then
+		local var7 = reactModule.useRef(nil)
+		reactModule.useEffect(function()
+			-- upvalues: p1 (ref), var7 (ref), var5 (ref)
+			if p1.captureToAttach == nil or var7.current == p1.captureToAttach then return end
+			var7.current = p1.captureToAttach
+			local cloned = table.clone(var5.composerImages)
+			
+			if #cloned >= 2 then
+				table.remove(cloned, 1)
+			end
+			table.insert(cloned, { capture = p1.captureToAttach })
+			var5.setComposerImages(cloned)
+			
+			if p1.onCaptureAttached ~= nil then
+				p1.onCaptureAttached()
+			end
+		end, {
+			p1.captureToAttach,
+			p1.onCaptureAttached,
+			var5.composerImages,
+			var5.setComposerImages
+		})
+	end
+	local var8 = noop
 	
 	if fFlagBuildExperienceAnalytics then
-		local var8, var9 = reactModule.useState(nil)
-		var7 = reactModule.useCallback(function(p2)
-			-- upvalues: var5 (ref), var9 (ref)
+		local var9, var10 = reactModule.useState(nil)
+		var8 = reactModule.useCallback(function(p2)
+			-- upvalues: var5 (ref), var10 (ref)
 			var5.setComposerText(p2)
-			var9(p2)
+			var10(p2)
 		end, { var5.setComposerText })
 		reactModule.useEffect(function()
-			-- upvalues: var8 (ref), var5 (ref), var9 (ref)
-			if var8 == nil then return end
-			var5.setComposerText(var8)
+			-- upvalues: var9 (ref), var5 (ref), var10 (ref)
+			if var9 == nil then return end
+			var5.setComposerText(var9)
 			
 			if var5.sendMessage() then
-				var9(nil)
+				var10(nil)
 			end
-		end, { var8, var5.sendMessage, var5.setComposerText })
+		end, { var9, var5.sendMessage, var5.setComposerText })
 	end
 	reactModule.useEffect(function()
 		-- upvalues: var1 (ref), var2 (ref), onClose (ref)
@@ -85,6 +119,8 @@ return function(p1)
 		composerImages = var5.composerImages,
 		onComposerImagesChanged = var5.setComposerImages,
 		onRetryComposerImage = var5.retryComposerImage,
+		composerResourceAttachments = var5.composerResourceAttachments,
+		onRemoveComposerResourceAttachment = var5.removeComposerResourceAttachmentAtIndex,
 		isComposerSendBlocked = var5.isComposerSendBlocked,
 		textBoxRef = var5.textBoxRef,
 		isAssistantResponding = var5.isAssistantResponding,
@@ -92,7 +128,7 @@ return function(p1)
 		canSendWhileResponding = var5.canSendWhileResponding,
 		onSend = var5.sendMessage,
 		onStop = var5.stopAssistantResponse,
-		onOpenChat = var7,
+		onOpenChat = var8,
 		topBarPillMenuTarget = p1.topBarPillMenuTarget
 	}
 end

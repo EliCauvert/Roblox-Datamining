@@ -1,10 +1,9 @@
 ﻿local guiService = game:GetService("GuiService")
-local parent = script.Parent.Parent
-local reactModule = require(parent.React)
-local useCoreActionBind = require(parent.ChatUIPrimitives).Hooks.useCoreActionBind
+local reactModule = require(script.Parent.Parent.React)
+local useSelectionActivateActionModule = require(script.Parent.FocusNavigation.useSelectionActivateAction)
 
 return function(p1)
-	-- upvalues: guiService (ref), reactModule (ref), useCoreActionBind (ref)
+	-- upvalues: guiService (ref), reactModule (ref), useSelectionActivateActionModule (ref)
 	local guiService_1 = p1.guiService or guiService
 	local enabled = p1.enabled
 	local windowInstance = p1.windowInstance
@@ -31,11 +30,10 @@ return function(p1)
 			end
 		end
 	end, { enabled, windowInstance, focusTargetRef, guiService_1 })
-	useCoreActionBind({
+	useSelectionActivateActionModule({
 		actionNamePrefix = "EnterTextChannelWindow",
 		enabled = enabled,
 		active = windowInstance ~= nil,
-		keyCode = Enum.KeyCode.ButtonA,
 		onAction = reactModule.useCallback(function(p2)
 			-- upvalues: focusTargetRef (ref), var1 (ref), guiService_1 (ref)
 			if p2 == Enum.UserInputState.Begin then

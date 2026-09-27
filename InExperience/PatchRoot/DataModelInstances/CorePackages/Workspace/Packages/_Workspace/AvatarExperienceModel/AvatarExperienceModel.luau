@@ -1,5 +1,6 @@
 ﻿local avatarEditorCategoriesModule = require(script.Enums.AvatarEditorCategories)
 local avatarEditorSubcategoriesModule = require(script.Enums.AvatarEditorSubcategories)
+local catalogCategoriesModule = require(script.Enums.CatalogCategories)
 local catalogCategoryTaxonomyUUIDsModule = require(script.Enums.CatalogCategoryTaxonomyUUIDs)
 local constantsModule = require(script.Constants)
 local focusTypeModule = require(script.Enums.FocusType)
@@ -22,6 +23,7 @@ return {
 	Enums = {
 		AvatarEditorCategories = avatarEditorCategoriesModule,
 		AvatarEditorSubcategories = avatarEditorSubcategoriesModule,
+		CatalogCategories = catalogCategoriesModule,
 		CatalogCategoryTaxonomyUUIDs = catalogCategoryTaxonomyUUIDsModule,
 		FocusType = focusTypeModule,
 		HeadShape = headShapeModule,

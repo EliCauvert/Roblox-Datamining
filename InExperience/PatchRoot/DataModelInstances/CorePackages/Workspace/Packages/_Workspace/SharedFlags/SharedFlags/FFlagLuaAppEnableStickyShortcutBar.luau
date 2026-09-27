@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("LuaAppEnableStickyShortcutBar", false) and game:GetEngineFeature("EnableDisplaySize")

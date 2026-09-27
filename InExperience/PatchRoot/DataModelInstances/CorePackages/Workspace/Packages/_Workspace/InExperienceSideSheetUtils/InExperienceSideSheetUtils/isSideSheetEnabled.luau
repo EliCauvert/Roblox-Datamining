@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnableSideSheet7", false) or require(script:FindFirstAncestor("InExperienceSideSheetUtils").Parent.PioneerUtils).isPioneerLaunch()
+﻿return game:DefineFastFlag("EnableSideSheet8", false) or require(script:FindFirstAncestor("InExperienceSideSheetUtils").Parent.PioneerUtils).isPioneerLaunch()

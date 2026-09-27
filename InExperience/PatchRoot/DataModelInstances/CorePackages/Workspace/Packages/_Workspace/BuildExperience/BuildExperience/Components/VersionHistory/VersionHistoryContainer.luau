@@ -10,12 +10,14 @@ local timeModule = require(parent.Time)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
 local fFlagBuildExperienceForceRefreshVersionHistoryModule = require(buildExperience.Flags.FFlagBuildExperienceForceRefreshVersionHistory)
+local fFlagBuildExperienceVersionHistoryPaginationModule = require(buildExperience.Flags.FFlagBuildExperienceVersionHistoryPagination)
 local getAgentRollbackRequestStoreModule = require(buildExperience.Stores.GetAgentRollbackRequestStore)
 local getPlaytestLoadingStoreModule = require(parent.BuildExperiencePlaytestLaunch.GetPlaytestLoadingStore)
 local rollbackPlaceWithRetryModule = require(buildExperience.utils.rollbackPlaceWithRetry)
 local var1 = if fFlagBuildAgentRollbackModule then require(script.Parent.AgentRollbackSnackbar) else nil
 local useLatestVersionCardViewModelModule = require(script.Parent.LatestVersionCard.useLatestVersionCardViewModel)
 local useLiveVersionCardViewModelModule = require(script.Parent.LiveVersionCard.useLiveVersionCardViewModel)
+local useNextHistoryPageModule = require(script.Parent.useNextHistoryPage)
 local versionHistoryBottomSheetModule = require(script.Parent.VersionHistoryBottomSheet)
 local versionHistoryUtilsModule = require(script.Parent.VersionHistoryUtils)
 local useScrollToTopAfterRestoreModule = require(script.Parent.useScrollToTopAfterRestore)
@@ -152,7 +154,7 @@ local function useAgentRollbackRestore(p8, p9, p10)
 end
 
 return function(p8)
-	-- upvalues: useLocalization (ref), dateHelper (ref), localizationStringsModule (ref), reactModule (ref), localizationModule (ref), placeVersionHistoryModule (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (ref), signalsReactModule (ref), useScrollToTopAfterRestoreModule (ref), getPlaytestLoadingStoreModule (ref), useLiveVersionCardViewModelModule (ref), fFlagBuildAgentRollbackModule (ref), useAgentRollbackRestore (ref), rollbackPlaceWithRetryModule (ref), fFlagEnableTeamTestLua (ref), mapLocalizedHistoryToEntries (ref), useLatestVersionCardViewModelModule (ref), dataStatus (ref), versionHistoryBottomSheetModule (ref), var1 (ref)
+	-- upvalues: useLocalization (ref), dateHelper (ref), localizationStringsModule (ref), reactModule (ref), localizationModule (ref), placeVersionHistoryModule (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (ref), signalsReactModule (ref), fFlagBuildExperienceVersionHistoryPaginationModule (ref), useNextHistoryPageModule (ref), useScrollToTopAfterRestoreModule (ref), getPlaytestLoadingStoreModule (ref), useLiveVersionCardViewModelModule (ref), fFlagBuildAgentRollbackModule (ref), useAgentRollbackRestore (ref), rollbackPlaceWithRetryModule (ref), fFlagEnableTeamTestLua (ref), mapLocalizedHistoryToEntries (ref), useLatestVersionCardViewModelModule (ref), dataStatus (ref), versionHistoryBottomSheetModule (ref), var1 (ref)
 	local var2 = useLocalization(dateHelper.MonthsLocalizationKeys)
 	local var3 = useLocalization({
 		empty = localizationStringsModule.VERSION_HISTORY_EMPTY,
@@ -174,48 +176,49 @@ return function(p8)
 	end, { var5, p8.placeId })
 	local var7 = signalsReactModule.useSignalState(var6.data)
 	local var8 = signalsReactModule.useSignalState(var6.status)
-	local var9, var10 = reactModule.useState(false)
-	local var11, var12 = reactModule.useState(nil)
-	local var13 = useScrollToTopAfterRestoreModule()
-	local var14 = signalsReactModule.useSignalState(reactModule.useCallback(function(p9)
+	local var9 = if fFlagBuildExperienceVersionHistoryPaginationModule then useNextHistoryPageModule(var5, p8.placeId, var7) else nil
+	local var10, var11 = reactModule.useState(false)
+	local var12, var13 = reactModule.useState(nil)
+	local var14 = useScrollToTopAfterRestoreModule()
+	local var15 = signalsReactModule.useSignalState(reactModule.useCallback(function(p9)
 		-- upvalues: getPlaytestLoadingStoreModule (copy), p8 (ref)
 		return getPlaytestLoadingStoreModule(p9).getAgentStatusForPlaceId(p8.placeId)(p9) == "Loading"
 	end, { p8.placeId }))
-	local var15 = useLiveVersionCardViewModelModule({
+	local var16 = useLiveVersionCardViewModelModule({
 		placeId = p8.placeId,
 		universeId = p8.universeId,
 		testId = if p8.testId then `{p8.testId}-live-version-card` else nil
 	})
-	local var16 = if fFlagBuildAgentRollbackModule then useAgentRollbackRestore(p8, restoreFailed, var14) else nil
-	local var17 = reactModule.useCallback(function(p9)
-		-- upvalues: var9 (ref), var14 (ref), var10 (ref), var12 (ref), rollbackPlaceWithRetryModule (copy), p8 (ref), fFlagEnableTeamTestLua (copy), var13 (ref), restoreFailed (ref)
-		if var9 or var14 then
+	local var17 = if fFlagBuildAgentRollbackModule then useAgentRollbackRestore(p8, restoreFailed, var15) else nil
+	local var18 = reactModule.useCallback(function(p9)
+		-- upvalues: var10 (ref), var15 (ref), var11 (ref), var13 (ref), rollbackPlaceWithRetryModule (copy), p8 (ref), fFlagEnableTeamTestLua (copy), var14 (ref), restoreFailed (ref)
+		if var10 or var15 then
 			return
 		end
-		var10(true)
-		var12(nil)
+		var11(true)
+		var13(nil)
 		rollbackPlaceWithRetryModule(p8.placeId, p9.versionNumber, {
 			debugSource = "version_history restore",
 			note = { title = p9.noteTitle, description = p9.noteDescription },
 			published = if fFlagEnableTeamTestLua then false else true
 		}):andThen(function()
-			-- upvalues: var13 (copy)
-			var13.scrollToTopAfterRestore()
+			-- upvalues: var14 (copy)
+			var14.scrollToTopAfterRestore()
 		end):catch(function(_)
-			-- upvalues: var12 (copy), restoreFailed (copy)
-			var12(restoreFailed)
+			-- upvalues: var13 (copy), restoreFailed (copy)
+			var13(restoreFailed)
 		end):finally(function()
-			-- upvalues: var10 (copy)
-			var10(false)
+			-- upvalues: var11 (copy)
+			var11(false)
 		end)
 	end, {
-		var9,
-		var14,
+		var10,
+		var15,
 		p8.placeId,
 		restoreFailed,
-		var13
+		var14
 	})
-	local var18 = reactModule.useMemo(function()
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: mapLocalizedHistoryToEntries (copy), var7 (ref), var2 (ref), fallbackDescription (ref), var4 (ref)
 		return mapLocalizedHistoryToEntries(var7, var2, fallbackDescription, var4)
 	end, {
@@ -225,31 +228,32 @@ return function(p8)
 		var4,
 		var3[localizationModule.RobloxLocaleIdKey]
 	})
-	local var19 = useLatestVersionCardViewModelModule({
+	local var20 = useLatestVersionCardViewModelModule({
 		layoutOrder = 0,
-		entry = var18[1],
+		entry = var19[1],
 		placeId = p8.placeId,
 		universeId = p8.universeId,
 		onClose = p8.onClose,
 		testId = if p8.testId then `{p8.testId}-latest-version-card` else nil
 	})
-	local var20 = if fFlagBuildAgentRollbackModule then nil else var11
-	local var21 = if var20 ~= nil then if var8 == dataStatus.NotReady then localizationStringsModule.VERSION_HISTORY_LOADING elseif var8 == dataStatus.Failed then localizationStringsModule.VERSION_HISTORY_LOAD_FAILED elseif #var18 == 0 then localizationStringsModule.VERSION_HISTORY_EMPTY else nil else var20
+	local var21 = if fFlagBuildAgentRollbackModule then nil else var12
+	local var22 = if var21 ~= nil then if var8 == dataStatus.NotReady then localizationStringsModule.VERSION_HISTORY_LOADING elseif var8 == dataStatus.Failed then localizationStringsModule.VERSION_HISTORY_LOAD_FAILED elseif #var19 == 0 then localizationStringsModule.VERSION_HISTORY_EMPTY else nil else var21
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		BottomSheet = reactModule.createElement(versionHistoryBottomSheetModule, {
 			isOpen = p8.isOpen,
-			entries = var18,
-			statusText = if var21 == localizationStringsModule.VERSION_HISTORY_LOADING then var3.loading elseif var21 == localizationStringsModule.VERSION_HISTORY_LOAD_FAILED then var3.loadFailed elseif var21 == localizationStringsModule.VERSION_HISTORY_EMPTY then var3.empty else var21,
-			isRestoreDisabled = if fFlagBuildAgentRollbackModule then var16.isPending or var14 else var9 or var14,
+			entries = var19,
+			statusText = if var22 == localizationStringsModule.VERSION_HISTORY_LOADING then var3.loading elseif var22 == localizationStringsModule.VERSION_HISTORY_LOAD_FAILED then var3.loadFailed elseif var22 == localizationStringsModule.VERSION_HISTORY_EMPTY then var3.empty else var22,
+			isRestoreDisabled = if fFlagBuildAgentRollbackModule then var17.isPending or var15 else var10 or var15,
 			onClose = p8.onClose,
-			onRestore = if fFlagBuildAgentRollbackModule then var16.onRestore else var17,
+			onRestore = if fFlagBuildAgentRollbackModule then var17.onRestore else var18,
 			onRestoreStarted = if fFlagBuildAgentRollbackModule then p8.onAgentRollbackStarted else nil,
-			scrollingFrameRef = var13.scrollingFrameRef,
+			scrollingFrameRef = var14.scrollingFrameRef,
+			onEndReached = var9,
 			testId = p8.testId,
-			liveVersion = var15,
-			latestVersion = var19
+			liveVersion = var16,
+			latestVersion = var20
 		}),
-		RestoreErrorSnackbar = if fFlagBuildAgentRollbackModule and var16.errorText ~= nil then reactModule.createElement(var1, { title = var16.errorText, onClose = var16.clearError }) else nil
+		RestoreErrorSnackbar = if fFlagBuildAgentRollbackModule and var17.errorText ~= nil then reactModule.createElement(var1, { title = var17.errorText, onClose = var17.clearError }) else nil
 	})
 end

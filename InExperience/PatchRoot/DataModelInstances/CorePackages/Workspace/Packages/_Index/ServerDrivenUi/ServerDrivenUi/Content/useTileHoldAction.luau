@@ -27,6 +27,7 @@ return function(value, p1, p2)
 			end
 		end, { p2 }),
 		holdDetectorProps = if value and var1 then {
+			disableRegularActionOnHoldIntent = nil,
 			guiObject = var1,
 			onHoldDetected = reactModule.useCallback(function(p3)
 				-- upvalues: var5 (ref)

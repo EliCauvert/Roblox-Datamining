@@ -12,8 +12,10 @@ local scrollToTop = appPageShellModule.scrollToTop
 local backToTopClickEvent = discoveryAnalyticsModule.Events.backToTopClickEvent
 local useTokens = foundationModule.Hooks.useTokens
 local useCursor = foundationModule.Hooks.useCursor
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local cursorType = foundationModule.Enums.CursorType
 local useLocalization = localizationModule.Hooks.useLocalization
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
 local var1 = if fFlagAppPageShellScrollToTopFocus then 1000000 else 1e999
 
@@ -28,7 +30,7 @@ local function scrollBackWithFocus(p1)
 end
 
 return function(p1)
-	-- upvalues: useTokens (ref), useCursor (ref), cursorType (ref), fFlagAppPageShellScrollToTopFocus (ref), responsiveModule (ref), useLocalization (ref), reactModule (ref), scrollToTop (ref), userGameSettingsService (ref), scrollBackWithFocus (ref), backToTopClickEvent (ref), var1 (ref)
+	-- upvalues: useTokens (ref), useCursor (ref), cursorType (ref), fFlagAppPageShellScrollToTopFocus (ref), responsiveModule (ref), useLocalization (ref), reactModule (ref), scrollToTop (ref), userGameSettingsService (ref), scrollBackWithFocus (ref), backToTopClickEvent (ref), var1 (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var2 = useTokens()
 	local var3 = if fFlagAppPageShellScrollToTopFocus then nil else responsiveModule.useLastInput() == responsiveModule.Input.Directional
 	
@@ -45,7 +47,8 @@ return function(p1)
 			AutoButtonColor = false,
 			SelectionOrder = var1,
 			Text = useLocalization({ backToTop = "Feature.GamePage.Action.BackToTop" }).backToTop,
-			Font = var2.Typography.BodyLarge.Font,
+			Font = if foundationFontFaceMigration then nil else var2.Typography.BodyLarge.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.BodyLarge.Font) else nil,
 			TextSize = var2.Typography.BodyLarge.FontSize,
 			TextColor3 = var2.Color.Content.Emphasis.Color3,
 			TextTransparency = var2.Color.Content.Emphasis.Transparency,

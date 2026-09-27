@@ -129,7 +129,8 @@ return reactModule.memo(function(p1)
 			size = inputSize.XSmall,
 			text = var6.undoLabel,
 			variant = buttonVariant.Standard,
-			ref = var2
+			ref = var2,
+			testId = `--game-tile-hidden-undo-{p0.universeId}`
 		})
 	})
 end)

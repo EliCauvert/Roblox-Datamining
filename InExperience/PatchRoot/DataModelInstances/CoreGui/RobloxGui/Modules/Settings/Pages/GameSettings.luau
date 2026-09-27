@@ -18,10 +18,10 @@ local url = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).Ur
 local textChatService = game:GetService("TextChatService")
 local safetyService = game:GetService("SafetyService")
 local var2 = if game:GetEngineFeature("CaptureModeEnabled") then game:GetService("ExperienceStateCaptureService") else nil
-local getFFlagEnableConnectDisconnectInSettingsAndChromeModule = require(robloxGui.Modules.Flags.GetFFlagEnableConnectDisconnectInSettingsAndChrome)
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local fFlagIEMSettingsGroupsModule = require(robloxGui.Modules.Settings.Flags.FFlagIEMSettingsGroups)
-local var3 = if getFFlagEnableConnectDisconnectInSettingsAndChromeModule() or isInExperienceUIVREnabled then require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId) else nil
+local _ = nil
+local var3 = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 local getCamMicPermissionsModule = require(robloxGui.Modules.Settings.getCamMicPermissions)
 local isCamEnabledForUserAndPlaceModule = require(robloxGui.Modules.Settings.isCamEnabledForUserAndPlace)
 local renderSettingsHeaderModule = nil
@@ -69,6 +69,7 @@ local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriends
 local fFlagVoiceRewarmTelemetry = sharedFlagsModule.FFlagVoiceRewarmTelemetry
 local debounceVoiceSelectorIndexChange = game:DefineFastFlag("DebounceVoiceSelectorIndexChange", false)
 local voiceSelectorIgnoreFailedStateDisconnect = game:DefineFastFlag("VoiceSelectorIgnoreFailedStateDisconnect", false)
+local voiceConnectSelectorDebounce = game:DefineFastFlag("VoiceConnectSelectorDebounce", false)
 local fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule = require(robloxGui.Modules.Settings.Flags.FFlagVoiceVolumeControlsEnableVoiceChatVolumeSlider)
 local voiceVolumeControlsFixSliderVisibilityOnEligibleGames = game:DefineFastFlag("VoiceVolumeControlsFixSliderVisibilityOnEligibleGames", false)
 local voiceVolumeControlsDisableInteractionWhenNoMasterVolume = game:DefineFastFlag("VoiceVolumeControlsDisableInteractionWhenNoMasterVolume", false)
@@ -161,6 +162,7 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local gfxResetModule = require(script.Parent.Parent.GfxReset)
 local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
 local throttleFunctionCallModule = require(coreGuiService.RobloxGui.Modules.Settings.Pages.ShareGame.ThrottleFunctionCall)
+local debounceModule = require(robloxGui.Modules.Chrome.ChromeShared.Utility.debounce)
 local builderIconsModule = require(corePackagesService.Packages.BuilderIcons)
 local signalsModule = require(corePackagesService.Packages.Signals)
 local migration = builderIconsModule.Migration
@@ -319,7 +321,7 @@ local function getFirstValueChangerFrame(p2)
 end
 
 return (function()
-	-- upvalues: IGMEnableGFXReset (ref), gfxResetModule (ref), robloxGui (ref), getFFlagLazyInitiateExperienceLanguageSwitcherModule (ref), VRService (ref), gameSettings (ref), utilityModule (ref), SETTINGS_MENU_LAYOUT_ORDER (ref), guiService (ref), getFFlagFixCyclicFullscreenIndexEventModule (ref), getFFlagEnableExplicitSettingsChangeAnalyticsModule (ref), reportSettingsChangeForAnalytics (ref), reportSettingsForAnalytics (ref), rbxAnalyticsService (ref), constantsModule (ref), gameBasicSettingsFramerateCapEngineFeature (ref), eraseFPSFromDefaultSetting (ref), robloxTranslatorModule (ref), romarkStartWithGraphicQualityLevelFastInt (ref), t (ref), updateVisibilitySettingsCopy (ref), fFlagUpdatePeopleNamesSettingCopyModule (ref), t_6 (ref), userGameSettingsService (ref), var3 (write), userInputService (ref), create (ref), themeModule (ref), centerShiftLockOverride (ref), microProfilerReadOnlyInformationLabel (ref), touchEnabled (ref), var15 (ref), var14 (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), localPlayer (ref), coreUtilityModule (ref), t_3 (ref), getFFlagAlwaysShowVRToggleModule (ref), getAppFeaturePolicies (ref), t_5 (ref), var7 (ref), t_2 (ref), t_1 (ref), url (ref), httpService (ref), feedbackEntryPointImprovedStrictnessCheck (ref), safetyService (ref), var2 (write), feedbackEntryPointButtonSizeAdjustment2 (ref), var9 (ref), disableFeedbackSoothsayerCheck (ref), name (ref), playersService (ref), var8 (ref), runService (ref), getFFlagChatTranslationWaitForIXPModule (ref), IXPServiceWrapper (ref), getFFlagChatTranslationNewDefaultsModule (ref), fFlagRenameVolumeToMainVolumeModule (ref), getFFlagEnablePartyVoiceVolumeOnlyWhenInEligibleParty (ref), default_3 (ref), voiceVolumeControlsDisableInteractionWhenNoMasterVolume (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), corePackagesService (ref), contextActionService (ref), fixDeveloperConsoleButtonSizeAndPositioning (ref), playerPermissionsModule (ref), userFreecamGuiDestabilization (ref), userShowGuiHideToggles (ref), soundService (ref), getFIntVoiceChatDeviceChangeDebounceDelayModule (ref), default_2 (ref), getFFlagEnableCrossExpVoice (ref), signalsModule (ref), getFIntDebounceAIRephraseSettingDelayModule (ref), textChatService (ref), expChatDebounceRephraseIndexSelection (ref), throttleFunctionCallModule (ref), getFIntDebounceChatSummariesSettingDelayModule (ref), var12 (ref), getFFlagVoiceChatUILoggingModule (ref), videoCaptureService (ref), var11 (ref), RUUserScalePreferenceAPIEngineFeature (ref), differentiateVoiceSelectorSystemAndUser (ref), voiceSelectorAvailableAfterFae (ref), getFIntDebounceDisconnectButtonDelayModule (ref), fFlagVoiceRewarmTelemetry (ref), constantsModule_1 (ref), voiceSelectorIgnoreFailedStateDisconnect (ref), voiceChatSelectorReconnectFocus2AEGIS2 (ref), debounceVoiceSelectorIndexChange (ref), deferProgrammaticChange (ref), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (ref), isVoiceFocused (ref), getFFlagEnableVrVoiceConnectDisconnect (ref), getFFlagEnableVoiceUxUpdates (ref), hideVoiceChatSelectorForFaeAEGIS2 (ref), observeIsVoiceFocused (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (ref), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (ref), voiceVolumeControlsEligibility (ref), getFFlagEnableUniveralVoiceToastsModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), t_4 (ref), getFFlagSelfViewCameraSettings (ref), isCamEnabledForUserAndPlaceModule (ref), getCamMicPermissionsModule (ref), default (ref), cameraDevicePermissionGrantedSignalModule (ref), var10 (ref), fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (ref), var6 (ref), showAntiHarassmentSettings (ref), getFFlagEnablePlayerNamesEnabledSettingModule (ref), playerChoiceTranslationSettingInitializerModule (ref), cachedPolicyServiceModule (ref), var4 (ref), fFlagBadgeVisibilitySettingEnabled (ref), fFlagEnableModerateChatRemoteEvent (ref), fFlagAIRephraseSettingEnabled (ref), fFlagChatSummariesSettingEnabled (ref), fFlagExpChatEnableFriendsTab (ref), getHasGuiHidingPermissionModule (ref), var5 (write), fFlagIEMSettingsGroupsModule (ref), renderSettingsHeaderModule (write), renderSettingsDividerModule (write), migration (ref), builderIconsModule (ref), enableTFFeedbackModeEntryCheck (ref), getFFlagEnableLocalesForExperienceLanguageSwitcherModule (ref), experienceLanguageSwitcherInitializerModule (ref), getLastValueChangerFrame (ref), fFlagIEMTabFocusNav (ref), getFirstValueChangerFrame (ref), getFFlagChatTranslationSettingEnabledModule (ref), getFFlagChatTranslationHoldoutEnabledModule (ref), getFStringChatTranslationLayerNameModule (ref), textChatServiceSettingsSavedEngineFeature (ref), getFFlagChatTranslationForceSettingModule (ref), chatTranslationOptionsWithChatLanguageSwitcherInitializerModule (ref)
+	-- upvalues: IGMEnableGFXReset (ref), gfxResetModule (ref), robloxGui (ref), getFFlagLazyInitiateExperienceLanguageSwitcherModule (ref), VRService (ref), gameSettings (ref), utilityModule (ref), SETTINGS_MENU_LAYOUT_ORDER (ref), guiService (ref), getFFlagFixCyclicFullscreenIndexEventModule (ref), getFFlagEnableExplicitSettingsChangeAnalyticsModule (ref), reportSettingsChangeForAnalytics (ref), reportSettingsForAnalytics (ref), rbxAnalyticsService (ref), constantsModule (ref), gameBasicSettingsFramerateCapEngineFeature (ref), eraseFPSFromDefaultSetting (ref), robloxTranslatorModule (ref), romarkStartWithGraphicQualityLevelFastInt (ref), t (ref), updateVisibilitySettingsCopy (ref), fFlagUpdatePeopleNamesSettingCopyModule (ref), t_6 (ref), userGameSettingsService (ref), var3 (write), userInputService (ref), create (ref), themeModule (ref), centerShiftLockOverride (ref), microProfilerReadOnlyInformationLabel (ref), touchEnabled (ref), var15 (ref), var14 (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), localPlayer (ref), coreUtilityModule (ref), t_3 (ref), getFFlagAlwaysShowVRToggleModule (ref), getAppFeaturePolicies (ref), t_5 (ref), var7 (ref), t_2 (ref), t_1 (ref), url (ref), httpService (ref), feedbackEntryPointImprovedStrictnessCheck (ref), safetyService (ref), var2 (write), feedbackEntryPointButtonSizeAdjustment2 (ref), var9 (ref), disableFeedbackSoothsayerCheck (ref), name (ref), playersService (ref), var8 (ref), runService (ref), getFFlagChatTranslationWaitForIXPModule (ref), IXPServiceWrapper (ref), getFFlagChatTranslationNewDefaultsModule (ref), fFlagRenameVolumeToMainVolumeModule (ref), getFFlagEnablePartyVoiceVolumeOnlyWhenInEligibleParty (ref), default_3 (ref), voiceVolumeControlsDisableInteractionWhenNoMasterVolume (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), corePackagesService (ref), contextActionService (ref), fixDeveloperConsoleButtonSizeAndPositioning (ref), playerPermissionsModule (ref), userFreecamGuiDestabilization (ref), userShowGuiHideToggles (ref), soundService (ref), getFIntVoiceChatDeviceChangeDebounceDelayModule (ref), default_2 (ref), getFFlagEnableCrossExpVoice (ref), signalsModule (ref), getFIntDebounceAIRephraseSettingDelayModule (ref), textChatService (ref), expChatDebounceRephraseIndexSelection (ref), throttleFunctionCallModule (ref), getFIntDebounceChatSummariesSettingDelayModule (ref), var12 (ref), getFFlagVoiceChatUILoggingModule (ref), videoCaptureService (ref), var11 (ref), RUUserScalePreferenceAPIEngineFeature (ref), differentiateVoiceSelectorSystemAndUser (ref), voiceSelectorAvailableAfterFae (ref), getFIntDebounceDisconnectButtonDelayModule (ref), fFlagVoiceRewarmTelemetry (ref), constantsModule_1 (ref), voiceSelectorIgnoreFailedStateDisconnect (ref), voiceConnectSelectorDebounce (ref), debounceModule (ref), voiceChatSelectorReconnectFocus2AEGIS2 (ref), debounceVoiceSelectorIndexChange (ref), deferProgrammaticChange (ref), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (ref), isVoiceFocused (ref), getFFlagEnableVrVoiceConnectDisconnect (ref), getFFlagEnableVoiceUxUpdates (ref), hideVoiceChatSelectorForFaeAEGIS2 (ref), observeIsVoiceFocused (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (ref), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (ref), voiceVolumeControlsEligibility (ref), getFFlagEnableUniveralVoiceToastsModule (ref), t_4 (ref), getFFlagSelfViewCameraSettings (ref), isCamEnabledForUserAndPlaceModule (ref), getCamMicPermissionsModule (ref), default (ref), cameraDevicePermissionGrantedSignalModule (ref), var10 (ref), fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (ref), var6 (ref), showAntiHarassmentSettings (ref), getFFlagEnablePlayerNamesEnabledSettingModule (ref), playerChoiceTranslationSettingInitializerModule (ref), cachedPolicyServiceModule (ref), var4 (ref), fFlagBadgeVisibilitySettingEnabled (ref), fFlagEnableModerateChatRemoteEvent (ref), fFlagAIRephraseSettingEnabled (ref), fFlagChatSummariesSettingEnabled (ref), fFlagExpChatEnableFriendsTab (ref), getHasGuiHidingPermissionModule (ref), var5 (write), fFlagIEMSettingsGroupsModule (ref), renderSettingsHeaderModule (write), renderSettingsDividerModule (write), migration (ref), builderIconsModule (ref), enableTFFeedbackModeEntryCheck (ref), getFFlagEnableLocalesForExperienceLanguageSwitcherModule (ref), experienceLanguageSwitcherInitializerModule (ref), getLastValueChangerFrame (ref), fFlagIEMTabFocusNav (ref), getFirstValueChangerFrame (ref), getFFlagChatTranslationSettingEnabledModule (ref), getFFlagChatTranslationHoldoutEnabledModule (ref), getFStringChatTranslationLayerNameModule (ref), textChatServiceSettingsSavedEngineFeature (ref), getFFlagChatTranslationForceSettingModule (ref), chatTranslationOptionsWithChatLanguageSwitcherInitializerModule (ref)
 	if IGMEnableGFXReset then
 		gfxResetModule.RunGfxReset()
 	end
@@ -1848,7 +1850,7 @@ return (function()
 				var68 = status
 			end
 			if not var70 then
-				name:warning("Feedback Mode initialization api call failed with url: " .. text .. " and with error message: " .. var369)
+				name:warning("Feedback Mode initialization api call failed with url: " .. text .. " and with error message: " .. var370)
 			end
 			rolesCheckCallback(var69)
 		end)
@@ -2050,7 +2052,7 @@ return (function()
 						var86 = status
 					end
 					if not var87 then
-						name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var410)
+						name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var411)
 					end
 					userExperienceLanguageSettingsCallback(var87, var86)
 				end)
@@ -2062,7 +2064,7 @@ return (function()
 			if var86 == nil then
 				var86 = "Execution path did not set earliest error to non-nil value."
 			end
-			name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var405)
+			name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var406)
 			local var87, var88, var89 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 			gameSettingsTab.LanguageSelectorFrame = var87
 			gameSettingsTab.LanguageSelectorLabel = var88
@@ -2097,7 +2099,7 @@ return (function()
 						var86 = status
 					end
 					if not var87 then
-						name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text_2 .. " with error message: " .. var416)
+						name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text_2 .. " with error message: " .. var417)
 					end
 					if p6 == nil then
 						p6 = var86
@@ -2142,7 +2144,7 @@ return (function()
 								var89 = status
 							end
 							if not var90 then
-								name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var410)
+								name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var411)
 							end
 							userExperienceLanguageSettingsCallback(var90, var89)
 						end)
@@ -2154,7 +2156,7 @@ return (function()
 					if var89 == nil then
 						var89 = "Execution path did not set earliest error to non-nil value."
 					end
-					name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var418)
+					name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var419)
 					local var90, var91, var92 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 					gameSettingsTab.LanguageSelectorFrame = var90
 					gameSettingsTab.LanguageSelectorLabel = var91
@@ -2168,7 +2170,7 @@ return (function()
 				if var93 == nil then
 					var93 = "Execution path did not set earliest error to non-nil value."
 				end
-				name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var411)
+				name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var412)
 				local var94, var95, var96 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 				gameSettingsTab.LanguageSelectorFrame = var94
 				gameSettingsTab.LanguageSelectorLabel = var95
@@ -2203,7 +2205,7 @@ return (function()
 						var86 = status
 					end
 					if not var87 then
-						name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_1 .. " with error message: " .. var427)
+						name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_1 .. " with error message: " .. var428)
 					end
 					if p8 == nil then
 						p8 = var86
@@ -2235,7 +2237,7 @@ return (function()
 								var89 = status
 							end
 							if not var90 then
-								name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text_2 .. " with error message: " .. var416)
+								name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text_2 .. " with error message: " .. var417)
 							end
 							if p6 == nil then
 								p6 = var89
@@ -2278,7 +2280,7 @@ return (function()
 										var91 = status
 									end
 									if not var92 then
-										name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var410)
+										name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var411)
 									end
 									userExperienceLanguageSettingsCallback(var92, var91)
 								end)
@@ -2290,7 +2292,7 @@ return (function()
 							if var91 == nil then
 								var91 = "Execution path did not set earliest error to non-nil value."
 							end
-							name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var418)
+							name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var419)
 							local var92, var93, var94 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 							gameSettingsTab.LanguageSelectorFrame = var92
 							gameSettingsTab.LanguageSelectorLabel = var93
@@ -2304,7 +2306,7 @@ return (function()
 						if var95 == nil then
 							var95 = "Execution path did not set earliest error to non-nil value."
 						end
-						name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var430)
+						name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var431)
 						local var96, var97, var98 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 						gameSettingsTab.LanguageSelectorFrame = var96
 						gameSettingsTab.LanguageSelectorLabel = var97
@@ -2319,7 +2321,7 @@ return (function()
 				if var89 == nil then
 					var89 = "Execution path did not set earliest error to non-nil value."
 				end
-				name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var422)
+				name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var423)
 				local var90, var91, var92 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 				gameSettingsTab.LanguageSelectorFrame = var90
 				gameSettingsTab.LanguageSelectorLabel = var91
@@ -2362,7 +2364,7 @@ return (function()
 				var86 = status
 			end
 			if not var87 then
-				name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text .. " with error message: " .. var435)
+				name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text .. " with error message: " .. var436)
 			end
 			local var88 = var86
 			
@@ -2389,7 +2391,7 @@ return (function()
 						var89 = status
 					end
 					if not var90 then
-						name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_1 .. " with error message: " .. var427)
+						name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_1 .. " with error message: " .. var428)
 					end
 					if p8 == nil then
 						p8 = var89
@@ -2420,7 +2422,7 @@ return (function()
 								var91 = status
 							end
 							if not var92 then
-								name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text_2 .. " with error message: " .. var416)
+								name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text_2 .. " with error message: " .. var417)
 							end
 							if p6 == nil then
 								p6 = var91
@@ -2463,7 +2465,7 @@ return (function()
 										var93 = status
 									end
 									if not var94 then
-										name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var410)
+										name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var411)
 									end
 									userExperienceLanguageSettingsCallback(var94, var93)
 								end)
@@ -2475,7 +2477,7 @@ return (function()
 							if var93 == nil then
 								var93 = "Execution path did not set earliest error to non-nil value."
 							end
-							name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var418)
+							name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var419)
 							local var94, var95, var96 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 							gameSettingsTab.LanguageSelectorFrame = var94
 							gameSettingsTab.LanguageSelectorLabel = var95
@@ -2489,7 +2491,7 @@ return (function()
 						if var97 == nil then
 							var97 = "Execution path did not set earliest error to non-nil value."
 						end
-						name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var430)
+						name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var431)
 						local var98, var99, var100 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 						gameSettingsTab.LanguageSelectorFrame = var98
 						gameSettingsTab.LanguageSelectorLabel = var99
@@ -2504,7 +2506,7 @@ return (function()
 				if var91 == nil then
 					var91 = "Execution path did not set earliest error to non-nil value."
 				end
-				name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var437)
+				name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var438)
 				local var92, var93, var94 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 				gameSettingsTab.LanguageSelectorFrame = var92
 				gameSettingsTab.LanguageSelectorLabel = var93
@@ -3682,7 +3684,7 @@ return (function()
 	local var109 = if differentiateVoiceSelectorSystemAndUser then false else nil
 	
 	local function createVoiceChatSelector()
-		-- upvalues: voiceSelectorAvailableAfterFae (copy), gameSettingsTab (ref), var3 (copy), default_2 (copy), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), differentiateVoiceSelectorSystemAndUser (copy), getFIntDebounceDisconnectButtonDelayModule (copy), var109 (write), fFlagVoiceRewarmTelemetry (copy), constantsModule_1 (copy), voiceSelectorIgnoreFailedStateDisconnect (copy), var108 (write), throttleFunctionCallModule (copy), voiceChatSelectorReconnectFocus2AEGIS2 (copy), guiService (copy), debounceVoiceSelectorIndexChange (copy), deferProgrammaticChange (copy)
+		-- upvalues: voiceSelectorAvailableAfterFae (copy), gameSettingsTab (ref), var3 (copy), default_2 (copy), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), differentiateVoiceSelectorSystemAndUser (copy), getFIntDebounceDisconnectButtonDelayModule (copy), var109 (write), fFlagVoiceRewarmTelemetry (copy), constantsModule_1 (copy), voiceSelectorIgnoreFailedStateDisconnect (copy), var108 (write), voiceConnectSelectorDebounce (copy), debounceModule (copy), throttleFunctionCallModule (copy), voiceChatSelectorReconnectFocus2AEGIS2 (copy), guiService (copy), debounceVoiceSelectorIndexChange (copy), deferProgrammaticChange (copy)
 		if voiceSelectorAvailableAfterFae and gameSettingsTab.VoiceConnectDisconnectFrame and gameSettingsTab.VoiceConnectDisconnectSelector then return end
 		local var110 = var3:Format("Feature.GameDetails.Label.VoiceChat")
 		local var111 = var3:Format("Feature.SettingsHub.Label.Disconnected")
@@ -3722,16 +3724,17 @@ return (function()
 		end
 		local var118 = var113
 		local var119 = getFIntDebounceDisconnectButtonDelayModule()
+		local var120 = var119 > 0
 		
-		local var120 = function(p11)
+		local var121 = function(p11)
 			-- upvalues: var118 (write), differentiateVoiceSelectorSystemAndUser (copy), var109 (copy), fFlagVoiceRewarmTelemetry (copy), default_2 (copy), constantsModule_1 (copy), voiceSelectorIgnoreFailedStateDisconnect (copy), var108 (copy), gameSettingsTab (copy)
 			if p11 == var118 then return end
 			var118 = p11
 			
 			if differentiateVoiceSelectorSystemAndUser and var109 then return end
 			if fFlagVoiceRewarmTelemetry then
-				local var121, var122, var123, var124 = default_2:GetConnectDisconnectButtonAnalyticsData(p11 == 2)
-				default_2.Analytics:reportJoinVoiceButtonEventWithVoiceSessionId("clicked", var121, var122, var123, var124, default_2.joinVoiceButtonContext)
+				local var122, var123, var124, var125 = default_2:GetConnectDisconnectButtonAnalyticsData(p11 == 2)
+				default_2.Analytics:reportJoinVoiceButtonEventWithVoiceSessionId("clicked", var122, var123, var124, var125, default_2.joinVoiceButtonContext)
 			else
 				default_2.Analytics:reportJoinVoiceButtonEventWithVoiceSessionId("clicked", default_2:GetConnectDisconnectButtonAnalyticsData(p11 == 2))
 			end
@@ -3761,8 +3764,20 @@ return (function()
 			end
 		end
 		
-		gameSettingsTab.VoiceConnectDisconnectSelector.IndexChanged:connect(if var119 > 0 then throttleFunctionCallModule(var119, var120) else var120)
-		
+		if voiceConnectSelectorDebounce then
+			local var122 = if var120 then debounceModule(var121, var119) else var121
+			gameSettingsTab.VoiceConnectDisconnectSelector.IndexChanged:connect(function(p11)
+				-- upvalues: differentiateVoiceSelectorSystemAndUser (copy), var109 (copy), var121 (ref), var122 (ref)
+				if differentiateVoiceSelectorSystemAndUser and var109 then
+					var121(p11)
+					
+					return
+				end
+				var122(p11)
+			end)
+		else
+			gameSettingsTab.VoiceConnectDisconnectSelector.IndexChanged:connect(if var120 then throttleFunctionCallModule(var119, var121) else var121)
+		end
 		if voiceChatSelectorReconnectFocus2AEGIS2 then
 			gameSettingsTab.VoiceConnectDisconnectFrame.SelectionChanged:Connect(function(_, p11, p12)
 				-- upvalues: var110 (ref), gameSettingsTab (copy), guiService (copy)
@@ -3772,7 +3787,7 @@ return (function()
 			end)
 		end
 		default_2:subscribe("OnStateChanged", function(_, p11)
-			-- upvalues: differentiateVoiceSelectorSystemAndUser (copy), var109 (copy), debounceVoiceSelectorIndexChange (copy), gameSettingsTab (copy), deferProgrammaticChange (copy)
+			-- upvalues: differentiateVoiceSelectorSystemAndUser (copy), var109 (copy), debounceVoiceSelectorIndexChange (copy), gameSettingsTab (copy), voiceConnectSelectorDebounce (copy), deferProgrammaticChange (copy)
 			if differentiateVoiceSelectorSystemAndUser then
 				var109 = true
 				
@@ -3789,6 +3804,9 @@ return (function()
 					gameSettingsTab.VoiceConnectDisconnectSelector:SetSelectionIndex(1)
 				end
 			elseif p11 == Enum.VoiceChatState.Failed then
+				gameSettingsTab.VoiceConnectDisconnectSelector:SetSelectionIndex(1)
+			end
+			if voiceConnectSelectorDebounce and differentiateVoiceSelectorSystemAndUser and (p11 == Enum.VoiceChatState.Ended or p11 == Enum.VoiceChatState.Idle) and gameSettingsTab.VoiceConnectDisconnectSelector:GetSelectedIndex() ~= 1 then
 				gameSettingsTab.VoiceConnectDisconnectSelector:SetSelectionIndex(1)
 			end
 			if differentiateVoiceSelectorSystemAndUser then
@@ -3861,8 +3879,8 @@ return (function()
 						end
 					end)
 				elseif fFlagVoiceRewarmTelemetry then
-					var116, var636, var637, var638 = default_2:GetConnectDisconnectButtonAnalyticsData(false)
-					default_2.Analytics:reportJoinVoiceButtonEventWithVoiceSessionId("clicked", var116, var636, var637, var638, default_2.joinVoiceButtonContext)
+					var116, var639, var640, var641 = default_2:GetConnectDisconnectButtonAnalyticsData(false)
+					default_2.Analytics:reportJoinVoiceButtonEventWithVoiceSessionId("clicked", var116, var639, var640, var641, default_2.joinVoiceButtonContext)
 				else
 					default_2.Analytics:reportJoinVoiceButtonEventWithVoiceSessionId("clicked", default_2:GetConnectDisconnectButtonAnalyticsData(false))
 				end
@@ -4103,7 +4121,7 @@ return (function()
 	
 	if game:GetEngineFeature("VoiceChatSupported") and (getFFlagEnableVrVoiceConnectDisconnect() or (if isInExperienceUIVREnabled then not isSpatial() else true)) then
 		spawn(function()
-			-- upvalues: getFFlagEnableVoiceUxUpdates (copy), hideVoiceChatSelectorForFaeAEGIS2 (copy), default_2 (copy), createVoiceChatSelector (ref), isVoiceFocused (copy), gameSettingsTab (ref), observeIsVoiceFocused (copy), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), voiceVolumeControlsEligibility (copy), name (copy), voiceSelectorAvailableAfterFae (copy), getFFlagEnableUniveralVoiceToastsModule (copy), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), differentiateVoiceSelectorSystemAndUser (copy), deferProgrammaticChange (copy), var109 (write), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (copy), createVoiceConnectDisconnect (ref), default_3 (copy), t_4 (copy), getFFlagVoiceChatUILoggingModule (copy)
+			-- upvalues: getFFlagEnableVoiceUxUpdates (copy), hideVoiceChatSelectorForFaeAEGIS2 (copy), default_2 (copy), createVoiceChatSelector (ref), isVoiceFocused (copy), gameSettingsTab (ref), observeIsVoiceFocused (copy), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), voiceVolumeControlsEligibility (copy), name (copy), voiceSelectorAvailableAfterFae (copy), getFFlagEnableUniveralVoiceToastsModule (copy), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), voiceConnectSelectorDebounce (copy), differentiateVoiceSelectorSystemAndUser (copy), deferProgrammaticChange (copy), var109 (write), createVoiceConnectDisconnect (ref), default_3 (copy), t_4 (copy), getFFlagVoiceChatUILoggingModule (copy)
 			if getFFlagEnableVoiceUxUpdates() and (not hideVoiceChatSelectorForFaeAEGIS2 and default_2:EligibleForFaeUpsell() or default_2:IsSeamlessVoice()) and default_2:verifyUniverseAndPlaceCanUseVoice() then
 				createVoiceChatSelector()
 				
@@ -4124,7 +4142,7 @@ return (function()
 				end)
 			end
 			default_2:asyncInit():andThen(function()
-				-- upvalues: default_2 (copy), gameSettingsTab (copy), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), isVoiceFocused (copy), voiceVolumeControlsEligibility (copy), name (copy), observeIsVoiceFocused (copy), voiceSelectorAvailableAfterFae (copy), getFFlagEnableVoiceUxUpdates (copy), createVoiceChatSelector (copy), getFFlagEnableUniveralVoiceToastsModule (copy), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), differentiateVoiceSelectorSystemAndUser (copy), deferProgrammaticChange (copy), var109 (copy), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (copy), createVoiceConnectDisconnect (copy), default_3 (copy), t_4 (copy)
+				-- upvalues: default_2 (copy), gameSettingsTab (copy), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), isVoiceFocused (copy), voiceVolumeControlsEligibility (copy), name (copy), observeIsVoiceFocused (copy), voiceSelectorAvailableAfterFae (copy), getFFlagEnableVoiceUxUpdates (copy), createVoiceChatSelector (copy), getFFlagEnableUniveralVoiceToastsModule (copy), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), voiceConnectSelectorDebounce (copy), differentiateVoiceSelectorSystemAndUser (copy), deferProgrammaticChange (copy), var109 (copy), createVoiceConnectDisconnect (copy), default_3 (copy), t_4 (copy)
 				VoiceChatService = default_2:getService()
 				
 				if default_2:VoiceChatAvailable() then
@@ -4218,7 +4236,22 @@ return (function()
 					end
 				end
 				if getFFlagEnableVoiceUxUpdates() then
-					if differentiateVoiceSelectorSystemAndUser and deferProgrammaticChange then
+					if voiceConnectSelectorDebounce then
+						if gameSettingsTab.VoiceConnectDisconnectSelector:GetSelectedIndex() == 2 then return end
+						if differentiateVoiceSelectorSystemAndUser and deferProgrammaticChange then
+							var109 = true
+							gameSettingsTab.VoiceConnectDisconnectSelector:SetSelectionIndex(2)
+							task.defer(function()
+								-- upvalues: var109 (copy)
+								var109 = false
+							end)
+							
+							return
+						end
+						gameSettingsTab.VoiceConnectDisconnectSelector:SetSelectionIndex(2)
+						
+						return
+					elseif differentiateVoiceSelectorSystemAndUser and deferProgrammaticChange then
 						var109 = true
 						gameSettingsTab.VoiceConnectDisconnectSelector:SetSelectionIndex(2)
 						task.defer(function()
@@ -4233,40 +4266,37 @@ return (function()
 					return
 				else
 					local var125 = false
+					createVoiceConnectDisconnect()
 					
-					if getFFlagEnableConnectDisconnectInSettingsAndChromeModule() then
-						createVoiceConnectDisconnect()
-						
-						if getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() then
-							var125 = isVoiceFocused()
-							observeIsVoiceFocused(function(p11)
-								-- upvalues: var125 (write), gameSettingsTab (copy), default_2 (copy)
-								var125 = p11
-								
-								if p11 then
-									if gameSettingsTab.VoiceConnectFrame then
-										gameSettingsTab.VoiceConnectFrame.Visible = false
-									end
-									if gameSettingsTab.VoiceDisconnectFrame then
-										gameSettingsTab.VoiceDisconnectFrame.Visible = false
-										
-										return
-									end
-								elseif default_2:ShouldShowJoinVoice() then
-									if gameSettingsTab.VoiceConnectFrame then
-										gameSettingsTab.VoiceConnectFrame.Visible = true
-									end
-									if gameSettingsTab.VoiceDisconnectFrame then
-										gameSettingsTab.VoiceDisconnectFrame.Visible = false
-									end
+					if getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() then
+						var125 = isVoiceFocused()
+						observeIsVoiceFocused(function(p11)
+							-- upvalues: var125 (write), gameSettingsTab (copy), default_2 (copy)
+							var125 = p11
+							
+							if p11 then
+								if gameSettingsTab.VoiceConnectFrame then
+									gameSettingsTab.VoiceConnectFrame.Visible = false
 								end
-							end)
-						end
+								if gameSettingsTab.VoiceDisconnectFrame then
+									gameSettingsTab.VoiceDisconnectFrame.Visible = false
+									
+									return
+								end
+							elseif default_2:ShouldShowJoinVoice() then
+								if gameSettingsTab.VoiceConnectFrame then
+									gameSettingsTab.VoiceConnectFrame.Visible = true
+								end
+								if gameSettingsTab.VoiceDisconnectFrame then
+									gameSettingsTab.VoiceDisconnectFrame.Visible = false
+								end
+							end
+						end)
 					end
-					if getFFlagEnableConnectDisconnectInSettingsAndChromeModule() and gameSettingsTab.VoiceConnectFrame then
+					if gameSettingsTab.VoiceConnectFrame then
 						gameSettingsTab.VoiceConnectFrame.Visible = false
 					end
-					if getFFlagEnableConnectDisconnectInSettingsAndChromeModule() and gameSettingsTab.VoiceDisconnectFrame then
+					if gameSettingsTab.VoiceDisconnectFrame then
 						if getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() then
 							gameSettingsTab.VoiceDisconnectFrame.Visible = not var125
 						else
@@ -4274,7 +4304,7 @@ return (function()
 						end
 					end
 					default_2.showVoiceUI.Event:Connect(function()
-						-- upvalues: getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), var125 (write), gameSettingsTab (copy), getFFlagEnableCrossExpVoice (copy), default_3 (copy), t_4 (copy), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (copy)
+						-- upvalues: getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), var125 (write), gameSettingsTab (copy), getFFlagEnableCrossExpVoice (copy), default_3 (copy), t_4 (copy)
 						if getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() and var125 then return end
 						gameSettingsTab.VoiceChatOptionsEnabled = true
 						local voiceChatOptionsEnabled = gameSettingsTab.VoiceChatOptionsEnabled or getFFlagEnableCrossExpVoice() and default_3:getIsConnected()
@@ -4282,15 +4312,15 @@ return (function()
 						if gameSettingsTab[t_4.Input .. "DeviceFrame"] then
 							gameSettingsTab[t_4.Input .. "DeviceFrame"].Visible = voiceChatOptionsEnabled
 						end
-						if getFFlagEnableConnectDisconnectInSettingsAndChromeModule() and gameSettingsTab.VoiceConnectFrame then
+						if gameSettingsTab.VoiceConnectFrame then
 							gameSettingsTab.VoiceConnectFrame.Visible = false
 						end
-						if getFFlagEnableConnectDisconnectInSettingsAndChromeModule() and gameSettingsTab.VoiceDisconnectFrame then
+						if gameSettingsTab.VoiceDisconnectFrame then
 							gameSettingsTab.VoiceDisconnectFrame.Visible = true
 						end
 					end)
 					default_2.hideVoiceUI.Event:Connect(function()
-						-- upvalues: getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), var125 (write), gameSettingsTab (copy), getFFlagEnableCrossExpVoice (copy), default_3 (copy), t_4 (copy), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (copy)
+						-- upvalues: getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), var125 (write), gameSettingsTab (copy), getFFlagEnableCrossExpVoice (copy), default_3 (copy), t_4 (copy)
 						if getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() and var125 then return end
 						gameSettingsTab.VoiceChatOptionsEnabled = false
 						local voiceChatOptionsEnabled = gameSettingsTab.VoiceChatOptionsEnabled or getFFlagEnableCrossExpVoice() and default_3:getIsConnected()
@@ -4298,10 +4328,10 @@ return (function()
 						if gameSettingsTab[t_4.Input .. "DeviceFrame"] then
 							gameSettingsTab[t_4.Input .. "DeviceFrame"].Visible = voiceChatOptionsEnabled
 						end
-						if getFFlagEnableConnectDisconnectInSettingsAndChromeModule() and gameSettingsTab.VoiceConnectFrame then
+						if gameSettingsTab.VoiceConnectFrame then
 							gameSettingsTab.VoiceConnectFrame.Visible = true
 						end
-						if getFFlagEnableConnectDisconnectInSettingsAndChromeModule() and gameSettingsTab.VoiceDisconnectFrame then
+						if gameSettingsTab.VoiceDisconnectFrame then
 							gameSettingsTab.VoiceDisconnectFrame.Visible = false
 						end
 					end)

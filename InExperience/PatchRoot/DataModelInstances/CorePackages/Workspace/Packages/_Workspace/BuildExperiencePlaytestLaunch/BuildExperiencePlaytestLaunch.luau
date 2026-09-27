@@ -1,7 +1,9 @@
 ﻿return {
+	teamCreateUtils = require(script.teamCreateUtils),
 	BuildModeLaunch = require(script.BuildModeLaunch),
 	GetPlaytestLoadingStore = require(script.GetPlaytestLoadingStore),
 	launchExperience = require(script.launchExperience),
+	leaveExperience = require(script.leaveExperience),
 	launchPlaytestWithLoadingState = require(script.launchPlaytestWithLoadingState),
 	playtestExperience = require(script.playtestExperience),
 	releaseAnyFocus = require(script.releaseAnyFocus),

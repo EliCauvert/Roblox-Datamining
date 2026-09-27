@@ -20,6 +20,7 @@ return {
 		return require(script.PreGameLoadingScreen)
 	end),
 	GetDeferredAssetStore = require(script.Stores.GetDeferredAssetStore),
+	PregameOverride = require(script.Stores.PregameOverride),
 	TiltLoadingScreen = createLazyComponent(function()
 		return require(script.TiltLoadingScreen)
 	end),

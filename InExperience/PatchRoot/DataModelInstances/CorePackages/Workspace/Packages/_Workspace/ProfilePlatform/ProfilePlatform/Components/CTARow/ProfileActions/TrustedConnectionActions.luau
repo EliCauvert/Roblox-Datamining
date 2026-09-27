@@ -143,12 +143,12 @@ return {
 			onActivated = { [profileTypes.User] = function() end }
 		}
 	end else nil,
-	[enumsModule.ProfileActions.PendingIncomingTrustedConnection] = if require(profilePlatform.Flags.FFlagPendingIncomingTrustedConnection) then function(p1)
+	[enumsModule.ProfileActions.PendingIncomingTrustedConnection] = function(p1)
 		-- upvalues: enumsModule (ref), profileTypes (ref)
 		return {
 			isDisabled = true,
 			text = p1.localized[enumsModule.ProfileActions.AddIncomingTrustedConnection],
 			onActivated = { [profileTypes.User] = function() end }
 		}
-	end else nil
+	end
 }

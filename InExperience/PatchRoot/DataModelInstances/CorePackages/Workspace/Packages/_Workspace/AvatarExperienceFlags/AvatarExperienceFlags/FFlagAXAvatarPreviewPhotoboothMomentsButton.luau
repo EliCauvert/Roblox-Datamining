@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXAvatarPreviewPhotoboothMomentsButton", false)
+﻿return game:DefineFastFlag("AXAvatarPreviewPhotoboothMomentsButton2", false)

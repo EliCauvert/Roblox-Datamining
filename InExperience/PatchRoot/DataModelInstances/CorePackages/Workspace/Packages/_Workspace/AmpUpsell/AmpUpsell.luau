@@ -7,6 +7,7 @@ return {
 	WizardContainer = require(script.Components.WizardContainer),
 	FAEUpsellContainer = require(script.Components.Upsells.FacialAgeEstimation.FAEUpsellContainer),
 	OpenAmpWizardContainer = require(script.Common.OpenAmpWizardContainer),
+	AmpWizardLaunchReceiver = require(script.Components.AmpWizardLaunchReceiver),
 	AmpEnums = require(script.Common.Enums),
 	AmpApiProvider = require(script.Common.AmpApiProvider),
 	IDVUpsellContainer = require(script.Components.Upsells.IdentityVerification.IDVUpsellContainer),

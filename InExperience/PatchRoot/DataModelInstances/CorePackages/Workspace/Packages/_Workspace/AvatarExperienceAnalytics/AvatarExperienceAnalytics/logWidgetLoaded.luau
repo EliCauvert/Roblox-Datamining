@@ -2,25 +2,28 @@
 local fFlagAXDeferWidgetLoadedUntilMarketplaceEntered = avatarExperienceFlagsModule.FFlagAXDeferWidgetLoadedUntilMarketplaceEntered
 local fFlagAXLimitWidgetLoadedItemCount = avatarExperienceFlagsModule.FFlagAXLimitWidgetLoadedItemCount
 local fIntAXWidgetLoadedItemCountLimit = avatarExperienceFlagsModule.FIntAXWidgetLoadedItemCountLimit
+local fFlagAXUnifiedEventCounters = avatarExperienceFlagsModule.FFlagAXUnifiedEventCounters
 local unifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
 local sendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
 local getUnifiedDeferredEventStoreModule = require(script.Parent.Store.getUnifiedDeferredEventStore)
 local WIDGET_LOADED = unifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_LOADED
 
-local function logWidgetLoaded(p1, p2)
-	-- upvalues: fFlagAXDeferWidgetLoadedUntilMarketplaceEntered (ref), getUnifiedDeferredEventStoreModule (ref), WIDGET_LOADED (ref), logWidgetLoaded (ref), fFlagAXLimitWidgetLoadedItemCount (ref), fIntAXWidgetLoadedItemCountLimit (ref), sendUnifiedEventLogModule (ref), unifiedEventLogEnumsModule (ref)
+local function logWidgetLoaded(p1, p2, p3)
+	-- upvalues: fFlagAXDeferWidgetLoadedUntilMarketplaceEntered (ref), getUnifiedDeferredEventStoreModule (ref), WIDGET_LOADED (ref), logWidgetLoaded (ref), fFlagAXUnifiedEventCounters (ref), fFlagAXLimitWidgetLoadedItemCount (ref), fIntAXWidgetLoadedItemCountLimit (ref), sendUnifiedEventLogModule (ref), unifiedEventLogEnumsModule (ref)
 	if fFlagAXDeferWidgetLoadedUntilMarketplaceEntered then
 		local var1 = getUnifiedDeferredEventStoreModule(false)
 		
 		if not var1.isEntered(false) then
 			var1.enqueue(WIDGET_LOADED, function()
-				-- upvalues: logWidgetLoaded (copy), p1 (ref), p2 (ref)
-				logWidgetLoaded(p1, p2)
+				-- upvalues: logWidgetLoaded (copy), p1 (ref), p2 (ref), fFlagAXUnifiedEventCounters (copy), p3 (ref)
+				logWidgetLoaded(p1, p2, if fFlagAXUnifiedEventCounters then p3 else nil)
 			end)
 			
 			return
 		end
 	end
+	local var2 = if fFlagAXUnifiedEventCounters and p3 ~= nil then p3() else nil
+	
 	for i, v in p1 do
 		local t = {}
 		local t_1 = {}
@@ -40,6 +43,7 @@ local function logWidgetLoaded(p1, p2)
 		sendUnifiedEventLogModule({
 			gridPositionColumn = 1,
 			action = unifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_LOADED,
+			surface = if fFlagAXUnifiedEventCounters then var2 else nil,
 			requestId = p2,
 			widgetId = v.id,
 			widgetType = v.type,

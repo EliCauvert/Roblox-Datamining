@@ -11,7 +11,6 @@ local useIsVoiceConnecting = crossExperienceVoiceModule.Hooks.useIsVoiceConnecti
 local constantsModule = require(robloxGui.Modules.VoiceChat.Constants)
 local VOICE_JOIN_PROGRESS = constantsModule.VOICE_JOIN_PROGRESS
 local promptTypeModule = require(robloxGui.Modules.VoiceChatPrompt.PromptType)
-local getFFlagEnableConnectDisconnectInSettingsAndChromeModule = require(robloxGui.Modules.Flags.GetFFlagEnableConnectDisconnectInSettingsAndChrome)
 local getFFlagIntegratePhoneUpsellJoinVoice = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagIntegratePhoneUpsellJoinVoice
 local getFFlagEnableVoiceUxUpdates = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableVoiceUxUpdates
 local fFlagVoiceRewarmTelemetry = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagVoiceRewarmTelemetry
@@ -42,13 +41,13 @@ local var4 = function(...)
 	if var3 then
 		return nil
 	end
-	var12 = true
+	var11 = true
 	
 	return var2(...)
 end
 
 return function()
-	-- upvalues: useIsVoiceFocused (ref), useIsVoiceConnecting (ref), reactModule (ref), var1 (ref), var4 (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), default (ref), isVoiceFocused (ref), VOICE_JOIN_PROGRESS (ref), getFFlagEnableVoiceUxUpdates (ref), constantsModule (ref), promptTypeModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref)
+	-- upvalues: useIsVoiceFocused (ref), useIsVoiceConnecting (ref), reactModule (ref), var1 (ref), var4 (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), default (ref), isVoiceFocused (ref), VOICE_JOIN_PROGRESS (ref), getFFlagEnableVoiceUxUpdates (ref), constantsModule (ref), promptTypeModule (ref)
 	local var5 = useIsVoiceFocused()
 	local var6 = useIsVoiceConnecting()
 	local var7 = reactModule.useMemo(function()
@@ -127,28 +126,25 @@ return function()
 		var8.availability:available()
 	end, { var8, var7 })
 	local var14 = reactModule.useCallback(function()
-		-- upvalues: default (copy), var11 (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (copy), var12 (ref), getFFlagEnableVoiceUxUpdates (copy), var13 (ref)
+		-- upvalues: default (copy), var11 (ref), var12 (ref), getFFlagEnableVoiceUxUpdates (copy), var13 (ref)
+		local _ = nil
 		local eventConnection = nil
-		local eventConnection_1 = nil
-		local eventConnection_2 = default.VoiceJoinProgressChanged.Event:Connect(var11)
+		local eventConnection_1 = default.VoiceJoinProgressChanged.Event:Connect(var11)
+		local eventConnection_2 = default.showVoiceUI.Event:Connect(var12)
 		
-		if getFFlagEnableConnectDisconnectInSettingsAndChromeModule() then
-			eventConnection = default.showVoiceUI.Event:Connect(var12)
-			
-			if not getFFlagEnableVoiceUxUpdates() then
-				eventConnection_1 = default.hideVoiceUI.Event:Connect(var13)
-			end
+		if not getFFlagEnableVoiceUxUpdates() then
+			eventConnection = default.hideVoiceUI.Event:Connect(var13)
 		end
 		return function()
-			-- upvalues: eventConnection_2 (ref), eventConnection (write), eventConnection_1 (write)
+			-- upvalues: eventConnection_1 (ref), eventConnection_2 (write), eventConnection (write)
+			if eventConnection_1 then
+				eventConnection_1:Disconnect()
+			end
 			if eventConnection_2 then
 				eventConnection_2:Disconnect()
 			end
 			if eventConnection then
 				eventConnection:Disconnect()
-			end
-			if eventConnection_1 then
-				eventConnection_1:Disconnect()
 			end
 		end
 	end, {})

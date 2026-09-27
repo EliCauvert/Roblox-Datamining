@@ -249,7 +249,8 @@ return reactModule.memo(function(p1)
 		sessionStore = current,
 		openProfile = p1.openProfile,
 		openOwnMoments = p1.openOwnMoments,
-		openMomentsFeedReport = p1.openMomentsFeedReport
+		openMomentsFeedReport = p1.openMomentsFeedReport,
+		openMomentCommentReport = p1.openMomentCommentReport
 	}, if var8 then reactModule.createElement(view, { tag = "size-full bg-surface-0" }, {
 		Feed = var25,
 		CreationFlowOverlay = if var9 then reactModule.createElement(view, {

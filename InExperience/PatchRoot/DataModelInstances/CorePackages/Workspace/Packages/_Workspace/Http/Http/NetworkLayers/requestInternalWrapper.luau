@@ -1,12 +1,13 @@
 ﻿local httpService = game:GetService("HttpService")
 local http = script:FindFirstAncestor("Http")
-local promiseModule = require(http.Parent.Promise)
+local parent = http.Parent
+local promiseModule = require(parent.Promise)
 local networkProfilerModule = require(http.NetworkProfiler)
 local _ = require(http.RequestTypes)
 local statusCodesModule = require(http.StatusCodes)
 local httpCancellerModule = require(http.NetworkLayers.HttpCanceller)
 local greenlistedEndpointsForLoggingModule = require(http.Logger.GreenlistedEndpointsForLogging)
-local mrRouterHeadersModule = require(http.MrRouterHeaders)
+local mrRouterHeadersModule = require(parent.MrRouterHeaders)
 local luaAppHttpSupportNoContent = game:DefineFastFlag("LuaAppHttpSupportNoContent", false)
 local enableRetryOnPrefetch401 = game:DefineFastFlag("EnableRetryOnPrefetch401", false)
 local none = Enum.HttpCachePolicy.None

@@ -8,7 +8,6 @@ local getMeshVertsModule = require(parent.util.getMeshVerts)
 local getMeshInfoModule = require(parent.util.getMeshInfo)
 local boundsDataUtilsModule = require(parent.util.BoundsDataUtils)
 local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
-local getFFlagUGCValidateLegFullBodySeparationModule = require(parent.flags.getFFlagUGCValidateLegFullBodySeparation)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
 local t = {}
@@ -134,13 +133,13 @@ local function calculateAllPartsBoundsData(p13, p14, p15, p16)
 			end
 			return var7, var13
 		end
-		var7, var46, var47 = calculateBoundsDataForPart(var9, var8, v, p15, p16)
+		var7, var45, var46 = calculateBoundsDataForPart(var9, var8, v, p15, p16)
 		
 		if var7 then
-			t[i] = var47
+			t[i] = var46
 			continue
 		end
-		return var7, var46
+		return var7, var45
 	end
 	return true, nil, t
 end
@@ -225,7 +224,7 @@ function t.calculateIndividualAssetPartsData(value, p19)
 end
 
 function t.calculateIndividualFullBodyPartsData(p20, p21, p22, p23)
-	-- upvalues: assetCalculatorModule (ref), getFFlagUGCValidateLegFullBodySeparationModule (ref), orientFullBodyArmsLegsToWorldAxes (ref), calculateAllPartsBoundsData (ref)
+	-- upvalues: assetCalculatorModule (ref), orientFullBodyArmsLegsToWorldAxes (ref), calculateAllPartsBoundsData (ref)
 	local function findMeshHandle(p24)
 		-- upvalues: p20 (ref)
 		return p20[p24]
@@ -233,9 +232,7 @@ function t.calculateIndividualFullBodyPartsData(p20, p21, p22, p23)
 	
 	local var22 = assetCalculatorModule.calculateAllTransformsForFullBody(p20)
 	
-	if not getFFlagUGCValidateLegFullBodySeparationModule() then
-		orientFullBodyArmsLegsToWorldAxes(var22, findMeshHandle)
-	elseif p23 then
+	if p23 then
 		orientFullBodyArmsLegsToWorldAxes(var22, findMeshHandle)
 	end
 	local var23, var24, var25 = calculateAllPartsBoundsData(var22, findMeshHandle, p21, p22)

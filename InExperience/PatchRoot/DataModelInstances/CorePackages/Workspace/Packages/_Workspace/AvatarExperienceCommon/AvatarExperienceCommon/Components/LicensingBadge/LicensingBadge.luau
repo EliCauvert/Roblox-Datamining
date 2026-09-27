@@ -5,27 +5,42 @@ local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useEarlyIsFocused = require(parent.Navigation).useEarlyIsFocused
 local AXTooltip = require(parent.AvatarExperienceUIKit).AXTooltipComponents.AXTooltip
-local fFlagAXMarketplaceLicensingItemDetails = require(parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemDetails
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local fFlagAXMarketplaceLicensingItemDetails = avatarExperienceFlagsModule.FFlagAXMarketplaceLicensingItemDetails
+local fFlagAXMarketplaceLicensingItemCards = avatarExperienceFlagsModule.FFlagAXMarketplaceLicensingItemCards
 local itemLicenseType = require(parent.AvatarExperienceModel).Enums.ItemLicenseType
 local badgeVariant = foundationModule.Enums.BadgeVariant
 local badgeSize = foundationModule.Enums.BadgeSize
 local t = {
 	[itemLicenseType.FirstParty] = {
 		label = "Feature.Catalog.Label.LicensingOfficial",
-		info = "Feature.Catalog.Label.LicensingOfficialInfo"
+		info = "Feature.Catalog.Label.LicensingOfficialInfo",
+		passiveVariant = badgeVariant.Contrast
 	},
 	[itemLicenseType.ThirdParty] = {
 		label = "Feature.Catalog.Label.LicensingLicensed",
-		info = "Feature.Catalog.Label.LicensingLicensedInfo"
+		info = "Feature.Catalog.Label.LicensingLicensedInfo",
+		passiveVariant = badgeVariant.OverMedia
 	}
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: t (ref), useTokens (ref), reactModule (ref), useLocalization (ref), fFlagAXMarketplaceLicensingItemDetails (ref), useEarlyIsFocused (ref), foundationModule (ref), badgeVariant (ref), badgeSize (ref), AXTooltip (ref)
-	local licenseType = t[p1.licensing.licenseType]
+local function PassiveLicensingBadge(p1)
+	-- upvalues: useLocalization (ref), reactModule (ref), foundationModule (ref), badgeSize (ref)
+	return reactModule.createElement(foundationModule.Badge, {
+		testId = "LicensingBadge",
+		text = useLocalization({ label = p1.config.label }).label,
+		variant = p1.config.passiveVariant,
+		size = p1.passiveSize or badgeSize.Small,
+		LayoutOrder = p1.LayoutOrder,
+		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged
+	})
+end
+
+local function InteractiveLicensingBadge(p1)
+	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), fFlagAXMarketplaceLicensingItemDetails (ref), useEarlyIsFocused (ref), foundationModule (ref), badgeVariant (ref), badgeSize (ref), AXTooltip (ref)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState(false)
-	local var4 = useLocalization({ label = licenseType.label, info = licenseType.info })
+	local var4 = useLocalization({ label = p1.config.label, info = p1.config.info })
 	local var5 = reactModule.useCallback(function()
 		-- upvalues: var3 (ref)
 		var3(function(p2)
@@ -70,4 +85,12 @@ return reactModule.memo(function(p1)
 			onTooltipActivated = var6
 		})
 	})
+end
+
+return reactModule.memo(function(p1)
+	-- upvalues: t (ref), fFlagAXMarketplaceLicensingItemCards (ref), reactModule (ref), PassiveLicensingBadge (ref), InteractiveLicensingBadge (ref)
+	local cloned = table.clone(p1)
+	cloned.config = t[p1.itemLicensingInfo.licenseType]
+	
+	return if fFlagAXMarketplaceLicensingItemCards and p1.isInteractive == false then reactModule.createElement(PassiveLicensingBadge, cloned) else reactModule.createElement(InteractiveLicensingBadge, cloned)
 end)

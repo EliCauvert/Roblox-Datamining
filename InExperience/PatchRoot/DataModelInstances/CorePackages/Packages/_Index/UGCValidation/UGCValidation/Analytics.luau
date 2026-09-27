@@ -9,9 +9,7 @@ local getEngineFeatureEngineUGCValidationIECTelemetryModule = require(parent.fla
 local getEngineFeatureEngineUGCValidateRigidNonSkinnedModule = require(parent.flags.getEngineFeatureEngineUGCValidateRigidNonSkinned)
 local getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule = require(parent.flags.getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBounds)
 local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
-local getFFlagUGCValidateHSRMeshIdsModule = require(parent.flags.getFFlagUGCValidateHSRMeshIds)
 local getFFlagUGCValidationEyebrowEyelashSupportModule = require(parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)
-local getFFlagUGCValidateCurveAnimRotationSpeedModule = require(parent.flags.getFFlagUGCValidateCurveAnimRotationSpeed)
 local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCValidateTexturePack)
 
 local function joinTables(...)
@@ -33,32 +31,22 @@ local t = {
 		validateAssetCreator_DependencyNotOwnedByCreator = "validateAssetCreator_DependencyNotOwnedByCreator",
 		validateAssetCreator_FailedToLoad = "validateAssetCreator_FailedToLoad",
 		validateAssetCreator_TooManyDependencies = "validateAssetCreator_TooManyDependencies",
-		validateAttributes = "validateAttributes",
-		validateBodyPartChildAttachmentBounds_InvalidAttachmentPosition = "validateBodyPartChildAttachmentBounds_InvalidAttachmentPosition",
+		validateAssetTransparency_AssetTransparencyThresholds = "validateAssetTransparency_AssetTransparencyThresholds",
 		validateBodyPartCollisionFidelity = "validateBodyPartCollisionFidelity",
-		validateCageUVs_TestExecutedSuccessfully = "validateCageUVs_TestExecutedSuccessfully",
-		validateCageUVs_TestPassed = "validateCageUVs_TestPassed",
-		validateCageUVTriangleArea_FailedToLoadMesh = "validateCageUVTriangleArea_FailedToLoadMesh",
-		validateCageUVTriangleArea_ZeroAreaTriangle = "validateCageUVTriangleArea_ZeroAreaTriangle",
-		validateCageUVValues_FailedToLoadMesh = "validateCageUVValues_FailedToLoadMesh",
-		validateCageUVValues_UnexpectedUVValue = "validateCageUVValues_UnexpectedUVValue",
 		validateCanLoad = "validateCanLoad",
 		validateDependencies_IsNotApproved = "validateDependencies_IsNotApproved",
 		validateDependencies_IsRestrictedUserId = "validateDependencies_IsRestrictedUserId",
 		validateDependencies_IsReviewing = "validateDependencies_IsReviewing",
 		validateDependencies_ParseFailure = "validateDependencies_ParseFailure",
-		validateDescendantMeshMetrics_FailedToCalculateTriangles = "validateDescendantMeshMetrics_FailedToCalculateTriangles",
 		validateDescendantMeshMetrics_FailedToLoadMesh = "validateDescendantMeshMetrics_FailedToLoadMesh",
 		validateDescendantMeshMetrics_HasSkinnedMeshMismatch = "validateDescendantMeshMetrics_HasSkinnedMeshMismatch",
 		validateDescendantMeshMetrics_NoSkinningInfo = "validateDescendantMeshMetrics_NoSkinningInfo",
 		validateDescendantMeshMetrics_TooFarFromOrigin = "validateDescendantMeshMetrics_TooFarFromOrigin",
-		validateDescendantMeshMetrics_TooManyTriangles = "validateDescendantMeshMetrics_TooManyTriangles",
 		validateDynamicHeadMeshPartFormat_FailedToLoadMesh = "validateDynamicHeadMeshPartFormat_FailedToLoadMesh",
 		validateDynamicHeadMeshPartFormat_ValidateDynamicHeadMesh = "validateDynamicHeadMeshPartFormat_ValidateDynamicHeadMesh",
 		validateFullBody_IncorrectAssetTypeSet = "validateFullBody_IncorrectAssetTypeSet",
 		validateFullBody_InstancesMissing = "validateFullBody_InstancesMissing",
 		validateFullBody_MeshIdsMissing = "validateFullBody_MeshIdsMissing",
-		validateHSR_HSRDataNotReady = "validateHSR_HSRDataNotReady",
 		validateHSR_NoWrapLayer = "validateHSR_NoWrapLayer",
 		validateInstanceTree = "validateInstanceTree",
 		validateInstanceTree_InvalidDescendants = "validateInstanceTree_InvalidDescendants",
@@ -76,7 +64,6 @@ local t = {
 		validateLimbsAndTorso_FolderInfoMismatch = "validateLimbsAndTorso_FolderInfoMismatch",
 		validateLimbsAndTorso_R6FolderHasChildren = "validateLimbsAndTorso_R6FolderHasChildren",
 		validateLimbsAndTorso_TopLevelFolders = "validateLimbsAndTorso_TopLevelFolders",
-		validateMaterials = "validateMaterials",
 		validateMeshBounds_FailedToExecute = "validateMeshBounds_FailedToExecute",
 		validateMeshBounds_FailedToLoadMesh = "validateMeshBounds_FailedToLoadMesh",
 		validateMeshBounds_TooLarge = "validateMeshBounds_TooLarge",
@@ -84,31 +71,16 @@ local t = {
 		validateMeshPartAccessory_FailedToLoadMesh = "validateMeshPartAccessory_FailedToLoadMesh",
 		validateMeshPartAccessory_NoMeshId = "validateMeshPartAccessory_NoMeshId",
 		validateMeshPartBodyPart_ValidateWithSchema = "validateMeshPartBodyPart_ValidateWithSchema",
-		validateMeshTriangleArea_FailedToLoadMesh = "validateMeshTriangleArea_FailedToLoadMesh",
-		validateMeshTriangleArea_NoArea = "validateMeshTriangleArea_NoArea",
 		validateMeshTriangles_FailedToExecute = "validateMeshTriangles_FailedToExecute",
 		validateMeshTriangles_FailedToLoadMesh = "validateMeshTriangles_FailedToLoadMesh",
 		validateMeshTriangles_TooManyTriangles = "validateMeshTriangles_TooManyTriangles",
 		validateMeshVertexColors_FailedToLoadMesh = "validateMeshVertexColors_FailedToLoadMesh",
 		validateMeshVertexColors_NonNeutralVertexColors = "validateMeshVertexColors_NonNeutralVertexColors",
-		validateModeration_AssetsHaveNotPassedModeration = "validateModeration_AssetsHaveNotPassedModeration",
-		validateModeration_CouldNotFetchModerationDetails = "validateModeration_CouldNotFetchModerationDetails",
-		validateModeration_FailedToParse = "validateModeration_FailedToParse",
-		validateModeration_ValidateUser = "validateModeration_ValidateUser",
 		validatePackage_FailedToParse = "validatePackage_FailedToParse",
-		validateProperties_PropertyDoesNotExist = "validateProperties_PropertyDoesNotExist",
-		validateProperties_PropertyMismatch = "validateProperties_PropertyMismatch",
 		validateSingleInstance_MultipleInstances = "validateSingleInstance_MultipleInstances",
 		validateSingleInstance_ZeroInstances = "validateSingleInstance_ZeroInstances",
-		validateSurfaceAppearances_MeshPartHasTexture = "validateSurfaceAppearances_MeshPartHasTexture",
-		validateSurfaceAppearances_MissingSurfaceAppearance = "validateSurfaceAppearances_MissingSurfaceAppearance",
+		validateSurfaceAppearances_InvalidAlphaMode = "validateSurfaceAppearances_InvalidAlphaMode",
 		validateTags = "validateTags",
-		validateTextureSize_FailedToExecute = "validateTextureSize_FailedToExecute",
-		validateTextureSize_FailedToLoadTexture = "validateTextureSize_FailedToLoadTexture",
-		validateTextureSize_InvalidTextureId = "validateTextureSize_InvalidTextureId",
-		validateTextureSize_TextureTooBig = "validateTextureSize_TextureTooBig",
-		validateTextureTransparency_InvalidTextureId = "validateTextureTransparency_InvalidTextureId",
-		validateTextureTransparency_TransparentTexture = "validateTextureTransparency_TransparentTexture",
 		validateThumbnailConfiguration_InvalidTarget = "validateThumbnailConfiguration_InvalidTarget",
 		validateThumbnailConfiguration_OutsideView = "validateThumbnailConfiguration_OutsideView",
 		validateVertexDensity_FailedToExecute = "validateVertexDensity_FailedToExecute",
@@ -128,35 +100,20 @@ local t = {
 		validateMainModifiedCageUVs_TooFewModifiedUVsFound = "validateMainModifiedCageUVs_TooFewModifiedUVsFound",
 		validateRenderMeshInsideModifiedOuterCageArea_FailedToExecute = "validateRenderMeshInsideModifiedOuterCageArea_FailedToExecute",
 		validateRenderMeshInsideModifiedOuterCageArea_RenderMeshNotPositionedCorrectly = "validateRenderMeshInsideModifiedOuterCageArea_RenderMeshNotPositionedCorrectly",
-		validateBodyPartCage_FailedToExecute = "validateBodyPartCage_FailedToExecute",
-		validateBodyPartCage_VertsAreTooFarInFrontOfRenderMesh = "validateBodyPartCage_VertsAreTooFarInFrontOfRenderMesh",
-		validateCurveAnimation_IncorrectNumericalData = "validateCurveAnimation_IncorrectNumericalData",
-		validateCurveAnimation_PositionalMovement = "validateCurveAnimation_PositionalMovement",
-		validateVerticesSimilarity_FailedToExecute = "validateVerticesSimilarity_FailedToExecute",
-		validateVerticesSimilarity_MaxSimilarityExceeded = "validateVerticesSimilarity_MaxSimilarityExceeded",
 		validateCagingRelevancy_FailedToExecute = "validateCagingRelevancy_FailedToExecute",
 		validateCagingRelevancy_IrrelevantCaging = "validateCagingRelevancy_IrrelevantCaging",
 		validateCageMeshDistance_FailedToExecute = "validateCageMeshDistance_FailedToExecute",
 		validateCageMeshDistance_OuterCageToMeshDistance = "validateCageMeshDistance_OuterCageToMeshDistance",
-		validateCageUVDuplicate_FailedToExecute = "validateCageUVDuplicate_FailedToExecute",
-		validateCageUVDuplicate_UnexpectedUVValue = "validateCageUVDuplicate_UnexpectedUVValue",
 		validatePartSizeWithinRenderSizeLimits_SizeExceeded = "validatePartSizeWithinRenderSizeLimits_SizeExceeded",
 		validateLayeredClothingAccessory_HandleIsScaled = "validateLayeredClothingAccessory_HandleIsScaled",
 		resetPhysicsData_LargeMass = "resetPhysicsData_LargeMass",
+		validateBodyAttPosRelativeToParent_PartAboveParent = "validateBodyAttPosRelativeToParent_PartAboveParent",
+		validateBodyAttPosRelativeToParent_ParentBelowPart = "validateBodyAttPosRelativeToParent_ParentBelowPart",
 		validateBodyBlockingTests_ZeroMeshSize = "validateBodyBlockingTests_ZeroMeshSize",
 		validateFullBody_ZeroMeshSize = "validateFullBody_ZeroMeshSize",
 		validateMeshBounds_Shifted = "validateMeshBounds_Shifted",
-		validateBodyPartChildAttachmentOrientations_RotatedRig = "validateBodyPartChildAttachmentOrientations_RotatedRig",
-		validateBodyPartChildAttachmentOrientations_RotatedGrip = "validateBodyPartChildAttachmentOrientations_RotatedGrip",
-		validateBodyPartChildAttachmentOrientations_RotatedBasic = "validateBodyPartChildAttachmentOrientations_RotatedBasic",
 		validateDeformedLayeredClothingInRenderBounds_FailedToExecute = "validateDeformedLayeredClothingInRenderBounds_FailedToExecute",
-		validateDeformedLayeredClothingInRenderBounds_ClothingOutOfBounds = "validateDeformedLayeredClothingInRenderBounds_ClothingOutOfBounds",
-		validateEmoteAnimation_FailedToDownloadCurveAnimation = "validateEmoteAnimation_FailedToDownloadCurveAnimation",
-		validateCurveAnimation_AnimationHierarchyIsIncorrect = "validateCurveAnimation_AnimationHierarchyIsIncorrect",
-		validateCurveAnimation_AnimationContainsNoJointManipulation = "validateCurveAnimation_AnimationContainsNoJointManipulation",
-		validateCurveAnimation_UnacceptableLength = "validateCurveAnimation_UnacceptableLength",
-		validateCurveAnimation_UnacceptableSizeBounds = "validateCurveAnimation_UnacceptableSizeBounds",
-		validateCurveAnimation_UnacceptableFrameDelta = "validateCurveAnimation_UnacceptableFrameDelta"
+		validateDeformedLayeredClothingInRenderBounds_ClothingOutOfBounds = "validateDeformedLayeredClothingInRenderBounds_ClothingOutOfBounds"
 	}
 }
 
@@ -165,17 +122,10 @@ if getFFlagUGCValidateTexturePackModule() then
 	t.ErrorType.validateTexturePack_FailedToDownloadTexturePack = "validateTexturePack_FailedToDownloadTexturePack"
 	t.ErrorType.validateTexturePack_TexturePackMismatch = "validateTexturePack_TexturePackMismatch"
 end
-t.ErrorType.validateLegsSeparation_InvalidAttachmentPosition = "validateLegsSeparation_InvalidAttachmentPosition"
-t.ErrorType.validateLegsSeparation_LegsOverlap = "validateLegsSeparation_LegsOverlap"
-
 if getEngineFeatureEngineUGCValidateRigidNonSkinnedModule() then
 	t.ErrorType.validateRigidMeshSkinning_FailedToDownload = "validateRigidMeshSkinning_FailedToDownload"
 	t.ErrorType.validateRigidMeshSkinning_BonesFoundInMesh = "validateRigidMeshSkinning_BonesFoundInMesh"
 end
-if getFFlagUGCValidateCurveAnimRotationSpeedModule() then
-	t.ErrorType.validateCurveAnimation_UnacceptableFrameRotationDelta = "validateCurveAnimation_UnacceptableFrameRotationDelta"
-end
-t.ErrorType.validateCurveAnimation_IncorrectAnimationRigData = "validateCurveAnimation_IncorrectAnimationRigData"
 t.ErrorType.validateMeshSizeProperty_FailedToLoadMesh = "validateMeshSizeProperty_FailedToLoadMesh"
 t.ErrorType.validateMeshSizeProperty_Mismatch = "validateMeshSizeProperty_Mismatch"
 t.ErrorType.validateBodyPartVertsSkinnedToR15_FailedToFetchSkinning = "validateBodyPartVertsSkinnedToR15_FailedToFetchSkinning"
@@ -192,19 +142,7 @@ if getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
 	t.ErrorType.validatePropertiesSensible_IncorrectPropertiesFound = "validatePropertiesSensible_IncorrectPropertiesFound"
 end
 t.ErrorType.validateHSR_FileDataInvalid = "validateHSR_FileDataInvalid"
-
-if getFFlagUGCValidateHSRMeshIdsModule() then
-	t.ErrorType.validataHSR_HSRMeshIdsMismatch = "validataHSR_HSRMeshIdsMismatch"
-end
-t.ErrorType.validateMakeupDecal_FailedToLoadTexture = "validateMakeupDecal_FailedToLoadTexture"
-t.ErrorType.validateMakeupDecal_NoColorMap = "validateMakeupDecal_NoColorMap"
-t.ErrorType.validateMakeupDecal_UVZoneError = "validateMakeupDecal_UVZoneError"
-t.ErrorType.validateWrapTextureTransfer_FailedToLoadCage = "validateWrapTextureTransfer_FailedToLoadCage"
-t.ErrorType.validateWrapTextureTransfer_NoCage = "validateWrapTextureTransfer_NoCage"
-t.ErrorType.validateWrapTextureTransfer_FailedToLoadUV = "validateWrapTextureTransfer_FailedToLoadUV"
-t.ErrorType.validateWrapTextureTransfer_InvalidUV = "validateWrapTextureTransfer_InvalidUV"
-t.ErrorType.validateWrapTextureTransfer_InvalidMinBound = "validateWrapTextureTransfer_InvalidMinBound"
-t.ErrorType.validateWrapTextureTransfer_InvalidMaxBound = "validateWrapTextureTransfer_InvalidMaxBound"
+t.ErrorType.validataHSR_HSRMeshIdsMismatch = "validataHSR_HSRMeshIdsMismatch"
 
 if getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule() then
 	t.ErrorType.validateFACSJointTransformsWithinBounds_Error = "validateFACSJointTransformsWithinBounds_Error"

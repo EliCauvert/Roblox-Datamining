@@ -1,0 +1,1 @@
+﻿return { Standard = "Standard", Emphasis = "Emphasis" }

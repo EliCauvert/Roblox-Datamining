@@ -47,8 +47,7 @@ return {
 							local t = {
 								partName = i,
 								num_small_volume_islands = v.num_small_volume_islands or "unknown",
-								num_disconnected_components = v.num_disconnected_components or "unknown",
-								score = tostring(math.floor(tonumber(v.score) or 0))
+								num_disconnected_components = v.num_disconnected_components or "unknown"
 							}
 							
 							if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then

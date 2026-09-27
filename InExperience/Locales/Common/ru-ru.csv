@@ -98,6 +98,7 @@ Authentication.SignUp.Response.BirthdayMustBeSetFirst,Сначала укажи 
 Authentication.SignUp.Response.ErrorTryAgain,
 Authentication.SignUp.Response.InvalidBirthday,Неверная дата рождения.
 Authentication.SignUp.Response.InvalidEmail,Неверный адрес эл. почты.
+Authentication.SignUp.Response.PasswordComplexity,Придумай более сложный пароль.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Сначала укажи имя пользователя.
 Authentication.TwoStepVerification.Action.GoToSecurity,Настройки
 Authentication.TwoStepVerification.Label.TwoStepRequired,"Необходима двухшаговая проверка для совершения дальнейших транзакций. Перейди в Настройки > Безопасность, чтобы завершить двухшаговую проверку."
@@ -1998,7 +1999,6 @@ Feature.Groups.Heading.Primary,Основная
 Feature.Groups.Heading.SocialLinksNew,Ссылки на соцсети
 Feature.Groups.Heading.SocialMedia,Соцсети
 Feature.Groups.Heading.VerificationRequired,Требуется подтверждение аккаунта
-Feature.Groups.Heading.Videos,
 Feature.Groups.Label.ByOwnerWithFormat,Автор: {ownerName}
 Feature.Groups.Label.GroupClosed,Сообщество закрыто
 Feature.Groups.Label.GroupLocked,Это сообщество было заблокировано

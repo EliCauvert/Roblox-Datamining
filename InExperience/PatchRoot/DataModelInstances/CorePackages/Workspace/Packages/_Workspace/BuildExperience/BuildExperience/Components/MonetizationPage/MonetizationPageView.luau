@@ -1,19 +1,25 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
+local foundationCloudAssetsModule = require(parent.FoundationCloudAssets)
 local reactModule = require(parent.React)
+local useLocalization = require(parent.Localization).Hooks.useLocalization
+local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local overflowMenuPageShellModule = require(buildExperience.Components.BuildPillMenu.OverflowMenuPageShell)
+local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local badge = foundationModule.Badge
 local button = foundationModule.Button
 local dialog = foundationModule.Dialog
 local icon = foundationModule.Icon
 local iconButton = foundationModule.IconButton
 local image = foundationModule.Image
+local scrollView = foundationModule.ScrollView
 local text = foundationModule.Text
 local textArea = foundationModule.TextArea
 local textInput = foundationModule.TextInput
 local toggle = foundationModule.Toggle
 local view = foundationModule.View
+local menu = foundationModule.Menu
 local badgeShape = foundationModule.Enums.BadgeShape
 local badgeSize = foundationModule.Enums.BadgeSize
 local badgeVariant = foundationModule.Enums.BadgeVariant
@@ -25,14 +31,73 @@ local iconSize = foundationModule.Enums.IconSize
 local inputSize = foundationModule.Enums.InputSize
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local useTokens = foundationModule.Hooks.useTokens
+local var1 = if fFlagBuildExperienceMonetizationNativeUIModule then foundationCloudAssetsModule.Assets["pictograms/robux"].assetId else nil
 local uDim2 = UDim2.new(0.333333333333, -8, 0, 0)
 
-local function ProductCard(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), uDim2 (ref), stateLayerAffordance (ref), badge (ref), badgeShape (ref), badgeSize (ref), badgeVariant (ref), image (ref), text (ref), icon (ref), iconName (ref), iconSize (ref)
-	local product = p1.product
-	local var1 = useTokens()
+local function ProductActionsMenu(p1)
+	-- upvalues: reactModule (ref), useLocalization (ref), localizationStringsModule (ref), iconName (ref), menu (ref), foundationModule (ref), iconButton (ref), inputSize (ref), buttonVariant (ref)
+	local var2, var3 = reactModule.useState(false)
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref)
+		var3(false)
+	end, {})
+	local var5 = useLocalization({ archive = localizationStringsModule.ARCHIVE_GAME_ARCHIVE })
 	
-	return reactModule.createElement(view, {
+	return reactModule.createElement(menu, {
+		testId = "monetization-product-actions-menu",
+		align = foundationModule.Enums.PopoverAlign.End,
+		isOpen = var2,
+		items = reactModule.useMemo(function()
+			-- upvalues: p1 (ref), iconName (copy), var5 (ref)
+			return {
+				{
+					id = "edit",
+					text = p1.editLabel,
+					icon = iconName.Pencil,
+					isDisabled = p1.isDisabled
+				},
+				{
+					id = "archive",
+					isDisabled = true,
+					text = var5.archive,
+					icon = iconName.TrashCan
+				}
+			}
+		end, { var5.archive, p1.editLabel, p1.isDisabled }),
+		onActivated = function(p2)
+			-- upvalues: var4 (ref), p1 (ref)
+			var4()
+			
+			if p2 == "edit" and not p1.isDisabled then
+				p1.onEdit()
+			end
+		end,
+		onPressedOutside = var4,
+		side = foundationModule.Enums.PopoverSide.Bottom
+	}, {
+		Trigger = reactModule.createElement(iconButton, {
+			isCircular = true,
+			testId = "monetization-product-actions",
+			icon = iconName.ThreeDotsHorizontal,
+			isDisabled = p1.isDisabled,
+			onActivated = function()
+				-- upvalues: var3 (ref), var2 (ref)
+				var3(not var2)
+			end,
+			size = inputSize.Medium,
+			variant = buttonVariant.Utility
+		})
+	})
+end
+
+local function ProductCard(p1)
+	-- upvalues: useTokens (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), var1 (ref), reactModule (ref), view (ref), uDim2 (ref), stateLayerAffordance (ref), badge (ref), badgeShape (ref), badgeSize (ref), badgeVariant (ref), image (ref), text (ref), icon (ref), iconName (ref), iconSize (ref)
+	local createElement_2
+	local product = p1.product
+	local var2 = useTokens()
+	local image_1 = product.image or (if fFlagBuildExperienceMonetizationNativeUIModule then var1 else nil)
+	local createElement = reactModule.createElement
+	local t = {
 		tag = "col auto-y radius-medium",
 		LayoutOrder = p1.LayoutOrder,
 		onActivated = p1.onActivated,
@@ -40,61 +105,85 @@ local function ProductCard(p1)
 		Size = uDim2,
 		stateLayer = { affordance = stateLayerAffordance.None },
 		testId = `monetization-product-{product.id}`
+	}
+	local t_1 = {}
+	local createElement_1 = reactModule.createElement
+	local t_2 = {
+		LayoutOrder = 1,
+		aspectRatio = 1,
+		tag = "radius-medium clip bg-surface-200",
+		Size = if fFlagBuildExperienceMonetizationNativeUIModule then UDim2.fromOffset(var2.Size.Size_2800, var2.Size.Size_2800) else UDim2.new(1, 0, 0, 109)
+	}
+	local t_3 = {
+		SaleStatus = if product.saleStatus == nil or fFlagBuildExperienceMonetizationNativeUIModule and product.isForSale ~= true then nil else reactModule.createElement(badge, {
+			ZIndex = 2,
+			Position = UDim2.fromOffset(var2.Gap.Small, var2.Gap.Small),
+			shape = badgeShape.Pill,
+			size = badgeSize.Small,
+			text = product.saleStatus,
+			testId = `monetization-product-sale-status-{product.id}`,
+			variant = badgeVariant.OverMedia
+		})
+	}
+	
+	if image_1 == nil then
+		createElement_2 = nil
+	else
+		createElement_2 = reactModule.createElement
+		createElement_2 = createElement_2(image, {
+			Image = image_1,
+			imageStyle = if fFlagBuildExperienceMonetizationNativeUIModule and product.image == nil then var2.Color.Content.Emphasis else nil,
+			ScaleType = Enum.ScaleType.Fit,
+			tag = if fFlagBuildExperienceMonetizationNativeUIModule then "size-full radius-medium" else "size-full",
+			testId = `monetization-product-image-{product.id}`
+		})
+	end
+	t_3.Image = createElement_2
+	t_1.Media = createElement_1(view, t_2, t_3)
+	t_1.Title = reactModule.createElement(text, {
+		LayoutOrder = 2,
+		Text = product.name,
+		sizeConstraint = if fFlagBuildExperienceMonetizationNativeUIModule then {
+			MaxSize = Vector2.new(var2.Size.Size_2800, var2.Size.Size_1000 + var2.Gap.Small)
+		} else nil,
+		tag = {
+			["size-full-0 auto-y padding-top-small text-title-medium text-align-x-left text-truncate-end content-emphasis"] = true,
+			["text-wrap"] = fFlagBuildExperienceMonetizationNativeUIModule
+		},
+		testId = if fFlagBuildExperienceMonetizationNativeUIModule then `monetization-product-title-{product.id}` else nil
+	})
+	t_1.Metadata = reactModule.createElement(view, {
+		LayoutOrder = 3,
+		sizeConstraint = if fFlagBuildExperienceMonetizationNativeUIModule then { MaxSize = Vector2.new(var2.Size.Size_2800, 1e999) } else nil,
+		tag = {
+			["row align-y-center gap-xsmall size-full-0 auto-y"] = true,
+			["padding-top-xsmall"] = fFlagBuildExperienceMonetizationNativeUIModule
+		}
 	}, {
-		Media = reactModule.createElement(view, {
+		Kind = if fFlagBuildExperienceMonetizationNativeUIModule or product.kind == nil then nil else reactModule.createElement(text, {
 			LayoutOrder = 1,
-			aspectRatio = 1,
-			tag = "radius-medium clip bg-surface-200",
-			Size = UDim2.new(1, 0, 0, 109)
-		}, {
-			SaleStatus = if product.saleStatus ~= nil then nil else reactModule.createElement(badge, {
-				ZIndex = 2,
-				Position = UDim2.fromOffset(var1.Gap.Small, var1.Gap.Small),
-				shape = badgeShape.Pill,
-				size = badgeSize.Small,
-				text = product.saleStatus,
-				testId = `monetization-product-sale-status-{product.id}`,
-				variant = badgeVariant.OverMedia
-			}),
-			Image = if product.image ~= nil then nil else reactModule.createElement(image, {
-				tag = "size-full",
-				Image = product.image,
-				ScaleType = Enum.ScaleType.Fit,
-				testId = `monetization-product-image-{product.id}`
-			})
+			tag = "auto-xy text-body-medium content-default",
+			Text = product.kind
 		}),
-		Title = reactModule.createElement(text, {
+		PriceIcon = reactModule.createElement(icon, {
 			LayoutOrder = 2,
-			tag = "size-full-0 auto-y padding-top-small text-title-medium text-align-x-left text-truncate-end content-emphasis",
-			Text = product.name
+			name = iconName.Robux,
+			size = iconSize.Small
 		}),
-		Metadata = reactModule.createElement(view, {
+		Price = reactModule.createElement(text, {
 			LayoutOrder = 3,
-			tag = "row align-y-center gap-xsmall size-full-0 auto-y"
-		}, {
-			Kind = if product.kind ~= nil then nil else reactModule.createElement(text, {
-				LayoutOrder = 1,
-				tag = "auto-xy text-body-medium content-default",
-				Text = product.kind
-			}),
-			PriceIcon = reactModule.createElement(icon, {
-				LayoutOrder = 2,
-				name = iconName.Robux,
-				size = iconSize.Small
-			}),
-			Price = reactModule.createElement(text, {
-				LayoutOrder = 3,
-				tag = "auto-xy text-body-medium content-default",
-				Text = product.price
-			}),
-			Spacer = reactModule.createElement(view, { LayoutOrder = 4, tag = "fill" }),
-			Age = if product.age ~= nil then nil else reactModule.createElement(text, {
-				LayoutOrder = 5,
-				tag = "auto-xy text-body-medium content-default",
-				Text = product.age
-			})
+			Text = product.price,
+			tag = if fFlagBuildExperienceMonetizationNativeUIModule then "fill auto-y text-body-medium text-wrap text-align-x-left content-default" else "auto-xy text-body-medium content-default"
+		}),
+		Spacer = if not fFlagBuildExperienceMonetizationNativeUIModule then reactModule.createElement(view, { LayoutOrder = 4, tag = "fill" }) else nil,
+		Age = if fFlagBuildExperienceMonetizationNativeUIModule or product.age == nil then nil else reactModule.createElement(text, {
+			LayoutOrder = 5,
+			tag = "auto-xy text-body-medium content-default",
+			Text = product.age
 		})
 	})
+	
+	return createElement(view, t, t_1)
 end
 
 local function ProductRow(p1)
@@ -102,13 +191,13 @@ local function ProductRow(p1)
 	local t = {}
 	
 	for i = p1.startIndex, math.min(p1.startIndex + 2, #p1.products) do
-		local var1 = p1.products[i]
-		t[var1.id] = reactModule.createElement(ProductCard, {
+		local var2 = p1.products[i]
+		t[var2.id] = reactModule.createElement(ProductCard, {
 			LayoutOrder = i - p1.startIndex + 1,
-			product = var1,
+			product = var2,
 			onActivated = function()
-				-- upvalues: p1 (ref), var1 (ref)
-				p1.onProductActivated(var1.id)
+				-- upvalues: p1 (ref), var2 (ref)
+				p1.onProductActivated(var2.id)
 			end
 		})
 	end
@@ -119,16 +208,22 @@ local function ProductRow(p1)
 end
 
 local function OptionRow(p2)
-	-- upvalues: reactModule (ref), view (ref), text (ref), toggle (ref), inputSize (ref)
+	-- upvalues: reactModule (ref), view (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), text (ref), toggle (ref), inputSize (ref)
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-large size-full-0 auto-y padding-x-large padding-y-medium",
 		LayoutOrder = p2.LayoutOrder
 	}, {
-		Copy = reactModule.createElement(view, { LayoutOrder = 1, tag = "col fill gap-xxsmall auto-y" }, {
+		Copy = reactModule.createElement(view, {
+			LayoutOrder = 1,
+			tag = if fFlagBuildExperienceMonetizationNativeUIModule then "col fill gap-xsmall auto-y" else "col fill gap-xxsmall auto-y"
+		}, {
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 1,
-				tag = "size-full-0 auto-y text-title-medium text-align-x-left content-emphasis",
-				Text = p2.title
+				Text = p2.title,
+				tag = {
+					["size-full-0 auto-y text-title-medium text-align-x-left content-emphasis"] = true,
+					["text-wrap"] = fFlagBuildExperienceMonetizationNativeUIModule
+				}
 			}),
 			Description = reactModule.createElement(text, {
 				LayoutOrder = 2,
@@ -179,10 +274,10 @@ local function OptionsStatusContent(p2)
 end
 
 local function OptionsContent(p2)
-	-- upvalues: OptionsStatusContent (ref), buttonVariant (ref), reactModule (ref), view (ref), text (ref), OptionRow (ref), dialog (ref), dialogSize (ref)
-	local var2 = OptionsStatusContent(p2)
+	-- upvalues: OptionsStatusContent (ref), buttonVariant (ref), reactModule (ref), view (ref), text (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), OptionRow (ref), dialog (ref), dialogSize (ref)
+	local var3 = OptionsStatusContent(p2)
 	
-	return if var2 == nil then reactModule.createElement(view, {
+	return if var3 == nil then reactModule.createElement(view, {
 		tag = "col gap-xxlarge size-full-0 auto-y padding-y-medium",
 		testId = "monetization-options"
 	}, {
@@ -201,13 +296,19 @@ local function OptionsContent(p2)
 			}, {
 				Title = reactModule.createElement(text, {
 					LayoutOrder = 1,
-					tag = "size-full-0 auto-y text-title-large text-align-x-left content-emphasis",
-					Text = p2.labels.pricingOptions
+					Text = p2.labels.pricingOptions,
+					tag = {
+						["size-full-0 auto-y text-title-large text-align-x-left content-emphasis"] = true,
+						["text-wrap"] = fFlagBuildExperienceMonetizationNativeUIModule
+					}
 				}),
 				Description = reactModule.createElement(text, {
 					LayoutOrder = 2,
-					tag = "size-full-0 auto-y text-body-small text-align-x-left content-default",
-					Text = p2.labels.pricingOptionsDescription
+					Text = p2.labels.pricingOptionsDescription,
+					tag = {
+						["size-full-0 auto-y text-body-small text-align-x-left content-default"] = true,
+						["text-wrap"] = fFlagBuildExperienceMonetizationNativeUIModule
+					}
 				})
 			}),
 			Rows = reactModule.createElement(view, {
@@ -237,8 +338,11 @@ local function OptionsContent(p2)
 		}, {
 			Header = reactModule.createElement(text, {
 				LayoutOrder = 1,
-				tag = "size-full-0 auto-y text-title-large text-align-x-left content-emphasis",
-				Text = p2.labels.shopUI
+				Text = p2.labels.shopUI,
+				tag = {
+					["size-full-0 auto-y text-title-large text-align-x-left content-emphasis"] = true,
+					["text-wrap"] = fFlagBuildExperienceMonetizationNativeUIModule
+				}
 			}),
 			Rows = reactModule.createElement(view, {
 				LayoutOrder = 2,
@@ -288,58 +392,71 @@ local function OptionsContent(p2)
 				}
 			})
 		}) else nil
-	}) else var2
+	}) else var3
 end
 
 local function CatalogContent(p2)
-	-- upvalues: reactModule (ref), ProductRow (ref), view (ref)
+	-- upvalues: reactModule (ref), ProductRow (ref), view (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref)
 	local t = {}
-	local var2 = 0
+	local var3 = 0
 	
 	for i = 1, #p2.products, 3 do
-		var2 += 1
-		t[`row-{var2}`] = reactModule.createElement(ProductRow, {
-			LayoutOrder = var2,
+		var3 += 1
+		t[`row-{var3}`] = reactModule.createElement(ProductRow, {
+			LayoutOrder = var3,
 			onProductActivated = p2.onProductActivated,
 			products = p2.products,
 			startIndex = i
 		})
 	end
 	return reactModule.createElement(view, {
-		tag = "col gap-large size-full-0 auto-y padding-y-medium",
-		testId = "MonetizationPageView"
+		testId = "MonetizationPageView",
+		tag = if fFlagBuildExperienceMonetizationNativeUIModule then "col gap-large size-full-0 auto-y padding-top-medium" else "col gap-large size-full-0 auto-y padding-y-medium"
 	}, t)
 end
 
 local function EmptyContent(p3)
-	-- upvalues: reactModule (ref), view (ref), image (ref), text (ref)
-	return reactModule.createElement(view, {
-		tag = "col align-x-center gap-xxlarge size-full-0 auto-y padding-y-medium",
-		testId = "MonetizationPageView"
+	-- upvalues: fFlagBuildExperienceMonetizationNativeUIModule (ref), useTokens (ref), reactModule (ref), view (ref), image (ref), var1 (ref), text (ref), scrollView (ref)
+	local var4 = if fFlagBuildExperienceMonetizationNativeUIModule then useTokens() else nil
+	local var5 = if fFlagBuildExperienceMonetizationNativeUIModule then var4.Config.UI.Scale else 1
+	local var6 = reactModule.createElement(view, {
+		testId = "MonetizationPageView",
+		tag = if fFlagBuildExperienceMonetizationNativeUIModule then "col align-x-center align-y-center size-full auto-y" else "col align-x-center gap-xxlarge size-full-0 auto-y padding-y-medium"
 	}, {
 		Illustration = reactModule.createElement(image, {
-			Image = "rbxasset://textures/ui/LuaApp/graphic/BuildExperience/NativeMonetization/EmptyCatalog.png",
 			LayoutOrder = 1,
 			testId = "monetization-empty-illustration",
+			Image = if fFlagBuildExperienceMonetizationNativeUIModule then var1 else "rbxasset://textures/ui/LuaApp/graphic/BuildExperience/NativeMonetization/EmptyCatalog.png",
+			imageStyle = if fFlagBuildExperienceMonetizationNativeUIModule then var4.Color.Content.Emphasis else nil,
 			ScaleType = Enum.ScaleType.Fit,
-			Size = UDim2.fromOffset(298, 168)
+			Size = if fFlagBuildExperienceMonetizationNativeUIModule then UDim2.fromOffset(320 * var5, 180 * var5) else UDim2.fromOffset(298, 168)
 		}),
 		Copy = reactModule.createElement(view, {
 			LayoutOrder = 2,
-			tag = "col align-x-center size-full-0 auto-y"
+			tag = if fFlagBuildExperienceMonetizationNativeUIModule then "col align-x-center size-full-0 auto-y padding-large" else "col align-x-center size-full-0 auto-y"
 		}, {
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 1,
-				tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-center content-emphasis",
-				Text = p3.emptyTitle
+				Text = p3.emptyTitle,
+				tag = if fFlagBuildExperienceMonetizationNativeUIModule then "size-full-0 auto-y text-heading-medium text-wrap text-align-x-center content-emphasis" else "size-full-0 auto-y text-title-medium text-wrap text-align-x-center content-emphasis"
 			}),
 			Description = reactModule.createElement(text, {
 				LayoutOrder = 2,
-				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
-				Text = p3.emptyDescription
+				Text = p3.emptyDescription,
+				tag = if fFlagBuildExperienceMonetizationNativeUIModule then "size-full-0 auto-y text-body-large text-wrap text-align-x-center content-default" else "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default"
 			})
 		})
 	})
+	
+	return if fFlagBuildExperienceMonetizationNativeUIModule then reactModule.createElement(scrollView, {
+		tag = "size-full",
+		testId = "monetization-empty-scroll",
+		scroll = {
+			AutomaticCanvasSize = Enum.AutomaticSize.Y,
+			CanvasSize = UDim2.new(1, 0, 0, 0),
+			ScrollingDirection = Enum.ScrollingDirection.Y
+		}
+	}, { Content = var6 }) else var6
 end
 
 local function CatalogStatusContent(p3)
@@ -399,7 +516,7 @@ local function CatalogRefreshWarning(p3)
 end
 
 local function DetailContent(p3)
-	-- upvalues: reactModule (ref), view (ref), image (ref), text (ref), icon (ref), iconName (ref), iconSize (ref), toggle (ref), inputSize (ref)
+	-- upvalues: fFlagBuildExperienceMonetizationNativeUIModule (ref), useTokens (ref), reactModule (ref), view (ref), image (ref), var1 (ref), text (ref), icon (ref), iconName (ref), iconSize (ref), toggle (ref), inputSize (ref)
 	local selectedProduct = p3.selectedProduct
 	
 	return if selectedProduct == nil then reactModule.createElement(view, { tag = "size-full", testId = "MonetizationPageView" }) else reactModule.createElement(view, {
@@ -408,11 +525,12 @@ local function DetailContent(p3)
 	}, {
 		Media = reactModule.createElement(view, {
 			LayoutOrder = 1,
-			tag = "row align-x-center size-full-0 auto-y padding-y-medium"
+			tag = if fFlagBuildExperienceMonetizationNativeUIModule then "row align-x-center size-full-0 auto-y padding-y-xlarge radius-medium bg-surface-200" else "row align-x-center size-full-0 auto-y padding-y-medium"
 		}, {
-			Image = if selectedProduct.image ~= nil then nil else reactModule.createElement(image, {
+			Image = if selectedProduct.image == nil and not fFlagBuildExperienceMonetizationNativeUIModule then nil else reactModule.createElement(image, {
 				testId = "monetization-detail-image",
-				Image = selectedProduct.image,
+				Image = selectedProduct.image or var1,
+				imageStyle = if selectedProduct.image == nil then if fFlagBuildExperienceMonetizationNativeUIModule then useTokens().Color.Content.Emphasis else nil else nil,
 				ScaleType = Enum.ScaleType.Fit,
 				Size = UDim2.fromOffset(195, 196)
 			})
@@ -424,8 +542,11 @@ local function DetailContent(p3)
 			Title = reactModule.createElement(view, { LayoutOrder = 1, tag = "col size-full-0 auto-y" }, {
 				Name = reactModule.createElement(text, {
 					LayoutOrder = 1,
-					tag = "size-full-0 auto-y text-heading-small text-align-x-left content-emphasis",
-					Text = selectedProduct.name
+					Text = selectedProduct.name,
+					tag = {
+						["size-full-0 auto-y text-heading-small text-align-x-left content-emphasis"] = true,
+						["text-wrap"] = fFlagBuildExperienceMonetizationNativeUIModule
+					}
 				}),
 				Price = reactModule.createElement(view, {
 					LayoutOrder = 2,
@@ -515,11 +636,26 @@ local function DetailContent(p3)
 end
 
 local function EditContent(p3)
-	-- upvalues: reactModule (ref), view (ref), textInput (ref), textArea (ref), text (ref)
+	-- upvalues: fFlagBuildExperienceMonetizationNativeUIModule (ref), useTokens (ref), reactModule (ref), view (ref), image (ref), var1 (ref), textInput (ref), textArea (ref), text (ref)
+	local var4 = if fFlagBuildExperienceMonetizationNativeUIModule then useTokens() else nil
+	local selectedProduct = p3.selectedProduct
+	
 	return reactModule.createElement(view, {
 		tag = "col gap-xlarge size-full-0 auto-y padding-y-large",
 		testId = "monetization-product-edit"
 	}, {
+		Media = if fFlagBuildExperienceMonetizationNativeUIModule and selectedProduct ~= nil then reactModule.createElement(view, {
+			LayoutOrder = 0,
+			tag = "row align-x-center size-full-0 auto-y padding-y-xlarge radius-medium bg-surface-200"
+		}, {
+			Image = reactModule.createElement(image, {
+				testId = "monetization-edit-image",
+				Image = selectedProduct.image or var1,
+				imageStyle = if selectedProduct.image == nil then var4.Color.Content.Emphasis else nil,
+				ScaleType = Enum.ScaleType.Fit,
+				Size = UDim2.fromOffset(var4.Size.Size_3000, var4.Size.Size_3000)
+			})
+		}) else nil,
 		Name = reactModule.createElement(textInput, {
 			LayoutOrder = 1,
 			testId = "monetization-edit-name",
@@ -559,29 +695,34 @@ local function EditContent(p3)
 end
 
 return function(p3)
-	-- upvalues: reactModule (ref), button (ref), inputSize (ref), buttonVariant (ref), iconButton (ref), iconName (ref), DetailContent (ref), CatalogStatusContent (ref), EditContent (ref), OptionsContent (ref), EmptyContent (ref), CatalogContent (ref), view (ref), CatalogRefreshWarning (ref), fillBehavior (ref), overflowMenuPageShellModule (ref)
+	-- upvalues: fFlagBuildExperienceMonetizationNativeUIModule (ref), reactModule (ref), ProductActionsMenu (ref), button (ref), inputSize (ref), buttonVariant (ref), iconButton (ref), iconName (ref), DetailContent (ref), CatalogStatusContent (ref), EditContent (ref), OptionsContent (ref), EmptyContent (ref), CatalogContent (ref), view (ref), CatalogRefreshWarning (ref), fillBehavior (ref), overflowMenuPageShellModule (ref)
 	local isDetail = p3.mode == "detail"
 	local isEdit = p3.mode == "edit"
 	local isOptions = p3.mode == "options"
-	local var3 = #p3.products > 0
-	local var4 = not isDetail and (not isEdit and (not isOptions and (p3.catalogStatus ~= "Ready" and not (p3.catalogStatus == "Failed" and var3))))
-	local var5 = not isDetail and (not isEdit and (not isOptions and (p3.catalogStatus == "Failed" and var3)))
-	local var6 = if isDetail and p3.canManageProduct then reactModule.createElement(button, {
+	local var4 = #p3.products > 0
+	local var5 = not isDetail and (not isEdit and (not isOptions and (p3.catalogStatus ~= "Ready" and not (p3.catalogStatus == "Failed" and var4))))
+	local var6 = p3.mode == "empty" and not var5
+	local var7 = not isDetail and (not isEdit and (not isOptions and (p3.catalogStatus == "Failed" and var4)))
+	local var8 = if isDetail and p3.canManageProduct then if fFlagBuildExperienceMonetizationNativeUIModule then reactModule.createElement(ProductActionsMenu, {
+		isDisabled = p3.isProductDisabled or (p3.isProductSaleStatusPending or p3.isProductManagedPricingPending),
+		editLabel = p3.labels.edit,
+		onEdit = p3.onOpenProductEdit
+	}) else reactModule.createElement(button, {
 		testId = "monetization-edit-product",
 		isDisabled = p3.isProductDisabled or (p3.isProductSaleStatusPending or p3.isProductManagedPricingPending),
 		onActivated = p3.onOpenProductEdit,
 		size = inputSize.Medium,
 		text = p3.labels.edit,
 		variant = buttonVariant.Standard
-	}) elseif isDetail or isEdit or (isOptions or var4) or not p3.showOptions then nil else reactModule.createElement(iconButton, {
+	}) elseif isDetail or isEdit or (isOptions or var5) or not p3.showOptions then nil else reactModule.createElement(iconButton, {
 		isCircular = true,
 		testId = "monetization-open-options",
-		icon = iconName.ThreeSlidersHorizontal,
+		icon = if fFlagBuildExperienceMonetizationNativeUIModule then iconName.TwoSwitchesHorizontal else iconName.ThreeSlidersHorizontal,
 		onActivated = p3.onOpenOptions,
 		size = inputSize.Medium,
 		variant = buttonVariant.Utility
 	})
-	local var7 = if var4 then reactModule.createElement(CatalogStatusContent, p3) elseif isDetail then if p3.isProductDisabled then reactModule.createElement("CanvasGroup", {
+	local var9 = if var5 then reactModule.createElement(CatalogStatusContent, p3) elseif isDetail then if p3.isProductDisabled then reactModule.createElement("CanvasGroup", {
 		[reactModule.Tag] = "data-testid=monetization-disabled-detail",
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
@@ -589,18 +730,23 @@ return function(p3)
 		Size = UDim2.new(1, 0, 0, 0)
 	}, { Content = reactModule.createElement(DetailContent, p3) }) else reactModule.createElement(DetailContent, p3) elseif isEdit then reactModule.createElement(EditContent, p3) elseif isOptions then reactModule.createElement(OptionsContent, p3) elseif p3.mode == "empty" then reactModule.createElement(EmptyContent, p3) else reactModule.createElement(CatalogContent, p3)
 	
-	if var5 then
-		var7 = reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, {
+	if var7 then
+		var9 = reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, {
 			Warning = reactModule.createElement(CatalogRefreshWarning, p3),
-			Content = var7
+			Content = var9
 		})
 	end
 	return reactModule.createElement(overflowMenuPageShellModule, {
 		footerDivider = false,
 		testId = "MonetizationPage",
 		closeIcon = iconName.ChevronLargeLeft,
-		content = var7,
-		footer = if isEdit then reactModule.createElement(view, { tag = "row gap-medium size-full-0 auto-y" }, {
+		content = var9,
+		footer = if isEdit then reactModule.createElement(view, {
+			tag = {
+				["row gap-medium size-full-0 auto-y"] = true,
+				["padding-y-medium"] = fFlagBuildExperienceMonetizationNativeUIModule
+			}
+		}, {
 			Cancel = reactModule.createElement(button, {
 				LayoutOrder = 1,
 				testId = "monetization-cancel-product-edit",
@@ -623,17 +769,23 @@ return function(p3)
 				variant = buttonVariant.Emphasis,
 				width = UDim.new(0.5, -6)
 			})
-		}) elseif var4 or p3.mode ~= "empty" and p3.mode ~= "catalog" then nil else reactModule.createElement(view, { tag = "row align-x-center size-full-0 auto-y" }, {
+		}) elseif var5 or p3.mode ~= "empty" and p3.mode ~= "catalog" then nil else reactModule.createElement(view, {
+			tag = {
+				["row align-x-center size-full-0 auto-y"] = true,
+				["padding-y-medium"] = fFlagBuildExperienceMonetizationNativeUIModule
+			}
+		}, {
 			Create = reactModule.createElement(button, {
 				testId = "monetization-create",
 				onActivated = p3.onOpenCreate,
-				size = inputSize.Medium,
+				size = if fFlagBuildExperienceMonetizationNativeUIModule then inputSize.Large else inputSize.Medium,
 				text = p3.labels.emptyCreateProduct,
 				variant = buttonVariant.Emphasis,
-				width = UDim.new(0, 240)
+				width = if fFlagBuildExperienceMonetizationNativeUIModule then UDim.new(1, 0) else UDim.new(0, 240)
 			})
 		}),
-		headerTrailing = var6,
+		disableScrolling = fFlagBuildExperienceMonetizationNativeUIModule and var6,
+		headerTrailing = var8,
 		onClose = p3.onClose,
 		title = if isDetail then if p3.selectedProduct ~= nil then p3.labels.title else p3.selectedProduct.name elseif isEdit then p3.labels.editProduct elseif isOptions then p3.labels.options else p3.labels.title
 	})

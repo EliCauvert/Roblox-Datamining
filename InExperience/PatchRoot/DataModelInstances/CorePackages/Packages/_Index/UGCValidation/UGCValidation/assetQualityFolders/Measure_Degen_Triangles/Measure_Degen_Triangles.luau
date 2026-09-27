@@ -37,8 +37,7 @@ return {
 						if tonumber(v.score) ~= 100 then
 							local t_1 = {
 								partName = i,
-								degenerate_triangle_percent = string.format("%.2f", (tonumber(v.degenerate_triangle_percent) or 0) * 100),
-								score = tostring(math.floor(tonumber(v.score) or 0))
+								degenerate_triangle_percent = string.format("%.2f", (tonumber(v.degenerate_triangle_percent) or 0) * 100)
 							}
 							
 							if uploadCategory then

@@ -9,6 +9,8 @@ local sduiParsers = sduiCoreSystemModule.SduiParsers
 local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
 local fFlagSduiSearchResultsPageEnabled = require(parent.SharedFlags).FFlagSduiSearchResultsPageEnabled
 local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
+local fFlagLuaAppSponsoredGamePreviewVideo = require(parent.SharedFlags).FFlagLuaAppSponsoredGamePreviewVideo
+local fFlagLuaAppSduiPassSortSubId = require(parent.SharedFlags).FFlagLuaAppSduiPassSortSubId
 local t = {}
 
 local var1 = function(p1)
@@ -26,7 +28,7 @@ local var1 = function(p1)
 end
 
 return function(p2, p3, p4, p5, p6)
-	-- upvalues: sduiErrors (ref), fFlagSduiFixSearchTelemetry (ref), t (ref), cryoModule (ref), var1 (ref), sduiParsers (ref), appPage (ref), fFlagSduiSearchResultsPageEnabled (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), sduiParseHelpers (ref)
+	-- upvalues: sduiErrors (ref), fFlagSduiFixSearchTelemetry (ref), t (ref), cryoModule (ref), var1 (ref), sduiParsers (ref), fFlagLuaAppSponsoredGamePreviewVideo (ref), appPage (ref), fFlagSduiSearchResultsPageEnabled (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), sduiParseHelpers (ref), fFlagLuaAppSduiPassSortSubId (ref)
 	if not p5 then
 		p2.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogGameImpressions, {
 			name = "SduiGameImpressionsHandler",
@@ -42,7 +44,8 @@ return function(p2, p3, p4, p5, p6)
 		local var3 = cryoModule.Dictionary.join(v, {
 			analyticsData = var1(v) or cryoModule.None,
 			isSponsored = sduiParsers.safeParseBoolean(v.adFlag or false, p2, t),
-			gameCollectionItemTypeOverride = if fFlagSduiFixSearchTelemetry then v.tileType else nil
+			gameCollectionItemTypeOverride = if fFlagSduiFixSearchTelemetry then v.tileType else nil,
+			sponsoredGamePreviewVideoEligible = if fFlagLuaAppSponsoredGamePreviewVideo then sduiParsers.safeParseBoolean(v.sponsoredGamePreviewVideoEligible or false, p2, t) else nil
 		})
 		
 		if fFlagSduiFixSearchTelemetry then
@@ -97,6 +100,6 @@ return function(p2, p3, p4, p5, p6)
 				componentType = var6,
 				message = `Failed to log game impressions. reason: {p7}. analyticsContext: {sduiParseHelpers.stringifyValue(p5)}`
 			}, p2.appPage)
-		end, nil, var1(p5))
+		end, if fFlagLuaAppSduiPassSortSubId and p5.sortSubId then tostring(p5.sortSubId) else nil, var1(p5))
 	end
 end

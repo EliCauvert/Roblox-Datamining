@@ -1,10 +1,6 @@
 ﻿local getPlayersFromStringModule = require(script.Parent.getPlayersFromString)
-local expChatShared = script:FindFirstAncestor("ExpChatShared")
-local userMutedModule = require(expChatShared.Actions.UserMuted)
-local parent = expChatShared.Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
-local fFlagExpChatUseChatMuteStore = sharedFlagsModule.FFlagExpChatUseChatMuteStore
+local parent = script:FindFirstAncestor("ExpChatShared").Parent
+local fFlagExpChatUseChatMuteStore = require(parent.SharedFlags).FFlagExpChatUseChatMuteStore
 local chatMuteModule = require(parent.ChatMute)
 local t = {
 	["CoreScripts.TextChat.Mute.Error.TargetDoesNotExist"] = "Roblox.Mute.Error.PlayerNotFound",
@@ -18,7 +14,7 @@ return {
 	name = script.Name,
 	alias = { "/mute", "/m" },
 	clientRun = function(p1, p2, p3, p4)
-		-- upvalues: fFlagExpChatUseChatMuteStore (ref), chatMuteModule (ref), t (ref), getPlayersFromStringModule (ref), fFlagExpChatUseMessagesStore (ref), userMutedModule (ref)
+		-- upvalues: fFlagExpChatUseChatMuteStore (ref), chatMuteModule (ref), t (ref), getPlayersFromStringModule (ref)
 		if fFlagExpChatUseChatMuteStore then
 			local var1 = chatMuteModule.resolveMuteTarget(string.split(p3, " ")[2], tostring(p2))
 			
@@ -59,17 +55,14 @@ return {
 					metadata = "Roblox.Mute.Error.CannotMuteSelf",
 					args = {}
 				}
-			elseif fFlagExpChatUseMessagesStore then
-				if not p4 or not p4.messagesStore then
-					return {
-						key = "CoreScripts.TextChat.MessageStatus.Warning.Unknown",
-						metadata = "Roblox.Mute.Error.ContextNotAvailable",
-						args = {}
-					}
-				end
+			elseif p4 and p4.messagesStore then
 				p4.messagesStore.muteUser(var4.userId)
 			else
-				p1:dispatch(userMutedModule(var4.userId))
+				return {
+					key = "CoreScripts.TextChat.MessageStatus.Warning.Unknown",
+					metadata = "Roblox.Mute.Error.ContextNotAvailable",
+					args = {}
+				}
 			end
 			return {
 				key = "CoreScripts.TextChat.Mute.Success",

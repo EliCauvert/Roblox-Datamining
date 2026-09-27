@@ -11,7 +11,6 @@ return {
 		validationEnumsModule.SharedDataMember.curveAnimations,
 		validationEnumsModule.SharedDataMember.curveAnimComputedFrames
 	},
-	fflag = require(parent.flags.getFFlagUGCValidationAnimationPackSupport),
 	expectedFailures = {},
 	prereqTests = {
 		validationEnumsModule.ValidationModule.CurveAnimDataAvailable

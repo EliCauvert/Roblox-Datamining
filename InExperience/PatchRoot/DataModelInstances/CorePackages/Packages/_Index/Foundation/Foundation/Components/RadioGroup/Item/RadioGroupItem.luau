@@ -41,7 +41,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		label = {
 			text = label,
 			position = constantsModule.INPUT_PLACEMENT_TO_LABEL_ALIGNMENT[var1.placement],
-			hint = if flagsModule.FoundationRadioBeta then var1.hint else nil
+			hint = var1.hint
 		},
 		customVariantProps = var5.input,
 		size = var1.size,

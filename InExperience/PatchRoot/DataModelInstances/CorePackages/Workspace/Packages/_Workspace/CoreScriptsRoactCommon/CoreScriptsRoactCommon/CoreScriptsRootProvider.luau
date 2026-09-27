@@ -1,6 +1,6 @@
 ﻿local parent = script.Parent.Parent
 local localizationService = game:GetService("LocalizationService")
-local guiService = game:GetService("GuiService")
+local isTenFootInterface = require(parent.AppCommonLib).isTenFootInterface
 local var1 = if game:DefineFastFlag("SwitchCSRootProviderTranslationsPackage", false) then require(parent.InExperienceLocales).Localization else require(parent.RobloxAppLocales).Localization
 local localizationProvider = require(parent.Localization).LocalizationProvider
 local designTokenProvider = require(parent.Style).DesignTokenProvider
@@ -22,7 +22,7 @@ local var2 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNav
 local t = {
 	themeName = "dark",
 	fontName = "gotham",
-	deviceType = if guiService:IsTenFootInterface() then deviceType.Console else deviceType.Desktop
+	deviceType = if isTenFootInterface() then deviceType.Console else deviceType.Desktop
 }
 
 return function(p1)

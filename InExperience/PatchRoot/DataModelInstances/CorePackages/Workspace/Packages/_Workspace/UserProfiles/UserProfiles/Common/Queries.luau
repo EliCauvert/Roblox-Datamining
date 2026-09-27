@@ -4,6 +4,7 @@ return {
 	userProfilesCombinedNameByUserIds = queries.userProfilesCombinedNameByUserIds,
 	userProfilesCombinedNameAndAliasByUserIds = queries.userProfilesCombinedNameAndAliasByUserIds,
 	userProfilesCombinedNameAndUsernameByUserIds = queries.userProfilesCombinedNameAndUsernameByUserIds,
+	userProfilesBasicNamesByUserIds = queries.userProfilesBasicNamesByUserIds,
 	userProfilesAllNamesByUserIds = queries.userProfilesAllNamesByUserIds,
 	userProfilesDisplayNameAndUsernameByUserIds = queries.userProfilesDisplayNameAndUsernameByUserIds,
 	userProfilesDisplayUserPlatformNamesByUserIds = queries.userProfilesDisplayUserPlatformNamesByUserIds,

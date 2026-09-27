@@ -21,18 +21,14 @@ local _ = require(sduiCoreSystem.SduiComponentType)
 local propResultCategory = sduiClientBindingTypesModule.PropResultCategory
 local applyFormatArgFormatter = require(sduiCoreSystem.ClientBinding.PropBuilder.applyFormatArgFormatter).applyFormatArgFormatter
 local dataStatus = dataHydrationModule.DataHydrationTypes.DataStatus
-local fFlagSduiImprovedErrorDimensions = require(parent.SharedFlags).FFlagSduiImprovedErrorDimensions
-local fFlagSduiInlineNestedComponentSchema = require(parent.SharedFlags).FFlagSduiInlineNestedComponentSchema
-local fFlagSduiIsEmptyConditions = require(parent.SharedFlags).FFlagSduiIsEmptyConditions
 local fFlagSduiDismissPromptPageScope = require(parent.SharedFlags).FFlagSduiDismissPromptPageScope
-local fFlagSduiHydrationFetchIfMissing = require(parent.SharedFlags).FFlagSduiHydrationFetchIfMissing
 local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
 local fFlagSduiFormatStringPercentSafeGsubModule = require(sduiCoreSystem.FFlagSduiFormatStringPercentSafeGsub)
 local frozen = table.freeze({ status = dataStatus.Failed })
 local frozen_1 = table.freeze({})
 
 local function resolveHydrationBinding(p1, p2, p3, p4)
-	-- upvalues: sduiDataBindingContentTypeModule (ref), fFlagSduiHydrationFetchIfMissing (ref), sduiDataBinderModule (ref)
+	-- upvalues: sduiDataBindingContentTypeModule (ref), sduiDataBinderModule (ref)
 	local joined = table.concat(p1, ".")
 	local var1 = p1[1]
 	local var2 = p2 and p2[var1]
@@ -49,7 +45,7 @@ local function resolveHydrationBinding(p1, p2, p3, p4)
 		if #p1 < 2 then
 			error(`Unsupported path for contentType {contentType}, bindingPath: {joined}`)
 		end
-		local fieldValue, fieldValue_1 = sduiDataBinderModule.getFieldValue(contentType, p1, id, p3, if fFlagSduiHydrationFetchIfMissing then var2.fetchIfMissing or p4 else p4)
+		local fieldValue, fieldValue_1 = sduiDataBinderModule.getFieldValue(contentType, p1, id, p3, var2.fetchIfMissing or p4)
 		
 		return fieldValue, fieldValue_1
 	end
@@ -82,21 +78,16 @@ local function generateStaticPropValue(p5, p6)
 end
 
 local function generateDynamicBindingPropValue(p5, p6, p7, p8, p9, p10)
-	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), splitDottedPathModule (ref), signalsModule (ref), resolveBindingPathValue (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), frozen (ref), tutilsModule (ref)
-	local currentComponentType = nil
-	local currentParserName = nil
-	
-	if fFlagSduiImprovedErrorDimensions then
-		currentComponentType = p7.currentComponentType
-		currentParserName = p7.currentParserName
-	end
+	-- upvalues: splitDottedPathModule (ref), signalsModule (ref), resolveBindingPathValue (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), frozen (ref), tutilsModule (ref)
+	local currentComponentType = p7.currentComponentType
+	local currentParserName = p7.currentParserName
 	local var3 = splitDottedPathModule(p5)
 	
 	if not var3 or #var3 == 0 then
 		error(`Invalid bindingPath: {p5}`)
 	end
 	return signalsModule.createComputed(function(p11)
-		-- upvalues: resolveBindingPathValue (copy), var3 (ref), p6 (ref), p8 (ref), p9 (ref), p10 (ref), p7 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), p5 (ref), sduiParseHelpersModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy)
+		-- upvalues: resolveBindingPathValue (copy), var3 (ref), p6 (ref), p8 (ref), p9 (ref), p10 (ref), p7 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), p5 (ref), sduiParseHelpersModule (copy), currentComponentType (ref), currentParserName (ref), frozen (copy)
 		local ok, status, var4 = pcall(function()
 			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var3 (copy), p6 (copy), p8 (copy), p9 (copy), p10 (copy), p7 (copy)
 			local var5, var6 = resolveBindingPathValue(p11, var3, p6, p8, p9, p10, p7)
@@ -111,8 +102,8 @@ local function generateDynamicBindingPropValue(p5, p6, p7, p8, p9, p10)
 			value = p5,
 			message = sduiParseHelpersModule.stringifyValue(status),
 			name = p7.debugName,
-			componentType = if fFlagSduiImprovedErrorDimensions then currentComponentType else nil,
-			parserName = if fFlagSduiImprovedErrorDimensions then currentParserName else nil
+			componentType = currentComponentType,
+			parserName = currentParserName
 		}, p7.appPage)
 		
 		return frozen
@@ -120,26 +111,21 @@ local function generateDynamicBindingPropValue(p5, p6, p7, p8, p9, p10)
 end
 
 local function generateTokenBindingPropValue(p5, p6, p7)
-	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), splitDottedPathModule (ref), signalsModule (ref), getSduiTokensStoreModule (ref), tryGetPathFromDataModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), frozen (ref), fFlagLuaAppSduiColorPropMigration (ref), dataStatus (ref), tutilsModule (ref)
-	local currentComponentType = nil
-	local currentParserName = nil
-	
-	if fFlagSduiImprovedErrorDimensions then
-		currentComponentType = p6.currentComponentType
-		currentParserName = p6.currentParserName
-	end
+	-- upvalues: splitDottedPathModule (ref), signalsModule (ref), getSduiTokensStoreModule (ref), tryGetPathFromDataModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), frozen (ref), fFlagLuaAppSduiColorPropMigration (ref), dataStatus (ref), tutilsModule (ref)
+	local currentComponentType = p6.currentComponentType
+	local currentParserName = p6.currentParserName
 	local var3 = splitDottedPathModule(p5)
 	
 	return signalsModule.createComputed(function(p8)
-		-- upvalues: getSduiTokensStoreModule (copy), p6 (ref), tryGetPathFromDataModule (copy), var3 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy), fFlagLuaAppSduiColorPropMigration (copy), p7 (ref), dataStatus (copy)
+		-- upvalues: getSduiTokensStoreModule (copy), p6 (ref), tryGetPathFromDataModule (copy), var3 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), currentComponentType (ref), currentParserName (ref), frozen (copy), fFlagLuaAppSduiColorPropMigration (copy), p7 (ref), dataStatus (copy)
 		local var4, var5 = tryGetPathFromDataModule(getSduiTokensStoreModule().getTokens(p8, p6.appPage), var3)
 		
 		if not var4 then
 			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.TokenBindingFailed, {
 				message = `Could not find token with tokenPath {table.concat(var3, ".")}`,
 				name = p6.debugName,
-				componentType = if fFlagSduiImprovedErrorDimensions then currentComponentType else nil,
-				parserName = if fFlagSduiImprovedErrorDimensions then currentParserName else nil
+				componentType = currentComponentType,
+				parserName = currentParserName
 			}, p6.appPage)
 			
 			return frozen
@@ -158,14 +144,10 @@ local function _(p5, p6, p7)
 end
 
 local function generateFormatStringPropValue(p5, p6, p7, p8, p9)
-	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), applyFormatArgFormatter (ref), frozen (ref), fFlagSduiFormatStringPercentSafeGsubModule (ref), generateDynamicBindingPropValue (ref), signalsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), tutilsModule (ref)
-	local currentComponentType = nil
-	local currentParserName = nil
+	-- upvalues: applyFormatArgFormatter (ref), frozen (ref), fFlagSduiFormatStringPercentSafeGsubModule (ref), generateDynamicBindingPropValue (ref), signalsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), tutilsModule (ref)
+	local currentComponentType = p7.currentComponentType
+	local currentParserName = p7.currentParserName
 	
-	if fFlagSduiImprovedErrorDimensions then
-		currentComponentType = p7.currentComponentType
-		currentParserName = p7.currentParserName
-	end
 	if typeof(p5) ~= "table" then
 		error(`Unexpected type for stringFormat {typeof(p5)}`)
 	end
@@ -224,7 +206,7 @@ local function generateFormatStringPropValue(p5, p6, p7, p8, p9)
 		end
 	end
 	return signalsModule.createComputed(function(p10)
-		-- upvalues: str (write), t (ref), t_1 (ref), applyFormatArgFormatter (copy), p7 (ref), frozen (copy), fFlagSduiFormatStringPercentSafeGsubModule (copy), p9 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write)
+		-- upvalues: str (write), t (ref), t_1 (ref), applyFormatArgFormatter (copy), p7 (ref), frozen (copy), fFlagSduiFormatStringPercentSafeGsubModule (copy), p9 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), currentComponentType (ref), currentParserName (ref)
 		local var5 = str
 		
 		for i, v in t do
@@ -280,8 +262,8 @@ local function generateFormatStringPropValue(p5, p6, p7, p8, p9)
 			value = var5,
 			message = `Parser in formatString for str {str}`,
 			name = p7.debugName,
-			componentType = if fFlagSduiImprovedErrorDimensions then currentComponentType else nil,
-			parserName = if fFlagSduiImprovedErrorDimensions then currentParserName else nil
+			componentType = currentComponentType,
+			parserName = currentParserName
 		}, p7.appPage)
 		
 		return frozen
@@ -376,7 +358,7 @@ if fFlagSduiDismissPromptPageScope then
 	end
 end
 local function evaluateCondition(p11, p12, p13, p14, p15)
-	-- upvalues: splitDottedPathModule (ref), resolveBindingPathValue (ref), dataStatus (ref), validateNumbers (ref), isSame (ref), fFlagSduiIsEmptyConditions (ref), fFlagSduiDismissPromptPageScope (ref), var10 (write), evaluateCondition (ref)
+	-- upvalues: splitDottedPathModule (ref), resolveBindingPathValue (ref), dataStatus (ref), validateNumbers (ref), isSame (ref), fFlagSduiDismissPromptPageScope (ref), var10 (write), evaluateCondition (ref)
 	if p12 == nil then
 		return true
 	end
@@ -493,7 +475,7 @@ local function evaluateCondition(p11, p12, p13, p14, p15)
 			return nil, var30
 		end
 		return var29 ~= nil
-	elseif fFlagSduiIsEmptyConditions and type == "is_empty" then
+	elseif type == "is_empty" then
 		local var33, var34
 		local var35 = splitDottedPathModule(value.field)
 		local ok, status, var36 = pcall(function()
@@ -512,7 +494,7 @@ local function evaluateCondition(p11, p12, p13, p14, p15)
 			return nil, var34
 		end
 		return var33 == nil or (if type(var33) == "string" then var33 == "" else type(var33) == "table" and next(var33) == nil)
-	elseif fFlagSduiIsEmptyConditions and type == "is_not_empty" then
+	elseif type == "is_not_empty" then
 		local var37, var38
 		local var39 = splitDottedPathModule(value.field)
 		local ok, status, var40 = pcall(function()
@@ -545,7 +527,7 @@ local function evaluateCondition(p11, p12, p13, p14, p15)
 		return var10(value, getFieldObject)
 	elseif type == "and_condition" then
 		for i, v in value.conditions do
-			var11, var95 = evaluateCondition(p11, v, p13, p14, p15)
+			var11, var99 = evaluateCondition(p11, v, p13, p14, p15)
 			
 			if not var12 or var12 == dataStatus.Ready then
 				if not var11 then
@@ -559,7 +541,7 @@ local function evaluateCondition(p11, p12, p13, p14, p15)
 		return nil
 	end
 	for i, v in value.conditions do
-		var11, var95 = evaluateCondition(p11, v, p13, p14, p15)
+		var11, var99 = evaluateCondition(p11, v, p13, p14, p15)
 		
 		if not var12 or var12 == dataStatus.Ready then
 			if var11 or var11 == nil then
@@ -610,18 +592,13 @@ return {
 	generateTokenBindingPropValue = generateTokenBindingPropValue,
 	generateFormatStringPropValue = generateFormatStringPropValue,
 	generateConditionalPropValue = function(p25, p26, p27, p28, p29, p30, p31, p32)
-		-- upvalues: fFlagSduiImprovedErrorDimensions (ref), signalsModule (ref), selectConditionalOption (ref), propResultCategory (ref), dataStatus (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), frozen (ref), tutilsModule (ref)
-		local currentComponentType = nil
-		local currentParserName = nil
-		
-		if fFlagSduiImprovedErrorDimensions then
-			currentComponentType = p27.currentComponentType
-			currentParserName = p27.currentParserName
-		end
+		-- upvalues: signalsModule (ref), selectConditionalOption (ref), propResultCategory (ref), dataStatus (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), frozen (ref), tutilsModule (ref)
+		local currentComponentType = p27.currentComponentType
+		local currentParserName = p27.currentParserName
 		local options = p25.options
 		
 		return signalsModule.createComputed(function(p33)
-			-- upvalues: selectConditionalOption (copy), options (ref), p26 (ref), p27 (ref), p29 (ref), p30 (ref), p28 (ref), p31 (ref), propResultCategory (copy), dataStatus (copy), p32 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy)
+			-- upvalues: selectConditionalOption (copy), options (ref), p26 (ref), p27 (ref), p29 (ref), p30 (ref), p28 (ref), p31 (ref), propResultCategory (copy), dataStatus (copy), p32 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy), currentComponentType (ref), currentParserName (ref), frozen (copy)
 			local ok, status, var46 = pcall(function()
 				-- upvalues: selectConditionalOption (copy), p33 (ref), options (copy), p26 (copy), p27 (copy), p29 (copy), p30 (copy), p28 (copy), p31 (copy), propResultCategory (copy), dataStatus (copy)
 				local var47, var48 = selectConditionalOption(p33, options, p26, p27, p29)
@@ -652,26 +629,21 @@ return {
 			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToEvaluateConditionalProp, {
 				message = sduiParseHelpersModule.stringifyValue(status),
 				name = p27.debugName,
-				componentType = if fFlagSduiImprovedErrorDimensions then currentComponentType else nil,
-				parserName = if fFlagSduiImprovedErrorDimensions then currentParserName else nil
+				componentType = currentComponentType,
+				parserName = currentParserName
 			}, p27.appPage)
 			
 			return frozen
 		end, tutilsModule.shallowEqual)
 	end,
 	generateTablePropSignalValue = function(value, p25, p26, p27, p28, p29, p30)
-		-- upvalues: fFlagSduiImprovedErrorDimensions (ref), signalsModule (ref), resolveTablePropValue (ref), sduiParseHelpersModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), frozen (ref), tutilsModule (ref)
-		local currentComponentType = nil
-		local currentParserName = nil
-		
-		if fFlagSduiImprovedErrorDimensions then
-			currentComponentType = p26.currentComponentType
-			currentParserName = p26.currentParserName
-		end
+		-- upvalues: signalsModule (ref), resolveTablePropValue (ref), sduiParseHelpersModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), frozen (ref), tutilsModule (ref)
+		local currentComponentType = p26.currentComponentType
+		local currentParserName = p26.currentParserName
 		local var46, var47, var48 = p29(value, p25, p28, p26, p27)
 		
 		return signalsModule.createComputed(function(p31)
-			-- upvalues: resolveTablePropValue (copy), var46 (ref), var47 (ref), var48 (ref), p25 (ref), p26 (ref), p27 (ref), p28 (ref), p29 (ref), p30 (ref), sduiParseHelpersModule (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy)
+			-- upvalues: resolveTablePropValue (copy), var46 (ref), var47 (ref), var48 (ref), p25 (ref), p26 (ref), p27 (ref), p28 (ref), p29 (ref), p30 (ref), sduiParseHelpersModule (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), currentComponentType (ref), currentParserName (ref), frozen (copy)
 			local ok, status, var49 = pcall(function()
 				-- upvalues: resolveTablePropValue (copy), p31 (ref), var46 (copy), var47 (copy), var48 (copy), p25 (copy), p26 (copy), p27 (copy), p28 (copy), p29 (copy)
 				local var50, var51 = resolveTablePropValue(p31, var46, var47, var48, p25, p26, p27, p28, p29)
@@ -683,8 +655,8 @@ return {
 				sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, {
 					message = sduiParseHelpersModule.stringifyValue(status),
 					name = p26.debugName,
-					componentType = if fFlagSduiImprovedErrorDimensions then currentComponentType else nil,
-					parserName = if fFlagSduiImprovedErrorDimensions then currentParserName else nil
+					componentType = currentComponentType,
+					parserName = currentParserName
 				}, p26.appPage)
 				
 				return frozen
@@ -699,8 +671,8 @@ return {
 						value = sduiParseHelpersModule.stringifyValue(status),
 						message = `Failed to apply propParser to table prop {sduiParseHelpersModule.stringifyValue(status_1)}`,
 						name = p26.debugName,
-						componentType = if fFlagSduiImprovedErrorDimensions then currentComponentType else nil,
-						parserName = if fFlagSduiImprovedErrorDimensions then currentParserName else nil
+						componentType = currentComponentType,
+						parserName = currentParserName
 					}, p26.appPage)
 					
 					return frozen
@@ -750,7 +722,7 @@ return {
 	isComponentVisible = function(p32, p33)
 		return p32.isComponentFilteredSignal == nil or p32.isComponentFilteredSignal(p33).data ~= true
 	end,
-	resolveTemplate = if fFlagSduiInlineNestedComponentSchema then function(p32, p33, p34)
+	resolveTemplate = function(p32, p33, p34)
 		if p33 ~= nil then
 			return p33
 		elseif p32 == nil or p32 == "" then
@@ -762,31 +734,21 @@ return {
 			error(`Could not find template for roblox_component {p32}`)
 		end
 		return templateForRobloxComponent
-	end else function(p35, p36)
-		if p35 == nil then
-			error("Missing roblox_component")
-		end
-		local templateForRobloxComponent = p36.getTemplateForRobloxComponent(p35)
-		
-		if templateForRobloxComponent == nil then
-			error(`Could not find template for roblox_component {p35}`)
-		end
-		return templateForRobloxComponent
 	end,
-	resolveTemplateFromData = if fFlagSduiInlineNestedComponentSchema then function(p37, p38)
-		local inlineComponent = p37.inline_component
-		local robloxComponent = p37.roblox_component
+	resolveTemplateFromData = function(p35, p36)
+		local inlineComponent = p35.inline_component
+		local robloxComponent = p35.roblox_component
 		
 		if inlineComponent ~= nil then
 			return inlineComponent
 		elseif robloxComponent == nil or robloxComponent == "" then
 			error("Missing roblox_component")
 		end
-		local templateForRobloxComponent = p38.getTemplateForRobloxComponent(robloxComponent)
+		local templateForRobloxComponent = p36.getTemplateForRobloxComponent(robloxComponent)
 		
 		if templateForRobloxComponent == nil then
 			error(`Could not find template for roblox_component {robloxComponent}`)
 		end
 		return templateForRobloxComponent
-	end else nil
+	end
 }

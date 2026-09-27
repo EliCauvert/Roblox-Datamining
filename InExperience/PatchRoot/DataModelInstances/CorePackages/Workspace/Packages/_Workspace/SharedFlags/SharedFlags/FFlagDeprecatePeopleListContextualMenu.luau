@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("DeprecatePeopleListContextualMenu", false) and (require(script.Parent.FFlagEnableMobileGameJoinCard) and require(script.Parent.FFlagEnableDesktopGameJoinCard))
+﻿return game:DefineFastFlag("DeprecatePeopleListContextualMenu", false) and require(script.Parent.FFlagEnableMobileGameJoinCard)

@@ -5,6 +5,7 @@ local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePo
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagMomentsAutoplayAmpPolicy = sharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
 local fFlagGuacMomentsFeatureList = sharedFlagsModule.FFlagGuacMomentsFeatureList
+local fFlagMomentsEngagementMetricsFeatureModule = require(momentsCommon.Flags.FFlagMomentsEngagementMetricsFeature)
 local getFFlagMomentsNonInfiniteScrollModule = require(momentsCommon.Flags.GetFFlagMomentsNonInfiniteScroll)
 local getFIntMomentsNonInfiniteScrollLimitModule = require(momentsCommon.Flags.GetFIntMomentsNonInfiniteScrollLimit)
 local createSignal = signalsModule.createSignal
@@ -22,7 +23,7 @@ local function readInfiniteScrollPolicy()
 end
 
 return function(p1)
-	-- upvalues: getFFlagMomentsNonInfiniteScrollModule (ref), getFIntMomentsNonInfiniteScrollLimitModule (ref), fFlagGuacMomentsFeatureList (ref), createComputed (ref), getAppPolicyStore (ref), fFlagMomentsAutoplayAmpPolicy (ref), readInfiniteScrollPolicy (ref), createSignal (ref)
+	-- upvalues: getFFlagMomentsNonInfiniteScrollModule (ref), getFIntMomentsNonInfiniteScrollLimitModule (ref), fFlagGuacMomentsFeatureList (ref), createComputed (ref), getAppPolicyStore (ref), fFlagMomentsAutoplayAmpPolicy (ref), fFlagMomentsEngagementMetricsFeatureModule (ref), readInfiniteScrollPolicy (ref), createSignal (ref)
 	local var1
 	local var2 = getFFlagMomentsNonInfiniteScrollModule()
 	local maxValue = math.max(1, getFIntMomentsNonInfiniteScrollLimitModule())
@@ -38,6 +39,10 @@ return function(p1)
 		-- upvalues: getAppPolicyStore (copy)
 		return table.find(getAppPolicyStore(false).getAppPolicy(p2).getMomentsFeatureList(), "auto_play") ~= nil
 	end) else nil
+	local var6 = if fFlagMomentsEngagementMetricsFeatureModule and fFlagGuacMomentsFeatureList then createComputed(function(p2)
+		-- upvalues: getAppPolicyStore (copy)
+		return table.find(getAppPolicyStore(false).getAppPolicy(p2).getMomentsFeatureList(), "engagement_metrics") ~= nil
+	end) else nil
 	local _ = nil
 	local _ = nil
 	
@@ -52,28 +57,29 @@ return function(p1)
 			return next(momentsFeatureList) == nil or table.find(momentsFeatureList, "infinite_scroll") ~= nil
 		end)
 		
-		local var6 = function(_) end
+		local var7 = function(_) end
 	else
-		local var7, var8 = createSignal(if var2 then (p1 or readInfiniteScrollPolicy)() else true)
+		local var8, var9 = createSignal(if var2 then (p1 or readInfiniteScrollPolicy)() else true)
 		var1 = createComputed(function(p2)
-			-- upvalues: var2 (ref), var7 (ref)
-			return if var2 then var7(p2) else true
+			-- upvalues: var2 (ref), var8 (ref)
+			return if var2 then var8(p2) else true
 		end)
 		
-		local var6 = function(p2)
-			-- upvalues: var8 (ref)
-			var8(p2)
+		local var7 = function(p2)
+			-- upvalues: var9 (ref)
+			var9(p2)
 		end
 	end
 	return {
 		getHasMomentsAccess = var3,
 		getIsInfluencerContentEnabled = var4,
 		getIsAutoPlayEnabled = var5,
+		getIsEngagementMetricsEnabled = var6,
 		getIsInfiniteScrollEnabled = var1,
 		getMaxMomentsBeforeEndState = createComputed(function(_)
 			-- upvalues: maxValue (ref)
 			return maxValue
 		end),
-		setInfiniteScrollAllowedByPolicy = var6
+		setInfiniteScrollAllowedByPolicy = var7
 	}
 end

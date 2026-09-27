@@ -47,7 +47,9 @@ return {
 		Report = 4,
 		Comment = 5,
 		Play = 6,
-		Purchase = 7
+		Purchase = 7,
+		CommentDelete = 8,
+		CommentSectionOpen = 9
 	},
 	HowToCaptureModalSteps = {
 		image1 = "rbxassetid://91055014485206",

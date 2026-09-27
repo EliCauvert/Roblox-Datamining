@@ -148,22 +148,29 @@ function t:updateAllElements(p3, p4)
 			setPanelParent(p6, workspace)
 			
 			return
-		elseif self.uiGroupState ~= UIGroupStateModule.GuiToggleAnimation or not var2 then
-			if fFlagEnableSpatialUIBottomBarFixPlaceFilterModule and var2 then
-				setPanelEnabledWithoutReparent(p6, false)
+		elseif var2 and (self.uiGroupState == UIGroupStateModule.GuiToggleAnimation or p6.keepVisibleWhenTopBarHidden) then
+			if not self.currentBottomBarAnimatable then
+				self.currentBottomBarAnimatable = panelManagedAnimatableModule.create(p6.panelObject, self.bottomBarVisibility, p6.keepVisibleWhenTopBarHidden and self.uiGroupState ~= UIGroupStateModule.GuiToggleAnimation)
+				
+				if self.currentBottomBarAnimatable then
+					self.currentBottomBarAnimatable:hideAndBlockAnimationUntilLookBackAgain()
+				end
+			end
+			if not p6.keepVisibleWhenTopBarHidden then return end
+			if fFlagEnableSpatialUIBottomBarFixPlaceFilterModule then
+				setPanelEnabledWithoutReparent(p6, true)
 				
 				return
 			end
-			setPanelParent(p6, nil)
-		elseif not self.currentBottomBarAnimatable then
-			self.currentBottomBarAnimatable = panelManagedAnimatableModule.create(p6.panelObject, self.bottomBarVisibility)
+			setPanelParent(p6, workspace)
 			
-			if self.currentBottomBarAnimatable then
-				self.currentBottomBarAnimatable:hideAndBlockAnimationUntilLookBackAgain()
-				
-				return
-			end
+			return
+		elseif fFlagEnableSpatialUIBottomBarFixPlaceFilterModule and var2 then
+			setPanelEnabledWithoutReparent(p6, false)
+			
+			return
 		end
+		setPanelParent(p6, nil)
 	end)
 end
 

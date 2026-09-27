@@ -1,4 +1,6 @@
-﻿local var1 = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AvatarExperienceCommon).Enums.CatalogCategories.Recommended:rawValue()
+﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local _ = require(parent.AvatarExperienceCommon)
+local var1 = require(parent.AvatarExperienceModel).Enums.CatalogCategories.Recommended:rawValue()
 
 return function(p1, p2, p3)
 	-- upvalues: var1 (ref)

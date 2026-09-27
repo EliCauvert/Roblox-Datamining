@@ -11,7 +11,6 @@ local channelTabDisplayLabel = expChatSharedModule.ChannelTabDisplayLabel
 local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local interactable = UIBloxModule.Core.Control.Interactable
 local useSelectionCursor = UIBloxModule.App.SelectionImage.useSelectionCursor
-local fFlagExpChatFocusChannelBarSupportModule = require(expChat.Flags.FFlagExpChatFocusChannelBarSupport)
 local fFlagExpChatChannelTabSizingUpdateModule = require(expChat.Flags.FFlagExpChatChannelTabSizingUpdate)
 local fFlagExpChatEnableTabsImpressionAnalyticsModule = require(expChat.Flags.FFlagExpChatEnableTabsImpressionAnalytics)
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
@@ -21,6 +20,7 @@ local localizationModule = require(expChat.Localization)
 local getOtherDisplayNameInWhisperChannelModule = require(expChat.getOtherDisplayNameInWhisperChannel)
 local getUnreadIndicatorLayoutModule = require(script.Parent.getUnreadIndicatorLayout)
 local useTabImpressionModule = require(script.Parent.useTabImpression)
+local fFlagExpChatGlobalTabDefaultModule = require(expChat.Flags.FFlagExpChatGlobalTabDefault)
 local unreachable = expChatSharedModule.TabTypes.unreachable
 local var2 = if fFlagExpChatChannelTabSizingUpdateModule then 12 else 20
 local color = Color3.fromRGB(255, 255, 255)
@@ -52,7 +52,7 @@ local function createUnreadDot(vectorA, vectorB)
 end
 
 return function(p1)
-	-- upvalues: dictionary (ref), t (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), useTabImpressionModule (ref), localizationModule (ref), fFlagExpChatUseSharedChannelTabDisplayLabel (ref), channelTabDisplayLabel (ref), fFlagExpChatEnableFriendsTab (ref), unreachable (ref), playersService (ref), getOtherDisplayNameInWhisperChannelModule (ref), reactModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatChannelTabSizingUpdateModule (ref), var1 (ref), getUnreadIndicatorLayoutModule (ref), var2 (ref), interactable (ref), createUnreadDot (ref), color (ref), configModule (ref)
+	-- upvalues: dictionary (ref), t (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), useTabImpressionModule (ref), fFlagExpChatGlobalTabDefaultModule (ref), localizationModule (ref), fFlagExpChatUseSharedChannelTabDisplayLabel (ref), channelTabDisplayLabel (ref), fFlagExpChatEnableFriendsTab (ref), unreachable (ref), playersService (ref), getOtherDisplayNameInWhisperChannelModule (ref), reactModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatChannelTabSizingUpdateModule (ref), var1 (ref), getUnreadIndicatorLayoutModule (ref), var2 (ref), interactable (ref), createUnreadDot (ref), color (ref), configModule (ref)
 	local var3 = dictionary.join(t, p1)
 	
 	if fFlagExpChatEnableTabsImpressionAnalyticsModule then
@@ -63,7 +63,8 @@ return function(p1)
 			index = var3.tabIndex,
 			inOverflow = var3.isTabCollapsed,
 			visible = var3.isTabVisibleToUser,
-			hasUnreadMessages = var3.hasUnreadMessages
+			hasUnreadMessages = var3.hasUnreadMessages,
+			isSelected = if fFlagExpChatGlobalTabDefaultModule then var3.isTabSelected else nil
 		})
 	end
 	local var4 = localizationModule.useLocalization(if fFlagExpChatUseSharedChannelTabDisplayLabel then channelTabDisplayLabel.LocalizationKeys else {
@@ -107,7 +108,7 @@ return function(p1)
 		unreachable(tabType)
 	end
 	local var6, var7 = reactModule.useState(var3.channelTabsSettings.BackgroundColor3)
-	local var8 = if fFlagExpChatFocusChannelBarSupportModule then useSelectionCursor(cursorKind.RoundedSlot) else nil
+	local var8 = useSelectionCursor(cursorKind.RoundedSlot)
 	local var9 = fFlagExpChatChannelTabSizingUpdateModule and (var3.hasUnreadMessages and not var3.isTabCollapsed)
 	local var10 = nil
 	local var11 = nil

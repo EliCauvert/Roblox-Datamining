@@ -11,10 +11,10 @@ local offerDialogStateModule = require(inExperienceShop.Components.OfferDialogs.
 local useCloseOnCoreMenuModule = require(inExperienceShop.Hooks.useCloseOnCoreMenu)
 local useOfferModalTextModule = require(inExperienceShop.Hooks.useOfferModalText)
 local fFlagShopCloseOfferDialogOnCoreMenuModule = require(inExperienceShop.Flags.FFlagShopCloseOfferDialogOnCoreMenu)
-local fFlagShowLargerOfferBannerOnDesktopModule = require(inExperienceShop.Flags.FFlagShowLargerOfferBannerOnDesktop)
+local fFlagShowLargerOfferBannerOnDesktop2Module = require(inExperienceShop.Flags.FFlagShowLargerOfferBannerOnDesktop2)
 
 return function(p1, p2)
-	-- upvalues: useOffersForKey (ref), reactModule (ref), selectActiveOffer (ref), useRemainingTimeText (ref), fFlagEnableUserOffers (ref), useLocalization (ref), fFlagShowLargerOfferBannerOnDesktopModule (ref), useOfferModalTextModule (ref), offerDialogStateModule (ref), fFlagShopCloseOfferDialogOnCoreMenuModule (ref), useCloseOnCoreMenuModule (ref)
+	-- upvalues: useOffersForKey (ref), reactModule (ref), selectActiveOffer (ref), useRemainingTimeText (ref), fFlagEnableUserOffers (ref), useLocalization (ref), fFlagShowLargerOfferBannerOnDesktop2Module (ref), useOfferModalTextModule (ref), offerDialogStateModule (ref), fFlagShopCloseOfferDialogOnCoreMenuModule (ref), useCloseOnCoreMenuModule (ref)
 	local var1 = useOffersForKey(p1)
 	local var2 = reactModule.useMemo(function()
 		-- upvalues: selectActiveOffer (copy), var1 (ref)
@@ -39,7 +39,7 @@ return function(p1, p2)
 	end
 	local var8 = if var3 ~= nil then nil else var3.modal
 	local var9 = if var2 ~= nil then nil else var2.expirationTimeInUTC
-	local var10 = if fFlagShowLargerOfferBannerOnDesktopModule then useOfferModalTextModule(if var8 then var8.body else "", if var8 then var4 else nil) else {
+	local var10 = if fFlagShowLargerOfferBannerOnDesktop2Module then useOfferModalTextModule(if var8 then var8.body else "", if var8 then var4 else nil) else {
 		viewTermsText = "",
 		bodyText = if var8 then var8.body else ""
 	}

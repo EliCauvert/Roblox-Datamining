@@ -13,10 +13,12 @@ local itemCardBadge = itemCardComponents.ItemCardBadge
 local responsiveModule = require(parent.Responsive)
 local useLastInput = responsiveModule.useLastInput
 local useIsSpatial = responsiveModule.useIsSpatial
+local useSelectedOverlayButtonModule = require(script.Parent.useSelectedOverlayButton)
 local fFlagAXInventoryDurablesSupport = avatarExperienceFlagsModule.FFlagAXInventoryDurablesSupport
 local fFlagAXFixBadgeStatusConfigOptions = avatarExperienceFlagsModule.FFlagAXFixBadgeStatusConfigOptions
 local fFlagAXShowFaeUpsell = avatarExperienceFlagsModule.FFlagAXShowFaeUpsell
 local fFlagAXSelectedBorderWrapsBackground = avatarExperienceFlagsModule.FFlagAXSelectedBorderWrapsBackground
+local fFlagAXMarketplaceItemCardIndicatorStack = avatarExperienceFlagsModule.FFlagAXMarketplaceItemCardIndicatorStack
 
 local var1 = function(p1)
 	local list = { { type = "icon", icon = p1.icon } }
@@ -28,10 +30,24 @@ local var1 = function(p1)
 end
 
 return function(p1)
-	-- upvalues: useTokens (ref), useLastInput (ref), useIsSpatial (ref), responsiveModule (ref), reactModule (ref), fFlagAXSelectedBorderWrapsBackground (ref), view (ref), itemCardBadge (ref), fFlagAXFixBadgeStatusConfigOptions (ref), fFlagAXShowFaeUpsell (ref), var1 (ref), fFlagAXInventoryDurablesSupport (ref), itemCardIcon (ref), button (ref), buttonType (ref)
-	local var2
-	local var3 = useTokens()
-	local var4 = useLastInput() == responsiveModule.Input.Directional and not useIsSpatial()
+	-- upvalues: useTokens (ref), fFlagAXMarketplaceItemCardIndicatorStack (ref), useSelectedOverlayButtonModule (ref), useLastInput (ref), useIsSpatial (ref), responsiveModule (ref), reactModule (ref), fFlagAXSelectedBorderWrapsBackground (ref), view (ref), itemCardBadge (ref), fFlagAXFixBadgeStatusConfigOptions (ref), fFlagAXShowFaeUpsell (ref), var1 (ref), fFlagAXInventoryDurablesSupport (ref), itemCardIcon (ref), button (ref), buttonType (ref)
+	local isVisible, bottomOffset, height
+	local var2 = useTokens()
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	
+	if fFlagAXMarketplaceItemCardIndicatorStack then
+		local var3 = useSelectedOverlayButtonModule(p1.buttonText ~= nil)
+		isVisible = var3.isVisible
+		bottomOffset = var3.bottomOffset
+		height = var3.height
+	else
+		isVisible = not (useLastInput() == responsiveModule.Input.Directional and not useIsSpatial())
+		bottomOffset = var2.Gap.XXSmall
+		height = var2.Size.Size_700
+	end
+	local var4
 	local createElement = reactModule.createElement
 	local var5 = "Frame"
 	local t = {
@@ -41,19 +57,19 @@ return function(p1)
 		Size = UDim2.fromScale(1, 1)
 	}
 	local t_1 = {
-		CatalogItemCardSelectedOverlayCornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var3.Radius.Medium) }),
+		CatalogItemCardSelectedOverlayCornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var2.Radius.Medium) }),
 		CatalogItemCardSelectedOverlayStroke = if fFlagAXSelectedBorderWrapsBackground and p1.suppressBorder then nil else reactModule.createElement("UIStroke", {
-			Color = var3.Color.Content.Emphasis.Color3,
-			Transparency = var3.Color.Content.Emphasis.Transparency,
-			Thickness = var3.Stroke.Standard,
+			Color = var2.Color.Content.Emphasis.Color3,
+			Transparency = var2.Color.Content.Emphasis.Transparency,
+			Thickness = var2.Stroke.Standard,
 			LineJoinMode = Enum.LineJoinMode.Round,
 			[reactModule.Tag] = "data-testid=selection-stroke"
 		})
 	}
 	
 	if p1.badge then
-		var2 = reactModule.createElement
-		var2 = var2(view, {
+		var4 = reactModule.createElement
+		var4 = var4(view, {
 			tag = "padding-top-small padding-left-small",
 			Size = UDim2.fromScale(0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY
@@ -67,9 +83,9 @@ return function(p1)
 			})
 		})
 	else
-		var2 = nil
+		var4 = nil
 	end
-	t_1.CatalogItemCardSelectedOverlayBadge = var2
+	t_1.CatalogItemCardSelectedOverlayBadge = var4
 	t_1.CatalogItemCardSelectedOverlayItemStatusIcon = if fFlagAXInventoryDurablesSupport and p1.itemStatusIcon and not p1.badge then reactModule.createElement(view, {
 		tag = "padding-top-small padding-left-small",
 		Size = UDim2.fromScale(0, 0),
@@ -77,16 +93,16 @@ return function(p1)
 	}, {
 		Icon = reactModule.createElement(itemCardIcon, { icon = p1.itemStatusIcon })
 	}) else nil
-	t_1.CatalogItemCardSelectedOverlayButton = if var4 or not p1.buttonText then nil else reactModule.createElement(button, {
+	t_1.CatalogItemCardSelectedOverlayButton = if isVisible and p1.buttonText then reactModule.createElement(button, {
 		isDisabled = false,
 		fontStyle = "CaptionHeader",
 		text = p1.buttonText,
 		buttonType = buttonType.PrimarySystem,
 		onActivated = p1.onActivated,
 		anchorPoint = Vector2.new(0.5, 1),
-		position = UDim2.new(0.5, 0, 1, -var3.Gap.XXSmall),
-		size = UDim2.new(1, -(var3.Gap.XXSmall * 2), 0, var3.Size.Size_700)
-	})
+		position = UDim2.new(0.5, 0, 1, -bottomOffset),
+		size = UDim2.new(1, -(var2.Gap.XXSmall * 2), 0, height)
+	}) else nil
 	
 	return createElement(var5, t, t_1)
 end

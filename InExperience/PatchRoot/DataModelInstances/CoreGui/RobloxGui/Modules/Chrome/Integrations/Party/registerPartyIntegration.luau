@@ -13,6 +13,8 @@ local mouseIconOverrideService = require(corePackagesService.Workspace.Packages.
 local reactModule = require(corePackagesService.Packages.React)
 local responsiveModule = require(corePackagesService.Workspace.Packages.Responsive)
 local symbol = require(corePackagesService.Workspace.Packages.AppCommonLib).Symbol
+local chatEntryPointNames = require(corePackagesService.Workspace.Packages.SocialCommon).Enums.ChatEntryPointNames
+local fFlagAppChatDistinctUnibarEntryPoint = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAppChatDistinctUnibarEntryPoint
 local sideSheetPlacement = chromeModule.Enums.SideSheetPlacement
 local var1 = mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function()
 	-- upvalues: inExperienceAppChatModalModule (ref)
@@ -20,20 +22,25 @@ local var1 = mappedSignal.new(inExperienceAppChatModalModule.default.visibilityS
 end)
 
 return function(p1, p2)
-	-- upvalues: serviceModule (ref), sideSheetPlacement (ref), inExperienceAppChatModalModule (ref), chromeIntegrationUtilsModule (ref), responsiveModule (ref), focusUtils (ref), localStoreModule (ref), getFStringConnectTooltipLocalStorageKeyModule (ref), var1 (ref), reactModule (ref), partyIconModule (ref), symbol (ref), mouseIconOverrideService (ref)
+	-- upvalues: serviceModule (ref), sideSheetPlacement (ref), inExperienceAppChatModalModule (ref), chromeIntegrationUtilsModule (ref), responsiveModule (ref), focusUtils (ref), fFlagAppChatDistinctUnibarEntryPoint (ref), chatEntryPointNames (ref), localStoreModule (ref), getFStringConnectTooltipLocalStorageKeyModule (ref), var1 (ref), reactModule (ref), partyIconModule (ref), symbol (ref), mouseIconOverrideService (ref)
 	local var2 = serviceModule:register({
 		label = "Feature.Squads.Label.Party",
 		id = p1,
 		sideSheetPlacement = sideSheetPlacement.None,
 		activated = function()
-			-- upvalues: inExperienceAppChatModalModule (copy), chromeIntegrationUtilsModule (copy), responsiveModule (copy), focusUtils (copy), localStoreModule (copy), getFStringConnectTooltipLocalStorageKeyModule (copy)
+			-- upvalues: inExperienceAppChatModalModule (copy), chromeIntegrationUtilsModule (copy), responsiveModule (copy), focusUtils (copy), fFlagAppChatDistinctUnibarEntryPoint (copy), chatEntryPointNames (copy), localStoreModule (copy), getFStringConnectTooltipLocalStorageKeyModule (copy)
 			if inExperienceAppChatModalModule:getVisible() then
 				inExperienceAppChatModalModule.default:setVisible(false)
 			else
 				chromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function()
-					-- upvalues: responsiveModule (copy), focusUtils (copy), inExperienceAppChatModalModule (copy)
+					-- upvalues: responsiveModule (copy), focusUtils (copy), fFlagAppChatDistinctUnibarEntryPoint (copy), inExperienceAppChatModalModule (copy), chatEntryPointNames (copy)
 					if responsiveModule.GetInputModeStore(false).getLastInputType(false) == responsiveModule.Input.Directional then
 						focusUtils.FocusOffChrome()
+					end
+					if fFlagAppChatDistinctUnibarEntryPoint then
+						inExperienceAppChatModalModule.default:setVisible(true, chatEntryPointNames.ChromeUnibar)
+						
+						return
 					end
 					inExperienceAppChatModalModule.default:setVisible(true)
 				end)

@@ -1,5 +1,8 @@
-﻿local t = {
-	[require(script:FindFirstAncestor("AccountUpgrade").AccountUpgradeFlow).Pioneer] = require(script.Parent.getPioneerAccountUpgradeAvailability)
+﻿local accountUpgradeFlowModule = require(script:FindFirstAncestor("AccountUpgrade").AccountUpgradeFlow)
+local getPioneerAccountUpgradeAvailabilityModule = require(script.Parent.getPioneerAccountUpgradeAvailability)
+local t = {
+	[accountUpgradeFlowModule.Pioneer] = getPioneerAccountUpgradeAvailabilityModule,
+	[accountUpgradeFlowModule.PioneerU13] = getPioneerAccountUpgradeAvailabilityModule
 }
 
 return function(p1)

@@ -7,6 +7,7 @@ local t = {
 		upgradeType = "Pioneer",
 		titleTextKey = "Authentication.SignUp.Header.SetUpYourRobloxAccount",
 		subtitleTextKey = "Authentication.SignUp.Subtitle.YourProgressCarriesOver",
+		submitTextKey = "Authentication.Login.Action.Save",
 		requiredFields = {
 			accountUpgradeFieldModule.Birthday,
 			accountUpgradeFieldModule.Username,
@@ -22,9 +23,22 @@ local t = {
 		upgradeType = "Pioneer",
 		titleTextKey = "Authentication.SignUp.Header.SetUpYourRobloxAccount",
 		subtitleTextKey = "Authentication.SignUp.Subtitle.YourProgressCarriesOver",
+		submitTextKey = "Authentication.Login.Action.Save",
 		requiredFields = {
 			accountUpgradeFieldModule.Username,
 			accountUpgradeFieldModule.Password
+		},
+		optionalFields = { accountUpgradeFieldModule.Gender }
+	},
+	[accountUpgradeFlowModule.OAuth] = {
+		canDismiss = false,
+		upgradeType = "OAuth",
+		titleTextKey = "Authentication.SignUp.Header.OneLastThing",
+		subtitleTextKey = "Authentication.SignUp.Subtitle.AddYourBirthday",
+		submitTextKey = "Authentication.SignUp.Action.StartPlay",
+		requiredFields = {
+			accountUpgradeFieldModule.Birthday,
+			accountUpgradeFieldModule.Username
 		},
 		optionalFields = { accountUpgradeFieldModule.Gender }
 	}

@@ -3,7 +3,6 @@ local constantsModule = require(parent.Constants)
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local getFFlagUGCValidateCurveAnimAttributesModule = require(parent.flags.getFFlagUGCValidateCurveAnimAttributes)
 local getFFlagUGCValidateMakeupCategoryParityModule = require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)
 local getFFlagUGCValidateR15FixedAttributesModule = require(parent.flags.getFFlagUGCValidateR15FixedAttributes)
@@ -24,7 +23,6 @@ local t_1 = {
 if getFFlagUGCValidateCurveAnimAttributesModule() then
 	table.insert(t.requiredData, validationEnumsModule.SharedDataMember.curveAnimations)
 end
-t.fflag = getFFlagUGCValidateMigrateSchemaPropertiesModule
 t.expectedFailures = {}
 
 local function hasOnlyAllowedAttribute(p1, p2, p3)

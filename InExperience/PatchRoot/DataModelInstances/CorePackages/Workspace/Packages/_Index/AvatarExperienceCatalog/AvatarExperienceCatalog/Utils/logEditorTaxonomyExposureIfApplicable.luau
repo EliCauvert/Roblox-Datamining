@@ -10,7 +10,7 @@ local fStringAXTaxonomyM20ExperimentLayerName = avatarExperienceFlagsModule.FStr
 local fStringAXTaxonomyM21ExperimentLayerName = avatarExperienceFlagsModule.FStringAXTaxonomyM21ExperimentLayerName
 local IXPServiceWrapper = require(parent.IxpServiceWrapper).IXPServiceWrapper
 local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local catalogCategories = avatarExperienceCommonModule.Enums.CatalogCategories
+local catalogCategories = require(parent.AvatarExperienceModel).Enums.CatalogCategories
 local catalogSDUICategoryIds = avatarExperienceCommonModule.Enums.CatalogSDUICategoryIds
 local catalogCategoryKeys = avatarExperienceCommonModule.Enums.CatalogCategoryKeys
 

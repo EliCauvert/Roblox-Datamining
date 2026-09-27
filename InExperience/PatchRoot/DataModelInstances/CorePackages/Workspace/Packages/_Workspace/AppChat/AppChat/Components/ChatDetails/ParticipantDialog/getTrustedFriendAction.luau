@@ -5,7 +5,6 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local sources = require(parent.SocialLuaAnalytics).Analytics.Enums.Sources
 local getProfileTrustedFriendActionsModule = require(appChat.Http.getProfileTrustedFriendActions)
 local fFlagProfilePlatformAddTC = sharedFlagsModule.FFlagProfilePlatformAddTC
-local pendingIncomingTrustedConnection = game:DefineFastFlag("PendingIncomingTrustedConnection", false)
 
 local function _(p1, p2, p3, p4)
 	return {
@@ -17,7 +16,7 @@ local function _(p1, p2, p3, p4)
 end
 
 local function normalizeTrustedFriendAction(p1)
-	-- upvalues: fFlagProfilePlatformAddTC (ref), sources (ref), pendingIncomingTrustedConnection (ref)
+	-- upvalues: fFlagProfilePlatformAddTC (ref), sources (ref)
 	for i, v in p1 do
 		if v ~= "RemoveTrustedConnection" then
 			if v == "AddTrustedConnection" then
@@ -48,7 +47,7 @@ local function normalizeTrustedFriendAction(p1)
 							rawActionType = v
 						}
 					end
-				elseif v == "PendingIncomingTrustedConnection" and pendingIncomingTrustedConnection then
+				elseif v == "PendingIncomingTrustedConnection" then
 					return {
 						actionType = "AddIncomingTrustedConnection",
 						isDisabled = true,

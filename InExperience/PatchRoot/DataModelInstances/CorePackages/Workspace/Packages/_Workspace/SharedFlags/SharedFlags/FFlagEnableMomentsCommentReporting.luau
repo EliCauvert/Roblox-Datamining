@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableMomentsCommentReporting", false) and require(script.Parent.FFlagAbuseReportAttributes)

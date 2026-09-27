@@ -1,13 +1,13 @@
 ﻿local parent = script.Parent
 local parent_1 = parent.Parent
 local parent_2 = parent_1.Parent
-local guiService = game:GetService("GuiService")
 local userInputService = game:GetService("UserInputService")
 local paymentPlatformModule = require(parent_1.Enums.PaymentPlatform)
 local url = require(parent_2.Http).Url
 local httpRbxApiService = game:GetService("HttpRbxApiService")
 local httpService = game:GetService("HttpService")
 local isVRAppBuild = require(parent_2.AppCommonLib).IsVRAppBuild
+local isTenFootInterface = require(parent_2.AppCommonLib).isTenFootInterface
 local getBlockingConsolePreparePaymentCheckModule = require(parent_1.Flags.getBlockingConsolePreparePaymentCheck)
 local getIsQuestPlatformModule = require(parent_1.Utility.getIsQuestPlatform)
 local default = require(parent_2.LoggingProtocol).default
@@ -51,6 +51,6 @@ function ConsolePreparePaymentCheck(p1)
 end
 
 return function(p1)
-	-- upvalues: isVRAppBuild (ref), guiService (ref), getBlockingConsolePreparePaymentCheckModule (ref)
-	return if not (not isVRAppBuild() and not guiService:IsTenFootInterface()) then not getBlockingConsolePreparePaymentCheckModule() or ConsolePreparePaymentCheck(p1) else true
+	-- upvalues: isVRAppBuild (ref), isTenFootInterface (ref), getBlockingConsolePreparePaymentCheckModule (ref)
+	return if not (not isVRAppBuild() and not isTenFootInterface()) then not getBlockingConsolePreparePaymentCheckModule() or ConsolePreparePaymentCheck(p1) else true
 end

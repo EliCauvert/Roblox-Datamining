@@ -129,7 +129,8 @@ return reactModule.memo(function(p1)
 			TextWrapped = true,
 			tag = "size-full-0 auto-y text-body-small text-align-x-left content-muted",
 			LayoutOrder = var7(),
-			Text = p1.footerText
+			Text = p1.footerText,
+			selection = if p1.focusNavEnabled == true then { Selectable = true } else nil
 		})
 	end
 	v = createNextOrder()

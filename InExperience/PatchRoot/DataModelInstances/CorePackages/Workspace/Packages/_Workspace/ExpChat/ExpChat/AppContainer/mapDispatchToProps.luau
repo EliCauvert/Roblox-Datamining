@@ -29,11 +29,8 @@ local globalCommands = expChatSharedModule.GlobalCommands
 local autoCastCommand = expChatSharedModule.Commands.autoCastCommand
 local RBXWhisperCommand = expChatSharedModule.Commands.Whisper.RBXWhisperCommand
 local chatInputBarResetTargetChannel = expChatSharedModule.Actions.ChatInputBarResetTargetChannel
-local chatTranslationGlobalToggledModule = require(expChat.Actions.ChatTranslationGlobalToggled)
-local chatTranslationMessageToggledModule = require(expChat.Actions.ChatTranslationMessageToggled)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagExpChatFixBackspaceNilTargetChannel = expChatSharedModule.Flags.FFlagExpChatFixBackspaceNilTargetChannel
-local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local fFlagExpChatDictatedSpeechEnabledModule = require(expChat.Flags.FFlagExpChatDictatedSpeechEnabled)
 local expChatUseVirtualCommandRunner = game:DefineFastFlag("ExpChatUseVirtualCommandRunner", false)
 local getFFlagExpChatProtectedChatInternalAPIs = sharedFlagsModule.getFFlagExpChatProtectedChatInternalAPIs
@@ -41,7 +38,7 @@ local fFlagExpChatDictation = sharedFlagsModule.FFlagExpChatDictation
 local fFlagExpChatDictationGrafanaMetricsModule = require(expChat.Flags.FFlagExpChatDictationGrafanaMetrics)
 
 return function(p1)
-	-- upvalues: playersService (ref), autoCastCommand (ref), RBXWhisperCommand (ref), promiseModule (ref), loggerModule (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), chatTranslationGlobalToggledModule (ref), analytics (ref), chatTranslationMessageToggledModule (ref), chatInputBarResetTargetChannel (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), getTransparencyStoreModule (ref), runVirtualChatCommandModule (ref), commands (ref), textChatService (ref), expChatFlipDictationPriorityV2 (ref), fFlagExpChatDictatedSpeechEnabledModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), list (ref), configModule (ref), fFlagExpChatDictation (ref), dictationAnalyticsModule (ref), computeEditDistanceModule (ref), fFlagExpChatDictationGrafanaMetricsModule (ref), expChatUseVirtualCommandRunner (ref), globalCommands (ref), runGlobalChatCommandModule (ref)
+	-- upvalues: playersService (ref), autoCastCommand (ref), RBXWhisperCommand (ref), promiseModule (ref), loggerModule (ref), getMessagesStoreModule (ref), analytics (ref), chatInputBarResetTargetChannel (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), getTransparencyStoreModule (ref), runVirtualChatCommandModule (ref), commands (ref), textChatService (ref), expChatFlipDictationPriorityV2 (ref), fFlagExpChatDictatedSpeechEnabledModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), list (ref), configModule (ref), fFlagExpChatDictation (ref), dictationAnalyticsModule (ref), computeEditDistanceModule (ref), fFlagExpChatDictationGrafanaMetricsModule (ref), expChatUseVirtualCommandRunner (ref), globalCommands (ref), runGlobalChatCommandModule (ref)
 	return {
 		activateWhisperMode = function(p2)
 			-- upvalues: playersService (copy), autoCastCommand (copy), RBXWhisperCommand (copy), promiseModule (copy), loggerModule (copy)
@@ -54,35 +51,24 @@ return function(p1)
 			end
 			assert(localPlayer, "Players.LocalPlayer should be non-nil")
 			promiseModule.any({
-				autoCastCommand(RBXWhisperCommand, localPlayer.UserId, "/w @" .. var20.Name)
+				autoCastCommand(RBXWhisperCommand, localPlayer.UserId, "/w @" .. var18.Name)
 			}):catch(function(p3)
 				-- upvalues: loggerModule (copy)
 				loggerModule:debug("Could not send autoCastCommand. Error: {}", p3)
 			end)
 		end,
 		onToggleTranslation = function(p2)
-			-- upvalues: fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy), p1 (ref), chatTranslationGlobalToggledModule (copy)
-			if fFlagExpChatUseMessagesStore then
-				getMessagesStoreModule(false).toggleGlobalTranslation(p2)
-				
-				return
-			end
-			p1(chatTranslationGlobalToggledModule(p2))
+			-- upvalues: getMessagesStoreModule (copy)
+			getMessagesStoreModule(false).toggleGlobalTranslation(p2)
 		end,
 		onToggleIndividualTranslation = function(p2, p3)
-			-- upvalues: playersService (copy), analytics (copy), fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy), p1 (ref), chatTranslationMessageToggledModule (copy)
+			-- upvalues: playersService (copy), analytics (copy), getMessagesStoreModule (copy)
 			analytics.FireClientAnalyticsWithEventName("MessageTranslationToggled", {
 				useTranslation = p2,
 				senderUserId = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil,
 				localeId = if playersService.LocalPlayer then playersService.LocalPlayer.LocaleId else nil
 			})
-			
-			if fFlagExpChatUseMessagesStore then
-				getMessagesStoreModule(false).toggleMessageTranslation(p2, p3)
-				
-				return
-			end
-			p1(chatTranslationMessageToggledModule(p2, p3))
+			getMessagesStoreModule(false).toggleMessageTranslation(p2, p3)
 		end,
 		resetTargetChannel = function(value)
 			-- upvalues: p1 (ref), chatInputBarResetTargetChannel (copy), fFlagExpChatFixBackspaceNilTargetChannel (copy)

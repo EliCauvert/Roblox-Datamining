@@ -28,6 +28,7 @@ return reactModule.forwardRef(function(p1, p2)
 		AutomaticSize = p1.AutomaticSize,
 		LayoutOrder = p1.LayoutOrder,
 		SelectionGroup = true,
+		[reactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged,
 		[reactModule.Tag] = p1.tag
 	}, if p1.backgroundLayers == nil or #p1.backgroundLayers <= 0 then {
 		ItemCardListLayout = reactModule.createElement("UIListLayout", {

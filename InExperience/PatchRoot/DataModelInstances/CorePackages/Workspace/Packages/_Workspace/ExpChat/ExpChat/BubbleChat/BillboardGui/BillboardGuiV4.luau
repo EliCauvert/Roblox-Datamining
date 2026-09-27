@@ -33,7 +33,6 @@ local experienceChatHeartbeatIncrement = game:DefineFastInt("ExperienceChatHeart
 local fFlagExpChatUseAdorneeStore = sharedFlagsModule.FFlagExpChatUseAdorneeStore
 local fFlagExpChatUseProximityStore = sharedFlagsModule.FFlagExpChatUseProximityStore
 local expChatProximityStoreExtraRendersBeforeUnmount = game:DefineFastInt("ExpChatProximityStoreExtraRendersBeforeUnmount", 10)
-local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local fFlagExpChatUseChatConfigStore = sharedFlagsModule.FFlagExpChatUseChatConfigStore
 local vector2 = Vector2.new(28, 28)
 
@@ -56,7 +55,7 @@ workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 end)
 
 function bubbleChatBillboard.init(p1)
-	-- upvalues: globalFlagsModule (ref), selfViewNoApi (ref), starterGuiService (ref), fFlagExpChatUseProximityStore (ref), expChatSharedModule (ref), roactModule (ref), fFlagExpChatUseMessagesStore (ref), otterModule (ref), playersService (ref), voiceIndicatorModule (ref), getMessagesStoreModule (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref)
+	-- upvalues: globalFlagsModule (ref), selfViewNoApi (ref), starterGuiService (ref), fFlagExpChatUseProximityStore (ref), expChatSharedModule (ref), roactModule (ref), otterModule (ref), playersService (ref), voiceIndicatorModule (ref), getMessagesStoreModule (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref)
 	local selfViewVisibility = nil
 	local var2 = nil
 	
@@ -86,7 +85,7 @@ function bubbleChatBillboard.init(p1)
 		savedChatSettings = p1.props.chatSettings,
 		selfViewOpen = selfViewVisibility,
 		selfViewEnabled = var2,
-		filteredMessages = if fFlagExpChatUseMessagesStore then {} else nil
+		filteredMessages = {}
 	})
 	p1.isMounted = false
 	local var9, var10 = roactModule.createBinding(Vector3.new())
@@ -146,9 +145,8 @@ function bubbleChatBillboard.init(p1)
 			p1:setState({ selfViewOpen = getSelfViewVisibility() })
 		end)
 	end
-	if fFlagExpChatUseMessagesStore then
-		p1.MessagesStore = getMessagesStoreModule(false)
-	end
+	p1.MessagesStore = getMessagesStoreModule(false)
+	
 	if fFlagExpChatUseChatConfigStore then
 		p1.ChatConfigurationStore = getChatConfigurationStoreModule(false)
 	end
@@ -262,7 +260,6 @@ function bubbleChatBillboard.shouldRenderPlayerButtonsNew(p1, p2)
 end
 
 local function messagesHaveChanged(p1, p2)
-	-- upvalues: fFlagExpChatUseMessagesStore (ref)
 	local p21Count = #p1
 	local p22Count = #p2
 	
@@ -273,7 +270,7 @@ local function messagesHaveChanged(p1, p2)
 	end
 	for i, v in p1 do
 		if v.messageId == p2[i].messageId then
-			if fFlagExpChatUseMessagesStore and v.text ~= p2[i].text then
+			if v.text ~= p2[i].text then
 				return true
 			end
 		end
@@ -555,10 +552,10 @@ function bubbleChatBillboard.didUpdate(p3, _, p4)
 end
 
 function bubbleChatBillboard.didMount(p3)
-	-- upvalues: fFlagExpChatUseMessagesStore (ref), createEffect (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), getRecentMessages (ref), otterModule (ref), fFlagExpChatUseAdorneeStore (ref), expChatSharedModule (ref), playersService (ref), fFlagEasierUnmutingModule (ref), fFlagExpChatUseProximityStore (ref), runService (ref), experienceChatHeartbeatIncrement (ref), currentCamera (write), t (ref)
+	-- upvalues: createEffect (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), getRecentMessages (ref), otterModule (ref), fFlagExpChatUseAdorneeStore (ref), expChatSharedModule (ref), playersService (ref), fFlagEasierUnmutingModule (ref), fFlagExpChatUseProximityStore (ref), runService (ref), experienceChatHeartbeatIncrement (ref), currentCamera (write), t (ref)
 	p3.isMounted = true
 	
-	if fFlagExpChatUseMessagesStore and p3.MessagesStore then
+	if p3.MessagesStore then
 		p3.messagesEffect = createEffect(function(p4)
 			-- upvalues: p3 (ref), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), getRecentMessages (copy)
 			local userId = p3.props.userId
@@ -621,7 +618,7 @@ function bubbleChatBillboard.didMount(p3)
 		end)
 	end
 	p3.heartbeatConn = runService.Heartbeat:Connect(function(p4)
-		-- upvalues: p3 (ref), experienceChatHeartbeatIncrement (copy), fFlagExpChatUseAdorneeStore (copy), currentCamera (copy), fFlagExpChatUseProximityStore (copy), otterModule (copy), t (copy), fFlagExpChatUseMessagesStore (copy), getRecentMessages (copy)
+		-- upvalues: p3 (ref), experienceChatHeartbeatIncrement (copy), fFlagExpChatUseAdorneeStore (copy), currentCamera (copy), fFlagExpChatUseProximityStore (copy), otterModule (copy), t (copy)
 		if p3.props.billboardUpdateFrequency > 0 then
 			p3.lastDistanceUpdate += p4
 			
@@ -670,26 +667,16 @@ function bubbleChatBillboard.didMount(p3)
 		
 		for i, v in p3.state.filteredMessages do
 			if var3 <= var6 - v.timestamp.UnixTimestampMillis then
-				if fFlagExpChatUseMessagesStore then
-					p3:setState(function(p5)
-						-- upvalues: var6 (ref), var3 (ref)
-						local t = {}
-						
-						for i, v in ipairs(p5.filteredMessages) do
-							if var6 - v.timestamp.UnixTimestampMillis < var3 then
-								table.insert(t, v)
-							end
-						end
-						return { filteredMessages = t }
-					end)
-					
-					return
-				end
 				p3:setState(function(p5)
-					-- upvalues: getRecentMessages (copy), var3 (ref), p3 (copy)
-					return {
-						filteredMessages = getRecentMessages(p5.filteredMessages, var3, p3.props.chatSettings.MaxBubbles)
-					}
+					-- upvalues: var6 (ref), var3 (ref)
+					local t = {}
+					
+					for i, v in ipairs(p5.filteredMessages) do
+						if var6 - v.timestamp.UnixTimestampMillis < var3 then
+							table.insert(t, v)
+						end
+					end
+					return { filteredMessages = t }
 				end)
 				
 				return
@@ -700,7 +687,7 @@ function bubbleChatBillboard.didMount(p3)
 end
 
 function bubbleChatBillboard.willUnmount(p5)
-	-- upvalues: var1 (ref), fFlagExpChatUseProximityStore (ref), fFlagExpChatUseMessagesStore (ref), fFlagExpChatUseChatConfigStore (ref)
+	-- upvalues: var1 (ref), fFlagExpChatUseProximityStore (ref), fFlagExpChatUseChatConfigStore (ref)
 	var1:trace("Unmounting billboards for {}", p5.state.shortId)
 	p5.isMounted = false
 	
@@ -732,7 +719,7 @@ function bubbleChatBillboard.willUnmount(p5)
 		p5.proximityEffect()
 		p5.proximityEffect = nil
 	end
-	if fFlagExpChatUseMessagesStore and p5.messagesEffect then
+	if p5.messagesEffect then
 		p5.messagesEffect()
 		p5.messagesEffect = nil
 	end
@@ -744,7 +731,6 @@ function bubbleChatBillboard.willUnmount(p5)
 end
 
 function bubbleChatBillboard.getDerivedStateFromProps(p5, p6)
-	-- upvalues: fFlagExpChatUseMessagesStore (ref), getRecentMessages (ref)
 	local text = "..." .. string.sub(tostring(p5.userId), -4)
 	local voiceState = nil
 	local var7 = nil
@@ -755,12 +741,10 @@ function bubbleChatBillboard.getDerivedStateFromProps(p5, p6)
 		var8 = false
 		voiceState = p5.voiceState
 	end
-	local _ = nil
-	
 	return {
-		savedChatSettings = if fFlagExpChatUseMessagesStore then p5.chatSettings else p5.lastMessage and p5.chatSettings,
+		savedChatSettings = p5.chatSettings,
 		shortId = text,
-		filteredMessages = if fFlagExpChatUseMessagesStore then p6.filteredMessages else getRecentMessages(p5.messages, p6.savedChatSettings.BubbleDuration * 1000, p6.savedChatSettings.MaxBubbles),
+		filteredMessages = p6.filteredMessages,
 		voiceStateCounter = var7,
 		voiceTimedOut = var8,
 		lastVoiceState = voiceState
@@ -768,14 +752,11 @@ function bubbleChatBillboard.getDerivedStateFromProps(p5, p6)
 end
 
 local function mapStateToProps(p5, p6)
-	-- upvalues: playersService (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), getSettingsForMessageModule (ref), fFlagExpChatUseMessagesStore (ref), fFlagExpChatUseAdorneeStore (ref), fFlagEasierUnmutingModule (ref)
+	-- upvalues: playersService (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), getSettingsForMessageModule (ref), fFlagExpChatUseAdorneeStore (ref), fFlagEasierUnmutingModule (ref)
 	local userId = p5.Messages.messagesBySenderId[p6.userId]
-	local var7 = if userId ~= nil then nil else userId[#userId]
 	
 	return {
-		messages = if fFlagExpChatUseMessagesStore then nil else userId,
-		lastMessage = if fFlagExpChatUseMessagesStore then nil else var7,
-		chatSettings = if p6.isTextChatServiceOn then if fFlagExpChatUseChatConfigStore then getChatConfigurationStoreModule(false).getBubbleChatSettings(false) else p5.BubbleChatSettings else getSettingsForMessageModule(p5.LegacyBubbleChatSettings, var7),
+		chatSettings = if p6.isTextChatServiceOn then if fFlagExpChatUseChatConfigStore then getChatConfigurationStoreModule(false).getBubbleChatSettings(false) else p5.BubbleChatSettings else getSettingsForMessageModule(p5.LegacyBubbleChatSettings, if userId ~= nil then nil else userId[#userId]),
 		adornee = if fFlagExpChatUseAdorneeStore then nil else p5.Adornees[p6.userId] or p6.partOrModel,
 		localAdornee = if fFlagExpChatUseAdorneeStore then nil elseif fFlagEasierUnmutingModule then p5.Adornees[if playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else ""] else nil,
 		clientSettings = p5.ClientSettings,
@@ -784,8 +765,8 @@ local function mapStateToProps(p5, p6)
 end
 
 if fFlagExpChatUseAdorneeStore then
-	local var8 = roactRoduxModule.connect(mapStateToProps)(bubbleChatBillboard)
+	local var7 = roactRoduxModule.connect(mapStateToProps)(bubbleChatBillboard)
 	
-	return if expChatMemoBillboardGui then reactModule.memo(var8) else var8
+	return if expChatMemoBillboardGui then reactModule.memo(var7) else var7
 end
 return if expChatMemoBillboardGui then reactModule.memo(roactRoduxModule.connect(mapStateToProps)(bubbleChatBillboard)) else roactRoduxModule.connect(mapStateToProps)(bubbleChatBillboard)

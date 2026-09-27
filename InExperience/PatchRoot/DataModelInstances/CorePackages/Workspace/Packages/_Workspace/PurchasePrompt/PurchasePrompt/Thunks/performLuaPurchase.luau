@@ -26,12 +26,24 @@ local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.SharedFlags).FFl
 local fFlagPurchasePromptFetchCartPricingForLooks = require(parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks
 local fFlagEnablePriceChangedErrorHandlingModule = require(purchasePrompt.Flags.FFlagEnablePriceChangedErrorHandling)
 local fFlagEnableRequestLocationTypeForSduiPurchaseModule = require(purchasePrompt.Flags.FFlagEnableRequestLocationTypeForSduiPurchase)
+local fFlagEnablePurchasePayloadForDevProductPurchaseModule = require(purchasePrompt.Flags.FFlagEnablePurchasePayloadForDevProductPurchase)
 local productPurchaseSurface = require(parent.PurchasePromptLite).Enums.ProductPurchaseSurface
 local t = {
 	[productPurchaseSurface.EDP] = "ExperienceDetailPage",
 	[productPurchaseSurface.HomePageGameItemShop] = "HomePageGameItemShop",
 	[productPurchaseSurface.SearchPageGameItemShop] = if require(parent.SharedFlags).FFlagEnableSearchGameItemOwnershipUpdate then "SearchPageGameItemShop" else nil
 }
+
+local function _(p1)
+	-- upvalues: httpService (ref)
+	if type(p1) ~= "string" or p1 == "" then
+		return nil
+	end
+	local ok, status = pcall(httpService.JSONDecode, httpService, p1)
+	
+	return if ok and type(status) == "table" and type(status.surface) == "table" then status else nil
+end
+
 local parseEconomicRestrictionsFailureReason = IAPExperienceModule.Utility.parseEconomicRestrictionsFailureReason
 local parseEconomicRestrictionsExpirationTimeInMinutes = IAPExperienceModule.Utility.parseEconomicRestrictionsExpirationTimeInMinutes
 local list = { networkModule, analyticsModule }
@@ -53,9 +65,10 @@ local function handleGenericPurchaseError(p1, p2, p3)
 end
 
 return function()
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), analyticsModule (ref), constantsModule (ref), fFlagEnableRequestLocationTypeForSduiPurchaseModule (ref), t (ref), performDevProductEdpPurchaseModule (ref), completePurchaseModule (ref), promiseModule (ref), handleGenericPurchaseError (ref), fFlagEnablePriceChangedErrorHandlingModule (ref), productTypeEnum (ref), performExperiencePurchaseModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), selectProductPriceModule (ref), deriveSelectedOfferIdsFromCartPricingModule (ref), httpService (ref), performLookPurchaseModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), performDeveloperSubscriptionRobuxPurchaseModule (ref), performDeveloperSubscriptionFiatPurchaseModule (ref)
+	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), analyticsModule (ref), constantsModule (ref), fFlagEnableRequestLocationTypeForSduiPurchaseModule (ref), t (ref), fFlagEnablePurchasePayloadForDevProductPurchaseModule (ref), httpService (ref), performDevProductEdpPurchaseModule (ref), completePurchaseModule (ref), promiseModule (ref), handleGenericPurchaseError (ref), fFlagEnablePriceChangedErrorHandlingModule (ref), productTypeEnum (ref), performExperiencePurchaseModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), selectProductPriceModule (ref), deriveSelectedOfferIdsFromCartPricingModule (ref), performLookPurchaseModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), performDeveloperSubscriptionRobuxPurchaseModule (ref), performDeveloperSubscriptionFiatPurchaseModule (ref)
 	return thunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: networkModule (copy), analyticsModule (copy), constantsModule (copy), fFlagEnableRequestLocationTypeForSduiPurchaseModule (copy), t (copy), performDevProductEdpPurchaseModule (copy), completePurchaseModule (copy), promiseModule (copy), handleGenericPurchaseError (copy), fFlagEnablePriceChangedErrorHandlingModule (copy), productTypeEnum (copy), performExperiencePurchaseModule (copy), fFlagPurchasePromptFetchCartPricingForLooks (copy), selectProductPriceModule (copy), deriveSelectedOfferIdsFromCartPricingModule (copy), httpService (copy), performLookPurchaseModule (copy), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), performDeveloperSubscriptionRobuxPurchaseModule (copy), performDeveloperSubscriptionFiatPurchaseModule (copy)
+		-- upvalues: networkModule (copy), analyticsModule (copy), constantsModule (copy), fFlagEnableRequestLocationTypeForSduiPurchaseModule (copy), t (copy), fFlagEnablePurchasePayloadForDevProductPurchaseModule (copy), httpService (copy), performDevProductEdpPurchaseModule (copy), completePurchaseModule (copy), promiseModule (copy), handleGenericPurchaseError (copy), fFlagEnablePriceChangedErrorHandlingModule (copy), productTypeEnum (copy), performExperiencePurchaseModule (copy), fFlagPurchasePromptFetchCartPricingForLooks (copy), selectProductPriceModule (copy), deriveSelectedOfferIdsFromCartPricingModule (copy), performLookPurchaseModule (copy), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), performDeveloperSubscriptionRobuxPurchaseModule (copy), performDeveloperSubscriptionFiatPurchaseModule (copy)
+		local purchasePayload, ok
 		local var1 = p2[networkModule]
 		local var2 = p2[analyticsModule]
 		local state = p1:getState()
@@ -76,6 +89,18 @@ return function()
 			if fFlagEnableRequestLocationTypeForSduiPurchaseModule then
 				local surface = state.purchaseAnalyticsMetadata and state.purchaseAnalyticsMetadata.surface
 				t_1.requestLocationType = if surface ~= nil then t[surface] else ""
+			end
+			if fFlagEnablePurchasePayloadForDevProductPurchaseModule then
+				local var3
+				purchasePayload = productPayload.purchasePayload
+				
+				if type(purchasePayload) == "string" and purchasePayload ~= "" then
+					ok, status = pcall(httpService.JSONDecode, httpService, purchasePayload)
+					var3 = if ok and type(status) == "table" and type(status.surface) == "table" then status else nil
+				else
+					var3 = nil
+				end
+				t_1.purchasePayload = var3
 			end
 			return performDevProductEdpPurchaseModule(var1, productId, t_1):andThen(function(p3)
 				-- upvalues: p1 (ref), completePurchaseModule (copy), var2 (ref), id (ref), promiseModule (copy)
@@ -106,14 +131,14 @@ return function()
 			local t_1 = nil
 			
 			if fFlagPurchasePromptFetchCartPricingForLooks then
-				local cartPricing = state.cartPricing
-				local response = cartPricing and cartPricing.response
+				purchasePayload = state.cartPricing
+				ok = purchasePayload and purchasePayload.response
 				
-				if response == nil then
+				if ok == nil then
 					t_1 = {}
 				else
 					expectedPrice = selectProductPriceModule(state) or expectedPrice
-					t_1 = deriveSelectedOfferIdsFromCartPricingModule(response)
+					t_1 = deriveSelectedOfferIdsFromCartPricingModule(ok)
 				end
 			end
 			return performLookPurchaseModule(var1, productPayload.id, {

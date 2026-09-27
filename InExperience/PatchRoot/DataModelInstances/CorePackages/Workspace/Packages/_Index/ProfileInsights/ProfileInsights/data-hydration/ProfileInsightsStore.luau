@@ -8,6 +8,7 @@ local profileInsightsStoreHttpTimeout = game:DefineFastInt("ProfileInsightsStore
 local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
 local fFlagTFProfileInsightsBypassCache = require(parent.SharedFlags).FFlagTFProfileInsightsBypassCache
 local fFlagProfileInsightsSkipFetchNoCacheEntry = require(parent.SharedFlags).FFlagProfileInsightsSkipFetchNoCacheEntry
+local fFlagUserSearchClassmatesInsight = require(parent.SharedFlags).FFlagUserSearchClassmatesInsight
 local urlBuilderModule = require(parent.UrlBuilder)
 local var1 = urlBuilderModule.UrlBuilder.new({
 	path = "profile-insights-api/v1/multiProfileInsights",
@@ -15,14 +16,14 @@ local var1 = urlBuilderModule.UrlBuilder.new({
 })()
 
 local function makeHttpCall(p1, p2, p3, p4)
-	-- upvalues: httpService (ref), var1 (ref), profileInsightsStoreHttpTimeout (ref)
+	-- upvalues: httpService (ref), var1 (ref), fFlagUserSearchClassmatesInsight (ref), profileInsightsStoreHttpTimeout (ref)
 	httpService:RequestInternal({
 		Method = "POST",
 		Priority = 0,
 		Url = var1,
 		Body = httpService:JSONEncode({
 			userIds = p1,
-			count = if p3 then nil else p2 or 2,
+			count = if fFlagUserSearchClassmatesInsight and p2 then p2 elseif p3 then nil else p2 or 2,
 			rankingStrategy = p3
 		}),
 		Timeout = profileInsightsStoreHttpTimeout,

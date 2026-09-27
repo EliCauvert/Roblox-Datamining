@@ -12,13 +12,16 @@ local fFlagExpChatEnableV2ChatWindowModule = require(expChat.Flags.FFlagExpChatE
 local fFlagExpChatRewriteInlineModule = require(expChat.Flags.FFlagExpChatRewriteInline)
 local getFFlagChatWindowUseCallbackOptimizationsModule = require(expChat.Flags.getFFlagChatWindowUseCallbackOptimizations)
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
+local fFlagExpChatDisableNameTapActionInGlobalChatModule = require(expChat.Flags.FFlagExpChatDisableNameTapActionInGlobalChat)
+local isGlobalChatMessageModule = require(expChat.isGlobalChatMessage)
 
 return function(p1)
-	-- upvalues: useStableSignal (ref), reactModule (ref), getFFlagChatWindowUseCallbackOptimizationsModule (ref), getMessagesStoreModule (ref), fFlagExpChatEnableV2ChatWindowModule (ref), useV2MessagePoolModule (ref), fFlagExpChatRewriteInlineModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), createMessageChildrenModule (ref), chatWindowModule (ref), dictionary (ref)
+	-- upvalues: useStableSignal (ref), reactModule (ref), fFlagExpChatDisableNameTapActionInGlobalChatModule (ref), isGlobalChatMessageModule (ref), getFFlagChatWindowUseCallbackOptimizationsModule (ref), getMessagesStoreModule (ref), fFlagExpChatEnableV2ChatWindowModule (ref), useV2MessagePoolModule (ref), fFlagExpChatRewriteInlineModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), createMessageChildrenModule (ref), chatWindowModule (ref), dictionary (ref)
 	local var1, var2 = useStableSignal({})
 	local var3 = reactModule.useRef(nil)
 	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref)
+		-- upvalues: fFlagExpChatDisableNameTapActionInGlobalChatModule (copy), isGlobalChatMessageModule (copy), p1 (ref)
+		if fFlagExpChatDisableNameTapActionInGlobalChatModule and isGlobalChatMessageModule(p2) then return end
 		p1.resetTargetChannel()
 		local var5 = tonumber(p2.userId)
 		

@@ -178,6 +178,8 @@ function name.constructRobuxUpsellPromptAnimatorObj(p1)
 				onCartOfferAppliedChanged = if fFlagPurchasePromptFetchCartPricing then props.onCartOfferAppliedChanged else nil,
 				postPurchaseActions = if fFlagPurchasePromptFetchCartPricing then props.postPurchaseActions else nil,
 				setPostPurchaseActions = if fFlagPurchasePromptFetchCartPricing then props.setPostPurchaseActions else nil,
+				onRobloxPlusButtonActivated = props.onRobloxPlusButtonActivated,
+				robloxPlusDiscountPercentage = props.robloxPlusDiscountPercentage,
 				buttons = {
 					buyItemActivated = function()
 						-- upvalues: p1 (copy), props (copy)
@@ -222,6 +224,8 @@ function name.constructRobuxUpsellPromptAnimatorObj(p1)
 				cartPricingResponse = if fFlagEnableOffersOnInExperienceSurface then props.cartPricingResponse else nil,
 				isCartPricingLoading = if fFlagEnableOffersOnInExperienceSurface then props.isCartPricingLoading else nil,
 				onCartOfferAppliedChanged = if fFlagEnableOffersOnInExperienceSurface then props.onCartOfferAppliedChanged else nil,
+				onRobloxPlusButtonActivated = props.onRobloxPlusButtonActivated,
+				robloxPlusDiscountPercentage = props.robloxPlusDiscountPercentage,
 				buttons = {
 					buyItemActivated = function()
 						-- upvalues: p1 (copy), props (copy)

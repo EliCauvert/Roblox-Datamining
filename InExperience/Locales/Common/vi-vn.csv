@@ -151,8 +151,10 @@ Authentication.SignUp.Message.Username.NoRealNameUse,Không dùng tên thật c�
 Authentication.SignUp.PasswordErrorLength,Có độ dài từ 8 đến 200 ký tự
 Authentication.SignUp.Response.BirthdayMustBeSetFirst,Phải chọn ngày sinh trước.
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.ErrorTryAgain2,Đã xảy ra lỗi. Vui lòng thử lại.
 Authentication.SignUp.Response.InvalidBirthday,Ngày sinh không hợp lệ.
 Authentication.SignUp.Response.InvalidEmail,Địa chỉ email không hợp lệ.
+Authentication.SignUp.Response.PasswordComplexity,Vui lòng tạo mật khẩu khó đoán hơn.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Phải đặt tên người dùng trước.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Tiến trình của bạn sẽ được giữ nguyên khi bạn thiết lập xong.
 Authentication.TwoStepVerification.Action.GoToSecurity,Cài đặt
@@ -178,27 +180,27 @@ Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,Hiệu ứng động qu
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,Hiệu ứng động quá ngắn ({duration} giây). Hiệu ứng động biểu cảm phải dài hơn {minLength} giây.
 Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Vị trí đặt bộ phận khung bao trong {cageName} vi phạm quy định: {upperPart} chưa được đặt đúng phía trên {lowerPart}.
 Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"Bộ phận khung bao {partName} trong {cageName} có {actualCount} đỉnh, trong khi số lượng dự kiến là khoảng {expectedCount}. Điều này có thể là do thiếu hoặc bị trùng lặp cấu trúc hình học ở vùng đó trên thân."
+Common.UGCValidation.ErrorLabel.AQSFail_CageUV,"{cage_name} có các giá trị UV không chính xác và không khớp với mẫu. Có {incorrect_uv_count} UV không chính xác ({unreferenced_vertex_count} chưa được tham chiếu, {non_template_uv_count} không có trong mẫu, {duplicate_mapping_count} ánh xạ trùng lặp), {unmatched_template_count} đỉnh mẫu không khớp. Vui lòng sửa lại UV của khung bao cho khớp với mẫu."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Thân của bạn chứa một số mảng lưới nhỏ không liên kết với nhau (mesh island). Vui lòng xóa các chi tiết nổi và đảm bảo tất cả các mảng lưới được liên kết với nhau.
-Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,Chất lượng tài sản: {partName} có {num_disconnected_components} thành phần bị ngắt kết nối. Số lượng này vượt quá giới hạn tối đa là {max_disconnected_components} thành phần.
-Common.UGCValidation.ErrorLabel.AQSInputDataError,Không thể tính toán điểm chất lượng đúng cách do dữ liệu đầu vào không chính xác hoặc không đầy đủ. Vui lòng kiểm tra mô hình của bạn hoặc gửi báo cáo lỗi
-Common.UGCValidation.ErrorLabel.AQSInternalError,"Không tạo được điểm do Lỗi chất lượng tài sản. Vui lòng kiểm tra xem dữ liệu đầu vào có chính xác hay không và thử lại, hoặc gửi báo cáo lỗi."
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,"Cảnh báo chất lượng tài sản: Điểm khoảng cách giữa khung bao và lưới bề mặt là {score}. Khoảng cách tối đa giữa khung bao ngoài và lưới bề mặt là {max_distance}, {negative_sdf_percent}% các đỉnh khung bao ngoài nằm bên trong lưới bề mặt kết xuất."
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,"Cảnh báo chất lượng tài sản: Điểm khoảng cách khung bao của thân là {score}. Khoảng cách tối đa giữa khung bao và lưới bề mặt của thân là {max_distance}, {negative_sdf_percent}% các đỉnh khung bao của thân nằm bên trong lưới bề mặt của thân."
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"Cảnh báo chất lượng tài sản: Điểm khoảng cách khung bao cho đầu là {score}. Khoảng cách tối đa giữa khung bao cho đầu và lưới bề mặt của đầu là {max_distance}, {negative_sdf_percent}% các đỉnh khung bao cho đầu nằm bên trong lưới bề mặt của đầu."
-Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,Cảnh báo chất lượng tài sản: Điểm mức độ phù hợp của khung bao là {score}. {irrelevant_percent}% các đỉnh của khung bao ngoài đã sửa đổi không bao phủ phụ kiện.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,Cảnh báo chất lượng tài sản: Điểm UV của khung bao là {score} dành cho {cage_name}. Số UV không chính xác: {incorrect_uv_count}.
-Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,Chất lượng tài sản: {partName} có {degenerate_triangle_percent}% tam giác suy biến (điểm: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,Cảnh báo chất lượng tài sản: Điểm biểu cảm của đầu hiệu ứng động là {score}.
-Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Chất lượng tài sản: cấu hình khớp đạt {score} điểm (khớp: {joint_number}, tay trái: {left_hand_joint_number}, tay phải: {right_hand_joint_number})."
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,Chất lượng tài sản: {partName} có {num_small_volume_islands} đảo nhỏ bị ngắt kết nối trên tổng số {num_disconnected_components} thành phần (điểm: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,Chất lượng tài sản: {partName} có vấn đề về lưới đa tạp (điểm: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,Chất lượng tài sản: Lưới {partName} không kín nước ({boundary_edges_percent}% cạnh biên).
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,Cảnh báo chất lượng tài sản: Điểm mức độ bao phủ của lưới bề mặt là {score}. {mesh_outside_outer_cage_percent}% các đỉnh của lưới bề mặt nằm bên ngoài khung bao ngoài.
-Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,Không tính toán được điểm chất lượng tài sản cho {measureName} vì dữ liệu đầu vào không đầy đủ hoặc không hợp lệ. Điều này không làm cản trở quá trình tải lên của bạn.
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,Chất lượng tài sản: vân đồ họa {textureName} có độ phức tạp thấp (điểm: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Chất lượng tài sản: vân đồ họa {textureName} có độ phân giải {texture_width}x{texture_height} (điểm: {score}).
+Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,{partName} có {num_disconnected_components} thành phần bị rời rạc. Số lượng này vượt quá giới hạn tối đa là {max_disconnected_components} thành phần.
+Common.UGCValidation.ErrorLabel.AQSInternalError,"Không thể hoàn tất quá trình xác thực do lỗi nội bộ. Vui lòng kiểm tra lại tính chính xác của dữ liệu đầu vào rồi thử lại, hoặc gửi báo cáo lỗi."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,"Khung bao ngoài không ôm sát lưới kết xuất. Khoảng cách tối đa giữa khung bao ngoài và lưới kết xuất là {max_distance}, và {negative_sdf_percent}% các đỉnh của khung bao ngoài nằm bên trong lưới kết xuất."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,"Khung bao thân không ôm sát lưới thân. Khoảng cách tối đa giữa khung bao thân và lưới là {max_distance}, và {negative_sdf_percent}% điểm đỉnh của khung bao thân nằm bên trong lưới thân."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"Khung bao của đầu không ôm sát lưới của đầu. Khoảng cách tối đa giữa khung bao của đầu và lưới là {max_distance}, và {negative_sdf_percent}% điểm đỉnh của khung bao của đầu nằm bên trong lưới của đầu."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,{irrelevant_percent}% các đỉnh của khung bao ngoài đã sửa đổi không bao phủ được phụ kiện. Vui lòng điều chỉnh khung bao để vừa vặn hơn với hình dáng phụ kiện.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"{cage_name} có các giá trị UV không chính xác. Có {incorrect_uv_count} UV không chính xác ({unreferenced_vertex_count} chưa được tham chiếu, {non_template_uv_count} không phải mẫu, {duplicate_mapping_count} ánh xạ trùng lặp), {unmatched_template_count} điểm đỉnh mẫu không khớp."
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} có {degenerate_triangle_percent}% tam giác suy biến.
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Đầu hiệu ứng động có vấn đề về chất lượng biểu cảm. Nhắm mắt trái: {left_eye_close}, nhắm mắt phải: {right_eye_close}, mở miệng: {mouth_open}, vui vẻ: {is_happy}, buồn: {is_sad}."
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Cấu hình khớp không hợp lệ. Tổng số khớp: {joint_number}, khớp tay trái: {left_hand_joint_number}, khớp tay phải: {right_hand_joint_number}."
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName} có {num_small_volume_islands} đảo lưới nhỏ không liên kết với nhau trong tổng số {num_disconnected_components} thành phần. Vui lòng xóa bớt các hình khối trôi nổi.
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"{partName} có cấu trúc hình học không đa tạp. Vui lòng kiểm tra các mặt không đồng phẳng, các bề mặt tự cắt nhau hoặc các cạnh dùng chung cho nhiều hơn hai mặt."
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,Lưới {partName} không kín ({boundary_edges_percent}% cạnh biên).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,{mesh_outside_outer_cage_percent}% điểm đỉnh của lưới nằm ngoài khung bao ngoài. Vui lòng điều chỉnh khung bao ngoài để chứa trọn vẹn lưới kết xuất.
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,Không tính toán được dữ liệu xác thực cho {measureName} do dữ liệu đầu vào không đầy đủ hoặc không hợp lệ. Điều này không ngăn cản quá trình đăng tải của bạn.
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,Vân đồ họa {textureName} có độ phức tạp thấp. Vân đồ họa này có thể thiếu các chi tiết hoặc độ đa dạng cần thiết.
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Vân đồ họa {textureName} có độ phân giải thấp ({texture_width}x{texture_height}). Hãy cân nhắc sử dụng vân đồ họa có độ phân giải cao hơn.
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Chất lượng tài sản: {partName} có {intersecting_tri_face_percent}% mặt tam giác giao nhau (điểm: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Chất lượng tài sản: {partName} có {uv_outside_bound_vert_percent}% đỉnh UV nằm ngoài giới hạn (điểm: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName} có {uv_outside_bound_vert_percent}% điểm đỉnh UV nằm ngoài giới hạn [0,1]."
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Chất lượng tài sản: {partName} có {similar_vertex_percent}% đỉnh tương đồng (điểm: {score}).
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,"Chỗ đính ""{AttachmentName}"" của phụ kiện trong ""{PartName}"" phải đặt gần bề mặt của lưới. Vị trí hiện tại [{CurrentPosition}] nằm ngoài vùng hợp lệ. Hãy di chuyển đến gần [{ClosestValidPosition}] hơn."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Handle được gắn kết bề mặt vào khớp {jointName}, là khớp không thuộc lược đồ được cho phép sử dụng. Chỉ được phép sử dụng các khớp R15 tiêu chuẩn và các khớp chuyển phần gắn kết bề mặt."
@@ -268,18 +270,19 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Đầu hiệu ứng động t
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Không phát hiện được biểu cảm nhắm mắt phải cho Đầu hiệu ứng động. Vui lòng điều chỉnh các điểm mốc của khung bao cho mắt phải để khớp với vị trí mắt phải trên đầu và đảm bảo mắt có thể nhắm lại.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Không phát hiện được biểu cảm nhăn mặt cho Đầu hiệu ứng động. Vui lòng điều chỉnh các điểm mốc của khung bao cho miệng để khớp với vị trí miệng trên đầu và đảm bảo miệng thể hiện được biểu cảm nhăn mặt.
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Diện tích phát sáng vượt ngưỡng.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} có mức Phát sáng quá cao. Diện tích phát sáng × cường độ phát sáng đã vượt quá giới hạn (hiện tại là {emissivePercentage}%, phải ở mức {maxEmissivePercentage}% trở xuống). Hãy thu nhỏ diện tích phát sáng hoặc giảm EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Đã vượt quá diện tích phát sáng.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} có mức Phát sáng quá cao. Diện tích phát sáng × cường độ phát sáng đã vượt quá giới hạn (hiện tại là {emissiveArea}, phải ở mức {maxEmissiveArea} trở xuống). Hãy thu nhỏ diện tích phát sáng hoặc giảm EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Tài sản này sử dụng bản đồ phát sáng chỉ dành cho nhà sáng tạo tham gia Chương trình Nhà sáng tạo đáng tin cậy. Vui lòng xóa tất cả nội dung chứa bản đồ phát sáng hoặc tham gia chương trình trước khi tải lên.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Hiệu ứng động đã đăng bị thiếu giá trị dịch chuyển tối đa hợp lệ của bộ phận. Vui lòng đăng lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Hiệu ứng động đã đăng bị thiếu điểm đánh dấu biểu cảm UGC hợp lệ. Vui lòng đăng lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Không thể tính toán độ dịch chuyển tối đa của bộ phận dựa trên dữ liệu hiệu ứng động đã đăng. Vui lòng đăng lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Hiệu ứng động đã đăng cho biết độ dịch chuyển tối đa của bộ phận là {taggedTranslation} stud, nhưng kết quả tính toán dựa trên dữ liệu của hiệu ứng động này cho kết quả là {calculatedTranslation} stud. Vui lòng đăng lại hiệu ứng động này."
+Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,Đầu phải được đặt phía trên Thân trên. Tâm của đầu đang nằm dưới đỉnh của thân – điều này cho thấy lưới của đầu đang bị xẹp hoặc đặt sai vị trí.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Thuộc tính InternalOverrideFACSData trên FaceControls phải để trống khi tải lên.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACS phát hiện đầu của bạn bị phóng to lên {modPercent}%, tuy nhiên việc thay đổi kích thước đầu là vi phạm chính sách về chợ đối với hiệu ứng khuôn mặt."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACS phát hiện đầu của bạn bị thu nhỏ còn {modPercent}%, tuy nhiên việc thay đổi kích thước đầu là vi phạm chính sách về chợ đối với hiệu ứng khuôn mặt."
-Common.UGCValidation.ErrorLabel.FailureWithoutReason,"Xác thực không thành công vì lý do không xác định. Vui lòng thử lại, hoặc mở báo cáo lỗi nếu sự cố này vẫn tiếp diễn."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Định dạng của tệp tải lên không khớp với cấu trúc thư mục yêu cầu. Vui lòng thử lại hoặc gửi báo cáo lỗi.
-Common.UGCValidation.ErrorLabel.HeadNotDynamic,"Đầu hiệu ứng động trên chợ phải được thiết lập sao cho tạo hiệu ứng động thích hợp cho các cử động cơ bản trên khuôn mặt, nhưng hệ thống phát hiện của chúng tôi không nhận ra thay đổi nào đáng kể."
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"Xương {bonePath} nằm quá xa so với meshpart {partName}, vui lòng đặt xương này gần hơn với ranh giới kích thước của meshpart."
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,Xương {bonePath} nằm quá gần xương cha của xương đó. Hãy điều chỉnh vị trí của xương này một chút.
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,"Xương {bonePath} có thuộc tính biến đổi, nhưng thuộc tính này chưa được kích hoạt khi tải lên chợ. Vui lòng đặt lại xương này về CFrame mặc định."
@@ -325,8 +328,6 @@ Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} ""{InstancePa
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"Chỗ đính ""{AttachmentName}"" của bộ khung trong ""{PartName}"" phải đặt gần vùng tiếp giáp của khớp kết nối bộ phận cơ thể này với bộ phận liền kề. Vị trí hiện tại [{CurrentPosition}] quá xa mặt phẳng kết nối. Hãy di chuyển đến gần [{ClosestValidPosition}] hơn."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Để tải một tài sản lên Roblox, bạn phải chọn chính xác 1 trường hợp và loại tải lên tương ứng."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Tài sản này quá lớn để tải lên ({sizeBytes} byte, vượt mức tối đa là {maxSizeBytes} byte). Vui lòng giảm kích thước rồi thử lại."
-Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Phiên bản {ProblematicDescendantPath} không được phép gắn thẻ.
-Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Chuỗi lỗi thử nghiệm thứ hai được sử dụng để xác minh quy trình đồng bộ hóa bản dịch Hub-first (ưu tiên xử lý tại Trung tâm) từ đầu đến cuối.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Bộ phận meshpart đầu có các hiệu ứng khuôn mặt cho khớp {jointName}, là khớp không thể sử dụng được trong FAC. Vui lòng đổi tên khớp này, sau đó nhập lại phần đầu của bạn."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Bộ phận cơ thể {partName} được gắn kết bề mặt vào khớp ảo {jointName}, là khớp không thuộc lược đồ R15plus."
 Common.VerifiedParentalConsent.Action.Cancel,
@@ -629,7 +630,7 @@ CoreScripts.EmoteThumbnailEditor.Label.Time,Thời gian
 CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,Menu Roblox màu trắng cho biết bạn đang chơi thử. Luôn tuân thủ Tiêu chuẩn cộng đồng của Roblox.
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,Mới: Hãy xem qua Roblox Connect!
 CoreScripts.FTUX.Heading.CheckOutRobloxParty,Mới: Hãy xem Party Roblox!
-CoreScripts.FTUX.Heading.InExperienceShop,Cửa hàng mới
+CoreScripts.FTUX.Heading.InExperienceShop,Mua Robux trong Cửa hàng
 CoreScripts.FTUX.Heading.JoinVoice,Tham gia cuộc nói chuyện
 CoreScripts.FTUX.Heading.LeaveRespawn,Rời khỏi và hồi sinh
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,Mới: Công cụ chuyển đổi avatar
@@ -640,7 +641,7 @@ CoreScripts.FTUX.Heading.SideSheetUpdate,Tất cả thao tác ở một nơi
 CoreScripts.FTUX.Heading.SocialOnboarding,Tính năng xã hội
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Chuyển sang avatar bạn đã lưu bất cứ lúc nào.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Trò chuyện với bạn bè bất cứ lúc nào.
-CoreScripts.FTUX.Label.InExperienceShopDescription,Khám phá các vật phẩm được chọn riêng cho bạn
+CoreScripts.FTUX.Label.InExperienceShopDescription,Một số gói có kèm vật phẩm thưởng
 CoreScripts.FTUX.Label.JoinVoiceDescription,Để nghe và nói chuyện với người khác
 CoreScripts.FTUX.Label.LeaveRespawn,Bạn có thể dễ dàng rời khỏi trò chơi hoặc hồi sinh avatar của mình ngay tại đây.
 CoreScripts.FTUX.Label.NewTiltOnboarding,Menu trò chơi chứa thao tác trong trò chơi cùng với các tùy chọn cài đặt trò chơi của bạn.
@@ -769,7 +770,7 @@ CoreScripts.InGameMenu.Controls.Backpack,Balo
 CoreScripts.InGameMenu.Controls.Backspace,Phím Backspace
 CoreScripts.InGameMenu.Controls.CameraMovementTitle,Di chuyển camera
 CoreScripts.InGameMenu.Controls.CameraZoomGamepad,Thu phóng camera
-CoreScripts.InGameMenu.Controls.CharacterMovementTitle,Di chuyển nhân vật
+CoreScripts.InGameMenu.Controls.CharacterMovementTitle,Điều khiển avatar
 CoreScripts.InGameMenu.Controls.Chat,Cuộc Trò Chuyện
 CoreScripts.InGameMenu.Controls.DevConsole,Bảng điều khiển cho nhà phát triển
 CoreScripts.InGameMenu.Controls.DownArrow,Mũi tên xuống
@@ -1018,7 +1019,7 @@ CoreScripts.PublishAssetPrompt.DisclaimerModel,Các vật phẩm đã tạo sẽ
 CoreScripts.PublishAssetPrompt.InvalidDescription,Mô tả Không Hợp Lệ
 CoreScripts.PublishAssetPrompt.InvalidName,Tên Không Hợp Lệ
 CoreScripts.PublishAssetPrompt.Name,Tên
-CoreScripts.PublishAssetPrompt.NoUserInput,Đã xảy ra lỗi. Vui lòng thử lại.
+CoreScripts.PublishAssetPrompt.NoUserInput,
 CoreScripts.PublishAssetPrompt.PackagesDefaultName,Gói của {RBX_NAME}
 CoreScripts.PublishAssetPrompt.PublishFailed,
 CoreScripts.PublishAssetPrompt.PublishFailedTitle,Gửi Thất Bại
@@ -1105,6 +1106,7 @@ CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCoun
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 Gửi lời chào đến tất cả những người đang chơi vào lúc này nhé!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,Chỉ bạn bè đáng tin cậy mới có thể trò chuyện với bạn.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,Trò chuyện với nhiều người hơn trong trò chơi này. Chỉ những người trong nhóm tuổi tương tự mới có thể trò chuyện với bạn.
+CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,Trò chuyện với nhiều người khác trong trò chơi này!
 CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ Cùng góp vui nào! Hãy gửi lời chào đến mọi người đang chơi lúc này nhé!
 CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 {RBX_COUNT} người chơi đang ở trong cuộc trò chuyện. Hãy gửi lời chào nhé!
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,Nhấn giữ để dùng chế độ rảnh tay
@@ -1877,6 +1879,7 @@ Feature.Avatar.UnavailableItems.BodyText,"{category} ""{item}"" đang được x
 Feature.Avatar.UnavailableItems.BodyTextMultiple,"Vật phẩm sau đang được xem xét và hiện không khả dụng.{lineBreak}{items}{lineBreak}Nếu vật phẩm này bị gỡ khỏi Roblox, bạn sẽ nhận được tiền hoàn trong vòng một tuần."
 Feature.Avatar.UnavailableItems.ConfirmText,
 Feature.Avatar.UnavailableItems.TitleText,Vật phẩm không có sẵn
+Feature.Avatar.profile.tooltip,Hồ sơ của bạn
 Feature.Avatar.tooltip.ExpiredItemsFilter,Tìm các vật phẩm tùy chọn dùng thử đã hết hạn
 Feature.AvatarSwitcher.Action.Continue,
 Feature.AvatarSwitcher.Action.OK,
@@ -1966,11 +1969,11 @@ Feature.Build.Action.UpdateRating,Cập nhật mức phân loại
 Feature.Build.Action.UpdateWithChanges,Cập nhật các thay đổi
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Xem mức sử dụng
-Feature.Build.Analytics.AnalyzeChatPrompt,Kiểm tra {analyzeName} trong {days} ngày qua
+Feature.Build.Analytics.AnalyzeChatPrompt,Phân tích {analyzeName} của tôi trong {days} ngày qua. Tại sao chỉ số này lại quan trọng và làm thế nào để cải thiện chỉ số này?
 Feature.Build.Analytics.AnalyzeName.Arppu,doanh thu trung bình trên mỗi người dùng trả phí
 Feature.Build.Analytics.AnalyzeName.D1Retention,tỷ lệ giữ chân ngày 1
 Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,người dùng hoạt động hằng ngày
-Feature.Build.Analytics.AnalyzeName.PayerConversion,tỷ lệ chuyển đổi thành người dùng trả phí
+Feature.Build.Analytics.AnalyzeName.PayerConversion,tỷ lệ chuyển đổi người trả phí
 Feature.Build.Analytics.AnalyzeName.PlaythroughRate,tỷ lệ hoàn thành lượt chơi
 Feature.Build.Analytics.AnalyzeName.TotalPlaytime,tổng thời gian chơi
 Feature.Build.Analytics.Description.Arppu,Doanh thu trung bình trên mỗi người dùng trả phí bằng tổng số Robux kiếm được chia cho số người chơi nạp tiền. Chỉ số này cho biết mức chi tiêu trung bình của mỗi người mua.
@@ -2018,9 +2021,13 @@ Feature.Build.Analytics.Title.TotalPlaytime,Tổng thời gian chơi
 Feature.Build.Analytics.Visits,Lượt truy cập
 Feature.Build.Content.NewGame,Trò chơi mới
 Feature.Build.Description.ActivateDeveloperProduct,Đăng bán sản phẩm {PRODUCT_ID} của nhà phát triển.
+Feature.Build.Description.AdActive,Quảng cáo của bạn đang chạy. Hãy xem quảng cáo đang tiếp cận bao nhiêu người chơi.
 Feature.Build.Description.AdCampaignModerationReview,Mọi chiến dịch quảng cáo đều được đội ngũ kiểm duyệt của Roblox xem xét. Quá trình này có thể mất đến 24 giờ.
 Feature.Build.Description.AdCampaignSheetRunDates,Chạy từ {startDate} – {endDate}
-Feature.Build.Description.AdvertisingAgreement,"Bằng việc tiếp tục, bạn đồng ý với {advertisingTermsStart}Điều khoản quảng cáo{advertisingTermsEnd} và {advertisingStandardsStart}Tiêu chuẩn quảng cáo của Roblox{advertisingStandardsEnd}."
+Feature.Build.Description.AdComplete,Quảng cáo của bạn đã kết thúc. Hãy kiểm tra kết quả.
+Feature.Build.Description.AdInReview,Quảng cáo của bạn đang được xét duyệt và dự kiến sẽ chạy từ {startDate} – {endDate}.
+Feature.Build.Description.AdModerationReview,Mọi quảng cáo đều được đội ngũ kiểm duyệt của Roblox xem xét và có thể mất đến 24 giờ.
+Feature.Build.Description.AdvertisingAgreement,"Khi chọn ""Tạo"", bạn đồng ý với {advertisingTermsStart}Điều khoản quảng cáo{advertisingTermsEnd} và {advertisingStandardsStart}Tiêu chuẩn quảng cáo của Roblox{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Nếu bạn lưu trữ trò chơi này, trò chơi sẽ bị gỡ khỏi Build. Bạn vẫn có thể truy cập và khôi phục trò chơi từ Trung tâm nhà sáng tạo hoặc Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Dùng Robux của bạn để tự động mua thêm lượt sử dụng Build trong quá trình sáng tạo. Bạn có thể cài đặt hạn mức chi tiêu hằng ngày bất cứ lúc nào.
 Feature.Build.Description.BoostAudienceForPlays,Thu hút thêm đối tượng để tăng số lượt chơi.
@@ -2035,10 +2042,12 @@ Feature.Build.Description.DeactivateDeveloperProduct,Ngừng bán sản phẩm {
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Nếu bạn kiếm được Robux, số Robux này sẽ được ưu tiên trừ vào chi phí của chiến dịch quảng cáo."
 Feature.Build.Description.EnableBuildNotifs,Bật thông báo trong phần cài đặt của thiết bị để nhận thông tin cập nhật từ Build.
 Feature.Build.Description.FriendsLinkOnly,Chỉ bạn bè của bạn mới có thể truy cập đường liên kết này. Hãy thay đổi cài đặt Đối tượng của trò chơi nếu bạn muốn có nhiều người chơi hơn.
+Feature.Build.Description.GameConfiguration,Thay đổi cách bạn bán vật phẩm và quảng bá trò chơi của mình.
 Feature.Build.Description.GameCreationDone,Tôi đã tạo xong và đăng trò chơi của bạn. Bạn đã có thể mở lên để chơi thử.
 Feature.Build.Description.GameSavedPlaytest,Tôi đã tạo xong trò chơi của bạn và lưu phiên bản mới. Bạn có thể mở lên để chơi thử nhé.
 Feature.Build.Description.HubSettings,Quản lý tất cả cài đặt trong Trung tâm nhà sáng tạo
 Feature.Build.Description.InviteFriendLimit,Mời tối đa {MAX_INVITES} người bạn tham gia chơi trong lúc bạn sáng tạo.
+Feature.Build.Description.LongAdCampaign,Có thêm thời gian để tiếp cận người chơi mới và thu hút họ quay lại.
 Feature.Build.Description.MakeAudienceAvail,Đăng trải nghiệm của bạn để cho phép đối tượng này tham gia.
 Feature.Build.Description.ManageAppearance,Quản lý giao diện hiển thị của trò chơi với người khác.
 Feature.Build.Description.ManageDeveloperProduct,Quản lý sản phẩm của nhà phát triển.
@@ -2053,6 +2062,8 @@ Feature.Build.Description.PlaytestLocked,Bạn có thể bắt đầu chơi th�
 Feature.Build.Description.PlaytesterAccess,Hãy mời bạn bè tham gia thử nghiệm sớm hoặc thay đổi cài đặt Đối tượng của trò chơi để cho phép nhiều người vào chơi hơn.
 Feature.Build.Description.PricingRules,Thiết lập quy tắc định giá
 Feature.Build.Description.PrivateShare,Hãy thay đổi cài đặt Đối tượng của trò chơi để chia sẻ.
+Feature.Build.Description.PromoteGameFree,Giúp trò chơi của bạn tiếp cận nhiều người chơi hơn chỉ với một thao tác nhấn.
+Feature.Build.Description.PromoteGamePaid,Tạo quảng cáo để giúp trò chơi của bạn tiếp cận hàng triệu người chơi.
 Feature.Build.Description.PromoteGameWithAdCampaign,Thu hút thêm người chơi bằng chiến dịch quảng cáo dài {durationDays} ngày và giúp trò chơi của bạn tiếp cận được nhiều người hơn.
 Feature.Build.Description.RaiseLimitOrWait,"Tăng hạn mức Robux hằng ngày của bạn để tiếp tục sáng tạo, hoặc đợi hạn mức làm mới vào ngày mai."
 Feature.Build.Description.RatingAgreement,"Bằng việc đăng, bạn đồng ý rằng mức phân loại nội dung này là chính xác."
@@ -2060,6 +2071,7 @@ Feature.Build.Description.RestoreLatest,Phiên bản này sẽ trở thành phi�
 Feature.Build.Description.RevertToVersion,Xác nhận trả về bản thay đổi gần nhất và quay lại {VERSION}.
 Feature.Build.Description.ShareLatest,Chia sẻ về những thay đổi trong phiên bản mới nhất của bạn.
 Feature.Build.Description.ShopButton,Thêm điểm truy cập cửa hàng
+Feature.Build.Description.ShortAdCampaign,Cách nhanh chóng để biết người chơi nghĩ gì về trò chơi của bạn.
 Feature.Build.Description.UpdateDeveloperProduct,Cập nhật sản phẩm của nhà phát triển {PRODUCT_ID}.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Nội dung mô tả không được quá 1.000 ký tự.
 Feature.Build.Error.DeveloperProductNameRequired,Nhập tên sản phẩm.
@@ -2075,6 +2087,7 @@ Feature.Build.Header.AccessSharing,Quyền truy cập và chia sẻ
 Feature.Build.Header.AllVersions,Tất cả các phiên bản
 Feature.Build.Header.ContentMaturity,Mức độ nội dung người lớn
 Feature.Build.Header.CustomAnswer,Câu trả lời tùy chỉnh
+Feature.Build.Header.GameConfiguration,Cấu hình của trò chơi
 Feature.Build.Header.GameDetails,Chi tiết về trò chơi
 Feature.Build.Header.Overview,
 Feature.Build.Header.PastCampaigns,Các chiến dịch trước
@@ -2118,6 +2131,7 @@ Feature.Build.Label.GamePlays,Lượt chơi
 Feature.Build.Label.GetMoreBuildUsage,Mua thêm lượt sử dụng Build
 Feature.Build.Label.Hi,Xin chào
 Feature.Build.Label.IconThumbnails,Biểu tượng và hình nhỏ
+Feature.Build.Label.Images2D,Hình ảnh 2D
 Feature.Build.Label.InProgress,Đang thực hiện
 Feature.Build.Label.InputNeeded,Cần thông tin đầu vào
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2127,9 +2141,12 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Giá được quản lý
 Feature.Build.Label.ManagedPricingMixed,Kết hợp trên các sản phẩm hiện tại
 Feature.Build.Label.MaximizeForGamePlays,Tăng tối đa lượt chơi
+Feature.Build.Label.Models3D,Mô hình 3D
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Không giới hạn
 Feature.Build.Label.NotStarted,Chưa bắt đầu
+Feature.Build.Label.Object,Đối tượng
+Feature.Build.Label.Objects3D,Đối tượng 3D
 Feature.Build.Label.OffSale,Ngừng bán
 Feature.Build.Label.OnSale,Đang bán
 Feature.Build.Label.Pending,Đang chờ xử lý
@@ -2151,12 +2168,14 @@ Feature.Build.Label.ResetsMonthly,Đặt lại hằng tháng
 Feature.Build.Label.ResetsWeekly,Đặt lại hằng tuần
 Feature.Build.Label.RestoredVersion,Đã khôi phục {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
+Feature.Build.Label.SalesOptions,Tùy chọn bán hàng
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,Tìm kiếm trò chơi
 Feature.Build.Label.SearchTasks,Tìm kiếm nhiệm vụ
 Feature.Build.Label.SelectOption,Chọn một tùy chọn
 Feature.Build.Label.ShopButton,Nút Cửa hàng
 Feature.Build.Label.ShopUi,UI cửa hàng
+Feature.Build.Label.Sounds,
 Feature.Build.Label.TargetAllRobloxPlayers,Nhắm đến tất cả người chơi Roblox
 Feature.Build.Label.Thinking,Đang tư duy
 Feature.Build.Label.Title,Tiêu đề
@@ -2234,6 +2253,7 @@ Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.Video,Video
+Feature.Build.Label.World,Thế giới
 Feature.Build.Message.AccountRequirements,Tài khoản của bạn không đáp ứng các yêu cầu để sử dụng Build.
 Feature.Build.Message.AccountTooNew,Tài khoản của bạn còn quá mới nên chưa thể đăng. Hãy thử lại khi bạn đã tạo tài khoản được 2 ngày.
 Feature.Build.Message.AdCampaignCreateFailed,Không tạo được chiến dịch. Vui lòng thử lại.
@@ -2246,6 +2266,7 @@ Feature.Build.Message.AdsStatsEmpty,Thu hút thêm người chơi bằng một c
 Feature.Build.Message.AdsStatsEmptyFree,Thu hút thêm người chơi bằng chiến dịch quảng cáo miễn phí và giúp trò chơi của bạn tiếp cận được nhiều người hơn
 Feature.Build.Message.AllFriendsAdded,Bạn đã mời tất cả bạn bè tham gia thử nghiệm sớm.
 Feature.Build.Message.AnswerBuildQuestion,Trả lời câu hỏi của Build ở bên dưới.
+Feature.Build.Message.AssetDetailsUnavailable,Không có chi tiết về tài sản.
 Feature.Build.Message.AudienceIneligible,Không đủ điều kiện cho đối tượng này
 Feature.Build.Message.BuildAccountBlocked,Tài khoản của bạn chưa sử dụng được Build vào lúc này.
 Feature.Build.Message.BuildBusy,Build đang bận. Hãy đợi một lát rồi thử lại.
@@ -2277,15 +2298,18 @@ Feature.Build.Message.InvitesLoadFailed,Không tải được lời mời
 Feature.Build.Message.LimitBelowSpend,Giới hạn không được thấp hơn con số {ALREADY_SPENT} Robux đã chi tiêu hôm nay.
 Feature.Build.Message.LinkCopied,Đã sao chép đường liên kết vào bộ nhớ tạm.
 Feature.Build.Message.LoadingVersions,Đang tải lịch sử phiên bản...
+Feature.Build.Message.NoAssetsFound,Không tìm thấy tài sản nào.
 Feature.Build.Message.NoCapturesAvailable,Không có ảnh chụp nào
 Feature.Build.Message.NoDescriptionProvided,Không có mô tả nào được cung cấp.
 Feature.Build.Message.NoFriendsToAdd,Bạn chưa có bạn bè để mời. Trước tiên bạn cần tìm người để kết bạn trên Roblox.
 Feature.Build.Message.NoResults,
+Feature.Build.Message.NoSearchResultsFound,Không tìm thấy kết quả tìm kiếm
 Feature.Build.Message.NoVersionHistory,Chưa có lịch sử phiên bản.
 Feature.Build.Message.OneTaskCompleted,Đã hoàn thành 1 nhiệm vụ
 Feature.Build.Message.OutOfBuildUsage,Bạn đã hết lượt sử dụng Build. Hãy xem các lựa chọn sử dụng Robux để tiếp tục sáng tạo.
 Feature.Build.Message.PlaytestInviteSendFailedBody,Bạn không thể gửi liên kết mời tham gia trò chuyện cho những người dùng sau:
 Feature.Build.Message.PlaytestInviteSendFailedHint,Vui lòng sử dụng nút Chia sẻ để lấy đường liên kết.
+Feature.Build.Message.PlaytesterRequestFailed,Chúng tôi không thể hoàn tất yêu cầu của bạn. Vui lòng thử lại.
 Feature.Build.Message.PlaytestersAdded,Đã mời {INVITED_COUNT}/{MAX_INVITES} người thử nghiệm sớm
 Feature.Build.Message.PrivatePlaytestInvite,{username} đã mời bạn tham gia thử nghiệm sớm {experienceName}
 Feature.Build.Message.PublicPublishFailed,Trò chơi của bạn đã được đăng nhưng chưa đăng công khai. Vui lòng thử lại.
@@ -2324,14 +2348,16 @@ Feature.Build.Notification.Title.NeedInput,Tính năng Tạo dựng cần bạn 
 Feature.Build.Placeholder.DescribeProduct,Mô tả sản phẩm bạn muốn bán
 Feature.Build.Placeholder.DescribeProductUpdate,Mô tả thông tin trong bản cập nhật
 Feature.Build.Prompt.CreateDeveloperProduct,"Giúp tôi tạo một sản phẩm của nhà phát triển, đưa sản phẩm đó vào trò chơi, xác minh và đăng các thay đổi, rồi cho phép người dùng mua sản phẩm đó."
-Feature.Build.Title.AdCampaignActive,Chiến dịch quảng cáo đang hoạt động
 Feature.Build.Title.AdCampaignDuration,Chiến dịch quảng cáo dài {durationDays} ngày
+Feature.Build.Title.AdComplete,Đã hoàn tất quảng cáo
+Feature.Build.Title.AdCreated,Đã tạo quảng cáo
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Thêm hình ảnh
 Feature.Build.Title.AdsStatsEmpty,Khởi tạo chiến dịch
 Feature.Build.Title.AdsStatsEmptyFree,Khởi tạo chiến dịch đầu tiên của bạn
 Feature.Build.Title.ArchiveThisGame,Lưu trữ trò chơi này?
-Feature.Build.Title.Audience,Đối tượng
+Feature.Build.Title.AssetLibrary,Thư viện
+Feature.Build.Title.Audience,
 Feature.Build.Title.BuildQuestion,Build có một câu hỏi
 Feature.Build.Title.BuildQuestions,Build có một số câu hỏi
 Feature.Build.Title.BuildUnavailable,Build không sử dụng được
@@ -2339,6 +2365,7 @@ Feature.Build.Title.BuildUsage,Lượt sử dụng Build
 Feature.Build.Title.ChangesNotLive,Nội dung bạn thay đổi chưa được đăng
 Feature.Build.Title.ChatBuildUnavailable,Build không sử dụng được.
 Feature.Build.Title.Content,Nội dung
+Feature.Build.Title.CreateYourAd,Tạo quảng cáo của bạn
 Feature.Build.Title.DailyRobuxReached,Đã dùng hết hạn mức Robux hằng ngày
 Feature.Build.Title.DeveloperProduct,Sản phẩm của nhà phát triển
 Feature.Build.Title.EditDeveloperProduct,Chỉnh sửa sản phẩm
@@ -2354,9 +2381,13 @@ Feature.Build.Title.NoMonetizationProducts,Bắt đầu kiếm tiền trong trò
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
 Feature.Build.Title.PlaytestInviteSendFailed,Không gửi được lời mời
 Feature.Build.Title.Playtesters,
+Feature.Build.Title.PlaytestersAddRejected,Không thể thêm những người dùng sau:
 Feature.Build.Title.PlaytestersOnlyPlay,Chỉ người chơi thử mới có thể chơi
 Feature.Build.Title.PromoteGame,Quảng bá trò chơi của bạn
 Feature.Build.Title.PromoteGameFree,Quảng bá trò chơi của bạn miễn phí
+Feature.Build.Title.PromoteGameFreePlural,Bạn có {promotionCount} quảng cáo miễn phí
+Feature.Build.Title.PromoteGameFreeSingular,Bạn có một quảng cáo miễn phí
+Feature.Build.Title.PromoteGamePaid,Nhiều người chơi khác đang chờ bạn
 Feature.Build.Title.PushNotifications,Thông báo đẩy
 Feature.Build.Title.RevertLastChange,Trả về bản thay đổi gần nhất?
 Feature.Build.Title.Tasks,Nhiệm vụ
@@ -2615,6 +2646,11 @@ Feature.Catalog.Label.ItemInAHold,Vật phẩm đang nắm giữ?
 Feature.Catalog.Label.ItemOwnedCount,Vật Phẩm Đã Sở Hữu ({itemCount})
 Feature.Catalog.Label.ItemsCount,
 Feature.Catalog.Label.LeftArm,
+Feature.Catalog.Label.LicensedBy,Được cấp phép bởi
+Feature.Catalog.Label.LicensingLicensed,Đã cấp phép
+Feature.Catalog.Label.LicensingLicensedInfo,Được thương hiệu phê duyệt
+Feature.Catalog.Label.LicensingOfficial,Chính thức
+Feature.Catalog.Label.LicensingOfficialInfo,Sản phẩm của thương hiệu
 Feature.Catalog.Label.Limited,Giới Hạn
 Feature.Catalog.Label.LimitedU,Giới Hạn ĐB
 Feature.Catalog.Label.LipMakeup,
@@ -2687,6 +2723,7 @@ Feature.Catalog.Label.SellCut,Bạn Kiếm Được:
 Feature.Catalog.Label.SellPageUpsell,Chỉ người dùng có gói thành viên Roblox Plus mới có thể bán hàng.
 Feature.Catalog.Label.SellSuccess,
 Feature.Catalog.Label.SerialNumberColon,Số Sê-ri:
+Feature.Catalog.Label.ShareToMoments,Chia sẻ lên Khoảnh khắc
 Feature.Catalog.Label.ShoulderAccessories,Phụ Kiện Vai
 Feature.Catalog.Label.SoldOut,Đã Bán Hết
 Feature.Catalog.Label.SupportsHeadShapes,Hỗ trợ các hình dáng đầu
@@ -2702,6 +2739,7 @@ Feature.Catalog.Label.Timer.Second.Plural,Còn {number} giây
 Feature.Catalog.Label.Timer.Second.Singular,Còn 1 giây
 Feature.Catalog.Label.Tops,Thân Trên
 Feature.Catalog.Label.Torso,
+Feature.Catalog.Label.TotalItemsFraction,Tổng: ({itemCount}/{itemTotal} vật phẩm)
 Feature.Catalog.Label.TotalItemsParenthesis,
 Feature.Catalog.Label.TotalUnformatted,Tổng
 Feature.Catalog.Label.Tradable,Có Thể Buôn Bán
@@ -2839,7 +2877,7 @@ Feature.Chat.Description.OSAContextCardDescription,Chúng tôi coi trọng sự 
 Feature.Chat.Description.OSAGroupDescriptionWithLinker,Chúng tôi coi trọng sự an toàn của bạn. Trong hồ sơ của người dùng có chức năng cho phép bạn chặn hoặc báo cáo họ bất cứ lúc nào. <a href='{osaViewDetailsUrl}'>Xem chi tiết.</a>
 Feature.Chat.Description.SnoozeDescription,Bạn có thể tắt chế độ Báo lại trong menu trải nghiệm
 Feature.Chat.Drawer.Join,
-Feature.Chat.Heading.ChatWithConnections,Trò chuyện với Người quen
+Feature.Chat.Heading.ChatWithConnections,Trò chuyện với bạn bè
 Feature.Chat.Heading.ChatWithFriends,Trò Chuyện Với Bạn Bè
 Feature.Chat.Heading.CreateUnfilteredChatDialog,Tạo nhóm mới với các tính năng trò chuyện mở rộng?
 Feature.Chat.Heading.ExpressiveChat,Trò chuyện tự nhiên
@@ -2850,7 +2888,7 @@ Feature.Chat.Heading.FirstConversationWithThisUser,Cuộc trò chuyện đầu t
 Feature.Chat.Heading.FirstInteractionWith,Lần tương tác đầu tiên với {displayName}
 Feature.Chat.Heading.FirstInteractionWithThisPerson,Lần tương tác đầu tiên với người này
 Feature.Chat.Heading.LeaveGroup,Rời Nhóm
-Feature.Chat.Heading.PartyWithConnections,Lập Party với Người quen
+Feature.Chat.Heading.PartyWithConnections,Lập Party với bạn bè
 Feature.Chat.Heading.PartyWithFriends,Lập Party với Bạn Bè
 Feature.Chat.Heading.SafeChattingWithThisUser,Hãy thận trọng khi trò chuyện với người này
 Feature.Chat.Heading.SafeChattingWithUsername,Hãy thận trọng khi trò chuyện với {displayName}
@@ -2878,7 +2916,6 @@ Feature.Chat.Label.GroupName,Tên Nhóm
 Feature.Chat.Label.HoverToReplyTooltip,Di chuột để trả lời
 Feature.Chat.Label.InGameFriendsChatNotifications,Thông báo trò chuyện với bạn bè trong trò chơi
 Feature.Chat.Label.Loading,
-Feature.Chat.Label.LongPressToReplyTooltip,Nhấn giữ để trả lời
 Feature.Chat.Label.Members,Thành Viên
 Feature.Chat.Label.MessageNotAvailable,Tin nhắn này không khả dụng
 Feature.Chat.Label.MuteInGameChatToastNotifications,Tắt thông báo trò chuyện trong trò chơi
@@ -2897,7 +2934,7 @@ Feature.Chat.Label.ReplyChatInputPlaceholder,Trả lời {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Trả lời chính mình
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} nói...
 Feature.Chat.Label.ReplyingToYourself,Bạn đã nói...
-Feature.Chat.Label.SearchConnections,Tìm Người quen
+Feature.Chat.Label.SearchConnections,Tìm bạn bè
 Feature.Chat.Label.SearchFriends,Tìm kiếm bạn bè
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SnoozeChatNotifications,Tắt thông báo trò chuyện trong trải nghiệm:
@@ -2918,34 +2955,34 @@ Feature.Chat.Label.UnknownUser,người chơi không xác định
 Feature.Chat.Label.User,Người dùng
 Feature.Chat.Label.ViewProfile,Xem Hồ Sơ
 Feature.Chat.Label.YouRepliedToYou,Bạn đã trả lời bản thân bạn
-Feature.Chat.Message.AddConnectionsLimit,Một cuộc trò chuyện nhóm được phép có tối đa {connectionsNum} Người quen.
-Feature.Chat.Message.AddConnectionsPartyLimit,Một Party được phép có tối đa {connectionsNum} Người quen.
-Feature.Chat.Message.AddConnectionsPartyLimitSingular,Bạn chỉ được phép tạo party với 1 Người quen do chế độ cài đặt quyền riêng tư.
-Feature.Chat.Message.AddFriendsLimit,Bạn có thể có tối đa {connectionsNum} người bạn trong cuộc trò chuyện nhóm.
-Feature.Chat.Message.AddFriendsPartyLimit,Bạn có thể có tối đa {connectionsNum} người bạn trong một Party.
-Feature.Chat.Message.AddFriendsPartyLimitSingular,Bạn chỉ có thể tạo party với 1 người bạn do cài đặt quyền riêng tư của bản thân.
+Feature.Chat.Message.AddConnectionsLimit,Bạn có thể có tối đa {connectionsNum} người bạn trong cuộc trò chuyện nhóm.
+Feature.Chat.Message.AddConnectionsPartyLimit,Bạn có thể có tối đa {connectionsNum} người bạn trong một Party.
+Feature.Chat.Message.AddConnectionsPartyLimitSingular,Bạn chỉ có thể tạo party với 1 người bạn do cài đặt quyền riêng tư của bản thân.
+Feature.Chat.Message.AddFriendsLimit,
+Feature.Chat.Message.AddFriendsPartyLimit,
+Feature.Chat.Message.AddFriendsPartyLimitSingular,
 Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName} đã gửi tin nhắn không thể hiển thị
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,Tính năng trò chuyện bị vô hiệu hóa. Bạn có thể bật tính năng này trong phần cài đặt quyền riêng tư.
 Feature.Chat.Message.ChatUnavailableRegion,Không thể sử dụng tính năng trò chuyện ở khu vực của bạn tại thời điểm này.
 Feature.Chat.Message.ChatUnavailableWithUser,Không thể sử dụng tính năng trò chuyện với người dùng này tại thời điểm này.
 Feature.Chat.Message.Default,Không phải ai trong cuộc trò chuyện này cũng có thể thấy tin nhắn của bạn.
-Feature.Chat.Message.EnableChat,"Để trò chuyện với Người quen, hãy bật tính năng trò chuyện trong phần Cài đặt quyền riêng tư."
-Feature.Chat.Message.EnableChat.FriendsRename,"Để trò chuyện với bạn bè, hãy bật tính năng trò chuyện trong phần Cài đặt quyền riêng tư."
-Feature.Chat.Message.EnableParty,"Để lập Party với Người quen, hãy bật tính năng Party trong phần Cài đặt quyền riêng tư."
-Feature.Chat.Message.EnableParty.FriendsRename,"Để lập Party với bạn bè, hãy bật tính năng Party trong phần Cài đặt quyền riêng tư."
+Feature.Chat.Message.EnableChat,"Để trò chuyện với bạn bè, hãy bật tính năng trò chuyện trong phần Cài đặt quyền riêng tư."
+Feature.Chat.Message.EnableChat.FriendsRename,
+Feature.Chat.Message.EnableParty,"Để lập Party với bạn bè, hãy bật tính năng Party trong phần Cài đặt quyền riêng tư."
+Feature.Chat.Message.EnableParty.FriendsRename,
 Feature.Chat.Message.FailedToLeaveGroup,Bạn không thể bị loại bỏ khỏi cuộc hội thoại {CONVERSATION_TITLE}.
 Feature.Chat.Message.FailedToLeaveGroup.V2,Bạn không thể bị loại bỏ khỏi nhóm {CONVERSATION_TITLE}.
 Feature.Chat.Message.FailedToRemoveUser,Người chơi {USERNAME} không thể bị loại bỏ khỏi cuộc hội thoại {CONVERSATION_TITLE}.
 Feature.Chat.Message.FailedToRemoveUser.V2,Người chơi {USERNAME} không thể bị loại bỏ khỏi nhóm {CONVERSATION_TITLE}.
 Feature.Chat.Message.FailedToRenameConversation,Không thể đổi tên cuộc hội thoại {EXISTING_NAME} thành {NEW_NAME}.
 Feature.Chat.Message.FailedToRenameConversation.V2,Không thể đổi tên nhóm từ {EXISTING_NAME} thành {NEW_NAME}.
-Feature.Chat.Message.GroupConnectionLimitSingular,Bạn chỉ có thể thêm 1 Người quen để trò chuyện.
-Feature.Chat.Message.GroupFriendLimitSingular,Bạn chỉ có thể thêm 1 người bạn để trò chuyện cùng.
+Feature.Chat.Message.GroupConnectionLimitSingular,Bạn chỉ có thể thêm 1 người bạn để trò chuyện cùng.
+Feature.Chat.Message.GroupFriendLimitSingular,
 Feature.Chat.Message.LeaveGroup,Bạn sẽ không thể tiếp tục trò chuyện với nhóm này.
 Feature.Chat.Message.LeaveGroup.V2,Bạn có chắc chắn muốn rời khỏi nhóm không?
-Feature.Chat.Message.MakeConnectionsToChat,Làm quen với các thành viên Roblox để bắt đầu trò chuyện cùng nhau
-Feature.Chat.Message.MakeConnectionsToParty,Tìm Người quen trên Roblox để chơi cùng nhau trong một Party
-Feature.Chat.Message.MakeFriendsToChat,Kết bạn trên Roblox để bắt đầu trò chuyện cùng nhau
+Feature.Chat.Message.MakeConnectionsToChat,Kết bạn trên Roblox để bắt đầu trò chuyện cùng nhau
+Feature.Chat.Message.MakeConnectionsToParty,Kết bạn trên Roblox để lập Party cùng nhau
+Feature.Chat.Message.MakeFriendsToChat,
 Feature.Chat.Message.MakeFriendsToParty,Kết bạn trên Roblox để lập Tổ Đội cùng nhau
 Feature.Chat.Message.MessageContentModerated,Tin nhắn của bạn đã được kiểm duyệt và không được gửi.
 Feature.Chat.Message.MessageUnavailable,Không thể xem tin nhắn
@@ -2972,7 +3009,7 @@ Feature.Chat.ShareGameToChat.NoPopularGames,Không có trải nghiệm phổ bi�
 Feature.Chat.ShareGameToChat.NoRecentGames,Không có gần đây
 Feature.Chat.ShareGameToChat.Popular,Phổ Biến
 Feature.Chat.ShareGameToChat.Recent,Gần Đây
-Feature.Chat.Text.NoConnections,"Bạn chưa thêm Người quen nào. Để bắt đầu, hãy tìm và thêm Người quen trên Roblox."
+Feature.Chat.Text.NoConnections,"Bạn chưa thêm người bạn nào. Để bắt đầu, hãy tìm và thêm bạn bè trên Roblox."
 Feature.Chat.Text.NoFriends,"Bạn chưa thêm bất kỳ người bạn nào. Để bắt đầu, hãy tìm và thêm bạn bè trên Roblox."
 Feature.Chat.Title.FriendsChat,Trò chuyện cùng bạn bè
 Feature.Chat.Title.MuteChatNotifications,Tắt thông báo trò chuyện từ bạn bè trong suốt trải nghiệm chơi
@@ -3089,7 +3126,7 @@ Feature.FAE.Action.Continue,
 Feature.FAE.Action.Unlock,
 Feature.FAE.Action.UnlockChat,
 Feature.FAE.CheckIfYouCanJoinGame,Hãy kiểm tra xem bạn có thể tham gia trò chơi này hay không.
-Feature.FAE.Label.ChatWithFriends,Trò chuyện với bạn bè
+Feature.FAE.Label.ChatWithFriends,
 Feature.FAE.Label.DayLeft,
 Feature.FAE.Label.DaysLeft,Còn {daysLeft} ngày
 Feature.FAE.Label.GetASecureAgeCheckToUnlockChatAndAddTrustedFriends,Thực hiện quy trình kiểm tra độ tuổi an toàn để mở khóa tính năng trò chuyện và thêm bạn bè đáng tin cậy.
@@ -3303,7 +3340,7 @@ Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} đã trở thành
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Đã xóa Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Đã gửi yêu cầu trở thành bạn bè đáng tin cậy
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,Xem hoạt động gần đây
-Feature.FriendsMenu.Label.SearchForConnections,
+Feature.FriendsMenu.Label.SearchForConnections,Tìm Người quen
 Feature.FriendsMenu.Label.SelectedConnectionsCount,Đã chọn {numerator}/{denominator} Người quen
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,Đã chọn {selectedCount} Người quen
 Feature.FriendsMenu.Label.SelectedFriendsCount,Đã chọn {numerator}/{denominator} người bạn
@@ -3400,7 +3437,6 @@ Feature.Groups.Heading.Primary,Chính
 Feature.Groups.Heading.SocialLinksNew,Liên kết mạng xã hội
 Feature.Groups.Heading.SocialMedia,Mạng xã hội
 Feature.Groups.Heading.VerificationRequired,Yêu cầu xác minh tài khoản
-Feature.Groups.Heading.Videos,
 Feature.Groups.Label.ByOwnerWithFormat,Người sở hữu: {ownerName}
 Feature.Groups.Label.Follower,người theo dõi
 Feature.Groups.Label.FollowerCapital,
@@ -3508,6 +3544,7 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Còn {time}
+Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Khi mua Robux, bạn đồng ý với {termsLinkStart}Điều khoản sử dụng{termsLinkEnd} của chúng tôi, bao gồm điều khoản trọng tài và chính sách thu hồi."
 Feature.InExperienceShop.Label.BonusItem,Vật phẩm thưởng
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Kết thúc sau {timeRemaining}
@@ -3522,6 +3559,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} phút
 Feature.InExperienceShop.Label.Timer.Minute.Singular,1 phút
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} giây
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 giây
+Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Bạn đã mua thành công {ROBUX_AMOUNT} Robux
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Bạn có chắc chắn muốn xóa vĩnh viễn vật phẩm này khỏi kho? Nếu thay đổi ý định, bạn sẽ phải tự kiếm lại vật phẩm này trong một trải nghiệm."
 Feature.Item.Label.DeleteItemUndercase,Xóa vật phẩm
 Feature.Landing.Label.PoweredBy,Được cung cấp bởi
@@ -4113,7 +4151,7 @@ Feature.SettingsHub.Label.Report.ReceivedReportBody,Chúng tôi đã nhận đư
 Feature.SettingsHub.Label.ReportComment,
 Feature.SettingsHub.Label.SceneCaptured,Cảnh đã chụp
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder,
-Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,Tìm bạn bè
+Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,Đang Gửi
 Feature.SettingsHub.Label.Show,Hiển thị
 Feature.SettingsHub.Label.Unmute,
@@ -4666,6 +4704,7 @@ IAPExperience.PurchaseSuccess.Title.PurchaseSucceeded,Mua Thành Công
 IAPExperience.RobuxUpsell.Action.BuyRobux,
 IAPExperience.RobuxUpsell.Action.BuyRobuxAndItem,Mua Robux Và Vật Phẩm
 IAPExperience.RobuxUpsell.Action.Cancel,
+IAPExperience.RobuxUpsell.Action.GetPercentOff,Được giảm {discountPercentage}%
 IAPExperience.RobuxUpsell.Text.AdditionalRobux,Bạn cần thêm {robux}.
 IAPExperience.RobuxUpsell.Text.BestValue,Đáng tiền nhất
 IAPExperience.RobuxUpsell.Text.BetterValue,Đáng tiền hơn
@@ -4961,7 +5000,7 @@ InGame.UnknownNamespace.Received,Đã Nhận
 InGame.UnknownNamespace.Sent,Đã Gửi
 InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,Không thể thêm {experience_name} vào màn hình
 InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,Không thể thêm {experience_name} vào màn hình chính
-InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Lối tắt đến {experience_name} đã tồn tại
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Lối tắt hiện tại của {experience_name} đã được thay thế
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Đã thêm {experience_name} vào màn hình thành công
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,Đã thêm {experience_name} vào màn hình chính thành công
 InstantApps.Shortcuts.Label.TryAgain,

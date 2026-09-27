@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("MomentsCommentMaxLength", 200)

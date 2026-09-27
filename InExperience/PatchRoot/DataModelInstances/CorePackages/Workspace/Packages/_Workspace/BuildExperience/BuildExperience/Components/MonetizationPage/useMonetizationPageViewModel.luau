@@ -7,7 +7,7 @@ local getBuildPromptDraftStoreModule = require(buildExperience.Stores.GetBuildPr
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local formatErrorModule = require(buildExperience.utils.formatError)
 local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
-local fFlagBuildExperienceManageDevProduct = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct) or fFlagBuildExperienceMonetizationNativeUIModule
+local fFlagBuildExperienceMonetizationProductEditingModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationProductEditing)
 local _ = require(script.Parent.MonetizationPageView)
 local t = {}
 
@@ -456,7 +456,7 @@ local function useOptionsState(p6, p7, p8, p9, p10)
 end
 
 return function(p11)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), t (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), reactModule (ref), t_2 (ref), useOptionsState (ref), fFlagBuildExperienceManageDevProduct (ref), t_1 (ref), useManageProductState (ref), sendBuildExperienceEventModule (ref), formatErrorModule (ref), getBuildPromptDraftStoreModule (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), t (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), reactModule (ref), t_2 (ref), useOptionsState (ref), fFlagBuildExperienceMonetizationProductEditingModule (ref), t_1 (ref), useManageProductState (ref), sendBuildExperienceEventModule (ref), formatErrorModule (ref), getBuildPromptDraftStoreModule (ref)
 	local var24 = useLocalization({
 		title = localizationStringsModule.MONETIZATION_TITLE,
 		emptyTitle = localizationStringsModule.MONETIZATION_EMPTY_TITLE,
@@ -518,13 +518,13 @@ return function(p11)
 	end, { var27 })
 	local var29 = if fFlagBuildExperienceMonetizationNativeUIModule then useOptionsState(p11, products, var26, var28, var27) else t_2
 	local var30 = if #products > 0 then "catalog" else "empty"
-	local var31 = if var25 == "detail" or fFlagBuildExperienceManageDevProduct and var25 == "edit" then products[1] else nil
+	local var31 = if var25 == "detail" or fFlagBuildExperienceMonetizationProductEditingModule and var25 == "edit" then products[1] else nil
 	local var32, var33 = reactModule.useState(var25 or var30)
 	local var34, var35 = reactModule.useState(var31)
 	local var36, var37 = reactModule.useState(false)
 	local var38, var39 = reactModule.useState(false)
 	local var40 = reactModule.useRef(nil)
-	local var41 = if fFlagBuildExperienceManageDevProduct then useManageProductState(var31) else t_1
+	local var41 = if fFlagBuildExperienceMonetizationProductEditingModule then useManageProductState(var31) else t_1
 	local selectedProductIdRef = var41.selectedProductIdRef
 	local isProductSaleStatusPending = var41.isProductSaleStatusPending
 	local setIsProductSaleStatusPending = var41.setIsProductSaleStatusPending
@@ -541,14 +541,14 @@ return function(p11)
 	local editPrice = var41.editPrice
 	local setEditPrice = var41.setEditPrice
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var40 (ref), var33 (ref), var25 (ref), var30 (ref), var35 (ref), var31 (ref), var37 (ref), var39 (ref), fFlagBuildExperienceManageDevProduct (copy), selectedProductIdRef (ref), setIsProductSaleStatusPending (ref), setProductSaleStatusError (ref), setIsProductEditPending (ref), setProductEditError (ref), setEditName (ref), setEditDescription (ref), setEditPrice (ref)
+		-- upvalues: var40 (ref), var33 (ref), var25 (ref), var30 (ref), var35 (ref), var31 (ref), var37 (ref), var39 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), selectedProductIdRef (ref), setIsProductSaleStatusPending (ref), setProductSaleStatusError (ref), setIsProductEditPending (ref), setProductEditError (ref), setEditName (ref), setEditDescription (ref), setEditPrice (ref)
 		var40.current = nil
 		var33(var25 or var30)
 		var35(var31)
 		var37(false)
 		var39(false)
 		
-		if fFlagBuildExperienceManageDevProduct then
+		if fFlagBuildExperienceMonetizationProductEditingModule then
 			selectedProductIdRef.current = if var31 ~= nil then nil else var31.id
 			setIsProductSaleStatusPending(false)
 			setProductSaleStatusError(false)
@@ -600,7 +600,7 @@ return function(p11)
 		isProductSaleStatusPending = isProductSaleStatusPending,
 		isProductEditPending = isProductEditPending,
 		canUpdateProductManagedPricing = p11.onUpdateProductManagedPricing ~= nil,
-		canManageProduct = fFlagBuildExperienceManageDevProduct and (p11.onUpdateProductSaleStatus ~= nil and p11.onUpdateProduct ~= nil),
+		canManageProduct = fFlagBuildExperienceMonetizationProductEditingModule and (p11.onUpdateProductSaleStatus ~= nil and p11.onUpdateProduct ~= nil),
 		productManagedPricingError = var38,
 		productSaleStatusError = productSaleStatusError,
 		productEditError = productEditError,
@@ -611,7 +611,7 @@ return function(p11)
 		emptyTitle = var24.emptyTitle,
 		emptyDescription = var24.emptyDescription,
 		onClose = reactModule.useCallback(function()
-			-- upvalues: var26 (ref), var32 (ref), sendBuildExperienceEventModule (copy), fFlagBuildExperienceManageDevProduct (copy), isProductEditPending (ref), var40 (ref), setProductEditError (ref), var33 (ref), selectedProductIdRef (ref), var35 (ref), var30 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), var25 (ref), p11 (ref)
+			-- upvalues: var26 (ref), var32 (ref), sendBuildExperienceEventModule (copy), fFlagBuildExperienceMonetizationProductEditingModule (copy), isProductEditPending (ref), var40 (ref), setProductEditError (ref), var33 (ref), selectedProductIdRef (ref), var35 (ref), var30 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), var25 (ref), p11 (ref)
 			local t = { mode = tostring(var32) }
 			
 			if t == nil then
@@ -619,7 +619,7 @@ return function(p11)
 			else
 				sendBuildExperienceEventModule("MONETIZATION_CLOSE_CLICK", var26, t)
 			end
-			if fFlagBuildExperienceManageDevProduct and var32 == "edit" then
+			if fFlagBuildExperienceMonetizationProductEditingModule and var32 == "edit" then
 				if isProductEditPending or var40.current ~= nil then
 					return
 				end
@@ -628,7 +628,7 @@ return function(p11)
 				
 				return
 			elseif var32 == "detail" then
-				if fFlagBuildExperienceManageDevProduct then
+				if fFlagBuildExperienceMonetizationProductEditingModule then
 					selectedProductIdRef.current = nil
 				end
 				var35(nil)
@@ -643,7 +643,7 @@ return function(p11)
 			p11.onClose()
 		end, {
 			var30,
-			if fFlagBuildExperienceManageDevProduct then isProductEditPending else nil,
+			if fFlagBuildExperienceMonetizationProductEditingModule then isProductEditPending else nil,
 			var32, var25, p11.onClose, var26, setProductEditError
 		}),
 		onOpenCreate = reactModule.useCallback(function()
@@ -652,7 +652,6 @@ return function(p11)
 			
 			if p11.onCreateProduct == nil then
 				getBuildPromptDraftStoreModule().queueDraft({
-					autoSend = true,
 					universeId = p11.universeId,
 					sessionId = p11.sessionId,
 					text = var24.createProductPrompt
@@ -676,7 +675,7 @@ return function(p11)
 		onCancelManagedPricing = var29.onCancelManagedPricing,
 		onRetryOptions = var29.onRetry,
 		onProductActivated = reactModule.useCallback(function(p12)
-			-- upvalues: products (ref), var26 (ref), sendBuildExperienceEventModule (copy), fFlagBuildExperienceManageDevProduct (copy), var39 (ref), setProductSaleStatusError (ref), setProductEditError (ref), selectedProductIdRef (ref), var35 (ref), var33 (ref)
+			-- upvalues: products (ref), var26 (ref), sendBuildExperienceEventModule (copy), fFlagBuildExperienceMonetizationProductEditingModule (copy), var39 (ref), setProductSaleStatusError (ref), setProductEditError (ref), selectedProductIdRef (ref), var35 (ref), var33 (ref)
 			for i, v in products do
 				if v.id == p12 then
 					local t = { productId = v.id }
@@ -686,12 +685,12 @@ return function(p11)
 					else
 						sendBuildExperienceEventModule("MONETIZATION_PRODUCT_CLICK", var26, t)
 					end
-					if fFlagBuildExperienceManageDevProduct then
+					if fFlagBuildExperienceMonetizationProductEditingModule then
 						var39(false)
 						setProductSaleStatusError(false)
 						setProductEditError(nil)
 					end
-					if fFlagBuildExperienceManageDevProduct then
+					if fFlagBuildExperienceMonetizationProductEditingModule then
 						selectedProductIdRef.current = v.id
 					end
 					var35(v)
@@ -702,11 +701,11 @@ return function(p11)
 			end
 		end, { products, var26 }),
 		onProductManagedPricingChanged = reactModule.useCallback(function(p13)
-			-- upvalues: var34 (ref), p11 (ref), var28 (ref), var27 (ref), var40 (ref), var36 (ref), fFlagBuildExperienceManageDevProduct (copy), isProductSaleStatusPending (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), var39 (ref), var26 (ref), sendBuildExperienceEventModule (copy), var35 (ref), var37 (ref), formatErrorModule (copy), selectedProductIdRef (ref)
+			-- upvalues: var34 (ref), p11 (ref), var28 (ref), var27 (ref), var40 (ref), var36 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), isProductSaleStatusPending (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), var39 (ref), var26 (ref), sendBuildExperienceEventModule (copy), var35 (ref), var37 (ref), formatErrorModule (copy), selectedProductIdRef (ref)
 			local var42 = if var34 ~= nil then nil else tonumber(var34.id)
 			local onUpdateProductManagedPricing = p11.onUpdateProductManagedPricing
 			
-			if var28.current == var27 and var40.current == nil and (var34 ~= nil and var42 ~= nil) and (onUpdateProductManagedPricing ~= nil and not var36 and (not fFlagBuildExperienceManageDevProduct or not isProductSaleStatusPending)) then
+			if var28.current == var27 and var40.current == nil and (var34 ~= nil and var42 ~= nil) and (onUpdateProductManagedPricing ~= nil and not var36 and (not fFlagBuildExperienceMonetizationProductEditingModule or not isProductSaleStatusPending)) then
 				if var34 ~= nil and (if var34.isArchived ~= true then if var34.isImmutable ~= true then var34.isInActivePriceOptimizationExperiment == true else true else true) then return end
 				if fFlagBuildExperienceMonetizationNativeUIModule and p13 and var34.priceInRobux == nil then
 					var39(true)
@@ -739,7 +738,7 @@ return function(p11)
 					end
 					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_SUCCESS", var26, t_1)
 				end):catch(function(p14)
-					-- upvalues: var28 (copy), var27 (copy), var40 (copy), t (ref), var34 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), formatErrorModule (copy), var26 (copy), sendBuildExperienceEventModule (copy), fFlagBuildExperienceManageDevProduct (copy), selectedProductIdRef (copy), var35 (copy), var39 (copy)
+					-- upvalues: var28 (copy), var27 (copy), var40 (copy), t (ref), var34 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), formatErrorModule (copy), var26 (copy), sendBuildExperienceEventModule (copy), fFlagBuildExperienceMonetizationProductEditingModule (copy), selectedProductIdRef (copy), var35 (copy), var39 (copy)
 					if var28.current ~= var27 or var40.current ~= t then return end
 					local id = var34.id
 					
@@ -753,7 +752,7 @@ return function(p11)
 					else
 						sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_FAILURE", var26, t_1)
 					end
-					if not fFlagBuildExperienceManageDevProduct or selectedProductIdRef.current == var34.id then
+					if not fFlagBuildExperienceMonetizationProductEditingModule or selectedProductIdRef.current == var34.id then
 						var35(var34)
 						var39(true)
 					end
@@ -769,15 +768,15 @@ return function(p11)
 			end
 		end, {
 			var36,
-			if fFlagBuildExperienceManageDevProduct then isProductSaleStatusPending else nil,
+			if fFlagBuildExperienceMonetizationProductEditingModule then isProductSaleStatusPending else nil,
 			p11.onUpdateProductManagedPricing, var34, var26, var27
 		}),
 		onProductSaleStatusChanged = reactModule.useCallback(function(p13)
-			-- upvalues: var34 (ref), p11 (ref), fFlagBuildExperienceManageDevProduct (copy), var28 (ref), var27 (ref), var40 (ref), isProductSaleStatusPending (ref), var36 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), setProductSaleStatusError (ref), var26 (ref), sendBuildExperienceEventModule (copy), var35 (ref), setIsProductSaleStatusPending (ref), formatErrorModule (copy), selectedProductIdRef (ref)
+			-- upvalues: var34 (ref), p11 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), var28 (ref), var27 (ref), var40 (ref), isProductSaleStatusPending (ref), var36 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), setProductSaleStatusError (ref), var26 (ref), sendBuildExperienceEventModule (copy), var35 (ref), setIsProductSaleStatusPending (ref), formatErrorModule (copy), selectedProductIdRef (ref)
 			local var42 = if var34 ~= nil then nil else tonumber(var34.id)
 			local onUpdateProductSaleStatus = p11.onUpdateProductSaleStatus
 			
-			if fFlagBuildExperienceManageDevProduct and var28.current == var27 and (var40.current == nil and var34 ~= nil) and (var42 ~= nil and onUpdateProductSaleStatus ~= nil and (not isProductSaleStatusPending and not var36)) then
+			if fFlagBuildExperienceMonetizationProductEditingModule and var28.current == var27 and (var40.current == nil and var34 ~= nil) and (var42 ~= nil and onUpdateProductSaleStatus ~= nil and (not isProductSaleStatusPending and not var36)) then
 				if var34 ~= nil and (if var34.isArchived ~= true then if var34.isImmutable ~= true then var34.isInActivePriceOptimizationExperiment == true else true else true) then return end
 				if fFlagBuildExperienceMonetizationNativeUIModule and p13 and var34.priceInRobux == nil then
 					setProductSaleStatusError(true)
@@ -843,8 +842,8 @@ return function(p11)
 			var27
 		}),
 		onOpenProductEdit = reactModule.useCallback(function()
-			-- upvalues: var34 (ref), fFlagBuildExperienceManageDevProduct (copy), var26 (ref), sendBuildExperienceEventModule (copy), setEditName (ref), setEditDescription (ref), setEditPrice (ref), setProductEditError (ref), var33 (ref)
-			if fFlagBuildExperienceManageDevProduct and var34 ~= nil then
+			-- upvalues: var34 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), var26 (ref), sendBuildExperienceEventModule (copy), setEditName (ref), setEditDescription (ref), setEditPrice (ref), setProductEditError (ref), var33 (ref)
+			if fFlagBuildExperienceMonetizationProductEditingModule and var34 ~= nil then
 				if var34 ~= nil and (if var34.isArchived ~= true then if var34.isImmutable ~= true then var34.isInActivePriceOptimizationExperiment == true else true else true) then return end
 				local t = { productId = var34.id }
 				
@@ -891,11 +890,11 @@ return function(p11)
 			var33("detail")
 		end, { isProductEditPending, var34, var26 }),
 		onSaveProductEdit = reactModule.useCallback(function()
-			-- upvalues: var34 (ref), p11 (ref), fFlagBuildExperienceManageDevProduct (copy), var28 (ref), var27 (ref), var40 (ref), isProductEditPending (ref), var26 (ref), sendBuildExperienceEventModule (copy), editName (ref), setProductEditError (ref), var24 (ref), editDescription (ref), editPrice (ref), setIsProductEditPending (ref), var35 (ref), var39 (ref), setProductSaleStatusError (ref), var33 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), formatErrorModule (copy)
+			-- upvalues: var34 (ref), p11 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), var28 (ref), var27 (ref), var40 (ref), isProductEditPending (ref), var26 (ref), sendBuildExperienceEventModule (copy), editName (ref), setProductEditError (ref), var24 (ref), editDescription (ref), editPrice (ref), setIsProductEditPending (ref), var35 (ref), var39 (ref), setProductSaleStatusError (ref), var33 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), formatErrorModule (copy)
 			local var42 = if var34 ~= nil then nil else tonumber(var34.id)
 			local onUpdateProduct = p11.onUpdateProduct
 			
-			if not fFlagBuildExperienceManageDevProduct or var28.current ~= var27 or (var40.current ~= nil or var34 == nil) or (var42 == nil or onUpdateProduct == nil or isProductEditPending) then return end
+			if not fFlagBuildExperienceMonetizationProductEditingModule or var28.current ~= var27 or (var40.current ~= nil or var34 == nil) or (var42 == nil or onUpdateProduct == nil or isProductEditPending) then return end
 			local t = { productId = var34.id }
 			
 			if t == nil then

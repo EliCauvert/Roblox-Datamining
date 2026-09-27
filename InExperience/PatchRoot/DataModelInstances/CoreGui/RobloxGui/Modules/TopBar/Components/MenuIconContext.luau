@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.React).createContext({ menuIconRef = nil })
+﻿return require(game:GetService("CorePackages").Packages.React).createContext({ menuIconRef = nil, replacesAgeRating = false })

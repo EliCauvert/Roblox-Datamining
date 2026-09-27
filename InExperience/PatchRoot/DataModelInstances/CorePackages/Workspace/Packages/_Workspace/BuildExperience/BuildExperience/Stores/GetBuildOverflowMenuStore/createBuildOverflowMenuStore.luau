@@ -38,8 +38,20 @@ local function isVersionHistoryDisabled(p1)
 	return p1.placeId == nil
 end
 
+local _ = function(p1)
+	-- upvalues: getPrivatePlaytestersStore (ref)
+	local andFetchInvitedPlayers = getPrivatePlaytestersStore(false).getAndFetchInvitedPlayers(p1.universeId)
+	
+	return andFetchInvitedPlayers.status(false) == "Ready" and #andFetchInvitedPlayers.players(false) > 0
+end
+
 local function isInviteToPlaytestDisabled(p1)
 	-- upvalues: getPrivatePlaytestersStore (ref)
+	local andFetchInvitedPlayers = getPrivatePlaytestersStore(false).getAndFetchInvitedPlayers(p1.universeId)
+	
+	if andFetchInvitedPlayers.status(false) == "Ready" and #andFetchInvitedPlayers.players(false) > 0 then
+		return false
+	end
 	local var1 = getPrivatePlaytestersStore(false)
 	
 	return var1.MAX_INVITES <= #var1.getAndFetchInvitedPlayers(p1.universeId).players(false)
@@ -113,7 +125,7 @@ local t = {
 }
 
 return function()
-	-- upvalues: localizationStringsModule (ref), fFlagBuildShareDisabledOnPrivateModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), isShareUnavailable (ref), onShareActivated (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), fFlagBuildExperienceMenuImprovementsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceManageDevProductModule (ref), signalsModule (ref), reactModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), fFlagEnableBuildAdPromotionModule (ref), privacyType (ref), t (ref)
+	-- upvalues: localizationStringsModule (ref), fFlagBuildShareDisabledOnPrivateModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), isShareUnavailable (ref), onShareActivated (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), getPrivatePlaytestersStore (ref), fFlagBuildExperienceMenuImprovementsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceManageDevProductModule (ref), signalsModule (ref), reactModule (ref), signalsReactModule (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), fFlagEnableBuildAdPromotionModule (ref), privacyType (ref), t (ref)
 	local list
 	local t_1 = {
 		id = "settings",
@@ -142,14 +154,15 @@ return function()
 		text = localizationStringsModule.BUILD_MENU_INVITE_TO_PLAYTEST,
 		isDisabled = isInviteToPlaytestDisabled,
 		onActivated = function(p1)
-			-- upvalues: sendBuildExperienceEventModule (copy)
+			-- upvalues: sendBuildExperienceEventModule (copy), getPrivatePlaytestersStore (copy)
 			sendBuildExperienceEventModule("ADD_TO_PLAYTEST_CLICK", {
 				universeId = p1.universeId,
 				placeId = p1.placeId,
 				conversationId = p1.sessionId
 			}, { source = "overflow_menu" })
+			local andFetchInvitedPlayers = getPrivatePlaytestersStore(false).getAndFetchInvitedPlayers(p1.universeId)
 			
-			return { type = "openInvitePicker" }
+			return if andFetchInvitedPlayers.status(false) == "Ready" and #andFetchInvitedPlayers.players(false) > 0 then { type = "openInviteManagement" } else { type = "openInvitePicker" }
 		end
 	}
 	local t_5 = {

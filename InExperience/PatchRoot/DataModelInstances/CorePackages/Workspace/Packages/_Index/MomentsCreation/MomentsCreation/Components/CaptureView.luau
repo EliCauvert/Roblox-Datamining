@@ -15,7 +15,6 @@ local constantsModule = require(momentsCreation.Constants)
 local getCaptureContentModule = require(momentsCreation.Capture.getCaptureContent)
 local getCaptureVideoContentModule = require(momentsCreation.Capture.getCaptureVideoContent)
 local useCreationMusicSyncModule = require(momentsCreation.Hooks.useCreationMusicSync)
-local getFFlagMomentsCreationGalleryPreviewSwapFixModule = require(momentsCreation.Flags.GetFFlagMomentsCreationGalleryPreviewSwapFix)
 local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
 local getTtsDuckScalarModule = require(momentsCreation.Audio.getTtsDuckScalar)
 local fadeVolumeModule = require(momentsCreation.Audio.fadeVolume)
@@ -45,7 +44,7 @@ local function VideoPreviewSurface(p1)
 	local var9 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), music (ref), audio (ref)
-		function var25.current()
+		function var24.current()
 			-- upvalues: music (copy), audio (copy)
 			if music ~= nil then
 				audio.timeline.seek(0)
@@ -222,59 +221,52 @@ local function ScreenshotPreviewSurface(p2)
 end
 
 return function(p2)
-	-- upvalues: useTokens (ref), reactModule (ref), getFFlagMomentsCreationGalleryPreviewSwapFixModule (ref), signalsModule (ref), view (ref), icon (ref), builderIconsModule (ref), VideoPreviewSurface (ref), ScreenshotPreviewSurface (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), signalsModule (ref), view (ref), icon (ref), builderIconsModule (ref), VideoPreviewSurface (ref), ScreenshotPreviewSurface (ref)
 	local var10 = useTokens()
 	local var11, var12 = reactModule.useState(p2.preview.getCapture(false))
 	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), getFFlagMomentsCreationGalleryPreviewSwapFixModule (copy), signalsModule (copy), var12 (ref)
+		-- upvalues: p2 (ref), var12 (ref), signalsModule (copy)
 		local preview = p2.preview
+		local var13 = nil
+		local var14 = nil
+		local var15 = false
 		
-		if getFFlagMomentsCreationGalleryPreviewSwapFixModule() then
-			local var13 = nil
-			local var14 = nil
-			local var15 = false
+		local function onWindowElapsed()
+			-- upvalues: var15 (write), var14 (write), var12 (copy), var13 (write), onWindowElapsed (ref)
+			if var15 then
+				var15 = false
+				local var16 = var14
+				var14 = nil
+				var12(var16)
+				var13 = task.delay(0.2, onWindowElapsed)
+				
+				return
+			end
+			var13 = nil
+		end
+		
+		local var16 = signalsModule.createEffect(function(p3)
+			-- upvalues: preview (ref), var13 (write), var12 (copy), onWindowElapsed (ref), var14 (write), var15 (write)
+			local capture = preview.getCapture(p3)
 			
-			local function onWindowElapsed()
-				-- upvalues: var15 (write), var14 (write), var12 (copy), var13 (write), onWindowElapsed (ref)
-				if var15 then
-					var15 = false
-					local var16 = var14
-					var14 = nil
-					var12(var16)
-					var13 = task.delay(0.2, onWindowElapsed)
-					
-					return
-				end
+			if var13 == nil then
+				var12(capture)
+				var13 = task.delay(0.2, onWindowElapsed)
+				
+				return
+			end
+			var14 = capture
+			var15 = true
+		end)
+		
+		return function()
+			-- upvalues: var13 (write), var16 (ref)
+			if var13 ~= nil then
+				task.cancel(var13)
 				var13 = nil
 			end
-			
-			local var16 = signalsModule.createEffect(function(p3)
-				-- upvalues: preview (ref), var13 (write), var12 (copy), onWindowElapsed (ref), var14 (write), var15 (write)
-				local capture = preview.getCapture(p3)
-				
-				if var13 == nil then
-					var12(capture)
-					var13 = task.delay(0.2, onWindowElapsed)
-					
-					return
-				end
-				var14 = capture
-				var15 = true
-			end)
-			
-			return function()
-				-- upvalues: var13 (write), var16 (ref)
-				if var13 ~= nil then
-					task.cancel(var13)
-					var13 = nil
-				end
-				var16()
-			end
+			var16()
 		end
-		return signalsModule.createEffect(function(p3)
-			-- upvalues: var12 (copy), preview (ref)
-			var12(preview.getCapture(p3))
-		end)
 	end, { p2.preview })
 	
 	return if var11 == nil then reactModule.createElement(view, {

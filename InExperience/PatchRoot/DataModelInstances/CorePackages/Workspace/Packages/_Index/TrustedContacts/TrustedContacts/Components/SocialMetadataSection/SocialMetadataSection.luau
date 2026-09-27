@@ -24,11 +24,12 @@ local fFlagProfilePlatformAddTC = require(parent.SharedFlags).FFlagProfilePlatfo
 local fStringParentLinkAmpNameSpace = require(parent.SharedFlags).FStringParentLinkAmpNameSpace
 local getFFlagEnableProfileInsightsApolloMigration = require(parent.SharedFlags).GetFFlagEnableProfileInsightsApolloMigration
 local fFlagTFProfileInsightsBypassCache = require(parent.SharedFlags).FFlagTFProfileInsightsBypassCache
+local fFlagTFClassmatesProfileInsight = require(parent.SharedFlags).FFlagTFClassmatesProfileInsight
 local socialMetadataSectionMigrateUserProfileToSignals = game:DefineFastFlag("SocialMetadataSectionMigrateUserProfileToSignals", false)
 local var1 = if socialMetadataSectionMigrateUserProfileToSignals then userProfilesModule.Stores.UserProfileStore.get() else nil
 
 return function(p1)
-	-- upvalues: socialMetadataSectionMigrateUserProfileToSignals (ref), userProfilesModule (ref), reactModule (ref), signalsModule (ref), var1 (ref), signalsReactModule (ref), getFFlagEnableProfileInsightsApolloMigration (ref), useSignalProfileInsightsByUserId (ref), fFlagTFProfileInsightsBypassCache (ref), useProfileInsightsByUserIds (ref), getProfileInsightsByUserIdFromData (ref), isCustomNilModule (ref), useLocalization (ref), ampApiProvider (ref), fStringParentLinkAmpNameSpace (ref), accessResponseEnum (ref), foundationModule (ref), view (ref), userTile (ref), layoutMode (ref), skeleton (ref), fFlagProfilePlatformAddTC (ref), socialMetadataIconsAndTextsSectionModule (ref)
+	-- upvalues: socialMetadataSectionMigrateUserProfileToSignals (ref), userProfilesModule (ref), reactModule (ref), signalsModule (ref), var1 (ref), signalsReactModule (ref), getFFlagEnableProfileInsightsApolloMigration (ref), useSignalProfileInsightsByUserId (ref), fFlagTFProfileInsightsBypassCache (ref), useProfileInsightsByUserIds (ref), getProfileInsightsByUserIdFromData (ref), isCustomNilModule (ref), useLocalization (ref), ampApiProvider (ref), fStringParentLinkAmpNameSpace (ref), accessResponseEnum (ref), foundationModule (ref), view (ref), userTile (ref), layoutMode (ref), fFlagTFClassmatesProfileInsight (ref), skeleton (ref), fFlagProfilePlatformAddTC (ref), socialMetadataIconsAndTextsSectionModule (ref)
 	local var2 = if not socialMetadataSectionMigrateUserProfileToSignals then userProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = { p1.userId },
 		query = userProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
@@ -152,13 +153,14 @@ return function(p1)
 			LayoutOrder = if fFlagProfilePlatformAddTC then p1.layoutOrder else 2
 		}) else reactModule.createElement(socialMetadataIconsAndTextsSectionModule, {
 			profileInsightIconItems = reactModule.useMemo(function()
-				-- upvalues: isCustomNilModule (copy), t (write)
+				-- upvalues: isCustomNilModule (copy), t (write), fFlagTFClassmatesProfileInsight (copy)
 				return {
 					mutualFriends = if not isCustomNilModule(t.mutualFriends) then t.mutualFriends else nil,
 					friendshipAgeUnixSeconds = if not isCustomNilModule(t.friendshipAgeUnixSeconds) then t.friendshipAgeUnixSeconds else nil,
 					friendRequestOriginSource = if not isCustomNilModule(t.friendRequestOriginSource) then t.friendRequestOriginSource else nil,
 					accountCreationDateUnixSeconds = if not isCustomNilModule(t.accountCreationDateUnixSeconds) then t.accountCreationDateUnixSeconds else nil,
-					localizedCountryName = if not isCustomNilModule(t.localizedCountryName) then t.localizedCountryName else nil
+					localizedCountryName = if not isCustomNilModule(t.localizedCountryName) then t.localizedCountryName else nil,
+					isClassmate = if fFlagTFClassmatesProfileInsight and t.isClassmate == true then true else nil
 				}
 			end, { t }),
 			isVerticallyConstrained = p1.isVerticallyConstrained,

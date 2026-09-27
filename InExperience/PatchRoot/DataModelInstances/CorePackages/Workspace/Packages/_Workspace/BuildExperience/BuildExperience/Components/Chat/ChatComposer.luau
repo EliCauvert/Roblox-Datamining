@@ -1,5 +1,6 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
+local fFlagBuildExperienceLibrary = require(parent.SharedFlags).FFlagBuildExperienceLibrary
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
@@ -21,7 +22,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), fFlagBuildExperienceFixChatComposerInitialSendStateModule (ref), signalsModule (ref), useReleaseFocusOnDownSwipeModule (ref), var1 (ref), inputSize (ref), view (ref), iconButton (ref), iconName (ref), buttonVariant (ref), fFlagComposerControlAlignment (ref), chatActionsRowModule (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), fFlagBuildExperienceFixChatComposerInitialSendStateModule (ref), signalsModule (ref), fFlagBuildExperienceLibrary (ref), useReleaseFocusOnDownSwipeModule (ref), var1 (ref), inputSize (ref), view (ref), iconButton (ref), iconName (ref), buttonVariant (ref), fFlagComposerControlAlignment (ref), chatActionsRowModule (ref)
 	local var2 = useTokens()
 	local var3 = reactModule.useRef(nil)
 	local var4 = reactModule.useMemo(function()
@@ -38,21 +39,28 @@ return function(p1)
 		return { getIsComposerEmpty = var6, setIsComposerEmpty = var7 }
 	end, { p1.text })
 	local var5 = p1.isAssistantResponding and p1.canSendWhileResponding ~= true
-	local var6 = p1.composerErrorText ~= nil
-	local var7 = p1.images ~= nil and #p1.images > 0
-	local var8 = p1.isAttachmentSupported and p1.onOpenCaptureGallery ~= nil
-	local var9 = reactModule.useCallback(function(p2)
+	local var6 = false
+	
+	if fFlagBuildExperienceLibrary and p1.allowsTypingWhileResponding == true then
+		var6 = var5
+		var5 = false
+	end
+	local var7 = p1.composerErrorText ~= nil
+	local var8 = p1.images ~= nil and #p1.images > 0
+	local var9 = p1.isAttachmentSupported and p1.onOpenCaptureGallery ~= nil
+	local var10 = reactModule.useCallback(function(p2)
 		-- upvalues: var4 (ref), p1 (ref)
 		var4.setIsComposerEmpty(string.gsub(p2, "^%s*(.-)%s*$", "%1") == "")
 		p1.onChanged(p2)
 	end, { p1.onChanged, var4 })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var4 (ref)
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: var6 (write), p1 (ref), var4 (ref)
+		if var6 then return end
 		if p1.onSend() then
 			var4.setIsComposerEmpty(true)
 		end
-	end, { p1.onSend, var4 })
-	local var11 = reactModule.useCallback(function()
+	end, { p1.onSend, var4, var6 })
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
 		if p1.textBoxRef ~= nil and p1.textBoxRef.current ~= nil then
 			p1.textBoxRef.current.releaseFocus()
@@ -61,25 +69,41 @@ return function(p1)
 			p1.onOpenCaptureGallery()
 		end
 	end, { p1.textBoxRef, p1.onOpenCaptureGallery })
+	
+	if fFlagBuildExperienceLibrary then
+		reactModule.useEffect(function()
+			-- upvalues: p1 (ref), var4 (ref), reactModule (copy)
+			if p1.tracksExternalText then
+				local var13 = reactModule.__subscribeToBinding(p1.text, function(p2)
+					-- upvalues: var4 (copy)
+					var4.setIsComposerEmpty(string.gsub(p2, "^%s*(.-)%s*$", "%1") == "")
+				end)
+				var4.setIsComposerEmpty(string.gsub(p1.text:getValue(), "^%s*(.-)%s*$", "%1") == "")
+				
+				return var13
+			end
+			return nil
+		end, { p1.tracksExternalText, p1.text, var4 })
+	end
 	useReleaseFocusOnDownSwipeModule(var3, p1.textBoxRef)
 	
 	return reactModule.createElement(var1, {
 		label = "",
 		text = p1.text,
-		onChanged = var9,
+		onChanged = var10,
 		hint = p1.composerErrorText,
-		hasError = var6,
+		hasError = var7,
 		placeholder = p1.placeholder or "",
 		width = UDim.new(1, 0),
 		size = inputSize.Large,
 		maxLines = p1.maxLines or 5,
 		isDisabled = var5,
-		onReturnPressed = var10,
+		onReturnPressed = var11,
 		textBoxRef = p1.textBoxRef,
 		ref = var3,
 		composerDebug = p1.composerDebug,
 		LayoutOrder = p1.LayoutOrder,
-		leadingElement = if var8 then reactModule.createElement(view, {
+		leadingElement = if var9 then reactModule.createElement(view, {
 			tag = "auto-xy",
 			padding = {
 				top = UDim.new(0, var2.Size.Size_200),
@@ -93,7 +117,7 @@ return function(p1)
 				testId = "ChatComposer.AttachImage",
 				icon = iconName.PlusSmall,
 				isDisabled = p1.isAssistantResponding,
-				onActivated = var11,
+				onActivated = var12,
 				size = inputSize.Small,
 				variant = buttonVariant.Standard
 			})
@@ -115,9 +139,9 @@ return function(p1)
 				canStopAssistantResponse = p1.canStopAssistantResponse,
 				canSendWhileResponding = p1.canSendWhileResponding,
 				getIsComposerEmpty = var4.getIsComposerEmpty,
-				hasAttachments = var7,
-				isSendDisabled = var6 or p1.isImageSendBlocked == true,
-				onSend = var10,
+				hasAttachments = var8,
+				isSendDisabled = var7 or p1.isSendBlocked == true,
+				onSend = var11,
 				onStop = p1.onStop
 			})
 		})

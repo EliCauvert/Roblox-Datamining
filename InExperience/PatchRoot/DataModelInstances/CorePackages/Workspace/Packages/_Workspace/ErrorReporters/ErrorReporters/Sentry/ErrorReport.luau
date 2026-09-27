@@ -57,6 +57,7 @@ local var5 = tModule.intersection(tModule.strictInterface({
 	level = tModule.optional(tModule.string),
 	attributes = var1,
 	annotations = var2,
+	tags = tModule.optional(tModule.map(tModule.string, tModule.string)),
 	customMetadata = var3,
 	breadcrumbs = var4,
 	timestamp = tModule.optional(tModule.number)

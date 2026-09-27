@@ -19,8 +19,13 @@ local retrievalStatus = require(corePackagesService.Workspace.Packages.Http).Enu
 local inviteUserIdToPlaceIdCustomizedModule = require(shareGame.Thunks.InviteUserIdToPlaceIdCustomized)
 local throttleFunctionCallModule = require(shareGame.ThrottleFunctionCall)
 local singleUserThumbnailModule = require(shareGame.Components.SingleUserThumbnail)
+local signalsModule = require(corePackagesService.Packages.Signals)
+local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
+local userProfileStore = require(corePackagesService.Workspace.Packages.UserProfiles).Stores.UserProfileStore
+local loadingModalModule = require(shareGame.Components.LoadingModal)
 local getFFlagAbuseReportAnalyticsHasLaunchDataModule = require(modules.Settings.Flags.GetFFlagAbuseReportAnalyticsHasLaunchData)
 local getFFlagEnableNewInviteSendEndpointModule = require(modules.Flags.GetFFlagEnableNewInviteSendEndpoint)
+local fFlagFixPromptGameInviteUIMissingDisplayName = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagFixPromptGameInviteUIMissingDisplayName
 local getFFlagThrottleInviteSendEndpointModule = require(modules.Flags.GetFFlagThrottleInviteSendEndpoint)
 local getFIntThrottleInviteSendEndpointDelayModule = require(modules.Flags.GetFIntThrottleInviteSendEndpointDelay)
 local getFFlagSingleUserInvitePageKeybindModule = require(modules.Settings.Flags.GetFFlagSingleUserInvitePageKeybind)
@@ -32,18 +37,44 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local color = Color3.fromRGB(41, 41, 41)
 
 local var2 = function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), constantsModule (ref), gameInviteEvents (ref), inviteStatus (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), playersService (ref), getFFlagSingleUserInvitePageKeybindModule (ref), contextActionService (ref), getFFlagThrottleInviteSendEndpointModule (ref), throttleFunctionCallModule (ref), getFIntThrottleInviteSendEndpointDelayModule (ref), retrievalStatus (ref), color (ref), styledTextLabel (ref), var1 (ref), COLORS (ref), singleUserThumbnailModule (ref), button (ref), buttonType (ref)
+	-- upvalues: useStyle (ref), reactModule (ref), fFlagFixPromptGameInviteUIMissingDisplayName (ref), userProfileStore (ref), signalsModule (ref), signalsReactModule (ref), constantsModule (ref), gameInviteEvents (ref), inviteStatus (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), playersService (ref), getFFlagSingleUserInvitePageKeybindModule (ref), contextActionService (ref), getFFlagThrottleInviteSendEndpointModule (ref), throttleFunctionCallModule (ref), getFIntThrottleInviteSendEndpointDelayModule (ref), retrievalStatus (ref), loadingModalModule (ref), color (ref), styledTextLabel (ref), var1 (ref), COLORS (ref), singleUserThumbnailModule (ref), button (ref), buttonType (ref)
 	local inviteUserId = p1.friends[tostring(p1.inviteUserId)]
 	local id = inviteUserId and p1.invites[inviteUserId.id]
 	local var3 = useStyle()
 	local var4, var5 = reactModule.useState(false)
+	local var6 = if fFlagFixPromptGameInviteUIMissingDisplayName then reactModule.useMemo(function()
+		-- upvalues: userProfileStore (copy), p1 (ref)
+		return userProfileStore.get().fetchNamesByUserIds({ tostring(p1.inviteUserId) })
+	end, { p1.inviteUserId }) else nil
+	local var7 = if fFlagFixPromptGameInviteUIMissingDisplayName then signalsReactModule.useSignalState(if fFlagFixPromptGameInviteUIMissingDisplayName then reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var6 (ref)
+		return signalsModule.createComputed(function(p2)
+			-- upvalues: var6 (copy)
+			local var8 = var6(p2)
+			local var9 = var8 and (var8.data and var8.data[1])
+			local names = var9 and var9.names
+			local var10 = ""
+			
+			if names then
+				var10 = names.getCombinedName(p2)
+				
+				if var10 == "" then
+					var10 = names.getUsername(p2)
+				end
+			end
+			return {
+				name = var10,
+				isFetching = if var8 ~= nil then var8.status == "fetching" else true
+			}
+		end)
+	end, { var6 }) else nil) else nil
 	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), constantsModule (copy), gameInviteEvents (copy)
 		if p1.promptMessage and p1.analytics then
 			p1.analytics:sendEvent(constantsModule.Triggers.DeveloperSingle, gameInviteEvents.CustomTextShown)
 		end
 	end, {})
-	local var6 = reactModule.useCallback(function()
+	local var8 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
 		p1.closePage()
 		
@@ -51,13 +82,13 @@ local var2 = function(p1)
 			p1.onAfterClosePage()
 		end
 	end, { p1.closePage, p1.onAfterClosePage })
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), constantsModule (copy), gameInviteEvents (copy), var6 (ref)
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), constantsModule (copy), gameInviteEvents (copy), var8 (ref)
 		p1.analytics:sendEvent(constantsModule.Triggers.DeveloperSingle, gameInviteEvents.CancelInvite)
-		var6()
-	end, { var6 })
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), p1 (ref), id (ref), inviteStatus (copy), constantsModule (copy), gameInviteEvents (copy), inviteUserId (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), playersService (copy), var6 (ref)
+		var8()
+	end, { var8 })
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), p1 (ref), id (ref), inviteStatus (copy), constantsModule (copy), gameInviteEvents (copy), inviteUserId (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), playersService (copy), var8 (ref)
 		var5(true)
 		local inviteUser = p1.inviteUser
 		local analytics = p1.analytics
@@ -68,7 +99,7 @@ local var2 = function(p1)
 			isLaunchDataProvided = if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then p1.launchData ~= nil and p1.launchData ~= "" else nil
 		})
 		inviteUser(tostring(inviteUserId.id), analytics, p1.inviteMessageId, p1.launchData):andThen(function(p2)
-			-- upvalues: var5 (copy), inviteUserId (copy), playersService (copy), analytics (ref), var6 (copy)
+			-- upvalues: var5 (copy), inviteUserId (copy), playersService (copy), analytics (ref), var8 (copy)
 			var5(false)
 			
 			if not p2 then return end
@@ -77,27 +108,27 @@ local var2 = function(p1)
 			if playersService.LocalPlayer and p2.conversationId then
 				analytics:onActivatedInviteSent(playersService.LocalPlayer.UserId, p2.conversationId, list)
 			end
-			var6()
-		end, var6)
+			var8()
+		end, var8)
 	end, {
 		p1.inviteUser, p1.inviteMessageId, p1.launchData, p1.analytics, var5, id,
-		inviteUserId, var6
+		inviteUserId, var8
 	})
 	
 	if getFFlagSingleUserInvitePageKeybindModule() then
 		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), contextActionService (copy), var8 (write), var7 (ref)
+			-- upvalues: p1 (ref), contextActionService (copy), var10 (write), var9 (ref)
 			if p1.isVisible then
 				contextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, p2, _)
-					-- upvalues: var8 (copy)
+					-- upvalues: var10 (copy)
 					if p2 == Enum.UserInputState.Begin then
-						var8()
+						var10()
 					end
 				end, false, Enum.KeyCode.ButtonA)
 				contextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, p2, _)
-					-- upvalues: var7 (copy)
+					-- upvalues: var9 (copy)
 					if p2 == Enum.UserInputState.Begin then
-						var7()
+						var9()
 					end
 				end, false, Enum.KeyCode.ButtonB)
 				
@@ -108,13 +139,17 @@ local var2 = function(p1)
 				end
 			end
 			return nil
-		end, { p1.isVisible, var8, var7 })
+		end, { p1.isVisible, var10, var9 })
 	end
 	if getFFlagThrottleInviteSendEndpointModule() then
-		var8 = reactModule.useCallback(throttleFunctionCallModule(getFIntThrottleInviteSendEndpointDelayModule(), var8), { var8 })
+		var10 = reactModule.useCallback(throttleFunctionCallModule(getFIntThrottleInviteSendEndpointDelayModule(), var10), { var10 })
 	end
 	if inviteUserId then
-		local var9 = id and id ~= inviteStatus.Failed
+		if fFlagFixPromptGameInviteUIMissingDisplayName and var7.name == "" and var7.isFetching then
+			return reactModule.createElement(loadingModalModule)
+		end
+		local var11 = if fFlagFixPromptGameInviteUIMissingDisplayName then if var7.name ~= "" then inviteUserId.displayName or "" else var7.name else inviteUserId.displayName
+		local var12 = id and id ~= inviteStatus.Failed
 		
 		return reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
@@ -138,7 +173,7 @@ local var2 = function(p1)
 			Header = reactModule.createElement(styledTextLabel, {
 				fontStyle = var3.Font.Header1,
 				colorStyle = var3.Theme.TextEmphasis,
-				text = var1:FormatByKey("Feature.SettingsHub.Heading.InviteUser", { DisplayName = inviteUserId.displayName }),
+				text = var1:FormatByKey("Feature.SettingsHub.Heading.InviteUser", { DisplayName = var11 }),
 				size = UDim2.new(1, 0, 0, 48),
 				textXAlignment = Enum.TextXAlignment.Center
 			}),
@@ -171,7 +206,7 @@ local var2 = function(p1)
 					layoutOrder = 2,
 					fontStyle = var3.Font.Header2,
 					colorStyle = var3.Theme.TextEmphasis,
-					text = p1.promptMessage or var1:FormatByKey("Feature.SettingsHub.Label.DefaultInviteMessage", { DisplayName = inviteUserId.displayName }),
+					text = p1.promptMessage or var1:FormatByKey("Feature.SettingsHub.Label.DefaultInviteMessage", { DisplayName = var11 }),
 					textXAlignment = Enum.TextXAlignment.Center,
 					automaticSize = Enum.AutomaticSize.Y,
 					size = UDim2.new(1, 0, 0, 0)
@@ -185,23 +220,23 @@ local var2 = function(p1)
 						buttonType = buttonType.Secondary,
 						size = UDim2.new(0.5, -12, 1, 0),
 						text = var1:FormatByKey("Feature.SettingsHub.Action.Cancel"),
-						onActivated = var7,
+						onActivated = var9,
 						isDisabled = var4
 					}),
 					InviteButton = reactModule.createElement(button, {
 						buttonType = buttonType.PrimarySystem,
 						size = UDim2.new(0.5, -12, 1, 0),
 						position = UDim2.new(0.5, 12, 0, 0),
-						text = var1:FormatByKey(if var9 then "Feature.SettingsHub.Label.Invited" else "Feature.SettingsHub.Action.InviteFriend"),
-						onActivated = var8,
+						text = var1:FormatByKey(if var12 then "Feature.SettingsHub.Label.Invited" else "Feature.SettingsHub.Action.InviteFriend"),
+						onActivated = var10,
 						isLoading = var4,
-						isDisabled = var9
+						isDisabled = var12
 					})
 				})
 			})
 		})
 	elseif p1.friendsRetrievalStatus == retrievalStatus.Done or p1.friendsRetrievalStatus == retrievalStatus.Failed then
-		var6()
+		var8()
 	end
 end
 

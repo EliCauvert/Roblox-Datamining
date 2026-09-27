@@ -5,6 +5,7 @@ local AXUnifiedEventFilter = avatarExperienceAnalyticsModule.AXUnifiedEventFilte
 local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
 local sendUnifiedEventLog = avatarExperienceAnalyticsModule.sendUnifiedEventLog
 local unifiedEventLoggingUtils = avatarExperienceAnalyticsModule.Utils.UnifiedEventLoggingUtils
+local fFlagAXUnifiedEventCounters = avatarExperienceAnalyticsModule.Flags.FFlagAXUnifiedEventCounters
 local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrors = sduiCoreSystemModule.SduiErrors
@@ -23,7 +24,7 @@ local function _(p1, p2)
 end
 
 return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: t (ref), sduiLogger (ref), sduiErrors (ref), findAnalyticsFieldInAncestors (ref), unifiedLoggingSurface (ref), marketplaceUnifiedItemType (ref), findCollectionItemInstancesModule (ref), marketplaceUnifiedAction (ref), unifiedEventLoggingUtils (ref), AXUnifiedEventFilter (ref), sendUnifiedEventLog (ref)
+	-- upvalues: t (ref), sduiLogger (ref), sduiErrors (ref), findAnalyticsFieldInAncestors (ref), unifiedLoggingSurface (ref), marketplaceUnifiedItemType (ref), findCollectionItemInstancesModule (ref), marketplaceUnifiedAction (ref), unifiedEventLoggingUtils (ref), fFlagAXUnifiedEventCounters (ref), AXUnifiedEventFilter (ref), sendUnifiedEventLog (ref)
 	if #p2 == 0 or #(p3 or t) == 0 then
 		sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToLogMarketplaceItemImpressions, {
 			name = "SduiMarketplaceItemImpressionsHandler",
@@ -93,8 +94,14 @@ return function(p1, p2, p3, p4, p5, p6)
 					t_2[i_1] = v_1
 				end
 			end
-			AXUnifiedEventFilter.filter(t_2)
-			sendUnifiedEventLog(t_2)
+			local var16 = nil
+			
+			if fFlagAXUnifiedEventCounters then
+				var16 = AXUnifiedEventFilter.filter(t_2)
+			else
+				AXUnifiedEventFilter.filter(t_2)
+			end
+			sendUnifiedEventLog(t_2, nil, if fFlagAXUnifiedEventCounters then { filterPassed = var16 } else nil)
 			var10 += 1
 		end
 	end

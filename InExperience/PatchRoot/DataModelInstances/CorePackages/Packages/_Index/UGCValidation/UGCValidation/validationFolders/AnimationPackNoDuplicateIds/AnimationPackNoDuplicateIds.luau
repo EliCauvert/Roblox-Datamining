@@ -3,14 +3,13 @@ local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local getFFlagUGCValidateAnimationPackNoDuplicateIdsModule = require(parent.flags.getFFlagUGCValidateAnimationPackNoDuplicateIds)
-local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 
 return {
 	categories = { validationEnumsModule.UploadCategory.ANIMATION_PACK },
 	requiredData = { validationEnumsModule.SharedDataMember.contentIds },
 	fflag = function()
-		-- upvalues: getFFlagUGCValidateAnimationPackNoDuplicateIdsModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref)
-		return getFFlagUGCValidateAnimationPackNoDuplicateIdsModule() and getFFlagUGCValidateMigrateSchemaPropertiesModule()
+		-- upvalues: getFFlagUGCValidateAnimationPackNoDuplicateIdsModule (ref)
+		return getFFlagUGCValidateAnimationPackNoDuplicateIdsModule()
 	end,
 	expectedFailures = {},
 	prereqTests = {

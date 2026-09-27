@@ -18,7 +18,9 @@ local localization = require(corePackagesService.Workspace.Packages.InExperience
 local localizationProvider = require(corePackagesService.Workspace.Packages.Localization).LocalizationProvider
 local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 local useCaptureScreenshotV2Module = require(abuseReportMenu.Hooks.useCaptureScreenshotV2)
+local useSettingsHubCloseButtonModule = require(script.Parent.useSettingsHubCloseButton)
 local isAbuseReportMenuOpenCloseSignalEnabledModule = require(abuseReportMenu.Flags.isAbuseReportMenuOpenCloseSignalEnabled)
+local fFlagReportFocusNavCloseButtonModule = require(abuseReportMenu.Flags.FFlagReportFocusNavCloseButton)
 local fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule = require(abuseReportMenu.Flags.FIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelay)
 local isInWHAM1707ExperimentModule = require(script.Parent.isInWHAM1707Experiment)
 local safetyServiceSignalsModule = require(script.Parent.safetyServiceSignals)
@@ -32,17 +34,30 @@ local function _()
 end
 
 local function AbuseReportMenuContentInner(p1)
-	-- upvalues: useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnum (ref), reactModule (ref), focusRoot (ref), dynamicReportInExpContainerModule (ref), inExpChatMessagesLoaderModule (ref), inExpVoiceUsersLoaderModule (ref), default (ref)
+	-- upvalues: useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnum (ref), fFlagReportFocusNavCloseButtonModule (ref), useSettingsHubCloseButtonModule (ref), reactModule (ref), focusRoot (ref), dynamicReportInExpContainerModule (ref), inExpChatMessagesLoaderModule (ref), inExpVoiceUsersLoaderModule (ref), default (ref)
+	local var1 = useRegistryEntry(focusNavigableSurfaceIdentifierEnum.CentralOverlay) == nil
+	local var2 = nil
+	local var3 = nil
+	
+	if fFlagReportFocusNavCloseButtonModule then
+		local var4, var5 = useSettingsHubCloseButtonModule(p1.getSettingsHubRef, p1.isReportTabVisible)
+		var2 = var4
+		var3 = var5
+	end
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Position = UDim2.new(0, 0, 0, 0),
 		Size = UDim2.new(1, 0, 1, 0)
 	}, {
 		FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
-			isAutoFocusRoot = true,
 			isIsolated = true,
-			frameProps = { Size = UDim2.new(1, 0, 1, 0) },
-			isFocusable = useRegistryEntry(focusNavigableSurfaceIdentifierEnum.CentralOverlay) == nil,
+			frameProps = {
+				Size = UDim2.new(1, 0, 1, 0),
+				SelectionBehaviorUp = if fFlagReportFocusNavCloseButtonModule and var2 ~= nil then Enum.SelectionBehavior.Escape else nil,
+				NextSelectionUp = var2
+			},
+			isFocusable = var1,
+			isAutoFocusRoot = if fFlagReportFocusNavCloseButtonModule then not var3 else true,
 			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.RouterView
 		}, {
 			DynamicReportInExpContainer = reactModule.createElement(dynamicReportInExpContainerModule, {
@@ -60,7 +75,7 @@ local function AbuseReportMenuContentInner(p1)
 end
 
 local function AbuseReportMenuContent(p1)
-	-- upvalues: reactModule (ref), useCaptureScreenshotV2Module (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (ref), isInWHAM1707ExperimentModule (ref), safetyServiceSignalsModule (ref), setTimeout (ref), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (ref), AbuseReportMenuContentInner (ref)
+	-- upvalues: reactModule (ref), useCaptureScreenshotV2Module (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (ref), isInWHAM1707ExperimentModule (ref), safetyServiceSignalsModule (ref), setTimeout (ref), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (ref), AbuseReportMenuContentInner (ref), fFlagReportFocusNavCloseButtonModule (ref)
 	local var1, var2 = reactModule.useState(false)
 	local var3, var4 = reactModule.useState(nil)
 	local var5 = useCaptureScreenshotV2Module()
@@ -129,6 +144,7 @@ local function AbuseReportMenuContent(p1)
 		isReportTabVisible = var1,
 		preselectedPlayer = var3,
 		reportAnythingSnapshotRef = var5.snapshotRef,
+		getSettingsHubRef = if fFlagReportFocusNavCloseButtonModule then p1.getSettingsHubRef else nil,
 		onClose = p1.hideReportTab,
 		onReportFinish = function()
 			-- upvalues: var4 (ref)

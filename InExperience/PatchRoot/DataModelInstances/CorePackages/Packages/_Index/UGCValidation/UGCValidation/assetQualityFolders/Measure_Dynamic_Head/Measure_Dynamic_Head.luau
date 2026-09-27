@@ -3,11 +3,9 @@ local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local getFIntUGCValidationDynamicHeadMinimumQualityPercentModule = require(parent.flags.getFIntUGCValidationDynamicHeadMinimumQualityPercent)
-local getFFlagUGCValidationAddGeometryToExportsModule = require(parent.flags.getFFlagUGCValidationAddGeometryToExports)
 local getFFlagUGCValidateAQScoreWarningsModule = require(parent.flags.getFFlagUGCValidateAQScoreWarnings)
 local t = {
 	categories = { validationEnumsModule.UploadCategory.DYNAMIC_HEAD },
-	fflag = require(parent.flags.getFFlagUGCValidateIsDynamicHead),
 	shadowFlag = require(parent.flags.getFFlagUGCValidationShadowIsDynamicHead),
 	knownAqsUserErrors = {
 		INVALID_LANDMARKS = errorSourceStringsModule.Keys.DynamicHeadCageMisaligned,
@@ -24,22 +22,27 @@ local t_1 = {
 }
 
 function t.run(p1, p2)
-	-- upvalues: getFFlagUGCValidationAddGeometryToExportsModule (ref), t_1 (ref), getFIntUGCValidationDynamicHeadMinimumQualityPercentModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref), errorSourceStringsModule (ref)
-	local _ = nil
-	local var1 = if getFFlagUGCValidationAddGeometryToExportsModule() then p2.aqsSummaryData.Measure_Dynamic_Head.Head or p2.aqsSummaryData.Measure_Dynamic_Head.Head_Geo else p2.aqsSummaryData.Measure_Dynamic_Head.Head
+	-- upvalues: t_1 (ref), getFIntUGCValidationDynamicHeadMinimumQualityPercentModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref), errorSourceStringsModule (ref)
+	local head = p2.aqsSummaryData.Measure_Dynamic_Head.Head or p2.aqsSummaryData.Measure_Dynamic_Head.Head_Geo
 	
-	if var1 == nil then
+	if head == nil then
 		error("Measure_Dynamic_Head: AQS summary missing required fields")
 		
 		return
 	end
 	for i, v in t_1 do
-		if var1[i] ~= nil and tonumber(var1[i]) <= getFIntUGCValidationDynamicHeadMinimumQualityPercentModule() / 100 then
+		if head[i] ~= nil and tonumber(head[i]) <= getFIntUGCValidationDynamicHeadMinimumQualityPercentModule() / 100 then
 			p1:fail(v)
 		end
 	end
-	if getFFlagUGCValidateAQScoreWarningsModule() and var1.score ~= nil and tonumber(var1.score) ~= 100 then
-		p1:warn(errorSourceStringsModule.Keys.AQSWarn_DynamicHead, { score = tostring(math.floor(tonumber(var1.score) or 0)) })
+	if getFFlagUGCValidateAQScoreWarningsModule() and head.score ~= nil and tonumber(head.score) ~= 100 then
+		p1:warn(errorSourceStringsModule.Keys.AQSWarn_DynamicHead, {
+			left_eye_close = string.format("%.2f", tonumber(head.left_eye_close) or 0),
+			right_eye_close = string.format("%.2f", tonumber(head.right_eye_close) or 0),
+			mouth_open = string.format("%.2f", tonumber(head.mouth_open) or 0),
+			is_happy = string.format("%.2f", tonumber(head.is_happy) or 0),
+			is_sad = string.format("%.2f", tonumber(head.is_sad) or 0)
+		})
 	end
 end
 

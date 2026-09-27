@@ -21,7 +21,7 @@ local function UserPreview(p1)
 	local var2
 	local createElement = reactModule.createElement
 	local t = {
-		tag = "row size-full-0 auto-y gap-medium radius-medium bg-surface-200 padding-medium align-y-center",
+		tag = "row align-y-center gap-medium size-full-0 auto-y padding-medium radius-medium bg-surface-200",
 		LayoutOrder = p1.layoutOrder
 	}
 	local t_1 = {
@@ -33,10 +33,10 @@ local function UserPreview(p1)
 	}
 	
 	if not preview.displayName then
-		var2 = preview.username and reactModule.createElement(view, { tag = "col auto-xy fill", LayoutOrder = 2 }, {
+		var2 = preview.username and reactModule.createElement(view, { tag = "col fill auto-xy", LayoutOrder = 2 }, {
 			DisplayName = preview.displayName and reactModule.createElement(text, {
 				RichText = true,
-				tag = "auto-xy content-emphasis text-wrap text-align-x-left",
+				tag = "auto-xy text-wrap text-align-x-left content-emphasis",
 				LayoutOrder = 1,
 				Text = preview.displayName
 			}),
@@ -58,7 +58,7 @@ local function ChatPreview(p1)
 	local preview = p1.preview
 	
 	return if preview then reactModule.createElement(view, {
-		tag = "size-full-0 auto-y gap-xsmall radius-medium bg-surface-200 padding-medium",
+		tag = "gap-xsmall size-full-0 auto-y padding-medium radius-medium bg-surface-200",
 		LayoutOrder = p1.layoutOrder
 	}, {
 		Message = reactModule.createElement(textWithTranslationModule, {
@@ -74,7 +74,7 @@ local function ExperiencePreview(p1)
 	local var2 = useExperienceDetailsModule(preview.id)
 	
 	return if preview then reactModule.createElement(view, {
-		tag = "row size-full-0 auto-y gap-medium radius-medium bg-surface-200 padding-medium align-y-center",
+		tag = "row align-y-center gap-medium size-full-0 auto-y padding-medium radius-medium bg-surface-200",
 		LayoutOrder = p1.layoutOrder
 	}, {
 		ExperienceIcon = reactModule.createElement(image, {

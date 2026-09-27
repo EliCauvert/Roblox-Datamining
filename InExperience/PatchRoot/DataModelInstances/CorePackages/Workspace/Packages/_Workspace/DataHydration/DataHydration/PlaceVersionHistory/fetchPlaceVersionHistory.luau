@@ -82,6 +82,7 @@ local _ = function(p3)
 end
 
 return {
+	DEFAULT_HISTORY_PAGE_SIZE = 100,
 	fetchHistory = function(p3, p4, p5)
 		-- upvalues: urlBase (ref), historyUrl (ref), fetch (ref), asPromise (ref)
 		p4 = p4 or {}

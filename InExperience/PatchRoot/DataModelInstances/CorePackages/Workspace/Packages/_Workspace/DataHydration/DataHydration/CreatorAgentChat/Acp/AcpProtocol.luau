@@ -65,5 +65,27 @@ return {
 			mcpServers = p1.mcpServers,
 			_meta = { _roblox = t }
 		}
+	end,
+	buildSessionPromptWireParams = function(p1)
+		local t = { sessionId = p1.sessionId, prompt = p1.prompt }
+		
+		if p1.experiment == nil then
+			if p1.meta ~= nil then
+				t._meta = p1.meta
+			end
+			return t
+		else
+			local t_1 = {}
+			
+			if p1.meta ~= nil and p1.meta._roblox ~= nil then
+				for i, v in p1.meta._roblox do
+					t_1[i] = v
+				end
+			end
+			t_1.experiment = p1.experiment
+			t._meta = { _roblox = t_1 }
+			
+			return t
+		end
 	end
 }

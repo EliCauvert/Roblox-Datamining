@@ -10,6 +10,7 @@ local showHelpModalThunkModule = require(parent.Thunks.ShowHelpModalThunk)
 local withLocalization = require(corePackagesService.Workspace.Packages.Localization).withLocalization
 local helpModal = roactModule.PureComponent:extend("HelpModal")
 local fFlagTopBarSignalizeScreenSize = require(corePackagesService.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
+local getFFlagEnableSendImageFeedbackToBackendModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.GetFFlagEnableSendImageFeedbackToBackend)
 
 function helpModal.init(p1)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref), displayModule (ref), signalsModule (ref)
@@ -35,10 +36,10 @@ function helpModal.willUnmount(p1)
 end
 
 function helpModal.render(p1)
-	-- upvalues: withLocalization (ref), roactModule (ref), modalDialogModule (ref), fFlagTopBarSignalizeScreenSize (ref), themedTextLabelModule (ref)
+	-- upvalues: withLocalization (ref), getFFlagEnableSendImageFeedbackToBackendModule (ref), roactModule (ref), modalDialogModule (ref), fFlagTopBarSignalizeScreenSize (ref), themedTextLabelModule (ref)
 	return withLocalization({
 		mainHeader = "CoreScripts.Feedback.Help.MainHeader",
-		instructionLabel = "CoreScripts.Feedback.Help.Instructions"
+		instructionLabel = if getFFlagEnableSendImageFeedbackToBackendModule() then "CoreScripts.Feedback.Help.InstructionsWithImage" else "CoreScripts.Feedback.Help.Instructions"
 	})(function(p2)
 		-- upvalues: roactModule (copy), modalDialogModule (copy), p1 (ref), fFlagTopBarSignalizeScreenSize (copy), themedTextLabelModule (copy)
 		return roactModule.createElement(modalDialogModule, {

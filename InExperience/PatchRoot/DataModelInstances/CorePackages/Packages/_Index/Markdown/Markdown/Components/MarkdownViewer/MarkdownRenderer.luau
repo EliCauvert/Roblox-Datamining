@@ -17,18 +17,23 @@ local imageElement = inlineLayoutModule.Components.InlineLayoutElements.ImageEle
 local hardBreakElement = inlineLayoutModule.Components.InlineLayoutElements.HardBreakElement
 local mergeContextsModule = require(utils.mergeContexts)
 local processSoftBreaksModule = require(utils.processSoftBreaks)
-local getCodeTextStyles = require(utils.TextStyle).getCodeTextStyles
-local getBaseTextElementEngineTags = require(utils.TextStyle).getBaseTextElementEngineTags
+local textStyleModule = require(utils.TextStyle)
 local renderInlineModule = require(script.Parent.Parent.NodeRenderers.renderInline)
 local renderTagModule = require(script.Parent.Parent.NodeRenderers.renderTag)
 local bulletList = markdownCoreModule.Components.BulletList
+local getBaseTextElementEngineTags = textStyleModule.getBaseTextElementEngineTags
+local getCodeTextStyles = textStyleModule.getCodeTextStyles
+local normalizeStyleFont = textStyleModule.normalizeStyleFont
 local _ = require(parent.Types)
 local highlighter = markdownCoreModule.Utils.Highlighter
 local getNodeTypeConfigModule = require(parent.Utils.getNodeTypeConfig)
 local isInlineElement = inlineLayoutModule.Utils.isInlineElement
+local flags = markdownCoreModule.Flags
+local flags_1 = foundationModule.Utility.Flags
 local builderSans = Enum.Font.BuilderSans
-local uDim2 = UDim2.new(0, 16, 0, 16)
+local uDim2 = UDim2.fromOffset(16, 16)
 local code = Enum.Font.Code
+local font = Font.new("rbxasset://fonts/families/BuilderMono.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 
 local var1 = function(p1)
 	print(`[Default link callback]: URL [{p1}] is clicked`)
@@ -37,7 +42,9 @@ end
 local t = { renderers = {} }
 
 local function _(p1, p2)
-	return if p1.fontFace then p1.fontFace elseif p1.font then Font.fromEnum(p1.font) else Font.fromEnum(p2)
+	local fontFace = p1.fontFace or p1.font
+	
+	return if typeof(fontFace) == "Font" then fontFace elseif fontFace then Font.fromEnum(fontFace) else Font.fromEnum(p2)
 end
 
 local _ = function(value)
@@ -179,28 +186,35 @@ t.defaultRenderers = {
 	HEADING = renderHeading,
 	PARAGRAPH = renderParagraph,
 	CODE_BLOCK = function(p6, p7)
-		-- upvalues: highlighter (ref), getCodeTextStyles (ref), code (ref), computeLineNumbers (ref), reactModule (ref), view (ref), foundationModule (ref), var9 (ref), text (ref), dashModule (ref)
+		-- upvalues: highlighter (ref), getCodeTextStyles (ref), flags (ref), font (ref), code (ref), computeLineNumbers (ref), reactModule (ref), view (ref), foundationModule (ref), var9 (ref), text (ref), dashModule (ref)
+		local var10
 		local text_1 = p6.text
-		local var10 = if (if p6.attributes then p6.attributes.language else nil) == "lua" then highlighter.highlight(text_1, p7.colorScheme) else text_1
+		local var11 = if (if p6.attributes then p6.attributes.language else nil) == "lua" then highlighter.highlight(text_1, p7.colorScheme) else text_1
 		local _ = nil
-		local var11 = getCodeTextStyles(p7)
+		local var12 = getCodeTextStyles(p7)
 		local t = {
 			TextWrapped = false,
-			tag = "auto-xy padding-small align-y-top",
-			fontStyle = {
-				FontSize = var11.textSize,
-				Font = if var11.fontFace then var11.fontFace elseif var11.font then Font.fromEnum(var11.font) else Font.fromEnum(code),
-				LineHeight = var11.lineHeight
-			},
-			TextXAlignment = Enum.TextXAlignment.Left
+			tag = "auto-xy padding-small align-y-top"
 		}
-		local t_1 = {
+		local t_1 = { FontSize = var12.textSize }
+		
+		if flags.FFlagMarkdownAssistantParity then
+			var10 = var12.fontFace or font
+		else
+			local fontFace = var12.fontFace or var12.font
+			var10 = if typeof(fontFace) == "Font" then fontFace elseif fontFace then Font.fromEnum(fontFace) else Font.fromEnum(code)
+		end
+		t_1.Font = var10
+		t_1.LineHeight = var12.lineHeight
+		t.fontStyle = t_1
+		t.TextXAlignment = Enum.TextXAlignment.Left
+		local t_2 = {
 			RichText = true,
 			ZIndex = 1,
-			Text = var10,
+			Text = var11,
 			textStyle = { Color3 = highlighter.getTokenColor("iden") }
 		}
-		local t_2 = {
+		local t_3 = {
 			ZIndex = 0,
 			TextSelectable = true,
 			Text = text_1,
@@ -212,11 +226,11 @@ t.defaultRenderers = {
 		local codeBackgroundStyles = p7.codeBackgroundStyles or {}
 		local backgroundColor3 = codeBackgroundStyles.backgroundColor3 or highlighter.getTokenColor("background")
 		local backgroundTransparency = codeBackgroundStyles.backgroundTransparency or 0
-		local var12 = nil
+		local var13 = nil
 		local showLineNumbers = p7.codeSettings and p7.codeSettings.showLineNumbers
 		
 		if showLineNumbers then
-			var12 = computeLineNumbers(text_1)
+			var13 = computeLineNumbers(text_1)
 		end
 		return reactModule.createElement(view, {
 			tag = "size-full-0 auto-y col",
@@ -249,7 +263,7 @@ t.defaultRenderers = {
 				LineNumbers = if showLineNumbers then reactModule.createElement(foundationModule.Text, {
 					LayoutOrder = 1,
 					tag = "size-0-0 auto-xy text-align-x-right text-align-y-center padding-small bg-shift-100 content-emphasis",
-					Text = var12,
+					Text = var13,
 					fontStyle = t.fontStyle
 				}) else nil,
 				ScrollFrameWrapper = reactModule.createElement(foundationModule.View, {
@@ -266,21 +280,21 @@ t.defaultRenderers = {
 						AutomaticSize = Enum.AutomaticSize.Y,
 						AutomaticCanvasSize = Enum.AutomaticSize.X
 					}, {
-						HighlightedCode = reactModule.createElement(text, dashModule.join(t, t_1)),
+						HighlightedCode = reactModule.createElement(text, dashModule.join(t, t_2)),
 						SelectableCodeWrapper = reactModule.createElement(foundationModule.View, { tag = t.tag }, {
 							SelectableCode = reactModule.createElement("TextBox", {
 								BackgroundTransparency = 1,
 								TextEditable = false,
 								TextWrapped = false,
 								ClearTextOnFocus = false,
-								Text = t_2.Text,
+								Text = t_3.Text,
 								FontFace = t.fontStyle.Font,
 								TextSize = t.fontStyle.FontSize,
-								TextColor3 = t_2.textStyle.Color3,
-								TextTransparency = t_2.textStyle.Transparency,
+								TextColor3 = t_3.textStyle.Color3,
+								TextTransparency = t_3.textStyle.Transparency,
 								TextXAlignment = Enum.TextXAlignment.Left,
 								TextYAlignment = Enum.TextYAlignment.Center,
-								ZIndex = t_2.ZIndex,
+								ZIndex = t_3.ZIndex,
 								Size = UDim2.fromScale(0, 0),
 								AutomaticSize = Enum.AutomaticSize.XY,
 								LineHeight = p7.codeStyles.lineHeight
@@ -308,15 +322,23 @@ t.defaultRenderers = {
 		return p7.processChildren(p6, mergeContextsModule(p7, { textStyles = t }))
 	end,
 	TEXT = function(p6, p7)
-		-- upvalues: processSoftBreaksModule (ref), getBaseTextElementEngineTags (ref), builderSans (ref), selectableTextElement (ref), textElement (ref)
+		-- upvalues: processSoftBreaksModule (ref), getBaseTextElementEngineTags (ref), flags (ref), builderSans (ref), selectableTextElement (ref), textElement (ref)
+		local fontFace
 		local t = {
 			LayoutOrder = p6.index,
 			Text = processSoftBreaksModule(p6.text),
 			EngineTags = getBaseTextElementEngineTags(p7.textStyles)
 		}
 		local t_1 = {}
-		local textStyles = p7.textStyles
-		t_1.Font = if textStyles.fontFace then textStyles.fontFace elseif textStyles.font then Font.fromEnum(textStyles.font) else Font.fromEnum(builderSans)
+		
+		if flags.FFlagMarkdownAssistantParity then
+			fontFace = p7.textStyles.fontFace
+		else
+			local textStyles = p7.textStyles
+			local fontFace_1 = textStyles.fontFace or textStyles.font
+			fontFace = if typeof(fontFace_1) == "Font" then fontFace_1 elseif fontFace_1 then Font.fromEnum(fontFace_1) else Font.fromEnum(builderSans)
+		end
+		t_1.Font = fontFace
 		t_1.FontSize = p7.textStyles.textSize
 		t.fontStyle = t_1
 		t.textStyle = {
@@ -342,7 +364,7 @@ t.defaultRenderers = {
 		})
 	end,
 	LIST = function(p6, p7)
-		-- upvalues: reactModule (ref), view (ref), render (ref), dashModule (ref), bulletList (ref), builderSans (ref)
+		-- upvalues: reactModule (ref), view (ref), render (ref), dashModule (ref), bulletList (ref), flags (ref), builderSans (ref)
 		local var10
 		local t = {}
 		local var11 = nil
@@ -374,6 +396,7 @@ t.defaultRenderers = {
 				})
 			end
 		end
+		local fontFace
 		local createElement = reactModule.createElement
 		local t_1 = {
 			TextWrapped = true,
@@ -383,8 +406,15 @@ t.defaultRenderers = {
 			Items = t
 		}
 		var10 = {}
-		local textStyles = p7.textStyles
-		var10.Font = if textStyles.fontFace then textStyles.fontFace elseif textStyles.font then Font.fromEnum(textStyles.font) else Font.fromEnum(builderSans)
+		
+		if flags.FFlagMarkdownAssistantParity then
+			fontFace = p7.textStyles.fontFace
+		else
+			local textStyles = p7.textStyles
+			local fontFace_1 = textStyles.fontFace or textStyles.font
+			fontFace = if typeof(fontFace_1) == "Font" then fontFace_1 elseif fontFace_1 then Font.fromEnum(fontFace_1) else Font.fromEnum(builderSans)
+		end
+		var10.Font = fontFace
 		var10.TextColor = if typeof(p7.textStyles.color) == "string" then Color3.fromHex(p7.textStyles.color) else p7.textStyles.color
 		var10.TextSize = p7.textStyles.textSize
 		var10.LineHeight = p7.textStyles.textSize
@@ -454,18 +484,51 @@ t.defaultRenderers = {
 }
 
 function t.render(p8, p9)
-	-- upvalues: t (ref), dashModule (ref), builderSans (ref), code (ref), uDim2 (ref), var1 (ref), processChildren (ref), render (ref)
+	-- upvalues: t (ref), flags (ref), normalizeStyleFont (ref), dashModule (ref), flags_1 (ref), font (ref), builderSans (ref), code (ref), uDim2 (ref), var1 (ref), processChildren (ref), render (ref)
+	local t_1
 	t.renderers = p9.userRenderers
-	local var12 = dashModule.joinDeep({
+	local cloned = table.clone(p9.markdownRendererProps or {})
+	local _ = nil
+	
+	if flags.FFlagMarkdownAssistantParity then
+		cloned.textStyles = normalizeStyleFont(cloned.textStyles)
+		cloned.codeStyles = normalizeStyleFont(cloned.codeStyles)
+		
+		if cloned.headerStyles then
+			cloned.headerStyles = dashModule.map(cloned.headerStyles, normalizeStyleFont)
+		end
+		local bodyMedium = p9.tokens.Typography.BodyMedium
+		local var12 = if flags_1.FoundationFontFaceMigration then normalizeStyleFont({ font = bodyMedium.Font }).fontFace else Font.fromEnum(bodyMedium.Font)
+		local fontSize = bodyMedium.FontSize
+		t_1 = {
+			textStyles = { textSize = fontSize, fontFace = var12 },
+			codeStyles = { lineHeight = 1.111, textSize = fontSize, fontFace = font },
+			headerStyles = {
+				[1] = { textSize = fontSize * 3, fontFace = var12 },
+				[2] = { textSize = fontSize * 2.5, fontFace = var12 },
+				[3] = { textSize = fontSize * 2, fontFace = var12 },
+				[4] = { textSize = fontSize * 1.5, fontFace = var12 },
+				[5] = { textSize = fontSize * 1.5, fontFace = var12 },
+				[6] = { textSize = fontSize * 1.5, fontFace = var12 }
+			}
+		}
+	else
+		t_1 = {
+			textStyles = { textSize = 18, font = builderSans },
+			codeStyles = { textSize = 18, lineHeight = 1.111, font = code },
+			headerStyles = {
+				[1] = { textSize = 54, font = builderSans },
+				[2] = { textSize = 45, font = builderSans },
+				[3] = { textSize = 36, font = builderSans },
+				[4] = { textSize = 27, font = builderSans }
+			}
+		}
+	end
+	local var13 = dashModule.joinDeep({
 		isInline = false,
-		textStyles = { textSize = 18, font = builderSans },
-		codeStyles = { textSize = 18, lineHeight = 1.111, font = code },
-		headerStyles = {
-			[1] = { textSize = 54, font = builderSans },
-			[2] = { textSize = 45, font = builderSans },
-			[3] = { textSize = 36, font = builderSans },
-			[4] = { textSize = 27, font = builderSans }
-		},
+		textStyles = t_1.textStyles,
+		codeStyles = t_1.codeStyles,
+		headerStyles = t_1.headerStyles,
 		imageStyles = { size = uDim2 },
 		linkStyles = {
 			linkColor = `#{p9.tokens.Color.Content.Link.Color3:ToHex()}`
@@ -473,10 +536,10 @@ function t.render(p8, p9)
 		linkCallback = p9.linkCallback or var1,
 		colorScheme = p9.colorScheme,
 		processChildren = processChildren
-	}, table.clone(p9.markdownRendererProps or {}))
-	table.freeze(var12)
+	}, cloned)
+	table.freeze(var13)
 	
-	return render(p8, var12)
+	return render(p8, var13)
 end
 
 return t

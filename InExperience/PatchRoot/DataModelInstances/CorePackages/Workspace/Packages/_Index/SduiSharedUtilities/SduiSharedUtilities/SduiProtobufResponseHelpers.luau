@@ -3,8 +3,6 @@ local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
 local parent = sduiSharedUtilities.Parent
 local getProtoVariableMapper = require(parent.SduiCoreSystem).getProtoVariableMapper
 local _ = require(sduiSharedUtilities.SduiIntegrationTypes)
-local fFlagSduiUniversalPageEntry = require(parent.SharedFlags).FFlagSduiUniversalPageEntry
-local fFlagSduiHydrationDataCamelCaseTopLevelKeys = require(parent.SharedFlags).FFlagSduiHydrationDataCamelCaseTopLevelKeys
 local fFlagSduiHydrationDataCamelCasePropertyKeys = require(parent.SharedFlags).FFlagSduiHydrationDataCamelCasePropertyKeys
 local fFlagEnableHomepagePromptsForModalsAndBanners = require(parent.SharedFlags).FFlagEnableHomepagePromptsForModalsAndBanners
 local fFlagPromptsHandlerEnabled = require(parent.SharedFlags).FFlagPromptsHandlerEnabled
@@ -54,21 +52,21 @@ return {
 		end
 	end,
 	parsePageEntriesFromResponse = function(p1)
-		-- upvalues: fFlagSduiUniversalPageEntry (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), fFlagPromptsHandlerEnabled (ref), parseSurfacing (ref)
+		-- upvalues: fFlagEnableHomepagePromptsForModalsAndBanners (ref), fFlagPromptsHandlerEnabled (ref), parseSurfacing (ref)
 		local t = {}
 		
 		if p1.page_entries then
 			for i, v in p1.page_entries do
 				local robloxComponent = v.page_entry.roblox_component
-				local var1 = if fFlagSduiUniversalPageEntry then v.input_data and (v.input_data.kind and v.input_data.kind.value) else v.kind and v.kind.value
+				local value = v.input_data and (v.input_data.kind and v.input_data.kind.value)
 				local identifier = v.page_entry.identifier
-				local var2 = if fFlagEnableHomepagePromptsForModalsAndBanners or fFlagPromptsHandlerEnabled then v.page_entry.category else nil
+				local var1 = if fFlagEnableHomepagePromptsForModalsAndBanners or fFlagPromptsHandlerEnabled then v.page_entry.category else nil
 				table.insert(t, {
 					robloxComponentType = robloxComponent,
 					identifier = if identifier ~= "" then nil else identifier,
-					componentInputData = var1,
+					componentInputData = value,
 					title = v.page_entry.title,
-					category = if var2 == nil or var2 == "" then nil else var2,
+					category = if var1 == nil or var1 == "" then nil else var1,
 					surfacing = parseSurfacing(v.page_entry.surfacing)
 				})
 			end
@@ -76,7 +74,7 @@ return {
 		return t
 	end,
 	parseHydrationDataFromResponse = function(p2)
-		-- upvalues: fFlagSduiHydrationDataCamelCasePropertyKeys (ref), getProtoVariableMapper (ref), fFlagSduiHydrationDataCamelCaseTopLevelKeys (ref)
+		-- upvalues: fFlagSduiHydrationDataCamelCasePropertyKeys (ref), getProtoVariableMapper (ref)
 		local hydrationData = p2.hydration_data
 		
 		if hydrationData then
@@ -97,18 +95,16 @@ return {
 					end
 				end
 			end
-			if fFlagSduiHydrationDataCamelCaseTopLevelKeys then
-				local var3 = getProtoVariableMapper()
-				local t = {}
-				
-				for i_1, v_1 in hydrationData do
-					if v_1 then
-						t[var3.mapPropName(i_1)] = v_1
-					end
+			local var2 = getProtoVariableMapper()
+			local t = {}
+			
+			for i_1, v_1 in hydrationData do
+				if v_1 then
+					t[var2.mapPropName(i_1)] = v_1
 				end
-				for i_2, v_2 in t do
-					hydrationData[i_2] = v_2
-				end
+			end
+			for i_2, v_2 in t do
+				hydrationData[i_2] = v_2
 			end
 		end
 		return hydrationData

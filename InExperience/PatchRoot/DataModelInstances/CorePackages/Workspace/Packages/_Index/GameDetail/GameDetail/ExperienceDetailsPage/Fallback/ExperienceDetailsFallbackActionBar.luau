@@ -9,14 +9,13 @@ local useTokens = foundationModule.Hooks.useTokens
 local useGameInfoModule = require(script.Parent.Parent.useGameInfo)
 local playButton = require(parent.GamePlayButton).PlayButton
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox = sharedFlagsModule.FFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox
 local fFlagSduiEdpPersistentActionBarPlayButton = sharedFlagsModule.FFlagSduiEdpPersistentActionBarPlayButton
 local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
 local fFlagEnableGameJoinEarlyAccess = sharedFlagsModule.FFlagEnableGameJoinEarlyAccess
 
 return {
 	Skeleton = reactModule.memo(function(p1)
-		-- upvalues: useTokens (ref), reactModule (ref), view (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), skeleton (ref), radius (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagEnableGameJoinEarlyAccess (ref)
+		-- upvalues: useTokens (ref), reactModule (ref), view (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), skeleton (ref), radius (ref), playButton (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagEnableGameJoinEarlyAccess (ref)
 		local size1200 = useTokens().Size.Size_1200
 		
 		return reactModule.createElement(view, {
@@ -35,6 +34,7 @@ return {
 			}),
 			PlayBtnContainer = if fFlagSduiEdpPersistentActionBarPlayButton then nil else reactModule.createElement(view, { tag = "grow auto-y", LayoutOrder = 3 }, {
 				PlayBtn = reactModule.createElement(playButton, {
+					useUIBloxButton = true,
 					launchOnReleaseAfterUnmount = true,
 					testId = "--edp-fallback-play-button",
 					universeId = p1.universeId,
@@ -42,7 +42,6 @@ return {
 					launchSource = p1.launchSource,
 					experienceJoinData = p1.experienceJoinData,
 					placeId = p1.placeIdOverride,
-					useUIBloxButton = fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox,
 					buttonSize = buttonSize.Large,
 					fillBehavior = foundationModule.Enums.FillBehavior.Fill,
 					launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil,
@@ -53,7 +52,7 @@ return {
 		})
 	end),
 	Error = reactModule.memo(function(p1)
-		-- upvalues: useGameInfoModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), reactModule (ref), view (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagEnableGameJoinEarlyAccess (ref)
+		-- upvalues: useGameInfoModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), reactModule (ref), view (ref), playButton (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagEnableGameJoinEarlyAccess (ref)
 		local var1 = useGameInfoModule(p1.universeId)
 		
 		return if var1 ~= nil and var1.isUnavailable == true then nil elseif fFlagSduiEdpPersistentActionBarPlayButton then nil else reactModule.createElement(view, {
@@ -62,6 +61,7 @@ return {
 		}, {
 			PlayBtnContainer = reactModule.createElement(view, { tag = "grow auto-y", LayoutOrder = 1 }, {
 				PlayBtn = reactModule.createElement(playButton, {
+					useUIBloxButton = true,
 					launchOnReleaseAfterUnmount = true,
 					testId = "--edp-fallback-play-button",
 					universeId = p1.universeId,
@@ -69,7 +69,6 @@ return {
 					launchSource = p1.launchSource,
 					experienceJoinData = p1.experienceJoinData,
 					placeId = p1.placeIdOverride,
-					useUIBloxButton = fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox,
 					buttonSize = buttonSize.Large,
 					fillBehavior = foundationModule.Enums.FillBehavior.Fill,
 					launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil,

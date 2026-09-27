@@ -64,7 +64,7 @@ return function()
 			hasMore = var1.hasMore,
 			onLoadMore = if var1.hasMore then var1.loadMore else nil,
 			renderRow = var5,
-			ctaConfig = if fFlagUserListCtaIntegrationEnabled then socialTabsCtaConfigModule else nil
+			ctaConfig = if fFlagUserListCtaIntegrationEnabled then socialTabsCtaConfigModule.Mutuals else nil
 		})
 	})
 end

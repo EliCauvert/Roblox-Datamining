@@ -82,7 +82,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			DO_NOT_USE_hasContentInputSink = true,
 			hasArrow = var1.hasArrow,
 			align = var1.align,
-			onPressedOutside = if flagsModule.FoundationCoachmarkPressedOutside then var1.onPressedOutside else nil,
+			onPressedOutside = var1.onPressedOutside,
 			side = { position = var1.side, offset = var2.Size.Size_200 },
 			radius = radiusModule.Medium,
 			backgroundStyle = var2.Inverse.Surface.Surface_0,

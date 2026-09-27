@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableNavRailTooltipAndTruncation", false) and require(script.Parent.UIBlox).FFlagUIBloxAddNavigationTabTooltipAndTruncation

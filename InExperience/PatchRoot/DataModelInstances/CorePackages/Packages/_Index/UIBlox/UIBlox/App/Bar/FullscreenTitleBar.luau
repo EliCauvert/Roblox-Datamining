@@ -1,6 +1,9 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent
 local parent_2 = parent_1.Parent
+local foundationModule = require(parent_2.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local roactModule = require(parent_2.Roact)
 local otterModule = require(parent_2.Otter)
 local tModule = require(parent_2.t)
@@ -47,9 +50,9 @@ function fullscreenTitleBar.init(p1)
 end
 
 function fullscreenTitleBar.render(p1)
-	-- upvalues: withStyleModule (ref), lerpModule (ref), roactModule (ref), controlStateModule (ref), divideTransparencyModule (ref), iconButtonModule (ref), imagesModule (ref), iconSizeModule (ref), getIconSizeModule (ref), threeSectionBarModule (ref)
+	-- upvalues: withStyleModule (ref), lerpModule (ref), roactModule (ref), controlStateModule (ref), divideTransparencyModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), iconButtonModule (ref), imagesModule (ref), iconSizeModule (ref), getIconSizeModule (ref), threeSectionBarModule (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), lerpModule (copy), roactModule (copy), controlStateModule (copy), divideTransparencyModule (copy), iconButtonModule (copy), imagesModule (copy), iconSizeModule (copy), getIconSizeModule (copy), threeSectionBarModule (copy)
+		-- upvalues: p1 (ref), lerpModule (copy), roactModule (copy), controlStateModule (copy), divideTransparencyModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), iconButtonModule (copy), imagesModule (copy), iconSizeModule (copy), getIconSizeModule (copy), threeSectionBarModule (copy)
 		local theme = p2.Theme
 		local font = p2.Font
 		local backgroundUIDefault = theme.BackgroundUIDefault
@@ -116,11 +119,12 @@ function fullscreenTitleBar.render(p1)
 						})
 					end,
 					renderCenter = function()
-						-- upvalues: roactModule (copy), header2 (ref), var1 (ref), p1 (copy), textEmphasis (ref), var5 (ref)
+						-- upvalues: roactModule (copy), foundationFontFaceMigration (copy), header2 (ref), normalizeFontFace (copy), var1 (ref), p1 (copy), textEmphasis (ref), var5 (ref)
 						return roactModule.createElement("TextLabel", {
 							BackgroundTransparency = 1,
 							TextWrapped = false,
-							Font = header2.Font,
+							Font = if foundationFontFaceMigration then nil else header2.Font,
+							FontFace = if foundationFontFaceMigration then normalizeFontFace(header2.Font) else nil,
 							Size = UDim2.new(1, 0, 0, var1),
 							Text = p1.props.title,
 							TextColor3 = textEmphasis.Color,

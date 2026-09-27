@@ -16,7 +16,6 @@ local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.Sdu
 local _ = require(sduiCoreSystem.SduiConfigTypes)
 local _ = require(sduiCoreSystem.SduiComponentType)
 local fFlagSduiActionSkipUnifiedLogging = require(parent.SharedFlags).FFlagSduiActionSkipUnifiedLogging
-local fFlagSduiImprovedErrorDimensions = require(parent.SharedFlags).FFlagSduiImprovedErrorDimensions
 local fFlagSduiExperimentalComponent = require(parent.SharedFlags).FFlagSduiExperimentalComponent
 
 local function mergeTemplateParamsWithOverrides(p1, p2)
@@ -32,14 +31,10 @@ local function mergeTemplateParamsWithOverrides(p1, p2)
 end
 
 local function buildActionProp(p3, p4, p5, p6, p7, p8)
-	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), fFlagSduiExperimentalComponent (ref), sduiActionTypeModule (ref), protoVariableMapperModule (ref), getSduiActionHandlerRegistryModule (ref), getSduiServiceDependenciesStoreModule (ref), sduiClientBindingBuilderModule (ref), propResultCategory (ref), fFlagSduiActionSkipUnifiedLogging (ref), buildPropTable (ref), mergeTemplateParamsWithOverrides (ref), logActionTelemetryModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiPropUtilsModule (ref), buildActionProp (ref)
-	local currentComponentType = nil
-	local currentParserName = nil
+	-- upvalues: fFlagSduiExperimentalComponent (ref), sduiActionTypeModule (ref), protoVariableMapperModule (ref), getSduiActionHandlerRegistryModule (ref), getSduiServiceDependenciesStoreModule (ref), sduiClientBindingBuilderModule (ref), propResultCategory (ref), fFlagSduiActionSkipUnifiedLogging (ref), buildPropTable (ref), mergeTemplateParamsWithOverrides (ref), logActionTelemetryModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiPropUtilsModule (ref), buildActionProp (ref)
+	local currentComponentType = p7.currentComponentType
+	local currentParserName = p7.currentParserName
 	
-	if fFlagSduiImprovedErrorDimensions then
-		currentComponentType = p7.currentComponentType
-		currentParserName = p7.currentParserName
-	end
 	if p3 == "value" then
 		local var2 = nil
 		local ok, status = pcall(function()
@@ -115,11 +110,11 @@ local function buildActionProp(p3, p4, p5, p6, p7, p8)
 			return status, propResultCategory.Literal
 		end
 		return function(_, _, _)
-			-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), var2 (write), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write)
+			-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), var2 (write), currentComponentType (ref), currentParserName (ref)
 			sduiLoggerModule.reportCounter(sduiErrorsModule.SduiCounterName.ExecutedInvalidAction, {
 				name = var2,
-				componentType = if fFlagSduiImprovedErrorDimensions then currentComponentType else nil,
-				parserName = if fFlagSduiImprovedErrorDimensions then currentParserName else "buildActionProp"
+				componentType = currentComponentType,
+				parserName = currentParserName
 			})
 		end, propResultCategory.Failed, status
 	elseif p3 == "conditional" then

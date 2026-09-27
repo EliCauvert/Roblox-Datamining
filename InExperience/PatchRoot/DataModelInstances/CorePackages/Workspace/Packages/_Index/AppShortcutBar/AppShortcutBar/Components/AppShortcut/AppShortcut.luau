@@ -1,9 +1,11 @@
-﻿local textService = game:GetService("TextService")
-local parent = script:FindFirstAncestor("AppShortcutBar").Parent
+﻿local parent = script:FindFirstAncestor("AppShortcutBar").Parent
+local textService = game:GetService("TextService")
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local UIBloxModule = require(parent.UIBlox)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
+local getTextSize = require(parent.Style).GetTextSize
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useStyle = UIBloxModule.Core.Style.useStyle
 local useTokens = foundationModule.Hooks.useTokens
 local icon = foundationModule.Icon
@@ -85,7 +87,7 @@ local function useOnShortcutActivated(p3)
 end
 
 function AppShortcut(p3)
-	-- upvalues: useStyle (ref), useTokens (ref), keyLabelUtilities (ref), reactModule (ref), textService (ref), keyLabel (ref), iconWithHoldAnimationModule (ref), icon (ref), useOnShortcutActivated (ref), shortcut (ref), stateLayer (ref)
+	-- upvalues: useStyle (ref), useTokens (ref), keyLabelUtilities (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), keyLabel (ref), iconWithHoldAnimationModule (ref), icon (ref), useOnShortcutActivated (ref), shortcut (ref), stateLayer (ref)
 	local var2, size900
 	local layoutOrder = p3.layoutOrder
 	local item = p3.item
@@ -113,10 +115,12 @@ function AppShortcut(p3)
 		size900 = var4.Size.Size_600
 	end
 	local var6 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), textService (copy), item (ref), var2 (write)
+		-- upvalues: var4 (ref), foundationFontFaceMigration (copy), getTextSize (copy), item (ref), textService (copy), var2 (write)
+		local xSmall = var4.Gap.XSmall
 		local labelMedium = var4.Typography.LabelMedium
+		local vector2 = Vector2.new(1e999, 1e999)
 		
-		return UDim2.new(0, var2 + var4.Gap.XSmall + textService:GetTextSize(item.text, math.floor(labelMedium.FontSize), labelMedium.Font, Vector2.new(1e999, 1e999)).X, 1, 0)
+		return UDim2.new(0, var2 + xSmall + (if foundationFontFaceMigration then getTextSize(item.text, math.floor(labelMedium.FontSize), labelMedium.Font, vector2, { addTemporaryPadding = false }) else textService:GetTextSize(item.text, math.floor(labelMedium.FontSize), labelMedium.Font, vector2)).X, 1, 0)
 	end, { var4, var2, item.text })
 	local var7 = reactModule.useMemo(function()
 		-- upvalues: isTable (ref), reactModule (copy), item (ref), keyLabel (copy)
@@ -179,7 +183,8 @@ function AppShortcut(p3)
 						})
 					})
 				end, {
-					item.hasProgress, item.progress, item.icon, var2, size900, isTable, var7
+					item.hasProgress, item.progress, item.icon, var2, size900, isTable, var7,
+					if foundationFontFaceMigration then var4.Size.Size_900 else nil
 				})
 			})
 		}),

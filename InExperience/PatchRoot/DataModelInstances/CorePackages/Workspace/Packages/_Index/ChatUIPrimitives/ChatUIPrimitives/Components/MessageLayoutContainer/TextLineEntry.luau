@@ -27,6 +27,15 @@ local function _(value)
 	return math.max(0, ceiled)
 end
 
+local _ = function(p1)
+	local ceiled = math.ceil(p1 * 3 / 4)
+	
+	if ceiled % 2 == 1 then
+		ceiled += 1
+	end
+	return tostring(math.max(0, ceiled))
+end
+
 local _ = function(value)
 	local t = { weight = "700" }
 	local ceiled = math.ceil(value * 3 / 4)
@@ -94,18 +103,35 @@ return reactModule.memo(function(p1)
 		
 		return var12(lightningBolt, t)
 	end, { var10, var1 })
-	local var12 = var10 ~= nil
+	local var12 = reactModule.useMemo(function()
+		-- upvalues: var10 (write), formatInlineIconModule (copy), var1 (ref)
+		if not var10 or not var10.iconName or var10.iconName == "" then
+			return ""
+		end
+		local var13 = formatInlineIconModule
+		local iconName = var10.iconName
+		local t = { weight = "600" }
+		local ceiled = math.ceil(var1.Typography.BodyLarge.FontSize * 3 / 4)
+		
+		if ceiled % 2 == 1 then
+			ceiled += 1
+		end
+		t.size = tostring(math.max(0, ceiled))
+		
+		return var13(iconName, t)
+	end, { var10, var1 })
+	local var13 = var10 ~= nil
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "col gap-xsmall auto-y",
 		Size = UDim2.new(1, 0, 0, 0),
 		backgroundStyle = { Transparency = 1, Color3 = Color3.new(0, 0, 0) },
 		LayoutOrder = var8,
-		Visible = var12,
+		Visible = var13,
 		onActivated = if p1.selectableRows then noop else nil,
 		stateLayer = if p1.selectableRows then t else nil,
 		selection = if p1.selectableRows then {
-			Selectable = var12,
+			Selectable = var13,
 			SelectionImageObject = p1.selectionCursor
 		} else nil
 	}, {
@@ -114,19 +140,19 @@ return reactModule.memo(function(p1)
 			RichText = true,
 			LayoutOrder = 1,
 			Text = reactModule.useMemo(function()
-				-- upvalues: var10 (write), var11 (write), var2 (ref)
+				-- upvalues: var10 (write), var11 (write), var12 (ref), var2 (ref)
 				if not var10 then
 					return ""
 				end
 				local prefixText = var10.prefixText or ""
 				
 				if var10.messageType == "user" then
-					local var13 = var11
+					local var14 = var11
 					
-					return if var13 == "" then prefixText .. " " .. var23.content else `{prefixText} {var10.content} {var13}`
+					return if var14 == "" then prefixText .. " " .. var24.content else `{prefixText} {var10.content} {var14}`
 				end
-				return if var10.messageType == "system-roblox" then var10.content else var2 .. var23.content .. "</font>"
-			end, { var10, var11, var2 }),
+				return if var10.messageType == "system-roblox" then var10.content elseif var12 == "" then var2 .. var24.content .. "</font>" else var2 .. var26 .. " " .. var24.content .. "</font>"
+			end, { var10, var11, var12, var2 }),
 			fontStyle = reactModule.useMemo(function()
 				-- upvalues: p1 (ref)
 				return if p1.fontFace then { Font = p1.fontFace } else nil

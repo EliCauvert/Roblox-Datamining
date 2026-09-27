@@ -7,6 +7,8 @@ local localizationModule = require(parent.Localization)
 local enumsModule = require(userList.Common.Enums)
 local enteredChatFromEntryPoint = require(parent.SocialCommon).Actions.EnteredChatFromEntryPoint
 local fFlagUserListCtaAnalyticsEnabled = require(parent.SharedFlags).FFlagUserListCtaAnalyticsEnabled
+local fFlagUserListCanonicalCtaAnalyticsModule = require(userList.Flags.FFlagUserListCanonicalCtaAnalytics)
+local reportCtaActivatedModule = require(userList.Analytics.reportCtaActivated)
 local fFlagSharedChatEntryPointAction = require(parent.SharedFlags).FFlagSharedChatEntryPointAction
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useLocalization = localizationModule.Hooks.useLocalization
@@ -17,7 +19,7 @@ local friendingActionsModule = require(userList.Cta.friendingActions)
 local notificationTypeList = guiService:GetNotificationTypeList()
 
 return function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), fFlagSharedChatEntryPointAction (ref), fFlagUserListCtaAnalyticsEnabled (ref), buttonTypes (ref), enteredChatFromEntryPoint (ref), guiService (ref), notificationTypeList (ref), friendingActionsModule (ref)
+	-- upvalues: useDispatch (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), fFlagSharedChatEntryPointAction (ref), fFlagUserListCtaAnalyticsEnabled (ref), fFlagUserListCanonicalCtaAnalyticsModule (ref), buttonTypes (ref), reportCtaActivatedModule (ref), enteredChatFromEntryPoint (ref), guiService (ref), notificationTypeList (ref), friendingActionsModule (ref)
 	local var1 = useDispatch()
 	local var2 = reactModule.useRef({})
 	local var3 = useLocalization({
@@ -37,27 +39,34 @@ return function(p1)
 	local var4 = if p1 then p1.friendshipOriginSourceType else nil
 	local var5 = if fFlagSharedChatEntryPointAction then if p1 then p1.chatEntryPoint else nil else nil
 	local var6 = if fFlagUserListCtaAnalyticsEnabled then if p1 then p1.onCtaActivated else nil else nil
+	local var7 = if fFlagUserListCanonicalCtaAnalyticsModule then if p1 then p1.analytics else nil else nil
 	
 	return reactModule.useMemo(function()
-		-- upvalues: buttonTypes (copy), fFlagUserListCtaAnalyticsEnabled (copy), var6 (write), fFlagSharedChatEntryPointAction (copy), var5 (write), var1 (ref), enteredChatFromEntryPoint (copy), guiService (copy), notificationTypeList (copy), var2 (ref), friendingActionsModule (copy), var4 (ref), var3 (ref)
+		-- upvalues: buttonTypes (copy), fFlagUserListCtaAnalyticsEnabled (copy), var6 (write), fFlagUserListCanonicalCtaAnalyticsModule (copy), reportCtaActivatedModule (copy), var7 (write), fFlagSharedChatEntryPointAction (copy), var5 (write), var1 (ref), enteredChatFromEntryPoint (copy), guiService (copy), notificationTypeList (copy), var2 (ref), friendingActionsModule (copy), var4 (ref), var3 (ref)
 		return {
-			[buttonTypes.Chat] = function(p2)
-				-- upvalues: fFlagUserListCtaAnalyticsEnabled (copy), var6 (copy), buttonTypes (copy), fFlagSharedChatEntryPointAction (copy), var5 (copy), var1 (copy), enteredChatFromEntryPoint (copy), guiService (copy), notificationTypeList (copy)
+			[buttonTypes.Chat] = function(p2, p3)
+				-- upvalues: fFlagUserListCtaAnalyticsEnabled (copy), var6 (copy), buttonTypes (copy), fFlagUserListCanonicalCtaAnalyticsModule (copy), reportCtaActivatedModule (copy), var7 (copy), fFlagSharedChatEntryPointAction (copy), var5 (copy), var1 (copy), enteredChatFromEntryPoint (copy), guiService (copy), notificationTypeList (copy)
 				if fFlagUserListCtaAnalyticsEnabled and var6 ~= nil then
 					var6({ buttonType = buttonTypes.Chat, userId = p2 })
+				end
+				if fFlagUserListCanonicalCtaAnalyticsModule then
+					reportCtaActivatedModule(var7, buttonTypes.Chat, p2, p3)
 				end
 				if fFlagSharedChatEntryPointAction and var5 ~= nil then
 					var1(enteredChatFromEntryPoint(var5))
 				end
 				guiService:BroadcastNotification(p2, notificationTypeList.LAUNCH_CONVERSATION)
 			end,
-			[buttonTypes.Add] = function(p2)
-				-- upvalues: var2 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var6 (copy), buttonTypes (copy), friendingActionsModule (copy), var1 (copy), var4 (copy), var3 (copy)
+			[buttonTypes.Add] = function(p2, p3)
+				-- upvalues: var2 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var6 (copy), buttonTypes (copy), fFlagUserListCanonicalCtaAnalyticsModule (copy), reportCtaActivatedModule (copy), var7 (copy), friendingActionsModule (copy), var1 (copy), var4 (copy), var3 (copy)
 				if var2.current[p2] then return end
 				var2.current[p2] = true
 				
 				if fFlagUserListCtaAnalyticsEnabled and var6 ~= nil then
 					var6({ buttonType = buttonTypes.Add, userId = p2 })
+				end
+				if fFlagUserListCanonicalCtaAnalyticsModule then
+					reportCtaActivatedModule(var7, buttonTypes.Add, p2, p3)
 				end
 				friendingActionsModule.executeAddFriend({
 					dispatch = var1,
@@ -69,26 +78,32 @@ return function(p1)
 					var2.current[p2] = nil
 				end)
 			end,
-			[buttonTypes.Accept] = function(p2)
-				-- upvalues: var2 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var6 (copy), buttonTypes (copy), friendingActionsModule (copy), var1 (copy), var3 (copy)
+			[buttonTypes.Accept] = function(p2, p3)
+				-- upvalues: var2 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var6 (copy), buttonTypes (copy), fFlagUserListCanonicalCtaAnalyticsModule (copy), reportCtaActivatedModule (copy), var7 (copy), friendingActionsModule (copy), var1 (copy), var3 (copy)
 				if var2.current[p2] then return end
 				var2.current[p2] = true
 				
 				if fFlagUserListCtaAnalyticsEnabled and var6 ~= nil then
 					var6({ buttonType = buttonTypes.Accept, userId = p2 })
 				end
+				if fFlagUserListCanonicalCtaAnalyticsModule then
+					reportCtaActivatedModule(var7, buttonTypes.Accept, p2, p3)
+				end
 				friendingActionsModule.executeAcceptFriendRequest({ dispatch = var1, targetUserId = p2, localized = var3 }):finally(function()
 					-- upvalues: var2 (copy), p2 (ref)
 					var2.current[p2] = nil
 				end)
 			end,
-			[buttonTypes.Dismiss] = function(p2)
-				-- upvalues: var2 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var6 (copy), buttonTypes (copy), friendingActionsModule (copy), var1 (copy), var3 (copy)
+			[buttonTypes.Dismiss] = function(p2, p3)
+				-- upvalues: var2 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var6 (copy), buttonTypes (copy), fFlagUserListCanonicalCtaAnalyticsModule (copy), reportCtaActivatedModule (copy), var7 (copy), friendingActionsModule (copy), var1 (copy), var3 (copy)
 				if var2.current[p2] then return end
 				var2.current[p2] = true
 				
 				if fFlagUserListCtaAnalyticsEnabled and var6 ~= nil then
 					var6({ buttonType = buttonTypes.Dismiss, userId = p2 })
+				end
+				if fFlagUserListCanonicalCtaAnalyticsModule then
+					reportCtaActivatedModule(var7, buttonTypes.Dismiss, p2, p3)
 				end
 				friendingActionsModule.executeDeclineFriendRequest({ dispatch = var1, targetUserId = p2, localized = var3 }):finally(function()
 					-- upvalues: var2 (copy), p2 (ref)
@@ -97,10 +112,6 @@ return function(p1)
 			end
 		}
 	end, {
-		var1,
-		var3,
-		var4,
-		var6,
-		var5
+		var1, var3, var4, var6, var5, var7
 	})
 end

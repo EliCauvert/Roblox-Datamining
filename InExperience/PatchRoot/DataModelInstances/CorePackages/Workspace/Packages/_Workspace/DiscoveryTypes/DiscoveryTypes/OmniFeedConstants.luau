@@ -4,6 +4,8 @@ local fFlagLuaAppRfySignalApportioningIxp = require(parent.SharedFlags).FFlagLua
 local fFlagLuaAppEnableReportExperience = require(parent.SharedFlags).FFlagLuaAppEnableReportExperience
 local fFlagLuaAppUsePrevalidatedVideoGamePlayability = require(parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
 local fFlagLuaAppRfyRevealRows = require(parent.SharedFlags).FFlagLuaAppRfyRevealRows
+local fFlagLuaAppSortHeaderAnchorTag = require(parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag
+local fFlagLuaAppContinueSortInstantPlay = require(parent.SharedFlags).FFlagLuaAppContinueSortInstantPlay
 local _ = require(script.Parent.RoduxTypes)
 
 return {
@@ -38,7 +40,7 @@ return {
 		SponsoredUserCohort = "sponsoredUserCohort",
 		EnableSponsoredFeedback = "enableSponsoredFeedback",
 		EnableCollectionGrid = "enableCollectionGrid",
-		SortHeaderAnchorTag = if require(parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag then "sortHeaderAnchorTag" else nil,
+		SortHeaderAnchorTag = if fFlagLuaAppSortHeaderAnchorTag then "sortHeaderAnchorTag" else nil,
 		InitialFeedVisibleRows = if fFlagLuaAppRfyRevealRows then "initialFeedVisibleRows" else nil,
 		VisibleRowsPerReveal = if fFlagLuaAppRfyRevealRows then "visibleRowsPerReveal" else nil,
 		EnableReportAd = "enableReportAd",
@@ -46,7 +48,8 @@ return {
 		IsSponsoredRatingFooterAllowed = "isSponsoredRatingFooterAllowed",
 		AmpUpsellFeatureName = "ampUpsellFeatureName",
 		AmpUpsellNamespace = "ampUpsellNamespace",
-		EnableInstantPlay = if require(parent.SharedFlags).FFlagLuaAppContinueSortInstantPlay then "enableInstantPlay" else nil
+		EnableInstantPlay = if fFlagLuaAppContinueSortInstantPlay then "enableInstantPlay" else nil,
+		InstantPlayTreatment = if fFlagLuaAppContinueSortInstantPlay then "instantPlayTreatment" else nil
 	},
 	ComponentTypeDataKeys = {
 		EventTile = "EventTile",

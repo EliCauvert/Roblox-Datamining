@@ -258,17 +258,27 @@ return function(p1)
 		})
 	}) else nil
 	t_3.Fields = createElement_2(view, t_4, t_5)
-	t_3.Actions = reactModule.createElement(accountUpgradeDialogActionsModule, {
-		LayoutOrder = 2,
-		buttons = {
-			{
-				text = p1.saveText,
-				variant = if var5 then buttonVariant.Standard else buttonVariant.Emphasis,
-				onActivated = p1.onSaveActivated,
-				isDisabled = var5,
-				isLoading = p1.isSubmitting
+	t_3.Actions = reactModule.createElement(view, {
+		tag = "col gap-small size-full-0 auto-y",
+		LayoutOrder = 2
+	}, {
+		Buttons = reactModule.createElement(accountUpgradeDialogActionsModule, {
+			LayoutOrder = 1,
+			buttons = {
+				{
+					text = p1.saveText,
+					variant = if var5 then buttonVariant.Standard else buttonVariant.Emphasis,
+					onActivated = p1.onSaveActivated,
+					isDisabled = var5,
+					isLoading = p1.isSubmitting
+				}
 			}
-		}
+		}),
+		Error = reactModule.createElement(FieldError, {
+			LayoutOrder = 2,
+			testId = "AccountUpgradeSubmitError",
+			text = p1.submitError
+		})
 	})
 	t_1.Body = createElement_1(view, t_2, t_3)
 	
@@ -276,6 +286,7 @@ return function(p1)
 		title = p1.titleText,
 		onClose = if onClose then var13 else nil,
 		hasBackdrop = p1.hasBackdrop,
+		isFocusable = not p1.isBirthdayPickerOpen,
 		children = {
 			Content = createElement(view, t, t_1),
 			BirthdayPicker = if var8 then reactModule.createElement(birthdayPickerSheetModule, {

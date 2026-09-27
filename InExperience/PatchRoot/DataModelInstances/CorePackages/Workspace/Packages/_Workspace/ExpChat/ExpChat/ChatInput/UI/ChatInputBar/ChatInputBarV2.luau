@@ -5,9 +5,7 @@ local foundationModule = require(parent.Foundation)
 local expChatSharedModule = require(parent.ExpChatShared)
 local configModule = require(expChat.Config)
 local channelChipModule = require(script.Parent.ChannelChip)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
-local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
+local fFlagEnableConsoleExpControls = require(parent.SharedFlags).FFlagEnableConsoleExpControls
 local expChatFocusablePlaceholderText = game:DefineFastFlag("ExpChatFocusablePlaceholderText", false)
 local fFlagExpChatInputBarV2CustomSendButtonModule = require(expChat.Flags.FFlagExpChatInputBarV2CustomSendButton)
 local fFlagExpChatInputBarV2CornerAndTruncationFixModule = require(expChat.Flags.FFlagExpChatInputBarV2CornerAndTruncationFix)
@@ -57,7 +55,7 @@ local function renderCustomSendButton(p1, p2, p3, p4)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), fFlagExpChatUseMessagesStore (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatComposerInputBarFigmaParityModule (ref), fFlagExpChatInputBarV2CustomSendButtonModule (ref), renderCustomSendButton (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref)
+	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatComposerInputBarFigmaParityModule (ref), fFlagExpChatInputBarV2CustomSendButtonModule (ref), renderCustomSendButton (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local setTransparency = p1.setTransparency
 	local chatInputBarSettings = p1.chatInputBarSettings
@@ -135,7 +133,7 @@ return reactModule.memo(function(p1)
 			developerChannelTabsEnabled = p1.developerChannelTabsEnabled
 		})
 	}
-	local var6 = if fFlagExpChatUseMessagesStore then not canLocalUserChatDerived else not p1.canLocalUserChat
+	local var6 = not canLocalUserChatDerived
 	
 	if var6 then
 		var6 = reactModule.createElement
@@ -162,7 +160,7 @@ return reactModule.memo(function(p1)
 		})
 	end
 	t_7.DisabledPlaceholderLabel = var6
-	local var7 = if fFlagExpChatUseMessagesStore then canLocalUserChatDerived else p1.canLocalUserChat
+	local var7 = canLocalUserChatDerived
 	
 	if var7 then
 		var7 = reactModule.createElement
@@ -177,7 +175,7 @@ return reactModule.memo(function(p1)
 			end)
 		}
 		local t_9 = {}
-		local var9 = if fFlagExpChatUseMessagesStore then canLocalUserChatDerived else p1.canLocalUserChat
+		local var9 = canLocalUserChatDerived
 		
 		if var9 then
 			var9 = reactModule.createElement

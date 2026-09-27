@@ -10,9 +10,7 @@ local fFlagExpChatDictationFTUXModule = require(expChat.Flags.FFlagExpChatDictat
 local expChatFocusablePlaceholderText = game:DefineFastFlag("ExpChatFocusablePlaceholderText", false)
 local fFlagExpChatInputBarV2CornerAndTruncationFixModule = require(expChat.Flags.FFlagExpChatInputBarV2CornerAndTruncationFix)
 local fFlagExpChatComposerInputBarFigmaParityModule = require(expChat.Flags.FFlagExpChatComposerInputBarFigmaParity)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
-local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
+local fFlagEnableConsoleExpControls = require(parent.SharedFlags).FFlagEnableConsoleExpControls
 local channelChipModule = require(script.Parent.ChannelChip)
 local stopCountdownModule = require(script.Parent.StopCountdown)
 local dictationFTUXModule = require(script.Parent.Dictation.DictationFTUX)
@@ -26,7 +24,7 @@ local function _(startValue, endValue, alpha)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), useDictationInputBarModule (ref), dictationAffordancesModule (ref), reactModule (ref), useDictationTextAreaModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), stopCountdownModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), fFlagExpChatUseMessagesStore (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatComposerInputBarFigmaParityModule (ref), dictationWaveformModule (ref), fFlagExpChatDictationFTUXModule (ref), dictationFTUXModule (ref)
+	-- upvalues: foundationModule (ref), useDictationInputBarModule (ref), dictationAffordancesModule (ref), reactModule (ref), useDictationTextAreaModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), stopCountdownModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatComposerInputBarFigmaParityModule (ref), dictationWaveformModule (ref), fFlagExpChatDictationFTUXModule (ref), dictationFTUXModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local setTransparency = p1.setTransparency
 	local chatInputBarSettings = p1.chatInputBarSettings
@@ -152,7 +150,7 @@ return reactModule.memo(function(p1)
 			developerChannelTabsEnabled = p1.developerChannelTabsEnabled
 		})
 	}
-	local var13 = if fFlagExpChatUseMessagesStore then not canLocalUserChatDerived else not p1.canLocalUserChat
+	local var13 = not canLocalUserChatDerived
 	
 	if var13 then
 		var13 = reactModule.createElement
@@ -179,7 +177,7 @@ return reactModule.memo(function(p1)
 		})
 	end
 	t_7.DisabledPlaceholderLabel = var13
-	local var14 = if fFlagExpChatUseMessagesStore then canLocalUserChatDerived else p1.canLocalUserChat
+	local var14 = canLocalUserChatDerived
 	
 	if var14 then
 		var14 = reactModule.createElement
@@ -194,7 +192,7 @@ return reactModule.memo(function(p1)
 			end)
 		}
 		local t_9 = {}
-		local var16 = if fFlagExpChatUseMessagesStore then canLocalUserChatDerived else p1.canLocalUserChat
+		local var16 = canLocalUserChatDerived
 		
 		if var16 then
 			var16 = reactModule.createElement

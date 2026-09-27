@@ -13,7 +13,6 @@ local promptTypeModule = require(robloxGui.Modules.VoiceChatPrompt.PromptType)
 local observeCurrentContextId = require(corePackagesService.Workspace.Packages.CrossExperience).Utils.observeCurrentContextId
 local getIcon = require(corePackagesService.Workspace.Packages.VoiceChat).Utils.GetIcon
 local CONTEXT_ID = require(corePackagesService.Workspace.Packages.CrossExperience).Constants.AUDIO_FOCUS_MANAGEMENT.CEV.CONTEXT_ID
-local getFFlagEnableConnectDisconnectInSettingsAndChromeModule = require(robloxGui.Modules.Flags.GetFFlagEnableConnectDisconnectInSettingsAndChrome)
 local getFFlagIntegratePhoneUpsellJoinVoice = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagIntegratePhoneUpsellJoinVoice
 local getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice
 local getFFlagEnableVoiceUxUpdates = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableVoiceUxUpdates
@@ -193,9 +192,7 @@ if game:GetEngineFeature("VoiceChatSupported") then
 		end
 	end
 	default.VoiceJoinProgressChanged.Event:Connect(HideOrShowJoinVoiceButton)
-	if not getFFlagEnableConnectDisconnectInSettingsAndChromeModule() then
-		default.VoiceJoinProgressChanged.Event:Connect(HideOrShowJoinVoiceButton)
-	elseif not getFFlagEnableVoiceUxUpdates() then
+	if not getFFlagEnableVoiceUxUpdates() then
 		default.showVoiceUI.Event:Connect(function()
 			-- upvalues: serviceModule (ref), unavailable (write), var1 (write), var3 (write)
 			local unavailable_1 = serviceModule.AvailabilitySignal.Unavailable

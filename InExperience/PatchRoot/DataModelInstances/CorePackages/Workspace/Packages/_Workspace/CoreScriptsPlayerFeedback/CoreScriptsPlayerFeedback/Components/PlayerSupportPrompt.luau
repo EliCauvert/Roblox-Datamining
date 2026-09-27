@@ -352,10 +352,11 @@ return reactModule.memo(function(p2)
 			}
 		})
 	end
-	local var34 = MIN_FEEDBACK_LENGTH <= #description and (#description <= MAX_PLAYER_SUPPORT_LENGTH and (category ~= "" and (var9 and (not var9.anyUploading and (not var9 or not var9.hasNonModerationFailure)))))
-	local var35 = reactModule.useCallback(function()
-		-- upvalues: var34 (ref), description (ref), category (ref), var25 (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var9 (write), p2 (ref)
-		if var34 then
+	local var34
+	local var35 = MIN_FEEDBACK_LENGTH <= #description and (#description <= MAX_PLAYER_SUPPORT_LENGTH and (category ~= "" and (var9 and (not var9.anyUploading and (not var9 or not var9.hasNonModerationFailure)))))
+	local var36 = reactModule.useCallback(function()
+		-- upvalues: var35 (ref), description (ref), category (ref), var25 (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var9 (write), p2 (ref)
+		if var35 then
 			pcall(function()
 				-- upvalues: description (copy), category (copy), var25 (copy), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var9 (copy)
 				local socialService = game:GetService("SocialService")
@@ -387,9 +388,9 @@ return reactModule.memo(function(p2)
 			return
 		end
 	end, {
-		description, category, var25, var34, var9 or false, p2.closePrompt
+		description, category, var25, var35, var9 or false, p2.closePrompt
 	})
-	local var36 = reactModule.useCallback(function()
+	local var37 = reactModule.useCallback(function()
 		-- upvalues: p2 (ref)
 		pcall(function()
 			local socialService = game:GetService("SocialService")
@@ -401,7 +402,7 @@ return reactModule.memo(function(p2)
 		p2.onFormAbandoned()
 		p2.closePrompt()
 	end, { p2.closePrompt, p2.onFormAbandoned })
-	local var37 = reactModule.useCallback(function()
+	local var38 = reactModule.useCallback(function()
 		-- upvalues: p2 (ref)
 		pcall(function()
 			local socialService = game:GetService("SocialService")
@@ -427,7 +428,7 @@ return reactModule.memo(function(p2)
 		end)
 	end, { p2.closePrompt, p2.onFormAbandoned })
 	useEscapeDismissModule("PlayerSupportPromptCancel", if fFlagEnablePlayerSupportCaptureAttachmentsModule then reactModule.useCallback(function()
-		-- upvalues: var15 (write), var16 (write), var11 (write), var12 (write), var36 (ref)
+		-- upvalues: var15 (write), var16 (write), var11 (write), var12 (write), var37 (ref)
 		if var15 then
 			var16(nil)
 			
@@ -437,10 +438,12 @@ return reactModule.memo(function(p2)
 			
 			return
 		end
-		var36()
-	end, { var15, var11, var36 }) else var36)
-	
-	return reactModule.createElement(dialog.Root, { hasBackdrop = true, onClose = var36 }, {
+		var37()
+	end, { var15, var11, var37 }) else var37)
+	local createElement = reactModule.createElement
+	local root = dialog.Root
+	local t_2 = { hasBackdrop = true, onClose = var37 }
+	local t_3 = {
 		Title = reactModule.createElement(dialog.Title, {
 			text = if fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 and var15 ~= nil then if var15.CaptureTime ~= nil then var23.CapturesAdd else var32.dateTime elseif fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 then var23.CapturesAdd else var23.Title
 		}),
@@ -474,7 +477,7 @@ return reactModule.memo(function(p2)
 						tag = "auto-xy",
 						LayoutOrder = 2,
 						Text = var23.ReportAbuseLink,
-						onActivated = var37,
+						onActivated = var38,
 						selection = { Selectable = true }
 					})
 				}),
@@ -597,10 +600,17 @@ return reactModule.memo(function(p2)
 					})
 				})
 			})
-		}),
-		Actions = if fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 then reactModule.createElement(dialog.Actions, {
-			LayoutOrder = 2,
-			actions = if var15 ~= nil then {
+		})
+	}
+	
+	if fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 then
+		local list_1
+		var34 = reactModule.createElement
+		local actions = dialog.Actions
+		local t_4 = { LayoutOrder = 2 }
+		
+		if var15 == nil then
+			list_1 = {
 				{
 					text = var23.Add,
 					variant = if var26 > 0 then buttonVariant.Emphasis else buttonVariant.Standard,
@@ -615,42 +625,47 @@ return reactModule.memo(function(p2)
 						var12(false)
 					end
 				}
-			} else (function()
-				-- upvalues: getCaptureKeyModule (copy), var15 (write), var13 (write), var27 (write), var23 (ref), buttonVariant (copy), var29 (write), var16 (write)
-				local var38 = var13[getCaptureKeyModule(var15)] == true
-				local var39 = var38 or not var27
-				
-				return {
-					{
-						text = if var38 then var23.Deselect else var23.Select,
-						variant = if var38 then buttonVariant.SoftEmphasis elseif var39 then buttonVariant.Emphasis else buttonVariant.Standard,
-						isDisabled = not var39 and not var38,
-						onActivated = function()
-							-- upvalues: var29 (copy), var15 (copy), var16 (copy)
-							var29(var15)
-							var16(nil)
-						end
-					},
-					{
-						text = var23.Cancel,
-						variant = buttonVariant.Standard,
-						onActivated = function()
-							-- upvalues: var16 (copy)
-							var16(nil)
-						end
-					}
+			}
+		else
+			local var39 = var13[getCaptureKeyModule(var15)] == true
+			local var40 = var39 or not var27
+			list_1 = {
+				{
+					text = if var39 then var23.Deselect else var23.Select,
+					variant = if var39 then buttonVariant.SoftEmphasis elseif var40 then buttonVariant.Emphasis else buttonVariant.Standard,
+					isDisabled = not var40 and not var39,
+					onActivated = function()
+						-- upvalues: var29 (write), var15 (write), var16 (write)
+						var29(var15)
+						var16(nil)
+					end
+				},
+				{
+					text = var23.Cancel,
+					variant = buttonVariant.Standard,
+					onActivated = function()
+						-- upvalues: var16 (write)
+						var16(nil)
+					end
 				}
-			end)()
-		}) else reactModule.createElement(dialog.Actions, {
+			}
+		end
+		t_4.actions = list_1
+		var34 = var34(actions, t_4)
+	else
+		var34 = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 2,
 			actions = {
 				{
 					text = var23.Send,
-					variant = if var34 then buttonVariant.Emphasis else buttonVariant.Standard,
-					onActivated = var35,
-					isDisabled = not var34
+					variant = if var35 then buttonVariant.Emphasis else buttonVariant.Standard,
+					onActivated = var36,
+					isDisabled = not var35
 				}
 			}
 		})
-	})
+	end
+	t_3.Actions = var34
+	
+	return createElement(root, t_2, t_3)
 end)

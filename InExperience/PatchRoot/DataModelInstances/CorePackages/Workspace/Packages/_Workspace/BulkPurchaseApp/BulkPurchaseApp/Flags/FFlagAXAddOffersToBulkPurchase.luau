@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXAddOffersToBulkPurchase", false) and (require(script:FindFirstAncestor("BulkPurchaseApp").Flags.FFlagAXAddPlusUpsellToBulkPurchase) and (game:GetEngineFeature("PromptBulkPurchaseRequestedV3EventEnabled") and game:GetEngineFeature("BulkPurchaseOffersEnabled")))

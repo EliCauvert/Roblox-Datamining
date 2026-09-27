@@ -5,6 +5,9 @@ local cryoModule = require(parent.Cryo)
 local tModule = require(parent.t)
 local errorQueueModule = require(script.Parent.Parent.ErrorQueue)
 local fIntOldestUAVersionToReportErrorsModule = require(script.Parent.Parent.FIntOldestUAVersionToReportErrors)
+local fIntSentryErrorLevelQueueTimeLimitSecondsModule = require(script.Parent.Parent.FIntSentryErrorLevelQueueTimeLimitSeconds)
+local fIntSentryDebugLevelQueueTimeLimitSecondsModule = require(script.Parent.Parent.FIntSentryDebugLevelQueueTimeLimitSeconds)
+local fFlagSentrySplitQueuesBySeverityModule = require(script.Parent.Parent.FFlagSentrySplitQueuesBySeverity)
 local errorReportModule = require(script.Parent.ErrorReport)
 local sentryReporterUtilityModule = require(script.Parent.SentryReporterUtility)
 local constantsModule = require(script.Parent.Constants)
@@ -58,7 +61,8 @@ local var2 = tModule.strictInterface({
 		RequestInternal = tModule.callback
 	})),
 	processErrorReportMethod = tModule.optional(tModule.callback),
-	queueOptions = tModule.optional(tModule.table),
+	debugQueueOptions = tModule.optional(tModule.table),
+	errorQueueOptions = tModule.optional(tModule.table),
 	generateLogMethod = tModule.optional(tModule.callback),
 	logIntervalInSeconds = tModule.optional(tModule.numberPositive),
 	dsn = tModule.string,
@@ -73,19 +77,20 @@ local var2 = tModule.strictInterface({
 })
 
 function t.new(p2)
-	-- upvalues: var2 (ref), var1 (ref), client (ref), t (ref), errorQueueModule (ref)
+	-- upvalues: var2 (ref), var1 (ref), client (ref), t (ref), fFlagSentrySplitQueuesBySeverityModule (ref), cryoModule (ref), fIntSentryDebugLevelQueueTimeLimitSecondsModule (ref), errorQueueModule (ref), fIntSentryErrorLevelQueueTimeLimitSecondsModule (ref)
 	local var3, var4 = var2(p2)
 	
 	if not var3 then
 		if var1 then
-			error("invalid arguments for SentryReporter: " .. var18)
+			error("invalid arguments for SentryReporter: " .. var21)
 		else
 			return nil
 		end
 	end
 	local t_1 = {
 		_isEnabled = true,
-		_errorQueue = nil,
+		_debugLevelQueue = nil,
+		_errorLevelQueue = nil,
 		_lastLogTime = 0,
 		_httpService = p2.httpService,
 		_processErrorReportMethod = p2.processErrorReportMethod,
@@ -109,15 +114,33 @@ function t.new(p2)
 		_logAttachmentFailureCallback = p2.logAttachmentFailureCallback or nil
 	}
 	setmetatable(t_1, t)
-	local var5 = errorQueueModule.new(function(_, p3, p4)
+	
+	local function reportQueuedError(_, p3, p4)
 		-- upvalues: t_1 (ref)
 		if t_1:sendErrorReport(p3.errorReport, p3.log) and t_1._errorFlushedCallback ~= nil then
 			t_1._errorFlushedCallback(p4)
 		end
-	end, p2.queueOptions)
-	t_1._errorQueue = var5
+	end
+	
+	local debugQueueOptions = p2.debugQueueOptions
+	
+	if fFlagSentrySplitQueuesBySeverityModule then
+		debugQueueOptions = cryoModule.Dictionary.join({
+			queueTimeLimit = fIntSentryDebugLevelQueueTimeLimitSecondsModule
+		}, p2.debugQueueOptions or {})
+	end
+	local var5 = errorQueueModule.new(reportQueuedError, debugQueueOptions)
+	t_1._debugLevelQueue = var5
 	var5:startTimer()
 	
+	if fFlagSentrySplitQueuesBySeverityModule then
+		local var6 = errorQueueModule.new(reportQueuedError, cryoModule.Dictionary.join({
+			flushImmediately = true,
+			queueTimeLimit = fIntSentryErrorLevelQueueTimeLimitSecondsModule
+		}, p2.errorQueueOptions or {}))
+		t_1._errorLevelQueue = var6
+		var6:startTimer()
+	end
 	return t_1
 end
 
@@ -256,7 +279,7 @@ function t:sendErrorReport(p2, p3)
 	}, level, var3, var4, function(p4, p5, p6)
 		-- upvalues: self (ref), p3 (ref)
 		self:_handleSentryExceptionCallback(p4, p5, p6, p3)
-	end, var5, if fFlagLuaAppSentryStampOccurrenceTimeModule then p2.timestamp else nil)
+	end, var5, if fFlagLuaAppSentryStampOccurrenceTimeModule then p2.timestamp else nil, p2.tags)
 	
 	return true
 end
@@ -321,33 +344,45 @@ function t:reportErrorImmediately(p4, p5, p6, p7, p8)
 	end
 end
 
+function t:_getQueueForLevel(p4)
+	-- upvalues: constantsModule (ref)
+	return if self._errorLevelQueue == nil or (p4 or constantsModule.DEFAULT_ERROR_LEVEL) ~= "error" then self._debugLevelQueue else self._errorLevelQueue
+end
+
 function t:reportErrorDeferred(p4, p5, p6, p7, p8)
 	if not self._isEnabled then return end
 	local formattedText = string.format("%s | %s", p4 or "", p5 or "")
+	local var6 = self:_getQueueForLevel(p8)
 	local t = { errorReport = nil, log = nil }
 	
-	if not self._errorQueue:hasError(formattedText) then
-		var42, formattedText = self:_generateErrorReport(p4, p5, p6, p7, p8)
-		t = { errorReport = var42, log = formattedText }
+	if not var6:hasError(formattedText) then
+		formattedText, var48 = self:_generateErrorReport(p4, p5, p6, p7, p8)
+		t = { errorReport = formattedText, log = var48 }
 	end
 	if self._errorQueuedCallback ~= nil then
 		self._errorQueuedCallback()
 	end
-	self._errorQueue:addError(formattedText, t)
+	var6:addError(formattedText, t)
 end
 
 function t:reportAllErrors()
-	if self._errorQueue ~= nil then
-		self._errorQueue:reportAllErrors()
+	if self._debugLevelQueue ~= nil then
+		self._debugLevelQueue:reportAllErrors()
+	end
+	if self._errorLevelQueue ~= nil then
+		self._errorLevelQueue:reportAllErrors()
 	end
 end
 
 function t:stop()
 	self._isEnabled = false
 	
-	if self._errorQueue ~= nil then
+	if self._debugLevelQueue ~= nil then
 		self:reportAllErrors()
-		self._errorQueue:stopTimer()
+		self._debugLevelQueue:stopTimer()
+	end
+	if self._errorLevelQueue ~= nil then
+		self._errorLevelQueue:stopTimer()
 	end
 end
 

@@ -14,7 +14,9 @@ local fFlagSkipPaymentSessionForPlainRobuxModule = require(inExperienceShop.Flag
 local fFlagHideBonusInShopWhenNotClaimableModule = require(inExperienceShop.Flags.FFlagHideBonusInShopWhenNotClaimable)
 local fFlagEnableBonusJwtInShop = require(parent.SharedFlags).FFlagEnableBonusJwtInShop
 local fFlagShopListenNativePurchaseFinishedModule = require(inExperienceShop.Flags.FFlagShopListenNativePurchaseFinished)
+local fFlagShopRobuxPurchaseCompletionModalModule = require(inExperienceShop.Flags.FFlagShopRobuxPurchaseCompletionModal)
 local fFlagRefetchRobuxWidgetAfterPurchaseModule = require(inExperienceShop.Flags.FFlagRefetchRobuxWidgetAfterPurchase)
+local fFlagEnableShopRobuxBuyTelemetryModule = require(inExperienceShop.Flags.FFlagEnableShopRobuxBuyTelemetry)
 local getBlockRobuxTileClickInShopModule = require(inExperienceShop.Flags.GetBlockRobuxTileClickInShop)
 local userOwnsGamePassHttpModule = require(inExperienceShop.Api.userOwnsGamePassHttp)
 local mockUserOwnsGamePassModule = require(inExperienceShop.Mocks.MockUserOwnsGamePass)
@@ -31,7 +33,7 @@ local function _(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), promoteBonusRobuxPackageToTopPicksModule (ref), fFlagEnableBonusJwtInShop (ref), getRobuxPackageBonusPresentationModule (ref), fFlagHideBonusInShopWhenNotClaimableModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), parent (ref), sessionService (ref), shopDebugLoggerModule (ref), fFlagShopUseMockUserOwnsGamePassModule (ref), mockUserOwnsGamePassModule (ref), userOwnsGamePassHttpModule (ref), fIntShopOwnershipFetchMaxAttemptsModule (ref), fFlagRefetchRobuxWidgetAfterPurchaseModule (ref), fFlagSkipPaymentSessionForPlainRobuxModule (ref), fFlagShopListenNativePurchaseFinishedModule (ref), purchasePromptModule (ref), redeemBonusTokenModule (ref), promiseModule (ref), getBlockRobuxTileClickInShopModule (ref), view (ref), robuxPackageTileModule (ref)
+	-- upvalues: reactModule (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), promoteBonusRobuxPackageToTopPicksModule (ref), fFlagEnableBonusJwtInShop (ref), getRobuxPackageBonusPresentationModule (ref), fFlagHideBonusInShopWhenNotClaimableModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), parent (ref), sessionService (ref), shopDebugLoggerModule (ref), fFlagShopUseMockUserOwnsGamePassModule (ref), mockUserOwnsGamePassModule (ref), userOwnsGamePassHttpModule (ref), fIntShopOwnershipFetchMaxAttemptsModule (ref), fFlagRefetchRobuxWidgetAfterPurchaseModule (ref), fFlagSkipPaymentSessionForPlainRobuxModule (ref), fFlagShopListenNativePurchaseFinishedModule (ref), fFlagShopRobuxPurchaseCompletionModalModule (ref), purchasePromptModule (ref), fFlagEnableShopRobuxBuyTelemetryModule (ref), inExperienceShop (ref), redeemBonusTokenModule (ref), promiseModule (ref), getBlockRobuxTileClickInShopModule (ref), view (ref), robuxPackageTileModule (ref)
 	local pkg = p1.pkg
 	local var1 = reactModule.useRef(nil)
 	local var2 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
@@ -98,6 +100,7 @@ return reactModule.memo(function(p1)
 						itemId = if productId ~= nil then pkg.id else productId,
 						itemType = if pkg.bonusItem ~= nil then marketplaceUnifiedItemType.ROBUX_WITH_BONUS else marketplaceUnifiedItemType.ROBUX,
 						categoryId = p1.categoryId,
+						categoryType = p1.categoryType,
 						gridPositionRow = p1.gridPositionRow,
 						gridPositionColumn = p1.gridPositionColumn
 					}, { sessionTagName = sessionService:GetSessionTag("level2a") })
@@ -106,8 +109,8 @@ return reactModule.memo(function(p1)
 				return
 			end
 		end, {
-			pkg.id, productId, pkg.bonusItem, p1.categoryId, p1.gridPositionRow,
-			p1.gridPositionColumn
+			pkg.id, productId, pkg.bonusItem, p1.categoryId, p1.categoryType,
+			p1.gridPositionRow, p1.gridPositionColumn
 		})
 		local var14 = reactModule.useCallback(function()
 			-- upvalues: bonusGamePassId (ref), shopDebugLoggerModule (copy), fFlagShopUseMockUserOwnsGamePassModule (copy), mockUserOwnsGamePassModule (copy), userOwnsGamePassHttpModule (copy), var2 (ref), fIntShopOwnershipFetchMaxAttemptsModule (copy), fFlagRefetchRobuxWidgetAfterPurchaseModule (copy), fFlagSkipPaymentSessionForPlainRobuxModule (copy)
@@ -125,24 +128,30 @@ return reactModule.memo(function(p1)
 			end
 		end, { bonusGamePassId, var2 })
 		local var15 = if fFlagShopListenNativePurchaseFinishedModule then reactModule.useCallback(function()
-			-- upvalues: mobileProductId (ref), shopDebugLoggerModule (copy), fFlagRefetchRobuxWidgetAfterPurchaseModule (copy), bonusGamePassId (ref), var2 (ref)
+			-- upvalues: mobileProductId (ref), shopDebugLoggerModule (copy), fFlagRefetchRobuxWidgetAfterPurchaseModule (copy), fFlagShopRobuxPurchaseCompletionModalModule (copy), bonusGamePassId (ref), var2 (ref), pkg (ref)
 			if mobileProductId == nil or mobileProductId == "" then
 				shopDebugLoggerModule.log("onNativePurchaseLaunched: skip, no store SKU")
 				
 				return
-			elseif fFlagRefetchRobuxWidgetAfterPurchaseModule or bonusGamePassId ~= nil then
-				shopDebugLoggerModule.logLazy(function()
-					-- upvalues: bonusGamePassId (copy), mobileProductId (copy)
-					return "onNativePurchaseLaunched: recording bonusGamePassId=" .. tostring(bonusGamePassId) .. " storeSku=" .. mobileProductId
-				end)
-				var2.bonusGamePassIdForNativePurchase(bonusGamePassId, mobileProductId)
+			elseif not fFlagRefetchRobuxWidgetAfterPurchaseModule and not fFlagShopRobuxPurchaseCompletionModalModule and bonusGamePassId == nil then
+				shopDebugLoggerModule.log("onNativePurchaseLaunched: skip, no bonus game pass")
 				
 				return
 			end
-			shopDebugLoggerModule.log("onNativePurchaseLaunched: skip, no bonus game pass")
-		end, { bonusGamePassId, mobileProductId, var2 }) else nil
+			shopDebugLoggerModule.logLazy(function()
+				-- upvalues: bonusGamePassId (copy), mobileProductId (copy)
+				return "onNativePurchaseLaunched: recording bonusGamePassId=" .. tostring(bonusGamePassId) .. " storeSku=" .. mobileProductId
+			end)
+			
+			if fFlagShopRobuxPurchaseCompletionModalModule then
+				var2.bonusGamePassIdForNativePurchase(bonusGamePassId, mobileProductId, pkg.robuxAmount)
+				
+				return
+			end
+			var2.bonusGamePassIdForNativePurchase(bonusGamePassId, mobileProductId)
+		end, { bonusGamePassId, mobileProductId, pkg.robuxAmount, var2 }) else nil
 		local var16 = reactModule.useCallback(function()
-			-- upvalues: purchasePromptModule (copy), shopDebugLoggerModule (copy), fFlagEnableBonusJwtInShop (copy), var5 (write), paymentSessionId (ref), fFlagSkipPaymentSessionForPlainRobuxModule (copy), hasBonusItem (ref), mobileProductId (ref), productId (ref), bonusGamePassId (ref), var14 (ref), fFlagShopListenNativePurchaseFinishedModule (copy), var15 (write), var12 (ref), fFlagRefetchRobuxWidgetAfterPurchaseModule (copy), redeemBonusTokenModule (copy), promiseModule (copy), var2 (ref), var7 (write), var4 (write), var6 (write)
+			-- upvalues: purchasePromptModule (copy), shopDebugLoggerModule (copy), fFlagEnableBonusJwtInShop (copy), var5 (write), fFlagEnableShopRobuxBuyTelemetryModule (copy), fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var1 (ref), inExperienceShop (copy), p1 (ref), paymentSessionId (ref), fFlagSkipPaymentSessionForPlainRobuxModule (copy), hasBonusItem (ref), mobileProductId (ref), productId (ref), bonusGamePassId (ref), var14 (ref), fFlagShopListenNativePurchaseFinishedModule (copy), var15 (write), var12 (ref), fFlagRefetchRobuxWidgetAfterPurchaseModule (copy), redeemBonusTokenModule (copy), promiseModule (copy), var2 (ref), var7 (write), var4 (write), var6 (write)
 			local launchRobuxPackagePurchase = purchasePromptModule.launchRobuxPackagePurchase
 			
 			if launchRobuxPackagePurchase == nil then
@@ -150,6 +159,9 @@ return reactModule.memo(function(p1)
 				
 				return
 			elseif fFlagEnableBonusJwtInShop and var5.current then return end
+			if fFlagEnableShopRobuxBuyTelemetryModule and fFlagEnableInExperienceShopUnifiedLoggingModule and var1.current ~= nil then
+				require(inExperienceShop.Analytics.sendRobuxBuyClickUnifiedEvent)(var1.current, p1.shopPageType)
+			end
 			local var17 = if fFlagSkipPaymentSessionForPlainRobuxModule and not hasBonusItem then "" else paymentSessionId
 			shopDebugLoggerModule.logLazy(function()
 				-- upvalues: mobileProductId (copy), productId (copy), bonusGamePassId (copy)
@@ -218,7 +230,7 @@ return reactModule.memo(function(p1)
 			end
 		end, {
 			mobileProductId, productId, paymentSessionId, var12, var14, var15,
-			hasBonusItem, bonusGamePassId, var2
+			hasBonusItem, bonusGamePassId, var2, p1.shopPageType
 		})
 		local bonusItemDetails = pkg.bonusItemDetails
 		local onBonusItemActivated = p1.onBonusItemActivated

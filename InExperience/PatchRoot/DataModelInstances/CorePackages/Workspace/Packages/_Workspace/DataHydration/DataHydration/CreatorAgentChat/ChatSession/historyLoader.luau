@@ -45,6 +45,8 @@ return {
 			
 			if p4() or var4.status ~= "succeeded" then
 				return false, {}, nil
+			elseif p3 == nil then
+				p1.onInitialSessionLoad(p2, var4.result)
 			end
 			return true, historyPageUtilsModule.getSessionLoadHistory(var4.result), historyPageUtilsModule.getNextHistoryPageToken(var4.result)
 		end

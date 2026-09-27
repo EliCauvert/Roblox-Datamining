@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ExpChatTextChannelWindowFocusNav", false)
+﻿return game:DefineFastFlag("ExpChatTextChannelWindowFocusNavV2", false)

@@ -30,6 +30,7 @@ end
 local chatVisible
 local expChatModule = require(corePackagesService.Workspace.Packages.ExpChat)
 local focusNavigationStore = expChatModule.Stores.GetFocusNavigationStore(false)
+local shouldSkipHistoricalMessage = expChatModule.shouldSkipHistoricalMessage
 local shouldSuppressUnreadForTabMetadata = expChatModule.shouldSuppressUnreadForTabMetadata
 local getFriendsChatIconUnreadStoreModule = require(corePackagesService.Workspace.Packages.FriendsChat.GetFriendsChatIconUnreadStore)
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
@@ -360,42 +361,63 @@ if fFlagExpChatEnableFriendsTab then
 	end)
 end
 local _ = function(p1)
-	-- upvalues: expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref)
-	local var4 = expChatSuppressWelcomeMessageUnibarUnread
-	
-	if var4 then
-		var4 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
+	-- upvalues: shouldSkipHistoricalMessage (ref), expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref)
+	local var4
+	if p1 ~= nil then
+		var4 = shouldSkipHistoricalMessage(p1)
+		
+		if not var4 then
+			var4 = expChatSuppressWelcomeMessageUnibarUnread
+			
+			if var4 then
+				var4 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
+			end
+		end
+		return var4
 	end
-	return var4
 end
 
 textChatService.MessageReceived:Connect(function(p1)
-	-- upvalues: getTextChannelDisplayMode (ref), shouldRenderTextChannelInDefaultWindow (ref), expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref), chatVisible (write), var1 (write), updateUnreadNotification (ref)
+	-- upvalues: getTextChannelDisplayMode (ref), shouldRenderTextChannelInDefaultWindow (ref), shouldSkipHistoricalMessage (ref), expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref), chatVisible (write), var1 (write), updateUnreadNotification (ref)
+	local var4
 	if not shouldRenderTextChannelInDefaultWindow(p1.TextChannel, getTextChannelDisplayMode()) then return end
-	local var4 = expChatSuppressWelcomeMessageUnibarUnread
-	
-	if var4 then
-		var4 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
-	end
-	if var4 then return end
-	if not chatVisible then
-		var1 += 1
-		updateUnreadNotification()
-	end
-end)
-
-if getFFlagTextChatEnableUniverseChatTabs() then
-	textChatService.UniverseChatMessageReceived:Connect(function(p1)
-		-- upvalues: expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref), chatVisible (write), var1 (write), updateUnreadNotification (ref)
-		local var4 = expChatSuppressWelcomeMessageUnibarUnread
+	if p1 ~= nil then
+		var4 = shouldSkipHistoricalMessage(p1)
 		
-		if var4 then
-			var4 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
+		if not var4 then
+			var4 = expChatSuppressWelcomeMessageUnibarUnread
+			
+			if var4 then
+				var4 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
+			end
 		end
 		if var4 then return end
 		if not chatVisible then
 			var1 += 1
 			updateUnreadNotification()
+		end
+	end
+end)
+
+if getFFlagTextChatEnableUniverseChatTabs() then
+	textChatService.UniverseChatMessageReceived:Connect(function(p1)
+		-- upvalues: shouldSkipHistoricalMessage (ref), expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref), chatVisible (write), var1 (write), updateUnreadNotification (ref)
+		local var4
+		if p1 ~= nil then
+			var4 = shouldSkipHistoricalMessage(p1)
+			
+			if not var4 then
+				var4 = expChatSuppressWelcomeMessageUnibarUnread
+				
+				if var4 then
+					var4 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
+				end
+			end
+			if var4 then return end
+			if not chatVisible then
+				var1 += 1
+				updateUnreadNotification()
+			end
 		end
 	end)
 end

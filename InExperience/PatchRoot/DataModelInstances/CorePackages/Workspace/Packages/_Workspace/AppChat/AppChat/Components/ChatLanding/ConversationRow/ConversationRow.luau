@@ -7,7 +7,9 @@ local squadsModule = require(parent.Squads)
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local fFlagAppChatExtendConversationListRowDividersModule = require(appChat.Flags.FFlagAppChatExtendConversationListRowDividers)
 local fFlagAppChatRemoveConversationListDividerModule = require(appChat.Flags.FFlagAppChatRemoveConversationListDivider)
+local fFlagAppChatTimestampInSubtitleConversationRowModule = require(appChat.Flags.FFlagAppChatTimestampInSubtitleConversationRow)
 local conversationFacePileModule = require(appChat.Components.Cells.ConversationFacePile)
+local conversationRowSubtitleModule = require(script.Parent.ConversationRowSubtitle)
 local useConversationRowPresentationModule = require(script.Parent.useConversationRowPresentation)
 local squadButtonSourceEnum = squadsModule.Enums.SquadButtonSourceEnum
 local squadComponentAccessWrapper = squadsModule.SquadComponentAccessWrapper
@@ -15,7 +17,7 @@ local squadJoinButton = squadsModule.SquadJoinButton
 local var1 = reactModule.memo(conversationFacePileModule)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useConversationRowPresentationModule (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), fFlagAppChatExtendConversationListRowDividersModule (ref), var1 (ref), squadComponentAccessWrapper (ref), squadJoinButton (ref), squadButtonSourceEnum (ref), domLocatorsModule (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
+	-- upvalues: useConversationRowPresentationModule (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), fFlagAppChatExtendConversationListRowDividersModule (ref), var1 (ref), fFlagAppChatTimestampInSubtitleConversationRowModule (ref), conversationRowSubtitleModule (ref), squadComponentAccessWrapper (ref), squadJoinButton (ref), squadButtonSourceEnum (ref), domLocatorsModule (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
 	local var2 = useConversationRowPresentationModule({
 		conversationId = p1.conversationId,
 		entryHeight = p1.entryHeight,
@@ -130,11 +132,16 @@ return reactModule.memo(function(p1)
 					})
 				})
 			}),
-			subtitle = reactModule.createElement(foundationModule.Text, {
+			subtitle = if fFlagAppChatTimestampInSubtitleConversationRowModule then nil else reactModule.createElement(foundationModule.Text, {
 				tag = "size-full-0 auto-y text-body-small text-align-x-left text-truncate-end content-default",
 				LayoutOrder = 2,
 				Text = var2.subtitleText
-			})
+			}),
+			subtitleRow = if fFlagAppChatTimestampInSubtitleConversationRowModule then reactModule.createElement(conversationRowSubtitleModule, {
+				LayoutOrder = 2,
+				subtitleText = var2.subtitleText,
+				timestampText = var2.timestampText
+			}) else nil
 		})
 	}
 	local createElement_5 = reactModule.createElement
@@ -177,7 +184,7 @@ return reactModule.memo(function(p1)
 		LayoutOrder = 1,
 		Visible = var2.showTimestamp
 	}, {
-		timestamp = reactModule.createElement(foundationModule.Text, {
+		timestamp = if fFlagAppChatTimestampInSubtitleConversationRowModule then nil else reactModule.createElement(foundationModule.Text, {
 			tag = "auto-xy text-body-small content-default",
 			Name = "timeStamp",
 			LayoutOrder = 1,

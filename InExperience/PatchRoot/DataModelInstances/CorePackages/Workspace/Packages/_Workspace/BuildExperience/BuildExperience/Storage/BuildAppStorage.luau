@@ -267,57 +267,6 @@ local function createBuildAppStorage(p3, p4)
 		end) else false
 	end
 	
-	local function getAgentSpecVersion()
-		-- upvalues: tryReadData (ref)
-		local _, var19 = tryReadData()
-		local agentSpecVersion = var19.agentSpecVersion
-		
-		return if type(agentSpecVersion) == "string" then agentSpecVersion else nil
-	end
-	
-	local function setAgentSpecVersion(value)
-		-- upvalues: fFlagBuildAdUpsellModule (copy), tryReadData (ref), p4 (ref), p3 (ref)
-		if fFlagBuildAdUpsellModule then
-			local var19, var20
-			local var21 = function(p5)
-				-- upvalues: value (ref)
-				p5.agentSpecVersion = value
-			end
-			
-			local var22, var23 = tryReadData()
-			
-			if var22 then
-				var19 = true
-				var20 = var23
-			else
-				local var24, var25 = tryReadData()
-				var19 = var24
-				var20 = var25
-			end
-			if not var19 then
-				return false
-			end
-			var20.agentSpecVersion = value
-			local ok, status = pcall(p4.JSONEncode, p4, var20)
-			
-			return if ok and type(status) == "string" then pcall(function()
-				-- upvalues: p3 (copy), status (ref)
-				p3:SetItem("BuildAppStorageKey", status)
-				p3:Flush()
-			end) else false
-		else
-			local var21, ok = tryReadData()
-			ok.agentSpecVersion = value
-			ok, status = pcall(p4.JSONEncode, p4, ok)
-			
-			return if ok and type(status) == "string" then pcall(function()
-				-- upvalues: p3 (copy), status (ref)
-				p3:SetItem("BuildAppStorageKey", status)
-				p3:Flush()
-			end) else false
-		end
-	end
-	
 	local function getChatDraft(p5)
 		-- upvalues: tryReadData (ref)
 		local _, var19 = tryReadData()
@@ -798,8 +747,6 @@ local function createBuildAppStorage(p3, p4)
 	return {
 		STORAGE_KEY = "BuildAppStorageKey",
 		AD_UPSELL_SCHEDULER_VERSION = 3,
-		getAgentSpecVersion = getAgentSpecVersion,
-		setAgentSpecVersion = setAgentSpecVersion,
 		getChatDraft = getChatDraft,
 		setChatDraft = setChatDraft,
 		getUnpublishedPlaytestModeTooltipDisplayCount = getUnpublishedPlaytestModeTooltipDisplayCount,
@@ -1111,8 +1058,6 @@ local var35 = createBuildAppStorage(appStorageService, httpService)
 return {
 	STORAGE_KEY = "BuildAppStorageKey",
 	AD_UPSELL_SCHEDULER_VERSION = 3,
-	getAgentSpecVersion = var35.getAgentSpecVersion,
-	setAgentSpecVersion = var35.setAgentSpecVersion,
 	getChatDraft = var35.getChatDraft,
 	setChatDraft = var35.setChatDraft,
 	getUnpublishedPlaytestModeTooltipDisplayCount = var35.getUnpublishedPlaytestModeTooltipDisplayCount,

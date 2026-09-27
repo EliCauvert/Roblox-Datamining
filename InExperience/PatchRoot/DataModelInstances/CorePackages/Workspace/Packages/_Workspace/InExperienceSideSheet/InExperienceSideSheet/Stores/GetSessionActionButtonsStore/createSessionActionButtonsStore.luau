@@ -12,7 +12,6 @@ local _ = require(inExperienceSideSheet.Common.Types)
 local isPioneerLaunch = require(parent.PioneerUtils).isPioneerLaunch
 local getSwitchServerStore = require(parent.SwitchServer).GetSwitchServerStore
 local getActionBindingsStoreModule = require(inExperienceSideSheet.Stores.GetActionBindingsStore)
-local fFlagShowSwitchServerButton = require(parent.SharedFlags).FFlagShowSwitchServerButton
 local buttonWidth = enumsModule.ButtonWidth
 local t = {
 	["rbxasset://textures/ui/Controls/DefaultController/ButtonX@2x.png"] = iconName.XboxX,
@@ -71,7 +70,7 @@ local function _(p1)
 end
 
 return function()
-	-- upvalues: getActionBindingsStoreModule (ref), isPioneerLaunch (ref), signalsModule (ref), createRespawnButtonConfig (ref), fFlagShowSwitchServerButton (ref), constantsModule (ref), enumsModule (ref), getIsSwitchServerButtonHidden (ref), buttonWidth (ref), createLeaveButtonConfig (ref), getInputModeStore (ref), input (ref), userInputService (ref), t (ref)
+	-- upvalues: getActionBindingsStoreModule (ref), isPioneerLaunch (ref), signalsModule (ref), createRespawnButtonConfig (ref), constantsModule (ref), enumsModule (ref), getIsSwitchServerButtonHidden (ref), buttonWidth (ref), createLeaveButtonConfig (ref), getInputModeStore (ref), input (ref), userInputService (ref), t (ref)
 	local sessionActionBindings = getActionBindingsStoreModule().sessionActionBindings
 	local var1 = isPioneerLaunch()
 	local var2, var3 = signalsModule.createSignal(nil)
@@ -80,7 +79,7 @@ return function()
 		createRespawnButtonConfig(sessionActionBindings, var4, var5)
 	}
 	
-	if var1 and fFlagShowSwitchServerButton then
+	if var1 then
 		table.insert(list, {
 			label = "CoreScripts.InGameMenu.PeoplePage.SwitchServer",
 			name = constantsModule.SessionActionButtonNames.SwitchServer,

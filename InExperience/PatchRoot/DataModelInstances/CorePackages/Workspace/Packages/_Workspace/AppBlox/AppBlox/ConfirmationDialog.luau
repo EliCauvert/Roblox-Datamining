@@ -19,9 +19,10 @@ local t = {
 	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
+local fFlagEnableSplitPane = require(parent.SharedFlags).FFlagEnableSplitPane
 
 return function(p1)
-	-- upvalues: useLocalization (ref), fFlagAppBloxConfirmationDialogFocusNav (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), useDefaultFocusBehavior (ref), fFlagLuaAppPlayButtonPrivatePT (ref), buttonVariant (ref), dialog (ref), orientation (ref)
+	-- upvalues: useLocalization (ref), fFlagAppBloxConfirmationDialogFocusNav (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), useDefaultFocusBehavior (ref), fFlagLuaAppPlayButtonPrivatePT (ref), buttonVariant (ref), dialog (ref), fFlagEnableSplitPane (ref), orientation (ref)
 	local var1 = useLocalization({
 		confirmButtonText = "CommonUI.Controls.Action.Confirm",
 		cancelButtonText = "CommonUI.Controls.Action.Cancel"
@@ -72,11 +73,11 @@ return function(p1)
 		}
 	end
 	return reactModule.createElement(dialog.Root, {
-		hasBackdrop = true,
+		hasBackdrop = if fFlagEnableSplitPane and p1.hasBackdrop ~= nil then p1.hasBackdrop else true,
 		disablePortal = p1.disablePortal,
-		onClose = if p1.showCloseButton then p1.onCancel else nil,
 		size = if fFlagLuaAppPlayButtonPrivatePT then p1.size else nil,
-		ref = var2
+		ref = var2,
+		onClose = if fFlagEnableSplitPane and p1.onClose ~= nil then p1.onClose elseif p1.showCloseButton then p1.onCancel else nil
 	}, {
 		DialogTitle = reactModule.createElement(dialog.Title, { text = p1.title }),
 		DialogContent = reactModule.createElement(dialog.Content, nil, {

@@ -164,7 +164,7 @@ function playerDropDown.createReportButton(p1)
 				
 				return
 			end
-			require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuNewContainerPage):ReportPlayer(selectedPlayer, p1.__componentName)
+			require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuContainerPage):ReportPlayer(selectedPlayer, p1.__componentName)
 			p1.props.closeDropDown()
 		end
 	})

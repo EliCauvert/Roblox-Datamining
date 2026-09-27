@@ -7,6 +7,7 @@ local roactModule = require(parent.Roact)
 local setScreenSize = require(parent.InExperienceContainer).SetScreenSize
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local _ = require(ampUpsell.Common.Types)
+local appAmpWizardLaunchBridgeModule = require(ampUpsell.Common.AppAmpWizardLaunchBridge)
 local _ = require(ampUpsell.Components.WizardContainer)
 local inExpWizardNavigatorModule = require(ampUpsell.Components.InExpWizardNavigator)
 local inExperienceProviderContainer = require(parent.InExperienceContainer).InExperienceProviderContainer
@@ -17,6 +18,7 @@ local getFFlagInExperienceContainerScreenSizeReducer = require(parent.SharedFlag
 local getFFlagMoveAmpUpsellOffNavigateDown = require(parent.SharedFlags).GetFFlagMoveAmpUpsellOffNavigateDown
 local fFlagConnectionAmpUpsellOnLeave = require(parent.SharedFlags).FFlagConnectionAmpUpsellOnLeave
 local inExpAmpWizardDisplayOrder = game:DefineFastInt("InExpAmpWizardDisplayOrder", 6)
+local fFlagRouteStandaloneAmpThroughUniversalApp = require(parent.SharedFlags).FFlagRouteStandaloneAmpThroughUniversalApp
 local var1 = if fFlagConnectionAmpUpsellOnLeave then require(parent.ApolloClient).ApolloProvider else nil
 local var2 = nil
 
@@ -66,7 +68,7 @@ end
 
 return {
 	OpenAmpWizardContainerInExp = function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
-		-- upvalues: getFFlagEnableDummyAMPWizardModule (ref), httpService (ref), getFFlagInExperienceContainerScreenSizeReducer (ref), getFFlagMoveAmpUpsellOffNavigateDown (ref), var2 (write), fFlagConnectionAmpUpsellOnLeave (ref), renderAmpWizard (ref)
+		-- upvalues: getFFlagEnableDummyAMPWizardModule (ref), httpService (ref), fFlagRouteStandaloneAmpThroughUniversalApp (ref), appAmpWizardLaunchBridgeModule (ref), getFFlagInExperienceContainerScreenSizeReducer (ref), getFFlagMoveAmpUpsellOffNavigateDown (ref), var2 (write), fFlagConnectionAmpUpsellOnLeave (ref), renderAmpWizard (ref)
 		if getFFlagEnableDummyAMPWizardModule() then
 			task.delay(0.5, function()
 				-- upvalues: p2 (ref), httpService (copy)
@@ -90,7 +92,17 @@ return {
 			end)
 			
 			return
-		elseif getFFlagInExperienceContainerScreenSizeReducer() and getFFlagMoveAmpUpsellOffNavigateDown() then
+		elseif fFlagRouteStandaloneAmpThroughUniversalApp and appAmpWizardLaunchBridgeModule.requestOpen({
+			featureName = p1,
+			nameSpace = p6,
+			recourseData = p3,
+			entryPointEventCtx = p4,
+			extraParameters = p5,
+			usePrologue = p10,
+			prologueOptions = p11,
+			completionCallback = p2
+		}) then return end
+		if getFFlagInExperienceContainerScreenSizeReducer() and getFFlagMoveAmpUpsellOffNavigateDown() then
 			renderAmpWizard({
 				isInExperienceEntry = true,
 				nameSpace = p6,

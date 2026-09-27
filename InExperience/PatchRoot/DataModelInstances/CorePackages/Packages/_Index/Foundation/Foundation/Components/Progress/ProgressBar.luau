@@ -86,7 +86,7 @@ return function(p1)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useTokensModule()
 	local var3 = usePreferencesModule()
-	local var4 = useProgressVariantsModule(var2, if flagsModule.FoundationProgressBarBetaUpdate then progressSizeModule.Medium else var1.size)
+	local var4 = useProgressVariantsModule(var2, if flagsModule.FoundationProgressBarBetaUpdate then if var1.size == progressSizeModule.Small then progressSizeModule.Small else progressSizeModule.Medium else var1.size)
 	local var5, var6 = useProgressBindingModule(var1.value)
 	
 	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {

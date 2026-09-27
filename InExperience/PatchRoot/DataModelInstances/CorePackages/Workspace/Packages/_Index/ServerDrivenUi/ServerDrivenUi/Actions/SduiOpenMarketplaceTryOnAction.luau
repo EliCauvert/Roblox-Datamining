@@ -2,6 +2,9 @@
 local unifiedEventLogConstants = require(parent.AvatarExperienceAnalytics).UnifiedEventLogConstants
 local unifiedEventLogEnums = require(parent.AvatarExperienceAnalytics).UnifiedEventLogEnums
 local sendUnifiedEventLog = require(parent.AvatarExperienceAnalytics).sendUnifiedEventLog
+local unifiedEventCounterAggregator = require(parent.AvatarExperienceAnalytics).UnifiedEventCounterAggregator
+local AXUnifiedEventFilter = require(parent.AvatarExperienceAnalytics).AXUnifiedEventFilter
+local fFlagAXUnifiedEventCounters = require(parent.AvatarExperienceAnalytics).Flags.FFlagAXUnifiedEventCounters
 local avatarScreen = require(parent.AvatarExperienceNavigation).Enums.AvatarScreen
 local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
@@ -42,7 +45,7 @@ local function _(p1, p2, p3)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: sduiActionType (ref), sduiErrorType (ref), unifiedEventLogEnums (ref), fFlagAXDiscoveryItemPurchaseAttribution (ref), fFlagAXAvatarSortInDiscoveryUnifiedPurchase (ref), var3 (ref), fFlagAXFixHomeAvatarsUnifiedPurchase (ref), findAnalyticsFieldInAncestors (ref), fFlagAXTryOnScreenImprovements (ref), var2 (ref), impressionEnums (ref), AXFixHomepageTryOnScreenAnalytics (ref), appPage (ref), analyticsService (ref), unifiedLoggingSurface (ref), sendUnifiedEventLog (ref), unifiedEventLogConstants (ref), avatarScreen (ref), fFlagAXFixPurchaseSurfaceLogging (ref), fFlagAXEnableHomeTryOnComplexView (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
+	-- upvalues: sduiActionType (ref), sduiErrorType (ref), unifiedEventLogEnums (ref), fFlagAXDiscoveryItemPurchaseAttribution (ref), fFlagAXAvatarSortInDiscoveryUnifiedPurchase (ref), var3 (ref), fFlagAXFixHomeAvatarsUnifiedPurchase (ref), findAnalyticsFieldInAncestors (ref), fFlagAXTryOnScreenImprovements (ref), var2 (ref), impressionEnums (ref), AXFixHomepageTryOnScreenAnalytics (ref), appPage (ref), analyticsService (ref), unifiedLoggingSurface (ref), sendUnifiedEventLog (ref), fFlagAXUnifiedEventCounters (ref), unifiedEventCounterAggregator (ref), AXUnifiedEventFilter (ref), unifiedEventLogConstants (ref), avatarScreen (ref), fFlagAXFixPurchaseSurfaceLogging (ref), fFlagAXEnableHomeTryOnComplexView (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
 	local var4 = if p1 then p1.actionParams else nil
 	
 	if var4 == nil then
@@ -175,9 +178,10 @@ return function(p1, p2, p3)
 			end
 			if fFlagAXDiscoveryItemPurchaseAttribution then
 				sendUnifiedEventLog(t_1)
-			else
-				analyticsService.EventStream:sendTelemetryEvent(unifiedEventLogConstants.EVENT_NAME, unifiedEventLogConstants.EVENT_NAME, t_1)
+			elseif fFlagAXUnifiedEventCounters then
+				unifiedEventCounterAggregator.record(t_1, AXUnifiedEventFilter.filter(t_1, { skipReporting = true }))
 			end
+			analyticsService.EventStream:sendTelemetryEvent(unifiedEventLogConstants.EVENT_NAME, unifiedEventLogConstants.EVENT_NAME, t_1)
 		end
 	end
 	local t = {

@@ -26,7 +26,6 @@ local fFlagSduiMarketplaceCatalogCategorySupport = sharedFlagsModule.FFlagSduiMa
 local fFlagSduiMarketplaceCatalogSortSupport = sharedFlagsModule.FFlagSduiMarketplaceCatalogSortSupport
 local fFlagSduiAddMarketplaceEntityDataHydration = sharedFlagsModule.FFlagSduiAddMarketplaceEntityDataHydration
 local fFlagSduiAddCollectibleItemDataHydration = sharedFlagsModule.FFlagSduiAddCollectibleItemDataHydration
-local fFlagSduiHydrationFetchIfMissing = sharedFlagsModule.FFlagSduiHydrationFetchIfMissing
 local fFlagSduiGameIconSupport = sharedFlagsModule.FFlagSduiGameIconSupport
 local fFlagSduiDevStoreSeeAllSupport = sharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
 local fFlagSduiCapabilityBindings = sharedFlagsModule.FFlagSduiCapabilityBindings
@@ -242,9 +241,7 @@ local function calculateAgeRecommendationDerivedField(p2, p3, _)
 end
 
 local function getDataObjectSignal(value, _, p4, p5)
-	-- upvalues: fFlagSduiHydrationFetchIfMissing (ref), dataHydrationModule (ref), sduiDataBindingContentTypeModule (ref), fFlagSduiCommunitySectionSupport (ref), fFlagSduiMarketplaceCatalogCategorySupport (ref), fFlagSduiMarketplaceCatalogSortSupport (ref), fFlagSduiAddMarketplaceEntityDataHydration (ref), fFlagSduiAddCollectibleItemDataHydration (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiNotificationBadgeHydration (ref)
-	p5 = fFlagSduiHydrationFetchIfMissing and p5
-	
+	-- upvalues: dataHydrationModule (ref), sduiDataBindingContentTypeModule (ref), fFlagSduiCommunitySectionSupport (ref), fFlagSduiMarketplaceCatalogCategorySupport (ref), fFlagSduiMarketplaceCatalogSortSupport (ref), fFlagSduiAddMarketplaceEntityDataHydration (ref), fFlagSduiAddCollectibleItemDataHydration (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiNotificationBadgeHydration (ref)
 	if value == "badge" then
 		return dataHydrationModule.Badges.getBadgeInfoStore(false).getBadgeInfo(tostring(p4))
 	elseif value == "creator" then
@@ -467,7 +464,7 @@ local t_1 = {
 	badge = getDataHydrationField,
 	creator = getDataHydrationField,
 	universe = if fFlagMigrateGameInfoToStore then function(p13, p14, p15, p16, p17)
-		-- upvalues: fFlagSduiGameIconSupport (ref), getUniverseIcon (ref), dataHydrationModule (ref), getUniverseVoteRatingText (ref), fFlagSduiSupportRatingNoPercent (ref), fFlagSduiHydrationFetchIfMissing (ref), getDataHydrationField (ref), tryGetPathFromDataModule (ref), calculateDerivedFieldValue (ref), dataStatus (ref)
+		-- upvalues: fFlagSduiGameIconSupport (ref), getUniverseIcon (ref), dataHydrationModule (ref), getUniverseVoteRatingText (ref), fFlagSduiSupportRatingNoPercent (ref), getDataHydrationField (ref), tryGetPathFromDataModule (ref), calculateDerivedFieldValue (ref), dataStatus (ref)
 		if #p14 == 2 then
 			if fFlagSduiGameIconSupport then
 				if p14[2] == "icon" then
@@ -478,7 +475,7 @@ local t_1 = {
 					return getUniverseVoteRatingText(p15, p16)
 				elseif fFlagSduiSupportRatingNoPercent and p14[2] == "rating_text_no_percent" then
 					return getUniverseVoteRatingText(p15, p16, true)
-				elseif not fFlagSduiHydrationFetchIfMissing or not p17 then
+				elseif not p17 then
 					return getDataHydrationField(p13, p14, p15, p16, p17)
 				end
 				local var14, var15

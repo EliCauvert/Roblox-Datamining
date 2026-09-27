@@ -19,6 +19,7 @@ return function(p1)
 	}, {
 		Terms = reactModule.createElement(view, {
 			tag = "auto-xy",
+			testId = "--core-ui-flyout-terms",
 			LayoutOrder = 1,
 			onActivated = useFlyoutItemNavigationModule(terms, p1.closeDrawer)
 		}, {
@@ -29,6 +30,7 @@ return function(p1)
 		}),
 		Privacy = reactModule.createElement(view, {
 			tag = "auto-xy",
+			testId = "--core-ui-flyout-privacy",
 			LayoutOrder = 2,
 			onActivated = useFlyoutItemNavigationModule(privacy, p1.closeDrawer)
 		}, {

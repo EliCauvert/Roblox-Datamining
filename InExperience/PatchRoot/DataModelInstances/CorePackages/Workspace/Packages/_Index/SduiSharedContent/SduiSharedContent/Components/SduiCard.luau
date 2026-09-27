@@ -14,12 +14,14 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
 local cursorType = foundationModule.Enums.CursorType
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local fFlagFixSduiCardFocusNavScroll = require(parent.SharedFlags).FFlagFixSduiCardFocusNavScroll
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagFixSduiCardFocusNavScroll = sharedFlagsModule.FFlagFixSduiCardFocusNavScroll
+local fFlagLuaAppConfigureSduiCardImageScaleType = sharedFlagsModule.FFlagLuaAppConfigureSduiCardImageScaleType
 
 local var1 = function() end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), fFlagFixSduiCardFocusNavScroll (ref), useCursor (ref), cursorType (ref), signalsReactModule (ref), textSizeModule (ref), reactModule (ref), view (ref), var1 (ref), stateLayerAffordance (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref), loadableImage (ref)
+	-- upvalues: useTokens (ref), fFlagFixSduiCardFocusNavScroll (ref), useCursor (ref), cursorType (ref), signalsReactModule (ref), textSizeModule (ref), reactModule (ref), view (ref), var1 (ref), stateLayerAffordance (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref), loadableImage (ref), fFlagLuaAppConfigureSduiCardImageScaleType (ref)
 	local var2 = useTokens()
 	local var3 = if fFlagFixSduiCardFocusNavScroll then useCursor(cursorType.RoundedRect) else nil
 	local size2500 = var2.Size.Size_2500
@@ -90,7 +92,8 @@ return reactModule.memo(function(p1)
 					text = p1.ctaText,
 					onActivated = p1.ctaOnActivated,
 					variant = p1.ctaVariant or buttonVariant.SoftEmphasis,
-					size = p1.ctaSize or inputSize.Small
+					size = p1.ctaSize or inputSize.Small,
+					testId = if p1.testId then `{p1.testId}--cta` else nil
 				})
 			}) else nil
 		}),
@@ -103,7 +106,7 @@ return reactModule.memo(function(p1)
 			Size = UDim2.new(0, size2500, 0, var5),
 			ImageColor3 = if p1.imageStyle then p1.imageStyle.Color3 else var2.Color.Content.Emphasis.Color3,
 			ImageTransparency = if p1.imageStyle then p1.imageStyle.Transparency else 0,
-			ScaleType = Enum.ScaleType.Crop,
+			ScaleType = if fFlagLuaAppConfigureSduiCardImageScaleType then p1.imageScaleType else Enum.ScaleType.Crop,
 			cornerRadius = p1.cornerRadius or UDim.new(0, var2.Radius.Medium)
 		}) else nil
 	})

@@ -8,7 +8,6 @@ local gameCollectionItemTypes = discoveryTypesModule.GameCollectionItemTypes
 local gameCollectionItemType = gameCollectionItemTypes.GameCollectionItemType
 local spanForItemType = gameCollectionItemTypes.SpanForItemType
 local fFlagLuaAppEnableNxMRoduxApportioning = sharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning
-local fFlagSduiPoolBackedFeed = sharedFlagsModule.FFlagSduiPoolBackedFeed
 local fFlagLuaAppEnableNxMApportioningExtraLogging = sharedFlagsModule.FFlagLuaAppEnableNxMApportioningExtraLogging
 local luaAppFixApportioningTileTailConflict = game:DefineFastFlag("LuaAppFixApportioningTileTailConflict", false)
 local t = {
@@ -28,7 +27,7 @@ local function defaultGetSpanConfig(p1)
 end
 
 local function processOneGrid(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: discoveryEventErrorLogger (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), fFlagSduiPoolBackedFeed (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (ref), apportioningDiagnosticTelemetry (ref), luaAppFixApportioningTileTailConflict (ref), defaultGetSpanConfig (ref)
+	-- upvalues: discoveryEventErrorLogger (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (ref), apportioningDiagnosticTelemetry (ref), luaAppFixApportioningTileTailConflict (ref), defaultGetSpanConfig (ref)
 	local var1 = p5 * p4
 	local t = {}
 	local t_1 = {}
@@ -61,13 +60,13 @@ local function processOneGrid(p1, p2, p3, p4, p5, p6, p7)
 	end
 	
 	local function tryPlaceSpanTile(p8, p9)
-		-- upvalues: fFlagLuaAppEnableNxMRoduxApportioning (copy), fFlagSduiPoolBackedFeed (copy), p7 (ref), nextFreePosition (ref), var2 (write), p4 (ref), var3 (write), fFlagLuaAppEnableNxMApportioningExtraLogging (copy), apportioningDiagnosticTelemetry (copy), p5 (ref), var1 (ref), p1 (ref), luaAppFixApportioningTileTailConflict (copy), t_2 (ref), writeLayoutCell (ref), t (ref)
+		-- upvalues: fFlagLuaAppEnableNxMRoduxApportioning (copy), p7 (ref), nextFreePosition (ref), var2 (write), p4 (ref), var3 (write), fFlagLuaAppEnableNxMApportioningExtraLogging (copy), apportioningDiagnosticTelemetry (copy), p5 (ref), var1 (ref), p1 (ref), luaAppFixApportioningTileTailConflict (copy), t_2 (ref), writeLayoutCell (ref), t (ref)
 		local colSpan = p9.colSpan
-		local var4 = if fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p7 then p9.rowSpan else nil
+		local var4 = if fFlagLuaAppEnableNxMRoduxApportioning or p7 then p9.rowSpan else nil
 		local minRowPadding = p9.minRowPadding
 		local alignmentType = p9.alignmentType
-		local var5 = if fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p7 then nextFreePosition(var2) else var2
-		local var6 = if fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p7 then math.floor(var5 / p4) + 1 else math.ceil((var2 + 1) / p4)
+		local var5 = if fFlagLuaAppEnableNxMRoduxApportioning or p7 then nextFreePosition(var2) else var2
+		local var6 = if fFlagLuaAppEnableNxMRoduxApportioning or p7 then math.floor(var5 / p4) + 1 else math.ceil((var2 + 1) / p4)
 		local var7 = var5 % p4 + 1
 		
 		if var6 < var3 then
@@ -89,7 +88,7 @@ local function processOneGrid(p1, p2, p3, p4, p5, p6, p7)
 				})
 			end
 			return false
-		elseif fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p7 or var1 >= var2 + colSpan then
+		elseif fFlagLuaAppEnableNxMRoduxApportioning or p7 or var1 >= var2 + colSpan then
 			if alignmentType == "LeftPin" and var7 ~= 1 then
 				if fFlagLuaAppEnableNxMApportioningExtraLogging then
 					apportioningDiagnosticTelemetry.log("SpanDeferred", {
@@ -141,7 +140,7 @@ local function processOneGrid(p1, p2, p3, p4, p5, p6, p7)
 					})
 				end
 				return false
-			elseif (fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p7) and p5 < var6 + var4 - 1 then
+			elseif (fFlagLuaAppEnableNxMRoduxApportioning or p7) and p5 < var6 + var4 - 1 then
 				if fFlagLuaAppEnableNxMApportioningExtraLogging then
 					apportioningDiagnosticTelemetry.log("SpanDeferred", {
 						reason = "vertical_overflow",
@@ -158,7 +157,7 @@ local function processOneGrid(p1, p2, p3, p4, p5, p6, p7)
 					})
 				end
 				return false
-			elseif (fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p7) and (var4 > 1 and #p1 - p8 < var7 - 1) then
+			elseif (fFlagLuaAppEnableNxMRoduxApportioning or p7) and (var4 > 1 and #p1 - p8 < var7 - 1) then
 				if fFlagLuaAppEnableNxMApportioningExtraLogging then
 					apportioningDiagnosticTelemetry.log("SpanDeferred", {
 						reason = "insufficient_trailing_entries",
@@ -176,7 +175,7 @@ local function processOneGrid(p1, p2, p3, p4, p5, p6, p7)
 					})
 				end
 				return false
-			elseif luaAppFixApportioningTileTailConflict and (fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p7) then
+			elseif luaAppFixApportioningTileTailConflict and (fFlagLuaAppEnableNxMRoduxApportioning or p7) then
 				for i_1 = 0, var4 - 1 do
 					for i = 0, colSpan - 1 do
 						local var8 = var6 + i_1
@@ -206,7 +205,7 @@ local function processOneGrid(p1, p2, p3, p4, p5, p6, p7)
 					end
 				end
 			end
-			if fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p7 then
+			if fFlagLuaAppEnableNxMRoduxApportioning or p7 then
 				for i_3 = 0, var4 - 1 do
 					for i_2 = 0, colSpan - 1 do
 						writeLayoutCell(var6 + i_3, var7 + i_2, -1)
@@ -280,7 +279,7 @@ local function processOneGrid(p1, p2, p3, p4, p5, p6, p7)
 					table.insert(t_1, { index = i_1, spanConfig = var13 })
 				end
 				var11 = i_1 + 1
-			elseif fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p7 then
+			elseif fFlagLuaAppEnableNxMRoduxApportioning or p7 then
 				local var14 = nextFreePosition(var2)
 				
 				if var1 <= var14 then break end
@@ -312,13 +311,13 @@ local function processOneGrid(p1, p2, p3, p4, p5, p6, p7)
 		placedIndices = t,
 		pendingSpanTiles = t_1,
 		nextStartIndex = var11,
-		layout = if fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p7 then t_2 else nil
+		layout = if fFlagLuaAppEnableNxMRoduxApportioning or p7 then t_2 else nil
 	}
 end
 
 return {
 	calculateSpanAwareGrids = function(p10, p11, p12, p13, p14)
-		-- upvalues: discoveryEventErrorLogger (ref), processOneGrid (ref), fFlagSduiPoolBackedFeed (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref)
+		-- upvalues: discoveryEventErrorLogger (ref), processOneGrid (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref)
 		if not p10 then
 			discoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_MissingEntries", "calculateSpanAwareGrids called without entries", { gridConfigsCount = #p11, itemsPerRow = p12 })
 			
@@ -356,10 +355,10 @@ return {
 			if not maxRows or maxRows <= 0 then
 				maxRows = 1e999
 			end
-			local var16 = processOneGrid(p10, var15, t_1, p12, maxRows, p13, if fFlagSduiPoolBackedFeed then p14 else nil)
+			local var16 = processOneGrid(p10, var15, t_1, p12, maxRows, p13, p14)
 			t[v.sortKey] = {
-				entryIndices = if fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p14 then nil else var16.placedIndices,
-				layout = if fFlagLuaAppEnableNxMRoduxApportioning or fFlagSduiPoolBackedFeed and p14 then var16.layout else nil
+				entryIndices = if fFlagLuaAppEnableNxMRoduxApportioning or p14 then nil else var16.placedIndices,
+				layout = if fFlagLuaAppEnableNxMRoduxApportioning or p14 then var16.layout else nil
 			}
 			var15 = var16.nextStartIndex
 			t_1 = var16.pendingSpanTiles

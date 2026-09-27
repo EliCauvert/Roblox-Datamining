@@ -22,6 +22,8 @@ local fFlagSduiCardComponent = require(parent.SharedFlags).FFlagSduiCardComponen
 local sduiCoachmarkComponent = game:DefineFastFlag("SduiCoachmarkComponent", false)
 local fFlagSduiContentRowStateLayerModule = require(sduiSharedContent.Flags.FFlagSduiContentRowStateLayer)
 local fFlagSduiSystemBannerComponent = require(parent.SharedFlags).FFlagSduiSystemBannerComponent
+local fFlagSduiBannerContextComponent = require(parent.SharedFlags).FFlagSduiBannerContextComponent
+local fFlagSduiViewportVisibilityComponent = require(parent.SharedFlags).FFlagSduiViewportVisibilityComponent
 local fFlagLuaAppUnlockUpsellSupport = require(parent.SharedFlags).FFlagLuaAppUnlockUpsellSupport
 local fFlagSduiDevStoreSeeAllSupport = require(parent.SharedFlags).FFlagSduiDevStoreSeeAllSupport
 local fFlagSduiPlayWithReward = require(parent.SharedFlags).FFlagSduiPlayWithReward
@@ -31,6 +33,7 @@ local fFlagSduiShimmerTextComponentEnabled = require(parent.SharedFlags).FFlagSd
 local fFlagSduiTooltipComponentEnabled = require(parent.SharedFlags).FFlagSduiTooltipComponentEnabled
 local fFlagSduiRevealTextComponentEnabled = require(parent.SharedFlags).FFlagSduiRevealTextComponentEnabled
 local fFlagSduiAiOverviewEnabled = require(parent.SharedFlags).FFlagSduiAiOverviewEnabled
+local fFlagSduiPreferredTextSizeLineBudgets = require(parent.SharedFlags).FFlagSduiPreferredTextSizeLineBudgets
 local fFlagSduiVerticalListWithImpressionsEnabled = require(parent.SharedFlags).FFlagSduiVerticalListWithImpressionsEnabled
 local fFlagSduiCollectionCarouselPlaceholderItem = require(parent.SharedFlags).FFlagSduiCollectionCarouselPlaceholderItem
 local fFlagSduiShowToastAction = require(parent.SharedFlags).FFlagSduiShowToastAction
@@ -108,7 +111,7 @@ local function registerSharedActions()
 end
 
 local function registerSharedUiComponents()
-	-- upvalues: sduiComponentType (ref), sduiSharedContent (ref), fFlagSduiCardComponent (ref), sduiCoachmarkComponent (ref), fFlagSduiSystemBannerComponent (ref), fFlagLuaAppUnlockUpsellSupport (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseColorTokenProp (ref), parseVector2Prop (ref), parseIntegerProp (ref), parseUDim2Prop (ref), parseBooleanProp (ref), parseNumberProp (ref), parseStringProp (ref), fFlagSduiShimmerTextComponentEnabled (ref), fFlagSduiRevealTextComponentEnabled (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagEnableGameJoinEarlyAccess (ref), fFlagSduiPlayWithReward (ref), parseUiComponentProp (ref), parseCallbackProp (ref), fFlagSduiContentRowStateLayerModule (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiTooltipComponentEnabled (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiAiOverviewEnabled (ref), fFlagSduiVerticalListWithImpressionsEnabled (ref), getSduiComponentRegistry (ref)
+	-- upvalues: sduiComponentType (ref), sduiSharedContent (ref), fFlagSduiCardComponent (ref), sduiCoachmarkComponent (ref), fFlagSduiSystemBannerComponent (ref), fFlagSduiBannerContextComponent (ref), fFlagSduiViewportVisibilityComponent (ref), fFlagLuaAppUnlockUpsellSupport (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseColorTokenProp (ref), parseVector2Prop (ref), parseIntegerProp (ref), parseUDim2Prop (ref), parseBooleanProp (ref), parseNumberProp (ref), parseStringProp (ref), fFlagSduiShimmerTextComponentEnabled (ref), fFlagSduiRevealTextComponentEnabled (ref), fFlagSduiPreferredTextSizeLineBudgets (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagEnableGameJoinEarlyAccess (ref), fFlagSduiPlayWithReward (ref), parseUiComponentProp (ref), parseCallbackProp (ref), fFlagSduiContentRowStateLayerModule (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiTooltipComponentEnabled (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiAiOverviewEnabled (ref), fFlagSduiVerticalListWithImpressionsEnabled (ref), getSduiComponentRegistry (ref)
 	getSduiComponentRegistry().registerComponentDefinitions({
 		[sduiComponentType.DetailsPageImageHeader] = {
 			getLazyComponent = function()
@@ -138,6 +141,18 @@ local function registerSharedUiComponents()
 			getLazyComponent = function()
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiSystemBanner)
+			end
+		} else nil,
+		[sduiComponentType.BannerContext] = if fFlagSduiBannerContextComponent then {
+			getLazyComponent = function()
+				-- upvalues: sduiSharedContent (copy)
+				return require(sduiSharedContent.Components.SduiBannerContext)
+			end
+		} else nil,
+		[sduiComponentType.ViewportVisibility] = if fFlagSduiViewportVisibilityComponent then {
+			getLazyComponent = function()
+				-- upvalues: sduiSharedContent (copy)
+				return require(sduiSharedContent.Components.SduiViewportVisibility)
 			end
 		} else nil,
 		[sduiComponentType.CircleIcon] = {
@@ -186,6 +201,12 @@ local function registerSharedUiComponents()
 			getLazyComponent = function()
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiRevealText)
+			end
+		} else nil,
+		[sduiComponentType.LineLimitedText] = if fFlagSduiPreferredTextSizeLineBudgets then {
+			getLazyComponent = function()
+				-- upvalues: sduiSharedContent (copy)
+				return require(sduiSharedContent.Components.SduiLineLimitedText)
 			end
 		} else nil,
 		[sduiComponentType.ContentRatingLabel] = {

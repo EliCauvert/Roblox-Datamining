@@ -7,7 +7,9 @@ local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedF
 local fStringLuaAppPlayButtonAgeCheckAmpFeatureName = sharedFlagsModule.FStringLuaAppPlayButtonAgeCheckAmpFeatureName
 local fStringLuaAppPlayButtonAgeCheckAmpNameSpace = sharedFlagsModule.FStringLuaAppPlayButtonAgeCheckAmpNameSpace
 local fFlagConnectionUpsellAnalytics = sharedFlagsModule.FFlagConnectionUpsellAnalytics
+local fFlagPioneerLeaveOnInExpFaeDownAge = sharedFlagsModule.FFlagPioneerLeaveOnInExpFaeDownAge
 local url = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).Url
+local maybeLeavePioneerOnFaeDownAgeModule = require(corePackagesService.Workspace.Packages.PioneerUtils.maybeLeavePioneerOnFaeDownAge)
 local var1 = nil
 local var2 = nil
 pcall(function()
@@ -138,7 +140,7 @@ local _ = function()
 end
 
 local function openWizardThenReconnect(p1, p2, p3, p4, p5, p6, p7, p8, p9)
-	-- upvalues: logTelemetry (ref), corePackagesService (ref), coreGuiService (ref)
+	-- upvalues: logTelemetry (ref), corePackagesService (ref), coreGuiService (ref), fFlagPioneerLeaveOnInExpFaeDownAge (ref), maybeLeavePioneerOnFaeDownAgeModule (ref)
 	logTelemetry(p1, p9)
 	local ok, status = pcall(require, corePackagesService.Workspace.Packages.AmpUpsell)
 	local var14 = if ok then status else nil
@@ -156,16 +158,29 @@ local function openWizardThenReconnect(p1, p2, p3, p4, p5, p6, p7, p8, p9)
 		
 		return
 	elseif not pcall(function()
-		-- upvalues: var14 (ref), p4 (ref), logTelemetry (copy), p1 (ref), p2 (ref), p7 (ref), p6 (ref), p8 (ref), p5 (ref), var15 (ref), p3 (ref)
-		var14.InExpAmpWizardController.OpenAmpWizardContainerInExp(p4, function(p10)
-			-- upvalues: var14 (copy), logTelemetry (copy), p1 (copy), p2 (copy)
-			if p10 == var14.AmpEnums.AccessResponseEnum.Granted then
+		-- upvalues: var14 (ref), p4 (ref), logTelemetry (copy), p1 (ref), fFlagPioneerLeaveOnInExpFaeDownAge (copy), p2 (ref), maybeLeavePioneerOnFaeDownAgeModule (copy), p7 (ref), p6 (ref), p8 (ref), p5 (ref), var15 (ref), p3 (ref)
+		var14.InExpAmpWizardController.OpenAmpWizardContainerInExp(p4, function(p10, p11)
+			-- upvalues: var14 (copy), logTelemetry (copy), p1 (copy), fFlagPioneerLeaveOnInExpFaeDownAge (copy), p2 (copy), maybeLeavePioneerOnFaeDownAgeModule (copy)
+			local var16 = p10 == var14.AmpEnums.AccessResponseEnum.Granted
+			
+			if var16 then
 				logTelemetry(p1, "AmpWizardGrantedReconnect")
-				p2()
 				
-				return
+				if not fFlagPioneerLeaveOnInExpFaeDownAge then
+					p2()
+				end
+			else
+				logTelemetry(p1, "AmpWizardNotGranted")
 			end
-			logTelemetry(p1, "AmpWizardNotGranted")
+			if fFlagPioneerLeaveOnInExpFaeDownAge then
+				local ampEnums = var14.AmpEnums
+				maybeLeavePioneerOnFaeDownAgeModule(p11 ~= nil and p11[ampEnums.ActionTypeEnum.AgeEstimation] == ampEnums.ActionStatusEnum.Success, function()
+					-- upvalues: var16 (ref), p2 (copy)
+					if var16 then
+						p2()
+					end
+				end)
+			end
 		end, p7, p6, p8, p5, var15, p3, true)
 	end) then
 		logTelemetry(p1, "AmpWizardOpenError")

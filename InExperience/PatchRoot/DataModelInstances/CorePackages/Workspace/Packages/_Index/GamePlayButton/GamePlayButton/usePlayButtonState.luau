@@ -27,28 +27,50 @@ local fFlagLuaAppDisablePlayableWhenLoadingForce = require(parent.SharedFlags).F
 local fFlagLuaAppPlayButtonAmpAgeCheckFlow = require(parent.SharedFlags).FFlagLuaAppPlayButtonAmpAgeCheckFlow
 local fFlagLuaAppParentApprovedExperiences = require(parent.SharedFlags).FFlagLuaAppParentApprovedExperiences
 local fFlagLuaAppPlayButtonLoadingDurationTelemetry = require(parent.SharedFlags).FFlagLuaAppPlayButtonLoadingDurationTelemetry
-local fFlagLuaAppPlayButtonPrivatePT = require(parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePT
+local fFlagLuaAppPlayButtonPrivatePTEnableSingleButton = require(parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePTEnableSingleButton
+local fFlagLuaAppPlayButtonPrivatePTEnableDualButton = require(parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePTEnableDualButton
+local luaAppPlaytestSingleBlocksPlayable = game:DefineFastFlag("LuaAppPlaytestSingleBlocksPlayable", false)
 
 local function selectPlayButtonState(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: retrievalStatus (ref), playButtonStatesModule (ref), playabilityStatusEnum (ref), fFlagLuaAppPlayButtonAmpAgeCheckFlow (ref), fFlagLuaAppParentUpsellPolicy (ref), fFlagLuaAppParentApprovedExperiences (ref), fFlagEnableGameJoinEarlyAccess (ref), getFFlagIsSquadEnabled (ref)
+	-- upvalues: retrievalStatus (ref), fFlagLuaAppPlayButtonPrivatePTEnableSingleButton (ref), playtestUnlockUpsellModule (ref), luaAppPlaytestSingleBlocksPlayable (ref), playButtonStatesModule (ref), playabilityStatusEnum (ref), fFlagLuaAppPlayButtonAmpAgeCheckFlow (ref), fFlagLuaAppParentUpsellPolicy (ref), fFlagLuaAppParentApprovedExperiences (ref), fFlagEnableGameJoinEarlyAccess (ref), getFFlagIsSquadEnabled (ref)
+	local playable
 	local _ = nil
-	local var1 = if p1 ~= retrievalStatus.Done or p2 == nil then if p2.isPlayable == true then playButtonStatesModule.Playable elseif p2.playabilityStatus == playabilityStatusEnum.PurchaseRequired and p3 ~= nil and p3.isForSale == true then playButtonStatesModule.PaidAccess elseif p2.playabilityStatus == playabilityStatusEnum.FiatPurchaseRequired and p3 ~= nil and p3.isForSale == true then playButtonStatesModule.FiatPaidAccess elseif fFlagLuaAppPlayButtonAmpAgeCheckFlow and (p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser or (if fFlagLuaAppParentUpsellPolicy then p7 else true) and (p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls or fFlagLuaAppParentApprovedExperiences and p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRequireParentApproval) or p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityAgeCheckRequired) then playButtonStatesModule.ActionNeeded elseif not fFlagLuaAppPlayButtonAmpAgeCheckFlow and p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser then if not fFlagLuaAppPlayButtonAmpAgeCheckFlow and (if fFlagLuaAppParentUpsellPolicy then p7 else true) and (p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls or fFlagLuaAppParentApprovedExperiences and p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRequireParentApproval) then if fFlagEnableGameJoinEarlyAccess and p8 and p2.playabilityStatus == playabilityStatusEnum.PlusSubscriptionRequired then playButtonStatesModule.EarlyAccessLocked else playButtonStatesModule.UnplayableOther else playButtonStatesModule.ActionNeeded else playButtonStatesModule.ActionNeeded else playButtonStatesModule.Playable
 	
-	if getFFlagIsSquadEnabled() and var1 == playButtonStatesModule.Playable and (p4 and #p4.members > 1) and (not p6 or not p6.maxPlayers or p6.maxPlayers > 1) then
+	if p1 == retrievalStatus.Done and p2 ~= nil then
+		local var1
+		if fFlagLuaAppPlayButtonPrivatePTEnableSingleButton then
+			var1 = false
+			
+			if p2.privatePlaytestInfo ~= nil then
+				var1 = not p2.privatePlaytestInfo.isPlayable
+				
+				if var1 then
+					var1 = playtestUnlockUpsellModule.getType(p2.privatePlaytestInfo.playabilityStatus) ~= nil
+					var1 = nil
+				end
+			end
+		else
+			var1 = nil
+		end
+		playable = if p2.isPlayable == true and (not luaAppPlaytestSingleBlocksPlayable or not var1) then playButtonStatesModule.Playable elseif fFlagLuaAppPlayButtonPrivatePTEnableSingleButton and var1 then playButtonStatesModule.ActionNeeded elseif p2.playabilityStatus == playabilityStatusEnum.PurchaseRequired and p3 ~= nil and p3.isForSale == true then playButtonStatesModule.PaidAccess elseif p2.playabilityStatus == playabilityStatusEnum.FiatPurchaseRequired and p3 ~= nil and p3.isForSale == true then playButtonStatesModule.FiatPaidAccess elseif fFlagLuaAppPlayButtonAmpAgeCheckFlow and (p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser or (if fFlagLuaAppParentUpsellPolicy then p7 else true) and (p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls or fFlagLuaAppParentApprovedExperiences and p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRequireParentApproval) or p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityAgeCheckRequired) then playButtonStatesModule.ActionNeeded elseif not fFlagLuaAppPlayButtonAmpAgeCheckFlow and p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser then if not fFlagLuaAppPlayButtonAmpAgeCheckFlow and (if fFlagLuaAppParentUpsellPolicy then p7 else true) and (p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls or fFlagLuaAppParentApprovedExperiences and p2.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRequireParentApproval) then if fFlagEnableGameJoinEarlyAccess and p8 and p2.playabilityStatus == playabilityStatusEnum.PlusSubscriptionRequired then playButtonStatesModule.EarlyAccessLocked else playButtonStatesModule.UnplayableOther else playButtonStatesModule.ActionNeeded else playButtonStatesModule.ActionNeeded
+	else
+		playable = playButtonStatesModule.Playable
+	end
+	if getFFlagIsSquadEnabled() and playable == playButtonStatesModule.Playable and (p4 and #p4.members > 1) and (not p6 or not p6.maxPlayers or p6.maxPlayers > 1) then
 		if p5 then
 			return playButtonStatesModule.WaitingForParty
 		end
-		var1 = playButtonStatesModule.PlayableWithParty
+		playable = playButtonStatesModule.PlayableWithParty
 	end
-	return var1
+	return playable
 end
 
 local function selectSecondaryPlayButtonState(p1, p2)
-	-- upvalues: fFlagLuaAppPlayButtonPrivatePT (ref), playtestUnlockUpsellModule (ref), playButtonStatesModule (ref), playabilityStatusEnum (ref)
+	-- upvalues: fFlagLuaAppPlayButtonPrivatePTEnableDualButton (ref), playtestUnlockUpsellModule (ref), playButtonStatesModule (ref), playabilityStatusEnum (ref)
 	local privatePlaytestInfo
 	if p2 == nil then
 		return nil
-	elseif fFlagLuaAppPlayButtonPrivatePT and p2.privatePlaytestInfo ~= nil then
+	elseif fFlagLuaAppPlayButtonPrivatePTEnableDualButton and p2.privatePlaytestInfo ~= nil then
 		privatePlaytestInfo = p2.privatePlaytestInfo
 		local type = playtestUnlockUpsellModule.getType(privatePlaytestInfo.playabilityStatus)
 		

@@ -6,14 +6,12 @@ local signalsModule = require(parent.Signals)
 local signalsExperimentalModule = require(parent.SignalsExperimental)
 local dataStatus = require(dataHydration.DataHydrationTypes).DataStatus
 local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalPlayerUserId
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppDataHydrationOptimisticMutationLayer = sharedFlagsModule.FFlagLuaAppDataHydrationOptimisticMutationLayer
-local fFlagMigrateGameInfoToStore = sharedFlagsModule.FFlagMigrateGameInfoToStore
+local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
 local luaAppDefaultDataTtlSec = game:DefineFastInt("LuaAppDefaultDataTtlSec", 3600)
 local luaAppDefaultFailedDataTtlSec = game:DefineFastInt("LuaAppDefaultFailedDataTtlSec", 60)
 
 return function(p1, p2, p3)
-	-- upvalues: luaAppDefaultDataTtlSec (ref), luaAppDefaultFailedDataTtlSec (ref), signalsModule (ref), dataStatus (ref), signalsExperimentalModule (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), cryoModule (ref), fFlagMigrateGameInfoToStore (ref), getLocalPlayerUserId (ref), playersService (ref)
+	-- upvalues: luaAppDefaultDataTtlSec (ref), luaAppDefaultFailedDataTtlSec (ref), signalsModule (ref), dataStatus (ref), signalsExperimentalModule (ref), cryoModule (ref), fFlagMigrateGameInfoToStore (ref), getLocalPlayerUserId (ref), playersService (ref)
 	p1 = p1 or luaAppDefaultDataTtlSec
 	p2 = p2 or luaAppDefaultFailedDataTtlSec
 	local var1 = if p3 then p3.sanitizeItem else nil
@@ -88,14 +86,14 @@ return function(p1, p2, p3)
 	end
 	
 	local function updateItems(p7, p8)
-		-- upvalues: p1 (ref), getOrCreateSignals (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), cryoModule (copy), var1 (ref), t_2 (write), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), t_3 (write), signalsExperimentalModule (copy)
+		-- upvalues: p1 (ref), getOrCreateSignals (ref), cryoModule (copy), var1 (ref), t_2 (write), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), t_3 (write), signalsExperimentalModule (copy)
 		local var5 = os.clock() + p1
 		signalsExperimentalModule.batch(function()
-			-- upvalues: p7 (ref), getOrCreateSignals (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), cryoModule (copy), var1 (copy), t_2 (copy), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), p8 (ref), t_3 (copy), var5 (ref)
+			-- upvalues: p7 (ref), getOrCreateSignals (copy), cryoModule (copy), var1 (copy), t_2 (copy), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), p8 (ref), t_3 (copy), var5 (ref)
 			for i, v in p7 do
 				local var6, var7 = getOrCreateSignals(i)
 				local var8 = var6.data(false)
-				local var9 = if var8 and type(var8) == "table" and type(v) == "table" then if fFlagLuaAppDataHydrationOptimisticMutationLayer then cryoModule.Dictionary.join(var8, v) else cryoModule.Dictionary.union(var8, v) else v
+				local var9 = if var8 and type(var8) == "table" and type(v) == "table" then cryoModule.Dictionary.join(var8, v) else v
 				var7(if var1 then var1(var9) else var9)
 				t_2[i](dataStatus.Ready)
 				
@@ -109,10 +107,10 @@ return function(p1, p2, p3)
 	end
 	
 	local function updateItem(p9, p10, p11)
-		-- upvalues: getOrCreateSignals (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), cryoModule (copy), var1 (ref), t_2 (write), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), t_3 (write), p1 (ref)
+		-- upvalues: getOrCreateSignals (ref), cryoModule (copy), var1 (ref), t_2 (write), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), t_3 (write), p1 (ref)
 		local var6, var7 = getOrCreateSignals(p9)
 		local var8 = var6.data(false)
-		local var9 = if var8 and type(var8) == "table" and type(p10) == "table" then if fFlagLuaAppDataHydrationOptimisticMutationLayer then cryoModule.Dictionary.join(var8, p10) else cryoModule.Dictionary.union(var8, p10) else p10
+		local var9 = if var8 and type(var8) == "table" and type(p10) == "table" then cryoModule.Dictionary.join(var8, p10) else p10
 		var7(if var1 then var1(var9) else var9)
 		t_2[p9](dataStatus.Ready)
 		

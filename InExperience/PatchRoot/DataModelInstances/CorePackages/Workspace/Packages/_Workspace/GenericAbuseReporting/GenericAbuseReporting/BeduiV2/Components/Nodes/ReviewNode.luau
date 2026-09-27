@@ -39,7 +39,7 @@ return reactModule.memo(function(p1)
 				LayoutOrder = 3
 			}, dashModule.map(p1.details, function(p2)
 				-- upvalues: reactModule (copy), view (copy), textWithTranslationModule (copy)
-				return reactModule.createElement(view, { tag = "col size-full-0 auto-y gap-xsmall" }, {
+				return reactModule.createElement(view, { tag = "col gap-xsmall size-full-0 auto-y" }, {
 					Heading = reactModule.createElement(textWithTranslationModule, {
 						tag = "size-full-0 auto-y text-body-medium",
 						layoutOrder = 1,

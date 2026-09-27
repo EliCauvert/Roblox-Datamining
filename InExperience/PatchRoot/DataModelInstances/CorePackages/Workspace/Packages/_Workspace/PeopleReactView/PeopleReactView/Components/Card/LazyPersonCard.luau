@@ -63,7 +63,8 @@ return reactModule.memo(function(p1)
 		showTooltip = p1.showTooltip,
 		onDismissTooltip = p1.onDismissTooltip,
 		shouldShowMenu = p1.shouldShowMenu,
-		layoutOrder = p1.layoutOrder
+		layoutOrder = p1.layoutOrder,
+		isCompactCardLayout = p1.isCompactCardLayout
 	}) else reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), personCardModule (copy), p1 (ref)
 		return reactModule.createElement(personCardModule, {
@@ -72,11 +73,12 @@ return reactModule.memo(function(p1)
 			showTooltip = p1.showTooltip,
 			onDismissTooltip = p1.onDismissTooltip,
 			shouldShowMenu = p1.shouldShowMenu,
-			layoutOrder = p1.layoutOrder
+			layoutOrder = p1.layoutOrder,
+			isCompactCardLayout = p1.isCompactCardLayout
 		})
 	end, {
 		p1.width, p1.person, p1.showTooltip, p1.onDismissTooltip, p1.shouldShowMenu,
-		p1.layoutOrder
+		p1.layoutOrder, p1.isCompactCardLayout
 	})
 	
 	return if p1.scrollingFrameStore then reactModule.createElement(lazyScrollingComponentModule, {

@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("PeopleReactView").Parent.React).createContext(false)

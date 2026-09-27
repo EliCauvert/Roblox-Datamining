@@ -24,11 +24,12 @@ local sendAnalyticsEvent = analyticsServiceModule.sendAnalyticsEvent
 local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local linkOpenedSource = analyticsServiceModule.LinkOpenedSource
 local submitSource = analyticsServiceModule.SubmitSource
+local formatErrorDetailForAnalytics = analyticsServiceModule.formatErrorDetailForAnalytics
 local fFlagEnableReportingFlowForMomentsFeed = require(parent.SharedFlags).FFlagEnableReportingFlowForMomentsFeed
-local fFlagAbuseReportLinkOpenedAnalytics = require(parent.SharedFlags).FFlagAbuseReportLinkOpenedAnalytics
 local fFlagAbuseReportSceneSelectionNextOnFailureModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionNextOnFailure)
 local fFlagAbuseReportSceneSelectionSubmitTrackingModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionSubmitTracking)
 local fFlagAbuseReportSubmissionTargetV4 = require(parent.SharedFlags).FFlagAbuseReportSubmissionTargetV4
+local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 
 local function getSubmissionTargetTelemetry(p1)
 	return if type(p1) == "table" then if p1.type == "default" then { target_type = "default" } elseif p1.type == "clientAction" then {
@@ -58,7 +59,7 @@ local function useAbuseSheetAnalytics(p1, p2, p3, p4)
 end
 
 return function(p1, p2)
-	-- upvalues: reactModule (ref), resolveStartNode (ref), reducer (ref), getInitialState (ref), getNewRunId (ref), useOpenLinkModule (ref), useRoactService (ref), roactNetworking (ref), useAbuseSheetAnalytics (ref), selectStore (ref), resolveArConfig (ref), telemetryEventType (ref), dashModule (ref), fFlagAbuseReportLinkOpenedAnalytics (ref), linkOpenedSource (ref), fFlagAbuseReportSubmissionTargetV4 (ref), getSubmissionTargetTelemetry (ref), sendReportModule (ref), promiseModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), abuseVectorModule (ref), fFlagAbuseReportSceneSelectionNextOnFailureModule (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), submitSource (ref), contentNodeModule (ref)
+	-- upvalues: reactModule (ref), resolveStartNode (ref), reducer (ref), getInitialState (ref), getNewRunId (ref), useOpenLinkModule (ref), useRoactService (ref), roactNetworking (ref), useAbuseSheetAnalytics (ref), selectStore (ref), resolveArConfig (ref), telemetryEventType (ref), dashModule (ref), fFlagAbuseReportImproveErrorEventsModule (ref), linkOpenedSource (ref), fFlagAbuseReportSubmissionTargetV4 (ref), getSubmissionTargetTelemetry (ref), sendReportModule (ref), promiseModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), abuseVectorModule (ref), fFlagAbuseReportSceneSelectionNextOnFailureModule (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), submitSource (ref), formatErrorDetailForAnalytics (ref), contentNodeModule (ref)
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), resolveStartNode (copy)
 		return if p1 then resolveStartNode(p1) else "root"
@@ -69,7 +70,7 @@ return function(p1, p2)
 	end)
 	local var4 = useOpenLinkModule()
 	local var5 = useRoactService(roactNetworking)
-	local var6 = useAbuseSheetAnalytics(var2, p2.abuseVector, p2.targetId, if p1 then p1.name else nil)
+	local var6 = useAbuseSheetAnalytics(var2, p2.abuseVector, p2.analyticsTargetId, if p1 then p1.name else nil)
 	local var7 = reactModule.useMemo(function()
 		-- upvalues: selectStore (copy), var2 (ref)
 		return selectStore(var2)
@@ -155,7 +156,7 @@ return function(p1, p2)
 	local var13 = dashModule.last(var2.stack)
 	local nodeId = var8 and (var8.nodes and (var13 and var8.nodes[var13.nodeId]))
 	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), var10 (ref), p1 (ref), var13 (ref), var6 (ref), telemetryEventType (copy), var8 (ref), nodeId (ref)
+		-- upvalues: p2 (ref), var10 (ref), p1 (ref), var13 (ref), var6 (ref), telemetryEventType (copy), var8 (ref), nodeId (ref), fFlagAbuseReportImproveErrorEventsModule (copy)
 		if not p2.open or var10.current then return end
 		if not p1 then return end
 		if not var13 then
@@ -191,7 +192,10 @@ return function(p1, p2)
 		elseif not nodeId then
 			var6({
 				sub_event_type = telemetryEventType.Error,
-				error_detail = {
+				error_detail = if fFlagAbuseReportImproveErrorEventsModule then {
+					error_message = "No config found for current nodeId",
+					error_metadata = { node_id = var13.nodeId }
+				} else {
 					error_message = `No config found for current nodeId: {var13.nodeId}`
 				}
 			})
@@ -250,7 +254,7 @@ return function(p1, p2)
 	end
 	
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), nodeId (ref), var2 (ref), dashModule (copy), p2 (ref), var3 (ref), fFlagAbuseReportLinkOpenedAnalytics (copy), var11 (ref), telemetryEventType (copy), linkOpenedSource (copy), var4 (ref), notifyFinish (ref), reset (ref), fFlagAbuseReportSubmissionTargetV4 (copy), getSubmissionTargetTelemetry (copy), sendReportModule (copy), var5 (ref), promiseModule (copy), fFlagEnableReportingFlowForMomentsFeed (copy), abuseVectorModule (copy), fFlagAbuseReportSceneSelectionNextOnFailureModule (copy), var6 (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy), var12 (ref)
+		-- upvalues: var8 (ref), nodeId (ref), var2 (ref), dashModule (copy), p2 (ref), var3 (ref), var11 (ref), telemetryEventType (copy), linkOpenedSource (copy), var4 (ref), notifyFinish (ref), reset (ref), fFlagAbuseReportSubmissionTargetV4 (copy), getSubmissionTargetTelemetry (copy), sendReportModule (copy), var5 (ref), promiseModule (copy), fFlagEnableReportingFlowForMomentsFeed (copy), abuseVectorModule (copy), fFlagAbuseReportSceneSelectionNextOnFailureModule (copy), var6 (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy), var12 (ref), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy)
 		if not var8 or not nodeId then return end
 		if var2.navigationState ~= "gotoNext" and var2.navigationState ~= "gotoFailure" then return end
 		local var14 = dashModule.last(var2.stack)
@@ -268,7 +272,7 @@ return function(p1, p2)
 			return
 		end
 		local function handleNextSimple(p3)
-			-- upvalues: p2 (copy), var3 (copy), fFlagAbuseReportLinkOpenedAnalytics (copy), var11 (copy), telemetryEventType (copy), linkOpenedSource (copy), var4 (copy), notifyFinish (copy), reset (copy)
+			-- upvalues: p2 (copy), var3 (copy), var11 (copy), telemetryEventType (copy), linkOpenedSource (copy), var4 (copy), notifyFinish (copy), reset (copy)
 			if not p3 then
 				warn("handleNextSimple called with nil next value")
 				p2.onClose()
@@ -291,12 +295,10 @@ return function(p1, p2)
 				end
 			elseif type(p3) ~= "table" or p3.type ~= "goto" then
 				if type(p3) == "table" and p3.type == "link" then
-					if fFlagAbuseReportLinkOpenedAnalytics then
-						var11.current({
-							sub_event_type = telemetryEventType.LinkOpened,
-							link_detail = { href = p3.href, source = linkOpenedSource.NextAction }
-						})
-					end
+					var11.current({
+						sub_event_type = telemetryEventType.LinkOpened,
+						link_detail = { href = p3.href, source = linkOpenedSource.NextAction }
+					})
 					var4("", p3.href)
 					notifyFinish()
 					p2.onClose()
@@ -411,7 +413,7 @@ return function(p1, p2)
 				var12.current = "completed"
 				handleNextSimple(var17.onSuccess)
 			end):catch(function(p3)
-				-- upvalues: var3 (copy), var6 (copy), telemetryEventType (copy), unixTimestampMillis (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy), var15 (ref), var16 (write), dashModule (copy), var12 (copy), var17 (ref), handleNextSimple (ref)
+				-- upvalues: var3 (copy), var6 (copy), telemetryEventType (copy), unixTimestampMillis (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy), var15 (ref), var16 (write), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy), dashModule (copy), var12 (copy), var17 (ref), handleNextSimple (ref)
 				var3({ type = "submissionFailed" })
 				var6({
 					sub_event_type = telemetryEventType.SubmitFail,
@@ -425,7 +427,7 @@ return function(p1, p2)
 				})
 				var6({
 					sub_event_type = telemetryEventType.Error,
-					error_detail = {
+					error_detail = if fFlagAbuseReportImproveErrorEventsModule then formatErrorDetailForAnalytics("submitReport failed", p3) else {
 						error_message = "submitReport: " .. dashModule.pretty(p3, { depth = 10 })
 					}
 				})

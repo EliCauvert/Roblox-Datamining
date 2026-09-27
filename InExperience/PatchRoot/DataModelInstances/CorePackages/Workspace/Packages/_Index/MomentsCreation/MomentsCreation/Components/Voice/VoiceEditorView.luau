@@ -15,9 +15,10 @@ local audioWaveformOverlayModule = require(momentsCreation.Components.Voice.Audi
 local videoTimelineModule = require(momentsCreation.Components.VideoTimeline)
 local voiceActionBarModule = require(momentsCreation.Components.Voice.VoiceActionBar)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
+local getFFlagMomentsTTSStartTimePositioningModule = require(momentsCreation.Flags.GetFFlagMomentsTTSStartTimePositioning)
 
 return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), view (ref), videoTimelineModule (ref), audioWaveformOverlayModule (ref), textArea (ref), inputSize (ref), inputVariant (ref), text (ref), voiceActionBarModule (ref), foundationModule (ref), button (ref)
+	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), view (ref), videoTimelineModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), audioWaveformOverlayModule (ref), textArea (ref), inputSize (ref), inputVariant (ref), text (ref), voiceActionBarModule (ref), foundationModule (ref), button (ref)
 	local var1
 	local var2 = useDeviceInsets()
 	local var3 = useTokens()
@@ -40,11 +41,15 @@ return function(p1)
 			layoutOrder = 1,
 			playback = p1.playback,
 			capture = p1.capture,
+			dragOnly = getFFlagMomentsTTSStartTimePositioningModule,
 			onSeek = p1.onTimelineSeek
 		}, {
 			AudioWaveform = if p1.showAudioWaveform then reactModule.createElement(audioWaveformOverlayModule, {
 				audioDuration = p1.audioDuration,
 				videoDuration = p1.videoDuration,
+				startTime = p1.startTime,
+				dragDetectorRef = p1.waveformDragDetectorRef,
+				isSelected = p1.waveformSelected,
 				samples = p1.waveformSamples
 			}) else nil
 		}),
@@ -58,7 +63,8 @@ return function(p1)
 					Thickness = var3.Stroke.Standard
 				},
 				cornerRadius = UDim.new(0, var3.Radius.Medium),
-				onAbsoluteSizeChanged = p1.onComposerResize
+				onAbsoluteSizeChanged = p1.onComposerResize,
+				ref = p1.composerContainerRef
 			}, {
 				Composer = reactModule.createElement(textArea, {
 					label = "",

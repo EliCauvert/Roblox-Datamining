@@ -1,5 +1,5 @@
 ﻿local userInputService = game:GetService("UserInputService")
-local guiService = game:GetService("GuiService")
+local isTenFootInterface = require(script:FindFirstAncestor("NotificationsCommon").Parent.AppCommonLib).isTenFootInterface
 
 return {
 	isDesktopDevice = function()
@@ -13,7 +13,7 @@ return {
 		return if none ~= Enum.Platform.Windows then if none ~= Enum.Platform.OSX then none == Enum.Platform.UWP else true else true
 	end,
 	isConsole = function()
-		-- upvalues: guiService (ref)
-		return guiService:IsTenFootInterface()
+		-- upvalues: isTenFootInterface (ref)
+		return isTenFootInterface()
 	end
 }

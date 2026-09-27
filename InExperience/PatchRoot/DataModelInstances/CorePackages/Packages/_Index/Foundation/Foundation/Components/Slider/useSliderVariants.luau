@@ -99,8 +99,8 @@ local function variantsFactory(p1)
 end
 
 return function(p1, p2, p3, p4)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
+	-- upvalues: variantsContextModule (ref), variantsFactory (ref), flagsModule (ref), composeStyleVariantModule (ref)
 	local slider = variantsContextModule.useVariants("Slider", variantsFactory, p1)
 	
-	return composeStyleVariantModule(slider.common, slider.variants[p3], slider.sizes[p2], slider.orientation[p4])
+	return if flagsModule.FoundationSliderCapture then composeStyleVariantModule(slider.common, slider.variants[p3], slider.sizes[p2]) else composeStyleVariantModule(slider.common, slider.variants[p3], slider.sizes[p2], slider.orientation[p4])
 end

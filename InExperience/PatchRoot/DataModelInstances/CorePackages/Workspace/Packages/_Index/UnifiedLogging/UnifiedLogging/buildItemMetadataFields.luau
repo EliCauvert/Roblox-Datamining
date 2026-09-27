@@ -1,4 +1,6 @@
-﻿local discoveryEventErrorLogger = require(script:FindFirstAncestor("UnifiedLogging").Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+﻿local parent = script:FindFirstAncestor("UnifiedLogging").Parent
+local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local fFlagUnifiedLoggingCoerceMetadataFieldValues = require(parent.SharedFlags).FFlagUnifiedLoggingCoerceMetadataFieldValues
 local t = {
 	collectionId = true,
 	collectionPosition = true,
@@ -16,7 +18,7 @@ local function _(p1)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: t (ref), discoveryEventErrorLogger (ref)
+	-- upvalues: t (ref), fFlagUnifiedLoggingCoerceMetadataFieldValues (ref), discoveryEventErrorLogger (ref)
 	local v_2
 	local t_1 = {}
 	
@@ -32,7 +34,13 @@ return function(p1, p2, p3)
 				if t_1[i_1] == nil then
 					t_1[i_1] = {}
 				end
-				t_1[i_1][i] = v_1
+				local var1 = t_1[i_1]
+				
+				if fFlagUnifiedLoggingCoerceMetadataFieldValues then
+					var1[i] = tostring(v_1)
+				else
+					var1[i] = v_1
+				end
 			end
 		end
 	end

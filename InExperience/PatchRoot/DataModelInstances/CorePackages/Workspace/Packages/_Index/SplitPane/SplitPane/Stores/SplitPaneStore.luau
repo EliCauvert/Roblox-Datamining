@@ -32,107 +32,128 @@ local var2 = nil
 local function createSplitPaneStore()
 	-- upvalues: getRegionOverrides (ref), regionName (ref), var2 (write), createCurrentScreenOrientationSignalModule (ref), displayModule (ref), supportPaneWidthRulesModule (ref), signalsModule (ref), evaluateShouldDefaultToCollapsed (ref), supportPaneMode (ref), var1 (write)
 	local var3 = if getRegionOverrides and regionName then getRegionOverrides(regionName.SupportRegion) else nil
-	local _ = if var3 and var3.widthScale then var3.widthScale else 0.33
-	local var4 = if var3 and var3.minWidth then var3.minWidth else 0
-	local var5 = if var3 and var3.maxWidth then var3.maxWidth else 1e999
+	local var4 = if var3 and var3.widthScale then var3.widthScale else 0.33
+	local var5 = if var3 and var3.minWidth then var3.minWidth else 0
+	local var6 = if var3 and var3.maxWidth then var3.maxWidth else 1e999
 	var3 = nil
-	local var6, var7 = createCurrentScreenOrientationSignalModule()
-	var2 = var7
-	var3 = var6
+	local var7, var8 = createCurrentScreenOrientationSignalModule()
+	var2 = var8
+	var3 = var7
 	
 	local function evaluateBreakpointEnabled(p1)
 		-- upvalues: displayModule (copy), var3 (write), supportPaneWidthRulesModule (copy)
-		local var8 = var3(p1)
+		local var9 = var3(p1)
 		
-		return (if var8 ~= Enum.ScreenOrientation.LandscapeLeft then var8 == Enum.ScreenOrientation.LandscapeRight else true) and supportPaneWidthRulesModule.isSplitEnabledForWidth(displayModule.GetDisplayStore(p1).getDesignSpaceViewportWidth(p1))
+		return (if var9 ~= Enum.ScreenOrientation.LandscapeLeft then var9 == Enum.ScreenOrientation.LandscapeRight else true) and supportPaneWidthRulesModule.isSplitEnabledForWidth(displayModule.GetDisplayStore(p1).getDesignSpaceViewportWidth(p1))
 	end
 	
-	local var8, var9 = signalsModule.createSignal(nil)
-	local var10, var11 = signalsModule.createSignal(nil)
-	local var12, var13 = signalsModule.createSignal(nil)
-	local var14 = signalsModule.createComputed(evaluateShouldDefaultToCollapsed)
-	local var15 = signalsModule.createComputed(function(p1)
-		-- upvalues: var12 (ref), var10 (ref), var14 (ref), supportPaneMode (copy)
-		local var16 = var12(p1)
+	local var9, var10 = signalsModule.createSignal(nil)
+	local var11, var12 = signalsModule.createSignal(nil)
+	local var13, var14 = signalsModule.createSignal(nil)
+	local var15 = signalsModule.createComputed(evaluateShouldDefaultToCollapsed)
+	local var16 = signalsModule.createComputed(function(p1)
+		-- upvalues: var13 (ref), var11 (ref), var15 (ref), supportPaneMode (copy)
+		local var17 = var13(p1)
 		
-		if var16 ~= nil then
-			return var16
+		if var17 ~= nil then
+			return var17
 		end
-		local var17 = var10(p1)
+		local var18 = var11(p1)
 		
-		return if var17 == nil then if var14(p1) then supportPaneMode.Collapsed else supportPaneMode.Normal else var17
+		return if var18 == nil then if var15(p1) then supportPaneMode.Collapsed else supportPaneMode.Normal else var18
 	end)
 	
 	local function getSupportPaneMode(p1)
-		-- upvalues: var15 (ref)
-		return var15(p1)
+		-- upvalues: var16 (ref)
+		return var16(p1)
 	end
 	
-	local var16 = var14(false)
+	local var17 = var15(false)
 	var1 = signalsModule.createEffect(function(p1)
-		-- upvalues: var14 (ref), var16 (write), var11 (ref)
-		local var17 = var14(p1)
+		-- upvalues: var15 (ref), var17 (write), var12 (ref)
+		local var18 = var15(p1)
 		
-		if var17 ~= var16 then
-			var11(nil)
+		if var18 ~= var17 then
+			var12(nil)
 		end
-		var16 = var17
+		var17 = var18
 	end)
-	local var17, var18 = signalsModule.createSignal(false)
-	local var19 = signalsModule.createComputed(function(p1)
-		-- upvalues: evaluateBreakpointEnabled (ref), var17 (ref)
-		return evaluateBreakpointEnabled(p1) and var17(p1)
+	local var18 = signalsModule.createComputed(function(p1)
+		-- upvalues: displayModule (copy), var4 (ref), var9 (ref), var5 (ref), var6 (ref)
+		local designSpaceViewportWidth = displayModule.GetDisplayStore(p1).getDesignSpaceViewportWidth(p1)
+		
+		return if designSpaceViewportWidth <= 0 then var4 else (var9(p1) or math.clamp(designSpaceViewportWidth * var4, var5, var6)) / designSpaceViewportWidth
+	end)
+	local var19, var20 = signalsModule.createSignal(false)
+	
+	local function setSupportWidth(value)
+		-- upvalues: displayModule (copy), var10 (ref), var5 (ref), var6 (ref)
+		local platformScale = displayModule.GetDisplayStore(false).getPlatformScale(false)
+		var10(math.clamp(value / (if platformScale and platformScale > 0 then platformScale else 1), var5, var6))
+	end
+	
+	local var21 = signalsModule.createComputed(function(p1)
+		-- upvalues: evaluateBreakpointEnabled (ref), var19 (ref)
+		return evaluateBreakpointEnabled(p1) and var19(p1)
+	end)
+	local var22 = signalsModule.createComputed(function(p1)
+		-- upvalues: var21 (ref), var16 (ref)
+		return if var21(p1) then var16(p1) else nil
 	end)
 	
 	return {
-		getSupportWidth = var8,
-		setSupportWidth = function(value)
-			-- upvalues: displayModule (copy), var9 (ref), var4 (ref), var5 (ref)
-			local platformScale = displayModule.GetDisplayStore(false).getPlatformScale(false)
-			var9(math.clamp(value / (if platformScale and platformScale > 0 then platformScale else 1), var4, var5))
-		end,
+		getSupportWidth = var9,
+		getSupportWidthFraction = var18,
+		setSupportWidth = setSupportWidth,
 		resetSupportWidth = function()
-			-- upvalues: var9 (ref)
-			var9(nil)
+			-- upvalues: var10 (ref)
+			var10(nil)
 		end,
 		getMinSupportWidth = function()
-			-- upvalues: var4 (ref)
-			return var4
-		end,
-		getMaxSupportWidth = function()
 			-- upvalues: var5 (ref)
 			return var5
 		end,
+		getMaxSupportWidth = function()
+			-- upvalues: var6 (ref)
+			return var6
+		end,
 		getIsBreakpointEnabled = signalsModule.createComputed(evaluateBreakpointEnabled),
-		getIsSplitPaneActive = var19,
-		getIsSplitEnabled = var19,
-		getIsSplitEligible = var17,
-		setIsSplitEligible = var18,
+		getIsSplitPaneActive = var21,
+		getIsSplitEnabled = var21,
+		getSupportPaneModeIfActive = var22,
+		getIsSplitPaneCollapsedOrNotActive = signalsModule.createComputed(function(p1)
+			-- upvalues: var22 (ref), supportPaneMode (copy)
+			local var23 = var22(p1)
+			
+			return if var23 ~= nil then var23 == supportPaneMode.Collapsed else true
+		end),
+		getIsSplitEligible = var19,
+		setIsSplitEligible = var20,
 		getSupportPaneMode = getSupportPaneMode,
-		getShouldDefaultToCollapsed = var14,
+		getShouldDefaultToCollapsed = var15,
 		setSupportPaneMode = function(value)
-			-- upvalues: var11 (ref)
-			var11(value)
+			-- upvalues: var12 (ref)
+			var12(value)
 		end,
 		setTemporarySupportPaneMode = function(value)
-			-- upvalues: var13 (ref)
-			var13(value)
+			-- upvalues: var14 (ref)
+			var14(value)
 		end,
 		resetSupportPaneMode = function()
-			-- upvalues: var11 (ref), var13 (ref)
-			var11(nil)
-			var13(nil)
+			-- upvalues: var12 (ref), var14 (ref)
+			var12(nil)
+			var14(nil)
 		end,
 		toggleSupportPaneMode = function(p1)
-			-- upvalues: var15 (ref), supportPaneMode (copy), var12 (ref), var13 (ref), var11 (ref)
-			local var20 = if var15(false) == p1 then supportPaneMode.Normal else p1
+			-- upvalues: var16 (ref), supportPaneMode (copy), var13 (ref), var14 (ref), var12 (ref)
+			local var23 = if var16(false) == p1 then supportPaneMode.Normal else p1
 			
-			if var12(false) == nil then
-				var11(var20)
+			if var13(false) == nil then
+				var12(var23)
 				
 				return
 			end
-			var13(var20)
+			var14(var23)
 		end
 	}
 end

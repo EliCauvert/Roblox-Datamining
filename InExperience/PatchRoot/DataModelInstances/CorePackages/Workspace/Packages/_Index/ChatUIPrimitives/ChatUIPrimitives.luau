@@ -3,6 +3,7 @@
 return {
 	ChatInputBarView = require(script.Components.ChatInputBar.ChatInputBarView),
 	["jest.config"] = script["jest.config"],
+	["jest.bench.config"] = script["jest.bench.config"],
 	MessageLayoutContainer = require(script.Components.MessageLayoutContainer.MessageLayoutContainer),
 	useMessagePool = require(script.Components.MessageLayoutContainer.useMessagePool),
 	Utils = {
@@ -18,7 +19,6 @@ return {
 		useFocusInputBar = require(script.Hooks.useFocusInputBar),
 		useInExperienceLocalization = require(script.Hooks.useInExperienceLocalization),
 		useLastInputGroup = require(script.Hooks.useLastInputGroup),
-		useCoreActionBind = require(script.Hooks.useCoreActionBind),
 		usePortalSelectionLinks = require(script.Hooks.usePortalSelectionLinks)
 	},
 	Telemetry = {

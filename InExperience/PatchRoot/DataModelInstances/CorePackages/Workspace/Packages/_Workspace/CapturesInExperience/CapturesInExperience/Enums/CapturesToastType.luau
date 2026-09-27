@@ -2,6 +2,7 @@
 	CapturesActivated = "CapturesActivated",
 	CaptureSavedToDevice = "CaptureSavedToDevice",
 	CaptureTaken = "CaptureTaken",
+	CaptureTakenWithAction = "CaptureTakenWithAction",
 	CaptureTakenWithMomentsCTA = "CaptureTakenWithMomentsCTA",
 	None = "None",
 	MomentProcessing = "MomentProcessing",

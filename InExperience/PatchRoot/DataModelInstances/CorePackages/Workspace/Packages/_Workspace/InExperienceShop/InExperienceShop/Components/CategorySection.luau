@@ -146,7 +146,7 @@ return reactModule.memo(function(p1)
 		return { [featuredRobuxPackage.id] = featuredRobuxPackage }
 	end, { p1.robuxPackages, p1.featuredRobuxPackage, var4 })
 	local var10 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: p1 (ref), var9 (ref), var4 (ref), var5 (ref), tileWrapperProps (copy), reactModule (copy), view (copy), robuxPackageTileContainerModule (copy), onItemActivated (ref), computeRobuxPackageMediaHeightScale (copy), shopItemTileModule (copy), onItemActivated (ref), var3 (copy)
+		-- upvalues: p1 (ref), var9 (ref), var4 (ref), var5 (ref), tileWrapperProps (copy), reactModule (copy), view (copy), robuxPackageTileContainerModule (copy), onItemActivated (ref), computeRobuxPackageMediaHeightScale (copy), var2 (copy), shopItemTileModule (copy), onItemActivated (ref), var3 (copy)
 		local t = {
 			categoryId = p1.sectionId,
 			gridPositionRow = if p4 then p4.gridPositionRow else nil,
@@ -194,13 +194,15 @@ return reactModule.memo(function(p1)
 				onBonusItemActivated = onItemActivated,
 				mediaHeightScale = if p4 == nil or p4.shopWidth <= 0 then nil else computeRobuxPackageMediaHeightScale(p4.shopWidth, p4.gap),
 				categoryId = t.categoryId,
+				categoryType = p1.categoryType,
 				gridPositionRow = t.gridPositionRow,
-				gridPositionColumn = t.gridPositionColumn
+				gridPositionColumn = t.gridPositionColumn,
+				shopPageType = if var2 then var2.Home else nil
 			})
 		})
 	end, {
 		var9, onItemActivated, onItemActivated, var4, var5, p1.paymentSessionId,
-		p1.bonusJwt, p1.sectionId
+		p1.bonusJwt, p1.sectionId, p1.categoryType
 	})
 	
 	return reactModule.createElement(view, {

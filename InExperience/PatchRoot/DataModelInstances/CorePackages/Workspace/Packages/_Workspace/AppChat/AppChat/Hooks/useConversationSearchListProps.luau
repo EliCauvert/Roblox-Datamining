@@ -17,6 +17,8 @@ local getLastMessageContentModule = require(appChat.Conversations.getLastMessage
 local getOtherParticipantsModule = require(appChat.Conversations.getOtherParticipants)
 local searchIntroducedConversationIdsModule = require(appChat.Stores.searchIntroducedConversationIds)
 local useConversationSearchModule = require(appChat.Hooks.useConversationSearch)
+local useChatSearchResultsTelemetryModule = require(appChat.Hooks.useChatSearchResultsTelemetry)
+local fFlagAppChatSearchSessionTelemetryModule = require(appChat.Flags.FFlagAppChatSearchSessionTelemetry)
 local t = {}
 local t_1 = {}
 
@@ -49,7 +51,7 @@ local function buildSearchItemList(p1, p2, p3)
 end
 
 return function(p4, p5, p6, p7, p8)
-	-- upvalues: useConversationSearchModule (ref), useDispatch (ref), useStore (ref), reactModule (ref), getConversationStoreModule (ref), searchIntroducedConversationIdsModule (ref), signalsExperimentalModule (ref), receivedConversationModule (ref), conversationRoduxSeedModule (ref), fetchLatestConversationDetailsModule (ref), t (ref), buildSearchItemList (ref), t_1 (ref), roactPaginator (ref)
+	-- upvalues: useConversationSearchModule (ref), useDispatch (ref), useStore (ref), reactModule (ref), getConversationStoreModule (ref), searchIntroducedConversationIdsModule (ref), signalsExperimentalModule (ref), receivedConversationModule (ref), conversationRoduxSeedModule (ref), fetchLatestConversationDetailsModule (ref), t (ref), buildSearchItemList (ref), fFlagAppChatSearchSessionTelemetryModule (ref), useChatSearchResultsTelemetryModule (ref), t_1 (ref), roactPaginator (ref)
 	local var3 = useConversationSearchModule(p4, p5)
 	local var4 = useDispatch()
 	local var5 = useStore()
@@ -80,10 +82,14 @@ return function(p4, p5, p6, p7, p8)
 		return if var3.isActive then buildSearchItemList(var3.items, p6, p7) else t
 	end, { var3.isActive, var3.items, p7, p6 })
 	
+	if fFlagAppChatSearchSessionTelemetryModule then
+		useChatSearchResultsTelemetryModule(var3, #var7)
+	end
 	if var3.isActive then
 		return true, {
 			itemList = var7,
 			conversationsIsFetching = var3.isFetching,
+			isSearchAwaitingResults = var3.isAwaitingResults,
 			oldestConversationIsFetched = var3.nextCursor == nil,
 			[roactPaginator.loadNext] = function()
 				-- upvalues: var3 (ref)

@@ -1,9 +1,12 @@
 ﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
 local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
+local foundationModule = require(parent.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = useTokens()
 	local t = {
 		TabsLayout = reactModule.createElement("UIListLayout", {
@@ -62,7 +65,8 @@ return function(p1)
 			LayoutOrder = 2,
 			Size = UDim2.fromScale(1, 0),
 			Text = text,
-			Font = var1.Typography.TitleLarge.Font,
+			Font = if foundationFontFaceMigration then nil else var1.Typography.TitleLarge.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.TitleLarge.Font) else nil,
 			TextSize = var1.Typography.TitleLarge.FontSize,
 			TextColor3 = var1.Color.Content.Emphasis.Color3,
 			TextTruncate = Enum.TextTruncate.AtEnd,

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ProfileCTAHydratePresenceFromMetadata", false)
+﻿return game:DefineFastFlag("ProfileCTAHydratePresenceFromMetadata_v2", false)

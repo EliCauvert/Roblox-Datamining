@@ -1,11 +1,13 @@
 ﻿local parent = script:FindFirstAncestor("Charts").Parent
 local addSystemInfoToArgs = require(parent.DiscoveryUtils).AddSystemInfoToArgs
 local buildSduiCollectionInfo = require(parent.SduiSharedUtilities).buildSduiCollectionInfo
-local fFlagSduiChartsRequestPlaceholders = require(parent.SharedFlags).FFlagSduiChartsRequestPlaceholders
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagSduiChartsRequestPlaceholders = sharedFlagsModule.FFlagSduiChartsRequestPlaceholders
+local fFlagSduiPreferredTextSizeLineBudgets = sharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets
 local uDim = UDim.new(1, 72)
 
 return function(p1, p2)
-	-- upvalues: addSystemInfoToArgs (ref), fFlagSduiChartsRequestPlaceholders (ref), buildSduiCollectionInfo (ref), uDim (ref)
+	-- upvalues: addSystemInfoToArgs (ref), fFlagSduiChartsRequestPlaceholders (ref), buildSduiCollectionInfo (ref), uDim (ref), fFlagSduiPreferredTextSizeLineBudgets (ref)
 	local t = {}
 	local t_1 = {}
 	addSystemInfoToArgs(t_1, { "maxMemory" })
@@ -55,7 +57,7 @@ return function(p1, p2)
 			t.client_capabilities = p2.clientCapabilities
 		end
 		if p2.hydrationStreamEnabled then
-			local var1 = buildSduiCollectionInfo("Small", uDim)
+			local var1 = buildSduiCollectionInfo("Small", uDim, if fFlagSduiPreferredTextSizeLineBudgets then 3 else nil)
 			t.collection_layout = p1.CollectionLayoutInfo.new({
 				items_per_row = var1.items_per_row,
 				rows_above_fold = var1.rows_above_fold

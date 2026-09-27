@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AppChatConversationTrustedFriendUpsellBanner3", false) and require(script.Parent.FFlagAppChatEnableDoubleOptIn)
+﻿return game:DefineFastFlag("AppChatConversationTrustedFriendUpsellBanner4", false) and require(script.Parent.FFlagAppChatEnableDoubleOptIn)

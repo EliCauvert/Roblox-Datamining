@@ -6,7 +6,6 @@ local useResponsive = require(parent.Foundation).Hooks.useResponsive
 local responsiveProvider = require(parent.Foundation).ResponsiveProvider
 local cryoModule = require(parent.Cryo)
 local luaAppInfoTableResponsiveProviderOverride = game:DefineFastFlag("LuaAppInfoTableResponsiveProviderOverride", false)
-local luaAppInfoTableResponsiveProviderOverride_1 = game:DefineFastFlag("LuaAppInfoTableWorkaroundGridJank2", false) and luaAppInfoTableResponsiveProviderOverride
 local breakpoint = foundationModule.Enums.Breakpoint
 
 local function buildColumnMajorChildren(p1, p2, p3)
@@ -31,14 +30,14 @@ local function buildColumnMajorChildren(p1, p2, p3)
 end
 
 return reactModule.memo(function(p4)
-	-- upvalues: luaAppInfoTableResponsiveProviderOverride_1 (ref), reactModule (ref), buildColumnMajorChildren (ref), foundationModule (ref), luaAppInfoTableResponsiveProviderOverride (ref), useResponsive (ref), cryoModule (ref), breakpoint (ref), useBreakpoint (ref), responsiveProvider (ref)
+	-- upvalues: luaAppInfoTableResponsiveProviderOverride (ref), reactModule (ref), buildColumnMajorChildren (ref), foundationModule (ref), luaAppInfoTableResponsiveProviderOverride (ref), useResponsive (ref), cryoModule (ref), breakpoint (ref), useBreakpoint (ref), responsiveProvider (ref)
 	local var3 = if p4.numColumns and p4.numColumns > 0 then p4.numColumns else 1
 	local var4 = nil
 	local var5 = nil
 	local var6 = nil
 	local var7 = nil
 	
-	if luaAppInfoTableResponsiveProviderOverride_1 then
+	if luaAppInfoTableResponsiveProviderOverride then
 		local var8, var9 = reactModule.useState(false)
 		var4 = var8
 		var5 = var9
@@ -49,7 +48,7 @@ return reactModule.memo(function(p4)
 	local t = {}
 	local var12 = 12 / var3
 	
-	if not luaAppInfoTableResponsiveProviderOverride_1 or var4 then
+	if not luaAppInfoTableResponsiveProviderOverride or var4 then
 		if var3 > 1 then
 			t = buildColumnMajorChildren(p4.items, var3, var12)
 		else
@@ -79,7 +78,7 @@ return reactModule.memo(function(p4)
 			})
 		})
 	end
-	if luaAppInfoTableResponsiveProviderOverride_1 then
+	if luaAppInfoTableResponsiveProviderOverride then
 		local _, var15 = useBreakpoint(var6)
 		reactModule.useEffect(function()
 			-- upvalues: var15 (ref), var5 (write)

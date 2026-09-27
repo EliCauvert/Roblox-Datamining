@@ -22,6 +22,8 @@ local completeRequestModule = require(purchasePrompt.Thunks.completeRequest)
 local getPlayerPriceModule = require(purchasePrompt.Utils.getPlayerPrice)
 local hasPendingRequestModule = require(purchasePrompt.Utils.hasPendingRequest)
 local getPaymentPlatformModule = require(purchasePrompt.Utils.getPaymentPlatform)
+local isEligibleForRobuxUpsellPlusButtonModule = require(purchasePrompt.Utils.isEligibleForRobuxUpsellPlusButton)
+local selectPriceModule = require(purchasePrompt.Selectors.selectPrice)
 local getUpsellFlowModule = require(purchasePrompt.NativeUpsell.getUpsellFlow)
 local thunkModule = require(purchasePrompt.Thunk)
 local fFlagAXMISWithBlackbird = require(purchasePrompt.Parent.SharedFlags).FFlagAXMISWithBlackbird
@@ -34,11 +36,13 @@ local upsellAccountBalanceRetryIntervalSec = game:DefineFastInt("UpsellAccountBa
 local list = { analyticsModule, networkModule, externalSettingsModule }
 
 local function restartUpsell(p1, _, p2, p3, p4)
-	-- upvalues: getRobuxUpsellSuggestionsModule (ref), hasPendingRequestModule (ref), promptNativeUpsellSuggestionsModule (ref), sendCounterModule (ref), counterModule (ref), setPromptStateModule (ref), promptStateModule (ref)
-	return getRobuxUpsellSuggestionsModule(p2, p3, p4):andThen(function(p5)
+	-- upvalues: getRobuxUpsellSuggestionsModule (ref), isEligibleForRobuxUpsellPlusButtonModule (ref), selectPriceModule (ref), hasPendingRequestModule (ref), promptNativeUpsellSuggestionsModule (ref), sendCounterModule (ref), counterModule (ref), setPromptStateModule (ref), promptStateModule (ref)
+	local state = p1:getState()
+	
+	return getRobuxUpsellSuggestionsModule(p2, p3, p4, isEligibleForRobuxUpsellPlusButtonModule(state.isUserEligibleForUnifiedPurchaseFlow, state.robloxSubscriptionProducts, state.productPayload, selectPriceModule(state), state.promptRequest.requestType)):andThen(function(p5)
 		-- upvalues: hasPendingRequestModule (copy), p1 (ref), promptNativeUpsellSuggestionsModule (copy), sendCounterModule (copy), counterModule (copy)
 		if hasPendingRequestModule(p1:getState()) then
-			p1:dispatch(promptNativeUpsellSuggestionsModule(p5.products, 1, p5.virtualItemBadgeType))
+			p1:dispatch(promptNativeUpsellSuggestionsModule(p5.products, 1, p5.virtualItemBadgeType, p5.experimentVariant))
 			p1:dispatch(sendCounterModule(counterModule.UpsellModalShownAgain))
 			
 			return

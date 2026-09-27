@@ -1,8 +1,10 @@
 ﻿local playersService = game:GetService("Players")
 local teleportService = game:GetService("TeleportService")
+local teamCreateUtilsModule = require(script.Parent.teamCreateUtils)
 local creatorAgentChatModule = require(script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent.DataHydration.CreatorAgentChat)
 local buildModeLaunchModule = require(script.Parent.BuildModeLaunch)
 local launchExperienceModule = require(script.Parent.launchExperience)
+local leaveExperienceModule = require(script.Parent.leaveExperience)
 local teleportToPlaceModule = require(script.Parent.teleportToPlace)
 local debug = creatorAgentChatModule.debug
 
@@ -27,7 +29,7 @@ local _ = function(p1)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: debug (ref), playersService (ref), teleportService (ref), buildModeLaunchModule (ref), teleportToPlaceModule (ref), launchExperienceModule (ref)
+	-- upvalues: debug (ref), teamCreateUtilsModule (ref), playersService (ref), teleportService (ref), buildModeLaunchModule (ref), teleportToPlaceModule (ref), leaveExperienceModule (ref), launchExperienceModule (ref)
 	local var1 = if p3 and p3.currentPlaceId ~= nil then p3.currentPlaceId else game.PlaceId
 	local var2 = if p3 then p3.isTeamTest else nil
 	debug.log("info", "playtestExperience", {
@@ -36,41 +38,48 @@ return function(p1, p2, p3)
 		currentPlaceId = var1,
 		source = p2
 	})
+	local var3 = teamCreateUtilsModule.isViewer()
+	local var4 = var1 ~= 0 and var1 == p1
 	
-	if not (var1 ~= 0 and var1 == p1) then
-		launchExperienceModule(p1, p2, var2)
+	if var4 and not var3 then
+		var4 = nil
 		
-		return "experience_launch"
-	end
-	local var3 = nil
-	
-	if p3 and p3.onTeleportFailed then
-		local onTeleportFailed = p3.onTeleportFailed
-		
-		local var4 = function()
-			-- upvalues: var3 (write), onTeleportFailed (ref)
-			if var3 then
-				var3()
-				var3 = nil
+		if p3 and p3.onTeleportFailed then
+			local onTeleportFailed = p3.onTeleportFailed
+			
+			local var5 = function()
+				-- upvalues: var4 (write), onTeleportFailed (ref)
+				if var4 then
+					var4()
+					var4 = nil
+				end
+				onTeleportFailed()
 			end
-			onTeleportFailed()
+			
+			local localPlayer = playersService.LocalPlayer
+			local teleportInitFailedConnection = teleportService.TeleportInitFailed:Connect(function(p4)
+				-- upvalues: localPlayer (ref), var5 (ref)
+				if p4 == localPlayer then
+					var5()
+				end
+			end)
+			
+			var4 = function()
+				-- upvalues: teleportInitFailedConnection (ref)
+				teleportInitFailedConnection:Disconnect()
+			end
 		end
+		buildModeLaunchModule:set()
+		teleportToPlaceModule(p1)
 		
-		local localPlayer = playersService.LocalPlayer
-		local teleportInitFailedConnection = teleportService.TeleportInitFailed:Connect(function(p4)
-			-- upvalues: localPlayer (ref), var4 (ref)
-			if p4 == localPlayer then
-				var4()
-			end
+		return "teleport_pending"
+	elseif var3 then
+		leaveExperienceModule(function()
+			-- upvalues: launchExperienceModule (copy), p1 (ref), p2 (ref), var2 (ref)
+			launchExperienceModule(p1, p2, var2)
 		end)
-		
-		var3 = function()
-			-- upvalues: teleportInitFailedConnection (ref)
-			teleportInitFailedConnection:Disconnect()
-		end
+	else
+		launchExperienceModule(p1, p2, var2)
 	end
-	buildModeLaunchModule:set()
-	teleportToPlaceModule(p1)
-	
-	return "teleport_pending"
+	return "experience_launch"
 end

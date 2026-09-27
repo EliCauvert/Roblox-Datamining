@@ -6,11 +6,11 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 	local _ = require(parent.MomentsTypes)
 	local reactModule = require(parent.React)
 	local text = require(parent.AppCommonLib).Text
-	local plainTextAutomaticSizeModule = require(script.Parent.PlainTextAutomaticSize)
-	local assetCardTempAutomaticSizeModule = require(script.Parent.AssetCardTempAutomaticSize)
+	local plainTextModule = require(script.Parent.PlainText)
+	local assetCardModule = require(script.Parent.AssetCard)
 	local hiddenMessageModule = require(script.Parent.HiddenMessage)
 	local enumMessageTypesModule = require(appChat.Components.ChatConversation.EnumMessageTypes)
-	local chatMessageContainerAutomaticSizeModule = require(script.Parent.ChatMessageContainerAutomaticSize)
+	local chatMessageContainerModule = require(script.Parent.ChatMessageContainer)
 	local loggerModule = require(script.Parent.Logger)
 	local pruneConsecutiveNewLines = require(appChat.SocialLibraries).Utils.pruneConsecutiveNewLines
 	local getModeratedMaskTextModule = require(appChat.Utils.getModeratedMaskText)
@@ -24,12 +24,12 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 		[enumMessageTypesModule.PlainText] = {
 			name = "PlainText",
 			paddingOffset = 0,
-			component = plainTextAutomaticSizeModule
+			component = plainTextModule
 		},
 		[enumMessageTypesModule.Link] = {
 			name = "AssetCard",
 			paddingOffset = 0,
-			component = assetCardTempAutomaticSizeModule
+			component = assetCardModule
 		}
 	}
 	local t_1 = {
@@ -89,7 +89,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 	}
 	
 	return function(p1)
-		-- upvalues: cryoModule (ref), t_2 (ref), fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), useTokens (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), text (ref), messageModelModule (ref), t_1 (ref), t (ref), pruneConsecutiveNewLines (ref), loggerModule (ref), view (ref), chatMessageContainerAutomaticSizeModule (ref), image (ref)
+		-- upvalues: cryoModule (ref), t_2 (ref), fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), useTokens (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), text (ref), messageModelModule (ref), t_1 (ref), t (ref), pruneConsecutiveNewLines (ref), loggerModule (ref), view (ref), chatMessageContainerModule (ref), image (ref)
 		local var1 = cryoModule.Dictionary.union(t_2, p1)
 		
 		local function _(p2)
@@ -135,7 +135,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 		local fontSize_1 = var2.Typography.BodySmall.FontSize
 		
 		if var4 then
-			return reactModule.createElement(chatMessageContainerAutomaticSizeModule, cryoModule.Dictionary.union(var1, {
+			return reactModule.createElement(chatMessageContainerModule, cryoModule.Dictionary.union(var1, {
 				messageMaxWidth = var5,
 				messageTypePaddingOffset = var4.paddingOffset,
 				messageId = var1.messageId,

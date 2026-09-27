@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("PushNotificationsUpsellHomePromptsExperiment", false) and require(script.Parent.FFlagPushNotificationsUpsellPassClientAttributesToPrompts)

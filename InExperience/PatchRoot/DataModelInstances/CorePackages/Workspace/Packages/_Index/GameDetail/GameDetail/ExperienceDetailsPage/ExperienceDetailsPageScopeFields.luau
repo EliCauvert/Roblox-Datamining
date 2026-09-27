@@ -1,5 +1,6 @@
 ﻿return {
 	FilterPlayWithReward = "filterPlayWithReward",
 	IsTenFoot = "isTenFoot",
-	ContainerWidth = "containerWidth"
+	ContainerWidth = "containerWidth",
+	HideCloseButtonOnHeader = "hideCloseButtonOnHeader"
 }

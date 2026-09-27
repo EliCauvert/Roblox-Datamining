@@ -1,17 +1,15 @@
 ﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local _ = require(parent.Signals)
+local _ = require(sduiCoreSystem.Parent.Signals)
 local propResultCategory = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 local buildDefaultPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildDefaultProp)
 local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local _ = require(sduiCoreSystem.ClientBinding.SduiDataBindingContentType)
 local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 local sduiClientBindingParsersModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiClientBindingParsers)
-local fFlagSduiStringPropToString = require(parent.SharedFlags).FFlagSduiStringPropToString
 
 local function buildStringProp(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: fFlagSduiStringPropToString (ref), sduiClientBindingParsersModule (ref), propResultCategory (ref), sduiPropUtilsModule (ref), buildDefaultPropModule (ref), buildStringProp (ref)
-	p7 = p7 or (if fFlagSduiStringPropToString then sduiClientBindingParsersModule.parseToString else nil)
+	-- upvalues: sduiClientBindingParsersModule (ref), propResultCategory (ref), sduiPropUtilsModule (ref), buildDefaultPropModule (ref), buildStringProp (ref)
+	p7 = p7 or sduiClientBindingParsersModule.parseToString
 	
 	if p1 == "translation" then
 		local var1 = p5.resolveLocalizedLiteral(p2)

@@ -4,7 +4,7 @@ local loginByPhoneModule = require(authCommon.Thunks.LoginByPhone)
 local loginByUsernameModule = require(authCommon.Thunks.LoginByUsername)
 local isStringEmailModule = require(authCommon.Utils.isStringEmail)
 local isStringPhoneModule = require(authCommon.Utils.isStringPhone)
-local var1 = game:GetService("GuiService"):IsTenFootInterface()
+local var1 = require(authCommon.Parent.AppCommonLib).isTenFootInterface()
 
 return function(p1, p2, p3, p4, p5, p6, p7, p8, p9)
 	-- upvalues: isStringEmailModule (ref), var1 (ref), loginByEmailModule (ref), isStringPhoneModule (ref), loginByPhoneModule (ref), loginByUsernameModule (ref)

@@ -17,7 +17,9 @@ return function(p1)
 				return {
 					chatLandingListCount = var3.chatLandingListCount,
 					pendingConversationCount = var3.pendingConversationCount,
-					unfilteredConversationCount = var3.unfilteredConversationCount
+					unfilteredConversationCount = var3.unfilteredConversationCount,
+					searchSessionId = var3.searchSessionId,
+					activeFilters = var3.activeFilters
 				}
 			end, { var1 })
 		}, p1.children)

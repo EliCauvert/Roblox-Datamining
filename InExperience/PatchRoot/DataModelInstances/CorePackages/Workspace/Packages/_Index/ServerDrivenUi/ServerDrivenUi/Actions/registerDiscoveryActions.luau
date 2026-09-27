@@ -1,15 +1,16 @@
 ﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
 local parent = serverDrivenUi.Parent
 local fFlagLuaAppSduiUpdateUserSettingsAction = require(parent.SharedFlags).FFlagLuaAppSduiUpdateUserSettingsAction
+local fFlagMoveSduiUpdateUserSettingsToAccountManagement = require(parent.SharedFlags).FFlagMoveSduiUpdateUserSettingsToAccountManagement
 local fFlagSduiOpenSearchResultsTabAction = require(parent.SharedFlags).FFlagSduiOpenSearchResultsTabAction
 local fFlagLuaAppSduiOpenSearchResultsWithQueryAction = require(parent.SharedFlags).FFlagLuaAppSduiOpenSearchResultsWithQueryAction
+local fFlagLuaAppSduiOpenExternalLinkAction = require(parent.SharedFlags).FFlagLuaAppSduiOpenExternalLinkAction
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local getSduiActionHandlerRegistry = sduiCoreSystemModule.getSduiActionHandlerRegistry
 local fFlagSduiActionsUpdateFiresOwnTelemetry = require(parent.SharedFlags).FFlagSduiActionsUpdateFiresOwnTelemetry
 local fFlagSduiCommunitySectionSupport = require(parent.SharedFlags).FFlagSduiCommunitySectionSupport
 local fFlagSduiDevStoreSeeAllSupport = require(parent.SharedFlags).FFlagSduiDevStoreSeeAllSupport
-local fFlagSduiLaunchExperienceAction = require(parent.SharedFlags).FFlagSduiLaunchExperienceAction
 local fFlagLuaAppUnlockUpsellSupport = require(parent.SharedFlags).FFlagLuaAppUnlockUpsellSupport
 local fFlagRobloxPlusFAEFreeTrial = require(parent.SharedFlags).FFlagRobloxPlusFAEFreeTrial
 local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
@@ -19,7 +20,7 @@ local fFlagLuaAppSduiHomePageSupport = require(parent.SharedFlags).FFlagLuaAppSd
 local fFlagLuaAppSduiGameTileFeedback = require(parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 
 return function()
-	-- upvalues: sduiActionType (ref), serverDrivenUi (ref), fFlagRobloxPlusFAEFreeTrial (ref), fFlagSduiActionsUpdateFiresOwnTelemetry (ref), fFlagSduiOpenSearchResultsTabAction (ref), fFlagLuaAppSduiOpenSearchResultsWithQueryAction (ref), fFlagLuaAppUnlockUpsellSupport (ref), fFlagSduiAiOverviewEnabled (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagLuaAppSduiUpdateUserSettingsAction (ref), fFlagSduiLaunchExperienceAction (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref), fFlagSduiPinShortcutAction (ref), fFlagSduiCommunitySectionSupport (ref), getSduiActionHandlerRegistry (ref)
+	-- upvalues: sduiActionType (ref), serverDrivenUi (ref), fFlagRobloxPlusFAEFreeTrial (ref), fFlagSduiActionsUpdateFiresOwnTelemetry (ref), fFlagSduiOpenSearchResultsTabAction (ref), fFlagLuaAppSduiOpenSearchResultsWithQueryAction (ref), fFlagLuaAppSduiOpenExternalLinkAction (ref), fFlagLuaAppUnlockUpsellSupport (ref), fFlagSduiAiOverviewEnabled (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagLuaAppSduiUpdateUserSettingsAction (ref), fFlagMoveSduiUpdateUserSettingsToAccountManagement (ref), parent (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref), fFlagSduiPinShortcutAction (ref), fFlagSduiCommunitySectionSupport (ref), getSduiActionHandlerRegistry (ref)
 	getSduiActionHandlerRegistry().registerActionHandlerConfigs({
 		[sduiActionType.DismissDialog] = {
 			skipUnifiedLogging = false,
@@ -122,6 +123,13 @@ return function()
 				return require(serverDrivenUi.Actions.TelemetryHandlers.SduiOpenSearchResultsWithQueryTelemetryHandler)
 			end
 		} else nil,
+		[sduiActionType.OpenExternalLink] = if fFlagLuaAppSduiOpenExternalLinkAction then {
+			skipUnifiedLogging = false,
+			lazyHandler = function()
+				-- upvalues: serverDrivenUi (copy)
+				return require(serverDrivenUi.Actions.SduiOpenExternalLinkAction)
+			end
+		} else nil,
 		[sduiActionType.OpenSocialLink] = {
 			skipUnifiedLogging = true,
 			lazyHandler = function()
@@ -212,11 +220,11 @@ return function()
 				return require(serverDrivenUi.Actions.SduiOpenMarketplaceTryOnAction)
 			end
 		},
-		[sduiActionType.UpdateUserSettings] = if fFlagLuaAppSduiUpdateUserSettingsAction then {
+		[sduiActionType.UpdateUserSettings] = if fFlagLuaAppSduiUpdateUserSettingsAction and not fFlagMoveSduiUpdateUserSettingsToAccountManagement then {
 			skipUnifiedLogging = false,
 			lazyHandler = function()
-				-- upvalues: serverDrivenUi (copy)
-				return require(serverDrivenUi.Actions.SduiUpdateUserSettingsAction)
+				-- upvalues: parent (copy)
+				return require(parent.SettingsSdui).getSduiUpdateUserSettingsAction()
 			end
 		} else nil,
 		[sduiActionType.PlayButtonClick] = {
@@ -260,13 +268,13 @@ return function()
 				return require(serverDrivenUi.Actions.SduiOpenGameInviteAction)
 			end
 		},
-		[sduiActionType.LaunchExperience] = if fFlagSduiLaunchExperienceAction then {
+		[sduiActionType.LaunchExperience] = {
 			firesOwnTelemetry = false,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiLaunchExperienceAction)
 			end
-		} else nil,
+		},
 		[sduiActionType.OpenChartsSortDetail] = {
 			skipUnifiedLogging = false,
 			lazyHandler = function()

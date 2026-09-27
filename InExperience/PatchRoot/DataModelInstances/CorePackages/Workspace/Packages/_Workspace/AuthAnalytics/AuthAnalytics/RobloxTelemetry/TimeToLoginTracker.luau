@@ -60,13 +60,6 @@ local function createTimeToLoginTracker(p1, p2, p3, p4)
 		return p2() - p5.startTimeMillis
 	end
 	
-	local _ = function(p5)
-		-- upvalues: p2 (ref)
-		local var1 = p2() - p5.startTimeMillis
-		
-		return var1 >= 0 and var1 <= 600000
-	end
-	
 	local _ = function(p5, p6)
 		-- upvalues: p1 (ref), telemetryConfigsModule (copy)
 		p1:logRobloxTelemetryCounter(telemetryConfigsModule.TimeToLoginInvalidDurationConfig, 1, { loginType = p5.loginType, reason = p6 })
@@ -74,16 +67,9 @@ local function createTimeToLoginTracker(p1, p2, p3, p4)
 	
 	return {
 		start = function(p5, p6)
-			-- upvalues: readPendingAttempt (ref), p2 (ref), p3 (ref), p4 (ref)
-			if p5 == nil or p5 == "" then return end
-			local var1 = readPendingAttempt()
-			
-			if var1 ~= nil then
-				local var2 = p2() - var1.startTimeMillis
-				
-				if var2 >= 0 and var2 <= 600000 then
-					return
-				end
+			-- upvalues: p2 (ref), p3 (ref), p4 (ref)
+			if p5 == nil or p5 == "" then
+				return
 			end
 			local t = {
 				twoStepVerification = false,

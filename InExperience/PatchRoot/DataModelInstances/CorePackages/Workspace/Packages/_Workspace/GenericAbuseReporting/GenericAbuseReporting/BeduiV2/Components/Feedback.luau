@@ -8,6 +8,7 @@ local feedbackAlert = foundationModule.FeedbackAlert
 local view = foundationModule.View
 local telemetryEventType = require(genericAbuseReporting.BeduiV2.Analytics.analyticsService).TelemetryEventType
 local useAbuseReportAnalytics = require(genericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).useAbuseReportAnalytics
+local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 local var1 = motionModule.createState({
 	groupTransparency = 1,
 	sizeY = 0,
@@ -23,18 +24,21 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: motionModule (ref), var1 (ref), reactModule (ref), useAbuseReportAnalytics (ref), t (ref), telemetryEventType (ref), view (ref), feedbackAlert (ref), alertSeverity (ref)
+	-- upvalues: motionModule (ref), var1 (ref), reactModule (ref), useAbuseReportAnalytics (ref), t (ref), telemetryEventType (ref), fFlagAbuseReportImproveErrorEventsModule (ref), view (ref), feedbackAlert (ref), alertSeverity (ref)
 	local var2 = motionModule.usePresence()
 	local var3, var4 = motionModule.useMotion(var1)
 	local var5 = reactModule.useRef(0)
 	local var6 = reactModule.useRef(var2.isPresent)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
 	reactModule.useEffect(function()
-		-- upvalues: t (copy), p1 (ref), sendEvent (ref), telemetryEventType (copy)
+		-- upvalues: t (copy), p1 (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy)
 		if not t[p1.severity] then
 			sendEvent({
 				sub_event_type = telemetryEventType.Error,
-				error_detail = {
+				error_detail = if fFlagAbuseReportImproveErrorEventsModule then {
+					error_message = "feedback missing correct severity",
+					error_metadata = { received_severity = p1.severity }
+				} else {
 					error_message = "feedback missing correct severity, received type: " .. tostring(p1.severity)
 				}
 			})

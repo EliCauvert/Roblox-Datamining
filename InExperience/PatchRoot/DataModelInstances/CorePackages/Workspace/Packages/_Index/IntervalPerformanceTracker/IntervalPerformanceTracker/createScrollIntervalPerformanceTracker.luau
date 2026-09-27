@@ -3,7 +3,7 @@ local intervalPerformanceTrackerModule = require(script.Parent.IntervalPerforman
 local list = {
 	"duration", "averageFPS", "framesCount", "longestFrameTime", "frameTimeAvgMs",
 	"frameTimeStdDevMs", "frameTimeDistributionMs", "frameBuckets",
-	"rawFrameTimesMs"
+	"rawFrameTimesMs", "rawScrollPositionSamplesCsv"
 }
 
 return function(p1, p2, p3, p4)
@@ -36,7 +36,7 @@ return function(p1, p2, p3, p4)
 	end
 	
 	return scrollIntervalTrackerModule.createScrollIntervalTracker(function(_)
-		-- upvalues: intervalPerformanceTrackerModule (copy), p1 (ref), var1 (ref), var2 (ref), var3 (ref), var7 (write), var5 (ref), var6 (ref)
+		-- upvalues: intervalPerformanceTrackerModule (copy), p1 (ref), var1 (ref), var2 (ref), var3 (ref), var7 (write), var5 (ref), var6 (ref), p2 (ref)
 		local var9
 		local var10 = nil
 		local var11 = if var7 then "warm" else "cold"
@@ -54,7 +54,7 @@ return function(p1, p2, p3, p4)
 		else
 			var9 = var6
 		end
-		intervalPerformanceTrackerModule:startTracking(p1, var10, var1, var2, var3, var9)
+		intervalPerformanceTrackerModule:startTracking(p1, var10, var1, var2, var3, var9, p2)
 		var7 = true
 		
 		return true

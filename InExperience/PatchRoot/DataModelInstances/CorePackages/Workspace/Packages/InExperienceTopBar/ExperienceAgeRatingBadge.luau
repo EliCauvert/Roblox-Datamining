@@ -1,0 +1,1 @@
+﻿return require(script.Parent.Parent._Workspace.InExperienceTopBar.InExperienceTopBar.Components.ExperienceAgeRatingBadge.ExperienceAgeRatingBadgeContainer)

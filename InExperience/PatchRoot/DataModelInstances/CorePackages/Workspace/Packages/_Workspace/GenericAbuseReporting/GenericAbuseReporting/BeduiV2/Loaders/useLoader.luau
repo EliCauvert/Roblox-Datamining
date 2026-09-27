@@ -1,9 +1,5 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
+﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 local loaderContextModule = require(script.Parent.LoaderContext)
-local fFlagAbuseReportDensifyResolvedArraysModule = require(genericAbuseReporting.Flags.FFlagAbuseReportDensifyResolvedArrays)
 
 local function _(p1)
 	return typeof(p1) == "table" and p1["$load"] ~= nil
@@ -107,41 +103,22 @@ end
 return {
 	useLoader = useLoader,
 	useListLoader = function(p3)
-		-- upvalues: useLoader (ref), reactModule (ref), fFlagAbuseReportDensifyResolvedArraysModule (ref), dashModule (ref)
+		-- upvalues: useLoader (ref)
 		local var1 = useLoader(p3)
 		
 		return {
-			data = reactModule.useMemo(function()
-				-- upvalues: var1 (ref), fFlagAbuseReportDensifyResolvedArraysModule (copy), dashModule (copy)
-				if not var1.data then
-					return nil
-				end
-				local data = var1.data
-				
-				return if fFlagAbuseReportDensifyResolvedArraysModule then data else dashModule.values(data)
-			end, { var1.data }),
+			data = var1.data,
 			loading = var1.loading,
 			error = var1.error,
 			retry = var1.retry
 		}
 	end,
 	useGroupedListLoader = function(p3)
-		-- upvalues: useLoader (ref), reactModule (ref), fFlagAbuseReportDensifyResolvedArraysModule (ref), dashModule (ref)
+		-- upvalues: useLoader (ref)
 		local var1 = useLoader(p3)
 		
 		return {
-			data = reactModule.useMemo(function()
-				-- upvalues: var1 (ref), fFlagAbuseReportDensifyResolvedArraysModule (copy), dashModule (copy)
-				if not var1.data then
-					return nil
-				end
-				local data = var1.data
-				
-				return if fFlagAbuseReportDensifyResolvedArraysModule then data else dashModule.map(dashModule.values(data), function(p4)
-					-- upvalues: dashModule (copy)
-					return if p4.items then dashModule.join(p4, { items = dashModule.values(p4.items) }) else p4
-				end)
-			end, { var1.data }),
+			data = var1.data,
 			loading = var1.loading,
 			error = var1.error,
 			retry = var1.retry

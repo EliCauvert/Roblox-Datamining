@@ -246,6 +246,8 @@ function name.render(p1)
 	t.onCartOfferAppliedChanged = if fFlagPurchasePromptCartPricingEnabledModule then props.onCartOfferAppliedChanged else nil
 	t.postPurchaseActions = if fFlagPurchasePromptCartPricingEnabledModule then props.postPurchaseActions else nil
 	t.setPostPurchaseActions = if fFlagPurchasePromptCartPricingEnabledModule then props.setPostPurchaseActions else nil
+	t.onRobloxPlusButtonActivated = props.onRobloxPlusButtonActivated
+	t.robloxPlusDiscountPercentage = props.robloxPlusDiscountPercentage
 	t.purchaseState = p1:getFlowState()
 	t.errorType = p1:getErrorType()
 	t.economicRestrictionError = props.economicRestrictionError

@@ -10,13 +10,11 @@ local getMeshMinMaxModule = require(parent.util.getMeshMinMax)
 local isMeshPartAccessoryModule = require(parent.util.isMeshPartAccessory)
 local getFFlagUGCValidateMeshMaxScaleModule = require(parent.flags.getFFlagUGCValidateMeshMaxScale)
 local getFIntUGCValidateMeshCenteringHundredsThresholdModule = require(parent.flags.getFIntUGCValidateMeshCenteringHundredsThreshold)
-local getFFlagUGCValidateMigrateMeshGeometryModule = require(parent.flags.getFFlagUGCValidateMigrateMeshGeometry)
 local legacyAccessoryCheckAvatarPartScaleType = game:DefineFastFlag("LegacyAccessoryCheckAvatarPartScaleType", false)
 local meshpartAccessoryCheckAvatarPartScaleType = game:DefineFastFlag("MeshpartAccessoryCheckAvatarPartScaleType", false)
 local UGCValidationScaleMinimumThousandths = game:DefineFastInt("UGCValidationScaleMinimumThousandths", 10)
 local fIntUGCValidationScaleMaximumThousandths = game:DefineFastInt("FIntUGCValidationScaleMaximumThousandths", 10000)
 local t = {
-	fflag = getFFlagUGCValidateMigrateMeshGeometryModule,
 	categories = {
 		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
 		validationEnumsModule.UploadCategory.RIGID_ACCESSORY

@@ -5,6 +5,7 @@ local parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
 local default = require(parent.LoggingProtocol).default
 local dashModule = require(parent.Dash)
 local isSpatial = require(parent.AppCommonLib).isSpatial
+local fFlagAXUnifiedEventCounters = require(parent.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
 
 local function getAXCounterV2Metadata(p1)
 	-- upvalues: userInputService (ref), isSpatial (ref), runService (ref), httpService (ref), dashModule (ref)
@@ -21,13 +22,13 @@ local function getAXCounterV2Metadata(p1)
 	return t
 end
 
-return function(p1, p2)
-	-- upvalues: default (ref), getAXCounterV2Metadata (ref)
+return function(p1, p2, p3)
+	-- upvalues: default (ref), getAXCounterV2Metadata (ref), fFlagAXUnifiedEventCounters (ref)
 	default:logRobloxTelemetryCounter({
 		description = "Counter to track various Avatar Experience events.",
 		links = "",
 		eventName = "AvatarExperience_" .. p1,
 		backends = { default.TelemetryBackends.Counter },
 		lastUpdated = { 2025, 10, 30 }
-	}, 1, getAXCounterV2Metadata(p2))
+	}, if fFlagAXUnifiedEventCounters then p3 or 1 else 1, getAXCounterV2Metadata(p2))
 end

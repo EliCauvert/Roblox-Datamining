@@ -6,13 +6,14 @@ local _ = require(parent.MomentsTypes)
 local _ = require(dataHydration.Moments.MomentsStoreTypes)
 local constructApiUrlModule = require(dataHydration.Moments.Util.constructApiUrl)
 local convertApiCommentToCommentModule = require(dataHydration.Moments.Util.convertApiCommentToComment)
+local fFlagEnableMomentsCommentReporting = require(parent.SharedFlags).FFlagEnableMomentsCommentReporting
 
 local function _(p1)
 	return `moment-comments-api/v1/moments/{p1}/comments`
 end
 
 local function decodeCommentsPage(p1)
-	-- upvalues: convertApiCommentToCommentModule (ref)
+	-- upvalues: convertApiCommentToCommentModule (ref), fFlagEnableMomentsCommentReporting (ref)
 	local t = {}
 	
 	if type(p1) == "table" and type(p1.comments) == "table" then
@@ -26,6 +27,7 @@ local function decodeCommentsPage(p1)
 	end
 	return {
 		comments = t,
+		channelId = if fFlagEnableMomentsCommentReporting and type(p1) == "table" and (type(p1.channelId) == "string" and p1.channelId ~= "") then p1.channelId else nil,
 		nextCursor = if type(p1) == "table" and type(p1.nextCursor) == "string" then p1.nextCursor else nil,
 		hasMore = type(p1) == "table" and p1.hasMore == true
 	}

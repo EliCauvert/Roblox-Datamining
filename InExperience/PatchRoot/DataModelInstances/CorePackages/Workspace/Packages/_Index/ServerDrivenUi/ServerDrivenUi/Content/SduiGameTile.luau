@@ -40,21 +40,21 @@ local sduiDefaultTileImageModule = require(serverDrivenUi.Content.SduiDefaultTil
 local fFlagSduiTileDisableLegacyHover = require(serverDrivenUi.Flags).FFlagSduiTileDisableLegacyHover
 local fFlagLuaAppResetHoverOnSduiPlayButtonActivation = require(parent.SharedFlags).FFlagLuaAppResetHoverOnSduiPlayButtonActivation
 local fFlagEnableGameJoinEarlyAccess = require(parent.SharedFlags).FFlagEnableGameJoinEarlyAccess
-local fFlagLuaAppSduiGameTileHoverShadow = require(parent.SharedFlags).FFlagLuaAppSduiGameTileHoverShadow
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local fFlagLuaAppSduiGameTileFeedback = require(parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 local fFlagLuaAppSduiGameTileMetadataFontStyle = require(parent.SharedFlags).FFlagLuaAppSduiGameTileMetadataFontStyle
 local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local sduiGameTileDisableDefaultPlayButtonOnHover = game:DefineFastFlag("SduiGameTileDisableDefaultPlayButtonOnHover", false)
+local fFlagSduiGameTileDirectAction = require(parent.SharedFlags).FFlagSduiGameTileDirectAction
 local var1 = if fFlagLuaAppSduiGameTileFeedback then signalsModule.createSignal(false) else nil
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), usePreferences (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppSduiGameTileHoverShadow (ref), reactModule (ref), useUidRefString (ref), fFlagLuaAppSduiGameTileFeedback (ref), var1 (write), getGameTileHiddenStore (ref), signalsModule (ref), signalsReactModule (ref), sduiErrors (ref), getInputModeStore (ref), sduiParseHelpers (ref), videoEndReason (ref), sduiParsers (ref), sduiActionType (ref), getOverflowMenuSignalStore (ref), default (ref), responsiveModule (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), sduiGameTileDisableDefaultPlayButtonOnHover (ref), sduiBuilder (ref), fFlagSduiFixSearchTelemetry (ref), findAnalyticsFieldInAncestors (ref), sduiPlayButton (ref), fFlagEnableGameJoinEarlyAccess (ref), localizeStrings (ref), discoveryAnalyticsModule (ref), sduiHoldToPlayModule (ref), sduiGameTileFooterModule (ref), fFlagLuaAppSduiGameTileMetadataFontStyle (ref), sduiTileOverflowMenu (ref), sduiDefaultTileImageModule (ref), sduiGameVideoThumbnailModule (ref), getSduiComponentWrapper (ref), sduiTileModule (ref), cryoModule (ref), zoomAnimatedFrame (ref), tileHoverShadowModule (ref)
+	-- upvalues: useTokens (ref), usePreferences (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiVideoThumbnail (ref), reactModule (ref), useUidRefString (ref), fFlagLuaAppSduiGameTileFeedback (ref), var1 (write), getGameTileHiddenStore (ref), signalsModule (ref), signalsReactModule (ref), sduiErrors (ref), getInputModeStore (ref), sduiParseHelpers (ref), videoEndReason (ref), sduiParsers (ref), sduiActionType (ref), getOverflowMenuSignalStore (ref), default (ref), responsiveModule (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), sduiGameTileDisableDefaultPlayButtonOnHover (ref), sduiBuilder (ref), fFlagSduiFixSearchTelemetry (ref), findAnalyticsFieldInAncestors (ref), sduiPlayButton (ref), fFlagEnableGameJoinEarlyAccess (ref), localizeStrings (ref), discoveryAnalyticsModule (ref), sduiHoldToPlayModule (ref), sduiGameTileFooterModule (ref), fFlagLuaAppSduiGameTileMetadataFontStyle (ref), sduiTileOverflowMenu (ref), fFlagSduiGameTileDirectAction (ref), sduiDefaultTileImageModule (ref), sduiGameVideoThumbnailModule (ref), getSduiComponentWrapper (ref), sduiTileModule (ref), cryoModule (ref), zoomAnimatedFrame (ref), tileHoverShadowModule (ref)
 	local var2 = useTokens()
 	local var3 = usePreferences()
 	local enableLegacyHoverState = not fFlagSduiTileDisableLegacyHover and p1.enableLegacyHoverState
 	local var4 = if fFlagLuaAppSduiVideoThumbnail then p1.sduiContext.videoPlaybackContext else nil
-	local var5 = if fFlagLuaAppSduiGameTileHoverShadow then reactModule.useRef(nil) else nil
+	local var5 = reactModule.useRef(nil)
 	local current = useUidRefString().current
 	local universeId = p1.universeId
 	local placeId = p1.placeId
@@ -302,7 +302,7 @@ return reactModule.memo(function(p1)
 		if sduiGameTileDisableDefaultPlayButtonOnHover then p1.disableDefaultPlayButtonOnHover else nil
 	})
 	local var26 = if fFlagSduiTileDisableLegacyHover then nil else reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: p1 (ref), reactModule (copy), var20 (ref), var21 (ref), fFlagLuaAppSduiGameTileHoverShadow (copy), var5 (write), var25 (ref)
+		-- upvalues: p1 (ref), reactModule (copy), var20 (ref), var21 (ref), var5 (ref), var25 (ref)
 		return if p1.enableLegacyHoverState then reactModule.createElement("Frame", {
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Position = UDim2.new(0, -p2, 0, -p2),
@@ -312,7 +312,7 @@ return reactModule.memo(function(p1)
 			BackgroundTransparency = 0,
 			[reactModule.Event.MouseEnter] = var20,
 			[reactModule.Event.MouseLeave] = var21,
-			ref = if fFlagLuaAppSduiGameTileHoverShadow then var5 else nil
+			ref = var5
 		}, {
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
@@ -372,6 +372,7 @@ return reactModule.memo(function(p1)
 		debugName = "SduiGameTile.OverflowMenu",
 		zIndex = 5,
 		componentConfig = p1.overflowMenuComponent,
+		directActionComponentConfig = if fFlagSduiGameTileDirectAction then p1.directActionComponent else nil,
 		isHovered = var15,
 		isSelected = var13,
 		menuKey = current,
@@ -460,7 +461,7 @@ return reactModule.memo(function(p1)
 		expansionOffsetBottom = xSmall,
 		reducedMotion = var3.reducedMotion
 	}, {
-		HoverShadow = if fFlagLuaAppSduiGameTileHoverShadow and var15 and ((if fFlagLuaAppSduiGameTileFeedback then not var9 else true) and var5) then reactModule.createElement(tileHoverShadowModule, {
+		HoverShadow = if var15 and (if fFlagLuaAppSduiGameTileFeedback then not var9 else true) and var5 then reactModule.createElement(tileHoverShadowModule, {
 			contentRef = var5,
 			hoverPadding = p1.containmentPadding,
 			containmentPadding = p1.containmentPadding

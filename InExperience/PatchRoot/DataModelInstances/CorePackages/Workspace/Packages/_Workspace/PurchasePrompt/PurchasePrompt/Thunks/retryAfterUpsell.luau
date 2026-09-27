@@ -22,6 +22,8 @@ local completeRequestModule = require(purchasePrompt.Thunks.completeRequest)
 local getPlayerPriceModule = require(purchasePrompt.Utils.getPlayerPrice)
 local hasPendingRequestModule = require(purchasePrompt.Utils.hasPendingRequest)
 local getPaymentPlatformModule = require(purchasePrompt.Utils.getPaymentPlatform)
+local isEligibleForRobuxUpsellPlusButtonModule = require(purchasePrompt.Utils.isEligibleForRobuxUpsellPlusButton)
+local selectPriceModule = require(purchasePrompt.Selectors.selectPrice)
 local getUpsellFlowModule = require(purchasePrompt.NativeUpsell.getUpsellFlow)
 local thunkModule = require(purchasePrompt.Thunk)
 local purchaseItemModule = require(script.Parent.purchaseItem)
@@ -39,11 +41,11 @@ if retryAfterUpsellV2 then
 	return retryAfterUpsellV2Module
 end
 local function retryAfterUpsell(p1)
-	-- upvalues: upsellAccountBalanceRetryAttemps (ref), thunkModule (ref), list (ref), analyticsModule (ref), networkModule (ref), externalSettingsModule (ref), getUpsellFlowModule (ref), requestTypeModule (ref), promptStateModule (ref), fFlagAXMISWithBlackbird (ref), purchaseCompleteRecievedModule (ref), completeRequestModule (ref), purchaseFlowModule (ref), setPromptStateModule (ref), getBalanceInfoModule (ref), getPlayerPriceModule (ref), hasPendingRequestModule (ref), balanceInfoRecievedModule (ref), getPaymentPlatformModule (ref), getRobuxUpsellSuggestionsModule (ref), promptNativeUpsellSuggestionsModule (ref), sendCounterModule (ref), counterModule (ref), upsellFlowModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), addUnifiedPurchaseRobuxUpsellCompletedTelemetry2 (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), purchaseItemModule (ref), upsellAccountBalanceRetryIntervalSec (ref), retryAfterUpsell (ref)
+	-- upvalues: upsellAccountBalanceRetryAttemps (ref), thunkModule (ref), list (ref), analyticsModule (ref), networkModule (ref), externalSettingsModule (ref), getUpsellFlowModule (ref), requestTypeModule (ref), promptStateModule (ref), fFlagAXMISWithBlackbird (ref), purchaseCompleteRecievedModule (ref), completeRequestModule (ref), purchaseFlowModule (ref), setPromptStateModule (ref), getBalanceInfoModule (ref), getPlayerPriceModule (ref), hasPendingRequestModule (ref), balanceInfoRecievedModule (ref), getPaymentPlatformModule (ref), getRobuxUpsellSuggestionsModule (ref), isEligibleForRobuxUpsellPlusButtonModule (ref), selectPriceModule (ref), promptNativeUpsellSuggestionsModule (ref), sendCounterModule (ref), counterModule (ref), upsellFlowModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), addUnifiedPurchaseRobuxUpsellCompletedTelemetry2 (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), purchaseItemModule (ref), upsellAccountBalanceRetryIntervalSec (ref), retryAfterUpsell (ref)
 	p1 = p1 or upsellAccountBalanceRetryAttemps
 	
 	return thunkModule.new(script.Name, list, function(p2, p3)
-		-- upvalues: analyticsModule (copy), networkModule (copy), externalSettingsModule (copy), getUpsellFlowModule (copy), requestTypeModule (copy), promptStateModule (copy), fFlagAXMISWithBlackbird (copy), purchaseCompleteRecievedModule (copy), completeRequestModule (copy), purchaseFlowModule (copy), setPromptStateModule (copy), getBalanceInfoModule (copy), getPlayerPriceModule (copy), hasPendingRequestModule (copy), balanceInfoRecievedModule (copy), getPaymentPlatformModule (copy), getRobuxUpsellSuggestionsModule (copy), promptNativeUpsellSuggestionsModule (copy), sendCounterModule (copy), counterModule (copy), upsellFlowModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), addUnifiedPurchaseRobuxUpsellCompletedTelemetry2 (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), purchaseItemModule (copy), p1 (write), upsellAccountBalanceRetryIntervalSec (copy), retryAfterUpsell (copy)
+		-- upvalues: analyticsModule (copy), networkModule (copy), externalSettingsModule (copy), getUpsellFlowModule (copy), requestTypeModule (copy), promptStateModule (copy), fFlagAXMISWithBlackbird (copy), purchaseCompleteRecievedModule (copy), completeRequestModule (copy), purchaseFlowModule (copy), setPromptStateModule (copy), getBalanceInfoModule (copy), getPlayerPriceModule (copy), hasPendingRequestModule (copy), balanceInfoRecievedModule (copy), getPaymentPlatformModule (copy), getRobuxUpsellSuggestionsModule (copy), isEligibleForRobuxUpsellPlusButtonModule (copy), selectPriceModule (copy), promptNativeUpsellSuggestionsModule (copy), sendCounterModule (copy), counterModule (copy), upsellFlowModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), addUnifiedPurchaseRobuxUpsellCompletedTelemetry2 (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), purchaseItemModule (copy), p1 (write), upsellAccountBalanceRetryIntervalSec (copy), retryAfterUpsell (copy)
 		local var1 = p3[analyticsModule]
 		local var2 = p3[networkModule]
 		local var3 = p3[externalSettingsModule]
@@ -67,7 +69,7 @@ local function retryAfterUpsell(p1)
 			p2:dispatch(setPromptStateModule(promptStateModule.PollingBalance))
 		end
 		return getBalanceInfoModule(var2, var3, false):andThen(function(p4)
-			-- upvalues: p2 (ref), getPlayerPriceModule (copy), hasPendingRequestModule (copy), balanceInfoRecievedModule (copy), purchaseFlow (ref), purchaseFlowModule (copy), var3 (ref), getPaymentPlatformModule (copy), getRobuxUpsellSuggestionsModule (copy), promptNativeUpsellSuggestionsModule (copy), sendCounterModule (copy), counterModule (copy), setPromptStateModule (copy), promptStateModule (copy), var4 (ref), upsellFlowModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), addUnifiedPurchaseRobuxUpsellCompletedTelemetry2 (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), purchaseItemModule (copy), p1 (copy), upsellAccountBalanceRetryIntervalSec (copy), retryAfterUpsell (copy), var1 (ref)
+			-- upvalues: p2 (ref), getPlayerPriceModule (copy), hasPendingRequestModule (copy), balanceInfoRecievedModule (copy), purchaseFlow (ref), purchaseFlowModule (copy), var3 (ref), getPaymentPlatformModule (copy), getRobuxUpsellSuggestionsModule (copy), isEligibleForRobuxUpsellPlusButtonModule (copy), selectPriceModule (copy), promptNativeUpsellSuggestionsModule (copy), sendCounterModule (copy), counterModule (copy), setPromptStateModule (copy), promptStateModule (copy), var4 (ref), upsellFlowModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), addUnifiedPurchaseRobuxUpsellCompletedTelemetry2 (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), purchaseItemModule (copy), p1 (copy), upsellAccountBalanceRetryIntervalSec (copy), retryAfterUpsell (copy), var1 (ref)
 			local state = p2:getState()
 			local var5 = getPlayerPriceModule(state.productInfo, state.accountInfo.membershipType == 4)
 			
@@ -75,6 +77,7 @@ local function retryAfterUpsell(p1)
 			local balance = state.accountInfo.balance
 			local robux = p4.robux
 			p2:dispatch(balanceInfoRecievedModule(p4))
+			local state_1 = p2:getState()
 			
 			if balance == robux then
 				if p1 > 0 then
@@ -106,10 +109,10 @@ local function retryAfterUpsell(p1)
 				
 				return
 			elseif purchaseFlow == purchaseFlowModule.LargeRobuxUpsell then
-				return getRobuxUpsellSuggestionsModule(var5, robux, getPaymentPlatformModule(var3.getPlatform())):andThen(function(p5)
+				return getRobuxUpsellSuggestionsModule(var5, robux, getPaymentPlatformModule(var3.getPlatform()), isEligibleForRobuxUpsellPlusButtonModule(state_1.isUserEligibleForUnifiedPurchaseFlow, state_1.robloxSubscriptionProducts, state_1.productPayload, selectPriceModule(state_1), state_1.promptRequest.requestType)):andThen(function(p5)
 					-- upvalues: hasPendingRequestModule (copy), p2 (copy), promptNativeUpsellSuggestionsModule (copy), sendCounterModule (copy), counterModule (copy)
 					if hasPendingRequestModule(p2:getState()) then
-						p2:dispatch(promptNativeUpsellSuggestionsModule(p5.products, 1, p5.virtualItemBadgeType))
+						p2:dispatch(promptNativeUpsellSuggestionsModule(p5.products, 1, p5.virtualItemBadgeType, p5.experimentVariant))
 						p2:dispatch(sendCounterModule(counterModule.UpsellModalShownAgain))
 						
 						return

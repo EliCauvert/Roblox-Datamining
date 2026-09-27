@@ -7,6 +7,7 @@ local convertApiMomentCommentsModule = require(dataHydration.Moments.Util.conver
 local fFlagMomentsStickerOverlayNormalizationModule = require(dataHydration.Moments.FFlagMomentsStickerOverlayNormalization)
 local fFlagMomentsRequireApiFeedItemIdModule = require(dataHydration.Moments.FFlagMomentsRequireApiFeedItemId)
 local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
+local fFlagEnableMomentsCommentReporting = sharedFlagsModule.FFlagEnableMomentsCommentReporting
 local momentStatus = momentsTypesModule.Enums.MomentStatus
 local builderSansMedium = Enum.Font.BuilderSansMedium
 local color3 = Color3.new(0, 0, 0)
@@ -190,7 +191,7 @@ local _ = function(p2)
 end
 
 local function convertApiMomentToMomentItem(p3)
-	-- upvalues: fFlagMomentsRequireApiFeedItemIdModule (ref), normalizeCaptureEdits (ref), momentStatus (ref), fFlagMomentsComments (ref), convertApiMomentCommentsModule (ref)
+	-- upvalues: fFlagMomentsRequireApiFeedItemIdModule (ref), normalizeCaptureEdits (ref), momentStatus (ref), fFlagEnableMomentsCommentReporting (ref), fFlagMomentsComments (ref), convertApiMomentCommentsModule (ref)
 	local captionedAssetMoment = p3.captionedAssetMoment
 	local owner = p3.owner
 	local entityId = p3.entityId or p3.id
@@ -205,6 +206,7 @@ local function convertApiMomentToMomentItem(p3)
 	local var11 = if (captionedAssetMoment.status or p3.status) == momentStatus.Deleted then momentStatus.Deleted else momentStatus.Public
 	local t = {
 		assetId = captionedAssetMoment.assetId,
+		channelId = if fFlagEnableMomentsCommentReporting and type(p3.channelId) == "string" and p3.channelId ~= "" then p3.channelId else nil,
 		creatorId = owner.id,
 		isModerated = captionedAssetMoment.isModerated
 	}

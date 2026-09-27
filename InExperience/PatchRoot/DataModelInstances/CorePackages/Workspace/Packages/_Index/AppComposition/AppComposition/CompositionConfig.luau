@@ -67,12 +67,12 @@ return {
 	end else nil,
 	getRegionOverrides = if fFlagEnableSplitPane then function(p1)
 		-- upvalues: regionName (ref)
-		return if p1 == regionName.SupportRegion then { widthScale = 0.33 } else nil
+		return if p1 == regionName.SupportRegion then { widthScale = 0.33, minWidth = 355 } else nil
 	end else nil,
 	getRegionLayout = if fFlagEnableSplitPane then function(p1, p2, p3)
 		-- upvalues: getBaseConfig (ref), regionName (ref)
 		local var1 = getBaseConfig(p2, p3)
-		local var2 = if p1 == regionName.SupportRegion then { widthScale = 0.33 } else nil
+		local var2 = if p1 == regionName.SupportRegion then { widthScale = 0.33, minWidth = 355 } else nil
 		
 		if var2 then
 			var1.width = var2.width

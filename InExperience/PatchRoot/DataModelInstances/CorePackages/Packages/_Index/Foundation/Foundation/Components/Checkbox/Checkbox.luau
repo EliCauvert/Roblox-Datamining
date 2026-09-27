@@ -38,7 +38,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		label = {
 			text = var1.label,
 			position = constantsModule.INPUT_PLACEMENT_TO_LABEL_ALIGNMENT[var1.placement],
-			hint = if flagsModule.FoundationCheckboxBeta then var1.hint else nil
+			hint = var1.hint
 		},
 		customVariantProps = var2.input,
 		size = var1.size,

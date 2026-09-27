@@ -11,54 +11,39 @@ local createDataResolverModule = require(dataHydration.createDataResolver)
 local _ = require(dataHydration.DataHydrationTypes)
 local _ = require(script.Parent.CommunityUserMembershipStoreTypes)
 local requestJoinCommunityModule = require(script.Parent.requestJoinCommunity)
-local fFlagLuaAppDataHydrationOptimisticMutationLayer = require(parent.SharedFlags).FFlagLuaAppDataHydrationOptimisticMutationLayer
 local groups_url = `{url.GROUPS_URL}v1/groups/`
 
 return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), signalsModule (ref), requestJoinCommunityModule (ref), logResponseError (ref), groups_url (ref), discoveryEventErrorLogger (ref)
+	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), signalsModule (ref), requestJoinCommunityModule (ref), logResponseError (ref), groups_url (ref), discoveryEventErrorLogger (ref)
 	local var1 = createDataCacheModule()
 	local var2 = createDataResolverModule({
+		supportsMutations = true,
 		cache = var1,
 		fetchFn = function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve({})
-		end,
-		supportsMutations = fFlagLuaAppDataHydrationOptimisticMutationLayer
+		end
 	})
 	
 	local function applyOptimisticMembership(p1)
-		-- upvalues: signalsModule (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var2 (ref), var1 (ref)
+		-- upvalues: signalsModule (copy), var2 (ref)
 		local var3, var4 = signalsModule.createSignal(nil)
-		local canJoin = nil
+		var2.setMutation(p1, { canJoin = false })
 		
-		if fFlagLuaAppDataHydrationOptimisticMutationLayer then
-			var2.setMutation(p1, { canJoin = false })
-		else
-			local item = var1.getItem(p1)
-			local var5 = item and item.data(false)
-			canJoin = var5 and var5.canJoin
-			var1.updateItem(p1, { canJoin = false })
-		end
 		return var3, function(p2)
-			-- upvalues: fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var2 (copy), p1 (ref), var1 (copy), canJoin (write), var4 (ref)
-			local var6 = p2 and p2.type == "error"
-			
-			if fFlagLuaAppDataHydrationOptimisticMutationLayer then
-				if var6 then
-					var2.clearMutation(p1)
-				else
-					var2.commitMutation(p1)
-				end
-			elseif var6 then
-				var1.updateItem(p1, { canJoin = canJoin })
+			-- upvalues: var2 (copy), p1 (ref), var4 (ref)
+			if p2 and p2.type == "error" then
+				var2.clearMutation(p1)
+			else
+				var2.commitMutation(p1)
 			end
 			var4(p2)
 		end
 	end
 	
 	return {
-		getMembership = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var2.getOptimisticCachedItem else var2.getCachedItem,
-		getMemberships = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var2.getOptimisticCachedItems else var2.getCachedItems,
+		getMembership = var2.getOptimisticCachedItem,
+		getMemberships = var2.getOptimisticCachedItems,
 		updateMembership = var1.updateItem,
 		updateMemberships = var1.updateItems,
 		joinCommunity = function(p1)

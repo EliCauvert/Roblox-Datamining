@@ -1,10 +1,12 @@
 ﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local parent = avatarExperienceInspectAndBuy.Parent
 local _ = require(avatarExperienceInspectAndBuy.Types)
-local tutilsModule = require(avatarExperienceInspectAndBuy.Parent.tutils)
+local tutilsModule = require(parent.tutils)
 local itemTypeEnum = require(avatarExperienceInspectAndBuy.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local fFlagAXMarketplaceLicensingItemCards = require(parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemCards
 
 return function(p1, p2)
-	-- upvalues: tutilsModule (ref), itemTypeEnum (ref)
+	-- upvalues: tutilsModule (ref), itemTypeEnum (ref), fFlagAXMarketplaceLicensingItemCards (ref)
 	local t = {
 		id = p1.assetId,
 		name = p1.name,
@@ -17,6 +19,7 @@ return function(p1, p2)
 			creatorName = p1.creatorName or "",
 			creatorHasVerifiedBadge = p1.creatorHasVerifiedBadge or false
 		},
+		itemLicensingInfo = if fFlagAXMarketplaceLicensingItemCards then p1.itemLicensingInfo else nil,
 		saleLocationType = p1.saleLocationType,
 		itemRestrictions = p1.itemRestrictions or {},
 		priceInRobux = p1.price,

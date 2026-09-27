@@ -4,8 +4,6 @@ local expChatSharedModule = require(parent.ExpChatShared)
 local sharedFlagsModule = require(parent.SharedFlags)
 local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
 local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
-local universeChatSystemMessageAddedModule = require(expChat.Actions.UniverseChatSystemMessageAdded)
-local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
 local analytics = expChatSharedModule.Analytics
 local fFlagExpChatReportVirtualCommandTelemetry = expChatSharedModule.Flags.FFlagExpChatReportVirtualCommandTelemetry
@@ -13,7 +11,7 @@ local context = expChatSharedModule.context
 local var1 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
 return function(p1, p2, p3, p4)
-	-- upvalues: context (ref), var1 (ref), fFlagExpChatReportVirtualCommandTelemetry (ref), analytics (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), universeChatSystemMessageAddedModule (ref)
+	-- upvalues: context (ref), var1 (ref), fFlagExpChatReportVirtualCommandTelemetry (ref), analytics (ref), getMessagesStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref)
 	if not context.translator then
 		var1:warning("context.translator is nil, cannot execute command")
 		
@@ -26,7 +24,7 @@ return function(p1, p2, p3, p4)
 					analytics:reportTextChatCommandClientSent(v.name)
 				end
 				task.spawn(function()
-					-- upvalues: v (ref), context (copy), p2 (ref), p1 (ref), fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy), p4 (ref), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), universeChatSystemMessageAddedModule (copy)
+					-- upvalues: v (ref), context (copy), p2 (ref), p1 (ref), getMessagesStoreModule (copy), p4 (ref), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy)
 					local var2 = v.clientRun(context.store, p2, p1, context)
 					
 					if var2 ~= nil then
@@ -44,16 +42,10 @@ return function(p1, p2, p3, p4)
 							joined = table.concat(t, "\n")
 						end
 						if joined then
-							if fFlagExpChatUseMessagesStore then
-								getMessagesStoreModule(false).addSystemMessage(joined, p4, var2.metadata)
-								
-								if fFlagExpChatUseChannelTabsStore then
-									getChannelTabsStoreModule(false).markChannelUnread(p4)
-									
-									return
-								end
-							else
-								context.store:dispatch(universeChatSystemMessageAddedModule(joined, p4, var2.metadata))
+							getMessagesStoreModule(false).addSystemMessage(joined, p4, var2.metadata)
+							
+							if fFlagExpChatUseChannelTabsStore then
+								getChannelTabsStoreModule(false).markChannelUnread(p4)
 							end
 						end
 					end

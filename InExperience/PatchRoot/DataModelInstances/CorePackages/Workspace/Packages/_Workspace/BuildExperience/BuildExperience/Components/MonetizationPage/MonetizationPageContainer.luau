@@ -15,8 +15,10 @@ local mapDeveloperProductsToMonetizationProductsModule = require(script.Parent.m
 local useMonetizationPageViewModelModule = require(script.Parent.useMonetizationPageViewModel)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
+local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
-local fFlagBuildExperienceManageDevProduct = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct) or fFlagBuildExperienceMonetizationNativeUIModule
+local fFlagBuildExperienceMonetizationProductEditingModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationProductEditing)
+local fFlagBuildExperienceManageDevProductModule_1 = fFlagBuildExperienceManageDevProductModule or fFlagBuildExperienceMonetizationNativeUIModule
 local var1 = signalsModule.createSignal(nil)
 local var2 = signalsModule.createSignal(nil)
 local var3 = signalsModule.createSignal(nil)
@@ -34,7 +36,7 @@ local var7 = signalsModule.createComputed(function()
 end)
 
 return function(p1)
-	-- upvalues: reactModule (ref), localizationModule (ref), localizationStringsModule (ref), var6 (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), var7 (ref), signalsReactModule (ref), universeConfigurationModule (ref), var2 (ref), notReady (ref), var3 (ref), var4 (ref), var5 (ref), sendBuildExperienceEventModule (ref), fFlagBuildExperienceManageDevProduct (ref), var1 (ref), ready (ref), mapDeveloperProductsToMonetizationProductsModule (ref), promiseModule (ref), useMonetizationPageViewModelModule (ref), monetizationPageViewModule (ref)
+	-- upvalues: reactModule (ref), localizationModule (ref), localizationStringsModule (ref), var6 (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), var7 (ref), signalsReactModule (ref), universeConfigurationModule (ref), var2 (ref), notReady (ref), var3 (ref), var4 (ref), var5 (ref), sendBuildExperienceEventModule (ref), fFlagBuildExperienceManageDevProductModule_1 (ref), var1 (ref), ready (ref), mapDeveloperProductsToMonetizationProductsModule (ref), promiseModule (ref), fFlagBuildExperienceMonetizationProductEditingModule (ref), useMonetizationPageViewModelModule (ref), monetizationPageViewModule (ref)
 	local var8 = reactModule.useContext(localizationModule.LocalizationRoactContext)
 	local var9 = localizationModule.Hooks.useLocalization({
 		priceUnavailable = localizationStringsModule.MONETIZATION_PRICE_UNAVAILABLE,
@@ -122,8 +124,8 @@ return function(p1)
 	end
 	local var27 = if fFlagBuildExperienceMonetizationNativeUIModule then if var18 == "Ready" then if var17 ~= nil then var17.canMonetize == true else true else true else not fFlagBuildExperienceMonetizationNativeUIModule
 	local var28 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), fFlagBuildExperienceManageDevProduct (copy), var10 (ref)
-		return if not (p1.products ~= nil or p1.universeId == nil) then if fFlagBuildExperienceManageDevProduct then var10.fetchProducts(p1.universeId) else var10.getAndFetchProducts(p1.universeId) else nil
+		-- upvalues: p1 (ref), fFlagBuildExperienceManageDevProductModule_1 (copy), var10 (ref)
+		return if not (p1.products ~= nil or p1.universeId == nil) then if fFlagBuildExperienceManageDevProductModule_1 then var10.fetchProducts(p1.universeId) else var10.getAndFetchProducts(p1.universeId) else nil
 	end, { var10, p1.products ~= nil, p1.universeId or 0 })
 	local var29 = signalsReactModule.useSignalState(if var28 ~= nil then var1 else var28.data)
 	local var30 = signalsReactModule.useSignalState(if var28 ~= nil then ready else var28.status)
@@ -273,7 +275,7 @@ return function(p1)
 	cloned.onRetryCatalog = var33
 	cloned.onUpdateProductManagedPricing = if p1.universeId == nil or not var27 then nil else var34
 	
-	if fFlagBuildExperienceManageDevProduct and p1.universeId ~= nil and var27 then
+	if fFlagBuildExperienceMonetizationProductEditingModule and p1.universeId ~= nil and var27 then
 		cloned.onUpdateProductSaleStatus = var35
 		cloned.onUpdateProduct = var36
 	end

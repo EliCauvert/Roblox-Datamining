@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXMarketplaceLicensingItemCards2", false) and (require(script.Parent.FFlagAXMarketplaceLicensing) and require(script.Parent.FFlagAXMarketplaceItemCardIndicatorStack))

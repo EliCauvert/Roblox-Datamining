@@ -1,5 +1,8 @@
 ﻿local parent = script.Parent.Parent.Parent.Parent
 local parent_1 = parent.Parent
+local foundationModule = require(parent_1.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local roactModule = require(parent_1.Roact)
 local cryoModule = require(parent_1.Cryo)
 local tModule = require(parent_1.t)
@@ -25,12 +28,12 @@ genericTextLabel.defaultProps = {
 }
 
 function genericTextLabel.render(p1)
-	-- upvalues: withStyleModule (ref), getTextSizeModule (ref), cryoModule (ref), roactModule (ref), UIBloxConfigModule (ref)
+	-- upvalues: withStyleModule (ref), getTextSizeModule (ref), cryoModule (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), UIBloxConfigModule (ref)
 	local text = p1.props.Text
 	local fluidSizing = p1.props.fluidSizing
 	
 	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), text (ref), getTextSizeModule (copy), cryoModule (copy), roactModule (copy), fluidSizing (ref), UIBloxConfigModule (copy)
+		-- upvalues: p1 (ref), text (ref), getTextSizeModule (copy), cryoModule (copy), roactModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), fluidSizing (ref), UIBloxConfigModule (copy)
 		local fontStyle = p1.props.fontStyle
 		local colorStyle = p1.props.colorStyle
 		local color = colorStyle.Color or colorStyle.Color3
@@ -60,7 +63,8 @@ function genericTextLabel.render(p1)
 			maxSize = cryoModule.None,
 			Size = if p1.props.AutomaticSize == nil or p1.props.AutomaticSize == Enum.AutomaticSize.None then size else nil,
 			Text = text,
-			Font = font,
+			Font = if foundationFontFaceMigration then cryoModule.None else font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(font) else cryoModule.None,
 			TextSize = p1.props.TextSize or var2,
 			AutomaticSize = p1.props.AutomaticSize or nil,
 			TextColor3 = color,

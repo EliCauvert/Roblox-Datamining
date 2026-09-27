@@ -4,11 +4,14 @@ local parent_2 = parent_1.Parent
 local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local roactModule = require(parent_2.Roact)
 local tModule = require(parent_2.t)
+local foundationModule = require(parent_2.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local withStyleModule = require(parent_1.Core.Style.withStyle)
 local getTextSizeModule = require(parent_1.Core.Text.GetTextSize)
 local imagesModule = require(parent_1.App.ImageSet.Images)
 local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
 local itemTileEnumsModule = require(parent.Enum.ItemTileEnums)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local itemTileStatus = roactModule.PureComponent:extend("ItemTileStatus")
 local vector2 = Vector2.new(50, 20)
 local vector2_1 = Vector2.new(10, 6)
@@ -29,9 +32,9 @@ local function getStyle(p1, p2)
 end
 
 function itemTileStatus.render(p1)
-	-- upvalues: withStyleModule (ref), getTextSizeModule (ref), vector2 (ref), getStyle (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), UIBloxConfigModule (ref), vector2_1 (ref)
+	-- upvalues: withStyleModule (ref), getTextSizeModule (ref), vector2 (ref), getStyle (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), UIBloxConfigModule (ref), vector2_1 (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), getTextSizeModule (copy), vector2 (copy), getStyle (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), UIBloxConfigModule (copy), vector2_1 (copy)
+		-- upvalues: p1 (ref), getTextSizeModule (copy), vector2 (copy), getStyle (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), UIBloxConfigModule (copy), vector2_1 (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		local theme = p2.Theme
 		local font = p2.Font
 		local tokens = p2.Tokens
@@ -54,7 +57,8 @@ function itemTileStatus.render(p1)
 		}, {
 			Text = roactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Font = font_1,
+				Font = if foundationFontFaceMigration then nil else font_1,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(font_1) else nil,
 				TextSize = var1,
 				Text = statusText,
 				TextColor3 = var3.Text.Color,

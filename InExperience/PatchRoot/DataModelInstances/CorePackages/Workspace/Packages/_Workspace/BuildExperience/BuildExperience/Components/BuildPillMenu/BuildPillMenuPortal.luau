@@ -168,6 +168,7 @@ return reactModule.memo(function(p1)
 				testId = p1.testId,
 				onOpenPage = var18,
 				onOpenInvitePicker = var20,
+				onOpenPlaytestManagement = var21,
 				onOpenAgentsPage = var19,
 				onOpenCreatorCreditPage = var22
 			})

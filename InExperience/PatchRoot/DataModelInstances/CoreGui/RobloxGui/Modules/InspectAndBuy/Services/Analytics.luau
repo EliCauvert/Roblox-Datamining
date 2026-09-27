@@ -13,6 +13,9 @@ local unifiedLoggingSurface = require(corePackagesService.Workspace.Packages.Ava
 local unifiedEventLogConstants = require(corePackagesService.Workspace.Packages.AvatarExperienceAnalytics).UnifiedEventLogConstants
 local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperienceModel).Enums.ItemTypeEnum
 local TIMED_OPTION_BY_DAYS = require(corePackagesService.Workspace.Packages.AvatarExperienceAnalytics).Constants.TIMED_OPTION_BY_DAYS
+local AXUnifiedEventFilter = require(corePackagesService.Workspace.Packages.AvatarExperienceAnalytics).AXUnifiedEventFilter
+local unifiedEventCounterAggregator = require(corePackagesService.Workspace.Packages.AvatarExperienceAnalytics).UnifiedEventCounterAggregator
+local fFlagAXUnifiedEventCounters = require(corePackagesService.Workspace.Packages.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
 local _ = {
 	SEND_EVENT_DEFERRED = 0,
 	SEND_EVENT_IMMEDIATELY = 1,
@@ -166,10 +169,15 @@ function t:report(p1, p2)
 end
 
 function t:reportUnifiedEvent(p1)
-	-- upvalues: unifiedLoggingSurface (ref), cryoModule (ref), unifiedEventLogConstants (ref)
-	self.eventStream:sendTelemetryEvent(self.ctx, unifiedEventLogConstants.EVENT_NAME, cryoModule.Dictionary.join({
+	-- upvalues: unifiedLoggingSurface (ref), cryoModule (ref), fFlagAXUnifiedEventCounters (ref), unifiedEventCounterAggregator (ref), AXUnifiedEventFilter (ref), unifiedEventLogConstants (ref)
+	local var1 = cryoModule.Dictionary.join({
 		surface = unifiedLoggingSurface.IN_EXPERIENCE_INSPECT_BUY
-	}, p1))
+	}, p1)
+	
+	if fFlagAXUnifiedEventCounters then
+		unifiedEventCounterAggregator.record(var1, AXUnifiedEventFilter.filter(var1, { skipReporting = true }))
+	end
+	self.eventStream:sendTelemetryEvent(self.ctx, unifiedEventLogConstants.EVENT_NAME, var1)
 end
 
 return t

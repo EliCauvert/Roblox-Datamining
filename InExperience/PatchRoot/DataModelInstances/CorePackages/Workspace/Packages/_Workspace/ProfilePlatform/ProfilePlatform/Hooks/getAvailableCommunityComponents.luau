@@ -4,13 +4,12 @@ local _ = require(profilePlatform.Types.Component)
 local enumsModule = require(profilePlatform.Common.Enums)
 local getSupportedActionsForProfileTypeModule = require(profilePlatform.Hooks.getSupportedActionsForProfileType)
 local fFlagAddSocialLinksToCommunityProfile = require(parent.SharedFlags).FFlagAddSocialLinksToCommunityProfile
-local fFlagAddVideoToCommunityProfile = require(parent.SharedFlags).FFlagAddVideoToCommunityProfile
 local fFlagAddCommunityLockedToCommunityProfile = require(parent.SharedFlags).FFlagAddCommunityLockedToCommunityProfile
 local fFlagAddEventsToCommunityProfileModule = require(profilePlatform.Flags.FFlagAddEventsToCommunityProfile)
 local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 
 return function()
-	-- upvalues: enumsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), getSupportedActionsForProfileTypeModule (ref), fFlagAddSocialLinksToCommunityProfile (ref), fFlagAddVideoToCommunityProfile (ref), fFlagAddCommunityLockedToCommunityProfile (ref), fFlagAddEventsToCommunityProfileModule (ref)
+	-- upvalues: enumsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), getSupportedActionsForProfileTypeModule (ref), fFlagAddSocialLinksToCommunityProfile (ref), fFlagAddCommunityLockedToCommunityProfile (ref), fFlagAddEventsToCommunityProfileModule (ref)
 	local list = {
 		{
 			component = enumsModule.Components.CommunityProfileHeader
@@ -29,9 +28,6 @@ return function()
 	
 	if fFlagAddSocialLinksToCommunityProfile then
 		table.insert(list, { component = enumsModule.Components.SocialLinks })
-	end
-	if fFlagAddVideoToCommunityProfile then
-		table.insert(list, { component = enumsModule.Components.Videos })
 	end
 	if fFlagAddCommunityLockedToCommunityProfile then
 		table.insert(list, { component = enumsModule.Components.CommunityLocked })

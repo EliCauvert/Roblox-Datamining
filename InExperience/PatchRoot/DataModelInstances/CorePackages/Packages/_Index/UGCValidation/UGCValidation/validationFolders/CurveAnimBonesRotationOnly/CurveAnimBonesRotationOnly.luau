@@ -6,14 +6,13 @@ local curveAnimBoneHierarchyUtilsModule = require(parent.util.CurveAnimBoneHiera
 local curveAnimTranslationUtilsModule = require(parent.util.CurveAnimTranslationUtils)
 local getFFlagUGCValidateEmotesBonesAllowedModule = require(parent.flags.getFFlagUGCValidateEmotesBonesAllowed)
 local getFFlagUGCValidateAnimBonesSupportModule = require(parent.flags.getFFlagUGCValidateAnimBonesSupport)
-local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
 local getFFlagUGCValidateAnimTranslationThresholdModule = require(parent.flags.getFFlagUGCValidateAnimTranslationThreshold)
 local UGCValidateBoneTranslationMaxDistanceHundredths = game:DefineFastInt("UGCValidateBoneTranslationMaxDistanceHundredths", 100)
 local t = {
 	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION }
 }
 
-if getFFlagUGCValidateAnimBonesSupportModule() and getFFlagUGCValidationAnimationPackSupportModule() then
+if getFFlagUGCValidateAnimBonesSupportModule() then
 	table.insert(t.categories, validationEnumsModule.UploadCategory.ANIMATION)
 end
 t.requiredData = { validationEnumsModule.SharedDataMember.curveAnimations }

@@ -7,6 +7,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local icon = require(parent.BuilderIcons).Icon
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 local fFlagTFNonFriendsPermittedModule = require(trustedContacts.Flags.FFlagTFNonFriendsPermitted)
+local fFlagTFClassmatesProfileInsight = require(parent.SharedFlags).FFlagTFClassmatesProfileInsight
 local t = {
 	mutualFriends = icon.TwoPeople,
 	friendshipAgeUnixSeconds = icon.Calendar,
@@ -15,6 +16,7 @@ local t = {
 	contacts = icon.SmartphonePortrait,
 	accountCreationDateUnixSeconds = icon.CircleI,
 	localizedCountryName = icon.GlobeDetailed,
+	isClassmate = if fFlagTFClassmatesProfileInsight then icon.PersonGraduate else nil,
 	notAFriend = if fFlagTFNonFriendsPermittedModule then icon.TriangleExclamation else nil,
 	noMutualFriends = if fFlagTFNonFriendsPermittedModule then icon.TriangleExclamation else nil
 }
@@ -37,7 +39,7 @@ local _ = function(p1, p2)
 end
 
 local var1 = function(p1, p2, p3)
-	-- upvalues: friendRequestOriginSource (ref)
+	-- upvalues: friendRequestOriginSource (ref), fFlagTFClassmatesProfileInsight (ref)
 	local joinedInYear = nil
 	
 	if p1 == "friendshipAgeUnixSeconds" then
@@ -72,12 +74,19 @@ local var1 = function(p1, p2, p3)
 		return joinedInYear
 	elseif p1 == "accountCreationDateUnixSeconds" then
 		joinedInYear = p3.joinedInYear
+		
+		return joinedInYear
+	elseif fFlagTFClassmatesProfileInsight and p1 == "isClassmate" then
+		if p2 then
+			return p3.classmates
+		end
+		joinedInYear = nil
 	end
 	return joinedInYear
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), fFlagConnectionsToFriendsRename (ref), localizationService (ref), useLocalization (ref), fFlagTFNonFriendsPermittedModule (ref), friendRequestOriginSource (ref), t (ref), var1 (ref)
+	-- upvalues: reactModule (ref), fFlagConnectionsToFriendsRename (ref), localizationService (ref), useLocalization (ref), fFlagTFClassmatesProfileInsight (ref), fFlagTFNonFriendsPermittedModule (ref), friendRequestOriginSource (ref), t (ref), var1 (ref)
 	local var2 = useLocalization({
 		singularMutualConnection = "Feature.Friends.Label.MutualFriendTitle",
 		fromQrCode = "Feature.Friends.Description.FromQrCode",
@@ -110,6 +119,7 @@ return function(p1)
 				num = floored_2
 			} elseif floored_2 == 1 then "Feature.Friends.Label.ConnectedOneDay" elseif fFlagConnectionsToFriendsRename then "Feature.Friends.Label.NewFriend" else "Feature.Friends.Label.NewConnection"
 		end, { p1.friendshipAgeUnixSeconds }),
+		classmates = if fFlagTFClassmatesProfileInsight then "Feature.Schools.Label.Classmates" else nil,
 		notAFriend = if fFlagTFNonFriendsPermittedModule then "Feature.Friends.Description.NotAFriend" else nil,
 		noMutualFriends = if fFlagTFNonFriendsPermittedModule then "Feature.Friends.Description.NoMutualFriends" else nil
 	})

@@ -5,7 +5,6 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local assetCalculatorModule = require(parent.util.AssetCalculator)
 local canBeNormalizedModule = require(parent.util.canBeNormalized)
 local prettyPrintVector3Module = require(parent.util.prettyPrintVector3)
-local getFFlagUGCValidateMigratePoseBlockingModule = require(parent.flags.getFFlagUGCValidateMigratePoseBlocking)
 local UGCValidatePoseDegFromXYPlane = game:DefineFastInt("UGCValidatePoseDegFromXYPlane", 20)
 local UGCValidatePoseArmMinDegFromXVectorOnXYPlane = game:DefineFastInt("UGCValidatePoseArmMinDegFromXVectorOnXYPlane", -90)
 local UGCValidatePoseArmMaxDegFromXVectorOnXYPlane = game:DefineFastInt("UGCValidatePoseArmMaxDegFromXVectorOnXYPlane", 30)
@@ -14,7 +13,6 @@ local UGCValidatePoseLegMaxDegFromXVectorOnXYPlane = game:DefineFastInt("UGCVali
 local t = {
 	categories = { validationEnumsModule.UploadCategory.TORSO_AND_LIMBS },
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
-	fflag = getFFlagUGCValidateMigratePoseBlockingModule,
 	expectedFailures = {}
 }
 

@@ -9,6 +9,7 @@ local itemStatusModule = require(script.Enums.ItemStatus)
 local salesLocationTypeModule = require(script.Enums.SalesLocationType)
 local creatorTypeModule = require(script.Enums.CreatorType)
 local catalogItemCardStatusIconTypeEnumModule = require(script.Components.CatalogItemCard.Enums.CatalogItemCardStatusIconTypeEnum)
+local itemStatusTypeEnumModule = require(script.Components.CatalogItemCard.Enums.ItemStatusTypeEnum)
 local colorGradientCircleModule = require(script.Components.ColorGradientCircle.ColorGradientCircle)
 local normalizeModule = require(script.Utils.normalize)
 local AXPartialPageModalModule = require(script.Components.AXPartialPageModal.AXPartialPageModal)
@@ -34,7 +35,6 @@ local selectHasDynamicHeadModule = require(script.State.Selectors.selectHasDynam
 local selectTryOnsLookIdModule = require(script.State.Selectors.selectTryOnsLookId)
 local itemDataModule = require(script.State.Selectors.ItemData)
 local robuxBalanceModule = require(script.Components.RobuxBalance.RobuxBalance)
-local catalogCategoriesModule = require(script.Enums.CatalogCategories)
 local catalogSubcategoriesModule = require(script.Enums.CatalogSubcategories)
 local catalogCategoryIdsModule = require(script.Enums.CatalogCategoryIds)
 local catalogSubcategoryIdsModule = require(script.Enums.CatalogSubcategoryIds)
@@ -89,6 +89,7 @@ return {
 			CatalogItemCardItemInfoEnum = catalogItemCardItemInfoEnumModule,
 			CatalogItemCardItemTypeEnum = catalogItemCardItemTypeEnumModule,
 			CatalogItemCardStatusIconTypeEnum = catalogItemCardStatusIconTypeEnumModule,
+			ItemStatusTypeEnum = itemStatusTypeEnumModule,
 			CatalogItemCard = catalogItemCardModule,
 			CatalogRowItemCard = catalogRowItemCardModule,
 			WearTimeFTUXStatusEnum = require(script.Components.CatalogItemCard.Enums.WearTimeFTUXStatusEnum)
@@ -121,7 +122,6 @@ return {
 		CreatorType = creatorTypeModule,
 		NoPriceStatus = noPriceStatusModule,
 		ItemPurchaseActionTypeEnum = itemPurchaseActionTypeEnumModule,
-		CatalogCategories = catalogCategoriesModule,
 		CatalogSubcategories = catalogSubcategoriesModule,
 		CatalogCategoryIds = catalogCategoryIdsModule,
 		CatalogSubcategoryIds = catalogSubcategoryIdsModule,
@@ -142,6 +142,7 @@ return {
 		useSubcategoryPillAnimation = useSubcategoryPillAnimationModule,
 		useRedirectFocusIntoGuiObject = require(script.Hooks.useRedirectFocusIntoGuiObject),
 		useNetworking = require(script.Hooks.useNetworking),
+		useHydrateEquippedAvatarOutfitId = require(script.Hooks.useHydrateEquippedAvatarOutfitId),
 		useFocusOnMountEffect = require(script.Hooks.useFocusOnMountEffect),
 		useEnhancedAvatarHeadsFtux = require(script.Hooks.useEnhancedAvatarHeadsFtux),
 		useAdaptiveScrolling = require(script.Hooks.useAdaptiveScrolling),
@@ -193,7 +194,8 @@ return {
 			avatarLastEquippedStateStore = require(script.Stores.AvatarLastEquippedStateStore.avatarLastEquippedStateStore)
 		},
 		AXTooltipStore = require(script.Stores.AXTooltipStore),
-		getTimeoutStatusStore = require(script.Stores.TimeoutStatusStore.getTimeoutStatusStore)
+		getTimeoutStatusStore = require(script.Stores.TimeoutStatusStore.getTimeoutStatusStore),
+		getEquippedAvatarOutfitIdStore = require(script.Stores.EquippedAvatarOutfitIdStore.getEquippedAvatarOutfitIdStore)
 	},
 	Utils = {
 		createSelectorSignal = require(script.Utils.createSelectorSignal),
@@ -209,6 +211,8 @@ return {
 		getRbxThumbType = require(script.Utils.getRbxThumbType),
 		isVRHiddenRobuxBalanceScreen = require(script.Utils.isVRHiddenRobuxBalanceScreen),
 		normalize = normalizeModule,
+		getRawItemLicensingInfo = require(script.Utils.getRawItemLicensingInfo),
+		parseItemLicensing = require(script.Utils.parseItemLicensing),
 		normalizeScreenSizeForWire = require(script.Utils.normalizeScreenSizeForWire),
 		debounce = require(script.Utils.debounce),
 		getZoomedSizeAndOffset = require(script.Utils.getZoomedSizeAndOffset),

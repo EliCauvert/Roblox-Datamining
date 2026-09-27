@@ -1,5 +1,8 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local reactModule = require(corePackagesService.Packages.React)
 local buttonStack = UIBloxModule.App.Button.ButtonStack
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -9,7 +12,7 @@ local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.Ro
 local dividerModule = require(script.Parent.Parent.Components.Divider)
 
 return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), headerBar (ref), robloxTranslatorModule (ref), dividerModule (ref), buttonStack (ref), buttonType (ref)
+	-- upvalues: useStyle (ref), reactModule (ref), headerBar (ref), robloxTranslatorModule (ref), dividerModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), buttonStack (ref), buttonType (ref)
 	local var1 = useStyle()
 	local theme = var1.Theme
 	local font = var1.Font
@@ -62,7 +65,8 @@ return function(p1)
 					TextWrapped = true,
 					BackgroundTransparency = 1,
 					Text = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Message.RetakeScene"),
-					Font = font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
 					TextColor3 = theme.TextEmphasis.Color,
 					TextTransparency = theme.TextEmphasis.Transparency,
 					TextXAlignment = Enum.TextXAlignment.Left,

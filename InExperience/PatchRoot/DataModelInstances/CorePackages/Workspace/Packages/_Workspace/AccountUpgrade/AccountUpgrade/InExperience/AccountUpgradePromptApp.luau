@@ -5,6 +5,7 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local coreScriptsRootProvider = require(parent.CoreScriptsRoactCommon).CoreScriptsRootProvider
 local inExperienceProviderContainer = require(parent.InExperienceContainer).InExperienceProviderContainer
+local _ = require(accountUpgrade.AccountUpgradeFlow)
 local accountUpgradeContainerModule = require(accountUpgrade.Components.AccountUpgradeContainer)
 local accountUpgradeSuccessViewModule = require(accountUpgrade.SuccessModal.AccountUpgradeSuccessView)
 local respawnIntoExperienceModule = require(script.Parent.respawnIntoExperience)
@@ -41,6 +42,7 @@ return function(p1)
 	if var4 == nil then
 		var1 = reactModule.createElement(accountUpgradeContainerModule, {
 			hasBackdrop = true,
+			flow = p1.flow,
 			currentUsername = var6,
 			onClose = p1.onDismiss,
 			onSignUpComplete = var7

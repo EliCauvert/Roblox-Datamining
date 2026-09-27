@@ -6,7 +6,6 @@ local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local getKnobSizeModule = require(script.Parent.getKnobSize)
 local iconSizeModule = require(foundation.Enums.IconSize)
-local flagsModule = require(foundation.Utility.Flags)
 
 local function computeProps(p1)
 	local var1 = p1.size.X.Offset + p1.shadowPadding * 2
@@ -21,11 +20,11 @@ local function computeProps(p1)
 end
 
 local function variantsFactory(p1)
-	-- upvalues: flagsModule (ref), inputSizeModule (ref), computeProps (ref), iconSizeModule (ref), getKnobSizeModule (ref)
+	-- upvalues: inputSizeModule (ref), computeProps (ref), iconSizeModule (ref), getKnobSizeModule (ref)
 	return {
 		common = {
 			knob = {
-				tag = if flagsModule.FoundationToggleBetaUpdate then "align-x-center align-y-center position-center-center anchor-center-center auto-xy radius-circle" else "position-center-center anchor-center-center auto-xy radius-circle"
+				tag = "align-x-center align-y-center position-center-center anchor-center-center auto-xy radius-circle"
 			},
 			knobShadow = { tag = "position-center-center anchor-center-center" }
 		},
@@ -41,12 +40,12 @@ local function variantsFactory(p1)
 				shadowPadding = p1.Padding.XSmall
 			}),
 			[inputSizeModule.Medium] = computeProps({
-				iconSize = if flagsModule.FoundationToggleBetaUpdate then iconSizeModule.Small else iconSizeModule.Medium,
+				iconSize = iconSizeModule.Small,
 				size = getKnobSizeModule(p1, inputSizeModule.Medium),
 				shadowPadding = p1.Padding.Small
 			}),
 			[inputSizeModule.Large] = computeProps({
-				iconSize = if flagsModule.FoundationToggleBetaUpdate then iconSizeModule.Small else iconSizeModule.Large,
+				iconSize = iconSizeModule.Small,
 				size = getKnobSizeModule(p1, inputSizeModule.Large),
 				shadowPadding = p1.Padding.Small
 			})

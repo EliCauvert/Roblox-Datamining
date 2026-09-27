@@ -11,11 +11,12 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXMISEnableMultiShoppingUnifiedEvents = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
 local fFlagAXSendUnifiedEventLogWithInstance = avatarExperienceFlagsModule.FFlagAXSendUnifiedEventLogWithInstance
 local fFlagAXUnifiedEventPageContext = avatarExperienceFlagsModule.FFlagAXUnifiedEventPageContext
+local fFlagAXUnifiedEventCounters = avatarExperienceFlagsModule.FFlagAXUnifiedEventCounters
 local fFlagAllowCustomUnifiedEventFilterModule = require(script.Parent.FFlagAllowCustomUnifiedEventFilter)
 local AXUnifiedEventFilterModule = require(script.Parent.AXUnifiedEventFilter)
 
 return function(p1, p2, p3)
-	-- upvalues: sessionService (ref), unifiedEventLogConstantsModule (ref), fFlagAXUnifiedEventPageContext (ref), isRunningInStudio (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedEventLoggingUtilsModule (ref), cryoModule (ref), unifiedEventPageStoreModule (ref), fFlagAllowCustomUnifiedEventFilterModule (ref), AXUnifiedEventFilterModule (ref), sendUnifiedEventLogModule (ref), fFlagAXSendUnifiedEventLogWithInstance (ref)
+	-- upvalues: sessionService (ref), unifiedEventLogConstantsModule (ref), fFlagAXUnifiedEventPageContext (ref), isRunningInStudio (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedEventLoggingUtilsModule (ref), cryoModule (ref), unifiedEventPageStoreModule (ref), fFlagAllowCustomUnifiedEventFilterModule (ref), AXUnifiedEventFilterModule (ref), sendUnifiedEventLogModule (ref), fFlagAXSendUnifiedEventLogWithInstance (ref), fFlagAXUnifiedEventCounters (ref)
 	local session_tag_nameAttribute = p1:GetAttribute(unifiedEventLogConstantsModule.SESSION_TAG_NAME)
 	
 	if not fFlagAXUnifiedEventPageContext and sessionService:GetSessionTag("level2a") ~= session_tag_nameAttribute and not isRunningInStudio() then return end
@@ -44,7 +45,8 @@ return function(p1, p2, p3)
 		var1 = cryoModule.Dictionary.join(var1, {
 			elementSessionTag = if session_tag_nameAttribute == nil or session_tag_nameAttribute == "" then unifiedEventPageStoreModule.UNKNOWN else session_tag_nameAttribute
 		})
-	end;
-	(if fFlagAllowCustomUnifiedEventFilterModule and p3.filter then p3.filter else AXUnifiedEventFilterModule.filter)(var1)
-	sendUnifiedEventLogModule(var1, if fFlagAXSendUnifiedEventLogWithInstance then p1 else nil)
+	end
+	sendUnifiedEventLogModule(var1, if fFlagAXSendUnifiedEventLogWithInstance then p1 else nil, if fFlagAXUnifiedEventCounters then {
+		filterPassed = (if fFlagAllowCustomUnifiedEventFilterModule and p3.filter then p3.filter else AXUnifiedEventFilterModule.filter)(var1)
+	} else nil)
 end

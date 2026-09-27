@@ -14,9 +14,10 @@ local iconSize = foundationModule.Enums.IconSize
 local iconVariant = foundationModule.Enums.IconVariant
 local inputSize = foundationModule.Enums.InputSize
 local useLocalization = localizationModule.Hooks.useLocalization
+local fFlagMobileGameJoinCardGamepadSupport = require(parent.SharedFlags).FFlagMobileGameJoinCardGamepadSupport
 
 return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), divider (ref), dividerVariant (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref)
+	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), divider (ref), dividerVariant (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref), text (ref), button (ref), fFlagMobileGameJoinCardGamepadSupport (ref), buttonVariant (ref), inputSize (ref)
 	local var1 = useLocalization({
 		unlock = "Feature.ExperienceDetails.PlayButtonText.Unlock",
 		bodyText = "Feature.FAE.CheckIfYouCanJoinGame"
@@ -46,6 +47,7 @@ return function(p1)
 		}),
 		UnlockButton = reactModule.createElement(button, {
 			LayoutOrder = 2,
+			ref = if fFlagMobileGameJoinCardGamepadSupport then p1.focusRef else nil,
 			text = var1.unlock,
 			onActivated = p1.onUnlockPressed,
 			variant = buttonVariant.Emphasis,

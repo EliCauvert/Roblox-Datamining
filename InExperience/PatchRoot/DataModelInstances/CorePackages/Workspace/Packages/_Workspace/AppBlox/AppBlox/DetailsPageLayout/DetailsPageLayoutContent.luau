@@ -3,7 +3,6 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local reactUtilsModule = require(parent.ReactUtils)
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppClampBannerPaddingToViewport = sharedFlagsModule.FFlagLuaAppClampBannerPaddingToViewport
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
 local fFlagLuaAppEdpDirectionalGradientMidTransparency = sharedFlagsModule.FFlagLuaAppEdpDirectionalGradientMidTransparency
 local scrollView = foundationModule.ScrollView
@@ -11,11 +10,11 @@ local view = foundationModule.View
 local detailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
 local detailsPageLayoutUtilsModule = require(script.Parent.DetailsPageLayoutUtils)
 local t = { Selectable = false }
-local var1 = if fFlagLuaAppClampBannerPaddingToViewport then reactModule.createBinding(0) else nil
+local var1 = reactModule.createBinding(0)
 local _ = nil
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), reactUtilsModule (ref), fFlagLuaAppClampBannerPaddingToViewport (ref), var1 (ref), detailsPageLayoutUtilsModule (ref), view (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), scrollView (ref), t (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref)
+	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), reactUtilsModule (ref), var1 (ref), detailsPageLayoutUtilsModule (ref), view (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), scrollView (ref), t (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref)
 	local var2 = reactModule.useContext(detailsPageLayoutContextModule)
 	local contentTopOffset = var2.contentTopOffset
 	local hasFullBleed = var2.hasFullBleed
@@ -66,8 +65,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		end) else nil
 	end, { hasHeader, headerBarHeight })
 	local var11 = reactModule.useMemo(function()
-		-- upvalues: contentTopOffset (ref), fFlagLuaAppClampBannerPaddingToViewport (copy), reactModule (copy), containerHeight (ref), var1 (copy), detailsPageLayoutUtilsModule (copy), hasFullBleed (ref), fullBleedOverlapOffset (ref), headerBarHeight (ref)
-		return if contentTopOffset then if fFlagLuaAppClampBannerPaddingToViewport then reactModule.joinBindings({ contentTopOffset, containerHeight or var1 }):map(function(p3)
+		-- upvalues: contentTopOffset (ref), reactModule (copy), containerHeight (ref), var1 (copy), detailsPageLayoutUtilsModule (copy), hasFullBleed (ref), fullBleedOverlapOffset (ref), headerBarHeight (ref)
+		return if contentTopOffset then reactModule.joinBindings({ contentTopOffset, containerHeight or var1 }):map(function(p3)
 			-- upvalues: detailsPageLayoutUtilsModule (copy), hasFullBleed (copy), fullBleedOverlapOffset (copy), headerBarHeight (copy)
 			local var12 = p3[2]
 			local var13 = detailsPageLayoutUtilsModule.computeCanvasPaddingTop(p3[1], hasFullBleed, fullBleedOverlapOffset, headerBarHeight)
@@ -76,13 +75,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				var13 = math.min(var13, var12 * 0.75)
 			end
 			return UDim.new(0, var13)
-		end) else contentTopOffset:map(function(p3)
-			-- upvalues: detailsPageLayoutUtilsModule (copy), hasFullBleed (copy), fullBleedOverlapOffset (copy), headerBarHeight (copy)
-			return UDim.new(0, detailsPageLayoutUtilsModule.computeCanvasPaddingTop(p3, hasFullBleed, fullBleedOverlapOffset, headerBarHeight))
 		end) else nil
 	end, {
 		contentTopOffset,
-		if fFlagLuaAppClampBannerPaddingToViewport then containerHeight else nil,
+		containerHeight,
 		hasFullBleed,
 		fullBleedOverlapOffset,
 		headerBarHeight

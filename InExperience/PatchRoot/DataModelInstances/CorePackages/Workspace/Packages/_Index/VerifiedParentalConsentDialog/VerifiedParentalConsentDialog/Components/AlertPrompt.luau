@@ -18,25 +18,22 @@ return function(p1)
 		titleIcon = p1.titleIcon,
 		bodyText = p1.bodyText,
 		buttonStackInfo = {
-			buttons = (function()
-				-- upvalues: p1 (ref), buttonType (copy), var1 (ref)
-				return if p1.isActionable then {
-					{
-						buttonType = buttonType.PrimarySystem,
-						props = {
-							onActivated = if p1.onAction then p1.onAction else p1.onDismiss,
-							text = var1.GoToSettings
-						}
-					},
-					{
-						props = { onActivated = p1.onDismiss, text = var1.Cancel }
+			buttons = if p1.isActionable then {
+				{
+					buttonType = buttonType.PrimarySystem,
+					props = {
+						onActivated = if p1.onAction then p1.onAction else p1.onDismiss,
+						text = var1.GoToSettings
 					}
-				} else {
-					{
-						props = { onActivated = p1.onDismiss, text = var1.Close }
-					}
+				},
+				{
+					props = { onActivated = p1.onDismiss, text = var1.Cancel }
 				}
-			end)()
+			} else {
+				{
+					props = { onActivated = p1.onDismiss, text = var1.Close }
+				}
+			}
 		},
 		position = UDim2.fromScale(0.5, 0.5),
 		screenSize = p1.screenSize,

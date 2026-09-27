@@ -1,4 +1,6 @@
-﻿return {
+﻿local fFlagMomentsCreationBackCta = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsCommon).Flags.FFlagMomentsCreationBackCta
+
+return {
 	CommunityStandardsText = "Feature.Moments.Description.CommunityStandards",
 	CreationTooltip = "Feature.Moments.Disclaimer.EveryoneMoments",
 	EditingCtaMusic = "Feature.Moments.Label.Music",
@@ -28,8 +30,8 @@
 	MusicSearchError = "Feature.Moments.Label.Error",
 	PublishingCtaContinue = "Feature.Moments.Action.Continue",
 	PublishingCtaPrimary = "Feature.Moments.Action.Post",
-	PublishingCtaReturn = "Feature.Moments.Action.Return",
-	PublishingCtaSecondary = "Feature.Moments.Action.ReturnToEditing",
+	PublishingCtaReturn = if fFlagMomentsCreationBackCta then "Feature.Moments.Action.Back" else "Feature.Moments.Action.Return",
+	PublishingCtaSecondary = if fFlagMomentsCreationBackCta then "Feature.Moments.Action.Back" else "Feature.Moments.Action.ReturnToEditing",
 	PublishingDescription = "Feature.Moments.Description.PublishMoment",
 	StayFriendlyModeration = "Feature.Moments.Label.StayFriendlyModeration"
 }

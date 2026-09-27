@@ -12,6 +12,11 @@ return {
 		Blank = "Blank",
 		OneByTwoTile = if fFlagLuaAppEnableHomepageOneByTwoTile then "OneByTwoTile" else nil
 	},
+	AlignmentType = if sharedFlagsModule.FFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then {
+		RightPin = "RightPin",
+		LeftPin = "LeftPin",
+		Default = "Default"
+	} else nil,
 	SpanForItemType = if sharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning then {
 		EmphasisTile = { colSpan = 2, rowSpan = 2 },
 		TwoByOneTile = { colSpan = 2, rowSpan = 1 },

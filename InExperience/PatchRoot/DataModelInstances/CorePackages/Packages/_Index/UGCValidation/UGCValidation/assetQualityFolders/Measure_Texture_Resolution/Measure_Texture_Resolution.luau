@@ -27,8 +27,7 @@ return {
 						p1:warn(errorSourceStringsModule.Keys.AQSWarn_TextureResolution, {
 							textureName = i,
 							texture_width = v.texture_width or "unknown",
-							texture_height = v.texture_height or "unknown",
-							score = tostring(math.floor(tonumber(v.score) or 0))
+							texture_height = v.texture_height or "unknown"
 						})
 					end
 				end

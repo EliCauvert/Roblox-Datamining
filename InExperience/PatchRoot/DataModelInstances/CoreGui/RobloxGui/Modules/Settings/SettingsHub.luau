@@ -196,10 +196,21 @@ local var15 = if t.GetFFlagPackagifySettingsShowSignal() then require(corePackag
 local var16 = if t.GetFFlagPackagifySettingsShowSignal() then require(corePackagesService.Workspace.Packages.CoreScriptsCommon).SettingsUtility else nil
 local t_1 = { frequency = 4, dampingRatio = 1 }
 local inExperienceSideSheetModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheet)
+local getDidSideSheetOpenWithPeoplePage = inExperienceSideSheetModule.getDidSideSheetOpenWithPeoplePage
+local getHasRoomForPeoplePage = inExperienceSideSheetModule.getHasRoomForPeoplePage
+local getIsPeoplePageOpen = inExperienceSideSheetModule.getIsPeoplePageOpen
+local getSideSheetAnimationDuration = inExperienceSideSheetModule.getSideSheetAnimationDuration
+local getSideSheetDrawerWidth = inExperienceSideSheetModule.getSideSheetDrawerWidth
+local getSideSheetMenuPageHeight = inExperienceSideSheetModule.getSideSheetMenuPageHeight
+local getSideSheetMenuPageWidth = inExperienceSideSheetModule.getSideSheetMenuPageWidth
 local toggleSideSheet = inExperienceSideSheetModule.toggleSideSheet
 local getSideSheetVisibility = inExperienceSideSheetModule.getSideSheetVisibility
+local setupInGameMenuPeoplePageActions = inExperienceSideSheetModule.setupInGameMenuPeoplePageActions
+local setupPeoplePageOpenTracking = inExperienceSideSheetModule.setupPeoplePageOpenTracking
+local fFlagSideSheetOpenPeoplePage = inExperienceSideSheetModule.Flags.FFlagSideSheetOpenPeoplePage
 local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local getSwitchServerStore = require(corePackagesService.Workspace.Packages.SwitchServer).GetSwitchServerStore
+local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
 local _ = require(robloxGui.Modules.Settings.ReactPageFactory)
 local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
 local fFlagLocalizeVersionLabels = t.FFlagLocalizeVersionLabels or var14
@@ -293,7 +304,7 @@ local function createReactPage(p2)
 end
 
 local function CreateSettingsHub()
-	-- upvalues: t (ref), robloxGui (ref), var15 (ref), utilityModule (ref), var16 (ref), createSignal (ref), constantsModule_1 (ref), stores (ref), rbxAnalyticsService (ref), reactPageAnalyticsModule (ref), createReactPage (ref), isSideSheetEnabledModule (ref), themeModule (ref), contextActionService (ref), localizationService (ref), localization (ref), var2 (ref), create (ref), var8 (ref), userInputService (ref), platform (ref), default (ref), getCamMicPermissionsModule (ref), otterModule (ref), robloxTranslatorModule (ref), settingsHubRaceConditionFix (ref), starterGuiService (ref), inExperienceSideSheetModule (ref), telemetryService (ref), menuLeaveGameTelemetryConfigModule (ref), menuResetCharacterTelemetryConfigModule (ref), constantsModule (ref), menuResumeTelemetryConfigModule (ref), reactRobloxModule (ref), reactModule (ref), menuButtonsContainerModule (ref), flagsModule (ref), guiService (ref), uDim2_1 (ref), uDim2 (ref), SHIELD_INACTIVE_POSITION (ref), SETTINGS_SHIELD_TRANSPARENCY (ref), SETTINGS_SHIELD (ref), var3 (ref), fFlagLocalizeVersionLabels (ref), GetServerChannelBlocking (ref), var12 (write), var6 (write), runService (ref), httpRbxApiService (ref), httpService (ref), cachedPolicyServiceModule (ref), baseUrl (ref), var9 (ref), starterPlayerService (ref), playersService (ref), roactModule (ref), roactAppExperimentModule (ref), IXPService (ref), appStyleProvider (ref), dark (ref), menuBackButtonModule (ref), menuFrontButtonModule (ref), appFonts (ref), t_1 (ref), corePackagesService (ref), inExperienceAppChatModalModule (ref), inExperienceCapabilities (ref), foundationProvider (ref), foundationModule (ref), utilsModule (ref), switchTabHint (ref), isSubjectToDesktopPolicies (ref), settingsFullScreenTitleBarModule (ref), VRService (ref), gameSettings (ref), devConsoleMasterModule (ref), fixReportButtonCutOff (ref), cryoModule (ref), IXPServiceWrapper (ref), experienceMenuSessionManagerInstance (ref), reactPageSignalModule (ref), mouseIconOverrideService (ref), settingsHubCursorOverride (ref), checkLeaveGameUpsellCooldown (ref), tweenService (ref), perfUtilsModule (ref), var10 (write), chatSelectorModule (ref), fFlagEnableNewBackpack (ref), var1 (ref), var11 (write), gameInviteInviteExperimentVariant (write), var5 (write), var4 (write), gameInviteModalManager (write), gameInviteConstants (write), GetCorePackagesLoaded (ref), gameInviteAnalytics (ref), capturesPolicy (ref), isSpatial (ref), capturesAppModule (ref), getSwitchServerStore (ref), getSideSheetVisibility (ref), toggleSideSheet (ref), leaveGameModule (ref), signalsModule (ref), portalWithFoundationStylelinkModule (ref), traversalHistoryMenu (ref), inExperienceMenuReactModule (ref), inExperienceMenuReactPageModule (ref)
+	-- upvalues: t (ref), robloxGui (ref), var15 (ref), utilityModule (ref), var16 (ref), createSignal (ref), constantsModule_1 (ref), stores (ref), rbxAnalyticsService (ref), reactPageAnalyticsModule (ref), createReactPage (ref), isSideSheetEnabledModule (ref), themeModule (ref), contextActionService (ref), localizationService (ref), localization (ref), var2 (ref), create (ref), var8 (ref), userInputService (ref), platform (ref), default (ref), getCamMicPermissionsModule (ref), otterModule (ref), robloxTranslatorModule (ref), settingsHubRaceConditionFix (ref), starterGuiService (ref), inExperienceSideSheetModule (ref), telemetryService (ref), menuLeaveGameTelemetryConfigModule (ref), menuResetCharacterTelemetryConfigModule (ref), constantsModule (ref), menuResumeTelemetryConfigModule (ref), reactRobloxModule (ref), reactModule (ref), menuButtonsContainerModule (ref), flagsModule (ref), guiService (ref), uDim2_1 (ref), uDim2 (ref), SHIELD_INACTIVE_POSITION (ref), SETTINGS_SHIELD_TRANSPARENCY (ref), SETTINGS_SHIELD (ref), var3 (ref), fFlagLocalizeVersionLabels (ref), GetServerChannelBlocking (ref), var12 (write), var6 (write), runService (ref), httpRbxApiService (ref), httpService (ref), cachedPolicyServiceModule (ref), baseUrl (ref), var9 (ref), starterPlayerService (ref), playersService (ref), roactModule (ref), roactAppExperimentModule (ref), IXPService (ref), appStyleProvider (ref), dark (ref), menuBackButtonModule (ref), menuFrontButtonModule (ref), appFonts (ref), t_1 (ref), corePackagesService (ref), inExperienceAppChatModalModule (ref), inExperienceCapabilities (ref), foundationProvider (ref), foundationModule (ref), utilsModule (ref), switchTabHint (ref), isSubjectToDesktopPolicies (ref), settingsFullScreenTitleBarModule (ref), fFlagSideSheetOpenPeoplePage (ref), getDidSideSheetOpenWithPeoplePage (ref), getSideSheetVisibility (ref), getHasRoomForPeoplePage (ref), getIsPeoplePageOpen (ref), getSideSheetAnimationDuration (ref), getSideSheetDrawerWidth (ref), getSideSheetMenuPageWidth (ref), VRService (ref), getSideSheetMenuPageHeight (ref), signalsModule (ref), gameSettings (ref), devConsoleMasterModule (ref), fixReportButtonCutOff (ref), cryoModule (ref), IXPServiceWrapper (ref), experienceMenuSessionManagerInstance (ref), reactPageSignalModule (ref), mouseIconOverrideService (ref), settingsHubCursorOverride (ref), checkLeaveGameUpsellCooldown (ref), tweenService (ref), toggleSideSheet (ref), perfUtilsModule (ref), var10 (write), chatSelectorModule (ref), fFlagEnableNewBackpack (ref), var1 (ref), var11 (write), gameInviteInviteExperimentVariant (write), var5 (write), var4 (write), gameInviteModalManager (write), gameInviteConstants (write), GetCorePackagesLoaded (ref), gameInviteAnalytics (ref), capturesPolicy (ref), isSpatial (ref), capturesAppModule (ref), isPioneerLaunch (ref), getSwitchServerStore (ref), leaveGameModule (ref), portalWithFoundationStylelinkModule (ref), traversalHistoryMenu (ref), inExperienceMenuReactModule (ref), inExperienceMenuReactPageModule (ref)
 	local t_2 = {
 		Visible = false,
 		Active = true,
@@ -1136,7 +1147,7 @@ local function CreateSettingsHub()
 			end
 			var12 = var6:InvokeServer()
 			var39 = var12
-			serverVersionLabel.Text = var38 .. var223
+			serverVersionLabel.Text = var38 .. var225
 			local serverVersionLabel_1 = t_2.ServerVersionLabel
 			serverVersionLabel_1.Size = coreScriptVersionEnabledEngineFeature and UDim2.new(0, serverVersionLabel_1.TextBounds.X + 6, 0, var3) or UDim2.new(0.2, -6, 1, 0)
 			t_2.ServerVersionLabel.TextScaled = not (coreScriptVersionEnabledEngineFeature or t_2.ServerVersionLabel.TextFits)
@@ -1375,7 +1386,7 @@ local function CreateSettingsHub()
 				rawValue = if t.GetFFlagNewEventIngestPlayerScriptsDimensions() then var41 else nil,
 				context = if t.GetFFlagNewEventIngestPlayerScriptsDimensions() then "IGMv1" else nil
 			})
-			t_2.OverridesPlayerScriptsLabel.Text = var39 .. var230
+			t_2.OverridesPlayerScriptsLabel.Text = var39 .. var232
 			t_2.OverridesPlayerScriptsLabel.Visible = var9 or playerPermissionsModule.IsPlayerAdminAsync(playersService.LocalPlayer)
 			local overridesPlayerScriptsLabel = t_2.OverridesPlayerScriptsLabel
 			overridesPlayerScriptsLabel.Size = coreScriptVersionEnabledEngineFeature and UDim2.new(0, overridesPlayerScriptsLabel.TextBounds.X + 6, 0, var3) or UDim2.new(0.2, -6, 1, 0)
@@ -2039,8 +2050,82 @@ local function CreateSettingsHub()
 		end
 	end
 	
+	local _ = function()
+		-- upvalues: fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy)
+		return fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage()
+	end
+	
+	local _ = function()
+		-- upvalues: fFlagSideSheetOpenPeoplePage (copy), getSideSheetVisibility (copy), getHasRoomForPeoplePage (copy)
+		return fFlagSideSheetOpenPeoplePage and (getSideSheetVisibility() or getHasRoomForPeoplePage())
+	end
+	
+	local _ = function()
+		-- upvalues: fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getSideSheetVisibility (copy), getIsPeoplePageOpen (copy)
+		return fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen())
+	end
+	
+	local _ = function()
+		-- upvalues: t_2 (ref), fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getSideSheetVisibility (copy), getIsPeoplePageOpen (copy)
+		local visible = t_2.Visible
+		
+		if visible then
+			visible = not (fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen()))
+		end
+		return visible
+	end
+	
+	local _ = function(p3)
+		-- upvalues: fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getSideSheetVisibility (copy), getSideSheetAnimationDuration (copy)
+		return if fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and getSideSheetVisibility() then getSideSheetAnimationDuration() else p3
+	end
+	
+	local _ = function(p3)
+		-- upvalues: fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getSideSheetVisibility (copy), getIsPeoplePageOpen (copy)
+		return if p3 == nil then fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen()) else p3
+	end
+	
+	local _ = function(value, p3)
+		-- upvalues: fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getSideSheetVisibility (copy), getIsPeoplePageOpen (copy), getSideSheetAnimationDuration (copy)
+		return if if p3 ~= nil then fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen()) else p3 then getSideSheetAnimationDuration() else value
+	end
+	
+	local _ = function()
+		-- upvalues: fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getSideSheetVisibility (copy), getIsPeoplePageOpen (copy), getSideSheetDrawerWidth (copy)
+		return if fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen()) then getSideSheetDrawerWidth() else 0
+	end
+	
+	local _ = function(p3)
+		-- upvalues: fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getSideSheetVisibility (copy), getIsPeoplePageOpen (copy), getSideSheetDrawerWidth (copy), themeModule (copy), getSideSheetMenuPageWidth (copy), robloxGui (copy)
+		local var39 = if not (fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen())) then 0 else getSideSheetDrawerWidth()
+		
+		if var39 <= 0 then
+			return p3
+		end
+		local var40 = themeModule.HubPadding()
+		
+		return math.max(150, math.min(p3, getSideSheetMenuPageWidth(robloxGui.AbsoluteSize.X, var39, var40.PaddingLeft.Offset + var40.PaddingRight.Offset)))
+	end
+	
+	local _ = function(p3, p4)
+		-- upvalues: themeModule (copy)
+		local var39 = themeModule.HubPadding()
+		
+		return p3 + var39.PaddingTop.Offset + var39.PaddingBottom.Offset + p4
+	end
+	
+	local _ = function(p3, p4)
+		-- upvalues: fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getSideSheetVisibility (copy), getIsPeoplePageOpen (copy), getSideSheetDrawerWidth (copy)
+		local var39 = if not (fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen())) then 0 else getSideSheetDrawerWidth()
+		
+		if var39 <= 0 then
+			return p3, p4
+		end
+		return UDim2.new(p3.X.Scale, p3.X.Offset + var39 / 2, 0.5, 0), Vector2.new(p4.X, 0.5)
+	end
+	
 	local function onScreenSizeChanged()
-		-- upvalues: t_2 (ref), t (copy), utilityModule (copy), themeModule (copy), var34 (ref), var35 (ref), robloxGui (copy), var2 (copy), VRService (copy), isSideSheetEnabledModule (copy), runService (copy), shouldShowBottomBar (ref), setBottomBarBindings (ref), setBottomBarSelection (ref), removeBottomBarBindings (ref)
+		-- upvalues: t_2 (ref), t (copy), utilityModule (copy), themeModule (copy), var34 (ref), var35 (ref), robloxGui (copy), var2 (copy), VRService (copy), fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getSideSheetVisibility (copy), getIsPeoplePageOpen (copy), getSideSheetDrawerWidth (copy), getSideSheetMenuPageWidth (copy), isSideSheetEnabledModule (copy), runService (copy), shouldShowBottomBar (ref), setBottomBarBindings (ref), setBottomBarSelection (ref), removeBottomBarBindings (ref), getSideSheetMenuPageHeight (copy)
 		local function _()
 			-- upvalues: t_2 (copy)
 			return if t_2.BackBarRef:getValue() then t_2.BackBarRef:getValue().Visible else false
@@ -2080,40 +2165,103 @@ local function CreateSettingsHub()
 		elseif t.isInExperienceUIVREnabled and VRService.VREnabled then
 			var42 = 0
 		end
+		local var44, var45
+		local position = var39.Position
+		local anchorPoint = var39.AnchorPoint
+		local var46 = if not (fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen())) then 0 else getSideSheetDrawerWidth()
+		
+		if var46 <= 0 then
+			var44 = position
+			var45 = anchorPoint
+		else
+			var44 = UDim2.new(position.X.Scale, position.X.Offset + var46 / 2, 0.5, 0)
+			var45 = Vector2.new(anchorPoint.X, 0.5)
+		end
 		t_2.MenuContainer.Size = var39.Size
-		t_2.MenuContainer.Position = var39.Position
-		t_2.MenuContainer.AnchorPoint = var39.AnchorPoint
+		t_2.MenuContainer.Position = var44
+		t_2.MenuContainer.AnchorPoint = var45
 		local _ = var42 * 2 + t_2.HubBar.Size.Y.Offset * 2
-		local var44 = 0
+		local var47 = 0
 		
 		if not t.FFlagAddTraversalBackButton then
 			if (if not t_2.BackBarRef:getValue() then false else t_2.BackBarRef:getValue().Visible) and t_2.BackBarRef:getValue() then
-				var44 = t_2.BackBarRef:getValue().Size.Y.Offset
+				var47 = t_2.BackBarRef:getValue().Size.Y.Offset
 			end
 			if t.EngineFeatureTeleportHistoryButtons and (if not t_2.FrontBarRef:getValue() then false else t_2.FrontBarRef:getValue().Visible) and t_2.FrontBarRef:getValue() then
-				var44 += t_2.FrontBarRef:getValue().Size.Y.Offset
+				var47 += t_2.FrontBarRef:getValue().Size.Y.Offset
 			end
 		end
 		if var43 then
+			local var48
 			t_2.HubBar.Position = UDim2.new(0.5, 0, 0, 10)
-			t_2.HubBar.Size = UDim2.new(0, robloxGui.AbsoluteSize.X - 40, 0, 54)
+			local hubBar = t_2.HubBar
+			local new = UDim2.new
+			local var49 = 0
+			local var50 = robloxGui.AbsoluteSize.X - 40
+			local var51 = if not (fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen())) then 0 else getSideSheetDrawerWidth()
+			
+			if var51 <= 0 then
+				var48 = var50
+			else
+				local var52 = themeModule.HubPadding()
+				var48 = math.max(150, math.min(var50, getSideSheetMenuPageWidth(robloxGui.AbsoluteSize.X, var51, var52.PaddingLeft.Offset + var52.PaddingRight.Offset)))
+			end
+			hubBar.Size = new(var49, var48, 0, 54)
 		elseif var2 then
 			t_2.HubBar.Size = UDim2.new(0, 1200, 0, 100)
 		elseif utilityModule:IsSmallTouchScreen() then
-			t_2.HubBar.Size = UDim2.new(0, robloxGui.AbsoluteSize.X - 60, 0, 52)
+			local var53
+			local hubBar = t_2.HubBar
+			local new = UDim2.new
+			local var54 = 0
+			local var55 = robloxGui.AbsoluteSize.X - 60
+			local var56 = if not (fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen())) then 0 else getSideSheetDrawerWidth()
+			
+			if var56 <= 0 then
+				var53 = var55
+			else
+				local var57 = themeModule.HubPadding()
+				var53 = math.max(150, math.min(var55, getSideSheetMenuPageWidth(robloxGui.AbsoluteSize.X, var56, var57.PaddingLeft.Offset + var57.PaddingRight.Offset)))
+			end
+			hubBar.Size = new(var54, var53, 0, 52)
 		elseif t.isInExperienceUIVREnabled then
-			t_2.HubBar.Size = UDim2.new(0, t_2.SettingsUIDelegate:getHubBarSize(), 0, 60)
+			local var58
+			local hubBar = t_2.HubBar
+			local new = UDim2.new
+			local var59 = 0
+			local hubBarSize = t_2.SettingsUIDelegate:getHubBarSize()
+			local var60 = if not (fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen())) then 0 else getSideSheetDrawerWidth()
+			
+			if var60 <= 0 then
+				var58 = hubBarSize
+			else
+				local var61 = themeModule.HubPadding()
+				var58 = math.max(150, math.min(hubBarSize, getSideSheetMenuPageWidth(robloxGui.AbsoluteSize.X, var60, var61.PaddingLeft.Offset + var61.PaddingRight.Offset)))
+			end
+			hubBar.Size = new(var59, var58, 0, 60)
 		else
-			t_2.HubBar.Size = UDim2.new(0, 800, 0, 60)
+			local var62
+			local hubBar = t_2.HubBar
+			local new = UDim2.new
+			local var63 = 0
+			local var64 = if not (fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen())) then 0 else getSideSheetDrawerWidth()
+			
+			if var64 <= 0 then
+				var62 = 800
+			else
+				local var65 = themeModule.HubPadding()
+				var62 = math.max(150, math.min(800, getSideSheetMenuPageWidth(robloxGui.AbsoluteSize.X, var64, var65.PaddingLeft.Offset + var65.PaddingRight.Offset)))
+			end
+			hubBar.Size = new(var63, var62, 0, 60)
 		end
-		local var45 = if isSideSheetEnabledModule or not themeModule.AlwaysShowBottomBar() then t_2.HubBar.Size.Y.Offset else t_2.HubBar.Size.Y.Offset + t_2.BottomButtonFrame.Size.Y.Offset
-		local var46 = var42 * 2 + (if t.FFlagFixDisableTopPaddingError and t_2.Pages.CurrentPage == nil or not t_2.Pages.CurrentPage.DisableTopPadding then var45 else 0)
+		local var66 = if isSideSheetEnabledModule or not themeModule.AlwaysShowBottomBar() then t_2.HubBar.Size.Y.Offset else t_2.HubBar.Size.Y.Offset + t_2.BottomButtonFrame.Size.Y.Offset
+		local var67 = var42 * 2 + (if t.FFlagFixDisableTopPaddingError and t_2.Pages.CurrentPage == nil or not t_2.Pages.CurrentPage.DisableTopPadding then var66 else 0)
 		
 		if not t.FFlagAddTraversalBackButton then
-			var44 = if (if not t_2.BackBarRef:getValue() then false else t_2.BackBarRef:getValue().Visible) and t_2.BackBarRef:getValue() then t_2.BackBarRef:getValue().Size.Y.Offset else 0
+			var47 = if (if not t_2.BackBarRef:getValue() then false else t_2.BackBarRef:getValue().Visible) and t_2.BackBarRef:getValue() then t_2.BackBarRef:getValue().Size.Y.Offset else 0
 			
 			if t.EngineFeatureTeleportHistoryButtons and (if not t_2.FrontBarRef:getValue() then false else t_2.FrontBarRef:getValue().Visible) and t_2.FrontBarRef:getValue() then
-				var44 += t_2.FrontBarRef:getValue().Size.Y.Offset
+				var47 += t_2.FrontBarRef:getValue().Size.Y.Offset
 			end
 		end
 		runService.Heartbeat:wait()
@@ -2125,58 +2273,109 @@ local function CreateSettingsHub()
 			removeBottomBarBindings()
 		end
 		if t.isInExperienceUIVREnabled then
-			var46 += t_2.SettingsUIDelegate:getMenuContainerExtraSpace()
+			var67 += t_2.SettingsUIDelegate:getMenuContainerExtraSpace()
 		end
-		local var47 = var41 - var46 - var44
+		local var68 = var41 - var67 - var47
 		
 		if t.FFlagRelocateMobileMenuButtons and (t.FIntRelocateMobileMenuButtonsVariant == 1 or t.FIntRelocateMobileMenuButtonsVariant == 3) and utilityModule:IsSmallTouchScreen() then
-			var47 -= themeModule.ExtraHubBottomPaddingMobile
+			var68 -= themeModule.ExtraHubBottomPaddingMobile
 		end
-		local var48
+		if fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen()) then
+			local var69 = themeModule.HubPadding()
+			var68 = getSideSheetMenuPageHeight(t_2.Shield.AbsoluteSize.Y, var66 + var69.PaddingTop.Offset + var69.PaddingBottom.Offset + var47)
+		end
+		if fFlagSideSheetOpenPeoplePage then
+			t_2.PageView.VerticalScrollBarInset = if fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen()) then Enum.ScrollBarInset.Always else Enum.ScrollBarInset.ScrollBar
+		end
+		local var70
 		local _ = nil
 		
 		if var43 then
-			var48 = var47
-		elseif var40 < var47 then
-			var48 = var40
+			var70 = var68
+		elseif var40 < var68 then
+			var70 = var40
 			t_2.HubBar.Position = UDim2.new(t_2.HubBar.Position.X.Scale, t_2.HubBar.Position.X.Offset, 0.5, -var40 / 2 - t_2.HubBar.Size.Y.Offset)
 			
 			if t_2.BottomButtonFrame then
 				t_2.BottomButtonFrame.Position = UDim2.new(t_2.BottomButtonFrame.Position.X.Scale, t_2.BottomButtonFrame.Position.X.Offset, 0.5, var40 / 2)
 			end
-		elseif var47 < 150 then
-			var48 = 150
+		elseif var68 < 150 then
+			var70 = 150
 			t_2.HubBar.Position = UDim2.new(t_2.HubBar.Position.X.Scale, t_2.HubBar.Position.X.Offset, 0.5, -75 - t_2.HubBar.Size.Y.Offset)
 			
 			if t_2.BottomButtonFrame then
 				t_2.BottomButtonFrame.Position = UDim2.new(t_2.BottomButtonFrame.Position.X.Scale, t_2.BottomButtonFrame.Position.X.Offset, 0.5, 75)
 			end
 		else
-			var48 = var47
+			var70 = var68
 			t_2.HubBar.Position = UDim2.new(t_2.HubBar.Position.X.Scale, t_2.HubBar.Position.X.Offset, 0, var42)
 			
 			if t_2.BottomButtonFrame then
-				t_2.BottomButtonFrame.Position = UDim2.new(t_2.BottomButtonFrame.Position.X.Scale, t_2.BottomButtonFrame.Position.X.Offset, 1, -(var42 + var45))
+				t_2.BottomButtonFrame.Position = UDim2.new(t_2.BottomButtonFrame.Position.X.Scale, t_2.BottomButtonFrame.Position.X.Offset, 1, -(var42 + var66))
 			end
 		end
 		local _ = nil
-		local var49 = if var2 then UDim2.new(0, t_2.HubBar.AbsoluteSize.X, 0, var48) elseif not utilityModule:IsSmallTouchScreen() then if t.FFlagRelocateMobileMenuButtons and (t.FIntRelocateMobileMenuButtonsVariant == 1 or t.FIntRelocateMobileMenuButtonsVariant == 3) then UDim2.new(0, t_2.HubBar.AbsoluteSize.X, 0, var48 + 0 + 0 - t_2.BottomButtonFrame.Size.Y.Offset) else UDim2.new(0, t_2.HubBar.AbsoluteSize.X, 0, var48 + 0 + 0) else UDim2.new(0, t_2.HubBar.AbsoluteSize.X, 0, var48)
+		local var71 = if var2 then UDim2.new(0, t_2.HubBar.AbsoluteSize.X, 0, var70) elseif not utilityModule:IsSmallTouchScreen() then if t.FFlagRelocateMobileMenuButtons and (t.FIntRelocateMobileMenuButtonsVariant == 1 or t.FIntRelocateMobileMenuButtonsVariant == 3) then UDim2.new(0, t_2.HubBar.AbsoluteSize.X, 0, var70 + 0 + 0 - t_2.BottomButtonFrame.Size.Y.Offset) else UDim2.new(0, t_2.HubBar.AbsoluteSize.X, 0, var70 + 0 + 0) else UDim2.new(0, t_2.HubBar.AbsoluteSize.X, 0, var70)
 		
 		if t.FFlagRelocateMobileMenuButtons and t.FIntRelocateMobileMenuButtonsVariant ~= 0 and t_2.BottomButtonFrame then
 			t_2.BottomButtonFrame.Size = UDim2.new(0, t_2.HubBar.Size.X.Offset, 0, t_2.HubBar.Size.Y.Offset)
 		end
-		local var50 = themeModule.HubPadding()
-		t_2.ReactPage.Size = UDim2.new(0, t_2.HubBar.AbsoluteSize.X + (var50.PaddingLeft.Offset + var50.PaddingRight.Offset), 0, var48 + var45 + (var50.PaddingTop.Offset + var50.PaddingBottom.Offset))
-		t_2.PageViewClipper.Size = var49
+		local var72 = themeModule.HubPadding()
+		t_2.ReactPage.Size = UDim2.new(0, t_2.HubBar.AbsoluteSize.X + (var72.PaddingLeft.Offset + var72.PaddingRight.Offset), 0, var70 + var66 + (var72.PaddingTop.Offset + var72.PaddingBottom.Offset))
+		t_2.PageViewClipper.Size = var71
 		
 		if var43 then
 			t_2.PageViewClipper.Position = UDim2.new(0.5, 0, 0, t_2.HubBar.Position.Y.Offset + t_2.HubBar.AbsoluteSize.Y)
 			
 			return
 		end
-		t_2.PageViewClipper.Position = UDim2.new(t_2.PageViewClipper.Position.X.Scale, t_2.PageViewClipper.Position.X.Offset, 0.5, -var48 / 2)
+		t_2.PageViewClipper.Position = UDim2.new(t_2.PageViewClipper.Position.X.Scale, t_2.PageViewClipper.Position.X.Offset, 0.5, -var70 / 2)
 	end
 	
+	if fFlagSideSheetOpenPeoplePage then
+		local function scheduleSideSheetPeoplePageLayoutRefresh()
+			-- upvalues: fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getSideSheetVisibility (copy), getIsPeoplePageOpen (copy), t_2 (ref), onScreenSizeChanged (ref)
+			if fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and not getSideSheetVisibility() and getIsPeoplePageOpen() then return end
+			local var39 = if fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen()) then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop
+			
+			if t_2.Modal then
+				local modal = t_2.Modal
+				local visible = t_2.Visible
+				
+				if visible then
+					visible = not (fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen()))
+				end
+				modal.Visible = visible
+			end
+			if t_2.Page then
+				t_2.Page.SelectionBehaviorLeft = var39
+			end
+			if t_2.PageViewClipper then
+				t_2.PageViewClipper.SelectionBehaviorLeft = var39
+			end
+			if t_2._sideSheetLayoutRefreshScheduled then
+				return
+			end
+			t_2._sideSheetLayoutRefreshScheduled = true
+			task.defer(function()
+				-- upvalues: t_2 (copy), onScreenSizeChanged (copy)
+				t_2._sideSheetLayoutRefreshScheduled = false
+				
+				if t_2.Visible and t_2.MenuContainer then
+					onScreenSizeChanged()
+				end
+			end)
+		end
+		
+		t_2._sideSheetLayoutEffectDispose = signalsModule.createEffect(function(p3)
+			-- upvalues: getSideSheetVisibility (copy), getSideSheetDrawerWidth (copy), getIsPeoplePageOpen (copy), getDidSideSheetOpenWithPeoplePage (copy), scheduleSideSheetPeoplePageLayoutRefresh (ref)
+			getSideSheetVisibility(p3)
+			getSideSheetDrawerWidth(p3)
+			getIsPeoplePageOpen(p3)
+			getDidSideSheetOpenWithPeoplePage(p3)
+			scheduleSideSheetPeoplePageLayoutRefresh()
+		end)
+	end
 	local _ = function()
 		-- upvalues: t_2 (ref), themeModule (copy), guiService (copy)
 		t_2.MenuContainer.BackgroundTransparency = themeModule.transparency("MenuContainer", 1) * guiService.PreferredTransparency
@@ -2566,7 +2765,7 @@ local function CreateSettingsHub()
 	end
 	
 	function t_2.SwitchToPage(_, p14, p15, p16, p17, _, p18)
-		-- upvalues: t_2 (ref), t (copy), fixReportButtonCutOff (copy), utilityModule (copy), themeModule (copy), isSideSheetEnabledModule (copy), shouldShowBottomBar (ref), var19 (write), var20 (write), setBottomBarBindings (ref), setBottomBarSelection (ref), onScreenSizeChanged (ref), cryoModule (copy), IXPServiceWrapper (copy), rbxAnalyticsService (copy), constantsModule (copy), flagsModule (copy), experienceMenuSessionManagerInstance (copy), reactPageSignalModule (copy)
+		-- upvalues: t_2 (ref), t (copy), fixReportButtonCutOff (copy), utilityModule (copy), themeModule (copy), isSideSheetEnabledModule (copy), shouldShowBottomBar (ref), fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getSideSheetVisibility (copy), getIsPeoplePageOpen (copy), getSideSheetDrawerWidth (copy), var19 (write), var20 (write), setBottomBarBindings (ref), setBottomBarSelection (ref), onScreenSizeChanged (ref), cryoModule (copy), IXPServiceWrapper (copy), rbxAnalyticsService (copy), constantsModule (copy), flagsModule (copy), experienceMenuSessionManagerInstance (copy), reactPageSignalModule (copy)
 		if t_2.Pages.PageTable[p14] == nil then return end
 		if t.FFlagPreventHiddenSwitchPage and t_2:GetVisibility() == false then return end
 		if fixReportButtonCutOff then
@@ -2600,15 +2799,27 @@ local function CreateSettingsHub()
 		if not isSideSheetEnabledModule and t_2.BottomButtonFrame and (var55 and not shouldShowBottomBar(p14)) then
 			uDim_1 = UDim.new(0, t_2.BottomButtonFrame.AbsoluteSize.Y)
 		end
-		local var57 = themeModule.HubPadding()
-		t_2.MenuContainerPadding.PaddingLeft = var57.PaddingLeft
-		t_2.MenuContainerPadding.PaddingRight = var57.PaddingRight
-		t_2.MenuContainerPadding.PaddingBottom = var57.PaddingBottom + uDim_1
-		t_2.MenuContainerPadding.PaddingTop = var57.PaddingTop + uDim
-		local var58 = themeModule.MenuContainerPosition(t_2.SettingsUIDelegate)
-		t_2.MenuContainer.Position = var58.Position
-		t_2.MenuContainer.Size = var58.Size
-		t_2.MenuContainer.AnchorPoint = var58.AnchorPoint
+		local var57, var58
+		local var59 = themeModule.HubPadding()
+		t_2.MenuContainerPadding.PaddingLeft = var59.PaddingLeft
+		t_2.MenuContainerPadding.PaddingRight = var59.PaddingRight
+		t_2.MenuContainerPadding.PaddingBottom = var59.PaddingBottom + uDim_1
+		t_2.MenuContainerPadding.PaddingTop = var59.PaddingTop + uDim
+		local var60 = themeModule.MenuContainerPosition(t_2.SettingsUIDelegate)
+		local position = var60.Position
+		local anchorPoint = var60.AnchorPoint
+		local var61 = if not (fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen())) then 0 else getSideSheetDrawerWidth()
+		
+		if var61 <= 0 then
+			var57 = position
+			var58 = anchorPoint
+		else
+			var57 = UDim2.new(position.X.Scale, position.X.Offset + var61 / 2, 0.5, 0)
+			var58 = Vector2.new(anchorPoint.X, 0.5)
+		end
+		t_2.MenuContainer.Position = var57
+		t_2.MenuContainer.Size = var60.Size
+		t_2.MenuContainer.AnchorPoint = var58
 		
 		if p16 == nil and t_2.Pages.CurrentPage and (t_2.Pages.CurrentPage.TabHeader and p14) and p14.TabHeader then
 			p16 = if t_2.Pages.CurrentPage.TabHeader.AbsolutePosition.x < p14.TabHeader.AbsolutePosition.x then 1 else -1
@@ -2638,17 +2849,17 @@ local function CreateSettingsHub()
 			else
 				t_2.BottomButtonFrame.Visible = false
 			end
-			local var59
+			local var62
 			local hubBar = t_2.HubBar
 			p14 = p14 or t_2.Pages.CurrentPage
 			
 			if isSideSheetEnabledModule then
-				var59 = p14.ShouldShowHubBar == true
-				var59 = nil
+				var62 = p14.ShouldShowHubBar == true
+				var62 = nil
 			else
-				var59 = p14.ShouldShowBottomBar == true
+				var62 = p14.ShouldShowBottomBar == true
 			end
-			hubBar.Visible = var59
+			hubBar.Visible = var62
 		end
 		if t.FFlagIEMTabFocusNav and t.FFlagIEMTabFocusNav then
 			local tabHeader = p14:GetTabHeader()
@@ -2660,27 +2871,27 @@ local function CreateSettingsHub()
 				end
 			end
 		end
-		local var60 = p14.IsPageClipped == true
-		t_2.PageViewClipper.ClipsDescendants = var60
-		t_2.PageView.ClipsDescendants = var60
-		t_2.PageViewInnerFrame.ClipsDescendants = var60
+		local var63 = p14.IsPageClipped == true
+		t_2.PageViewClipper.ClipsDescendants = var63
+		t_2.PageView.ClipsDescendants = var63
+		t_2.PageViewInnerFrame.ClipsDescendants = var63
 		t_2.Pages.CurrentPage = p14
 		t_2.Pages.CurrentPage:Display(t_2.PageViewInnerFrame, p17)
 		t_2.Pages.CurrentPage.Active = true
 		t_2.CurrentPageSignal:fire(if t_2.Pages.CurrentPage then t_2.Pages.CurrentPage.Page.Name else nil)
 		
 		if isSideSheetEnabledModule then
-			local var61
+			local var64
 			local currentPage = t_2.Pages.CurrentPage
 			local currentPage_1 = currentPage or t_2.Pages.CurrentPage
 			
 			if isSideSheetEnabledModule then
-				var61 = currentPage_1.ShouldShowHubBar == true
-				var61 = nil
+				var64 = currentPage_1.ShouldShowHubBar == true
+				var64 = nil
 			else
-				var61 = currentPage_1.ShouldShowBottomBar == true
+				var64 = currentPage_1.ShouldShowBottomBar == true
 			end
-			if var61 and currentPage.TabHeader then
+			if var64 and currentPage.TabHeader then
 				t_2.PageTitleLabel.Text = currentPage.TabHeader.TabLabel.Title.Text
 			else
 				t_2.PageTitleLabel.Text = ""
@@ -2689,7 +2900,7 @@ local function CreateSettingsHub()
 		local _ = nil
 		local _ = t_2.Pages.CurrentPage
 		
-		if u9589 ~= nil and u9589.ShouldDisableDefaultScroll == true then
+		if u10335 ~= nil and u10335.ShouldDisableDefaultScroll == true then
 			t_2.PageView.ScrollBarThickness = 0
 			t_2.PageView.ScrollingEnabled = false
 			t_2.PageView.CanvasPosition = Vector2.new(0, 0)
@@ -2713,9 +2924,9 @@ local function CreateSettingsHub()
 			if p19 == "AbsoluteSize" then
 				local _ = nil
 				local _ = t_2.Pages.CurrentPage
-				local var62 = u10094
+				local var65 = u10868
 				
-				if not (var62 ~= nil and var62.ShouldDisableDefaultScroll == true) then
+				if not (var65 ~= nil and var65.ShouldDisableDefaultScroll == true) then
 					t_2.PageView.CanvasSize = UDim2.new(0, 0, 0, t_2.Pages.CurrentPage:GetSize().Y)
 				end
 			end
@@ -2751,7 +2962,7 @@ local function CreateSettingsHub()
 					t_2.GameSettingsPageReorderIXPFetched = true
 				end
 			else
-				rbxAnalyticsService:SetRBXEventStream(constantsModule.AnalyticsTargetName, "open_" .. p64.Page.Name .. "_tab", constantsModule.AnalyticsMenuActionName, t_1)
+				rbxAnalyticsService:SetRBXEventStream(constantsModule.AnalyticsTargetName, "open_" .. p73.Page.Name .. "_tab", constantsModule.AnalyticsMenuActionName, t_1)
 			end
 			experienceMenuSessionManagerInstance:MenuSwitchToPage(p14.Page)
 		else
@@ -2817,46 +3028,52 @@ local function CreateSettingsHub()
 		end
 	end
 	
-	local var62 = if t.FFlagSettingsHubIndependentBackgroundVisibility then function(p19, p20)
-		-- upvalues: t_2 (ref), inExperienceAppChatModalModule (copy), constantsModule (copy), t (copy), themeModule (copy), tweenService (copy)
+	local var65 = if t.FFlagSettingsHubIndependentBackgroundVisibility then function(p19, p20, p21)
+		-- upvalues: t_2 (ref), inExperienceAppChatModalModule (copy), constantsModule (copy), fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getSideSheetVisibility (copy), getIsPeoplePageOpen (copy), getSideSheetAnimationDuration (copy), t (copy), themeModule (copy), tweenService (copy)
 		if not t_2.DarkenBackground then return end
 		if not p19 and t_2.DarkenBackground.Visible and (inExperienceAppChatModalModule:getVisible() or t_2.Visible) then return end
-		local var63 = 1
+		local var66 = 1
 		local quart = Enum.EasingStyle.Quart
-		local var64 = if constantsModule then constantsModule.ShieldCloseAnimationTweenTime else 0.4
+		local _ = 0
+		local var67 = if not (if p21 ~= nil then fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen()) else p21) then if constantsModule then constantsModule.ShieldCloseAnimationTweenTime else 0.4 else getSideSheetAnimationDuration()
 		
 		if p19 then
-			var63 = if t.isInExperienceUIVREnabled then t_2.SettingsUIDelegate:getDarkBackgroundTheme().Transparency else themeModule.transparency("DarkenBackground")
+			var66 = if t.isInExperienceUIVREnabled then t_2.SettingsUIDelegate:getDarkBackgroundTheme().Transparency else themeModule.transparency("DarkenBackground")
 			quart = Enum.EasingStyle.Quad
-			var64 = if constantsModule then constantsModule.ShieldOpenAnimationTweenTime else 0.5
+			var67 = if fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and getSideSheetVisibility() then getSideSheetAnimationDuration() elseif constantsModule then constantsModule.ShieldOpenAnimationTweenTime else 0.5
 		end
 		if p20 then
 			if t_2.DarkenBackgroundTween then
 				t_2.DarkenBackgroundTween:Cancel()
 				t_2.DarkenBackgroundTween = nil
 			end
-			t_2.DarkenBackground.BackgroundTransparency = var63
+			t_2.DarkenBackground.BackgroundTransparency = var66
 		else
-			local tweenInfo = TweenInfo.new(var64, quart, Enum.EasingDirection.Out)
+			local tweenInfo = TweenInfo.new(var67, quart, Enum.EasingDirection.Out)
 			
 			if t_2.DarkenBackgroundTween then
 				t_2.DarkenBackgroundTween:Cancel()
 			end
-			t_2.DarkenBackgroundTween = tweenService:Create(t_2.DarkenBackground, tweenInfo, { BackgroundTransparency = var63 })
+			t_2.DarkenBackgroundTween = tweenService:Create(t_2.DarkenBackground, tweenInfo, { BackgroundTransparency = var66 })
 			t_2.DarkenBackgroundTween:Play()
 		end
 		t_2.DarkenBackground.Visible = p19
 	end else nil
 	
 	setVisibilityInternal = function(value, p19, p20, _, p21)
-		-- upvalues: t (copy), t_2 (ref), perfUtilsModule (copy), robloxGui (copy), var62 (write), onScreenSizeChanged (ref), utilityModule (copy), var34 (ref), guiService (copy), themeModule (copy), experienceMenuSessionManagerInstance (copy), constantsModule (copy), gameSettings (copy), tweenService (copy), contextActionService (copy), isSideSheetEnabledModule (copy), var44 (ref), var46 (ref), shouldShowBottomBar (ref), setBottomBarBindings (ref), setBottomBarSelection (ref), userInputService (copy), var45 (ref), var10 (copy), VRService (copy), mouseIconOverrideService (copy), settingsHubCursorOverride (copy), removeBottomBarBindings (ref), chatSelectorModule (copy), fFlagEnableNewBackpack (copy), var1 (copy), inExperienceAppChatModalModule (copy), var11 (copy), var35 (ref), SHIELD_INACTIVE_POSITION (copy), rbxAnalyticsService (copy)
+		-- upvalues: fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getSideSheetVisibility (copy), getIsPeoplePageOpen (copy), t_2 (ref), toggleSideSheet (copy), t (copy), perfUtilsModule (copy), robloxGui (copy), var65 (write), onScreenSizeChanged (ref), utilityModule (copy), var34 (ref), guiService (copy), themeModule (copy), experienceMenuSessionManagerInstance (copy), constantsModule (copy), getSideSheetAnimationDuration (copy), gameSettings (copy), tweenService (copy), contextActionService (copy), isSideSheetEnabledModule (copy), var44 (ref), var46 (ref), shouldShowBottomBar (ref), setBottomBarBindings (ref), setBottomBarSelection (ref), userInputService (copy), var45 (ref), var10 (copy), VRService (copy), mouseIconOverrideService (copy), settingsHubCursorOverride (copy), removeBottomBarBindings (ref), chatSelectorModule (copy), fFlagEnableNewBackpack (copy), var1 (copy), inExperienceAppChatModalModule (copy), var11 (copy), var35 (ref), SHIELD_INACTIVE_POSITION (copy), rbxAnalyticsService (copy)
+		local var66 = fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen())
+		
+		if fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and not value and t_2.Visible then
+			toggleSideSheet(false)
+		end
 		local _ = nil
-		local var63 = if t.isInExperienceUIVREnabled then p19 or not t_2.SettingsUIDelegate:isOpenCloseAnimationAllowed() else p19
+		local var67 = if t.isInExperienceUIVREnabled then p19 or not t_2.SettingsUIDelegate:isOpenCloseAnimationAllowed() else p19
 		t_2.OpenStateChangedCount += 1
-		local var64 = value ~= t_2.Visible
+		local var68 = value ~= t_2.Visible
 		t_2.Visible = value
 		
-		if t.FFlagEnableInGameMenuDurationLogger and var64 and not value then
+		if t.FFlagEnableInGameMenuDurationLogger and var68 and not value then
 			perfUtilsModule.menuClose()
 		end
 		if t_2.ResizedConnection then
@@ -2875,7 +3092,19 @@ local function CreateSettingsHub()
 			t_2.PreferredTransparencyChangedConnection:disconnect()
 			t_2.PreferredTransparencyChangedConnection = nil
 		end
-		t_2.Modal.Visible = t_2.Visible
+		local visible
+		local modal = t_2.Modal
+		
+		if fFlagSideSheetOpenPeoplePage then
+			visible = t_2.Visible
+			
+			if visible then
+				visible = not (fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen()))
+			end
+		else
+			visible = t_2.Visible
+		end
+		modal.Visible = visible
 		
 		if t_2.TabConnection then
 			t_2.TabConnection:disconnect()
@@ -2884,7 +3113,7 @@ local function CreateSettingsHub()
 		local playerListManagerModule = require(robloxGui.Modules.PlayerList.PlayerListManager)
 		
 		if t.FFlagSettingsHubIndependentBackgroundVisibility then
-			var62(t_2.Visible, var63)
+			var65(t_2.Visible, var67, var66)
 		end
 		if t_2.Visible then
 			t_2.ResizedConnection = robloxGui.Changed:connect(function(p22)
@@ -2928,7 +3157,7 @@ local function CreateSettingsHub()
 			t_2.Shield.Visible = t_2.Visible
 			guiService:CloseInspectMenu()
 			
-			if var63 or not t_2.Shield:IsDescendantOf(game) then
+			if var67 or not t_2.Shield:IsDescendantOf(game) then
 				t_2.Shield.Position = UDim2.new(0, 0, 0, 0)
 				
 				if not t.FFlagSettingsHubIndependentBackgroundVisibility and t_2.DarkenBackground then
@@ -2939,7 +3168,7 @@ local function CreateSettingsHub()
 					t_2.DarkenBackground.BackgroundTransparency = themeModule.transparency("DarkenBackground")
 				end
 			else
-				local var65 = if constantsModule then constantsModule.ShieldOpenAnimationTweenTime else 0.5
+				local var69 = if fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and getSideSheetVisibility() then getSideSheetAnimationDuration() elseif constantsModule then constantsModule.ShieldOpenAnimationTweenTime else 0.5
 				
 				if gameSettings.ReducedMotion then
 					if t_2.ReducedMotionOpenTween then
@@ -2969,7 +3198,7 @@ local function CreateSettingsHub()
 						perfUtilsModule.menuOpenComplete()
 					end
 				else
-					t_2.Shield:TweenPositionInternal(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.InOut, Enum.EasingStyle.Quart, var65, true, function()
+					t_2.Shield:TweenPositionInternal(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.InOut, Enum.EasingStyle.Quart, var69, true, function()
 						-- upvalues: t (copy), perfUtilsModule (copy)
 						if t.FFlagEnableInGameMenuDurationLogger then
 							perfUtilsModule.menuOpenComplete()
@@ -2977,7 +3206,7 @@ local function CreateSettingsHub()
 					end)
 				end
 				if not t.FFlagSettingsHubIndependentBackgroundVisibility and t_2.DarkenBackground then
-					local tweenInfo = TweenInfo.new(var65, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+					local tweenInfo = TweenInfo.new(var69, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 					
 					if t_2.DarkenBackgroundTween then
 						t_2.DarkenBackgroundTween:Cancel()
@@ -3022,9 +3251,9 @@ local function CreateSettingsHub()
 			else
 				t_2:SwitchToPage(t_2:GetFirstPageWithTabHeader(), nil, 1, true)
 			end
-			local var66 = if t.isInExperienceUIVREnabled and not t.InExperienceUIVRIXP:isMovePanelToCenter() then not VRService.VREnabled else true
+			local var70 = if t.isInExperienceUIVREnabled and not t.InExperienceUIVRIXP:isMovePanelToCenter() then not VRService.VREnabled else true
 			
-			if var66 then
+			if var70 then
 				if not t.FFlagAddNewPlayerListMobileFocusNav then
 					playerListManagerModule:HideTemp("SettingsMenu", true)
 				elseif playerListManagerModule:GetIsModal() then
@@ -3038,10 +3267,10 @@ local function CreateSettingsHub()
 				if fFlagEnableNewBackpack then
 					var1.setVisibility(var1.FeatureName.Backpack, false)
 				else
-					var66 = require(robloxGui.Modules.BackpackScript)
+					var70 = require(robloxGui.Modules.BackpackScript)
 					
-					if var66.IsOpen then
-						var66:OpenClose()
+					if var70.IsOpen then
+						var70:OpenClose()
 					end
 				end
 			end
@@ -3085,7 +3314,7 @@ local function CreateSettingsHub()
 					chatSelectorModule:HideTemp("SettingsMenu", false)
 				end
 			end
-			if var63 then
+			if var67 then
 				t_2.Shield.Position = SHIELD_INACTIVE_POSITION
 				t_2.Shield.Visible = t_2.Visible
 				t_2.SettingsShowSignal:fire(t_2.Visible)
@@ -3103,7 +3332,7 @@ local function CreateSettingsHub()
 					t_2.DarkenBackground.BackgroundTransparency = 1
 				end
 			else
-				local var67 = if constantsModule then constantsModule.ShieldCloseAnimationTweenTime else 0.4
+				local var71 = if not (if var66 ~= nil then fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen()) else var66) then if constantsModule then constantsModule.ShieldCloseAnimationTweenTime else 0.4 else getSideSheetAnimationDuration()
 				
 				local function handleShieldClose()
 					-- upvalues: t (copy), t_2 (copy), guiService (copy), experienceMenuSessionManagerInstance (copy), perfUtilsModule (copy)
@@ -3149,13 +3378,20 @@ local function CreateSettingsHub()
 				elseif t.ChromeEnabled and t.FFlagEnableConsoleExpControls then
 					require(robloxGui.Modules.Chrome.Service):setShortcutBar(nil)
 				end
-				t_2.Shield:TweenPositionInternal(SHIELD_INACTIVE_POSITION, Enum.EasingDirection.In, Enum.EasingStyle.Quad, var67, true, function()
+				local _in = Enum.EasingDirection.In
+				local quad = Enum.EasingStyle.Quad
+				
+				if if var66 ~= nil then fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and (getSideSheetVisibility() and getIsPeoplePageOpen()) else var66 then
+					_in = Enum.EasingDirection.Out
+					quad = Enum.EasingStyle.Quart
+				end
+				t_2.Shield:TweenPositionInternal(SHIELD_INACTIVE_POSITION, _in, quad, var71, true, function()
 					-- upvalues: t_2 (copy), handleShieldClose (ref)
 					t_2.Shield.Visible = t_2.Visible
 					handleShieldClose()
 				end)
 				if not t.FFlagSettingsHubIndependentBackgroundVisibility and t_2.DarkenBackground then
-					local tweenInfo = TweenInfo.new(var67, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
+					local tweenInfo = TweenInfo.new(var71, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
 					
 					if t_2.DarkenBackgroundTween then
 						t_2.DarkenBackgroundTween:Cancel()
@@ -3199,7 +3435,7 @@ local function CreateSettingsHub()
 			universeid = tostring(game.GameId)
 		}
 		
-		if var64 then
+		if var68 then
 			if value then
 				rbxAnalyticsService:SetRBXEventStream(constantsModule.AnalyticsTargetName, constantsModule.AnalyticsMenuOpenName, constantsModule.AnalyticsMenuActionName, t_1)
 				
@@ -3223,11 +3459,11 @@ local function CreateSettingsHub()
 	end
 	
 	function t_2.SetBackgroundVisibility(_, p19, p20)
-		-- upvalues: t_2 (ref), var62 (write)
+		-- upvalues: t_2 (ref), var65 (write)
 		if t_2.DarkenBackground.Visible == p19 then
 			return
 		end
-		var62(p19, p20)
+		var65(p19, p20)
 	end
 	
 	function t_2.GetVisibility(_)
@@ -3248,29 +3484,25 @@ local function CreateSettingsHub()
 	end
 	
 	function t_2.InviteToGame(_)
-		-- upvalues: t (copy), IXPServiceWrapper (copy), gameInviteInviteExperimentVariant (copy), var5 (copy), userInputService (copy), var4 (copy), t_2 (ref), gameInviteModalManager (copy), gameInviteConstants (copy), robloxGui (copy)
-		local var63 = false
+		-- upvalues: t (copy), IXPServiceWrapper (copy), gameInviteInviteExperimentVariant (copy), var5 (copy), userInputService (copy), var4 (copy), t_2 (ref), gameInviteModalManager (copy), gameInviteConstants (copy), robloxGui (copy), fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), toggleSideSheet (copy)
+		local var66 = false
 		
 		if t.GetFFlagLuaInExperienceCoreScriptsGameInviteUnification() and t.FFlagLuaEnableGameInviteModalSettingsHub then
 			local fStringGameInviteMenuLayer = t.GetFStringGameInviteMenuLayer()
-			local var64 = IXPServiceWrapper:GetLayerData(fStringGameInviteMenuLayer)
+			local var67 = IXPServiceWrapper:GetLayerData(fStringGameInviteMenuLayer)
 			IXPServiceWrapper:LogUserLayerExposure(fStringGameInviteMenuLayer)
 			
-			if var64 and var64.inExperienceGameInviteUXRefresh2023 ~= gameInviteInviteExperimentVariant.UxRefresh then
-				var63 = var64.inExperienceGameInviteUXRefresh2023 ~= gameInviteInviteExperimentVariant.InviteLimit
+			if var67 and var67.inExperienceGameInviteUXRefresh2023 ~= gameInviteInviteExperimentVariant.UxRefresh then
+				var66 = var67.inExperienceGameInviteUXRefresh2023 ~= gameInviteInviteExperimentVariant.InviteLimit
 			end
 		end
 		if game:GetEngineFeature("PlatformFriendsService") and var5 and var5:IsInviteFriendsEnabled() then
 			var5:ShowInviteFriendsUI()
-			
-			return
 		elseif userInputService:GetPlatform() == Enum.Platform.XBoxOne then
 			if var4 then
 				var4:PopupGameInviteUI()
-				
-				return
 			end
-		elseif var63 then
+		elseif var66 then
 			if not t.FFlagAddInviteFriendsIntegration or t_2.Visible then
 				t_2:ToggleVisibility()
 			end
@@ -3278,22 +3510,23 @@ local function CreateSettingsHub()
 			
 			if t.FFlagEnableConsoleExpControls and t.ChromeEnabled then
 				require(robloxGui.Modules.Chrome.Service):setShortcutBar(nil)
-				
-				return
 			end
 		else
 			t_2:AddToMenuStack(t_2.Pages.CurrentPage)
 			t_2:SwitchToPage(t_2.ShareGamePage, nil, 1, true)
+		end
+		if fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() then
+			toggleSideSheet(false)
 		end
 	end
 	
 	function t_2.PopMenu(_, _, p19, p20)
 		-- upvalues: t_2 (ref), poppedMenu (ref), t (copy), robloxGui (copy)
 		if t_2.MenuStack and #t_2.MenuStack > 0 then
-			local var63 = t_2.MenuStack[#t_2.MenuStack]
+			local var66 = t_2.MenuStack[#t_2.MenuStack]
 			
-			if type(var63) ~= "table" then
-				poppedMenu:Fire(var63)
+			if type(var66) ~= "table" then
+				poppedMenu:Fire(var66)
 			end
 			table.remove(t_2.MenuStack, #t_2.MenuStack)
 			t_2:SwitchToPage(t_2.MenuStack[#t_2.MenuStack], true, 1, p19)
@@ -3398,11 +3631,11 @@ local function CreateSettingsHub()
 	end
 	
 	t_2.GameSettingsPageReorderIXPFetched = false
-	local var63 = nil
-	local var64 = nil
+	local var66 = nil
+	local var67 = nil
 	
 	local function enableVR()
-		-- upvalues: corePackagesService (copy), t_2 (ref), var63 (write)
+		-- upvalues: corePackagesService (copy), t_2 (ref), var66 (write)
 		local VRHub = require(corePackagesService.Workspace.Packages.VrCommon).VRHub
 		local panel3D = require(corePackagesService.Workspace.Packages.VrCommon).Panel3D
 		local settingsMenu = panel3D.Get("SettingsMenu")
@@ -3414,7 +3647,7 @@ local function CreateSettingsHub()
 		t_2.Shield.Parent.ClipsDescendants = false
 		t_2.VRShield.Visible = true
 		t_2:HideShield()
-		var63 = t_2.SettingsShowSignal:connect(function(p19)
+		var66 = t_2.SettingsShowSignal:connect(function(p19)
 			-- upvalues: settingsMenu (ref), VRHub (ref)
 			if p19 then
 				settingsMenu:SetVisible(true)
@@ -3434,19 +3667,19 @@ local function CreateSettingsHub()
 	end
 	
 	local function disableVR()
-		-- upvalues: t_2 (ref), robloxGui (copy), var63 (write), var64 (write), corePackagesService (copy)
+		-- upvalues: t_2 (ref), robloxGui (copy), var66 (write), var67 (write), corePackagesService (copy)
 		t_2.ClippingShield.Parent = robloxGui
 		t_2.Shield.Parent.ClipsDescendants = true
 		t_2.VRShield.Visible = false
 		t_2:ShowShield()
 		
-		if var63 then
-			var63:disconnect()
-			var63 = nil
+		if var66 then
+			var66:disconnect()
+			var66 = nil
 		end
-		if var64 then
-			var64:disconnect()
-			var64 = nil
+		if var67 then
+			var67:disconnect()
+			var67 = nil
 		end
 		require(corePackagesService.Workspace.Packages.VrCommon).Panel3D.Get("SettingsMenu"):SetVisible(false)
 	end
@@ -3497,7 +3730,7 @@ local function CreateSettingsHub()
 	end
 	t_2.GameSettingsPage = require(robloxGui.Modules.Settings.Pages.GameSettingsWrapper)
 	t_2.GameSettingsPage:SetHub(t_2)
-	t_2.ReportAbusePage = require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuNewContainerPage)
+	t_2.ReportAbusePage = require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuContainerPage)
 	t_2.ReportAbusePage:SetHub(t_2)
 	t_2.ReportSentPage = require(robloxGui.Modules.Settings.Pages.ReportSentPage)
 	t_2.ReportSentPage:SetHub(t_2)
@@ -3541,9 +3774,9 @@ local function CreateSettingsHub()
 		t_2.ShareGamePage:ConnectHubToApp(t_2, t_2.ShareGameApp)
 		t_2:AddPage(t_2.ShareGamePage)
 	end
-	local var65 = capturesPolicy.PolicyImplementation.read()
+	local var68 = capturesPolicy.PolicyImplementation.read()
 	
-	if (if var65 then capturesPolicy.Mapper(var65).eligibleForCapturesFeature() else false) and (if t.isInExperienceUIVREnabled and t.FFlagFixSpatialUICaptures then not isSpatial() else true) then
+	if (if var68 then capturesPolicy.Mapper(var68).eligibleForCapturesFeature() else false) and (if t.isInExperienceUIVREnabled and t.FFlagFixSpatialUICaptures then not isSpatial() else true) then
 		local capturesPageWrapperModule = require(robloxGui.Modules.Settings.Pages.CapturesPageWrapper)
 		
 		local function closeSettingsMenu()
@@ -3603,11 +3836,16 @@ local function CreateSettingsHub()
 	
 	if not t.isNewInGameMenuEnabled() and (not t.FFlagAddUILessMode or t.FIntAddUILessModeVariant == 0) then
 		contextActionService:BindCoreAction("RBXEscapeMainMenu", function(_, p19, _)
-			-- upvalues: t (copy), getSwitchServerStore (copy), isSideSheetEnabledModule (copy), getSideSheetVisibility (copy), toggleSideSheet (copy), t_2 (ref), constantsModule (copy)
+			-- upvalues: t (copy), isPioneerLaunch (copy), getSwitchServerStore (copy), isSideSheetEnabledModule (copy), getSideSheetVisibility (copy), fFlagSideSheetOpenPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getIsPeoplePageOpen (copy), t_2 (ref), toggleSideSheet (copy), constantsModule (copy)
 			if p19 ~= Enum.UserInputState.Begin then return end
-			if t.FFlagShowSwitchServerButton and getSwitchServerStore(false).isConfirmationOpen(false) then return end
+			if (t.FFlagShowSwitchServerButton or isPioneerLaunch()) and getSwitchServerStore(false).isConfirmationOpen(false) then return end
 			if isSideSheetEnabledModule then
 				if getSideSheetVisibility() then
+					if fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and getIsPeoplePageOpen() then
+						t_2:SetVisibility(false)
+						
+						return
+					end
 					toggleSideSheet(false)
 					
 					return
@@ -3633,10 +3871,17 @@ local function CreateSettingsHub()
 			t_2:PopMenu(false, true)
 		end, false, Enum.KeyCode.Escape)
 	end
+	local var69 = require(corePackagesService.Workspace.Packages.BuildExperiencePlaytestLaunch.teamCreateUtils).isViewer()
 	guiService.ShowLeaveConfirmation:connect(function()
-		-- upvalues: isSideSheetEnabledModule (copy), t (copy), getSideSheetVisibility (copy), toggleSideSheet (copy), t_2 (ref), constantsModule (copy)
-		if isSideSheetEnabledModule and t.FFlagSideSheetAndroidBack then
+		-- upvalues: var69 (ref), isSideSheetEnabledModule (copy), t (copy), fFlagSideSheetOpenPeoplePage (copy), getSideSheetVisibility (copy), getHasRoomForPeoplePage (copy), getDidSideSheetOpenWithPeoplePage (copy), getIsPeoplePageOpen (copy), t_2 (ref), toggleSideSheet (copy), constantsModule (copy)
+		if var69 then return end
+		if isSideSheetEnabledModule and (t.FFlagSideSheetAndroidBack or fFlagSideSheetOpenPeoplePage and (getSideSheetVisibility() or getHasRoomForPeoplePage())) then
 			if getSideSheetVisibility() then
+				if fFlagSideSheetOpenPeoplePage and getDidSideSheetOpenWithPeoplePage() and getIsPeoplePageOpen() then
+					t_2:SetVisibility(false)
+					
+					return
+				end
 				toggleSideSheet(false)
 				
 				return
@@ -3664,22 +3909,22 @@ local function CreateSettingsHub()
 			t_2.Pages.CurrentPage:SelectARow()
 		end
 	end)
-	local var66 = false
+	local var70 = false
 	
 	local _ = function()
-		-- upvalues: var66 (write), IXPServiceWrapper (copy), t (copy)
-		if var66 then
+		-- upvalues: var70 (write), IXPServiceWrapper (copy), t (copy)
+		if var70 then
 			return
 		end
-		var66 = true
+		var70 = true
 		IXPServiceWrapper:LogFlagLinkedUserLayerExposure(t.GetFStringExitModalIXPLayer())
 	end
 	
 	if t.isExitModalRemoved and isSubjectToDesktopPolicies() then
 		game:GetService("GuiService").NativeClose:Connect(function()
-			-- upvalues: t (copy), var66 (write), IXPServiceWrapper (copy), leaveGameModule (copy)
-			if t.FFlagEnableExitModalExposure and not var66 then
-				var66 = true
+			-- upvalues: t (copy), var70 (write), IXPServiceWrapper (copy), leaveGameModule (copy)
+			if t.FFlagEnableExitModalExposure and not var70 then
+				var70 = true
 				IXPServiceWrapper:LogFlagLinkedUserLayerExposure(t.GetFStringExitModalIXPLayer())
 			end
 			leaveGameModule(false, { shouldNativeExit = true })
@@ -3688,9 +3933,9 @@ local function CreateSettingsHub()
 		if t_2.FullScreenTitleBar then
 			t_2.FullScreenTitleBar = settingsFullScreenTitleBarModule.update(t_2.FullScreenTitleBar, {
 				onClose = function()
-					-- upvalues: t (copy), var66 (write), IXPServiceWrapper (copy), leaveGameModule (copy)
-					if t.FFlagEnableExitModalExposure and not var66 then
-						var66 = true
+					-- upvalues: t (copy), var70 (write), IXPServiceWrapper (copy), leaveGameModule (copy)
+					if t.FFlagEnableExitModalExposure and not var70 then
+						var70 = true
 						IXPServiceWrapper:LogFlagLinkedUserLayerExposure(t.GetFStringExitModalIXPLayer())
 					end
 					leaveGameModule(false, { shouldNativeExit = true })
@@ -3700,9 +3945,9 @@ local function CreateSettingsHub()
 	elseif t_2.ExitModalPage then
 		local buttonsContainer
 		local function showExitModal()
-			-- upvalues: t (copy), var66 (write), IXPServiceWrapper (copy), t_2 (ref), removeBottomBarBindings (ref)
-			if t.FFlagEnableExitModalExposure and not var66 then
-				var66 = true
+			-- upvalues: t (copy), var70 (write), IXPServiceWrapper (copy), t_2 (ref), removeBottomBarBindings (ref)
+			if t.FFlagEnableExitModalExposure and not var70 then
+				var70 = true
 				IXPServiceWrapper:LogFlagLinkedUserLayerExposure(t.GetFStringExitModalIXPLayer())
 			end
 			t_2.HubBar.Visible = false
@@ -3767,28 +4012,28 @@ local function CreateSettingsHub()
 	})
 	buttonsContainer = t_2.PlayersPage.ButtonsContainer
 	
-	local var67 = function(p19)
+	local var71 = function(p19)
 		-- upvalues: reactModule (copy), t_2 (ref), signalsModule (copy), t (copy), isSpatial (copy), portalWithFoundationStylelinkModule (copy), traversalHistoryMenu (copy)
-		local var68, var69 = reactModule.useState(p19.showSignal(false) and t_2.Visible)
+		local var72, var73 = reactModule.useState(p19.showSignal(false) and t_2.Visible)
 		reactModule.useEffect(function()
-			-- upvalues: signalsModule (copy), var69 (ref), p19 (ref), t_2 (copy)
-			local var70 = signalsModule.createEffect(function(p20)
-				-- upvalues: var69 (copy), p19 (copy), t_2 (copy)
-				var69(p19.showSignal(p20) and t_2.Visible)
+			-- upvalues: signalsModule (copy), var73 (ref), p19 (ref), t_2 (copy)
+			local var74 = signalsModule.createEffect(function(p20)
+				-- upvalues: var73 (copy), p19 (copy), t_2 (copy)
+				var73(p19.showSignal(p20) and t_2.Visible)
 			end)
 			local settingsShowSignalConnection = t_2.SettingsShowSignal:connect(function(p20)
-				-- upvalues: var69 (copy), p19 (copy)
-				var69(p19.showSignal(false) and p20)
+				-- upvalues: var73 (copy), p19 (copy)
+				var73(p19.showSignal(false) and p20)
 			end)
 			
 			return function()
-				-- upvalues: var70 (ref), settingsShowSignalConnection (ref)
-				var70()
+				-- upvalues: var74 (ref), settingsShowSignalConnection (ref)
+				var74()
 				settingsShowSignalConnection:Disconnect()
 			end
 		end, {})
 		
-		return t.FFlagAddTraversalHistory and (not (t.isInExperienceUIVREnabled and isSpatial()) and (p19.parent and (var68 and reactModule.createElement(portalWithFoundationStylelinkModule, { parent = p19.parent }, {
+		return t.FFlagAddTraversalHistory and (not (t.isInExperienceUIVREnabled and isSpatial()) and (p19.parent and (var72 and reactModule.createElement(portalWithFoundationStylelinkModule, { parent = p19.parent }, {
 			TraversalHistoryMenu = reactModule.createElement(traversalHistoryMenu, {
 				anchorParent = p19.parent,
 				currentPageChangeSignal = p19.currentPageChangeSignal,
@@ -3810,13 +4055,13 @@ local function CreateSettingsHub()
 			end,
 			mountTo = t_2.ReactPage
 		}),
-		TraversalHistoryMenuBottomBar = reactModule.createElement(var67, {
+		TraversalHistoryMenuBottomBar = reactModule.createElement(var71, {
 			showSignal = t_2.showBottomBarSignal,
 			parent = if t.FFlagAddTraversalHistory then t_2.LeaveGameButton else nil,
 			menuSide = foundationModule.Enums.PopoverSide.Top,
 			currentPageChangeSignal = t_2.CurrentPageSignal
 		}),
-		TraversalHistoryMenuMobileButton = reactModule.createElement(var67, {
+		TraversalHistoryMenuMobileButton = reactModule.createElement(var71, {
 			showSignal = signalsModule.createComputed(function(p19)
 				-- upvalues: t_2 (ref)
 				return not t_2.showBottomBarSignal(p19)
@@ -3844,83 +4089,87 @@ VRHub.ModuleOpened.Event:connect(function(p19)
 		t_2:SetVisibility(false)
 	end
 end)
-local var62 = CreateSettingsHub()
+local var65 = CreateSettingsHub()
 
+if fFlagSideSheetOpenPeoplePage then
+	setupPeoplePageOpenTracking(var65)
+	setupInGameMenuPeoplePageActions(var65)
+end
 function t_2.GetExperienceControlStore(_)
-	-- upvalues: var62 (ref)
-	return var62:GetExperienceControlStore()
+	-- upvalues: var65 (ref)
+	return var65:GetExperienceControlStore()
 end
 
 function t_2.SetVisibility(_, p19, p20, p21, p22, p23)
-	-- upvalues: var62 (ref)
-	var62:SetVisibility(p19, p20, p21, p22, p23)
+	-- upvalues: var65 (ref)
+	var65:SetVisibility(p19, p20, p21, p22, p23)
 end
 
 function t_2.SetBackgroundVisibility(_, p19, p20)
-	-- upvalues: var62 (ref)
-	var62:SetBackgroundVisibility(p19, p20)
+	-- upvalues: var65 (ref)
+	var65:SetBackgroundVisibility(p19, p20)
 end
 
 function t_2.ToggleVisibility(_, p19, p20)
-	-- upvalues: var62 (ref)
-	var62:ToggleVisibility(p19, p20)
+	-- upvalues: var65 (ref)
+	var65:ToggleVisibility(p19, p20)
 end
 
 function t_2.SwitchToPage(_, p19, p20)
-	-- upvalues: var62 (ref)
-	var62:SwitchToPage(p19, p20, 1)
+	-- upvalues: var65 (ref)
+	var65:SwitchToPage(p19, p20, 1)
 end
 
 if t.FFlagAddUILessMode and t.FIntAddUILessModeVariant ~= 0 then
 	function t_2.PopMenu(_, p19, p20, p21)
-		-- upvalues: var62 (ref)
-		return var62:PopMenu(p19, p20, p21)
+		-- upvalues: var65 (ref)
+		return var65:PopMenu(p19, p20, p21)
 	end
 end
 function t_2.GetVisibility(_)
-	-- upvalues: var62 (ref)
-	return var62.Visible
+	-- upvalues: var65 (ref)
+	return var65.Visible
 end
 
 function t_2.ShowShield(_)
-	-- upvalues: var62 (ref)
-	var62:ShowShield()
+	-- upvalues: var65 (ref)
+	var65:ShowShield()
 end
 
 function t_2.HideShield(_)
-	-- upvalues: var62 (ref)
-	var62:HideShield()
+	-- upvalues: var65 (ref)
+	var65:HideShield()
 end
 
 function t_2.GetRespawnBehaviour(_)
-	-- upvalues: var62 (ref)
-	return var62:GetRespawnBehaviour()
+	-- upvalues: var65 (ref)
+	return var65:GetRespawnBehaviour()
 end
 
 function t_2.CloseReactPage(_)
-	-- upvalues: var62 (ref)
-	var62:CloseReactPage()
+	-- upvalues: var65 (ref)
+	var65:CloseReactPage()
 end
 
 function t_2.SwitchToReactPage(_, p19, p20, p21)
-	-- upvalues: var62 (ref)
-	var62:SwitchToReactPage(p19, p20, p21)
+	-- upvalues: var65 (ref)
+	var65:SwitchToReactPage(p19, p20, p21)
 end
 
 if t.FFlagAddInviteFriendsIntegration then
 	function t_2.InviteToGame(_)
-		-- upvalues: var62 (ref)
-		var62:InviteToGame()
+		-- upvalues: var65 (ref)
+		var65:InviteToGame()
 	end
 end
-t_2.RespawnBehaviourChangedEvent = var62.RespawnBehaviourChangedEvent
-t_2.SettingsShowSignal = var62.SettingsShowSignal
-t_2.CurrentPageSignal = var62.CurrentPageSignal
+t_2.RespawnBehaviourChangedEvent = var65.RespawnBehaviourChangedEvent
+t_2.SettingsShowSignal = var65.SettingsShowSignal
+t_2.CurrentPageSignal = var65.CurrentPageSignal
 t_2.SettingsShowEvent = Instance.new("BindableEvent")
-var62.SettingsShowSignal:connect(function(p19)
+var65.SettingsShowSignal:connect(function(p19)
 	-- upvalues: t_2 (ref)
 	t_2.SettingsShowEvent:Fire(p19)
 end)
-t_2.Instance = var62
+t_2.Instance = var65
 
 return t_2

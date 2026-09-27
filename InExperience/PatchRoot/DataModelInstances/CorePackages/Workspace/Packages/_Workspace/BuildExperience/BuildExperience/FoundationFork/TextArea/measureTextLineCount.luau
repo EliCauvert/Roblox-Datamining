@@ -1,9 +1,12 @@
 ﻿local textService = game:GetService("TextService")
+local parent = script:FindFirstAncestor("BuildExperience").Parent
+local styleModule = require(parent.Style)
+local foundationFontFaceMigration = require(parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local getVisibleLineCountModule = require(script.Parent.getVisibleLineCount)
 local chatTextAreaDebugModule = require(script.Parent.chatTextAreaDebug)
 
 return function(p1)
-	-- upvalues: getVisibleLineCountModule (ref), chatTextAreaDebugModule (ref), textService (ref)
+	-- upvalues: getVisibleLineCountModule (ref), chatTextAreaDebugModule (ref), foundationFontFaceMigration (ref), styleModule (ref), textService (ref)
 	local var1 = getVisibleLineCountModule(p1.text, p1.maxLines)
 	local var2 = 1
 	
@@ -29,8 +32,8 @@ return function(p1)
 		
 		return t
 	elseif layoutWidth > 0 then
-		local y = textService:GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000)).Y
-		local y_1 = textService:GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000)).Y
+		local y = (if foundationFontFaceMigration then styleModule.GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000), { addTemporaryPadding = false }) else textService:GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000))).Y
+		local y_1 = (if foundationFontFaceMigration then styleModule.GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000), { addTemporaryPadding = false }) else textService:GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000))).Y
 		var3 = y_1
 		
 		if y_1 > 0 and y > 0 then

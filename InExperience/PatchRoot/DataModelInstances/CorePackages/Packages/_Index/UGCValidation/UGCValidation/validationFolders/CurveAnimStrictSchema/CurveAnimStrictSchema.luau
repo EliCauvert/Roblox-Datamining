@@ -5,19 +5,17 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local buildStaticCurveAnimationSchemaModule = require(parent.util.buildStaticCurveAnimationSchema)
 local validateInstanceTreeAgainstSchemaModule = require(parent.util.validateInstanceTreeAgainstSchema)
 local curveAnimationHierarchyUtilsModule = require(parent.util.CurveAnimationHierarchyUtils)
-local getFFlagUGCValidateCurveAnimStrictSchemaModule = require(parent.flags.getFFlagUGCValidateCurveAnimStrictSchema)
 local t = {
-	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION }
-}
-
-if require(parent.flags.getFFlagUGCValidationAnimationPackSupport)() then
-	table.insert(t.categories, validationEnumsModule.UploadCategory.ANIMATION)
-end
-t.requiredData = { validationEnumsModule.SharedDataMember.curveAnimations }
-t.fflag = getFFlagUGCValidateCurveAnimStrictSchemaModule
-t.expectedFailures = {}
-t.prereqTests = {
-	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+	categories = {
+		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		validationEnumsModule.UploadCategory.ANIMATION
+	},
+	requiredData = { validationEnumsModule.SharedDataMember.curveAnimations },
+	fflag = require(parent.flags.getFFlagUGCValidateCurveAnimStrictSchema),
+	expectedFailures = {},
+	prereqTests = {
+		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+	}
 }
 
 local function validateNoBodyPartDuplicates(p1, p2)

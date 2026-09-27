@@ -1,6 +1,9 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent
 local parent_2 = parent_1.Parent
+local foundationModule = require(parent_2.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local roactModule = require(parent_2.Roact)
 local cryoModule = require(parent_2.Cryo)
 local tModule = require(parent_2.t)
@@ -63,9 +66,9 @@ function emptyState.init(p1)
 end
 
 function emptyState.render(p1)
-	-- upvalues: withStyleModule (ref), roactModule (ref), roactGamepadModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref), getPageMarginModule (ref), buttonModule (ref)
+	-- upvalues: withStyleModule (ref), roactModule (ref), roactGamepadModule (ref), imageSetComponentModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), genericTextLabelModule (ref), getPageMarginModule (ref), buttonModule (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: roactModule (copy), roactGamepadModule (copy), p1 (ref), imageSetComponentModule (copy), genericTextLabelModule (copy), getPageMarginModule (copy), buttonModule (copy)
+		-- upvalues: roactModule (copy), roactGamepadModule (copy), p1 (ref), imageSetComponentModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), genericTextLabelModule (copy), getPageMarginModule (copy), buttonModule (copy)
 		local createElement = roactModule.createElement
 		local frame = roactGamepadModule.Focusable.Frame
 		local t = {
@@ -129,7 +132,8 @@ function emptyState.render(p1)
 					Text = p1.props.titleProps.titleText,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					Font = p2.Font.Title.Font,
+					Font = if foundationFontFaceMigration then nil else p2.Font.Title.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Font.Title.Font) else nil,
 					TextSize = p2.Font.Header1.RelativeSize * p2.Font.BaseSize,
 					TextColor3 = p2.Theme.TextEmphasis.Color,
 					TextTransparency = p2.Theme.TextEmphasis.Transparency,

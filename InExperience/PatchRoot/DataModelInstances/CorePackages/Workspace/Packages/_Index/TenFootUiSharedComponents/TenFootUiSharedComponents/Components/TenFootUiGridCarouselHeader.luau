@@ -1,6 +1,8 @@
 ﻿local parent = script:FindFirstAncestor("TenFootUiSharedComponents").Parent
 local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local styleModule = require(parent.Style)
 local useDesignTokens = styleModule.useDesignTokens
 local mapTypographyVariantToFontEnum = styleModule.mapTypographyVariantToFontEnum
@@ -10,22 +12,26 @@ local iconWithTooltip = require(parent.AppBlox).IconWithTooltip
 local sharedFlagsModule = require(parent.SharedFlags)
 local getFFlagTenFootUiSupportSortHeaderTooltip = sharedFlagsModule.GetFFlagTenFootUiSupportSortHeaderTooltip
 local getFFlagTenFootUiSupportSortSubtitle = sharedFlagsModule.GetFFlagTenFootUiSupportSortSubtitle
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local vector2 = Vector2.new(1e999, 1e999)
 
 return function(p1)
-	-- upvalues: useDesignTokens (ref), mapTypographyVariantToFontEnum (ref), getFFlagTenFootUiSupportSortSubtitle (ref), getTextSize (ref), vector2 (ref), getFFlagTenFootUiSupportSortHeaderTooltip (ref), reactModule (ref), cryoModule (ref), iconWithTooltip (ref), tooltipOrientation (ref)
+	-- upvalues: useDesignTokens (ref), foundationFontFaceMigration (ref), mapTypographyVariantToFontEnum (ref), normalizeFontFace (ref), getFFlagTenFootUiSupportSortSubtitle (ref), getTextSize (ref), vector2 (ref), getFFlagTenFootUiSupportSortHeaderTooltip (ref), reactModule (ref), cryoModule (ref), iconWithTooltip (ref), tooltipOrientation (ref)
 	local var1 = useDesignTokens(function(p2)
-		-- upvalues: mapTypographyVariantToFontEnum (copy), getFFlagTenFootUiSupportSortSubtitle (copy)
+		-- upvalues: foundationFontFaceMigration (copy), mapTypographyVariantToFontEnum (copy), normalizeFontFace (copy), getFFlagTenFootUiSupportSortSubtitle (copy)
 		return {
+			textMeasurementFont = if foundationFontFaceMigration then p2.Typography.HeadingSmall.Font else nil,
 			textStyles = {
-				Font = mapTypographyVariantToFontEnum(p2.Typography.HeadingSmall),
+				Font = if foundationFontFaceMigration then nil else mapTypographyVariantToFontEnum(p2.Typography.HeadingSmall),
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Typography.HeadingSmall.Font) else nil,
 				TextSize = p2.Typography.HeadingSmall.FontSize,
 				LineHeight = p2.Typography.HeadingSmall.LineHeight,
 				TextColor3 = p2.Color.Content.Emphasis.Color3,
 				TextTransparency = p2.Color.Content.Emphasis.Transparency
 			},
 			subtitleTextStyles = if getFFlagTenFootUiSupportSortSubtitle() then {
-				Font = p2.Typography.BodyLarge.Font,
+				Font = if foundationFontFaceMigration then nil else p2.Typography.BodyLarge.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Typography.BodyLarge.Font) else nil,
 				TextSize = p2.Typography.BodyLarge.FontSize,
 				LineHeight = p2.Typography.BodyLarge.LineHeight,
 				TextColor3 = p2.Color.Content.Default.Color3
@@ -35,7 +41,7 @@ return function(p1)
 		}
 	end)
 	local margin = p1.margin or 0
-	local var2 = getTextSize(p1.text, var1.textStyles.TextSize, var1.textStyles.Font, vector2)
+	local var2 = if foundationFontFaceMigration then getTextSize(p1.text, var1.textStyles.TextSize, var1.textMeasurementFont, vector2) else getTextSize(p1.text, var1.textStyles.TextSize, var1.textStyles.Font, vector2)
 	local t = nil
 	
 	if getFFlagTenFootUiSupportSortHeaderTooltip() or getFFlagTenFootUiSupportSortSubtitle() then

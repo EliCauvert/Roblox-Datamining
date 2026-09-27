@@ -9,7 +9,6 @@ local mediaRootModule = require(momentsCommon.Media.mediaRoot)
 local _ = require(momentsCommon.Media.mediaNodeRegistry)
 local defaultMediaNodeRegistryModule = require(momentsCommon.Media.defaultMediaNodeRegistry)
 local preloadConstantsModule = require(momentsCommon.Media.Preload.preloadConstants)
-local fFlagMomentsLoopOnEndSeekModule = require(momentsCommon.Flags.FFlagMomentsLoopOnEndSeek)
 local _ = require(momentsCommon.Media.Nodes.createVideoNode)
 local _ = require(momentsCommon.Media.Nodes.createScreenshotNode)
 local _ = require(momentsCommon.Media.Nodes.createMusicNode)
@@ -20,7 +19,7 @@ local getFFlagMomentsStickerButtonModule = require(momentsCommon.Flags.GetFFlagM
 local loopEpsilonSeconds = preloadConstantsModule.loopEpsilonSeconds
 
 return function(p1, p2)
-	-- upvalues: defaultMediaNodeRegistryModule (ref), mediaRootModule (ref), createAudioGraphModule (ref), getFFlagMomentsStickerButtonModule (ref), createSignal (ref), createComputed (ref), cryoModule (ref), loopEpsilonSeconds (ref), fFlagMomentsLoopOnEndSeekModule (ref)
+	-- upvalues: defaultMediaNodeRegistryModule (ref), mediaRootModule (ref), createAudioGraphModule (ref), getFFlagMomentsStickerButtonModule (ref), createSignal (ref), createComputed (ref), cryoModule (ref), loopEpsilonSeconds (ref)
 	local services = p2.services
 	local registry = p2.registry or defaultMediaNodeRegistryModule()
 	local var1 = p1.captureType == Enum.CaptureType.Video
@@ -459,9 +458,9 @@ return function(p1, p2)
 			var18(var17(false) + 1)
 		end,
 		seek = function(p4)
-			-- upvalues: var21 (write), fFlagMomentsLoopOnEndSeekModule (copy), var15 (ref), var25 (ref), t (ref)
+			-- upvalues: var21 (write), var15 (ref), var25 (ref), t (ref)
 			if var21 then return end
-			if fFlagMomentsLoopOnEndSeekModule and var15(false) then
+			if var15(false) then
 				local duration = var25(false).duration
 				
 				if duration > 0 and duration <= p4 then

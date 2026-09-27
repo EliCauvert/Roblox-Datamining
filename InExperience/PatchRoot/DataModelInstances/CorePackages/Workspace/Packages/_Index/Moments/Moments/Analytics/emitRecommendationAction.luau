@@ -1,6 +1,8 @@
 ﻿local moments = script:FindFirstAncestor("Moments")
+local parent = moments.Parent
 local constantsModule = require(moments.Constants)
 local fFlagMomentsRecommendationClientEventTimestampModule = require(moments.Flags.FFlagMomentsRecommendationClientEventTimestamp)
+local fFlagMomentsComments = require(parent.SharedFlags).FFlagMomentsComments
 local t = {
 	eventName = "RecommendationActionEvent",
 	throttlingPercentage = 10000,
@@ -10,7 +12,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: constantsModule (ref), t (ref), fFlagMomentsRecommendationClientEventTimestampModule (ref)
+	-- upvalues: constantsModule (ref), t (ref), fFlagMomentsRecommendationClientEventTimestampModule (ref), fFlagMomentsComments (ref)
 	local var1 = if p1.actionType == constantsModule.RecommendationActionType.Play then game:GetService("HttpService"):GenerateGUID(false) else nil
 	game:GetService("TelemetryService"):LogEvent(t, {
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
@@ -27,6 +29,7 @@ return function(p1)
 			reaction_type = p1.reactionType,
 			destination_placeid = if p1.destinationPlaceId then tostring(p1.destinationPlaceId) else nil,
 			comment_text = p1.commentText,
+			comment_section_open_duration_seconds = if fFlagMomentsComments and p1.commentSectionOpenDurationSeconds ~= nil then tostring(p1.commentSectionOpenDurationSeconds) else nil,
 			action_weight = if p1.actionWeight then tostring(p1.actionWeight) else nil,
 			moments_play_intent_id = var1
 		}

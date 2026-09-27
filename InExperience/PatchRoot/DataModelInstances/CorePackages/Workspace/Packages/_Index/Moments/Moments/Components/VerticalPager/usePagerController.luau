@@ -1,5 +1,4 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
+﻿local parent = script:FindFirstAncestor("Moments").Parent
 local runService = game:GetService("RunService")
 local userInputService = game:GetService("UserInputService")
 local foundationModule = require(parent.Foundation)
@@ -10,11 +9,10 @@ local constantsModule = require(script.Parent.Constants)
 local _ = require(script.Parent.Types)
 local snapMathModule = require(script.Parent.snapMath)
 local pagerNavigationModule = require(script.Parent.pagerNavigation)
-local getFFlagMomentsFixNavButtonSnapModule = require(moments.Flags.GetFFlagMomentsFixNavButtonSnap)
 local usePreferences = foundationModule.Hooks.usePreferences
 
 return function(p1)
-	-- upvalues: reactModule (ref), usePreferences (ref), signalsModule (ref), runService (ref), constantsModule (ref), snapMathModule (ref), pagerNavigationModule (ref), getFFlagMomentsFixNavButtonSnapModule (ref), userInputService (ref), signalsReactModule (ref)
+	-- upvalues: reactModule (ref), usePreferences (ref), signalsModule (ref), runService (ref), constantsModule (ref), snapMathModule (ref), pagerNavigationModule (ref), userInputService (ref), signalsReactModule (ref)
 	local scrollingFrame = p1.scrollingFrame
 	local store = p1.store
 	local itemHeight = p1.itemHeight
@@ -303,13 +301,13 @@ return function(p1)
 		end
 	end, { scrollingFrame, active, var26, var30 })
 	reactModule.useEffect(function()
-		-- upvalues: scrollingFrame (ref), active (ref), pagerNavigationModule (copy), getFFlagMomentsFixNavButtonSnapModule (copy), nativeScrollEnabled (ref), var14 (ref), userInputService (copy), var13 (ref), var15 (ref), var28 (ref), var25 (ref), constantsModule (copy), var31 (ref), var16 (ref), var30 (ref), var1 (ref)
+		-- upvalues: scrollingFrame (ref), active (ref), pagerNavigationModule (copy), nativeScrollEnabled (ref), var14 (ref), userInputService (copy), var13 (ref), var15 (ref), var28 (ref), var25 (ref), constantsModule (copy), var31 (ref), var16 (ref), var30 (ref), var1 (ref)
 		if not scrollingFrame or not active then return end
 		local function _(p2)
 			return if p2.UserInputType ~= Enum.UserInputType.Touch then p2.UserInputType == Enum.UserInputType.MouseButton1 else true
 		end
 		
-		local var36 = pagerNavigationModule.shouldTrackDrag(getFFlagMomentsFixNavButtonSnapModule(), nativeScrollEnabled)
+		local var36 = pagerNavigationModule.shouldTrackDrag(true, nativeScrollEnabled)
 		var14.current = {}
 		
 		local _ = function(p2)

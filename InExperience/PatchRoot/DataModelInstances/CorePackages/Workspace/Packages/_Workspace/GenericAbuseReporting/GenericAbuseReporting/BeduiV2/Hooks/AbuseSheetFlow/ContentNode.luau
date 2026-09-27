@@ -15,9 +15,10 @@ local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReport
 local fFlagSupportSubmissionOnAllReportNodes = require(parent.SharedFlags).FFlagSupportSubmissionOnAllReportNodes
 local fFlagAbuseReportInExpPlayerListV3 = require(parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3
 local fFlagAbuseReportSceneSelectionSubmitTrackingModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionSubmitTracking)
+local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useAbuseReportAnalytics (ref), reactModule (ref), listNodeV2Module (ref), dashModule (ref), commentNodeModule (ref), confirmationNodeModule (ref), fFlagSupportSubmissionOnAllReportNodes (ref), paragraphNodeModule (ref), reviewNodeModule (ref), genericAbuseReporting (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), fFlagAbuseReportInExpPlayerListV3 (ref), telemetryEventType (ref)
+	-- upvalues: useAbuseReportAnalytics (ref), reactModule (ref), listNodeV2Module (ref), dashModule (ref), commentNodeModule (ref), confirmationNodeModule (ref), fFlagSupportSubmissionOnAllReportNodes (ref), paragraphNodeModule (ref), reviewNodeModule (ref), genericAbuseReporting (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), fFlagAbuseReportInExpPlayerListV3 (ref), telemetryEventType (ref), fFlagAbuseReportImproveErrorEventsModule (ref)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
 	
 	if p1.node.type == "list" then
@@ -130,7 +131,10 @@ return reactModule.memo(function(p1)
 	end
 	sendEvent({
 		sub_event_type = telemetryEventType.Error,
-		error_detail = { error_message = `Unknown node type: {p1.node.type}` }
+		error_detail = if fFlagAbuseReportImproveErrorEventsModule then {
+			error_message = "Unknown node type",
+			error_metadata = { node_type = tostring(p1.node.type) }
+		} else { error_message = `Unknown node type: {p1.node.type}` }
 	})
 	
 	return reactModule.createElement(reactModule.Fragment)

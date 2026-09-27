@@ -141,7 +141,6 @@ return {
 	Guilded = "Feature.AccountSettings.Label.Guilded",
 	Discord = "Feature.AccountSettings.Label.Discord",
 	Twitter = "Feature.AccountSettings.Label.Twitter",
-	Videos = "Feature.Groups.Heading.Videos",
 	BannedFromGroup = "Feature.Groups.Message.BannedFromGroup",
 	GroupClosed = "Feature.Groups.Label.GroupClosed",
 	PremiumMaxGroups = "Feature.Groups.Description.PremiumMaxGroups",

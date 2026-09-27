@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("SduiGameTileDirectAction", false) and require(script.Parent.FFlagLuaAppSduiGameTileFeedback)

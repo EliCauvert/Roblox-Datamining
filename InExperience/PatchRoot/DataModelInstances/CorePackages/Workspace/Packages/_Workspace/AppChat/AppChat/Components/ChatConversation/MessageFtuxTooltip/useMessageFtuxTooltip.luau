@@ -6,79 +6,89 @@ local reactModule = require(parent.React)
 local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useTelemetryModule = require(appChat.Telemetry.useTelemetry)
-local messageFtuxTooltipVariantModule = require(script.Parent.MessageFtuxTooltipVariant)
+local _ = require(script.Parent.MessageFtuxTooltipVariant)
 local messageFtuxTooltipDismissSignalModule = require(script.Parent.MessageFtuxTooltipDismissSignal)
 local useMessageFtuxTooltipConfigModule = require(script.Parent.useMessageFtuxTooltipConfig)
 local chatConversationTelemetryEventsModule = require(appChat.Components.ChatConversation.ChatConversationTelemetryEvents)
 local chatConversationTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatConversationTelemetryLayer)
-local fFlagAppChatUseSwipeForRepliesModule = require(appChat.Flags.FFlagAppChatUseSwipeForReplies)
-
-return function(p1)
-	-- upvalues: messageFtuxTooltipVariantModule (ref), useMessageFtuxTooltipConfigModule (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useLocalUserId (ref), reactModule (ref), chatConversationTelemetryEventsModule (ref), fFlagAppChatUseSwipeForRepliesModule (ref), appStorageService (ref), httpService (ref), messageFtuxTooltipDismissSignalModule (ref), useLocalization (ref)
-	if p1 == messageFtuxTooltipVariantModule.None then
-		return {
-			text = "",
-			isDismissed = true,
-			handleDismiss = function() end
-		}
+local t = {
+	GetItem = function(_, p1)
+		-- upvalues: appStorageService (ref)
+		return appStorageService:GetItem(p1)
+	end,
+	SetItem = function(_, p1, p2)
+		-- upvalues: appStorageService (ref)
+		appStorageService:SetItem(p1, p2)
+	end,
+	Flush = function()
+		-- upvalues: appStorageService (ref)
+		appStorageService:Flush()
 	end
+}
+
+return function(p1, p2)
+	-- upvalues: t (ref), useMessageFtuxTooltipConfigModule (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), reactModule (ref), useLocalUserId (ref), chatConversationTelemetryEventsModule (ref), httpService (ref), messageFtuxTooltipDismissSignalModule (ref), useLocalization (ref)
+	p2 = p2 or t
 	local var1 = useMessageFtuxTooltipConfigModule(p1)
 	local var2 = useTelemetryModule(chatConversationTelemetryLayerModule.Context)
-	local var3 = useLocalUserId() or ""
-	local var4, var5 = reactModule.useState(true)
-	local var6 = reactModule.useRef({})
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), chatConversationTelemetryEventsModule (copy), p1 (ref)
-		var2.emit(chatConversationTelemetryEventsModule.ConversationMessageFtuxTooltipImpression, { tooltipVariant = p1 })
-	end, { p1, var2 })
+	local var3 = reactModule.useRef(var2)
+	var3.current = var2
+	local var4 = useLocalUserId() or ""
+	local var5, var6 = reactModule.useState(true)
+	local var7 = reactModule.useRef({})
 	local var8 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), chatConversationTelemetryEventsModule (copy), p1 (ref)
-		var2.emit(chatConversationTelemetryEventsModule.ConversationMessageFtuxTooltipDismissed, { tooltipVariant = p1 })
-	end, { p1, var2 })
+		-- upvalues: var3 (ref), chatConversationTelemetryEventsModule (copy), p1 (ref)
+		var3.current.emit(chatConversationTelemetryEventsModule.ConversationMessageFtuxTooltipImpression, { tooltipVariant = p1 })
+	end, { p1 })
 	local var9 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var8 (ref), var6 (ref), var3 (ref), fFlagAppChatUseSwipeForRepliesModule (copy), var1 (ref), appStorageService (copy), httpService (copy), var5 (ref)
-		if var4 then
+		-- upvalues: var3 (ref), chatConversationTelemetryEventsModule (copy), p1 (ref)
+		var3.current.emit(chatConversationTelemetryEventsModule.ConversationMessageFtuxTooltipDismissed, { tooltipVariant = p1 })
+	end, { p1 })
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), var9 (ref), var7 (ref), var4 (ref), var1 (ref), p2 (ref), httpService (copy), var6 (ref)
+		if var5 then
 			return
 		end
-		var8()
-		var6.current[var3] = if fFlagAppChatUseSwipeForRepliesModule then var1.textKey else true
+		var9()
+		var7.current[var4] = var1.textKey
 		local ok, _ = pcall(function()
-			-- upvalues: appStorageService (copy), var1 (copy), httpService (copy), var6 (copy)
-			appStorageService:SetItem(var1.storageKey, httpService:JSONEncode(var6.current))
-			appStorageService:Flush()
+			-- upvalues: p2 (copy), var1 (copy), httpService (copy), var7 (copy)
+			p2:SetItem(var1.storageKey, httpService:JSONEncode(var7.current))
+			p2:Flush()
 		end)
-		var5(ok)
-	end, { var1.storageKey, var3, var4 })
+		var6(ok)
+	end, {
+		var1.storageKey, var1.textKey, var4, var5, p2, var9
+	})
 	reactModule.useEffect(function()
-		-- upvalues: appStorageService (copy), var1 (ref), httpService (copy), var6 (ref), fFlagAppChatUseSwipeForRepliesModule (copy), var3 (ref), var5 (ref), var7 (ref)
-		local var10
+		-- upvalues: p2 (ref), var1 (ref), httpService (copy), var7 (ref), var4 (ref), var6 (ref), var8 (ref)
 		local ok, status = pcall(function()
-			-- upvalues: appStorageService (copy), var1 (copy), httpService (copy)
-			return httpService:JSONDecode(appStorageService:GetItem(var1.storageKey))
+			-- upvalues: p2 (copy), var1 (copy), httpService (copy)
+			return httpService:JSONDecode(p2:GetItem(var1.storageKey))
 		end)
-		var6.current = if ok then status else {}
+		var7.current = if ok then status else {}
+		local var11 = var7.current[var4] == var1.textKey
+		var6(var11)
 		
-		if fFlagAppChatUseSwipeForRepliesModule then
-			var10 = var6.current[var3] == var1.textKey
-			var10 = nil
-		else
-			var10 = var6.current[var3] or false
+		if not var11 then
+			var8()
 		end
-		var5(var10)
-		
-		if not var10 then
-			var7()
-		end
-	end, { var1.storageKey, var3 })
+	end, {
+		var1.storageKey,
+		var1.textKey,
+		var4,
+		p2,
+		var8
+	})
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), messageFtuxTooltipDismissSignalModule (copy), p1 (ref), var9 (ref)
-		if var4 then
+		-- upvalues: var5 (ref), messageFtuxTooltipDismissSignalModule (copy), p1 (ref), var10 (ref)
+		if var5 then
 			return
 		end
-		local dismissedConnection = messageFtuxTooltipDismissSignalModule.dismissed:connect(function(p2)
-			-- upvalues: p1 (copy), var9 (copy)
-			if p2 == p1 then
-				var9()
+		local dismissedConnection = messageFtuxTooltipDismissSignalModule.dismissed:connect(function(p3)
+			-- upvalues: p1 (copy), var10 (copy)
+			if p3 == p1 then
+				var10()
 			end
 		end)
 		
@@ -86,15 +96,15 @@ return function(p1)
 			-- upvalues: dismissedConnection (ref)
 			dismissedConnection:disconnect()
 		end
-	end, { p1, var9, var4 })
-	local var10 = useLocalization({ tooltipText = var1.textKey })
+	end, { p1, var10, var5 })
+	local var11 = useLocalization({ tooltipText = var1.textKey })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var10 (ref), var4 (ref), var9 (ref)
+		-- upvalues: var11 (ref), var5 (ref), var10 (ref)
 		return {
-			text = var10.tooltipText,
-			isDismissed = var4,
-			handleDismiss = var9
+			text = var11.tooltipText,
+			isDismissed = var5,
+			handleDismiss = var10
 		}
-	end, { var10.tooltipText, var4, var9 })
+	end, { var11.tooltipText, var5, var10 })
 end

@@ -18,7 +18,9 @@ local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestSer
 local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local chevronSmallDownButtonModule = require(script.Parent.ChevronSmallDownButton)
+local getTestId = require(parent.RoactUtils).getTestId
 local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagLuaAppAddTestIdsForArrow = sharedFlagsModule.FFlagLuaAppAddTestIdsForArrow
 local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
 local fFlagHidePremiumIconography = sharedFlagsModule.FFlagHidePremiumIconography
 local fFlagEnableFlyoutUncheckedBadge = sharedFlagsModule.FFlagEnableFlyoutUncheckedBadge
@@ -26,7 +28,7 @@ local fFlagEnableDrawerFocusNav = sharedFlagsModule.FFlagEnableDrawerFocusNav
 local fFlagFlyoutSidePanelUseProfileFrameThumbnail = sharedFlagsModule.FFlagFlyoutSidePanelUseProfileFrameThumbnail
 
 return function(p1)
-	-- upvalues: useTokens (ref), fFlagEnableFlyoutUncheckedBadge (ref), useLocalization (ref), useAppPolicy (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), fFlagFlyoutSidePanelUseProfileFrameThumbnail (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), foundationModule (ref), fFlagEnableDrawerFocusNav (ref), loadableImage (ref), text (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconName (ref), badge (ref), badgeVariant (ref), chevronSmallDownButtonModule (ref)
+	-- upvalues: useTokens (ref), fFlagEnableFlyoutUncheckedBadge (ref), useLocalization (ref), useAppPolicy (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), fFlagFlyoutSidePanelUseProfileFrameThumbnail (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), foundationModule (ref), fFlagLuaAppAddTestIdsForArrow (ref), getTestId (ref), fFlagEnableDrawerFocusNav (ref), loadableImage (ref), text (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconName (ref), badge (ref), badgeVariant (ref), chevronSmallDownButtonModule (ref)
 	local var1
 	local var2 = useTokens()
 	local var3 = if fFlagEnableFlyoutUncheckedBadge then useLocalization({ Unchecked = "CommonUI.Features.Label.Unchecked" }) else nil
@@ -88,7 +90,8 @@ return function(p1)
 			Text = "",
 			AutomaticSize = if fFlagEnableFlyoutUncheckedBadge then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
 			LayoutOrder = if fFlagEnableFlyoutUncheckedBadge then 1 else nil,
-			[reactModule.Event.Activated] = var6
+			[reactModule.Event.Activated] = var6,
+			[reactModule.Tag] = if fFlagLuaAppAddTestIdsForArrow then getTestId("core-ui-flyout-profile-card") else nil
 		}, {
 			UIPadding = if fFlagEnableDrawerFocusNav then reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var2.Padding.Small) }) else nil,
 			UIFlexItem = if fFlagEnableFlyoutUncheckedBadge then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }) else nil,

@@ -25,6 +25,7 @@ local startMomentsCreationFlowModule = require(parent.Thunks.StartMomentsCreatio
 local toastVanishedModule = require(parent.Actions.ToastVanished)
 local _ = require(parent.Types)
 local toastControllerModule = require(script.Parent.ToastController)
+local fFlagBuildExperienceInGameCaptureToChat = require(parent_1.SharedFlags).FFlagBuildExperienceInGameCaptureToChat
 local fFlagCreateMomentsToastModule = require(parent.Flags.FFlagCreateMomentsToast)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local _ = {
@@ -126,6 +127,15 @@ local t = {
 			end
 		end
 	},
+	[capturesToastTypeModule.CaptureTakenWithAction] = {
+		toastTitleKey = "captureSaved",
+		iconImage = images["icons/controls/screenshot"],
+		onActivated = function(_, _, p1)
+			if p1 and p1.toastAction and p1.captureInfo then
+				p1.toastAction.onActivated(p1.captureInfo)
+			end
+		end
+	},
 	[capturesToastTypeModule.CapturesActivated] = {
 		toastTitleKey = "capturesEnabled",
 		iconImage = images["icons/status/success"]
@@ -171,7 +181,7 @@ local t = {
 }
 
 return function(_)
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useSelector (ref), constantsModule (ref), reactModule (ref), capturesToastTypeModule (ref), t (ref), toastVanishedModule (ref), dashModule (ref), fFlagCreateMomentsToastModule (ref), toastControllerModule (ref), httpService (ref), startMomentsCreationFlowModule (ref), eventNamesModule (ref), toast (ref)
+	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useSelector (ref), constantsModule (ref), reactModule (ref), capturesToastTypeModule (ref), t (ref), toastVanishedModule (ref), fFlagBuildExperienceInGameCaptureToChat (ref), dashModule (ref), fFlagCreateMomentsToastModule (ref), toastControllerModule (ref), httpService (ref), startMomentsCreationFlowModule (ref), eventNamesModule (ref), toast (ref)
 	local var2 = useAnalyticsModule()
 	local var3 = useDispatch()
 	local var4 = useLocalization({
@@ -211,14 +221,14 @@ return function(_)
 		return if p1 then var4[p1] else nil
 	end)
 	local var9 = reactModule.useMemo(function()
-		-- upvalues: var5 (ref), capturesToastTypeModule (copy), t (copy), var3 (ref), toastVanishedModule (copy), var2 (ref), var6 (ref), constantsModule (copy), dashModule (copy), var8 (ref)
+		-- upvalues: var5 (ref), capturesToastTypeModule (copy), t (copy), var3 (ref), toastVanishedModule (copy), var2 (ref), var6 (ref), constantsModule (copy), var8 (ref), fFlagBuildExperienceInGameCaptureToChat (copy), dashModule (copy)
 		if var5 == capturesToastTypeModule.None then
 			return nil
 		end
 		local var10 = t[var5]
 		
 		return dashModule.join(var10, {
-			buttonText = var8(var10.toastCTAKey),
+			buttonText = if fFlagBuildExperienceInGameCaptureToChat and var6 and var6.toastAction then var6.toastAction.text else var8(var10.toastCTAKey),
 			duration = var10.duration or constantsModule.ToastDuration,
 			onActivated = if var10.onActivated then function()
 				-- upvalues: var10 (ref), var2 (copy), var3 (copy), var6 (copy), var5 (ref), var5 (copy), toastVanishedModule (copy)

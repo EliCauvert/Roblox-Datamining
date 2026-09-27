@@ -14,5 +14,6 @@ return {
 	FFlagEnableShopPrefetch = require(script.Flags.FFlagEnableShopPrefetch),
 	FFlagHideShopMenuOnFailure = require(script.Flags.FFlagHideShopMenuOnFailure),
 	FFlagCenterInExperienceShopWindow = require(script.Flags.FFlagCenterInExperienceShopWindow),
+	FFlagFixInExperienceShopCursorLock = require(script.Flags.FFlagFixInExperienceShopCursorLock),
 	FFlagExperienceShopNewIconography = require(script.Flags.FFlagExperienceShopNewIconography)
 }

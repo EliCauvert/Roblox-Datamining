@@ -5,29 +5,6 @@ local textModule = require(foundation.Components.Text)
 local viewModule = require(foundation.Components.View)
 local matrixGrid = matrixGridModule.MatrixGrid
 
-local function StorySection(p1)
-	-- upvalues: reactModule (ref), viewModule (ref), textModule (ref)
-	return reactModule.createElement(viewModule, {
-		tag = "col gap-medium size-full-0 auto-y",
-		LayoutOrder = p1.LayoutOrder
-	}, {
-		Title = reactModule.createElement(textModule, {
-			tag = "auto-xy text-label-medium text-align-x-left content-default",
-			LayoutOrder = 1,
-			Text = p1.caption
-		}),
-		Note = if p1.note then reactModule.createElement(textModule, {
-			tag = "auto-xy text-body-small text-wrap text-align-x-left content-muted",
-			LayoutOrder = 2,
-			Text = p1.note
-		}) else nil,
-		Content = reactModule.createElement(viewModule, {
-			LayoutOrder = 3,
-			tag = p1.contentTag or "row gap-large align-y-top auto-xy wrap"
-		}, p1.children)
-	})
-end
-
 local function Section(p1)
 	-- upvalues: reactModule (ref), viewModule (ref), textModule (ref)
 	return reactModule.createElement(viewModule, {
@@ -35,27 +12,27 @@ local function Section(p1)
 		LayoutOrder = p1.LayoutOrder
 	}, {
 		Title = if p1.note then reactModule.createElement(viewModule, {
-			tag = "col align-x-left gap-xsmall auto-xy",
+			tag = "col align-x-left gap-xsmall size-full-0 auto-y",
 			LayoutOrder = 1
 		}, {
 			Name = reactModule.createElement(textModule, {
-				tag = "auto-xy text-label-medium content-default",
+				tag = "auto-xy text-label-medium text-align-x-left content-default",
 				LayoutOrder = 1,
 				Text = p1.name
 			}),
 			Note = reactModule.createElement(textModule, {
-				tag = "auto-xy text-caption-small text-align-x-left content-muted",
+				tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-left content-muted",
 				LayoutOrder = 2,
 				Text = p1.note
 			})
 		}) else reactModule.createElement(textModule, {
-			tag = "auto-xy text-label-medium content-default",
+			tag = "auto-xy text-label-medium text-align-x-left content-default",
 			LayoutOrder = 1,
 			Text = p1.name
 		}),
 		Content = reactModule.createElement(viewModule, {
 			LayoutOrder = 2,
-			tag = p1.contentTag or "row gap-large auto-xy wrap"
+			tag = p1.contentTag or "row gap-large align-y-top auto-xy wrap"
 		}, p1.children)
 	})
 end
@@ -66,12 +43,13 @@ local function StoryMatrixGrid(p1)
 		Content = reactModule.createElement(matrixGrid, {
 			headerTextAlign = "left",
 			cellAlign = "left",
-			rowAlign = "top",
 			showLabelColumn = p1.showLabelColumn,
 			labelColumnWidth = p1.labelColumnWidth,
 			columnHeaders = p1.columnHeaders,
 			cellColumnWidth = p1.cellColumnWidth,
 			cellColumnWidths = p1.cellColumnWidths,
+			rowGap = p1.rowGap,
+			rowAlign = p1.rowAlign,
 			rows = p1.rows
 		})
 	})
@@ -80,12 +58,12 @@ end
 return {
 	STORY_FRAME_TAG = "padding-y-large bg-surface-0",
 	STORY_PAGE_TAG = "size-full-0 auto-y padding-y-large bg-surface-0",
-	StorySection = StorySection,
+	STORY_PAGE_COL_TAG = "col gap-xxlarge size-full-0 auto-y padding-y-large bg-surface-0",
 	Section = Section,
 	LabeledCell = function(p1)
 		-- upvalues: reactModule (ref), viewModule (ref), textModule (ref)
 		return reactModule.createElement(viewModule, {
-			tag = "col align-x-left gap-small auto-xy",
+			tag = p1.tag or "col align-x-left gap-small auto-xy",
 			LayoutOrder = p1.LayoutOrder
 		}, {
 			Label = reactModule.createElement(textModule, {
@@ -93,7 +71,7 @@ return {
 				LayoutOrder = 1,
 				Text = p1.label
 			}),
-			Content = reactModule.createElement(viewModule, { tag = "auto-xy", LayoutOrder = 2 }, p1.children)
+			Content = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = p1.contentTag or "auto-xy" }, p1.children)
 		})
 	end,
 	StoryMatrixGrid = StoryMatrixGrid,
@@ -112,6 +90,8 @@ return {
 				columnHeaders = p1.columnHeaders,
 				cellColumnWidth = p1.cellColumnWidth,
 				cellColumnWidths = p1.cellColumnWidths,
+				rowGap = p1.rowGap,
+				rowAlign = p1.rowAlign,
 				rows = p1.rows
 			})
 		})

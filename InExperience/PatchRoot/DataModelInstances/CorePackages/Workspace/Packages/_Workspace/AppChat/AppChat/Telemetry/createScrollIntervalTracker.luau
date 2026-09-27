@@ -14,8 +14,8 @@ local t = {
 return if game:DefineFastFlag("AppChatMigrateScrollIntervalTracker2", false) then function(p1, p2, p3, p4)
 	-- upvalues: appChatPerfTrackerModule (ref), cryoModule (ref), t (ref), scrollIntervalTrackerModule (ref)
 	return scrollIntervalTrackerModule.createScrollIntervalTracker(function(p5)
-		-- upvalues: appChatPerfTrackerModule (copy), p1 (ref)
-		return appChatPerfTrackerModule.start(p1, p5)
+		-- upvalues: appChatPerfTrackerModule (copy), p1 (ref), p2 (ref)
+		return appChatPerfTrackerModule.start(p1, p5, p2)
 	end, function(p5)
 		-- upvalues: appChatPerfTrackerModule (copy), p1 (ref)
 		appChatPerfTrackerModule.finish(p1, p5)
@@ -69,10 +69,10 @@ end else function(p1, p2, p3, p4)
 	end
 	
 	local _ = function(p5)
-		-- upvalues: scrollIntervalTracker (copy), p1 (ref), appChatPerfTrackerModule (copy), p3 (ref), var2 (write), var3 (write), var4 (write), var5 (write), var6 (write)
+		-- upvalues: scrollIntervalTracker (copy), p1 (ref), appChatPerfTrackerModule (copy), p3 (ref), p2 (ref), var2 (write), var3 (write), var4 (write), var5 (write), var6 (write)
 		scrollIntervalTracker:debug("Scroll: {} starting", p1)
 		
-		if appChatPerfTrackerModule.start(p1, p3) then
+		if appChatPerfTrackerModule.start(p1, p3, p2) then
 			var2 = true
 			var3 = nil
 			var4 = 0
@@ -126,7 +126,7 @@ end else function(p1, p2, p3, p4)
 			if var1.minDistancePx > var4 then return end
 			scrollIntervalTracker:debug("Scroll: {} starting", p1)
 			
-			if appChatPerfTrackerModule.start(p1, p3) then
+			if appChatPerfTrackerModule.start(p1, p3, p2) then
 				var2 = true
 				var3 = nil
 				var4 = 0

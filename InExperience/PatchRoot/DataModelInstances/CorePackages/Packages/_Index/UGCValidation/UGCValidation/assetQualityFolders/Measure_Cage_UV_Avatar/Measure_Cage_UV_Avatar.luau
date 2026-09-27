@@ -39,7 +39,6 @@ return {
 				end
 				if getFFlagUGCValidateAQScoreWarningsModule() and var2 ~= nil and var2 ~= 100 then
 					p1:warn(errorSourceStringsModule.Keys.AQSWarn_CageUV, {
-						score = tostring(var2),
 						cage_name = v,
 						incorrect_uv_count = tostring(incorrectUvCount),
 						unreferenced_vertex_count = unreferencedVertexCount,
@@ -61,7 +60,6 @@ return {
 				})
 			elseif getFFlagUGCValidateAQScoreWarningsModule() and var2 ~= 100 then
 				p1:warn(errorSourceStringsModule.Keys.AQSWarn_CageUV, {
-					score = tostring(var2),
 					cage_name = v,
 					incorrect_uv_count = tostring(incorrectUvCount),
 					unreferenced_vertex_count = unreferencedVertexCount,

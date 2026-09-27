@@ -15,7 +15,6 @@ local getFFlagChatTranslationShowFTUXModule = require(expChat.Flags.getFFlagChat
 local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local fFlagExpChatNewInputBarModule = require(expChat.Flags.FFlagExpChatNewInputBar)
 local getFFlagExpChatAlwaysRunTCS = sharedFlagsModule.getFFlagExpChatAlwaysRunTCS
-local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 
 function getChatWindowEnabled()
 	-- upvalues: textChatService (ref)
@@ -147,7 +146,7 @@ function appContainer.didMount(p1)
 end
 
 function appContainer.render(p1)
-	-- upvalues: roactModule (ref), bubbleChatModule (ref), clientSettingsModule (ref), appLayoutModule (ref), fFlagExpChatUseMessagesStore (ref), isChatRegionLockedModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatNewInputBarModule (ref), getFFlagChatTranslationShowFTUXModule (ref), var1 (ref), chatTranslationFTUXModule (ref)
+	-- upvalues: roactModule (ref), bubbleChatModule (ref), clientSettingsModule (ref), appLayoutModule (ref), isChatRegionLockedModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatNewInputBarModule (ref), getFFlagChatTranslationShowFTUXModule (ref), var1 (ref), chatTranslationFTUXModule (ref)
 	local isTextChatServiceEnabled = p1.state.isTextChatServiceEnabled
 	local var3 = roactModule.createElement(bubbleChatModule, {
 		getIconVoiceIndicator = p1.props.getIconVoiceIndicator,
@@ -165,7 +164,6 @@ function appContainer.render(p1)
 	return if isTextChatServiceEnabled then roactModule.createElement(clientSettingsModule.Provider, { value = p1.props.clientSettings }, {
 		app = roactModule.createFragment({
 			appLayout = roactModule.createElement(appLayoutModule, {
-				canLocalUserChat = if fFlagExpChatUseMessagesStore then nil else p1.props.canLocalUserChat,
 				isChatInputBarVisible = not isChatRegionLockedModule() and p1.props.isChatInputBarVisible,
 				isChatWindowVisible = p1.props.isChatWindowVisible,
 				isChannelBarVisible = p1.props.isChannelBarVisible,

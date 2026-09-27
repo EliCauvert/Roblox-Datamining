@@ -107,6 +107,10 @@ return function(p1)
 			-- upvalues: var1 (ref), paramsKey (copy)
 			return var1.getAndFetchItem(paramsKey(p2))
 		end,
+		refetchMetric = function(p2)
+			-- upvalues: var1 (ref), paramsKey (copy)
+			var1.fetchItem(paramsKey(p2))
+		end,
 		getAndFetchMetricMetadata = function(p2)
 			-- upvalues: var2 (ref), metricsKey (copy)
 			return var2.getAndFetchItem(metricsKey(p2))

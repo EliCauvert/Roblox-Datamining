@@ -25,6 +25,7 @@ return function(p1)
 			platform = p1.linkedAccountType
 		}
 	})
+	local var2 = p1.didUsernameChange and p1.canRespawn ~= false
 	
 	return reactModule.createElement(accountUpgradeDialogModule, {
 		testId = "account-upgrade-success-dialog",
@@ -47,11 +48,11 @@ return function(p1)
 						tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-left content-default",
 						LayoutOrder = 1,
 						testId = "account-upgrade-success-body",
-						Text = if p1.didUsernameChange then var1.usernameChangedBody else var1.usernameUnchangedBody
+						Text = if var2 then var1.usernameChangedBody else var1.usernameUnchangedBody
 					}),
 					Actions = reactModule.createElement(accountUpgradeDialogActionsModule, {
 						LayoutOrder = 2,
-						buttons = if p1.didUsernameChange then {
+						buttons = if var2 then {
 							{
 								text = var1.respawnNowText,
 								variant = buttonVariant.Emphasis,

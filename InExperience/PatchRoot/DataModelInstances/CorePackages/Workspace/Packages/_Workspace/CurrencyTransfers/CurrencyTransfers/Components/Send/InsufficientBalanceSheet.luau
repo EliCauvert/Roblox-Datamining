@@ -26,28 +26,91 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local transferRobuxHeaderModule = require(currencyTransfers.Components.Generic.TransferRobuxHeader)
 local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
 local formatNumberModule = require(currencyTransfers.Utils.formatNumber)
+local getFFlagCurrencyTransferFocusNavigationModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
+local useTransferSheetFocusModule = require(currencyTransfers.Hooks.useTransferSheetFocus)
 
 return function(_)
-	-- upvalues: useTransferStoreModule (ref), useTokens (ref), useLocalization (ref), transferLocalizationKeysModule (ref), signalsReactModule (ref), reactModule (ref), formatNumberModule (ref), localizationService (ref), transferLocaleFormatModule (ref), purchaseRobuxConstantsModule (ref), webViewServiceWrapperModule (ref), transferOriginationModule (ref), setTransferPromptStateModule (ref), promptStateModule (ref), getBalanceAfterPurchaseWebviewModule (ref), sheet (ref), useScaledValue (ref), transferRobuxHeaderModule (ref), view (ref), icon (ref), enums (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
+	-- upvalues: useTransferStoreModule (ref), useTokens (ref), useLocalization (ref), transferLocalizationKeysModule (ref), signalsReactModule (ref), reactModule (ref), formatNumberModule (ref), localizationService (ref), transferLocaleFormatModule (ref), purchaseRobuxConstantsModule (ref), webViewServiceWrapperModule (ref), transferOriginationModule (ref), setTransferPromptStateModule (ref), promptStateModule (ref), getBalanceAfterPurchaseWebviewModule (ref), getFFlagCurrencyTransferFocusNavigationModule (ref), useTransferSheetFocusModule (ref), sheet (ref), useScaledValue (ref), transferRobuxHeaderModule (ref), view (ref), icon (ref), enums (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local var1 = useTransferStoreModule()
 	local var2 = useTokens()
 	local var3 = useLocalization(transferLocalizationKeysModule.Presets.InsufficientBalanceSheet)
 	local getRobuxBalanceAmount = signalsReactModule.useSignalState(var1.getRobuxBalanceAmount) or 0
 	local var4 = reactModule.useRef(0)
 	local var5 = formatNumberModule(localizationService.RobloxLocaleId, math.max(0, (signalsReactModule.useSignalState(var1.getSelectedAmount) or 0 or 0) - getRobuxBalanceAmount))
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: transferLocaleFormatModule (copy), var3 (ref), var5 (ref)
+		return transferLocaleFormatModule.substituteAmount(var3.InsufficientBalance or "", tostring(var5))
+	end, { var5, var3.InsufficientBalance })
 	
+	local function goBackToInputAndOpenBuyRobux()
+		-- upvalues: var1 (ref), purchaseRobuxConstantsModule (copy), webViewServiceWrapperModule (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), promptStateModule (copy), var4 (ref), getBalanceAfterPurchaseWebviewModule (copy)
+		local transferOrigination = var1.getTransferOrigination(false)
+		webViewServiceWrapperModule.new({
+			url = purchaseRobuxConstantsModule.getPurchaseRobuxUrl(),
+			title = purchaseRobuxConstantsModule.PURCHASE_ROBUX_WEBVIEW_TITLE,
+			closeCallback = function()
+				-- upvalues: transferOrigination (ref), transferOriginationModule (copy), setTransferPromptStateModule (copy), var1 (copy), promptStateModule (copy), var4 (copy), getBalanceAfterPurchaseWebviewModule (copy)
+				local function _()
+					-- upvalues: transferOrigination (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), var1 (copy), promptStateModule (copy)
+					if transferOrigination == transferOriginationModule.InExperience then
+						setTransferPromptStateModule(var1, promptStateModule.TransferConfirm)
+						
+						return
+					end
+					setTransferPromptStateModule(var1, promptStateModule.TransferInput)
+				end
+				
+				var4.current += 1
+				local current = var4.current
+				getBalanceAfterPurchaseWebviewModule(nil, var1.getNetworkImpl()):andThen(function(p1)
+					-- upvalues: var4 (copy), current (ref), var1 (copy), transferOrigination (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), promptStateModule (copy)
+					if var4.current ~= current then return end
+					var1.setRobuxBalanceAmount(p1)
+					var1.setBalanceReceivedFromApi(true)
+					
+					if transferOrigination == transferOriginationModule.InExperience then
+						setTransferPromptStateModule(var1, promptStateModule.TransferConfirm)
+						
+						return
+					end
+					setTransferPromptStateModule(var1, promptStateModule.TransferInput)
+				end):catch(function(_)
+					-- upvalues: var4 (copy), current (ref), transferOrigination (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), var1 (copy), promptStateModule (copy)
+					if var4.current ~= current then return end
+					if transferOrigination == transferOriginationModule.InExperience then
+						setTransferPromptStateModule(var1, promptStateModule.TransferConfirm)
+						
+						return
+					end
+					setTransferPromptStateModule(var1, promptStateModule.TransferInput)
+				end)
+			end
+		}):open()
+	end
+	
+	local function handleClose()
+		-- upvalues: var1 (ref), transferOriginationModule (copy), setTransferPromptStateModule (copy), promptStateModule (copy)
+		if var1.getTransferOrigination(false) == transferOriginationModule.InExperience then
+			var1.triggerOnClose()
+			
+			return
+		end
+		setTransferPromptStateModule(var1, promptStateModule.TransferInput)
+	end
+	
+	local var7 = nil
+	local var8 = nil
+	
+	if getFFlagCurrencyTransferFocusNavigationModule() then
+		local var9, var10 = useTransferSheetFocusModule(handleClose)
+		var7 = var9
+		var8 = var10
+	end
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
 		snapPoints = { useScaledValue(300), 0.5 },
-		onClose = function()
-			-- upvalues: var1 (ref), transferOriginationModule (copy), setTransferPromptStateModule (copy), promptStateModule (copy)
-			if var1.getTransferOrigination(false) == transferOriginationModule.InExperience then
-				var1.triggerOnClose()
-				
-				return
-			end
-			setTransferPromptStateModule(var1, promptStateModule.TransferInput)
-		end
+		onClose = handleClose,
+		ref = var7
 	}, {
 		Header = reactModule.createElement(sheet.Header, {}, {
 			TransferRobuxHeader = reactModule.createElement(transferRobuxHeaderModule, {
@@ -72,10 +135,7 @@ return function(_)
 				ErrorMessage = reactModule.createElement(text, {
 					tag = "text-body-large content-emphasis text-align-x-center auto-y text-wrap",
 					LayoutOrder = 2,
-					Text = reactModule.useMemo(function()
-						-- upvalues: transferLocaleFormatModule (copy), var3 (ref), var5 (ref)
-						return transferLocaleFormatModule.substituteAmount(var3.InsufficientBalance or "", tostring(var5))
-					end, { var5, var3.InsufficientBalance }),
+					Text = var6,
 					Size = UDim2.new(1, 0, 0, 0)
 				})
 			})
@@ -86,52 +146,9 @@ return function(_)
 			}, {
 				reactModule.createElement(view, { tag = "row auto-y size-full-0 gap-small" }, {
 					reactModule.createElement(button, {
+						ref = var8,
 						text = var3.BuyRobux or "Buy",
-						onActivated = function()
-							-- upvalues: var1 (ref), purchaseRobuxConstantsModule (copy), webViewServiceWrapperModule (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), promptStateModule (copy), var4 (ref), getBalanceAfterPurchaseWebviewModule (copy)
-							local transferOrigination = var1.getTransferOrigination(false)
-							webViewServiceWrapperModule.new({
-								url = purchaseRobuxConstantsModule.getPurchaseRobuxUrl(),
-								title = purchaseRobuxConstantsModule.PURCHASE_ROBUX_WEBVIEW_TITLE,
-								closeCallback = function()
-									-- upvalues: transferOrigination (ref), transferOriginationModule (copy), setTransferPromptStateModule (copy), var1 (copy), promptStateModule (copy), var4 (copy), getBalanceAfterPurchaseWebviewModule (copy)
-									local function _()
-										-- upvalues: transferOrigination (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), var1 (copy), promptStateModule (copy)
-										if transferOrigination == transferOriginationModule.InExperience then
-											setTransferPromptStateModule(var1, promptStateModule.TransferConfirm)
-											
-											return
-										end
-										setTransferPromptStateModule(var1, promptStateModule.TransferInput)
-									end
-									
-									var4.current += 1
-									local current = var4.current
-									getBalanceAfterPurchaseWebviewModule(nil, var1.getNetworkImpl()):andThen(function(p1)
-										-- upvalues: var4 (copy), current (ref), var1 (copy), transferOrigination (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), promptStateModule (copy)
-										if var4.current ~= current then return end
-										var1.setRobuxBalanceAmount(p1)
-										var1.setBalanceReceivedFromApi(true)
-										
-										if transferOrigination == transferOriginationModule.InExperience then
-											setTransferPromptStateModule(var1, promptStateModule.TransferConfirm)
-											
-											return
-										end
-										setTransferPromptStateModule(var1, promptStateModule.TransferInput)
-									end):catch(function(_)
-										-- upvalues: var4 (copy), current (ref), transferOrigination (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), var1 (copy), promptStateModule (copy)
-										if var4.current ~= current then return end
-										if transferOrigination == transferOriginationModule.InExperience then
-											setTransferPromptStateModule(var1, promptStateModule.TransferConfirm)
-											
-											return
-										end
-										setTransferPromptStateModule(var1, promptStateModule.TransferInput)
-									end)
-								end
-							}):open()
-						end,
+						onActivated = goBackToInputAndOpenBuyRobux,
 						variant = buttonVariant.Emphasis,
 						fillBehavior = fillBehavior.Fill
 					})

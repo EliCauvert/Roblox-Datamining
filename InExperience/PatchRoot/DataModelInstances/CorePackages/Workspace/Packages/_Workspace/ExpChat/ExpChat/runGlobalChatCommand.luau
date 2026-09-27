@@ -4,15 +4,13 @@ local expChatSharedModule = require(parent.ExpChatShared)
 local sharedFlagsModule = require(parent.SharedFlags)
 local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
 local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
-local universeChatSystemMessageAddedModule = require(expChat.Actions.UniverseChatSystemMessageAdded)
-local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
 local context = expChatSharedModule.context
 local globalCommands = expChatSharedModule.GlobalCommands
 local var1 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
 return function(p1, p2)
-	-- upvalues: context (ref), var1 (ref), globalCommands (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), universeChatSystemMessageAddedModule (ref)
+	-- upvalues: context (ref), var1 (ref), globalCommands (ref), getMessagesStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref)
 	if not context.translator then
 		var1:warning("context.translator is nil, cannot execute command")
 		
@@ -38,14 +36,10 @@ return function(p1, p2)
 						joined = table.concat(t, "\n")
 					end
 					if joined then
-						if fFlagExpChatUseMessagesStore then
-							getMessagesStoreModule(false).addSystemMessage(joined, "RBXGlobal")
-							
-							if fFlagExpChatUseChannelTabsStore then
-								getChannelTabsStoreModule(false).markChannelUnread("RBXGlobal")
-							end
-						else
-							context.store:dispatch(universeChatSystemMessageAddedModule(joined, "RBXGlobal"))
+						getMessagesStoreModule(false).addSystemMessage(joined, "RBXGlobal")
+						
+						if fFlagExpChatUseChannelTabsStore then
+							getChannelTabsStoreModule(false).markChannelUnread("RBXGlobal")
 						end
 					end
 				end

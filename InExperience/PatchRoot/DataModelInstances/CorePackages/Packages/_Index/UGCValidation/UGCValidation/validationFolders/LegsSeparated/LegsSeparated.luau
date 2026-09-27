@@ -5,8 +5,6 @@ local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local boundsDataUtilsModule = require(parent.util.BoundsDataUtils)
 local boundsCalculatorModule = require(parent.util.BoundsCalculator)
-local getFFlagUGCValidateMigratePoseBlockingModule = require(parent.flags.getFFlagUGCValidateMigratePoseBlocking)
-local getFFlagUGCValidateLegFullBodySeparationModule = require(parent.flags.getFFlagUGCValidateLegFullBodySeparation)
 local getFFlagUGCValidateHeadAboveTorsoModule = require(parent.flags.getFFlagUGCValidateHeadAboveTorso)
 local getFStringUGCValidateLegHipAttachmentRangeModule = require(parent.flags.GetFStringUGCValidateLegHipAttachmentRange)
 local getFStringUGCValidateAllowedLegOverlapMultiplierModule = require(parent.flags.GetFStringUGCValidateAllowedLegOverlapMultiplier)
@@ -26,7 +24,6 @@ if getFFlagUGCValidateHeadAboveTorsoModule() then
 		validationEnumsModule.SharedDataMember.fullBodyPartsMetrics
 	}
 end
-t.fflag = getFFlagUGCValidateMigratePoseBlockingModule
 t.expectedFailures = {}
 
 local function validateAttachmentPosition(p1, p2, p3)
@@ -126,8 +123,7 @@ local function checkLegOverlap(p5, p6)
 end
 
 local function validateFullBodySeparation(p5, p6)
-	-- upvalues: getFFlagUGCValidateLegFullBodySeparationModule (ref), getFFlagUGCValidateHeadAboveTorsoModule (ref), checkLegOverlap (ref), createAllBodyPartsFromRootInstance (ref), buildEditableMeshesFromSharedData (ref), validationEnumsModule (ref), boundsCalculatorModule (ref), errorSourceStringsModule (ref)
-	if not getFFlagUGCValidateLegFullBodySeparationModule() then return end
+	-- upvalues: getFFlagUGCValidateHeadAboveTorsoModule (ref), checkLegOverlap (ref), createAllBodyPartsFromRootInstance (ref), buildEditableMeshesFromSharedData (ref), validationEnumsModule (ref), boundsCalculatorModule (ref), errorSourceStringsModule (ref)
 	if getFFlagUGCValidateHeadAboveTorsoModule() then
 		local fullBodyPartsMetrics = p6.fullBodyPartsMetrics
 		

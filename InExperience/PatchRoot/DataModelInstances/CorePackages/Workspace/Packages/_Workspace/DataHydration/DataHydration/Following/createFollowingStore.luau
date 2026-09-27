@@ -5,7 +5,6 @@ local createDataResolverModule = require(dataHydration.createDataResolver)
 local _ = require(dataHydration.DataHydrationTypes)
 local cryoModule = require(parent.Cryo)
 local promiseModule = require(parent.Promise)
-local fFlagLuaAppDataHydrationOptimisticMutationLayer = require(parent.SharedFlags).FFlagLuaAppDataHydrationOptimisticMutationLayer
 local requestsModule = require(script.Parent.Requests)
 local _ = require(script.Parent.FollowingStoreTypes)
 local classifyFollowingErrorModule = require(script.Parent.classifyFollowingError)
@@ -20,7 +19,7 @@ local _ = function(p1)
 end
 
 return function()
-	-- upvalues: createDataCacheModule (ref), requestsModule (ref), createDataResolverModule (ref), cryoModule (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), promiseModule (ref), classifyFollowingErrorModule (ref)
+	-- upvalues: createDataCacheModule (ref), requestsModule (ref), createDataResolverModule (ref), cryoModule (ref), promiseModule (ref), classifyFollowingErrorModule (ref)
 	local var1 = createDataCacheModule()
 	local var2 = createDataCacheModule()
 	
@@ -55,6 +54,7 @@ return function()
 	
 	local var5 = createDataResolverModule({
 		requestBatchSize = 100,
+		supportsMutations = true,
 		cache = var1,
 		queueProcessDelaySec = game:GetFastInt("FollowingStoreProcessDelaySec"),
 		fetchFn = function(p3)
@@ -91,11 +91,11 @@ return function()
 				
 				return p5.isFollowing
 			end)
-		end,
-		supportsMutations = fFlagLuaAppDataHydrationOptimisticMutationLayer
+		end
 	})
 	local var9 = createDataResolverModule({
 		requestBatchSize = 100,
+		supportsMutations = true,
 		cache = var2,
 		queueProcessDelaySec = game:GetFastInt("FollowingStoreProcessDelaySec"),
 		fetchFn = function(p5)
@@ -132,13 +132,12 @@ return function()
 				
 				return p7.isFollowed
 			end)
-		end,
-		supportsMutations = fFlagLuaAppDataHydrationOptimisticMutationLayer
+		end
 	})
-	local var13 = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var5.getOptimisticCachedItem else var5.getCachedItem
-	local var14 = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var5.getOptimisticAndFetchItem else var5.getAndFetchItem
-	local var15 = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var9.getOptimisticCachedItem else var9.getCachedItem
-	local var16 = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var9.getOptimisticAndFetchItem else var9.getAndFetchItem
+	local getOptimisticCachedItem = var5.getOptimisticCachedItem
+	local getOptimisticAndFetchItem = var5.getOptimisticAndFetchItem
+	local getOptimisticCachedItem_1 = var9.getOptimisticCachedItem
+	local getOptimisticAndFetchItem_1 = var9.getOptimisticAndFetchItem
 	
 	local function writeFollowing(p7, p8, p9, p10)
 		-- upvalues: var5 (ref), promiseModule (copy), classifyFollowingErrorModule (copy)
@@ -159,12 +158,12 @@ return function()
 	
 	return {
 		GetIsFollowing = function(p7, p8)
-			-- upvalues: var13 (ref), var9 (ref), var14 (ref)
-			return if p8 and p8.skipFetch then var13(p7) elseif var9.isRequestInQueueOrInFlight(p7) then var13(p7) else var14(p7)
+			-- upvalues: getOptimisticCachedItem (ref), var9 (ref), getOptimisticAndFetchItem (ref)
+			return if p8 and p8.skipFetch then getOptimisticCachedItem(p7) elseif var9.isRequestInQueueOrInFlight(p7) then getOptimisticCachedItem(p7) else getOptimisticAndFetchItem(p7)
 		end,
 		GetIsFollowed = function(p7, p8)
-			-- upvalues: var15 (ref), var5 (ref), var16 (ref)
-			return if p8 and p8.skipFetch then var15(p7) elseif var5.isRequestInQueueOrInFlight(p7) then var15(p7) else var16(p7)
+			-- upvalues: getOptimisticCachedItem_1 (ref), var5 (ref), getOptimisticAndFetchItem_1 (ref)
+			return if p8 and p8.skipFetch then getOptimisticCachedItem_1(p7) elseif var5.isRequestInQueueOrInFlight(p7) then getOptimisticCachedItem_1(p7) else getOptimisticAndFetchItem_1(p7)
 		end,
 		Follow = function(p7, p8)
 			-- upvalues: writeFollowing (ref), requestsModule (copy)

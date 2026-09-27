@@ -10,6 +10,7 @@ local t = {
 	SIZE_CONSTRAINT_RELATIVE_XX = "RelativeXX",
 	SIZE_CONSTRAINT_RELATIVE_YY = "RelativeYY"
 }
+local t_1 = {}
 
 local function convertToLuaEnum(p1, p2, p3)
 	local match = string.match(p1, "^" .. p1 .. "(.*)")
@@ -32,6 +33,21 @@ return {
 		if not var1 then
 			var1 = convertToLuaEnum(p1, p2, p3)
 			t[p1] = var1
+		end
+		return var1
+	end,
+	mapLuaEnumFormatToProto = function(p1, p2, p3)
+		-- upvalues: t_1 (ref)
+		local text = p2 .. p7
+		local var1 = t_1[text]
+		
+		if var1 == false then
+			return nil
+		elseif var1 == nil then
+			local var2 = p3.fromName(p2 .. string.upper(p1:gsub("(%l)(%u)", "%1_%2")))
+			t_1[text] = var2 or false
+			
+			return var2
 		end
 		return var1
 	end,

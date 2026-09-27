@@ -74,7 +74,7 @@ return function()
 			hasMore = hasMore,
 			onLoadMore = if hasMore then fetchMore else nil,
 			renderRow = var6,
-			ctaConfig = if fFlagUserListCtaIntegrationEnabled then socialTabsCtaConfigModule else nil
+			ctaConfig = if fFlagUserListCtaIntegrationEnabled then socialTabsCtaConfigModule.Friends else nil
 		})
 	}) else reactModule.createElement(socialTabsEmptyStateModule, { text = var3.emptyText })
 end

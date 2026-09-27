@@ -56,6 +56,7 @@
 	EditingFlowVoiceoverDeleteButtonPressed = "EditingFlowVoiceoverDeleteButtonPressed",
 	EditingFlowVoiceoverDeleted = "EditingFlowVoiceoverDeleted",
 	EditingFlowVoiceoverDeleteCancelled = "EditingFlowVoiceoverDeleteCancelled",
+	EditingFlowVoiceoverStartTimeAdjusted = "EditingFlowVoiceoverStartTimeAdjusted",
 	EditingFlowGenerateTextButtonPressed = "EditingFlowGenerateTextButtonPressed",
 	EditingFlowGenerateTextSucceeded = "EditingFlowGenerateTextSucceeded",
 	EditingFlowGenerateTextFailed = "EditingFlowGenerateTextFailed",

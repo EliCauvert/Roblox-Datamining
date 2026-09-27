@@ -33,7 +33,6 @@ local getFFlagLocalMutedNilFix = require(corePackagesService.Workspace.Packages.
 local getFFlagBatchVoiceParticipantsUpdates = voiceChatCoreModule.Flags.GetFFlagBatchVoiceParticipantsUpdates
 local getFFlagExpChatAlwaysRunTCS = require(corePackagesService.Workspace.Packages.SharedFlags).getFFlagExpChatAlwaysRunTCS
 local getFFlagExpChatUseVoiceParticipantsStore = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagExpChatUseVoiceParticipantsStore
-local _ = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagExpChatUseMessagesStore
 local fFlagExpChatUseChatConfigStore = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagExpChatUseChatConfigStore
 local expChatModule = require(corePackagesService.Workspace.Packages.ExpChat)
 local var1 = require(robloxGui.Modules.InGameChat.BubbleChat.Logger)(script.Name)

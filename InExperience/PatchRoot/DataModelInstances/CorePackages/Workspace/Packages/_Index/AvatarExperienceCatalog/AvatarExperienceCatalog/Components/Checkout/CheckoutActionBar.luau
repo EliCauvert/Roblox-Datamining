@@ -9,19 +9,24 @@ local constants = avatarExperienceCommonModule.Constants
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagStackedBottomNavMarketplaceCTA = sharedFlagsModule.FFlagStackedBottomNavMarketplaceCTA
 local fFlagAXFixBottomNavCTAHeight = sharedFlagsModule.FFlagAXFixBottomNavCTAHeight
+local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
 local constants_1 = require(parent.AppSystemBar).Constants
 local useNavBarSize = require(parent.AppNavBar).useNavBarSize
+local var1 = if fFlagEnableSplitPane then require(parent.SplitPane).SplitPaneStore else nil
+local var2 = if fFlagEnableSplitPane then require(parent.SignalsReact).useSignalState else nil
 
 local function selectDeviceOrientation(p1)
 	return p1.DeviceOrientation
 end
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: foundationModule (ref), fFlagStackedBottomNavMarketplaceCTA (ref), fFlagAXFixBottomNavCTAHeight (ref), useNavBarSize (ref), useSelector (ref), selectDeviceOrientation (ref), responsiveModule (ref), useLocalization (ref), reactModule (ref), constants (ref), constants_1 (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local var2 = if fFlagStackedBottomNavMarketplaceCTA and not fFlagAXFixBottomNavCTAHeight then useNavBarSize() else nil
-	local var3 = useSelector(selectDeviceOrientation) == responsiveModule.Keys.Portrait
-	local var4 = useLocalization({
+	-- upvalues: foundationModule (ref), fFlagStackedBottomNavMarketplaceCTA (ref), fFlagAXFixBottomNavCTAHeight (ref), useNavBarSize (ref), fFlagEnableSplitPane (ref), var2 (ref), var1 (ref), useSelector (ref), selectDeviceOrientation (ref), responsiveModule (ref), useLocalization (ref), reactModule (ref), constants (ref), constants_1 (ref)
+	local var3 = foundationModule.Hooks.useTokens()
+	local var4 = if fFlagStackedBottomNavMarketplaceCTA and not fFlagAXFixBottomNavCTAHeight then useNavBarSize() else nil
+	local var5 = if fFlagEnableSplitPane then var2(var1.getStore().getIsBreakpointEnabled) else false
+	local var6 = if fFlagEnableSplitPane then var2(var1.getStore().getSupportWidthFraction) else nil
+	local var7 = (if fFlagEnableSplitPane and var5 then responsiveModule.Keys.Landscape else useSelector(selectDeviceOrientation)) == responsiveModule.Keys.Portrait
+	local var8 = useLocalization({
 		checkoutItemSingular = "Feature.Catalog.Action.CheckoutSingular",
 		checkoutButtonFtuxTooltip = "Feature.Catalog.Label.Checkout.CheckoutButtonFtuxTooltip",
 		checkoutItemPlural = {
@@ -29,53 +34,54 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			count = p1.itemCount
 		}
 	})
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), constants (copy)
-		return if var3 then UDim2.fromScale(0, 1) else UDim2.fromScale(constants.LANDSCAPE_UI_WIDTH_PERCENTAGE, 1)
-	end, { var3 })
+	local var9 = reactModule.useRef(nil)
+	local var10 = reactModule.useMemo(function()
+		-- upvalues: var7 (ref), fFlagEnableSplitPane (copy), var5 (ref), var6 (ref), constants (copy)
+		return if var7 then UDim2.fromScale(0, 1) elseif fFlagEnableSplitPane then UDim2.fromScale(if var5 then 1 - var6 else constants.LANDSCAPE_UI_WIDTH_PERCENTAGE, 1) else UDim2.fromScale(constants.LANDSCAPE_UI_WIDTH_PERCENTAGE, 1)
+	end, { var7, var5, var6 })
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "row items-center gap-medium auto-y padding-y-large padding-x-xlarge bg-surface-0 anchor-bottom-left",
 		ZIndex = 3,
+		testId = if fFlagEnableSplitPane then "CheckoutActionBar" else nil,
 		ref = p2,
 		Visible = p1.Visible,
 		Size = reactModule.useMemo(function()
-			-- upvalues: var3 (ref), constants (copy)
-			return if var3 then UDim2.fromScale(1, 0) else UDim2.fromScale(constants.LANDSCAPE_SCENE_WIDTH_PERCENTAGE, 0)
-		end, { var3 }),
+			-- upvalues: var7 (ref), fFlagEnableSplitPane (copy), var5 (ref), var6 (ref), constants (copy)
+			return if var7 then UDim2.fromScale(1, 0) elseif fFlagEnableSplitPane then UDim2.fromScale(if var5 then var6 else constants.LANDSCAPE_SCENE_WIDTH_PERCENTAGE, 0) else UDim2.fromScale(constants.LANDSCAPE_SCENE_WIDTH_PERCENTAGE, 0)
+		end, { var7, var5, var6 }),
 		Position = if fFlagStackedBottomNavMarketplaceCTA then reactModule.useMemo(function()
-			-- upvalues: p1 (ref), fFlagAXFixBottomNavCTAHeight (copy), constants_1 (copy), var6 (ref), var2 (ref)
+			-- upvalues: p1 (ref), fFlagAXFixBottomNavCTAHeight (copy), constants_1 (copy), var10 (ref), var4 (ref)
 			return if p1.footerVisibilityBinding then p1.footerVisibilityBinding:map(function(p3)
-				-- upvalues: fFlagAXFixBottomNavCTAHeight (copy), constants_1 (copy), var6 (copy), var2 (copy)
-				return if fFlagAXFixBottomNavCTAHeight then var6 + UDim2.new(0, 0, 0, -math.max(0, constants_1.BOTTOM_BAR_SIZE * p3 - 8)) else var6 + UDim2.new(0, 0, 0, -(var2 - 8) * p3)
-			end) else var6
-		end, { var6, p1.footerVisibilityBinding, var2 }) else var6,
+				-- upvalues: fFlagAXFixBottomNavCTAHeight (copy), constants_1 (copy), var10 (copy), var4 (copy)
+				return if fFlagAXFixBottomNavCTAHeight then var10 + UDim2.new(0, 0, 0, -math.max(0, constants_1.BOTTOM_BAR_SIZE * p3 - 8)) else var10 + UDim2.new(0, 0, 0, -(var4 - 8) * p3)
+			end) else var10
+		end, { var10, p1.footerVisibilityBinding, var4 }) else var10,
 		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged
 	}, {
 		ActionButton = reactModule.createElement(foundationModule.Button, {
 			LayoutOrder = 1,
-			text = if p1.itemCount <= 1 then var4.checkoutItemSingular else var4.checkoutItemPlural,
+			text = if p1.itemCount <= 1 then var8.checkoutItemSingular else var8.checkoutItemPlural,
 			onActivated = p1.onCheckoutButtonActivated,
 			variant = foundationModule.Enums.ButtonVariant.Emphasis,
 			size = foundationModule.Enums.ButtonSize.Medium,
 			fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-			ref = var5
+			ref = var9
 		}),
 		ActionButtonPopover = reactModule.createElement(foundationModule.Popover.Root, { isOpen = p1.showCheckoutButtonTooltip }, {
-			Anchor = reactModule.createElement(foundationModule.Popover.Anchor, { anchorRef = var5 }),
+			Anchor = reactModule.createElement(foundationModule.Popover.Anchor, { anchorRef = var9 }),
 			Content = reactModule.createElement(foundationModule.Popover.Content, {
 				align = foundationModule.Enums.PopoverAlign.Center,
 				side = foundationModule.Enums.PopoverSide.Top,
 				radius = foundationModule.Enums.Radius.Medium,
-				backgroundStyle = var1.Color.System.Contrast
+				backgroundStyle = var3.Color.System.Contrast
 			}, {
 				PopCoverContent = reactModule.createElement(foundationModule.View, {
 					tag = "col gap-xsmall padding-y-small padding-x-medium auto-xy"
 				}, {
 					CategoryButtonTooltipTitle = reactModule.createElement(foundationModule.Text, {
 						tag = "auto-xy text-title-medium text-truncate-end content-inverse-emphasis",
-						Text = var4.checkoutButtonFtuxTooltip
+						Text = var8.checkoutButtonFtuxTooltip
 					}, {
 						TooltipOverlayButton = reactModule.createElement("TextButton", {
 							Transparency = 1,

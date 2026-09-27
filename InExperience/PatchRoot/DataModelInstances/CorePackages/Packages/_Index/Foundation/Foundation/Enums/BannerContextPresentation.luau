@@ -1,0 +1,1 @@
+﻿return { Inline = "Inline", Affixed = "Affixed" }

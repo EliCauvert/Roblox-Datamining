@@ -6,7 +6,6 @@ local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local createEditableInstancesForContextModule = require(parent.util.createEditableInstancesForContext)
-local getFFlagUGCValidateMigrateWrapAndMakeupModule = require(parent.flags.getFFlagUGCValidateMigrateWrapAndMakeup)
 local getFFlagUGCValidateDecalTextureLimitsModule = require(parent.flags.getFFlagUGCValidateDecalTextureLimits)
 local getFFlagUGCValidationAllowFullVaasModule = require(parent.flags.getFFlagUGCValidationAllowFullVaas)
 local validateMakeupZoneIncludeToleranceHundredthsPercent = game:DefineFastInt("ValidateMakeupZoneIncludeToleranceHundredthsPercent", 100)
@@ -19,7 +18,6 @@ local t = {
 }
 local t_1 = { InExpServer = true, InExpClient = true }
 local t_2 = {
-	fflag = getFFlagUGCValidateMigrateWrapAndMakeupModule,
 	categories = { validationEnumsModule.UploadCategory.MAKEUP },
 	requiredData = {
 		validationEnumsModule.SharedDataMember.rootInstance,

@@ -1,5 +1,4 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
+﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
 local coreGuiService = game:GetService("CoreGui")
 local runService = game:GetService("RunService")
 local contentProviderService = game:GetService("ContentProvider")
@@ -21,7 +20,6 @@ local toMediaItemModule = require(parent.Moments.ToMediaItem)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagMomentsAutoplayAmpPolicy = sharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
 local fFlagProfileMomentsVideoPlaybackFix = sharedFlagsModule.FFlagProfileMomentsVideoPlaybackFix
-local fFlagProfileMomentsMuteCarouselAudioModule = require(profilePlatform.Flags.FFlagProfileMomentsMuteCarouselAudio)
 local useSignalState = signalsReactModule.useSignalState
 
 local function _()
@@ -64,7 +62,7 @@ local function defaultCreateCoordinator(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: fFlagMomentsAutoplayAmpPolicy (ref), useSignalState (ref), getMomentsCapabilities (ref), reactModule (ref), signalsModule (ref), userInputService (ref), var1 (write), toMediaItemModule (ref), defaultCreateCoordinator (ref), fFlagProfileMomentsMuteCarouselAudioModule (ref), media (ref)
+	-- upvalues: fFlagMomentsAutoplayAmpPolicy (ref), useSignalState (ref), getMomentsCapabilities (ref), reactModule (ref), signalsModule (ref), userInputService (ref), var1 (write), toMediaItemModule (ref), defaultCreateCoordinator (ref), media (ref)
 	local activeIndex = p1.activeIndex
 	local playbackActive = p1.playbackActive
 	local var2 = if fFlagMomentsAutoplayAmpPolicy then useSignalState(getMomentsCapabilities(false).getIsAutoPlayEnabled) else nil
@@ -168,22 +166,21 @@ return function(p1)
 		if fFlagMomentsAutoplayAmpPolicy then var5 else nil
 	})
 	local createCoordinator = p1.createCoordinator or defaultCreateCoordinator
-	local var11 = if fFlagProfileMomentsMuteCarouselAudioModule then 0 else nil
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: createCoordinator (ref), var10 (ref), var11 (ref)
-		return createCoordinator(var10, var11)
-	end, { var10, createCoordinator, var11 })
+	local var11 = reactModule.useMemo(function()
+		-- upvalues: createCoordinator (ref), var10 (ref)
+		return createCoordinator(var10, 0)
+	end, { var10, createCoordinator, 0 })
 	reactModule.useEffect(function()
-		-- upvalues: var12 (ref)
+		-- upvalues: var11 (ref)
 		return function()
-			-- upvalues: var12 (copy)
-			var12.dispose()
+			-- upvalues: var11 (copy)
+			var11.dispose()
 		end
-	end, { var12 })
+	end, { var11 })
 	reactModule.useImperativeHandle(p1.handoffRef, function()
-		-- upvalues: var12 (ref)
-		return { release = var12.dispose }
-	end, { var12 })
+		-- upvalues: var11 (ref)
+		return { release = var11.dispose }
+	end, { var11 })
 	
-	return reactModule.createElement(media.MediaPreloadProvider.Provider, { controllerProvider = var12.provider }, p1.children)
+	return reactModule.createElement(media.MediaPreloadProvider.Provider, { controllerProvider = var11.provider }, p1.children)
 end

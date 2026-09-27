@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXItemDetailsSdui", false)
+﻿return game:DefineFastFlag("AXItemDetailsSdui2", false)

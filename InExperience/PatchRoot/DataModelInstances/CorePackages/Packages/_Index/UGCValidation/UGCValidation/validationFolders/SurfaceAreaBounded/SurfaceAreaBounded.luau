@@ -6,7 +6,6 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local getFIntMaxTotalSurfaceAreaModule = require(parent.flags.getFIntMaxTotalSurfaceArea)
 
 return {
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateMeshGeometry),
 	categories = {
 		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
 		validationEnumsModule.UploadCategory.RIGID_ACCESSORY,

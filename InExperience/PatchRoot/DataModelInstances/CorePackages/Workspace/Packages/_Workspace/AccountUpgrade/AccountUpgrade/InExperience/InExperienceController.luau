@@ -140,6 +140,7 @@ function t_1.mount(p1)
 		end
 		
 		var4:render(if flow.canDismiss then reactModule.createElement(flow.getView(), {
+			flow = p1.flow,
 			onDismiss = function()
 				-- upvalues: var5 (write), var4 (ref), screenGui (copy), p1 (copy), var2 (copy), var1 (copy), cleanupHost (copy)
 				local t = { reason = "user_closed" }
@@ -160,7 +161,7 @@ function t_1.mount(p1)
 				end)
 			end,
 			onComplete = var6
-		}) else reactModule.createElement(flow.getView(), { onComplete = var6 }))
+		}) else reactModule.createElement(flow.getView(), { flow = p1.flow, onComplete = var6 }))
 	end)
 	
 	if not ok then

@@ -202,6 +202,32 @@ return {
 			end)
 		}
 	}),
+	SearchStarted = telemetryModule.new({
+		name = "chatLandingSearchStarted",
+		description = "A search session opened on the chat landing list. Once per session, on both the client-filter and backend-search paths.",
+		lastUpdated = { 2026, 9, 21 },
+		backendsList = {
+			namedCounterConfigurationNoEmittedInfo("AppChat.ChatLanding.Search.Started"),
+			EVENT_INGEST_NO_EMITTED_INFO
+		}
+	}),
+	SearchResultsRendered = telemetryModule.new({
+		name = "chatLandingSearchResultsRendered",
+		description = "A search query settled. Once per query, with the result count and outcome, which the cell events cannot express when zero cells render.",
+		lastUpdated = { 2026, 9, 21 },
+		backendsList = {
+			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Search.ResultsRendered", function(p1)
+				return { searchResultType = p1.searchResultType }
+			end),
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return {
+					searchResultCount = p1.searchResultCount,
+					searchResultType = p1.searchResultType,
+					searchLatencyMs = p1.searchLatencyMs
+				}
+			end)
+		}
+	}),
 	ChatLandingGroupsBtnClicked = telemetryModule.new({
 		name = "chatLandingGroupsBtnClicked",
 		description = "",

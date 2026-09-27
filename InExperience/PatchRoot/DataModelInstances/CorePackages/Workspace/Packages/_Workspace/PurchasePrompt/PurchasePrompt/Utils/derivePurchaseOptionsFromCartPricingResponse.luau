@@ -1,4 +1,6 @@
-﻿local _ = require(script:FindFirstAncestor("PurchasePrompt").Parent.IAPExperience)
+﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local _ = require(purchasePrompt.Parent.IAPExperience)
+local _ = require(purchasePrompt.types)
 local deriveSelectedOfferIdsFromCartPricingModule = require(script.Parent.deriveSelectedOfferIdsFromCartPricing)
 
 return function(p1)

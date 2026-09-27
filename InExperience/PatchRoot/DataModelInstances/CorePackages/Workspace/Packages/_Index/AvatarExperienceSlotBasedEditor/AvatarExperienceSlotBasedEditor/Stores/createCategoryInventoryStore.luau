@@ -6,14 +6,12 @@ local mutedError = require(parent.Loggers).mutedError
 local inventoryItemTypeModule = require(avatarExperienceSlotBasedEditor.Enums.InventoryItemType)
 local _ = require(avatarExperienceSlotBasedEditor.Enums.InventoryItemAvailability)
 local _ = require(script.Parent.Parent.Types)
-local fFlagAXModeratedItemsFlow = require(parent.AvatarExperienceFlags).FFlagAXModeratedItemsFlow
 local fFlagAXInventoryDurablesSupport = require(parent.AvatarExperienceFlags).FFlagAXInventoryDurablesSupport
-local fFlagAXEnableModeratedItemsFlowForDurables = require(parent.AvatarExperienceFlags).FFlagAXEnableModeratedItemsFlowForDurables
 local fFlagAXBackgroundGeneration = require(parent.AvatarExperienceFlags).FFlagAXBackgroundGeneration
 local fFlagAXRefetchInventoryOnUpdate = require(parent.AvatarExperienceFlags).FFlagAXRefetchInventoryOnUpdate
 
 return function()
-	-- upvalues: signalsModule (ref), httpService (ref), fFlagAXRefetchInventoryOnUpdate (ref), inventoryItemTypeModule (ref), mutedError (ref), fFlagAXModeratedItemsFlow (ref), fFlagAXEnableModeratedItemsFlowForDurables (ref), fFlagAXInventoryDurablesSupport (ref), fFlagAXBackgroundGeneration (ref)
+	-- upvalues: signalsModule (ref), httpService (ref), fFlagAXRefetchInventoryOnUpdate (ref), inventoryItemTypeModule (ref), mutedError (ref), fFlagAXInventoryDurablesSupport (ref), fFlagAXBackgroundGeneration (ref)
 	local var1 = nil
 	local var2, var3 = signalsModule.createSignal(nil)
 	local var4, var5 = signalsModule.createSignal(false)
@@ -70,7 +68,7 @@ return function()
 			var3(if #t_1 > 0 then t_1 else nil)
 		end,
 		addResultsPage = function(p2, p3)
-			-- upvalues: fFlagAXRefetchInventoryOnUpdate (copy), var6 (ref), var8 (write), var2 (ref), inventoryItemTypeModule (copy), mutedError (copy), fFlagAXModeratedItemsFlow (copy), fFlagAXEnableModeratedItemsFlowForDurables (copy), fFlagAXInventoryDurablesSupport (copy), fFlagAXBackgroundGeneration (copy), var3 (ref), var1 (write), var5 (ref)
+			-- upvalues: fFlagAXRefetchInventoryOnUpdate (copy), var6 (ref), var8 (write), var2 (ref), inventoryItemTypeModule (copy), mutedError (copy), fFlagAXInventoryDurablesSupport (copy), fFlagAXBackgroundGeneration (copy), var3 (ref), var1 (write), var5 (ref)
 			if fFlagAXRefetchInventoryOnUpdate and p3 ~= nil and p3 ~= var6(false) then return end
 			local var10 = fFlagAXRefetchInventoryOnUpdate and var8 == true
 			
@@ -85,15 +83,15 @@ return function()
 				
 				if var13 == inventoryItemTypeModule.Unknown then
 					mutedError(`Unknown item type received from user inventory endpoint: {v.itemCategory.itemType}`)
-					continue
+				else
+					table.insert(var12, {
+						itemId = tostring(v.itemId),
+						inventoryItemType = var13,
+						availabilityStatus = v.availabilityStatus,
+						expirationTime = if fFlagAXInventoryDurablesSupport then v.expirationTime else nil,
+						isPlusExclusive = if fFlagAXBackgroundGeneration then v.isPlusExclusive else nil
+					})
 				end
-				table.insert(var12, {
-					itemId = tostring(v.itemId),
-					inventoryItemType = var13,
-					availabilityStatus = if fFlagAXModeratedItemsFlow or fFlagAXEnableModeratedItemsFlowForDurables then v.availabilityStatus else nil,
-					expirationTime = if fFlagAXInventoryDurablesSupport then v.expirationTime else nil,
-					isPlusExclusive = if fFlagAXBackgroundGeneration then v.isPlusExclusive else nil
-				})
 			end
 			var3(var12)
 			local nextPageToken = p2.nextPageToken

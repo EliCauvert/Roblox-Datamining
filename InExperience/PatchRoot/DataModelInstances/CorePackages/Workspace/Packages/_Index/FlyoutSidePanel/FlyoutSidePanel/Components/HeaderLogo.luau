@@ -5,7 +5,10 @@ local useTokens = foundationModule.Hooks.useTokens
 local themeName = foundationModule.Enums.ThemeName
 local luaAppsEnableDynamicLogoWidth = game:DefineFastFlag("LuaAppsEnableDynamicLogoWidth", false)
 local var1 = if luaAppsEnableDynamicLogoWidth then require(parent.FoundationImages).Images else nil
-local fFlagLuaAppsEnableClassicWordmark = require(parent.SharedFlags).FFlagLuaAppsEnableClassicWordmark
+local getTestId = require(parent.RoactUtils).getTestId
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagLuaAppAddTestIdsForArrow = sharedFlagsModule.FFlagLuaAppAddTestIdsForArrow
+local fFlagLuaAppsEnableClassicWordmark = sharedFlagsModule.FFlagLuaAppsEnableClassicWordmark
 local fFlagLuaAppsEnableMarkButtonSeqModule = require(script.Parent.Parent.Flags.FFlagLuaAppsEnableMarkButtonSeq)
 local fFlagLuaAppsEnableMarkButtonSeqModule_1 = game:DefineFastFlag("LuaAppsMarkButtonStartWithHat", false) and fFlagLuaAppsEnableMarkButtonSeqModule
 local var2 = if fFlagLuaAppsEnableMarkButtonSeqModule then require(parent.Style).AppearanceContext else nil
@@ -43,7 +46,7 @@ if luaAppsEnableDynamicLogoWidth then
 	end
 end
 return function(p1)
-	-- upvalues: useTokens (ref), fFlagLuaAppsEnableMarkButtonSeqModule (ref), reactModule (ref), var2 (ref), fFlagLuaAppsEnableClassicWordmark (ref), themeName (ref), list (ref), list_1 (ref), luaAppsEnableDynamicLogoWidth (ref), var1 (ref), t (ref), vector2 (ref), constantsModule (ref), foundationModule (ref)
+	-- upvalues: useTokens (ref), fFlagLuaAppsEnableMarkButtonSeqModule (ref), reactModule (ref), var2 (ref), fFlagLuaAppsEnableClassicWordmark (ref), themeName (ref), list (ref), list_1 (ref), luaAppsEnableDynamicLogoWidth (ref), var1 (ref), t (ref), vector2 (ref), constantsModule (ref), foundationModule (ref), fFlagLuaAppAddTestIdsForArrow (ref), getTestId (ref)
 	local var3 = useTokens()
 	local var4 = if fFlagLuaAppsEnableMarkButtonSeqModule then reactModule.useContext(var2) else nil
 	local var5 = false
@@ -79,12 +82,12 @@ return function(p1)
 	local var13 = fFlagLuaAppsEnableMarkButtonSeqModule and (p1.isSystemThemeEnabled and (p1.onWordmarkActivated ~= nil and not var5))
 	local var14 = if var13 then var6[var7] else nil
 	local var15 = fFlagLuaAppsEnableClassicWordmark and var5
-	local var14_1_1 = var15 or var14 ~= nil
-	local var14_1_2 = var15 or var14 ~= nil
+	local var15_1_1 = var15 or var14 ~= nil
+	local var15_1_2 = var15 or var14 ~= nil
 	local var16 = var14 or (if var15 then "icons/logo/letterform_classic" else "icons/logo/letterform")
-	local var17 = if luaAppsEnableDynamicLogoWidth and var14_1_2 then var1[var16] else nil
+	local var17 = if luaAppsEnableDynamicLogoWidth and var15_1_2 then var1[var16] else nil
 	local size500 = var3.Size.Size_500
-	local var18 = if luaAppsEnableDynamicLogoWidth and var14_1_2 then Vector2.new(30 * var3.Config.UI.Scale * t[var16], 30 * var3.Config.UI.Scale) elseif var15 or var14 then vector2 * var3.Config.UI.Scale else Vector2.new(size500 * constantsModule.ROBLOX_LOGO_ASPECT_RATIO, size500)
+	local var18 = if luaAppsEnableDynamicLogoWidth and var15_1_2 then Vector2.new(30 * var3.Config.UI.Scale * t[var16], 30 * var3.Config.UI.Scale) elseif var15 or var14 then vector2 * var3.Config.UI.Scale else Vector2.new(size500 * constantsModule.ROBLOX_LOGO_ASPECT_RATIO, size500)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		TitleOrRobloxLogoFrame = reactModule.createElement(foundationModule.Image, {
@@ -96,7 +99,7 @@ return function(p1)
 				offset = var17.ImageRectOffset,
 				size = var17.ImageRectSize
 			} else nil,
-			imageStyle = if var14_1_1 then nil else var3.Color.Content.Emphasis,
+			imageStyle = if var15_1_1 then nil else var3.Color.Content.Emphasis,
 			ScaleType = Enum.ScaleType.Fit,
 			Size = UDim2.fromOffset(var18.X, var18.Y)
 		}, {
@@ -111,7 +114,8 @@ return function(p1)
 				Size = UDim2.new(1, 0, 0, var3.Size.Size_1200),
 				Text = "Roblox",
 				TextTransparency = 1,
-				[reactModule.Event.Activated] = var8
+				[reactModule.Event.Activated] = var8,
+				[reactModule.Tag] = if fFlagLuaAppAddTestIdsForArrow then getTestId("core-ui-flyout-wordmark") else nil
 			}) else nil
 		})
 	})

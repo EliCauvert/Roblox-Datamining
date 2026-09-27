@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BuildExperienceMonetizationNativeUI", false) and require(script.Parent.FFlagBuildExperienceManageDevProduct)
+﻿return game:DefineFastFlag("BuildExperienceMonetizationNativeUI2", false) and require(script.Parent.FFlagBuildExperienceManageDevProduct)

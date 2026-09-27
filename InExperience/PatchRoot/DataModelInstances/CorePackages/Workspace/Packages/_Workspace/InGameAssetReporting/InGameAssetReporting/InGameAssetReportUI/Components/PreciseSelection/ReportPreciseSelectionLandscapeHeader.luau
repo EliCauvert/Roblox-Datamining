@@ -5,6 +5,8 @@ local foundationModule = require(parent.Foundation)
 local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local headerBar = UIBloxModule.App.Bar.HeaderBar
 local iconButton = UIBloxModule.App.Button.IconButton
 local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
@@ -12,11 +14,11 @@ local images = UIBloxModule.App.ImageSet.Images
 local withStyle = UIBloxModule.Style.withStyle
 
 local function _(p1)
-	-- upvalues: withStyle (ref), reactModule (ref)
+	-- upvalues: withStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	return function()
-		-- upvalues: withStyle (copy), reactModule (copy), p1 (ref)
+		-- upvalues: withStyle (copy), reactModule (copy), p1 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		return withStyle(function(p2)
-			-- upvalues: reactModule (copy), p1 (copy)
+			-- upvalues: reactModule (copy), p1 (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 			local theme = p2.Theme
 			
 			return reactModule.createElement("TextLabel", {
@@ -24,7 +26,8 @@ local function _(p1)
 				TextWrapped = true,
 				BackgroundTransparency = 1,
 				Text = p1,
-				Font = p2.Font.Header2.Font,
+				Font = if foundationFontFaceMigration then nil else p2.Font.Header2.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Center,
@@ -93,7 +96,7 @@ local _ = function(p1, p2, p3, p4, p5, p6)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), foundationModule (ref), button (ref), buttonVariant (ref), inputSize (ref), withStyle (ref)
+	-- upvalues: reactModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), foundationModule (ref), button (ref), buttonVariant (ref), inputSize (ref), withStyle (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local createElement = reactModule.createElement
 	local var1 = "Frame"
 	local t = {
@@ -170,9 +173,9 @@ return function(p1)
 	local titleText = p1.titleText
 	
 	function t_2.renderCenter()
-		-- upvalues: withStyle (copy), reactModule (copy), titleText (ref)
+		-- upvalues: withStyle (copy), reactModule (copy), titleText (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		return withStyle(function(p2)
-			-- upvalues: reactModule (copy), titleText (copy)
+			-- upvalues: reactModule (copy), titleText (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 			local theme = p2.Theme
 			
 			return reactModule.createElement("TextLabel", {
@@ -180,7 +183,8 @@ return function(p1)
 				TextWrapped = true,
 				BackgroundTransparency = 1,
 				Text = titleText,
-				Font = p2.Font.Header2.Font,
+				Font = if foundationFontFaceMigration then nil else p2.Font.Header2.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Center,

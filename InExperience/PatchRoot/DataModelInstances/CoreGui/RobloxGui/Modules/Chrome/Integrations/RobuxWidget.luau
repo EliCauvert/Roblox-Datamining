@@ -10,7 +10,9 @@ local inExperienceSideSheetModule = require(corePackagesService.Workspace.Packag
 local function openShop()
 	-- upvalues: serviceModule (ref), constantsModule (ref), inExperienceShopModule (ref)
 	if serviceModule:isIntegrationValid(constantsModule.IN_EXPERIENCE_SHOP_ID) then
-		inExperienceShopModule.requestOpenToRobuxTab()
+		if not serviceModule:isWindowOpen(constantsModule.IN_EXPERIENCE_SHOP_ID) then
+			inExperienceShopModule.requestOpenToRobuxTab()
+		end
 		serviceModule:activate(constantsModule.IN_EXPERIENCE_SHOP_ID)
 	end
 end
@@ -27,7 +29,8 @@ return (if require(chrome.Flags.FFlagEnableSideSheetRobuxWidget) and require(cor
 			return reactModule.createElement(inExperienceSideSheetModule.RobuxWidget, {
 				layoutOrder = p1.layoutOrder,
 				placement = p1.placement,
-				onBuyActivated = openShop
+				onBuyActivated = openShop,
+				firstIntegrationToFocusCallback = p1.firstIntegrationToFocusCallback
 			})
 		end
 	}

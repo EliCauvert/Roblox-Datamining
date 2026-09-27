@@ -1,4 +1,5 @@
 ﻿local fFlagAXCatalogBackgroundsSupport = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AvatarExperienceFlags).FFlagAXCatalogBackgroundsSupport
+local resolveWidgetListWindowSizeModule = require(script.Parent.Utils.resolveWidgetListWindowSize)
 local vector2 = Vector2.new(game:DefineFastInt("AXLooksImageOffsetMultiplierX", 500) / 1000, game:DefineFastInt("AXLooksImageOffsetMultiplierY", 750) / 1000)
 local var1 = game:DefineFastInt("AXLooksImageZoom", 1250) / 1000
 local t = {
@@ -8,6 +9,10 @@ local t = {
 	WINDOW_SIZE = game:DefineFastInt("WidgetListWindowSize", 21),
 	INITIAL_NUM_TO_RENDER = if game:DefineFastFlag("AXUseFIntForWidgetListInitialNumToRender", false) then game:DefineFastInt("WidgetListInitialNumToRender", 8) else 8
 }
+
+if game:DefineFastFlag("AXWidgetListWindowSizeByMemoryTier", false) then
+	t.WINDOW_SIZE = resolveWidgetListWindowSizeModule(t.WINDOW_SIZE)
+end
 local t_1 = {
 	[tostring(Enum.AssetType.TShirt.Value)] = "Feature.Avatar.Label.ClassicTShirts",
 	[tostring(Enum.AssetType.Hat.Value)] = "Feature.Avatar.Label.Hat",

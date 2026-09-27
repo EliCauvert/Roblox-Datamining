@@ -4,11 +4,14 @@ local parent_2 = parent_1.Parent
 local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local roactModule = require(parent_2.Roact)
 local tModule = require(parent_2.t)
+local foundationModule = require(parent_2.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local withStyleModule = require(parent_1.Core.Style.withStyle)
 local getTextSizeModule = require(parent_1.Core.Text.GetTextSize)
 local imagesModule = require(parent_1.App.ImageSet.Images)
 local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
 local itemTileEnumsModule = require(parent.Enum.ItemTileEnums)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local itemRestrictionStatus = roactModule.PureComponent:extend("ItemRestrictionStatus")
 local vector2 = Vector2.new(50, 20)
 local vector2_1 = Vector2.new(8, 8)
@@ -35,9 +38,9 @@ local _ = function(p1)
 end
 
 function itemRestrictionStatus.render(p1)
-	-- upvalues: withStyleModule (ref), itemTileEnumsModule (ref), getTextSizeModule (ref), vector2 (ref), imagesModule (ref), vector2_1 (ref), roactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref)
+	-- upvalues: withStyleModule (ref), itemTileEnumsModule (ref), getTextSizeModule (ref), vector2 (ref), imagesModule (ref), vector2_1 (ref), roactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), itemTileEnumsModule (copy), getTextSizeModule (copy), vector2 (copy), imagesModule (copy), vector2_1 (copy), roactModule (copy), imageSetComponentModule (copy), UIBloxConfigModule (copy)
+		-- upvalues: p1 (ref), itemTileEnumsModule (copy), getTextSizeModule (copy), vector2 (copy), imagesModule (copy), vector2_1 (copy), roactModule (copy), imageSetComponentModule (copy), UIBloxConfigModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		local var1
 		local theme = p2.Theme
 		local font = p2.Font
@@ -80,7 +83,8 @@ function itemRestrictionStatus.render(p1)
 			}),
 			Text = roactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Font = font_1,
+				Font = if foundationFontFaceMigration then nil else font_1,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(font_1) else nil,
 				TextSize = var3,
 				Text = var1,
 				TextColor3 = theme.TextMuted.Color,

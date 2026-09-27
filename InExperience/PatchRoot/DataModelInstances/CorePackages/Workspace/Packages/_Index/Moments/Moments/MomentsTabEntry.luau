@@ -404,19 +404,22 @@ local function MomentsTabEntry(p4)
 				getImmersiveChromeStoreModule(false).setOverlayCovering(true)
 				openOwnMoments()
 			end else nil,
-			openMomentsFeedReport = p4.openMomentsFeedReport
+			openMomentsFeedReport = p4.openMomentsFeedReport,
+			openMomentCommentReport = p4.openMomentCommentReport
 		}
 	end, {
 		p4.openProfile,
 		p4.openOwnMoments,
-		p4.openMomentsFeedReport
+		p4.openMomentsFeedReport,
+		p4.openMomentCommentReport
 	})
 	
 	return if canRenderNativeMoments(useMomentsGating()) then reactModule.createElement(momentsHostShellModule, {
 		sessionStore = var13.current,
 		openProfile = var26.openProfile,
 		openOwnMoments = var26.openOwnMoments,
-		openMomentsFeedReport = var26.openMomentsFeedReport
+		openMomentsFeedReport = var26.openMomentsFeedReport,
+		openMomentCommentReport = var26.openMomentCommentReport
 	}, if p4.useRootOwnedNavigation then reactModule.createElement(innerNavigatorModule, { navigation = p4.navigation }) else reactModule.createElement(var1)) else nil
 end
 
@@ -428,6 +431,7 @@ local function MomentsTabEntrySessionized(p4)
 		openProfile = p4.openProfile,
 		openOwnMoments = p4.openOwnMoments,
 		openMomentsFeedReport = p4.openMomentsFeedReport,
+		openMomentCommentReport = p4.openMomentCommentReport,
 		onTabFocused = p4.onTabFocused
 	})
 end

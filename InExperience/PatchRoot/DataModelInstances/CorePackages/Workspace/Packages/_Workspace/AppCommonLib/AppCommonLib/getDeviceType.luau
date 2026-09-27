@@ -1,15 +1,16 @@
-﻿local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
+﻿local userInputService = game:GetService("UserInputService")
+local parent = script:FindFirstAncestor("AppCommonLib").Parent
 local isVRAppBuildModule = require(script.Parent.IsVRAppBuild)
-local robloxAppEnumsModule = require(script:FindFirstAncestor("AppCommonLib").Parent.RobloxAppEnums)
+local isTenFootInterfaceModule = require(script.Parent.isTenFootInterface)
+local robloxAppEnumsModule = require(parent.RobloxAppEnums)
 local deviceOrientationMode = robloxAppEnumsModule.DeviceOrientationMode
 local deviceType = robloxAppEnumsModule.DeviceType
 
 return function(p1)
-	-- upvalues: isVRAppBuildModule (ref), deviceType (ref), guiService (ref), userInputService (ref), deviceOrientationMode (ref)
+	-- upvalues: isVRAppBuildModule (ref), deviceType (ref), isTenFootInterfaceModule (ref), userInputService (ref), deviceOrientationMode (ref)
 	if isVRAppBuildModule() then
 		return deviceType.VR
-	elseif guiService:IsTenFootInterface() then
+	elseif isTenFootInterfaceModule() then
 		return deviceType.Console
 	end
 	local none = Enum.Platform.None

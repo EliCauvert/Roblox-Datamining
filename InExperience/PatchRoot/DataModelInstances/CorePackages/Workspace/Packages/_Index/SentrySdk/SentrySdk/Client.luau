@@ -162,7 +162,7 @@ function t:capture_message(p1, p2, p3, p4)
 	end)
 end
 
-function t:capture_exception(p1, p2, p3, p4, p5, p6, p7)
+function t:capture_exception(p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: versionModule (ref), var1 (ref)
 	p2 = p2 or "error"
 	local t = {
@@ -213,21 +213,28 @@ function t:capture_exception(p1, p2, p3, p4, p5, p6, p7)
 		contexts = t
 	}
 	
+	if p8 then
+		t_3.tags = table.clone(self.tags)
+		
+		for i, v in p8 do
+			t_3.tags[i] = v
+		end
+	end
 	if p4 then
 		t_3.threads = p4
 	end
 	t_3.debug_meta = self:_buildDebugMeta()
 	local httpService = self.httpService
-	self.transport:send(t_3, if not p5 then nil else function(p8, p9)
+	self.transport:send(t_3, if not p5 then nil else function(p9, p10)
 		-- upvalues: httpService (ref), p5 (ref)
 		local id = nil
 		local var2 = nil
 		
-		if p8 and p9 and p9.body then
-			if type(p9.body) == "table" and p9.body.Body then
+		if p9 and p10 and p10.body then
+			if type(p10.body) == "table" and p10.body.Body then
 				local var3, var4
 				local var5 = httpService
-				local body = p9.body.Body
+				local body = p10.body.Body
 				
 				if type(body) == "string" then
 					local ok, status = pcall(function()
@@ -250,27 +257,27 @@ function t:capture_exception(p1, p2, p3, p4, p5, p6, p7)
 					id = var3.id
 				end
 			end
-			var2 = p9
-		elseif p9 then
-			var2 = p9
+			var2 = p10
+		elseif p10 then
+			var2 = p10
 		end
-		p5(p8, var2, id)
+		p5(p9, var2, id)
 	end)
 end
 
-function t:send_event_with_attachments(p8, p9, p10)
-	if p8 and #p9 ~= 0 then
+function t:send_event_with_attachments(p9, p10, p11)
+	if p9 and #p10 ~= 0 then
 		local httpService = self.httpService
-		self.transport:send_attachments(p8, p9, if not p10 then nil else function(p11, p12)
-			-- upvalues: httpService (ref), p10 (ref)
+		self.transport:send_attachments(p9, p10, if not p11 then nil else function(p12, p13)
+			-- upvalues: httpService (ref), p11 (ref)
 			local id = nil
 			local var2 = nil
 			
-			if p11 and p12 and p12.body then
-				if type(p12.body) == "table" and p12.body.Body then
+			if p12 and p13 and p13.body then
+				if type(p13.body) == "table" and p13.body.Body then
 					local var3, var4
 					local var5 = httpService
-					local body = p12.body.Body
+					local body = p13.body.Body
 					
 					if type(body) == "string" then
 						local ok, status = pcall(function()
@@ -293,34 +300,34 @@ function t:send_event_with_attachments(p8, p9, p10)
 						id = var3.id
 					end
 				end
-				var2 = p12
-			elseif p12 then
-				var2 = p12
+				var2 = p13
+			elseif p13 then
+				var2 = p13
 			end
-			p10(p11, var2, id)
+			p11(p12, var2, id)
 		end)
 		
 		return
-	elseif p10 then
-		p10(false, { error = "eventId and attachments are required" }, nil)
+	elseif p11 then
+		p11(false, { error = "eventId and attachments are required" }, nil)
 	end
 end
 
-function t:set_user(p8)
-	self.user = p8
+function t:set_user(p9)
+	self.user = p9
 end
 
-function t:set_tag(p8, p9)
-	self.tags[p8] = tostring(p9)
+function t:set_tag(p9, p10)
+	self.tags[p9] = tostring(p10)
 end
 
-function t:set_extra(p8, p9)
-	self.extra[p8] = p9
+function t:set_extra(p9, p10)
+	self.extra[p9] = p10
 end
 
-function t:add_breadcrumb(p8)
-	p8.timestamp = os.time()
-	table.insert(self.breadcrumbs, p8)
+function t:add_breadcrumb(p9)
+	p9.timestamp = os.time()
+	table.insert(self.breadcrumbs, p9)
 	
 	if #self.breadcrumbs > 50 then
 		table.remove(self.breadcrumbs, 1)

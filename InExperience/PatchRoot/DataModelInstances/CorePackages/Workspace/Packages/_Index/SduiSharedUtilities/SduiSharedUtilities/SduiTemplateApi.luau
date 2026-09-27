@@ -13,7 +13,9 @@ local sduiErrors = sduiCoreSystemModule.SduiErrors
 local sduiLogger = sduiCoreSystemModule.SduiLogger
 local displayLocation = serviceContractsProtoModule.apppageplatform.shared.display_location.DisplayLocation
 local templateApiMessages = serviceContractsProtoModule.apppageplatform.templates.template_api_messages
-local fFlagSduiTemplateApiPostRequest = require(parent.SharedFlags).FFlagSduiTemplateApiPostRequest
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagSduiTemplateApiPostRequest = sharedFlagsModule.FFlagSduiTemplateApiPostRequest
+local fFlagSduiAdvertiseRuntimeSupportSets = sharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets
 
 local function _()
 	-- upvalues: urlBuilderModule (ref)
@@ -142,8 +144,22 @@ local function buildPostConfig(p10, p11, p12)
 	}
 end
 
+local function buildPostConfigWithRuntimeSupport(p10, p11, p12)
+	-- upvalues: templateApiMessages (ref), buildCachedComponentMappings (ref), sduiApiStorePostConfigModule (ref)
+	return {
+		contentType = sduiApiStorePostConfigModule.SduiApiStorePostConfigContentType.Proto,
+		protoMessage = templateApiMessages.GetTemplatesRequest,
+		body = templateApiMessages.GetTemplatesRequest.new({
+			display_locations = p10.displayLocationNumbers,
+			client_capabilities = p12,
+			cached_component_mappings = buildCachedComponentMappings(p10.displayLocationNumbers, p10.surfaceKeysByDisplayLocation),
+			locale = p11
+		})
+	}
+end
+
 local function createRequest(p10)
-	-- upvalues: resolveSurfaceKeys (ref), localizationService (ref), sduiCapabilities (ref), fFlagSduiTemplateApiPostRequest (ref), urlBuilderModule (ref), buildGetUrl (ref), buildPostConfig (ref), templateApiMessages (ref)
+	-- upvalues: resolveSurfaceKeys (ref), localizationService (ref), sduiCapabilities (ref), fFlagSduiAdvertiseRuntimeSupportSets (ref), fFlagSduiTemplateApiPostRequest (ref), urlBuilderModule (ref), buildGetUrl (ref), buildPostConfigWithRuntimeSupport (ref), templateApiMessages (ref), buildPostConfig (ref)
 	local var4 = resolveSurfaceKeys(p10.surfaceKeys)
 	
 	if var4 == nil then
@@ -151,25 +167,49 @@ local function createRequest(p10)
 	end
 	local locale = p10.locale or localizationService.RobloxLocaleId
 	local capabilities = p10.capabilities or sduiCapabilities.getEnabledCapabilities()
-	local cloned = table.clone(capabilities)
-	table.sort(cloned)
-	local t = {
-		url = if fFlagSduiTemplateApiPostRequest then `{urlBuilderModule.UrlBase.APIS}/landing-page-api/v1/templates` else buildGetUrl(var4.displayLocationNumbers, locale, capabilities)
-	}
-	local var5 = "sdui-template-api:%*:%*:%*"
-	local concat = table.concat
-	local displayLocationNumbers = var4.displayLocationNumbers
-	local list = table.create(#displayLocationNumbers)
 	
-	for i, v in displayLocationNumbers do
-		table.insert(list, tostring(v))
+	if fFlagSduiAdvertiseRuntimeSupportSets then
+		local cloned = table.clone(sduiCapabilities.getEnabledCapabilities())
+		table.sort(cloned)
+		local var5 = sduiCapabilities.buildClientCapabilities()
+		local t = {
+			url = if fFlagSduiTemplateApiPostRequest then `{urlBuilderModule.UrlBase.APIS}/landing-page-api/v1/templates` else buildGetUrl(var4.displayLocationNumbers, locale, capabilities)
+		}
+		local var6 = "sdui-template-api:%*:%*:%*"
+		local concat = table.concat
+		local displayLocationNumbers = var4.displayLocationNumbers
+		local list = table.create(#displayLocationNumbers)
+		
+		for i, v in displayLocationNumbers do
+			table.insert(list, tostring(v))
+		end
+		t.cacheKey = var6:format(concat(list, ","), locale, table.concat(cloned, ","))
+		t.postConfig = if fFlagSduiTemplateApiPostRequest then buildPostConfigWithRuntimeSupport(var4, locale, var5) else nil
+		t.responseProto = templateApiMessages.GetTemplatesResponse
+		t.surfaceKeysByDisplayLocation = var4.surfaceKeysByDisplayLocation
+		
+		return t
+	else
+		local cloned = table.clone(capabilities)
+		table.sort(cloned)
+		local t = {
+			url = if fFlagSduiTemplateApiPostRequest then `{urlBuilderModule.UrlBase.APIS}/landing-page-api/v1/templates` else buildGetUrl(var4.displayLocationNumbers, locale, capabilities)
+		}
+		local var7 = "sdui-template-api:%*:%*:%*"
+		local concat = table.concat
+		local displayLocationNumbers = var4.displayLocationNumbers
+		local list = table.create(#displayLocationNumbers)
+		
+		for i, v in displayLocationNumbers do
+			table.insert(list, tostring(v))
+		end
+		t.cacheKey = var7:format(concat(list, ","), locale, table.concat(cloned, ","))
+		t.postConfig = if fFlagSduiTemplateApiPostRequest then buildPostConfig(var4, locale, capabilities) else nil
+		t.responseProto = templateApiMessages.GetTemplatesResponse
+		t.surfaceKeysByDisplayLocation = var4.surfaceKeysByDisplayLocation
+		
+		return t
 	end
-	t.cacheKey = var5:format(concat(list, ","), locale, table.concat(cloned, ","))
-	t.postConfig = if fFlagSduiTemplateApiPostRequest then buildPostConfig(var4, locale, capabilities) else nil
-	t.responseProto = templateApiMessages.GetTemplatesResponse
-	t.surfaceKeysByDisplayLocation = var4.surfaceKeysByDisplayLocation
-	
-	return t
 end
 
 local _ = function(p11)
@@ -199,73 +239,73 @@ return {
 	createRequest = createRequest,
 	parseResponseForSurface = function(p12, p13)
 		-- upvalues: sduiSurfaceToDisplayLocationModule (ref), extractTemplates (ref), displayLocation (ref), getSduiTemplateStoreModule (ref)
-		local var6 = sduiSurfaceToDisplayLocationModule[p13]
-		local var7 = extractTemplates(p12)
+		local var8 = sduiSurfaceToDisplayLocationModule[p13]
+		local var9 = extractTemplates(p12)
 		local t = {}
 		
 		if p12.component_mappings then
 			for i, v in p12.component_mappings do
-				local var8
+				local var10
 				local displayLocation_1 = v.display_location
 				
 				if type(displayLocation_1) == "number" then
 					local ok, status = pcall(displayLocation.fromNumber, displayLocation_1)
-					var8 = if ok then status else nil
+					var10 = if ok then status else nil
 				else
-					var8 = displayLocation_1
+					var10 = displayLocation_1
 				end
-				if var8 == var6 then
+				if var10 == var8 then
 					t = v.roblox_component_to_template_id
 					break
 				end
 			end
 		end
 		local t_1 = {}
-		local var9 = getSduiTemplateStoreModule()
+		local var11 = getSduiTemplateStoreModule()
 		
 		for i, v in t do
-			local var10 = var7[v] or var9.getTemplate(v)
+			local var12 = var9[v] or var11.getTemplate(v)
 			
-			if var10 then
-				t_1[i] = var10
+			if var12 then
+				t_1[i] = var12
 			end
 		end
-		return var7, t_1, t
+		return var9, t_1, t
 	end,
 	storeResponse = function(p14, p15)
 		-- upvalues: getSduiTemplateStoreModule (ref), extractTemplates (ref), displayLocation (ref), sduiLogger (ref), sduiErrors (ref)
-		local var11 = getSduiTemplateStoreModule()
-		var11.addTemplates(extractTemplates(p14))
+		local var13 = getSduiTemplateStoreModule()
+		var13.addTemplates(extractTemplates(p14))
 		
 		if p14.component_mappings then
 			for i, v in p14.component_mappings do
-				local var12
+				local var14
 				local displayLocation_1 = v.display_location
 				
 				if type(displayLocation_1) == "number" then
 					local ok, status = pcall(displayLocation.fromNumber, displayLocation_1)
-					var12 = if ok then status else nil
+					var14 = if ok then status else nil
 				else
-					var12 = displayLocation_1
+					var14 = displayLocation_1
 				end
-				if var12 == nil then
-					local _, var13 = next(p15.surfaceKeysByDisplayLocation)
+				if var14 == nil then
+					local _, var15 = next(p15.surfaceKeysByDisplayLocation)
 					sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToMapRobloxComponentToTemplate, {
 						name = tostring(v.display_location),
 						message = `Unknown DisplayLocation {v.display_location}`
-					}, if var13 then var13[1] else "Unknown")
+					}, if var15 then var15[1] else "Unknown")
 				else
-					local var14 = p15.surfaceKeysByDisplayLocation[var12]
+					local var16 = p15.surfaceKeysByDisplayLocation[var14]
 					
-					if var14 then
-						for i_1, v_1 in var14 do
-							var11.recordSurfaceTemplates(v_1, v.roblox_component_to_template_id)
+					if var16 then
+						for i_1, v_1 in var16 do
+							var13.recordSurfaceTemplates(v_1, v.roblox_component_to_template_id)
 						end
 					end
 				end
 			end
 		end
-		var11.addLocalizedLiterals(p14.localized_literals or {})
+		var13.addLocalizedLiterals(p14.localized_literals or {})
 		
 		return p14
 	end

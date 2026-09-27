@@ -1,7 +1,6 @@
 ﻿local parent = script.Parent.Parent
 local _ = require(parent.util.Types)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule = require(parent.flags.getFFlagUGCValidationExtendSchemaToIgnoreDescendants)
 
 local function _(p1, p2)
 	return if type(p1) == "table" then table.find(p1, p2) ~= nil else p1 == p2
@@ -12,10 +11,10 @@ local _ = function(p1)
 end
 
 local function validateInstancesFromSchema(p1, p2, p3, p4, p5, p6)
-	-- upvalues: getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule (ref), validateInstancesFromSchema (ref), errorSourceStringsModule (ref)
+	-- upvalues: validateInstancesFromSchema (ref), errorSourceStringsModule (ref)
 	p3[p1] = true
 	
-	if getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule() and p2._ignoreDescendants then
+	if p2._ignoreDescendants then
 		assert(not p2._children, "if _ignoreDescendants is true, there should be no descendants in the schema as they would be ignored anyway")
 		
 		for i, v in p1:GetDescendants() do
@@ -66,7 +65,7 @@ local function validateInstancesFromSchema(p1, p2, p3, p4, p5, p6)
 				else
 					var3 = ""
 				end
-				t.detail = className .. var8 .. ` inside '{p3.Name}'`
+				t.detail = className .. var7 .. ` inside '{p3.Name}'`
 				p4:fail(v_1, t, var4)
 			end
 		end

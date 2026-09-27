@@ -151,8 +151,10 @@ Authentication.SignUp.Message.Username.NoRealNameUse,本名を使用しないで
 Authentication.SignUp.PasswordErrorLength,8～200文字で入力してください
 Authentication.SignUp.Response.BirthdayMustBeSetFirst,最初に誕生日を設定する必要があります。
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.ErrorTryAgain2,問題が発生しました。もう一度お試しください。
 Authentication.SignUp.Response.InvalidBirthday,生年月日が無効です。
 Authentication.SignUp.Response.InvalidEmail,メールアドレスが無効です。
+Authentication.SignUp.Response.PasswordComplexity,もっと複雑なパスワードを作成してください。
 Authentication.SignUp.Response.UsernameMustBeSetFirst,最初にユーザーネームを設定する必要があります。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,設定を完了すると、進行状況が引き継がれます。
 Authentication.TwoStepVerification.Action.GoToSecurity,
@@ -178,27 +180,27 @@ Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,アニメーション�
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,アニメーションが短すぎます（{duration}秒）。リアクションアニメーションは{minLength}秒より長くしてください。
 Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,{cageName}のケージパーツ配置違反：{upperPart}が{lowerPart}の上に正しく配置されていません。
 Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,{cageName}内のケージパーツ「{partName}」には頂点が{actualCount}個ありますが、約{expectedCount}個ほどに設定してください。これは、そのボディ領域にジオメトリの欠落または重複があることを示している可能性があります。
+Common.UGCValidation.ErrorLabel.AQSFail_CageUV,{cage_name}のUV値がテンプレートと一致していません。不適切なUVが{incorrect_uv_count}個（未参照{unreferenced_vertex_count}個、テンプレート非対応{non_template_uv_count}個、重複マッピング{duplicate_mapping_count}個）あり、テンプレートの頂点と不一致のものが{unmatched_template_count}個あります。ケージのUVを修正して、テンプレートと一致させてください。
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,ボディには、小さな分離したメッシュコンポーネント（メッシュアイランド）が含まれています。フローティングジオメトリを削除し、すべてのメッシュパーツが適切に接続されていることを確認してください。
-Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,アセット品質：{partName}には、{num_disconnected_components}個の分離したコンポーネントがあり、これは最大数の{max_disconnected_components}個を超えています。
-Common.UGCValidation.ErrorLabel.AQSInputDataError,入力データが正しくないか不完全なため、品質スコアを正しく計算できません。モデルを確認するか、バグレポートを提出してください
-Common.UGCValidation.ErrorLabel.AQSInternalError,アセット品質エラーのためスコアを生成できません。入力データの正確性を確認して再試行するか、バグ報告を提出してください。
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,アセット品質の警告：ケージとメッシュの距離スコアは{score}です。アウターケージとメッシュの間の最大距離は{max_distance}です。アウターケージの頂点の{negative_sdf_percent}%がレンダリングメッシュ内にあります。
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,アセット品質の警告：身体ケージの距離スコアは{score}です。身体ケージとメッシュの間の最大距離は{max_distance}です。身体ケージの頂点の{negative_sdf_percent}%が身体メッシュ内にあります。
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,アセット品質の警告：頭部ケージの距離スコアは{score}です。頭部ケージとメッシュの間の最大距離は{max_distance}です。頭部ケージの頂点の{negative_sdf_percent}%が頭部メッシュ内にあります。
-Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,アセット品質の警告：ケージの関連性スコアは{score}です。修正されたアウターケージの頂点の{irrelevant_percent}%がアクセサリに対応していません。
-Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,アセット品質の警告：ケージのUVスコアは{cage_name}の場合は{score}です。不正確なUVカウント：{incorrect_uv_count}。
-Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,アセット品質：{partName}には、退化した三角形が{degenerate_triangle_percent}%含まれています（スコア：{score}）。
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,アセット品質の警告：動く頭の表情スコアは{score}です。
-Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,アセット品質：ジョイント構成のスコアは{score}です（ジョイント：{joint_number}、左手：{left_hand_joint_number}、右手：{right_hand_joint_number}）。
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,アセット品質：{partName}には、{num_disconnected_components}個のコンポーネントのうち、{num_small_volume_islands}個の小さな分離したアイランドがあります（スコア：{score}）。
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,アセット品質：{partName}には、メッシュの多様体に関する問題が含まれています（スコア：{score}）。
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,アセット品質：{partName}メッシュが水密ではありません（{boundary_edges_percent}%の境界エッジ）。
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,アセット品質の警告：メッシュの包含スコアは{score}です。メッシュの頂点の{mesh_outside_outer_cage_percent}%がアウターケージの外側にあります。
-Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,{measureName}のアセット品質スコアは、入力データが不完全または無効であったため、計算できませんでした。これはアップロードを妨げるものではありません。
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,アセット品質：テクスチャ{textureName}の複雑度が低いです（スコア：{score}）。
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,アセット品質：テクスチャ{textureName}の解像度は{texture_width}x{texture_height}です（スコア：{score}）。
+Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,{partName}には、{num_disconnected_components}個の分離したコンポーネントがあり、上限の{max_disconnected_components}個を超えています。
+Common.UGCValidation.ErrorLabel.AQSInternalError,内部エラーのため、検証を完了できません。入力データの正確性をご確認の上、再度お試しいただくか、バグ報告を提出してください。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,アウターケージがレンダリングメッシュに十分に沿っていません。アウターケージとメッシュの最大距離は{max_distance}で、アウターケージの頂点の{negative_sdf_percent}%がレンダリングメッシュ内にあります。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,ボディケージがボディメッシュに十分に沿っていません。ボディケージとメッシュの最大距離は{max_distance}で、ボディケージの頂点の{negative_sdf_percent}%がボディメッシュ内にあります。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,頭のケージが頭部メッシュに十分に沿っていません。ケージとメッシュの最大距離は{max_distance}で、ケージ頂点の{negative_sdf_percent}%が頭部メッシュ内にあります。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,修正されたアウターケージの頂点の{irrelevant_percent}%がアクセサリを覆っていません。アクセサリの形状に合うようにケージを調整してください。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,{cage_name}のUV値が正しくありません。不適切なUVが{incorrect_uv_count}個（未参照{unreferenced_vertex_count}個、テンプレート非対応{non_template_uv_count}個、重複マッピング{duplicate_mapping_count}個）あり、テンプレートの頂点と不一致のものが{unmatched_template_count}個あります。
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName}には、退化した三角形が{degenerate_triangle_percent}%含まれています。
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,「動く頭」に、表情の品質に関する問題があります。左目の閉じ具合：{left_eye_close}、右目の閉じ具合：{right_eye_close}、口の開き具合：{mouth_open}、喜びの表情：{is_happy}、悲しみの表情：{is_sad}。
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,予期しないジョイント構成です。ジョイント総数：{joint_number}、左手のジョイント：{left_hand_joint_number}、右手のジョイント：{right_hand_joint_number}。
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName}には、合計{num_disconnected_components}個のコンポーネントのうち、{num_small_volume_islands}個の小さく分離したメッシュアイランドがあります。浮遊ジオメトリを削除してください。
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,{partName}には、非多様体ジオメトリが含まれています。平面でない面、自己交差するサーフェス、または3つ以上の面で共有されているエッジがないか確認してください。
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,{partName}メッシュが水密ではありません（{boundary_edges_percent}%の境界エッジ）。
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,メッシュの頂点の{mesh_outside_outer_cage_percent}%がアウターケージの外側にあります。アウターケージを調整して、レンダリングメッシュが完全に収まるようにしてください。
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,{measureName}の検証データは、入力データが不完全または無効であったため、計算できませんでした。これはアップロードを妨げるものではありません。
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,テクスチャ{textureName}の複雑度が低くなっています。テクスチャのディテールやバリエーションが不足している可能性があります。
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,テクスチャ{textureName}の解像度が低くなっています（{texture_width}x{texture_height}）。より高解像度のテクスチャの使用を検討してください。
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,アセット品質：{partName}には、交差している三角形の面が{intersecting_tri_face_percent}%含まれています（スコア：{score}）。
-Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,アセット品質：{partName}には、境界外のUV頂点が{uv_outside_bound_vert_percent}%含まれています（スコア：{score}）。
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName}には、[0,1]の境界外のUV頂点が{uv_outside_bound_vert_percent}%含まれています。"
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,アセット品質：{partName}には、近接頂点が{similar_vertex_percent}%含まれています（スコア：{score}）。
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,「{PartName}」のアクセサリアタッチメント「{AttachmentName}」は、メッシュの表面の近くに配置する必要があります。現在の位置[{CurrentPosition}]は有効な領域外です。[{ClosestValidPosition}]に近づけてください。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,Handle（ハンドル）が、許可されているスキーマに含まれていないジョイント{jointName}にスキニングされています。許可されているのは、標準のR15ジョイントとスキニング転送ジョイントのみです。
@@ -268,18 +270,19 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,マーケットプレイス上
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,動く頭の右目を閉じた表情を検出できません。右目のケージのランドマークを調整して、頭の右目の位置に合わせ、閉じられるようにしてください。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,動く頭のしかめっ面の表情を検出できません。口のケージのランドマークを調整して、頭の口の位置に合わせ、しかめっ面の表情ができるようにしてください。
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,エミッシブエリアがしきい値を超えています。
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName}の発光が強すぎます。エミッシブエリア×強度が上限を超えています（現在{emissivePercentage}%ですが、{maxEmissivePercentage}%以下でなければなりません）。光るエリアを縮小するか、EmissiveStrengthを下げてください。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,エミッシブエリアの面積が上限を超えています。
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{emissiveArea}の発光が強すぎます。エミッシブエリア×強度が上限を超えています（現在{assetTypeName}ですが、{maxEmissiveArea}以下でなければなりません）。光るエリアを縮小するか、EmissiveStrengthを下げてください。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,このアセットは、信頼できるクリエータープログラムのクリエーターのみが利用できるエミッシブマップを使用しています。アップロードする前に、すべてのエミッシブマップコンテンツを削除するか、プログラムに参加してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,公開されたアニメーションには有効なパーツの最大移動量がありません。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,公開されたアニメーションには有効なUGCリアクションマーカーがありません。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,公開されたアニメーションデータからパーツの最大移動量を計算できませんでした。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,公開されたアニメーションでは、パーツの最大移動量が{taggedTranslation}マスに指定されていますが、アニメーションデータでは{calculatedTranslation}マスと計算されています。アニメーションを再公開してください。
+Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,頭はUpperTorsoの上に配置する必要があります。現在、頭の中心が胴体の最上部より下に位置しています。これは、頭のメッシュが折りたたまれているか、配置が正しくないことを示しています。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,アップロード時、FaceControlsのInternalOverrideFACSDataプロパティは空にする必要があります。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,頭部を{modPercent}%に拡大するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,頭部を{modPercent}%に縮小するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
-Common.UGCValidation.ErrorLabel.FailureWithoutReason,不明な理由で検証に失敗しました。再度お試しいただくか、問題が解決しない場合はバグレポートを開いてください。
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,アップロード形式が期待されるフォルダ構造と一致しません。再度お試しいただくか、バグ報告を提出してください。
-Common.UGCValidation.ErrorLabel.HeadNotDynamic,コアとなる顔の動きを適切にアニメーション化するにはマーケットプレイス上の「動く頭」を設定する必要がありますが、当社の検出では顕著な変化は確認されませんでした。
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,骨「{bonePath}」がメッシュパーツ「{partName}」から離れすぎています。メッシュパーツのサイズ境界に近づけてください。
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,ボーン{bonePath}が親に近すぎます。ボーンの位置を少し調整してください。
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,骨「{bonePath}」には変換プロパティが存在しますが、これはまだマーケットプレイスへのアップロードが有効化されていません。これをIdentity CFrameにリセットしてください。
@@ -325,8 +328,6 @@ Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName}「{InstancePat
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,「{PartName}」のリグアタッチメント「{AttachmentName}」は、このボディパーツの隣接パーツに接続するジョイント境界の近くに配置する必要があります。現在の位置[{CurrentPosition}]は接続面から離れすぎています。[{ClosestValidPosition}]に近づけてください。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Robloxにアセットをアップロードするには、必ず1件のインスタンスと関連したアップロードタイプを選択する必要があります。
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,このアセットは大きすぎるためアップロードできません（{sizeBytes}バイト。上限は{maxSizeBytes}バイトです）。サイズを小さくしてから、もう一度お試しください。
-Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,{ProblematicDescendantPath}インスタンスにタグを付与することはできません。
-Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,ハブ型翻訳同期処理のE2Eワークフロー検証に使用される、2回目のテストのエラー文字列。
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,頭部のメッシュパーツには、{jointName}の表情アニメーションが含まれていますが、これはFACS（表情コーディングシステム）では使用できません。このジョイントの名前を変更してから、頭部を再度インポートしてください。
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,ボディパーツ{partName}が、R15plusスキーマに含まれていない仮想ジョイント{jointName}にスキニングされています。
 Common.VerifiedParentalConsent.Action.Cancel,
@@ -629,7 +630,7 @@ CoreScripts.EmoteThumbnailEditor.Label.Time,時間
 CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,白いRobloxメニューは、あなたがプレイテスト中であることを示します。Robloxコミュニティ基準には常に従いましょう。
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,新機能: Roblox Connectをチェック！
 CoreScripts.FTUX.Heading.CheckOutRobloxParty,新機能: Roblox パーティをチェック
-CoreScripts.FTUX.Heading.InExperienceShop,新しいショップ
+CoreScripts.FTUX.Heading.InExperienceShop,ショップでRobuxをゲット
 CoreScripts.FTUX.Heading.JoinVoice,ボイスチャットを開始
 CoreScripts.FTUX.Heading.LeaveRespawn,退出とリスポーン
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,新機能: アバター切り替え
@@ -640,7 +641,7 @@ CoreScripts.FTUX.Heading.SideSheetUpdate,すべてのアクションを一元管
 CoreScripts.FTUX.Heading.SocialOnboarding,SNS機能
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,保存済みのアバターにいつでも切り替えられます。
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,いつでも友達とチャットできます。
-CoreScripts.FTUX.Label.InExperienceShopDescription,あなたへのおすすめアイテムをチェックしてください
+CoreScripts.FTUX.Label.InExperienceShopDescription,一部のパッケージにはボーナスアイテムが含まれています
 CoreScripts.FTUX.Label.JoinVoiceDescription,ボイスチャットで音声通話
 CoreScripts.FTUX.Label.LeaveRespawn,ゲームからの退出やアバターのリスポーンは、ここから簡単に行えます。
 CoreScripts.FTUX.Label.NewTiltOnboarding,ゲームメニューには、ゲーム内のアクションとゲーム設定が含まれています。
@@ -769,7 +770,7 @@ CoreScripts.InGameMenu.Controls.Backpack,バックパック
 CoreScripts.InGameMenu.Controls.Backspace,バックスペースキー
 CoreScripts.InGameMenu.Controls.CameraMovementTitle,カメラ動作
 CoreScripts.InGameMenu.Controls.CameraZoomGamepad,カメラズーム
-CoreScripts.InGameMenu.Controls.CharacterMovementTitle,キャラクターの動作
+CoreScripts.InGameMenu.Controls.CharacterMovementTitle,アバター操作
 CoreScripts.InGameMenu.Controls.Chat,
 CoreScripts.InGameMenu.Controls.DevConsole,Devコンソール
 CoreScripts.InGameMenu.Controls.DownArrow,下カーソル
@@ -1105,6 +1106,7 @@ CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCoun
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋今プレイ中の全員に挨拶してみましょう！
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,信頼できる友達とのみチャットできます。
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,このゲームでより多くの人とチャットしましょう。あなたとチャットできるのは、同じ年齢層の人だけです。
+CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,このゲームでより多くの人とチャットしましょう！
 CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ 一緒に楽しもう！今プレイ中の全員に挨拶してみましょう！
 CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 {RBX_COUNT}人のプレイヤーがチャットに参加しています。挨拶してみましょう！
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,長押しするとハンズフリーになります
@@ -1877,6 +1879,7 @@ Feature.Avatar.UnavailableItems.BodyText,{category}「{item}」は現在審査�
 Feature.Avatar.UnavailableItems.BodyTextMultiple,以下のアイテムは現在審査中のため利用できません。{lineBreak}{items}{lineBreak}もしRobloxから削除された場合、1週間以内に返金されます。
 Feature.Avatar.UnavailableItems.ConfirmText,
 Feature.Avatar.UnavailableItems.TitleText,アイテムが利用できません
+Feature.Avatar.profile.tooltip,
 Feature.Avatar.tooltip.ExpiredItemsFilter,有効期限切れの時間制限付きオプションアイテムを探す
 Feature.AvatarSwitcher.Action.Continue,
 Feature.AvatarSwitcher.Action.OK,
@@ -1966,11 +1969,11 @@ Feature.Build.Action.UpdateRating,レーティングを更新
 Feature.Build.Action.UpdateWithChanges,変更を反映して更新
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,使用量を表示
-Feature.Build.Analytics.AnalyzeChatPrompt,過去{days}日間の{analyzeName}は？
+Feature.Build.Analytics.AnalyzeChatPrompt,過去{days}日間の{analyzeName}に関する解析を行ってください。また、この指標が重要な理由と改善方法を教えてください。
 Feature.Build.Analytics.AnalyzeName.Arppu,有料ユーザーあたりの平均収益
 Feature.Build.Analytics.AnalyzeName.D1Retention,1日目のリテンション
 Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,1日あたりのアクティブユーザー数
-Feature.Build.Analytics.AnalyzeName.PayerConversion,有料ユーザーコンバージョン
+Feature.Build.Analytics.AnalyzeName.PayerConversion,有料ユーザーのコンバージョン率
 Feature.Build.Analytics.AnalyzeName.PlaythroughRate,プレイスルー率
 Feature.Build.Analytics.AnalyzeName.TotalPlaytime,合計プレイ時間
 Feature.Build.Analytics.Description.Arppu,有料ユーザーあたりの平均収益は、獲得したRobuxの合計を支払いプレイヤー数で割ったものです。各購入者が平均でどれだけRobuxを使っているかを示します。
@@ -2012,15 +2015,19 @@ Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,合計プレイヤー数
 Feature.Build.Analytics.Title.D1Retention,D1リテンション
 Feature.Build.Analytics.Title.DailyActiveUsers,
-Feature.Build.Analytics.Title.PayerConversion,
+Feature.Build.Analytics.Title.PayerConversion,有料ユーザーコンバージョン
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,訪問数
 Feature.Build.Content.NewGame,新規のゲーム
 Feature.Build.Description.ActivateDeveloperProduct,開発者製品{PRODUCT_ID}の販売を開始してください。
+Feature.Build.Description.AdActive,広告は掲載中です。どれだけのプレイヤーにリーチしているかを確認しましょう。
 Feature.Build.Description.AdCampaignModerationReview,すべての広告キャンペーンはRobloxによる審査の対象となります。審査には最大24時間かかる場合があります。
 Feature.Build.Description.AdCampaignSheetRunDates,実施期間：{startDate}～{endDate}
-Feature.Build.Description.AdvertisingAgreement,続行すると、{advertisingTermsStart}Roblox広告基準{advertisingTermsEnd}および{advertisingStandardsStart}広告基準{advertisingStandardsEnd}に同意したものとみなされます。
+Feature.Build.Description.AdComplete,広告が終了しました。結果をご覧ください。
+Feature.Build.Description.AdInReview,広告は審査中で、{startDate}～{endDate}に実施予定です。
+Feature.Build.Description.AdModerationReview,すべての広告はRobloxによる審査の対象となり、審査には最大24時間かかる場合があります。
+Feature.Build.Description.AdvertisingAgreement,[作成]を選択すると、{advertisingTermsStart}Roblox広告基準{advertisingTermsEnd}および{advertisingStandardsStart}広告基準{advertisingStandardsEnd}に同意したものとみなされます。
 Feature.Build.Description.ArchiveRemoval,このゲームをアーカイブすると、[ビルド]から削除されます。これは、クリエーターハブまたはRoblox Studioから引き続きアクセスして復元できます。
 Feature.Build.Description.AutoBuyUsage,Robuxを使って、作成中に追加のビルド使用量を自動的に購入しましょう。1日あたりの課金限度額はいつでも設定できます。
 Feature.Build.Description.BoostAudienceForPlays,オーディエンスを拡大して、プレイ数を増やしましょう。
@@ -2035,10 +2042,12 @@ Feature.Build.Description.DeactivateDeveloperProduct,開発者製品（{PRODUCT_
 Feature.Build.Description.EarnedRobuxAppliedFirst,獲得済みRobuxをお持ちの場合、広告キャンペーンの費用にはそちらが先に充当されます。
 Feature.Build.Description.EnableBuildNotifs,ビルドからの最新情報を受け取るには、デバイス設定で通知を有効化してください。
 Feature.Build.Description.FriendsLinkOnly,このリンクにアクセスできるのはあなたの友達のみです。より多くの人にプレイしてもらいたい場合は、ゲームのオーディエンス設定を変更してください。
+Feature.Build.Description.GameConfiguration,アイテムの販売方法やゲームの宣伝方法を変更しましょう。
 Feature.Build.Description.GameCreationDone,ゲームの作成と公開が完了しました。ゲームを開いてプレイテストできます。
 Feature.Build.Description.GameSavedPlaytest,ゲームの作成が完了し、新しいバージョンが保存されました。ゲームを開いてプレイテストできます。
 Feature.Build.Description.HubSettings,クリエーターハブですべての設定を管理します
 Feature.Build.Description.InviteFriendLimit,最大{MAX_INVITES}人の友達を招待して、制作中のゲームをプレイしてもらえます。
+Feature.Build.Description.LongAdCampaign,新しいプレイヤーにリーチし、リピートしてもらうため、キャンペーン期間を増やしましょう。
 Feature.Build.Description.MakeAudienceAvail,このオーディエンスが利用できるようにするには、バーチャル空間を公開してください。
 Feature.Build.Description.ManageAppearance,他のユーザーへのゲームの表示のされ方を管理しましょう。
 Feature.Build.Description.ManageDeveloperProduct,開発者製品を管理します。
@@ -2053,6 +2062,8 @@ Feature.Build.Description.PlaytestLocked,プレイテストは、最初のゲー
 Feature.Build.Description.PlaytesterAccess,友達を早期テスターとして招待するか、ゲームのオーディエンス設定を変更して、より多くの人にプレイしてもらいましょう。
 Feature.Build.Description.PricingRules,価格設定ルールを設定
 Feature.Build.Description.PrivateShare,ゲームのオーディエンス設定を変更してシェアしてください。
+Feature.Build.Description.PromoteGameFree,ワンタップで、より多くのプレイヤーにゲームをアピールしましょう。
+Feature.Build.Description.PromoteGamePaid,広告を作成して、数百万人のプレイヤーにゲームをアピールしましょう。
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}日間の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう。
 Feature.Build.Description.RaiseLimitOrWait,作成を続けるには、1日あたりのRobux限度額を増やすか、明日になってリセットされるのをお待ちください。
 Feature.Build.Description.RatingAgreement,公開することで、このコンテンツレーティングが正確であることに同意したものとみなされます。
@@ -2060,6 +2071,7 @@ Feature.Build.Description.RestoreLatest,このバージョンが、公開済み�
 Feature.Build.Description.RevertToVersion,確認して最後の変更を元に戻し、{VERSION}に戻ります。
 Feature.Build.Description.ShareLatest,最新バージョンの変更内容を共有しましょう。
 Feature.Build.Description.ShopButton,ショップボタンを追加
+Feature.Build.Description.ShortAdCampaign,ゲームに対するプレイヤーの反応を簡単に確認する方法です。
 Feature.Build.Description.UpdateDeveloperProduct,開発者製品{PRODUCT_ID}を更新してください。
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"詳細は1,000文字以下で入力してください。"
 Feature.Build.Error.DeveloperProductNameRequired,製品名を入力してください。
@@ -2075,6 +2087,7 @@ Feature.Build.Header.AccessSharing,アクセスとシェア
 Feature.Build.Header.AllVersions,すべてのバージョン
 Feature.Build.Header.ContentMaturity,コンテンツ成熟度
 Feature.Build.Header.CustomAnswer,カスタムの回答
+Feature.Build.Header.GameConfiguration,ゲームの設定
 Feature.Build.Header.GameDetails,ゲームの詳細
 Feature.Build.Header.Overview,
 Feature.Build.Header.PastCampaigns,過去のキャンペーン
@@ -2118,6 +2131,7 @@ Feature.Build.Label.GamePlays,プレイ数
 Feature.Build.Label.GetMoreBuildUsage,もっとビルド使用量を獲得
 Feature.Build.Label.Hi,こんにちは
 Feature.Build.Label.IconThumbnails,アイコンとサムネイル
+Feature.Build.Label.Images2D,2D画像
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,入力が必要です
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2127,9 +2141,12 @@ Feature.Build.Label.Loading,読み込み中...
 Feature.Build.Label.ManagedPricing,管理価格設定
 Feature.Build.Label.ManagedPricingMixed,既存の製品で設定が混在
 Feature.Build.Label.MaximizeForGamePlays,プレイ数を最大化
+Feature.Build.Label.Models3D,3Dモデル
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,制限なし
 Feature.Build.Label.NotStarted,開始していません
+Feature.Build.Label.Object,オブジェクト
+Feature.Build.Label.Objects3D,3Dオブジェクト
 Feature.Build.Label.OffSale,
 Feature.Build.Label.OnSale,販売中
 Feature.Build.Label.Pending,保留中
@@ -2151,12 +2168,14 @@ Feature.Build.Label.ResetsMonthly,毎月リセット
 Feature.Build.Label.ResetsWeekly,毎週リセット
 Feature.Build.Label.RestoredVersion,復元済みの{VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
+Feature.Build.Label.SalesOptions,販売オプション
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,ゲームをサーチ
 Feature.Build.Label.SearchTasks,タスクをサーチ
 Feature.Build.Label.SelectOption,オプションを選択
 Feature.Build.Label.ShopButton,ショップボタン
 Feature.Build.Label.ShopUi,ショップUI
+Feature.Build.Label.Sounds,サウンド
 Feature.Build.Label.TargetAllRobloxPlayers,すべてのRobloxプレイヤーを対象にする
 Feature.Build.Label.Thinking,考え中
 Feature.Build.Label.Title,タイトル
@@ -2234,6 +2253,7 @@ Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.Video,ビデオ
+Feature.Build.Label.World,世界
 Feature.Build.Message.AccountRequirements,アカウントがビルドを使用するための要件を満たしていません。
 Feature.Build.Message.AccountTooNew,お持ちのアカウントは公開するには新しすぎます。2日目になってからもう一度お試しください。
 Feature.Build.Message.AdCampaignCreateFailed,キャンペーンを作成できませんでした。もう一度お試しください。
@@ -2246,6 +2266,7 @@ Feature.Build.Message.AdsStatsEmpty,広告キャンペーンでオーディエ�
 Feature.Build.Message.AdsStatsEmptyFree,無料の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう
 Feature.Build.Message.AllFriendsAdded,すべての友達を早期テスターとして招待しました。
 Feature.Build.Message.AnswerBuildQuestion,以下のビルドの質問に答えてください。
+Feature.Build.Message.AssetDetailsUnavailable,アセットの詳細は表示できません。
 Feature.Build.Message.AudienceIneligible,このオーディエンスの対象外
 Feature.Build.Message.BuildAccountBlocked,現在、お持ちのアカウントではビルドを利用できません。
 Feature.Build.Message.BuildBusy,ビルドがビジー状態です。しばらくしてからもう一度お試しください。
@@ -2277,15 +2298,18 @@ Feature.Build.Message.InvitesLoadFailed,招待を読み込めませんでした
 Feature.Build.Message.LimitBelowSpend,限度額は、今日すでに使用した{ALREADY_SPENT}Robux未満にすることはできません。
 Feature.Build.Message.LinkCopied,リンクをクリップボードにコピーしました。
 Feature.Build.Message.LoadingVersions,バージョン履歴を読み込み中...
+Feature.Build.Message.NoAssetsFound,アセットが見つかりません。
 Feature.Build.Message.NoCapturesAvailable,添付できる切り抜きはありません
 Feature.Build.Message.NoDescriptionProvided,詳細がありません。
 Feature.Build.Message.NoFriendsToAdd,まだ招待できる友達がいません。まずはRobloxでつながる相手を見つけましょう。
 Feature.Build.Message.NoResults,
+Feature.Build.Message.NoSearchResultsFound,検索結果が見つかりませんでした
 Feature.Build.Message.NoVersionHistory,まだバージョン履歴はありません。
 Feature.Build.Message.OneTaskCompleted,1つのタスクが完了しました
 Feature.Build.Message.OutOfBuildUsage,ビルド使用量がなくなりました。作成を続けるには、Robuxを使用するためのオプションをご確認ください。
 Feature.Build.Message.PlaytestInviteSendFailedBody,次のユーザーに招待のチャットリンクを送信できませんでした：
 Feature.Build.Message.PlaytestInviteSendFailedHint,[シェア]ボタンを使用して、リンクを取得してください。
+Feature.Build.Message.PlaytesterRequestFailed,リクエストを完了できませんでした。もう一度お試しください。
 Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}人中{INVITED_COUNT}人の早期テスターを招待済み
 Feature.Build.Message.PrivatePlaytestInvite,{username}さんから『{experienceName}』の早期テスターとして招待されました
 Feature.Build.Message.PublicPublishFailed,ゲームは公開手続きが行われましたが、公開できませんでした。もう一度お試しください。
@@ -2324,13 +2348,15 @@ Feature.Build.Notification.Title.NeedInput,ビルドを続けるには入力が�
 Feature.Build.Placeholder.DescribeProduct,販売したいものについて説明してください
 Feature.Build.Placeholder.DescribeProductUpdate,更新内容を説明してください
 Feature.Build.Prompt.CreateDeveloperProduct,開発者製品を作成してゲームに組み込み、変更を検証して公開し、購入できるようにしてください。
-Feature.Build.Title.AdCampaignActive,広告キャンペーンが有効です
 Feature.Build.Title.AdCampaignDuration,{durationDays}日間の広告キャンペーン
+Feature.Build.Title.AdComplete,広告が完了しました
+Feature.Build.Title.AdCreated,広告が作成されました
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,画像を追加
 Feature.Build.Title.AdsStatsEmpty,キャンペーンを開始
 Feature.Build.Title.AdsStatsEmptyFree,最初のキャンペーンを開始
 Feature.Build.Title.ArchiveThisGame,このゲームをアーカイブしますか？
+Feature.Build.Title.AssetLibrary,ライブラリ
 Feature.Build.Title.Audience,オーディエンス
 Feature.Build.Title.BuildQuestion,ビルドから質問があります
 Feature.Build.Title.BuildQuestions,ビルドからいくつか質問があります
@@ -2339,6 +2365,7 @@ Feature.Build.Title.BuildUsage,ビルド使用量
 Feature.Build.Title.ChangesNotLive,変更はまだ公開されていません
 Feature.Build.Title.ChatBuildUnavailable,ビルドは利用できません。
 Feature.Build.Title.Content,コンテンツ
+Feature.Build.Title.CreateYourAd,広告を作成
 Feature.Build.Title.DailyRobuxReached,Robuxが1日の限度額に達しました
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,製品を編集
@@ -2354,9 +2381,13 @@ Feature.Build.Title.NoMonetizationProducts,ゲーム内で収益を獲得
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
 Feature.Build.Title.PlaytestInviteSendFailed,招待を送信できませんでした
 Feature.Build.Title.Playtesters,
+Feature.Build.Title.PlaytestersAddRejected,次のユーザーを追加できませんでした：
 Feature.Build.Title.PlaytestersOnlyPlay,プレイテスターだけがプレイできます
 Feature.Build.Title.PromoteGame,ゲームを宣伝
 Feature.Build.Title.PromoteGameFree,ゲームを無料で宣伝する
+Feature.Build.Title.PromoteGameFreePlural,{promotionCount}回の無料広告を受け取りました
+Feature.Build.Title.PromoteGameFreeSingular,無料の広告を受け取りました
+Feature.Build.Title.PromoteGamePaid,さらに多くのプレイヤーが待っています
 Feature.Build.Title.PushNotifications,プッシュ通知
 Feature.Build.Title.RevertLastChange,最後の変更を元に戻しますか？
 Feature.Build.Title.Tasks,タスク
@@ -2615,6 +2646,11 @@ Feature.Catalog.Label.ItemInAHold,アイテムは保留中ですか？
 Feature.Catalog.Label.ItemOwnedCount,所有しているアイテム ({itemCount})
 Feature.Catalog.Label.ItemsCount,
 Feature.Catalog.Label.LeftArm,
+Feature.Catalog.Label.LicensedBy,ライセンス供与者
+Feature.Catalog.Label.LicensingLicensed,ライセンス供与
+Feature.Catalog.Label.LicensingLicensedInfo,ブランドが承認
+Feature.Catalog.Label.LicensingOfficial,公式
+Feature.Catalog.Label.LicensingOfficialInfo,ブランドが作成
 Feature.Catalog.Label.Limited,数量限定
 Feature.Catalog.Label.LimitedU,ユニーク限定
 Feature.Catalog.Label.LipMakeup,
@@ -2687,6 +2723,7 @@ Feature.Catalog.Label.SellCut,獲得:
 Feature.Catalog.Label.SellPageUpsell,Roblox Plusメンバーシップのユーザーだけが販売できます。
 Feature.Catalog.Label.SellSuccess,
 Feature.Catalog.Label.SerialNumberColon,シリアル番号:
+Feature.Catalog.Label.ShareToMoments,モーメントにシェア
 Feature.Catalog.Label.ShoulderAccessories,肩用アクセサリ
 Feature.Catalog.Label.SoldOut,
 Feature.Catalog.Label.SupportsHeadShapes,頭の形をサポート
@@ -2702,6 +2739,7 @@ Feature.Catalog.Label.Timer.Second.Plural,残り{number}秒
 Feature.Catalog.Label.Timer.Second.Singular,残り1秒
 Feature.Catalog.Label.Tops,
 Feature.Catalog.Label.Torso,
+Feature.Catalog.Label.TotalItemsFraction,合計：（{itemCount}/{itemTotal}個のアイテム）
 Feature.Catalog.Label.TotalItemsParenthesis,合計（{itemCount}アイテム）
 Feature.Catalog.Label.TotalUnformatted,合計
 Feature.Catalog.Label.Tradable,取引可能
@@ -2839,8 +2877,8 @@ Feature.Chat.Description.OSAContextCardDescription,不快に感じた場合は�
 Feature.Chat.Description.OSAGroupDescriptionWithLinker,安全のため、いつでもユーザーを相手のプロフィールからブロックしたり、ユーザーの規約違反を報告したりできます。<a href='{osaViewDetailsUrl}'>詳細を表示。</a>
 Feature.Chat.Description.SnoozeDescription,一時停止機能はバーチャル空間メニューでオフにできます
 Feature.Chat.Drawer.Join,
-Feature.Chat.Heading.ChatWithConnections,つながりとチャット
-Feature.Chat.Heading.ChatWithFriends,友達とチャット
+Feature.Chat.Heading.ChatWithConnections,友達とチャット
+Feature.Chat.Heading.ChatWithFriends,
 Feature.Chat.Heading.CreateUnfilteredChatDialog,チャット拡張機能がついた新規グループを作成しますか？
 Feature.Chat.Heading.ExpressiveChat,広範囲対応チャット
 Feature.Chat.Heading.FailedToLeaveGroup,グループから退出できませんでした
@@ -2878,7 +2916,6 @@ Feature.Chat.Label.GroupName,グループ名
 Feature.Chat.Label.HoverToReplyTooltip,マウスオーバーして返信
 Feature.Chat.Label.InGameFriendsChatNotifications,ゲーム内の友達とのチャット通知
 Feature.Chat.Label.Loading,
-Feature.Chat.Label.LongPressToReplyTooltip,長押しで返信
 Feature.Chat.Label.Members,メンバー
 Feature.Chat.Label.MessageNotAvailable,このメッセージは表示できません
 Feature.Chat.Label.MuteInGameChatToastNotifications,ゲーム内チャット通知をミュート
@@ -2918,33 +2955,33 @@ Feature.Chat.Label.UnknownUser,未知のユーザー
 Feature.Chat.Label.User,ユーザー
 Feature.Chat.Label.ViewProfile,プロフィールを見る
 Feature.Chat.Label.YouRepliedToYou,自分に返信しました
-Feature.Chat.Message.AddConnectionsLimit,チャットグループにはつながりを {connectionsNum} 人まで追加できます。
-Feature.Chat.Message.AddConnectionsPartyLimit,パーティにはつながりを {connectionsNum} 人まで追加できます。
-Feature.Chat.Message.AddConnectionsPartyLimitSingular,プライバシー設定により、つながっている人1人としかパーティを結成できません。
-Feature.Chat.Message.AddFriendsLimit,チャットグループには友達を{connectionsNum}人まで追加できます。
-Feature.Chat.Message.AddFriendsPartyLimit,パーティには友達を{connectionsNum}人まで追加できます。
-Feature.Chat.Message.AddFriendsPartyLimitSingular,プライバシー設定により、1人の友達としかパーティを結成できません。
+Feature.Chat.Message.AddConnectionsLimit,チャットグループには友達を{connectionsNum}人まで追加できます。
+Feature.Chat.Message.AddConnectionsPartyLimit,パーティには友達を{connectionsNum}人まで追加できます。
+Feature.Chat.Message.AddConnectionsPartyLimitSingular,プライバシー設定により、1人の友達としかパーティを結成できません。
+Feature.Chat.Message.AddFriendsLimit,
+Feature.Chat.Message.AddFriendsPartyLimit,
+Feature.Chat.Message.AddFriendsPartyLimitSingular,
 Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName}さんが表示できないメッセージを送信しました
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,チャットがオフになっています。プライバシー設定でオンにできます。
 Feature.Chat.Message.ChatUnavailableRegion,現在、チャットはお住まいの地域では利用できません。
 Feature.Chat.Message.ChatUnavailableWithUser,現在、このユーザーはチャットに応答できません。
 Feature.Chat.Message.Default,このチャットでは、全員があなたのメッセージを見れるわけではありません。
-Feature.Chat.Message.EnableChat,プライバシー設定でチャットをオンにして、つながっている人とチャットしましょう。
-Feature.Chat.Message.EnableChat.FriendsRename,友達とチャットするには、プライバシー設定でチャットを有効にしてください。
-Feature.Chat.Message.EnableParty,プライバシー設定でパーティ機能をオンにして、つながっている人とチャットしましょう。
-Feature.Chat.Message.EnableParty.FriendsRename,友達とパーティ機能を使用するには、プライバシー設定でパーティを有効にしてください。
+Feature.Chat.Message.EnableChat,友達とチャットするには、プライバシー設定でチャットを有効にしてください。
+Feature.Chat.Message.EnableChat.FriendsRename,
+Feature.Chat.Message.EnableParty,友達とパーティ機能を使用するには、プライバシー設定でパーティを有効にしてください。
+Feature.Chat.Message.EnableParty.FriendsRename,
 Feature.Chat.Message.FailedToLeaveGroup,{CONVERSATION_TITLE} の会話を終了できませんでした。
 Feature.Chat.Message.FailedToLeaveGroup.V2,グループ（{CONVERSATION_TITLE} ）から削除できませんでした。
 Feature.Chat.Message.FailedToRemoveUser,{CONVERSATION_TITLE} の会話からユーザー、{USERNAME} さんを削除することができませんでした。
 Feature.Chat.Message.FailedToRemoveUser.V2,グループ（{CONVERSATION_TITLE} ）から {USERNAME} さんを削除できませんでした。
 Feature.Chat.Message.FailedToRenameConversation,会話「{EXISTING_NAME}」の名前を「{NEW_NAME}」に変更できませんでした。
 Feature.Chat.Message.FailedToRenameConversation.V2,グループ名「{EXISTING_NAME}」を「{NEW_NAME}」に変更できませんでした。
-Feature.Chat.Message.GroupConnectionLimitSingular,チャットはつながっている相手で1人しか追加できません。
+Feature.Chat.Message.GroupConnectionLimitSingular,チャットには友達を1人しか追加できません。
 Feature.Chat.Message.GroupFriendLimitSingular,友達1人しかチャット相手として追加できません。
 Feature.Chat.Message.LeaveGroup,このグループでチャットを続けることはできません。
 Feature.Chat.Message.LeaveGroup.V2,このグループを抜けますか？
-Feature.Chat.Message.MakeConnectionsToChat,Roblox上で人とつながってチャットを始めましょう
-Feature.Chat.Message.MakeConnectionsToParty,Roblox上で人とつながってパーティを結成しましょう
+Feature.Chat.Message.MakeConnectionsToChat,Robloxで友達を作ってチャットしよう
+Feature.Chat.Message.MakeConnectionsToParty,Robloxで友達を作ってパーティを結成しよう
 Feature.Chat.Message.MakeFriendsToChat,チャットを始めてRoblox上で友達を作ろう
 Feature.Chat.Message.MakeFriendsToParty,パーティ機能でRobloxで友達を作ろう
 Feature.Chat.Message.MessageContentModerated,メッセージは、規制により送信されませんでした。
@@ -2972,7 +3009,7 @@ Feature.Chat.ShareGameToChat.NoPopularGames,人気のバーチャル空間はあ
 Feature.Chat.ShareGameToChat.NoRecentGames,最近のものはありません
 Feature.Chat.ShareGameToChat.Popular,人気
 Feature.Chat.ShareGameToChat.Recent,最近
-Feature.Chat.Text.NoConnections,つながりをまだ追加していません。Robloxでつながりたい人を見つけて追加して始めましょう。
+Feature.Chat.Text.NoConnections,まだ友達を追加していません。まずはRobloxで友達を見つけて追加してください。
 Feature.Chat.Text.NoFriends,まだ友達を追加していません。始めるには、友達を見つけてRobloxに追加してください。
 Feature.Chat.Title.FriendsChat,友達チャット
 Feature.Chat.Title.MuteChatNotifications,ゲームプレイ中に友達からのチャット通知をミュートする
@@ -3400,7 +3437,6 @@ Feature.Groups.Heading.Primary,メイン
 Feature.Groups.Heading.SocialLinksNew,SNSリンク
 Feature.Groups.Heading.SocialMedia,ソーシャルメディア
 Feature.Groups.Heading.VerificationRequired,アカウント認証が必要です
-Feature.Groups.Heading.Videos,
 Feature.Groups.Label.ByOwnerWithFormat,所有者: {ownerName}
 Feature.Groups.Label.Follower,
 Feature.Groups.Label.FollowerCapital,
@@ -3508,6 +3544,7 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,残り{time}
+Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,Robuxを購入すると、仲裁条項と撤回ポリシーを含むRobloxの{termsLinkStart}利用規約{termsLinkEnd}に同意したものとみなされます。
 Feature.InExperienceShop.Label.BonusItem,ボーナスアイテム
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,あと{timeRemaining}で終了
@@ -3522,6 +3559,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number}分
 Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number}秒
 Feature.InExperienceShop.Label.Timer.Second.Singular,1秒
+Feature.InExperienceShop.Message.RobuxPurchaseSuccess,{ROBUX_AMOUNT} Robuxを購入できました
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,このアイテムを持ち物から永久に削除しますか？もし気が変わった場合は、バーチャル空間で再び獲得する必要があります。
 Feature.Item.Label.DeleteItemUndercase,アイテムを削除
 Feature.Landing.Label.PoweredBy,運営：
@@ -4386,7 +4424,7 @@ Feature.Toast.Message.PurchaseMessage.SuccessV3,{gameName} へのアクセスを
 Feature.Toast.NetworkingError.Forbidden,権限がありません。
 Feature.Toast.NetworkingError.NotFound,コンテンツが見つかりませんでした。
 Feature.Toast.NetworkingError.ServiceUnavailable,
-Feature.Toast.NetworkingError.SomethingIsWrong,問題が発生しました。もう一度お試しください。
+Feature.Toast.NetworkingError.SomethingIsWrong,
 Feature.Toast.NetworkingError.Timeout,タイムアウトしました。もう一度お試しください
 Feature.Toast.NetworkingError.TooManyRequests,サーバーが混雑しています。後でもう一度お試しください。
 Feature.Toast.NetworkingError.UnableToConnect,接続できませんでした。後でもう一度お試しください。
@@ -4665,6 +4703,7 @@ IAPExperience.PurchaseSuccess.Title.PurchaseSucceeded,購入できました
 IAPExperience.RobuxUpsell.Action.BuyRobux,
 IAPExperience.RobuxUpsell.Action.BuyRobuxAndItem,
 IAPExperience.RobuxUpsell.Action.Cancel,
+IAPExperience.RobuxUpsell.Action.GetPercentOff,{discountPercentage}%オフをゲット
 IAPExperience.RobuxUpsell.Text.AdditionalRobux,あと {robux} 必要です。
 IAPExperience.RobuxUpsell.Text.BestValue,ベストバリュー
 IAPExperience.RobuxUpsell.Text.BetterValue,よりお得
@@ -4960,7 +4999,7 @@ InGame.UnknownNamespace.Received,受信済み
 InGame.UnknownNamespace.Sent,送付済み
 InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,{experience_name}のショートカットをデスクトップに追加できませんでした
 InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,{experience_name}のショートカットをホーム画面に追加できませんでした
-InstantApps.Shortcuts.Label.ShortcutAlreadyExists,{experience_name}のショートカットはすでに存在します
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,『{experience_name}』の既存のショートカットが置き換えられました
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,{experience_name}のショートカットをデスクトップに追加しました
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name}のショートカットをホーム画面に追加しました
 InstantApps.Shortcuts.Label.TryAgain,

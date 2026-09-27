@@ -32,6 +32,7 @@ local t = {
 	end
 }
 local sentryIncludeRolloutFlagsContext = game:DefineFastFlag("SentryIncludeRolloutFlagsContext", false)
+local sentryIncludeIxpEnrolledExperimentsContext = game:DefineFastFlag("SentryIncludeIxpEnrolledExperimentsContext", false)
 
 local function _(p1)
 	local var1 = typeof(p1)
@@ -111,7 +112,7 @@ function t.parseThreadsToSentry(value)
 end
 
 local function parseAppContext(p1)
-	-- upvalues: t (ref), sentryIncludeRolloutFlagsContext (ref)
+	-- upvalues: t (ref), sentryIncludeRolloutFlagsContext (ref), sentryIncludeIxpEnrolledExperimentsContext (ref)
 	local t_1 = {}
 	local attributes = p1.attributes
 	local appVersion = t.safeGet(attributes, "appVersion")
@@ -169,6 +170,13 @@ local function parseAppContext(p1)
 		
 		if rolloutFlagsInVariant ~= nil then
 			t_1.rollout_flags_in_variant = rolloutFlagsInVariant
+		end
+	end
+	if sentryIncludeIxpEnrolledExperimentsContext then
+		local ixpEnrolledExperiments = t.safeGet(attributes, "IxpEnrolledExperiments")
+		
+		if ixpEnrolledExperiments ~= nil then
+			t_1.ixp_enrolled_experiments = ixpEnrolledExperiments
 		end
 	end
 	return t_1

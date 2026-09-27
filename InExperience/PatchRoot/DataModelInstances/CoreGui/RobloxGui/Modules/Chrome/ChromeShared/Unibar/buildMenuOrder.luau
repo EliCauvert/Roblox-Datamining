@@ -1,10 +1,10 @@
 ﻿local chrome = script:FindFirstAncestor("Chrome")
 local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
 local constantsModule = require(script.Parent.Constants)
 local inExperienceSideSheetModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheet)
 local isConnectDropdownEnabledModule = require(chrome.Integrations.Connect.isConnectDropdownEnabled)
 local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
+local isTenFootInterface = require(corePackagesService.Workspace.Packages.AppCommonLib).isTenFootInterface
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
@@ -28,7 +28,7 @@ local function _(p1, p2, p3)
 end
 
 return function()
-	-- upvalues: isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), isSpatial (ref), guiService (ref), isInExperienceUIVREnabled (ref), var2 (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagEnableSideSheetRobuxWidgetModule (ref), isSideSheetEnabledModule (ref), fFlagAddInviteFriendsIntegration (ref), constantsModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), fFlagShowSwitchServerButton (ref), fFlagEnableInExperienceShop (ref), isPioneerLaunch (ref), inExperienceSideSheetModule (ref)
+	-- upvalues: isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), isSpatial (ref), isTenFootInterface (ref), isInExperienceUIVREnabled (ref), var2 (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagEnableSideSheetRobuxWidgetModule (ref), isSideSheetEnabledModule (ref), fFlagAddInviteFriendsIntegration (ref), constantsModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), fFlagShowSwitchServerButton (ref), isPioneerLaunch (ref), fFlagEnableInExperienceShop (ref), inExperienceSideSheetModule (ref)
 	local var3 = isConnectDropdownEnabledModule()
 	
 	if var3 then
@@ -43,7 +43,7 @@ return function()
 		trust_and_safety = 40,
 		connect_dropdown = if var3 then 50 else nil,
 		[constantsModule.AVATAR_SWITCHER_ID] = if fFlagEnableInExperienceAvatarSwitcher then 60 else nil,
-		[constantsModule.SWITCH_SERVER_ID] = if fFlagShowSwitchServerButton then 65 else nil,
+		[constantsModule.SWITCH_SERVER_ID] = if fFlagShowSwitchServerButton or isPioneerLaunch() then 65 else nil,
 		[constantsModule.IN_EXPERIENCE_SHOP_ID] = if fFlagEnableInExperienceShop then 70 else nil,
 		leaderboard = 80,
 		emotes = 90,
@@ -53,7 +53,7 @@ return function()
 		camera_entrypoint = if var4 then 130 else nil,
 		gallery = 140,
 		selfie_view = if var4 then 150 else nil,
-		music_entrypoint = if not isSpatial() and not guiService:IsTenFootInterface() then 160 else nil,
+		music_entrypoint = if not isSpatial() and not isTenFootInterface() then 160 else nil,
 		AccountUpsell = if isPioneerLaunch() then 170 else nil,
 		[inExperienceSideSheetModule.Enums.ActionBinding.Leave] = 180,
 		[inExperienceSideSheetModule.Enums.ActionBinding.Respawn] = 190

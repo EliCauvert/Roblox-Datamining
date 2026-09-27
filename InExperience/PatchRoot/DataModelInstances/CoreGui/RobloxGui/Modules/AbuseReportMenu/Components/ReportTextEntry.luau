@@ -1,9 +1,13 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
 local reactModule = require(corePackagesService.Packages.React)
-local useStyle = require(corePackagesService.Packages.UIBlox).Core.Style.useStyle
+local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+local useStyle = UIBloxModule.Core.Style.useStyle
 
 return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref)
+	-- upvalues: useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = useStyle()
 	local theme = var1.Theme
 	
@@ -27,7 +31,8 @@ return function(p1)
 			AnchorPoint = Vector2.new(0, 0),
 			BackgroundColor3 = theme.BackgroundUIDefault.Color,
 			PlaceholderText = p1.placeholderText,
-			Font = var1.Font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
 			Text = p1.text,
 			TextSize = var1.Tokens.FontSize.FontSize_400,
 			TextColor3 = theme.TextDefault.Color,

@@ -1,18 +1,20 @@
 ﻿local parent = script:FindFirstAncestor("UserProfiles").Parent
 local lumberyakModule = require(parent.Lumberyak)
 local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagUserProfilePlatformProfile = sharedFlagsModule.FFlagUserProfilePlatformProfile
+local platformProfileRequestModule = require(parent.GraphQLServer.PlatformProfileRequest)
 local signalsModule = require(parent.Signals)
 local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 local userProfileStoreMaxLoggingLevel = game:DefineFastString("UserProfileStoreMaxLoggingLevel", lumberyakModule.Logger.Levels.Error)
 local userProfileStoreHttpTimeout = game:DefineFastInt("UserProfileStoreHttpTimeout", 1500)
-local userProfileStoreBatchSize = game:DefineFastInt("UserProfileStoreBatchSize", 50)
+local fIntUserProfileStoreBatchSize = sharedFlagsModule.FIntUserProfileStoreBatchSize
 local userProfileStoreQueueProcessDelay = game:DefineFastInt("UserProfileStoreQueueProcessDelay", 1)
 local fFlagEnableVerifiedBadgeStore = sharedFlagsModule.FFlagEnableVerifiedBadgeStore
 local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
 local userProfileModelModule = require(script.Parent.UserProfileModel)
 local var1 = createComputed(function(_)
-	-- upvalues: parent (ref), lumberyakModule (ref), userProfileStoreMaxLoggingLevel (ref), userProfileStoreHttpTimeout (ref), fFlagEnableVerifiedBadgeStore (ref), fFlagEnableBlackbirdCheck (ref), userProfileModelModule (ref), userProfileStoreBatchSize (ref), createSignal (ref), userProfileStoreQueueProcessDelay (ref)
+	-- upvalues: parent (ref), lumberyakModule (ref), userProfileStoreMaxLoggingLevel (ref), userProfileStoreHttpTimeout (ref), fFlagEnableVerifiedBadgeStore (ref), fFlagEnableBlackbirdCheck (ref), userProfileModelModule (ref), fIntUserProfileStoreBatchSize (ref), fFlagUserProfilePlatformProfile (ref), platformProfileRequestModule (ref), createSignal (ref), userProfileStoreQueueProcessDelay (ref)
 	local urlBuilderModule = require(parent.UrlBuilder)
 	local urlBuilder = urlBuilderModule.UrlBuilder
 	local urlBase = urlBuilderModule.UrlBase
@@ -61,7 +63,7 @@ local var1 = createComputed(function(_)
 	end
 	
 	local function performBatchFetch(p1, p2, p3, p4)
-		-- upvalues: userProfileStore (ref), t_2 (ref), userProfileStoreBatchSize (copy), httpService (ref), var2 (ref), userProfileStoreHttpTimeout (ref), t_1 (ref), userProfileModelModule (copy), performBatchFetch (ref)
+		-- upvalues: userProfileStore (ref), t_2 (ref), fIntUserProfileStoreBatchSize (copy), fFlagUserProfilePlatformProfile (copy), platformProfileRequestModule (copy), httpService (ref), var2 (ref), userProfileStoreHttpTimeout (ref), t_1 (ref), userProfileModelModule (copy), performBatchFetch (ref)
 		if #p1 == 0 then
 			userProfileStore:trace("No more ids to fetch. Setting result.")
 			
@@ -93,19 +95,24 @@ local var1 = createComputed(function(_)
 			local _ = {}
 			local t = {}
 			
-			if userProfileStoreBatchSize < #p1 then
+			if fIntUserProfileStoreBatchSize < #p1 then
 				t_3 = {}
 				
-				for i = 1, userProfileStoreBatchSize do
+				for i = 1, fIntUserProfileStoreBatchSize do
 					table.insert(t_3, p1[i])
 				end
-				for i_1 = userProfileStoreBatchSize + 1, #p1 do
+				for i_1 = fIntUserProfileStoreBatchSize + 1, #p1 do
 					table.insert(t, p1[i_1])
 				end
 			else
 				t_3 = p1
 			end
-			local var6 = httpService:JSONEncode({ userIds = t_3, fields = string.split(p2, ",") })
+			local parts = string.split(p2, ",")
+			local var6 = httpService:JSONEncode({
+				userIds = t_3,
+				fields = parts,
+				includePlatformProfile = if fFlagUserProfilePlatformProfile and platformProfileRequestModule.hasPlatformFields(parts) then true else nil
+			})
 			userProfileStore:debug("Fetching: {}", var6)
 			httpService:RequestInternal({
 				Method = "POST",
@@ -120,7 +127,7 @@ local var1 = createComputed(function(_)
 				},
 				RequestType = Enum.HttpRequestType.Default
 			}):Start(function(p5, p6)
-				-- upvalues: httpService (copy), userProfileStore (copy), var6 (ref), t_2 (copy), p2 (ref), t_1 (copy), userProfileModelModule (copy), performBatchFetch (copy), t (ref), p3 (ref), p4 (ref)
+				-- upvalues: httpService (copy), userProfileStore (copy), var6 (ref), fFlagUserProfilePlatformProfile (copy), platformProfileRequestModule (copy), parts (ref), t_2 (copy), p2 (ref), t_1 (copy), userProfileModelModule (copy), performBatchFetch (copy), t (ref), p3 (ref), p4 (ref)
 				if p5 == true then
 					local body = p6.Body
 					
@@ -135,6 +142,9 @@ local var1 = createComputed(function(_)
 							local profileDetails = status.profileDetails
 							
 							if profileDetails ~= nil then
+								if fFlagUserProfilePlatformProfile then
+									profileDetails = platformProfileRequestModule.normalizeProfiles(profileDetails, parts)
+								end
 								local var7 = t_2[p2]
 								
 								for i, v in ipairs(profileDetails) do
@@ -277,6 +287,26 @@ local var1 = createComputed(function(_)
 		end
 	end
 	
+	local function getNameFields(p8)
+		-- upvalues: t (ref), fFlagUserProfilePlatformProfile (copy), fFlagEnableVerifiedBadgeStore (copy), fFlagEnableBlackbirdCheck (copy)
+		local list = {
+			t.COMBINED_NAME, t.DISPLAY_NAME, t.USERNAME, t.IN_EXPERIENCE_COMBINED_NAME,
+			t.CONTACT_NAME, t.ALIAS
+		}
+		
+		if not fFlagUserProfilePlatformProfile or p8 then
+			table.insert(list, t.PLATFORM_NAME)
+			table.insert(list, t.PLATFORM_PROFILE_ID)
+		end
+		if fFlagEnableVerifiedBadgeStore then
+			table.insert(list, t.IS_VERIFIED)
+		end
+		if fFlagEnableBlackbirdCheck then
+			table.insert(list, t.HAS_ROBLOX_SUBSCRIPTION)
+		end
+		return list
+	end
+	
 	local function invalidateCachedProfiles(p8, p9)
 		-- upvalues: t_2 (ref)
 		table.sort(p8)
@@ -294,20 +324,9 @@ local var1 = createComputed(function(_)
 	end
 	
 	return {
-		fetchNamesByUserIds = function(p10, p11)
-			-- upvalues: t (ref), fFlagEnableVerifiedBadgeStore (copy), fFlagEnableBlackbirdCheck (copy), fetchByUserIds (ref)
-			local list = {
-				t.COMBINED_NAME, t.DISPLAY_NAME, t.USERNAME, t.IN_EXPERIENCE_COMBINED_NAME,
-				t.CONTACT_NAME, t.ALIAS, t.PLATFORM_NAME, t.PLATFORM_PROFILE_ID
-			}
-			
-			if fFlagEnableVerifiedBadgeStore then
-				table.insert(list, t.IS_VERIFIED)
-			end
-			if fFlagEnableBlackbirdCheck then
-				table.insert(list, t.HAS_ROBLOX_SUBSCRIPTION)
-			end
-			return fetchByUserIds(p10, list, p11)
+		fetchNamesByUserIds = function(p10, p11, p12)
+			-- upvalues: fetchByUserIds (ref), getNameFields (ref)
+			return fetchByUserIds(p10, getNameFields(p12), p11)
 		end,
 		updateFromHydration = function(p10)
 			-- upvalues: t_1 (ref), userProfileStore (ref), userProfileModelModule (copy)
@@ -336,7 +355,13 @@ local var1 = createComputed(function(_)
 			return t_1[p11]
 		end,
 		invalidateCachedNamesForUserIds = function(p11)
-			-- upvalues: t (ref), invalidateCachedProfiles (ref)
+			-- upvalues: fFlagUserProfilePlatformProfile (copy), invalidateCachedProfiles (ref), getNameFields (ref), t (ref)
+			if fFlagUserProfilePlatformProfile then
+				invalidateCachedProfiles(getNameFields(false), p11)
+				invalidateCachedProfiles(getNameFields(true), p11)
+				
+				return
+			end
 			invalidateCachedProfiles({
 				t.COMBINED_NAME, t.DISPLAY_NAME, t.USERNAME, t.IN_EXPERIENCE_COMBINED_NAME,
 				t.CONTACT_NAME, t.ALIAS, t.PLATFORM_NAME, t.PLATFORM_PROFILE_ID

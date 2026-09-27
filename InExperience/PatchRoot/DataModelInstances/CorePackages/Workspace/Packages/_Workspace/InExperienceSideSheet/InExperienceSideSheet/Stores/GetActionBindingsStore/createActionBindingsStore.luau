@@ -6,9 +6,12 @@ local analyticsConstantsModule = require(inExperienceSideSheet.Analytics.Analyti
 local sidesheetAnalyticsModule = require(inExperienceSideSheet.Analytics.SidesheetAnalytics)
 local enumsModule = require(inExperienceSideSheet.Common.Enums)
 local getIntegrationsStoreModule = require(inExperienceSideSheet.Stores.GetIntegrationsStore)
+local closePeoplePageOpenedWithSideSheetModule = require(inExperienceSideSheet.Utils.closePeoplePageOpenedWithSideSheet)
 local getSideSheetVisibilityModule = require(inExperienceSideSheet.Utils.getSideSheetVisibility)
 local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
+local fFlagSideSheetOpenPeoplePage = require(inExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
 local fFlagShowSwitchServerButton = require(parent.SharedFlags).FFlagShowSwitchServerButton
+local isPioneerLaunch = require(parent.PioneerUtils).isPioneerLaunch
 
 local function createActionBinding(p1)
 	-- upvalues: signalsModule (ref)
@@ -27,26 +30,30 @@ local function createActionBinding(p1)
 end
 
 return function()
-	-- upvalues: enumsModule (ref), createActionBinding (ref), fFlagShowSwitchServerButton (ref), signalsModule (ref), getIntegrationsStoreModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), getSideSheetVisibilityModule (ref), contextActionService (ref)
+	-- upvalues: enumsModule (ref), createActionBinding (ref), fFlagShowSwitchServerButton (ref), isPioneerLaunch (ref), signalsModule (ref), getIntegrationsStoreModule (ref), fFlagSideSheetOpenPeoplePage (ref), closePeoplePageOpenedWithSideSheetModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), getSideSheetVisibilityModule (ref), contextActionService (ref)
 	local t = {
 		[enumsModule.ActionBinding.Leave] = createActionBinding({ Enum.KeyCode.L, Enum.KeyCode.ButtonX }),
 		[enumsModule.ActionBinding.Respawn] = createActionBinding({ Enum.KeyCode.R, Enum.KeyCode.ButtonY })
 	}
 	
-	if fFlagShowSwitchServerButton then
+	if fFlagShowSwitchServerButton or isPioneerLaunch() then
 		t[enumsModule.ActionBinding.SwitchServer] = createActionBinding(nil)
 	end
 	local var1 = signalsModule.createEffect(function(p1)
-		-- upvalues: getIntegrationsStoreModule (copy), t (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
+		-- upvalues: getIntegrationsStoreModule (copy), t (ref), fFlagSideSheetOpenPeoplePage (copy), closePeoplePageOpenedWithSideSheetModule (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
 		for i, v in getIntegrationsStoreModule(p1).getSessionActionIntegrations(p1) do
 			local id = t[v.id]
 			
 			if id then
 				id.setOnActivated(function()
-					-- upvalues: v (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
+					-- upvalues: v (ref), fFlagSideSheetOpenPeoplePage (copy), closePeoplePageOpenedWithSideSheetModule (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
 					return function()
-						-- upvalues: v (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
+						-- upvalues: v (copy), fFlagSideSheetOpenPeoplePage (copy), closePeoplePageOpenedWithSideSheetModule (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
 						v.activated()
+						
+						if fFlagSideSheetOpenPeoplePage then
+							closePeoplePageOpenedWithSideSheetModule()
+						end
 						toggleSideSheetModule(false)
 						sidesheetAnalyticsModule.logSidesheetClosed(analyticsConstantsModule.Source.ItemSelected)
 					end
@@ -55,10 +62,10 @@ return function()
 		end
 	end)
 	local var2 = signalsModule.createEffect(function(p2)
-		-- upvalues: getSideSheetVisibilityModule (copy), t (ref), fFlagShowSwitchServerButton (copy), contextActionService (copy)
+		-- upvalues: getSideSheetVisibilityModule (copy), t (ref), isPioneerLaunch (copy), fFlagShowSwitchServerButton (copy), contextActionService (copy)
 		if getSideSheetVisibilityModule(p2) then
 			for i, v in t do
-				if not fFlagShowSwitchServerButton or v.keyCodes ~= nil then
+				if not isPioneerLaunch() and not fFlagShowSwitchServerButton or v.keyCodes ~= nil then
 					local var3 = function(_, p3, _)
 						-- upvalues: v (ref)
 						if p3 == Enum.UserInputState.Begin then

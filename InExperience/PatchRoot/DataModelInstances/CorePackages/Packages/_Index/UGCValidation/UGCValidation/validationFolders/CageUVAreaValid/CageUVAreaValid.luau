@@ -11,7 +11,6 @@ return {
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.outerCagesData },
 	conditionalData = {},
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateCageUV),
 	expectedFailures = {},
 	run = function(p1, p2)
 		-- upvalues: UGCValidationService (ref), errorSourceStringsModule (ref)

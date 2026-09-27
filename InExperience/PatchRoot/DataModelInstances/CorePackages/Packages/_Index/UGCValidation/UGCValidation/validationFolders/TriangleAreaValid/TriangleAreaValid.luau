@@ -12,7 +12,6 @@ local function _(vectorA, vectorB, p1)
 end
 
 return {
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateMeshGeometry),
 	categories = {
 		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD

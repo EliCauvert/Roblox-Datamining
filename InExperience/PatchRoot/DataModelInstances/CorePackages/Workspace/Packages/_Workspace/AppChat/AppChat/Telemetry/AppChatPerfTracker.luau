@@ -16,11 +16,11 @@ return {
 		-- upvalues: appChatPerfEventInfoModule (ref), appChatTTITrackerModule (ref), appChatIntervalTrackerModule (ref)
 		return if appChatPerfEventInfoModule.isTTIEvent(p1) then appChatTTITrackerModule.isActive(p1, p2 or {}) else appChatIntervalTrackerModule.isActive(p1)
 	end,
-	start = function(p1, p2)
+	start = function(p1, p2, p3)
 		-- upvalues: appChatPerfEventInfoModule (ref), appChatTTITrackerModule (ref), appChatIntervalTrackerModule (ref)
 		p2 = p2 or {}
 		
-		return if appChatPerfEventInfoModule.isTTIEvent(p1) then appChatTTITrackerModule.start(p1, p2) else appChatIntervalTrackerModule.start(p1, p2)
+		return if appChatPerfEventInfoModule.isTTIEvent(p1) then appChatTTITrackerModule.start(p1, p2) else appChatIntervalTrackerModule.start(p1, p2, p3)
 	end,
 	finish = function(p1, p2)
 		-- upvalues: appChatPerfEventInfoModule (ref), appChatTTITrackerModule (ref), appChatIntervalTrackerModule (ref)

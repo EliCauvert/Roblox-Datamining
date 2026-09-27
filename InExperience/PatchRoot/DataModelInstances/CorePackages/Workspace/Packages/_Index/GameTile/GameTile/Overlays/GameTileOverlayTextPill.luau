@@ -1,5 +1,8 @@
 ﻿local parent = script:FindFirstAncestor("GameTile").Parent
 local reactModule = require(parent.React)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local styleModule = require(parent.Style)
 local colors = styleModule.Colors
 local lightTheme = styleModule.Themes.LightTheme
@@ -7,7 +10,7 @@ local getTextSize = styleModule.GetTextSize
 local useDesignTokens = styleModule.useDesignTokens
 
 return function(p1)
-	-- upvalues: useDesignTokens (ref), reactModule (ref), getTextSize (ref), colors (ref), lightTheme (ref)
+	-- upvalues: useDesignTokens (ref), reactModule (ref), getTextSize (ref), colors (ref), lightTheme (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	if p1.text and string.len(p1.text) ~= 0 then
 		local var1 = useDesignTokens()
 		local size200 = var1.Size.Size_200
@@ -39,7 +42,8 @@ return function(p1)
 				Size = UDim2.fromOffset(var2.X, var2.Y),
 				Text = p1.text,
 				TextColor3 = lightTheme.TextEmphasis.Color3,
-				Font = font,
+				Font = if foundationFontFaceMigration then nil else font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(font) else nil,
 				TextSize = fontSize300,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,

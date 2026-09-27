@@ -17,6 +17,7 @@ return function()
 	local var13, var14 = signalsModule.createSignal({})
 	local var15, var16 = signalsModule.createSignal(constantsModule.MIN_COLUMNS)
 	local var17, var18 = signalsModule.createSignal(false)
+	local var19, var20 = signalsModule.createSignal(nil)
 	
 	return {
 		store = {
@@ -29,6 +30,11 @@ return function()
 			getBonusPromotionEligibility = var13,
 			getItemsPerRow = var15,
 			getShouldOpenToRobuxTab = var17,
+			getPurchasedRobuxAmount = var19,
+			dismissRobuxPurchaseSuccess = function()
+				-- upvalues: var20 (ref)
+				var20(nil)
+			end,
 			onShopOpened = jest.fn(),
 			fetchAllShopData = jest.fn(),
 			prefetchWidgetsOnly = jest.fn(),
@@ -47,6 +53,7 @@ return function()
 		setOwnership = var10,
 		setTrialAvailabilities = var12,
 		setBonusPromotionEligibility = var14,
-		setItemsPerRow = var16
+		setItemsPerRow = var16,
+		setPurchasedRobuxAmount = var20
 	}
 end

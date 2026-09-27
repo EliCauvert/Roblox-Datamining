@@ -2,6 +2,8 @@
 local parent = inExperienceShop.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
+local unifiedPurchaseCompletionModal = require(parent.IAPExperience).UnifiedPurchaseCompletionModal
+local fFlagShopRobuxPurchaseCompletionModalModule = require(inExperienceShop.Flags.FFlagShopRobuxPurchaseCompletionModal)
 local view = foundationModule.View
 local tabs = foundationModule.Tabs
 local fillBehavior = foundationModule.Enums.FillBehavior
@@ -27,17 +29,17 @@ local _ = require(inExperienceShop.Hooks.useShopOfferChip)
 local fFlagEnableCreatorEarlyAccessBannerInShopModule = require(inExperienceShop.Flags.FFlagEnableCreatorEarlyAccessBannerInShop)
 local fFlagRemoveBottomPaddingInExperienceShopModule = require(inExperienceShop.Flags.FFlagRemoveBottomPaddingInExperienceShop)
 local fFlagShopBlockClickPassThroughModule = require(inExperienceShop.Flags.FFlagShopBlockClickPassThrough)
-local fFlagShowLargerOfferBannerOnDesktopModule = require(inExperienceShop.Flags.FFlagShowLargerOfferBannerOnDesktop)
+local fFlagShowLargerOfferBannerOnDesktop2Module = require(inExperienceShop.Flags.FFlagShowLargerOfferBannerOnDesktop2)
 local _ = require(inExperienceShop.Hooks.useShopReportOverflow)
 
 return function(p1)
-	-- upvalues: findSectionModule (ref), fFlagEnableUserOffers (ref), fFlagShowLargerOfferBannerOnDesktopModule (ref), isSubjectToDesktopPolicies (ref), reactModule (ref), view (ref), searchInputContainerModule (ref), topBarModule (ref), desktopOfferBannerModule (ref), fFlagRemoveBottomPaddingInExperienceShopModule (ref), fFlagShopBlockClickPassThroughModule (ref), useTokens (ref), fFlagEnableCreatorEarlyAccessBannerInShopModule (ref), creatorEarlyAccessBannerModule (ref), tabs (ref), fillBehavior (ref), searchResultsContainerModule (ref), shopHomePageContainerModule (ref), categoryPageContainerModule (ref), itemDetailsContainerModule (ref), var1 (ref), offerDialogStateModule (ref), offerDetailsDialogModule (ref), offerTermsDialogModule (ref)
+	-- upvalues: findSectionModule (ref), fFlagEnableUserOffers (ref), fFlagShowLargerOfferBannerOnDesktop2Module (ref), isSubjectToDesktopPolicies (ref), reactModule (ref), view (ref), searchInputContainerModule (ref), topBarModule (ref), desktopOfferBannerModule (ref), fFlagRemoveBottomPaddingInExperienceShopModule (ref), fFlagShopBlockClickPassThroughModule (ref), useTokens (ref), fFlagEnableCreatorEarlyAccessBannerInShopModule (ref), creatorEarlyAccessBannerModule (ref), tabs (ref), fillBehavior (ref), searchResultsContainerModule (ref), shopHomePageContainerModule (ref), categoryPageContainerModule (ref), itemDetailsContainerModule (ref), fFlagShopRobuxPurchaseCompletionModalModule (ref), unifiedPurchaseCompletionModal (ref), var1 (ref), offerDialogStateModule (ref), offerDetailsDialogModule (ref), offerTermsDialogModule (ref)
 	local isSearchOpen = p1.isSearchOpen
 	local var2 = not isSearchOpen and #p1.tabs > 0
 	local selectedItem = p1.selectedItem
 	local var3 = if p1.selectedCategoryId ~= "home" then findSectionModule(p1.sections, p1.selectedCategoryId) == nil else true
 	local var4 = if fFlagEnableUserOffers then p1.offer.offerModal else nil
-	local var5 = fFlagEnableUserOffers and (fFlagShowLargerOfferBannerOnDesktopModule and (isSubjectToDesktopPolicies() and (not isSearchOpen and (p1.offer.showOfferChip and var4 ~= nil))))
+	local var5 = fFlagEnableUserOffers and (fFlagShowLargerOfferBannerOnDesktop2Module and isSubjectToDesktopPolicies())
 	local var6 = reactModule.createElement(view, {
 		tag = "row align-y-center size-full-1200",
 		LayoutOrder = 1
@@ -62,7 +64,7 @@ return function(p1)
 			onOfferChipActivated = if fFlagEnableUserOffers then p1.offer.onOfferChipActivated else nil
 		}) else nil
 	})
-	local var7 = if var5 and var4 ~= nil then reactModule.createElement(view, {
+	local var7 = if var5 and (not isSearchOpen and (var3 and (p1.offer.showOfferChip and var4 ~= nil))) and var4 ~= nil then reactModule.createElement(view, {
 		tag = "size-full-0 auto-y padding-x-xlarge padding-top-medium",
 		LayoutOrder = 4
 	}, {
@@ -125,7 +127,7 @@ return function(p1)
 				OfferBanner = var7,
 				PageSlot = reactModule.createElement(view, {
 					tag = "col fill size-full-0 padding-top-medium",
-					LayoutOrder = if fFlagShowLargerOfferBannerOnDesktopModule then 5 else 4,
+					LayoutOrder = if fFlagShowLargerOfferBannerOnDesktop2Module then 5 else 4,
 					onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged
 				}, {
 					Search = if isSearchOpen then reactModule.createElement(searchResultsContainerModule, {
@@ -155,6 +157,13 @@ return function(p1)
 				onClose = p1.onDetailsClose
 			})
 		}),
+		RobuxPurchaseSuccess = if fFlagShopRobuxPurchaseCompletionModalModule and p1.robuxPurchaseSuccess ~= nil then reactModule.createElement(unifiedPurchaseCompletionModal, {
+			bodyText = p1.robuxPurchaseSuccess.bodyText,
+			buttons = {
+				onActivated = p1.robuxPurchaseSuccess.onClose,
+				onClose = p1.robuxPurchaseSuccess.onClose
+			}
+		}) else nil,
 		ReportOverlay = if p1.topBarReportSession and var1 then reactModule.createElement(var1, {
 			abuseVector = p1.topBarReportSession.abuseVector,
 			targetId = p1.topBarReportSession.targetId,

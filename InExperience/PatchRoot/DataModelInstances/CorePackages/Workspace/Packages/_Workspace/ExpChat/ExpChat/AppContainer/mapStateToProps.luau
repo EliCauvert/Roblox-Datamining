@@ -2,14 +2,12 @@
 local parent = expChat.Parent
 local expChatSharedModule = require(parent.ExpChatShared)
 local sharedFlagsModule = require(parent.SharedFlags)
-local getFFlagExpChatEnableChannelTabsUIModule = require(expChat.Flags.getFFlagExpChatEnableChannelTabsUI)
 local fFlagExpChatNewInputBarModule = require(expChat.Flags.FFlagExpChatNewInputBar)
 local fFlagExpChatFixInputBarOrphanBorderModule = require(expChat.Flags.FFlagExpChatFixInputBarOrphanBorder)
 local selectSelectedTabNameModule = require(expChat.selectSelectedTabName)
 local friendsChatTabNameModule = require(parent.FriendsChat.FriendsChatTabName)
 local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
-local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local fFlagExpChatUseChatConfigStore = sharedFlagsModule.FFlagExpChatUseChatConfigStore
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
 
@@ -32,7 +30,7 @@ local _ = function(p1)
 end
 
 return function(p1, _)
-	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatTabNameModule (ref), fFlagExpChatUseMessagesStore (ref), fFlagExpChatFixInputBarOrphanBorderModule (ref), selectSelectedTabNameModule (ref), getFFlagExpChatEnableChannelTabsUIModule (ref), fFlagExpChatUseChatConfigStore (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatNewInputBarModule (ref)
+	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatTabNameModule (ref), fFlagExpChatFixInputBarOrphanBorderModule (ref), selectSelectedTabNameModule (ref), fFlagExpChatUseChatConfigStore (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatNewInputBarModule (ref)
 	local var1 = false
 	
 	if getFFlagTextChatEnableUniverseChatTabs() then
@@ -57,9 +55,7 @@ return function(p1, _)
 	local var4
 	channelTabs = fFlagExpChatEnableFriendsTab and var3 == "FriendsChat"
 	local var5 = not channelTabs
-	local t = {
-		canLocalUserChat = if fFlagExpChatUseMessagesStore then nil else p1.CanLocalUserChat
-	}
+	local t = {}
 	
 	if fFlagExpChatFixInputBarOrphanBorderModule then
 		local isChatInputBarEnabled = p1.ChatVisibility.isChatInputBarEnabled
@@ -70,7 +66,7 @@ return function(p1, _)
 	end
 	t.isChatInputBarVisible = var4
 	t.isChatWindowVisible = p1.ChatVisibility.isChatWindowEnabled.value
-	t.isChannelBarVisible = if getFFlagExpChatEnableChannelTabsUIModule() then p1.ChatVisibility.isChannelBarEnabled.value or getFFlagTextChatEnableUniverseChatTabs() and (var1 and (p1.ChatVisibility.isChatWindowEnabled.value or var2 and p1.ChatVisibility.isChatWindowEnabled.value)) else false
+	t.isChannelBarVisible = p1.ChatVisibility.isChannelBarEnabled.value or getFFlagTextChatEnableUniverseChatTabs() and (var1 and (p1.ChatVisibility.isChatWindowEnabled.value or var2 and p1.ChatVisibility.isChatWindowEnabled.value))
 	t.chatTopBarVisibility = p1.ChatVisibility.isChatInputBarEnabled._topBarVisibility and p1.ChatVisibility.isChatWindowEnabled._topBarVisibility
 	t.chatLayoutAlignment = p1.ChatLayout.Alignment
 	t.chatWindowSettings = if fFlagExpChatUseChatConfigStore then nil else p1.ChatLayout.ChatWindowSettings

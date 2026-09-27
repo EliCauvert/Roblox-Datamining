@@ -7,9 +7,10 @@ local reactToFeedItemModule = require(script.Parent.Requests.reactToFeedItem)
 local reactToFeedItemV2Module = require(script.Parent.Requests.reactToFeedItemV2)
 local createMomentsEmojiSetsStoreModule = require(script.Parent.createMomentsEmojiSetsStore)
 local fFlagMomentsEmojiSetsApiModule = require(script.Parent.FFlagMomentsEmojiSetsApi)
+local fFlagMomentsComments = require(parent.SharedFlags).FFlagMomentsComments
 
 return function(p1)
-	-- upvalues: httpClientModule (ref), reactToFeedItemModule (ref), reactToFeedItemV2Module (ref), promiseModule (ref), fFlagMomentsEmojiSetsApiModule (ref), createMomentsEmojiSetsStoreModule (ref)
+	-- upvalues: httpClientModule (ref), reactToFeedItemModule (ref), reactToFeedItemV2Module (ref), promiseModule (ref), fFlagMomentsEmojiSetsApiModule (ref), fFlagMomentsComments (ref), createMomentsEmojiSetsStoreModule (ref)
 	p1 = p1 or {}
 	
 	local function reactToFeedItem(p2)
@@ -27,15 +28,21 @@ return function(p1)
 		end)
 	end
 	
-	if fFlagMomentsEmojiSetsApiModule then
-		local var1 = createMomentsEmojiSetsStoreModule(p1)
-		
-		return {
-			reactToFeedItem = reactToFeedItem,
-			reactToFeedItemV2 = reactToFeedItemV2,
-			getAndFetchEmojiSets = var1.getAndFetchEmojiSets,
-			getEmojis = var1.getEmojis
-		}
+	if not fFlagMomentsEmojiSetsApiModule and not fFlagMomentsComments then
+		return { reactToFeedItem = reactToFeedItem }
 	end
-	return { reactToFeedItem = reactToFeedItem }
+	local var1 = createMomentsEmojiSetsStoreModule(p1)
+	local t = {
+		reactToFeedItem = reactToFeedItem,
+		getAndFetchEmojiSets = var1.getAndFetchEmojiSets
+	}
+	
+	if fFlagMomentsComments then
+		t.getCachedEmojiCatalog = var1.getCachedEmojiCatalog
+	end
+	if fFlagMomentsEmojiSetsApiModule then
+		t.reactToFeedItemV2 = reactToFeedItemV2
+		t.getEmojis = var1.getEmojis
+	end
+	return t
 end

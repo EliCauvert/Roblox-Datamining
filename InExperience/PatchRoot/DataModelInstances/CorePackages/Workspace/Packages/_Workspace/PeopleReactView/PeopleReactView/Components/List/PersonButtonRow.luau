@@ -12,9 +12,14 @@ local muteVolumeButtonModule = require(peopleReactView.Components.Buttons.MuteVo
 local useDeviceOrientation = robloxAppHooksModule.useDeviceOrientation
 local useSignalState = signalsReactModule.useSignalState
 local personButtonConfigsModule = require(peopleReactView.Configs.PersonButtonConfigs)
+local peoplePageLayoutContextModule = require(peopleReactView.PeoplePageLayoutContext)
+local sideSheetFocusContextModule = require(peopleReactView.SideSheetFocusContext)
+local getPersonButtonRowSelectionBehaviorLeftModule = require(peopleReactView.Utils.getPersonButtonRowSelectionBehaviorLeft)
 local flags = peopleServiceModule.getService("Flags")
 local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
 local fFlagVoiceVolumeControlsPerUserPlayerListButton = flags.FFlagVoiceVolumeControlsPerUserPlayerListButton
+local fFlagSideSheetOpenPeoplePage = require(parent.SharedFlags).FFlagSideSheetOpenPeoplePage
+local fFlagPeopleListButtonOverflowModule = require(peopleReactView.Flags.FFlagPeopleListButtonOverflow)
 
 local function MemoizedButton(p1)
 	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), reactModule (ref), peopleServiceModule (ref), personButtonModule (ref)
@@ -64,43 +69,44 @@ local function MemoizedButton(p1)
 end
 
 return function(p1)
-	-- upvalues: personButtonConfigsModule (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), reactModule (ref), peopleServiceModule (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (ref), useSignalState (ref), getFFlagAddPeoplePageCardLayout (ref), muteVolumeButtonModule (ref), MemoizedButton (ref), view (ref)
-	local var1 = personButtonConfigsModule(p1.userId)
-	local var2 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait
-	local var3 = reactModule.useMemo(function()
+	-- upvalues: reactModule (ref), peoplePageLayoutContextModule (ref), personButtonConfigsModule (ref), fFlagPeopleListButtonOverflowModule (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), peopleServiceModule (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (ref), useSignalState (ref), getFFlagAddPeoplePageCardLayout (ref), fFlagSideSheetOpenPeoplePage (ref), sideSheetFocusContextModule (ref), getPersonButtonRowSelectionBehaviorLeftModule (ref), muteVolumeButtonModule (ref), MemoizedButton (ref), view (ref)
+	local var1 = reactModule.useContext(peoplePageLayoutContextModule)
+	local var2 = personButtonConfigsModule(p1.userId, if fFlagPeopleListButtonOverflowModule then var1.isCompact else false)
+	local var3 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait or fFlagPeopleListButtonOverflowModule and var1.isCompact
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("FocusNavigationService")
 	end, {})
-	local var4 = if fFlagVoiceVolumeControlsPerUserPlayerListButton then reactModule.useMemo(function()
+	local var5 = if fFlagVoiceVolumeControlsPerUserPlayerListButton then reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("Constants")
 	end, {}) else nil
-	local var5 = if fFlagVoiceVolumeControlsPerUserPlayerListButton then useSignalState((if fFlagVoiceVolumeControlsPerUserPlayerListButton then reactModule.useMemo(function()
+	local var6 = if fFlagVoiceVolumeControlsPerUserPlayerListButton then useSignalState((if fFlagVoiceVolumeControlsPerUserPlayerListButton then reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("PeopleVoiceChatStore")
 	end, {}) else nil).getShowVolumeControl) else false
-	local var6 = reactModule.useRef({})
-	local var7 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var6 (ref)
+	local var7 = reactModule.useRef({})
+	local var8 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var7 (ref)
 		if p2 then
-			var6.current[p3] = p2
+			var7.current[p3] = p2
 			
 			return
 		end
-		var6.current[p3] = nil
+		var7.current[p3] = nil
 	end, {})
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: getFFlagAddPeoplePageCardLayout (copy), var1 (ref)
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: getFFlagAddPeoplePageCardLayout (copy), var2 (ref)
 		local t = {}
 		
 		if getFFlagAddPeoplePageCardLayout() then
-			for i, v in var1 do
+			for i, v in var2 do
 				if v.shouldShow() then
 					table.insert(t, v.id)
 				end
 			end
 		else
-			for i, v in ipairs(var1) do
+			for i, v in ipairs(var2) do
 				if v.shouldShow() then
 					table.insert(t, v.id)
 				end
@@ -109,56 +115,39 @@ return function(p1)
 		table.sort(t)
 		
 		return table.concat(t, ",")
-	end, { var1 })
+	end, { var2 })
 	reactModule.useEffect(function()
-		-- upvalues: fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), var6 (ref), var5 (ref), var4 (ref), getFFlagAddPeoplePageCardLayout (copy), var1 (ref), p1 (ref), var3 (ref)
+		-- upvalues: fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), var7 (ref), var6 (ref), var5 (ref), getFFlagAddPeoplePageCardLayout (copy), var2 (ref), p1 (ref), var4 (ref)
 		local t = {}
 		
 		if fFlagVoiceVolumeControlsPerUserPlayerListButton then
 			local function _(p2)
-				-- upvalues: var6 (copy), t (ref), var5 (copy), var4 (copy)
+				-- upvalues: var7 (copy), t (ref), var6 (copy), var5 (copy)
 				if not p2.shouldShow() then return end
-				local id = var6.current[p2.id]
+				local id = var7.current[p2.id]
 				
 				if id then
 					table.insert(t, id)
 				end
-				if var5 and p2.id == var4.PERSON_BUTTONS.MUTE_PLAYER then
-					local var9 = var6.current[p2.id .. "_volume"]
+				if var6 and p2.id == var5.PERSON_BUTTONS.MUTE_PLAYER then
+					local var10 = var7.current[p2.id .. "_volume"]
 					
-					if var9 then
-						table.insert(t, var9)
+					if var10 then
+						table.insert(t, var10)
 					end
 				end
 			end
 			
 			if getFFlagAddPeoplePageCardLayout() then
-				for i, v in var1 do
+				for i, v in var2 do
 					if v.shouldShow() then
-						local id = var6.current[v.id]
+						local id = var7.current[v.id]
 						
 						if id then
 							table.insert(t, id)
 						end
-						if var5 and v.id == var4.PERSON_BUTTONS.MUTE_PLAYER then
-							local var9 = var6.current[v.id .. "_volume"]
-							
-							if var9 then
-								table.insert(t, var9)
-							end
-						end
-					end
-				end
-			else
-				for i, v in ipairs(var1) do
-					if v.shouldShow() then
-						local id = var6.current[v.id]
-						
-						if id then
-							table.insert(t, id)
-						end
-						if var5 and v.id == var4.PERSON_BUTTONS.MUTE_PLAYER then
-							local var10 = var6.current[v.id .. "_volume"]
+						if var6 and v.id == var5.PERSON_BUTTONS.MUTE_PLAYER then
+							local var10 = var7.current[v.id .. "_volume"]
 							
 							if var10 then
 								table.insert(t, var10)
@@ -166,11 +155,28 @@ return function(p1)
 						end
 					end
 				end
+			else
+				for i, v in ipairs(var2) do
+					if v.shouldShow() then
+						local id = var7.current[v.id]
+						
+						if id then
+							table.insert(t, id)
+						end
+						if var6 and v.id == var5.PERSON_BUTTONS.MUTE_PLAYER then
+							local var11 = var7.current[v.id .. "_volume"]
+							
+							if var11 then
+								table.insert(t, var11)
+							end
+						end
+					end
+				end
 			end
 		elseif getFFlagAddPeoplePageCardLayout() then
-			for i, v in var1 do
+			for i, v in var2 do
 				if v.shouldShow() then
-					local id = var6.current[v.id]
+					local id = var7.current[v.id]
 					
 					if id then
 						table.insert(t, id)
@@ -178,9 +184,9 @@ return function(p1)
 				end
 			end
 		else
-			for i, v in ipairs(var1) do
+			for i, v in ipairs(var2) do
 				if v.shouldShow() then
-					local id = var6.current[v.id]
+					local id = var7.current[v.id]
 					
 					if id then
 						table.insert(t, id)
@@ -192,95 +198,96 @@ return function(p1)
 			table.sort(t, function(p2, p3)
 				return p2.LayoutOrder < p3.LayoutOrder
 			end)
-			var3.registerButtonRow(p1.userId, t, p1.index or 0)
+			var4.registerButtonRow(p1.userId, t, p1.index or 0)
 		end
 	end, if fFlagVoiceVolumeControlsPerUserPlayerListButton then {
 		p1.userId,
 		p1.index,
-		var3,
-		var8,
-		var5
-	} else { p1.userId, p1.index, var3, var8 })
+		var4,
+		var9,
+		var6
+	} else { p1.userId, p1.index, var4, var9 })
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), p1 (ref)
+		-- upvalues: var4 (ref), p1 (ref)
 		return function()
-			-- upvalues: var3 (copy), p1 (copy)
-			var3.handlePersonRemoved(p1.userId)
-			var3.unregisterButtonRow(p1.userId)
+			-- upvalues: var4 (copy), p1 (copy)
+			var4.handlePersonRemoved(p1.userId)
+			var4.unregisterButtonRow(p1.userId)
 		end
-	end, { p1.userId, var3 })
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), p1 (ref)
-		return var3.hasSelectablePlatformButton(p1.userId)
-	end, { p1.userId, var3 })
+	end, { p1.userId, var4 })
 	local var12 = reactModule.useMemo(function()
-		-- upvalues: var11 (ref)
-		return if var11 then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop
-	end, { var11 })
+		-- upvalues: var4 (ref), p1 (ref)
+		return var4.hasSelectablePlatformButton(p1.userId)
+	end, { p1.userId, var4 })
+	local var13 = if fFlagSideSheetOpenPeoplePage then reactModule.useContext(sideSheetFocusContextModule) else false
+	local var14 = reactModule.useMemo(function()
+		-- upvalues: fFlagSideSheetOpenPeoplePage (copy), getPersonButtonRowSelectionBehaviorLeftModule (copy), var12 (ref), var13 (ref)
+		return if fFlagSideSheetOpenPeoplePage then getPersonButtonRowSelectionBehaviorLeftModule(var12, var13) elseif var12 then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop
+	end, { var13, var12 })
 	
 	if not reactModule.useMemo(function()
-		-- upvalues: getFFlagAddPeoplePageCardLayout (copy), var1 (ref)
+		-- upvalues: getFFlagAddPeoplePageCardLayout (copy), var2 (ref)
 		if getFFlagAddPeoplePageCardLayout() then
-			for i, v in var1 do
+			for i, v in var2 do
 				if v.shouldShow() then
 					return true
 				end
 			end
 		else
-			for i, v in ipairs(var1) do
+			for i, v in ipairs(var2) do
 				if v.shouldShow() then
 					return true
 				end
 			end
 		end
 		return false
-	end, { var1 }) then
+	end, { var2 }) then
 		return nil
 	end
 	local t = {}
 	
 	if getFFlagAddPeoplePageCardLayout() then
-		for i, v in var1 do
+		for i, v in var2 do
 			if v.shouldShow() then
-				if fFlagVoiceVolumeControlsPerUserPlayerListButton and var5 and v.id == var4.PERSON_BUTTONS.MUTE_PLAYER then
+				if fFlagVoiceVolumeControlsPerUserPlayerListButton and var6 and v.id == var5.PERSON_BUTTONS.MUTE_PLAYER then
 					table.insert(t, reactModule.createElement(muteVolumeButtonModule, {
 						key = v.id,
 						config = v,
 						userId = p1.userId,
-						entryPoint = var4.ANALYTICS.ENTRY_POINT.PEOPLE_LIST,
+						entryPoint = var5.ANALYTICS.ENTRY_POINT.PEOPLE_LIST,
 						muteButtonName = v.id,
 						volumeButtonName = v.id .. "_volume",
-						onButtonMount = var7
+						onButtonMount = var8
 					}))
 				else
 					table.insert(t, reactModule.createElement(MemoizedButton, {
 						key = v.id,
 						config = v,
 						buttonId = v.id,
-						onButtonMount = var7
+						onButtonMount = var8
 					}))
 				end
 			end
 		end
 	else
-		for i, v in ipairs(var1) do
+		for i, v in ipairs(var2) do
 			if v.shouldShow() then
-				if fFlagVoiceVolumeControlsPerUserPlayerListButton and var5 and v.id == var4.PERSON_BUTTONS.MUTE_PLAYER then
+				if fFlagVoiceVolumeControlsPerUserPlayerListButton and var6 and v.id == var5.PERSON_BUTTONS.MUTE_PLAYER then
 					table.insert(t, reactModule.createElement(muteVolumeButtonModule, {
 						key = v.id,
 						config = v,
 						userId = p1.userId,
-						entryPoint = var4.ANALYTICS.ENTRY_POINT.PEOPLE_LIST,
+						entryPoint = var5.ANALYTICS.ENTRY_POINT.PEOPLE_LIST,
 						muteButtonName = v.id,
 						volumeButtonName = v.id .. "_volume",
-						onButtonMount = var7
+						onButtonMount = var8
 					}))
 				else
 					table.insert(t, reactModule.createElement(MemoizedButton, {
 						key = v.id,
 						config = v,
 						buttonId = v.id,
-						onButtonMount = var7
+						onButtonMount = var8
 					}))
 				end
 			end
@@ -290,11 +297,11 @@ return function(p1)
 		LayoutOrder = 1,
 		tag = {
 			["auto-xy row"] = true,
-			["gap-small"] = var2,
-			["gap-medium"] = not var2
+			["gap-small"] = var3,
+			["gap-medium"] = not var3
 		},
 		selectionGroup = {
-			SelectionBehaviorLeft = var12,
+			SelectionBehaviorLeft = var14,
 			SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 		}
 	}, t)

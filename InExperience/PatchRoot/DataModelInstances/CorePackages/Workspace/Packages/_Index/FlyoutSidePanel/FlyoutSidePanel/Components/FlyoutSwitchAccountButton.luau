@@ -10,6 +10,7 @@ local fFlagCTAChangeMorePageFlyoutButtonText = require(parent.SharedFlags).FFlag
 return function(p1)
 	-- upvalues: reactModule (ref), useLocalization (ref), fFlagCTAChangeMorePageFlyoutButtonText (ref), button (ref), buttonVariant (ref), buttonSize (ref)
 	return reactModule.createElement(button, {
+		testId = "--core-ui-flyout-button-switch-account",
 		isDisabled = false,
 		text = useLocalization({
 			title = if fFlagCTAChangeMorePageFlyoutButtonText then "Authentication.AccountSwitch.Header.SwitchAccountSentenceCase" else "Authentication.AccountSwitch.Action.SwitchAccount"

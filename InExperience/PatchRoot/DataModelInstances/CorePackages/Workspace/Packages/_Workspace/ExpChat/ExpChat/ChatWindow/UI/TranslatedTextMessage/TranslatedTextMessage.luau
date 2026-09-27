@@ -20,7 +20,6 @@ local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
 local getChatStatusStoreModule = require(expChat.Stores.GetChatStatusStore)
 local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
 local UIBloxModule = require(parent.UIBlox)
-local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
 local useStore = require(parent.RoactUtils).Hooks.RoactRodux.useStore
 local shouldSendHighFrequencyTelemetryModule = require(expChat.shouldSendHighFrequencyTelemetry)
@@ -47,12 +46,12 @@ local useCursor = UIBloxModule.App.SelectionCursor.useCursor
 local configModule = require(expChat.Config)
 local helpers = expChat.ChatWindow.Helpers
 local getMessageSettingsModule = require(helpers.getMessageSettings)
+local fFlagExpChatGlobalTabDefaultModule = require(expChat.Flags.FFlagExpChatGlobalTabDefault)
 local duplicateInvisibleTextModule = require(helpers.duplicateInvisibleText)
 local flags = expChat.Flags
 local isExperienceChatUserProfileApiEnabledModule = require(flags.isExperienceChatUserProfileApiEnabled)
 local fIntExpChatVisibleARButtonPaddingModule = require(flags.FIntExpChatVisibleARButtonPadding)
 local fIntExpChatDefaultARButtonPaddingModule = require(flags.FIntExpChatDefaultARButtonPadding)
-local fFlagAEGIS2EnableGatesForExpChatModule = require(flags.FFlagAEGIS2EnableGatesForExpChat)
 local fFlagExpChatTopBannerForPresetChatAccessModule = require(flags.FFlagExpChatTopBannerForPresetChatAccess)
 local fFlagExpChatFixLocalUserVerifiedBadgeModule = require(flags.FFlagExpChatFixLocalUserVerifiedBadge)
 local expChatSharedModule = require(parent_1.ExpChatShared)
@@ -96,23 +95,21 @@ local _ = function(value, p1)
 	end)
 end
 
-local function useARButtonRightPadding()
-	-- upvalues: fFlagExpChatPresetChatEnabled (ref), fFlagExpChatTopBannerForPresetChatAccessModule (ref), useIsARButtonVisibleModule (ref), fIntExpChatVisibleARButtonPaddingModule (ref), fIntExpChatDefaultARButtonPaddingModule (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), getChatStatusStoreModule (ref), signalsReactModule (ref), showChatEnabledUIModule (ref), isChatRegionLockedModule (ref)
+local _ = function()
+	-- upvalues: fFlagExpChatPresetChatEnabled (ref), fFlagExpChatTopBannerForPresetChatAccessModule (ref), useIsARButtonVisibleModule (ref), fIntExpChatVisibleARButtonPaddingModule (ref), fIntExpChatDefaultARButtonPaddingModule (ref), getChatStatusStoreModule (ref), signalsReactModule (ref), showChatEnabledUIModule (ref), isChatRegionLockedModule (ref)
 	if fFlagExpChatPresetChatEnabled and fFlagExpChatTopBannerForPresetChatAccessModule then
 		return if useIsARButtonVisibleModule() then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule
 	end
 	local _ = 0
-	local _ = nil
-	local _ = nil
 	
-	return if not isChatRegionLockedModule() and (if fFlagAEGIS2EnableGatesForExpChatModule then showChatEnabledUIModule(signalsReactModule.useSignalState(getChatStatusStoreModule(false).getChatStatus)) else true) then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule
+	return if not isChatRegionLockedModule() and showChatEnabledUIModule(signalsReactModule.useSignalState(getChatStatusStoreModule(false).getChatStatus)) then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule
 end
 
 local function appendTrustedIndicator(p1, p2, p3, p4, p5)
 	local var3 = p5.Color.Shift.Shift_300.Color3:ToHex()
 	local transparency = p5.Color.Shift.Shift_300.Transparency
 	local transparency_1 = p5.Color.Content.Emphasis.Transparency
-	local var4 = `{`{`{`{`<mark color='#{var56}' transparency='{transparency + p12 * (1 - transparency)}'>`}<font transparency='1' weight='{600}' size='{p13 - 4}'><stroke transparency='1'>_`}<font color='#{p14.Color.Content.Emphasis.Color3:ToHex()}' transparency='{transparency_1 + p12 * (1 - transparency_1)}'>{p2}</font>`}_</stroke></font>`}</mark>`
+	local var4 = `{`{`{`{`<mark color='#{var55}' transparency='{transparency + p12 * (1 - transparency)}'>`}<font transparency='1' weight='{600}' size='{p13 - 4}'><stroke transparency='1'>_`}<font color='#{p14.Color.Content.Emphasis.Color3:ToHex()}' transparency='{transparency_1 + p12 * (1 - transparency_1)}'>{p2}</font>`}_</stroke></font>`}</mark>`
 	
 	return if string.find(p1, ":([%S:]-)$") then string.gsub(p1, ":([%S:]-)$", ` {var4} :%1`) else `{p1} {var4}`
 end
@@ -130,7 +127,7 @@ local _ = function(p1, p2, p3, p4)
 end
 
 local var4 = function(p1)
-	-- upvalues: fFlagDebugMessageProfilingModule (ref), reactModule (ref), expChatPerfTracker (ref), localizationModule (ref), fFlagExpChatRewriteInlineModule (ref), fStringInExpChatRewriteLabelKeyModule (ref), foundationModule (ref), getMessageSettingsModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), isExperienceChatUserProfileApiEnabledModule (ref), var2 (ref), getFFlagExpChatExcludeFOMORendersModule (ref), signalsModule (ref), playersService (ref), var3 (ref), signalsReactModule (ref), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (ref), fFlagExpChatUseChannelTabsStore (ref), useStore (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref), shouldSendHighFrequencyTelemetryModule (ref), var1 (ref), getChannelTabsStoreModule (ref), textChatService (ref), appendTrustedIndicator (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatPolishSummaryMessageUIModule (ref), textChatMessageChatActionTypeModule (ref), summaryMessageRichTextModule (ref), fFlagExpChatPresetChatEnabled (ref), isPresetMessage (ref), getPresetIconRichText (ref), expChatTranslationToggleSpacingFix (ref), duplicateInvisibleTextModule (ref), useCursor (ref), fFlagEnableInExpChatRewriteModule (ref), useARButtonRightPadding (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), getChatStatusStoreModule (ref), showChatEnabledUIModule (ref), isChatRegionLockedModule (ref), fIntExpChatVisibleARButtonPaddingModule (ref), fIntExpChatDefaultARButtonPaddingModule (ref), fIntExpChatWindowTransparencyRewriteInteractableThresholdModule (ref)
+	-- upvalues: fFlagDebugMessageProfilingModule (ref), reactModule (ref), expChatPerfTracker (ref), localizationModule (ref), fFlagExpChatGlobalTabDefaultModule (ref), fFlagExpChatRewriteInlineModule (ref), fStringInExpChatRewriteLabelKeyModule (ref), foundationModule (ref), getMessageSettingsModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), isExperienceChatUserProfileApiEnabledModule (ref), var2 (ref), getFFlagExpChatExcludeFOMORendersModule (ref), signalsModule (ref), playersService (ref), var3 (ref), signalsReactModule (ref), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (ref), fFlagExpChatUseChannelTabsStore (ref), useStore (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref), shouldSendHighFrequencyTelemetryModule (ref), var1 (ref), getChannelTabsStoreModule (ref), textChatService (ref), appendTrustedIndicator (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatPolishSummaryMessageUIModule (ref), textChatMessageChatActionTypeModule (ref), summaryMessageRichTextModule (ref), fFlagExpChatPresetChatEnabled (ref), isPresetMessage (ref), getPresetIconRichText (ref), expChatTranslationToggleSpacingFix (ref), duplicateInvisibleTextModule (ref), useCursor (ref), fFlagEnableInExpChatRewriteModule (ref), fFlagExpChatTopBannerForPresetChatAccessModule (ref), useIsARButtonVisibleModule (ref), fIntExpChatVisibleARButtonPaddingModule (ref), fIntExpChatDefaultARButtonPaddingModule (ref), getChatStatusStoreModule (ref), showChatEnabledUIModule (ref), isChatRegionLockedModule (ref), fIntExpChatWindowTransparencyRewriteInteractableThresholdModule (ref)
 	if fFlagDebugMessageProfilingModule then
 		debug.profilebegin("TranslatedTextMessage")
 	end
@@ -144,6 +141,7 @@ local var4 = function(p1)
 	local var5 = if isSpatialUIEnabled then p1.chatWindowSettings.SpatialPanelTextSize else p1.chatWindowSettings.TextSize
 	local var6 = localizationModule.useLocalization({
 		trustedLabelText = "CoreScripts.TextChat.ChatWindow.TrustedLabel",
+		hereLabel = if fFlagExpChatGlobalTabDefaultModule then "CoreScripts.TextChat.ChannelTabs.Here" else nil,
 		rewrittenLabelText = if fFlagExpChatRewriteInlineModule then fStringInExpChatRewriteLabelKeyModule else nil,
 		defaultRewrittenLabelText = if fFlagExpChatRewriteInlineModule then "CoreScripts.TextChat.ChatWindow.RewrittenLabel" else nil
 	})
@@ -153,7 +151,7 @@ local var4 = function(p1)
 		var7 = if var6.rewrittenLabelText and var6.rewrittenLabelText ~= "" then var6.rewrittenLabelText else var6.defaultRewrittenLabelText
 	end
 	local var8 = foundationModule.Hooks.useTokens()
-	local var9 = getMessageSettingsModule(p1.message, p1.chatWindowSettings)
+	local var9 = getMessageSettingsModule(p1.message, p1.chatWindowSettings, if fFlagExpChatGlobalTabDefaultModule then var6.hereLabel else nil)
 	local showTranslationButton = p1.showTranslationButton
 	local var10 = getMessageText(var9.useTranslation, var9.translation, var9.text)
 	local prefixText = var9.prefixText or ""
@@ -268,7 +266,7 @@ local var4 = function(p1)
 			local var22 = var10 or ""
 			
 			if p1.message.chatActionType == textChatMessageChatActionTypeModule.Summary then
-				var22 = summaryMessageRichTextModule.wrapInSummaryMutedStyle(summaryMessageRichTextModule.getSummaryIconPrefix(var20) .. " " .. var65_1, var21.Color.Content.Muted.Color3:ToHex(), var20)
+				var22 = summaryMessageRichTextModule.wrapInSummaryMutedStyle(summaryMessageRichTextModule.getSummaryIconPrefix(var20) .. " " .. var64_1, var21.Color.Content.Muted.Color3:ToHex(), var20)
 			end
 			var19 = var22
 		end
@@ -288,7 +286,7 @@ local var4 = function(p1)
 			-- upvalues: p1 (ref), foundationModule (copy), prefixTextProperties (ref), var8 (ref), var7 (write)
 			local var19 = p2[1] or ""
 			
-			return if p1.wasRewritten then `{var19} <font size='{prefixTextProperties.TextSize - 4}' color='#{var63.Color.Content.Muted.Color3:ToHex()}'>{`({var7})`}<font transparency='1'><stroke transparency='1'>_</stroke></font>{`<font weight='600' family='rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json'>{if p1.isRewriteMenuOpen then foundationModule.Enums.IconName.ChevronLargeUp else foundationModule.Enums.IconName.ChevronLargeDown}</font>`}</font>` else var19
+			return if p1.wasRewritten then `{var19} <font size='{prefixTextProperties.TextSize - 4}' color='#{var62.Color.Content.Muted.Color3:ToHex()}'>{`({var7})`}<font transparency='1'><stroke transparency='1'>_</stroke></font>{`<font weight='600' family='rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json'>{if p1.isRewriteMenuOpen then foundationModule.Enums.IconName.ChevronLargeUp else foundationModule.Enums.IconName.ChevronLargeDown}</font>`}</font>` else var19
 		end)
 	end
 	local UIPadding
@@ -296,31 +294,36 @@ local var4 = function(p1)
 	local _ = nil
 	
 	if fFlagEnableInExpChatRewriteModule then
-		UIPadding = reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, useARButtonRightPadding()) })
+		local var20
+		if fFlagExpChatPresetChatEnabled and fFlagExpChatTopBannerForPresetChatAccessModule then
+			var20 = if useIsARButtonVisibleModule() then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule
+		else
+			local _ = 0
+			var20 = if not isChatRegionLockedModule() and showChatEnabledUIModule(signalsReactModule.useSignalState(getChatStatusStoreModule(false).getChatStatus)) then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule
+		end
+		UIPadding = reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var20) })
 	else
-		local _ = nil
-		local _ = nil
 		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingRight = UDim.new(0, if not isChatRegionLockedModule() and (if fFlagAEGIS2EnableGatesForExpChatModule then showChatEnabledUIModule(signalsReactModule.useSignalState(getChatStatusStoreModule(false).getChatStatus)) else true) then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule)
+			PaddingRight = UDim.new(0, if not isChatRegionLockedModule() and showChatEnabledUIModule(signalsReactModule.useSignalState(getChatStatusStoreModule(false).getChatStatus)) then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule)
 		})
 	end
-	local var20 = nil
+	local var21 = nil
 	
 	if fFlagExpChatRewriteInlineModule and p1.wasRewritten then
 		if p1.chatWindowTransparencyBindable == nil then
-			var20 = true
+			var21 = true
 		elseif typeof(p1.chatWindowTransparencyBindable) == "number" then
-			var20 = p1.chatWindowTransparencyBindable < fIntExpChatWindowTransparencyRewriteInteractableThresholdModule
-			var20 = nil
+			var21 = p1.chatWindowTransparencyBindable < fIntExpChatWindowTransparencyRewriteInteractableThresholdModule
+			var21 = nil
 		else
-			var20 = p1.chatWindowTransparencyBindable:map(function(p2)
+			var21 = p1.chatWindowTransparencyBindable:map(function(p2)
 				-- upvalues: fIntExpChatWindowTransparencyRewriteInteractableThresholdModule (copy)
 				return p2 < fIntExpChatWindowTransparencyRewriteInteractableThresholdModule
 			end)
 		end
 	end
 	local createElement = reactModule.createElement
-	local var21 = "Frame"
+	local var22 = "Frame"
 	local t = {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
@@ -329,18 +332,18 @@ local var4 = function(p1)
 	}
 	local t_1 = { UIPadding = UIPadding }
 	local createElement_1 = reactModule.createElement
-	local var22 = "Frame"
+	local var23 = "Frame"
 	local t_2 = {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
 		Size = UDim2.new(1, 0, 0, 0)
 	}
 	local t_3 = {}
-	local var23 = false
+	local var24 = false
 	
 	if string.len(prefixText) > 0 then
-		var23 = reactModule.createElement
-		local var24 = "TextLabel"
+		var24 = reactModule.createElement
+		local var25 = "TextLabel"
 		local t_4 = {
 			BackgroundTransparency = 1,
 			RichText = true,
@@ -357,21 +360,21 @@ local var4 = function(p1)
 			-- upvalues: textStrokeTransparency (ref)
 			return if textStrokeTransparency == nil then 1 else textStrokeTransparency + p2 * (1 - textStrokeTransparency)
 		end)
-		local var25 = 0
+		local var26 = 0
 		t_4.TextTransparency = p1.textTransparency:map(function(p2)
-			-- upvalues: var25 (ref)
-			return if var25 == nil then 1 else var25 + p2 * (1 - var25)
+			-- upvalues: var26 (ref)
+			return if var26 == nil then 1 else var26 + p2 * (1 - var26)
 		end)
 		t_4.TextXAlignment = Enum.TextXAlignment.Left
 		t_4.TextYAlignment = Enum.TextYAlignment.Top
-		var23 = var23(var24, t_4, {
+		var24 = var24(var25, t_4, {
 			UIGradient = prefixTextProperties.UIGradient ~= nil and reactModule.createElement("UIGradient", prefixTextProperties.UIGradient)
 		})
 	end
 	local createElement_3
-	t_3.PrefixText = var23
+	t_3.PrefixText = var24
 	local createElement_2 = reactModule.createElement
-	local var26 = if fFlagExpChatRewriteInlineModule and p1.wasRewritten then "TextButton" else "TextLabel"
+	local var27 = if fFlagExpChatRewriteInlineModule and p1.wasRewritten then "TextButton" else "TextLabel"
 	local t_4 = {
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1,
@@ -388,24 +391,24 @@ local var4 = function(p1)
 		-- upvalues: textStrokeTransparency (ref)
 		return if textStrokeTransparency == nil then 1 else textStrokeTransparency + p2 * (1 - textStrokeTransparency)
 	end)
-	local var27 = 0
+	local var28 = 0
 	t_4.TextTransparency = p1.textTransparency:map(function(p2)
-		-- upvalues: var27 (ref)
-		return if var27 == nil then 1 else var27 + p2 * (1 - var27)
+		-- upvalues: var28 (ref)
+		return if var28 == nil then 1 else var28 + p2 * (1 - var28)
 	end)
 	t_4.TextWrapped = true
 	t_4.TextXAlignment = Enum.TextXAlignment.Left
 	t_4.TextYAlignment = Enum.TextYAlignment.Top
 	t_4[reactModule.Event.Activated] = if fFlagExpChatRewriteInlineModule and p1.wasRewritten then p1.onTextBodyActivated else nil
-	t_4.Interactable = var20
-	t_3.BodyText = createElement_2(var26, t_4)
+	t_4.Interactable = var21
+	t_3.BodyText = createElement_2(var27, t_4)
 	
 	if string.len(prefixText) == 0 then
 		createElement_3 = nil
 	else
 		local createElement_4
 		createElement_3 = reactModule.createElement
-		local var28 = "Frame"
+		local var29 = "Frame"
 		local t_5 = {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.XY,
@@ -441,16 +444,16 @@ local var4 = function(p1)
 		
 		if showTranslationButton then
 			createElement_4 = reactModule.createElement
-			local var29 = "ImageButton"
+			local var30 = "ImageButton"
 			local t_7 = {
 				BackgroundTransparency = 1,
 				HoverImage = "rbxasset://textures/translateIconDark.png",
 				Image = "rbxasset://textures/translateIcon.png"
 			}
-			local var30 = 0
+			local var31 = 0
 			t_7.ImageTransparency = p1.textTransparency:map(function(p2)
-				-- upvalues: var30 (ref)
-				return if var30 == nil then 1 else var30 + p2 * (1 - var30)
+				-- upvalues: var31 (ref)
+				return if var31 == nil then 1 else var31 + p2 * (1 - var31)
 			end)
 			t_7.LayoutOrder = 2
 			t_7.PressedImage = "rbxasset://textures/translateIconDark.png"
@@ -462,16 +465,16 @@ local var4 = function(p1)
 				p1.onToggle(not p1.message.useTranslation, p1.message.messageId)
 			end
 			
-			createElement_4 = createElement_4(var29, t_7)
+			createElement_4 = createElement_4(var30, t_7)
 		else
 			createElement_4 = nil
 		end
 		t_6.TranslationButton = createElement_4
-		createElement_3 = createElement_3(var28, t_5, t_6)
+		createElement_3 = createElement_3(var29, t_5, t_6)
 	end
 	t_3.TextMessageButton = createElement_3
-	t_1.TextMessage = createElement_1(var22, t_2, t_3)
-	createElement = createElement(var21, t, t_1)
+	t_1.TextMessage = createElement_1(var23, t_2, t_3)
+	createElement = createElement(var22, t, t_1)
 	
 	if fFlagDebugMessageProfilingModule then
 		debug.profileend()
@@ -480,22 +483,13 @@ local var4 = function(p1)
 end
 
 local function TranslatedTextMessageWithToggle(_)
-	-- upvalues: roactRoduxModule (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), var4 (ref)
-	return roactRoduxModule.connect(function() end, function(p2)
-		-- upvalues: fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy)
+	-- upvalues: roactRoduxModule (ref), getMessagesStoreModule (ref), var4 (ref)
+	return roactRoduxModule.connect(function() end, function(_)
+		-- upvalues: getMessagesStoreModule (copy)
 		return {
-			onToggle = function(p3, p4)
-				-- upvalues: fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy), p2 (ref)
-				if fFlagExpChatUseMessagesStore then
-					getMessagesStoreModule(false).toggleMessageTranslation(p3, p4)
-					
-					return
-				end
-				p2({
-					type = "ChatTranslationMessageToggled",
-					useTranslation = p3,
-					messageId = p4
-				})
+			onToggle = function(p2, p3)
+				-- upvalues: getMessagesStoreModule (copy)
+				getMessagesStoreModule(false).toggleMessageTranslation(p2, p3)
 			end
 		}
 	end)(var4)
@@ -503,12 +497,12 @@ end
 
 local function RewriteLabelWithButton(p2)
 	-- upvalues: foundationModule (ref), localizationModule (ref), fStringInExpChatRewriteLabelKeyModule (ref), reactModule (ref)
-	local var31 = foundationModule.Hooks.useTokens()
-	local var32 = localizationModule.useLocalization({
+	local var32 = foundationModule.Hooks.useTokens()
+	local var33 = localizationModule.useLocalization({
 		defaultRewrittenLabelText = "CoreScripts.TextChat.ChatWindow.RewrittenLabel",
 		rewrittenLabelText = fStringInExpChatRewriteLabelKeyModule
 	})
-	local var33 = if var32.rewrittenLabelText and var32.rewrittenLabelText ~= "" then var32.rewrittenLabelText else var32.defaultRewrittenLabelText
+	local var34 = if var33.rewrittenLabelText and var33.rewrittenLabelText ~= "" then var33.rewrittenLabelText else var33.defaultRewrittenLabelText
 	local createElement = reactModule.createElement
 	local view = foundationModule.View
 	local t = {
@@ -524,20 +518,20 @@ local function RewriteLabelWithButton(p2)
 		RichText = true,
 		Text = "(" .. var117 .. ")"
 	}
-	local t_3 = { Color3 = var31.Color.Content.Muted.Color3 }
-	local transparency = var31.Color.Content.Muted.Transparency
+	local t_3 = { Color3 = var32.Color.Content.Muted.Color3 }
+	local transparency = var32.Color.Content.Muted.Transparency
 	t_3.Transparency = p2.textTransparency:map(function(p3)
 		-- upvalues: transparency (ref)
 		return if transparency == nil then 1 else transparency + p3 * (1 - transparency)
 	end)
 	t_2.textStyle = t_3
 	local t_4 = { Color = Color3.fromRGB(0, 0, 0) }
-	local var34 = 0.5
+	local var35 = 0.5
 	t_4.Transparency = p2.textTransparency:map(function(p3)
-		-- upvalues: var34 (ref)
-		return if var34 == nil then 1 else var34 + p3 * (1 - var34)
+		-- upvalues: var35 (ref)
+		return if var35 == nil then 1 else var35 + p3 * (1 - var35)
 	end)
-	t_4.Thickness = var31.Stroke.Thin
+	t_4.Thickness = var32.Stroke.Thin
 	t_2.stroke = t_4
 	t_1.Label = createElement_1(text, t_2)
 	t_1.IconButton = reactModule.createElement(foundationModule.IconButton, {
@@ -556,47 +550,54 @@ local function RewriteLabelWithButton(p2)
 end
 
 return reactModule.memo(function(p2)
-	-- upvalues: getMessageSettingsModule (ref), fFlagEnableInExpChatRewriteModule (ref), useARButtonRightPadding (ref), fIntExpChatDefaultARButtonPaddingModule (ref), localizationModule (ref), fStringInExpChatRewriteReasonKeyModule (ref), foundationModule (ref), reactModule (ref), fFlagExpChatRewriteToggleAnalyticsModule (ref), expChatSharedModule (ref), fFlagExpChatRewriteInlineIxpEnabledModule (ref), IXPService (ref), fStringExpChatRewriteInlineIxpLayerModule (ref), fFlagExpChatRewriteInlineModule (ref), dictionary (ref), TranslatedTextMessageWithToggle (ref), var4 (ref), RewriteLabelWithButton (ref)
-	local var31 = getMessageSettingsModule(p2.message, p2.chatWindowSettings)
+	-- upvalues: getMessageSettingsModule (ref), fFlagEnableInExpChatRewriteModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatTopBannerForPresetChatAccessModule (ref), useIsARButtonVisibleModule (ref), fIntExpChatVisibleARButtonPaddingModule (ref), fIntExpChatDefaultARButtonPaddingModule (ref), getChatStatusStoreModule (ref), signalsReactModule (ref), showChatEnabledUIModule (ref), isChatRegionLockedModule (ref), localizationModule (ref), fStringInExpChatRewriteReasonKeyModule (ref), foundationModule (ref), reactModule (ref), fFlagExpChatRewriteToggleAnalyticsModule (ref), expChatSharedModule (ref), fFlagExpChatRewriteInlineIxpEnabledModule (ref), IXPService (ref), fStringExpChatRewriteInlineIxpLayerModule (ref), fFlagExpChatRewriteInlineModule (ref), dictionary (ref), TranslatedTextMessageWithToggle (ref), var4 (ref), RewriteLabelWithButton (ref)
+	local var32 = getMessageSettingsModule(p2.message, p2.chatWindowSettings)
 	local showTranslationButton = p2.showTranslationButton
-	local var32 = nil
-	local _ = nil
 	local var33 = nil
 	local _ = nil
 	local var34 = nil
+	local _ = nil
+	local var35 = nil
 	local originalText = nil
-	local var35 = false
+	local var36 = false
 	local wasRewritten = false
-	local var36 = 0
-	local var37 = ""
+	local var37 = 0
+	local var38 = ""
 	
 	if fFlagEnableInExpChatRewriteModule then
-		var36 = math.max(useARButtonRightPadding() - fIntExpChatDefaultARButtonPaddingModule, 0)
-		local var38 = localizationModule.useLocalization({
+		local var39
+		if fFlagExpChatPresetChatEnabled and fFlagExpChatTopBannerForPresetChatAccessModule then
+			var39 = if useIsARButtonVisibleModule() then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule
+		else
+			local _ = 0
+			var39 = if not isChatRegionLockedModule() and showChatEnabledUIModule(signalsReactModule.useSignalState(getChatStatusStoreModule(false).getChatStatus)) then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule
+		end
+		var37 = math.max(var39 - fIntExpChatDefaultARButtonPaddingModule, 0)
+		local var40 = localizationModule.useLocalization({
 			defaultRewrittenReasonLabelText = "CoreScripts.TextChat.ChatWindows.RewrittenReasonLabel",
 			rewrittenReasonLabelText = fStringInExpChatRewriteReasonKeyModule
 		})
-		var37 = if var38.rewrittenReasonLabelText and var38.rewrittenReasonLabelText ~= "" then var38.rewrittenReasonLabelText else var38.defaultRewrittenReasonLabelText
-		var32 = foundationModule.Hooks.useTokens()
-		local var39, var40 = reactModule.useState(false)
-		var33 = var39
-		local var41 = var40
-		wasRewritten = var31.wasRewritten
-		originalText = var31.originalText
-		var35 = wasRewritten and (originalText ~= nil and originalText ~= "")
-		var34 = reactModule.useCallback(function()
-			-- upvalues: fFlagExpChatRewriteToggleAnalyticsModule (copy), expChatSharedModule (copy), p2 (ref), var33 (write), var35 (write), var41 (write)
+		var38 = if var40.rewrittenReasonLabelText and var40.rewrittenReasonLabelText ~= "" then var40.rewrittenReasonLabelText else var40.defaultRewrittenReasonLabelText
+		var33 = foundationModule.Hooks.useTokens()
+		local var41, var42 = reactModule.useState(false)
+		var34 = var41
+		local var43 = var42
+		wasRewritten = var32.wasRewritten
+		originalText = var32.originalText
+		var36 = wasRewritten and (originalText ~= nil and originalText ~= "")
+		var35 = reactModule.useCallback(function()
+			-- upvalues: fFlagExpChatRewriteToggleAnalyticsModule (copy), expChatSharedModule (copy), p2 (ref), var34 (write), var36 (write), var43 (write)
 			if fFlagExpChatRewriteToggleAnalyticsModule then
 				expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.RewriteDropdownToggledConfig, {
 					messageId = p2.message.messageId,
-					isDropdownOpen = tostring(var33),
-					showOriginalText = tostring(var35)
+					isDropdownOpen = tostring(var34),
+					showOriginalText = tostring(var36)
 				}, expChatSharedModule.Analytics.DefaultStandardizedFields)
 			end
-			var41(function(p3)
+			var43(function(p3)
 				return not p3
 			end)
-		end, { var33, var35, p2.message.messageId })
+		end, { var34, var36, p2.message.messageId })
 		
 		if fFlagExpChatRewriteInlineIxpEnabledModule then
 			reactModule.useEffect(function()
@@ -608,44 +609,44 @@ return reactModule.memo(function(p2)
 		end
 	end
 	local _ = nil
-	local var42 = p2
+	local var44 = p2
 	
 	if fFlagExpChatRewriteInlineModule and wasRewritten then
-		var42 = dictionary.join(var42, {
+		var44 = dictionary.join(var44, {
 			LayoutOrder = 1,
-			isRewriteMenuOpen = var33,
+			isRewriteMenuOpen = var34,
 			wasRewritten = wasRewritten,
-			onTextBodyActivated = var34
+			onTextBodyActivated = var35
 		})
 	elseif fFlagEnableInExpChatRewriteModule and wasRewritten then
-		var42 = dictionary.join(var42, { LayoutOrder = 1 })
+		var44 = dictionary.join(var44, { LayoutOrder = 1 })
 	end
-	local var43
-	local var44 = if showTranslationButton then reactModule.createElement(TranslatedTextMessageWithToggle, var42) else reactModule.createElement(var4, var42)
+	local var45
+	local var46 = if showTranslationButton then reactModule.createElement(TranslatedTextMessageWithToggle, var44) else reactModule.createElement(var4, var44)
 	
 	if fFlagEnableInExpChatRewriteModule and wasRewritten then
-		local var45
-		var43 = reactModule.createElement
+		local var47
+		var45 = reactModule.createElement
 		local view = foundationModule.View
 		local t = {
 			tag = `size-full-0 auto-y align-y-top col{if fFlagExpChatRewriteInlineModule then " gap-xsmall" else ""}`,
 			LayoutOrder = p2.LayoutOrder
 		}
 		local t_1 = {
-			UIPadding = if var33 then reactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 4) }) else nil,
-			TranslatedTextMessage = var44,
+			UIPadding = if var34 then reactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 4) }) else nil,
+			TranslatedTextMessage = var46,
 			RewriteLabelWithButton = if wasRewritten and not fFlagExpChatRewriteInlineModule then reactModule.createElement(RewriteLabelWithButton, {
 				LayoutOrder = 2,
-				onActivated = var34,
-				isRewriteMenuOpen = var33,
+				onActivated = var35,
+				isRewriteMenuOpen = var34,
 				transparencyValue = p2.transparencyValue,
 				textTransparency = p2.textTransparency
 			}) else nil
 		}
 		
-		if var33 then
+		if var34 then
 			local createElement
-			var45 = reactModule.createElement
+			var47 = reactModule.createElement
 			local view_1 = foundationModule.View
 			local t_2 = {
 				tag = "align-x-left col radius-medium gap-xxsmall padding-small",
@@ -653,16 +654,16 @@ return reactModule.memo(function(p2)
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, -fIntExpChatDefaultARButtonPaddingModule, 0, 0)
 			}
-			local t_3 = { Color3 = var32.Color.Common.Scrim.Color3 }
-			local var46 = 0.7
+			local t_3 = { Color3 = var33.Color.Common.Scrim.Color3 }
+			local var48 = 0.7
 			t_3.Transparency = p2.transparencyValue:map(function(p3)
-				-- upvalues: var46 (ref)
-				return if var46 == nil then 1 else var46 + p3 * (1 - var46)
+				-- upvalues: var48 (ref)
+				return if var48 == nil then 1 else var48 + p3 * (1 - var48)
 			end)
 			t_2.backgroundStyle = t_3
 			local t_4 = {}
 			
-			if var35 then
+			if var36 then
 				createElement = reactModule.createElement
 				local text = foundationModule.Text
 				local t_5 = {
@@ -672,29 +673,29 @@ return reactModule.memo(function(p2)
 					TextWrapped = true,
 					Text = originalText,
 					AutomaticSize = Enum.AutomaticSize.Y,
-					Size = UDim2.new(1, -var36, 0, 0)
+					Size = UDim2.new(1, -var37, 0, 0)
 				}
-				local t_6 = { Color3 = var32.Color.Content.Muted.Color3 }
-				local transparency = var32.Color.Content.Muted.Transparency
+				local t_6 = { Color3 = var33.Color.Content.Muted.Color3 }
+				local transparency = var33.Color.Content.Muted.Transparency
 				t_6.Transparency = p2.textTransparency:map(function(p3)
 					-- upvalues: transparency (ref)
 					return if transparency == nil then 1 else transparency + p3 * (1 - transparency)
 				end)
 				t_5.textStyle = t_6
 				local t_7 = { Color = Color3.fromRGB(0, 0, 0) }
-				local var47 = 0.5
+				local var49 = 0.5
 				t_7.Transparency = p2.textTransparency:map(function(p3)
-					-- upvalues: var47 (ref)
-					return if var47 == nil then 1 else var47 + p3 * (1 - var47)
+					-- upvalues: var49 (ref)
+					return if var49 == nil then 1 else var49 + p3 * (1 - var49)
 				end)
-				t_7.Thickness = var32.Stroke.Thin
+				t_7.Thickness = var33.Stroke.Thin
 				t_5.stroke = t_7
 				createElement = createElement(text, t_5)
 			else
 				createElement = nil
 			end
 			t_4.OriginalText = createElement
-			t_4.Divider = if var35 then reactModule.createElement(foundationModule.Divider, {
+			t_4.Divider = if var36 then reactModule.createElement(foundationModule.Divider, {
 				LayoutOrder = 2,
 				orientation = foundationModule.Enums.Orientation.Horizontal,
 				Visible = p2.textTransparency:map(function(p3)
@@ -709,95 +710,95 @@ return reactModule.memo(function(p2)
 				LayoutOrder = 3,
 				RichText = true,
 				TextWrapped = true,
-				Text = var37,
+				Text = var38,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Size = UDim2.new(1, -var36, 0, 0)
+				Size = UDim2.new(1, -var37, 0, 0)
 			}
-			local t_6 = { Color3 = var32.Color.Content.Default.Color3 }
-			local transparency = var32.Color.Content.Default.Transparency
+			local t_6 = { Color3 = var33.Color.Content.Default.Color3 }
+			local transparency = var33.Color.Content.Default.Transparency
 			t_6.Transparency = p2.textTransparency:map(function(p3)
 				-- upvalues: transparency (ref)
 				return if transparency == nil then 1 else transparency + p3 * (1 - transparency)
 			end)
 			t_5.textStyle = t_6
 			local t_7 = { Color = Color3.fromRGB(0, 0, 0) }
-			local var48 = 0.5
+			local var50 = 0.5
 			t_7.Transparency = p2.textTransparency:map(function(p3)
-				-- upvalues: var48 (ref)
-				return if var48 == nil then 1 else var48 + p3 * (1 - var48)
+				-- upvalues: var50 (ref)
+				return if var50 == nil then 1 else var50 + p3 * (1 - var50)
 			end)
-			t_7.Thickness = var32.Stroke.Thin
+			t_7.Thickness = var33.Stroke.Thin
 			t_5.stroke = t_7
 			t_4.ReasoningText = createElement_1(text, t_5)
-			var45 = var45(view_1, t_2, t_4)
+			var47 = var47(view_1, t_2, t_4)
 		else
-			var45 = nil
+			var47 = nil
 		end
-		t_1.DropdownMenu = var45
-		var43 = var43(view, t, t_1)
+		t_1.DropdownMenu = var47
+		var45 = var45(view, t, t_1)
 	else
-		var43 = var44
+		var45 = var46
 	end
-	return var43
+	return var45
 end, function(p3, p4)
 	-- upvalues: fFlagExpChatFixLocalUserVerifiedBadgeModule (ref), fFlagEnableInExpChatRewriteModule (ref), fFlagExpChatRewriteInlineModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatPresetChatEnabled (ref)
-	local var49 = false
+	local var51 = false
 	
 	if p3.message.text == p4.message.text then
-		var49 = false
+		var51 = false
 		
 		if p3.message.prefixText == p4.message.prefixText then
-			var49 = false
+			var51 = false
 			
 			if p3.message.translation == p4.message.translation then
-				var49 = false
+				var51 = false
 				
 				if p3.message.useTranslation == p4.message.useTranslation then
-					var49 = false
+					var51 = false
 					
 					if p3.message.messageId == p4.message.messageId then
 						if fFlagExpChatFixLocalUserVerifiedBadgeModule then
-							var49 = false
+							var51 = false
 							
 							if p3.message.userId == p4.message.userId then
 								local _ = p3.isUserVerified == p4.isUserVerified
 							end
 						else
-							var49 = true
+							var51 = true
 						end
-						if var49 then
-							var49 = false
+						if var51 then
+							var51 = false
 							
 							if p3.chatWindowSettings == p4.chatWindowSettings then
 								if fFlagEnableInExpChatRewriteModule then
-									var49 = false
+									var51 = false
 									
 									if p3.message.wasRewritten == p4.message.wasRewritten then
-										var49 = p3.message.originalText == p4.message.originalText
-										var49 = nil
+										var51 = p3.message.originalText == p4.message.originalText
+										var51 = nil
 									end
 								else
-									var49 = true
+									var51 = true
 								end
-								if var49 then
+								if var51 then
 									if fFlagExpChatRewriteInlineModule then
-										var49 = p3.chatWindowTransparencyBindable == p4.chatWindowTransparencyBindable
-										var49 = nil
+										var51 = p3.chatWindowTransparencyBindable == p4.chatWindowTransparencyBindable
+										var51 = nil
 									else
-										var49 = true
+										var51 = true
 									end
-									if var49 then
+									if var51 then
 										if fFlagEnableInExpChatSummaryOnLuaModule then
-											var49 = p3.message.chatActionType == p4.message.chatActionType
-											var49 = nil
+											var51 = p3.message.chatActionType == p4.message.chatActionType
+											var51 = nil
 										else
-											var49 = true
+											var51 = true
 										end
-										if var49 then
+										if var51 then
 											if fFlagExpChatPresetChatEnabled then
 												return p3.message.presetId == p4.message.presetId
 											end
-											var49 = true
+											var51 = true
 										end
 									end
 								end
@@ -808,5 +809,5 @@ end, function(p3, p4)
 			end
 		end
 	end
-	return var49
+	return var51
 end)

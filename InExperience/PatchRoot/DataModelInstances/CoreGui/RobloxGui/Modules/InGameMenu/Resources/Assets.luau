@@ -37,7 +37,7 @@ return {
 		CancelFriendRequest = imagesModule["InGameMenu/Icons/CancelFriendRequest"],
 		UnFriend = imagesModule["InGameMenu/Icons/UnFriend"],
 		Friends = imagesModule["InGameMenu/Icons/Friends"],
-		MoreActions = imagesModule["LuaApp/icons/GameDetails/more"],
+		MoreActions = if game:DefineFastFlag("FixInGameMenuMoreButtonIcon", false) then images["icons/common/more"] else imagesModule["LuaApp/icons/GameDetails/more"],
 		ViewAvatar = imagesModule["InGameMenu/Icons/ViewAvatar"],
 		RoundedRectImageKey = "component_assets/circle_17",
 		RoundedRect = {

@@ -27,7 +27,6 @@ local useAnimateScrollViewToSelectionModule = require(appBlox.useAnimateScrollVi
 local getTestId = require(parent.RoactUtils).getTestId
 local fFlagLuaAppFixDetailsPageThumbnailRenderInPhone = require(parent.SharedFlags).FFlagLuaAppFixDetailsPageThumbnailRenderInPhone
 local fFlagLuaAppFixSDPLayout = require(parent.SharedFlags).FFlagLuaAppFixSDPLayout
-local luaAppDisableStickyBarMediaGallery = game:DefineFastFlag("LuaAppDisableStickyBarMediaGallery", false)
 local fFlagLuaAppAddTestIdsForArrow = require(parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
 local detailsPageTemplate = roactModule.PureComponent:extend("DetailsPageTemplate")
@@ -136,7 +135,7 @@ function detailsPageTemplate.init(p1)
 end
 
 function detailsPageTemplate.render(p1)
-	-- upvalues: deviceType (ref), getPlatformConfigModule (ref), fFlagLuaAppFixSDPLayout (ref), withStyle (ref), getIconSize (ref), iconSize (ref), roactModule (ref), getIconSizeUDim2 (ref), reactModule (ref), fFlagLuaAppAddTestIdsForArrow (ref), getTestId (ref), iconButton (ref), images (ref), loadableImage (ref), luaAppDisableStickyBarMediaGallery (ref), stickyActionBarModule (ref), verticalScrollView (ref), detailsPageHeaderModule (ref), fFlagLuaAppFixDetailsPageThumbnailRenderInPhone (ref), detailsPageBodyModule (ref), actionBar (ref)
+	-- upvalues: deviceType (ref), getPlatformConfigModule (ref), fFlagLuaAppFixSDPLayout (ref), withStyle (ref), getIconSize (ref), iconSize (ref), roactModule (ref), getIconSizeUDim2 (ref), reactModule (ref), fFlagLuaAppAddTestIdsForArrow (ref), getTestId (ref), iconButton (ref), images (ref), loadableImage (ref), stickyActionBarModule (ref), verticalScrollView (ref), detailsPageHeaderModule (ref), fFlagLuaAppFixDetailsPageThumbnailRenderInPhone (ref), detailsPageBodyModule (ref), actionBar (ref)
 	local headerPadding
 	local var1 = p1.props.deviceType == deviceType.Phone
 	local var2 = getPlatformConfigModule(p1.props.deviceType)
@@ -158,7 +157,7 @@ function detailsPageTemplate.render(p1)
 		local var7 = if var1 or not p1.props.isFullscreen or not renderFullscreenContent then false else true
 		
 		return withStyle(function(p2)
-			-- upvalues: p1 (ref), var1 (ref), getIconSize (copy), iconSize (copy), var4 (ref), roactModule (copy), getIconSizeUDim2 (copy), reactModule (copy), fFlagLuaAppAddTestIdsForArrow (copy), getTestId (copy), iconButton (copy), var7 (ref), images (copy), loadableImage (copy), backgroundComponentPosition (ref), fFlagLuaAppFixSDPLayout (copy), containerSize (ref), luaAppDisableStickyBarMediaGallery (copy), stickyActionBarModule (copy), verticalScrollView (copy), headerPadding (ref), detailsPageHeaderModule (copy), var3 (ref), fFlagLuaAppFixDetailsPageThumbnailRenderInPhone (copy), var5 (ref), detailsPageBodyModule (copy), var6 (ref), renderFullscreenContent (ref), actionBar (copy)
+			-- upvalues: p1 (ref), var1 (ref), getIconSize (copy), iconSize (copy), var4 (ref), roactModule (copy), getIconSizeUDim2 (copy), reactModule (copy), fFlagLuaAppAddTestIdsForArrow (copy), getTestId (copy), iconButton (copy), var7 (ref), images (copy), loadableImage (copy), backgroundComponentPosition (ref), fFlagLuaAppFixSDPLayout (copy), containerSize (ref), stickyActionBarModule (copy), verticalScrollView (copy), headerPadding (ref), detailsPageHeaderModule (copy), var3 (ref), fFlagLuaAppFixDetailsPageThumbnailRenderInPhone (copy), var5 (ref), detailsPageBodyModule (copy), var6 (ref), renderFullscreenContent (ref), actionBar (copy)
 			local textButton
 			local theme = p2.Theme
 			local var8 = p1.props.bannerImageUrl == nil
@@ -225,8 +224,8 @@ function detailsPageTemplate.render(p1)
 				})
 			}
 			
-			if not p1.state.showStickyActionTopBar then
-				textButton = (if luaAppDisableStickyBarMediaGallery then var7 and not p1.props.disableStickyActionBar else var7) and (roactModule.createElement("TextButton", {
+			if p1.state.showStickyActionTopBar or var7 and not p1.props.disableStickyActionBar then
+				textButton = roactModule.createElement("TextButton", {
 					Text = "",
 					AutoButtonColor = false,
 					BorderSizePixel = 0,
@@ -242,7 +241,7 @@ function detailsPageTemplate.render(p1)
 							title = p1.props.titleText
 						}
 					})
-				}) or nil)
+				}) or nil
 			end
 			t_1.StickyActionBarFrame = textButton
 			t_1.ContentScrollingFrame = roactModule.createElement(verticalScrollView, {
@@ -289,7 +288,7 @@ function detailsPageTemplate.render(p1)
 							actionBarLabelText = p1.props.actionBarLabelText,
 							renderInfoContent = p1.props.renderInfoContent,
 							renderCustomHeader = p1.props.renderCustomHeader,
-							actionBarProps = if p1.state.showStickyActionTopBar or (if luaAppDisableStickyBarMediaGallery then not p1.props.disableStickyActionBar and var7 else var7) then nil else p1.props.actionBarProps,
+							actionBarProps = if p1.state.showStickyActionTopBar or not p1.props.disableStickyActionBar and var7 then nil else p1.props.actionBarProps,
 							actionBarWidth = p1.props.actionBarWidth,
 							actionBarHeight = p1.props.actionBarHeight,
 							headerBarBackgroundHeight = var4,

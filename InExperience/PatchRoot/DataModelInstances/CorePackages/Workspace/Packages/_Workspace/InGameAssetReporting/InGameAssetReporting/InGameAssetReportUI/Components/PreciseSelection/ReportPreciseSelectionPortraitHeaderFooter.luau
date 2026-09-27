@@ -5,6 +5,8 @@ local foundationModule = require(parent.Foundation)
 local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local headerBar = UIBloxModule.App.Bar.HeaderBar
 local iconButton = UIBloxModule.App.Button.IconButton
 local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
@@ -36,11 +38,11 @@ local function _(p1)
 end
 
 local _ = function(p1)
-	-- upvalues: withStyle (ref), reactModule (ref)
+	-- upvalues: withStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	return function()
-		-- upvalues: withStyle (copy), reactModule (copy), p1 (ref)
+		-- upvalues: withStyle (copy), reactModule (copy), p1 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		return withStyle(function(p2)
-			-- upvalues: reactModule (copy), p1 (copy)
+			-- upvalues: reactModule (copy), p1 (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 			local currentCamera = game.Workspace.CurrentCamera
 			local theme = p2.Theme
 			
@@ -49,7 +51,8 @@ local _ = function(p1)
 				TextWrapped = true,
 				BackgroundTransparency = 1,
 				Text = p1,
-				Font = p2.Font.Header2.Font,
+				Font = if foundationFontFaceMigration then nil else p2.Font.Header2.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Center,
@@ -80,7 +83,7 @@ end
 
 return {
 	PortraitModeHeader = function(p1)
-		-- upvalues: reactModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), withStyle (ref)
+		-- upvalues: reactModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), withStyle (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 		local createElement = reactModule.createElement
 		local var1 = "Frame"
 		local t = {
@@ -140,9 +143,9 @@ return {
 		local titleText = p1.titleText
 		
 		function t_2.renderCenter()
-			-- upvalues: withStyle (copy), reactModule (copy), titleText (ref)
+			-- upvalues: withStyle (copy), reactModule (copy), titleText (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 			return withStyle(function(p2)
-				-- upvalues: reactModule (copy), titleText (copy)
+				-- upvalues: reactModule (copy), titleText (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 				local currentCamera = game.Workspace.CurrentCamera
 				local theme = p2.Theme
 				
@@ -151,7 +154,8 @@ return {
 					TextWrapped = true,
 					BackgroundTransparency = 1,
 					Text = titleText,
-					Font = p2.Font.Header2.Font,
+					Font = if foundationFontFaceMigration then nil else p2.Font.Header2.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
 					TextColor3 = theme.TextEmphasis.Color,
 					TextTransparency = theme.TextEmphasis.Transparency,
 					TextXAlignment = Enum.TextXAlignment.Center,

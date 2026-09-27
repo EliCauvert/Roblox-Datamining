@@ -7,12 +7,11 @@ local tutilsModule = require(parent.tutils)
 local apiFetchGameIcons = require(parent.GameIconRodux).GameIcons.ApiFetchGameIcons
 local dataHydrationModule = require(parent.DataHydration)
 local _ = require(parent.DiscoveryTypes)
-local fFlagLuaAppReduceGameIconFetches = require(parent.SharedFlags).FFlagLuaAppReduceGameIconFetches
 local fFlagMigrateGameIconsToStore = require(parent.SharedFlags).FFlagMigrateGameIconsToStore
 local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
 
 return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: gameInfosReducerModule (ref), fFlagMigrateGameInfoToStore (ref), tutilsModule (ref), fFlagLuaAppReduceGameIconFetches (ref), addGamesModule (ref), syncGameInfosToStoreModule (ref), fFlagMigrateGameIconsToStore (ref), dataHydrationModule (ref), apiFetchGameIcons (ref)
+	-- upvalues: gameInfosReducerModule (ref), fFlagMigrateGameInfoToStore (ref), tutilsModule (ref), addGamesModule (ref), syncGameInfosToStoreModule (ref), fFlagMigrateGameIconsToStore (ref), dataHydrationModule (ref), apiFetchGameIcons (ref)
 	local key = p2:getState().Personalization[gameInfosReducerModule.key]
 	local t = {}
 	local t_1 = {}
@@ -20,7 +19,7 @@ return function(p1, p2, p3, p4, p5, p6)
 	
 	for i, v in p3 do
 		p4(v):match(function(p7)
-			-- upvalues: fFlagMigrateGameInfoToStore (copy), var1 (ref), tutilsModule (copy), key (ref), t (ref), fFlagLuaAppReduceGameIconFetches (copy), p6 (ref), t_1 (ref), p5 (ref), v (ref)
+			-- upvalues: fFlagMigrateGameInfoToStore (copy), var1 (ref), tutilsModule (copy), key (ref), t (ref), p6 (ref), t_1 (ref), p5 (ref), v (ref)
 			local universeId = p7.universeId
 			
 			if fFlagMigrateGameInfoToStore then
@@ -29,7 +28,7 @@ return function(p1, p2, p3, p4, p5, p6)
 			if not tutilsModule.shallowEqual(p7, key[universeId]) then
 				t[universeId] = p7
 				
-				if not fFlagLuaAppReduceGameIconFetches or not p6 or p6(universeId) then
+				if not p6 or p6(universeId) then
 					table.insert(t_1, universeId)
 				end
 			end

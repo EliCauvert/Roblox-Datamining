@@ -12,6 +12,7 @@ return function(p1)
 		onActivated = useFlyoutItemNavigationModule(p1.item, p1.closeDrawer, p1.buildCreatorWebNavUrl),
 		icon = p1.item.icon,
 		text = useLocalization({ text = p1.item.textKey }).text,
-		notificationCount = p1.item.notificationCount
+		notificationCount = p1.item.notificationCount,
+		testId = p1.item.itemType
 	})
 end

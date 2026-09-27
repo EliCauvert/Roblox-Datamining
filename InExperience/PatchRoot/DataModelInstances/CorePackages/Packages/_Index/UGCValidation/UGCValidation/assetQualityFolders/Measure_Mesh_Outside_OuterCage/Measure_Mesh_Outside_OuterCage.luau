@@ -24,7 +24,6 @@ return {
 		end
 		if getFFlagUGCValidateAQScoreWarningsModule() and handle.score ~= nil and tonumber(handle.score) ~= 100 then
 			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MeshOutsideOuterCage, {
-				score = tostring(math.floor(tonumber(handle.score) or 0)),
 				mesh_outside_outer_cage_percent = string.format("%.2f", (tonumber(handle.mesh_outside_outer_cage_percent) or 0) * 100)
 			})
 		end

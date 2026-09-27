@@ -41,6 +41,7 @@ local profileShareLinksModule = require(parent.ProfileShareLinks)
 local contexts = require(parent.SocialLuaAnalytics).Analytics.Enums.Contexts
 local sources = require(parent.SocialLuaAnalytics).Analytics.Enums.Sources
 local textKeysModule = require(profilePlatform.Common.TextKeys)
+local makeViewGroupPageModule = require(profilePlatform.Utils.makeViewGroupPage)
 local getAvailableCommunityComponentsModule = require(profilePlatform.Hooks.getAvailableCommunityComponents)
 local getProfilePlatformModule = require(profilePlatform.Networking.getProfilePlatform)
 local refreshProfilePlatformModule = require(profilePlatform.Networking.refreshProfilePlatform)
@@ -69,7 +70,6 @@ local fFlagEnablePlatformProfileContextualMenuOption = require(parent.SharedFlag
 local fFlagProfilePlatformNewProfileHeader = sharedFlagsModule.FFlagProfilePlatformNewProfileHeader
 local fFlagProfileAboutDetailsUseSheet = sharedFlagsModule.FFlagProfileAboutDetailsUseSheet
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
-local fFlagPendingIncomingTrustedConnectionModule = require(profilePlatform.Flags.FFlagPendingIncomingTrustedConnection)
 local fFlagProfilePlatformPassPresenceToJoinUserInExperience = sharedFlagsModule.FFlagProfilePlatformPassPresenceToJoinUserInExperience
 local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
 local var2 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
@@ -113,7 +113,7 @@ local var5 = dataHydrationModule.TrustedConnections.TrustedConnectionsStore.get(
 local t = { skipFetch = true }
 
 return function(p1)
-	-- upvalues: useLocalUserId (ref), useDispatch (ref), useNavigation (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useShortUrl (ref), useGetOrGenerateLinkUrl (ref), useEffectOnce (ref), reactModule (ref), var4 (ref), fFlagConnectionsToFriendsRename (ref), textKeysModule (ref), useLocalization (ref), enumsModule (ref), fFlagProfilePlatformAddTC (ref), fFlagProfilePlatformEnableUnlockChatModule (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), fFlagProfilePlatformEditBackgroundMenuItemModule (ref), fFlagProfilePlatformEnableEditLookModule (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagEnablePlatformProfileContextualMenuOption (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), fFlagProfilePlatformEnableTradeItemsModule (ref), fFlagProfilePlatformEnableUserFollowModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), var2 (ref), t (ref), fFlagProfilePlatformPassPresenceToJoinUserInExperience (ref), useSelector (ref), presenceModule (ref), useAboutSectionsModule (ref), fFlagProfileAboutDetailsUseSheet (ref), fFlagProfilePlatformRefreshActionsRespectPoliciesModule (ref), useActionsComponentRequestModule (ref), useJoinUserInExperience (ref), fFlagProfilePlatformEditBackgroundMenuItemModule_1 (ref), iconName (ref), eventNamesModule (ref), useProfileShareLink (ref), contexts (ref), profileSharePolicyEnum (ref), USER_FRIENDING_ERRORS (ref), STATUS_CODES (ref), httpService (ref), setCurrentToastMessage (ref), fFlagProfilePlatformCTAsRefactorModule (ref), profileActionsModule (ref), buttonVariant (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var3 (ref), networkingFriendsModule (ref), images (ref), refreshProfilePlatformActionInfoModule (ref), buttonType (ref), contextualInfoTypes (ref), refreshProfilePlatformModule (ref), appPage (ref), enteredChatFromEntryPointModule (ref), chatEntryPointNames (ref), guiService (ref), notificationTypeList (ref), socialStopwatchModule (ref), setAliasModule (ref), foundationModule (ref), fFlagAXEnableProfileTab (ref), refreshProfilePlatformUserInfoModule (ref), fFlagMoveInExperienceModeToEditProfile (ref), default (ref), fFlagEnableAbuseReportRevampFlow (ref), fFlagEnableAbuseReportRevampProfileAndGroupModule (ref), abuseVectorModule (ref), openDynamicAbuseReportModule (ref), closeCentralOverlay (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), myUserBlockingNetworkingModule (ref), USER_BLOCKING_ERRORS (ref), base_url (ref), groupsNetworkingModule (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref), urlBuilder (ref), urlBase (ref), var5 (ref), sources (ref), fFlagFixTFLinksVRGatingModule (ref), fFlagPendingIncomingTrustedConnectionModule (ref), getPlatformFriendsServiceModule (ref), transferDirection (ref), transferOrigination (ref)
+	-- upvalues: useLocalUserId (ref), useDispatch (ref), useNavigation (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useShortUrl (ref), useGetOrGenerateLinkUrl (ref), useEffectOnce (ref), reactModule (ref), var4 (ref), fFlagConnectionsToFriendsRename (ref), textKeysModule (ref), useLocalization (ref), enumsModule (ref), fFlagProfilePlatformAddTC (ref), fFlagProfilePlatformEnableUnlockChatModule (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), fFlagProfilePlatformEditBackgroundMenuItemModule (ref), fFlagProfilePlatformEnableEditLookModule (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagEnablePlatformProfileContextualMenuOption (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), fFlagProfilePlatformEnableTradeItemsModule (ref), fFlagProfilePlatformEnableUserFollowModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), var2 (ref), t (ref), fFlagProfilePlatformPassPresenceToJoinUserInExperience (ref), useSelector (ref), presenceModule (ref), useAboutSectionsModule (ref), fFlagProfileAboutDetailsUseSheet (ref), fFlagProfilePlatformRefreshActionsRespectPoliciesModule (ref), useActionsComponentRequestModule (ref), useJoinUserInExperience (ref), fFlagProfilePlatformEditBackgroundMenuItemModule_1 (ref), iconName (ref), eventNamesModule (ref), useProfileShareLink (ref), contexts (ref), profileSharePolicyEnum (ref), USER_FRIENDING_ERRORS (ref), STATUS_CODES (ref), httpService (ref), setCurrentToastMessage (ref), fFlagProfilePlatformCTAsRefactorModule (ref), profileActionsModule (ref), buttonVariant (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var3 (ref), networkingFriendsModule (ref), images (ref), refreshProfilePlatformActionInfoModule (ref), buttonType (ref), contextualInfoTypes (ref), refreshProfilePlatformModule (ref), appPage (ref), enteredChatFromEntryPointModule (ref), chatEntryPointNames (ref), guiService (ref), notificationTypeList (ref), socialStopwatchModule (ref), setAliasModule (ref), foundationModule (ref), fFlagAXEnableProfileTab (ref), refreshProfilePlatformUserInfoModule (ref), fFlagMoveInExperienceModeToEditProfile (ref), default (ref), fFlagEnableAbuseReportRevampFlow (ref), fFlagEnableAbuseReportRevampProfileAndGroupModule (ref), abuseVectorModule (ref), openDynamicAbuseReportModule (ref), closeCentralOverlay (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), myUserBlockingNetworkingModule (ref), USER_BLOCKING_ERRORS (ref), base_url (ref), groupsNetworkingModule (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref), makeViewGroupPageModule (ref), urlBuilder (ref), urlBase (ref), var5 (ref), sources (ref), fFlagFixTFLinksVRGatingModule (ref), getPlatformFriendsServiceModule (ref), transferDirection (ref), transferOrigination (ref)
 	local var6 = useLocalUserId()
 	local var7 = useDispatch()
 	local var8 = useNavigation()
@@ -321,7 +321,7 @@ return function(p1)
 	} else nil
 	
 	return reactModule.useMemo(function()
-		-- upvalues: fFlagProfilePlatformCTAsRefactorModule (copy), profileActionsModule (copy), var31 (ref), enumsModule (copy), var16 (ref), buttonVariant (copy), var11 (ref), eventNamesModule (copy), p1 (ref), var9 (ref), fFlagMigrateFriendshipStatusesRemainingActions (copy), var3 (copy), profileId (ref), var7 (ref), networkingFriendsModule (copy), var6 (ref), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), var22 (ref), setErrorToast (ref), buttonType (copy), contextualInfoTypes (copy), refreshProfilePlatformModule (copy), profileType (ref), var8 (ref), appPage (copy), enteredChatFromEntryPointModule (copy), chatEntryPointNames (copy), guiService (copy), notificationTypeList (copy), socialStopwatchModule (copy), setAliasModule (copy), fFlagProfilePlatformEnableEditAppearanceMenuModule (copy), iconName (copy), editAvatar (ref), fFlagProfilePlatformEnableEditLookModule (copy), var24 (ref), var25 (ref), getEditBackgroundAction (ref), foundationModule (copy), fFlagAXEnableProfileTab (copy), editUsername (ref), refreshProfilePlatformUserInfoModule (copy), fFlagMoveInExperienceModeToEditProfile (copy), var23 (ref), qRCodePage (ref), var27 (ref), default (copy), contexts (copy), var13 (ref), textKeysModule (copy), var26 (ref), fFlagEnableAbuseReportRevampFlow (copy), fFlagEnableAbuseReportRevampProfileAndGroupModule (copy), abuseVectorModule (copy), openDynamicAbuseReportModule (copy), closeCentralOverlay (copy), url (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy), myUserBlockingNetworkingModule (copy), USER_BLOCKING_ERRORS (copy), base_url (copy), groupsNetworkingModule (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy), urlBuilder (copy), urlBase (copy), var5 (copy), fFlagProfilePlatformAddTC (copy), sources (copy), fFlagFixTFLinksVRGatingModule (copy), fFlagPendingIncomingTrustedConnectionModule (copy), fFlagProfilePlatformNewProfileHeader (copy), aboutSections (write), fFlagProfileAboutDetailsUseSheet (copy), var20 (write), fFlagEnablePlatformProfileContextualMenuOption (copy), getPlatformFriendsServiceModule (copy), var18 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), var10 (ref), transferDirection (copy), transferOrigination (copy), fFlagProfilePlatformEnableTradeItemsModule (copy)
+		-- upvalues: fFlagProfilePlatformCTAsRefactorModule (copy), profileActionsModule (copy), var31 (ref), enumsModule (copy), var16 (ref), buttonVariant (copy), var11 (ref), eventNamesModule (copy), p1 (ref), var9 (ref), fFlagMigrateFriendshipStatusesRemainingActions (copy), var3 (copy), profileId (ref), var7 (ref), networkingFriendsModule (copy), var6 (ref), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), var22 (ref), setErrorToast (ref), buttonType (copy), contextualInfoTypes (copy), refreshProfilePlatformModule (copy), profileType (ref), var8 (ref), appPage (copy), enteredChatFromEntryPointModule (copy), chatEntryPointNames (copy), guiService (copy), notificationTypeList (copy), socialStopwatchModule (copy), setAliasModule (copy), fFlagProfilePlatformEnableEditAppearanceMenuModule (copy), iconName (copy), editAvatar (ref), fFlagProfilePlatformEnableEditLookModule (copy), var24 (ref), var25 (ref), getEditBackgroundAction (ref), foundationModule (copy), fFlagAXEnableProfileTab (copy), editUsername (ref), refreshProfilePlatformUserInfoModule (copy), fFlagMoveInExperienceModeToEditProfile (copy), var23 (ref), qRCodePage (ref), var27 (ref), default (copy), contexts (copy), var13 (ref), textKeysModule (copy), var26 (ref), fFlagEnableAbuseReportRevampFlow (copy), fFlagEnableAbuseReportRevampProfileAndGroupModule (copy), abuseVectorModule (copy), openDynamicAbuseReportModule (copy), closeCentralOverlay (copy), url (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy), myUserBlockingNetworkingModule (copy), USER_BLOCKING_ERRORS (copy), base_url (copy), groupsNetworkingModule (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy), makeViewGroupPageModule (copy), urlBuilder (copy), urlBase (copy), var5 (copy), fFlagProfilePlatformAddTC (copy), sources (copy), fFlagFixTFLinksVRGatingModule (copy), fFlagProfilePlatformNewProfileHeader (copy), aboutSections (write), fFlagProfileAboutDetailsUseSheet (copy), var20 (write), fFlagEnablePlatformProfileContextualMenuOption (copy), getPlatformFriendsServiceModule (copy), var18 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), var10 (ref), transferDirection (copy), transferOrigination (copy), fFlagProfilePlatformEnableTradeItemsModule (copy)
 		if not fFlagProfilePlatformCTAsRefactorModule then
 			return {
 				[enumsModule.ProfileActions.AcceptFriendRequest] = {
@@ -809,31 +809,24 @@ return function(p1)
 					variant = buttonVariant.SubEmphasis,
 					text = var16[enumsModule.ProfileActions.ViewCommunity],
 					onActivated = function()
-						-- upvalues: var11 (copy), eventNamesModule (copy), p1 (copy), var9 (copy), appPage (copy), urlBuilder (copy), profileId (copy), textKeysModule (copy), var7 (copy), getProfilePlatformModule (copy), profileType (copy), getAvailableCommunityComponentsModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
+						-- upvalues: var11 (copy), eventNamesModule (copy), p1 (copy), var9 (copy), makeViewGroupPageModule (copy), profileId (copy), var7 (copy), getProfilePlatformModule (copy), profileType (copy), getAvailableCommunityComponentsModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
 						var11.fireAnalyticsEvent(eventNamesModule.CTAButtonViewCommunity, { buttonSurface = p1, btnContext = var9.sourceInfo.source })
-						local t = {
-							name = appPage.GenericWebPage,
-							detail = urlBuilder.user.group({ groupId = profileId }),
-							extraProps = {
-								titleKey = textKeysModule.Community,
-								onClose = function()
-									-- upvalues: var7 (copy), getProfilePlatformModule (copy), profileType (copy), profileId (copy), getAvailableCommunityComponentsModule (copy)
-									var7(getProfilePlatformModule.API({
-										includeComponentOrdering = true,
-										profileType = profileType,
-										profileId = profileId,
-										components = getAvailableCommunityComponentsModule()
-									}))
-								end
-							}
-						}
+						local var32 = makeViewGroupPageModule(profileId, function()
+							-- upvalues: var7 (copy), getProfilePlatformModule (copy), profileType (copy), profileId (copy), getAvailableCommunityComponentsModule (copy)
+							var7(getProfilePlatformModule.API({
+								includeComponentOrdering = true,
+								profileType = profileType,
+								profileId = profileId,
+								components = getAvailableCommunityComponentsModule()
+							}))
+						end)
 						
 						if fFlagSignalsNavP3Dispatch then
-							var1.down(var1.fromLegacyPage(t))
+							var1.down(var1.fromLegacyPage(var32))
 							
 							return
 						end
-						var7(navigateDown(t))
+						var7(navigateDown(var32))
 					end
 				},
 				[enumsModule.ProfileActions.ViewFullProfile] = {
@@ -1050,11 +1043,11 @@ return function(p1)
 					text = var16[enumsModule.ProfileActions.AddTrustedConnection],
 					onActivated = function() end
 				} else nil,
-				[enumsModule.ProfileActions.PendingIncomingTrustedConnection] = if fFlagPendingIncomingTrustedConnectionModule then {
+				[enumsModule.ProfileActions.PendingIncomingTrustedConnection] = {
 					isDisabled = true,
 					text = var16[enumsModule.ProfileActions.AddIncomingTrustedConnection],
 					onActivated = function() end
-				} else nil,
+				},
 				[enumsModule.ProfileActions.ViewAbout] = if fFlagProfilePlatformNewProfileHeader then {
 					text = var16[enumsModule.ProfileActions.ViewAbout],
 					onActivated = function()

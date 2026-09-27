@@ -1,10 +1,13 @@
 ﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
+local foundationModule = require(parent.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local fFlagLuaAppAlignHeroUnitBottomRowCtaButton = require(parent.SharedFlags).FFlagLuaAppAlignHeroUnitBottomRowCtaButton
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), fFlagLuaAppAlignHeroUnitBottomRowCtaButton (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), fFlagLuaAppAlignHeroUnitBottomRowCtaButton (ref)
 	local layoutOrder = p1.layoutOrder
 	local zIndex = p1.zIndex
 	local position = p1.position
@@ -42,7 +45,7 @@ return reactModule.memo(function(p1)
 		}, {
 			UIFlexItem = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
 			Label = reactModule.useMemo(function()
-				-- upvalues: p1 (ref), reactModule (copy), bodySmall (ref), color3 (ref)
+				-- upvalues: p1 (ref), reactModule (copy), bodySmall (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), color3 (ref)
 				return if p1.rightLabelContent then reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
@@ -55,7 +58,8 @@ return reactModule.memo(function(p1)
 					Size = UDim2.new(0, 0, 0, bodySmall.FontSize * bodySmall.LineHeight),
 					Text = p1.labelText,
 					TextSize = bodySmall.FontSize,
-					Font = bodySmall.Font,
+					Font = if foundationFontFaceMigration then nil else bodySmall.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(bodySmall.Font) else nil,
 					TextColor3 = color3,
 					TextXAlignment = Enum.TextXAlignment.Right,
 					TextTruncate = Enum.TextTruncate.SplitWord,

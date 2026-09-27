@@ -24,6 +24,8 @@ local mainViewScriptProfilerModule = require(components.ScriptProfiler.MainViewS
 local mainViewDebugVisualizationsModule = require(components.DebugVisualizations.MainViewDebugVisualizations)
 local mainViewLuauHeapModule = require(components.LuauHeap.MainViewLuauHeap)
 local mainViewVoiceChatModule = require(components.VoiceChat.MainViewVoiceChat)
+local mainViewVoiceDebugModule = require(components.VoiceDebug.MainViewVoiceDebug)
+local getFFlagVoiceDebugConsoleV2Module = require(components.VoiceDebug.GetFFlagVoiceDebugConsoleV2)
 local mainViewRequestOrchestratorModule = require(components.RequestOrchestrator.MainViewRequestOrchestrator)
 local RCCProfilerDataCompleteListenerModule = require(components.MicroProfiler.RCCProfilerDataCompleteListener)
 local getClientReplicatorModule = require(devConsole.Util.getClientReplicator)
@@ -37,8 +39,11 @@ local playerPermissionsModule = require(coreGuiService.RobloxGui.Modules.PlayerP
 local scriptProfilerEngineFeature = game:GetEngineFeature("ScriptProfiler")
 local devConsoleRequestOrchestratorTab2 = game:DefineFastFlag("DevConsoleRequestOrchestratorTab2", false)
 local devConsoleAdminSeesDevTabs = game:DefineFastFlag("DevConsoleAdminSeesDevTabs", false)
+local devConsoleRefreshVoiceAvailabilityOnReopen = game:DefineFastFlag("DevConsoleRefreshVoiceAvailabilityOnReopen", false)
 local default = require(coreGuiService.RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
+local var1 = false
 local t = {
+	VoiceDebug = nil,
 	Log = {
 		layoutOrder = 1,
 		hasClientServer = true,
@@ -72,7 +77,7 @@ local t_1 = {
 	Memory = { layoutOrder = 2, tab = mainViewMemoryModule },
 	ScriptProfiler = if scriptProfilerEngineFeature then { layoutOrder = 3, tab = mainViewScriptProfilerModule } else nil,
 	LuauHeap = { layoutOrder = 4, tab = mainViewLuauHeapModule },
-	VoiceChat = if game:GetEngineFeature("VoiceChatDevConsoleTabEnabled") and default and default:canUseService() then { layoutOrder = 5, tab = mainViewVoiceChatModule } else nil
+	VoiceChat = if getFFlagVoiceDebugConsoleV2Module() or not game:GetEngineFeature("VoiceChatDevConsoleTabEnabled") or (not default or not default:canUseService()) then nil else { layoutOrder = 5, tab = mainViewVoiceChatModule }
 }
 local t_2 = {
 	Log = { layoutOrder = 1, tab = mainViewLogModule },
@@ -83,8 +88,8 @@ local t_3 = {
 		layoutOrder = 13,
 		tab = mainViewVoiceChatModule,
 		isEnabled = function()
-			-- upvalues: default (ref)
-			return game:GetEngineFeature("VoiceChatDevConsoleTabEnabled") and (default ~= nil and default:canUseService())
+			-- upvalues: getFFlagVoiceDebugConsoleV2Module (ref), default (ref)
+			return not getFFlagVoiceDebugConsoleV2Module() and (game:GetEngineFeature("VoiceChatDevConsoleTabEnabled") and (default ~= nil and default:canUseService()))
 		end
 	},
 	RequestOrchestrator = {
@@ -157,7 +162,7 @@ end
 
 function t_4:SetupDevConsole()
 	-- upvalues: userInputService (ref), t_5 (ref), mainViewModule (ref), setTabListModule (ref), t_2 (ref), devConsoleAnalyticsModule (ref), roduxModule (ref), devConsoleReducerModule (ref), roactModule (ref), roactRoduxModule (ref), dataProviderModule (ref), devConsoleWindowModule (ref), constantsModule (ref), RCCProfilerDataCompleteListenerModule (ref)
-	local var1 = t_5[userInputService:GetPlatform()]
+	local var2 = t_5[userInputService:GetPlatform()]
 	self.store = roduxModule.Store.new(devConsoleReducerModule, {
 		MainView = mainViewModule(nil, setTabListModule(t_2, "Log"))
 	}, { devConsoleAnalyticsModule })
@@ -167,7 +172,7 @@ function t_4:SetupDevConsole()
 				DevConsoleWindow = roactModule.createElement(devConsoleWindowModule, {
 					isDeveloperView = false,
 					isMinimized = false,
-					formFactor = var1,
+					formFactor = var2,
 					isVisible = self.store:getState().DisplayOptions.isVisible,
 					position = constantsModule.MainWindowInit.Position,
 					size = constantsModule.MainWindowInit.Size,
@@ -185,7 +190,7 @@ function t_4:SetupDevConsole()
 	self.waitForStartBindable:Fire()
 end
 
-local var1 = t_4.new()
+local var2 = t_4.new()
 
 function t_4:refreshTabList()
 	-- upvalues: setTabListModule (ref), getAdminTabList (ref), t (ref)
@@ -198,6 +203,28 @@ function t_4:refreshTabList()
 	end
 end
 
+function t_4.refreshVoiceDevConsoleAvailability(p1)
+	-- upvalues: getFFlagVoiceDebugConsoleV2Module (ref), default (ref), var1 (write), t (ref), mainViewVoiceDebugModule (ref)
+	if not getFFlagVoiceDebugConsoleV2Module() then return end
+	if game:GetEngineFeature("VoiceChatDevConsoleTabEnabled") and default then
+		local function apply()
+			-- upvalues: default (copy), var1 (copy), t (copy), mainViewVoiceDebugModule (copy), p1 (ref)
+			local var3 = default:VoiceChatAvailable()
+			
+			if var3 == var1 then
+				return
+			end
+			var1 = var3
+			t.VoiceDebug = if var1 then { layoutOrder = 13, tab = mainViewVoiceDebugModule } else nil
+			p1:refreshTabList()
+		end
+		
+		default:asyncInit():andThen(apply):catch(apply)
+		
+		return
+	end
+end
+
 function t_4:Start()
 	-- upvalues: roactModule (ref), coreGuiService (ref), getClientReplicatorModule (ref), devConsoleAdminSeesDevTabs (ref), playerPermissionsModule (ref), playersService (ref), setTabListModule (ref), t_1 (ref), t (ref)
 	if not self.init then
@@ -206,7 +233,7 @@ function t_4:Start()
 		end
 		self.init = true
 		self.element = roactModule.mount(self.root, coreGuiService, "DevConsoleMaster")
-		local var2 = getClientReplicatorModule()
+		local var3 = getClientReplicatorModule()
 		task.spawn(function()
 			-- upvalues: devConsoleAdminSeesDevTabs (copy), playerPermissionsModule (copy), playersService (copy), self (ref), setTabListModule (copy), t_1 (copy)
 			if devConsoleAdminSeesDevTabs then
@@ -220,9 +247,13 @@ function t_4:Start()
 				self.store:dispatch(setTabListModule(t_1, "Log", false))
 			end
 		end)
+		task.spawn(function()
+			-- upvalues: self (ref)
+			self:refreshVoiceDevConsoleAvailability()
+		end)
 		
-		if var2 then
-			self._statsConnector = var2.StatsReceived:connect(function(_)
+		if var3 then
+			self._statsConnector = var3.StatsReceived:connect(function(_)
 				-- upvalues: self (ref), devConsoleAdminSeesDevTabs (copy), setTabListModule (copy), t (copy)
 				if not self._statsConnector then return end
 				self._statsConnector:Disconnect()
@@ -242,9 +273,9 @@ function t_4:Start()
 end
 
 function t_4:ToggleVisibility()
-	-- upvalues: var1 (ref)
+	-- upvalues: var2 (ref)
 	if not self.init then
-		var1:Start()
+		var2:Start()
 	end
 	self:SetVisibility(not self.store:getState().DisplayOptions.isVisible)
 end
@@ -260,18 +291,20 @@ end
 
 function t_4.SetServerStatsConnection(_, p1)
 	-- upvalues: getClientReplicatorModule (ref)
-	local var2 = getClientReplicatorModule()
+	local var3 = getClientReplicatorModule()
 	
-	if var2 then
-		var2:RequestServerStats(p1)
+	if var3 then
+		var3:RequestServerStats(p1)
 	end
 end
 
 function t_4:SetVisibility(p1)
-	-- upvalues: var1 (ref), setDevConsoleVisibilityModule (ref)
+	-- upvalues: var2 (ref), devConsoleRefreshVoiceAvailabilityOnReopen (ref), setDevConsoleVisibilityModule (ref)
 	if type(p1) == "boolean" then
 		if not self.init and p1 then
-			var1:Start()
+			var2:Start()
+		elseif devConsoleRefreshVoiceAvailabilityOnReopen and p1 then
+			self:refreshVoiceDevConsoleAvailability()
 		end
 		self:SetServerStatsConnection(p1)
 		self.store:dispatch(setDevConsoleVisibilityModule(p1))
@@ -279,15 +312,15 @@ function t_4:SetVisibility(p1)
 end
 
 starterGuiService:RegisterGetCore("DevConsoleVisible", function()
-	-- upvalues: var1 (ref)
-	return var1:GetVisibility()
+	-- upvalues: var2 (ref)
+	return var2:GetVisibility()
 end)
 starterGuiService:RegisterSetCore("DevConsoleVisible", function(p1)
-	-- upvalues: var1 (ref)
+	-- upvalues: var2 (ref)
 	if type(p1) ~= "boolean" then
 		error("DevConsoleVisible must be given a boolean value.")
 	end
-	var1:SetVisibility(p1)
+	var2:SetVisibility(p1)
 end)
 
-return var1
+return var2

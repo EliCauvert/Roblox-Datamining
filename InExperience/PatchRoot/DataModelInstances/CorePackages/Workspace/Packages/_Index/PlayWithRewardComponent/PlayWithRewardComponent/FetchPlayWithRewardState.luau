@@ -9,22 +9,12 @@ local mutedError = require(parent.Loggers).mutedError
 local tModule = require(parent.t)
 local IXPServiceWrapper = require(parent.IXPServiceWrapper).IXPServiceWrapper
 local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
-local fFlagLuaAppRemovePlayWithRewardBetaAllowlist = require(parent.SharedFlags).FFlagLuaAppRemovePlayWithRewardBetaAllowlist
 local playWithRewardStateModule = require(parent.PlayWithRewardState)
 local playWithRewardAdData = playWithRewardStateModule.PlayWithRewardAdData
 local setPlayWithRewardState = playWithRewardStateModule.SetPlayWithRewardState
-local luaAppPlayWithRewardBetaUniverses = game:DefineFastString("LuaAppPlayWithRewardBetaUniverses", "")
 local luaAppPlayWithRewardBetaIxpVariantKey = game:DefineFastString("LuaAppPlayWithRewardBetaIxpVariantKey", "Variant")
 local luaAppPlayWithRewardBetaIxpTreatmentValue = game:DefineFastString("LuaAppPlayWithRewardBetaIxpTreatmentValue", "Treatment")
 local luaAppPlayWithRewardSkipIxpForShimmer = game:DefineFastFlag("LuaAppPlayWithRewardSkipIxpForShimmer", false)
-local luaAppPlayWithRewardUsePlatformSpecificLayerValueForShimmer = game:DefineFastFlag("LuaAppPlayWithRewardUsePlatformSpecificLayerValueForShimmer", false)
-
-local function isUniverseIdInPlayWithRewardBetaAllowList(x, y)
-	local var1 = x:gsub("^%s+", ""):gsub("%s+$", "")
-	
-	return if var1 == "" or y == "" or y:find(",", 1, true) ~= nil then false else ("," .. var17 .. ","):find("," .. y .. ",", 1, true) ~= nil
-end
-
 local var1 = tModule.interface({
 	AdAvailabilityResult = tModule.userdata,
 	ProductId = tModule.optional(tModule.string),
@@ -81,7 +71,7 @@ local function fetchPlayWithRewardStateAsync(p1, p2, _, p3)
 end
 
 local function shouldShowShimmer(p4, p5)
-	-- upvalues: logger (ref), var2 (ref), luaAppPlayWithRewardSkipIxpForShimmer (ref), luaAppPlayWithRewardUsePlatformSpecificLayerValueForShimmer (ref), userInputService (ref), IXPServiceWrapper (ref), appUserLayers (ref), luaAppPlayWithRewardBetaIxpVariantKey (ref), luaAppPlayWithRewardBetaIxpTreatmentValue (ref)
+	-- upvalues: logger (ref), var2 (ref), luaAppPlayWithRewardSkipIxpForShimmer (ref), userInputService (ref), IXPServiceWrapper (ref), appUserLayers (ref), luaAppPlayWithRewardBetaIxpVariantKey (ref), luaAppPlayWithRewardBetaIxpTreatmentValue (ref)
 	if not p4 then
 		logger:warning(`AdService is not available. Cannot determine whether to show shimmer for universe ID {p5}.`)
 		
@@ -102,7 +92,7 @@ local function shouldShowShimmer(p4, p5)
 			return true
 		end
 		local var7
-		local var8 = if luaAppPlayWithRewardUsePlatformSpecificLayerValueForShimmer and userInputService:GetPlatform() == Enum.Platform.Android then IXPServiceWrapper:GetLayerData(appUserLayers.AdsPlayWithRewardBetaAndroidLayer) else IXPServiceWrapper:GetLayerData(appUserLayers.AdsPlayWithRewardBetaLayer)
+		local var8 = if userInputService:GetPlatform() == Enum.Platform.Android then IXPServiceWrapper:GetLayerData(appUserLayers.AdsPlayWithRewardBetaAndroidLayer) else IXPServiceWrapper:GetLayerData(appUserLayers.AdsPlayWithRewardBetaLayer)
 		
 		if var8 and var8[luaAppPlayWithRewardBetaIxpVariantKey] then
 			var7 = var8[luaAppPlayWithRewardBetaIxpVariantKey] == luaAppPlayWithRewardBetaIxpTreatmentValue
@@ -115,12 +105,9 @@ local function shouldShowShimmer(p4, p5)
 end
 
 return function(p6, p7, p8)
-	-- upvalues: fFlagLuaAppRemovePlayWithRewardBetaAllowlist (ref), isUniverseIdInPlayWithRewardBetaAllowList (ref), luaAppPlayWithRewardBetaUniverses (ref), promiseModule (ref), httpService (ref), shouldShowShimmer (ref), playWithRewardTelemetryModule (ref), setPlayWithRewardState (ref), fetchPlayWithRewardStateAsync (ref), logger (ref)
+	-- upvalues: httpService (ref), shouldShowShimmer (ref), playWithRewardTelemetryModule (ref), setPlayWithRewardState (ref), promiseModule (ref), fetchPlayWithRewardStateAsync (ref), logger (ref)
 	return function(p9)
-		-- upvalues: fFlagLuaAppRemovePlayWithRewardBetaAllowlist (copy), isUniverseIdInPlayWithRewardBetaAllowList (copy), luaAppPlayWithRewardBetaUniverses (copy), p7 (ref), promiseModule (copy), httpService (copy), shouldShowShimmer (copy), p6 (ref), playWithRewardTelemetryModule (copy), setPlayWithRewardState (copy), fetchPlayWithRewardStateAsync (copy), p8 (ref), logger (copy)
-		if not fFlagLuaAppRemovePlayWithRewardBetaAllowlist and not isUniverseIdInPlayWithRewardBetaAllowList(luaAppPlayWithRewardBetaUniverses, p7) then
-			return promiseModule.resolve()
-		end
+		-- upvalues: httpService (copy), shouldShowShimmer (copy), p6 (ref), p7 (ref), playWithRewardTelemetryModule (copy), setPlayWithRewardState (copy), promiseModule (copy), fetchPlayWithRewardStateAsync (copy), p8 (ref), logger (copy)
 		local var9 = httpService:GenerateGUID(false)
 		
 		if shouldShowShimmer(p6, p7) then

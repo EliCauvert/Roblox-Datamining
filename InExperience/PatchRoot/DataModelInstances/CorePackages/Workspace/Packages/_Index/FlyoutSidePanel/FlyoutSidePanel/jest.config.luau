@@ -1,12 +1,8 @@
-﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
+﻿local parent = script.Parent
 
 return {
-	displayName = "FlyoutSidePanel",
-	testMatch = { "**/*.test" },
-	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.LogHandler,
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+	projects = {
+		parent["jest.main.config"],
+		parent["jest.mockDataModel.config"]
 	}
 }

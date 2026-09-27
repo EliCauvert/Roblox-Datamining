@@ -2,10 +2,14 @@
 local parent_1 = parent.Parent
 local reactModule = require(parent_1.React)
 local cryoModule = require(parent_1.Cryo)
+local foundationModule = require(parent_1.Foundation)
 local UIBloxModule = require(parent_1.UIBlox)
 local useAppPolicy = require(parent_1.UniversalAppPolicy).useAppPolicy
 local useRoactService = require(parent_1.RobloxAppHooks).useRoactService
 local roactServiceTagsModule = require(parent_1.RoactServiceTags)
+local useTokens = foundationModule.Hooks.useTokens
+local popoverAlign = foundationModule.Enums.PopoverAlign
+local popoverSide = foundationModule.Enums.PopoverSide
 local navigationBar = UIBloxModule.App.Navigation.NavigationBar
 local navigationRailV2 = UIBloxModule.App.Navigation.NavigationRailV2
 local navigationBarAlignment = UIBloxModule.App.Navigation.Enum.NavigationBarAlignment
@@ -21,6 +25,7 @@ local webViewRedesignEnabledEngineFeature = game:GetEngineFeature("WebViewRedesi
 local fFlagAddGamepadBumperNavigation = require(parent_1.SharedFlags).FFlagAddGamepadBumperNavigation
 local fFlagShrinkAppNavBar = require(parent_1.SharedFlags).FFlagShrinkAppNavBar
 local fFlagEnableFlyoutOnNavRail = require(parent_1.SharedFlags).FFlagEnableFlyoutOnNavRail
+local fFlagEnableNavRailTooltipAndTruncation = require(parent_1.SharedFlags).FFlagEnableNavRailTooltipAndTruncation
 local appNavBarGateFooterVisibleOnPlacement = game:DefineFastFlag("AppNavBarGateFooterVisibleOnPlacement", false)
 local appNavBarFooterVisibleWithoutScrollAway = game:DefineFastFlag("AppNavBarFooterVisibleWithoutScrollAway", false)
 
@@ -36,15 +41,16 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useAppPolicy (ref), useRoactService (ref), roactServiceTagsModule (ref), reactModule (ref), studioCTAIconModule (ref), webViewRedesignEnabledEngineFeature (ref), constantsModule (ref), fFlagEnableFlyoutOnNavRail (ref), appNavItemModule (ref), fFlagShrinkAppNavBar (ref), getScrollAwayEnabledModule (ref), appNavBarFooterVisibleWithoutScrollAway (ref), visibilityControlModule (ref), appNavBarGateFooterVisibleOnPlacement (ref), placementModule (ref), appNavTelemetryModule (ref), navigationBar (ref), navigationBarAlignment (ref), navigationRailV2 (ref), navigationRailAlignment (ref), fFlagAddGamepadBumperNavigation (ref)
+	-- upvalues: cryoModule (ref), t (ref), fFlagEnableNavRailTooltipAndTruncation (ref), useTokens (ref), useAppPolicy (ref), useRoactService (ref), roactServiceTagsModule (ref), reactModule (ref), studioCTAIconModule (ref), webViewRedesignEnabledEngineFeature (ref), constantsModule (ref), fFlagEnableFlyoutOnNavRail (ref), appNavItemModule (ref), fFlagShrinkAppNavBar (ref), popoverSide (ref), popoverAlign (ref), getScrollAwayEnabledModule (ref), appNavBarFooterVisibleWithoutScrollAway (ref), visibilityControlModule (ref), appNavBarGateFooterVisibleOnPlacement (ref), placementModule (ref), appNavTelemetryModule (ref), navigationBar (ref), navigationBarAlignment (ref), navigationRailV2 (ref), navigationRailAlignment (ref), fFlagAddGamepadBumperNavigation (ref)
 	local items, selectedIndex
 	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = useAppPolicy(function(p2)
+	local var2 = if fFlagEnableNavRailTooltipAndTruncation then useTokens() else nil
+	local var3 = useAppPolicy(function(p2)
 		return p2.getShowStudioCTA()
 	end)
-	local var3 = useRoactService(roactServiceTagsModule.AppEventIngestService)
-	local var4 = useRoactService(roactServiceTagsModule.AppLinking)
-	local var5 = reactModule.useCallback(function(_, p2)
+	local var4 = useRoactService(roactServiceTagsModule.AppEventIngestService)
+	local var5 = useRoactService(roactServiceTagsModule.AppLinking)
+	local var6 = reactModule.useCallback(function(_, p2)
 		-- upvalues: reactModule (copy), studioCTAIconModule (copy), webViewRedesignEnabledEngineFeature (copy), p1 (ref)
 		return reactModule.createElement(studioCTAIconModule, {
 			controlState = p2,
@@ -53,11 +59,11 @@ return reactModule.memo(function(p1)
 	end, {
 		if webViewRedesignEnabledEngineFeature then p1.showTooltip else nil
 	})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), constantsModule (copy), var1 (ref), var4 (ref)
-		var3:setRBXEventStream(constantsModule.STUDIO_CTA_EVENT_CONTEXT, constantsModule.STUDIO_CTA_EVENT_NAME_OPEN)
-		var4:openURL(var1.buildCreatorWebNavUrl({ utm_content = "side_bar_blue_icon" }))
-	end, { var3, var4, var1.buildCreatorWebNavUrl })
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref), constantsModule (copy), var1 (ref), var5 (ref)
+		var4:setRBXEventStream(constantsModule.STUDIO_CTA_EVENT_CONTEXT, constantsModule.STUDIO_CTA_EVENT_NAME_OPEN)
+		var5:openURL(var1.buildCreatorWebNavUrl({ utm_content = "side_bar_blue_icon" }))
+	end, { var4, var5, var1.buildCreatorWebNavUrl })
 	local _ = nil
 	local _ = nil
 	
@@ -68,11 +74,11 @@ return reactModule.memo(function(p1)
 		if var1.menuItem ~= nil then
 			table.insert(t_1, var1.menuItem)
 		end
-		if var2 then
+		if var3 then
 			table.insert(t_2, {
 				isSecondary = true,
-				renderIcon = var5,
-				onActivated = var6
+				renderIcon = var6,
+				onActivated = var7
 			})
 		end
 		items = cryoModule.List.join(t_1, var1.items, t_2)
@@ -81,35 +87,52 @@ return reactModule.memo(function(p1)
 		items = var1.items
 		selectedIndex = var1.selectedIndex
 		
-		if var2 then
+		if var3 then
 			items = cryoModule.List.join(items)
 			table.insert(items, {
 				isSecondary = true,
-				renderIcon = var5,
-				onActivated = var6
+				renderIcon = var6,
+				onActivated = var7
 			})
 		end
 	end
-	local var7 = nil
-	local var8 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: reactModule (copy), appNavItemModule (copy), fFlagShrinkAppNavBar (copy), var1 (ref)
+	local var8 = nil
+	local var9 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: reactModule (copy), appNavItemModule (copy), fFlagShrinkAppNavBar (copy), var1 (ref), fFlagEnableNavRailTooltipAndTruncation (copy)
 		return reactModule.createElement(appNavItemModule, {
 			isCenterPositioned = true,
 			hasLabel = true,
 			item = p2,
 			isChecked = p3,
-			systemBarLabelTextSizeBinding = if fFlagShrinkAppNavBar then nil else var1.systemBarLabelTextSizeBinding
+			systemBarLabelTextSizeBinding = if fFlagShrinkAppNavBar then nil else var1.systemBarLabelTextSizeBinding,
+			fillWidth = if fFlagEnableNavRailTooltipAndTruncation then true else nil,
+			enableTooltip = if fFlagEnableNavRailTooltipAndTruncation then false else nil
 		})
 	end, { var1.systemBarLabelTextSizeBinding })
-	local var9 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: reactModule (copy), appNavItemModule (copy), fFlagShrinkAppNavBar (copy), var1 (ref)
-		return reactModule.createElement(appNavItemModule, {
+	local var10 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: reactModule (copy), appNavItemModule (copy), fFlagShrinkAppNavBar (copy), var1 (ref), fFlagEnableNavRailTooltipAndTruncation (copy), popoverSide (copy), popoverAlign (copy)
+		local var11
+		local createElement = reactModule.createElement
+		local t = {
 			isCenterPositioned = false,
 			hasLabel = true,
 			item = p2,
 			isChecked = p3,
-			systemBarLabelTextSizeBinding = if fFlagShrinkAppNavBar then nil else var1.systemBarLabelTextSizeBinding
-		})
+			systemBarLabelTextSizeBinding = if fFlagShrinkAppNavBar then nil else var1.systemBarLabelTextSizeBinding,
+			width = if fFlagEnableNavRailTooltipAndTruncation then UDim.new(1, 0) else nil
+		}
+		
+		if fFlagEnableNavRailTooltipAndTruncation then
+			var11 = p2.labelText ~= nil
+			var11 = nil
+		else
+			var11 = nil
+		end
+		t.enableTooltip = var11
+		t.tooltipSide = if fFlagEnableNavRailTooltipAndTruncation then popoverSide.Right else nil
+		t.tooltipAlign = if fFlagEnableNavRailTooltipAndTruncation then popoverAlign.Center else nil
+		
+		return createElement(appNavItemModule, t)
 	end, { var1.systemBarLabelTextSizeBinding })
 	local footerBinding = nil
 	
@@ -136,10 +159,10 @@ return reactModule.memo(function(p1)
 	end
 	reactModule.useEffect(function()
 		-- upvalues: fFlagEnableFlyoutOnNavRail (copy), items (write), selectedIndex (write), var1 (ref), appNavTelemetryModule (copy)
-		local var10 = if fFlagEnableFlyoutOnNavRail then items[selectedIndex] else var1.items[var1.selectedIndex]
+		local var11 = if fFlagEnableFlyoutOnNavRail then items[selectedIndex] else var1.items[var1.selectedIndex]
 		
-		if var10 ~= nil and var10.page ~= nil then
-			appNavTelemetryModule.logSwitchTabEnd(var10.page)
+		if var11 ~= nil and var11.page ~= nil then
+			appNavTelemetryModule.logSwitchTabEnd(var11.page)
 		end
 	end, if fFlagEnableFlyoutOnNavRail then { items, selectedIndex } else { var1.items, var1.selectedIndex })
 	reactModule.useEffect(function()
@@ -152,33 +175,35 @@ return reactModule.memo(function(p1)
 	end, { var1.placement })
 	
 	if var1.placement == placementModule.Bottom then
-		var7 = reactModule.createElement(navigationBar, {
+		var8 = reactModule.createElement(navigationBar, {
 			animated = true,
 			active = true,
 			alignment = navigationBarAlignment.EvenlyDistributed,
 			items = items,
 			isVisible = var1.isVisible,
 			size = var1.size,
-			renderItem = var8,
+			renderItem = var9,
 			position = var1.position,
 			selection = selectedIndex,
 			clipsDescendants = var1.clipsDescendants,
-			visibility = footerBinding
+			visibility = footerBinding,
+			spacing = if fFlagEnableNavRailTooltipAndTruncation then UDim.new(0, var2.Gap.Small) else nil
 		})
 	elseif var1.placement == placementModule.Left then
-		var7 = reactModule.createElement(navigationRailV2, {
+		var8 = reactModule.createElement(navigationRailV2, {
 			animated = true,
 			alignment = navigationRailAlignment.Justified,
 			items = items,
-			renderItem = var9,
+			renderItem = var10,
 			size = var1.size,
 			isVisible = var1.isVisible,
 			position = var1.position,
 			selection = selectedIndex,
 			clipsDescendants = var1.clipsDescendants,
 			leadingComponent = if fFlagAddGamepadBumperNavigation then var1.leadingComponent else nil,
-			trailingComponent = if fFlagAddGamepadBumperNavigation then var1.trailingComponent else nil
+			trailingComponent = if fFlagAddGamepadBumperNavigation then var1.trailingComponent else nil,
+			spacing = if fFlagEnableNavRailTooltipAndTruncation then UDim.new(0, var2.Gap.Small) else nil
 		})
 	end
-	return var7
+	return var8
 end)

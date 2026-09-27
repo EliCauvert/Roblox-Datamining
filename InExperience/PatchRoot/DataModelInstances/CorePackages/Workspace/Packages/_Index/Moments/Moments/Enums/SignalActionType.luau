@@ -4,5 +4,8 @@
 	RemoveReaction = "RemoveReaction",
 	Share = "Share",
 	Report = "Report",
-	Join = "Join"
+	Join = "Join",
+	Comment = "Comment",
+	CommentDelete = "CommentDelete",
+	CommentSectionOpen = "CommentSectionOpen"
 }

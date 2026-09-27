@@ -5,7 +5,7 @@ local fFlagExperienceMenuGamepadExposureEnabled = sharedFlagsModule.FFlagExperie
 game:DefineFastFlag("EnableInGameMenuChrome", false)
 local debugEnableChromeOnUnsupportedDevices = game:DefineFastFlag("DebugEnableChromeOnUnsupportedDevices", false)
 local VRService = game:GetService("VRService")
-local var1 = game:GetService("GuiService"):IsTenFootInterface()
+local var1 = require(parent.AppCommonLib).isTenFootInterface()
 local isInExperienceUIVREnabled = require(parent.SharedExperimentDefinition).isInExperienceUIVREnabled
 
 return function()

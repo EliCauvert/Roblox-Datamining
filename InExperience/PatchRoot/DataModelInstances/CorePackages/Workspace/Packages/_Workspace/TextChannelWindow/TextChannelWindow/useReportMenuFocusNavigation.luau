@@ -1,8 +1,7 @@
 ﻿local parent = script.Parent.Parent
 local reactModule = require(parent.React)
-local chatUIPrimitivesModule = require(parent.ChatUIPrimitives)
-local useCoreActionBind = chatUIPrimitivesModule.Hooks.useCoreActionBind
-local usePortalSelectionLinks = chatUIPrimitivesModule.Hooks.usePortalSelectionLinks
+local usePortalSelectionLinks = require(parent.ChatUIPrimitives).Hooks.usePortalSelectionLinks
+local useSelectionBackActionModule = require(script.Parent.FocusNavigation.useSelectionBackAction)
 
 local function findFirstSelectable(p1)
 	for i, v in p1:GetDescendants() do
@@ -17,23 +16,20 @@ local function findFirstSelectable(p1)
 end
 
 return function(p2)
-	-- upvalues: reactModule (ref), useCoreActionBind (ref), findFirstSelectable (ref), usePortalSelectionLinks (ref)
+	-- upvalues: reactModule (ref), useSelectionBackActionModule (ref), findFirstSelectable (ref), usePortalSelectionLinks (ref)
 	local menuContentRef = p2.menuContentRef
 	local triggerRef = p2.triggerRef
 	local onClose = p2.onClose
-	useCoreActionBind({
+	useSelectionBackActionModule({
 		actionNamePrefix = "TextChannelWindowReportMenuBack",
 		enabled = p2.enabled,
 		active = p2.isOpen,
-		keyCode = Enum.KeyCode.ButtonB,
 		onAction = reactModule.useCallback(function(p3)
 			-- upvalues: onClose (ref)
 			if p3 == Enum.UserInputState.End then
 				onClose()
-				
-				return Enum.ContextActionResult.Sink
 			end
-			return Enum.ContextActionResult.Pass
+			return Enum.ContextActionResult.Sink
 		end, { onClose }),
 		contextActionService = p2.contextActionService
 	})

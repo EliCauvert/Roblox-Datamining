@@ -1,5 +1,6 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
+local userInputService = game:GetService("UserInputService")
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
@@ -22,6 +23,7 @@ local fFlagBuildExperiencePrivateInvitesModule = require(buildExperience.Flags.F
 local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
 local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
 local fFlagEnableBuildOverflowMenuForNewGamesModule = require(buildExperience.Flags.FFlagEnableBuildOverflowMenuForNewGames)
+local fFlagBuildExperienceReleaseFocusOnOverflowActionModule = require(buildExperience.Flags.FFlagBuildExperienceReleaseFocusOnOverflowAction)
 local useGetAdCampaignEligibilityModule = require(buildExperience.Components.Ads.useGetAdCampaignEligibility)
 local adCampaignEligibilityUtilsModule = require(buildExperience.Components.Ads.adCampaignEligibilityUtils)
 local iconButton = foundationModule.IconButton
@@ -41,7 +43,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: useScaledValue (ref), buildOverflowMenuWidth (ref), useOpenWebView (ref), reactModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), fFlagBuildShareDisabledOnPrivateModule (ref), useExperienceShareFlowModule (ref), useSharePublishedExperience (ref), fFlagEnableBuildAdPromotionModule (ref), useGetAdCampaignEligibilityModule (ref), adCampaignEligibilityUtilsModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), useLocalization (ref), useCreatorCreditMenuItem (ref), badgeVariant (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), var2 (ref), localizationStringsModule (ref), releaseAnyFocusModule (ref), leaveExperienceModule (ref), versionHistoryContainerModule (ref), fFlagBuildAgentRollbackModule (ref), menu (ref), popoverSide (ref), fFlagBuildDesktopReadinessModule (ref), inputSize (ref), popoverAlign (ref), iconButton (ref), buttonVariant (ref), experienceShareOverlaysModule (ref), friendsOnlyShareDialogModule (ref), var1 (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref)
+	-- upvalues: useScaledValue (ref), buildOverflowMenuWidth (ref), useOpenWebView (ref), reactModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), fFlagBuildShareDisabledOnPrivateModule (ref), useExperienceShareFlowModule (ref), useSharePublishedExperience (ref), fFlagEnableBuildAdPromotionModule (ref), useGetAdCampaignEligibilityModule (ref), adCampaignEligibilityUtilsModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), useLocalization (ref), useCreatorCreditMenuItem (ref), badgeVariant (ref), fFlagBuildExperienceReleaseFocusOnOverflowActionModule (ref), userInputService (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), var2 (ref), localizationStringsModule (ref), releaseAnyFocusModule (ref), leaveExperienceModule (ref), versionHistoryContainerModule (ref), fFlagBuildAgentRollbackModule (ref), menu (ref), popoverSide (ref), fFlagBuildDesktopReadinessModule (ref), inputSize (ref), popoverAlign (ref), iconButton (ref), buttonVariant (ref), experienceShareOverlaysModule (ref), friendsOnlyShareDialogModule (ref), var1 (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref)
 	local var3 = useScaledValue(buildOverflowMenuWidth)
 	local var4 = useOpenWebView()
 	local var5, var6 = reactModule.useState(false)
@@ -175,7 +177,14 @@ return function(p1)
 			align = popoverAlign.End,
 			onPressedOutside = var32,
 			onActivated = reactModule.useCallback(function(p2)
-				-- upvalues: var17 (ref), var29 (ref), var6 (ref), var25 (ref), var26 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), var4 (ref), var2 (copy), localizationStringsModule (copy), p1 (ref), releaseAnyFocusModule (copy), var8 (ref), fFlagBuildExperiencePrivateInvitesModule (copy), var13 (ref), var14 (ref), var16 (ref), var10 (ref), leaveExperienceModule (copy)
+				-- upvalues: fFlagBuildExperienceReleaseFocusOnOverflowActionModule (copy), userInputService (copy), var17 (ref), var29 (ref), var6 (ref), var25 (ref), var26 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), var4 (ref), var2 (copy), localizationStringsModule (copy), p1 (ref), releaseAnyFocusModule (copy), var8 (ref), fFlagBuildExperiencePrivateInvitesModule (copy), var13 (ref), var14 (ref), var16 (ref), var10 (ref), leaveExperienceModule (copy)
+				if fFlagBuildExperienceReleaseFocusOnOverflowActionModule then
+					local focusedTextBox = userInputService:GetFocusedTextBox()
+					
+					if focusedTextBox then
+						focusedTextBox:ReleaseFocus()
+					end
+				end
 				if var17 and var29 ~= nil and p2 == var29.item.id then
 					var29.activate()
 					var6(false)
@@ -195,6 +204,10 @@ return function(p1)
 										p1.onAction(var34)
 									end
 								elseif var34.type == "openInvitePicker" then
+									if p1.onAction then
+										p1.onAction(var34)
+									end
+								elseif var34.type == "openInviteManagement" then
 									if p1.onAction then
 										p1.onAction(var34)
 									end

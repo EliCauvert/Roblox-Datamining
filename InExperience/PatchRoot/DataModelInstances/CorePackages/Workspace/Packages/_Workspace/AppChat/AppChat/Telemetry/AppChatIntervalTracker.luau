@@ -4,12 +4,11 @@ local intervalPerformanceTracker = require(appChat.Parent.IntervalPerformanceTra
 local appChatPerfEventModule = require(appChat.Telemetry.AppChatPerfEvent)
 local appChatPerfEventInfoModule = require(appChat.Telemetry.AppChatPerfEventInfo)
 local appChatTTITrackerModule = require(appChat.Telemetry.AppChatTTITracker)
-local fFlagAppChatScrollFrameTimeTrackingModule = require(appChat.Flags.FFlagAppChatScrollFrameTimeTracking)
 local list = { "duration", "averageFPS", "longestFrameTime" }
 local list_1 = {
 	"duration", "averageFPS", "framesCount", "longestFrameTime", "frameTimeAvgMs",
 	"frameTimeStdDevMs", "frameTimeDistributionMs", "frameBuckets",
-	"rawFrameTimesMs"
+	"rawFrameTimesMs", "rawScrollPositionSamplesCsv"
 }
 local t = {}
 
@@ -30,13 +29,13 @@ local function canStartInterval(p1)
 end
 
 local function _(p1)
-	-- upvalues: fFlagAppChatScrollFrameTimeTrackingModule (ref), appChatPerfEventModule (ref), list_1 (ref), list (ref)
-	return if fFlagAppChatScrollFrameTimeTrackingModule and (p1 == appChatPerfEventModule.ScrollConversationList or p1 == appChatPerfEventModule.ScrollMessageList) then list_1 else list
+	-- upvalues: appChatPerfEventModule (ref), list_1 (ref), list (ref)
+	return if p1 == appChatPerfEventModule.ScrollConversationList or p1 == appChatPerfEventModule.ScrollMessageList then list_1 else list
 end
 
 local t_1 = {
-	start = function(p1, _)
-		-- upvalues: appChatPerfEventInfoModule (ref), canStartInterval (ref), appChatPerf (ref), intervalPerformanceTracker (ref), fFlagAppChatScrollFrameTimeTrackingModule (ref), appChatPerfEventModule (ref), list_1 (ref), list (ref), t (ref)
+	start = function(p1, _, p2)
+		-- upvalues: appChatPerfEventInfoModule (ref), canStartInterval (ref), appChatPerf (ref), intervalPerformanceTracker (ref), appChatPerfEventModule (ref), list_1 (ref), list (ref), t (ref)
 		local intervalName = appChatPerfEventInfoModule.getIntervalName(p1)
 		local var1, var2 = canStartInterval(p1)
 		
@@ -46,7 +45,7 @@ local t_1 = {
 			return false
 		end
 		appChatPerf:debug("Interval Start: {}", intervalName)
-		intervalPerformanceTracker:startTracking(intervalName, nil, if fFlagAppChatScrollFrameTimeTrackingModule and (p1 == appChatPerfEventModule.ScrollConversationList or p1 == appChatPerfEventModule.ScrollMessageList) then list_1 else list, true, true)
+		intervalPerformanceTracker:startTracking(intervalName, nil, if p1 == appChatPerfEventModule.ScrollConversationList or p1 == appChatPerfEventModule.ScrollMessageList then list_1 else list, true, true, nil, p2)
 		t[p1] = true
 		
 		return true

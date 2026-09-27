@@ -5,11 +5,14 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
+local fFlagBuildExperienceVersionHistoryPaginationModule = require(buildExperience.Flags.FFlagBuildExperienceVersionHistoryPagination)
+local fIntBuildExperienceVersionHistoryLoadMoreViewportPercentModule = require(buildExperience.Flags.FIntBuildExperienceVersionHistoryLoadMoreViewportPercent)
 local latestVersionCardViewModule = require(script.Parent.LatestVersionCard.LatestVersionCardView)
 local liveVersionCardViewModule = require(script.Parent.LiveVersionCard.LiveVersionCardView)
 local restoreVersionDialogModule = require(script.Parent.RestoreVersionDialog)
 local versionHistoryCardModule = require(script.Parent.VersionHistoryCard)
 local versionHistorySectionModule = require(script.Parent.VersionHistorySection)
+local useScrollEndReachedModule = require(script.Parent.useScrollEndReached)
 local useScrollPerformanceTrackerModule = require(buildExperience.Telemetry.useScrollPerformanceTracker)
 local checkbox = foundationModule.Checkbox
 local sheet = foundationModule.Sheet
@@ -19,14 +22,17 @@ local useScaledValue = foundationModule.Hooks.useScaledValue
 local VERSION_HISTORY_VERSIONS_TITLE = localizationStringsModule.VERSION_HISTORY_VERSIONS_TITLE
 
 local function VersionHistoryContent(p1)
-	-- upvalues: useScrollPerformanceTrackerModule (ref), reactModule (ref), sheet (ref)
+	-- upvalues: useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceVersionHistoryPaginationModule (ref), useScrollEndReachedModule (ref), fIntBuildExperienceVersionHistoryLoadMoreViewportPercentModule (ref), reactModule (ref), sheet (ref)
 	useScrollPerformanceTrackerModule("LuaApp_Build_VersionHistory_Scroll", p1.scrollingFrameRef)
 	
+	if fFlagBuildExperienceVersionHistoryPaginationModule then
+		useScrollEndReachedModule(p1.scrollingFrameRef, fIntBuildExperienceVersionHistoryLoadMoreViewportPercentModule / 100, p1.onEndReached)
+	end
 	return reactModule.createElement(sheet.Content, { scrollingFrameRef = p1.scrollingFrameRef }, p1.children)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), localizationStringsModule (ref), VERSION_HISTORY_VERSIONS_TITLE (ref), fFlagBuildAgentRollbackModule (ref), latestVersionCardViewModule (ref), versionHistoryCardModule (ref), view (ref), checkbox (ref), text (ref), useScaledValue (ref), versionHistorySectionModule (ref), liveVersionCardViewModule (ref), sheet (ref), VersionHistoryContent (ref), restoreVersionDialogModule (ref)
+	-- upvalues: reactModule (ref), useLocalization (ref), localizationStringsModule (ref), VERSION_HISTORY_VERSIONS_TITLE (ref), fFlagBuildAgentRollbackModule (ref), latestVersionCardViewModule (ref), versionHistoryCardModule (ref), view (ref), checkbox (ref), text (ref), useScaledValue (ref), versionHistorySectionModule (ref), liveVersionCardViewModule (ref), sheet (ref), VersionHistoryContent (ref), fFlagBuildExperienceVersionHistoryPaginationModule (ref), restoreVersionDialogModule (ref)
 	local testId = p1.testId or "version-history-bottom-sheet"
 	local scrollingFrameRef = p1.scrollingFrameRef or reactModule.useRef(nil)
 	local var1, var2 = reactModule.useState(nil)
@@ -65,7 +71,10 @@ return function(p1)
 					}
 				})
 			}),
-			Content = reactModule.createElement(VersionHistoryContent, { scrollingFrameRef = scrollingFrameRef }, {
+			Content = reactModule.createElement(VersionHistoryContent, {
+				scrollingFrameRef = scrollingFrameRef,
+				onEndReached = if fFlagBuildExperienceVersionHistoryPaginationModule then p1.onEndReached else nil
+			}, {
 				Sections = reactModule.createElement(view, {
 					tag = "col size-full-0 auto-y",
 					layout = {

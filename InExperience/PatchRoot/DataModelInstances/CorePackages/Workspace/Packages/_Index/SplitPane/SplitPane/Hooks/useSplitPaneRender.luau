@@ -5,11 +5,12 @@ local appSplitViewModule = require(parent.AppSplitView)
 local constants = require(parent.NavigationRodux).Constants
 local splitPaneContextModule = require(script.Parent.Parent.Context.SplitPaneContext)
 local splitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
+local isSupportPaneScreenModule = require(script.Parent.Parent.Utils.isSupportPaneScreen)
 local supportPaneMode = appSplitViewModule.Enums.SupportPaneMode
 local tempRnSwitchNavigatorName = constants.TempRnSwitchNavigatorName
 
 return function(p1, p2, p3, p4)
-	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), supportPaneMode (ref)
+	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), supportPaneMode (ref), isSupportPaneScreenModule (ref)
 	local store = splitPaneStoreModule.getStore()
 	local var1 = signalsReactModule.useSignalState(store.getSupportPaneMode)
 	local var2 = signalsReactModule.useSignalState(store.getSupportWidth)
@@ -58,48 +59,63 @@ return function(p1, p2, p3, p4)
 			end
 		end
 	end
-	local var9
-	local var10 = p1[1] ~= nil and (p1[1].descriptor ~= nil and (p1[1].descriptor.state ~= nil and p1[1].descriptor.state.routeName == tempRnSwitchNavigatorName))
-	local var11 = reactModule.useRef(0)
+	local var9 = p1[1] ~= nil and (p1[1].descriptor ~= nil and (p1[1].descriptor.state ~= nil and p1[1].descriptor.state.routeName == tempRnSwitchNavigatorName))
+	local var10 = reactModule.useRef(0)
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var5 (ref), var10 (ref), var1 (ref), supportPaneMode (copy), store (ref)
-		local current = var11.current
-		var11.current = var5
+		-- upvalues: var10 (ref), var5 (ref), var9 (ref), var1 (ref), supportPaneMode (copy), store (ref)
+		local current = var10.current
+		var10.current = var5
 		
-		if not var10 or var1 == supportPaneMode.Normal then return end
+		if not var9 or var1 == supportPaneMode.Normal then return end
 		if (current > 0 and var5 == 0) or (current == 0 and var5 > 0) then
 			store.setSupportPaneMode(supportPaneMode.Normal)
 		end
-	end, { var10, var5, store, var1 })
-	local var12 = if var5 > 0 then p3[var5] else nil
-	local var13 = if var12 ~= nil then {} else p1[var12].descriptor.options
-	local var14 = var12 ~= nil
-	local t_2 = {
-		hostNavigation = if var12 ~= nil then nil else p1[var12].descriptor.navigation,
+	end, { var9, var5, store, var1 })
+	local var11 = if var5 > 0 then p3[var5] else nil
+	local var12 = if var11 ~= nil then {} else p1[var11].descriptor.options
+	local var13 = if var11 ~= nil then nil else p1[var11].descriptor.navigation
+	local var14 = var11 ~= nil
+	local t_2 = {}
+	
+	if p4 then
+		for i, v in p1 do
+			if isSupportPaneScreenModule(v) then
+				local state = v.descriptor.state
+				
+				if state ~= nil and state.key ~= nil then
+					table.insert(t_2, state.key)
+				end
+			end
+		end
+	end
+	local var15
+	local t_3 = {
+		hostNavigation = var13,
 		hasDetailOnTop = var14,
 		paneCount = var5,
-		splitPaneExpandable = var13.splitPaneExpandable,
-		splitPaneCollapsible = var13.splitPaneCollapsible
+		splitPaneExpandable = var12.splitPaneExpandable,
+		splitPaneCollapsible = var12.splitPaneCollapsible,
+		supportRouteKeys = t_2
 	}
 	
-	if var13.splitPaneCollapsible ~= true then
-		var9 = not var14
+	if var12.splitPaneCollapsible ~= true then
+		var15 = not var14
 		
-		if var9 then
-			var9 = not (var14 and var5 > 1)
+		if var15 then
+			var15 = not (var14 and var5 > 1)
 		end
 		return {
 			primarySlotChildren = cloned,
 			supportSlotChildren = t,
 			overlaySlotChildren = t_1,
-			supportContentProps = t_2,
+			supportContentProps = t_3,
 			supportWidth = var2,
 			supportMinWidth = store.getMinSupportWidth(),
 			supportMaxWidth = store.getMaxSupportWidth(),
 			onSupportPaneWidthChanged = store.setSupportWidth,
 			supportPaneMode = var1,
 			supportPaneResizable = var4.supportPaneResizable == true,
-			supportResizerAbovePane = not var9,
+			supportResizerAbovePane = not var15,
 			isBreakpointEnabled = var3,
 			renderSupportContent = var4.renderSupportContent,
 			onContentRegionRectChanged = var4.onContentRegionRectChanged

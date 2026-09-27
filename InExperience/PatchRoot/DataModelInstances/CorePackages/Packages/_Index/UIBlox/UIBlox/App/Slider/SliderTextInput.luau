@@ -2,11 +2,14 @@
 local parent = script.Parent.Parent.Parent.Parent
 local roactModule = require(parent.Roact)
 local tModule = require(parent.t)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local eventConnection = require(parent.ReactUtils).EventConnection
 local imageSetComponentModule = require(parent.UIBlox.Core.ImageSet.ImageSetComponent)
 local imagesModule = require(parent.UIBlox.App.ImageSet.Images)
 local withStyleModule = require(parent.UIBlox.Core.Style.withStyle)
 local divideTransparencyModule = require(parent.UIBlox.Utility.divideTransparency)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local sliderTextInput = roactModule.PureComponent:extend("SliderTextInput")
 sliderTextInput.validateProps = tModule.strictInterface({
 	position = tModule.optional(tModule.union(tModule.UDim2, tModule.table)),
@@ -27,9 +30,9 @@ function sliderTextInput.init(p1)
 end
 
 function sliderTextInput.render(p1)
-	-- upvalues: withStyleModule (ref), divideTransparencyModule (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), eventConnection (ref), userInputService (ref)
+	-- upvalues: withStyleModule (ref), divideTransparencyModule (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), eventConnection (ref), userInputService (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), divideTransparencyModule (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), eventConnection (copy), userInputService (copy)
+		-- upvalues: p1 (ref), divideTransparencyModule (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), eventConnection (copy), userInputService (copy)
 		local var1 = if p1.props.disabled then 2 else 1
 		
 		return roactModule.createElement(imageSetComponentModule.Label, {
@@ -57,7 +60,8 @@ function sliderTextInput.render(p1)
 				[roactModule.Ref] = p1.textBoxRef,
 				BackgroundTransparency = 1,
 				ClearTextOnFocus = false,
-				Font = p2.Font.Body.Font,
+				Font = if foundationFontFaceMigration then nil else p2.Font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Font.Body.Font) else nil,
 				TextSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize,
 				TextColor3 = p2.Theme.TextDefault.Color,
 				TextTransparency = divideTransparencyModule(p2.Theme.TextDefault.Transparency, var1),

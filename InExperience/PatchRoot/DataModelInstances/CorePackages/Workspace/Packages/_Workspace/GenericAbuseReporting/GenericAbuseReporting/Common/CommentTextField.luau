@@ -1,12 +1,15 @@
 ﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useCursor = UIBloxModule.App.SelectionCursor.useCursor
 local useStyle = UIBloxModule.Core.Style.useStyle
 local fFlagChatLineReportingFocusFixesEnabled = require(parent.SharedFlags).FFlagChatLineReportingFocusFixesEnabled
 
 return function(p1)
-	-- upvalues: reactModule (ref), fFlagChatLineReportingFocusFixesEnabled (ref), useCursor (ref), useStyle (ref)
+	-- upvalues: reactModule (ref), fFlagChatLineReportingFocusFixesEnabled (ref), useCursor (ref), useStyle (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1, var2 = reactModule.useState("")
 	local var3 = if fFlagChatLineReportingFocusFixesEnabled then useCursor() else nil
 	local var4 = useStyle()
@@ -33,7 +36,8 @@ return function(p1)
 			AnchorPoint = Vector2.new(0, 0),
 			BackgroundColor3 = p1.backgroundColor3 or theme.BackgroundDefault.Color,
 			PlaceholderText = p1.placeholderText,
-			Font = var4.Font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else var4.Font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var4.Tokens.Typography.BodyLarge.Font) else nil,
 			SelectionImageObject = var3,
 			Text = p1.text,
 			TextSize = var4.Font.BaseSize,

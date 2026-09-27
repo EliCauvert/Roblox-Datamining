@@ -2,7 +2,6 @@
 local _ = require(parent.util.Types)
 local constantsModule = require(parent.Constants)
 local constantsInterfaceModule = require(parent.ConstantsInterface)
-local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
 local isMeshPartAccessoryModule = require(parent.util.isMeshPartAccessory)
 local isLayeredClothingModule = require(parent.util.isLayeredClothing)
 local validateLayeredClothingAccessoryModule = require(parent.validation.validateLayeredClothingAccessory)
@@ -24,14 +23,14 @@ local function validateBodyPartInternal(p1)
 end
 
 return function(p1)
-	-- upvalues: getFFlagUGCValidationAnimationPackSupportModule (ref), constantsModule (ref), validateEmoteAnimationModule (ref), constantsInterfaceModule (ref), validateMakeupAssetModule (ref), validateBodyPartInternal (ref), validatePackageModule (ref), isMeshPartAccessoryModule (ref), isLayeredClothingModule (ref), validateLayeredClothingAccessoryModule (ref), validateMeshPartAccessoryModule (ref), validateLegacyAccessoryModule (ref)
+	-- upvalues: constantsModule (ref), validateEmoteAnimationModule (ref), constantsInterfaceModule (ref), validateMakeupAssetModule (ref), validateBodyPartInternal (ref), validatePackageModule (ref), isMeshPartAccessoryModule (ref), isLayeredClothingModule (ref), validateLayeredClothingAccessoryModule (ref), validateMeshPartAccessoryModule (ref), validateLegacyAccessoryModule (ref)
 	assert(p1.instances ~= nil, "instances required in validationContext for validateInternal")
 	assert(p1.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateInternal")
 	local instances = p1.instances
 	local assetTypeEnum = p1.assetTypeEnum
 	local validateMeshPartAccessories = p1.validateMeshPartAccessories
 	
-	if getFFlagUGCValidationAnimationPackSupportModule() and constantsModule.ANIMATION_ASSET_INFO and constantsModule.ANIMATION_ASSET_INFO[assetTypeEnum] then
+	if constantsModule.ANIMATION_ASSET_INFO and constantsModule.ANIMATION_ASSET_INFO[assetTypeEnum] then
 		return true
 	elseif assetTypeEnum == Enum.AssetType.EmoteAnimation then
 		return validateEmoteAnimationModule.validate(p1)

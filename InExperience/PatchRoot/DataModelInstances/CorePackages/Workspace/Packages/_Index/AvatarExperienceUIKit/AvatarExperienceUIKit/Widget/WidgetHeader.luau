@@ -1,5 +1,7 @@
 ﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
 local reactModule = require(parent.React)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local UIBloxModule = require(parent.UIBlox)
 local iconWithTooltip = require(parent.AppBlox).IconWithTooltip
@@ -11,6 +13,7 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXWidgetHeaderTreatEmptyTextAsNil = avatarExperienceFlagsModule.FFlagAXWidgetHeaderTreatEmptyTextAsNil
 local fFlagAXCatalogItemInformationPopover = avatarExperienceFlagsModule.FFlagAXCatalogItemInformationPopover
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local fFlagAXWidgetHeaderFlexLayout = avatarExperienceFlagsModule.FFlagAXWidgetHeaderFlexLayout
 
 local function _(p1)
@@ -18,7 +21,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), useDesignTokens (ref), useLocalization (ref), fFlagAXWidgetHeaderTreatEmptyTextAsNil (ref), fFlagAXCatalogItemInformationPopover (ref), fFlagAXWidgetHeaderFlexLayout (ref), iconWithTooltip (ref), tooltipOrientation (ref), button (ref), buttonType (ref), standardButtonSize (ref)
+	-- upvalues: reactModule (ref), useDesignTokens (ref), useLocalization (ref), fFlagAXWidgetHeaderTreatEmptyTextAsNil (ref), fFlagAXCatalogItemInformationPopover (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), fFlagAXWidgetHeaderFlexLayout (ref), iconWithTooltip (ref), tooltipOrientation (ref), button (ref), buttonType (ref), standardButtonSize (ref)
 	local titleText, var1, var2
 	local var3, var4 = reactModule.useBinding(Vector2.new())
 	local var5 = useDesignTokens()
@@ -56,7 +59,8 @@ return function(p1)
 		LayoutOrder = 1,
 		BackgroundTransparency = 1,
 		Text = var1,
-		Font = var5.Typography.HeadingSmall.Font,
+		Font = if foundationFontFaceMigration then nil else var5.Typography.HeadingSmall.Font,
+		FontFace = if foundationFontFaceMigration then normalizeFontFace(var5.Typography.HeadingSmall.Font) else nil,
 		TextSize = var5.Typography.HeadingSmall.FontSize,
 		LineHeight = var5.Typography.HeadingSmall.LineHeight,
 		TextColor3 = var5.Color.Content.Emphasis.Color3,
@@ -141,7 +145,8 @@ return function(p1)
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
 				Text = var2,
-				Font = var5.Typography.BodyLarge.Font,
+				Font = if foundationFontFaceMigration then nil else var5.Typography.BodyLarge.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var5.Typography.BodyLarge.Font) else nil,
 				TextSize = var5.Typography.BodyLarge.FontSize,
 				TextColor3 = var5.Color.Content.Default.Color3,
 				TextTransparency = var5.Color.Content.Default.Transparency,

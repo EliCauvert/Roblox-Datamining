@@ -3,31 +3,34 @@ local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
 local tModule = require(parent.t)
 local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local gameTileOverflowMenuActionThrottleHundrethsPercent = game:DefineFastInt("GameTileOverflowMenuActionThrottleHundrethsPercent", 0)
-local var1 = tModule.strictInterface({
+local sharedFlagsModule = require(parent.SharedFlags)
+local strictInterface = tModule.strictInterface
+strictInterface = strictInterface({
 	universeId = tModule.string,
 	sortId = tModule.optional(tModule.string),
 	actionType = tModule.string,
 	menuItem = tModule.optional(tModule.string),
 	availableMenuItems = tModule.optional(tModule.string),
-	contentType = if require(parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile then tModule.optional(tModule.string) else nil
+	contentType = if sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile then tModule.optional(tModule.string) else nil,
+	isDirectAction = if sharedFlagsModule.FFlagLuaAppGameTileDirectActionTelemetry or sharedFlagsModule.FFlagSduiGameTileDirectAction then tModule.optional(tModule.boolean) else nil
 })
 
 return function(p1, p2)
-	-- upvalues: discoveryEventErrorLogger (ref), var1 (ref), gameTileOverflowMenuActionThrottleHundrethsPercent (ref), telemetryService (ref)
+	-- upvalues: discoveryEventErrorLogger (ref), strictInterface (ref), gameTileOverflowMenuActionThrottleHundrethsPercent (ref), telemetryService (ref)
 	if not p2 then
 		discoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", "event is missing context")
 	end
-	local var2, var3 = var1(p1)
+	local var1, var2 = strictInterface(p1)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", var3)
+	if not var1 then
+		discoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", var2)
 	end
 	telemetryService:LogEvent({
 		eventName = "gameTileOverflowMenuAction",
 		description = "User has taken an action with the Game Tile Overflow Menu",
 		backends = { "EventIngest" },
 		throttlingPercentage = gameTileOverflowMenuActionThrottleHundrethsPercent,
-		lastUpdated = { 25, 10, 15 }
+		lastUpdated = { 26, 9, 23 }
 	}, {
 		eventContext = p2,
 		standardizedFields = { "addSessionInfo" },

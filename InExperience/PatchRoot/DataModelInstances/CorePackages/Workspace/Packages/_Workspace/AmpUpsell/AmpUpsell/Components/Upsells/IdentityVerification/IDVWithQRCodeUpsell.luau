@@ -4,6 +4,8 @@ local UIBloxModule = require(parent.UIBlox)
 local foundationModule = require(parent.Foundation)
 local iconSize = foundationModule.Enums.IconSize
 local loading = foundationModule.Loading
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local analyticsServiceModule = require(ampUpsell.Analytics.AnalyticsService)
@@ -22,7 +24,7 @@ local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local idvWithQRCodeUpsellStrings = require(ampUpsell.Common.LocalizationStrings).idvWithQRCodeUpsellStrings
 
 return function(p1)
-	-- upvalues: useLocalization (ref), idvWithQRCodeUpsellStrings (ref), useStyle (ref), analyticsServiceModule (ref), useSelector (ref), reactModule (ref), partialPageModal (ref), sendButtonClickEventModule (ref), appScreensModule (ref), styledTextLabel (ref), directionsTileModule (ref), progressChecklistModule (ref), displayQRCode (ref), ECLevels (ref), loading (ref), iconSize (ref), linkButton (ref)
+	-- upvalues: useLocalization (ref), idvWithQRCodeUpsellStrings (ref), useStyle (ref), analyticsServiceModule (ref), useSelector (ref), reactModule (ref), partialPageModal (ref), sendButtonClickEventModule (ref), appScreensModule (ref), styledTextLabel (ref), directionsTileModule (ref), progressChecklistModule (ref), displayQRCode (ref), ECLevels (ref), loading (ref), iconSize (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), linkButton (ref)
 	local featureName = p1.featureName
 	local qrCodeLink = p1.qrCodeLink
 	local var1 = useLocalization(idvWithQRCodeUpsellStrings)
@@ -168,7 +170,8 @@ return function(p1)
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
 					Text = var1.disclaimer,
-					Font = font,
+					Font = if foundationFontFaceMigration then nil else font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodyLarge.Font) else nil,
 					TextSize = var3,
 					TextColor3 = var2.Theme.TextDefault.Color,
 					TextTransparency = transparency,

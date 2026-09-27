@@ -14,7 +14,6 @@ local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local useSelectionCursor = UIBloxModule.App.SelectionImage.useSelectionCursor
 local useInterpolatedClientSettingsModule = require(expChat.ClientSettings.useInterpolatedClientSettings)
-local fFlagExpChatFocusChannelBarSupportModule = require(expChat.Flags.FFlagExpChatFocusChannelBarSupport)
 local fFlagExpChatEnableTabsImpressionAnalyticsModule = require(expChat.Flags.FFlagExpChatEnableTabsImpressionAnalytics)
 local var1 = require(expChat.Stores.GetFocusNavigationStore)(false)
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
@@ -46,7 +45,7 @@ local function setTransparency(value, p1)
 end
 
 return function(p1)
-	-- upvalues: configModule (ref), reactModule (ref), signalsReactModule (ref), getChatLayoutStoreModule (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), var1 (ref), reactFocusNavigationModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatEnableFriendsTab (ref), channelTabModule (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), fFlagExpChatLogTabClickedModule (ref), analytics (ref), var2 (ref), setTransparency (ref), textChatService (ref), useInterpolatedClientSettingsModule (ref), color_1 (ref), imageSetLabel (ref), cycleDown (ref), color (ref)
+	-- upvalues: configModule (ref), reactModule (ref), signalsReactModule (ref), getChatLayoutStoreModule (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), var1 (ref), reactFocusNavigationModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatEnableFriendsTab (ref), channelTabModule (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), fFlagExpChatLogTabClickedModule (ref), analytics (ref), var2 (ref), setTransparency (ref), textChatService (ref), useInterpolatedClientSettingsModule (ref), color_1 (ref), imageSetLabel (ref), cycleDown (ref), color (ref)
 	local var4 = 0
 	
 	for i in pairs(p1.allChannelTabs) do
@@ -65,11 +64,11 @@ return function(p1)
 		var13 = var15
 		var14 = var16
 	end
-	local var17 = if fFlagExpChatFocusChannelBarSupportModule then signalsReactModule.useSignalState(var1.getChatInputBarFocused) else nil
-	local var18 = if fFlagExpChatFocusChannelBarSupportModule then reactModule.useRef(nil) else nil
-	local var19 = if fFlagExpChatFocusChannelBarSupportModule then reactFocusNavigationModule.useFocusGuiObject() else nil
-	local var20 = if fFlagExpChatFocusChannelBarSupportModule then useSelectionCursor(cursorKind.Invisible) else nil
-	local var21 = if fFlagExpChatFocusChannelBarSupportModule then useSelectionCursor(cursorKind.RoundedSlot) else nil
+	local var17 = signalsReactModule.useSignalState(var1.getChatInputBarFocused)
+	local var18 = reactModule.useRef(nil)
+	local var19 = reactFocusNavigationModule.useFocusGuiObject()
+	local var20 = useSelectionCursor(cursorKind.Invisible)
+	local var21 = useSelectionCursor(cursorKind.RoundedSlot)
 	local var22 = var10 or var11
 	local var23 = var22 < var4 * configModule.ChannelTabsSettings.MinTabWidth
 	local var24 = if not var23 then var4 else math.floor((var22 - configModule.ChannelTabsSettings.DropdownIconContainerWidth) / configModule.ChannelTabsSettings.MinTabWidth)
@@ -216,6 +215,7 @@ return function(p1)
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/TopRoundedRect8px.png",
 			BorderSizePixel = 0,
+			Selectable = true,
 			ImageColor3 = backgroundColor3,
 			ImageTransparency = p1.transparencyValue:map(function(p2)
 				-- upvalues: backgroundTransparency (ref)
@@ -224,9 +224,8 @@ return function(p1)
 			ScaleType = Enum.ScaleType.Slice,
 			Size = UDim2.new(1, 0, 0, 8),
 			SliceCenter = Rect.new(8, 8, 24, 32),
-			Selectable = if fFlagExpChatFocusChannelBarSupportModule then true else nil,
 			SelectionImageObject = var20,
-			ref = if fFlagExpChatFocusChannelBarSupportModule then p1.topBorderRef else nil
+			ref = p1.topBorderRef
 		})
 	}
 	local createElement_2 = reactModule.createElement
@@ -283,9 +282,9 @@ return function(p1)
 		t_9.BackgroundColor3 = color_1
 		t_9.Text = ""
 		t_9.BorderSizePixel = 0
-		t_9.Selectable = if fFlagExpChatFocusChannelBarSupportModule then true else nil
+		t_9.Selectable = true
 		t_9.SelectionImageObject = var21
-		t_9.ref = if fFlagExpChatFocusChannelBarSupportModule then var18 else nil
+		t_9.ref = var18
 		
 		t_9[reactModule.Event.MouseEnter] = function()
 			-- upvalues: var7 (ref)
@@ -381,6 +380,7 @@ return function(p1)
 		local t_10 = {
 			ScrollBarThickness = 4,
 			ClipsDescendants = true,
+			Selectable = false,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1),
 			CanvasSize = UDim2.new(0, 150, 0, var26)
@@ -397,7 +397,6 @@ return function(p1)
 		end)
 		t_10.ScrollingDirection = Enum.ScrollingDirection.Y
 		t_10.ElasticBehavior = Enum.ElasticBehavior.Always
-		t_10.Selectable = if fFlagExpChatFocusChannelBarSupportModule then false else nil
 		t_8.ScrollView = createElement_4(var47, t_10, t_1)
 		var44 = var44(var45, t_7, t_8)
 	end

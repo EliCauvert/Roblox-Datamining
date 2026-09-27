@@ -33,6 +33,8 @@ local getFIntCurrencyTransferMaxAmountModule = require(currencyTransfers.Flags.G
 local getFFlagCurrencyTransferFixTextBoxInputModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFixTextBoxInput)
 local getFFlagCurrencyTransferFlowUIImprovementFixModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFlowUIImprovementFix)
 local getFFlagCurrencyTransferFixDesktopInputModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFixDesktopInput)
+local getFFlagCurrencyTransferFocusNavigationModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
+local useTransferSheetFocusModule = require(currencyTransfers.Hooks.useTransferSheetFocus)
 local getFFlagCurrencyTransferUseBackendTransferLimitsModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferUseBackendTransferLimits)
 local currencyTransferTelemetryModule = require(currencyTransfers.Events.CurrencyTransferTelemetry)
 local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTransferFlowEventName)
@@ -41,7 +43,7 @@ local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobux
 local formatNumberModule = require(currencyTransfers.Utils.formatNumber)
 
 return function(_)
-	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTokens (ref), getFFlagCurrencyTransferFixDesktopInputModule (ref), userInputService (ref), useTransferStoreModule (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), signalsReactModule (ref), getFFlagCurrencyTransferUseBackendTransferLimitsModule (ref), getFIntCurrencyTransferMinAmountModule (ref), getFIntCurrencyTransferMaxAmountModule (ref), setTransferPromptStateModule (ref), promptStateModule (ref), proceedToConfirmModule (ref), useTextBoxOnChangeRefModule (ref), useAutoFocusTextBoxOnMountModule (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), formatNumberModule (ref), localizationService (ref), transferLocaleFormatModule (ref), useScaledValue (ref), sheet (ref), transferRobuxHeaderModule (ref), view (ref), getFFlagCurrencyTransferFixTextBoxInputModule (ref), transferProfileThumbnailModule (ref), robuxTextModule (ref), icon (ref), text (ref), transferAmountOptionChipsModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
+	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTokens (ref), getFFlagCurrencyTransferFixDesktopInputModule (ref), userInputService (ref), useTransferStoreModule (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), signalsReactModule (ref), getFFlagCurrencyTransferUseBackendTransferLimitsModule (ref), getFIntCurrencyTransferMinAmountModule (ref), getFIntCurrencyTransferMaxAmountModule (ref), setTransferPromptStateModule (ref), promptStateModule (ref), proceedToConfirmModule (ref), useTextBoxOnChangeRefModule (ref), getFFlagCurrencyTransferFocusNavigationModule (ref), useTransferSheetFocusModule (ref), useAutoFocusTextBoxOnMountModule (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), formatNumberModule (ref), localizationService (ref), transferLocaleFormatModule (ref), useScaledValue (ref), sheet (ref), transferRobuxHeaderModule (ref), view (ref), getFFlagCurrencyTransferFixTextBoxInputModule (ref), transferProfileThumbnailModule (ref), robuxTextModule (ref), icon (ref), text (ref), transferAmountOptionChipsModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local createElement_3
 	local var1 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxInputSheet)
 	local var2 = useTokens()
@@ -91,8 +93,7 @@ return function(_)
 		var10,
 		var11
 	})
-	local triggerOnClose = var4.triggerOnClose
-	local var13 = useAutoFocusTextBoxOnMountModule(useTextBoxOnChangeRefModule(reactModule.useCallback(function(p1)
+	local var13 = useTextBoxOnChangeRefModule(reactModule.useCallback(function(p1)
 		-- upvalues: setSelectedAmount (ref)
 		setSelectedAmount(p1 or 0)
 	end, { setSelectedAmount }), reactModule.useCallback(function(p1, p2)
@@ -105,15 +106,18 @@ return function(_)
 			end
 			var12()
 		end
-	end, { var12, getSelectedAmount, var10, var11 })), 0.05)
-	local var14 = reactModule.useCallback(function(p1)
-		-- upvalues: var7 (ref), var13 (ref)
+	end, { var12, getSelectedAmount, var10, var11 }))
+	local triggerOnClose = var4.triggerOnClose
+	local var14 = if getFFlagCurrencyTransferFocusNavigationModule() then useTransferSheetFocusModule(triggerOnClose) else nil
+	local var15 = useAutoFocusTextBoxOnMountModule(var13, 0.05)
+	local var16 = reactModule.useCallback(function(p1)
+		-- upvalues: var7 (ref), var15 (ref)
 		if p1 then
 			var7.current = p1
-			var13(p1)
+			var15(p1)
 		end
-	end, { var13 })
-	local var15 = reactModule.useMemo(function()
+	end, { var15 })
+	local var17 = reactModule.useMemo(function()
 		return {
 			{ amount = 25, text = "25" },
 			{ amount = 50, text = "50" },
@@ -121,7 +125,7 @@ return function(_)
 			{ amount = 200, text = "200" }
 		}
 	end, {})
-	local var16 = reactModule.useCallback(function(p1)
+	local var18 = reactModule.useCallback(function(p1)
 		-- upvalues: setSelectedAmount (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var7 (ref)
 		setSelectedAmount(p1)
 		
@@ -133,29 +137,30 @@ return function(_)
 			end
 		end
 	end, { setSelectedAmount })
-	local var17 = var5 and (getSelectedAmount > 0 and (if getSelectedAmount >= var10 then var11 < getSelectedAmount else true))
-	local var18 = reactModule.useMemo(function()
-		-- upvalues: var17 (ref), getSelectedAmount (ref), var10 (ref), formatNumberModule (copy), localizationService (copy), transferLocaleFormatModule (copy), var1 (ref), var11 (ref)
-		return if not (not var17 or not getSelectedAmount or getSelectedAmount <= 0) then if getSelectedAmount < var10 then transferLocaleFormatModule.substituteAmount(var1.LowerThanMinAmount or "", tostring(formatNumberModule(localizationService.RobloxLocaleId, var10))) elseif var11 < getSelectedAmount then transferLocaleFormatModule.substituteAmount(var1.GreaterThanMaxAmount or "", tostring(formatNumberModule(localizationService.RobloxLocaleId, var11))) else nil else nil
+	local var19 = var5 and (getSelectedAmount > 0 and (if getSelectedAmount >= var10 then var11 < getSelectedAmount else true))
+	local var20 = reactModule.useMemo(function()
+		-- upvalues: var19 (ref), getSelectedAmount (ref), var10 (ref), formatNumberModule (copy), localizationService (copy), transferLocaleFormatModule (copy), var1 (ref), var11 (ref)
+		return if not (not var19 or not getSelectedAmount or getSelectedAmount <= 0) then if getSelectedAmount < var10 then transferLocaleFormatModule.substituteAmount(var1.LowerThanMinAmount or "", tostring(formatNumberModule(localizationService.RobloxLocaleId, var10))) elseif var11 < getSelectedAmount then transferLocaleFormatModule.substituteAmount(var1.GreaterThanMaxAmount or "", tostring(formatNumberModule(localizationService.RobloxLocaleId, var11))) else nil else nil
 	end, {
-		var17, getSelectedAmount, var10, var11, var1.LowerThanMinAmount,
+		var19, getSelectedAmount, var10, var11, var1.LowerThanMinAmount,
 		var1.GreaterThanMaxAmount
 	})
-	local var19 = reactModule.useMemo(function()
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: getSelectedAmount (ref)
 		return not getSelectedAmount or getSelectedAmount <= 0
 	end, { getSelectedAmount })
-	local var20 = useScaledValue(500)
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: var20 (ref)
-		return { var20, 0.62 }
-	end, { var20 })
+	local var22 = useScaledValue(500)
+	local var23 = reactModule.useMemo(function()
+		-- upvalues: var22 (ref)
+		return { var22, 0.62 }
+	end, { var22 })
 	local createElement = reactModule.createElement
 	local root = sheet.Root
 	local t = {
 		preferCenterSheet = true,
-		snapPoints = var21,
-		onClose = triggerOnClose
+		snapPoints = var23,
+		onClose = triggerOnClose,
+		ref = var14
 	}
 	local t_1 = {
 		Header = reactModule.createElement(sheet.Header, {}, {
@@ -197,15 +202,15 @@ return function(_)
 					Text = if getSelectedAmount and getSelectedAmount > 0 then tostring(getSelectedAmount) elseif getFFlagCurrencyTransferFixTextBoxInputModule() then "" else "0",
 					TextInputType = Enum.TextInputType.Number,
 					ClearTextOnFocus = not getFFlagCurrencyTransferFlowUIImprovementFixModule(),
-					ref = var14
+					ref = var16
 				})
 			})
 		})
 	end
-	local var22
+	local var24
 	t_5.RobuxInputWrapper = createElement_3
 	local createElement_4 = reactModule.createElement
-	local var23 = "Frame"
+	local var25 = "Frame"
 	local t_6 = {
 		BackgroundTransparency = 1,
 		LayoutOrder = 1,
@@ -214,7 +219,7 @@ return function(_)
 	}
 	local t_7 = {}
 	local createElement_5 = reactModule.createElement
-	local var24 = view
+	local var26 = view
 	local t_8 = {
 		tag = "col align-x-center items-center gap-xlarge size-full-0 auto-y padding-top-xlarge"
 	}
@@ -230,7 +235,7 @@ return function(_)
 		}) else nil
 	}
 	local createElement_6 = reactModule.createElement
-	local var25 = view
+	local var27 = view
 	local t_10 = {
 		tag = "col align-x-center gap-large size-full-1600",
 		LayoutOrder = 2
@@ -249,7 +254,7 @@ return function(_)
 	}
 	local t_13 = {}
 	local createElement_8 = reactModule.createElement
-	local var26 = "Frame"
+	local var28 = "Frame"
 	local t_14 = {
 		BackgroundTransparency = 1,
 		LayoutOrder = 1,
@@ -260,8 +265,8 @@ return function(_)
 	}
 	
 	if var3 then
-		var22 = reactModule.createElement
-		var22 = var22("Frame", {
+		var24 = reactModule.createElement
+		var24 = var24("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			AutomaticSize = Enum.AutomaticSize.XY
@@ -298,13 +303,13 @@ return function(_)
 				PlaceholderColor3 = var2.Color.Content.Emphasis.Color3,
 				AutomaticSize = Enum.AutomaticSize.X,
 				Size = UDim2.fromOffset(0, math.round(var2.Typography.DisplaySmall.FontSize)),
-				ref = var14
+				ref = var16
 			})
 		})
 	else
-		var22 = nil
+		var24 = nil
 	end
-	t_15.DesktopInputRow = var22
+	t_15.DesktopInputRow = var24
 	t_15.AmountTapTarget = if not var3 then reactModule.createElement("TextButton", {
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.new(0, 0, 0, 0),
@@ -318,21 +323,21 @@ return function(_)
 			end
 		end
 	}) else nil
-	t_13.AmountWrapper = createElement_8(var26, t_14, t_15)
+	t_13.AmountWrapper = createElement_8(var28, t_14, t_15)
 	t_11.AmountRow = createElement_7(view, t_12, t_13)
 	t_11.ErrorSlot = reactModule.createElement(view, {
 		tag = "col align-x-center align-y-center size-full-0 padding-top-medium",
 		LayoutOrder = 3,
 		Size = UDim2.new(1, 0, 0, 40)
 	}, {
-		ValidationErrorText = if var18 then reactModule.createElement(text, {
+		ValidationErrorText = if var20 then reactModule.createElement(text, {
 			tag = "auto-xy text-caption-small text-align-x-center content-system-alert",
 			LayoutOrder = 1,
-			Text = var18
+			Text = var20
 		}) else nil
 	})
-	t_9.AmountContainer = createElement_6(var25, t_10, t_11)
-	t_7.Content = createElement_5(var24, t_8, t_9)
+	t_9.AmountContainer = createElement_6(var27, t_10, t_11)
+	t_7.Content = createElement_5(var26, t_8, t_9)
 	t_7.TapToFocusOverlay = if not var3 then reactModule.createElement("TextButton", {
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.new(0, 0, 0, 0),
@@ -346,7 +351,7 @@ return function(_)
 			end
 		end
 	}) else nil
-	t_5.ThumbnailAndAmountArea = createElement_4(var23, t_6, t_7)
+	t_5.ThumbnailAndAmountArea = createElement_4(var25, t_6, t_7)
 	t_5.AmountChips = reactModule.createElement(view, {
 		tag = "col align-x-center size-full-1600 auto-y",
 		LayoutOrder = 2,
@@ -354,8 +359,8 @@ return function(_)
 	}, {
 		Chips = reactModule.createElement(transferAmountOptionChipsModule, {
 			layoutOrder = 1,
-			chips = var15,
-			onChipSelected = var16,
+			chips = var17,
+			onChipSelected = var18,
 			selectedAmount = getSelectedAmount
 		})
 	})
@@ -374,7 +379,7 @@ return function(_)
 					onActivated = var12,
 					variant = buttonVariant.Emphasis,
 					fillBehavior = fillBehavior.Fill,
-					isDisabled = var19
+					isDisabled = var21
 				})
 			}),
 			Disclaimer = reactModule.createElement(text, {

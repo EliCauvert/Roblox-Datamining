@@ -13,10 +13,12 @@ local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = localizationModule.Hooks.useLocalization
 local analyticsConstantsModule = require(inExperienceSideSheet.Analytics.AnalyticsConstants)
 local sidesheetAnalyticsModule = require(inExperienceSideSheet.Analytics.SidesheetAnalytics)
+local closePeoplePageOpenedWithSideSheetModule = require(inExperienceSideSheet.Utils.closePeoplePageOpenedWithSideSheet)
 local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
+local fFlagSideSheetOpenPeoplePage = require(inExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), view (ref), icon (ref), iconName (ref), iconVariant (ref), text (ref)
+	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), fFlagSideSheetOpenPeoplePage (ref), closePeoplePageOpenedWithSideSheetModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), view (ref), icon (ref), iconName (ref), iconVariant (ref), text (ref)
 	local var1 = useTokens()
 	local var2 = useLocalization({
 		title = "CoreScripts.InGameMenu.UnlockMore.Title",
@@ -24,7 +26,7 @@ return reactModule.memo(function(p1)
 	})
 	
 	return reactModule.createElement(view, {
-		tag = "size-full-0 auto-y padding-bottom-medium",
+		tag = "size-full-0 auto-y padding-bottom-medium padding-top-small",
 		testId = "account-upsell-container",
 		LayoutOrder = p1.layoutOrder
 	}, {
@@ -32,8 +34,12 @@ return reactModule.memo(function(p1)
 			tag = "row align-y-center size-full-0 auto-y padding-medium radius-medium bg-shift-200",
 			testId = "account-upsell-card",
 			onActivated = reactModule.useCallback(function()
-				-- upvalues: p1 (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
+				-- upvalues: p1 (ref), fFlagSideSheetOpenPeoplePage (copy), closePeoplePageOpenedWithSideSheetModule (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
 				p1.onActivated()
+				
+				if fFlagSideSheetOpenPeoplePage then
+					closePeoplePageOpenedWithSideSheetModule()
+				end
 				toggleSideSheetModule(false)
 				sidesheetAnalyticsModule.logSidesheetClosed(analyticsConstantsModule.Source.AccountUpsell)
 			end, { p1.onActivated })

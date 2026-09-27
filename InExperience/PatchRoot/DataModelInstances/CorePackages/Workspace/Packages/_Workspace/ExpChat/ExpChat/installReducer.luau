@@ -26,6 +26,6 @@ return roduxModule.combineReducers({
 	Adornees = require(script.Adornees),
 	ClientSettings = require(script.ClientSettings),
 	AutocompleteDropdown = require(expChat.Flags.getEnableChatInputBarConfigurationAutocompleteEnabled)() and require(script.AutocompleteDropdown) or nil,
-	ChannelTabs = require(expChat.Flags.getFFlagExpChatEnableChannelTabsUI)() and require(script.ChannelTabs) or nil,
+	ChannelTabs = require(script.ChannelTabs),
 	ReverseNudgeToxicUsers = require(script.ReverseNudgeToxicUsers)
 })

@@ -1,7 +1,9 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
+﻿local textService = game:GetService("TextService")
+local socialCarousel = script:FindFirstAncestor("SocialCarousel")
 local parent = socialCarousel.Parent
-local textService = game:GetService("TextService")
 local foundationModule = require(parent.Foundation)
+local getTextSize = require(parent.Style).GetTextSize
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local reactModule = require(parent.React)
 local enums = foundationModule.Enums
 local image = foundationModule.Image
@@ -20,15 +22,15 @@ local fFlagSocialCarouselRemoveStrokeForAddFriendsModule = require(socialCarouse
 local fIntSocalCarouselMaxNewRequestsCountModule = require(socialCarousel.Flags.FIntSocalCarouselMaxNewRequestsCount)
 
 return function(p1)
-	-- upvalues: reactModule (ref), useTokens (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), textService (ref), view (ref), image (ref), enums (ref), text (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), fIntSocalCarouselMaxNewRequestsCountModule (ref), skeleton (ref), radius (ref), fFlagSocialCarouselRemoveStrokeForAddFriendsModule (ref), icon (ref), iconSize (ref)
+	-- upvalues: reactModule (ref), useTokens (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), view (ref), image (ref), enums (ref), text (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), fIntSocalCarouselMaxNewRequestsCountModule (ref), skeleton (ref), radius (ref), fFlagSocialCarouselRemoveStrokeForAddFriendsModule (ref), icon (ref), iconSize (ref)
 	local tileRef = p1.tileRef or reactModule.useRef(nil)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState(false)
 	local titleSmall = var1.Typography.TitleSmall
 	local isLoading = fFlagSocialCarouselShowLoadingSkeletonModule and p1.isLoading
 	local var4 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), textService (copy), titleSmall (ref)
-		return if p1.title then textService:GetTextSize(p1.title, titleSmall.FontSize, titleSmall.Font, Vector2.new(500, 500)) else Vector2.new(0, 0)
+		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), getTextSize (copy), titleSmall (ref), textService (copy)
+		return if p1.title then if foundationFontFaceMigration then getTextSize(p1.title, titleSmall.FontSize, titleSmall.Font, Vector2.new(500, 500), { addTemporaryPadding = false }) else textService:GetTextSize(p1.title, titleSmall.FontSize, titleSmall.Font, Vector2.new(500, 500)) else Vector2.new(0, 0)
 	end, { p1.title })
 	local var5 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), reactModule (copy), view (copy), image (copy)

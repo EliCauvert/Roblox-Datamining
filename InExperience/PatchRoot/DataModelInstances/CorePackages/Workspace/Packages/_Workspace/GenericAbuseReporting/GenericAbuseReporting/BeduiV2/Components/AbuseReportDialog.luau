@@ -43,9 +43,9 @@ return reactModule.memo(function(p1)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Header = reactModule.createElement(sheet.Header, nil, reactModule.createElement(view, {
-			tag = "size-full-0 auto-y row align-y-center gap-small flex-between"
+			tag = "row flex-between align-y-center gap-small size-full-0 auto-y"
 		}, {
-			reactModule.createElement(view, { tag = "auto-xy row align-y-center gap-small" }, {
+			reactModule.createElement(view, { tag = "row align-y-center gap-small auto-xy" }, {
 				BackIcon = if canGoBack then reactModule.createElement(iconButton, {
 					LayoutOrder = 1,
 					size = inputSize.Medium,

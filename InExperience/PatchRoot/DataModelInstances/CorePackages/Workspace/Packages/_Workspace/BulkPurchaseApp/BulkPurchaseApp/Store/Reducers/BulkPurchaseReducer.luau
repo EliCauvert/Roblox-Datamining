@@ -11,6 +11,7 @@ local bulkPurchaseDisablePurchaseModule = require(bulkPurchaseApp.Store.Actions.
 local _ = require(bulkPurchaseApp.Store.Types)
 local fFlagBulkPurchaseRemoveStartedActionModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseRemoveStartedAction)
 local fFlagAXAddPlusUpsellToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
+local fFlagAXAddOffersToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
 
 local function _()
 	-- upvalues: bulkPurchasePromptStateEnumModule (ref)
@@ -46,7 +47,7 @@ return roduxModule.createReducer({ promptState = bulkPurchasePromptStateEnumModu
 		return cloned
 	end,
 	[bulkPurchaseRequestedModule.name] = function(p1, p2)
-		-- upvalues: fFlagBulkPurchaseRemoveStartedActionModule (ref), bulkPurchasePromptStateEnumModule (ref)
+		-- upvalues: fFlagBulkPurchaseRemoveStartedActionModule (ref), bulkPurchasePromptStateEnumModule (ref), fFlagAXAddOffersToBulkPurchaseModule (ref)
 		local cloned = table.clone(p1)
 		cloned.itemData = p2.itemData
 		cloned.options = p2.options
@@ -58,9 +59,13 @@ return roduxModule.createReducer({ promptState = bulkPurchasePromptStateEnumModu
 		if fFlagBulkPurchaseRemoveStartedActionModule then
 			cloned.promptState = bulkPurchasePromptStateEnumModule.Request
 		end
+		if fFlagAXAddOffersToBulkPurchaseModule then
+			cloned.offerData = p2.offerData
+		end
 		return cloned
 	end,
 	[bulkPurchaseRefreshedModule.name] = function(p1, p2)
+		-- upvalues: fFlagAXAddOffersToBulkPurchaseModule (ref)
 		local cloned = table.clone(p1)
 		cloned.itemData = p2.itemData
 		cloned.options = p2.options
@@ -70,6 +75,9 @@ return roduxModule.createReducer({ promptState = bulkPurchasePromptStateEnumModu
 		cloned.discountInformation = p2.discountInformation
 		cloned.disablePurchase = false
 		
+		if fFlagAXAddOffersToBulkPurchaseModule then
+			cloned.offerData = p2.offerData
+		end
 		return cloned
 	end,
 	[bulkPurchaseDisablePurchaseModule.name] = function(p1, _)

@@ -13,7 +13,9 @@ local createTTSAudioManagerModule = require(momentsCreation.Audio.createTTSAudio
 local createEditSessionModule = require(momentsCreation.Stores.createEditSession)
 local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
 local makeDefaultTextOverlayEditModule = require(momentsCreation.Utils.makeDefaultTextOverlayEdit)
+local clampTtsStartTimeModule = require(momentsCreation.Utils.clampTtsStartTime)
 local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
+local getFFlagMomentsTTSStartTimePositioningModule = require(momentsCreation.Flags.GetFFlagMomentsTTSStartTimePositioning)
 local getFFlagMomentsGenerateTextInTextOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsGenerateTextInTextOverlay)
 local momentsDraftStorageModule = require(momentsCreation.Storage.MomentsDraftStorage)
 local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
@@ -30,7 +32,7 @@ local createComputed = signalsModule.createComputed
 local createSignal = signalsModule.createSignal
 
 return function(p1)
-	-- upvalues: creationToolRegistryModule (ref), defaultCreationToolsModule (ref), sessionManager (ref), funnelEventNames (ref), createSignal (ref), createComputed (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSAudioOverlayModule (ref), createCapturePreviewControllerModule (ref), createTTSAudioManagerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), getFFlagMomentsCreationSaveDraft (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), dialogTypeModule (ref), makeDefaultTextOverlayEditModule (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref)
+	-- upvalues: creationToolRegistryModule (ref), defaultCreationToolsModule (ref), sessionManager (ref), funnelEventNames (ref), createSignal (ref), createComputed (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSAudioOverlayModule (ref), createCapturePreviewControllerModule (ref), createTTSAudioManagerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), getFFlagMomentsCreationSaveDraft (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), clampTtsStartTimeModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), dialogTypeModule (ref), makeDefaultTextOverlayEditModule (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref)
 	local store = p1.store
 	local host = p1.host or {}
 	local registry = p1.registry or creationToolRegistryModule(defaultCreationToolsModule)
@@ -289,7 +291,7 @@ return function(p1)
 	end
 	
 	local function commitActiveTool()
-		-- upvalues: getActiveSession (write), var14 (ref), store (ref), creationFlowStateModule (copy), var1 (write), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), setActiveSession (write)
+		-- upvalues: getActiveSession (write), var14 (ref), store (ref), creationFlowStateModule (copy), var1 (write), getFFlagMomentsTTSStartTimePositioningModule (copy), var4 (ref), clampTtsStartTimeModule (copy), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), setActiveSession (write)
 		local var17 = getActiveSession(false)
 		local var18 = var14(false)
 		
@@ -303,6 +305,20 @@ return function(p1)
 		if var18.onCommit ~= nil and var18.onCommit(var19, var1) == false then return end
 		store.setCommittedEdit(var18.kind, var19)
 		
+		if getFFlagMomentsTTSStartTimePositioningModule and var18.kind == "trim" and (var19 ~= nil and var19.startTime ~= nil) and var19.endTime ~= nil then
+			local var20 = var19.endTime - var19.startTime
+			local tts = var4(false).tts
+			
+			if tts ~= nil and tts.startTime ~= nil and var20 > 0 then
+				local var21 = clampTtsStartTimeModule(tts.startTime, var20)
+				
+				if var21 ~= tts.startTime then
+					local cloned = table.clone(tts)
+					cloned.startTime = var21
+					store.setCommittedEdit("voice", cloned)
+				end
+			end
+		end
 		if var18.cta.commitAnalyticsEvent ~= nil and (not var18.cta.commitRequiresEdit or (if var18.toEdits ~= nil then next(var18.toEdits(var19)) ~= nil else true)) then
 			fireAnalyticsEventModule(var18.cta.commitAnalyticsEvent, withCreationSession(makeCreationEventFieldsModule.makeToolField(var18)))
 		end
@@ -438,7 +454,7 @@ return function(p1)
 		getVoiceCoachmarkDismissed = var10,
 		dismissVoiceCoachmark = dismissVoiceCoachmark,
 		publish = function()
-			-- upvalues: store (ref), host (ref), var3 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), sessionManager (copy), funnelEventNames (copy), preview (ref), var4 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), getFFlagMomentsTTSAudioOverlayModule (copy), dismiss (ref)
+			-- upvalues: store (ref), host (ref), var3 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), sessionManager (copy), funnelEventNames (copy), preview (ref), var4 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), getFFlagMomentsTTSAudioOverlayModule (copy), getFFlagMomentsTTSStartTimePositioningModule (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), dismiss (ref)
 			local description = store.getDescription(false)
 			
 			if host.isTextFiltered ~= nil and host.isTextFiltered(description) then
@@ -467,6 +483,20 @@ return function(p1)
 				textOverlayEdits = store.getTextOverlayEdits(false)
 				var17 = cryoModule.Dictionary.join(var17, makeCreationEventFieldsModule.makeGeneratedTextOutcomeFields(store.getGeneratedDescription(false), description, store.getGeneratedSummary(false), if textOverlayEdits == nil or textOverlayEdits[1] == nil then nil else textOverlayEdits[1].text))
 			end
+			if getFFlagMomentsTTSAudioOverlayModule and getFFlagMomentsTTSStartTimePositioningModule then
+				textOverlayEdits = var4(false)
+				local tts = textOverlayEdits.tts
+				
+				if tts ~= nil then
+					local startTime = tts.startTime or 0
+					local var18 = if textOverlayEdits.trim ~= nil then preview.playback.getTimeLength(false) else textOverlayEdits.trim.endTime - textOverlayEdits.trim.startTime
+					var17 = cryoModule.Dictionary.join(var17, {
+						ttsStartTimeSeconds = tostring(startTime),
+						ttsVideoDurationSeconds = tostring(var18),
+						ttsStartTimeFraction = tostring(if var18 > 0 then startTime / var18 else 0)
+					})
+				end
+			end
 			fireAnalyticsEventModule(eventNames.MomentsEditingFlowPublished, var17)
 			
 			if fFlagMomentsRealtimeSessionTelemetry then
@@ -474,34 +504,34 @@ return function(p1)
 			end
 			if fFlagMomentsContentStatsTelemetry then
 				textOverlayEdits = momentsCommonModule.Analytics
-				local var18 = var4(false)
-				local var19 = 0
+				local var19 = var4(false)
+				local var20 = 0
 				
-				if var18.music ~= nil then
-					var19 += 1
+				if var19.music ~= nil then
+					var20 += 1
 					textOverlayEdits.reportMomentsPublishedWithEdit("music")
 				end
-				if var18.trim ~= nil then
-					var19 += 1
+				if var19.trim ~= nil then
+					var20 += 1
 					textOverlayEdits.reportMomentsPublishedWithEdit("trim")
 				end
-				if var18.textOverlays ~= nil and #var18.textOverlays > 0 then
-					var19 += 1
+				if var19.textOverlays ~= nil and #var19.textOverlays > 0 then
+					var20 += 1
 					textOverlayEdits.reportMomentsPublishedWithEdit("text_overlay")
 				end
-				if var18.stickerOverlays ~= nil and #var18.stickerOverlays > 0 then
-					var19 += 1
+				if var19.stickerOverlays ~= nil and #var19.stickerOverlays > 0 then
+					var20 += 1
 					textOverlayEdits.reportMomentsPublishedWithEdit("sticker")
 				end
 				if description ~= nil and description ~= "" then
-					var19 += 1
+					var20 += 1
 					textOverlayEdits.reportMomentsPublishedWithEdit("description")
 				end
-				if getFFlagMomentsTTSAudioOverlayModule and var18.tts ~= nil then
-					var19 += 1
+				if getFFlagMomentsTTSAudioOverlayModule and var19.tts ~= nil then
+					var20 += 1
 					textOverlayEdits.reportMomentsPublishedWithEdit("tts")
 				end
-				textOverlayEdits.reportMomentsPublishedEditCount(var19)
+				textOverlayEdits.reportMomentsPublishedEditCount(var20)
 				local selectedCapture = store.getSelectedCapture(false)
 				
 				if selectedCapture ~= nil then

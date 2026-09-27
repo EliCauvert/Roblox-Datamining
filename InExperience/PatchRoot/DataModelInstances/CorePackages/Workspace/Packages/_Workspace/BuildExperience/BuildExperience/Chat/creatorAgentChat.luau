@@ -15,6 +15,7 @@ local proposePlanControllerModule = require(script.Parent.proposePlanController)
 local var2 = if fFlagBuildExperienceManageDevProductModule then require(script.Parent.askManageDevProductController) else nil
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local fFlagBuildEventsUpdate1Module = require(buildExperience.Flags.FFlagBuildEventsUpdate1)
+local fFlagBuildRemoveTeamTestEnabledCapabilityFlagModule = require(buildExperience.Flags.FFlagBuildRemoveTeamTestEnabledCapabilityFlag)
 local studioAskUserTool = creatorAgentChatModule.StudioAskUserTool
 local studioClientDataModelTools = creatorAgentChatModule.StudioClientDataModelTools
 local studioClientLogsTool = creatorAgentChatModule.StudioClientLogsTool
@@ -188,7 +189,7 @@ end
 
 return {
 	createLiveAssistantTurn = function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: createLocalToolControllers (ref), studioAskUserTool (ref), studioProposePlanTool (ref), studioClientLogsTool (ref), fFlagBuildExperienceClientDataModelTools (ref), studioClientDataModelTools (ref), fFlagBuildExperienceManageDevProductModule (ref), studioManageDevProductTool (ref), fFlagEnableTeamTestLua (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), resolvePromptFailure (ref), debug (ref), getPromptFailureTelemetryParameters (ref), localizationStringsModule (ref), t_1 (ref)
+		-- upvalues: createLocalToolControllers (ref), studioAskUserTool (ref), studioProposePlanTool (ref), studioClientLogsTool (ref), fFlagBuildExperienceClientDataModelTools (ref), studioClientDataModelTools (ref), fFlagBuildExperienceManageDevProductModule (ref), studioManageDevProductTool (ref), fFlagBuildRemoveTeamTestEnabledCapabilityFlagModule (ref), fFlagEnableTeamTestLua (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), resolvePromptFailure (ref), debug (ref), getPromptFailureTelemetryParameters (ref), localizationStringsModule (ref), t_1 (ref)
 		local var3 = createLocalToolControllers(p1, p4, p5)
 		local universeId = p1.universeId
 		local list = {
@@ -212,7 +213,7 @@ return {
 					application = if fFlagBuildExperienceClientDataModelTools then "build-on-mobile" else nil,
 					localTools = list,
 					providerConfig = { universeId = universeId },
-					teamTestEnabled = fFlagEnableTeamTestLua
+					teamTestEnabled = if fFlagBuildRemoveTeamTestEnabledCapabilityFlagModule then nil else fFlagEnableTeamTestLua
 				}
 			},
 			onDroppedChatMessage = function(p7)

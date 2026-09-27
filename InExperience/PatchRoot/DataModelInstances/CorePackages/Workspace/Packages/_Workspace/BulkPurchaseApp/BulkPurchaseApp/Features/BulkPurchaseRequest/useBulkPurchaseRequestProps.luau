@@ -27,6 +27,7 @@ local bulkPurchaseEndedModule = require(bulkPurchaseApp.Store.Actions.BulkPurcha
 local bulkPurchaseFailedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseFailed)
 local bulkPurchaseDisablePurchaseModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseDisablePurchase)
 local bulkPurchaseSucceededModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseSucceeded)
+local bulkPurchaseCountersEnumModule = require(bulkPurchaseApp.Enums.BulkPurchaseCountersEnum)
 local bulkPurchasePromptStateEnumModule = require(bulkPurchaseApp.Enums.BulkPurchasePromptStateEnum)
 local errorCodeEnumModule = require(bulkPurchaseApp.Enums.ErrorCodeEnum)
 local itemStatusToErrorCodeMapModule = require(bulkPurchaseApp.Enums.ItemStatusToErrorCodeMap)
@@ -34,7 +35,9 @@ local paymentPlatformEnumModule = require(bulkPurchaseApp.Enums.PaymentPlatformE
 local getPaymentPlatformModule = require(bulkPurchaseApp.Utils.getPaymentPlatform)
 local getRobuxStoreUrlModule = require(bulkPurchaseApp.Utils.getRobuxStoreUrl)
 local getGuiObjectIsObscuredModule = require(bulkPurchaseApp.Utils.getGuiObjectIsObscured)
+local reportBulkPurchaseRequestCountersModule = require(bulkPurchaseApp.Utils.reportBulkPurchaseRequestCounters)
 local fFlagFixVP8143Module = require(bulkPurchaseApp.Flags.FFlagFixVP8143)
+local fFlagBulkPurchaseReportCountersModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseReportCounters)
 local getItemResultsFromResponseModule = require(script.Parent.Utils.getItemResultsFromResponse)
 local getCommonItemStatusModule = require(script.Parent.Utils.getCommonItemStatus)
 local handleEconomicRestrictionErrorModule = require(script.Parent.Utils.handleEconomicRestrictionError)
@@ -43,12 +46,13 @@ local selectOptionsModule = require(script.Parent.Utils.selectOptions)
 local fixBuyRobuxForAndroid = game:DefineFastFlag("FixBuyRobuxForAndroid", false)
 local fixBulkPurchaseStarterGuiRename = game:DefineFastFlag("FixBulkPurchaseStarterGuiRename", false)
 local fFlagAXAddPlusUpsellToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
+local fFlagAXAddOffersToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
 local fIntBlackbirdUpsellMinPriceForDiscountInclusive = sharedFlagsModule.FIntBlackbirdUpsellMinPriceForDiscountInclusive
 local fIntBlackbirdUpsellMaxPriceForDiscountInclusive = sharedFlagsModule.FIntBlackbirdUpsellMaxPriceForDiscountInclusive
 local _ = require(script.Parent.BulkPurchaseRequest)
 
 return function()
-	-- upvalues: useDispatch (ref), useSelector (ref), selectBulkPurchaseRequestStateModule (ref), selectPurchaseResultsModule (ref), selectOrderRequestModule (ref), selectOptionsModule (ref), selectItemDataModule (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref), reactModule (ref), robloxSubscriptionSignals (ref), signalsReactModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref), bulkPurchaseDisablePurchaseModule (ref), isErrorReasonContainsEconomicRestrictions (ref), handleEconomicRestrictionErrorModule (ref), getItemResultsFromResponseModule (ref), getCommonItemStatusModule (ref), bulkPurchaseSucceededModule (ref), bulkPurchasePromptStateEnumModule (ref), bulkPurchaseFailedModule (ref), itemStatusToErrorCodeMapModule (ref), errorCodeEnumModule (ref), getPaymentPlatformModule (ref), paymentPlatformEnumModule (ref), fixBuyRobuxForAndroid (ref), httpService (ref), getRobuxStoreUrlModule (ref), browserService (ref), useAppPolicy (ref), getRobloxSubscriptionProducts (ref), mutedError (ref), fIntBlackbirdUpsellMinPriceForDiscountInclusive (ref), fIntBlackbirdUpsellMaxPriceForDiscountInclusive (ref), robloxSubscriptionPurchaseAppModule (ref), robloxSubscriptionFlowCompleteReason (ref), surfaceName (ref), surfaceContext (ref), purchasePromptModule (ref), fFlagFixVP8143Module (ref), runService (ref), getGuiObjectIsObscuredModule (ref), fixBulkPurchaseStarterGuiRename (ref), starterGuiService (ref)
+	-- upvalues: useDispatch (ref), useSelector (ref), selectBulkPurchaseRequestStateModule (ref), selectPurchaseResultsModule (ref), selectOrderRequestModule (ref), selectOptionsModule (ref), selectItemDataModule (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref), reactModule (ref), robloxSubscriptionSignals (ref), signalsReactModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref), bulkPurchaseDisablePurchaseModule (ref), isErrorReasonContainsEconomicRestrictions (ref), handleEconomicRestrictionErrorModule (ref), getItemResultsFromResponseModule (ref), getCommonItemStatusModule (ref), bulkPurchaseSucceededModule (ref), bulkPurchasePromptStateEnumModule (ref), fFlagBulkPurchaseReportCountersModule (ref), reportBulkPurchaseRequestCountersModule (ref), bulkPurchaseCountersEnumModule (ref), bulkPurchaseFailedModule (ref), itemStatusToErrorCodeMapModule (ref), errorCodeEnumModule (ref), getPaymentPlatformModule (ref), paymentPlatformEnumModule (ref), fixBuyRobuxForAndroid (ref), httpService (ref), getRobuxStoreUrlModule (ref), browserService (ref), useAppPolicy (ref), getRobloxSubscriptionProducts (ref), mutedError (ref), fIntBlackbirdUpsellMinPriceForDiscountInclusive (ref), fIntBlackbirdUpsellMaxPriceForDiscountInclusive (ref), robloxSubscriptionPurchaseAppModule (ref), robloxSubscriptionFlowCompleteReason (ref), surfaceName (ref), surfaceContext (ref), purchasePromptModule (ref), fFlagAXAddOffersToBulkPurchaseModule (ref), fFlagFixVP8143Module (ref), runService (ref), getGuiObjectIsObscuredModule (ref), fixBulkPurchaseStarterGuiRename (ref), starterGuiService (ref)
 	local var1 = useDispatch()
 	local var2 = useSelector(selectBulkPurchaseRequestStateModule)
 	local var3 = useSelector(selectPurchaseResultsModule)
@@ -79,7 +83,7 @@ return function()
 	end
 	
 	local var14 = function()
-		-- upvalues: fFlagAXAddPlusUpsellToBulkPurchaseModule (copy), var1 (ref), bulkPurchaseDisablePurchaseModule (copy), marketplaceService (copy), var4 (ref), var5 (ref), isErrorReasonContainsEconomicRestrictions (copy), handleEconomicRestrictionErrorModule (copy), getItemResultsFromResponseModule (copy), var6 (ref), getCommonItemStatusModule (copy), bulkPurchaseSucceededModule (copy), bulkPurchasePromptStateEnumModule (copy), bulkPurchaseFailedModule (copy), itemStatusToErrorCodeMapModule (copy), errorCodeEnumModule (copy)
+		-- upvalues: fFlagAXAddPlusUpsellToBulkPurchaseModule (copy), var1 (ref), bulkPurchaseDisablePurchaseModule (copy), marketplaceService (copy), var4 (ref), var5 (ref), isErrorReasonContainsEconomicRestrictions (copy), handleEconomicRestrictionErrorModule (copy), getItemResultsFromResponseModule (copy), var6 (ref), getCommonItemStatusModule (copy), bulkPurchaseSucceededModule (copy), bulkPurchasePromptStateEnumModule (copy), fFlagBulkPurchaseReportCountersModule (copy), reportBulkPurchaseRequestCountersModule (copy), bulkPurchaseCountersEnumModule (copy), bulkPurchaseFailedModule (copy), itemStatusToErrorCodeMapModule (copy), errorCodeEnumModule (copy)
 		if fFlagAXAddPlusUpsellToBulkPurchaseModule then
 			var1(bulkPurchaseDisablePurchaseModule())
 		end
@@ -102,9 +106,14 @@ return function()
 				
 				return
 			elseif var16 == Enum.MarketplaceItemPurchaseStatus.Success then
+				if fFlagBulkPurchaseReportCountersModule then
+					reportBulkPurchaseRequestCountersModule(bulkPurchaseCountersEnumModule.BulkPurchaseSucceededCounter)
+				end
 				var1(bulkPurchaseSucceededModule(bulkPurchasePromptStateEnumModule.Success, var15))
 				
 				return
+			elseif fFlagBulkPurchaseReportCountersModule then
+				reportBulkPurchaseRequestCountersModule(bulkPurchaseCountersEnumModule.BulkPurchaseFailedCounter)
 			end
 			var1(bulkPurchaseFailedModule(itemStatusToErrorCodeMapModule[var16]))
 			
@@ -166,13 +175,19 @@ return function()
 			return false
 		end, { var18, var12, var2.items })
 		var17 = reactModule.useCallback(function()
-			-- upvalues: robloxSubscriptionPurchaseAppModule (copy), robloxSubscriptionFlowCompleteReason (copy), var7 (write), var1 (ref), bulkPurchaseDisablePurchaseModule (copy), marketplaceService (copy), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy), surfaceName (copy), surfaceContext (copy)
+			-- upvalues: fFlagBulkPurchaseReportCountersModule (copy), reportBulkPurchaseRequestCountersModule (copy), bulkPurchaseCountersEnumModule (copy), robloxSubscriptionPurchaseAppModule (copy), robloxSubscriptionFlowCompleteReason (copy), var7 (write), var1 (ref), bulkPurchaseDisablePurchaseModule (copy), marketplaceService (copy), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy), surfaceName (copy), surfaceContext (copy)
+			if fFlagBulkPurchaseReportCountersModule then
+				reportBulkPurchaseRequestCountersModule(bulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellInitatedCounter)
+			end
 			robloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase({ showBackButton = false }, {
 				onFlowComplete = function(p1)
-					-- upvalues: robloxSubscriptionFlowCompleteReason (copy), var7 (copy), var1 (copy), bulkPurchaseDisablePurchaseModule (copy), marketplaceService (copy), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy)
+					-- upvalues: robloxSubscriptionFlowCompleteReason (copy), var7 (copy), var1 (copy), bulkPurchaseDisablePurchaseModule (copy), fFlagBulkPurchaseReportCountersModule (copy), reportBulkPurchaseRequestCountersModule (copy), bulkPurchaseCountersEnumModule (copy), marketplaceService (copy), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy)
 					if p1 == robloxSubscriptionFlowCompleteReason.UpsellPurchaseSucceeded and var7 then
 						var1(bulkPurchaseDisablePurchaseModule())
 						
+						if fFlagBulkPurchaseReportCountersModule then
+							reportBulkPurchaseRequestCountersModule(bulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellSucceededCounter)
+						end
 						if not pcall(function()
 							-- upvalues: marketplaceService (copy), var7 (copy)
 							marketplaceService:RefreshBulkPurchase(var7)
@@ -180,26 +195,50 @@ return function()
 							var1(bulkPurchaseFailedModule(errorCodeEnumModule.Generic))
 						end
 					end
+					if fFlagBulkPurchaseReportCountersModule and p1 == robloxSubscriptionFlowCompleteReason.UpsellPurchaseFailed then
+						reportBulkPurchaseRequestCountersModule(bulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellFailedCounter)
+					end
 				end
 			}, nil, surfaceName.BulkPurchasePrompt, surfaceContext.InGame, nil, nil)
 		end, { var1, var7 })
 		blackbirdUpsellBannerProductInfo = purchasePromptModule.Utils.getBlackbirdUpsellBannerProductInfo(var8)
 	end
-	local var19 = nil
+	local var19 = if fFlagAXAddOffersToBulkPurchaseModule then reactModule.useCallback(function(p1)
+		-- upvalues: var2 (ref), marketplaceService (copy), var7 (write)
+		local t = {}
+		
+		if var2.offerData and var2.offerData.offersAvailable then
+			local offersAvailable = var2.offerData.offersAvailable
+			
+			for i, v in offersAvailable do
+				if i ~= p1 and not offersAvailable[i].selected then
+					table.insert(t, i)
+				end
+				if i == p1 and offersAvailable[i].selected then
+					table.insert(t, i)
+				end
+			end
+		end
+		pcall(function()
+			-- upvalues: marketplaceService (copy), var7 (copy), t (ref)
+			marketplaceService:RefreshBulkPurchase(var7, { unselectedOffers = t })
+		end)
+	end, { var2.offerData, var7 }) else nil
 	local var20 = nil
+	local var21 = nil
 	local _ = nil
 	
 	if fFlagFixVP8143Module then
-		var19 = reactModule.useRef(nil)
-		local var21, var22 = reactModule.useState(true)
-		var20 = var21
-		local var23 = var22
+		var20 = reactModule.useRef(nil)
+		local var22, var23 = reactModule.useState(true)
+		var21 = var22
+		local var24 = var23
 		reactModule.useEffect(function()
-			-- upvalues: runService (copy), var19 (write), getGuiObjectIsObscuredModule (copy), fixBulkPurchaseStarterGuiRename (copy), starterGuiService (copy), var23 (write)
+			-- upvalues: runService (copy), var20 (write), getGuiObjectIsObscuredModule (copy), fixBulkPurchaseStarterGuiRename (copy), starterGuiService (copy), var24 (write)
 			local heartbeatConnection = runService.Heartbeat:Connect(function()
-				-- upvalues: var19 (copy), getGuiObjectIsObscuredModule (copy), fixBulkPurchaseStarterGuiRename (copy), starterGuiService (copy), var23 (copy)
-				if var19.current and typeof(var19.current) == "Instance" and var19.current:IsA("GuiObject") then
-					var23(getGuiObjectIsObscuredModule(var19.current) or (if fixBulkPurchaseStarterGuiRename then starterGuiService:GetCore("DevConsoleVisible") else game.StarterGui:GetCore("DevConsoleVisible")))
+				-- upvalues: var20 (copy), getGuiObjectIsObscuredModule (copy), fixBulkPurchaseStarterGuiRename (copy), starterGuiService (copy), var24 (copy)
+				if var20.current and typeof(var20.current) == "Instance" and var20.current:IsA("GuiObject") then
+					var24(getGuiObjectIsObscuredModule(var20.current) or (if fixBulkPurchaseStarterGuiRename then starterGuiService:GetCore("DevConsoleVisible") else game.StarterGui:GetCore("DevConsoleVisible")))
 				end
 			end)
 			
@@ -209,7 +248,7 @@ return function()
 			end
 		end, {})
 	end
-	local var24
+	local var25
 	local t = {
 		currentBalance = var2.balance,
 		items = var2.items,
@@ -221,17 +260,19 @@ return function()
 	}
 	
 	if fFlagFixVP8143Module then
-		var24 = var20
+		var25 = var21
 		
-		if not var24 then
-			var24 = if #var2.items ~= 0 then fFlagAXAddPlusUpsellToBulkPurchaseModule and var2.disablePurchase == true else true
+		if not var25 then
+			var25 = if #var2.items ~= 0 then fFlagAXAddPlusUpsellToBulkPurchaseModule and var2.disablePurchase == true else true
 		end
-		t.isDisabled = var24
-		t.purchaseButtonRef = if fFlagFixVP8143Module then var19 else nil
+		t.isDisabled = var25
+		t.purchaseButtonRef = if fFlagFixVP8143Module then var20 else nil
 		t.discountInformation = var2.discountInformation
 		t.shouldShowBlackbirdUpsellBanner = if fFlagAXAddPlusUpsellToBulkPurchaseModule then var16 else nil
 		t.blackbirdUpsellBannerProductInfo = if fFlagAXAddPlusUpsellToBulkPurchaseModule then blackbirdUpsellBannerProductInfo else nil
 		t.onBlackbirdUpsellActivated = if fFlagAXAddPlusUpsellToBulkPurchaseModule then var17 else nil
+		t.offerData = if fFlagAXAddOffersToBulkPurchaseModule then var2.offerData else nil
+		t.toggleOfferSelected = if fFlagAXAddOffersToBulkPurchaseModule then var19 else nil
 		
 		return t
 	end

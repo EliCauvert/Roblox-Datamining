@@ -8,6 +8,7 @@ local inputModule = require(parent.Input)
 local interfaceModule = require(parent.Interface)
 local propertiesModule = require(parent.Properties)
 local isCircleContainedInGuiObjectModule = require(parent.isCircleContainedInGuiObject)
+local isSelectableGuiObjectModule = require(parent.isSelectableGuiObject)
 local rotatePointAroundObjectModule = require(parent.RotatePointAroundObject)
 local var2 = 1
 local var3 = false
@@ -23,11 +24,7 @@ local var4 = nil
 local var5 = nil
 local var6 = 1e999
 
-local function _(p1)
-	return not (not p1:IsA("GuiButton") and not p1:IsA("TextBox")) and (not (not p1.Active or not p1.Selectable) and p1.AbsoluteSize.Magnitude ~= 0)
-end
-
-local _ = function(p1, p2, p3)
+local function _(p1, p2, p3)
 	return p2.x <= p1.x and (p2.y <= p1.y and (p1.x <= p3.x and p1.y <= p3.y))
 end
 
@@ -83,24 +80,22 @@ local function handleScrollingFrame(p1, p2, p3)
 end
 
 local function findClosestOrOccludingGuiObject(_, p1, p2, p3)
-	-- upvalues: handleScrollingFrame (ref), var3 (write), var4 (write), rotatePointAroundObjectModule (ref), var6 (write), isCircleContainedInGuiObjectModule (ref), propertiesModule (ref), var5 (write)
+	-- upvalues: handleScrollingFrame (ref), var3 (write), isSelectableGuiObjectModule (ref), var4 (write), rotatePointAroundObjectModule (ref), var6 (write), isCircleContainedInGuiObjectModule (ref), propertiesModule (ref), var5 (write)
 	for i, v in ipairs(p1) do
 		if not handleScrollingFrame(v, p2, p3) then
-			local var7 = not v:IsA("GuiButton") and not v:IsA("TextBox") and (if v.Active and v.Selectable then v.AbsoluteSize.Magnitude ~= 0 else false)
+			local var7 = isSelectableGuiObjectModule(v)
 			
 			if var7 and not var4 then
 				var4 = v
 			end
-			var7 = not v:IsA("GuiButton") and not v:IsA("TextBox") and (if v.Active and v.Selectable then v.AbsoluteSize.Magnitude ~= 0 else false)
-			
 			if var7 then
-				var7 = v.AbsolutePosition
+				local absolutePosition = v.AbsolutePosition
 				local var8 = v.AbsolutePosition + v.AbsoluteSize
 				local var9 = 0
 				local var10 = if v.AbsoluteRotation ~= 0 then p2 else rotatePointAroundObjectModule(p2, v)
 				
-				if var10.x < var7.x or var10.y < var7.y or (var8.x < var10.x or var8.y < var10.y) then
-					var9 = math.sqrt(math.pow(if var10.x < var7.x then var7.x - var10.x elseif var8.x < var10.x then var10.x - var8.x else 0, 2) + math.pow(if var10.y < var7.y then var7.y - var10.y elseif var8.y < var10.y then var10.y - var8.y else 0, 2))
+				if var10.x < absolutePosition.x or var10.y < absolutePosition.y or (var8.x < var10.x or var8.y < var10.y) then
+					var9 = math.sqrt(math.pow(if var10.x < absolutePosition.x then absolutePosition.x - var10.x elseif var8.x < var10.x then var10.x - var8.x else 0, 2) + math.pow(if var10.y < absolutePosition.y then absolutePosition.y - var10.y elseif var8.y < var10.y then var10.y - var8.y else 0, 2))
 				end
 				if var9 < var6 then
 					var4 = v

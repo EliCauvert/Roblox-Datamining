@@ -36,6 +36,8 @@ return {
 	end)(),
 	CAPABILITY_SUPPORTS_EVENT_RSVP_FACE_PILE = sharedFlagsModule.FFlagSduiEventRsvpFacePile,
 	CAPABILITY_SUPPORTS_SCALED_PLAY_BUTTON_AND_IMAGE_SIZES = sharedFlagsModule.FFlagSduiScalePlayButtonAndImageSizes,
+	CAPABILITY_SUPPORTS_EXTENDED_CLIENT_CAPABILITIES = sharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets,
+	CAPABILITY_SUPPORTS_PREFERRED_TEXT_SIZE_LINE_BUDGETS = sharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets,
 	CAPABILITY_SUPPORTS_CONTAINER_QUERIES = sharedFlagsModule.FFlagSduiContainerQueries,
 	CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL = sharedFlagsModule.FFlagEnableGameJoinEarlyAccess
 }

@@ -3,9 +3,11 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local colors = require(parent.Style).Colors
 local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), colors (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), colors (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	if p1.text and p1.text ~= "" then
 		local layoutOrder = p1.layoutOrder
 		local anchorPoint = p1.anchorPoint
@@ -43,7 +45,8 @@ return reactModule.memo(function(p1)
 				AutomaticSize = Enum.AutomaticSize.X,
 				Text = p1.text,
 				TextColor3 = textColor3 or var1.LightMode.Content.Emphasis.Color3,
-				Font = fontStyle.Font,
+				Font = if foundationFontFaceMigration then nil else fontStyle.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(fontStyle.Font) else nil,
 				TextSize = fontStyle.FontSize,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,

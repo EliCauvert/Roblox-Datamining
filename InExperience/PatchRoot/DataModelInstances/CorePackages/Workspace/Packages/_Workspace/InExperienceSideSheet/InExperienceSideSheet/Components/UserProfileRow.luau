@@ -125,7 +125,7 @@ return reactModule.memo(function(p2)
 	local var7, var8 = useLocalUser()
 	
 	return reactModule.createElement(view, {
-		tag = "row align-y-center gap-small size-full-0 auto-y padding-right-xlarge padding-top-large",
+		tag = "row align-y-center gap-small size-full-0 auto-y padding-top-small",
 		testId = "user-profile-row",
 		LayoutOrder = p2.layoutOrder
 	}, {

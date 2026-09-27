@@ -9,7 +9,6 @@ return {
 		validationEnumsModule.SharedDataMember.rootInstance,
 		validationEnumsModule.SharedDataMember.uploadEnum
 	},
-	fflag = require(parent.flags.getFFlagUGCValidationAnimationPackSupport),
 	expectedFailures = {},
 	prereqTests = {
 		validationEnumsModule.ValidationModule.ExpectedRootSchema

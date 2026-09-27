@@ -8,6 +8,7 @@ local ingestFrameHandlerModule = require(script.Parent.CasStore.ingestFrameHandl
 local sessionRegistryModule = require(script.Parent.CasStore.sessionRegistry)
 local constantsModule = require(script.Parent.ChatSession.constants)
 local createTurnHandleModule = require(script.Parent.createTurnHandle)
+local experimentOverrideModule = require(script.Parent.experimentOverride)
 local onTerminalModule = require(script.Parent.onTerminal)
 local rpcDecoderModule = require(script.Parent.rpcDecoder)
 local _ = require(script.Parent.types)
@@ -52,7 +53,7 @@ local t = {
 }
 
 return function(p3)
-	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref), acpProtocolModule (ref), t (ref), rpcDecoderModule (ref), signalsModule (ref), onTerminalModule (ref), appendSessionListEntries (ref), createTurnHandleModule (ref), historyIngestModule (ref), sessionRegistryModule (ref), constantsModule (ref), ingestFrameHandlerModule (ref)
+	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref), acpProtocolModule (ref), t (ref), rpcDecoderModule (ref), signalsModule (ref), onTerminalModule (ref), appendSessionListEntries (ref), createTurnHandleModule (ref), experimentOverrideModule (ref), historyIngestModule (ref), sessionRegistryModule (ref), constantsModule (ref), ingestFrameHandlerModule (ref)
 	p3 = p3 or {}
 	local network = p3.network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
 	local baseUrl = p3.baseUrl or acpProtocolModule.acpUrl()
@@ -498,7 +499,7 @@ return function(p3)
 	end
 	
 	local function sessionPrompt(p11)
-		-- upvalues: p3 (ref), var1 (write), createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
+		-- upvalues: p3 (ref), var1 (write), createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref), experimentOverrideModule (copy)
 		local var18
 		assert(p11 and (typeof(p11.sessionId) == "string" and p11.sessionId ~= ""), "sessionId is required")
 		assert(p11.prompt, "prompt is required")
@@ -553,14 +554,13 @@ return function(p3)
 			t_2[tostring(var18)] = var20
 		end
 		local var22 = t_1[sessionId]
+		local buildSessionPromptWireParams = acpProtocolModule.buildSessionPromptWireParams
 		local t = { sessionId = sessionId }
 		local prompt = p11.prompt
 		t.prompt = if typeof(prompt) == "string" then { { type = "text", text = prompt } } else prompt
-		
-		if p11._meta then
-			t._meta = p11._meta
-		end
-		onTerminalModule(rpcCall(var18, acpProtocolModule.Methods.SessionPrompt, t).state, nil, function(p12, p13)
+		t.meta = p11._meta
+		t.experiment = if experimentOverrideModule.isEnabled() then p11.experiment else nil
+		onTerminalModule(rpcCall(var18, acpProtocolModule.Methods.SessionPrompt, buildSessionPromptWireParams(t)).state, nil, function(p12, p13)
 			-- upvalues: var22 (ref), t_1 (copy), t_3 (copy), t_2 (copy)
 			task.defer(function()
 				-- upvalues: var22 (copy), p12 (ref), p13 (ref), t_1 (copy), t_3 (copy), t_2 (copy)

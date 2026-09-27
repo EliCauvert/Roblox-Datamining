@@ -2,6 +2,7 @@
 	dependencies = require(script.dependencies),
 	Events = require(script.Events),
 	EventStreamConstants = require(script.Constants.EventStreamConstants),
+	LoginType = require(script.Constants.LoginType),
 	authTimingUtil = require(script.Utils.authTimingUtil),
 	TelemetryConfigs = require(script.RobloxTelemetry.TelemetryConfigs),
 	RobloxTelemetry = require(script.RobloxTelemetry),

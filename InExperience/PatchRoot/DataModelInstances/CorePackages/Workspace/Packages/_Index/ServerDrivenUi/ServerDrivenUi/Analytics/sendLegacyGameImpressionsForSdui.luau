@@ -12,17 +12,20 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local _ = require(parent.DiscoveryTypes)
 local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
 local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
+local fFlagLuaAppSponsoredGamePreviewVideo = require(parent.SharedFlags).FFlagLuaAppSponsoredGamePreviewVideo
+local fFlagLuaAppSduiPassSortSubId = require(parent.SharedFlags).FFlagLuaAppSduiPassSortSubId
 local t = {}
 
 return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: fFlagSduiFixSearchTelemetry (ref), t (ref), cryoModule (ref), sduiParsers (ref), sduiBuilder (ref), appPage (ref), findAnalyticsFieldInAncestors (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), sduiParseHelpers (ref), sduiErrors (ref)
+	-- upvalues: fFlagSduiFixSearchTelemetry (ref), t (ref), cryoModule (ref), sduiParsers (ref), fFlagLuaAppSponsoredGamePreviewVideo (ref), sduiBuilder (ref), fFlagLuaAppSduiPassSortSubId (ref), findAnalyticsFieldInAncestors (ref), appPage (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), sduiParseHelpers (ref), sduiErrors (ref)
 	local t_1 = {}
 	local var1 = if fFlagSduiFixSearchTelemetry then 0 else nil
 	
 	for i, v in p2 or t do
 		local var2 = cryoModule.Dictionary.join(v, {
 			isSponsored = sduiParsers.safeParseBoolean(v.adFlag or false, p7, p4),
-			gameCollectionItemTypeOverride = if fFlagSduiFixSearchTelemetry then v.tileType else nil
+			gameCollectionItemTypeOverride = if fFlagSduiFixSearchTelemetry then v.tileType else nil,
+			sponsoredGamePreviewVideoEligible = if fFlagLuaAppSponsoredGamePreviewVideo then sduiParsers.safeParseBoolean(v.sponsoredGamePreviewVideoEligible or false, p7, p4) else nil
 		})
 		
 		if fFlagSduiFixSearchTelemetry then
@@ -41,6 +44,8 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 			local componentType = sduiBuilder.getComponentType(var5, p7)
 			var4 = (if componentType ~= "Tile" then componentType == "GameTile" else true) and (var5.props and (var5.props.imageAspectRatio or 0) > 1)
 		end
+		local var6 = if fFlagLuaAppSduiPassSortSubId then findAnalyticsFieldInAncestors("sortSubId", p4) else nil
+		
 		if p8 then
 			p8(p1, t_1, p5.itemsPerRow, p6, var4)
 			
@@ -67,6 +72,6 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 				name = p10,
 				message = `Failed to log game impressions. reason: {p11}. analyticsContext: {if p4 then sduiParseHelpers.stringifyValue(p4.analyticsData) else nil}`
 			}, p7.appPage)
-		end, nil)
+		end, if fFlagLuaAppSduiPassSortSubId and var6 then tostring(var6) else nil)
 	end
 end

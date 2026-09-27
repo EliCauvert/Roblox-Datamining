@@ -1,9 +1,7 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local _ = require(genericAbuseReporting.BeduiV2.Types)
-local fFlagAbuseReportDensifyResolvedArraysModule = require(genericAbuseReporting.Flags.FFlagAbuseReportDensifyResolvedArrays)
+﻿local _ = require(script:FindFirstAncestor("GenericAbuseReporting").BeduiV2.Types)
 
 local function transformJsonLeafFirst(_, _)
-	-- upvalues: fFlagAbuseReportDensifyResolvedArraysModule (ref), transformJsonLeafFirst (ref)
+	-- upvalues: transformJsonLeafFirst (ref)
 -- FATAL: Failed to generate AST for `transformJsonLeafFirst` function:
 runtime : [AssertionError] :11990: true edge null
 Traceback:

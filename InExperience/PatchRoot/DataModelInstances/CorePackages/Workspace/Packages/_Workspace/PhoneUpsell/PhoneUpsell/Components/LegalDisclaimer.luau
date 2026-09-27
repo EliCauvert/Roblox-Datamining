@@ -1,12 +1,15 @@
 ﻿local parent = script:FindFirstAncestor("PhoneUpsell").Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
-local checkbox = require(parent.Foundation).Checkbox
+local foundationModule = require(parent.Foundation)
+local checkbox = foundationModule.Checkbox
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local linkButton = UIBloxModule.App.Button.LinkButton
 local useStyle = UIBloxModule.Core.Style.useStyle
 
 return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), checkbox (ref), linkButton (ref)
+	-- upvalues: useStyle (ref), reactModule (ref), checkbox (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), linkButton (ref)
 	local var1 = useStyle()
 	local baseSize = var1.Font.BaseSize
 	local relativeSize = var1.Font.CaptionHeader.RelativeSize
@@ -46,7 +49,8 @@ return function(p1)
 				TextSize = baseSize * relativeSize,
 				TextColor3 = var1.Theme.TextDefault.Color,
 				TextTransparency = var1.Theme.TextDefault.Transparency,
-				Font = var1.Font.Body.Font,
+				Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Size = UDim2.new(1, -(26 + size150), 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
@@ -59,7 +63,8 @@ return function(p1)
 			TextSize = baseSize * relativeSize,
 			TextColor3 = var1.Theme.TextDefault.Color,
 			TextTransparency = var1.Theme.TextDefault.Transparency,
-			Font = var1.Font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
@@ -91,7 +96,8 @@ return function(p1)
 				TextSize = baseSize * relativeSize,
 				TextColor3 = var1.Theme.TextDefault.Color,
 				TextTransparency = var1.Theme.TextDefault.Transparency,
-				Font = var1.Font.Body.Font,
+				Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}),

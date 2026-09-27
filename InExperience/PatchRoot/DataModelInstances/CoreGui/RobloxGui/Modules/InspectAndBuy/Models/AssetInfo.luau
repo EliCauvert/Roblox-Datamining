@@ -1,10 +1,15 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
+local cryoModule = require(corePackagesService.Packages.Cryo)
 local dashModule = require(corePackagesService.Packages.Dash)
+local fFlagAXMarketplaceLicensing = require(corePackagesService.Workspace.Packages.AvatarExperienceFlags).FFlagAXMarketplaceLicensing
 local parent = script.Parent.Parent
 local mockIdModule = require(parent.MockId)
 local constantsModule = require(parent.Constants)
 local _ = require(corePackagesService.Workspace.Packages.AvatarExperienceInspectAndBuy)
-local itemRestrictions = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon).Enums.ItemRestrictions
+local avatarExperienceCommonModule = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon)
+local itemRestrictions = avatarExperienceCommonModule.Enums.ItemRestrictions
+local getRawItemLicensingInfo = avatarExperienceCommonModule.Utils.getRawItemLicensingInfo
+local parseItemLicensing = avatarExperienceCommonModule.Utils.parseItemLicensing
 local getFFlagIBEnableCollectiblesSystemSupportModule = require(parent.Flags.GetFFlagIBEnableCollectiblesSystemSupport)
 local t = {
 	new = function()
@@ -66,7 +71,7 @@ function t.fromBulkPurchaseResult(p1, p2)
 end
 
 function t.fromAvatarPreviewItem(p1)
-	-- upvalues: t (ref)
+	-- upvalues: t (ref), fFlagAXMarketplaceLicensing (ref), parseItemLicensing (ref), getRawItemLicensingInfo (ref)
 	local var1 = t.new()
 	var1.name = p1.name
 	var1.description = p1.description
@@ -85,6 +90,9 @@ function t.fromAvatarPreviewItem(p1)
 	var1.noPriceStatus = p1.noPriceStatus
 	var1.meta = p1.meta
 	
+	if fFlagAXMarketplaceLicensing then
+		var1.itemLicensingInfo = parseItemLicensing(getRawItemLicensingInfo(p1))
+	end
 	if p1.itemRestrictions then
 		local t_1 = {}
 		
@@ -246,7 +254,7 @@ function t.fromGetEconomyProductInfo(p2, p3, p4, p5, p6)
 end
 
 function t.fromGetItemDetailsV2(p2)
-	-- upvalues: t (ref)
+	-- upvalues: t (ref), getRawItemLicensingInfo (ref), fFlagAXMarketplaceLicensing (ref), parseItemLicensing (ref), cryoModule (ref)
 	local var2 = t.new()
 	var2.assetId = tostring(p2.id)
 	var2.isForSale = p2.isPurchasable
@@ -270,95 +278,99 @@ function t.fromGetItemDetailsV2(p2)
 	var2.numFavorites = p2.favoriteCount
 	var2.catalogPriceStatus = p2.priceStatus
 	var2.timedOptions = p2.timedOptions
+	local var3 = getRawItemLicensingInfo(p2)
 	
+	if fFlagAXMarketplaceLicensing and var3 ~= nil then
+		var2.itemLicensingInfo = parseItemLicensing(var3) or cryoModule.None
+	end
 	return var2
 end
 
 function t.fromGetItemDetails(p3)
 	-- upvalues: t (ref)
-	local var3 = t.new()
-	var3.assetId = tostring(p3.Id)
-	var3.owned = p3.Owned
-	var3.isForSale = p3.IsPurchasable
-	var3.price = p3.Price or 0
-	var3.hasResellers = p3.HasResellers
-	var3.collectibleItemId = p3.CollectibleItemId
+	local var4 = t.new()
+	var4.assetId = tostring(p3.Id)
+	var4.owned = p3.Owned
+	var4.isForSale = p3.IsPurchasable
+	var4.price = p3.Price or 0
+	var4.hasResellers = p3.HasResellers
+	var4.collectibleItemId = p3.CollectibleItemId
 	local t_1 = {}
 	
 	if p3.ItemRestrictions then
 		for i, v in p3.ItemRestrictions do
 			t_1[v] = true
 		end
-		var3.itemRestrictions = t_1
+		var4.itemRestrictions = t_1
 	end
-	var3.saleLocationType = p3.SaleLocationType
-	var3.remaining = p3.UnitsAvailableForConsumption
-	var3.collectibleTotalQuantity = p3.TotalQuantity
-	var3.collectibleLowestResalePrice = p3.LowestResalePrice
-	var3.isOffSale = p3.IsOffSale
-	var3.saleLocationType = p3.SaleLocationType
-	var3.numFavorites = p3.FavoriteCount
-	var3.catalogPriceStatus = p3.PriceStatus
-	var3.creatingUniverseId = p3.CreatingUniverseId
+	var4.saleLocationType = p3.SaleLocationType
+	var4.remaining = p3.UnitsAvailableForConsumption
+	var4.collectibleTotalQuantity = p3.TotalQuantity
+	var4.collectibleLowestResalePrice = p3.LowestResalePrice
+	var4.isOffSale = p3.IsOffSale
+	var4.saleLocationType = p3.SaleLocationType
+	var4.numFavorites = p3.FavoriteCount
+	var4.catalogPriceStatus = p3.PriceStatus
+	var4.creatingUniverseId = p3.CreatingUniverseId
 	
-	return var3
+	return var4
 end
 
 function t.fromPurchaseSuccess(p4)
 	-- upvalues: t (ref)
-	local var4 = t.new()
-	var4.assetId = tostring(p4)
-	var4.owned = true
+	local var5 = t.new()
+	var5.assetId = tostring(p4)
+	var5.owned = true
 	
-	return var4
+	return var5
 end
 
 function t.fromGetVersionInfo(p4, p5)
 	-- upvalues: t (ref)
-	local var4 = t.new()
-	var4.assetId = tostring(p4)
-	var4.creatingUniverseId = if p5.creatingUniverseId then tostring(p5.creatingUniverseId) else nil
+	local var5 = t.new()
+	var5.assetId = tostring(p4)
+	var5.creatingUniverseId = if p5.creatingUniverseId then tostring(p5.creatingUniverseId) else nil
 	
-	return var4
+	return var5
 end
 
 function t.getSaleDetailsForCollectibles(p4)
 	-- upvalues: dashModule (ref), constantsModule (ref)
-	local var4 = dashModule.joinDeep({}, p4)
+	local var5 = dashModule.joinDeep({}, p4)
 	local saleLocation = p4.saleLocation
 	
 	if p4.productType == constantsModule.ProductType.CollectibleItem then
-		local var5 = saleLocation and saleLocation.SaleLocationType ~= constantsModule.SaleLocationType.ShopOnly
-		local var6 = saleLocation and saleLocation.SaleLocationType ~= constantsModule.SaleLocationType.ShopAndExperiencesById
-		local var7 = saleLocation and (saleLocation.SaleLocationType == constantsModule.SaleLocationType.ShopAndExperiencesById and (type(saleLocation.UniverseIds) == "table" and table.find(saleLocation.UniverseIds, game.GameId) ~= nil))
-		local var8 = saleLocation and saleLocation.SaleLocationType ~= constantsModule.SaleLocationType.ExperiencesDevApiOnly
+		local var6 = saleLocation and saleLocation.SaleLocationType ~= constantsModule.SaleLocationType.ShopOnly
+		local var7 = saleLocation and saleLocation.SaleLocationType ~= constantsModule.SaleLocationType.ShopAndExperiencesById
+		local var8 = saleLocation and (saleLocation.SaleLocationType == constantsModule.SaleLocationType.ShopAndExperiencesById and (type(saleLocation.UniverseIds) == "table" and table.find(saleLocation.UniverseIds, game.GameId) ~= nil))
+		local var9 = saleLocation and saleLocation.SaleLocationType ~= constantsModule.SaleLocationType.ExperiencesDevApiOnly
 		local isForSale = p4.isForSale
 		
 		if isForSale then
 			isForSale = p4.canBeSoldInThisGame
 			
 			if isForSale then
-				isForSale = var5
+				isForSale = var6
 				
-				if isForSale and not var6 then
-					isForSale = var7 and var8
+				if isForSale and not var7 then
+					isForSale = var8 and var9
 				end
 			end
 		end
-		var4.isForSale = isForSale
+		var5.isForSale = isForSale
 		
 		if p4.collectibleIsLimited then
-			return var4
+			return var5
 		else
-			var4.isForSale = var4.isForSale and not var4.owned
+			var5.isForSale = var5.isForSale and not var5.owned
 			
-			return var4
+			return var5
 		end
 	else
-		var4.isForSale = p4.isForSale and p4.canBeSoldInThisGame
+		var5.isForSale = p4.isForSale and p4.canBeSoldInThisGame
 		
 		if p4.canBeSoldInThisGame == nil then
-			var4.isForSale = p4.isForSale
+			var5.isForSale = p4.isForSale
 		end
 	end
 end

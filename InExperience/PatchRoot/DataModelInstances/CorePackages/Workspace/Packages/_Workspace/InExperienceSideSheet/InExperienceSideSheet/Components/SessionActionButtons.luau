@@ -6,6 +6,7 @@ local view = require(parent.Foundation).View
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableWhatsNew = sharedFlagsModule.FFlagEnableWhatsNew
 local fFlagShowSwitchServerButton = sharedFlagsModule.FFlagShowSwitchServerButton
+local isPioneerLaunch = require(parent.PioneerUtils).isPioneerLaunch
 local var1 = if fFlagEnableWhatsNew then require(parent.WhatsNew).WhatsNewAnchor else nil
 local getSessionActionButtonsStoreModule = require(inExperienceSideSheet.Stores.GetSessionActionButtonsStore)
 local buildSessionActionButtonLayoutModule = require(inExperienceSideSheet.Utils.buildSessionActionButtonLayout)
@@ -16,11 +17,11 @@ local function getSessionActionButtonConfigs(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: signalsReactModule (ref), getSessionActionButtonConfigs (ref), fFlagShowSwitchServerButton (ref), buildSessionActionButtonLayoutModule (ref), reactModule (ref), view (ref), fFlagEnableWhatsNew (ref), var1 (ref)
+	-- upvalues: signalsReactModule (ref), getSessionActionButtonConfigs (ref), fFlagShowSwitchServerButton (ref), isPioneerLaunch (ref), buildSessionActionButtonLayoutModule (ref), reactModule (ref), view (ref), fFlagEnableWhatsNew (ref), var1 (ref)
 	local var2 = signalsReactModule.useSignalState(getSessionActionButtonConfigs)
 	local var3 = var2
 	
-	if fFlagShowSwitchServerButton then
+	if fFlagShowSwitchServerButton or isPioneerLaunch() then
 		var3 = {}
 		
 		for i, v in var2 do

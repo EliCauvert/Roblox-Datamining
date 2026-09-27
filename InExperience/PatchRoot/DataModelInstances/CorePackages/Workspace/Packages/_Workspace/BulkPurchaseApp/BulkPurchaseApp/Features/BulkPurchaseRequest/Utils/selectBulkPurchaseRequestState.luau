@@ -5,9 +5,10 @@ local createPurchasableItemModule = require(script.Parent.createPurchasableItem)
 local createOwnedItemModule = require(script.Parent.createOwnedItem)
 local createUnpurchasableItemModule = require(script.Parent.createUnpurchasableItem)
 local fFlagAXAddPlusUpsellToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
+local fFlagAXAddOffersToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
 
 return function(p1)
-	-- upvalues: purchasableStateEnumModule (ref), createPurchasableItemModule (ref), createOwnedItemModule (ref), createUnpurchasableItemModule (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref)
+	-- upvalues: purchasableStateEnumModule (ref), createPurchasableItemModule (ref), createOwnedItemModule (ref), createUnpurchasableItemModule (ref), fFlagAXAddOffersToBulkPurchaseModule (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref)
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
@@ -32,6 +33,7 @@ return function(p1)
 		unpurchasableItems = t_2,
 		balance = p1.balance or 0,
 		discountInformation = p1.discountInformation,
+		offerData = if fFlagAXAddOffersToBulkPurchaseModule then p1.offerData else nil,
 		disablePurchase = if fFlagAXAddPlusUpsellToBulkPurchaseModule then p1.disablePurchase else nil
 	}
 end

@@ -74,6 +74,7 @@ return makeConfigurableModule(function(p1)
 				ExpandableText = strictModule({
 					GetCanExpand = require(script.Core.Text.ExpandableText.ExpandableTextUtils).getCanExpand
 				}),
+				GetTextSize = require(script.Core.Text.GetTextSize),
 				EmojiTextLabel = createLazyComponentModule(function()
 					return require(script.Core.Text.EmojiTextLabel.EmojiTextLabel)
 				end)

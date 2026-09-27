@@ -86,6 +86,7 @@ return function(p1)
 			}, {
 				TopBarButton = reactModule.createElement(iconButton, {
 					isCircular = true,
+					testId = "--discovery-edp-iconbutton-bottomsheet-nav",
 					icon = if p1.shouldMountAsFullView then iconName.ChevronLargeLeft else iconName.X,
 					variant = buttonVariant.Utility,
 					size = buttonSize.Medium,

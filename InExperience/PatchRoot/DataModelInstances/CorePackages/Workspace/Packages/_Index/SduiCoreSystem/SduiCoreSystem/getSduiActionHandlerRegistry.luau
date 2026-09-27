@@ -32,6 +32,17 @@ local function createSduiActionHandlerRegistry()
 				t[i] = v
 			end
 		end,
+		getRegisteredActionTypes = function()
+			-- upvalues: t (ref)
+			local t_1 = {}
+			
+			for i in t do
+				table.insert(t_1, i)
+			end
+			table.sort(t_1)
+			
+			return t_1
+		end,
 		debug_clear = function()
 			-- upvalues: t (ref)
 			table.clear(t)

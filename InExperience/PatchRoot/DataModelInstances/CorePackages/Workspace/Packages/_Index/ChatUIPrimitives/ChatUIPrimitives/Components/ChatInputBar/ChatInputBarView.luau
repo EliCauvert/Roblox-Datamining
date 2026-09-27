@@ -3,8 +3,10 @@ local parent = chatUIPrimitives.Parent
 local reactModule = require(parent.React)
 local reactIsModule = require(parent.ReactIs)
 local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local fFlagChatInputBarGuardInvalidUtf8 = require(parent.SharedFlags).FFlagChatInputBarGuardInvalidUtf8
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local getTextLengthIfValidUtf8Module = require(script.Parent.getTextLengthIfValidUtf8)
 local channelChipModule = require(script.Parent.ChannelChip)
 local chatAutocompleteDropdownModule = require(script.Parent.Autocomplete.ChatAutocompleteDropdown)
@@ -88,7 +90,7 @@ local function renderFallbackDisabledOverlay(p1)
 end
 
 local function renderLegacy(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), renderDropdown (ref), deriveBackgroundStyle (ref), reactIsModule (ref), renderSideChip (ref), renderSendButton (ref), renderFallbackDisabledOverlay (ref)
+	-- upvalues: reactModule (ref), foundationModule (ref), renderDropdown (ref), deriveBackgroundStyle (ref), reactIsModule (ref), renderSideChip (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), renderSendButton (ref), renderFallbackDisabledOverlay (ref)
 	local createElement_3
 	local tokens = p1.tokens
 	local props = p1.props
@@ -211,8 +213,8 @@ local function renderLegacy(p1)
 				BackgroundTransparency = 1,
 				ClearTextOnFocus = false,
 				MaxVisibleGraphemes = props.maximumCharacterLimit or -1,
-				Font = if props.fontFace then nil else tokens.Typography.CaptionMedium.Font,
-				FontFace = props.fontFace,
+				Font = if props.fontFace or foundationFontFaceMigration then nil else tokens.Typography.CaptionMedium.Font,
+				FontFace = props.fontFace or (if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.CaptionMedium.Font) else nil),
 				PlaceholderText = props.placeholderText or "",
 				PlaceholderColor3 = p1.placeholderColor,
 				Size = UDim2.fromScale(1, 0),
@@ -274,7 +276,7 @@ local function renderLegacy(p1)
 end
 
 local function renderComposer(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), renderDropdown (ref), renderSideChip (ref), reactIsModule (ref), renderSendButton (ref), renderFallbackDisabledOverlay (ref)
+	-- upvalues: reactModule (ref), foundationModule (ref), renderDropdown (ref), renderSideChip (ref), reactIsModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), renderSendButton (ref), renderFallbackDisabledOverlay (ref)
 	local createElement_3
 	local tokens = p1.tokens
 	local props = p1.props
@@ -359,40 +361,48 @@ local function renderComposer(p1)
 			t_8.TextTransparency = var4
 			createElement_4 = createElement_4(text, t_8)
 		end
+		local createElement_5
 		t_7.DisabledLabel = createElement_4
-		t_7.TextBoxContainer = if p1.canChat then reactModule.createElement(foundationModule.View, {
-			tag = "position-top-right anchor-top-right auto-y clip",
-			Size = var3
-		}, {
-			TextBox = reactModule.createElement("TextBox", {
-				AnchorPoint = Vector2.new(0, 0),
-				AutomaticSize = Enum.AutomaticSize.Y,
-				BackgroundTransparency = 1,
-				ClearTextOnFocus = false,
-				MaxVisibleGraphemes = props.maximumCharacterLimit or -1,
-				Font = if props.fontFace then nil else tokens.Typography.BodyMedium.Font,
-				FontFace = props.fontFace,
-				PlaceholderText = props.placeholderText or "",
-				PlaceholderColor3 = p1.composerPlaceholderColor,
-				Size = UDim2.fromScale(1, 0),
-				Text = props.defaultValue or "",
-				TextColor3 = p1.textColor,
-				TextSize = fontSize,
-				TextTransparency = p1.textTransparency,
-				TextWrapped = false,
-				TextXAlignment = Enum.TextXAlignment.Left,
-				TextYAlignment = Enum.TextYAlignment.Center,
-				TextEditable = props.enableFocusedWrite ~= false,
-				ZIndex = 2,
-				[reactModule.Change.Text] = p1.onTextChanged,
-				[reactModule.Event.ReturnPressedFromOnScreenKeyboard] = p1.onReturnPressedFromOnScreenKeyboard,
-				[reactModule.Event.Focused] = p1.onFocused,
-				[reactModule.Event.FocusLost] = p1.onFocusLost,
-				ref = p1.textBoxRef,
-				SelectionImageObject = props.selectionImageObject,
-				Selectable = if props.selectionImageObject ~= nil then nil else true
+		
+		if p1.canChat then
+			createElement_5 = reactModule.createElement
+			createElement_5 = createElement_5(foundationModule.View, {
+				tag = "position-top-right anchor-top-right auto-y clip",
+				Size = var3
+			}, {
+				TextBox = reactModule.createElement("TextBox", {
+					AnchorPoint = Vector2.new(0, 0),
+					AutomaticSize = Enum.AutomaticSize.Y,
+					BackgroundTransparency = 1,
+					ClearTextOnFocus = false,
+					MaxVisibleGraphemes = props.maximumCharacterLimit or -1,
+					Font = if props.fontFace or foundationFontFaceMigration then nil else tokens.Typography.BodyMedium.Font,
+					FontFace = props.fontFace or (if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.BodyMedium.Font) else nil),
+					PlaceholderText = props.placeholderText or "",
+					PlaceholderColor3 = p1.composerPlaceholderColor,
+					Size = UDim2.fromScale(1, 0),
+					Text = props.defaultValue or "",
+					TextColor3 = p1.textColor,
+					TextSize = fontSize,
+					TextTransparency = p1.textTransparency,
+					TextWrapped = false,
+					TextXAlignment = Enum.TextXAlignment.Left,
+					TextYAlignment = Enum.TextYAlignment.Center,
+					TextEditable = props.enableFocusedWrite ~= false,
+					ZIndex = 2,
+					[reactModule.Change.Text] = p1.onTextChanged,
+					[reactModule.Event.ReturnPressedFromOnScreenKeyboard] = p1.onReturnPressedFromOnScreenKeyboard,
+					[reactModule.Event.Focused] = p1.onFocused,
+					[reactModule.Event.FocusLost] = p1.onFocusLost,
+					ref = p1.textBoxRef,
+					SelectionImageObject = props.selectionImageObject,
+					Selectable = if props.selectionImageObject ~= nil then nil else true
+				})
 			})
-		}) else nil
+		else
+			createElement_5 = nil
+		end
+		t_7.TextBoxContainer = createElement_5
 		createElement_3 = createElement_3(view_3, t_6, t_7)
 	end
 	t_5.TextContainer = createElement_3

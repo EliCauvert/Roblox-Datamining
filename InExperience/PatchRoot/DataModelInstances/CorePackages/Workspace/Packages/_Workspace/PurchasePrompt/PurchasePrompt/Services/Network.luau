@@ -25,6 +25,7 @@ local fFlagEnableRequestLocationTypeForSduiPurchaseModule = require(purchaseProm
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = sharedFlagsModule.FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
 local fFlagEnablePurchasePayloadInExperienceShop = sharedFlagsModule.FFlagEnablePurchasePayloadInExperienceShop
+local fFlagEnableMarketplacePurchaseDeepLinkAttribution = sharedFlagsModule.FFlagEnableMarketplacePurchaseDeepLinkAttribution
 local fFlagRefreshPriceOnRetryAfterUpsellModule = require(purchasePrompt.Flags.FFlagRefreshPriceOnRetryAfterUpsell)
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local fFlagEnableInExperienceOffersPurchaseFlow = sharedFlagsModule.FFlagEnableInExperienceOffersPurchaseFlow
@@ -137,10 +138,10 @@ local function getPlayerOwns(p1, p2, p3)
 end
 
 local function performPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12)
-	-- upvalues: getFFlagEnablePromptPurchaseRequestedV2Module (ref), getFFlagEnablePromptPurchaseRequestedV2Take2Module (ref), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), marketplaceService (ref), fFlagEnablePurchasePayloadInExperienceShop (ref), isGenericChallengeResponseModule (ref)
+	-- upvalues: getFFlagEnablePromptPurchaseRequestedV2Module (ref), getFFlagEnablePromptPurchaseRequestedV2Take2Module (ref), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), marketplaceService (ref), fFlagEnablePurchasePayloadInExperienceShop (ref), fFlagEnableMarketplacePurchaseDeepLinkAttribution (ref), isGenericChallengeResponseModule (ref)
 	local ok, status = pcall(function()
-		-- upvalues: getFFlagEnablePromptPurchaseRequestedV2Module (copy), getFFlagEnablePromptPurchaseRequestedV2Take2Module (copy), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), marketplaceService (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), p8 (ref), p9 (ref), p10 (ref), fFlagEnablePurchasePayloadInExperienceShop (copy), p11 (ref), p12 (ref)
-		return if not (not getFFlagEnablePromptPurchaseRequestedV2Module() and not getFFlagEnablePromptPurchaseRequestedV2Take2Module()) then if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, if fFlagEnablePurchasePayloadInExperienceShop then p11 else nil, p12) elseif fFlagEnablePurchasePayloadInExperienceShop then marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, nil, p11) else marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9) else marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8)
+		-- upvalues: getFFlagEnablePromptPurchaseRequestedV2Module (copy), getFFlagEnablePromptPurchaseRequestedV2Take2Module (copy), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), marketplaceService (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), p8 (ref), p9 (ref), p10 (ref), fFlagEnablePurchasePayloadInExperienceShop (copy), p11 (ref), p12 (ref), fFlagEnableMarketplacePurchaseDeepLinkAttribution (copy)
+		return if not (not getFFlagEnablePromptPurchaseRequestedV2Module() and not getFFlagEnablePromptPurchaseRequestedV2Take2Module()) then if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, if fFlagEnablePurchasePayloadInExperienceShop then p11 else nil, p12) elseif fFlagEnablePurchasePayloadInExperienceShop then marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, nil, p11, if fFlagEnableMarketplacePurchaseDeepLinkAttribution then p12 else nil) else marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, nil, nil, if fFlagEnableMarketplacePurchaseDeepLinkAttribution then p12 else nil) else marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8)
 	end)
 	
 	if ok then

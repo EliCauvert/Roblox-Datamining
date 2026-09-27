@@ -2,10 +2,5 @@
 
 return function()
 	-- upvalues: pioneerInfo (ref)
-	local ok, status = pcall(function()
-		-- upvalues: pioneerInfo (copy)
-		return pioneerInfo.getPioneerSource() == Enum.PioneerSource.DaveyBazooka
-	end)
-	
-	return ok and status
+	return pioneerInfo.isDaveyBazooka()
 end

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXCustomizeTabDeepLink", false)
+﻿return game:DefineFastFlag("AXCustomizeTabDeepLink2", false)

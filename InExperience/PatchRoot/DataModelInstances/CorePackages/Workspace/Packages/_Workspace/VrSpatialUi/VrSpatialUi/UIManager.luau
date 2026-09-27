@@ -104,6 +104,10 @@ function t:registerRoactPanel(p1, p2, p3)
 	end
 	if isInExperienceUIVREnabled then
 		self:connectPanelVisibility(p1, p3 or observableModule.ObservableValue.new(true))
+		
+		if p2.keepVisibleWhenTopBarHidden ~= nil then
+			self.uiGroupHelper:updateAllElements(self.uiElements, self.uiGroups)
+		end
 	end
 end
 

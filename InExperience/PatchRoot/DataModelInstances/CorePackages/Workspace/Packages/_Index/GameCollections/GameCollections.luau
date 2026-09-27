@@ -13,6 +13,8 @@
 	useNavigateToSortLinkWebView = require(script.useNavigateToSortLinkWebView),
 	useRenderGameCollectionItem = require(script.useRenderGameCollectionItem),
 	["jest.config"] = script["jest.config"],
+	["jest.main.config"] = script["jest.main.config"],
+	["jest.mockDataModel.config"] = script["jest.mockDataModel.config"],
 	GameCollectionLayoutCalculators = require(script.GameCollectionLayoutCalculators),
 	GameCollectionNavigationBindings = require(script.GameCollectionNavigationBindings),
 	GameSortImpressionsDetector = require(script.Impressions.GameSortImpressionsDetector),

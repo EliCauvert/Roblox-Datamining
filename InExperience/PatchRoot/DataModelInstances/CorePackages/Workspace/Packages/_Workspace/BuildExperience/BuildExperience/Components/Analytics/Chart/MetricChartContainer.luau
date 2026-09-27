@@ -12,6 +12,7 @@ local dataStatus = require(parent.DataHydration.ExperienceAnalytics).DataStatus
 local _ = require(buildExperience.Analytics.AnalyticsMetric)
 local _ = require(buildExperience.Analytics.AnalyticsWindow)
 local useExperienceMetricSeriesModule = require(buildExperience.Analytics.useExperienceMetricSeries)
+local fFlagBuildAnalyticsCreatorHubWindowFixModule = require(buildExperience.Flags.FFlagBuildAnalyticsCreatorHubWindowFix)
 local metricChartModule = require(script.Parent.MetricChart)
 local PLOT_HEIGHT = require(script.Parent.chartLayout).PLOT_HEIGHT
 
@@ -60,12 +61,12 @@ local function MetricChartEmpty(p1)
 end
 
 return function(p1)
-	-- upvalues: dataStatus (ref), useExperienceMetricSeriesModule (ref), useLocalization (ref), analyticsKeysModule (ref), reactModule (ref), MetricChartEmpty (ref), MetricChartSkeleton (ref), metricChartModule (ref)
+	-- upvalues: dataStatus (ref), useExperienceMetricSeriesModule (ref), useLocalization (ref), analyticsKeysModule (ref), reactModule (ref), MetricChartEmpty (ref), MetricChartSkeleton (ref), fFlagBuildAnalyticsCreatorHubWindowFixModule (ref), metricChartModule (ref)
 	local var1 = if p1.metadataStatus == dataStatus.Failed then nil else p1.latestAvailableTime
 	local var2 = useExperienceMetricSeriesModule(p1.universeId, p1.metric, p1.window, var1)
 	local noData = useLocalization({ noData = analyticsKeysModule.ANALYTICS_NO_DATA }).noData
 	
-	return if if p1.metadataStatus ~= dataStatus.Failed then p1.metadataStatus == dataStatus.Ready and p1.latestAvailableTime == nil else true then reactModule.createElement(MetricChartEmpty, { layoutOrder = p1.layoutOrder, message = noData }) elseif var2.status == dataStatus.NotReady then reactModule.createElement(MetricChartSkeleton, { layoutOrder = p1.layoutOrder }) elseif var2.status == dataStatus.Failed or not var2.hasData then reactModule.createElement(MetricChartEmpty, { layoutOrder = p1.layoutOrder, message = noData }) else reactModule.createElement(metricChartModule, {
+	return if if p1.metadataStatus ~= dataStatus.Failed then p1.metadataStatus == dataStatus.Ready and p1.latestAvailableTime == nil else true then reactModule.createElement(MetricChartEmpty, { layoutOrder = p1.layoutOrder, message = noData }) elseif var2.status == dataStatus.NotReady then reactModule.createElement(MetricChartSkeleton, { layoutOrder = p1.layoutOrder }) elseif if fFlagBuildAnalyticsCreatorHubWindowFixModule then not var2.hasData elseif var2.status ~= dataStatus.Failed then not var2.hasData else true then reactModule.createElement(MetricChartEmpty, { layoutOrder = p1.layoutOrder, message = noData }) else reactModule.createElement(metricChartModule, {
 		series = var2.series,
 		hasData = var2.hasData,
 		latest = var2.latest,

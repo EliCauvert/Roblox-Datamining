@@ -1,20 +1,23 @@
 ﻿local moments = script:FindFirstAncestor("Moments")
 local parent = moments.Parent
+local builderIconsModule = require(parent.BuilderIcons)
 local foundationModule = require(parent.Foundation)
 local localizationModule = require(parent.Localization)
 local momentsCommonModule = require(parent.MomentsCommon)
 local reactModule = require(parent.React)
+local iconButton = foundationModule.IconButton
 local sheet = foundationModule.Sheet
 local text = foundationModule.Text
 local view = foundationModule.View
 local useLocalization = localizationModule.Hooks.useLocalization
 local musicThumbnailIcon = momentsCommonModule.Components.MusicThumbnailIcon
 local musicThumbnailIconSize = momentsCommonModule.Enums.MusicThumbnailIconSize
+local fFlagMomentsAudioSaveButtonModule = require(moments.Flags.FFlagMomentsAudioSaveButton)
 local _ = require(moments.Hooks.useMusicInfo)
 local t = { title = "Feature.Moments.Label.Music" }
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), sheet (ref), text (ref), view (ref), musicThumbnailIcon (ref), musicThumbnailIconSize (ref)
+	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), sheet (ref), text (ref), view (ref), musicThumbnailIcon (ref), musicThumbnailIconSize (ref), fFlagMomentsAudioSaveButtonModule (ref), iconButton (ref), builderIconsModule (ref), foundationModule (ref)
 	local musicInfo = p1.musicInfo
 	
 	return reactModule.createElement(sheet.Root, {
@@ -50,7 +53,14 @@ return function(p1)
 						LayoutOrder = 2,
 						Text = musicInfo.Artist
 					}) else nil
-				})
+				}),
+				SaveButton = if fFlagMomentsAudioSaveButtonModule then reactModule.createElement(iconButton, {
+					LayoutOrder = 3,
+					testId = "MomentsMusicSaveButton",
+					icon = builderIconsModule.Icon.Bookmark,
+					onActivated = function() end,
+					size = foundationModule.Enums.InputSize.Medium
+				}) else nil
 			})
 		})
 	})

@@ -5,6 +5,11 @@ local reactModule = require(parent.React)
 local roactModule = require(parent.Roact)
 local UIBloxModule = require(parent.UIBlox)
 local authCommonModule = require(parent.AuthCommon)
+local styleModule = require(parent.Style)
+local foundationModule = require(parent.Foundation)
+local text = require(parent.AppCommonLib).Text
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useStyle = UIBloxModule.Core.Style.useStyle
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -12,11 +17,11 @@ local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local mergePropsModule = require(phoneUpsell.Utils.mergeProps)
 local textField = UIBloxModule.App.Input.TextField
 local countryCodeButtonModule = require(phoneUpsell.Components.InGame.CountryCodeButton)
-local text = require(parent.AppCommonLib).Text
 local countryCodeDropdownContainer = authCommonModule.Components.InGame.CountryCodeDropdownContainer
 local useExternalEvent = require(parent.RoactUtils).Hooks.useExternalEvent
 local getFFlagAddMorePhoneUpsellEvents = require(parent.SharedFlags).GetFFlagAddMorePhoneUpsellEvents
 local fFlagInExperienceAddPhoneViewNewCopy = require(parent.SharedFlags).FFlagInExperienceAddPhoneViewNewCopy
+local vector2 = Vector2.new(10000, 10000)
 local t = {
 	alwaysShowLegalText = false,
 	requireLegalTextCheckbox = false,
@@ -44,7 +49,7 @@ local function getButtonStackProps(p1, p2, p3, p4, p5)
 end
 
 return function(p1)
-	-- upvalues: mergePropsModule (ref), t (ref), fFlagInExperienceAddPhoneViewNewCopy (ref), useStyle (ref), useLocalization (ref), reactModule (ref), text (ref), useExternalEvent (ref), userInputService (ref), roactModule (ref), countryCodeButtonModule (ref), getFFlagAddMorePhoneUpsellEvents (ref), textField (ref), interactiveAlert (ref), getButtonStackProps (ref), countryCodeDropdownContainer (ref)
+	-- upvalues: mergePropsModule (ref), t (ref), fFlagInExperienceAddPhoneViewNewCopy (ref), useStyle (ref), useLocalization (ref), reactModule (ref), foundationFontFaceMigration (ref), styleModule (ref), vector2 (ref), text (ref), useExternalEvent (ref), userInputService (ref), roactModule (ref), countryCodeButtonModule (ref), getFFlagAddMorePhoneUpsellEvents (ref), textField (ref), normalizeFontFace (ref), interactiveAlert (ref), getButtonStackProps (ref), countryCodeDropdownContainer (ref)
 	local var1 = mergePropsModule(t, p1)
 	local var2 = if fFlagInExperienceAddPhoneViewNewCopy then {
 		phoneNumberKey = "Feature.VerificationUpsell.Label.PhoneNumber",
@@ -84,7 +89,7 @@ return function(p1)
 	local size1200 = tokens.Size.Size_1200
 	local prefix = var1.countryCode.prefix
 	local var5, var6 = reactModule.useState(false)
-	local maxValue = math.max(text.GetTextWidth(prefix, font, fontSize) + 24, size1200)
+	local maxValue = math.max((if foundationFontFaceMigration then styleModule.GetTextSize(prefix, fontSize, font, vector2).X else text.GetTextWidth(prefix, font, fontSize)) + 24, size1200)
 	local var7, var8 = reactModule.useState(300)
 	
 	local var9 = function(p2)
@@ -95,30 +100,30 @@ return function(p1)
 	local var10 = reactModule.useRef(nil)
 	local var11 = reactModule.useRef(nil)
 	local var12 = reactModule.useRef(nil)
-	local vector2 = Vector2.new(0, 0)
 	local vector2_1 = Vector2.new(0, 0)
 	local vector2_2 = Vector2.new(0, 0)
+	local vector2_3 = Vector2.new(0, 0)
 	
 	if var10.current then
-		vector2 = var10.current.AbsolutePosition
+		vector2_1 = var10.current.AbsolutePosition
 	end
 	if var11.current then
-		vector2_1 = var11.current.AbsolutePosition
+		vector2_2 = var11.current.AbsolutePosition
 	end
 	if var12.current then
-		vector2_2 = var12.current.AbsolutePosition
+		vector2_3 = var12.current.AbsolutePosition
 	end
-	local minValue = math.min(var1.screenSize.Y - (vector2.Y + size1200 + small - vector2_1.Y) - small, 400)
+	local minValue = math.min(var1.screenSize.Y - (vector2_1.Y + size1200 + small - vector2_2.Y) - small, 400)
 	useExternalEvent(userInputService.InputBegan, reactModule.useCallback(function(p2)
-		-- upvalues: size1200 (ref), small (ref), vector2_2 (write), var7 (ref), minValue (write), maxValue (ref), var5 (ref), var6 (ref)
+		-- upvalues: size1200 (ref), small (ref), vector2_3 (write), var7 (ref), minValue (write), maxValue (ref), var5 (ref), var6 (ref)
 		local var13 = size1200 + small
 		
-		if var5 and not (vector2_2.X < p2.Position.X and (p2.Position.X < vector2_2.X + var7 and (vector2_2.Y + var13 < p2.Position.Y and p2.Position.Y < vector2_2.Y + var13 + minValue))) and not (vector2_2.X < p2.Position.X and (p2.Position.X < vector2_2.X + maxValue and (vector2_2.Y < p2.Position.Y and p2.Position.Y < vector2_2.Y + size1200))) then
+		if var5 and not (vector2_3.X < p2.Position.X and (p2.Position.X < vector2_3.X + var7 and (vector2_3.Y + var13 < p2.Position.Y and p2.Position.Y < vector2_3.Y + var13 + minValue))) and not (vector2_3.X < p2.Position.X and (p2.Position.X < vector2_3.X + maxValue and (vector2_3.Y < p2.Position.Y and p2.Position.Y < vector2_3.Y + size1200))) then
 			var6(false)
 		end
 	end, {
 		var5,
-		vector2_2,
+		vector2_3,
 		var7,
 		maxValue,
 		size1200
@@ -189,7 +194,8 @@ return function(p1)
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
 			TextColor3 = tokens.Color.System.Alert.Color3,
-			Font = var3.Font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else var3.Font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.BodyLarge.Font) else nil,
 			TextSize = baseSize * var3.Font.CaptionSmall.RelativeSize,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
@@ -211,7 +217,7 @@ return function(p1)
 			onAbsoluteSizeChanged = var9,
 			onCloseClicked = var1.onClose,
 			middleContent = if fFlagInExperienceAddPhoneViewNewCopy then function()
-				-- upvalues: reactModule (copy), tokens (ref), var4 (ref), baseSize (ref), var3 (ref), frame (ref), relativeSize (ref)
+				-- upvalues: reactModule (copy), tokens (ref), var4 (ref), baseSize (ref), var3 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), frame (ref), relativeSize (ref)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.Y,
@@ -235,7 +241,8 @@ return function(p1)
 							TextSize = baseSize,
 							TextColor3 = var3.Theme.TextEmphasis.Color,
 							TextTransparency = var3.Theme.TextEmphasis.Transparency,
-							Font = var3.Font.Body.Font,
+							Font = if foundationFontFaceMigration then nil else var3.Font.Body.Font,
+							FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.BodyLarge.Font) else nil,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
@@ -249,7 +256,8 @@ return function(p1)
 							TextSize = baseSize * relativeSize,
 							TextColor3 = var3.Theme.TextEmphasis.Color,
 							TextTransparency = var3.Theme.TextEmphasis.Transparency,
-							Font = var3.Font.Body.Font,
+							Font = if foundationFontFaceMigration then nil else var3.Font.Body.Font,
+							FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.BodyLarge.Font) else nil,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
@@ -262,7 +270,8 @@ return function(p1)
 							TextSize = baseSize * relativeSize,
 							TextColor3 = var3.Theme.TextEmphasis.Color,
 							TextTransparency = var3.Theme.TextEmphasis.Transparency,
-							Font = var3.Font.Body.Font,
+							Font = if foundationFontFaceMigration then nil else var3.Font.Body.Font,
+							FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.BodyLarge.Font) else nil,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
@@ -270,7 +279,7 @@ return function(p1)
 					})
 				})
 			end else function()
-				-- upvalues: reactModule (copy), tokens (ref), frame (ref), var4 (ref), baseSize (ref), relativeSize (ref), var3 (ref)
+				-- upvalues: reactModule (copy), tokens (ref), frame (ref), var4 (ref), baseSize (ref), relativeSize (ref), var3 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.Y,
@@ -295,7 +304,8 @@ return function(p1)
 							TextSize = baseSize * relativeSize,
 							TextColor3 = var3.Theme.TextEmphasis.Color,
 							TextTransparency = var3.Theme.TextEmphasis.Transparency,
-							Font = var3.Font.Body.Font,
+							Font = if foundationFontFaceMigration then nil else var3.Font.Body.Font,
+							FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.BodyLarge.Font) else nil,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
@@ -310,7 +320,7 @@ return function(p1)
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(0, var7 - 24, 0, 0),
-			Position = UDim2.new(0, vector2.X - vector2_1.X, 0, vector2.Y + size1200 + small - vector2_1.Y)
+			Position = UDim2.new(0, vector2_1.X - vector2_2.X, 0, vector2_1.Y + size1200 + small - vector2_2.Y)
 		}, {
 			CountryCodeDropdown = reactModule.createElement(countryCodeDropdownContainer, {
 				dropdownVisible = var5,

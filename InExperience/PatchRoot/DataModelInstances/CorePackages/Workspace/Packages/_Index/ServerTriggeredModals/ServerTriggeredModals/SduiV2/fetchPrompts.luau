@@ -1,15 +1,18 @@
 ﻿local httpService = game:GetService("HttpService")
 local parent = script:FindFirstAncestor("ServerTriggeredModals").Parent
-local _ = require(script.Parent.PromptsEntryPoint)
+local promptsEntryPointModule = require(script.Parent.PromptsEntryPoint)
 local _ = require(script.Parent.Types.PromptsTypes)
 local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local urlBase = require(parent.UrlBuilder).UrlBase
+local nativePushNotificationPermissionPrompt = require(parent.NotificationsUpsell).NativePushNotificationPermissionPrompt
 local sduiResponseType = sduiSharedUtilitiesModule.SduiResponseType
 local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
+local parsePageEntriesFromResponse = sduiSharedUtilitiesModule.SduiProtobufResponseHelpers.parsePageEntriesFromResponse
 local fFlagSduiAllowNoConfigsBuilt = require(parent.SharedFlags).FFlagSduiAllowNoConfigsBuilt
 local fFlagEdpGameLeavePromptsHandlerEnabled = require(parent.SharedFlags).FFlagEdpGameLeavePromptsHandlerEnabled
 local fFlagHomepagePromptsHandlerPassClientAttributes = require(parent.SharedFlags).FFlagHomepagePromptsHandlerPassClientAttributes
+local fFlagPushNotificationsUpsellHomePromptsExperiment = require(parent.SharedFlags).FFlagPushNotificationsUpsellHomePromptsExperiment
 
 local function getPromptsUrl(p1, p2)
 	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref)
@@ -23,7 +26,7 @@ local function getPromptsUrl(p1, p2)
 end
 
 return function(p1, p2)
-	-- upvalues: parent (ref), getSduiApiStore (ref), sduiResponseType (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), fFlagHomepagePromptsHandlerPassClientAttributes (ref), getPromptsUrl (ref), urlBuilder (ref), urlBase (ref), fFlagSduiAllowNoConfigsBuilt (ref)
+	-- upvalues: parent (ref), getSduiApiStore (ref), sduiResponseType (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), fFlagHomepagePromptsHandlerPassClientAttributes (ref), getPromptsUrl (ref), urlBuilder (ref), urlBase (ref), fFlagSduiAllowNoConfigsBuilt (ref), promptsEntryPointModule (ref), fFlagPushNotificationsUpsellHomePromptsExperiment (ref), nativePushNotificationPermissionPrompt (ref), parsePageEntriesFromResponse (ref)
 	getSduiApiStore().fetchIfNeeded({
 		responseType = sduiResponseType.ProtobufJson,
 		url = if fFlagEdpGameLeavePromptsHandlerEnabled or fFlagHomepagePromptsHandlerPassClientAttributes then getPromptsUrl(p1.entryPoint, p1.clientAttributes) else urlBuilder.new({
@@ -36,6 +39,12 @@ return function(p1, p2)
 		clearOnEmptyResponse = p1.clearOnEmptyResponse,
 		allowNoConfigsBuilt = if fFlagSduiAllowNoConfigsBuilt then p1.allowNoConfigsBuilt else nil,
 		loadTimer = p1.loadTimer,
-		apiProto = require(parent.ServiceContractsProto).apppageplatform.prompts.prompts.GetEligiblePromptsResponse
+		apiProto = require(parent.ServiceContractsProto).apppageplatform.prompts.prompts.GetEligiblePromptsResponse,
+		parsePageEntriesFromResponse = if p1.entryPoint == promptsEntryPointModule.HomepageLaunch and fFlagPushNotificationsUpsellHomePromptsExperiment and nativePushNotificationPermissionPrompt.isEnabled() then function(p3)
+			-- upvalues: nativePushNotificationPermissionPrompt (copy), parsePageEntriesFromResponse (copy)
+			nativePushNotificationPermissionPrompt.handlePromptsResponse(p3)
+			
+			return parsePageEntriesFromResponse(p3)
+		end else nil
 	}, p2)
 end

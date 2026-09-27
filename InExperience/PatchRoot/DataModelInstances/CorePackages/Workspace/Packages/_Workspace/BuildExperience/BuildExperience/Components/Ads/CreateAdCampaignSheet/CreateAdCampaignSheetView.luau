@@ -5,6 +5,7 @@ local inlineLayoutModule = require(parent.InlineLayout)
 local button = foundationModule.Button
 local icon = foundationModule.Icon
 local iconButton = foundationModule.IconButton
+local optionSelectorGroup = foundationModule.OptionSelectorGroup
 local sheet = foundationModule.Sheet
 local text = foundationModule.Text
 local view = foundationModule.View
@@ -15,6 +16,7 @@ local createAdCampaignSheetConfigModule = require(script.Parent.CreateAdCampaign
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconSize = foundationModule.Enums.IconSize
 local inputSize = foundationModule.Enums.InputSize
+local optionSelectorGroupSize = foundationModule.Enums.OptionSelectorGroupSize
 local useTokens = foundationModule.Hooks.useTokens
 local list = { 1 }
 local t = { name = "u", attributes = {} }
@@ -103,47 +105,6 @@ local function AdCampaignLegalText(p6)
 	})
 end
 
-local function AdCampaignSheetBackground()
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref)
-	return reactModule.createElement("Folder", nil, {
-		Surface = reactModule.createElement(view, {
-			ZIndex = 0,
-			testId = "create-ad-campaign-sheet-surface",
-			tag = "size-full",
-			backgroundStyle = useTokens().Color.Surface.Surface_0
-		})
-	})
-end
-
-local function DividerlessSheetActions(p6)
-	-- upvalues: useTokens (ref), reactModule (ref), sheet (ref), view (ref)
-	local var5 = useTokens()
-	local thicker = var5.Stroke.Thicker
-	local small = var5.Margin.Small
-	
-	return reactModule.createElement(sheet.Actions, nil, {
-		Content = reactModule.createElement(view, { tag = "size-full-0 auto-y" }, {
-			Surface = reactModule.createElement("Folder", nil, {
-				Background = reactModule.createElement(view, {
-					ZIndex = 0,
-					testId = "create-ad-campaign-actions-surface",
-					Size = UDim2.new(1, 2 * small, 1, 2 * small),
-					Position = UDim2.fromOffset(-small, -small),
-					backgroundStyle = var5.Color.Surface.Surface_0
-				})
-			}),
-			DividerMask = reactModule.createElement(view, {
-				ZIndex = 2,
-				testId = "create-ad-campaign-actions-divider-mask",
-				Size = UDim2.new(1, 2 * (small + thicker), 0, 2 * thicker),
-				Position = UDim2.fromOffset((-small) - thicker, (-small) - thicker),
-				backgroundStyle = var5.Color.Surface.Surface_0
-			}),
-			ActionColumn = reactModule.createElement(view, { ZIndex = 1, tag = "col gap-medium size-full-0 auto-y" }, p6.children)
-		})
-	})
-end
-
 local function createBenefitRows(p6)
 	-- upvalues: reactModule (ref), view (ref), icon (ref), iconSize (ref), text (ref)
 	local t = {}
@@ -169,29 +130,127 @@ local function createBenefitRows(p6)
 	return t
 end
 
-return function(p7)
-	-- upvalues: useTokens (ref), reactModule (ref), sheet (ref), list (ref), view (ref), iconButton (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref), icon (ref), iconSize (ref), text (ref), AdCampaignSheetBackground (ref), createBenefitRows (ref), AdCampaignLegalText (ref), DividerlessSheetActions (ref), button (ref)
+local function CampaignPrice(p7)
+	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), foundationModule (ref), iconSize (ref), text (ref)
+	return if p7.option.originalPriceText == nil then reactModule.createElement(view, {
+		LayoutOrder = 1,
+		tag = "row align-y-center gap-xxsmall auto-xy",
+		testId = p7.testId
+	}, {
+		Icon = reactModule.createElement(icon, {
+			LayoutOrder = 1,
+			tag = "content-default",
+			name = foundationModule.Enums.IconName.Robux,
+			size = iconSize.Small,
+			testId = `{p7.testId}-robux-icon`
+		}),
+		Amount = reactModule.createElement(text, {
+			LayoutOrder = 2,
+			tag = "auto-xy text-body-medium content-default",
+			Text = p7.option.priceText
+		})
+	}) else reactModule.createElement(view, {
+		LayoutOrder = 1,
+		tag = "row align-y-center gap-small auto-xy",
+		testId = p7.testId
+	}, {
+		OriginalPrice = reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy" }, {
+			Content = reactModule.createElement(view, {
+				ZIndex = 1,
+				tag = "row align-y-center gap-xxsmall auto-xy"
+			}, {
+				Icon = reactModule.createElement(icon, {
+					LayoutOrder = 1,
+					tag = "content-default",
+					name = foundationModule.Enums.IconName.Robux,
+					size = iconSize.Small,
+					testId = `{p7.testId}-robux-icon`
+				}),
+				Amount = reactModule.createElement(text, {
+					LayoutOrder = 2,
+					tag = "auto-xy text-body-medium content-default",
+					Text = p7.option.originalPriceText
+				})
+			}),
+			Strikethrough = reactModule.createElement(view, {
+				ZIndex = 2,
+				tag = "position-center-left anchor-center-left",
+				testId = "two-options-ad-campaign-free-strikethrough",
+				Size = UDim2.new(1, 0, 0, 1),
+				backgroundStyle = useTokens().Color.Content.Default
+			})
+		}),
+		Free = reactModule.createElement(text, {
+			LayoutOrder = 2,
+			tag = "auto-xy text-title-medium content-emphasis",
+			Text = p7.option.priceText,
+			testId = `{p7.testId}-free`
+		})
+	})
+end
+
+local function CampaignOptionItem(p7)
+	-- upvalues: useTokens (ref), reactModule (ref), view (ref), optionSelectorGroup (ref), CampaignPrice (ref)
 	local var5 = useTokens()
+	local var6 = reactModule.useRef(nil)
+	reactModule.useImperativeHandle(p7.optionRef, function()
+		-- upvalues: var6 (ref)
+		return var6.current
+	end)
+	
+	return reactModule.createElement(view, {
+		tag = "size-full-0 auto-y",
+		LayoutOrder = p7.LayoutOrder
+	}, {
+		Selector = reactModule.createElement(optionSelectorGroup.Item, {
+			value = p7.option.value,
+			label = p7.option.title,
+			metadata = p7.option.runDates,
+			description = p7.option.description,
+			isDisabled = p7.isInteractionDisabled,
+			ref = var6
+		}),
+		Price = reactModule.createElement(view, {
+			ZIndex = 2,
+			tag = "anchor-top-right auto-xy",
+			Position = UDim2.new(1, -var5.Padding.XLarge, 0, var5.Padding.XLarge)
+		}, {
+			Content = reactModule.createElement(CampaignPrice, { option = p7.option, testId = `{p7.testId}-price` })
+		})
+	})
+end
+
+return function(p7)
+	-- upvalues: useTokens (ref), reactModule (ref), sheet (ref), list (ref), view (ref), iconButton (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref), icon (ref), iconSize (ref), text (ref), optionSelectorGroup (ref), optionSelectorGroupSize (ref), CampaignOptionItem (ref), createBenefitRows (ref), AdCampaignLegalText (ref), button (ref)
+	local var5 = useTokens()
+	local isTwoOptions = p7.variant == "twoOptions"
+	local var6 = if isTwoOptions then "two-options-ad-campaign" else "create-ad-campaign"
 	
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
 		isOpen = p7.isOpen,
-		sheetRef = p7.sheetRef,
+		ref = if isTwoOptions then p7.sheetRootRef else nil,
 		snapPoints = list,
-		onClose = p7.onClose
+		onClose = p7.onClose,
+		testId = if isTwoOptions then "TwoOptionsAdCampaignSheet" else nil
 	}, {
 		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = false }, {
 			HeaderRow = reactModule.createElement(view, {
 				LayoutOrder = 1,
-				tag = "row flex-between align-y-center size-full-0 auto-y"
+				tag = {
+					["row align-y-center size-full-0 auto-y"] = true,
+					["flex-between"] = not isTwoOptions or p7.showCloseButton,
+					["align-x-right"] = isTwoOptions and not p7.showCloseButton
+				}
 			}, {
-				Close = reactModule.createElement(iconButton, {
+				Close = if isTwoOptions and not p7.showCloseButton then nil else reactModule.createElement(iconButton, {
 					LayoutOrder = 1,
 					icon = foundationModule.Enums.IconName.X,
 					size = inputSize.Large,
 					variant = buttonVariant.Utility,
 					isDisabled = p7.isCreatePending,
-					onActivated = p7.onRequestClose
+					onActivated = p7.onClose,
+					testId = if isTwoOptions then `{var6}-close` else nil
 				}),
 				Balance = reactModule.createElement(view, {
 					LayoutOrder = 2,
@@ -218,9 +277,14 @@ return function(p7)
 				})
 			})
 		}),
-		Surface = reactModule.createElement(AdCampaignSheetBackground),
 		Content = reactModule.createElement(sheet.Content, nil, {
-			Body = reactModule.createElement(view, { tag = "col gap-large size-full-0 auto-y" }, {
+			Body = reactModule.createElement(view, {
+				tag = {
+					["col size-full-0 auto-y"] = true,
+					["gap-large"] = not isTwoOptions,
+					["gap-xlarge"] = isTwoOptions
+				}
+			}, {
 				Introduction = reactModule.createElement(view, {
 					LayoutOrder = 1,
 					tag = "col gap-xxsmall size-full-0 auto-y"
@@ -236,7 +300,39 @@ return function(p7)
 						Text = p7.description
 					})
 				}),
-				Campaign = reactModule.createElement(view, {
+				Campaign = if isTwoOptions then reactModule.createElement(view, {
+					LayoutOrder = 2,
+					tag = "col gap-medium size-full-0 auto-y"
+				}, {
+					Title = reactModule.createElement(text, {
+						LayoutOrder = 1,
+						tag = "size-full-0 auto-y text-title-large text-wrap text-align-x-left content-emphasis",
+						Text = p7.startCampaignTitle
+					}),
+					Options = reactModule.createElement(optionSelectorGroup.Root, {
+						LayoutOrder = 2,
+						testId = "two-options-ad-campaign-options",
+						value = p7.selectedOption,
+						onValueChanged = p7.onOptionChanged,
+						size = optionSelectorGroupSize.Medium,
+						Selectable = not p7.isCreatePending
+					}, {
+						Free = reactModule.createElement(CampaignOptionItem, {
+							LayoutOrder = 1,
+							testId = "two-options-ad-campaign-free-option",
+							option = p7.freeOption,
+							optionRef = p7.freeOptionRef,
+							isInteractionDisabled = p7.isCreatePending
+						}),
+						Paid = reactModule.createElement(CampaignOptionItem, {
+							LayoutOrder = 2,
+							optionRef = nil,
+							testId = "two-options-ad-campaign-paid-option",
+							option = p7.paidOption,
+							isInteractionDisabled = p7.isCreatePending
+						})
+					})
+				}) else reactModule.createElement(view, {
 					LayoutOrder = 2,
 					tag = "row align-y-center gap-small size-full-0 auto-y padding-medium stroke-standard stroke-default radius-medium bg-surface-0"
 				}, {
@@ -281,12 +377,12 @@ return function(p7)
 						})
 					})
 				}),
-				Disclaimer = reactModule.createElement(text, {
+				Disclaimer = if not isTwoOptions then reactModule.createElement(text, {
 					LayoutOrder = 3,
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 					Text = p7.earnedRobuxDisclaimer
-				}),
-				Included = reactModule.createElement(view, {
+				}) else nil,
+				Included = if not isTwoOptions then reactModule.createElement(view, {
 					LayoutOrder = 4,
 					tag = "col gap-xxlarge size-full-0 auto-y padding-xlarge stroke-standard stroke-default radius-medium bg-surface-0"
 				}, {
@@ -299,7 +395,7 @@ return function(p7)
 						LayoutOrder = 2,
 						tag = "col gap-xxlarge size-full-0 auto-y padding-bottom-small padding-left-medium"
 					}, createBenefitRows(p7.benefits))
-				}),
+				}) else nil,
 				Legal = reactModule.createElement(AdCampaignLegalText, {
 					LayoutOrder = 5,
 					text = p7.legalText,
@@ -308,29 +404,32 @@ return function(p7)
 				})
 			})
 		}),
-		Actions = reactModule.createElement(DividerlessSheetActions, nil, {
-			Error = if p7.hasCreateError then reactModule.createElement(text, {
-				LayoutOrder = 0,
-				tag = "size-full-0 auto-y text-caption-medium text-wrap text-align-x-left content-system-alert",
-				testId = "create-ad-campaign-create-error",
-				Text = p7.createErrorText
-			}) else nil,
-			Create = reactModule.createElement(button, {
-				LayoutOrder = 1,
-				testId = "create-ad-campaign-create-button",
-				text = p7.createText,
-				size = inputSize.Medium,
-				variant = buttonVariant.Emphasis,
-				width = UDim.new(1, 0),
-				isLoading = p7.isCreatePending,
-				onActivated = p7.onCreate
-			}),
-			Moderation = reactModule.createElement(text, {
-				LayoutOrder = 2,
-				tag = "auto-y text-caption-small text-wrap text-align-x-left content-default",
-				testId = "create-ad-campaign-moderation-notice",
-				Text = p7.moderationNotice,
-				Size = UDim2.new(1, 0, 0, math.ceil(var5.Typography.CaptionSmall.FontSize * var5.Typography.CaptionSmall.LineHeight * 2))
+		Actions = reactModule.createElement(sheet.Actions, nil, {
+			Footer = reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, {
+				Error = if p7.hasCreateError then reactModule.createElement(text, {
+					LayoutOrder = 0,
+					tag = "size-full-0 auto-y text-caption-medium text-wrap text-align-x-left content-system-alert",
+					Text = p7.createErrorText,
+					testId = `{var6}-create-error`
+				}) else nil,
+				Create = reactModule.createElement(button, {
+					LayoutOrder = 1,
+					text = p7.createText,
+					size = inputSize.Medium,
+					variant = buttonVariant.Emphasis,
+					width = UDim.new(1, 0),
+					isDisabled = if isTwoOptions then p7.isCreateDisabled else nil,
+					isLoading = p7.isCreatePending,
+					onActivated = p7.onCreate,
+					testId = `{var6}-create-button`
+				}),
+				Moderation = reactModule.createElement(text, {
+					LayoutOrder = 2,
+					tag = "auto-y text-caption-small text-wrap text-align-x-left content-default",
+					Text = p7.moderationNotice,
+					Size = UDim2.new(1, 0, 0, math.ceil(var5.Typography.CaptionSmall.FontSize * var5.Typography.CaptionSmall.LineHeight * 2)),
+					testId = `{var6}-moderation-notice`
+				})
 			})
 		})
 	})

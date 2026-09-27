@@ -7,7 +7,6 @@ local reactModule = require(corePackagesService.Packages.React)
 local roactModule = require(corePackagesService.Packages.Roact)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
 local utilityModule = require(robloxGui.Modules.Settings.Utility)
-local getFFlagEnableConnectDisconnectInSettingsAndChromeModule = require(robloxGui.Modules.Flags.GetFFlagEnableConnectDisconnectInSettingsAndChrome)
 local withTooltip = UIBloxModule.App.Dialog.TooltipV2.withTooltip
 local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
 local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
@@ -17,7 +16,7 @@ local constantsModule = require(robloxGui.Modules.TopBar.Constants)
 local topBarHeight = constantsModule.TopBarHeight
 
 return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), guiService (ref), fIntVoiceChatTooltipDelayModule (ref), utilityModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), topBarHeight (ref), constantsModule (ref), roactModule (ref), styledTextLabel (ref), coreGuiService (ref), tooltipOrientation (ref), withTooltip (ref)
+	-- upvalues: useStyle (ref), reactModule (ref), guiService (ref), fIntVoiceChatTooltipDelayModule (ref), utilityModule (ref), topBarHeight (ref), constantsModule (ref), roactModule (ref), styledTextLabel (ref), coreGuiService (ref), tooltipOrientation (ref), withTooltip (ref)
 	local var1 = useStyle()
 	local var2 = reactModule.useRef(nil)
 	local onClose = p1.onClose
@@ -53,10 +52,7 @@ return function(p1)
 	end, { p1.showPrompt })
 	local _ = 38
 	local var3 = if utilityModule:IsSmallTouchScreen() then 64 else 64
-	
-	if getFFlagEnableConnectDisconnectInSettingsAndChromeModule() then
-		local _ = topBarHeight
-	end
+	local _ = topBarHeight
 	local var4 = constantsModule.useDisplayScaleState(topBarHeight)
 	
 	return withTooltip({

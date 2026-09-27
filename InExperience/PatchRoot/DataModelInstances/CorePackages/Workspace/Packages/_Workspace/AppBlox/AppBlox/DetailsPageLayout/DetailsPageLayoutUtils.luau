@@ -1,6 +1,4 @@
-﻿local fFlagLuaAppClampBannerPaddingToViewport = require(script:FindFirstAncestor("AppBlox").Parent.SharedFlags).FFlagLuaAppClampBannerPaddingToViewport
-
-return {
+﻿return {
 	computeContentTopOffset = function(value, p1, p2)
 		return if value <= 0 then 0 else math.max(0, value / p1 - p2)
 	end,
@@ -8,7 +6,6 @@ return {
 		return math.max(0, (if p1 <= 0 then 0 else math.max(0, p1 / p2 - p3)) - p4)
 	end,
 	computeInitialScrollYForSize = function(p1, p2)
-		-- upvalues: fFlagLuaAppClampBannerPaddingToViewport (ref)
 		local maxValue
 		local fullBleedAspectRatio = p2.fullBleedAspectRatio
 		local headerBarHeight = p2.headerBarHeight
@@ -30,12 +27,7 @@ return {
 		if maxValue_1 == 0 then
 			maxValue_1 = headerBarHeight
 		end
-		local var2 = maxValue_1
-		
-		if fFlagLuaAppClampBannerPaddingToViewport then
-			var2 = math.min(var2, p1.Y * 0.75)
-		end
-		return math.min(maxValue, math.max(0, var2 - headerBarHeight))
+		return math.min(maxValue, math.max(0, math.min(maxValue_1, p1.Y * 0.75) - headerBarHeight))
 	end,
 	computeCanvasPaddingTop = function(p1, p2, p3, p4)
 		local maxValue = math.max(0, p1 - (if p2 then p3 else 0))

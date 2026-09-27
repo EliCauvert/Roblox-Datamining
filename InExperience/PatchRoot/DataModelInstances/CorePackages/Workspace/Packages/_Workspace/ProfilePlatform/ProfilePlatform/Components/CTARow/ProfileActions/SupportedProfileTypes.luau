@@ -11,7 +11,6 @@ local fFlagProfilePlatformEnableCurrencyTransfer = sharedFlagsModule.FFlagProfil
 local fFlagProfilePlatformEnableTradeItemsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
 local fFlagProfilePlatformAddTC = sharedFlagsModule.FFlagProfilePlatformAddTC
 local fFlagFixTFLinksVRGatingModule = require(profilePlatform.Flags.FFlagFixTFLinksVRGating)
-local fFlagPendingIncomingTrustedConnectionModule = require(profilePlatform.Flags.FFlagPendingIncomingTrustedConnection)
 local fFlagProfilePlatformEnableUnlockChatModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableUnlockChat)
 local fFlagProfilePlatformEnableUserFollowModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableUserFollow)
 local list = {
@@ -64,9 +63,8 @@ if not fFlagFixTFLinksVRGatingModule then
 elseif fFlagProfilePlatformAddTC then
 	table.insert(list, enumsModule.ProfileActions.AddTrustedConnectionViaLink)
 end
-if fFlagPendingIncomingTrustedConnectionModule then
-	table.insert(list, enumsModule.ProfileActions.PendingIncomingTrustedConnection)
-end
+table.insert(list, enumsModule.ProfileActions.PendingIncomingTrustedConnection)
+
 if fFlagProfilePlatformNewProfileHeader then
 	table.insert(list, enumsModule.ProfileActions.ViewAbout)
 end

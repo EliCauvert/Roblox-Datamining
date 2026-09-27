@@ -19,7 +19,6 @@ game:DefineFastFlag("FacialAnimationStreamingSearchForReplacementWhenRemovingAni
 game:DefineFastFlag("StopStreamTrackOnDeath", false)
 game:DefineFastFlag("FacialAnimationStreamingClearAllConnectionsFix2", false)
 game:DefineFastFlag("FacialAnimationStreamingIfNoDynamicHeadDisableA2C", false)
-game:DefineFastFlag("FacialAnimationStreamingFixNilMutedCheck", false)
 local getFFlagAvatarChatServiceEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagAvatarChatServiceEnabled
 local var1 = if getFFlagAvatarChatServiceEnabled() then game:GetService("AvatarChatService") else nil
 local faceAnimatorService = game:GetService("FaceAnimatorService")
@@ -471,78 +470,67 @@ local function onFaceControlsAdded(p2, p3)
 	t_6[p2.UserId] = p3
 	
 	if t_6[p2.UserId] then
-		local var9
-		if game:GetFastFlag("FacialAnimationStreamingFixNilMutedCheck") then
-			var9 = default_1
-			
-			if var9 then
-				var9 = default_1.localMuted == false
-				var9 = nil
-			end
-		else
-			var9 = default_1 and not default_1.localMuted
-		end
-		if var9 then
+		if default_1 and default_1.localMuted == false then
+			local var9 = ""
 			local var10 = ""
-			local var11 = ""
 			
 			if p2 then
 				if p2.UserId then
-					var10 = tostring(p2.UserId)
+					var9 = tostring(p2.UserId)
 				end
 				if p2.Name then
-					var11 = p2.Name
+					var10 = p2.Name
 				end
 			end
-			name:trace(string.format("%s {id: %s, name: %s}.", "FaceControls found -> enabling A2C (Mic is ON)...", var10, var11))
+			name:trace(string.format("%s {id: %s, name: %s}.", "FaceControls found -> enabling A2C (Mic is ON)...", var9, var10))
 			faceAnimatorService.AudioAnimationEnabled = true
 			
 			return
 		else
+			local var11 = ""
 			local var12 = ""
-			local var13 = ""
 			
 			if p2 then
 				if p2.UserId then
-					var12 = tostring(p2.UserId)
+					var11 = tostring(p2.UserId)
 				end
 				if p2.Name then
-					var13 = p2.Name
+					var12 = p2.Name
 				end
 			end
-			name:trace(string.format("%s {id: %s, name: %s}.", "FaceControls found -> won't enable A2C (Mic is MUTED)...", var12, var13))
+			name:trace(string.format("%s {id: %s, name: %s}.", "FaceControls found -> won't enable A2C (Mic is MUTED)...", var11, var12))
 			
 			return
 		end
 	elseif faceAnimatorService.AudioAnimationEnabled then
+		local var13 = ""
 		local var14 = ""
-		local var15 = ""
 		
 		if p2 then
 			if p2.UserId then
-				var14 = tostring(p2.UserId)
+				var13 = tostring(p2.UserId)
 			end
 			if p2.Name then
-				var15 = p2.Name
+				var14 = p2.Name
 			end
 		end
-		name:trace(string.format("%s {id: %s, name: %s}.", "FaceControls NOT found -> disabling A2C...", var14, var15))
+		name:trace(string.format("%s {id: %s, name: %s}.", "FaceControls NOT found -> disabling A2C...", var13, var14))
 		faceAnimatorService.AudioAnimationEnabled = false
 		
 		return
 	else
+		local var15 = ""
 		local var16 = ""
-		local var17 = ""
 		
 		if p2 then
 			if p2.UserId then
-				var16 = tostring(p2.UserId)
+				var15 = tostring(p2.UserId)
 			end
 			if p2.Name then
-				var17 = p2.Name
+				var16 = p2.Name
 			end
 		end
-		name:trace(string.format("%s {id: %s, name: %s}.", "FaceControls NOT found -> won't disable A2C (already is disabled)...", var16, var17))
+		name:trace(string.format("%s {id: %s, name: %s}.", "FaceControls NOT found -> won't disable A2C (already is disabled)...", var15, var16))
 	end
 end
 

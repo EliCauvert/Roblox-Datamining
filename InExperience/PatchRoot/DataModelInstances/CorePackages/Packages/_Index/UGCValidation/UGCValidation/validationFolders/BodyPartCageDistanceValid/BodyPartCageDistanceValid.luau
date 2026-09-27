@@ -7,7 +7,6 @@ local assetCalculatorModule = require(parent.util.AssetCalculator)
 local getFStringUGCValidationMaxCageDistanceModule = require(parent.flags.GetFStringUGCValidationMaxCageDistance)
 
 return {
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateCageGeometry),
 	categories = { validationEnumsModule.UploadCategory.FULL_BODY },
 	requiredData = {
 		validationEnumsModule.SharedDataMember.renderMeshesData,

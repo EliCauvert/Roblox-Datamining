@@ -18,7 +18,7 @@ return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useAbuseSheetFlowModule (ref), fFlagEnableInlineSurveyOnUserReport (ref), reactModule (ref), abuseReportDialogModule (ref), arTranslationProvider (ref), abuseReportAnalyticsProvider (ref), loaderProvider (ref), layoutSlotsProvider (ref), sheetSlots (ref)
 	local var1 = useAbuseSheetFlowModule(p1.rawConfig, {
 		abuseVector = p1.abuseVector,
-		targetId = p1.targetId,
+		analyticsTargetId = p1.analyticsTargetId,
 		onClose = p1.onClose,
 		open = p1.open,
 		onCustomSubmit = p1.onCustomSubmit,
@@ -45,7 +45,6 @@ return reactModule.forwardRef(function(p1, p2)
 	
 	return if var1 then reactModule.createElement(arTranslationProvider, { translations = var1.config.translations }, reactModule.createElement(abuseReportAnalyticsProvider, { analytics = var1.analytics }, reactModule.createElement(loaderProvider, { loaders = {}, open = p1.open }, reactModule.createElement(layoutSlotsProvider, { slots = sheetSlots }, reactModule.createElement(abuseReportDialogModule, {
 		abuseVector = p1.abuseVector,
-		targetId = p1.targetId,
 		onClose = p1.onClose,
 		abuseReportFlow = var1,
 		takeoverFocus = p1.takeoverFocus

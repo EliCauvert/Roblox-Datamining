@@ -6,6 +6,12 @@ local fFlagEnableInExperienceAvatarSwitcher = sharedFlagsModule.FFlagEnableInExp
 local fFlagAddInviteFriendsIntegration = sharedFlagsModule.FFlagAddInviteFriendsIntegration
 local fFlagAppNavMyStatsTab = sharedFlagsModule.FFlagAppNavMyStatsTab
 local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local fFlagEnableInExperienceShop = sharedFlagsModule.FFlagEnableInExperienceShop
+local fFlagIntegrateTraversalHistoryInSideSheet = sharedFlagsModule.FFlagIntegrateTraversalHistoryInSideSheet
+local fFlagRemoveFriendsChatUnibarEntrypoints = sharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints
+local fFlagExpChatCanShowFriendsTab = sharedFlagsModule.FFlagExpChatCanShowFriendsTab
+local fFlagShowSwitchServerButton = sharedFlagsModule.FFlagShowSwitchServerButton
+local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
 local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 
 return {
@@ -13,7 +19,7 @@ return {
 	AssistantBuild = if fFlagAppNavMyStatsTab then require(script.AssistantBuild) else nil,
 	Chat = require(script.ExpChat.ChatChromeIntegration),
 	ConnectUnibar = if argoPartyExperimentation.getIsRenameEnabled() then nil else require(script.Connect.ConnectIconUnibar),
-	ConnectDropdown = if sharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints and sharedFlagsModule.FFlagExpChatCanShowFriendsTab and argoPartyExperimentation.getIsRenameEnabled() then nil else require(script.Connect.ConnectIconDropdown),
+	ConnectDropdown = if fFlagRemoveFriendsChatUnibarEntrypoints and fFlagExpChatCanShowFriendsTab and argoPartyExperimentation.getIsRenameEnabled() then nil else require(script.Connect.ConnectIconDropdown),
 	TrustAndSafety = require(script.TrustAndSafety),
 	DummyWindow = require(script.DummyWindow),
 	DummyWindow2 = require(script.DummyWindow2),
@@ -32,11 +38,11 @@ return {
 	Settings = require(script.Pages.Settings),
 	Gallery = require(script.Pages.Gallery),
 	Help = require(script.Pages.Help),
-	TraversalHistory = if require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).Traversal.Flags.FFlagAddTraversalHistory and sharedFlagsModule.FFlagIntegrateTraversalHistoryInSideSheet then require(script.Pages.TraversalHistory) else nil,
+	TraversalHistory = if require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).Traversal.Flags.FFlagAddTraversalHistory and fFlagIntegrateTraversalHistoryInSideSheet then require(script.Pages.TraversalHistory) else nil,
 	LeaveConfirmation = if isSideSheetEnabledModule then require(script.Pages.LeaveConfirmation) else nil,
 	RespawnConfirmation = if isSideSheetEnabledModule then require(script.Pages.RespawnConfirmation) else nil,
 	RobuxWidget = if require(script.Parent.Flags.FFlagEnableSideSheetRobuxWidget) and isSideSheetEnabledModule then require(script.RobuxWidget) else nil,
-	ShopEntrypoint = if sharedFlagsModule.FFlagEnableInExperienceShop then require(script.InExperienceShop.ShopEntrypoint) else nil,
-	SwitchServer = if isSideSheetEnabledModule and sharedFlagsModule.FFlagShowSwitchServerButton then require(script.SwitchServer) else nil,
-	AccountUpsell = if require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch() then require(script.AccountUpsell) else nil
+	ShopEntrypoint = if fFlagEnableInExperienceShop then require(script.InExperienceShop.ShopEntrypoint) else nil,
+	SwitchServer = if isSideSheetEnabledModule and (isPioneerLaunch() or fFlagShowSwitchServerButton) then require(script.SwitchServer) else nil,
+	AccountUpsell = if isPioneerLaunch() then require(script.AccountUpsell) else nil
 }

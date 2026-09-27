@@ -100,6 +100,7 @@ return reactModule.memo(function(p1)
 	}, {
 		NavButton = reactModule.createElement(iconButton, {
 			isCircular = true,
+			testId = "--discovery-edp-iconbutton-peekview-nav",
 			icon = if var10 then iconName.ChevronLargeLeft else iconName.X,
 			variant = buttonVariant.Utility,
 			size = buttonSize.Medium,

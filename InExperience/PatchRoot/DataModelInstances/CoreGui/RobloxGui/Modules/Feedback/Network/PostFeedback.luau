@@ -38,7 +38,7 @@ return function(p1, p2, p3, p4, p5, p6, p7)
 				FeedbackTarget = {
 					ServiceSource = { Type = inGameTranslations, ExternalId = p4 },
 					Source = { ContentType = p1, Value = p2 },
-					Translation = { ContentType = p1, Value = p3 }
+					Translation = if p1 == constantsModule.ContentType.Image and (p3 == nil or p3 == "") then nil else { ContentType = p1, Value = p3 }
 				},
 				Locale = if playersService.LocalPlayer.LocaleId then playersService.LocalPlayer.LocaleId:gsub("-", "_") else "",
 				ReasonType = p7,

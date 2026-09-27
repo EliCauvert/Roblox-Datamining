@@ -17,6 +17,8 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fIntAutoJoinNewServerTimeMs = sharedFlagsModule.FIntAutoJoinNewServerTimeMs
 local fFlagEnableLuaAppsFollowUserId = game:GetEngineFeature("ExperienceServiceFollowUserIdEnabled") and sharedFlagsModule.FFlagEnableLuaAppsFollowUserId
 local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 
 local function getStoreJoinState(p1)
 	-- upvalues: getLoadingScreenStoreModule (ref)
@@ -33,7 +35,7 @@ local function getStoreServerStatusText(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), guiService (ref), signalsReactModule (ref), getStoreJoinState (ref), getStoreServerStatusText (ref), fIntAutoJoinNewServerTimeMs (ref), runService (ref), experienceService (ref), placeLauncherStateModule (ref), fFlagEnableLuaAppsFollowUserId (ref), loadingScreenTelemetryModule (ref), queuePositionEnabledEngineFeature (ref), foundationModule (ref), coreGuiService (ref)
+	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), guiService (ref), signalsReactModule (ref), getStoreJoinState (ref), getStoreServerStatusText (ref), fIntAutoJoinNewServerTimeMs (ref), runService (ref), experienceService (ref), placeLauncherStateModule (ref), fFlagEnableLuaAppsFollowUserId (ref), loadingScreenTelemetryModule (ref), queuePositionEnabledEngineFeature (ref), foundationModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), coreGuiService (ref)
 	local var1 = useTokens()
 	local var2 = useLocalization({
 		friendsServerIsFullJoiningNewServer = "InGame.ConnectionError.Description.FriendsServerIsFullJoiningNewServer",
@@ -150,7 +152,8 @@ return reactModule.memo(function(p1)
 				ZIndex = 2,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 0, 0),
-				Font = var1.Typography.TitleMedium.Font,
+				Font = if foundationFontFaceMigration then nil else var1.Typography.TitleMedium.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.TitleMedium.Font) else nil,
 				TextSize = var1.Typography.TitleMedium.FontSize,
 				TextColor3 = var1.Color.System.Contrast.Color3,
 				Text = var8,

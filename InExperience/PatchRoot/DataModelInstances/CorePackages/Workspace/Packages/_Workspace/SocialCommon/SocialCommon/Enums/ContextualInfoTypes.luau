@@ -4,6 +4,7 @@
 	Friend = "friend",
 	ExperienceLastLocation = "experienceLastLocation",
 	Following = "following",
+	Classmates = "classmates",
 	MutualFriends = "mutualFriends",
 	Frequents = "frequents",
 	Contacts = "Contacts",

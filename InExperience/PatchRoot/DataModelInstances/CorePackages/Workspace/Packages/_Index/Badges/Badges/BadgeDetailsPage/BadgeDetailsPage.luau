@@ -18,7 +18,6 @@ local sduiLoadTimer = sduiSharedUtilitiesModule.SduiLoadTimer
 local compositionTags = require(parent.AppComposition).CompositionTags
 local setIsBadgeDetailsSheetOpen = badgeDetailsSheetStateModule.setIsBadgeDetailsSheetOpen
 local fFlagSduiPageEntryUseSharedHooks = require(parent.SharedFlags).FFlagSduiPageEntryUseSharedHooks
-local luaAppBadgeDetailsLargeSideSheetSize2 = game:DefineFastFlag("LuaAppBadgeDetailsLargeSideSheetSize2", false)
 
 local function _(p1, p2)
 	local extraProps = p1.navigation and p1.navigation.getParam("extraProps")
@@ -31,7 +30,7 @@ local _ = function(p1, p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), getBadgeDetailsPageKeyModule (ref), reactModule (ref), sduiLoadTimer (ref), useNavigation (ref), useRouteName (ref), useNavigationFocus (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), fetchBadgeDetailsPageModule (ref), setIsBadgeDetailsSheetOpen (ref), sduiFeatureEntryPoint (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), foundationModule (ref), luaAppBadgeDetailsLargeSideSheetSize2 (ref)
+	-- upvalues: useTokens (ref), getBadgeDetailsPageKeyModule (ref), reactModule (ref), sduiLoadTimer (ref), useNavigation (ref), useRouteName (ref), useNavigationFocus (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), fetchBadgeDetailsPageModule (ref), setIsBadgeDetailsSheetOpen (ref), sduiFeatureEntryPoint (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), foundationModule (ref)
 	local var1 = useTokens()
 	local extraProps = p1.navigation and p1.navigation.getParam("extraProps")
 	local badgeId = p1.badgeId or extraProps and extraProps.badgeId
@@ -93,7 +92,7 @@ return reactModule.memo(function(p1)
 	}) else reactModule.createElement(foundationModule.Sheet.Root, {
 		snapPoints = { 1 },
 		isOpen = var6,
-		displaySize = if luaAppBadgeDetailsLargeSideSheetSize2 then foundationModule.Enums.DialogSize.Large else nil,
+		displaySize = foundationModule.Enums.DialogSize.Large,
 		onClose = var8
 	}, {
 		Header = reactModule.createElement(foundationModule.Sheet.Header, { hasCloseAffordance = true }, {

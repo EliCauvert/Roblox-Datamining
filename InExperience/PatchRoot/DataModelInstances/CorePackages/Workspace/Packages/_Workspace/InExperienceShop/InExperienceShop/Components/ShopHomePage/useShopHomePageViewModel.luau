@@ -4,11 +4,12 @@ local reactModule = require(parent.React)
 local signal = require(parent.AppCommonLib).Signal
 local categorySectionModule = require(inExperienceShop.Components.CategorySection)
 local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
+local fFlagEnableShopRobuxBuyTelemetryModule = require(inExperienceShop.Flags.FFlagEnableShopRobuxBuyTelemetry)
 local _ = require(inExperienceShop.Types)
 local _ = require(script.Parent.ShopHomePageView)
 
 return function(p1)
-	-- upvalues: reactModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), signal (ref), categorySectionModule (ref)
+	-- upvalues: reactModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), signal (ref), categorySectionModule (ref), fFlagEnableShopRobuxBuyTelemetryModule (ref)
 	local itemsPerRow = p1.itemsPerRow
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), signal (copy)
@@ -18,11 +19,12 @@ return function(p1)
 	return {
 		data = p1.sections,
 		renderItem = reactModule.useCallback(function(p2)
-			-- upvalues: reactModule (copy), categorySectionModule (copy), itemsPerRow (ref), p1 (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var1 (ref)
+			-- upvalues: reactModule (copy), categorySectionModule (copy), fFlagEnableShopRobuxBuyTelemetryModule (copy), itemsPerRow (ref), p1 (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var1 (ref)
 			local item = p2.item
 			
 			return reactModule.createElement(categorySectionModule, {
 				sectionId = item.id,
+				categoryType = if fFlagEnableShopRobuxBuyTelemetryModule then item.categoryType else nil,
 				title = item.name,
 				items = item.items,
 				robuxPackages = item.robuxPackages,

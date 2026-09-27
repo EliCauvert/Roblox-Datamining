@@ -5,7 +5,6 @@ local validationModuleLoaderModule = require(parent.validationSystem.ValidationM
 local fetchAllDesiredDataModule = require(parent.validationSystem.dataFetchModules.FetchAllDesiredData)
 local validationReporterModule = require(parent.validationSystem.ValidationReporter)
 local getFFlagDebugUGCValidationPrintNewStructureResultsModule = require(parent.flags.getFFlagDebugUGCValidationPrintNewStructureResults)
-local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local getFFlagUGCValidationFetchErrorMethodModule = require(parent.flags.getFFlagUGCValidationFetchErrorMethod)
 local validationConstantsModule = require(parent.validationSystem.ValidationConstants)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
@@ -55,7 +54,7 @@ local function _(p3, p4, p5)
 end
 
 return function(p3, p4, p5)
-	-- upvalues: validationModuleLoaderModule (ref), validationReporterModule (ref), validationEnumsModule (ref), reportSingleResult (ref), getMissingData (ref), validationConstantsModule (ref), errorSourceStringsModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), getFFlagUGCValidationFetchErrorMethodModule (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref)
+	-- upvalues: validationModuleLoaderModule (ref), validationReporterModule (ref), validationEnumsModule (ref), reportSingleResult (ref), getMissingData (ref), validationConstantsModule (ref), errorSourceStringsModule (ref), getFFlagUGCValidationFetchErrorMethodModule (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref)
 	local v
 	local validationModule = validationModuleLoaderModule.getValidationModule(p3)
 	local var1 = validationReporterModule.new(p3, p4)
@@ -118,7 +117,7 @@ return function(p3, p4, p5)
 			end)
 			
 			if not ok then
-				if getFFlagUGCValidateMigrateSchemaPropertiesModule() and type(status) == "table" and status.__forceError then
+				if type(status) == "table" and status.__forceError then
 					error(status.message, 0)
 				end
 				if getFFlagUGCValidationFetchErrorMethodModule() and type(status) == "table" and status.__fetchError then

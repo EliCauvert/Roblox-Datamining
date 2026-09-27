@@ -6,7 +6,6 @@ local _ = require(appChat.Analytics.Enums.ConversationActionType)
 local _ = require(parent.SocialLuaAnalytics)
 local defaultTelemetryEventsModule = require(appChat.Telemetry.DefaultTelemetryEvents)
 local fFlagAppChatEnableMessageContextMenuModule = require(appChat.Flags.FFlagAppChatEnableMessageContextMenu)
-local fFlagAppChatUseSwipeForRepliesModule = require(appChat.Flags.FFlagAppChatUseSwipeForReplies)
 local namedCounterConfigurationNoEmittedInfo = defaultTelemetryEventsModule.namedCounterConfigurationNoEmittedInfo
 local namedCounterConfigurationAndFormat = defaultTelemetryEventsModule.namedCounterConfigurationAndFormat
 
@@ -122,7 +121,7 @@ return {
 			targetMessageFormatFunction()
 		}
 	}),
-	ConversationMessageSwiped = if fFlagAppChatUseSwipeForRepliesModule then telemetryModule.new({
+	ConversationMessageSwiped = telemetryModule.new({
 		name = "chatMessageSwiped",
 		description = "",
 		lastUpdated = { 2025, 11, 25 },
@@ -130,7 +129,7 @@ return {
 			namedCounterConfigurationNoEmittedInfo("AppChat.ChatConversation.Message.Swiped"),
 			targetMessageFormatFunction()
 		}
-	}) else nil,
+	}),
 	ConversationMessageReplyIconImpression = telemetryModule.new({
 		name = "chatMessageReplyIconImpression",
 		description = "",

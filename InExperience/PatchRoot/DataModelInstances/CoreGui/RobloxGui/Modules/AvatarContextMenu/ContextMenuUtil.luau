@@ -4,8 +4,10 @@ local contextActionService = game:GetService("ContextActionService")
 local guiService = game:GetService("GuiService")
 local userInputService = game:GetService("UserInputService")
 local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
+local corePackagesService = game:GetService("CorePackages")
+local isTenFootInterface = require(corePackagesService.Workspace.Packages.AppCommonLib).isTenFootInterface
 local _ = require(coreGuiService:WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("AvatarContextMenu").ThemeHandler)
-local blockingUtilityModule = require(game:GetService("CorePackages").Workspace.Packages.BlockingUtility)
+local blockingUtilityModule = require(corePackagesService.Workspace.Packages.BlockingUtility)
 local localPlayer = playersService.LocalPlayer
 while not localPlayer do
 	playersService.PlayerAdded:Wait()
@@ -217,7 +219,7 @@ local function _()
 end
 
 function t.MakeStyledButton(_, p2, p3, p4, p5, p6)
-	-- upvalues: MakeDefaultButton (ref), getViewportSize (ref), userInputService (ref), guiService (ref)
+	-- upvalues: MakeDefaultButton (ref), getViewportSize (ref), userInputService (ref), isTenFootInterface (ref)
 	local var3 = MakeDefaultButton(p2, p4, p5, p6)
 	local textLabel = Instance.new("TextLabel")
 	textLabel.Name = p2 .. "TextLabel"
@@ -233,7 +235,7 @@ function t.MakeStyledButton(_, p2, p3, p4, p5, p6)
 	
 	if userInputService.TouchEnabled and (if var4.Y >= 500 then var4.X < 700 else true) then
 		textLabel.TextSize = 18 * p6.TextScale
-	elseif guiService:IsTenFootInterface() then
+	elseif isTenFootInterface() then
 		textLabel.TextSize = 36 * p6.TextScale
 	end
 	textLabel.Text = p3

@@ -12,7 +12,6 @@ local sduiListEntrySorterModule = require(sduiCoreSystem.ClientBinding.PropBuild
 local sduiListEntryRendererModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryRenderer)
 local sduiPoolEntryHelpersModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPoolEntryHelpers)
 local _ = require(sduiCoreSystem.ClientBinding.SduiPoolStoreTypes)
-local fFlagSduiPoolBackedFeed = require(parent.SharedFlags).FFlagSduiPoolBackedFeed
 local fFlagSduiPerSectionPoolSizing = require(parent.SharedFlags).FFlagSduiPerSectionPoolSizing
 local propResultCategory = sduiClientBindingTypesModule.PropResultCategory
 
@@ -29,7 +28,7 @@ local function _(p1, p2)
 end
 
 local function buildItemsFromEntries(p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14)
-	-- upvalues: sduiListEntrySorterModule (ref), fFlagSduiPoolBackedFeed (ref), sduiPoolEntryHelpersModule (ref), fFlagSduiPerSectionPoolSizing (ref), sduiListEntryRendererModule (ref)
+	-- upvalues: sduiListEntrySorterModule (ref), sduiPoolEntryHelpersModule (ref), fFlagSduiPerSectionPoolSizing (ref), sduiListEntryRendererModule (ref)
 	if p5 ~= nil then
 		local var1
 		local var2 = p3
@@ -51,24 +50,21 @@ local function buildItemsFromEntries(p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, 
 	local var3 = sduiListEntrySorterModule.applyOrder(p3, p4, p11, p7, p6, p8, p10)
 	local var4 = nil
 	local entryConfigExtrasFn = nil
+	local var5 = sduiPoolEntryHelpersModule.computePoolSections(var3, if fFlagSduiPerSectionPoolSizing then p14 else nil)
 	
-	if fFlagSduiPoolBackedFeed then
-		local var5 = sduiPoolEntryHelpersModule.computePoolSections(var3, if fFlagSduiPerSectionPoolSizing then p14 else nil)
-		
-		if p13 ~= nil or sduiPoolEntryHelpersModule.sectionsHaveMultiRow(var5) then
-			local var6 = sduiPoolEntryHelpersModule.createPoolEntryFns(var5, p6, p7, p8, p9, if p13 ~= nil then nil else p13(p11), p14)
-			var4 = var6.inputSlicer
-			entryConfigExtrasFn = var6.entryConfigExtrasFn
-		end
+	if p13 ~= nil or sduiPoolEntryHelpersModule.sectionsHaveMultiRow(var5) then
+		local var6 = sduiPoolEntryHelpersModule.createPoolEntryFns(var5, p6, p7, p8, p9, if p13 ~= nil then nil else p13(p11), p14)
+		var4 = var6.inputSlicer
+		entryConfigExtrasFn = var6.entryConfigExtrasFn
 	end
-	if not fFlagSduiPoolBackedFeed or var4 == nil then
+	if var4 == nil then
 		var4 = sduiListEntryRendererModule.createInputSlicer(p6, p7, p8, p9)
 	end
-	return sduiListEntryRendererModule.buildEntryConfigs(var3, var4, p5, p8, p9, p10, p7, p11, p12, if fFlagSduiPoolBackedFeed then entryConfigExtrasFn else nil)
+	return sduiListEntryRendererModule.buildEntryConfigs(var3, var4, p5, p8, p9, p10, p7, p11, p12, entryConfigExtrasFn)
 end
 
 return function(_, p15, p16, p17, p18, p19)
-	-- upvalues: sduiLoggerModule (ref), sduiErrorsModule (ref), propResultCategory (ref), sduiListEntryRendererModule (ref), fFlagSduiPoolBackedFeed (ref), sduiPoolEntryHelpersModule (ref), sduiPropUtilsModule (ref), sduiListEntryNormalizerModule (ref), buildItemsFromEntries (ref), sduiParseHelpersModule (ref), signalsModule (ref)
+	-- upvalues: sduiLoggerModule (ref), sduiErrorsModule (ref), propResultCategory (ref), sduiListEntryRendererModule (ref), sduiPoolEntryHelpersModule (ref), sduiPropUtilsModule (ref), sduiListEntryNormalizerModule (ref), buildItemsFromEntries (ref), sduiParseHelpersModule (ref), signalsModule (ref)
 	local source = p15 and p15.source
 	local defaultItem = p15 and p15.default_item
 	local orderedIdentifiers = p15 and p15.ordered_identifiers
@@ -90,20 +86,16 @@ return function(_, p15, p16, p17, p18, p19)
 	local type = source.type
 	local value = source.value
 	local var7 = sduiListEntryRendererModule.captureErrorContext(p18)
-	local var8 = nil
-	local var9 = nil
+	local poolConfig = p15 and p15.pool_config
+	local var8 = sduiPoolEntryHelpersModule.resolvePoolDataGetter(poolConfig and poolConfig.pool_path, p16, p18, p17)
+	local var9 = sduiPoolEntryHelpersModule.buildPoolEntryConfigs(poolConfig)
 	
-	if fFlagSduiPoolBackedFeed then
-		local poolConfig = p15 and p15.pool_config
-		var8 = sduiPoolEntryHelpersModule.resolvePoolDataGetter(poolConfig and poolConfig.pool_path, p16, p18, p17)
-		var9 = sduiPoolEntryHelpersModule.buildPoolEntryConfigs(poolConfig)
-	end
 	if type == "binding_path" then
 		local var10 = nil
 		
 		return sduiPropUtilsModule.generateDynamicBindingPropValue(value, p16, p18, p17, function(p20, p21)
-			-- upvalues: sduiListEntryNormalizerModule (copy), defaultItem (ref), itemOverrides (ref), p18 (ref), var10 (write), buildItemsFromEntries (copy), orderedIdentifiers (ref), p17 (ref), p16 (ref), var7 (ref), p19 (ref), deferItemBuild (ref), var8 (write), fFlagSduiPoolBackedFeed (copy), var9 (write)
-			var10 = buildItemsFromEntries(sduiListEntryNormalizerModule.normalizeBoundData(p20, defaultItem, itemOverrides, p18), orderedIdentifiers, var10, p17, p16, p18, var7, p19, p21, deferItemBuild, var8, if fFlagSduiPoolBackedFeed then var9 else nil)
+			-- upvalues: sduiListEntryNormalizerModule (copy), defaultItem (ref), itemOverrides (ref), p18 (ref), var10 (write), buildItemsFromEntries (copy), orderedIdentifiers (ref), p17 (ref), p16 (ref), var7 (ref), p19 (ref), deferItemBuild (ref), var8 (ref), var9 (ref)
+			var10 = buildItemsFromEntries(sduiListEntryNormalizerModule.normalizeBoundData(p20, defaultItem, itemOverrides, p18), orderedIdentifiers, var10, p17, p16, p18, var7, p19, p21, deferItemBuild, var8, var9)
 			
 			return var10
 		end), propResultCategory.PropSignal
@@ -116,10 +108,10 @@ return function(_, p15, p16, p17, p18, p19)
 			end, propResultCategory.PropSignal
 		end
 		return function(p20)
-			-- upvalues: sduiListEntryNormalizerModule (copy), items (ref), defaultItem (ref), p18 (ref), buildItemsFromEntries (copy), orderedIdentifiers (ref), p17 (ref), p16 (ref), var7 (ref), p19 (ref), deferItemBuild (ref), var8 (write), fFlagSduiPoolBackedFeed (copy), var9 (write), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy)
+			-- upvalues: sduiListEntryNormalizerModule (copy), items (ref), defaultItem (ref), p18 (ref), buildItemsFromEntries (copy), orderedIdentifiers (ref), p17 (ref), p16 (ref), var7 (ref), p19 (ref), deferItemBuild (ref), var8 (ref), var9 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy)
 			local ok, status = pcall(function()
-				-- upvalues: sduiListEntryNormalizerModule (copy), items (copy), defaultItem (copy), p18 (copy), buildItemsFromEntries (copy), orderedIdentifiers (copy), p17 (copy), p16 (copy), var7 (copy), p19 (copy), p20 (ref), deferItemBuild (copy), var8 (copy), fFlagSduiPoolBackedFeed (copy), var9 (copy)
-				return buildItemsFromEntries(sduiListEntryNormalizerModule.normalizeLiteralItems(items, defaultItem, p18), orderedIdentifiers, nil, p17, p16, p18, var7, p19, p20, deferItemBuild, var8, if fFlagSduiPoolBackedFeed then var9 else nil)
+				-- upvalues: sduiListEntryNormalizerModule (copy), items (copy), defaultItem (copy), p18 (copy), buildItemsFromEntries (copy), orderedIdentifiers (copy), p17 (copy), p16 (copy), var7 (copy), p19 (copy), p20 (ref), deferItemBuild (copy), var8 (copy), var9 (copy)
+				return buildItemsFromEntries(sduiListEntryNormalizerModule.normalizeLiteralItems(items, defaultItem, p18), orderedIdentifiers, nil, p17, p16, p18, var7, p19, p20, deferItemBuild, var8, var9)
 			end)
 			
 			if ok then
@@ -134,7 +126,7 @@ return function(_, p15, p16, p17, p18, p19)
 			
 			return { data = {} }
 		end, propResultCategory.PropSignal
-	elseif fFlagSduiPoolBackedFeed and type == "pool" then
+	elseif type == "pool" then
 		return signalsModule.createComputed(function(p20)
 			-- upvalues: p17 (ref), sduiListEntryNormalizerModule (copy), defaultItem (ref), itemOverrides (ref), p18 (ref), buildItemsFromEntries (copy), orderedIdentifiers (ref), p16 (ref), var7 (ref), p19 (ref), deferItemBuild (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy)
 			local ok, status = pcall(function()

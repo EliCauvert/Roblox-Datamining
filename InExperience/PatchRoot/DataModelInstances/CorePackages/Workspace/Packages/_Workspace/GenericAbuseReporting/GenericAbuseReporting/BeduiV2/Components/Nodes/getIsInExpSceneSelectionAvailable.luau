@@ -1,7 +1,6 @@
 ﻿local experienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
 local IXPService = game:GetService("IXPService")
 local sharedFlagsModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.SharedFlags)
-local gateAbuseReportInExpSceneSelectionOnIXP = game:DefineFastFlag("GateAbuseReportInExpSceneSelectionOnIXP", false)
 local fStringReportMenuIXPLayer = sharedFlagsModule.FStringReportMenuIXPLayer
 local fStringSelectInSceneIXPField = sharedFlagsModule.FStringSelectInSceneIXPField
 
@@ -21,7 +20,7 @@ local function _()
 end
 
 return function()
-	-- upvalues: experienceStateCaptureService (ref), gateAbuseReportInExpSceneSelectionOnIXP (ref), IXPService (ref), fStringReportMenuIXPLayer (ref), fStringSelectInSceneIXPField (ref)
+	-- upvalues: experienceStateCaptureService (ref), IXPService (ref), fStringReportMenuIXPLayer (ref), fStringSelectInSceneIXPField (ref)
 	if not game:GetEngineFeature("SafetyServiceCaptureModeReportProp") then
 		return false
 	elseif not game:GetEngineFeature("CaptureModeEnabled") then
@@ -30,8 +29,6 @@ return function()
 		return false
 	elseif game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") and not experienceStateCaptureService:CanEnterCaptureMode() then
 		return false
-	elseif not gateAbuseReportInExpSceneSelectionOnIXP then
-		return true
 	end
 	local ok, status = pcall(function()
 		-- upvalues: IXPService (copy), fStringReportMenuIXPLayer (copy)

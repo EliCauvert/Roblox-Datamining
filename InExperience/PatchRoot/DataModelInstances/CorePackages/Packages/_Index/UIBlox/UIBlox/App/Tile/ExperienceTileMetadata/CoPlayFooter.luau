@@ -3,11 +3,14 @@ local parent_1 = parent.Parent
 local UIBloxConfigModule = require(parent.UIBloxConfig)
 local cryoModule = require(parent_1.Cryo)
 local reactModule = require(parent_1.React)
+local foundationModule = require(parent_1.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local label = require(parent.Core.ImageSet.ImageSetComponent).Label
 local genericTextLabelModule = require(parent.Core.Text.GenericTextLabel.GenericTextLabel)
 local useStyleModule = require(parent.Core.Style.useStyle)
 local _ = require(parent.App.Style.StyleTypes)
 local _ = require(parent.App.Style.Fonts)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local t = {
 	faceGroupCount = 3,
 	maxBadgeDisplayNumber = 99,
@@ -67,7 +70,7 @@ local function renderEmphasisBorder(p1, p2, p3, p4)
 end
 
 local function renderBadge(p1, p2, p3)
-	-- upvalues: reactModule (ref), renderCornerStroke (ref), renderEmphasisBorder (ref)
+	-- upvalues: reactModule (ref), renderCornerStroke (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), renderEmphasisBorder (ref)
 	local var1 = if p1.maxDisplayNumber < p1.usersCount then tostring(p1.maxDisplayNumber) .. "+" else tostring(p1.usersCount)
 	local theme = p3.Theme
 	local font = p3.Font
@@ -111,7 +114,8 @@ local function renderBadge(p1, p2, p3)
 				Text = var1,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				Font = font.CaptionHeader.Font,
+				Font = if foundationFontFaceMigration then nil else font.CaptionHeader.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(font.CaptionHeader.Font) else nil,
 				TextSize = font.BaseSize * font.CaptionHeader.RelativeSize,
 				TextColor3 = badgeContentColor.Color,
 				TextTransparency = badgeContentColor.Transparency,

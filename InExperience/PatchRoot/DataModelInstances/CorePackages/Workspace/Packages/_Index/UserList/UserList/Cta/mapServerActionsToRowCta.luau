@@ -3,6 +3,7 @@ local foundationModule = require(userList.Parent.Foundation)
 local enumsModule = require(userList.Common.Enums)
 local _ = require(userList.Common.Types)
 local fFlagUserListChatCtaStandardVariantModule = require(userList.Flags.FFlagUserListChatCtaStandardVariant)
+local fFlagUserListCanonicalCtaAnalyticsModule = require(userList.Flags.FFlagUserListCanonicalCtaAnalytics)
 local iconName = foundationModule.Enums.IconName
 local buttonTypes = enumsModule.ButtonTypes
 local t = {
@@ -39,8 +40,8 @@ local function _(p1, p2)
 	return false
 end
 
-return function(p3, p4, p5, p6)
-	-- upvalues: t (ref), var1 (ref), fFlagUserListChatCtaStandardVariantModule (ref), buttonTypes (ref), iconName (ref)
+return function(p3, p4, p5, p6, p7)
+	-- upvalues: t (ref), fFlagUserListCanonicalCtaAnalyticsModule (ref), var1 (ref), fFlagUserListChatCtaStandardVariantModule (ref), buttonTypes (ref), iconName (ref)
 	if not p3 or not p3.buttons then
 		return { primaryCta = nil, secondaryCta = nil }
 	end
@@ -68,8 +69,8 @@ return function(p3, p4, p5, p6)
 				type_1 = {
 					type = type.buttonType,
 					onActivated = if var4 then function()
-						-- upvalues: var4 (ref), p5 (ref)
-						var4(p5)
+						-- upvalues: var4 (ref), p5 (ref), fFlagUserListCanonicalCtaAnalyticsModule (copy), p7 (ref)
+						var4(p5, if fFlagUserListCanonicalCtaAnalyticsModule then p7 else nil)
 					end else var1,
 					isDisabled = type.isDisabled,
 					disabledReason = v.disabledReason,
@@ -85,8 +86,8 @@ return function(p3, p4, p5, p6)
 						type = buttonTypes.Dismiss,
 						icon = iconName.X,
 						onActivated = if dismiss then function()
-							-- upvalues: dismiss (ref), p5 (ref)
-							dismiss(p5)
+							-- upvalues: dismiss (ref), p5 (ref), fFlagUserListCanonicalCtaAnalyticsModule (copy), p7 (ref)
+							dismiss(p5, if fFlagUserListCanonicalCtaAnalyticsModule then p7 else nil)
 						end else var1
 					}
 				end

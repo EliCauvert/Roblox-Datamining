@@ -30,10 +30,11 @@ local getPriceStatusModule = require(avatarExperienceInspectAndBuy.Utils.getPric
 local cryoModule = require(parent.Cryo)
 local useSignalState = require(parent.SignalsReact).useSignalState
 local useItemSelectionStore = require(avatarExperienceInspectAndBuy.Contexts.ItemSelectionStoreContext).useItemSelectionStore
+local fFlagAXMarketplaceLicensingItemCards = require(parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemCards
 local catalogItemCardStatusIconTypeEnum = AXCommonModule.Components.CatalogItemCard.CatalogItemCardStatusIconTypeEnum
 
 return function(p1, p2, _, p3, p4)
-	-- upvalues: useTokens (ref), useConvertedItemDataModule (ref), itemTypeEnum (ref), bundleLocalizationKeys (ref), assetLocalizationKeys (ref), cryoModule (ref), priceStatusLocalizationKeys (ref), useLocalization (ref), useItemSelectionStore (ref), useSignalState (ref), reactModule (ref), getPriceStatusModule (ref), priceStatusModule (ref), getPriceInRobux (ref), getItemThumbnailUrlModule (ref), getCatalogCardItemTypeModule (ref), catalogItemCardStatusIconTypeEnum (ref), retrievalStatus (ref), getPriceLineContentModule (ref), addUnifiedEventLogging (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sessionService (ref), itemCardThumbnail (ref), wearTimeSelectedOptionInList (ref)
+	-- upvalues: useTokens (ref), useConvertedItemDataModule (ref), itemTypeEnum (ref), bundleLocalizationKeys (ref), assetLocalizationKeys (ref), cryoModule (ref), priceStatusLocalizationKeys (ref), useLocalization (ref), useItemSelectionStore (ref), useSignalState (ref), reactModule (ref), getPriceStatusModule (ref), priceStatusModule (ref), getPriceInRobux (ref), getItemThumbnailUrlModule (ref), getCatalogCardItemTypeModule (ref), catalogItemCardStatusIconTypeEnum (ref), retrievalStatus (ref), getPriceLineContentModule (ref), addUnifiedEventLogging (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sessionService (ref), itemCardThumbnail (ref), fFlagAXMarketplaceLicensingItemCards (ref), wearTimeSelectedOptionInList (ref)
 	local var1 = useTokens()
 	local var2, var3 = useConvertedItemDataModule(p1)
 	local var4 = useLocalization(cryoModule.Dictionary.join(if p1.itemType == itemTypeEnum.Bundle then bundleLocalizationKeys else assetLocalizationKeys, priceStatusLocalizationKeys))
@@ -116,6 +117,7 @@ return function(p1, p2, _, p3, p4)
 		itemSubType = itemSubType,
 		itemType = var12,
 		creator = var15,
+		itemLicensingInfo = if fFlagAXMarketplaceLicensingItemCards then var2.itemLicensingInfo else nil,
 		priceLineContent = var14,
 		LayoutOrder = p2,
 		Size = UDim2.fromOffset(p4, 0),

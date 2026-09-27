@@ -1,7 +1,10 @@
 ﻿local verifiedBadges = script:FindFirstAncestor("VerifiedBadges")
 local cryoModule = require(verifiedBadges.Parent.Cryo)
+local foundationModule = require(verifiedBadges.Parent.Foundation)
 local reactModule = require(verifiedBadges.Parent.React)
 local reactRobloxModule = require(verifiedBadges.Parent.ReactRoblox)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local t = {
 	anchorPoint = Vector2.new(),
 	position = UDim2.new(),
@@ -13,7 +16,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), reactRobloxModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), reactRobloxModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	
 	if var1.children then
@@ -61,7 +64,8 @@ return function(p1)
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			Text = var1.emoji,
-			Font = var1.font,
+			Font = if foundationFontFaceMigration then nil else var1.font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.font) else nil,
 			TextColor3 = var1.color,
 			TextSize = var2,
 			TextYAlignment = Enum.TextYAlignment.Center,

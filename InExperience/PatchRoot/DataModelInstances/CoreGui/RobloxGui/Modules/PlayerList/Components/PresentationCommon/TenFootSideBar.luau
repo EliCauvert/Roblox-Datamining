@@ -49,7 +49,7 @@ function tenFootSideBar.openSidebar(p1, p2)
 				
 				return
 			end
-			require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuNewContainerPage):ReportPlayer(p2, p1.__componentName)
+			require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuContainerPage):ReportPlayer(p2, p1.__componentName)
 		end)
 	end
 	local closedConnection = nil

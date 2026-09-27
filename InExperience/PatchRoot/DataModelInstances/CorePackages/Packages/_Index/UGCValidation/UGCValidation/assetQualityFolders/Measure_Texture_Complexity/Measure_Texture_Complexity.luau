@@ -24,10 +24,7 @@ return {
 			if i ~= "measurement_score" then
 				if v ~= nil and v.score ~= nil then
 					if tonumber(v.score) ~= 100 then
-						p1:warn(errorSourceStringsModule.Keys.AQSWarn_TextureComplexity, {
-							textureName = i,
-							score = tostring(math.floor(tonumber(v.score) or 0))
-						})
+						p1:warn(errorSourceStringsModule.Keys.AQSWarn_TextureComplexity, { textureName = i })
 					end
 				end
 				p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Texture_Complexity" })

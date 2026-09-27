@@ -3,12 +3,11 @@ local parent = serverDrivenUi.Parent
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiImpressionEventType = sduiCoreSystemModule.SduiImpressionEventType
 local getSduiImpressionHandlerRegistry = sduiCoreSystemModule.getSduiImpressionHandlerRegistry
-local fFlagSduiEdpStoreImpressionsLogging = require(parent.SharedFlags).FFlagSduiEdpStoreImpressionsLogging
 local fFlagSduiDevStoreSeeAllImpressionsLogging = require(parent.SharedFlags).FFlagSduiDevStoreSeeAllImpressionsLogging
 local fFlagSduiQueryImpressionsLogging = require(parent.SharedFlags).FFlagSduiQueryImpressionsLogging
 
 return function()
-	-- upvalues: sduiImpressionEventType (ref), serverDrivenUi (ref), fFlagSduiEdpStoreImpressionsLogging (ref), fFlagSduiDevStoreSeeAllImpressionsLogging (ref), fFlagSduiQueryImpressionsLogging (ref), getSduiImpressionHandlerRegistry (ref)
+	-- upvalues: sduiImpressionEventType (ref), serverDrivenUi (ref), fFlagSduiDevStoreSeeAllImpressionsLogging (ref), fFlagSduiQueryImpressionsLogging (ref), getSduiImpressionHandlerRegistry (ref)
 	getSduiImpressionHandlerRegistry().registerImpressionHandlerConfigs({
 		[sduiImpressionEventType.filterImpressions] = {
 			skipItemImpressionsLog = true,
@@ -38,20 +37,20 @@ return function()
 				return require(serverDrivenUi.Impressions.SduiVirtualEventImpressionsHandler)
 			end
 		},
-		[sduiImpressionEventType.experienceStoreImpressions] = if fFlagSduiEdpStoreImpressionsLogging then {
+		[sduiImpressionEventType.experienceStoreImpressions] = {
 			skipItemImpressionsLog = false,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Impressions.SduiEdpStoreImpressionsHandler)
 			end
-		} else nil,
-		[sduiImpressionEventType.marketplaceItemImpressions] = if fFlagSduiEdpStoreImpressionsLogging then {
+		},
+		[sduiImpressionEventType.marketplaceItemImpressions] = {
 			skipItemImpressionsLog = false,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
 			end
-		} else nil,
+		},
 		[sduiImpressionEventType.devStoreSeeAllImpressions] = if fFlagSduiDevStoreSeeAllImpressionsLogging then {
 			skipItemImpressionsLog = false,
 			lazyHandler = function()

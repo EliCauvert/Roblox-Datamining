@@ -1,13 +1,18 @@
 ﻿local parent = script.Parent.Parent.Parent.Parent
-local reactModule = require(parent.Parent.React)
-local useStyleModule = require(parent.Core.Style.useStyle)
+local core = parent.Core
+local parent_1 = parent.Parent
+local foundationModule = require(parent_1.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+local reactModule = require(parent_1.React)
+local useStyleModule = require(core.Style.useStyle)
 local useTextSizeOffsetModule = require(parent.Core.Style.useTextSizeOffset)
 local _ = require(parent.App.Style.Fonts)
 local _ = require(parent.App.Style.StyleTypes)
 local setDefaultModule = require(parent.Utility.setDefault)
 
 return function(p1)
-	-- upvalues: useStyleModule (ref), useTextSizeOffsetModule (ref), setDefaultModule (ref), reactModule (ref)
+	-- upvalues: useStyleModule (ref), useTextSizeOffsetModule (ref), setDefaultModule (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1, var2, var3, var4
 	local var5 = useStyleModule()
 	local var6 = useTextSizeOffsetModule()
@@ -62,7 +67,8 @@ return function(p1)
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Text = contentTitle,
-			Font = var12.Font,
+			Font = if foundationFontFaceMigration then nil else var12.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var12.Font) else nil,
 			TextSize = font.BaseSize * var12.RelativeSize,
 			TextTransparency = textEmphasis.Transparency,
 			TextColor3 = textEmphasis.Color,

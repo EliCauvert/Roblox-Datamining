@@ -2,6 +2,9 @@
 local parent = phoneUpsell.Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useStyle = UIBloxModule.Core.Style.useStyle
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -12,7 +15,7 @@ local linkButton = UIBloxModule.App.Button.LinkButton
 local getFFlagDisableVerifyPhoneViewOnSuccessModule = require(phoneUpsell.Flags.GetFFlagDisableVerifyPhoneViewOnSuccess)
 
 return function(p1)
-	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), buttonType (ref), getFFlagDisableVerifyPhoneViewOnSuccessModule (ref), getPartialPageModalMiddleContentWidth (ref), partialPageModal (ref), textInputBoxWithBorder (ref), linkButton (ref)
+	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), buttonType (ref), getFFlagDisableVerifyPhoneViewOnSuccessModule (ref), getPartialPageModalMiddleContentWidth (ref), partialPageModal (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), textInputBoxWithBorder (ref), linkButton (ref)
 	local var1 = useStyle()
 	local t = {
 		titleKey = "Feature.VerificationUpsell.Heading.VerifyYourPhone",
@@ -43,7 +46,7 @@ return function(p1)
 			-- upvalues: var4 (ref), var6 (ref), var3 (ref), var5 (ref), buttonType (copy), getFFlagDisableVerifyPhoneViewOnSuccessModule (copy), p1 (ref)
 			local function _()
 				-- upvalues: var3 (copy), p3 (ref), var5 (copy), p2 (ref)
-				return if var3 then p3 .. " (" .. var9 .. ")" else p2
+				return if var3 then p3 .. " (" .. var10 .. ")" else p2
 			end
 			
 			local list = {
@@ -73,7 +76,7 @@ return function(p1)
 							
 							countDown()
 						end,
-						text = if var3 then p3 .. " (" .. var9 .. ")" else p2,
+						text = if var3 then p3 .. " (" .. var10 .. ")" else p2,
 						isDisabled = var3 or getFFlagDisableVerifyPhoneViewOnSuccessModule() and p1.isDisabled
 					}
 				}
@@ -121,7 +124,8 @@ return function(p1)
 				TextSize = var1.Font.BaseSize,
 				TextColor3 = var1.Theme.TextDefault.Color,
 				TextTransparency = var1.Theme.TextDefault.Transparency,
-				Font = var1.Font.Body.Font,
+				Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(0, getPartialPageModalMiddleContentWidth(p1.screenSize.X), 0, 0)

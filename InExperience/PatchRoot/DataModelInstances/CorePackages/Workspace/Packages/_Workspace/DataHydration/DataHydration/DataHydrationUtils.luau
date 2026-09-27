@@ -22,6 +22,84 @@ return {
 		
 		return if var2 == nil or var2 <= 0 then nil else var2
 	end,
+	observeLocalPlayerUserId = function(p3)
+		-- upvalues: playersService (ref)
+		local var2 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
+		local var3 = if var2 == nil or var2 <= 0 then nil else var2
+		var2 = nil
+		local _ = nil
+		local var4 = false
+		
+		local function notifyIfChanged()
+			-- upvalues: playersService (copy), var3 (write), p3 (ref)
+			local var5 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
+			local var6 = if var5 == nil or var5 <= 0 then nil else var5
+			
+			if var6 == var3 then
+				return
+			end
+			var3 = var6
+			p3(var6)
+		end
+		
+		local function _()
+			-- upvalues: var2 (write), playersService (copy), notifyIfChanged (ref)
+			if var2 ~= nil then
+				var2:Disconnect()
+				var2 = nil
+			end
+			local localPlayer = playersService.LocalPlayer
+			
+			if localPlayer ~= nil then
+				var2 = localPlayer:GetPropertyChangedSignal("UserId"):Connect(notifyIfChanged)
+			end
+		end
+		
+		if var2 ~= nil then
+			var2:Disconnect()
+			var2 = nil
+		end
+		local localPlayer = playersService.LocalPlayer
+		
+		if localPlayer ~= nil then
+			var2 = localPlayer:GetPropertyChangedSignal("UserId"):Connect(notifyIfChanged)
+		end
+		local var5 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
+			-- upvalues: var2 (write), playersService (copy), notifyIfChanged (ref), var3 (write), p3 (ref)
+			if var2 ~= nil then
+				var2:Disconnect()
+				var2 = nil
+			end
+			local localPlayer = playersService.LocalPlayer
+			
+			if localPlayer ~= nil then
+				var2 = localPlayer:GetPropertyChangedSignal("UserId"):Connect(notifyIfChanged)
+			end
+			local var6 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
+			local var7 = if var6 == nil or var6 <= 0 then nil else var6
+			
+			if var7 == var3 then
+				return
+			end
+			var3 = var7
+			p3(var7)
+		end)
+		
+		return function()
+			-- upvalues: var4 (write), var2 (write), var5 (write)
+			if var4 then return end
+			var4 = true
+			
+			if var2 ~= nil then
+				var2:Disconnect()
+				var2 = nil
+			end
+			if var5 ~= nil then
+				var5:Disconnect()
+				var5 = nil
+			end
+		end
+	end,
 	mergeListsWithoutDuplicates = if fFlagAddFriendsPageTrustedFriendRequestSection or fFlagFriendsRequestsMergeListsWithoutDuplicates then function(p3, p4, p5)
 		-- upvalues: var1 (ref)
 		if p4 and #p4 ~= 0 then

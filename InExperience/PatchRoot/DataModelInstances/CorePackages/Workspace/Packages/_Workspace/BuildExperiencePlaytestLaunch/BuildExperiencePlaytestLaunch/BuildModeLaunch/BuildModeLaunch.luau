@@ -1,23 +1,58 @@
 ﻿local httpService = game:GetService("HttpService")
 local memStorageService = game:GetService("MemStorageService")
+local notificationService = game:GetService("NotificationService")
+local fFlagBuildExperienceLibrary = require(script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent.SharedFlags).FFlagBuildExperienceLibrary
+
+local function _(p1)
+	if type(p1) == "string" then
+		local lowerText = string.lower(p1)
+		
+		return if lowerText == "light" or lowerText == "dark" then lowerText else nil
+	end
+end
+
 local t = {}
 t.__index = t
 
 function t.new()
 	-- upvalues: t (ref)
-	return setmetatable({ cachedResult = nil }, t)
+	return setmetatable({
+		cachedResult = nil,
+		cachedSelectedTheme = nil,
+		cachedChatSessionId = nil,
+		cachedChatPlaceId = nil
+	}, t)
 end
 
-function t:set()
-	-- upvalues: memStorageService (ref), httpService (ref)
+function t:set(p1, p2)
+	-- upvalues: fFlagBuildExperienceLibrary (ref), notificationService (ref), memStorageService (ref), httpService (ref)
+	local t = { hasBuildMode = true }
+	
+	if fFlagBuildExperienceLibrary then
+		local var1
+		local selectedTheme = notificationService.SelectedTheme
+		
+		if type(selectedTheme) == "string" then
+			local lowerText = string.lower(selectedTheme)
+			var1 = if lowerText == "light" or lowerText == "dark" then lowerText else nil
+		end
+		self.cachedSelectedTheme = var1 or self.cachedSelectedTheme
+		t.selectedTheme = self.cachedSelectedTheme
+		t.chatSessionId = p1
+		t.chatPlaceId = p2
+	end
 	self.cachedResult = nil
-	memStorageService:SetItem("BuildExperienceLaunchData", httpService:JSONEncode({ hasBuildMode = true }))
+	memStorageService:SetItem("BuildExperienceLaunchData", httpService:JSONEncode(t))
 end
 
 function t:hasBuildMode()
-	-- upvalues: memStorageService (ref), httpService (ref)
+	-- upvalues: fFlagBuildExperienceLibrary (ref), memStorageService (ref), httpService (ref)
 	if self.cachedResult ~= nil then
 		return self.cachedResult
+	elseif fFlagBuildExperienceLibrary then
+		self.cachedSelectedTheme = nil
+		self.cachedChatSessionId = nil
+		self.cachedChatPlaceId = nil
 	end
 	local buildExperienceLaunchDataItem = memStorageService:GetItem("BuildExperienceLaunchData")
 	
@@ -28,15 +63,45 @@ function t:hasBuildMode()
 	end
 	local ok, status = pcall(httpService.JSONDecode, httpService, buildExperienceLaunchDataItem)
 	
-	if ok and type(status) == "table" then
-		memStorageService:SetItem("BuildExperienceLaunchData", "")
-		self.cachedResult = status.hasBuildMode == true
+	if not ok or type(status) ~= "table" then
+		self.cachedResult = false
 		
-		return self.cachedResult
+		return false
 	end
-	self.cachedResult = false
+	memStorageService:SetItem("BuildExperienceLaunchData", "")
+	self.cachedResult = status.hasBuildMode == true
 	
-	return false
+	if fFlagBuildExperienceLibrary and self.cachedResult then
+		local var1
+		local selectedTheme = status.selectedTheme
+		
+		if type(selectedTheme) == "string" then
+			local lowerText = string.lower(selectedTheme)
+			var1 = if lowerText == "light" or lowerText == "dark" then lowerText else nil
+		end
+		self.cachedSelectedTheme = var1
+		
+		if type(status.chatSessionId) == "string" and status.chatSessionId ~= "" and type(status.chatPlaceId) == "number" then
+			self.cachedChatSessionId = status.chatSessionId
+			self.cachedChatPlaceId = status.chatPlaceId
+		end
+	end
+	return self.cachedResult
+end
+
+function t:applyViewerTheme()
+	-- upvalues: notificationService (ref)
+	self:hasBuildMode()
+	
+	if self.cachedSelectedTheme ~= nil then
+		notificationService.SelectedTheme = self.cachedSelectedTheme
+	end
+end
+
+function t:getChatSessionId(p1)
+	self:hasBuildMode()
+	
+	return if self.cachedChatPlaceId == p1 then self.cachedChatSessionId else nil
 end
 
 return t

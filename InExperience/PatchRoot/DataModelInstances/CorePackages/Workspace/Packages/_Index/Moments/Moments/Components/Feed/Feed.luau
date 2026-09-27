@@ -50,7 +50,6 @@ local surfaceReadyTrackerModule = require(script.Parent.SurfaceReadyTracker)
 local swipeLatencyTrackerModule = require(script.Parent.SwipeLatencyTracker)
 local verticalPager = verticalPagerModule.VerticalPager
 local feedContext = feedContextModule.FeedContext
-local getFFlagMomentsFilterUnavailableFeedItemsModule = require(moments.Flags.GetFFlagMomentsFilterUnavailableFeedItems)
 local var2 = feedTelemetryModule.createNoopTelemetry()
 local t = {
 	deletedTitle = "Feature.Moments.Label.MomentDeletedTitle",
@@ -122,7 +121,7 @@ local _ = function()
 end
 
 return function(p1)
-	-- upvalues: var2 (ref), fFlagMomentsComments (ref), var1 (ref), signalsReactModule (ref), getImmersiveChromeStoreModule (ref), fFlagMomentsImmersiveChromeModule (ref), useLocalization (ref), t (ref), useMomentsSession (ref), getToastStoreModule (ref), reactModule (ref), getFeedScrollLimitModule (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), getFFlagMomentsNonInfiniteScroll (ref), getMomentsCapabilities (ref), createFeedStoreModule (ref), feedItemDedupeKey (ref), fFlagMomentsMediaSmoothnessTelemetry (ref), logMomentViewBeganModule (ref), logFeedEndStateReachedModule (ref), useFeedTelemetryModule (ref), feedItemAttribution (ref), momentsSurfaceLoadManager (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsFeedHealthAnalytics (ref), feedItemRegistryModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), deleteMomentModule (ref), var3 (write), parent (ref), getFFlagMomentsFixDeleteModule (ref), fFlagMomentsRemoveDeletedFromProfile (ref), getDeletedMomentsStoreModule (ref), makeFeedActionFieldsModule (ref), fFlagMomentsFixDeleteToastCopyModule (ref), makeMediaLoadEventFields (ref), fFlagMomentsRealtimeObservability (ref), analytics (ref), fFlagMomentsFeedMediaLoadAttemptedEvent (ref), getFFlagMomentsFilterUnavailableFeedItemsModule (ref), feedContext (ref), verticalPager (ref), renderFeedItem (ref), feedItemKey (ref), feedStateViewModule (ref), feedNavigationBarModule (ref), immersiveChromeControllerModule (ref), swipeLatencyTrackerModule (ref), deletionConfirmationDialogModule (ref), momentMediaCoordinatorProviderModule (ref), surfaceReadyTrackerModule (ref)
+	-- upvalues: var2 (ref), fFlagMomentsComments (ref), var1 (ref), signalsReactModule (ref), getImmersiveChromeStoreModule (ref), fFlagMomentsImmersiveChromeModule (ref), useLocalization (ref), t (ref), useMomentsSession (ref), getToastStoreModule (ref), reactModule (ref), getFeedScrollLimitModule (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), getFFlagMomentsNonInfiniteScroll (ref), getMomentsCapabilities (ref), createFeedStoreModule (ref), feedItemDedupeKey (ref), fFlagMomentsMediaSmoothnessTelemetry (ref), logMomentViewBeganModule (ref), logFeedEndStateReachedModule (ref), useFeedTelemetryModule (ref), feedItemAttribution (ref), momentsSurfaceLoadManager (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsFeedHealthAnalytics (ref), feedItemRegistryModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), deleteMomentModule (ref), var3 (write), parent (ref), getFFlagMomentsFixDeleteModule (ref), fFlagMomentsRemoveDeletedFromProfile (ref), getDeletedMomentsStoreModule (ref), makeFeedActionFieldsModule (ref), fFlagMomentsFixDeleteToastCopyModule (ref), makeMediaLoadEventFields (ref), fFlagMomentsRealtimeObservability (ref), analytics (ref), fFlagMomentsFeedMediaLoadAttemptedEvent (ref), feedContext (ref), verticalPager (ref), renderFeedItem (ref), feedItemKey (ref), feedStateViewModule (ref), feedNavigationBarModule (ref), immersiveChromeControllerModule (ref), swipeLatencyTrackerModule (ref), deletionConfirmationDialogModule (ref), momentMediaCoordinatorProviderModule (ref), surfaceReadyTrackerModule (ref)
 	local source = p1.source
 	local var4 = p1.active ~= nil or p1.active
 	local var5 = if p1.playbackActive ~= nil then var4 else p1.playbackActive
@@ -523,12 +522,12 @@ return function(p1)
 		pager = var15.pager,
 		playbackActive = var5,
 		createCoordinator = p1.createCoordinator,
-		onMediaItemLoadAttempted = if fFlagMomentsRealtimeObservability or fFlagMomentsFeedMediaLoadAttemptedEvent and getFFlagMomentsFilterUnavailableFeedItemsModule() then reactModule.useCallback(function(p4)
-			-- upvalues: fFlagMomentsRealtimeObservability (copy), analytics (copy), var15 (ref), fFlagMomentsFeedMediaLoadAttemptedEvent (copy), getFFlagMomentsFilterUnavailableFeedItemsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), makeMediaLoadEventFields (copy), source (ref)
+		onMediaItemLoadAttempted = if fFlagMomentsRealtimeObservability or fFlagMomentsFeedMediaLoadAttemptedEvent then reactModule.useCallback(function(p4)
+			-- upvalues: fFlagMomentsRealtimeObservability (copy), analytics (copy), var15 (ref), fFlagMomentsFeedMediaLoadAttemptedEvent (copy), fireAnalyticsEvent (copy), eventNames (copy), makeMediaLoadEventFields (copy), source (ref)
 			if fFlagMomentsRealtimeObservability then
 				analytics.reportMomentsFeedMediaLoad("attempted", var15.observabilityFeedType)
 			end
-			if fFlagMomentsFeedMediaLoadAttemptedEvent and getFFlagMomentsFilterUnavailableFeedItemsModule() then
+			if fFlagMomentsFeedMediaLoadAttemptedEvent then
 				for i, v in var15.pager.getItems(false) do
 					if v.kind == "moment" and v.moment.momentId == p4 then
 						fireAnalyticsEvent(eventNames.FeedMediaLoadAttempted, makeMediaLoadEventFields(v.moment, source))
@@ -538,15 +537,13 @@ return function(p1)
 				end
 			end
 		end, { var15, source }) else nil,
-		onMediaItemFailed = if fFlagMomentsRealtimeObservability or getFFlagMomentsFilterUnavailableFeedItemsModule() then reactModule.useCallback(function(p5, p6)
-			-- upvalues: fFlagMomentsRealtimeObservability (copy), analytics (copy), var15 (ref), getFFlagMomentsFilterUnavailableFeedItemsModule (copy), var40 (ref)
+		onMediaItemFailed = reactModule.useCallback(function(p5, p6)
+			-- upvalues: fFlagMomentsRealtimeObservability (copy), analytics (copy), var15 (ref), var40 (ref)
 			if fFlagMomentsRealtimeObservability then
 				analytics.reportMomentsFeedMediaLoad("failed", var15.observabilityFeedType, p6)
 			end
-			if getFFlagMomentsFilterUnavailableFeedItemsModule() then
-				var40(p5, p6)
-			end
-		end, { var15, var40 }) else nil
+			var40(p5, p6)
+		end, { var15, var40 })
 	}, if var7 then {
 		Feed = var41,
 		SurfaceReadyTracker = reactModule.createElement(surfaceReadyTrackerModule, { pager = var15.pager })

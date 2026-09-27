@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("TFClassmatesProfileInsight", false) and require(script.Parent.FFlagProfileInsightsParseClassmates)

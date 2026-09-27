@@ -3,12 +3,9 @@ local analyticsModule = require(parent.Analytics)
 local constantsModule = require(parent.Constants)
 local validateMeshPartBodyPartModule = require(parent.validation.validateMeshPartBodyPart)
 local validateTagsModule = require(parent.validation.validateTags)
-local validatePropertyRequirementsModule = require(parent.validation.validatePropertyRequirements)
-local validateAttributesModule = require(parent.validation.validateAttributes)
 local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
 local createLimbsAndTorsoSchemaModule = require(parent.util.createLimbsAndTorsoSchema)
 local _ = require(parent.util.Types)
-local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 
 local function _(p1, p2)
 	for i, v in pairs(p1) do
@@ -105,7 +102,7 @@ local function validateFolderAssetIdsMatch(value, p8, p9)
 end
 
 local function validateR6Folder(p10, p11, p12)
-	-- upvalues: failureReasonsAccumulatorModule (ref), analyticsModule (ref), validateTagsModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validatePropertyRequirementsModule (ref), validateAttributesModule (ref)
+	-- upvalues: failureReasonsAccumulatorModule (ref), analyticsModule (ref), validateTagsModule (ref)
 	local var6 = failureReasonsAccumulatorModule.new()
 	
 	if #p10:GetChildren() > 0 then
@@ -116,10 +113,6 @@ local function validateR6Folder(p10, p11, p12)
 	end
 	var6:updateReasons(validateTagsModule(p10, p12))
 	
-	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-		var6:updateReasons(validatePropertyRequirementsModule(p10, p11, p12))
-		var6:updateReasons(validateAttributesModule(p10, p12))
-	end
 	return var6:getFinalResults()
 end
 
@@ -153,12 +146,12 @@ return function(p10)
 				local _ = nil
 				
 				if v == constantsModule.FOLDER_NAMES.R6 then
-					var29, i_1 = validateR6Folder(var6, assetTypeEnum, p10)
-					var8 = var29
+					var26, i_1 = validateR6Folder(var6, assetTypeEnum, p10)
+					var8 = var26
 					var7 = i_1
 				else
-					var31, i_1 = validateMeshPartBodyPartModule(var6, createLimbsAndTorsoSchemaModule(assetTypeEnum, v, p10), p10)
-					var8 = var31
+					var28, i_1 = validateMeshPartBodyPartModule(var6, createLimbsAndTorsoSchemaModule(assetTypeEnum, v, p10), p10)
+					var8 = var28
 					var7 = i_1
 				end
 				if not var8 then

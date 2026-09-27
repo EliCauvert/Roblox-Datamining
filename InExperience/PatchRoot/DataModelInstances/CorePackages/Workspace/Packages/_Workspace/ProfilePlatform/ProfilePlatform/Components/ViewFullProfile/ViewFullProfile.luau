@@ -20,11 +20,14 @@ local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfi
 local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
 local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local textKeysModule = require(profilePlatform.Common.TextKeys)
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local makeViewGroupPageModule = require(profilePlatform.Utils.makeViewGroupPage)
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagEnableGroupDetailPane = sharedFlagsModule.FFlagEnableGroupDetailPane
+local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
 function ViewFullProfile(p1)
-	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), eventNamesModule (ref), navigateDownToViewUserProfile (ref), urlBuilder (ref), urlBase (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), horizontalPageMargin (ref), constantsModule (ref), button (ref), buttonType (ref)
+	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), fFlagEnableGroupDetailPane (ref), eventNamesModule (ref), navigateDownToViewUserProfile (ref), appPage (ref), urlBuilder (ref), urlBase (ref), makeViewGroupPageModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), horizontalPageMargin (ref), constantsModule (ref), button (ref), buttonType (ref)
 	local viewFullProfile = useProfileJsonComponentModule(enumsModule.Components.ViewFullProfile) or {}
 	local var2 = useProfileWrapperContextModule()
 	local profileId = var2.profileId
@@ -55,7 +58,7 @@ function ViewFullProfile(p1)
 				buttonType = buttonType.Secondary,
 				size = UDim2.new(1, 0, 0, constantsModule.CTA_BUTTON_HEIGHT),
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: var3 (ref), eventNamesModule (copy), var2 (ref), enumsModule (copy), profileType (ref), var4 (ref), navigateDownToViewUserProfile (copy), profileId (ref), viewFullProfile (ref), urlBuilder (copy), urlBase (copy), appPage (copy), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
+					-- upvalues: var3 (ref), eventNamesModule (copy), var2 (ref), enumsModule (copy), profileType (ref), var4 (ref), navigateDownToViewUserProfile (copy), profileId (ref), viewFullProfile (ref), appPage (copy), urlBuilder (copy), urlBase (copy), textKeysModule (copy), makeViewGroupPageModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
 					var3.fireAnalyticsEvent(eventNamesModule.ViewPlayerProfileButton, {
 						absolutePosition = var2.sourceInfo.homepageCarouselAbsolutePosition,
 						isHomePageCarousel = var2.sourceInfo.source == enumsModule.Sources.HomepageFriendsCarousel,
@@ -71,22 +74,24 @@ function ViewFullProfile(p1)
 						
 						return
 					elseif profileType == enumsModule.ProfileTypes.Community then
-						local t = {
+						local var6 = if viewFullProfile.type == enumsModule.ViewFullProfileTypes.Profile then {
 							name = appPage.GenericWebPage,
-							detail = if viewFullProfile.type == enumsModule.ViewFullProfileTypes.Profile then urlBuilder.new({ base = urlBase.WWW, path = `profiles/{profileId}` })() else urlBuilder.user.group({ groupId = profileId }),
-							extraProps = {
-								titleKey = if viewFullProfile.type == enumsModule.ViewFullProfileTypes.Profile then textKeysModule.Profile else textKeysModule.Community
-							}
-						}
+							detail = urlBuilder.new({ base = urlBase.WWW, path = `profiles/{profileId}` })(),
+							extraProps = { titleKey = textKeysModule.Profile }
+						} else makeViewGroupPageModule(profileId)
 						
 						if fFlagSignalsNavP3Dispatch then
-							var1.down(var1.fromLegacyPage(t))
+							var1.down(var1.fromLegacyPage(var6))
 							
 							return
 						end
-						var4(navigateDown(t))
+						var4(navigateDown(var6))
 					end
-				end, { var4, profileId, var3, var2 }),
+				end, {
+					var4, profileId, var3, var2,
+					if fFlagEnableGroupDetailPane then profileType else nil,
+					if fFlagEnableGroupDetailPane then viewFullProfile.type else nil
+				}),
 				text = reactModule.useMemo(function()
 					-- upvalues: profileType (ref), enumsModule (copy), var5 (ref), viewFullProfile (ref)
 					if profileType == enumsModule.ProfileTypes.User then
@@ -94,7 +99,11 @@ function ViewFullProfile(p1)
 					elseif profileType == enumsModule.ProfileTypes.Community then
 						return if viewFullProfile.type == enumsModule.ViewFullProfileTypes.Profile then var5.viewFullProfileLabel elseif viewFullProfile.type == enumsModule.ViewFullProfileTypes.Community then var5.viewCommunityLabel else var5.viewFullProfileLabel
 					end
-				end, { var5 })
+				end, {
+					var5,
+					if fFlagEnableGroupDetailPane then profileType else nil,
+					if fFlagEnableGroupDetailPane then viewFullProfile.type else nil
+				})
 			})
 		})
 	})

@@ -23,7 +23,7 @@ return function(p1)
 	local var1 = useAbuseSheetFlowModule(p1.rawConfig, {
 		open = true,
 		abuseVector = p1.abuseVector,
-		targetId = p1.targetId,
+		analyticsTargetId = p1.targetId,
 		onClose = p1.onClose,
 		onCustomSubmit = p1.onCustomSubmit,
 		clientActionHandlers = p1.clientActionHandlers,

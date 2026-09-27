@@ -4,9 +4,10 @@ local _ = require(avatarExperienceInspectAndBuy.Types)
 local itemTypeEnum = require(avatarExperienceInspectAndBuy.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local salesLocationType = require(avatarExperienceInspectAndBuy.Parent.AXCommon).Enums.SalesLocationType
 local tutilsModule = require(parent.tutils)
+local fFlagAXMarketplaceLicensingItemCards = require(parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemCards
 
 return function(p1, p2)
-	-- upvalues: tutilsModule (ref), itemTypeEnum (ref), salesLocationType (ref)
+	-- upvalues: tutilsModule (ref), itemTypeEnum (ref), fFlagAXMarketplaceLicensingItemCards (ref), salesLocationType (ref)
 	local var1 = if p2 then tutilsModule.fieldCount(p2) else 0
 	local t = {}
 	
@@ -32,6 +33,7 @@ return function(p1, p2)
 			creatorName = p1.creatorName or "",
 			creatorHasVerifiedBadge = p1.creatorHasVerifiedBadge or false
 		},
+		itemLicensingInfo = if fFlagAXMarketplaceLicensingItemCards then p1.itemLicensingInfo else nil,
 		saleLocationType = p1.saleLocationType or salesLocationType.Invalid,
 		itemRestrictions = p1.itemRestrictions or {},
 		priceInRobux = p1.price,

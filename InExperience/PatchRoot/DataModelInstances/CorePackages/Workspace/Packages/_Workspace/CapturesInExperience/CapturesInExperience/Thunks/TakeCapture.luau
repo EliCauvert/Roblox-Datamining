@@ -13,9 +13,12 @@ local overlayActivatedModule = require(parent.Actions.OverlayActivated)
 local overlayDeactivatedModule = require(parent.Actions.OverlayDeactivated)
 local overlayFlashActivatedModule = require(parent.Actions.OverlayFlashActivated)
 local overlayFlashDeactivatedModule = require(parent.Actions.OverlayFlashDeactivated)
+local pendingCaptureToastActionModule = require(parent.Utils.pendingCaptureToastAction)
 local removeCoreUIModule = require(parent.Utils.removeCoreUI)
 local toastTriggeredModule = require(parent.Actions.ToastTriggered)
+local _ = require(parent.Types)
 local fStringSocialCaptureTakenIXPLayer = require(parent_1.SharedFlags).FStringSocialCaptureTakenIXPLayer
+local fFlagBuildExperienceInGameCaptureToChat = require(parent_1.SharedFlags).FFlagBuildExperienceInGameCaptureToChat
 local debugAPPEXP4747B = game:DefineFastFlag("DebugAPPEXP4747B", false)
 
 local function _(p1)
@@ -46,13 +49,17 @@ local _ = function()
 	end
 end
 
-return function()
-	-- upvalues: toastTriggeredModule (ref), capturesToastTypeModule (ref), userInputService (ref), getScreenshotHudModule (ref), debugAPPEXP4747B (ref), guiService (ref), removeCoreUIModule (ref), overlayActivatedModule (ref), captureService (ref), getAvatarAssetsModule (ref), getUserMetadataModule (ref), httpService (ref), overlayFlashActivatedModule (ref), overlayFlashDeactivatedModule (ref), overlayDeactivatedModule (ref), IXPServiceWrapper (ref), fStringSocialCaptureTakenIXPLayer (ref)
-	return function(p1)
-		-- upvalues: toastTriggeredModule (copy), capturesToastTypeModule (copy), userInputService (copy), getScreenshotHudModule (copy), debugAPPEXP4747B (copy), guiService (copy), removeCoreUIModule (copy), overlayActivatedModule (copy), captureService (copy), getAvatarAssetsModule (copy), getUserMetadataModule (copy), httpService (copy), overlayFlashActivatedModule (copy), overlayFlashDeactivatedModule (copy), overlayDeactivatedModule (copy), IXPServiceWrapper (copy), fStringSocialCaptureTakenIXPLayer (copy)
+return function(p1)
+	-- upvalues: fFlagBuildExperienceInGameCaptureToChat (ref), pendingCaptureToastActionModule (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref), userInputService (ref), getScreenshotHudModule (ref), debugAPPEXP4747B (ref), guiService (ref), removeCoreUIModule (ref), overlayActivatedModule (ref), captureService (ref), getAvatarAssetsModule (ref), getUserMetadataModule (ref), httpService (ref), overlayFlashActivatedModule (ref), overlayFlashDeactivatedModule (ref), overlayDeactivatedModule (ref), IXPServiceWrapper (ref), fStringSocialCaptureTakenIXPLayer (ref)
+	return function(p2)
+		-- upvalues: fFlagBuildExperienceInGameCaptureToChat (copy), pendingCaptureToastActionModule (copy), p1 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy), userInputService (copy), getScreenshotHudModule (copy), debugAPPEXP4747B (copy), guiService (copy), removeCoreUIModule (copy), overlayActivatedModule (copy), captureService (copy), getAvatarAssetsModule (copy), getUserMetadataModule (copy), httpService (copy), overlayFlashActivatedModule (copy), overlayFlashDeactivatedModule (copy), overlayDeactivatedModule (copy), IXPServiceWrapper (copy), fStringSocialCaptureTakenIXPLayer (copy)
 		local var1 = false
 		local var2 = false
-		p1:dispatch(toastTriggeredModule(capturesToastTypeModule.None))
+		
+		if fFlagBuildExperienceInGameCaptureToChat then
+			pendingCaptureToastActionModule.set(if p1 then p1.toastAction else nil)
+		end
+		p2:dispatch(toastTriggeredModule(capturesToastTypeModule.None))
 		local overrideMouseIconBehavior = userInputService.OverrideMouseIconBehavior
 		userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
 		local var3 = getScreenshotHudModule()
@@ -81,7 +88,7 @@ return function()
 				guiService:ToggleGuiIsVisibleForCaptures(playerNameplates)
 			end
 		end
-		p1:dispatch(overlayActivatedModule())
+		p2:dispatch(overlayActivatedModule())
 		captureService:OnCaptureBegan()
 		task.wait(0.1)
 		local var5 = getAvatarAssetsModule()
@@ -96,11 +103,11 @@ return function()
 			}))
 		end
 		task.wait()
-		p1:dispatch(overlayFlashActivatedModule())
+		p2:dispatch(overlayFlashActivatedModule())
 		task.wait(0.5)
 		captureService:OnCaptureEnded()
-		p1:dispatch(overlayFlashDeactivatedModule())
-		p1:dispatch(overlayDeactivatedModule())
+		p2:dispatch(overlayFlashDeactivatedModule())
+		p2:dispatch(overlayDeactivatedModule())
 		userInputService.OverrideMouseIconBehavior = overrideMouseIconBehavior
 		
 		if var2 and not guiService:GetGuiIsVisible(Enum.GuiType.Custom) then

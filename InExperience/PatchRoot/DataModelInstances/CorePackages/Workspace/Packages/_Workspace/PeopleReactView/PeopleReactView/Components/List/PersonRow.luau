@@ -22,16 +22,18 @@ local useIsRobloxSubscriber = userProfilesModule.Hooks.useIsRobloxSubscriber
 local useInExperienceCombinedNameModule = require(peopleReactView.Hooks.useInExperienceCombinedName)
 local platformNameModule = require(peopleReactView.Components.Buttons.PlatformName)
 local personButtonRowModule = require(peopleReactView.Components.List.PersonButtonRow)
+local peoplePageLayoutContextModule = require(peopleReactView.PeoplePageLayoutContext)
 local formatUsername = userProfilesModule.Formatters.formatUsername
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
+local fFlagPeopleListButtonOverflowModule = require(peopleReactView.Flags.FFlagPeopleListButtonOverflow)
 local playerListRefactorUsernameFormatting = game:DefineFastFlag("PlayerListRefactorUsernameFormatting", false)
 local getFFlagAddPeoplePageCardLayout = peopleServiceModule.getService("Flags").GetFFlagAddPeoplePageCardLayout
 
 return function(p1)
-	-- upvalues: useTokens (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), reactModule (ref), peopleServiceModule (ref), getFFlagAddPeoplePageCardLayout (ref), useInExperienceCombinedNameModule (ref), useSignalBinding (ref), avatar (ref), inputSize (ref), fFlagPeopleTabUseProfileFrameThumbnailModule (ref), text (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), playerListRefactorUsernameFormatting (ref), formatUsername (ref), personButtonRowModule (ref), platformNameModule (ref)
+	-- upvalues: useTokens (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), reactModule (ref), peoplePageLayoutContextModule (ref), fFlagPeopleListButtonOverflowModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), peopleServiceModule (ref), getFFlagAddPeoplePageCardLayout (ref), useInExperienceCombinedNameModule (ref), useSignalBinding (ref), avatar (ref), inputSize (ref), fFlagPeopleTabUseProfileFrameThumbnailModule (ref), text (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), playerListRefactorUsernameFormatting (ref), formatUsername (ref), personButtonRowModule (ref), platformNameModule (ref)
 	local var1
 	local var2 = useTokens()
-	local var3 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait
+	local var3 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait or fFlagPeopleListButtonOverflowModule and reactModule.useContext(peoplePageLayoutContextModule).isCompact
 	local var4 = if fFlagEnableBlackbirdCheck then useIsRobloxSubscriber(tostring(p1.person.UserId)) else nil
 	local var5 = reactModule.useRef(nil)
 	local var6 = reactModule.useCallback(function(p2)

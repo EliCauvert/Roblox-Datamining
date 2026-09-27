@@ -8,7 +8,6 @@ local editDisplayNameErrorModalModule = require(parent.EditProfile.EditDisplayNa
 local usernameInsufficientFundsModalModule = require(parent.EditProfile.UsernameInsufficientFundsModal)
 local enumsModule_1 = require(parent.EditProfile.Enums)
 local profilePlatformViewAdaptorModule = require(profilePlatform.Components.ProfilePlatformViewAdaptor)
-local videoFullscreenPageModule = require(profilePlatform.Components.Videos.VideoFullscreenPage)
 local setAliasModal = setAliasModule.SetAliasModal
 local editProfileScreenViewAdapterModule = require(parent.EditProfile.EditProfileScreenViewAdapter)
 local editProfileToastScreenModule = require(parent.EditProfile.EditProfileToastScreen)
@@ -23,7 +22,6 @@ local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagS
 local fFlagProfilePlatformEnableMomentsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableMoments)
 local reactModule = require(parent.React)
 local roactNavigationModule = require(parent.RoactNavigation)
-local fFlagAddVideoToCommunityProfile = require(parent.SharedFlags).FFlagAddVideoToCommunityProfile
 local fFlagEditProfileBackgroundEnabled = require(parent.SharedFlags).FFlagEditProfileBackgroundEnabled
 local fFlagEnableCommunityVerificationModalModule = require(profilePlatform.Flags.FFlagEnableCommunityVerificationModal)
 local fFlagEditProfileImageV2Enabled = require(parent.SharedFlags).FFlagEditProfileImageV2Enabled
@@ -79,14 +77,6 @@ t_5.navigationOptions = var2
 t_4[editProfilePage] = t_5
 -- Unknown statement at pc 2: <SetList>
 
-if fFlagAddVideoToCommunityProfile then
-	table.insert(t_2, {
-		[enumsModule.Screens.VideoFullscreen] = {
-			screen = videoFullscreenPageModule,
-			navigationOptions = t
-		}
-	})
-end
 if fFlagEnableCommunityVerificationModalModule then
 	table.insert(t_2, {
 		[enumsModule.Screens.CommunityVerificationModal] = {

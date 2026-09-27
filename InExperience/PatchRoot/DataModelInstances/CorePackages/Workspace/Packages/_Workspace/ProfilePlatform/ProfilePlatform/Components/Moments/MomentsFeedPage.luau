@@ -11,6 +11,7 @@ local centralOverlayModule = require(parent.CentralOverlay)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableArgusImmersiveNav = sharedFlagsModule.FFlagEnableArgusImmersiveNav
 local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
+local fFlagEnableMomentsCommentReporting = sharedFlagsModule.FFlagEnableMomentsCommentReporting
 local fFlagAbuseReportSubmissionTargetV4 = sharedFlagsModule.FFlagAbuseReportSubmissionTargetV4
 local view = foundationModule.View
 local iconButton = foundationModule.IconButton
@@ -34,7 +35,7 @@ local createUserMomentsFeedSourceModule = require(parent.Moments.CreateUserMomen
 local reportMoment = momentsModule.reportMoment
 
 return if fFlagEnableArgusImmersiveNav then function()
-	-- upvalues: useNavigation (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useDispatch (ref), closeCentralOverlay (ref), reportMoment (ref), openDynamicAbuseReport (ref), abuseVector (ref), fFlagAbuseReportSubmissionTargetV4 (ref), useScreenSize (ref), view (ref), momentsImmersivePresentation (ref), immersiveFeedKind (ref)
+	-- upvalues: useNavigation (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useDispatch (ref), closeCentralOverlay (ref), reportMoment (ref), openDynamicAbuseReport (ref), abuseVector (ref), fFlagAbuseReportSubmissionTargetV4 (ref), fFlagEnableMomentsCommentReporting (ref), useScreenSize (ref), view (ref), momentsImmersivePresentation (ref), immersiveFeedKind (ref)
 	local var1 = useNavigation()
 	local extraProps = var1.getParam("extraProps")
 	local var2 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
@@ -110,11 +111,32 @@ return if fFlagEnableArgusImmersiveNav then function()
 			}))
 		end, { var6 })
 	end
-	local var7 = useScreenSize()
+	local var7 = nil
+	
+	if fFlagEnableMomentsCommentReporting then
+		local var8 = useDispatch()
+		var7 = reactModule.useCallback(function(p1)
+			-- upvalues: var8 (ref), openDynamicAbuseReport (copy), abuseVector (copy), closeCentralOverlay (copy)
+			var8(openDynamicAbuseReport({
+				abuseVector = abuseVector.MomentComment,
+				attributes = {
+					targetId = p1.commentId,
+					channelId = p1.channelId,
+					reportedUserId = p1.reportedUserId
+				},
+				analyticsTargetId = p1.commentId,
+				onClose = function()
+					-- upvalues: var8 (copy), closeCentralOverlay (copy)
+					var8(closeCentralOverlay())
+				end
+			}))
+		end, { var8 })
+	end
+	local var9 = useScreenSize()
 	
 	return reactModule.createElement(view, {
 		tag = "bg-surface-0",
-		Size = UDim2.fromOffset(var7.X, var7.Y)
+		Size = UDim2.fromOffset(var9.X, var9.Y)
 	}, {
 		Presentation = reactModule.createElement(momentsImmersivePresentation, {
 			sessionSource = "profile",
@@ -122,7 +144,8 @@ return if fFlagEnableArgusImmersiveNav then function()
 			targetUserId = var2,
 			initialIndex = var3,
 			onBack = var4,
-			openMomentsFeedReport = var5
+			openMomentsFeedReport = var5,
+			openMomentCommentReport = var7
 		})
 	})
 end else function()

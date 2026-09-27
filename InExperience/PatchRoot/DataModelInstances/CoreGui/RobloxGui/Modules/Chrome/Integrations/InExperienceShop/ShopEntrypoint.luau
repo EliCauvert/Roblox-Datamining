@@ -1,5 +1,6 @@
 ﻿local chrome = script:FindFirstAncestor("Chrome")
 local corePackagesService = game:GetService("CorePackages")
+local guiService = game:GetService("GuiService")
 local marketplaceService = game:GetService("MarketplaceService")
 local playersService = game:GetService("Players")
 local starterGuiService = game:GetService("StarterGui")
@@ -9,6 +10,7 @@ local chromeModule = require(corePackagesService.Workspace.Packages.Chrome)
 local windowSizeSignalModule = require(chrome.ChromeShared.Service.WindowSizeSignal)
 local constantsModule = require(chrome.ChromeShared.Unibar.Constants)
 local commonIconModule = require(chrome.Integrations.CommonIcon)
+local initializeShopMenuControllerModule = require(chrome.Integrations.InExperienceShop.initializeShopMenuController)
 local shopChromeWrapperModule = require(chrome.Integrations.InExperienceShop.ShopChromeWrapper)
 local shopWindowLayoutModule = require(chrome.Integrations.InExperienceShop.ShopWindowLayout)
 local chromeUtilsModule = require(chrome.ChromeShared.Service.ChromeUtils)
@@ -18,6 +20,7 @@ local inExperienceShopModule = require(corePackagesService.Workspace.Packages.In
 local fFlagEnableShopPrefetch = inExperienceShopModule.FFlagEnableShopPrefetch
 local fFlagHideShopMenuOnFailure = inExperienceShopModule.FFlagHideShopMenuOnFailure
 local fFlagCenterInExperienceShopWindow = inExperienceShopModule.FFlagCenterInExperienceShopWindow
+local fFlagFixInExperienceShopCursorLock = inExperienceShopModule.FFlagFixInExperienceShopCursorLock
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local fFlagEnableMenuTrailingBadge = sharedFlagsModule.FFlagEnableMenuTrailingBadge
 local fFlagShowOfferBadge = sharedFlagsModule.FFlagShowOfferBadge
@@ -115,6 +118,9 @@ t.components = {
 }
 local var7 = serviceModule:register(t)
 
+if fFlagFixInExperienceShopCursorLock then
+	initializeShopMenuControllerModule(guiService, var1)
+end
 if fFlagEnableShopPrefetch then
 	local prefetchShopDataOnGameJoinModule = require(corePackagesService.Workspace.Packages.InExperienceShop.prefetchShopDataOnGameJoin)
 	

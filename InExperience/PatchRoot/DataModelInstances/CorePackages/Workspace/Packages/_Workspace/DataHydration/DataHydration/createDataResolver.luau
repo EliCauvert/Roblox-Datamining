@@ -6,15 +6,13 @@ local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalP
 local createRequestQueueModule = require(dataHydration.createRequestQueue)
 local createMutationLayerModule = require(dataHydration.createMutationLayer)
 local promiseModule = require(parent.Promise)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppDataHydrationDataResolverOnClear = sharedFlagsModule.FFlagLuaAppDataHydrationDataResolverOnClear
-local fFlagLuaAppDataHydrationOptimisticMutationLayer = sharedFlagsModule.FFlagLuaAppDataHydrationOptimisticMutationLayer
+local fFlagLuaAppDataHydrationDataResolverOnClear = require(parent.SharedFlags).FFlagLuaAppDataHydrationDataResolverOnClear
 local luaAppDataHydrationDefaultBatchSize = game:DefineFastInt("LuaAppDataHydrationDefaultBatchSize", 50)
 local luaAppDataHydrationQueueProcessDelaySec = game:DefineFastInt("LuaAppDataHydrationQueueProcessDelaySec", 1)
 local luaAppDataHydrationDefaultRequestTimeoutSec = game:DefineFastInt("LuaAppDataHydrationDefaultRequestTimeoutSec", 30)
 
 return function(p1)
-	-- upvalues: luaAppDataHydrationDefaultBatchSize (ref), luaAppDataHydrationQueueProcessDelaySec (ref), luaAppDataHydrationDefaultRequestTimeoutSec (ref), createRequestQueueModule (ref), getLocalPlayerUserId (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), createMutationLayerModule (ref), promiseModule (ref), fFlagLuaAppDataHydrationDataResolverOnClear (ref), playersService (ref)
+	-- upvalues: luaAppDataHydrationDefaultBatchSize (ref), luaAppDataHydrationQueueProcessDelaySec (ref), luaAppDataHydrationDefaultRequestTimeoutSec (ref), createRequestQueueModule (ref), getLocalPlayerUserId (ref), createMutationLayerModule (ref), promiseModule (ref), fFlagLuaAppDataHydrationDataResolverOnClear (ref), playersService (ref)
 	local var1 = p1.supportsMultiGet ~= nil or p1.supportsMultiGet
 	local var2 = p1.requestBatchSize or luaAppDataHydrationDefaultBatchSize
 	
@@ -32,7 +30,7 @@ return function(p1)
 	local t = {}
 	local var5 = nil
 	local var6 = getLocalPlayerUserId()
-	local var7 = if fFlagLuaAppDataHydrationOptimisticMutationLayer and p1.supportsMutations then createMutationLayerModule() else nil
+	local var7 = if p1.supportsMutations then createMutationLayerModule() else nil
 	
 	local function FORCE_FETCH()
 		return true
@@ -46,7 +44,7 @@ return function(p1)
 	end
 	
 	local _ = function(p2, p3, p4)
-		-- upvalues: var6 (write), p1 (ref), t (write), cache (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (write)
+		-- upvalues: var6 (write), p1 (ref), t (write), cache (ref), var7 (write)
 		if p4 ~= var6 then return end
 		if p1.logError then
 			p1.logError(p2)
@@ -56,13 +54,13 @@ return function(p1)
 		end
 		cache.markItemsAsFailed(p3)
 		
-		if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+		if var7 then
 			var7.drainCommitted(p3, cache.updateItem)
 		end
 	end
 	
 	local function handleSuccess(p5, p6, p7)
-		-- upvalues: var6 (write), t (write), p1 (ref), cache (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (write)
+		-- upvalues: var6 (write), t (write), p1 (ref), cache (ref), var7 (write)
 		if p7 ~= var6 then return end
 		for i, v in p5 do
 			t[i] = nil
@@ -74,47 +72,39 @@ return function(p1)
 		end
 		local t_1 = {}
 		
-		if fFlagLuaAppDataHydrationOptimisticMutationLayer then
-			for v, v_1 in p6 do
-				if p5[v_1] == nil then
-					if var7 and var7.isCommitted(v_1) then
-						t[v_1] = nil
-					else
-						table.insert(t_1, v_1)
-					end
-				end
-			end
-			if var7 then
-				var7.drainCommitted(p6, cache.updateItem)
-			end
-		else
-			for v, v_1 in p6 do
-				if p5[v_1] == nil then
+		for v, v_1 in p6 do
+			if p5[v_1] == nil then
+				if var7 and var7.isCommitted(v_1) then
+					t[v_1] = nil
+				else
 					table.insert(t_1, v_1)
 				end
 			end
+		end
+		if var7 then
+			var7.drainCommitted(p6, cache.updateItem)
 		end
 		if #t_1 > 0 then
 			if p7 ~= var6 then return end
 			if p1.logError then
 				p1.logError("Items missing in response")
 			end
-			for v, v_1 in t_1 do
-				t[v_1] = nil
+			for v, v_2 in t_1 do
+				t[v_2] = nil
 			end
 			cache.markItemsAsFailed(t_1)
 			
-			if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+			if var7 then
 				var7.drainCommitted(t_1, cache.updateItem)
 			end
 		end
 	end
 	
 	local function scheduleFetch()
-		-- upvalues: var5 (write), var4 (ref), var3 (write), var6 (write), var2 (write), t (write), cache (ref), requestTimeoutSec (ref), p1 (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (write), var1 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref)
+		-- upvalues: var5 (write), var4 (ref), var3 (write), var6 (write), var2 (write), t (write), cache (ref), requestTimeoutSec (ref), p1 (ref), var7 (write), var1 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref)
 		if var5 == nil and not var4.isEmpty() then
 			var5 = task.delay(var3, function()
-				-- upvalues: var6 (copy), var5 (copy), var4 (copy), var2 (copy), t (copy), cache (copy), requestTimeoutSec (copy), p1 (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy), var1 (copy), promiseModule (copy), handleSuccess (copy), scheduleFetch (copy)
+				-- upvalues: var6 (copy), var5 (copy), var4 (copy), var2 (copy), t (copy), cache (copy), requestTimeoutSec (copy), p1 (copy), var7 (copy), var1 (copy), promiseModule (copy), handleSuccess (copy), scheduleFetch (copy)
 				var5 = nil
 				
 				if var4.isEmpty() then return end
@@ -125,7 +115,7 @@ return function(p1)
 				end
 				local items = cache.getItems(var8)
 				local delayedThread = task.delay(requestTimeoutSec, function()
-					-- upvalues: requestTimeoutSec (copy), var8 (ref), var6 (ref), var6 (copy), p1 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy)
+					-- upvalues: requestTimeoutSec (copy), var8 (ref), var6 (ref), var6 (copy), p1 (copy), t (copy), cache (copy), var7 (copy)
 					local var9 = `No fetch response after {requestTimeoutSec} sec`
 					
 					if var6 ~= var6 then return end
@@ -137,19 +127,19 @@ return function(p1)
 					end
 					cache.markItemsAsFailed(var8)
 					
-					if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+					if var7 then
 						var7.drainCommitted(var8, cache.updateItem)
 					end
 				end)
 				local ok, status = pcall(function()
-					-- upvalues: var1 (copy), var8 (ref), items (ref), p1 (copy), promiseModule (copy), handleSuccess (copy), var6 (ref), delayedThread (ref), var6 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy)
+					-- upvalues: var1 (copy), var8 (ref), items (ref), p1 (copy), promiseModule (copy), handleSuccess (copy), var6 (ref), delayedThread (ref), var6 (copy), t (copy), cache (copy), var7 (copy)
 					if var1 then
 						p1.fetchFn(items):andThen(function(p8)
 							-- upvalues: handleSuccess (copy), var8 (copy), var6 (copy), delayedThread (copy)
 							handleSuccess(p8, var8, var6)
 							task.cancel(delayedThread)
 						end):catch(function(p8)
-							-- upvalues: var8 (copy), var6 (copy), var6 (copy), p1 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy), delayedThread (copy)
+							-- upvalues: var8 (copy), var6 (copy), var6 (copy), p1 (copy), t (copy), cache (copy), var7 (copy), delayedThread (copy)
 							if var6 == var6 then
 								if p1.logError then
 									p1.logError(p8)
@@ -159,7 +149,7 @@ return function(p1)
 								end
 								cache.markItemsAsFailed(var8)
 								
-								if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+								if var7 then
 									var7.drainCommitted(var8, cache.updateItem)
 								end
 							end
@@ -183,7 +173,7 @@ return function(p1)
 						handleSuccess(t, var8, var6)
 						task.cancel(delayedThread)
 					end):catch(function(p9)
-						-- upvalues: var8 (copy), var6 (copy), var6 (copy), p1 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy), delayedThread (copy)
+						-- upvalues: var8 (copy), var6 (copy), var6 (copy), p1 (copy), t (copy), cache (copy), var7 (copy), delayedThread (copy)
 						if var6 == var6 then
 							if p1.logError then
 								p1.logError(p9)
@@ -193,7 +183,7 @@ return function(p1)
 							end
 							cache.markItemsAsFailed(var8)
 							
-							if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+							if var7 then
 								var7.drainCommitted(var8, cache.updateItem)
 							end
 						end
@@ -211,7 +201,7 @@ return function(p1)
 						end
 						cache.markItemsAsFailed(var8)
 						
-						if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+						if var7 then
 							var7.drainCommitted(var8, cache.updateItem)
 						end
 					end
@@ -230,7 +220,7 @@ return function(p1)
 	end
 	
 	local function getAndFetchItems(p8, p9)
-		-- upvalues: cache (ref), var4 (ref), t (write), var5 (write), var3 (write), var6 (write), var2 (write), requestTimeoutSec (ref), p1 (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (write), var1 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref)
+		-- upvalues: cache (ref), var4 (ref), t (write), var5 (write), var3 (write), var6 (write), var2 (write), requestTimeoutSec (ref), p1 (ref), var7 (write), var1 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref)
 		local items, items_1 = cache.getItems(p8, p9)
 		local t_1 = {}
 		local t_2 = {}
@@ -251,7 +241,7 @@ return function(p1)
 				return t_1
 			end
 			var5 = task.delay(var3, function()
-				-- upvalues: var6 (copy), var5 (copy), var4 (copy), var2 (copy), t (copy), cache (copy), requestTimeoutSec (copy), p1 (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy), var1 (copy), promiseModule (copy), handleSuccess (copy), scheduleFetch (copy)
+				-- upvalues: var6 (copy), var5 (copy), var4 (copy), var2 (copy), t (copy), cache (copy), requestTimeoutSec (copy), p1 (copy), var7 (copy), var1 (copy), promiseModule (copy), handleSuccess (copy), scheduleFetch (copy)
 				var5 = nil
 				
 				if var4.isEmpty() then return end
@@ -262,7 +252,7 @@ return function(p1)
 				end
 				local items = cache.getItems(var10)
 				local delayedThread = task.delay(requestTimeoutSec, function()
-					-- upvalues: requestTimeoutSec (copy), var10 (ref), var6 (ref), var6 (copy), p1 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy)
+					-- upvalues: requestTimeoutSec (copy), var10 (ref), var6 (ref), var6 (copy), p1 (copy), t (copy), cache (copy), var7 (copy)
 					local var11 = `No fetch response after {requestTimeoutSec} sec`
 					
 					if var6 ~= var6 then return end
@@ -274,19 +264,19 @@ return function(p1)
 					end
 					cache.markItemsAsFailed(var10)
 					
-					if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+					if var7 then
 						var7.drainCommitted(var10, cache.updateItem)
 					end
 				end)
 				local ok, status = pcall(function()
-					-- upvalues: var1 (copy), var10 (ref), items (ref), p1 (copy), promiseModule (copy), handleSuccess (copy), var6 (ref), delayedThread (ref), var6 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy)
+					-- upvalues: var1 (copy), var10 (ref), items (ref), p1 (copy), promiseModule (copy), handleSuccess (copy), var6 (ref), delayedThread (ref), var6 (copy), t (copy), cache (copy), var7 (copy)
 					if var1 then
 						p1.fetchFn(items):andThen(function(p10)
 							-- upvalues: handleSuccess (copy), var10 (copy), var6 (copy), delayedThread (copy)
 							handleSuccess(p10, var10, var6)
 							task.cancel(delayedThread)
 						end):catch(function(p10)
-							-- upvalues: var10 (copy), var6 (copy), var6 (copy), p1 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy), delayedThread (copy)
+							-- upvalues: var10 (copy), var6 (copy), var6 (copy), p1 (copy), t (copy), cache (copy), var7 (copy), delayedThread (copy)
 							if var6 == var6 then
 								if p1.logError then
 									p1.logError(p10)
@@ -296,7 +286,7 @@ return function(p1)
 								end
 								cache.markItemsAsFailed(var10)
 								
-								if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+								if var7 then
 									var7.drainCommitted(var10, cache.updateItem)
 								end
 							end
@@ -320,7 +310,7 @@ return function(p1)
 						handleSuccess(t, var10, var6)
 						task.cancel(delayedThread)
 					end):catch(function(p11)
-						-- upvalues: var10 (copy), var6 (copy), var6 (copy), p1 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy), delayedThread (copy)
+						-- upvalues: var10 (copy), var6 (copy), var6 (copy), p1 (copy), t (copy), cache (copy), var7 (copy), delayedThread (copy)
 						if var6 == var6 then
 							if p1.logError then
 								p1.logError(p11)
@@ -330,7 +320,7 @@ return function(p1)
 							end
 							cache.markItemsAsFailed(var10)
 							
-							if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+							if var7 then
 								var7.drainCommitted(var10, cache.updateItem)
 							end
 						end
@@ -348,7 +338,7 @@ return function(p1)
 						end
 						cache.markItemsAsFailed(var10)
 						
-						if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+						if var7 then
 							var7.drainCommitted(var10, cache.updateItem)
 						end
 					end
@@ -361,7 +351,7 @@ return function(p1)
 	end
 	
 	local function getAndFetchItem(p10, p11)
-		-- upvalues: cache (ref), var4 (ref), t (write), var5 (write), var3 (write), var6 (write), var2 (write), requestTimeoutSec (ref), p1 (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (write), var1 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref)
+		-- upvalues: cache (ref), var4 (ref), t (write), var5 (write), var3 (write), var6 (write), var2 (write), requestTimeoutSec (ref), p1 (ref), var7 (write), var1 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref)
 		local item, item_1 = cache.getItem(p10, p11)
 		
 		if item_1 and not (if var4.hasItem(p10) then true else t[p10] == nil) then
@@ -373,7 +363,7 @@ return function(p1)
 				return item, item_1
 			end
 			var5 = task.delay(var3, function()
-				-- upvalues: var6 (copy), var5 (copy), var4 (copy), var2 (copy), t (copy), cache (copy), requestTimeoutSec (copy), p1 (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy), var1 (copy), promiseModule (copy), handleSuccess (copy), scheduleFetch (copy)
+				-- upvalues: var6 (copy), var5 (copy), var4 (copy), var2 (copy), t (copy), cache (copy), requestTimeoutSec (copy), p1 (copy), var7 (copy), var1 (copy), promiseModule (copy), handleSuccess (copy), scheduleFetch (copy)
 				var5 = nil
 				
 				if var4.isEmpty() then return end
@@ -384,7 +374,7 @@ return function(p1)
 				end
 				local items = cache.getItems(var12)
 				local delayedThread = task.delay(requestTimeoutSec, function()
-					-- upvalues: requestTimeoutSec (copy), var12 (ref), var6 (ref), var6 (copy), p1 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy)
+					-- upvalues: requestTimeoutSec (copy), var12 (ref), var6 (ref), var6 (copy), p1 (copy), t (copy), cache (copy), var7 (copy)
 					local var13 = `No fetch response after {requestTimeoutSec} sec`
 					
 					if var6 ~= var6 then return end
@@ -396,19 +386,19 @@ return function(p1)
 					end
 					cache.markItemsAsFailed(var12)
 					
-					if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+					if var7 then
 						var7.drainCommitted(var12, cache.updateItem)
 					end
 				end)
 				local ok, status = pcall(function()
-					-- upvalues: var1 (copy), var12 (ref), items (ref), p1 (copy), promiseModule (copy), handleSuccess (copy), var6 (ref), delayedThread (ref), var6 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy)
+					-- upvalues: var1 (copy), var12 (ref), items (ref), p1 (copy), promiseModule (copy), handleSuccess (copy), var6 (ref), delayedThread (ref), var6 (copy), t (copy), cache (copy), var7 (copy)
 					if var1 then
 						p1.fetchFn(items):andThen(function(p12)
 							-- upvalues: handleSuccess (copy), var12 (copy), var6 (copy), delayedThread (copy)
 							handleSuccess(p12, var12, var6)
 							task.cancel(delayedThread)
 						end):catch(function(p12)
-							-- upvalues: var12 (copy), var6 (copy), var6 (copy), p1 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy), delayedThread (copy)
+							-- upvalues: var12 (copy), var6 (copy), var6 (copy), p1 (copy), t (copy), cache (copy), var7 (copy), delayedThread (copy)
 							if var6 == var6 then
 								if p1.logError then
 									p1.logError(p12)
@@ -418,7 +408,7 @@ return function(p1)
 								end
 								cache.markItemsAsFailed(var12)
 								
-								if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+								if var7 then
 									var7.drainCommitted(var12, cache.updateItem)
 								end
 							end
@@ -442,7 +432,7 @@ return function(p1)
 						handleSuccess(t, var12, var6)
 						task.cancel(delayedThread)
 					end):catch(function(p13)
-						-- upvalues: var12 (copy), var6 (copy), var6 (copy), p1 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy), delayedThread (copy)
+						-- upvalues: var12 (copy), var6 (copy), var6 (copy), p1 (copy), t (copy), cache (copy), var7 (copy), delayedThread (copy)
 						if var6 == var6 then
 							if p1.logError then
 								p1.logError(p13)
@@ -452,7 +442,7 @@ return function(p1)
 							end
 							cache.markItemsAsFailed(var12)
 							
-							if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+							if var7 then
 								var7.drainCommitted(var12, cache.updateItem)
 							end
 						end
@@ -470,7 +460,7 @@ return function(p1)
 						end
 						cache.markItemsAsFailed(var12)
 						
-						if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+						if var7 then
 							var7.drainCommitted(var12, cache.updateItem)
 						end
 					end
@@ -503,7 +493,7 @@ return function(p1)
 	end
 	
 	local function clear()
-		-- upvalues: var5 (write), t (write), cache (ref), var4 (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (write), fFlagLuaAppDataHydrationDataResolverOnClear (copy), p1 (ref)
+		-- upvalues: var5 (write), t (write), cache (ref), var4 (ref), var7 (write), fFlagLuaAppDataHydrationDataResolverOnClear (copy), p1 (ref)
 		if var5 then
 			task.cancel(var5)
 			var5 = nil
@@ -512,7 +502,7 @@ return function(p1)
 		cache.clear()
 		var4.clear()
 		
-		if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+		if var7 then
 			var7.clearAll()
 		end
 		if fFlagLuaAppDataHydrationDataResolverOnClear and p1.onClear then
@@ -548,7 +538,7 @@ return function(p1)
 		clear = clear
 	}
 	
-	if fFlagLuaAppDataHydrationOptimisticMutationLayer and var7 then
+	if var7 then
 		function t_1.getOptimisticCachedItem(p12)
 			-- upvalues: cache (ref), var7 (write)
 			local item, item_1 = cache.getItem(p12)

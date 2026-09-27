@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnableTimeToLoginMetrics", false)
+﻿return game:DefineFastFlag("EnableTimeToLoginMetrics2", false)

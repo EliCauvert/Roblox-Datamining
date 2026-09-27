@@ -12,7 +12,6 @@ local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
 local _ = require(sduiCoreSystem.SduiComponentType)
 local sduiParseHelpersModule = require(sduiCoreSystem.SduiParseHelpers)
 local _ = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryNormalizer)
-local fFlagSduiPoolBackedFeed = require(parent.SharedFlags).FFlagSduiPoolBackedFeed
 local buildConfigForComponent = sduiClientBindingBuilderModule.buildConfigForComponent
 local sduiDeferredItemStubModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiDeferredItemStub)
 local t = {}
@@ -66,7 +65,7 @@ end
 return {
 	captureErrorContext = captureErrorContext,
 	createInputSlicer = function(p9, p10, p11, p12, p13)
-		-- upvalues: fillInputs (ref), cryoModule (ref), t (ref), unwrapEntryData (ref), fFlagSduiPoolBackedFeed (ref)
+		-- upvalues: fillInputs (ref), cryoModule (ref), t (ref), unwrapEntryData (ref)
 		local function rawSlice(p14, p15)
 			-- upvalues: p9 (ref), fillInputs (copy), p10 (ref), p11 (ref), p12 (ref), cryoModule (copy), t (copy), unwrapEntryData (copy)
 			if p14.sourceMode == "literal" then
@@ -92,7 +91,7 @@ return {
 			end
 		end
 		
-		return if fFlagSduiPoolBackedFeed and p13 ~= nil then function(p14, p15)
+		return if p13 == nil then rawSlice else function(p14, p15)
 			-- upvalues: rawSlice (ref), p13 (ref), cryoModule (copy)
 			local var1 = rawSlice(p14, p15)
 			
@@ -102,13 +101,13 @@ return {
 				
 				return if var2 == nil then var1(p16) else cryoModule.Dictionary.join(var1(p16), var2)
 			end
-		end else rawSlice
+		end
 	end,
 	buildEntryConfigs = function(p9, p10, p11, p12, p13, p14, p15, p16, p17, p18)
-		-- upvalues: fFlagSduiPoolBackedFeed (ref), sduiPropUtilsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiDeferredItemStubModule (ref), buildConfigForComponent (ref)
+		-- upvalues: sduiPropUtilsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiDeferredItemStubModule (ref), buildConfigForComponent (ref)
 		local t = {}
 		local t_1 = {}
-		local var1 = fFlagSduiPoolBackedFeed and p18 ~= nil
+		local var1 = p18 ~= nil
 		
 		for i, v in p9 do
 			if p11 and p11[i] then

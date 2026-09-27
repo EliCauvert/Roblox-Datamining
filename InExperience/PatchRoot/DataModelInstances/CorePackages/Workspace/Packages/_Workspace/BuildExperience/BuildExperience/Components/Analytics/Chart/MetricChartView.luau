@@ -3,6 +3,8 @@ local parent = script:FindFirstAncestor("BuildExperience").Parent
 local foundationModule = require(parent.Foundation)
 local graphingModule = require(parent.Graphing)
 local reactModule = require(parent.React)
+local styleModule = require(parent.Style)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local chartLayoutModule = require(script.Parent.chartLayout)
 local canvas = graphingModule.Canvas
 local curve = graphingModule.Curve
@@ -129,11 +131,11 @@ local function renderValueRow(p1, p2)
 end
 
 local function measureGutter(p1, p2, p3)
-	-- upvalues: textService (ref)
+	-- upvalues: foundationFontFaceMigration (ref), styleModule (ref), textService (ref)
 	local var3 = 0
 	
 	for i, v in p1 do
-		var3 = math.max(var3, textService:GetTextSize(v.label, p2, p3, Vector2.new(1000, 100)).X)
+		var3 = math.max(var3, (if foundationFontFaceMigration then styleModule.GetTextSize(v.label, p2, p3, Vector2.new(1000, 100), { addTemporaryPadding = false }) else textService:GetTextSize(v.label, p2, p3, Vector2.new(1000, 100))).X)
 	end
 	return math.max(60, math.ceil(var3) + 2 + 12)
 end
@@ -160,7 +162,7 @@ local function renderYAxisLabels(p4)
 end
 
 local function selectXAxisTicks(p5, p6, p7, p8)
-	-- upvalues: textService (ref)
+	-- upvalues: foundationFontFaceMigration (ref), styleModule (ref), textService (ref)
 	local p16Count = #p5
 	
 	if p16Count <= 2 or p6 <= 0 then
@@ -169,7 +171,7 @@ local function selectXAxisTicks(p5, p6, p7, p8)
 	local var5 = 0
 	
 	for i, v in p5 do
-		var5 = math.max(var5, textService:GetTextSize(v, p7, p8, Vector2.new(1000, 100)).X)
+		var5 = math.max(var5, (if foundationFontFaceMigration then styleModule.GetTextSize(v, p7, p8, Vector2.new(1000, 100), { addTemporaryPadding = false }) else textService:GetTextSize(v, p7, p8, Vector2.new(1000, 100))).X)
 	end
 	if p6 < var5 then
 		return {}

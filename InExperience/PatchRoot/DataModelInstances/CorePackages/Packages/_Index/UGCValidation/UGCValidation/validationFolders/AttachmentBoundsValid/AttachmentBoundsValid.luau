@@ -9,7 +9,6 @@ local meshSpaceUtilsModule = require(parent.util.MeshSpaceUtils)
 local prettyPrintVector3Module = require(parent.util.prettyPrintVector3)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
-local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local getFStringUGCValidationAttachmentErrorLinkModule = require(parent.flags.getFStringUGCValidationAttachmentErrorLink)
 local getFFlagUGCValidateAttachmentBoundsErrorMessageModule = require(parent.flags.getFFlagUGCValidateAttachmentBoundsErrorMessage)
 local t = {
@@ -23,7 +22,6 @@ local t = {
 		validationEnumsModule.SharedDataMember.consumerConfig
 	},
 	conditionalData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	fflag = getFFlagUGCValidateMigrateSchemaPropertiesModule,
 	expectedFailures = {}
 }
 

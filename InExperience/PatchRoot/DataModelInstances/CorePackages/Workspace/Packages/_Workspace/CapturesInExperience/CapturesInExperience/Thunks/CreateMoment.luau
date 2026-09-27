@@ -9,18 +9,24 @@ local normalizeMomentMetadataModule = require(parent.Utils.normalizeMomentMetada
 local toastTriggeredModule = require(parent.Actions.ToastTriggered)
 local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
 local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
+local getFFlagMomentsUseMomentsServiceForUpload = momentsCommonModule.Flags.GetFFlagMomentsUseMomentsServiceForUpload
 local makePostMetadata = momentsCreationModule.makePostMetadata
 
-return function(p1, p2, p3)
-	-- upvalues: normalizeMomentMetadataModule (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadata (ref), captureService (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref)
-	return function(p4)
-		-- upvalues: normalizeMomentMetadataModule (copy), p2 (ref), getFFlagMomentsUseUploadPostAsync (copy), makePostMetadata (copy), captureService (copy), p1 (ref), p3 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy)
+return function(p1, p2, p3, p4)
+	-- upvalues: normalizeMomentMetadataModule (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadata (ref), getFFlagMomentsUseMomentsServiceForUpload (ref), captureService (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref)
+	return function(p5)
+		-- upvalues: normalizeMomentMetadataModule (copy), p2 (ref), getFFlagMomentsUseUploadPostAsync (copy), makePostMetadata (copy), getFFlagMomentsUseMomentsServiceForUpload (copy), p1 (ref), p4 (ref), captureService (copy), p3 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy)
 		local var1 = normalizeMomentMetadataModule(p2)
 		
 		if getFFlagMomentsUseUploadPostAsync() then
-			local var2 = makePostMetadata(p2)
+			local var2 = makePostMetadata(p2, if getFFlagMomentsUseMomentsServiceForUpload() then p1 else nil)
 			pcall(function()
-				-- upvalues: captureService (copy), p1 (copy), var2 (ref)
+				-- upvalues: getFFlagMomentsUseMomentsServiceForUpload (copy), p4 (copy), var2 (ref), captureService (copy), p1 (copy)
+				if getFFlagMomentsUseMomentsServiceForUpload() then
+					(p4 or game:GetService("MomentsService")):CreatePostAsync(var2)
+					
+					return
+				end
 				captureService:UploadPostAsync(p1, var2)
 			end)
 		else
@@ -29,6 +35,6 @@ return function(p1, p2, p3)
 				captureService:UploadCaptureAndPostMoment(p1, var1, p3)
 			end)
 		end
-		p4:dispatch(toastTriggeredModule(capturesToastTypeModule.MomentProcessing))
+		p5:dispatch(toastTriggeredModule(capturesToastTypeModule.MomentProcessing))
 	end
 end

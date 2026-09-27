@@ -5,6 +5,8 @@ local UIBloxModule = require(parent.UIBlox)
 local foundationModule = require(parent.Foundation)
 local checkbox = foundationModule.Checkbox
 local text = foundationModule.Text
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local withStyle = UIBloxModule.Style.withStyle
 local withLocalization = require(parent.Localization).withLocalization
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -54,7 +56,7 @@ local function getButtonStackProps(p1, p2, p3, p4, p5, p6)
 end
 
 return function(p1)
-	-- upvalues: mergePropsModule (ref), t (ref), reactModule (ref), getPartialPageModalMiddleContentWidth (ref), fFlagHomePhoneVerificationUpsellNewCopy (ref), withStyle (ref), withLocalization (ref), partialPageModal (ref), getButtonStackProps (ref), fFlagPhoneUpsellFocusNavigationModule (ref), textBoxStateWrapper (ref), phoneNumberTextBox (ref), text (ref), checkbox (ref), linkButton (ref)
+	-- upvalues: mergePropsModule (ref), t (ref), reactModule (ref), getPartialPageModalMiddleContentWidth (ref), fFlagHomePhoneVerificationUpsellNewCopy (ref), withStyle (ref), withLocalization (ref), partialPageModal (ref), getButtonStackProps (ref), fFlagPhoneUpsellFocusNavigationModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), textBoxStateWrapper (ref), phoneNumberTextBox (ref), text (ref), checkbox (ref), linkButton (ref)
 	local var1 = mergePropsModule(t, p1)
 	
 	local function noOp() end
@@ -78,9 +80,9 @@ return function(p1)
 		t_1.extraButtonKey = var1.extraButtonKey
 	end
 	return withStyle(function(p2)
-		-- upvalues: withLocalization (copy), t_1 (ref), var1 (ref), var2 (ref), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), fFlagPhoneUpsellFocusNavigationModule (copy), var4 (ref), var5 (ref), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (ref), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var3 (ref), linkButton (copy)
+		-- upvalues: withLocalization (copy), t_1 (ref), var1 (ref), var2 (ref), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), fFlagPhoneUpsellFocusNavigationModule (copy), var4 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), var5 (ref), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (ref), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var3 (ref), linkButton (copy)
 		return withLocalization(t_1)(function(p3)
-			-- upvalues: p2 (ref), var1 (copy), var2 (copy), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), fFlagPhoneUpsellFocusNavigationModule (copy), var4 (copy), var5 (copy), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (copy), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var3 (copy), linkButton (copy)
+			-- upvalues: p2 (ref), var1 (copy), var2 (copy), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), fFlagPhoneUpsellFocusNavigationModule (copy), var4 (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), var5 (copy), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (copy), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var3 (copy), linkButton (copy)
 			local baseSize = p2.Font.BaseSize
 			local relativeSize = p2.Font.Body.RelativeSize
 			local relativeSize_1 = p2.Font.CaptionHeader.RelativeSize
@@ -119,7 +121,8 @@ return function(p1)
 					TextSize = baseSize,
 					TextColor3 = p2.Theme.TextDefault.Color,
 					TextTransparency = p2.Theme.TextDefault.Transparency,
-					Font = p2.Font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else p2.Font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Size = UDim2.new(0, var5, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
@@ -160,7 +163,8 @@ return function(p1)
 					TextSize = baseSize * relativeSize_1,
 					TextColor3 = p2.Theme.TextEmphasis.Color,
 					TextTransparency = p2.Theme.TextEmphasis.Transparency,
-					Font = p2.Font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else p2.Font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Size = UDim2.new(0, var5, 0, 24)
 				}),
@@ -193,7 +197,8 @@ return function(p1)
 						TextSize = baseSize * relativeSize_1,
 						TextColor3 = p2.Theme.TextDefault.Color,
 						TextTransparency = p2.Theme.TextDefault.Transparency,
-						Font = p2.Font.Body.Font,
+						Font = if foundationFontFaceMigration then nil else p2.Font.Body.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						Size = UDim2.new(1, -32, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
@@ -206,7 +211,8 @@ return function(p1)
 					TextSize = baseSize * relativeSize_1,
 					TextColor3 = p2.Theme.TextDefault.Color,
 					TextTransparency = p2.Theme.TextDefault.Transparency,
-					Font = p2.Font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else p2.Font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Size = UDim2.new(0, var5, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
@@ -242,7 +248,8 @@ return function(p1)
 					TextSize = baseSize * relativeSize_1,
 					TextColor3 = p2.Theme.TextDefault.Color,
 					TextTransparency = p2.Theme.TextDefault.Transparency,
-					Font = p2.Font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else p2.Font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					AutomaticSize = Enum.AutomaticSize.XY
 				}),

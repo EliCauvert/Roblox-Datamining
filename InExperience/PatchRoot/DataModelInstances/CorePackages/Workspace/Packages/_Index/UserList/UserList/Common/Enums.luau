@@ -19,5 +19,6 @@
 		Dismiss = "Dismiss",
 		Pending = "Pending",
 		View = "View"
-	}
+	},
+	CtaSurfaces = { SocialTabsPage = "SocialTabsPage" }
 }

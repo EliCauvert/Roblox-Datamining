@@ -5,7 +5,6 @@ local retrievalStatus = require(parent.Http).Enum.RetrievalStatus
 local playabilityStatusEnum = require(parent.DiscoveryTypes).PlayabilityStatusEnum
 local isVideoEligibleForPlayability = require(parent.VideoUtils).isVideoEligibleForPlayability
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local fFlagLuaAppAddVideoIneligiblePlayabilityStatus = require(parent.SharedFlags).FFlagLuaAppAddVideoIneligiblePlayabilityStatus
 local fFlagLuaAppUsePrevalidatedVideoGamePlayability = require(parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local var1 = if not fFlagLuaAppSduiVideoThumbnail then {
@@ -21,10 +20,10 @@ local var1 = if not fFlagLuaAppSduiVideoThumbnail then {
 	playabilityStatusEnum.ContextualPlayabilityUnrated,
 	playabilityStatusEnum.ContextualPlayabilityAgeGatedByDescriptor,
 	playabilityStatusEnum.ContextualPlayabilityExperienceBlockedParentalControls,
-	if fFlagLuaAppAddVideoIneligiblePlayabilityStatus then playabilityStatusEnum.ContextualPlayabilityRequireParentApproval else nil,
-	if fFlagLuaAppAddVideoIneligiblePlayabilityStatus then playabilityStatusEnum.ContextualPlayabilityAgeCheckRequired else nil,
-	if fFlagLuaAppAddVideoIneligiblePlayabilityStatus then playabilityStatusEnum.ContextualPlayabilityCoreGated else nil,
-	if fFlagLuaAppAddVideoIneligiblePlayabilityStatus then playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser else nil
+	playabilityStatusEnum.ContextualPlayabilityRequireParentApproval,
+	playabilityStatusEnum.ContextualPlayabilityAgeCheckRequired,
+	playabilityStatusEnum.ContextualPlayabilityCoreGated,
+	playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser
 } else nil
 
 return function(p1, p2)

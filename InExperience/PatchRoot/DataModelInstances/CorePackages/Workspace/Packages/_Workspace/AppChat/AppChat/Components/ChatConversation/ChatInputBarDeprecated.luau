@@ -1,9 +1,9 @@
 ﻿local appChat = script:FindFirstAncestor("AppChat")
 local parent = appChat.Parent
-local guiService = game:GetService("GuiService")
 local socialLibrariesModule = require(appChat.SocialLibraries)
 local roactModule = require(parent.Roact)
 local text = require(parent.AppCommonLib).Text
+local isTenFootInterface = require(parent.AppCommonLib).isTenFootInterface
 local UIBloxModule = require(parent.UIBlox)
 local images = UIBloxModule.App.ImageSet.Images
 local iconSize = UIBloxModule.App.Constant.IconSize
@@ -59,7 +59,7 @@ chatInputBarDeprecated.defaultProps = {
 }
 
 function chatInputBarDeprecated.init(p1)
-	-- upvalues: roactModule (ref), userInputService (ref), text (ref), getAppFeaturePolicies (ref), getFIntAppChatBehaviorCollectionEnabledPercentageModule (ref), playersService (ref), isMessageValidModule (ref), isKeyCodePressedModule (ref), appChatUseTextBoxTextOnSend (ref), sendButtonClickActionResultModule (ref), fFlagAppChatOnConsoles (ref), guiService (ref)
+	-- upvalues: roactModule (ref), userInputService (ref), text (ref), getAppFeaturePolicies (ref), getFIntAppChatBehaviorCollectionEnabledPercentageModule (ref), playersService (ref), isMessageValidModule (ref), isKeyCodePressedModule (ref), appChatUseTextBoxTextOnSend (ref), sendButtonClickActionResultModule (ref), fFlagAppChatOnConsoles (ref), isTenFootInterface (ref)
 	p1.isMounted = false
 	p1.state = {
 		showSendChat = false,
@@ -157,7 +157,7 @@ function chatInputBarDeprecated.init(p1)
 	end
 	
 	function p0.onSendActivated()
-		-- upvalues: appChatUseTextBoxTextOnSend (copy), p1 (ref), isMessageValidModule (copy), text (copy), sendButtonClickActionResultModule (copy), fFlagAppChatOnConsoles (copy), guiService (copy)
+		-- upvalues: appChatUseTextBoxTextOnSend (copy), p1 (ref), isMessageValidModule (copy), text (copy), sendButtonClickActionResultModule (copy), fFlagAppChatOnConsoles (copy), isTenFootInterface (copy)
 		local var2 = if appChatUseTextBoxTextOnSend then if p1.inputBoxRef.current then p1.inputBoxRef.current.Text else "" else p1.state.inputText
 		local var3 = if appChatUseTextBoxTextOnSend then var2 and isMessageValidModule(var2, p1.props.maxCharacterLength) else p1.state.showSendChat
 		local var4 = text.Trim(var2)
@@ -169,7 +169,7 @@ function chatInputBarDeprecated.init(p1)
 			if p1.focusNavigationService and p1.focusNavigationService.focusedGuiObject:getValue() == p1.sendButtonRef:getValue() then
 				p1.focusNavigationService:focusGuiObject(p1.inputBarRef:getValue(), false)
 			end
-			if fFlagAppChatOnConsoles and (if fFlagAppChatOnConsoles then guiService:IsTenFootInterface() else nil) then
+			if fFlagAppChatOnConsoles and (if fFlagAppChatOnConsoles then isTenFootInterface() else nil) then
 				p1.inputBoxRef.current:ReleaseFocus()
 			end
 			p1:setState({ inputText = "", showSendChat = false })
@@ -242,17 +242,17 @@ function chatInputBarDeprecated.render(p1)
 end
 
 function chatInputBarDeprecated.renderContent(p1, p2)
-	-- upvalues: withStyle (ref), withChatPagePaddingModule (ref), withSelectionCursorProvider (ref), fFlagAppChatOnConsoles (ref), isVRAppBuild (ref), guiService (ref), roactModule (ref), imageSetLabel (ref), images (ref), interactable (ref), cursorKind (ref), fFlagAppChatGamepadSendButtonNavModule (ref), chatInputBoxDisabledModule (ref), callbackInputBox (ref), iconSize (ref)
+	-- upvalues: withStyle (ref), withChatPagePaddingModule (ref), withSelectionCursorProvider (ref), fFlagAppChatOnConsoles (ref), isVRAppBuild (ref), isTenFootInterface (ref), roactModule (ref), imageSetLabel (ref), images (ref), interactable (ref), cursorKind (ref), fFlagAppChatGamepadSendButtonNavModule (ref), chatInputBoxDisabledModule (ref), callbackInputBox (ref), iconSize (ref)
 	return withStyle(function(p3)
-		-- upvalues: withChatPagePaddingModule (copy), withSelectionCursorProvider (copy), fFlagAppChatOnConsoles (copy), isVRAppBuild (copy), guiService (copy), p1 (ref), p2 (ref), roactModule (copy), imageSetLabel (copy), images (copy), interactable (copy), cursorKind (copy), fFlagAppChatGamepadSendButtonNavModule (copy), chatInputBoxDisabledModule (copy), callbackInputBox (copy), iconSize (copy)
+		-- upvalues: withChatPagePaddingModule (copy), withSelectionCursorProvider (copy), fFlagAppChatOnConsoles (copy), isVRAppBuild (copy), isTenFootInterface (copy), p1 (ref), p2 (ref), roactModule (copy), imageSetLabel (copy), images (copy), interactable (copy), cursorKind (copy), fFlagAppChatGamepadSendButtonNavModule (copy), chatInputBoxDisabledModule (copy), callbackInputBox (copy), iconSize (copy)
 		return withChatPagePaddingModule(function(p4)
-			-- upvalues: withSelectionCursorProvider (copy), p3 (ref), fFlagAppChatOnConsoles (copy), isVRAppBuild (copy), guiService (copy), p1 (copy), p2 (copy), roactModule (copy), imageSetLabel (copy), images (copy), interactable (copy), cursorKind (copy), fFlagAppChatGamepadSendButtonNavModule (copy), chatInputBoxDisabledModule (copy), callbackInputBox (copy), iconSize (copy)
+			-- upvalues: withSelectionCursorProvider (copy), p3 (ref), fFlagAppChatOnConsoles (copy), isVRAppBuild (copy), isTenFootInterface (copy), p1 (copy), p2 (copy), roactModule (copy), imageSetLabel (copy), images (copy), interactable (copy), cursorKind (copy), fFlagAppChatGamepadSendButtonNavModule (copy), chatInputBoxDisabledModule (copy), callbackInputBox (copy), iconSize (copy)
 			return withSelectionCursorProvider(function(p5)
-				-- upvalues: p3 (copy), fFlagAppChatOnConsoles (copy), isVRAppBuild (copy), guiService (copy), p1 (copy), p4 (ref), p2 (copy), roactModule (copy), imageSetLabel (copy), images (copy), interactable (copy), cursorKind (copy), fFlagAppChatGamepadSendButtonNavModule (copy), chatInputBoxDisabledModule (copy), callbackInputBox (copy), withSelectionCursorProvider (copy), iconSize (copy)
+				-- upvalues: p3 (copy), fFlagAppChatOnConsoles (copy), isVRAppBuild (copy), isTenFootInterface (copy), p1 (copy), p4 (ref), p2 (copy), roactModule (copy), imageSetLabel (copy), images (copy), interactable (copy), cursorKind (copy), fFlagAppChatGamepadSendButtonNavModule (copy), chatInputBoxDisabledModule (copy), callbackInputBox (copy), withSelectionCursorProvider (copy), iconSize (copy)
 				local font = p3.Font
 				local font_1 = font.Body.Font
 				local var1 = font.BaseSize * font.Body.RelativeSize
-				local var2 = if fFlagAppChatOnConsoles then isVRAppBuild() or guiService:IsTenFootInterface() else nil
+				local var2 = if fFlagAppChatOnConsoles then isVRAppBuild() or isTenFootInterface() else nil
 				local frameHeight = p1.state.frameHeight
 				
 				if frameHeight == 0 then

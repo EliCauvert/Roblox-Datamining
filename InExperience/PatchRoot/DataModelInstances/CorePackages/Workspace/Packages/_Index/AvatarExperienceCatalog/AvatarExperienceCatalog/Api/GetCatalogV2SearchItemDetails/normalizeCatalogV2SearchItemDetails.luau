@@ -1,11 +1,14 @@
 ﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
 local parent = avatarExperienceCatalog.Parent
-local normalize = require(parent.AvatarExperienceCommon).Utils.normalize
+local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
+local normalize = avatarExperienceCommonModule.Utils.normalize
 local normalizeBoolean = normalize.normalizeBoolean
 local normalizeString = normalize.normalizeString
 local normalizeNumber = normalize.normalizeNumber
 local makeNormalizeTableFn = normalize.makeNormalizeTableFn
+local getRawItemLicensingInfo = avatarExperienceCommonModule.Utils.getRawItemLicensingInfo
 local convertToPascalCaseModule = require(avatarExperienceCatalog.Utils.convertToPascalCase)
+local fFlagAXMarketplaceLicensing = require(parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensing
 local ASSET_TYPE_ID_STRING_TO_NAME = require(parent.AvatarExperienceCommon).Constants.ASSET_TYPE_ID_STRING_TO_NAME
 local _ = require(avatarExperienceCatalog.Models.CatalogV2SearchItemDetails)
 local t = {
@@ -61,7 +64,7 @@ local function normalizeTimedOptions(p2)
 end
 
 local function normalizeItem(p3)
-	-- upvalues: ASSET_TYPE_ID_STRING_TO_NAME (ref), t (ref), normalizeString (ref), normalizeBundledItems (ref), normalizeBoolean (ref), normalizeNumber (ref), normalizeTimedOptions (ref), convertToPascalCaseModule (ref)
+	-- upvalues: ASSET_TYPE_ID_STRING_TO_NAME (ref), t (ref), getRawItemLicensingInfo (ref), normalizeString (ref), normalizeBundledItems (ref), normalizeBoolean (ref), normalizeNumber (ref), normalizeTimedOptions (ref), fFlagAXMarketplaceLicensing (ref), convertToPascalCaseModule (ref)
 	if type(p3) ~= "table" then
 		return nil, "Item must be a table"
 	end
@@ -96,7 +99,8 @@ local function normalizeItem(p3)
 		offSaleDeadline = normalizeString(p3.offSaleDeadline),
 		quantityLimitPerUser = normalizeNumber(p3.quantityLimitPerUser),
 		isOffSale = normalizeBoolean(p3.isOffSale),
-		timedOptions = normalizeTimedOptions(p3)
+		timedOptions = normalizeTimedOptions(p3),
+		itemLicensingInfo = if fFlagAXMarketplaceLicensing then getRawItemLicensingInfo(p3) else nil
 	}), nil
 end
 

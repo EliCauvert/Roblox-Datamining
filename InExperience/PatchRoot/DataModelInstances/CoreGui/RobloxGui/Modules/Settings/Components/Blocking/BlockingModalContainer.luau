@@ -85,7 +85,7 @@ return function(p1)
 					
 					return
 				end
-				require(modules.Settings.Pages.ReportAbuseMenuNewContainerPage):ReportPlayer(player, source_1)
+				require(modules.Settings.Pages.ReportAbuseMenuContainerPage):ReportPlayer(player, source_1)
 			end, { var5, player, source })
 		})
 	})

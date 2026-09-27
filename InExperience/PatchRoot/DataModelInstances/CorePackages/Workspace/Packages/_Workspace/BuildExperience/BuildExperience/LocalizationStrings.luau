@@ -1,5 +1,7 @@
 ﻿local localizationService = game:GetService("LocalizationService")
-local sharedFlagsModule = require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags)
+local buildExperience = script:FindFirstAncestor("BuildExperience")
+local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
+local sharedFlagsModule = require(buildExperience.Parent.SharedFlags)
 local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
 local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
 local fFlagBuildExperienceClientDataModelTools = sharedFlagsModule.FFlagBuildExperienceClientDataModelTools
@@ -135,6 +137,13 @@ local t = {
 	}
 }
 
+if fFlagBuildExperienceMonetizationNativeUIModule then
+	t.manage_developer_product = {
+		completed = "Feature.Build.Title.DeveloperProduct",
+		failed = "Feature.Build.Title.DeveloperProduct",
+		running = "Feature.Build.Title.DeveloperProduct"
+	}
+end
 if fFlagBuildExperienceClientDataModelTools then
 	t.inspect_client_instance = {
 		completed = "Feature.Build.Label.ToolInspectDone",
@@ -152,6 +161,11 @@ return {
 	AD_UPSELL_CARD_DESC = "Feature.Build.Description.BoostAudienceForPlays",
 	AD_UPSELL_CARD_DONT_SHOW_AGAIN = "Feature.Build.Action.DontShowAgain",
 	AD_UPSELL_CARD_TITLE = "Feature.Build.Title.PromoteGameFree",
+	AD_UPSELL_FREE_TITLE = "Feature.Build.Title.PromoteGameFreeSingular",
+	AD_UPSELL_FREE_TITLE_PLURAL = "Feature.Build.Title.PromoteGameFreePlural",
+	AD_UPSELL_FREE_DESC = "Feature.Build.Description.PromoteGameFree",
+	AD_UPSELL_NO_FREE_TITLE = "Feature.Build.Title.PromoteGamePaid",
+	AD_UPSELL_NO_FREE_DESC = "Feature.Build.Description.PromoteGamePaid",
 	AD_UPSELL_CONGRATS = "Feature.Build.Message.PublishPromotionUpsell",
 	AD_UPSELL_CONGRATS_SINGULAR = "Feature.Build.Message.PublishPromotionUpsellSingular",
 	AGENT_PLAN_BUILD = "Feature.Build.Action.Build",
@@ -366,9 +380,12 @@ return {
 	GAME_CONFIGURATION_CONTENT_RATING = "Feature.Build.Label.ContentRating",
 	GAME_CONFIGURATION_CREATOR_HUB = "Feature.Build.Label.CreatorHub",
 	GAME_CONFIGURATION_CREATOR_HUB_DESCRIPTION = "Feature.Build.Description.HubSettings",
+	GAME_CONFIGURATION_GAME_CONFIGURATION = "Feature.Build.Header.GameConfiguration",
+	GAME_CONFIGURATION_GAME_CONFIGURATION_BODY = "Feature.Build.Description.GameConfiguration",
 	GAME_CONFIGURATION_GAME_DETAILS = "Feature.Build.Header.GameDetails",
 	GAME_CONFIGURATION_GAME_DETAILS_BODY = "Feature.Build.Description.ManageAppearance",
 	GAME_CONFIGURATION_ICON_AND_THUMBNAILS = "Feature.Build.Label.IconThumbnails",
+	GAME_CONFIGURATION_SALES_OPTIONS = "Feature.Build.Label.SalesOptions",
 	GAME_CONFIGURATION_LINK_COPIED = if not fFlagEnableShareSheet then "Feature.Build.Message.LinkCopied" else nil,
 	GAME_CONFIGURATION_LOADING = "Feature.Build.Label.Loading",
 	GAME_CONFIGURATION_PREVIEW = "Feature.Build.Action.Preview",
@@ -380,6 +397,16 @@ return {
 	GAME_CONFIGURATION_SHARE = "Feature.Build.Action.Share",
 	GAME_CONFIGURATION_UPDATE_RATING = "Feature.Build.Action.UpdateRating",
 	GAME_CONFIGURATION_TITLE_AND_DESCRIPTION = "Feature.Build.Label.TitleDescription",
+	LIBRARY_TITLE = "Feature.Build.Title.AssetLibrary",
+	LIBRARY_EMPTY = "Feature.Build.Message.NoAssetsFound",
+	LIBRARY_SEARCH_EMPTY = "Feature.Build.Message.NoSearchResultsFound",
+	LIBRARY_OBJECTS_3D = "Feature.Build.Label.Objects3D",
+	LIBRARY_IMAGES_2D = "Feature.Build.Label.Images2D",
+	LIBRARY_SOUNDS = "Feature.Build.Label.Sounds",
+	LIBRARY_OBJECT = "Feature.Build.Label.Object",
+	LIBRARY_WORLD = "Feature.Build.Label.World",
+	LIBRARY_MODEL_UNAVAILABLE = "Feature.Build.Message.AssetDetailsUnavailable",
+	LIBRARY_SEARCH_PLACEHOLDER = "CommonUI.Controls.Action.Search",
 	MEDIA_SELECTION_CAPTURE_LIBRARY = "Feature.Build.Label.CaptureLibrary",
 	MEDIA_SELECTION_DELETE = "Feature.Build.Action.Delete",
 	MEDIA_SELECTION_TITLE = "Feature.Build.Label.IconThumbnails",
@@ -398,6 +425,10 @@ return {
 	MY_CREATIONS_UNIVERSE_NAME = "Feature.Build.Label.UniverseNumber",
 	PLAYTEST_DISABLED_TOOLTIP = "Feature.Build.Description.PlaytestLocked",
 	PLAYTEST_TITLE = "Feature.Build.Action.Playtest",
+	PRIVATE_INVITES_ADD_ERROR = "Feature.Build.Message.PlaytesterRequestFailed",
+	PRIVATE_INVITES_ADD_ERROR_ACTION = "Feature.Build.Action.OK",
+	PRIVATE_INVITES_ADD_ERROR_TITLE = "Feature.Build.Title.GenericError",
+	PRIVATE_INVITES_ADD_REJECTED_TITLE = "Feature.Build.Title.PlaytestersAddRejected",
 	PRIVATE_INVITES_ADD_PLAYTESTER = "Feature.Build.Action.AddPlaytester",
 	PRIVATE_INVITES_ADD_PLAYTESTERS = "Feature.Build.Action.AddPlaytesters",
 	PRIVATE_INVITES_ALL_FRIENDS_ADDED = "Feature.Build.Message.AllFriendsAdded",
@@ -484,9 +515,14 @@ return {
 	VERSION_HISTORY_VERSION_TITLE = "Feature.Build.Title.VersionNumber",
 	VERSION_HISTORY_VERSIONS_TITLE = "Feature.Build.Title.Versions",
 	AD_CAMPAIGN_CARD_TITLE_FREE = "Feature.Build.Title.PromoteGameFree",
-	AD_CAMPAIGN_CARD_TITLE_ACTIVE = "Feature.Build.Title.AdCampaignActive",
+	AD_CAMPAIGN_CARD_TITLE_ACTIVE = "Feature.Build.Title.AdActive",
+	AD_CAMPAIGN_CARD_TITLE_CREATED = "Feature.Build.Title.AdCreated",
+	AD_CAMPAIGN_CARD_TITLE_COMPLETE = "Feature.Build.Title.AdComplete",
 	AD_CAMPAIGN_CARD_DESC_FREE = "Feature.Build.Description.BoostAudienceForPlays",
 	AD_CAMPAIGN_CARD_ACTIVE_DESC = "Feature.Build.Description.CampaignRunDates",
+	AD_CAMPAIGN_CARD_DESC_IN_REVIEW = "Feature.Build.Description.AdInReview",
+	AD_CAMPAIGN_CARD_DESC_ACTIVE = "Feature.Build.Description.AdActive",
+	AD_CAMPAIGN_CARD_DESC_COMPLETE = "Feature.Build.Description.AdComplete",
 	AD_CAMPAIGN_CARD_VIEW = "Feature.Build.Action.View",
 	AD_CAMPAIGN_SHEET_TITLE = "Feature.Build.Title.PromoteGame",
 	AD_CAMPAIGN_SHEET_DESCRIPTION = "Feature.Build.Description.PromoteGameWithAdCampaign",
@@ -502,6 +538,13 @@ return {
 	AD_CAMPAIGN_SHEET_CREATE = "Feature.Build.Action.Create",
 	AD_CAMPAIGN_SHEET_MODERATION_NOTICE = "Feature.Build.Description.AdCampaignModerationReview",
 	AD_CAMPAIGN_SHEET_CREATE_ERROR = "Feature.Build.Message.AdCampaignCreateFailed",
+	TWO_OPTIONS_AD_CAMPAIGN_SHEET_TITLE = "Feature.Build.Title.CreateYourAd",
+	TWO_OPTIONS_AD_CAMPAIGN_SHEET_INTRODUCTION = "Feature.Build.Description.ChooseAdCampaignLength",
+	TWO_OPTIONS_AD_CAMPAIGN_SHEET_CAMPAIGN_PICKER_TITLE = "Feature.Build.Title.PickCampaign",
+	TWO_OPTIONS_AD_CAMPAIGN_SHEET_OPTION_TITLE = "Feature.Build.Title.AdCampaignOptionDurationShort",
+	TWO_OPTIONS_AD_CAMPAIGN_SHEET_SHORT_DESCRIPTION = "Feature.Build.Description.ShortAdCampaign",
+	TWO_OPTIONS_AD_CAMPAIGN_SHEET_LONG_DESCRIPTION = "Feature.Build.Description.LongAdCampaign",
+	TWO_OPTIONS_AD_CAMPAIGN_SHEET_MODERATION_NOTICE = "Feature.Build.Description.AdModerationReview",
 	BUILD_MENU_MONETIZATION = "Feature.Build.Action.EarnRobux",
 	MONETIZATION_TITLE = "Feature.Build.Action.EarnRobux",
 	MONETIZATION_EMPTY_TITLE = "Feature.Build.Title.NoMonetizationProducts",

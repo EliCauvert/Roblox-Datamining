@@ -6,19 +6,25 @@ local view = foundationModule.View
 local text = foundationModule.Text
 local analyticsConstantsModule = require(inExperienceSideSheet.Analytics.AnalyticsConstants)
 local sidesheetAnalyticsModule = require(inExperienceSideSheet.Analytics.SidesheetAnalytics)
+local closePeoplePageOpenedWithSideSheetModule = require(inExperienceSideSheet.Utils.closePeoplePageOpenedWithSideSheet)
 local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
+local fFlagSideSheetOpenPeoplePage = require(inExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
 local fFlagSideSheetFocusNav = require(parent.SharedFlags).FFlagSideSheetFocusNav
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), fFlagSideSheetFocusNav (ref), view (ref), text (ref)
+	-- upvalues: reactModule (ref), fFlagSideSheetOpenPeoplePage (ref), closePeoplePageOpenedWithSideSheetModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), fFlagSideSheetFocusNav (ref), view (ref), text (ref)
 	local var1 = if fFlagSideSheetFocusNav then reactModule.useRef(nil) else nil
 	
 	return reactModule.createElement(view, {
-		tag = "row align-y-center gap-small size-full-0 auto-y radius-medium",
+		tag = "row align-y-center gap-none size-full-1000 padding-left-xsmall radius-medium",
 		LayoutOrder = p1.layoutOrder,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
+			-- upvalues: p1 (ref), fFlagSideSheetOpenPeoplePage (copy), closePeoplePageOpenedWithSideSheetModule (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
 			p1.onActivated()
+			
+			if fFlagSideSheetOpenPeoplePage then
+				closePeoplePageOpenedWithSideSheetModule()
+			end
 			toggleSideSheetModule(false)
 			sidesheetAnalyticsModule.logSidesheetClosed(analyticsConstantsModule.Source.ItemSelected)
 		end, { p1.onActivated }),
@@ -37,12 +43,12 @@ return reactModule.memo(function(p1)
 		end, { p1.firstIntegrationToFocusCallback }) else nil else nil
 	}, {
 		IconContainer = reactModule.createElement(view, {
-			tag = "align-x-center align-y-center size-1000 auto-xy",
+			tag = "align-x-center align-y-center size-1000",
 			LayoutOrder = 1
 		}, { Icon = p1.icon({ visible = true }) }),
 		Label = reactModule.createElement(text, {
 			LayoutOrder = 2,
-			tag = "auto-xy padding-y-small text-title-medium text-align-x-left text-truncate-split content-emphasis",
+			tag = "auto-xy padding-x-small text-label-medium text-align-x-left text-truncate-split content-emphasis",
 			Text = p1.label
 		})
 	})

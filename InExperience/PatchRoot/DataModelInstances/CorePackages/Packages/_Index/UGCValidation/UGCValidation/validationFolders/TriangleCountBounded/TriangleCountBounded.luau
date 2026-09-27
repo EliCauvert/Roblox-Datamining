@@ -6,7 +6,6 @@ local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local getFIntUGCValidateTriangleLimitToleranceModule = require(parent.flags.getFIntUGCValidateTriangleLimitTolerance)
 local t = {
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateMeshGeometry),
 	categories = {
 		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
 		validationEnumsModule.UploadCategory.RIGID_ACCESSORY,

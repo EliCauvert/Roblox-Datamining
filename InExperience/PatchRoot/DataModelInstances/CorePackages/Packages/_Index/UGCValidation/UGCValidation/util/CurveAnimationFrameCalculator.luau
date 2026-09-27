@@ -3,10 +3,7 @@ local constantsModule = require(parent.Constants)
 local assetCalculatorModule = require(parent.util.AssetCalculator)
 local curveAnimationHierarchyUtilsModule = require(parent.util.CurveAnimationHierarchyUtils)
 local rigBuilderModule = require(parent.util.RigBuilder)
-local flags = parent.flags
-local getFFlagUGCValidateDuplicatesInAnimationModule = require(flags.getFFlagUGCValidateDuplicatesInAnimation)
-local getFIntUGCValidateMaxAnimationFPSModule = require(flags.getFIntUGCValidateMaxAnimationFPS)
-local getFFlagUGCValidateCurveAnimFinalFrameBugModule = require(flags.getFFlagUGCValidateCurveAnimFinalFrameBug)
+local getFIntUGCValidateMaxAnimationFPSModule = require(parent.flags.getFIntUGCValidateMaxAnimationFPS)
 local t = {}
 local faceControlsName = curveAnimationHierarchyUtilsModule.FaceControlsName
 
@@ -59,23 +56,17 @@ local _ = function(p1)
 end
 
 function t.calculateAnimFramesAtOrigin(p1)
-	-- upvalues: getFIntUGCValidateMaxAnimationFPSModule (ref), getFFlagUGCValidateDuplicatesInAnimationModule (ref), curveAnimationHierarchyUtilsModule (ref), hasFloatCurveKeys (ref), constantsModule (ref), faceControlsName (ref), rigBuilderModule (ref), assetCalculatorModule (ref), getFFlagUGCValidateCurveAnimFinalFrameBugModule (ref)
+	-- upvalues: getFIntUGCValidateMaxAnimationFPSModule (ref), curveAnimationHierarchyUtilsModule (ref), hasFloatCurveKeys (ref), constantsModule (ref), faceControlsName (ref), rigBuilderModule (ref), assetCalculatorModule (ref)
 	local var1 = 1 / getFIntUGCValidateMaxAnimationFPSModule()
 	
 	local function getCurveTracks()
-		-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (copy), curveAnimationHierarchyUtilsModule (copy), p1 (ref), hasFloatCurveKeys (copy), constantsModule (copy), faceControlsName (copy)
-		local descendants
+		-- upvalues: curveAnimationHierarchyUtilsModule (copy), p1 (ref), hasFloatCurveKeys (copy), constantsModule (copy), faceControlsName (copy)
 		local t = {}
-		local _ = nil
+		local bodyPartFolderRoot = curveAnimationHierarchyUtilsModule.getBodyPartFolderRoot(p1)
+		assert(bodyPartFolderRoot, "CurveAnimation must have one and only one body part Folder child or HumanoidRootPart child.")
+		local descendants = bodyPartFolderRoot:GetDescendants()
+		table.insert(descendants, bodyPartFolderRoot)
 		
-		if getFFlagUGCValidateDuplicatesInAnimationModule() then
-			local bodyPartFolderRoot = curveAnimationHierarchyUtilsModule.getBodyPartFolderRoot(p1)
-			assert(bodyPartFolderRoot, "CurveAnimation must have one and only one body part Folder child or HumanoidRootPart child.")
-			descendants = bodyPartFolderRoot:GetDescendants()
-			table.insert(descendants, bodyPartFolderRoot)
-		else
-			descendants = p1:GetDescendants()
-		end
 		for i, v in descendants do
 			if v:IsA("Folder") and curveAnimationHierarchyUtilsModule.getBodyPartToParentMap()[v.Name] then
 				local position = v:FindFirstChild("Position")
@@ -154,17 +145,12 @@ function t.calculateAnimFramesAtOrigin(p1)
 	
 	local var6 = 0
 	while var6 <= var5 do
-		if getFFlagUGCValidateCurveAnimFinalFrameBugModule() then
-			local var7 = var6
-			table.insert(t_1, assetCalculatorModule.calculateAllTransformsForFullBody(t, calculateTransformsAtTime(var7, var4)))
-			table.insert(t_2, calculatePositionMagnitudeResultsAtTime(var7, var4))
-		else
-			table.insert(t_1, assetCalculatorModule.calculateAllTransformsForFullBody(t, calculateTransformsAtTime(var6, var4)))
-			table.insert(t_2, calculatePositionMagnitudeResultsAtTime(var6, var4))
-		end
+		local var7 = var6
+		table.insert(t_1, assetCalculatorModule.calculateAllTransformsForFullBody(t, calculateTransformsAtTime(var7, var4)))
+		table.insert(t_2, calculatePositionMagnitudeResultsAtTime(var7, var4))
 		var6 += var1
 	end
-	if getFFlagUGCValidateCurveAnimFinalFrameBugModule() and var5 >= 0 then
+	if var5 >= 0 then
 		table.insert(t_1, assetCalculatorModule.calculateAllTransformsForFullBody(t, calculateTransformsAtTime(var5, var4)))
 		table.insert(t_2, calculatePositionMagnitudeResultsAtTime(var5, var4))
 	end

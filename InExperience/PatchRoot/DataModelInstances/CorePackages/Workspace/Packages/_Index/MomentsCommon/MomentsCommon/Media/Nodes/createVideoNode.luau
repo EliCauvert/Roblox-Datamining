@@ -7,7 +7,6 @@ local _ = require(momentsCommon.Media.MediaTypes)
 local _ = require(momentsCommon.Media.mediaNodeRegistry)
 local getCropSizeModule = require(momentsCommon.Utils.getCropSize)
 local getFitSizeModule = require(momentsCommon.Utils.getFitSize)
-local getFFlagMomentsVideoSurfaceMediaRectModule = require(momentsCommon.Flags.GetFFlagMomentsVideoSurfaceMediaRect)
 local fFlagMomentsVideoCropRoundedCornersModule = require(momentsCommon.Flags.FFlagMomentsVideoCropRoundedCorners)
 local fFlagMomentsPreloadVideoPlayerInstanceModule = require(momentsCommon.Flags.FFlagMomentsPreloadVideoPlayerInstance)
 local useSignalState = signalsReactModule.useSignalState
@@ -72,7 +71,7 @@ end
 return {
 	kind = "video",
 	create = function(p1, p2)
-		-- upvalues: createSignal (ref), defaultObserveLoaded (ref), createComputed (ref), fFlagMomentsPreloadVideoPlayerInstanceModule (ref), getFFlagMomentsVideoSurfaceMediaRectModule (ref), reactModule (ref), VideoSurface (ref)
+		-- upvalues: createSignal (ref), defaultObserveLoaded (ref), createComputed (ref), fFlagMomentsPreloadVideoPlayerInstanceModule (ref), reactModule (ref), VideoSurface (ref)
 		local id = p1.id
 		local content = p1.content
 		local var2, var3 = createSignal(p1.region)
@@ -450,25 +449,14 @@ return {
 				return var22
 			end,
 			render = function(p3)
-				-- upvalues: getFFlagMomentsVideoSurfaceMediaRectModule (copy), reactModule (copy), VideoSurface (copy), zIndex (ref), cornerRadius (ref)
-				return if getFFlagMomentsVideoSurfaceMediaRectModule() then reactModule.createElement(VideoSurface, {
+				-- upvalues: reactModule (copy), VideoSurface (copy), zIndex (ref), cornerRadius (ref)
+				return reactModule.createElement(VideoSurface, {
 					getItemSize = p3.getItemSize,
 					getResolution = p3.getResolution,
 					getScaleType = p3.getScaleType,
 					setSurface = p3.setSurface,
 					zIndex = zIndex,
 					cornerRadius = cornerRadius
-				}) else reactModule.createElement("VideoDisplay", {
-					BackgroundTransparency = 1,
-					Size = UDim2.fromScale(1, 1),
-					ScaleType = p3.scaleType or Enum.ScaleType.Crop,
-					ZIndex = zIndex,
-					ref = function(p4)
-						-- upvalues: p3 (ref)
-						p3.setSurface(p4)
-					end
-				}, {
-					Corner = if cornerRadius ~= nil then nil else reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, cornerRadius) })
 				})
 			end,
 			play = function()

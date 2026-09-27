@@ -22,11 +22,13 @@
 	AvatarExperienceScreenSizeImpressionsDetector = require(script.AvatarExperienceScreenSizeImpressionsDetector),
 	sendAXStat = require(script.sendAXStat),
 	sendAXCounterV2 = require(script.sendAXCounterV2),
+	UnifiedEventCounterAggregator = require(script.Lib.UnifiedEventCounterAggregator),
 	getAvatarEventCounterNameWithPlatform = require(script.getAvatarEventCounterNameWithPlatform),
 	reportAvatarEventCounterNoAnalyticsArgument = require(script.reportAvatarEventCounterNoAnalyticsArgument),
 	reportAvatarEventCounterV1 = require(script.reportAvatarEventCounterV1),
 	Flags = {
-		FFlagAllowCustomUnifiedEventFilter = require(script.FFlagAllowCustomUnifiedEventFilter)
+		FFlagAllowCustomUnifiedEventFilter = require(script.FFlagAllowCustomUnifiedEventFilter),
+		FFlagAXUnifiedEventCounters = require(script.Parent.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
 	},
 	reportBackgroundUserActionCounter = require(script.reportBackgroundUserActionCounter),
 	Enums = {
@@ -41,7 +43,8 @@
 		UnifiedSelectionListStore = require(script.Store.UnifiedSelectionListStore)
 	},
 	Surfaces = {
-		SlotBasedEditorAnalytics = require(script.Surfaces.SlotBasedEditorAnalytics)
+		SlotBasedEditorAnalytics = require(script.Surfaces.SlotBasedEditorAnalytics),
+		SupportRegionAvatarOverlayAnalytics = require(script.Surfaces.SupportRegionAvatarOverlayAnalytics)
 	},
 	Utils = {
 		UnifiedEventLoggingUtils = require(script.Utils.UnifiedEventLoggingUtils),

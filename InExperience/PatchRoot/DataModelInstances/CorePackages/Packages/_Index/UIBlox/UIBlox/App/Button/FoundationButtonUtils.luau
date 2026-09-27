@@ -6,7 +6,6 @@ local core = parent_2.Core
 local foundationModule = require(parent_3.Foundation)
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
-local flags = foundationModule.Utility.Flags
 local getTextSizeModule = require(core.Text.GetTextSize)
 local uiblox = require(parent_3.BuilderIcons).Migration.uiblox
 local buttonTypeModule = require(parent.Enum.ButtonType)
@@ -88,12 +87,12 @@ return {
 		return if a == nil then nil elseif b == nil then 640 else b
 	end,
 	getFitContentSize = function(p1, p2, p3)
-		-- upvalues: t_1 (ref), t_3 (ref), flags (ref), getTextSizeModule (ref), vector2 (ref)
+		-- upvalues: t_1 (ref), t_3 (ref), getTextSizeModule (ref), vector2 (ref)
 		local var1 = if p2 then t_1[p2] else nil
 		local var2 = if var1 then t_3[var1] else nil
 		
 		if var2 then
-			local var3 = p3.Typography[(if flags.FoundationButtonLabelTypography then "Label" else "Title") .. var13.typography]
+			local var3 = p3.Typography["Label" .. var13.typography]
 			
 			return Vector2.new(math.ceil(getTextSizeModule(p1, var3.FontSize, var3.Font, vector2).X) + p3.Padding[var2.padding] * 2, p3.Size[var2.height])
 		end

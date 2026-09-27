@@ -4,12 +4,9 @@ local gamepadService = game:GetService("GamepadService")
 local playersService = game:GetService("Players")
 local coreGuiService = game:GetService("CoreGui")
 local sharedFlagsModule = require(script:FindFirstAncestor("VirtualCursorModular").Parent.SharedFlags)
-local fFlagEnableSnapInVirtualCursor = sharedFlagsModule.FFlagEnableSnapInVirtualCursor
-local fFlagEnableMoveSnapInVirtualCursor = sharedFlagsModule.FFlagEnableMoveSnapInVirtualCursor
-local fIntSnapLevelInVirtualCursor = sharedFlagsModule.FIntSnapLevelInVirtualCursor
-local fFlagVirtualCursorSnapStopsWhenInputStops = sharedFlagsModule.FFlagVirtualCursorSnapStopsWhenInputStops
-local fFlagVirtualCursorSnapLevelBasedOnDirection = sharedFlagsModule.FFlagVirtualCursorSnapLevelBasedOnDirection
-local fFlagEnableVirtualCursorDebugging = sharedFlagsModule.FFlagEnableVirtualCursorDebugging
+local fFlagEnableVirtualCursorMoveAssist = sharedFlagsModule.FFlagEnableVirtualCursorMoveAssist
+local fIntVirtualCursorMoveAssistLevel = sharedFlagsModule.FIntVirtualCursorMoveAssistLevel
+local fIntVirtualCursorMoveAssistHoverSpeed = sharedFlagsModule.FIntVirtualCursorMoveAssistHoverSpeed
 local propertiesModule = require(parent.Properties)
 local utilModule = require(parent.Util)
 local getMaxSpeed = utilModule.GetMaxSpeed
@@ -33,8 +30,8 @@ function t.new(p1, p2, p3)
 		_selectedObject = nil,
 		_inputController = p1,
 		_cursorController = p2,
-		_snapController = p3,
-		_targetingRadius = propertiesModule.SnapRadius,
+		_moveAssistController = p3,
+		_targetingRadius = propertiesModule.MoveAssistRadius,
 		_selectionRadius = propertiesModule.SelectionRadius,
 		_scrolled = {}
 	}, t)
@@ -131,19 +128,21 @@ function t:getClosestCandidate(p1, p2, _, p3, p4)
 end
 
 function t:processMoving(p5)
-	-- upvalues: guiService (ref), gamepadService (ref), fFlagEnableMoveSnapInVirtualCursor (ref), fIntSnapLevelInVirtualCursor (ref), propertiesModule (ref), getMaxSpeed (ref)
+	-- upvalues: guiService (ref), gamepadService (ref), fFlagEnableVirtualCursorMoveAssist (ref), fIntVirtualCursorMoveAssistLevel (ref), propertiesModule (ref), getMaxSpeed (ref), fIntVirtualCursorMoveAssistHoverSpeed (ref)
 	local var7 = guiService:GetScreenResolution() + guiService:GetGuiInset()
 	local moveVector = self._inputController:GetMoveVector()
 	local gamepadCursorPosition = gamepadService:GetGamepadCursorPosition()
 	
-	if fFlagEnableMoveSnapInVirtualCursor and not self._isScrolling then
-		moveVector = self._snapController:adjustMove(moveVector, {
+	if fFlagEnableVirtualCursorMoveAssist and not self._isScrolling and (fIntVirtualCursorMoveAssistLevel > 0 and propertiesModule.MoveAssistMinInputMagnitude <= moveVector.Magnitude) then
+		moveVector = self._moveAssistController:applyMoveAssist(moveVector, {
 			cursorPosition = gamepadCursorPosition + self._cursorController:GetCursorScreenGuiOffset(),
-			strengthMultiplier = fIntSnapLevelInVirtualCursor / 100,
-			candidates = self:getSnapCandidateList(gamepadCursorPosition, propertiesModule.SnapRadius)
+			strengthMultiplier = fIntVirtualCursorMoveAssistLevel / 100,
+			candidates = self:getAssistCandidateList(gamepadCursorPosition, propertiesModule.MoveAssistRadius)
 		})
+	elseif fFlagEnableVirtualCursorMoveAssist then
+		self._moveAssistController:clearDebugSnapshot()
 	end
-	local var8 = moveVector * getMaxSpeed() * (if self._selectedObject == nil then 1 elseif self._isScrolling then propertiesModule.ScrollingSlowDown else propertiesModule.SpeedAdjustmentTarget)
+	local var8 = moveVector * getMaxSpeed() * (if self._selectedObject == nil then 1 elseif self._isScrolling then propertiesModule.ScrollingSlowDown elseif fFlagEnableVirtualCursorMoveAssist and fIntVirtualCursorMoveAssistLevel > 0 and fIntVirtualCursorMoveAssistHoverSpeed > 0 then fIntVirtualCursorMoveAssistHoverSpeed / 100 else propertiesModule.SpeedAdjustmentTarget)
 	
 	if var8.Magnitude > 0 then
 		local var9 = gamepadCursorPosition + var8 * p5
@@ -153,42 +152,10 @@ function t:processMoving(p5)
 	gamepadService:SetGamepadCursorPosition(gamepadCursorPosition)
 end
 
-function t:processSnapping(p5, p6, p7, p8)
-	-- upvalues: fFlagEnableSnapInVirtualCursor (ref), fFlagVirtualCursorSnapStopsWhenInputStops (ref), fFlagEnableVirtualCursorDebugging (ref), fIntSnapLevelInVirtualCursor (ref), propertiesModule (ref), guiService (ref), fFlagVirtualCursorSnapLevelBasedOnDirection (ref), gamepadService (ref)
-	if not fFlagEnableSnapInVirtualCursor then return end
-	local var7 = (p6 - p7) / p5
-	
-	if var7.Magnitude <= 0 and fFlagVirtualCursorSnapStopsWhenInputStops then
-		if fFlagEnableVirtualCursorDebugging then
-			print("Cursor is not moving, skipping snap processing")
-		end
-		return
-	else
-		local cursorScreenGuiOffset = self._cursorController:GetCursorScreenGuiOffset()
-		local var8 = self._snapController:adjustSnap({
-			cursorPosition = p6 + cursorScreenGuiOffset,
-			strengthMultiplier = fIntSnapLevelInVirtualCursor / 100,
-			targetObject = p8,
-			deltaTime = p5,
-			expiredTime = propertiesModule.SnapExpireTime
-		}) - cursorScreenGuiOffset
-		local var9 = guiService:GetScreenResolution() + guiService:GetGuiInset()
-		local vector2 = Vector2.new(math.clamp(var8.X, 0, var9.X), math.clamp(var8.Y, 0, var9.Y))
-		
-		if (vector2 - p6):Dot(var7) > 0 or not fFlagVirtualCursorSnapLevelBasedOnDirection then
-			self._cursorController:SetPosition(vector2)
-			gamepadService:SetGamepadCursorPosition(vector2)
-			
-			return
-		elseif fFlagEnableVirtualCursorDebugging then
-			print("Snap position is behind cursor movement, skipping snap")
-		end
-	end
-end
-
 function t.getCandidates(_, p5, p6)
 	-- upvalues: playersService (ref), coreGuiService (ref)
-	local playerGui = playersService.LocalPlayer:FindFirstChildOfClass("PlayerGui")
+	local localPlayer = playersService.LocalPlayer
+	local var7 = if localPlayer then localPlayer:FindFirstChildOfClass("PlayerGui") else nil
 	
 	return {
 		{
@@ -196,8 +163,8 @@ function t.getCandidates(_, p5, p6)
 			coreGuiService:GetGuiObjectsInCircle(p5, p6)
 		},
 		{
-			playerGui,
-			if playerGui then playerGui:GetGuiObjectsInCircle(p5, p6) else {}
+			var7,
+			if var7 then var7:GetGuiObjectsInCircle(p5, p6) else {}
 		}
 	}
 end
@@ -258,52 +225,39 @@ function t:processCandidates(p9, p10, p11)
 	return var8, var10
 end
 
-function t:getSnapCandidateList(p12, p13)
-	-- upvalues: guiService (ref), playersService (ref), coreGuiService (ref)
+function t:getAssistCandidateList(p12, p13)
+	-- upvalues: guiService (ref), isSelectableGuiObject (ref)
 	local t = {}
-	p12 -= guiService:GetGuiInset()
-	local var15 = guiService:GetScreenResolution() + guiService:GetGuiInset()
-	local localPlayer = playersService.LocalPlayer
-	local var16 = if localPlayer then localPlayer:FindFirstChildOfClass("PlayerGui") else nil
-	local var17 = coreGuiService:GetGuiObjectsInCircle(p12, p13)
 	
-	for i, v in if var16 then var16:GetGuiObjectsInCircle(p12, p13) else {} do
-		if v:IsA("GuiObject") and self._snapController:isSnapCandidate(v, var15) then
-			table.insert(t, v)
-		end
-	end
-	for i, v_1 in var17 do
-		if v_1:IsA("GuiObject") and self._snapController:isSnapCandidate(v_1, var15) then
-			table.insert(t, v_1)
+	for i, v in self:getCandidates(p12 - guiService:GetGuiInset(), p13) do
+		for i_1, v_1 in v[2] do
+			if v_1:IsA("GuiObject") and isSelectableGuiObject(v_1) then
+				table.insert(t, v_1)
+			end
 		end
 	end
 	return t
 end
 
 function t:onRenderStep(p14)
-	-- upvalues: gamepadService (ref), fFlagEnableSnapInVirtualCursor (ref), fFlagEnableMoveSnapInVirtualCursor (ref), playersService (ref), coreGuiService (ref), guiService (ref)
-	local gamepadCursorPosition = gamepadService:GetGamepadCursorPosition()
+	-- upvalues: gamepadService (ref), playersService (ref), coreGuiService (ref), guiService (ref)
 	self:processMoving(p14)
-	local gamepadCursorPosition_1 = gamepadService:GetGamepadCursorPosition()
-	local var18, var19 = self:processCandidates(gamepadCursorPosition_1, self._targetingRadius, p14)
+	local var15, var16 = self:processCandidates(gamepadService:GetGamepadCursorPosition(), self._targetingRadius, p14)
 	
-	if self._selectionRadius < var19 then
-		var18 = nil
+	if self._selectionRadius < var16 then
+		var15 = nil
 	end
-	if fFlagEnableSnapInVirtualCursor and not fFlagEnableMoveSnapInVirtualCursor then
-		self:processSnapping(p14, gamepadCursorPosition_1, gamepadCursorPosition, var18)
-	end
-	if var18 ~= self._selectedObject then
+	if var15 ~= self._selectedObject then
 		local playerGui = playersService.LocalPlayer:FindFirstChildOfClass("PlayerGui")
 		
-		if var18 then
+		if var15 then
 			self._cursorController:SetHighlight(true)
 			
-			if var18:IsDescendantOf(coreGuiService) then
-				guiService.SelectedCoreObject = var18
+			if var15:IsDescendantOf(coreGuiService) then
+				guiService.SelectedCoreObject = var15
 				guiService.SelectedObject = nil
-			elseif playerGui and var18:IsDescendantOf(playerGui) then
-				guiService.SelectedObject = var18
+			elseif playerGui and var15:IsDescendantOf(playerGui) then
+				guiService.SelectedObject = var15
 				guiService.SelectedCoreObject = nil
 			end
 		else
@@ -311,7 +265,7 @@ function t:onRenderStep(p14)
 			guiService.SelectedObject = nil
 			guiService.SelectedCoreObject = nil
 		end
-		self._selectedObject = var18
+		self._selectedObject = var15
 	end
 end
 

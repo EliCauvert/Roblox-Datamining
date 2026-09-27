@@ -52,7 +52,6 @@ local voiceEndedCheckDisregardIdleState = game:DefineFastFlag("VoiceEndedCheckDi
 local disableLeaveToastInStudio = game:DefineFastFlag("DisableLeaveToastInStudio", false)
 local enableVerifiedCheckViaOverlay = game:DefineFastFlag("EnableVerifiedCheckViaOverlay", false)
 local getFIntThrottleParticipantsUpdateMs = voiceChatCoreModule.Flags.GetFIntThrottleParticipantsUpdateMs
-local getFFlagEnableConnectDisconnectInSettingsAndChromeModule = require(robloxGui.Modules.Flags.GetFFlagEnableConnectDisconnectInSettingsAndChrome)
 local voiceUIImprovementsIXPLayerName = game:DefineFastString("VoiceUIImprovementsIXPLayerName", "Voice.Exposure")
 local throttleParticipantsUpdateIXPLayerValue = game:DefineFastString("ThrottleParticipantsUpdateIXPLayerValue", "ThrottleParticipantsUpdate")
 local voiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure = game:DefineFastFlag("VoiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure", false)
@@ -249,7 +248,7 @@ function t:__newindex(p1, p2)
 end
 
 function t.new(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: analytics (ref), getCamMicPermissionsModule (ref), t (ref), WATCHED_MESSAGE_TYPES (ref), getFIntThrottleParticipantsUpdateMs (ref), IXPServiceWrapper (ref), voiceUIImprovementsIXPLayerName (ref), throttleParticipantsUpdateIXPLayerValue (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), expChatModule (ref), getFFlagEnableUniveralVoiceToastsModule (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), debugSkipVoicePermissionCheck (ref), fFlagDebugShowAudioDeviceInputDebugger (ref), fFlagEnablePartyVoiceChangersInLua (ref), microphoneDevicePermissionsLoggingModule (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (ref), voiceVolumeControlsEligibility (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (ref), VOICE_JOIN_PROGRESS (ref), constantsModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), disableLeaveToastInStudio (ref), promptTypeModule (ref), debugSimulateConnectDisconnect (ref), name (ref), appStorageService (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), voiceNudgeUseNewDACopyModule (ref), getFFlagShowDevicePermissionsModal (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), getFFlagNonVoiceFTUX (ref), getFFlagEnableVoiceChatMuteForVideoCaptures (ref), getFFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref)
+	-- upvalues: analytics (ref), getCamMicPermissionsModule (ref), t (ref), WATCHED_MESSAGE_TYPES (ref), getFIntThrottleParticipantsUpdateMs (ref), IXPServiceWrapper (ref), voiceUIImprovementsIXPLayerName (ref), throttleParticipantsUpdateIXPLayerValue (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), expChatModule (ref), getFFlagEnableUniveralVoiceToastsModule (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), debugSkipVoicePermissionCheck (ref), fFlagDebugShowAudioDeviceInputDebugger (ref), fFlagEnablePartyVoiceChangersInLua (ref), microphoneDevicePermissionsLoggingModule (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (ref), voiceVolumeControlsEligibility (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (ref), VOICE_JOIN_PROGRESS (ref), constantsModule (ref), disableLeaveToastInStudio (ref), promptTypeModule (ref), debugSimulateConnectDisconnect (ref), name (ref), appStorageService (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), voiceNudgeUseNewDACopyModule (ref), getFFlagShowDevicePermissionsModal (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), getFFlagNonVoiceFTUX (ref), getFFlagEnableVoiceChatMuteForVideoCaptures (ref), getFFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref)
 	local tbl = setmetatable({
 		_mutedAnyone = false,
 		voiceConnectEventReportedForActiveSession = false,
@@ -397,7 +396,7 @@ function t.new(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 		end)
 	end
 	tbl.coreVoiceManager:subscribe("OnStateChanged", function(_, p11)
-		-- upvalues: microphoneDevicePermissionsLoggingModule (copy), tbl (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (copy), voiceVolumeControlsEligibility (copy), IXPServiceWrapper (copy), voiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (copy), VOICE_JOIN_PROGRESS (copy), constantsModule (copy), var6 (write), eventConnection (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (copy), disableLeaveToastInStudio (copy), promptTypeModule (copy)
+		-- upvalues: microphoneDevicePermissionsLoggingModule (copy), tbl (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (copy), voiceVolumeControlsEligibility (copy), IXPServiceWrapper (copy), voiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (copy), VOICE_JOIN_PROGRESS (copy), constantsModule (copy), var6 (write), eventConnection (ref), disableLeaveToastInStudio (copy), promptTypeModule (copy)
 		microphoneDevicePermissionsLoggingModule:setClientSessionId(tbl.coreVoiceManager:GetSessionId())
 		
 		if p11 == Enum.VoiceChatState.Ended or p11 == Enum.VoiceChatState.Failed then
@@ -424,9 +423,6 @@ function t.new(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 			tbl.pendingDisconnectReason = nil
 		end
 		if var8 and tbl.bannedUntil == nil then
-			if not getFFlagEnableConnectDisconnectInSettingsAndChromeModule() then
-				tbl:HideVoiceUI()
-			end
 			if disableLeaveToastInStudio and tbl.runService:IsStudio() then return end
 			tbl:showPrompt(promptTypeModule.LeaveVoice)
 		end
@@ -1486,7 +1482,7 @@ function t.GetIcon(_, p16, p17)
 end
 
 function t:JoinVoice(p16)
-	-- upvalues: fFlagVoiceRewarmTelemetry (ref), showJoinVoiceWhenDisconnectedV3 (ref), name (ref), guardVoiceInExpUpsellVariant (ref), constantsModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), getFFlagNonVoiceFTUX (ref), appStorageService (ref), getFFlagEnableVrVoiceParity (ref), promiseModule (ref), seamlessVoiceV2JoinVoiceToast (ref), enableVerifiedCheckViaOverlay (ref), getFFlagDisableConsentModalForExistingUsersModule (ref), promptTypeModule (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), getFFlagEnableInExpPhoneVoiceUpsellEntrypoints (ref), getOverlayStore (ref), overlayTypes (ref), socialUpsellType (ref), enum (ref), sendUserConnectionStatus (ref)
+	-- upvalues: fFlagVoiceRewarmTelemetry (ref), showJoinVoiceWhenDisconnectedV3 (ref), name (ref), guardVoiceInExpUpsellVariant (ref), constantsModule (ref), getFFlagNonVoiceFTUX (ref), appStorageService (ref), getFFlagEnableVrVoiceParity (ref), promiseModule (ref), seamlessVoiceV2JoinVoiceToast (ref), enableVerifiedCheckViaOverlay (ref), getFFlagDisableConsentModalForExistingUsersModule (ref), promptTypeModule (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), getFFlagEnableInExpPhoneVoiceUpsellEntrypoints (ref), getOverlayStore (ref), overlayTypes (ref), socialUpsellType (ref), enum (ref), sendUserConnectionStatus (ref)
 	local joinVoiceButtonContext = nil
 	local var18 = nil
 	
@@ -1504,7 +1500,7 @@ function t:JoinVoice(p16)
 	if not fFlagVoiceRewarmTelemetry then
 		self.Analytics:reportJoinVoiceButtonEvent("clicked", self:GetInExpUpsellAnalyticsData())
 	end
-	if getFFlagEnableConnectDisconnectInSettingsAndChromeModule() and self.previousGroupId then
+	if self.previousGroupId then
 		if fFlagVoiceRewarmTelemetry then
 			var18 = "RejoinPreviousChannel"
 		end
@@ -1526,7 +1522,7 @@ function t:JoinVoice(p16)
 		else
 			self:CheckAndShowPermissionPrompt():finallyReturn(promiseModule.reject())
 		end
-	elseif getFFlagEnableConnectDisconnectInSettingsAndChromeModule() and self:UserVoiceEnabled() then
+	elseif self:UserVoiceEnabled() then
 		if fFlagVoiceRewarmTelemetry then
 			var18 = "FirstJoinSession"
 		end
@@ -1626,7 +1622,7 @@ function t:EligibleForAgeCheckToast()
 end
 
 function t:ShouldShowJoinVoice()
-	-- upvalues: getFFlagEnableVoiceUxUpdates (ref), fFlagVoiceRewarmTelemetry (ref), voiceChatCoreModule (ref), showJoinVoiceWhenDisconnectedV3 (ref), getFFlagOnlyEnableJoinVoiceInVoiceEnabledUniversesModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), alwaysSetJoinVoiceButtonContext (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), getFFlagEnableInExpPhoneVoiceUpsellEntrypoints (ref), constantsModule (ref)
+	-- upvalues: getFFlagEnableVoiceUxUpdates (ref), fFlagVoiceRewarmTelemetry (ref), voiceChatCoreModule (ref), showJoinVoiceWhenDisconnectedV3 (ref), getFFlagOnlyEnableJoinVoiceInVoiceEnabledUniversesModule (ref), alwaysSetJoinVoiceButtonContext (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), getFFlagEnableInExpPhoneVoiceUpsellEntrypoints (ref), constantsModule (ref)
 	if getFFlagEnableVoiceUxUpdates() then
 		if fFlagVoiceRewarmTelemetry then
 			if self:EligibleForFaeUpsell() then
@@ -1664,10 +1660,10 @@ function t:ShouldShowJoinVoice()
 			return true
 		end
 	elseif getFFlagOnlyEnableJoinVoiceInVoiceEnabledUniversesModule() then
-		if getFFlagEnableConnectDisconnectInSettingsAndChromeModule() and self:IsSeamlessVoice() and self:verifyUniverseAndPlaceCanUseVoice() then
+		if self:IsSeamlessVoice() and self:verifyUniverseAndPlaceCanUseVoice() then
 			return not self.voiceUIVisible
 		end
-	elseif getFFlagEnableConnectDisconnectInSettingsAndChromeModule() and self:IsSeamlessVoice() then
+	elseif self:IsSeamlessVoice() then
 		return not self.voiceUIVisible
 	end
 end
@@ -1734,10 +1730,10 @@ function t:GetConnectDisconnectAnalyticsData()
 end
 
 function t:Leave()
-	-- upvalues: getFFlagDisconnectToastClientRewrite (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), getFFlagVoiceChatClientRewriteMasterLua (ref), sendUserConnectionStatus (ref)
+	-- upvalues: getFFlagDisconnectToastClientRewrite (ref), getFFlagVoiceChatClientRewriteMasterLua (ref), sendUserConnectionStatus (ref)
 	self:ensureInitialized("leave")
 	
-	if getFFlagDisconnectToastClientRewrite() and getFFlagEnableConnectDisconnectInSettingsAndChromeModule() then
+	if getFFlagDisconnectToastClientRewrite() then
 		self:SetVoiceConnectCookieValue(false)
 	end
 	self.Analytics:reportConnectDisconnectEvents("voiceDisconnectEvent", self:GetConnectDisconnectAnalyticsData())
@@ -1757,7 +1753,7 @@ function t:Leave()
 	self.previousGroupId = groupId
 	self.previousMutedState = var18
 	
-	if not getFFlagDisconnectToastClientRewrite() and getFFlagEnableConnectDisconnectInSettingsAndChromeModule() then
+	if not getFFlagDisconnectToastClientRewrite() then
 		self:SetVoiceConnectCookieValue(false)
 	end
 	if sendUserConnectionStatus and self:IsSeamlessVoice() then

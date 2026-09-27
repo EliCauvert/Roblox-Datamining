@@ -2,6 +2,9 @@
 local parent = phoneUpsell.Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useStyle = UIBloxModule.Core.Style.useStyle
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -41,7 +44,7 @@ local function getButtonStackProps(p1, p2, p3, p4, p5, p6)
 end
 
 return function(p1)
-	-- upvalues: mergePropsModule (ref), t (ref), getPartialPageModalMiddleContentWidth (ref), useStyle (ref), useLocalization (ref), reactModule (ref), partialPageModal (ref), getButtonStackProps (ref)
+	-- upvalues: mergePropsModule (ref), t (ref), getPartialPageModalMiddleContentWidth (ref), useStyle (ref), useLocalization (ref), reactModule (ref), partialPageModal (ref), getButtonStackProps (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = mergePropsModule(t, p1)
 	local var2 = getPartialPageModalMiddleContentWidth(var1.screenSize.X)
 	local t_1 = {
@@ -91,7 +94,8 @@ return function(p1)
 				TextSize = var3.Font.BaseSize,
 				TextColor3 = var3.Theme.TextDefault.Color,
 				TextTransparency = var3.Theme.TextDefault.Transparency,
-				Font = var3.Font.Body.Font,
+				Font = if foundationFontFaceMigration then nil else var3.Font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Size = UDim2.new(0, var2, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y

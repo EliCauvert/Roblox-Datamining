@@ -4,6 +4,7 @@
 	userProfilesCombinedNameAndAliasByUserIds = require(script.userProfilesCombinedNameAndAliasByUserIds),
 	userProfilesCombinedNameAndUsernameByUserIds = require(script.userProfilesCombinedNameAndUsernameByUserIds),
 	userProfilesCombinedNameUsernameAndIsVerifiedByUserIds = require(script.userProfilesCombinedNameUsernameAndIsVerifiedByUserIds),
+	userProfilesBasicNamesByUserIds = require(script.userProfilesBasicNamesByUserIds),
 	userProfilesAllNamesByUserIds = require(script.userProfilesAllNamesByUserIds),
 	userProfilesDisplayNameAndUsernameByUserIds = require(script.userProfilesDisplayNameAndUsernameByUserIds),
 	userProfilesDisplayUserPlatformNamesByUserIds = require(script.userProfilesDisplayUserPlatformNamesByUserIds),

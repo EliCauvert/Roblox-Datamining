@@ -12,9 +12,10 @@ local inputSize = foundationModule.Enums.InputSize
 local appHeaderBarModule = require(parent.AppHeaderBar)
 local textKeysModule = require(groups.Common.TextKeys)
 local useGroupsWrapperContextModule = require(groups.Contexts.useGroupsWrapperContext)
+local fFlagEnableGroupDetailPane = require(parent.SharedFlags).FFlagEnableGroupDetailPane
 
 return function(p1)
-	-- upvalues: useGroupsWrapperContextModule (ref), useNavigation (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), appHeaderBarModule (ref), view (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref)
+	-- upvalues: useGroupsWrapperContextModule (ref), useNavigation (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), fFlagEnableGroupDetailPane (ref), appHeaderBarModule (ref), view (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref)
 	local var1 = useGroupsWrapperContextModule()
 	local var2 = useNavigation()
 	local var3 = useLocalization({
@@ -22,9 +23,17 @@ return function(p1)
 		seeAll = textKeysModule.ActionSeeAll
 	})
 	local var4 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
+		-- upvalues: fFlagEnableGroupDetailPane (copy), var1 (ref), var2 (ref)
+		if fFlagEnableGroupDetailPane and var1.navigateTo.previousView then
+			var1.navigateTo.previousView()
+			
+			return
+		end
 		var2.goBack()
-	end, { var2 })
+	end, {
+		if fFlagEnableGroupDetailPane then var1.navigateTo.previousView else nil,
+		var2
+	})
 	local var5 = reactModule.useMemo(function()
 		-- upvalues: appHeaderBarModule (copy), var4 (ref)
 		return appHeaderBarModule.makeBackButton(var4)
@@ -36,13 +45,13 @@ return function(p1)
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		LeftSection = reactModule.createElement(view, { tag = "row auto-xy align-y-center gap-small" }, {
+		LeftSection = reactModule.createElement(view, { tag = "row align-y-center gap-small auto-xy" }, {
 			BackButton = reactModule.useMemo(function()
 				-- upvalues: var5 (ref), reactModule (copy), view (copy)
-				return reactModule.createElement(view, { tag = "size-0 auto-xy align-x-left", LayoutOrder = 1 }, { button = var5() })
+				return reactModule.createElement(view, { tag = "align-x-left size-0 auto-xy", LayoutOrder = 1 }, { button = var5() })
 			end, { var5 }),
 			Title = reactModule.createElement(text, {
-				tag = "text-align-x-left content-default text-heading-medium",
+				tag = "text-heading-medium text-align-x-left content-default",
 				LayoutOrder = 2,
 				Text = var3.title
 			})

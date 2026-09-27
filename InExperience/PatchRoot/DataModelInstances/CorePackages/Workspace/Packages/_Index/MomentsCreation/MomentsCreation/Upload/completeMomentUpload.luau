@@ -1,11 +1,10 @@
 ﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
 local momentsCommonModule = require(momentsCreation.Parent.MomentsCommon)
 local loggerModule = require(momentsCreation.Logger)
-local getFFlagMomentsUseBackendPostStatusNotificationModule = require(momentsCreation.Flags.GetFFlagMomentsUseBackendPostStatusNotification)
 local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
 
 return function(p1, p2)
-	-- upvalues: fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), getFFlagMomentsUseBackendPostStatusNotificationModule (ref), loggerModule (ref)
+	-- upvalues: fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), loggerModule (ref)
 	p2.uploadStore.setSuccess(p1)
 	
 	if fFlagMomentsRealtimeSessionTelemetry then
@@ -23,13 +22,5 @@ return function(p1, p2)
 		myCreationsStore.invalidateCount()
 	end
 	p2.onPostedToFeed()
-	local var1 = getFFlagMomentsUseBackendPostStatusNotificationModule()
-	loggerModule:debug("event=completion assetId={} MomentsUseBackendPostStatusNotification={} localSuccessToast={}", tostring(p1), tostring(var1), if var1 then "suppressed" else "trigger")
-	
-	if not var1 then
-		p2.toastStore.triggerToast({
-			title = p2.localizations.publishedTitle,
-			text = p2.localizations.publishedBody
-		})
-	end
+	loggerModule:debug("event=completion assetId={} MomentsUseBackendPostStatusNotification={} localSuccessToast={}", tostring(p1), tostring(true), "suppressed")
 end

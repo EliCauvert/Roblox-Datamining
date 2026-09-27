@@ -1,0 +1,30 @@
+﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local parent = inExperienceSideSheet.Parent
+local dataHydrationModule = require(parent.DataHydration)
+local reactModule = require(parent.React)
+local signalsModule = require(parent.Signals)
+local signalsReactModule = require(parent.SignalsReact)
+local getUniverseIdModule = require(inExperienceSideSheet.Utils.getUniverseId)
+
+return function()
+	-- upvalues: getUniverseIdModule (ref), reactModule (ref), signalsModule (ref), dataHydrationModule (ref), signalsReactModule (ref)
+	local var1 = getUniverseIdModule()
+	local var2 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var1 (ref), dataHydrationModule (copy)
+		return signalsModule.createComputed(function(p1)
+			-- upvalues: var1 (copy), dataHydrationModule (copy)
+			if var1 then
+				local andFetchGameInfo = dataHydrationModule.Game.getGameInfoStore(p1).getAndFetchGameInfo(var1)
+				
+				return {
+					data = andFetchGameInfo.data(p1),
+					isLoading = andFetchGameInfo.status(p1) == dataHydrationModule.DataStatus.NotReady
+				}
+			end
+			return { data = nil, isLoading = false }
+		end)
+	end, { var1 }))
+	local data = var2.data
+	
+	return if data then data.name else nil, if data then data.creator else nil, var2.isLoading
+end

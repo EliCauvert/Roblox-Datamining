@@ -13,6 +13,7 @@ return {
 	isUserChatEnabled = require(script.isUserChatEnabled),
 	requestSelectTab = require(script.ExternalNavigation.requestSelectTab),
 	requestSelectFriendsTab = require(script.ExternalNavigation.requestSelectFriendsTab),
+	shouldSkipHistoricalMessage = require(script.shouldSkipHistoricalMessage),
 	shouldSuppressUnreadForTabMetadata = require(script.shouldSuppressUnreadForTabMetadata),
 	ExpChatPerfTracker = require(parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker,
 	["jest.config"] = script["jest.config"],

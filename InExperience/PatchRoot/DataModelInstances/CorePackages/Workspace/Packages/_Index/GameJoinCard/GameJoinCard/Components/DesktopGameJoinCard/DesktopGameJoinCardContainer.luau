@@ -5,7 +5,9 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local responsiveModule = require(parent.Responsive)
 local gameDetailModule = require(parent.GameDetail)
-local _ = require(parent.SocialCommon)
+local socialCommonModule = require(parent.SocialCommon)
+local chatEntryPointNames = socialCommonModule.Enums.ChatEntryPointNames
+local enteredChatFromEntryPoint = socialCommonModule.Actions.EnteredChatFromEntryPoint
 local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
 local socialExperienceJoinModule = require(parent.SocialExperienceJoin)
 local gamePlayIntent = discoveryAnalyticsModule.Events.gamePlayIntent
@@ -41,9 +43,9 @@ local useAppFocusRoot = focusNavigationUtilsModule.useAppFocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableConsoleGameJoinCard = sharedFlagsModule.FFlagEnableConsoleGameJoinCard
-local fFlagJoinCardAgeCheckUpsell = sharedFlagsModule.FFlagJoinCardAgeCheckUpsell
 local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
 local fFlagGameJoinCardAnalyticsCardId = sharedFlagsModule.FFlagGameJoinCardAnalyticsCardId
+local fFlagGameJoinCardChatEntryPointModule = require(gameJoinCard.Flags.FFlagGameJoinCardChatEntryPoint)
 local getPlatformFriendsServiceModule = require(gameJoinCard.Utils.getPlatformFriendsService)
 local analyticsConstantsModule = require(script.Parent.Parent.Parent.Analytics.AnalyticsConstants)
 local gameJoinCardButtonAction = analyticsConstantsModule.GameJoinCardButtonAction
@@ -55,7 +57,7 @@ local useAgeCheckCompletionLogger = useAgeCheckUpsellAnalyticsModule.useAgeCheck
 local useAgeCheckPressLogger = useAgeCheckUpsellAnalyticsModule.useAgeCheckPressLogger
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useNavigation (ref), useNavigationFocus (ref), fFlagGameJoinCardAnalyticsCardId (ref), reactModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), contentProviderService (ref), fFlagJoinCardAgeCheckUpsell (ref), useAgeCheckCompletionLogger (ref), useJoinUserInExperience (ref), useAgeCheckPressLogger (ref), httpService (ref), useGameJoinCardAnalyticsModule (ref), dependencyArray (ref), usePreferredInput (ref), responsiveModule (ref), fFlagEnableConsoleGameJoinCard (ref), getPlatformFriendsServiceModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), useRoactService (ref), appEventIngestService (ref), appSessionService (ref), appGuiService (ref), useAppPolicy (ref), gamePlayIntent (ref), peopleListInHomePage (ref), setGamePlaySession (ref), sessionType (ref), gameDetailReferral (ref), openGameDetails (ref), viewEDPsourceValues (ref), gameJoinCardButtonAction (ref), viewProfileSourceValues (ref), fFlagEnableSplitPane (ref), appPage (ref), notificationType (ref), desktopGameJoinCardModule (ref), gamepadJoinFocusBehaviorModule (ref)
+	-- upvalues: useDispatch (ref), useNavigation (ref), useNavigationFocus (ref), fFlagGameJoinCardAnalyticsCardId (ref), reactModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), contentProviderService (ref), useAgeCheckCompletionLogger (ref), useJoinUserInExperience (ref), useAgeCheckPressLogger (ref), httpService (ref), useGameJoinCardAnalyticsModule (ref), dependencyArray (ref), usePreferredInput (ref), responsiveModule (ref), fFlagEnableConsoleGameJoinCard (ref), getPlatformFriendsServiceModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), useRoactService (ref), appEventIngestService (ref), appSessionService (ref), appGuiService (ref), useAppPolicy (ref), gamePlayIntent (ref), peopleListInHomePage (ref), setGamePlaySession (ref), sessionType (ref), gameDetailReferral (ref), openGameDetails (ref), viewEDPsourceValues (ref), gameJoinCardButtonAction (ref), viewProfileSourceValues (ref), fFlagEnableSplitPane (ref), appPage (ref), fFlagGameJoinCardChatEntryPointModule (ref), enteredChatFromEntryPoint (ref), chatEntryPointNames (ref), notificationType (ref), desktopGameJoinCardModule (ref), gamepadJoinFocusBehaviorModule (ref)
 	local var1 = useDispatch()
 	local var2 = useNavigation()
 	local var3 = useNavigationFocus() ~= false
@@ -95,16 +97,16 @@ return function(p1)
 		isHomePageCarousel = true,
 		homepageCarouselAbsolutePosition = p1.homepageCarouselAbsolutePosition,
 		presence = p1.presence,
-		onAgeCheckCompletion = if fFlagJoinCardAgeCheckUpsell then useAgeCheckCompletionLogger(var8) else nil
+		onAgeCheckCompletion = useAgeCheckCompletionLogger(var8)
 	})
-	local var13 = if fFlagJoinCardAgeCheckUpsell then useAgeCheckPressLogger({
+	local var13 = useAgeCheckPressLogger({
 		userId = p1.userId,
 		universeId = var8,
 		absolutePosition = p1.homepageCarouselAbsolutePosition,
 		joinGameCardId = if fFlagGameJoinCardAnalyticsCardId then var4 else nil,
 		joinAgeCheckUpsellFlow = var12.joinAgeCheckUpsellFlow
-	}) else nil
-	local var14 = fFlagJoinCardAgeCheckUpsell and var12.ageCheckRequired == true
+	})
+	local var14 = var12.ageCheckRequired == true
 	local var15 = reactModule.useRef(false)
 	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), var3 (ref), var15 (ref), fFlagGameJoinCardAnalyticsCardId (copy), httpService (copy), var5 (write), useGameJoinCardAnalyticsModule (copy)
@@ -267,23 +269,25 @@ return function(p1)
 		isConsole = var17,
 		consolePlatformLabel = platformName,
 		focusRootRef = if fFlagEnableConsoleGameJoinCard then var21 else nil,
-		ageCheckRequired = if fFlagJoinCardAgeCheckUpsell then var12.ageCheckRequired else nil,
+		ageCheckRequired = var12.ageCheckRequired,
 		onAgeCheckPressed = var13,
 		onPlatformProfilePressed = if fFlagEnableConsoleGameJoinCard and var17 then var18 else nil,
 		onChat = if var17 or not var25 then nil else reactModule.useCallback(function()
-			-- upvalues: p1 (ref), useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), var8 (ref), fFlagGameJoinCardAnalyticsCardId (copy), var4 (write), var24 (ref), notificationType (copy)
-			if p1.userId == "" then
-				return
-			end
+			-- upvalues: p1 (ref), useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), var8 (ref), fFlagGameJoinCardAnalyticsCardId (copy), var4 (write), fFlagGameJoinCardChatEntryPointModule (copy), var1 (ref), enteredChatFromEntryPoint (copy), chatEntryPointNames (copy), var24 (ref), notificationType (copy)
+			if p1.userId == "" then return end
 			useGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(gameJoinCardButtonAction.Chat, {
 				friendId = p1.userId,
 				universeId = if var8 ~= "" then nil else var8,
 				absolutePosition = p1.homepageCarouselAbsolutePosition,
 				joinGameCardId = if fFlagGameJoinCardAnalyticsCardId then var4 else nil
 			})
+			
+			if fFlagGameJoinCardChatEntryPointModule then
+				var1(enteredChatFromEntryPoint(chatEntryPointNames.GameJoinCard))
+			end
 			var24:BroadcastNotification(p1.userId, notificationType.LAUNCH_CONVERSATION)
 			p1.onClose()
-		end, dependencyArray(p1.userId, var8, p1.homepageCarouselAbsolutePosition, var24, p1.onClose, var4)),
+		end, dependencyArray(p1.userId, var8, p1.homepageCarouselAbsolutePosition, var24, p1.onClose, var4, var1)),
 		onViewProfile = if not var17 then reactModule.useCallback(function(p2)
 			-- upvalues: p1 (ref), var8 (ref), fFlagGameJoinCardAnalyticsCardId (copy), var4 (write), viewProfileSourceValues (copy), useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), fFlagEnableSplitPane (copy), var2 (ref), appPage (copy)
 			if p1.userId ~= "" then

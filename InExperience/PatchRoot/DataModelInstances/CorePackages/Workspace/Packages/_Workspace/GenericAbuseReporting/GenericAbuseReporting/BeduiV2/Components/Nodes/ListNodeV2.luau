@@ -27,12 +27,13 @@ local textWithTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Tr
 local _ = require(genericAbuseReporting.BeduiV2.Utils.Translate.translate)
 local useArTranslation = require(genericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 local useListLoader = require(genericAbuseReporting.BeduiV2.Loaders.useLoader).useListLoader
+local formatErrorDetailForAnalytics = analyticsServiceModule.formatErrorDetailForAnalytics
 local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReportAnalytics
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
 local fFlagAbuseReportInExpPlayerListV3 = require(parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3
-local fFlagAbuseReportSelectItemAddId = require(parent.SharedFlags).FFlagAbuseReportSelectItemAddId
 local fFlagAbuseReportListNodeFullBleedModule = require(genericAbuseReporting.Flags.FFlagAbuseReportListNodeFullBleed)
+local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 local t = {
 	chevron = nil,
 	radio = listItemInputType.Radio,
@@ -104,7 +105,7 @@ local function ListNodeError(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), useArTranslation (ref), useAbuseReportAnalytics (ref), useListLoader (ref), useLayoutSlots (ref), fFlagAbuseReportListNodeFullBleedModule (ref), reactFocusNavigationModule (ref), focusBehaviorsModule (ref), scrollToItemModule (ref), telemetryEventType (ref), fFlagAbuseReportSelectItemAddId (ref), dashModule (ref), ListNodeLoading (ref), ListNodeError (ref), empty (ref), eyebrowModule (ref), view (ref), list (ref), fFlagAbuseReportInExpPlayerListV3 (ref), iconName (ref), t (ref), footerModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), useArTranslation (ref), useAbuseReportAnalytics (ref), useListLoader (ref), useLayoutSlots (ref), fFlagAbuseReportListNodeFullBleedModule (ref), reactFocusNavigationModule (ref), focusBehaviorsModule (ref), scrollToItemModule (ref), telemetryEventType (ref), fFlagAbuseReportImproveErrorEventsModule (ref), formatErrorDetailForAnalytics (ref), dashModule (ref), ListNodeLoading (ref), ListNodeError (ref), empty (ref), eyebrowModule (ref), view (ref), list (ref), fFlagAbuseReportInExpPlayerListV3 (ref), iconName (ref), t (ref), footerModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState(p1.initialValue or nil)
 	local translateIntoString = useArTranslation().translateIntoString
@@ -186,12 +187,12 @@ return reactModule.memo(function(p1)
 		var17.current = nil
 	end, { var2 })
 	reactModule.useEffect(function()
-		-- upvalues: error (ref), var9 (ref), sendEvent (ref), telemetryEventType (copy)
+		-- upvalues: error (ref), var9 (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy)
 		if error and not var9.current then
 			var9.current = true
 			sendEvent({
 				sub_event_type = telemetryEventType.Error,
-				error_detail = { error_message = "list: async load failed: " .. error }
+				error_detail = if fFlagAbuseReportImproveErrorEventsModule then formatErrorDetailForAnalytics("list: async load failed", error) else { error_message = "list: async load failed: " .. error }
 			})
 		end
 	end, { error, sendEvent })
@@ -205,13 +206,13 @@ return reactModule.memo(function(p1)
 	local variant = p1.variant or "radio"
 	local isChevron = variant == "chevron"
 	local var18 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: data (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportSelectItemAddId (copy), var5 (ref), var7 (ref)
+		-- upvalues: data (ref), sendEvent (ref), telemetryEventType (copy), var5 (ref), var7 (ref)
 		if data then
 			sendEvent({
 				sub_event_type = telemetryEventType.SelectItem,
 				select_item_detail = {
 					selected_index = p2,
-					selected_id = if fFlagAbuseReportSelectItemAddId then p3 else nil,
+					selected_id = p3,
 					list_length = #data,
 					has_scroll = var5,
 					did_scroll = var7
@@ -222,7 +223,7 @@ return reactModule.memo(function(p1)
 		end
 	end, { sendEvent, var5, var7, data })
 	local var19 = reactModule.useCallback(function(p2)
-		-- upvalues: data (ref), var3 (ref), dashModule (copy), var18 (ref), fFlagAbuseReportSelectItemAddId (copy)
+		-- upvalues: data (ref), var3 (ref), dashModule (copy), var18 (ref)
 		if data then
 			var3(p2)
 			local var20 = 0
@@ -234,7 +235,7 @@ return reactModule.memo(function(p1)
 					return
 				end
 			end)
-			var18(var20, if fFlagAbuseReportSelectItemAddId then p2 else nil)
+			var18(var20, p2)
 			
 			return
 		end
@@ -299,7 +300,7 @@ return reactModule.memo(function(p1)
 				isContained = { isContained = false, hasMargin = true }
 			}, {
 				dashModule.map(data, function(p2, p3)
-					-- upvalues: fFlagAbuseReportInExpPlayerListV3 (copy), p1 (ref), reactModule (copy), list (copy), iconName (copy), translateIntoString (ref), isChevron (ref), var18 (ref), fFlagAbuseReportSelectItemAddId (copy), var19 (ref), t (copy), variant (ref), var2 (ref), var16 (ref), var15 (ref)
+					-- upvalues: fFlagAbuseReportInExpPlayerListV3 (copy), p1 (ref), reactModule (copy), list (copy), iconName (copy), translateIntoString (ref), isChevron (ref), var18 (ref), var19 (ref), t (copy), variant (ref), var2 (ref), var16 (ref), var15 (ref)
 					return reactModule.createElement(list.Item, {
 						leading = if type(p2.leading) == "string" then iconName[p2.leading] else p2.leading,
 						title = translateIntoString(p2.label),
@@ -307,8 +308,8 @@ return reactModule.memo(function(p1)
 						trailing = if fFlagAbuseReportInExpPlayerListV3 and p1.renderTrailingAccessory then p1.renderTrailingAccessory(p2) else nil,
 						onActivated = {
 							onActivated = if isChevron then function()
-								-- upvalues: var18 (copy), p3 (ref), fFlagAbuseReportSelectItemAddId (copy), p2 (ref), p1 (copy)
-								var18(p3, if fFlagAbuseReportSelectItemAddId then p2.id else nil)
+								-- upvalues: var18 (copy), p3 (ref), p2 (ref), p1 (copy)
+								var18(p3, p2.id)
 								
 								if p1.onNext then
 									p1.onNext(p2.id, p2)

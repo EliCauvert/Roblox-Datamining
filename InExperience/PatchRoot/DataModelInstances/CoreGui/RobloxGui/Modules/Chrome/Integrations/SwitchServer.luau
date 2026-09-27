@@ -44,8 +44,8 @@ local var4 = serviceModule:register({
 	}
 })
 signalsUtilsModule.createDetachedEffect(function(p1)
-	-- upvalues: switchServerStore (ref), var4 (ref)
-	if switchServerStore.shouldEnableSwitchServer(p1) then
+	-- upvalues: switchServerStore (ref), isPioneerLaunch (ref), var4 (ref)
+	if switchServerStore.shouldEnableSwitchServer(p1) or isPioneerLaunch() then
 		var4.availability:available()
 		
 		return

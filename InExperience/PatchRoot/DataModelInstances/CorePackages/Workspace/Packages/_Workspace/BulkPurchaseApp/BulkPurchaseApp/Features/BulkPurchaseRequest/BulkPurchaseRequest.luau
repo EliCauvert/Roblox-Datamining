@@ -15,6 +15,7 @@ local fullPagePromptScrollListModule = require(bulkPurchaseApp.Components.FullPa
 local fFlagFixVP8143Module = require(bulkPurchaseApp.Flags.FFlagFixVP8143)
 local fFlagBulkPurchaseEnablePurchaseOptionsModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseEnablePurchaseOptions)
 local fFlagAXAddPlusUpsellToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
+local fFlagAXAddOffersToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
 local itemListModule = require(bulkPurchaseApp.Components.ItemList)
 local _ = require(parent.AvatarExperienceCommon)
 local _ = require(parent.RobloxSubscriptionPurchaseApp)
@@ -35,7 +36,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), localizationRoactContext (ref), reactFocusNavigationModule (ref), fFlagFixVP8143Module (ref), useDesignTokens (ref), itemStatusKeyToLocalizationKeyModule (ref), mapItemsToRowPresentation (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), mapOwnedItemsToRowPresentation (ref), mapUnpurchasableItemsToRowPresentation (ref), fullPagePromptModule (ref), fullPagePromptTwoPanelLayoutModule (ref), lineItemLayoutModule (ref), styledTextLabel (ref), fullPagePromptScrollListModule (ref), itemListModule (ref), dividerModule (ref), priceBoxModule (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref)
+	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), localizationRoactContext (ref), reactFocusNavigationModule (ref), fFlagFixVP8143Module (ref), useDesignTokens (ref), itemStatusKeyToLocalizationKeyModule (ref), mapItemsToRowPresentation (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), mapOwnedItemsToRowPresentation (ref), mapUnpurchasableItemsToRowPresentation (ref), fullPagePromptModule (ref), fullPagePromptTwoPanelLayoutModule (ref), lineItemLayoutModule (ref), styledTextLabel (ref), fullPagePromptScrollListModule (ref), itemListModule (ref), dividerModule (ref), priceBoxModule (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref), fFlagAXAddOffersToBulkPurchaseModule (ref)
 	local var1 = useLocalization(t)
 	local var2 = reactModule.useContext(localizationRoactContext)
 	local var3, var4 = reactFocusNavigationModule.useDefaultFocusBehavior()
@@ -122,7 +123,9 @@ return function(p1)
 			isDisabled = p1.isDisabled,
 			shouldShowBlackbirdUpsellBanner = if fFlagAXAddPlusUpsellToBulkPurchaseModule then p1.shouldShowBlackbirdUpsellBanner else nil,
 			blackbirdUpsellBannerProductInfo = if fFlagAXAddPlusUpsellToBulkPurchaseModule then p1.blackbirdUpsellBannerProductInfo else nil,
-			onBlackbirdUpsellActivated = if fFlagAXAddPlusUpsellToBulkPurchaseModule then p1.onBlackbirdUpsellActivated else nil
+			onBlackbirdUpsellActivated = if fFlagAXAddPlusUpsellToBulkPurchaseModule then p1.onBlackbirdUpsellActivated else nil,
+			offerData = if fFlagAXAddOffersToBulkPurchaseModule then p1.offerData else nil,
+			toggleOfferSelected = if fFlagAXAddOffersToBulkPurchaseModule then p1.toggleOfferSelected else nil
 		})
 	}))
 end

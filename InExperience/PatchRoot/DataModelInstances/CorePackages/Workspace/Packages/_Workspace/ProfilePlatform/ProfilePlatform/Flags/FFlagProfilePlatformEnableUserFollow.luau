@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ProfilePlatformEnableUserFollow", false) and require(script:FindFirstAncestor("ProfilePlatform").Parent.SharedFlags).FFlagLuaAppDataHydrationOptimisticMutationLayer
+﻿return game:DefineFastFlag("ProfilePlatformEnableUserFollow", false)

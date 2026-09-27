@@ -1,8 +1,6 @@
 ﻿local parent = script:FindFirstAncestor("GameJoinCard").Parent
 local timeToInteractiveTracker = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagMobileGameJoinCardTTITracking = sharedFlagsModule.FFlagMobileGameJoinCardTTITracking
-local fFlagJoinCardAgeCheckUpsell = sharedFlagsModule.FFlagJoinCardAgeCheckUpsell
+local fFlagMobileGameJoinCardTTITracking = require(parent.SharedFlags).FFlagMobileGameJoinCardTTITracking
 local t = {
 	MobileCardMounted = "MobileGameJoinCardOpened_Mounted",
 	MobileBannerMounted = "MobileGameJoinCardOpened_BannerLoaded",
@@ -16,10 +14,9 @@ local t_2 = { EventName = t, Surface = t_1 }
 local var1 = nil
 
 function t_2.trackMobileCardClickStart()
-	-- upvalues: fFlagJoinCardAgeCheckUpsell (ref), var1 (write), fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref), t_1 (ref)
-	if fFlagJoinCardAgeCheckUpsell then
-		var1 = tick() * 1000
-	end
+	-- upvalues: var1 (write), fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref), t_1 (ref)
+	var1 = tick() * 1000
+	
 	if fFlagMobileGameJoinCardTTITracking then
 		timeToInteractiveTracker.trackStart(t.MobileCardMounted, true)
 		timeToInteractiveTracker.updateMetadata(t.MobileCardMounted, {

@@ -22,6 +22,7 @@ return function(value)
 	local var3 = useRoactService(appEventIngestService)
 	
 	return reactModule.createElement(button, {
+		testId = "--core-ui-flyout-button-quick-signin",
 		isDisabled = false,
 		text = useLocalization({
 			title = if fFlagCTAChangeMorePageFlyoutButtonText then "Authentication.Login.Action.QuickSignIn" else "Authentication.CrossDevice.Heading.QuickLogin"

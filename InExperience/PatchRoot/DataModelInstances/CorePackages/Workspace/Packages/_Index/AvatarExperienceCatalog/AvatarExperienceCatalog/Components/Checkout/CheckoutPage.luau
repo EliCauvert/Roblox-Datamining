@@ -22,10 +22,13 @@ local checkoutTotalLinesModule = require(avatarExperienceCatalog.Components.Chec
 local checkoutUnavailableButtonModule = require(avatarExperienceCatalog.Components.Checkout.CheckoutUnavailableButton)
 local _ = require(avatarExperienceCatalog.Api.PostCartPricingForOffers.CartPricingForOffersTypes)
 local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
+local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
 local fFlagAXEnableExpiredUserLookCheckout = avatarExperienceFlagsModule.FFlagAXEnableExpiredUserLookCheckout
 local fFlagAXMISSmallUIChanges = avatarExperienceFlagsModule.FFlagAXMISSmallUIChanges
 local fFlagAXMISWithOffers = avatarExperienceFlagsModule.FFlagAXMISWithOffers
 local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
+local var1 = if fFlagEnableSplitPane then require(parent.SplitPane).SplitPaneStore else nil
+local var2 = if fFlagEnableSplitPane then require(parent.SignalsReact).useSignalState else nil
 
 local function selectDeviceOrientation(p1)
 	return p1.DeviceOrientation
@@ -35,26 +38,28 @@ local function selectStatusBarHeight(p1)
 	return if p1 and p1.TopBar and p1.TopBar.statusBarHeight then p1.TopBar.statusBarHeight else 0
 end
 
-local var1 = function()
+local var3 = function()
 	-- upvalues: robloxSubscriptionPurchaseAppModule (ref), surfaceName (ref), surfaceContext (ref)
 	robloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase({ showBackButton = true }, { onFlowComplete = function(_) end }, nil, surfaceName.CatalogMultiItemCheckoutPage, surfaceContext.InApp, nil, nil)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: parent (ref), foundationModule (ref), useSelector (ref), selectDeviceOrientation (ref), responsiveModule (ref), selectStatusBarHeight (ref), useLocalization (ref), fFlagAXMISWithOffers (ref), reactModule (ref), constants (ref), fFlagAXMISWithBlackbird (ref), checkoutPageHeaderModule (ref), checkoutPageBodyModule (ref), fFlagAXEnableExpiredUserLookCheckout (ref), fFlagAXDurables2Option (ref), cryoModule (ref), checkoutTotalLinesModule (ref), tutilsModule (ref), fFlagAXMISSmallUIChanges (ref), checkoutBuyButtonModule (ref), checkoutUnavailableButtonModule (ref), blackbirdUpsellBanner (ref), var1 (ref)
+	-- upvalues: parent (ref), foundationModule (ref), fFlagEnableSplitPane (ref), var2 (ref), var1 (ref), useSelector (ref), selectDeviceOrientation (ref), responsiveModule (ref), selectStatusBarHeight (ref), useLocalization (ref), fFlagAXMISWithOffers (ref), reactModule (ref), constants (ref), fFlagAXMISWithBlackbird (ref), checkoutPageHeaderModule (ref), checkoutPageBodyModule (ref), fFlagAXEnableExpiredUserLookCheckout (ref), fFlagAXDurables2Option (ref), cryoModule (ref), checkoutTotalLinesModule (ref), tutilsModule (ref), fFlagAXMISSmallUIChanges (ref), checkoutBuyButtonModule (ref), checkoutUnavailableButtonModule (ref), blackbirdUpsellBanner (ref), var3 (ref)
 	local IAPExperienceModule = require(parent.IAPExperience)
 	local purchasePromptModule = require(parent.PurchasePrompt)
-	local var2 = foundationModule.Hooks.useTokens()
-	local var3 = useSelector(selectDeviceOrientation) == responsiveModule.Keys.Portrait
-	local var4 = useSelector(selectStatusBarHeight)
-	local var5 = useLocalization({
+	local var4 = foundationModule.Hooks.useTokens()
+	local var5 = if fFlagEnableSplitPane then var2(var1.getStore().getIsBreakpointEnabled) else false
+	local var6 = if fFlagEnableSplitPane then var2(var1.getStore().getSupportWidthFraction) else nil
+	local var7 = (if fFlagEnableSplitPane and var5 then responsiveModule.Keys.Landscape else useSelector(selectDeviceOrientation)) == responsiveModule.Keys.Portrait
+	local var8 = useSelector(selectStatusBarHeight)
+	local var9 = useLocalization({
 		buyLabel = "Feature.Catalog.Action.Buy",
 		wearAfterPurchaseLabel = "Feature.Catalog.Checkout.WearAfterPurchase",
 		addToMyAvatarsLabel = "Feature.Avatar.Label.Title.AddToMyAvatars",
 		addToMyMakeupLooksLabel = "Feature.Avatar.Label.Title.AddToMyMakeupLooks",
 		saveOptionsLabel = if fFlagAXMISWithOffers then "Feature.Catalog.Label.SaveOptions" else nil
 	})
-	local var6 = reactModule.useMemo(function()
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), constants (copy)
 		for i, v in p1.cartItems do
 			if not constants.MAKEUP_LOOK_ASSET_TYPES[v.itemSubType] then
@@ -63,10 +68,10 @@ return reactModule.memo(function(p1)
 		end
 		return false
 	end, { p1.cartItems })
-	local var7 = if var3 then UDim2.fromScale(1, 1) else UDim2.fromScale(constants.LANDSCAPE_SCENE_WIDTH_PERCENTAGE, 1)
-	local var8 = if var3 then UDim2.fromScale(0, 0) else UDim2.fromScale(constants.LANDSCAPE_UI_WIDTH_PERCENTAGE, 0)
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: fFlagAXMISWithOffers (copy), p1 (ref), reactModule (copy), foundationModule (copy), var2 (ref)
+	local var11 = if var7 then UDim2.fromScale(1, 1) else UDim2.fromScale(if fFlagEnableSplitPane and var5 then var6 else constants.LANDSCAPE_SCENE_WIDTH_PERCENTAGE, 1)
+	local var12 = if var7 then UDim2.fromScale(0, 0) else UDim2.fromScale(if fFlagEnableSplitPane and var5 then 1 - var6 else constants.LANDSCAPE_UI_WIDTH_PERCENTAGE, 0)
+	local var13 = reactModule.useMemo(function()
+		-- upvalues: fFlagAXMISWithOffers (copy), p1 (ref), reactModule (copy), foundationModule (copy), var4 (ref)
 		if not fFlagAXMISWithOffers then
 			return nil
 		end
@@ -90,7 +95,7 @@ return reactModule.memo(function(p1)
 				}, {
 					Content = reactModule.createElement(foundationModule.View, {
 						tag = "row gap-medium auto-xy align-y-center",
-						Position = UDim2.fromOffset(var2.Stroke.Standard, 0)
+						Position = UDim2.fromOffset(var4.Stroke.Standard, 0)
 					}, {
 						Checkbox = reactModule.createElement(foundationModule.Checkbox, {
 							label = "",
@@ -121,22 +126,23 @@ return reactModule.memo(function(p1)
 		local createElement_2
 		local blackbirdUpsellBannerProductInfo = purchasePromptModule.Utils.getBlackbirdUpsellBannerProductInfo(p1.robloxSubscriptionProducts)
 		local createElement = reactModule.createElement
-		local var10 = "Frame"
+		local var14 = "Frame"
 		local t = {
 			BackgroundTransparency = 0,
+			BackgroundColor3 = var4.Color.Surface.Surface_0.Color3,
 			BorderSizePixel = 0,
 			Transparency = 1,
+			[reactModule.Tag] = if fFlagEnableSplitPane then "data-testid=CheckoutPage" else nil,
+			Size = var11,
+			Position = var12,
 			Active = true,
-			SelectionGroup = true,
-			BackgroundColor3 = var2.Color.Surface.Surface_0.Color3,
-			Size = var7,
-			Position = var8,
 			Visible = p1.isVisible,
+			SelectionGroup = true,
 			SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 			SelectionBehaviorDown = Enum.SelectionBehavior.Stop
 		}
 		local t_1 = {
-			UIPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var4) }),
+			UIPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var8) }),
 			ListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder
@@ -184,7 +190,7 @@ return reactModule.memo(function(p1)
 				LayoutOrder = 3,
 				tag = if fFlagAXDurables2Option then "col gap-medium size-full-0 auto-y padding-x-xxlarge padding-bottom-medium" else "col gap-medium size-full-0 auto-y padding-x-xxlarge padding-bottom-medium padding-top-xxlarge"
 			}, {
-				OfferCheckboxes = if fFlagAXMISWithOffers and var9 and #cryoModule.Dictionary.keys(var9) > 0 then reactModule.createElement(reactModule.Fragment, nil, var9) else nil
+				OfferCheckboxes = if fFlagAXMISWithOffers and var13 and #cryoModule.Dictionary.keys(var13) > 0 then reactModule.createElement(reactModule.Fragment, nil, var13) else nil
 			})
 		else
 			createElement_2 = reactModule.createElement
@@ -192,10 +198,10 @@ return reactModule.memo(function(p1)
 				LayoutOrder = 3,
 				tag = if fFlagAXDurables2Option then "col gap-medium size-full-0 auto-y padding-x-xxlarge padding-bottom-medium" else "col gap-medium size-full-0 auto-y padding-x-xxlarge padding-bottom-medium padding-top-xxlarge"
 			}, {
-				OfferCheckboxes = if fFlagAXMISWithOffers and var9 and #cryoModule.Dictionary.keys(var9) > 0 then reactModule.createElement(reactModule.Fragment, nil, var9) else nil,
+				OfferCheckboxes = if fFlagAXMISWithOffers and var13 and #cryoModule.Dictionary.keys(var13) > 0 then reactModule.createElement(reactModule.Fragment, nil, var13) else nil,
 				CheckoutPageWearAfterPurchase = if not fFlagAXMISWithOffers then reactModule.createElement(foundationModule.Checkbox, {
 					LayoutOrder = 1,
-					label = var5.wearAfterPurchaseLabel,
+					label = var9.wearAfterPurchaseLabel,
 					size = foundationModule.Enums.InputSize.Small,
 					isChecked = p1.isWearAfterPurchaseChecked,
 					onActivated = p1.onWearAfterPurchaseToggle,
@@ -203,7 +209,7 @@ return reactModule.memo(function(p1)
 				}) else nil,
 				AddToMyAvatars = if not fFlagAXMISWithOffers then reactModule.createElement(foundationModule.Checkbox, {
 					LayoutOrder = 2,
-					label = if var6 then var5.addToMyAvatarsLabel else var5.addToMyMakeupLooksLabel,
+					label = if var10 then var9.addToMyAvatarsLabel else var9.addToMyMakeupLooksLabel,
 					size = foundationModule.Enums.InputSize.Small,
 					isChecked = p1.isAddToMyAvatarsChecked,
 					onActivated = p1.onAddToMyAvatarsToggle,
@@ -220,7 +226,7 @@ return reactModule.memo(function(p1)
 					Label = reactModule.createElement(foundationModule.Text, {
 						tag = "auto-xy text-body-small",
 						LayoutOrder = 1,
-						Text = var5.saveOptionsLabel
+						Text = var9.saveOptionsLabel
 					}),
 					Chevron = reactModule.createElement(foundationModule.Icon, {
 						LayoutOrder = 2,
@@ -230,7 +236,7 @@ return reactModule.memo(function(p1)
 				}) else nil,
 				WearAfterPurchaseCheckbox = if fFlagAXMISWithOffers and p1.isSaveOptionsOpen then reactModule.createElement(foundationModule.Checkbox, {
 					LayoutOrder = 2,
-					label = var5.wearAfterPurchaseLabel,
+					label = var9.wearAfterPurchaseLabel,
 					size = foundationModule.Enums.InputSize.Small,
 					isChecked = p1.isWearAfterPurchaseChecked,
 					onActivated = p1.onWearAfterPurchaseToggle,
@@ -238,7 +244,7 @@ return reactModule.memo(function(p1)
 				}) else nil,
 				AddToMyAvatarsCheckbox = if fFlagAXMISWithOffers and p1.isSaveOptionsOpen then reactModule.createElement(foundationModule.Checkbox, {
 					LayoutOrder = 3,
-					label = if var6 then var5.addToMyAvatarsLabel else var5.addToMyMakeupLooksLabel,
+					label = if var10 then var9.addToMyAvatarsLabel else var9.addToMyMakeupLooksLabel,
 					size = foundationModule.Enums.InputSize.Small,
 					isChecked = p1.isAddToMyAvatarsChecked,
 					onActivated = p1.onAddToMyAvatarsToggle,
@@ -270,35 +276,36 @@ return reactModule.memo(function(p1)
 				LayoutOrder = 3,
 				onCheckoutButtonActivated = p1.onCheckoutButtonActivated,
 				isPurchasing = p1.isPurchasing,
-				label = var5.buyLabel
+				label = var9.buyLabel
 			}) else reactModule.createElement(checkoutUnavailableButtonModule, {
 				LayoutOrder = 3,
 				onActivated = p1.onUnavailableButtonActivated,
-				label = var5.buyLabel
+				label = var9.buyLabel
 			}),
 			BlackbirdUpsellBanner = if p1.shouldShowBlackbirdUpsellBanner and blackbirdUpsellBannerProductInfo then reactModule.createElement(blackbirdUpsellBanner, {
 				LayoutOrder = 4,
 				productInfo = blackbirdUpsellBannerProductInfo,
-				onActivated = var1
+				onActivated = var3
 			}) else nil
 		})
 		
-		return createElement(var10, t, t_1)
+		return createElement(var14, t, t_1)
 	else
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 0,
+			BackgroundColor3 = var4.Color.Surface.Surface_0.Color3,
 			BorderSizePixel = 0,
 			Transparency = 1,
+			[reactModule.Tag] = if fFlagEnableSplitPane then "data-testid=CheckoutPage" else nil,
+			Size = var11,
+			Position = var12,
 			Active = true,
-			SelectionGroup = true,
-			BackgroundColor3 = var2.Color.Surface.Surface_0.Color3,
-			Size = var7,
-			Position = var8,
 			Visible = p1.isVisible,
+			SelectionGroup = true,
 			SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 			SelectionBehaviorDown = Enum.SelectionBehavior.Stop
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var4) }),
+			UIPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var8) }),
 			ListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder
@@ -335,7 +342,7 @@ return reactModule.memo(function(p1)
 			}, {
 				CheckoutPageWearAfterPurchase = reactModule.createElement(foundationModule.Checkbox, {
 					LayoutOrder = 1,
-					label = var5.wearAfterPurchaseLabel,
+					label = var9.wearAfterPurchaseLabel,
 					size = foundationModule.Enums.InputSize.Small,
 					isChecked = p1.isWearAfterPurchaseChecked,
 					onActivated = p1.onWearAfterPurchaseToggle,
@@ -343,7 +350,7 @@ return reactModule.memo(function(p1)
 				}),
 				AddToMyAvatars = reactModule.createElement(foundationModule.Checkbox, {
 					LayoutOrder = 2,
-					label = if var6 then var5.addToMyAvatarsLabel else var5.addToMyMakeupLooksLabel,
+					label = if var10 then var9.addToMyAvatarsLabel else var9.addToMyMakeupLooksLabel,
 					size = foundationModule.Enums.InputSize.Small,
 					isChecked = p1.isAddToMyAvatarsChecked,
 					onActivated = p1.onAddToMyAvatarsToggle,
@@ -353,7 +360,7 @@ return reactModule.memo(function(p1)
 			CheckoutPageBuyBorder = reactModule.createElement(foundationModule.View, {
 				LayoutOrder = 4,
 				Size = UDim2.new(1, 0, 0, 1),
-				backgroundStyle = var2.Color.Stroke.Muted
+				backgroundStyle = var4.Color.Stroke.Muted
 			}),
 			CheckoutPageBuySection = reactModule.createElement(foundationModule.View, {
 				tag = "size-full-0 auto-y col gap-medium padding-xxlarge",
@@ -369,10 +376,10 @@ return reactModule.memo(function(p1)
 				CheckoutBuyButton = if p1.canPurchase then reactModule.createElement(checkoutBuyButtonModule, {
 					onCheckoutButtonActivated = p1.onCheckoutButtonActivated,
 					isPurchasing = p1.isPurchasing,
-					label = var5.buyLabel
+					label = var9.buyLabel
 				}) else reactModule.createElement(checkoutUnavailableButtonModule, {
 					onActivated = p1.onUnavailableButtonActivated,
-					label = var5.buyLabel
+					label = var9.buyLabel
 				})
 			})
 		})

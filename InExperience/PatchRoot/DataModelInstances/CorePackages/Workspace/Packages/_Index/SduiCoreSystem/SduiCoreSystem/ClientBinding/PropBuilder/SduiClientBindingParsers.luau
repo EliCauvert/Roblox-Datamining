@@ -8,7 +8,6 @@ local getSduiTokensStoreModule = require(sduiCoreSystem.ClientBinding.getSduiTok
 local protoVariableMapperModule = require(sduiCoreSystem.ClientBinding.ProtoVariableMapper)
 local splitDottedPathModule = require(sduiCoreSystem.ClientBinding.splitDottedPath)
 local parsePymkItemsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.parsePymkItems)
-local fFlagSduiStringPropToString = require(parent.SharedFlags).FFlagSduiStringPropToString
 local fFlagSduiPropParsersShouldHandleTokens = require(parent.SharedFlags).FFlagSduiPropParsersShouldHandleTokens
 local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
 local fFlagSduiUnwrapStructPropEnvelope = require(parent.SharedFlags).FFlagSduiUnwrapStructPropEnvelope
@@ -320,7 +319,7 @@ return {
 	parseArrayOfStruct = parseArrayOfStruct,
 	parsePymkItems = parsePymkItemsModule,
 	parseStringArray = parseStringArray,
-	parseToString = if fFlagSduiStringPropToString then parseToString else nil,
+	parseToString = parseToString,
 	parseColor3 = if fFlagLuaAppSduiColorPropMigration then parseColor3 else nil,
 	parseGradient = if fFlagSduiParseProtoGradientFields then function(p8)
 		-- upvalues: parseStruct (ref), t (ref), parseColor3 (ref)

@@ -15,11 +15,14 @@ return function(p1)
 	local var1, var2
 	local var3 = useTokens()
 	local var4 = reactModule.useCallback(function()
-		-- upvalues: thirdPartyUserService (copy)
+		-- upvalues: p1 (ref), thirdPartyUserService (copy)
+		if p1.onActivated then
+			p1.onActivated()
+		end
 		if thirdPartyUserService then
 			thirdPartyUserService:ShowAccountPicker()
 		end
-	end, {})
+	end, { p1.onActivated })
 	local var5 = useLocalization({ dividerText = p1.dividerTextKey })
 	local _ = nil
 	local _ = nil
@@ -32,7 +35,7 @@ return function(p1)
 		var2 = "content-default"
 	end
 	return reactModule.createElement(view, {
-		tag = "col gap-xxlarge align-x-center auto-xy size-full-0",
+		tag = "col align-x-center gap-xxlarge size-full-0 auto-xy",
 		LayoutOrder = p1.layoutOrder
 	}, {
 		Divider = reactModule.createElement(dividerWithTextModule, {

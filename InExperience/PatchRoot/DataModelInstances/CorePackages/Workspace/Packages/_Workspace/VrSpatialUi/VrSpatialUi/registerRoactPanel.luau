@@ -66,7 +66,7 @@ local _ = function(value)
 	part.Parent = parent
 end
 
-return function(p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: constantsModule (ref), fFlagEnableSpatialUIBottomBarFixPlaceFilterModule (ref), httpService (ref), UIManagerModule (ref)
 	local t = nil
 	local var1 = constantsModule.ROACT_PANEL_UIGROUP_MAP[p2]
@@ -78,6 +78,7 @@ return function(p1, p2, p3)
 	end
 	local t_1 = {
 		headScale = 1,
+		keepVisibleWhenTopBarHidden = p4,
 		panelObject = p1.current,
 		uiType = constantsModule.SpatialUIType.SpatialUIRoact,
 		panelType = p2,

@@ -9,6 +9,7 @@ return function(p1)
 	-- upvalues: reactModule (ref), foundationModule (ref), fFlagEnableFlyoutUncheckedBadge (ref), builderIconsModule (ref), iconSize (ref)
 	return reactModule.createElement(foundationModule.View, {
 		tag = "position-center-right anchor-center-right auto-xy radius-circle bg-action-standard padding-xsmall",
+		testId = "--core-ui-flyout-switch-account-chevron",
 		onActivated = p1.onActivated,
 		LayoutOrder = if fFlagEnableFlyoutUncheckedBadge then p1.layoutOrder else nil
 	}, {

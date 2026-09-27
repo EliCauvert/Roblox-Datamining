@@ -104,7 +104,6 @@
 	Groups = "Groups",
 	ProfilePlatform = "ProfilePlatform",
 	TransferRobuxFlow = "TransferRobuxFlow",
-	VideoFullscreen = "VideoFullscreen",
 	FeatureTileAdPlayer = "FeatureTileAdPlayer",
 	SocialUnableToJoinExperience = "SocialUnableToJoinExperience",
 	SocialPurchaseExperience = "SocialPurchaseExperience",
@@ -177,5 +176,6 @@
 	SocialTabsMutuals = "SocialTabsMutuals",
 	SocialTabsFriends = "SocialTabsFriends",
 	FriendsActivityFeed = "FriendsActivityFeed",
-	Schools = "Schools"
+	Schools = "Schools",
+	PlusReferralDashboard = "PlusReferralDashboard"
 }

@@ -59,6 +59,7 @@ return {
 	getSduiPageEntrySnackbarStore = require(script.getSduiPageEntrySnackbarStore),
 	usePageEntrySnackbar = require(script.usePageEntrySnackbar),
 	useComponentConfig = require(script.hooks.useComponentConfig),
+	usePreferredTextSizeLineBudget = require(script.hooks.usePreferredTextSizeLineBudget),
 	useEntrySurfacing = require(script.hooks.useEntrySurfacing),
 	useInputData = require(script.hooks.useInputData),
 	useSduiPageScopeField = require(script.hooks.useSduiPageScopeField),
@@ -75,5 +76,6 @@ return {
 	SduiCapabilities = require(parent.SduiCoreSystem).SduiCapabilities,
 	getSduiDataBinder = require(parent.SduiCoreSystem).getSduiDataBinder,
 	streamingFeedMergeStrategy = require(script.streamingFeedMergeStrategy),
-	buildSduiCollectionInfo = require(script.buildSduiCollectionInfo)
+	buildSduiCollectionInfo = require(script.buildSduiCollectionInfo),
+	getPreferredTextSizeLineBudget = require(script.getPreferredTextSizeLineBudget)
 }

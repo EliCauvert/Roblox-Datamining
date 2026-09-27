@@ -5,9 +5,12 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local getImageData = require(parent.RobloxAppAssets).GetImageData
 local roactModule = require(parent.Roact)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), imageSetLabel (ref), getImageData (ref), roactModule (ref)
+	-- upvalues: useStyle (ref), reactModule (ref), imageSetLabel (ref), getImageData (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), roactModule (ref)
 	local var1 = useStyle()
 	local tokens = var1.Tokens
 	local t = {
@@ -16,6 +19,7 @@ return function(p1)
 			FieldValue = { ContentColor = tokens.Color.Content.Emphasis }
 		}
 	}
+	local font = p1.font or t.Base.Field.Typography.Font
 	
 	return reactModule.createElement(imageSetLabel, {
 		ZIndex = 2,
@@ -32,7 +36,8 @@ return function(p1)
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
 			Text = p1.countryPrefix,
-			Font = p1.font or t.Base.Field.Typography.Font,
+			Font = if foundationFontFaceMigration then nil else font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(font) else nil,
 			TextSize = p1.textSize or t.Base.Field.Typography.FontSize,
 			TextColor3 = t.Base.FieldValue.ContentColor.Color3,
 			TextTransparency = t.Base.FieldValue.ContentColor.Transparency,

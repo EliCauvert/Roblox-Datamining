@@ -14,5 +14,7 @@
 	PartyNotificationPush = "PartyNotificationPush",
 	ChatDetailsParticipantDialog = "ChatDetailsParticipantDialog",
 	SchoolMemberList = "SchoolMemberList",
+	SocialTabsPage = "SocialTabsPage",
+	GameJoinCard = "GameJoinCard",
 	Unknown = "Unknown"
 }

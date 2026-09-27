@@ -12,6 +12,13 @@ local t = {
 local t_1 = { left = "align-x-left", center = "align-x-center" }
 local t_2 = { top = "align-y-top", center = "align-y-center" }
 
+local function enumHeaders(p1)
+	-- upvalues: dashModule (ref)
+	return dashModule.map(p1, function(p2)
+		return tostring(p2)
+	end)
+end
+
 local function matrixLabel(p1)
 	-- upvalues: reactModule (ref), textModule (ref)
 	return reactModule.createElement(textModule, {
@@ -107,7 +114,7 @@ return {
 		local labelColumnWidth = p4.labelColumnWidth or 80
 		local headerTextAlign = p4.headerTextAlign or "center"
 		local cellAlign = p4.cellAlign or "center"
-		local rowAlign = p4.rowAlign or "center"
+		local rowAlign = p4.rowAlign or "top"
 		local rowGap = p4.rowGap or "large"
 		local var4 = t[headerTextAlign]
 		local var5 = t_1[cellAlign]
@@ -146,6 +153,7 @@ return {
 		end
 		return reactModule.createElement(viewModule, { tag = "col auto-xy" }, t_3)
 	end,
+	enumHeaders = enumHeaders,
 	matrixLabel = matrixLabel,
 	matrixInfoLabel = matrixInfoLabel
 }

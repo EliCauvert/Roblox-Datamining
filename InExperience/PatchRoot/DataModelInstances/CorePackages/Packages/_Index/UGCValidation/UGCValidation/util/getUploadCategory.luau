@@ -2,11 +2,10 @@
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local constantsModule = require(parent.Constants)
 local constantsInterfaceModule = require(parent.ConstantsInterface)
-local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
 local parts = string.split(require(parent.flags.getFStringUGCLCAllowedAssetTypeIds)(), ",")
 
 return function(p1, p2, p3)
-	-- upvalues: validationEnumsModule (ref), getFFlagUGCValidationAnimationPackSupportModule (ref), constantsModule (ref), parts (ref), constantsInterfaceModule (ref)
+	-- upvalues: validationEnumsModule (ref), constantsModule (ref), parts (ref), constantsInterfaceModule (ref)
 	if p3 == nil then
 		assert(p2)
 		local ANIMATION = nil
@@ -21,7 +20,7 @@ return function(p1, p2, p3)
 			ANIMATION = validationEnumsModule.UploadCategory.RIGID_ACCESSORY
 		elseif constantsInterfaceModule.isMakeupAsset(p2) then
 			ANIMATION = validationEnumsModule.UploadCategory.MAKEUP
-		elseif getFFlagUGCValidationAnimationPackSupportModule() and constantsModule.ANIMATION_ASSET_INFO and constantsModule.ANIMATION_ASSET_INFO[p2] then
+		elseif constantsModule.ANIMATION_ASSET_INFO and constantsModule.ANIMATION_ASSET_INFO[p2] then
 			ANIMATION = validationEnumsModule.UploadCategory.ANIMATION
 		end
 		if ANIMATION == nil then
@@ -29,6 +28,6 @@ return function(p1, p2, p3)
 		end
 		return ANIMATION
 	else
-		return if p3 == Enum.BundleType.BodyParts then validationEnumsModule.UploadCategory.FULL_BODY elseif getFFlagUGCValidationAnimationPackSupportModule() and p3 == Enum.BundleType.Animations then validationEnumsModule.UploadCategory.ANIMATION_PACK else validationEnumsModule.UploadCategory.BOTH_SHOES
+		return if p3 == Enum.BundleType.BodyParts then validationEnumsModule.UploadCategory.FULL_BODY elseif p3 == Enum.BundleType.Animations then validationEnumsModule.UploadCategory.ANIMATION_PACK else validationEnumsModule.UploadCategory.BOTH_SHOES
 	end
 end

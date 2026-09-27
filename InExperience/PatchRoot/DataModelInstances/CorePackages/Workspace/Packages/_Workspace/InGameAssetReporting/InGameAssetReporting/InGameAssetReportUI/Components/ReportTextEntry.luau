@@ -1,9 +1,13 @@
 ﻿local parent = script:FindFirstAncestor("InGameAssetReporting").Parent
 local reactModule = require(parent.React)
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
+local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+local useStyle = UIBloxModule.Core.Style.useStyle
 
 return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref)
+	-- upvalues: useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = useStyle()
 	local theme = var1.Theme
 	
@@ -26,7 +30,8 @@ return function(p1)
 			AnchorPoint = Vector2.new(0, 0),
 			BackgroundColor3 = theme.BackgroundDefault.Color,
 			PlaceholderText = p1.placeholderText,
-			Font = var1.Font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
 			Text = p1.text,
 			TextSize = var1.Font.BaseSize,
 			TextColor3 = theme.TextDefault.Color,

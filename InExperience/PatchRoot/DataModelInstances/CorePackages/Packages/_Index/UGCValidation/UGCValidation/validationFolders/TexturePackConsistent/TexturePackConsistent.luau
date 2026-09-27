@@ -4,7 +4,6 @@ local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local texturePackUtilsModule = require(parent.util.TexturePackUtils)
-local getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule = require(parent.flags.getFFlagUGCValidateMigrateSurfaceAppearanceMeshQuality)
 local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCValidateTexturePack)
 local getFFlagUGCValidateTexturePackOnRCCOnlyModule = require(parent.flags.getFFlagUGCValidateTexturePackOnRCCOnly)
 local getFFlagUGCValidationAllowFullVaasModule = require(parent.flags.getFFlagUGCValidationAllowFullVaas)
@@ -17,7 +16,6 @@ local t = {
 local t_1 = { InExpServer = true, InExpClient = true }
 
 return {
-	fflag = getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule,
 	categories = {
 		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD,

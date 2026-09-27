@@ -11,4 +11,10 @@ if game:DefineFastFlag("EnableExperienceGenericChallengeRenderingOnLoadingScript
 		require(corePackagesService.Workspace.Packages.GenericChallenges).Middleware.InitExperienceChallengeInterceptor()
 	end)()
 end
+if require(corePackagesService.Workspace.Packages.BuildExperiencePlaytestLaunch.teamCreateUtils).isViewer() then
+	require(corePackagesService.Packages.UIBlox).init(require(corePackagesService.Workspace.Packages.CoreScriptsInitializer).UIBloxInGameConfig)
+	require(corePackagesService.Workspace.Packages.BuildExperience.mountTeamCreateViewer)(placeId)
+	
+	return
+end
 coroutine.wrap(require(corePackagesService.Workspace.Packages.ExperienceLoadingScript).loadingScript)(placeId, 72)

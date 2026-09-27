@@ -9,6 +9,7 @@ local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCrea
 local normalizeMomentMetadataModule = require(momentsCreation.Utils.normalizeMomentMetadata)
 local getFFlagMomentsCreationNormalizeMetadataEnumsModule = require(momentsCreation.Flags.GetFFlagMomentsCreationNormalizeMetadataEnums)
 local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
+local getFFlagMomentsUseMomentsServiceForUpload = momentsCommonModule.Flags.GetFFlagMomentsUseMomentsServiceForUpload
 local makePostMetadataModule = require(momentsCreation.Utils.makePostMetadata)
 local _game = game
 local captureServiceUploadUniverseIdOverrideEngineFeature = game:GetEngineFeature("CaptureServiceUploadUniverseIdOverride")
@@ -27,8 +28,8 @@ local function _(p1)
 	return p1
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: captureServiceUploadUniverseIdOverrideEngineFeature (ref), _game (ref), getFFlagMomentsCreationNormalizeMetadataEnumsModule (ref), normalizeMomentMetadataModule (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadataModule (ref), captureService (ref), makeCreationEventFieldsModule (ref), fireAnalyticsEventModule (ref), eventNames (ref)
+return function(p1, p2, p3, p4, p5)
+	-- upvalues: captureServiceUploadUniverseIdOverrideEngineFeature (ref), _game (ref), getFFlagMomentsCreationNormalizeMetadataEnumsModule (ref), normalizeMomentMetadataModule (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadataModule (ref), getFFlagMomentsUseMomentsServiceForUpload (ref), captureService (ref), makeCreationEventFieldsModule (ref), fireAnalyticsEventModule (ref), eventNames (ref)
 	local gameId, var1
 	if captureServiceUploadUniverseIdOverrideEngineFeature then
 		gameId = _game.GameId
@@ -51,9 +52,14 @@ return function(p1, p2, p3, p4)
 	local _ = nil
 	
 	if getFFlagMomentsUseUploadPostAsync() then
-		local var3 = makePostMetadataModule(p2)
+		local var3 = makePostMetadataModule(p2, if getFFlagMomentsUseMomentsServiceForUpload() then p1 else nil)
 		local ok, status = pcall(function()
-			-- upvalues: captureService (copy), p1 (ref), var3 (ref)
+			-- upvalues: getFFlagMomentsUseMomentsServiceForUpload (copy), p5 (ref), var3 (ref), captureService (copy), p1 (ref)
+			if getFFlagMomentsUseMomentsServiceForUpload() then
+				(p5 or game:GetService("MomentsService")):CreatePostAsync(var3)
+				
+				return
+			end
 			captureService:UploadPostAsync(p1, var3)
 		end)
 		gameId = ok

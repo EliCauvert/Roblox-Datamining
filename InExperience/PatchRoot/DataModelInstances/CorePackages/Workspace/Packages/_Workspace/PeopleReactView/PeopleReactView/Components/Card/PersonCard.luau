@@ -45,9 +45,14 @@ return reactModule.memo(function(p1)
 			CardThumbnail = reactModule.createElement(cardThumbnailModule, {
 				layoutOrder = 1,
 				person = p1.person,
-				shouldShowMenu = if getFFlagPeoplePageLazyRenderCards() then p1.shouldShowMenu else nil
+				shouldShowMenu = if getFFlagPeoplePageLazyRenderCards() then p1.shouldShowMenu else nil,
+				isCompactCardLayout = p1.isCompactCardLayout
 			}),
-			CardDetails = reactModule.createElement(cardDetailsModule, { layoutOrder = 2, person = p1.person })
+			CardDetails = reactModule.createElement(cardDetailsModule, {
+				layoutOrder = 2,
+				person = p1.person,
+				isCompactCardLayout = p1.isCompactCardLayout
+			})
 		}),
 		CardTooltip = if var3 then reactModule.createElement(cardTooltipModule, {
 			action = reactModule.useCallback(function()

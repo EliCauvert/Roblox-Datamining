@@ -4,26 +4,14 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local useUserProfileInfoModule = require(buildExperience.Components.UserPicker.useUserProfileInfo)
+local privateInviteUserRowModule = require(script.Parent.PrivateInviteUserRow)
 local dialog = foundationModule.Dialog
-local text = foundationModule.Text
 local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local dialogSize = foundationModule.Enums.DialogSize
 
-local function FailedUserRow(p1)
-	-- upvalues: useUserProfileInfoModule (ref), reactModule (ref), text (ref)
-	local var1 = useUserProfileInfoModule(p1.userId)
-	
-	return reactModule.createElement(text, {
-		tag = "size-full-0 auto-y text-body-medium text-align-x-left content-default",
-		LayoutOrder = p1.layoutOrder,
-		Text = if var1.displayName ~= "" then p1.unknownText else var1.displayName
-	})
-end
-
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), FailedUserRow (ref), buttonVariant (ref), dialog (ref), dialogSize (ref), view (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), privateInviteUserRowModule (ref), buttonVariant (ref), dialog (ref), dialogSize (ref), view (ref)
 	local var1 = useLocalization({
 		body = localizationStringsModule.PRIVATE_INVITES_SEND_FAILURE_BODY,
 		hint = localizationStringsModule.PRIVATE_INVITES_SEND_FAILURE_HINT,
@@ -34,7 +22,7 @@ return function(p1)
 	local t = {}
 	
 	for i, v in p1.failedUserIds do
-		t[`user-{v}`] = reactModule.createElement(FailedUserRow, {
+		t[`user-{v}`] = reactModule.createElement(privateInviteUserRowModule, {
 			userId = v,
 			layoutOrder = i,
 			unknownText = var1.unknownUser
@@ -42,8 +30,6 @@ return function(p1)
 	end
 	return reactModule.createElement(dialog.Root, {
 		testId = "build-private-invite-send-failure-dialog",
-		disablePortal = p1.disablePortal == true,
-		hasBackdrop = p1.hasBackdrop == nil or p1.hasBackdrop,
 		onClose = p1.onCancel,
 		size = dialogSize.Small
 	}, {

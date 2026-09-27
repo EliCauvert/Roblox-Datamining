@@ -14,6 +14,7 @@ local showOnboardingModalThunkModule = require(parent.Thunks.ShowOnboardingModal
 local withLocalization = require(corePackagesService.Workspace.Packages.Localization).withLocalization
 local onboardingModal = roactModule.PureComponent:extend("OnboardingModal")
 local fFlagTopBarSignalizeScreenSize = require(corePackagesService.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
+local getFFlagEnableSendImageFeedbackToBackendModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.GetFFlagEnableSendImageFeedbackToBackend)
 
 function onboardingModal.init(p1)
 	-- upvalues: experienceStateCaptureService (ref), fFlagTopBarSignalizeScreenSize (ref), displayModule (ref), signalsModule (ref)
@@ -44,12 +45,12 @@ function onboardingModal.willUnmount(p1)
 end
 
 function onboardingModal.render(p1)
-	-- upvalues: withLocalization (ref), roactModule (ref), modalDialogModule (ref), fFlagTopBarSignalizeScreenSize (ref), buttonStack (ref), buttonType (ref), themedTextLabelModule (ref)
+	-- upvalues: withLocalization (ref), getFFlagEnableSendImageFeedbackToBackendModule (ref), roactModule (ref), modalDialogModule (ref), fFlagTopBarSignalizeScreenSize (ref), buttonStack (ref), buttonType (ref), themedTextLabelModule (ref)
 	return withLocalization({
 		mainHeader = "CoreScripts.Feedback.Onboarding.MainHeader",
-		instructionLabel = "CoreScripts.Feedback.Onboarding.Instructions",
 		cancel = "CoreScripts.Feedback.Onboarding.Cancel",
-		start = "CoreScripts.Feedback.Onboarding.Start"
+		start = "CoreScripts.Feedback.Onboarding.Start",
+		instructionLabel = if getFFlagEnableSendImageFeedbackToBackendModule() then "CoreScripts.Feedback.Onboarding.InstructionsWithImage" else "CoreScripts.Feedback.Onboarding.Instructions"
 	})(function(p2)
 		-- upvalues: roactModule (copy), modalDialogModule (copy), p1 (ref), fFlagTopBarSignalizeScreenSize (copy), buttonStack (copy), buttonType (copy), themedTextLabelModule (copy)
 		return roactModule.createElement(modalDialogModule, {

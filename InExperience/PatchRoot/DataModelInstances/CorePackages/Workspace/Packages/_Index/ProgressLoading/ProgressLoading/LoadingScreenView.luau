@@ -16,6 +16,8 @@ local foundationModule = require(parent.Foundation)
 local iconSize = foundationModule.Enums.IconSize
 local loading = foundationModule.Loading
 local foundationProvider = foundationModule.FoundationProvider
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local localization = require(parent.InExperienceLocales).Localization
 local localizationProvider = require(parent.Localization).LocalizationProvider
 local autoTranslateBadgeModule = require(progressLoading.Components.AutoTranslateBadge)
@@ -452,7 +454,7 @@ function loadingScreenView.renderPlaceIcon(p1, p2)
 end
 
 function loadingScreenView.renderInfoFrame(p1, p2)
-	-- upvalues: verifiedBadgesModule (ref), list (ref), roactModule (ref), var4 (ref)
+	-- upvalues: verifiedBadgesModule (ref), list (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), var4 (ref)
 	local productInfo = p1.props.productInfo
 	local var8 = if productInfo then productInfo.Name else ""
 	local var9 = if productInfo then productInfo.Creator.Name else ""
@@ -500,7 +502,8 @@ function loadingScreenView.renderInfoFrame(p1, p2)
 				Size = UDim2.fromScale(0.8, 0),
 				AnchorPoint = Vector2.new(0.5, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = p2.Font.Title.Font,
+				Font = if foundationFontFaceMigration then nil else p2.Font.Title.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.HeadingLarge.Font) else nil,
 				TextSize = p1.bindings.placeTextSize,
 				TextColor3 = p2.Theme.TextEmphasis.Color,
 				Text = var8,
@@ -521,7 +524,8 @@ function loadingScreenView.renderInfoFrame(p1, p2)
 				Size = UDim2.fromScale(0.6, 0),
 				AnchorPoint = Vector2.new(0.5, 1),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = p2.Font.CaptionBody.Font,
+				Font = if foundationFontFaceMigration then nil else p2.Font.CaptionBody.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodySmall.Font) else nil,
 				TextSize = p1.bindings.creatorTextSize,
 				TextColor3 = p2.Theme.TextDefault.Color,
 				Text = var9,
@@ -627,7 +631,7 @@ function loadingScreenView.renderCloseBtn(p1, _)
 end
 
 function loadingScreenView.renderServerFrame(p1, p2)
-	-- upvalues: var3 (ref), roactModule (ref), var1 (ref), coreGuiService (ref)
+	-- upvalues: var3 (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), var1 (ref), coreGuiService (ref)
 	local serverStatusText = p1.state.serverStatusText
 	local isSubjectToChinaPolicies = p1.props.isSubjectToChinaPolicies
 	local var8 = if var3 then 16 else 12
@@ -651,7 +655,8 @@ function loadingScreenView.renderServerFrame(p1, p2)
 			ZIndex = 2,
 			Size = UDim2.new(1, 0, 0, 2 * var9),
 			Position = UDim2.new(0, 0, 1, -4 * var8 - 2 * var9),
-			Font = p2.Font.Footer.Font,
+			Font = if foundationFontFaceMigration then nil else p2.Font.Footer.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.CaptionSmall.Font) else nil,
 			TextSize = var9,
 			TextColor3 = p2.Theme.TextDefault.Color,
 			Text = var1:Format("Authentication.Login.WeChat.AntiAddictionText"),
@@ -663,7 +668,8 @@ function loadingScreenView.renderServerFrame(p1, p2)
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 4 * var8),
 			Position = UDim2.new(0, 0, 1, -2 * var8),
-			Font = p2.Font.Footer.Font,
+			Font = if foundationFontFaceMigration then nil else p2.Font.Footer.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.CaptionSmall.Font) else nil,
 			TextSize = var8,
 			TextWrapped = true,
 			TextScaled = false,
@@ -680,7 +686,7 @@ function loadingScreenView.renderServerFrame(p1, p2)
 end
 
 function loadingScreenView.renderGamepadCancelBtn(p1, p2)
-	-- upvalues: responsiveModule (ref), roactModule (ref), var1 (ref)
+	-- upvalues: responsiveModule (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), var1 (ref)
 	return p1.props.preferredInputRef.current == responsiveModule.Input.Directional and (not p1.state.gamepadCancelPressed and roactModule.createElement("Frame", {
 		Name = "GamepadCancelFrame",
 		BackgroundTransparency = 1,
@@ -708,7 +714,8 @@ function loadingScreenView.renderGamepadCancelBtn(p1, p2)
 			ZIndex = 2,
 			LayoutOrder = 1,
 			Size = UDim2.fromScale(1, 1),
-			Font = p2.Font.SubHeader1.Font,
+			Font = if foundationFontFaceMigration then nil else p2.Font.SubHeader1.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
 			TextColor3 = p2.Theme.TextEmphasis.Color,
 			Text = var1:Format("CoreScripts.TopBar.Back"),
 			TextXAlignment = Enum.TextXAlignment.Left,

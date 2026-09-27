@@ -2,7 +2,10 @@
 local parent = phoneUpsell.Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
-local checkbox = require(parent.Foundation).Checkbox
+local foundationModule = require(parent.Foundation)
+local checkbox = foundationModule.Checkbox
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useStyle = UIBloxModule.Core.Style.useStyle
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -43,7 +46,7 @@ local function getButtonStackProps(p1, p2, p3, p4, p5, p6, p7)
 end
 
 return function(p1)
-	-- upvalues: mergePropsModule (ref), t (ref), reactModule (ref), useStyle (ref), useLocalization (ref), interactiveAlert (ref), getButtonStackProps (ref), getFFlagDisablePVUpsellDataConsent (ref), checkbox (ref), linkButton (ref)
+	-- upvalues: mergePropsModule (ref), t (ref), reactModule (ref), useStyle (ref), useLocalization (ref), interactiveAlert (ref), getButtonStackProps (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), getFFlagDisablePVUpsellDataConsent (ref), checkbox (ref), linkButton (ref)
 	local var1 = mergePropsModule(t, p1)
 	local var2, var3 = reactModule.useState(false)
 	local t_1 = {
@@ -73,7 +76,7 @@ return function(p1)
 		buttonStackInfo = getButtonStackProps(var5.buttonKey, var4.Tokens.Size.Size_1200, var1.onButtonClick, var1.isButtonDisabled, var5.extraButtonKey, var1.onExtraButtonClick, var1.isExtraButtonDisabled),
 		onCloseClicked = var1.onClose,
 		middleContent = function()
-			-- upvalues: reactModule (copy), var5 (ref), baseSize (ref), var4 (ref)
+			-- upvalues: reactModule (copy), var5 (ref), baseSize (ref), var4 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -88,7 +91,8 @@ return function(p1)
 					TextSize = baseSize,
 					TextColor3 = var4.Theme.TextDefault.Color,
 					TextTransparency = var4.Theme.TextDefault.Transparency,
-					Font = var4.Font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else var4.Font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var4.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
@@ -96,7 +100,7 @@ return function(p1)
 			})
 		end,
 		footerContent = if not getFFlagDisablePVUpsellDataConsent() then function()
-			-- upvalues: reactModule (copy), var4 (ref), var1 (ref), size150 (ref), checkbox (copy), var3 (ref), var2 (ref), var5 (ref), baseSize (ref), relativeSize (ref), linkButton (copy)
+			-- upvalues: reactModule (copy), var4 (ref), var1 (ref), size150 (ref), checkbox (copy), var3 (ref), var2 (ref), var5 (ref), baseSize (ref), relativeSize (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), linkButton (copy)
 			local frame
 			local createElement = reactModule.createElement
 			local var6 = "Frame"
@@ -135,7 +139,8 @@ return function(p1)
 						TextSize = baseSize * relativeSize,
 						TextColor3 = var4.Theme.TextDefault.Color,
 						TextTransparency = var4.Theme.TextDefault.Transparency,
-						Font = var4.Font.Body.Font,
+						Font = if foundationFontFaceMigration then nil else var4.Font.Body.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(var4.Tokens.Typography.BodyLarge.Font) else nil,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						Size = UDim2.new(1, -(26 + size150), 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
@@ -150,7 +155,8 @@ return function(p1)
 					TextSize = baseSize * relativeSize,
 					TextColor3 = var4.Theme.TextDefault.Color,
 					TextTransparency = var4.Theme.TextDefault.Transparency,
-					Font = var4.Font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else var4.Font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var4.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
@@ -185,7 +191,8 @@ return function(p1)
 					TextSize = baseSize * relativeSize,
 					TextColor3 = var4.Theme.TextDefault.Color,
 					TextTransparency = var4.Theme.TextDefault.Transparency,
-					Font = var4.Font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else var4.Font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var4.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					AutomaticSize = Enum.AutomaticSize.XY
 				}),

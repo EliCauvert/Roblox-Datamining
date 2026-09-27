@@ -22,7 +22,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), controlStateModule (ref), textModule (ref), withCommonPropsModule (ref), labelText (ref), stateLayerAffordanceModule (ref), flagsModule (ref), inputLabelSizeModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), controlStateModule (ref), textModule (ref), withCommonPropsModule (ref), labelText (ref), stateLayerAffordanceModule (ref), inputLabelSizeModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	
 	return reactModule.createElement(textModule, withCommonPropsModule(var1, {
@@ -39,7 +39,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		end, { var1.onHover }) else nil,
 		stateLayer = { affordance = stateLayerAffordanceModule.None },
 		textStyle = var1.textStyle,
-		tag = if flagsModule.FoundationInternalInputBeta then {
+		tag = {
 			["size-0 auto-xy text-wrap text-align-x-left text-align-y-top"] = true,
 			["padding-top-xxsmall"] = var1.size ~= inputLabelSizeModule.XSmall,
 			["content-muted"] = var1.isDisabled,
@@ -47,13 +47,6 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			["text-body-small"] = if var1.size ~= inputLabelSizeModule.Small then var1.size == inputLabelSizeModule.XSmall else true,
 			["text-body-medium"] = var1.size == inputLabelSizeModule.Medium,
 			["text-body-large"] = var1.size == inputLabelSizeModule.Large
-		} else {
-			["size-0 auto-xy text-wrap text-align-x-left text-align-y-top"] = true,
-			["content-muted"] = var1.isDisabled,
-			["content-default"] = not var1.isDisabled,
-			["text-title-small"] = if var1.size ~= inputLabelSizeModule.Small then var1.size == inputLabelSizeModule.XSmall else true,
-			["text-title-medium"] = var1.size == inputLabelSizeModule.Medium,
-			["text-title-large"] = var1.size == inputLabelSizeModule.Large
 		},
 		ref = p2
 	}))

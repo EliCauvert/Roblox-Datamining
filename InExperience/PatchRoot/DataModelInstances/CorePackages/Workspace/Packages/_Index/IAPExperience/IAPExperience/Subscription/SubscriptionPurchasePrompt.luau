@@ -9,6 +9,7 @@ local appPage = require(parent_1.RobloxAppEnums).AppPage
 local textService = game:GetService("TextService")
 local verifiedBadgesModule = require(parent_1.VerifiedBadges)
 local reactModule = require(parent_1.React)
+local getTextSize = require(parent_1.Style).GetTextSize
 local UIBloxModule = require(parent_1.UIBlox)
 local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
 local getPartialPageModalMiddleContentWidth = UIBloxModule.App.Dialog.Modal.getPartialPageModalMiddleContentWidth
@@ -20,6 +21,8 @@ local view = foundationModule.View
 local text = foundationModule.Text
 local enums = foundationModule.Enums
 local getIconRichText = foundationModule.Utility.getIconRichText
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useTokens = foundationModule.Hooks.useTokens
 local multiTextLocalizerModule = require(parent.Locale.MultiTextLocalizer)
 local subscriptionTitleModule = require(parent.Subscription.SubscriptionTitle)
@@ -28,7 +31,7 @@ local fFlagHideDevSubsPriceIfSubscribed = require(parent.Parent.SharedFlags).FFl
 local fFlagEnableDevSubsFastFollowFixes = require(parent.Parent.SharedFlags).FFlagEnableDevSubsFastFollowFixes
 
 local function generateTestmodeDisclaimer(p1, p2, p3, p4)
-	-- upvalues: textService (ref), reactModule (ref)
+	-- upvalues: foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), reactModule (ref), normalizeFontFace (ref)
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
@@ -43,8 +46,9 @@ local function generateTestmodeDisclaimer(p1, p2, p3, p4)
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			TextSize = 12,
-			Size = UDim2.new(1, 0, 0, textService:GetTextSize(p1, 12, p2.Footer.Font, Vector2.new(p4, 1e999)).Y + 2),
-			Font = p2.Footer.Font,
+			Size = UDim2.new(1, 0, 0, if foundationFontFaceMigration then getTextSize(p1, 12, p2.Footer.Font, Vector2.new(p4, 1e999), { addTemporaryPadding = false }).Y + 2 else textService:GetTextSize(p1, 12, p2.Footer.Font, Vector2.new(p4, 1e999)).Y + 2),
+			Font = if foundationFontFaceMigration then nil else p2.Footer.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Footer.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			Text = p1,
 			TextColor3 = p3.TextDefault.Color
@@ -53,14 +57,15 @@ local function generateTestmodeDisclaimer(p1, p2, p3, p4)
 end
 
 local function generatePromptText(p1, p2, p3, p4, p5, p6)
-	-- upvalues: reactModule (ref), textService (ref)
+	-- upvalues: reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), getTextSize (ref), textService (ref)
 	return reactModule.createElement("TextLabel", {
 		LayoutOrder = p6 or 2,
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, p4, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		Font = p2.Body.Font,
+		Font = if foundationFontFaceMigration then nil else p2.Body.Font,
+		FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Body.Font) else nil,
 		Text = p1.description,
 		TextSize = 16,
 		TextWrapped = true,
@@ -68,8 +73,8 @@ local function generatePromptText(p1, p2, p3, p4, p5, p6)
 		TextTransparency = p3.TextDefault.Transparency,
 		RichText = true,
 		[reactModule.Change.AbsoluteSize] = function(p7)
-			-- upvalues: textService (copy), p5 (ref)
-			p5(textService:GetTextSize(p7.Text, p7.TextSize, p7.Font, Vector2.new(p7.AbsoluteSize.X, 1e999)).Y)
+			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), p2 (ref), textService (copy), p5 (ref)
+			p5(if foundationFontFaceMigration then getTextSize(p7.Text, p7.TextSize, p2.Body.Font, Vector2.new(p7.AbsoluteSize.X, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(p7.Text, p7.TextSize, p7.Font, Vector2.new(p7.AbsoluteSize.X, 1e999)).Y)
 		end
 	})
 end

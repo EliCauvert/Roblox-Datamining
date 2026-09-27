@@ -2,13 +2,10 @@
 local cryoModule = require(parent.Parent.Cryo)
 local validationRulesUtilModule = require(parent.util.ValidationRulesUtil)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local getFFlagUGCValidationFixConstantsTypoLegModule = require(parent.flags.getFFlagUGCValidationFixConstantsTypoLeg)
 local getFFlagUGCValidationEyebrowEyelashSupportModule = require(parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)
 local getFFlagUGCValidateCheckHSROwnerModule = require(parent.flags.getFFlagUGCValidateCheckHSROwner)
 local getFFlagUGCValidateCheckTexturePackOwnerModule = require(parent.flags.getFFlagUGCValidateCheckTexturePackOwner)
-local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
 local UGCValidateMakeupDecalUVProperties = game:DefineFastFlag("UGCValidateMakeupDecalUVProperties", false)
-local getFFlagUGCValidationAllowEngineDefaultPartSurfacesModule = require(parent.flags.getFFlagUGCValidationAllowEngineDefaultPartSurfaces)
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 local getFFlagUGCValidateMakeupCategoryParityModule = require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)
 local getFFlagUGCValidateDisallowAeroMeshDataModule = require(parent.flags.getFFlagUGCValidateDisallowAeroMeshData)
@@ -182,14 +179,8 @@ t.BODYPART_TO_PARENT = {
 	RightUpperLeg = nil,
 	RightLowerLeg = "RightUpperLeg"
 }
-
-if getFFlagUGCValidationFixConstantsTypoLegModule() then
-	t.BODYPART_TO_PARENT.RightFoot = "RightLowerLeg"
-	t.BODYPART_TO_PARENT.LeftFoot = "LeftLowerLeg"
-else
-	t.BODYPART_TO_PARENT.RightLeg = "RightLowerLeg"
-	t.BODYPART_TO_PARENT.LeftLeg = "LeftLowerLeg"
-end
+t.BODYPART_TO_PARENT.RightFoot = "RightLowerLeg"
+t.BODYPART_TO_PARENT.LeftFoot = "LeftLowerLeg"
 t.RenderVsWrapMeshMaxDiff = validationRulesUtilModule:getRules().MeshRules.CageMeshMaxDistanceFromRenderMesh
 t.COMPARISON_METHODS = {
 	SMALLER = "<",
@@ -260,15 +251,15 @@ t.PROPERTIES = {
 		TopParamB = 0.5,
 		TopSurfaceInput = Enum.InputType.NoInput,
 		BackSurface = Enum.SurfaceType.Smooth,
-		BottomSurface = if getFFlagUGCValidationAllowEngineDefaultPartSurfacesModule() then {
+		BottomSurface = {
 			[t.COMPARISON_METHODS.FOUND_IN] = { Enum.SurfaceType.Smooth, Enum.SurfaceType.Inlet }
-		} else Enum.SurfaceType.Smooth,
+		},
 		FrontSurface = Enum.SurfaceType.Smooth,
 		LeftSurface = Enum.SurfaceType.Smooth,
 		RightSurface = Enum.SurfaceType.Smooth,
-		TopSurface = if getFFlagUGCValidationAllowEngineDefaultPartSurfacesModule() then {
+		TopSurface = {
 			[t.COMPARISON_METHODS.FOUND_IN] = { Enum.SurfaceType.Smooth, Enum.SurfaceType.Studs }
-		} else Enum.SurfaceType.Smooth,
+		},
 		Transparency = { [t.COMPARISON_METHODS.EXACT_EQ] = 0 },
 		Color = {
 			[t.COMPARISON_METHODS.FUZZY_EQ] = BrickColor.new("Medium stone grey").Color,
@@ -466,36 +457,33 @@ t.MESH_CONTENT_TYPE_TO_FIELD_NAME = {
 	[t.MESH_CONTENT_TYPE.OUTER_CAGE] = "CageMeshId",
 	[t.MESH_CONTENT_TYPE.INNER_CAGE] = "ReferenceMeshId"
 }
-
-if getFFlagUGCValidationAnimationPackSupportModule() then
-	t.ANIMATION_ASSET_INFO = {
-		[Enum.AssetType.ClimbAnimation] = {
-			modelName = "ClimbAnimation",
-			stringValueNames = { "climb" }
-		},
-		[Enum.AssetType.FallAnimation] = {
-			modelName = "FallAnimation",
-			stringValueNames = { "fall" }
-		},
-		[Enum.AssetType.IdleAnimation] = {
-			modelName = "IdleAnimation",
-			stringValueNames = { "idle" }
-		},
-		[Enum.AssetType.JumpAnimation] = {
-			modelName = "JumpAnimation",
-			stringValueNames = { "jump" }
-		},
-		[Enum.AssetType.RunAnimation] = { modelName = "RunAnimation", stringValueNames = { "run" } },
-		[Enum.AssetType.SwimAnimation] = {
-			modelName = "SwimAnimation",
-			stringValueNames = { "swim", "swimidle" }
-		},
-		[Enum.AssetType.WalkAnimation] = {
-			modelName = "WalkAnimation",
-			stringValueNames = { "walk" }
-		}
+t.ANIMATION_ASSET_INFO = {
+	[Enum.AssetType.ClimbAnimation] = {
+		modelName = "ClimbAnimation",
+		stringValueNames = { "climb" }
+	},
+	[Enum.AssetType.FallAnimation] = {
+		modelName = "FallAnimation",
+		stringValueNames = { "fall" }
+	},
+	[Enum.AssetType.IdleAnimation] = {
+		modelName = "IdleAnimation",
+		stringValueNames = { "idle" }
+	},
+	[Enum.AssetType.JumpAnimation] = {
+		modelName = "JumpAnimation",
+		stringValueNames = { "jump" }
+	},
+	[Enum.AssetType.RunAnimation] = { modelName = "RunAnimation", stringValueNames = { "run" } },
+	[Enum.AssetType.SwimAnimation] = {
+		modelName = "SwimAnimation",
+		stringValueNames = { "swim", "swimidle" }
+	},
+	[Enum.AssetType.WalkAnimation] = {
+		modelName = "WalkAnimation",
+		stringValueNames = { "walk" }
 	}
-end
+}
 t.AllAssetUploadCategories = {
 	validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
 	validationEnumsModule.UploadCategory.DYNAMIC_HEAD,
@@ -503,10 +491,7 @@ t.AllAssetUploadCategories = {
 	validationEnumsModule.UploadCategory.RIGID_ACCESSORY,
 	validationEnumsModule.UploadCategory.EMOTE_ANIMATION
 }
-
-if getFFlagUGCValidationAnimationPackSupportModule() then
-	table.insert(t.AllAssetUploadCategories, validationEnumsModule.UploadCategory.ANIMATION)
-end
+table.insert(t.AllAssetUploadCategories, validationEnumsModule.UploadCategory.ANIMATION)
 t.AllAssetUploadCategoriesIncludingMakeup = {}
 
 for i_5, v_5 in t.AllAssetUploadCategories do
@@ -521,10 +506,7 @@ t.AllBundleUploadCategories = {
 	validationEnumsModule.UploadCategory.FULL_BODY,
 	validationEnumsModule.UploadCategory.BOTH_SHOES
 }
-
-if getFFlagUGCValidationAnimationPackSupportModule() then
-	table.insert(t.AllBundleUploadCategories, validationEnumsModule.UploadCategory.ANIMATION_PACK)
-end
+table.insert(t.AllBundleUploadCategories, validationEnumsModule.UploadCategory.ANIMATION_PACK)
 t.AllUploadCategories = {}
 
 for i_6, v_6 in validationEnumsModule.UploadCategory do

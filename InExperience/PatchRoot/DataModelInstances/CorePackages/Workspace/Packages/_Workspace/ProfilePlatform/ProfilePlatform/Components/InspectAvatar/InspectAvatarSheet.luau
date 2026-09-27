@@ -73,6 +73,15 @@ return function(p1)
 			openItemDetails = p1.openItemDetails
 		})
 	end
+	local var7
+	local var8 = if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then reactModule.useMemo(function()
+		-- upvalues: inputHandlersModule (copy), p1 (ref)
+		return inputHandlersModule.onRelease(function(p2)
+			-- upvalues: p1 (copy)
+			p2:cancel()
+			p1.onClose()
+		end)
+	end, { p1.onClose }) else nil
 	local t_1 = {
 		Scrim = reactModule.createElement("TextButton", {
 			Size = UDim2.new(1, -p1.cardWidth, 1, 0),
@@ -82,132 +91,139 @@ return function(p1)
 			AutoButtonColor = false,
 			Selectable = if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then false else nil,
 			[reactModule.Event.Activated] = p1.onDismiss
-		}),
-		Sheet = reactModule.createElement(view, {
-			tag = "col position-top-right anchor-top-right margin-bottom-small padding-x-xlarge bg-surface-0",
-			Size = UDim2.new(0, p1.cardWidth, 1, 0)
-		}, {
-			StatusBarSpacer = if p1.topOffset > 0 then reactModule.createElement(view, {
-				tag = "bg-surface-0",
-				LayoutOrder = 0,
-				Size = UDim2.new(1, 0, 0, p1.topOffset)
-			}) else nil,
-			AvatarViewport = reactModule.createElement(view, {
-				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, p1.avatarViewportHeight)
-			}, {
-				BackgroundClipper = if fFlagProfileInspectAvatarBackgroundModule and p1.avatarBackgroundImage ~= nil then reactModule.createElement(view, {
-					ClipsDescendants = true,
-					ZIndex = 1,
-					Size = UDim2.new(1, var3 * 2, 1, 0),
-					Position = UDim2.new(0, -var3, 0, 0)
-				}, {
-					BackgroundImage = reactModule.createElement(image, {
-						Size = UDim2.fromScale(1.35, 1.35),
-						AnchorPoint = Vector2.new(0.5, 0.5),
-						Position = UDim2.fromScale(0.5, 0.5),
-						Image = p1.avatarBackgroundImage,
-						ScaleType = Enum.ScaleType.Crop
-					})
-				}) else nil,
-				Background = reactModule.createElement(displayBackground, {
-					height = p1.avatarViewportHeight,
-					userId = tonumber(p1.profileId),
-					userThumbnail = p1.avatarThumbnail
-				}),
-				TopBar = reactModule.createElement(view, {
-					ZIndex = 2,
-					tag = {
-						["row align-y-center"] = fFlagProfileInspectAvatarBackgroundModule,
-						["row align-y-center size-full-0 auto-y padding-small"] = not fFlagProfileInspectAvatarBackgroundModule
-					},
-					Size = if fFlagProfileInspectAvatarBackgroundModule then UDim2.new(1, 0, 0, 56) else nil,
-					Position = if fFlagProfileInspectAvatarBackgroundModule then UDim2.new(0, 10 - var3, 0, 0) else nil
-				}, {
-					BackButtonCircle = if fFlagProfileInspectAvatarBackgroundModule then reactModule.createElement(view, {
-						tag = "radius-circle bg-over-media-0",
-						Size = UDim2.fromOffset(36, 36)
-					}, {
-						BackButton = reactModule.createElement(iconButton, {
-							isCircular = true,
-							icon = iconName.ChevronLargeLeft,
-							size = iconSize.Small,
-							variant = buttonVariant.Utility,
-							onActivated = p1.onClose,
-							AnchorPoint = Vector2.new(0.5, 0.5),
-							Position = UDim2.fromScale(0.5, 0.5)
-						})
-					}) else nil,
-					BackButton = if not fFlagProfileInspectAvatarBackgroundModule then reactModule.createElement(iconButton, {
-						isCircular = true,
-						icon = iconName.ChevronLargeLeft,
-						size = iconSize.Medium,
-						variant = buttonVariant.Utility,
-						onActivated = p1.onClose
-					}) else nil
-				})
-			}),
-			Title = reactModule.createElement(text, {
-				tag = "size-full-0 auto-y padding-y-small text-heading-small text-align-x-left",
-				LayoutOrder = 2,
-				Text = var1.title
-			}),
-			ScrollWrapper = reactModule.createElement(view, { tag = "fill size-full-0", LayoutOrder = 3 }, {
-				ScrollContent = reactModule.createElement("ScrollingFrame", {
-					ScrollBarThickness = 0,
-					BackgroundTransparency = 1,
-					BorderSizePixel = 0,
-					Size = UDim2.fromScale(1, 1),
-					AutomaticCanvasSize = Enum.AutomaticSize.Y,
-					CanvasSize = UDim2.new(0, 0, 0, 0)
-				}, {
-					ItemList = if not p1.isLoading then reactModule.createElement(view, {
-						tag = "col gap-large size-full-0 auto-y padding-bottom-large padding-top-medium"
-					}, t) else nil,
-					LoadingShimmer = if p1.isLoading then reactModule.createElement(view, { tag = "col size-full-0 auto-y" }, (function()
-						-- upvalues: reactModule (copy), skeleton (copy)
-						local t = {}
-						
-						for i = 1, 4 do
-							t[`Shimmer{i}`] = reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, 72), LayoutOrder = i })
-						end
-						return t
-					end)()) else nil
-				})
-			}),
-			FooterDivider = reactModule.createElement(divider, { LayoutOrder = 4, Size = UDim2.new(1, 0, 0, 1) }),
-			Footer = reactModule.createElement(view, { tag = "size-full-2500 bg-surface-0", LayoutOrder = 5 }, {
-				ActionBar = reactModule.createElement(buyActionBar, {
-					priceLabel = {
-						leftLabel = var1.buyHeader,
-						priceInRobux = tostring(p1.purchaseSummary.totalPrice)
-					},
-					purchaseButtonProps = {
-						purchaseButtonText = if fFlagProfileInspectAvatarBuyAllModule then var1.buyWholeLook else var1.buyItems,
-						onPurchase = p1.onBuyAll,
-						isDisabled = p1.isLoading or p1.purchaseSummary.count == 0,
-						variant = buttonVariant.Emphasis
-					}
-				})
-			})
 		})
 	}
+	local createElement = reactModule.createElement
+	local var9 = view
+	local t_2 = {
+		tag = "col position-top-right anchor-top-right margin-bottom-small padding-x-xlarge bg-surface-0",
+		Size = UDim2.new(0, p1.cardWidth, 1, 0)
+	}
+	local t_3 = {
+		StatusBarSpacer = if p1.topOffset > 0 then reactModule.createElement(view, {
+			tag = "bg-surface-0",
+			LayoutOrder = 0,
+			Size = UDim2.new(1, 0, 0, p1.topOffset)
+		}) else nil,
+		AvatarViewport = reactModule.createElement(view, {
+			LayoutOrder = 1,
+			Size = UDim2.new(1, 0, 0, p1.avatarViewportHeight)
+		}, {
+			BackgroundClipper = if fFlagProfileInspectAvatarBackgroundModule and p1.avatarBackgroundImage ~= nil then reactModule.createElement(view, {
+				ClipsDescendants = true,
+				ZIndex = 1,
+				Size = UDim2.new(1, var3 * 2, 1, 0),
+				Position = UDim2.new(0, -var3, 0, 0)
+			}, {
+				BackgroundImage = reactModule.createElement(image, {
+					Size = UDim2.fromScale(1.35, 1.35),
+					AnchorPoint = Vector2.new(0.5, 0.5),
+					Position = UDim2.fromScale(0.5, 0.5),
+					Image = p1.avatarBackgroundImage,
+					ScaleType = Enum.ScaleType.Crop
+				})
+			}) else nil,
+			Background = reactModule.createElement(displayBackground, {
+				height = p1.avatarViewportHeight,
+				userId = tonumber(p1.profileId),
+				userThumbnail = p1.avatarThumbnail
+			}),
+			TopBar = reactModule.createElement(view, {
+				ZIndex = 2,
+				tag = {
+					["row align-y-center"] = fFlagProfileInspectAvatarBackgroundModule,
+					["row align-y-center size-full-0 auto-y padding-small"] = not fFlagProfileInspectAvatarBackgroundModule
+				},
+				Size = if fFlagProfileInspectAvatarBackgroundModule then UDim2.new(1, 0, 0, 56) else nil,
+				Position = if fFlagProfileInspectAvatarBackgroundModule then UDim2.new(0, 10 - var3, 0, 0) else nil
+			}, {
+				BackButtonCircle = if fFlagProfileInspectAvatarBackgroundModule then reactModule.createElement(view, {
+					tag = "radius-circle bg-over-media-0",
+					Size = UDim2.fromOffset(36, 36)
+				}, {
+					BackButton = reactModule.createElement(iconButton, {
+						isCircular = true,
+						icon = iconName.ChevronLargeLeft,
+						size = iconSize.Small,
+						variant = buttonVariant.Utility,
+						onActivated = p1.onClose,
+						AnchorPoint = Vector2.new(0.5, 0.5),
+						Position = UDim2.fromScale(0.5, 0.5)
+					})
+				}) else nil,
+				BackButton = if not fFlagProfileInspectAvatarBackgroundModule then reactModule.createElement(iconButton, {
+					isCircular = true,
+					icon = iconName.ChevronLargeLeft,
+					size = iconSize.Medium,
+					variant = buttonVariant.Utility,
+					onActivated = p1.onClose
+				}) else nil
+			})
+		}),
+		Title = reactModule.createElement(text, {
+			tag = "size-full-0 auto-y padding-y-small text-heading-small text-align-x-left",
+			LayoutOrder = 2,
+			Text = var1.title
+		})
+	}
+	local createElement_1 = reactModule.createElement
+	local t_4 = { tag = "fill size-full-0", LayoutOrder = 3 }
+	local t_5 = {}
+	local createElement_2 = reactModule.createElement
+	local var10 = "ScrollingFrame"
+	local t_6 = {
+		ScrollBarThickness = 0,
+		BackgroundTransparency = 1,
+		BorderSizePixel = 0,
+		Size = UDim2.fromScale(1, 1),
+		AutomaticCanvasSize = Enum.AutomaticSize.Y,
+		CanvasSize = UDim2.new(0, 0, 0, 0)
+	}
+	local t_7 = {
+		ItemList = if not p1.isLoading then reactModule.createElement(view, {
+			tag = "col gap-large size-full-0 auto-y padding-bottom-large padding-top-medium"
+		}, t) else nil
+	}
+	
+	if p1.isLoading then
+		var7 = reactModule.createElement
+		local var11 = view
+		local t_8 = { tag = "col size-full-0 auto-y" }
+		local t_9 = {}
+		
+		for i_1 = 1, 4 do
+			t_9[`Shimmer{i_1}`] = reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, 72), LayoutOrder = i_1 })
+		end
+		var7 = var7(var11, t_8, t_9)
+	else
+		var7 = nil
+	end
+	t_7.LoadingShimmer = var7
+	t_5.ScrollContent = createElement_2(var10, t_6, t_7)
+	t_3.ScrollWrapper = createElement_1(view, t_4, t_5)
+	t_3.FooterDivider = reactModule.createElement(divider, { LayoutOrder = 4, Size = UDim2.new(1, 0, 0, 1) })
+	t_3.Footer = reactModule.createElement(view, { tag = "size-full-2500 bg-surface-0", LayoutOrder = 5 }, {
+		ActionBar = reactModule.createElement(buyActionBar, {
+			priceLabel = {
+				leftLabel = var1.buyHeader,
+				priceInRobux = tostring(p1.purchaseSummary.totalPrice)
+			},
+			purchaseButtonProps = {
+				purchaseButtonText = if fFlagProfileInspectAvatarBuyAllModule then var1.buyWholeLook else var1.buyItems,
+				onPurchase = p1.onBuyAll,
+				isDisabled = p1.isLoading or p1.purchaseSummary.count == 0,
+				variant = buttonVariant.Emphasis
+			}
+		})
+	})
+	t_1.Sheet = createElement(var9, t_2, t_3)
 	
 	return if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then reactModule.createElement(appFocusRoot, {
 		isAutoFocusRoot = true,
 		isIsolated = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
 		customEventHandlers = {
-			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then reactModule.useMemo(function()
-					-- upvalues: inputHandlersModule (copy), p1 (ref)
-					return inputHandlersModule.onRelease(function(p2)
-						-- upvalues: p1 (copy)
-						p2:cancel()
-						p1.onClose()
-					end)
-				end, { p1.onClose }) else nil
-			}
+			[focusNavigationEventNameEnum.NavigateBack] = { handler = var8 }
 		}
 	}, t_1) else reactModule.createElement(view, { Size = UDim2.fromScale(1, 1) }, t_1)
 end

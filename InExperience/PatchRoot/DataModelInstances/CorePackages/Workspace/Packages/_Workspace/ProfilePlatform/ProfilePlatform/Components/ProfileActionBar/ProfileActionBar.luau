@@ -25,9 +25,10 @@ local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatfo
 local fFlagProfilePlatformEnableTransferTooltipModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTransferTooltip)
 local _ = require(profilePlatform.Types.UpsellTooltipProps)
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
+local fFlagProfileGamepadPrimaryActionFocusModule = require(profilePlatform.Flags.FFlagProfileGamepadPrimaryActionFocus)
 
 return function(p1)
-	-- upvalues: fFlagEnableProfilePlatformDisabledReasonTextModule (ref), useTokens (ref), fFlagAXEnableProfileTab (ref), useIsMeTabModule (ref), buttonVariant (ref), reactModule (ref), useDisabledReasonTextModule (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), actionMenuButtonModule (ref), button (ref), fillBehavior (ref), inputSize (ref), fFlagPortEnableCommunityVerificationModalModule (ref), fFlagEnableCommunityVerificationModalModule (ref), iconButton (ref), iconSize (ref), fFlagProfilePlatformEnableTransferTooltipModule (ref), profileMoreButtonModule (ref), plusMoreMenuTooltipModule (ref), view (ref), text (ref), horizontalPageMargin (ref)
+	-- upvalues: fFlagEnableProfilePlatformDisabledReasonTextModule (ref), useTokens (ref), fFlagAXEnableProfileTab (ref), useIsMeTabModule (ref), buttonVariant (ref), reactModule (ref), useDisabledReasonTextModule (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), actionMenuButtonModule (ref), button (ref), fillBehavior (ref), inputSize (ref), fFlagPortEnableCommunityVerificationModalModule (ref), fFlagEnableCommunityVerificationModalModule (ref), iconButton (ref), iconSize (ref), fFlagProfilePlatformEnableTransferTooltipModule (ref), profileMoreButtonModule (ref), plusMoreMenuTooltipModule (ref), fFlagProfileGamepadPrimaryActionFocusModule (ref), view (ref), text (ref), horizontalPageMargin (ref)
 	local var1 = if fFlagEnableProfilePlatformDisabledReasonTextModule then useTokens() else nil
 	local var2 = if fFlagAXEnableProfileTab then useIsMeTabModule() else nil
 	local profileActions = p1.profileActions
@@ -136,7 +137,8 @@ return function(p1)
 		end, {
 			profileActions.primary, profileActions.secondary, p1.openContextualMenu,
 			p1.isContextualMenuOpen, p1.showPlusMoreMenuTooltip, p1.upsellTooltipProps,
-			p1.moreButtonRef
+			p1.moreButtonRef,
+			if fFlagProfileGamepadPrimaryActionFocusModule then p1.primaryButtonRef else nil
 		})),
 		DisabledReasonText = if fFlagEnableProfilePlatformDisabledReasonTextModule and var3 and var1 then reactModule.createElement(text, {
 			LayoutOrder = 1,

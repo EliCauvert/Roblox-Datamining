@@ -8,9 +8,6 @@ local t = {
 	CHANNEL_GLOBAL = "RBXGlobal",
 	areChannelTabsEnabled = function()
 		-- upvalues: textChatService (ref)
-		if not game:GetEngineFeature("EnableChannelTabsConfiguration") then
-			return false
-		end
 		local channelTabsConfiguration = textChatService:FindFirstChildOfClass("ChannelTabsConfiguration")
 		
 		return channelTabsConfiguration ~= nil and channelTabsConfiguration.Enabled

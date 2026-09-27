@@ -6,6 +6,8 @@ local UIBloxModule = require(parent.UIBlox)
 local foundationModule = require(parent.Foundation)
 local radius = foundationModule.Enums.Radius
 local skeleton = foundationModule.Skeleton
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local useTextSizeOffset = UIBloxModule.Core.Style.useTextSizeOffset
 local baseCellModule = require(script.Parent.BaseCell)
@@ -61,7 +63,7 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTextSizeOffset (ref), fFlagAppChatTimestampInSubtitleModule (ref), reactModule (ref), baseCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), conversationFacePileModule (ref), avatarCircleModule (ref), skeleton (ref), radius (ref), fFlagAppChatFixPlusBadgeAlignmentModule (ref), foundationModule (ref), fFlagEnableBlackbirdCheck (ref), imageSetLabel (ref)
+	-- upvalues: cryoModule (ref), t (ref), useTextSizeOffset (ref), fFlagAppChatTimestampInSubtitleModule (ref), reactModule (ref), baseCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), conversationFacePileModule (ref), avatarCircleModule (ref), skeleton (ref), radius (ref), fFlagAppChatFixPlusBadgeAlignmentModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), foundationModule (ref), fFlagEnableBlackbirdCheck (ref), imageSetLabel (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2 = useTextSizeOffset()
 	local var3 = var1.subTitleTextSize + var2
@@ -224,7 +226,8 @@ return reactModule.memo(function(p1)
 				TextSize = var1.titleTextSize,
 				TextColor3 = var1.titleTextColor3,
 				TextTransparency = var1.titleTextTransparency,
-				Font = var1.titleFont,
+				Font = if foundationFontFaceMigration then nil else var1.titleFont,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.titleFont) else nil,
 				Text = var1.titleText or "",
 				TextTruncate = Enum.TextTruncate.SplitWord,
 				TextXAlignment = Enum.TextXAlignment.Left
@@ -259,7 +262,8 @@ return reactModule.memo(function(p1)
 				TextSize = var1.secondaryTitleTextSize,
 				TextColor3 = var1.secondaryTitleTextColor3,
 				TextTransparency = var1.secondaryTitleTextTransparency,
-				Font = var1.secondaryTitleFont,
+				Font = if foundationFontFaceMigration then nil else var1.secondaryTitleFont,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.secondaryTitleFont) else nil,
 				Text = var1.secondaryTitleText or "",
 				TextTruncate = Enum.TextTruncate.AtEnd,
 				TextXAlignment = Enum.TextXAlignment.Left,
@@ -317,7 +321,8 @@ return reactModule.memo(function(p1)
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Text = var1.subTitleText,
 				TextTruncate = if fFlagAppChatTimestampInSubtitleModule then Enum.TextTruncate.SplitWord else Enum.TextTruncate.AtEnd,
-				Font = var1.subTitleTextFont
+				Font = if foundationFontFaceMigration then nil else var1.subTitleTextFont,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.subTitleTextFont) else nil
 			}, if fFlagAppChatTimestampInSubtitleModule then {
 				sizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = var8 })
 			} else nil),
@@ -330,7 +335,8 @@ return reactModule.memo(function(p1)
 				TextTransparency = var1.subTitleTextTransparency,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Text = var9,
-				Font = var1.subTitleTextFont,
+				Font = if foundationFontFaceMigration then nil else var1.subTitleTextFont,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.subTitleTextFont) else nil,
 				LayoutOrder = 3,
 				[reactModule.Change.AbsoluteSize] = function(p2)
 					-- upvalues: var7 (write)

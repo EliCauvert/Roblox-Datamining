@@ -77,7 +77,7 @@ local function openReportDialog(p1)
 		
 		return
 	end
-	require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuNewContainerPage):ReportPlayer(p1, "PlayerListReskin")
+	require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuContainerPage):ReportPlayer(p1, "PlayerListReskin")
 end
 
 local function assembleMenuItems(p1)

@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
+﻿local friendsChat = script:FindFirstAncestor("FriendsChat")
+local parent = friendsChat.Parent
 local reactModule = require(parent.React)
 local chatLandingTelemetryEventsModule = require(parent.AppChat.ChatLandingTelemetryEvents)
 local chatLandingTelemetryLayerModule = require(parent.AppChat.ChatLandingTelemetryLayer)
@@ -6,6 +7,7 @@ local chatLandingTelemetryStateModule = require(parent.AppChat.ChatLandingTeleme
 local _ = require(parent.AppChat.GetConversationListStore)
 local getFriendsChatSettingsStoreModule = require(parent.AppChat.GetFriendsChatSettingsStore)
 local useTelemetryModule = require(parent.AppChat.useTelemetry)
+local fFlagFriendsChatLandingTelemetryFieldsModule = require(friendsChat.Flags.FFlagFriendsChatLandingTelemetryFields)
 local getChatLandingConversationInfoModule = require(script.Parent.getChatLandingConversationInfo)
 local getChatLandingSharedCountsModule = require(script.Parent.getChatLandingSharedCounts)
 
@@ -15,7 +17,7 @@ local function _()
 end
 
 return function(p1)
-	-- upvalues: useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), chatLandingTelemetryStateModule (ref), reactModule (ref), getChatLandingSharedCountsModule (ref), chatLandingTelemetryEventsModule (ref), getFriendsChatSettingsStoreModule (ref), getChatLandingConversationInfoModule (ref)
+	-- upvalues: useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), chatLandingTelemetryStateModule (ref), reactModule (ref), getChatLandingSharedCountsModule (ref), chatLandingTelemetryEventsModule (ref), getFriendsChatSettingsStoreModule (ref), fFlagFriendsChatLandingTelemetryFieldsModule (ref), getChatLandingConversationInfoModule (ref)
 	local emit = useTelemetryModule(chatLandingTelemetryLayerModule.Context).emit
 	local var1 = chatLandingTelemetryStateModule.useSetState()
 	local var2 = reactModule.useRef(p1.displayedConversations)
@@ -46,6 +48,13 @@ return function(p1)
 			isChatEnabled = getFriendsChatSettingsStoreModule(false).getChatEnabled(false)
 		})
 	end, {})
+	local emptyStateType = p1.emptyStateType
+	reactModule.useEffect(function()
+		-- upvalues: fFlagFriendsChatLandingTelemetryFieldsModule (copy), emptyStateType (ref), var4 (ref), chatLandingTelemetryEventsModule (copy)
+		if fFlagFriendsChatLandingTelemetryFieldsModule and emptyStateType ~= nil then
+			var4.current(chatLandingTelemetryEventsModule.ChatEmptyStateScreenRendered, { emptyStateType = emptyStateType })
+		end
+	end, { emptyStateType })
 	
 	return {
 		fireSearchActivatedEvent = reactModule.useCallback(function()

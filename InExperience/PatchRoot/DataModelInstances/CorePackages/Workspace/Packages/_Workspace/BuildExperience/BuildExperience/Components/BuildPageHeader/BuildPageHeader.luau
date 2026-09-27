@@ -1,6 +1,5 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local displayModule = require(parent.Display)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
@@ -16,11 +15,9 @@ local iconButton = foundationModule.IconButton
 local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
-local iconVariant = foundationModule.Enums.IconVariant
 local inputSize = foundationModule.Enums.InputSize
 local useScaledValue = foundationModule.Hooks.useScaledValue
 local useTokens = foundationModule.Hooks.useTokens
-local agentSpecDebugSheetModule = require(buildExperience.Components.AgentSpecDebug.AgentSpecDebugSheet)
 local flyoutSidePanelIXP = require(parent.SharedExperimentDefinition).FlyoutSidePanelIXP
 local flyoutLeftHeader = require(parent.FlyoutSidePanel).Components.FlyoutLeftHeader
 local searchBarContainerModule = require(buildExperience.Components.SearchBar.SearchBarContainer)
@@ -40,22 +37,6 @@ end
 
 local function renderEmptyRight()
 	return nil
-end
-
-local function AgentSpec(p1)
-	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), creatorAgentChatModule (ref), iconVariant (ref), buttonVariant (ref), inputSize (ref)
-	return reactModule.createElement(iconButton, {
-		isCircular = true,
-		LayoutOrder = p1.LayoutOrder,
-		icon = {
-			name = iconName.LabBeaker,
-			variant = if creatorAgentChatModule.experimentOverride.get() ~= nil then iconVariant.Regular else iconVariant.Filled
-		},
-		variant = buttonVariant.Utility,
-		size = inputSize.Medium,
-		onActivated = p1.onActivated,
-		testId = p1.testId
-	})
 end
 
 local function HeaderSearch(p1)
@@ -121,29 +102,15 @@ local function HeaderCenter(p1)
 end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), flyoutSidePanelIXP (ref), reactModule (ref), displayModule (ref), signalsReactModule (ref), getSearchQueryStoreModule (ref), HeaderCenter (ref), creatorAgentChatModule (ref), AgentSpec (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), renderEmptyRight (ref), headerBar (ref), renderFlyoutLeftHeader (ref), agentSpecDebugSheetModule (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), flyoutSidePanelIXP (ref), displayModule (ref), signalsReactModule (ref), getSearchQueryStoreModule (ref), reactModule (ref), HeaderCenter (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), renderEmptyRight (ref), headerBar (ref), renderFlyoutLeftHeader (ref)
 	local title = useLocalization({ title = localizationStringsModule.BUILD_HEADER_TITLE }).title
 	local var1 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled()
-	local var2, var3 = reactModule.useState(false)
 	local _ = false
 	local _ = false
 	local _ = nil
-	local var4 = signalsReactModule.useSignalState(displayModule.GetDisplayStore(false).getDisplaySize)
+	local var2 = signalsReactModule.useSignalState(displayModule.GetDisplayStore(false).getDisplaySize)
 	local searchQueryStore = p1.searchQueryStore or getSearchQueryStoreModule()
-	local var5 = var4 == Enum.DisplaySize.Small and p1.onOpenSearch ~= nil
-	local var6 = if var4 ~= Enum.DisplaySize.Small then function()
-		-- upvalues: reactModule (copy), HeaderCenter (copy), searchQueryStore (write)
-		return reactModule.createElement(HeaderCenter, { searchQueryStore = searchQueryStore })
-	end else nil
-	local var7 = creatorAgentChatModule.experimentOverride.isEnabled()
-	local var8 = if var7 then reactModule.createElement(AgentSpec, {
-		LayoutOrder = 2,
-		testId = "BuildPageHeader.AgentSpecButton",
-		onActivated = function()
-			-- upvalues: var3 (ref)
-			var3(true)
-		end
-	}) else nil
+	local var3 = var2 == Enum.DisplaySize.Small and p1.onOpenSearch ~= nil
 	
 	return reactModule.createElement(view, {
 		ZIndex = 3,
@@ -162,14 +129,17 @@ return function(p1)
 				return renderFlyoutLeftHeader(title)
 			end else nil,
 			title = if var1 then nil else title,
-			renderCenter = var6,
-			renderRight = if var5 or var7 then function()
-				-- upvalues: reactModule (copy), view (copy), var5 (write), iconButton (copy), iconName (copy), p1 (ref), inputSize (copy), buttonVariant (copy), var8 (ref)
+			renderCenter = if var2 ~= Enum.DisplaySize.Small then function()
+				-- upvalues: reactModule (copy), HeaderCenter (copy), searchQueryStore (write)
+				return reactModule.createElement(HeaderCenter, { searchQueryStore = searchQueryStore })
+			end else nil,
+			renderRight = if var3 then function()
+				-- upvalues: reactModule (copy), view (copy), var3 (write), iconButton (copy), iconName (copy), p1 (ref), inputSize (copy), buttonVariant (copy)
 				return reactModule.createElement(view, {
 					tag = "row align-y-center gap-medium auto-xy",
 					testId = "BuildPageHeader.RightActions"
 				}, {
-					Search = if var5 then reactModule.createElement(iconButton, {
+					Search = if var3 then reactModule.createElement(iconButton, {
 						LayoutOrder = 1,
 						isCircular = true,
 						testId = "BuildPageHeader.SearchButton",
@@ -177,16 +147,9 @@ return function(p1)
 						onActivated = p1.onOpenSearch,
 						size = inputSize.Medium,
 						variant = buttonVariant.Utility
-					}) else nil,
-					AgentSpec = var8
+					}) else nil
 				})
 			end else renderEmptyRight
-		}),
-		AgentSpecSheet = if var2 then reactModule.createElement(agentSpecDebugSheetModule, {
-			onClose = function()
-				-- upvalues: var3 (ref)
-				var3(false)
-			end
-		}) else nil
+		})
 	})
 end

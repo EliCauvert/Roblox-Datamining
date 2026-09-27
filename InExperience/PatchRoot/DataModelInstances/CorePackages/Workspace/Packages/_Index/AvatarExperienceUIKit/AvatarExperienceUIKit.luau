@@ -17,6 +17,7 @@ return {
 		ItemCardHeader = require(itemCard.ItemCardHeader),
 		ItemCardHeaderCornersOverlay = require(itemCard.ItemCardHeaderCornersOverlay),
 		ItemCardIcon = require(itemCard.ItemCardIcon),
+		ItemCardIndicatorStack = require(itemCard.ItemCardIndicatorStack),
 		ItemCardPriceLine = require(itemCard.ItemCardPriceLine),
 		ItemCardStatus = require(itemCard.ItemCardStatus),
 		ItemCardThumbnail = require(itemCard.ItemCardThumbnail),

@@ -6,10 +6,12 @@ local icon = foundationModule.Icon
 local image = foundationModule.Image
 local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local fFlagSduiAttributionRowV2 = require(parent.SharedFlags).FFlagSduiAttributionRowV2
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), fFlagSduiAttributionRowV2 (ref), reactModule (ref), view (ref), foundationModule (ref), image (ref), text (ref), icon (ref)
+	-- upvalues: useTokens (ref), fFlagSduiAttributionRowV2 (ref), reactModule (ref), view (ref), foundationModule (ref), image (ref), text (ref), icon (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local layoutOrder = p1.layoutOrder
 	local zIndex = p1.zIndex
 	local position = p1.position
@@ -64,7 +66,8 @@ return reactModule.memo(function(p1)
 					Position = UDim2.new(0, 0, 0, 0),
 					Size = UDim2.new(1, 0, 0, var1.Size.Size_500),
 					TextSize = titleMedium.FontSize,
-					Font = titleMedium.Font,
+					Font = if foundationFontFaceMigration then nil else titleMedium.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(titleMedium.Font) else nil,
 					TextColor3 = var1.DarkMode.Content.Emphasis.Color3,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextTruncate = Enum.TextTruncate.SplitWord
@@ -76,7 +79,8 @@ return reactModule.memo(function(p1)
 					Position = UDim2.new(0, 0, 1, 0),
 					Size = UDim2.new(1, 0, 0, var1.Size.Size_500),
 					TextSize = bodyMedium.FontSize,
-					Font = bodyMedium.Font,
+					Font = if foundationFontFaceMigration then nil else bodyMedium.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(bodyMedium.Font) else nil,
 					TextColor3 = var1.DarkMode.Content.Emphasis.Color3,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextTruncate = Enum.TextTruncate.SplitWord

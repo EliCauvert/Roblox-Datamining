@@ -14,12 +14,13 @@ local fFlagEnableExperienceDetailsBottomSheet = require(parent.SharedFlags).FFla
 local fFlagLuaAppEdpBottomSheetPeekViewEvents = require(parent.SharedFlags).FFlagLuaAppEdpBottomSheetPeekViewEvents
 local fFlagLuaAppSduiEdpEnabled = require(parent.SharedFlags).FFlagLuaAppSduiEdpEnabled
 local fFlagLuaAppAddSeeAllFlagToGameDetailReferral = require(parent.SharedFlags).FFlagLuaAppAddSeeAllFlagToGameDetailReferral
+local fFlagLuaAppSduiPassSortSubId = require(parent.SharedFlags).FFlagLuaAppSduiPassSortSubId
 local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local fFlagLuaAppSduiSponsoredTwoByOneTile = require(parent.SharedFlags).FFlagLuaAppSduiSponsoredTwoByOneTile
 local t = {}
 
 return function(p1, p2, p3)
-	-- upvalues: sduiErrors (ref), getInputModeStore (ref), t (ref), findAnalyticsFieldInAncestors (ref), intervalPerformanceTracker (ref), fFlagSduiFixSearchTelemetry (ref), sduiParsers (ref), fFlagLuaAppSduiSponsoredTwoByOneTile (ref), cryoModule (ref), fFlagLuaAppAddSeeAllFlagToGameDetailReferral (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), openGameDetails (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), fFlagEnableExperienceDetailsBottomSheet (ref), appPage (ref), fFlagLuaAppSduiEdpEnabled (ref)
+	-- upvalues: sduiErrors (ref), getInputModeStore (ref), t (ref), findAnalyticsFieldInAncestors (ref), intervalPerformanceTracker (ref), fFlagSduiFixSearchTelemetry (ref), sduiParsers (ref), fFlagLuaAppSduiSponsoredTwoByOneTile (ref), cryoModule (ref), fFlagLuaAppAddSeeAllFlagToGameDetailReferral (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), fFlagLuaAppSduiPassSortSubId (ref), openGameDetails (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), fFlagEnableExperienceDetailsBottomSheet (ref), appPage (ref), fFlagLuaAppSduiEdpEnabled (ref)
 	p3.dependencies.logger.reportCounter(sduiErrors.SduiCounterName.OpenGameDetailsAction, { name = getInputModeStore(false).getLastInputType(false) }, true)
 	local var1 = if p1 then p1.actionParams else t
 	local var2 = findAnalyticsFieldInAncestors("itemComponentType", p2)
@@ -74,16 +75,17 @@ return function(p1, p2, p3)
 	end
 	local var14 = calculateRowPositionFields(var3, itemsPerRow, startRowNumber)
 	local var15 = findAnalyticsFieldInAncestors("appliedFilters", p2)
+	local var16 = if fFlagLuaAppSduiPassSortSubId then findAnalyticsFieldInAncestors("sortSubId", p2) else nil
 	
 	if var1.inheritReferralSession == true then
 		dependencies.gameAnalytics.reportOpenGameDetailFromGameDetail(if fFlagLuaAppSduiSponsoredTwoByOneTile and placeIdOverride then placeIdOverride else placeId, var3, totalNumberOfItems_1, var5, var6, tostring(universeId), p3.appPage, findAnalyticsFieldInAncestors("hostUniverseId", p2))
 	else
-		dependencies.gameAnalytics.reportOpenGameDetailWithId(if fFlagLuaAppSduiSponsoredTwoByOneTile and placeIdOverride then placeIdOverride else placeId, tostring(collectionId_1), var11, collectionPosition_1, var3, totalNumberOfItems_1, var5, var6, tostring(universeId), p3.appPage, tostring(var9), var15, var4, true, var14.positionInRow, var14.rowInSort, var14.rowOnPage, var12, nil, if fFlagLuaAppSduiSponsoredTwoByOneTile and var8 then var8 else nil, nil, nil, if fFlagLuaAppAddSeeAllFlagToGameDetailReferral then var13 else nil)
+		dependencies.gameAnalytics.reportOpenGameDetailWithId(if fFlagLuaAppSduiSponsoredTwoByOneTile and placeIdOverride then placeIdOverride else placeId, tostring(collectionId_1), var11, collectionPosition_1, var3, totalNumberOfItems_1, var5, var6, tostring(universeId), p3.appPage, tostring(var9), var15, var4, true, var14.positionInRow, var14.rowInSort, var14.rowOnPage, var12, nil, if fFlagLuaAppSduiSponsoredTwoByOneTile and var8 then var8 else nil, if fFlagLuaAppSduiPassSortSubId and var16 then tostring(var16) else nil, nil, if fFlagLuaAppAddSeeAllFlagToGameDetailReferral then var13 else nil)
 	end
-	local var16
+	local var17
 	local navigation = dependencies.getNavigation()
 	local dispatch = dependencies.dispatch
-	local var17 = tostring(var9)
+	local var18 = tostring(var9)
 	local t_1 = {
 		index = var3,
 		placeIdOverride = if fFlagLuaAppSduiSponsoredTwoByOneTile and placeIdOverride then placeIdOverride else nil,
@@ -91,14 +93,14 @@ return function(p1, p2, p3)
 	}
 	
 	if fFlagLuaAppEdpBottomSheetPeekViewEvents then
-		var16 = nil
+		var17 = nil
 	elseif fFlagEnableExperienceDetailsBottomSheet then
-		var16 = p3.appPage == appPage.GameDetail
-		var16 = nil
+		var17 = p3.appPage == appPage.GameDetail
+		var17 = nil
 	else
-		var16 = nil
+		var17 = nil
 	end
-	t_1.mountAsFullView = var16
-	dispatch(openGameDetails(var17, navigation, t_1, if fFlagLuaAppSduiEdpEnabled then dependencies.networking else nil))
+	t_1.mountAsFullView = var17
+	dispatch(openGameDetails(var18, navigation, t_1, if fFlagLuaAppSduiEdpEnabled then dependencies.networking else nil))
 	p3.dependencies.logger.reportCounter(sduiErrors.SduiCounterName.OpenGameDetailsActionFinish, { name = getInputModeStore(false).getLastInputType(false) }, true)
 end

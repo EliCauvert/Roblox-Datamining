@@ -1,1 +1,5 @@
-﻿return { Pioneer = "Pioneer", PioneerU13 = "PioneerU13" }
+﻿return {
+	Pioneer = "Pioneer",
+	PioneerU13 = "PioneerU13",
+	OAuth = "OAuth"
+}

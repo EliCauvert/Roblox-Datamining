@@ -4,9 +4,11 @@ local parent_1 = script:FindFirstAncestor("BuildExperience").Parent
 local reactModule = require(parent.React)
 local reactUtilsModule = require(parent.ReactUtils)
 local fFlagComposerControlAlignment = require(parent_1.SharedFlags).FFlagComposerControlAlignment
+local foundationFontFaceMigration = require(parent_1.Foundation).Utility.Flags.FoundationFontFaceMigration
 local components = foundation.Components
 local iconModule = require(components.Icon)
 local paddingModule = require(components.Padding)
+local normalizeFontFaceModule = require(foundation.Utility.normalizeFontFace)
 local scrollViewModule = require(components.ScrollView)
 local _ = require(components.Types)
 local viewModule = require(components.View)
@@ -43,7 +45,7 @@ local t = {
 	variant = inputVariantModule.Standard
 }
 local var1 = reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), isPluginSecurityModule (ref), paddingModule (ref)
+	-- upvalues: reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFaceModule (ref), isPluginSecurityModule (ref), paddingModule (ref)
 	local isBoundsChecker = p1.isBoundsChecker
 	local isMultiLine = p1.isMultiLine or isBoundsChecker
 	
@@ -52,7 +54,8 @@ local var1 = reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		Selectable = false,
 		Active = if isBoundsChecker then false else nil,
 		Visible = if isBoundsChecker then false else nil,
-		Font = p1.fontStyle.Font,
+		Font = if foundationFontFaceMigration then nil else p1.fontStyle.Font,
+		FontFace = if foundationFontFaceMigration then normalizeFontFaceModule(p1.fontStyle.Font) else nil,
 		TextSize = p1.fontStyle.FontSize,
 		LineHeight = p1.fontStyle.LineHeight,
 		TextColor3 = if p1.textStyle then p1.textStyle.Color3 else nil,
@@ -83,7 +86,7 @@ local var1 = reactModule.memo(reactModule.forwardRef(function(p1, p2)
 end))
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), getBindableValueModule (ref), useTextInputVariantsModule (ref), fFlagComposerControlAlignment (ref), inputVariantModule (ref), useStyleTagsModule (ref), usePreferredInputModule (ref), useComposerFocusLockModule (ref), getDisabledStyleModule (ref), getMultiLineTextHeightModule (ref), chatTextAreaDebugModule (ref), measureTextLineCountModule (ref), inputFocusBehaviorModule (ref), useComposerKeyboardConnectionsModule (ref), controlStateModule (ref), radiusModule (ref), truncateTextToCursorModule (ref), useBindableModule (ref), reactUtilsModule (ref), viewModule (ref), withCommonPropsModule (ref), blendTransparenciesModule (ref), constantsModule (ref), stateLayerAffordanceModule (ref), scrollViewModule (ref), var1 (ref), mapBindableModule (ref), iconModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), getBindableValueModule (ref), useTextInputVariantsModule (ref), fFlagComposerControlAlignment (ref), inputVariantModule (ref), useStyleTagsModule (ref), usePreferredInputModule (ref), useComposerFocusLockModule (ref), getDisabledStyleModule (ref), getMultiLineTextHeightModule (ref), chatTextAreaDebugModule (ref), measureTextLineCountModule (ref), foundationFontFaceMigration (ref), normalizeFontFaceModule (ref), inputFocusBehaviorModule (ref), useComposerKeyboardConnectionsModule (ref), controlStateModule (ref), radiusModule (ref), truncateTextToCursorModule (ref), useBindableModule (ref), reactUtilsModule (ref), viewModule (ref), withCommonPropsModule (ref), blendTransparenciesModule (ref), constantsModule (ref), stateLayerAffordanceModule (ref), scrollViewModule (ref), var1 (ref), mapBindableModule (ref), iconModule (ref)
 	local var2 = p1
 	
 	if p1.Selectable == nil then
@@ -139,19 +142,24 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		return function() end
 	end, { var3.composerDebug })
 	local var40 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var6 (ref)
+		-- upvalues: var5 (ref), var6 (ref), var8 (ref)
 		local current = var5.current or var6.current
 		
-		return if current and current.AbsoluteSize.X > 0 then current.AbsoluteSize.X else 0
+		if current and current.AbsoluteSize.X > 0 then
+			return current.AbsoluteSize.X
+		end
+		local current_1 = var8.current
+		
+		return if current_1 and current_1.AbsoluteWindowSize.X > 0 then current_1.AbsoluteWindowSize.X else 0
 	end, {})
 	local var41 = reactModule.useCallback(function(p3)
-		-- upvalues: measureTextLineCountModule (copy), var3 (ref), var32 (ref), var40 (ref), fontStyle (ref), fontSize (ref), var36 (ref)
+		-- upvalues: measureTextLineCountModule (copy), var3 (ref), var32 (ref), var40 (ref), foundationFontFaceMigration (copy), normalizeFontFaceModule (copy), fontStyle (ref), fontSize (ref), var36 (ref)
 		local var42 = measureTextLineCountModule({
 			text = p3,
 			maxLines = var3.maxLines,
 			singleLineHeight = var32,
 			layoutWidth = var40(),
-			font = fontStyle.Font,
+			font = if foundationFontFaceMigration then normalizeFontFaceModule(fontStyle.Font) else fontStyle.Font,
 			fontSize = fontSize
 		})
 		var36(math.max(if var42.boundsY and var42.boundsY > 0 then math.ceil(var42.boundsY) else var32, var42.lineCount * var32))
@@ -164,23 +172,32 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var43 = if var3.maxLines then var33 else math.max(1, var3.numLines)
 	local var44 = if var3.alwaysMultiLine then true else var43 > 1
 	reactModule.useEffect(function()
-		-- upvalues: var37 (ref), getBindableValueModule (copy), var3 (ref), var10 (ref), chatTextAreaDebugModule (copy), var39 (ref), var34 (ref), var41 (ref)
+		-- upvalues: var37 (ref), getBindableValueModule (copy), var3 (ref), var39 (ref), var34 (ref), var41 (ref), reactModule (copy), var10 (ref), chatTextAreaDebugModule (copy)
 		if not var37 then
 			return function() end
 		end
 		local var45 = getBindableValueModule(var3.text)
-		
-		if var45 ~= var10.current then
-			chatTextAreaDebugModule.log("syncFromParent", `len={utf8.len(var45) or #var45}`)
-			var10.current = var45
-			var39(var45)
+		var39(var45)
+		var34(var41(var45))
+		task.defer(function()
+			-- upvalues: var34 (copy), var41 (copy), var45 (ref)
 			var34(var41(var45))
+		end)
+		
+		return if typeof(var3.text) == "table" and var3.text.getValue ~= nil then reactModule.__subscribeToBinding(var3.text, function(p3)
+			-- upvalues: var10 (copy), chatTextAreaDebugModule (copy), var39 (copy), var34 (copy), var41 (copy)
+			if p3 == var10.current then
+				return
+			end
+			chatTextAreaDebugModule.log("syncFromParent", `len={utf8.len(p3) or #p3}`)
+			var10.current = p3
+			var39(p3)
+			var34(var41(p3))
 			task.defer(function()
-				-- upvalues: var34 (copy), var41 (copy), var45 (ref)
-				var34(var41(var45))
+				-- upvalues: var34 (copy), var41 (copy), p3 (ref)
+				var34(var41(p3))
 			end)
-		end
-		return function() end
+		end) else function() end
 	end, { var3.text, var41, var37 })
 	local var45 = reactModule.useCallback(function(p3)
 		-- upvalues: var5 (ref), var6 (ref)

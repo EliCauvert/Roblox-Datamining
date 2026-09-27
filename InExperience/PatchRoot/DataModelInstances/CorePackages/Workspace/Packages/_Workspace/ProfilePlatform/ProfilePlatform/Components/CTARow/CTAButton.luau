@@ -8,7 +8,10 @@ local useTradeItemsExposureLoggerModule = require(profilePlatform.Hooks.useTrade
 local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
 local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local contextualMenuContainsActionModule = require(profilePlatform.Utils.contextualMenuContainsAction)
+local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
+local fFlagProfileGamepadPrimaryActionFocusModule = require(profilePlatform.Flags.FFlagProfileGamepadPrimaryActionFocus)
 local reactModule = require(parent.React)
+local useComposedRef = require(parent.ReactUtils).useComposedRef
 local _ = require(parent.ReactFocusNavigation)
 local inputHandlersModule = require(parent.InputHandlers)
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
@@ -24,7 +27,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local fillBehavior = foundationModule.Enums.FillBehavior
 
 return function(p1)
-	-- upvalues: reactModule (ref), fFlagProfileTradeItemsExposureLoggingModule (ref), useTradeItemsExposureLoggerModule (ref), fFlagProfileTradeItemsImpressionLoggingModule (ref), useProfileAnalyticsContextModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), buttonVariant (ref), enumsModule (ref), contextualMenuContainsActionModule (ref), eventNamesModule (ref), iconButton (ref), button (ref), fillBehavior (ref), view (ref), contextualMenuModule (ref)
+	-- upvalues: reactModule (ref), fFlagProfileTradeItemsExposureLoggingModule (ref), useTradeItemsExposureLoggerModule (ref), fFlagProfileTradeItemsImpressionLoggingModule (ref), useProfileAnalyticsContextModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), fFlagProfileGamepadPrimaryActionFocusModule (ref), focusNavigationUtilsModule (ref), useComposedRef (ref), useProfileWrapperContextModule (ref), enumsModule (ref), buttonVariant (ref), contextualMenuContainsActionModule (ref), eventNamesModule (ref), iconButton (ref), button (ref), fillBehavior (ref), view (ref), contextualMenuModule (ref)
 	local var1, var2 = reactModule.useState(false)
 	local var3 = if fFlagProfileTradeItemsExposureLoggingModule then useTradeItemsExposureLoggerModule() else nil
 	local var4 = if fFlagProfileTradeItemsImpressionLoggingModule then useProfileAnalyticsContextModule() else nil
@@ -51,22 +54,27 @@ return function(p1)
 	})
 	local var8 = reactModule.useRef(nil)
 	local menuItem = p1.buttonItem.menuItem
+	local var9 = nil
+	
+	if fFlagProfileGamepadPrimaryActionFocusModule then
+		var9 = if p1.layoutOrder == 1 and menuItem.id ~= enumsModule.ProfileActions.ContextualOverflow and useProfileWrapperContextModule().headerVariant ~= enumsModule.ProfileTabVariants.MeTab then useComposedRef(var8, focusNavigationUtilsModule.useFocusOnMount()) else var8
+	end
 	local displayValue = menuItem.displayValue
 	local icon = displayValue.icon
 	local text = displayValue.text
 	local contextualMenuItems = p1.buttonItem.contextualMenuItems
-	local var9 = if p1.buttonItem.buttonStyle then p1.buttonItem.buttonStyle else buttonVariant.Standard
-	local var10 = contextualMenuItems and #contextualMenuItems > 0
+	local var10 = if p1.buttonItem.buttonStyle then p1.buttonItem.buttonStyle else buttonVariant.Standard
+	local var11 = contextualMenuItems and #contextualMenuItems > 0
 	local isDisabled = p1.buttonItem.menuItem.isDisabled
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: fFlagProfileTradeItemsExposureLoggingModule (copy), menuItem (ref), enumsModule (copy), var1 (ref), var3 (write), fFlagProfileTradeItemsImpressionLoggingModule (copy), contextualMenuContainsActionModule (copy), contextualMenuItems (ref), var4 (ref), eventNamesModule (copy), var10 (ref), var6 (ref)
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: fFlagProfileTradeItemsExposureLoggingModule (copy), menuItem (ref), enumsModule (copy), var1 (ref), var3 (write), fFlagProfileTradeItemsImpressionLoggingModule (copy), contextualMenuContainsActionModule (copy), contextualMenuItems (ref), var4 (ref), eventNamesModule (copy), var11 (ref), var6 (ref)
 		if fFlagProfileTradeItemsExposureLoggingModule and menuItem.id == enumsModule.ProfileActions.ContextualOverflow and not var1 then
 			var3()
 		end
 		if fFlagProfileTradeItemsImpressionLoggingModule and menuItem.id == enumsModule.ProfileActions.ContextualOverflow and (not var1 and contextualMenuContainsActionModule(contextualMenuItems, enumsModule.ProfileActions.TradeItems)) then
 			var4.fireAnalyticsEvent(eventNamesModule.ContextualMenuTradeItemsImpression, { buttonSurface = enumsModule.ButtonSurface.ContextualMenu })
 		end
-		if not var10 then
+		if not var11 then
 			menuItem.onActivated()
 			
 			return
@@ -75,36 +83,36 @@ return function(p1)
 		end
 		var6()
 	end, {
-		var10, var1, menuItem.id, menuItem.onActivated, var6,
+		var11, var1, menuItem.id, menuItem.onActivated, var6,
 		if fFlagProfileTradeItemsExposureLoggingModule then var3 else nil,
 		if fFlagProfileTradeItemsImpressionLoggingModule then var4 else nil,
 		if fFlagProfileTradeItemsImpressionLoggingModule then contextualMenuItems else nil
 	})
-	local var12 = icon ~= nil and text == nil
+	local var13 = icon ~= nil and text == nil
 	
 	return reactModule.createElement(view, {
-		tag = { ["auto-xy"] = var12, ["fill auto-y"] = not var12 },
+		tag = { ["auto-xy"] = var13, ["fill auto-y"] = not var13 },
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Button = if var12 then reactModule.createElement(iconButton, {
+		Button = if var13 then reactModule.createElement(iconButton, {
 			icon = icon,
 			LayoutOrder = p1.layoutOrder,
-			onActivated = var11,
+			onActivated = var12,
 			variant = buttonVariant.Standard,
-			ref = var8,
+			ref = if fFlagProfileGamepadPrimaryActionFocusModule then var9 else var8,
 			isDisabled = isDisabled
 		}) else reactModule.createElement(button, {
 			text = text,
 			icon = icon,
-			onActivated = var11,
+			onActivated = var12,
 			fillBehavior = fillBehavior.Fill,
-			variant = var9,
+			variant = var10,
 			isLoading = p1.buttonItem.isLoading,
 			LayoutOrder = p1.layoutOrder,
-			ref = var8,
+			ref = if fFlagProfileGamepadPrimaryActionFocusModule then var9 else var8,
 			isDisabled = isDisabled
 		}),
-		ContextualMenu = if var10 then reactModule.createElement(contextualMenuModule, {
+		ContextualMenu = if var11 then reactModule.createElement(contextualMenuModule, {
 			isOpen = var1,
 			menuItems = contextualMenuItems,
 			anchorRef = var8,

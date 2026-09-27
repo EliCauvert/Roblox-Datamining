@@ -29,7 +29,7 @@ local textOverlayDisplay = momentsCommonModule.Components.TextOverlayDisplay
 local getScale = momentsCommonModule.Utils.getScale
 local getFFlagMomentsStickerButton = momentsCommonModule.Flags.GetFFlagMomentsStickerButton
 local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
-local fFlagMomentsTextOverlayPreviewTransform = momentsCommonModule.Flags.FFlagMomentsTextOverlayPreviewTransform
+local fFlagMomentsTextOverlayV2Redesign = momentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
 local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
 local constantsModule = require(momentsCreation.Constants)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
@@ -44,13 +44,7 @@ local fitTextOverlayFontSizeModule = require(momentsCreation.Utils.fitTextOverla
 local isPointOverTrashTargetModule = require(momentsCreation.Utils.isPointOverTrashTarget)
 local getFFlagMomentsTextOverlayClampToBoundsModule = require(momentsCreation.Flags.GetFFlagMomentsTextOverlayClampToBounds)
 local getFFlagMomentsCreationTextOverlayResolutionScaleModule = require(momentsCreation.Flags.GetFFlagMomentsCreationTextOverlayResolutionScale)
-local getFFlagMomentsTextVerticalSizeSliderModule = require(momentsCreation.Flags.GetFFlagMomentsTextVerticalSizeSlider)
 local verticalFontSizeSliderModule = require(momentsCreation.Components.TextOverlay.VerticalFontSizeSlider)
-local getFFlagMomentsTextDragToDeleteModule = require(momentsCreation.Flags.GetFFlagMomentsTextDragToDelete)
-local fFlagMomentsTextAlignmentPickerModule = require(momentsCreation.Flags.FFlagMomentsTextAlignmentPicker)
-local fFlagMomentsTextColorPickerModule = require(momentsCreation.Flags.FFlagMomentsTextColorPicker)
-local fFlagMomentsTextFontPickerModule = require(momentsCreation.Flags.FFlagMomentsTextFontPicker)
-local fFlagMomentsTextOverlayBottomScrimModule = require(momentsCreation.Flags.FFlagMomentsTextOverlayBottomScrim)
 local textOverlayToolbarModule = require(momentsCreation.Components.TextOverlay.TextOverlayToolbar)
 local t = { dampingRatio = 0.85, frequency = 12 }
 local numberSequence = NumberSequence.new({
@@ -87,7 +81,7 @@ local function GenerateTextButton(p1)
 end
 
 return function(p1)
-	-- upvalues: useSignalState (ref), getFFlagMomentsCreationTextOverlayResolutionScaleModule (ref), getScale (ref), useMemo (ref), signalsModule (ref), creationFlowStateModule (ref), useRef (ref), useBinding (ref), useOnScreenKeyboardHeightModule (ref), fFlagMomentsTextOverlayPreviewTransform (ref), constantsModule (ref), fitTextOverlayFontSizeModule (ref), useCallback (ref), getFFlagMomentsStickerButton (ref), dashModule (ref), getFFlagEnableMomentTextGeneration (ref), useDeviceInsets (ref), useAnimatedBinding (ref), useIsMultiTouchActive (ref), UIDragDetectorFixEventPositionEnabledEngineFeature (ref), guiService (ref), isPointOverTrashTargetModule (ref), getFFlagMomentsTextDragToDeleteModule (ref), reactOtterModule (ref), t (ref), useEffect (ref), makeTextOverlayEditsForEditorModule (ref), makeDefaultTextOverlayEditModule (ref), textService (ref), reactModule (ref), view (ref), foundationModule (ref), textOverlay (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref), GenerateTextButton (ref), getFFlagMomentsTextVerticalSizeSliderModule (ref), verticalFontSizeSliderModule (ref), fFlagMomentsTextOverlayBottomScrimModule (ref), numberSequence (ref), fFlagMomentsTextAlignmentPickerModule (ref), fFlagMomentsTextColorPickerModule (ref), fFlagMomentsTextFontPickerModule (ref), textOverlayToolbarModule (ref), overlayDisplay (ref), getFFlagMomentsTextOverlayClampToBoundsModule (ref), textOverlayDisplay (ref), textOverlayTrashZoneModule (ref)
+	-- upvalues: useSignalState (ref), getFFlagMomentsCreationTextOverlayResolutionScaleModule (ref), getScale (ref), useMemo (ref), signalsModule (ref), creationFlowStateModule (ref), useRef (ref), useBinding (ref), useOnScreenKeyboardHeightModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), constantsModule (ref), fitTextOverlayFontSizeModule (ref), useCallback (ref), getFFlagMomentsStickerButton (ref), dashModule (ref), getFFlagEnableMomentTextGeneration (ref), useDeviceInsets (ref), useAnimatedBinding (ref), useIsMultiTouchActive (ref), UIDragDetectorFixEventPositionEnabledEngineFeature (ref), guiService (ref), isPointOverTrashTargetModule (ref), reactOtterModule (ref), t (ref), useEffect (ref), makeTextOverlayEditsForEditorModule (ref), makeDefaultTextOverlayEditModule (ref), textService (ref), reactModule (ref), view (ref), foundationModule (ref), textOverlay (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref), GenerateTextButton (ref), verticalFontSizeSliderModule (ref), numberSequence (ref), textOverlayToolbarModule (ref), overlayDisplay (ref), getFFlagMomentsTextOverlayClampToBoundsModule (ref), textOverlayDisplay (ref), textOverlayTrashZoneModule (ref)
 	local controller = p1.controller
 	local var1 = useSignalState(controller.getStep)
 	local var2 = useSignalState(p1.ctx.getItemSize)
@@ -109,7 +103,7 @@ return function(p1)
 	local var9 = useRef(nil)
 	local var10, var11 = useBinding(UDim2.fromOffset(0, 0))
 	local var12 = useOnScreenKeyboardHeightModule()
-	local var13 = if fFlagMomentsTextOverlayPreviewTransform then useMemo(function()
+	local var13 = if fFlagMomentsTextOverlayV2Redesign then useMemo(function()
 		-- upvalues: var8 (ref), constantsModule (copy), var12 (ref), var2 (ref), fitTextOverlayFontSizeModule (copy)
 		return if var8 == nil then constantsModule.TextOverlay.DefaultFontSize elseif var12 > 0 then constantsModule.TextOverlay.DefaultFontSize else fitTextOverlayFontSizeModule(var8.text, var8.textOverlayStyle.font, var8.textOverlayStyle.fontSize, math.min(300, var2.X * 0.9), var2.Y * 0.8, constantsModule.TextOverlay.MinFontSize)
 	end, { var8, var12, var2 }) elseif var8 ~= nil then constantsModule.TextOverlay.DefaultFontSize else var8.textOverlayStyle.fontSize
@@ -157,7 +151,7 @@ return function(p1)
 	local var18 = nil
 	local var19 = nil
 	
-	if fFlagMomentsTextOverlayPreviewTransform then
+	if fFlagMomentsTextOverlayV2Redesign then
 		var18 = useCallback(function(p2)
 			-- upvalues: controller (ref), dashModule (copy)
 			local textOverlays = controller.getComposedEdits(false).textOverlays
@@ -179,15 +173,15 @@ return function(p1)
 			controller.updateCommittedEdit("text", { dashModule.joinDeep(var20, { rotation = p2 }) })
 		end, { controller })
 	end
-	local var20 = if fFlagMomentsTextOverlayPreviewTransform then useDeviceInsets() else nil
+	local var20 = if fFlagMomentsTextOverlayV2Redesign then useDeviceInsets() else nil
 	local var21 = useRef(nil)
 	local var22 = useRef(false)
 	local var23, var24 = useBinding(false)
 	local var25, var26 = useAnimatedBinding(1)
 	local var27, var28 = useAnimatedBinding(1)
-	local var29 = if fFlagMomentsTextOverlayPreviewTransform then useIsMultiTouchActive(var1 == creationFlowStateModule.Preview) else false
+	local var29 = if fFlagMomentsTextOverlayV2Redesign then useIsMultiTouchActive(var1 == creationFlowStateModule.Preview) else false
 	local var30 = useCallback(function(p2)
-		-- upvalues: var21 (ref), fFlagMomentsTextOverlayPreviewTransform (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), var20 (write), guiService (copy), isPointOverTrashTargetModule (copy)
+		-- upvalues: var21 (ref), fFlagMomentsTextOverlayV2Redesign (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), var20 (write), guiService (copy), isPointOverTrashTargetModule (copy)
 		local current = var21.current
 		
 		if current == nil then
@@ -196,17 +190,17 @@ return function(p1)
 		local zero = Vector2.zero
 		local var31 = 0
 		
-		if fFlagMomentsTextOverlayPreviewTransform and not UIDragDetectorFixEventPositionEnabledEngineFeature and var20 ~= nil then
+		if fFlagMomentsTextOverlayV2Redesign and not UIDragDetectorFixEventPositionEnabledEngineFeature and var20 ~= nil then
 			zero = guiService:GetGuiInset() + Vector2.new(var20.left, var20.top)
 		end
-		if fFlagMomentsTextOverlayPreviewTransform then
+		if fFlagMomentsTextOverlayV2Redesign then
 			var31 = 24
 		end
 		return isPointOverTrashTargetModule(p2, zero, current.AbsolutePosition, current.AbsoluteSize, var31)
 	end, { var20 })
 	local var31 = useCallback(function()
-		-- upvalues: getFFlagMomentsTextDragToDeleteModule (copy), p1 (ref), var22 (ref), var26 (ref), reactOtterModule (copy), var28 (ref), var24 (ref)
-		if not getFFlagMomentsTextDragToDeleteModule() then return end
+		-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), p1 (ref), var22 (ref), var26 (ref), reactOtterModule (copy), var28 (ref), var24 (ref)
+		if not fFlagMomentsTextOverlayV2Redesign then return end
 		if p1.ctx.setIsOverlayDragging then
 			p1.ctx.setIsOverlayDragging(true)
 		end
@@ -216,8 +210,8 @@ return function(p1)
 		var24(true)
 	end, { p1.ctx, var26, var28, var24 })
 	local var32 = useCallback(function(p2)
-		-- upvalues: getFFlagMomentsTextDragToDeleteModule (copy), var30 (ref), var22 (ref), var26 (ref), reactOtterModule (copy), t (copy), var28 (ref)
-		if not getFFlagMomentsTextDragToDeleteModule() then return end
+		-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), var30 (ref), var22 (ref), var26 (ref), reactOtterModule (copy), t (copy), var28 (ref)
+		if not fFlagMomentsTextOverlayV2Redesign then return end
 		local var33 = var30(p2)
 		
 		if var33 == var22.current then
@@ -228,8 +222,8 @@ return function(p1)
 		var28(reactOtterModule.spring(if var33 then 0.45 else 1, t))
 	end, { var30, var26, var28 })
 	local var33 = useCallback(function(p2)
-		-- upvalues: getFFlagMomentsTextDragToDeleteModule (copy), var17 (ref), p1 (ref), var22 (ref), var24 (ref), var26 (ref), reactOtterModule (copy), controller (ref), var28 (ref)
-		if not getFFlagMomentsTextDragToDeleteModule() then
+		-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), var17 (ref), p1 (ref), var22 (ref), var24 (ref), var26 (ref), reactOtterModule (copy), controller (ref), var28 (ref)
+		if not fFlagMomentsTextOverlayV2Redesign then
 			var17(p2)
 			
 			return
@@ -252,17 +246,17 @@ return function(p1)
 		p1.ctx, controller, var17, var24, var26, var28
 	})
 	useEffect(function()
-		-- upvalues: getFFlagMomentsTextDragToDeleteModule (copy), textOverlays (ref), var28 (ref), reactOtterModule (copy)
-		if not getFFlagMomentsTextDragToDeleteModule() then return end
+		-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), textOverlays (ref), var28 (ref), reactOtterModule (copy)
+		if not fFlagMomentsTextOverlayV2Redesign then return end
 		if textOverlays == nil or #textOverlays == 0 then
 			var28(reactOtterModule.instant(1))
 		end
 	end, { textOverlays })
 	
-	if fFlagMomentsTextOverlayPreviewTransform then
+	if fFlagMomentsTextOverlayV2Redesign then
 		useEffect(function()
-			-- upvalues: getFFlagMomentsTextDragToDeleteModule (copy), var29 (write), var22 (ref), var24 (ref), var26 (ref), reactOtterModule (copy), var28 (ref), p1 (ref)
-			if not getFFlagMomentsTextDragToDeleteModule() or not var29 then return end
+			-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), var29 (write), var22 (ref), var24 (ref), var26 (ref), reactOtterModule (copy), var28 (ref), p1 (ref)
+			if not fFlagMomentsTextOverlayV2Redesign or not var29 then return end
 			var22.current = false
 			var24(false)
 			var26(reactOtterModule.instant(1))
@@ -325,7 +319,7 @@ return function(p1)
 		var12,
 		var2
 	})
-	local var35 = not fFlagMomentsTextOverlayPreviewTransform or var12 == 0
+	local var35 = not fFlagMomentsTextOverlayV2Redesign or var12 == 0
 	
 	if var7 then
 		return if var8 == nil then nil else reactModule.createElement(view, {
@@ -337,7 +331,8 @@ return function(p1)
 		}, {
 			TextOverlay = reactModule.createElement(textOverlay, {
 				editable = true,
-				additionalScale = if fFlagMomentsTextOverlayPreviewTransform then var5 else nil,
+				additionalScale = if fFlagMomentsTextOverlayV2Redesign then var5 else nil,
+				fitToContent = var12 == 0,
 				onActivated = var14,
 				size = var10,
 				textOverlayEdit = dashModule.joinDeep(var8, {
@@ -349,8 +344,8 @@ return function(p1)
 				textBoxRef = var9
 			}),
 			GenerateText = if getFFlagMomentsGenerateTextInTextOverlayModule() and controller.getCanGenerateText(false) then reactModule.createElement(GenerateTextButton, { controller = controller }) else nil,
-			VerticalFontSizeSlider = if getFFlagMomentsTextVerticalSizeSliderModule() and var35 then reactModule.createElement(verticalFontSizeSliderModule, { controller = controller, mediaHeight = var2.Y }) else nil,
-			BottomScrim = if fFlagMomentsTextOverlayBottomScrimModule then reactModule.createElement(view, {
+			VerticalFontSizeSlider = if fFlagMomentsTextOverlayV2Redesign and var35 then reactModule.createElement(verticalFontSizeSliderModule, { controller = controller, mediaHeight = var2.Y }) else nil,
+			BottomScrim = if fFlagMomentsTextOverlayV2Redesign then reactModule.createElement(view, {
 				ZIndex = 5,
 				tag = "position-bottom-center anchor-bottom-center",
 				Size = UDim2.new(1, 0, 0, 200),
@@ -358,15 +353,15 @@ return function(p1)
 			}, {
 				UIGradient = reactModule.createElement("UIGradient", { Rotation = 90, Transparency = numberSequence })
 			}) else nil,
-			TextOverlayToolbar = if fFlagMomentsTextAlignmentPickerModule or fFlagMomentsTextColorPickerModule or fFlagMomentsTextFontPickerModule then reactModule.createElement(textOverlayToolbarModule, { controller = controller, isKeyboardVisible = var12 > 0 }) else nil
+			TextOverlayToolbar = if fFlagMomentsTextOverlayV2Redesign then reactModule.createElement(textOverlayToolbarModule, { controller = controller, isKeyboardVisible = var12 > 0 }) else nil
 		})
 	elseif textOverlays == nil or #textOverlays == 0 then
 		return nil
 	end
 	local var36 = var1 == creationFlowStateModule.Preview
 	local var37 = var36 and not var29
-	local var38 = getFFlagMomentsTextDragToDeleteModule() and var36
-	local var39 = fFlagMomentsTextOverlayPreviewTransform and var36
+	local var38 = fFlagMomentsTextOverlayV2Redesign and var36
+	local var39 = fFlagMomentsTextOverlayV2Redesign and var36
 	local var40 = if getFFlagMomentsStickerButton() then reactModule.createElement(overlayDisplay, {
 		editable = false,
 		clampToBoundsEnabled = getFFlagMomentsTextOverlayClampToBoundsModule(),

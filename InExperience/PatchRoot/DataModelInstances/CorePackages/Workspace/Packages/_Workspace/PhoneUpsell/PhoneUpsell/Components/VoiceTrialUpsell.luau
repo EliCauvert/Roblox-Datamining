@@ -2,6 +2,9 @@
 local parent = phoneUpsell.Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useStyle = UIBloxModule.Core.Style.useStyle
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useRef = reactModule.useRef
@@ -40,7 +43,7 @@ local function getButtonStackProps(p1, p2, p3, p4, p5)
 end
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useDispatch (ref), useRef (ref), useStyle (ref), useLocalization (ref), useRoactService (ref), roactNetworking (ref), postUserOptIn (ref), postUpsellTrialOptInModule (ref), setCurrentToastMessage (ref), toastRoduxModule (ref), images (ref), reactModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), interactiveAlert (ref), getButtonStackProps (ref)
+	-- upvalues: cryoModule (ref), t (ref), useDispatch (ref), useRef (ref), useStyle (ref), useLocalization (ref), useRoactService (ref), roactNetworking (ref), postUserOptIn (ref), postUpsellTrialOptInModule (ref), setCurrentToastMessage (ref), toastRoduxModule (ref), images (ref), reactModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), interactiveAlert (ref), getButtonStackProps (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = cryoModule.Dictionary.union(t, p1)
 	local t_1 = {
 		titleKey = "Feature.VerificationUpsell.Heading.TryVoiceChat",
@@ -93,7 +96,7 @@ return function(p1)
 			end, var5.extraButtonKey, var1.onClose),
 			onCloseClicked = var1.onClose,
 			middleContent = function()
-				-- upvalues: reactModule (copy), var5 (ref), baseSize (ref), var4 (ref)
+				-- upvalues: reactModule (copy), var5 (ref), baseSize (ref), var4 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.Y,
@@ -108,7 +111,8 @@ return function(p1)
 						TextSize = baseSize,
 						TextColor3 = var4.Theme.TextDefault.Color,
 						TextTransparency = var4.Theme.TextDefault.Transparency,
-						Font = var4.Font.Body.Font,
+						Font = if foundationFontFaceMigration then nil else var4.Font.Body.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(var4.Tokens.Typography.BodyLarge.Font) else nil,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y

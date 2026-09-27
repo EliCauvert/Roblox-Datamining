@@ -7,7 +7,6 @@ return {
 	Analytics = require(script.Analytics),
 	VoiceVolumeControlsEligibility = require(script.VoiceVolumeControlsEligibility),
 	Flags = {
-		GetFFlagUpdateDeviceInputPlayerChanged = require(flags.GetFFlagUpdateDeviceInputPlayerChanged),
 		GetFFlagVoiceChatServiceManagerUseAvatarChat = require(flags.GetFFlagVoiceChatServiceManagerUseAvatarChat),
 		GetFFlagBatchVoiceParticipantsUpdates = require(flags.GetFFlagBatchVoiceParticipantsUpdates),
 		GetFIntThrottleParticipantsUpdateMs = require(flags.GetFIntThrottleParticipantsUpdateMs),

@@ -5,13 +5,16 @@ local reactModule = require(parent.React)
 local oneByTwoTileModule = require(sponsoredTiles.OneByTwoTile)
 local getTileBadgeByPositionConfigFromEntry = require(parent.GameTile).getTileBadgeByPositionConfigFromEntry
 local _ = require(parent.VideoUtils)
-local fFlagLuaAppEnableReportExperience = require(parent.SharedFlags).FFlagLuaAppEnableReportExperience
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagLuaAppEnableReportExperience = sharedFlagsModule.FFlagLuaAppEnableReportExperience
+local fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor = sharedFlagsModule.FFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor
 local var1 = reactModule.memo(function(p1)
-	-- upvalues: getTileBadgeByPositionConfigFromEntry (ref), reactModule (ref), oneByTwoTileModule (ref), fFlagLuaAppEnableReportExperience (ref)
+	-- upvalues: getTileBadgeByPositionConfigFromEntry (ref), reactModule (ref), oneByTwoTileModule (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (ref), fFlagLuaAppEnableReportExperience (ref)
 	local var2 = -((p1.maxItemIndex or 0) + 1)
 	
 	return reactModule.createElement(oneByTwoTileModule, {
 		size = p1.item.sizeOverride,
+		alignmentType = if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor and p1.item.spanOverride ~= nil then p1.item.spanOverride.alignmentType else nil,
 		zIndex = if p1.zIndex then p1.zIndex + var2 else var2,
 		hoverKey = `OneByTwoTile_{p1.impressionsTag or ""}_{p1.index or "0"}_{p1.item.universeId or p1.item.clickoutUrl}`,
 		contentType = p1.item.contentType,

@@ -47,13 +47,14 @@ local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPres
 local sharedFlagsModule = require(parent.SharedFlags)
 local getFFlagExpChatProtectedChatInternalAPIs = sharedFlagsModule.getFFlagExpChatProtectedChatInternalAPIs
 local fFlagExpChatUseChatConfigStore = sharedFlagsModule.FFlagExpChatUseChatConfigStore
-local fFlagChatLineReportingGlobalMuteEnabled = sharedFlagsModule.FFlagChatLineReportingGlobalMuteEnabled
 local fFlagExpChatDictation = sharedFlagsModule.FFlagExpChatDictation
 local getChatConfigurationStoreModule = require(expChat.Stores.GetChatConfigurationStore)
 local computeNameColor = require(parent.ChatUIPrimitives).Utils.computeNameColor
 local getFFlagExpChatExcludeFOMORendersModule = require(expChat.Flags.getFFlagExpChatExcludeFOMORenders)
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local fFlagExpChatDisableUniverseBubbleChat = expChatSharedModule.Flags.FFlagExpChatDisableUniverseBubbleChat
+local isGlobalBubbleChatEnabledModule = require(expChat.isGlobalBubbleChatEnabled)
+local fFlagExpChatGlobalTabDefaultModule = require(expChat.Flags.FFlagExpChatGlobalTabDefault)
 local getFFlagExpChatSyntheticSystemMessageRichText = expChatSharedModule.Flags.GetFFlagExpChatSyntheticSystemMessageRichText
 local getTextAndTranslationModule = require(expChat.getTextAndTranslation)
 local channelTabsConfigurationEnabledModule = require(actions.ChannelTabsConfigurationEnabled)
@@ -90,7 +91,7 @@ local function resolveChannelNameForMapOrder(p1, p2, p3)
 end
 
 local function mapByMessageIdInOrderHelper(p1, p2, p3)
-	-- upvalues: isWhiteSpaceOnlyModule (ref), resolveChannelNameForMapOrder (ref), httpService (ref), dictionary (ref), fFlagEnableInExpChatRewriteModule (ref), fFlagExpChatDictation (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagChatLineReportingGlobalMuteEnabled (ref), fFlagExpChatPresetChatEnabled (ref), list (ref), fFlagExpChatEnableFOMOUpsellModule (ref), getFFlagExpChatExcludeFOMORendersModule (ref)
+	-- upvalues: isWhiteSpaceOnlyModule (ref), resolveChannelNameForMapOrder (ref), httpService (ref), dictionary (ref), fFlagEnableInExpChatRewriteModule (ref), fFlagExpChatDictation (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatPresetChatEnabled (ref), list (ref), fFlagExpChatEnableFOMOUpsellModule (ref), getFFlagExpChatExcludeFOMORendersModule (ref)
 	if isWhiteSpaceOnlyModule(p2.text) and p2.status ~= Enum.TextChatMessageStatus.Floodchecked and p2.status ~= Enum.TextChatMessageStatus.MessageTooLong then
 		return p1
 	end
@@ -144,7 +145,7 @@ local function mapByMessageIdInOrderHelper(p1, p2, p3)
 			wasRewritten = wasRewritten,
 			originalText = originalText,
 			chatActionType = if fFlagEnableInExpChatSummaryOnLuaModule then p2.chatActionType else nil,
-			isUniverseChat = if fFlagChatLineReportingGlobalMuteEnabled then p2.isUniverseChat else nil,
+			isUniverseChat = p2.isUniverseChat,
 			presetId = if fFlagExpChatPresetChatEnabled then p2.presetId else nil,
 			presetChatVersion = if fFlagExpChatPresetChatEnabled then p2.presetChatVersion else nil
 		}
@@ -272,7 +273,7 @@ local function mapByMessageIdInOrderHelper(p1, p2, p3)
 				wasRewritten = wasRewritten,
 				originalText = originalText,
 				chatActionType = if fFlagEnableInExpChatSummaryOnLuaModule then p2.chatActionType else nil,
-				isUniverseChat = if fFlagChatLineReportingGlobalMuteEnabled then p2.isUniverseChat else nil,
+				isUniverseChat = p2.isUniverseChat,
 				presetId = if fFlagExpChatPresetChatEnabled then p2.presetId else nil,
 				presetChatVersion = if fFlagExpChatPresetChatEnabled then p2.presetChatVersion else nil
 			}
@@ -300,7 +301,7 @@ local function mapByMessageIdInOrderHelper(p1, p2, p3)
 				wasRewritten = wasRewritten,
 				originalText = originalText,
 				chatActionType = if fFlagEnableInExpChatSummaryOnLuaModule then p2.chatActionType else nil,
-				isUniverseChat = if fFlagChatLineReportingGlobalMuteEnabled then p2.isUniverseChat else nil,
+				isUniverseChat = p2.isUniverseChat,
 				presetId = if fFlagExpChatPresetChatEnabled then p2.presetId else nil,
 				presetChatVersion = if fFlagExpChatPresetChatEnabled then p2.presetChatVersion else nil
 			})
@@ -309,7 +310,7 @@ local function mapByMessageIdInOrderHelper(p1, p2, p3)
 end
 
 local function mapByMessageIdInOrder(p1, p2)
-	-- upvalues: fFlagEnableInExpChatRewriteModule (ref), getTextAndTranslationModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), fFlagExpChatFixLocalUserVerifiedBadgeModule (ref), outgoingMessageSentModule (ref), playersService (ref), fFlagExpChatPresetChatEnabled (ref), set (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatDisableUniverseBubbleChat (ref), getFFlagTextChatEnableUniverseChatTabs (ref), shouldRenderTextChannelInDefaultWindow (ref), getTextChannelDisplayMode (ref), computeNameColor (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), fFlagChatLineReportingGlobalMuteEnabled (ref), mapByMessageIdInOrderHelper (ref)
+	-- upvalues: fFlagEnableInExpChatRewriteModule (ref), getTextAndTranslationModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), fFlagExpChatFixLocalUserVerifiedBadgeModule (ref), outgoingMessageSentModule (ref), playersService (ref), fFlagExpChatPresetChatEnabled (ref), set (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatDisableUniverseBubbleChat (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatGlobalTabDefaultModule (ref), isGlobalBubbleChatEnabledModule (ref), shouldRenderTextChannelInDefaultWindow (ref), getTextChannelDisplayMode (ref), computeNameColor (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), mapByMessageIdInOrderHelper (ref)
 	local var1, var2
 	local textChatMessage = p2.textChatMessage
 	local _ = nil
@@ -337,7 +338,7 @@ local function mapByMessageIdInOrder(p1, p2)
 	var5 = var5 and not (if var6 then set.has(p1._mutedUserIds, var6) else false)
 	local var7 = if (if fFlagExpChatUseChatConfigStore then getChatConfigurationStoreModule(false).getIsBubbleChatEnabled(false) else p1.isBubbleChatEnabled) and var5 and (not fFlagEnableInExpChatSummaryOnLuaModule or var6 ~= nil) and (textChatMessage.Status == Enum.TextChatMessageStatus.Success or textChatMessage.Status == Enum.TextChatMessageStatus.Sending) then true else false
 	
-	if fFlagExpChatDisableUniverseBubbleChat and getFFlagTextChatEnableUniverseChatTabs() and p2.isUniverseChat == true then
+	if fFlagExpChatDisableUniverseBubbleChat and getFFlagTextChatEnableUniverseChatTabs() and p2.isUniverseChat == true and (not fFlagExpChatGlobalTabDefaultModule or not isGlobalBubbleChatEnabledModule()) then
 		var7 = false
 	end
 	if not p2.isUniverseChat and p2.channelNameOverride == nil and not shouldRenderTextChannelInDefaultWindow(textChatMessage.TextChannel, getTextChannelDisplayMode()) then
@@ -366,7 +367,7 @@ local function mapByMessageIdInOrder(p1, p2)
 		wasRewritten = if fFlagEnableInExpChatRewriteModule then textChatMessage.WasRewritten else nil,
 		originalText = if fFlagEnableInExpChatRewriteModule then textChatMessage.OriginalText else nil,
 		chatActionType = if fFlagEnableInExpChatSummaryOnLuaModule then textChatMessage.ChatActionType else nil,
-		isUniverseChat = if fFlagChatLineReportingGlobalMuteEnabled then p2.isUniverseChat else nil,
+		isUniverseChat = p2.isUniverseChat,
 		presetId = if fFlagExpChatPresetChatEnabled then textChatMessage.PresetId else nil,
 		presetChatVersion = if fFlagExpChatPresetChatEnabled then textChatMessage.PresetChatVersion else nil
 	}, if getFFlagTextChatEnableUniverseChatTabs() then p2.channelNameOverride else nil)

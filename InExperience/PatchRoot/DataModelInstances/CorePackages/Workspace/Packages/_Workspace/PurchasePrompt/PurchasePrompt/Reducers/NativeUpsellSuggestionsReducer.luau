@@ -5,7 +5,8 @@ return require(purchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer({},
 		return {
 			products = p1.products,
 			selection = p1.selection,
-			virtualItemBadgeType = p1.virtualItemBadgeType
+			virtualItemBadgeType = p1.virtualItemBadgeType,
+			experimentVariant = p1.experimentVariant
 		}
 	end
 })

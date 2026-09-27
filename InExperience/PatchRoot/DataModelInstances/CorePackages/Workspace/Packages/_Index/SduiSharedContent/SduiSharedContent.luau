@@ -13,6 +13,7 @@
 	SduiOverflowMenu = require(script.Components.SduiOverflowMenu),
 	SduiTileOverflowMenu = require(script.Components.SduiTileOverflowMenu),
 	SduiText = require(script.Components.SduiText),
+	SduiLineLimitedText = require(script.Components.SduiLineLimitedText),
 	SduiPlayButton = require(script.Components.SduiPlayButton),
 	SduiPlayWithReward = require(script.Components.SduiPlayWithReward),
 	SduiPlayButtonContextualMessage = require(script.Components.SduiPlayButtonContextualMessage),

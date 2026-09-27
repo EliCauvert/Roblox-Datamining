@@ -11,8 +11,6 @@ local _ = require(sduiCoreSystem.SduiConfigTypes)
 local _ = require(sduiCoreSystem.SduiComponentType)
 local getSduiComponentRegistryModule = require(sduiCoreSystem.getSduiComponentRegistry)
 local validateInterfaceModule = require(sduiCoreSystem.validateInterface)
-local fFlagSduiNestedComponentListProp = require(parent.SharedFlags).FFlagSduiNestedComponentListProp
-local fFlagSduiPoolBackedFeed = require(parent.SharedFlags).FFlagSduiPoolBackedFeed
 
 local function SduiErrorComponent(_)
 	-- upvalues: reactModule (ref)
@@ -25,7 +23,7 @@ end
 local t = {}
 
 local function buildWrappedComponent(p1, p2, p3)
-	-- upvalues: fFlagSduiNestedComponentListProp (ref), t (ref), reactModule (ref), getSduiComponentRegistryModule (ref), sduiErrorType (ref), SduiErrorComponent (ref), validateInterfaceModule (ref)
+	-- upvalues: t (ref), reactModule (ref), getSduiComponentRegistryModule (ref), sduiErrorType (ref), SduiErrorComponent (ref), validateInterfaceModule (ref)
 	local componentType = p2.componentConfig.componentType
 	local sduiContext = p2.sduiContext
 	
@@ -33,11 +31,11 @@ local function buildWrappedComponent(p1, p2, p3)
 		p2.componentConfig.analyticsContext.setLocalAnalyticsData(p2.localAnalyticsData)
 	end
 	local var1 = if p2.componentConfig.props then table.clone(p2.componentConfig.props) else {}
-	local var2 = if fFlagSduiNestedComponentListProp and p2.componentConfig.nestedComponentConfigListPropSignalNames then p2.componentConfig.nestedComponentConfigListPropSignalNames else t
+	local var2 = if p2.componentConfig.nestedComponentConfigListPropSignalNames then p2.componentConfig.nestedComponentConfigListPropSignalNames else t
 	
 	if p3 then
 		for i, v in p3 do
-			if not v.isNestedComponentConfig and (not fFlagSduiNestedComponentListProp or not var2[i]) then
+			if not v.isNestedComponentConfig and not var2[i] then
 				var1[i] = v.data
 			end
 		end
@@ -74,7 +72,7 @@ local function buildWrappedComponent(p1, p2, p3)
 			})
 		end
 	end
-	if fFlagSduiNestedComponentListProp and p3 and next(var2) then
+	if p3 and next(var2) then
 		for i in var2 do
 			local var5 = p3[i]
 			
@@ -111,23 +109,23 @@ local function buildWrappedComponent(p1, p2, p3)
 end
 
 return function(p4)
-	-- upvalues: reactModule (ref), buildWrappedComponent (ref), compareSduiPropsModule (ref), fFlagSduiPoolBackedFeed (ref), signalsModule (ref), tutilsModule (ref), signalsReactModule (ref)
+	-- upvalues: reactModule (ref), buildWrappedComponent (ref), compareSduiPropsModule (ref), signalsModule (ref), tutilsModule (ref), signalsReactModule (ref)
 	return {
 		SduiClientBindingThinWrapper = reactModule.memo(function(p5)
 			-- upvalues: buildWrappedComponent (copy), p4 (ref)
 			return buildWrappedComponent(p4, p5)
 		end, compareSduiPropsModule),
 		SduiDataBindingWrapper = reactModule.memo(function(p5)
-			-- upvalues: fFlagSduiPoolBackedFeed (copy), reactModule (copy), signalsModule (copy), tutilsModule (copy), signalsReactModule (copy), buildWrappedComponent (copy), p4 (ref)
+			-- upvalues: reactModule (copy), signalsModule (copy), tutilsModule (copy), signalsReactModule (copy), buildWrappedComponent (copy), p4 (ref)
 			local propSignals = p5.componentConfig.propSignals
 			local isComponentFilteredSignal = p5.componentConfig.isComponentFilteredSignal
-			local var7 = if fFlagSduiPoolBackedFeed then p5.extraLocalPropSignals else nil
-			local var8 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-				-- upvalues: propSignals (ref), isComponentFilteredSignal (ref), var7 (ref), signalsModule (copy), fFlagSduiPoolBackedFeed (copy), tutilsModule (copy)
-				assert(propSignals or (isComponentFilteredSignal or var7), "propSignals, isComponentFilteredSignal, or extraLocalPropSignals must exist")
+			local extraLocalPropSignals = p5.extraLocalPropSignals
+			local var7 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+				-- upvalues: propSignals (ref), isComponentFilteredSignal (ref), extraLocalPropSignals (ref), signalsModule (copy), tutilsModule (copy)
+				assert(propSignals or (isComponentFilteredSignal or extraLocalPropSignals), "propSignals, isComponentFilteredSignal, or extraLocalPropSignals must exist")
 				
 				return signalsModule.createComputed(function(p6)
-					-- upvalues: propSignals (copy), fFlagSduiPoolBackedFeed (copy), var7 (copy), isComponentFilteredSignal (copy)
+					-- upvalues: propSignals (copy), extraLocalPropSignals (copy), isComponentFilteredSignal (copy)
 					local t = {}
 					
 					if propSignals then
@@ -135,8 +133,8 @@ return function(p4)
 							t[i] = v(p6)
 						end
 					end
-					if fFlagSduiPoolBackedFeed and var7 then
-						for i, v in var7 do
+					if extraLocalPropSignals then
+						for i, v in extraLocalPropSignals do
 							t[i] = { data = v(p6) }
 						end
 					end
@@ -148,11 +146,11 @@ return function(p4)
 			end, {
 				propSignals,
 				isComponentFilteredSignal,
-				if fFlagSduiPoolBackedFeed then var7 else nil,
+				extraLocalPropSignals,
 				p5.componentConfig.componentType
 			}))
 			
-			return if var8.__isComponentFiltered == true then nil else buildWrappedComponent(p4, p5, var8)
+			return if var7.__isComponentFiltered == true then nil else buildWrappedComponent(p4, p5, var7)
 		end, compareSduiPropsModule)
 	}
 end

@@ -6,7 +6,6 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local wrapTargetCageUVReferenceValuesModule = require(parent.WrapTargetCageUVReferenceValues)
 local collisionTestUtilModule = require(parent.util.CollisionTestUtil)
 local stringUtilModule = require(parent.util.StringUtil)
-local getFFlagUGCValidateMigrateCageUVModule = require(parent.flags.getFFlagUGCValidateMigrateCageUV)
 local UGCValidateExcludedUVModifyRequirements = game:DefineFastInt("UGCValidateExcludedUVModifyRequirements", 14)
 local UGCValidatePartUVModifyRequirements = game:DefineFastInt("UGCValidatePartUVModifyRequirements", 45)
 local UGCValidateRenderMeshInsideModifiedArea = game:DefineFastInt("UGCValidateRenderMeshInsideModifiedArea", 70)
@@ -19,7 +18,6 @@ local t = {
 		validationEnumsModule.SharedDataMember.renderMeshesData
 	},
 	conditionalData = {},
-	fflag = getFFlagUGCValidateMigrateCageUVModule,
 	expectedFailures = {}
 }
 local t_1 = {

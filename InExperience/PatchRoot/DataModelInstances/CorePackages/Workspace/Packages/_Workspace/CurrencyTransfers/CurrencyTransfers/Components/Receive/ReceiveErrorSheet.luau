@@ -41,8 +41,11 @@ local function _(p1, p2, p3)
 	return accountDisabled, OK
 end
 
+local getFFlagCurrencyTransferFocusNavigationModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
+local useTransferSheetFocusModule = require(currencyTransfers.Hooks.useTransferSheetFocus)
+
 return function(_)
-	-- upvalues: useTransferStoreModule (ref), useTokens (ref), signalsReactModule (ref), failureReasonModule (ref), reactModule (ref), getTransferRequestByIdRequestModule (ref), useUserNameFromUserIdModule (ref), useLocalization (ref), transferLocalizationKeysModule (ref), transferLocaleFormatModule (ref), sheet (ref), useScaledValue (ref), view (ref), icon (ref), enums (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
+	-- upvalues: useTransferStoreModule (ref), useTokens (ref), signalsReactModule (ref), failureReasonModule (ref), reactModule (ref), getTransferRequestByIdRequestModule (ref), useUserNameFromUserIdModule (ref), useLocalization (ref), transferLocalizationKeysModule (ref), transferLocaleFormatModule (ref), getFFlagCurrencyTransferFocusNavigationModule (ref), useTransferSheetFocusModule (ref), sheet (ref), useScaledValue (ref), view (ref), icon (ref), enums (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local genericError, tryAgain
 	local var1 = useTransferStoreModule()
 	local var2 = useTokens()
@@ -91,10 +94,19 @@ return function(_)
 		genericError = var13.GenericError
 		tryAgain = var13.TryAgain
 	end
+	local var14 = nil
+	local var15 = nil
+	
+	if getFFlagCurrencyTransferFocusNavigationModule() then
+		local var16, var17 = useTransferSheetFocusModule(triggerOnClose)
+		var14 = var16
+		var15 = var17
+	end
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
 		snapPoints = { useScaledValue(300), 0.5 },
-		onClose = triggerOnClose
+		onClose = triggerOnClose,
+		ref = var14
 	}, {
 		Content = reactModule.createElement(sheet.Content, { LayoutOrder = 1 }, {
 			SheetContentContainer = reactModule.createElement(view, {
@@ -124,6 +136,7 @@ return function(_)
 			}, {
 				reactModule.createElement(view, { tag = "row auto-y size-full-0 gap-small" }, {
 					reactModule.createElement(button, {
+						ref = var15,
 						text = tryAgain,
 						onActivated = triggerOnClose,
 						variant = buttonVariant.Emphasis,

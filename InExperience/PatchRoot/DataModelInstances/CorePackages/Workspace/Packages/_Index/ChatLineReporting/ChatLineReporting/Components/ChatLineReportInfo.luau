@@ -3,10 +3,12 @@ local parent = chatLineReporting.Parent
 local reactModule = require(parent.React)
 local reactOtterModule = require(parent.ReactOtter)
 local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useTokens = foundationModule.Hooks.useTokens
 local view = foundationModule.View
 local fFlagChatLineReportingFocusFixesEnabled = require(parent.SharedFlags).FFlagChatLineReportingFocusFixesEnabled
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local constantsModule = require(chatLineReporting.Common.Constants)
 local t = {
 	stiffness = 400,
@@ -17,7 +19,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), constantsModule (ref), reactOtterModule (ref), t (ref), fFlagChatLineReportingFocusFixesEnabled (ref), view (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), constantsModule (ref), reactOtterModule (ref), t (ref), fFlagChatLineReportingFocusFixesEnabled (ref), view (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState(false)
 	local var4 = useLocalization(constantsModule.ChatLineLocalizationKeys)
@@ -69,7 +71,8 @@ return function(p1)
 				InfoText = reactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					TextWrapped = true,
-					Font = var1.Typography.BodySmall.Font,
+					Font = if foundationFontFaceMigration then nil else var1.Typography.BodySmall.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.BodySmall.Font) else nil,
 					Text = var4.InfoTextKey,
 					TextColor3 = var1.Color.Content.Default.Color3,
 					TextSize = var1.Typography.BodySmall.FontSize,

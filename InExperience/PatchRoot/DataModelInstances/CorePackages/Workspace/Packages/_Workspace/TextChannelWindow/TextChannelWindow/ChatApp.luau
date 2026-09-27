@@ -13,18 +13,29 @@ local messageListAreaModule = require(script.Parent.MessageListArea)
 local _ = require(script.Parent.Message)
 local themeFromBackgroundColorModule = require(script.Parent.themeFromBackgroundColor)
 local useChatWindowEntryHandoffModule = require(script.Parent.useChatWindowEntryHandoff)
+local selectionInputsModule = require(script.Parent.FocusNavigation.SelectionInputs)
 local fFlagExpChatTextChannelWindowThemeByBackgroundModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowThemeByBackground)
 local fFlagExpChatTextChannelWindowFocusNavModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFocusNav)
+local expChatTCWAllowKeyboardNav = game:DefineFastFlag("ExpChatTCWAllowKeyboardNav", false)
 local guiService = game:GetService("GuiService")
+local userInputService = game:GetService("UserInputService")
 local provider = focusNavigationUtilsModule.FocusNavigableSurfaceRegistry.Provider
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
 local createNextOrder = reactUtilsModule.createNextOrder
 local var1 = if fFlagExpChatTextChannelWindowFocusNavModule then reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui) else nil
-local t = {
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack
-}
+local t = {}
+
+if expChatTCWAllowKeyboardNav then
+	for i, v in selectionInputsModule.Back do
+		if v.EnumType == Enum.KeyCode then
+			t[v] = focusNavigationEventNameEnum.NavigateBack
+		end
+	end
+else
+	t[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack
+end
 local t_1 = {}
 local t_2 = {
 	SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
@@ -88,14 +99,22 @@ local function ChatWindowBody(p1)
 end
 
 local function ChatAppFocusNav(p1)
-	-- upvalues: reactModule (ref), responsiveModule (ref), foundationModule (ref), guiService (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t_1 (ref), t (ref), useChatWindowEntryHandoffModule (ref), ChatWindowBody (ref)
-	local var2 = reactModule.useRef(nil)
-	local var3 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional and p1.windowInstance ~= nil
-	local var4 = foundationModule.Hooks.useCursor(foundationModule.Enums.CursorType.RoundedRect)
-	local var5, var6 = reactModule.useState(false)
-	local var7, var8 = reactModule.useState(false)
+	-- upvalues: reactModule (ref), responsiveModule (ref), expChatTCWAllowKeyboardNav (ref), foundationModule (ref), guiService (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), userInputService (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t_1 (ref), t (ref), useChatWindowEntryHandoffModule (ref), ChatWindowBody (ref)
+	local var2
+	local var3 = reactModule.useRef(nil)
+	local var4 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
+	
+	if expChatTCWAllowKeyboardNav then
+		var2 = p1.windowInstance ~= nil
+		var2 = nil
+	else
+		var2 = var4 and p1.windowInstance ~= nil
+	end
+	local var5 = foundationModule.Hooks.useCursor(foundationModule.Enums.CursorType.RoundedRect)
+	local var6, var7 = reactModule.useState(false)
+	local var8, var9 = reactModule.useState(false)
 	local windowInstance = p1.windowInstance
-	local var9 = reactModule.useCallback(function()
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: guiService (copy), windowInstance (ref)
 		guiService.SelectedCoreObject = nil
 		
@@ -103,37 +122,41 @@ local function ChatAppFocusNav(p1)
 			guiService.SelectedObject = windowInstance
 		end
 	end, { windowInstance })
-	local var10 = useFocusRoot({
+	local var11 = useFocusRoot({
 		isAutoFocusRoot = false,
 		shouldRestoreFocus = false,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-		eventMap = if var5 or var7 then t_1 else t,
+		eventMap = if var6 or var8 then t_1 else t,
 		eventHandlers = reactModule.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var9 (ref)
+			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), userInputService (copy), var10 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
 					handler = inputHandlersModule.onRelease(function(p2)
-						-- upvalues: var9 (copy)
-						var9()
-						p2:cancel()
+						-- upvalues: userInputService (copy), var10 (copy)
+						if userInputService:GetFocusedTextBox() == nil then
+							var10()
+							p2:cancel()
+							
+							return
+						end
 					end)
 				}
 			}
-		end, { var9 })
+		end, { var10 })
 	})
 	useChatWindowEntryHandoffModule({
-		enabled = var3,
+		enabled = var2,
 		windowInstance = p1.windowInstance,
-		focusTargetRef = var2,
+		focusTargetRef = var3,
 		setSelection = reactFocusNavigationModule.useFocusGuiObject()
 	})
 	local cloned = table.clone(p1)
-	cloned.focusNavEnabled = var3
-	cloned.selectionCursor = var4
-	cloned.focusRootRef = var10
-	cloned.inputTextBoxRef = var2
-	cloned.setReportMenuOpen = var6
-	cloned.setExpressionTrayOpen = var8
+	cloned.focusNavEnabled = var2
+	cloned.selectionCursor = var5
+	cloned.focusRootRef = var11
+	cloned.inputTextBoxRef = var3
+	cloned.setReportMenuOpen = var7
+	cloned.setExpressionTrayOpen = var9
 	
 	return reactModule.createElement(ChatWindowBody, cloned)
 end

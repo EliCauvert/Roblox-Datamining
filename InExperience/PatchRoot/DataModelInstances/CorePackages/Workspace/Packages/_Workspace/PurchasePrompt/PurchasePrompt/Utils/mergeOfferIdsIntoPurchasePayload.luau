@@ -1,4 +1,5 @@
 ﻿local httpService = game:GetService("HttpService")
+local _ = require(script:FindFirstAncestor("PurchasePrompt").types)
 
 return function(p1, p2)
 	-- upvalues: httpService (ref)

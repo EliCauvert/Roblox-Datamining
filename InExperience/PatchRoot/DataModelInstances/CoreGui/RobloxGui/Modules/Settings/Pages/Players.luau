@@ -17,7 +17,7 @@ local openTypeSupport = require(corePackagesService.Packages.UIBlox).Utility.Ope
 local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
 local utilityModule = require(robloxGui.Modules.Settings.Utility)
 local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
-local reportAbuseMenuNewContainerPageModule = require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuNewContainerPage)
+local reportAbuseMenuContainerPageModule = require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuContainerPage)
 local socialUtilModule = require(robloxGui.Modules:WaitForChild("SocialUtil"))
 local diag = require(corePackagesService.Workspace.Packages.Analytics).AnalyticsReporters.Diag
 local eventStream = require(corePackagesService.Workspace.Packages.Analytics).AnalyticsReporters.EventStream
@@ -79,7 +79,7 @@ local muteStatusIcons = default.MuteStatusIcons
 local playerMuteStatusIcons = default.PlayerMuteStatusIcons
 
 return (function()
-	-- upvalues: robloxGui (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), localizationService (ref), localization (ref), uiblox (ref), builderIconsModule (ref), localPlayer (write), utilityModule (ref), blockingUtilityModule (ref), themeModule (ref), fFlagConnectionsToFriendsRename (ref), constantsModule_1 (ref), getFFlagDefaultFriendingLabelTextNonEmptyModule (ref), voiceAnalyticsModule (ref), settingsHubPlayersButtonsResponsiveThreshold (ref), getFFlagEnableConsoleJoinVoiceModule (ref), getFFlagCleanupMuteSelfButtonModule (ref), checkButtonFrameBeforeDestroy (ref), guiService (ref), blockingAnalyticsModule (ref), onBlockButtonActivatedModule (ref), robloxTranslatorModule (ref), muteStatusIcons (ref), luaFlagVoiceChatDisableSubscribeRetryForMultistream (ref), voiceChatMultistreamSubscriptionsEnabledEngineFeature (ref), default (ref), constantsModule (ref), create (ref), isSideSheetEnabledModule (ref), fFlagRelocateMobileMenuButtonsModule (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), getFFlagEnableLeaveGameUpsellEntrypointModule (ref), fFlagIEMTabFocusNav (ref), playerMuteStatusIcons (ref), reportAbuseMenuNewContainerPageModule (ref), var2 (ref), uDim2 (ref), enableConsoleJoinVoiceTranslation (ref), status (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), checkForNilUserIdOnPlayerList (ref), userProfileStore (ref), isEngineTruncationEnabledForIngameSettingsModule (ref), playerListRefactorUsernameFormatting (ref), formatUsername (ref), playersService (ref), userInputService (ref), fFlagHidePeoplePageInviteFriends (ref), fFlagAddInviteFriendsIntegration (ref), runService (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), var1 (write), gameInviteAnalytics (ref), eventStream (ref), diag (ref), socialUtilModule (ref), getFFlagVoiceChatUILoggingModule (ref), name (ref), checkShareGameButtonInMuteAllLayout (ref), cryoModule (ref), onlyCaptureFocusIfOnPlayerPage (ref), getFFlagDestroyPlayerCardOnLeaveModule (ref), reactRobloxModule (ref), reactModule (ref), menuButtonsContainerModule (ref), fFlagMenuButtonsMountWithIEMModule (ref)
+	-- upvalues: robloxGui (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), localizationService (ref), localization (ref), uiblox (ref), builderIconsModule (ref), localPlayer (write), utilityModule (ref), blockingUtilityModule (ref), themeModule (ref), fFlagConnectionsToFriendsRename (ref), constantsModule_1 (ref), getFFlagDefaultFriendingLabelTextNonEmptyModule (ref), voiceAnalyticsModule (ref), settingsHubPlayersButtonsResponsiveThreshold (ref), getFFlagEnableConsoleJoinVoiceModule (ref), getFFlagCleanupMuteSelfButtonModule (ref), checkButtonFrameBeforeDestroy (ref), guiService (ref), blockingAnalyticsModule (ref), onBlockButtonActivatedModule (ref), robloxTranslatorModule (ref), muteStatusIcons (ref), luaFlagVoiceChatDisableSubscribeRetryForMultistream (ref), voiceChatMultistreamSubscriptionsEnabledEngineFeature (ref), default (ref), constantsModule (ref), create (ref), isSideSheetEnabledModule (ref), fFlagRelocateMobileMenuButtonsModule (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), getFFlagEnableLeaveGameUpsellEntrypointModule (ref), fFlagIEMTabFocusNav (ref), playerMuteStatusIcons (ref), reportAbuseMenuContainerPageModule (ref), var2 (ref), uDim2 (ref), enableConsoleJoinVoiceTranslation (ref), status (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), checkForNilUserIdOnPlayerList (ref), userProfileStore (ref), isEngineTruncationEnabledForIngameSettingsModule (ref), playerListRefactorUsernameFormatting (ref), formatUsername (ref), playersService (ref), userInputService (ref), fFlagHidePeoplePageInviteFriends (ref), fFlagAddInviteFriendsIntegration (ref), runService (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), var1 (write), gameInviteAnalytics (ref), eventStream (ref), diag (ref), socialUtilModule (ref), getFFlagVoiceChatUILoggingModule (ref), name (ref), checkShareGameButtonInMuteAllLayout (ref), cryoModule (ref), onlyCaptureFocusIfOnPlayerPage (ref), getFFlagDestroyPlayerCardOnLeaveModule (ref), reactRobloxModule (ref), reactModule (ref), menuButtonsContainerModule (ref), fFlagMenuButtonsMountWithIEMModule (ref)
 	local players = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	players.PageListLayout.Padding = UDim.new(0, 16)
 	players.playSessionId = ""
@@ -742,7 +742,7 @@ return (function()
 	end)
 	
 	local function reportAbuseButtonCreate(p3, p4)
-		-- upvalues: localPlayer (copy), reportAbuseMenuNewContainerPageModule (copy), utilityModule (copy), themeModule (copy)
+		-- upvalues: localPlayer (copy), reportAbuseMenuContainerPageModule (copy), utilityModule (copy), themeModule (copy)
 		local rightSideButtons = p3:FindFirstChild("RightSideButtons")
 		
 		if rightSideButtons then
@@ -753,8 +753,8 @@ return (function()
 			end
 			if p4 and (p4 ~= localPlayer and (p4.UserId > 0 and localPlayer.UserId > 0)) then
 				local reportPlayer_2 = utilityModule:MakeStyledImageButton("ReportPlayer", "icons/actions/feedback", UDim2.new(0, themeModule.ButtonHeight, 0, themeModule.ButtonHeight), UDim2.new(0, 28, 0, 28), function()
-					-- upvalues: reportAbuseMenuNewContainerPageModule (copy), p4 (ref)
-					reportAbuseMenuNewContainerPageModule:ReportPlayer(p4, "MenuPlayerList")
+					-- upvalues: reportAbuseMenuContainerPageModule (copy), p4 (ref)
+					reportAbuseMenuContainerPageModule:ReportPlayer(p4, "MenuPlayerList")
 				end)
 				reportPlayer_2.Name = "ReportPlayer"
 				reportPlayer_2.Position = UDim2.new(1, -260, 0, 7)

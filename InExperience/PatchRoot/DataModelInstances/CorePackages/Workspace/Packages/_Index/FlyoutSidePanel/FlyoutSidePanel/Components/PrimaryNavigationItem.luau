@@ -9,9 +9,11 @@ local statusIndicator = foundationModule.StatusIndicator
 local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
 local flags = foundationModule.Utility.Flags
 local constantsModule = require(script.Parent.Parent.Constants)
+local getTestId = require(parent.RoactUtils).getTestId
+local fFlagLuaAppAddTestIdsForArrow = require(parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), icon (ref), iconSize (ref), text (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), constantsModule (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), fFlagLuaAppAddTestIdsForArrow (ref), getTestId (ref), icon (ref), iconSize (ref), text (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), constantsModule (ref)
 	local var1 = useTokens()
 	
 	return reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = p1.layoutOrder }, {
@@ -20,7 +22,8 @@ return function(p1)
 			AutomaticSize = Enum.AutomaticSize.Y,
 			BackgroundTransparency = 1,
 			Text = "",
-			[reactModule.Event.Activated] = p1.onActivated
+			[reactModule.Event.Activated] = p1.onActivated,
+			[reactModule.Tag] = if fFlagLuaAppAddTestIdsForArrow then getTestId("core-ui-flyout-nav-item", p1.testId) else nil
 		}, {
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,

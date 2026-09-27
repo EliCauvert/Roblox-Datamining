@@ -9,10 +9,16 @@ return {
 		lastUpdated = { 2026, 7, 7 },
 		backendsList = {
 			defaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.Navigation.Visible", function(p1)
-				return { isChatEnabled = p1.isChatEnabled }
+				return {
+					isChatEnabled = p1.isChatEnabled,
+					isChatLoading = p1.isChatLoading
+				}
 			end),
 			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
-				return { isChatEnabled = p1.isChatEnabled }
+				return {
+					isChatEnabled = p1.isChatEnabled,
+					isChatLoading = p1.isChatLoading
+				}
 			end)
 		}
 	}),
@@ -22,10 +28,16 @@ return {
 		lastUpdated = { 2026, 7, 7 },
 		backendsList = {
 			defaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.Navigation.Closed", function(p1)
-				return { isChatEnabled = p1.isChatEnabled }
+				return {
+					isChatEnabled = p1.isChatEnabled,
+					isChatLoading = p1.isChatLoading
+				}
 			end),
 			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
-				return { isChatEnabled = p1.isChatEnabled }
+				return {
+					isChatEnabled = p1.isChatEnabled,
+					isChatLoading = p1.isChatLoading
+				}
 			end)
 		}
 	})

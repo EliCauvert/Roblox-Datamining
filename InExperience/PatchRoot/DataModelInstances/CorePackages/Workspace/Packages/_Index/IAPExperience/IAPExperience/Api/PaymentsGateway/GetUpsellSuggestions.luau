@@ -5,13 +5,14 @@ local IXPServiceWrapper = require(parent_1.IXPServiceWrapper).IXPServiceWrapper
 local httpRbxApiService = game:GetService("HttpRbxApiService")
 local httpService = game:GetService("HttpService")
 local loggerModule = require(parent.Utility.logger)
-local _ = require(parent.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
+local getUpsellSuggestionsTypesModule = require(parent.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
 local fStringIXPLayerMobileUpsellModule = require(parent.Flags.FStringIXPLayerMobileUpsell)
+local fFlagEnableRobuxUpsellPlusButtonExperimentModule = require(parent.Flags.FFlagEnableRobuxUpsellPlusButtonExperiment)
 local text = url.APIS_URL .. "payments-gateway/v1/products/get-upsell-suggestions"
 local enableUpsellVirtualItemBadge = game:DefineFastFlag("EnableUpsellVirtualItemBadge", false)
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: enableUpsellVirtualItemBadge (ref), loggerModule (ref), IXPServiceWrapper (ref), fStringIXPLayerMobileUpsellModule (ref), text (ref), httpRbxApiService (ref), httpService (ref)
+return function(p1, p2, p3, p4, p5, p6, p7, p8, p9)
+	-- upvalues: enableUpsellVirtualItemBadge (ref), loggerModule (ref), IXPServiceWrapper (ref), fStringIXPLayerMobileUpsellModule (ref), fFlagEnableRobuxUpsellPlusButtonExperimentModule (ref), text (ref), httpRbxApiService (ref), httpService (ref), getUpsellSuggestionsTypesModule (ref)
 	local badgingV2Variant = nil
 	
 	if enableUpsellVirtualItemBadge then
@@ -32,6 +33,9 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8)
 		virtual_item_badge_variant = badgingV2Variant
 	}
 	
+	if fFlagEnableRobuxUpsellPlusButtonExperimentModule then
+		t.is_eligible_for_experiment = p9 == true
+	end
 	if p5 ~= nil then
 		t.item_product_id = p5
 	end
@@ -65,7 +69,8 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8)
 	local var2 = httpService:JSONDecode(status)
 	local t_1 = {
 		products = {},
-		virtualItemBadgeType = var2.virtual_item_badge_type
+		virtualItemBadgeType = var2.virtual_item_badge_type,
+		experimentVariant = if fFlagEnableRobuxUpsellPlusButtonExperimentModule then getUpsellSuggestionsTypesModule.normalizeExperimentVariant(var2.experiment_variant) else nil
 	}
 	
 	for i, v in ipairs(var2.products) do

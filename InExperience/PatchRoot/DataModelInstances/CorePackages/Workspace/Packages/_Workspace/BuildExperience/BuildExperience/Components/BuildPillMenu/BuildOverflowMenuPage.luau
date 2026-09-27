@@ -4,6 +4,7 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local gameConfigurationContentModule = require(buildExperience.Components.GameConfigurations.GameConfigurationContent.GameConfigurationContent)
 local publishConfigurationContentContainerModule = require(buildExperience.Components.PublishConfigurationContent.PublishConfigurationContentContainer)
 local overflowMenuPageShellModule = require(script.Parent.OverflowMenuPageShell)
@@ -40,7 +41,7 @@ local function PublishPreview(p1)
 end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), PublishPreview (ref), publishConfigurationContentContainerModule (ref), gameConfigurationContentModule (ref), view (ref), overflowMenuPageShellModule (ref), t (ref), publishFooterModule (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), PublishPreview (ref), publishConfigurationContentContainerModule (ref), gameConfigurationContentModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), view (ref), overflowMenuPageShellModule (ref), t (ref), publishFooterModule (ref)
 	local var1 = useLocalization({
 		loading = localizationStringsModule.BUILD_MENU_LOADING,
 		publish = localizationStringsModule.BUILD_MENU_PUBLISH,
@@ -62,6 +63,7 @@ return function(p1)
 		onOpenAudiencePage = p1.onOpenAudiencePage,
 		onOpenTitleDescriptionPage = p1.onOpenTitleDescriptionPage,
 		onOpenMediaSelectionPage = p1.onOpenMediaSelectionPage,
+		onOpenMonetizationPage = if fFlagBuildExperienceMonetizationNativeUIModule then p1.onOpenMonetizationPage else nil,
 		onOpenPlaytestPicker = p1.onOpenPlaytestPicker,
 		onOpenPlaytestManagement = p1.onOpenPlaytestManagement
 	})

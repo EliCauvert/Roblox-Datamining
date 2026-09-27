@@ -51,19 +51,22 @@ return function(p1)
 				if #t_1 == 0 then
 					var1.replaceItem(tostring(p2), p4)
 					
-					return promiseModule.resolve({})
+					return promiseModule.resolve({ added = {}, rejected = {} })
 				end
 				return playtestersRequestsModule.addPlaytester(p2, t_1, t):andThen(function(p5)
 					-- upvalues: var1 (copy), p2 (copy), t_1 (ref)
 					var1.replaceItem(tostring(p2), p5)
 					local t = {}
+					local t_2 = {}
 					
 					for i, v in t_1 do
-						if table.find(p5, v) ~= nil then
+						if table.find(p5, v) == nil then
+							table.insert(t_2, v)
+						else
 							table.insert(t, v)
 						end
 					end
-					return t
+					return { added = t, rejected = t_2 }
 				end)
 			end)
 		end,

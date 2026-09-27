@@ -6,6 +6,7 @@ local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local interactable = UIBloxModule.Core.Control.Interactable
 local withHoverTooltip = UIBloxModule.App.Dialog.TooltipV2.withHoverTooltip
+local controlState = UIBloxModule.Core.Control.Enum.ControlState
 local useCursor = UIBloxModule.App.SelectionCursor.useCursor
 local useDesignTokens = require(parent.Style).useDesignTokens
 local useUiModeInfo = require(parent.RobloxAppHooks).useUiModeInfo
@@ -13,13 +14,16 @@ local uiMode = require(parent.RobloxAppEnums).UiMode
 local getFFlagTenFootUiSupportSortHeaderTooltip = require(parent.SharedFlags).GetFFlagTenFootUiSupportSortHeaderTooltip
 local fFlagLuaAppFixCursorHooks = require(parent.SharedFlags).FFlagLuaAppFixCursorHooks
 game:DefineFastInt("TooltipHitboxMinSize", 26)
+local luaAppGateTooltipPositionTracking = game:DefineFastFlag("LuaAppGateTooltipPositionTracking", false)
 local info = images["icons/actions/info"]
 local vector2 = Vector2.new(game:GetFastInt("TooltipHitboxMinSize"), game:GetFastInt("TooltipHitboxMinSize"))
 
 return function(p1)
-	-- upvalues: useUiModeInfo (ref), useDesignTokens (ref), getFFlagTenFootUiSupportSortHeaderTooltip (ref), fFlagLuaAppFixCursorHooks (ref), useCursor (ref), uiMode (ref), coreGuiService (ref), withHoverTooltip (ref), reactModule (ref), imageSetLabel (ref), info (ref), interactable (ref), vector2 (ref)
+	-- upvalues: useUiModeInfo (ref), useDesignTokens (ref), luaAppGateTooltipPositionTracking (ref), reactModule (ref), getFFlagTenFootUiSupportSortHeaderTooltip (ref), fFlagLuaAppFixCursorHooks (ref), useCursor (ref), uiMode (ref), coreGuiService (ref), withHoverTooltip (ref), controlState (ref), imageSetLabel (ref), info (ref), interactable (ref), vector2 (ref)
 	local var1 = useUiModeInfo()
 	local var2 = useDesignTokens()
+	local var3 = if luaAppGateTooltipPositionTracking then reactModule.useRef(false) else nil
+	local var4 = if luaAppGateTooltipPositionTracking then reactModule.useRef(nil) else nil
 	local color3 = var2.Color.Content.Emphasis.Color3
 	local size600 = var2.Size.Size_600
 	local circle = nil
@@ -29,8 +33,8 @@ return function(p1)
 		circle = var2.Radius.Circle
 		size0 = var2.Size.Size_0
 	end
-	local var3 = if fFlagLuaAppFixCursorHooks and getFFlagTenFootUiSupportSortHeaderTooltip() then useCursor(UDim.new(0, circle), size0) else nil
-	local var4 = var1.uiMode == uiMode.VR
+	local var5 = if fFlagLuaAppFixCursorHooks and getFFlagTenFootUiSupportSortHeaderTooltip() then useCursor(UDim.new(0, circle), size0) else nil
+	local var6 = var1.uiMode == uiMode.VR
 	
 	if var1.uiMode == uiMode.VR and not p1.supportVR then
 		return nil
@@ -45,18 +49,43 @@ return function(p1)
 		preferredOrientation = p1.tooltipOrientation,
 		guiTarget = coreGuiService,
 		triggerPointName = p1.triggerPointName,
-		disabled = var4
+		disabled = var6
 	}, function(p2, p3)
-		-- upvalues: reactModule (copy), size (ref), p1 (ref), fFlagLuaAppFixCursorHooks (copy), getFFlagTenFootUiSupportSortHeaderTooltip (copy), var3 (ref), useCursor (copy), circle (write), size0 (write), imageSetLabel (copy), info (copy), color3 (ref), interactable (copy), vector2 (copy)
+		-- upvalues: luaAppGateTooltipPositionTracking (copy), var3 (ref), controlState (copy), var4 (ref), reactModule (copy), size (ref), p1 (ref), fFlagLuaAppFixCursorHooks (copy), getFFlagTenFootUiSupportSortHeaderTooltip (copy), var5 (ref), useCursor (copy), circle (write), size0 (write), imageSetLabel (copy), info (copy), color3 (ref), interactable (copy), vector2 (copy)
+		local _ = nil
+		local _ = nil
+		
+		if luaAppGateTooltipPositionTracking then
+			local var7 = function(p4)
+				-- upvalues: var3 (copy), p2 (ref)
+				if var3.current then
+					p2(p4)
+				end
+			end
+			
+			local var8 = function(p4, p5)
+				-- upvalues: var3 (copy), controlState (copy), var4 (copy), p2 (ref), p3 (ref)
+				var3.current = if p5 ~= controlState.Hover then p5 == controlState.Selected else true
+				
+				if var3.current and var4.current then
+					p2(var4.current)
+				end
+				p3(p4, p5)
+			end
+		else
+			local var7 = p2
+			local var8 = p3
+		end
 		return reactModule.createElement("Frame", {
 			Size = size,
 			BackgroundTransparency = 1,
 			LayoutOrder = p1.layoutOrder,
 			AnchorPoint = p1.anchorPoint,
 			Position = p1.position,
-			SelectionImageObject = if fFlagLuaAppFixCursorHooks and getFFlagTenFootUiSupportSortHeaderTooltip() then var3 elseif getFFlagTenFootUiSupportSortHeaderTooltip() then useCursor(UDim.new(0, circle), size0) else nil,
-			[reactModule.Change.AbsolutePosition] = p2,
-			[reactModule.Change.AbsoluteSize] = p2
+			ref = if luaAppGateTooltipPositionTracking then var4 else nil,
+			SelectionImageObject = if fFlagLuaAppFixCursorHooks and getFFlagTenFootUiSupportSortHeaderTooltip() then var5 elseif getFFlagTenFootUiSupportSortHeaderTooltip() then useCursor(UDim.new(0, circle), size0) else nil,
+			[reactModule.Change.AbsolutePosition] = var7,
+			[reactModule.Change.AbsoluteSize] = var7
 		}, {
 			TooltipIcon = reactModule.createElement(imageSetLabel, {
 				BackgroundTransparency = 1,
@@ -70,7 +99,7 @@ return function(p1)
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
-				onStateChanged = p3,
+				onStateChanged = var8,
 				[reactModule.Event.Activated] = p1.onActivateTooltip,
 				ZIndex = 1,
 				Selectable = p1.selectable

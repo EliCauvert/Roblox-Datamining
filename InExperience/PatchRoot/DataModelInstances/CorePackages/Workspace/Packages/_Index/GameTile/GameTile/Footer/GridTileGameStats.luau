@@ -14,7 +14,6 @@ local useBreakpointXOrSmaller = responsiveModule.useBreakpointXOrSmaller
 local gameTileTypesModule = require(gameTile.GameTileTypes)
 local fFlagLuaAppMigrateGameTileFooterValueFixes = require(parent.SharedFlags).FFlagLuaAppMigrateGameTileFooterValueFixes
 local fFlagLuaAppFixSmallScreenFooterStatsOverlap = require(parent.SharedFlags).FFlagLuaAppFixSmallScreenFooterStatsOverlap
-local fFlagLuaAppNarrowTileSmallerFooterFont = require(parent.SharedFlags).FFlagLuaAppNarrowTileSmallerFooterFont
 local fFlagLuaAppNarrowTileHideRating = require(parent.SharedFlags).FFlagLuaAppNarrowTileHideRating
 local fFlagLuaAppNarrowTileHidePlayerCount = require(parent.SharedFlags).FFlagLuaAppNarrowTileHidePlayerCount
 local ratingSmall = images["icons/status/games/rating_small"]
@@ -22,7 +21,7 @@ local var1 = images["icons/status/games/people-playing_small"]
 local vector2 = Vector2.new(1e999, 1e999)
 
 return function(p1)
-	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), fFlagLuaAppFixSmallScreenFooterStatsOverlap (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), gameTileTypesModule (ref), fFlagLuaAppNarrowTileSmallerFooterFont (ref), fFlagLuaAppMigrateGameTileFooterValueFixes (ref), getGameTileMetadataFontModule (ref), reactModule (ref), fFlagLuaAppNarrowTileHideRating (ref), textService (ref), vector2 (ref), imageSetLabel (ref), ratingSmall (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), var1 (ref)
+	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), fFlagLuaAppFixSmallScreenFooterStatsOverlap (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), gameTileTypesModule (ref), fFlagLuaAppMigrateGameTileFooterValueFixes (ref), getGameTileMetadataFontModule (ref), reactModule (ref), fFlagLuaAppNarrowTileHideRating (ref), textService (ref), vector2 (ref), imageSetLabel (ref), ratingSmall (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), var1 (ref)
 	local var2
 	local var3 = useDesignTokens()
 	local var4 = useTextSizeOffset()
@@ -41,10 +40,10 @@ return function(p1)
 	local createElement_1
 	local var6 = useBreakpointXOrSmaller(responsiveModule.Keys.Small) and p1.gameTileLayoutType == gameTileTypesModule.GameTileLayoutType.Narrow
 	local var7 = if p1.isUnifiedGameTile then if fFlagLuaAppMigrateGameTileFooterValueFixes then var5.Size.Size_500 else var5.Size.Size_300 elseif fFlagLuaAppMigrateGameTileFooterValueFixes then var3.Size.Size_500 else var3.Size.Size_300
-	local var8 = if p1.isUnifiedGameTile then if var2 or fFlagLuaAppNarrowTileSmallerFooterFont and p1.compactMetadataFormat then var5.Gap.XXSmall else var5.Gap.XSmall else var3.Size.Size_100
+	local var8 = if p1.isUnifiedGameTile then if var2 or p1.compactMetadataFormat then var5.Gap.XXSmall else var5.Gap.XSmall else var3.Size.Size_100
 	local var9 = if p1.isUnifiedGameTile then if fFlagLuaAppMigrateGameTileFooterValueFixes then if var2 then var5.Gap.XXSmall else var5.Gap.Small else var5.Gap.Medium else var3.Size.Size_200
 	local var10 = if p1.isUnifiedGameTile then var5.Color.Content.Default else var3.Color.Content.Default
-	local var11 = getGameTileMetadataFontModule(p1.useLargerFont, var3, var5 or nil, if p1.isUnifiedGameTile then true else nil, if fFlagLuaAppNarrowTileSmallerFooterFont then p1.compactMetadataFormat else nil)
+	local var11 = getGameTileMetadataFontModule(p1.useLargerFont, var3, var5 or nil, if p1.isUnifiedGameTile then true else nil, p1.compactMetadataFormat)
 	local fontSize = var11.FontSize
 	local font = var11.Font
 	local var12 = var4 > 0 and var6

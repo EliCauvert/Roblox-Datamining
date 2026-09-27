@@ -20,7 +20,6 @@ local fFlagSduiAlwaysCacheWithIdentifier = require(parent.SharedFlags).FFlagSdui
 local fFlagEnableSduiV2HomepagePrompts = require(parent.SharedFlags).FFlagEnableSduiV2HomepagePrompts
 local fFlagEnableHomepagePromptsForModalsAndBanners = require(parent.SharedFlags).FFlagEnableHomepagePromptsForModalsAndBanners
 local fFlagPromptsHandlerEnabled = require(parent.SharedFlags).FFlagPromptsHandlerEnabled
-local fFlagSduiImprovedErrorDimensions = require(parent.SharedFlags).FFlagSduiImprovedErrorDimensions
 local fFlagLuaAppSduiStreamingChunkedResponses = require(parent.SharedFlags).FFlagLuaAppSduiStreamingChunkedResponses
 local fFlagLuaAppEnableSduiHomePage = require(parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local fFlagSduiClientTemplateCache = require(parent.SharedFlags).FFlagSduiClientTemplateCache
@@ -53,7 +52,7 @@ local function mergeTables(p1, p2)
 end
 
 return function(p3)
-	-- upvalues: fFlagSduiClientDrivenTemplates (ref), fFlagSduiPaginatePostBody (ref), fFlagSduiAllowNoConfigsBuilt (ref), fFlagLuaAppEnableSduiHomePage (ref), fFlagSduiUseHttpClientModule (ref), sduiRequestStatus (ref), sduiLogger (ref), sduiErrors (ref), fFlagSduiImprovedErrorDimensions (ref), getSduiDataBinder (ref), fFlagSduiClientTemplateCache (ref), getSduiTemplateStoreModule (ref), recordTemplateUsage (ref), sduiUsageRecorder (ref), sduiProtobufResponseHelpersModule (ref), fFlagSduiAlwaysCacheWithIdentifier (ref), fFlagLuaAppSduiStreamingChunkedResponses (ref), sduiInputDataMergeModule (ref), createBuilderConfig (ref), getSduiClientBindingBuilder (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagEnableSduiV2HomepagePrompts (ref), fFlagPromptsHandlerEnabled (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), cryoModule (ref), fFlagSduiGameIconSupport (ref), processClientHintsModule (ref), fFlagSduiApiStoreOnSuccessAndRefresh (ref)
+	-- upvalues: fFlagSduiClientDrivenTemplates (ref), fFlagSduiPaginatePostBody (ref), fFlagSduiAllowNoConfigsBuilt (ref), fFlagLuaAppEnableSduiHomePage (ref), fFlagSduiUseHttpClientModule (ref), sduiRequestStatus (ref), sduiLogger (ref), sduiErrors (ref), getSduiDataBinder (ref), fFlagSduiClientTemplateCache (ref), getSduiTemplateStoreModule (ref), recordTemplateUsage (ref), sduiUsageRecorder (ref), sduiProtobufResponseHelpersModule (ref), fFlagSduiAlwaysCacheWithIdentifier (ref), fFlagLuaAppSduiStreamingChunkedResponses (ref), sduiInputDataMergeModule (ref), createBuilderConfig (ref), getSduiClientBindingBuilder (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagEnableSduiV2HomepagePrompts (ref), fFlagPromptsHandlerEnabled (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), cryoModule (ref), fFlagSduiGameIconSupport (ref), processClientHintsModule (ref), fFlagSduiApiStoreOnSuccessAndRefresh (ref)
 	local response = p3.response
 	local decodeResponse = p3.decodeResponse
 	local parsePageEntriesFromResponse = p3.parsePageEntriesFromResponse
@@ -82,11 +81,7 @@ return function(p3)
 	
 	if not ok then
 		loadTimer.updateRequestStatus(sduiRequestStatus.FailedToLoad)
-		sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToDecodeResponse, {
-			debugName = if fFlagSduiImprovedErrorDimensions then nil else configCacheKey,
-			name = if fFlagSduiImprovedErrorDimensions then configCacheKey else nil,
-			message = status
-		}, surfaceKey)
+		sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToDecodeResponse, { name = configCacheKey, message = status }, surfaceKey)
 		error("Failed to decode")
 	end
 	loadTimer.logResponseDataUpdateBegin()
@@ -102,11 +97,7 @@ return function(p3)
 		end)
 		
 		if not ok_1 then
-			sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToUpdateDataStores, {
-				debugName = if fFlagSduiImprovedErrorDimensions then nil else configCacheKey,
-				name = if fFlagSduiImprovedErrorDimensions then configCacheKey else nil,
-				message = status_1
-			}, surfaceKey)
+			sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToUpdateDataStores, { name = configCacheKey, message = status_1 }, surfaceKey)
 		end
 	end
 	local t = {}
@@ -132,11 +123,7 @@ return function(p3)
 		end)
 		
 		if not ok_1 then
-			sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToAddTemplates, {
-				debugName = if fFlagSduiImprovedErrorDimensions then nil else configCacheKey,
-				name = if fFlagSduiImprovedErrorDimensions then configCacheKey else nil,
-				message = status_1
-			}, surfaceKey)
+			sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToAddTemplates, { name = configCacheKey, message = status_1 }, surfaceKey)
 		end
 	end
 	loadTimer.logResponseDataUpdateEnd()
@@ -145,7 +132,7 @@ return function(p3)
 	local var5 = if fFlagSduiClientDrivenTemplates and var1 then var1(status) else sduiProtobufResponseHelpersModule.parseLocalizedLiteralsFromResponse(status)
 	
 	local function resolveTemplateForRobloxComponent(p4)
-		-- upvalues: t (write), getSduiTemplateStoreModule (copy), surfaceKey (ref), sduiLogger (copy), sduiErrors (copy), fFlagSduiImprovedErrorDimensions (copy), configCacheKey (ref)
+		-- upvalues: t (write), getSduiTemplateStoreModule (copy), surfaceKey (ref), sduiLogger (copy), sduiErrors (copy)
 		local var6 = t[p4]
 		
 		if var6 == nil then
@@ -153,7 +140,6 @@ return function(p3)
 		end
 		if var6 == nil then
 			sduiLogger.reportError(sduiErrors.SduiErrorType.MissingCachedTemplate, {
-				debugName = if fFlagSduiImprovedErrorDimensions then nil else configCacheKey,
 				name = p4,
 				message = `Backend omitted template for {p4} but it could not be resolved from the surface cache + template store`
 			}, surfaceKey)
@@ -205,7 +191,6 @@ return function(p3)
 					if ok_1 then
 						if t_1[var9] then
 							sduiLogger.reportError(sduiErrors.SduiErrorType.DuplicateOrMissingIdentifier, {
-								debugName = if fFlagSduiImprovedErrorDimensions then nil else var9,
 								name = var8,
 								message = `Existing config found for cacheKey {var9}. Need to specify identifer in page entry for multiple configs`
 							}, surfaceKey)
@@ -219,18 +204,13 @@ return function(p3)
 							surfacing = v.surfacing
 						}
 					else
-						sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToBuildClientBindingConfig, {
-							debugName = if fFlagSduiImprovedErrorDimensions then nil else configCacheKey,
-							name = var8,
-							message = `{status_1}`
-						}, surfaceKey)
+						sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToBuildClientBindingConfig, { name = var8, message = `{status_1}` }, surfaceKey)
 					end
 					if v.title and t_1[var9] then
 						t_1[var9].title = v.title
 					end
 				elseif not fFlagSduiClientTemplateCache or not enableTemplateCache then
 					sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToMapRobloxComponentToTemplate, {
-						debugName = if fFlagSduiImprovedErrorDimensions then nil else configCacheKey,
 						name = var8,
 						message = `Missing template for robloxComponentType {var8}`
 					}, surfaceKey)
@@ -238,8 +218,7 @@ return function(p3)
 			else
 				sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToAddTemplates, {
 					message = "Page entry missing robloxComponentType",
-					debugName = if fFlagSduiImprovedErrorDimensions then nil else configCacheKey,
-					name = if fFlagSduiImprovedErrorDimensions then configCacheKey else nil
+					name = configCacheKey
 				}, surfaceKey)
 			end
 		else
@@ -258,8 +237,7 @@ return function(p3)
 	end
 	if not next(t_1) and not paginateResponse and (if fFlagSduiAllowNoConfigsBuilt then not var3 else true) then
 		sduiLogger.reportError(sduiErrors.SduiErrorType.NoComponentConfigsBuilt, {
-			debugName = if fFlagSduiImprovedErrorDimensions then nil else configCacheKey,
-			name = if fFlagSduiImprovedErrorDimensions then configCacheKey else nil,
+			name = configCacheKey,
 			message = `No configs built when handling proto response for {configCacheKey}`
 		}, surfaceKey)
 	end

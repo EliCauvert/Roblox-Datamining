@@ -9,8 +9,10 @@ local useTokens = foundationModule.Hooks.useTokens
 local skeleton = foundationModule.Skeleton
 local view = foundationModule.View
 local peopleServiceModule = require(parent.PeopleService)
+local fFlagPeopleListButtonOverflowModule = require(peopleReactView.Flags.FFlagPeopleListButtonOverflow)
 local _ = require(peopleReactView.Stores.GetScrollingFrameStore)
 local personRowModule = require(peopleReactView.Components.List.PersonRow)
+local peoplePageLayoutContextModule = require(peopleReactView.PeoplePageLayoutContext)
 local lazyScrollingComponentModule = require(peopleReactView.Components.Common.LazyScrollingComponent)
 local flags = peopleServiceModule.getService("Flags")
 local fFlagPeoplePageRemoveSkeletons = flags.FFlagPeoplePageRemoveSkeletons
@@ -51,9 +53,9 @@ local var1 = reactModule.memo(function(p1)
 end)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), fFlagPeoplePageRemoveUseMemoElements (ref), reactModule (ref), personRowModule (ref), var1 (ref), fFlagPeoplePageRemoveSkeletons (ref), view (ref), skeleton (ref), radius (ref), lazyScrollingComponentModule (ref)
+	-- upvalues: useTokens (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), reactModule (ref), peoplePageLayoutContextModule (ref), fFlagPeopleListButtonOverflowModule (ref), fFlagPeoplePageRemoveUseMemoElements (ref), personRowModule (ref), var1 (ref), fFlagPeoplePageRemoveSkeletons (ref), view (ref), skeleton (ref), radius (ref), lazyScrollingComponentModule (ref)
 	local var2 = useTokens()
-	local var3 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait
+	local var3 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait or fFlagPeopleListButtonOverflowModule and reactModule.useContext(peoplePageLayoutContextModule).isCompact
 	local var4 = if fFlagPeoplePageRemoveUseMemoElements then reactModule.createElement(personRowModule, { person = p1.person, layoutOrder = p1.layoutOrder }) else reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), personRowModule (copy), p1 (ref)
 		return reactModule.createElement(personRowModule, { person = p1.person, layoutOrder = p1.layoutOrder })

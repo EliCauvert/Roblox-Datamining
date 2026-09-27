@@ -6,6 +6,7 @@ return {
 	Immutable = require(script.Immutable),
 	IsVRAppBuild = require(script.IsVRAppBuild),
 	isSpatial = require(script.isSpatial),
+	isTenFootInterface = require(script.isTenFootInterface),
 	connectToIsSpatialChanged = require(script.connectToIsSpatialChanged),
 	GetDefaultQualityLevel = require(script.GetDefaultQualityLevel),
 	Color = require(script.Color),

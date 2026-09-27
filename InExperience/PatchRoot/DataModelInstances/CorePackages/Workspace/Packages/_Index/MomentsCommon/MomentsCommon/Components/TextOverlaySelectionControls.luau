@@ -1,12 +1,12 @@
 ﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
 local parent = momentsCommon.Parent
-local fFlagMomentsTextOverlayPreviewTransformModule = require(momentsCommon.Flags.FFlagMomentsTextOverlayPreviewTransform)
+local fFlagMomentsTextOverlayV2RedesignModule = require(momentsCommon.Flags.FFlagMomentsTextOverlayV2Redesign)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local responsiveModule = require(parent.Responsive)
 local view = foundationModule.View
 local icon = foundationModule.Icon
-local var1 = if fFlagMomentsTextOverlayPreviewTransformModule then require(parent.BuilderIcons) else nil
+local var1 = if fFlagMomentsTextOverlayV2RedesignModule then require(parent.BuilderIcons) else nil
 local useTextOverlayPreviewGesturesModule = require(momentsCommon.Hooks.useTextOverlayPreviewGestures)
 local hexColor = Color3.fromHex("FFFFFF")
 local hexColor_1 = Color3.fromHex("121215")

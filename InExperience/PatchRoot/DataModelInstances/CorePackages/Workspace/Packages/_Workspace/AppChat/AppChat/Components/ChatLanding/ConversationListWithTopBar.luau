@@ -28,6 +28,7 @@ local shouldUseFoundationConversationRow = signalsMigrationConfigModule.shouldUs
 local fFlagAppChatUseUltimateListConversationListModule_1 = shouldUseFoundationConversationRow and fFlagAppChatUseUltimateListConversationListModule
 local fFlagAppChatUseViewRecyclerConversationListModule_1 = shouldUseFoundationConversationRow and fFlagAppChatUseViewRecyclerConversationListModule
 local conversationListModule = require(script.Parent.ConversationList)
+local chatLoadingContainerModule = require(script.Parent.ChatLoading.ChatLoadingContainer)
 local var1 = false
 local var2 = nil
 local var3 = false
@@ -194,11 +195,11 @@ function conversationListWithTopBar.init(p1)
 end
 
 function conversationListWithTopBar.render(p1)
-	-- upvalues: withAnalyticsModule (ref), withTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), partyPageCarouselExperimentation (ref), shouldUseFoundationConversationRow (ref), fFlagAppChatConsoleFocusFixesModule (ref), fFlagAppIaScrollAway (ref), fFlagAppChatUseUltimateListConversationListModule_1 (ref), fFlagAppChatUseViewRecyclerConversationListModule_1 (ref), conversationListModule (ref), var3 (write), var4 (write), var1 (write), var2 (write), roactModule (ref)
+	-- upvalues: withAnalyticsModule (ref), withTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), partyPageCarouselExperimentation (ref), shouldUseFoundationConversationRow (ref), fFlagAppChatConsoleFocusFixesModule (ref), fFlagAppIaScrollAway (ref), fFlagAppChatUseUltimateListConversationListModule_1 (ref), fFlagAppChatUseViewRecyclerConversationListModule_1 (ref), conversationListModule (ref), var3 (write), var4 (write), var1 (write), var2 (write), roactModule (ref), chatLoadingContainerModule (ref)
 	return withAnalyticsModule(function(p2)
-		-- upvalues: withTelemetryModule (copy), chatLandingTelemetryLayerModule (copy), p1 (ref), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppChatConsoleFocusFixesModule (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), fFlagAppChatUseViewRecyclerConversationListModule_1 (copy), conversationListModule (copy), var3 (copy), var4 (copy), var1 (copy), var2 (copy), roactModule (copy)
+		-- upvalues: withTelemetryModule (copy), chatLandingTelemetryLayerModule (copy), p1 (ref), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppChatConsoleFocusFixesModule (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), fFlagAppChatUseViewRecyclerConversationListModule_1 (copy), conversationListModule (copy), var3 (copy), var4 (copy), var1 (copy), var2 (copy), roactModule (copy), chatLoadingContainerModule (copy)
 		return withTelemetryModule(chatLandingTelemetryLayerModule.Context)(function(p3)
-			-- upvalues: p1 (copy), p2 (ref), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppChatConsoleFocusFixesModule (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), fFlagAppChatUseViewRecyclerConversationListModule_1 (copy), conversationListModule (copy), var3 (copy), var4 (copy), var1 (copy), var2 (copy), roactModule (copy)
+			-- upvalues: p1 (copy), p2 (ref), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppChatConsoleFocusFixesModule (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), fFlagAppChatUseViewRecyclerConversationListModule_1 (copy), conversationListModule (copy), var3 (copy), var4 (copy), var1 (copy), var2 (copy), roactModule (copy), chatLoadingContainerModule (copy)
 			local t = {
 				Size = UDim2.fromScale(1, 1),
 				itemList = if p1.props.filterText and p1.props.filterText:match("%S") then p1.state.filteredItemList else p1.props.itemList,
@@ -279,7 +280,12 @@ function conversationListWithTopBar.render(p1)
 			return roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = if fFlagAppChatConsoleFocusFixesModule and not p1.props.isInExperience then UDim2.new(1, 0, 1, p1.props.deviceSafePadding.bottom) else UDim2.new(1, 0, 1, 0)
-			}, { conversationList = roactModule.createElement(var5, t) })
+			}, {
+				conversationList = if p1.props.isSearchActive and p1.props.isSearchAwaitingResults and #p1.props.itemList == 0 then roactModule.createElement(chatLoadingContainerModule, {
+					cellHeight = p1.props.entryHeight,
+					topPadding = p1.props.canvasTopPadding
+				}) else roactModule.createElement(var5, t)
+			})
 		end)
 	end)
 end

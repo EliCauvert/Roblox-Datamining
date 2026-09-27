@@ -1,6 +1,7 @@
 ﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local parent = sduiCoreSystem.Parent
 local sduiCapabilityFlagsModule = require(sduiCoreSystem.ClientBinding.SduiCapabilityFlags)
+local resolveRuntimeFlagValuesModule = require(sduiCoreSystem.ClientBinding.resolveRuntimeFlagValues)
 local t = {
 	isEnabled = function(p1)
 		-- upvalues: sduiCapabilityFlagsModule (ref)
@@ -86,6 +87,18 @@ function t.getEnabledCapabilityNumbers(p5)
 	return var4
 end
 
+function t.getEnabledCapabilityNumbersWithoutExtendedMarker()
+	-- upvalues: t (ref)
+	local t_1 = {}
+	
+	for i, v in t.getEnabledCapabilities() do
+		if v ~= "CAPABILITY_SUPPORTS_EXTENDED_CLIENT_CAPABILITIES" then
+			table.insert(t_1, v)
+		end
+	end
+	return t.getEnabledCapabilityNumbers(t_1)
+end
+
 function t.addAllToQueryParams(p6)
 	-- upvalues: t (ref)
 	local var5 = t.createQueryValue(t.getEnabledCapabilities())
@@ -93,6 +106,77 @@ function t.addAllToQueryParams(p6)
 	if var5 ~= nil then
 		p6.enabledCapabilities = var5
 	end
+end
+
+local function resolveRuntimeSupportNumbers(p6, p7, p8)
+	-- upvalues: sduiCoreSystem (ref)
+	local protoVariableMapperModule = require(sduiCoreSystem.ClientBinding.ProtoVariableMapper)
+	local t = {}
+	
+	for i, v in p6 do
+		local var5 = protoVariableMapperModule.mapLuaEnumFormatToProto(v, p8, p7)
+		
+		if var5 ~= nil then
+			local var6 = p7.toNumber(var5)
+			
+			if var6 ~= 0 then
+				table.insert(t, var6)
+			end
+		end
+	end
+	table.sort(t)
+	
+	return t
+end
+
+local var7 = false
+
+local function _()
+	-- upvalues: resolveRuntimeFlagValuesModule (ref), var7 (write)
+	local var8, var9, var10 = resolveRuntimeFlagValuesModule(function(p9)
+		return pcall(game.GetFastFlag, game, p9)
+	end)
+	
+	if not var7 and var9 + var10 > 0 then
+		var7 = true
+		warn(`SduiCapabilities: ignored {var9} invalid runtime flag names and {var10} unreadable flags`)
+	end
+	return var8
+end
+
+local function getRuntimeSupportFields()
+	-- upvalues: parent (ref), resolveRuntimeSupportNumbers (ref), sduiCoreSystem (ref), resolveRuntimeFlagValuesModule (ref), var7 (write)
+	local shared = require(parent.ServiceContractsProto).apppageplatform.shared
+	local t = {
+		registered_ui_component_types = resolveRuntimeSupportNumbers(require(sduiCoreSystem.getSduiComponentRegistry)().getRegisteredComponentTypes(), shared.ui_component_type.UiComponentType, "UI_COMPONENT_TYPE_"),
+		registered_action_types = resolveRuntimeSupportNumbers(require(sduiCoreSystem.getSduiActionHandlerRegistry)().getRegisteredActionTypes(), shared.actions.ActionType, "ACTION_TYPE_")
+	}
+	local var8, var9, var10 = resolveRuntimeFlagValuesModule(function(p9)
+		return pcall(game.GetFastFlag, game, p9)
+	end)
+	
+	if not var7 and var9 + var10 > 0 then
+		var7 = true
+		warn(`SduiCapabilities: ignored {var9} invalid runtime flag names and {var10} unreadable flags`)
+	end
+	t.runtime_flag_values = var8
+	
+	return t
+end
+
+function t.buildClientCapabilities()
+	-- upvalues: parent (ref), t (ref), getRuntimeSupportFields (ref)
+	local serviceContractsProtoModule = require(parent.ServiceContractsProto)
+	local clientCapabilities = serviceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities
+	local t_1 = {
+		enabled_capabilities = t.getEnabledCapabilityNumbers(t.getEnabledCapabilities()),
+		platform = serviceContractsProtoModule.apppageplatform.shared.client_capabilities.Platform.toNumber("PLATFORM_APP")
+	}
+	
+	for i, v in getRuntimeSupportFields() do
+		t_1[i] = v
+	end
+	return clientCapabilities.new(t_1)
 end
 
 return t

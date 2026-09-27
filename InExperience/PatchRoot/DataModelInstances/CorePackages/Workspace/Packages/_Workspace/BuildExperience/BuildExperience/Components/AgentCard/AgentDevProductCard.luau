@@ -4,6 +4,8 @@ local foundationModule = require(parent.Foundation)
 local localizationModule = require(parent.Localization)
 local reactModule = require(parent.React)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
+local var1 = if fFlagBuildExperienceMonetizationNativeUIModule then require(parent.FoundationCloudAssets) else nil
 local localizationService = game:GetService("LocalizationService")
 local localizationRoactContext = localizationModule.LocalizationRoactContext
 local numberLocalization = localizationModule.NumberLocalization
@@ -11,24 +13,36 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local agentCardModule = require(script.Parent.AgentCard)
 local agentCardActionsModule = require(script.Parent.AgentCardActions)
 local button = foundationModule.Button
+local image = foundationModule.Image
+local sheet = foundationModule.Sheet
+local text = foundationModule.Text
+local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
+local assetId = nil
 
+if fFlagBuildExperienceMonetizationNativeUIModule then
+	var1.preloadAsset("pictograms/robux")
+	assetId = var1.Assets["pictograms/robux"].assetId
+end
 local function formatSummary(p1, p2, p3)
 	return p1:Format(p2, p3)
 end
 
 local function summaryText(p1, p2, p3, p4)
-	-- upvalues: numberLocalization (ref), localizationService (ref), formatSummary (ref), localizationStringsModule (ref)
+	-- upvalues: numberLocalization (ref), localizationService (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), formatSummary (ref), localizationStringsModule (ref)
 	local action = p1.action
 	
 	if action == "create" then
+		local name = p1.name or p3
+		local var2 = if p1.priceInRobux ~= nil then p4 else numberLocalization.localize(tostring(p1.priceInRobux), localizationService.RobloxLocaleId)
+		
+		if fFlagBuildExperienceMonetizationNativeUIModule then
+			return formatSummary(p2, localizationStringsModule.AGENT_DEV_PRODUCT_PRICE, { PRICE = var2 })
+		end
 		local list = {
-			formatSummary(p2, localizationStringsModule.AGENT_DEV_PRODUCT_CREATE, {
-				NAME = p1.name or p3,
-				PRICE = if p1.priceInRobux ~= nil then p4 else numberLocalization.localize(tostring(p1.priceInRobux), localizationService.RobloxLocaleId)
-			})
+			formatSummary(p2, localizationStringsModule.AGENT_DEV_PRODUCT_CREATE, { NAME = name, PRICE = var2 })
 		}
 		
 		if p1.description ~= nil then
@@ -58,55 +72,129 @@ local function summaryText(p1, p2, p3, p4)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), localizationRoactContext (ref), useLocalization (ref), localizationStringsModule (ref), agentCardModule (ref), summaryText (ref), agentCardActionsModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
-	local var1 = reactModule.useContext(localizationRoactContext)
-	local var2 = useLocalization({
+	-- upvalues: reactModule (ref), localizationRoactContext (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), sheet (ref), text (ref), view (ref), image (ref), assetId (write), summaryText (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), agentCardModule (ref), agentCardActionsModule (ref)
+	local var2 = reactModule.useContext(localizationRoactContext)
+	local var3 = useLocalization({
 		title = localizationStringsModule.AGENT_DEV_PRODUCT_TITLE,
 		approve = localizationStringsModule.AGENT_DEV_PRODUCT_APPROVE,
-		reject = localizationStringsModule.AGENT_DEV_PRODUCT_REJECT,
+		reject = if fFlagBuildExperienceMonetizationNativeUIModule then localizationStringsModule.MONETIZATION_CANCEL else localizationStringsModule.AGENT_DEV_PRODUCT_REJECT,
 		defaultName = localizationStringsModule.AGENT_DEV_PRODUCT_DEFAULT_NAME,
-		unavailablePrice = localizationStringsModule.AGENT_DEV_PRODUCT_PRICE_UNAVAILABLE
+		unavailablePrice = localizationStringsModule.AGENT_DEV_PRODUCT_PRICE_UNAVAILABLE,
+		preview = if fFlagBuildExperienceMonetizationNativeUIModule then localizationStringsModule.GAME_CONFIGURATION_PREVIEW else nil,
+		create = if fFlagBuildExperienceMonetizationNativeUIModule then localizationStringsModule.MONETIZATION_EMPTY_CREATE_PRODUCT else nil
 	})
 	local testId = p1.testId or "agent-dev-product-card"
-	local var3 = p1.isActionDisabled == true
+	local var4 = p1.isActionDisabled == true
+	local var5 = fFlagBuildExperienceMonetizationNativeUIModule and p1.action == "create"
+	local var6 = false
+	local var7 = nil
+	local var8 = nil
 	
+	if fFlagBuildExperienceMonetizationNativeUIModule then
+		local var9, var10 = reactModule.useState(false)
+		var6 = var9
+		var7 = var10
+		var8 = reactModule.useCallback(function()
+			-- upvalues: var7 (write)
+			var7(true)
+		end, { var7 })
+	end
 	return reactModule.createElement(agentCardModule, {
-		title = var2.title,
-		textContent = summaryText(p1, var1, var2.defaultName, var2.unavailablePrice),
+		title = if var5 then p1.name or var3.defaultName else var3.title,
+		fitToContent = if var5 then true else nil,
+		textContent = summaryText(p1, var2, var3.defaultName, var3.unavailablePrice),
 		layoutOrder = p1.layoutOrder,
 		testId = testId
 	}, {
+		Preview = if var5 then reactModule.createElement(sheet.Root, {
+			isOpen = var6,
+			onClose = function()
+				-- upvalues: var6 (write), var4 (ref), p1 (ref), var7 (write)
+				if not var6 and not var4 then
+					p1.onApprove()
+				end
+				var7(false)
+			end,
+			snapPoints = { 0.5, 1 },
+			testId = `{testId}-preview`
+		}, {
+			Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
+				Title = reactModule.createElement(text, {
+					tag = "size-full-0 auto-y text-title-large text-wrap text-align-x-left content-emphasis",
+					Text = p1.name or var3.defaultName
+				})
+			}),
+			Content = reactModule.createElement(sheet.Content, nil, {
+				Details = reactModule.createElement(view, { tag = "col gap-large size-full-0 auto-y" }, {
+					Image = reactModule.createElement(image, {
+						LayoutOrder = 1,
+						tag = "size-3000-3000 content-emphasis",
+						Image = assetId,
+						ScaleType = Enum.ScaleType.Fit,
+						testId = `{testId}-preview-image`
+					}),
+					Price = reactModule.createElement(text, {
+						LayoutOrder = 2,
+						tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-left content-emphasis",
+						Text = summaryText(p1, var2, var3.defaultName, var3.unavailablePrice)
+					}),
+					Description = reactModule.createElement(text, {
+						LayoutOrder = 3,
+						tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
+						Text = p1.description or "",
+						testId = `{testId}-preview-description`
+					})
+				})
+			}),
+			Actions = if not var4 then reactModule.createElement(sheet.Actions, nil, {
+				Create = reactModule.createElement(button, {
+					text = var3.create,
+					size = inputSize.Large,
+					variant = buttonVariant.Emphasis,
+					fillBehavior = fillBehavior.Fill,
+					isDisabled = not var6,
+					onActivated = function()
+						-- upvalues: var4 (ref), var6 (write), var7 (write)
+						if var4 or not var6 then
+							return
+						end
+						var7(false)
+					end,
+					testId = `{testId}-create-button`
+				})
+			}) else nil
+		}) else nil,
 		Actions = reactModule.createElement(agentCardActionsModule, nil, {
 			Approve = reactModule.createElement(button, {
 				LayoutOrder = 1,
-				text = var2.approve,
+				text = if var5 then var3.preview else var3.approve,
 				size = inputSize.Small,
 				variant = buttonVariant.Emphasis,
 				fillBehavior = fillBehavior.Fill,
-				isDisabled = var3,
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: var3 (ref), p1 (ref)
-					if var3 then
+				isDisabled = if var5 then false else var4,
+				onActivated = if var5 then var8 else reactModule.useCallback(function()
+					-- upvalues: var4 (ref), p1 (ref)
+					if var4 then
 						return
 					end
 					p1.onApprove()
-				end, { var3, p1.onApprove }),
-				testId = `{testId}-approve-button`
+				end, { var4, p1.onApprove }),
+				testId = if var5 then `{testId}-preview-button` else `{testId}-approve-button`
 			}),
-			Reject = reactModule.createElement(button, {
+			Reject = if var5 and var4 then nil else reactModule.createElement(button, {
 				LayoutOrder = 2,
-				text = var2.reject,
+				text = var3.reject,
 				size = inputSize.Small,
 				variant = buttonVariant.Standard,
 				fillBehavior = fillBehavior.Fill,
-				isDisabled = var3,
+				isDisabled = var4,
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: var3 (ref), p1 (ref)
-					if var3 then
+					-- upvalues: var4 (ref), p1 (ref)
+					if var4 then
 						return
 					end
 					p1.onReject()
-				end, { var3, p1.onReject }),
+				end, { var4, p1.onReject }),
 				testId = `{testId}-reject-button`
 			})
 		})

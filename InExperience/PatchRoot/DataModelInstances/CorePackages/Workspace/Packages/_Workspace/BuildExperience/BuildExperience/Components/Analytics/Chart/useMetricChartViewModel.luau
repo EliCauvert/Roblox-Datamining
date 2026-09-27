@@ -3,6 +3,7 @@ local parent = buildExperience.Parent
 local localizationService = game:GetService("LocalizationService")
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local analyticsKeysModule = require(buildExperience.Analytics.AnalyticsKeys)
 local _ = require(parent.DataHydration.ExperienceAnalytics)
@@ -34,7 +35,7 @@ local list = {
 }
 
 return function(p1)
-	-- upvalues: foundationModule (ref), localizationService (ref), reactModule (ref), analyticsKeysModule (ref), list (ref), useLocalization (ref), fillMetricSeriesGapsModule (ref), deriveChartAxesModule (ref), formatMetricValueModule (ref), scaleValueToUnitModule (ref), formatMetricTimestampModule (ref), noDataPlaceholderModule (ref), metricValueRoundsToZeroModule (ref), analyticsUnitModule (ref)
+	-- upvalues: foundationModule (ref), localizationService (ref), foundationFontFaceMigration (ref), reactModule (ref), analyticsKeysModule (ref), list (ref), useLocalization (ref), fillMetricSeriesGapsModule (ref), deriveChartAxesModule (ref), formatMetricValueModule (ref), scaleValueToUnitModule (ref), formatMetricTimestampModule (ref), noDataPlaceholderModule (ref), metricValueRoundsToZeroModule (ref), analyticsUnitModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = foundationModule.Hooks.useTextSizeOffset()
 	local robloxLocaleId = localizationService.RobloxLocaleId
@@ -42,7 +43,7 @@ return function(p1)
 	local unit = metric.unit
 	local bodySmall = var1.Typography.BodySmall
 	local font = bodySmall.Font
-	local var3 = if typeof(font) == "EnumItem" then font else Enum.Font.BuilderSans
+	local var3 = if foundationFontFaceMigration then font elseif typeof(font) == "EnumItem" then font else Enum.Font.BuilderSans
 	local var4 = bodySmall.FontSize + (var2 or 0)
 	local var5, var6 = reactModule.useState(nil)
 	local var7, var8 = reactModule.useState(false)

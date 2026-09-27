@@ -7,7 +7,8 @@ t.__index = t
 local var1 = tModule.tuple(tModule.callback, tModule.optional(tModule.strictInterface({
 	queueTimeLimit = tModule.optional(tModule.numberPositive),
 	queueErrorLimit = tModule.optional(tModule.numberPositive),
-	queueKeyLimit = tModule.optional(tModule.numberPositive)
+	queueKeyLimit = tModule.optional(tModule.numberPositive),
+	flushImmediately = tModule.optional(tModule.boolean)
 })))
 
 function t.new(p1, p2)
@@ -23,6 +24,7 @@ function t.new(p1, p2)
 		_queueTimeLimit = p2.queueTimeLimit or 30,
 		_queueErrorLimit = p2.queueErrorLimit or 30,
 		_queueKeyLimit = p2.queueKeyLimit or 10,
+		_flushImmediately = p2.flushImmediately == true,
 		_errors = {}
 	}
 	setmetatable(t_1, t)
@@ -77,7 +79,7 @@ end
 function t:startTimer()
 	-- upvalues: runService (ref)
 	if self._renderSteppedConnection == nil then
-		self._runningTime = 0
+		self._runningTime = if self._flushImmediately then self._queueTimeLimit else 0
 		self._renderSteppedConnection = runService.renderStepped:Connect(function(p1)
 			-- upvalues: self (ref)
 			self:_onRenderStep(p1)

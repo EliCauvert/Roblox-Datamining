@@ -1,5 +1,8 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local reactModule = require(corePackagesService.Packages.React)
 local buttonStack = UIBloxModule.App.Button.ButtonStack
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -65,7 +68,7 @@ local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p1)
 end
 
 return function(p1)
-	-- upvalues: usePreferredInput (ref), responsiveModule (ref), robloxTranslatorModule (ref), reactModule (ref), useStyle (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), restartScreenshotDialogModule (ref), imageSetButton (ref), assetsModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), ScreenshotReviewDialogSmallPortraitModeHeaderRight (ref), button (ref), buttonType (ref), standardButtonSize (ref), dividerModule (ref), buttonStack (ref)
+	-- upvalues: usePreferredInput (ref), responsiveModule (ref), robloxTranslatorModule (ref), reactModule (ref), useStyle (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), restartScreenshotDialogModule (ref), imageSetButton (ref), assetsModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), ScreenshotReviewDialogSmallPortraitModeHeaderRight (ref), button (ref), buttonType (ref), standardButtonSize (ref), dividerModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), buttonStack (ref)
 	local var1 = usePreferredInput() == responsiveModule.Input.Directional
 	
 	if robloxTranslatorModule then
@@ -269,7 +272,8 @@ return function(p1)
 								TextWrapped = true,
 								BackgroundTransparency = 1,
 								Text = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Message.ProblemNotInScene"),
-								Font = font.Header1.Font,
+								Font = if foundationFontFaceMigration then nil else font.Header1.Font,
+								FontFace = if foundationFontFaceMigration then normalizeFontFace(var10.Tokens.Typography.HeadingSmall.Font) else nil,
 								TextColor3 = theme.TextEmphasis.Color,
 								TextTransparency = theme.TextEmphasis.Transparency,
 								TextSize = if p1.isSmallPortraitMode then 12 else 20,

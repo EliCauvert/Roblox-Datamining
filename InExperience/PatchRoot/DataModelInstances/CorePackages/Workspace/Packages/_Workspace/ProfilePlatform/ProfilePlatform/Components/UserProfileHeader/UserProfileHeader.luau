@@ -32,6 +32,7 @@ local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useEffectOnMount = roactUtilsModule.Hooks.useEffectOnMount
 local networkingPresenceModule = require(profilePlatform.Networking.NetworkingPresence)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
+local fFlagProfileInspectAvatarCWEntryModule = require(profilePlatform.Flags.FFlagProfileInspectAvatarCWEntry)
 local fFlagSocialEnableProfileInspectAndBuyAnalytics = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyAnalytics
 local fFlagEnableSocialTabsPage = require(parent.SharedFlags).FFlagEnableSocialTabsPage
 local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
@@ -44,7 +45,7 @@ local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local t = { skipFetch = true }
 
 return function(p1)
-	-- upvalues: fFlagSocialEnableProfileInspectAndBuy (ref), useLocalUserId (ref), useNavigation (ref), reactModule (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (ref), useProfileAnalyticsContextModule (ref), useProfileWrapperContextModule (ref), eventNamesModule (ref), enumsModule (ref), fFlagProfilePlatformNewProfileHeader (ref), useProfileFormFactorModule (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useEffectOnMount (ref), var2 (ref), var1 (ref), t (ref), convertPresenceEnumModule (ref), presenceModule (ref), useDispatch (ref), networkingPresenceModule (ref), useSelector (ref), useShouldShowContextualInformationModule (ref), fFlagProfilePlatformMeTabMobileProfileHero (ref), useShouldResizeAvatarModule (ref), constantsModule (ref), view (ref), userProfileAvatarModule (ref), inspectAvatarTooltipModule (ref), avatarHeadshotComponentModule (ref), fFlagAddPlatformNameToProfileHeader (ref), contextualInformationModule (ref), socialChipCountsRowContainer (ref), fFlagEnableSocialTabsPage (ref), socialIdentityContainerModule (ref), fFlagMoveInExperienceModeToEditProfile (ref), disableStreamerModeToggle (ref), userProfileSettingsToggleModule (ref)
+	-- upvalues: fFlagSocialEnableProfileInspectAndBuy (ref), useLocalUserId (ref), useNavigation (ref), reactModule (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (ref), useProfileAnalyticsContextModule (ref), useProfileWrapperContextModule (ref), eventNamesModule (ref), enumsModule (ref), fFlagProfilePlatformNewProfileHeader (ref), useProfileFormFactorModule (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useEffectOnMount (ref), var2 (ref), var1 (ref), t (ref), convertPresenceEnumModule (ref), presenceModule (ref), useDispatch (ref), networkingPresenceModule (ref), useSelector (ref), useShouldShowContextualInformationModule (ref), fFlagProfilePlatformMeTabMobileProfileHero (ref), useShouldResizeAvatarModule (ref), constantsModule (ref), view (ref), userProfileAvatarModule (ref), fFlagProfileInspectAvatarCWEntryModule (ref), inspectAvatarTooltipModule (ref), avatarHeadshotComponentModule (ref), fFlagAddPlatformNameToProfileHeader (ref), contextualInformationModule (ref), socialChipCountsRowContainer (ref), fFlagEnableSocialTabsPage (ref), socialIdentityContainerModule (ref), fFlagMoveInExperienceModeToEditProfile (ref), disableStreamerModeToggle (ref), userProfileSettingsToggleModule (ref)
 	local var3
 	local userThumbnail = p1.userThumbnail
 	local var4 = nil
@@ -131,12 +132,12 @@ return function(p1)
 					height = var5,
 					layoutVariant = var6
 				}),
-				TooltipAnchor = reactModule.createElement(view, {
+				TooltipAnchor = if fFlagProfileInspectAvatarCWEntryModule then nil else reactModule.createElement(view, {
 					tag = "position-center-center anchor-center-center size-50",
 					BackgroundTransparency = 1,
 					ref = var12
 				}),
-				Tooltip = reactModule.createElement(inspectAvatarTooltipModule, { anchorRef = var12, ref = var13 })
+				Tooltip = if fFlagProfileInspectAvatarCWEntryModule then nil else reactModule.createElement(inspectAvatarTooltipModule, { anchorRef = var12, ref = var13 })
 			}) else reactModule.createElement(userProfileAvatarModule, {
 				layoutOrder = 1,
 				userThumbnail = userThumbnail,
@@ -185,12 +186,12 @@ return function(p1)
 			[reactModule.Event.Activated] = var16
 		}, {
 			Avatar = reactModule.createElement(userProfileAvatarModule, { userThumbnail = userThumbnail, userId = p1.userId }),
-			TooltipAnchor = reactModule.createElement(view, {
+			TooltipAnchor = if fFlagProfileInspectAvatarCWEntryModule then nil else reactModule.createElement(view, {
 				tag = "position-center-center anchor-center-center size-50",
 				BackgroundTransparency = 1,
 				ref = var12
 			}),
-			Tooltip = reactModule.createElement(inspectAvatarTooltipModule, { anchorRef = var12, ref = var13 })
+			Tooltip = if fFlagProfileInspectAvatarCWEntryModule then nil else reactModule.createElement(inspectAvatarTooltipModule, { anchorRef = var12, ref = var13 })
 		}) else reactModule.createElement(userProfileAvatarModule, { userThumbnail = userThumbnail, userId = p1.userId })
 	}
 	var10 = "Frame"

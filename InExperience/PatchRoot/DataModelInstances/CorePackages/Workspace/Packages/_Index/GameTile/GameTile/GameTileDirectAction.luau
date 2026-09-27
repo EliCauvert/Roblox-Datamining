@@ -4,6 +4,7 @@ local cryoModule = require(parent.Cryo)
 local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local _ = require(gameTile.GameTileOverflowMenu)
 local useGameTileActionsModule = require(gameTile.useGameTileActions)
 local buttonVariant = foundationModule.Enums.ButtonVariant
@@ -11,45 +12,36 @@ local iconButton = foundationModule.IconButton
 local iconSize = foundationModule.Enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
 local view = foundationModule.View
-local sendGameTileDirectActionActivatedEvent = discoveryAnalyticsModule.Events.sendGameTileDirectActionActivatedEvent
-local sendGameTileDirectActionImpressedEvent = discoveryAnalyticsModule.Events.sendGameTileDirectActionImpressedEvent
-local luaAppGameTileDirectActionTelemetry = game:DefineFastFlag("LuaAppGameTileDirectActionTelemetry", false)
-local luaAppGameTileDirectActionImpressionTelemetry = game:DefineFastFlag("LuaAppGameTileDirectActionImpressionTelemetry", false)
+local gameTileOverflowMenuAction = discoveryAnalyticsModule.Events.gameTileOverflowMenuAction
+local fFlagLuaAppEnableHomepageOneByTwoTile = sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
+local fFlagLuaAppGameTileDirectActionTelemetry = sharedFlagsModule.FFlagLuaAppGameTileDirectActionTelemetry
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), cryoModule (ref), useGameTileActionsModule (ref), luaAppGameTileDirectActionImpressionTelemetry (ref), sendGameTileDirectActionImpressedEvent (ref), view (ref), iconButton (ref), luaAppGameTileDirectActionTelemetry (ref), sendGameTileDirectActionActivatedEvent (ref), iconSize (ref), buttonVariant (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), cryoModule (ref), fFlagLuaAppGameTileDirectActionTelemetry (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), useGameTileActionsModule (ref), view (ref), iconButton (ref), iconSize (ref), buttonVariant (ref)
 	local var1 = useTokens()
 	local var2 = useGameTileActionsModule(cryoModule.Dictionary.join(p1, {
 		availableMenuItems = reactModule.useMemo(function()
 			-- upvalues: p1 (ref)
 			return { [p1.actionId] = true }
 		end, { p1.actionId })
-	}))[1]
-	local _ = nil
+	}), if fFlagLuaAppGameTileDirectActionTelemetry then if fFlagLuaAppGameTileDirectActionTelemetry then reactModule.useCallback(function(p2)
+		-- upvalues: gameTileOverflowMenuAction (copy), p1 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy)
+		gameTileOverflowMenuAction({
+			actionType = "GameTileOverflowMenuItemActivated",
+			isDirectAction = true,
+			universeId = p1.universeId,
+			sortId = p1.collectionId or "",
+			menuItem = p2,
+			availableMenuItems = p2,
+			contentType = if fFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
+		}, p1.appPage)
+	end, {
+		p1.appPage,
+		p1.universeId,
+		p1.collectionId,
+		if fFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
+	}) else nil else nil)[1]
 	
-	if luaAppGameTileDirectActionImpressionTelemetry then
-		local var3 = reactModule.useRef(false)
-		reactModule.useEffect(function()
-			-- upvalues: var2 (ref), p1 (ref), var3 (write), sendGameTileDirectActionImpressedEvent (copy)
-			if not var2 or not p1.isHovered then return end
-			local id = var2.id
-			
-			if (p1.iconOverride or var2.icon) and id and (var2.onActivated and not var3.current) then
-				sendGameTileDirectActionImpressedEvent({
-					universeId = p1.universeId,
-					sortId = p1.collectionId,
-					actionId = id,
-					contentType = p1.contentType
-				}, p1.appPage or "Unknown")
-				var3.current = true
-				
-				return
-			end
-		end, {
-			var2, p1.isHovered, p1.iconOverride, p1.universeId, p1.collectionId,
-			p1.contentType, p1.appPage
-		})
-	end
 	if not var2 or not p1.isHovered then
 		return nil
 	end
@@ -68,17 +60,8 @@ return function(p1)
 			testId = "game-tile-direct-action",
 			icon = iconOverride,
 			onActivated = function()
-				-- upvalues: onActivated (ref), id (ref), luaAppGameTileDirectActionTelemetry (copy), sendGameTileDirectActionActivatedEvent (copy), p1 (ref)
+				-- upvalues: onActivated (ref), id (ref)
 				onActivated(id)
-				
-				if luaAppGameTileDirectActionTelemetry then
-					sendGameTileDirectActionActivatedEvent({
-						universeId = p1.universeId,
-						sortId = p1.collectionId,
-						actionId = id,
-						contentType = p1.contentType
-					}, p1.appPage or "Unknown")
-				end
 			end,
 			size = iconSize.Small,
 			variant = buttonVariant.Utility

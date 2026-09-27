@@ -58,10 +58,21 @@ return function(p1)
 							
 							return
 						end
+					elseif p2.type == "openInviteManagement" then
+						if p1.onOpenPlaytestManagement then
+							p1.onOpenPlaytestManagement()
+							
+							return
+						end
 					elseif p1.onAction then
 						p1.onAction(p2)
 					end
-				end, { p1.onAction, p1.onOpenPage, p1.onOpenInvitePicker }),
+				end, {
+					p1.onAction,
+					p1.onOpenPage,
+					p1.onOpenInvitePicker,
+					p1.onOpenPlaytestManagement
+				}),
 				onOpenCreatorCreditPage = p1.onOpenCreatorCreditPage
 			})
 		})

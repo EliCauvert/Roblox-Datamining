@@ -4,7 +4,6 @@ local constantsModule = require(parent.Constants)
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
 local getFIntUGCValidateMaxHSRDataLenModule = require(parent.flags.getFIntUGCValidateMaxHSRDataLen)
 local getFFlagUGCValidateWrapDataCapsModule = require(parent.flags.getFFlagUGCValidateWrapDataCaps)
@@ -24,7 +23,6 @@ local t = {
 		validationEnumsModule.SharedDataMember.consumerConfig,
 		validationEnumsModule.SharedDataMember.uploadCategory
 	},
-	fflag = getFFlagUGCValidateMigrateSchemaPropertiesModule,
 	expectedFailures = {}
 }
 

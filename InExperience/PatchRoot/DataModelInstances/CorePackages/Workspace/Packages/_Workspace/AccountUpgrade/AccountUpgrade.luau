@@ -1,5 +1,7 @@
 ﻿return {
+	AccountUpgradeAppShellFlow = require(script.AppShell.AccountUpgradeAppShellFlow),
 	AccountUpgradeField = require(script.AccountUpgradeField),
+	AccountUpgradeError = require(script.AccountUpgradeError),
 	AccountUpgradeFlow = require(script.AccountUpgradeFlow),
 	Components = require(script.Components),
 	Eligibility = require(script.Eligibility),

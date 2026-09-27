@@ -18,6 +18,7 @@ local reactModule = require(parent_1.React)
 local UIBloxModule = require(parent_1.UIBlox)
 local cryoModule = require(parent_1.Cryo)
 local isVRAppBuild = require(parent_1.AppCommonLib).IsVRAppBuild
+local isTenFootInterface = require(parent_1.AppCommonLib).isTenFootInterface
 local responsiveModule = require(parent_1.Responsive)
 local usePreferredInput = responsiveModule.usePreferredInput
 local useIsSpatial = responsiveModule.useIsSpatial
@@ -88,7 +89,7 @@ local isToastToRight = toastNotificationHelperModule.isToastToRight
 local calculateTimeRemaining = toastNotificationHelperModule.calculateTimeRemaining
 
 return function(p1)
-	-- upvalues: typeModule (ref), toastNotificationHelperModule (ref), constantsModule (ref), toastNotificationProtocol (ref), reactModule (ref), userGameSettingsService (ref), getNotificationSize (ref), getDeviceOrientation (ref), fFlagFriendshipNotifsUseSendrExperiment (ref), calculateToastPosition (ref), isToastToRight (ref), useIsSpatial (ref), usePreferredInput (ref), responsiveModule (ref), userInputService (ref), useKeyCodeHoldModule (ref), useStyle (ref), playersService (ref), loggerModule (ref), analyticsServiceModule (ref), toastNotificationSessionizationHelperModule (ref), cryoModule (ref), default (ref), var1 (write), var2 (write), var3 (write), IXPServiceWrapper (ref), friendshipNotifsUseSendrLayerName (ref), FRRToastPositionVariantKey (ref), enableNotificationsToastTTLFix (ref), clientToastNotificationsEnabledEngineFeature (ref), guiService (ref), joinExperience (ref), httpService (ref), calculateTimeRemaining (ref), lifecycleEventsModule (ref), getFStringPCGDKFilteredNotificationTypes (ref), thirdPartyUserService (ref), enableDisplayLoggingForToastsFix (ref), getFFlagFilterSecurityAlertsVRToastEnabled (ref), getFFlagEnableChatNewMessage (ref), marshalNotificationData (ref), t (ref), reactOtterModule (ref), isVRAppBuild (ref), touchEnabled (ref), imageSetLabel (ref), close (ref), springAnimatedItem (ref), swipeDetectionWrapperModule (ref), clientNotificationWrapperModule (ref), enableClientToastNotificationsReducedMotion (ref), notificationCardProviderModule (ref), notificationCardModule (ref), toastVRWrapperModule (ref), toastNotificationSnoozeMenuModule (ref), deeplinkConfirmationModal (ref)
+	-- upvalues: typeModule (ref), toastNotificationHelperModule (ref), constantsModule (ref), toastNotificationProtocol (ref), reactModule (ref), userGameSettingsService (ref), getNotificationSize (ref), getDeviceOrientation (ref), fFlagFriendshipNotifsUseSendrExperiment (ref), calculateToastPosition (ref), isToastToRight (ref), useIsSpatial (ref), usePreferredInput (ref), responsiveModule (ref), userInputService (ref), useKeyCodeHoldModule (ref), useStyle (ref), playersService (ref), loggerModule (ref), analyticsServiceModule (ref), toastNotificationSessionizationHelperModule (ref), cryoModule (ref), default (ref), var1 (write), var2 (write), var3 (write), IXPServiceWrapper (ref), friendshipNotifsUseSendrLayerName (ref), FRRToastPositionVariantKey (ref), enableNotificationsToastTTLFix (ref), clientToastNotificationsEnabledEngineFeature (ref), guiService (ref), joinExperience (ref), httpService (ref), calculateTimeRemaining (ref), lifecycleEventsModule (ref), getFStringPCGDKFilteredNotificationTypes (ref), thirdPartyUserService (ref), enableDisplayLoggingForToastsFix (ref), isTenFootInterface (ref), getFFlagFilterSecurityAlertsVRToastEnabled (ref), getFFlagEnableChatNewMessage (ref), marshalNotificationData (ref), t (ref), reactOtterModule (ref), isVRAppBuild (ref), touchEnabled (ref), imageSetLabel (ref), close (ref), springAnimatedItem (ref), swipeDetectionWrapperModule (ref), clientNotificationWrapperModule (ref), enableClientToastNotificationsReducedMotion (ref), notificationCardProviderModule (ref), notificationCardModule (ref), toastVRWrapperModule (ref), toastNotificationSnoozeMenuModule (ref), deeplinkConfirmationModal (ref)
 	local var4 = p1.renderLocation == typeModule.RenderLocationEnum.CoreScript
 	local var5 = toastNotificationHelperModule.isDesktopDevice()
 	local var6 = if var4 then constantsModule.CardTopMargin.Experience else constantsModule.CardTopMargin.App
@@ -544,8 +545,8 @@ return function(p1)
 	end
 	
 	local var71 = reactModule.useCallback(function(p5)
-		-- upvalues: guiService (copy), typeModule (copy), getFFlagFilterSecurityAlertsVRToastEnabled (copy), var44 (ref), getFFlagEnableChatNewMessage (copy), default_1 (ref), marshalNotificationData (copy), var20 (ref), lifecycleEventsModule (copy)
-		if guiService:IsTenFootInterface() and p5 and (p5.notificationType ~= nil and p5.notificationType ~= typeModule.NotificationTypeEnum.ClientNotification) then return end
+		-- upvalues: isTenFootInterface (copy), typeModule (copy), getFFlagFilterSecurityAlertsVRToastEnabled (copy), var44 (ref), getFFlagEnableChatNewMessage (copy), default_1 (ref), marshalNotificationData (copy), var20 (ref), lifecycleEventsModule (copy)
+		if isTenFootInterface() and p5 and (p5.notificationType ~= nil and p5.notificationType ~= typeModule.NotificationTypeEnum.ClientNotification) then return end
 		if getFFlagFilterSecurityAlertsVRToastEnabled() and var44 and (p5 and p5.notificationType ~= nil) and p5.notificationType == typeModule.NotificationTypeEnum.SecurityAlert then return end
 		if p5 and p5.notificationType == typeModule.NotificationTypeEnum.ChatNewMessage and (not getFFlagEnableChatNewMessage() and p5.content) and p5.content.id then
 			default_1:dismissNotification(p5.content.id)

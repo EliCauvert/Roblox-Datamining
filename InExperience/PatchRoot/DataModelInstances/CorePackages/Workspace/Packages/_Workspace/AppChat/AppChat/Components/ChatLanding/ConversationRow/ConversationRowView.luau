@@ -10,8 +10,10 @@ local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebu
 local fFlagAppChatExtendConversationListRowDividersModule = require(appChat.Flags.FFlagAppChatExtendConversationListRowDividers)
 local fFlagAppChatRemoveConversationListDividerModule = require(appChat.Flags.FFlagAppChatRemoveConversationListDivider)
 local fFlagAppChatUseBindingConversationFacePileModule = require(appChat.Flags.FFlagAppChatUseBindingConversationFacePile)
+local fFlagAppChatTimestampInSubtitleConversationRowModule = require(appChat.Flags.FFlagAppChatTimestampInSubtitleConversationRow)
 local conversationFacePileModule = require(appChat.Components.Cells.ConversationFacePile)
 local conversationFacePileBindingModule = require(script.Parent.ConversationFacePileBinding)
+local conversationRowSubtitleModule = require(script.Parent.ConversationRowSubtitle)
 local useGetOneToOneFriendIdFromConversationIdModule = require(appChat.Hooks.useGetOneToOneFriendIdFromConversationId)
 local useIsRobloxSubscriberBinding = require(parent.UserProfiles).Hooks.useIsRobloxSubscriberBinding
 local squadButtonSourceEnum = squadsModule.Enums.SquadButtonSourceEnum
@@ -81,7 +83,7 @@ local function SquadButtonHost(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), fFlagAppChatExtendConversationListRowDividersModule (ref), fFlagAppChatUseBindingConversationFacePileModule (ref), conversationFacePileBindingModule (ref), LegacyConversationFacePileHost (ref), SubscriptionBadge (ref), LegacySubscriptionBadgeHost (ref), SquadButtonHost (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
+	-- upvalues: foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), fFlagAppChatExtendConversationListRowDividersModule (ref), fFlagAppChatUseBindingConversationFacePileModule (ref), conversationFacePileBindingModule (ref), LegacyConversationFacePileHost (ref), SubscriptionBadge (ref), LegacySubscriptionBadgeHost (ref), fFlagAppChatTimestampInSubtitleConversationRowModule (ref), conversationRowSubtitleModule (ref), SquadButtonHost (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
 	local var2 = foundationModule.Hooks.useTokens()
 	local uDim = UDim.new(0, p1.pagePaddingLeft)
 	local uDim_1 = UDim.new(0, p1.pagePaddingRight)
@@ -148,11 +150,16 @@ return reactModule.memo(function(p1)
 								}),
 								subscriptionBadge = if fFlagAppChatUseBindingConversationFacePileModule then reactModule.createElement(SubscriptionBadge, { visible = p1.showSubscriptionBadge }) else reactModule.createElement(LegacySubscriptionBadgeHost, { itemSignal = p1.itemSignal })
 							}),
-							subtitle = reactModule.createElement(foundationModule.Text, {
+							subtitle = if fFlagAppChatTimestampInSubtitleConversationRowModule then nil else reactModule.createElement(foundationModule.Text, {
 								tag = "size-full-0 auto-y text-body-small text-align-x-left text-truncate-end content-default",
 								LayoutOrder = 2,
 								Text = p1.subtitleText
-							})
+							}),
+							subtitleRow = if fFlagAppChatTimestampInSubtitleConversationRowModule then reactModule.createElement(conversationRowSubtitleModule, {
+								LayoutOrder = 2,
+								subtitleText = p1.subtitleText,
+								timestampText = p1.timestampText
+							}) else nil
 						}),
 						rightContent = reactModule.createElement(foundationModule.View, {
 							tag = "row align-y-center size-0-full auto-x",
@@ -170,7 +177,7 @@ return reactModule.memo(function(p1)
 								LayoutOrder = 1,
 								Visible = p1.showTimestamp
 							}, {
-								timestamp = reactModule.createElement(foundationModule.Text, {
+								timestamp = if fFlagAppChatTimestampInSubtitleConversationRowModule then nil else reactModule.createElement(foundationModule.Text, {
 									tag = "auto-xy text-body-small content-default",
 									Name = "timeStamp",
 									LayoutOrder = 1,

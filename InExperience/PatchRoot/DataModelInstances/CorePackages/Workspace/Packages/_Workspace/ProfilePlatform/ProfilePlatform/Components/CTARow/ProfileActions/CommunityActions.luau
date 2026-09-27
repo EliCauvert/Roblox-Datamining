@@ -19,6 +19,7 @@ local textKeysModule = require(profilePlatform.Common.TextKeys)
 local enumsModule = require(profilePlatform.Common.Enums)
 local _ = require(profilePlatform.Components.CTARow.Types)
 local eventNamesModule = require(profilePlatform.Analytics.EventNames)
+local makeViewGroupPageModule = require(profilePlatform.Utils.makeViewGroupPage)
 local profileTypes = enumsModule.ProfileTypes
 local base_url = `{url.BASE_URL}share/g/%s`
 
@@ -92,40 +93,33 @@ return {
 		}
 	end,
 	[enumsModule.ProfileActions.ViewCommunity] = function(p1)
-		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref), eventNamesModule (ref), appPage (ref), urlBuilder (ref), textKeysModule (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
+		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref), eventNamesModule (ref), makeViewGroupPageModule (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
 		return {
 			variant = buttonVariant.SubEmphasis,
 			text = p1.localized[enumsModule.ProfileActions.ViewCommunity],
 			onActivated = {
 				[profileTypes.Community] = function()
-					-- upvalues: p1 (ref), eventNamesModule (copy), appPage (copy), urlBuilder (copy), textKeysModule (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
+					-- upvalues: p1 (ref), eventNamesModule (copy), makeViewGroupPageModule (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
 					p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonViewCommunity, {
 						buttonSurface = p1.buttonSurface,
 						btnContext = p1.profileWrapperContext.sourceInfo.source
 					})
-					local t = {
-						name = appPage.GenericWebPage,
-						detail = urlBuilder.user.group({ groupId = p1.profileId }),
-						extraProps = {
-							titleKey = textKeysModule.Community,
-							onClose = function()
-								-- upvalues: p1 (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy)
-								p1.dispatch(getProfilePlatformModule.API({
-									includeComponentOrdering = true,
-									profileType = p1.profileType,
-									profileId = p1.profileId,
-									components = getAvailableCommunityComponentsModule()
-								}))
-							end
-						}
-					}
+					local var2 = makeViewGroupPageModule(p1.profileId, function()
+						-- upvalues: p1 (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy)
+						p1.dispatch(getProfilePlatformModule.API({
+							includeComponentOrdering = true,
+							profileType = p1.profileType,
+							profileId = p1.profileId,
+							components = getAvailableCommunityComponentsModule()
+						}))
+					end)
 					
 					if fFlagSignalsNavP3Dispatch then
-						var1.down(var1.fromLegacyPage(t))
+						var1.down(var1.fromLegacyPage(var2))
 						
 						return
 					end
-					p1.dispatch(navigateDown(t))
+					p1.dispatch(navigateDown(var2))
 				end
 			}
 		}

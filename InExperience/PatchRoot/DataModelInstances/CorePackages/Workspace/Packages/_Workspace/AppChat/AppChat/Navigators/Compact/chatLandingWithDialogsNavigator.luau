@@ -66,7 +66,9 @@ local function AppChatNavigatorTelemetryProviders(p1)
 		return {
 			chatLandingListCount = var4.chatLandingListCount,
 			pendingConversationCount = var4.pendingConversationCount,
-			unfilteredConversationCount = var4.unfilteredConversationCount
+			unfilteredConversationCount = var4.unfilteredConversationCount,
+			searchSessionId = var4.searchSessionId,
+			activeFilters = var4.activeFilters
 		}
 	end, { var1 })
 	local var4, var5 = useGetAndSetRefModule({})

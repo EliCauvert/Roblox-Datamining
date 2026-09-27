@@ -30,7 +30,6 @@ return {
 		end
 		if getFFlagUGCValidateAQScoreWarningsModule() and handleOuterCage.score ~= nil and tonumber(handleOuterCage.score) ~= 100 then
 			p1:warn(errorSourceStringsModule.Keys.AQSWarn_CageMeshDistance, {
-				score = tostring(math.floor(tonumber(handleOuterCage.score) or 0)),
 				max_distance = handleOuterCage.max_distance or "unknown",
 				negative_sdf_percent = string.format("%.2f", (tonumber(handleOuterCage.negative_sdf_percent) or 0) * 100)
 			})

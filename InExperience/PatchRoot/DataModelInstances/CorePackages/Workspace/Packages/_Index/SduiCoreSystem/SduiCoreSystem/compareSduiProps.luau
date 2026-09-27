@@ -1,17 +1,14 @@
 ﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local tutilsModule = require(parent.tutils)
+local tutilsModule = require(sduiCoreSystem.Parent.tutils)
 local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local t = {
 	extraLocalProps = true,
 	localAnalyticsData = true,
 	parentAnalyticsContext = true,
-	conditionalProps = true
+	conditionalProps = true,
+	extraLocalPropSignals = true
 }
 
-if require(parent.SharedFlags).FFlagSduiPoolBackedFeed then
-	t.extraLocalPropSignals = true
-end
 return function(p1, p2)
 	-- upvalues: t (ref), tutilsModule (ref)
 	if p1 == p2 then

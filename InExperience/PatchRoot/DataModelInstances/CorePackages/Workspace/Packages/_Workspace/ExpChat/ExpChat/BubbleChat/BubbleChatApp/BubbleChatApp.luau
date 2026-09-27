@@ -17,7 +17,6 @@ local permissions = require(expChat.Config).Permissions
 local globalFlagsModule = require(expChat.GlobalFlags)
 local getFFlagUseCharacterStore = expChatSharedModule.Flags.getFFlagUseCharacterStore
 local expChatRemoveBubbleChatAppUserMessagesState = game:DefineFastFlag("ExpChatRemoveBubbleChatAppUserMessagesState", false)
-local fFlagExpChatUseMessagesStore = require(parent.SharedFlags).FFlagExpChatUseMessagesStore
 local memoizeBubbleChatApp = game:DefineFastFlag("MemoizeBubbleChatApp", false)
 local getFFlagExpChatUseVoiceParticipantsStore = sharedFlagsModule.GetFFlagExpChatUseVoiceParticipantsStore
 local expChatBubbleChatRerenderOnAncestryChange = game:DefineFastFlag("ExpChatBubbleChatRerenderOnAncestryChange", false)
@@ -207,7 +206,7 @@ function bubbleChatApp.willUnmount(p2)
 end
 
 function bubbleChatApp.render(p3)
-	-- upvalues: globalFlagsModule (ref), playersService (ref), roactModule (ref), dictionary (ref), billboardGuiModule (ref), fFlagExpChatUseMessagesStore (ref)
+	-- upvalues: globalFlagsModule (ref), playersService (ref), roactModule (ref), dictionary (ref), billboardGuiModule (ref)
 	local t = {}
 	
 	if p3.props.characters then
@@ -235,7 +234,7 @@ function bubbleChatApp.render(p3)
 		t[tostring(playersService.LocalPlayer.UserId)] = true
 	end
 	return roactModule.createElement("ScreenGui", { ResetOnSpawn = false }, dictionary.map(t, function(p4, p5)
-		-- upvalues: roactModule (copy), billboardGuiModule (copy), p3 (ref), fFlagExpChatUseMessagesStore (copy)
+		-- upvalues: roactModule (copy), billboardGuiModule (copy), p3 (ref)
 		return roactModule.createElement(billboardGuiModule, {
 			userId = p5,
 			onFadeOut = p3.onBillboardFadeOut,
@@ -251,7 +250,6 @@ function bubbleChatApp.render(p3)
 			isCameraOnlyUser = p3.props.isCameraOnlyUser,
 			setCameraPermissionStateFromControl = p3.setCameraPermissionStateFromControl,
 			getPermissions = p3.props.getPermissions,
-			isBubbleChatEnabled = if fFlagExpChatUseMessagesStore then nil else p3.props.isBubbleChatEnabled,
 			voiceState = p3.props.voiceParticipants[p5],
 			partOrModel = p3.props.mockUserIdToPartOrModel[p5],
 			isTextChatServiceOn = p3.props.isTextChatServiceOn,
@@ -261,24 +259,20 @@ function bubbleChatApp.render(p3)
 end
 
 local function mapStateToProps(p4, p5)
-	-- upvalues: fFlagExpChatUseMessagesStore (ref), expChatSharedModule (ref), expChatRemoveBubbleChatAppUserMessagesState (ref), getFFlagUseCharacterStore (ref), getFFlagExpChatUseVoiceParticipantsStore (ref)
-	local var2 = if not fFlagExpChatUseMessagesStore then if p5.isTextChatServiceOn then p4.BubbleChatSettings.Enabled else p4.LegacyBubbleChatSettings.Enabled else nil
+	-- upvalues: expChatSharedModule (ref), expChatRemoveBubbleChatAppUserMessagesState (ref), getFFlagUseCharacterStore (ref), getFFlagExpChatUseVoiceParticipantsStore (ref)
 	local mockUserIdToPartOrModel = p4.Messages.mockUserIdToPartOrModel
 	
-	if fFlagExpChatUseMessagesStore then
-		if p5.mockUserIdToPartOrModel then
-			mockUserIdToPartOrModel = p5.mockUserIdToPartOrModel
-		else
-			local context = expChatSharedModule.context
-			local messagesStore = context and context.messagesStore
-			
-			if messagesStore then
-				mockUserIdToPartOrModel = messagesStore.getMockUserIdToPartOrModel(false)
-			end
+	if p5.mockUserIdToPartOrModel then
+		mockUserIdToPartOrModel = p5.mockUserIdToPartOrModel
+	else
+		local context = expChatSharedModule.context
+		local messagesStore = context and context.messagesStore
+		
+		if messagesStore then
+			mockUserIdToPartOrModel = messagesStore.getMockUserIdToPartOrModel(false)
 		end
 	end
 	return {
-		isBubbleChatEnabled = if fFlagExpChatUseMessagesStore then nil else var2,
 		userMessages = if expChatRemoveBubbleChatAppUserMessagesState then nil else p4.Messages.messagesBySenderId,
 		voiceEnabled = p4.Voice.isEnabled,
 		characters = if getFFlagUseCharacterStore() then nil else p4.Players.charactersByUserId,

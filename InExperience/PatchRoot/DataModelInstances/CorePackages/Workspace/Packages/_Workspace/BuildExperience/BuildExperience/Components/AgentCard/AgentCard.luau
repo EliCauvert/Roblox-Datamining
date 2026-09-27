@@ -21,8 +21,8 @@ return function(p1)
 		Content = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			RichText = true,
-			tag = "size-full-2000 text-body-medium text-wrap text-align-x-left text-align-y-top text-truncate-end content-emphasis",
 			Text = p1.textContent,
+			tag = if p1.fitToContent then "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis" else "size-full-2000 text-body-medium text-wrap text-align-x-left text-align-y-top text-truncate-end content-emphasis",
 			testId = `{testId}-text-content`
 		}),
 		Children = reactModule.createElement(reactModule.Fragment, nil, p1.children)

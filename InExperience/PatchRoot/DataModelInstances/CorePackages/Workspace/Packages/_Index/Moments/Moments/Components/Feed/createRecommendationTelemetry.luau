@@ -9,12 +9,16 @@ local emitRecommendationImpressionModule = require(moments.Analytics.emitRecomme
 local emitRecommendationActionModule = require(moments.Analytics.emitRecommendationAction)
 local _ = require(moments.SignalTracker)
 local _ = require(script.Parent.FeedTypes)
+local fFlagMomentsComments = require(parent.SharedFlags).FFlagMomentsComments
 local t = {
 	AddReaction = constantsModule.RecommendationActionType.AddReaction,
 	RemoveReaction = constantsModule.RecommendationActionType.RemoveReaction,
 	Share = constantsModule.RecommendationActionType.Share,
 	Report = constantsModule.RecommendationActionType.Report,
-	Join = constantsModule.RecommendationActionType.Play
+	Join = constantsModule.RecommendationActionType.Play,
+	Comment = if fFlagMomentsComments then constantsModule.RecommendationActionType.Comment else nil,
+	CommentDelete = if fFlagMomentsComments then constantsModule.RecommendationActionType.CommentDelete else nil,
+	CommentSectionOpen = if fFlagMomentsComments then constantsModule.RecommendationActionType.CommentSectionOpen else nil
 }
 local t_1 = {
 	AddReaction = "reaction_add",
@@ -29,7 +33,7 @@ local function _(value, p1)
 end
 
 return function(p1)
-	-- upvalues: emitRecommendationImpressionModule (ref), t (ref), fFlagMomentsRealtimeSessionTelemetry (ref), t_1 (ref), analytics (ref), emitRecommendationActionModule (ref)
+	-- upvalues: emitRecommendationImpressionModule (ref), t (ref), fFlagMomentsRealtimeSessionTelemetry (ref), t_1 (ref), analytics (ref), emitRecommendationActionModule (ref), fFlagMomentsComments (ref)
 	local getMomentsSessionId = p1.getMomentsSessionId
 	local signalTracker = p1.signalTracker
 	
@@ -49,7 +53,7 @@ return function(p1)
 			end
 		end,
 		logAction = function(p2, p3, p4)
-			-- upvalues: t (copy), fFlagMomentsRealtimeSessionTelemetry (copy), t_1 (copy), analytics (copy), emitRecommendationActionModule (copy), getMomentsSessionId (ref), signalTracker (ref)
+			-- upvalues: t (copy), fFlagMomentsRealtimeSessionTelemetry (copy), t_1 (copy), analytics (copy), emitRecommendationActionModule (copy), fFlagMomentsComments (copy), getMomentsSessionId (ref), signalTracker (ref)
 			local var1 = t[p2]
 			
 			if var1 == nil then
@@ -64,12 +68,13 @@ return function(p1)
 			local var3 = emitRecommendationActionModule({
 				itemId = p3.itemId,
 				tracingId = p3.tracingId or "",
-				momentsSessionId = getMomentsSessionId(false),
+				momentsSessionId = if fFlagMomentsComments and p4.momentsSessionId ~= nil then p4.momentsSessionId else getMomentsSessionId(false),
 				actionType = var1,
 				reactionType = p4.reactionType,
 				destinationPlaceId = p4.destinationPlaceId,
 				commentText = p4.commentText,
-				actionWeight = p4.actionWeight
+				actionWeight = p4.actionWeight,
+				commentSectionOpenDurationSeconds = if fFlagMomentsComments then p4.commentSectionOpenDurationSeconds else nil
 			})
 			
 			if signalTracker then

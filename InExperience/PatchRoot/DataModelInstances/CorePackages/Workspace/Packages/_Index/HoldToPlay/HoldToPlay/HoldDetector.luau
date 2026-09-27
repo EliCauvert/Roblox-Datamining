@@ -8,9 +8,10 @@ local appShortcutBarContext = require(parent.AppShortcutBar).AppShortcutBarConte
 local useButtonHold = focusNavigationUtilsModule.useButtonHold
 local buttonHoldStateEnum = focusNavigationUtilsModule.ButtonHoldStateEnum
 local constantsModule = require(holdToPlay.Constants)
+local fFlagUserSearchCancelTileActivationOnHoldIntent = require(parent.SharedFlags).FFlagUserSearchCancelTileActivationOnHoldIntent
 
 local function HoldDetectorForSelectedObject(p1)
-	-- upvalues: reactModule (ref), useButtonHold (ref), constantsModule (ref), appShortcutBarContext (ref), buttonHoldStateEnum (ref), reactFocusNavigationModule (ref)
+	-- upvalues: reactModule (ref), useButtonHold (ref), constantsModule (ref), appShortcutBarContext (ref), buttonHoldStateEnum (ref), fFlagUserSearchCancelTileActivationOnHoldIntent (ref), reactFocusNavigationModule (ref)
 	local var1, var2 = reactModule.useState(nil)
 	local var3, var4 = reactModule.useState(nil)
 	local var5 = var1 or p1.keyCode
@@ -21,18 +22,28 @@ local function HoldDetectorForSelectedObject(p1)
 	local var10 = appShortcutBarContext.useDispatchButtonHoldStarted()
 	local var11 = appShortcutBarContext.useDispatchButtonHoldEnded()
 	local var12 = if var9.holdState ~= buttonHoldStateEnum.HOLDING then if var9.holdState ~= buttonHoldStateEnum.JUST_PRESSED then var9.holdState == buttonHoldStateEnum.COMPLETED else true else true
+	local var13 = fFlagUserSearchCancelTileActivationOnHoldIntent and (if var9.holdState ~= buttonHoldStateEnum.HOLDING then var9.holdState == buttonHoldStateEnum.COMPLETED else true)
+	local var14 = fFlagUserSearchCancelTileActivationOnHoldIntent and p1.disableRegularActionOnHoldIntent == true
 	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), p1 (ref)
-		if not var12 and p1.setDisabledForHold then
+		-- upvalues: var14 (ref), p1 (ref), var13 (ref), var12 (ref), fFlagUserSearchCancelTileActivationOnHoldIntent (copy)
+		if var14 then
+			if p1.setDisabledForHold then
+				p1.setDisabledForHold(var13)
+			end
+		elseif not var12 and p1.setDisabledForHold then
 			p1.setDisabledForHold(false)
 		end
 		return function()
-			-- upvalues: p1 (copy)
-			if p1.setDisabledForHold then
+			-- upvalues: p1 (copy), fFlagUserSearchCancelTileActivationOnHoldIntent (copy), var14 (copy), var13 (copy)
+			if p1.setDisabledForHold and (not fFlagUserSearchCancelTileActivationOnHoldIntent or (not var14 or not var13)) then
 				p1.setDisabledForHold(false)
 			end
 		end
-	end, { var12, p1.setDisabledForHold })
+	end, {
+		var12,
+		p1.setDisabledForHold,
+		if var14 then var13 else false
+	})
 	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), var12 (ref), p1 (ref), var10 (ref), var9 (ref), var2 (ref), var4 (ref), var6 (ref), var11 (ref), var8 (ref)
 		if var7.current or not var12 then
@@ -62,24 +73,25 @@ local function HoldDetectorForSelectedObject(p1)
 		var12, var9.holdProgress, var10, var11, p1.focusNavigationEventName,
 		p1.keyCode, var6, var5
 	})
-	local var13 = var9.holdState == buttonHoldStateEnum.COMPLETED and var8.current == false
+	local var15 = var9.holdState == buttonHoldStateEnum.COMPLETED and var8.current == false
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), p1 (ref), var8 (ref)
-		if var13 and p1.onHoldDetected then
+		-- upvalues: var15 (ref), p1 (ref), var8 (ref), var14 (ref)
+		if var15 and p1.onHoldDetected then
 			var8.current = true
 			
-			if p1.setDisabledForHold then
+			if p1.setDisabledForHold and not var14 then
 				p1.setDisabledForHold(true)
 			end
 			p1.onHoldDetected(p1.guiObject)
 		end
 	end, {
-		var13,
+		var15,
 		p1.onHoldDetected,
 		p1.guiObject,
-		p1.setDisabledForHold
+		p1.setDisabledForHold,
+		var14
 	})
-	local var14 = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
+	local var16 = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
 		-- upvalues: var6 (ref), var9 (ref)
 		return if var6 then { [var6] = { handler = var9.eventHandler } } else {}
 	end, { var9.eventHandler, var6 }), reactFocusNavigationModule.useEventMap(reactModule.useMemo(function()
@@ -87,15 +99,15 @@ local function HoldDetectorForSelectedObject(p1)
 		return if var5 and var6 then { [var5] = var6 } else {}
 	end, { var5, var6 })))
 	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), p1 (ref)
-		if var14 then
-			var14(p1.guiObject)
+		-- upvalues: var16 (ref), p1 (ref)
+		if var16 then
+			var16(p1.guiObject)
 		end
 		return function()
-			-- upvalues: var14 (copy)
-			var14(nil)
+			-- upvalues: var16 (copy)
+			var16(nil)
 		end
-	end, { var14, p1.guiObject })
+	end, { var16, p1.guiObject })
 	
 	return nil
 end

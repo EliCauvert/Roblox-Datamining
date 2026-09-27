@@ -476,9 +476,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		},
 		onActivated = if not var4.isDisabled then var36 else nil,
 		isDisabled = var4.isDisabled,
-		backgroundStyle = if container.bgStyle then getDisabledStyleModule({
+		backgroundStyle = if flagsModule.FoundationFixColorOnScrubbableNumberInput and var4.backgroundGradient then getDisabledStyleModule({ Transparency = 0.001, Color3 = Color3.new(1, 1, 1) }, var4.isDisabled) elseif container.bgStyle then getDisabledStyleModule({
 			Color3 = container.bgStyle.Color3,
-			Transparency = if var4.backgroundGradient then 0 else container.bgStyle.Transparency
+			Transparency = if flagsModule.FoundationFixColorOnScrubbableNumberInput or not var4.backgroundGradient then container.bgStyle.Transparency else 0
 		}, var4.isDisabled) else nil,
 		stateLayer = { affordance = stateLayerAffordanceModule.None },
 		tag = container.tag,

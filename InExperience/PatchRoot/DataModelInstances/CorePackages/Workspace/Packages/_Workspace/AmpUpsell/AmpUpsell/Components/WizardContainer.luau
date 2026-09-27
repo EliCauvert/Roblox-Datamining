@@ -85,6 +85,19 @@ local function getSuccessfulActions(p1)
 	return t
 end
 
+local function _(p2, p3, p4)
+	-- upvalues: actionTypeEnum (ref)
+	local action = p4.action
+	
+	if p2 == nil or action ~= actionTypeEnum.ParentConsent and action ~= actionTypeEnum.ParentLink then
+		return false
+	end
+	local parentConsentTypes = p4.parentConsentTypes
+	local var1 = if parentConsentTypes then parentConsentTypes[1] else nil
+	
+	return var1 == nil or (if p3 ~= nil then table.find(p3, var1) == nil else true)
+end
+
 return function(p2)
 	-- upvalues: useNavigation (ref), ampApiProviderModule (ref), analyticsServiceModule (ref), useRoactService (ref), roactNetworking (ref), reactModule (ref), useApolloClient (ref), useCompletionCallbackWithReturnPageModule (ref), fFlagEnableAmpWizardDeepLink (ref), actionTypeEnum (ref), appScreensModule (ref), cryoModule (ref), actionStatusEnum (ref), accessResponseEnum (ref), getFFlagEnableAmpEmailUpsellSupportModule (ref), getFFlagEnableAmpIDVUpsellSupportModule (ref), getFFlagEnableAmpIDVUpsellPopOnCompletionModule (ref), getFFlagEnableAmpWizardVPCNavigationFixModule (ref), logEventOnceIfEnabled (ref), getFFlagEnableAmpSubscriptionUpsellModule (ref), userSettingsSettingNameEnum (ref), getFFlagEnableAmpVPCPrologueModule (ref), getFFlagEnableAmpWizardInlineVPCForFAEModule (ref), accountSettingsUpsellStringsFn (ref), getFFlagEnableAmpUpsellGqlModule (ref), getSuccessfulActions (ref), sendModalActionEventModule (ref), VPCRequestTypeEnum (ref), VPCApiProviderModule (ref), VPCPrologueController (ref), errorScreenModule (ref), loading (ref), iconSize (ref)
 	local var1 = useNavigation()
@@ -94,7 +107,8 @@ return function(p2)
 	local extraParameters = p2.extraParameters
 	local entryPointEventCtx = p2.entryPointEventCtx
 	local openUpsells = p2.openUpsells
-	local selfContainedUpsells = p2.selfContainedUpsells
+	local vpcV2Launcher = p2.vpcV2Launcher
+	local vpcExcludedRequestTypes = p2.vpcExcludedRequestTypes
 	local completionCallback = p2.completionCallback
 	local metadata = p2.metadata
 	local var2 = if p2.ampApiProvider then p2.ampApiProvider else ampApiProviderModule
@@ -108,18 +122,22 @@ return function(p2)
 	local var13, var14 = reactModule.useState(nil)
 	local var15 = useApolloClient()
 	local var16 = if fFlagEnableAmpWizardDeepLink then useCompletionCallbackWithReturnPageModule(var1, completionCallback, metadata) else completionCallback
-	
-	local function _(p3)
-		-- upvalues: selfContainedUpsells (ref)
-		return selfContainedUpsells ~= nil and selfContainedUpsells[p3] == true
-	end
-	
 	local var17 = reactModule.useCallback(function(p3)
-		-- upvalues: selfContainedUpsells (ref), var1 (ref)
-		if not (selfContainedUpsells ~= nil and selfContainedUpsells[p3] == true) then
+		-- upvalues: vpcV2Launcher (ref), vpcExcludedRequestTypes (ref), actionTypeEnum (copy), var1 (ref)
+		local var18
+		local action = p3.action
+		
+		if vpcV2Launcher == nil or action ~= actionTypeEnum.ParentConsent and action ~= actionTypeEnum.ParentLink then
+			var18 = false
+		else
+			local parentConsentTypes = p3.parentConsentTypes
+			local var19 = if parentConsentTypes then parentConsentTypes[1] else nil
+			var18 = var19 == nil or (if vpcExcludedRequestTypes ~= nil then table.find(vpcExcludedRequestTypes, var19) == nil else true)
+		end
+		if not var18 then
 			var1.pop()
 		end
-	end, { var1.pop, selfContainedUpsells })
+	end, { var1.pop, vpcV2Launcher, vpcExcludedRequestTypes })
 	local var18 = reactModule.useCallback(function(_, p3)
 		-- upvalues: actionTypeEnum (copy), appScreensModule (copy), var8 (ref), cryoModule (copy), var7 (ref), actionStatusEnum (copy), var16 (ref), accessResponseEnum (copy), getFFlagEnableAmpEmailUpsellSupportModule (copy), getFFlagEnableAmpIDVUpsellSupportModule (copy), featureName (ref), entryPointEventCtx (ref), metadata (ref), getFFlagEnableAmpIDVUpsellPopOnCompletionModule (copy), var1 (ref), recourseData (ref), var5 (ref), getFFlagEnableAmpWizardVPCNavigationFixModule (copy), var17 (ref), p2 (ref), logEventOnceIfEnabled (copy), getFFlagEnableAmpSubscriptionUpsellModule (copy)
 		local action = p3.action
@@ -195,22 +213,22 @@ return function(p2)
 				entryPointEventCtx = entryPointEventCtx,
 				isInExperienceEntry = var5,
 				onCancel = function()
-					-- upvalues: getFFlagEnableAmpWizardVPCNavigationFixModule (copy), var17 (copy), action (ref), var16 (copy), accessResponseEnum (copy), cryoModule (copy), var7 (copy), actionStatusEnum (copy)
+					-- upvalues: getFFlagEnableAmpWizardVPCNavigationFixModule (copy), var17 (copy), p3 (ref), var16 (copy), accessResponseEnum (copy), cryoModule (copy), var7 (copy), action (ref), actionStatusEnum (copy)
 					if getFFlagEnableAmpWizardVPCNavigationFixModule() then
-						var17(action)
+						var17(p3)
 					end
 					var16(accessResponseEnum.Denied, cryoModule.Dictionary.join(var7, { [action] = actionStatusEnum.Cancelled }))
 				end,
 				onSuccess = function()
-					-- upvalues: getFFlagEnableAmpWizardVPCNavigationFixModule (copy), var17 (copy), action (ref), var16 (copy), accessResponseEnum (copy), cryoModule (copy), var7 (copy), actionStatusEnum (copy)
+					-- upvalues: getFFlagEnableAmpWizardVPCNavigationFixModule (copy), var17 (copy), p3 (ref), var16 (copy), accessResponseEnum (copy), cryoModule (copy), var7 (copy), action (ref), actionStatusEnum (copy)
 					if getFFlagEnableAmpWizardVPCNavigationFixModule() then
-						var17(action)
+						var17(p3)
 					end
 					var16(accessResponseEnum.Denied, cryoModule.Dictionary.join(var7, { [action] = actionStatusEnum.Success }))
 				end,
 				onRetryAmp = function()
-					-- upvalues: var17 (copy), action (ref), var8 (copy), cryoModule (copy), var7 (copy), actionStatusEnum (copy)
-					var17(action)
+					-- upvalues: var17 (copy), p3 (ref), var8 (copy), cryoModule (copy), var7 (copy), action (ref), actionStatusEnum (copy)
+					var17(p3)
 					var8(cryoModule.Dictionary.join(var7, { [action] = actionStatusEnum.RetryRequested }))
 				end
 			}
@@ -282,17 +300,31 @@ return function(p2)
 		return {}
 	end, { var7, var16, var17 })
 	local var19 = reactModule.useCallback(function(p3)
-		-- upvalues: actionTypeEnum (copy), userSettingsSettingNameEnum (copy), openUpsells (ref)
+		-- upvalues: vpcV2Launcher (ref), vpcExcludedRequestTypes (ref), actionTypeEnum (copy), userSettingsSettingNameEnum (copy), openUpsells (ref)
+		local var20
+		local var21 = vpcExcludedRequestTypes
 		local action = p3.action
 		
-		if action == actionTypeEnum.UserSettings then
+		if vpcV2Launcher == nil or action ~= actionTypeEnum.ParentConsent and action ~= actionTypeEnum.ParentLink then
+			var20 = false
+		else
+			local parentConsentTypes = p3.parentConsentTypes
+			local var22 = if parentConsentTypes then parentConsentTypes[1] else nil
+			var20 = var22 == nil or (if var21 ~= nil then table.find(var21, var22) == nil else true)
+		end
+		if var20 then
+			return vpcV2Launcher
+		end
+		local action_1 = p3.action
+		
+		if action_1 == actionTypeEnum.UserSettings then
 			local userSettings = p3.userSettings
 			
-			return if userSettings and userSettings.settingName == userSettingsSettingNameEnum.AllowFacialAgeEstimation then nil else openUpsells[action]
+			return if userSettings and userSettings.settingName == userSettingsSettingNameEnum.AllowFacialAgeEstimation then nil else openUpsells[action_1]
 		end
-	end, { openUpsells })
+	end, { openUpsells, vpcV2Launcher, vpcExcludedRequestTypes })
 	local var20 = reactModule.useCallback(function(_, p3)
-		-- upvalues: var10 (ref), var19 (ref), var18 (ref), actionTypeEnum (copy), p2 (ref), getFFlagEnableAmpVPCPrologueModule (copy), selfContainedUpsells (ref), var12 (ref), getFFlagEnableAmpWizardInlineVPCForFAEModule (copy), userSettingsSettingNameEnum (copy), var14 (ref), var16 (ref), accessResponseEnum (copy), var7 (ref), accountSettingsUpsellStringsFn (copy), var4 (ref), featureName (ref), var1 (ref), cryoModule (copy), actionStatusEnum (copy)
+		-- upvalues: var10 (ref), var19 (ref), var18 (ref), actionTypeEnum (copy), p2 (ref), getFFlagEnableAmpVPCPrologueModule (copy), vpcV2Launcher (ref), vpcExcludedRequestTypes (ref), var12 (ref), getFFlagEnableAmpWizardInlineVPCForFAEModule (copy), userSettingsSettingNameEnum (copy), var14 (ref), var16 (ref), accessResponseEnum (copy), var7 (ref), accountSettingsUpsellStringsFn (copy), var4 (ref), featureName (ref), var1 (ref), cryoModule (copy), actionStatusEnum (copy)
 		if p3 == nil or #p3 == 0 then
 			var10(true)
 			
@@ -338,7 +370,19 @@ return function(p2)
 			local var24 = var18(action, var21)
 			
 			if p2.usePrologue and (if action ~= actionTypeEnum.ParentConsent then action == actionTypeEnum.ParentLink else true) and getFFlagEnableAmpVPCPrologueModule() then
-				if selfContainedUpsells ~= nil and selfContainedUpsells[action] == true then
+				local var25
+				local var26 = vpcV2Launcher
+				local var27 = vpcExcludedRequestTypes
+				local action_1 = var21.action
+				
+				if var26 == nil or action_1 ~= actionTypeEnum.ParentConsent and action_1 ~= actionTypeEnum.ParentLink then
+					var25 = false
+				else
+					local parentConsentTypes = var21.parentConsentTypes
+					local var28 = if parentConsentTypes then parentConsentTypes[1] else nil
+					var25 = var28 == nil or (if var27 ~= nil then table.find(var27, var28) == nil else true)
+				end
+				if var25 then
 					var22(var24)
 					
 					return
@@ -353,7 +397,7 @@ return function(p2)
 		end
 	end, {
 		var7, var16, featureName, var18, var1.pop, var4, var19, p2.usePrologue,
-		selfContainedUpsells, var14
+		vpcV2Launcher, vpcExcludedRequestTypes, var14
 	})
 	local var21 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: var10 (ref), logEventOnceIfEnabled (copy), getFFlagEnableAmpUpsellGqlModule (copy), var2 (ref), var15 (ref), getSuccessfulActions (copy), var7 (ref), extraParameters (ref), accessResponseEnum (copy), var20 (ref), var16 (ref)
@@ -392,26 +436,52 @@ return function(p2)
 		var21(featureName, nameSpace)
 	end, { var7, featureName, var21, nameSpace })
 	reactModule.useEffect(function()
-		-- upvalues: getFFlagEnableAmpWizardInlineVPCForFAEModule (copy), var13 (ref), VPCRequestTypeEnum (copy), var18 (ref), cryoModule (copy), recourseData (ref), VPCApiProviderModule (copy), var6 (ref), actionTypeEnum (copy), openUpsells (ref), getFFlagEnableAmpVPCPrologueModule (copy), selfContainedUpsells (ref), var12 (ref), var14 (ref)
+		-- upvalues: getFFlagEnableAmpWizardInlineVPCForFAEModule (copy), var13 (ref), VPCRequestTypeEnum (copy), var18 (ref), cryoModule (copy), recourseData (ref), VPCApiProviderModule (copy), var6 (ref), actionTypeEnum (copy), var19 (ref), var10 (ref), var14 (ref), getFFlagEnableAmpVPCPrologueModule (copy), vpcV2Launcher (ref), vpcExcludedRequestTypes (ref), var12 (ref)
 		if getFFlagEnableAmpWizardInlineVPCForFAEModule() and var13 ~= nil then
-			local function buildFAEProps(p3)
-				-- upvalues: VPCRequestTypeEnum (copy), var18 (copy), cryoModule (copy), recourseData (copy)
-				return cryoModule.Dictionary.join(var18(p3, {
+			local function _(p3)
+				-- upvalues: VPCRequestTypeEnum (copy)
+				return {
 					action = p3,
 					parentConsentTypes = { VPCRequestTypeEnum.UpdateUserSetting }
-				}), {
+				}
+			end
+			
+			local function buildFAEProps(p3)
+				-- upvalues: var18 (copy), cryoModule (copy), recourseData (copy)
+				return cryoModule.Dictionary.join(var18(p3.action, p3), {
 					recourseData = cryoModule.Dictionary.join(recourseData or {}, { allowFacialAgeEstimation = "Enabled" })
 				})
 			end
 			
 			VPCApiProviderModule.getLinkedParentEmails(var6):andThen(function(p3)
-				-- upvalues: actionTypeEnum (copy), buildFAEProps (ref), openUpsells (copy), getFFlagEnableAmpVPCPrologueModule (copy), selfContainedUpsells (copy), var12 (copy), var14 (copy)
+				-- upvalues: actionTypeEnum (copy), VPCRequestTypeEnum (copy), buildFAEProps (ref), var19 (copy), var10 (copy), var14 (copy), getFFlagEnableAmpVPCPrologueModule (copy), vpcV2Launcher (copy), vpcExcludedRequestTypes (copy), var12 (copy)
 				local var22 = if (if p3.parentEmails then #p3.parentEmails else 0) > 0 then actionTypeEnum.ParentConsent else actionTypeEnum.ParentLink
-				local var23 = buildFAEProps(var22)
-				local var24 = openUpsells[var22]
+				local t = {
+					action = var22,
+					parentConsentTypes = { VPCRequestTypeEnum.UpdateUserSetting }
+				}
+				local var23 = buildFAEProps(t)
+				local var24 = var19(t)
 				
-				if getFFlagEnableAmpVPCPrologueModule() then
-					if selfContainedUpsells ~= nil and selfContainedUpsells[var22] == true then
+				if var24 == nil then
+					var10(true)
+					var14(nil)
+					
+					return
+				elseif getFFlagEnableAmpVPCPrologueModule() then
+					local var25
+					local var26 = vpcV2Launcher
+					local var27 = vpcExcludedRequestTypes
+					local action = t.action
+					
+					if var26 == nil or action ~= actionTypeEnum.ParentConsent and action ~= actionTypeEnum.ParentLink then
+						var25 = false
+					else
+						local parentConsentTypes = t.parentConsentTypes
+						local var28 = if parentConsentTypes then parentConsentTypes[1] else nil
+						var25 = var28 == nil or (if var27 ~= nil then table.find(var27, var28) == nil else true)
+					end
+					if var25 then
 						var24(var23)
 					else
 						var12({
@@ -423,15 +493,47 @@ return function(p2)
 					var14(nil)
 				end
 			end):catch(function(_)
-				-- upvalues: buildFAEProps (ref), actionTypeEnum (copy), openUpsells (copy), var14 (copy)
-				openUpsells[actionTypeEnum.ParentLink](buildFAEProps(actionTypeEnum.ParentLink))
+				-- upvalues: actionTypeEnum (copy), VPCRequestTypeEnum (copy), buildFAEProps (ref), var19 (copy), var10 (copy), getFFlagEnableAmpVPCPrologueModule (copy), vpcV2Launcher (copy), vpcExcludedRequestTypes (copy), var12 (copy), var14 (copy)
+				local t = {
+					action = actionTypeEnum.ParentLink,
+					parentConsentTypes = { VPCRequestTypeEnum.UpdateUserSetting }
+				}
+				local var22 = buildFAEProps(t)
+				local var23 = var19(t)
+				
+				if var23 == nil then
+					var10(true)
+				elseif getFFlagEnableAmpVPCPrologueModule() then
+					local var24
+					local var25 = vpcV2Launcher
+					local var26 = vpcExcludedRequestTypes
+					local action = t.action
+					
+					if var25 == nil or action ~= actionTypeEnum.ParentConsent and action ~= actionTypeEnum.ParentLink then
+						var24 = false
+					else
+						local parentConsentTypes = t.parentConsentTypes
+						local var27 = if parentConsentTypes then parentConsentTypes[1] else nil
+						var24 = var27 == nil or (if var26 ~= nil then table.find(var26, var27) == nil else true)
+					end
+					if var24 then
+						var23(var22)
+					else
+						var12({
+							action = actionTypeEnum.ParentLink,
+							actionProps = var22,
+							openUpsellFn = var23
+						})
+					end
+				end
 				var14(nil)
 			end)
 			
 			return
 		end
 	end, {
-		var13, var6, var18, openUpsells, recourseData, selfContainedUpsells
+		var13, var6, var18, openUpsells, recourseData, var19, vpcV2Launcher,
+		vpcExcludedRequestTypes
 	})
 	
 	return if getFFlagEnableAmpVPCPrologueModule() and var11 then reactModule.createElement(VPCPrologueController, {

@@ -26,7 +26,6 @@ local momentOverlayInsetContextModule = require(moments.Components.Feed.Items.Mo
 local fFlagMomentsImmersiveChromeModule = require(moments.Flags.FFlagMomentsImmersiveChrome)
 local fFlagMomentsUseCompositionLibraryModule = require(moments.Flags.FFlagMomentsUseCompositionLibrary)
 local fFlagMomentsUseFoundationHeaderBarModule = require(moments.Flags.FFlagMomentsUseFoundationHeaderBar)
-local getFFlagMomentsRefreshFromTopAfterUploadModule = require(moments.Flags.GetFFlagMomentsRefreshFromTopAfterUpload)
 local getFFlagMomentsFixBackgroundFeedInputModule = require(moments.Flags.GetFFlagMomentsFixBackgroundFeedInput)
 local getFFlagMomentsFixUnavailableDeeplinkModule = require(moments.Flags.GetFFlagMomentsFixUnavailableDeeplink)
 local getImmersiveChromeStoreModule = require(moments.Stores.GetImmersiveChromeStore)
@@ -56,7 +55,7 @@ local fireFunnelAnalyticsEvent = analytics.fireFunnelAnalyticsEvent
 local useMomentsGating = momentsCommonModule.Hooks.useMomentsGating
 
 return function(p1)
-	-- upvalues: reactModule (ref), momentsLocalStorageModule (ref), momentsLocalStorageKeysModule (ref), useScreenBottomInsetModule (ref), useFeedPlaybackActiveModule (ref), useMomentsSession (ref), useMomentsHost (ref), fFlagMomentsUseFoundationHeaderBarModule (ref), useMomentsGating (ref), useCreationEntryModule (ref), useUploadHostModule (ref), sessionManager (ref), funnelEventNames (ref), fireFunnelAnalyticsEvent (ref), var2 (ref), isStudioModule (ref), getFFlagArgusStudioMockFeedModule (ref), createMockFeedSource (ref), createMomentsFeedSourceModule (ref), var1 (ref), fFlagEnableArgus (ref), createRecommendationTelemetry (ref), fFlagMomentsImmersiveChromeModule (ref), signalsReactModule (ref), getImmersiveChromeStoreModule (ref), getFFlagMomentsFixBackgroundFeedInputModule (ref), reportModalCovering (ref), fFlagEnableReportingFlowForMomentsFeed (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), fFlagMomentsFlushDwellBeforeNavigationModule (ref), roactNavigationModule (ref), robloxAppEventsModule (ref), appPage (ref), getUploadStoreModule (ref), getFFlagMomentsRefreshFromTopAfterUploadModule (ref), logCreateIntentModule (ref), fireAnalyticsEvent (ref), eventNames (ref), topBarModule (ref), momentOverlayInsetContextModule (ref), view (ref), constantsModule (ref), fFlagMomentsUseCompositionLibraryModule (ref), momentsFeedSurfaceModule (ref), var3 (ref), creationFlowScreen (ref), FTUXEducationScreenModule (ref)
+	-- upvalues: reactModule (ref), momentsLocalStorageModule (ref), momentsLocalStorageKeysModule (ref), useScreenBottomInsetModule (ref), useFeedPlaybackActiveModule (ref), useMomentsSession (ref), useMomentsHost (ref), fFlagMomentsUseFoundationHeaderBarModule (ref), useMomentsGating (ref), useCreationEntryModule (ref), useUploadHostModule (ref), sessionManager (ref), funnelEventNames (ref), fireFunnelAnalyticsEvent (ref), var2 (ref), isStudioModule (ref), getFFlagArgusStudioMockFeedModule (ref), createMockFeedSource (ref), createMomentsFeedSourceModule (ref), var1 (ref), fFlagEnableArgus (ref), createRecommendationTelemetry (ref), fFlagMomentsImmersiveChromeModule (ref), signalsReactModule (ref), getImmersiveChromeStoreModule (ref), getFFlagMomentsFixBackgroundFeedInputModule (ref), reportModalCovering (ref), fFlagEnableReportingFlowForMomentsFeed (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), fFlagMomentsFlushDwellBeforeNavigationModule (ref), roactNavigationModule (ref), robloxAppEventsModule (ref), appPage (ref), getUploadStoreModule (ref), logCreateIntentModule (ref), fireAnalyticsEvent (ref), eventNames (ref), topBarModule (ref), momentOverlayInsetContextModule (ref), view (ref), constantsModule (ref), fFlagMomentsUseCompositionLibraryModule (ref), momentsFeedSurfaceModule (ref), var3 (ref), creationFlowScreen (ref), FTUXEducationScreenModule (ref)
 	local var4, var5 = reactModule.useState(function()
 		-- upvalues: momentsLocalStorageModule (copy), momentsLocalStorageKeysModule (copy)
 		return not momentsLocalStorageModule.getField(momentsLocalStorageKeysModule.CreateTooltipSeen)
@@ -157,25 +156,20 @@ return function(p1)
 	local var26 = signalsReactModule.useSignalState(var25.getState)
 	local var27 = signalsReactModule.useSignalState(var25.getUploadedMoment)
 	reactModule.useEffect(function()
-		-- upvalues: getFFlagMomentsRefreshFromTopAfterUploadModule (copy), var26 (ref), var9 (ref), var8 (ref), var27 (ref), var23 (ref)
-		if getFFlagMomentsRefreshFromTopAfterUploadModule() then
-			if var26 ~= "Success" then
-				var9.current = var26
+		-- upvalues: var26 (ref), var9 (ref), var8 (ref), var27 (ref), var23 (ref)
+		if var26 ~= "Success" then
+			var9.current = var26
+			
+			return
+		elseif var9.current ~= "Success" then
+			var9.current = var26
+			local current = var8.current
+			
+			if type(var27) == "table" and var27.momentId ~= nil and current ~= nil then
+				current.prependMoment(var27)
 				
 				return
-			elseif var9.current ~= "Success" then
-				var9.current = var26
-				local current = var8.current
-				
-				if type(var27) == "table" and var27.momentId ~= nil and current ~= nil then
-					current.prependMoment(var27)
-					
-					return
-				end
-				var23()
 			end
-			return
-		elseif var26 == "Success" then
 			var23()
 		end
 	end, { var26, var27, var23 })

@@ -2,6 +2,8 @@
 local roact = dependenciesModule.Roact
 local UIBlox = dependenciesModule.UIBlox
 local checkIconModule = require(script.Parent.CheckIcon)
+local foundationFontFaceMigration = dependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
+local normalizeFontFace = dependenciesModule.Foundation.Utility.normalizeFontFace
 local alertViewCheckbox = roact.Component:extend("AlertViewCheckbox")
 alertViewCheckbox.defaultProps = {
 	Text = "",
@@ -11,9 +13,9 @@ alertViewCheckbox.defaultProps = {
 }
 
 function alertViewCheckbox.render(p1)
-	-- upvalues: UIBlox (ref), roact (ref), checkIconModule (ref)
+	-- upvalues: UIBlox (ref), roact (ref), checkIconModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	return UIBlox.Style.withStyle(function(p2)
-		-- upvalues: roact (copy), p1 (ref), checkIconModule (copy)
+		-- upvalues: roact (copy), p1 (ref), checkIconModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		return roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -41,7 +43,8 @@ function alertViewCheckbox.render(p1)
 				Text = p1.props.Text,
 				TextColor3 = p1.props.TextColor3 or p2.Theme.TextDefault.Color,
 				TextSize = p1.props.TextSize or p2.Font.Body.RelativeSize * p2.Font.BaseSize,
-				Font = p1.props.Font or p2.Font.CaptionSubHeader.Font,
+				Font = if foundationFontFaceMigration then nil else p1.props.Font or p2.Font.CaptionSubHeader.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p1.props.Font or p2.Font.CaptionSubHeader.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left
 			})
 		})

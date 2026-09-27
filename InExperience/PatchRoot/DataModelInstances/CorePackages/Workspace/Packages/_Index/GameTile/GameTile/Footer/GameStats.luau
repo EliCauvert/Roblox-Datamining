@@ -17,7 +17,6 @@ local interactable = UIBloxModule.Core.Control.Interactable
 local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
 local withLocalization = require(parent.Localization).withLocalization
 local sponsoredTooltipHover = require(parent.Ads).SponsoredTooltipHover
-local fFlagLuaAppNarrowTileSmallerFooterFont = require(parent.SharedFlags).FFlagLuaAppNarrowTileSmallerFooterFont
 local fFlagLuaAppNarrowTileHideRating = require(parent.SharedFlags).FFlagLuaAppNarrowTileHideRating
 local fFlagLuaAppNarrowTileHidePlayerCount = require(parent.SharedFlags).FFlagLuaAppNarrowTileHidePlayerCount
 local fFlagLuaAppGenreRatingFooter = require(parent.SharedFlags).FFlagLuaAppGenreRatingFooter
@@ -102,7 +101,7 @@ function gameStats.renderSponsored(p1, p2)
 end
 
 function gameStats.renderGameStats(p1, p2, p3, p4)
-	-- upvalues: fFlagLuaAppGenreRatingFooter (ref), getGameStatsRatingPercentageTextModule (ref), var2 (write), roactModule (ref), gridTileGameStatsModule (ref), fFlagLuaAppNarrowTileSmallerFooterFont (ref), fFlagLuaAppNarrowTileHideRating (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), withLocalization (ref), gridTileIconTextFooterModule (ref), images (ref)
+	-- upvalues: fFlagLuaAppGenreRatingFooter (ref), getGameStatsRatingPercentageTextModule (ref), var2 (write), roactModule (ref), gridTileGameStatsModule (ref), fFlagLuaAppNarrowTileHideRating (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), withLocalization (ref), gridTileIconTextFooterModule (ref), images (ref)
 	local stats = p3.stats
 	local var3 = if fFlagLuaAppGenreRatingFooter then getGameStatsRatingPercentageTextModule(stats.totalUpVotes, stats.totalDownVotes) else var2(stats.totalUpVotes, stats.totalDownVotes)
 	
@@ -132,7 +131,7 @@ function gameStats.renderGameStats(p1, p2, p3, p4)
 		isUnifiedGameTile = p3.isUnifiedGameTile,
 		gameTileLayoutType = p3.gameTileLayoutType,
 		LayoutOrder = p1.props.LayoutOrder,
-		compactMetadataFormat = if fFlagLuaAppNarrowTileSmallerFooterFont then p3.compactMetadataFormat else nil,
+		compactMetadataFormat = p3.compactMetadataFormat,
 		hideRating = if fFlagLuaAppNarrowTileHideRating then p3.hideRating else nil,
 		hidePlayerCount = if fFlagLuaAppNarrowTileHidePlayerCount then p3.hidePlayerCount else nil
 	}) else p1:renderFullGameStats(p2, p3, var3, p4)

@@ -19,12 +19,14 @@ return function(p1)
 				return {
 					openProfile = p1.openProfile,
 					openOwnMoments = p1.openOwnMoments,
-					openMomentsFeedReport = p1.openMomentsFeedReport
+					openMomentsFeedReport = p1.openMomentsFeedReport,
+					openMomentCommentReport = p1.openMomentCommentReport
 				}
 			end, {
 				p1.openProfile,
 				p1.openOwnMoments,
-				p1.openMomentsFeedReport
+				p1.openMomentsFeedReport,
+				p1.openMomentCommentReport
 			})
 		}, {
 			Content = reactModule.createElement(reactModule.Fragment, nil, p1.children, reactModule.createElement(experienceDetailsSheet), if fFlagMomentsComments and var1 ~= nil then reactModule.createElement(var1.CommentsSheetContainer) else nil, reactModule.createElement(toastOverlayModule))

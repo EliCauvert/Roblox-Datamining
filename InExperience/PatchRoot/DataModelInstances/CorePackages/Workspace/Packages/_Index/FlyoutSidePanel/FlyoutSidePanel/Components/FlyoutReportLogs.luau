@@ -15,6 +15,7 @@ return function(p1)
 	local var1 = useRoactService(appEventIngestService)
 	
 	return reactModule.createElement(foundationModule.Button, {
+		testId = "--core-ui-flyout-button-report-logs",
 		isDisabled = false,
 		text = useLocalization({
 			text = if fFlagCTAChangeMorePageFlyoutButtonText then "CommonUI.Features.Label.ReportLogsSentenceCase" else "CommonUI.Features.Label.ReportLogs"

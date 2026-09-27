@@ -18,6 +18,7 @@ local buildChartsSortDetailRequestModule = require(charts.ChartsSortDetailPage.b
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiChartsPostBody = sharedFlagsModule.FFlagSduiChartsPostBody
 local fFlagSduiChartsSortDetailGenreFilter = sharedFlagsModule.FFlagSduiChartsSortDetailGenreFilter
+local fFlagSduiAdvertiseRuntimeSupportSets = sharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets
 
 local function _()
 	-- upvalues: getSduiClientPageScope (ref), chartsConstantsModule (ref), chartsPageScopeFieldsModule (ref)
@@ -65,7 +66,7 @@ local _ = function(value)
 end
 
 return function(p1, p2)
-	-- upvalues: getSduiClientPageScope (ref), chartsConstantsModule (ref), chartsPageScopeFieldsModule (ref), fFlagSduiChartsPostBody (ref), getChartsSortDetailPageKeyModule (ref), fFlagSduiChartsSortDetailGenreFilter (ref), getSduiApiStore (ref), chartsSortDetailScopeFieldsModule (ref), getChartsSortDetailPostUrlModule (ref), parent (ref), sduiCapabilities (ref), buildChartsSortDetailRequestModule (ref), chartsPageSessionModule (ref), getFilterSelectionsWithGenre (ref), getSduiTemplateStore (ref), sduiResponseType (ref), sduiApiStorePostConfigContentType (ref), getChartsSortDetailUrlModule (ref), getGenreForRequest (ref)
+	-- upvalues: getSduiClientPageScope (ref), chartsConstantsModule (ref), chartsPageScopeFieldsModule (ref), fFlagSduiChartsPostBody (ref), getChartsSortDetailPageKeyModule (ref), fFlagSduiChartsSortDetailGenreFilter (ref), getSduiApiStore (ref), chartsSortDetailScopeFieldsModule (ref), getChartsSortDetailPostUrlModule (ref), parent (ref), fFlagSduiAdvertiseRuntimeSupportSets (ref), sduiCapabilities (ref), buildChartsSortDetailRequestModule (ref), chartsPageSessionModule (ref), getFilterSelectionsWithGenre (ref), getSduiTemplateStore (ref), sduiResponseType (ref), sduiApiStorePostConfigContentType (ref), getChartsSortDetailUrlModule (ref), getGenreForRequest (ref)
 	local var1 = getSduiClientPageScope(chartsConstantsModule.ConfigKey).get(chartsPageScopeFieldsModule.FilterSelections)
 	
 	if fFlagSduiChartsPostBody then
@@ -83,12 +84,12 @@ return function(p1, p2)
 		local var4 = getChartsSortDetailPostUrlModule()
 		local serviceContractsProtoModule = require(parent.ServiceContractsProto)
 		local chartsPage = serviceContractsProtoModule.apppageplatform.charts.charts_page
-		local var5 = serviceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
+		local var5 = if fFlagSduiAdvertiseRuntimeSupportSets then sduiCapabilities.buildClientCapabilities() else serviceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
 			enabled_capabilities = sduiCapabilities.getEnabledCapabilityNumbers({ "CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS" })
 		})
 		
 		local function buildBody(p3)
-			-- upvalues: buildChartsSortDetailRequestModule (copy), chartsPage (ref), p1 (ref), chartsPageSessionModule (copy), fFlagSduiChartsSortDetailGenreFilter (copy), getFilterSelectionsWithGenre (copy), var2 (ref), getSduiClientPageScope (copy), chartsConstantsModule (copy), chartsPageScopeFieldsModule (copy), getSduiTemplateStore (copy), var5 (ref)
+			-- upvalues: buildChartsSortDetailRequestModule (copy), chartsPage (ref), p1 (ref), chartsPageSessionModule (copy), fFlagSduiChartsSortDetailGenreFilter (copy), getFilterSelectionsWithGenre (copy), var2 (ref), getSduiClientPageScope (copy), chartsConstantsModule (copy), chartsPageScopeFieldsModule (copy), getSduiTemplateStore (copy), var5 (write)
 			return buildChartsSortDetailRequestModule(chartsPage, {
 				sortId = p1,
 				contentPageToken = p3,

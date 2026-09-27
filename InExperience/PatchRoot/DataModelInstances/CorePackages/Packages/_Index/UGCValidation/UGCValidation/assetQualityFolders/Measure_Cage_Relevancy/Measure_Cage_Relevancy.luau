@@ -24,7 +24,6 @@ return {
 		end
 		if getFFlagUGCValidateAQScoreWarningsModule() and handleOuterCage.score ~= nil and tonumber(handleOuterCage.score) ~= 100 then
 			p1:warn(errorSourceStringsModule.Keys.AQSWarn_CageRelevancy, {
-				score = tostring(math.floor(tonumber(handleOuterCage.score) or 0)),
 				irrelevant_percent = string.format("%.2f", 100 - (tonumber(handleOuterCage.outer_cage_face_relevant_percent) or 0) * 100)
 			})
 		end

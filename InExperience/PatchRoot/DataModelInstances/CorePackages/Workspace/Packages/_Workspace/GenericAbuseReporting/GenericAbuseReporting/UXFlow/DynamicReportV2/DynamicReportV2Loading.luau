@@ -10,7 +10,7 @@ return reactModule.memo(function(_)
 	-- upvalues: reactModule (ref), sheet (ref), skeleton (ref), radius (ref), view (ref)
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, 24), radius = radius.Medium })),
-		Content = reactModule.createElement(sheet.Content, nil, reactModule.createElement(view, { tag = "size-full-0 auto-y col gap-medium" }, {
+		Content = reactModule.createElement(sheet.Content, nil, reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, {
 			Title = reactModule.createElement(skeleton, {
 				LayoutOrder = 1,
 				Size = UDim2.new(0.8, 0, 0, 40),

@@ -8,7 +8,6 @@ local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
 local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
 local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local _ = require(sduiCoreSystem.SduiComponentType)
-local fFlagSduiImprovedErrorDimensions = require(parent.SharedFlags).FFlagSduiImprovedErrorDimensions
 local t = {}
 local t_1 = {
 	__index = function(p1, p2)
@@ -17,18 +16,13 @@ local t_1 = {
 }
 
 return function(p1, p2, p3, p4)
-	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), t (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), cryoModule (ref), t_1 (ref)
-	local currentComponentType = nil
-	local currentParserName = nil
-	
-	if fFlagSduiImprovedErrorDimensions then
-		currentComponentType = p4.currentComponentType
-		currentParserName = p4.currentParserName
-	end
+	-- upvalues: t (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), cryoModule (ref), t_1 (ref)
+	local currentComponentType = p4.currentComponentType
+	local currentParserName = p4.currentParserName
 	local var1 = nil
 	local t_2 = {
 		getAnalyticsDataSnapshot = function()
-			-- upvalues: p1 (ref), t (copy), p2 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), p4 (ref), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), var1 (write), cryoModule (copy)
+			-- upvalues: p1 (ref), t (copy), p2 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), p4 (ref), currentComponentType (ref), currentParserName (ref), var1 (write), cryoModule (copy)
 			local cloned = table.clone(p1 or t)
 			
 			if p2 then
@@ -38,12 +32,12 @@ return function(p1, p2, p3, p4)
 						cloned[i] = v(false).data
 					end
 				end, function(p5)
-					-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), p4 (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (copy), currentParserName (copy)
+					-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), p4 (copy), currentComponentType (copy), currentParserName (copy)
 					sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToComputeAnalyticsData, {
 						message = p5,
 						name = p4.debugName,
-						componentType = if fFlagSduiImprovedErrorDimensions then currentComponentType else nil,
-						parserName = if fFlagSduiImprovedErrorDimensions then currentParserName else nil
+						componentType = currentComponentType,
+						parserName = currentParserName
 					}, p4.appPage)
 				end)
 			end

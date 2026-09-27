@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("MeProfileEntryTooltipEnabled", false) and require(script.Parent.FFlagAXUseProfileIconEntryPoint)

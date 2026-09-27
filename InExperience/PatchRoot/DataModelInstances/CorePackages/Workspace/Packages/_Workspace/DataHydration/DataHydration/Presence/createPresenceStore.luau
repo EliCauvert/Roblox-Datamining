@@ -75,12 +75,13 @@ return function()
 			return var3.getCachedItem(p2)
 		end,
 		UpdateUserPresence = function(p2, p3, p4)
-			-- upvalues: var1 (ref), fFlagProfileCTAHydratePresenceFromMetadataModule (copy), var2 (ref), t (ref)
-			var1.replaceItem(p2, p3)
-			
+			-- upvalues: fFlagProfileCTAHydratePresenceFromMetadataModule (copy), var1 (ref), var2 (ref), t (ref)
 			if fFlagProfileCTAHydratePresenceFromMetadataModule and p4 and p4.isRealtimeUnknown then
+				var1.replaceItem(p2, p3)
+				
 				return
 			end
+			var1.replaceItem(p2, p3)
 			local var4 = if p4 then true else false
 			var2.replaceItem(p2, var4)
 			t[p2] = var4

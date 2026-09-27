@@ -3,11 +3,12 @@ local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local adUpsellCardModule = require(buildExperience.Components.Ads.AdUpsellCard)
+local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local text = foundationModule.Text
 local view = foundationModule.View
 
 return function(p1)
-	-- upvalues: reactModule (ref), view (ref), text (ref), adUpsellCardModule (ref)
+	-- upvalues: reactModule (ref), view (ref), text (ref), adUpsellCardModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
 	return reactModule.createElement(view, {
 		tag = "col gap-xxlarge size-full-0 auto-y",
 		LayoutOrder = p1.order,
@@ -23,6 +24,8 @@ return function(p1)
 			LayoutOrder = 2,
 			containerRef = p1.cardRef,
 			isCreatePending = p1.isCreatePending,
+			freePromotionsRemaining = if fFlagBuildAgentAdCampaignCardModule then p1.freePromotionsRemaining else nil,
+			isCreateDisabled = if fFlagBuildAgentAdCampaignCardModule then false else nil,
 			onCreate = p1.onCreate,
 			onDismiss = p1.onDismiss
 		})

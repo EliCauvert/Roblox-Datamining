@@ -1,13 +1,16 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
+﻿local moments = script:FindFirstAncestor("Moments")
+local parent = moments.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local dialogSize = foundationModule.Enums.DialogSize
 local sheet = foundationModule.Sheet
 local text = foundationModule.Text
 local view = foundationModule.View
+local commentsComposerContainerModule = require(moments.Components.Comments.Composer.CommentsComposerContainer)
+local commentsPanelBodyContainerModule = require(moments.Components.Comments.Panel.CommentsPanelBody.CommentsPanelBodyContainer)
 
 return function(p1)
-	-- upvalues: reactModule (ref), sheet (ref), dialogSize (ref), text (ref), view (ref)
+	-- upvalues: reactModule (ref), sheet (ref), dialogSize (ref), text (ref), view (ref), commentsPanelBodyContainerModule (ref), commentsComposerContainerModule (ref)
 	return reactModule.createElement(sheet.Root, {
 		testId = "moments-comments-sheet",
 		isOpen = p1.isOpen,
@@ -21,17 +24,21 @@ return function(p1)
 				Text = p1.title
 			})
 		}),
-		Content = reactModule.createElement(sheet.Content, nil, {
+		Content = reactModule.createElement(sheet.Content, { scrollingFrameRef = p1.scrollingFrameRef }, {
 			ContentSlot = reactModule.createElement(view, {
 				tag = "size-full-0 auto-y",
 				testId = "moments-comments-content-slot"
-			}, p1.content)
+			}, {
+				PanelBody = reactModule.createElement(commentsPanelBodyContainerModule, p1.panelBodyProps)
+			})
 		}),
 		Actions = reactModule.createElement(sheet.Actions, nil, {
 			ComposerSlot = reactModule.createElement(view, {
 				tag = "size-full-0 auto-y",
 				testId = "moments-comments-composer-slot"
-			}, p1.composer)
+			}, {
+				Composer = if p1.composerProps ~= nil then nil else reactModule.createElement(commentsComposerContainerModule, p1.composerProps)
+			})
 		})
 	})
 end

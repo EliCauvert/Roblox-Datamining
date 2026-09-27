@@ -4,6 +4,7 @@
 	ExpChatPresetChatAutocompleteExperimentation = require(script.ExpChatPresetChatAutocompleteExperimentation),
 	ArgoPartyExperimentation = require(script.ArgoPartyExperimentation),
 	ExpChatNewSystemMessagesExperimentation = require(script.ExpChatNewSystemMessagesExperimentation),
+	ExpChatGlobalTabDefaultExperimentation = require(script.ExpChatGlobalTabDefaultExperimentation),
 	QueueExperimentation = require(script.QueueExperimentation),
 	ScheduledSquadsListExperimentation = require(script.ScheduledSquadsListExperimentation),
 	SquadCoordinationExperienceJoinExperimentation = require(script.SquadCoordinationExperienceJoinExperimentation),

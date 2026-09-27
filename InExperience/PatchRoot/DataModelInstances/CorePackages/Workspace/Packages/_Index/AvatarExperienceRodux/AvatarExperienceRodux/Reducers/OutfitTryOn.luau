@@ -54,6 +54,8 @@ local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnab
 local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local fFlagParseHeadShapeFromAPIResponse = avatarExperienceFlagsModule.FFlagParseHeadShapeFromAPIResponse
 local fFlagHeadRefinementFacialAnimationToggle = avatarExperienceFlagsModule.FFlagHeadRefinementFacialAnimationToggle
+local fFlagAXPhotoboothMomentsPage = avatarExperienceFlagsModule.FFlagAXPhotoboothMomentsPage
+local fFlagAXTryOnWithoutEquippedBody = avatarExperienceFlagsModule.FFlagAXTryOnWithoutEquippedBody
 local var1 = 0
 
 local function formatItem(p1, p2)
@@ -119,8 +121,8 @@ local function formatItem(p1, p2)
 	return t
 end
 
-local function formatItemFromLookOutfit(p3, p4, p5)
-	-- upvalues: ASSET_TYPE_TO_ACCESSORY_TYPE (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref), cryoModule (ref), ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE (ref), LAYERED_MAKEUP_ORDER (ref), LOOK_TYPE (ref), fFlagAXCatalogMakeupSupport (ref), var1 (write)
+local function formatItemFromLookOutfit(p3, p4, p5, p6)
+	-- upvalues: fFlagAXPhotoboothMomentsPage (ref), fFlagAXTryOnWithoutEquippedBody (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref), cryoModule (ref), ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE (ref), LAYERED_MAKEUP_ORDER (ref), LOOK_TYPE (ref), fFlagAXCatalogMakeupSupport (ref), var1 (write)
 	local t = {
 		version = "1",
 		isUnequipped = false,
@@ -129,7 +131,10 @@ local function formatItemFromLookOutfit(p3, p4, p5)
 		itemType = p3.itemType,
 		itemSubType = p3.itemSubType,
 		selectedInTryOnManager = p3.isNotSelectable ~= true,
-		lookId = p5
+		lookId = p5,
+		outfitId = if fFlagAXPhotoboothMomentsPage then p6 else nil,
+		headShape = if fFlagAXTryOnWithoutEquippedBody then p3.headShape else nil,
+		staticFacialAnimation = if fFlagAXTryOnWithoutEquippedBody then p3.staticFacialAnimation else nil
 	}
 	
 	if ASSET_TYPE_TO_ACCESSORY_TYPE[p3.itemSubType] then
@@ -225,7 +230,7 @@ local function getTryOnItemsMakeupAndAvatarLookIds(p6)
 end
 
 local function reconcileAllTryOnState(p7)
-	-- upvalues: fFlagAXMISEnableMultiShopping (ref), getTryOnItemsMakeupAndAvatarLookIds (ref), getTryOnItemsContainsRecolorableBody (ref), cryoModule (ref), tutilsModule (ref), LOOK_TYPE (ref)
+	-- upvalues: fFlagAXMISEnableMultiShopping (ref), getTryOnItemsMakeupAndAvatarLookIds (ref), getTryOnItemsContainsRecolorableBody (ref), fFlagAXPhotoboothMomentsPage (ref), cryoModule (ref), tutilsModule (ref), LOOK_TYPE (ref), fFlagAXTryOnWithoutEquippedBody (ref)
 	local tryOnItems = p7.TryOnItems
 	local var3 = nil
 	local var4 = nil
@@ -239,6 +244,9 @@ local function reconcileAllTryOnState(p7)
 	
 	if fFlagAXMISEnableMultiShopping then
 		var7 = var7 or var3 ~= nil
+	end
+	if fFlagAXPhotoboothMomentsPage then
+		var7 = var7 or p7.OutfitId ~= nil
 	end
 	local var8
 	local var9 = if var7 then p7.BodyColor3s else cryoModule.None
@@ -259,7 +267,8 @@ local function reconcileAllTryOnState(p7)
 		LookType = if fFlagAXMISEnableMultiShopping then if fFlagAXMISEnableMultiShopping then if var8 then cryoModule.None else p7.LookType else nil else nil,
 		MakeupLookId = if fFlagAXMISEnableMultiShopping then var4 else nil,
 		MakeupLookType = if fFlagAXMISEnableMultiShopping then if not fFlagAXMISEnableMultiShopping then if var8 or not var4 then cryoModule.None else LOOK_TYPE.Makeup else nil else nil,
-		ShouldTryOnWithoutEquippedItems = if fFlagAXMISEnableMultiShopping then if var8 then false else p7.ShouldTryOnWithoutEquippedItems else nil
+		ShouldTryOnWithoutEquippedItems = if fFlagAXMISEnableMultiShopping then if var8 then false else p7.ShouldTryOnWithoutEquippedItems else nil,
+		ShouldTryOnWithoutEquippedBody = if fFlagAXTryOnWithoutEquippedBody then if var8 then false else p7.ShouldTryOnWithoutEquippedBody else nil
 	})
 end
 
@@ -272,9 +281,12 @@ local t = {
 	LastToggledLookType = nil,
 	LastTryOnClassicHeadShape = nil,
 	BackgroundPreview = nil,
+	AvatarType = nil,
+	OutfitId = nil,
 	TryOnItems = {},
 	OutfitIdMap = {},
-	ShouldTryOnWithoutEquippedItems = if fFlagAXMISEnableMultiShopping then false else nil
+	ShouldTryOnWithoutEquippedItems = if fFlagAXMISEnableMultiShopping then false else nil,
+	ShouldTryOnWithoutEquippedBody = if fFlagAXTryOnWithoutEquippedBody then false else nil
 }
 
 return roduxModule.createReducer(t, {
@@ -287,7 +299,7 @@ return roduxModule.createReducer(t, {
 		return cloned
 	end,
 	[toggleTryOnModule.name] = function(p7, p8)
-		-- upvalues: t (ref), getTryOnItemReducerKey (ref), fFlagAXMISEnableMultiShopping (ref), reconcileAllTryOnState (ref), removeItem (ref), reducerUtilsModule (ref), formatItem (ref), getFilteredTryOnItems (ref), itemTypeEnum (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), bundleTypeIdStrings (ref), cryoModule (ref), getTryOnItemsContainsRecolorableBody (ref), fFlagAXCatalogMakeupSupport (ref), removeMakeupAssetsFromTryOnsIfOverLimit (ref)
+		-- upvalues: t (ref), getTryOnItemReducerKey (ref), fFlagAXMISEnableMultiShopping (ref), reconcileAllTryOnState (ref), removeItem (ref), reducerUtilsModule (ref), formatItem (ref), getFilteredTryOnItems (ref), itemTypeEnum (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), bundleTypeIdStrings (ref), cryoModule (ref), getTryOnItemsContainsRecolorableBody (ref), fFlagAXPhotoboothMomentsPage (ref), fFlagAXCatalogMakeupSupport (ref), removeMakeupAssetsFromTryOnsIfOverLimit (ref)
 		local var3
 		local var4 = p7 or t
 		local var5 = var4.TryOnItems or {}
@@ -334,6 +346,10 @@ return roduxModule.createReducer(t, {
 		end
 		local var12 = cryoModule.Dictionary.join(var8, { [var7] = var9 })
 		local var13 = getTryOnItemsContainsRecolorableBody(var12)
+		
+		if fFlagAXPhotoboothMomentsPage then
+			var13 = var13 or var4.OutfitId ~= nil
+		end
 		local var14 = cryoModule.Dictionary.join(var4, {
 			TryOnItems = var12,
 			LastToggledItem = var9,
@@ -363,7 +379,7 @@ return roduxModule.createReducer(t, {
 		})
 	end,
 	[tryOnLooksOutfitModule.name] = function(p7, p8)
-		-- upvalues: t (ref), fFlagAXMISEnableMultiShopping (ref), fFlagAXCatalogMakeupSupport (ref), LOOK_TYPE (ref), MAKEUP_LOOK_ASSET_TYPES (ref), getTryOnItemReducerKey (ref), formatItemFromLookOutfit (ref), formatBundleFromLookOutfit (ref), cryoModule (ref)
+		-- upvalues: t (ref), fFlagAXMISEnableMultiShopping (ref), fFlagAXCatalogMakeupSupport (ref), LOOK_TYPE (ref), MAKEUP_LOOK_ASSET_TYPES (ref), getTryOnItemReducerKey (ref), formatItemFromLookOutfit (ref), fFlagAXPhotoboothMomentsPage (ref), formatBundleFromLookOutfit (ref), cryoModule (ref), fFlagAXTryOnWithoutEquippedBody (ref)
 		local var3 = p7 or t
 		local t_1 = {}
 		
@@ -377,7 +393,7 @@ return roduxModule.createReducer(t, {
 			end
 		end
 		for i, v in p8.assetItemIdTypeAndSubtype do
-			t_1[getTryOnItemReducerKey(v.itemId, v.itemType)] = formatItemFromLookOutfit(v, p8.lookType, if fFlagAXMISEnableMultiShopping then p8.lookId else nil)
+			t_1[getTryOnItemReducerKey(v.itemId, v.itemType)] = formatItemFromLookOutfit(v, p8.lookType, if fFlagAXMISEnableMultiShopping then p8.lookId else nil, if fFlagAXPhotoboothMomentsPage then p8.outfitId else nil)
 		end
 		if p8.bundleItemIdTypeAndSubtype ~= nil then
 			for i_1, v_1 in p8.bundleItemIdTypeAndSubtype do
@@ -411,68 +427,87 @@ return roduxModule.createReducer(t, {
 		}
 		
 		if fFlagAXMISEnableMultiShopping then
-			var4 = p8.lookId ~= nil
-			var4 = nil
+			var4 = true
+			
+			if p8.lookId == nil then
+				var4 = fFlagAXPhotoboothMomentsPage
+				
+				if var4 then
+					var4 = p8.outfitId ~= nil
+					var4 = nil
+				end
+			end
 		else
 			var4 = nil
 		end
+		local var5
 		t_2.ShouldTryOnWithoutEquippedItems = var4
+		
+		if fFlagAXTryOnWithoutEquippedBody then
+			var5 = p8.shouldTryOnWithoutEquippedBody == true
+			var5 = nil
+		else
+			var5 = nil
+		end
+		t_2.ShouldTryOnWithoutEquippedBody = var5
+		t_2.AvatarType = if fFlagAXPhotoboothMomentsPage then if p8.avatarType then p8.avatarType else cryoModule.None else nil
+		t_2.OutfitId = if fFlagAXPhotoboothMomentsPage then if p8.outfitId ~= nil then cryoModule.None else p8.outfitId else nil
 		
 		return join(var3, t_2)
 	end,
 	[setEquippedInTryOnManagerModule.name] = function(p9, p10)
 		-- upvalues: t (ref), getTryOnItemReducerKey (ref), cryoModule (ref)
-		local var5 = p9 or t
-		local tryOnItems = var5.TryOnItems or {}
-		local var6 = getTryOnItemReducerKey(p10.itemId, p10.itemType)
+		local var6 = p9 or t
+		local tryOnItems = var6.TryOnItems or {}
+		local var7 = getTryOnItemReducerKey(p10.itemId, p10.itemType)
 		
-		return if tryOnItems[var6] == nil then var5 else cryoModule.Dictionary.join(var5, {
+		return if tryOnItems[var7] == nil then var6 else cryoModule.Dictionary.join(var6, {
 			TryOnItems = cryoModule.Dictionary.join(tryOnItems, {
-				[var6] = cryoModule.Dictionary.join(tryOnItems[var6], { selectedInTryOnManager = p10.selectedInTryOnManager })
+				[var7] = cryoModule.Dictionary.join(tryOnItems[var7], { selectedInTryOnManager = p10.selectedInTryOnManager })
 			})
 		})
 	end,
 	[setSelectedTimedOptionModule.name] = function(p9, p10)
 		-- upvalues: t (ref), getTryOnItemReducerKey (ref), cryoModule (ref)
-		local var5 = p9 or t
-		local tryOnItems = var5.TryOnItems or {}
-		local var6 = getTryOnItemReducerKey(p10.itemId, p10.itemType)
+		local var6 = p9 or t
+		local tryOnItems = var6.TryOnItems or {}
+		local var7 = getTryOnItemReducerKey(p10.itemId, p10.itemType)
 		
-		return if tryOnItems[var6] == nil then var5 else cryoModule.Dictionary.join(var5, {
+		return if tryOnItems[var7] == nil then var6 else cryoModule.Dictionary.join(var6, {
 			TryOnItems = cryoModule.Dictionary.join(tryOnItems, {
-				[var6] = cryoModule.Dictionary.join(tryOnItems[var6], { selectedTimedOptionIndex = p10.selectedTimedOptionIndex })
+				[var7] = cryoModule.Dictionary.join(tryOnItems[var7], { selectedTimedOptionIndex = p10.selectedTimedOptionIndex })
 			})
 		})
 	end,
 	[removeUnselectedItemsFromTryOnModule.name] = function(p9, _)
 		-- upvalues: t (ref), cryoModule (ref)
-		local var5 = p9 or t
+		local var6 = p9 or t
 		local t_1 = {}
 		
-		for i, v in var5.TryOnItems or {} do
+		for i, v in var6.TryOnItems or {} do
 			if v.selectedInTryOnManager then
 				t_1[i] = v
 			end
 		end
-		return cryoModule.Dictionary.join(var5, { TryOnItems = t_1 })
+		return cryoModule.Dictionary.join(var6, { TryOnItems = t_1 })
 	end,
 	[removeLookFromTryOnModule.name] = if fFlagAXMISEnableMultiShopping then function(p10, p11)
-		-- upvalues: t (ref), fFlagAXCatalogMakeupSupport (ref), cryoModule (ref)
-		local var6 = p10 or t
+		-- upvalues: t (ref), fFlagAXCatalogMakeupSupport (ref), cryoModule (ref), fFlagAXTryOnWithoutEquippedBody (ref)
+		local var7 = p10 or t
 		local t_1 = {}
 		
-		for i, v in var6.TryOnItems or {} do
+		for i, v in var7.TryOnItems or {} do
 			if v.lookId ~= p11.lookId then
 				t_1[i] = v
 			end
 		end
-		return if fFlagAXCatalogMakeupSupport and var6.MakeupLookId == p11.lookId then cryoModule.Dictionary.join(var6, {
+		return if fFlagAXCatalogMakeupSupport and var7.MakeupLookId == p11.lookId then cryoModule.Dictionary.join(var7, {
 			TryOnItems = t_1,
 			MakeupLookId = cryoModule.None,
 			MakeupLookType = cryoModule.None,
 			MakeupLookAnalyticsInfo = cryoModule.None,
 			LastToggledLookType = cryoModule.None
-		}) else cryoModule.Dictionary.join(var6, {
+		}) else cryoModule.Dictionary.join(var7, {
 			ShouldTryOnWithoutEquippedItems = false,
 			TryOnItems = t_1,
 			LookId = cryoModule.None,
@@ -481,106 +516,117 @@ return roduxModule.createReducer(t, {
 			BodyColor3s = cryoModule.None,
 			BodyPartColorRangeIds = cryoModule.None,
 			Scale = cryoModule.None,
-			LastToggledLookType = cryoModule.None
+			LastToggledLookType = cryoModule.None,
+			ShouldTryOnWithoutEquippedBody = if fFlagAXTryOnWithoutEquippedBody then false else nil
 		})
 	end else nil,
 	[removeFromTryOnModule.name] = function(p12, p13)
 		-- upvalues: t (ref), findItemInTryOnItems (ref), reconcileAllTryOnState (ref), removeItem (ref)
-		local var7 = p12 or t
-		local tryOnItems = var7.TryOnItems or {}
+		local var8 = p12 or t
+		local tryOnItems = var8.TryOnItems or {}
 		local _ = nil
-		local var8 = findItemInTryOnItems(tryOnItems, p13.itemId, p13.itemType)
+		local var9 = findItemInTryOnItems(tryOnItems, p13.itemId, p13.itemType)
 		
-		return if var8 == nil then var7 else reconcileAllTryOnState(removeItem(var7, tryOnItems, var8))
+		return if var9 == nil then var8 else reconcileAllTryOnState(removeItem(var8, tryOnItems, var9))
 	end,
 	[removeLookItemsFromTryOnModule.name] = function(p12, p13)
-		-- upvalues: t (ref), getTryOnItemReducerKey (ref), itemTypeEnum (ref), cryoModule (ref), fFlagAXMISEnableMultiShopping (ref), fFlagAXCatalogMakeupSupport (ref)
-		local var7 = p12 or t
+		-- upvalues: t (ref), getTryOnItemReducerKey (ref), itemTypeEnum (ref), cryoModule (ref), fFlagAXMISEnableMultiShopping (ref), fFlagAXTryOnWithoutEquippedBody (ref), fFlagAXCatalogMakeupSupport (ref)
+		local var8 = p12 or t
 		
-		if p13.lookId == var7.LookId then
-			local var8 = var7.TryOnItems or {}
+		if p13.lookId == var8.LookId then
+			local var9 = var8.TryOnItems or {}
 			
 			for i, v in p13.assetIds do
-				local var9 = getTryOnItemReducerKey(v, itemTypeEnum.Asset)
+				local var10 = getTryOnItemReducerKey(v, itemTypeEnum.Asset)
 				
-				if var8[var9] ~= nil then
-					var8 = cryoModule.Dictionary.join(var8, { [var9] = cryoModule.None })
+				if var9[var10] ~= nil then
+					var9 = cryoModule.Dictionary.join(var9, { [var10] = cryoModule.None })
 				end
 			end
 			if p13.bundleIds ~= nil then
 				for i, v_1 in p13.bundleIds do
-					local var10 = getTryOnItemReducerKey(v_1, itemTypeEnum.Bundle)
+					local var11 = getTryOnItemReducerKey(v_1, itemTypeEnum.Bundle)
 					
-					if var8[var10] ~= nil then
-						var8 = cryoModule.Dictionary.join(var8, { [var10] = cryoModule.None })
+					if var9[var11] ~= nil then
+						var9 = cryoModule.Dictionary.join(var9, { [var11] = cryoModule.None })
 					end
 				end
 			end
-			var7 = cryoModule.Dictionary.join(var7, {
-				TryOnItems = var8,
+			var8 = cryoModule.Dictionary.join(var8, {
+				TryOnItems = var9,
 				LookId = cryoModule.None,
 				LookType = cryoModule.None,
 				BodyColor3s = cryoModule.None,
 				BodyPartColorRangeIds = cryoModule.None,
 				Scale = cryoModule.None,
-				ShouldTryOnWithoutEquippedItems = if fFlagAXMISEnableMultiShopping then false else nil
+				ShouldTryOnWithoutEquippedItems = if fFlagAXMISEnableMultiShopping then false else nil,
+				ShouldTryOnWithoutEquippedBody = if fFlagAXTryOnWithoutEquippedBody then false else nil
 			})
 		end
-		if fFlagAXMISEnableMultiShopping and fFlagAXCatalogMakeupSupport and p13.lookId == var7.MakeupLookId then
-			local var11 = var7.TryOnItems or {}
+		if fFlagAXMISEnableMultiShopping and fFlagAXCatalogMakeupSupport and p13.lookId == var8.MakeupLookId then
+			local var12 = var8.TryOnItems or {}
 			
 			for i, v in p13.assetIds do
-				local var12 = getTryOnItemReducerKey(v, itemTypeEnum.Asset)
+				local var13 = getTryOnItemReducerKey(v, itemTypeEnum.Asset)
 				
-				if var11[var12] ~= nil then
-					var11 = cryoModule.Dictionary.join(var11, { [var12] = cryoModule.None })
+				if var12[var13] ~= nil then
+					var12 = cryoModule.Dictionary.join(var12, { [var13] = cryoModule.None })
 				end
 			end
 			if p13.bundleIds ~= nil then
 				for i, v_1 in p13.bundleIds do
-					local var13 = getTryOnItemReducerKey(v_1, itemTypeEnum.Bundle)
+					local var14 = getTryOnItemReducerKey(v_1, itemTypeEnum.Bundle)
 					
-					if var11[var13] ~= nil then
-						var11 = cryoModule.Dictionary.join(var11, { [var13] = cryoModule.None })
+					if var12[var14] ~= nil then
+						var12 = cryoModule.Dictionary.join(var12, { [var14] = cryoModule.None })
 					end
 				end
 			end
-			var7 = cryoModule.Dictionary.join(var7, {
-				TryOnItems = var11,
+			var8 = cryoModule.Dictionary.join(var8, {
+				TryOnItems = var12,
 				MakeupLookId = cryoModule.None,
 				MakeupLookType = cryoModule.None
 			})
 		end
-		return var7
+		return var8
 	end,
 	[receivedBundleInfoForTryOnModule.name] = function(p14, p15)
 		-- upvalues: t (ref), getTryOnItemReducerKey (ref), itemTypeEnum (ref), cryoModule (ref)
-		local var14 = p14 or t
-		local tryOnItems = var14.TryOnItems or {}
+		local var15 = p14 or t
+		local tryOnItems = var15.TryOnItems or {}
 		local _ = nil
 		local _ = nil
-		local var15 = getTryOnItemReducerKey(p15.itemId, itemTypeEnum.Bundle)
+		local var16 = getTryOnItemReducerKey(p15.itemId, itemTypeEnum.Bundle)
 		
-		if tryOnItems[var15] then
-			local cloned = table.clone(var14.OutfitIdMap or {})
+		if tryOnItems[var16] then
+			local cloned = table.clone(var15.OutfitIdMap or {})
 			cloned[p15.itemId] = p15.outfitId
-			local var16 = var15
+			local var17 = var16
 			
-			return cryoModule.Dictionary.join(var14, {
+			return cryoModule.Dictionary.join(var15, {
 				TryOnItems = cryoModule.Dictionary.join(tryOnItems, {
-					[var16] = cryoModule.Dictionary.join(tryOnItems[var16], { receivedBundleInfo = true })
+					[var17] = cryoModule.Dictionary.join(tryOnItems[var17], { receivedBundleInfo = true })
 				}),
 				OutfitIdMap = cloned
 			})
 		end
-		return var14
+		return var15
 	end,
 	[clearTryOnsModule.name] = function(p14, p15)
-		-- upvalues: cryoModule (ref), t (ref), fFlagAXMISEnableMultiShopping (ref), fFlagAXCatalogMakeupSupport (ref)
+		-- upvalues: fFlagAXPhotoboothMomentsPage (ref), cryoModule (ref), t (ref), fFlagAXMISEnableMultiShopping (ref), fFlagAXTryOnWithoutEquippedBody (ref), fFlagAXCatalogMakeupSupport (ref)
+		local var15
 		if not p14 then
 			return t
+		elseif fFlagAXPhotoboothMomentsPage then
+			var15 = true
+			
+			if p14.LookId == nil then
+				local _ = p14.OutfitId ~= nil
+			end
+		else
+			var15 = p14.LookId ~= nil
 		end
-		local retainTryOnColor = not p14.LookId and p15.retainTryOnColor
+		local retainTryOnColor = not var15 and p15.retainTryOnColor
 		
 		return cryoModule.Dictionary.join(t, {
 			LastTryOnClassicHeadShape = p14.LastTryOnClassicHeadShape,
@@ -589,6 +635,7 @@ return roduxModule.createReducer(t, {
 			BodyPartColorRangeIds = if retainTryOnColor then p14.BodyPartColorRangeIds else nil,
 			OutfitIdMap = if p14 then p14.OutfitIdMap else {},
 			ShouldTryOnWithoutEquippedItems = if fFlagAXMISEnableMultiShopping then false else nil,
+			ShouldTryOnWithoutEquippedBody = if fFlagAXTryOnWithoutEquippedBody then false else nil,
 			LastToggledLookType = if fFlagAXMISEnableMultiShopping and fFlagAXCatalogMakeupSupport then cryoModule.None else nil
 		})
 	end,
@@ -627,23 +674,23 @@ return roduxModule.createReducer(t, {
 	[setOrderForTryOnsModule.name] = function(p14, p15)
 		-- upvalues: t (ref), getTryOnItemReducerKey (ref), itemTypeEnum (ref), cryoModule (ref), constants (ref)
 		local tryOnItems
-		local var14 = p14 or t
+		local var15 = p14 or t
 		
 		for i, v in p15.itemIdToOrderMap do
-			tryOnItems = var14.TryOnItems or {}
-			local var15 = getTryOnItemReducerKey(i, itemTypeEnum.Asset)
+			tryOnItems = var15.TryOnItems or {}
+			local var16 = getTryOnItemReducerKey(i, itemTypeEnum.Asset)
 			
-			if tryOnItems[var15] and tryOnItems[var15].itemType ~= itemTypeEnum.Bundle then
-				var14 = cryoModule.Dictionary.join(var14, {
+			if tryOnItems[var16] and tryOnItems[var16].itemType ~= itemTypeEnum.Bundle then
+				var15 = cryoModule.Dictionary.join(var15, {
 					TryOnItems = cryoModule.Dictionary.join(tryOnItems, {
-						[var15] = cryoModule.Dictionary.join(tryOnItems[var15], { order = v })
+						[var16] = cryoModule.Dictionary.join(tryOnItems[var16], { order = v })
 					})
 				})
-			elseif not tryOnItems[var15] then
+			elseif not tryOnItems[var16] then
 				for i_1, v_1 in tryOnItems do
 					if v_1.bundleInfo and v_1.bundleInfo[i] and v_1.itemId ~= constants.AVATAR_BLOCKY_DEFAULT_BUNDLE_ID then
 						local bundleInfo = v_1.bundleInfo
-						var14 = cryoModule.Dictionary.join(p14, {
+						var15 = cryoModule.Dictionary.join(p14, {
 							TryOnItems = cryoModule.Dictionary.join(tryOnItems, {
 								[i_1] = cryoModule.Dictionary.join(tryOnItems[i_1], {
 									bundleInfo = cryoModule.Dictionary.join(bundleInfo, {
@@ -657,17 +704,17 @@ return roduxModule.createReducer(t, {
 				end
 			end
 		end
-		return var14
+		return var15
 	end,
 	[setAccessoryAdjustmentsModule.name] = function(p16, p17)
 		-- upvalues: t (ref), cryoModule (ref)
-		local var16 = p16 or t
-		local tryOnItems = var16.TryOnItems or {}
+		local var17 = p16 or t
+		local tryOnItems = var17.TryOnItems or {}
 		
 		for i, v in tryOnItems do
 			if v.itemType == "Asset" then
 				if v.itemId == p17.itemId then
-					return cryoModule.Dictionary.join(var16, {
+					return cryoModule.Dictionary.join(var17, {
 						TryOnItems = cryoModule.Dictionary.join(tryOnItems, {
 							[i] = cryoModule.Dictionary.join(v, {
 								position = p17.position,
@@ -699,40 +746,40 @@ return roduxModule.createReducer(t, {
 				end
 			end
 		end
-		return var16
+		return var17
 	end,
 	[addSelectedBundleInfoModule.name] = function(p18, p19)
 		-- upvalues: t (ref), getTryOnItemReducerKey (ref), itemTypeEnum (ref), cryoModule (ref)
-		local var17 = p18 or t
-		local tryOnItems = var17.TryOnItems or {}
-		local var18 = getTryOnItemReducerKey(p19.bundleId, itemTypeEnum.Bundle)
+		local var18 = p18 or t
+		local tryOnItems = var18.TryOnItems or {}
+		local var19 = getTryOnItemReducerKey(p19.bundleId, itemTypeEnum.Bundle)
 		
-		return if tryOnItems[var18] then cryoModule.Dictionary.join(var17, {
+		return if tryOnItems[var19] then cryoModule.Dictionary.join(var18, {
 			TryOnItems = cryoModule.Dictionary.join(tryOnItems, {
-				[var18] = cryoModule.Dictionary.join(tryOnItems[var18], { bundleInfo = p19.bundleInfo })
+				[var19] = cryoModule.Dictionary.join(tryOnItems[var19], { bundleInfo = p19.bundleInfo })
 			})
-		}) else var17
+		}) else var18
 	end,
 	[setOutfitTryOnsModule.name] = function(_, p18)
 		return p18.outfitTryOns
 	end,
 	[removeLookModule.name] = function(p18, p19)
-		-- upvalues: t (ref), fFlagAXMISEnableMultiShopping (ref), fFlagAXCatalogMakeupSupport (ref), cryoModule (ref)
-		local var17 = p18 or t
+		-- upvalues: t (ref), fFlagAXMISEnableMultiShopping (ref), fFlagAXCatalogMakeupSupport (ref), cryoModule (ref), fFlagAXTryOnWithoutEquippedBody (ref)
+		local var18 = p18 or t
 		
-		if p19.lookId == var17.LookId or fFlagAXMISEnableMultiShopping and fFlagAXCatalogMakeupSupport and p19.lookId == var17.MakeupLookId then
+		if p19.lookId == var18.LookId or fFlagAXMISEnableMultiShopping and fFlagAXCatalogMakeupSupport and p19.lookId == var18.MakeupLookId then
 			local t_1 = {}
 			
 			if fFlagAXMISEnableMultiShopping then
-				for i, v in var17.TryOnItems or {} do
+				for i, v in var18.TryOnItems or {} do
 					if v.lookId ~= p19.lookId then
 						t_1[i] = v
 					end
 				end
 			end
 			if fFlagAXMISEnableMultiShopping and fFlagAXCatalogMakeupSupport then
-				if p19.lookId == var17.LookId then
-					var17 = cryoModule.Dictionary.join(var17, {
+				if p19.lookId == var18.LookId then
+					var18 = cryoModule.Dictionary.join(var18, {
 						ShouldTryOnWithoutEquippedItems = false,
 						TryOnItems = t_1,
 						LookId = cryoModule.None,
@@ -740,32 +787,34 @@ return roduxModule.createReducer(t, {
 						BodyColor3s = cryoModule.None,
 						BodyPartColorRangeIds = cryoModule.None,
 						Scale = cryoModule.None,
+						ShouldTryOnWithoutEquippedBody = if fFlagAXTryOnWithoutEquippedBody then false else nil,
 						LastToggledLookType = cryoModule.None
 					})
 				end
-				if p19.lookId == var17.MakeupLookId then
-					var17 = cryoModule.Dictionary.join(var17, {
+				if p19.lookId == var18.MakeupLookId then
+					var18 = cryoModule.Dictionary.join(var18, {
 						TryOnItems = t_1,
 						MakeupLookId = cryoModule.None,
 						MakeupLookType = cryoModule.None,
 						LastToggledLookType = cryoModule.None
 					})
 					
-					return var17
+					return var18
 				end
 			else
-				var17 = cryoModule.Dictionary.join(var17, {
+				var18 = cryoModule.Dictionary.join(var18, {
 					TryOnItems = t_1,
 					LookId = cryoModule.None,
 					LookType = cryoModule.None,
 					BodyColor3s = cryoModule.None,
 					BodyPartColorRangeIds = cryoModule.None,
 					Scale = cryoModule.None,
-					ShouldTryOnWithoutEquippedItems = if fFlagAXMISEnableMultiShopping then false else nil
+					ShouldTryOnWithoutEquippedItems = if fFlagAXMISEnableMultiShopping then false else nil,
+					ShouldTryOnWithoutEquippedBody = if fFlagAXTryOnWithoutEquippedBody then false else nil
 				})
 			end
 		end
-		return var17
+		return var18
 	end,
 	[characterHistoryStateChangeButtonActivated.name] = function(p20, p21)
 		-- upvalues: fFlagAXRootSlotBasedEditorFlag (ref)

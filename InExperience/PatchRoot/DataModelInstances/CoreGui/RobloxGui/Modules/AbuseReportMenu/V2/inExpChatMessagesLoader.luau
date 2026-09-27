@@ -11,7 +11,6 @@ local enrichMissingUsernames = require(script.Parent.inExpChatMessagesLoaderUser
 local channelTabDisplayLabel = expChatSharedModule.ChannelTabDisplayLabel
 local getChannelTabsStore = expChatModule.Stores.GetChannelTabsStore
 local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
-local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local fFlagExpChatUseSharedChannelTabDisplayLabel = sharedFlagsModule.FFlagExpChatUseSharedChannelTabDisplayLabel
 local var1 = localization.new(localizationService.RobloxLocaleId)
 
@@ -31,37 +30,24 @@ end
 return {
 	type = "groupedListItem",
 	fetch = function(_)
-		-- upvalues: expChatSharedModule (ref), promiseModule (ref), fFlagExpChatUseMessagesStore (ref), expChatMessageHelpersModule (ref), var1 (ref), fFlagExpChatUseSharedChannelTabDisplayLabel (ref), channelTabDisplayLabel (ref), enrichMissingUsernames (ref), getChannelTabsStore (ref), getLocalizedChannelTabLabels (ref), fFlagExpChatUseChannelTabsStore (ref), playersService (ref)
+		-- upvalues: expChatSharedModule (ref), promiseModule (ref), expChatMessageHelpersModule (ref), var1 (ref), fFlagExpChatUseSharedChannelTabDisplayLabel (ref), channelTabDisplayLabel (ref), enrichMissingUsernames (ref), getChannelTabsStore (ref), getLocalizedChannelTabLabels (ref), fFlagExpChatUseChannelTabsStore (ref), playersService (ref)
 		local store = expChatSharedModule.context.store
 		
 		if not store then
 			return promiseModule.resolve({})
 		end
-		local var2, var3, var4
 		local state = store:getState()
 		local _ = nil
 		local _ = nil
 		local _ = nil
+		local messagesStore = expChatSharedModule.context.messagesStore
 		
-		if fFlagExpChatUseMessagesStore then
-			local messagesStore = expChatSharedModule.context.messagesStore
-			
-			if not messagesStore then
-				return promiseModule.resolve({})
-			end
-			var2 = messagesStore.getByMessageId(false) or {}
-			var3 = messagesStore.getWindowMessagesInOrder(false) or {}
-			var4 = messagesStore.getWindowMessagesInOrderByTabId(false) or {}
-		else
-			local messages = state and state.Messages
-			
-			if not messages then
-				return promiseModule.resolve({})
-			end
-			var2 = messages.byMessageId or {}
-			var3 = messages.windowMessagesInOrder or {}
-			var4 = messages.windowMessagesInOrderByTabId or {}
+		if not messagesStore then
+			return promiseModule.resolve({})
 		end
+		local var2 = messagesStore.getByMessageId(false) or {}
+		local var3 = messagesStore.getWindowMessagesInOrder(false) or {}
+		local var4 = messagesStore.getWindowMessagesInOrderByTabId(false) or {}
 		local translator = expChatSharedModule.context.translator
 		
 		if expChatMessageHelpersModule.areChannelTabsEnabled() then

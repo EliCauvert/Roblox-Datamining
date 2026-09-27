@@ -7,12 +7,8 @@ local expChatSharedModule = require(parent.ExpChatShared)
 local foundationModule = require(parent.Foundation)
 local inputTypeModule = require(parent.InputType)
 local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local sharedFlagsModule = require(parent.SharedFlags)
 local signalsReactModule = require(parent.SignalsReact)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
+local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local text = foundationModule.Text
 local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
 local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
@@ -38,15 +34,13 @@ local function _()
 end
 
 return reactModule.memo(function(value)
-	-- upvalues: foundationModule (ref), getPresetChatStoreModule (ref), useDispatch (ref), signalsReactModule (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), useSelector (ref), localizationModule (ref), reactModule (ref), setIsPresetTrayOpenModule (ref), presetTrayKeyboardSelectedModule (ref), expChatSharedModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), inputTypeModule (ref), userInputService (ref), guiService (ref), getTransparencyStoreModule (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (ref), var1 (ref), sendPresetModule (ref), presetChatContainer (ref), textChatService (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), presetMessageButtonModule (ref), text (ref), presetCooldownProviderModule (ref)
+	-- upvalues: foundationModule (ref), getPresetChatStoreModule (ref), useDispatch (ref), signalsReactModule (ref), getMessagesStoreModule (ref), localizationModule (ref), reactModule (ref), setIsPresetTrayOpenModule (ref), presetTrayKeyboardSelectedModule (ref), expChatSharedModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), inputTypeModule (ref), userInputService (ref), guiService (ref), getTransparencyStoreModule (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (ref), var1 (ref), sendPresetModule (ref), presetChatContainer (ref), textChatService (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), presetMessageButtonModule (ref), text (ref), presetCooldownProviderModule (ref)
 	local var2 = foundationModule.Hooks.useTokens()
 	local var3 = getPresetChatStoreModule(false)
 	local var4 = useDispatch()
 	local var5 = signalsReactModule.useSignalState(var3.getIsLoading)
 	local var6 = signalsReactModule.useSignalState(var3.getCategoryGroups)
-	local var7 = if fFlagExpChatUseMessagesStore then signalsReactModule.useSignalState(getMessagesStoreModule(false).getCanLocalUserChat) else useSelector(function(p1)
-		return p1.CanLocalUserChat
-	end)
+	local var7 = signalsReactModule.useSignalState(getMessagesStoreModule(false).getCanLocalUserChat)
 	local var8 = localizationModule.useLocalization({ footerDescription = "Feature.Chat.PresetChat.Disclaimer" })
 	local var9 = reactModule.useCallback(function()
 		-- upvalues: setIsPresetTrayOpenModule (copy), var3 (ref)

@@ -6,17 +6,19 @@ local signalsReactModule = require(parent_1.SignalsReact)
 local localizationService = game:GetService("LocalizationService")
 local numberLocalization = require(parent_1.Localization).NumberLocalization
 local constantsModule = require(parent.Common.Constants)
+local formatStatStringModule = require(parent.Common.FormatStatString)
 local leaderboardRowShellModule = require(parent.Components.Presentation.LeaderboardRowShell)
 local leaderboardTextCellModule = require(parent.Components.Presentation.LeaderboardTextCell)
 local peopleCellModule = require(parent.Components.Presentation.PeopleCell)
+local fFlagPlayerListPlatformLeaderboardAbbreviateScoresModule = require(parent.Flags.FFlagPlayerListPlatformLeaderboardAbbreviateScores)
 local _ = { Rank = "Rank", People = "People", Score = "-" }
 local var1 = signalsModule.createSignal(nil)
 local platformLeaderboardUnrankedLabel = game:DefineFastString("PlatformLeaderboardUnrankedLabel", "100+")
 local var2 = signalsModule.createSignal(nil)
 
 local function formatScoreCell(p1)
-	-- upvalues: numberLocalization (ref), localizationService (ref)
-	return if p1 == nil then "-" else numberLocalization.localize(p1, localizationService.RobloxLocaleId)
+	-- upvalues: fFlagPlayerListPlatformLeaderboardAbbreviateScoresModule (ref), formatStatStringModule (ref), numberLocalization (ref), localizationService (ref)
+	return if fFlagPlayerListPlatformLeaderboardAbbreviateScoresModule then formatStatStringModule(p1) elseif p1 == nil then "-" else numberLocalization.localize(p1, localizationService.RobloxLocaleId)
 end
 
 local function formatRankCell(p1)

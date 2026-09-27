@@ -1,7 +1,8 @@
 ﻿local constantsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.Constants)
+local fFlagFixPromptGameInviteUIMissingDisplayName = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).FFlagFixPromptGameInviteUIMissingDisplayName
 
 return function(p1, p2)
-	-- upvalues: constantsModule (ref)
+	-- upvalues: constantsModule (ref), fFlagFixPromptGameInviteUIMissingDisplayName (ref)
 	local var1 = if p1 and p1.InviteUser ~= 0 then p1.InviteUser else nil
 	local var2, var3 = p2(if var1 then constantsModule.Triggers.DeveloperSingle else constantsModule.Triggers.DeveloperMultiple, var1)
 	
@@ -10,6 +11,9 @@ return function(p1, p2)
 	end
 	local t = {}
 	
+	if fFlagFixPromptGameInviteUIMissingDisplayName and var1 then
+		t.inviteUserId = var1
+	end
 	if var3 and p1 then
 		if p1.InviteMessageId ~= "" then
 			t.inviteMessageId = p1.InviteMessageId

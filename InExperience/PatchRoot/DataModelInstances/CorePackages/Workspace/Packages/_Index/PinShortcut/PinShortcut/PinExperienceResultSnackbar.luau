@@ -2,6 +2,7 @@
 local appBloxModule = require(parent.AppBlox)
 local centralOverlayModule = require(parent.CentralOverlay)
 local localizationModule = require(parent.Localization)
+local loggingProtocolModule = require(parent.LoggingProtocol)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local roactUtilsModule = require(parent.RoactUtils)
@@ -11,12 +12,14 @@ local closeCentralOverlay = centralOverlayModule.Thunks.CloseCentralOverlay
 local enums = foundationModule.Enums
 local getAppFeaturePolicies = universalAppPolicyModule.getAppFeaturePolicies
 local snackbarWrapper = appBloxModule.SnackbarWrapper
+local telemetryCountersModule = require(script.Parent.TelemetryCounters)
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useLocalization = localizationModule.Hooks.useLocalization
 local fFlagAddPinExperienceTargetDestinationGUACPolicy = sharedFlagsModule.FFlagAddPinExperienceTargetDestinationGUACPolicy
+local fFlagPinShortcutSnackbarTelemetryEnabledModule = require(script.Parent.Flags.FFlagPinShortcutSnackbarTelemetryEnabled)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), closeCentralOverlay (ref), useLocalization (ref), fFlagAddPinExperienceTargetDestinationGUACPolicy (ref), getAppFeaturePolicies (ref), enums (ref), snackbarWrapper (ref)
+	-- upvalues: useDispatch (ref), reactModule (ref), closeCentralOverlay (ref), useLocalization (ref), fFlagAddPinExperienceTargetDestinationGUACPolicy (ref), getAppFeaturePolicies (ref), enums (ref), fFlagPinShortcutSnackbarTelemetryEnabledModule (ref), loggingProtocolModule (ref), telemetryCountersModule (ref), snackbarWrapper (ref)
 	local alreadyExists, t
 	local var1 = useDispatch()
 	local var2 = reactModule.useCallback(function()
@@ -67,6 +70,14 @@ return reactModule.memo(function(p1)
 		alreadyExists = if var6 == "Desktop" then var5.failedDesktop else var5.failedHomeScreen
 		t = { name = enums.IconName.TriangleExclamation }
 	end
+	if fFlagPinShortcutSnackbarTelemetryEnabledModule then
+		reactModule.useEffect(function()
+			-- upvalues: var3 (ref), var4 (ref), loggingProtocolModule (copy), telemetryCountersModule (copy)
+			loggingProtocolModule.default:logRobloxTelemetryCounter(telemetryCountersModule.SnackbarShown, 1, {
+				action = if var3 then "Success" elseif var4 then "AlreadyExists" else "Failure"
+			})
+		end, {})
+	end
 	local tryAgain = nil
 	local var7 = nil
 	
@@ -74,7 +85,10 @@ return reactModule.memo(function(p1)
 		tryAgain = var5.viewShortcut
 		
 		var7 = function()
-			-- upvalues: var2 (ref), p1 (ref)
+			-- upvalues: fFlagPinShortcutSnackbarTelemetryEnabledModule (copy), loggingProtocolModule (copy), telemetryCountersModule (copy), var2 (ref), p1 (ref)
+			if fFlagPinShortcutSnackbarTelemetryEnabledModule then
+				loggingProtocolModule.default:logRobloxTelemetryCounter(telemetryCountersModule.SnackbarButtonPressed, 1, { action = "ViewShortcut" })
+			end
 			var2()
 			p1.onViewShortcut()
 		end
@@ -82,7 +96,10 @@ return reactModule.memo(function(p1)
 		tryAgain = var5.tryAgain
 		
 		var7 = function()
-			-- upvalues: var2 (ref), p1 (ref)
+			-- upvalues: fFlagPinShortcutSnackbarTelemetryEnabledModule (copy), loggingProtocolModule (copy), telemetryCountersModule (copy), var2 (ref), p1 (ref)
+			if fFlagPinShortcutSnackbarTelemetryEnabledModule then
+				loggingProtocolModule.default:logRobloxTelemetryCounter(telemetryCountersModule.SnackbarButtonPressed, 1, { action = "TryAgain" })
+			end
 			var2()
 			p1.onRetry()
 		end

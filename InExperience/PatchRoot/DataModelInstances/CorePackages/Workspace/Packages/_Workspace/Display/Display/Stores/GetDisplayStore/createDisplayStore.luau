@@ -12,7 +12,7 @@ local debugLuaAppEnableScale = game:DefineFastFlag("DebugLuaAppEnableScale", fal
 local debugLuaAppEnableScale_1 = debugLuaAppEnableScale or game:DefineFastFlag("FFlagLuaAppEnableWindowsHandheldScale", false) and enableDisplaySizeEngineFeature
 local fFlagDebugForceConsoleSafeInsets = require(parent_1.SharedFlags).FFlagDebugForceConsoleSafeInsets
 local var1 = if fFlagDisableLuaAppConsoleScaleModule then 1 else 1.5
-local var2 = guiService:IsTenFootInterface()
+local var2 = appCommonLibModule.isTenFootInterface()
 
 local function forceConsoleSafeInsets(value)
 	-- upvalues: parent_1 (ref), var1 (ref)

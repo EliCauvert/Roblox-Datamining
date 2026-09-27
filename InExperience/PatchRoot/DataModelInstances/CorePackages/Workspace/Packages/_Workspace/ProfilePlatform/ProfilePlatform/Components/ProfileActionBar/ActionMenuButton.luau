@@ -1,6 +1,9 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
+﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local parent = profilePlatform.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
+local useComposedRef = require(parent.ReactUtils).useComposedRef
+local fFlagProfileGamepadPrimaryActionFocusModule = require(profilePlatform.Flags.FFlagProfileGamepadPrimaryActionFocus)
 local button = foundationModule.Button
 local menu = foundationModule.Menu
 local buttonVariant = foundationModule.Enums.ButtonVariant
@@ -10,9 +13,10 @@ local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
 
 return function(p1)
-	-- upvalues: reactModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref), inputSize (ref), menu (ref), popoverAlign (ref), popoverSide (ref)
+	-- upvalues: reactModule (ref), fFlagProfileGamepadPrimaryActionFocusModule (ref), useComposedRef (ref), button (ref), buttonVariant (ref), fillBehavior (ref), inputSize (ref), menu (ref), popoverAlign (ref), popoverSide (ref)
 	local var1, var2 = reactModule.useState(false)
-	local buttonRef = p1.buttonRef or reactModule.useRef(nil)
+	local var3 = reactModule.useRef(nil)
+	local var4 = if fFlagProfileGamepadPrimaryActionFocusModule then var3 else p1.buttonRef or var3
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		TriggerButton = reactModule.createElement(button, {
@@ -31,13 +35,13 @@ return function(p1)
 			width = UDim.new(1, 0),
 			fillBehavior = fillBehavior.Fill,
 			size = inputSize.Medium,
-			ref = buttonRef,
+			ref = if fFlagProfileGamepadPrimaryActionFocusModule then useComposedRef(var4, p1.buttonRef) else var4,
 			LayoutOrder = p1.LayoutOrder
 		}),
 		ActionMenu = if var1 then reactModule.createElement(menu, {
 			isOpen = true,
 			align = popoverAlign.Start,
-			anchorRef = buttonRef,
+			anchorRef = var4,
 			items = p1.menuItems,
 			onActivated = reactModule.useCallback(function()
 				-- upvalues: var2 (ref)

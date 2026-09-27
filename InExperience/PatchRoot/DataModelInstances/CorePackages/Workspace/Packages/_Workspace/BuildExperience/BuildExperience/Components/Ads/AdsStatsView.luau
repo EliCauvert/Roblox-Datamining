@@ -148,13 +148,12 @@ end
 return function(p3)
 	-- upvalues: reactModule (ref), createAdCampaignSheetContainerModule (ref), text (ref), LoadingSkeleton (ref), promotionCardModule (ref), EmptyState (ref), renderActiveCampaign (ref), view (ref), pastCampaignsListModule (ref)
 	local testId = p3.testId or "AdsStatsView"
-	local t = {}
-	
-	if p3.isPromotionSheetOpen then
-		t.PromotionSheet = reactModule.createElement(createAdCampaignSheetContainerModule, {
-			isOpen = true,
+	local t = {
+		PromotionSheet = reactModule.createElement(createAdCampaignSheetContainerModule, {
 			waitForCreateResult = true,
 			useLocalRunDates = true,
+			freeOriginalPriceRobux = 500,
+			isOpen = p3.isPromotionSheetOpen,
 			onClose = p3.onClosePromotionSheet,
 			onCreate = p3.onCreateCampaign,
 			isCreatePending = p3.isPromotionCreatePending,
@@ -164,7 +163,8 @@ return function(p3)
 			runStartTimeMs = p3.adCampaignRunStartTimeMs,
 			runEndTimeMs = p3.adCampaignRunEndTimeMs
 		})
-	end
+	}
+	
 	if p3.isFailed then
 		t.Error = reactModule.createElement(text, {
 			LayoutOrder = 1,

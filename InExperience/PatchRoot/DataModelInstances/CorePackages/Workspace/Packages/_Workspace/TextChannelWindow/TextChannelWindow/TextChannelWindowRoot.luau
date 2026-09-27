@@ -13,6 +13,9 @@ local chatAvailabilityContextModule = require(script.Parent.ChatAvailabilityCont
 local messageWriterContextModule = require(script.Parent.MessageWriterContext)
 local createChannelMessagesStoreModule = require(script.Parent.createChannelMessagesStore)
 local textChatServiceBridgeModule = require(script.Parent.TextChatServiceBridge)
+local useWelcomeSystemMessageModule = require(script.Parent.useWelcomeSystemMessage)
+local useSummarySystemMessageModule = require(script.Parent.useSummarySystemMessage)
+local thirdPartySummaryEligibilityModule = require(script.Parent.thirdPartySummaryEligibility)
 local textChatService = game:GetService("TextChatService")
 local useLocalUserChatAvailability = chatAvailabilityContextModule.useLocalUserChatAvailability
 local var1 = signalsModule.createSignal({})
@@ -28,7 +31,7 @@ local _ = function(p1)
 end
 
 local function TextChannelWindowRoot(p1)
-	-- upvalues: useTextChannelWindowPropsModule (ref), useLocalUserInTextChannelModule (ref), useLocalUserChatAvailability (ref), reactModule (ref), var1 (ref), useAvailabilitySystemMessageModule (ref), textChannelWindowPerfTracker (ref), textChannelWindowAnalyticsModule (ref), textChatService (ref), signalsModule (ref), chatAppModule (ref)
+	-- upvalues: useTextChannelWindowPropsModule (ref), useLocalUserInTextChannelModule (ref), useLocalUserChatAvailability (ref), reactModule (ref), var1 (ref), useAvailabilitySystemMessageModule (ref), useWelcomeSystemMessageModule (ref), useSummarySystemMessageModule (ref), textChannelWindowPerfTracker (ref), textChannelWindowAnalyticsModule (ref), textChatService (ref), signalsModule (ref), chatAppModule (ref)
 	local var2 = useTextChannelWindowPropsModule(p1.textChannelWindow)
 	local target = var2.target
 	local var3 = if target == nil then "no-channel" elseif not useLocalUserInTextChannelModule(target, p1.localUserId) then "not-member" else "member"
@@ -39,6 +42,8 @@ local function TextChannelWindowRoot(p1)
 		return if var4 then p1.getChannelMessages(var4) else var1
 	end, { var4, p1.getChannelMessages, var1 })
 	useAvailabilitySystemMessageModule(var5, target)
+	useWelcomeSystemMessageModule(var4, p1.localUserId)
+	useSummarySystemMessageModule(var4, p1.getIsEligibleForSummary)
 	local name = p1.textChannelWindow.Name
 	local var7 = reactModule.useRef(false)
 	local loadStartTime = p1.loadStartTime
@@ -119,46 +124,47 @@ local var9 = false
 
 return {
 	start = function()
-		-- upvalues: createChannelMessagesStoreModule (ref), textChannelWindowAnalyticsModule (ref), t_1 (ref), textChatService (ref), t (ref), textChannelWindowPerfTracker (ref), reactModule (ref), textChannelWindowErrorBoundary (ref), messageWriterContextModule (ref), chatAvailabilityContextModule (ref), TextChannelWindowRoot (ref), mountToTargetInstanceModule (ref), var9 (write), onScriptError (ref), textChatServiceBridgeModule (ref)
+		-- upvalues: createChannelMessagesStoreModule (ref), thirdPartySummaryEligibilityModule (ref), textChannelWindowAnalyticsModule (ref), t_1 (ref), textChatService (ref), t (ref), textChannelWindowPerfTracker (ref), reactModule (ref), textChannelWindowErrorBoundary (ref), messageWriterContextModule (ref), chatAvailabilityContextModule (ref), TextChannelWindowRoot (ref), mountToTargetInstanceModule (ref), var9 (write), onScriptError (ref), textChatServiceBridgeModule (ref)
 		local playersService = game:GetService("Players")
 		local localPlayer = playersService.LocalPlayer
 		
 		if not localPlayer then return end
 		local var10 = tostring(localPlayer.UserId)
 		local var11 = createChannelMessagesStoreModule()
+		local var12 = thirdPartySummaryEligibilityModule.create(var10)
 		
 		local function flushWindowStatus(p2)
 			-- upvalues: textChannelWindowAnalyticsModule (copy), t_1 (copy), textChatService (copy)
 			if not textChannelWindowAnalyticsModule.getFFlagExpChatTelemetryEnabled() then return end
-			local var12 = t_1[p2]
+			local var13 = t_1[p2]
 			
-			if var12 then
-				local var13 = os.clock() - var12.lastChangeTime
-				textChatService:SendExpChatWindowStatusChange(var12.closedDuration + (if not var12.isOpen then var13 else 0), var12.openDuration + (if var12.isOpen then var13 else 0), 0, 0, "text_channel_window", p2.Name)
+			if var13 then
+				local var14 = os.clock() - var13.lastChangeTime
+				textChatService:SendExpChatWindowStatusChange(var13.closedDuration + (if not var13.isOpen then var14 else 0), var13.openDuration + (if var13.isOpen then var14 else 0), 0, 0, "text_channel_window", p2.Name)
 				t_1[p2] = nil
 			end
 		end
 		
 		local function onRemoved(p2)
 			-- upvalues: t (copy), textChannelWindowPerfTracker (copy), flushWindowStatus (ref)
-			local var12 = t[p2]
+			local var13 = t[p2]
 			
-			if var12 then
+			if var13 then
 				local target = p2.Target
-				local var13 = if target and target:IsA("TextChannel") then target.Name else nil
+				local var14 = if target and target:IsA("TextChannel") then target.Name else nil
 				
-				if var13 then
-					textChannelWindowPerfTracker.cancelForChannel(var13)
+				if var14 then
+					textChannelWindowPerfTracker.cancelForChannel(var14)
 				end
 				flushWindowStatus(p2)
-				var12()
+				var13()
 				t[p2] = nil
 			end
 		end
 		
 		local function onAdded(p2)
-			-- upvalues: var11 (ref), textChannelWindowAnalyticsModule (copy), reactModule (copy), textChannelWindowErrorBoundary (copy), messageWriterContextModule (copy), chatAvailabilityContextModule (copy), localPlayer (ref), TextChannelWindowRoot (copy), var10 (ref), textChannelWindowPerfTracker (copy), mountToTargetInstanceModule (copy), t (copy), t_1 (copy), flushWindowStatus (ref)
-			local var12 = reactModule.createElement(textChannelWindowErrorBoundary, nil, {
+			-- upvalues: var11 (ref), textChannelWindowAnalyticsModule (copy), reactModule (copy), textChannelWindowErrorBoundary (copy), messageWriterContextModule (copy), chatAvailabilityContextModule (copy), localPlayer (ref), TextChannelWindowRoot (copy), var10 (ref), var12 (ref), textChannelWindowPerfTracker (copy), mountToTargetInstanceModule (copy), t (copy), t_1 (copy), flushWindowStatus (ref)
+			local var13 = reactModule.createElement(textChannelWindowErrorBoundary, nil, {
 				inner = reactModule.createElement(messageWriterContextModule.Provider, {
 					upsertMessage = function(p3)
 						-- upvalues: p2 (ref), var11 (copy)
@@ -182,30 +188,31 @@ return {
 							localUserId = var10,
 							textChannelWindow = p2,
 							getChannelMessages = var11.getMessagesForChannel,
+							getIsEligibleForSummary = var12.getIsEligible,
 							loadStartTime = if textChannelWindowAnalyticsModule.getFFlagExpChatTelemetryEnabled() then os.clock() else nil
 						})
 					})
 				})
 			})
 			textChannelWindowPerfTracker.startMountTTI(p2.Name)
-			local var13 = mountToTargetInstanceModule(p2, var12)
+			local var14 = mountToTargetInstanceModule(p2, var13)
 			
-			if var13 then
-				t[p2] = var13
-				local target = p2.Target
-				local var14 = if target and target:IsA("TextChannel") then target.Name else nil
-				textChannelWindowAnalyticsModule.emit(textChannelWindowAnalyticsModule.Counters.Mount, {
-					result = "success",
-					has_target = var14 ~= nil,
-					target_text_channel_category = textChannelWindowAnalyticsModule.getChannelCategory(var14)
-				})
-			else
+			if var14 then
+				t[p2] = var14
 				local target = p2.Target
 				local var15 = if target and target:IsA("TextChannel") then target.Name else nil
 				textChannelWindowAnalyticsModule.emit(textChannelWindowAnalyticsModule.Counters.Mount, {
-					result = "failed",
+					result = "success",
 					has_target = var15 ~= nil,
 					target_text_channel_category = textChannelWindowAnalyticsModule.getChannelCategory(var15)
+				})
+			else
+				local target = p2.Target
+				local var16 = if target and target:IsA("TextChannel") then target.Name else nil
+				textChannelWindowAnalyticsModule.emit(textChannelWindowAnalyticsModule.Counters.Mount, {
+					result = "failed",
+					has_target = var16 ~= nil,
+					target_text_channel_category = textChannelWindowAnalyticsModule.getChannelCategory(var16)
 				})
 			end
 			if textChannelWindowAnalyticsModule.getFFlagExpChatTelemetryEnabled() then
@@ -217,16 +224,16 @@ return {
 				}
 				p2:GetPropertyChangedSignal("IsRendering"):Connect(function()
 					-- upvalues: t_1 (copy), p2 (ref)
-					local var16 = t_1[p2]
+					local var17 = t_1[p2]
 					
-					if var16 then
+					if var17 then
 						local processTime = os.clock()
-						local var17 = processTime - var16.lastChangeTime
+						local var18 = processTime - var17.lastChangeTime
 						t_1[p2] = {
 							isOpen = p2.IsRendering == true,
 							lastChangeTime = processTime,
-							openDuration = var16.openDuration + (if var16.isOpen then var17 else 0),
-							closedDuration = var16.closedDuration + (if not var16.isOpen then var17 else 0)
+							openDuration = var17.openDuration + (if var17.isOpen then var18 else 0),
+							closedDuration = var17.closedDuration + (if not var17.isOpen then var18 else 0)
 						}
 					end
 				end)
@@ -234,19 +241,19 @@ return {
 			p2.AncestryChanged:Connect(function()
 				-- upvalues: p2 (ref), t (copy), textChannelWindowPerfTracker (copy), flushWindowStatus (copy)
 				if not p2:IsDescendantOf(game) then
-					local var16 = p2
-					local var17 = t[var16]
+					local var17 = p2
+					local var18 = t[var17]
 					
-					if var17 then
-						local target = var16.Target
-						local var18 = if target and target:IsA("TextChannel") then target.Name else nil
+					if var18 then
+						local target = var17.Target
+						local var19 = if target and target:IsA("TextChannel") then target.Name else nil
 						
-						if var18 then
-							textChannelWindowPerfTracker.cancelForChannel(var18)
+						if var19 then
+							textChannelWindowPerfTracker.cancelForChannel(var19)
 						end
-						flushWindowStatus(var16)
-						var17()
-						t[var16] = nil
+						flushWindowStatus(var17)
+						var18()
+						t[var17] = nil
 					end
 				end
 			end)

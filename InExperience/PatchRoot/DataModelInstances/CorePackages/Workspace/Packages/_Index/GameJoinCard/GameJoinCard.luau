@@ -10,6 +10,7 @@ return {
 	DesktopGameJoinCardContainer = require(script.Components.DesktopGameJoinCard.DesktopGameJoinCardContainer),
 	GamepadJoinFocusBehavior = require(script.Components.DesktopGameJoinCard.GamepadJoinFocusBehavior),
 	useGameJoinCardNavigation = require(script.Components.DesktopGameJoinCard.useGameJoinCardNavigation),
+	useJoinUserActions = require(script.Hooks.useJoinUserActions),
 	usePrefetchInGameFriendsMedia = require(script.Hooks.usePrefetchInGameFriendsMedia),
 	MobileGameJoinCard = require(script.Components.MobileGameJoinCard),
 	Telemetry = {

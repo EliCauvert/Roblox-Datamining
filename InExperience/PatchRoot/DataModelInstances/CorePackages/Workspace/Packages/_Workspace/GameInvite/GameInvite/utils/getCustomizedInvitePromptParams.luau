@@ -1,8 +1,11 @@
-﻿local getCustomizedInvitePromptUserIdModule = require(script.Parent.getCustomizedInvitePromptUserId)
-local _ = require(script:FindFirstAncestor("GameInvite").gameInviteModalType)
+﻿local gameInvite = script:FindFirstAncestor("GameInvite")
+local parent = gameInvite.Parent
+local getCustomizedInvitePromptUserIdModule = require(script.Parent.getCustomizedInvitePromptUserId)
+local _ = require(gameInvite.gameInviteModalType)
+local fFlagFixPromptGameInviteUIMissingDisplayName = require(parent.SharedFlags).FFlagFixPromptGameInviteUIMissingDisplayName
 
 return function(p1, p2, p3)
-	-- upvalues: getCustomizedInvitePromptUserIdModule (ref)
+	-- upvalues: getCustomizedInvitePromptUserIdModule (ref), fFlagFixPromptGameInviteUIMissingDisplayName (ref)
 	local var1 = getCustomizedInvitePromptUserIdModule(p1)
 	local var2, var3 = p3(p2, var1)
 	
@@ -11,6 +14,9 @@ return function(p1, p2, p3)
 	end
 	local t = { trigger = p2 }
 	
+	if fFlagFixPromptGameInviteUIMissingDisplayName and var1 then
+		t.inviteUserId = var1
+	end
 	if var3 and p1 then
 		if p1.InviteMessageId ~= "" then
 			t.inviteMessageId = p1.InviteMessageId

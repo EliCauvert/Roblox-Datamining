@@ -1,15 +1,18 @@
-﻿local textService = game:GetService("TextService")
-local parent = script.Parent.Parent
+﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent
+local textService = game:GetService("TextService")
 local reactModule = require(parent_1.React)
 local UIBloxModule = require(parent_1.UIBlox)
 local cryoModule = require(parent_1.Cryo)
+local foundationModule = require(parent_1.Foundation)
+local getTextSize = require(parent_1.Style).GetTextSize
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local useStyle = UIBloxModule.Core.Style.useStyle
 local headerBar = UIBloxModule.App.Bar.HeaderBar
 local utilityActionIcon = UIBloxModule.App.Button.UtilityActionIcon
 local sharedFlagsModule = require(parent_1.SharedFlags)
 local fFlagEnableConsoleRobloxLogo = sharedFlagsModule.FFlagEnableConsoleRobloxLogo
-local fFlagLuaAppCompositionTopBarFullBleed = sharedFlagsModule.FFlagLuaAppCompositionTopBarFullBleed
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local appHeaderBarUseSizeFull = game:DefineFastFlag("AppHeaderBarUseSizeFull", false)
 local fFlagEnableClassicThemeHeaderBackground = sharedFlagsModule.FFlagEnableClassicThemeHeaderBackground
 local var1 = if fFlagEnableClassicThemeHeaderBackground then require(script.Parent.AppHeaderBarClassicThemeBackground) else nil
@@ -25,7 +28,7 @@ local t = {
 }
 
 local function BarTitle(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), textService (ref), cryoModule (ref)
+	-- upvalues: useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), normalizeFontFace (ref), cryoModule (ref)
 	local tokens = useStyle().Tokens
 	local layoutOrder = p1.layoutOrder
 	local title = p1.title
@@ -37,13 +40,15 @@ local function BarTitle(p1)
 		TextWrapped = true,
 		LayoutOrder = layoutOrder,
 		Size = reactModule.useMemo(function()
-			-- upvalues: textService (copy), title (ref), titleFont (ref), tokens (ref)
-			local var4 = textService:GetTextSize(title, titleFont.FontSize, titleFont.Font, Vector2.new(1e999, 1e999))
+			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), title (ref), titleFont (ref), textService (copy), tokens (ref)
+			local vector2 = Vector2.new(1e999, 1e999)
+			local var4 = if foundationFontFaceMigration then getTextSize(title, titleFont.FontSize, titleFont.Font, vector2, { addTemporaryPadding = false }) else textService:GetTextSize(title, titleFont.FontSize, titleFont.Font, vector2)
 			
 			return UDim2.fromOffset(var4.X + 2, var4.Y + tokens.Size.Size_50 * 2)
 		end, { title, titleFont.FontSize, titleFont.Font, tokens }),
 		Text = title,
-		Font = titleFont.Font,
+		Font = if foundationFontFaceMigration then nil else titleFont.Font,
+		FontFace = if foundationFontFaceMigration then normalizeFontFace(titleFont.Font) else nil,
 		TextSize = titleFont.FontSize,
 		LineHeight = titleFont.LineHeight,
 		TextColor3 = var3.Color3,
@@ -173,7 +178,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useRenderLeft (ref), useRenderCenter (ref), useRenderRight (ref), fFlagEnableClassicThemeHeaderBackground (ref), var2 (ref), reactModule (ref), fFlagLuaAppCompositionTopBarFullBleed (ref), var1 (ref), headerBar (ref)
+	-- upvalues: cryoModule (ref), t (ref), useRenderLeft (ref), useRenderCenter (ref), useRenderRight (ref), fFlagEnableClassicThemeHeaderBackground (ref), var2 (ref), reactModule (ref), var1 (ref), headerBar (ref)
 	local var3 = cryoModule.Dictionary.join(t, p1)
 	local barHeight = var3.barHeight
 	local zIndex = var3.zIndex
@@ -223,7 +228,7 @@ return function(p1)
 		GroupTransparency = if groupTransparency then groupTransparency.transparency else nil,
 		ref = if fFlagEnableClassicThemeHeaderBackground then searchActionIcon elseif groupTransparency then groupTransparency.guiObjectRef else nil,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		[reactModule.Tag] = if fFlagLuaAppCompositionTopBarFullBleed then tag else nil
+		[reactModule.Tag] = tag
 	}, {
 		HeaderImageBackground = if avatarActionIcon then reactModule.createElement(var1, { config = renderUserInfo, containerRef = var8 }) else nil,
 		Bar = reactModule.createElement(headerBar, {

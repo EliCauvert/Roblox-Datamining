@@ -25,6 +25,7 @@ local useExperienceShareFlowModule = require(buildExperience.utils.useExperience
 local gameConfigurationListModule = require(script.Parent.Parent.GameConfigurationList.GameConfigurationList)
 local getPrivatePlaytestersStore = require(parent.DataHydration.PrivatePlaytesters).getPrivatePlaytestersStore
 local fFlagBuildExperiencePrivateInvitesModule = require(buildExperience.Flags.FFlagBuildExperiencePrivateInvites)
+local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local text = foundationModule.Text
 local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
@@ -32,7 +33,7 @@ local captureServiceStartUploadCoreScriptBypass = sharedFlagsModule.FFlagMyStats
 local privacyType = universeConfigurationModule.PrivacyType
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationModule (ref), useOpenWebView (ref), useArchiveGameFlowModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), useExperienceShareFlowModule (ref), universeConfigurationModule (ref), experienceGuidelinesModule (ref), signalsReactModule (ref), gameConfigurationLabelsModule (ref), privacyType (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), captureServiceStartUploadCoreScriptBypass (ref), iconName (ref), getPrivatePlaytestersStore (ref), signalsModule (ref), view (ref), gameConfigurationListModule (ref), buildMaturityBannerModule (ref), text (ref), archiveGameDialogModule (ref), experienceShareOverlaysModule (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationModule (ref), useOpenWebView (ref), useArchiveGameFlowModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), useExperienceShareFlowModule (ref), universeConfigurationModule (ref), experienceGuidelinesModule (ref), signalsReactModule (ref), gameConfigurationLabelsModule (ref), privacyType (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), captureServiceStartUploadCoreScriptBypass (ref), iconName (ref), getPrivatePlaytestersStore (ref), signalsModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), view (ref), gameConfigurationListModule (ref), buildMaturityBannerModule (ref), text (ref), archiveGameDialogModule (ref), experienceShareOverlaysModule (ref)
 	local testId = p1.testId or "game-configuration-content"
 	local var1 = useLocalization({
 		access = localizationStringsModule.GAME_CONFIGURATION_ACCESS,
@@ -43,6 +44,9 @@ return function(p1)
 		contentRating = localizationStringsModule.GAME_CONFIGURATION_CONTENT_RATING,
 		creatorHub = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
 		creatorHubDescription = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB_DESCRIPTION,
+		gameConfiguration = localizationStringsModule.GAME_CONFIGURATION_GAME_CONFIGURATION,
+		gameConfigurationBody = localizationStringsModule.GAME_CONFIGURATION_GAME_CONFIGURATION_BODY,
+		salesOptions = localizationStringsModule.GAME_CONFIGURATION_SALES_OPTIONS,
 		friendsOnlyAudience = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_FRIENDS_ONLY,
 		gameDetails = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS,
 		gameDetailsBody = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS_BODY,
@@ -192,7 +196,61 @@ return function(p1)
 		title = privateInvitesRowTitle,
 		description = if var24 == "Failed" then privateInvitesRowLoadError else loading
 	} else nil
+	local var26 = reactModule.useMemo(function()
+		-- upvalues: audience (ref), var10 (write), p1 (ref), var25 (write), privateInvitesShareLink (ref), var6 (ref), contentRating (ref), var17 (ref), iconName (copy), var19 (ref)
+		local list = {
+			{
+				id = "audience",
+				trailingIcon = nil,
+				title = audience,
+				description = var10,
+				onActivated = p1.onOpenAudiencePage
+			}
+		}
+		
+		if var25 ~= nil then
+			table.insert(list, var25)
+			table.insert(list, {
+				id = "playtest-share-link",
+				trailingIcon = nil,
+				title = privateInvitesShareLink,
+				onActivated = var6
+			})
+		end
+		table.insert(list, {
+			id = "content-rating",
+			title = contentRating,
+			description = var17,
+			trailingIcon = iconName.ArrowUpRightFromSquare,
+			onActivated = var19
+		})
+		
+		return list
+	end, {
+		var10, var17, var19, var25, var6, p1.onOpenAudiencePage, audience,
+		contentRating, privateInvitesShareLink
+	})
+	local var27 = reactModule.useMemo(function()
+		-- upvalues: creatorHub (ref), creatorHubDescription (ref), iconName (copy), var18 (ref)
+		return {
+			{
+				id = "creator-hub",
+				title = creatorHub,
+				description = creatorHubDescription,
+				trailingIcon = iconName.ArrowUpRightFromSquare,
+				onActivated = var18
+			}
+		}
+	end, { creatorHub, creatorHubDescription, var18 })
+	local t = {}
 	
+	if fFlagBuildExperienceMonetizationNativeUIModule then
+		table.insert(t, {
+			id = "sales-options",
+			title = var1.salesOptions,
+			onActivated = p1.onOpenMonetizationPage
+		})
+	end
 	return reactModule.createElement(view, {
 		tag = "col gap-xlarge size-full-0 auto-y padding-y-large",
 		LayoutOrder = p1.layoutOrder,
@@ -213,64 +271,27 @@ return function(p1)
 				layoutOrder = 1,
 				title = if var21 then accessAndSharing else access,
 				body = accessBody,
-				rows = reactModule.useMemo(function()
-					-- upvalues: audience (ref), var10 (write), p1 (ref), var25 (write), privateInvitesShareLink (ref), var6 (ref), contentRating (ref), var17 (ref), iconName (copy), var19 (ref)
-					local list = {
-						{
-							id = "audience",
-							trailingIcon = nil,
-							title = audience,
-							description = var10,
-							onActivated = p1.onOpenAudiencePage
-						}
-					}
-					
-					if var25 ~= nil then
-						table.insert(list, var25)
-						table.insert(list, {
-							id = "playtest-share-link",
-							trailingIcon = nil,
-							title = privateInvitesShareLink,
-							onActivated = var6
-						})
-					end
-					table.insert(list, {
-						id = "content-rating",
-						title = contentRating,
-						description = var17,
-						trailingIcon = iconName.ArrowUpRightFromSquare,
-						onActivated = var19
-					})
-					
-					return list
-				end, {
-					var10, var17, var19, var25, var6, p1.onOpenAudiencePage, audience,
-					contentRating, privateInvitesShareLink
-				}),
+				rows = var26,
 				testId = `{testId}-access`
 			}),
 			BuildMaturityBanner = if var11 ~= nil then nil else reactModule.createElement(buildMaturityBannerModule, { text = var11 })
 		}),
-		CreatorHub = reactModule.createElement(gameConfigurationListModule, {
+		GameConfiguration = if fFlagBuildExperienceMonetizationNativeUIModule then reactModule.createElement(gameConfigurationListModule, {
 			layoutOrder = 3,
+			title = var1.gameConfiguration,
+			body = var1.gameConfigurationBody,
+			rows = t,
+			testId = `{testId}-game-configuration`
+		}) else nil,
+		CreatorHub = reactModule.createElement(gameConfigurationListModule, {
+			layoutOrder = if fFlagBuildExperienceMonetizationNativeUIModule then 4 else 3,
 			title = creatorHub,
-			rows = reactModule.useMemo(function()
-				-- upvalues: creatorHub (ref), creatorHubDescription (ref), iconName (copy), var18 (ref)
-				return {
-					{
-						id = "creator-hub",
-						title = creatorHub,
-						description = creatorHubDescription,
-						trailingIcon = iconName.ArrowUpRightFromSquare,
-						onActivated = var18
-					}
-				}
-			end, { creatorHub, creatorHubDescription, var18 }),
+			rows = var27,
 			testId = `{testId}-creator-hub`
 		}),
 		ArchiveGame = reactModule.createElement(view, {
-			LayoutOrder = 4,
 			tag = "row align-y-center size-full-0 auto-y padding-large stroke-standard stroke-default radius-large bg-surface-0",
+			LayoutOrder = if fFlagBuildExperienceMonetizationNativeUIModule then 5 else 4,
 			onActivated = reactModule.useCallback(function()
 				-- upvalues: var4 (ref), p1 (ref)
 				var4.requestArchive(p1.universeId)

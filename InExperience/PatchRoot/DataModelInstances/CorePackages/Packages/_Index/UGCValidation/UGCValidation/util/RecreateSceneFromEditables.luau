@@ -1,13 +1,11 @@
 ﻿local parent = script.Parent.Parent
 local _ = require(parent.util.Types)
 local assetService = game:GetService("AssetService")
-local getFFlagUGCValidationAddPBRToSharedDataModule = require(parent.flags.getFFlagUGCValidationAddPBRToSharedData)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local rigBuilderModule = require(parent.util.RigBuilder)
 local buildEmoteKeyframeSequenceFromCurveAnimModule = require(parent.util.buildEmoteKeyframeSequenceFromCurveAnim)
 local getEngineFeatureEngineUGCValidateEmoteAnimationExportModule = require(parent.flags.getEngineFeatureEngineUGCValidateEmoteAnimationExport)
-local getFFlagUGCValidationAddGeometryToExportsModule = require(parent.flags.getFFlagUGCValidationAddGeometryToExports)
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 local t = {}
 
@@ -22,34 +20,30 @@ local function createCagePart(p1, p2, p3, p4)
 end
 
 local function copyMeshPart(p1, p2, p3)
-	-- upvalues: assetService (ref), getFFlagUGCValidationAddPBRToSharedDataModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), r15plusUtilsModule (ref)
+	-- upvalues: assetService (ref), getFFlagUGCValidateAllowEmissivesModule (ref), r15plusUtilsModule (ref)
 	local editable = assetService:CreateMeshPartAsync(Content.fromObject(p2.editable))
 	
-	if getFFlagUGCValidationAddPBRToSharedDataModule() then
-		if p3 and not p3.isPBR and p3.Texture then
-			editable.TextureContent = Content.fromObject(p3.Texture.editable)
-		elseif p3 and p3.isPBR then
-			local surfaceAppearance = Instance.new("SurfaceAppearance")
-			
-			if p3.ColorMap then
-				surfaceAppearance.ColorMapContent = Content.fromObject(p3.ColorMap.editable)
-			end
-			if p3.MetalnessMap then
-				surfaceAppearance.MetalnessMapContent = Content.fromObject(p3.MetalnessMap.editable)
-			end
-			if p3.NormalMap then
-				surfaceAppearance.NormalMapContent = Content.fromObject(p3.NormalMap.editable)
-			end
-			if p3.RoughnessMap then
-				surfaceAppearance.RoughnessMapContent = Content.fromObject(p3.RoughnessMap.editable)
-			end
-			if getFFlagUGCValidateAllowEmissivesModule() and p3.EmissiveMask then
-				surfaceAppearance.EmissiveMaskContent = Content.fromObject(p3.EmissiveMask.editable)
-			end
-			surfaceAppearance.Parent = editable
+	if p3 and not p3.isPBR and p3.Texture then
+		editable.TextureContent = Content.fromObject(p3.Texture.editable)
+	elseif p3 and p3.isPBR then
+		local surfaceAppearance = Instance.new("SurfaceAppearance")
+		
+		if p3.ColorMap then
+			surfaceAppearance.ColorMapContent = Content.fromObject(p3.ColorMap.editable)
 		end
-	elseif p3 then
-		editable.TextureContent = Content.fromObject(p3.editable)
+		if p3.MetalnessMap then
+			surfaceAppearance.MetalnessMapContent = Content.fromObject(p3.MetalnessMap.editable)
+		end
+		if p3.NormalMap then
+			surfaceAppearance.NormalMapContent = Content.fromObject(p3.NormalMap.editable)
+		end
+		if p3.RoughnessMap then
+			surfaceAppearance.RoughnessMapContent = Content.fromObject(p3.RoughnessMap.editable)
+		end
+		if getFFlagUGCValidateAllowEmissivesModule() and p3.EmissiveMask then
+			surfaceAppearance.EmissiveMaskContent = Content.fromObject(p3.EmissiveMask.editable)
+		end
+		surfaceAppearance.Parent = editable
 	end
 	editable.Name = p1.Name
 	editable.Size = p1.Size
@@ -115,7 +109,7 @@ local function createEmoteExportScene(p7)
 end
 
 function t.createModelForGltfExport(p7)
-	-- upvalues: getEngineFeatureEngineUGCValidateEmoteAnimationExportModule (ref), validationEnumsModule (ref), createEmoteExportScene (ref), copyMeshPart (ref), createCagePart (ref), getFFlagUGCValidationAddGeometryToExportsModule (ref)
+	-- upvalues: getEngineFeatureEngineUGCValidateEmoteAnimationExportModule (ref), validationEnumsModule (ref), createEmoteExportScene (ref), copyMeshPart (ref), createCagePart (ref)
 	if getEngineFeatureEngineUGCValidateEmoteAnimationExportModule() and p7.uploadCategory == validationEnumsModule.UploadCategory.EMOTE_ANIMATION then
 		return createEmoteExportScene(p7)
 	end
@@ -143,7 +137,7 @@ function t.createModelForGltfExport(p7)
 			if var7 then
 				createCagePart(var5, var4, var7, "InnerCage").Parent = model
 			end
-			if getFFlagUGCValidationAddGeometryToExportsModule() and p7.uploadCategory == validationEnumsModule.UploadCategory.FULL_BODY then
+			if p7.uploadCategory == validationEnumsModule.UploadCategory.FULL_BODY then
 				var5.Name = `{name}_Geo`
 			end
 		end

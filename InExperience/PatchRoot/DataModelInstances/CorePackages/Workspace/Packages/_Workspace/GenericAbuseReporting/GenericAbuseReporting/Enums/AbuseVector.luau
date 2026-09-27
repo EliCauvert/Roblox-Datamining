@@ -13,6 +13,7 @@
 	Invalid = "invalid",
 	Looks = "looks",
 	MomentsFeed = "moments_feed",
+	MomentComment = "moment_comment",
 	Notifications = "notifications",
 	Place = "place",
 	Subscription = "subscriptions",

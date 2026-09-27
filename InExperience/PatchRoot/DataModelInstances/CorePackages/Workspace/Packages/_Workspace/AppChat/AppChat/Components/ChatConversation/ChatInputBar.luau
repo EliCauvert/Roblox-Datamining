@@ -22,7 +22,6 @@ local useChatPagePaddingModule = require(appChat.Contexts.ChatPagePadding.useCha
 local useIsSpatial = require(parent.Responsive).useIsSpatial
 local sendButtonClickActionResultModule = require(appChat.Analytics.Enums.SendButtonClickActionResult)
 local _ = require(appChat.types)
-local fFlagAppChatReplyComposeBarContainerModule = require(appChat.Flags.FFlagAppChatReplyComposeBarContainer)
 local fFlagAppChatGamepadSendButtonNavModule = require(appChat.Flags.FFlagAppChatGamepadSendButtonNav)
 local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
 local useChatWideModeFocusModule = require(appChat.Contexts.ChatWideModeFocus.useChatWideModeFocus)
@@ -57,7 +56,7 @@ local function heightOfNLines(p1, p2, p3, p4)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), userInputService (ref), useChatPagePaddingModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), useChatWideModeFocusModule (ref), foundationModule (ref), useStyle (ref), heightOfNLines (ref), useKeystrokeCollectionModule (ref), isMessageValidModule (ref), text (ref), sendButtonClickActionResultModule (ref), isKeyCodePressedModule (ref), useInputConnectionsModule (ref), fFlagAppChatReplyComposeBarContainerModule (ref), useIsSpatial (ref), fFlagAppChatGamepadSendButtonNavModule (ref), chatInputBoxDisabledModule (ref), callbackInputBox (ref), builderIconsModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), userInputService (ref), useChatPagePaddingModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), useChatWideModeFocusModule (ref), foundationModule (ref), useStyle (ref), heightOfNLines (ref), useKeystrokeCollectionModule (ref), isMessageValidModule (ref), text (ref), sendButtonClickActionResultModule (ref), isKeyCodePressedModule (ref), useInputConnectionsModule (ref), useIsSpatial (ref), fFlagAppChatGamepadSendButtonNavModule (ref), chatInputBoxDisabledModule (ref), callbackInputBox (ref), builderIconsModule (ref)
 	local var1 = cryoModule.Dictionary.union(t, p1)
 	local var2, var3 = reactModule.useState(0)
 	local var4, var5 = reactModule.useState(0)
@@ -168,8 +167,8 @@ return reactModule.memo(function(p1)
 		onFocusLost = var1.onFocusLost
 	})
 	local var28 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: text (copy), font (ref), var20 (ref), var21 (ref), fFlagAppChatReplyComposeBarContainerModule (copy), var18 (ref), var1 (ref)
-		local var29 = var20 + math.min(text.GetTextHeight(p2, font, var20, p3), var21) + (if fFlagAppChatReplyComposeBarContainerModule then 0 else var18.Padding.Medium * 2)
+		-- upvalues: text (copy), font (ref), var20 (ref), var21 (ref), var1 (ref)
+		local var29 = var20 + math.min(text.GetTextHeight(p2, font, var20, p3), var21)
 		
 		if var1.onHeightChanged then
 			var1.onHeightChanged(var29)
@@ -254,7 +253,6 @@ return reactModule.memo(function(p1)
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = {
-			["padding-y-medium"] = not fFlagAppChatReplyComposeBarContainerModule,
 			["padding-x-xlarge"] = not moreMenuEnabled,
 			fill = moreMenuEnabled
 		},

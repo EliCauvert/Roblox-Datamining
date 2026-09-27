@@ -80,7 +80,7 @@ function t_1.cancelPendingTaskIfNeeded(p1)
 	p1._pendingHideAnimation = var1
 end
 
-function t_1.create(p1, p2)
+function t_1.create(p1, p2, p3)
 	-- upvalues: otterModule (ref), var1 (ref), t_1 (ref)
 	local var2 = nil
 	
@@ -92,12 +92,14 @@ function t_1.create(p1, p2)
 	end
 	if var2 == nil then
 		return nil
+	elseif p3 then
+		var2.GroupTransparency = 1
 	end
 	p2:set(var2.GroupTransparency == 0)
-	local var3 = otterModule.createSingleMotor(0)
-	var3:onStep(function(p3)
+	local var3 = otterModule.createSingleMotor(if p3 then 1 else 0)
+	var3:onStep(function(p4)
 		-- upvalues: var2 (write), p2 (ref)
-		var2.GroupTransparency = p3
+		var2.GroupTransparency = p4
 		p2:set(var2.GroupTransparency == 0)
 	end)
 	local t = {

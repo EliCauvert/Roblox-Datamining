@@ -11,6 +11,13 @@ return function()
 	
 	return {
 		getFilters = var1,
+		reset = function()
+			-- upvalues: var2 (ref)
+			var2({
+				sessionHiddenCommentIds = {},
+				recentlyBlockedAuthorIds = {}
+			})
+		end,
 		hideCommentForSession = function(p1)
 			-- upvalues: var1 (ref), var2 (ref)
 			local var3 = var1(false)

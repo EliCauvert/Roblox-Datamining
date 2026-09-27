@@ -2,22 +2,19 @@
 local parent = genericAbuseReporting.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local useDefaultTags = foundationModule.Hooks.useDefaultTags
 local view = foundationModule.View
 local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
 local analyticsServiceModule = require(genericAbuseReporting.BeduiV2.Analytics.analyticsService)
 local textWithTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
 local _ = require(genericAbuseReporting.BeduiV2.Utils.Translate.translate)
-local fFlagAbuseReportDensifyResolvedArraysModule = require(genericAbuseReporting.Flags.FFlagAbuseReportDensifyResolvedArrays)
-local fFlagAbuseReportLinkOpenedAnalytics = sharedFlagsModule.FFlagAbuseReportLinkOpenedAnalytics
 local linkOpenedSource = analyticsServiceModule.LinkOpenedSource
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDefaultTags (ref), fFlagAbuseReportDensifyResolvedArraysModule (ref), reactModule (ref), textWithTranslationModule (ref), fFlagAbuseReportLinkOpenedAnalytics (ref), linkOpenedSource (ref), view (ref)
+	-- upvalues: useDefaultTags (ref), reactModule (ref), textWithTranslationModule (ref), linkOpenedSource (ref), view (ref)
 	local var1 = useDefaultTags(p1.additionalTag, "col gap-small size-full-0 auto-y")
 	
-	if not p1.footerItems or fFlagAbuseReportDensifyResolvedArraysModule and #p1.footerItems == 0 then
+	if not p1.footerItems or #p1.footerItems == 0 then
 		return nil
 	end
 	local t = {}
@@ -26,10 +23,9 @@ return reactModule.memo(function(p1)
 		table.insert(t, reactModule.createElement(textWithTranslationModule, {
 			tag = "auto-xy text-body-small",
 			input = v.label,
-			linkId = if fFlagAbuseReportLinkOpenedAnalytics then v.id else nil,
-			linkSource = if fFlagAbuseReportLinkOpenedAnalytics then linkOpenedSource.Footer else nil,
-			layoutOrder = if fFlagAbuseReportDensifyResolvedArraysModule then i else nil,
-			LayoutOrder = if fFlagAbuseReportDensifyResolvedArraysModule then nil else i
+			linkId = v.id,
+			linkSource = linkOpenedSource.Footer,
+			layoutOrder = i
 		}))
 	end
 	return reactModule.createElement(view, {

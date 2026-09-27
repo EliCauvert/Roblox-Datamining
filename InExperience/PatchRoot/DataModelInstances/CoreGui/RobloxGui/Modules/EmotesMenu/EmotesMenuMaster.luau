@@ -38,6 +38,7 @@ local constants = UIBloxModule.App.Style.Constants
 local uiModeStyleProvider = require(corePackagesService.Workspace.Packages.Style).UiModeStyleProvider
 local canPlayEmotesModule = require(utility.CanPlayEmotes)
 local constantsModule_1 = require(parent.Constants)
+local fFlagFixEmotesMenuAvailabilityModule = require(parent.Flags.FFlagFixEmotesMenuAvailability)
 local emotesMenuModule = require(components.EmotesMenu)
 local emotesMenuReducerModule = require(reducers.EmotesMenuReducer)
 local openMenuModule = require(thunks.OpenMenu)
@@ -173,6 +174,7 @@ function t:_onNumberEmotesLoadedChanged(p1)
 end
 
 function t:_onHumanoidDescriptionChanged(p1)
+	-- upvalues: fFlagFixEmotesMenuAvailabilityModule (ref)
 	if self.equippedEmotesChangedConn then
 		self.equippedEmotesChangedConn:Disconnect()
 		self.equippedEmotesChangedConn = nil
@@ -201,7 +203,12 @@ function t:_onHumanoidDescriptionChanged(p1)
 		end)
 		self:_onEmotesChanged(p1:GetEmotes())
 		self.numberEmotesLoadedChangedConn = p1:GetPropertyChangedSignal("NumberEmotesLoaded"):Connect(function(p2)
-			-- upvalues: self (ref)
+			-- upvalues: fFlagFixEmotesMenuAvailabilityModule (copy), self (ref), p1 (ref)
+			if fFlagFixEmotesMenuAvailabilityModule then
+				self:_onNumberEmotesLoadedChanged(p1.NumberEmotesLoaded)
+				
+				return
+			end
 			self:_onNumberEmotesLoadedChanged(p2)
 		end)
 		self:_onNumberEmotesLoadedChanged(p1.NumberEmotesLoaded)

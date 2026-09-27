@@ -17,7 +17,9 @@ local flyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnaly
 local useOpenFlyoutSidePanelModule = require(script.Parent.Parent.Hooks.useOpenFlyoutSidePanel)
 local useRoactService = require(parent.RobloxAppHooks).useRoactService
 local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
+local roactUtilsModule = require(parent.RoactUtils)
+local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
+local getTestId = roactUtilsModule.getTestId
 local statusIndicator = foundationModule.StatusIndicator
 local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
 local flags = foundationModule.Utility.Flags
@@ -26,6 +28,7 @@ local fFlagLuaAppFixNotificationBadgeCountsSync = require(parent.SharedFlags).FF
 local fFlagEnableFlyoutOnNavRail = require(parent.SharedFlags).FFlagEnableFlyoutOnNavRail
 local fFlagFlyoutUseOpenHook = require(parent.SharedFlags).FFlagFlyoutUseOpenHook
 local fFlagFlyoutHeaderFixPadding = require(parent.SharedFlags).FFlagFlyoutHeaderFixPadding
+local fFlagLuaAppAddTestIdsForArrow = require(parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 
 local function getTotalNotificationCount(p1, p2, p3)
 	-- upvalues: fFlagLuaAppFixNotificationBadgeCountsSync (ref)
@@ -53,7 +56,7 @@ local function getTotalNotificationCount(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: useSelector (ref), fFlagLuaAppFixNotificationBadgeCountsSync (ref), getTotalNotificationCount (ref), useTokens (ref), fFlagFlyoutUseOpenHook (ref), useOpenFlyoutSidePanelModule (ref), useSetDrawerVisible (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), flyoutTooltipManagerModule (ref), useLocalization (ref), coreGuiService (ref), tooltipOrientation (ref), userInputService (ref), fFlagEnableFlyoutOnNavRail (ref), fFlagFlyoutHeaderFixPadding (ref), foundationModule (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), flyoutAlternateEntryPointModule (ref), icon (ref), builderIconsModule (ref), iconSize (ref), withTooltip (ref)
+	-- upvalues: useSelector (ref), fFlagLuaAppFixNotificationBadgeCountsSync (ref), getTotalNotificationCount (ref), useTokens (ref), fFlagFlyoutUseOpenHook (ref), useOpenFlyoutSidePanelModule (ref), useSetDrawerVisible (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), flyoutTooltipManagerModule (ref), useLocalization (ref), coreGuiService (ref), tooltipOrientation (ref), userInputService (ref), fFlagEnableFlyoutOnNavRail (ref), fFlagFlyoutHeaderFixPadding (ref), fFlagLuaAppAddTestIdsForArrow (ref), getTestId (ref), foundationModule (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), flyoutAlternateEntryPointModule (ref), icon (ref), builderIconsModule (ref), iconSize (ref), withTooltip (ref)
 	local var1
 	local var2 = getTotalNotificationCount(useSelector(function(p2)
 		return p2.NotificationBadgeCounts or {}
@@ -143,6 +146,7 @@ return function(p1)
 		Size = UDim2.fromOffset(if fFlagFlyoutHeaderFixPadding then var3.Size.Size_900 else var3.Size.Size_1000, var3.Size.Size_1000),
 		Selectable = if fFlagEnableFlyoutOnNavRail then p1.selectable else nil,
 		[reactModule.Event.Activated] = var1,
+		[reactModule.Tag] = if fFlagLuaAppAddTestIdsForArrow then getTestId("core-ui-flyout-hamburger") else nil,
 		ref = p1.buttonRef
 	}, {
 		StatusIndicatorContainer = if var2 > 0 then reactModule.createElement(foundationModule.View, {

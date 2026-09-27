@@ -14,13 +14,15 @@ local serverJobsDataModule = require(components.ServerJobs.ServerJobsData)
 local debugVisualizationsDataModule = require(components.DebugVisualizations.DebugVisualizationsData)
 local luauHeapDataModule = require(components.LuauHeap.LuauHeapData)
 local voiceChatDataModule = require(components.VoiceChat.VoiceChatData)
+local voiceDebugDataModule = require(components.VoiceDebug.VoiceDebugData)
+local getFFlagVoiceDebugConsoleV2Module = require(components.VoiceDebug.GetFFlagVoiceDebugConsoleV2)
 local dataContextModule = require(components.DataContext)
 local dataProvider = roactModule.Component:extend("DataProvider")
 local voiceChatDevConsoleTabEnabledEngineFeature = game:GetEngineFeature("VoiceChatDevConsoleTabEnabled")
 local devConsoleStartDataOnMount = game:DefineFastFlag("DevConsoleStartDataOnMount", false)
 
 function dataProvider.init(p1)
-	-- upvalues: logDataModule (ref), clientMemoryDataModule (ref), serverMemoryDataModule (ref), networkDataModule (ref), serverScriptsDataModule (ref), dataStoresDataModule (ref), serverStatsDataModule (ref), actionBindingsDataModule (ref), serverJobsDataModule (ref), debugVisualizationsDataModule (ref), luauHeapDataModule (ref), voiceChatDevConsoleTabEnabledEngineFeature (ref), voiceChatDataModule (ref)
+	-- upvalues: logDataModule (ref), clientMemoryDataModule (ref), serverMemoryDataModule (ref), networkDataModule (ref), serverScriptsDataModule (ref), dataStoresDataModule (ref), serverStatsDataModule (ref), actionBindingsDataModule (ref), serverJobsDataModule (ref), debugVisualizationsDataModule (ref), luauHeapDataModule (ref), voiceChatDevConsoleTabEnabledEngineFeature (ref), getFFlagVoiceDebugConsoleV2Module (ref), voiceChatDataModule (ref), voiceDebugDataModule (ref)
 	p1:setState({
 		DevConsoleData = {
 			ClientLogData = logDataModule.new(true),
@@ -36,18 +38,23 @@ function dataProvider.init(p1)
 			ServerJobsData = serverJobsDataModule.new(),
 			DebugVisualizationsData = debugVisualizationsDataModule.new(),
 			LuauHeapData = luauHeapDataModule.new(),
-			VoiceChatData = if voiceChatDevConsoleTabEnabledEngineFeature then voiceChatDataModule.new() else nil
+			VoiceChatData = if voiceChatDevConsoleTabEnabledEngineFeature and not getFFlagVoiceDebugConsoleV2Module() then voiceChatDataModule.new() else nil,
+			VoiceDebugData = if voiceChatDevConsoleTabEnabledEngineFeature and getFFlagVoiceDebugConsoleV2Module() then voiceDebugDataModule.new() else nil
 		}
 	})
 end
 
 function dataProvider.didMount(p1)
-	-- upvalues: voiceChatDevConsoleTabEnabledEngineFeature (ref), devConsoleStartDataOnMount (ref)
+	-- upvalues: voiceChatDevConsoleTabEnabledEngineFeature (ref), getFFlagVoiceDebugConsoleV2Module (ref), devConsoleStartDataOnMount (ref)
 	p1.state.DevConsoleData.ClientLogData:start()
 	p1.state.DevConsoleData.ClientMemoryData:start()
 	
 	if voiceChatDevConsoleTabEnabledEngineFeature then
-		p1.state.DevConsoleData.VoiceChatData:start()
+		if getFFlagVoiceDebugConsoleV2Module() then
+			p1.state.DevConsoleData.VoiceDebugData:start()
+		else
+			p1.state.DevConsoleData.VoiceChatData:start()
+		end
 	end
 	if devConsoleStartDataOnMount and p1.props.isDeveloperView then
 		for i, v in pairs(p1.state.DevConsoleData) do

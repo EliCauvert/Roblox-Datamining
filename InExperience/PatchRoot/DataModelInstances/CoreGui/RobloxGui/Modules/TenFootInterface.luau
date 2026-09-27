@@ -1,9 +1,9 @@
 ﻿local color3 = Color3.new(0.105882352941, 0.988235294118, 0.419607843137)
 local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local guiService = game:GetService("GuiService")
 local playersService = game:GetService("Players")
-local create = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Create
-local var1 = guiService:IsTenFootInterface()
+local corePackagesService = game:GetService("CorePackages")
+local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
+local var1 = require(corePackagesService.Workspace.Packages.AppCommonLib).isTenFootInterface()
 local t = {
 	IsEnabled = function(_)
 		-- upvalues: var1 (ref)

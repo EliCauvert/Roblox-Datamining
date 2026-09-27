@@ -1,6 +1,9 @@
 ﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
 local parent = ampUpsell.Parent
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local reactModule = require(parent.React)
 local roactModule = require(parent.Roact)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
@@ -17,7 +20,7 @@ local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 
 return function(p1)
-	-- upvalues: useLocalization (ref), idvWithQRCodeUpsellStrings (ref), useStyle (ref), analyticsServiceModule (ref), useSelector (ref), reactModule (ref), partialPageModal (ref), sendButtonClickEventModule (ref), appScreensModule (ref), buttonType (ref), directionsTileModule (ref), progressChecklistModule (ref), roactModule (ref), linkButton (ref)
+	-- upvalues: useLocalization (ref), idvWithQRCodeUpsellStrings (ref), useStyle (ref), analyticsServiceModule (ref), useSelector (ref), reactModule (ref), partialPageModal (ref), sendButtonClickEventModule (ref), appScreensModule (ref), buttonType (ref), directionsTileModule (ref), progressChecklistModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), roactModule (ref), linkButton (ref)
 	local featureName = p1.featureName
 	local var1 = useLocalization(idvWithQRCodeUpsellStrings)
 	local var2 = useStyle()
@@ -129,7 +132,8 @@ return function(p1)
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
 					Text = var1.disclaimer,
-					Font = font,
+					Font = if foundationFontFaceMigration then nil else font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodyLarge.Font) else nil,
 					TextSize = var3,
 					TextColor3 = var2.Theme.TextDefault.Color,
 					TextTransparency = transparency,

@@ -24,6 +24,14 @@ return function(p1)
 				var1 = var8 and not isLoading
 			end
 		end
+		local hasGenerated = p1.hasGenerated or p1.hasCleared
+		local var9 = p1.lastGeneratedText ~= p1.lastSavedText
+		local var10 = p1.hasGenerated and (p1.startTime or 0) ~= (p1.lastSavedStartTime or 0)
+		local var11 = hasGenerated
+		
+		if var11 and not var9 then
+			var11 = var10 and (not var2 and (not isLoading and not isError))
+		end
 		return {
 			isGenerating = isLoading,
 			isError = isError,
@@ -31,7 +39,7 @@ return function(p1)
 			isOverLimit = var5,
 			canGenerate = var1,
 			isModerated = var4,
-			showSave = (p1.hasGenerated or p1.hasCleared) and (p1.lastGeneratedText ~= p1.lastSavedText and (not var2 and (not isLoading and not isError)))
+			showSave = var11
 		}
 	end
 end

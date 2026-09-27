@@ -10,7 +10,7 @@ local function _(p1)
 	return `moment-comments-api/v1/moments/{p1}/comments`
 end
 
-return function(p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: constructApiUrlModule (ref), httpClientModule (ref), convertApiCommentToCommentModule (ref)
 	local var1, var2 = constructApiUrlModule(`moment-comments-api/v1/moments/{p1}/comments`)
 	
@@ -21,9 +21,10 @@ return function(p1, p2, p3)
 		headers = var2,
 		body = p2,
 		network = p3,
-		decode = function(p4)
+		statusCodeActions = p4,
+		decode = function(p5)
 			-- upvalues: convertApiCommentToCommentModule (copy)
-			local var3 = convertApiCommentToCommentModule(p4)
+			local var3 = convertApiCommentToCommentModule(p5)
 			assert(var3 ~= nil, "postMomentComment: response was not a Comment")
 			
 			return var3

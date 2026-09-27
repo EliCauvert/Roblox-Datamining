@@ -9,6 +9,7 @@
 	LoginRequests = require(script.LoginRequests),
 	PostGetUserByUsername = require(script.PostGetUserByUsername),
 	PostPasswordValid = require(script.PostPasswordValid),
+	RedeemAuthenticationTicket = require(script.RedeemAuthenticationTicket),
 	LogoutAllLoggedInUsersRequest = require(script.LogoutAllLoggedInUsersRequest),
 	LogoutFromAllSessionsAndReauthenticateRequest = require(script.LogoutFromAllSessionsAndReauthenticateRequest),
 	LogoutRequest = require(script.LogoutRequest),

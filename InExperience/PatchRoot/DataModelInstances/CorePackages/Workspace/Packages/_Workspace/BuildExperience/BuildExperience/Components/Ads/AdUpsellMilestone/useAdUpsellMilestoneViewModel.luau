@@ -1,9 +1,11 @@
-﻿local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
+local reactModule = require(buildExperience.Parent.React)
 local adUpsellVisibilityUtilsModule = require(script.Parent.adUpsellVisibilityUtils)
 local _ = require(script.Parent.AdUpsellMilestoneView)
+local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 
 return function(p1)
-	-- upvalues: reactModule (ref), adUpsellVisibilityUtilsModule (ref)
+	-- upvalues: reactModule (ref), adUpsellVisibilityUtilsModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
 	local var1 = reactModule.useRef(nil)
 	local var2 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
@@ -70,6 +72,7 @@ return function(p1)
 	return {
 		order = p1.order,
 		congratsText = p1.congratsText,
+		freePromotionsRemaining = if fFlagBuildAgentAdCampaignCardModule then p1.freePromotionsRemaining else nil,
 		cardRef = var1,
 		isCreatePending = p1.isCreatePending,
 		onCreate = p1.onCreate,

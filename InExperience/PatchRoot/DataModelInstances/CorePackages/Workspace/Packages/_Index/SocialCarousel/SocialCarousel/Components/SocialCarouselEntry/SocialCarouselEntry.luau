@@ -15,33 +15,27 @@ local useSocialCarouselLoadTimerModule = require(socialCarousel.Analytics.useSoc
 local _ = require(socialCarousel.Analytics.AnalyticsTypes)
 local friendCarouselRefreshThrottleInterval = game:DefineFastInt("FriendCarouselRefreshThrottleInterval", 3)
 local fFlagSocialCarouselShareQREnabled = require(parent.SharedFlags).FFlagSocialCarouselShareQREnabled
-local fFlagEnableDesktopGameJoinCard = require(parent.SharedFlags).FFlagEnableDesktopGameJoinCard
 local carouselModule = require(socialCarousel.Components.Carousel)
 
 return function(p1)
-	-- upvalues: useRoactService (ref), roactAnalytics (ref), appEventIngestService (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselLoadTimerModule (ref), reactModule (ref), useSocialCarouselListModule (ref), fFlagEnableDesktopGameJoinCard (ref), useSocialCarouselUnifiedLoggingModule (ref), useThrottledCallback (ref), friendCarouselRefreshThrottleInterval (ref), socialCarouselContextModule (ref), fFlagSocialCarouselShareQREnabled (ref), carouselModule (ref)
+	-- upvalues: useRoactService (ref), roactAnalytics (ref), appEventIngestService (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselLoadTimerModule (ref), reactModule (ref), useSocialCarouselListModule (ref), useSocialCarouselUnifiedLoggingModule (ref), useThrottledCallback (ref), friendCarouselRefreshThrottleInterval (ref), socialCarouselContextModule (ref), fFlagSocialCarouselShareQREnabled (ref), carouselModule (ref)
 	local var1 = useRoactService(roactAnalytics)
 	local var2 = useRoactService(appEventIngestService)
 	local var3 = useSocialCarouselLoadTimerModule(useSocialCarouselAnalyticsModule().reportLoadingEvent)
 	local var4 = reactModule.useRef(os.clock())
 	local var5 = useSocialCarouselListModule(p1.roduxKey, p1.customTileList)
-	local var6 = nil
-	local var7 = nil
-	
-	if fFlagEnableDesktopGameJoinCard then
-		local var8, var9 = reactModule.useState(nil)
-		var6 = var8
-		var7 = var9
-	end
-	local var10 = useSocialCarouselUnifiedLoggingModule(var1, var2, p1.unifiedLogging, var5, var4)
-	local var11 = useThrottledCallback(function()
+	local _ = nil
+	local _ = nil
+	local var6, var7 = reactModule.useState(nil)
+	local var8 = useSocialCarouselUnifiedLoggingModule(var1, var2, p1.unifiedLogging, var5, var4)
+	local var9 = useThrottledCallback(function()
 		-- upvalues: var5 (ref)
 		var5.refreshFriendsList()
 	end, friendCarouselRefreshThrottleInterval)
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var11 (ref)
+		-- upvalues: p1 (ref), var9 (ref)
 		if p1.refreshSignal then
-			p1.refreshSignal:connect(var11)
+			p1.refreshSignal:connect(var9)
 			
 			return
 		end
@@ -52,9 +46,9 @@ return function(p1)
 			eventIngest = var2,
 			appAnalytics = var1,
 			hideCarouselHeader = p1.hideCarouselHeader,
-			openGameJoinCardUserId = if fFlagEnableDesktopGameJoinCard then var6 else nil,
-			setOpenGameJoinCardUserId = if fFlagEnableDesktopGameJoinCard then var7 else nil,
-			unifiedLogging = var10,
+			openGameJoinCardUserId = var6,
+			setOpenGameJoinCardUserId = var7,
+			unifiedLogging = var8,
 			sortAnalyticsData = p1.sortAnalyticsData,
 			friendRequestCount = var5.friendRequestCount,
 			recommendationCount = var5.recommendationCount,

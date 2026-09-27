@@ -137,9 +137,9 @@ return {
 			t._store:dispatch(menuOpenedModule())
 		end
 		
-		function t.takeCapture()
+		function t.takeCapture(p2)
 			-- upvalues: t (ref), takeCaptureModule (copy)
-			t._store:dispatch(takeCaptureModule())
+			t._store:dispatch(takeCaptureModule(p2))
 		end
 		
 		local function maybeSendCoreGuiEvent(p2, p3)

@@ -14,6 +14,7 @@ return {
 	TOOLTIP_MAX_WIDTH = 280,
 	SHADOW_IMAGE = "component_assets/dropshadow_17_8",
 	SHADOW_SIZE = 16,
+	PLUGIN_SHADOW_SIZE = 4,
 	BUILDER_SANS_FONT_ASSET = "rbxasset://fonts/families/BuilderSans.json",
 	MODAL = {
 		DISABLE_SELECTION = { Selectable = false },

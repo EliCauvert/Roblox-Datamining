@@ -7,9 +7,6 @@ local sduiDataBindingContentTypeModule = require(sduiCoreSystem.ClientBinding.Sd
 local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local protoVariableMapperModule = require(sduiCoreSystem.ClientBinding.ProtoVariableMapper)
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiMarketplaceCatalogCategorySupport = sharedFlagsModule.FFlagSduiMarketplaceCatalogCategorySupport
-local fFlagSduiMarketplaceCatalogSortSupport = sharedFlagsModule.FFlagSduiMarketplaceCatalogSortSupport
-local fFlagSduiHydrationFetchIfMissing = sharedFlagsModule.FFlagSduiHydrationFetchIfMissing
 local fFlagSduiDevStoreSeeAllSupport = sharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
 local t = {
 	[sduiDataBindingContentTypeModule.badge] = { "badge_id" },
@@ -17,9 +14,9 @@ local t = {
 	[sduiDataBindingContentTypeModule.universe] = { "universe_id" },
 	[sduiDataBindingContentTypeModule.ageRecommendation] = { "universe_id" },
 	[sduiDataBindingContentTypeModule.socialLink] = { "social_link_id" },
-	[sduiDataBindingContentTypeModule.marketplaceCatalogCategory] = if fFlagSduiMarketplaceCatalogCategorySupport then { "marketplace_catalog_category_item_id" } else nil,
+	[sduiDataBindingContentTypeModule.marketplaceCatalogCategory] = if sharedFlagsModule.FFlagSduiMarketplaceCatalogCategorySupport then { "marketplace_catalog_category_item_id" } else nil,
 	[sduiDataBindingContentTypeModule.song] = { "song_id" },
-	[sduiDataBindingContentTypeModule.marketplaceCatalogSort] = if fFlagSduiMarketplaceCatalogSortSupport then { "catalog_sort_id" } else nil,
+	[sduiDataBindingContentTypeModule.marketplaceCatalogSort] = if sharedFlagsModule.FFlagSduiMarketplaceCatalogSortSupport then { "catalog_sort_id" } else nil,
 	[sduiDataBindingContentTypeModule.gamePass] = { "game_pass_id" },
 	[sduiDataBindingContentTypeModule.gameDeveloperProduct] = if fFlagSduiDevStoreSeeAllSupport then { "developer_product_id" } else nil,
 	[sduiDataBindingContentTypeModule.gameSubscription] = if fFlagSduiDevStoreSeeAllSupport then { "subscription_id" } else nil,
@@ -30,7 +27,7 @@ local t = {
 }
 
 return function(p1, p2)
-	-- upvalues: protoVariableMapperModule (ref), splitDottedPathModule (ref), tryGetPathFromDataModule (ref), t (ref), fFlagSduiHydrationFetchIfMissing (ref)
+	-- upvalues: protoVariableMapperModule (ref), splitDottedPathModule (ref), tryGetPathFromDataModule (ref), t (ref)
 	local t_1 = {}
 	
 	for i, v in p2 do
@@ -72,7 +69,7 @@ return function(p1, p2)
 		t_1[if v.alias and v.alias ~= "" then v.alias else var1] = {
 			contentType = var1,
 			id = var3,
-			fetchIfMissing = if fFlagSduiHydrationFetchIfMissing then v.client_fetch else nil
+			fetchIfMissing = v.client_fetch
 		}
 	end
 	return t_1

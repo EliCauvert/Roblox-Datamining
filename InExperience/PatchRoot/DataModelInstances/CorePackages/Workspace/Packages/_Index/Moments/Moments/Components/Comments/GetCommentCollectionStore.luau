@@ -1,6 +1,10 @@
-﻿local createCommentCollectionStoreModule = require(script.createCommentCollectionStore)
+﻿local signalsModule = require(script:FindFirstAncestor("Moments").Parent.Signals)
+local getCommentSessionFiltersStoreModule = require(script.Parent.GetCommentSessionFiltersStore)
+local createCommentCollectionStoreModule = require(script.createCommentCollectionStore)
 
-return require(script:FindFirstAncestor("Moments").Parent.Signals).createComputed(function(_)
-	-- upvalues: createCommentCollectionStoreModule (ref)
-	return createCommentCollectionStoreModule()
+return signalsModule.createComputed(function(_)
+	-- upvalues: createCommentCollectionStoreModule (ref), getCommentSessionFiltersStoreModule (ref)
+	return createCommentCollectionStoreModule({
+		sessionFilters = getCommentSessionFiltersStoreModule(false)
+	})
 end)

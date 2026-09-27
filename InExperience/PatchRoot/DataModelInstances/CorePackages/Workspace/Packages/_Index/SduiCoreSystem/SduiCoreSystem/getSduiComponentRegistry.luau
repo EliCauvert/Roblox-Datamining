@@ -42,6 +42,17 @@ local function createSduiComponentRegistry()
 			for i, v in p1 do
 				t[i] = v
 			end
+		end,
+		getRegisteredComponentTypes = function()
+			-- upvalues: t (ref)
+			local t_1 = {}
+			
+			for i in t do
+				table.insert(t_1, i)
+			end
+			table.sort(t_1)
+			
+			return t_1
 		end
 	}
 end

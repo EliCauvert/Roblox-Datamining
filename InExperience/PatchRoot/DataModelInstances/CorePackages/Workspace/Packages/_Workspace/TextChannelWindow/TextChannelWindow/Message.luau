@@ -32,6 +32,16 @@ return {
 			timestamp = DateTime.now()
 		}
 	end,
+	createExperienceSystemMessage = function(p1, p2, p3)
+		-- upvalues: httpService (ref)
+		return {
+			messageType = "system-experience",
+			messageId = p2 or httpService:GenerateGUID(false),
+			content = p1,
+			iconName = p3,
+			timestamp = DateTime.now()
+		}
+	end,
 	createSystemMessageFromTextChatMessage = function(p1)
 		-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (ref)
 		return {

@@ -12,6 +12,8 @@ local externalEventConnection = require(corePackagesService.Workspace.Packages.R
 local responsiveModule = require(corePackagesService.Workspace.Packages.Responsive)
 local useLastInput = responsiveModule.useLastInput
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTextSize
+local foundationFontFaceMigration = require(corePackagesService.Packages.Foundation).Utility.Flags.FoundationFontFaceMigration
 local button = UIBloxModule.App.Button.Button
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local toast = UIBloxModule.App.Dialog.Toast
@@ -398,7 +400,7 @@ function voiceChatPromptFrame.init(p1)
 end
 
 function voiceChatPromptFrame.render(p1)
-	-- upvalues: getFFlagEnableVoicePromptReasonTextModule (ref), promptTypeModule (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), voiceNudgeUseNewDACopyModule (ref), getFFlagShowDevicePermissionsModal (ref), textService (ref), var3 (ref), var7 (ref), var9 (ref), var2 (ref), getFFlagSupportGamepadNavInVoiceModals (ref), voiceNudgeUseNewConfirmButton (ref), roactModule (ref), var8 (ref), var5 (ref), var4 (ref), color_1 (ref), color (ref), button (ref), buttonType (ref), UIBloxModule (ref), assetsModule (ref), var10 (ref), var6 (ref), devicePermissionsModalModule (ref), t (ref), t_1 (ref), userInputService (ref), voiceChatConsentModalModule (ref), coreGuiService (ref), voiceChatTooltipModule (ref), getFIntVoiceToxicityToastDurationSecondsModule (ref), getFIntVoiceJoinM3ToastDurationSecondsModule (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), toast (ref), externalEventConnection (ref)
+	-- upvalues: getFFlagEnableVoicePromptReasonTextModule (ref), promptTypeModule (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), voiceNudgeUseNewDACopyModule (ref), getFFlagShowDevicePermissionsModal (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), var3 (ref), var7 (ref), var9 (ref), var2 (ref), getFFlagSupportGamepadNavInVoiceModals (ref), voiceNudgeUseNewConfirmButton (ref), roactModule (ref), var8 (ref), var5 (ref), var4 (ref), color_1 (ref), color (ref), button (ref), buttonType (ref), UIBloxModule (ref), assetsModule (ref), var10 (ref), var6 (ref), devicePermissionsModalModule (ref), t (ref), t_1 (ref), userInputService (ref), voiceChatConsentModalModule (ref), coreGuiService (ref), voiceChatTooltipModule (ref), getFIntVoiceToxicityToastDurationSecondsModule (ref), getFIntVoiceJoinM3ToastDurationSecondsModule (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), toast (ref), externalEventConnection (ref)
 	local var11 = if getFFlagEnableVoicePromptReasonTextModule() then p1.props.errorText else nil
 	local promptType = p1.state.promptType
 	local var12 = if promptType ~= promptTypeModule.VoiceToxicityModal then getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and promptType == promptTypeModule.VoiceToxicityModalV2 else true
@@ -424,31 +426,33 @@ function voiceChatPromptFrame.render(p1)
 	end
 	if var19 then
 		local toastTitle = p1.state.toastContent.toastTitle
-		local var20 = 20 + textService:GetTextSize(toastTitle, p1.promptStyle.Font.Header1.RelativeSize * p1.promptStyle.Font.BaseSize, p1.promptStyle.Font.Header1.Font, Vector2.new(325, 1e999)).Y
-		local var21 = var11 or (if p1.state.banEnd ~= "" then p1.state.toastContent.toastSubtitle .. p15.state.banEnd else "<b>" .. (if var14 or getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and var15 then p1.state.banEnd else var3 .. p15.state.banEnd) .. "</b><br />" .. p15.state.toastContent.toastSubtitle)
-		local font = p1.promptStyle.Font.Body.Font
-		local var22 = p1.promptStyle.Font.Body.RelativeSize * p1.promptStyle.Font.BaseSize
-		local var23 = 20 + textService:GetTextSize(var21, var22, font, Vector2.new(325, 1e999)).Y
+		local font = p1.promptStyle.Font.Header1.Font
+		local var20 = p1.promptStyle.Font.Header1.RelativeSize * p1.promptStyle.Font.BaseSize
+		local var21 = 20 + (if foundationFontFaceMigration then getTextSize(toastTitle, var20, font, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(toastTitle, var20, font, Vector2.new(325, 1e999)).Y)
+		local var22 = var11 or (if p1.state.banEnd ~= "" then p1.state.toastContent.toastSubtitle .. p15.state.banEnd else "<b>" .. (if var14 or getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and var15 then p1.state.banEnd else var3 .. p15.state.banEnd) .. "</b><br />" .. p15.state.toastContent.toastSubtitle)
+		local font_1 = p1.promptStyle.Font.Body.Font
+		local var23 = p1.promptStyle.Font.Body.RelativeSize * p1.promptStyle.Font.BaseSize
+		local var24 = 20 + (if foundationFontFaceMigration then getTextSize(var22, var23, font_1, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(var22, var23, font_1, Vector2.new(325, 1e999)).Y)
 		
 		if var14 or var15 then
-			var23 += 20
+			var24 += 20
 		end
-		local var24 = if var14 then var7 elseif getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and var15 then var9 else var2
-		local var25 = 20 + textService:GetTextSize(var24, var22, font, Vector2.new(325, 1e999)).Y
+		local var25 = if var14 then var7 elseif getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and var15 then var9 else var2
+		local var26 = 20 + (if foundationFontFaceMigration then getTextSize(var25, var23, font_1, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(var25, var23, font_1, Vector2.new(325, 1e999)).Y)
 		local promptType_3 = p1.state.promptType
-		local var26 = true
+		local var27 = true
 		
 		if promptType_3 ~= promptTypeModule.VoiceChatSuspendedTemporaryB then
 			if getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() then
-				var26 = true
+				var27 = true
 				
 				if promptType_3 ~= promptTypeModule.VoiceChatSuspendedTemporaryBV2 then
-					var26 = if promptType_3 ~= promptTypeModule.VoiceToxicityModal then getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and promptType_3 == promptTypeModule.VoiceToxicityModalV2 else true
+					var27 = if promptType_3 ~= promptTypeModule.VoiceToxicityModal then getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and promptType_3 == promptTypeModule.VoiceToxicityModalV2 else true
 				end
 			end
 		end
-		local var27 = if getFFlagSupportGamepadNavInVoiceModals() then Enum.SelectionBehavior.Stop else nil
-		local var28 = if getFFlagSupportGamepadNavInVoiceModals() then true else nil
+		local var28 = if getFFlagSupportGamepadNavInVoiceModals() then Enum.SelectionBehavior.Stop else nil
+		local var29 = if getFFlagSupportGamepadNavInVoiceModals() then true else nil
 		local _ = nil
 		
 		return roactModule.createElement(roactModule.Portal, { target = coreGuiService }, {
@@ -496,14 +500,14 @@ function voiceChatPromptFrame.render(p1)
 					ImageTransparency = p1.promptStyle.Theme.BackgroundUIDefault.Transparency,
 					Position = UDim2.new(0.5, 0, 0.5, 0),
 					ScaleType = assetsModule.Images.RoundedRect.ScaleType,
-					Size = UDim2.new(0, 365, 0, 55 + var20 + 1 + var23 + 14 + var25 + 36 + 40),
+					Size = UDim2.new(0, 365, 0, 55 + var21 + 1 + var24 + 14 + var26 + 36 + 40),
 					AutomaticSize = y,
 					SliceCenter = assetsModule.Images.RoundedRect.SliceCenter,
-					SelectionBehaviorDown = var27,
-					SelectionBehaviorLeft = var27,
-					SelectionBehaviorRight = var27,
-					SelectionBehaviorUp = var27,
-					SelectionGroup = var28,
+					SelectionBehaviorDown = var28,
+					SelectionBehaviorLeft = var28,
+					SelectionBehaviorRight = var28,
+					SelectionBehaviorUp = var28,
+					SelectionGroup = var29,
 					ref = if getFFlagSupportGamepadNavInVoiceModals() then p1.ref else nil
 				}, {
 					Padding = roactModule.createElement("UIPadding", {
@@ -529,7 +533,7 @@ function voiceChatPromptFrame.render(p1)
 					TitleTextContainer = roactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 2,
-						Size = UDim2.new(1, 0, 0, var20),
+						Size = UDim2.new(1, 0, 0, var21),
 						AutomaticSize = y
 					}, {
 						TitleText = roactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
@@ -555,14 +559,14 @@ function voiceChatPromptFrame.render(p1)
 					BodyTextContainer = roactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 5,
-						Size = UDim2.new(1, 0, 0, var23)
+						Size = UDim2.new(1, 0, 0, var24)
 					}, {
 						BodyText = roactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
 							fontStyle = p1.promptStyle.Font.Body,
 							colorStyle = p1.promptStyle.Theme.TextDefault,
 							textXAlignment = Enum.TextXAlignment.Center,
 							size = UDim2.new(1, 0, 1, 0),
-							text = var21
+							text = var22
 						})
 					}),
 					TextSpaceContainer = roactModule.createElement("Frame", {
@@ -573,7 +577,7 @@ function voiceChatPromptFrame.render(p1)
 					SubBodyTextContainer = not var12 and roactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 7,
-						Size = UDim2.new(1, 0, 0, var25),
+						Size = UDim2.new(1, 0, 0, var26),
 						AutomaticSize = y
 					}, {
 						BodyText = roactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
@@ -581,7 +585,7 @@ function voiceChatPromptFrame.render(p1)
 							colorStyle = p1.promptStyle.Theme.TextDefault,
 							textXAlignment = Enum.TextXAlignment.Center,
 							size = UDim2.new(1, 0, 1, 0),
-							text = var24
+							text = var25
 						})
 					}),
 					SpaceContainer2 = roactModule.createElement("Frame", {
@@ -615,7 +619,7 @@ function voiceChatPromptFrame.render(p1)
 								-- upvalues: color (copy)
 								p2.BackgroundColor3 = color
 							end,
-							Selectable = var28,
+							Selectable = var29,
 							BackgroundColor3 = color,
 							BackgroundTransparency = 0,
 							TextColor3 = Color3.fromRGB(0, 0, 0),
@@ -631,9 +635,9 @@ function voiceChatPromptFrame.render(p1)
 							size = UDim2.new(1, -5, 0, 48),
 							text = if getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and voiceNudgeUseNewDACopyModule() and var15 then var8 elseif getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and var12 and (voiceNudgeUseNewDACopyModule() and p1.state.promptType == promptTypeModule.VoiceToxicityModalV2) then var8 elseif var12 then var5 else var4,
 							onActivated = p1.handlePrimayActivated,
-							Selectable = var28
+							Selectable = var29
 						}),
-						SecondaryButton = var26 and roactModule.createElement(UIBloxModule.App.Button.LinkButton, {
+						SecondaryButton = var27 and roactModule.createElement(UIBloxModule.App.Button.LinkButton, {
 							colorStyleDefault = "TextMuted",
 							colorStyleHover = "TextMuted",
 							layoutOrder = if voiceNudgeUseNewConfirmButton then 2 else 1,

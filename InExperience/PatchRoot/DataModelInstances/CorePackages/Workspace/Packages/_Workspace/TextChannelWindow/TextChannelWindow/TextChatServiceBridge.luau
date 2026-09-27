@@ -7,8 +7,6 @@ local _ = require(script.Parent.createChannelMessagesStore)
 local isTextSourceMutedModule = require(script.Parent.isTextSourceMuted)
 local getFFlagExpChatProtectedChatInternalAPIs = sharedFlagsModule.getFFlagExpChatProtectedChatInternalAPIs
 local getFFlagExpChatUseChatMuteStoreModule = require(script.Parent.getFFlagExpChatUseChatMuteStore)
-local fFlagExpChatRemoveOrphanedChannelsModule = require(script.Parent.Flags.FFlagExpChatRemoveOrphanedChannels)
-local fFlagExpChatDedupChannelConnectionsModule = require(script.Parent.Flags.FFlagExpChatDedupChannelConnections)
 
 local function getMessageStatus(p1)
 	local status = p1.Status
@@ -17,44 +15,44 @@ local function getMessageStatus(p1)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: fFlagExpChatDedupChannelConnectionsModule (ref), getFFlagExpChatUseChatMuteStoreModule (ref), isTextSourceMutedModule (ref), textChatServiceIntegrationModule (ref), textChannelWindowPerfTracker (ref), textChannelWindowAnalyticsModule (ref), getMessageStatus (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), fFlagExpChatRemoveOrphanedChannelsModule (ref)
+	-- upvalues: getFFlagExpChatUseChatMuteStoreModule (ref), isTextSourceMutedModule (ref), textChatServiceIntegrationModule (ref), textChannelWindowPerfTracker (ref), textChannelWindowAnalyticsModule (ref), getMessageStatus (ref), getFFlagExpChatProtectedChatInternalAPIs (ref)
 	local t = {}
 	
 	local function connectChannel(p4)
-		-- upvalues: fFlagExpChatDedupChannelConnectionsModule (copy), t (ref), getFFlagExpChatUseChatMuteStoreModule (copy), isTextSourceMutedModule (copy), textChatServiceIntegrationModule (copy), p2 (ref), p3 (ref), textChannelWindowPerfTracker (copy), textChannelWindowAnalyticsModule (copy), getMessageStatus (copy)
-		if fFlagExpChatDedupChannelConnectionsModule and t[p4] then return end
-		local isRBXSystem = p4.Name == "RBXSystem"
-		local messageReceivedConnection = p4.MessageReceived:Connect(function(p5)
-			-- upvalues: isRBXSystem (ref), getFFlagExpChatUseChatMuteStoreModule (copy), isTextSourceMutedModule (copy), textChatServiceIntegrationModule (copy), p2 (copy), p3 (copy), p4 (ref), textChannelWindowPerfTracker (copy), textChannelWindowAnalyticsModule (copy), getMessageStatus (copy)
-			if not p5.TextSource and not isRBXSystem then return end
-			if getFFlagExpChatUseChatMuteStoreModule() and p5.TextSource and isTextSourceMutedModule(p5.TextSource) then return end
-			local var1 = textChatServiceIntegrationModule.mapTextChatMessage(p5, p2)
-			
-			if var1.content == "" then
-				p3.removeMessage(p4, var1.messageId)
-			else
-				p3.upsertMessage(p4, var1)
-			end
-			if p5.TextSource and tostring(p5.TextSource.UserId) ~= p2 then
-				textChannelWindowPerfTracker.startReceiveInterval(p5.MessageId, p4.Name)
-			end
-			textChannelWindowAnalyticsModule.emit(textChannelWindowAnalyticsModule.Counters.MessageReceived, {
-				status = getMessageStatus(p5),
-				target_text_channel_category = textChannelWindowAnalyticsModule.getChannelCategory(p4.Name)
-			})
-		end)
-		
-		if fFlagExpChatDedupChannelConnectionsModule then
-			local list = { messageReceivedConnection }
-			t[p4] = list
-			table.insert(list, p4.Destroying:Connect(function()
-				-- upvalues: list (ref), t (copy), p4 (ref)
-				for i, v in list do
-					v:Disconnect()
-				end
-				t[p4] = nil
-			end))
+		-- upvalues: t (ref), getFFlagExpChatUseChatMuteStoreModule (copy), isTextSourceMutedModule (copy), textChatServiceIntegrationModule (copy), p2 (ref), p3 (ref), textChannelWindowPerfTracker (copy), textChannelWindowAnalyticsModule (copy), getMessageStatus (copy)
+		if t[p4] then
+			return
 		end
+		local isRBXSystem = p4.Name == "RBXSystem"
+		local list = {
+			p4.MessageReceived:Connect(function(p5)
+				-- upvalues: isRBXSystem (ref), getFFlagExpChatUseChatMuteStoreModule (copy), isTextSourceMutedModule (copy), textChatServiceIntegrationModule (copy), p2 (copy), p3 (copy), p4 (ref), textChannelWindowPerfTracker (copy), textChannelWindowAnalyticsModule (copy), getMessageStatus (copy)
+				if not p5.TextSource and not isRBXSystem then return end
+				if getFFlagExpChatUseChatMuteStoreModule() and p5.TextSource and isTextSourceMutedModule(p5.TextSource) then return end
+				local var1 = textChatServiceIntegrationModule.mapTextChatMessage(p5, p2)
+				
+				if var1.content == "" then
+					p3.removeMessage(p4, var1.messageId)
+				else
+					p3.upsertMessage(p4, var1)
+				end
+				if p5.TextSource and tostring(p5.TextSource.UserId) ~= p2 then
+					textChannelWindowPerfTracker.startReceiveInterval(p5.MessageId, p4.Name)
+				end
+				textChannelWindowAnalyticsModule.emit(textChannelWindowAnalyticsModule.Counters.MessageReceived, {
+					status = getMessageStatus(p5),
+					target_text_channel_category = textChannelWindowAnalyticsModule.getChannelCategory(p4.Name)
+				})
+			end)
+		}
+		t[p4] = list
+		table.insert(list, p4.Destroying:Connect(function()
+			-- upvalues: list (ref), t (copy), p4 (ref)
+			for i, v in list do
+				v:Disconnect()
+			end
+			t[p4] = nil
+		end))
 		p4.ChildRemoved:Connect(function(p5)
 			-- upvalues: p2 (copy), p3 (copy), p4 (ref)
 			if p5:IsA("TextSource") and tostring(p5.UserId) == p2 then
@@ -88,13 +86,10 @@ return function(p1, p2, p3)
 			connectChannel(p5)
 		end
 	end)
-	
-	if fFlagExpChatRemoveOrphanedChannelsModule then
-		p1.DescendantRemoving:Connect(function(p5)
-			-- upvalues: p3 (ref)
-			if p5:IsA("TextChannel") then
-				p3.removeChannelEntry(p5)
-			end
-		end)
-	end
+	p1.DescendantRemoving:Connect(function(p5)
+		-- upvalues: p3 (ref)
+		if p5:IsA("TextChannel") then
+			p3.removeChannelEntry(p5)
+		end
+	end)
 end

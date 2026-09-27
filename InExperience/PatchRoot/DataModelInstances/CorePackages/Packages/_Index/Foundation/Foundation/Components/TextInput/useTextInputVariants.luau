@@ -29,11 +29,12 @@ local function computeProps(p1)
 end
 
 local function variantsFactory(p1)
-	-- upvalues: inputSizeModule (ref), computeProps (ref), iconSizeModule (ref), builderIconsModule (ref), flagsModule (ref)
+	-- upvalues: flagsModule (ref), inputSizeModule (ref), computeProps (ref), iconSizeModule (ref), builderIconsModule (ref)
 	return {
 		common = {
 			container = {
 				tag = "row",
+				fgStyle = if flagsModule.FoundationFixColorOnScrubbableNumberInput then p1.Color.Shift.Shift_200 else nil,
 				strokeStyle = p1.Color.Stroke.Emphasis,
 				strokeThickness = p1.Stroke.Standard
 			},

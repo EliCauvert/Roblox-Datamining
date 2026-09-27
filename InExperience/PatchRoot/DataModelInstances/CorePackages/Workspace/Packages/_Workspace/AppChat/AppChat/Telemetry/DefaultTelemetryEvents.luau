@@ -2,7 +2,6 @@
 local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
 local cryoModule = require(parent.Cryo)
 local list = { "addSessionInfo", "addOSInfo" }
-local appChatExcludeStandardizedFieldsFromCounters = game:DefineFastFlag("AppChatExcludeStandardizedFieldsFromCounters", false)
 
 local function _(_, p1)
 	return {
@@ -13,7 +12,7 @@ local function _(_, p1)
 end
 
 local function namedCounterConfigurationAndFormat(p1, p2)
-	-- upvalues: socialLuaAnalyticsModule (ref), cryoModule (ref), appChatExcludeStandardizedFieldsFromCounters (ref), list (ref)
+	-- upvalues: socialLuaAnalyticsModule (ref), cryoModule (ref)
 	return {
 		throttlingThousandths = nil,
 		type = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.RobloxTelemetryCounter,
@@ -28,8 +27,7 @@ local function namedCounterConfigurationAndFormat(p1, p2)
 				entryPoint = p4.entryPoint,
 				hasActiveParty = p4.currentSquadId ~= nil
 			}, p2(p3, p4))
-		end,
-		standardizedFields = if appChatExcludeStandardizedFieldsFromCounters then nil else list
+		end
 	}
 end
 
@@ -49,7 +47,7 @@ local _ = function(_, p1)
 end
 
 local function namedStatConfigurationAndFormat(p1, p2)
-	-- upvalues: socialLuaAnalyticsModule (ref), cryoModule (ref), appChatExcludeStandardizedFieldsFromCounters (ref), list (ref)
+	-- upvalues: socialLuaAnalyticsModule (ref), cryoModule (ref)
 	return {
 		throttlingThousandths = nil,
 		type = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.RobloxTelemetryStat,
@@ -64,8 +62,7 @@ local function namedStatConfigurationAndFormat(p1, p2)
 				entryPoint = p4.entryPoint,
 				hasActiveParty = p4.currentSquadId ~= nil
 			}, p2(p3, p4))
-		end,
-		standardizedFields = if appChatExcludeStandardizedFieldsFromCounters then nil else list
+		end
 	}
 end
 

@@ -1,7 +1,6 @@
 ﻿return {
 	AddUserToConversation = require(script.AddUserToConversation),
 	ClearGlobalUnreadCount = require(script.ClearGlobalUnreadCount),
-	CreateChatAbuseReport = require(script.CreateChatAbuseReport),
 	CreateConversation = require(script.CreateConversation),
 	DuplicateConversation = require(script.DuplicateConversation),
 	ExpandToGroupConversation = require(script.ExpandToGroupConversation),

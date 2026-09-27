@@ -7,7 +7,12 @@ local fFlagEnableProfileCompletion = require(parent.SharedFlags).FFlagEnableProf
 local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
 local fFlagProfilePlatformEditBackgroundMenuItemModule = require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
+local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 local fFlagProfilePlatformEnableMomentsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableMoments)
+local fFlagFriendsCallingClientGateDEV = require(parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
+local fFlagUseUserCtaCommonEnums = require(parent.SharedFlags).FFlagUseUserCtaCommonEnums
+local fFlagJoinabilityCTARefactor = require(parent.SharedFlags).FFlagJoinabilityCTARefactor
+local var1 = if fFlagUseUserCtaCommonEnums then require(parent.UserCtaCommon).Enums.UserCtaAction else nil
 
 return {
 	Components = {
@@ -18,7 +23,6 @@ return {
 		FavoriteExperiences = "FavoriteExperiences",
 		Store = "Store",
 		SocialLinks = "SocialLinks",
-		Videos = "Videos",
 		UserProfileHeader = "UserProfileHeader",
 		ViewFullProfile = "ViewFullProfile",
 		Inventory = "Inventory",
@@ -33,7 +37,23 @@ return {
 		ProfileCompletion = if fFlagEnableProfileCompletion then "ProfileCompletion" else "",
 		Moments = if fFlagProfilePlatformEnableMomentsModule then "UserMoments" else ""
 	},
-	ProfileActions = {
+	ProfileActions = if fFlagUseUserCtaCommonEnums then (function()
+		-- upvalues: var1 (ref), fFlagFriendsCallingClientGateDEV (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), fFlagProfilePlatformEditBackgroundMenuItemModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), fFlagProfilePlatformEnableTradeItemsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), fFlagJoinabilityCTARefactor (ref)
+		local cloned = table.clone(var1)
+		cloned.Call = if fFlagFriendsCallingClientGateDEV then var1.Call else ""
+		cloned.EditAppearance = if fFlagProfilePlatformEnableEditAppearanceMenuModule then var1.EditAppearance else ""
+		cloned.EditEmotes = if fFlagProfilePlatformEnableEditAppearanceMenuModule then var1.EditEmotes else ""
+		cloned.SwitchAvatar = if fFlagProfilePlatformEnableEditAppearanceMenuModule then var1.SwitchAvatar else ""
+		cloned.EditBackground = if fFlagProfilePlatformEnableEditAppearanceMenuModule and fFlagProfilePlatformEditBackgroundMenuItemModule then var1.EditBackground else ""
+		cloned.CurrencyTransfer = if fFlagProfilePlatformEnableCurrencyTransfer then var1.CurrencyTransfer else ""
+		cloned.TradeItems = if fFlagProfilePlatformEnableTradeItemsModule then var1.TradeItems else ""
+		cloned.ContextualOverflow = if fFlagProfilePlatformCTAsRefactorModule then var1.ContextualOverflow else ""
+		cloned.PlayExperience = if fFlagJoinabilityCTARefactor then var1.PlayExperience else ""
+		cloned.ViewProfile = if fFlagJoinabilityCTARefactor then var1.ViewProfile else ""
+		cloned.UnlockExperience = if fFlagJoinabilityCTARefactor then var1.UnlockExperience else ""
+		
+		return cloned
+	end)() else {
 		AcceptFriendRequest = "AcceptFriendRequest",
 		AcceptOffNetworkFriendRequest = "AcceptOffNetworkFriendRequest",
 		AddFriend = "AddFriend",
@@ -46,7 +66,7 @@ return {
 		PendingIncomingTrustedConnection = "PendingIncomingTrustedConnection",
 		Block = "Block",
 		CannotAddFriend = "CannotAddFriend",
-		Call = if require(parent.SharedFlags).FFlagFriendsCallingClientGate_DEV then "Call" else "",
+		Call = if fFlagFriendsCallingClientGateDEV then "Call" else "",
 		Chat = "Chat",
 		EditAlias = "EditAlias",
 		EditAppearance = if fFlagProfilePlatformEnableEditAppearanceMenuModule then "EditAppearance" else "",
@@ -79,8 +99,11 @@ return {
 		ViewAbout = "ViewAbout",
 		CurrencyTransfer = if fFlagProfilePlatformEnableCurrencyTransfer then "CurrencyTransfer" else "",
 		TradeItems = if fFlagProfilePlatformEnableTradeItemsModule then "TradeItems" else "",
-		ContextualOverflow = if require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor) then "ContextualOverflow" else "",
-		UnlockChat = "UnlockChat"
+		ContextualOverflow = if fFlagProfilePlatformCTAsRefactorModule then "ContextualOverflow" else "",
+		UnlockChat = "UnlockChat",
+		PlayExperience = "",
+		ViewProfile = "",
+		UnlockExperience = ""
 	},
 	DisabledReasons = {
 		BannedFromCommunity = "BannedFromCommunity",
@@ -138,7 +161,6 @@ return {
 		ProfileMain = "ProfileMain",
 		ItemDetails = "ItemDetails",
 		ItemOrBundleDetails = "ItemOrBundleDetails",
-		VideoFullscreen = "VideoFullscreen",
 		EditProfilePage = "EditProfilePage",
 		EditDisplayNameErrorModal = "EditDisplayNameErrorModal",
 		UsernameInsufficientFundsModal = "UsernameInsufficientFundsModal",

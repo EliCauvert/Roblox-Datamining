@@ -2,18 +2,20 @@
 local starterPlayerService = game:GetService("StarterPlayer")
 local roactModule = require(corePackagesService.Packages.Roact)
 local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local constantsModule = require(script.Parent.Parent.Constants)
+local parent = script.Parent.Parent
+local constantsModule = require(parent.Constants)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
+local fFlagFixEmotesMenuAvailabilityModule = require(parent.Flags.FFlagFixEmotesMenuAvailability)
 local wheelText = roactModule.PureComponent:extend("WheelText")
 
 function wheelText.getWheelText(p1)
-	-- upvalues: starterPlayerService (ref), robloxTranslatorModule (ref), constantsModule (ref)
+	-- upvalues: starterPlayerService (ref), fFlagFixEmotesMenuAvailabilityModule (ref), robloxTranslatorModule (ref), constantsModule (ref)
 	local currentEmotes = p1.props.emotesPage.currentEmotes
 	local locale = p1.props.locale
 	local numberEmotesLoaded = p1.props.emotesPage.numberEmotesLoaded
 	
 	if next(currentEmotes) == nil then
-		return if starterPlayerService.UserEmotesEnabled and numberEmotesLoaded == 0 then robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.NoEmotesEquipped, locale) else robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.EmotesDisabled, locale)
+		return if starterPlayerService.UserEmotesEnabled and (fFlagFixEmotesMenuAvailabilityModule or numberEmotesLoaded == 0) then robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.NoEmotesEquipped, locale) else robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.EmotesDisabled, locale)
 	end
 	local focusedSegmentIndex = currentEmotes[p1.props.emotesWheel.focusedSegmentIndex]
 	

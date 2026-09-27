@@ -8,6 +8,7 @@ local createDataResolverModule = require(dataHydration.createDataResolver)
 local _ = require(dataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MomentsStoreTypes)
 local getEmojiSetsModule = require(script.Parent.Requests.getEmojiSets)
+local decodeEmojiSetsModule = require(script.Parent.Util.decodeEmojiSets)
 local resolveMomentsEmojiCatalogModule = require(script.Parent.Util.resolveMomentsEmojiCatalog)
 local validateMomentsEmojiCatalogModule = require(script.Parent.Util.validateMomentsEmojiCatalog)
 
@@ -16,7 +17,7 @@ local function shouldRefreshCachedEmojiSets(value)
 end
 
 return function(value)
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), httpClientModule (ref), getEmojiSetsModule (ref), validateMomentsEmojiCatalogModule (ref), promiseModule (ref), shouldRefreshCachedEmojiSets (ref), resolveMomentsEmojiCatalogModule (ref)
+	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), httpClientModule (ref), getEmojiSetsModule (ref), validateMomentsEmojiCatalogModule (ref), promiseModule (ref), shouldRefreshCachedEmojiSets (ref), resolveMomentsEmojiCatalogModule (ref), decodeEmojiSetsModule (ref)
 	local value_1 = value or {}
 	local var1 = createDataResolverModule({
 		supportsMultiGet = false,
@@ -39,6 +40,21 @@ return function(value)
 		getEmojis = function(p1)
 			-- upvalues: var1 (ref), resolveMomentsEmojiCatalogModule (copy)
 			return resolveMomentsEmojiCatalogModule.resolveMomentsEmojiCatalog(var1.getCachedItem("emoji-sets").data(p1)).emojis
+		end,
+		getCachedEmojiCatalog = function(p1)
+			-- upvalues: var1 (ref), validateMomentsEmojiCatalogModule (copy), decodeEmojiSetsModule (copy)
+			local cachedItem = var1.getCachedItem("emoji-sets")
+			local var2 = cachedItem.data(p1)
+			
+			return if validateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(var2) then {
+				source = "cache",
+				emojis = decodeEmojiSetsModule.flattenEmojis(var2),
+				status = cachedItem.status(p1)
+			} else {
+				source = "unavailable",
+				emojis = {},
+				status = cachedItem.status(p1)
+			}
 		end,
 		dispose = function()
 			-- upvalues: var1 (ref)

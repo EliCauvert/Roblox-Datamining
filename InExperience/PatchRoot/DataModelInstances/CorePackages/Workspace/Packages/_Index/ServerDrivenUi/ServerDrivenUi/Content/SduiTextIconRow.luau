@@ -1,8 +1,12 @@
 ﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
+local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local checkAndFormatPossibleLink = require(parent.CollectionViews).checkAndFormatPossibleLink
 local textSizeModule = require(parent.TextSize)
 local t = {
@@ -36,7 +40,7 @@ local function applyOverrides(p1, p2)
 end
 
 return reactModule.memo(function(p3)
-	-- upvalues: textSizeModule (ref), useTokens (ref), checkAndFormatPossibleLink (ref), reactModule (ref), applyOverrides (ref), imageSetLabel (ref)
+	-- upvalues: textSizeModule (ref), useTokens (ref), checkAndFormatPossibleLink (ref), reactModule (ref), applyOverrides (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), imageSetLabel (ref)
 	local layoutOrder = p3.layoutOrder
 	local anchorPoint = p3.anchorPoint
 	local automaticSize = p3.automaticSize
@@ -85,7 +89,8 @@ return reactModule.memo(function(p3)
 			Text = var5 or "",
 			AutomaticSize = Enum.AutomaticSize.X,
 			Size = size or UDim2.new(0, 0, 0, ceiled),
-			Font = fontStyle.Font,
+			Font = if foundationFontFaceMigration then nil else fontStyle.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(fontStyle.Font) else nil,
 			TextSize = fontStyle.FontSize,
 			TextTransparency = 0,
 			TextColor3 = textColor,

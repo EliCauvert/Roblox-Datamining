@@ -22,13 +22,12 @@ local viewEDPsourceValues = analyticsConstantsModule.viewEDPsourceValues
 local viewProfileSourceValues = analyticsConstantsModule.viewProfileSourceValues
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableConsoleGameJoinCard = sharedFlagsModule.FFlagEnableConsoleGameJoinCard
-local fFlagJoinCardAgeCheckUpsell = sharedFlagsModule.FFlagJoinCardAgeCheckUpsell
 local fFlagBlockEDPClickthrough = sharedFlagsModule.FFlagBlockEDPClickthrough
 local fFlagDesktopGameJoinCardUIImprovements = sharedFlagsModule.FFlagDesktopGameJoinCardUIImprovements
 local ageCheckUpsellCTAModule = require(script.Parent.Parent.AgeCheckUpsellCTA)
 
 return function(p1)
-	-- upvalues: useTokens (ref), useScaledValue (ref), useLocalization (ref), reactModule (ref), getBuilderIconForCurrentPlatform (ref), viewEDPsourceValues (ref), viewProfileSourceValues (ref), fFlagDesktopGameJoinCardUIImprovements (ref), controlState (ref), fFlagJoinCardAgeCheckUpsell (ref), view (ref), fFlagEnableConsoleGameJoinCard (ref), image (ref), fFlagBlockEDPClickthrough (ref), stateLayerAffordance (ref), skeleton (ref), radius (ref), text (ref), icon (ref), iconSize (ref), ageCheckUpsellCTAModule (ref), button (ref), buttonVariant (ref), inputSize (ref), foundationModule (ref)
+	-- upvalues: useTokens (ref), useScaledValue (ref), useLocalization (ref), reactModule (ref), getBuilderIconForCurrentPlatform (ref), viewEDPsourceValues (ref), viewProfileSourceValues (ref), fFlagDesktopGameJoinCardUIImprovements (ref), controlState (ref), view (ref), fFlagEnableConsoleGameJoinCard (ref), image (ref), fFlagBlockEDPClickthrough (ref), stateLayerAffordance (ref), skeleton (ref), radius (ref), text (ref), icon (ref), iconSize (ref), ageCheckUpsellCTAModule (ref), button (ref), buttonVariant (ref), inputSize (ref), foundationModule (ref)
 	local var1 = useTokens()
 	local var2 = useScaledValue(260)
 	local var3 = useLocalization({
@@ -76,7 +75,7 @@ return function(p1)
 	end
 	local createElement_2
 	local var14 = if fFlagDesktopGameJoinCardUIImprovements and var9 then `<u>{var3.viewProfile}</u>` else var3.viewProfile
-	local var15 = fFlagJoinCardAgeCheckUpsell and p1.ageCheckRequired == true
+	local var15 = p1.ageCheckRequired == true
 	local createElement = reactModule.createElement
 	local t = {
 		tag = "col gap-medium padding-large radius-medium stroke-thin stroke-muted",

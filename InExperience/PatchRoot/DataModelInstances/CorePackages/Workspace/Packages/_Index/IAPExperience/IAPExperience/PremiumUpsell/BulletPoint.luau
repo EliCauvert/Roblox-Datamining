@@ -2,6 +2,10 @@
 local parent = script.Parent.Parent.Parent
 local UIBloxModule = require(parent.UIBlox)
 local roactModule = require(parent.Roact)
+local foundationModule = require(parent.Foundation)
+local getTextSize = require(parent.Style).GetTextSize
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local withStyle = UIBloxModule.Style.withStyle
@@ -9,15 +13,15 @@ local iconSize = UIBloxModule.App.Constant.IconSize
 local var1 = iconSize.Small + 16
 
 return function(p1)
-	-- upvalues: withStyle (ref), textService (ref), var1 (ref), roactModule (ref), imageSetLabel (ref), iconSize (ref), images (ref)
+	-- upvalues: withStyle (ref), foundationFontFaceMigration (ref), getTextSize (ref), var1 (ref), textService (ref), roactModule (ref), imageSetLabel (ref), iconSize (ref), images (ref), normalizeFontFace (ref)
 	return withStyle(function(p2)
-		-- upvalues: p1 (ref), textService (copy), var1 (copy), roactModule (copy), imageSetLabel (copy), iconSize (copy), images (copy)
+		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), getTextSize (copy), var1 (copy), textService (copy), roactModule (copy), imageSetLabel (copy), iconSize (copy), images (copy), normalizeFontFace (copy)
 		local theme = p2.Theme
 		local font = p2.Font
 		local text = p1.text
 		local var2 = font.Body.RelativeSize * font.BaseSize
 		local font_1 = font.Body.Font
-		local var3 = if text ~= nil then Vector2.new(0, 0) else textService:GetTextSize(text, var2, font_1, Vector2.new(p1.width - var1, 10000))
+		local var3 = if text ~= nil then Vector2.new(0, 0) elseif foundationFontFaceMigration then getTextSize(text, var2, font_1, Vector2.new(p1.width - var1, 10000), { addTemporaryPadding = false }) else textService:GetTextSize(text, var2, font_1, Vector2.new(p1.width - var1, 10000))
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -42,7 +46,8 @@ return function(p1)
 				TextSize = var2,
 				TextColor3 = theme.TextDefault.Color,
 				TextTransparency = theme.TextDefault.Transparency,
-				Font = font_1,
+				Font = if foundationFontFaceMigration then nil else font_1,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(font_1) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				LayoutOrder = p1.layoutOrder
 			})
