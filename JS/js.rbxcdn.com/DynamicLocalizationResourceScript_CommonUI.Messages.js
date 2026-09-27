@@ -2,6 +2,7 @@ var Roblox = Roblox || {};
 Roblox.LangDynamic = Roblox.LangDynamic || {};
 Roblox.LangDynamic["CommonUI.Messages"] = {
     "Label.Error": "Error",
+    "Label.Loading": "Loading",
     "Response.TooManyAttemptsText": "Too Many Attempts",
     "Action.Close": "Close",
     "Response.BadRequest": "Bad Request",

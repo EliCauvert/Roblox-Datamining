@@ -13,6 +13,11 @@ Roblox.LangDynamic["Feature.ProfileBadges"] = {
     "TwoSVWithVerifiedBadge": "Disabling 2-Step Verification will result in the loss of your verified badge and make your account less secure. Are you sure you want to proceed?",
     "VerifiedBadgeInfoTitle": "Verified Badge",
     "GroupNameChangeWithVerifiedBadge": "the verified badge will be removed.",
-    "action.close": "Close"
+    "action.close": "Close",
+    "Action.FirstPage": "First Page",
+    "Action.Previous": "Previous",
+    "Action.Next": "Next",
+    "Action.LastPage": "Last Page",
+    "Label.Loading": "loading"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.ProfileBadges");

@@ -1,18 +1,18 @@
 ! function() {
     try {
-        var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
+        var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "0921efeeb7915525c34339f0bd121e150ef14a90"
+            id: "e16a5baceca1aa104ffa593cd2bab07b0f24dafe"
         };
         var n = (new e.Error).stack;
-        n && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[n] = "d149589c-8da3-43bd-aa73-c743a6a48a31", e._sentryDebugIdIdentifier = "sentry-dbid-d149589c-8da3-43bd-aa73-c743a6a48a31")
+        n && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[n] = "1c67ac87-0122-4591-907b-a3e35583c74d", e._sentryDebugIdIdentifier = "sentry-dbid-1c67ac87-0122-4591-907b-a3e35583c74d")
     } catch (e) {}
 }(),
 function() {
     var e = {
-            942: function(e) {
+            611: function(e) {
                 function n(e) {
-                    return e && "undefined" != typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e
+                    return e && "u" > typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e
                 }!
                 /*!
                 	Copyright (c) 2018 Jed Watson.
@@ -46,10 +46,6 @@ function() {
                         return o
                     }) : window.classNames = o
                 }()
-            },
-            78: function(e, n, t) {
-                "use strict";
-                e.exports = {}
             }
         },
         n = {};
@@ -63,47 +59,30 @@ function() {
         return e[o](i, i.exports, t), i.exports
     }
     t.m = e, t.n = function(e) {
-        var n = e && e.__esModule ? function() {
-            return e.default
-        } : function() {
-            return e
-        };
-        return t.d(n, {
-            a: n
-        }), n
-    }, t.d = function(e, n) {
-        for (var o in n) t.o(n, o) && !t.o(e, o) && Object.defineProperty(e, o, {
-            enumerable: !0,
-            get: n[o]
-        })
-    }, t.k = function(e) {
-        return "" + e + ".css"
-    }, t.g = function() {
-        if ("object" == typeof globalThis) return globalThis;
-        try {
-            return this || Function("return this")()
-        } catch (e) {
-            if ("object" == typeof window) return window
-        }
-    }(), t.o = function(e, n) {
-        return Object.prototype.hasOwnProperty.call(e, n)
-    }, t.r = function(e) {
-        "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
-            value: "Module"
-        }), Object.defineProperty(e, "__esModule", {
-            value: !0
-        })
-    }, t.rv = function() {
-        return "1.5.7"
-    }, t.g.importScripts && (o = t.g.location + "");
-    var o, r = t.g.document;
-    if (!o && r && (r.currentScript && "SCRIPT" === r.currentScript.tagName.toUpperCase() && (o = r.currentScript.src), !o)) {
-        var i = r.getElementsByTagName("script");
-        if (i.length)
-            for (var a = i.length - 1; a > -1 && (!o || !/^http(s?):/.test(o));) o = i[a--].src
-    }
-    if (!o) throw Error("Automatic publicPath is not supported in this browser");
-    t.p = o.replace(/^blob:/, "").replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/"), t.ruid = "bundler=rspack@1.5.7",
+            var n = e && e.__esModule ? function() {
+                return e.default
+            } : function() {
+                return e
+            };
+            return t.d(n, {
+                a: n
+            }), n
+        }, t.d = function(e, n) {
+            for (var o in n) t.o(n, o) && !t.o(e, o) && Object.defineProperty(e, o, {
+                enumerable: !0,
+                get: n[o]
+            })
+        }, t.o = function(e, n) {
+            return Object.prototype.hasOwnProperty.call(e, n)
+        }, t.r = function(e) {
+            "u" > typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
+                value: "Module"
+            }), Object.defineProperty(e, "__esModule", {
+                value: !0
+            })
+        }, t.rv = function() {
+            return "1.7.12"
+        }, t.ruid = "bundler=rspack@1.7.12",
         function() {
             "use strict";
             var e = window.ReactJSX,
@@ -156,7 +135,7 @@ function() {
                 }
                 s.done ? n(c) : Promise.resolve(c).then(o, r)
             }
-            var h = function() {
+            var m = function() {
                     var e;
                     return (e = function() {
                         return function(e, n) {
@@ -169,12 +148,21 @@ function() {
                                     trys: [],
                                     ops: []
                                 },
-                                a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
-                            return a.next = s(0), a.throw = s(1), a.return = s(2), "function" == typeof Symbol && (a[Symbol.iterator] = function() {
-                                return this
+                                a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
+                                s = Object.defineProperty;
+                            return s(a, "next", {
+                                value: c(0)
+                            }), s(a, "throw", {
+                                value: c(1)
+                            }), s(a, "return", {
+                                value: c(2)
+                            }), "function" == typeof Symbol && s(a, Symbol.iterator, {
+                                value: function() {
+                                    return this
+                                }
                             }), a;
 
-                            function s(s) {
+                            function c(s) {
                                 return function(c) {
                                     var l = [s, c];
                                     if (t) throw TypeError("Generator is already executing.");
@@ -254,14 +242,14 @@ function() {
                         })
                     })()
                 },
-                m = "RBXcb",
+                h = "RBXcb",
                 b = "Description.PrivacyPolicy",
                 y = "{privacyPolicyLink}",
                 x = window.Roblox["core-scripts"].environmentUrls,
-                g = t.n(x),
-                v = function(e, n) {
-                    s(m) && u(m, {
-                        domain: g().domain
+                v = t.n(x),
+                g = function(e, n) {
+                    s(h) && u(h, {
+                        domain: v().domain
                     });
                     var t = "",
                         o = [];
@@ -269,15 +257,15 @@ function() {
                         e.includes(r) ? t += "".concat(r, "=true&") : (t += "".concat(r, "=false&"), o.push(r)), i === n.length - 1 && (t = t.slice(0, -1))
                     }), o.forEach(function(e) {
                         u(e, {
-                            domain: g().domain
+                            domain: v().domain
                         })
-                    }), l(m, t, {
+                    }), l(h, t, {
                         maxAge: 15552e3,
-                        domain: g().domain
+                        domain: v().domain
                     })
                 },
                 k = function() {
-                    var e = s(m);
+                    var e = s(h);
                     return !!e && !!e.value.split("&").find(function(e) {
                         return "true" === e.split("=")[1]
                     })
@@ -307,22 +295,22 @@ function() {
                             className: "text",
                             children: c.substring(l + f)
                         }),
-                        h = (0, e.jsx)("a", {
+                        m = (0, e.jsx)("a", {
                             className: "text-link",
                             target: "_blank",
                             href: u,
                             rel: "noreferrer",
                             children: i(b)
                         }),
-                        m = function(e) {
-                            v(e, t), o()
+                        h = function(e) {
+                            g(e, t), o()
                         };
                     return (0, e.jsxs)(a.Fragment, {
                         children: [(0, e.jsxs)("div", {
                             className: "cookie-banner",
                             children: [(0, e.jsxs)("div", {
                                 className: "cookie-description-content",
-                                children: [d, h, p]
+                                children: [d, m, p]
                             }), (0, e.jsx)("div", {
                                 children: (0, e.jsxs)("div", {
                                     className: "cookie-button-container",
@@ -335,13 +323,13 @@ function() {
                                         children: [(0, e.jsx)(N.Button, {
                                             className: "btn-secondary-lg cookie-btn",
                                             onClick: function() {
-                                                m([""])
+                                                h([""])
                                             },
                                             children: i("Action.DeclineAll")
                                         }), (0, e.jsx)(N.Button, {
                                             className: "btn-cta-lg cookie-btn",
                                             onClick: function() {
-                                                m(t)
+                                                h(t)
                                             },
                                             children: i("Action.AcceptAll")
                                         })]
@@ -351,18 +339,18 @@ function() {
                         }), (0, e.jsx)("div", {
                             className: "cookie-banner-bg",
                             onClick: function() {
-                                m([""])
+                                h([""])
                             },
                             "aria-hidden": "true"
                         })]
                     })
                 },
-                I = t(942),
+                I = t(611),
                 R = t.n(I),
-                T = "RBXViralAcquisition",
-                L = "Description.RBXViralAcquisition",
-                B = "RBXSource",
-                O = "Description.RBXSource",
+                L = "RBXViralAcquisition",
+                T = "Description.RBXViralAcquisition",
+                O = "RBXSource",
+                B = "Description.RBXSource",
                 P = "Heading.GoogleAnalytics",
                 U = [{
                     label: "Label.DataCollected",
@@ -454,11 +442,11 @@ function() {
                         d = (0, e.jsxs)("div", {
                             className: "analytics-cookie-list",
                             children: [(0, e.jsx)(_, {
-                                cookieName: T,
-                                description: t(L)
+                                cookieName: L,
+                                description: t(T)
                             }), (0, e.jsx)(_, {
-                                cookieName: B,
-                                description: t(O)
+                                cookieName: O,
+                                description: t(B)
                             })]
                         });
                     return (0, e.jsxs)("div", {
@@ -477,7 +465,7 @@ function() {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, n) {
-                    var t, o, r = null == e ? null : "undefined" != typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                    var t, o, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                     if (null != r) {
                         var i = [],
                             a = !0,
@@ -508,8 +496,8 @@ function() {
             }
             var V = M((0, N.createModal)(), 2),
                 X = V[0],
-                $ = V[1],
-                W = function(n) {
+                W = V[1],
+                q = function(n) {
                     var t = n.nonEssentialCookieList,
                         o = n.essentialCookieList,
                         r = n.translate,
@@ -520,14 +508,14 @@ function() {
                         d = l[1],
                         f = M((0, a.useState)(!1), 2),
                         p = f[0],
-                        h = f[1],
-                        m = M((0, a.useState)(!1), 2),
-                        y = m[0],
-                        x = m[1];
+                        m = f[1],
+                        h = M((0, a.useState)(!1), 2),
+                        y = h[0],
+                        x = h[1];
                     (0, a.useEffect)(function() {
-                        $.open()
+                        W.open()
                     }, []);
-                    var g = R()({
+                    var v = R()({
                             hidden: !p
                         }),
                         j = R()("cookie-consent-tool-collaps", {
@@ -538,7 +526,7 @@ function() {
                         }),
                         E = new(w())().getRobloxLocale(),
                         I = S.urlService.getUrlWithLocale("string" == typeof A ? A : "", E),
-                        T = (0, e.jsx)("div", {
+                        L = (0, e.jsx)("div", {
                             className: "cookie-consent-tool-info-link",
                             children: (0, e.jsxs)("a", {
                                 className: "text-link",
@@ -550,7 +538,7 @@ function() {
                                 })]
                             })
                         }),
-                        L = (0, e.jsx)("div", {
+                        T = (0, e.jsx)("div", {
                             className: "cookie-consent-tool-info-link",
                             children: (0, e.jsxs)("a", {
                                 className: "text-link",
@@ -562,7 +550,7 @@ function() {
                                 })]
                             })
                         }),
-                        B = (0, e.jsxs)("div", {
+                        O = (0, e.jsxs)("div", {
                             children: [(0, e.jsxs)("div", {
                                 className: "static-section",
                                 children: [(0, e.jsx)("div", {
@@ -592,7 +580,7 @@ function() {
                                 })]
                             })]
                         }),
-                        O = (0, e.jsxs)("div", {
+                        B = (0, e.jsxs)("div", {
                             children: [(0, e.jsx)("button", {
                                 className: j,
                                 type: "button",
@@ -618,7 +606,7 @@ function() {
                             }, n.cookieName)
                         }),
                         U = (0, e.jsxs)("div", {
-                            children: [L, T]
+                            children: [T, L]
                         }),
                         G = (0, e.jsxs)("div", {
                             className: "essential-cookie-section",
@@ -626,17 +614,17 @@ function() {
                                 className: C,
                                 type: "button",
                                 onClick: function() {
-                                    h(!p)
+                                    m(!p)
                                 },
                                 children: r("Heading.EssentialCookies")
                             }), (0, e.jsx)("div", {
-                                className: g,
+                                className: v,
                                 children: P
                             })]
                         }),
                         V = (0, e.jsxs)("div", {
                             className: "cookie-consent-tool-body",
-                            children: [B, U, G, O, (0, e.jsx)(H, {
+                            children: [O, U, G, B, (0, e.jsx)(H, {
                                 isNonEssentialCookieListVisible: y,
                                 translate: r
                             })]
@@ -648,7 +636,7 @@ function() {
                         actionButtonText: r("Action.SavePreferences"),
                         neutralButtonText: r("Action.Cancel"),
                         onAction: function() {
-                            v(u ? t : [], t), s(null)
+                            g(u ? t : [], t), s(null)
                         },
                         onNeutral: function() {
                             s(i.banner)
@@ -658,13 +646,13 @@ function() {
                     })
                 };
 
-            function q(e, n) {
+            function F(e, n) {
                 (null == n || n > e.length) && (n = e.length);
                 for (var t = 0, o = Array(n); t < n; t++) o[t] = e[t];
                 return o
             }
 
-            function F(e, n, t, o, r, i, a) {
+            function J(e, n, t, o, r, i, a) {
                 try {
                     var s = e[i](a),
                         c = s.value
@@ -675,11 +663,11 @@ function() {
                 s.done ? n(c) : Promise.resolve(c).then(o, r)
             }
 
-            function J(e, n) {
+            function $(e, n) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, n) {
-                    var t, o, r = null == e ? null : "undefined" != typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                    var t, o, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                     if (null != r) {
                         var i = [],
                             a = !0,
@@ -699,152 +687,160 @@ function() {
                     }
                 }(e, n) || function(e, n) {
                     if (e) {
-                        if ("string" == typeof e) return q(e, n);
+                        if ("string" == typeof e) return F(e, n);
                         var t = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return q(e, n)
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return F(e, n)
                     }
                 }(e, n) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
             var z = (0, r.withTranslations)(function(n) {
-                var t = n.translate,
-                    o = J((0, a.useState)([]), 2),
-                    r = o[0],
-                    c = o[1],
-                    l = J((0, a.useState)([]), 2),
-                    u = l[0],
-                    d = l[1],
-                    f = J((0, a.useState)(null), 2),
-                    p = f[0],
-                    b = f[1];
-                switch ((0, a.useEffect)(function() {
-                        var e, n = s(m);
-                        (null == n || "" === n.value) && (e = function() {
-                            var e;
-                            return function(e, n) {
-                                var t, o, r, i = {
-                                        label: 0,
-                                        sent: function() {
-                                            if (1 & r[0]) throw r[1];
-                                            return r[1]
+                    var t = n.translate,
+                        o = $((0, a.useState)([]), 2),
+                        r = o[0],
+                        c = o[1],
+                        l = $((0, a.useState)([]), 2),
+                        u = l[0],
+                        d = l[1],
+                        f = $((0, a.useState)(null), 2),
+                        p = f[0],
+                        b = f[1];
+                    switch ((0, a.useEffect)(function() {
+                            var e, n = s(h);
+                            (null == n || "" === n.value) && (e = function() {
+                                var e;
+                                return function(e, n) {
+                                    var t, o, r, i = {
+                                            label: 0,
+                                            sent: function() {
+                                                if (1 & r[0]) throw r[1];
+                                                return r[1]
+                                            },
+                                            trys: [],
+                                            ops: []
                                         },
-                                        trys: [],
-                                        ops: []
-                                    },
-                                    a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
-                                return a.next = s(0), a.throw = s(1), a.return = s(2), "function" == typeof Symbol && (a[Symbol.iterator] = function() {
-                                    return this
-                                }), a;
-
-                                function s(s) {
-                                    return function(c) {
-                                        var l = [s, c];
-                                        if (t) throw TypeError("Generator is already executing.");
-                                        for (; a && (a = 0, l[0] && (i = 0)), i;) try {
-                                            if (t = 1, o && (r = 2 & l[0] ? o.return : l[0] ? o.throw || ((r = o.return) && r.call(o), 0) : o.next) && !(r = r.call(o, l[1])).done) return r;
-                                            switch (o = 0, r && (l = [2 & l[0], r.value]), l[0]) {
-                                                case 0:
-                                                case 1:
-                                                    r = l;
-                                                    break;
-                                                case 4:
-                                                    return i.label++, {
-                                                        value: l[1],
-                                                        done: !1
-                                                    };
-                                                case 5:
-                                                    i.label++, o = l[1], l = [0];
-                                                    continue;
-                                                case 7:
-                                                    l = i.ops.pop(), i.trys.pop();
-                                                    continue;
-                                                default:
-                                                    if (!(r = (r = i.trys).length > 0 && r[r.length - 1]) && (6 === l[0] || 2 === l[0])) {
-                                                        i = 0;
-                                                        continue
-                                                    }
-                                                    if (3 === l[0] && (!r || l[1] > r[0] && l[1] < r[3])) {
-                                                        i.label = l[1];
-                                                        break
-                                                    }
-                                                    if (6 === l[0] && i.label < r[1]) {
-                                                        i.label = r[1], r = l;
-                                                        break
-                                                    }
-                                                    if (r && i.label < r[2]) {
-                                                        i.label = r[2], i.ops.push(l);
-                                                        break
-                                                    }
-                                                    r[2] && i.ops.pop(), i.trys.pop();
-                                                    continue
-                                            }
-                                            l = n.call(e, i)
-                                        } catch (e) {
-                                            l = [6, e], o = 0
-                                        } finally {
-                                            t = r = 0
+                                        a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
+                                        s = Object.defineProperty;
+                                    return s(a, "next", {
+                                        value: c(0)
+                                    }), s(a, "throw", {
+                                        value: c(1)
+                                    }), s(a, "return", {
+                                        value: c(2)
+                                    }), "function" == typeof Symbol && s(a, Symbol.iterator, {
+                                        value: function() {
+                                            return this
                                         }
-                                        if (5 & l[0]) throw l[1];
-                                        return {
-                                            value: l[0] ? l[1] : void 0,
-                                            done: !0
+                                    }), a;
+
+                                    function c(s) {
+                                        return function(c) {
+                                            var l = [s, c];
+                                            if (t) throw TypeError("Generator is already executing.");
+                                            for (; a && (a = 0, l[0] && (i = 0)), i;) try {
+                                                if (t = 1, o && (r = 2 & l[0] ? o.return : l[0] ? o.throw || ((r = o.return) && r.call(o), 0) : o.next) && !(r = r.call(o, l[1])).done) return r;
+                                                switch (o = 0, r && (l = [2 & l[0], r.value]), l[0]) {
+                                                    case 0:
+                                                    case 1:
+                                                        r = l;
+                                                        break;
+                                                    case 4:
+                                                        return i.label++, {
+                                                            value: l[1],
+                                                            done: !1
+                                                        };
+                                                    case 5:
+                                                        i.label++, o = l[1], l = [0];
+                                                        continue;
+                                                    case 7:
+                                                        l = i.ops.pop(), i.trys.pop();
+                                                        continue;
+                                                    default:
+                                                        if (!(r = (r = i.trys).length > 0 && r[r.length - 1]) && (6 === l[0] || 2 === l[0])) {
+                                                            i = 0;
+                                                            continue
+                                                        }
+                                                        if (3 === l[0] && (!r || l[1] > r[0] && l[1] < r[3])) {
+                                                            i.label = l[1];
+                                                            break
+                                                        }
+                                                        if (6 === l[0] && i.label < r[1]) {
+                                                            i.label = r[1], r = l;
+                                                            break
+                                                        }
+                                                        if (r && i.label < r[2]) {
+                                                            i.label = r[2], i.ops.push(l);
+                                                            break
+                                                        }
+                                                        r[2] && i.ops.pop(), i.trys.pop();
+                                                        continue
+                                                }
+                                                l = n.call(e, i)
+                                            } catch (e) {
+                                                l = [6, e], o = 0
+                                            } finally {
+                                                t = r = 0
+                                            }
+                                            if (5 & l[0]) throw l[1];
+                                            return {
+                                                value: l[0] ? l[1] : void 0,
+                                                done: !0
+                                            }
                                         }
                                     }
-                                }
-                            }(this, function(n) {
-                                switch (n.label) {
-                                    case 0:
-                                        return [4, h()];
-                                    case 1:
-                                        return (e = n.sent()).ShouldDisplayCookieBannerV3 && e.EssentialCookieList ? (c(e.NonEssentialCookieList), d(e.EssentialCookieList), b(i.banner)) : v(e.NonEssentialCookieList, e.NonEssentialCookieList), [2]
-                                }
-                            })
-                        }, function() {
-                            var n = this,
-                                t = arguments;
-                            return new Promise(function(o, r) {
-                                var i = e.apply(n, t);
+                                }(this, function(n) {
+                                    switch (n.label) {
+                                        case 0:
+                                            return [4, m()];
+                                        case 1:
+                                            return (e = n.sent()).ShouldDisplayCookieBannerV3 && e.EssentialCookieList ? (c(e.NonEssentialCookieList), d(e.EssentialCookieList), b(i.banner)) : g(e.NonEssentialCookieList, e.NonEssentialCookieList), [2]
+                                    }
+                                })
+                            }, function() {
+                                var n = this,
+                                    t = arguments;
+                                return new Promise(function(o, r) {
+                                    var i = e.apply(n, t);
 
-                                function a(e) {
-                                    F(i, o, r, a, s, "next", e)
-                                }
+                                    function a(e) {
+                                        J(i, o, r, a, s, "next", e)
+                                    }
 
-                                function s(e) {
-                                    F(i, o, r, a, s, "throw", e)
+                                    function s(e) {
+                                        J(i, o, r, a, s, "throw", e)
+                                    }
+                                    a(void 0)
+                                })
+                            })()
+                        }, []), p) {
+                        case i.banner:
+                            return (0, e.jsx)(E, {
+                                translate: t,
+                                nonEssentialCookieList: r,
+                                closeBanner: function() {
+                                    b(null)
+                                },
+                                showConsentTool: function() {
+                                    b(i.consentTool)
                                 }
-                                a(void 0)
-                            })
-                        })()
-                    }, []), p) {
-                    case i.banner:
-                        return (0, e.jsx)(E, {
-                            translate: t,
-                            nonEssentialCookieList: r,
-                            closeBanner: function() {
-                                b(null)
-                            },
-                            showConsentTool: function() {
-                                b(i.consentTool)
-                            }
-                        });
-                    case i.consentTool:
-                        return (0, e.jsx)(W, {
-                            translate: t,
-                            essentialCookieList: u,
-                            nonEssentialCookieList: r,
-                            closeConsentTool: b
-                        });
-                    default:
-                        return (0, e.jsx)("div", {})
-                }
-            }, d.w);
-            t(78);
-            var Y = document.getElementById("cookie-banner-wrapper");
+                            });
+                        case i.consentTool:
+                            return (0, e.jsx)(q, {
+                                translate: t,
+                                essentialCookieList: u,
+                                nonEssentialCookieList: r,
+                                closeConsentTool: b
+                            });
+                        default:
+                            return (0, e.jsx)("div", {})
+                    }
+                }, d.w),
+                Y = document.getElementById("cookie-banner-wrapper");
             o()(function() {
                 Y && (0, r.renderWithErrorBoundary)((0, e.jsx)(z, {}), Y)
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("CookieBannerV3");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/cookieBannerV3-8cdb1570e906d383.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/cookieBannerV3-90b4022fad640768.js.map

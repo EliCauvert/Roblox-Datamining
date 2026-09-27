@@ -1152,7 +1152,7 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Description.AddRoles": "Only roles you assign to this category will be able to view it when the restrict toggle is enabled",
     "Message.CreatedAnnouncement": "{actor} created an announcement \"{title}\"",
     "Message.DeletedAnnouncement": "{actor} deleted an announcement \"{title}\"",
-    "Description.RoleRestrictedCategory": "This a role restricted category",
+    "Description.RoleRestrictedCategory": "This is a role restricted category",
     "Description.AgeRestrictedCategoryIneligible": "Your account does not meet the minimum age requirement for this category.",
     "Heading.AgeRestrictedCategory": "Restricted access",
     "Description.AgeRestrictedCategoryEligible": "This category is marked as age restricted. Do you wish to proceed?",
@@ -1341,6 +1341,12 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Error.SupportTicketIneligible": "You can’t submit a bug report for this experience right now.",
     "Placeholder.PollQuestion": "Write your question",
     "Label.OverflowMenu": "More options",
-    "Label.AddImage": "Add image"
+    "Label.AddImage": "Add image",
+    "ResponseCountSingular": "response",
+    "ResponseCountPlural": "responses",
+    "Label.Voted": "Voted",
+    "Label.ResponseCountSingular": "response",
+    "Label.ResponseCountPlural": "responses",
+    "Action.React": "React"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Groups");

@@ -182,6 +182,7 @@ Roblox.LangDynamic["Feature.Transactions"] = {
     "Label.TransactionTypeCreatorRewards": "Creator Rewards",
     "Label.ReferralPayouts": "Referral Payouts",
     "Description.ReferralPayout": "Plus Referral Payout",
-    "Description.PendingRobuxReferralPayout": "These Robux are pending and will be released in 21 days."
+    "Description.PendingRobuxReferralPayout": "These Robux are pending and will be released in 21 days.",
+    "Label.LicensedMarketplaceTooltip": "This item is licensed, and a percentage of its sales revenue goes toward a licensing fee."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Transactions");

@@ -381,6 +381,10 @@ Roblox.LangDynamic["Feature.Avatar"] = {
     "Label.ProfileFrame.Black": "Black",
     "Label.ProfileFrame.White": "White",
     "Label.ProfileFrame.Turquoise": "Turquoise",
-    "Label.ProfileFrame.Redcliff": "Redcliff"
+    "Label.ProfileFrame.Redcliff": "Redcliff",
+    "Label.LicensingLicensed": "Licensed",
+    "Label.LicensingOfficial": "Official",
+    "profile.tooltip": "Your profile",
+    "Label.AvatarBodyType": "Avatar body type"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Avatar");

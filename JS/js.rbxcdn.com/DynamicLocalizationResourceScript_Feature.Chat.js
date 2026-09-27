@@ -154,11 +154,11 @@ Roblox.LangDynamic["Feature.Chat"] = {
     "Heading.FirstConversationWith": "First conversation with {displayName}",
     "Description.OSAContextCardDescription": "Your safety matters. Not feeling comfortable? You can block or report this person anytime from their profile.",
     "Heading.FirstConversationWithThisUser": "First conversation with this person",
-    "Label.AddConnections": "Add Connections",
-    "Message.AddConnectionsLimit": "You can have up to {connectionsNum} Connections in chat group.",
-    "Message.MakeConnectionsToChatNPlay": "Make Connections to start chatting and partying!",
-    "Message.ConnectionsChatPrivacySetting": "To chat with Connections, turn on chat in your {frontLink}Privacy Settings{endLink}",
-    "Label.SearchConnections": "Search for Connections",
+    "Label.AddConnections": "Add Friends",
+    "Message.AddConnectionsLimit": "You can have up to {connectionsNum} friends in chat group.",
+    "Message.MakeConnectionsToChatNPlay": "Make friends to start chatting and partying!",
+    "Message.ConnectionsChatPrivacySetting": "To chat with friends, turn on chat in your {frontLink}Privacy Settings{endLink}",
+    "Label.SearchConnections": "Search for Friends",
     "Heading.FirstInteractionWith": "First interaction with {displayName}",
     "Heading.FirstInteractionWithThisPerson": "First interaction with this person",
     "Description.OSAGroupDescription": "Your safety matters. You can block or report a person anytime from their profile.",
@@ -189,6 +189,7 @@ Roblox.LangDynamic["Feature.Chat"] = {
     "Description.InlineContextCardDescription": "Be careful when you chat with strangers. Don't share personal info or move to another chat app. You can block or report anyone from their profile.",
     "Heading.SafeChattingWithUsername": "Be safe chatting with {displayName}",
     "Heading.SafeChattingWithThisUser": "Be safe chatting with this person",
-    "Label.UnfilteredChat": "Unfiltered chat"
+    "Label.UnfilteredChat": "Unfiltered chat",
+    "Label.Trusted": "Trusted"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Chat");

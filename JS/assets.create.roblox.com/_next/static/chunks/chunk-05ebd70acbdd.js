@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "32c5ec98-d407-6546-593f-9826d161a826")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "45cc3508-aa55-dc5a-d71d-ec3e9da19b2d")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 730530, e => {
@@ -82,7 +82,7 @@
     e.s(["default", 0, t])
 }, 759283, 253536, e => {
     "use strict";
-    var a = e.i(540513),
+    var a = e.i(751846),
         t = e.i(307529),
         r = e.i(251622),
         o = e.i(260022);
@@ -101,8 +101,8 @@
     let f = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/subscriptions#creating-subscriptions"),
         b = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/game-design/subscription-design#bundles"),
         m = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/subscriptions#earning-with-subscriptions"),
-        A = (0, o.resolveUrl)("robloxCommunityStandardsUrl", "production", "global"),
-        y = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/marketplace-policy#ugc-program-guidelines"),
+        y = (0, o.resolveUrl)("robloxCommunityStandardsUrl", "production", "global"),
+        A = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/marketplace-policy#ugc-program-guidelines"),
         h = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/marketplace-fees-and-commissions#publishing-advance");
     (0, o.getProductionCreatorHubUrl)("global"), (0, o.getProductionCreatorHubUrl)("global");
     let v = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/account-verification");
@@ -112,8 +112,8 @@
         L = (0, o.resolveUrl)("advertisingStandardsUrl", "production", "global"),
         E = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/account-verification"),
         C = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/avatar-creation-token");
-    e.s(["ACCOUNT_VERIFICATION_URL", 0, E, "ASSET_ACCESS_PRIVACY", 0, u, "BADGE_LEARN_MORE_URL", 0, c, "CREATOR_STORE_VERIFICATION_URL", 0, v, "DEVELOPER_PRODUCT_LEARN_MORE_URL", 0, s, "DISTRIBUTE_MODELS", 0, g, "LAUNCH_DATA_LEARN_MORE_URL", 0, n, "MARKETPLACE_POLICY", 0, y, "MOMENTS_LEARN_MORE_URL", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "PASS_LEARN_MORE_URL", 0, i, "PRIVATE_SERVER_LEARN_MORE_URL", 0, l, "PUBLISHING_ADVANCE", 0, h, "RELEASE_EXPERIENCE_TO_PUBLIC_URL", 0, d, "ROBLOX_ADVERTISING_STANDARDS", 0, L, "ROBLOX_COMMUNITY_STANDARDS", 0, A, "ROBLOX_TERMS_OF_USE", 0, P, "SALE_LOCATION_LEARN_MORE_URL", 0, p, "SUBSCRIPTION_LEARN_MORE_PRICING_URL", 0, m, "SUBSCRIPTION_LEARN_MORE_PRODUCT_TYPES_URL", 0, b, "SUBSCRIPTION_LEARN_MORE_URL", 0, f, "SUBSCRIPTION_TERMS_OF_USE", 0, U, "TOKEN_LEARN_MORE_URL", 0, C], 253536);
-    let S = {
+    e.s(["ACCOUNT_VERIFICATION_URL", 0, E, "ASSET_ACCESS_PRIVACY", 0, u, "BADGE_LEARN_MORE_URL", 0, c, "CREATOR_STORE_VERIFICATION_URL", 0, v, "DEVELOPER_PRODUCT_LEARN_MORE_URL", 0, s, "DISTRIBUTE_MODELS", 0, g, "LAUNCH_DATA_LEARN_MORE_URL", 0, n, "MARKETPLACE_POLICY", 0, A, "MOMENTS_LEARN_MORE_URL", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "PASS_LEARN_MORE_URL", 0, i, "PRIVATE_SERVER_LEARN_MORE_URL", 0, l, "PUBLISHING_ADVANCE", 0, h, "RELEASE_EXPERIENCE_TO_PUBLIC_URL", 0, d, "ROBLOX_ADVERTISING_STANDARDS", 0, L, "ROBLOX_COMMUNITY_STANDARDS", 0, y, "ROBLOX_TERMS_OF_USE", 0, P, "SALE_LOCATION_LEARN_MORE_URL", 0, p, "SUBSCRIPTION_LEARN_MORE_PRICING_URL", 0, m, "SUBSCRIPTION_LEARN_MORE_PRODUCT_TYPES_URL", 0, b, "SUBSCRIPTION_LEARN_MORE_URL", 0, f, "SUBSCRIPTION_TERMS_OF_USE", 0, U, "TOKEN_LEARN_MORE_URL", 0, C], 253536);
+    let T = {
             [t.default.Place]: r.default.Game,
             [t.default.SharedExperiences]: r.default.Game,
             [t.default.MyExperiences]: r.default.Game,
@@ -166,7 +166,7 @@
             [t.default.TextDocument]: r.default.LibraryAsset,
             [t.default.AssetPermissionRequests]: r.default.Game
         },
-        T = {
+        S = {
             [r.default.Game]: "experiences",
             [r.default.CatalogAsset]: "catalog",
             [r.default.LibraryAsset]: "library",
@@ -185,7 +185,8 @@
             [r.default.ReferralRewards]: "referral-reward-details",
             [r.default.Environment]: "environments",
             [r.default.Look]: "look",
-            [r.default.Alert]: "alerts"
+            [r.default.Alert]: "alerts",
+            [r.default.Journey]: "analytics/journeys"
         },
         x = {
             [r.default.Game]: a.ThumbnailTypes.gameIcon,
@@ -206,6 +207,7 @@
             [r.default.ReferralRewards]: a.ThumbnailTypes.assetThumbnail,
             [r.default.Environment]: a.ThumbnailTypes.universeThumbnail,
             [r.default.Alert]: a.ThumbnailTypes.universeThumbnail,
+            [r.default.Journey]: a.ThumbnailTypes.universeThumbnail,
             [r.default.Look]: a.ThumbnailTypes.assetThumbnail
         },
         R = {
@@ -227,7 +229,8 @@
             [r.default.ReferralRewards]: a.ReturnPolicy.AutoGenerated,
             [r.default.Environment]: a.ReturnPolicy.AutoGenerated,
             [r.default.Look]: a.ReturnPolicy.AutoGenerated,
-            [r.default.Alert]: a.ReturnPolicy.AutoGenerated
+            [r.default.Alert]: a.ReturnPolicy.AutoGenerated,
+            [r.default.Journey]: a.ReturnPolicy.AutoGenerated
         },
         k = {
             [t.default.Place]: "Label.Games",
@@ -354,7 +357,8 @@
             [r.default.ReferralRewards]: "Label.ReferralRewards",
             [r.default.Environment]: "Label.Environments",
             [r.default.Look]: "Label.Looks",
-            [r.default.Alert]: "Heading.Alerts"
+            [r.default.Alert]: "Heading.Alerts",
+            [r.default.Journey]: "Heading.Journeys"
         },
         G = {
             [r.default.Game]: "Label.Game",
@@ -375,7 +379,8 @@
             [r.default.ReferralRewards]: "Label.ReferralRewards",
             [r.default.Environment]: "Label.Environment",
             [r.default.Look]: "Label.Looks",
-            [r.default.Alert]: "Heading.Alert"
+            [r.default.Alert]: "Heading.Alert",
+            [r.default.Journey]: "Heading.Journey"
         },
         z = {
             [r.default.Game]: "Heading.Game",
@@ -396,7 +401,8 @@
             [r.default.ReferralRewards]: "Heading.ReferralRewards",
             [r.default.Environment]: "Heading.Environment",
             [r.default.Look]: "Heading.Looks",
-            [r.default.Alert]: "Heading.Alert"
+            [r.default.Alert]: "Heading.Alert",
+            [r.default.Journey]: "Heading.Journey"
         },
         w = {
             [r.default.Game]: null,
@@ -417,7 +423,8 @@
             [r.default.AvatarCreationToken]: "avatar-creation-tokens/create",
             [r.default.Environment]: "environments/create",
             [r.default.Look]: "looks/create",
-            [r.default.Alert]: "alerts/create"
+            [r.default.Alert]: "alerts/create",
+            [r.default.Journey]: "analytics/journeys/create"
         },
         I = {
             [r.default.Game]: null,
@@ -438,7 +445,8 @@
             [r.default.AvatarCreationToken]: null,
             [r.default.Environment]: null,
             [r.default.Look]: null,
-            [r.default.Alert]: null
+            [r.default.Alert]: null,
+            [r.default.Journey]: null
         },
         B = {
             [r.default.Badge]: c,
@@ -449,14 +457,14 @@
             [r.default.AvatarCreationToken]: C,
             [r.default.Look]: void 0
         };
-    e.s(["AllSettlePromiseFailed", 0, "rejected", "AllSettlePromiseSuccess", 0, "fulfilled", "assetFullNameKeys", 0, k, "assetTypeToItemType", 0, S, "assetTypeToSingularNameKeys", 0, M, "itemFullNameKeys", 0, D, "itemTypeToCreatePath", 0, w, "itemTypeToLearnMoreUrl", 0, B, "itemTypeToNameKeys", 0, G, "itemTypeToPath", 0, T, "itemTypeToReorderPath", 0, I, "itemTypeToReturnPolicyType", 0, R, "itemTypeToSingularNameKeys", 0, z, "itemTypeToThumbnailType", 0, x, "toastDurationTime", 0, 3e3, "uninitializedUniverseId", 0, -1], 759283)
+    e.s(["AllSettlePromiseFailed", 0, "rejected", "AllSettlePromiseSuccess", 0, "fulfilled", "assetFullNameKeys", 0, k, "assetTypeToItemType", 0, T, "assetTypeToSingularNameKeys", 0, M, "itemFullNameKeys", 0, D, "itemTypeToCreatePath", 0, w, "itemTypeToLearnMoreUrl", 0, B, "itemTypeToNameKeys", 0, G, "itemTypeToPath", 0, S, "itemTypeToReorderPath", 0, I, "itemTypeToReturnPolicyType", 0, R, "itemTypeToSingularNameKeys", 0, z, "itemTypeToThumbnailType", 0, x, "toastDurationTime", 0, 3e3, "uninitializedUniverseId", 0, -1], 759283)
 }, 307529, e => {
     "use strict";
     var a, t = ((a = t || {}).Place = "Place", a.MyExperiences = "MyExperiences", a.SharedExperiences = "SharedExperiences", a.TShirt = "TShirt", a.Shirt = "Shirt", a.Pants = "Pants", a.Hat = "Hat", a.HairAccessory = "HairAccessory", a.FaceAccessory = "FaceAccessory", a.NeckAccessory = "NeckAccessory", a.ShoulderAccessory = "ShoulderAccessory", a.FrontAccessory = "FrontAccessory", a.BackAccessory = "BackAccessory", a.WaistAccessory = "WaistAccessory", a.TShirtAccessory = "TShirtAccessory", a.ShirtAccessory = "ShirtAccessory", a.PantsAccessory = "PantsAccessory", a.JacketAccessory = "JacketAccessory", a.SweaterAccessory = "SweaterAccessory", a.ShortsAccessory = "ShortsAccessory", a.DressSkirtAccessory = "DressSkirtAccessory", a.EyebrowAccessory = "EyebrowAccessory", a.EyelashAccessory = "EyelashAccessory", a.FaceMakeup = "FaceMakeup", a.LipMakeup = "LipMakeup", a.EyeMakeup = "EyeMakeup", a.AvatarBackground = "AvatarBackground", a.AvatarLooks = "AvatarLooks", a.Showcase = "Showcase", a.Decal = "Decal", a.Image = "Image", a.Audio = "Audio", a.Model = "Model", a.Mesh = "Mesh", a.MeshPart = "MeshPart", a.Plugin = "Plugin", a.EmoteAnimation = "EmoteAnimation", a.Animation = "Animation", a.Video = "Video", a.TextDocument = "TextDocument", a.Event = "Event", a.UpcomingEvent = "UpcomingEvent", a.DraftEvent = "DraftEvent", a.PastEvent = "PastEvent", a.FontFamily = "FontFamily", a.ShareLink = "ShareLink", a.Moments = "Moments", a.StorePreviewVideo = "StorePreviewVideo", a.GamePreviewVideo = "GamePreviewVideo", a.AllCatalogAsset = "All", a.AssetPermissionRequests = "AssetPermissionRequests", a);
     e.s(["default", 0, t])
 }, 251622, e => {
     "use strict";
-    var a, t = ((a = t || {}).Game = "Game", a.Bundle = "Bundle", a.CatalogAsset = "CatalogAsset", a.LibraryAsset = "LibraryAsset", a.GamePass = "Pass", a.Badge = "Badge", a.DeveloperProduct = "DeveloperProduct", a.TranslatorGame = "TranslatorGame", a.Places = "Places", a.CreatedPlaces = "CreatedPlaces", a.Event = "Event", a.Notifications = "Notifications", a.ExperienceSubscription = "Subscription", a.Advanced = "Advanced", a.AvatarCreationToken = "AvatarCreationToken", a.ReferralRewards = "ReferralRewards", a.Environment = "Environment", a.Look = "Look", a.Alert = "Alert", a);
+    var a, t = ((a = t || {}).Game = "Game", a.Bundle = "Bundle", a.CatalogAsset = "CatalogAsset", a.LibraryAsset = "LibraryAsset", a.GamePass = "Pass", a.Badge = "Badge", a.DeveloperProduct = "DeveloperProduct", a.TranslatorGame = "TranslatorGame", a.Places = "Places", a.CreatedPlaces = "CreatedPlaces", a.Event = "Event", a.Notifications = "Notifications", a.ExperienceSubscription = "Subscription", a.Advanced = "Advanced", a.AvatarCreationToken = "AvatarCreationToken", a.ReferralRewards = "ReferralRewards", a.Environment = "Environment", a.Look = "Look", a.Alert = "Alert", a.Journey = "Journey", a);
     let r = Object.values(t);
     e.s(["default", 0, t, "isItem", 0, e => r.includes(e)])
 }, 726474, e => {
@@ -594,7 +602,7 @@
             getManagedPricingEventDetailsUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/monetization/managed-pricing/events/").concat(a, "/details"),
             getMonetizationHardCodedPricesUrl: e => "/dashboard/creations/experiences/".concat(e, "/monetization/hard-coded-prices"),
             getPersonalizedShopsUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/monetization/shop").concat(a ? "?tab=".concat(a) : ""),
-            getExternallyHiddenDeveloperProductsUrl: e => "/dashboard/creations/experiences/".concat(e, "/monetization/shop/externally-hidden-developer-products"),
+            getDeveloperProductPurchasesBlockedUrl: e => "/dashboard/creations/experiences/".concat(e, "/monetization/shop/developer-product-purchases-blocked"),
             getSellerOnboardingUrl: () => "/settings/eligibility/priced-assets",
             getTranslatorPortalUrl: () => "/dashboard/translator-portal",
             getAudioDistributionOnboardingUrl: () => "/settings/eligibility/audio-distribution",
@@ -620,9 +628,10 @@
             getExtendedServicesUnlock: e => "/dashboard/creations/experiences/".concat(e, "/extended-services"),
             getPaymentsUrl: () => "/dashboard/payments",
             getServerManagementUrl: e => "/dashboard/creations/experiences/".concat(e, "/server-management"),
+            getServerManagementDetailsUrl: (e, a, t) => "/dashboard/creations/experiences/".concat(e, "/server-management/").concat(a, "/servers/").concat(t, "/details"),
             getClientSessionsUrl: e => "/dashboard/creations/experiences/".concat(e, "/observability/client-sessions"),
             getClientSessionDetailsUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/observability/client-sessions/").concat(a),
-            getPlayerSupportUrl: e => "/dashboard/creations/experiences/".concat(e, "/player-support")
+            getPlayerSupportUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/player-support").concat(a ? "/".concat(a) : "")
         };
     e.s(["creatorStore", 0, {
         getUrl: () => o,
@@ -692,6 +701,7 @@
         getAnalyticsMonetizationPayerConversionRateGuideUrl: () => "".concat(n, "/production/analytics/monetization#improving-payer-conversion-rate"),
         getAnalyticsMonetizationARPPUGuideUrl: () => "".concat(n, "/production/analytics/monetization#improving-average-revenue-per-paying-user-arppu"),
         getAnalyticsFilterByMetricsGuideUrl: () => "".concat(n, "/production/analytics/analytics-dashboard#filter-by-metrics"),
+        getAnalyticsEventTypesUrl: () => "".concat(n, "/production/analytics/event-types"),
         getDiscoveryUrl: () => "".concat(n, "/discovery"),
         getDiscoveryBestPracticesUrl: () => "".concat(n, "/discovery#best-practices-for-discovery"),
         getDiscoveryRecommendationUrl: () => "".concat(n, "/discovery#how-recommendation-works"),
@@ -717,6 +727,7 @@
         getCloudServicesMemoryStoresMemoryUsageUrl: () => "".concat(n, "/cloud-services/memory-stores/observability#memory-usage-alerts"),
         getExperimentationUrl: () => "".concat(n, "/production/experiments"),
         getExperimentationBestPracticesUrl: () => "".concat(n, "/production/experiments#best-practices-for-experiments"),
+        getExperimentationViewAndInterpretResultsUrl: () => "".concat(n, "/production/experiments#view-and-interpret-results"),
         getReleaseNotesUrl: e => "".concat(n, "/release-notes/release-notes-").concat(e),
         getProductIntelligenceApisUrl: () => "".concat(n, "/production/monetization/developer-products#personalize-your-in-experience-store")
     }, "getDataCollectionSettingsUrl", 0, function(e, a) {
@@ -740,5 +751,5 @@
     e.s(["creatorHub", 0, a])
 }]);
 
-//# debugId=32c5ec98-d407-6546-593f-9826d161a826
-//# sourceMappingURL=1zk3y-qul_tyl.js.map
+//# debugId=45cc3508-aa55-dc5a-d71d-ec3e9da19b2d
+//# sourceMappingURL=08swejmyofzmc.js.map

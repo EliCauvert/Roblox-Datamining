@@ -237,6 +237,9 @@ Roblox.LangDynamic["Notifications.Preferences"] = {
     "Label.NotificationTypeTransactionRefunded": "Transaction Refunded",
     "Description.NotificationTypeTransactionRefunded": "Refunded transaction updates from my sales",
     "Description.UnsubscribeFromTransactionRefunded": "Stop notifying me about refunded transactions from my sales",
-    "Label.NotifciationTypeFriendPresence": "Friend Presence"
+    "Label.NotifciationTypeFriendPresence": "Friend Presence",
+    "Label.NotificationTypeCreatorTransparency": "Creator Transparency",
+    "Label.CategoryCreatorTransparency": "Creator Transparency",
+    "Description.NotificationTypeCreatorTransparency": "Updates about your content on Roblox"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Notifications.Preferences");

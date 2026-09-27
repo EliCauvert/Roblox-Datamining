@@ -89,6 +89,7 @@ Roblox.LangDynamic["Common.GameSorts"] = {
     "Description.CohortCCUCoachmark": "Active user counts are based on your current filters. To view all active users, set your filters to 'All devices' and 'All locations'",
     "Label.ItemsPickedForYou": "Items For You",
     "SubtitleRecommendedItems": "Enhance play with these recommended items",
-    "Label.CohortCCUSubtitlev2": "Player counts reflect the selected device and location filters"
+    "Label.CohortCCUSubtitlev2": "Player counts reflect the selected device and location filters",
+    "Title.TopBuildGamesv2": "Explore Something New"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Common.GameSorts");

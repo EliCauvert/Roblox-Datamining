@@ -15,6 +15,8 @@ Roblox.LangDynamic["CreatorDashboard.Controls"] = {
     "Action.Delete": "Delete",
     "Action.Remove": "Remove",
     "Action.More": "More",
-    "Action.Copy": "Copy"
+    "Action.Copy": "Copy",
+    "Action.Verify": "Verify",
+    "Action.Edit": "Edit"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_CreatorDashboard.Controls");

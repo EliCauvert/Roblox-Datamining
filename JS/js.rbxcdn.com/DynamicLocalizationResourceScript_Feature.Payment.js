@@ -236,6 +236,9 @@ Roblox.LangDynamic["Feature.Payment"] = {
     "Response.PaymentMethodError": "There was an error loading the payment method. Please retry or use a different payment method.",
     "Message.PayPalReconnect": "There was an issue connecting to your PayPal account. Please unlink and reconnect.",
     "Label.CashApp": "Cash App Pay",
-    "Description.LegalDisclosurePaymentMethodsV2WithBonusRobux": "One-time bonus included in the package. By purchasing Robux, you agree to our {termsLinkStart}Terms of Use{termsLinkEnd}, including the arbitration clause and revocation policy."
+    "Description.LegalDisclosurePaymentMethodsV2WithBonusRobux": "One-time bonus included in the package. By purchasing Robux, you agree to our {termsLinkStart}Terms of Use{termsLinkEnd}, including the arbitration clause and revocation policy.",
+    "Label.SomethingWentWrong": "Something went wrong",
+    "Description.OrderDetailsError": "There was a problem getting your order details.",
+    "Button.TryAgain": "Try again"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Payment");

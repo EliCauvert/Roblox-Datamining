@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "3c7dc3aa-ee0b-bb4a-fe05-7c56e9e12cb7")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "c48bf5a6-bb94-1587-a479-92f4c8e8ba7c")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 739167, e => {
@@ -7398,25 +7398,26 @@
                 }
             }
         };
-    (sS = sT || (sT = {})).Custom = "Custom", sS.Last1Day = "Last1Day", sS.Last1Hour = "Last1Hour", sS.Last28Days = "Last28Days", sS.Last3Days = "Last3Days", sS.Last56Days = "Last56Days", sS.Last7Days = "Last7Days", sS.Last90Days = "Last90Days";
-    var sP = sT;
-    g.AdsPublisherReportingArpu, g.AdsPublisherReportingVideo2DAdsPerDUV, g.AdsPublisherReportingVideo2DReachRatio, g.AveragePlayTimeMinutesPerDAU, g.AverageRevenuePerPayingUser, g.AverageRevenuePerUser, g.AverageSessionLengthMinutes, g.D1Retention, g.D7Retention, g.PayingUsersCVR, (sv = sC || (sC = {})).AveragePlayTimeMinutesPerDAU = "AveragePlayTimeMinutesPerDAU", sv.AverageRevenuePerPayingUser = "AverageRevenuePerPayingUser", sv.AverageRevenuePerUser = "AverageRevenuePerUser", sv.AverageSessionLengthMinutes = "AverageSessionLengthMinutes", sv.ClickCVR = "ClickCVR", sv.ClientCrashRate15m = "ClientCrashRate15m", sv.ClientFps = "ClientFps", sv.ClientMemoryUsage = "ClientMemoryUsage", sv.ClientMemoryUsagePercentage = "ClientMemoryUsagePercentage", sv.ComputeEfficiency = "ComputeEfficiency", sv.ConcurrentPlayers = "ConcurrentPlayers", sv.CoresPerServer = "CoresPerServer", sv.CsmFanoutRatio = "CsmFanoutRatio", sv.CsmGameServersConnectedCount = "CsmGameServersConnectedCount", sv.CsmMessageSizeBytes = "CsmMessageSizeBytes", sv.CsmPublishedMessagesCount = "CsmPublishedMessagesCount", sv.CsmReceivedMessagesCount = "CsmReceivedMessagesCount", sv.D1Retention = "D1Retention", sv.D30Retention = "D30Retention", sv.D7Retention = "D7Retention", sv.DailyActiveUsers = "DailyActiveUsers", sv.DailyRevenue = "DailyRevenue", sv.DataStoreConsumedListRequests = "DataStoreConsumedListRequests", sv.DataStoreConsumedReadRequests = "DataStoreConsumedReadRequests", sv.DataStoreConsumedRemoveRequests = "DataStoreConsumedRemoveRequests", sv.DataStoreConsumedWriteRequests = "DataStoreConsumedWriteRequests", sv.DataStoreListRequests = "DataStoreListRequests", sv.DataStoreListRequestsByEndpoint = "DataStoreListRequestsByEndpoint", sv.DataStoreListRequestsQuota = "DataStoreListRequestsQuota", sv.DataStoreListRequestsQuotaOrdered = "DataStoreListRequestsQuotaOrdered", sv.DataStoreListRequestsQuotaStandard = "DataStoreListRequestsQuotaStandard", sv.DataStoreReadRequests = "DataStoreReadRequests", sv.DataStoreReadRequestsByEndpoint = "DataStoreReadRequestsByEndpoint", sv.DataStoreReadRequestsQuotaOrdered = "DataStoreReadRequestsQuotaOrdered", sv.DataStoreReadRequestsQuotaStandard = "DataStoreReadRequestsQuotaStandard", sv.DataStoreRemoveRequests = "DataStoreRemoveRequests", sv.DataStoreRemoveRequestsByEndpoint = "DataStoreRemoveRequestsByEndpoint", sv.DataStoreRemoveRequestsQuotaOrdered = "DataStoreRemoveRequestsQuotaOrdered", sv.DataStoreRemoveRequestsQuotaStandard = "DataStoreRemoveRequestsQuotaStandard", sv.DataStoreRequests = "DataStoreRequests", sv.DataStoreRequestsByEndpoint = "DataStoreRequestsByEndpoint", sv.DataStoreRequestsByStatus = "DataStoreRequestsByStatus", sv.DataStoreStorageQuotaBytes = "DataStoreStorageQuotaBytes", sv.DataStoreStorageUsageBytes = "DataStoreStorageUsageBytes", sv.DataStoreWriteRequests = "DataStoreWriteRequests", sv.DataStoreWriteRequestsByEndpoint = "DataStoreWriteRequestsByEndpoint", sv.DataStoreWriteRequestsQuotaOrdered = "DataStoreWriteRequestsQuotaOrdered", sv.DataStoreWriteRequestsQuotaStandard = "DataStoreWriteRequestsQuotaStandard", sv.DauMauStickiness = "DauMauStickiness", sv.EndToEndCVR = "EndToEndCVR", sv.HttpServiceRequestsCount = "HttpServiceRequestsCount", sv.HttpServiceResponseTime = "HttpServiceResponseTime", sv.ImpressionCVR = "ImpressionCVR", sv.MatchmakingCategoricalCustomSignalsSimilarityRatio = "MatchmakingCategoricalCustomSignalsSimilarityRatio", sv.MatchmakingNumericCustomSignalsDifference = "MatchmakingNumericCustomSignalsDifference", sv.MatchmakingSignalsAgeDifference = "MatchmakingSignalsAgeDifference", sv.MatchmakingSignalsCommonChatGroupRatio = "MatchmakingSignalsCommonChatGroupRatio", sv.MatchmakingSignalsCommonDeviceTypeRatio = "MatchmakingSignalsCommonDeviceTypeRatio", sv.MatchmakingSignalsCommonLanguageRatio = "MatchmakingSignalsCommonLanguageRatio", sv.MatchmakingSignalsDeltaPing = "MatchmakingSignalsDeltaPing", sv.MatchmakingSignalsEstimatePing = "MatchmakingSignalsEstimatePing", sv.MatchmakingSignalsOccupancyRatio = "MatchmakingSignalsOccupancyRatio", sv.MatchmakingSignalsPlayHistoryDifference = "MatchmakingSignalsPlayHistoryDifference", sv.MatchmakingSignalsPreferredPlayerMatchRatioAvg = "MatchmakingSignalsPreferredPlayerMatchRatioAvg", sv.MatchmakingSignalsVoiceChatRatio = "MatchmakingSignalsVoiceChatRatio", sv.MemoryStoreErrorRateAlert = "MemoryStoreErrorRateAlert", sv.MemoryStoreMemoryQuotaBytes = "MemoryStoreMemoryQuotaBytes", sv.MemoryStoreMemoryUsageBytes = "MemoryStoreMemoryUsageBytes", sv.MemoryStoreRequests = "MemoryStoreRequests", sv.MemoryStoreRequestsByEndpoint = "MemoryStoreRequestsByEndpoint", sv.MemoryStoreRequestsByStatus = "MemoryStoreRequestsByStatus", sv.MemoryStoreRequestUnits = "MemoryStoreRequestUnits", sv.MemoryStoreRequestUnitsByEndpoint = "MemoryStoreRequestUnitsByEndpoint", sv.MemoryStoreRequestUnitsQuota = "MemoryStoreRequestUnitsQuota", sv.MemoryStoreThrottlingAlert = "MemoryStoreThrottlingAlert", sv.MonthlyActiveUsers = "MonthlyActiveUsers", sv.PayingUsers = "PayingUsers", sv.PayingUsersCVR = "PayingUsersCVR", sv.QualifiedEndToEndCVR = "QualifiedEndToEndCVR", sv.QualifiedUniqueUsersWithPlaySessions = "QualifiedUniqueUsersWithPlaySessions", sv.RFYPlayThroughRate = "RFYPlayThroughRate", sv.RFYQualifiedPTR = "RFYQualifiedPTR", sv.ServerCpuTime = "ServerCpuTime", sv.ServerFrameRate = "ServerFrameRate", sv.ServerMemoryUsage = "ServerMemoryUsage", sv.ServerMemoryUsageV2 = "ServerMemoryUsageV2", sv.SessionDurationSeconds = "SessionDurationSeconds", sv.SpeechToTextTranscriptionStatuses = "SpeechToTextTranscriptionStatuses", sv.SpeechToTextTranscriptionUsage = "SpeechToTextTranscriptionUsage", sv.TextToSpeechAssetSuccesses = "TextToSpeechAssetSuccesses", sv.TextToSpeechRawAudioErrors = "TextToSpeechRawAudioErrors", sv.TextToSpeechRawAudioSuccesses = "TextToSpeechRawAudioSuccesses", sv.ThumbnailImpressions = "ThumbnailImpressions", sv.ThumbnailQualifiedPTR = "ThumbnailQualifiedPTR", sv.TotalPlayTimeHours = "TotalPlayTimeHours", sv.UniqueUsersWithClicks = "UniqueUsersWithClicks", sv.UniqueUsersWithImpressions = "UniqueUsersWithImpressions", sv.UniqueUsersWithPlaySessions = "UniqueUsersWithPlaySessions", sv.Visits = "Visits", (sU = sb || (sb = {})).Count = "Count", sU.NonCount = "NonCount";
-    var sS, sv, sT, sC, sb, sU, sk, sf = sb;
-    (sM = sk || (sk = {})).Bytes = "Bytes", sM.BytesPerSecond = "BytesPerSecond", sM.Days = "Days", sM.Gigabytes = "Gigabytes", sM.GigabytesPerSecond = "GigabytesPerSecond", sM.Hours = "Hours", sM.Invalid = "Invalid", sM.Kilobytes = "Kilobytes", sM.KilobytesPerSecond = "KilobytesPerSecond", sM.Megabytes = "Megabytes", sM.MegabytesPerSecond = "MegabytesPerSecond", sM.Microseconds = "Microseconds", sM.Milliseconds = "Milliseconds", sM.Minutes = "Minutes", sM.Nanoseconds = "Nanoseconds", sM.Number = "Number", sM.NumberPerHours = "NumberPerHours", sM.NumberPerMilliseconds = "NumberPerMilliseconds", sM.NumberPerMinutes = "NumberPerMinutes", sM.NumberPerSecond = "NumberPerSecond", sM.Percentage01 = "Percentage01", sM.Percentage0100 = "Percentage0100", sM.Robux = "Robux", sM.Seconds = "Seconds", sM.Terabytes = "Terabytes", sM.TerabytesPerSecond = "TerabytesPerSecond", sM.Usd = "Usd";
-    var sM, sN, sw = sk;
-    (sL = sN || (sN = {})).Numeric = "Numeric", sL.String = "String", sL.StringArray = "StringArray";
-    var sL, sE, sh = sN;
-    (sI = sE || (sE = {})).AdAccountId = "AdAccountId", sI.Creator = "Creator", sI.Group = "Group", sI.Organization = "Organization", sI.Universe = "Universe";
-    var sI, sO, sx = sE;
-    (sV = sO || (sO = {})).ClientFps = "ClientFps", sV.ClientMemoryUsage = "ClientMemoryUsage", sV.ClientMemoryUsagePercentage = "ClientMemoryUsagePercentage", sV.CoresPerServer = "CoresPerServer", sV.CustomEventsV2 = "CustomEventsV2", sV.HttpServiceResponseTime = "HttpServiceResponseTime", sV.HttpServiceResponseTimeExtended = "HttpServiceResponseTimeExtended", sV.MatchmakingCategoricalCustomSignalsSimilarityRatio = "MatchmakingCategoricalCustomSignalsSimilarityRatio", sV.MatchmakingNumericCustomSignalsDifference = "MatchmakingNumericCustomSignalsDifference", sV.MatchmakingSignalsAgeDifference = "MatchmakingSignalsAgeDifference", sV.MatchmakingSignalsCommonChatGroupRatio = "MatchmakingSignalsCommonChatGroupRatio", sV.MatchmakingSignalsCommonDeviceTypeRatio = "MatchmakingSignalsCommonDeviceTypeRatio", sV.MatchmakingSignalsCommonLanguageRatio = "MatchmakingSignalsCommonLanguageRatio", sV.MatchmakingSignalsDeltaPing = "MatchmakingSignalsDeltaPing", sV.MatchmakingSignalsEstimatePing = "MatchmakingSignalsEstimatePing", sV.MatchmakingSignalsOccupancyRatio = "MatchmakingSignalsOccupancyRatio", sV.MatchmakingSignalsPlayHistoryDifference = "MatchmakingSignalsPlayHistoryDifference", sV.MatchmakingSignalsVoiceChatRatio = "MatchmakingSignalsVoiceChatRatio", sV.ServerCpuTime = "ServerCpuTime", sV.ServerFrameRate = "ServerFrameRate", sV.ServerMemoryUsage = "ServerMemoryUsage", sV.ServerMemoryUsageByServerAge = "ServerMemoryUsageByServerAge", sV.ServerMemoryUsageV2 = "ServerMemoryUsageV2", sV.SessionDurationSeconds = "SessionDurationSeconds", sV.SessionDurationSecondsMigration = "SessionDurationSecondsMigration";
-    var sV, sB, sF = sO;
-    (i = sB || (sB = {})).Error = "Error", i.Info = "Info", i.Warning = "Warning";
-    var sG = sB;
-    let sz = {
+    (sv = sC || (sC = {})).Custom = "Custom", sv.Last1Day = "Last1Day", sv.Last1Hour = "Last1Hour", sv.Last28Days = "Last28Days", sv.Last3Days = "Last3Days", sv.Last56Days = "Last56Days", sv.Last7Days = "Last7Days", sv.Last90Days = "Last90Days";
+    var sP = sC;
+    let sS = [g.AdsPublisherReportingArpu, g.AdsPublisherReportingVideo2DAdsPerDUV, g.AdsPublisherReportingVideo2DReachRatio, g.AveragePlayTimeMinutesPerDAU, g.AverageRevenuePerPayingUser, g.AverageRevenuePerUser, g.AverageSessionLengthMinutes, g.D1Retention, g.D7Retention, g.PayingUsersCVR];
+    (sT = sb || (sb = {})).AveragePlayTimeMinutesPerDAU = "AveragePlayTimeMinutesPerDAU", sT.AverageRevenuePerPayingUser = "AverageRevenuePerPayingUser", sT.AverageRevenuePerUser = "AverageRevenuePerUser", sT.AverageSessionLengthMinutes = "AverageSessionLengthMinutes", sT.ClickCVR = "ClickCVR", sT.ClientCrashRate15m = "ClientCrashRate15m", sT.ClientFps = "ClientFps", sT.ClientMemoryUsage = "ClientMemoryUsage", sT.ClientMemoryUsagePercentage = "ClientMemoryUsagePercentage", sT.ComputeEfficiency = "ComputeEfficiency", sT.ConcurrentPlayers = "ConcurrentPlayers", sT.CoresPerServer = "CoresPerServer", sT.CsmFanoutRatio = "CsmFanoutRatio", sT.CsmGameServersConnectedCount = "CsmGameServersConnectedCount", sT.CsmMessageSizeBytes = "CsmMessageSizeBytes", sT.CsmPublishedMessagesCount = "CsmPublishedMessagesCount", sT.CsmReceivedMessagesCount = "CsmReceivedMessagesCount", sT.D1Retention = "D1Retention", sT.D30Retention = "D30Retention", sT.D7Retention = "D7Retention", sT.DailyActiveUsers = "DailyActiveUsers", sT.DailyRevenue = "DailyRevenue", sT.DataStoreConsumedListRequests = "DataStoreConsumedListRequests", sT.DataStoreConsumedReadRequests = "DataStoreConsumedReadRequests", sT.DataStoreConsumedRemoveRequests = "DataStoreConsumedRemoveRequests", sT.DataStoreConsumedWriteRequests = "DataStoreConsumedWriteRequests", sT.DataStoreListRequests = "DataStoreListRequests", sT.DataStoreListRequestsByEndpoint = "DataStoreListRequestsByEndpoint", sT.DataStoreListRequestsQuota = "DataStoreListRequestsQuota", sT.DataStoreListRequestsQuotaOrdered = "DataStoreListRequestsQuotaOrdered", sT.DataStoreListRequestsQuotaStandard = "DataStoreListRequestsQuotaStandard", sT.DataStoreReadRequests = "DataStoreReadRequests", sT.DataStoreReadRequestsByEndpoint = "DataStoreReadRequestsByEndpoint", sT.DataStoreReadRequestsQuotaOrdered = "DataStoreReadRequestsQuotaOrdered", sT.DataStoreReadRequestsQuotaStandard = "DataStoreReadRequestsQuotaStandard", sT.DataStoreRemoveRequests = "DataStoreRemoveRequests", sT.DataStoreRemoveRequestsByEndpoint = "DataStoreRemoveRequestsByEndpoint", sT.DataStoreRemoveRequestsQuotaOrdered = "DataStoreRemoveRequestsQuotaOrdered", sT.DataStoreRemoveRequestsQuotaStandard = "DataStoreRemoveRequestsQuotaStandard", sT.DataStoreRequests = "DataStoreRequests", sT.DataStoreRequestsByEndpoint = "DataStoreRequestsByEndpoint", sT.DataStoreRequestsByStatus = "DataStoreRequestsByStatus", sT.DataStoreStorageQuotaBytes = "DataStoreStorageQuotaBytes", sT.DataStoreStorageUsageBytes = "DataStoreStorageUsageBytes", sT.DataStoreWriteRequests = "DataStoreWriteRequests", sT.DataStoreWriteRequestsByEndpoint = "DataStoreWriteRequestsByEndpoint", sT.DataStoreWriteRequestsQuotaOrdered = "DataStoreWriteRequestsQuotaOrdered", sT.DataStoreWriteRequestsQuotaStandard = "DataStoreWriteRequestsQuotaStandard", sT.DauMauStickiness = "DauMauStickiness", sT.EndToEndCVR = "EndToEndCVR", sT.HttpServiceRequestsCount = "HttpServiceRequestsCount", sT.HttpServiceResponseTime = "HttpServiceResponseTime", sT.ImpressionCVR = "ImpressionCVR", sT.MatchmakingCategoricalCustomSignalsSimilarityRatio = "MatchmakingCategoricalCustomSignalsSimilarityRatio", sT.MatchmakingNumericCustomSignalsDifference = "MatchmakingNumericCustomSignalsDifference", sT.MatchmakingSignalsAgeDifference = "MatchmakingSignalsAgeDifference", sT.MatchmakingSignalsCommonChatGroupRatio = "MatchmakingSignalsCommonChatGroupRatio", sT.MatchmakingSignalsCommonDeviceTypeRatio = "MatchmakingSignalsCommonDeviceTypeRatio", sT.MatchmakingSignalsCommonLanguageRatio = "MatchmakingSignalsCommonLanguageRatio", sT.MatchmakingSignalsDeltaPing = "MatchmakingSignalsDeltaPing", sT.MatchmakingSignalsEstimatePing = "MatchmakingSignalsEstimatePing", sT.MatchmakingSignalsOccupancyRatio = "MatchmakingSignalsOccupancyRatio", sT.MatchmakingSignalsPlayHistoryDifference = "MatchmakingSignalsPlayHistoryDifference", sT.MatchmakingSignalsPreferredPlayerMatchRatioAvg = "MatchmakingSignalsPreferredPlayerMatchRatioAvg", sT.MatchmakingSignalsVoiceChatRatio = "MatchmakingSignalsVoiceChatRatio", sT.MemoryStoreErrorRateAlert = "MemoryStoreErrorRateAlert", sT.MemoryStoreMemoryQuotaBytes = "MemoryStoreMemoryQuotaBytes", sT.MemoryStoreMemoryUsageBytes = "MemoryStoreMemoryUsageBytes", sT.MemoryStoreRequests = "MemoryStoreRequests", sT.MemoryStoreRequestsByEndpoint = "MemoryStoreRequestsByEndpoint", sT.MemoryStoreRequestsByStatus = "MemoryStoreRequestsByStatus", sT.MemoryStoreRequestUnits = "MemoryStoreRequestUnits", sT.MemoryStoreRequestUnitsByEndpoint = "MemoryStoreRequestUnitsByEndpoint", sT.MemoryStoreRequestUnitsQuota = "MemoryStoreRequestUnitsQuota", sT.MemoryStoreThrottlingAlert = "MemoryStoreThrottlingAlert", sT.MonthlyActiveUsers = "MonthlyActiveUsers", sT.PayingUsers = "PayingUsers", sT.PayingUsersCVR = "PayingUsersCVR", sT.QualifiedEndToEndCVR = "QualifiedEndToEndCVR", sT.QualifiedUniqueUsersWithPlaySessions = "QualifiedUniqueUsersWithPlaySessions", sT.RFYPlayThroughRate = "RFYPlayThroughRate", sT.RFYQualifiedPTR = "RFYQualifiedPTR", sT.ServerCpuTime = "ServerCpuTime", sT.ServerFrameRate = "ServerFrameRate", sT.ServerMemoryUsage = "ServerMemoryUsage", sT.ServerMemoryUsageV2 = "ServerMemoryUsageV2", sT.SessionDurationSeconds = "SessionDurationSeconds", sT.SpeechToTextTranscriptionStatuses = "SpeechToTextTranscriptionStatuses", sT.SpeechToTextTranscriptionUsage = "SpeechToTextTranscriptionUsage", sT.TextToSpeechAssetSuccesses = "TextToSpeechAssetSuccesses", sT.TextToSpeechRawAudioErrors = "TextToSpeechRawAudioErrors", sT.TextToSpeechRawAudioSuccesses = "TextToSpeechRawAudioSuccesses", sT.ThumbnailImpressions = "ThumbnailImpressions", sT.ThumbnailQualifiedPTR = "ThumbnailQualifiedPTR", sT.TotalPlayTimeHours = "TotalPlayTimeHours", sT.UniqueUsersWithClicks = "UniqueUsersWithClicks", sT.UniqueUsersWithImpressions = "UniqueUsersWithImpressions", sT.UniqueUsersWithPlaySessions = "UniqueUsersWithPlaySessions", sT.Visits = "Visits", (sk = sU || (sU = {})).Count = "Count", sk.NonCount = "NonCount";
+    var sv, sT, sC, sb, sU, sk, sf, sM = sU;
+    (sN = sf || (sf = {})).Bytes = "Bytes", sN.BytesPerSecond = "BytesPerSecond", sN.Days = "Days", sN.Gigabytes = "Gigabytes", sN.GigabytesPerSecond = "GigabytesPerSecond", sN.Hours = "Hours", sN.Invalid = "Invalid", sN.Kilobytes = "Kilobytes", sN.KilobytesPerSecond = "KilobytesPerSecond", sN.Megabytes = "Megabytes", sN.MegabytesPerSecond = "MegabytesPerSecond", sN.Microseconds = "Microseconds", sN.Milliseconds = "Milliseconds", sN.Minutes = "Minutes", sN.Nanoseconds = "Nanoseconds", sN.Number = "Number", sN.NumberPerHours = "NumberPerHours", sN.NumberPerMilliseconds = "NumberPerMilliseconds", sN.NumberPerMinutes = "NumberPerMinutes", sN.NumberPerSecond = "NumberPerSecond", sN.Percentage01 = "Percentage01", sN.Percentage0100 = "Percentage0100", sN.Robux = "Robux", sN.Seconds = "Seconds", sN.Terabytes = "Terabytes", sN.TerabytesPerSecond = "TerabytesPerSecond", sN.Usd = "Usd";
+    var sN, sw, sL = sf;
+    (sE = sw || (sw = {})).Numeric = "Numeric", sE.String = "String", sE.StringArray = "StringArray";
+    var sE, sh, sI = sw;
+    (sO = sh || (sh = {})).AdAccountId = "AdAccountId", sO.Creator = "Creator", sO.Group = "Group", sO.Organization = "Organization", sO.Universe = "Universe";
+    var sO, sx, sV = sh;
+    (sB = sx || (sx = {})).ClientFps = "ClientFps", sB.ClientMemoryUsage = "ClientMemoryUsage", sB.ClientMemoryUsagePercentage = "ClientMemoryUsagePercentage", sB.CoresPerServer = "CoresPerServer", sB.CustomEventsV2 = "CustomEventsV2", sB.HttpServiceResponseTime = "HttpServiceResponseTime", sB.HttpServiceResponseTimeExtended = "HttpServiceResponseTimeExtended", sB.MatchmakingCategoricalCustomSignalsSimilarityRatio = "MatchmakingCategoricalCustomSignalsSimilarityRatio", sB.MatchmakingNumericCustomSignalsDifference = "MatchmakingNumericCustomSignalsDifference", sB.MatchmakingSignalsAgeDifference = "MatchmakingSignalsAgeDifference", sB.MatchmakingSignalsCommonChatGroupRatio = "MatchmakingSignalsCommonChatGroupRatio", sB.MatchmakingSignalsCommonDeviceTypeRatio = "MatchmakingSignalsCommonDeviceTypeRatio", sB.MatchmakingSignalsCommonLanguageRatio = "MatchmakingSignalsCommonLanguageRatio", sB.MatchmakingSignalsDeltaPing = "MatchmakingSignalsDeltaPing", sB.MatchmakingSignalsEstimatePing = "MatchmakingSignalsEstimatePing", sB.MatchmakingSignalsOccupancyRatio = "MatchmakingSignalsOccupancyRatio", sB.MatchmakingSignalsPlayHistoryDifference = "MatchmakingSignalsPlayHistoryDifference", sB.MatchmakingSignalsVoiceChatRatio = "MatchmakingSignalsVoiceChatRatio", sB.ServerCpuTime = "ServerCpuTime", sB.ServerFrameRate = "ServerFrameRate", sB.ServerMemoryUsage = "ServerMemoryUsage", sB.ServerMemoryUsageByServerAge = "ServerMemoryUsageByServerAge", sB.ServerMemoryUsageV2 = "ServerMemoryUsageV2", sB.SessionDurationSeconds = "SessionDurationSeconds", sB.SessionDurationSecondsMigration = "SessionDurationSecondsMigration";
+    var sB, sF, sG = sx;
+    (i = sF || (sF = {})).Error = "Error", i.Info = "Info", i.Warning = "Warning";
+    var sz = sF;
+    let sq = {
         [g.ActionRatePerDau]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -7430,12 +7431,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ActionRatePerDauByActionType]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -7449,12 +7450,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ActionRatePerImpression]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -7468,12 +7469,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsPublisherReportingAdsPerEDAU]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 3,
             isPositiveGood: !0,
             localizedName: {
@@ -7486,12 +7487,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsPublisherReportingArpu]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -7505,12 +7506,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsPublisherReportingDisplayAdImpressions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7523,12 +7524,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingImmersiveDisplayRevenue]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7541,12 +7542,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingImmersiveDisplayRobuxEpm]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -7559,12 +7560,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsPublisherReportingImmersiveEvents]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7577,12 +7578,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingImmersiveVideoViews]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7595,12 +7596,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingPortalRevenueRobux]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7613,12 +7614,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingRobuxEpm]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -7631,12 +7632,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsPublisherReportingRobuxEpt]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -7649,12 +7650,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsPublisherReportingTotalImpressions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7675,12 +7676,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingTotalRevenueRobux]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7701,12 +7702,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingTotalTeleports]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7719,12 +7720,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingVideo2DAdsPerDUV]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 3,
             isPositiveGood: !0,
             localizedName: {
@@ -7737,12 +7738,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -7755,12 +7756,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsPublisherReportingVideo2DConversionRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -7774,12 +7775,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsPublisherReportingVideo2DDailyUniqueViewer]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7800,12 +7801,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingVideo2DEligibleDau]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7818,12 +7819,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -7844,12 +7845,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsPublisherReportingVideo2DEvents]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7862,12 +7863,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingVideo2DFillPercent]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -7881,12 +7882,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsPublisherReportingVideo2DFills]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7899,12 +7900,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingVideo2DImpressions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7925,12 +7926,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingVideo2DReachRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -7944,12 +7945,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsPublisherReportingVideo2DRequests]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7962,12 +7963,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingVideo2DRevenueRobux]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -7988,12 +7989,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingVideo2DRewardPercent]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -8007,12 +8008,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsPublisherReportingVideo2DRewards]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8025,12 +8026,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsPublisherReportingVideo2DRobuxEpm]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -8043,12 +8044,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsRoasEstimate]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -8062,12 +8063,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !1,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsRoasEstimateByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -8081,12 +8082,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !1,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsUAEarningsUsdDefaultView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -8100,12 +8101,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !1,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAEarningsUsdDefaultViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -8119,12 +8120,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !1,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpNumPlaysDefaultView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8137,12 +8138,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpNumPlaysDefaultViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8155,12 +8156,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpNumPlaysNewUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8173,12 +8174,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpNumPlaysNewUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8191,12 +8192,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpNumPlaysResurrected30dUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8209,12 +8210,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpNumPlaysResurrected30dUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8227,12 +8228,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpNumPlaysResurrected7dUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8245,12 +8246,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpNumPlaysResurrected7dUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8263,12 +8264,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpNumPlaysReturningUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8281,12 +8282,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpNumPlaysReturningUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8299,12 +8300,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpPlaytimeDefaultView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -8317,12 +8318,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpPlaytimeDefaultViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -8335,12 +8336,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpPlaytimeNewUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -8353,12 +8354,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpPlaytimeNewUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -8371,12 +8372,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpPlaytimeResurrected30dUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -8389,12 +8390,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpPlaytimeResurrected30dUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -8407,12 +8408,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpPlaytimeResurrected7dUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -8425,12 +8426,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpPlaytimeResurrected7dUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -8443,12 +8444,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpPlaytimeReturningUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -8461,12 +8462,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpPlaytimeReturningUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -8479,12 +8480,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpRobuxRevenueDefaultView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8497,12 +8498,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpRobuxRevenueDefaultViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8515,12 +8516,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpRobuxRevenueNewUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8533,12 +8534,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpRobuxRevenueNewUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8551,12 +8552,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpRobuxRevenueResurrected30dUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8569,12 +8570,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8587,12 +8588,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpRobuxRevenueResurrected7dUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8605,12 +8606,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8623,12 +8624,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpRobuxRevenueReturningUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8641,12 +8642,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAExpRobuxRevenueReturningUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8659,12 +8660,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumClicksDefaultView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8677,12 +8678,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumClicksDefaultViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8695,12 +8696,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumClicksNewUsers]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8713,12 +8714,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumClicksNewUsersByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8731,12 +8732,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumClicksResurrected30dUsers]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8749,12 +8750,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumClicksResurrected30dUsersByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8767,12 +8768,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumClicksResurrected7dUsers]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8785,12 +8786,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumClicksResurrected7dUsersByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8803,12 +8804,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumClicksReturningUsers]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8821,12 +8822,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumClicksReturningUsersByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8839,12 +8840,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumImpressionsDefaultView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8857,12 +8858,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumImpressionsDefaultViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8875,12 +8876,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumImpressionsNewUsers]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8893,12 +8894,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumImpressionsNewUsersByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8911,12 +8912,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumImpressionsResurrected30dUsers]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8929,12 +8930,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumImpressionsResurrected30dUsersByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8947,12 +8948,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumImpressionsResurrected7dUsers]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8965,12 +8966,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumImpressionsResurrected7dUsersByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -8983,12 +8984,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumImpressionsReturningUsers]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9001,12 +9002,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumImpressionsReturningUsersByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9019,12 +9020,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumPlaysDefaultView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9037,12 +9038,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumPlaysDefaultViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9055,12 +9056,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumPlaysNewUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9073,12 +9074,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumPlaysNewUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9091,12 +9092,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumPlaysResurrected30dUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9109,12 +9110,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumPlaysResurrected30dUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9127,12 +9128,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumPlaysResurrected7dUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9145,12 +9146,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumPlaysResurrected7dUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9163,12 +9164,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumPlaysReturningUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9181,12 +9182,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUANumPlaysReturningUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9199,12 +9200,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAPlaytimeDefaultView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -9217,12 +9218,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAPlaytimeDefaultViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -9235,12 +9236,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAPlaytimeNewUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -9253,12 +9254,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAPlaytimeNewUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -9271,12 +9272,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAPlaytimeResurrected30dUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -9289,12 +9290,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAPlaytimeResurrected30dUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -9307,12 +9308,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAPlaytimeResurrected7dUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -9325,12 +9326,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAPlaytimeResurrected7dUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -9343,12 +9344,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAPlaytimeReturningUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -9361,12 +9362,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUAPlaytimeReturningUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -9379,12 +9380,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUARoas]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9398,12 +9399,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !1,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsUARoasByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9417,12 +9418,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !1,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsUARobuxRevenueDefaultView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9435,12 +9436,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUARobuxRevenueDefaultViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9453,12 +9454,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUARobuxRevenueNewUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9471,12 +9472,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUARobuxRevenueNewUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9489,12 +9490,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUARobuxRevenueResurrected30dUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9507,12 +9508,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUARobuxRevenueResurrected30dUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9525,12 +9526,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUARobuxRevenueResurrected7dUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9543,12 +9544,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUARobuxRevenueResurrected7dUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9561,12 +9562,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUARobuxRevenueReturningUserView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9579,12 +9580,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUARobuxRevenueReturningUserViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9597,12 +9598,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUATotalSpendMicroUsdDefaultView]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9615,12 +9616,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUATotalSpendMicroUsdDefaultViewByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9633,12 +9634,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUATotalSpendMicroUsdNewUsers]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9651,12 +9652,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUATotalSpendMicroUsdNewUsersByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9669,12 +9670,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUATotalSpendMicroUsdResurrected30dUsers]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9687,12 +9688,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9705,12 +9706,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUATotalSpendMicroUsdResurrected7dUsers]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9723,12 +9724,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9741,12 +9742,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUATotalSpendMicroUsdReturningUsers]: {
-            resourceTypes: [sx.AdAccountId],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.AdAccountId],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9759,12 +9760,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsUATotalSpendMicroUsdReturningUsersByUniverse]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9777,12 +9778,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsVideo2DAdsPerEDAUBreakdown]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 3,
             isPositiveGood: !0,
             localizedName: {
@@ -9795,12 +9796,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 730,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AdsVideo2DEligibleDauBreakdown]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9813,12 +9814,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 730,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AdsVideo2DReachRatioBreakdown]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9832,12 +9833,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 730,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9850,12 +9851,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AffiliateLinkDailyAffiliateReactivationsPayoutRobux]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9868,12 +9869,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AffiliateLinkDailyAffiliateSignupsPayoutRobux]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9886,12 +9887,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9905,12 +9906,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9924,12 +9925,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AffiliateLinkDailyBookingsPerSpenderCombined]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -9943,12 +9944,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AffiliateLinkDailyQualifiedActiveSpenderReactivations]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9967,12 +9968,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AffiliateLinkDailyQualifiedReactivations]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -9991,12 +9992,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AffiliateLinkDailyQualifiedReactivationsBookingsRobux]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10009,12 +10010,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AffiliateLinkDailyQualifiedReactivationsSpenders]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -10033,12 +10034,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AffiliateLinkDailyQualifiedSignups]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -10057,12 +10058,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AffiliateLinkDailyQualifiedSignupsBookingsRobux]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10075,12 +10076,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AffiliateLinkDailyQualifiedSignupSpenders]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -10099,12 +10100,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AffiliateLinkDailyTotalPayoutRobux]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -10117,12 +10118,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AffiliateLinkDailyUniqueClick]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -10141,12 +10142,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AffiliateLinkDailyVisits]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -10165,12 +10166,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.AlertIncidentCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -10183,12 +10184,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.Attribution1DPayerConversionRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10211,12 +10212,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution1DPayerConversionRatioMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10230,12 +10231,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution1DPlaytimePerUserInMinutes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -10258,12 +10259,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution1DPlaytimePerUserInMinutesMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -10277,12 +10278,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution1DRobuxPerUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10305,12 +10306,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution1DRobuxPerUserMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10324,12 +10325,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution30DPayerConversionRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10352,12 +10353,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution30DPayerConversionRatioMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10371,12 +10372,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution30DPlaytimePerUserInMinutes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -10399,12 +10400,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution30DPlaytimePerUserInMinutesMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -10418,12 +10419,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution30DRobuxPerUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10446,12 +10447,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution30DRobuxPerUserMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10465,12 +10466,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution7DPayerConversionRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10493,12 +10494,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution7DPayerConversionRatioMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10512,12 +10513,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution7DPlaytimePerUserInMinutes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -10540,12 +10541,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution7DPlaytimePerUserInMinutesMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -10559,12 +10560,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution7DRobuxPerUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10587,12 +10588,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.Attribution7DRobuxPerUserMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10606,12 +10607,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AttributionD1RetentionRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10634,12 +10635,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AttributionD1RetentionRatioMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10653,12 +10654,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AttributionD30RetentionRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10681,12 +10682,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AttributionD30RetentionRatioMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10700,12 +10701,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AttributionD7RetentionRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10728,12 +10729,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AttributionD7RetentionRatioMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10747,12 +10748,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AverageImpressionsPerUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10766,12 +10767,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AveragePlayTimeMinutesPerDAU]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -10793,12 +10794,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AverageRevenuePerPayingUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10820,12 +10821,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AverageRevenuePerUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -10847,12 +10848,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AverageSessionLengthMinutes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -10873,12 +10874,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AvgViewTimePerView]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Seconds,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Seconds,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -10892,12 +10893,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.AvgViewTimePerViewer]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Seconds,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Seconds,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -10911,12 +10912,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthAttributesBps]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.BytesPerSecond,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.BytesPerSecond,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -10929,12 +10930,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthAttributesMaxBytes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Bytes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Bytes,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -10947,12 +10948,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthAttributesUpdatesPerSecond]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.NumberPerSecond,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.NumberPerSecond,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -10965,12 +10966,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthEventBps]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.BytesPerSecond,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.BytesPerSecond,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -10983,12 +10984,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthEventMaxBytes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Bytes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Bytes,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -11001,12 +11002,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthEventUpdatesPerSecond]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.NumberPerSecond,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.NumberPerSecond,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -11019,12 +11020,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthNewInstanceBps]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.BytesPerSecond,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.BytesPerSecond,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -11037,12 +11038,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthNewInstanceMaxBytes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Bytes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Bytes,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -11055,12 +11056,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthNewInstanceUpdatesPerSecond]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.NumberPerSecond,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.NumberPerSecond,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -11073,12 +11074,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthPropertiesBps]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.BytesPerSecond,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.BytesPerSecond,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -11091,12 +11092,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthPropertiesMaxBytes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Bytes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Bytes,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -11109,12 +11110,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthPropertiesUpdatesPerSecond]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.NumberPerSecond,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.NumberPerSecond,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -11127,12 +11128,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthTotalBps]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.BytesPerSecond,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.BytesPerSecond,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -11145,12 +11146,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthTotalMaxBytes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Bytes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Bytes,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -11163,12 +11164,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BandwidthTotalUpdatesPerSecond]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.NumberPerSecond,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.NumberPerSecond,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -11181,12 +11182,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.BonusPromotionsAwardedCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11199,12 +11200,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 365,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.BonusPromotionsGameJoinCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11217,12 +11218,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 365,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.BonusPromotionsImpressionCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11235,12 +11236,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 365,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ClickCVR]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -11262,12 +11263,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ClickCVRMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -11281,12 +11282,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ClientCpuTimeAvg]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Milliseconds,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Milliseconds,
             decimalPrecision: 3,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -11308,12 +11309,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ClientCrashCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -11335,12 +11336,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ClientCrashCountMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -11361,12 +11362,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ClientCrashRate15m]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -11389,12 +11390,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ClientCrashRate15mMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -11416,12 +11417,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ClientCrashRateNotStableAlert]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -11434,12 +11435,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ClientCrashRateNotStableAlertMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -11452,12 +11453,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.ClientFps]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.NumberPerSecond,
+        [sG.ClientFps]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.NumberPerSecond,
             decimalPrecision: 0,
             isPositiveGood: !0,
             isEligibleForAlerting: !0,
@@ -11479,12 +11480,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.ClientMemoryUsage]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Gigabytes,
+        [sG.ClientMemoryUsage]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Gigabytes,
             decimalPrecision: 2,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -11506,12 +11507,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.ClientMemoryUsagePercentage]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+        [sG.ClientMemoryUsagePercentage]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -11533,12 +11534,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CommentRatePerImpression]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -11552,12 +11553,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CommerceCheckouts]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11570,12 +11571,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommerceClicks]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11588,12 +11589,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommerceGMV]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -11606,12 +11607,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommerceImpressions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11624,12 +11625,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommerceOrders]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11642,12 +11643,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommerceQuantitySold]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11660,12 +11661,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommerceUniqueCheckouts]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11678,12 +11679,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommerceUniqueClicks]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11696,12 +11697,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommerceUniqueImpressions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11714,12 +11715,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommerceUniqueOrders]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11732,12 +11733,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommunityAnnouncementDeliveries]: {
-            resourceTypes: [sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11753,12 +11754,12 @@
                 disabled: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommunityAnnouncementEngagement]: {
-            resourceTypes: [sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11774,12 +11775,12 @@
                 disabled: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommunityAnnouncementEventCount]: {
-            resourceTypes: [sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11795,12 +11796,12 @@
                 disabled: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommunityAnnouncementNetReactions]: {
-            resourceTypes: [sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11816,12 +11817,12 @@
                 disabled: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommunityAnnouncementNotificationCTR]: {
-            resourceTypes: [sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -11838,12 +11839,12 @@
                 disabled: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CommunityAnnouncementUniqueClicks]: {
-            resourceTypes: [sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11859,12 +11860,12 @@
                 disabled: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommunityAnnouncementUniqueUsers]: {
-            resourceTypes: [sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11880,12 +11881,12 @@
                 disabled: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommunityForumContentEventCount]: {
-            resourceTypes: [sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11901,12 +11902,12 @@
                 disabled: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommunityForumContentUniqueUsers]: {
-            resourceTypes: [sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11922,12 +11923,12 @@
                 disabled: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommunityGroupPageUniqueVisitors]: {
-            resourceTypes: [sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11943,12 +11944,12 @@
                 disabled: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommunityGroupPageViews]: {
-            resourceTypes: [sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11964,12 +11965,12 @@
                 disabled: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommunityMembershipChangeEvents]: {
-            resourceTypes: [sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -11985,12 +11986,12 @@
                 disabled: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CommunityMembershipCount]: {
-            resourceTypes: [sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12006,12 +12007,12 @@
                 disabled: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ComputeEfficiency]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -12027,12 +12028,12 @@
                 disabled: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ConcurrentPlayers]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12060,12 +12061,12 @@
                 excluded: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
-        [sF.CoresPerServer]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+        [sG.CoresPerServer]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -12081,12 +12082,12 @@
                 disabled: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CpuCoreUtilization]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -12108,7 +12109,7 @@
             },
             quotaConfig: {
                 staticValue: .8,
-                severity: sG.Error,
+                severity: sz.Error,
                 label: {
                     key: "Label.Quota.CpuCoreUtilization",
                     namespace: l.Analytics
@@ -12116,12 +12117,12 @@
                 hideLegend: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CreatorRewardsAudienceExpansionFunnelEstimatedPayout]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12134,12 +12135,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CreatorRewardsAudienceExpansionFunnelPayerConversion60D]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage0100,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage0100,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -12159,12 +12160,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CreatorRewardsAudienceExpansionFunnelPayerConversion7D]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage0100,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage0100,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -12184,12 +12185,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage0100,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage0100,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -12208,12 +12209,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CreatorRewardsAudienceExpansionFunnelReactivations]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12232,12 +12233,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CreatorRewardsAudienceExpansionFunnelRetentionD1]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage0100,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage0100,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -12257,12 +12258,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CreatorRewardsAudienceExpansionFunnelRetentionD7]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage0100,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage0100,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -12282,12 +12283,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CreatorRewardsAudienceExpansionFunnelRevenue1D]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12300,12 +12301,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CreatorRewardsAudienceExpansionFunnelRevenue60D]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12319,12 +12320,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CreatorRewardsAudienceExpansionFunnelRevenue7D]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12338,12 +12339,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -12357,12 +12358,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -12376,12 +12377,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -12395,12 +12396,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -12414,12 +12415,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CreatorRewardsAudienceExpansionFunnelSignups]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12438,12 +12439,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CreatorRewardsAudienceExpansionFunnelUserCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12462,12 +12463,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CreatorRewardsAverageRobuxBookingsPerSpender]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12481,12 +12482,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12499,12 +12500,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CreatorRewardsLifetimeQualifiedReactivations]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12523,12 +12524,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CreatorRewardsLifetimeQualifiedSignups]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12547,12 +12548,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CreatorRewardsLifetimeQualifiedSpenders]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12571,12 +12572,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CsmFanoutRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 1,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -12593,12 +12594,12 @@
                 disabled: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CsmFanoutRatioExtended]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 1,
             isPositiveGood: !1,
             localizedName: {
@@ -12619,12 +12620,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CsmGameServersConnectedCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             isEligibleForAlerting: !0,
@@ -12646,12 +12647,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CsmMessageSizeBytes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Bytes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Bytes,
             decimalPrecision: 0,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -12676,12 +12677,12 @@
                 staticValue: 1024
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CsmMessageSizeQuota]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Bytes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Bytes,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -12697,12 +12698,12 @@
                 disabled: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CsmPublishedMessagesCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             isEligibleForAlerting: !0,
@@ -12719,12 +12720,12 @@
                 disabled: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CsmPublishedMessagesExtendedCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12745,12 +12746,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CsmReceivedMessagesCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             isEligibleForAlerting: !0,
@@ -12770,12 +12771,12 @@
                 metric: g.CsmReceivedMessagesQuota
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CsmReceivedMessagesExtendedCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12799,12 +12800,12 @@
                 metric: g.CsmReceivedMessagesQuota
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CsmReceivedMessagesQuota]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -12820,12 +12821,12 @@
                 disabled: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CubeDailyRequests]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12847,12 +12848,12 @@
                 }
             },
             retentionDurationDays: 190,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CubeLatencyAvg]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Seconds,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Seconds,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -12874,12 +12875,12 @@
                 }
             },
             retentionDurationDays: 190,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CubeLatencyP99]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Seconds,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Seconds,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -12901,12 +12902,12 @@
                 }
             },
             retentionDurationDays: 190,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.CubeOutcomes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12928,12 +12929,12 @@
                 }
             },
             retentionDurationDays: 190,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.CubeTotalRequests]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12955,12 +12956,12 @@
                 }
             },
             retentionDurationDays: 190,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
-        [sF.CustomEventsV2]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+        [sG.CustomEventsV2]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -12982,12 +12983,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.D1Retention]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -13010,12 +13011,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.D30Retention]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -13038,12 +13039,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.D7Retention]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -13066,12 +13067,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.DailyActiveUsers]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -13098,12 +13099,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DailyCohortRetention]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -13117,12 +13118,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.DailyRetentionCohortNoDim]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -13136,12 +13137,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.DailyRevenue]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -13162,12 +13163,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreConsumedListRequests]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -13198,12 +13199,12 @@
                 metric: g.DataStoreListRequestsQuotaStandard
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreConsumedReadRequests]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -13234,12 +13235,12 @@
                 metric: g.DataStoreReadRequestsQuotaStandard
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreConsumedRemoveRequests]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -13270,12 +13271,12 @@
                 metric: g.DataStoreRemoveRequestsQuotaStandard
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreConsumedWriteRequests]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -13306,12 +13307,12 @@
                 metric: g.DataStoreWriteRequestsQuotaStandard
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreListRequests]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13339,12 +13340,12 @@
                 excluded: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreListRequestsByEndpoint]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13371,12 +13372,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreListRequestsQuota]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13404,12 +13405,12 @@
                 excluded: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreListRequestsQuotaOrdered]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13428,12 +13429,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreListRequestsQuotaStandard]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13452,12 +13453,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreReadRequests]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13485,12 +13486,12 @@
                 excluded: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreReadRequestsByEndpoint]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13517,12 +13518,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreReadRequestsQuotaOrdered]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13541,12 +13542,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreReadRequestsQuotaStandard]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13574,12 +13575,12 @@
                 excluded: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreRemoveRequests]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13607,12 +13608,12 @@
                 excluded: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreRemoveRequestsByEndpoint]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13639,12 +13640,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreRemoveRequestsQuotaOrdered]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13663,12 +13664,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreRemoveRequestsQuotaStandard]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13696,12 +13697,12 @@
                 excluded: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreRequests]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -13729,12 +13730,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreRequestsByEndpoint]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13761,12 +13762,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreRequestsByStatus]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13793,12 +13794,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreStorageQuotaBytes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Bytes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Bytes,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13820,12 +13821,12 @@
                 excluded: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreStorageUsageBytes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Bytes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Bytes,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13849,12 +13850,12 @@
                 metric: g.DataStoreStorageQuotaBytes
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreWriteRequests]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13882,12 +13883,12 @@
                 excluded: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreWriteRequestsByEndpoint]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13914,12 +13915,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreWriteRequestsQuotaOrdered]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13938,12 +13939,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DataStoreWriteRequestsQuotaStandard]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -13971,12 +13972,12 @@
                 excluded: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.DauMauStickiness]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -13998,12 +13999,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.EarningsTotalUsd]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14016,12 +14017,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 730,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.EconomyAverageWalletBalance]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -14042,12 +14043,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.EconomyTransactionAmount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -14068,12 +14069,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.EconomyTransactionAmountSinks]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -14086,12 +14087,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.EconomyTransactionCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -14112,12 +14113,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.EndToEndCVR]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14139,12 +14140,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.EndToEndCVRMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14158,12 +14159,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ErrorCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -14176,12 +14177,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 70,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.EventAvgDailyActiveUsers]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -14195,12 +14196,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.EventAvgDailyRevenue]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -14214,12 +14215,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.EventAvgDailyUserPlaytimeMinutes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -14233,12 +14234,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.EventAvgRevenuePerDailyActiveUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14252,12 +14253,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ExperimentMetricAdsArpu]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14271,12 +14272,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ExperimentMetricAdsFrequency]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 3,
             isPositiveGood: !0,
             localizedName: {
@@ -14290,12 +14291,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ExperimentMetricAdsOptInRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14309,12 +14310,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ExperimentMetricAverageRevenuePerPayingUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14328,12 +14329,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ExperimentMetricAverageRevenuePerUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14347,12 +14348,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ExperimentMetricAverageSessionTime]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14366,12 +14367,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ExperimentMetricDay1Retention]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14385,12 +14386,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ExperimentMetricDay7Retention]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14404,12 +14405,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ExperimentMetricMean]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -14423,12 +14424,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ExperimentMetricPayerConversionRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14442,12 +14443,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ExperimentMetricPlaytimePerUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14461,12 +14462,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ExperimentMetricQualifiedPlayThroughRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14480,12 +14481,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ForwardD1Retention]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14507,12 +14508,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ForwardD30Retention]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14535,12 +14536,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ForwardD7Retention]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14563,12 +14564,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.FriendReferralAverageRobuxBookingsPerSpender]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14582,12 +14583,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.FriendReferralLifetimeEstimatedAffiliatePayoutRobux]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -14600,12 +14601,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.FriendReferralLifetimeQualifiedSignups]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -14624,12 +14625,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.FriendReferralLifetimeQualifiedSpenders]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -14648,12 +14649,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.FriendReferralLifetimeVisits]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -14666,12 +14667,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.FunnelCohortCompletionRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14685,12 +14686,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.FunnelCohortSessionCompletionRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14704,12 +14705,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.FunnelStepChurnRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -14723,12 +14724,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.FunnelStepCompletionRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14742,12 +14743,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.FunnelStepOverallCompletionRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14761,12 +14762,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.FunnelStepTotalCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -14785,12 +14786,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.FunnelUserChurnRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -14804,12 +14805,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.FunnelUserOverallCompletionRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14823,12 +14824,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.FunnelUserStepCompletionRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -14842,12 +14843,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.FunnelUserTotalCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -14866,12 +14867,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.HttpServiceRequestsCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             isEligibleForAlerting: !0,
@@ -14893,12 +14894,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.HttpServiceRequestsExtendedCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -14911,12 +14912,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.HttpServiceRequestsV2]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -14929,12 +14930,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
-        [sF.HttpServiceResponseTime]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Milliseconds,
+        [sG.HttpServiceResponseTime]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Milliseconds,
             decimalPrecision: 0,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -14956,12 +14957,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.HttpServiceResponseTimeExtended]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Milliseconds,
+        [sG.HttpServiceResponseTimeExtended]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Milliseconds,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -14974,12 +14975,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ImpressionCVR]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -15001,12 +15002,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ImpressionCVRMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -15020,12 +15021,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.IphEarningsRobux]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15038,12 +15039,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 2555,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.IphEarningsRobuxPartial]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15056,12 +15057,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 2555,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.IphTransactionCount]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15074,12 +15075,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 2555,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.IphTransactionCountPartial]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15092,12 +15093,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 2555,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ItemAvatar3dLimitedAvailableQuantity]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15110,12 +15111,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 190,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ItemAvatar3dLimitedTotalQuantity]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15128,12 +15129,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 190,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ItemAverageTransactionPrice]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -15146,12 +15147,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 190,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ItemLifetimeCreatorEarning]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15164,12 +15165,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 190,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ItemLifetimeRebateAmount]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15182,12 +15183,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 365,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ItemLifetimeRobuxSpent]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15200,12 +15201,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 190,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ItemLifetimeTransactionCount]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15218,12 +15219,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 190,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ItemLimitedSoldPercentage]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -15237,12 +15238,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 190,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ItemMonetizationRevenue]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15264,12 +15265,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ItemMonetizationSales]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15282,12 +15283,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ItemPublishAdvance]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15300,12 +15301,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 365,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ItemPublishAdvanceRecoupedPercentage]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -15319,12 +15320,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 365,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ItemTotalCreatorEarning]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15337,12 +15338,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 365,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ItemTotalRobuxSpent]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15355,12 +15356,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 365,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ItemTotalTransactionCount]: {
-            resourceTypes: [sx.Creator, sx.Group],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator, sV.Group],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15373,12 +15374,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 365,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JoinRatePerImpression]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -15392,12 +15393,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.JourneyCompletionUsers]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15416,12 +15417,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyEntryTransitions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15440,12 +15441,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyLastStageTransitions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15464,12 +15465,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyNodeTransitionChurnCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -15488,12 +15489,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyNodeTransitionChurnRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -15507,12 +15508,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.JourneyNodeTransitionCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15531,12 +15532,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyNodeUserChurnCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -15555,12 +15556,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyNodeUserChurnRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -15574,12 +15575,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.JourneyNodeUserCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15598,12 +15599,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyStageChurnRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -15617,12 +15618,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.JourneyStageSkipRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -15636,12 +15637,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.JourneyStageSkipTransitionCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -15660,12 +15661,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyStageSkipTransitionRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -15679,12 +15680,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.JourneyStageSkipUserCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -15703,12 +15704,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyStageTransitionChurnRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -15722,12 +15723,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.JourneyStageTransitionCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15746,12 +15747,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyStageUserCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15770,12 +15771,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyTotalUsers]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15794,12 +15795,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyTransitionCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15818,12 +15819,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyTransitionCountUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -15842,12 +15843,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.JourneyTransitionPctOfSource]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -15861,12 +15862,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.JourneyTransitionPctOfStart]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -15880,12 +15881,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.JourneyUserPctOfSource]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -15899,12 +15900,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.JourneyUserPctOfStart]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -15918,12 +15919,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.MaintenanceThreshold]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -15943,12 +15944,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.MatchmakingCategoricalCustomSignalsSimilarityRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+        [sG.MatchmakingCategoricalCustomSignalsSimilarityRatio]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -15969,12 +15970,12 @@
                 }
             },
             retentionDurationDays: 90,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.MatchmakingNumericCustomSignalsDifference]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+        [sG.MatchmakingNumericCustomSignalsDifference]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -15995,12 +15996,12 @@
                 }
             },
             retentionDurationDays: 90,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.MatchmakingPlayerAttributesLoadingStatusAvg]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -16014,12 +16015,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.MatchmakingSignalsAgeDifference]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+        [sG.MatchmakingSignalsAgeDifference]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -16040,12 +16041,12 @@
                 }
             },
             retentionDurationDays: 90,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.MatchmakingSignalsCommonChatGroupRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+        [sG.MatchmakingSignalsCommonChatGroupRatio]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -16066,12 +16067,12 @@
                 }
             },
             retentionDurationDays: 90,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.MatchmakingSignalsCommonDeviceTypeRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+        [sG.MatchmakingSignalsCommonDeviceTypeRatio]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -16092,12 +16093,12 @@
                 }
             },
             retentionDurationDays: 90,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.MatchmakingSignalsCommonLanguageRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+        [sG.MatchmakingSignalsCommonLanguageRatio]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -16118,12 +16119,12 @@
                 }
             },
             retentionDurationDays: 90,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.MatchmakingSignalsDeltaPing]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Milliseconds,
+        [sG.MatchmakingSignalsDeltaPing]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Milliseconds,
             decimalPrecision: 3,
             isPositiveGood: !1,
             localizedName: {
@@ -16144,12 +16145,12 @@
                 }
             },
             retentionDurationDays: 90,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.MatchmakingSignalsEstimatePing]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Milliseconds,
+        [sG.MatchmakingSignalsEstimatePing]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Milliseconds,
             decimalPrecision: 3,
             isPositiveGood: !1,
             localizedName: {
@@ -16170,12 +16171,12 @@
                 }
             },
             retentionDurationDays: 90,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.MatchmakingSignalsOccupancyRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+        [sG.MatchmakingSignalsOccupancyRatio]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -16196,12 +16197,12 @@
                 }
             },
             retentionDurationDays: 90,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.MatchmakingSignalsPlayHistoryDifference]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+        [sG.MatchmakingSignalsPlayHistoryDifference]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -16222,12 +16223,12 @@
                 }
             },
             retentionDurationDays: 90,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.MatchmakingSignalsPreferredPlayerMatchRatioAvg]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -16249,12 +16250,12 @@
                 }
             },
             retentionDurationDays: 90,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.MatchmakingSignalsVoiceChatRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+        [sG.MatchmakingSignalsVoiceChatRatio]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -16275,12 +16276,12 @@
                 }
             },
             retentionDurationDays: 90,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.MemoryStoreErrorRateAlert]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -16299,12 +16300,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.MemoryStoreMemoryQuotaBytes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Bytes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Bytes,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -16317,12 +16318,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.MemoryStoreMemoryUsageAlert]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -16335,12 +16336,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.MemoryStoreMemoryUsageBytes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Bytes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Bytes,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -16364,12 +16365,12 @@
                 metric: g.MemoryStoreMemoryQuotaBytes
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.MemoryStoreRequests]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -16397,12 +16398,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.MemoryStoreRequestsByEndpoint]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -16429,12 +16430,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.MemoryStoreRequestsByStatus]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -16461,12 +16462,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.MemoryStoreRequestUnits]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -16488,12 +16489,12 @@
                 metric: g.MemoryStoreRequestUnitsQuota
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.MemoryStoreRequestUnitsByEndpoint]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -16523,12 +16524,12 @@
                 metric: g.MemoryStoreRequestUnitsQuota
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.MemoryStoreRequestUnitsQuota]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -16547,12 +16548,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.MemoryStoreThrottlingAlert]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -16571,12 +16572,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.MonthlyActiveUsers]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -16603,12 +16604,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.OomUnexpectedExits]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -16630,12 +16631,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.OomUnexpectedExitsMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -16656,12 +16657,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.PayingUsers]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -16688,12 +16689,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.PayingUsersCVR]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -16715,12 +16716,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.PayoutRobux]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -16733,12 +16734,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.PayoutRobuxV2]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -16751,12 +16752,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.PeakConcurrentPlayers]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             isEligibleForAlerting: !0,
@@ -16784,12 +16785,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.PersonalizedShopsConversionRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -16802,12 +16803,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.PersonalizedShopsImpressions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -16820,12 +16821,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.PersonalizedShopsPurchases]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -16838,12 +16839,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.PersonalizedShopsRevenue]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -16856,12 +16857,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.PlayerFeedbackVotesCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -16874,12 +16875,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.PotentialEarningsTotalUsd]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -16892,12 +16893,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 730,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.PotentialExtraEarningsTotalUsd]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -16910,12 +16911,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 90,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.PurchaseRatePerImpression]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -16929,12 +16930,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.QualifiedEndToEndCVR]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -16956,12 +16957,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.QualifiedEndToEndCVRMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -16975,12 +16976,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.QualifiedUniqueUsersWithPlaySessions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -17007,12 +17008,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.QualifiedUniqueUsersWithPlaySessionsMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -17031,12 +17032,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ReactionRatePerImpression]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -17050,12 +17051,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RecommendationDau]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -17069,12 +17070,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.RecommendationViewsTotal]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -17088,12 +17089,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.RelativeThresholdCapture]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17113,12 +17114,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD1CoplayDays]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Days,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Days,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -17140,12 +17141,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD1Playtime]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -17167,12 +17168,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD1QualifiedPlaySessions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17194,12 +17195,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD1RobuxSpend]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17221,12 +17222,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD1SpendDay]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Days,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Days,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -17248,12 +17249,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD2To7CoplayDays]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Days,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Days,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -17275,12 +17276,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD2To7PlayDays]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Days,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Days,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -17302,12 +17303,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD2To7Playtime]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -17329,12 +17330,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD2To7QualifiedPlaySessions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17356,12 +17357,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD2To7RobuxSpend]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17383,12 +17384,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD2To7SpendDays]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Days,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Days,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -17410,12 +17411,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD8To28CoplayDays]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Days,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Days,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -17437,12 +17438,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD8To28PlayDays]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Days,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Days,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -17464,12 +17465,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD8To28Playtime]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -17491,12 +17492,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD8To28QualifiedPlaySessions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17518,12 +17519,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD8To28RobuxSpend]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17545,12 +17546,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYD8To28SpendDays]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Days,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Days,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -17572,12 +17573,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYDeepEngagementRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17599,12 +17600,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYDuration0To60]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -17626,12 +17627,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYDuration181To600]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17645,12 +17646,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !1,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYDuration61To180]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -17672,12 +17673,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYDurationGreaterThan600]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17691,12 +17692,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !1,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYL7IntentionalCoplayDays]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Days,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Days,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -17709,12 +17710,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYL7PlayDays]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Days,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Days,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -17727,12 +17728,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYL7PlaySessionsPerUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17754,12 +17755,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYL7PlayTime]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -17772,12 +17773,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYL7RobuxSpent]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17791,12 +17792,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYL7RobuxSpentDays]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Days,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Days,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -17809,12 +17810,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYPlayThroughRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17836,12 +17837,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYQualifiedPTR]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17863,12 +17864,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RFYUniqueNotInterestedUsersPerMillionImpressions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -17890,12 +17891,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -17908,12 +17909,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -17926,12 +17927,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.RobloxPlusDevBountyDailySubscribers]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -17944,12 +17945,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.RobloxPlusDevBountyPayoutRobux]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -17962,12 +17963,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.RobloxPlusDevBountySubscriberCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -17980,12 +17981,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.RobloxPlusDevBountySubscriberSpend]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -17998,12 +17999,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.RotraceTotalCalls]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -18025,12 +18026,12 @@
                 }
             },
             retentionDurationDays: 365,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.RSVPCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -18043,12 +18044,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
-        [sF.ServerCpuTime]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Milliseconds,
+        [sG.ServerCpuTime]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Milliseconds,
             decimalPrecision: 3,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -18070,12 +18071,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ServerCrashCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -18097,12 +18098,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
-        [sF.ServerFrameRate]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.NumberPerSecond,
+        [sG.ServerFrameRate]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.NumberPerSecond,
             decimalPrecision: 0,
             isPositiveGood: !0,
             isEligibleForAlerting: !0,
@@ -18124,12 +18125,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.ServerMemoryUsage]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Gigabytes,
+        [sG.ServerMemoryUsage]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Gigabytes,
             decimalPrecision: 2,
             isPositiveGood: !1,
             localizedName: {
@@ -18151,12 +18152,12 @@
                 excluded: !0
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.ServerMemoryUsageByServerAge]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Megabytes,
+        [sG.ServerMemoryUsageByServerAge]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Megabytes,
             decimalPrecision: 0,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -18178,12 +18179,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.ServerMemoryUsageV2]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Megabytes,
+        [sG.ServerMemoryUsageV2]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Megabytes,
             decimalPrecision: 0,
             isPositiveGood: !1,
             isEligibleForAlerting: !0,
@@ -18205,12 +18206,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.SessionDurationSeconds]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+        [sG.SessionDurationSeconds]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             isEligibleForAlerting: !0,
@@ -18232,12 +18233,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
-        [sF.SessionDurationSecondsMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+        [sG.SessionDurationSecondsMigration]: {
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -18258,12 +18259,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkAttribution1DPayerConversionRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18277,12 +18278,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkAttribution1DPlaytimePerUserInMinutes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -18296,12 +18297,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkAttribution1DRobuxPerUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18315,12 +18316,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkAttribution30DPayerConversionRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18334,12 +18335,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkAttribution30DPlaytimePerUserInMinutes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -18353,12 +18354,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkAttribution30DRobuxPerUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18372,12 +18373,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkAttribution7DPayerConversionRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18391,12 +18392,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkAttribution7DPlaytimePerUserInMinutes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -18410,12 +18411,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkAttribution7DRobuxPerUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Robux,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Robux,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18429,12 +18430,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkAttributionD1RetentionRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18448,12 +18449,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkAttributionD30RetentionRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18467,12 +18468,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkAttributionD7RetentionRatio]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18486,12 +18487,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkClickCVR]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18505,12 +18506,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkQualifiedClickCVR]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18524,12 +18525,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ShareLinkQualifiedUniqueUsersWithPlaySessions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -18548,12 +18549,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ShareLinkUniqueUsersWithClicks]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -18572,12 +18573,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ShareLinkUniqueUsersWithPlaySessions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -18596,12 +18597,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ShareRatePerImpression]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 4,
             isPositiveGood: !0,
             localizedName: {
@@ -18615,12 +18616,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.SourceCount]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -18639,12 +18640,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.SourceCountRatioKpi]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18664,12 +18665,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.SpeechToTextTranscriptionQuota]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -18688,12 +18689,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.SpeechToTextTranscriptionStatuses]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -18720,12 +18721,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.SpeechToTextTranscriptionUsage]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -18755,12 +18756,12 @@
                 metric: g.SpeechToTextTranscriptionQuota
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.SponsoredAdPlays]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -18773,12 +18774,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.StoreRevenue]: {
-            resourceTypes: [sx.Creator],
-            valueType: sh.Numeric,
-            unit: sw.Usd,
+            resourceTypes: [sV.Creator],
+            valueType: sI.Numeric,
+            unit: sL.Usd,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18800,12 +18801,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.StoreTransactions]: {
-            resourceTypes: [sx.Creator],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Creator],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -18827,12 +18828,12 @@
                 excluded: !0
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TargetThreshold]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -18852,12 +18853,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.TextToSpeechAssetSuccesses]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -18884,12 +18885,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TextToSpeechRawAudioErrors]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -18916,12 +18917,12 @@
                 }
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TextToSpeechRawAudioQuota]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -18940,12 +18941,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TextToSpeechRawAudioSuccesses]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -18975,12 +18976,12 @@
                 metric: g.TextToSpeechRawAudioQuota
             },
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ThumbnailAverageSessionLengthMinutes]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Minutes,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Minutes,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -18993,12 +18994,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ThumbnailImpressions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19011,12 +19012,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ThumbnailL7QualifiedPTR]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -19030,12 +19031,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ThumbnailQualifiedPlays]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19048,12 +19049,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.ThumbnailQualifiedPTR]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -19067,12 +19068,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.ThumbnailWinningSegments]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.StringArray,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.StringArray,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19085,12 +19086,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 30,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.TotalAbuseReports]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -19117,12 +19118,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TotalActions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19136,12 +19137,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TotalActionsByActionType]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -19155,12 +19156,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TotalComments]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19174,12 +19175,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TotalJoins]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19193,12 +19194,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TotalPlayTimeHours]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 1,
             isPositiveGood: !0,
             localizedName: {
@@ -19219,12 +19220,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TotalPurchases]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19238,12 +19239,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TotalReactionsAdded]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19257,12 +19258,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TotalSessionsEndedInBucket]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -19283,12 +19284,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TotalShares]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19302,12 +19303,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.TotalViewHours]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Hours,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Hours,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -19321,12 +19322,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.UniqueAbuseReportSubmittersPer1000PlaytimeHours]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.NumberPerHours,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.NumberPerHours,
             decimalPrecision: 1,
             isPositiveGood: !1,
             localizedName: {
@@ -19353,12 +19354,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.UniqueItemsPerUser]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -19372,12 +19373,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         },
         [g.UniqueServerShutdowns]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !1,
             localizedName: {
@@ -19390,12 +19391,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.UniqueUsersWithClicks]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19422,12 +19423,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.UniqueUsersWithClicksMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19446,12 +19447,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.UniqueUsersWithImpressions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19478,12 +19479,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.UniqueUsersWithImpressionsMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19502,12 +19503,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.UniqueUsersWithPlaySessions]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19534,12 +19535,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.UniqueUsersWithPlaySessionsMigration]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19558,12 +19559,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.UsersInExperiment]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19576,12 +19577,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.UsersJoinedFromNotifications]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19595,12 +19596,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.VideoServiceExclusivePlaybackSeconds]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Seconds,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Seconds,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19613,12 +19614,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.VideoServicePlaybackSeconds]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Seconds,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Seconds,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19631,12 +19632,12 @@
             },
             fillMissingDatapoints: !0,
             retentionDurationDays: 28,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.Visits]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Number,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Number,
             decimalPrecision: 0,
             isPositiveGood: !0,
             localizedName: {
@@ -19657,12 +19658,12 @@
                 }
             },
             retentionDurationDays: 1468,
-            metricDisplayType: sf.Count
+            metricDisplayType: sM.Count
         },
         [g.WeeklyCohortRetention]: {
-            resourceTypes: [sx.Universe],
-            valueType: sh.Numeric,
-            unit: sw.Percentage01,
+            resourceTypes: [sV.Universe],
+            valueType: sI.Numeric,
+            unit: sL.Percentage01,
             decimalPrecision: 2,
             isPositiveGood: !0,
             localizedName: {
@@ -19676,12 +19677,12 @@
             noDataFallback: so.NA,
             fillMissingDatapoints: !0,
             retentionDurationDays: 1468,
-            metricDisplayType: sf.NonCount
+            metricDisplayType: sM.NonCount
         }
     };
     (n = t || (t = {})).HalfHour = "METRIC_GRANULARITY_HALF_HOUR", n.None = "METRIC_GRANULARITY_NONE", n.OneDay = "METRIC_GRANULARITY_ONE_DAY", n.OneHour = "METRIC_GRANULARITY_ONE_HOUR", n.OneMinute = "METRIC_GRANULARITY_ONE_MINUTE", n.OneMonth = "METRIC_GRANULARITY_ONE_MONTH", n.OneWeek = "METRIC_GRANULARITY_ONE_WEEK";
-    var sq = t;
-    let sH = {
+    var sH = t;
+    let sQ = {
             [g.ActionRatePerDau]: {
                 filter: [],
                 breakdown: []
@@ -20506,15 +20507,15 @@
                 filter: [],
                 breakdown: []
             },
-            [sF.ClientFps]: {
+            [sG.ClientFps]: {
                 filter: [p.MemoryGroup, p.OperatingSystem, p.Place, p.Platform, sn.PercentileType],
                 breakdown: [p.MemoryGroup, p.OperatingSystem, p.Platform]
             },
-            [sF.ClientMemoryUsage]: {
+            [sG.ClientMemoryUsage]: {
                 filter: [p.MemoryGroup, p.OperatingSystem, p.Place, p.Platform, sn.PercentileType],
                 breakdown: [p.MemoryGroup, p.OperatingSystem, p.Platform]
             },
-            [sF.ClientMemoryUsagePercentage]: {
+            [sG.ClientMemoryUsagePercentage]: {
                 filter: [p.MemoryGroup, p.OperatingSystem, p.Place, p.Platform, sn.PercentileType],
                 breakdown: [p.MemoryGroup, p.OperatingSystem, p.Platform]
             },
@@ -20622,7 +20623,7 @@
                 filter: [],
                 breakdown: []
             },
-            [sF.CoresPerServer]: {
+            [sG.CoresPerServer]: {
                 filter: [],
                 breakdown: []
             },
@@ -20774,7 +20775,7 @@
                 filter: [],
                 breakdown: []
             },
-            [sF.CustomEventsV2]: {
+            [sG.CustomEventsV2]: {
                 filter: [],
                 breakdown: []
             },
@@ -21094,11 +21095,11 @@
                 filter: [],
                 breakdown: []
             },
-            [sF.HttpServiceResponseTime]: {
+            [sG.HttpServiceResponseTime]: {
                 filter: [p.HttpServiceDomains, p.HttpServiceMethod, p.Place, sn.PercentileType],
                 breakdown: [p.HttpServiceMethod]
             },
-            [sF.HttpServiceResponseTimeExtended]: {
+            [sG.HttpServiceResponseTimeExtended]: {
                 filter: [],
                 breakdown: []
             },
@@ -21290,11 +21291,11 @@
                 filter: [],
                 breakdown: []
             },
-            [sF.MatchmakingCategoricalCustomSignalsSimilarityRatio]: {
+            [sG.MatchmakingCategoricalCustomSignalsSimilarityRatio]: {
                 filter: [],
                 breakdown: []
             },
-            [sF.MatchmakingNumericCustomSignalsDifference]: {
+            [sG.MatchmakingNumericCustomSignalsDifference]: {
                 filter: [],
                 breakdown: []
             },
@@ -21302,35 +21303,35 @@
                 filter: [],
                 breakdown: []
             },
-            [sF.MatchmakingSignalsAgeDifference]: {
+            [sG.MatchmakingSignalsAgeDifference]: {
                 filter: [],
                 breakdown: []
             },
-            [sF.MatchmakingSignalsCommonChatGroupRatio]: {
+            [sG.MatchmakingSignalsCommonChatGroupRatio]: {
                 filter: [],
                 breakdown: []
             },
-            [sF.MatchmakingSignalsCommonDeviceTypeRatio]: {
+            [sG.MatchmakingSignalsCommonDeviceTypeRatio]: {
                 filter: [],
                 breakdown: []
             },
-            [sF.MatchmakingSignalsCommonLanguageRatio]: {
+            [sG.MatchmakingSignalsCommonLanguageRatio]: {
                 filter: [],
                 breakdown: []
             },
-            [sF.MatchmakingSignalsDeltaPing]: {
+            [sG.MatchmakingSignalsDeltaPing]: {
                 filter: [],
                 breakdown: []
             },
-            [sF.MatchmakingSignalsEstimatePing]: {
+            [sG.MatchmakingSignalsEstimatePing]: {
                 filter: [],
                 breakdown: []
             },
-            [sF.MatchmakingSignalsOccupancyRatio]: {
+            [sG.MatchmakingSignalsOccupancyRatio]: {
                 filter: [],
                 breakdown: []
             },
-            [sF.MatchmakingSignalsPlayHistoryDifference]: {
+            [sG.MatchmakingSignalsPlayHistoryDifference]: {
                 filter: [],
                 breakdown: []
             },
@@ -21338,7 +21339,7 @@
                 filter: [],
                 breakdown: []
             },
-            [sF.MatchmakingSignalsVoiceChatRatio]: {
+            [sG.MatchmakingSignalsVoiceChatRatio]: {
                 filter: [],
                 breakdown: []
             },
@@ -21638,7 +21639,7 @@
                 filter: [],
                 breakdown: []
             },
-            [sF.ServerCpuTime]: {
+            [sG.ServerCpuTime]: {
                 filter: [p.CpuTimeCategory, p.CpuTimeSubCategory, p.Place, sn.PercentileType],
                 breakdown: [p.CpuTimeCategory, p.CpuTimeSubCategory]
             },
@@ -21646,27 +21647,27 @@
                 filter: [],
                 breakdown: []
             },
-            [sF.ServerFrameRate]: {
+            [sG.ServerFrameRate]: {
                 filter: [p.Place, sn.PercentileType],
                 breakdown: []
             },
-            [sF.ServerMemoryUsage]: {
+            [sG.ServerMemoryUsage]: {
                 filter: [],
                 breakdown: []
             },
-            [sF.ServerMemoryUsageByServerAge]: {
+            [sG.ServerMemoryUsageByServerAge]: {
                 filter: [p.MemoryUsageCategory, p.MemoryUsageSubCategory, p.Place, sn.PercentileType],
                 breakdown: [p.MemoryUsageCategory, p.MemoryUsageSubCategory]
             },
-            [sF.ServerMemoryUsageV2]: {
+            [sG.ServerMemoryUsageV2]: {
                 filter: [p.MemoryUsageCategory, p.MemoryUsageSubCategory, p.Place, sn.PercentileType],
                 breakdown: [p.MemoryUsageCategory, p.MemoryUsageSubCategory]
             },
-            [sF.SessionDurationSeconds]: {
+            [sG.SessionDurationSeconds]: {
                 filter: [p.MemoryGroup, p.OperatingSystem, p.Place, p.Platform, sn.PercentileType],
                 breakdown: [p.MemoryGroup, p.OperatingSystem, p.Platform]
             },
-            [sF.SessionDurationSecondsMigration]: {
+            [sG.SessionDurationSecondsMigration]: {
                 filter: [],
                 breakdown: []
             },
@@ -21923,7 +21924,7 @@
                 breakdown: []
             }
         },
-        sQ = {
+        sJ = {
             [g.ActionRatePerDau]: [p.AgeGroup, p.ConfigName, p.Gender, p.LocationId, p.OperatingSystem, p.Platform],
             [g.ActionRatePerDauByActionType]: [p.ActionType, p.AgeGroup, p.ConfigName, p.Gender, p.LocationId, p.OperatingSystem, p.Platform],
             [g.ActionRatePerImpression]: [p.AgeGroup, p.ConfigName, p.Gender, p.LocationId, p.OperatingSystem, p.Platform],
@@ -22130,9 +22131,9 @@
             [g.ClientCrashRate15mMigration]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly],
             [g.ClientCrashRateNotStableAlert]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly],
             [g.ClientCrashRateNotStableAlertMigration]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly],
-            [sF.ClientFps]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly, sn.PercentileType],
-            [sF.ClientMemoryUsage]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly, sn.PercentileType],
-            [sF.ClientMemoryUsagePercentage]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly, sn.PercentileType],
+            [sG.ClientFps]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly, sn.PercentileType],
+            [sG.ClientMemoryUsage]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly, sn.PercentileType],
+            [sG.ClientMemoryUsagePercentage]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly, sn.PercentileType],
             [g.CommentRatePerImpression]: [p.AgeGroup, p.ConfigName, p.Gender, p.LocationId, p.OperatingSystem, p.Platform],
             [g.CommerceCheckouts]: [p.CommerceProductId, p.Gender, p.OperatingSystem, p.Platform],
             [g.CommerceClicks]: [p.CommerceProductId, p.Gender, p.OperatingSystem, p.Platform],
@@ -22159,7 +22160,7 @@
             [g.CommunityMembershipCount]: [p.AgeGroupV2, p.Country, p.Gender, p.Locale, p.OperatingSystem, p.Platform, sn.TopCountries, sn.TopLocales],
             [g.ComputeEfficiency]: [p.Place],
             [g.ConcurrentPlayers]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly],
-            [sF.CoresPerServer]: [p.Place, sn.PercentileType],
+            [sG.CoresPerServer]: [p.Place, sn.PercentileType],
             [g.CpuCoreUtilization]: [p.Place],
             [g.CreatorRewardsAudienceExpansionFunnelEstimatedPayout]: [p.CreatorRewardsAudienceExpansionFunnelIsEstimate, p.CreatorRewardsAudienceExpansionFunnelIsReactivation, p.CreatorRewardsAudienceExpansionFunnelIsSignup],
             [g.CreatorRewardsAudienceExpansionFunnelPayerConversion60D]: [p.CreatorRewardsAudienceExpansionFunnelIsEstimate, p.CreatorRewardsAudienceExpansionFunnelIsReactivation, p.CreatorRewardsAudienceExpansionFunnelIsSignup],
@@ -22197,7 +22198,7 @@
             [g.CubeLatencyP99]: [p.WorkflowType],
             [g.CubeOutcomes]: [p.Outcome, p.WorkflowType],
             [g.CubeTotalRequests]: [p.WorkflowType],
-            [sF.CustomEventsV2]: [p.AgeGroup, p.CustomEventName, p.CustomField1, p.CustomField2, p.CustomField3, p.Gender, p.IsNewUser, p.OperatingSystem, p.PayerStatus, p.Platform, sn.AggregationType],
+            [sG.CustomEventsV2]: [p.AgeGroup, p.CustomEventName, p.CustomField1, p.CustomField2, p.CustomField3, p.Gender, p.IsNewUser, p.OperatingSystem, p.PayerStatus, p.Platform, sn.AggregationType],
             [g.D1Retention]: [p.AcquisitionSource, p.AgeGroupV2, p.Country, p.Gender, p.Locale, p.OperatingSystem, p.Platform, p.UserO18Eligibility, p.UserSegmentationAccountAge, p.UserSegmentationActivationStatus, p.UserSegmentationEngagementLevel, p.UserSegmentationPayerStatus, p.UserSegmentationPlatformActivationStatus, p.UserSegmentationPlatformSpenderStatus, sn.TopAcquisitionSources, sn.TopCountries, sn.TopLocales],
             [g.D30Retention]: [p.AcquisitionSource, p.AgeGroupV2, p.Country, p.Gender, p.Locale, p.OperatingSystem, p.Platform, p.UserO18Eligibility, p.UserSegmentationAccountAge, p.UserSegmentationActivationStatus, p.UserSegmentationEngagementLevel, p.UserSegmentationPayerStatus, p.UserSegmentationPlatformActivationStatus, p.UserSegmentationPlatformSpenderStatus, sn.TopAcquisitionSources, sn.TopCountries, sn.TopLocales],
             [g.D7Retention]: [p.AcquisitionSource, p.AgeGroupV2, p.Country, p.Gender, p.Locale, p.OperatingSystem, p.Platform, p.UserO18Eligibility, p.UserSegmentationAccountAge, p.UserSegmentationActivationStatus, p.UserSegmentationEngagementLevel, p.UserSegmentationPayerStatus, p.UserSegmentationPlatformActivationStatus, p.UserSegmentationPlatformSpenderStatus, sn.TopAcquisitionSources, sn.TopCountries, sn.TopLocales],
@@ -22277,8 +22278,8 @@
             [g.HttpServiceRequestsCount]: [p.HttpServiceDomains, p.HttpServiceMethod, p.HttpServiceStatus, p.Place],
             [g.HttpServiceRequestsExtendedCount]: [p.HttpServiceDomainsExtended, p.HttpServiceMethod, p.HttpServiceStatus, p.Place],
             [g.HttpServiceRequestsV2]: [p.HttpServiceMethod, p.HttpServiceStatus, p.Place],
-            [sF.HttpServiceResponseTime]: [p.HttpServiceDomains, p.HttpServiceMethod, p.Place, sn.PercentileType],
-            [sF.HttpServiceResponseTimeExtended]: [p.HttpServiceDomainsExtended, p.HttpServiceMethod, p.Place, sn.PercentileType],
+            [sG.HttpServiceResponseTime]: [p.HttpServiceDomains, p.HttpServiceMethod, p.Place, sn.PercentileType],
+            [sG.HttpServiceResponseTimeExtended]: [p.HttpServiceDomainsExtended, p.HttpServiceMethod, p.Place, sn.PercentileType],
             [g.ImpressionCVR]: [p.AcquisitionSource, p.AgeGroupV2, p.Gender, p.IsNewUser, p.OperatingSystem, p.Platform, p.UserSegmentationPlatformActivationStatus, p.UserSegmentationPlatformSpenderStatus, sn.TopAcquisitionSources],
             [g.ImpressionCVRMigration]: [p.AcquisitionSource, p.AgeGroupV2, p.Gender, p.IsNewUser, p.OperatingSystem, p.Platform, p.UserSegmentationPlatformActivationStatus, p.UserSegmentationPlatformSpenderStatus, sn.TopAcquisitionSources],
             [g.IphEarningsRobux]: [p.AgreementId, p.Country, p.EarningsType, p.IpFamilyName, p.LicenseName, sn.TopCountries],
@@ -22326,19 +22327,19 @@
             [g.JourneyUserPctOfSource]: [p.AgeGroup, p.CustomField1, p.CustomField2, p.CustomField3, p.FromNode, p.FromStage, p.Gender, p.IsNewUser, p.JourneyName, p.JourneyVersion, p.OperatingSystem, p.PayerStatus, p.Platform, p.ToNode, p.ToStage],
             [g.JourneyUserPctOfStart]: [p.AgeGroup, p.CustomField1, p.CustomField2, p.CustomField3, p.FromNode, p.FromStage, p.Gender, p.IsNewUser, p.JourneyName, p.JourneyVersion, p.OperatingSystem, p.PayerStatus, p.Platform, p.ToNode, p.ToStage],
             [g.MaintenanceThreshold]: [],
-            [sF.MatchmakingCategoricalCustomSignalsSimilarityRatio]: [p.AgeGroup, p.Locale, p.MatchmakingCategoricalCustomSignal, p.Place, p.Platform, sn.PercentileType, sn.TopLocales],
-            [sF.MatchmakingNumericCustomSignalsDifference]: [p.AgeGroup, p.Locale, p.MatchmakingNumericCustomSignal, p.Place, p.Platform, sn.PercentileType, sn.TopLocales],
+            [sG.MatchmakingCategoricalCustomSignalsSimilarityRatio]: [p.AgeGroup, p.Locale, p.MatchmakingCategoricalCustomSignal, p.Place, p.Platform, sn.PercentileType, sn.TopLocales],
+            [sG.MatchmakingNumericCustomSignalsDifference]: [p.AgeGroup, p.Locale, p.MatchmakingNumericCustomSignal, p.Place, p.Platform, sn.PercentileType, sn.TopLocales],
             [g.MatchmakingPlayerAttributesLoadingStatusAvg]: [p.MatchmakingAttribute, p.MatchmakingPlayerAttributesLoadingStatus],
-            [sF.MatchmakingSignalsAgeDifference]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
-            [sF.MatchmakingSignalsCommonChatGroupRatio]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
-            [sF.MatchmakingSignalsCommonDeviceTypeRatio]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
-            [sF.MatchmakingSignalsCommonLanguageRatio]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
-            [sF.MatchmakingSignalsDeltaPing]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
-            [sF.MatchmakingSignalsEstimatePing]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
-            [sF.MatchmakingSignalsOccupancyRatio]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
-            [sF.MatchmakingSignalsPlayHistoryDifference]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
+            [sG.MatchmakingSignalsAgeDifference]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
+            [sG.MatchmakingSignalsCommonChatGroupRatio]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
+            [sG.MatchmakingSignalsCommonDeviceTypeRatio]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
+            [sG.MatchmakingSignalsCommonLanguageRatio]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
+            [sG.MatchmakingSignalsDeltaPing]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
+            [sG.MatchmakingSignalsEstimatePing]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
+            [sG.MatchmakingSignalsOccupancyRatio]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
+            [sG.MatchmakingSignalsPlayHistoryDifference]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
             [g.MatchmakingSignalsPreferredPlayerMatchRatioAvg]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.TopCountries, sn.TopLocales],
-            [sF.MatchmakingSignalsVoiceChatRatio]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
+            [sG.MatchmakingSignalsVoiceChatRatio]: [p.AgeGroup, p.Country, p.Locale, p.Place, p.Platform, sn.PercentileType, sn.TopCountries, sn.TopLocales],
             [g.MemoryStoreErrorRateAlert]: [p.MemoryStoreErrorRateAlertSeverity],
             [g.MemoryStoreMemoryQuotaBytes]: [],
             [g.MemoryStoreMemoryUsageAlert]: [p.MemoryStoreMemoryUsageAlertSeverity],
@@ -22413,14 +22414,14 @@
             [g.RobloxPlusDevBountySubscriberSpend]: [],
             [g.RotraceTotalCalls]: [p.SimplifiedUrl, sn.TopSimplifiedUrls],
             [g.RSVPCount]: [p.EndTimeUTC, p.EventCategory, p.OccurrenceId, p.StartTimeUTC, p.VirtualEventId],
-            [sF.ServerCpuTime]: [p.CpuTimeCategory, p.CpuTimeSubCategory, p.Place, sn.PercentileType],
+            [sG.ServerCpuTime]: [p.CpuTimeCategory, p.CpuTimeSubCategory, p.Place, sn.PercentileType],
             [g.ServerCrashCount]: [p.CrashType, p.Place],
-            [sF.ServerFrameRate]: [p.Place, sn.PercentileType],
-            [sF.ServerMemoryUsage]: [p.Place, sn.PercentileType],
-            [sF.ServerMemoryUsageByServerAge]: [p.MemoryUsageCategory, p.MemoryUsageSubCategory, p.Place, p.ServerAgeBucket, sn.PercentileType],
-            [sF.ServerMemoryUsageV2]: [p.MemoryUsageCategory, p.MemoryUsageSubCategory, p.Place, p.ServerAgeBucket, sn.PercentileType],
-            [sF.SessionDurationSeconds]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly, sn.PercentileType],
-            [sF.SessionDurationSecondsMigration]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly, sn.PercentileType],
+            [sG.ServerFrameRate]: [p.Place, sn.PercentileType],
+            [sG.ServerMemoryUsage]: [p.Place, sn.PercentileType],
+            [sG.ServerMemoryUsageByServerAge]: [p.MemoryUsageCategory, p.MemoryUsageSubCategory, p.Place, p.ServerAgeBucket, sn.PercentileType],
+            [sG.ServerMemoryUsageV2]: [p.MemoryUsageCategory, p.MemoryUsageSubCategory, p.Place, p.ServerAgeBucket, sn.PercentileType],
+            [sG.SessionDurationSeconds]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly, sn.PercentileType],
+            [sG.SessionDurationSecondsMigration]: [p.MemoryGroup, p.OperatingSystem, p.Place, p.PlaceVersion, p.Platform, sn.LatestPlaceVersion, sn.LatestPlaceVersionOnly, sn.PercentileType],
             [g.ShareLinkAttribution1DPayerConversionRatio]: [p.AgeGroup, p.CampaignName, p.Gender, p.OperatingSystem, p.Platform, p.ShareLinkId],
             [g.ShareLinkAttribution1DPlaytimePerUserInMinutes]: [p.AgeGroup, p.CampaignName, p.Gender, p.OperatingSystem, p.Platform, p.ShareLinkId],
             [g.ShareLinkAttribution1DRobuxPerUser]: [p.AgeGroup, p.CampaignName, p.Gender, p.OperatingSystem, p.Platform, p.ShareLinkId],
@@ -22485,570 +22486,570 @@
             [g.Visits]: [p.AgeGroupV2, p.Country, p.Gender, p.IsNewUser, p.Locale, p.OperatingSystem, p.Platform, p.UserO18Eligibility, p.UserSegmentationAccountAge, p.UserSegmentationActivationStatus, p.UserSegmentationEngagementLevel, p.UserSegmentationPayerStatus, p.UserSegmentationPlatformActivationStatus, p.UserSegmentationPlatformSpenderStatus, sn.TopCountries, sn.TopLocales],
             [g.WeeklyCohortRetention]: [p.AcquisitionSource, p.AgeGroupV2, p.CohortWeek, p.Country, p.Gender, p.Locale, p.OperatingSystem, p.Platform, p.UserSegmentationAccountAge, p.UserSegmentationActivationStatus, p.UserSegmentationEngagementLevel, p.UserSegmentationPayerStatus, p.UserSegmentationPlatformActivationStatus, p.UserSegmentationPlatformSpenderStatus, sn.TopAcquisitionSources, sn.TopCountries, sn.TopLocales]
         },
-        sJ = {
-            [g.ActionRatePerDau]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.ActionRatePerDauByActionType]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.ActionRatePerImpression]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.AdsPublisherReportingAdsPerEDAU]: [sq.None, sq.OneDay],
-            [g.AdsPublisherReportingArpu]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AdsPublisherReportingDisplayAdImpressions]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingImmersiveDisplayRevenue]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingImmersiveDisplayRobuxEpm]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingImmersiveEvents]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingImmersiveVideoViews]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingPortalRevenueRobux]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingRobuxEpm]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingRobuxEpt]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingTotalImpressions]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingTotalRevenueRobux]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingTotalTeleports]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingVideo2DAdsPerDUV]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingVideo2DConversionRate]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingVideo2DDailyUniqueViewer]: [sq.None, sq.OneDay],
-            [g.AdsPublisherReportingVideo2DEligibleDau]: [sq.None, sq.OneDay],
-            [g.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingVideo2DEvents]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingVideo2DFillPercent]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingVideo2DFills]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingVideo2DImpressions]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingVideo2DReachRatio]: [sq.None, sq.OneDay],
-            [g.AdsPublisherReportingVideo2DRequests]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingVideo2DRevenueRobux]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingVideo2DRewardPercent]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingVideo2DRewards]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsPublisherReportingVideo2DRobuxEpm]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsRoasEstimate]: [sq.None, sq.OneDay],
-            [g.AdsRoasEstimateByUniverse]: [sq.None, sq.OneDay],
-            [g.AdsUAEarningsUsdDefaultView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAEarningsUsdDefaultViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpNumPlaysDefaultView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpNumPlaysDefaultViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpNumPlaysNewUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpNumPlaysNewUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpNumPlaysResurrected30dUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpNumPlaysResurrected30dUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpNumPlaysResurrected7dUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpNumPlaysResurrected7dUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpNumPlaysReturningUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpNumPlaysReturningUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpPlaytimeDefaultView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpPlaytimeDefaultViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpPlaytimeNewUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpPlaytimeNewUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpPlaytimeResurrected30dUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpPlaytimeResurrected30dUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpPlaytimeResurrected7dUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpPlaytimeResurrected7dUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpPlaytimeReturningUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpPlaytimeReturningUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpRobuxRevenueDefaultView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpRobuxRevenueDefaultViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpRobuxRevenueNewUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpRobuxRevenueNewUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpRobuxRevenueResurrected30dUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpRobuxRevenueResurrected7dUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpRobuxRevenueReturningUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAExpRobuxRevenueReturningUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumClicksDefaultView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumClicksDefaultViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumClicksNewUsers]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumClicksNewUsersByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumClicksResurrected30dUsers]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumClicksResurrected30dUsersByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumClicksResurrected7dUsers]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumClicksResurrected7dUsersByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumClicksReturningUsers]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumClicksReturningUsersByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumImpressionsDefaultView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumImpressionsDefaultViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumImpressionsNewUsers]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumImpressionsNewUsersByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumImpressionsResurrected30dUsers]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumImpressionsResurrected30dUsersByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumImpressionsResurrected7dUsers]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumImpressionsResurrected7dUsersByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumImpressionsReturningUsers]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumImpressionsReturningUsersByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumPlaysDefaultView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumPlaysDefaultViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumPlaysNewUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumPlaysNewUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumPlaysResurrected30dUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumPlaysResurrected30dUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumPlaysResurrected7dUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumPlaysResurrected7dUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumPlaysReturningUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUANumPlaysReturningUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAPlaytimeDefaultView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAPlaytimeDefaultViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAPlaytimeNewUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAPlaytimeNewUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAPlaytimeResurrected30dUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAPlaytimeResurrected30dUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAPlaytimeResurrected7dUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAPlaytimeResurrected7dUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAPlaytimeReturningUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUAPlaytimeReturningUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUARoas]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUARoasByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUARobuxRevenueDefaultView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUARobuxRevenueDefaultViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUARobuxRevenueNewUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUARobuxRevenueNewUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUARobuxRevenueResurrected30dUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUARobuxRevenueResurrected30dUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUARobuxRevenueResurrected7dUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUARobuxRevenueResurrected7dUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUARobuxRevenueReturningUserView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUARobuxRevenueReturningUserViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUATotalSpendMicroUsdDefaultView]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUATotalSpendMicroUsdDefaultViewByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUATotalSpendMicroUsdNewUsers]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUATotalSpendMicroUsdNewUsersByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUATotalSpendMicroUsdResurrected30dUsers]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUATotalSpendMicroUsdResurrected7dUsers]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUATotalSpendMicroUsdReturningUsers]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsUATotalSpendMicroUsdReturningUsersByUniverse]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.AdsVideo2DAdsPerEDAUBreakdown]: [sq.None, sq.OneDay],
-            [g.AdsVideo2DEligibleDauBreakdown]: [sq.None, sq.OneDay],
-            [g.AdsVideo2DReachRatioBreakdown]: [sq.None, sq.OneDay],
-            [g.AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyAffiliateReactivationsPayoutRobux]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyAffiliateSignupsPayoutRobux]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyBookingsPerSpenderCombined]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyQualifiedActiveSpenderReactivations]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyQualifiedReactivations]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyQualifiedReactivationsBookingsRobux]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyQualifiedReactivationsSpenders]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyQualifiedSignups]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyQualifiedSignupsBookingsRobux]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyQualifiedSignupSpenders]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyTotalPayoutRobux]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyUniqueClick]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AffiliateLinkDailyVisits]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AlertIncidentCount]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.Attribution1DPayerConversionRatio]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution1DPayerConversionRatioMigration]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution1DPlaytimePerUserInMinutes]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution1DPlaytimePerUserInMinutesMigration]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution1DRobuxPerUser]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution1DRobuxPerUserMigration]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution30DPayerConversionRatio]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution30DPayerConversionRatioMigration]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution30DPlaytimePerUserInMinutes]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution30DPlaytimePerUserInMinutesMigration]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution30DRobuxPerUser]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution30DRobuxPerUserMigration]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution7DPayerConversionRatio]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution7DPayerConversionRatioMigration]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution7DPlaytimePerUserInMinutes]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution7DPlaytimePerUserInMinutesMigration]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution7DRobuxPerUser]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.Attribution7DRobuxPerUserMigration]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.AttributionD1RetentionRatio]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.AttributionD1RetentionRatioMigration]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.AttributionD30RetentionRatio]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.AttributionD30RetentionRatioMigration]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.AttributionD7RetentionRatio]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.AttributionD7RetentionRatioMigration]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.AverageImpressionsPerUser]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.AveragePlayTimeMinutesPerDAU]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AverageRevenuePerPayingUser]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AverageRevenuePerUser]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AverageSessionLengthMinutes]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.AvgViewTimePerView]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.AvgViewTimePerViewer]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.BandwidthAttributesBps]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthAttributesMaxBytes]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthAttributesUpdatesPerSecond]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthEventBps]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthEventMaxBytes]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthEventUpdatesPerSecond]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthNewInstanceBps]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthNewInstanceMaxBytes]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthNewInstanceUpdatesPerSecond]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthPropertiesBps]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthPropertiesMaxBytes]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthPropertiesUpdatesPerSecond]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthTotalBps]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthTotalMaxBytes]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BandwidthTotalUpdatesPerSecond]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.BonusPromotionsAwardedCount]: [sq.None, sq.OneDay],
-            [g.BonusPromotionsGameJoinCount]: [sq.None, sq.OneDay],
-            [g.BonusPromotionsImpressionCount]: [sq.None, sq.OneDay],
-            [g.ClickCVR]: [sq.None, sq.OneDay],
-            [g.ClickCVRMigration]: [sq.None, sq.OneDay],
-            [g.ClientCpuTimeAvg]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.ClientCrashCount]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.ClientCrashCountMigration]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.ClientCrashRate15m]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.ClientCrashRate15mMigration]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.ClientCrashRateNotStableAlert]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.ClientCrashRateNotStableAlertMigration]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [sF.ClientFps]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [sF.ClientMemoryUsage]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [sF.ClientMemoryUsagePercentage]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.CommentRatePerImpression]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.CommerceCheckouts]: [sq.None, sq.OneDay],
-            [g.CommerceClicks]: [sq.None, sq.OneDay],
-            [g.CommerceGMV]: [sq.OneDay],
-            [g.CommerceImpressions]: [sq.None, sq.OneDay],
-            [g.CommerceOrders]: [sq.None, sq.OneDay],
-            [g.CommerceQuantitySold]: [sq.None, sq.OneDay],
-            [g.CommerceUniqueCheckouts]: [sq.None, sq.OneDay],
-            [g.CommerceUniqueClicks]: [sq.None, sq.OneDay],
-            [g.CommerceUniqueImpressions]: [sq.None, sq.OneDay],
-            [g.CommerceUniqueOrders]: [sq.None, sq.OneDay],
-            [g.CommunityAnnouncementDeliveries]: [sq.None, sq.OneDay],
-            [g.CommunityAnnouncementEngagement]: [sq.None, sq.OneDay],
-            [g.CommunityAnnouncementEventCount]: [sq.None, sq.OneDay],
-            [g.CommunityAnnouncementNetReactions]: [sq.None, sq.OneDay],
-            [g.CommunityAnnouncementNotificationCTR]: [sq.None, sq.OneDay],
-            [g.CommunityAnnouncementUniqueClicks]: [sq.None, sq.OneDay],
-            [g.CommunityAnnouncementUniqueUsers]: [sq.None, sq.OneDay],
-            [g.CommunityForumContentEventCount]: [sq.None, sq.OneDay],
-            [g.CommunityForumContentUniqueUsers]: [sq.None, sq.OneDay],
-            [g.CommunityGroupPageUniqueVisitors]: [sq.None, sq.OneDay],
-            [g.CommunityGroupPageViews]: [sq.None, sq.OneDay],
-            [g.CommunityMembershipChangeEvents]: [sq.None, sq.OneDay],
-            [g.CommunityMembershipCount]: [sq.None, sq.OneDay],
-            [g.ComputeEfficiency]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.ConcurrentPlayers]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [sF.CoresPerServer]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.CpuCoreUtilization]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.CreatorRewardsAudienceExpansionFunnelEstimatedPayout]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelPayerConversion60D]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelPayerConversion7D]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelReactivations]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelRetentionD1]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelRetentionD7]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelRevenue1D]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelRevenue60D]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelRevenue7D]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelSignups]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAudienceExpansionFunnelUserCount]: [sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.CreatorRewardsAverageRobuxBookingsPerSpender]: [sq.None, sq.OneDay],
-            [g.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux]: [sq.None, sq.OneDay],
-            [g.CreatorRewardsLifetimeQualifiedReactivations]: [sq.None, sq.OneDay],
-            [g.CreatorRewardsLifetimeQualifiedSignups]: [sq.None, sq.OneDay],
-            [g.CreatorRewardsLifetimeQualifiedSpenders]: [sq.None, sq.OneDay],
-            [g.CsmFanoutRatio]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.CsmFanoutRatioExtended]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.CsmGameServersConnectedCount]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.CsmMessageSizeBytes]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.CsmMessageSizeQuota]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.CsmPublishedMessagesCount]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.CsmPublishedMessagesExtendedCount]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.CsmReceivedMessagesCount]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.CsmReceivedMessagesExtendedCount]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.CsmReceivedMessagesQuota]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.CubeDailyRequests]: [sq.OneDay],
-            [g.CubeLatencyAvg]: [sq.OneDay, sq.OneHour],
-            [g.CubeLatencyP99]: [sq.OneDay, sq.OneHour],
-            [g.CubeOutcomes]: [sq.None],
-            [g.CubeTotalRequests]: [sq.None],
-            [sF.CustomEventsV2]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.D1Retention]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.D30Retention]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.D7Retention]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.DailyActiveUsers]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.DailyCohortRetention]: [sq.None, sq.OneDay],
-            [g.DailyRetentionCohortNoDim]: [sq.None, sq.OneDay],
-            [g.DailyRevenue]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.DataStoreConsumedListRequests]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreConsumedReadRequests]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreConsumedRemoveRequests]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreConsumedWriteRequests]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreListRequests]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreListRequestsByEndpoint]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreListRequestsQuota]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreListRequestsQuotaOrdered]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreListRequestsQuotaStandard]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreReadRequests]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreReadRequestsByEndpoint]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreReadRequestsQuotaOrdered]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreReadRequestsQuotaStandard]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreRemoveRequests]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreRemoveRequestsByEndpoint]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreRemoveRequestsQuotaOrdered]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreRemoveRequestsQuotaStandard]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreRequests]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreRequestsByEndpoint]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreRequestsByStatus]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreStorageQuotaBytes]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreStorageUsageBytes]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreWriteRequests]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreWriteRequestsByEndpoint]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreWriteRequestsQuotaOrdered]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DataStoreWriteRequestsQuotaStandard]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.DauMauStickiness]: [sq.OneDay],
-            [g.EarningsTotalUsd]: [sq.None, sq.OneDay],
-            [g.EconomyAverageWalletBalance]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.EconomyTransactionAmount]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.EconomyTransactionAmountSinks]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.EconomyTransactionCount]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.EndToEndCVR]: [sq.None, sq.OneDay],
-            [g.EndToEndCVRMigration]: [sq.None, sq.OneDay],
-            [g.ErrorCount]: [sq.HalfHour, sq.None, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.EventAvgDailyActiveUsers]: [sq.None, sq.OneDay],
-            [g.EventAvgDailyRevenue]: [sq.None, sq.OneDay],
-            [g.EventAvgDailyUserPlaytimeMinutes]: [sq.None, sq.OneDay],
-            [g.EventAvgRevenuePerDailyActiveUser]: [sq.None, sq.OneDay],
-            [g.ExperimentMetricAdsArpu]: [sq.None, sq.OneDay],
-            [g.ExperimentMetricAdsFrequency]: [sq.None, sq.OneDay],
-            [g.ExperimentMetricAdsOptInRate]: [sq.None, sq.OneDay],
-            [g.ExperimentMetricAverageRevenuePerPayingUser]: [sq.None, sq.OneDay],
-            [g.ExperimentMetricAverageRevenuePerUser]: [sq.None, sq.OneDay],
-            [g.ExperimentMetricAverageSessionTime]: [sq.None, sq.OneDay],
-            [g.ExperimentMetricDay1Retention]: [sq.None, sq.OneDay],
-            [g.ExperimentMetricDay7Retention]: [sq.None, sq.OneDay],
-            [g.ExperimentMetricMean]: [sq.None, sq.OneDay],
-            [g.ExperimentMetricPayerConversionRate]: [sq.None, sq.OneDay],
-            [g.ExperimentMetricPlaytimePerUser]: [sq.None, sq.OneDay],
-            [g.ExperimentMetricQualifiedPlayThroughRate]: [sq.None, sq.OneDay],
-            [g.ForwardD1Retention]: [sq.OneDay],
-            [g.ForwardD30Retention]: [sq.OneDay],
-            [g.ForwardD7Retention]: [sq.OneDay],
-            [g.FriendReferralAverageRobuxBookingsPerSpender]: [sq.OneDay],
-            [g.FriendReferralLifetimeEstimatedAffiliatePayoutRobux]: [sq.OneDay],
-            [g.FriendReferralLifetimeQualifiedSignups]: [sq.OneDay],
-            [g.FriendReferralLifetimeQualifiedSpenders]: [sq.OneDay],
-            [g.FriendReferralLifetimeVisits]: [sq.OneDay],
-            [g.FunnelCohortCompletionRate]: [sq.None, sq.OneDay],
-            [g.FunnelCohortSessionCompletionRate]: [sq.None, sq.OneDay],
-            [g.FunnelStepChurnRate]: [sq.None],
-            [g.FunnelStepCompletionRate]: [sq.None],
-            [g.FunnelStepOverallCompletionRate]: [sq.None],
-            [g.FunnelStepTotalCount]: [sq.None],
-            [g.FunnelUserChurnRate]: [sq.None],
-            [g.FunnelUserOverallCompletionRate]: [sq.None],
-            [g.FunnelUserStepCompletionRate]: [sq.None],
-            [g.FunnelUserTotalCount]: [sq.None],
-            [g.HttpServiceRequestsCount]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.HttpServiceRequestsExtendedCount]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.HttpServiceRequestsV2]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [sF.HttpServiceResponseTime]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [sF.HttpServiceResponseTimeExtended]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.ImpressionCVR]: [sq.None, sq.OneDay],
-            [g.ImpressionCVRMigration]: [sq.None, sq.OneDay],
-            [g.IphEarningsRobux]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.IphEarningsRobuxPartial]: [sq.None, sq.OneMonth, sq.OneWeek],
-            [g.IphTransactionCount]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.IphTransactionCountPartial]: [sq.None, sq.OneMonth, sq.OneWeek],
-            [g.ItemAvatar3dLimitedAvailableQuantity]: [sq.None],
-            [g.ItemAvatar3dLimitedTotalQuantity]: [sq.None],
-            [g.ItemAverageTransactionPrice]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.ItemLifetimeCreatorEarning]: [sq.None],
-            [g.ItemLifetimeRebateAmount]: [sq.None],
-            [g.ItemLifetimeRobuxSpent]: [sq.None],
-            [g.ItemLifetimeTransactionCount]: [sq.None],
-            [g.ItemLimitedSoldPercentage]: [sq.None],
-            [g.ItemMonetizationRevenue]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.ItemMonetizationSales]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.ItemPublishAdvance]: [sq.None],
-            [g.ItemPublishAdvanceRecoupedPercentage]: [sq.None],
-            [g.ItemTotalCreatorEarning]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.ItemTotalRobuxSpent]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.ItemTotalTransactionCount]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.JoinRatePerImpression]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.JourneyCompletionUsers]: [sq.None],
-            [g.JourneyEntryTransitions]: [sq.None],
-            [g.JourneyLastStageTransitions]: [sq.None],
-            [g.JourneyNodeTransitionChurnCount]: [sq.None],
-            [g.JourneyNodeTransitionChurnRate]: [sq.None],
-            [g.JourneyNodeTransitionCount]: [sq.None],
-            [g.JourneyNodeUserChurnCount]: [sq.None],
-            [g.JourneyNodeUserChurnRate]: [sq.None],
-            [g.JourneyNodeUserCount]: [sq.None],
-            [g.JourneyStageChurnRate]: [sq.None],
-            [g.JourneyStageSkipRate]: [sq.None],
-            [g.JourneyStageSkipTransitionCount]: [sq.None],
-            [g.JourneyStageSkipTransitionRate]: [sq.None],
-            [g.JourneyStageSkipUserCount]: [sq.None],
-            [g.JourneyStageTransitionChurnRate]: [sq.None],
-            [g.JourneyStageTransitionCount]: [sq.None],
-            [g.JourneyStageUserCount]: [sq.None],
-            [g.JourneyTotalUsers]: [sq.None],
-            [g.JourneyTransitionCount]: [sq.None],
-            [g.JourneyTransitionCountUser]: [sq.None],
-            [g.JourneyTransitionPctOfSource]: [sq.None],
-            [g.JourneyTransitionPctOfStart]: [sq.None],
-            [g.JourneyUserPctOfSource]: [sq.None],
-            [g.JourneyUserPctOfStart]: [sq.None],
-            [g.MaintenanceThreshold]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [sF.MatchmakingCategoricalCustomSignalsSimilarityRatio]: [sq.None, sq.OneDay, sq.OneHour],
-            [sF.MatchmakingNumericCustomSignalsDifference]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.MatchmakingPlayerAttributesLoadingStatusAvg]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [sF.MatchmakingSignalsAgeDifference]: [sq.OneDay, sq.OneHour],
-            [sF.MatchmakingSignalsCommonChatGroupRatio]: [sq.OneDay, sq.OneHour],
-            [sF.MatchmakingSignalsCommonDeviceTypeRatio]: [sq.OneDay, sq.OneHour],
-            [sF.MatchmakingSignalsCommonLanguageRatio]: [sq.OneDay, sq.OneHour],
-            [sF.MatchmakingSignalsDeltaPing]: [sq.OneDay, sq.OneHour],
-            [sF.MatchmakingSignalsEstimatePing]: [sq.OneDay, sq.OneHour],
-            [sF.MatchmakingSignalsOccupancyRatio]: [sq.OneDay, sq.OneHour],
-            [sF.MatchmakingSignalsPlayHistoryDifference]: [sq.OneDay, sq.OneHour],
-            [g.MatchmakingSignalsPreferredPlayerMatchRatioAvg]: [sq.OneDay, sq.OneHour],
-            [sF.MatchmakingSignalsVoiceChatRatio]: [sq.OneDay, sq.OneHour],
-            [g.MemoryStoreErrorRateAlert]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute, sq.OneMinute],
-            [g.MemoryStoreMemoryQuotaBytes]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.MemoryStoreMemoryUsageAlert]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute, sq.OneMinute],
-            [g.MemoryStoreMemoryUsageBytes]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.MemoryStoreRequests]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.MemoryStoreRequestsByEndpoint]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.MemoryStoreRequestsByStatus]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.MemoryStoreRequestUnits]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.MemoryStoreRequestUnitsByEndpoint]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.MemoryStoreRequestUnitsQuota]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.MemoryStoreThrottlingAlert]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.MonthlyActiveUsers]: [sq.OneDay],
-            [g.OomUnexpectedExits]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.OomUnexpectedExitsMigration]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.PayingUsers]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.PayingUsersCVR]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.PayoutRobux]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.PayoutRobuxV2]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.PeakConcurrentPlayers]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.PersonalizedShopsConversionRate]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.PersonalizedShopsImpressions]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.PersonalizedShopsPurchases]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.PersonalizedShopsRevenue]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.PlayerFeedbackVotesCount]: [sq.None, sq.OneDay],
-            [g.PotentialEarningsTotalUsd]: [sq.None, sq.OneDay],
-            [g.PotentialExtraEarningsTotalUsd]: [sq.None, sq.OneDay],
-            [g.PurchaseRatePerImpression]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.QualifiedEndToEndCVR]: [sq.None, sq.OneDay],
-            [g.QualifiedEndToEndCVRMigration]: [sq.None, sq.OneDay],
-            [g.QualifiedUniqueUsersWithPlaySessions]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.QualifiedUniqueUsersWithPlaySessionsMigration]: [sq.None, sq.OneDay],
-            [g.ReactionRatePerImpression]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.RecommendationDau]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.RecommendationViewsTotal]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.RelativeThresholdCapture]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.RFYD1CoplayDays]: [sq.OneDay],
-            [g.RFYD1Playtime]: [sq.OneDay],
-            [g.RFYD1QualifiedPlaySessions]: [sq.OneDay],
-            [g.RFYD1RobuxSpend]: [sq.OneDay],
-            [g.RFYD1SpendDay]: [sq.OneDay],
-            [g.RFYD2To7CoplayDays]: [sq.OneDay],
-            [g.RFYD2To7PlayDays]: [sq.OneDay],
-            [g.RFYD2To7Playtime]: [sq.OneDay],
-            [g.RFYD2To7QualifiedPlaySessions]: [sq.OneDay],
-            [g.RFYD2To7RobuxSpend]: [sq.OneDay],
-            [g.RFYD2To7SpendDays]: [sq.OneDay],
-            [g.RFYD8To28CoplayDays]: [sq.OneDay],
-            [g.RFYD8To28PlayDays]: [sq.OneDay],
-            [g.RFYD8To28Playtime]: [sq.OneDay],
-            [g.RFYD8To28QualifiedPlaySessions]: [sq.OneDay],
-            [g.RFYD8To28RobuxSpend]: [sq.OneDay],
-            [g.RFYD8To28SpendDays]: [sq.OneDay],
-            [g.RFYDeepEngagementRate]: [sq.OneDay],
-            [g.RFYDuration0To60]: [sq.OneDay],
-            [g.RFYDuration181To600]: [sq.OneDay],
-            [g.RFYDuration61To180]: [sq.OneDay],
-            [g.RFYDurationGreaterThan600]: [sq.OneDay],
-            [g.RFYL7IntentionalCoplayDays]: [sq.OneDay],
-            [g.RFYL7PlayDays]: [sq.OneDay],
-            [g.RFYL7PlaySessionsPerUser]: [sq.OneDay],
-            [g.RFYL7PlayTime]: [sq.OneDay],
-            [g.RFYL7RobuxSpent]: [sq.OneDay],
-            [g.RFYL7RobuxSpentDays]: [sq.OneDay],
-            [g.RFYPlayThroughRate]: [sq.OneDay],
-            [g.RFYQualifiedPTR]: [sq.OneDay],
-            [g.RFYUniqueNotInterestedUsersPerMillionImpressions]: [sq.OneDay],
-            [g.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.RobloxPlusDevBountyDailySubscribers]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.RobloxPlusDevBountyPayoutRobux]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.RobloxPlusDevBountySubscriberCount]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.RobloxPlusDevBountySubscriberSpend]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.RotraceTotalCalls]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.RSVPCount]: [sq.None, sq.OneDay],
-            [sF.ServerCpuTime]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.ServerCrashCount]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [sF.ServerFrameRate]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [sF.ServerMemoryUsage]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [sF.ServerMemoryUsageByServerAge]: [sq.HalfHour, sq.None, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [sF.ServerMemoryUsageV2]: [sq.HalfHour, sq.None, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [sF.SessionDurationSeconds]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [sF.SessionDurationSecondsMigration]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.ShareLinkAttribution1DPayerConversionRatio]: [sq.None, sq.OneDay],
-            [g.ShareLinkAttribution1DPlaytimePerUserInMinutes]: [sq.None, sq.OneDay],
-            [g.ShareLinkAttribution1DRobuxPerUser]: [sq.None, sq.OneDay],
-            [g.ShareLinkAttribution30DPayerConversionRatio]: [sq.None, sq.OneDay],
-            [g.ShareLinkAttribution30DPlaytimePerUserInMinutes]: [sq.None, sq.OneDay],
-            [g.ShareLinkAttribution30DRobuxPerUser]: [sq.None, sq.OneDay],
-            [g.ShareLinkAttribution7DPayerConversionRatio]: [sq.None, sq.OneDay],
-            [g.ShareLinkAttribution7DPlaytimePerUserInMinutes]: [sq.None, sq.OneDay],
-            [g.ShareLinkAttribution7DRobuxPerUser]: [sq.None, sq.OneDay],
-            [g.ShareLinkAttributionD1RetentionRatio]: [sq.None, sq.OneDay],
-            [g.ShareLinkAttributionD30RetentionRatio]: [sq.None, sq.OneDay],
-            [g.ShareLinkAttributionD7RetentionRatio]: [sq.None, sq.OneDay],
-            [g.ShareLinkClickCVR]: [sq.None, sq.OneDay],
-            [g.ShareLinkQualifiedClickCVR]: [sq.None, sq.OneDay],
-            [g.ShareLinkQualifiedUniqueUsersWithPlaySessions]: [sq.None, sq.OneDay],
-            [g.ShareLinkUniqueUsersWithClicks]: [sq.None, sq.OneDay],
-            [g.ShareLinkUniqueUsersWithPlaySessions]: [sq.None, sq.OneDay],
-            [g.ShareRatePerImpression]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.SourceCount]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.SourceCountRatioKpi]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.SpeechToTextTranscriptionQuota]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.SpeechToTextTranscriptionStatuses]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.SpeechToTextTranscriptionUsage]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.SponsoredAdPlays]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.StoreRevenue]: [sq.None, sq.OneDay],
-            [g.StoreTransactions]: [sq.None, sq.OneDay],
-            [g.TargetThreshold]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.TextToSpeechAssetSuccesses]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.TextToSpeechRawAudioErrors]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.TextToSpeechRawAudioQuota]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.TextToSpeechRawAudioSuccesses]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.ThumbnailAverageSessionLengthMinutes]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.ThumbnailImpressions]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.ThumbnailL7QualifiedPTR]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.ThumbnailQualifiedPlays]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.ThumbnailQualifiedPTR]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.ThumbnailWinningSegments]: [sq.None, sq.OneDay, sq.OneHour],
-            [g.TotalAbuseReports]: [sq.OneDay],
-            [g.TotalActions]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.TotalActionsByActionType]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.TotalComments]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.TotalJoins]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.TotalPlayTimeHours]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.TotalPurchases]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.TotalReactionsAdded]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.TotalSessionsEndedInBucket]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.TotalShares]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.TotalViewHours]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.UniqueAbuseReportSubmittersPer1000PlaytimeHours]: [sq.OneDay],
-            [g.UniqueItemsPerUser]: [sq.None, sq.OneDay, sq.OneHour, sq.OneMonth, sq.OneWeek],
-            [g.UniqueServerShutdowns]: [sq.None, sq.OneDay],
-            [g.UniqueUsersWithClicks]: [sq.None, sq.OneDay],
-            [g.UniqueUsersWithClicksMigration]: [sq.None, sq.OneDay],
-            [g.UniqueUsersWithImpressions]: [sq.None, sq.OneDay],
-            [g.UniqueUsersWithImpressionsMigration]: [sq.None, sq.OneDay],
-            [g.UniqueUsersWithPlaySessions]: [sq.None, sq.OneDay, sq.OneWeek],
-            [g.UniqueUsersWithPlaySessionsMigration]: [sq.None, sq.OneDay],
-            [g.UsersInExperiment]: [sq.None, sq.OneDay],
-            [g.UsersJoinedFromNotifications]: [sq.None, sq.OneDay],
-            [g.VideoServiceExclusivePlaybackSeconds]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.VideoServicePlaybackSeconds]: [sq.HalfHour, sq.OneDay, sq.OneHour, sq.OneMinute],
-            [g.Visits]: [sq.None, sq.OneDay, sq.OneMonth, sq.OneWeek],
-            [g.WeeklyCohortRetention]: [sq.None, sq.OneWeek]
-        },
         sW = {
-            [sF.ClientFps]: {
+            [g.ActionRatePerDau]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.ActionRatePerDauByActionType]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.ActionRatePerImpression]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.AdsPublisherReportingAdsPerEDAU]: [sH.None, sH.OneDay],
+            [g.AdsPublisherReportingArpu]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AdsPublisherReportingDisplayAdImpressions]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingImmersiveDisplayRevenue]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingImmersiveDisplayRobuxEpm]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingImmersiveEvents]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingImmersiveVideoViews]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingPortalRevenueRobux]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingRobuxEpm]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingRobuxEpt]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingTotalImpressions]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingTotalRevenueRobux]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingTotalTeleports]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingVideo2DAdsPerDUV]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingVideo2DConversionRate]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingVideo2DDailyUniqueViewer]: [sH.None, sH.OneDay],
+            [g.AdsPublisherReportingVideo2DEligibleDau]: [sH.None, sH.OneDay],
+            [g.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingVideo2DEvents]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingVideo2DFillPercent]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingVideo2DFills]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingVideo2DImpressions]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingVideo2DReachRatio]: [sH.None, sH.OneDay],
+            [g.AdsPublisherReportingVideo2DRequests]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingVideo2DRevenueRobux]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingVideo2DRewardPercent]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingVideo2DRewards]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsPublisherReportingVideo2DRobuxEpm]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsRoasEstimate]: [sH.None, sH.OneDay],
+            [g.AdsRoasEstimateByUniverse]: [sH.None, sH.OneDay],
+            [g.AdsUAEarningsUsdDefaultView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAEarningsUsdDefaultViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpNumPlaysDefaultView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpNumPlaysDefaultViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpNumPlaysNewUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpNumPlaysNewUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpNumPlaysResurrected30dUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpNumPlaysResurrected30dUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpNumPlaysResurrected7dUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpNumPlaysResurrected7dUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpNumPlaysReturningUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpNumPlaysReturningUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpPlaytimeDefaultView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpPlaytimeDefaultViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpPlaytimeNewUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpPlaytimeNewUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpPlaytimeResurrected30dUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpPlaytimeResurrected30dUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpPlaytimeResurrected7dUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpPlaytimeResurrected7dUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpPlaytimeReturningUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpPlaytimeReturningUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpRobuxRevenueDefaultView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpRobuxRevenueDefaultViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpRobuxRevenueNewUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpRobuxRevenueNewUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpRobuxRevenueResurrected30dUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpRobuxRevenueResurrected7dUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpRobuxRevenueReturningUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAExpRobuxRevenueReturningUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumClicksDefaultView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumClicksDefaultViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumClicksNewUsers]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumClicksNewUsersByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumClicksResurrected30dUsers]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumClicksResurrected30dUsersByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumClicksResurrected7dUsers]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumClicksResurrected7dUsersByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumClicksReturningUsers]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumClicksReturningUsersByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumImpressionsDefaultView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumImpressionsDefaultViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumImpressionsNewUsers]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumImpressionsNewUsersByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumImpressionsResurrected30dUsers]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumImpressionsResurrected30dUsersByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumImpressionsResurrected7dUsers]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumImpressionsResurrected7dUsersByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumImpressionsReturningUsers]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumImpressionsReturningUsersByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumPlaysDefaultView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumPlaysDefaultViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumPlaysNewUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumPlaysNewUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumPlaysResurrected30dUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumPlaysResurrected30dUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumPlaysResurrected7dUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumPlaysResurrected7dUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumPlaysReturningUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUANumPlaysReturningUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAPlaytimeDefaultView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAPlaytimeDefaultViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAPlaytimeNewUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAPlaytimeNewUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAPlaytimeResurrected30dUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAPlaytimeResurrected30dUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAPlaytimeResurrected7dUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAPlaytimeResurrected7dUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAPlaytimeReturningUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUAPlaytimeReturningUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUARoas]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUARoasByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUARobuxRevenueDefaultView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUARobuxRevenueDefaultViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUARobuxRevenueNewUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUARobuxRevenueNewUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUARobuxRevenueResurrected30dUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUARobuxRevenueResurrected30dUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUARobuxRevenueResurrected7dUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUARobuxRevenueResurrected7dUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUARobuxRevenueReturningUserView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUARobuxRevenueReturningUserViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUATotalSpendMicroUsdDefaultView]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUATotalSpendMicroUsdDefaultViewByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUATotalSpendMicroUsdNewUsers]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUATotalSpendMicroUsdNewUsersByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUATotalSpendMicroUsdResurrected30dUsers]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUATotalSpendMicroUsdResurrected7dUsers]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUATotalSpendMicroUsdReturningUsers]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsUATotalSpendMicroUsdReturningUsersByUniverse]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.AdsVideo2DAdsPerEDAUBreakdown]: [sH.None, sH.OneDay],
+            [g.AdsVideo2DEligibleDauBreakdown]: [sH.None, sH.OneDay],
+            [g.AdsVideo2DReachRatioBreakdown]: [sH.None, sH.OneDay],
+            [g.AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyAffiliateReactivationsPayoutRobux]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyAffiliateSignupsPayoutRobux]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyBookingsPerSpenderCombined]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyQualifiedActiveSpenderReactivations]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyQualifiedReactivations]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyQualifiedReactivationsBookingsRobux]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyQualifiedReactivationsSpenders]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyQualifiedSignups]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyQualifiedSignupsBookingsRobux]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyQualifiedSignupSpenders]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyTotalPayoutRobux]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyUniqueClick]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AffiliateLinkDailyVisits]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AlertIncidentCount]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.Attribution1DPayerConversionRatio]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution1DPayerConversionRatioMigration]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution1DPlaytimePerUserInMinutes]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution1DPlaytimePerUserInMinutesMigration]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution1DRobuxPerUser]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution1DRobuxPerUserMigration]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution30DPayerConversionRatio]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution30DPayerConversionRatioMigration]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution30DPlaytimePerUserInMinutes]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution30DPlaytimePerUserInMinutesMigration]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution30DRobuxPerUser]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution30DRobuxPerUserMigration]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution7DPayerConversionRatio]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution7DPayerConversionRatioMigration]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution7DPlaytimePerUserInMinutes]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution7DPlaytimePerUserInMinutesMigration]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution7DRobuxPerUser]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.Attribution7DRobuxPerUserMigration]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.AttributionD1RetentionRatio]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.AttributionD1RetentionRatioMigration]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.AttributionD30RetentionRatio]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.AttributionD30RetentionRatioMigration]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.AttributionD7RetentionRatio]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.AttributionD7RetentionRatioMigration]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.AverageImpressionsPerUser]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.AveragePlayTimeMinutesPerDAU]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AverageRevenuePerPayingUser]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AverageRevenuePerUser]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AverageSessionLengthMinutes]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.AvgViewTimePerView]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.AvgViewTimePerViewer]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.BandwidthAttributesBps]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthAttributesMaxBytes]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthAttributesUpdatesPerSecond]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthEventBps]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthEventMaxBytes]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthEventUpdatesPerSecond]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthNewInstanceBps]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthNewInstanceMaxBytes]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthNewInstanceUpdatesPerSecond]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthPropertiesBps]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthPropertiesMaxBytes]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthPropertiesUpdatesPerSecond]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthTotalBps]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthTotalMaxBytes]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BandwidthTotalUpdatesPerSecond]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.BonusPromotionsAwardedCount]: [sH.None, sH.OneDay],
+            [g.BonusPromotionsGameJoinCount]: [sH.None, sH.OneDay],
+            [g.BonusPromotionsImpressionCount]: [sH.None, sH.OneDay],
+            [g.ClickCVR]: [sH.None, sH.OneDay],
+            [g.ClickCVRMigration]: [sH.None, sH.OneDay],
+            [g.ClientCpuTimeAvg]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.ClientCrashCount]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.ClientCrashCountMigration]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.ClientCrashRate15m]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.ClientCrashRate15mMigration]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.ClientCrashRateNotStableAlert]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.ClientCrashRateNotStableAlertMigration]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [sG.ClientFps]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [sG.ClientMemoryUsage]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [sG.ClientMemoryUsagePercentage]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.CommentRatePerImpression]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.CommerceCheckouts]: [sH.None, sH.OneDay],
+            [g.CommerceClicks]: [sH.None, sH.OneDay],
+            [g.CommerceGMV]: [sH.OneDay],
+            [g.CommerceImpressions]: [sH.None, sH.OneDay],
+            [g.CommerceOrders]: [sH.None, sH.OneDay],
+            [g.CommerceQuantitySold]: [sH.None, sH.OneDay],
+            [g.CommerceUniqueCheckouts]: [sH.None, sH.OneDay],
+            [g.CommerceUniqueClicks]: [sH.None, sH.OneDay],
+            [g.CommerceUniqueImpressions]: [sH.None, sH.OneDay],
+            [g.CommerceUniqueOrders]: [sH.None, sH.OneDay],
+            [g.CommunityAnnouncementDeliveries]: [sH.None, sH.OneDay],
+            [g.CommunityAnnouncementEngagement]: [sH.None, sH.OneDay],
+            [g.CommunityAnnouncementEventCount]: [sH.None, sH.OneDay],
+            [g.CommunityAnnouncementNetReactions]: [sH.None, sH.OneDay],
+            [g.CommunityAnnouncementNotificationCTR]: [sH.None, sH.OneDay],
+            [g.CommunityAnnouncementUniqueClicks]: [sH.None, sH.OneDay],
+            [g.CommunityAnnouncementUniqueUsers]: [sH.None, sH.OneDay],
+            [g.CommunityForumContentEventCount]: [sH.None, sH.OneDay],
+            [g.CommunityForumContentUniqueUsers]: [sH.None, sH.OneDay],
+            [g.CommunityGroupPageUniqueVisitors]: [sH.None, sH.OneDay],
+            [g.CommunityGroupPageViews]: [sH.None, sH.OneDay],
+            [g.CommunityMembershipChangeEvents]: [sH.None, sH.OneDay],
+            [g.CommunityMembershipCount]: [sH.None, sH.OneDay],
+            [g.ComputeEfficiency]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.ConcurrentPlayers]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [sG.CoresPerServer]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.CpuCoreUtilization]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.CreatorRewardsAudienceExpansionFunnelEstimatedPayout]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelPayerConversion60D]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelPayerConversion7D]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelReactivations]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelRetentionD1]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelRetentionD7]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelRevenue1D]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelRevenue60D]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelRevenue7D]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelSignups]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAudienceExpansionFunnelUserCount]: [sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.CreatorRewardsAverageRobuxBookingsPerSpender]: [sH.None, sH.OneDay],
+            [g.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux]: [sH.None, sH.OneDay],
+            [g.CreatorRewardsLifetimeQualifiedReactivations]: [sH.None, sH.OneDay],
+            [g.CreatorRewardsLifetimeQualifiedSignups]: [sH.None, sH.OneDay],
+            [g.CreatorRewardsLifetimeQualifiedSpenders]: [sH.None, sH.OneDay],
+            [g.CsmFanoutRatio]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.CsmFanoutRatioExtended]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.CsmGameServersConnectedCount]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.CsmMessageSizeBytes]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.CsmMessageSizeQuota]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.CsmPublishedMessagesCount]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.CsmPublishedMessagesExtendedCount]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.CsmReceivedMessagesCount]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.CsmReceivedMessagesExtendedCount]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.CsmReceivedMessagesQuota]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.CubeDailyRequests]: [sH.OneDay],
+            [g.CubeLatencyAvg]: [sH.OneDay, sH.OneHour],
+            [g.CubeLatencyP99]: [sH.OneDay, sH.OneHour],
+            [g.CubeOutcomes]: [sH.None],
+            [g.CubeTotalRequests]: [sH.None],
+            [sG.CustomEventsV2]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.D1Retention]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.D30Retention]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.D7Retention]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.DailyActiveUsers]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.DailyCohortRetention]: [sH.None, sH.OneDay],
+            [g.DailyRetentionCohortNoDim]: [sH.None, sH.OneDay],
+            [g.DailyRevenue]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.DataStoreConsumedListRequests]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreConsumedReadRequests]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreConsumedRemoveRequests]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreConsumedWriteRequests]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreListRequests]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreListRequestsByEndpoint]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreListRequestsQuota]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreListRequestsQuotaOrdered]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreListRequestsQuotaStandard]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreReadRequests]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreReadRequestsByEndpoint]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreReadRequestsQuotaOrdered]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreReadRequestsQuotaStandard]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreRemoveRequests]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreRemoveRequestsByEndpoint]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreRemoveRequestsQuotaOrdered]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreRemoveRequestsQuotaStandard]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreRequests]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreRequestsByEndpoint]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreRequestsByStatus]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreStorageQuotaBytes]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreStorageUsageBytes]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreWriteRequests]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreWriteRequestsByEndpoint]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreWriteRequestsQuotaOrdered]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DataStoreWriteRequestsQuotaStandard]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.DauMauStickiness]: [sH.OneDay],
+            [g.EarningsTotalUsd]: [sH.None, sH.OneDay],
+            [g.EconomyAverageWalletBalance]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.EconomyTransactionAmount]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.EconomyTransactionAmountSinks]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.EconomyTransactionCount]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.EndToEndCVR]: [sH.None, sH.OneDay],
+            [g.EndToEndCVRMigration]: [sH.None, sH.OneDay],
+            [g.ErrorCount]: [sH.HalfHour, sH.None, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.EventAvgDailyActiveUsers]: [sH.None, sH.OneDay],
+            [g.EventAvgDailyRevenue]: [sH.None, sH.OneDay],
+            [g.EventAvgDailyUserPlaytimeMinutes]: [sH.None, sH.OneDay],
+            [g.EventAvgRevenuePerDailyActiveUser]: [sH.None, sH.OneDay],
+            [g.ExperimentMetricAdsArpu]: [sH.None, sH.OneDay],
+            [g.ExperimentMetricAdsFrequency]: [sH.None, sH.OneDay],
+            [g.ExperimentMetricAdsOptInRate]: [sH.None, sH.OneDay],
+            [g.ExperimentMetricAverageRevenuePerPayingUser]: [sH.None, sH.OneDay],
+            [g.ExperimentMetricAverageRevenuePerUser]: [sH.None, sH.OneDay],
+            [g.ExperimentMetricAverageSessionTime]: [sH.None, sH.OneDay],
+            [g.ExperimentMetricDay1Retention]: [sH.None, sH.OneDay],
+            [g.ExperimentMetricDay7Retention]: [sH.None, sH.OneDay],
+            [g.ExperimentMetricMean]: [sH.None, sH.OneDay],
+            [g.ExperimentMetricPayerConversionRate]: [sH.None, sH.OneDay],
+            [g.ExperimentMetricPlaytimePerUser]: [sH.None, sH.OneDay],
+            [g.ExperimentMetricQualifiedPlayThroughRate]: [sH.None, sH.OneDay],
+            [g.ForwardD1Retention]: [sH.OneDay],
+            [g.ForwardD30Retention]: [sH.OneDay],
+            [g.ForwardD7Retention]: [sH.OneDay],
+            [g.FriendReferralAverageRobuxBookingsPerSpender]: [sH.OneDay],
+            [g.FriendReferralLifetimeEstimatedAffiliatePayoutRobux]: [sH.OneDay],
+            [g.FriendReferralLifetimeQualifiedSignups]: [sH.OneDay],
+            [g.FriendReferralLifetimeQualifiedSpenders]: [sH.OneDay],
+            [g.FriendReferralLifetimeVisits]: [sH.OneDay],
+            [g.FunnelCohortCompletionRate]: [sH.None, sH.OneDay],
+            [g.FunnelCohortSessionCompletionRate]: [sH.None, sH.OneDay],
+            [g.FunnelStepChurnRate]: [sH.None],
+            [g.FunnelStepCompletionRate]: [sH.None],
+            [g.FunnelStepOverallCompletionRate]: [sH.None],
+            [g.FunnelStepTotalCount]: [sH.None],
+            [g.FunnelUserChurnRate]: [sH.None],
+            [g.FunnelUserOverallCompletionRate]: [sH.None],
+            [g.FunnelUserStepCompletionRate]: [sH.None],
+            [g.FunnelUserTotalCount]: [sH.None],
+            [g.HttpServiceRequestsCount]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.HttpServiceRequestsExtendedCount]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.HttpServiceRequestsV2]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [sG.HttpServiceResponseTime]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [sG.HttpServiceResponseTimeExtended]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.ImpressionCVR]: [sH.None, sH.OneDay],
+            [g.ImpressionCVRMigration]: [sH.None, sH.OneDay],
+            [g.IphEarningsRobux]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.IphEarningsRobuxPartial]: [sH.None, sH.OneMonth, sH.OneWeek],
+            [g.IphTransactionCount]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.IphTransactionCountPartial]: [sH.None, sH.OneMonth, sH.OneWeek],
+            [g.ItemAvatar3dLimitedAvailableQuantity]: [sH.None],
+            [g.ItemAvatar3dLimitedTotalQuantity]: [sH.None],
+            [g.ItemAverageTransactionPrice]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.ItemLifetimeCreatorEarning]: [sH.None],
+            [g.ItemLifetimeRebateAmount]: [sH.None],
+            [g.ItemLifetimeRobuxSpent]: [sH.None],
+            [g.ItemLifetimeTransactionCount]: [sH.None],
+            [g.ItemLimitedSoldPercentage]: [sH.None],
+            [g.ItemMonetizationRevenue]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.ItemMonetizationSales]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.ItemPublishAdvance]: [sH.None],
+            [g.ItemPublishAdvanceRecoupedPercentage]: [sH.None],
+            [g.ItemTotalCreatorEarning]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.ItemTotalRobuxSpent]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.ItemTotalTransactionCount]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.JoinRatePerImpression]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.JourneyCompletionUsers]: [sH.None],
+            [g.JourneyEntryTransitions]: [sH.None],
+            [g.JourneyLastStageTransitions]: [sH.None],
+            [g.JourneyNodeTransitionChurnCount]: [sH.None],
+            [g.JourneyNodeTransitionChurnRate]: [sH.None],
+            [g.JourneyNodeTransitionCount]: [sH.None],
+            [g.JourneyNodeUserChurnCount]: [sH.None],
+            [g.JourneyNodeUserChurnRate]: [sH.None],
+            [g.JourneyNodeUserCount]: [sH.None],
+            [g.JourneyStageChurnRate]: [sH.None],
+            [g.JourneyStageSkipRate]: [sH.None],
+            [g.JourneyStageSkipTransitionCount]: [sH.None],
+            [g.JourneyStageSkipTransitionRate]: [sH.None],
+            [g.JourneyStageSkipUserCount]: [sH.None],
+            [g.JourneyStageTransitionChurnRate]: [sH.None],
+            [g.JourneyStageTransitionCount]: [sH.None],
+            [g.JourneyStageUserCount]: [sH.None],
+            [g.JourneyTotalUsers]: [sH.None],
+            [g.JourneyTransitionCount]: [sH.None],
+            [g.JourneyTransitionCountUser]: [sH.None],
+            [g.JourneyTransitionPctOfSource]: [sH.None],
+            [g.JourneyTransitionPctOfStart]: [sH.None],
+            [g.JourneyUserPctOfSource]: [sH.None],
+            [g.JourneyUserPctOfStart]: [sH.None],
+            [g.MaintenanceThreshold]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [sG.MatchmakingCategoricalCustomSignalsSimilarityRatio]: [sH.None, sH.OneDay, sH.OneHour],
+            [sG.MatchmakingNumericCustomSignalsDifference]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.MatchmakingPlayerAttributesLoadingStatusAvg]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [sG.MatchmakingSignalsAgeDifference]: [sH.OneDay, sH.OneHour],
+            [sG.MatchmakingSignalsCommonChatGroupRatio]: [sH.OneDay, sH.OneHour],
+            [sG.MatchmakingSignalsCommonDeviceTypeRatio]: [sH.OneDay, sH.OneHour],
+            [sG.MatchmakingSignalsCommonLanguageRatio]: [sH.OneDay, sH.OneHour],
+            [sG.MatchmakingSignalsDeltaPing]: [sH.OneDay, sH.OneHour],
+            [sG.MatchmakingSignalsEstimatePing]: [sH.OneDay, sH.OneHour],
+            [sG.MatchmakingSignalsOccupancyRatio]: [sH.OneDay, sH.OneHour],
+            [sG.MatchmakingSignalsPlayHistoryDifference]: [sH.OneDay, sH.OneHour],
+            [g.MatchmakingSignalsPreferredPlayerMatchRatioAvg]: [sH.OneDay, sH.OneHour],
+            [sG.MatchmakingSignalsVoiceChatRatio]: [sH.OneDay, sH.OneHour],
+            [g.MemoryStoreErrorRateAlert]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute, sH.OneMinute],
+            [g.MemoryStoreMemoryQuotaBytes]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.MemoryStoreMemoryUsageAlert]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute, sH.OneMinute],
+            [g.MemoryStoreMemoryUsageBytes]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.MemoryStoreRequests]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.MemoryStoreRequestsByEndpoint]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.MemoryStoreRequestsByStatus]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.MemoryStoreRequestUnits]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.MemoryStoreRequestUnitsByEndpoint]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.MemoryStoreRequestUnitsQuota]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.MemoryStoreThrottlingAlert]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.MonthlyActiveUsers]: [sH.OneDay],
+            [g.OomUnexpectedExits]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.OomUnexpectedExitsMigration]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.PayingUsers]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.PayingUsersCVR]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.PayoutRobux]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.PayoutRobuxV2]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.PeakConcurrentPlayers]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.PersonalizedShopsConversionRate]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.PersonalizedShopsImpressions]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.PersonalizedShopsPurchases]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.PersonalizedShopsRevenue]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.PlayerFeedbackVotesCount]: [sH.None, sH.OneDay],
+            [g.PotentialEarningsTotalUsd]: [sH.None, sH.OneDay],
+            [g.PotentialExtraEarningsTotalUsd]: [sH.None, sH.OneDay],
+            [g.PurchaseRatePerImpression]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.QualifiedEndToEndCVR]: [sH.None, sH.OneDay],
+            [g.QualifiedEndToEndCVRMigration]: [sH.None, sH.OneDay],
+            [g.QualifiedUniqueUsersWithPlaySessions]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.QualifiedUniqueUsersWithPlaySessionsMigration]: [sH.None, sH.OneDay],
+            [g.ReactionRatePerImpression]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.RecommendationDau]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.RecommendationViewsTotal]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.RelativeThresholdCapture]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.RFYD1CoplayDays]: [sH.OneDay],
+            [g.RFYD1Playtime]: [sH.OneDay],
+            [g.RFYD1QualifiedPlaySessions]: [sH.OneDay],
+            [g.RFYD1RobuxSpend]: [sH.OneDay],
+            [g.RFYD1SpendDay]: [sH.OneDay],
+            [g.RFYD2To7CoplayDays]: [sH.OneDay],
+            [g.RFYD2To7PlayDays]: [sH.OneDay],
+            [g.RFYD2To7Playtime]: [sH.OneDay],
+            [g.RFYD2To7QualifiedPlaySessions]: [sH.OneDay],
+            [g.RFYD2To7RobuxSpend]: [sH.OneDay],
+            [g.RFYD2To7SpendDays]: [sH.OneDay],
+            [g.RFYD8To28CoplayDays]: [sH.OneDay],
+            [g.RFYD8To28PlayDays]: [sH.OneDay],
+            [g.RFYD8To28Playtime]: [sH.OneDay],
+            [g.RFYD8To28QualifiedPlaySessions]: [sH.OneDay],
+            [g.RFYD8To28RobuxSpend]: [sH.OneDay],
+            [g.RFYD8To28SpendDays]: [sH.OneDay],
+            [g.RFYDeepEngagementRate]: [sH.OneDay],
+            [g.RFYDuration0To60]: [sH.OneDay],
+            [g.RFYDuration181To600]: [sH.OneDay],
+            [g.RFYDuration61To180]: [sH.OneDay],
+            [g.RFYDurationGreaterThan600]: [sH.OneDay],
+            [g.RFYL7IntentionalCoplayDays]: [sH.OneDay],
+            [g.RFYL7PlayDays]: [sH.OneDay],
+            [g.RFYL7PlaySessionsPerUser]: [sH.OneDay],
+            [g.RFYL7PlayTime]: [sH.OneDay],
+            [g.RFYL7RobuxSpent]: [sH.OneDay],
+            [g.RFYL7RobuxSpentDays]: [sH.OneDay],
+            [g.RFYPlayThroughRate]: [sH.OneDay],
+            [g.RFYQualifiedPTR]: [sH.OneDay],
+            [g.RFYUniqueNotInterestedUsersPerMillionImpressions]: [sH.OneDay],
+            [g.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.RobloxPlusDevBountyDailySubscribers]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.RobloxPlusDevBountyPayoutRobux]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.RobloxPlusDevBountySubscriberCount]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.RobloxPlusDevBountySubscriberSpend]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.RotraceTotalCalls]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.RSVPCount]: [sH.None, sH.OneDay],
+            [sG.ServerCpuTime]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.ServerCrashCount]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [sG.ServerFrameRate]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [sG.ServerMemoryUsage]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [sG.ServerMemoryUsageByServerAge]: [sH.HalfHour, sH.None, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [sG.ServerMemoryUsageV2]: [sH.HalfHour, sH.None, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [sG.SessionDurationSeconds]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [sG.SessionDurationSecondsMigration]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.ShareLinkAttribution1DPayerConversionRatio]: [sH.None, sH.OneDay],
+            [g.ShareLinkAttribution1DPlaytimePerUserInMinutes]: [sH.None, sH.OneDay],
+            [g.ShareLinkAttribution1DRobuxPerUser]: [sH.None, sH.OneDay],
+            [g.ShareLinkAttribution30DPayerConversionRatio]: [sH.None, sH.OneDay],
+            [g.ShareLinkAttribution30DPlaytimePerUserInMinutes]: [sH.None, sH.OneDay],
+            [g.ShareLinkAttribution30DRobuxPerUser]: [sH.None, sH.OneDay],
+            [g.ShareLinkAttribution7DPayerConversionRatio]: [sH.None, sH.OneDay],
+            [g.ShareLinkAttribution7DPlaytimePerUserInMinutes]: [sH.None, sH.OneDay],
+            [g.ShareLinkAttribution7DRobuxPerUser]: [sH.None, sH.OneDay],
+            [g.ShareLinkAttributionD1RetentionRatio]: [sH.None, sH.OneDay],
+            [g.ShareLinkAttributionD30RetentionRatio]: [sH.None, sH.OneDay],
+            [g.ShareLinkAttributionD7RetentionRatio]: [sH.None, sH.OneDay],
+            [g.ShareLinkClickCVR]: [sH.None, sH.OneDay],
+            [g.ShareLinkQualifiedClickCVR]: [sH.None, sH.OneDay],
+            [g.ShareLinkQualifiedUniqueUsersWithPlaySessions]: [sH.None, sH.OneDay],
+            [g.ShareLinkUniqueUsersWithClicks]: [sH.None, sH.OneDay],
+            [g.ShareLinkUniqueUsersWithPlaySessions]: [sH.None, sH.OneDay],
+            [g.ShareRatePerImpression]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.SourceCount]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.SourceCountRatioKpi]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.SpeechToTextTranscriptionQuota]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.SpeechToTextTranscriptionStatuses]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.SpeechToTextTranscriptionUsage]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.SponsoredAdPlays]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.StoreRevenue]: [sH.None, sH.OneDay],
+            [g.StoreTransactions]: [sH.None, sH.OneDay],
+            [g.TargetThreshold]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.TextToSpeechAssetSuccesses]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.TextToSpeechRawAudioErrors]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.TextToSpeechRawAudioQuota]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.TextToSpeechRawAudioSuccesses]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.ThumbnailAverageSessionLengthMinutes]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.ThumbnailImpressions]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.ThumbnailL7QualifiedPTR]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.ThumbnailQualifiedPlays]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.ThumbnailQualifiedPTR]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.ThumbnailWinningSegments]: [sH.None, sH.OneDay, sH.OneHour],
+            [g.TotalAbuseReports]: [sH.OneDay],
+            [g.TotalActions]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.TotalActionsByActionType]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.TotalComments]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.TotalJoins]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.TotalPlayTimeHours]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.TotalPurchases]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.TotalReactionsAdded]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.TotalSessionsEndedInBucket]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.TotalShares]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.TotalViewHours]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.UniqueAbuseReportSubmittersPer1000PlaytimeHours]: [sH.OneDay],
+            [g.UniqueItemsPerUser]: [sH.None, sH.OneDay, sH.OneHour, sH.OneMonth, sH.OneWeek],
+            [g.UniqueServerShutdowns]: [sH.None, sH.OneDay],
+            [g.UniqueUsersWithClicks]: [sH.None, sH.OneDay],
+            [g.UniqueUsersWithClicksMigration]: [sH.None, sH.OneDay],
+            [g.UniqueUsersWithImpressions]: [sH.None, sH.OneDay],
+            [g.UniqueUsersWithImpressionsMigration]: [sH.None, sH.OneDay],
+            [g.UniqueUsersWithPlaySessions]: [sH.None, sH.OneDay, sH.OneWeek],
+            [g.UniqueUsersWithPlaySessionsMigration]: [sH.None, sH.OneDay],
+            [g.UsersInExperiment]: [sH.None, sH.OneDay],
+            [g.UsersJoinedFromNotifications]: [sH.None, sH.OneDay],
+            [g.VideoServiceExclusivePlaybackSeconds]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.VideoServicePlaybackSeconds]: [sH.HalfHour, sH.OneDay, sH.OneHour, sH.OneMinute],
+            [g.Visits]: [sH.None, sH.OneDay, sH.OneMonth, sH.OneWeek],
+            [g.WeeklyCohortRetention]: [sH.None, sH.OneWeek]
+        },
+        sY = {
+            [sG.ClientFps]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.ClientFpsAvg,
                 byPercentileType: {
@@ -23058,7 +23059,7 @@
                     [t2.P90]: m.ClientFpsP90
                 }
             },
-            [sF.ClientMemoryUsage]: {
+            [sG.ClientMemoryUsage]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.ClientMemoryUsageAvg,
                 byPercentileType: {
@@ -23068,7 +23069,7 @@
                     [t2.P90]: m.ClientMemoryUsageP90
                 }
             },
-            [sF.ClientMemoryUsagePercentage]: {
+            [sG.ClientMemoryUsagePercentage]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.ClientMemoryUsagePercentageAvg,
                 byPercentileType: {
@@ -23078,7 +23079,7 @@
                     [t2.P90]: m.ClientMemoryUsagePercentageP90
                 }
             },
-            [sF.CoresPerServer]: {
+            [sG.CoresPerServer]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.CoresPerServerAvg,
                 byPercentileType: {
@@ -23088,7 +23089,7 @@
                     [t2.P90]: m.CoresPerServerP90
                 }
             },
-            [sF.CustomEventsV2]: {
+            [sG.CustomEventsV2]: {
                 dimension: sn.AggregationType,
                 defaultMetric: m.CustomEventSumValue,
                 byAggregationType: {
@@ -23101,7 +23102,7 @@
                     [t0.Sum]: m.CustomEventSumValue
                 }
             },
-            [sF.HttpServiceResponseTime]: {
+            [sG.HttpServiceResponseTime]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.HttpServiceResponseTimeAvg,
                 byPercentileType: {
@@ -23111,7 +23112,7 @@
                     [t2.P90]: m.HttpServiceResponseTimeP90
                 }
             },
-            [sF.HttpServiceResponseTimeExtended]: {
+            [sG.HttpServiceResponseTimeExtended]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.HttpServiceResponseTimeExtendedAvg,
                 byPercentileType: {
@@ -23121,7 +23122,7 @@
                     [t2.P90]: m.HttpServiceResponseTimeExtendedP90
                 }
             },
-            [sF.MatchmakingCategoricalCustomSignalsSimilarityRatio]: {
+            [sG.MatchmakingCategoricalCustomSignalsSimilarityRatio]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.MatchmakingCategoricalCustomSignalsSimilarityRatioAvg,
                 byPercentileType: {
@@ -23131,7 +23132,7 @@
                     [t2.P90]: m.MatchmakingCategoricalCustomSignalsSimilarityRatioP90
                 }
             },
-            [sF.MatchmakingNumericCustomSignalsDifference]: {
+            [sG.MatchmakingNumericCustomSignalsDifference]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.MatchmakingNumericCustomSignalsDifferenceAvg,
                 byPercentileType: {
@@ -23141,7 +23142,7 @@
                     [t2.P90]: m.MatchmakingNumericCustomSignalsDifferenceP90
                 }
             },
-            [sF.MatchmakingSignalsAgeDifference]: {
+            [sG.MatchmakingSignalsAgeDifference]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.MatchmakingSignalsAgeDifferenceAvg,
                 byPercentileType: {
@@ -23151,7 +23152,7 @@
                     [t2.P90]: m.MatchmakingSignalsAgeDifferenceP90
                 }
             },
-            [sF.MatchmakingSignalsCommonChatGroupRatio]: {
+            [sG.MatchmakingSignalsCommonChatGroupRatio]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.MatchmakingSignalsCommonChatGroupRatioAvg,
                 byPercentileType: {
@@ -23161,7 +23162,7 @@
                     [t2.P90]: m.MatchmakingSignalsCommonChatGroupRatioP90
                 }
             },
-            [sF.MatchmakingSignalsCommonDeviceTypeRatio]: {
+            [sG.MatchmakingSignalsCommonDeviceTypeRatio]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.MatchmakingSignalsCommonDeviceTypeRatioAvg,
                 byPercentileType: {
@@ -23171,7 +23172,7 @@
                     [t2.P90]: m.MatchmakingSignalsCommonDeviceTypeRatioP90
                 }
             },
-            [sF.MatchmakingSignalsCommonLanguageRatio]: {
+            [sG.MatchmakingSignalsCommonLanguageRatio]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.MatchmakingSignalsCommonLanguageRatioAvg,
                 byPercentileType: {
@@ -23181,7 +23182,7 @@
                     [t2.P90]: m.MatchmakingSignalsCommonLanguageRatioP90
                 }
             },
-            [sF.MatchmakingSignalsDeltaPing]: {
+            [sG.MatchmakingSignalsDeltaPing]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.MatchmakingSignalsDeltaPingAvg,
                 byPercentileType: {
@@ -23191,7 +23192,7 @@
                     [t2.P90]: m.MatchmakingSignalsDeltaPingP90
                 }
             },
-            [sF.MatchmakingSignalsEstimatePing]: {
+            [sG.MatchmakingSignalsEstimatePing]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.MatchmakingSignalsEstimatePingAvg,
                 byPercentileType: {
@@ -23201,7 +23202,7 @@
                     [t2.P90]: m.MatchmakingSignalsEstimatePingP90
                 }
             },
-            [sF.MatchmakingSignalsOccupancyRatio]: {
+            [sG.MatchmakingSignalsOccupancyRatio]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.MatchmakingSignalsOccupancyRatioAvg,
                 byPercentileType: {
@@ -23211,7 +23212,7 @@
                     [t2.P90]: m.MatchmakingSignalsOccupancyRatioP90
                 }
             },
-            [sF.MatchmakingSignalsPlayHistoryDifference]: {
+            [sG.MatchmakingSignalsPlayHistoryDifference]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.MatchmakingSignalsPlayHistoryDifferenceAvg,
                 byPercentileType: {
@@ -23221,7 +23222,7 @@
                     [t2.P90]: m.MatchmakingSignalsPlayHistoryDifferenceP90
                 }
             },
-            [sF.MatchmakingSignalsVoiceChatRatio]: {
+            [sG.MatchmakingSignalsVoiceChatRatio]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.MatchmakingSignalsVoiceChatRatioAvg,
                 byPercentileType: {
@@ -23231,7 +23232,7 @@
                     [t2.P90]: m.MatchmakingSignalsVoiceChatRatioP90
                 }
             },
-            [sF.ServerCpuTime]: {
+            [sG.ServerCpuTime]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.CpuTimeAvg,
                 byPercentileType: {
@@ -23241,7 +23242,7 @@
                     [t2.P90]: m.CpuTimeP90
                 }
             },
-            [sF.ServerFrameRate]: {
+            [sG.ServerFrameRate]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.ServerFrameRateAvg,
                 byPercentileType: {
@@ -23251,7 +23252,7 @@
                     [t2.P90]: m.ServerFrameRateP90
                 }
             },
-            [sF.ServerMemoryUsage]: {
+            [sG.ServerMemoryUsage]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.ServerMemoryUsageAvg,
                 byPercentileType: {
@@ -23261,7 +23262,7 @@
                     [t2.P90]: m.ServerMemoryUsageP90
                 }
             },
-            [sF.ServerMemoryUsageByServerAge]: {
+            [sG.ServerMemoryUsageByServerAge]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.MemoryUsageAvg,
                 byPercentileType: {
@@ -23271,7 +23272,7 @@
                     [t2.P90]: m.MemoryUsageP90
                 }
             },
-            [sF.ServerMemoryUsageV2]: {
+            [sG.ServerMemoryUsageV2]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.MemoryUsageAvg,
                 byPercentileType: {
@@ -23281,7 +23282,7 @@
                     [t2.P90]: m.MemoryUsageP90
                 }
             },
-            [sF.SessionDurationSeconds]: {
+            [sG.SessionDurationSeconds]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.SessionDurationSecondsAvg,
                 byPercentileType: {
@@ -23291,7 +23292,7 @@
                     [t2.P90]: m.SessionDurationSecondsP90
                 }
             },
-            [sF.SessionDurationSecondsMigration]: {
+            [sG.SessionDurationSecondsMigration]: {
                 dimension: sn.PercentileType,
                 defaultMetric: m.SessionDurationSecondsAvgMigration,
                 byPercentileType: {
@@ -23302,8 +23303,8 @@
                 }
             }
         };
-    g.ActionRatePerDau, g.ActionRatePerDauByActionType, g.ActionRatePerImpression, g.AdsPublisherReportingAdsPerEDAU, g.AdsPublisherReportingArpu, g.AdsPublisherReportingDisplayAdImpressions, g.AdsPublisherReportingImmersiveDisplayRevenue, g.AdsPublisherReportingImmersiveDisplayRobuxEpm, g.AdsPublisherReportingImmersiveEvents, g.AdsPublisherReportingImmersiveVideoViews, g.AdsPublisherReportingPortalRevenueRobux, g.AdsPublisherReportingRobuxEpm, g.AdsPublisherReportingRobuxEpt, g.AdsPublisherReportingTotalImpressions, g.AdsPublisherReportingTotalRevenueRobux, g.AdsPublisherReportingTotalTeleports, g.AdsPublisherReportingVideo2DAdsPerDUV, g.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer, g.AdsPublisherReportingVideo2DConversionRate, g.AdsPublisherReportingVideo2DDailyUniqueViewer, g.AdsPublisherReportingVideo2DEligibleDau, g.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc, g.AdsPublisherReportingVideo2DEvents, g.AdsPublisherReportingVideo2DFillPercent, g.AdsPublisherReportingVideo2DFills, g.AdsPublisherReportingVideo2DImpressions, g.AdsPublisherReportingVideo2DReachRatio, g.AdsPublisherReportingVideo2DRequests, g.AdsPublisherReportingVideo2DRevenueRobux, g.AdsPublisherReportingVideo2DRewardPercent, g.AdsPublisherReportingVideo2DRewards, g.AdsPublisherReportingVideo2DRobuxEpm, g.AdsRoasEstimate, g.AdsRoasEstimateByUniverse, g.AdsUAEarningsUsdDefaultView, g.AdsUAEarningsUsdDefaultViewByUniverse, g.AdsUAExpNumPlaysDefaultView, g.AdsUAExpNumPlaysDefaultViewByUniverse, g.AdsUAExpNumPlaysNewUserView, g.AdsUAExpNumPlaysNewUserViewByUniverse, g.AdsUAExpNumPlaysResurrected30dUserView, g.AdsUAExpNumPlaysResurrected30dUserViewByUniverse, g.AdsUAExpNumPlaysResurrected7dUserView, g.AdsUAExpNumPlaysResurrected7dUserViewByUniverse, g.AdsUAExpNumPlaysReturningUserView, g.AdsUAExpNumPlaysReturningUserViewByUniverse, g.AdsUAExpPlaytimeDefaultView, g.AdsUAExpPlaytimeDefaultViewByUniverse, g.AdsUAExpPlaytimeNewUserView, g.AdsUAExpPlaytimeNewUserViewByUniverse, g.AdsUAExpPlaytimeResurrected30dUserView, g.AdsUAExpPlaytimeResurrected30dUserViewByUniverse, g.AdsUAExpPlaytimeResurrected7dUserView, g.AdsUAExpPlaytimeResurrected7dUserViewByUniverse, g.AdsUAExpPlaytimeReturningUserView, g.AdsUAExpPlaytimeReturningUserViewByUniverse, g.AdsUAExpRobuxRevenueDefaultView, g.AdsUAExpRobuxRevenueDefaultViewByUniverse, g.AdsUAExpRobuxRevenueNewUserView, g.AdsUAExpRobuxRevenueNewUserViewByUniverse, g.AdsUAExpRobuxRevenueResurrected30dUserView, g.AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse, g.AdsUAExpRobuxRevenueResurrected7dUserView, g.AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse, g.AdsUAExpRobuxRevenueReturningUserView, g.AdsUAExpRobuxRevenueReturningUserViewByUniverse, g.AdsUANumClicksDefaultView, g.AdsUANumClicksDefaultViewByUniverse, g.AdsUANumClicksNewUsers, g.AdsUANumClicksNewUsersByUniverse, g.AdsUANumClicksResurrected30dUsers, g.AdsUANumClicksResurrected30dUsersByUniverse, g.AdsUANumClicksResurrected7dUsers, g.AdsUANumClicksResurrected7dUsersByUniverse, g.AdsUANumClicksReturningUsers, g.AdsUANumClicksReturningUsersByUniverse, g.AdsUANumImpressionsDefaultView, g.AdsUANumImpressionsDefaultViewByUniverse, g.AdsUANumImpressionsNewUsers, g.AdsUANumImpressionsNewUsersByUniverse, g.AdsUANumImpressionsResurrected30dUsers, g.AdsUANumImpressionsResurrected30dUsersByUniverse, g.AdsUANumImpressionsResurrected7dUsers, g.AdsUANumImpressionsResurrected7dUsersByUniverse, g.AdsUANumImpressionsReturningUsers, g.AdsUANumImpressionsReturningUsersByUniverse, g.AdsUANumPlaysDefaultView, g.AdsUANumPlaysDefaultViewByUniverse, g.AdsUANumPlaysNewUserView, g.AdsUANumPlaysNewUserViewByUniverse, g.AdsUANumPlaysResurrected30dUserView, g.AdsUANumPlaysResurrected30dUserViewByUniverse, g.AdsUANumPlaysResurrected7dUserView, g.AdsUANumPlaysResurrected7dUserViewByUniverse, g.AdsUANumPlaysReturningUserView, g.AdsUANumPlaysReturningUserViewByUniverse, g.AdsUAPlaytimeDefaultView, g.AdsUAPlaytimeDefaultViewByUniverse, g.AdsUAPlaytimeNewUserView, g.AdsUAPlaytimeNewUserViewByUniverse, g.AdsUAPlaytimeResurrected30dUserView, g.AdsUAPlaytimeResurrected30dUserViewByUniverse, g.AdsUAPlaytimeResurrected7dUserView, g.AdsUAPlaytimeResurrected7dUserViewByUniverse, g.AdsUAPlaytimeReturningUserView, g.AdsUAPlaytimeReturningUserViewByUniverse, g.AdsUARoas, g.AdsUARoasByUniverse, g.AdsUARobuxRevenueDefaultView, g.AdsUARobuxRevenueDefaultViewByUniverse, g.AdsUARobuxRevenueNewUserView, g.AdsUARobuxRevenueNewUserViewByUniverse, g.AdsUARobuxRevenueResurrected30dUserView, g.AdsUARobuxRevenueResurrected30dUserViewByUniverse, g.AdsUARobuxRevenueResurrected7dUserView, g.AdsUARobuxRevenueResurrected7dUserViewByUniverse, g.AdsUARobuxRevenueReturningUserView, g.AdsUARobuxRevenueReturningUserViewByUniverse, g.AdsUATotalSpendMicroUsdDefaultView, g.AdsUATotalSpendMicroUsdDefaultViewByUniverse, g.AdsUATotalSpendMicroUsdNewUsers, g.AdsUATotalSpendMicroUsdNewUsersByUniverse, g.AdsUATotalSpendMicroUsdResurrected30dUsers, g.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse, g.AdsUATotalSpendMicroUsdResurrected7dUsers, g.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse, g.AdsUATotalSpendMicroUsdReturningUsers, g.AdsUATotalSpendMicroUsdReturningUsersByUniverse, g.AdsVideo2DAdsPerEDAUBreakdown, g.AdsVideo2DEligibleDauBreakdown, g.AdsVideo2DReachRatioBreakdown, g.AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux, g.AffiliateLinkDailyAffiliateReactivationsPayoutRobux, g.AffiliateLinkDailyAffiliateSignupsPayoutRobux, g.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender, g.AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender, g.AffiliateLinkDailyBookingsPerSpenderCombined, g.AffiliateLinkDailyQualifiedActiveSpenderReactivations, g.AffiliateLinkDailyQualifiedReactivations, g.AffiliateLinkDailyQualifiedReactivationsBookingsRobux, g.AffiliateLinkDailyQualifiedReactivationsSpenders, g.AffiliateLinkDailyQualifiedSignups, g.AffiliateLinkDailyQualifiedSignupsBookingsRobux, g.AffiliateLinkDailyQualifiedSignupSpenders, g.AffiliateLinkDailyTotalPayoutRobux, g.AffiliateLinkDailyUniqueClick, g.AffiliateLinkDailyVisits, g.AlertIncidentCount, g.Attribution1DPayerConversionRatio, g.Attribution1DPayerConversionRatioMigration, g.Attribution1DPlaytimePerUserInMinutes, g.Attribution1DPlaytimePerUserInMinutesMigration, g.Attribution1DRobuxPerUser, g.Attribution1DRobuxPerUserMigration, g.Attribution30DPayerConversionRatio, g.Attribution30DPayerConversionRatioMigration, g.Attribution30DPlaytimePerUserInMinutes, g.Attribution30DPlaytimePerUserInMinutesMigration, g.Attribution30DRobuxPerUser, g.Attribution30DRobuxPerUserMigration, g.Attribution7DPayerConversionRatio, g.Attribution7DPayerConversionRatioMigration, g.Attribution7DPlaytimePerUserInMinutes, g.Attribution7DPlaytimePerUserInMinutesMigration, g.Attribution7DRobuxPerUser, g.Attribution7DRobuxPerUserMigration, g.AttributionD1RetentionRatio, g.AttributionD1RetentionRatioMigration, g.AttributionD30RetentionRatio, g.AttributionD30RetentionRatioMigration, g.AttributionD7RetentionRatio, g.AttributionD7RetentionRatioMigration, g.AverageImpressionsPerUser, g.AveragePlayTimeMinutesPerDAU, g.AverageRevenuePerPayingUser, g.AverageRevenuePerUser, g.AverageSessionLengthMinutes, g.AvgViewTimePerView, g.AvgViewTimePerViewer, g.BandwidthAttributesBps, g.BandwidthAttributesMaxBytes, g.BandwidthAttributesUpdatesPerSecond, g.BandwidthEventBps, g.BandwidthEventMaxBytes, g.BandwidthEventUpdatesPerSecond, g.BandwidthNewInstanceBps, g.BandwidthNewInstanceMaxBytes, g.BandwidthNewInstanceUpdatesPerSecond, g.BandwidthPropertiesBps, g.BandwidthPropertiesMaxBytes, g.BandwidthPropertiesUpdatesPerSecond, g.BandwidthTotalBps, g.BandwidthTotalMaxBytes, g.BandwidthTotalUpdatesPerSecond, g.BonusPromotionsAwardedCount, g.BonusPromotionsGameJoinCount, g.BonusPromotionsImpressionCount, g.ClickCVR, g.ClickCVRMigration, g.ClientCpuTimeAvg, g.ClientCrashCount, g.ClientCrashCountMigration, g.ClientCrashRate15m, g.ClientCrashRate15mMigration, g.ClientCrashRateNotStableAlert, g.ClientCrashRateNotStableAlertMigration, sF.ClientFps, sF.ClientMemoryUsage, sF.ClientMemoryUsagePercentage, g.CommentRatePerImpression, g.CommerceCheckouts, g.CommerceClicks, g.CommerceGMV, g.CommerceImpressions, g.CommerceOrders, g.CommerceQuantitySold, g.CommerceUniqueCheckouts, g.CommerceUniqueClicks, g.CommerceUniqueImpressions, g.CommerceUniqueOrders, g.CommunityAnnouncementDeliveries, g.CommunityAnnouncementEngagement, g.CommunityAnnouncementEventCount, g.CommunityAnnouncementNetReactions, g.CommunityAnnouncementNotificationCTR, g.CommunityAnnouncementUniqueClicks, g.CommunityAnnouncementUniqueUsers, g.CommunityForumContentEventCount, g.CommunityForumContentUniqueUsers, g.CommunityGroupPageUniqueVisitors, g.CommunityGroupPageViews, g.CommunityMembershipChangeEvents, g.CommunityMembershipCount, g.ComputeEfficiency, g.ConcurrentPlayers, sF.CoresPerServer, g.CpuCoreUtilization, g.CreatorRewardsAudienceExpansionFunnelEstimatedPayout, g.CreatorRewardsAudienceExpansionFunnelPayerConversion60D, g.CreatorRewardsAudienceExpansionFunnelPayerConversion7D, g.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers, g.CreatorRewardsAudienceExpansionFunnelReactivations, g.CreatorRewardsAudienceExpansionFunnelRetentionD1, g.CreatorRewardsAudienceExpansionFunnelRetentionD7, g.CreatorRewardsAudienceExpansionFunnelRevenue1D, g.CreatorRewardsAudienceExpansionFunnelRevenue60D, g.CreatorRewardsAudienceExpansionFunnelRevenue7D, g.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D, g.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D, g.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D, g.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D, g.CreatorRewardsAudienceExpansionFunnelSignups, g.CreatorRewardsAudienceExpansionFunnelUserCount, g.CreatorRewardsAverageRobuxBookingsPerSpender, g.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux, g.CreatorRewardsLifetimeQualifiedReactivations, g.CreatorRewardsLifetimeQualifiedSignups, g.CreatorRewardsLifetimeQualifiedSpenders, g.CsmFanoutRatio, g.CsmFanoutRatioExtended, g.CsmGameServersConnectedCount, g.CsmMessageSizeBytes, g.CsmMessageSizeQuota, g.CsmPublishedMessagesCount, g.CsmPublishedMessagesExtendedCount, g.CsmReceivedMessagesCount, g.CsmReceivedMessagesExtendedCount, g.CsmReceivedMessagesQuota, g.CubeDailyRequests, g.CubeLatencyAvg, g.CubeLatencyP99, g.CubeOutcomes, g.CubeTotalRequests, sF.CustomEventsV2, g.D1Retention, g.D30Retention, g.D7Retention, g.DailyActiveUsers, g.DailyCohortRetention, g.DailyRetentionCohortNoDim, g.DailyRevenue, g.DataStoreConsumedListRequests, g.DataStoreConsumedReadRequests, g.DataStoreConsumedRemoveRequests, g.DataStoreConsumedWriteRequests, g.DataStoreListRequests, g.DataStoreListRequestsByEndpoint, g.DataStoreListRequestsQuota, g.DataStoreListRequestsQuotaOrdered, g.DataStoreListRequestsQuotaStandard, g.DataStoreReadRequests, g.DataStoreReadRequestsByEndpoint, g.DataStoreReadRequestsQuotaOrdered, g.DataStoreReadRequestsQuotaStandard, g.DataStoreRemoveRequests, g.DataStoreRemoveRequestsByEndpoint, g.DataStoreRemoveRequestsQuotaOrdered, g.DataStoreRemoveRequestsQuotaStandard, g.DataStoreRequests, g.DataStoreRequestsByEndpoint, g.DataStoreRequestsByStatus, g.DataStoreStorageQuotaBytes, g.DataStoreStorageUsageBytes, g.DataStoreWriteRequests, g.DataStoreWriteRequestsByEndpoint, g.DataStoreWriteRequestsQuotaOrdered, g.DataStoreWriteRequestsQuotaStandard, g.DauMauStickiness, g.EarningsTotalUsd, g.EconomyAverageWalletBalance, g.EconomyTransactionAmount, g.EconomyTransactionAmountSinks, g.EconomyTransactionCount, g.EndToEndCVR, g.EndToEndCVRMigration, g.ErrorCount, g.EventAvgDailyActiveUsers, g.EventAvgDailyRevenue, g.EventAvgDailyUserPlaytimeMinutes, g.EventAvgRevenuePerDailyActiveUser, g.ExperimentMetricAdsArpu, g.ExperimentMetricAdsFrequency, g.ExperimentMetricAdsOptInRate, g.ExperimentMetricAverageRevenuePerPayingUser, g.ExperimentMetricAverageRevenuePerUser, g.ExperimentMetricAverageSessionTime, g.ExperimentMetricDay1Retention, g.ExperimentMetricDay7Retention, g.ExperimentMetricMean, g.ExperimentMetricPayerConversionRate, g.ExperimentMetricPlaytimePerUser, g.ExperimentMetricQualifiedPlayThroughRate, g.ForwardD1Retention, g.ForwardD30Retention, g.ForwardD7Retention, g.FriendReferralAverageRobuxBookingsPerSpender, g.FriendReferralLifetimeEstimatedAffiliatePayoutRobux, g.FriendReferralLifetimeQualifiedSignups, g.FriendReferralLifetimeQualifiedSpenders, g.FriendReferralLifetimeVisits, g.FunnelCohortCompletionRate, g.FunnelCohortSessionCompletionRate, g.FunnelStepChurnRate, g.FunnelStepCompletionRate, g.FunnelStepOverallCompletionRate, g.FunnelStepTotalCount, g.FunnelUserChurnRate, g.FunnelUserOverallCompletionRate, g.FunnelUserStepCompletionRate, g.FunnelUserTotalCount, g.HttpServiceRequestsCount, g.HttpServiceRequestsExtendedCount, g.HttpServiceRequestsV2, sF.HttpServiceResponseTime, sF.HttpServiceResponseTimeExtended, g.ImpressionCVR, g.ImpressionCVRMigration, g.IphEarningsRobux, g.IphEarningsRobuxPartial, g.IphTransactionCount, g.IphTransactionCountPartial, g.ItemAvatar3dLimitedAvailableQuantity, g.ItemAvatar3dLimitedTotalQuantity, g.ItemAverageTransactionPrice, g.ItemLifetimeCreatorEarning, g.ItemLifetimeRebateAmount, g.ItemLifetimeRobuxSpent, g.ItemLifetimeTransactionCount, g.ItemLimitedSoldPercentage, g.ItemMonetizationRevenue, g.ItemMonetizationSales, g.ItemPublishAdvance, g.ItemPublishAdvanceRecoupedPercentage, g.ItemTotalCreatorEarning, g.ItemTotalRobuxSpent, g.ItemTotalTransactionCount, g.JoinRatePerImpression, g.JourneyCompletionUsers, g.JourneyEntryTransitions, g.JourneyLastStageTransitions, g.JourneyNodeTransitionChurnCount, g.JourneyNodeTransitionChurnRate, g.JourneyNodeTransitionCount, g.JourneyNodeUserChurnCount, g.JourneyNodeUserChurnRate, g.JourneyNodeUserCount, g.JourneyStageChurnRate, g.JourneyStageSkipRate, g.JourneyStageSkipTransitionCount, g.JourneyStageSkipTransitionRate, g.JourneyStageSkipUserCount, g.JourneyStageTransitionChurnRate, g.JourneyStageTransitionCount, g.JourneyStageUserCount, g.JourneyTotalUsers, g.JourneyTransitionCount, g.JourneyTransitionCountUser, g.JourneyTransitionPctOfSource, g.JourneyTransitionPctOfStart, g.JourneyUserPctOfSource, g.JourneyUserPctOfStart, g.MaintenanceThreshold, sF.MatchmakingCategoricalCustomSignalsSimilarityRatio, sF.MatchmakingNumericCustomSignalsDifference, g.MatchmakingPlayerAttributesLoadingStatusAvg, sF.MatchmakingSignalsAgeDifference, sF.MatchmakingSignalsCommonChatGroupRatio, sF.MatchmakingSignalsCommonDeviceTypeRatio, sF.MatchmakingSignalsCommonLanguageRatio, sF.MatchmakingSignalsDeltaPing, sF.MatchmakingSignalsEstimatePing, sF.MatchmakingSignalsOccupancyRatio, sF.MatchmakingSignalsPlayHistoryDifference, g.MatchmakingSignalsPreferredPlayerMatchRatioAvg, sF.MatchmakingSignalsVoiceChatRatio, g.MemoryStoreErrorRateAlert, g.MemoryStoreMemoryQuotaBytes, g.MemoryStoreMemoryUsageAlert, g.MemoryStoreMemoryUsageBytes, g.MemoryStoreRequests, g.MemoryStoreRequestsByEndpoint, g.MemoryStoreRequestsByStatus, g.MemoryStoreRequestUnits, g.MemoryStoreRequestUnitsByEndpoint, g.MemoryStoreRequestUnitsQuota, g.MemoryStoreThrottlingAlert, g.MonthlyActiveUsers, g.OomUnexpectedExits, g.OomUnexpectedExitsMigration, g.PayingUsers, g.PayingUsersCVR, g.PayoutRobux, g.PayoutRobuxV2, g.PeakConcurrentPlayers, g.PersonalizedShopsConversionRate, g.PersonalizedShopsImpressions, g.PersonalizedShopsPurchases, g.PersonalizedShopsRevenue, g.PlayerFeedbackVotesCount, g.PotentialEarningsTotalUsd, g.PotentialExtraEarningsTotalUsd, g.PurchaseRatePerImpression, g.QualifiedEndToEndCVR, g.QualifiedEndToEndCVRMigration, g.QualifiedUniqueUsersWithPlaySessions, g.QualifiedUniqueUsersWithPlaySessionsMigration, g.ReactionRatePerImpression, g.RecommendationDau, g.RecommendationViewsTotal, g.RelativeThresholdCapture, g.RFYD1CoplayDays, g.RFYD1Playtime, g.RFYD1QualifiedPlaySessions, g.RFYD1RobuxSpend, g.RFYD1SpendDay, g.RFYD2To7CoplayDays, g.RFYD2To7PlayDays, g.RFYD2To7Playtime, g.RFYD2To7QualifiedPlaySessions, g.RFYD2To7RobuxSpend, g.RFYD2To7SpendDays, g.RFYD8To28CoplayDays, g.RFYD8To28PlayDays, g.RFYD8To28Playtime, g.RFYD8To28QualifiedPlaySessions, g.RFYD8To28RobuxSpend, g.RFYD8To28SpendDays, g.RFYDeepEngagementRate, g.RFYDuration0To60, g.RFYDuration181To600, g.RFYDuration61To180, g.RFYDurationGreaterThan600, g.RFYL7IntentionalCoplayDays, g.RFYL7PlayDays, g.RFYL7PlaySessionsPerUser, g.RFYL7PlayTime, g.RFYL7RobuxSpent, g.RFYL7RobuxSpentDays, g.RFYPlayThroughRate, g.RFYQualifiedPTR, g.RFYUniqueNotInterestedUsersPerMillionImpressions, g.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins, g.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber, g.RobloxPlusDevBountyDailySubscribers, g.RobloxPlusDevBountyPayoutRobux, g.RobloxPlusDevBountySubscriberCount, g.RobloxPlusDevBountySubscriberSpend, g.RotraceTotalCalls, g.RSVPCount, sF.ServerCpuTime, g.ServerCrashCount, sF.ServerFrameRate, sF.ServerMemoryUsage, sF.ServerMemoryUsageByServerAge, sF.ServerMemoryUsageV2, sF.SessionDurationSeconds, sF.SessionDurationSecondsMigration, g.ShareLinkAttribution1DPayerConversionRatio, g.ShareLinkAttribution1DPlaytimePerUserInMinutes, g.ShareLinkAttribution1DRobuxPerUser, g.ShareLinkAttribution30DPayerConversionRatio, g.ShareLinkAttribution30DPlaytimePerUserInMinutes, g.ShareLinkAttribution30DRobuxPerUser, g.ShareLinkAttribution7DPayerConversionRatio, g.ShareLinkAttribution7DPlaytimePerUserInMinutes, g.ShareLinkAttribution7DRobuxPerUser, g.ShareLinkAttributionD1RetentionRatio, g.ShareLinkAttributionD30RetentionRatio, g.ShareLinkAttributionD7RetentionRatio, g.ShareLinkClickCVR, g.ShareLinkQualifiedClickCVR, g.ShareLinkQualifiedUniqueUsersWithPlaySessions, g.ShareLinkUniqueUsersWithClicks, g.ShareLinkUniqueUsersWithPlaySessions, g.ShareRatePerImpression, g.SourceCount, g.SourceCountRatioKpi, g.SpeechToTextTranscriptionQuota, g.SpeechToTextTranscriptionStatuses, g.SpeechToTextTranscriptionUsage, g.SponsoredAdPlays, g.StoreRevenue, g.StoreTransactions, g.TargetThreshold, g.TextToSpeechAssetSuccesses, g.TextToSpeechRawAudioErrors, g.TextToSpeechRawAudioQuota, g.TextToSpeechRawAudioSuccesses, g.ThumbnailAverageSessionLengthMinutes, g.ThumbnailImpressions, g.ThumbnailL7QualifiedPTR, g.ThumbnailQualifiedPlays, g.ThumbnailQualifiedPTR, g.ThumbnailWinningSegments, g.TotalAbuseReports, g.TotalActions, g.TotalActionsByActionType, g.TotalComments, g.TotalJoins, g.TotalPlayTimeHours, g.TotalPurchases, g.TotalReactionsAdded, g.TotalSessionsEndedInBucket, g.TotalShares, g.TotalViewHours, g.UniqueAbuseReportSubmittersPer1000PlaytimeHours, g.UniqueItemsPerUser, g.UniqueServerShutdowns, g.UniqueUsersWithClicks, g.UniqueUsersWithClicksMigration, g.UniqueUsersWithImpressions, g.UniqueUsersWithImpressionsMigration, g.UniqueUsersWithPlaySessions, g.UniqueUsersWithPlaySessionsMigration, g.UsersInExperiment, g.UsersJoinedFromNotifications, g.VideoServiceExclusivePlaybackSeconds, g.VideoServicePlaybackSeconds, g.Visits, g.WeeklyCohortRetention, s || (s = {}), e.s(["AnalyticsTranslationNamespace", 0, l, "DimensionToMetricToNamespaceMap", 0, P, "FallbackValue", 0, so, "RAQIV2APIMetric", 0, m, "RAQIV2AbuseChannel", 0, f, "RAQIV2AcquisitionSource", 0, w, "RAQIV2AdFormat", 0, h, "RAQIV2AggregationType", 0, t0, "RAQIV2AnnouncementEventType", 0, Z, "RAQIV2AvatarItemTargetType", 0, eo, "RAQIV2BenchmarkDatasetKey", 0, sD, "RAQIV2BenchmarkDatasetKeyToVariant", 0, sg, "RAQIV2BenchmarkVariantId", 0, sA, "RAQIV2BenchmarkVariantsByMetric", 0, sR, "RAQIV2BreakdownValueOrder", 0, tC, "RAQIV2DateRangeType", 0, sP, "RAQIV2Dimension", 0, p, "RAQIV2DimensionDisplayConfig", 0, ss, "RAQIV2DimensionValueType", 0, tk, "RAQIV2FilterOperation", 0, tN, "RAQIV2FlowType", 0, ii, "RAQIV2ForumContentEventType", 0, is, "RAQIV2IsNewUser", 0, ib, "RAQIV2MembershipEventType", 0, iH, "RAQIV2MemoryGroup", 0, iW, "RAQIV2Metric", 0, g, "RAQIV2MetricDisplayConfig", 0, sz, "RAQIV2MetricDisplayType", 0, sf, "RAQIV2MetricGranularity", 0, sq, "RAQIV2MetricToAlertingEligibleDimensions", 0, sH, "RAQIV2MetricToSupportedDimensions", 0, sQ, "RAQIV2MetricToSupportedGranularities", 0, sJ, "RAQIV2MetricUnit", 0, sw, "RAQIV2MetricValueType", 0, sh, "RAQIV2OperatingSystem", 0, ne, "RAQIV2PageViewContext", 0, na, "RAQIV2PercentileType", 0, t2, "RAQIV2Platform", 0, nd, "RAQIV2ProductType", 0, nR, "RAQIV2PseudoDimensionDisplayConfig", 0, st, "RAQIV2PurchaseStatus", 0, nv, "RAQIV2RevenueSource", 0, nb, "RAQIV2RewardedVideoEventType", 0, nf, "RAQIV2Severity", 0, nJ, "RAQIV2SpecialDimensionRenderer", 0, tw, "RAQIV2UIMetric", 0, sF, "RAQIV2UIMetricToAPIConfig", 0, sW, "RAQIV2UIPseudoDimension", 0, sn, "RAQIV2UIPseudoDimensionType", 0, sa, "RAQIV2Universe", 0, n2, "RAQIV2VoteType", 0, aC, "Severity", 0, sG])
+    g.ActionRatePerDau, g.ActionRatePerDauByActionType, g.ActionRatePerImpression, g.AdsPublisherReportingAdsPerEDAU, g.AdsPublisherReportingArpu, g.AdsPublisherReportingDisplayAdImpressions, g.AdsPublisherReportingImmersiveDisplayRevenue, g.AdsPublisherReportingImmersiveDisplayRobuxEpm, g.AdsPublisherReportingImmersiveEvents, g.AdsPublisherReportingImmersiveVideoViews, g.AdsPublisherReportingPortalRevenueRobux, g.AdsPublisherReportingRobuxEpm, g.AdsPublisherReportingRobuxEpt, g.AdsPublisherReportingTotalImpressions, g.AdsPublisherReportingTotalRevenueRobux, g.AdsPublisherReportingTotalTeleports, g.AdsPublisherReportingVideo2DAdsPerDUV, g.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer, g.AdsPublisherReportingVideo2DConversionRate, g.AdsPublisherReportingVideo2DDailyUniqueViewer, g.AdsPublisherReportingVideo2DEligibleDau, g.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc, g.AdsPublisherReportingVideo2DEvents, g.AdsPublisherReportingVideo2DFillPercent, g.AdsPublisherReportingVideo2DFills, g.AdsPublisherReportingVideo2DImpressions, g.AdsPublisherReportingVideo2DReachRatio, g.AdsPublisherReportingVideo2DRequests, g.AdsPublisherReportingVideo2DRevenueRobux, g.AdsPublisherReportingVideo2DRewardPercent, g.AdsPublisherReportingVideo2DRewards, g.AdsPublisherReportingVideo2DRobuxEpm, g.AdsRoasEstimate, g.AdsRoasEstimateByUniverse, g.AdsUAEarningsUsdDefaultView, g.AdsUAEarningsUsdDefaultViewByUniverse, g.AdsUAExpNumPlaysDefaultView, g.AdsUAExpNumPlaysDefaultViewByUniverse, g.AdsUAExpNumPlaysNewUserView, g.AdsUAExpNumPlaysNewUserViewByUniverse, g.AdsUAExpNumPlaysResurrected30dUserView, g.AdsUAExpNumPlaysResurrected30dUserViewByUniverse, g.AdsUAExpNumPlaysResurrected7dUserView, g.AdsUAExpNumPlaysResurrected7dUserViewByUniverse, g.AdsUAExpNumPlaysReturningUserView, g.AdsUAExpNumPlaysReturningUserViewByUniverse, g.AdsUAExpPlaytimeDefaultView, g.AdsUAExpPlaytimeDefaultViewByUniverse, g.AdsUAExpPlaytimeNewUserView, g.AdsUAExpPlaytimeNewUserViewByUniverse, g.AdsUAExpPlaytimeResurrected30dUserView, g.AdsUAExpPlaytimeResurrected30dUserViewByUniverse, g.AdsUAExpPlaytimeResurrected7dUserView, g.AdsUAExpPlaytimeResurrected7dUserViewByUniverse, g.AdsUAExpPlaytimeReturningUserView, g.AdsUAExpPlaytimeReturningUserViewByUniverse, g.AdsUAExpRobuxRevenueDefaultView, g.AdsUAExpRobuxRevenueDefaultViewByUniverse, g.AdsUAExpRobuxRevenueNewUserView, g.AdsUAExpRobuxRevenueNewUserViewByUniverse, g.AdsUAExpRobuxRevenueResurrected30dUserView, g.AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse, g.AdsUAExpRobuxRevenueResurrected7dUserView, g.AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse, g.AdsUAExpRobuxRevenueReturningUserView, g.AdsUAExpRobuxRevenueReturningUserViewByUniverse, g.AdsUANumClicksDefaultView, g.AdsUANumClicksDefaultViewByUniverse, g.AdsUANumClicksNewUsers, g.AdsUANumClicksNewUsersByUniverse, g.AdsUANumClicksResurrected30dUsers, g.AdsUANumClicksResurrected30dUsersByUniverse, g.AdsUANumClicksResurrected7dUsers, g.AdsUANumClicksResurrected7dUsersByUniverse, g.AdsUANumClicksReturningUsers, g.AdsUANumClicksReturningUsersByUniverse, g.AdsUANumImpressionsDefaultView, g.AdsUANumImpressionsDefaultViewByUniverse, g.AdsUANumImpressionsNewUsers, g.AdsUANumImpressionsNewUsersByUniverse, g.AdsUANumImpressionsResurrected30dUsers, g.AdsUANumImpressionsResurrected30dUsersByUniverse, g.AdsUANumImpressionsResurrected7dUsers, g.AdsUANumImpressionsResurrected7dUsersByUniverse, g.AdsUANumImpressionsReturningUsers, g.AdsUANumImpressionsReturningUsersByUniverse, g.AdsUANumPlaysDefaultView, g.AdsUANumPlaysDefaultViewByUniverse, g.AdsUANumPlaysNewUserView, g.AdsUANumPlaysNewUserViewByUniverse, g.AdsUANumPlaysResurrected30dUserView, g.AdsUANumPlaysResurrected30dUserViewByUniverse, g.AdsUANumPlaysResurrected7dUserView, g.AdsUANumPlaysResurrected7dUserViewByUniverse, g.AdsUANumPlaysReturningUserView, g.AdsUANumPlaysReturningUserViewByUniverse, g.AdsUAPlaytimeDefaultView, g.AdsUAPlaytimeDefaultViewByUniverse, g.AdsUAPlaytimeNewUserView, g.AdsUAPlaytimeNewUserViewByUniverse, g.AdsUAPlaytimeResurrected30dUserView, g.AdsUAPlaytimeResurrected30dUserViewByUniverse, g.AdsUAPlaytimeResurrected7dUserView, g.AdsUAPlaytimeResurrected7dUserViewByUniverse, g.AdsUAPlaytimeReturningUserView, g.AdsUAPlaytimeReturningUserViewByUniverse, g.AdsUARoas, g.AdsUARoasByUniverse, g.AdsUARobuxRevenueDefaultView, g.AdsUARobuxRevenueDefaultViewByUniverse, g.AdsUARobuxRevenueNewUserView, g.AdsUARobuxRevenueNewUserViewByUniverse, g.AdsUARobuxRevenueResurrected30dUserView, g.AdsUARobuxRevenueResurrected30dUserViewByUniverse, g.AdsUARobuxRevenueResurrected7dUserView, g.AdsUARobuxRevenueResurrected7dUserViewByUniverse, g.AdsUARobuxRevenueReturningUserView, g.AdsUARobuxRevenueReturningUserViewByUniverse, g.AdsUATotalSpendMicroUsdDefaultView, g.AdsUATotalSpendMicroUsdDefaultViewByUniverse, g.AdsUATotalSpendMicroUsdNewUsers, g.AdsUATotalSpendMicroUsdNewUsersByUniverse, g.AdsUATotalSpendMicroUsdResurrected30dUsers, g.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse, g.AdsUATotalSpendMicroUsdResurrected7dUsers, g.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse, g.AdsUATotalSpendMicroUsdReturningUsers, g.AdsUATotalSpendMicroUsdReturningUsersByUniverse, g.AdsVideo2DAdsPerEDAUBreakdown, g.AdsVideo2DEligibleDauBreakdown, g.AdsVideo2DReachRatioBreakdown, g.AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux, g.AffiliateLinkDailyAffiliateReactivationsPayoutRobux, g.AffiliateLinkDailyAffiliateSignupsPayoutRobux, g.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender, g.AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender, g.AffiliateLinkDailyBookingsPerSpenderCombined, g.AffiliateLinkDailyQualifiedActiveSpenderReactivations, g.AffiliateLinkDailyQualifiedReactivations, g.AffiliateLinkDailyQualifiedReactivationsBookingsRobux, g.AffiliateLinkDailyQualifiedReactivationsSpenders, g.AffiliateLinkDailyQualifiedSignups, g.AffiliateLinkDailyQualifiedSignupsBookingsRobux, g.AffiliateLinkDailyQualifiedSignupSpenders, g.AffiliateLinkDailyTotalPayoutRobux, g.AffiliateLinkDailyUniqueClick, g.AffiliateLinkDailyVisits, g.AlertIncidentCount, g.Attribution1DPayerConversionRatio, g.Attribution1DPayerConversionRatioMigration, g.Attribution1DPlaytimePerUserInMinutes, g.Attribution1DPlaytimePerUserInMinutesMigration, g.Attribution1DRobuxPerUser, g.Attribution1DRobuxPerUserMigration, g.Attribution30DPayerConversionRatio, g.Attribution30DPayerConversionRatioMigration, g.Attribution30DPlaytimePerUserInMinutes, g.Attribution30DPlaytimePerUserInMinutesMigration, g.Attribution30DRobuxPerUser, g.Attribution30DRobuxPerUserMigration, g.Attribution7DPayerConversionRatio, g.Attribution7DPayerConversionRatioMigration, g.Attribution7DPlaytimePerUserInMinutes, g.Attribution7DPlaytimePerUserInMinutesMigration, g.Attribution7DRobuxPerUser, g.Attribution7DRobuxPerUserMigration, g.AttributionD1RetentionRatio, g.AttributionD1RetentionRatioMigration, g.AttributionD30RetentionRatio, g.AttributionD30RetentionRatioMigration, g.AttributionD7RetentionRatio, g.AttributionD7RetentionRatioMigration, g.AverageImpressionsPerUser, g.AveragePlayTimeMinutesPerDAU, g.AverageRevenuePerPayingUser, g.AverageRevenuePerUser, g.AverageSessionLengthMinutes, g.AvgViewTimePerView, g.AvgViewTimePerViewer, g.BandwidthAttributesBps, g.BandwidthAttributesMaxBytes, g.BandwidthAttributesUpdatesPerSecond, g.BandwidthEventBps, g.BandwidthEventMaxBytes, g.BandwidthEventUpdatesPerSecond, g.BandwidthNewInstanceBps, g.BandwidthNewInstanceMaxBytes, g.BandwidthNewInstanceUpdatesPerSecond, g.BandwidthPropertiesBps, g.BandwidthPropertiesMaxBytes, g.BandwidthPropertiesUpdatesPerSecond, g.BandwidthTotalBps, g.BandwidthTotalMaxBytes, g.BandwidthTotalUpdatesPerSecond, g.BonusPromotionsAwardedCount, g.BonusPromotionsGameJoinCount, g.BonusPromotionsImpressionCount, g.ClickCVR, g.ClickCVRMigration, g.ClientCpuTimeAvg, g.ClientCrashCount, g.ClientCrashCountMigration, g.ClientCrashRate15m, g.ClientCrashRate15mMigration, g.ClientCrashRateNotStableAlert, g.ClientCrashRateNotStableAlertMigration, sG.ClientFps, sG.ClientMemoryUsage, sG.ClientMemoryUsagePercentage, g.CommentRatePerImpression, g.CommerceCheckouts, g.CommerceClicks, g.CommerceGMV, g.CommerceImpressions, g.CommerceOrders, g.CommerceQuantitySold, g.CommerceUniqueCheckouts, g.CommerceUniqueClicks, g.CommerceUniqueImpressions, g.CommerceUniqueOrders, g.CommunityAnnouncementDeliveries, g.CommunityAnnouncementEngagement, g.CommunityAnnouncementEventCount, g.CommunityAnnouncementNetReactions, g.CommunityAnnouncementNotificationCTR, g.CommunityAnnouncementUniqueClicks, g.CommunityAnnouncementUniqueUsers, g.CommunityForumContentEventCount, g.CommunityForumContentUniqueUsers, g.CommunityGroupPageUniqueVisitors, g.CommunityGroupPageViews, g.CommunityMembershipChangeEvents, g.CommunityMembershipCount, g.ComputeEfficiency, g.ConcurrentPlayers, sG.CoresPerServer, g.CpuCoreUtilization, g.CreatorRewardsAudienceExpansionFunnelEstimatedPayout, g.CreatorRewardsAudienceExpansionFunnelPayerConversion60D, g.CreatorRewardsAudienceExpansionFunnelPayerConversion7D, g.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers, g.CreatorRewardsAudienceExpansionFunnelReactivations, g.CreatorRewardsAudienceExpansionFunnelRetentionD1, g.CreatorRewardsAudienceExpansionFunnelRetentionD7, g.CreatorRewardsAudienceExpansionFunnelRevenue1D, g.CreatorRewardsAudienceExpansionFunnelRevenue60D, g.CreatorRewardsAudienceExpansionFunnelRevenue7D, g.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D, g.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D, g.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D, g.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D, g.CreatorRewardsAudienceExpansionFunnelSignups, g.CreatorRewardsAudienceExpansionFunnelUserCount, g.CreatorRewardsAverageRobuxBookingsPerSpender, g.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux, g.CreatorRewardsLifetimeQualifiedReactivations, g.CreatorRewardsLifetimeQualifiedSignups, g.CreatorRewardsLifetimeQualifiedSpenders, g.CsmFanoutRatio, g.CsmFanoutRatioExtended, g.CsmGameServersConnectedCount, g.CsmMessageSizeBytes, g.CsmMessageSizeQuota, g.CsmPublishedMessagesCount, g.CsmPublishedMessagesExtendedCount, g.CsmReceivedMessagesCount, g.CsmReceivedMessagesExtendedCount, g.CsmReceivedMessagesQuota, g.CubeDailyRequests, g.CubeLatencyAvg, g.CubeLatencyP99, g.CubeOutcomes, g.CubeTotalRequests, sG.CustomEventsV2, g.D1Retention, g.D30Retention, g.D7Retention, g.DailyActiveUsers, g.DailyCohortRetention, g.DailyRetentionCohortNoDim, g.DailyRevenue, g.DataStoreConsumedListRequests, g.DataStoreConsumedReadRequests, g.DataStoreConsumedRemoveRequests, g.DataStoreConsumedWriteRequests, g.DataStoreListRequests, g.DataStoreListRequestsByEndpoint, g.DataStoreListRequestsQuota, g.DataStoreListRequestsQuotaOrdered, g.DataStoreListRequestsQuotaStandard, g.DataStoreReadRequests, g.DataStoreReadRequestsByEndpoint, g.DataStoreReadRequestsQuotaOrdered, g.DataStoreReadRequestsQuotaStandard, g.DataStoreRemoveRequests, g.DataStoreRemoveRequestsByEndpoint, g.DataStoreRemoveRequestsQuotaOrdered, g.DataStoreRemoveRequestsQuotaStandard, g.DataStoreRequests, g.DataStoreRequestsByEndpoint, g.DataStoreRequestsByStatus, g.DataStoreStorageQuotaBytes, g.DataStoreStorageUsageBytes, g.DataStoreWriteRequests, g.DataStoreWriteRequestsByEndpoint, g.DataStoreWriteRequestsQuotaOrdered, g.DataStoreWriteRequestsQuotaStandard, g.DauMauStickiness, g.EarningsTotalUsd, g.EconomyAverageWalletBalance, g.EconomyTransactionAmount, g.EconomyTransactionAmountSinks, g.EconomyTransactionCount, g.EndToEndCVR, g.EndToEndCVRMigration, g.ErrorCount, g.EventAvgDailyActiveUsers, g.EventAvgDailyRevenue, g.EventAvgDailyUserPlaytimeMinutes, g.EventAvgRevenuePerDailyActiveUser, g.ExperimentMetricAdsArpu, g.ExperimentMetricAdsFrequency, g.ExperimentMetricAdsOptInRate, g.ExperimentMetricAverageRevenuePerPayingUser, g.ExperimentMetricAverageRevenuePerUser, g.ExperimentMetricAverageSessionTime, g.ExperimentMetricDay1Retention, g.ExperimentMetricDay7Retention, g.ExperimentMetricMean, g.ExperimentMetricPayerConversionRate, g.ExperimentMetricPlaytimePerUser, g.ExperimentMetricQualifiedPlayThroughRate, g.ForwardD1Retention, g.ForwardD30Retention, g.ForwardD7Retention, g.FriendReferralAverageRobuxBookingsPerSpender, g.FriendReferralLifetimeEstimatedAffiliatePayoutRobux, g.FriendReferralLifetimeQualifiedSignups, g.FriendReferralLifetimeQualifiedSpenders, g.FriendReferralLifetimeVisits, g.FunnelCohortCompletionRate, g.FunnelCohortSessionCompletionRate, g.FunnelStepChurnRate, g.FunnelStepCompletionRate, g.FunnelStepOverallCompletionRate, g.FunnelStepTotalCount, g.FunnelUserChurnRate, g.FunnelUserOverallCompletionRate, g.FunnelUserStepCompletionRate, g.FunnelUserTotalCount, g.HttpServiceRequestsCount, g.HttpServiceRequestsExtendedCount, g.HttpServiceRequestsV2, sG.HttpServiceResponseTime, sG.HttpServiceResponseTimeExtended, g.ImpressionCVR, g.ImpressionCVRMigration, g.IphEarningsRobux, g.IphEarningsRobuxPartial, g.IphTransactionCount, g.IphTransactionCountPartial, g.ItemAvatar3dLimitedAvailableQuantity, g.ItemAvatar3dLimitedTotalQuantity, g.ItemAverageTransactionPrice, g.ItemLifetimeCreatorEarning, g.ItemLifetimeRebateAmount, g.ItemLifetimeRobuxSpent, g.ItemLifetimeTransactionCount, g.ItemLimitedSoldPercentage, g.ItemMonetizationRevenue, g.ItemMonetizationSales, g.ItemPublishAdvance, g.ItemPublishAdvanceRecoupedPercentage, g.ItemTotalCreatorEarning, g.ItemTotalRobuxSpent, g.ItemTotalTransactionCount, g.JoinRatePerImpression, g.JourneyCompletionUsers, g.JourneyEntryTransitions, g.JourneyLastStageTransitions, g.JourneyNodeTransitionChurnCount, g.JourneyNodeTransitionChurnRate, g.JourneyNodeTransitionCount, g.JourneyNodeUserChurnCount, g.JourneyNodeUserChurnRate, g.JourneyNodeUserCount, g.JourneyStageChurnRate, g.JourneyStageSkipRate, g.JourneyStageSkipTransitionCount, g.JourneyStageSkipTransitionRate, g.JourneyStageSkipUserCount, g.JourneyStageTransitionChurnRate, g.JourneyStageTransitionCount, g.JourneyStageUserCount, g.JourneyTotalUsers, g.JourneyTransitionCount, g.JourneyTransitionCountUser, g.JourneyTransitionPctOfSource, g.JourneyTransitionPctOfStart, g.JourneyUserPctOfSource, g.JourneyUserPctOfStart, g.MaintenanceThreshold, sG.MatchmakingCategoricalCustomSignalsSimilarityRatio, sG.MatchmakingNumericCustomSignalsDifference, g.MatchmakingPlayerAttributesLoadingStatusAvg, sG.MatchmakingSignalsAgeDifference, sG.MatchmakingSignalsCommonChatGroupRatio, sG.MatchmakingSignalsCommonDeviceTypeRatio, sG.MatchmakingSignalsCommonLanguageRatio, sG.MatchmakingSignalsDeltaPing, sG.MatchmakingSignalsEstimatePing, sG.MatchmakingSignalsOccupancyRatio, sG.MatchmakingSignalsPlayHistoryDifference, g.MatchmakingSignalsPreferredPlayerMatchRatioAvg, sG.MatchmakingSignalsVoiceChatRatio, g.MemoryStoreErrorRateAlert, g.MemoryStoreMemoryQuotaBytes, g.MemoryStoreMemoryUsageAlert, g.MemoryStoreMemoryUsageBytes, g.MemoryStoreRequests, g.MemoryStoreRequestsByEndpoint, g.MemoryStoreRequestsByStatus, g.MemoryStoreRequestUnits, g.MemoryStoreRequestUnitsByEndpoint, g.MemoryStoreRequestUnitsQuota, g.MemoryStoreThrottlingAlert, g.MonthlyActiveUsers, g.OomUnexpectedExits, g.OomUnexpectedExitsMigration, g.PayingUsers, g.PayingUsersCVR, g.PayoutRobux, g.PayoutRobuxV2, g.PeakConcurrentPlayers, g.PersonalizedShopsConversionRate, g.PersonalizedShopsImpressions, g.PersonalizedShopsPurchases, g.PersonalizedShopsRevenue, g.PlayerFeedbackVotesCount, g.PotentialEarningsTotalUsd, g.PotentialExtraEarningsTotalUsd, g.PurchaseRatePerImpression, g.QualifiedEndToEndCVR, g.QualifiedEndToEndCVRMigration, g.QualifiedUniqueUsersWithPlaySessions, g.QualifiedUniqueUsersWithPlaySessionsMigration, g.ReactionRatePerImpression, g.RecommendationDau, g.RecommendationViewsTotal, g.RelativeThresholdCapture, g.RFYD1CoplayDays, g.RFYD1Playtime, g.RFYD1QualifiedPlaySessions, g.RFYD1RobuxSpend, g.RFYD1SpendDay, g.RFYD2To7CoplayDays, g.RFYD2To7PlayDays, g.RFYD2To7Playtime, g.RFYD2To7QualifiedPlaySessions, g.RFYD2To7RobuxSpend, g.RFYD2To7SpendDays, g.RFYD8To28CoplayDays, g.RFYD8To28PlayDays, g.RFYD8To28Playtime, g.RFYD8To28QualifiedPlaySessions, g.RFYD8To28RobuxSpend, g.RFYD8To28SpendDays, g.RFYDeepEngagementRate, g.RFYDuration0To60, g.RFYDuration181To600, g.RFYDuration61To180, g.RFYDurationGreaterThan600, g.RFYL7IntentionalCoplayDays, g.RFYL7PlayDays, g.RFYL7PlaySessionsPerUser, g.RFYL7PlayTime, g.RFYL7RobuxSpent, g.RFYL7RobuxSpentDays, g.RFYPlayThroughRate, g.RFYQualifiedPTR, g.RFYUniqueNotInterestedUsersPerMillionImpressions, g.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins, g.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber, g.RobloxPlusDevBountyDailySubscribers, g.RobloxPlusDevBountyPayoutRobux, g.RobloxPlusDevBountySubscriberCount, g.RobloxPlusDevBountySubscriberSpend, g.RotraceTotalCalls, g.RSVPCount, sG.ServerCpuTime, g.ServerCrashCount, sG.ServerFrameRate, sG.ServerMemoryUsage, sG.ServerMemoryUsageByServerAge, sG.ServerMemoryUsageV2, sG.SessionDurationSeconds, sG.SessionDurationSecondsMigration, g.ShareLinkAttribution1DPayerConversionRatio, g.ShareLinkAttribution1DPlaytimePerUserInMinutes, g.ShareLinkAttribution1DRobuxPerUser, g.ShareLinkAttribution30DPayerConversionRatio, g.ShareLinkAttribution30DPlaytimePerUserInMinutes, g.ShareLinkAttribution30DRobuxPerUser, g.ShareLinkAttribution7DPayerConversionRatio, g.ShareLinkAttribution7DPlaytimePerUserInMinutes, g.ShareLinkAttribution7DRobuxPerUser, g.ShareLinkAttributionD1RetentionRatio, g.ShareLinkAttributionD30RetentionRatio, g.ShareLinkAttributionD7RetentionRatio, g.ShareLinkClickCVR, g.ShareLinkQualifiedClickCVR, g.ShareLinkQualifiedUniqueUsersWithPlaySessions, g.ShareLinkUniqueUsersWithClicks, g.ShareLinkUniqueUsersWithPlaySessions, g.ShareRatePerImpression, g.SourceCount, g.SourceCountRatioKpi, g.SpeechToTextTranscriptionQuota, g.SpeechToTextTranscriptionStatuses, g.SpeechToTextTranscriptionUsage, g.SponsoredAdPlays, g.StoreRevenue, g.StoreTransactions, g.TargetThreshold, g.TextToSpeechAssetSuccesses, g.TextToSpeechRawAudioErrors, g.TextToSpeechRawAudioQuota, g.TextToSpeechRawAudioSuccesses, g.ThumbnailAverageSessionLengthMinutes, g.ThumbnailImpressions, g.ThumbnailL7QualifiedPTR, g.ThumbnailQualifiedPlays, g.ThumbnailQualifiedPTR, g.ThumbnailWinningSegments, g.TotalAbuseReports, g.TotalActions, g.TotalActionsByActionType, g.TotalComments, g.TotalJoins, g.TotalPlayTimeHours, g.TotalPurchases, g.TotalReactionsAdded, g.TotalSessionsEndedInBucket, g.TotalShares, g.TotalViewHours, g.UniqueAbuseReportSubmittersPer1000PlaytimeHours, g.UniqueItemsPerUser, g.UniqueServerShutdowns, g.UniqueUsersWithClicks, g.UniqueUsersWithClicksMigration, g.UniqueUsersWithImpressions, g.UniqueUsersWithImpressionsMigration, g.UniqueUsersWithPlaySessions, g.UniqueUsersWithPlaySessionsMigration, g.UsersInExperiment, g.UsersJoinedFromNotifications, g.VideoServiceExclusivePlaybackSeconds, g.VideoServicePlaybackSeconds, g.Visits, g.WeeklyCohortRetention, s || (s = {}), e.s(["AnalyticsTranslationNamespace", 0, l, "DimensionToMetricToNamespaceMap", 0, P, "FallbackValue", 0, so, "RAQIV2APIMetric", 0, m, "RAQIV2AbuseChannel", 0, f, "RAQIV2AcquisitionSource", 0, w, "RAQIV2AdFormat", 0, h, "RAQIV2AggregationType", 0, t0, "RAQIV2AnnouncementEventType", 0, Z, "RAQIV2AvatarItemTargetType", 0, eo, "RAQIV2BenchmarkDatasetKey", 0, sD, "RAQIV2BenchmarkDatasetKeyToVariant", 0, sg, "RAQIV2BenchmarkVariantId", 0, sA, "RAQIV2BenchmarkVariantsByMetric", 0, sR, "RAQIV2BreakdownValueOrder", 0, tC, "RAQIV2DateRangeType", 0, sP, "RAQIV2Dimension", 0, p, "RAQIV2DimensionDisplayConfig", 0, ss, "RAQIV2DimensionValueType", 0, tk, "RAQIV2ExperimentationMetrics", 0, sS, "RAQIV2FilterOperation", 0, tN, "RAQIV2FlowType", 0, ii, "RAQIV2ForumContentEventType", 0, is, "RAQIV2IsNewUser", 0, ib, "RAQIV2MembershipEventType", 0, iH, "RAQIV2MemoryGroup", 0, iW, "RAQIV2Metric", 0, g, "RAQIV2MetricDisplayConfig", 0, sq, "RAQIV2MetricDisplayType", 0, sM, "RAQIV2MetricGranularity", 0, sH, "RAQIV2MetricToAlertingEligibleDimensions", 0, sQ, "RAQIV2MetricToSupportedDimensions", 0, sJ, "RAQIV2MetricToSupportedGranularities", 0, sW, "RAQIV2MetricUnit", 0, sL, "RAQIV2MetricValueType", 0, sI, "RAQIV2OperatingSystem", 0, ne, "RAQIV2PageViewContext", 0, na, "RAQIV2PercentileType", 0, t2, "RAQIV2Platform", 0, nd, "RAQIV2ProductType", 0, nR, "RAQIV2PseudoDimensionDisplayConfig", 0, st, "RAQIV2PurchaseStatus", 0, nv, "RAQIV2RevenueSource", 0, nb, "RAQIV2RewardedVideoEventType", 0, nf, "RAQIV2Severity", 0, nJ, "RAQIV2SpecialDimensionRenderer", 0, tw, "RAQIV2UIMetric", 0, sG, "RAQIV2UIMetricToAPIConfig", 0, sY, "RAQIV2UIPseudoDimension", 0, sn, "RAQIV2UIPseudoDimensionType", 0, sa, "RAQIV2Universe", 0, n2, "RAQIV2VoteType", 0, aC, "Severity", 0, sz])
 }]);
 
-//# debugId=3c7dc3aa-ee0b-bb4a-fe05-7c56e9e12cb7
-//# sourceMappingURL=2y5sl-esp3ii3.js.map
+//# debugId=c48bf5a6-bb94-1587-a479-92f4c8e8ba7c
+//# sourceMappingURL=3oaboycgur3dz.js.map

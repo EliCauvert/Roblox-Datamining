@@ -38,6 +38,7 @@ Roblox.LangDynamic["Feature.UniversalFeatureRestrictions"] = {
     "Generic.DialogTitleV2.Suspended.Days": "{abuseVector} suspended for {number} days",
     "Generic.DialogTitleV2.Suspended.Hour": "{abuseVector} suspended for 1 hour",
     "Generic.DialogTitleV2.Suspended.Minute": "{abuseVector} suspended for 1 minute",
-    "Generic.DialogTitleV2.Suspended.Minutes": "{abuseVector} suspended for {number} minutes"
+    "Generic.DialogTitleV2.Suspended.Minutes": "{abuseVector} suspended for {number} minutes",
+    "AbuseVector.Lowercase.LabelName.Voice": "voice"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.UniversalFeatureRestrictions");

@@ -2,10 +2,10 @@
     try {
         var t = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         t.SENTRY_RELEASE = {
-            id: "7dd1427733ace37b11c373bec2ccb29663c84427"
+            id: "26f8b665939591e93c2e9f54bc9a500c51dd97e9"
         };
         var o = (new t.Error).stack;
-        o && (t._sentryDebugIds = t._sentryDebugIds || {}, t._sentryDebugIds[o] = "f31355fb-7a09-48d4-8ad8-9ea6e15e7f05", t._sentryDebugIdIdentifier = "sentry-dbid-f31355fb-7a09-48d4-8ad8-9ea6e15e7f05")
+        o && (t._sentryDebugIds = t._sentryDebugIds || {}, t._sentryDebugIds[o] = "96267a13-f6e9-426c-b57d-5b2dea471591", t._sentryDebugIdIdentifier = "sentry-dbid-96267a13-f6e9-426c-b57d-5b2dea471591")
     } catch (t) {}
 }(),
 function() {
@@ -15,100 +15,100 @@ function() {
                     "./infiniteScrollDirective.js": "7409"
                 };
 
-                function a(t) {
-                    return n(i(t))
+                function i(t) {
+                    return n(a(t))
                 }
 
-                function i(t) {
+                function a(t) {
                     if (!n.o(e, t)) {
                         var o = Error("Cannot find module '" + t + "'");
                         throw o.code = "MODULE_NOT_FOUND", o
                     }
                     return e[t]
                 }
-                a.keys = function() {
+                i.keys = function() {
                     return Object.keys(e)
-                }, a.resolve = i, t.exports = a, a.id = 4688
+                }, i.resolve = a, t.exports = i, i.id = 4688
             },
             1197: function(t, o, n) {
                 var e = {
                     "./limitedIconDirective.js": "9439"
                 };
 
-                function a(t) {
-                    return n(i(t))
+                function i(t) {
+                    return n(a(t))
                 }
 
-                function i(t) {
+                function a(t) {
                     if (!n.o(e, t)) {
                         var o = Error("Cannot find module '" + t + "'");
                         throw o.code = "MODULE_NOT_FOUND", o
                     }
                     return e[t]
                 }
-                a.keys = function() {
+                i.keys = function() {
                     return Object.keys(e)
-                }, a.resolve = i, t.exports = a, a.id = 1197
+                }, i.resolve = a, t.exports = i, i.id = 1197
             },
             7605: function(t, o, n) {
                 var e = {
                     "./directives/templates/limitedIconContainer.html": "476"
                 };
 
-                function a(t) {
-                    return n(i(t))
+                function i(t) {
+                    return n(a(t))
                 }
 
-                function i(t) {
+                function a(t) {
                     if (!n.o(e, t)) {
                         var o = Error("Cannot find module '" + t + "'");
                         throw o.code = "MODULE_NOT_FOUND", o
                     }
                     return e[t]
                 }
-                a.keys = function() {
+                i.keys = function() {
                     return Object.keys(e)
-                }, a.resolve = i, t.exports = a, a.id = 7605
+                }, i.resolve = a, t.exports = i, i.id = 7605
             },
             8695: function(t, o, n) {
                 var e = {
                     "./modalOptions.js": "3291"
                 };
 
-                function a(t) {
-                    return n(i(t))
+                function i(t) {
+                    return n(a(t))
                 }
 
-                function i(t) {
+                function a(t) {
                     if (!n.o(e, t)) {
                         var o = Error("Cannot find module '" + t + "'");
                         throw o.code = "MODULE_NOT_FOUND", o
                     }
                     return e[t]
                 }
-                a.keys = function() {
+                i.keys = function() {
                     return Object.keys(e)
-                }, a.resolve = i, t.exports = a, a.id = 8695
+                }, i.resolve = a, t.exports = i, i.id = 8695
             },
             643: function(t, o, n) {
                 var e = {
                     "./modalController.js": "9933"
                 };
 
-                function a(t) {
-                    return n(i(t))
+                function i(t) {
+                    return n(a(t))
                 }
 
-                function i(t) {
+                function a(t) {
                     if (!n.o(e, t)) {
                         var o = Error("Cannot find module '" + t + "'");
                         throw o.code = "MODULE_NOT_FOUND", o
                     }
                     return e[t]
                 }
-                a.keys = function() {
+                i.keys = function() {
                     return Object.keys(e)
-                }, a.resolve = i, t.exports = a, a.id = 643
+                }, i.resolve = a, t.exports = i, i.id = 643
             },
             1866: function(t, o, n) {
                 var e = {
@@ -116,100 +116,100 @@ function() {
                     "./modalStringService.js": "5372"
                 };
 
-                function a(t) {
-                    return n(i(t))
+                function i(t) {
+                    return n(a(t))
                 }
 
-                function i(t) {
+                function a(t) {
                     if (!n.o(e, t)) {
                         var o = Error("Cannot find module '" + t + "'");
                         throw o.code = "MODULE_NOT_FOUND", o
                     }
                     return e[t]
                 }
-                a.keys = function() {
+                i.keys = function() {
                     return Object.keys(e)
-                }, a.resolve = i, t.exports = a, a.id = 1866
+                }, i.resolve = a, t.exports = i, i.id = 1866
             },
             7399: function(t, o, n) {
                 var e = {
                     "./controllers/templates/commonModal.html": "2823"
                 };
 
-                function a(t) {
-                    return n(i(t))
+                function i(t) {
+                    return n(a(t))
                 }
 
-                function i(t) {
+                function a(t) {
                     if (!n.o(e, t)) {
                         var o = Error("Cannot find module '" + t + "'");
                         throw o.code = "MODULE_NOT_FOUND", o
                     }
                     return e[t]
                 }
-                a.keys = function() {
+                i.keys = function() {
                     return Object.keys(e)
-                }, a.resolve = i, t.exports = a, a.id = 7399
+                }, i.resolve = a, t.exports = i, i.id = 7399
             },
             1182: function(t, o, n) {
                 var e = {
                     "./toastDirective.js": "5375"
                 };
 
-                function a(t) {
-                    return n(i(t))
+                function i(t) {
+                    return n(a(t))
                 }
 
-                function i(t) {
+                function a(t) {
                     if (!n.o(e, t)) {
                         var o = Error("Cannot find module '" + t + "'");
                         throw o.code = "MODULE_NOT_FOUND", o
                     }
                     return e[t]
                 }
-                a.keys = function() {
+                i.keys = function() {
                     return Object.keys(e)
-                }, a.resolve = i, t.exports = a, a.id = 1182
+                }, i.resolve = a, t.exports = i, i.id = 1182
             },
             2841: function(t, o, n) {
                 var e = {
                     "./directives/templates/toast.html": "8083"
                 };
 
-                function a(t) {
-                    return n(i(t))
+                function i(t) {
+                    return n(a(t))
                 }
 
-                function i(t) {
+                function a(t) {
                     if (!n.o(e, t)) {
                         var o = Error("Cannot find module '" + t + "'");
                         throw o.code = "MODULE_NOT_FOUND", o
                     }
                     return e[t]
                 }
-                a.keys = function() {
+                i.keys = function() {
                     return Object.keys(e)
-                }, a.resolve = i, t.exports = a, a.id = 2841
+                }, i.resolve = a, t.exports = i, i.id = 2841
             },
             4768: function(t, o, n) {
                 var e = {
                     "./verticalMenuDirective.js": "7645"
                 };
 
-                function a(t) {
-                    return n(i(t))
+                function i(t) {
+                    return n(a(t))
                 }
 
-                function i(t) {
+                function a(t) {
                     if (!n.o(e, t)) {
                         var o = Error("Cannot find module '" + t + "'");
                         throw o.code = "MODULE_NOT_FOUND", o
                     }
                     return e[t]
                 }
-                a.keys = function() {
+                i.keys = function() {
                     return Object.keys(e)
-                }, a.resolve = i, t.exports = a, a.id = 4768
+                }, i.resolve = a, t.exports = i, i.id = 4768
             },
             476: function(t) {
                 t.exports = '<span class="limited-icon-container"> <span class="icon-shop-limited" ng-hide="layoutOptions.isIconDisabled"> </span> <span class="limited-number-container" ng-show="layoutOptions.isUnique"> <span class="font-caption-header">#</span> <span class="font-caption-header text-subheader limited-number" ng-show="layoutOptions.isLimitedNumberShown" ng-bind="layoutOptions.limitedNumber"></span> </span></span> '
@@ -225,31 +225,31 @@ function() {
                 n.r(o);
                 var e = n(7935);
 
-                function a(t, o, n, e) {
+                function i(t, o, n, e) {
                     return {
-                        link: function(a, i, r) {
-                            o = angular.element(o), c = 0, null != r.infiniteScrollDistance && a.$watch(r.infiniteScrollDistance, function(t) {
+                        link: function(i, a, r) {
+                            o = angular.element(o), c = 0, null != r.infiniteScrollDistance && i.$watch(r.infiniteScrollDistance, function(t) {
                                 return c = parseInt(t, 10)
                             });
                             var l, s, c, u, d, f = !0;
-                            return u = !0, l = !1, null != r.infiniteScrollDisabled && a.$watch(r.infiniteScrollDisabled, function(t) {
+                            return u = !0, l = !1, null != r.infiniteScrollDisabled && i.$watch(r.infiniteScrollDisabled, function(t) {
                                 if ((u = !t) && l) return l = !1, s()
                             }), s = function() {
                                 var n, e;
-                                return !!f && ((e = o.height() + o.scrollTop(), (n = i.offset().top + i.height() - e <= o.height() * c) && u) ? t.$$phase ? a.$eval(r.infiniteScroll) : a.$apply(r.infiniteScroll) : n ? l = !0 : void 0)
-                            }, null !== r.infiniteScrollAlwaysDisabled && (d = a.$watch(function() {
-                                return e(r.infiniteScrollAlwaysDisabled)(a)
+                                return !!f && ((e = o.height() + o.scrollTop(), (n = a.offset().top + a.height() - e <= o.height() * c) && u) ? t.$$phase ? i.$eval(r.infiniteScroll) : i.$apply(r.infiniteScroll) : n ? l = !0 : void 0)
+                            }, null !== r.infiniteScrollAlwaysDisabled && (d = i.$watch(function() {
+                                return e(r.infiniteScrollAlwaysDisabled)(i)
                             }, function(t) {
                                 null != t && (f = !t)
-                            })), o.on("scroll", s), a.$on("manualInfiniteScrollCheck", s), a.$on("$destroy", function() {
+                            })), o.on("scroll", s), i.$on("manualInfiniteScrollCheck", s), i.$on("$destroy", function() {
                                 return d && d(), o.off("scroll", s)
                             }), n(function() {
-                                return r.infiniteScrollImmediateCheck && a.$eval(r.infiniteScrollImmediateCheck), s()
+                                return r.infiniteScrollImmediateCheck && i.$eval(r.infiniteScrollImmediateCheck), s()
                             }, 0)
                         }
                     }
                 }
-                a.$inject = ["$rootScope", "$window", "$timeout", "$parse"], e.A.directive("infiniteScroll", a), o.default = a
+                i.$inject = ["$rootScope", "$window", "$timeout", "$parse"], e.A.directive("infiniteScroll", i), o.default = i
             },
             7935: function(t, o, n) {
                 "use strict";
@@ -280,7 +280,7 @@ function() {
                 "use strict";
                 n.r(o);
                 var e = n(5567),
-                    a = {
+                    i = {
                         params: {
                             titleText: "",
                             titleIcon: "",
@@ -315,21 +315,21 @@ function() {
                         },
                         mainButtonPressed: 0
                     };
-                e.A.constant("modalOptions", a), o.default = a
+                e.A.constant("modalOptions", i), o.default = i
             },
             9933: function(t, o, n) {
                 "use strict";
                 n.r(o);
                 var e = n(5567);
 
-                function a(t, o, n, e, a, i) {
-                    o.modalData = a, o.closeActions = i.closeActions, o.close = function(t) {
+                function i(t, o, n, e, i, a) {
+                    o.modalData = i, o.closeActions = a.closeActions, o.close = function(t) {
                         e.close(t)
                     }, o.dismiss = function() {
                         e.dismiss("dismissed")
                     }
                 }
-                a.$inject = ["$log", "$scope", "$sce", "$uibModalInstance", "modalData", "modalService"], e.A.controller("modalController", a), o.default = a
+                i.$inject = ["$log", "$scope", "$sce", "$uibModalInstance", "modalData", "modalService"], e.A.controller("modalController", i), o.default = i
             },
             5567: function(t, o, n) {
                 "use strict";
@@ -339,16 +339,16 @@ function() {
                     }
                 });
                 var e = window.Roblox["core-scripts"].intl.translation,
-                    a = n(8192),
-                    i = n.n(a),
+                    i = n(8192),
+                    a = n.n(i),
                     r = function(t, o) {
                         return !!t.classList.contains(o) || !!t.parentElement && r(t.parentElement, o)
                     },
-                    l = i().module("modal", ["ui.bootstrap", "modalHtmlTemplate"]).config(["$uibModalProvider", "$injector", function(t, o) {
+                    l = a().module("modal", ["ui.bootstrap", "modalHtmlTemplate"]).config(["$uibModalProvider", "$injector", function(t, o) {
                         t.options.openedClass = "modal-open-noscroll", t.options.animation = !1;
                         var n = o.get("languageResourceProvider"),
-                            a = new e.TranslationResourceProvider().getTranslationResource("CommonUI.Controls");
-                        n.setTranslationResources([a])
+                            i = new e.TranslationResourceProvider().getTranslationResource("CommonUI.Controls");
+                        n.setTranslationResources([i])
                     }]).run(["modalOptions", "$uibModalStack", "$rootScope", function(t, o, n) {
                         var e = n.$watch(function() {
                             return document.querySelectorAll(t.layoutParams.modalSelector).length
@@ -369,38 +369,38 @@ function() {
                 "use strict";
                 n.r(o);
                 var e = n(8192),
-                    a = n.n(e),
-                    i = n(5567);
+                    i = n.n(e),
+                    a = n(5567);
 
                 function r(t, o, n) {
-                    var e = a().extend({}, n.params, o.params);
+                    var e = i().extend({}, n.params, o.params);
                     return {
                         open: function(n) {
-                            var i = a().extend({}, e, n),
+                            var a = i().extend({}, e, n),
                                 r = t.open({
                                     templateUrl: o.commonTemplateUrl,
                                     controller: o.commonController,
-                                    windowClass: i.cssClass || "",
-                                    animation: i.animation || o.defaults.animation,
-                                    keyboard: i.keyboard || o.defaults.keyboard,
-                                    backdrop: !!i.closeButtonShow || "static",
-                                    openedClass: i.openedClass || "modal-open-noscroll",
+                                    windowClass: a.cssClass || "",
+                                    animation: a.animation || o.defaults.animation,
+                                    keyboard: a.keyboard || o.defaults.keyboard,
+                                    backdrop: !!a.closeButtonShow || "static",
+                                    openedClass: a.openedClass || "modal-open-noscroll",
                                     resolve: {
-                                        modalData: i
+                                        modalData: a
                                     }
                                 });
-                            return r.result.then(a().noop, a().noop), r
+                            return r.result.then(i().noop, i().noop), r
                         }
                     }
                 }
-                r.$inject = ["$uibModal", "modalOptions", "modalStringService"], i.A.service("modalService", r), o.default = r
+                r.$inject = ["$uibModal", "modalOptions", "modalStringService"], a.A.service("modalService", r), o.default = r
             },
             5372: function(t, o, n) {
                 "use strict";
                 n.r(o);
                 var e = n(5567);
 
-                function a(t) {
+                function i(t) {
                     return {
                         params: {
                             actionButtonText: t.get("Action.Yes"),
@@ -408,14 +408,14 @@ function() {
                         }
                     }
                 }
-                a.$inject = ["languageResource"], e.A.service("modalStringService", a), o.default = a
+                i.$inject = ["languageResource"], e.A.service("modalStringService", i), o.default = i
             },
             5375: function(t, o, n) {
                 "use strict";
                 n.r(o);
                 var e = n(1319);
 
-                function a(t) {
+                function i(t) {
                     return {
                         restrict: "A",
                         replace: !0,
@@ -444,7 +444,7 @@ function() {
                         }
                     }
                 }
-                a.$inject = ["$timeout"], e.A.directive("toast", a), o.default = a
+                i.$inject = ["$timeout"], e.A.directive("toast", i), o.default = i
             },
             1319: function(t, o, n) {
                 "use strict";
@@ -482,12 +482,12 @@ function() {
         o = {};
 
     function n(e) {
-        var a = o[e];
-        if (void 0 !== a) return a.exports;
-        var i = o[e] = {
+        var i = o[e];
+        if (void 0 !== i) return i.exports;
+        var a = o[e] = {
             exports: {}
         };
-        return t[e](i, i.exports, n), i.exports
+        return t[e](a, a.exports, n), a.exports
     }
     n.m = t, n.n = function(t) {
             var o = t && t.__esModule ? function() {
@@ -521,28 +521,28 @@ function() {
                 e = function(t) {
                     return t.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()
                 },
-                a = function(t) {
+                i = function(t) {
                     return t.split("/").pop().replace(".html", "")
                 },
-                i = function(t) {
+                a = function(t) {
                     t.keys().forEach(t)
                 },
-                r = function(t, o, n, i) {
+                r = function(t, o, n, a) {
                     return t.module(o, []).run(["$templateCache", function(t) {
                         n && n.keys().forEach(function(o) {
-                            var i = e(a(o));
-                            t.put(i, n(o))
-                        }), i && i.keys().forEach(function(o) {
-                            var n = e(a(o));
-                            t.put(n, i(o).replace(/<\/?script[^>]*>/gi, ""))
+                            var a = e(i(o));
+                            t.put(a, n(o))
+                        }), a && a.keys().forEach(function(o) {
+                            var n = e(i(o));
+                            t.put(n, a(o).replace(/<\/?script[^>]*>/gi, ""))
                         })
                     }])
                 };
-            n(1319), n(7935), n(9295), n(5567), n(4583), i(n(1182));
+            n(1319), n(7935), n(9295), n(5567), n(4583), a(n(1182));
             var l = n(2841);
-            r(o(), "toastHtmlTemplate", l), i(n(4688)), i(n(4768)), i(n(8695)), i(n(643)), i(n(1866));
+            r(o(), "toastHtmlTemplate", l), a(n(4688)), a(n(4768)), a(n(8695)), a(n(643)), a(n(1866));
             var s = n(7399);
-            r(o(), "modalHtmlTemplate", s), i(n(1197));
+            r(o(), "modalHtmlTemplate", s), a(n(1197));
             var c = n(7605);
             r(o(), "limitedIconTemplate", c)
         }()

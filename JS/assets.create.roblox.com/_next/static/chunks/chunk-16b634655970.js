@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "e6367e13-016a-4a1d-3b72-6ff04ce2744f")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "791b633e-5bb3-d68a-4549-c31c33aba226")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 711300, 747304, 209268, 634203, 35877, t => {
@@ -535,7 +535,7 @@
 }, 157310, 772278, 468612, 554314, 114467, 980385, 903481, 624083, t => {
     "use strict";
     let e;
-    var i, s, r, n, a, o, l, u, h, c, d, p, f, v, _, b, y, m, w, g, S, O, R, C, E, T, M, k, F, U, W, q, j = t.i(711300),
+    var i, s, r, n, a, o, l, u, h, c, d, p, f, v, _, b, y, m, w, g, S, O, R, E, T, C, M, k, F, U, W, q, j = t.i(711300),
         P = t.i(634203),
         D = t.i(35877),
         Q = t.i(422898),
@@ -866,12 +866,12 @@
     var V = t.i(211089),
         Z = t.i(383062),
         J = t.i(607923),
-        X = (h = new WeakMap, c = new WeakMap, d = new WeakMap, p = new WeakMap, f = new WeakMap, v = new WeakMap, _ = new WeakMap, b = new WeakMap, y = new WeakMap, m = new WeakMap, w = new WeakMap, g = new WeakMap, S = new WeakMap, O = new WeakMap, R = new WeakMap, C = new WeakSet, E = new WeakSet, T = new WeakSet, M = new WeakSet, k = new WeakSet, F = new WeakSet, U = new WeakSet, W = new WeakSet, q = new WeakSet, class extends V.Subscribable {
+        X = (h = new WeakMap, c = new WeakMap, d = new WeakMap, p = new WeakMap, f = new WeakMap, v = new WeakMap, _ = new WeakMap, b = new WeakMap, y = new WeakMap, m = new WeakMap, w = new WeakMap, g = new WeakMap, S = new WeakMap, O = new WeakMap, R = new WeakMap, E = new WeakSet, T = new WeakSet, C = new WeakSet, M = new WeakSet, k = new WeakSet, F = new WeakSet, U = new WeakSet, W = new WeakSet, q = new WeakSet, class extends V.Subscribable {
             bindMethods() {
                 this.refetch = this.refetch.bind(this)
             }
             onSubscribe() {
-                1 === this.listeners.size && ((0, j._)(this, c).addObserver(this), Y((0, j._)(this, c), this.options) ? (0, Q._)(this, C, ti).call(this) : this.updateResult(), (0, Q._)(this, k, ta).call(this))
+                1 === this.listeners.size && ((0, j._)(this, c).addObserver(this), Y((0, j._)(this, c), this.options) ? (0, Q._)(this, E, ti).call(this) : this.updateResult(), (0, Q._)(this, k, ta).call(this))
             }
             onUnsubscribe() {
                 this.hasListeners() || this.destroy()
@@ -895,8 +895,8 @@
                     observer: this
                 });
                 let s = this.hasListeners();
-                s && tt((0, j._)(this, c), i, this.options, e) && (0, Q._)(this, C, ti).call(this), this.updateResult(), s && ((0, j._)(this, c) !== i || (0, L.resolveEnabled)(this.options.enabled, (0, j._)(this, c)) !== (0, L.resolveEnabled)(e.enabled, (0, j._)(this, c)) || (0, L.resolveStaleTime)(this.options.staleTime, (0, j._)(this, c)) !== (0, L.resolveStaleTime)(e.staleTime, (0, j._)(this, c))) && (0, Q._)(this, E, ts).call(this);
-                let r = (0, Q._)(this, T, tr).call(this);
+                s && tt((0, j._)(this, c), i, this.options, e) && (0, Q._)(this, E, ti).call(this), this.updateResult(), s && ((0, j._)(this, c) !== i || (0, L.resolveEnabled)(this.options.enabled, (0, j._)(this, c)) !== (0, L.resolveEnabled)(e.enabled, (0, j._)(this, c)) || (0, L.resolveStaleTime)(this.options.staleTime, (0, j._)(this, c)) !== (0, L.resolveStaleTime)(e.staleTime, (0, j._)(this, c))) && (0, Q._)(this, T, ts).call(this);
+                let r = (0, Q._)(this, C, tr).call(this);
                 s && ((0, j._)(this, c) !== i || (0, L.resolveEnabled)(this.options.enabled, (0, j._)(this, c)) !== (0, L.resolveEnabled)(e.enabled, (0, j._)(this, c)) || r !== (0, j._)(this, O)) && (0, Q._)(this, M, tn).call(this, r)
             }
             getOptimisticResult(t) {
@@ -934,7 +934,7 @@
             }
             fetch(t) {
                 var e;
-                return (0, Q._)(this, C, ti).call(this, {
+                return (0, Q._)(this, E, ti).call(this, {
                     ...t,
                     cancelRefetch: null == (e = t.cancelRefetch) || e
                 }).then(() => (this.updateResult(), (0, j._)(this, p)))
@@ -968,27 +968,27 @@
                     status: R
                 } = h;
                 i = h.data;
-                let C = !1;
+                let E = !1;
                 if (void 0 !== e.placeholderData && void 0 === i && "pending" === R) {
                     let t;
-                    if ((null == n ? void 0 : n.isPlaceholderData) && e.placeholderData === (null == o ? void 0 : o.placeholderData)) t = n.data, C = !0;
+                    if ((null == n ? void 0 : n.isPlaceholderData) && e.placeholderData === (null == o ? void 0 : o.placeholderData)) t = n.data, E = !0;
                     else {
-                        var E;
-                        t = "function" == typeof e.placeholderData ? e.placeholderData(null == (E = (0, j._)(this, w)) ? void 0 : E.state.data, (0, j._)(this, w)) : e.placeholderData
+                        var T;
+                        t = "function" == typeof e.placeholderData ? e.placeholderData(null == (T = (0, j._)(this, w)) ? void 0 : T.state.data, (0, j._)(this, w)) : e.placeholderData
                     }
                     void 0 !== t && (R = "success", i = (0, L.replaceData)(null == n ? void 0 : n.data, t, e), g = !0)
                 }
-                if (e.select && void 0 !== i && !C)
+                if (e.select && void 0 !== i && !E)
                     if (n && i === (null == a ? void 0 : a.data) && e.select === (0, j._)(this, y)) i = (0, j._)(this, m);
                     else try {
                         (0, D._)(this, y, e.select), i = e.select(i), i = (0, L.replaceData)(null == n ? void 0 : n.data, i, e), (0, D._)(this, m, i), (0, D._)(this, b, null)
                     } catch (t) {
                         (0, D._)(this, b, t)
                     }(0, j._)(this, b) && (S = (0, j._)(this, b), i = (0, j._)(this, m), O = Date.now(), R = "error");
-                let T = "fetching" === h.fetchStatus,
+                let C = "fetching" === h.fetchStatus,
                     M = "pending" === R,
                     k = "error" === R,
-                    F = M && T,
+                    F = M && C,
                     U = void 0 !== i,
                     W = {
                         status: R,
@@ -1007,8 +1007,8 @@
                         errorUpdateCount: h.errorUpdateCount,
                         isFetched: h.dataUpdateCount > 0 || h.errorUpdateCount > 0,
                         isFetchedAfterMount: h.dataUpdateCount > l.dataUpdateCount || h.errorUpdateCount > l.errorUpdateCount,
-                        isFetching: T,
-                        isRefetching: T && !M,
+                        isFetching: C,
+                        isRefetching: C && !M,
                         isLoadingError: k && !U,
                         isPaused: "paused" === h.fetchStatus,
                         isPlaceholderData: g,
@@ -1061,7 +1061,7 @@
                 this.updateResult(), this.hasListeners() && (0, Q._)(this, k, ta).call(this)
             }
             constructor(t, e) {
-                super(), (0, A._)(this, C), (0, A._)(this, E), (0, A._)(this, T), (0, A._)(this, M), (0, A._)(this, k), (0, A._)(this, F), (0, A._)(this, U), (0, A._)(this, W), (0, A._)(this, q), (0, P._)(this, h, {
+                super(), (0, A._)(this, E), (0, A._)(this, T), (0, A._)(this, C), (0, A._)(this, M), (0, A._)(this, k), (0, A._)(this, F), (0, A._)(this, U), (0, A._)(this, W), (0, A._)(this, q), (0, P._)(this, h, {
                     writable: !0,
                     value: void 0
                 }), (0, P._)(this, c, {
@@ -1153,12 +1153,12 @@
 
     function tn(t) {
         (0, Q._)(this, U, tl).call(this), (0, D._)(this, O, t), !L.isServer && !1 !== (0, L.resolveEnabled)(this.options.enabled, (0, j._)(this, c)) && (0, L.isValidTimeout)((0, j._)(this, O)) && 0 !== (0, j._)(this, O) && (0, D._)(this, S, J.timeoutManager.setInterval(() => {
-            (this.options.refetchIntervalInBackground || I.focusManager.isFocused()) && (0, Q._)(this, C, ti).call(this)
+            (this.options.refetchIntervalInBackground || I.focusManager.isFocused()) && (0, Q._)(this, E, ti).call(this)
         }, (0, j._)(this, O)))
     }
 
     function ta() {
-        (0, Q._)(this, E, ts).call(this), (0, Q._)(this, M, tn).call(this, (0, Q._)(this, T, tr).call(this))
+        (0, Q._)(this, T, ts).call(this), (0, Q._)(this, M, tn).call(this, (0, Q._)(this, C, tr).call(this))
     }
 
     function to() {
@@ -1271,10 +1271,10 @@
         }
         return c.notifyOnChangeProps ? f : p.trackResult(f)
     }
-    t.s(["ensureSuspenseTimers", 0, tw, "fetchOptimistic", 0, tO, "shouldSuspend", 0, tS, "willFetch", 0, tg], 903481), t.s(["useBaseQuery", 0, tR], 624083), t.s(["useQuery", 0, function(t, e) {
+    t.s(["defaultThrowOnError", 0, (t, e) => void 0 === e.state.data, "ensureSuspenseTimers", 0, tw, "fetchOptimistic", 0, tO, "shouldSuspend", 0, tS, "willFetch", 0, tg], 903481), t.s(["useBaseQuery", 0, tR], 624083), t.s(["useQuery", 0, function(t, e) {
         return tR(t, X, e)
     }], 157310)
 }]);
 
-//# debugId=e6367e13-016a-4a1d-3b72-6ff04ce2744f
-//# sourceMappingURL=1e1ay2t84igak.js.map
+//# debugId=791b633e-5bb3-d68a-4549-c31c33aba226
+//# sourceMappingURL=2ilzrr0xqy27c.js.map
