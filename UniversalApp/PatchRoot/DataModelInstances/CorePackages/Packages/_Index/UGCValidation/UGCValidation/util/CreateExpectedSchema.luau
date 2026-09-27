@@ -11,8 +11,6 @@ local createAccessorySchemaModule = require(parent.util.createAccessorySchema)
 local createEmoteSchemaModule = require(parent.util.createEmoteSchema)
 local createAnimationSchemaModule = require(parent.util.createAnimationSchema)
 local getUploadCategoryModule = require(parent.util.getUploadCategory)
-local getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule = require(parent.flags.getFFlagUGCValidateEyebrowEyelashThumbnailSchema)
-local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
 local getFFlagUGCValidationAnimationPackFolderStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackFolderStructure)
 local getFFlagUGCValidationAnimationPackDisableModelStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackDisableModelStructure)
 local t = {}
@@ -78,8 +76,8 @@ local t_1 = {
 		return createBodyPartSchema(p4)
 	end,
 	LAYERED_CLOTHING = function(p4, _)
-		-- upvalues: getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule (ref), createEyebrowEyelashSchemaModule (ref), constantsModule (ref), createLayeredClothingSchemaModule (ref)
-		return if getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule() then if p4 == Enum.AssetType.EyebrowAccessory or p4 == Enum.AssetType.EyelashAccessory then createEyebrowEyelashSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames) else createLayeredClothingSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames) else createLayeredClothingSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames)
+		-- upvalues: createEyebrowEyelashSchemaModule (ref), constantsModule (ref), createLayeredClothingSchemaModule (ref)
+		return if p4 == Enum.AssetType.EyebrowAccessory or p4 == Enum.AssetType.EyelashAccessory then createEyebrowEyelashSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames) else createLayeredClothingSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames)
 	end,
 	RIGID_ACCESSORY = function(p4, p5)
 		-- upvalues: constantsModule (ref), createMeshPartAccessorySchemaModule (ref), createAccessorySchemaModule (ref)
@@ -90,15 +88,13 @@ local t_1 = {
 	MAKEUP = function(_, _)
 		-- upvalues: createMakeupSchemaModule (ref)
 		return createMakeupSchemaModule()
-	end
-}
-
-if getFFlagUGCValidationAnimationPackSupportModule() then
-	function t_1.ANIMATION(p4, p5)
+	end,
+	ANIMATION = function(p4, p5)
 		-- upvalues: createAnimationSchemaModule (ref)
 		return createAnimationSchemaModule(p4, p5)
 	end
-end
+}
+
 function t.generateAssetSchema(value, p4, p5)
 	-- upvalues: t_1 (ref)
 	return t_1[value](p4, p5)

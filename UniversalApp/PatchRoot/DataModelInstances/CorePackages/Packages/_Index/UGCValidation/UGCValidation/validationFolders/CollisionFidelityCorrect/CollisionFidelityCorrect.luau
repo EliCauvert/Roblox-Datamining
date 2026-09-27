@@ -10,7 +10,6 @@ return {
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties),
 	expectedFailures = {},
 	run = function(p1, p2)
 		-- upvalues: UGCValidationBodyPartCollisionFidelity (ref), errorSourceStringsModule (ref)

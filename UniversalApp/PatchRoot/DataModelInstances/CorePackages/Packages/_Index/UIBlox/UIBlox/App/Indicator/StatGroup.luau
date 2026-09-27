@@ -1,15 +1,19 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent
 local core = parent_1.Core
-local reactModule = require(parent_1.Parent.React)
+local parent_2 = parent_1.Parent
+local reactModule = require(parent_2.React)
+local foundationModule = require(parent_2.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local imagesModule = require(parent.ImageSet.Images)
 local imageSetComponentModule = require(core.ImageSet.ImageSetComponent)
 local useStyleModule = require(core.Style.useStyle)
 local _ = require(parent.Style.Fonts)
 local UIBloxConfigModule = require(parent_1.UIBloxConfig)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 
 local function renderStatItem(p1, p2, p3, p4)
-	-- upvalues: UIBloxConfigModule (ref), reactModule (ref), imageSetComponentModule (ref), imagesModule (ref)
+	-- upvalues: UIBloxConfigModule (ref), reactModule (ref), imageSetComponentModule (ref), imagesModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local tokens = p4.Tokens
 	local font = p4.Font
 	local var1 = font.BaseSize * font.Body.RelativeSize
@@ -42,7 +46,8 @@ local function renderStatItem(p1, p2, p3, p4)
 			Size = UDim2.fromScale(0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
 			Text = p3,
-			Font = font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(font.Body.Font) else nil,
 			TextSize = var1,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,

@@ -3,17 +3,14 @@ local parent = script.Parent.Parent.Parent
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateMigrateCageGeometryModule = require(parent.flags.getFFlagUGCValidateMigrateCageGeometry)
 local getEngineFeatureEngineUGCValidationLCOOBModule = require(parent.flags.getEngineFeatureEngineUGCValidationLCOOB)
-local getFFlagEnforceMaxSizeOffsetForLCModule = require(parent.flags.getFFlagEnforceMaxSizeOffsetForLC)
 
 return {
-	fflag = getFFlagUGCValidateMigrateCageGeometryModule,
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	requiredData = {},
 	expectedFailures = {},
 	run = function(p1, p2)
-		-- upvalues: getEngineFeatureEngineUGCValidationLCOOBModule (ref), errorSourceStringsModule (ref), getFFlagEnforceMaxSizeOffsetForLCModule (ref), UGCValidationService (ref)
+		-- upvalues: getEngineFeatureEngineUGCValidationLCOOBModule (ref), errorSourceStringsModule (ref), UGCValidationService (ref)
 		if p2.consumerConfig.consumerEnv == "IEC" then return end
 		local rootInstance = p2.rootInstance
 		
@@ -35,22 +32,16 @@ return {
 			p1:fail(errorSourceStringsModule.Keys.LCWithinRenderBounds_NoWrapLayer, { accessoryName = rootInstance.Name })
 			
 			return
-		elseif getFFlagEnforceMaxSizeOffsetForLCModule() then
-			if wrapLayer.MaxSize ~= Vector3.new(0, 0, 0) then
-				p1:fail(errorSourceStringsModule.Keys.LCWithinRenderBounds_NonZeroMaxSize, {})
-				
-				return
-			elseif wrapLayer.Offset ~= Vector3.new(0, 0, 0) then
-				p1:fail(errorSourceStringsModule.Keys.LCWithinRenderBounds_NonZeroOffset, {})
-				
-				return
-			elseif UGCValidationService:IsDeformedLayeredClothingOutOfRenderBounds(rootInstance) then
-				p1:fail(errorSourceStringsModule.Keys.LCWithinRenderBounds_OutOfBounds, { accessoryName = rootInstance.Name })
-			end
+		elseif wrapLayer.MaxSize ~= Vector3.new(0, 0, 0) then
+			p1:fail(errorSourceStringsModule.Keys.LCWithinRenderBounds_NonZeroMaxSize, {})
+			
 			return
-		else
-			wrapLayer.MaxSize = Vector3.new(0, 0, 0)
-			wrapLayer.Offset = Vector3.new(0, 0, 0)
+		elseif wrapLayer.Offset ~= Vector3.new(0, 0, 0) then
+			p1:fail(errorSourceStringsModule.Keys.LCWithinRenderBounds_NonZeroOffset, {})
+			
+			return
+		elseif UGCValidationService:IsDeformedLayeredClothingOutOfRenderBounds(rootInstance) then
+			p1:fail(errorSourceStringsModule.Keys.LCWithinRenderBounds_OutOfBounds, { accessoryName = rootInstance.Name })
 		end
 	end
 }

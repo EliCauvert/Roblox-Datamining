@@ -2,16 +2,19 @@
 local parent_1 = parent.Parent
 local roactModule = require(parent_1.Roact)
 local tModule = require(parent_1.t)
+local foundationModule = require(parent_1.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local withStyleModule = require(parent.Core.Style.withStyle)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local tileBanner = roactModule.PureComponent:extend("TileBanner")
 tileBanner.validateProps = tModule.strictInterface({ bannerText = tModule.string })
 
 function tileBanner.render(p1)
-	-- upvalues: withStyleModule (ref), roactModule (ref)
+	-- upvalues: withStyleModule (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local bannerText = p1.props.bannerText
 	
 	return withStyleModule(function(p2)
-		-- upvalues: roactModule (copy), bannerText (ref)
+		-- upvalues: roactModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), bannerText (ref)
 		local font = p2.Font
 		local theme = p2.Theme
 		
@@ -23,7 +26,8 @@ function tileBanner.render(p1)
 		}, {
 			TextLabel = roactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Font = font.CaptionBody.Font,
+				Font = if foundationFontFaceMigration then nil else font.CaptionBody.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(font.CaptionBody.Font) else nil,
 				TextSize = font.CaptionBody.RelativeSize * font.BaseSize,
 				Text = bannerText,
 				TextColor3 = theme.SystemPrimaryContent.Color,

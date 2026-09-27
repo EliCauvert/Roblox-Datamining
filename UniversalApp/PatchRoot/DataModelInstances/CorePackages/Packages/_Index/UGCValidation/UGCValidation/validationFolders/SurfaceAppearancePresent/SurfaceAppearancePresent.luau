@@ -5,7 +5,6 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local t = { InExpServer = true, InExpClient = true }
 
 return {
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateSurfaceAppearanceMeshQuality),
 	categories = {
 		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD,

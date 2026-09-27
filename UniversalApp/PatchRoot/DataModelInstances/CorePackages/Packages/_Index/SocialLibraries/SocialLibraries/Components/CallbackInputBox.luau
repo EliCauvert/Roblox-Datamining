@@ -1,6 +1,8 @@
 ﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
 local roact = dependenciesModule.Roact
 local imageSetLabel = dependenciesModule.UIBlox.Core.ImageSet.ImageSetLabel
+local foundationFontFaceMigration = dependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
+local normalizeFontFace = dependenciesModule.Foundation.Utility.normalizeFontFace
 local callbackInputBox = roact.PureComponent:extend("CallbackInputBox")
 callbackInputBox.defaultProps = {
 	initialInputText = "",
@@ -54,7 +56,7 @@ function callbackInputBox.init(p1)
 end
 
 function callbackInputBox.render(p1)
-	-- upvalues: roact (ref), imageSetLabel (ref)
+	-- upvalues: roact (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), imageSetLabel (ref)
 	local placeholderTextTransparency = p1.props.placeholderTextTransparency
 	local inputTextTransparency = p1.props.inputTextTransparency
 	local _ = nil
@@ -84,7 +86,8 @@ function callbackInputBox.render(p1)
 				TextColor3 = p1.props.inputTextColor3,
 				TextSize = p1.props.inputTextSize,
 				TextTransparency = if p1.inputText and p1.inputText ~= "" then inputTextTransparency else placeholderTextTransparency,
-				Font = p1.props.inputTextFont,
+				Font = if foundationFontFaceMigration then nil else p1.props.inputTextFont,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p1.props.inputTextFont) else nil,
 				PlaceholderText = p1.props.placeholderText,
 				PlaceholderColor3 = p1.props.placeholderTextColor3,
 				TextXAlignment = p1.props.inputTextXAlignment,

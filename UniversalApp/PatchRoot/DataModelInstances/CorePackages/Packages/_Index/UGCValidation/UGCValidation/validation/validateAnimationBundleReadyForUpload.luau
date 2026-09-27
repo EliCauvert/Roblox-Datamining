@@ -7,7 +7,6 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local createEditableInstancesForContextModule = require(parent.util.createEditableInstancesForContext)
 local destroyEditableInstancesModule = require(parent.util.destroyEditableInstances)
 local _ = require(parent.validation.validateBundleReadyForUpload)
-local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
 local getFFlagUGCValidationAnimationPackFolderStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackFolderStructure)
 local getFFlagUGCValidationAnimationPackDisableModelStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackDisableModelStructure)
 local getFFlagUGCValidationAnimationPackMissingTypeMessageModule = require(parent.flags.getFFlagUGCValidationAnimationPackMissingTypeMessage)
@@ -40,7 +39,7 @@ local function hasExactStringValueNames(p1, p2)
 end
 
 return function(p3, p4, p5, p6, p7, p8)
-	-- upvalues: promiseModule (ref), getFFlagUGCValidationAnimationPackSupportModule (ref), constantsModule (ref), getFFlagUGCValidationAnimationPackDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref), hasExactStringValueNames (ref), getFFlagUGCValidationAnimationPackMissingTypeMessageModule (ref), errorSourceStringsModule (ref), httpService (ref), createEditableInstancesForContextModule (ref), legacyValidationAdapterModule (ref), destroyEditableInstancesModule (ref)
+	-- upvalues: promiseModule (ref), constantsModule (ref), getFFlagUGCValidationAnimationPackDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref), hasExactStringValueNames (ref), getFFlagUGCValidationAnimationPackMissingTypeMessageModule (ref), errorSourceStringsModule (ref), httpService (ref), createEditableInstancesForContextModule (ref), legacyValidationAdapterModule (ref), destroyEditableInstancesModule (ref)
 	p6 = p6 or function() end
 	assert(p6 ~= nil, "Luau")
 	
@@ -61,7 +60,7 @@ return function(p3, p4, p5, p6, p7, p8)
 	local t_3
 	local t = {}
 	
-	if getFFlagUGCValidationAnimationPackSupportModule() and constantsModule.ANIMATION_ASSET_INFO then
+	if constantsModule.ANIMATION_ASSET_INFO then
 		local t_1 = {}
 		local t_2 = {}
 		
@@ -158,7 +157,7 @@ return function(p3, p4, p5, p6, p7, p8)
 			end
 		end
 	end
-	if getFFlagUGCValidationAnimationPackSupportModule() and constantsModule.ANIMATION_ASSET_INFO then
+	if constantsModule.ANIMATION_ASSET_INFO then
 		for i_1, v_1 in constantsModule.ANIMATION_ASSET_INFO do
 			if t_1[i_1] then
 				table.insert(t_3, t_1[i_1])
@@ -213,7 +212,7 @@ return function(p3, p4, p5, p6, p7, p8)
 		t_4.pieces[p10].status = "finished"
 		p6(t_4)
 	end):andThen(function()
-		-- upvalues: t_4 (write), p7 (ref), p8 (ref), createEditableInstancesForContextModule (copy), getFFlagUGCValidationAnimationPackSupportModule (copy), legacyValidationAdapterModule (copy), var5 (ref), destroyEditableInstancesModule (copy), p6 (write)
+		-- upvalues: t_4 (write), p7 (ref), p8 (ref), createEditableInstancesForContextModule (copy), legacyValidationAdapterModule (copy), var5 (ref), destroyEditableInstancesModule (copy), p6 (write)
 		local function createFullBodyData(p11)
 			local t = {}
 			
@@ -248,14 +247,9 @@ return function(p3, p4, p5, p6, p7, p8)
 		if var15 then
 			t.editableMeshes = var16.editableMeshes
 			t.editableImages = var16.editableImages
-			var14 = true
-			var13 = nil
-			
-			if getFFlagUGCValidationAnimationPackSupportModule() then
-				local var17, var18 = legacyValidationAdapterModule.studioRFUBundleValidation(var12, Enum.BundleType.Animations, t, var5, var14, var13)
-				var14 = var17
-				var13 = var18
-			end
+			local var17, var18 = legacyValidationAdapterModule.studioRFUBundleValidation(var12, Enum.BundleType.Animations, t, var5, true, nil)
+			var14 = var17
+			var13 = var18
 			destroyEditableInstancesModule(t.editableMeshes, t.editableImages)
 		else
 			var13 = var16

@@ -7,10 +7,8 @@ local floatEqualsModule = require(parent.util.floatEquals)
 local valueToStringModule = require(parent.util.valueToString)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
-local attachmentRotationFIntsModule = require(parent.util.AttachmentRotationFInts)
-local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local UGCValidateRigAttachmentRotationUsesDiff = game:DefineFastFlag("UGCValidateRigAttachmentRotationUsesDiff", false)
-local thresholdGetters = attachmentRotationFIntsModule.thresholdGetters
+local thresholdGetters = require(parent.util.AttachmentRotationFInts).thresholdGetters
 local var1 = CFrame.new(Vector3.new(0, 0, 0), Vector3.new(0, 0, -1)) * CFrame.fromEulerAnglesXYZ(-1.570796326795, 0, 0)
 local t = {
 	categories = {
@@ -21,7 +19,6 @@ local t = {
 		validationEnumsModule.SharedDataMember.rootInstance,
 		validationEnumsModule.SharedDataMember.uploadEnum
 	},
-	fflag = getFFlagUGCValidateMigrateSchemaPropertiesModule,
 	expectedFailures = {}
 }
 

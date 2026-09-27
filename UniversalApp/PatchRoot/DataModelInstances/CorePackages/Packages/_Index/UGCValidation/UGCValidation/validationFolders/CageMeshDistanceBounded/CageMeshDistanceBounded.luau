@@ -3,12 +3,10 @@ local parent = script.Parent.Parent.Parent
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateMigrateCageGeometryModule = require(parent.flags.getFFlagUGCValidateMigrateCageGeometry)
 local getFIntUGCValidateCageMeshDistanceThresholdModule = require(parent.flags.getFIntUGCValidateCageMeshDistanceThreshold)
 local getFFlagUGCValidationEyebrowEyelashSupportModule = require(parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)
 
 return {
-	fflag = getFFlagUGCValidateMigrateCageGeometryModule,
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	requiredData = {
 		validationEnumsModule.SharedDataMember.renderMeshesData,

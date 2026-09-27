@@ -197,7 +197,7 @@ Authentication.AccountRecovery.Label.Email2svCapitalized,Email 2SV
 Authentication.AccountRecovery.Label.EmailUnavailable,email unavailable
 Authentication.AccountRecovery.Label.EnterCode,Enter the code
 Authentication.AccountRecovery.Label.NewPasswordV2,New password
-Authentication.AccountRecovery.Label.Or,Or
+Authentication.AccountRecovery.Label.Or,OR
 Authentication.AccountRecovery.Label.PreviousContactMethodVerification,{contactMethod} verified
 Authentication.AccountRecovery.Label.ResendCode,Resend code
 Authentication.AccountRecovery.Label.ResendCodeTimer,Resend code in {timeLeft}s
@@ -309,6 +309,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ Login
 Authentication.Login.Action.QuickSignIn,Quick sign-in
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.Save,Save
 Authentication.Login.Action.SendCodeSentenceCase,Send code
 Authentication.Login.Action.SendVerificationEmail,Send Verification Email
 Authentication.Login.Action.SignIn,Sign In
@@ -437,6 +438,7 @@ Authentication.Passkey.Label.UpsellTitle,Sign in faster with a passkey
 Authentication.Passkey.Label.UpsellToastPageTitle,Success! Passkey created
 Authentication.Passkey.Label.UpsellToastTitle,Passkey created successfully!
 Authentication.ResetPassword.Response.ResetPasswordStarted,You must reset your password before continuing.
+Authentication.SignUp.Action.ApplyOnNextRespawn,Apply on next respawn
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
 Authentication.SignUp.Action.CreateAPasskey,
@@ -446,8 +448,10 @@ Authentication.SignUp.Action.EnableFaceId,Enable Face ID
 Authentication.SignUp.Action.ExitModalLeave,Leave
 Authentication.SignUp.Action.IUnderstand,I Understand
 Authentication.SignUp.Action.NextWord,
+Authentication.SignUp.Action.RespawnNow,Respawn now
 Authentication.SignUp.Action.SetupLater,Setup later
 Authentication.SignUp.Action.StartOver,Start Over
+Authentication.SignUp.Action.StartPlay,Start play
 Authentication.SignUp.Action.UseEmail,Use email address
 Authentication.SignUp.Action.UsePhoneNumber,Use phone number
 Authentication.SignUp.Button.OKCaptialized,
@@ -456,6 +460,7 @@ Authentication.SignUp.Description.AccountAlreadyLinked,Your account on {platform
 Authentication.SignUp.Description.AgreeToTermsWithGuardian.NoParameters,"I agree to Roblox’s Terms of Use (including arbitration) and acknowledge its Privacy Policy.  If under 18, I agree that my parent/guardian permits me to create this account and agrees to the Terms of Use."
 Authentication.SignUp.Description.BirthdayHelp,This helps us know what content to show you. It won’t be visible to others.
 Authentication.SignUp.Description.BirthdayHelp3,"This helps us show you relevant content, and is not shared with others."
+Authentication.SignUp.Description.BirthdayHint,Enter date
 Authentication.SignUp.Description.BirthdayValuePropC,This helps us know what content to show you. It won't be visible to others
 Authentication.SignUp.Description.ClickNextAgreeToTerms,"By selecting Next, you agree to the Terms of Use, including the arbitration clause, and you acknowledge the Privacy Policy."
 Authentication.SignUp.Description.CreateAPassword,Create a password for your Roblox account
@@ -466,7 +471,7 @@ Authentication.SignUp.Description.EnterParentEmail,Enter your parent's email add
 Authentication.SignUp.Description.FaceIdPromo,Face ID is the most secure and easiest way to sign in on Roblox.
 Authentication.SignUp.Description.GenderHelp2,This helps us pick a relevant avatar for you.
 Authentication.SignUp.Description.OneMoreStep,One more step
-Authentication.SignUp.Description.Or,OR
+Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,"We ask for your parent's email for account recovery purposes, subject to the Roblox Privacy Policy"
 Authentication.SignUp.Description.PasskeyTryAgain,"Sorry, something went wrong with registering your passkey. Please try signing up again with a different username."
 Authentication.SignUp.Description.RobloxNotAvailableInRegion,Roblox is temporarily unavailable in your region.
@@ -478,10 +483,12 @@ Authentication.SignUp.Description.SignupAgreement.FullCopy.CreateAccount,
 Authentication.SignUp.Description.ThisKeepYourAccountSecure,This will keep your Roblox account secure.
 Authentication.SignUp.Description.Try,Try
 Authentication.SignUp.Description.UnderAgeAlert,You do not meet the minimum age requirement to play Roblox.
+Authentication.SignUp.Description.UsernameChanged,"All set! Your account is ready and linked to {platform}. Respawn now to see your updated username in the game, or it'll apply next time."
 Authentication.SignUp.Description.UsernameHelp,This is how people will see you on Roblox. Remember your username for future login.
 Authentication.SignUp.Description.UsernameHelpV2,"This is how you’ll sign in and show up to others, so make sure it’s easy to remember."
 Authentication.SignUp.Description.UsernameRule1,Use 3 - 20 characters
 Authentication.SignUp.Description.UsernameRule2,"Only letters (a-z), numbers (0-9), and underscores (_) are allowed"
+Authentication.SignUp.Description.UsernameUnchanged,You're in! Your account is ready and linked to {platform}. Chat with friends and play millions of Roblox games.
 Authentication.SignUp.Description.VerificationLinkingText,"Your Roblox account will be linked to your account on {platform}. You can unlink from the Settings screen at any time. There may be a cool down before being able to link to another account on {platform}. By clicking Sign Up, you are agreeing to the Terms of Use including the arbitration clause and you are acknowledging the Privacy Policy."
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Your Roblox account will be linked to your account on {platform}. You can unlink from the Settings screen at any time. There may be a cool down before being able to link to another account on {platform}. By clicking {ctaButton}, you are agreeing to the Terms of Use including the arbitration clause and you are acknowledging the Privacy Policy."
 Authentication.SignUp.Description.VerificationPage,"By clicking Sign Up, you are agreeing to the Terms of Use including the arbitration clause and you are acknowledging the Privacy Policy."
@@ -492,7 +499,9 @@ Authentication.SignUp.Header.CreatePassword,"Hey {username}, create a password"
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"Hey {username}, create a password or passkey"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,We created your account. Choose how you'll sign-in.
 Authentication.SignUp.Header.GenderPage6,One last thing! Select your gender (optional)
+Authentication.SignUp.Header.OneLastThing,One last thing
 Authentication.SignUp.Header.PleaseTryAgain,Please Try Again
+Authentication.SignUp.Header.SetUpYourRobloxAccount,Set up your Roblox account
 Authentication.SignUp.Header.UsernamePage4,"Next, create a username"
 Authentication.SignUp.Header.WhatIsYourBirthday,What is your birthday?
 Authentication.SignUp.Heading.CannotSignUp,Can't Sign Up
@@ -516,6 +525,7 @@ Authentication.SignUp.Label.EmailAddress,Email Address
 Authentication.SignUp.Label.EnterYourEmail,Enter your email
 Authentication.SignUp.Label.EnterYourParentsEmail,Enter your parent's email
 Authentication.SignUp.Label.Error.MinimumAge5,New accounts must be above the age of five
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,Must be older to play this game
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,Username is already in use
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,Username should not start or end with _
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,"Username should contain only letters, numbers, and _"
@@ -571,12 +581,15 @@ Authentication.SignUp.PasswordErrorLength,Is between 8 and 200 characters long
 Authentication.SignUp.Response.AgedUpDisplayNameSetFirst,Name must be set first.
 Authentication.SignUp.Response.BirthdayMustBeSetFirst,Birthday must be set first.
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.ErrorTryAgain2,Something went wrong. Please try again.
 Authentication.SignUp.Response.InvalidBirthday,Invalid birthday.
 Authentication.SignUp.Response.InvalidEmail,Invalid email address.
 Authentication.SignUp.Response.InvalidPhoneNumber,Invalid phone number.
 Authentication.SignUp.Response.PasswordComplexity,Please create a more complex password.
 Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Number is already associated with another account.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Username must be set first.
+Authentication.SignUp.Subtitle.AddYourBirthday,Add your birthday to create your Roblox account.
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,Your progress carries over when you complete setup.
 Authentication.SignUp.Title,"Hi {username}, create a password"
 Authentication.TwoStepVerification.Action.Approve,Approve
 Authentication.TwoStepVerification.Action.ChangePassword,Change Password
@@ -645,26 +658,25 @@ Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Cage part placement vi
 Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"Cage part {partName} in {cageName} has {actualCount} vertices, expected approximately {expectedCount}. This may indicate missing or duplicated geometry in that body region."
 Common.UGCValidation.ErrorLabel.AQSFail_CageUV,"The {cage_name} has incorrect UV values that do not match the template. {incorrect_uv_count} incorrect UVs ({unreferenced_vertex_count} unreferenced, {non_template_uv_count} non-template, {duplicate_mapping_count} duplicate mappings), {unmatched_template_count} unmatched template vertices. Please correct the cage UV to match the template."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Your body contains small disconnected mesh components (mesh islands). Please remove floating geometry and ensure all mesh parts are properly connected.
-Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"Asset quality: {partName} has {num_disconnected_components} disconnected components, which exceeds the maximum of {max_disconnected_components}."
-Common.UGCValidation.ErrorLabel.AQSInputDataError,Quality score cannot be properly computed due to the input data is incorrect or incomplete. Please check your model or file a bug report
-Common.UGCValidation.ErrorLabel.AQSInternalError,"Score cannot be generated due to Asset Quality Error. Please check input data correctness and try again, or file a bug report."
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,"Asset quality warning: Cage-to-mesh distance score is {score}. Max distance between outer cage and mesh is {max_distance}, {negative_sdf_percent}% of outer cage vertices are inside render mesh."
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,"Asset quality warning: Body cage distance score is {score}. Max distance between body cage and mesh is {max_distance}, {negative_sdf_percent}% of body cage vertices are inside the body mesh."
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"Asset quality warning: Head cage distance score is {score}. Max distance between head cage and mesh is {max_distance}, {negative_sdf_percent}% of head cage vertices are inside head mesh."
-Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,Asset quality warning: Cage relevancy score is {score}. {irrelevant_percent}% of the modified outer cage vertices do not cover the accessory.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,Asset quality warning: Cage UV score is {score} for {cage_name}. Incorrect UV count: {incorrect_uv_count}.
-Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,Asset quality: {partName} has {degenerate_triangle_percent}% degenerate triangles (score: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,Asset quality warning: Dynamic head expression score is {score}.
-Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Asset quality: joint configuration scored {score} (joints: {joint_number}, left hand: {left_hand_joint_number}, right hand: {right_hand_joint_number})."
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,Asset quality: {partName} has {num_small_volume_islands} small disconnected islands out of {num_disconnected_components} components (score: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,Asset quality: {partName} has mesh manifold issues (score: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,Asset quality: {partName} mesh is not watertight ({boundary_edges_percent}% boundary edges).
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,Asset quality warning: Mesh containment score is {score}. {mesh_outside_outer_cage_percent}% of mesh vertices are outside the outer cage.
-Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,Asset quality score for {measureName} could not be computed because the input data was incomplete or invalid. This does not block your upload.
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,Asset quality: texture {textureName} has low complexity (score: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Asset quality: texture {textureName} has resolution {texture_width}x{texture_height} (score: {score}).
+Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"{partName} has {num_disconnected_components} disconnected components, which exceeds the maximum of {max_disconnected_components}."
+Common.UGCValidation.ErrorLabel.AQSInternalError,"Validation cannot be completed due to an internal error. Please check input data correctness and try again, or file a bug report."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,"Outer cage does not closely follow the render mesh. Maximum distance between outer cage and mesh is {max_distance}, and {negative_sdf_percent}% of outer cage vertices are inside the render mesh."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,"Body cage does not closely follow the body mesh. Maximum distance between body cage and mesh is {max_distance}, and {negative_sdf_percent}% of body cage vertices are inside the body mesh."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"Head cage does not closely follow the head mesh. Maximum distance between head cage and mesh is {max_distance}, and {negative_sdf_percent}% of head cage vertices are inside the head mesh."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,{irrelevant_percent}% of the modified outer cage vertices do not cover the accessory. Please adjust the cage to better fit the accessory shape.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"The {cage_name} has incorrect UV values. {incorrect_uv_count} incorrect UVs ({unreferenced_vertex_count} unreferenced, {non_template_uv_count} non-template, {duplicate_mapping_count} duplicate mappings), {unmatched_template_count} unmatched template vertices."
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} has {degenerate_triangle_percent}% degenerate triangles.
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Dynamic head has expression quality issues. Left eye close: {left_eye_close}, right eye close: {right_eye_close}, mouth open: {mouth_open}, happy: {is_happy}, sad: {is_sad}."
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Unexpected joint configuration. Total joints: {joint_number}, left hand joints: {left_hand_joint_number}, right hand joints: {right_hand_joint_number}."
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName} has {num_small_volume_islands} small disconnected mesh islands out of {num_disconnected_components} total components. Please remove floating geometry.
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"{partName} has non-manifold geometry. Please check for non-planar faces, self-intersecting surfaces, or edges shared by more than two faces."
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,{partName} mesh is not watertight ({boundary_edges_percent}% boundary edges).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,{mesh_outside_outer_cage_percent}% of mesh vertices are outside the outer cage. Please adjust the outer cage to fully contain the render mesh.
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,Validation data for {measureName} could not be computed because the input data was incomplete or invalid. This does not block your upload.
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,Texture {textureName} has low complexity. The texture may lack sufficient detail or variation.
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Texture {textureName} has a low resolution of {texture_width}x{texture_height}. Consider using a higher resolution texture.
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Asset quality: {partName} has {intersecting_tri_face_percent}% intersecting triangle faces (score: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Asset quality: {partName} has {uv_outside_bound_vert_percent}% UV vertices outside bounds (score: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName} has {uv_outside_bound_vert_percent}% UV vertices outside the [0,1] bounds."
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Asset quality: {partName} has {similar_vertex_percent}% similar vertices (score: {score}).
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,Accessory attachment '{AttachmentName}' in '{PartName}' must be placed close to the surface of the mesh. Current position [{CurrentPosition}] is outside the valid region. Move it closer to [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Handle is skinned to joint {jointName}, which is not part of the allowed schema. Only standard R15 joints and skinning transfer joints are permitted."
@@ -735,18 +747,19 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Dynamic Heads on the marketpl
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Cannot detect right eye close expression for the Dynamic Head. Please adjust cage landmarks for the right eye to match where the right eye on the head and make sure it can be closed.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Cannot detect frown expression for the Dynamic Head. Please adjust cage landmarks for the mouth to match where the mouth on the head and make sure it can show frown expression.
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Emissive Area Above Threshold.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} is too Emissive. Emissive area × intensity exceeds limit (currently {emissivePercentage}%, must be {maxEmissivePercentage}% or less). Shrink the glowing area or lower its EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Emissive Area Exceeded.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} is too Emissive. Emissive area × intensity exceeds limit (currently {emissiveArea}, must be {maxEmissiveArea} or less). Shrink the glowing area or lower its EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,This asset uses emissive maps which are only available to creators in the Trusted Creator Program. Please remove all emissive map content or join the program before uploading.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,The published animation is missing a valid maximum part translation value. Please republish the animation.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,The published animation is missing a valid UGC emote marker. Please republish the animation.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,The maximum part translation could not be calculated from the published animation data. Please republish the animation.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"The published animation specifies a maximum part translation of {taggedTranslation} studs, but its animation data calculates to {calculatedTranslation} studs. Please republish the animation."
+Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Head must be placed above UpperTorso. The head center is below the top of the torso, which indicates the head mesh is collapsed or misplaced."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,The InternalOverrideFACSData property on FaceControls must be empty on upload.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACs was detected expanding your head to {modPercent}%, but altering the head is against marketplace policy for facial animations."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACs was detected shrinking your head to {modPercent}%, but altering the head is against marketplace policy for facial animations."
-Common.UGCValidation.ErrorLabel.FailureWithoutReason,Validation failed for an unknown reason. Please try again or open a bug report if this issue persists.
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Upload format does not match expected folder structure. Please try again or file a bug report.
-Common.UGCValidation.ErrorLabel.HeadNotDynamic,"Dynamic Heads on the marketplace must be setup to properly animate the core facial movements, but our detection did not notice a substantial change."
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"Bone {bonePath} is too far outside of the meshpart {partName}, please put it closer to the meshpart size boundary."
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,Bone {bonePath} is too close to its parent. Adjust the position of the bone slightly.
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,"Bone {bonePath} has a transform property, but this is not yet enabled for marketplace uploads. Please reset it to the identity CFrame."
@@ -792,8 +805,6 @@ Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,Rig attachment '{AttachmentName}' in '{PartName}' must be placed near the joint boundary where this body part connects to an adjacent part. Current position [{CurrentPosition}] is too far from the connection plane. Move it closer to [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"To upload an asset to Roblox, you must select exactly 1 instance and the associated upload type."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,This asset is too large to upload ({sizeBytes} bytes exceeds the maximum of {maxSizeBytes} bytes). Please reduce its size and try again.
-Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Instance {ProblematicDescendantPath} should not have tags.
-Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Second test error string used to verify the Hub-first translation sync workflow end-to-end.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Head meshpart has facial animations for {jointName}, which cannot be used in FACs. Please rename this joint then reimport your head."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Bodypart {partName} is skinned to virtual joint {jointName}, which is not part of the R15plus schema."
 Common.VerifiedParentalConsent.Action.Cancel,
@@ -873,6 +884,8 @@ CommonUI.Controls.Label.Wednesday,Wednesday
 CommonUI.Controls.Label.WednesdayAbbreviated,We
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,No results found
+CommonUI.Features.Action.ClassicThemeSunsetGetPlus,Get Plus
+CommonUI.Features.Action.ClassicThemeSunsetManage,
 CommonUI.Features.Action.ClassicUnlockGetTheme,Get theme
 CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
@@ -880,6 +893,7 @@ CommonUI.Features.Action.Go,Go
 CommonUI.Features.Action.LessLowercase,less
 CommonUI.Features.Action.MoreLowercase,more
 CommonUI.Features.Action.Send,Send
+CommonUI.Features.Heading.ClassicThemeSunset,Thank you for celebrating 20 years of Roblox
 CommonUI.Features.Heading.ClassicUnlock,Celebrate 20 years of Roblox
 CommonUI.Features.Heading.GameDetails,Experience Details
 CommonUI.Features.Label.About,About
@@ -899,6 +913,8 @@ CommonUI.Features.Label.Catalog,Roblox Catalog
 CommonUI.Features.Label.ChannelWithChannelName,Channel: {channelName}
 CommonUI.Features.Label.Charts,Charts
 CommonUI.Features.Label.Chat,Chat
+CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,Roblox Plus members keep the Classic theme. Only the anniversary app icon is retiring.
+CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,Your Roblox Plus membership keeps the Classic theme. Only the anniversary app icon is retiring.
 CommonUI.Features.Label.ClassicUnlockDescription,Enjoy the classic look for a limited time
 CommonUI.Features.Label.ClassicUnlockManagementSnackbar,Manage classic theme in settings
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
@@ -1118,6 +1134,7 @@ CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCoun
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 Say hi to everyone playing now!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,Only your trusted friends can chat with you.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,Chat with more people in this game. Only people in similar age groups can chat with you.
+CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,Chat with more people in this game!
 CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ Join the fun! Say hi to everyone playing now!
 CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 {RBX_COUNT} players are in chat. Say hi!
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,Hold to go hands free
@@ -1458,7 +1475,7 @@ Feature.AppealsPortal.Description.AppealDenied.Multiple,"We carefully reviewed y
 Feature.AppealsPortal.Description.AppealDenied.None,"We carefully reviewed your appeal and we still consider that your activity breaks the rules explained in our Community Standards. We understand this decision can feel disappointing, and appreciate your time sending an appeal."
 Feature.AppealsPortal.Description.AppealDenied.Singular,"We carefully reviewed your appeal for {singleViolation} and we still consider that your activity breaks the rules explained in our Community Standards. We understand this decision can feel disappointing, and appreciate your time sending an appeal."
 Feature.AppealsPortal.Description.AppealDenied.V2,We carefully reviewed your appeal for {violations} and we still consider that your activity breaks the rules explained in our Community Standards. Thanks for sending an appeal.
-Feature.AppealsPortal.Description.AppealDisclosures,More about appeals: {link}learn more and review disclosures.{linkEnd}
+Feature.AppealsPortal.Description.AppealDisclosures,{link}View appeal guidelines and disclosures{linkEnd}
 Feature.AppealsPortal.Description.AppealIneligible,You're no longer eligible to appeal this decision. Please verify your identity and try again.
 Feature.AppealsPortal.Description.AppealReceived,"We’ll let you know of a decision soon. We estimate a response within 5 business days, depending on how complex the issue is. Thanks for sending an appeal."
 Feature.AppealsPortal.Description.AppealReceived.Plural,"We’ll let you know of a decision soon. We estimate a response within {number} business days, depending on how complex the issue is. Thanks for sending an appeal."
@@ -1660,7 +1677,7 @@ Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Restore last saved avatar
 Feature.Avatar.Action.Revert,Revert
 Feature.Avatar.Action.Rotate,Rotate
-Feature.Avatar.Action.Save,Save
+Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,Save as new
 Feature.Avatar.Action.Select,Select
 Feature.Avatar.Action.SelectMultipleItems,Select multiple items
@@ -1873,7 +1890,7 @@ Feature.Avatar.Label.FullBody,Full Body
 Feature.Avatar.Label.FullMasks,Full Masks
 Feature.Avatar.Label.FullPair,Full Pair
 Feature.Avatar.Label.Gear,Gear
-Feature.Avatar.Label.GenericSetError,Something went wrong. Please try again.
+Feature.Avatar.Label.GenericSetError,
 Feature.Avatar.Label.GetLookQuestion,Would you like to get this outfit for free?
 Feature.Avatar.Label.GetOutfitMultiple,Would you like to get [{numItems}] items for free?
 Feature.Avatar.Label.GetOutfitOne,Would you like to get [1] item for free?
@@ -2187,6 +2204,7 @@ Feature.Avatar.UnavailableItems.BodyText,"{category} item ""{item}"" is under re
 Feature.Avatar.UnavailableItems.BodyTextMultiple,The following items are under review and currently unavailable.{lineBreak}{items}{lineBreak}If the item is removed from Roblox you'll receive a refund within a week.
 Feature.Avatar.UnavailableItems.ConfirmText,
 Feature.Avatar.UnavailableItems.TitleText,Item Unavailable
+Feature.Avatar.profile.tooltip,Your profile
 Feature.Avatar.tooltip.ExpiredItemsFilter,Find expired timed option items
 Feature.AvatarBundleReceivedInteractiveAlert.Action.Ok,
 Feature.AvatarBundleReceivedInteractiveAlert.Action.TakeALook,Take a look
@@ -2267,11 +2285,11 @@ Feature.Build.Action.UpdateRating,Update rating
 Feature.Build.Action.UpdateWithChanges,Update with changes
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,View usage
-Feature.Build.Analytics.AnalyzeChatPrompt,What's my {analyzeName} for the past {days} days?
+Feature.Build.Analytics.AnalyzeChatPrompt,Analyze my {analyzeName} for the past {days} days. Why does this metric matter and how can I improve it?
 Feature.Build.Analytics.AnalyzeName.Arppu,average revenue per paying user
 Feature.Build.Analytics.AnalyzeName.D1Retention,day-1 retention
 Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,daily active users
-Feature.Build.Analytics.AnalyzeName.PayerConversion,payer conversion
+Feature.Build.Analytics.AnalyzeName.PayerConversion,payer conversion rate
 Feature.Build.Analytics.AnalyzeName.PlaythroughRate,playthrough rate
 Feature.Build.Analytics.AnalyzeName.TotalPlaytime,total playtime
 Feature.Build.Analytics.Description.Arppu,Average revenue per paying user divides total Robux earned by the number of paying players. It shows how much each buyer spends on average.
@@ -2319,9 +2337,13 @@ Feature.Build.Analytics.Title.TotalPlaytime,Total playtime
 Feature.Build.Analytics.Visits,Visits
 Feature.Build.Content.NewGame,New game
 Feature.Build.Description.ActivateDeveloperProduct,Put developer product {PRODUCT_ID} on sale.
+Feature.Build.Description.AdActive,Your ad is running. See how many players it's reaching.
 Feature.Build.Description.AdCampaignModerationReview,All ad campaigns are reviewed by Roblox moderation. This process may take up to 24 hours.
 Feature.Build.Description.AdCampaignSheetRunDates,Runs {startDate} – {endDate}
-Feature.Build.Description.AdvertisingAgreement,"By proceeding, you agree to the {advertisingTermsStart}Roblox Advertising Terms{advertisingTermsEnd} and {advertisingStandardsStart}Advertising Standards{advertisingStandardsEnd}."
+Feature.Build.Description.AdComplete,Your ad has ended. Check your results.
+Feature.Build.Description.AdInReview,Your ad is in review and is scheduled to run {startDate} – {endDate}.
+Feature.Build.Description.AdModerationReview,All ads are reviewed by Roblox moderation and may take up to 24 hours.
+Feature.Build.Description.AdvertisingAgreement,"By selecting Create, you agree to the {advertisingTermsStart}Roblox Advertising Terms{advertisingTermsEnd} and {advertisingStandardsStart}Advertising Standards{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"If you archive this game, it will be removed from Build. You can still access and restore it from Creator Hub or Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Use your Robux to automatically buy additional Build usage as you create. You can set a daily spend limit anytime.
 Feature.Build.Description.BoostAudienceForPlays,Boost your audience for more plays.
@@ -2330,16 +2352,19 @@ Feature.Build.Description.BuildReplyNotif,Get notified when Build has a reply fo
 Feature.Build.Description.BuyRobuxToCreate,"Buy more Robux to keep creating, or wait for your free Build usage to reset tomorrow."
 Feature.Build.Description.BuyUsageOrWait,"Buy more Build usage with Robux, or wait for your daily limit to reset."
 Feature.Build.Description.CampaignRunDates,Your campaign will run {startDate} – {endDate}
+Feature.Build.Description.ChooseAdCampaignLength,Choose how long you want your ad to run.
 Feature.Build.Description.ChoosePlaytesters,Choose friends to preview your game.
 Feature.Build.Description.CreateDeveloperProduct,"Create ""{NAME}"" for {PRICE} Robux, off sale."
 Feature.Build.Description.DeactivateDeveloperProduct,Take developer product {PRODUCT_ID} off sale.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"If you have earned Robux, those will be applied first toward the cost of the ad campaign."
 Feature.Build.Description.EnableBuildNotifs,Turn on notifications in your device settings to get updates from Build.
 Feature.Build.Description.FriendsLinkOnly,Only your friends can access this link. Change your game's Audience setting if you want more people to play.
+Feature.Build.Description.GameConfiguration,Change how you sell items and promote your game.
 Feature.Build.Description.GameCreationDone,I've completed creating and publishing your game. You can open it to playtest.
 Feature.Build.Description.GameSavedPlaytest,I've completed creating your game and saved a new version. You can open it to playtest.
 Feature.Build.Description.HubSettings,Manage all settings on Creator Hub
 Feature.Build.Description.InviteFriendLimit,Invite up to {MAX_INVITES} friends to play while you create.
+Feature.Build.Description.LongAdCampaign,More time to reach new players and keep them coming back.
 Feature.Build.Description.MakeAudienceAvail,Publish your experience to make it available to this audience.
 Feature.Build.Description.ManageAppearance,Manage how your game appears to others.
 Feature.Build.Description.ManageDeveloperProduct,Manage developer product.
@@ -2354,6 +2379,8 @@ Feature.Build.Description.PlaytestLocked,You can start playtesting after you cre
 Feature.Build.Description.PlaytesterAccess,Invite friends as early testers or change your game's Audience setting to let more people play.
 Feature.Build.Description.PricingRules,Set pricing rules
 Feature.Build.Description.PrivateShare,Change your game's Audience setting to share it.
+Feature.Build.Description.PromoteGameFree,Get your game in front of more players in one tap.
+Feature.Build.Description.PromoteGamePaid,Create an ad to get your game in front of millions of players.
 Feature.Build.Description.PromoteGameWithAdCampaign,Boost your audience with a {durationDays}-day ad campaign and get your game discovered.
 Feature.Build.Description.RaiseLimitOrWait,"Increase your daily Robux limit to keep creating, or wait for it to reset tomorrow."
 Feature.Build.Description.RatingAgreement,"By publishing, you agree that this content rating is accurate."
@@ -2361,6 +2388,7 @@ Feature.Build.Description.RestoreLatest,This version will become your latest pub
 Feature.Build.Description.RevertToVersion,Confirm to revert the latest change and go back to {VERSION}.
 Feature.Build.Description.ShareLatest,Share what’s changed in your latest version.
 Feature.Build.Description.ShopButton,Add a shopping entry point
+Feature.Build.Description.ShortAdCampaign,A quick way to see what players think of your game.
 Feature.Build.Description.UpdateDeveloperProduct,Update developer product {PRODUCT_ID}.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"Description must be 1,000 characters or fewer."
 Feature.Build.Error.DeveloperProductNameRequired,Enter a product name.
@@ -2376,6 +2404,7 @@ Feature.Build.Header.AccessSharing,Access & sharing
 Feature.Build.Header.AllVersions,All versions
 Feature.Build.Header.ContentMaturity,Content maturity
 Feature.Build.Header.CustomAnswer,Custom answer
+Feature.Build.Header.GameConfiguration,Game configuration
 Feature.Build.Header.GameDetails,Game details
 Feature.Build.Header.Overview,
 Feature.Build.Header.PastCampaigns,Past campaigns
@@ -2419,6 +2448,7 @@ Feature.Build.Label.GamePlays,Game plays
 Feature.Build.Label.GetMoreBuildUsage,Get more Build usage
 Feature.Build.Label.Hi,Hi
 Feature.Build.Label.IconThumbnails,Icon & thumbnails
+Feature.Build.Label.Images2D,2D Images
 Feature.Build.Label.InProgress,In progress
 Feature.Build.Label.InputNeeded,Input needed
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2428,9 +2458,12 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Managed pricing
 Feature.Build.Label.ManagedPricingMixed,Mixed across current products
 Feature.Build.Label.MaximizeForGamePlays,Maximize for game plays
+Feature.Build.Label.Models3D,3D Models
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,No limit
 Feature.Build.Label.NotStarted,Not started
+Feature.Build.Label.Object,Object
+Feature.Build.Label.Objects3D,3D Objects
 Feature.Build.Label.OffSale,Off sale
 Feature.Build.Label.OnSale,On sale
 Feature.Build.Label.Pending,Pending
@@ -2452,12 +2485,14 @@ Feature.Build.Label.ResetsMonthly,Resets monthly
 Feature.Build.Label.ResetsWeekly,Resets weekly
 Feature.Build.Label.RestoredVersion,Restored {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
+Feature.Build.Label.SalesOptions,Sales options
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,Search games
 Feature.Build.Label.SearchTasks,Search tasks
 Feature.Build.Label.SelectOption,Select an option
 Feature.Build.Label.ShopButton,Shop button
 Feature.Build.Label.ShopUi,Shop UI
+Feature.Build.Label.Sounds,Sounds
 Feature.Build.Label.TargetAllRobloxPlayers,Target all Roblox players
 Feature.Build.Label.Thinking,Thinking
 Feature.Build.Label.Title,Title
@@ -2535,6 +2570,7 @@ Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.Video,
+Feature.Build.Label.World,World
 Feature.Build.Message.AccountRequirements,Your account doesn't meet the requirements to use Build.
 Feature.Build.Message.AccountTooNew,Your account is too new to publish. Try again when it's 2 days old.
 Feature.Build.Message.AdCampaignCreateFailed,Couldn't create your campaign. Please try again.
@@ -2547,6 +2583,7 @@ Feature.Build.Message.AdsStatsEmpty,Boost your audience with an ad campaign and 
 Feature.Build.Message.AdsStatsEmptyFree,Boost your audience with a free ad campaign and get your game discovered
 Feature.Build.Message.AllFriendsAdded,You've invited all your friends as early testers.
 Feature.Build.Message.AnswerBuildQuestion,Answer Build's question below.
+Feature.Build.Message.AssetDetailsUnavailable,Asset details are unavailable.
 Feature.Build.Message.AudienceIneligible,Not eligible for this audience
 Feature.Build.Message.BuildAccountBlocked,Build isn't available for your account right now.
 Feature.Build.Message.BuildBusy,Build is busy. Wait a minute and try again.
@@ -2578,15 +2615,18 @@ Feature.Build.Message.InvitesLoadFailed,Couldn't load invites
 Feature.Build.Message.LimitBelowSpend,Limit can't be below the {ALREADY_SPENT} Robux already spent today.
 Feature.Build.Message.LinkCopied,Link copied to clipboard.
 Feature.Build.Message.LoadingVersions,Loading version history...
+Feature.Build.Message.NoAssetsFound,No assets found.
 Feature.Build.Message.NoCapturesAvailable,No captures available
 Feature.Build.Message.NoDescriptionProvided,No description provided.
 Feature.Build.Message.NoFriendsToAdd,You don't have any friends to invite yet. Find people to connect with on Roblox first.
 Feature.Build.Message.NoResults,
+Feature.Build.Message.NoSearchResultsFound,No search results found
 Feature.Build.Message.NoVersionHistory,No version history yet.
 Feature.Build.Message.OneTaskCompleted,1 task completed
 Feature.Build.Message.OutOfBuildUsage,You're out of Build usage. View your options to use Robux to keep creating.
 Feature.Build.Message.PlaytestInviteSendFailedBody,You were not able to send an invite chat link to the following users:
 Feature.Build.Message.PlaytestInviteSendFailedHint,Please use the Share button to get a link.
+Feature.Build.Message.PlaytesterRequestFailed,We couldn't complete your request. Please try again.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} of {MAX_INVITES} early testers invited
 Feature.Build.Message.PrivatePlaytestInvite,{username} invited you to be an early tester for {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Your game was published, but couldn't be made public. Try again."
@@ -2625,13 +2665,17 @@ Feature.Build.Notification.Title.NeedInput,Build needs your input
 Feature.Build.Placeholder.DescribeProduct,Describe what you want to sell
 Feature.Build.Placeholder.DescribeProductUpdate,Describe an update
 Feature.Build.Prompt.CreateDeveloperProduct,"Help me create a developer product, wire it into the game, verify and publish the changes, and make it available for purchase."
-Feature.Build.Title.AdCampaignActive,Ad campaign is active
+Feature.Build.Title.AdActive,Ad campaign is active
 Feature.Build.Title.AdCampaignDuration,{durationDays}-day ad campaign
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}-days
+Feature.Build.Title.AdComplete,Ad complete
+Feature.Build.Title.AdCreated,Ad created
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Add images
 Feature.Build.Title.AdsStatsEmpty,Start a campaign
 Feature.Build.Title.AdsStatsEmptyFree,Start your first campaign
 Feature.Build.Title.ArchiveThisGame,Archive this game?
+Feature.Build.Title.AssetLibrary,Library
 Feature.Build.Title.Audience,Audience
 Feature.Build.Title.BuildQuestion,Build has a question
 Feature.Build.Title.BuildQuestions,Build has some questions
@@ -2640,6 +2684,7 @@ Feature.Build.Title.BuildUsage,Build usage
 Feature.Build.Title.ChangesNotLive,Your changes aren’t live yet
 Feature.Build.Title.ChatBuildUnavailable,Build unavailable.
 Feature.Build.Title.Content,Content
+Feature.Build.Title.CreateYourAd,Create your ad
 Feature.Build.Title.DailyRobuxReached,Daily Robux limit reached
 Feature.Build.Title.DeveloperProduct,Developer product
 Feature.Build.Title.EditDeveloperProduct,Edit product
@@ -2653,11 +2698,16 @@ Feature.Build.Title.GetUsers,Get users
 Feature.Build.Title.ManagedPricingAcknowledgement,Turn on Managed Pricing?
 Feature.Build.Title.NoMonetizationProducts,Start earning in your game
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
+Feature.Build.Title.PickCampaign,Pick a length
 Feature.Build.Title.PlaytestInviteSendFailed,Couldn't send invites
 Feature.Build.Title.Playtesters,
+Feature.Build.Title.PlaytestersAddRejected,Could not add the following users:
 Feature.Build.Title.PlaytestersOnlyPlay,Only playtesters can play
 Feature.Build.Title.PromoteGame,Promote your game
 Feature.Build.Title.PromoteGameFree,Promote your game for free
+Feature.Build.Title.PromoteGameFreePlural,You've got {promotionCount} free ads
+Feature.Build.Title.PromoteGameFreeSingular,You've got a free ad
+Feature.Build.Title.PromoteGamePaid,More players are waiting
 Feature.Build.Title.PushNotifications,Push notifications
 Feature.Build.Title.RevertLastChange,Revert last change?
 Feature.Build.Title.Tasks,Tasks
@@ -2860,6 +2910,11 @@ Feature.Catalog.Label.ItemInAHold,Item in a hold?
 Feature.Catalog.Label.ItemOwnedCount,Owned Items ({itemCount})
 Feature.Catalog.Label.ItemsCount,{itemCount} items
 Feature.Catalog.Label.LeftArm,
+Feature.Catalog.Label.LicensedBy,Licensed by
+Feature.Catalog.Label.LicensingLicensed,Licensed
+Feature.Catalog.Label.LicensingLicensedInfo,Approved by the brand
+Feature.Catalog.Label.LicensingOfficial,Official
+Feature.Catalog.Label.LicensingOfficialInfo,Made by the brand
 Feature.Catalog.Label.Limited,
 Feature.Catalog.Label.LimitedU,Limited U
 Feature.Catalog.Label.LipMakeup,
@@ -2932,6 +2987,7 @@ Feature.Catalog.Label.SellCut,You Earn:
 Feature.Catalog.Label.SellPageUpsell,Selling is only available to users with a Roblox Plus membership.
 Feature.Catalog.Label.SellSuccess,Item on Sale
 Feature.Catalog.Label.SerialNumberColon,Serial Number:
+Feature.Catalog.Label.ShareToMoments,Share to Moments
 Feature.Catalog.Label.ShoulderAccessories,Shoulder Accessories
 Feature.Catalog.Label.SoldOut,
 Feature.Catalog.Label.SupportsHeadShapes,Supports Head Shapes
@@ -2947,6 +3003,7 @@ Feature.Catalog.Label.Timer.Second.Plural,{number} seconds left
 Feature.Catalog.Label.Timer.Second.Singular,1 second left
 Feature.Catalog.Label.Tops,Tops
 Feature.Catalog.Label.Torso,
+Feature.Catalog.Label.TotalItemsFraction,Total: ({itemCount} / {itemTotal} items)
 Feature.Catalog.Label.TotalItemsParenthesis,
 Feature.Catalog.Label.TotalUnformatted,Total
 Feature.Catalog.Label.Tradable,Tradable
@@ -3088,8 +3145,8 @@ Feature.Chat.Drawer.Join,
 Feature.Chat.Drawer.PinGame,Pin
 Feature.Chat.Drawer.PlayGame,Visit Experience
 Feature.Chat.Drawer.ViewDetails,
-Feature.Chat.Heading.ChatWithConnections,Chat with Connections
-Feature.Chat.Heading.ChatWithFriends,Chat with Friends
+Feature.Chat.Heading.ChatWithConnections,Chat with Friends
+Feature.Chat.Heading.ChatWithFriends,
 Feature.Chat.Heading.CreateUnfilteredChatDialog,Create new group with expanded chat features?
 Feature.Chat.Heading.ExpressiveChat,Expressive chat
 Feature.Chat.Heading.FailedToLeaveGroup,Failed to Leave Group
@@ -3099,16 +3156,16 @@ Feature.Chat.Heading.FirstConversationWithThisUser,First conversation with this 
 Feature.Chat.Heading.FirstInteractionWith,First interaction with {displayName}
 Feature.Chat.Heading.FirstInteractionWithThisPerson,First interaction with this person
 Feature.Chat.Heading.LeaveGroup,Leave Group
-Feature.Chat.Heading.PartyWithConnections,Party with Connections
-Feature.Chat.Heading.PartyWithFriends,Party with Friends
+Feature.Chat.Heading.PartyWithConnections,Party with Friends
+Feature.Chat.Heading.PartyWithFriends,
 Feature.Chat.Heading.SafeChattingWithThisUser,Be safe chatting with this person
 Feature.Chat.Heading.SafeChattingWithUsername,Be safe chatting with {displayName}
 Feature.Chat.Heading.ShareGameToChat,Share experience to chat
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} invited you to join
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} invited you to join a group
 Feature.Chat.Heading.YouWereInvitedToGroup,You were invited to join the group
-Feature.Chat.Label.AddConnections,
-Feature.Chat.Label.AddFriends,Add Friends
+Feature.Chat.Label.AddConnections,Add Friends
+Feature.Chat.Label.AddFriends,
 Feature.Chat.Label.Available,Available
 Feature.Chat.Label.Blocked,Blocked
 Feature.Chat.Label.ByBuilder,By {USERNAME}
@@ -3128,7 +3185,6 @@ Feature.Chat.Label.Group.YouRepliedToThem,You replied to {DISPLAY_NAME}
 Feature.Chat.Label.GroupName,Group Name
 Feature.Chat.Label.HoverToReplyTooltip,Hover to reply
 Feature.Chat.Label.Loading,
-Feature.Chat.Label.LongPressToReplyTooltip,Long press to reply
 Feature.Chat.Label.Members,Members
 Feature.Chat.Label.MessageNotAvailable,This message is not available
 Feature.Chat.Label.MuteInGameChatToastNotifications,Mute in game chat notifications
@@ -3147,7 +3203,7 @@ Feature.Chat.Label.ReplyChatInputPlaceholder,Reply to {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Reply to yourself
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} said...
 Feature.Chat.Label.ReplyingToYourself,You said...
-Feature.Chat.Label.SearchConnections,Search for Connections
+Feature.Chat.Label.SearchConnections,Search for Friends
 Feature.Chat.Label.SearchForFriendsAndChat,Search for conversations
 Feature.Chat.Label.SearchFriends,Search for friends
 Feature.Chat.Label.SearchWord,
@@ -3170,35 +3226,35 @@ Feature.Chat.Label.UnknownUser,unknown user
 Feature.Chat.Label.User,User
 Feature.Chat.Label.ViewProfile,View Profile
 Feature.Chat.Label.YouRepliedToYou,You replied to yourself
-Feature.Chat.Message.AddConnectionsLimit,You can have up to {connectionsNum} Connections in chat group.
-Feature.Chat.Message.AddConnectionsPartyLimit,You can have up to {connectionsNum} Connections in a Party.
-Feature.Chat.Message.AddConnectionsPartyLimitSingular,You can only form a party with 1 Connection due to your privacy settings.
-Feature.Chat.Message.AddFriendsLimit,You can have up to {connectionsNum} friends in chat group.
-Feature.Chat.Message.AddFriendsPartyLimit,You can have up to {connectionsNum} friends in a Party.
-Feature.Chat.Message.AddFriendsPartyLimitSingular,You can only form a party with 1 friend due to your privacy settings.
+Feature.Chat.Message.AddConnectionsLimit,You can have up to {connectionsNum} friends in chat group.
+Feature.Chat.Message.AddConnectionsPartyLimit,You can have up to {connectionsNum} friends in a Party.
+Feature.Chat.Message.AddConnectionsPartyLimitSingular,You can only form a party with 1 friend due to your privacy settings.
+Feature.Chat.Message.AddFriendsLimit,
+Feature.Chat.Message.AddFriendsPartyLimit,
+Feature.Chat.Message.AddFriendsPartyLimitSingular,
 Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName} sent a message that can't be displayed
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,Chat is disabled. You can enable it in your privacy settings.
 Feature.Chat.Message.ChatUnavailableRegion,At this time chat is not available in your region.
 Feature.Chat.Message.ChatUnavailableWithUser,"At this time, chat is not available with this user."
 Feature.Chat.Message.Default,Not everyone in this chat can see your message.
-Feature.Chat.Message.EnableChat,"To chat with Connections, turn on chat in your Privacy Settings."
-Feature.Chat.Message.EnableChat.FriendsRename,"To chat with friends, turn on chat in your Privacy Settings."
-Feature.Chat.Message.EnableParty,"To Party with Connections, turn on Party in your Privacy Settings."
-Feature.Chat.Message.EnableParty.FriendsRename,"To Party with friends, turn on Party in your Privacy Settings."
+Feature.Chat.Message.EnableChat,"To chat with friends, turn on chat in your Privacy Settings."
+Feature.Chat.Message.EnableChat.FriendsRename,
+Feature.Chat.Message.EnableParty,"To Party with friends, turn on Party in your Privacy Settings."
+Feature.Chat.Message.EnableParty.FriendsRename,
 Feature.Chat.Message.FailedToLeaveGroup,You could not be removed from the conversation {CONVERSATION_TITLE}.
 Feature.Chat.Message.FailedToLeaveGroup.V2,You could not be removed from the group {CONVERSATION_TITLE}.
 Feature.Chat.Message.FailedToRemoveUser,The user {USERNAME} could not be removed from the conversation {CONVERSATION_TITLE}.
 Feature.Chat.Message.FailedToRemoveUser.V2,The user {USERNAME} could not be removed from the group {CONVERSATION_TITLE}.
 Feature.Chat.Message.FailedToRenameConversation,The conversation {EXISTING_NAME} could not be renamed to {NEW_NAME}.
 Feature.Chat.Message.FailedToRenameConversation.V2,The group {EXISTING_NAME} could not be renamed to {NEW_NAME}.
-Feature.Chat.Message.GroupConnectionLimitSingular,You can only add 1 Connection to chat with.
-Feature.Chat.Message.GroupFriendLimitSingular,You can only add 1 friend to chat with.
+Feature.Chat.Message.GroupConnectionLimitSingular,You can only add 1 friend to chat with.
+Feature.Chat.Message.GroupFriendLimitSingular,
 Feature.Chat.Message.LeaveGroup,You won't be able to keep chatting with this group.
 Feature.Chat.Message.LeaveGroup.V2,Are you sure you want to leave the group?
-Feature.Chat.Message.MakeConnectionsToChat,Make Connections on Roblox to start chatting together
-Feature.Chat.Message.MakeConnectionsToParty,Make Connections on Roblox to Party together
-Feature.Chat.Message.MakeFriendsToChat,Make friends on Roblox to start chatting together
-Feature.Chat.Message.MakeFriendsToParty,Make friends on Roblox to Party together
+Feature.Chat.Message.MakeConnectionsToChat,Make friends on Roblox to start chatting together
+Feature.Chat.Message.MakeConnectionsToParty,Make friends on Roblox to Party together
+Feature.Chat.Message.MakeFriendsToChat,
+Feature.Chat.Message.MakeFriendsToParty,
 Feature.Chat.Message.MessageContentModerated,Your message was moderated and not sent.
 Feature.Chat.Message.MessageUnavailable,Message unavailable
 Feature.Chat.Message.OneUserTyping,{DISPLAY_NAME} is typing...
@@ -3226,8 +3282,8 @@ Feature.Chat.ShareGameToChat.NoPopularGames,No popular experiences available
 Feature.Chat.ShareGameToChat.NoRecentGames,No recents
 Feature.Chat.ShareGameToChat.Popular,Popular
 Feature.Chat.ShareGameToChat.Recent,Recent
-Feature.Chat.Text.NoConnections,"You haven't added any Connections yet. To get started, find and add your Connections on Roblox."
-Feature.Chat.Text.NoFriends,"You haven't added any friends yet. To get started, find and add your friends on Roblox."
+Feature.Chat.Text.NoConnections,"You haven't added any friends yet. To get started, find and add your friends on Roblox."
+Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.MuteChatNotifications,Mute chat notifications from friends during gameplay
 Feature.Chat.Title.NewChat,New chat
 Feature.Chat.Toast.Error.InvalidUserSelected,One or more people in this list can’t be added
@@ -3566,7 +3622,7 @@ Feature.Friends.Label.PlayedByUserAndOthers,Played by <b>{name}</b> and <b>{numO
 Feature.Friends.Label.PlayedByUserAndOthers.FriendsRename,Played by <b>{name}</b> and <b>{numOfOthers} other friends</b>
 Feature.Friends.Label.RenameInfoText,"Roblox Friends are now Connections. Add people you know as Connections to easily see who's online, start a Party, and play together. <br /><br />Now, age-checked users 13 and older can unlock expressive chat features with eligible Connections, with more features coming soon!"
 Feature.Friends.Label.Request,Request
-Feature.Friends.Label.SearchFriends,Search for Friends
+Feature.Friends.Label.SearchFriends,
 Feature.Friends.Label.SearchPeople,Search People
 Feature.Friends.Label.SentFromWithContext,Sent From {gameName}
 Feature.Friends.Label.SingularMutualFriend,mutual friend
@@ -3643,7 +3699,7 @@ Feature.FriendsActivityFeed.Timestamp.OneHourAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.OneMinuteAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.OneWeekAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.WeeksAbbreviatedPlural,
-Feature.FriendsMenu.Label.SearchForConnections,
+Feature.FriendsMenu.Label.SearchForConnections,Search for Connections
 Feature.FriendsMenu.Label.SelectedConnectionsCount,{numerator}/{denominator} Connections selected
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,{selectedCount} Connections selected
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} friends selected
@@ -3806,7 +3862,6 @@ Feature.Groups.Heading.Primary,Primary
 Feature.Groups.Heading.SocialLinksNew,Social links
 Feature.Groups.Heading.SocialMedia,Social Media
 Feature.Groups.Heading.VerificationRequired,Account Verification Required
-Feature.Groups.Heading.Videos,Videos
 Feature.Groups.Label.ByOwnerWithFormat,By {ownerName}
 Feature.Groups.Label.Follower,follower
 Feature.Groups.Label.FollowerCapital,
@@ -4118,7 +4173,7 @@ Feature.Moments.Label.Tone.Cinematic,Cinematic
 Feature.Moments.Label.Tone.Funny,Funny
 Feature.Moments.Label.Tone.Hype,Hype
 Feature.Moments.Label.Tone.Neutral,Neutral
-Feature.Moments.Label.Videos,
+Feature.Moments.Label.Videos,Videos
 Feature.Moments.Label.VoiceCoachmarkBody,Type a script for video narration
 Feature.Moments.Label.VoiceCoachmarkTitle,Create a voiceover
 Feature.Moments.Label.VoiceGenerating,Creating your voiceover...
@@ -4142,7 +4197,7 @@ Feature.NotApproved.Action.ReactivateAccount,Re-activate My Account
 Feature.NotApproved.Action.ReportMistake,Report a mistake
 Feature.NotApproved.Action.RuleConfirmation,I agree to know and follow the rules.
 Feature.NotApproved.Action.UserAgree,
-Feature.NotApproved.Action.ViewAppealGuidelines,View appeal guidelines
+Feature.NotApproved.Action.ViewAppealGuidelines,View appeal guidelines and disclosures
 Feature.NotApproved.Action.ViewLess,View less
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,View rules
@@ -4838,6 +4893,7 @@ Feature.ReportAbuse.ProblemDescription.Violence,Extreme violence or gore
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Continue your report
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Thank you for starting your IP Infringement report
 Feature.RobloxSubscription.Action.JoinIn,Join in {time}
+Feature.RobloxSubscription.Action.ReferToPlus,Refer to Plus
 Feature.RobloxSubscription.Action.Subscribe,Subscribe
 Feature.RobloxSubscription.Action.TryItForFree,Try it for free
 Feature.RobloxSubscription.Body.AlreadySubscribed,Your Plus subscription already provides in-game benefits.
@@ -4848,7 +4904,12 @@ Feature.RobloxSubscription.Description.Benefit.Customize,Customize with profile 
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% off first 60 days, then 20% off items and avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,More fun for less Robux. Subscribe to Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Join early with Plus
+Feature.RobloxSubscription.Description.ReferralRecipientReward,Offer valid for new Plus subscribers only.
+Feature.RobloxSubscription.Description.ReferralReferrerReward,When anyone buys Plus with your link.
+Feature.RobloxSubscription.Description.ReferralShare,Invite someone to Plus and you both get {amount} Robux when they buy plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
+Feature.RobloxSubscription.Heading.ReferralHistory,Referral history
+Feature.RobloxSubscription.Heading.ReferralShare,"Share Plus, get"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Free private servers
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,Send Robux for free
@@ -4858,7 +4919,12 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{discountPercent}% of
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"By clicking ""Continue,"" you agree to the {linkStart}Roblox Subscription Terms{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"By clicking ""Try it for free,"" you agree to the {linkStart}Roblox Subscription Terms.{linkEnd} Your free trial will end in 1 month and you will be charged automatically each month and can cancel at any time."
 Feature.RobloxSubscription.Label.FreeTrialText,Get free trial
+Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
+Feature.RobloxSubscription.Label.ReferralTheyGet,Your referrals get
+Feature.RobloxSubscription.Label.ReferralYouGet,You get
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 month free,{boldEnd} then {price}/{periodType}"
+Feature.RobloxSubscription.Label.RobuxEarned,Robux earned
+Feature.RobloxSubscription.Label.SuccessfulReferrals,Successful referrals
 Feature.RobloxSubscription.Label.month,month
 Feature.RobloxSubscription.Label.months,months
 Feature.RobloxSubscription.Title.AgeCheckTrial,Get 1 free week of Plus
@@ -5060,6 +5126,14 @@ Feature.SongDetails.Label.SongsAvailableBy,Songs available by {artistName}
 Feature.SongDetails.Label.SongsBy,Songs by {artistName}
 Feature.SongDetails.Label.ThousandPlus,1000+
 Feature.SongDetails.Label.Vendor,Vendor
+Feature.SplitPane.EditAvatarButtonText,Edit Avatar
+Feature.SplitPane.NoAdditionalAvatarsDialogBody,"Create another avatar, then switch between them here."
+Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,Create Avatar
+Feature.SplitPane.NoAdditionalAvatarsDialogTitle,That's All Your Saved Avatars
+Feature.SplitPane.UnsavedChangesDialogBody,"If you switch now, your avatar changes may be lost. Save to keep them."
+Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,Don't save
+Feature.SplitPane.UnsavedChangesDialogTitle,Save your changes?
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Add others
 Feature.Squads.Action.ConnectToVoice,Connect to voice
@@ -5501,6 +5575,7 @@ IAPExperience.PurchaseSuccess.Title.PurchaseSucceeded,Purchase Succeeded
 IAPExperience.RobuxUpsell.Action.BuyRobux,
 IAPExperience.RobuxUpsell.Action.BuyRobuxAndItem,Buy Robux and Item
 IAPExperience.RobuxUpsell.Action.Cancel,
+IAPExperience.RobuxUpsell.Action.GetPercentOff,Get {discountPercentage}% off
 IAPExperience.RobuxUpsell.Text.AdditionalRobux,You need an additional {robux}.
 IAPExperience.RobuxUpsell.Text.BestValue,Best value
 IAPExperience.RobuxUpsell.Text.BetterValue,Better value
@@ -5574,7 +5649,7 @@ InstantApps.Shortcuts.Label.AddToDesktopMenuItem,Add to Desktop
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,Add to Home Screen
 InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,Failed to add {experience_name} to desktop
 InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,Failed to add {experience_name} to home screen
-InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Shortcut to {experience_name} already exists
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Existing shortcut for {experience_name} replaced
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Successfully added {experience_name} to desktop
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,Successfully added {experience_name} to home screen
 InstantApps.Shortcuts.Label.TryAgain,

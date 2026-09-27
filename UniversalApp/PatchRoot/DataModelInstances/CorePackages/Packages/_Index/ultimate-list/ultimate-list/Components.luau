@@ -1,1 +1,4 @@
-﻿return { ScrollingFrame = require(script.ScrollingFrame) }
+﻿return {
+	ScrollingFrame = require(script.ScrollingFrame),
+	VirtualizedContent = require(script.VirtualizedContent)
+}

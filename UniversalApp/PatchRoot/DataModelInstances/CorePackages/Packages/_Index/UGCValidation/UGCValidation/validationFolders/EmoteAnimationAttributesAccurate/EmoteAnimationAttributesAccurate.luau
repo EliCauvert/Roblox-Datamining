@@ -4,15 +4,13 @@ local constantsModule = require(parent.Constants)
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateMigrateCurveAnimModule = require(parent.flags.getFFlagUGCValidateMigrateCurveAnim)
 game:DefineFastFlag("UGCValidateEmoteAttributes", false)
 local t = {
 	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION },
 	requiredData = {},
 	conditionalData = { validationEnumsModule.SharedDataMember.curveAnimations },
 	fflag = function()
-		-- upvalues: getFFlagUGCValidateMigrateCurveAnimModule (ref)
-		return getFFlagUGCValidateMigrateCurveAnimModule() and (game:GetFastFlag("UGCValidateEmoteAttributes") and game:GetEngineFeature("EngineTagEmoteMaxPartTranslation"))
+		return game:GetFastFlag("UGCValidateEmoteAttributes") and game:GetEngineFeature("EngineTagEmoteMaxPartTranslation")
 	end,
 	expectedFailures = {},
 	prereqTests = {}

@@ -4,6 +4,7 @@ local parent_2 = parent_1.Parent
 local reactModule = require(parent_2.React)
 local cryoModule = require(parent_2.Cryo)
 local foundationModule = require(parent_2.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local _ = require(parent.ImageSet.ImagesTypes)
 local _ = require(parent.Style.StyleTypes)
 local label = require(parent_1.Core.ImageSet.ImageSetComponent).Label
@@ -11,6 +12,7 @@ local skeleton = foundationModule.Skeleton
 local useStyleModule = require(parent_1.Core.Style.useStyle)
 local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local openTypeSupportModule = require(parent_1.Utility.OpenTypeSupport)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 
 local function getStyleDefaults(p1)
 	-- upvalues: UIBloxConfigModule (ref)
@@ -45,7 +47,7 @@ local function getUserNameStyleDefaults(p1)
 end
 
 local function NameItem(p1)
-	-- upvalues: cryoModule (ref), reactModule (ref), label (ref), skeleton (ref), UIBloxConfigModule (ref)
+	-- upvalues: cryoModule (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), label (ref), skeleton (ref), UIBloxConfigModule (ref)
 	local createElement_1
 	local layoutOrder = p1.layoutOrder
 	local isReversed = p1.isReversed
@@ -73,7 +75,8 @@ local function NameItem(p1)
 		Text = icon,
 		TextXAlignment = Enum.TextXAlignment.Center,
 		TextYAlignment = Enum.TextYAlignment.Center,
-		Font = labelTypography.Font,
+		Font = if foundationFontFaceMigration then nil else labelTypography.Font,
+		FontFace = if foundationFontFaceMigration then normalizeFontFace(labelTypography.Font) else nil,
 		TextSize = iconSize,
 		TextColor3 = iconColorStyle.Color3,
 		TextTransparency = if iconColorStyle.Transparency then iconColorStyle.Transparency else 0
@@ -123,7 +126,8 @@ local function NameItem(p1)
 			Text = labelText,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			Font = labelTypography.Font,
+			Font = if foundationFontFaceMigration then nil else labelTypography.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(labelTypography.Font) else nil,
 			TextSize = labelTypography.FontSize,
 			TextColor3 = labelColorStyle.Color3,
 			TextTransparency = labelColorStyle.Transparency,

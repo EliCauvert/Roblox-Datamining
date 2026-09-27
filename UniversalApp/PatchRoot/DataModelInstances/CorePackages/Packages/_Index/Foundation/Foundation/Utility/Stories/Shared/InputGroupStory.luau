@@ -33,7 +33,7 @@ local function Section(p1)
 		}),
 		Content = reactModule.createElement(viewModule, {
 			LayoutOrder = 2,
-			tag = p1.contentTag or "row gap-large auto-xy wrap"
+			tag = p1.contentTag or "row gap-large align-y-top auto-xy wrap"
 		}, p1.children)
 	})
 end
@@ -144,7 +144,6 @@ return {
 				},
 				{
 					name = "Placement",
-					summary = `placement positions each item's label relative to its {string.lower(p4.itemName)}.`,
 					story = function()
 						-- upvalues: reactModule (copy), Page (copy), Section (copy), dashModule (copy), list_1 (copy), p3 (ref), createItems (copy), staticItems (copy)
 						return reactModule.createElement(Page, nil, {

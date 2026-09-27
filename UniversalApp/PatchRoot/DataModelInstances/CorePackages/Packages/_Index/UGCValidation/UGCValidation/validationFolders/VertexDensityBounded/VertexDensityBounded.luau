@@ -6,7 +6,6 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local getFIntUGCValidationVertexDensityThresholdModule = require(parent.flags.getFIntUGCValidationVertexDensityThreshold)
 
 return {
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateMeshGeometry),
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},

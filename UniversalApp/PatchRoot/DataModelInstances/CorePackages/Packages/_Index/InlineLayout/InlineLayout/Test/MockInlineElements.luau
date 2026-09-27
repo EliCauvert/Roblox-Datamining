@@ -28,7 +28,7 @@ function t:render(p1, p2)
 	return reactModule.createElement("TextLabel", {
 		key = tostring(p2),
 		LayoutOrder = p2,
-		Size = UDim2.new(0, self.width, 0, 20),
+		Size = UDim2.fromOffset(self.width, 20),
 		Text = `{p1}`
 	})
 end
@@ -68,7 +68,7 @@ function t_1:render(p1, p2)
 	return reactModule.createElement("TextLabel", {
 		key = tostring(p2),
 		LayoutOrder = p2,
-		Size = UDim2.new(0, self.width, 0, 20),
+		Size = UDim2.fromOffset(self.width, 20),
 		Text = `{p1}`
 	})
 end

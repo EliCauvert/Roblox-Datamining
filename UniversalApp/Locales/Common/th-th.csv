@@ -291,6 +291,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,ลงชื่อเข้าใช้ด้วย QQ
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.Save,บันทึก
 Authentication.Login.Action.SendCodeSentenceCase,ส่งรหัส
 Authentication.Login.Action.SendVerificationEmail,ส่งอีเมลการตรวจสอบยืนยัน
 Authentication.Login.Action.SignIn,ลงชื่อเข้าใช้
@@ -419,6 +420,7 @@ Authentication.Passkey.Label.UpsellTitle,ลงชื่อเข้าใช้
 Authentication.Passkey.Label.UpsellToastPageTitle,สำเร็จ! สร้างพาสคีย์แล้ว
 Authentication.Passkey.Label.UpsellToastTitle,สร้างพาสคีย์สำเร็จเรียบร้อยแล้ว!
 Authentication.ResetPassword.Response.ResetPasswordStarted,คุณต้องรีเซ็ตรหัสผ่านของคุณก่อนที่จะดำเนินการต่อ
+Authentication.SignUp.Action.ApplyOnNextRespawn,ใช้เมื่อเกิดใหม่ครั้งต่อไป
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
 Authentication.SignUp.Action.CreateAPasskey,
@@ -428,6 +430,7 @@ Authentication.SignUp.Action.EnableFaceId,เปิดใช้งาน Face ID
 Authentication.SignUp.Action.ExitModalLeave,ออก
 Authentication.SignUp.Action.IUnderstand,ฉันเข้าใจ
 Authentication.SignUp.Action.NextWord,
+Authentication.SignUp.Action.RespawnNow,เกิดใหม่ตอนนี้เลย
 Authentication.SignUp.Action.SetupLater,ตั้งค่าภายหลัง
 Authentication.SignUp.Action.StartOver,เริ่มต้นใหม่หมด
 Authentication.SignUp.Action.UseEmail,ใช้ที่อยู่อีเมล
@@ -438,6 +441,7 @@ Authentication.SignUp.Description.AccountAlreadyLinked,บัญชีสำห�
 Authentication.SignUp.Description.AgreeToTermsWithGuardian.NoParameters,ฉันยอมรับข้อกำหนดการใช้งาน (รวมถึงอนุญาโตตุลาการ) และรับทราบนโยบายความเป็นส่วนตัวของ Roblox หากมีอายุต่ำกว่า 18 ปี ฉันยอมรับว่าพ่อแม่/ผู้ปกครองอนุญาตให้ฉันสร้างบัญชีนี้และยอมรับข้อกำหนดการใช้งานของ Roblox
 Authentication.SignUp.Description.BirthdayHelp,ข้อมูลนี้จะช่วยให้เราทราบว่าควรจะแสดงเนื้อหาใดให้กับคุณ โดยผู้อื่นจะไม่เห็นข้อมูลนี้
 Authentication.SignUp.Description.BirthdayHelp3,การดำเนินการนี้จะช่วยให้เราแสดงเนื้อหาที่เกี่ยวข้องกับคุณ โดยไม่มีการเปิดเผยให้ผู้ใช้รายอื่นทราบ
+Authentication.SignUp.Description.BirthdayHint,กรอกวันที่
 Authentication.SignUp.Description.BirthdayValuePropC,
 Authentication.SignUp.Description.ClickNextAgreeToTerms,"การเลือก ""ถัดไป"" จะถือว่าคุณยอมรับข้อกำหนดการใช้งาน รวมถึงข้อกำหนดการใช้อนุญาโตตุลาการ และรับทราบถึงนโยบายความเป็นส่วนตัว"
 Authentication.SignUp.Description.CreateAPassword,สร้างรหัสผ่านสําหรับบัญชี Roblox ของคุณ
@@ -460,10 +464,12 @@ Authentication.SignUp.Description.SignupAgreement.FullCopy.CreateAccount,
 Authentication.SignUp.Description.ThisKeepYourAccountSecure,การดำเนินการนี้จะรักษาบัญชี Roblox ของคุณให้ปลอดภัย
 Authentication.SignUp.Description.Try,
 Authentication.SignUp.Description.UnderAgeAlert,คุณมีอายุไม่ถึงเกณฑ์ขั้นต่ำที่กำหนดไว้ในการเล่น Roblox
+Authentication.SignUp.Description.UsernameChanged,เรียบร้อยแล้ว! บัญชีของคุณพร้อมใช้งานและเชื่อมโยงกับ {platform} แล้ว เกิดใหม่ตอนนี้เลย แล้วมาดูชื่อผู้ใช้ที่อัปเดตในเกมกัน หรือจะใช้ในครั้งต่อไปก็ได้
 Authentication.SignUp.Description.UsernameHelp,นี่คือชื่อที่จะปรากฎต่อผู้ใช้คนอื่นๆ บน Roblox โปรดจำชื่อผู้ใช้ของคุณเพื่อการลงชื่อเข้าใช้ในอนาคต
 Authentication.SignUp.Description.UsernameHelpV2,ข้อมูลนี้จะใช้ในการลงชื่อเข้าใช้และแสดงให้ผู้อื่นเห็น จึงควรตั้งชื่อที่จำง่าย
 Authentication.SignUp.Description.UsernameRule1,ใช้ตัวอักษร 3-20 ตัว
 Authentication.SignUp.Description.UsernameRule2,"อนุญาตให้ใช้เพียงตัวอักษร (a-z), ตัวเลข (0-9) และขีดล่าง (_) เท่านั้น"
+Authentication.SignUp.Description.UsernameUnchanged,คุณเข้าร่วมแล้ว! บัญชีของคุณพร้อมใช้งานและเชื่อมโยงกับ {platform} แล้ว มาแชทกับเพื่อนและเล่นเกม Roblox นับล้านกัน
 Authentication.SignUp.Description.VerificationLinkingText,บัญชี Roblox ของคุณจะเชื่อมโยงกับบัญชีสำหรับ {platform} คุณสามารถยกเลิกการเชื่อมโยงได้ตลอดเวลาที่หน้าจอการตั้งค่า โดยอาจมีช่วงคูลดาวน์ก่อนที่จะสามารถเชื่อมโยงกับบัญชีสำหรับ {platform} ได้ การคลิกที่ลงทะเบียน จะถือว่าคุณยอมรับข้อกําหนดการใช้งานรวม ซึ่งรวมถึงข้อกำหนดการใช้อนุญาโตตุลาการและรับทราบถึงนโยบายความเป็นส่วนตัว
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,บัญชี Roblox ของคุณจะเชื่อมโยงกับบัญชี Roblox ของคุณจะเชื่อมโยงกับบัญชีสำหรับ {platform}  คุณสามารถยกเลิกการเชื่อมโยงได้ตลอดเวลาที่หน้าจอการตั้งค่า โดยอาจมีช่วงคูลดาวน์ก่อนที่จะสามารถเชื่อมโยงกับบัญชี Roblox ของคุณจะเชื่อมโยงกับบัญชีสำหรับ {platform}  ได้ การคลิก{ctaButton} จะถือว่าคุณยอมรับข้อกําหนดการใช้งานรวม ซึ่งรวมถึงข้อกำหนดการใช้อนุญาโตตุลาการและรับทราบถึงนโยบายความเป็นส่วนตัว
 Authentication.SignUp.Description.VerificationPage,"การคลิกที่ ""ลงทะเบียน"" จะถือว่าคุณยอมรับข้อกำหนดการใช้งานซึ่งรวมถึงข้อกำหนดการใช้อนุญาโตตุลาการและรับทราบถึงนโยบายความเป็นส่วนตัว"
@@ -475,6 +481,7 @@ Authentication.SignUp.Header.CreatePasswordOrPasskey,สวัสดี {usernam
 Authentication.SignUp.Header.CreatedAccountChooseSignin,เราสร้างบัญชีให้คุณแล้ว เลือกวิธีที่คุณต้องการลงชื่อเข้าใช้
 Authentication.SignUp.Header.GenderPage6,ขั้นสุดท้าย เลือกเพศของคุณ (ไม่บังคับ)
 Authentication.SignUp.Header.PleaseTryAgain,กรุณาลองใหม่อีกครั้ง
+Authentication.SignUp.Header.SetUpYourRobloxAccount,ตั้งค่าบัญชี Roblox ของคุณ
 Authentication.SignUp.Header.UsernamePage4,ต่อไปเป็นการสร้างชื่อผู้ใช้
 Authentication.SignUp.Header.WhatIsYourBirthday,วันเกิดของคุณคือเมื่อไหร่?
 Authentication.SignUp.Heading.CannotSignUp,ไม่สามารถลงทะเบียนได้
@@ -498,6 +505,7 @@ Authentication.SignUp.Label.EmailAddress,
 Authentication.SignUp.Label.EnterYourEmail,กรอกอีเมลของคุณ
 Authentication.SignUp.Label.EnterYourParentsEmail,กรอกอีเมลของผู้ปกครองคุณ
 Authentication.SignUp.Label.Error.MinimumAge5,ผู้ใช้ใหม่จะต้องมีอายุมากกว่าห้าปี
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,ต้องมีอายุมากกว่านี้เพื่อเล่นเกมนี้
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,มีคนใช้ชื่อผู้ใช้นี้ไปแล้ว
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,ชื่อผู้ใช้ต้องไม่เริ่มหรือลงท้ายด้วย _
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,ชื่อผู้ใช้ต้องประกอบด้วยตัวหนังสือ ตัวเลข และ _
@@ -553,12 +561,14 @@ Authentication.SignUp.PasswordErrorLength,มีความยาวระห�
 Authentication.SignUp.Response.AgedUpDisplayNameSetFirst,จำเป็นต้องตั้งชื่อก่อน
 Authentication.SignUp.Response.BirthdayMustBeSetFirst,ต้องระบุวันเกิดก่อน
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.ErrorTryAgain2,มีบางอย่างผิดปกติ โปรดลองอีกครั้ง
 Authentication.SignUp.Response.InvalidBirthday,วันเกิดไม่ถูกต้อง
 Authentication.SignUp.Response.InvalidEmail,ที่อยู่อีเมลไม่ถูกต้อง
 Authentication.SignUp.Response.InvalidPhoneNumber,หมายเลขโทรศัพท์ไม่ถูกต้อง
 Authentication.SignUp.Response.PasswordComplexity,โปรดสร้างรหัสผ่านที่ซับซ้อนมากกว่านี้
 Authentication.SignUp.Response.PhoneNumberAlreadyLinked,หมายเลขโทรศัพท์นี้เชื่อมโยงกับบัญชีอื่นอยู่แล้ว
 Authentication.SignUp.Response.UsernameMustBeSetFirst,ต้องระบุชื่อผู้ใช้ก่อน
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,พอตั้งค่าเสร็จ ก็เล่นต่อจากเดิมได้เลย
 Authentication.SignUp.Title,สวัสดี {username} โปรดสร้างรหัสผ่าน
 Authentication.TwoStepVerification.Action.Approve,อนุมัติ
 Authentication.TwoStepVerification.Action.ChangePassword,เปลี่ยนรหัสผ่าน
@@ -625,27 +635,27 @@ Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,แอนิเมช�
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,แอนิเมชันสั้นเกินไป ({duration} วินาที) แอนิเมชันท่าทางต้องมีความยาวมากกว่า {minLength} วินาที
 Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,การจัดวางชิ้นส่วน Cage {cageName} ไม่ถูกต้อง: {upperPart} ไม่ได้อยู่เหนือ {lowerPart} ในตำแหน่งที่ถูกต้อง
 Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,ชิ้นส่วน {partName} ใน Cage {cageName} มีจุดตัด {actualCount} จุด โดยควรมีประมาณ {expectedCount} จุด ซึ่งอาจบ่งชี้ว่ามีรูปทรงเรขาคณิตในบริเวณดังกล่าวของร่างกายไม่ครบหรือซ้ำกัน
+Common.UGCValidation.ErrorLabel.AQSFail_CageUV,"{cage_name} มีค่า UV ที่ไม่ถูกต้อง ซึ่งไม่ตรงกับแม่แบบ โดยมีค่า UV ที่ไม่ถูกต้อง {incorrect_uv_count} รายการ (ไม่มีการอ้างอิง {unreferenced_vertex_count} รายการ, ไม่ใช่แม่แบบ {non_template_uv_count} รายการ, การแมปซ้ำกัน {duplicate_mapping_count} รายการ) มีจุดตัดที่ไม่ตรงกับแม่แบบ {unmatched_template_count} รายการ โปรดแก้ไขค่า UV ของ Cage ให้ตรงกับแม่แบบ"
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,ร่างกายของคุณมีองค์ประกอบเมชขนาดเล็กที่ไม่เชื่อมต่อกัน (ส่วนย่อยของเมช) โปรดลบรูปทรงที่ลอยอยู่ออกและตรวจสอบให้แน่ใจว่าส่วนต่างๆ ของเมชทั้งหมดเชื่อมต่อกันอย่างถูกต้อง
-Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,คุณภาพของทรัพยากร: {partName} มีองค์ประกอบที่ไม่เชื่อมต่อกัน {num_disconnected_components} ชิ้น ซึ่งเกินจำนวนสูงสุดที่กำหนดไว้ที่ {max_disconnected_components} ชิ้น
-Common.UGCValidation.ErrorLabel.AQSInputDataError,ไม่สามารถคำนวณคะแนนคุณภาพได้อย่างถูกต้องเนื่องจากข้อมูลที่ป้อนไม่ถูกต้องหรือไม่สมบูรณ์ โปรดตรวจสอบโมเดลหรือกรอกรายงานจุดบกพร่อง
-Common.UGCValidation.ErrorLabel.AQSInternalError,สร้างคะแนนไม่ได้เนื่องจากข้อผิดพลาดด้านคุณภาพของเนื้อหา โปรดตรวจสอบความถูกต้องของข้อมูลที่ป้อนและลองอีกครั้ง หรือรายงานจุดบกพร่อง
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,"คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: Cage กับเมชมีคะแนนระยะห่าง {score}, Cage ด้านนอกกับเมชมีระยะห่างสูงสุด {max_distance} และจุดตัดของ Cage ด้านนอก {negative_sdf_percent}% อยู่ภายในเมชเรนเดอร์"
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,"คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: Cage ของร่างกายมีคะแนนระยะห่าง {score}, Cage ของร่างกายกับเมชมีระยะห่างสูงสุด {max_distance} และจุดตัดของ Cage ของร่างกาย {negative_sdf_percent}% อยู่ภายในเมชของร่างกาย"
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: Cage ของศีรษะมีคะแนนระยะห่าง {score}, Cage ของศีรษะกับเมชมีระยะห่างสูงสุด {max_distance} และจุดตัดของ Cage ของศีรษะ {negative_sdf_percent}% อยู่ภายในเมชของศีรษะ"
-Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: Cage มีคะแนนความเกี่ยวข้อง {score} โดย {irrelevant_percent}% ของจุดตัดของ Cage ด้านนอกที่มีการแก้ไขไม่ครอบคลุมไอเท็มเสริม
-Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: Cage {cage_name} มีคะแนน UV {score} จำนวน UV ที่ไม่ถูกต้อง: {incorrect_uv_count}
-Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,คุณภาพของทรัพยากร: {partName} มีสามเหลี่ยมเสื่อมสภาพ {degenerate_triangle_percent}% (คะแนน: {score})
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: การแสดงออกของศีรษะแบบเคลื่อนไหวมีคะแนน {score}
-Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"คุณภาพของทรัพยากร: การกำหนดค่าข้อต่อได้คะแนน {score} (ข้อต่อ: {joint_number}, มือซ้าย: {left_hand_joint_number}, มือขวา: {right_hand_joint_number})"
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,คุณภาพของทรัพยากร: {partName} มีส่วนย่อยขนาดเล็กที่ไม่เชื่อมต่อกัน {num_small_volume_islands} ส่วน จากองค์ประกอบ  {num_disconnected_components} ชิ้น (คะแนน: {score})
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,คุณภาพของทรัพยากร: {partName} มีปัญหาเมชซ้อนทับกัน (คะแนน: {score})
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,คุณภาพของทรัพยากร: เมช {partName} ปิดไม่สนิท ({boundary_edges_percent}% ของขอบเขต)
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: เมชมีคะแนนการครอบคลุม {score} โดยจุดตัดของเมช {mesh_outside_outer_cage_percent}% อยู่นอก Cage ด้านนอก
-Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,ไม่สามารถคำนวณคะแนนคุณภาพของทรัพยากรสำหรับ {measureName} ได้ เนื่องจากข้อมูลที่ป้อนไม่ครบถ้วนหรือไม่ถูกต้อง แต่ไม่บล็อคการอัปโหลดของคุณ
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,คุณภาพของทรัพยากร: พื้นผิว {textureName} มีความซับซ้อนต่ำ (คะแนน: {score})
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,คุณภาพของทรัพยากร: พื้นผิว {textureName} มีความละเอียด {texture_width}x{texture_height} (คะแนน: {score})
+Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,{partName} มีองค์ประกอบที่ไม่เชื่อมต่อกัน {num_disconnected_components} ชิ้น ซึ่งเกินจำนวนสูงสุดที่กำหนดไว้ที่ {max_disconnected_components} ชิ้น
+Common.UGCValidation.ErrorLabel.AQSInternalError,ไม่สามารถตรวจสอบให้เสร็จสิ้นได้เนื่องจากข้อผิดพลาดภายใน โปรดตรวจสอบความถูกต้องของข้อมูลที่ป้อนแล้วลองอีกครั้ง หรือรายงานจุดบกพร่อง
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,Cage ด้านนอกไม่แนบไปกับเมชเรนเดอร์ ระยะห่างสูงสุดระหว่าง Cage ด้านนอกกับเมชคือ {max_distance} และจุดยอดของ Cage ด้านนอก {negative_sdf_percent}% อยู่ภายในเมชเรนเดอร์
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,Cage ของร่างกายไม่แนบไปกับเมชของร่างกาย ระยะห่างสูงสุดระหว่าง Cage ของร่างกายกับเมชคือ {max_distance} และจุดยอดของ Cage ร่างกาย {negative_sdf_percent}% อยู่ภายในเมชของร่างกาย
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,Cage ของศีรษะไม่แนบไปกับเมชของศีรษะ ระยะห่างสูงสุดระหว่าง Cage ของศีรษะกับเมชคือ {max_distance} และจุดยอดของ Cage ศีรษะ {negative_sdf_percent}% อยู่ภายในเมชของศีรษะ
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,จุดยอดของ Outer Cage ที่ปรับแก้แล้วจำนวน {irrelevant_percent}% ไม่ได้ครอบคลุมไอเท็มเสริม โปรดปรับ Cage ให้พอดีกับรูปทรงของไอเท็มเสริมมากขึ้น
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"{cage_name} มีค่า UV ที่ไม่ถูกต้อง โดยมีค่า UV ที่ไม่ถูกต้อง {incorrect_uv_count} รายการ (ไม่มีการอ้างอิง {unreferenced_vertex_count} รายการ, ไม่ตรงกับแม่แบบ {non_template_uv_count} รายการ, แมปซ้ำ {duplicate_mapping_count} รายการ) และมีจุดยอดของแม่แบบที่ไม่ตรงกัน {unmatched_template_count} รายการ"
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} มีสามเหลี่ยมเสื่อมสภาพ {degenerate_triangle_percent}%
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"ศีรษะแบบเคลื่อนไหวมีปัญหาด้านคุณภาพการแสดงสีหน้า ปิดตาซ้าย: {left_eye_close}, ปิดตาขวา: {right_eye_close}, อ้าปาก: {mouth_open}, ดีใจ: {is_happy}, เศร้า: {is_sad}"
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"การกำหนดค่าข้อต่อผิดปกติ จำนวนข้อต่อทั้งหมด:{joint_number}, ข้อต่อมือซ้าย: {left_hand_joint_number}, ข้อต่อมือขวา: {right_hand_joint_number}"
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName} มีเมชขนาดเล็กที่ไม่เชื่อมต่อกัน {num_small_volume_islands} ส่วนจากองค์ประกอบทั้งหมด {num_disconnected_components} ส่วน โปรดลบรูปทรงที่ลอยอยู่ออก
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,{partName} มีรูปเรขาคณิตที่ไม่ใช่แมนิโฟลด์ โปรดตรวจสอบผิวหน้าที่ไม่อยู่ในระนาบเดียวกัน พื้นผิวที่ตัดกันเอง หรือขอบที่มีผิวหน้าใช้ร่วมกันมากกว่า 2 ด้าน
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,เมช {partName} ปิดไม่สนิท ({boundary_edges_percent}% ของขอบเขต)
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,จุดยอดของเมช {mesh_outside_outer_cage_percent}% อยู่นอก Cage ด้านนอก โปรดปรับ Cage ด้านนอกให้ครอบคลุมเมชเรนเดอร์ทั้งหมด
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,ไม่สามารถคำนวณข้อมูลการตรวจสอบความถูกต้องสำหรับ {measureName} ได้ เนื่องจากข้อมูลที่ป้อนไม่ครบถ้วนหรือไม่ถูกต้อง แต่ไม่เป็นการบล็อคการอัปโหลดของคุณ
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,พื้นผิว {textureName} มีความซับซ้อนต่ำ จึงอาจมีรายละเอียดหรือความแตกต่างไม่เพียงพอ
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,พื้นผิว {textureName} มีความละเอียดต่ำที่ {texture_width}x{texture_height} ลองใช้พื้นผิวที่มีความละเอียดสูงขึ้น
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,คุณภาพของทรัพยากร: {partName} มีหน้าสามเหลี่ยมที่ตัดกัน {intersecting_tri_face_percent}% (คะแนน: {score})
-Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,คุณภาพของทรัพยากร: {partName} มีจุดตัด UV นอกขอบเขต {uv_outside_bound_vert_percent}% (คะแนน: {score})
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName} มีจุดยอด UV นอกขอบเขต [0,1] {uv_outside_bound_vert_percent}%"
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,คุณภาพของทรัพยากร: {partName} มีจุดตัดที่คล้ายกัน {similar_vertex_percent}% (คะแนน: {score})
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,ต้องวางจุดเชื่อมต่อไอเท็มเสริม '{AttachmentName}' ใน '{PartName}' ไว้ใกล้ๆ พื้นผิวของเมช ตำแหน่งปัจจุบัน [{CurrentPosition}] อยู่นอกพื้นที่ที่ถูกต้อง โปรดย้ายไปอยู่ใกล้ๆ [{ClosestValidPosition}]
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,Handle นี้ Skin อยู่กับข้อต่อ {jointName} ซึ่งไม่ได้เป็นส่วนหนึ่งของ Schema ที่อนุญาต จะอนุญาตเฉพาะข้อต่อแบบ R15 มาตรฐานและข้อต่อถ่ายโอนการ Skinning เท่านั้น
@@ -715,18 +725,19 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,ศีรษะแบบเค
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,ตรวจไม่พบท่าปิดตาข้างขวาสำหรับศีรษะแบบเคลื่อนไหว โปรดปรับจุดสังเกต Cage สำหรับตาขวาให้ตรงกับตำแหน่งของตาขวาบนศีรษะ และตรวจสอบให้แน่ใจว่าปิดตาข้างขวาได้
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,ตรวจไม่พบท่าหน้าบึ้งสำหรับศีรษะแบบเคลื่อนไหว โปรดปรับจุดสังเกต Cage สำหรับปากให้ตรงกับตำแหน่งของปากบนศีรษะ และตรวจสอบให้แน่ใจว่าทำหน้าบึ้งได้
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,พื้นที่การเปล่งแสงสูงกว่าเกณฑ์
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName} เปล่งแสงมากเกินไป พื้นที่เปล่งแสง × ความเข้มเกินขีดจำกัด (ปัจจุบันอยู่ที่ {emissivePercentage}% และต้องไม่เกิน {maxEmissivePercentage}%) โปรดลดขนาดพื้นที่เปล่งแสงหรือลดค่า EmissiveStrength ลง
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,พื้นที่การเปล่งแสงเกินขีดจำกัด
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{assetTypeName} เปล่งแสงมากเกินไป พื้นที่เปล่งแสง × ความเข้มเกินขีดจำกัด (ปัจจุบันอยู่ที่ {emissiveArea} ต้องไม่เกิน {maxEmissiveArea}) โปรดลดขนาดพื้นที่เปล่งแสงหรือลดค่า EmissiveStrength ลง
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,ทรัพยากรนี้ใช้แผนที่แบบเปล่งแสง ซึ่งมีให้เฉพาะครีเอเตอร์ในโปรแกรมสำหรับครีเอเตอร์ที่เชื่อได้เท่านั้น โปรดลบเนื้อหาแผนที่แบบเปล่งแสงออกทั้งหมด หรือเข้าร่วมโปรแกรมก่อนอัปโหลด
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,แอนิเมชันที่เผยแพร่ไม่มีค่าระยะการขยับชิ้นส่วนสูงสุดที่ถูกต้อง โปรดเผยแพร่แอนิเมชันอีกครั้ง
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,แอนิเมชันที่เผยแพร่ไม่มีมาร์กเกอร์ท่าทาง UGC ที่ถูกต้อง โปรดเผยแพร่แอนิเมชันอีกครั้ง
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,ไม่สามารถคำนวณระยะการขยับชิ้นส่วนสูงสุดจากข้อมูลแอนิเมชันที่เผยแพร่ได้ โปรดเผยแพร่แอนิเมชันอีกครั้ง
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,แอนิเมชันที่เผยแพร่ระบุระยะการขยับชิ้นส่วนสูงสุดไว้ที่ {taggedTranslation} Stud แต่ข้อมูลแอนิเมชันคำนวณได้ {calculatedTranslation} Stud โปรดเผยแพร่แอนิเมชันอีกครั้ง
+Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,ต้องวางศีรษะให้อยู่เหนือ UpperTorso ศูนย์กลางของศีรษะอยู่ต่ำกว่าส่วนบนของลำตัว ซึ่งบ่งชี้ว่าเมชของศีรษะยุบตัวหรือวางผิดตำแหน่ง
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,คุณสมบัติ InternalOverrideFACSData บน FaceControls ต้องว่างเปล่าเมื่ออัปโหลด
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,ตรวจพบ FACs ที่ทำให้ศีรษะที่คุณทำให้ใหญ่ขึ้นเป็น {modPercent}% แต่การปรับเปลี่ยนศีรษะนั้นขัดต่อนโยบายของมาร์เก็ตเพลสเกี่ยวกับการเคลื่อนไหวใบหน้า
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,ตรวจพบ FACs ที่ทำให้ศีรษะที่คุณทำเล็กลงเหลือ {modPercent}% แต่การปรับเปลี่ยนศีรษะนั้นขัดต่อนโยบายของมาร์เก็ตเพลสเกี่ยวกับการเคลื่อนไหวใบหน้า
-Common.UGCValidation.ErrorLabel.FailureWithoutReason,ตรวจสอบยืนยันไม่สำเร็จโดยไม่ทราบสาเหตุ โปรดลองอีกครั้งหรือรายงานจุดบกพร่องหากยังคงประสบปัญหาอยู่
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,รูปแบบการอัปโหลดไม่ตรงกับโครงสร้างโฟลเดอร์ที่คาดไว้ โปรดลองอีกครั้งหรือรายงานจุดบกพร่อง
-Common.UGCValidation.ErrorLabel.HeadNotDynamic,ต้องตั้งค่าศีรษะแบบเคลื่อนไหวในมาร์เก็ตเพลสให้มีการเคลื่อนไหวหลักของใบหน้าที่เหมาะสม แต่เราตรวจไม่พบการเปลี่ยนแปลงอย่างมีนัยสำคัญ
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,กระดูก {bonePath} อยู่ห่างจาก Meshpart {partName} มากเกินไป โปรดปรับให้อยู่ใกล้ขอบเขตขนาดของ Meshpart มากขึ้น
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,กระดูก {bonePath} อยู่ใกล้กับส่วนหลักมากเกินไป โปรดปรับตำแหน่งของกระดูกเล็กน้อย
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,กระดูก {bonePath} มีคุณสมบัติการแปรสภาพ แต่ยังไม่เปิดให้อัปโหลดในมาร์เก็ตเพลส โปรดรีเซ็ตค่าเป็น CFrame ตั้งต้น
@@ -772,8 +783,6 @@ Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,ต้องวางจุดเชื่อมต่อ Rig '{AttachmentName}' ใน '{PartName}' ใกล้ขอบเขตข้อต่อที่ชิ้นส่วนร่างกายนี้เชื่อมต่อกับส่วนที่อยู่ติดกัน ตำแหน่งปัจจุบัน [{CurrentPosition}] อยู่ห่างจากระนาบการเชื่อมต่อเกินไป โปรดย้ายไปอยู่ใกล้ๆ [{ClosestValidPosition}]
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,หากต้องการอัปโหลดทรัพยากรไปยัง Roblox คุณต้องเลือก 1 อินสแตนซ์และประเภทการอัปโหลดที่เกี่ยวข้อง
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,ทรัพยากรนี้มีขนาดใหญ่เกินกว่าจะอัปโหลด ({sizeBytes} ไบต์เกินขนาดสูงสุดที่กำหนดไว้ที่ {maxSizeBytes} ไบต์) โปรดลดขนาดแล้วลองอีกครั้ง
-Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,อินสแตนซ์ {ProblematicDescendantPath} ไม่ควรมีแท็ก
-Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,มีการใช้สตริงแสดงข้อผิดพลาดของการทดสอบครั้งที่สองในการตรวจสอบยืนยันเวิร์กโฟลว์การซิงค์การแปลแบบ Hub-first ตั้งแต่ต้นจนจบ
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,Meshpart ของศีรษะมีการเคลื่อนไหวใบหน้าสำหรับ {jointName} ซึ่งไม่สามารถใช้ใน FACs ได้ โปรดตั้งชื่อข้อต่อนี้ใหม่แล้วนำเข้าศีรษะของคุณอีกครั้ง
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,ส่วนของร่างกาย {partName} Skin อยู่กับข้อต่อเสมือน {jointName} ซึ่งไม่ได้เป็นส่วนหนึ่งของ Schema R15plus
 Common.VerifiedParentalConsent.Action.Cancel,
@@ -851,6 +860,8 @@ CommonUI.Controls.Label.Wednesday,วันพุธ
 CommonUI.Controls.Label.WednesdayAbbreviated,เรา
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,ไม่พบผลการค้นหา
+CommonUI.Features.Action.ClassicThemeSunsetGetPlus,สมัคร Plus
+CommonUI.Features.Action.ClassicThemeSunsetManage,
 CommonUI.Features.Action.ClassicUnlockGetTheme,รับธีม
 CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
@@ -858,6 +869,7 @@ CommonUI.Features.Action.Go,ไป
 CommonUI.Features.Action.LessLowercase,แสดงน้อยลง
 CommonUI.Features.Action.MoreLowercase,แสดงเพิ่ม
 CommonUI.Features.Action.Send,
+CommonUI.Features.Heading.ClassicThemeSunset,ขอบคุณที่ร่วมฉลองครบรอบ 20 ปีของ Roblox
 CommonUI.Features.Heading.ClassicUnlock,Roblox ฉลองครบรอบ 20 ปี
 CommonUI.Features.Heading.GameDetails,รายละเอียดประสบการณ์
 CommonUI.Features.Label.About,เกี่ยวกับ
@@ -877,6 +889,8 @@ CommonUI.Features.Label.Catalog,แค็ตตาล็อก Roblox
 CommonUI.Features.Label.ChannelWithChannelName,แชนเนล: {channelName}
 CommonUI.Features.Label.Charts,อันดับ
 CommonUI.Features.Label.Chat,แชท
+CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,สมาชิก Roblox Plus จะยังคงใช้ธีมคลาสสิกต่อได้ เฉพาะไอคอนแอปฉลองครบรอบเท่านั้นที่จะยกเลิก
+CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,ผู้ใช้ที่เป็นสมาชิก Roblox Plus จะยังคงใช้ธีมคลาสสิกต่อได้ เฉพาะไอคอนแอปฉลองครบรอบเท่านั้นที่จะยกเลิก
 CommonUI.Features.Label.ClassicUnlockDescription,สนุกกับธีมคลาสสิกในเวลาจำกัด
 CommonUI.Features.Label.ClassicUnlockManagementSnackbar,จัดการธีมคลาสสิกในการตั้งค่า
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
@@ -1098,6 +1112,7 @@ CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCoun
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 ทักทายทุกคนที่กำลังเล่นอยู่!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,เฉพาะเพื่อนที่เชื่อได้เท่านั้นที่แชทกับคุณได้
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,แชทกับผู้ใช้คนอื่นๆ ในเกมนี้ เฉพาะผู้ใช้ในกลุ่มอายุใกล้เคียงเท่านั้นที่จะแชทกับคุณได้
+CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,แชทกับผู้ใช้คนอื่นๆ ในเกมนี้!
 CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ มาร่วมสนุกกัน! ทักทายทุกคนที่กำลังเล่นอยู่!
 CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 มีผู้เล่น {RBX_COUNT} คนในแชท ทักทายกันหน่อย!
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,กดค้างไว้เพื่อใช้แบบแฮนด์ฟรี
@@ -1434,7 +1449,7 @@ Feature.AppealsPortal.Description.AppealDenied.Multiple,เราตรวจส
 Feature.AppealsPortal.Description.AppealDenied.None,เราตรวจสอบคำอุทธรณ์ของคุณอย่างรอบคอบแล้ว และยังคงเห็นว่ากิจกรรมของคุณละเมิดกฎที่ระบุไว้ในมาตรฐานชุมชนของเรา เราเข้าใจดีว่าคำตัดสินนี้อาจทำให้คุณผิดหวัง และขอขอบคุณที่สละเวลาส่งคำอุทธรณ์เข้ามา
 Feature.AppealsPortal.Description.AppealDenied.Singular,เราตรวจสอบคำอุทธรณ์ของคุณเกี่ยวกับ{singleViolation}อย่างรอบคอบแล้ว และยังคงเห็นว่ากิจกรรมของคุณละเมิดกฎที่ระบุไว้ในมาตรฐานชุมชนของเรา เราเข้าใจดีว่าคำตัดสินนี้อาจทำให้คุณผิดหวัง และขอขอบคุณที่สละเวลาส่งคำอุทธรณ์เข้ามา
 Feature.AppealsPortal.Description.AppealDenied.V2,เราตรวจสอบคำอุทธรณ์ของคุณเกี่ยวกับ{violations}อย่างรอบคอบแล้ว และยังคงเห็นว่ากิจกรรมของคุณละเมิดกฎที่ระบุไว้ในมาตรฐานชุมชนของเรา ขอขอบคุณที่ส่งคำอุทธรณ์เข้ามา
-Feature.AppealsPortal.Description.AppealDisclosures,ข้อมูลเพิ่มเติมเกี่ยวกับการอุทธรณ์: {link}เรียนรู้เพิ่มเติมและตรวจสอบการเปิดเผยข้อมูล{linkEnd}
+Feature.AppealsPortal.Description.AppealDisclosures,{link}ดูแนวทางการอุทธรณ์และการเปิดเผยข้อมูล{linkEnd}
 Feature.AppealsPortal.Description.AppealIneligible,คุณไม่มีสิทธิ์อุทธรณ์คำตัดสินนี้อีกต่อไป โปรดตรวจสอบยืนยันตัวตนของคุณแล้วลองอีกครั้ง
 Feature.AppealsPortal.Description.AppealReceived,เราจะแจ้งผลการพิจารณาให้คุณทราบภายในประมาณ 5 วันทำการ ขึ้นอยู่กับความซับซ้อนของปัญหา ขอขอบคุณที่ส่งคำอุทธรณ์เข้ามา
 Feature.AppealsPortal.Description.AppealReceived.Plural,เราจะแจ้งผลการพิจารณาให้คุณทราบภายในประมาณ {number} วันทำการ ขึ้นอยู่กับความซับซ้อนของปัญหา ขอขอบคุณที่ส่งคำอุทธรณ์เข้ามา
@@ -1636,7 +1651,7 @@ Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,กู้คืนอวาตาร์ที่บันทึกล่าสุด
 Feature.Avatar.Action.Revert,แปลงกลับ
 Feature.Avatar.Action.Rotate,หมุน
-Feature.Avatar.Action.Save,บันทึก
+Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,บันทึกเป็นรายการใหม่
 Feature.Avatar.Action.Select,เลือก
 Feature.Avatar.Action.SelectMultipleItems,เลือกหลายไอเท็ม
@@ -1848,7 +1863,7 @@ Feature.Avatar.Label.FullBody,ร่างกายทุกส่วน
 Feature.Avatar.Label.FullMasks,มาสก์เต็มหน้า
 Feature.Avatar.Label.FullPair,ครบคู่
 Feature.Avatar.Label.Gear,อุปกรณ์
-Feature.Avatar.Label.GenericSetError,มีบางอย่างผิดปกติ โปรดลองอีกครั้ง
+Feature.Avatar.Label.GenericSetError,
 Feature.Avatar.Label.GetLookQuestion,คุณต้องการรับเครื่องแต่งกายนี้ฟรีใช่หรือไม่?
 Feature.Avatar.Label.GetOutfitMultiple,คุณต้องการรับ [{numItems}] ไอเท็มฟรีใช่หรือไม่?
 Feature.Avatar.Label.GetOutfitOne,คุณต้องการรับ [1] ไอเท็มฟรีใช่หรือไม่?
@@ -2162,6 +2177,7 @@ Feature.Avatar.UnavailableItems.BodyText,"{category} ""{item}"" อยู่ร�
 Feature.Avatar.UnavailableItems.BodyTextMultiple,ไอเท็มต่อไปนี้อยู่ระหว่างการตรวจสอบและไม่สามารถใช้งานได้ในขณะนี้{lineBreak}{items}{lineBreak}หากไอเท็มนี้ถูกลบออกจาก Roblox คุณจะได้รับเงินคืนภายใน 1 สัปดาห์
 Feature.Avatar.UnavailableItems.ConfirmText,
 Feature.Avatar.UnavailableItems.TitleText,ไอเท็มไม่พร้อมใช้งาน
+Feature.Avatar.profile.tooltip,โปรไฟล์ของคุณ
 Feature.Avatar.tooltip.ExpiredItemsFilter,ค้นหาไอเท็มที่มีตัวเลือกการจำกัดเวลาที่หมดอายุ
 Feature.AvatarBundleReceivedInteractiveAlert.Action.Ok,
 Feature.AvatarBundleReceivedInteractiveAlert.Action.TakeALook,ลองดูสิ
@@ -2242,7 +2258,7 @@ Feature.Build.Action.UpdateRating,อัปเดตระดับความ�
 Feature.Build.Action.UpdateWithChanges,อัปเดตตามการเปลี่ยนแปลง
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,ดูการใช้งาน
-Feature.Build.Analytics.AnalyzeChatPrompt,{analyzeName} ของฉันในช่วง {days} วันที่ผ่านมาเป็นอย่างไร?
+Feature.Build.Analytics.AnalyzeChatPrompt,วิเคราะห์{analyzeName}ของฉันในช่วง {days} วันที่ผ่านมาให้หน่อย ทำไมตัวชี้วัดนี้จึงสำคัญ และฉันจะนำไปปรับปรุงอย่างไรดี?
 Feature.Build.Analytics.AnalyzeName.Arppu,รายรับเฉลี่ยต่อผู้ใช้ที่ชำระเงิน
 Feature.Build.Analytics.AnalyzeName.D1Retention,จำนวนผู้ที่กลับมาใช้งานในวันที่ 1
 Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,จำนวนผู้ใช้งานต่อวัน
@@ -2294,9 +2310,13 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,การเยี่ยมชม
 Feature.Build.Content.NewGame,เกมใหม่
 Feature.Build.Description.ActivateDeveloperProduct,ลงขายผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
+Feature.Build.Description.AdActive,โฆษณาของคุณกำลังแสดงอยู่ ดูว่าเข้าถึงผู้เล่นกี่คนแล้ว
 Feature.Build.Description.AdCampaignModerationReview,ทีมกลั่นกรองของ Roblox จะตรวจสอบแคมเปญโฆษณาทั้งหมด โดยกระบวนการนี้อาจใช้เวลาถึง 24 ชั่วโมง
 Feature.Build.Description.AdCampaignSheetRunDates,ใช้ {startDate} – {endDate}
-Feature.Build.Description.AdvertisingAgreement,การดำเนินการต่อถือว่าคุณยอมรับ{advertisingTermsStart}ข้อกำหนดการโฆษณา{advertisingTermsEnd}และ{advertisingStandardsStart}มาตรฐานการโฆษณาของ Roblox{advertisingStandardsEnd}
+Feature.Build.Description.AdComplete,โฆษณาของคุณสิ้นสุดลงแล้ว ตรวจสอบผลลัพธ์เลย
+Feature.Build.Description.AdInReview,โฆษณาของคุณอยู่ระหว่างการตรวจสอบและมีกำหนดแสดงตั้งแต่วันที่ {startDate} – {endDate}
+Feature.Build.Description.AdModerationReview,ทีมกลั่นกรองของ Roblox จะตรวจสอบโฆษณาทั้งหมด ซึ่งอาจใช้เวลาถึง 24 ชั่วโมง
+Feature.Build.Description.AdvertisingAgreement,"การเลือก ""สร้าง"" ถือว่าคุณยอมรับ{advertisingTermsStart}ข้อกำหนดการโฆษณา{advertisingTermsEnd}และ{advertisingStandardsStart}มาตรฐานการโฆษณา{advertisingStandardsEnd}ของ Roblox"
 Feature.Build.Description.ArchiveRemoval,หากเก็บเกมนี้ถาวร เกมจะถูกลบออกจาก Build แต่คุณยังสามารถเข้าถึงและกู้คืนเกมได้จากศูนย์กลางครีเอเตอร์หรือ Roblox Studio
 Feature.Build.Description.AutoBuyUsage,ใช้ Robux ของคุณเพื่อซื้อโควต้าการใช้งาน Build เพิ่มเติมโดยอัตโนมัติในขณะที่คุณสร้าง คุณสามารถกำหนดวงเงินใช้จ่ายต่อวันได้ตลอดเวลา
 Feature.Build.Description.BoostAudienceForPlays,เพิ่มกลุ่มเป้าหมายของคุณเพื่อให้มีคนเล่นมากขึ้น
@@ -2311,10 +2331,12 @@ Feature.Build.Description.DeactivateDeveloperProduct,เลิกขายผล
 Feature.Build.Description.EarnedRobuxAppliedFirst,หากคุณได้รับ Robux จะมีการนำ Robux เหล่านั้นไปชำระค่าแคมเปญโฆษณาก่อน
 Feature.Build.Description.EnableBuildNotifs,เปิดการแจ้งเตือนในการตั้งค่าอุปกรณ์ของคุณเพื่อรับอัปเดตจาก Build
 Feature.Build.Description.FriendsLinkOnly,มีเพียงเพื่อนของคุณเท่านั้นที่สามารถเข้าถึงลิงก์นี้ได้ หากต้องการให้มีคนเล่นมากขึ้น ให้เปลี่ยนการตั้งค่ากลุ่มเป้าหมายของเกม
+Feature.Build.Description.GameConfiguration,เปลี่ยนวิธีขายไอเท็มและโปรโมตเกมของคุณ
 Feature.Build.Description.GameCreationDone,ฉันสร้างและเผยแพร่เกมของคุณเรียบร้อยแล้ว คุณสามารถเปิดเพื่อทดลองเล่นได้
 Feature.Build.Description.GameSavedPlaytest,ฉันสร้างเกมของคุณและบันทึกเวอร์ชันใหม่เรียบร้อยแล้ว คุณสามารถเปิดเพื่อทดลองเล่นได้
 Feature.Build.Description.HubSettings,จัดการการตั้งค่าทั้งหมดในศูนย์กลางครีเอเตอร์
 Feature.Build.Description.InviteFriendLimit,เชิญเพื่อนมาเล่นได้สูงสุด {MAX_INVITES} คนระหว่างที่คุณสร้าง
+Feature.Build.Description.LongAdCampaign,มีเวลามากขึ้นในการเข้าถึงผู้เล่นใหม่และทำให้ผู้เล่นกลับมาอีกครั้ง
 Feature.Build.Description.MakeAudienceAvail,เผยแพร่ประสบการณ์ของคุณเพื่อให้กลุ่มเป้าหมายนี้สามารถใช้งานได้
 Feature.Build.Description.ManageAppearance,จัดการวิธีแสดงเกมของคุณให้ผู้อื่นเห็น
 Feature.Build.Description.ManageDeveloperProduct,จัดการผลิตภัณฑ์นักพัฒนา
@@ -2329,6 +2351,8 @@ Feature.Build.Description.PlaytestLocked,คุณสามารถเริ่
 Feature.Build.Description.PlaytesterAccess,เชิญเพื่อนเป็นผู้ทดลองเล่นระยะแรก หรือเปลี่ยนการตั้งค่ากลุ่มเป้าหมายของเกมเพื่อให้ผู้ใช้มาเล่นมากขึ้น
 Feature.Build.Description.PricingRules,ตั้งกฎการตั้งราคา
 Feature.Build.Description.PrivateShare,เปลี่ยนการตั้งค่ากลุ่มเป้าหมายของเกมเพื่อแชร์
+Feature.Build.Description.PromoteGameFree,นำเสนอเกมของคุณให้ผู้เล่นเห็นมากขึ้นได้ในคลิกเดียว
+Feature.Build.Description.PromoteGamePaid,สร้างโฆษณาเพื่อเปิดโอกาสให้ผู้เล่นนับล้านคนเห็นเกมของคุณ
 Feature.Build.Description.PromoteGameWithAdCampaign,เพิ่มกลุ่มเป้าหมายของคุณด้วยแคมเปญโฆษณา {durationDays} วันและทำให้เกมของคุณเป็นที่รู้จัก
 Feature.Build.Description.RaiseLimitOrWait,เพิ่มวงเงิน Robux รายวันของคุณเพื่อสร้างต่อ หรือรอให้รีเซ็ตในวันพรุ่งนี้
 Feature.Build.Description.RatingAgreement,การเผยแพร่จะถือว่าคุณยอมรับว่าการจัดระดับเนื้อหานี้ถูกต้อง
@@ -2336,6 +2360,7 @@ Feature.Build.Description.RestoreLatest,เวอร์ชันนี้จะ�
 Feature.Build.Description.RevertToVersion,ยืนยันเพื่อย้อนการเปลี่ยนแปลงล่าสุดและกลับไปใช้เวอร์ชัน {VERSION}
 Feature.Build.Description.ShareLatest,แชร์ว่าเวอร์ชันล่าสุดของคุณมีอะไรเปลี่ยนแปลงไปบ้าง
 Feature.Build.Description.ShopButton,เพิ่มจุดเริ่มต้นการช็อปปิ้ง
+Feature.Build.Description.ShortAdCampaign,วิธีดูแบบเร็วๆ ว่าผู้เล่นคิดอย่างไรเกี่ยวกับเกมของคุณ
 Feature.Build.Description.UpdateDeveloperProduct,อัปเดตผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"คำอธิบายต้องมีความยาวไม่เกิน 1,000 อักขระ"
 Feature.Build.Error.DeveloperProductNameRequired,กรอกชื่อผลิตภัณฑ์
@@ -2351,6 +2376,7 @@ Feature.Build.Header.AccessSharing,การเข้าถึงและกา
 Feature.Build.Header.AllVersions,ทุกเวอร์ชัน
 Feature.Build.Header.ContentMaturity,ระดับความเหมาะสมของเนื้อหา
 Feature.Build.Header.CustomAnswer,คำตอบที่กำหนดเอง
+Feature.Build.Header.GameConfiguration,การกำหนดค่าเกม
 Feature.Build.Header.GameDetails,รายละเอียดเกม
 Feature.Build.Header.Overview,
 Feature.Build.Header.PastCampaigns,แคมเปญที่ผ่านมา
@@ -2394,6 +2420,7 @@ Feature.Build.Label.GamePlays,จำนวนการเล่นเกม
 Feature.Build.Label.GetMoreBuildUsage,รับโควต้าการใช้งาน Build เพิ่ม
 Feature.Build.Label.Hi,สวัสดี
 Feature.Build.Label.IconThumbnails,ไอคอนและภาพขนาดย่อ
+Feature.Build.Label.Images2D,ภาพ 2D
 Feature.Build.Label.InProgress,อยู่ระหว่างดำเนินการ
 Feature.Build.Label.InputNeeded,ต้องกรอกข้อมูล
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2403,9 +2430,12 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,การตั้งราคาแบบมีการจัดการ
 Feature.Build.Label.ManagedPricingMixed,ราคาคละกันในผลิตภัณฑ์ปัจจุบันทั้งหมด
 Feature.Build.Label.MaximizeForGamePlays,เพิ่มจำนวนการเล่นเกมให้สูงสุด
+Feature.Build.Label.Models3D,โมเดล 3D
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,ไม่จำกัด
 Feature.Build.Label.NotStarted,ยังไม่ได้เริ่ม
+Feature.Build.Label.Object,วัตถุ
+Feature.Build.Label.Objects3D,วัตถุ 3 มิติ
 Feature.Build.Label.OffSale,ไม่ได้วางขาย
 Feature.Build.Label.OnSale,กำลังวางขายอยู่
 Feature.Build.Label.Pending,รอดำเนินการ
@@ -2427,12 +2457,14 @@ Feature.Build.Label.ResetsMonthly,รีเซ็ตทุกเดือน
 Feature.Build.Label.ResetsWeekly,รีเซ็ตทุกสัปดาห์
 Feature.Build.Label.RestoredVersion,กู้คืน {VERSION} แล้ว
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
+Feature.Build.Label.SalesOptions,ตัวเลือกการขาย
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,ค้นหาเกม
 Feature.Build.Label.SearchTasks,ค้นหางาน
 Feature.Build.Label.SelectOption,
 Feature.Build.Label.ShopButton,ปุ่มร้านค้า
 Feature.Build.Label.ShopUi,UI ของร้านค้า
+Feature.Build.Label.Sounds,
 Feature.Build.Label.TargetAllRobloxPlayers,กำหนดเป้าหมายเป็นผู้เล่น Roblox ทั้งหมด
 Feature.Build.Label.Thinking,กำลังคิด
 Feature.Build.Label.Title,
@@ -2510,6 +2542,7 @@ Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.Video,
+Feature.Build.Label.World,โลก
 Feature.Build.Message.AccountRequirements,บัญชีของคุณมีคุณสมบัติไม่ตรงตามข้อกำหนดในการใช้ Build
 Feature.Build.Message.AccountTooNew,บัญชีของคุณยังใหม่เกินไปที่จะเผยแพร่ ลองอีกครั้งเมื่อบัญชีมีอายุ 2 วัน
 Feature.Build.Message.AdCampaignCreateFailed,ไม่สามารถสร้างแคมเปญของคุณได้ โปรดลองอีกครั้ง
@@ -2522,6 +2555,7 @@ Feature.Build.Message.AdsStatsEmpty,เพิ่มกลุ่มเป้า�
 Feature.Build.Message.AdsStatsEmptyFree,เพิ่มกลุ่มเป้าหมายของคุณด้วยแคมเปญโฆษณาฟรีและทำให้เกมของคุณเป็นที่รู้จัก
 Feature.Build.Message.AllFriendsAdded,คุณเชิญเพื่อนทุกคนมาเป็นผู้ทดลองเล่นระยะแรกแล้ว
 Feature.Build.Message.AnswerBuildQuestion,ตอบคำถามของ Build ด้านล่าง
+Feature.Build.Message.AssetDetailsUnavailable,รายละเอียดทรัพยากรไม่พร้อมใช้งาน
 Feature.Build.Message.AudienceIneligible,ไม่มีสิทธิ์เผยแพร่ให้กลุ่มเป้าหมายนี้
 Feature.Build.Message.BuildAccountBlocked,บัญชีของคุณไม่สามารถใช้ Build ได้ในขณะนี้
 Feature.Build.Message.BuildBusy,Build ยุ่งอยู่ โปรดรอสักครู่แล้วลองอีกครั้ง
@@ -2553,15 +2587,18 @@ Feature.Build.Message.InvitesLoadFailed,ไม่สามารถโหลด�
 Feature.Build.Message.LimitBelowSpend,วงเงินต้องไม่น้อยกว่า {ALREADY_SPENT} Robux ที่ใช้ไปแล้วในวันนี้
 Feature.Build.Message.LinkCopied,คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว
 Feature.Build.Message.LoadingVersions,กำลังโหลดประวัติเวอร์ชัน...
+Feature.Build.Message.NoAssetsFound,ไม่พบทรัพยากร
 Feature.Build.Message.NoCapturesAvailable,ไม่มีภาพที่จับ
 Feature.Build.Message.NoDescriptionProvided,ไม่มีคำอธิบาย
 Feature.Build.Message.NoFriendsToAdd,คุณยังไม่มีเพื่อนให้เชิญ ลองหาผู้ใช้ที่จะเชื่อมต่อกันใน Roblox ก่อน
 Feature.Build.Message.NoResults,
+Feature.Build.Message.NoSearchResultsFound,
 Feature.Build.Message.NoVersionHistory,ยังไม่มีประวัติเวอร์ชัน
 Feature.Build.Message.OneTaskCompleted,เสร็จแล้ว 1 งาน
 Feature.Build.Message.OutOfBuildUsage,คุณใช้โควต้าการใช้งาน Build หมดแล้ว ดูตัวเลือกของคุณเพื่อใช้ Robux สร้างต่อ
 Feature.Build.Message.PlaytestInviteSendFailedBody,คุณไม่สามารถส่งลิงก์เชิญเข้าร่วมแชทให้ผู้ใช้ต่อไปนี้ได้:
 Feature.Build.Message.PlaytestInviteSendFailedHint,โปรดใช้ปุ่มแชร์เพื่อรับลิงก์
+Feature.Build.Message.PlaytesterRequestFailed,เราไม่สามารถดำเนินการตามคำขอของคุณได้ โปรดลองอีกครั้ง
 Feature.Build.Message.PlaytestersAdded,เชิญผู้ทดลองเล่นระยะแรกแล้ว {INVITED_COUNT} จาก {MAX_INVITES} คน
 Feature.Build.Message.PrivatePlaytestInvite,{username} ชวนคุณมาเป็นผู้ทดลองเล่นระยะแรกสำหรับ {experienceName}
 Feature.Build.Message.PublicPublishFailed,เผยแพร่เกมของคุณแล้ว แต่ไม่สามารถตั้งค่าเป็นสาธารณะได้ โปรดลองอีกครั้ง
@@ -2600,13 +2637,15 @@ Feature.Build.Notification.Title.NeedInput,Build ต้องการอิน�
 Feature.Build.Placeholder.DescribeProduct,อธิบายสิ่งที่คุณต้องการขาย
 Feature.Build.Placeholder.DescribeProductUpdate,อธิบายเกี่ยวกับการอัปเดต
 Feature.Build.Prompt.CreateDeveloperProduct,ช่วยฉันสร้างผลิตภัณฑ์นักพัฒนา เชื่อมโยงเข้ากับเกม ตรวจสอบและเผยแพร่การเปลี่ยนแปลง และเปิดให้ซื้อ
-Feature.Build.Title.AdCampaignActive,แคมเปญโฆษณาเปิดใช้งานอยู่
 Feature.Build.Title.AdCampaignDuration,แคมเปญโฆษณา {durationDays} วัน
+Feature.Build.Title.AdComplete,โฆษณาเสร็จแล้ว
+Feature.Build.Title.AdCreated,สร้างโฆษณาแล้ว
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,เพิ่มภาพ
 Feature.Build.Title.AdsStatsEmpty,เริ่มใช้แคมเปญ
 Feature.Build.Title.AdsStatsEmptyFree,เริ่มใช้แคมเปญแรก
 Feature.Build.Title.ArchiveThisGame,เก็บเกมนี้ถาวรใช่ไหม?
+Feature.Build.Title.AssetLibrary,คลัง
 Feature.Build.Title.Audience,กลุ่มเป้าหมาย
 Feature.Build.Title.BuildQuestion,Build มีคำถาม
 Feature.Build.Title.BuildQuestions,Build มีอะไรจะถาม
@@ -2615,6 +2654,7 @@ Feature.Build.Title.BuildUsage,โควต้าการใช้งาน Bui
 Feature.Build.Title.ChangesNotLive,การเปลี่ยนแปลงของคุณยังไม่มีผล
 Feature.Build.Title.ChatBuildUnavailable,
 Feature.Build.Title.Content,เนื้อหา
+Feature.Build.Title.CreateYourAd,สร้างโฆษณาของคุณ
 Feature.Build.Title.DailyRobuxReached,ใช้ Robux ครบตามวงเงินสูงสุดต่อวันแล้ว
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,แก้ไขผลิตภัณฑ์
@@ -2630,9 +2670,13 @@ Feature.Build.Title.NoMonetizationProducts,เริ่มสร้างรา�
 Feature.Build.Title.NoRobuxForUsage,ไม่มี Robux เหลือสำหรับโควต้าการใช้งาน Build
 Feature.Build.Title.PlaytestInviteSendFailed,ไม่สามารถส่งคำเชิญได้
 Feature.Build.Title.Playtesters,
+Feature.Build.Title.PlaytestersAddRejected,ไม่สามารถเพิ่มผู้ใช้ต่อไปนี้ได้:
 Feature.Build.Title.PlaytestersOnlyPlay,เฉพาะผู้ทดลองเล่นเท่านั้นที่เล่นได้
 Feature.Build.Title.PromoteGame,โปรโมตเกมของคุณ
 Feature.Build.Title.PromoteGameFree,โปรโมตเกมของคุณฟรี
+Feature.Build.Title.PromoteGameFreePlural,คุณได้รับสิทธิ์โฆษณาฟรี {promotionCount} รายการ
+Feature.Build.Title.PromoteGameFreeSingular,คุณได้รับสิทธิ์โฆษณาฟรี
+Feature.Build.Title.PromoteGamePaid,มีผู้เล่นอีกมากมายรออยู่
 Feature.Build.Title.PushNotifications,การแจ้งเตือนแบบพุช
 Feature.Build.Title.RevertLastChange,แปลงกลับการเปลี่ยนแปลงล่าสุดไหม?
 Feature.Build.Title.Tasks,งาน
@@ -2835,6 +2879,11 @@ Feature.Catalog.Label.ItemInAHold,ไอเท็มอยู่ในช่ว�
 Feature.Catalog.Label.ItemOwnedCount,ไอเท็มที่เป็นเจ้าของแล้ว ({itemCount})
 Feature.Catalog.Label.ItemsCount,
 Feature.Catalog.Label.LeftArm,
+Feature.Catalog.Label.LicensedBy,ได้รับสิทธิ์ใช้งานจาก
+Feature.Catalog.Label.LicensingLicensed,ได้รับสิทธิ์ใช้งาน
+Feature.Catalog.Label.LicensingLicensedInfo,อนุมัติโดยแบรนด์
+Feature.Catalog.Label.LicensingOfficial,ทางการ
+Feature.Catalog.Label.LicensingOfficialInfo,จัดทำโดยแบรนด์
 Feature.Catalog.Label.Limited,ลิมิเต็ด
 Feature.Catalog.Label.LimitedU,ลิมิเต็ด U
 Feature.Catalog.Label.LipMakeup,
@@ -2907,6 +2956,7 @@ Feature.Catalog.Label.SellCut,คุณจะได้รับ:
 Feature.Catalog.Label.SellPageUpsell,เฉพาะผู้ใช้ที่เป็นสมาชิก Roblox Plus เท่านั้นจึงจะทำการขายได้
 Feature.Catalog.Label.SellSuccess,วางขายไอเท็มแล้ว
 Feature.Catalog.Label.SerialNumberColon,หมายเลขซีเรียล:
+Feature.Catalog.Label.ShareToMoments,แชร์ไปยังโมเมนต์
 Feature.Catalog.Label.ShoulderAccessories,ไอเท็มเสริมสำหรับไหล่
 Feature.Catalog.Label.SoldOut,
 Feature.Catalog.Label.SupportsHeadShapes,รองรับรูปร่างศีรษะ
@@ -2922,6 +2972,7 @@ Feature.Catalog.Label.Timer.Second.Plural,เหลืออีก {number} ว�
 Feature.Catalog.Label.Timer.Second.Singular,เหลืออีก 1 วินาที
 Feature.Catalog.Label.Tops,เสื้อผ้าท่อนบน
 Feature.Catalog.Label.Torso,
+Feature.Catalog.Label.TotalItemsFraction,ทั้งหมด: ({itemCount} / {itemTotal} ไอเท็ม)
 Feature.Catalog.Label.TotalItemsParenthesis,
 Feature.Catalog.Label.TotalUnformatted,รวม
 Feature.Catalog.Label.Tradable,ทำการแลกเปลี่ยนได้
@@ -3063,8 +3114,8 @@ Feature.Chat.Drawer.Join,
 Feature.Chat.Drawer.PinGame,ปักหมุด
 Feature.Chat.Drawer.PlayGame,เยี่ยมชมประสบการณ์
 Feature.Chat.Drawer.ViewDetails,
-Feature.Chat.Heading.ChatWithConnections,แชทกับเครือข่าย
-Feature.Chat.Heading.ChatWithFriends,แชทกับเพื่อน
+Feature.Chat.Heading.ChatWithConnections,แชทกับเพื่อน
+Feature.Chat.Heading.ChatWithFriends,
 Feature.Chat.Heading.CreateUnfilteredChatDialog,สร้างกลุ่มใหม่พร้อมคุณสมบัติแชทเพิ่มเติมหรือไม่?
 Feature.Chat.Heading.ExpressiveChat,แชทที่สื่ออารมณ์
 Feature.Chat.Heading.FailedToLeaveGroup,ออกจากกลุ่มไม่สำเร็จ
@@ -3074,8 +3125,8 @@ Feature.Chat.Heading.FirstConversationWithThisUser,การสนทนาค�
 Feature.Chat.Heading.FirstInteractionWith,การโต้ตอบครั้งแรกกับ {displayName}
 Feature.Chat.Heading.FirstInteractionWithThisPerson,การโต้ตอบครั้งแรกกับบุคคลนี้
 Feature.Chat.Heading.LeaveGroup,ออกจากกลุ่ม
-Feature.Chat.Heading.PartyWithConnections,Party กับเครือข่าย
-Feature.Chat.Heading.PartyWithFriends,Party กับเพื่อน
+Feature.Chat.Heading.PartyWithConnections,Party กับเพื่อน
+Feature.Chat.Heading.PartyWithFriends,
 Feature.Chat.Heading.SafeChattingWithThisUser,โปรดใช้ความระมัดระวังเมื่อแชทกับบุคคลนี้
 Feature.Chat.Heading.SafeChattingWithUsername,โปรดใช้ความระมัดระวังเมื่อแชทกับ {displayName}
 Feature.Chat.Heading.ShareGameToChat,แชร์ประสบการณ์ไปยังแชท
@@ -3103,7 +3154,6 @@ Feature.Chat.Label.Group.YouRepliedToThem,คุณตอบกลับ {DISPLA
 Feature.Chat.Label.GroupName,ชื่อกลุ่ม
 Feature.Chat.Label.HoverToReplyTooltip,วางเคอร์เซอร์ไว้ด้านบนเพื่อตอบกลับ
 Feature.Chat.Label.Loading,
-Feature.Chat.Label.LongPressToReplyTooltip,กดค้างเพื่อตอบกลับ
 Feature.Chat.Label.Members,สมาชิก
 Feature.Chat.Label.MessageNotAvailable,ไม่สามารถใช้ข้อความนี้ได้
 Feature.Chat.Label.MuteInGameChatToastNotifications,ปิดเสียงแจ้งเตือนแชทในเกม
@@ -3122,9 +3172,9 @@ Feature.Chat.Label.ReplyChatInputPlaceholder,ตอบกลับ {DISPLAY_NAME
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} พูดว่า...
 Feature.Chat.Label.ReplyingToYourself,คุณพูดว่า...
-Feature.Chat.Label.SearchConnections,ค้นหาเครือข่าย
+Feature.Chat.Label.SearchConnections,ค้นหาเพื่อน
 Feature.Chat.Label.SearchForFriendsAndChat,ค้นหาการสนทนา
-Feature.Chat.Label.SearchFriends,ค้นหาเพื่อน
+Feature.Chat.Label.SearchFriends,
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,ส่งแล้ว
 Feature.Chat.Label.SnoozeChatNotifications,ปิดเสียงแจ้งเตือนแชทในประสบการณ์:
@@ -3145,35 +3195,35 @@ Feature.Chat.Label.UnknownUser,ผู้ใช้ที่ไม่รู้จ�
 Feature.Chat.Label.User,
 Feature.Chat.Label.ViewProfile,ดูโปรไฟล์
 Feature.Chat.Label.YouRepliedToYou,คุณตอบกลับตัวเอง
-Feature.Chat.Message.AddConnectionsLimit,คุณมีเครือข่ายได้สูงสุด {connectionsNum} คนในกลุ่มแชท
-Feature.Chat.Message.AddConnectionsPartyLimit,คุณมีเครือข่ายได้สูงสุด {connectionsNum} คนใน Party
-Feature.Chat.Message.AddConnectionsPartyLimitSingular,คุณจัด Party กับเครือข่ายได้เพียง 1 คนเนื่องจากการตั้งค่าความเป็นส่วนตัวของคุณ
-Feature.Chat.Message.AddFriendsLimit,คุณมีเพื่อนได้สูงสุด {connectionsNum} คนในกลุ่มแชท
-Feature.Chat.Message.AddFriendsPartyLimit,คุณมีเพื่อนได้สูงสุด {connectionsNum} คนใน Party
-Feature.Chat.Message.AddFriendsPartyLimitSingular,คุณจัด Party กับเพื่อนได้เพียง 1 คนเนื่องจากการตั้งค่าความเป็นส่วนตัวของคุณ
+Feature.Chat.Message.AddConnectionsLimit,คุณมีเพื่อนได้สูงสุด {connectionsNum} คนในกลุ่มแชท
+Feature.Chat.Message.AddConnectionsPartyLimit,คุณมีเพื่อนได้สูงสุด {connectionsNum} คนใน Party
+Feature.Chat.Message.AddConnectionsPartyLimitSingular,คุณจัด Party กับเพื่อนได้เพียง 1 คนเนื่องจากการตั้งค่าความเป็นส่วนตัวของคุณ
+Feature.Chat.Message.AddFriendsLimit,
+Feature.Chat.Message.AddFriendsPartyLimit,
+Feature.Chat.Message.AddFriendsPartyLimitSingular,
 Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName} ส่งข้อความที่ไม่สามารถแสดงได้มาให้
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,แชทถูกปิดใช้งาน คุณสามารถเปิดใช้งานได้ในการตั้งค่าความเป็นส่วนตัวของคุณ
 Feature.Chat.Message.ChatUnavailableRegion,ตอนนี้ยังใช้งานแชทไม่ได้ในภูมิภาคของคุณ
 Feature.Chat.Message.ChatUnavailableWithUser,ตอนนี้ผู้ใช้รายนี้ใช้งานแชทไม่ได้
 Feature.Chat.Message.Default,มีแค่บางคนเท่านั้นที่สามารถเห็นแชทของคุณได้
-Feature.Chat.Message.EnableChat,หากต้องการแชทกับเครือข่าย เปิดการแชทในการตั้งค่าความเป็นส่วนตัวของคุณ
-Feature.Chat.Message.EnableChat.FriendsRename,หากต้องการแชทกับเพื่อน ให้เปิดการแชทในการตั้งค่าความเป็นส่วนตัวของคุณ
-Feature.Chat.Message.EnableParty,หากต้องการ Party กับเครือข่าย ให้เปิดใช้ Party ในการตั้งค่าความเป็นส่วนตัวของคุณ
-Feature.Chat.Message.EnableParty.FriendsRename,หากต้องการ Party กับเพื่อนๆ ให้เปิดใช้ Party ในการตั้งค่าความเป็นส่วนตัวของคุณ
+Feature.Chat.Message.EnableChat,หากต้องการแชทกับเพื่อน ให้เปิดการแชทในการตั้งค่าความเป็นส่วนตัวของคุณ
+Feature.Chat.Message.EnableChat.FriendsRename,
+Feature.Chat.Message.EnableParty,หากต้องการ Party กับเพื่อนๆ ให้เปิดใช้ Party ในการตั้งค่าความเป็นส่วนตัวของคุณ
+Feature.Chat.Message.EnableParty.FriendsRename,
 Feature.Chat.Message.FailedToLeaveGroup,ไม่สามารถลบคุณออกจากการสนทนา {CONVERSATION_TITLE} ได้
 Feature.Chat.Message.FailedToLeaveGroup.V2,ไม่สามารถลบคุณออกจากกลุ่ม {CONVERSATION_TITLE} ได้
 Feature.Chat.Message.FailedToRemoveUser,ไม่สามารถลบผู้ใช้ {USERNAME} ออกจากการสนทนา {CONVERSATION_TITLE} ได้
 Feature.Chat.Message.FailedToRemoveUser.V2,ไม่สามารถลบผู้ใช้ {USERNAME} ออกจากกลุ่ม {CONVERSATION_TITLE} ได้
 Feature.Chat.Message.FailedToRenameConversation,ไม่สามารถเปลี่ยนชื่อการสนทนาจาก {EXISTING_NAME} เป็น {NEW_NAME} ได้
 Feature.Chat.Message.FailedToRenameConversation.V2,ไม่สามารถเปลี่ยนชื่อกลุ่มจาก {EXISTING_NAME} เป็น {NEW_NAME} ได้
-Feature.Chat.Message.GroupConnectionLimitSingular,คุณสามารถเพิ่มเครือข่ายเพื่อแชทด้วยได้เพียง 1 คนเท่านั้น
-Feature.Chat.Message.GroupFriendLimitSingular,คุณสามารถเพิ่มเพื่อนเพื่อแชทด้วยได้เพียง 1 คนเท่านั้น
+Feature.Chat.Message.GroupConnectionLimitSingular,คุณสามารถเพิ่มเพื่อนเพื่อแชทด้วยได้เพียง 1 คนเท่านั้น
+Feature.Chat.Message.GroupFriendLimitSingular,
 Feature.Chat.Message.LeaveGroup,คุณไม่สามารถแชทกับกลุ่มนี้ต่อได้
 Feature.Chat.Message.LeaveGroup.V2,คุณแน่ใจหรือไม่ว่าคุณต้องการออกจากกลุ่ม?
-Feature.Chat.Message.MakeConnectionsToChat,หาเครือข่ายบน Roblox แล้วเริ่มแชทกันได้เลย
-Feature.Chat.Message.MakeConnectionsToParty,หาเครือข่ายบน Roblox เพื่อมา Party ด้วยกัน
-Feature.Chat.Message.MakeFriendsToChat,หาเพื่อนบน Roblox แล้วเริ่มแชทกันได้เลย
-Feature.Chat.Message.MakeFriendsToParty,หาเพื่อนบน Roblox เพื่อมา Party ด้วยกัน
+Feature.Chat.Message.MakeConnectionsToChat,หาเพื่อนบน Roblox แล้วเริ่มแชทกันได้เลย
+Feature.Chat.Message.MakeConnectionsToParty,หาเพื่อนบน Roblox เพื่อมา Party ด้วยกัน
+Feature.Chat.Message.MakeFriendsToChat,
+Feature.Chat.Message.MakeFriendsToParty,
 Feature.Chat.Message.MessageContentModerated,ข้อความของคุณไม่ผ่านเกณฑ์การกลั่นกรองจึงไม่ถูกส่ง
 Feature.Chat.Message.MessageUnavailable,ไม่สามารถดูข้อความได้
 Feature.Chat.Message.OneUserTyping,{DISPLAY_NAME} กำลังพิมพ์...
@@ -3201,8 +3251,8 @@ Feature.Chat.ShareGameToChat.NoPopularGames,ไม่มีประสบกา
 Feature.Chat.ShareGameToChat.NoRecentGames,ไม่มีรายการล่าสุด
 Feature.Chat.ShareGameToChat.Popular,
 Feature.Chat.ShareGameToChat.Recent,ล่าสุด
-Feature.Chat.Text.NoConnections,คุณยังไม่ได้เพิ่มเครือข่าย หากต้องการเริ่มต้น ให้ค้นหาและเพิ่มเครือข่ายบน Roblox
-Feature.Chat.Text.NoFriends,คุณยังไม่ได้เพิ่มเพื่อน หากต้องการเริ่ม ให้ค้นหาและเพิ่มเพื่อนของคุณบน Roblox
+Feature.Chat.Text.NoConnections,คุณยังไม่ได้เพิ่มเพื่อน หากต้องการเริ่ม ให้ค้นหาและเพิ่มเพื่อนของคุณบน Roblox
+Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.MuteChatNotifications,ปิดการแจ้งเตือนเกี่ยวกับแชทจากเพื่อนระหว่างเล่นเกม
 Feature.Chat.Title.NewChat,แชทใหม่
 Feature.Chat.Toast.Error.InvalidUserSelected,ไม่สามารถเพิ่มอย่างน้อยหนึ่งคนที่อยู่ในรายการนี้ได้
@@ -3618,7 +3668,7 @@ Feature.FriendsActivityFeed.Timestamp.OneHourAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.OneMinuteAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.OneWeekAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.WeeksAbbreviatedPlural,
-Feature.FriendsMenu.Label.SearchForConnections,
+Feature.FriendsMenu.Label.SearchForConnections,ค้นหาเครือข่าย
 Feature.FriendsMenu.Label.SelectedConnectionsCount,เลือกไว้ {numerator}/{denominator} เครือข่าย
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,เลือกไว้ {selectedCount} เครือข่าย
 Feature.FriendsMenu.Label.SelectedFriendsCount,เลือกเพื่อนแล้ว {numerator} จาก {denominator} คน
@@ -3781,7 +3831,6 @@ Feature.Groups.Heading.Primary,กลุ่มหลัก
 Feature.Groups.Heading.SocialLinksNew,ลิงก์โซเชียล
 Feature.Groups.Heading.SocialMedia,โซเชียลมีเดีย
 Feature.Groups.Heading.VerificationRequired,ต้องตรวจสอบยืนยันบัญชี
-Feature.Groups.Heading.Videos,
 Feature.Groups.Label.ByOwnerWithFormat,โดย {ownerName}
 Feature.Groups.Label.Follower,
 Feature.Groups.Label.FollowerCapital,
@@ -4117,7 +4166,7 @@ Feature.NotApproved.Action.ReactivateAccount,เปิดใช้งานบ�
 Feature.NotApproved.Action.ReportMistake,รายงานข้อผิดพลาด
 Feature.NotApproved.Action.RuleConfirmation,ฉันยอมรับว่าเข้าใจและจะปฏิบัติตามกฎ
 Feature.NotApproved.Action.UserAgree,
-Feature.NotApproved.Action.ViewAppealGuidelines,ดูแนวทางการอุทธรณ์
+Feature.NotApproved.Action.ViewAppealGuidelines,ดูแนวทางการอุทธรณ์และการเปิดเผยข้อมูล
 Feature.NotApproved.Action.ViewLess,ดูน้อยลง
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,ดูกฎ
@@ -4807,6 +4856,7 @@ Feature.ReportAbuse.ProblemDescription.Violence,ความรุนแรง�
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,ทำรายงานของคุณต่อ
 Feature.ReportAbuse.Title.SelectInSceneIpReport,ขอบคุณที่เริ่มรายงานการละเมิดทรัพย์สินทางปัญญา
 Feature.RobloxSubscription.Action.JoinIn,เข้าร่วมได้ในอีก {time}
+Feature.RobloxSubscription.Action.ReferToPlus,แนะนำ Plus
 Feature.RobloxSubscription.Action.Subscribe,สมัครสมาชิก
 Feature.RobloxSubscription.Action.TryItForFree,ลองใช้ฟรี
 Feature.RobloxSubscription.Body.AlreadySubscribed,การสมัครสมาชิก Plus ของคุณให้สิทธิประโยชน์ในเกมอยู่แล้ว
@@ -4817,7 +4867,12 @@ Feature.RobloxSubscription.Description.Benefit.Customize,ปรับแต่�
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,ส่วนลด 10% ใน 60 วันแรก จากนั้นลด 20% สำหรับไอเท็มและอวาตาร์
 Feature.RobloxSubscription.Description.ExclusiveBenefits,สนุกมากขึ้น แต่ใช้ Robux น้อยลง สมัครสมาชิก Roblox Plus เลย
 Feature.RobloxSubscription.Description.JoinEarly,เข้าร่วมได้ก่อนใครเมื่อสมัคร Plus
+Feature.RobloxSubscription.Description.ReferralRecipientReward,ข้อเสนอใช้ได้กับสมาชิก Plus รายใหม่เท่านั้น
+Feature.RobloxSubscription.Description.ReferralReferrerReward,เมื่อมีคนเข้าร่วม Plus ด้วยลิงก์ของคุณ
+Feature.RobloxSubscription.Description.ReferralShare,ชวนเพื่อนมาใช้ Plus แล้วรับ {amount} Robux ไปเลยทั้งคู่เมื่อเพื่อนเข้าร่วม
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"การคลิก \u{201C}{ctaText}\u{201D} จะถือว่าคุณยอมรับ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
+Feature.RobloxSubscription.Heading.ReferralHistory,ประวัติการแนะนำ
+Feature.RobloxSubscription.Heading.ReferralShare,แชร์ Plus แล้วรับ
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,เซิร์ฟเวอร์ส่วนตัวฟรี
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,ส่ง Robux ฟรี
@@ -4827,7 +4882,12 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,ลด {discountPerce
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"การคลิก ""ดำเนินการต่อ"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd}"
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"การคลิก ""ลองใช้ฟรี"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd} ช่วงทดลองใช้ฟรีของคุณจะสิ้นสุดในอีก 1 เดือน โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติและคุณยกเลิกได้ทุกเมื่อ"
 Feature.RobloxSubscription.Label.FreeTrialText,ทดลองใช้ฟรี
+Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
+Feature.RobloxSubscription.Label.ReferralTheyGet,ผู้ที่คุณแนะนำจะได้รับ
+Feature.RobloxSubscription.Label.ReferralYouGet,คุณจะได้รับ
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}ฟรี 1 เดือน{boldEnd} จากนั้น {price}/{periodType}
+Feature.RobloxSubscription.Label.RobuxEarned,Robux ที่ได้รับ
+Feature.RobloxSubscription.Label.SuccessfulReferrals,การแนะนำที่สำเร็จ
 Feature.RobloxSubscription.Label.month,
 Feature.RobloxSubscription.Label.months,
 Feature.RobloxSubscription.Title.AgeCheckTrial,รับ Plus ฟรี 1 สัปดาห์
@@ -5029,6 +5089,14 @@ Feature.SongDetails.Label.SongsAvailableBy,จำนวนเพลงที่ 
 Feature.SongDetails.Label.SongsBy,เพลงที่แต่งโดย {artistName}
 Feature.SongDetails.Label.ThousandPlus,"1,000+"
 Feature.SongDetails.Label.Vendor,
+Feature.SplitPane.EditAvatarButtonText,
+Feature.SplitPane.NoAdditionalAvatarsDialogBody,สร้างอวาตาร์อื่น แล้วสลับธีมที่นี่
+Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,สร้างอวาตาร์
+Feature.SplitPane.NoAdditionalAvatarsDialogTitle,ดูอวาตาร์ทั้งหมดที่คุณบันทึกไว้ครบแล้ว
+Feature.SplitPane.UnsavedChangesDialogBody,หากสลับตัวตอนนี้ การเปลี่ยนแปลงอวาตาร์อาจหายไป โปรดบันทึกเพื่อเก็บไว้ก่อน
+Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,ไม่บันทึก
+Feature.SplitPane.UnsavedChangesDialogTitle,บันทึกการเปลี่ยนแปลงไหม?
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,เพิ่มผู้ใช้คนอื่น
 Feature.Squads.Action.ConnectToVoice,เชื่อมต่อกับเสียง
@@ -5469,6 +5537,7 @@ IAPExperience.PurchaseSuccess.Title.PurchaseSucceeded,ซื้อสำเร�
 IAPExperience.RobuxUpsell.Action.BuyRobux,
 IAPExperience.RobuxUpsell.Action.BuyRobuxAndItem,
 IAPExperience.RobuxUpsell.Action.Cancel,
+IAPExperience.RobuxUpsell.Action.GetPercentOff,รับส่วนลด {discountPercentage}%
 IAPExperience.RobuxUpsell.Text.AdditionalRobux,คุณต้องการเพิ่มอีก {robux}
 IAPExperience.RobuxUpsell.Text.BestValue,คุ้มค่าที่สุด
 IAPExperience.RobuxUpsell.Text.BetterValue,คุ้มค่ากว่า
@@ -5542,7 +5611,7 @@ InstantApps.Shortcuts.Label.AddToDesktopMenuItem,เพิ่มไปยัง�
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,เพิ่มไปยังหน้าหลัก
 InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,เพิ่ม {experience_name} ไปยังเดสก์ท็อปไม่สำเร็จ
 InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,เพิ่ม {experience_name} ไปยังหน้าหลักไม่สำเร็จ
-InstantApps.Shortcuts.Label.ShortcutAlreadyExists,มีทางลัดไป {experience_name} อยู่แล้ว
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,แทนที่ทางลัดที่มีอยู่สำหรับ {experience_name} แล้ว
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,เพิ่ม {experience_name} ไปยังเดสก์ท็อปสำเร็จเรียบร้อยแล้ว
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,เพิ่ม {experience_name} ไปยังหน้าหลักสำเร็จเรียบร้อยแล้ว
 InstantApps.Shortcuts.Label.TryAgain,

@@ -6,7 +6,6 @@ local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local wrapTargetCageUVReferenceValuesModule = require(parent.WrapTargetCageUVReferenceValues)
 local createEditableInstancesForContextModule = require(parent.util.createEditableInstancesForContext)
-local getFFlagUGCValidateMigrateWrapAndMakeupModule = require(parent.flags.getFFlagUGCValidateMigrateWrapAndMakeup)
 local getFFlagUGCValidationAllowFullVaasModule = require(parent.flags.getFFlagUGCValidationAllowFullVaas)
 local t = {
 	Publish = true,
@@ -17,7 +16,6 @@ local t = {
 local t_1 = { InExpServer = true, InExpClient = true }
 
 return {
-	fflag = getFFlagUGCValidateMigrateWrapAndMakeupModule,
 	categories = { validationEnumsModule.UploadCategory.MAKEUP },
 	requiredData = {
 		validationEnumsModule.SharedDataMember.rootInstance,

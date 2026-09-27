@@ -1,6 +1,4 @@
-﻿local getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule = require(script.Parent.Parent.flags.getFFlagUGCValidationExtendSchemaToIgnoreDescendants)
-
-local function _(p1, p2)
+﻿local function _(p1, p2)
 	if type(p1) == "table" then
 		for i, v in pairs(p1) do
 			if v == p2 then
@@ -17,7 +15,7 @@ local _ = function(p3)
 end
 
 local function validateWithSchemaHelper(p3, p4, p5)
-	-- upvalues: getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule (ref), validateWithSchemaHelper (ref)
+	-- upvalues: validateWithSchemaHelper (ref)
 	local v
 	if p4.ClassName == p3.ClassName then
 		if p3.Name ~= nil then
@@ -40,7 +38,7 @@ local function validateWithSchemaHelper(p3, p4, p5)
 				var1 = false
 			end
 		end
-		if getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule() and p3._ignoreDescendants then
+		if p3._ignoreDescendants then
 			assert(not p3._children, "if _ignoreDescendants is true, there should be no descendants in the schema as they would be ignored anyway")
 			
 			for i, v in p4:GetDescendants() do
@@ -56,7 +54,7 @@ local function validateWithSchemaHelper(p3, p4, p5)
 				local var3 = nil
 				
 				for i_1, v_1 in pairs(p4:GetChildren()) do
-					if not getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule() or not p5[v_1] then
+					if not p5[v_1] then
 						local var4 = validateWithSchemaHelper(v, v_1, p5)
 						
 						if var4.success then

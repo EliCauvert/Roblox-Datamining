@@ -6,7 +6,6 @@ local var1 = nil
 local flags = parent.flags
 local getFFlagUGCValidationAllowHRDUploadModule = require(flags.getFFlagUGCValidationAllowHRDUpload)
 local getFFlagDebugAllowHRDUploadOnBundleBackendModule = require(flags.getFFlagDebugAllowHRDUploadOnBundleBackend)
-local getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule = require(flags.getFFlagUGCValidationExtendSchemaToIgnoreDescendants)
 local list = {
 	"Index",
 	"Middle",
@@ -87,8 +86,8 @@ function t.setIsBackendBundleUpload(value)
 end
 
 function t.checkFlagEnabledForAllowHrd()
-	-- upvalues: getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule (ref), getFFlagUGCValidationAllowHRDUploadModule (ref), getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), var5 (write)
-	return if getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule() then if getFFlagUGCValidationAllowHRDUploadModule() then true else getFFlagDebugAllowHRDUploadOnBundleBackendModule() and var5 else false
+	-- upvalues: getFFlagUGCValidationAllowHRDUploadModule (ref), getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), var5 (write)
+	return if getFFlagUGCValidationAllowHRDUploadModule() then true else getFFlagDebugAllowHRDUploadOnBundleBackendModule() and var5
 end
 
 local var6 = nil

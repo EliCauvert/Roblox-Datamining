@@ -3,15 +3,17 @@ local roact = dependenciesModule.Roact
 local UIBlox = dependenciesModule.UIBlox
 local cryo = dependenciesModule.Cryo
 local imagesModule = require(script.Parent.Images)
+local foundationFontFaceMigration = dependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
+local normalizeFontFace = dependenciesModule.Foundation.Utility.normalizeFontFace
 local color = Color3.fromRGB(200, 200, 200)
 local rect = Rect.new(7, 8, 7, 8)
 local alertViewTextbox = roact.PureComponent:extend("AlertViewTextbox")
 alertViewTextbox.defaultProps = { LayoutOrder = 0, Text = "", PlaceholderText = nil }
 
 function alertViewTextbox.render(p1)
-	-- upvalues: UIBlox (ref), rect (ref), roact (ref), imagesModule (ref), color (ref)
+	-- upvalues: UIBlox (ref), rect (ref), roact (ref), imagesModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), color (ref)
 	return UIBlox.Style.withStyle(function(p2)
-		-- upvalues: p1 (ref), rect (copy), roact (copy), imagesModule (copy), color (copy)
+		-- upvalues: p1 (ref), rect (copy), roact (copy), imagesModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), color (copy)
 		local vector2 = Vector2.new(0, 0)
 		local vector2_1 = Vector2.new(0, 0)
 		local _ = nil
@@ -32,7 +34,8 @@ function alertViewTextbox.render(p1)
 			Textbox = roact.createElement("TextBox", {
 				BackgroundTransparency = 1,
 				ClearTextOnFocus = false,
-				Font = font.Header2.Font,
+				Font = if foundationFontFaceMigration then nil else font.Header2.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(font.Header2.Font) else nil,
 				PlaceholderText = p1.props.PlaceholderText,
 				PlaceholderColor3 = color,
 				Position = UDim2.new(0, 6, 0, 0),

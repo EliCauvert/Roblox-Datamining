@@ -4,6 +4,8 @@ local roact = dependenciesModule.Roact
 local cryo = dependenciesModule.Cryo
 local UIBlox = dependenciesModule.UIBlox
 local text = dependenciesModule.Text
+local foundationFontFaceMigration = dependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
+local getTextBoundsAsync = dependenciesModule.Foundation.Utility.getTextBoundsAsync
 local components = socialLibraries.Components
 local alertViewLabelModule = require(components.AlertView.AlertViewLabel)
 local alertViewTextboxModule = require(components.AlertView.AlertViewTextbox)
@@ -29,7 +31,7 @@ alertViewBuilder.defaultProps = {
 }
 
 function alertViewBuilder.init(p1)
-	-- upvalues: roact (ref), text (ref)
+	-- upvalues: roact (ref), foundationFontFaceMigration (ref), getTextBoundsAsync (ref), text (ref)
 	local var1 = 0
 	p1.refs = {}
 	
@@ -39,15 +41,119 @@ function alertViewBuilder.init(p1)
 	end
 	p1.state = { numTextboxes = var1 }
 	
-	function p0.calcTextboxTextHeight(p2, p3)
+	if foundationFontFaceMigration then
+		p1.isMounted = false
+		p1.textMeasurements = {}
+		
+		function p0.flushTextMeasurements()
+			-- upvalues: p1 (ref), getTextBoundsAsync (copy)
+			for i, v in p1.textMeasurements do
+				if p1.props.textboxes[i] then
+					for i_1, v_1 in v do
+						if v_1.height == nil and not v_1.inFlight then
+							v_1.inFlight = true
+							task.spawn(function()
+								-- upvalues: getTextBoundsAsync (copy), v_1 (ref), p1 (copy), i (ref), i_1 (ref)
+								local var2 = getTextBoundsAsync(v_1.text, v_1.font, v_1.fontSize, v_1.width)
+								v_1.inFlight = false
+								local var3 = p1.textMeasurements[i]
+								
+								if var2 and p1.isMounted and (var3 and var3[i_1] == v_1) then
+									v_1.height = var2.Y
+									p1:setState(function(p2)
+										return {
+											textMeasurementVersion = (p2.textMeasurementVersion or 0) + 1
+										}
+									end)
+								end
+							end)
+						end
+					end
+				else
+					p1.textMeasurements[i] = nil
+				end
+			end
+		end
+		
+		function p0.scheduleTextMeasurementFlush()
+			-- upvalues: p1 (ref)
+			if p1.textMeasurementFlushScheduled then
+				return
+			end
+			p1.textMeasurementFlushScheduled = true
+			task.defer(function()
+				-- upvalues: p1 (copy)
+				p1.textMeasurementFlushScheduled = false
+				
+				if p1.isMounted then
+					p1.flushTextMeasurements()
+				end
+			end)
+		end
+	end
+	p1.calcTextboxTextHeight = if foundationFontFaceMigration then function(p2, p3, p4, p5)
+		-- upvalues: p1 (ref)
+		if p3 and p3 ~= "" then
+			local var2 = p2.Font.Body.RelativeSize * p2.Font.BaseSize
+			local font = p2.Font.Body.Font
+			local childComponentWidth = p1.props.childComponentWidth
+			local var3 = p1.textMeasurements[p4]
+			
+			if not var3 then
+				var3 = {}
+				p1.textMeasurements[p4] = var3
+			end
+			local var4 = var3[p5]
+			
+			if not var4 or var4.text ~= p3 or (var4.font ~= font or var4.fontSize ~= var2) or var4.width ~= childComponentWidth then
+				var3[p5] = {
+					inFlight = false,
+					text = p3,
+					font = font,
+					fontSize = var2,
+					width = childComponentWidth
+				}
+				p1.scheduleTextMeasurementFlush()
+				
+				return var2
+			end
+			return if var4.height == nil then var2 else var4.height
+		else
+			local var5 = p1.textMeasurements[p4]
+			
+			if var5 then
+				var5[p5] = nil
+			end
+			return 0
+		end
+	end else function(p2, p3)
 		-- upvalues: text (copy), p1 (ref)
 		return if p3 and p3 ~= "" then text.GetTextHeight(p3, p2.Font.Body.Font, p2.Font.Body.RelativeSize * p2.Font.BaseSize, p1.props.childComponentWidth) else 0
 	end
 end
 
 function alertViewBuilder.didMount(p2)
+	-- upvalues: foundationFontFaceMigration (ref)
+	if foundationFontFaceMigration then
+		p2.isMounted = true
+		p2.flushTextMeasurements()
+	end
 	if type(p2.props.onModalOpen) == "function" then
 		p2.props.onModalOpen()
+	end
+end
+
+function alertViewBuilder.didUpdate(p2)
+	-- upvalues: foundationFontFaceMigration (ref)
+	if foundationFontFaceMigration then
+		p2.flushTextMeasurements()
+	end
+end
+
+function alertViewBuilder.willUnmount(p2)
+	-- upvalues: foundationFontFaceMigration (ref)
+	if foundationFontFaceMigration then
+		p2.isMounted = false
 	end
 end
 
@@ -98,10 +204,10 @@ function alertViewBuilder.makeTextboxList(p3, p4)
 	
 	for i, v in pairs(p3.props.textboxes) do
 		local var3
-		local var4 = p3.calcTextboxTextHeight(p4, v.belowText)
-		local var5 = p3.calcTextboxTextHeight(p4, v.warningText)
+		local belowText = p3.calcTextboxTextHeight(p4, v.belowText, i, "belowText")
+		local warningText = p3.calcTextboxTextHeight(p4, v.warningText, i, "warningText")
 		local createElement = roact.createElement
-		local var6 = fitFrameVerticalModule
+		local var4 = fitFrameVerticalModule
 		local t_1 = {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
@@ -125,36 +231,36 @@ function alertViewBuilder.makeTextboxList(p3, p4)
 				LayoutOrder = 2,
 				Text = v.belowText,
 				TextXAlignment = v.belowTextAlignment or Enum.TextXAlignment.Left,
-				Size = UDim2.new(1, 0, 0, var4),
+				Size = UDim2.new(1, 0, 0, belowText),
 				TextColor3 = var2
 			}) or nil
 		end
-		local var7
+		local var5
 		t_2[text] = var3
 		local text_1 = i .. " Warning Text"
 		
 		if v.warningText and v.warningText ~= "" then
-			var7 = roact.createElement(alertViewLabelModule, {
+			var5 = roact.createElement(alertViewLabelModule, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
 				Text = v.warningText,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Size = UDim2.new(1, 0, 0, var5),
+				Size = UDim2.new(1, 0, 0, warningText),
 				TextColor3 = p4.Theme.Alert.Color
 			}) or nil
 		end
-		t_2[text_1] = var7
-		t[i] = createElement(var6, t_1, t_2)
+		t_2[text_1] = var5
+		t[i] = createElement(var4, t_1, t_2)
 	end
 	return t
 end
 
 function alertViewBuilder.makeMiddleContent(p5, p6)
 	-- upvalues: roact (ref), fitFrameVerticalModule (ref)
-	local var8 = p5:makeTextboxList(p6)
+	local var6 = p5:makeTextboxList(p6)
 	
 	return if p5.state.numTextboxes == 0 then nil else function()
-		-- upvalues: roact (copy), fitFrameVerticalModule (copy), var8 (ref)
+		-- upvalues: roact (copy), fitFrameVerticalModule (copy), var6 (ref)
 		return roact.createElement(fitFrameVerticalModule, {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
@@ -165,7 +271,7 @@ function alertViewBuilder.makeMiddleContent(p5, p6)
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				width = UDim.new(1, 0)
-			}, var8)
+			}, var6)
 		})
 	end
 end

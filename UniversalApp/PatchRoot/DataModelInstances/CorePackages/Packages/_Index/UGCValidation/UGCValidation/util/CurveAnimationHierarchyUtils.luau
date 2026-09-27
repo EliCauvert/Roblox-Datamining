@@ -1,7 +1,6 @@
 ﻿local parent = script.Parent.Parent
 local assetCalculatorModule = require(parent.util.AssetCalculator)
 local flags = parent.flags
-local getFFlagUGCValidateDuplicatesInAnimationModule = require(flags.getFFlagUGCValidateDuplicatesInAnimation)
 local getFFlagUGCValidateRestrictNumFaceControlsModule = require(flags.getFFlagUGCValidateRestrictNumFaceControls)
 local getFIntUGCValidateMaxTotalFaceControlsModule = require(flags.getFIntUGCValidateMaxTotalFaceControls)
 local t = {}
@@ -144,35 +143,18 @@ function t.validateBodyPartFolderChildren(p6)
 end
 
 function t.validateCurveAnimationBodyPartFolder(p7)
-	-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (ref), t (ref)
+	-- upvalues: t (ref)
 	local function validateBodyPartFolderInternal(p8)
-		-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (copy), t (copy), validateBodyPartFolderInternal (ref)
-		if getFFlagUGCValidateDuplicatesInAnimationModule() then
-			if not t.validateBodyPartFolderChildren(p8) then
+		-- upvalues: t (copy), validateBodyPartFolderInternal (ref)
+		if not t.validateBodyPartFolderChildren(p8) then
+			return false
+		end
+		for i, v in p8:GetChildren() do
+			if v:IsA("Folder") and v.Name ~= t.FaceControlsName and not validateBodyPartFolderInternal(v) then
 				return false
 			end
-			for i, v in p8:GetChildren() do
-				if v:IsA("Folder") and v.Name ~= t.FaceControlsName and not validateBodyPartFolderInternal(v) then
-					return false
-				end
-			end
-			return true
-		else
-			local name
-			for i, v in p8:GetChildren() do
-				if v:IsA("Folder") then
-					if v.Name ~= t.humanoidRootPartName then
-						name = t.getBodyPartToParentMap()[v.Name]
-						
-						if name then
-							return name == p8.Name and validateBodyPartFolderInternal(v)
-						end
-					end
-					return false
-				end
-			end
-			return true
 		end
+		return true
 	end
 	
 	return if t.isBodyPartFolderNameValid(p7.Name) then validateBodyPartFolderInternal(p7) else true

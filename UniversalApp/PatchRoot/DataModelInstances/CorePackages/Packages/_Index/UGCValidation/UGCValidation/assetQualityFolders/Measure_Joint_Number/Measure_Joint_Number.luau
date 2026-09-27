@@ -24,7 +24,6 @@ return {
 			return
 		elseif tonumber(fullBodyMesh.score) ~= 100 then
 			p1:warn(errorSourceStringsModule.Keys.AQSWarn_JointNumber, {
-				score = tostring(math.floor(tonumber(fullBodyMesh.score) or 0)),
 				joint_number = fullBodyMesh.joint_number or "unknown",
 				left_hand_joint_number = fullBodyMesh.left_hand_joint_number or "unknown",
 				right_hand_joint_number = fullBodyMesh.right_hand_joint_number or "unknown"

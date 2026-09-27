@@ -234,12 +234,9 @@ end
 
 function tbl:fetchMore(p1)
 	-- upvalues: object (ref), boolean (ref), networkStatus (ref), var1 (write), invariant (ref)
-	local var2 = object.assign({}, (function()
-		-- upvalues: boolean (copy), p1 (ref), object (copy), self (ref)
-		return if boolean.toJSBoolean(p1.query) then p1 else object.assign({}, self.options, p1, {
-			variables = object.assign({}, self.options.variables, p1.variables)
-		})
-	end)(), { fetchPolicy = "no-cache" })
+	local var2 = object.assign({}, if boolean.toJSBoolean(p1.query) then p1 else object.assign({}, self.options, p1, {
+		variables = object.assign({}, self.options.variables, p1.variables)
+	}), { fetchPolicy = "no-cache" })
 	local var3 = self.queryManager:generateQueryId()
 	
 	if boolean.toJSBoolean(var2.notifyOnNetworkStatusChange) then

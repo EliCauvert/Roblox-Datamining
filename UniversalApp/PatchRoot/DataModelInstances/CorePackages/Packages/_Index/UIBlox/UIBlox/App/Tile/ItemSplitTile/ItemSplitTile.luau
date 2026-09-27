@@ -4,6 +4,8 @@ local core = parent_1.Core
 local parent_2 = parent_1.Parent
 local roactModule = require(parent_2.Roact)
 local tModule = require(parent_2.t)
+local foundationModule = require(parent_2.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local withStyleModule = require(core.Style.withStyle)
 local interactableModule = require(core.Control.Interactable)
 local controlStateModule = require(core.Control.Enum.ControlState)
@@ -11,6 +13,7 @@ local loadableImageModule = require(parent_1.App.Loading.LoadableImage)
 local imagesModule = require(parent.ImageSet.Images)
 local imageSetComponentModule = require(core.ImageSet.ImageSetComponent)
 local itemSplitTileFooterModule = require(parent_1.App.Tile.ItemSplitTile.ItemSplitTileFooter)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local uDim = UDim.new(0, 8)
 local uDim_1 = UDim.new(0, 8)
 local uDim_2 = UDim.new(0, 12)
@@ -112,7 +115,7 @@ function itemSplitTile.renderTopContent(p1, p2)
 end
 
 function itemSplitTile.renderBottomContent(p1, p2)
-	-- upvalues: controlStateModule (ref), uDim_2 (ref), uDim_1 (ref), roactModule (ref), itemSplitTileFooterModule (ref)
+	-- upvalues: controlStateModule (ref), uDim_2 (ref), uDim_1 (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), itemSplitTileFooterModule (ref)
 	local itemName = p1.props.itemName
 	local hasBackground = p1.props.hasBackground
 	local font = p2.Font
@@ -143,7 +146,8 @@ function itemSplitTile.renderBottomContent(p1, p2)
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Text = itemName,
-			Font = font.Header2.Font,
+			Font = if foundationFontFaceMigration then nil else font.Header2.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(font.Header2.Font) else nil,
 			TextSize = ceiled,
 			TextTransparency = textEmphasis.Transparency,
 			TextColor3 = textEmphasis.Color,

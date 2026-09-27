@@ -5,7 +5,7 @@ local t = {
 	[inputSizeModule.Large] = inputLabelSizeModule.Large,
 	[inputSizeModule.Medium] = inputLabelSizeModule.Medium,
 	[inputSizeModule.Small] = inputLabelSizeModule.Small,
-	[inputSizeModule.XSmall] = if require(foundation.Utility.Flags).FoundationInternalInputBeta then inputLabelSizeModule.XSmall else inputLabelSizeModule.Small
+	[inputSizeModule.XSmall] = inputLabelSizeModule.XSmall
 }
 
 return function(p1)

@@ -4,7 +4,6 @@ local constantsModule = require(parent.Constants)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local getFFlagUGCValidateCheckDescendantIdsLoadableModule = require(parent.flags.getFFlagUGCValidateCheckDescendantIdsLoadable)
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 
@@ -23,7 +22,6 @@ return {
 		validationEnumsModule.SharedDataMember.consumerConfig,
 		validationEnumsModule.SharedDataMember.contentIds
 	},
-	fflag = getFFlagUGCValidateMigrateSchemaPropertiesModule,
 	expectedFailures = {},
 	run = function(p1, p2)
 		-- upvalues: validationEnumsModule (ref), constantsModule (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), getFFlagUGCValidateCheckDescendantIdsLoadableModule (ref), UGCValidationService (ref)

@@ -1,7 +1,10 @@
 ﻿local parent = script.Parent
 local parent_1 = parent.Parent
 local parent_2 = parent_1.Parent
-local reactModule = require(parent_2.Parent.React)
+local parent_3 = parent_2.Parent
+local reactModule = require(parent_3.React)
+local foundationModule = require(parent_3.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local inputLabelModule = require(parent.InputLabel)
 local helperTextModule = require(parent.HelperText)
 local imageSetComponentModule = require(parent_2.Core.ImageSet.ImageSetComponent)
@@ -9,10 +12,11 @@ local _ = require(parent_1.ImageSet.ImagesTypes)
 local useStyleModule = require(parent_2.Core.Style.useStyle)
 local useCursorModule = require(parent_2.App.SelectionCursor.useCursor)
 local UIBloxConfigModule = require(parent_2.UIBloxConfig)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local t = { width = UDim.new(0, 400) }
 
 return function(p1)
-	-- upvalues: useStyleModule (ref), reactModule (ref), UIBloxConfigModule (ref), useCursorModule (ref), t (ref), inputLabelModule (ref), imageSetComponentModule (ref), helperTextModule (ref)
+	-- upvalues: useStyleModule (ref), reactModule (ref), UIBloxConfigModule (ref), useCursorModule (ref), t (ref), inputLabelModule (ref), imageSetComponentModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), helperTextModule (ref)
 	local tokens = useStyleModule().Tokens
 	local var1 = reactModule.useRef(nil)
 	local var2, var3 = reactModule.useState(false)
@@ -190,7 +194,8 @@ return function(p1)
 	t_9.BackgroundTransparency = 1
 	t_9.TextXAlignment = Enum.TextXAlignment.Left
 	t_9.TextYAlignment = Enum.TextYAlignment.Center
-	t_9.Font = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.BodyLarge.Font else tokens.Component.TextField.Base.Field.Typography.Font
+	t_9.Font = if foundationFontFaceMigration then nil elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.BodyLarge.Font else tokens.Component.TextField.Base.Field.Typography.Font
+	t_9.FontFace = if foundationFontFaceMigration then normalizeFontFace(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.BodyLarge.Font else tokens.Component.TextField.Base.Field.Typography.Font) else nil
 	t_9.OpenTypeFeatures = if UIBloxConfigModule.enableOpenTypeSupport and p1.openTypeFeatures then p1.openTypeFeatures else nil
 	t_9.TextSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.BodyLarge.FontSize else tokens.Component.TextField.Base.Field.Typography.FontSize
 	t_9.LineHeight = 1

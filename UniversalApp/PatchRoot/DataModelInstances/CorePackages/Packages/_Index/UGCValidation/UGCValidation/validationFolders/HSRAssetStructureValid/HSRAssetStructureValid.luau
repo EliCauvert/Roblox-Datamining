@@ -10,7 +10,6 @@ return {
 		validationEnumsModule.UploadCategory.LAYERED_CLOTHING
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties),
 	expectedFailures = {},
 	run = function(p1, p2)
 		-- upvalues: validationEnumsModule (ref), errorSourceStringsModule (ref)

@@ -10,7 +10,7 @@ local t = {
 	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION }
 }
 
-if getFFlagUGCValidateAnimBonesSupportModule() and require(parent.flags.getFFlagUGCValidationAnimationPackSupport)() then
+if getFFlagUGCValidateAnimBonesSupportModule() then
 	table.insert(t.categories, validationEnumsModule.UploadCategory.ANIMATION)
 end
 t.requiredData = { validationEnumsModule.SharedDataMember.curveAnimations }

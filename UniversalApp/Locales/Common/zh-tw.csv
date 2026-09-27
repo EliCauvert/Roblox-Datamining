@@ -307,6 +307,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ 登入
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.Save,儲存
 Authentication.Login.Action.SendCodeSentenceCase,傳送驗證碼
 Authentication.Login.Action.SendVerificationEmail,傳送驗證電子郵件
 Authentication.Login.Action.SignIn,登入
@@ -435,6 +436,7 @@ Authentication.Passkey.Label.UpsellTitle,使用密碼金鑰加快登入
 Authentication.Passkey.Label.UpsellToastPageTitle,成功！已建立密碼金鑰
 Authentication.Passkey.Label.UpsellToastTitle,已成功建立密碼金鑰！
 Authentication.ResetPassword.Response.ResetPasswordStarted,若要繼續，請先重置密碼。
+Authentication.SignUp.Action.ApplyOnNextRespawn,在下次重生時套用
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
 Authentication.SignUp.Action.CreateAPasskey,
@@ -444,6 +446,7 @@ Authentication.SignUp.Action.EnableFaceId,啟用 Face ID
 Authentication.SignUp.Action.ExitModalLeave,離開
 Authentication.SignUp.Action.IUnderstand,我了解
 Authentication.SignUp.Action.NextWord,
+Authentication.SignUp.Action.RespawnNow,立即重生
 Authentication.SignUp.Action.SetupLater,稍後設定
 Authentication.SignUp.Action.StartOver,重新開始
 Authentication.SignUp.Action.UseEmail,
@@ -454,6 +457,7 @@ Authentication.SignUp.Description.AccountAlreadyLinked,你的 {platformAccountNa
 Authentication.SignUp.Description.AgreeToTermsWithGuardian.NoParameters,我同意 Roblox 的《使用條款》（包括仲裁條款），並認可其《隱私權政策》。若未滿 18 歲，我同意交由家長／監護人決定是否允許我建立此帳號，並同意《使用條款》。
 Authentication.SignUp.Description.BirthdayHelp,這有助於我們知道要向您顯示哪些內容。其他人不會看到此資訊。
 Authentication.SignUp.Description.BirthdayHelp3,這能幫助我們為您顯示更相關的內容，且此資訊不會與他人分享。
+Authentication.SignUp.Description.BirthdayHint,輸入日期
 Authentication.SignUp.Description.BirthdayValuePropC,這有助於我們知道要向您顯示哪些內容。其他人不會看到此資訊
 Authentication.SignUp.Description.ClickNextAgreeToTerms,選取「下一步」即表示您同意使用條款（包括仲裁條款）和隱私權政策。
 Authentication.SignUp.Description.CreateAPassword,為您的 Roblox 帳號建立密碼
@@ -476,10 +480,12 @@ Authentication.SignUp.Description.SignupAgreement.FullCopy.CreateAccount,
 Authentication.SignUp.Description.ThisKeepYourAccountSecure,這能提高您的 Roblox 帳號的安全性。
 Authentication.SignUp.Description.Try,試用
 Authentication.SignUp.Description.UnderAgeAlert,您沒有達到玩 Roblox 的最低年齡要求。
+Authentication.SignUp.Description.UsernameChanged,大功告成！你的帳號已準備就緒並連結到 {platform}。立即重生，即可在遊戲中看到更新後的使用者名稱，或在下次重生時套用。
 Authentication.SignUp.Description.UsernameHelp,這是您在 Roblox 向其他人顯示的名稱。請記住您的使用者名稱以便日後登入。
 Authentication.SignUp.Description.UsernameHelpV2,這是您登入的方式，也是會向其他人顯示的名稱，因此請務必使用好記的名字。
 Authentication.SignUp.Description.UsernameRule1,請使用 3 至 20 個字元
 Authentication.SignUp.Description.UsernameRule2,僅允許使用字母（a-z）、數字（0-9）和底線（_）
+Authentication.SignUp.Description.UsernameUnchanged,大功告成！你的帳號已準備就緒並連結到 {platform}。歡迎與好友聊天，並暢玩數百萬個 Roblox 遊戲。
 Authentication.SignUp.Description.VerificationLinkingText,您的 Roblox 帳號將連結到您在 {platform} 上的帳號。 您可以隨時從「設定」畫面取消連結。 在能夠連結到 {platform} 上的另一個帳號之前，可能需要一段冷卻時間。按下「註冊」即表示您同意使用條款（包括仲裁條款）和隱私權政策。
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,您的 Roblox 帳號將連結到您在 {platform} 的帳號。您可以隨時從設定畫面取消連結。成功連結到 {platform} 上的另一個帳號之前，可能會有一段時間的等待期。按一下「{ctaButton}」即表示您同意使用條款（包括仲裁條款），並瞭解隱私權政策。
 Authentication.SignUp.Description.VerificationPage,點擊「註冊」即表示您同意使用條款（包括仲裁條款）和隱私權政策。
@@ -491,6 +497,7 @@ Authentication.SignUp.Header.CreatePasswordOrPasskey, {username} 您好，請建
 Authentication.SignUp.Header.CreatedAccountChooseSignin,已建立你的帳號。請選擇登入方式。
 Authentication.SignUp.Header.GenderPage6,來到最後了！請選擇您的性別（選填）
 Authentication.SignUp.Header.PleaseTryAgain,請再試一次
+Authentication.SignUp.Header.SetUpYourRobloxAccount,設定你的 Roblox 帳號
 Authentication.SignUp.Header.UsernamePage4,接下來，請建立使用者名稱
 Authentication.SignUp.Header.WhatIsYourBirthday,您的生日是？
 Authentication.SignUp.Heading.CannotSignUp,無法註冊
@@ -514,6 +521,7 @@ Authentication.SignUp.Label.EmailAddress,
 Authentication.SignUp.Label.EnterYourEmail,輸入你的電子郵件
 Authentication.SignUp.Label.EnterYourParentsEmail,輸入家長的電子郵件
 Authentication.SignUp.Label.Error.MinimumAge5,新帳號必須年滿五歲以上
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,此遊戲有遊玩年齡限制
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,使用者名稱已被使用
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,使用者名稱不應以 _ 作為開頭或結尾
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,使用者名稱應只包含字母、數字與 _
@@ -569,12 +577,14 @@ Authentication.SignUp.PasswordErrorLength,必須為 8 到 200 個字元之間
 Authentication.SignUp.Response.AgedUpDisplayNameSetFirst,請先設定名稱。
 Authentication.SignUp.Response.BirthdayMustBeSetFirst,請先設定生日。
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.ErrorTryAgain2,發生錯誤，請再試一次。
 Authentication.SignUp.Response.InvalidBirthday,生日無效。
 Authentication.SignUp.Response.InvalidEmail,此電子郵件地址無效。
 Authentication.SignUp.Response.InvalidPhoneNumber,手機號碼無效。
 Authentication.SignUp.Response.PasswordComplexity,請輸入更複雜的密碼。
 Authentication.SignUp.Response.PhoneNumberAlreadyLinked,已有帳號加入此手機號碼。
 Authentication.SignUp.Response.UsernameMustBeSetFirst,請先設定使用者名稱。
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,完成設定後，你的進度將會保留。
 Authentication.SignUp.Title,{username}，您好，請建立密碼
 Authentication.TwoStepVerification.Action.Approve,批准
 Authentication.TwoStepVerification.Action.ChangePassword,變更密碼
@@ -641,27 +651,27 @@ Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,動畫太長（{duratio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,動畫太短（{duration} 秒）。動作動畫必須超過 {minLength} 秒。
 Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,{cageName} 中的圍籠零件放置違規：{upperPart} 未正確放置在 {lowerPart} 上方。
 Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,{cageName} 中的圍籠零件 {partName} 有 {actualCount} 個頂點，預期約為 {expectedCount} 個。這可能表示該身體區域缺少或出現重複幾何形狀。
+Common.UGCValidation.ErrorLabel.AQSFail_CageUV,{cage_name} 的 UV 值不正確，與範本不匹配。{incorrect_uv_count} 個 UV 不正確（{unreferenced_vertex_count} 個未參考、{non_template_uv_count} 個非範本、{duplicate_mapping_count} 個重複對映），以及 {unmatched_template_count} 個未匹配的範本頂點。請更正圍籠的 UV，使其與範本匹配。
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,你的身體包含小型未連接的網格元件（網格島）。請移除浮動幾何，並確保所有網格部位皆已正確連接。
-Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,素材品質：{partName} 有 {num_disconnected_components} 個未連接的元件，超過 {max_disconnected_components} 個的上限。
-Common.UGCValidation.ErrorLabel.AQSInputDataError,由於輸入資料不正確或不完整，無法正確計算品質分數。請檢查你的模型或提交錯誤報告
-Common.UGCValidation.ErrorLabel.AQSInternalError,由於資產品質錯誤，無法產生分數。請檢查輸入資料的正確性，然後再試一次，或提交錯誤報告。
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,素材品質警告：圍籠與網格之間的距離分數為 {score}。外部圍籠與網格之間的最長距離為 {max_distance}，{negative_sdf_percent}% 的外部圍籠頂點位於成像網格內部。
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,素材品質警告：身體圍籠距離分數為 {score}。身體圍籠與網格之間的最長距離為 {max_distance}，{negative_sdf_percent}% 的身體圍籠頂點位於身體網格內部。
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,素材品質警告：頭部圍籠距離分數為 {score}。頭部圍籠與網格之間的最長距離為 {max_distance}，{negative_sdf_percent}% 的頭部圍籠頂點位於頭部網格內部。
-Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,素材品質警告：圍籠相關性分數為 {score}。已修改的外部圍籠頂點中，有 {irrelevant_percent}% 未覆蓋飾品。
-Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,素材品質警告：圍籠 {cage_name} 的 UV 分數為 {score}。UV 數量不正確：{incorrect_uv_count}。
-Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,素材品質：{partName} 有 {degenerate_triangle_percent}% 的退化三角形（分數：{score}）。
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,素材品質警告：動態頭部表情分數為 {score}。
-Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,素材品質：關節設定分數為 {score}（關節：{joint_number}，左手：{left_hand_joint_number}，右手：{right_hand_joint_number}）。
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,素材品質：在 {num_disconnected_components} 個元件中，{partName} 有 {num_small_volume_islands} 個小型未連接的島嶼（分數：{score}）。
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,素材品質：{partName} 有網格流形問題（分數：{score}）。
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,素材品質：{partName} 網格非密封（{boundary_edges_percent}% 邊界邊緣）。
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,素材品質警告：網格圍阻分數為 {score}。{mesh_outside_outer_cage_percent}% 的網格頂點位於外部圍籠之外。
-Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,由於輸入資料不完整或無效，因此無法計算 {measureName} 的素材品質分數。這並不會使你無法上傳。
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,素材品質：紋理 {textureName} 的複雜度低（分數：{score}）。
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,素材品質：紋理 {textureName} 的解析度為 {texture_width} x {texture_height}（分數：{score}）。
+Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,{partName} 有 {num_disconnected_components} 個未連接的元件，超過 {max_disconnected_components} 個的上限。
+Common.UGCValidation.ErrorLabel.AQSInternalError,由於內部錯誤，無法完成驗證。請檢查輸入的資料是否正確，然後再試一次，或提交錯誤報告。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,外部圍籠未緊貼成像網格。外部圍籠與網格之間的最長距離為 {max_distance}，且有 {negative_sdf_percent}% 的外部圍籠頂點位於成像網格內。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,身體圍籠未緊貼身體網格。身體圍籠與網格之間的最長距離為 {max_distance}，且有 {negative_sdf_percent}% 的身體圍籠頂點位於身體網格內。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,頭部圍籠未緊貼頭部網格。頭部圍籠與網格之間的最長距離為 {max_distance}，且有 {negative_sdf_percent}% 的頭部圍籠頂點位於頭部網格內。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,已修改的外部圍籠頂點中，有 {irrelevant_percent}% 未覆蓋飾品。請調整圍籠，使其更貼合飾品形狀。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,{cage_name} 的 UV 值不正確。{incorrect_uv_count} 個 UV 不正確（{unreferenced_vertex_count} 個未參考、{non_template_uv_count} 個非範本、{duplicate_mapping_count} 個重複對映），以及 {unmatched_template_count} 個未匹配的範本頂點。
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} 有 {degenerate_triangle_percent}% 的退化三角形。
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,動態頭部有表情品質問題。左眼閉上：{left_eye_close}、右眼閉上：{right_eye_close}、嘴巴張開：{mouth_open}、開心：{is_happy}、悲傷：{is_sad}。
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,關節設定異常。關節總數：{joint_number}，左手關節：{left_hand_joint_number}，右手關節：{right_hand_joint_number}。
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName} 在總共 {num_disconnected_components} 個元件中，有 {num_small_volume_islands} 個小型未連接的網格島嶼。請移除浮動幾何。
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,{partName} 具有非流形幾何。請檢查是否有非平面的面、自我相交表面，或是兩個以上的面共用的邊。
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,{partName} 網格非密封（{boundary_edges_percent}% 邊界邊緣）。
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,{mesh_outside_outer_cage_percent}% 的網格頂點位於外部圍籠之外。請調整外部圍籠，使其完全圍阻成像網格。
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,輸入的資料不完整或無效，因此無法計算 {measureName} 的驗證資料。這並不會使你無法上傳。
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,紋理 {textureName} 的複雜度較低。紋理可能缺乏足夠的細節或變化。
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,紋理 {textureName} 的解析度較低，為 {texture_width}x{texture_height}。建議使用解析度較高的紋理。
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,素材品質：{partName} 有 {intersecting_tri_face_percent}% 的相交三角形面（分數：{score}）。
-Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,素材品質：{partName} 有 {uv_outside_bound_vert_percent}% 的 UV 頂點超出界限（分數：{score}）。
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName} 有 {uv_outside_bound_vert_percent}% 的 UV 頂點超出 [0,1] 界限。"
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,素材品質：{partName} 有 {similar_vertex_percent}% 的相似頂點（分數：{score}）。
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,「{PartName}」中的飾品附件「{AttachmentName}」，必須放置在網格表面附近。目前位置 [{CurrentPosition}] 超出有效區域。請將其移動至更靠近 [{ClosestValidPosition}] 的位置。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,手把已蒙皮至關節 {jointName}，但該關節不屬於允許的結構。僅允許使用標準 R15 關節和蒙皮轉移關節。
@@ -731,18 +741,19 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,市集上的動態頭部必須
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,無法偵測到動態頭部閉上右眼的表情。請根據右眼在頭部上的位置，調整右眼的圍籠地標，並確保眼睛是閉上的狀態。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,無法偵測到動態頭部皺眉的表情。請根據嘴巴在頭部上的位置，調整嘴巴的圍籠地標，並確保是皺眉的表情。
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,發光區域超過閾值。
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName} 的發光度太高。發光區域 × 強度超過限制（目前為 {emissivePercentage}%，必須小於或等於 {maxEmissivePercentage}%）。請縮小發光區域或降低其 EmissiveStrength。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,超出發光區域。
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{assetTypeName} 的發光度太高。發光區域 × 強度超過限制（目前為 {emissiveArea}，必須小於或等於 {maxEmissiveArea}）。請縮小發光區域或降低其 EmissiveStrength。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,此素材使用僅供「信任創作者計畫」中的創作者使用的發光貼圖。請移除所有發光貼圖內容，或在上傳前加入該計畫。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,已發佈的動畫缺少有效的部位最大平移距離值。請重新發佈此動畫。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,已發佈的動畫缺少有效的 UGC 動作標記。請重新發佈此動畫。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,無法從已發佈的動畫資料中，計算部位的最大平移距離。請重新發佈此動畫。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,已發佈的動畫指定部位的最大平移距離為 {taggedTranslation} 個磚塊，但其動畫資料計算出為 {calculatedTranslation} 個磚塊。請重新發佈此動畫。
+Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,頭部必須放置在 UpperTorso 上方。頭部中心位於軀幹頂端下方，這意味著頭部網格塌陷或位置不對。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls 上的 InternalOverrideFACSData 屬性在上傳時，必須為空。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,FACS 偵測到你的頭部被放大至 {modPercent}%，但更改頭部的行為違反了市集的臉部動畫政策。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,FACS 偵測到你的頭部被縮小至 {modPercent}%，但更改頭部的行為違反了市集的臉部動畫政策。
-Common.UGCValidation.ErrorLabel.FailureWithoutReason,驗證失敗，原因不明。請再試一次，如果問題仍然存在，請開啟錯誤報告。
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,上傳格式不符合預期的資料夾結構。請再試一次或提交錯誤報告。
-Common.UGCValidation.ErrorLabel.HeadNotDynamic,市集上的動態頭部必須先行設定，才能正確地展現主要臉部動作，但我們的偵測並無發現重大變化。
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,骨骼 {bonePath} 距離網格零件 {partName} 過遠，請將其移動至靠近網格零件的尺寸邊界處。
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,骨骼 {bonePath} 與其父骨骼距離過近。請稍微調整該骨骼的位置。
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,骨骼 {bonePath} 具有 transform 屬性，但市集上傳功能尚未啟用此設定。請將其重置為 identity CFrame。
@@ -788,8 +799,6 @@ Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName}「{InstancePat
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,「{PartName}」中的骨架附件「{AttachmentName}」，必須放置在該身體部位與相鄰部位連接的關節邊界附近。目前位置 [{CurrentPosition}] 與連接平面距離過遠。請將其移動至更靠近 [{ClosestValidPosition}] 的位置。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,若要將素材上傳至 Roblox，你必須選擇 1 個實例和關聯的上傳類型。
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,此素材太大，無法上傳（{sizeBytes} 位元組，超過 {maxSizeBytes} 位元組的上限）。請縮小大小，然後再試一次。
-Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,個體{ProblematicDescendantPath}不應有標註。
-Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,第二個測試錯誤字串，用於驗證 Hub-first 翻譯同步工作流程的端到端程序。
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,頭部網格零件包含 {jointName} 的臉部動畫，但該關節無法用於 FACs。請重新命名此關節，然後重新匯入頭部。
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,身體部位 {partName} 已蒙皮至虛擬關節 {jointName}，但該關節不屬於 R15plus 結構。
 Common.VerifiedParentalConsent.Action.Cancel,
@@ -867,6 +876,8 @@ CommonUI.Controls.Label.Wednesday,星期三
 CommonUI.Controls.Label.WednesdayAbbreviated,週三
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,找不到結果
+CommonUI.Features.Action.ClassicThemeSunsetGetPlus,取得 Plus
+CommonUI.Features.Action.ClassicThemeSunsetManage,
 CommonUI.Features.Action.ClassicUnlockGetTheme,取得主題
 CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
@@ -874,6 +885,7 @@ CommonUI.Features.Action.Go,開始
 CommonUI.Features.Action.LessLowercase,更少
 CommonUI.Features.Action.MoreLowercase,更多
 CommonUI.Features.Action.Send,傳送
+CommonUI.Features.Heading.ClassicThemeSunset,感謝您一同歡慶 Roblox 20 週年
 CommonUI.Features.Heading.ClassicUnlock,慶祝 Roblox 20 週年
 CommonUI.Features.Heading.GameDetails,體驗詳細資料
 CommonUI.Features.Label.About,關於
@@ -893,6 +905,8 @@ CommonUI.Features.Label.Catalog,Roblox 目錄
 CommonUI.Features.Label.ChannelWithChannelName,頻道：{channelName}
 CommonUI.Features.Label.Charts,圖表
 CommonUI.Features.Label.Chat,聊天
+CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,Roblox Plus 會員可以保留經典主題。只有週年紀念 App 圖示會停用。
+CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,擁有 Roblox Plus 會員資格的使用者可以保留經典主題。只有週年紀念 App 圖示會停用。
 CommonUI.Features.Label.ClassicUnlockDescription,限時享受經典外觀
 CommonUI.Features.Label.ClassicUnlockManagementSnackbar,在「設定」中管理經典主題
 CommonUI.Features.Label.ClientCoreScriptVersion,用戶端核心指令碼版本：{clientCoreScriptVersion}
@@ -1114,6 +1128,7 @@ CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCoun
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 向所有正在遊玩的玩家打個招呼吧！
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,只有信任的聯絡對象才能與你聊天。
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,在此遊戲中與更多人員聊天。只有年齡相近的人員才能與你聊天。
+CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,在此遊戲中與更多人員聊天！
 CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ 加入同樂吧！向所有正在遊玩的玩家打個招呼！
 CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 {RBX_COUNT} 位玩家正在聊天。打個招呼吧！
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,按住以切換至免持模式
@@ -1450,7 +1465,7 @@ Feature.AppealsPortal.Description.AppealDenied.Multiple,我們已仔細審核有
 Feature.AppealsPortal.Description.AppealDenied.None,我們已仔細審核你的上訴，並仍認定你的活動違反了《社群標準》中的規定。我們明白此決定可能令人失望，同時感謝你撥冗提出上訴。
 Feature.AppealsPortal.Description.AppealDenied.Singular,我們已仔細審核有關{singleViolation}的上訴，並仍認定你的活動違反了《社群標準》中的規定。我們明白此決定可能很令人失望，感謝你撥冗提出上訴。
 Feature.AppealsPortal.Description.AppealDenied.V2,我們已仔細審核有關{violations}的上訴，並仍認定你的活動違反了《社群標準》中的規定。感謝你提出上訴。
-Feature.AppealsPortal.Description.AppealDisclosures,更多關於上訴的資訊：{link}瞭解詳情並查看揭露資訊{linkEnd}。
+Feature.AppealsPortal.Description.AppealDisclosures,{link}檢視上訴指南和揭露資訊{linkEnd}
 Feature.AppealsPortal.Description.AppealIneligible,你不再符合對此決定提出上訴的資格。請驗證身分，然後再試一次。
 Feature.AppealsPortal.Description.AppealReceived,我們會盡快通知你審核結果。根據問題的複雜程度，我們預計會在 5 個工作天內回覆。感謝你提出上訴。
 Feature.AppealsPortal.Description.AppealReceived.Plural,我們會盡快通知你審核結果。根據問題的複雜程度，我們預計會在 {number} 個工作天內回覆。感謝你提出上訴。
@@ -1652,7 +1667,7 @@ Feature.Avatar.Action.Reset,重設
 Feature.Avatar.Action.RestoreLastSaved,還原上次儲存的虛擬人偶
 Feature.Avatar.Action.Revert,還原
 Feature.Avatar.Action.Rotate,旋轉
-Feature.Avatar.Action.Save,儲存
+Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,儲存為新裝扮
 Feature.Avatar.Action.Select,選擇
 Feature.Avatar.Action.SelectMultipleItems,選擇多個道具
@@ -1864,7 +1879,7 @@ Feature.Avatar.Label.FullBody,全身
 Feature.Avatar.Label.FullMasks,全臉面具
 Feature.Avatar.Label.FullPair,完整配對
 Feature.Avatar.Label.Gear,裝備
-Feature.Avatar.Label.GenericSetError,發生錯誤，請再試一次。
+Feature.Avatar.Label.GenericSetError,
 Feature.Avatar.Label.GetLookQuestion,免費取得此服裝？
 Feature.Avatar.Label.GetOutfitMultiple,免費獲得 [{numItems}] 個道具？
 Feature.Avatar.Label.GetOutfitOne,免費獲得 [1] 個道具？
@@ -2178,6 +2193,7 @@ Feature.Avatar.UnavailableItems.BodyText,{category}「{item}」目前在審核�
 Feature.Avatar.UnavailableItems.BodyTextMultiple,以下道具目前在審核中，因此無法使用。{lineBreak}{items}{lineBreak}若該道具從 Roblox 中移除，你將在一週內收到退款。
 Feature.Avatar.UnavailableItems.ConfirmText,
 Feature.Avatar.UnavailableItems.TitleText,無法使用的道具
+Feature.Avatar.profile.tooltip,你的個人檔案
 Feature.Avatar.tooltip.ExpiredItemsFilter,尋找已過期的定時選項道具
 Feature.AvatarBundleReceivedInteractiveAlert.Action.Ok,
 Feature.AvatarBundleReceivedInteractiveAlert.Action.TakeALook,來看看
@@ -2258,7 +2274,7 @@ Feature.Build.Action.UpdateRating,更新分級
 Feature.Build.Action.UpdateWithChanges,更新變更
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,查看使用量
-Feature.Build.Analytics.AnalyzeChatPrompt,過去 {days} 天的{analyzeName}是多少？
+Feature.Build.Analytics.AnalyzeChatPrompt,分析我過去 {days} 天的{analyzeName}。為何這項指標很重要，以及我該如何改善？
 Feature.Build.Analytics.AnalyzeName.Arppu,每位付費使用者平均收益
 Feature.Build.Analytics.AnalyzeName.D1Retention,第 1 天保留率
 Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,每日活躍使用者
@@ -2310,9 +2326,13 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,造訪次數
 Feature.Build.Content.NewGame,新遊戲
 Feature.Build.Description.ActivateDeveloperProduct,販售開發者產品 {PRODUCT_ID}。
+Feature.Build.Description.AdActive,你的廣告正在投放中。看看它觸及了多少玩家。
 Feature.Build.Description.AdCampaignModerationReview,所有廣告活動都會由 Roblox 審核。此流程最多可能需要 24 小時。
 Feature.Build.Description.AdCampaignSheetRunDates,投放時間 {startDate} – {endDate}
-Feature.Build.Description.AdvertisingAgreement,繼續操作，即表示您同意 {advertisingTermsStart}Roblox 廣告條款{advertisingTermsEnd}和{advertisingStandardsStart}廣告標準{advertisingStandardsEnd}。
+Feature.Build.Description.AdComplete,廣告已結束。請查看結果。
+Feature.Build.Description.AdInReview,你的廣告正受到審核，預計於 {startDate}至 {endDate}期間投放。
+Feature.Build.Description.AdModerationReview,所有廣告都會經由 Roblox 審核，最多可能需要 24 小時。
+Feature.Build.Description.AdvertisingAgreement,選擇「建立」，即表示您同意 {advertisingTermsStart}Roblox 廣告條款{advertisingTermsEnd}和{advertisingStandardsStart}廣告標準{advertisingStandardsEnd}。
 Feature.Build.Description.ArchiveRemoval,若封存此遊戲，遊戲會從「組建」中移除。你仍可在創作者中心或 Roblox Studio 中，存取並還原遊戲。
 Feature.Build.Description.AutoBuyUsage,使用你的 Robux，在你建立時自動購買額外的組建使用量。你可以隨時設定每日消費上限。
 Feature.Build.Description.BoostAudienceForPlays,增加受眾，獲得更多遊玩次數。
@@ -2327,10 +2347,12 @@ Feature.Build.Description.DeactivateDeveloperProduct,將開發者產品 {PRODUCT
 Feature.Build.Description.EarnedRobuxAppliedFirst,若已賺取 Robux，這些 Robux 將會優先用於支付廣告活動費用。
 Feature.Build.Description.EnableBuildNotifs,在裝置設定中啟用通知，以接收來自組建的最新消息。
 Feature.Build.Description.FriendsLinkOnly,只有你的好友能存取此連結。若希望有更多人玩，請變更遊戲的受眾設定。
+Feature.Build.Description.GameConfiguration,變更販售物品的方式，並宣傳你的遊戲。
 Feature.Build.Description.GameCreationDone,我已建立完成並發佈你的遊戲。你可以打開遊戲試玩。
 Feature.Build.Description.GameSavedPlaytest,我已建立遊戲並儲存了新版本。你可以打開遊戲試玩。
 Feature.Build.Description.HubSettings,在創作者中心管理所有設定
 Feature.Build.Description.InviteFriendLimit,在你創作時，邀請最多 {MAX_INVITES} 位好友一起遊玩。
+Feature.Build.Description.LongAdCampaign,有更多時間觸及新玩家，並讓他們持續回流。
 Feature.Build.Description.MakeAudienceAvail,發佈體驗，讓此受眾可以存取。
 Feature.Build.Description.ManageAppearance,管理遊戲向其他人顯示的方式。
 Feature.Build.Description.ManageDeveloperProduct,管理開發者產品。
@@ -2345,6 +2367,8 @@ Feature.Build.Description.PlaytestLocked,建立第一個遊戲後，即可開始
 Feature.Build.Description.PlaytesterAccess,邀請好友成為搶先遊玩的測試員，或變更遊戲的受眾設定，讓更多人遊玩。
 Feature.Build.Description.PricingRules,設定定價規則
 Feature.Build.Description.PrivateShare,變更遊戲的受眾設定以分享。
+Feature.Build.Description.PromoteGameFree,輕觸一下，即可讓你的遊戲觸及更多玩家。
+Feature.Build.Description.PromoteGamePaid,建立廣告，讓你的遊戲觸及數百萬玩家。
 Feature.Build.Description.PromoteGameWithAdCampaign,透過為期 {durationDays} 天的廣告活動增加受眾，讓遊戲能被他人發現。
 Feature.Build.Description.RaiseLimitOrWait,提高每日 Robux 上限以繼續創作，或等待使用量於明天重置。
 Feature.Build.Description.RatingAgreement,發佈即表示您同意此內容分級準確無誤。
@@ -2352,6 +2376,7 @@ Feature.Build.Description.RestoreLatest,此版本將成為你的最新發佈版�
 Feature.Build.Description.RevertToVersion,確認以還原最新變更並回到 {VERSION}。
 Feature.Build.Description.ShareLatest,分享最新版本的變更內容。
 Feature.Build.Description.ShopButton,新增購物入口
+Feature.Build.Description.ShortAdCampaign,快速瞭解玩家對你遊戲的看法。
 Feature.Build.Description.UpdateDeveloperProduct,更新開發者產品 {PRODUCT_ID}。
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"說明長度不得超過 1,000 個字元。"
 Feature.Build.Error.DeveloperProductNameRequired,輸入產品名稱。
@@ -2367,6 +2392,7 @@ Feature.Build.Header.AccessSharing,存取權與分享
 Feature.Build.Header.AllVersions,所有版本
 Feature.Build.Header.ContentMaturity,成年適宜內容
 Feature.Build.Header.CustomAnswer,自訂答案
+Feature.Build.Header.GameConfiguration,遊戲設定
 Feature.Build.Header.GameDetails,遊戲詳情
 Feature.Build.Header.Overview,
 Feature.Build.Header.PastCampaigns,過往的廣告活動
@@ -2410,6 +2436,7 @@ Feature.Build.Label.GamePlays,遊戲遊玩次數
 Feature.Build.Label.GetMoreBuildUsage,取得更多組建使用量
 Feature.Build.Label.Hi,嗨
 Feature.Build.Label.IconThumbnails,圖示和縮圖
+Feature.Build.Label.Images2D,2D 圖片
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,必須輸入內容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2419,9 +2446,12 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,管理定價
 Feature.Build.Label.ManagedPricingMixed,混合套用於現有產品
 Feature.Build.Label.MaximizeForGamePlays,最大化遊戲遊玩次數
+Feature.Build.Label.Models3D,3D 模型
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,無上限
 Feature.Build.Label.NotStarted,尚未開始
+Feature.Build.Label.Object,物件
+Feature.Build.Label.Objects3D,3D 物件
 Feature.Build.Label.OffSale,下架
 Feature.Build.Label.OnSale,販售中
 Feature.Build.Label.Pending,擱置
@@ -2443,12 +2473,14 @@ Feature.Build.Label.ResetsMonthly,每月重置
 Feature.Build.Label.ResetsWeekly,每週重置
 Feature.Build.Label.RestoredVersion,已還原 {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
+Feature.Build.Label.SalesOptions,銷售選項
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,搜尋遊戲
 Feature.Build.Label.SearchTasks,搜尋任務
 Feature.Build.Label.SelectOption,選擇一個選項
 Feature.Build.Label.ShopButton,商店按鈕
 Feature.Build.Label.ShopUi,商店使用者介面
+Feature.Build.Label.Sounds,音效
 Feature.Build.Label.TargetAllRobloxPlayers,鎖定所有 Roblox 玩家
 Feature.Build.Label.Thinking,思考中
 Feature.Build.Label.Title,標題
@@ -2526,6 +2558,7 @@ Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.Video,
+Feature.Build.Label.World,世界
 Feature.Build.Message.AccountRequirements,你的帳號不符合使用組建的要求。
 Feature.Build.Message.AccountTooNew,你的帳號太新，無法發佈。請在 2 天後再試一次。
 Feature.Build.Message.AdCampaignCreateFailed,無法建立你的廣告活動，請再試一次。
@@ -2538,6 +2571,7 @@ Feature.Build.Message.AdsStatsEmpty,透過廣告活動拓展受眾，讓更多�
 Feature.Build.Message.AdsStatsEmptyFree,透過免費廣告活動拓展受眾，讓更多人發現你的遊戲
 Feature.Build.Message.AllFriendsAdded,你已邀請所有好友成為搶先遊玩的測試員。
 Feature.Build.Message.AnswerBuildQuestion,在下方回答組建的問題。
+Feature.Build.Message.AssetDetailsUnavailable,無法取得素材詳細資訊。
 Feature.Build.Message.AudienceIneligible,不符合向此受眾發佈的資格
 Feature.Build.Message.BuildAccountBlocked,你的帳號目前無法使用組建。
 Feature.Build.Message.BuildBusy,組建忙碌中。請稍候片刻再試。
@@ -2569,15 +2603,18 @@ Feature.Build.Message.InvitesLoadFailed,無法載入邀請
 Feature.Build.Message.LimitBelowSpend,上限不能低於今天已消費的 {ALREADY_SPENT} Robux。
 Feature.Build.Message.LinkCopied,連結已複製到剪貼簿。
 Feature.Build.Message.LoadingVersions,正在載入版本紀錄...
+Feature.Build.Message.NoAssetsFound,找不到素材。
 Feature.Build.Message.NoCapturesAvailable,沒有可用的截圖
 Feature.Build.Message.NoDescriptionProvided,未提供說明。
 Feature.Build.Message.NoFriendsToAdd,你沒有可邀請的好友。請先在 Roblox 上尋找可交流的對象。
 Feature.Build.Message.NoResults,
+Feature.Build.Message.NoSearchResultsFound,找不到搜尋結果
 Feature.Build.Message.NoVersionHistory,尚無版本紀錄。
 Feature.Build.Message.OneTaskCompleted,已完成 1 項任務
 Feature.Build.Message.OutOfBuildUsage,你的組建使用量已用完。查看你的選項，使用 Robux 以繼續創作。
 Feature.Build.Message.PlaytestInviteSendFailedBody,你無法向以下使用者傳送聊天邀請連結：
 Feature.Build.Message.PlaytestInviteSendFailedHint,請使用「分享」按鈕來取得連結。
+Feature.Build.Message.PlaytesterRequestFailed,我們無法完成你的請求，請再試一次。
 Feature.Build.Message.PlaytestersAdded,已邀請 {INVITED_COUNT} 位早鳥測試員，共 {MAX_INVITES} 位
 Feature.Build.Message.PrivatePlaytestInvite,{username} 邀請你成為搶先遊玩 {experienceName} 的測試員
 Feature.Build.Message.PublicPublishFailed,你的遊戲已發佈，但無法設為公開，請再試一次。
@@ -2616,13 +2653,15 @@ Feature.Build.Notification.Title.NeedInput,組建需要你的輸入
 Feature.Build.Placeholder.DescribeProduct,描述你想要銷售的產品
 Feature.Build.Placeholder.DescribeProductUpdate,描述一項更新
 Feature.Build.Prompt.CreateDeveloperProduct,協助我建立開發者產品、將其連接到遊戲中、驗證和發佈變更，並開放購買。
-Feature.Build.Title.AdCampaignActive,廣告活動已生效
 Feature.Build.Title.AdCampaignDuration,為期 {durationDays} 天的廣告活動
+Feature.Build.Title.AdComplete,廣告已完成
+Feature.Build.Title.AdCreated,已建立廣告
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,新增圖片
 Feature.Build.Title.AdsStatsEmpty,啟動廣告活動
 Feature.Build.Title.AdsStatsEmptyFree,啟動你的第一個廣告活動
 Feature.Build.Title.ArchiveThisGame,要封存此遊戲嗎？
+Feature.Build.Title.AssetLibrary,素材庫
 Feature.Build.Title.Audience,受眾
 Feature.Build.Title.BuildQuestion,組建有一個問題
 Feature.Build.Title.BuildQuestions,組建有一些問題
@@ -2631,6 +2670,7 @@ Feature.Build.Title.BuildUsage,組建使用量
 Feature.Build.Title.ChangesNotLive,變更的內容尚未發佈
 Feature.Build.Title.ChatBuildUnavailable,無法使用組建。
 Feature.Build.Title.Content,內容
+Feature.Build.Title.CreateYourAd,建立廣告
 Feature.Build.Title.DailyRobuxReached,已達每日 Robux 上限
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,編輯產品
@@ -2646,9 +2686,13 @@ Feature.Build.Title.NoMonetizationProducts,開始在遊戲中賺取收入
 Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
 Feature.Build.Title.PlaytestInviteSendFailed,無法傳送邀請
 Feature.Build.Title.Playtesters,
+Feature.Build.Title.PlaytestersAddRejected,無法新增以下使用者：
 Feature.Build.Title.PlaytestersOnlyPlay,只有遊戲測試員可以遊玩
 Feature.Build.Title.PromoteGame,宣傳你的遊戲
 Feature.Build.Title.PromoteGameFree,免費宣傳你的遊戲
+Feature.Build.Title.PromoteGameFreePlural,你獲得了 {promotionCount} 則免費廣告
+Feature.Build.Title.PromoteGameFreeSingular,你獲得了一則免費廣告
+Feature.Build.Title.PromoteGamePaid,更多玩家正在等著你
 Feature.Build.Title.PushNotifications,推播通知
 Feature.Build.Title.RevertLastChange,是否要還原上次的變更？
 Feature.Build.Title.Tasks,任務
@@ -2851,6 +2895,11 @@ Feature.Catalog.Label.ItemInAHold,道具存放中？
 Feature.Catalog.Label.ItemOwnedCount,已擁有道具（{itemCount}）
 Feature.Catalog.Label.ItemsCount,
 Feature.Catalog.Label.LeftArm,
+Feature.Catalog.Label.LicensedBy,授權者：
+Feature.Catalog.Label.LicensingLicensed,已授權
+Feature.Catalog.Label.LicensingLicensedInfo,經品牌核准
+Feature.Catalog.Label.LicensingOfficial,官方
+Feature.Catalog.Label.LicensingOfficialInfo,由品牌製作
 Feature.Catalog.Label.Limited,限量
 Feature.Catalog.Label.LimitedU,限定 U
 Feature.Catalog.Label.LipMakeup,
@@ -2923,6 +2972,7 @@ Feature.Catalog.Label.SellCut,您會賺取：
 Feature.Catalog.Label.SellPageUpsell,只有具備 Roblox Plus 會員資格的使用者可使用販賣功能。
 Feature.Catalog.Label.SellSuccess,道具販賣中
 Feature.Catalog.Label.SerialNumberColon,序列號:
+Feature.Catalog.Label.ShareToMoments,分享至「美好時光」
 Feature.Catalog.Label.ShoulderAccessories,肩膀飾品
 Feature.Catalog.Label.SoldOut,
 Feature.Catalog.Label.SupportsHeadShapes,支援頭部形狀
@@ -2938,6 +2988,7 @@ Feature.Catalog.Label.Timer.Second.Plural,剩下 {number} 秒
 Feature.Catalog.Label.Timer.Second.Singular,剩下 1 秒
 Feature.Catalog.Label.Tops,上衣
 Feature.Catalog.Label.Torso,
+Feature.Catalog.Label.TotalItemsFraction,合計：（{itemCount} 個物品，共 {itemTotal} 個）
 Feature.Catalog.Label.TotalItemsParenthesis,
 Feature.Catalog.Label.TotalUnformatted,合計
 Feature.Catalog.Label.Tradable,可交易
@@ -3079,8 +3130,8 @@ Feature.Chat.Drawer.Join,
 Feature.Chat.Drawer.PinGame,置頂
 Feature.Chat.Drawer.PlayGame,參訪體驗
 Feature.Chat.Drawer.ViewDetails,
-Feature.Chat.Heading.ChatWithConnections,與聯繫對象聊天
-Feature.Chat.Heading.ChatWithFriends,與好友聊天
+Feature.Chat.Heading.ChatWithConnections,與好友聊天
+Feature.Chat.Heading.ChatWithFriends,
 Feature.Chat.Heading.CreateUnfilteredChatDialog,使用擴充的聊天功能建立新群組？
 Feature.Chat.Heading.ExpressiveChat,暢談
 Feature.Chat.Heading.FailedToLeaveGroup,無法離開群組
@@ -3090,7 +3141,7 @@ Feature.Chat.Heading.FirstConversationWithThisUser,與此使用者的第一次�
 Feature.Chat.Heading.FirstInteractionWith,與「{displayName}」的第一次互動
 Feature.Chat.Heading.FirstInteractionWithThisPerson,與此使用者的第一次互動
 Feature.Chat.Heading.LeaveGroup,離開群組
-Feature.Chat.Heading.PartyWithConnections,與聯繫對象組隊同樂
+Feature.Chat.Heading.PartyWithConnections,與好友組隊同樂
 Feature.Chat.Heading.PartyWithFriends,與好友利用 Party 同樂
 Feature.Chat.Heading.SafeChattingWithThisUser,與此使用者聊天時請注意安全
 Feature.Chat.Heading.SafeChattingWithUsername,與 {displayName} 聊天時請注意安全
@@ -3119,7 +3170,6 @@ Feature.Chat.Label.Group.YouRepliedToThem,您已回覆 {DISPLAY_NAME}
 Feature.Chat.Label.GroupName,
 Feature.Chat.Label.HoverToReplyTooltip,懸停以回覆
 Feature.Chat.Label.Loading,
-Feature.Chat.Label.LongPressToReplyTooltip,長按以回覆
 Feature.Chat.Label.Members,成員
 Feature.Chat.Label.MessageNotAvailable,無法存取此訊息
 Feature.Chat.Label.MuteInGameChatToastNotifications,將遊戲中的聊天通知靜音
@@ -3138,9 +3188,9 @@ Feature.Chat.Label.ReplyChatInputPlaceholder,回覆 {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,回覆給自己
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} 說...
 Feature.Chat.Label.ReplyingToYourself,你說…
-Feature.Chat.Label.SearchConnections,搜尋聯繫對象
+Feature.Chat.Label.SearchConnections,搜尋好友
 Feature.Chat.Label.SearchForFriendsAndChat,搜尋對話
-Feature.Chat.Label.SearchFriends,搜尋好友
+Feature.Chat.Label.SearchFriends,
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,已傳送
 Feature.Chat.Label.SnoozeChatNotifications,將體驗中的聊天通知靜音：
@@ -3161,10 +3211,10 @@ Feature.Chat.Label.UnknownUser,未知使用者
 Feature.Chat.Label.User,使用者
 Feature.Chat.Label.ViewProfile,檢視個人檔案
 Feature.Chat.Label.YouRepliedToYou,您已回覆給自己
-Feature.Chat.Message.AddConnectionsLimit,聊天群組最多可以有 {connectionsNum} 位聯繫對象。
-Feature.Chat.Message.AddConnectionsPartyLimit,隊伍中最多可以有 {connectionsNum} 位聯繫對象。
-Feature.Chat.Message.AddConnectionsPartyLimitSingular,由於您的隱私設定，您只能與 1 位聯繫對象組成隊伍。
-Feature.Chat.Message.AddFriendsLimit,你的聊天群組最多可以有 {connectionsNum} 位好友。
+Feature.Chat.Message.AddConnectionsLimit,你的聊天群組最多可以有 {connectionsNum} 位好友。
+Feature.Chat.Message.AddConnectionsPartyLimit,你的隊伍最多可以有 {connectionsNum} 位好友。
+Feature.Chat.Message.AddConnectionsPartyLimitSingular,由於你的隱私設定，你只能與 1 位好友組隊。
+Feature.Chat.Message.AddFriendsLimit,
 Feature.Chat.Message.AddFriendsPartyLimit,你的 Party 最多可以有 {connectionsNum} 位好友。
 Feature.Chat.Message.AddFriendsPartyLimitSingular,由於你的隱私設定，你只能與 1 位好友組成 Party。
 Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName} 傳送了一則無法顯示的訊息
@@ -3172,9 +3222,9 @@ Feature.Chat.Message.ChatIsDisabledByPrivacySetting,聊天功能已停用。此�
 Feature.Chat.Message.ChatUnavailableRegion,所在地區目前無法使用聊天功能。
 Feature.Chat.Message.ChatUnavailableWithUser,此使用者目前無法使用聊天功能。
 Feature.Chat.Message.Default,某些在此聊天室的使用者將看不到您的訊息。
-Feature.Chat.Message.EnableChat,若要與聯繫對象聊天，請在隱私設定中開啟聊天功能。
-Feature.Chat.Message.EnableChat.FriendsRename,若要與好友聊天，請在隱私設定中開啟聊天功能。
-Feature.Chat.Message.EnableParty,若要與聯繫對象組成隊伍，請在「隱私設定」中開啟「隊伍」功能。
+Feature.Chat.Message.EnableChat,若要與好友聊天，請在隱私設定中開啟聊天功能。
+Feature.Chat.Message.EnableChat.FriendsRename,
+Feature.Chat.Message.EnableParty,若要與好友組隊同樂，請在隱私設定中開啟 Party 功能。
 Feature.Chat.Message.EnableParty.FriendsRename,若要與好友一起使用 Party，請在隱私設定中開啟 Party 功能。
 Feature.Chat.Message.FailedToLeaveGroup,無法將您從對話 {CONVERSATION_TITLE} 移除。
 Feature.Chat.Message.FailedToLeaveGroup.V2,無法將您從群組 {CONVERSATION_TITLE} 中移除。
@@ -3182,13 +3232,13 @@ Feature.Chat.Message.FailedToRemoveUser,無法將使用者 {USERNAME} 從對話 
 Feature.Chat.Message.FailedToRemoveUser.V2,無法將使用者 {USERNAME} 從群組 {CONVERSATION_TITLE} 中移除。
 Feature.Chat.Message.FailedToRenameConversation,對話 {EXISTING_NAME} 無法更名為 {NEW_NAME}。
 Feature.Chat.Message.FailedToRenameConversation.V2,群組 {EXISTING_NAME} 無法更名為 {NEW_NAME}。
-Feature.Chat.Message.GroupConnectionLimitSingular,只能新增 1 位聯繫對象來聊天。
-Feature.Chat.Message.GroupFriendLimitSingular,你只能新增 1 位好友進行聊天。
+Feature.Chat.Message.GroupConnectionLimitSingular,你只能新增 1 位好友進行聊天。
+Feature.Chat.Message.GroupFriendLimitSingular,
 Feature.Chat.Message.LeaveGroup,您將無法在此群組聊天。
 Feature.Chat.Message.LeaveGroup.V2,確定要離開群組嗎？
-Feature.Chat.Message.MakeConnectionsToChat,在 Roblox 上建立聯繫對象，即可開始一起聊天
-Feature.Chat.Message.MakeConnectionsToParty,在 Roblox 上建立聯繫對象，一起組隊遊玩
-Feature.Chat.Message.MakeFriendsToChat,在 Roblox 結交好友即可一起聊天
+Feature.Chat.Message.MakeConnectionsToChat,在 Roblox 結交好友即可一起聊天
+Feature.Chat.Message.MakeConnectionsToParty,在 Roblox 上結交朋友，一起組隊遊玩
+Feature.Chat.Message.MakeFriendsToChat,
 Feature.Chat.Message.MakeFriendsToParty,在 Roblox 上結交朋友來進行隊伍遊玩
 Feature.Chat.Message.MessageContentModerated,訊息遭到過濾，無法傳送。
 Feature.Chat.Message.MessageUnavailable,無法查看訊息
@@ -3217,8 +3267,8 @@ Feature.Chat.ShareGameToChat.NoPopularGames,無熱門體驗
 Feature.Chat.ShareGameToChat.NoRecentGames,沒有近期紀錄
 Feature.Chat.ShareGameToChat.Popular,
 Feature.Chat.ShareGameToChat.Recent,最近玩過
-Feature.Chat.Text.NoConnections,尚未新增任何聯繫對象。若要開始，請尋找並在 Roblox 上新增聯繫對象。
-Feature.Chat.Text.NoFriends,你尚未新增任何好友。若要開始，請在 Roblox 上尋找並新增好友。
+Feature.Chat.Text.NoConnections,你尚未新增任何好友。若要開始，請在 Roblox 上尋找並新增好友。
+Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.MuteChatNotifications,在遊戲遊玩期間將好友的聊天通知靜音
 Feature.Chat.Title.NewChat,新聊天
 Feature.Chat.Toast.Error.InvalidUserSelected,此清單中有人員無法新增
@@ -3634,7 +3684,7 @@ Feature.FriendsActivityFeed.Timestamp.OneHourAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.OneMinuteAbbreviated,1 分鐘
 Feature.FriendsActivityFeed.Timestamp.OneWeekAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.WeeksAbbreviatedPlural,
-Feature.FriendsMenu.Label.SearchForConnections,
+Feature.FriendsMenu.Label.SearchForConnections,搜尋聯繫對象
 Feature.FriendsMenu.Label.SelectedConnectionsCount,已選取 {numerator} 位聯繫對象，上限 {denominator} 位
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,已選取 {selectedCount} 位聯繫對象
 Feature.FriendsMenu.Label.SelectedFriendsCount,已選取 {numerator}/{denominator} 名好友
@@ -3797,7 +3847,6 @@ Feature.Groups.Heading.Primary,主要
 Feature.Groups.Heading.SocialLinksNew,社交連結
 Feature.Groups.Heading.SocialMedia,社交媒體
 Feature.Groups.Heading.VerificationRequired,必須驗證帳號
-Feature.Groups.Heading.Videos,
 Feature.Groups.Label.ByOwnerWithFormat,所有者：{ownerName}
 Feature.Groups.Label.Follower,
 Feature.Groups.Label.FollowerCapital,
@@ -4133,7 +4182,7 @@ Feature.NotApproved.Action.ReactivateAccount,重新啟用我的帳號
 Feature.NotApproved.Action.ReportMistake,回報錯誤
 Feature.NotApproved.Action.RuleConfirmation,我同意了解並遵守規定。
 Feature.NotApproved.Action.UserAgree,
-Feature.NotApproved.Action.ViewAppealGuidelines,檢視上訴指南
+Feature.NotApproved.Action.ViewAppealGuidelines,檢視上訴指南和揭露資訊
 Feature.NotApproved.Action.ViewLess,顯示較少
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,檢視規範
@@ -4823,6 +4872,7 @@ Feature.ReportAbuse.ProblemDescription.Violence,嫉妒暴力或血腥
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,
 Feature.ReportAbuse.Title.SelectInSceneIpReport,感謝你提出智慧財產權侵權檢舉
 Feature.RobloxSubscription.Action.JoinIn,加入時間：{time}
+Feature.RobloxSubscription.Action.ReferToPlus,推薦加入 Plus
 Feature.RobloxSubscription.Action.Subscribe,
 Feature.RobloxSubscription.Action.TryItForFree,免費試用
 Feature.RobloxSubscription.Body.AlreadySubscribed,您的 Plus 訂閱已提供遊戲內的福利。
@@ -4833,7 +4883,12 @@ Feature.RobloxSubscription.Description.Benefit.Customize,透過個人檔案外�
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具和虛擬人偶 10% 優惠，之後享 20% 優惠
 Feature.RobloxSubscription.Description.ExclusiveBenefits,用更少的 Robux 享受更多樂趣。訂閱 Roblox Plus。
 Feature.RobloxSubscription.Description.JoinEarly,透過 Plus 搶先加入
+Feature.RobloxSubscription.Description.ReferralRecipientReward,優惠僅適用於新的 Plus 訂閱者。
+Feature.RobloxSubscription.Description.ReferralReferrerReward,當有人使用你的連結加入 Plus 時。
+Feature.RobloxSubscription.Description.ReferralShare,邀請他人加入 Plus，對方加入時，雙方皆可獲得 {amount} Robux。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"按一下\u{201C}{ctaText}\u{201D}，即表示您同意 <a href=""{termsUrl}"">Roblox 訂閱條款</a>。系統將每月自動向您收取費用，直到取消訂閱為止。"
+Feature.RobloxSubscription.Heading.ReferralHistory,推薦歷史紀錄
+Feature.RobloxSubscription.Heading.ReferralShare,分享 Plus，獲得
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免費私人伺服器
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,免費傳送 Robux
@@ -4843,7 +4898,12 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,在 {periodIndex} {pe
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,按一下「繼續」，即表示你同意 {linkStart}Roblox 訂閱條款{linkEnd}。
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,按一下「免費試用」，即表示您同意 {linkStart}Roblox 訂閱條款。{linkEnd}您的免費試用期將於 1 個月後結束，之後系統將每月自動向您收費。您可以隨時取消訂閱。
 Feature.RobloxSubscription.Label.FreeTrialText,取得免費試用
+Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
+Feature.RobloxSubscription.Label.ReferralTheyGet,你的推薦對象將獲得
+Feature.RobloxSubscription.Label.ReferralYouGet,你將獲得
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}免費試用 1 個月{boldEnd}，之後 {price}／{periodType}
+Feature.RobloxSubscription.Label.RobuxEarned,已賺取的 Robux
+Feature.RobloxSubscription.Label.SuccessfulReferrals,成功推薦
 Feature.RobloxSubscription.Label.month,個月
 Feature.RobloxSubscription.Label.months,
 Feature.RobloxSubscription.Title.AgeCheckTrial,取得 Plus 一週免費使用權
@@ -5045,6 +5105,14 @@ Feature.SongDetails.Label.SongsAvailableBy,「{artistName}」的歌曲
 Feature.SongDetails.Label.SongsBy,
 Feature.SongDetails.Label.ThousandPlus,1000 以上
 Feature.SongDetails.Label.Vendor,廠商
+Feature.SplitPane.EditAvatarButtonText,
+Feature.SplitPane.NoAdditionalAvatarsDialogBody,建立另一個虛擬人偶，然後在此處切換主題。
+Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,建立虛擬人偶
+Feature.SplitPane.NoAdditionalAvatarsDialogTitle,以上是你已儲存的所有虛擬人偶
+Feature.SplitPane.UnsavedChangesDialogBody,若現在切換，你的虛擬人偶變更可能會遺失。請儲存以保留變更。
+Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,不要儲存
+Feature.SplitPane.UnsavedChangesDialogTitle,要儲存變更嗎？
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,新增其他人
 Feature.Squads.Action.ConnectToVoice,連線到語音
@@ -5485,6 +5553,7 @@ IAPExperience.PurchaseSuccess.Title.PurchaseSucceeded,購買成功
 IAPExperience.RobuxUpsell.Action.BuyRobux,
 IAPExperience.RobuxUpsell.Action.BuyRobuxAndItem,
 IAPExperience.RobuxUpsell.Action.Cancel,
+IAPExperience.RobuxUpsell.Action.GetPercentOff,享 {discountPercentage}% 折扣
 IAPExperience.RobuxUpsell.Text.AdditionalRobux,您還需要 {robux}。
 IAPExperience.RobuxUpsell.Text.BestValue,最超值
 IAPExperience.RobuxUpsell.Text.BetterValue,更划算
@@ -5558,7 +5627,7 @@ InstantApps.Shortcuts.Label.AddToDesktopMenuItem,新增至桌面
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,新增至首頁畫面
 InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,無法將「{experience_name}」新增至桌面
 InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,無法將 {experience_name} 新增到首頁畫面
-InstantApps.Shortcuts.Label.ShortcutAlreadyExists,「{experience_name}」的捷徑已存在
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,{experience_name} 的現有捷徑已被取代
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,已成功新增「{experience_name}」至桌面
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,已成功新增 {experience_name} 到首頁畫面
 InstantApps.Shortcuts.Label.TryAgain,

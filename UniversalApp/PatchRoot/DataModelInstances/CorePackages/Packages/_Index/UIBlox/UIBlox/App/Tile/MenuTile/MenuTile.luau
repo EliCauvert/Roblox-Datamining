@@ -7,6 +7,7 @@ local roactModule = require(parent_2.Roact)
 local tModule = require(parent_2.t)
 local cryoModule = require(parent_2.Cryo)
 local foundationModule = require(parent_2.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local badgeStatesModule = require(parent.Indicator.Enum.BadgeStates)
 local iconSizeModule = require(parent.ImageSet.Enum.IconSize)
 local getIconSizeModule = require(parent.ImageSet.getIconSize)
@@ -24,6 +25,7 @@ local divideTransparencyModule = require(parent_1.Utility.divideTransparency)
 local cursorTypeModule = require(parent.SelectionCursor.CursorType)
 local useCursorByTypeModule = require(parent.SelectionCursor.useCursorByType)
 local getTextSizeModule = require(parent_1.Core.Text.GetTextSize)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local migrateBadgeVariantModule = require(parent_1.Utility.migrateBadgeVariant)
 local uDim = UDim.new(0, 12)
 local uDim_1 = UDim.new(0, 8)
@@ -98,7 +100,7 @@ function menuTile.init(p1)
 end
 
 function menuTile.render(p1)
-	-- upvalues: withProviders (ref), getStyleProps (ref), getTextSizeModule (ref), controlStateModule (ref), otterModule (ref), t (ref), divideTransparencyModule (ref), roactModule (ref), interactableModule (ref), uDim (ref), uDim_1 (ref), imageSetComponentModule (ref), statusIndicator (ref), migrateBadgeVariantModule (ref)
+	-- upvalues: withProviders (ref), getStyleProps (ref), getTextSizeModule (ref), controlStateModule (ref), otterModule (ref), t (ref), divideTransparencyModule (ref), roactModule (ref), interactableModule (ref), uDim (ref), uDim_1 (ref), imageSetComponentModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), statusIndicator (ref), migrateBadgeVariantModule (ref)
 	local backgroundTransparency = p1.state.backgroundTransparency
 	local iconTransparency = p1.state.iconTransparency
 	local titleTransparency = p1.state.titleTransparency
@@ -111,7 +113,7 @@ function menuTile.render(p1)
 	local title = p1.props.title
 	
 	return withProviders(function(p2, _, p3)
-		-- upvalues: getStyleProps (copy), p1 (ref), getTextSizeModule (copy), title (ref), controlStateModule (copy), otterModule (copy), t (copy), divideTransparencyModule (copy), roactModule (copy), interactableModule (copy), size (ref), position (ref), layoutOrder (ref), onActivated (ref), backgroundTransparency (ref), uDim (copy), uDim_1 (copy), icon (ref), imageSetComponentModule (copy), iconTransparency (ref), titleTransparency (ref), badgeValue (ref), statusIndicator (copy), migrateBadgeVariantModule (copy)
+		-- upvalues: getStyleProps (copy), p1 (ref), getTextSizeModule (copy), title (ref), controlStateModule (copy), otterModule (copy), t (copy), divideTransparencyModule (copy), roactModule (copy), interactableModule (copy), size (ref), position (ref), layoutOrder (ref), onActivated (ref), backgroundTransparency (ref), uDim (copy), uDim_1 (copy), icon (ref), imageSetComponentModule (copy), iconTransparency (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), titleTransparency (ref), badgeValue (ref), statusIndicator (copy), migrateBadgeVariantModule (copy)
 		local theme = p2.Theme
 		local var1 = getStyleProps(p1.props.styleProps, p2)
 		local backgroundUIDefault = theme.BackgroundUIDefault
@@ -210,7 +212,8 @@ function menuTile.render(p1)
 						BackgroundTransparency = 1,
 						LayoutOrder = 2,
 						TextWrapped = true,
-						Font = titleFont.Font,
+						Font = if foundationFontFaceMigration then nil else titleFont.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(titleFont.Font) else nil,
 						Size = UDim2.new(1, 0, 0, y * 2),
 						Text = title,
 						TextColor3 = titleStyle.Color,

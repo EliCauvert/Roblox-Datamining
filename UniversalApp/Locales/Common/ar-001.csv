@@ -291,6 +291,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,تسجيل دخول QQ
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,إعادة إرسال الرمز
+Authentication.Login.Action.Save,حفظ
 Authentication.Login.Action.SendCodeSentenceCase,إرسال الكود
 Authentication.Login.Action.SendVerificationEmail,إرسال بريد إلكتروني للتحقق
 Authentication.Login.Action.SignIn,تسجيل الدخول
@@ -418,6 +419,7 @@ Authentication.Passkey.Label.UpsellTitle,تسجيل الدخول بشكلٍ أس
 Authentication.Passkey.Label.UpsellToastPageTitle,اكتمل بنجاح! تم إنشاء مفتاح المرور
 Authentication.Passkey.Label.UpsellToastTitle,تم إنشاء مفتاح مرور بنجاح!
 Authentication.ResetPassword.Response.ResetPasswordStarted,يجب عليك إعادة تعيين كلمة المرور الخاصة بك قبل المتابعة.
+Authentication.SignUp.Action.ApplyOnNextRespawn,تطبيق عند إعادة الظهور التالي
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
 Authentication.SignUp.Action.CreateAPasskey,
@@ -427,6 +429,7 @@ Authentication.SignUp.Action.EnableFaceId,تمكين مُعرِّف الوجه
 Authentication.SignUp.Action.ExitModalLeave,الخروج
 Authentication.SignUp.Action.IUnderstand,فهمت هذا
 Authentication.SignUp.Action.NextWord,
+Authentication.SignUp.Action.RespawnNow,إعادة الظهور الآن
 Authentication.SignUp.Action.SetupLater,الإعداد لاحقًا
 Authentication.SignUp.Action.StartOver,البدء من جديد
 Authentication.SignUp.Action.UseEmail,استخدام عنوان البريد الإلكتروني
@@ -437,6 +440,7 @@ Authentication.SignUp.Description.AccountAlreadyLinked,حساب على منصة 
 Authentication.SignUp.Description.AgreeToTermsWithGuardian.NoParameters,أوافق على شروط استخدام منصة Roblox (بما في ذلك التحكيم) وأقر بسياسة الخصوصية الخاصة بها. إذا كان عمري أقل من 18 عامًا، فأنا أوافق على أن والدي/الوصي علي يسمح لي بإنشاء هذا الحساب ويوافق على شروط الاستخدام.
 Authentication.SignUp.Description.BirthdayHelp,يساعدنا هذا على تحديد المحتوى الذي نعرضه عليك. لن يظهر عمرك للآخرين.
 Authentication.SignUp.Description.BirthdayHelp3,يساعدنا تاريخ ميلادك في عرض المحتوى ذي الصلة، ولا تتم مشاركته مع الآخرين.
+Authentication.SignUp.Description.BirthdayHint,أدخِل التاريخ
 Authentication.SignUp.Description.BirthdayValuePropC,يساعدنا هذا على تحديد المحتوى الذي نعرضه عليك. لن يظهر عمرك للآخرين
 Authentication.SignUp.Description.ClickNextAgreeToTerms,"بالضغط على ""التالي""، أنت توافق على شروط الاستخدام، بما في ذلك شرط التحكيم، وتُقر بسياسة الخصوصية."
 Authentication.SignUp.Description.CreateAPassword,إنشاء كلمة مرور لحسابك على Roblox
@@ -459,10 +463,12 @@ Authentication.SignUp.Description.SignupAgreement.FullCopy.CreateAccount,
 Authentication.SignUp.Description.ThisKeepYourAccountSecure,سيحافظ هذا على أمان حسابك في Roblox.
 Authentication.SignUp.Description.Try,جرب
 Authentication.SignUp.Description.UnderAgeAlert,أنت لا تستوفي الحد الأدنى المطلوب للعب على Roblox.
+Authentication.SignUp.Description.UsernameChanged,كل شيء جاهز! حسابك جاهز ومرتبط بمنصّة {platform}. أعد الظهور الآن لرؤية اسم المستخدم المحدث في اللعبة، أو سيُطبق التغيير في المرة القادمة.
 Authentication.SignUp.Description.UsernameHelp,بهذا الاسم سيراك الناس على Roblox. تذكر اسم المستخدم لتستخدمه في تسجيل الدخول في المستقبل.
 Authentication.SignUp.Description.UsernameHelpV2,هذه هي الطريقة التي ستسجّل بها الدخول ويظهر بها اسمك للآخرين، لذا تأكد من اختيار اسم مستخدم يسهل تذكره.
 Authentication.SignUp.Description.UsernameRule1,استخدم من 3 إلى 20 حرفًا
 Authentication.SignUp.Description.UsernameRule2,لا يُسمح إلا باستخدام الأحرف (من a إلى z) والأرقام (من 0 إلى 9) والشرطات السفلية (_)
+Authentication.SignUp.Description.UsernameUnchanged,لقد انضممت! حسابك جاهز ومرتبط بمنصّة {platform}. يمكنك الدردشة مع الأصدقاء وتشغيل الملايين من ألعاب منصّة Roblox.
 Authentication.SignUp.Description.VerificationLinkingText,سيتم ربط حسابك في Roblox بحسابك على {platform}. يمكنك إلغاء الارتباط من شاشة الإعدادات في أي وقت. قد يكون هناك فترة انتظار قبل أن تصير قادرًا على ربط الحساب حساب آخر على {platform}. من خلال النقر على التسجيل، أنت توافق على شروط الاستخدام بما في ذلك شرط التحكيم وأنت تعترف بسياسة الخصوصية لدينا.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,سيتم ربط حسابك في منصة Roblox بحسابك على حساب {platform}. يمكنك إلغاء الربط من شاشة الإعدادات في أي وقت. قد تكون هناك فترة انتظار قبل أن تتمكن من ربط الحساب بحساب آخر على حساب {platform}. من خلال النقر على {ctaButton}، أنت توافق على شروط الاستخدام بما في ذلك شرط التحكيم وأنت تُقِر بسياسة الخصوصية.
 Authentication.SignUp.Description.VerificationPage,من خلال النقر على التسجيل، أنت توافق على شروط الاستخدام بما في ذلك شرط التحكيم وأنت تعترف بسياسة الخصوصية.
@@ -474,6 +480,7 @@ Authentication.SignUp.Header.CreatePasswordOrPasskey,مرحبًا {username}، �
 Authentication.SignUp.Header.CreatedAccountChooseSignin,لقد أنشأنا حسابك. اختَر الطريقة التي ستسجل بها الدخول.
 Authentication.SignUp.Header.GenderPage6,شيء أخير. حدّد جنسك (اختياري)
 Authentication.SignUp.Header.PleaseTryAgain,يُرجى إعادة المحاولة
+Authentication.SignUp.Header.SetUpYourRobloxAccount,إعداد حسابك على منصّة Roblox
 Authentication.SignUp.Header.UsernamePage4,بعد ذلك، أنشئ اسم مستخدم
 Authentication.SignUp.Header.WhatIsYourBirthday,ما تاريخ ميلادك؟
 Authentication.SignUp.Heading.CannotSignUp,لا يمكنك التسجيل
@@ -497,6 +504,7 @@ Authentication.SignUp.Label.EmailAddress,
 Authentication.SignUp.Label.EnterYourEmail,أدخل بريدك الإلكتروني
 Authentication.SignUp.Label.EnterYourParentsEmail,إدخال البريد الإلكتروني لوالديك
 Authentication.SignUp.Label.Error.MinimumAge5,ينبغي أن تكون الحسابات الجديدة للأعمار فوق الخامسة
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,يجب أن تكون أكبر سنًا لتشغيل هذه اللعبة
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,اسم المستخدم هذا مأخوذ
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,لا يمكن أن تبدأ أسماء المستخدمين أو تنتهي بالرمز _
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,يمكن أن تحتوي أسماء المستخدمين على أحرف وأرقام و _ فقط
@@ -552,12 +560,14 @@ Authentication.SignUp.PasswordErrorLength,
 Authentication.SignUp.Response.AgedUpDisplayNameSetFirst,لا بد من تعيين الاسم أولاً.
 Authentication.SignUp.Response.BirthdayMustBeSetFirst,لا بد من تعيين تاريخ الميلاد أولاً.
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.ErrorTryAgain2,حدث خطأ ما. يُرجى المحاولة مرة أخرى.
 Authentication.SignUp.Response.InvalidBirthday,عيد ميلاد غير صالح.
 Authentication.SignUp.Response.InvalidEmail,عنوان البريد الإلكتروني غير صالح.
 Authentication.SignUp.Response.InvalidPhoneNumber,رقم الهاتف غير صالح.
 Authentication.SignUp.Response.PasswordComplexity,الرجاء إنشاء كلمة مرور أكثر تعقيدا.
 Authentication.SignUp.Response.PhoneNumberAlreadyLinked,رقم مرتبط بالفعل بحساب آخر.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,لا بد من تعيين اسم المستخدم أولاً.
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,سيتم حفظ تقدمك عند إكمال الإعداد.
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,موافقة
 Authentication.TwoStepVerification.Action.ChangePassword,تغيير كلمة المرور
@@ -624,27 +634,27 @@ Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,الحركة طويلة
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,الحركة قصيرة جدًا ({duration} من الثواني). يجب أن يكون طول الحركات التعبيرية (Emote) أكثر من {minLength} من الثواني.
 Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,يوجد انتهاك في وضع أجزاء القفص في {cageName}: لم يتم وضع {upperPart} بشكل صحيح فوق {lowerPart}.
 Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,يحتوي جزء القفص {partName} في {cageName} على {actualCount} من الرؤوس، بينما العدد المتوقع تقريبًا هو {expectedCount}. قد يشير ذلك إلى وجود تصميم هندسي مفقود أو مكرر في منطقة الجسد تلك.
+Common.UGCValidation.ErrorLabel.AQSFail_CageUV,يحتوي غلاف {cage_name} على قيم إحداثيات UV غير صحيحة ولا تتطابق مع القالب. توجد {incorrect_uv_count} من إحداثيات UV غير صحيحة ({unreferenced_vertex_count} غير مرجحة، و{non_template_uv_count} لا تتبع القالب، و{duplicate_mapping_count} من التعيينات المكررة)، بالإضافة إلى {unmatched_template_count} من رؤوس القوالب غير المطابقة. يُرجى تصحيح إحداثيات UV الخاصة بالغلاف لتتطابق مع القالب.
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,يحتوي الجسد لديك على مكونات صغيرة منفصلة من أصل mesh (جزر من أصل mesh). يُرجى إزالة الهندسة العائمة والتأكد من توصيل جميع أجزاء أصل mesh بشكل صحيح.
-Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,جودة الأصل: يحتوي الجزء {partName} على {num_disconnected_components} من المكونات غير المتصلة، وهو ما يتجاوز الحد الأقصى البالغ {max_disconnected_components}.
-Common.UGCValidation.ErrorLabel.AQSInputDataError,لا يمكن حساب درجة الجودة بشكل صحيح لأن بيانات الإدخال غير صحيحة أو غير كاملة. يُرجى التحقق من النموذج الخاص بك أو الإبلاغ عن الأخطاء
-Common.UGCValidation.ErrorLabel.AQSInternalError,لا يمكن إنشاء النتيجة بسبب خطأ في جودة الأصل. يُرجى التحقق من صحة بيانات الإدخال والمحاولة مرة أخرى، أو الإبلاغ عن الأخطاء.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,تحذير بشأن جودة الأصل: تبلغ درجة مسافة القفص عن أصل Mesh ما مقداره {score}. يبلغ الحد الأقصى للمسافة بين القفص الخارجي وأصل Mesh ما مقداره {max_distance}، وتقع نسبة {negative_sdf_percent}% من رؤوس القفص الخارجي داخل أصل Mesh للعرض.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,تحذير بشأن جودة الأصل: تبلغ درجة مسافة قفص الجسد ما مقداره {score}. يبلغ الحد الأقصى للمسافة بين قفص الجسد وأصل Mesh ما مقداره {max_distance}، وتقع نسبة {negative_sdf_percent}% من رؤوس قفص الجسد داخل أصل Mesh للجسد.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,تحذير بشأن جودة الأصل: تبلغ درجة مسافة قفص الرأس ما مقداره {score}. يبلغ الحد الأقصى للمسافة بين قفص الرأس وأصل Mesh ما مقداره {max_distance}، وتقع نسبة {negative_sdf_percent}% من رؤوس قفص الرأس داخل أصل Mesh للرأس.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,تحذير بشأن جودة الأصل: تبلغ درجة ملاءمة القفص ما مقداره {score}. نسبة {irrelevant_percent}% من رؤوس القفص الخارجي المعدلة لا تغطي الإكسسوار.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,تحذير بشأن جودة الأصل: تبلغ درجة إحداثيات UV ما مقداره {score} للقفص {cage_name}. عدد إحداثيات UV غير الصحيحة: {incorrect_uv_count}.
-Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,جودة الأصل: يحتوي الجزء {partName} على نسبة {degenerate_triangle_percent}% من المثلثات الملتوية (النتيجة: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,تحذير بشأن جودة الأصل: تبلغ درجة تعبير الرأس الديناميكي ما مقداره {score}.
-Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,جودة الأصل: حصلت تهيئة المفاصل على النتيجة {score} (المفاصل: {joint_number}، اليد اليسرى: {left_hand_joint_number}، اليد اليمنى: {right_hand_joint_number}).
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,جودة الأصل: يحتوي الجزء {partName} على {num_small_volume_islands} من الجزر الصغيرة المنفصلة من أصل {num_disconnected_components} من المكونات (النتيجة: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,جودة الأصل: يحتوي الجزء {partName} على مشكلات في انتظام أصل Mesh (النتيجة: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,جودة الأصل: أصل mesh الخاص بالجزء {partName} غير مانع لتسرب الماء ({boundary_edges_percent}% من حواف الحدود).
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,تحذير بشأن جودة الأصل: تبلغ درجة احتواء أصل mesh ما مقداره {score}. تقع ما نسبته {mesh_outside_outer_cage_percent}% من رؤوس أصل mesh خارج القفص الخارجي.
-Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,تعذر احتساب درجة جودة الأصل لـ {measureName} لأن بيانات الإدخال غير مكتملة أو غير صالحة. هذا لا يمنع عملية الرفع.
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,جودة الأصل: تتميز الهيئة {textureName} بانخفاض تعقيدها (النتيجة: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,جودة الأصل: تبلغ دقة الهيئة {textureName} ما مقداره {texture_width}x{texture_height} (النتيجة: {score}).
+Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,يحتوي الجزء {partName} على {num_disconnected_components} من المكونات غير المتصلة، وهو ما يتجاوز الحد الأقصى البالغ {max_disconnected_components}.
+Common.UGCValidation.ErrorLabel.AQSInternalError,لا يمكن إكمال التحقق من الصحة بسبب خطأ داخلي. يُرجى التحقق من صحة بيانات الإدخال والمحاولة مرة أخرى، أو الإبلاغ عن الأخطاء.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,لا يتبع القفص الخارجي عن كثب أصل Mesh للعرض. يبلغ الحد الأقصى للمسافة بين القفص الخارجي وأصل Mesh ما مقداره {max_distance}، وتقع نسبة {negative_sdf_percent}% من رؤوس القفص الخارجي داخل أصل Mesh للعرض.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,لا يتبع قفص الجسد عن كثب أصل Mesh للجسد. يبلغ الحد الأقصى للمسافة بين قفص الجسد وأصل Mesh ما مقداره {max_distance}، وتقع نسبة {negative_sdf_percent}% من رؤوس قفص الجسد داخل أصل Mesh للجسد.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,لا يتبع قفص الرأس عن كثب أصل Mesh للرأس. يبلغ الحد الأقصى للمسافة بين قفص الرأس وأصل Mesh ما مقداره {max_distance}، وتقع نسبة {negative_sdf_percent}% من رؤوس قفص الرأس داخل أصل Mesh للرأس.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,ما نسبته {irrelevant_percent}% من رؤوس القفص الخارجي المعدلة لا تغطي الإكسسوار. يُرجى ضبط القفص ليتناسب بشكل أفضل مع شكل الإكسسوار.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,يحتوي {cage_name} على قيم إحداثيات UV غير صحيحة. توجد {incorrect_uv_count} من إحداثيات UV غير صحيحة ({unreferenced_vertex_count} بدون مرجع، و{non_template_uv_count} لا تتبع القالب، و{duplicate_mapping_count} من التعيينات المكررة)، بالإضافة إلى {unmatched_template_count} من رؤوس القوالب غير المطابقة.
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,يحتوي الجزء {partName} على نسبة {degenerate_triangle_percent}% من المثلثات الملتوية.
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,توجد بالرأس الديناميكي مشاكل في جودة التعبير. إغلاق العين اليسرى: {left_eye_close}، إغلاق العين اليمنى: {right_eye_close}، فتح الفم: {mouth_open}، سعيد: {is_happy}، حزين: {is_sad}.
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,تهيئة مفاصل غير متوقعة. إجمالي المفاصل: {joint_number}، مفاصل اليد اليسرى: {left_hand_joint_number}، مفاصل اليد اليمنى: {right_hand_joint_number}.
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,يحتوي الجزء {partName} على {num_small_volume_islands} من الجزر الصغيرة المنفصلة من أصل mesh من إجمالي {num_disconnected_components} من المكونات. يرجى إزالة الأشكال الهندسية العائمة.
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,يحتوي الجزء {partName} على أشكال هندسية غير متشعبة. يُرجى التحقق من وجود أوجه غير مستوية أو أسطح تتقاطع مع نفسها أو حواف مشتركة بين أكثر من وجهين.
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,أصل mesh للجزء {partName} غير مانع لتسرب الماء ({boundary_edges_percent}% من حواف الحدود).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,تقع ما نسبته {mesh_outside_outer_cage_percent}% من رؤوس أصل Mesh خارج القفص الخارجي. يُرجى تعديل القفص الخارجي ليحتوي أصل Mesh للعرض بشكل كامل.
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,تعذر احتساب بيانات التحقق لـ {measureName} لأن بيانات الإدخال غير مكتملة أو غير صالحة. هذا لا يمنع عملية الرفع.
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,تتميز الهيئة {textureName} بانخفاض تعقيدها. قد تفتقر الهيئة إلى التفاصيل أو التباين الكافيين.
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,تتميز الهيئة {textureName} بدقة منخفضة تبلغ {texture_width}x{texture_height}. يُرجى استخدام هيئة ذات دقة أعلى.
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,جودة الأصل: يحتوي الجزء {partName} على نسبة {intersecting_tri_face_percent}% من الوجوه المثلثة المتداخلة (النتيجة: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,جودة الأصل: يحتوي الجزء {partName} على نسبة {uv_outside_bound_vert_percent}% من رؤوس إحداثيات UV خارج الحدود (النتيجة: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,يحتوي الجزء {partName} على نسبة {uv_outside_bound_vert_percent} % من رؤوس إحداثيات UV خارج الحدود [0،1].
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,جودة الأصل: يحتوي الجزء {partName} على نسبة {similar_vertex_percent}% من رؤوس الإحداثيات المماثلة (النتيجة: {score}).
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,"يجب وضع نقطة اتصال الإكسسوار ""{AttachmentName}"" في الجزء ""{PartName}"" بالقرب من سطح mesh. الموضع الحالي [{CurrentPosition}] خارج النطاق الصالح. انقله ليكون أقرب إلى [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,المقبض مربوط بالمفصل {jointName}، وهو ليس جزءًا من المخطط المسموح به. يُسمح فقط بمفاصل R15 القياسية ومفاصل نقل الإكساء.
@@ -714,18 +724,19 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,يجب أن تكون الرؤ�
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,تعذّر اكتشاف تعبير إغلاق العين اليمنى للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالعين اليمنى لتتطابق مع موضع العين اليمنى على الرأس والتأكد من إمكانية إغلاقها.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,تعذّر اكتشاف تعبير العبوس للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالفم لتتطابق مع موضع الفم على الرأس والتأكد من إمكانية إظهار تعبير العبوس.
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,تتجاوز المنطقة المُضيئة الحد المسموح به.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,يتميز {meshName} بكونه مضيئًا للغاية. تتجاوز مساحة الإضاءة × الشدة الحد المسموح به (حيث تبلغ حاليًا {emissivePercentage}%، ويجب أن تكون {maxEmissivePercentage}% أو أقل). قم بتقليص المساحة المتوهجة أو خفض قيمة EmissiveStrength.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,تم تجاوز المنطقة المُضيئة.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,يتميز {assetTypeName} بكونه مضيئًا للغاية. تتجاوز مساحة الإضاءة × الشدة الحد المسموح به (حيث تبلغ حاليًا {emissiveArea}، ويجب أن تكون {maxEmissiveArea} أو أقل). قم بتقليص المساحة المتوهجة أو خفض قيمة EmissiveStrength.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,يستخدم هذا الأصل خرائط إضاءة ذاتية متاحة فقط للمصممين في برنامج المصممين الموثوق بهم. يُرجى إزالة محتوى خرائط الإضاءة الذاتية بالكامل أو الانضمام إلى البرنامج قبل الرفع.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,تفتقد الحركة المنشورة إلى قيمة صالحة للحد الأقصى لإزاحة الأجزاء. يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,تفتقد الحركة المنشورة إلى علامة حركة تعبيرية صالحة من تصميم المستخدم (UGC). يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,تعذَّر حساب الحد الأقصى لإزاحة الجزء من بيانات الحركة المنشورة. يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,تحدد الحركة المنشورة الحد الأقصى لإزاحة الجزء بمقدار {taggedTranslation} من الأزرار، لكن بيانات الحركة الخاصة بها تُحسب لتكون {calculatedTranslation} من الأزرار. يُرجى إعادة نشر الحركة.
+Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,يجب وضع الرأس فوق UpperTorso. يقع مركز الرأس أسفل الجزء العلوي من الجسم، مما يشير إلى أن أصل Mesh للرأس منهار أو في غير موضعه الصحيح.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,يجب أن تكون خاصية InternalOverrideFACSData في FaceControls فارغة عند الرفع.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,تم اكتشاف أن نظام FACS قام بتوسيع حجم رأسك إلى {modPercent}%، لكن تعديل الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,تم اكتشاف أن نظام FACS قام بتقليص حجم رأسك إلى {modPercent}%، لكن تغيير الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
-Common.UGCValidation.ErrorLabel.FailureWithoutReason,فشل التحقُّق لسبب غير معروف. يُرجى المحاولة مرة أخرى أو الإبلاغ عن الأخطاء إذا استمرت هذه المشكلة.
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,تنسيق الملف الذي تم تحميله لا يطابق بنية المجلد المتوقعة. يُرجى المحاولة مرة أخرى أو الإبلاغ عن الأخطاء.
-Common.UGCValidation.ErrorLabel.HeadNotDynamic,يجب إعداد الرؤوس الديناميكية في المتجر لتحريك حركات الوجه الأساسية بشكل صحيح، لكن عملية الاكتشاف التي أجريناها لم ترصد تغييرًا كبيرًا.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,العظم {bonePath} بعيد جدًا عن MeshPart {partName}، يرجى وضعه أقرب إلى حدود حجم MeshPart‏.
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,العظم {bonePath} قريب جدًا من أصله. اضبط موضع العظم قليلاً.
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,يحتوي العظم {bonePath} على خاصية التحويل، ولكن لم يتم تمكين هذه الخاصية بعد لعمليات الرفع إلى المتجر. يرجى إعادة تعيينها إلى إطار CFrame المتطابق.
@@ -771,8 +782,6 @@ Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"يحتوي {ClassName} ""
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"يجب وضع نقطة اتصال rig ""{AttachmentName}"" في الجزء ""{PartName}"" بالقرب من حدود المفصل حيث يتصل جزء الجسد هذا بجزء مجاور. الموضع الحالي [{CurrentPosition}] بعيد جدًا عن مستوى الاتصال. انقله ليكون أقرب إلى [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,لرفع أصل على منصة Roblox، يجب عليك تحديد حالة واحدة بالضبط ونوع الرفع المرتبط بها.
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,هذا الأصل أكبر من الحد المسموح به للرفع (حجمه {sizeBytes} بايت متجاوزًا الحد الأقصى البالغ {maxSizeBytes} بايت). يرجى تقليل حجمه والمحاولة مرة أخرى.
-Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,يجب ألا تحتوي الحالة {ProblematicDescendantPath} على أي وسوم.
-Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,سلسلة أخطاء الاختبار الثانية المُستخدمة للتحقق من سير عمل مزامنة الترجمة المرتكزة على المركز من البداية للنهاية
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,يحتوي MeshPart الخاص بالرأس على محرك وجه لـ {jointName}، والذي لا يمكن استخدامه في نظام FACs. يُرجى إعادة تسمية هذه المفصل ثم إعادة استيراد الرأس.
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned, الجزء {partName} مربوط بالمفصل الافتراضي {jointName}، وهو ليسو جزءًا من مخطط R15plus.
 Common.VerifiedParentalConsent.Action.Cancel,
@@ -850,6 +859,8 @@ CommonUI.Controls.Label.Wednesday,الأربعاء
 CommonUI.Controls.Label.WednesdayAbbreviated,
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,لا توجد نتائج
+CommonUI.Features.Action.ClassicThemeSunsetGetPlus,اشترِك في Plus
+CommonUI.Features.Action.ClassicThemeSunsetManage,
 CommonUI.Features.Action.ClassicUnlockGetTheme,احصل على السمة
 CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
@@ -857,6 +868,7 @@ CommonUI.Features.Action.Go,الذهاب
 CommonUI.Features.Action.LessLowercase,أقل
 CommonUI.Features.Action.MoreLowercase,المزيد
 CommonUI.Features.Action.Send,
+CommonUI.Features.Heading.ClassicThemeSunset,شكرًا لاحتفالك بمرور 20 عامًا على انطلاق منصّة Roblox
 CommonUI.Features.Heading.ClassicUnlock,احتفِل بمرور 20 عامًا على انطلاق منصّة Roblox
 CommonUI.Features.Heading.GameDetails,تفاصيل التجربة
 CommonUI.Features.Label.About,حول
@@ -876,6 +888,8 @@ CommonUI.Features.Label.Catalog,كتالوج Roblox
 CommonUI.Features.Label.ChannelWithChannelName,القناة: {channelName}
 CommonUI.Features.Label.Charts,الرائجة
 CommonUI.Features.Label.Chat,الدردشة
+CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,سيحتفظ الأعضاء المشتركون في Roblox Plus بالسمة الكلاسيكية، بينما سيتم إيقاف استخدام أيقونة تطبيق الذكرى السنوية وحدها.
+CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,ستحتفظ كمُشترك في Roblox Plus بالسمة الكلاسيكية، بينما سيتم إيقاف استخدام أيقونة تطبيق الذكرى السنوية وحدها.
 CommonUI.Features.Label.ClassicUnlockDescription,استمتِع بالمظهر الكلاسيكي لفترة محدودة
 CommonUI.Features.Label.ClassicUnlockManagementSnackbar,إدارة السمة الكلاسيكية في الإعدادات
 CommonUI.Features.Label.ClientCoreScriptVersion,العميل CoreScript-Version: {clientCoreScriptVersion}
@@ -1095,6 +1109,7 @@ CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCoun
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 رحِّب بكل مَن يلعبون الآن!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,يمكن فقط لأصدقائك الموثوق بهم الدردشة معك.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,يمكنك الدردشة مع المزيد من الأشخاص في هذه اللعبة. يمكن فقط للأشخاص في الفئات العمرية المماثلة الدردشة معك.
+CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,يمكنك الدردشة مع المزيد من الأشخاص في هذه اللعبة!
 CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ انضم إلى المرح! رحِّب بكل مَن يلعبون الآن!
 CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 يوجد {RBX_COUNT} من اللاعبين في الدردشة. رحِّب بهم!
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,اضغط مطولًا للتحدث دون استخدام اليدين
@@ -1431,7 +1446,7 @@ Feature.AppealsPortal.Description.AppealDenied.Multiple,راجعنا بعناي�
 Feature.AppealsPortal.Description.AppealDenied.None,راجعنا طلب الاستئناف الذي قدمته بعناية وما زلنا نعتبر أن نشاطك ينتهك القواعد الموضحة في معايير مجتمعنا. نتفهم أن هذا القرار قد يكون مخيبًا للآمال، ونقدر وقتك في إرسال طلب الاستئناف.
 Feature.AppealsPortal.Description.AppealDenied.Singular,راجعنا طلب الاستئناف الذي قدمته بشأن الانتهاك {singleViolation} بعناية وما زلنا نعتبر أن نشاطك ينتهك القواعد الموضحة في معايير مجتمعنا. نتفهم أن هذا القرار قد يكون مخيبًا للآمال، ونقدر وقتك في إرسال طلب الاستئناف.
 Feature.AppealsPortal.Description.AppealDenied.V2,راجعنا بعناية طلب استئنافك بشأن {violations} وما زلنا نعتبر أن نشاطك ينتهك القواعد الموضحة في معايير مجتمعنا. شكرًا لك على إرسال الاستئناف.
-Feature.AppealsPortal.Description.AppealDisclosures,المزيد حول طلبات الاستئناف: {link}معرفة المزيد ومراجعة الإفصاحات.{linkEnd}
+Feature.AppealsPortal.Description.AppealDisclosures,{link}عرض القواعد الإرشادية للاستئناف والإفصاحات{linkEnd}
 Feature.AppealsPortal.Description.AppealIneligible,لم تعد مؤهلًا لاستئناف هذا القرار. يرجى التحقق من هويتك والمحاولة مرة أخرى.
 Feature.AppealsPortal.Description.AppealReceived,سنبلغك بالقرار قريبًا. حسب تقديراتنا، قد يستغرق الرد حوالي خمسة أيام عمل اعتمادًا على مدى تعقيد المشكلة. شكرًا لك على إرسال الاستئناف.
 Feature.AppealsPortal.Description.AppealReceived.Plural,سنبلغك بالقرار قريبًا. حسب تقديراتنا، قد يستغرق الرد حوالي {number} من أيام العمل اعتمادًا على مدى تعقيد المشكلة. شكرًا لك على إرسال الاستئناف.
@@ -1633,7 +1648,7 @@ Feature.Avatar.Action.Reset,إعادة تعيين
 Feature.Avatar.Action.RestoreLastSaved,استعادة الأفاتار المحفوظ آخر مرة
 Feature.Avatar.Action.Revert,
 Feature.Avatar.Action.Rotate,تدوير
-Feature.Avatar.Action.Save,حفظ
+Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,حفظ كجديد
 Feature.Avatar.Action.Select,تحديد
 Feature.Avatar.Action.SelectMultipleItems,حدد عناصر متعددة
@@ -1845,7 +1860,7 @@ Feature.Avatar.Label.FullBody,الجسد بالكامل
 Feature.Avatar.Label.FullMasks,الأقنعة الكاملة
 Feature.Avatar.Label.FullPair,زوج كامل
 Feature.Avatar.Label.Gear,عتاد
-Feature.Avatar.Label.GenericSetError,حدث خطأ ما. يُرجى المحاولة مرة أخرى.
+Feature.Avatar.Label.GenericSetError,
 Feature.Avatar.Label.GetLookQuestion,هل تريد الحصول على هذا الزيّ مجانًا؟
 Feature.Avatar.Label.GetOutfitMultiple,هل تريد الحصول على [{numItems}] عناصر مجانية؟
 Feature.Avatar.Label.GetOutfitOne,هل تريد الحصول على عنصر واحد مجانيّ؟
@@ -2159,6 +2174,7 @@ Feature.Avatar.UnavailableItems.BodyText,"العنصر {category} ""{item}"" ق�
 Feature.Avatar.UnavailableItems.BodyTextMultiple,العناصر التالية قيد المراجعة وغير متاحة حاليًا.{lineBreak}{items}{lineBreak}إذا تمت إزالة العنصر من منصة Roblox، فسوف تسترد المبلغ المدفوع في غضون أسبوع.
 Feature.Avatar.UnavailableItems.ConfirmText,
 Feature.Avatar.UnavailableItems.TitleText,العنصر غير متاح
+Feature.Avatar.profile.tooltip,ملفك الشخصي
 Feature.Avatar.tooltip.ExpiredItemsFilter,البحث عن العناصر منتهية الصلاحية من الخيارات المحددة بالوقت
 Feature.AvatarBundleReceivedInteractiveAlert.Action.Ok,
 Feature.AvatarBundleReceivedInteractiveAlert.Action.TakeALook,ألقِ نظرة
@@ -2239,11 +2255,11 @@ Feature.Build.Action.UpdateRating,تحديث التصنيف
 Feature.Build.Action.UpdateWithChanges,التحديث بالتغييرات
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,عرض الاستخدام
-Feature.Build.Analytics.AnalyzeChatPrompt,ما هي مقاييس {analyzeName} خلال {days} من الأيام الماضية؟
+Feature.Build.Analytics.AnalyzeChatPrompt,تحليل {analyzeName} خلال {days} من الأيام الماضية. ما سبب أهمية هذا المقياس وكيف يمكنني تحسينه؟
 Feature.Build.Analytics.AnalyzeName.Arppu,متوسط العائد لكل مستخدم يقوم بالدفع
 Feature.Build.Analytics.AnalyzeName.D1Retention,الاحتفاظ في اليوم الأول
 Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,المستخدمون النشطون يوميًا
-Feature.Build.Analytics.AnalyzeName.PayerConversion,التحويل إلى دافعين
+Feature.Build.Analytics.AnalyzeName.PayerConversion,معدل تحويل الدافعين
 Feature.Build.Analytics.AnalyzeName.PlaythroughRate,معدل إكمال جلسة اللعب
 Feature.Build.Analytics.AnalyzeName.TotalPlaytime,إجمالي مدة اللعب
 Feature.Build.Analytics.Description.Arppu,"يُقسّم ""متوسط العائد لكل مستخدم يقوم بالدفع"" إجمالي عملات Robux المكتسبة على عدد اللاعبين الدافعين. وهو يوضح متوسط ما ينفقه كل مشتري."
@@ -2291,9 +2307,13 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,الزيارات
 Feature.Build.Content.NewGame,لعبة جديدة
 Feature.Build.Description.ActivateDeveloperProduct,طرح منتج المطوّر {PRODUCT_ID} للبيع.
+Feature.Build.Description.AdActive,إعلانك قيد التشغيل. اطّلع على عدد اللاعبين الذين يصل إليهم.
 Feature.Build.Description.AdCampaignModerationReview,تتم مراجعة جميع الحملات الإعلانية من قِبل فريق الإشراف لدى منصّة Roblox. قد تستغرق هذه العملية ما يصل إلى 24 ساعة.
 Feature.Build.Description.AdCampaignSheetRunDates,سيتم تشغيل حملتك من {startDate} إلى {endDate}
-Feature.Build.Description.AdvertisingAgreement,من خلال المتابعة، فإنك توافق على {advertisingTermsStart}شروط الإعلان{advertisingTermsEnd} و{advertisingStandardsStart}معايير الإعلان{advertisingStandardsEnd} لدى منصّة Roblox.
+Feature.Build.Description.AdComplete,انتهى إعلانك. تحقَّق من نتائجك.
+Feature.Build.Description.AdInReview,إعلانك قيد المراجعة ومجدول للتشغيل من {startDate} إلى {endDate}.
+Feature.Build.Description.AdModerationReview,تتم مراجعة جميع الإعلانات من قِبل فريق الإشراف لدى منصّة Roblox وقد تستغرق العملية ما يصل إلى 24 ساعة.
+Feature.Build.Description.AdvertisingAgreement,"من خلال تحديد ""إنشاء""، فإنك توافق على {advertisingTermsStart}شروط الإعلان{advertisingTermsEnd} و{advertisingStandardsStart}معايير الإعلان{advertisingStandardsEnd} لدى منصّة Roblox."
 Feature.Build.Description.ArchiveRemoval,إذا قمت بأرشفة هذه اللعبة، فستتم إزالتها من ميزة Build. سيظل بإمكانك الوصول إليها واستعادتها من مركز المصمم أو من Roblox Studio.
 Feature.Build.Description.AutoBuyUsage,استخدم عملات Robux لشراء المزيد من استخدام ميزة Build تلقائيًا أثناء الإنشاء. يمكنك تعيين حد الإنفاق اليومي في أي وقت.
 Feature.Build.Description.BoostAudienceForPlays,زوِّد أعداد جمهورك لتحقيق المزيد من عمليات التشغيل.
@@ -2308,10 +2328,12 @@ Feature.Build.Description.DeactivateDeveloperProduct,إيقاف بيع منتج 
 Feature.Build.Description.EarnedRobuxAppliedFirst,إذا كنت قد ربحت عملات Robux، فسيتم تطبيقها أولًا لتغطية تكلفة الحملة الإعلانية.
 Feature.Build.Description.EnableBuildNotifs,يمكنك تشغيل الإشعارات من إعدادات جهازك للحصول على التحديثات من ميزة Build.
 Feature.Build.Description.FriendsLinkOnly,يمكن فقط لأصدقائك الوصول إلى هذا الرابط. غيّر إعدادات الجمهور للعبتك إذا كنت تريد أن يلعبها المزيد من الأشخاص.
+Feature.Build.Description.GameConfiguration,غيّر طريقة بيعك للعناصر والترويج للعبتك.
 Feature.Build.Description.GameCreationDone,لقد أكملت إنشاء لعبتك ونشرها. يمكنك فتحها لاختبار اللعب.
 Feature.Build.Description.GameSavedPlaytest,لقد أكملتُ إنشاء لعبتك وحفظت إصدارًا جديدًا. يمكنك فتحها لاختبار اللعب.
 Feature.Build.Description.HubSettings,يمكنك إدارة جميع الإعدادات في مركز المصمم
 Feature.Build.Description.InviteFriendLimit,يمكنك دعوة ما يصل إلى {MAX_INVITES} من الأصدقاء للعب أثناء الإنشاء.
+Feature.Build.Description.LongAdCampaign,المزيد من الوقت للوصول إلى لاعبين جدد وإبقائهم متحمسين للعودة مجددًا.
 Feature.Build.Description.MakeAudienceAvail,انشر تجربتك لتكون متاحة لهذا الجمهور.
 Feature.Build.Description.ManageAppearance,يمكنك إدارة كيفية ظهور لعبتك للآخرين.
 Feature.Build.Description.ManageDeveloperProduct,إدارة منتج المطوّر.
@@ -2326,6 +2348,8 @@ Feature.Build.Description.PlaytestLocked,يمكنك بدء اختبار اللع
 Feature.Build.Description.PlaytesterAccess,يمكنك دعوة الأصدقاء كمختبري لعب مبكرين أو تغيير إعدادات جمهور لعبتك للسماح لمزيد من الأشخاص باللعب.
 Feature.Build.Description.PricingRules,إعداد قواعد التسعير
 Feature.Build.Description.PrivateShare,غيّر إعدادات الجمهور للعبتك لمشاركتها.
+Feature.Build.Description.PromoteGameFree,اعرض لعبتك أمام عدد أكبر من اللاعبين بضغطة واحدة.
+Feature.Build.Description.PromoteGamePaid,أنشئ إعلانًا لعرض لعبتك أمام الملايين من اللاعبين.
 Feature.Build.Description.PromoteGameWithAdCampaign,زوِّد أعداد جمهورك من خلال حملة إعلانية لمدة {durationDays} من الأيام واجعل لعبتك متاحة للاكتشاف.
 Feature.Build.Description.RaiseLimitOrWait,قم بزيادة الحد اليومي لديك من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيينه غدًا.
 Feature.Build.Description.RatingAgreement,من خلال النشر، فإنك توافق على دقة تصنيف هذا المحتوى.
@@ -2333,6 +2357,7 @@ Feature.Build.Description.RestoreLatest,سيصبح هذا الإصدار أحد�
 Feature.Build.Description.RevertToVersion,تأكيد التراجع عن التغيير الأخير والرجوع إلى {VERSION}.
 Feature.Build.Description.ShareLatest,شارك التغييرات التي أُجريت على أحدث إصدار لديك.
 Feature.Build.Description.ShopButton,إضافة نقطة إدخال للتسوق
+Feature.Build.Description.ShortAdCampaign,طريقة سريعة لمعرفة رأي اللاعبين في لعبتك.
 Feature.Build.Description.UpdateDeveloperProduct,تحديث منتج المطوّر {PRODUCT_ID}.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,يجب أن يتكون الوصف من 1000 حرفٍ أو أقل.
 Feature.Build.Error.DeveloperProductNameRequired,أدخل اسم المنتج.
@@ -2348,6 +2373,7 @@ Feature.Build.Header.AccessSharing,إمكانية الوصول والمشارك�
 Feature.Build.Header.AllVersions,جميع الإصدارات
 Feature.Build.Header.ContentMaturity,حساسية المحتوى
 Feature.Build.Header.CustomAnswer,إجابة مخصصة
+Feature.Build.Header.GameConfiguration,تهيئة اللعبة
 Feature.Build.Header.GameDetails,تفاصيل اللعبة
 Feature.Build.Header.Overview,
 Feature.Build.Header.PastCampaigns,الحملات السابقة
@@ -2391,6 +2417,7 @@ Feature.Build.Label.GamePlays,عدد مرات تشغيل اللعبة
 Feature.Build.Label.GetMoreBuildUsage,احصل على المزيد من استخدام ميزة Build
 Feature.Build.Label.Hi,مرحبًا
 Feature.Build.Label.IconThumbnails,الأيقونة والصور المصغرة
+Feature.Build.Label.Images2D,الصور ثنائية الأبعاد
 Feature.Build.Label.InProgress,قيد التقدم
 Feature.Build.Label.InputNeeded,الإدخال مطلوب
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2400,9 +2427,12 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,التسعير المُدار
 Feature.Build.Label.ManagedPricingMixed,مختلط عبر المنتجات الحالية
 Feature.Build.Label.MaximizeForGamePlays,زوِّد عدد مرات تشغيل اللعبة إلى أقصى حد
+Feature.Build.Label.Models3D,النماذج ثلاثية الأبعاد
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,لا يوجد حدّ
 Feature.Build.Label.NotStarted,لم يتم البدء
+Feature.Build.Label.Object,كائن
+Feature.Build.Label.Objects3D,كائنات ثلاثية الأبعاد
 Feature.Build.Label.OffSale,غير معروض للبيع
 Feature.Build.Label.OnSale,معروض للبيع
 Feature.Build.Label.Pending,معلّق
@@ -2424,12 +2454,14 @@ Feature.Build.Label.ResetsMonthly,تتم إعادة التعيين شهريًا
 Feature.Build.Label.ResetsWeekly,تتم إعادة التعيين أسبوعيًا
 Feature.Build.Label.RestoredVersion,تمت استعادة {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
+Feature.Build.Label.SalesOptions,خيارات المبيعات
 Feature.Build.Label.Search,بحث
 Feature.Build.Label.SearchGames,البحث في الألعاب
 Feature.Build.Label.SearchTasks,البحث في المهام
 Feature.Build.Label.SelectOption,حدّد خيارًا
 Feature.Build.Label.ShopButton,زر المتجر
 Feature.Build.Label.ShopUi,واجهة المستخدم للمتجر
+Feature.Build.Label.Sounds,الأصوات
 Feature.Build.Label.TargetAllRobloxPlayers,استهدف جميع اللاعبين على منصّة Roblox
 Feature.Build.Label.Thinking,جارٍ التفكير
 Feature.Build.Label.Title,العنوان
@@ -2507,6 +2539,7 @@ Feature.Build.Label.VersionCompact,الإصدار {VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,الإصدار 0{VERSION_NUMBER}
 Feature.Build.Label.Video,
+Feature.Build.Label.World,العالم
 Feature.Build.Message.AccountRequirements,لا يفي حسابك بمتطلبات استخدام ميزة Build.
 Feature.Build.Message.AccountTooNew,حسابك جديد جدًا بحيث لا يمكن النشر. حاول مرة أخرى بعد يومين من إنشائه.
 Feature.Build.Message.AdCampaignCreateFailed,تعذَّر إنشاء حملتك. يُرجى المحاولة مرة أخرى.
@@ -2519,6 +2552,7 @@ Feature.Build.Message.AdsStatsEmpty,زوِّد أعداد جمهورك من خل
 Feature.Build.Message.AdsStatsEmptyFree,زوِّد أعداد جمهورك من خلال حملة إعلانية مجانية واجعل لعبتك متاحة للاكتشاف
 Feature.Build.Message.AllFriendsAdded,لقد دعوت جميع أصدقائك كمختبري لعب مبكرين.
 Feature.Build.Message.AnswerBuildQuestion,أجب عن سؤال ميزة Build أدناه.
+Feature.Build.Message.AssetDetailsUnavailable,تفاصيل الأصل غير متاحة.
 Feature.Build.Message.AudienceIneligible,غير مؤهل لهذا الجمهور
 Feature.Build.Message.BuildAccountBlocked,ميزة Build غير متاحة لحسابك في الوقت الحالي.
 Feature.Build.Message.BuildBusy,ميزة Build مشغولة حاليًا. انتظر دقيقة وحاول مرة أخرى.
@@ -2550,15 +2584,18 @@ Feature.Build.Message.InvitesLoadFailed,تعذَّر تحميل الدعوات
 Feature.Build.Message.LimitBelowSpend,لا يمكن أن يقل الحد عن {ALREADY_SPENT} من عملات Robux التي تم إنفاقها اليوم بالفعل.
 Feature.Build.Message.LinkCopied,تم نسخ الرابط إلى الحافظة.
 Feature.Build.Message.LoadingVersions,جارٍ تحميل سجل الإصدارات...
+Feature.Build.Message.NoAssetsFound,لم يتم العثور على أي أصول.
 Feature.Build.Message.NoCapturesAvailable,لا توجد أي لقطات متاحة
 Feature.Build.Message.NoDescriptionProvided,لم يتم تقديم وصف.
 Feature.Build.Message.NoFriendsToAdd,ليس لديك أي أصدقاء لدعوتهم حتى الآن. ابحث عن أشخاص للتواصل معهم على منصّة Roblox أولًا.
 Feature.Build.Message.NoResults,
+Feature.Build.Message.NoSearchResultsFound,لم يتم العثور على أي نتائج بحث
 Feature.Build.Message.NoVersionHistory,لا يوجد سجل إصدارات حتى الآن.
 Feature.Build.Message.OneTaskCompleted,تم إكمال مهمة واحدة
 Feature.Build.Message.OutOfBuildUsage,لقد نفد رصيدك من استخدام ميزة Build. اعرض خياراتك لاستخدام عملات Robux لمواصلة الإنشاء.
 Feature.Build.Message.PlaytestInviteSendFailedBody,تعذر إرسال رابط دعوة الدردشة إلى المستخدمين التاليين:
 Feature.Build.Message.PlaytestInviteSendFailedHint,"يُرجى استخدام زر ""مشاركة"" للحصول على الرابط."
+Feature.Build.Message.PlaytesterRequestFailed,لم نتمكن من إكمال طلبك. يُرجى إعادة المحاولة.
 Feature.Build.Message.PlaytestersAdded,تمت دعوة {INVITED_COUNT} من أصل {MAX_INVITES} من مختبري اللعب المبكرين
 Feature.Build.Message.PrivatePlaytestInvite,تمت دعوتك من قِبل {username} لتكون مختبر لعب مبكر لتجربة {experienceName}
 Feature.Build.Message.PublicPublishFailed,تم نشر لعبتك، ولكن تعذَّر جعلها عامة. حاول مرة أخرى.
@@ -2597,13 +2634,15 @@ Feature.Build.Notification.Title.NeedInput,ميزة Build بحاجة إلى إد
 Feature.Build.Placeholder.DescribeProduct,صِف ما تريد بيعه
 Feature.Build.Placeholder.DescribeProductUpdate,صِف تحديثًا
 Feature.Build.Prompt.CreateDeveloperProduct,ساعدني في إنشاء منتج المطوّر، وربطه باللعبة، والتحقق من التغييرات ونشرها، وجعله متاحًا للشراء.
-Feature.Build.Title.AdCampaignActive,الحملة الإعلانية نشطة
 Feature.Build.Title.AdCampaignDuration,حملة إعلانية لمدة {durationDays} من الأيام
+Feature.Build.Title.AdComplete,اكتمل الإعلان
+Feature.Build.Title.AdCreated,تم إنشاء الإعلان
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,إضافة صور
 Feature.Build.Title.AdsStatsEmpty,بدء حملة
 Feature.Build.Title.AdsStatsEmptyFree,ابدأ حملتك الأولى
 Feature.Build.Title.ArchiveThisGame,هل تريد أرشفة هذه اللعبة؟
+Feature.Build.Title.AssetLibrary,المكتبة
 Feature.Build.Title.Audience,الجمهور
 Feature.Build.Title.BuildQuestion,لدى ميزة Build سؤال
 Feature.Build.Title.BuildQuestions,لدى ميزة Build بعض الأسئلة
@@ -2612,6 +2651,7 @@ Feature.Build.Title.BuildUsage,استخدام ميزة Build
 Feature.Build.Title.ChangesNotLive,تغييراتك لم تُنشر بعد
 Feature.Build.Title.ChatBuildUnavailable,ميزة Build غير متوفرة.
 Feature.Build.Title.Content,المحتوى
+Feature.Build.Title.CreateYourAd,أنشئ إعلانك
 Feature.Build.Title.DailyRobuxReached,تم الوصول إلى الحد اليومي المسموح به من عملات Robux
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,تحرير المنتج
@@ -2627,9 +2667,13 @@ Feature.Build.Title.NoMonetizationProducts,ابدأ الكسب في لعبتك
 Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
 Feature.Build.Title.PlaytestInviteSendFailed,تعذَّر إرسال الدعوات
 Feature.Build.Title.Playtesters,
+Feature.Build.Title.PlaytestersAddRejected,تعذَّر إضافة المستخدمين التاليين:
 Feature.Build.Title.PlaytestersOnlyPlay,يمكن لمختبري اللعب فقط تشغيل اللعبة
 Feature.Build.Title.PromoteGame,روّج للعبتك
 Feature.Build.Title.PromoteGameFree,روّج للعبتك مجانًا
+Feature.Build.Title.PromoteGameFreePlural,لقد حصلت على {promotionCount} من الإعلانات المجانية
+Feature.Build.Title.PromoteGameFreeSingular,لقد حصلت على إعلان مجاني
+Feature.Build.Title.PromoteGamePaid,المزيد من اللاعبين في انتظارك
 Feature.Build.Title.PushNotifications,الإشعارات الفورية
 Feature.Build.Title.RevertLastChange,هل تريد التراجع عن التغيير الأخير؟
 Feature.Build.Title.Tasks,المهام
@@ -2832,6 +2876,11 @@ Feature.Catalog.Label.ItemInAHold,عنصر معلّق؟
 Feature.Catalog.Label.ItemOwnedCount,العناصر المملوكة ({itemCount})
 Feature.Catalog.Label.ItemsCount,{itemCount} عناصر
 Feature.Catalog.Label.LeftArm,اليد اليسرى
+Feature.Catalog.Label.LicensedBy,مرخّص من
+Feature.Catalog.Label.LicensingLicensed,مُرخّص
+Feature.Catalog.Label.LicensingLicensedInfo,معتمد من العلامة التجارية
+Feature.Catalog.Label.LicensingOfficial,رسمي
+Feature.Catalog.Label.LicensingOfficialInfo,تم إنشاؤه بواسطة العلامة التجارية
 Feature.Catalog.Label.Limited,
 Feature.Catalog.Label.LimitedU,Limited U
 Feature.Catalog.Label.LipMakeup,
@@ -2904,6 +2953,7 @@ Feature.Catalog.Label.SellCut,أنت تكسب:
 Feature.Catalog.Label.SellPageUpsell,البيع متاح فقط للمستخدمين المشتركين في عضوية Roblox Plus.
 Feature.Catalog.Label.SellSuccess,العنصر للبيع
 Feature.Catalog.Label.SerialNumberColon,الرقم التسلسلي:
+Feature.Catalog.Label.ShareToMoments,مشاركة في اللحظات
 Feature.Catalog.Label.ShoulderAccessories,أكسسوارات للكتف
 Feature.Catalog.Label.SoldOut,مباع بالكامل
 Feature.Catalog.Label.SupportsHeadShapes,يدعم أشكال الرأس
@@ -2919,6 +2969,7 @@ Feature.Catalog.Label.Timer.Second.Plural,عدد الثواني المتبقية
 Feature.Catalog.Label.Timer.Second.Singular,يتبقى ثانية واحدة
 Feature.Catalog.Label.Tops,ملابس علوية
 Feature.Catalog.Label.Torso,
+Feature.Catalog.Label.TotalItemsFraction,الإجمالي: ({itemCount} / {itemTotal} من العناصر)
 Feature.Catalog.Label.TotalItemsParenthesis,
 Feature.Catalog.Label.TotalUnformatted,المجموع
 Feature.Catalog.Label.Tradable,قابلة للتبادل
@@ -3060,7 +3111,7 @@ Feature.Chat.Drawer.Join,
 Feature.Chat.Drawer.PinGame,تثبيت
 Feature.Chat.Drawer.PlayGame,زيارة التجربة
 Feature.Chat.Drawer.ViewDetails,
-Feature.Chat.Heading.ChatWithConnections,استمتع بالدردشة مع جهات الاتصال
+Feature.Chat.Heading.ChatWithConnections,دردش مع الأصدقاء
 Feature.Chat.Heading.ChatWithFriends,الدردشة مع الأصدقاء
 Feature.Chat.Heading.CreateUnfilteredChatDialog,هل تريد إنشاء مجموعة جديدة تتضمن ميزات الدردشة الشاملة؟
 Feature.Chat.Heading.ExpressiveChat,الدردشة المتقدمة
@@ -3071,7 +3122,7 @@ Feature.Chat.Heading.FirstConversationWithThisUser,أول محادثة مع هذ
 Feature.Chat.Heading.FirstInteractionWith,أول تفاعل مع {displayName}
 Feature.Chat.Heading.FirstInteractionWithThisPerson,أول تفاعل مع هذا الشخص
 Feature.Chat.Heading.LeaveGroup,مغادرة المجموعة
-Feature.Chat.Heading.PartyWithConnections,فرقة مع جهات التواصل
+Feature.Chat.Heading.PartyWithConnections,كوِّن فرقة مع الأصدقاء
 Feature.Chat.Heading.PartyWithFriends,فرقة مع الأصدقاء
 Feature.Chat.Heading.SafeChattingWithThisUser,حافِظ على سلامتك أثناء الدردشة مع هذا الشخص
 Feature.Chat.Heading.SafeChattingWithUsername,حافِظ على سلامتك أثناء الدردشة مع {displayName}
@@ -3079,7 +3130,7 @@ Feature.Chat.Heading.ShareGameToChat,شارك التجربة في الدردشة
 Feature.Chat.Heading.UserInvitedYouToJoin,تمت دعوتك من {combinedName} للانضمام إلى الدردشة
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,تمت دعوتك من {combinedName} للانضمام إلى مجموعة
 Feature.Chat.Heading.YouWereInvitedToGroup,لقد تلقيتَ دعوة للانضمام إلى المجموعة
-Feature.Chat.Label.AddConnections,إضافة جهات تواصل
+Feature.Chat.Label.AddConnections,
 Feature.Chat.Label.AddFriends,
 Feature.Chat.Label.Available,متاحة
 Feature.Chat.Label.Blocked,محظور
@@ -3100,7 +3151,6 @@ Feature.Chat.Label.Group.YouRepliedToThem,أنت أجبت {DISPLAY_NAME}
 Feature.Chat.Label.GroupName,اسم المجموعة
 Feature.Chat.Label.HoverToReplyTooltip,المرور فوق للرد
 Feature.Chat.Label.Loading,
-Feature.Chat.Label.LongPressToReplyTooltip,اضغط مطولًا للرد
 Feature.Chat.Label.Members,الأعضاء
 Feature.Chat.Label.MessageNotAvailable,هذه الرسالة غير متوفرة
 Feature.Chat.Label.MuteInGameChatToastNotifications,كتم إشعارات الدردشة داخل اللعبة
@@ -3119,9 +3169,9 @@ Feature.Chat.Label.ReplyChatInputPlaceholder,الرد على {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,رد على رسالتك
 Feature.Chat.Label.ReplyingToOthers,رسالة {DISPLAY_NAME} مفادها...
 Feature.Chat.Label.ReplyingToYourself,رسالتك مفادها…
-Feature.Chat.Label.SearchConnections,البحث عن جهات اتصال
+Feature.Chat.Label.SearchConnections,البحث عن أصدقاء
 Feature.Chat.Label.SearchForFriendsAndChat,البحث عن محادثات
-Feature.Chat.Label.SearchFriends,البحث عن أصدقاء
+Feature.Chat.Label.SearchFriends,
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,مرسلة
 Feature.Chat.Label.SnoozeChatNotifications,كتم إشعارات الدردشة داخل التجربة:
@@ -3142,9 +3192,9 @@ Feature.Chat.Label.UnknownUser,مستخدم غير معروف
 Feature.Chat.Label.User,المستخدم
 Feature.Chat.Label.ViewProfile,عرض الملف الشخصي
 Feature.Chat.Label.YouRepliedToYou,أنت أجبت نفسك
-Feature.Chat.Message.AddConnectionsLimit,يمكنك إضافة ما يصل إلى {connectionsNum} من جهات التواصل في مجموعة الدردشة.
-Feature.Chat.Message.AddConnectionsPartyLimit,يمكنك الحصول على {connectionsNum} من جهات التواصل كحد أقصى في الفرقة.
-Feature.Chat.Message.AddConnectionsPartyLimitSingular,يمكنك إنشاء فرقة مع جهة تواصل واحدة فقط بسبب إعدادات الخصوصية في حسابك.
+Feature.Chat.Message.AddConnectionsLimit,يمكنك إضافة ما يصل إلى {connectionsNum} من الأصدقاء في مجموعة الدردشة.
+Feature.Chat.Message.AddConnectionsPartyLimit,يمكنك إضافة ما يصل إلى {connectionsNum} من الأصدقاء في الفرقة.
+Feature.Chat.Message.AddConnectionsPartyLimitSingular,يمكنك إنشاء فرقة مع صديق واحد فقط بسبب إعدادات الخصوصية لديك.
 Feature.Chat.Message.AddFriendsLimit,يمكنك الحصول على ما يصل إلى {connectionsNum} من الأصدقاء في مجموعة الدردشة.
 Feature.Chat.Message.AddFriendsPartyLimit,يمكنك الحصول على {connectionsNum} من الأصدقاء كحد أقصى في الحفلة.
 Feature.Chat.Message.AddFriendsPartyLimitSingular,يمكنك إنشاء مجموعة مع صديق واحد فقط بسبب إعدادات الخصوصية لديك.
@@ -3153,9 +3203,9 @@ Feature.Chat.Message.ChatIsDisabledByPrivacySetting,تم تعطيل الدردش
 Feature.Chat.Message.ChatUnavailableRegion,الدردشة غير متاحة في منطقتك في الوقت الحالي.
 Feature.Chat.Message.ChatUnavailableWithUser,الدردشة غير متاحة مع هذا المستخدم في الوقت الحالي.
 Feature.Chat.Message.Default,ليس كل شخص في هذه المحادثة يمكنه رؤية رسالتك.
-Feature.Chat.Message.EnableChat,للدردشة مع جهات التواصل، يُرجى تشغيل خاصية الدردشة في إعدادات الخصوصية في حسابك.
+Feature.Chat.Message.EnableChat,للدردشة مع الأصدقاء، شغّل الدردشة في إعدادات الخصوصية لديك.
 Feature.Chat.Message.EnableChat.FriendsRename,للدردشة مع الأصدقاء، شغل الدردشة في إعدادات الخصوصية لديك.
-Feature.Chat.Message.EnableParty,لإنشاء فرقة مع جهات التواصل، يُرجى تشغيل ميزة الفرقة في إعدادات الخصوصية في حسابك.
+Feature.Chat.Message.EnableParty,لإنشاء فرقة مع الأصدقاء، شغّل الفرقة في إعدادات الخصوصية لديك.
 Feature.Chat.Message.EnableParty.FriendsRename,لإنشاء مجموعة مع الأصدقاء، شغّل المجموعة في إعدادات الخصوصية لديك.
 Feature.Chat.Message.FailedToLeaveGroup,تعذرت إزالتك من المحادثة {CONVERSATION_TITLE}.
 Feature.Chat.Message.FailedToLeaveGroup.V2,لم نتمكن من إزالتك من المجموعة {CONVERSATION_TITLE}.
@@ -3163,12 +3213,12 @@ Feature.Chat.Message.FailedToRemoveUser,المستخدم {USERNAME} لا يمك�
 Feature.Chat.Message.FailedToRemoveUser.V2,لم نتمكن من إزالة المستخدم {USERNAME} من المجموعة {CONVERSATION_TITLE}.
 Feature.Chat.Message.FailedToRenameConversation,لا يمكن إعادة تسمية المحادثة {EXISTING_NAME} إلى {NEW_NAME}.
 Feature.Chat.Message.FailedToRenameConversation.V2,لم نتمكن من إعادة تسمية المجموعة {EXISTING_NAME} إلى {NEW_NAME}.
-Feature.Chat.Message.GroupConnectionLimitSingular,يمكنك إضافة جهة تواصل واحدة فقط للدردشة معها.
-Feature.Chat.Message.GroupFriendLimitSingular,يمكنك إضافة صديق واحد فقط للدردشة معه.
+Feature.Chat.Message.GroupConnectionLimitSingular,يمكنك إضافة صديق واحد فقط للدردشة معه.
+Feature.Chat.Message.GroupFriendLimitSingular,
 Feature.Chat.Message.LeaveGroup,لن تتمكن من مواصلة الدردشة مع هذه المجموعة.
 Feature.Chat.Message.LeaveGroup.V2,هل أنت متأكد من أنك تريد مغادرة هذه المجموعة؟
-Feature.Chat.Message.MakeConnectionsToChat,أضِف جهات تواصل على Roblox لبدء الدردشة معها
-Feature.Chat.Message.MakeConnectionsToParty,أضِف جهات تواصل على Roblox لإنشاء فرقة معًا
+Feature.Chat.Message.MakeConnectionsToChat,أنشئ صداقات على منصّة Roblox لبدء الدردشة معًا
+Feature.Chat.Message.MakeConnectionsToParty,أنشئ صداقات على منصّة Roblox للانضمام إلى الفرقة معًا
 Feature.Chat.Message.MakeFriendsToChat,أنشئ صداقات على Roblox لبدء الدردشة معها
 Feature.Chat.Message.MakeFriendsToParty,كوّن صداقات على Roblox لإنشاء فرقة معًا
 Feature.Chat.Message.MessageContentModerated,تم الإشراف على رسالتك ولم يتم إرسالها.
@@ -3181,7 +3231,7 @@ Feature.Chat.Message.RemoveUser.V2,هل أنت متأكد من أنك تريد �
 Feature.Chat.Message.RemovedFromConversation,لقد تمت إزالتك من المجموعة.
 Feature.Chat.Message.SeveralUsersTyping,العديد من المستخدمين يكتبون...
 Feature.Chat.Message.TurnOnChat,
-Feature.Chat.Message.TurnOnParty,لإنشاء فرقة مع الأصدقاء، شغّل الفرقة في إعدادات الخصوصية لديك.
+Feature.Chat.Message.TurnOnParty,
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} و {DISPLAY_NAME_2} يكتبان...
 Feature.Chat.PresetChat.Disclaimer,تتيح العبارات السريعة للاعبين من جميع الأعمار تنسيق اللعب.
 Feature.Chat.Response.ChatNameFullyModerated,تم الإشراف على اسم مجموعة الدردشة.
@@ -3198,8 +3248,8 @@ Feature.Chat.ShareGameToChat.NoPopularGames,لا توجد تجارب شعبية 
 Feature.Chat.ShareGameToChat.NoRecentGames,لا تجارب حديثة
 Feature.Chat.ShareGameToChat.Popular,شعبية
 Feature.Chat.ShareGameToChat.Recent,حديثة
-Feature.Chat.Text.NoConnections,لم تضف أي جهات تواصل حتى الآن. للبدء، ابحث عن جهات التواصل وأضفها على Roblox.
-Feature.Chat.Text.NoFriends,لم تضف أي أصدقاء بعد. للبدء، ابحث عن أصدقائك على منصّة Roblox ثم أضفهم.
+Feature.Chat.Text.NoConnections,لم تضف أي أصدقاء بعد. للبدء، ابحث عن أصدقائك على منصّة Roblox ثم أضفهم.
+Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.MuteChatNotifications,كتم إشعارات الدردشة من الأصدقاء أثناء اللعب
 Feature.Chat.Title.NewChat,دردشة جديدة
 Feature.Chat.Toast.Error.InvalidUserSelected,لا يمكن إضافة شخص واحد أو أكثر من الأشخاص المُدرجين ضمن هذه القائمة
@@ -3236,7 +3286,7 @@ Feature.Contacts.Heading.HelpFriendsFindYou,ساعد أصدقائك في الع�
 Feature.Contacts.Heading.LetFriendsFindYou,السماح للأصدقاء بالبحث عنك
 Feature.Contacts.Heading.SettingSaved,تم حفظ الإعداد.
 Feature.Contacts.Label.DiscoverabilityOptIn,ساعدني في الظهور لمستخدمي Roblox بناء على رقم هاتفي.
-Feature.Contacts.Label.FindContacts,
+Feature.Contacts.Label.FindContacts,البحث عن جهات اتصال
 Feature.Contacts.Label.Invite,دعوة إلى Roblox
 Feature.Contacts.Label.OnRoblox,على Roblox
 Feature.Contacts.Message.AddFriends,
@@ -3778,7 +3828,6 @@ Feature.Groups.Heading.Primary,اساسي
 Feature.Groups.Heading.SocialLinksNew,روابط التواصل الاجتماعي
 Feature.Groups.Heading.SocialMedia,وسائل التواصل الاجتماعي
 Feature.Groups.Heading.VerificationRequired,التحقُّق من الحساب مطلوب
-Feature.Groups.Heading.Videos,الفيديوهات
 Feature.Groups.Label.ByOwnerWithFormat,بواسطة {ownerName}
 Feature.Groups.Label.Follower,المتابعون
 Feature.Groups.Label.FollowerCapital,
@@ -4090,7 +4139,7 @@ Feature.Moments.Label.Tone.Cinematic,سينمائي
 Feature.Moments.Label.Tone.Funny,مضحك
 Feature.Moments.Label.Tone.Hype,حماسي
 Feature.Moments.Label.Tone.Neutral,محايد
-Feature.Moments.Label.Videos,
+Feature.Moments.Label.Videos,الفيديوهات
 Feature.Moments.Label.VoiceCoachmarkBody,كتابة نص برمجي للتعليق الصوتي بالفيديو
 Feature.Moments.Label.VoiceCoachmarkTitle,
 Feature.Moments.Label.VoiceGenerating,جارٍ إنشاء تعليقك الصوتي...
@@ -4114,7 +4163,7 @@ Feature.NotApproved.Action.ReactivateAccount,إعادة تنشيط حسابي
 Feature.NotApproved.Action.ReportMistake,الإبلاغ عن خطأ
 Feature.NotApproved.Action.RuleConfirmation,أوافق على معرفة القواعد واتباعها.
 Feature.NotApproved.Action.UserAgree,أنا موافق
-Feature.NotApproved.Action.ViewAppealGuidelines,عرض القواعد الإرشادية للاستئناف
+Feature.NotApproved.Action.ViewAppealGuidelines,عرض القواعد الإرشادية للاستئناف والإفصاحات
 Feature.NotApproved.Action.ViewLess,عرض أقل
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,عرض القواعد
@@ -4804,6 +4853,7 @@ Feature.ReportAbuse.ProblemDescription.Violence,عنف شديد أو مشاهد 
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,مواصلة إعداد بلاغك
 Feature.ReportAbuse.Title.SelectInSceneIpReport,شكرًا لك على بدء بلاغ انتهاك الملكية الفكرية
 Feature.RobloxSubscription.Action.JoinIn,الانضمام بعد {time}
+Feature.RobloxSubscription.Action.ReferToPlus,إحالة إلى اشتراك Plus
 Feature.RobloxSubscription.Action.Subscribe,اشتراك
 Feature.RobloxSubscription.Action.TryItForFree,جرب مجانًا
 Feature.RobloxSubscription.Body.AlreadySubscribed,يوفر اشتراكك في Plus بالفعل مزايا داخل اللعبة.
@@ -4814,7 +4864,12 @@ Feature.RobloxSubscription.Description.Benefit.Customize,التخصيص باست
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,خصم بنسبة 10% في أول 60 يومًا، ثم خصم بنسبة 20% على العناصر والأفاتارات
 Feature.RobloxSubscription.Description.ExclusiveBenefits,متعة أكثر مقابل عدد أقل من عملات Robux. اشترِك في Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,انضم مبكرًا مع اشتراك Plus
+Feature.RobloxSubscription.Description.ReferralRecipientReward,العرض صالح لمشتركي Plus الجدد فقط.
+Feature.RobloxSubscription.Description.ReferralReferrerReward,عندما ينضم أي شخص إلى اشتراك Plus باستخدام رابطك.
+Feature.RobloxSubscription.Description.ReferralShare,ادعُ شخصًا إلى اشتراك Plus وسيحصل كلاكما على {amount} من عملات Robux عند الانضمام.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"بالضغط على \u{201C}{ctaText}\u{201D}، فإنك توافق على <a href=""{termsUrl}"">شروط الاشتراك في منصّة Roblox</a>. سيتم تحصيل الرسوم منك تلقائيًا كل شهر حتى تقوم بالإلغاء."
+Feature.RobloxSubscription.Heading.ReferralHistory,سجل الإحالات
+Feature.RobloxSubscription.Heading.ReferralShare,شارك Plus، واحصل على
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,خوادم خاصة مجانية
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,إرسال عملات Robux مجانًا
@@ -4824,7 +4879,12 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,خصم بنسبة {di
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"بالضغط على ""متابعة""، فإنك توافق على {linkStart}شروط الاشتراك في منصّة Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"بالضغط على ""جرب مجانًا""، فإنك توافق على {linkStart}شروط الاشتراك في Roblox.{linkEnd} ستنتهي الفترة التجريبية المجانية بعد شهر واحد وسيتم تحصيل الرسوم منك تلقائيًا كل شهر ويمكنك الإلغاء في أي وقت."
 Feature.RobloxSubscription.Label.FreeTrialText,احصل على فترة تجريبية مجانية
+Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} من عملات Robux
+Feature.RobloxSubscription.Label.ReferralTheyGet,يحصل الأشخاص الذين تدعوهم على
+Feature.RobloxSubscription.Label.ReferralYouGet,ستحصل على
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}شهر واحد مجانًا،{boldEnd} ثم {price}/{periodType}
+Feature.RobloxSubscription.Label.RobuxEarned,عملات Robux المكتسبة
+Feature.RobloxSubscription.Label.SuccessfulReferrals,الإحالات الناجحة
 Feature.RobloxSubscription.Label.month,
 Feature.RobloxSubscription.Label.months,أشهر
 Feature.RobloxSubscription.Title.AgeCheckTrial,احصل على أسبوع مجاني من Plus
@@ -5025,6 +5085,14 @@ Feature.SongDetails.Label.SongsAvailableBy,عدد أغاني {artistName} الم
 Feature.SongDetails.Label.SongsBy,قائمة أغاني {artistName}
 Feature.SongDetails.Label.ThousandPlus,أكثر من 1000
 Feature.SongDetails.Label.Vendor,المورّد
+Feature.SplitPane.EditAvatarButtonText,
+Feature.SplitPane.NoAdditionalAvatarsDialogBody,أنشئ أفاتارًا آخر، ثم بدّل بينهم هنا.
+Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,أنشئ أفاتارًا
+Feature.SplitPane.NoAdditionalAvatarsDialogTitle,هذه هي كل أفاتاراتك المحفوظة
+Feature.SplitPane.UnsavedChangesDialogBody,إذا قمت بالتبديل الآن، فقد تُفقد التغييرات التي أجريتها على الأفاتار لديك. احفظها للاحتفاظ بها.
+Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,عدم الحفظ
+Feature.SplitPane.UnsavedChangesDialogTitle,هل تريد حفظ تغييراتك؟
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,إضافة آخرين
 Feature.Squads.Action.ConnectToVoice,الاتصال بالمحادثة الصوتية
@@ -5465,6 +5533,7 @@ IAPExperience.PurchaseSuccess.Title.PurchaseSucceeded,نجحت عملية الش
 IAPExperience.RobuxUpsell.Action.BuyRobux,
 IAPExperience.RobuxUpsell.Action.BuyRobuxAndItem,
 IAPExperience.RobuxUpsell.Action.Cancel,
+IAPExperience.RobuxUpsell.Action.GetPercentOff,احصل على خصم بنسبة {discountPercentage}%
 IAPExperience.RobuxUpsell.Text.AdditionalRobux,تحتاج إلى {robux} إضافية.
 IAPExperience.RobuxUpsell.Text.BestValue,أفضل قيمة
 IAPExperience.RobuxUpsell.Text.BetterValue,Better value
@@ -5538,7 +5607,7 @@ InstantApps.Shortcuts.Label.AddToDesktopMenuItem,إضافة إلى سطح الم
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,إضافة إلى الشاشة الرئيسية
 InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,تعذَّرت إضافة {experience_name} إلى سطح المكتب
 InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,تعذَّرت إضافة {experience_name} إلى الشاشة الرئيسية
-InstantApps.Shortcuts.Label.ShortcutAlreadyExists,اختصار تجربة {experience_name} موجود بالفعل
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,تم استبدال الاختصار الحالي لتجربة {experience_name}
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,تمت إضافة {experience_name} إلى سطح المكتب بنجاح
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,تمت إضافة {experience_name} إلى الشاشة الرئيسية بنجاح
 InstantApps.Shortcuts.Label.TryAgain,

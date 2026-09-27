@@ -6,10 +6,9 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local _ = require(foundation.Components.Types)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local flagsModule = require(foundation.Utility.Flags)
 
 local function variantsFactory(p1)
-	-- upvalues: inputSizeModule (ref), flagsModule (ref)
+	-- upvalues: inputSizeModule (ref)
 	return {
 		common = {
 			input = {
@@ -42,11 +41,9 @@ local function variantsFactory(p1)
 			},
 			[inputSizeModule.Large] = {
 				input = {
-					size = if flagsModule.FoundationRadioBeta then UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600) else UDim2.fromOffset(p1.Size.Size_700, p1.Size.Size_700)
+					size = UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600)
 				},
-				checkmark = {
-					tag = if flagsModule.FoundationRadioBeta then "size-250" else "size-300"
-				}
+				checkmark = { tag = "size-250" }
 			}
 		}
 	}

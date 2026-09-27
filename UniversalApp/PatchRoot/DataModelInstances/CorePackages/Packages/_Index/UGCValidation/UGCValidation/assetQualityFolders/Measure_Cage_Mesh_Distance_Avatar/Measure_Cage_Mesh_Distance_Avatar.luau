@@ -30,7 +30,6 @@ return {
 		end
 		if getFFlagUGCValidateAQScoreWarningsModule() and fullBodyCage.score ~= nil and tonumber(fullBodyCage.score) ~= 100 then
 			p1:warn(errorSourceStringsModule.Keys.AQSWarn_CageMeshDistanceAvatar, {
-				score = tostring(math.floor(tonumber(fullBodyCage.score) or 0)),
 				max_distance = fullBodyCage.max_distance or "unknown",
 				negative_sdf_percent = string.format("%.2f", (tonumber(fullBodyCage.negative_sdf_percent) or 0) * 100)
 			})

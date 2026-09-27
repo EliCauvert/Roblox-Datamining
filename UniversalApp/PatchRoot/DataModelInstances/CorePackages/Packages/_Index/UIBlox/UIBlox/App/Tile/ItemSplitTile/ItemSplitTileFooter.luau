@@ -4,8 +4,10 @@ local parent_2 = parent_1.Parent
 local roactModule = require(parent_2.Roact)
 local tModule = require(parent_2.t)
 local foundationModule = require(parent_2.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local withStyleModule = require(parent_1.Core.Style.withStyle)
 local imagesModule = require(parent_1.App.ImageSet.Images)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local skeleton = foundationModule.Skeleton
 local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
 local iconSizeModule = require(parent.ImageSet.Enum.IconSize)
@@ -18,13 +20,13 @@ itemSplitTileFooter.validateProps = tModule.strictInterface({
 })
 
 function itemSplitTileFooter.render(p1)
-	-- upvalues: imagesModule (ref), withStyleModule (ref), getIconSizeUDim2Module (ref), iconSizeModule (ref), roactModule (ref), skeleton (ref), imageSetComponentModule (ref)
+	-- upvalues: imagesModule (ref), withStyleModule (ref), getIconSizeUDim2Module (ref), iconSizeModule (ref), roactModule (ref), skeleton (ref), imageSetComponentModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local priceText = p1.props.priceText
 	local isOwned = p1.props.isOwned
 	local var1 = if isOwned then imagesModule["icons/status/item/owned"] else imagesModule["icons/common/robux_small"]
 	
 	return withStyleModule(function(p2)
-		-- upvalues: priceText (ref), isOwned (ref), getIconSizeUDim2Module (copy), iconSizeModule (copy), roactModule (copy), p1 (ref), skeleton (copy), imageSetComponentModule (copy), var1 (ref)
+		-- upvalues: priceText (ref), isOwned (ref), getIconSizeUDim2Module (copy), iconSizeModule (copy), roactModule (copy), p1 (ref), skeleton (copy), imageSetComponentModule (copy), var1 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		local font = p2.Font.Body.Font
 		local var2 = p2.Font.BaseSize * p2.Font.Body.RelativeSize
 		local theme = p2.Theme
@@ -51,7 +53,8 @@ function itemSplitTileFooter.render(p1)
 				BackgroundTransparency = 1,
 				Position = UDim2.new(0, var5, 0, 0),
 				Size = UDim2.new(1, -var5, 1, 0),
-				Font = font,
+				Font = if foundationFontFaceMigration then nil else font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(font) else nil,
 				TextColor3 = theme.TextMuted.Color,
 				TextTransparency = theme.TextMuted.Transparency,
 				TextSize = var2,

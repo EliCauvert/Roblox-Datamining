@@ -5,7 +5,6 @@ local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local valueToStringModule = require(parent.util.valueToString)
-local getFFlagUGCValidationEyebrowEyelashSupportModule = require(parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)
 local t = {
 	categories = {
 		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
@@ -18,7 +17,6 @@ local t = {
 		validationEnumsModule.SharedDataMember.rootInstance,
 		validationEnumsModule.SharedDataMember.uploadEnum
 	},
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties),
 	expectedFailures = {}
 }
 
@@ -41,10 +39,10 @@ local function comparitorMethodImpl(p1, p2, p3)
 end
 
 local function doesPropertyMatchExpectations(p1, p2, p3)
-	-- upvalues: cryoModule (ref), getFFlagUGCValidationEyebrowEyelashSupportModule (ref), constantsModule (ref), doesPropertyMatchExpectations (ref), comparitorMethodImpl (ref)
+	-- upvalues: cryoModule (ref), constantsModule (ref), doesPropertyMatchExpectations (ref), comparitorMethodImpl (ref)
 	if p2 == cryoModule.None then
 		return p1 == nil
-	elseif getFFlagUGCValidationEyebrowEyelashSupportModule() and typeof(p2) == "table" and p3 == constantsModule.COMPARISON_METHODS.FOUND_IN then
+	elseif typeof(p2) == "table" and p3 == constantsModule.COMPARISON_METHODS.FOUND_IN then
 		local var1 = false
 		
 		for i, v in p2 do

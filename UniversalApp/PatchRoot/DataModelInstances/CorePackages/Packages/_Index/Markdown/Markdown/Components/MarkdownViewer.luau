@@ -6,16 +6,17 @@ local foundationModule = require(parent_1.Foundation)
 local text = foundationModule.Text
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
-local _ = require(parent_1.MarkdownCore)
+local markdownCoreModule = require(parent_1.MarkdownCore)
 local commonMarkComplianceParserModule = require(parent.Parsers.CommonMarkComplianceParser)
 local _ = require(parent.Types)
 local markdownRendererModule = require(script.MarkdownRenderer)
+local flags = markdownCoreModule.Flags
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), dashModule (ref), markdownRendererModule (ref), commonMarkComplianceParserModule (ref), view (ref), text (ref)
+	-- upvalues: useTokens (ref), flags (ref), reactModule (ref), dashModule (ref), markdownRendererModule (ref), commonMarkComplianceParserModule (ref), view (ref), text (ref)
 	local var1 = useTokens()
 	
-	if not p1.Markdown and not p1.Ast then
+	if not flags.FFlagMarkdownAssistantParity and not p1.Markdown and not p1.Ast then
 		warn("MarkdownViewer requires either a Markdown string or an Ast in props")
 		
 		return nil
@@ -23,7 +24,7 @@ return function(p1)
 	local var2 = reactModule.useMemo(function()
 		-- upvalues: dashModule (copy), markdownRendererModule (copy), p1 (ref)
 		return dashModule.join(markdownRendererModule.defaultRenderers, p1.Renderers or {}, p1.AdditionalFeatureRenderers or {})
-	end, { p1.Renderers })
+	end, if flags.FFlagMarkdownAssistantParity then { p1.Renderers, p1.AdditionalFeatureRenderers } else { p1.Renderers })
 	local var3, var4 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), commonMarkComplianceParserModule (copy)
 		if p1.Ast then
@@ -43,12 +44,7 @@ return function(p1)
 		end
 		return var5, var6
 	end, { p1.Markdown, p1.Ast })
-	
-	return if var3 then reactModule.createElement(view, dashModule.join({
-		tag = "col size-full-0 auto-y",
-		BorderSizePixel = 0,
-		backgroundStyle = { Transparency = 1 }
-	}, p1.WrapperProps or {}), reactModule.useMemo(function()
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: var3 (ref), markdownRendererModule (copy), var4 (ref), var2 (ref), p1 (ref), var1 (ref)
 		return if var3 then markdownRendererModule.render(var4, {
 			userRenderers = var2,
@@ -57,9 +53,23 @@ return function(p1)
 			colorScheme = p1.ColorScheme,
 			tokens = var1
 		}) else nil
-	end, {
+	end, if flags.FFlagMarkdownAssistantParity then {
+		var3, var4, p1.LinkCallback, p1.MarkdownRendererProps, p1.ColorScheme, var2,
+		var1
+	} else {
 		var3, var4, p1.LinkCallback, p1.MarkdownRendererProps, p1.ColorScheme, var2
-	})) else p1.Fallback or reactModule.createElement(view, dashModule.join({
+	})
+	
+	if flags.FFlagMarkdownAssistantParity and not p1.Markdown and not p1.Ast then
+		warn("MarkdownViewer requires either a Markdown string or an Ast in props")
+		
+		return nil
+	end
+	return if var3 then reactModule.createElement(view, dashModule.join({
+		tag = "col size-full-0 auto-y",
+		BorderSizePixel = 0,
+		backgroundStyle = { Transparency = 1 }
+	}, p1.WrapperProps or {}), var5) else p1.Fallback or reactModule.createElement(view, dashModule.join({
 		tag = "size-full-0 auto-y",
 		backgroundStyle = { Transparency = 1 }
 	}, p1.WrapperProps or {}), reactModule.createElement(text, { Text = "Failed to parse the provided markdown" }))

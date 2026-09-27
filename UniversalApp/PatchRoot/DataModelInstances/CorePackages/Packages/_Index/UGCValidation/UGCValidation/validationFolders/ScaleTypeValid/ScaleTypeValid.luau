@@ -12,7 +12,6 @@ return {
 		validationEnumsModule.UploadCategory.RIGID_ACCESSORY
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties),
 	expectedFailures = {},
 	run = function(p1, p2)
 		-- upvalues: constantsModule (ref), errorSourceStringsModule (ref)

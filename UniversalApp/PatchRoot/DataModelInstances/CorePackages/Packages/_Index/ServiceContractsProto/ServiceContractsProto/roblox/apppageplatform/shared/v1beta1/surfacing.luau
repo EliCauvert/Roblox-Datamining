@@ -16,12 +16,20 @@ function t_1:encode()
 	local buff = buffer.create(0)
 	local var1 = 0
 	
-	if self.kind ~= nil and self.kind.type == "peek_view" then
-		local var2 = self.kind.value:encode()
-		local var3, var4 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
-		var3, var9 = protoModule.writeBuffer(var3, var4, var2, buffer.len(var2))
-		buff = var3
-		var1 = var4
+	if self.kind ~= nil then
+		if self.kind.type == "peek_view" then
+			local var2 = self.kind.value:encode()
+			local var3, var4 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
+			var3, var10 = protoModule.writeBuffer(var3, var4, var2, buffer.len(var2))
+			buff = var3
+			var1 = var4
+		elseif self.kind.type == "full_page" then
+			local var5 = self.kind.value:encode()
+			local var6, var7 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
+			var6, var13 = protoModule.writeBuffer(var6, var7, var5, buffer.len(var5))
+			buff = var6
+			var1 = var7
+		end
 	end
 	local buff_1 = buffer.create(var1)
 	buffer.copy(buff_1, 0, buff, 0, var1)
@@ -54,23 +62,28 @@ function t_1.decode(p1)
 				local var10, var11 = protoModule.readBuffer(p1, var2)
 				var2 = var11
 				var1.kind = { type = "peek_view", value = t.PeekView.decode(var10) }
+			elseif var7 == 2 then
+				local _ = nil
+				local var12, var13 = protoModule.readBuffer(p1, var2)
+				var2 = var13
+				var1.kind = { type = "full_page", value = t.FullPage.decode(var12) }
 			else
 				local _ = nil
-				local var12, var13 = protoModule.readVarInt(p1, var2)
-				var2 = var13 + var12
+				local var14, var15 = protoModule.readVarInt(p1, var2)
+				var2 = var15 + var14
 			end
 		elseif var3 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var14, var15 = protoModule.readFixed32(p1, var2)
-			local _ = var14
-			var2 = var15
-		elseif var3 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var16, var17 = protoModule.readFixed64(p1, var2)
+			local var16, var17 = protoModule.readFixed32(p1, var2)
 			local _ = var16
 			var2 = var17
+		elseif var3 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var18, var19 = protoModule.readFixed64(p1, var2)
+			local _ = var18
+			var2 = var19
 		else
-			error("Unsupported wire type: " .. var13)
+			error("Unsupported wire type: " .. var17)
 		end
 	end
 	return var1
@@ -79,29 +92,47 @@ end
 function t_1:jsonEncode()
 	local t = {}
 	
-	if self.kind ~= nil and self.kind.type == "peek_view" then
-		t.peekView = self.kind.value:jsonEncode()
+	if self.kind ~= nil then
+		if self.kind.type == "peek_view" then
+			t.peekView = self.kind.value:jsonEncode()
+			
+			return t
+		elseif self.kind.type == "full_page" then
+			t.fullPage = self.kind.value:jsonEncode()
+		end
 	end
 	return t
 end
 
 function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), t (ref)
-	local var18 = t_1.new()
+	local var20 = t_1.new()
 	
 	if self.peek_view ~= nil then
-		var18.kind = {
+		var20.kind = {
 			type = "peek_view",
 			value = t.PeekView.jsonDecode(self.peek_view)
 		}
 	end
 	if self.peekView ~= nil then
-		var18.kind = {
+		var20.kind = {
 			type = "peek_view",
 			value = t.PeekView.jsonDecode(self.peekView)
 		}
 	end
-	return var18
+	if self.full_page ~= nil then
+		var20.kind = {
+			type = "full_page",
+			value = t.FullPage.jsonDecode(self.full_page)
+		}
+	end
+	if self.fullPage ~= nil then
+		var20.kind = {
+			type = "full_page",
+			value = t.FullPage.jsonDecode(self.fullPage)
+		}
+	end
+	return var20
 end
 
 t_1.descriptor = {
@@ -123,63 +154,63 @@ end
 function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var18 = 0
+	local var20 = 0
 	
 	if self.height_offset ~= nil then
-		local var19, var20 = protoModule.writeTag(buff, var18, 1, protoModule.wireTypes.varint)
-		var19, var33 = protoModule.writeVarInt(var19, var20, self.height_offset)
-		buff = var19
-		var18 = var20
+		local var21, var22 = protoModule.writeTag(buff, var20, 1, protoModule.wireTypes.varint)
+		var21, var39 = protoModule.writeVarInt(var21, var22, self.height_offset)
+		buff = var21
+		var20 = var22
 	end
-	local buff_1 = buffer.create(var18)
-	buffer.copy(buff_1, 0, buff, 0, var18)
+	local buff_1 = buffer.create(var20)
+	buffer.copy(buff_1, 0, buff, 0, var20)
 	
 	return buff_1
 end
 
 function t_2.decode(p2)
 	-- upvalues: t_2 (ref), protoModule (ref)
-	local var18 = t_2.new()
-	local var19 = 0
-	while var19 < buffer.len(p2) do
+	local var20 = t_2.new()
+	local var21 = 0
+	while var21 < buffer.len(p2) do
 		local _ = nil
 		local _ = nil
-		local var20, var21, var22 = protoModule.readTag(p2, var19)
-		local var23 = var20
-		local var24 = var21
-		var19 = var22
+		local var22, var23, var24 = protoModule.readTag(p2, var21)
+		local var25 = var22
+		local var26 = var23
+		var21 = var24
 		
-		if var24 == protoModule.wireTypes.varint then
-			if var23 == 1 then
+		if var26 == protoModule.wireTypes.varint then
+			if var25 == 1 then
 				local _ = nil
-				local var25, var26 = protoModule.readVarIntI32(p2, var19)
-				var19 = var26
-				var18.height_offset = var25
+				local var27, var28 = protoModule.readVarIntI32(p2, var21)
+				var21 = var28
+				var20.height_offset = var27
 			else
 				local _ = nil
-				local var27, var28 = protoModule.readVarInt(p2, var19)
-				local _ = var27
-				var19 = var28
+				local var29, var30 = protoModule.readVarInt(p2, var21)
+				local _ = var29
+				var21 = var30
 			end
-		elseif var24 == protoModule.wireTypes.lengthDelimited then
+		elseif var26 == protoModule.wireTypes.lengthDelimited then
 			local _ = nil
-			local var29, var30 = protoModule.readVarInt(p2, var19)
-			var19 = var30 + var29
-		elseif var24 == protoModule.wireTypes.i32 then
+			local var31, var32 = protoModule.readVarInt(p2, var21)
+			var21 = var32 + var31
+		elseif var26 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var31, var32 = protoModule.readFixed32(p2, var19)
-			local _ = var31
-			var19 = var32
-		elseif var24 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var33, var34 = protoModule.readFixed64(p2, var19)
+			local var33, var34 = protoModule.readFixed32(p2, var21)
 			local _ = var33
-			var19 = var34
+			var21 = var34
+		elseif var26 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var35, var36 = protoModule.readFixed64(p2, var21)
+			local _ = var35
+			var21 = var36
 		else
-			error("Unsupported wire type: " .. var41)
+			error("Unsupported wire type: " .. var47)
 		end
 	end
-	return var18
+	return var20
 end
 
 function t_2:jsonEncode()
@@ -193,15 +224,15 @@ end
 
 function t_2:jsonDecode()
 	-- upvalues: t_2 (ref)
-	local var35 = t_2.new()
+	local var37 = t_2.new()
 	
 	if self.height_offset ~= nil then
-		var35.height_offset = self.height_offset
+		var37.height_offset = self.height_offset
 	end
 	if self.heightOffset ~= nil then
-		var35.height_offset = self.heightOffset
+		var37.height_offset = self.heightOffset
 	end
-	return var35
+	return var37
 end
 
 t_2.descriptor = {
@@ -210,5 +241,109 @@ t_2.descriptor = {
 }
 t.PeekView = t_2
 typeRegistryModule.default:register(t.PeekView)
+local t_3 = {}
+t_3.__index = t_3
 
-return { Surfacing = t.Surfacing, PeekView = t.PeekView }
+function t_3.new(p3)
+	-- upvalues: t_3 (ref)
+	return setmetatable({
+		content_top_padding = if p3 == nil or p3.content_top_padding == nil then nil else p3.content_top_padding
+	}, t_3)
+end
+
+function t_3:encode()
+	-- upvalues: protoModule (ref)
+	local buff = buffer.create(0)
+	local var37 = 0
+	
+	if self.content_top_padding ~= nil then
+		local var38, var39 = protoModule.writeTag(buff, var37, 1, protoModule.wireTypes.varint)
+		var38, var63 = protoModule.writeVarInt(var38, var39, self.content_top_padding)
+		buff = var38
+		var37 = var39
+	end
+	local buff_1 = buffer.create(var37)
+	buffer.copy(buff_1, 0, buff, 0, var37)
+	
+	return buff_1
+end
+
+function t_3.decode(p3)
+	-- upvalues: t_3 (ref), protoModule (ref)
+	local var37 = t_3.new()
+	local var38 = 0
+	while var38 < buffer.len(p3) do
+		local _ = nil
+		local _ = nil
+		local var39, var40, var41 = protoModule.readTag(p3, var38)
+		local var42 = var39
+		local var43 = var40
+		var38 = var41
+		
+		if var43 == protoModule.wireTypes.varint then
+			if var42 == 1 then
+				local _ = nil
+				local var44, var45 = protoModule.readVarIntI32(p3, var38)
+				var38 = var45
+				var37.content_top_padding = var44
+			else
+				local _ = nil
+				local var46, var47 = protoModule.readVarInt(p3, var38)
+				local _ = var46
+				var38 = var47
+			end
+		elseif var43 == protoModule.wireTypes.lengthDelimited then
+			local _ = nil
+			local var48, var49 = protoModule.readVarInt(p3, var38)
+			var38 = var49 + var48
+		elseif var43 == protoModule.wireTypes.i32 then
+			local _ = nil
+			local var50, var51 = protoModule.readFixed32(p3, var38)
+			local _ = var50
+			var38 = var51
+		elseif var43 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var52, var53 = protoModule.readFixed64(p3, var38)
+			local _ = var52
+			var38 = var53
+		else
+			error("Unsupported wire type: " .. var71)
+		end
+	end
+	return var37
+end
+
+function t_3:jsonEncode()
+	local t = {}
+	
+	if self.content_top_padding ~= nil then
+		t.contentTopPadding = self.content_top_padding
+	end
+	return t
+end
+
+function t_3:jsonDecode()
+	-- upvalues: t_3 (ref)
+	local var54 = t_3.new()
+	
+	if self.content_top_padding ~= nil then
+		var54.content_top_padding = self.content_top_padding
+	end
+	if self.contentTopPadding ~= nil then
+		var54.content_top_padding = self.contentTopPadding
+	end
+	return var54
+end
+
+t_3.descriptor = {
+	name = "FullPage",
+	fullName = "roblox.apppageplatform.shared.v1beta1.FullPage"
+}
+t.FullPage = t_3
+typeRegistryModule.default:register(t.FullPage)
+
+return {
+	Surfacing = t.Surfacing,
+	PeekView = t.PeekView,
+	FullPage = t.FullPage
+}

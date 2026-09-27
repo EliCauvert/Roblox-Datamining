@@ -2,42 +2,26 @@
 local _ = require(parent.util.Types)
 local analyticsModule = require(parent.Analytics)
 local constantsModule = require(parent.Constants)
-local validateCoplanarIntersectionModule = require(parent.validation.validateCoplanarIntersection)
 local validateInstanceTreeModule = require(parent.validation.validateInstanceTree)
-local validateMeshTrianglesModule = require(parent.validation.validateMeshTriangles)
-local validateModerationModule = require(parent.validation.validateModeration)
-local validateMaterialsModule = require(parent.validation.validateMaterials)
 local validateTagsModule = require(parent.validation.validateTags)
-local validateMeshBoundsModule = require(parent.validation.validateMeshBounds)
-local validatePropertyRequirementsModule = require(parent.validation.validatePropertyRequirements)
-local validateAttributesModule = require(parent.validation.validateAttributes)
-local validateMeshVertColorsModule = require(parent.validation.validateMeshVertColors)
 local validateSingleInstanceModule = require(parent.validation.validateSingleInstance)
 local validateThumbnailConfigurationModule = require(parent.validation.validateThumbnailConfiguration)
 local validateScaleTypeModule = require(parent.validation.validateScaleType)
-local validateTotalSurfaceAreaModule = require(parent.validation.validateTotalSurfaceArea)
 local validateRigidMeshNotSkinnedModule = require(parent.validation.validateRigidMeshNotSkinned)
 local validateDependenciesModule = require(parent.validation.validateDependencies)
 local validatePropertiesSensibleModule = require(parent.validation.ValidatePropertiesSensible)
 local rigidOrLayeredAllowedModule = require(parent.util.RigidOrLayeredAllowed)
 local createAccessorySchemaModule = require(parent.util.createAccessorySchema)
 local getAttachmentModule = require(parent.util.getAttachment)
-local getAccessoryScaleModule = require(parent.util.getAccessoryScale)
 local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFromContext)
 local getEditableImageFromContextModule = require(parent.util.getEditableImageFromContext)
 local getEngineFeatureEngineUGCValidateRigidNonSkinnedModule = require(parent.flags.getEngineFeatureEngineUGCValidateRigidNonSkinned)
 local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
-local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
-local getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule = require(parent.flags.getFFlagUGCValidateMigrateSurfaceAppearanceMeshQuality)
-local getFFlagUGCValidateMigrateMeshGeometryModule = require(parent.flags.getFFlagUGCValidateMigrateMeshGeometry)
-local legacyAccessoryCheckAvatarPartScaleType = game:DefineFastFlag("LegacyAccessoryCheckAvatarPartScaleType", false)
 
 return function(p1)
-	-- upvalues: rigidOrLayeredAllowedModule (ref), analyticsModule (ref), constantsModule (ref), validateSingleInstanceModule (ref), createAccessorySchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validateDependenciesModule (ref), getAttachmentModule (ref), getEditableMeshFromContextModule (ref), getEditableImageFromContextModule (ref), validateMaterialsModule (ref), validatePropertyRequirementsModule (ref), validateTagsModule (ref), validateAttributesModule (ref), validateScaleTypeModule (ref), validateThumbnailConfigurationModule (ref), validateModerationModule (ref), getFFlagUGCValidateMigrateMeshGeometryModule (ref), validateTotalSurfaceAreaModule (ref), legacyAccessoryCheckAvatarPartScaleType (ref), getAccessoryScaleModule (ref), validateMeshBoundsModule (ref), validateMeshTrianglesModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), validateMeshVertColorsModule (ref), validateCoplanarIntersectionModule (ref), getEngineFeatureEngineUGCValidateRigidNonSkinnedModule (ref), validateRigidMeshNotSkinnedModule (ref)
+	-- upvalues: rigidOrLayeredAllowedModule (ref), analyticsModule (ref), constantsModule (ref), validateSingleInstanceModule (ref), createAccessorySchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), validateDependenciesModule (ref), getAttachmentModule (ref), getEditableMeshFromContextModule (ref), getEditableImageFromContextModule (ref), validateTagsModule (ref), validateScaleTypeModule (ref), validateThumbnailConfigurationModule (ref), getEngineFeatureEngineUGCValidateRigidNonSkinnedModule (ref), validateRigidMeshNotSkinnedModule (ref)
 	local instances = p1.instances
 	local assetTypeEnum = p1.assetTypeEnum
-	local isServer = p1.isServer
-	local allowUnreviewedAssets = p1.allowUnreviewedAssets
 	
 	if not rigidOrLayeredAllowedModule.isRigidAccessoryAllowed(assetTypeEnum) then
 		analyticsModule.reportFailure(analyticsModule.ErrorType.validateLegacyAccessory_AssetTypeNotAllowedAsRigidAccessory, nil, p1)
@@ -68,10 +52,7 @@ return function(p1)
 			return false, var10
 		end
 	end
-	local var11, var12 = validateDependenciesModule(var4, p1, {
-		skipExistenceCheck = getFFlagUGCValidateMigrateSchemaPropertiesModule(),
-		skipOwnershipCheck = getFFlagUGCValidateMigrateSchemaPropertiesModule()
-	})
+	local var11, var12 = validateDependenciesModule(var4, p1, { skipExistenceCheck = true, skipOwnershipCheck = true })
 	
 	if not var11 then
 		return false, var12
@@ -86,161 +67,81 @@ return function(p1)
 	}
 	local scale = specialMesh.Scale
 	local var13 = getAttachmentModule(handle, var1.attachmentNames)
-	local var14 = assert(var1.bounds[var13.Name], "Could not find bounds for " .. var46.Name)
-	local var15 = true
+	assert(var1.bounds[var13.Name], "Could not find bounds for " .. var32.Name)
+	local var14 = true
 	local t_1 = {}
-	local var16 = t.contentId ~= nil and t.contentId ~= ""
-	local var17, var18 = getEditableMeshFromContextModule(specialMesh, "MeshId", p1)
+	local var15 = t.contentId ~= nil and t.contentId ~= ""
+	local var16, var17 = getEditableMeshFromContextModule(specialMesh, "MeshId", p1)
 	
-	if not var17 then
+	if not var16 then
 		if t.contentId then
 			return false, {
 				string.format("Failed to load mesh for legacy accessory '%s'. Make sure mesh exists and try again.", var4.Name)
 			}
 		end
-		var16 = false
 		var15 = false
+		var14 = false
 		table.insert(t_1, {
 			string.format("Missing meshId on legacy accessory '%s'. Make sure you are using a valid meshId and try again.\n", var4.Name)
 		})
 	end
-	t.editableMesh = var18
-	var16 = true
+	t.editableMesh = var17
+	var15 = true
 	local t_2 = {
 		fieldName = "TextureId",
 		fullName = specialMesh:GetFullName(),
 		contentId = specialMesh.TextureId
 	}
-	local var19, var20 = getEditableImageFromContextModule(specialMesh, "TextureId", p1)
+	local var18, var19 = getEditableImageFromContextModule(specialMesh, "TextureId", p1)
 	
-	if not var19 then
+	if not var18 then
 		return false, {
 			string.format("Failed to load texture for legacy accessory '%s'. Make sure texture exists and try again.", var4.Name)
 		}
 	end
-	t_2.editableImage = var20
+	t_2.editableImage = var19
 	local _ = {}
+	local var20, var21 = validateTagsModule(var4, p1)
+	local var22 = var21
 	
-	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-		local var21, var22 = validateMaterialsModule(var4, p1)
-		
-		if not var21 then
-			table.insert(t_1, table.concat(var22, "\n"))
-			var15 = false
-		end
-		local var23, var24 = validatePropertyRequirementsModule(var4, nil, p1)
-		local var25 = var24
-		
-		if not var23 then
-			table.insert(t_1, table.concat(var25, "\n"))
-			var15 = false
-		end
+	if not var20 then
+		table.insert(t_1, table.concat(var22, "\n"))
+		var14 = false
 	end
-	local var26, var27 = validateTagsModule(var4, p1)
-	local var28 = var27
-	
-	if not var26 then
-		table.insert(t_1, table.concat(var28, "\n"))
-		var15 = false
-	end
-	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-		local var29, var30 = validateAttributesModule(var4, p1)
-		local var31 = var30
-		
-		if not var29 then
-			table.insert(t_1, table.concat(var31, "\n"))
-			var15 = false
-		end
-	end
+	local var23
 	local avatarPartScaleType = handle:FindFirstChild("AvatarPartScaleType")
 	
-	if avatarPartScaleType and avatarPartScaleType:IsA("StringValue") then
-		local var32, var33 = validateScaleTypeModule(avatarPartScaleType, p1)
-		local var34 = var33
-		
-		if not var32 then
-			table.insert(t_1, table.concat(var34, "\n"))
-			var15 = false
+	if avatarPartScaleType then
+		if avatarPartScaleType:IsA("StringValue") then
+			local var24, var25 = validateScaleTypeModule(avatarPartScaleType, p1)
+			local var26 = var25
+			
+			if not var24 then
+				table.insert(t_1, table.concat(var26, "\n"))
+				var23 = false
+				var23 = var14
+			end
+		else
+			var23 = var14
 		end
+	else
+		var23 = var14
 	end
-	local var35
-	local var36, var37 = validateThumbnailConfigurationModule(var4, handle, t, scale, p1)
-	local var38 = var37
+	local var27, var28 = validateThumbnailConfigurationModule(var4, handle, t, scale, p1)
+	local var29 = var28
 	
-	if not var36 then
-		table.insert(t_1, table.concat(var38, "\n"))
-		var35 = false
-		var35 = var15
-	end
-	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() and (if allowUnreviewedAssets then false else not isServer) then
-		local var39, var40 = validateModerationModule(var4, {}, p1)
-		local var41 = var40
-		
-		if not var39 then
-			table.insert(t_1, table.concat(var41, "\n"))
-			var35 = false
-		end
-	end
-	if not getFFlagUGCValidateMigrateMeshGeometryModule() then
-		local var42, var43 = validateTotalSurfaceAreaModule(t, scale, p1)
-		local var44 = var43
-		
-		if not var42 then
-			table.insert(t_1, table.concat(var44, "\n"))
-			var35 = false
-		end
-	end
-	if legacyAccessoryCheckAvatarPartScaleType and handle:FindFirstChild("AvatarPartScaleType") then
-		local var45 = getAccessoryScaleModule(handle, var13)
-		var14 = {
-			size = var14.size / var45,
-			offset = if var14.offset then var14.offset / var45 else nil
-		}
-	end
-	if not getFFlagUGCValidateMigrateMeshGeometryModule() then
-		local var46, var47 = validateMeshBoundsModule(handle, var13, t, scale, var14, assetTypeEnum.Name, p1)
-		local var48 = var47
-		
-		if not var46 then
-			table.insert(t_1, table.concat(var48, "\n"))
-			var35 = false
-		end
-	end
-	if not getFFlagUGCValidateMigrateMeshGeometryModule() then
-		local var49, var50 = validateMeshTrianglesModule(t, nil, p1)
-		local var51 = var50
-		
-		if not var49 then
-			table.insert(t_1, table.concat(var51, "\n"))
-			var35 = false
-		end
-	end
-	if not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() then
-		local var52, var53 = validateMeshVertColorsModule(t, false, p1)
-		local var54 = var53
-		
-		if not var52 then
-			table.insert(t_1, table.concat(var54, "\n"))
-			var35 = false
-		end
-	end
-	if not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() then
-		local var55, var56 = validateCoplanarIntersectionModule(t, scale, p1)
-		local var57 = var56
-		
-		if not var55 then
-			table.insert(t_1, table.concat(var57, "\n"))
-			var35 = false
-		end
+	if not var27 then
+		table.insert(t_1, table.concat(var29, "\n"))
+		var23 = false
 	end
 	if getEngineFeatureEngineUGCValidateRigidNonSkinnedModule() then
-		local var58, var59 = validateRigidMeshNotSkinnedModule(t.contentId, p1)
-		local var60 = var59
+		local var30, var31 = validateRigidMeshNotSkinnedModule(t.contentId, p1)
+		local var32 = var31
 		
-		if not var58 then
-			table.insert(t_1, table.concat(var60, "\n"))
-			var35 = false
+		if not var30 then
+			table.insert(t_1, table.concat(var32, "\n"))
+			var23 = false
 		end
 	end
-	return var35, t_1
+	return var23, t_1
 end

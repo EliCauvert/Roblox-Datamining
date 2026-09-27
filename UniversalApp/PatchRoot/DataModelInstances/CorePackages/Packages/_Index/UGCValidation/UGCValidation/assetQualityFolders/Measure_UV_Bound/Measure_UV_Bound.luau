@@ -32,8 +32,7 @@ return {
 						if tonumber(v.score) ~= 100 then
 							local t = {
 								partName = i,
-								uv_outside_bound_vert_percent = string.format("%.2f", (tonumber(v.uv_outside_bound_vert_percent) or 0) * 100),
-								score = tostring(math.floor(tonumber(v.score) or 0))
+								uv_outside_bound_vert_percent = string.format("%.2f", (tonumber(v.uv_outside_bound_vert_percent) or 0) * 100)
 							}
 							
 							if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then

@@ -288,6 +288,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	else
 		var36 = nil
 	end
+	local transparency, transparency_1
 	local var44 = if flagsModule.FoundationNumberInputBeta and var36 or not flagsModule.FoundationNumberInputBeta then reactModule.createElement(numberInputControlsModule, {
 		variant = var1.variant,
 		controlsVariant = if flagsModule.FoundationNumberInputBeta then nil else controlsVariant,
@@ -350,35 +351,81 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	end, {
 		if flagsModule.FoundationNumberInputScrubCallbackProps then var1.onScrubEnded else nil
 	})
-	local transparency = var2.Color.Shift.Shift_300.Transparency
-	local transparency_1 = var2.Color.Shift.Shift_100.Transparency
-	local var49 = reactModule.useMemo(function()
-		-- upvalues: mapBindableModule (copy), var1 (ref), var16 (ref), transparency_1 (ref), transparency (ref)
-		return mapBindableModule(var1.value, function(p3)
-			-- upvalues: var1 (copy), var16 (copy), transparency_1 (copy), transparency (copy)
-			local var50 = if p3 and var1.maximum and var1.minimum then if var1.maximum == var1.minimum then 1 else (var16(p3) - var1.minimum) / (var1.maximum - var1.minimum) else 0
-			
-			if var50 == 0 then
-				return NumberSequence.new(transparency_1)
-			elseif var50 == 1 then
-				return NumberSequence.new(transparency)
-			elseif var50 <= 0 and var50 >= 1 then
-				return NumberSequence.new(transparency_1)
-			end
-			local list = {
+	local _ = nil
+	local _ = nil
+	local var49 = nil
+	local _ = nil
+	local _ = nil
+	
+	if flagsModule.FoundationFixColorOnScrubbableNumberInput then
+		local fgStyle = var3.container.fgStyle
+		local bgStyle = var3.container.bgStyle
+		var49 = if bgStyle and bgStyle.Color3 then bgStyle.Color3 else var2.Color.Shift.Shift_100.Color3
+		transparency = if fgStyle and fgStyle.Transparency then fgStyle.Transparency else var2.Color.None.Transparency
+		transparency_1 = if bgStyle and bgStyle.Transparency then bgStyle.Transparency else var2.Color.None.Transparency
+	else
+		transparency = var2.Color.Shift.Shift_300.Transparency
+		transparency_1 = var2.Color.Shift.Shift_100.Transparency
+	end
+	local var50
+	local var51 = math.abs(var1.maximum) < 1e999 and math.abs(var1.minimum) < 1e999
+	local _ = nil
+	local var52 = nil
+	
+	if flagsModule.FoundationNumberInputScrubbingUsesOffset then
+		var50 = reactModule.useMemo(function()
+			-- upvalues: transparency (write), transparency_1 (write)
+			return NumberSequence.new({
 				NumberSequenceKeypoint.new(0, transparency),
-				NumberSequenceKeypoint.new(var50, transparency),
-				NumberSequenceKeypoint.new(math.min(var50 + 0.001, 1), transparency_1)
-			}
-			
-			if var50 < 0.999 then
-				table.insert(list, NumberSequenceKeypoint.new(1, transparency_1))
-			end
-			return NumberSequence.new(list)
-		end)
-	end, {
-		transparency, transparency_1, var1.value, var16, var1.maximum, var1.minimum
-	})
+				NumberSequenceKeypoint.new(0.499, transparency),
+				NumberSequenceKeypoint.new(0.5, transparency_1),
+				NumberSequenceKeypoint.new(1, transparency_1)
+			})
+		end, { transparency, transparency_1 })
+		var52 = reactModule.useMemo(function()
+			-- upvalues: mapBindableModule (copy), var1 (ref), var51 (ref), var16 (ref)
+			return mapBindableModule(var1.value, function(p3)
+				-- upvalues: var51 (copy), var16 (copy), var1 (copy)
+				local var53 = if p3 and var51 then if var1.maximum == var1.minimum then 1 else (var16(p3) - var1.minimum) / (var1.maximum - var1.minimum) else 0
+				
+				return if var53 <= 0 then Vector2.new(-1, 0) elseif var53 >= 1 then Vector2.new(1, 0) else Vector2.new(var53 - 0.5, 0)
+			end)
+		end, {
+			var1.value,
+			var16,
+			var1.maximum,
+			var1.minimum,
+			var51
+		})
+	else
+		var50 = reactModule.useMemo(function()
+			-- upvalues: mapBindableModule (copy), var1 (ref), var16 (ref), transparency_1 (write), transparency (write)
+			return mapBindableModule(var1.value, function(p3)
+				-- upvalues: var1 (copy), var16 (copy), transparency_1 (copy), transparency (copy)
+				local var53 = if p3 and var1.maximum and var1.minimum then if var1.maximum == var1.minimum then 1 else (var16(p3) - var1.minimum) / (var1.maximum - var1.minimum) else 0
+				
+				if var53 == 0 then
+					return NumberSequence.new(transparency_1)
+				elseif var53 == 1 then
+					return NumberSequence.new(transparency)
+				elseif var53 <= 0 and var53 >= 1 then
+					return NumberSequence.new(transparency_1)
+				end
+				local list = {
+					NumberSequenceKeypoint.new(0, transparency),
+					NumberSequenceKeypoint.new(var53, transparency),
+					NumberSequenceKeypoint.new(math.min(var53 + 0.001, 1), transparency_1)
+				}
+				
+				if var53 < 0.999 then
+					table.insert(list, NumberSequenceKeypoint.new(1, transparency_1))
+				end
+				return NumberSequence.new(list)
+			end)
+		end, {
+			transparency, transparency_1, var1.value, var16, var1.maximum, var1.minimum
+		})
+	end
 	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), reactIsModule (copy), var1 (ref), var24 (ref), var22 (ref)
 		if not var10() and not reactIsModule.isBinding(var1.value) then
@@ -397,8 +444,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		hint = var1.hint,
 		textBoxRef = var7,
 		input = function(p3)
-			-- upvalues: flagsModule (copy), var36 (ref), var44 (ref), controlsVariant (ref), numberInputControlsVariantModule (copy), reactModule (copy), internalTextInputModule (copy), var1 (ref), joinBindablesModule (copy), var23 (ref), var10 (ref), var22 (ref), hasError (ref), var3 (ref), var27 (write), p1 (ref), var41 (ref), var40 (ref), var38 (ref), var14 (ref), var46 (ref), var47 (ref), var48 (ref), var49 (ref), var2 (ref), viewModule (copy), iconModule (copy), var26 (write), textModule (copy), var29 (write), var28 (write), var37 (ref), var45 (ref), var25 (ref)
-			local var50 = if flagsModule.FoundationNumberInputBeta then var36 and var44 else controlsVariant == numberInputControlsVariantModule.Split
+			-- upvalues: flagsModule (copy), var36 (ref), var44 (ref), controlsVariant (ref), numberInputControlsVariantModule (copy), reactModule (copy), internalTextInputModule (copy), var1 (ref), joinBindablesModule (copy), var23 (ref), var10 (ref), var22 (ref), hasError (ref), var3 (ref), var27 (write), p1 (ref), var41 (ref), var40 (ref), var38 (ref), var14 (ref), var46 (ref), var47 (ref), var48 (ref), var51 (ref), var49 (write), var50 (write), var52 (write), var2 (ref), viewModule (copy), iconModule (copy), var26 (write), textModule (copy), var29 (write), var28 (write), var37 (ref), var45 (ref), var25 (ref)
+			local var53 = if flagsModule.FoundationNumberInputBeta then var36 and var44 else controlsVariant == numberInputControlsVariantModule.Split
 			local createElement = reactModule.createElement
 			createElement = createElement(internalTextInputModule, {
 				inputRef = var1.inputRef,
@@ -428,10 +475,14 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				onDragEnded = if var14 then var48 else nil,
 				onReturnPressed = var1.onReturnPressed,
 				ref = p3,
-				backgroundGradient = if var14 and var49 then reactModule.createElement("UIGradient", {
+				backgroundGradient = if flagsModule.FoundationNumberInputScrubbingUsesOffset then if var14 and var51 then reactModule.createElement("UIGradient", {
+					Color = ColorSequence.new(var49),
+					Transparency = var50,
+					Offset = var52
+				}) else nil elseif var14 and var50 then reactModule.createElement("UIGradient", {
 					Rotation = 0,
-					Color = ColorSequence.new(var2.Color.Shift.Shift_300.Color3),
-					Transparency = var49
+					Color = if flagsModule.FoundationFixColorOnScrubbableNumberInput then ColorSequence.new(var49) else ColorSequence.new(var2.Color.Shift.Shift_300.Color3),
+					Transparency = var50
 				}) else nil,
 				trailingElement = if flagsModule.FoundationNumberInputBeta then if var1.trailingIcon then reactModule.createElement(viewModule, { tag = "row align-y-center size-0-full auto-x" }, reactModule.createElement(iconModule, {
 					name = var1.trailingIcon,
@@ -444,10 +495,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					size = var3.icon.size
 				})) else nil,
 				isDisabled = var1.isDisabled,
-				LayoutOrder = if var50 and flagsModule.FoundationNumberInputBeta then 0 else nil,
+				LayoutOrder = if var53 and flagsModule.FoundationNumberInputBeta then 0 else nil,
 				testId = `{var1.testId}--field`
 			})
-			local var51 = if flagsModule.FoundationNumberInputBeta and var26 then reactModule.createElement(textModule, {
+			local var54 = if flagsModule.FoundationNumberInputBeta and var26 then reactModule.createElement(textModule, {
 				tag = "text-align-x-left text-align-y-center content-muted",
 				RichText = true,
 				ClipsDescendants = true,
@@ -463,9 +514,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			}) else nil
 			
 			if flagsModule.FoundationNumberInputBeta then
-				createElement = reactModule.createElement(viewModule, { tag = "size-full-0 auto-y" }, { Input = createElement, Units = var51 })
+				createElement = reactModule.createElement(viewModule, { tag = "size-full-0 auto-y" }, { Input = createElement, Units = var54 })
 			end
-			return if var50 or flagsModule.FoundationNumberInputBeta then reactModule.createElement(viewModule, {
+			return if var53 or flagsModule.FoundationNumberInputBeta then reactModule.createElement(viewModule, {
 				Size = if flagsModule.FoundationNumberInputBeta then UDim2.new(var37.Scale - var45.Scale, var37.Offset - var45.Offset, 0, 0) else UDim2.fromOffset(var37.Offset - var45.Offset, 0),
 				tag = if flagsModule.FoundationNumberInputBeta then "row align-y-center auto-y" else "row align-y-center gap-xsmall auto-y",
 				layout = if flagsModule.FoundationNumberInputBeta then {
@@ -475,7 +526,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				} else nil
 			}, {
 				InputField = createElement,
-				Controls = if var50 then var44 else nil
+				Controls = if var53 then var44 else nil
 			}) else createElement
 		end
 	}))

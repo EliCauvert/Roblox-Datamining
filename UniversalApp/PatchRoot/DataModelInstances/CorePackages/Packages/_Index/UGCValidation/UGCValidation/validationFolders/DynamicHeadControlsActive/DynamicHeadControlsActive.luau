@@ -12,7 +12,6 @@ local list = {
 }
 
 return {
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateDynamicHeadData),
 	categories = { validationEnumsModule.UploadCategory.DYNAMIC_HEAD },
 	prereqTests = {
 		validationEnumsModule.ValidationModule.DynamicHeadFacsPresent

@@ -1,8 +1,12 @@
 ﻿local parent = script.Parent.Parent.Parent
+local parent_1 = parent.Parent
 local translatorModule = require(parent.Translations.Translator)
-local reactModule = require(parent.Parent.React)
+local reactModule = require(parent_1.React)
+local foundationModule = require(parent_1.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local useStyleModule = require(parent.Core.Style.useStyle)
 local UIBloxConfigModule = require(parent.UIBloxConfig)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 
 local function _(p1, p2)
 	-- upvalues: reactModule (ref), translatorModule (ref)
@@ -10,7 +14,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: useStyleModule (ref), UIBloxConfigModule (ref), reactModule (ref), translatorModule (ref)
+	-- upvalues: useStyleModule (ref), UIBloxConfigModule (ref), reactModule (ref), translatorModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = useStyleModule()
 	local var2 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var1.Tokens.Typography.BodySmall else var1.Tokens.Component.InputLabel.Base.Typography
 	local var3 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var1.Tokens.Color.Content.Default else var1.Tokens.Component.InputLabel.Base.ContentColor
@@ -24,7 +28,8 @@ return function(p1)
 	t.TextXAlignment = Enum.TextXAlignment.Left
 	t.TextYAlignment = Enum.TextYAlignment.Top
 	t.TextColor3 = var3.Color3
-	t.Font = var2.Font
+	t.Font = if foundationFontFaceMigration then nil else var2.Font
+	t.FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Font) else nil
 	t.TextSize = var2.FontSize
 	t.LineHeight = var2.LineHeight
 	t.Size = UDim2.new(1, 0, 0, 0)

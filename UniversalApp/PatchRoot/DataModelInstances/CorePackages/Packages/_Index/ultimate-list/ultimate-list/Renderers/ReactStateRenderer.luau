@@ -17,8 +17,9 @@ return function(p1)
 	local var2, var3 = reactModule.useState(p1.virtualizedListController.get)
 	local var4, var5 = reactModule.useBinding(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref), var5 (ref), var3 (ref)
-		local var6 = var2
+		-- upvalues: p1 (ref), var3 (ref), var5 (ref)
+		local var6 = p1.virtualizedListController.get()
+		var3(var6)
 		
 		return p1.virtualizedListController.bindToUpdate(function()
 			-- upvalues: var5 (copy), var6 (write), p1 (copy), var3 (copy)

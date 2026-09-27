@@ -3,13 +3,11 @@ local parent = script.Parent.Parent.Parent
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateMigrateDynamicHeadDataModule = require(parent.flags.getFFlagUGCValidateMigrateDynamicHeadData)
 local getFIntFacsJointMaximumDistRatioDirectModule = require(parent.flags.getFIntFacsJointMaximumDistRatioDirect)
 local getFIntFacsJointMaximumDistRatioAccumulatedModule = require(parent.flags.getFIntFacsJointMaximumDistRatioAccumulated)
 local getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule = require(parent.flags.getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBounds)
 
 return {
-	fflag = getFFlagUGCValidateMigrateDynamicHeadDataModule,
 	categories = { validationEnumsModule.UploadCategory.DYNAMIC_HEAD },
 	prereqTests = {
 		validationEnumsModule.ValidationModule.DynamicHeadFacsPresent

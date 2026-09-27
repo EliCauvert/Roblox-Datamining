@@ -7,12 +7,14 @@ local _ = require(foundation.Enums.IconSize)
 local radiusModule = require(foundation.Enums.Radius)
 local _ = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Providers.Style.Tokens)
+local flagsModule = require(foundation.Utility.Flags)
 
 return function(p1)
-	-- upvalues: inputSizeModule (ref), inputVariantModule (ref), dashModule (ref), radiusModule (ref)
+	-- upvalues: flagsModule (ref), inputSizeModule (ref), inputVariantModule (ref), dashModule (ref), radiusModule (ref)
 	return {
 		common = {
 			container = {
+				fgStyle = if flagsModule.FoundationFixColorOnScrubbableNumberInput then p1.Color.Shift.Shift_200 else nil,
 				strokeStyle = p1.Color.Stroke.Emphasis,
 				strokeThickness = p1.Stroke.Standard
 			}
@@ -27,12 +29,17 @@ return function(p1)
 			[inputVariantModule.Standard] = {},
 			[inputVariantModule.Contrast] = {
 				container = {
+					fgStyle = if flagsModule.FoundationFixColorOnScrubbableNumberInput then p1.Color.Shift.Shift_300 else nil,
 					bgStyle = p1.Color.Shift.Shift_200,
 					strokeStyle = dashModule.None
 				}
 			},
 			[inputVariantModule.Utility] = {
-				container = { bgStyle = dashModule.None, strokeStyle = dashModule.None }
+				container = {
+					fgStyle = dashModule.None,
+					bgStyle = dashModule.None,
+					strokeStyle = dashModule.None
+				}
 			}
 		},
 		defaultRadius = {

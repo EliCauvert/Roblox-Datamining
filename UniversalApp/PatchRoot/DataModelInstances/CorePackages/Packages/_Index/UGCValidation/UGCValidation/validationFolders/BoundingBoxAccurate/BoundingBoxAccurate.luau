@@ -13,7 +13,6 @@ local t = {
 		validationEnumsModule.SharedDataMember.rootInstance,
 		validationEnumsModule.SharedDataMember.renderMeshesData
 	},
-	fflag = require(parent.flags.getFFlagUGCValidateMigratePoseBlocking),
 	expectedFailures = {}
 }
 

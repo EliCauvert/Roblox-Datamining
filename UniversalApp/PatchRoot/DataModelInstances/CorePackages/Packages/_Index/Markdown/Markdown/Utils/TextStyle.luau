@@ -33,5 +33,17 @@ return {
 			})
 		end
 		return t
+	end,
+	normalizeStyleFont = function(p1)
+		-- upvalues: dashModule (ref)
+		if not p1 then
+			return p1
+		end
+		local var1 = dashModule.omit(p1, { "font" })
+		
+		if var1.fontFace == nil and p1.font ~= nil then
+			var1.fontFace = if typeof(p1.font) == "Font" then p1.font else Font.fromEnum(p1.font)
+		end
+		return var1
 	end
 }

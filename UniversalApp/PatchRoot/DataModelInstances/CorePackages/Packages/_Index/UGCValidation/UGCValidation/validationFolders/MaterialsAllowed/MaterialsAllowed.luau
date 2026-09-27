@@ -11,7 +11,6 @@ local t = {
 		validationEnumsModule.UploadCategory.RIGID_ACCESSORY
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties),
 	expectedFailures = {}
 }
 
