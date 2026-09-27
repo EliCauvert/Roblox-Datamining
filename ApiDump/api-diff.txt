@@ -1,62 +1,70 @@
-Version version-55808de4b1914919 (2026-09-15 20:33:57 UTC)
+Version version-6b0e880a1a144428 (2026-09-27 19:34:35 UTC)
 ============================================================
 
-Added Class AdPlacement : Instance
-	Added Property AdPlacement.AdFormat: Enum.AdFormat {🚧Monetization}
-	Added Property AdPlacement.ActivationInstance: Instance? {🚧Monetization}
-	Added Property AdPlacement.PlacementId: number {🚧Monetization}
-	Added Property AdPlacement.RewardId: string [ReadOnly] {🚧Monetization}
-	Added Property AdPlacement.RewardImageContent: Content [ReadOnly] {🚧Monetization}
-	Added Property AdPlacement.RewardName: string [ReadOnly] {🚧Monetization}
-	Added Property AdPlacement.Visible: boolean [ReadOnly] {🚧Monetization}
+Added Property AudioTextToSpeech.AutoLocalize: boolean {🚧Audio}
+Added Property InputAction.DisplayName: string {🚧Input} {🚀SimAccess}
+Added Property TeleportOptions.ReservedServerId: string {🚧Teleport}
+Added Property TeleportOptions.VipServerId: string {🚧Teleport}
+Added Property Workspace.StreamingEnabledStorage: boolean [Hidden] [NotReplicated] [NotScriptable] {🔒RobloxEngine}
 
-Added Class QueueService : Instance [NotCreatable] [Service] [NotReplicated]
-	Added Function QueueService:GetStandardQueue(name: string) -> StandardQueue {🚧DataStore}
+Added Function CaptureService:StartVideoCaptureForMCPAsync(onCaptureReady: (...any) -> ...any) -> Enum.VideoCaptureStartedResult [Yields] {🚧Capture} {🔒RobloxScript}
+Added Function CaptureService:StopVideoCaptureForMCP() -> () {🚧Capture} {🔒RobloxScript}
+Added Function MarketplaceService:RefreshBulkPurchase(batchPurchaseAuthToken: string, options: { [string]: any }? = nil) -> () {🔒RobloxScript}
+Added Function Plugin:GetPreinitPayload() -> any [CustomLuaState] {🔒RobloxScript}
+Added Function TeleportService:TeleportSwitchServer() -> () {🚧Teleport} {🔒RobloxScript}
+Added Function WrapTextureTransfer:PrepareProjectionMeshDataAsync() -> () [Yields] {🚧AvatarAppearance + DynamicGeneration}
+Added Function AssetQualityService:FetchAssetQualitySummaryFromJobIdV2Async(jobId: string, desiredQualityChecks: { any }) -> { [string]: any } [Yields] {🔒RobloxScript}
+Added Function MomentsService:FetchPostAsync(assetId: number) -> buffer [Yields] {🚧Capture} {🔒RobloxScript}
+Added Function PerformanceControlService:SetUserActivity(state: Enum.ScrollState) -> () {🔒RobloxScript}
 
-Added Class StandardQueue : Instance [NotCreatable] [NotReplicated]
-	Added Function StandardQueue:BatchCommitAsync(group: string, messageIds: { any }) -> () [Yields] {🚧DataStore}
-	Added Function StandardQueue:PublishAsync(data: any, messageKey: string? = "") -> () [Yields] {🚧DataStore}
-	Added Function StandardQueue:SubscribeAsync(group: string, callback: (...any) -> ...any) -> RBXScriptConnection [Yields] {🚧DataStore}
+Added Event MarketplaceService.PromptBulkPurchaseRefreshed(player: Instance, status: Enum.MarketplaceBulkPurchasePromptStatus, response: { [string]: any }) {🔒RobloxScript}
+Added Event MarketplaceService.RefreshBulkPurchaseRequested(playerId: number, batchPurchaseAuthToken: string, options: { [string]: any }) {🔒RobloxScript}
 
-Added Class ExternalIdentityService : Instance {🔒RobloxScript} [NotCreatable] [Service] [NotReplicated]
-	Added Function ExternalIdentityService:AcquireProofAsync(provider: string, nonce: string?, browserStartUrl: string?) -> ...any [Yields] {🔒RobloxScript}
-	Added Function ExternalIdentityService:CancelActiveOperation() -> () {🔒RobloxScript}
-	Added Function ExternalIdentityService:GetCapabilitiesAsync() -> { [string]: any } [Yields] {🔒RobloxScript}
+Added EnumItem TeleportMethod.TeleportSwitchServer : 8
 
-Added Property ChatWindowConfiguration.TextChannelDisplayMode: Enum.TextChannelDisplayMode {🚧🔎Chat} {🚧✏️PluginOrOpenCloud}
-Added Property StateMachineTransitionDefinition.From: Instance? {🚧Animation}
-Added Property StateMachineTransitionDefinition.Priority: number {🚧Animation}
-Added Property StateMachineTransitionDefinition.To: Instance? {🚧Animation}
-Added Property Workspace.MapTVRemoteToGamepadKeycodes: Enum.RolloutState [NotScriptable]
-Added Property StarterPlayer.PlaceAvatarRules: Instance? [Hidden] {🚧Players} {🔒RobloxScript}
-Added Property StateMachineTransitionDefinition.TransitionId: string {🚧Animation} {🔒RobloxScript}
-Added Property TextChannel.IsDefaultTextChannel: boolean [Hidden] {🚧Chat} {🔒RobloxScript}
+Added Tag [CustomLuaState] to Function Plugin:FinishFullLoading
+Added Tag [Deprecated] to Function LocalizationService:GetTranslatorForPlayer
+Added Tag [ReadOnly] to Property WorldRoot.PhysicsStepTime
 
-Added Function Terrain:ReplaceMaterialInTransformSubregionSlot(cframe: CFrame, size: Vector3, sourceMaterialIndex: number, targetMaterialIndex: number, targetRegion: Region3int16) -> () {🚧Environment} {🔒RobloxScript}
-Added Function Terrain:SetMaterialInTransformSubregionSlot(cframe: CFrame, size: Vector3, targetMaterialIndex: number, targetRegion: Region3int16) -> () {🚧Environment} {🔒RobloxScript}
-Added Function CallingService:CreateCallAsync(participantIds: { any }? = {}, chatChannelId: string? = "") -> { [string]: any } [Yields] {🔒RobloxScript}
-Added Function UGCValidationService:GetLayeredClothingPostDeformationSizeAsync(accessory: Accessory, editableMesh: EditableMesh, meshScale: Vector3) -> Vector3 [Yields] {🔒RobloxScript}
+Changed the capabilities and write permissions of Property Lighting.LightingStyle 
+	from: {🚧Environment} {✏️RobloxScript}
+	  to: {🚧🔎Environment} {🚧✏️PluginOrOpenCloud} 
 
-Added Event LiveScriptingService.BeginEditWithUri(id: number, uri: string) [Hidden] {🔒RobloxEngine}
-Added Event LiveScriptingService.SendAtomicOperationWithUri(requestId: number, uri: string, op: string, hash: string) [Hidden] {🔒RobloxEngine}
+Changed the capabilities and write permissions of Property Lighting.PrioritizeLightingQuality 
+	from: {🚧Environment} {✏️RobloxScript}
+	  to: {🚧🔎Environment} {🚧✏️PluginOrOpenCloud} 
 
-Added Enum AnimationNodeBlendMode
-	Added EnumItem AnimationNodeBlendMode.Over : 0
-	Added EnumItem AnimationNodeBlendMode.Add : 1
-	Added EnumItem AnimationNodeBlendMode.Subtract : 2
+Changed the capabilities and write permissions of Property PartOperation.RenderFidelity 
+	from: {🚧Basic + CSG} {✏️Plugin}
+	  to: {🚧🔎Basic + CSG} {🚧✏️PluginOrOpenCloud} 
 
-Added Enum QueueDecision
-	Added EnumItem QueueDecision.Commit : 0
-	Added EnumItem QueueDecision.Defer : 1
+Changed the capabilities and write permissions of Property PartOperation.SmoothingAngle 
+	from: {🚧Basic + CSG} {✏️Plugin}
+	  to: {🚧🔎Basic + CSG} {🚧✏️PluginOrOpenCloud} 
 
-Added Enum TextChannelDisplayMode
-	Added EnumItem TextChannelDisplayMode.AllTextChannels : 0
-	Added EnumItem TextChannelDisplayMode.DefaultTextChannels : 1
+Changed the capabilities and write permissions of Property TriangleMeshPart.FluidFidelity 
+	from: {🚧Basic} {✏️Plugin}
+	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
 
-Added EnumItem AnimationNodeType.OneShotNode : 14
-Added EnumItem AnimationNodeType.StateMachineNode : 16
-Added EnumItem PromptCreateOutfitResult.UGCValidationFailed : 8
+Changed the capabilities and write permissions of Property TriangleMeshPart.CollisionFidelity 
+	from: {🚧Basic} {✏️Plugin}
+	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
 
-Removed Function CallingService:CreateCall
+Changed the parameters of Function EditableImage:DrawImageProjected 
+	from: (mesh: EditableMesh, projection: { [string]: any }, brushConfig: { [string]: any })
+	  to: (projectionSource: Object, projection: { [string]: any }, brushConfig: { [string]: any })
 
-Removed Tag [NotReplicated] from Class StateMachineTransitionDefinition
+Changed the parameters of Function EditableImage:SampleImageProjected 
+	from: (sourceMesh: EditableMesh, sourceTexture: EditableImage, projectionConfig: { [string]: any }, brushConfig: { [string]: any })
+	  to: (projectionSource: Object, sourceTexture: EditableImage, projectionConfig: { [string]: any }, brushConfig: { [string]: any })
+
+Changed the parameters of Function Plugin:FinishFullLoading 
+	from: ()
+	  to: (payload: any)
+
+Removed Class SnippetService
+
+Removed Enum Language
+	Removed EnumItem Language.Default
+
+Removed Tag [NotReplicated] from Property WorldRoot.PhysicsStepTime
