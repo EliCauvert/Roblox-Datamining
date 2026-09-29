@@ -11,7 +11,9 @@ local images = UIBlox.App.ImageSet.Images
 local foundationModule = require(corePackagesService.Packages.Foundation)
 local icon = foundationModule.Icon
 local iconSize = foundationModule.Enums.IconSize
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local withLocalizationModule = require(script.Parent.Parent.Localization.withLocalization)
 local searchBar = roact.PureComponent:extend("SearchBar")
 searchBar.validateProps = t.interface({
@@ -107,9 +109,11 @@ function searchBar.focus(p1)
 end
 
 function searchBar.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), withLocalizationModule (ref), roact (ref), userInputService (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), icon (ref), iconSize (ref), imageSetLabel (ref), images (ref)
+	-- upvalues: withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), withLocalizationModule (ref), roact (ref), userInputService (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), icon (ref), iconSize (ref), imageSetLabel (ref), images (ref), normalizeFontFace (ref)
 	return withFoundationOrUIBloxStyle(function(p2)
+		-- upvalues: foundationFontFaceMigration (copy)
 		return {
+			Tokens = if foundationFontFaceMigration then p2 else nil,
 			Theme = {
 				TextEmphasis = {
 					Color = p2.Color.Content.Emphasis.Color3,
@@ -129,12 +133,12 @@ function searchBar.render(p1)
 			}
 		}
 	end, function(p2)
-		-- upvalues: withLocalizationModule (copy), p1 (ref), roact (copy), userInputService (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), icon (copy), iconSize (copy), imageSetLabel (copy), images (copy)
+		-- upvalues: withLocalizationModule (copy), p1 (ref), roact (copy), userInputService (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), icon (copy), iconSize (copy), imageSetLabel (copy), images (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		return withLocalizationModule({
 			search = "CoreScripts.InGameMenu.InviteFriends.Search",
 			cancel = "CoreScripts.InGameMenu.Cancel"
 		})(function(p3)
-			-- upvalues: p2 (ref), p1 (copy), roact (copy), userInputService (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), icon (copy), iconSize (copy), imageSetLabel (copy), images (copy)
+			-- upvalues: p2 (ref), p1 (copy), roact (copy), userInputService (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), icon (copy), iconSize (copy), imageSetLabel (copy), images (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 			local body = p2.Font.Body
 			local body_1 = p2.Font.Body
 			
@@ -192,7 +196,8 @@ function searchBar.render(p1)
 							LayoutOrder = 2,
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, -28, 0, 20),
-							Font = body_1.Font,
+							Font = if foundationFontFaceMigration then nil else body_1.Font,
+							FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
 							Text = p1.props.text or "",
 							TextInputType = if userInputService:GetPlatform() == Enum.Platform.Android then Enum.TextInputType.PasswordShown else Enum.TextInputType.NoSuggestions,
 							TextSize = p2.Font.BaseSize * body_1.RelativeSize,
@@ -214,7 +219,8 @@ function searchBar.render(p1)
 					LayoutOrder = 2,
 					BackgroundTransparency = 1,
 					Size = UDim2.fromOffset(57, 20),
-					Font = body.Font,
+					Font = if foundationFontFaceMigration then nil else body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
 					TextSize = p2.Font.BaseSize * body.RelativeSize,
 					Text = p3.cancel,
 					TextColor3 = p2.Theme.TextEmphasis.Color,

@@ -45,8 +45,8 @@ return function(p1)
 			},
 			backgroundStyle = if var3 then var1.Inverse.Surface.Surface_0 else var1.Color.ActionStandard.Background,
 			onActivated = function()
-				-- upvalues: var2 (ref), v (ref)
-				var2.onChipActivated(v.font)
+				-- upvalues: var2 (ref), v (ref), i (ref)
+				var2.onChipActivated(v.font, i)
 			end
 		}, {
 			Label = reactModule.createElement(text, {

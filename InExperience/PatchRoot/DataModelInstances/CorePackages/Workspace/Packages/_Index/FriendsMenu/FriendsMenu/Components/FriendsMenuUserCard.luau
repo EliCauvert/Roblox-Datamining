@@ -5,6 +5,9 @@ local getStandardSizeAvatarHeadShotRbxthumb = require(parent.UserLib).Utils.getS
 local fFlagFriendsMenuUseProfileFrameThumbnailModule = require(friendsMenu.Flags.FFlagFriendsMenuUseProfileFrameThumbnail)
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local interactable = UIBloxModule.Core.Control.Interactable
@@ -15,7 +18,7 @@ local selectedUsersContextModule = require(context.SelectedUsersContext)
 local uDim = UDim.new(1, 0)
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), selectedUsersContextModule (ref), useStyle (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), fFlagFriendsMenuUseProfileFrameThumbnailModule (ref), interactable (ref), constantsModule (ref), uDim (ref), imageSetLabel (ref), images (ref)
+	-- upvalues: reactModule (ref), selectedUsersContextModule (ref), useStyle (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), fFlagFriendsMenuUseProfileFrameThumbnailModule (ref), interactable (ref), constantsModule (ref), uDim (ref), imageSetLabel (ref), images (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = reactModule.useContext(selectedUsersContextModule)
 	local var2 = useStyle()
 	local theme = var2.Theme
@@ -68,7 +71,8 @@ return reactModule.forwardRef(function(p1, p2)
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Position = UDim2.fromScale(0.5, 1),
 			Size = UDim2.fromOffset(constantsModule.FRIEND_MENU_CARD_SIZE, 0),
-			Font = font.Footer.Font,
+			Font = if foundationFontFaceMigration then nil else font.Footer.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionSmall.Font) else nil,
 			Text = p1.displayName,
 			TextColor3 = theme.TextDefault.Color,
 			TextSize = font.BaseSize * font.Footer.RelativeSize,

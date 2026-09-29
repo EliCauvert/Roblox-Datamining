@@ -91,6 +91,7 @@ Authentication.SignUp.Action.ApplyOnNextRespawn,अगली बार रीस
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ExitModalLeave,छोड़ें
 Authentication.SignUp.Action.RespawnNow,अभी रीस्पॉन करें
+Authentication.SignUp.Action.StartPlay,खेलना शुरू करें
 Authentication.SignUp.Button.OKCaptialized,ठीक है
 Authentication.SignUp.Button.RetryLogIn,फिर से लॉग इन करने की कोशिश करें
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} पर मौजूद आपका अकाउंट पहले से ही Roblox अकाउंट से लिंक किया हुआ है. दोबारा लॉग इन करने की कोशिश करें.
@@ -99,6 +100,7 @@ Authentication.SignUp.Description.Try,आज़माएँ
 Authentication.SignUp.Description.UsernameChanged,सब हो गया! आपका अकाउंट तैयार है और {platform} से लिंक किया हआ है. गेम में अपना अपडेट किया हुआ यूज़रनेम देखने के लिए अभी रीस्पॉन करें या यह अगली बार लागू होगा.
 Authentication.SignUp.Description.UsernameUnchanged,आप शामिल हो गए हैं! आपका अकाउंट तैयार है और {platform} से लिंक किया हुआ है. फ़्रेंड्स के साथ चैट करें और लाखों Roblox गेम्स खेलें.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"आपका Roblox अकाउंट, {platform} पर आपके अकाउंट से लिंक हो जाएगा. कभी भी सेटिंग स्क्रीन से अनलिंक किया जा सकता है. {platform} पर किसी दूसरे अकाउंट से लिंक करने से पहले कुछ इंतज़ार करना पड़ सकता है. {ctaButton} पर क्लिक करने का मतलब है कि आप आर्बिट्रेशन क्लॉज़ सहित उपयोग की शर्तों से सहमत हैं और आपने प्राइवेसी पॉलिसी को स्वीकार किया है."
+Authentication.SignUp.Header.OneLastThing,बस एक और काम बाकी है
 Authentication.SignUp.Header.SetUpYourRobloxAccount,अपना Roblox अकाउंट सेट अप करें
 Authentication.SignUp.Heading.CountryCodeSelector,देश चुनें
 Authentication.SignUp.Heading.RetryLogIn,
@@ -139,6 +141,7 @@ Authentication.SignUp.Response.InvalidBirthday,जन्मदिन अमा�
 Authentication.SignUp.Response.InvalidEmail,ईमेल एड्रेस गलत है.
 Authentication.SignUp.Response.PasswordComplexity,ज़्यादा मुश्किल पासवर्ड बनाएँ.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,यूज़रनेम पहले सेट किया जाना चाहिए.
+Authentication.SignUp.Subtitle.AddYourBirthday,अपना Roblox अकाउंट बनाने के लिए अपना जन्मदिन जोड़ें.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,"सेटअप पूरा करने पर, आपकी प्रोग्रेस आगे के लिए सेव हो जाती है."
 Authentication.TwoStepVerification.Action.GoToSecurity,सेटिंग्स
 Authentication.TwoStepVerification.Label.TwoStepRequired,"आगे के ट्रांज़ैक्शन के लिए, 2-स्टेप वेरिफ़िकेशन ज़रूरी है. 2-स्टेप वेरिफ़िकेशन के लिए सेटिंग्स > सिक्योरिटी पर जाएँ."
@@ -1027,6 +1030,7 @@ CoreScripts.PublishAvatarPrompt.Rotate,
 CoreScripts.PublishAvatarPrompt.Zoom,ज़ूम करें
 CoreScripts.PublishCommon.Disclaimer,
 CoreScripts.PublishCommon.Leave,
+CoreScripts.PublishCommon.ReviewingCreation,आपका क्रिएशन रिव्यू किया जा रहा है...
 CoreScripts.PublishCommon.Stay,
 CoreScripts.PublishCommon.UnsavedWarning,सेव नहीं किए गए बदलाव स्टोर नहीं किए जाएँगे
 CoreScripts.PurchasePrompt.Button.OK,
@@ -2017,6 +2021,7 @@ Feature.Build.Description.BuildReplyNotif,बिल्ड से आपके �
 Feature.Build.Description.BuyRobuxToCreate,"क्रिएट करना जारी रखने के लिए, और Robux खरीदें या कल अपने मुफ़्त बिल्ड के इस्तेमाल के रीसेट होने का इंतज़ार करें."
 Feature.Build.Description.BuyUsageOrWait,Robux की मदद से बिल्ड का ज़्यादा इस्तेमाल खरीदें या अपनी रोज़ाना की लिमिट के रीसेट होने का इंतज़ार करें.
 Feature.Build.Description.CampaignRunDates,आपका कैंपेन {startDate} – {endDate} तक चलेगा
+Feature.Build.Description.ChooseAdCampaignLength,चुनें कि आपको अपना ऐड कब तक चलाना है।
 Feature.Build.Description.ChoosePlaytesters,चुनें कि कौन-से फ़्रेंड्स आपका गेम प्रीव्यू कर सकते हैं.
 Feature.Build.Description.CreateDeveloperProduct,"{PRICE} Robux में ""{NAME}"" क्रिएट करें, बिक्री से हटाया गया."
 Feature.Build.Description.DeactivateDeveloperProduct,डेवलपर प्रॉडक्ट {PRODUCT_ID} को बिक्री से हटाएँ.
@@ -2329,7 +2334,9 @@ Feature.Build.Notification.Title.NeedInput,बिल्ड के लिए आ�
 Feature.Build.Placeholder.DescribeProduct,बताएँ कि आपको क्या बेचना है
 Feature.Build.Placeholder.DescribeProductUpdate,कोई अपडेट बताएँ
 Feature.Build.Prompt.CreateDeveloperProduct,"डेवलपर प्रॉडक्ट बनाने, उसे गेम में जोड़ने, बदलावों को वेरिफ़ाई करके पब्लिश करने और उसे खरीदारी के लिए उपलब्ध कराने में मेरी मदद करें."
+Feature.Build.Title.AdActive,ऐड कैंपेन ऐक्टिव है
 Feature.Build.Title.AdCampaignDuration,{durationDays}-दिन का ऐड कैंपेन
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}-दिन
 Feature.Build.Title.AdComplete,ऐड पूरा हुआ
 Feature.Build.Title.AdCreated,ऐड क्रिएट किया गया
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2360,6 +2367,7 @@ Feature.Build.Title.GetUsers,यूज़र्स पाएँ
 Feature.Build.Title.ManagedPricingAcknowledgement,'मैनेज की जा रही कीमतें' फ़ीचर चालू करना है?
 Feature.Build.Title.NoMonetizationProducts,अपने गेम में कमाना शुरू करें
 Feature.Build.Title.NoRobuxForUsage,बिल्ड के इस्तेमाल के लिए कोई Robux नहीं बचा
+Feature.Build.Title.PickCampaign,अवधि चुनें
 Feature.Build.Title.PlaytestInviteSendFailed,इनवाइट नहीं भेजे जा सके
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,इन यूज़र्स को नहीं जोड़ा जा सका :
@@ -2982,14 +2990,6 @@ Feature.Chat.Response.ChatNameFullyModerated,चैट ग्रुप का �
 Feature.Chat.Response.ChatNameFullyModerated.V2,ग्रुप का नाम मॉडरेट किया गया.
 Feature.Chat.Response.NetworkError,नेटवर्क संबंधी गड़बड़ी
 Feature.Chat.RobloxConnectUnavailableWithUser,"इस समय, इस यूज़र के लिए Roblox Connect की सुविधा उपलब्ध नहीं है."
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,फ़्रेंड एक्टिविटी
-Feature.Chat.ShareGameToChat.NoFavoriteGames,कोई पसंदीदा नहीं है
-Feature.Chat.ShareGameToChat.NoFriendActivity,आपकी कोई फ़्रेंड ऐक्टिविटी नहीं है
-Feature.Chat.ShareGameToChat.NoPopularGames,कोई पॉप्युलर एक्सपीरिएंस उपलब्ध नहीं है
-Feature.Chat.ShareGameToChat.NoRecentGames,हाल ही का कुछ भी नहीं है
-Feature.Chat.ShareGameToChat.Popular,पॉप्युलर
-Feature.Chat.ShareGameToChat.Recent,हाल ही का
 Feature.Chat.Text.NoConnections,आपके पास अभी तक कोई फ़्रेंड नहीं है. Roblox पर शुरू करने के लिए फ़्रेंड्स को खोजें और जोड़ें.
 Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.FriendsChat,फ़्रेंड्स चैट
@@ -4702,7 +4702,7 @@ IAPExperience.RobuxUpsell.Text.LastPurchased,पिछली बार खरी
 IAPExperience.RobuxUpsell.Text.Loading,
 IAPExperience.RobuxUpsell.Text.MoreRobux,"ज़्यादा Robux, उतनी ही कीमत पर"
 IAPExperience.RobuxUpsell.Text.NeedMoreRobux,आपको और Robux की ज़रूरत है
-IAPExperience.RobuxUpsell.Text.PopularItem,
+IAPExperience.RobuxUpsell.Text.PopularItem,पॉप्युलर
 IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet,हेडसेट डिवाइसों पर Robux खरीदने की सुविधा अभी तक उपलब्ध नहीं है. किसी अन्य डिवाइस पर कोशिश करें.
 IAPExperience.RobuxUpsell.Text.RemainingBalance,बचे हुए {robux} को आपके बैलेंस में क्रेडिट कर दिया जाएगा.
 IAPExperience.RobuxUpsell.Text.TermsOfUse,

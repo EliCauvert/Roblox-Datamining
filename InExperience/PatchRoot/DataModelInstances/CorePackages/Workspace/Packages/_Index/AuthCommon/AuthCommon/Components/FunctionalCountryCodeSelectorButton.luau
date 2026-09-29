@@ -1,7 +1,11 @@
 ﻿local authCommon = script:FindFirstAncestor("AuthCommon")
 local parent = authCommon.Parent
 local roactModule = require(parent.Roact)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local appFonts = require(parent.Style).AppFonts
+local getTextSize = require(parent.Style).GetTextSize
 local colors = require(parent.Style).Colors
 local white = colors.White
 local gray2 = colors.Gray2
@@ -12,17 +16,18 @@ local useStyle = require(parent.UIBlox).Core.Style.useStyle
 local _ = require(authCommon.Common.Types)
 
 return function(p1)
-	-- upvalues: getFFlagCountryCodeBoldPrefixEnabledModule (ref), text (ref), appFonts (ref), useStyle (ref), roactModule (ref), white (ref), gray2 (ref)
+	-- upvalues: getFFlagCountryCodeBoldPrefixEnabledModule (ref), foundationFontFaceMigration (ref), foundationModule (ref), getTextSize (ref), text (ref), appFonts (ref), useStyle (ref), roactModule (ref), normalizeFontFace (ref), white (ref), gray2 (ref)
 	local localizedName = p1.CountryCode.localizedName or ""
 	local text_1 = "+" .. (p1.CountryCode.prefix or "")
 	local textSize = p1.ListButtonProps.TextSize
 	local boldPrefixEnabled = getFFlagCountryCodeBoldPrefixEnabledModule() and p1.BoldPrefixEnabled
-	local textWidth = text.GetTextWidth(text_1, appFonts.default:getDefault(), textSize)
+	local var1 = if foundationFontFaceMigration then foundationModule.Hooks.useTokens() else nil
+	local var2 = if foundationFontFaceMigration then getTextSize(text_1, textSize, var1.Typography.BodySmall.Font, Vector2.new(10000, 10000)).X else text.GetTextWidth(text_1, appFonts.default:getDefault(), textSize)
 	local formattedText = string.format("%s (%s)", localizedName, text_1)
 	local size = p1.Size
 	local layoutOrder = p1.LayoutOrder
 	local selectionCallback = p1.ListButtonProps.SelectionCallback or function(_) end
-	local var1 = useStyle()
+	local var3 = useStyle()
 	
 	return roactModule.createElement("TextButton", {
 		Size = size,
@@ -38,8 +43,9 @@ return function(p1)
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
 			Text = formattedText,
-			Font = var1.Tokens.Typography.BodySmall.Font,
-			TextColor3 = var1.Tokens.Color.Shift.Shift_400.Color3,
+			Font = if foundationFontFaceMigration then nil else var3.Tokens.Typography.BodySmall.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.BodySmall.Font) else nil,
+			TextColor3 = var3.Tokens.Color.Shift.Shift_400.Color3,
 			TextSize = textSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextTruncate = Enum.TextTruncate.AtEnd
@@ -47,9 +53,10 @@ return function(p1)
 	} else {
 		CountryName = roactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, -textWidth, 1, 0),
+			Size = UDim2.new(1, -var2, 1, 0),
 			Text = localizedName,
-			Font = appFonts.default:getDefault(),
+			Font = if foundationFontFaceMigration then nil else appFonts.default:getDefault(),
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.BodySmall.Font) else nil,
 			TextColor3 = white,
 			TextSize = textSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
@@ -59,7 +66,8 @@ return function(p1)
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
 			Text = text_1,
-			Font = appFonts.default:getDefault(),
+			Font = if foundationFontFaceMigration then nil else appFonts.default:getDefault(),
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.BodySmall.Font) else nil,
 			TextColor3 = gray2,
 			TextSize = textSize,
 			TextXAlignment = Enum.TextXAlignment.Right,

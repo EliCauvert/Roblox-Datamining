@@ -8,6 +8,8 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local foundationModule = require(parent.Foundation)
 local useCursor = foundationModule.Hooks.useCursor
 local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local getFFlagEnableFriendsListSearchNormalizationErrorFix = sharedFlagsModule.GetFFlagEnableFriendsListSearchNormalizationErrorFix
 local useStyle = UIBloxModule.Core.Style.useStyle
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -31,7 +33,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useStyle (ref), useTokens (ref), reactModule (ref), friendsListContextModule (ref), getLocalizedStrings (ref), t (ref), var1 (write), var2 (write), var3 (write), var5 (write), var4 (write), var6 (write), var8 (write), var7 (write), useCursor (ref), foundationModule (ref), getFFlagEnableFriendsListSearchNormalizationErrorFix (ref), debounce (ref), imageSetLabel (ref), search (ref), imageSetButton (ref), clear (ref)
+	-- upvalues: useStyle (ref), useTokens (ref), reactModule (ref), friendsListContextModule (ref), getLocalizedStrings (ref), t (ref), var1 (write), var2 (write), var3 (write), var5 (write), var4 (write), var6 (write), var8 (write), var7 (write), useCursor (ref), foundationModule (ref), getFFlagEnableFriendsListSearchNormalizationErrorFix (ref), debounce (ref), imageSetLabel (ref), search (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), imageSetButton (ref), clear (ref)
 	local var9 = useStyle()
 	local var10 = useTokens()
 	local var11 = reactModule.useContext(friendsListContextModule)
@@ -115,7 +117,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			TextWrapped = true,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextSize = var6,
-			Font = var9.Font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else var9.Font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var10.Typography.BodyLarge.Font) else nil,
 			ref = var13,
 			[reactModule.Event.Focused] = p1.onFocus,
 			[reactModule.Change.Text] = var16,

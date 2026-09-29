@@ -5,6 +5,9 @@ local localizationModule = require(parent_1.Localization)
 local reactModule = require(parent_1.React)
 local roactUtilsModule = require(parent_1.RoactUtils)
 local UIBloxModule = require(parent_1.UIBlox)
+local foundationModule = require(parent_1.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useAnalyticsModule = require(parent.Analytics.useAnalytics)
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useLocalization = localizationModule.Hooks.useLocalization
@@ -29,7 +32,7 @@ return capturesPolicyModule.connect(function(p1)
 		enableCapturesBulkManagement = p1.enableCapturesBulkManagement()
 	}
 end)(function(p1)
-	-- upvalues: useAnalyticsModule (ref), useStyle (ref), useDispatch (ref), reactModule (ref), useLocalization (ref), useSelector (ref), constantsModule (ref), eventNamesModule (ref), captureManagerOpenedModule (ref), getCaptureStorageUsageModule (ref), usePingLazyRenderResizingModule (ref), iconButton (ref), images (ref), iconSize (ref), withTooltip (ref), tooltipOrientation (ref), coreGuiService (ref), interactable (ref), imageSetLabel (ref)
+	-- upvalues: useAnalyticsModule (ref), useStyle (ref), useDispatch (ref), reactModule (ref), useLocalization (ref), useSelector (ref), constantsModule (ref), eventNamesModule (ref), captureManagerOpenedModule (ref), getCaptureStorageUsageModule (ref), usePingLazyRenderResizingModule (ref), iconButton (ref), images (ref), iconSize (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), withTooltip (ref), tooltipOrientation (ref), coreGuiService (ref), interactable (ref), imageSetLabel (ref)
 	local var1 = useAnalyticsModule()
 	local var2 = useStyle()
 	local var3 = useDispatch()
@@ -124,7 +127,8 @@ end)(function(p1)
 					LayoutOrder = 1,
 					TextWrapped = false,
 					AutomaticSize = Enum.AutomaticSize.X,
-					Font = font,
+					Font = if foundationFontFaceMigration then nil else font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodySmall.Font) else nil,
 					Size = UDim2.fromOffset(0, 20),
 					Text = var14,
 					TextColor3 = color,

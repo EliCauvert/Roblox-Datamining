@@ -14,12 +14,10 @@ local getToastStoreModule = require(moments.Stores.GetToastStore)
 local useMomentsHost = require(moments.MomentsHostContext).useMomentsHost
 local reactionTypeModule = require(moments.Enums.ReactionType)
 local buildCommentRowsModule = require(script.Parent.Parent.Rows.buildCommentRows)
-local createCommentRowLayoutModule = require(script.Parent.Parent.Rows.createCommentRowLayout)
 local _ = require(script.Parent.Parent.Rows.CommentRowTypes)
 local useVirtualizedCommentRowsModule = require(script.Parent.Parent.Rows.useVirtualizedCommentRows)
 local _ = require(script.Parent.CommentsListView)
 local playersService = game:GetService("Players")
-local t = {}
 
 local function _(p1)
 	return `{string.len(p1)}:{p1}`
@@ -31,7 +29,7 @@ local function showDeleteFailedToast()
 end
 
 return function(p1)
-	-- upvalues: playersService (ref), getCommentCollectionStoreModule (ref), reactModule (ref), signalsReactModule (ref), signalsModule (ref), buildCommentRowsModule (ref), momentsGetMomentsCommentsStoreModule (ref), momentsGetMomentsReactionsStoreModule (ref), momentsResolveEmoteIdModule (ref), reactionTypeModule (ref), t (ref), foundationModule (ref), createCommentRowLayoutModule (ref), useVirtualizedCommentRowsModule (ref), getCommentsListCoordinatorModule (ref), useMomentsHost (ref), showDeleteFailedToast (ref)
+	-- upvalues: playersService (ref), getCommentCollectionStoreModule (ref), reactModule (ref), signalsReactModule (ref), signalsModule (ref), buildCommentRowsModule (ref), momentsGetMomentsCommentsStoreModule (ref), momentsGetMomentsReactionsStoreModule (ref), momentsResolveEmoteIdModule (ref), reactionTypeModule (ref), foundationModule (ref), useVirtualizedCommentRowsModule (ref), getCommentsListCoordinatorModule (ref), useMomentsHost (ref), showDeleteFailedToast (ref)
 	local var1
 	local localPlayer = playersService.LocalPlayer
 	local var2 = if localPlayer ~= nil then "" else localPlayer.Name
@@ -71,49 +69,37 @@ return function(p1)
 			return if var11.source == "cache" and var11.status == "Ready" then momentsResolveEmoteIdModule.resolveOptionalEmoteIdForReaction(var11.emojis, reactionTypeModule.ThumbsUp) else nil
 		end)
 	end, { var9 }))
-	local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var9 (ref), t (copy)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: var9 (copy), t (copy)
-			local getCachedEmojiCatalog = var9.getCachedEmojiCatalog
-			
-			return if getCachedEmojiCatalog == nil then t else getCachedEmojiCatalog(p2).emojis
-		end)
-	end, { var9 }))
-	local var12 = foundationModule.Hooks.useTokens()
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: createCommentRowLayoutModule (copy), var12 (ref)
-		return createCommentRowLayoutModule(var12)
-	end, { var12 })
-	local var14 = useVirtualizedCommentRowsModule(var6, var13.rowGap, var13.estimatedRowHeight, `{p1.feedItemId}:{p1.sessionId}`, p1.scrollingFrameRef)
-	local var15 = getCommentsListCoordinatorModule(false)
+	local var11 = foundationModule.Hooks.useTokens()
+	local small = var11.Padding.Small
+	local var12 = useVirtualizedCommentRowsModule(var6, 0, var11.Size.Size_2000, `{p1.feedItemId}:{p1.sessionId}`, p1.scrollingFrameRef)
+	local var13 = getCommentsListCoordinatorModule(false)
+	local var14 = reactModule.useCallback(function()
+		-- upvalues: var13 (ref), p1 (ref)
+		return var13.loadMore(p1.feedItemId, p1.sessionId)
+	end, { var13, p1.feedItemId, p1.sessionId })
+	local var15 = reactModule.useCallback(function()
+		-- upvalues: var13 (ref), p1 (ref)
+		var13.retryLoadMore(p1.feedItemId, p1.sessionId)
+	end, { var13, p1.feedItemId, p1.sessionId })
 	local var16 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref), p1 (ref)
-		return var15.loadMore(p1.feedItemId, p1.sessionId)
-	end, { var15, p1.feedItemId, p1.sessionId })
+		-- upvalues: var13 (ref), p1 (ref)
+		var13.retryPendingSubmission(p1.feedItemId, p1.sessionId)
+	end, { var13, p1.feedItemId, p1.sessionId })
 	local var17 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref), p1 (ref)
-		var15.retryLoadMore(p1.feedItemId, p1.sessionId)
-	end, { var15, p1.feedItemId, p1.sessionId })
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref), p1 (ref)
-		var15.retryPendingSubmission(p1.feedItemId, p1.sessionId)
-	end, { var15, p1.feedItemId, p1.sessionId })
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref), p1 (ref)
-		var15.editPendingSubmission(p1.feedItemId, p1.sessionId)
-	end, { var15, p1.feedItemId, p1.sessionId })
-	local var20 = reactModule.useCallback(function(p2, p3, p4, p5)
-		-- upvalues: var15 (ref), p1 (ref)
-		return if p5 then var15.ensureReactionAbsent(p1.feedItemId, p2, p3, p4) else var15.ensureReactionPresent(p1.feedItemId, p2, p3, p4)
-	end, { var15, p1.feedItemId })
-	local var21 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: var15 (ref), p1 (ref)
-		return var15.ensureReactionPresent(p1.feedItemId, p2, p3, p4)
-	end, { var15, p1.feedItemId })
+		-- upvalues: var13 (ref), p1 (ref)
+		var13.editPendingSubmission(p1.feedItemId, p1.sessionId)
+	end, { var13, p1.feedItemId, p1.sessionId })
+	local var18 = reactModule.useCallback(function(p2, p3, p4, p5)
+		-- upvalues: var13 (ref), p1 (ref)
+		return if p5 then var13.ensureReactionAbsent(p1.feedItemId, p2, p3, p4) else var13.ensureReactionPresent(p1.feedItemId, p2, p3, p4)
+	end, { var13, p1.feedItemId })
+	local var19 = reactModule.useCallback(function(p2, p3, p4)
+		-- upvalues: var13 (ref), p1 (ref)
+		return var13.ensureReactionPresent(p1.feedItemId, p2, p3, p4)
+	end, { var13, p1.feedItemId })
 	local openMomentCommentReport = useMomentsHost().openMomentCommentReport
 	local channelId = var5.channelId
-	local var22 = reactModule.useMemo(function()
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: openMomentCommentReport (ref), channelId (ref)
 		return if openMomentCommentReport == nil or channelId == nil then nil else function(p2, p3)
 			-- upvalues: openMomentCommentReport (copy), channelId (copy)
@@ -124,10 +110,10 @@ return function(p1)
 			})
 		end
 	end, { openMomentCommentReport, channelId })
-	local var23 = reactModule.useCallback(function(p2)
-		-- upvalues: var15 (ref), p1 (ref), showDeleteFailedToast (copy)
-		return var15.deleteComment(p1.feedItemId, p2, showDeleteFailedToast)
-	end, { var15, p1.feedItemId })
+	local var21 = reactModule.useCallback(function(p2)
+		-- upvalues: var13 (ref), p1 (ref), showDeleteFailedToast (copy)
+		return var13.deleteComment(p1.feedItemId, p2, showDeleteFailedToast)
+	end, { var13, p1.feedItemId })
 	
 	if var5.nextCursor == nil then
 		var1 = "nil"
@@ -136,33 +122,32 @@ return function(p1)
 		var1 = `{string.len(nextCursor)}:{nextCursor}`
 	end
 	local concat = table.concat
-	local t_1 = {}
+	local t = {}
 	local feedItemId = p1.feedItemId
 	-- Unknown statement at pc 3: <SetList>
-	concat = concat(t_1, "|")
+	concat = concat(t, "|")
 	
 	return {
-		geometry = var14.geometry,
-		rowLayout = var13,
-		avatarBackgroundStyle = var12.Color.Shift.Shift_300,
+		geometry = var12.geometry,
+		rowBleed = small,
+		avatarBackgroundStyle = var11.Color.Shift.Shift_300,
 		viewerUsername = var2,
 		feedItemId = p1.feedItemId,
 		thumbsUpEmoteId = var10,
-		emojis = var11,
 		creatorEnabled = var8 ~= nil and var8.creatorEnabled,
 		viewerCanWrite = var8 ~= nil and var8.viewerCanWrite,
 		scrollingFrameRef = p1.scrollingFrameRef,
 		loadMoreStatus = var5.loadMoreStatus,
 		paginationStateKey = concat,
-		onNearEnd = var16,
-		onUnderfilled = var16,
-		onRetryLoadMore = var17,
-		onRetryPendingSubmission = var18,
-		onEditPendingSubmission = var19,
-		onToggleReaction = var20,
-		onAddReaction = var21,
-		onReportComment = var22,
-		onDeleteComment = var23,
-		onRowHeightChanged = var14.onRowHeightChanged
+		onNearEnd = var14,
+		onUnderfilled = var14,
+		onRetryLoadMore = var15,
+		onRetryPendingSubmission = var16,
+		onEditPendingSubmission = var17,
+		onToggleReaction = var18,
+		onAddReaction = var19,
+		onReportComment = var20,
+		onDeleteComment = var21,
+		onRowHeightChanged = var12.onRowHeightChanged
 	}
 end

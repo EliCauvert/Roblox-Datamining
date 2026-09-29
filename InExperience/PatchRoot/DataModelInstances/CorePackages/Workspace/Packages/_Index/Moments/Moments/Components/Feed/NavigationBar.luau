@@ -16,13 +16,23 @@ local fFlagLuaSupportMicroGamepadPreferredInput = require(parent.SharedFlags).FF
 local formFactor = momentsCommonModule.Enums.FormFactor
 
 return function(p1)
-	-- upvalues: useDeviceInsets (ref), useFormFactor (ref), usePreferredInputModule (ref), useTokens (ref), formFactor (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), reactModule (ref), view (ref), iconButton (ref), chevronLargeUp (ref), foundationModule (ref), chevronLargeDown (ref)
-	local var1 = usePreferredInputModule()
+	-- upvalues: useDeviceInsets (ref), useFormFactor (ref), usePreferredInputModule (ref), useTokens (ref), moments (ref), parent (ref), formFactor (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), reactModule (ref), view (ref), iconButton (ref), chevronLargeUp (ref), foundationModule (ref), chevronLargeDown (ref)
+	local var1 = useDeviceInsets()
+	local var2 = useFormFactor()
+	local var3 = usePreferredInputModule()
+	local var4 = useTokens()
+	local fFlagMomentsAlignFeedNavArrowsWithHeaderModule = require(moments.Flags.FFlagMomentsAlignFeedNavArrowsWithHeader)
+	local var5 = nil
 	
-	return if useFormFactor() == formFactor.MobileLandscape then nil elseif not (var1 ~= Enum.PreferredInput.KeyboardAndMouse and not (if var1 ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and var1 == Enum.PreferredInput.MicroGamepad else true)) then if p1.active then reactModule.createElement(view, {
+	if fFlagMomentsAlignFeedNavArrowsWithHeaderModule then
+		if require(moments.Flags.FFlagMomentsUseCompositionLibrary) and require(moments.Flags.FFlagMomentsUseFoundationHeaderBar) then
+			var5 = require(parent.AppComposition).useCompositionLayout()
+		end
+	end
+	return if var2 == formFactor.MobileLandscape then nil elseif not (var3 ~= Enum.PreferredInput.KeyboardAndMouse and not (if var3 ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and var3 == Enum.PreferredInput.MicroGamepad else true)) then if p1.active then reactModule.createElement(view, {
 		tag = "size-full",
 		padding = {
-			right = UDim.new(0, math.max(useDeviceInsets().right, useTokens().Padding.XLarge))
+			right = UDim.new(0, if fFlagMomentsAlignFeedNavArrowsWithHeaderModule then require(script.Parent.resolveFeedRightChromeInset)(var1, if var5 ~= nil then nil else var5.margin, var4.Padding.XLarge) else math.max(var1.right, var4.Padding.XLarge))
 		},
 		ZIndex = p1.zIndex
 	}, {

@@ -2,6 +2,7 @@
 local parent = dataHydration.Parent
 local momentsTypesModule = require(parent.MomentsTypes)
 local sharedFlagsModule = require(parent.SharedFlags)
+local getFFlagMomentsRenderPostAssetsModule = require(parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
 local _ = require(dataHydration.Moments.MomentsStoreTypes)
 local convertApiMomentCommentsModule = require(dataHydration.Moments.Util.convertApiMomentComments)
 local fFlagMomentsStickerOverlayNormalizationModule = require(dataHydration.Moments.FFlagMomentsStickerOverlayNormalization)
@@ -191,7 +192,7 @@ local _ = function(p2)
 end
 
 local function convertApiMomentToMomentItem(p3)
-	-- upvalues: fFlagMomentsRequireApiFeedItemIdModule (ref), normalizeCaptureEdits (ref), momentStatus (ref), fFlagEnableMomentsCommentReporting (ref), fFlagMomentsComments (ref), convertApiMomentCommentsModule (ref)
+	-- upvalues: fFlagMomentsRequireApiFeedItemIdModule (ref), normalizeCaptureEdits (ref), momentStatus (ref), fFlagEnableMomentsCommentReporting (ref), getFFlagMomentsRenderPostAssetsModule (ref), fFlagMomentsComments (ref), convertApiMomentCommentsModule (ref)
 	local captionedAssetMoment = p3.captionedAssetMoment
 	local owner = p3.owner
 	local entityId = p3.entityId or p3.id
@@ -237,6 +238,7 @@ local function convertApiMomentToMomentItem(p3)
 	t_1.universeId = if var9 ~= nil then nil else var9.experienceId
 	t.metadata = t_1
 	t.momentId = entityId
+	t.postAsset = if getFFlagMomentsRenderPostAssetsModule() and p3.postAsset ~= nil and p3.postAsset.postAssetId ~= nil then { postAssetId = p3.postAsset.postAssetId } else nil
 	t.recommendationMetadata = { feedItemId = feedItemId, tracingId = p3.feedSessionId }
 	t.status = var11
 	

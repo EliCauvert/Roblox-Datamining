@@ -9,7 +9,9 @@ local cryo = inGameMenuDependenciesModule.Cryo
 local t = inGameMenuDependenciesModule.t
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
 local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
 local externalEventConnectionModule = require(script.Parent.Parent.Utility.ExternalEventConnection)
@@ -80,7 +82,7 @@ function sliderWithInput.renderFocusHandler(p1)
 end
 
 function sliderWithInput.renderWithSelectionCursor(p1, p2)
-	-- upvalues: cryo (ref), roact (ref), sliderModule (ref), withFoundationOrUIBloxStyle (ref), assetImageModule (ref), var2 (ref), externalEventConnectionModule (ref), userInputService (ref)
+	-- upvalues: cryo (ref), roact (ref), sliderModule (ref), withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), assetImageModule (ref), normalizeFontFace (ref), var2 (ref), externalEventConnectionModule (ref), userInputService (ref)
 	local props = p1.props
 	
 	return roact.createElement("Frame", {
@@ -98,7 +100,9 @@ function sliderWithInput.renderWithSelectionCursor(p1, p2)
 			NextSelectionRight = p1.textBoxRef
 		})),
 		TextContainer = withFoundationOrUIBloxStyle(function(p3)
+			-- upvalues: foundationFontFaceMigration (copy)
 			return {
+				Tokens = if foundationFontFaceMigration then p3 else nil,
 				Theme = {
 					TextMuted = {
 						Color = p3.Color.Content.Muted.Color3,
@@ -123,7 +127,7 @@ function sliderWithInput.renderWithSelectionCursor(p1, p2)
 				}
 			}
 		end, function(p3)
-			-- upvalues: props (ref), roact (copy), assetImageModule (copy), p1 (ref), p2 (ref), var2 (copy)
+			-- upvalues: props (ref), roact (copy), assetImageModule (copy), p1 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), p2 (ref), var2 (copy)
 			local var3 = if props.disabled then p3.Theme.TextMuted else p3.Theme.TextDefault
 			
 			return roact.createElement(assetImageModule.Label, {
@@ -141,7 +145,8 @@ function sliderWithInput.renderWithSelectionCursor(p1, p2)
 					Size = UDim2.new(1, 0, 1, 0),
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.5, 0, 0.5, 0),
-					Font = p3.Font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else p3.Font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 					TextScaled = true,
 					ClearTextOnFocus = false,
 					TextEditable = not props.disabled,

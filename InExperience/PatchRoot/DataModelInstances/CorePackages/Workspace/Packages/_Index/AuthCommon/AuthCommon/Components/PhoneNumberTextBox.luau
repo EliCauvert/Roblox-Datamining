@@ -3,6 +3,10 @@ local parent = authCommon.Parent
 local coreGuiService = game:GetService("CoreGui")
 local roactModule = require(parent.Roact)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local getTextSize = require(parent.Style).GetTextSize
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local withStyle = UIBloxModule.Style.withStyle
 local text = require(parent.AppCommonLib).Text
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -55,9 +59,9 @@ function phoneNumberTextBox.init(p1)
 end
 
 function phoneNumberTextBox.render(p1)
-	-- upvalues: withStyle (ref), text (ref), roactModule (ref), imageSetLabel (ref), getImageData (ref), coreGuiService (ref), countryCodeSelectorModule (ref)
+	-- upvalues: withStyle (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), roactModule (ref), imageSetLabel (ref), getImageData (ref), normalizeFontFace (ref), coreGuiService (ref), countryCodeSelectorModule (ref)
 	return withStyle(function(p2)
-		-- upvalues: p1 (ref), text (copy), roactModule (copy), imageSetLabel (copy), getImageData (copy), coreGuiService (copy), countryCodeSelectorModule (copy)
+		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), getTextSize (copy), text (copy), roactModule (copy), imageSetLabel (copy), getImageData (copy), normalizeFontFace (copy), coreGuiService (copy), countryCodeSelectorModule (copy)
 		local color = p1.props.Color
 		local color_1 = p2.Theme.BackgroundMuted.Color
 		local transparency = p1.props.Transparency
@@ -70,7 +74,7 @@ function phoneNumberTextBox.render(p1)
 		local text_1 = p1.props.Text or ""
 		local textInputTypeOverride = p1.props.TextInputTypeOverride or Enum.TextInputType.Phone
 		local text_2 = " +" .. p2.props.CountryCode.prefix
-		local maxValue = math.max(text.GetTextWidth(text_2, font, var1) + p1.props.InnerPadding * 2, p1.props.CountryCodeSize)
+		local maxValue = math.max(if foundationFontFaceMigration then getTextSize(text_2, var1, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(10000, 10000)).X + p1.props.InnerPadding * 2 else text.GetTextWidth(text_2, font, var1) + p1.props.InnerPadding * 2, p1.props.CountryCodeSize)
 		
 		return roactModule.createElement("TextButton", {
 			Size = p1.props.Size,
@@ -111,7 +115,8 @@ function phoneNumberTextBox.render(p1)
 					TextColor3 = color_2,
 					TextSize = var1,
 					TextInputType = textInputTypeOverride,
-					Font = font,
+					Font = if foundationFontFaceMigration then nil else font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
 					ClearTextOnFocus = false,
 					[roactModule.Event.Focused] = p1.props.onFocused,
 					[roactModule.Event.FocusLost] = p1.props.onFocusLost,
@@ -144,7 +149,8 @@ function phoneNumberTextBox.render(p1)
 					RichText = true,
 					Size = UDim2.new(1, -p1.props.InnerPadding, 1, 0),
 					TextXAlignment = Enum.TextXAlignment.Right,
-					Font = font,
+					Font = if foundationFontFaceMigration then nil else font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
 					Text = "<u>" .. text_2 .. "</u>",
 					TextSize = var1,
 					TextColor3 = color_2,

@@ -5,12 +5,11 @@ local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
 local toastTriggeredModule = require(parent.Actions.ToastTriggered)
 local _ = require(parent.Types)
 local fFlagCapturesVideoBulkManagerStopGapModule = require(parent.Flags.FFlagCapturesVideoBulkManagerStopGap)
-local capturesVideoSupportLegacyVideos = game:DefineFastFlag("CapturesVideoSupportLegacyVideos", false)
 local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
 return function(p1)
-	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), fFlagCapturesVideoBulkManagerStopGapModule (ref), captureService (ref), fFlagUseRbxstorageInGalleryModule (ref), captureTypeModule (ref), capturesVideoSupportLegacyVideos (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref)
+	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), fFlagCapturesVideoBulkManagerStopGapModule (ref), captureService (ref), fFlagUseRbxstorageInGalleryModule (ref), captureTypeModule (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref)
 	local t = {}
 	
 	for i, v in ipairs(p1) do
@@ -21,11 +20,7 @@ return function(p1)
 				table.insert(t, v)
 			end
 		elseif fFlagUseRbxstorageInGalleryModule and v.type == captureTypeModule.Video then
-			if capturesVideoSupportLegacyVideos then
-				table.insert(t, captureService:PreVideoCaptureShared(v.videoCapture))
-			else
-				table.insert(t, v.videoCapture)
-			end
+			table.insert(t, captureService:PreVideoCaptureShared(v.videoCapture))
 		elseif v.type == captureTypeModule.Screenshot then
 			table.insert(t, v.filePath)
 		end

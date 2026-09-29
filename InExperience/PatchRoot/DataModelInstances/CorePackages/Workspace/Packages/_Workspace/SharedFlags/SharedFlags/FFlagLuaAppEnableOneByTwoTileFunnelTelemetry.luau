@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppEnableOneByTwoTileFunnelTelemetry", false) and require(script.Parent.FFlagLuaAppEnableHomepageOneByTwoTile)

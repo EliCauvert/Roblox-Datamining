@@ -13,6 +13,9 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local foundationModule = require(parent.Foundation)
 local icon = foundationModule.Icon
 local enums = foundationModule.Enums
+local getTextSize = require(parent.Style).GetTextSize
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local clearSmall = images["icons/actions/edit/clear_small"]
 local fFlagDisableAutocorrectSocialUserSearch = require(parent.SharedFlags).FFlagDisableAutocorrectSocialUserSearch
 local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
@@ -30,7 +33,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: fFlagDisableAutocorrectSocialUserSearch (ref), roactAppExperimentModule (ref), disableAutocorrectExperimentLayer (ref), dashModule (ref), t (ref), useStyle (ref), reactModule (ref), text (ref), textButton (ref), imageSetLabel (ref), icon (ref), enums (ref), callbackInputBox (ref), clearSmall (ref), iconSize (ref), fFlagEnableLeftNavOnConsole (ref)
+	-- upvalues: fFlagDisableAutocorrectSocialUserSearch (ref), roactAppExperimentModule (ref), disableAutocorrectExperimentLayer (ref), dashModule (ref), t (ref), useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), textButton (ref), imageSetLabel (ref), icon (ref), enums (ref), normalizeFontFace (ref), callbackInputBox (ref), clearSmall (ref), iconSize (ref), fFlagEnableLeftNavOnConsole (ref)
 	local createElement_3
 	local var1 = if fFlagDisableAutocorrectSocialUserSearch then roactAppExperimentModule.useUserExperiment({ disableAutocorrectExperimentLayer }, function(p2)
 		-- upvalues: disableAutocorrectExperimentLayer (copy)
@@ -51,12 +54,13 @@ return function(p1)
 		end
 	end, {})
 	local header2 = var3.Font.Header2
+	local var9 = var3.Font.BaseSize * header2.RelativeSize
 	local uDim = UDim.new(0, 4)
-	local var9 = if var2.isDisabled then UDim2.new(1, 0, 1, 0) else UDim2.new(1, (-text.GetTextWidth(var2.cancelText, header2.Font, var3.Font.BaseSize * header2.RelativeSize)) - 12, 1, 0)
+	local var10 = if var2.isDisabled then UDim2.new(1, 0, 1, 0) else UDim2.new(1, (-(if foundationFontFaceMigration then getTextSize(var2.cancelText, var9, var3.Tokens.Typography.TitleLarge.Font, Vector2.new(10000, 10000)).X else text.GetTextWidth(var2.cancelText, header2.Font, var9))) - 12, 1, 0)
 	local body = var3.Font.Body
-	local var10 = var3.Font.BaseSize * body.RelativeSize
+	local var11 = var3.Font.BaseSize * body.RelativeSize
 	
-	local var11 = function(p2, p3)
+	local var12 = function(p2, p3)
 		-- upvalues: var2 (ref), var6 (ref), var3 (ref), var8 (ref)
 		if var2.focusChangedCallback then
 			var2.focusChangedCallback(p2, p3)
@@ -72,7 +76,7 @@ return function(p1)
 	end
 	
 	local createElement = reactModule.createElement
-	local var12 = "Frame"
+	local var13 = "Frame"
 	local t_1 = {
 		BorderSizePixel = 0,
 		BackgroundTransparency = var3.Theme.BackgroundDefault.Transparency,
@@ -102,7 +106,7 @@ return function(p1)
 	local t_3 = {
 		BorderSizePixel = 0,
 		LayoutOrder = 1,
-		Size = var9,
+		Size = var10,
 		BackgroundColor3 = var3.Theme.UIMuted.Color,
 		BackgroundTransparency = var3.Theme.UIMuted.Transparency
 	}
@@ -130,7 +134,7 @@ return function(p1)
 		})
 	}
 	local createElement_2 = reactModule.createElement
-	local var13 = "Frame"
+	local var14 = "Frame"
 	local t_5 = {
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
@@ -145,8 +149,9 @@ return function(p1)
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			Size = UDim2.fromScale(1, 1),
-			TextSize = var10,
-			Font = body.Font,
+			TextSize = var11,
+			Font = if foundationFontFaceMigration then nil else body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Tokens.Typography.BodyLarge.Font) else nil,
 			TextColor3 = var3.Theme.TextDefault.Color,
 			TextTransparency = var3.Theme.TextMuted.Transparency
 		})
@@ -157,7 +162,7 @@ return function(p1)
 			initialInputText = var2.initialInputText,
 			inputTextColor3 = var3.Theme.TextEmphasis.Color,
 			inputTextFont = body.Font,
-			inputTextSize = var10,
+			inputTextSize = var11,
 			inputTextTransparency = var3.Theme.TextEmphasis.Transparency,
 			inputTextXAlignment = Enum.TextXAlignment.Left,
 			textInputType = if fFlagDisableAutocorrectSocialUserSearch and var1 then Enum.TextInputType.NoSuggestions else nil,
@@ -172,14 +177,14 @@ return function(p1)
 			clearButtonSize = iconSize.Small,
 			textChangedCallback = var2.textChangedCallback,
 			onSelectCallback = var2.onSelectCallback,
-			focusChangedCallback = var11,
+			focusChangedCallback = var12,
 			returnPressedFromOnScreenKeyboardCallback = if fFlagEnableLeftNavOnConsole then var2.returnPressedFromOnScreenKeyboardCallback elseif fFlagDisableAutocorrectSocialUserSearch and var1 then var2.returnPressedFromOnScreenKeyboardCallback else nil,
 			inputBoxRef = var4
 		})
 	end
 	t_6.filterBox = createElement_3
-	t_4.FilterBoxContainer = createElement_2(var13, t_5, t_6)
+	t_4.FilterBoxContainer = createElement_2(var14, t_5, t_6)
 	t_2.FilterBoxBackground = createElement_1(imageSetLabel, t_3, t_4)
 	
-	return createElement(var12, t_1, t_2)
+	return createElement(var13, t_1, t_2)
 end

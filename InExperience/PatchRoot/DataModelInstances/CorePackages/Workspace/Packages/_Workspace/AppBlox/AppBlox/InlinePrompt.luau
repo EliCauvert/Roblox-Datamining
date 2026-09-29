@@ -3,6 +3,9 @@ local UIBloxModule = require(parent.UIBlox)
 local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 local responsiveModule = require(parent.Responsive)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local core = UIBloxModule.Core
 local app = UIBloxModule.App
 local useStyle = core.Style.useStyle
@@ -15,7 +18,7 @@ local getIconSize = app.ImageSet.getIconSize
 local close = images["icons/navigation/close"]
 
 return function(p1)
-	-- upvalues: useStyle (ref), getIconSize (ref), iconSize (ref), reactModule (ref), responsiveModule (ref), imageSetLabel (ref), button (ref), cryoModule (ref), iconButton (ref), close (ref)
+	-- upvalues: useStyle (ref), getIconSize (ref), iconSize (ref), reactModule (ref), responsiveModule (ref), imageSetLabel (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), button (ref), cryoModule (ref), iconButton (ref), close (ref)
 	local var1 = useStyle()
 	local tokens = var1.Tokens
 	local var2 = (if p1.iconImage then 36 else 0) + (if p1.onDismiss then getIconSize(iconSize.Small) else 0)
@@ -80,7 +83,8 @@ return function(p1)
 					TextColor3 = var1.Tokens.Color.Content.Emphasis.Color3,
 					TextTransparency = var1.Tokens.Color.Content.Emphasis.Transparency,
 					TextSize = var1.Tokens.Typography.CaptionLarge.FontSize,
-					Font = var1.Tokens.Typography.CaptionLarge.Font,
+					Font = if foundationFontFaceMigration then nil else var1.Tokens.Typography.CaptionLarge.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.CaptionLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
@@ -96,7 +100,8 @@ return function(p1)
 					TextColor3 = var1.Tokens.Color.Content.Default.Color3,
 					TextTransparency = var1.Tokens.Color.Content.Default.Transparency,
 					TextSize = var1.Tokens.Typography.BodySmall.FontSize,
-					Font = var1.Tokens.Typography.BodySmall.Font,
+					Font = if foundationFontFaceMigration then nil else var1.Tokens.Typography.BodySmall.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodySmall.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y

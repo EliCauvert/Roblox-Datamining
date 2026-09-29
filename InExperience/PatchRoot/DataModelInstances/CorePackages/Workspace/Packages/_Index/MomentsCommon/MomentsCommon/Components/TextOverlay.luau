@@ -189,6 +189,20 @@ return function(p1)
 				visible = var18
 			})
 		})
+	elseif fFlagMomentsTextOverlayV2RedesignModule then
+		local var20 = reactModule.createElement(view, {
+			tag = "auto-xy padding-medium radius-medium bg-contrast",
+			GroupTransparency = var5,
+			scale = t_2.scale,
+			sizeConstraint = { MaxSize = vector2 },
+			stateLayer = {
+				affordance = foundationModule.Enums.StateLayerAffordance.None
+			}
+		}, { TextInput = textBox })
+		t_2.scale = nil
+		t_2.tag = "position-center-center anchor-center-center auto-xy"
+		
+		return reactModule.createElement(view, t_2, { UIDragDetector = var13, Chip = var20 })
 	end
 	t_2.tag = "position-center-center anchor-center-center auto-xy padding-medium radius-medium bg-contrast"
 	t_2.sizeConstraint = { MaxSize = vector2 }

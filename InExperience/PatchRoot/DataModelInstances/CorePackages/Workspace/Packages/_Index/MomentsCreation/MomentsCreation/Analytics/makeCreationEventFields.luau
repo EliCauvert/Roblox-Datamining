@@ -1,4 +1,6 @@
-﻿local momentsCommonModule = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsCommon)
+﻿local parent = script:FindFirstAncestor("MomentsCreation").Parent
+local momentsCommonModule = require(parent.MomentsCommon)
+local _ = require(parent.MomentsTypes)
 local eventNames = momentsCommonModule.Analytics.EventNames
 local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
 local sessionManager = momentsCommonModule.Analytics.SessionManager
@@ -66,28 +68,86 @@ return {
 		end
 		return t
 	end,
-	makeCaptureDescriptorFields = function(p2)
+	makeTextOverlayEventFields = function(p2)
+		-- upvalues: sessionManager (ref), funnelEventNames (ref)
+		local t_1, var3, var4
+		local t = { tool = "text" }
+		local sessionId = sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)
+		
+		if sessionId == nil then
+			t_1 = {}
+			var3 = nil
+			var4 = nil
+		else
+			t_1 = { creationSessionId = sessionId }
+			var3 = nil
+			var4 = nil
+		end
+		for i, v in t_1, var3, var4 do
+			t[i] = v
+		end
+		if p2 ~= nil then
+			for i_1, v_1 in p2 do
+				t[i_1] = v_1
+			end
+		end
+		return t
+	end,
+	makeTextOverlayPublishSummaryFields = function(p3)
+		if p3 == nil then
+			return {}
+		end
+		local t = {}
+		local textOverlayStyle = p3.textOverlayStyle
+		
+		if textOverlayStyle ~= nil then
+			if textOverlayStyle.font ~= nil then
+				t.font = textOverlayStyle.font.Name
+			end
+			if textOverlayStyle.fontSize ~= nil then
+				t.fontSize = tostring(textOverlayStyle.fontSize)
+			end
+			if textOverlayStyle.fontColor ~= nil then
+				t.color = "#" .. textOverlayStyle.fontColor:ToHex()
+			end
+			if textOverlayStyle.textXAlignment ~= nil then
+				t.alignment = textOverlayStyle.textXAlignment.Name
+			end
+		end
+		if p3.rotation ~= nil then
+			t.rotation = tostring(p3.rotation)
+		end
+		if typeof(p3.position) == "UDim2" then
+			t.positionX = tostring(p3.position.X.Scale)
+			t.positionY = tostring(p3.position.Y.Scale)
+		end
+		if p3.scale ~= nil then
+			t.scale = tostring(p3.scale)
+		end
+		return if next(t) == nil then {} else t
+	end,
+	makeCaptureDescriptorFields = function(p3)
 		local t = {
-			sourcePlaceId = tostring(p2.SourcePlaceId),
-			localId = tostring(p2.LocalId)
+			sourcePlaceId = tostring(p3.SourcePlaceId),
+			localId = tostring(p3.LocalId)
 		}
-		local captureType = p2.CaptureType
+		local captureType = p3.CaptureType
 		t.captureType = if typeof(captureType) == "EnumItem" then captureType.Name elseif captureType == nil then nil else tostring(captureType)
-		t.universeId = tostring(p2.SourceUniverseId)
+		t.universeId = tostring(p3.SourceUniverseId)
 		
 		return t
 	end,
-	makeGeneratedTextOutcomeFields = function(p2, p3, p4, p5)
+	makeGeneratedTextOutcomeFields = function(p3, p4, p5, p6)
 		-- upvalues: getFFlagEnableMomentTextGeneration (ref)
 		return if getFFlagEnableMomentTextGeneration() then {
-			generatedDescriptionOutcome = if p2 == nil then "none" elseif p3 == p2 then "verbatim" elseif p3 == nil or p3 == "" then "discarded" else "edited",
-			generatedSummaryOutcome = if p4 == nil then "none" elseif p5 == p4 then "verbatim" elseif p5 == nil or p5 == "" then "discarded" else "edited"
+			generatedDescriptionOutcome = if p3 == nil then "none" elseif p4 == p3 then "verbatim" elseif p4 == nil or p4 == "" then "discarded" else "edited",
+			generatedSummaryOutcome = if p5 == nil then "none" elseif p6 == p5 then "verbatim" elseif p6 == nil or p6 == "" then "discarded" else "edited"
 		} else {}
 	end,
-	classifyGeneratedTextOutcome = function(p2, p3)
-		return if p2 == nil then "none" elseif p3 == p2 then "verbatim" elseif p3 == nil or p3 == "" then "discarded" else "edited"
+	classifyGeneratedTextOutcome = function(p3, p4)
+		return if p3 == nil then "none" elseif p4 == p3 then "verbatim" elseif p4 == nil or p4 == "" then "discarded" else "edited"
 	end,
-	enumName = function(p2)
-		return if typeof(p2) == "EnumItem" then p2.Name elseif p2 == nil then nil else tostring(p2)
+	enumName = function(p3)
+		return if typeof(p3) == "EnumItem" then p3.Name elseif p3 == nil then nil else tostring(p3)
 	end
 }

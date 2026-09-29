@@ -16,7 +16,6 @@ local pendingCaptureToastActionModule = require(parent.Utils.pendingCaptureToast
 local waitForFlashOverlayModule = require(parent.Utils.waitForFlashOverlay)
 local fFlagBuildExperienceInGameCaptureToChat = require(parent_1.SharedFlags).FFlagBuildExperienceInGameCaptureToChat
 local fFlagCreateMomentsToastModule = require(parent.Flags.FFlagCreateMomentsToast)
-local fFlagEnableUpdatedCaptureControlsModule = require(parent.Flags.FFlagEnableUpdatedCaptureControls)
 local captureTypeModule = require(parent.Enums.CaptureType)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local captureServiceEnableXExperiencePostingApisEngineFeature = game:GetEngineFeature("CaptureServiceEnableXExperiencePostingApis")
@@ -35,9 +34,9 @@ local function triggerDefaultToast(p1, p2, p3, p4, p5)
 end
 
 return function(p1, _, p2)
-	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), triggerSourceTypeModule (ref), fFlagEnableUpdatedCaptureControlsModule (ref), socialStopwatchModule (ref), eventNamesModule (ref), retrieveCapturesModule (ref), waitForFlashOverlayModule (ref), fFlagBuildExperienceInGameCaptureToChat (ref), pendingCaptureToastActionModule (ref), getCaptureObjectModule (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref), capturesPolicyModule (ref), fFlagCreateMomentsToastModule (ref), captureServiceEnableXExperiencePostingApisEngineFeature (ref), triggerDefaultToast (ref), constantsModule (ref), fetchCapturesFromGalleryModule (ref), findMatchingCaptureModule (ref)
+	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), triggerSourceTypeModule (ref), socialStopwatchModule (ref), eventNamesModule (ref), retrieveCapturesModule (ref), waitForFlashOverlayModule (ref), fFlagBuildExperienceInGameCaptureToChat (ref), pendingCaptureToastActionModule (ref), getCaptureObjectModule (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref), capturesPolicyModule (ref), fFlagCreateMomentsToastModule (ref), captureServiceEnableXExperiencePostingApisEngineFeature (ref), triggerDefaultToast (ref), constantsModule (ref), fetchCapturesFromGalleryModule (ref), findMatchingCaptureModule (ref)
 	return function(p3, p4)
-		-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureTypeModule (copy), triggerSourceTypeModule (copy), fFlagEnableUpdatedCaptureControlsModule (copy), socialStopwatchModule (copy), p2 (ref), eventNamesModule (copy), p1 (ref), retrieveCapturesModule (copy), waitForFlashOverlayModule (copy), fFlagBuildExperienceInGameCaptureToChat (copy), pendingCaptureToastActionModule (copy), getCaptureObjectModule (copy), toastTriggeredModule (copy), capturesToastTypeModule (copy), capturesPolicyModule (copy), fFlagCreateMomentsToastModule (copy), captureServiceEnableXExperiencePostingApisEngineFeature (copy), triggerDefaultToast (copy), constantsModule (copy), fetchCapturesFromGalleryModule (copy), findMatchingCaptureModule (copy)
+		-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureTypeModule (copy), triggerSourceTypeModule (copy), socialStopwatchModule (copy), p2 (ref), eventNamesModule (copy), p1 (ref), retrieveCapturesModule (copy), waitForFlashOverlayModule (copy), fFlagBuildExperienceInGameCaptureToChat (copy), pendingCaptureToastActionModule (copy), getCaptureObjectModule (copy), toastTriggeredModule (copy), capturesToastTypeModule (copy), capturesPolicyModule (copy), fFlagCreateMomentsToastModule (copy), captureServiceEnableXExperiencePostingApisEngineFeature (copy), triggerDefaultToast (copy), constantsModule (copy), fetchCapturesFromGalleryModule (copy), findMatchingCaptureModule (copy)
 		local var1
 		if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
 			var1 = p3.CaptureType == Enum.CaptureType.Video
@@ -45,7 +44,7 @@ return function(p1, _, p2)
 		else
 			var1 = p3.type == captureTypeModule.Video
 		end
-		if p4 == triggerSourceTypeModule.UserSave and (not fFlagEnableUpdatedCaptureControlsModule or not var1) then
+		if p4 == triggerSourceTypeModule.UserSave and not var1 then
 			local var2 = socialStopwatchModule.Stopwatch.stop(socialStopwatchModule.Events.CaptureTaken)
 			p2(eventNamesModule.CapturesEntrypointLatency, { statValue = if var2 then var2.timeElapsed else nil })
 		end

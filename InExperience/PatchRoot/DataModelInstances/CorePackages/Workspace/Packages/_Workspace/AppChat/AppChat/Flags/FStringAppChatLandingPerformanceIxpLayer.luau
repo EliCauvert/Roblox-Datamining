@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("AppChatLandingPerformanceIxpLayer", "Party.LandingPage.Performance")

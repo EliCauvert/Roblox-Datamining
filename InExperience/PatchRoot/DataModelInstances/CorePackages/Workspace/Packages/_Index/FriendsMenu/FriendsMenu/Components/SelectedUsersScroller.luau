@@ -3,6 +3,9 @@ local parent = friendsMenu.Parent
 local context = friendsMenu.Context
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local responsiveModule = require(parent.Responsive)
 local sharedFlagsModule = require(parent.SharedFlags)
@@ -16,7 +19,7 @@ local getRenameFriendsToConnectionsEnabledFriendsMenuModule = require(friendsMen
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
 
 return function(p1)
-	-- upvalues: reactModule (ref), selectedUsersContextModule (ref), responsiveModule (ref), useLastInputMode (ref), useFocusGuiObject (ref), useStyle (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), getRenameFriendsToConnectionsEnabledFriendsMenuModule (ref), friendsMenuUserCardModule (ref), constantsModule (ref)
+	-- upvalues: reactModule (ref), selectedUsersContextModule (ref), responsiveModule (ref), useLastInputMode (ref), useFocusGuiObject (ref), useStyle (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), getRenameFriendsToConnectionsEnabledFriendsMenuModule (ref), friendsMenuUserCardModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), constantsModule (ref)
 	local var1 = reactModule.useContext(selectedUsersContextModule)
 	local var2 = responsiveModule.useBreakpointYOrLarger(responsiveModule.Keys.Medium)
 	local var3 = useLastInputMode()
@@ -111,7 +114,8 @@ return function(p1)
 			LayoutOrder = 0,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Font = font.Header2.Font,
+			Font = if foundationFontFaceMigration then nil else font.Header2.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var7.Tokens.Typography.TitleLarge.Font) else nil,
 			Text = if p1.selectionLimit then var8.selectedFriendsCountText else var8.selectedFriendsCountNoLimitText,
 			TextColor3 = theme.TextEmphasis.Color,
 			TextSize = font.BaseSize * font.Header2.RelativeSize,

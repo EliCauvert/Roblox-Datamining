@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnableCapturesGalleryRetrievalCoreScript_v3", false) and game:GetEngineFeature("CoreScriptGalleryRetrieval")
+﻿return game:GetEngineFeature("CoreScriptGalleryRetrieval")

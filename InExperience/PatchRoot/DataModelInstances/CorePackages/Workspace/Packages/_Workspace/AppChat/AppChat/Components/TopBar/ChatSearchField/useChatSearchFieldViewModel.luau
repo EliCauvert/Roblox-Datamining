@@ -14,64 +14,79 @@ return function(p1)
 	local onChanged = p1.onChanged
 	local var2 = useLocalization({ placeholder = "Feature.Chat.Label.SearchWord" })
 	local var3 = reactModule.useRef(Enum.KeyCode.None)
-	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref)
+	local var4 = reactModule.useRef(false)
+	local var5 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref), var4 (ref)
 		var3.current = if p2 then p2.KeyCode else Enum.KeyCode.None
+		var4.current = false
 	end, {})
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useCallback(inputHandlersModule.onRelease(function(p2)
+	local var6 = reactModule.useRef(nil)
+	local var7 = reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useCallback(inputHandlersModule.onRelease(function(p2)
 		-- upvalues: var3 (ref), onExit (ref)
 		local current = var3.current
-		local var7 = current ~= Enum.KeyCode.None and (p2.eventData ~= nil and p2.eventData.KeyCode == current)
+		local var8 = current ~= Enum.KeyCode.None and (p2.eventData ~= nil and p2.eventData.KeyCode == current)
 		
-		if not var7 and onExit == nil then return end
+		if not var8 and onExit == nil then return end
 		p2:cancel()
 		
-		if var7 then
+		if var8 then
 			var3.current = Enum.KeyCode.None
 			
 			return
 		end
 		onExit()
-	end), { onExit or false }), nil, var5)
-	local var7 = reactFocusNavigationModule.useFocusGuiObject()
-	local var8 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var8 (ref), var7 (ref)
-		if var5.current and var8 and var8.focusedGuiObject:getValue() ~= nil then
-			var7(var5.current)
+	end), { onExit or false }), nil, var6)
+	local var8 = reactFocusNavigationModule.useFocusGuiObject()
+	local var9 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var6 (ref), var9 (ref), var8 (ref)
+		if var6.current and var9 and var9.focusedGuiObject:getValue() ~= nil then
+			var8(var6.current)
 		end
-	end, { var7, var8 or false })
-	local var10 = reactModule.useCallback(function(p2)
-		-- upvalues: var9 (ref), var1 (ref), onChanged (ref)
+	end, { var8, var9 or false })
+	local var11 = reactModule.useCallback(function(p2)
+		-- upvalues: var4 (ref), var10 (ref), var1 (ref), onChanged (ref)
 		if p2 == "" then
-			var9()
+			var4.current = true
+			var10()
 			
 			if var1.current then
 				var1.current.focus()
 			end
 		end
 		onChanged(p2)
-	end, { onChanged, var9 })
+	end, { onChanged, var10 })
+	local onFocusGained = p1.onFocusGained
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref), onFocusGained (ref)
+		if var4.current then
+			var4.current = false
+			
+			return
+		elseif onFocusGained then
+			onFocusGained()
+		end
+	end, { onFocusGained })
 	local shouldAutoFocus = p1.shouldAutoFocus or false
 	reactModule.useEffect(function()
-		-- upvalues: shouldAutoFocus (ref), var9 (ref), var1 (ref)
+		-- upvalues: shouldAutoFocus (ref), var10 (ref), var1 (ref)
 		if shouldAutoFocus then
-			var9()
+			var10()
 			
 			if var1.current then
 				var1.current.focus()
 			end
 		end
-	end, { shouldAutoFocus, var9 })
+	end, { shouldAutoFocus, var10 })
 	
 	return {
 		text = p1.text,
 		placeholder = var2.placeholder,
-		onChanged = var10,
-		onFocusLost = var4,
+		onChanged = var11,
+		onFocusGained = if onFocusGained then var12 else nil,
+		onFocusLost = var5,
 		inputRef = var1,
-		containerRef = var6,
+		containerRef = var7,
 		testId = p1.testId,
 		LayoutOrder = p1.LayoutOrder
 	}

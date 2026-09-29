@@ -3,7 +3,10 @@ local reactModule = require(parent.React)
 local focusable = require(parent.RoactGamepad).Focusable
 local verifiedBadgesModule = require(parent.VerifiedBadges)
 local UIBloxModule = require(parent.UIBlox)
-local skeleton = require(parent.Foundation).Skeleton
+local foundationModule = require(parent.Foundation)
+local skeleton = foundationModule.Skeleton
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useStyle = UIBloxModule.Core.Style.useStyle
 local useSelectionCursor = UIBloxModule.App.SelectionImage.useSelectionCursor
 local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
@@ -13,7 +16,7 @@ local vector2 = Vector2.new(14, 14)
 local uDim2 = UDim2.new(0.3, 0, 0.8, 0)
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useStyle (ref), useSelectionCursor (ref), cursorKind (ref), vector2 (ref), focusable (ref), reactModule (ref), verifiedBadgesModule (ref), skeleton (ref), uDim2 (ref), imageSetLabel (ref), pushRightSmall (ref)
+	-- upvalues: useStyle (ref), useSelectionCursor (ref), cursorKind (ref), vector2 (ref), focusable (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), verifiedBadgesModule (ref), skeleton (ref), uDim2 (ref), imageSetLabel (ref), pushRightSmall (ref)
 	local layoutOrder = p1.LayoutOrder
 	local infoName = p1.infoName
 	local infoData = p1.infoData
@@ -49,7 +52,8 @@ return reactModule.forwardRef(function(p1, p2)
 		}, {
 			InfoNameTextLabel = reactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Font = font.Body.Font,
+				Font = if foundationFontFaceMigration then nil else font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
 				Size = UDim2.new(0.5, 0, 1, 0),
 				Text = infoName,
 				TextColor3 = theme.TextDefault.Color,
@@ -70,7 +74,8 @@ return reactModule.forwardRef(function(p1, p2)
 			}, {
 				InfoDataTextLabel = reactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
-					Font = if onActivate then font.Header2.Font else font.Body.Font,
+					Font = if foundationFontFaceMigration then nil elseif onActivate then font.Header2.Font else font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(if onActivate then var1.Tokens.Typography.TitleLarge.Font else var1.Tokens.Typography.BodyLarge.Font) else nil,
 					Size = UDim2.new(0, 0, 1, 0),
 					Text = infoData,
 					TextColor3 = if onActivate then theme.TextEmphasis.Color else theme.TextDefault.Color,
@@ -85,7 +90,8 @@ return reactModule.forwardRef(function(p1, p2)
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(1, 0),
 				Position = UDim2.new(1, if onActivate then var4 else 0, 0, 0),
-				Font = if onActivate then font.Header2.Font else font.Body.Font,
+				Font = if foundationFontFaceMigration then nil elseif onActivate then font.Header2.Font else font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(if onActivate then var1.Tokens.Typography.TitleLarge.Font else var1.Tokens.Typography.BodyLarge.Font) else nil,
 				Size = UDim2.new(0.5, 0, 1, 0),
 				Text = infoData,
 				TextColor3 = if onActivate then theme.TextEmphasis.Color else theme.TextDefault.Color,

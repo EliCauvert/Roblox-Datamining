@@ -3,7 +3,6 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local commentRowViewModule = require(script.Parent.CommentRow.CommentRowView)
 local useCommentRowHeightReporterModule = require(script.Parent.CommentRow.useCommentRowHeightReporter)
-local _ = require(script.Parent.CommentRowTypes)
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
 
@@ -43,7 +42,6 @@ return function(p1)
 		authorLabel = p1.viewerUsername,
 		text = p1.text,
 		metadataLabel = if p1.status == "Sending" then "Sending\226\128\166" else "Send status unknown",
-		rowLayout = p1.rowLayout,
 		avatarBackgroundStyle = p1.avatarBackgroundStyle,
 		GroupTransparency = var3,
 		rowRef = var1.rowRef,

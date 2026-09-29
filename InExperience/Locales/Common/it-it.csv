@@ -2017,6 +2017,7 @@ Feature.Build.Description.BuildReplyNotif,Ricevi una notifica quando Build ha un
 Feature.Build.Description.BuyRobuxToCreate,Acquista più Robux per continuare a creare o attendi che il tuo utilizzo gratuito di Costruisci venga ripristinato domani.
 Feature.Build.Description.BuyUsageOrWait,Acquista più utilizzo di Build con Robux o attendi il ripristino del limite giornaliero.
 Feature.Build.Description.CampaignRunDates,La tua campagna sarà attiva dal giorno {startDate} al giorno {endDate}
+Feature.Build.Description.ChooseAdCampaignLength,Scegli per quanto tempo vuoi che il tuo annuncio sia attivo.
 Feature.Build.Description.ChoosePlaytesters,Scegli gli amici che proveranno il tuo gioco in anteprima.
 Feature.Build.Description.CreateDeveloperProduct,"Crea ""{NAME}"" per {PRICE} Robux, non in vendita."
 Feature.Build.Description.DeactivateDeveloperProduct,Ritira dalla vendita il Developer Product {PRODUCT_ID}.
@@ -2330,6 +2331,7 @@ Feature.Build.Placeholder.DescribeProduct,Descrivi cosa vuoi vendere
 Feature.Build.Placeholder.DescribeProductUpdate,Descrivi un aggiornamento
 Feature.Build.Prompt.CreateDeveloperProduct,"Aiutami a creare un Developer Product, a integrarlo nel gioco, a verificare e pubblicare le modifiche e a renderlo disponibile per l'acquisto."
 Feature.Build.Title.AdCampaignDuration,Campagna pubblicitaria di {durationDays} giorni
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} giorni
 Feature.Build.Title.AdComplete,Annuncio completato
 Feature.Build.Title.AdCreated,Annuncio creato
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2360,6 +2362,7 @@ Feature.Build.Title.GetUsers,Ottieni utenti
 Feature.Build.Title.ManagedPricingAcknowledgement,Attivare i prezzi gestiti?
 Feature.Build.Title.NoMonetizationProducts,Inizia a guadagnare nel tuo gioco
 Feature.Build.Title.NoRobuxForUsage,Nessun Robux rimasto per l'utilizzo di Build
+Feature.Build.Title.PickCampaign,Scegli una durata
 Feature.Build.Title.PlaytestInviteSendFailed,Impossibile inviare gli inviti
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Impossibile aggiungere i seguenti utenti:
@@ -2982,14 +2985,6 @@ Feature.Chat.Response.ChatNameFullyModerated,Il nome della chat del gruppo è st
 Feature.Chat.Response.ChatNameFullyModerated.V2,Il nome del gruppo è stato moderato.
 Feature.Chat.Response.NetworkError,Errore di rete
 Feature.Chat.RobloxConnectUnavailableWithUser,"Al momento, Roblox Connect non è disponibile per questo utente."
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,Attività amici
-Feature.Chat.ShareGameToChat.NoFavoriteGames,Nessun preferito
-Feature.Chat.ShareGameToChat.NoFriendActivity,Nessuna attività amici
-Feature.Chat.ShareGameToChat.NoPopularGames,Nessuna esperienza popolare disponibile
-Feature.Chat.ShareGameToChat.NoRecentGames,Nessuno recente
-Feature.Chat.ShareGameToChat.Popular,Popolari
-Feature.Chat.ShareGameToChat.Recent,Recenti
 Feature.Chat.Text.NoConnections,"Non hai ancora aggiunto nessun amico. Per iniziare, trovali e aggiungili su Roblox."
 Feature.Chat.Text.NoFriends,"Non hai ancora aggiunto nessun amico. Per iniziare, trova e aggiungi i tuoi amici su Roblox."
 Feature.Chat.Title.FriendsChat,Chat tra amici

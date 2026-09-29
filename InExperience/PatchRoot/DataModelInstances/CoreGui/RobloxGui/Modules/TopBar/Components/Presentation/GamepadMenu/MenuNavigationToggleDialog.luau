@@ -6,7 +6,11 @@ local _ = coreGuiService:WaitForChild("RobloxGui")
 local reactUtilsModule = require(corePackagesService.Packages.ReactUtils)
 local reactModule = require(corePackagesService.Packages.React)
 local _ = require(corePackagesService.Packages.UIBlox)
-local fFlagEnableConsoleExpControls = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
+local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useEventConnection = reactUtilsModule.useEventConnection
 local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTextSize
 local useDesignTokens = require(corePackagesService.Workspace.Packages.Style).useDesignTokens
@@ -19,7 +23,7 @@ local localization = require(corePackagesService.Workspace.Packages.InExperience
 local fFlagLocalizeMenuNavigationToggleDialogModule = require(coreGuiService.RobloxGui.Modules.TopBar.Flags.FFlagLocalizeMenuNavigationToggleDialog)
 
 return function(p1)
-	-- upvalues: useDesignTokens (ref), fFlagLocalizeMenuNavigationToggleDialogModule (ref), userInputService (ref), reactModule (ref), localizationService (ref), useEventConnection (ref), localization (ref), getTextSize (ref), var1 (ref), fFlagEnableConsoleExpControls (ref), useObservableValueModule (ref), var2 (ref)
+	-- upvalues: useDesignTokens (ref), fFlagLocalizeMenuNavigationToggleDialogModule (ref), userInputService (ref), reactModule (ref), localizationService (ref), useEventConnection (ref), localization (ref), getTextSize (ref), var1 (ref), fFlagEnableConsoleExpControls (ref), useObservableValueModule (ref), var2 (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var3, var4
 	local var5 = useDesignTokens()
 	local captionMedium = var5.Typography.CaptionMedium
@@ -110,7 +114,8 @@ return function(p1)
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			TextColor3 = color3,
-			Font = captionMedium.Font,
+			Font = if foundationFontFaceMigration then nil else captionMedium.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(captionMedium.Font) else nil,
 			TextSize = captionMedium.FontSize
 		}),
 		Icon = reactModule.createElement("ImageLabel", {
@@ -128,7 +133,8 @@ return function(p1)
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			TextColor3 = color3,
-			Font = captionMedium.Font,
+			Font = if foundationFontFaceMigration then nil else captionMedium.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(captionMedium.Font) else nil,
 			TextSize = captionMedium.FontSize
 		}),
 		Padding = reactModule.createElement("UIPadding", {

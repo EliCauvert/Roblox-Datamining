@@ -1,7 +1,11 @@
 ﻿local authCommon = script:FindFirstAncestor("AuthCommon")
 local parent = authCommon.Parent
 local roactModule = require(parent.Roact)
-local withStyle = require(parent.UIBlox).Style.withStyle
+local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+local withStyle = UIBloxModule.Style.withStyle
 local passwordBoxModule = require(authCommon.Components.PasswordBox)
 local genericTextBoxModule = require(authCommon.Components.GenericTextBox)
 local authStatefulRoundCornerBorderModule = require(authCommon.Components.AuthStatefulRoundCornerBorder)
@@ -16,7 +20,7 @@ name.defaultProps = {
 }
 
 function name.render(p1)
-	-- upvalues: getFFlagEnableAuthStatefulTextInputUpdates (ref), withStyle (ref), roactModule (ref), authStatefulRoundCornerBorderModule (ref), passwordBoxModule (ref), genericTextBoxModule (ref)
+	-- upvalues: getFFlagEnableAuthStatefulTextInputUpdates (ref), withStyle (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), authStatefulRoundCornerBorderModule (ref), passwordBoxModule (ref), genericTextBoxModule (ref)
 	local text = p1.props.text
 	local textInputType = p1.props.textInputType
 	local textInputHeight = p1.props.textInputHeight
@@ -33,7 +37,7 @@ function name.render(p1)
 	local var2 = p1.props.textInputType == Enum.TextInputType.Password
 	
 	return withStyle(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy), layoutOrder (ref), var1 (ref), labelText (ref), authStatefulRoundCornerBorderModule (copy), textInputHeight (ref), getFFlagEnableAuthStatefulTextInputUpdates (copy), borderState (ref), var2 (ref), passwordBoxModule (copy), text (ref), placeholderText (ref), onChangeTextCallback (ref), genericTextBoxModule (copy), textInputType (ref), onFocused (ref), onFocusLost (ref), maxLength (ref), errorText (ref)
+		-- upvalues: p1 (ref), roactModule (copy), layoutOrder (ref), var1 (ref), labelText (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), authStatefulRoundCornerBorderModule (copy), textInputHeight (ref), getFFlagEnableAuthStatefulTextInputUpdates (copy), borderState (ref), var2 (ref), passwordBoxModule (copy), text (ref), placeholderText (ref), onChangeTextCallback (ref), genericTextBoxModule (copy), textInputType (ref), onFocused (ref), onFocusLost (ref), maxLength (ref), errorText (ref)
 		local font = p2.Font.Body.Font
 		local var3 = p2.Font.BaseSize * p2.Font.Body.RelativeSize
 		local color = p2.Theme.TextDefault.Color
@@ -70,7 +74,8 @@ function name.render(p1)
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Text = labelText,
-				Font = p2.Font.CaptionHeader.Font,
+				Font = if foundationFontFaceMigration then nil else p2.Font.CaptionHeader.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.CaptionLarge.Font) else nil,
 				TextSize = p2.Font.BaseSize * p2.Font.CaptionHeader.RelativeSize,
 				TextColor3 = color_3,
 				TextTransparency = p2.Theme.TextEmphasis.Transparency,
@@ -126,7 +131,8 @@ function name.render(p1)
 				TextWrapped = true,
 				Text = errorText,
 				TextSize = p2.Font.CaptionBody.RelativeSize * p2.Font.BaseSize,
-				Font = p2.Font.SubHeader1.Font,
+				Font = if foundationFontFaceMigration then nil else p2.Font.SubHeader1.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
 				TextColor3 = p2.Theme.Alert.Color,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				AutomaticSize = Enum.AutomaticSize.Y,

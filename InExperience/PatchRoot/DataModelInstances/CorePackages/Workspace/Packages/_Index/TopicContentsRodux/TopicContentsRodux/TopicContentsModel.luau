@@ -7,6 +7,7 @@ local omniRecommendationsContentType = discoveryTypesModule.OmniRecommendationsC
 local gameCollectionItemType = discoveryTypesModule.GameCollectionItemTypes.GameCollectionItemType
 local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
 local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
+local fFlagLuaAppEnableOneByTwoTileFunnelTelemetry = require(parent.SharedFlags).FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
 local t = {
 	new = function()
 		return {
@@ -44,8 +45,8 @@ function t.fromData(p1)
 	}
 end
 
-function t.fromContentList(p1, p2, p3, p4)
-	-- upvalues: t (ref), topicContentsEntryModelModule (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), gameCollectionItemType (ref), discoveryEventErrorLogger (ref), omniRecommendationsContentType (ref)
+function t.fromContentList(p1, p2, p3, p4, p5)
+	-- upvalues: t (ref), topicContentsEntryModelModule (ref), fFlagLuaAppEnableOneByTwoTileFunnelTelemetry (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), gameCollectionItemType (ref), discoveryEventErrorLogger (ref), omniRecommendationsContentType (ref)
 	local var1 = t.new()
 	var1.updatedTimestamp = p4
 	var1.entries = {}
@@ -54,32 +55,32 @@ function t.fromContentList(p1, p2, p3, p4)
 	if p1 then
 		for i, v in ipairs(p1) do
 			if not var1.hasMoreRows then
-				topicContentsEntryModelModule.fromOmniRecommendations(v):match(function(p5)
+				topicContentsEntryModelModule.fromOmniRecommendations(v, if fFlagLuaAppEnableOneByTwoTileFunnelTelemetry then p5 else nil):match(function(p6)
 					-- upvalues: fFlagLuaAppEnableHomepageOneByTwoTile (copy), gameCollectionItemType (copy), discoveryEventErrorLogger (copy), omniRecommendationsContentType (copy), var1 (ref), v (ref), p2 (ref), p3 (ref)
-					if fFlagLuaAppEnableHomepageOneByTwoTile and p5.componentType == gameCollectionItemType.OneByTwoTile and (not p5.primaryVideoAssetId or not p5.primaryImageAssetId) then
+					if fFlagLuaAppEnableHomepageOneByTwoTile and p6.componentType == gameCollectionItemType.OneByTwoTile and (not p6.primaryVideoAssetId or not p6.primaryImageAssetId) then
 						discoveryEventErrorLogger.reportError("TopicContentsModel_OneByTwoTileMissingAssets", "OneByTwoTile entry dropped: missing primaryVideoAssetId or primaryImageAssetId", {
-							contentType = tostring(p5.contentType),
-							hasVideo = p5.primaryVideoAssetId ~= nil,
-							hasImage = p5.primaryImageAssetId ~= nil
+							contentType = tostring(p6.contentType),
+							hasVideo = p6.primaryVideoAssetId ~= nil,
+							hasImage = p6.primaryImageAssetId ~= nil
 						})
 						
 						return
-					elseif fFlagLuaAppEnableHomepageOneByTwoTile and p5.contentType == omniRecommendationsContentType.AdLink then
-						if not p5.clickoutUrl or p5.clickoutUrl == "" then
+					elseif fFlagLuaAppEnableHomepageOneByTwoTile and p6.contentType == omniRecommendationsContentType.AdLink then
+						if not p6.clickoutUrl or p6.clickoutUrl == "" then
 							discoveryEventErrorLogger.reportError("TopicContentsModel_AdLinkMissingClickoutUrl", "AdLink entry dropped: missing clickoutUrl")
 							
 							return
-						elseif p5.universeId ~= nil then
+						elseif p6.universeId ~= nil then
 							discoveryEventErrorLogger.reportError("TopicContentsModel_AdLinkUnexpectedUniverseId", "AdLink entry unexpectedly has universe ID")
 						end
-						table.insert(var1.entries, p5)
+						table.insert(var1.entries, p6)
 						
 						return
 					else
 						local var2 = p2(v.contentType)
 						
 						if var2 ~= nil then
-							local var3 = p3(p5, var2)
+							local var3 = p3(p6, var2)
 							
 							if var3 ~= nil then
 								table.insert(var1.entries, var3)
@@ -89,8 +90,8 @@ function t.fromContentList(p1, p2, p3, p4)
 							var1.hasMoreRows = true
 						end
 					end
-				end):matchError(function(p5)
-					warn(p5)
+				end):matchError(function(p6)
+					warn(p6)
 				end)
 				continue
 			end

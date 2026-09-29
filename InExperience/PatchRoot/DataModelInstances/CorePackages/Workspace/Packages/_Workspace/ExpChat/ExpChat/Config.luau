@@ -1,5 +1,6 @@
 ﻿local guiService = game:GetService("GuiService")
 local expChat = script:FindFirstAncestor("ExpChat")
+local parent = expChat.Parent
 local t = {
 	ChatInputBarFont = Enum.Font.BuilderSansMedium,
 	ChatInputBarFontFace = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
@@ -52,7 +53,7 @@ local t = {
 		BorderColor3 = Color3.fromRGB(100, 100, 100),
 		MinTabWidth = if require(expChat.Flags.FFlagExpChatChannelTabSizingUpdate) then 72 else 100
 	},
-	DefaultChannelNames = require(expChat.Parent.ExpChatShared).Config.DefaultChannelNames,
+	DefaultChannelNames = require(parent.ExpChatShared).Config.DefaultChannelNames,
 	MessageCharacterLimit = 200,
 	VERIFIED_EMOJI = utf8.char(57344),
 	LOCK_EMOJI = utf8.char(128274),
@@ -153,7 +154,7 @@ local t = {
 	}
 }
 
-if guiService:IsTenFootInterface() then
+if require(parent.AppCommonLib).isTenFootInterface() then
 	t.ChatWindowSize = UDim2.fromScale(0.4, 0.4)
 	t.ChatWindowMaxWidth = 768
 	t.ChatWindowMaxHeight = 432

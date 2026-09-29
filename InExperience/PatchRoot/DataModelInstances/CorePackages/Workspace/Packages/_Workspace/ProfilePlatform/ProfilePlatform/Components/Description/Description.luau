@@ -1,6 +1,6 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
+﻿local textService = game:GetService("TextService")
+local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local parent = profilePlatform.Parent
-local textService = game:GetService("TextService")
 local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
 local useDynamicSizeMarginModule = require(profilePlatform.Hooks.useDynamicSizeMargin)
@@ -10,6 +10,8 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
 local foundationModule = require(parent.Foundation)
+local getTextSize = require(parent.Style).GetTextSize
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local localizationModule = require(parent.Localization)
 local responsiveModule = require(parent.Responsive)
 local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
@@ -23,7 +25,7 @@ local text = foundationModule.Text
 local view = foundationModule.View
 
 return function(p1)
-	-- upvalues: useTokens (ref), useScreenSize (ref), useDynamicSizeMarginModule (ref), useProfileWrapperContextModule (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), useIsSpatial (ref), usePreferredInput (ref), responsiveModule (ref), useAboutSectionHeightModule (ref), fFlagProfilePlatformNewProfileHeader (ref), textService (ref), enumsModule (ref), view (ref), text (ref), horizontalPageMargin (ref), expandableTextArea (ref)
+	-- upvalues: useTokens (ref), useScreenSize (ref), useDynamicSizeMarginModule (ref), useProfileWrapperContextModule (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), useIsSpatial (ref), usePreferredInput (ref), responsiveModule (ref), useAboutSectionHeightModule (ref), fFlagProfilePlatformNewProfileHeader (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), enumsModule (ref), view (ref), text (ref), horizontalPageMargin (ref), expandableTextArea (ref)
 	local var1
 	local var2 = useTokens()
 	local var3 = useScreenSize()
@@ -40,8 +42,10 @@ return function(p1)
 	local var10 = useIsSpatial() or usePreferredInput() == responsiveModule.Input.Directional
 	local var11, var12 = useAboutSectionHeightModule(description, var7, var4)
 	local var13 = if fFlagProfilePlatformNewProfileHeader then var12 else reactModule.useMemo(function()
-		-- upvalues: description (write), textService (copy), bodyMedium (ref), var10 (ref)
-		return textService:GetTextSize(string.gsub(description or "", "[\r\n]+", " "), bodyMedium.FontSize, bodyMedium.Font, Vector2.new(1e999, 1e999)).Y * (if var10 then 2.6 else 2)
+		-- upvalues: description (write), foundationFontFaceMigration (copy), getTextSize (copy), bodyMedium (ref), textService (copy), var10 (ref)
+		local replaced = string.gsub(description or "", "[\r\n]+", " ")
+		
+		return (if foundationFontFaceMigration then getTextSize(replaced, bodyMedium.FontSize, bodyMedium.Font, Vector2.new(1e999, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(replaced, bodyMedium.FontSize, bodyMedium.Font, Vector2.new(1e999, 1e999)).Y) * (if var10 then 2.6 else 2)
 	end, { description, bodyMedium.FontSize, bodyMedium.Font, var10 })
 	
 	if fFlagProfilePlatformNewProfileHeader then

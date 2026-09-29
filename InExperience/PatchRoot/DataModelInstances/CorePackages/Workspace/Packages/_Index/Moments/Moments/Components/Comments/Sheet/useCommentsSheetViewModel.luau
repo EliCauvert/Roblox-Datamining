@@ -24,34 +24,37 @@ return function()
 		return var5.getCachedMomentComments(var3 or "")
 	end, { var5, var3 }).data)
 	local var7 = reactModule.useRef(nil)
-	local var8 = getCommentCollectionStoreModule(false)
-	local var9 = var3 or ""
-	local var10 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var8 (ref), var9 (ref)
-		return var8.getState(var9)
-	end, { var8, var9 }))
-	local var11 = if var6 == nil or var6.count == nil then if var10.initialLoadStatus == "Success" and not var10.hasMore then math.max(0, #var10.orderedCommentIds - (if var10.pendingSubmission ~= nil then 0 else 1)) else nil else var6.count
-	local var12 = if var11 ~= nil then nil else localizationModule.abbreviateCount(var11, localizationService.RobloxLocaleId)
-	local var13 = getCommentsPanelStateModule(var6, var10)
-	local var14 = "Comments"
+	local var8, var9 = reactModule.useState(nil)
+	local var10 = getCommentCollectionStoreModule(false)
+	local var11 = var3 or ""
+	local var12 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: var10 (ref), var11 (ref)
+		return var10.getState(var11)
+	end, { var10, var11 }))
+	local var13 = if var6 == nil or var6.count == nil then if var12.initialLoadStatus == "Success" and not var12.hasMore then math.max(0, #var12.orderedCommentIds - (if var12.pendingSubmission ~= nil then 0 else 1)) else nil else var6.count
+	local var14 = if var13 ~= nil then nil else localizationModule.abbreviateCount(var13, localizationService.RobloxLocaleId)
+	local var15 = getCommentsPanelStateModule(var6, var12)
+	local var16 = "Comments"
 	
-	if var11 ~= nil and var11 > 0 and var12 ~= nil then
-		var14 = `Comments ({if var6 == nil or not var6.countIsCapped then var12 else `{var12}+`})`
+	if var13 ~= nil and var13 > 0 and var14 ~= nil then
+		var16 = `Comments ({if var6 == nil or not var6.countIsCapped then var14 else `{var14}+`})`
 	end
 	return {
 		isOpen = var2,
-		title = var14,
+		title = var16,
 		onClose = var1.close,
 		scrollingFrameRef = var7,
+		actionsRef = var9,
 		panelBodyProps = {
 			isOpen = var2,
 			feedItemId = var3,
 			comments = var6,
-			panelState = var13,
+			panelState = var15,
 			sessionId = var4,
 			scrollingFrameRef = var7,
+			actionsFrame = var8,
 			onClose = var1.close
 		},
-		composerProps = if var2 and (var3 ~= nil and (var3 ~= "" and var13.canCompose)) then { feedItemId = var3, sessionId = var4 } else nil
+		composerProps = if var2 and (var3 ~= nil and (var3 ~= "" and var15.canCompose)) then { feedItemId = var3, sessionId = var4 } else nil
 	}
 end

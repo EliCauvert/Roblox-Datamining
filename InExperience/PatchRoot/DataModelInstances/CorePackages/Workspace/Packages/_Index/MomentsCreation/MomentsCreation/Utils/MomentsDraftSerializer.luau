@@ -94,6 +94,7 @@ local function serialize(p1)
 			captureType = p1.captureRef.captureType.Name
 		},
 		description = p1.description,
+		commentsEnabled = p1.commentsEnabled,
 		edits = t,
 		lastSaveTime = p1.lastSaveTime
 	}
@@ -279,12 +280,13 @@ return {
 			end
 			t.sticker = t_1
 		end
-		return if type(p2.userId) == "string" then if not (p2.description ~= nil and type(p2.description) ~= "string") then if type(p2.lastSaveTime) == "number" then {
+		return if type(p2.userId) == "string" then if not (p2.description ~= nil and type(p2.description) ~= "string") then if not (p2.commentsEnabled ~= nil and type(p2.commentsEnabled) ~= "boolean") then if type(p2.lastSaveTime) == "number" then {
 			userId = p2.userId,
 			captureRef = { localId = captureRef.localId, captureType = var1 },
 			description = p2.description,
+			commentsEnabled = p2.commentsEnabled,
 			edits = t,
 			lastSaveTime = p2.lastSaveTime
-		} else nil else nil else nil
+		} else nil else nil else nil else nil
 	end
 }

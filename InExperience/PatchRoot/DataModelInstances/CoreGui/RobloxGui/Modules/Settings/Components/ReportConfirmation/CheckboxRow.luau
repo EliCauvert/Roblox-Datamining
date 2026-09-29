@@ -4,8 +4,10 @@ local tModule = require(corePackagesService.Packages.t)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
 local foundationModule = require(corePackagesService.Packages.Foundation)
 local checkbox = foundationModule.Checkbox
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local images = UIBloxModule.App.ImageSet.Images
 local checkboxRow = roactModule.PureComponent:extend("CheckboxRow")
@@ -29,9 +31,11 @@ checkboxRow.validateProps = tModule.interface({
 })
 
 function checkboxRow.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roactModule (ref), foundationModule (ref), imageSetLabel (ref), images (ref), checkbox (ref)
+	-- upvalues: withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roactModule (ref), foundationModule (ref), imageSetLabel (ref), images (ref), normalizeFontFace (ref), checkbox (ref)
 	return withFoundationOrUIBloxStyle(function(p2)
+		-- upvalues: foundationFontFaceMigration (copy)
 		return {
+			Tokens = if foundationFontFaceMigration then p2 else nil,
 			Theme = {
 				IconDefault = {
 					Color = p2.Color.Content.Default.Color3,
@@ -59,7 +63,7 @@ function checkboxRow.render(p1)
 			}
 		}
 	end, function(p2)
-		-- upvalues: p1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), foundationModule (copy), imageSetLabel (copy), images (copy), checkbox (copy)
+		-- upvalues: p1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), foundationModule (copy), imageSetLabel (copy), images (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), checkbox (copy)
 		local textMuted, iconDefault
 		local baseSize = p2.Font.BaseSize
 		local _ = nil
@@ -108,7 +112,8 @@ function checkboxRow.render(p1)
 				TextColor3 = textMuted.Color,
 				TextTransparency = textMuted.Transparency,
 				TextSize = p2.Font.Header2.RelativeSize * baseSize,
-				Font = p2.Font.Header2.Font,
+				Font = if foundationFontFaceMigration then nil else p2.Font.Header2.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
 			checkbox = roactModule.createElement(checkbox, {

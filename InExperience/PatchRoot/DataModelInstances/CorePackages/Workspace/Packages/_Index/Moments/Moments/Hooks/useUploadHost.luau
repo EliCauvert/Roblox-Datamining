@@ -10,12 +10,15 @@ local momentsCreationModule = require(parent.MomentsCreation)
 local sharedFlagsModule = require(parent.SharedFlags)
 local publishMomentWithUpload = momentsCreationModule.publishMomentWithUpload
 local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
+local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
 local generateMomentTextModule = require(moments.generateMomentText)
 local momentGeneratedTextFeedbackModule = require(moments.Feedback.momentGeneratedTextFeedback)
 local refreshOwnMomentsAfterPublishModule = require(moments.Upload.refreshOwnMomentsAfterPublish)
 local setPublishedMomentOnUploadStoreModule = require(moments.Upload.setPublishedMomentOnUploadStore)
+local createPublishedPostResolverModule = require(moments.Upload.createPublishedPostResolver)
 local fFlagMomentsHydratePublishedFeedItemModule = require(moments.Flags.FFlagMomentsHydratePublishedFeedItem)
 local fFlagMomentsRefreshOwnMomentsAfterPublish = sharedFlagsModule.FFlagMomentsRefreshOwnMomentsAfterPublish
+local fFlagMomentsResolvePublishedPostFeedItem = sharedFlagsModule.FFlagMomentsResolvePublishedPostFeedItem
 local getUploadStoreModule = require(moments.Stores.GetUploadStore)
 local getToastStoreModule = require(moments.Stores.GetToastStore)
 local t = {
@@ -63,15 +66,42 @@ local function makeUploadedMomentItem(p1, p2, p3, p4, p5)
 	}
 end
 
-local function _(p1, p2, p3, p4, p5)
-	-- upvalues: fFlagMomentsHydratePublishedFeedItemModule (ref), setPublishedMomentOnUploadStoreModule (ref), makeUploadedMomentItem (ref), fFlagMomentsRefreshOwnMomentsAfterPublish (ref), refreshOwnMomentsAfterPublishModule (ref)
+local function setPublishedPostOnUploadStore(value, p1)
+	local var2 = value.resolve()
+	
+	if not value.isCurrent() then return end
+	if var2 == nil then
+		p1.reset()
+		
+		return
+	end
+	p1.setSuccess(var2)
+end
+
+local function makeUploadStore(p1, p2, p3, p4, p5)
+	-- upvalues: fFlagMomentsResolvePublishedPostFeedItem (ref), getFFlagMomentsUseUploadPostAsync (ref), createPublishedPostResolverModule (ref), setPublishedPostOnUploadStore (ref), fFlagMomentsHydratePublishedFeedItemModule (ref), setPublishedMomentOnUploadStoreModule (ref), makeUploadedMomentItem (ref), fFlagMomentsRefreshOwnMomentsAfterPublish (ref), refreshOwnMomentsAfterPublishModule (ref)
+	local var2 = if fFlagMomentsResolvePublishedPostFeedItem and getFFlagMomentsUseUploadPostAsync() then createPublishedPostResolverModule({
+		captureType = p2.CaptureType,
+		description = p4,
+		edits = p3,
+		placeId = p2.SourcePlaceId
+	}) else nil
+	
 	return {
-		setUploading = p1.setUploading,
+		setUploading = if var2 ~= nil then p1.setUploading else function()
+			-- upvalues: var2 (ref), p1 (ref)
+			var2.captureSnapshot()
+			p1.setUploading()
+		end,
 		setFailed = p1.setFailed,
 		setSuccess = function(value)
-			-- upvalues: p1 (ref), fFlagMomentsHydratePublishedFeedItemModule (copy), setPublishedMomentOnUploadStoreModule (copy), makeUploadedMomentItem (copy), p2 (ref), p3 (ref), p4 (ref), p5 (ref), fFlagMomentsRefreshOwnMomentsAfterPublish (copy), refreshOwnMomentsAfterPublishModule (copy)
+			-- upvalues: p1 (ref), var2 (ref), setPublishedPostOnUploadStore (copy), fFlagMomentsHydratePublishedFeedItemModule (copy), setPublishedMomentOnUploadStoreModule (copy), makeUploadedMomentItem (copy), p2 (ref), p3 (ref), p4 (ref), p5 (ref), fFlagMomentsRefreshOwnMomentsAfterPublish (copy), refreshOwnMomentsAfterPublishModule (copy)
 			if type(value) ~= "number" then
 				p1.setSuccess(value)
+				
+				return
+			elseif var2 ~= nil then
+				task.spawn(setPublishedPostOnUploadStore, var2, p1)
 				
 				return
 			elseif fFlagMomentsHydratePublishedFeedItemModule then
@@ -89,14 +119,14 @@ local function _(p1, p2, p3, p4, p5)
 end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), getFFlagEnableMomentTextGeneration (ref), reactModule (ref), getUploadStoreModule (ref), getToastStoreModule (ref), generateMomentTextModule (ref), momentGeneratedTextFeedbackModule (ref), momentsCreationModule (ref), var1 (ref), publishMomentWithUpload (ref), fFlagMomentsHydratePublishedFeedItemModule (ref), setPublishedMomentOnUploadStoreModule (ref), makeUploadedMomentItem (ref), fFlagMomentsRefreshOwnMomentsAfterPublish (ref), refreshOwnMomentsAfterPublishModule (ref)
+	-- upvalues: useLocalization (ref), t (ref), getFFlagEnableMomentTextGeneration (ref), reactModule (ref), getUploadStoreModule (ref), getToastStoreModule (ref), generateMomentTextModule (ref), momentGeneratedTextFeedbackModule (ref), momentsCreationModule (ref), var1 (ref), publishMomentWithUpload (ref), makeUploadStore (ref)
 	local onExit = p1.onExit
 	local captureSource = p1.captureSource
 	local var2 = useLocalization(t)
 	local var3 = if getFFlagEnableMomentTextGeneration() then reactModule.useRef({}) else nil
 	
 	return reactModule.useMemo(function()
-		-- upvalues: getUploadStoreModule (copy), getToastStoreModule (copy), getFFlagEnableMomentTextGeneration (copy), var3 (write), onExit (ref), captureSource (ref), generateMomentTextModule (copy), momentGeneratedTextFeedbackModule (copy), var2 (ref), momentsCreationModule (copy), var1 (copy), publishMomentWithUpload (copy), fFlagMomentsHydratePublishedFeedItemModule (copy), setPublishedMomentOnUploadStoreModule (copy), makeUploadedMomentItem (copy), fFlagMomentsRefreshOwnMomentsAfterPublish (copy), refreshOwnMomentsAfterPublishModule (copy)
+		-- upvalues: getUploadStoreModule (copy), getToastStoreModule (copy), getFFlagEnableMomentTextGeneration (copy), var3 (write), onExit (ref), captureSource (ref), generateMomentTextModule (copy), momentGeneratedTextFeedbackModule (copy), var2 (ref), momentsCreationModule (copy), var1 (copy), publishMomentWithUpload (copy), makeUploadStore (copy)
 		local var4 = getUploadStoreModule(false)
 		local var5 = getToastStoreModule(false)
 		local var6 = getFFlagEnableMomentTextGeneration()
@@ -178,35 +208,16 @@ return function(p1)
 			end else nil,
 			isTextFiltered = momentsCreationModule.isTextFiltered,
 			createMoment = if var1 then function(_, _, p2, _, _)
-				print(`[moments-creation] dev publish (not uploaded): "{p17}"`)
-			end else function(p2, p3, p4, p5, p6)
-				-- upvalues: publishMomentWithUpload (copy), var2 (copy), var4 (ref), fFlagMomentsHydratePublishedFeedItemModule (copy), setPublishedMomentOnUploadStoreModule (copy), makeUploadedMomentItem (copy), fFlagMomentsRefreshOwnMomentsAfterPublish (copy), refreshOwnMomentsAfterPublishModule (copy), var5 (ref)
+				print(`[moments-creation] dev publish (not uploaded): "{p19}"`)
+			end else function(p2, p3, p4, p5, p6, p7)
+				-- upvalues: publishMomentWithUpload (copy), var2 (copy), makeUploadStore (copy), var4 (ref), var5 (ref)
 				publishMomentWithUpload(p2, p3, p4, {
 					localizations = var2,
-					uploadStore = {
-						setUploading = var4.setUploading,
-						setFailed = var4.setFailed,
-						setSuccess = function(value)
-							-- upvalues: var4 (ref), fFlagMomentsHydratePublishedFeedItemModule (copy), setPublishedMomentOnUploadStoreModule (copy), makeUploadedMomentItem (copy), p2 (ref), p3 (ref), p4 (ref), p6 (ref), fFlagMomentsRefreshOwnMomentsAfterPublish (copy), refreshOwnMomentsAfterPublishModule (copy)
-							if type(value) ~= "number" then
-								var4.setSuccess(value)
-								
-								return
-							elseif fFlagMomentsHydratePublishedFeedItemModule then
-								task.spawn(setPublishedMomentOnUploadStoreModule, value, var4)
-								
-								return
-							end
-							var4.setSuccess(makeUploadedMomentItem(value, p2, p3, p4, p6))
-							
-							if fFlagMomentsRefreshOwnMomentsAfterPublish then
-								task.spawn(refreshOwnMomentsAfterPublishModule, value)
-							end
-						end
-					},
+					uploadStore = makeUploadStore(var4, p2, p3, p4, p6),
 					toastStore = var5,
 					creationSessionId = p5,
-					resolvedTimeLength = p6
+					resolvedTimeLength = p6,
+					commentsEnabled = p7
 				})
 			end
 		}

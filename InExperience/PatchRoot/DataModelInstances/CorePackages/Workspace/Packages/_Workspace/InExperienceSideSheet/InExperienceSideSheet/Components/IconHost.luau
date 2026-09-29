@@ -3,7 +3,6 @@ local parent = inExperienceSideSheet.Parent
 local _ = require(parent.Chrome)
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
-local flags = foundationModule.Utility.Flags
 local useTokens = foundationModule.Hooks.useTokens
 local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
 local statusIndicator = foundationModule.StatusIndicator
@@ -11,7 +10,7 @@ local view = foundationModule.View
 local useNotificationCountModule = require(inExperienceSideSheet.Hooks.useNotificationCount)
 
 return function(p1)
-	-- upvalues: useTokens (ref), useNotificationCountModule (ref), reactModule (ref), view (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref)
+	-- upvalues: useTokens (ref), useNotificationCountModule (ref), reactModule (ref), view (ref), statusIndicator (ref), statusIndicatorVariant (ref)
 	local var1 = useTokens()
 	local var2, var3 = useNotificationCountModule(p1.notification)
 	
@@ -28,7 +27,7 @@ return function(p1)
 		NotificationBadge = if var2 then reactModule.createElement(statusIndicator, {
 			ZIndex = 2,
 			value = var3,
-			variant = if flags.FoundationStatusIndicatorVariantExperiment then statusIndicatorVariant.Contrast_Experiment else statusIndicatorVariant.Emphasis,
+			variant = statusIndicatorVariant.Emphasis,
 			AnchorPoint = Vector2.new(0, 0),
 			Position = UDim2.new(0, var1.Gap.XXLarge, 0, var1.Gap.Small)
 		}) else nil

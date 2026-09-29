@@ -32,7 +32,7 @@ return function(p1)
 				PanelBody = reactModule.createElement(commentsPanelBodyContainerModule, p1.panelBodyProps)
 			})
 		}),
-		Actions = reactModule.createElement(sheet.Actions, nil, {
+		Actions = reactModule.createElement(sheet.Actions, { ref = p1.actionsRef }, {
 			ComposerSlot = reactModule.createElement(view, {
 				tag = "size-full-0 auto-y",
 				testId = "moments-comments-composer-slot"

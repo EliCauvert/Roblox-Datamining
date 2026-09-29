@@ -2019,6 +2019,7 @@ Feature.Build.Description.BuildReplyNotif,รับการแจ้งเต�
 Feature.Build.Description.BuyRobuxToCreate,ซื้อ Robux เพิ่มเพื่อสร้างต่อ หรือรอให้โควต้าการใช้งาน Build ฟรีของคุณรีเซ็ตในวันพรุ่งนี้
 Feature.Build.Description.BuyUsageOrWait,ซื้อโควต้าการใช้งาน Build เพิ่มด้วย Robux หรือรอให้โควต้ารายวันของคุณรีเซ็ต
 Feature.Build.Description.CampaignRunDates,แคมเปญของคุณจะใช้งานได้ในช่วงวันที่ {startDate} - {endDate}
+Feature.Build.Description.ChooseAdCampaignLength,เลือกว่าต้องการให้แสดงโฆษณานานแค่ไหน
 Feature.Build.Description.ChoosePlaytesters,เลือกเพื่อนที่จะช่วยดูตัวอย่างเกมของคุณ
 Feature.Build.Description.CreateDeveloperProduct,"สร้าง ""{NAME}"" ในราคา {PRICE} Robux, ไม่ได้วางขาย"
 Feature.Build.Description.DeactivateDeveloperProduct,เลิกขายผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
@@ -2332,6 +2333,7 @@ Feature.Build.Placeholder.DescribeProduct,อธิบายสิ่งที�
 Feature.Build.Placeholder.DescribeProductUpdate,อธิบายเกี่ยวกับการอัปเดต
 Feature.Build.Prompt.CreateDeveloperProduct,ช่วยฉันสร้างผลิตภัณฑ์นักพัฒนา เชื่อมโยงเข้ากับเกม ตรวจสอบและเผยแพร่การเปลี่ยนแปลง และเปิดให้ซื้อ
 Feature.Build.Title.AdCampaignDuration,แคมเปญโฆษณา {durationDays} วัน
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} วัน
 Feature.Build.Title.AdComplete,โฆษณาเสร็จแล้ว
 Feature.Build.Title.AdCreated,สร้างโฆษณาแล้ว
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2362,6 +2364,7 @@ Feature.Build.Title.GetUsers,ดึงดูดผู้ใช้
 Feature.Build.Title.ManagedPricingAcknowledgement,เปิดการตั้งราคาแบบมีการจัดการใช่ไหม?
 Feature.Build.Title.NoMonetizationProducts,เริ่มสร้างรายได้ในเกมของคุณ
 Feature.Build.Title.NoRobuxForUsage,ไม่มี Robux เหลือสำหรับโควต้าการใช้งาน Build
+Feature.Build.Title.PickCampaign,เลือกระยะเวลา
 Feature.Build.Title.PlaytestInviteSendFailed,ไม่สามารถส่งคำเชิญได้
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,ไม่สามารถเพิ่มผู้ใช้ต่อไปนี้ได้:
@@ -2984,14 +2987,6 @@ Feature.Chat.Response.ChatNameFullyModerated,ชื่อกลุ่มแช�
 Feature.Chat.Response.ChatNameFullyModerated.V2,ชื่อกลุ่มไม่ผ่านเกณฑ์การกลั่นกรอง
 Feature.Chat.Response.NetworkError,เกิดข้อผิดพลาดกับเครือข่าย
 Feature.Chat.RobloxConnectUnavailableWithUser,ตอนนี้ผู้ใช้รายนี้ใช้งาน Roblox Connect ไม่ได้
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,กิจกรรมของเพื่อน
-Feature.Chat.ShareGameToChat.NoFavoriteGames,ไม่มีรายการโปรด
-Feature.Chat.ShareGameToChat.NoFriendActivity,คุณไม่มีกิจกรรมของเพื่อน
-Feature.Chat.ShareGameToChat.NoPopularGames,ไม่มีประสบการณ์ยอดนิยมที่สามารถใช้ได้
-Feature.Chat.ShareGameToChat.NoRecentGames,ไม่มีรายการล่าสุด
-Feature.Chat.ShareGameToChat.Popular,
-Feature.Chat.ShareGameToChat.Recent,ล่าสุด
 Feature.Chat.Text.NoConnections,คุณยังไม่ได้เพิ่มเพื่อน หากต้องการเริ่ม ให้ค้นหาและเพิ่มเพื่อนของคุณบน Roblox
 Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.FriendsChat,การแชทกับเพื่อน

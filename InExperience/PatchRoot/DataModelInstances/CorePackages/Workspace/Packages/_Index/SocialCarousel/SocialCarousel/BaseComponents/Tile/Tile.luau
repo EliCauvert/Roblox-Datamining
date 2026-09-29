@@ -13,7 +13,6 @@ local useTokens = foundationModule.Hooks.useTokens
 local view = foundationModule.View
 local icon = foundationModule.Icon
 local iconSize = foundationModule.Enums.IconSize
-local flags = foundationModule.Utility.Flags
 local statusIndicator = foundationModule.StatusIndicator
 local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
 local radius = foundationModule.Enums.Radius
@@ -22,7 +21,7 @@ local fFlagSocialCarouselRemoveStrokeForAddFriendsModule = require(socialCarouse
 local fIntSocalCarouselMaxNewRequestsCountModule = require(socialCarousel.Flags.FIntSocalCarouselMaxNewRequestsCount)
 
 return function(p1)
-	-- upvalues: reactModule (ref), useTokens (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), view (ref), image (ref), enums (ref), text (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), fIntSocalCarouselMaxNewRequestsCountModule (ref), skeleton (ref), radius (ref), fFlagSocialCarouselRemoveStrokeForAddFriendsModule (ref), icon (ref), iconSize (ref)
+	-- upvalues: reactModule (ref), useTokens (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), view (ref), image (ref), enums (ref), text (ref), statusIndicator (ref), statusIndicatorVariant (ref), fIntSocalCarouselMaxNewRequestsCountModule (ref), skeleton (ref), radius (ref), fFlagSocialCarouselRemoveStrokeForAddFriendsModule (ref), icon (ref), iconSize (ref)
 	local tileRef = p1.tileRef or reactModule.useRef(nil)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState(false)
@@ -121,11 +120,11 @@ return function(p1)
 			end, { p1.subtitle })
 		}),
 		Badge = if isLoading then nil else reactModule.useMemo(function()
-			-- upvalues: p1 (ref), reactModule (copy), statusIndicator (copy), flags (copy), statusIndicatorVariant (copy), fIntSocalCarouselMaxNewRequestsCountModule (copy)
+			-- upvalues: p1 (ref), reactModule (copy), statusIndicator (copy), statusIndicatorVariant (copy), fIntSocalCarouselMaxNewRequestsCountModule (copy)
 			return if p1.badge then reactModule.createElement(statusIndicator, {
 				Position = UDim2.new(0.9, 0, 0.1, 0),
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				variant = if flags.FoundationStatusIndicatorVariantExperiment then statusIndicatorVariant.Alert else statusIndicatorVariant.Emphasis,
+				variant = statusIndicatorVariant.Emphasis,
 				value = tonumber(p1.badge),
 				max = fIntSocalCarouselMaxNewRequestsCountModule
 			}) else nil

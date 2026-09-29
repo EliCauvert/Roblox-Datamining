@@ -29,7 +29,8 @@ return {
 		buildBulkPurchaseAnalyticsPayload = require(script.Utils.buildBulkPurchaseAnalyticsPayload),
 		buildItemDataFromAXRodux = require(script.Utils.buildItemDataFromAXRodux),
 		getTryOnItemsTotalPrice = require(script.Utils.getTryOnItemsTotalPrice),
-		selectItemDataForTryOnItems = require(script.Utils.selectItemDataForTryOnItems)
+		selectItemDataForTryOnItems = require(script.Utils.selectItemDataForTryOnItems),
+		formatNumber = require(script.Utils.formatNumber)
 	},
 	Hooks = {
 		useViewBreakpoints = useViewBreakpointsModule,

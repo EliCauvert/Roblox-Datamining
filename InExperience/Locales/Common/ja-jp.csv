@@ -108,6 +108,7 @@ Authentication.SignUp.Action.ApplyOnNextRespawn,次のリスポーンで適用
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ExitModalLeave,退出
 Authentication.SignUp.Action.RespawnNow,今すぐリスポーン
+Authentication.SignUp.Action.StartPlay,プレイ開始
 Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,ログインをやり直す
 Authentication.SignUp.Description.AccountAlreadyLinked,あなたのプロフィール（{platformAccountName}）は、すでにRobloxアカウントにリンク済みです。もう一度ログインしてみてください。
@@ -116,6 +117,7 @@ Authentication.SignUp.Description.Try,こちらをお試しください
 Authentication.SignUp.Description.UsernameChanged,完了しました！お使いのアカウントの準備が整い、{platform}に紐づけられました。更新したユーザー名を今すぐゲーム内に反映させるには、リスポーンしてください。何もしなくても、次回から適用されます。
 Authentication.SignUp.Description.UsernameUnchanged,完了しました！お使いのアカウントの準備が整い、{platform}に紐づけられました。友達とチャットしたり、何百万ものRobloxゲームをプレイしたりしましょう。
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,お持ちのRoblox（ロブロックス）アカウントは {platform} 上のアカウントに紐づけられます。設定画面からいつでも紐づけを解除できます。また {platform} 上の他のアカウントとの紐づけができるようになるまでには、クールダウン期間があるかもしれません。{ctaButton} をクリックすると、仲裁条項を含む利用規約に同意し、プライバシーポリシーを承認したことになります。
+Authentication.SignUp.Header.OneLastThing,最後のステップ
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Robloxアカウントを設定
 Authentication.SignUp.Heading.CountryCodeSelector,国を選択
 Authentication.SignUp.Heading.RetryLogIn,
@@ -156,6 +158,7 @@ Authentication.SignUp.Response.InvalidBirthday,生年月日が無効です。
 Authentication.SignUp.Response.InvalidEmail,メールアドレスが無効です。
 Authentication.SignUp.Response.PasswordComplexity,もっと複雑なパスワードを作成してください。
 Authentication.SignUp.Response.UsernameMustBeSetFirst,最初にユーザーネームを設定する必要があります。
+Authentication.SignUp.Subtitle.AddYourBirthday,Robloxアカウントを作成するには、生年月日を入力してください。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,設定を完了すると、進行状況が引き継がれます。
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,取引を進めるには、2段階認証が必要です。 設定 > セキュリティ に行って、2段階認証を完了してください。
@@ -1044,6 +1047,7 @@ CoreScripts.PublishAvatarPrompt.Rotate,
 CoreScripts.PublishAvatarPrompt.Zoom,ズーム
 CoreScripts.PublishCommon.Disclaimer,
 CoreScripts.PublishCommon.Leave,
+CoreScripts.PublishCommon.ReviewingCreation,作品を確認しています...
 CoreScripts.PublishCommon.Stay,
 CoreScripts.PublishCommon.UnsavedWarning,未保存の変更内容が失われる可能性があります
 CoreScripts.PurchasePrompt.Button.OK,
@@ -2036,6 +2040,7 @@ Feature.Build.Description.BuildReplyNotif,ビルドで返信が届いたとき�
 Feature.Build.Description.BuyRobuxToCreate,作成を続けるには、Robuxをさらに購入するか、明日になって無料のビルド使用量がリセットされるのをお待ちください。
 Feature.Build.Description.BuyUsageOrWait,Robuxでビルド使用量をさらに購入するか、1日あたりの限度額がリセットされるのをお待ちください。
 Feature.Build.Description.CampaignRunDates,キャンペーンは、{startDate}～{endDate}に実施されます。
+Feature.Build.Description.ChooseAdCampaignLength,広告の掲載期間を選択してください。
 Feature.Build.Description.ChoosePlaytesters,ゲームをテストプレイしてもらう友達を選択してください。
 Feature.Build.Description.CreateDeveloperProduct,{PRICE} Robuxの「{NAME}」を作成し、非売品にします。
 Feature.Build.Description.DeactivateDeveloperProduct,開発者製品（{PRODUCT_ID}）を非売品にします。
@@ -2348,7 +2353,9 @@ Feature.Build.Notification.Title.NeedInput,ビルドを続けるには入力が�
 Feature.Build.Placeholder.DescribeProduct,販売したいものについて説明してください
 Feature.Build.Placeholder.DescribeProductUpdate,更新内容を説明してください
 Feature.Build.Prompt.CreateDeveloperProduct,開発者製品を作成してゲームに組み込み、変更を検証して公開し、購入できるようにしてください。
+Feature.Build.Title.AdActive,広告キャンペーンは有効になっています
 Feature.Build.Title.AdCampaignDuration,{durationDays}日間の広告キャンペーン
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}日
 Feature.Build.Title.AdComplete,広告が完了しました
 Feature.Build.Title.AdCreated,広告が作成されました
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2379,6 +2386,7 @@ Feature.Build.Title.GetUsers,ユーザーを獲得
 Feature.Build.Title.ManagedPricingAcknowledgement,管理価格設定をオンにしますか？
 Feature.Build.Title.NoMonetizationProducts,ゲーム内で収益を獲得
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
+Feature.Build.Title.PickCampaign,期間を選択
 Feature.Build.Title.PlaytestInviteSendFailed,招待を送信できませんでした
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,次のユーザーを追加できませんでした：
@@ -3001,14 +3009,6 @@ Feature.Chat.Response.ChatNameFullyModerated,チャットグループ名が規�
 Feature.Chat.Response.ChatNameFullyModerated.V2,ゲーム名が内容規制されました。
 Feature.Chat.Response.NetworkError,ネットワークエラー
 Feature.Chat.RobloxConnectUnavailableWithUser,現在、このユーザーはRoblox Connectに応答できません。
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,友達のアクティビティ
-Feature.Chat.ShareGameToChat.NoFavoriteGames,お気に入りはありません
-Feature.Chat.ShareGameToChat.NoFriendActivity,友達のアクティビティはありません
-Feature.Chat.ShareGameToChat.NoPopularGames,人気のバーチャル空間はありません
-Feature.Chat.ShareGameToChat.NoRecentGames,最近のものはありません
-Feature.Chat.ShareGameToChat.Popular,人気
-Feature.Chat.ShareGameToChat.Recent,最近
 Feature.Chat.Text.NoConnections,まだ友達を追加していません。まずはRobloxで友達を見つけて追加してください。
 Feature.Chat.Text.NoFriends,まだ友達を追加していません。始めるには、友達を見つけてRobloxに追加してください。
 Feature.Chat.Title.FriendsChat,友達チャット
@@ -4719,7 +4719,7 @@ IAPExperience.RobuxUpsell.Text.LastPurchased,前回の購入
 IAPExperience.RobuxUpsell.Text.Loading,
 IAPExperience.RobuxUpsell.Text.MoreRobux,同じ価格でロバックスを増量
 IAPExperience.RobuxUpsell.Text.NeedMoreRobux,Robuxがもっと必要です
-IAPExperience.RobuxUpsell.Text.PopularItem,
+IAPExperience.RobuxUpsell.Text.PopularItem,人気
 IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet,ヘッドセットデバイスでは、まだRobuxの購入に対応していません。別のデバイス上でお試しください。
 IAPExperience.RobuxUpsell.Text.RemainingBalance,残りの {robux} が残高に加算されます。
 IAPExperience.RobuxUpsell.Text.TermsOfUse,

@@ -1969,6 +1969,7 @@ Feature.Build.Description.BuildReplyNotif,"Erhalte Benachrichtigungen, wenn Buil
 Feature.Build.Description.BuyRobuxToCreate,"Kaufe mehr Robux, um weiter zu erstellen, oder warte, bis dein kostenloses Build-Kontingent morgen zurückgesetzt wird."
 Feature.Build.Description.BuyUsageOrWait,"Kaufe mehr Build-Kontingent mit Robux oder warte, bis dein Tageslimit zurückgesetzt wird."
 Feature.Build.Description.CampaignRunDates,Deine Kampagne läuft von {startDate}–{endDate}.
+Feature.Build.Description.ChooseAdCampaignLength,"Wähle aus, wie lange deine Anzeige geschaltet werden soll."
 Feature.Build.Description.ChoosePlaytesters,"Wähle Freunde aus, die eine Vorschau deines Spiels erhalten."
 Feature.Build.Description.CreateDeveloperProduct,"Erstelle ""{NAME}"" für {PRICE} Robux (nicht mehr im Verkauf)."
 Feature.Build.Description.DeactivateDeveloperProduct,Nimm das Entwicklerprodukt {PRODUCT_ID} aus dem Verkauf.
@@ -2282,6 +2283,7 @@ Feature.Build.Placeholder.DescribeProduct,"Beschreibe, was du verkaufen möchtes
 Feature.Build.Placeholder.DescribeProductUpdate,Beschreibe ein Update
 Feature.Build.Prompt.CreateDeveloperProduct,"Hilf mir, ein Entwicklerprodukt zu erstellen, es in das Spiel einzubinden, die Änderungen zu prüfen und zu veröffentlichen und es zum Kauf anzubieten."
 Feature.Build.Title.AdCampaignDuration,{durationDays}-tägige Werbekampagne
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} Tage
 Feature.Build.Title.AdComplete,Werbeanzeige abgeschlossen
 Feature.Build.Title.AdCreated,Werbeanzeige erstellt
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2312,6 +2314,7 @@ Feature.Build.Title.GetUsers,Benutzer gewinnen
 Feature.Build.Title.ManagedPricingAcknowledgement,Verwaltete Preisgestaltung aktivieren?
 Feature.Build.Title.NoMonetizationProducts,"Beginne, in deinem Spiel Einnahmen zu erzielen"
 Feature.Build.Title.NoRobuxForUsage,Keine Robux mehr für das Build-Kontingent übrig
+Feature.Build.Title.PickCampaign,Dauer auswählen
 Feature.Build.Title.PlaytestInviteSendFailed,Einladungen konnten nicht gesendet werden
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Die folgenden Benutzer konnten nicht hinzugefügt werden:
@@ -2934,14 +2937,6 @@ Feature.Chat.Response.ChatNameFullyModerated,Name der Chatgruppe wurde moderiert
 Feature.Chat.Response.ChatNameFullyModerated.V2,Name der Gruppe wurde moderiert.
 Feature.Chat.Response.NetworkError,Netzwerkfehler
 Feature.Chat.RobloxConnectUnavailableWithUser,Derzeit ist Roblox Connect für diesen Benutzer nicht verfügbar.
-Feature.Chat.ShareGameToChat.Favorites,Lieblingsspiele
-Feature.Chat.ShareGameToChat.FriendActivity,Freundesaktivität
-Feature.Chat.ShareGameToChat.NoFavoriteGames,Keine Favoriten
-Feature.Chat.ShareGameToChat.NoFriendActivity,Du hast keine Freundesaktivität.
-Feature.Chat.ShareGameToChat.NoPopularGames,Keine beliebten Experiences verfügbar
-Feature.Chat.ShareGameToChat.NoRecentGames,Nichts Kürzliches
-Feature.Chat.ShareGameToChat.Popular,Beliebt
-Feature.Chat.ShareGameToChat.Recent,Kürzlich
 Feature.Chat.Text.NoConnections,"Du hast noch keine Freunde hinzugefügt. Um loszulegen, finde deine Freunde auf Roblox und füge sie hinzu."
 Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.FriendsChat,Freunde-Chat
@@ -4650,7 +4645,7 @@ IAPExperience.RobuxUpsell.Text.LastPurchased,Zuletzt gekauft
 IAPExperience.RobuxUpsell.Text.Loading,
 IAPExperience.RobuxUpsell.Text.MoreRobux,Mehr Robux zum gleichen Preis
 IAPExperience.RobuxUpsell.Text.NeedMoreRobux,Du brauchst mehr Robux
-IAPExperience.RobuxUpsell.Text.PopularItem,
+IAPExperience.RobuxUpsell.Text.PopularItem,Beliebt
 IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet,Der Kauf von Robux wird auf Headset-Geräten noch nicht unterstützt. Bitte versuche es auf einem anderen Gerät.
 IAPExperience.RobuxUpsell.Text.RemainingBalance,Die verbleibenden {robux} werden deinem Kontostand gutgeschrieben.
 IAPExperience.RobuxUpsell.Text.TermsOfUse,

@@ -2,6 +2,9 @@
 local reactModule = require(corePackagesService.Packages.React)
 local roactModule = require(corePackagesService.Packages.Roact)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local tModule = require(corePackagesService.Packages.t)
 local argCheckModule = require(corePackagesService.Workspace.Packages.ArgCheck)
 local images = UIBloxModule.App.ImageSet.Images
@@ -18,7 +21,7 @@ local var1 = argCheckModule.wrap(tModule.strictInterface({
 }))
 
 return function(p1)
-	-- upvalues: var1 (ref), useStyle (ref), reactModule (ref), roactModule (ref), imageSetLabel (ref), truncationExpandSmall (ref), baseMenu (ref)
+	-- upvalues: var1 (ref), useStyle (ref), reactModule (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), imageSetLabel (ref), truncationExpandSmall (ref), baseMenu (ref)
 	assert(var1(p1))
 	local var2 = useStyle()
 	local captionHeader = var2.Font.CaptionHeader
@@ -66,7 +69,8 @@ return function(p1)
 			Text = p1.dropdownList[p1.selectedIndex],
 			TextColor3 = Color3.new(1, 1, 1),
 			TextSize = var3,
-			Font = captionHeader.Font,
+			Font = if foundationFontFaceMigration then nil else captionHeader.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionLarge.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			BackgroundColor3 = var4,
 			BackgroundTransparency = 0,

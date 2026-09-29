@@ -9,9 +9,10 @@ local musicThumbnailIcon = momentsCommonModule.Components.MusicThumbnailIcon
 local musicThumbnailIconSize = momentsCommonModule.Enums.MusicThumbnailIconSize
 local useMusicInfoModule = require(moments.Hooks.useMusicInfo)
 local musicModalModule = require(moments.Components.MusicModal)
+local fFlagMomentsActionRailSpacingModule = require(moments.Flags.FFlagMomentsActionRailSpacing)
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), useMusicInfoModule (ref), view (ref), musicThumbnailIcon (ref), musicThumbnailIconSize (ref), musicModalModule (ref)
+	-- upvalues: reactModule (ref), useMusicInfoModule (ref), view (ref), fFlagMomentsActionRailSpacingModule (ref), musicThumbnailIcon (ref), musicThumbnailIconSize (ref), musicModalModule (ref)
 	local moment = p1.moment
 	local var1, var2 = reactModule.useState(false)
 	local var3 = useMusicInfoModule(reactModule.useMemo(function()
@@ -38,12 +39,12 @@ return reactModule.memo(function(p1)
 			AutomaticSize = Enum.AutomaticSize.XY
 		}, {
 			Inner = reactModule.createElement(view, {
-				tag = "align-x-center align-y-center size-1200-1200 radius-medium",
 				isDisabled = p1.isDisabled,
 				onActivated = reactModule.useCallback(function()
 					-- upvalues: var2 (ref)
 					var2(true)
-				end, {})
+				end, {}),
+				tag = if fFlagMomentsActionRailSpacingModule then "align-x-center align-y-center size-1000-1000 radius-medium" else "align-x-center align-y-center size-1200-1200 radius-medium"
 			}, {
 				MusicThumbnail = reactModule.createElement(musicThumbnailIcon, {
 					assetId = var3.AssetId,

@@ -8,6 +8,9 @@ local reactModule = require(parent_1.React)
 local roactUtilsModule = require(parent_1.RoactUtils)
 local robloxAppHooksModule = require(parent_1.RobloxAppHooks)
 local UIBloxModule = require(parent_1.UIBlox)
+local foundationModule = require(parent_1.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local images = UIBloxModule.App.ImageSet.Images
 local imageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
 local signal = appCommonLibModule.Signal
@@ -53,7 +56,7 @@ local function getTitle(p1)
 end
 
 return function(_)
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useSelector (ref), constantsModule (ref), useRef (ref), signal (ref), useState (ref), useScreenSize (ref), useEffectOnce (ref), IXPServiceWrapper (ref), fStringSocialCaptureTakenIXPLayer (ref), useEffect (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref), useCallback (ref), eventNamesModule (ref), carouselClosedModule (ref), deleteCaptureModule (ref), contextActionService (ref), getTitle (ref), reactModule (ref), fFlagUseMediaPlayerInCarousel (ref), imageSetButton (ref), images (ref), uDim2 (ref), capturesCarouselModule (ref), carouselCTAContainerModule (ref), deleteWarningModalModule (ref), permissionModalModule (ref), toastContainerModule (ref)
+	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useSelector (ref), constantsModule (ref), useRef (ref), signal (ref), useState (ref), useScreenSize (ref), useEffectOnce (ref), IXPServiceWrapper (ref), fStringSocialCaptureTakenIXPLayer (ref), useEffect (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref), useCallback (ref), eventNamesModule (ref), carouselClosedModule (ref), deleteCaptureModule (ref), contextActionService (ref), getTitle (ref), reactModule (ref), fFlagUseMediaPlayerInCarousel (ref), imageSetButton (ref), images (ref), uDim2 (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), capturesCarouselModule (ref), carouselCTAContainerModule (ref), deleteWarningModalModule (ref), permissionModalModule (ref), toastContainerModule (ref)
 	local var1 = useAnalyticsModule()
 	local var2 = useDispatch()
 	local var3 = useStyle()
@@ -177,7 +180,8 @@ return function(_)
 						ZIndex = 1,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						AutomaticSize = Enum.AutomaticSize.X,
-						Font = var3.Font.Header2.Font,
+						Font = if foundationFontFaceMigration then nil else var3.Font.Header2.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Tokens.Typography.TitleLarge.Font) else nil,
 						Position = UDim2.new(0.5, 0, 0.5, 2),
 						Size = UDim2.fromScale(0, 1),
 						Text = var19,
@@ -201,7 +205,8 @@ return function(_)
 						ZIndex = 2,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						AutomaticSize = Enum.AutomaticSize.X,
-						Font = var3.Font.Header2.Font,
+						Font = if foundationFontFaceMigration then nil else var3.Font.Header2.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Tokens.Typography.TitleLarge.Font) else nil,
 						Position = UDim2.fromScale(0.5, 0.5),
 						Size = UDim2.fromScale(0, 1),
 						Text = var19,

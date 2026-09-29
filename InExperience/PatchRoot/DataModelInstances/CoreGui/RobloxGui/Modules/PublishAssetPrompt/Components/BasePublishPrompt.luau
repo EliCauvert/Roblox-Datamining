@@ -13,6 +13,9 @@ local tModule = require(corePackagesService.Packages.t)
 local robloxGui = coreGuiService:WaitForChild("RobloxGui")
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local withStyle = UIBloxModule.Style.withStyle
 local fullPageModal = UIBloxModule.App.Dialog.Modal.FullPageModal
 local overlay = UIBloxModule.App.Dialog.Overlay
@@ -180,9 +183,9 @@ function basePublishPrompt.didUpdate(p1, p2, p3)
 end
 
 function basePublishPrompt.renderMiddle(p1, p2)
-	-- upvalues: withStyle (ref), roactModule (ref), constantsModule (ref), labeledTextBoxModule (ref)
+	-- upvalues: withStyle (ref), roactModule (ref), constantsModule (ref), labeledTextBoxModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	return withStyle(function(p3)
-		-- upvalues: roactModule (copy), p1 (ref), constantsModule (copy), labeledTextBoxModule (copy), p2 (ref)
+		-- upvalues: roactModule (copy), p1 (ref), constantsModule (copy), labeledTextBoxModule (copy), p2 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		local font = p3.Font
 		local baseSize = font.BaseSize
 		local theme = p3.Theme
@@ -259,7 +262,8 @@ function basePublishPrompt.renderMiddle(p1, p2)
 					TextWrapped = true,
 					Size = UDim2.fromScale(1, 1),
 					Text = p2.disclaimer,
-					Font = footer.Font,
+					Font = if foundationFontFaceMigration then nil else footer.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.CaptionSmall.Font) else nil,
 					TextSize = baseSize * footer.RelativeSize,
 					TextColor3 = theme.TextDefault.Color
 				})

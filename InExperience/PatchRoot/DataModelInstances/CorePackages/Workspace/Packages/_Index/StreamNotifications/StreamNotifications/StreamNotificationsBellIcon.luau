@@ -201,7 +201,7 @@ local var1 = function(p1)
 				max = 99,
 				AnchorPoint = Vector2.new(0, 1),
 				Position = UDim2.fromScale(0.5, 0.5),
-				variant = if not foundationModule.Utility.Flags.FoundationStatusIndicatorVariantExperiment then foundationModule.Enums.StatusIndicatorVariant.Emphasis else foundationModule.Enums.StatusIndicatorVariant.Alert,
+				variant = foundationModule.Enums.StatusIndicatorVariant.Emphasis,
 				value = notificationCount
 			}) else nil,
 			DisplayStreamNotifications = if not dropdownEnabled then var11 else nil

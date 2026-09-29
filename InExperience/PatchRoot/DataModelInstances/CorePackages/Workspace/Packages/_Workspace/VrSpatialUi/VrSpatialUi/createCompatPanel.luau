@@ -2,6 +2,7 @@
 local parent = vrSpatialUi.Parent
 local coreGuiService = game:GetService("CoreGui")
 local curvedSurfaceGuisEnabledEngineFeature = game:GetEngineFeature("CurvedSurfaceGuisEnabled")
+local fFlagSpatialUIHiddenPanelRaycastFixModule = require(vrSpatialUi.Flags.FFlagSpatialUIHiddenPanelRaycastFix)
 local constantsModule = require(vrSpatialUi.Constants)
 local spatialUIType = constantsModule.SpatialUIType
 local object = require(parent.LuauPolyfill).Object
@@ -45,27 +46,29 @@ local function createPanelPart(p1)
 end
 
 local function createPanel(p1)
-	-- upvalues: object (ref), t (ref), spatialUIType (ref), t_2 (ref), createPanelPart (ref), coreGuiService (ref), curvedSurfaceGuisEnabledEngineFeature (ref), t_1 (ref)
+	-- upvalues: object (ref), t (ref), spatialUIType (ref), t_2 (ref), createPanelPart (ref), fFlagSpatialUIHiddenPanelRaycastFixModule (ref), coreGuiService (ref), curvedSurfaceGuisEnabledEngineFeature (ref), t_1 (ref)
 	local var1 = object.assign({}, t, p1)
 	
 	if var1.type == spatialUIType.SpatialUIPartOnly then
-		return {
-			type = var1.type,
-			panelObject = createPanelPart(object.assign({}, t_2, var1.spatialPanelProps))
-		}
+		local var2 = createPanelPart(object.assign({}, t_2, var1.spatialPanelProps))
+		
+		if fFlagSpatialUIHiddenPanelRaycastFixModule then
+			var2.CanQuery = false
+		end
+		return { type = var1.type, panelObject = var2 }
 	elseif var1.type == spatialUIType.SpatialUI then
-		local var2 = object.assign({}, t_2, var1.spatialPanelProps)
-		local var3 = createPanelPart(var2)
+		local var3 = object.assign({}, t_2, var1.spatialPanelProps)
+		local var4 = createPanelPart(var3)
 		local surfaceGui = Instance.new("SurfaceGui")
 		surfaceGui.Parent = coreGuiService
-		surfaceGui.Name = var2.name .. "_SurfaceGui"
-		surfaceGui.Enabled = not var2.hidden
-		surfaceGui.CanvasSize = var2.virtualScreenSize
-		surfaceGui.AlwaysOnTop = var2.alwaysOnTop
-		surfaceGui.Shape = if curvedSurfaceGuisEnabledEngineFeature and var2.curvature ~= 0 then Enum.SurfaceGuiShape.CurvedHorizontally else Enum.SurfaceGuiShape.Flat
-		surfaceGui.HorizontalCurvature = if curvedSurfaceGuisEnabledEngineFeature then var2.curvature else 0
+		surfaceGui.Name = var3.name .. "_SurfaceGui"
+		surfaceGui.Enabled = not var3.hidden
+		surfaceGui.CanvasSize = var3.virtualScreenSize
+		surfaceGui.AlwaysOnTop = var3.alwaysOnTop
+		surfaceGui.Shape = if curvedSurfaceGuisEnabledEngineFeature and var3.curvature ~= 0 then Enum.SurfaceGuiShape.CurvedHorizontally else Enum.SurfaceGuiShape.Flat
+		surfaceGui.HorizontalCurvature = if curvedSurfaceGuisEnabledEngineFeature then var3.curvature else 0
 		surfaceGui.Active = true
-		surfaceGui.Adornee = var3
+		surfaceGui.Adornee = var4
 		surfaceGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		surfaceGui.LightInfluence = 0
 		surfaceGui.ZOffset = 0
@@ -77,15 +80,15 @@ local function createPanel(p1)
 		
 		return nil
 	end
-	local var4 = object.assign({}, t_1, var1.screenGuiProps)
+	local var5 = object.assign({}, t_1, var1.screenGuiProps)
 	local screenGui = Instance.new("ScreenGui")
 	screenGui.Parent = coreGuiService
-	screenGui.Name = var4.Name
-	screenGui.ResetOnSpawn = var4.ResetOnSpawn
-	screenGui.DisplayOrder = var4.DisplayOrder
+	screenGui.Name = var5.Name
+	screenGui.ResetOnSpawn = var5.ResetOnSpawn
+	screenGui.DisplayOrder = var5.DisplayOrder
 	
-	if var4.ZIndexBehavior then
-		screenGui.ZIndexBehavior = var4.ZIndexBehavior
+	if var5.ZIndexBehavior then
+		screenGui.ZIndexBehavior = var5.ZIndexBehavior
 	end
 	return { type = var1.type, panelObject = screenGui }
 end

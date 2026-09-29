@@ -3,6 +3,7 @@ local parent = momentsCreation.Parent
 local _ = require(parent.MomentsTypes)
 local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
 local fFlagMomentsTextOverlayV2Redesign = require(parent.MomentsCommon).Flags.FFlagMomentsTextOverlayV2Redesign
+local fFlagMomentsCommentsCreatorControlModule = require(momentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
 local momentsPostCtaUseCaptureUniverse = game:DefineFastFlag("MomentsPostCtaUseCaptureUniverse", false)
 
 local function _(p1)
@@ -49,8 +50,12 @@ local function convertTextOverlay(p1)
 end
 
 return function(p1, p2)
-	-- upvalues: convertTextOverlay (ref), getFFlagMomentsTTSAudioOverlayModule (ref), momentsPostCtaUseCaptureUniverse (ref), fFlagMomentsTextOverlayV2Redesign (ref)
+	-- upvalues: fFlagMomentsCommentsCreatorControlModule (ref), convertTextOverlay (ref), getFFlagMomentsTTSAudioOverlayModule (ref), momentsPostCtaUseCaptureUniverse (ref), fFlagMomentsTextOverlayV2Redesign (ref)
 	local t = { caption = p1.description }
+	
+	if fFlagMomentsCommentsCreatorControlModule and p1.commentsEnabled == false then
+		t.commentsEnabled = false
+	end
 	local captureType = p1.captureType
 	
 	if (if typeof(captureType) == "EnumItem" then captureType.Name else captureType) == Enum.CaptureType.Screenshot.Name then

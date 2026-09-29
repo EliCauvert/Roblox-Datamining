@@ -1,6 +1,9 @@
 ﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
 local cryoModule = require(parent.Cryo)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local roactModule = require(parent.Roact)
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local getImageData = require(parent.RobloxAppAssets).GetImageData
@@ -45,13 +48,13 @@ function textBoxStateWrapper.init(p1)
 end
 
 function textBoxStateWrapper.render(p1)
-	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), getImageData (ref), cryoModule (ref)
+	-- upvalues: withStyle (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), imageSetLabel (ref), getImageData (ref), cryoModule (ref)
 	local helpComponent = p1.props.HelpComponent
 	local errorText = p1.props.ErrorText
 	local labelText = p1.props.LabelText
 	
 	return withStyle(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy), labelText (ref), imageSetLabel (copy), getImageData (copy), cryoModule (copy), errorText (ref), helpComponent (ref)
+		-- upvalues: p1 (ref), roactModule (copy), labelText (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), imageSetLabel (copy), getImageData (copy), cryoModule (copy), errorText (ref), helpComponent (ref)
 		local color = p2.Theme.UIDefault.Color
 		local transparency = p2.Theme.UIDefault.Transparency
 		
@@ -88,7 +91,8 @@ function textBoxStateWrapper.render(p1)
 				LayoutOrder = 1,
 				TextWrapped = true,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = p2.Font.CaptionHeader.Font,
+				Font = if foundationFontFaceMigration then nil else p2.Font.CaptionHeader.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.CaptionLarge.Font) else nil,
 				Size = UDim2.fromScale(1, 0),
 				Text = labelText,
 				TextColor3 = p2.Theme.TextEmphasis.Color,
@@ -149,7 +153,8 @@ function textBoxStateWrapper.render(p1)
 				LayoutOrder = 3,
 				TextWrapped = true,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = p2.Font.CaptionBody.Font,
+				Font = if foundationFontFaceMigration then nil else p2.Font.CaptionBody.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodySmall.Font) else nil,
 				Size = UDim2.fromScale(1, 0),
 				Text = errorText,
 				TextColor3 = p2.Theme.Alert.Color,

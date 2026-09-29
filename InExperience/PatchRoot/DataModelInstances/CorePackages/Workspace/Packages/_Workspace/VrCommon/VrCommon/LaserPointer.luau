@@ -10,6 +10,7 @@ local VRUtilModule = require(vrCommon.VRUtil)
 require(vrCommon.Panel3D)
 local enableUserInputCFrameLogging = game:DefineFastFlag("EnableUserInputCFrameLogging", false)
 local VRLaserPointerRaycastChange = game:DefineFastFlag("VRLaserPointerRaycastChange", false)
+local renderCaptureAlwaysOnTopGuiEngineFeature = game:GetEngineFeature("RenderCaptureAlwaysOnTopGui")
 local localPlayer = playersService.LocalPlayer
 while not localPlayer do
 	playersService.Changed:wait()
@@ -136,7 +137,7 @@ t_3.__index = t_3
 t_3.Mode = t
 
 function t_3.new(_)
-	-- upvalues: t_3 (ref), VRService (ref), create (ref), coreGuiService (ref), t_1 (ref), vector2_1 (ref), vector2 (ref), guiService (ref)
+	-- upvalues: t_3 (ref), VRService (ref), create (ref), coreGuiService (ref), t_1 (ref), vector2_1 (ref), vector2 (ref), renderCaptureAlwaysOnTopGuiEngineFeature (ref), guiService (ref)
 	local tbl = setmetatable({}, t_3)
 	tbl.laserMaxDistance = VRService.LaserDistance
 	tbl.laserHand = 0
@@ -244,7 +245,8 @@ function t_3.new(_)
 		AlwaysOnTop = true,
 		Enabled = false,
 		ZOffset = 10,
-		Parent = tbl.cursorPart
+		Adornee = if renderCaptureAlwaysOnTopGuiEngineFeature then tbl.cursorPart else nil,
+		Parent = if renderCaptureAlwaysOnTopGuiEngineFeature then coreGuiService else tbl.cursorPart
 	})
 	tbl.cursorImage = create("ImageLabel")({
 		Image = "rbxasset://textures/Cursors/Gamepad/Pointer.png",
@@ -653,8 +655,12 @@ function t_3:updateCursor_DEPRECATED()
 end
 
 function t_3:disableComponent()
-	-- upvalues: removePartsFromGame (ref)
+	-- upvalues: removePartsFromGame (ref), renderCaptureAlwaysOnTopGuiEngineFeature (ref)
 	removePartsFromGame(self.parabola, self.parabolaOffhand, self.originPart, self.originPartOffhand, self.plopPart, self.plopBall, self.cursorPart)
+	
+	if renderCaptureAlwaysOnTopGuiEngineFeature then
+		removePartsFromGame(self.cursorSurfaceGui)
+	end
 	self:setNavigationActionEnabled(false)
 	
 	for i, v in pairs(self.connections) do

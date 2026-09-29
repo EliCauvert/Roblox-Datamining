@@ -3,6 +3,9 @@ local parent = friendsMenu.Parent
 local context = friendsMenu.Context
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local roactUtilsModule = require(parent.RoactUtils)
 local signalsModule = require(parent.Signals)
 local useSignalState = require(parent.SignalsReact).useSignalState
@@ -27,7 +30,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: fFlagUseSignalsForGameInvitesStatus (ref), reactModule (ref), signalsModule (ref), var1 (ref), useSignalState (ref), useSelector (ref), getLocalizedStrings (ref), t (ref), friendsListContextModule (ref), useStyle (ref), inviteStatus (ref), button (ref), buttonType (ref), standardButtonSize (ref)
+	-- upvalues: fFlagUseSignalsForGameInvitesStatus (ref), reactModule (ref), signalsModule (ref), var1 (ref), useSignalState (ref), useSelector (ref), getLocalizedStrings (ref), t (ref), friendsListContextModule (ref), useStyle (ref), inviteStatus (ref), button (ref), buttonType (ref), standardButtonSize (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var2
 	local _ = nil
 	
@@ -81,7 +84,8 @@ return function(p1)
 		AnchorPoint = p1.anchorPoint,
 		Position = p1.position,
 		TextColor3 = theme.TextDefault.Color,
-		Font = font.CaptionHeader.Font,
+		Font = if foundationFontFaceMigration then nil else font.CaptionHeader.Font,
+		FontFace = if foundationFontFaceMigration then normalizeFontFace(var6.Tokens.Typography.CaptionLarge.Font) else nil,
 		LayoutOrder = p1.layoutOrder
 	})
 end

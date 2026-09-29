@@ -4,8 +4,8 @@ local makeMomentMetadataModule = require(momentsCreation.Utils.makeMomentMetadat
 local makeRegistrationInfoModule = require(momentsCreation.Utils.makeRegistrationInfo)
 local createMomentModule = require(momentsCreation.Upload.createMoment)
 
-return function(p1, p2, p3, p4, p5)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: makeMomentMetadataModule (ref), makeRegistrationInfoModule (ref), createMomentModule (ref)
-	local var1 = makeMomentMetadataModule(p1, p3, p2, p5)
+	local var1 = makeMomentMetadataModule(p1, p3, p2, p5, p6)
 	createMomentModule(p1, var1, makeRegistrationInfoModule(p1, var1), p4)
 end

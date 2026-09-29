@@ -5,6 +5,9 @@ local roactRoduxModule = require(parent.RoactRodux)
 local roactAppExperimentModule = require(parent.RoactAppExperiment)
 local roactModule = require(parent.Roact)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local withStyle = UIBloxModule.Style.withStyle
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local getImageData = require(parent.RobloxAppAssets).GetImageData
@@ -167,9 +170,9 @@ function passwordBox.render(p1)
 end
 
 function passwordBox.renderWithSelectionCursor(_, _)
-	-- upvalues: enableAndroidPasswordSuggestionEngineFeature (ref), getFFlagEnableTextFieldContentType (ref), withStyle (ref), getFFlagLuaAppFixSelectionCursor (ref), cursorKind (ref), roactModule (ref), imageSetLabel (ref), getImageData (ref), guiObjectInputSinkEngineFeature (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref)
+	-- upvalues: enableAndroidPasswordSuggestionEngineFeature (ref), getFFlagEnableTextFieldContentType (ref), withStyle (ref), getFFlagLuaAppFixSelectionCursor (ref), cursorKind (ref), roactModule (ref), imageSetLabel (ref), getImageData (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), guiObjectInputSinkEngineFeature (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref)
 -- FATAL: Failed to generate AST for `renderWithSelectionCursor` function:
-runtime : [KeyError] :11990: 148
+runtime : [KeyError] :11990: 150
 Traceback:
 	runtime : [lunaux]:11990 function decompile_function
 	runtime : [lunaux]:1933 function normalize_cfg

@@ -20,6 +20,7 @@ local robloxSubscriptionFlowCompleteReason = robloxSubscriptionPurchaseAppModule
 local surfaceName = robloxSubscriptionPurchaseAppModule.SurfaceName
 local surfaceContext = robloxSubscriptionPurchaseAppModule.SurfaceContext
 local purchasePromptModule = require(parent.PurchasePrompt)
+local webViewUtilsModule = require(parent.WebViewUtils)
 local selectPurchaseResultsModule = require(bulkPurchaseApp.Store.Selectors.selectPurchaseResults)
 local selectOrderRequestModule = require(bulkPurchaseApp.Store.Selectors.selectOrderRequest)
 local selectItemDataModule = require(bulkPurchaseApp.Store.Selectors.selectItemData)
@@ -44,6 +45,7 @@ local handleEconomicRestrictionErrorModule = require(script.Parent.Utils.handleE
 local selectBulkPurchaseRequestStateModule = require(script.Parent.Utils.selectBulkPurchaseRequestState)
 local selectOptionsModule = require(script.Parent.Utils.selectOptions)
 local fixBuyRobuxForAndroid = game:DefineFastFlag("FixBuyRobuxForAndroid", false)
+local fixBulkPurchaseInExperienceBuyRobux = game:DefineFastFlag("FixBulkPurchaseInExperienceBuyRobux", false)
 local fixBulkPurchaseStarterGuiRename = game:DefineFastFlag("FixBulkPurchaseStarterGuiRename", false)
 local fFlagAXAddPlusUpsellToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
 local fFlagAXAddOffersToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
@@ -52,7 +54,7 @@ local fIntBlackbirdUpsellMaxPriceForDiscountInclusive = sharedFlagsModule.FIntBl
 local _ = require(script.Parent.BulkPurchaseRequest)
 
 return function()
-	-- upvalues: useDispatch (ref), useSelector (ref), selectBulkPurchaseRequestStateModule (ref), selectPurchaseResultsModule (ref), selectOrderRequestModule (ref), selectOptionsModule (ref), selectItemDataModule (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref), reactModule (ref), robloxSubscriptionSignals (ref), signalsReactModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref), bulkPurchaseDisablePurchaseModule (ref), isErrorReasonContainsEconomicRestrictions (ref), handleEconomicRestrictionErrorModule (ref), getItemResultsFromResponseModule (ref), getCommonItemStatusModule (ref), bulkPurchaseSucceededModule (ref), bulkPurchasePromptStateEnumModule (ref), fFlagBulkPurchaseReportCountersModule (ref), reportBulkPurchaseRequestCountersModule (ref), bulkPurchaseCountersEnumModule (ref), bulkPurchaseFailedModule (ref), itemStatusToErrorCodeMapModule (ref), errorCodeEnumModule (ref), getPaymentPlatformModule (ref), paymentPlatformEnumModule (ref), fixBuyRobuxForAndroid (ref), httpService (ref), getRobuxStoreUrlModule (ref), browserService (ref), useAppPolicy (ref), getRobloxSubscriptionProducts (ref), mutedError (ref), fIntBlackbirdUpsellMinPriceForDiscountInclusive (ref), fIntBlackbirdUpsellMaxPriceForDiscountInclusive (ref), robloxSubscriptionPurchaseAppModule (ref), robloxSubscriptionFlowCompleteReason (ref), surfaceName (ref), surfaceContext (ref), purchasePromptModule (ref), fFlagAXAddOffersToBulkPurchaseModule (ref), fFlagFixVP8143Module (ref), runService (ref), getGuiObjectIsObscuredModule (ref), fixBulkPurchaseStarterGuiRename (ref), starterGuiService (ref)
+	-- upvalues: useDispatch (ref), useSelector (ref), selectBulkPurchaseRequestStateModule (ref), selectPurchaseResultsModule (ref), selectOrderRequestModule (ref), selectOptionsModule (ref), selectItemDataModule (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref), reactModule (ref), robloxSubscriptionSignals (ref), signalsReactModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref), bulkPurchaseDisablePurchaseModule (ref), isErrorReasonContainsEconomicRestrictions (ref), handleEconomicRestrictionErrorModule (ref), getItemResultsFromResponseModule (ref), getCommonItemStatusModule (ref), bulkPurchaseSucceededModule (ref), bulkPurchasePromptStateEnumModule (ref), fFlagBulkPurchaseReportCountersModule (ref), reportBulkPurchaseRequestCountersModule (ref), bulkPurchaseCountersEnumModule (ref), bulkPurchaseFailedModule (ref), itemStatusToErrorCodeMapModule (ref), errorCodeEnumModule (ref), getPaymentPlatformModule (ref), paymentPlatformEnumModule (ref), fixBulkPurchaseInExperienceBuyRobux (ref), webViewUtilsModule (ref), getRobuxStoreUrlModule (ref), fixBuyRobuxForAndroid (ref), httpService (ref), browserService (ref), useAppPolicy (ref), getRobloxSubscriptionProducts (ref), mutedError (ref), fIntBlackbirdUpsellMinPriceForDiscountInclusive (ref), fIntBlackbirdUpsellMaxPriceForDiscountInclusive (ref), robloxSubscriptionPurchaseAppModule (ref), robloxSubscriptionFlowCompleteReason (ref), surfaceName (ref), surfaceContext (ref), purchasePromptModule (ref), fFlagAXAddOffersToBulkPurchaseModule (ref), fFlagFixVP8143Module (ref), runService (ref), getGuiObjectIsObscuredModule (ref), fixBulkPurchaseStarterGuiRename (ref), starterGuiService (ref)
 	local var1 = useDispatch()
 	local var2 = useSelector(selectBulkPurchaseRequestStateModule)
 	local var3 = useSelector(selectPurchaseResultsModule)
@@ -127,13 +129,15 @@ return function()
 	end
 	
 	local var15 = function()
-		-- upvalues: getPaymentPlatformModule (copy), paymentPlatformEnumModule (copy), fixBuyRobuxForAndroid (copy), httpService (copy), getRobuxStoreUrlModule (copy), browserService (copy), var1 (ref), bulkPurchaseEndedModule (copy), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy)
+		-- upvalues: getPaymentPlatformModule (copy), paymentPlatformEnumModule (copy), fixBulkPurchaseInExperienceBuyRobux (copy), webViewUtilsModule (copy), getRobuxStoreUrlModule (copy), fixBuyRobuxForAndroid (copy), httpService (copy), browserService (copy), var1 (ref), bulkPurchaseEndedModule (copy), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy)
 		local var16 = getPaymentPlatformModule()
 		
 		if var16 ~= paymentPlatformEnumModule.Desktop and var16 ~= paymentPlatformEnumModule.Mobile then
 			var1(bulkPurchaseFailedModule(errorCodeEnumModule.InsufficientRobux))
 			
 			return
+		elseif fixBulkPurchaseInExperienceBuyRobux then
+			webViewUtilsModule.openWebViewSession(getRobuxStoreUrlModule(), "")
 		elseif fixBuyRobuxForAndroid then
 			browserService:SendCommand(httpService:JSONEncode({ command = "open", url = getRobuxStoreUrlModule() }))
 		else

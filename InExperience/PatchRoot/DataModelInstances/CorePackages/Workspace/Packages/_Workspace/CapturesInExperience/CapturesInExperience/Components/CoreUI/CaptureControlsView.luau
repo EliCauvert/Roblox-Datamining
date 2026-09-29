@@ -30,7 +30,6 @@ local usePlayShutterSoundModule = require(parent.Hooks.usePlayShutterSound)
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local useTokens = foundationModule.Hooks.useTokens
 local useTopbarInsetModule = require(parent.Hooks.useTopbarInset)
-local capturesLayerExposureLoggingEnabled = game:DefineFastFlag("CapturesLayerExposureLoggingEnabled", false)
 local debugOverrideCaptureControlsVideoGuacPolicy = game:DefineFastFlag("DebugOverrideCaptureControlsVideoGuacPolicy", false)
 local fStringSocialCaptureIXPLayer = require(parent_1.SharedFlags).FStringSocialCaptureIXPLayer
 local t = {
@@ -46,7 +45,7 @@ return capturesPolicyModule.connect(function(p1)
 		hasVideoCaptureCapability = p1.hasVideoCaptureCapability() and captureService:CanCaptureVideo() or debugOverrideCaptureControlsVideoGuacPolicy
 	}
 end)(function(p1)
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useTokens (ref), useTopbarInsetModule (ref), useSelector (ref), constantsModule (ref), useEffect (ref), capturesLayerExposureLoggingEnabled (ref), IXPServiceWrapper (ref), fStringSocialCaptureIXPLayer (ref), usePlayShutterSoundModule (ref), reactModule (ref), useCaptureControlsControllerModule (ref), eventNamesModule (ref), useCallback (ref), socialStopwatchModule (ref), takeCaptureModule (ref), view (ref), foundationModule (ref), videoCaptureControlModule (ref), t (ref), tooltip (ref), popoverAlign (ref), icon (ref), voiceChatIndicatorModule (ref), image (ref)
+	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useTokens (ref), useTopbarInsetModule (ref), useSelector (ref), constantsModule (ref), useEffect (ref), IXPServiceWrapper (ref), fStringSocialCaptureIXPLayer (ref), usePlayShutterSoundModule (ref), reactModule (ref), useCaptureControlsControllerModule (ref), eventNamesModule (ref), useCallback (ref), socialStopwatchModule (ref), takeCaptureModule (ref), view (ref), foundationModule (ref), videoCaptureControlModule (ref), t (ref), tooltip (ref), popoverAlign (ref), icon (ref), voiceChatIndicatorModule (ref), image (ref)
 	local var1 = useAnalyticsModule()
 	local var2 = useDispatch()
 	local var3 = useLocalization({
@@ -63,8 +62,8 @@ end)(function(p1)
 		return p2[constantsModule.RoduxKey].IsVideoCaptureActive.status
 	end)
 	useEffect(function()
-		-- upvalues: capturesLayerExposureLoggingEnabled (copy), var6 (ref), IXPServiceWrapper (copy), fStringSocialCaptureIXPLayer (copy)
-		if capturesLayerExposureLoggingEnabled and var6 then
+		-- upvalues: var6 (ref), IXPServiceWrapper (copy), fStringSocialCaptureIXPLayer (copy)
+		if var6 then
 			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(fStringSocialCaptureIXPLayer)
 		end
 	end, { var6 })

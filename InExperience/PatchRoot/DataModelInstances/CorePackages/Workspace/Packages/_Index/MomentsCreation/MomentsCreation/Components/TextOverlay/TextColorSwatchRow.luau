@@ -12,6 +12,10 @@ local useSignalState = signalsReactModule.useSignalState
 local useTokens = foundationModule.Hooks.useTokens
 local useFormFactor = momentsCommonModule.Hooks.useFormFactor
 local formFactor = momentsCommonModule.Enums.FormFactor
+local eventNames = momentsCommonModule.Analytics.EventNames
+local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
+local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
+local fFlagMomentsTextOverlayV2Redesign = momentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
 local constantsModule = require(momentsCreation.Constants)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
@@ -23,7 +27,7 @@ local list = {
 }
 
 return function(p1)
-	-- upvalues: useTokens (ref), useFormFactor (ref), formFactor (ref), useMemo (ref), signalsModule (ref), useSignalState (ref), dashModule (ref), list (ref), reactModule (ref), view (ref), foundationModule (ref), constantsModule (ref)
+	-- upvalues: useTokens (ref), useFormFactor (ref), formFactor (ref), useMemo (ref), signalsModule (ref), useSignalState (ref), dashModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), list (ref), reactModule (ref), view (ref), foundationModule (ref), constantsModule (ref)
 	local controller = p1.controller
 	local var1 = useTokens()
 	local var2 = useFormFactor() == formFactor.Wide
@@ -39,20 +43,22 @@ return function(p1)
 		end)
 	end, { controller }))
 	
-	local function onSwatchActivated(p2)
-		-- upvalues: controller (ref), dashModule (copy)
+	local function onSwatchActivated(p2, p3)
+		-- upvalues: controller (ref), dashModule (copy), fFlagMomentsTextOverlayV2Redesign (copy), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
 		local activeSession = controller.getActiveSession(false)
 		
 		if activeSession == nil then return end
 		local draft = activeSession.getDraft(false)
 		local var4 = draft and draft[1]
 		
-		if var4 == nil then
-			return
-		end
+		if var4 == nil then return end
 		activeSession.update({
 			dashModule.joinDeep(var4, { textOverlayStyle = { fontColor = p2 } })
 		})
+		
+		if fFlagMomentsTextOverlayV2Redesign then
+			fireAnalyticsEventModule(eventNames.EditingFlowTextOverlayColorSelected, makeCreationEventFieldsModule.makeTextOverlayEventFields({ buttonIndex = tostring(p3), color = "#" .. p2:ToHex() }))
+		end
 	end
 	
 	local t = {}
@@ -64,8 +70,8 @@ return function(p1)
 			Size = UDim2.fromOffset(32, 32),
 			backgroundStyle = { Color3 = v },
 			onActivated = function()
-				-- upvalues: onSwatchActivated (ref), v (ref)
-				onSwatchActivated(v)
+				-- upvalues: onSwatchActivated (ref), v (ref), i (ref)
+				onSwatchActivated(v, i)
 			end,
 			stroke = {
 				Thickness = 3,

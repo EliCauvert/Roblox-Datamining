@@ -7,9 +7,10 @@ local getCommentCollectionStoreModule = require(moments.Components.Comments.GetC
 local getCommentsListCoordinatorModule = require(moments.Components.Comments.List.getCommentsListCoordinator)
 local _ = require(script.Parent.Parent.getCommentsPanelState)
 local _ = require(script.Parent.CommentsPanelBodyView)
+local useVisibleContentHeightModule = require(script.Parent.useVisibleContentHeight)
 
 return function(p1)
-	-- upvalues: reactModule (ref), getCommentCollectionStoreModule (ref), signalsReactModule (ref), getCommentsListCoordinatorModule (ref)
+	-- upvalues: reactModule (ref), getCommentCollectionStoreModule (ref), signalsReactModule (ref), getCommentsListCoordinatorModule (ref), useVisibleContentHeightModule (ref)
 	local feedItemId = p1.feedItemId
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), feedItemId (ref)
@@ -61,6 +62,7 @@ return function(p1)
 		feedItemId = feedItemId,
 		sessionId = p1.sessionId,
 		scrollingFrameRef = p1.scrollingFrameRef,
+		stateMinHeight = useVisibleContentHeightModule(p1.scrollingFrameRef, p1.actionsFrame),
 		onRetryInitial = reactModule.useCallback(function()
 			-- upvalues: feedItemId (ref), var6 (ref), p1 (ref)
 			if feedItemId ~= nil and feedItemId ~= "" then

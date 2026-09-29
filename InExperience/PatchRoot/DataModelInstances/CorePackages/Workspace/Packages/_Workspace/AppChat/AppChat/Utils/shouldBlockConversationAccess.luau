@@ -1,8 +1,0 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local shouldShowOSAForConversationModule = require(appChat.Utils.shouldShowOSAForConversation)
-local shouldShowU13ChatOptInForConversationModule = require(appChat.Utils.shouldShowU13ChatOptInForConversation)
-
-return function(p1)
-	-- upvalues: shouldShowOSAForConversationModule (ref), shouldShowU13ChatOptInForConversationModule (ref)
-	return shouldShowOSAForConversationModule(p1) or shouldShowU13ChatOptInForConversationModule(p1)
-end

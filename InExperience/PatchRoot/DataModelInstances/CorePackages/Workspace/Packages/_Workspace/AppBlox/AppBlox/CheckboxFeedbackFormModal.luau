@@ -16,6 +16,7 @@ local checkbox = foundationModule.Checkbox
 local dialog = foundationModule.Dialog
 local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local useLocalization = localizationModule.Hooks.useLocalization
 local navigateDown = navigationRoduxModule.Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
@@ -26,10 +27,11 @@ local useAppPolicy = universalAppPolicyModule.useAppPolicy
 local urlBuilder = urlBuilderModule.UrlBuilder
 local fFlagLuaAppMakeDisclaimerOptInForFeedbackForm = sharedFlagsModule.FFlagLuaAppMakeDisclaimerOptInForFeedbackForm
 local fFlagLuaAppNotInterestedFeedbackFormTelemetry = sharedFlagsModule.FFlagLuaAppNotInterestedFeedbackFormTelemetry
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local luaAppCheckboxFeedbackFormTitleTextWrapping = game:DefineFastFlag("LuaAppCheckboxFeedbackFormTitleTextWrapping", false)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), useTokens (ref), useLocalization (ref), reactModule (ref), closeCentralOverlay (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), cryoModule (ref), checkbox (ref), useAppPolicy (ref), appPage (ref), urlBuilder (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), dialog (ref), text (ref), luaAppCheckboxFeedbackFormTitleTextWrapping (ref), buttonVariant (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref)
+	-- upvalues: useDispatch (ref), useTokens (ref), useLocalization (ref), reactModule (ref), closeCentralOverlay (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), cryoModule (ref), checkbox (ref), useAppPolicy (ref), appPage (ref), urlBuilder (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), dialog (ref), text (ref), luaAppCheckboxFeedbackFormTitleTextWrapping (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), buttonVariant (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref)
 	local var2 = useDispatch()
 	local var3 = useTokens()
 	local var4 = useLocalization({
@@ -142,7 +144,8 @@ return reactModule.memo(function(p1)
 					AutomaticSize = Enum.AutomaticSize.Y,
 					BackgroundTransparency = 1,
 					ClearTextOnFocus = false,
-					Font = var3.Typography.CaptionMedium.Font,
+					Font = if foundationFontFaceMigration then nil else var3.Typography.CaptionMedium.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Typography.CaptionMedium.Font) else nil,
 					LineHeight = var3.LineHeight.LineHeight_140,
 					MultiLine = true,
 					PlaceholderColor3 = var3.Color.Content.Muted.Color3,

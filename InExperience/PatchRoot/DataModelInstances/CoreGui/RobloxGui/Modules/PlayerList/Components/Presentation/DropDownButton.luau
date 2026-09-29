@@ -7,8 +7,10 @@ local foundationModule = require(corePackagesService.Packages.Foundation)
 local iconName = foundationModule.Enums.IconName
 local iconVariant = foundationModule.Enums.IconVariant
 local iconSize = foundationModule.Enums.IconSize
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local parent = script.Parent.Parent
 local withLayoutValues = require(parent.Connection.LayoutValues).WithLayoutValues
 local iconButtonModule = require(parent.PresentationCommon.IconButton)
@@ -71,11 +73,13 @@ function dropDownButton.getColorBackgroundAnimation(value, p1)
 end
 
 function dropDownButton.render(p1)
-	-- upvalues: withLayoutValues (ref), withFoundationOrUIBloxStyle (ref), enabled (ref), colors (ref), fFlagAllowDisplayingFoundationIconsForDropdownModule (ref), iconName (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), iconSize (ref), roactModule (ref), foundationModule (ref), iconVariant (ref), imageSetLabel (ref), iconButtonModule (ref), images (ref)
+	-- upvalues: withLayoutValues (ref), withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), enabled (ref), colors (ref), fFlagAllowDisplayingFoundationIconsForDropdownModule (ref), iconName (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), iconSize (ref), roactModule (ref), foundationModule (ref), iconVariant (ref), imageSetLabel (ref), normalizeFontFace (ref), iconButtonModule (ref), images (ref)
 	return withLayoutValues(function(p2)
-		-- upvalues: withFoundationOrUIBloxStyle (copy), enabled (copy), p1 (ref), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), iconSize (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), imageSetLabel (copy), iconButtonModule (copy), images (copy)
+		-- upvalues: withFoundationOrUIBloxStyle (copy), foundationFontFaceMigration (copy), enabled (copy), p1 (ref), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), iconSize (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), imageSetLabel (copy), normalizeFontFace (copy), iconButtonModule (copy), images (copy)
 		return withFoundationOrUIBloxStyle(function(p3, p4)
+			-- upvalues: foundationFontFaceMigration (copy)
 			return {
+				Tokens = if foundationFontFaceMigration then p3 else nil,
 				Theme = {
 					BackgroundContrast = {
 						Color = p3.Color.Surface.Surface_100.Color3,
@@ -116,7 +120,7 @@ function dropDownButton.render(p1)
 				Settings = { PreferredTransparency = p4.preferredTransparency }
 			}
 		end, function(p3)
-			-- upvalues: enabled (copy), p2 (ref), p1 (copy), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), iconSize (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), imageSetLabel (copy), iconButtonModule (copy), images (copy)
+			-- upvalues: enabled (copy), p2 (ref), p1 (copy), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), iconSize (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), imageSetLabel (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), iconButtonModule (copy), images (copy)
 			local t = {
 				Color = if enabled() then p3.Theme.BackgroundUIContrast.Color else p3.Theme.BackgroundContrast.Color,
 				Transparency = p2.OverrideBackgroundTransparency * p3.Settings.PreferredTransparency
@@ -288,7 +292,8 @@ function dropDownButton.render(p1)
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, -var7, 1, 0),
 						Text = p1.props.text,
-						Font = p3.Font.Header2.Font,
+						Font = if foundationFontFaceMigration then nil else p3.Font.Header2.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.TitleLarge.Font) else nil,
 						TextSize = p3.Font.BaseSize * p3.Font.Header2.RelativeSize,
 						TextColor3 = p3.Theme.TextEmphasis.Color,
 						TextTransparency = p3.Theme.TextEmphasis.Transparency,

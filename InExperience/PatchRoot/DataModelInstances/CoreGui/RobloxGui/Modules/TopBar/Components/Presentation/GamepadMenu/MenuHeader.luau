@@ -2,6 +2,9 @@
 local roactModule = require(corePackagesService.Packages.Roact)
 local tModule = require(corePackagesService.Packages.t)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
 local withStyle = UIBloxModule.Core.Style.withStyle
 local images = UIBloxModule.App.ImageSet.Images
@@ -17,9 +20,9 @@ menuHeader.validateProps = tModule.strictInterface({
 })
 
 function menuHeader.render(p1)
-	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), circle17 (ref), rect (ref), imageUnavailable (ref)
+	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), circle17 (ref), rect (ref), imageUnavailable (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	return withStyle(function(p2)
-		-- upvalues: roactModule (copy), imageSetLabel (copy), circle17 (copy), rect (copy), imageUnavailable (copy), p1 (ref)
+		-- upvalues: roactModule (copy), imageSetLabel (copy), circle17 (copy), rect (copy), imageUnavailable (copy), p1 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		local theme = p2.Theme
 		local font = p2.Font
 		
@@ -74,7 +77,8 @@ function menuHeader.render(p1)
 						TextWrapped = true,
 						Size = UDim2.new(1, 0, 1, -45),
 						Position = UDim2.fromOffset(0, 25),
-						Font = font.Header1.Font,
+						Font = if foundationFontFaceMigration then nil else font.Header1.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.HeadingSmall.Font) else nil,
 						Text = p1.props.gameName,
 						TextSize = font.BaseSize * font.Header1.RelativeSize,
 						TextColor3 = theme.TextEmphasis.Color,

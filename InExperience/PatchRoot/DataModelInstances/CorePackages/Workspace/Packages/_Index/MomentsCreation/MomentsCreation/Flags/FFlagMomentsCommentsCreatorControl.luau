@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("MomentsCommentsCreatorControl", false) and game:GetEngineFeature("MomentsCreatePostCommentsControl")

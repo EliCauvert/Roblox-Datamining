@@ -4,6 +4,9 @@ local robloxGui = coreGuiService:WaitForChild("RobloxGui")
 local reactModule = require(corePackagesService.Packages.React)
 local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
 local _ = require(corePackagesService.Workspace.Packages.LeaderboardStore)
 local gameTranslatorModule = require(robloxGui.Modules.GameTranslator)
@@ -22,7 +25,7 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: t (ref), useLayoutValues (ref), useStyle (ref), reactModule (ref), robloxTranslatorModule (ref), fFlagEnableMobilePlayerListOnConsole (ref), fFlagPlayerListFixLeaderstatsStacking (ref), signalsReactModule (ref), gameTranslatorModule (ref), coreGuiService (ref), corePackagesService (ref)
+	-- upvalues: t (ref), useLayoutValues (ref), useStyle (ref), reactModule (ref), robloxTranslatorModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), fFlagEnableMobilePlayerListOnConsole (ref), fFlagPlayerListFixLeaderstatsStacking (ref), signalsReactModule (ref), gameTranslatorModule (ref), coreGuiService (ref), corePackagesService (ref)
 	local t_1 = {}
 	
 	for i, v in pairs(t) do
@@ -50,7 +53,8 @@ return reactModule.memo(function(p1)
 		Text = robloxTranslatorModule:FormatByKey("InGame.PlayerList.Players"),
 		TextXAlignment = Enum.TextXAlignment.Left,
 		TextYAlignment = Enum.TextYAlignment.Center,
-		Font = var2.Font.Footer.Font,
+		Font = if foundationFontFaceMigration then nil else var2.Font.Footer.Font,
+		FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionSmall.Font) else nil,
 		TextSize = if fFlagEnableMobilePlayerListOnConsole then var1.TitleBarTextSize else var2.Font.BaseSize * var2.Font.Footer.RelativeSize,
 		TextTransparency = var5,
 		TextColor3 = var4
@@ -69,7 +73,8 @@ return reactModule.memo(function(p1)
 					Text = gameTranslatorModule:TranslateGameText(coreGuiService, i_2),
 					TextXAlignment = Enum.TextXAlignment.Center,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					Font = var2.Font.Footer.Font,
+					Font = if foundationFontFaceMigration then nil else var2.Font.Footer.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionSmall.Font) else nil,
 					TextSize = if fFlagEnableMobilePlayerListOnConsole then var1.TitleBarTextSize else var2.Font.BaseSize * var2.Font.Footer.RelativeSize,
 					TextTransparency = var5,
 					TextColor3 = var4,
@@ -79,7 +84,7 @@ return reactModule.memo(function(p1)
 		end
 	elseif t_1.gameStatsCount and t_1.gameStatsCount > 0 then
 		t_1.gameStats.iterateData(function(p2, p3)
-			-- upvalues: maxLeaderstats (ref), gameTranslatorModule (copy), coreGuiService (copy), t_2 (ref), reactModule (copy), var1 (ref), var2 (ref), fFlagEnableMobilePlayerListOnConsole (copy), var5 (ref), var4 (ref)
+			-- upvalues: maxLeaderstats (ref), gameTranslatorModule (copy), coreGuiService (copy), t_2 (ref), reactModule (copy), var1 (ref), foundationFontFaceMigration (copy), var2 (ref), normalizeFontFace (copy), fFlagEnableMobilePlayerListOnConsole (copy), var5 (ref), var4 (ref)
 			if maxLeaderstats < p3.order(false) then
 				return
 			end
@@ -90,7 +95,8 @@ return reactModule.memo(function(p1)
 				Text = gameTranslatorModule:TranslateGameText(coreGuiService, p2),
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				Font = var2.Font.Footer.Font,
+				Font = if foundationFontFaceMigration then nil else var2.Font.Footer.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionSmall.Font) else nil,
 				TextSize = if fFlagEnableMobilePlayerListOnConsole then var1.TitleBarTextSize else var2.Font.BaseSize * var2.Font.Footer.RelativeSize,
 				TextTransparency = var5,
 				TextColor3 = var4,

@@ -3,8 +3,6 @@
 	RECEIVED_BUBBLE_WITH_TAIL = "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble.png",
 	SENT_BUBBLE_WITH_TAIL = "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self.png",
 	TAIL_WIDTH = 6,
-	SENT_TAIL = "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self-tip.png",
-	RECEIVED_TAIL = "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-tip.png",
 	REPLIED_TO_MARKER_WIDTH = 4,
 	REPLIED_TO_MARKER_GAP = 10,
 	GROUPED_BUBBLE_SINGLE = "chat_bubble/chat-bubble-single",

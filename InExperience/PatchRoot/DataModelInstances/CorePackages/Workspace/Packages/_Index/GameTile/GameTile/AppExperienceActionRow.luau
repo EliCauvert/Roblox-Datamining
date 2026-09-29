@@ -35,6 +35,7 @@ local useUserExperiment = require(parent.RoactAppExperiment).useUserExperiment
 local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local fFlagLuaAppEnablePlaySquadButton = require(parent.SharedFlags).FFlagLuaAppEnablePlaySquadButton
+local fFlagDebugEnablePopForcePicker = require(parent.SharedFlags).FFlagDebugEnablePopForcePicker
 local fFlagLuaAppEnablePlayableStateWhenLoading = require(parent.SharedFlags).FFlagLuaAppEnablePlayableStateWhenLoading
 local fFlagLuaAppSupportDisablePlayableWhenLoading = require(parent.SharedFlags).FFlagLuaAppSupportDisablePlayableWhenLoading
 local fFlagLuaAppDisablePlayableWhenLoadingForce = require(parent.SharedFlags).FFlagLuaAppDisablePlayableWhenLoadingForce
@@ -121,7 +122,7 @@ function appExperienceActionRow.willUnmount(p1)
 end
 
 function appExperienceActionRow.render(p1)
-	-- upvalues: fFlagLuaAppUnifyPlayButtonTile (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), fFlagLuaAppUnifyPlayButtonTileIxp (ref), gameTileExperimentationModule (ref), withLocalization (ref), roactModule (ref), playButton (ref), buttonSize (ref), var1 (ref), fFlagLuaAppPlayButtonPrivatePT (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), experienceActionRow (ref), fFlagLuaAppSupportDisablePlayableWhenLoading (ref), playButtonStates (ref), fFlagLuaAppEnablePlaySquadButton (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref)
+	-- upvalues: fFlagLuaAppUnifyPlayButtonTile (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), fFlagLuaAppUnifyPlayButtonTileIxp (ref), gameTileExperimentationModule (ref), withLocalization (ref), roactModule (ref), playButton (ref), buttonSize (ref), var1 (ref), fFlagLuaAppPlayButtonPrivatePT (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), experienceActionRow (ref), fFlagLuaAppSupportDisablePlayableWhenLoading (ref), playButtonStates (ref), fFlagLuaAppEnablePlaySquadButton (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref), fFlagDebugEnablePopForcePicker (ref), parent (ref)
 	if fFlagLuaAppUnifyPlayButtonTile then
 		if p1.props.isUnifiedGameTileEnabled and (not fFlagLuaAppUnifyPlayButtonTileIxp and not fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or (if fFlagLuaAppUnifyPlayButtonAllSurfacesIxp then p1.props.hasUnifiedPlayButtonIxp else fFlagLuaAppUnifyPlayButtonTileIxp and gameTileExperimentationModule.getIsPlayButtonMigrationEnabled())) then
 			local horizontalPadding = p1.props.horizontalPadding or 0
@@ -151,7 +152,7 @@ function appExperienceActionRow.render(p1)
 			end)
 		end
 	end
-	return withLocalization({
+	local var2 = withLocalization({
 		unlockText = "Feature.ExperienceDetails.PlayButtonText.Unlock",
 		unavailableText = "Feature.ExperienceDetails.PlayButtonText.Unavailable",
 		buyText = "Feature.ExperienceDetails.PlayButtonText.Buy",
@@ -160,17 +161,17 @@ function appExperienceActionRow.render(p1)
 		playText = if fFlagLuaAppTextOnlyPlayButton or fFlagLuaAppIconTextPlayButton then if fFlagLuaAppUpdatePlayButtonText then "Feature.ExperienceDetails.PlayButtonText.Play" else "Feature.ExperienceDetails.PlayButtonText.ActionNeeded" else nil
 	})(function(p2)
 		-- upvalues: roactModule (copy), experienceActionRow (copy), p1 (ref), fFlagLuaAppSupportDisablePlayableWhenLoading (copy), playButtonStates (copy), fFlagLuaAppEnablePlaySquadButton (copy), getFFlagUIBloxUseFoundationButton (copy), fFlagLuaAppPlayButtonOptOutFoundationButton (copy)
-		local var2
+		local var3
 		local createElement = roactModule.createElement
 		local t = { isActionable = p1:isButtonEnabled() }
 		
 		if fFlagLuaAppSupportDisablePlayableWhenLoading then
-			var2 = p1.props.playButtonState == playButtonStates.Loading
-			var2 = nil
+			var3 = p1.props.playButtonState == playButtonStates.Loading
+			var3 = nil
 		else
-			var2 = nil
+			var3 = nil
 		end
-		t.buttonLoading = var2
+		t.buttonLoading = var3
 		t.text = p1:getButtonText(p2)
 		t.icon = p1:getButtonIcon()
 		t.buttonType = p1:getButtonType()
@@ -183,6 +184,37 @@ function appExperienceActionRow.render(p1)
 		
 		return createElement(experienceActionRow, t)
 	end)
+	
+	return if fFlagDebugEnablePopForcePicker then roactModule.createElement("Frame", {
+		Name = "PopForcePickerWrapper",
+		BackgroundTransparency = 1,
+		BorderSizePixel = 0,
+		Size = UDim2.fromScale(1, 1)
+	}, {
+		Layout = roactModule.createElement("UIListLayout", {
+			FillDirection = Enum.FillDirection.Horizontal,
+			VerticalAlignment = Enum.VerticalAlignment.Center,
+			SortOrder = Enum.SortOrder.LayoutOrder,
+			Padding = UDim.new(0, 8)
+		}),
+		PlaySlot = roactModule.createElement("Frame", {
+			LayoutOrder = 1,
+			BackgroundTransparency = 1,
+			Size = UDim2.fromScale(0, 1)
+		}, {
+			Flex = roactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
+			AppExperienceActionRow = var2
+		}),
+		PopForcePickerAnchor = roactModule.createElement("Frame", {
+			LayoutOrder = 2,
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.fromOffset(0, 0),
+			AutomaticSize = Enum.AutomaticSize.XY
+		}, {
+			Picker = roactModule.createElement(require(parent.GamePlayButton.PopForcePicker), { compact = true })
+		})
+	}) else var2
 end
 
 function appExperienceActionRow.isOverflowButtonVisible(p1)

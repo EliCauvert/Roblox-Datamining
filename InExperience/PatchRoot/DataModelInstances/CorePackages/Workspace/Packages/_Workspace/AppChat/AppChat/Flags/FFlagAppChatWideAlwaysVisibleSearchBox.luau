@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AppChatWideAlwaysVisibleSearchBoxV1", false) and require(script:FindFirstAncestor("AppChat").Flags.FFlagAppChatFoundationSearchInput)

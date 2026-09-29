@@ -8,6 +8,7 @@ local _ = require(vrSpatialUi.DragBar)
 local UIGroupStateModule = require(vrSpatialUi.UIGroupState)
 local panelManagedAnimatableModule = require(vrSpatialUi.PanelManagedAnimatable)
 local fFlagEnableSpatialUIBottomBarFixPlaceFilterModule = require(vrSpatialUi.Flags.FFlagEnableSpatialUIBottomBarFixPlaceFilter)
+local fFlagSpatialUIHiddenPanelRaycastFixModule = require(vrSpatialUi.Flags.FFlagSpatialUIHiddenPanelRaycastFix)
 local inExperienceUIVRIXP = require(parent.SharedExperimentDefinition).InExperienceUIVRIXP
 local spatialUIEnableCameraCacheFix = game:DefineFastFlag("SpatialUIEnableCameraCacheFix", false)
 local radians = math.rad(game:DefineFastInt("SpatialUIRepositionDeviationAngle", 10))
@@ -91,6 +92,16 @@ function setPanelEnabledWithoutReparent(value, p3)
 	end
 end
 
+function setPanelVisibleState(value, p3, p4)
+	-- upvalues: fFlagEnableSpatialUIBottomBarFixPlaceFilterModule (ref), constantsModule (ref)
+	if fFlagEnableSpatialUIBottomBarFixPlaceFilterModule and p3 == constantsModule.PanelType.BottomBar then
+		setPanelEnabledWithoutReparent(value, p4)
+		
+		return
+	end
+	setPanelParent(value, if p4 then workspace else nil)
+end
+
 local t = {}
 t.__index = t
 
@@ -122,8 +133,30 @@ function t:animateBottomBarOnHeadMoveIfNeeded(_, p3, p4)
 	self.currentBottomBarAnimatable:animateShowIfNeeded()
 end
 
+function t:isGroupVisibleForPanel(p3, p4)
+	local var1 = getUIGroupTypeForPanel(p4, p3)
+	local var2 = if var1 then self.uiGroupVisibilityMap[var1] else nil
+	
+	return if var2 then var2.value:get() else true
+end
+
+function t:applyGroupPanelsEnabled(p3, p4, p5)
+	local var1 = self.uiGroupVisibilityMap[p3]
+	local var2 = self:isTopBarVisible() and (if var1 then var1.value:get() else true)
+	
+	if p5 and var2 then
+		return
+	end
+	visitAllPanels(p4, function(p6, p7)
+		-- upvalues: p4 (ref), p3 (ref), var2 (ref)
+		if not isTempPanel(p6) and getUIGroupTypeForPanel(p4, p6) == p3 then
+			setPanelVisibleState(p7, p6, var2)
+		end
+	end)
+end
+
 function t:updateAllElements(p3, p4)
-	-- upvalues: UIGroupStateModule (ref), constantsModule (ref), fFlagEnableSpatialUIBottomBarFixPlaceFilterModule (ref), panelManagedAnimatableModule (ref)
+	-- upvalues: UIGroupStateModule (ref), constantsModule (ref), fFlagSpatialUIHiddenPanelRaycastFixModule (ref), fFlagEnableSpatialUIBottomBarFixPlaceFilterModule (ref), panelManagedAnimatableModule (ref)
 	local var1 = self:isTopBarVisible()
 	
 	if var1 then
@@ -136,11 +169,15 @@ function t:updateAllElements(p3, p4)
 	end
 	self:updateAllDragBar(p3, p4)
 	visitAllPanels(p3, function(p5, p6)
-		-- upvalues: constantsModule (copy), var1 (ref), fFlagEnableSpatialUIBottomBarFixPlaceFilterModule (copy), self (ref), UIGroupStateModule (copy), panelManagedAnimatableModule (copy)
+		-- upvalues: constantsModule (copy), var1 (ref), fFlagSpatialUIHiddenPanelRaycastFixModule (copy), self (ref), p3 (ref), fFlagEnableSpatialUIBottomBarFixPlaceFilterModule (copy), UIGroupStateModule (copy), panelManagedAnimatableModule (copy)
 		local var2 = p5 == constantsModule.PanelType.BottomBar
 		
 		if var1 then
-			if fFlagEnableSpatialUIBottomBarFixPlaceFilterModule and var2 then
+			if fFlagSpatialUIHiddenPanelRaycastFixModule and not self:isGroupVisibleForPanel(p5, p3) then
+				setPanelVisibleState(p6, p5, false)
+				
+				return
+			elseif fFlagEnableSpatialUIBottomBarFixPlaceFilterModule and var2 then
 				setPanelEnabledWithoutReparent(p6, true)
 				
 				return
@@ -175,18 +212,24 @@ function t:updateAllElements(p3, p4)
 end
 
 function t:connectPanelVisibility(p3, p4, p5, p6)
+	-- upvalues: fFlagSpatialUIHiddenPanelRaycastFixModule (ref)
 	if isTempPanel(p3) then return end
 	self:disconnectPanelVisibility(p3, p5, p6)
 	local var1 = getUIGroupTypeForPanel(p5, p3)
 	
-	if var1 then
-		self.uiGroupVisibilityMap[var1] = connect(p4, function()
-			-- upvalues: self (ref), p3 (ref), p5 (ref), p6 (ref)
-			self:updateDragBar(p3, p5, p6)
-		end)
+	if not var1 then return end
+	self.uiGroupVisibilityMap[var1] = connect(p4, function()
+		-- upvalues: self (ref), p3 (ref), p5 (ref), p6 (ref), fFlagSpatialUIHiddenPanelRaycastFixModule (copy), var1 (ref)
 		self:updateDragBar(p3, p5, p6)
 		
-		return
+		if fFlagSpatialUIHiddenPanelRaycastFixModule then
+			self:applyGroupPanelsEnabled(var1, p5)
+		end
+	end)
+	self:updateDragBar(p3, p5, p6)
+	
+	if fFlagSpatialUIHiddenPanelRaycastFixModule then
+		self:applyGroupPanelsEnabled(var1, p5, true)
 	end
 end
 

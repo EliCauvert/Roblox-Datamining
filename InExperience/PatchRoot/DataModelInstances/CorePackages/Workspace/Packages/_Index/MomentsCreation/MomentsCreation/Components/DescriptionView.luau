@@ -7,8 +7,10 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
+local inputPlacement = foundationModule.Enums.InputPlacement
 local inputSize = foundationModule.Enums.InputSize
 local text = foundationModule.Text
+local toggle = foundationModule.Toggle
 local view = foundationModule.View
 local useCallback = reactModule.useCallback
 local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
@@ -24,9 +26,29 @@ local eventNames = momentsCommonModule.Analytics.EventNames
 local sessionManager = momentsCommonModule.Analytics.SessionManager
 local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
 local fFlagMomentTextGenerationFilteredSignal = momentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
+local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
+local fFlagMomentsCommentsCreatorControlModule = require(momentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
+
+local function AllowCommentsToggle(p1)
+	-- upvalues: getCreationFlowStoreModule (ref), useSignalState (ref), useCallback (ref), reactModule (ref), toggle (ref), inputPlacement (ref), inputSize (ref)
+	local var1 = getCreationFlowStoreModule(false)
+	
+	return reactModule.createElement(toggle, {
+		label = "Allow comments",
+		testId = "moments-allow-comments-toggle",
+		isChecked = useSignalState(var1.getCommentsEnabled),
+		LayoutOrder = p1.layoutOrder,
+		onActivated = useCallback(function(p2)
+			-- upvalues: var1 (ref)
+			var1.updateCommentsEnabled(p2)
+		end, { var1.updateCommentsEnabled }),
+		placement = inputPlacement.End,
+		size = inputSize.Medium
+	})
+end
 
 return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), getCreationFlowStoreModule (ref), reactModule (ref), useSignalState (ref), useCallback (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), view (ref), constantsModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), generatedTextFeedbackContainerModule (ref), button (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref), text (ref)
+	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), getCreationFlowStoreModule (ref), reactModule (ref), useSignalState (ref), fFlagMomentsCommentsCreatorControlModule (ref), getFFlagMomentsUseUploadPostAsync (ref), useCallback (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), view (ref), constantsModule (ref), AllowCommentsToggle (ref), fFlagMomentTextGenerationFilteredSignal (ref), generatedTextFeedbackContainerModule (ref), button (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref), text (ref)
 	local var1 = useDeviceInsets()
 	local var2 = useTokens()
 	local var3 = useCreationFlowStringsModule()
@@ -42,6 +64,7 @@ return function(p1)
 			current.Text = var6
 		end
 	end, { var6 })
+	local var7 = fFlagMomentsCommentsCreatorControlModule and getFFlagMomentsUseUploadPostAsync()
 	
 	return reactModule.createElement(view, {
 		tag = "align-x-center size-full-0 auto-y",
@@ -78,14 +101,14 @@ return function(p1)
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
 					[reactModule.Change.Text] = useCallback(function(p2)
-						local var7 = p2.Text:gsub("[\r\n]+", " ")
-						local charCount = utf8.len(var7)
+						local var8 = p2.Text:gsub("[\r\n]+", " ")
+						local charCount = utf8.len(var8)
 						
 						if charCount ~= nil and charCount >= 140 then
-							var7 = string.sub(var7, 1, utf8.offset(var7, 141) - 1)
+							var8 = string.sub(var8, 1, utf8.offset(var8, 141) - 1)
 						end
-						if var7 ~= p2.Text then
-							p2.Text = var7
+						if var8 ~= p2.Text then
+							p2.Text = var8
 						end
 					end, {}),
 					[reactModule.Event.FocusLost] = useCallback(function()
@@ -96,10 +119,11 @@ return function(p1)
 					end, { var4.updateDescription })
 				})
 			}),
-			GeneratedTextFeedback = if fFlagMomentTextGenerationFilteredSignal then reactModule.createElement(generatedTextFeedbackContainerModule, { layoutOrder = 1 }) else nil,
+			AllowComments = if var7 then reactModule.createElement(AllowCommentsToggle, { layoutOrder = 1 }) else nil,
+			GeneratedTextFeedback = if fFlagMomentTextGenerationFilteredSignal then reactModule.createElement(generatedTextFeedbackContainerModule, { layoutOrder = if var7 then 2 else 1 }) else nil,
 			CTAs = reactModule.createElement(view, {
-				LayoutOrder = 2,
-				tag = "row align-x-center align-y-bottom gap-small position-bottom-center anchor-bottom-center size-full-0 auto-y"
+				tag = "row align-x-center align-y-bottom gap-small position-bottom-center anchor-bottom-center size-full-0 auto-y",
+				LayoutOrder = if var7 then 3 else 2
 			}, {
 				PostButton = reactModule.createElement(button, {
 					LayoutOrder = 1,
@@ -121,8 +145,8 @@ return function(p1)
 				})
 			}),
 			Disclaimer = reactModule.createElement(text, {
-				LayoutOrder = 3,
 				tag = "auto-xy text-body-small text-align-x-center text-align-y-top content-neutral",
+				LayoutOrder = if var7 then 4 else 3,
 				Text = var3.CreationTooltip
 			})
 		})

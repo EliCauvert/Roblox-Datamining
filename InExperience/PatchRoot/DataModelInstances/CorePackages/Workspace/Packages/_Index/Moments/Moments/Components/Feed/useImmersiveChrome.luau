@@ -11,6 +11,7 @@ local fFlagMomentsImmersiveChromeModule = require(moments.Flags.FFlagMomentsImme
 local getFIntMomentsImmersiveHideAfterAdvancesModule = require(moments.Flags.GetFIntMomentsImmersiveHideAfterAdvances)
 local getFIntMomentsImmersiveShownDwellMsModule = require(moments.Flags.GetFIntMomentsImmersiveShownDwellMs)
 local getFIntMomentsImmersiveHiddenCooldownMsModule = require(moments.Flags.GetFIntMomentsImmersiveHiddenCooldownMs)
+local getFFlagMomentsPersistHeaderOnProfilePeekModule = require(moments.Flags.GetFFlagMomentsPersistHeaderOnProfilePeek)
 local analytics = momentsCommonModule.Analytics
 local eventNames = analytics.EventNames
 local fireAnalyticsEvent = analytics.fireAnalyticsEvent
@@ -21,7 +22,7 @@ local function defaultFireEvent(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), getImmersiveChromeStoreModule (ref), fFlagMomentsImmersiveChromeModule (ref), defaultFireEvent (ref), getFIntMomentsImmersiveHideAfterAdvancesModule (ref), getFIntMomentsImmersiveShownDwellMsModule (ref), getFIntMomentsImmersiveHiddenCooldownMsModule (ref), immersiveChromeMachineModule (ref), signalsModule (ref), useSignalState (ref)
+	-- upvalues: reactModule (ref), getImmersiveChromeStoreModule (ref), fFlagMomentsImmersiveChromeModule (ref), defaultFireEvent (ref), getFIntMomentsImmersiveHideAfterAdvancesModule (ref), getFIntMomentsImmersiveShownDwellMsModule (ref), getFIntMomentsImmersiveHiddenCooldownMsModule (ref), immersiveChromeMachineModule (ref), signalsModule (ref), useSignalState (ref), getFFlagMomentsPersistHeaderOnProfilePeekModule (ref)
 	local pager = p1.pager
 	local active = p1.active
 	local getActiveIsPlaying = p1.getActiveIsPlaying
@@ -72,13 +73,34 @@ return function(p1)
 			var7.onActiveUpdate(currentIndex, var8, var9)
 		end)
 	end, { pager, getActiveIsPlaying, getIsScrolling, var7 })
-	local getOverlayCovering = useSignalState(var2.getOverlayCovering) or var1
+	local var8 = useSignalState(var2.getOverlayCovering)
+	local var9 = getFFlagMomentsPersistHeaderOnProfilePeekModule()
+	local var10 = if var9 then var1 else var8 or var1
+	local var11 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: active (ref), inputAllowed (ref), reducedMotion (ref), var3 (ref), var7 (ref), getOverlayCovering (ref)
-		var7.setForceShow((not active or (not inputAllowed or (reducedMotion or not var3))) and not getOverlayCovering)
-		var7.setForceHide(getOverlayCovering)
+		-- upvalues: var9 (ref), var8 (ref), active (ref), var11 (ref), inputAllowed (ref), reducedMotion (ref), var3 (ref), var7 (ref), var1 (ref), var10 (ref)
+		if var9 then
+			if var8 and not active then
+				var11.current = true
+			elseif active then
+				var11.current = false
+			end
+		end
+		local var12 = not active
+		
+		if var12 then
+			var12 = not (var9 and var11.current)
+		end
+		local setForceShow = var7.setForceShow
+		local var13 = var12 or (not inputAllowed or (reducedMotion or not var3))
+		
+		if var13 then
+			var13 = not (var8 or var1)
+		end
+		setForceShow(var13)
+		var7.setForceHide(var10)
 	end, {
-		active, inputAllowed, reducedMotion, var3, getOverlayCovering, var7
+		active, inputAllowed, reducedMotion, var3, var8, var1, var10, var9, var7
 	})
 	reactModule.useEffect(function()
 		-- upvalues: var2 (ref), var7 (ref)

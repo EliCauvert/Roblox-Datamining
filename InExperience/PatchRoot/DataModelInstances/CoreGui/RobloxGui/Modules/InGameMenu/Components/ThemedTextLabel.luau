@@ -3,8 +3,22 @@ local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGame
 local roact = inGameMenuDependenciesModule.Roact
 local cryo = inGameMenuDependenciesModule.Cryo
 local t = inGameMenuDependenciesModule.t
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local globalConfigModule = require(script.Parent.Parent.GlobalConfig)
+local t_1 = {
+	Title = "HeadingLarge",
+	Header1 = "HeadingSmall",
+	Header2 = "TitleLarge",
+	SubHeader1 = "TitleLarge",
+	Body = "BodyLarge",
+	CaptionHeader = "CaptionLarge",
+	CaptionSubHeader = "CaptionLarge",
+	CaptionBody = "BodySmall",
+	Footer = "CaptionSmall"
+}
 local var1 = t.strictInterface({
 	themeKey = t.optional(t.string),
 	fontKey = t.optional(t.string),
@@ -26,12 +40,14 @@ local var1 = t.strictInterface({
 })
 
 return function(p1)
-	-- upvalues: globalConfigModule (ref), var1 (ref), withFoundationOrUIBloxStyle (ref), cryo (ref), roact (ref)
+	-- upvalues: globalConfigModule (ref), var1 (ref), withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), t_1 (ref), normalizeFontFace (ref), cryo (ref), roact (ref)
 	if globalConfigModule.propValidation then
 		assert(var1(p1))
 	end
 	return withFoundationOrUIBloxStyle(function(p2)
+		-- upvalues: foundationFontFaceMigration (copy)
 		return {
+			Tokens = if foundationFontFaceMigration then p2 else nil,
 			Theme = {
 				BackgroundDefault = {
 					Color = p2.Color.Surface.Surface_0.Color3,
@@ -207,7 +223,7 @@ return function(p1)
 			}
 		}
 	end, function(p2)
-		-- upvalues: p1 (ref), cryo (copy), roact (copy)
+		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), t_1 (copy), normalizeFontFace (copy), cryo (copy), roact (copy)
 		local var2 = p2.Theme[p1.themeKey or "TextDefault"]
 		local var3 = p2.Font[p1.fontKey or "Body"]
 		
@@ -218,7 +234,8 @@ return function(p1)
 			BackgroundTransparency = 1,
 			fontKey = cryo.None,
 			themeKey = cryo.None,
-			Font = var3.Font,
+			Font = if foundationFontFaceMigration then cryo.None else var3.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace((p2.Tokens.Typography[t_1[p1.fontKey or "Body"]] or var3).Font) else nil,
 			TextSize = var3.RelativeSize * p2.Font.BaseSize
 		}))
 	end)

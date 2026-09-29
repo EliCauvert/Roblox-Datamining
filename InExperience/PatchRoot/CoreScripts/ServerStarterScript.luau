@@ -22,10 +22,8 @@ if serverUtilModule.getFFlagServerCoreScriptSourceCode() then
 	serverUtilModule.initSourceCodeFolder()
 end
 require(robloxGui.Modules.Server.RemoteAllowList)()
+scriptContextService:AddCoreScriptLocal("ServerCoreScripts/OpenCloud/OpenCloudV2", script.Parent)
 
-if game:DefineFastFlag("OpenCloudCoreScriptLuaEnabled", false) then
-	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/OpenCloud/OpenCloudV2", script.Parent)
-end
 if game:DefineFastFlag("OpenCloudClientLibraryCoreScriptEnabled", false) then
 	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/OpenCloud/OpenCloudClientLibraryCoreScript", script.Parent)
 end
@@ -62,7 +60,7 @@ local function getServerChannel_1()
 	return runService:GetRobloxClientChannel()
 end
 
-function getServerVersion.getServerVersion()
+function getServerVersion.DebugFreeCameraForAdmins()
 	-- upvalues: runService (ref)
 	local robloxVersion = runService:GetRobloxVersion()
 	local var1 = if robloxVersion == "?" then "DEBUG_SERVER" elseif runService:IsStudio() then "ROBLOX Studio" else robloxVersion

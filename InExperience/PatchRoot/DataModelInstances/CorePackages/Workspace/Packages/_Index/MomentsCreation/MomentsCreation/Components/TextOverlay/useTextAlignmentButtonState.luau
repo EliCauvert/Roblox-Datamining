@@ -2,12 +2,17 @@
 local parent = momentsCreation.Parent
 local builderIconsModule = require(parent.BuilderIcons)
 local dashModule = require(parent.Dash)
+local momentsCommonModule = require(parent.MomentsCommon)
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local useCallback = reactModule.useCallback
 local useMemo = reactModule.useMemo
 local useSignalState = signalsReactModule.useSignalState
+local eventNames = momentsCommonModule.Analytics.EventNames
+local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
+local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
+local fFlagMomentsTextOverlayV2Redesign = momentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
 local list = {
@@ -32,7 +37,7 @@ local function _(p1)
 end
 
 return function(value)
-	-- upvalues: useMemo (ref), signalsModule (ref), useSignalState (ref), useCallback (ref), list (ref), dashModule (ref), t (ref), builderIconsModule (ref)
+	-- upvalues: useMemo (ref), signalsModule (ref), useSignalState (ref), useCallback (ref), list (ref), dashModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), t (ref), builderIconsModule (ref)
 	return {
 		icon = t[useSignalState(useMemo(function()
 			-- upvalues: signalsModule (copy), value (ref)
@@ -46,7 +51,7 @@ return function(value)
 			end)
 		end, { value })).Name] or builderIconsModule.Icon.FourBarsHorizontalCenterAligned,
 		onActivated = useCallback(function()
-			-- upvalues: value (ref), list (copy), dashModule (copy)
+			-- upvalues: value (ref), list (copy), dashModule (copy), fFlagMomentsTextOverlayV2Redesign (copy), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
 			local activeSession = value.getActiveSession(false)
 			
 			if activeSession == nil then return end
@@ -64,6 +69,9 @@ return function(value)
 						dashModule.joinDeep(var1, { textOverlayStyle = { textXAlignment = center } })
 					})
 					
+					if fFlagMomentsTextOverlayV2Redesign then
+						fireAnalyticsEventModule(eventNames.EditingFlowTextOverlayAlignmentSelected, makeCreationEventFieldsModule.makeTextOverlayEventFields({ alignment = center.Name }))
+					end
 					return
 				end
 			end

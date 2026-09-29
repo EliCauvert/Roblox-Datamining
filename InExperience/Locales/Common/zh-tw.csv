@@ -2035,6 +2035,7 @@ Feature.Build.Description.BuildReplyNotif,在組建回覆你時收到通知。
 Feature.Build.Description.BuyRobuxToCreate,購買更多 Robux 以繼續創作，或等待明天重置的免費組建使用量。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 購買更多組建使用量，或等待每日上限重置。
 Feature.Build.Description.CampaignRunDates,你的活動將在 {startDate} – {endDate}期間投放
+Feature.Build.Description.ChooseAdCampaignLength,選擇廣告投放的時間長度。
 Feature.Build.Description.ChoosePlaytesters,選擇好友預覽你的遊戲。
 Feature.Build.Description.CreateDeveloperProduct,以 {PRICE} Robux 建立「{NAME}」，已下架。
 Feature.Build.Description.DeactivateDeveloperProduct,將開發者產品 {PRODUCT_ID} 下架。
@@ -2348,6 +2349,7 @@ Feature.Build.Placeholder.DescribeProduct,描述你想要銷售的產品
 Feature.Build.Placeholder.DescribeProductUpdate,描述一項更新
 Feature.Build.Prompt.CreateDeveloperProduct,協助我建立開發者產品、將其連接到遊戲中、驗證和發佈變更，並開放購買。
 Feature.Build.Title.AdCampaignDuration,為期 {durationDays} 天的廣告活動
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
 Feature.Build.Title.AdComplete,廣告已完成
 Feature.Build.Title.AdCreated,已建立廣告
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2378,6 +2380,7 @@ Feature.Build.Title.GetUsers,取得使用者
 Feature.Build.Title.ManagedPricingAcknowledgement,是否開啟管理定價功能？
 Feature.Build.Title.NoMonetizationProducts,開始在遊戲中賺取收入
 Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
+Feature.Build.Title.PickCampaign,選擇長度
 Feature.Build.Title.PlaytestInviteSendFailed,無法傳送邀請
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,無法新增以下使用者：
@@ -3000,14 +3003,6 @@ Feature.Chat.Response.ChatNameFullyModerated,群組名稱遭到過濾。
 Feature.Chat.Response.ChatNameFullyModerated.V2,群組名稱已審核。
 Feature.Chat.Response.NetworkError,網路錯誤
 Feature.Chat.RobloxConnectUnavailableWithUser,此使用者目前無法使用 Roblox Connect。
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,好友動態
-Feature.Chat.ShareGameToChat.NoFavoriteGames,沒有最愛遊戲
-Feature.Chat.ShareGameToChat.NoFriendActivity,暫時沒有好友動態
-Feature.Chat.ShareGameToChat.NoPopularGames,無熱門體驗
-Feature.Chat.ShareGameToChat.NoRecentGames,沒有近期紀錄
-Feature.Chat.ShareGameToChat.Popular,
-Feature.Chat.ShareGameToChat.Recent,最近玩過
 Feature.Chat.Text.NoConnections,你尚未新增任何好友。若要開始，請在 Roblox 上尋找並新增好友。
 Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.FriendsChat,好友聊天

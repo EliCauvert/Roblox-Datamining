@@ -5,6 +5,9 @@ local localizationModule = require(parent_1.Localization)
 local reactModule = require(parent_1.React)
 local roactUtilsModule = require(parent_1.RoactUtils)
 local UIBloxModule = require(parent_1.UIBlox)
+local foundationModule = require(parent_1.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useAnalyticsModule = require(parent.Analytics.useAnalytics)
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useLocalization = localizationModule.Hooks.useLocalization
@@ -22,7 +25,7 @@ local fFlagUseCaptureCommonComponentsModule = require(parent.Flags.FFlagUseCaptu
 local fFlagCapturesGalleryDespawnOnMenuCloseModule = require(parent.Flags.FFlagCapturesGalleryDespawnOnMenuClose)
 
 return function(p1)
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useSystemMenuDetectionModule (ref), useSelector (ref), constantsModule (ref), useLocalization (ref), reactModule (ref), eventNamesModule (ref), carouselOpenedModule (ref), fFlagCapturesGalleryDespawnOnMenuCloseModule (ref), fFlagUseCaptureCommonComponentsModule (ref), captureGridView (ref), galleryActionContainerModule (ref), captureItem (ref), galleryGridViewModule (ref)
+	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useSystemMenuDetectionModule (ref), useSelector (ref), constantsModule (ref), useLocalization (ref), reactModule (ref), eventNamesModule (ref), carouselOpenedModule (ref), fFlagCapturesGalleryDespawnOnMenuCloseModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), fFlagUseCaptureCommonComponentsModule (ref), captureGridView (ref), galleryActionContainerModule (ref), captureItem (ref), galleryGridViewModule (ref)
 	local var1 = useAnalyticsModule()
 	local var2 = useDispatch()
 	local var3 = useStyle()
@@ -59,7 +62,8 @@ return function(p1)
 		NothingHereYet = var6 and reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextWrapped = true,
-			Font = var3.Font.CaptionBody.Font,
+			Font = if foundationFontFaceMigration then nil else var3.Font.CaptionBody.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Tokens.Typography.BodySmall.Font) else nil,
 			Size = UDim2.new(1, -12, 1, 12),
 			Text = useLocalization({
 				nothingHereYet = "Feature.Captures.Label.NothingHereYet",

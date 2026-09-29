@@ -11,21 +11,21 @@ local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
 local inputSize = foundationModule.Enums.InputSize
 local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
-local threeDotsVertical = builderIconsModule.Icon.ThreeDotsVertical
+local threeDotsHorizontal = builderIconsModule.Icon.ThreeDotsHorizontal
 local t = {
 	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
 return function(p1)
-	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), foundationModule (ref), popoverSide (ref), popoverAlign (ref), threeDotsVertical (ref), inputSize (ref)
+	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), foundationModule (ref), popoverSide (ref), popoverAlign (ref), threeDotsHorizontal (ref), inputSize (ref)
 	local onClose = p1.onClose
 	
 	return reactModule.createElement(foundationModule.Menu, {
 		isOpen = p1.isOpen,
 		items = p1.items,
 		side = popoverSide.Bottom,
-		align = popoverAlign.End,
+		align = if p1.anchorRef ~= nil then popoverAlign.End else popoverAlign.Start,
 		anchorRef = p1.anchorRef,
 		onPressedOutside = onClose,
 		ref = useFocusRoot({
@@ -51,7 +51,7 @@ return function(p1)
 	}, if p1.anchorRef == nil then {
 		Button = reactModule.createElement(foundationModule.IconButton, {
 			isCircular = true,
-			icon = threeDotsVertical,
+			icon = threeDotsHorizontal,
 			size = inputSize.XSmall,
 			onActivated = p1.onButtonActivated,
 			testId = `moments-comment-actions-button-{p1.commentId}`

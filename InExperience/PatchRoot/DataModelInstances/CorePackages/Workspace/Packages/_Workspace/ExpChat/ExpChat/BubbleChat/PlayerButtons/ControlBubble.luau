@@ -1,9 +1,9 @@
 ﻿local runService = game:GetService("RunService")
 local tweenService = game:GetService("TweenService")
-local guiService = game:GetService("GuiService")
 local expChat = script:FindFirstAncestor("ExpChat")
 local parent = expChat.Parent
 local reactModule = require(parent.React)
+local isTenFootInterface = require(parent.AppCommonLib).isTenFootInterface
 local sharedFlagsModule = require(parent.SharedFlags)
 local withSignalsDataModule = require(script.Parent.withSignalsData)
 local UIBloxModule = require(parent.UIBlox)
@@ -29,7 +29,7 @@ local function createTweenShimmeringEffect(p1)
 end
 
 local function ControlBubble(p1)
-	-- upvalues: fFlagExpChatMicBubbleSingleImageModule (ref), reactModule (ref), getVoiceIndicatorAssetNameModule (ref), image (ref), enableChatMicPerfBinding (ref), imageSetLabel (ref), runService (ref), expChatMicActivityHeartbeatIncrement (ref), createTweenShimmeringEffect (ref), vector2 (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), getFFlagExpChatEnableVoiceReverseNudgeModule (ref), images (ref), guiService (ref), var1 (write)
+	-- upvalues: fFlagExpChatMicBubbleSingleImageModule (ref), reactModule (ref), getVoiceIndicatorAssetNameModule (ref), image (ref), enableChatMicPerfBinding (ref), imageSetLabel (ref), runService (ref), expChatMicActivityHeartbeatIncrement (ref), createTweenShimmeringEffect (ref), vector2 (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), getFFlagExpChatEnableVoiceReverseNudgeModule (ref), images (ref), isTenFootInterface (ref), var1 (write)
 	local var2, var3, var4
 	local _ = nil
 	local _ = nil
@@ -140,8 +140,8 @@ local function ControlBubble(p1)
 	end
 	return reactModule.createElement("ImageButton", {
 		AnchorPoint = Vector2.new(0.5, 1),
-		Interactable = if guiService:IsTenFootInterface() then false else nil,
-		Selectable = if guiService:IsTenFootInterface() then false else nil,
+		Interactable = if isTenFootInterface() then false else nil,
+		Selectable = if isTenFootInterface() then false else nil,
 		Size = p1.controlBubbleSize,
 		LayoutOrder = p1.LayoutOrder,
 		BorderSizePixel = 0,

@@ -7,9 +7,11 @@ local reactModule = require(parent.React)
 local useNavigation = require(parent.Navigation).useNavigation
 local useNavigationProps = require(parent.RobloxAppNavigation).useNavigationProps
 local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return function(p1)
-	-- upvalues: useNavigationProps (ref), reactModule (ref), useNavigation (ref), useTokens (ref), peekViewState (ref), peekView (ref)
+	-- upvalues: useNavigationProps (ref), reactModule (ref), useNavigation (ref), useTokens (ref), peekViewState (ref), peekView (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = useNavigationProps(function(_, p2)
 		return { title = p2.title, body = p2.body }
 	end)
@@ -55,7 +57,8 @@ return function(p1)
 			TextWrapped = true,
 			LayoutOrder = 1,
 			Text = title,
-			Font = headingSmall.Font,
+			Font = if foundationFontFaceMigration then nil else headingSmall.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(headingSmall.Font) else nil,
 			TextSize = headingSmall.FontSize,
 			TextColor3 = emphasis.Color3,
 			TextTransparency = emphasis.Transparency,
@@ -68,7 +71,8 @@ return function(p1)
 			TextWrapped = true,
 			LayoutOrder = 2,
 			Text = body,
-			Font = bodyLarge.Font,
+			Font = if foundationFontFaceMigration then nil else bodyLarge.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(bodyLarge.Font) else nil,
 			TextSize = bodyLarge.FontSize,
 			TextColor3 = default.Color3,
 			TextTransparency = default.Transparency,

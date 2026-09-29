@@ -5,6 +5,7 @@ local tModule = require(corePackagesService.Packages.t)
 local verifiedBadgesModule = require(corePackagesService.Workspace.Packages.VerifiedBadges)
 local userLibModule = require(corePackagesService.Workspace.Packages.UserLib)
 local cryoModule = require(corePackagesService.Packages.Cryo)
+local foundationFontFaceMigration = require(corePackagesService.Packages.Foundation).Utility.Flags.FoundationFontFaceMigration
 local parent = script.Parent.Parent.Parent
 local withLayoutValues = require(parent.Components.Connection.LayoutValues).WithLayoutValues
 local usePlayerCombinedNameModule = require(parent.Hooks.usePlayerCombinedName)
@@ -29,16 +30,18 @@ playerNameTag.validateProps = tModule.strictInterface({
 	textFont = tModule.strictInterface({
 		Size = tModule.number,
 		MinSize = tModule.number,
-		Font = tModule.enum(Enum.Font)
+		Font = tModule.enum(Enum.Font),
+		FontFace = tModule.optional(tModule.typeof("Font"))
 	})
 })
 
 function playerNameTag.render(p1)
-	-- upvalues: withLayoutValues (ref), fFlagEnableVerifiedBadgeStore (ref), userLibModule (ref), reactModule (ref), verifiedBadgesModule (ref)
+	-- upvalues: withLayoutValues (ref), fFlagEnableVerifiedBadgeStore (ref), userLibModule (ref), reactModule (ref), verifiedBadgesModule (ref), foundationFontFaceMigration (ref)
 	return withLayoutValues(function(p2)
-		-- upvalues: p1 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), reactModule (copy), verifiedBadgesModule (copy)
+		-- upvalues: p1 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), reactModule (copy), verifiedBadgesModule (copy), foundationFontFaceMigration (copy)
 		local var1 = if p1.props.isHovered then p2.IconSelectedColor else p2.IconUnSelectedColor
 		local font = p1.props.textFont.Font
+		local fontFace = p1.props.textFont.FontFace
 		local size = p1.props.textFont.Size
 		local t = {}
 		local platformName = p1.props.player.PlatformName
@@ -97,7 +100,8 @@ function playerNameTag.render(p1)
 						BackgroundTransparency = 1,
 						AutomaticSize = Enum.AutomaticSize.X,
 						Size = UDim2.fromScale(0, 1),
-						Font = font,
+						Font = if foundationFontFaceMigration then nil else font,
+						FontFace = if foundationFontFaceMigration then fontFace else nil,
 						Text = p1.props.name,
 						TextSize = size,
 						TextColor3 = p1.props.textStyle.Color,
@@ -124,7 +128,8 @@ function playerNameTag.render(p1)
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.X,
 					Size = UDim2.fromScale(0, 1),
-					Font = font,
+					Font = if foundationFontFaceMigration then nil else font,
+					FontFace = if foundationFontFaceMigration then fontFace else nil,
 					Text = p1.props.name,
 					TextSize = size,
 					TextColor3 = p1.props.textStyle.Color,

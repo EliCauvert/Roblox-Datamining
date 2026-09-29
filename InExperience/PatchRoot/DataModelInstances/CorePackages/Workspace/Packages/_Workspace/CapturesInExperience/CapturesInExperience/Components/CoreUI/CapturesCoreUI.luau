@@ -13,10 +13,9 @@ local useCallback = reactModule.useCallback
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useEventConnection = reactUtilsModule.useEventConnection
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local fFlagEnableUpdatedCaptureControlsModule = require(parent.Flags.FFlagEnableUpdatedCaptureControls)
 
 return function(_)
-	-- upvalues: useDispatch (ref), useSelector (ref), constantsModule (ref), useCallback (ref), makeVideoCaptureStartFailedHandlerModule (ref), useEventConnection (ref), captureService (ref), makeVideoCaptureFailedHandlerModule (ref), reactModule (ref), fFlagEnableUpdatedCaptureControlsModule (ref), captureControlsViewModule (ref), toastContainerModule (ref)
+	-- upvalues: useDispatch (ref), useSelector (ref), constantsModule (ref), useCallback (ref), makeVideoCaptureStartFailedHandlerModule (ref), useEventConnection (ref), captureService (ref), makeVideoCaptureFailedHandlerModule (ref), reactModule (ref), captureControlsViewModule (ref), toastContainerModule (ref)
 	local var1 = useDispatch()
 	local var2 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
@@ -30,7 +29,7 @@ return function(_)
 	useEventConnection(captureService.UserVideoCaptureFailed, useCallback(makeVideoCaptureFailedHandlerModule(var1), {}))
 	
 	return reactModule.createElement(reactModule.Fragment, {}, {
-		CaptureControlsView = if fFlagEnableUpdatedCaptureControlsModule and var3 then reactModule.createElement(captureControlsViewModule) else nil,
+		CaptureControlsView = if var3 then reactModule.createElement(captureControlsViewModule) else nil,
 		ToastsFrame = if not var2 then reactModule.createElement("Frame", {
 			Active = false,
 			BackgroundTransparency = 1,

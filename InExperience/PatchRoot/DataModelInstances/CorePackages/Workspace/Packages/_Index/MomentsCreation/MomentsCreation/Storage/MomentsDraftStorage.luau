@@ -24,6 +24,7 @@ return {
 			userId = var3,
 			captureRef = p1.captureRef,
 			description = p1.description,
+			commentsEnabled = p1.commentsEnabled,
 			edits = p1.edits,
 			lastSaveTime = DateTime.now().UnixTimestampMillis
 		}

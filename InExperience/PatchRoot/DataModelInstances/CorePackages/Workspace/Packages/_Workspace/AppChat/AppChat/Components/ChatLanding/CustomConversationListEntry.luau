@@ -6,6 +6,8 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local useTextSizeOffset = UIBloxModule.Core.Style.useTextSizeOffset
 local useChatPagePaddingModule = require(appChat.Contexts.ChatPagePadding.useChatPagePadding)
 local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local getBoldTextThemeModule = require(script.Parent.Utils.getBoldTextTheme)
 local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -15,7 +17,7 @@ local fFlagAppChatRemoveConversationListDividerModule = require(appChat.Flags.FF
 local pushRight = images["icons/navigation/pushRight"]
 
 function CustomConversationListEntry(p1)
-	-- upvalues: useStyle (ref), getBoldTextThemeModule (ref), useTextSizeOffset (ref), useChatPagePaddingModule (ref), iconSize (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), imageSetLabel (ref), pushRight (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
+	-- upvalues: useStyle (ref), getBoldTextThemeModule (ref), useTextSizeOffset (ref), useChatPagePaddingModule (ref), iconSize (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), imageSetLabel (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), pushRight (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
 	local var1 = useStyle()
 	local var2 = getBoldTextThemeModule(var1)
 	local var3 = useTextSizeOffset()
@@ -93,7 +95,8 @@ function CustomConversationListEntry(p1)
 					TextSize = var5,
 					TextColor3 = color,
 					TextTransparency = transparency,
-					Font = font,
+					Font = if foundationFontFaceMigration then nil else font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.TitleLarge.Font) else nil,
 					Text = titleText or "",
 					TextTruncate = Enum.TextTruncate.AtEnd,
 					TextXAlignment = Enum.TextXAlignment.Left
@@ -105,7 +108,8 @@ function CustomConversationListEntry(p1)
 					TextSize = var7,
 					TextColor3 = color_1,
 					TextTransparency = transparency_1,
-					Font = font_1,
+					Font = if foundationFontFaceMigration then nil else font_1,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodySmall.Font) else nil,
 					Text = subTitleText,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextTruncate = Enum.TextTruncate.AtEnd

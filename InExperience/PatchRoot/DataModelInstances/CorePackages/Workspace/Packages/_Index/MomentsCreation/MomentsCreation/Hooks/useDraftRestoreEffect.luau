@@ -10,6 +10,7 @@ local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCrea
 local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
 local failureReasonModule = require(momentsCreation.Enums.FailureReason)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
+local fFlagMomentsCommentsCreatorControlModule = require(momentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
 local eventNames = momentsCommonModule.Analytics.EventNames
 local sessionManager = momentsCommonModule.Analytics.SessionManager
 local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
@@ -20,10 +21,10 @@ local function withCreationSession(p1)
 end
 
 return function(p1)
-	-- upvalues: getCreationFlowStoreModule (ref), reactModule (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), failureReasonModule (ref), creationFlowStateModule (ref), withCreationSession (ref)
+	-- upvalues: getCreationFlowStoreModule (ref), reactModule (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), failureReasonModule (ref), fFlagMomentsCommentsCreatorControlModule (ref), creationFlowStateModule (ref), withCreationSession (ref)
 	local var1 = getCreationFlowStoreModule(false)
 	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref), momentsDraftStorageModule (copy), fireAnalyticsEventModule (copy), eventNames (copy), failureReasonModule (copy), creationFlowStateModule (copy), withCreationSession (copy)
+		-- upvalues: var1 (ref), p1 (ref), momentsDraftStorageModule (copy), fireAnalyticsEventModule (copy), eventNames (copy), failureReasonModule (copy), fFlagMomentsCommentsCreatorControlModule (copy), creationFlowStateModule (copy), withCreationSession (copy)
 		if var1.getSelectedCapture(false) ~= nil or next(var1.getEditsMap(false)) ~= nil then return end
 		if p1 == nil then return end
 		local var2, var3 = momentsDraftStorageModule.load()
@@ -50,6 +51,9 @@ return function(p1)
 		var1.onSelectedCaptureUpdated(var4)
 		var1.updateDescription(var2.description or "")
 		
+		if fFlagMomentsCommentsCreatorControlModule then
+			var1.updateCommentsEnabled(var2.commentsEnabled ~= false)
+		end
 		for i_1, v in pairs(var2.edits) do
 			var1.setCommittedEdit(i_1, v)
 		end

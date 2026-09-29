@@ -7,6 +7,7 @@ return function()
 	local var5, var6 = createSignal(nil)
 	local var7, var8 = createSignal(nil)
 	local var9, var10 = createSignal(nil)
+	local var11, var12 = createSignal(true)
 	
 	return {
 		getDescription = var1,
@@ -18,6 +19,8 @@ return function()
 		getGeneratedTextFeedback = var7,
 		setGeneratedTextFeedback = var8,
 		getGeneratedSummary = var9,
-		setGeneratedSummary = var10
+		setGeneratedSummary = var10,
+		getCommentsEnabled = var11,
+		setCommentsEnabled = var12
 	}
 end

@@ -2,6 +2,9 @@
 local roactModule = require(corePackagesService.Packages.Roact)
 local tModule = require(corePackagesService.Packages.t)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local withStyle = UIBloxModule.Core.Style.withStyle
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
@@ -17,9 +20,9 @@ menuCell.validateProps = tModule.strictInterface({
 })
 
 function menuCell.render(p1)
-	-- upvalues: withStyle (ref), robloxTranslatorModule (ref), roactModule (ref), imageSetLabel (ref)
+	-- upvalues: withStyle (ref), robloxTranslatorModule (ref), roactModule (ref), imageSetLabel (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	return withStyle(function(p2)
-		-- upvalues: robloxTranslatorModule (copy), p1 (ref), roactModule (copy), imageSetLabel (copy)
+		-- upvalues: robloxTranslatorModule (copy), p1 (ref), roactModule (copy), imageSetLabel (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		local theme = p2.Theme
 		local font = p2.Font
 		
@@ -94,7 +97,8 @@ function menuCell.render(p1)
 					LayoutOrder = 2,
 					Size = UDim2.new(1, -48, 1, 0),
 					Text = robloxTranslatorModule:FormatByKey(p1.props.localizationKey),
-					Font = font.Header2.Font,
+					Font = if foundationFontFaceMigration then nil else font.Header2.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
 					TextSize = font.BaseSize * font.Header2.RelativeSize,
 					TextColor3 = theme.TextEmphasis.Color,
 					TextTransparency = theme.TextEmphasis.TextTransparency,

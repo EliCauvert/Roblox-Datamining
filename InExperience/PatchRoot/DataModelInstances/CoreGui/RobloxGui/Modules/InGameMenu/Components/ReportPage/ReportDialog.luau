@@ -11,7 +11,9 @@ local button = UIBlox.App.Button.Button
 local buttonType = UIBlox.App.Button.Enum.ButtonType
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local parent = script.Parent.Parent.Parent
-local getFFlagIGMGamepadSelectionHistoryModule = require(parent.Flags.GetFFlagIGMGamepadSelectionHistory)
+local flags = parent.Flags
+local getFFlagIGMGamepadSelectionHistoryModule = require(flags.GetFFlagIGMGamepadSelectionHistory)
+local fFlagIGMDialogButtonsUseUIBloxButtonModule = require(flags.FFlagIGMDialogButtonsUseUIBloxButton)
 local focusHandlerModule = require(script.Parent.Parent.Connection.FocusHandler)
 local assetsModule = require(parent.Resources.Assets)
 local closeReportDialogModule = require(parent.Actions.CloseReportDialog)
@@ -96,7 +98,7 @@ function reportDialog.renderTextEntryField(p1, p2, p3, p4)
 end
 
 function reportDialog.renderButtons(p1, _, p2, p3)
-	-- upvalues: list (ref), roact (ref), button (ref), buttonType (ref)
+	-- upvalues: list (ref), roact (ref), button (ref), buttonType (ref), fFlagIGMDialogButtonsUseUIBloxButtonModule (ref)
 	local charCount = utf8.len(utf8.nfcnormalize(p1.state.abuseDescription))
 	p3.ButtonContainer = roact.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -115,7 +117,8 @@ function reportDialog.renderButtons(p1, _, p2, p3)
 			buttonType = buttonType.Secondary,
 			size = UDim2.fromOffset(144, 36),
 			text = p2.cancel,
-			onActivated = p1.props.dispatchCloseReportDialog
+			onActivated = p1.props.dispatchCloseReportDialog,
+			DO_NOT_USE_useUIBloxButton = if fFlagIGMDialogButtonsUseUIBloxButtonModule then true else nil
 		}),
 		ConfirmButton = roact.createElement(button, {
 			layoutOrder = 2,
@@ -127,7 +130,8 @@ function reportDialog.renderButtons(p1, _, p2, p3)
 				-- upvalues: p1 (ref), list (copy)
 				p1.props.dispatchSendReport(if p1.props.userId ~= nil then list[p1.state.typeOfAbuseIndex] else "Inappropriate Content", p1.state.abuseDescription, p1.props.userId)
 				p1.props.dispatchCloseReportDialog()
-			end
+			end,
+			DO_NOT_USE_useUIBloxButton = if fFlagIGMDialogButtonsUseUIBloxButtonModule then true else nil
 		})
 	})
 end

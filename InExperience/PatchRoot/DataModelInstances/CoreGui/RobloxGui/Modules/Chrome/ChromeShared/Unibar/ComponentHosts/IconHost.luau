@@ -16,7 +16,6 @@ local fFlagTokenizeUnibarConstantsWithStyleProvider = flagsModule_1.FFlagTokeniz
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
 local foundationModule = require(corePackagesService.Packages.Foundation)
 local useCursor = foundationModule.Hooks.useCursor
-local flags = foundationModule.Utility.Flags
 local statusIndicator = foundationModule.StatusIndicator
 local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
 local interactable = UIBloxModule.Core.Control.Interactable
@@ -86,7 +85,7 @@ function logTooltipState(p1, p2)
 end
 
 function NotificationBadge(p1)
-	-- upvalues: reactModule (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), fFlagChromeNineDotActivityIndicator (ref), nineDotActivityIndicatorModule (ref)
+	-- upvalues: reactModule (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), statusIndicator (ref), statusIndicatorVariant (ref), fFlagChromeNineDotActivityIndicator (ref), nineDotActivityIndicatorModule (ref)
 	if not p1.integration then
 		return nil
 	end
@@ -144,7 +143,7 @@ function NotificationBadge(p1)
 				-- upvalues: minBadgeCount (ref)
 				return math.min(math.max(p2, minBadgeCount), 99)
 			end),
-			variant = if flags.FoundationStatusIndicatorVariantExperiment then statusIndicatorVariant.Contrast_Experiment else statusIndicatorVariant.Emphasis,
+			variant = statusIndicatorVariant.Emphasis,
 			AnchorPoint = Vector2.new(0, 0),
 			Position = UDim2.new(0, ICON_BADGE_OFFSET_X, 0, ICON_BADGE_OFFSET_Y)
 		}) else nil,

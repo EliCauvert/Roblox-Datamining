@@ -37,6 +37,7 @@ local setUserLeavingConversationModule = require(appChat.Conversations.Actions.S
 local setUserTypingModule = require(appChat.Conversations.Actions.SetUserTyping)
 local fFlagAppChatConversationStoreModule = require(appChat.Flags.FFlagAppChatConversationStore)
 local fFlagAppChatServerSideConversationSearchModule = require(appChat.Flags.FFlagAppChatServerSideConversationSearch)
+local appChatBatchConversationPageUpsert = game:DefineFastFlag("AppChatBatchConversationPageUpsert", false)
 local t = {
 	[constantsModule.OptInVariant.OsaContextCard] = {
 		field = "osaAcknowledgementStatus",
@@ -65,15 +66,25 @@ local function upsertConversationResponse(p1, p2)
 	p1.upsertConversation(var1)
 end
 
-local function _(p1, p2)
-	-- upvalues: upsertConversationResponse (ref)
+local function upsertConversationResponses(p1, p2)
+	-- upvalues: appChatBatchConversationPageUpsert (ref), signalsExperimentalModule (ref), upsertConversationResponse (ref)
 	if p2 == nil or p2.conversations == nil then return end
+	if appChatBatchConversationPageUpsert then
+		signalsExperimentalModule.batch(function()
+			-- upvalues: p2 (ref), upsertConversationResponse (copy), p1 (ref)
+			for i, v in p2.conversations do
+				upsertConversationResponse(p1, v)
+			end
+		end)
+		
+		return
+	end
 	for i, v in p2.conversations do
 		upsertConversationResponse(p1, v)
 	end
 end
 
-local _ = function(p3, p4, p5)
+local function _(p3, p4, p5)
 	-- upvalues: cryoModule (ref)
 	if p4 == nil then return end
 	local conversation = p3.getConversation(p4, false)
@@ -421,14 +432,8 @@ local function handleDuplicateConversationSucceeded(p11, p12)
 end
 
 local function handleGetUserConversationsSucceeded(p11, p12)
-	-- upvalues: upsertConversationResponse (ref)
-	local responseBody = p11.responseBody
-	
-	if responseBody ~= nil and responseBody.conversations ~= nil then
-		for i, v in responseBody.conversations do
-			upsertConversationResponse(p12, v)
-		end
-	end
+	-- upvalues: upsertConversationResponses (ref)
+	upsertConversationResponses(p12, p11.responseBody)
 	local nextCursor = p11.responseBody and p11.responseBody.next_cursor
 	local t = { isFetchingConversations = false }
 	
@@ -438,35 +443,28 @@ local function handleGetUserConversationsSucceeded(p11, p12)
 	p12.setListStatus(t)
 end
 
-local function handleGetUserConversationsFailed(_, p13)
-	p13.setListStatus({ isFetchingConversations = false })
+local function handleGetUserConversationsFailed(_, p11)
+	p11.setListStatus({ isFetchingConversations = false })
 end
 
-local function handleGetConversationDetailsSucceeded(p13, p14)
-	-- upvalues: upsertConversationResponse (ref)
-	local responseBody = p13.responseBody
-	
-	if responseBody ~= nil then
-		if responseBody.conversations == nil then return end
-		for i, v in responseBody.conversations do
-			upsertConversationResponse(p14, v)
-		end
-	end
+local function handleGetConversationDetailsSucceeded(p11, p12)
+	-- upvalues: upsertConversationResponses (ref)
+	upsertConversationResponses(p12, p11.responseBody)
 end
 
-local function handleLegacyGetUserConversationsSucceeded(p15, p16)
+local function handleLegacyGetUserConversationsSucceeded(p11, p12)
 	-- upvalues: conversationModule (ref)
-	local responseBody = p15.responseBody
+	local responseBody = p11.responseBody
 	
 	if responseBody == nil then return end
 	for i, v in ipairs(responseBody) do
-		p16.upsertConversation(conversationModule.fromWeb(v))
+		p12.upsertConversation(conversationModule.fromWeb(v))
 	end
-	p16.setListStatus({ isFetchingConversations = false })
-	local pageSize = p15.queryArgs and p15.queryArgs.pageSize
+	p12.setListStatus({ isFetchingConversations = false })
+	local pageSize = p11.queryArgs and p11.queryArgs.pageSize
 	
 	if pageSize ~= nil and #responseBody < pageSize then
-		p16.setListStatus({ oldestConversationIsFetched = true })
+		p12.setListStatus({ oldestConversationIsFetched = true })
 	end
 end
 
@@ -477,25 +475,25 @@ local t_1 = {
 	[appChatNetworkingModule.rodux.GetUserConversations.Failed.name] = handleGetUserConversationsFailed,
 	[appChatNetworkingModule.rodux.GetConversationDetails.Succeeded.name] = handleGetConversationDetailsSucceeded,
 	[appChatNetworkingModule.rodux.MultiGetConversationDetails.Succeeded.name] = handleGetConversationDetailsSucceeded,
-	[appChatNetworkingModule.rodux.MarkConversation.Succeeded.name] = function(p17, p18)
+	[appChatNetworkingModule.rodux.MarkConversation.Succeeded.name] = function(p13, p14)
 		-- upvalues: cryoModule (ref)
-		local conversationIds = p17.postBody and p17.postBody.conversation_ids
+		local conversationIds = p13.postBody and p13.postBody.conversation_ids
 		
 		if conversationIds == nil then return end
 		for i, v in conversationIds do
 			local t = { hasUnreadMessages = false }
 			
 			if v ~= nil then
-				local conversation = p18.getConversation(v, false)
+				local conversation = p14.getConversation(v, false)
 				
 				if conversation ~= nil then
-					p18.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
+					p14.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 				end
 			end
 		end
 	end,
-	[appChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.Succeeded.name] = function(p19, p20)
-		local responseBody = p19.responseBody
+	[appChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.Succeeded.name] = function(p15, p16)
+		local responseBody = p15.responseBody
 		
 		if responseBody == nil or responseBody.conversation_participants_metadata == nil then return end
 		for i, v in responseBody.conversation_participants_metadata do
@@ -509,12 +507,12 @@ local t_1 = {
 					isInvited = v_1.is_invited
 				}
 			end
-			p20.setParticipantMetadata(i, t)
+			p16.setParticipantMetadata(i, t)
 		end
 	end,
-	[appChatNetworkingModule.rodux.RecordModalSequenceResponse.Succeeded.name] = function(p21, p22)
+	[appChatNetworkingModule.rodux.RecordModalSequenceResponse.Succeeded.name] = function(p17, p18)
 		-- upvalues: constantsModule (ref), t (ref), conversationChannelsModule (ref), cryoModule (ref)
-		local postBody = p21.postBody
+		local postBody = p17.postBody
 		
 		if postBody == nil or postBody.action_type ~= constantsModule.ModalAction.Accept then return end
 		local modalVariant = t[postBody.modal_variant]
@@ -524,163 +522,163 @@ local t_1 = {
 		local t_1 = { [modalVariant.field] = modalVariant.value }
 		
 		if conversationId == nil then return end
-		local conversation = p22.getConversation(conversationId, false)
+		local conversation = p18.getConversation(conversationId, false)
 		
 		if conversation == nil then
 			return
 		end
-		p22.upsertConversation(cryoModule.Dictionary.join(conversation, t_1), false)
+		p18.upsertConversation(cryoModule.Dictionary.join(conversation, t_1), false)
 	end,
 	[networkingChatModule.GetUserConversations.Succeeded.name] = handleLegacyGetUserConversationsSucceeded,
 	[networkingChatModule.GetUserConversations.Failed.name] = handleGetUserConversationsFailed,
 	[networkingChatModule.GetConversations.Succeeded.name] = handleLegacyGetUserConversationsSucceeded,
 	[networkingChatModule.GetConversations.Failed.name] = handleGetUserConversationsFailed,
-	[networkingChatModule.GetLatestMessages.Succeeded.name] = function(p21, p22)
+	[networkingChatModule.GetLatestMessages.Succeeded.name] = function(p17, p18)
 		-- upvalues: updateConversationLastUpdatedFromMessages (ref), messagesFromWebResponse (ref)
-		local responseBody = p21.responseBody
+		local responseBody = p17.responseBody
 		
 		if responseBody == nil then return end
 		for i, v in ipairs(responseBody) do
 			local var13 = tostring(v.conversationId)
-			updateConversationLastUpdatedFromMessages(p22, var13, messagesFromWebResponse(var13, v.chatMessages))
+			updateConversationLastUpdatedFromMessages(p18, var13, messagesFromWebResponse(var13, v.chatMessages))
 		end
 	end,
-	[networkingChatModule.MarkAsRead.Succeeded.name] = function(p23, p24)
+	[networkingChatModule.MarkAsRead.Succeeded.name] = function(p19, p20)
 		-- upvalues: cryoModule (ref)
-		local conversationId = p23.postBody and p23.postBody.conversationId
+		local conversationId = p19.postBody and p19.postBody.conversationId
 		local t = { hasUnreadMessages = false }
 		
 		if conversationId == nil then return end
-		local conversation = p24.getConversation(conversationId, false)
+		local conversation = p20.getConversation(conversationId, false)
 		
 		if conversation == nil then
 			return
 		end
-		p24.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
+		p20.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[networkingBlockingModule.BlockUserById.Succeeded.name] = function(p23, p24)
+	[networkingBlockingModule.BlockUserById.Succeeded.name] = function(p19, p20)
 		-- upvalues: conversationChannelsModule (ref)
-		local users = p23.namedIds and p23.namedIds.users
+		local users = p19.namedIds and p19.namedIds.users
 		
 		if users == nil then return end
 		local var14 = tostring(users)
 		
-		for i, v in p24.getConversations(false) do
+		for i, v in p20.getConversations(false) do
 			if v.type == conversationChannelsModule.Type.OneToOne and table.find(v.participants or {}, var14) then
-				p24.removeConversation(v.id)
+				p20.removeConversation(v.id)
 			end
 		end
-		p24.removeConversation(conversationChannelsModule.getFriendConversationId({ var14 }))
+		p20.removeConversation(conversationChannelsModule.getFriendConversationId({ var14 }))
 	end,
-	[receivedConversationModule.name] = function(p25, p26)
-		p26.upsertConversation(p25.conversation)
+	[receivedConversationModule.name] = function(p21, p22)
+		p22.upsertConversation(p21.conversation)
 	end,
-	[receivedMessages.name] = function(p25, p26)
+	[receivedMessages.name] = function(p21, p22)
 		-- upvalues: updateConversationLastUpdatedFromMessages (ref)
-		updateConversationLastUpdatedFromMessages(p26, p25.conversationId, p25.messages, p25.shouldMarkConversationUnread)
+		updateConversationLastUpdatedFromMessages(p22, p21.conversationId, p21.messages, p21.shouldMarkConversationUnread)
 	end,
-	[removedConversationModule.name] = function(p25, p26)
-		if p25.conversationId then
-			p26.removeConversation(p25.conversationId)
+	[removedConversationModule.name] = function(p21, p22)
+		if p21.conversationId then
+			p22.removeConversation(p21.conversationId)
 		end
 	end,
-	[renamedGroupConversationModule.name] = function(p25, p26)
+	[renamedGroupConversationModule.name] = function(p21, p22)
 		-- upvalues: cryoModule (ref)
-		local conversationId = p25.conversationId
+		local conversationId = p21.conversationId
 		local t = {
-			lastUpdated = p25.lastUpdated,
-			title = p25.title,
-			isDefaultTitle = p25.isDefaultTitle
+			lastUpdated = p21.lastUpdated,
+			title = p21.title,
+			isDefaultTitle = p21.isDefaultTitle
 		}
 		
 		if conversationId == nil then return end
-		local conversation = p26.getConversation(conversationId, false)
+		local conversation = p22.getConversation(conversationId, false)
 		
 		if conversation == nil then
 			return
 		end
-		p26.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
+		p22.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[changedParticipantsModule.name] = function(p25, p26)
+	[changedParticipantsModule.name] = function(p21, p22)
 		-- upvalues: cryoModule (ref)
-		local conversationId = p25.conversationId
+		local conversationId = p21.conversationId
 		local t = {
-			participants = p25.participants,
-			lastUpdated = p25.lastUpdated,
-			title = p25.title
+			participants = p21.participants,
+			lastUpdated = p21.lastUpdated,
+			title = p21.title
 		}
 		
 		if conversationId == nil then return end
-		local conversation = p26.getConversation(conversationId, false)
+		local conversation = p22.getConversation(conversationId, false)
 		
 		if conversation == nil then
 			return
 		end
-		p26.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
+		p22.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[hasUnreadMessagesModule.name] = function(p25, p26)
+	[hasUnreadMessagesModule.name] = function(p21, p22)
 		-- upvalues: cryoModule (ref)
-		local id = p25.conversation and p25.conversation.id
+		local id = p21.conversation and p21.conversation.id
 		local t = { hasUnreadMessages = true }
 		
 		if id == nil then return end
-		local conversation = p26.getConversation(id, false)
+		local conversation = p22.getConversation(id, false)
 		
 		if conversation == nil then
 			return
 		end
-		p26.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
+		p22.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[readConversationModule.name] = function(p25, p26)
+	[readConversationModule.name] = function(p21, p22)
 		-- upvalues: cryoModule (ref)
-		local conversationId = p25.conversationId
+		local conversationId = p21.conversationId
 		local t = { hasUnreadMessages = false }
 		
 		if conversationId == nil then return end
-		local conversation = p26.getConversation(conversationId, false)
+		local conversation = p22.getConversation(conversationId, false)
 		
 		if conversation == nil then
 			return
 		end
-		p26.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
+		p22.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[setUserTypingModule.name] = function(value, p25)
-		local conversationId = value.conversationId and p25.getConversation(value.conversationId, false)
+	[setUserTypingModule.name] = function(value, p21)
+		local conversationId = value.conversationId and p21.getConversation(value.conversationId, false)
 		
 		if conversationId == nil then
 			return
 		end
 		local cloned = table.clone(conversationId.usersTyping or {})
 		cloned[value.userId] = value.value
-		p25.setUsersTyping(value.conversationId, cloned)
+		p21.setUsersTyping(value.conversationId, cloned)
 	end,
-	[setConversationLoadingStatusModule.name] = function(value, p25)
+	[setConversationLoadingStatusModule.name] = function(value, p21)
 		-- upvalues: cryoModule (ref)
 		local conversationId = value.conversationId
 		local t = { initialLoadingStatus = value.value }
 		
 		if conversationId == nil then return end
-		local conversation = p25.getConversation(conversationId, false)
+		local conversation = p21.getConversation(conversationId, false)
 		
 		if conversation == nil then
 			return
 		end
-		p25.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
+		p21.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[setUserLeavingConversationModule.name] = function(value, p25)
+	[setUserLeavingConversationModule.name] = function(value, p21)
 		-- upvalues: cryoModule (ref)
 		local id = value.id
 		local t = { isUserLeaving = value.isLeaving }
 		
 		if id == nil then return end
-		local conversation = p25.getConversation(id, false)
+		local conversation = p21.getConversation(id, false)
 		
 		if conversation == nil then
 			return
 		end
-		p25.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
+		p21.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[setPinnedGameForConversationModule.name] = function(value, p25)
+	[setPinnedGameForConversationModule.name] = function(value, p21)
 		-- upvalues: cryoModule (ref)
 		local conversationId = value.conversationId
 		local t = {
@@ -691,45 +689,45 @@ local t_1 = {
 		}
 		
 		if conversationId == nil then return end
-		local conversation = p25.getConversation(conversationId, false)
+		local conversation = p21.getConversation(conversationId, false)
 		
 		if conversation == nil then
 			return
 		end
-		p25.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
+		p21.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[conversationModerationTypeChangedModule.name] = function(p25, p26)
+	[conversationModerationTypeChangedModule.name] = function(p21, p22)
 		-- upvalues: cryoModule (ref)
-		local conversationId = p25.conversationId
-		local t = { moderationType = p25.moderationType }
+		local conversationId = p21.conversationId
+		local t = { moderationType = p21.moderationType }
 		
 		if conversationId == nil then return end
-		local conversation = p26.getConversation(conversationId, false)
+		local conversation = p22.getConversation(conversationId, false)
 		
 		if conversation == nil then
 			return
 		end
-		p26.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
+		p22.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
-	[friendConversationCreatedModule.name] = function(p25, p26)
-		if p25.oldFriendConversationId then
-			p26.removeConversation(p25.oldFriendConversationId)
+	[friendConversationCreatedModule.name] = function(p21, p22)
+		if p21.oldFriendConversationId then
+			p22.removeConversation(p21.oldFriendConversationId)
 		end
 	end,
-	[friendshipDestroyedModule.name] = function(p25, p26)
+	[friendshipDestroyedModule.name] = function(p21, p22)
 		-- upvalues: conversationChannelsModule (ref)
-		local var15 = if p25.userId1 ~= "localUserId" then if p25.userId2 ~= "localUserId" then nil else p25.userId2 else p25.userId1
+		local var15 = if p21.userId1 ~= "localUserId" then if p21.userId2 ~= "localUserId" then nil else p21.userId2 else p21.userId1
 		
 		if var15 == nil then
 			return
 		end
-		p26.removeConversation(conversationChannelsModule.getFriendConversationId({ var15 }))
+		p22.removeConversation(conversationChannelsModule.getFriendConversationId({ var15 }))
 	end,
-	[requestPageConversationsModule.name] = function(_, p25)
-		p25.setListStatus({ isFetchingConversations = true })
+	[requestPageConversationsModule.name] = function(_, p21)
+		p21.setListStatus({ isFetchingConversations = true })
 	end,
-	[receivedPageConversationsModule.name] = function(_, p25)
-		p25.setListStatus({ isFetchingConversations = false })
+	[receivedPageConversationsModule.name] = function(_, p21)
+		p21.setListStatus({ isFetchingConversations = false })
 	end,
 	[requestLatestMessagesModule.name] = function(_, _)
 		-- upvalues: getConversationListStoreModule (ref)
@@ -739,36 +737,36 @@ local t_1 = {
 		-- upvalues: getConversationListStoreModule (ref)
 		getConversationListStoreModule(false).setLatestMessagesFetching(false)
 	end,
-	[appChatNetworkingModule.rodux.GetNewerMessages.Succeeded.name] = function(p25, p26)
+	[appChatNetworkingModule.rodux.GetNewerMessages.Succeeded.name] = function(p21, p22)
 		-- upvalues: updateConversationLastUpdatedFromMessages (ref), shouldMarkConversationUnreadFromMessages (ref)
-		local conversationId = p25.queryArgs and p25.queryArgs.conversation_id
-		local responseBody = p25.responseBody
+		local conversationId = p21.queryArgs and p21.queryArgs.conversation_id
+		local responseBody = p21.responseBody
 		local messages = responseBody and responseBody.messages
-		updateConversationLastUpdatedFromMessages(p26, conversationId, messages, shouldMarkConversationUnreadFromMessages(conversationId, messages))
+		updateConversationLastUpdatedFromMessages(p22, conversationId, messages, shouldMarkConversationUnreadFromMessages(conversationId, messages))
 	end,
-	[receivedOldestConversationModule.name] = function(_, p25)
-		p25.setListStatus({ oldestConversationIsFetched = true })
+	[receivedOldestConversationModule.name] = function(_, p21)
+		p21.setListStatus({ oldestConversationIsFetched = true })
 	end,
-	[receivedChannelsMigrationConflictModule.name] = function(_, p25)
+	[receivedChannelsMigrationConflictModule.name] = function(_, p21)
 		-- upvalues: getConversationListStoreModule (ref)
-		p25.clear()
+		p21.clear()
 		getConversationListStoreModule(false).setLatestMessagesFetching(false)
 	end
 }
 
 return function(value, _)
 	-- upvalues: fFlagAppChatConversationStoreModule (ref), t_1 (ref), getConversationStoreModule (ref)
-	return function(p25)
+	return function(p21)
 		-- upvalues: value (ref), fFlagAppChatConversationStoreModule (copy), t_1 (copy), getConversationStoreModule (copy)
-		local var15 = value(p25)
+		local var15 = value(p21)
 		
 		if not fFlagAppChatConversationStoreModule then
 			return var15
 		end
-		local type = t_1[p25.type]
+		local type = t_1[p21.type]
 		
 		if type then
-			type(p25, getConversationStoreModule(false))
+			type(p21, getConversationStoreModule(false))
 		end
 		return var15
 	end

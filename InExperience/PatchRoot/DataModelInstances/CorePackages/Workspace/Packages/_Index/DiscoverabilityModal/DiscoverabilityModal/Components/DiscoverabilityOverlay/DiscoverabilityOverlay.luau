@@ -5,7 +5,10 @@ local dependenciesModule = require(parent.dependencies)
 local eventNamesModule = require(parent.Analytics.Enums.EventNames)
 local react = dependenciesModule.React
 local UIBlox = dependenciesModule.UIBlox
-local checkbox = dependenciesModule.Foundation.Checkbox
+local foundation = dependenciesModule.Foundation
+local checkbox = foundation.Checkbox
+local normalizeFontFace = foundation.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundation.Utility.Flags.FoundationFontFaceMigration
 local useLocalization = dependenciesModule.Hooks.useLocalization
 local discoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule = require(parent.Flags.DiscoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelist)
 local useStyle = UIBlox.Core.Style.useStyle
@@ -23,7 +26,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: playersService (ref), discoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule (ref), react (ref), useStyle (ref), useLocalization (ref), textKeysModule (ref), eventNamesModule (ref), t (ref), imageSetLabel (ref), images (ref), iconSize (ref), checkbox (ref), styledTextLabel (ref), radioButtonList (ref), partialPageModal (ref), buttonType (ref)
+	-- upvalues: playersService (ref), discoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule (ref), react (ref), useStyle (ref), useLocalization (ref), textKeysModule (ref), eventNamesModule (ref), t (ref), imageSetLabel (ref), images (ref), iconSize (ref), checkbox (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), styledTextLabel (ref), radioButtonList (ref), partialPageModal (ref), buttonType (ref)
 	local titleText, var1, var2, frame, infoText, color
 	local var3 = if playersService.LocalPlayer and discoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule.isWhitelistedUserId(playersService.LocalPlayer.UserId) then false else p1.prefillDiscoverabilitySetting
 	local var4, var5 = react.useState(if var3 then 1 else nil)
@@ -105,7 +108,8 @@ return function(p1)
 			CheckboxLabel = react.createElement("TextButton", {
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BackgroundTransparency = 1,
-				Font = font.Body.Font,
+				Font = if foundationFontFaceMigration then nil else font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var6.Tokens.Typography.BodyLarge.Font) else nil,
 				Size = UDim2.fromScale(1, 0),
 				Text = var7.optInTextPrefillDiscoverable,
 				TextColor3 = theme.TextDefault.Color,
@@ -202,7 +206,8 @@ return function(p1)
 			LearnMore = react.createElement("TextButton", {
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BackgroundTransparency = 1,
-				Font = font.CaptionBody.Font,
+				Font = if foundationFontFaceMigration then nil else font.CaptionBody.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var6.Tokens.Typography.BodySmall.Font) else nil,
 				Size = UDim2.fromScale(1, 0),
 				Text = var7.learnMoreText,
 				TextColor3 = color,

@@ -4,9 +4,11 @@ local parent_1 = script:FindFirstAncestor("AppBlox").Parent
 local reactModule = require(parent.React)
 local reactUtilsModule = require(parent.ReactUtils)
 local fFlagComposerControlAlignment = require(parent_1.SharedFlags).FFlagComposerControlAlignment
+local foundationFontFaceMigration = require(parent_1.Foundation).Utility.Flags.FoundationFontFaceMigration
 local components = foundation.Components
 local iconModule = require(components.Icon)
 local paddingModule = require(components.Padding)
+local normalizeFontFaceModule = require(foundation.Utility.normalizeFontFace)
 local scrollViewModule = require(components.ScrollView)
 local _ = require(components.Types)
 local viewModule = require(components.View)
@@ -43,7 +45,7 @@ local t = {
 	variant = inputVariantModule.Standard
 }
 local var1 = reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), isPluginSecurityModule (ref), paddingModule (ref)
+	-- upvalues: reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFaceModule (ref), isPluginSecurityModule (ref), paddingModule (ref)
 	local isBoundsChecker = p1.isBoundsChecker
 	local isMultiLine = p1.isMultiLine or isBoundsChecker
 	
@@ -52,7 +54,8 @@ local var1 = reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		Selectable = false,
 		Active = if isBoundsChecker then false else nil,
 		Visible = if isBoundsChecker then false else nil,
-		Font = p1.fontStyle.Font,
+		Font = if foundationFontFaceMigration then nil else p1.fontStyle.Font,
+		FontFace = if foundationFontFaceMigration then normalizeFontFaceModule(p1.fontStyle.Font) else nil,
 		TextSize = p1.fontStyle.FontSize,
 		LineHeight = p1.fontStyle.LineHeight,
 		TextColor3 = if p1.textStyle then p1.textStyle.Color3 else nil,
@@ -83,7 +86,7 @@ local var1 = reactModule.memo(reactModule.forwardRef(function(p1, p2)
 end))
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), getBindableValueModule (ref), useTextInputVariantsModule (ref), fFlagComposerControlAlignment (ref), inputVariantModule (ref), useStyleTagsModule (ref), usePreferredInputModule (ref), useComposerFocusLockModule (ref), getDisabledStyleModule (ref), getMultiLineTextHeightModule (ref), composerDebugModule (ref), measureTextLineCountModule (ref), inputFocusBehaviorModule (ref), useComposerKeyboardConnectionsModule (ref), controlStateModule (ref), radiusModule (ref), truncateTextToCursorModule (ref), useBindableModule (ref), reactUtilsModule (ref), viewModule (ref), withCommonPropsModule (ref), blendTransparenciesModule (ref), constantsModule (ref), stateLayerAffordanceModule (ref), scrollViewModule (ref), var1 (ref), mapBindableModule (ref), iconModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), getBindableValueModule (ref), useTextInputVariantsModule (ref), fFlagComposerControlAlignment (ref), inputVariantModule (ref), useStyleTagsModule (ref), usePreferredInputModule (ref), useComposerFocusLockModule (ref), getDisabledStyleModule (ref), getMultiLineTextHeightModule (ref), composerDebugModule (ref), measureTextLineCountModule (ref), foundationFontFaceMigration (ref), normalizeFontFaceModule (ref), inputFocusBehaviorModule (ref), useComposerKeyboardConnectionsModule (ref), controlStateModule (ref), radiusModule (ref), truncateTextToCursorModule (ref), useBindableModule (ref), reactUtilsModule (ref), viewModule (ref), withCommonPropsModule (ref), blendTransparenciesModule (ref), constantsModule (ref), stateLayerAffordanceModule (ref), scrollViewModule (ref), var1 (ref), mapBindableModule (ref), iconModule (ref)
 	local var2 = p1
 	
 	if p1.Selectable == nil then
@@ -154,13 +157,13 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		return if current and current.AbsoluteSize.X > 0 then current.AbsoluteSize.X else 0
 	end, {})
 	local var42 = reactModule.useCallback(function(p3)
-		-- upvalues: measureTextLineCountModule (copy), var3 (ref), var33 (ref), var41 (ref), fontStyle (ref), fontSize (ref), var37 (ref)
+		-- upvalues: measureTextLineCountModule (copy), var3 (ref), var33 (ref), var41 (ref), foundationFontFaceMigration (copy), normalizeFontFaceModule (copy), fontStyle (ref), fontSize (ref), var37 (ref)
 		local var43 = measureTextLineCountModule({
 			text = p3,
 			maxLines = var3.maxLines,
 			singleLineHeight = var33,
 			layoutWidth = var41(),
-			font = fontStyle.Font,
+			font = if foundationFontFaceMigration then normalizeFontFaceModule(fontStyle.Font) else fontStyle.Font,
 			fontSize = fontSize
 		})
 		var37(math.max(if var43.boundsY and var43.boundsY > 0 then math.ceil(var43.boundsY) else var33, var43.lineCount * var33))

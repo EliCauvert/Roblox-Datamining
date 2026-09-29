@@ -7,6 +7,10 @@ local utils = gameInvite.utils
 local friendsMenuModule = require(parent.FriendsMenu)
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local getTextSize = require(parent.Style).GetTextSize
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local universalAppPolicyModule = require(parent.UniversalAppPolicy)
 local deviceInfo = require(parent.NotificationsCommon).DeviceInfo
 local isVRAppBuild = require(parent.AppCommonLib).IsVRAppBuild
@@ -47,7 +51,7 @@ local var1 = function(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), gameInviteModalLayoutContextModule (ref), gameDetailsContextModule (ref), friendsListContext (ref), inviteFriendContext (ref), getLocalizedStrings (ref), t (ref), useAppPolicy (ref), deviceInfo (ref), var1 (ref), textService (ref), titleIconSize (ref), gameInviteModalManagerModule (ref), sidePadding (ref), imageSetButton (ref), close (ref), fFlagConnectionsToFriendsRename (ref), search (ref), shareGameInviteLinkModule (ref), friendsMenuSearch (ref), gameInviteAnalyticsManagerModule (ref)
+	-- upvalues: useStyle (ref), reactModule (ref), gameInviteModalLayoutContextModule (ref), gameDetailsContextModule (ref), friendsListContext (ref), inviteFriendContext (ref), getLocalizedStrings (ref), t (ref), useAppPolicy (ref), deviceInfo (ref), var1 (ref), foundationFontFaceMigration (ref), getTextSize (ref), titleIconSize (ref), textService (ref), gameInviteModalManagerModule (ref), sidePadding (ref), imageSetButton (ref), close (ref), fFlagConnectionsToFriendsRename (ref), normalizeFontFace (ref), search (ref), shareGameInviteLinkModule (ref), friendsMenuSearch (ref), gameInviteAnalyticsManagerModule (ref)
 	local var2 = useStyle()
 	local var3 = reactModule.useContext(gameInviteModalLayoutContextModule)
 	local var4 = reactModule.useContext(gameDetailsContextModule)
@@ -66,37 +70,37 @@ return function(p1)
 	local var13 = var11 and not isFullWidth
 	local var14 = var2.Font.BaseSize * var2.Font.Header2.RelativeSize
 	local var15 = var2.Font.BaseSize * var2.Font.Body.RelativeSize
-	local copyLinkTextSize = textService:GetTextSize(var9.copyLink, var14, var2.Font.Header2.Font, Vector2.new(300 - titleIconSize, 1e999))
+	local var16 = if foundationFontFaceMigration then getTextSize(var9.copyLink, var14, var2.Tokens.Typography.TitleLarge.Font, Vector2.new(300 - titleIconSize, 1e999), { addTemporaryPadding = false }) else textService:GetTextSize(var9.copyLink, var14, var2.Font.Header2.Font, Vector2.new(300 - titleIconSize, 1e999))
 	local uDim2 = nil
-	local var16 = 0
+	local var17 = 0
 	
 	if var12 then
 		if var11 and var13 then
-			local var17 = math.ceil(copyLinkTextSize.X) + 10
-			uDim2 = UDim2.new(0, var17, 1, 0)
-			var16 += var17
+			local var18 = math.ceil(var16.X) + 10
+			uDim2 = UDim2.new(0, var18, 1, 0)
+			var17 += var18
 		else
 			uDim2 = UDim2.new(0, titleIconSize, 0, titleIconSize)
-			var16 += titleIconSize
+			var17 += titleIconSize
 		end
 	end
 	if isCompact then
-		var16 += titleIconSize
+		var17 += titleIconSize
 	end
 	if isCompact and var12 then
-		var16 += 4
+		var17 += 4
 	end
-	local var18 = function()
+	local var19 = function()
 		-- upvalues: gameInviteModalManagerModule (copy), var6 (ref)
 		gameInviteModalManagerModule:closeModal(var6.getMaxRecipientRowNum())
 	end
 	
-	local var19 = function()
+	local var20 = function()
 		-- upvalues: var8 (ref)
 		var8(true)
 	end
 	
-	local var20 = function()
+	local var21 = function()
 		-- upvalues: var8 (ref), searchFriends (ref)
 		var8(false)
 		searchFriends("")
@@ -113,7 +117,7 @@ return function(p1)
 		Position = UDim2.new(0, 0, 1, 0),
 		Size = p1.size
 	}, if var7 then reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), friendsMenuSearch (copy), gameInviteAnalyticsManagerModule (copy), var15 (ref), var2 (ref), var9 (ref), var20 (ref)
+		-- upvalues: reactModule (copy), friendsMenuSearch (copy), gameInviteAnalyticsManagerModule (copy), var15 (ref), var2 (ref), var9 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), var21 (ref)
 		return {
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
@@ -140,12 +144,13 @@ return function(p1)
 				TextSize = var15,
 				TextColor3 = var2.Theme.UIDefault.Color,
 				Text = var9.cancelText,
-				Font = var2.Font.Body.Font,
-				[reactModule.Event.Activated] = var20
+				Font = if foundationFontFaceMigration then nil else var2.Font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodyLarge.Font) else nil,
+				[reactModule.Event.Activated] = var21
 			})
 		}
 	end, { var7 }) else reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), sidePadding (copy), var16 (write), p1 (ref), imageSetButton (copy), titleIconSize (copy), var18 (ref), close (copy), var2 (ref), fFlagConnectionsToFriendsRename (copy), var9 (ref), var14 (ref), isCompact (ref), var19 (ref), search (copy), var12 (ref), shareGameInviteLinkModule (copy), var11 (ref), var13 (ref), uDim2 (write)
+		-- upvalues: reactModule (copy), sidePadding (copy), var17 (write), p1 (ref), imageSetButton (copy), titleIconSize (copy), var19 (ref), close (copy), var2 (ref), fFlagConnectionsToFriendsRename (copy), var9 (ref), var14 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), isCompact (ref), var20 (ref), search (copy), var12 (ref), shareGameInviteLinkModule (copy), var11 (ref), var13 (ref), uDim2 (write)
 		return {
 			UIPadding = reactModule.createElement("UIPadding", {
 				PaddingLeft = UDim.new(0, sidePadding),
@@ -159,7 +164,7 @@ return function(p1)
 			LeftActionContainer = reactModule.createElement("Frame", {
 				LayoutOrder = 0,
 				BackgroundTransparency = 1,
-				Size = UDim2.new(0, var16, 1, 0)
+				Size = UDim2.new(0, var17, 1, 0)
 			}, {
 				UIListLayout = reactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
@@ -171,7 +176,7 @@ return function(p1)
 				CloseButton = if not p1.hideCloseButton then reactModule.createElement(imageSetButton, {
 					BackgroundTransparency = 1,
 					Size = UDim2.new(0, titleIconSize, 0, titleIconSize),
-					[reactModule.Event.Activated] = var18,
+					[reactModule.Event.Activated] = var19,
 					Image = close,
 					ImageColor3 = var2.Theme.IconEmphasis.Color,
 					ImageTransparency = var2.Theme.IconEmphasis.Transparency,
@@ -186,13 +191,14 @@ return function(p1)
 				TextSize = var14,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextColor3 = var2.Theme.TextEmphasis.Color,
-				Font = var2.Font.Header2.Font,
-				Size = UDim2.new(1, var16 * 2 * -1, 1, 0)
+				Font = if foundationFontFaceMigration then nil else var2.Font.Header2.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.TitleLarge.Font) else nil,
+				Size = UDim2.new(1, var17 * 2 * -1, 1, 0)
 			}),
 			RightActionContainer = reactModule.createElement("Frame", {
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
-				Size = UDim2.new(0, var16, 1, 0)
+				Size = UDim2.new(0, var17, 1, 0)
 			}, {
 				UIListLayout = reactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
@@ -206,7 +212,7 @@ return function(p1)
 					BackgroundTransparency = 1,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Size = UDim2.new(0, titleIconSize, 0, titleIconSize),
-					[reactModule.Event.Activated] = var19,
+					[reactModule.Event.Activated] = var20,
 					Image = search,
 					ImageColor3 = var2.Theme.IconEmphasis.Color,
 					ImageTransparency = var2.Theme.IconEmphasis.Transparency,

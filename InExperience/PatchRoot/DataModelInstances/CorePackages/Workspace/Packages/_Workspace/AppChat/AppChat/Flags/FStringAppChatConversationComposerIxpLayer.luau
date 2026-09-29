@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("AppChatConversationComposerIxpLayer", "Party.ConversationPage.Composer")

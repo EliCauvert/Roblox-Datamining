@@ -9,6 +9,8 @@ local foundationModule = require(corePackagesService.Packages.Foundation)
 local iconName = foundationModule.Enums.IconName
 local iconVariant = foundationModule.Enums.IconVariant
 local iconSize = foundationModule.Enums.IconSize
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useLayoutValues = playerListModule.Common.useLayoutValues
 local withStyle = UIBloxModule.Style.withStyle
 local parent = script.Parent.Parent
@@ -76,11 +78,11 @@ function dropDownButton.getColorBackgroundAnimation(value, p1)
 end
 
 function dropDownButton.render(p1)
-	-- upvalues: withLayoutValues (ref), withStyle (ref), colors (ref), fFlagAllowDisplayingFoundationIconsForDropdownModule (ref), iconName (ref), roactModule (ref), foundationModule (ref), iconVariant (ref), iconSize (ref), imageSetLabel (ref), fFlagEnableMobilePlayerListOnConsole (ref), iconButtonModule (ref), images (ref)
+	-- upvalues: withLayoutValues (ref), withStyle (ref), colors (ref), fFlagAllowDisplayingFoundationIconsForDropdownModule (ref), iconName (ref), roactModule (ref), foundationModule (ref), iconVariant (ref), iconSize (ref), imageSetLabel (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), fFlagEnableMobilePlayerListOnConsole (ref), iconButtonModule (ref), images (ref)
 	return withLayoutValues(function(p2)
-		-- upvalues: withStyle (copy), p1 (ref), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), iconSize (copy), imageSetLabel (copy), fFlagEnableMobilePlayerListOnConsole (copy), iconButtonModule (copy), images (copy)
+		-- upvalues: withStyle (copy), p1 (ref), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), iconSize (copy), imageSetLabel (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), fFlagEnableMobilePlayerListOnConsole (copy), iconButtonModule (copy), images (copy)
 		return withStyle(function(p3)
-			-- upvalues: p2 (write), p1 (copy), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), iconSize (copy), imageSetLabel (copy), fFlagEnableMobilePlayerListOnConsole (copy), iconButtonModule (copy), images (copy)
+			-- upvalues: p2 (write), p1 (copy), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), iconSize (copy), imageSetLabel (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), fFlagEnableMobilePlayerListOnConsole (copy), iconButtonModule (copy), images (copy)
 			p2 = p1.props.layoutValues
 			local t = { Transparency = 1, Color = Color3.new(1, 1, 1) }
 			
@@ -221,7 +223,8 @@ function dropDownButton.render(p1)
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, -var7, 1, 0),
 						Text = p1.props.text,
-						Font = p3.Font.Header2.Font,
+						Font = if foundationFontFaceMigration then nil else p3.Font.Header2.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.TitleLarge.Font) else nil,
 						TextSize = if fFlagEnableMobilePlayerListOnConsole then p2.DropDownButtonTextSize else p3.Font.BaseSize * p3.Font.Header2.RelativeSize,
 						TextColor3 = p3.Theme.TextEmphasis.Color,
 						TextTransparency = p3.Theme.TextEmphasis.Transparency,

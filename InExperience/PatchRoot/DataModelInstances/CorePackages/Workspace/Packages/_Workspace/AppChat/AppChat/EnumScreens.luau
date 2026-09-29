@@ -30,7 +30,6 @@
 	ReportAbuse = "ReportAbuse",
 	ViewUserProfile = "ViewUserProfile",
 	Groups = "Groups",
-	UnfilteredThreadsLearnMore = "UnfilteredThreadsLearnMore",
 	FriendsLanding = "FriendsLanding",
 	Home = "Home"
 }

@@ -3,6 +3,9 @@ local userInputService = game:GetService("UserInputService")
 local parent = script:FindFirstAncestor("InputUi").Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local useLocalization = require(parent.Localization).Hooks.useLocalization
@@ -11,7 +14,7 @@ local _ = require(script.Parent.GamepadDisconnectTokenMapper)
 local gamepadMessageKeyEngineFeature = game:GetEngineFeature("GamepadMessageKeyEngineFeature")
 
 return function(p1)
-	-- upvalues: useDesignTokens (ref), gamepadMessageKeyEngineFeature (ref), memStorageService (ref), useLocalization (ref), userInputService (ref), reactModule (ref), imageSetLabel (ref), images (ref)
+	-- upvalues: useDesignTokens (ref), gamepadMessageKeyEngineFeature (ref), memStorageService (ref), useLocalization (ref), userInputService (ref), reactModule (ref), imageSetLabel (ref), images (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local gamepadDisconnectMessageKeyItem
 	local var1 = useDesignTokens()
 	local color3 = var1.Color.Content.Emphasis.Color3
@@ -121,7 +124,8 @@ return function(p1)
 							TextColor3 = color3,
 							TextTransparency = transparency,
 							TextSize = var1.Typography.HeadingLarge.FontSize,
-							Font = var1.Typography.HeadingLarge.Font,
+							Font = if foundationFontFaceMigration then nil else var1.Typography.HeadingLarge.Font,
+							FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.HeadingLarge.Font) else nil,
 							TextXAlignment = Enum.TextXAlignment.Left
 						})
 					}),
@@ -135,7 +139,8 @@ return function(p1)
 						TextColor3 = color3,
 						TextTransparency = transparency,
 						TextSize = var1.Typography.TitleLarge.FontSize,
-						Font = var1.Typography.TitleLarge.Font,
+						Font = if foundationFontFaceMigration then nil else var1.Typography.TitleLarge.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.TitleLarge.Font) else nil,
 						TextXAlignment = Enum.TextXAlignment.Left
 					})
 				})

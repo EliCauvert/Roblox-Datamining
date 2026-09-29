@@ -3,6 +3,9 @@ local parent = editProfile.Parent
 local userInputService = game:GetService("UserInputService")
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useStyle = UIBloxModule.Core.Style.useStyle
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local images = UIBloxModule.App.ImageSet.Images
@@ -12,7 +15,7 @@ local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
 local callbackInputBox = require(parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Components.CallbackInputBox
 
 return function(p1)
-	-- upvalues: reactModule (ref), useStyle (ref), useScreenSize (ref), socialNetworksInEditProfileIXPModule (ref), userInputService (ref), imageSetLabel (ref), images (ref), callbackInputBox (ref), iconSize (ref)
+	-- upvalues: reactModule (ref), useStyle (ref), useScreenSize (ref), socialNetworksInEditProfileIXPModule (ref), userInputService (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), imageSetLabel (ref), images (ref), callbackInputBox (ref), iconSize (ref)
 	local var1 = reactModule.useRef(nil)
 	local var2 = useStyle()
 	local font = var2.Font
@@ -82,7 +85,8 @@ return function(p1)
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			RichText = true,
-			Font = font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodyLarge.Font) else nil,
 			Text = p1.networkTitle,
 			TextSize = var3,
 			TextColor3 = theme.TextDefault.Color,

@@ -2,6 +2,9 @@
 local parent = editProfile.Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useStyle = UIBloxModule.Core.Style.useStyle
 local editSocialNetworksItemModule = require(editProfile.Components.EditSocialNetworksItem)
 local dropdownMenu = UIBloxModule.App.Menu.DropdownMenu
@@ -19,7 +22,7 @@ local fFlagEditProfileFixFocusNavigationModule = require(editProfile.Flags.FFlag
 local focusNavigatorWrapperModule = require(editProfile.Utils.FocusNavigatorWrapper)
 
 return function(p1)
-	-- upvalues: reactModule (ref), constantsModule (ref), useLocalization (ref), textKeysModule (ref), useNavigationProps (ref), socialNetworksInEditProfileIXPModule (ref), useStyle (ref), useScreenSize (ref), fFlagEditProfileFixFocusNavigationModule (ref), focusNavigatorWrapperModule (ref), verticalScrollView (ref), interactiveAlert (ref), editSocialNetworksItemModule (ref), dropdownMenu (ref), buttonType (ref)
+	-- upvalues: reactModule (ref), constantsModule (ref), useLocalization (ref), textKeysModule (ref), useNavigationProps (ref), socialNetworksInEditProfileIXPModule (ref), useStyle (ref), useScreenSize (ref), fFlagEditProfileFixFocusNavigationModule (ref), focusNavigatorWrapperModule (ref), verticalScrollView (ref), interactiveAlert (ref), editSocialNetworksItemModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), dropdownMenu (ref), buttonType (ref)
 	local var1, var2 = reactModule.useState(p1.socialNetworks.facebook)
 	local var3, var4 = reactModule.useState(p1.socialNetworks.twitter)
 	local var5, var6 = reactModule.useState(p1.socialNetworks.youtube)
@@ -81,7 +84,7 @@ return function(p1)
 				anchorPoint = Vector2.new(0.5, 0),
 				position = UDim2.new(0.5, 0, 0, 30 + var13),
 				middleContent = function()
-					-- upvalues: reactModule (copy), editSocialNetworksItemModule (copy), var2 (ref), var16 (ref), var1 (ref), var18 (ref), socialNetworksInEditProfileIXPModule (copy), var17 (ref), var15 (ref), var14 (ref), var4 (ref), var3 (ref), var6 (ref), var5 (ref), var8 (ref), var7 (ref), var10 (ref), var9 (ref), font (ref), var20 (ref), theme (ref), dropdownMenu (copy), var11 (ref), var22 (ref), var21 (ref), constantsModule (copy)
+					-- upvalues: reactModule (copy), editSocialNetworksItemModule (copy), var2 (ref), var16 (ref), var1 (ref), var18 (ref), socialNetworksInEditProfileIXPModule (copy), var17 (ref), var15 (ref), var14 (ref), var4 (ref), var3 (ref), var6 (ref), var5 (ref), var8 (ref), var7 (ref), var10 (ref), var9 (ref), foundationFontFaceMigration (copy), font (ref), normalizeFontFace (copy), var19 (ref), var20 (ref), theme (ref), dropdownMenu (copy), var11 (ref), var22 (ref), var21 (ref), constantsModule (copy)
 					return reactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						AutomaticSize = Enum.AutomaticSize.XY
@@ -159,7 +162,8 @@ return function(p1)
 								BackgroundTransparency = 1,
 								RichText = true,
 								ZIndex = 0,
-								Font = font.Body.Font,
+								Font = if foundationFontFaceMigration then nil else font.Body.Font,
+								FontFace = if foundationFontFaceMigration then normalizeFontFace(var19.Tokens.Typography.BodyLarge.Font) else nil,
 								Text = var16.VisibleTo,
 								TextSize = var20,
 								TextColor3 = theme.TextDefault.Color,
@@ -230,7 +234,7 @@ return function(p1)
 			anchorPoint = Vector2.new(0.5, 0),
 			position = UDim2.new(0.5, 0, 0, 30 + var13),
 			middleContent = function()
-				-- upvalues: reactModule (copy), editSocialNetworksItemModule (copy), var2 (ref), var16 (ref), var1 (ref), var18 (ref), socialNetworksInEditProfileIXPModule (copy), var17 (ref), var15 (ref), var14 (ref), var4 (ref), var3 (ref), var6 (ref), var5 (ref), var8 (ref), var7 (ref), var10 (ref), var9 (ref), font (ref), var20 (ref), theme (ref), dropdownMenu (copy), var11 (ref), var22 (ref), var21 (ref), constantsModule (copy)
+				-- upvalues: reactModule (copy), editSocialNetworksItemModule (copy), var2 (ref), var16 (ref), var1 (ref), var18 (ref), socialNetworksInEditProfileIXPModule (copy), var17 (ref), var15 (ref), var14 (ref), var4 (ref), var3 (ref), var6 (ref), var5 (ref), var8 (ref), var7 (ref), var10 (ref), var9 (ref), foundationFontFaceMigration (copy), font (ref), normalizeFontFace (copy), var19 (ref), var20 (ref), theme (ref), dropdownMenu (copy), var11 (ref), var22 (ref), var21 (ref), constantsModule (copy)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.XY
@@ -308,7 +312,8 @@ return function(p1)
 							BackgroundTransparency = 1,
 							RichText = true,
 							ZIndex = 0,
-							Font = font.Body.Font,
+							Font = if foundationFontFaceMigration then nil else font.Body.Font,
+							FontFace = if foundationFontFaceMigration then normalizeFontFace(var19.Tokens.Typography.BodyLarge.Font) else nil,
 							Text = var16.VisibleTo,
 							TextSize = var20,
 							TextColor3 = theme.TextDefault.Color,

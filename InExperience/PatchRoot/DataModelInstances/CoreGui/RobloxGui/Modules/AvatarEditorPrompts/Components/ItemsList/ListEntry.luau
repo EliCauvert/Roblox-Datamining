@@ -4,6 +4,10 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local roactModule = require(corePackagesService.Packages.Roact)
 local tModule = require(corePackagesService.Packages.t)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTextSize
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local text = require(corePackagesService.Workspace.Packages.AppCommonLib).Text
 local roactFitComponents = require(corePackagesService.Packages.AvatarExperienceDeps).RoactFitComponents
 local fitTextLabel = roactFitComponents.FitTextLabel
@@ -22,14 +26,14 @@ listEntry.validateProps = tModule.strictInterface({
 })
 
 function listEntry.render(p1)
-	-- upvalues: withStyle (ref), text (ref), roactModule (ref), roactFitComponents (ref), fitTextLabel (ref)
+	-- upvalues: withStyle (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), roactModule (ref), roactFitComponents (ref), normalizeFontFace (ref), fitTextLabel (ref)
 	return withStyle(function(p2)
-		-- upvalues: text (copy), p1 (ref), roactModule (copy), roactFitComponents (copy), fitTextLabel (copy)
+		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), text (copy), p1 (ref), roactModule (copy), roactFitComponents (copy), normalizeFontFace (copy), fitTextLabel (copy)
 		local font = p2.Font
 		local theme = p2.Theme
 		local font_1 = font.CaptionBody.Font
 		local var1 = font.BaseSize * font.CaptionBody.RelativeSize
-		local textWidth = text.GetTextWidth("\226\128\162 ", font_1, var1)
+		local var2 = if foundationFontFaceMigration then getTextSize("\226\128\162 ", var1, p2.Tokens.Typography.BodySmall.Font, Vector2.new(10000, 10000)).X else text.GetTextWidth("\226\128\162 ", font_1, var1)
 		
 		return roactModule.createElement(roactFitComponents.FitFrameVertical, {
 			width = UDim.new(1, 0),
@@ -48,8 +52,9 @@ function listEntry.render(p1)
 				BackgroundTransparency = 1,
 				Text = "\226\128\162 ",
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(textWidth, var1),
-				Font = font_1,
+				Size = UDim2.fromOffset(var2, var1),
+				Font = if foundationFontFaceMigration then nil else font_1,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodySmall.Font) else nil,
 				TextSize = var1,
 				TextColor3 = theme.TextDefault.Color,
 				TextTransparency = theme.TextDefault.Transparency,
@@ -58,7 +63,7 @@ function listEntry.render(p1)
 			Text = roactModule.createElement(fitTextLabel, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
-				width = UDim.new(1, if p1.props.hasBullet then -textWidth else 0),
+				width = UDim.new(1, if p1.props.hasBullet then -var2 else 0),
 				Text = p1.props.text,
 				Font = font_1,
 				TextSize = var1,

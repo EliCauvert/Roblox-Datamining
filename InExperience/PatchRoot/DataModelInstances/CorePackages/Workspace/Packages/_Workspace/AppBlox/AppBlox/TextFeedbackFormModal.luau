@@ -1,6 +1,8 @@
 ﻿local parent = script:FindFirstAncestor("AppBlox").Parent
 local centralOverlayModule = require(parent.CentralOverlay)
 local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local localizationModule = require(parent.Localization)
 local navigationRoduxModule = require(parent.NavigationRodux)
 local reactModule = require(parent.React)
@@ -24,7 +26,7 @@ local useAppPolicy = universalAppPolicyModule.useAppPolicy
 local urlBuilder = urlBuilderModule.UrlBuilder
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), useTokens (ref), useLocalization (ref), reactModule (ref), closeCentralOverlay (ref), useAppPolicy (ref), appPage (ref), urlBuilder (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), dialog (ref), luaAppTextFeedbackFormModalStandardInput (ref), buttonVariant (ref)
+	-- upvalues: useDispatch (ref), useTokens (ref), useLocalization (ref), reactModule (ref), closeCentralOverlay (ref), useAppPolicy (ref), appPage (ref), urlBuilder (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), dialog (ref), luaAppTextFeedbackFormModalStandardInput (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), buttonVariant (ref)
 	local var2 = useDispatch()
 	local var3 = useTokens()
 	local var4 = useLocalization({
@@ -68,7 +70,8 @@ return reactModule.memo(function(p1)
 					AutomaticSize = Enum.AutomaticSize.Y,
 					BackgroundTransparency = 1,
 					ClearTextOnFocus = false,
-					Font = if luaAppTextFeedbackFormModalStandardInput then var3.Typography.BodyMedium.Font else var3.Typography.CaptionMedium.Font,
+					Font = if foundationFontFaceMigration then nil elseif luaAppTextFeedbackFormModalStandardInput then var3.Typography.BodyMedium.Font else var3.Typography.CaptionMedium.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(if luaAppTextFeedbackFormModalStandardInput then var3.Typography.BodyMedium.Font else var3.Typography.CaptionMedium.Font) else nil,
 					LineHeight = if luaAppTextFeedbackFormModalStandardInput then var3.Typography.BodyMedium.LineHeight else var3.LineHeight.LineHeight_140,
 					MultiLine = true,
 					PlaceholderColor3 = var3.Color.Content.Muted.Color3,

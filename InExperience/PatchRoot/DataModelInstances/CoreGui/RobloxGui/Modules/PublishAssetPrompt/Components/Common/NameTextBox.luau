@@ -4,6 +4,9 @@ local tModule = require(corePackagesService.Packages.t)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local focusable = require(corePackagesService.Packages.RoactGamepad).Focusable
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local withStyle = UIBloxModule.Style.withStyle
 local withSelectionCursorProvider = UIBloxModule.App.SelectionImage.withSelectionCursorProvider
 local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
@@ -80,7 +83,7 @@ function nameTextBox.checkIsNameValid(_, p1)
 end
 
 function nameTextBox.renderWithProviders(p1, p2, p3)
-	-- upvalues: roactModule (ref), focusable (ref), cursorKind (ref)
+	-- upvalues: roactModule (ref), focusable (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), cursorKind (ref)
 	local font = p2.Font
 	local theme = p2.Theme
 	local body = font.Body
@@ -100,7 +103,8 @@ function nameTextBox.renderWithProviders(p1, p2, p3)
 				Text = p1.state.name,
 				BackgroundTransparency = 1,
 				ClearTextOnFocus = false,
-				Font = body.Font,
+				Font = if foundationFontFaceMigration then nil else body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
 				TextSize = font.BaseSize * body.RelativeSize,
 				PlaceholderColor3 = theme.PlaceHolder.Color,
 				PlaceholderText = p1.props.defaultName,
@@ -143,7 +147,8 @@ function nameTextBox.renderWithProviders(p1, p2, p3)
 			TextYAlignment = Enum.TextYAlignment.Top,
 			Size = UDim2.new(1, 0, 0, 20),
 			TextColor3 = theme.Alert.Color,
-			Font = font.Body.Font
+			Font = if foundationFontFaceMigration then nil else font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil
 		})
 	})
 end

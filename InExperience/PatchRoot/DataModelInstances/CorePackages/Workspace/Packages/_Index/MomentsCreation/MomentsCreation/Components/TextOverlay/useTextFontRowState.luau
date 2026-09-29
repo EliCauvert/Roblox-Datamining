@@ -15,11 +15,15 @@ local useSignalState = signalsReactModule.useSignalState
 local useTokens = foundationModule.Hooks.useTokens
 local useFormFactor = momentsCommonModule.Hooks.useFormFactor
 local formFactor = momentsCommonModule.Enums.FormFactor
+local eventNames = momentsCommonModule.Analytics.EventNames
+local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
+local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
+local fFlagMomentsTextOverlayV2Redesign = momentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
 
 return function(value)
-	-- upvalues: useTokens (ref), useFormFactor (ref), formFactor (ref), useMemo (ref), signalsModule (ref), useSignalState (ref), useCallback (ref), dashModule (ref), useRef (ref), useState (ref), reactOtterModule (ref)
+	-- upvalues: useTokens (ref), useFormFactor (ref), formFactor (ref), useMemo (ref), signalsModule (ref), useSignalState (ref), useCallback (ref), dashModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), useRef (ref), useState (ref), reactOtterModule (ref)
 	local var1 = useTokens()
 	local var2 = useFormFactor() == formFactor.Wide
 	local var3 = useSignalState(useMemo(function()
@@ -33,20 +37,22 @@ return function(value)
 			return if var5 == nil then Enum.Font.BuilderSansMedium else var5.textOverlayStyle.font
 		end)
 	end, { value }))
-	local var4 = useCallback(function(p1)
-		-- upvalues: value (ref), dashModule (copy)
+	local var4 = useCallback(function(p1, p2)
+		-- upvalues: value (ref), dashModule (copy), fFlagMomentsTextOverlayV2Redesign (copy), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
 		local activeSession = value.getActiveSession(false)
 		
 		if activeSession == nil then return end
 		local draft = activeSession.getDraft(false)
 		local var5 = draft and draft[1]
 		
-		if var5 == nil then
-			return
-		end
+		if var5 == nil then return end
 		activeSession.update({
 			dashModule.joinDeep(var5, { textOverlayStyle = { font = p1 } })
 		})
+		
+		if fFlagMomentsTextOverlayV2Redesign then
+			fireAnalyticsEventModule(eventNames.EditingFlowTextOverlayFontSelected, makeCreationEventFieldsModule.makeTextOverlayEventFields({ buttonIndex = tostring(p2), font = p1.Name }))
+		end
 	end, { value })
 	local var5 = useRef(nil)
 	local var6, var7 = useState(false)

@@ -6,6 +6,10 @@ local tModule = require(corePackagesService.Packages.t)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local focusable = require(corePackagesService.Packages.RoactGamepad).Focusable
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTextSize
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local withStyle = UIBloxModule.Style.withStyle
 local withSelectionCursorProvider = UIBloxModule.App.SelectionImage.withSelectionCursorProvider
 local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
@@ -63,22 +67,24 @@ function assetDescriptionTextBox.init(p1)
 end
 
 function assetDescriptionTextBox.calculateNeedsRescroll(p1, p2, p3)
-	-- upvalues: textService (ref)
+	-- upvalues: foundationFontFaceMigration (ref), getTextSize (ref), textService (ref)
 	if p1.state.cursorPosition == -1 then return end
-	local var1 = p3.RelativeSize * p2.Font.BaseSize
-	local var2 = textService:GetTextSize((p1.state.assetDescription or ""):sub(1, p1.state.cursorPosition - 1), var1, p3.Font, Vector2.new(p1.state.textBoxWidth, 10000))
+	local var1 = (p1.state.assetDescription or ""):sub(1, p1.state.cursorPosition - 1)
+	local var2 = p3.RelativeSize * p2.Font.BaseSize
+	local vector2 = Vector2.new(p1.state.textBoxWidth, 10000)
+	local var3 = if foundationFontFaceMigration then getTextSize(var1, var2, p2.Tokens.Typography.BodySmall.Font, vector2, { addTemporaryPadding = false }) else textService:GetTextSize(var1, var2, p3.Font, vector2)
 	
-	if p1.state.scrollingFrameHeight + p1.state.canvasPosition < var2.Y then
-		p1:setState({ canvasPosition = var2.Y - p1.state.scrollingFrameHeight })
+	if p1.state.scrollingFrameHeight + p1.state.canvasPosition < var3.Y then
+		p1:setState({ canvasPosition = var3.Y - p1.state.scrollingFrameHeight })
 		
 		return
-	elseif var2.Y - var1 < p1.state.canvasPosition then
-		p1:setState({ canvasPosition = var2.Y - var1 })
+	elseif var3.Y - var2 < p1.state.canvasPosition then
+		p1:setState({ canvasPosition = var3.Y - var2 })
 	end
 end
 
 function assetDescriptionTextBox.onTextChanged(p1, p2, p3, p4)
-	-- upvalues: getFFlagValidateDescriptionModule (ref), textService (ref)
+	-- upvalues: getFFlagValidateDescriptionModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref)
 	local var1
 	local text = p2.Text
 	
@@ -95,18 +101,21 @@ function assetDescriptionTextBox.onTextChanged(p1, p2, p3, p4)
 		lastValidDescription = p2.Text
 	end
 	local charCount_1 = utf8.len(utf8.nfcnormalize(text))
+	local var2 = if charCount_1 == nil then 0 else charCount_1
+	local var3 = p4.RelativeSize * p3.Font.BaseSize
+	local vector2 = Vector2.new(p1.state.textBoxWidth, 10000)
 	p1:setState({
 		lastValidDescription = lastValidDescription,
 		assetDescription = text,
-		descriptionLength = if charCount_1 == nil then 0 else charCount_1,
-		canvasHeight = math.max(100, textService:GetTextSize(text, p4.RelativeSize * p3.Font.BaseSize, p4.Font, Vector2.new(p1.state.textBoxWidth, 10000)).Y),
+		descriptionLength = var2,
+		canvasHeight = math.max(100, (if foundationFontFaceMigration then getTextSize(text, var3, p3.Tokens.Typography.BodySmall.Font, vector2, { addTemporaryPadding = false }) else textService:GetTextSize(text, var3, p4.Font, vector2)).Y),
 		isDescriptionValid = var1
 	})
 	p1.props.onAssetDescriptionUpdated(text, var1)
 end
 
 function assetDescriptionTextBox.renderWithProviders(p1, p2, p3)
-	-- upvalues: getFFlagValidateDescriptionModule (ref), roactModule (ref), imageSetLabel (ref), circle17Stroke1 (ref), rect (ref), focusable (ref), robloxTranslatorModule (ref), cursorKind (ref)
+	-- upvalues: getFFlagValidateDescriptionModule (ref), roactModule (ref), imageSetLabel (ref), circle17Stroke1 (ref), rect (ref), focusable (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), robloxTranslatorModule (ref), cursorKind (ref)
 	local font = p2.Font
 	local captionBody = font.CaptionBody
 	local theme = p2.Theme
@@ -147,7 +156,8 @@ function assetDescriptionTextBox.renderWithProviders(p1, p2, p3)
 					Text = p1.state.assetDescription,
 					BackgroundTransparency = 1,
 					ClearTextOnFocus = false,
-					Font = font.Header2.Font,
+					Font = if foundationFontFaceMigration then nil else font.Header2.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
 					TextSize = font.BaseSize * captionBody.RelativeSize,
 					PlaceholderColor3 = theme.PlaceHolder.Color,
 					PlaceholderText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.AssetDescriptionPlaceholder"),
@@ -201,7 +211,8 @@ function assetDescriptionTextBox.renderWithProviders(p1, p2, p3)
 			TextYAlignment = Enum.TextYAlignment.Top,
 			Size = UDim2.new(0.8, 0, 0, 20),
 			TextColor3 = theme.Alert.Color,
-			Font = font.Body.Font
+			Font = if foundationFontFaceMigration then nil else font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil
 		}))
 	})
 end

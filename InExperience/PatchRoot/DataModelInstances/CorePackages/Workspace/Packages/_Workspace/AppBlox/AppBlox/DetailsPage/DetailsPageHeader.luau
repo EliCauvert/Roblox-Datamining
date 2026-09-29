@@ -1,5 +1,8 @@
 ﻿local parent = script:FindFirstAncestor("AppBlox").Parent
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local withStyle = UIBloxModule.Core.Style.withStyle
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local images = UIBloxModule.App.ImageSet.Images
@@ -78,7 +81,7 @@ function detailsPageHeader.renderThumbnail(p1, p2, p3, p4, p5)
 end
 
 function detailsPageHeader.renderDesktopMode(p1, p2)
-	-- upvalues: roactModule (ref), luaAppBottomAlignDetailsHeaderInfoFrame (ref), detailsPageTitleContentModule (ref), actionBar (ref), fFlagUIBloxEnableActionBarButtonOverride (ref), fFlagUIBloxAddTestIdToActionBar (ref)
+	-- upvalues: roactModule (ref), luaAppBottomAlignDetailsHeaderInfoFrame (ref), detailsPageTitleContentModule (ref), actionBar (ref), fFlagUIBloxEnableActionBarButtonOverride (ref), fFlagUIBloxAddTestIdToActionBar (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local thumbnailHeight = p1.props.thumbnailHeight
 	local var1 = thumbnailHeight * (p1.props.thumbnailAspectRatio.X / p1.props.thumbnailAspectRatio.Y)
 	local sideMargin = p1.props.sideMargin or 48
@@ -151,7 +154,8 @@ function detailsPageHeader.renderDesktopMode(p1, p2)
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextWrapped = true,
 					BackgroundTransparency = 1,
-					Font = p2.Tokens.Typography.BodyLarge.Font,
+					Font = if foundationFontFaceMigration then nil else p2.Tokens.Typography.BodyLarge.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
 					TextSize = p2.Tokens.FontSize.FontSize_350,
 					TextColor3 = p2.Tokens.Color.Content.Emphasis.Color3,
 					TextTransparency = p2.Tokens.Color.Content.Emphasis.Transparency,

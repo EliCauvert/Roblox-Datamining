@@ -14,6 +14,7 @@ local createEditSessionModule = require(momentsCreation.Stores.createEditSession
 local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
 local makeDefaultTextOverlayEditModule = require(momentsCreation.Utils.makeDefaultTextOverlayEdit)
 local clampTtsStartTimeModule = require(momentsCreation.Utils.clampTtsStartTime)
+local fFlagMomentsCommentsCreatorControlModule = require(momentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
 local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
 local getFFlagMomentsTTSStartTimePositioningModule = require(momentsCreation.Flags.GetFFlagMomentsTTSStartTimePositioning)
 local getFFlagMomentsGenerateTextInTextOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsGenerateTextInTextOverlay)
@@ -28,11 +29,12 @@ local getFFlagMomentsCreationSaveDraft = momentsCommonModule.Flags.GetFFlagMomen
 local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
 local fFlagMomentsContentStatsTelemetry = momentsCommonModule.Flags.FFlagMomentsContentStatsTelemetry
 local fFlagMomentTextGenerationFilteredSignal = momentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
+local fFlagMomentsTextOverlayV2Redesign = momentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
 local createComputed = signalsModule.createComputed
 local createSignal = signalsModule.createSignal
 
 return function(p1)
-	-- upvalues: creationToolRegistryModule (ref), defaultCreationToolsModule (ref), sessionManager (ref), funnelEventNames (ref), createSignal (ref), createComputed (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSAudioOverlayModule (ref), createCapturePreviewControllerModule (ref), createTTSAudioManagerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), getFFlagMomentsCreationSaveDraft (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), clampTtsStartTimeModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), dialogTypeModule (ref), makeDefaultTextOverlayEditModule (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref)
+	-- upvalues: creationToolRegistryModule (ref), defaultCreationToolsModule (ref), sessionManager (ref), funnelEventNames (ref), createSignal (ref), createComputed (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSAudioOverlayModule (ref), createCapturePreviewControllerModule (ref), createTTSAudioManagerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), getFFlagMomentsCreationSaveDraft (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), clampTtsStartTimeModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), dialogTypeModule (ref), fFlagMomentsCommentsCreatorControlModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), makeDefaultTextOverlayEditModule (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref)
 	local store = p1.store
 	local host = p1.host or {}
 	local registry = p1.registry or creationToolRegistryModule(defaultCreationToolsModule)
@@ -454,7 +456,7 @@ return function(p1)
 		getVoiceCoachmarkDismissed = var10,
 		dismissVoiceCoachmark = dismissVoiceCoachmark,
 		publish = function()
-			-- upvalues: store (ref), host (ref), var3 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), sessionManager (copy), funnelEventNames (copy), preview (ref), var4 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), getFFlagMomentsTTSAudioOverlayModule (copy), getFFlagMomentsTTSStartTimePositioningModule (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), dismiss (ref)
+			-- upvalues: store (ref), host (ref), var3 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), sessionManager (copy), funnelEventNames (copy), preview (ref), fFlagMomentsCommentsCreatorControlModule (copy), var4 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), getFFlagMomentsTTSAudioOverlayModule (copy), getFFlagMomentsTTSStartTimePositioningModule (copy), fFlagMomentsTextOverlayV2Redesign (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), dismiss (ref)
 			local description = store.getDescription(false)
 			
 			if host.isTextFiltered ~= nil and host.isTextFiltered(description) then
@@ -474,7 +476,13 @@ return function(p1)
 			local sessionId = sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)
 			
 			if host.createMoment ~= nil then
-				host.createMoment(store.getSelectedCapture(false), var4(false), description, sessionId, preview.playback.getTimeLength(false))
+				local timeLength = preview.playback.getTimeLength(false)
+				
+				if fFlagMomentsCommentsCreatorControlModule then
+					host.createMoment(store.getSelectedCapture(false), var4(false), description, sessionId, timeLength, store.getCommentsEnabled(false))
+				else
+					host.createMoment(store.getSelectedCapture(false), var4(false), description, sessionId, timeLength)
+				end
 			end
 			local textOverlayEdits
 			local var17 = cryoModule.Dictionary.join(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowPublished), makeCreationEventFieldsModule.makeCreationBaseFields(sessionId))
@@ -496,6 +504,10 @@ return function(p1)
 						ttsStartTimeFraction = tostring(if var18 > 0 then startTime / var18 else 0)
 					})
 				end
+			end
+			if fFlagMomentsTextOverlayV2Redesign then
+				textOverlayEdits = var4(false).textOverlays
+				var17 = cryoModule.Dictionary.join(var17, makeCreationEventFieldsModule.makeTextOverlayPublishSummaryFields(textOverlayEdits and textOverlayEdits[1]))
 			end
 			fireAnalyticsEventModule(eventNames.MomentsEditingFlowPublished, var17)
 			

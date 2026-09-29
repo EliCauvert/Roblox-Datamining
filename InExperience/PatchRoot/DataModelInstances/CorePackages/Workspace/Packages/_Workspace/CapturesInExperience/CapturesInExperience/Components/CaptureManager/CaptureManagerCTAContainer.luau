@@ -5,6 +5,9 @@ local reactModule = require(parent_1.React)
 local roactUtilsModule = require(parent_1.RoactUtils)
 local socialStopwatchModule = require(parent_1.SocialStopwatch)
 local UIBloxModule = require(parent_1.UIBlox)
+local foundationModule = require(parent_1.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local iconButton = UIBloxModule.App.Button.IconButton
 local iconSize = UIBloxModule.App.Constant.IconSize
 local images = UIBloxModule.App.ImageSet.Images
@@ -31,7 +34,7 @@ local uDim2 = UDim2.new(0.33, 0, 0, 36)
 return capturesPolicyModule.connect(function(p1)
 	return { enableShareCaptureCTA = p1.enableShareCaptureCTA() }
 end)(function(p1)
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useRef (ref), useSelector (ref), constantsModule (ref), reactModule (ref), capturesSaveToExternalStorageLimit (ref), useLocalization (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), getSaveToStoragePermissionModule (ref), eventNamesModule (ref), socialStopwatchModule (ref), shareCaptureModule (ref), externalShareSourceTypeModule (ref), getIsDeleteWarningModalOptedOutModule (ref), deleteWarningModalOpenedModule (ref), iconButton (ref), images (ref), iconSize (ref), uDim2 (ref)
+	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useRef (ref), useSelector (ref), constantsModule (ref), reactModule (ref), capturesSaveToExternalStorageLimit (ref), useLocalization (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), getSaveToStoragePermissionModule (ref), eventNamesModule (ref), socialStopwatchModule (ref), shareCaptureModule (ref), externalShareSourceTypeModule (ref), getIsDeleteWarningModalOptedOutModule (ref), deleteWarningModalOpenedModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), iconButton (ref), images (ref), iconSize (ref), uDim2 (ref)
 	local var1 = useAnalyticsModule()
 	local var2 = useDispatch()
 	local var3 = useStyle()
@@ -41,7 +44,7 @@ end)(function(p1)
 		return p2[constantsModule.RoduxKey].CaptureManager.SelectedCaptures
 	end)
 	local var6, var7 = reactModule.useState(false)
-	local var22Count = #var5
+	local var23Count = #var5
 	local var8 = if #var5 ~= 0 then #var5 > 1 else true
 	local var9 = if #var5 ~= 0 then capturesSaveToExternalStorageLimit < #var5 else true
 	local var10 = #var5 == 0
@@ -54,7 +57,7 @@ end)(function(p1)
 		oneCaptureSelectedLabel = "Feature.Captures.Label.OneCaptureSelected",
 		multipleCapturesSelectedLabel = {
 			"Feature.Captures.Label.MultipleCapturesSelected",
-			numberOfCaptures = var22Count
+			numberOfCaptures = var23Count
 		}
 	})
 	reactModule.useEffect(function()
@@ -78,9 +81,9 @@ end)(function(p1)
 		var7(var16)
 	end, { var5 })
 	local var17 = reactModule.useCallback(function()
-		-- upvalues: var22Count (ref), var15 (ref)
-		return if var22Count == 0 then var15.selectCaptureLabel elseif var22Count == 1 then var15.oneCaptureSelectedLabel else var15.multipleCapturesSelectedLabel
-	end, { var22Count })
+		-- upvalues: var23Count (ref), var15 (ref)
+		return if var23Count == 0 then var15.selectCaptureLabel elseif var23Count == 1 then var15.oneCaptureSelectedLabel else var15.multipleCapturesSelectedLabel
+	end, { var23Count })
 	local var18 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), var4 (ref)
 		return if p1.isDisabled then true else DateTime.now().UnixTimestampMillis - var4.current < 500
@@ -112,7 +115,8 @@ end)(function(p1)
 			ZIndex = 1,
 			AnchorPoint = Vector2.new(1, 0.5),
 			AutomaticSize = Enum.AutomaticSize.X,
-			Font = var3.Font.Header2.Font,
+			Font = if foundationFontFaceMigration then nil else var3.Font.Header2.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Tokens.Typography.TitleLarge.Font) else nil,
 			Position = UDim2.new(1, 0, 1, 0),
 			Size = var13,
 			Text = var17(),

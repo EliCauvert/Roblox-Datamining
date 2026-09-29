@@ -7,6 +7,8 @@ local UIBlox = inGameMenuDependenciesModule.UIBlox
 local t = inGameMenuDependenciesModule.t
 local button = UIBlox.App.Button.Button
 local buttonType = UIBlox.App.Button.Enum.ButtonType
+local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTextSize
+local foundationFontFaceMigration = require(corePackagesService.Packages.Foundation).Utility.Flags.FoundationFontFaceMigration
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local assetsModule = require(script.Parent.Parent.Resources.Assets)
 local themedTextLabelModule = require(script.Parent.ThemedTextLabel)
@@ -24,11 +26,13 @@ infoDialog.validateProps = t.strictInterface({
 })
 
 function infoDialog.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), textService (ref), roact (ref), imageSetLabel (ref), assetsModule (ref), themedTextLabelModule (ref), dividerModule (ref), button (ref), buttonType (ref)
+	-- upvalues: withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), roact (ref), imageSetLabel (ref), assetsModule (ref), themedTextLabelModule (ref), dividerModule (ref), button (ref), buttonType (ref)
 	local props = p1.props
 	
 	return withFoundationOrUIBloxStyle(function(p2)
+		-- upvalues: foundationFontFaceMigration (copy)
 		return {
+			Tokens = if foundationFontFaceMigration then p2 else nil,
 			Theme = {
 				Overlay = {
 					Color = p2.Color.Common.Scrim.Color3,
@@ -48,9 +52,11 @@ function infoDialog.render(p1)
 			}
 		}
 	end, function(p2)
-		-- upvalues: props (ref), textService (copy), roact (copy), imageSetLabel (copy), assetsModule (copy), p1 (ref), themedTextLabelModule (copy), dividerModule (copy), button (copy), buttonType (copy)
+		-- upvalues: props (ref), foundationFontFaceMigration (copy), getTextSize (copy), textService (copy), roact (copy), imageSetLabel (copy), assetsModule (copy), p1 (ref), themedTextLabelModule (copy), dividerModule (copy), button (copy), buttonType (copy)
+		local font = p2.Font.Body.Font
 		local var1 = p2.Font.Body.RelativeSize * p2.Font.BaseSize
-		local var2 = math.max(textService:GetTextSize(props.bodyText, var1, p2.Font.Body.Font, Vector2.new(264, 1e999)).Y, var1 * 2) + 48
+		local bodyText = props.bodyText
+		local var2 = math.max(if foundationFontFaceMigration then getTextSize(bodyText, var1, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(264, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(bodyText, var1, font, Vector2.new(264, 1e999)).Y, var1 * 2) + 48
 		
 		return roact.createElement("Frame", {
 			BackgroundTransparency = 1,

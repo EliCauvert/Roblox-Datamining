@@ -10,7 +10,9 @@ local t = inGameMenuDependenciesModule.t
 local UIBlox = inGameMenuDependenciesModule.UIBlox
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
 local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
 local devConsoleMasterModule = require(coreGuiService.RobloxGui.Modules.DevConsoleMaster)
@@ -55,9 +57,11 @@ if not getFFlagIGMGamepadSelectionHistoryModule() then
 	end
 end
 function advancedPage.renderWithSelectionCursor(p1, p2)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), roact (ref), pageModule (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), focusHandlerModule (ref), constantsModule (ref), guiService (ref), categoryHeaderModule (ref), toggleEntryModule (ref), userGameSettingsService (ref), sendAnalyticsModule (ref), withLocalizationModule (ref), var2 (ref), devConsoleMasterModule (ref), dividerModule (ref), versionReporterModule (ref), externalEventConnectionModule (ref), onScreenProfilerEnabledPropertyChangedSignal (ref)
+	-- upvalues: withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), roact (ref), pageModule (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), focusHandlerModule (ref), constantsModule (ref), guiService (ref), categoryHeaderModule (ref), toggleEntryModule (ref), userGameSettingsService (ref), sendAnalyticsModule (ref), withLocalizationModule (ref), normalizeFontFace (ref), var2 (ref), devConsoleMasterModule (ref), dividerModule (ref), versionReporterModule (ref), externalEventConnectionModule (ref), onScreenProfilerEnabledPropertyChangedSignal (ref)
 	return withFoundationOrUIBloxStyle(function(p3)
+		-- upvalues: foundationFontFaceMigration (copy)
 		return {
+			Tokens = if foundationFontFaceMigration then p3 else nil,
 			Theme = {
 				TextEmphasis = {
 					Color = p3.Color.Content.Emphasis.Color3,
@@ -73,7 +77,7 @@ function advancedPage.renderWithSelectionCursor(p1, p2)
 			}
 		}
 	end, function(p3)
-		-- upvalues: roact (copy), pageModule (copy), p1 (ref), getFFlagIGMGamepadSelectionHistoryModule (copy), focusHandlerModule (copy), constantsModule (copy), guiService (copy), categoryHeaderModule (copy), toggleEntryModule (copy), userGameSettingsService (copy), sendAnalyticsModule (copy), withLocalizationModule (copy), p2 (ref), var2 (copy), devConsoleMasterModule (copy), dividerModule (copy), versionReporterModule (copy), externalEventConnectionModule (copy), onScreenProfilerEnabledPropertyChangedSignal (copy)
+		-- upvalues: roact (copy), pageModule (copy), p1 (ref), getFFlagIGMGamepadSelectionHistoryModule (copy), focusHandlerModule (copy), constantsModule (copy), guiService (copy), categoryHeaderModule (copy), toggleEntryModule (copy), userGameSettingsService (copy), sendAnalyticsModule (copy), withLocalizationModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), p2 (ref), var2 (copy), devConsoleMasterModule (copy), dividerModule (copy), versionReporterModule (copy), externalEventConnectionModule (copy), onScreenProfilerEnabledPropertyChangedSignal (copy)
 		return roact.createElement(pageModule, {
 			zIndex = 2,
 			pageTitle = p1.props.pageTitle,
@@ -123,13 +127,14 @@ function advancedPage.renderWithSelectionCursor(p1, p2)
 			DeveloperConsole = withLocalizationModule({
 				text = "CoreScripts.InGameMenu.GameSettings.DeveloperConsole"
 			})(function(p4)
-				-- upvalues: roact (copy), p3 (ref), p2 (copy), var2 (copy), devConsoleMasterModule (copy), p1 (copy)
+				-- upvalues: roact (copy), p3 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), p2 (copy), var2 (copy), devConsoleMasterModule (copy), p1 (copy)
 				return roact.createElement("TextButton", {
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 0, 54),
 					Text = p4.text,
 					TextColor3 = p3.Theme.TextEmphasis.Color,
-					Font = p3.Font.Header2.Font,
+					Font = if foundationFontFaceMigration then nil else p3.Font.Header2.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.TitleLarge.Font) else nil,
 					TextSize = p3.Font.Header2.RelativeSize * p3.Font.BaseSize,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					LayoutOrder = 4,

@@ -22,6 +22,7 @@ local getFFlagEnableReferredPlayerJoinRemoteEvent = require(parent.SharedFlags).
 local getFFlagEnableReferredPlayerJoinRemoteEventForAll = require(parent.SharedFlags).GetFFlagEnableReferredPlayerJoinRemoteEventForAll
 local getFIntMaxReferredPlayerJoinToasts = require(parent.SharedFlags).GetFIntMaxReferredPlayerJoinToasts
 local fFlagEnablePartyNudgeAfterJoin = require(parent.SharedFlags).FFlagEnablePartyNudgeAfterJoin
+local fFlagShowFriendJoinedYouToastForNonReferredJoins = require(parent.SharedFlags).FFlagShowFriendJoinedYouToastForNonReferredJoins
 local socialContextToastDelay = game:DefineFastInt("SocialContextToastDelay", 10)
 local var1 = if getFFlagEnableReferredPlayerJoinRemoteEvent() then function()
 	-- upvalues: getFFlagEnableReferredPlayerJoinRemoteEventForAll (ref)
@@ -250,7 +251,7 @@ local function handleFollowedPlayerDisconnected(p3, p4, p5, _, p6, p7)
 end
 
 function SocialContextToastDispatcher(p3)
-	-- upvalues: reactModule (ref), getFFlagEnableReferredPlayerJoinRemoteEvent (ref), useDispatch (ref), DEPRECATED_FriendsGetFriendStatuses (ref), handleFollowedPlayerDisconnected (ref), showYouJoinedFriendsToast (ref), socialContextToastDiagKeysModule (ref), getFFlagSocialContextToastEventStream (ref), socialContextToastEventsModule (ref), toastTypesModule (ref), socialContextToastAnalyticsActionTypesModule (ref), getNames (ref), setToastContentModule (ref), fFlagEnablePartyNudgeAfterJoin (ref), useOneToOnePartyNudgeStartPartyRejected (ref), getFIntMaxReferredPlayerJoinToasts (ref), socialContextToastDelay (ref), var1 (write)
+	-- upvalues: reactModule (ref), getFFlagEnableReferredPlayerJoinRemoteEvent (ref), useDispatch (ref), DEPRECATED_FriendsGetFriendStatuses (ref), handleFollowedPlayerDisconnected (ref), showYouJoinedFriendsToast (ref), socialContextToastDiagKeysModule (ref), getFFlagSocialContextToastEventStream (ref), socialContextToastEventsModule (ref), toastTypesModule (ref), socialContextToastAnalyticsActionTypesModule (ref), getNames (ref), setToastContentModule (ref), fFlagEnablePartyNudgeAfterJoin (ref), useOneToOnePartyNudgeStartPartyRejected (ref), getFIntMaxReferredPlayerJoinToasts (ref), fFlagShowFriendJoinedYouToastForNonReferredJoins (ref), socialContextToastDelay (ref), var1 (write)
 	local services = p3.services
 	local analytics = services.analytics
 	local playersService = services.playersService
@@ -351,9 +352,11 @@ function SocialContextToastDispatcher(p3)
 			joinerUserId = p4.UserId,
 			joinerName = p4.DisplayName
 		}))
-	end, {}) else nil
+	end, {
+		if fFlagShowFriendJoinedYouToastForNonReferredJoins then var7 else nil
+	}) else nil
 	reactModule.useEffect(function()
-		-- upvalues: fFlagEnablePartyNudgeAfterJoin (copy), services (ref), var4 (ref), socialContextToastDelay (copy), var2 (ref), playersService (ref), showToastOnJoin (ref), var3 (ref), onPlayerAdded (ref), getFFlagEnableReferredPlayerJoinRemoteEvent (copy), var1 (copy), var5 (ref), var9 (write)
+		-- upvalues: fFlagEnablePartyNudgeAfterJoin (copy), services (ref), var4 (ref), socialContextToastDelay (copy), var2 (ref), playersService (ref), showToastOnJoin (ref), fFlagShowFriendJoinedYouToastForNonReferredJoins (copy), var3 (ref), onPlayerAdded (ref), getFFlagEnableReferredPlayerJoinRemoteEvent (copy), var1 (copy), var5 (ref), var9 (write)
 		local var10 = true
 		
 		if fFlagEnablePartyNudgeAfterJoin and services.showPlayerJoinedFriendsToastRemoteEvent then
@@ -364,12 +367,12 @@ function SocialContextToastDispatcher(p3)
 			end)
 		end
 		task.delay(socialContextToastDelay, function()
-			-- upvalues: var2 (copy), playersService (copy), var10 (write), showToastOnJoin (copy), fFlagEnablePartyNudgeAfterJoin (copy), services (copy), var3 (copy), onPlayerAdded (copy), getFFlagEnableReferredPlayerJoinRemoteEvent (copy), var1 (copy), var5 (copy), var9 (copy)
+			-- upvalues: var2 (copy), playersService (copy), var10 (write), showToastOnJoin (copy), fFlagEnablePartyNudgeAfterJoin (copy), fFlagShowFriendJoinedYouToastForNonReferredJoins (copy), services (copy), var3 (copy), onPlayerAdded (copy), getFFlagEnableReferredPlayerJoinRemoteEvent (copy), var1 (copy), var5 (copy), var9 (copy)
 			if not var2.current then
 				if #playersService:GetPlayers() > 0 and var10 then
 					showToastOnJoin()
 				end
-				if not fFlagEnablePartyNudgeAfterJoin then
+				if not fFlagEnablePartyNudgeAfterJoin and not fFlagShowFriendJoinedYouToastForNonReferredJoins then
 					var3.current = playersService.PlayerAdded:Connect(onPlayerAdded)
 				elseif services.showFriendJoinedPlayerToastRemoteEvent then
 					var3.current = services.showFriendJoinedPlayerToastRemoteEvent.OnClientEvent:Connect(onPlayerAdded)

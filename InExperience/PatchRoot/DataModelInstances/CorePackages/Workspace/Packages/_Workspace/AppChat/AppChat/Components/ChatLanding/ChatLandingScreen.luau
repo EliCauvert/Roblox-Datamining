@@ -22,6 +22,10 @@ local fFlagAppChatChatLandingScreenRenameFixEnabled = sharedFlagsModule.FFlagApp
 local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
 local argoPartyExperimentation = require(parent.SocialExperiments).ArgoPartyExperimentation
 local fFlagAppChatIxpScreenExposureModule = require(appChat.Flags.FFlagAppChatIxpScreenExposure)
+local fFlagAppChatIxpParallelScreenLayersModule = require(appChat.Flags.FFlagAppChatIxpParallelScreenLayers)
+local fStringAppChatLandingConversationRowsIxpLayerModule = require(appChat.Flags.FStringAppChatLandingConversationRowsIxpLayer)
+local fStringAppChatLandingConversationListIxpLayerModule = require(appChat.Flags.FStringAppChatLandingConversationListIxpLayer)
+local fStringAppChatLandingPerformanceIxpLayerModule = require(appChat.Flags.FStringAppChatLandingPerformanceIxpLayer)
 local IXPNavigationUtilsModule = require(appChat.Utils.IXPNavigationUtils)
 local chatLandingScreen = roactModule.PureComponent:extend("ChatLandingScreen")
 chatLandingScreen.defaultProps = { navigation = nil }
@@ -63,8 +67,11 @@ function chatLandingScreen.navigationOptions(p1)
 end
 
 function chatLandingScreen.init(p1)
-	-- upvalues: fFlagAppChatIxpScreenExposureModule (ref), IXPNavigationUtilsModule (ref), loggerModule (ref), enumScreensModule (ref), getCurrentRouteModule (ref), fFlagEnablePartyQuickStartButton (ref), resetForSquadLobbyForCompactModeModule (ref), roactNavigationModule (ref), getTopBarStoreModule (ref)
+	-- upvalues: fFlagAppChatIxpScreenExposureModule (ref), IXPNavigationUtilsModule (ref), fFlagAppChatIxpParallelScreenLayersModule (ref), fStringAppChatLandingConversationRowsIxpLayerModule (ref), fStringAppChatLandingConversationListIxpLayerModule (ref), fStringAppChatLandingPerformanceIxpLayerModule (ref), loggerModule (ref), enumScreensModule (ref), getCurrentRouteModule (ref), fFlagEnablePartyQuickStartButton (ref), resetForSquadLobbyForCompactModeModule (ref), roactNavigationModule (ref), getTopBarStoreModule (ref)
 	p1.ixpSubscription = if fFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, "Party.LandingPage") else nil
+	p1.conversationRowsIxpSubscription = if fFlagAppChatIxpScreenExposureModule and fFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, fStringAppChatLandingConversationRowsIxpLayerModule) else nil
+	p1.conversationListIxpSubscription = if fFlagAppChatIxpScreenExposureModule and fFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, fStringAppChatLandingConversationListIxpLayerModule) else nil
+	p1.performanceIxpSubscription = if fFlagAppChatIxpScreenExposureModule and fFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, fStringAppChatLandingPerformanceIxpLayerModule) else nil
 	
 	function p1.navigateToConversation(p2)
 		-- upvalues: loggerModule (copy), p1 (ref), enumScreensModule (copy)
@@ -239,6 +246,15 @@ end
 function chatLandingScreen.willUnmount(p1)
 	if p1.ixpSubscription then
 		p1.ixpSubscription.remove()
+	end
+	if p1.conversationRowsIxpSubscription then
+		p1.conversationRowsIxpSubscription.remove()
+	end
+	if p1.conversationListIxpSubscription then
+		p1.conversationListIxpSubscription.remove()
+	end
+	if p1.performanceIxpSubscription then
+		p1.performanceIxpSubscription.remove()
 	end
 end
 

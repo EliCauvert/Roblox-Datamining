@@ -65,7 +65,6 @@ local t = {
 	EngineFeatureRbxAnalyticsServiceExposePlaySessionId = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId"),
 	EngineFeatureTeleportHistoryButtons = game:GetEngineFeature("TeleportHistoryButtons"),
 	EngineFeaturePlayerScriptStatusProperty = game:GetEngineFeature("PlayerScriptStatusProperty"),
-	FFlagRemoveRecordPage = game:DefineFastFlag("RemoveRecordPage", false),
 	FFlagPreventHiddenSwitchPage = game:DefineFastFlag("PreventHiddenSwitchPage", false),
 	FFlagLuaEnableGameInviteModalSettingsHub = game:DefineFastFlag("LuaEnableGameInviteModalSettingsHub", false),
 	FFlagFixDisableTopPaddingError = game:DefineFastFlag("FixDisableTopPaddingError", false),
@@ -2900,7 +2899,7 @@ local function CreateSettingsHub()
 		local _ = nil
 		local _ = t_2.Pages.CurrentPage
 		
-		if u10335 ~= nil and u10335.ShouldDisableDefaultScroll == true then
+		if u10304 ~= nil and u10304.ShouldDisableDefaultScroll == true then
 			t_2.PageView.ScrollBarThickness = 0
 			t_2.PageView.ScrollingEnabled = false
 			t_2.PageView.CanvasPosition = Vector2.new(0, 0)
@@ -2924,7 +2923,7 @@ local function CreateSettingsHub()
 			if p19 == "AbsoluteSize" then
 				local _ = nil
 				local _ = t_2.Pages.CurrentPage
-				local var65 = u10868
+				local var65 = u10837
 				
 				if not (var65 ~= nil and var65.ShouldDisableDefaultScroll == true) then
 					t_2.PageView.CanvasSize = UDim2.new(0, 0, 0, t_2.Pages.CurrentPage:GetSize().Y)
@@ -3742,12 +3741,6 @@ local function CreateSettingsHub()
 	if t.FFlagHelpPageIXPExposure then
 		t_2.HelpPageIXPFetched = false
 	end
-	if not t.FFlagRemoveRecordPage then
-		if platform == Enum.Platform.Windows and not cachedPolicyServiceModule:IsSubjectToChinaPolicies() then
-			t_2.RecordPage = require(robloxGui.Modules.Settings.Pages.Record)
-			t_2.RecordPage:SetHub(t_2)
-		end
-	end
 	if inExperienceCapabilities.canListPeopleInSameServer then
 		t_2.PlayersPage = require(robloxGui.Modules.Settings.Pages.PeopleWrapper)
 		t_2.PlayersPage:SetHub(t_2)
@@ -3820,9 +3813,6 @@ local function CreateSettingsHub()
 	end
 	t_2:AddPage(t_2.HelpPage)
 	
-	if not t.FFlagRemoveRecordPage and t_2.RecordPage and not t_2.CapturesPage then
-		t_2:AddPage(t_2.RecordPage)
-	end
 	if not t.isExitModalRemoved and t_2.ExitModalPage then
 		t_2:AddPage(t_2.ExitModalPage)
 	end

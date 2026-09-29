@@ -4,6 +4,7 @@ local reactModule = require(parent.React)
 local reactUtilsModule = require(parent.ReactUtils)
 local foundationModule = require(parent.Foundation)
 local getColorStyleWithTransparencyModule = require(moments.Utils.getColorStyleWithTransparency)
+local fFlagMomentsActionRailSpacingModule = require(moments.Flags.FFlagMomentsActionRailSpacing)
 local icon = foundationModule.Icon
 local text = foundationModule.Text
 local view = foundationModule.View
@@ -20,7 +21,7 @@ local function formatCount(p1, p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactUtilsModule (ref), useTokens (ref), getColorStyleWithTransparencyModule (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), text (ref), formatCount (ref)
+	-- upvalues: reactUtilsModule (ref), useTokens (ref), getColorStyleWithTransparencyModule (ref), fFlagMomentsActionRailSpacingModule (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), text (ref), formatCount (ref)
 	local count = p1.count
 	local var1 = reactUtilsModule.createNextOrder()
 	local var2 = useTokens()
@@ -30,8 +31,8 @@ return reactModule.memo(function(p1)
 	end)
 	
 	return reactModule.createElement(view, {
-		tag = "col align-x-center align-y-center gap-xsmall size-1200-1200 radius-medium",
 		LayoutOrder = p1.LayoutOrder,
+		tag = if fFlagMomentsActionRailSpacingModule then "col align-x-center align-y-center gap-small size-1200-1200 auto-xy radius-medium" else "col align-x-center align-y-center gap-xsmall size-1200-1200 radius-medium",
 		isDisabled = p1.isDisabled,
 		onActivated = p1.onActivated,
 		ref = p1.nativeRef,

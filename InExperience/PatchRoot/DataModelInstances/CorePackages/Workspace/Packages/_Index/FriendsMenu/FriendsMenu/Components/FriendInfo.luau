@@ -5,6 +5,8 @@ local UIBloxModule = require(parent.UIBlox)
 local foundationModule = require(parent.Foundation)
 local radius = foundationModule.Enums.Radius
 local skeleton = foundationModule.Skeleton
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local userModel = require(parent.UserLib).Models.UserModel
 local localizationHelper = require(parent.NotificationsCommon).LocalizationHelper
 local _ = require(parent.NotificationsCommon)
@@ -29,7 +31,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: useStyle (ref), getLocalizedStrings (ref), t (ref), userModel (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), reactModule (ref), skeleton (ref), radius (ref), foundationModule (ref), imageSetLabel (ref), studiologoSmall (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref)
+	-- upvalues: useStyle (ref), getLocalizedStrings (ref), t (ref), userModel (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), reactModule (ref), skeleton (ref), radius (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), foundationModule (ref), imageSetLabel (ref), studiologoSmall (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref)
 	local var1 = useStyle()
 	local theme = var1.Theme
 	local font = var1.Font
@@ -80,7 +82,8 @@ return function(p1)
 				TextSize = var2,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
-				Font = font.Header2.Font,
+				Font = if foundationFontFaceMigration then nil else font.Header2.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.TitleLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			}, {
@@ -105,7 +108,8 @@ return function(p1)
 			TextSize = var2,
 			TextColor3 = theme.TextEmphasis.Color,
 			TextTransparency = theme.TextEmphasis.Transparency,
-			Font = font.Header2.Font,
+			Font = if foundationFontFaceMigration then nil else font.Header2.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.TitleLarge.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}),
@@ -142,7 +146,8 @@ return function(p1)
 				TextSize = var3,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
-				Font = font.CaptionBody.Font,
+				Font = if foundationFontFaceMigration then nil else font.CaptionBody.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodySmall.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextTruncate = Enum.TextTruncate.AtEnd,
 				OpenTypeFeatures = if getFFlagLuaAppEnableOpenTypeSupport() then openTypeSupport:getUserNameStylisticAlternative() else nil

@@ -18,6 +18,8 @@ local assetsModule = require(parent.Resources.Assets)
 local themedTextLabelModule = require(script.Parent.ThemedTextLabel)
 local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
 local focusHandlerModule = require(script.Parent.Connection.FocusHandler)
+local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTextSize
+local foundationFontFaceMigration = require(corePackagesService.Packages.Foundation).Utility.Flags.FoundationFontFaceMigration
 local informationalDialog = roact.PureComponent:extend("InformationalDialog")
 informationalDialog.validateProps = t.strictInterface({
 	bodyText = t.string,
@@ -55,15 +57,16 @@ function informationalDialog.init(p1)
 end
 
 function informationalDialog.render(p1)
-	-- upvalues: withStyle (ref), textService (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), roact (ref), coreGuiService (ref), imageSetLabel (ref), assetsModule (ref), themedTextLabelModule (ref), button (ref), buttonType (ref), runService (ref), focusHandlerModule (ref), constantsModule (ref), guiService (ref)
+	-- upvalues: withStyle (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), roact (ref), coreGuiService (ref), imageSetLabel (ref), assetsModule (ref), themedTextLabelModule (ref), button (ref), buttonType (ref), runService (ref), focusHandlerModule (ref), constantsModule (ref), guiService (ref)
 	local props = p1.props
 	
 	return withStyle(function(p2)
-		-- upvalues: props (ref), textService (copy), getFFlagIGMGamepadSelectionHistoryModule (copy), p1 (ref), roact (copy), coreGuiService (copy), imageSetLabel (copy), assetsModule (copy), themedTextLabelModule (copy), button (copy), buttonType (copy), runService (copy), focusHandlerModule (copy), constantsModule (copy), guiService (copy)
+		-- upvalues: props (ref), foundationFontFaceMigration (copy), getTextSize (copy), textService (copy), getFFlagIGMGamepadSelectionHistoryModule (copy), p1 (ref), roact (copy), coreGuiService (copy), imageSetLabel (copy), assetsModule (copy), themedTextLabelModule (copy), button (copy), buttonType (copy), runService (copy), focusHandlerModule (copy), constantsModule (copy), guiService (copy)
 		local font = p2.Font.Body.Font
 		local var1 = p2.Font.Body.RelativeSize * p2.Font.BaseSize
-		local var2 = math.max(textService:GetTextSize(props.bodyText, var1, font, Vector2.new(295, 1e999)).Y, var1 * 2) + 20
-		local var3 = math.max(textService:GetTextSize(props.subBodyText, var1, font, Vector2.new(295, 1e999)).Y, var1 * 2) + 20
+		local bodyText = props.bodyText
+		local var2 = math.max(if foundationFontFaceMigration then getTextSize(bodyText, var1, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(295, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(bodyText, var1, font, Vector2.new(295, 1e999)).Y, var1 * 2) + 20
+		local var3 = math.max(if foundationFontFaceMigration then getTextSize(props.subBodyText, var1, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(295, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(props.subBodyText, var1, font, Vector2.new(295, 1e999)).Y, var1 * 2) + 20
 		
 		return roact.createElement(roact.Portal, { target = coreGuiService }, {
 			InGameMenuInformationalDialog = roact.createElement("ScreenGui", {

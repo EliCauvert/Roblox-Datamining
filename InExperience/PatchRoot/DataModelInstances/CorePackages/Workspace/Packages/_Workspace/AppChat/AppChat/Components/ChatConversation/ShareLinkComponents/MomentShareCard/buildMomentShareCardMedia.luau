@@ -1,16 +1,18 @@
-﻿local httpService = game:GetService("HttpService")
-local foundationModule = require(script:FindFirstAncestor("AppChat").Parent.Foundation)
+﻿local appChat = script:FindFirstAncestor("AppChat")
+local httpService = game:GetService("HttpService")
+local foundationModule = require(appChat.Parent.Foundation)
 local getRbxThumb = foundationModule.Utility.getRbxThumb
 local thumbnailType = foundationModule.Enums.ThumbnailType
 
 local function _(p1, p2, p3)
+	-- upvalues: appChat (ref)
 	local var1 = `rbxassetid://{p1}`
 	
-	return if p2 == Enum.CaptureType.Video and p3 ~= nil then `{var1}&accessContext={p3}&permissionContext=ignoreUniverse` else var1
+	return if not (p2 ~= Enum.CaptureType.Video or p3 == nil) then if require(appChat.Flags.FFlagAppChatMomentShareCardPermissionContextFix) and game.GameId == 0 then `{var1}&accessContext={p3}` else `{var1}&accessContext={p3}&permissionContext=ignoreUniverse` else var1
 end
 
 return function(p1)
-	-- upvalues: httpService (ref), getRbxThumb (ref), thumbnailType (ref)
+	-- upvalues: httpService (ref), getRbxThumb (ref), thumbnailType (ref), appChat (ref)
 	local assetId = p1.assetId
 	local captureType = p1.captureType
 	
@@ -22,7 +24,7 @@ return function(p1)
 	local var2 = if assetId > 0 then Content.fromUri(if var1 ~= nil then getRbxThumb(thumbnailType.Asset, assetId) else `{getRbxThumb(thumbnailType.Asset, assetId)}&accessContext={var1}`) else nil
 	local t = {}
 	local var3 = `rbxassetid://{assetId}`
-	t.content = Content.fromUri(if captureType == Enum.CaptureType.Video and var1 ~= nil then `{var3}&accessContext={var1}&permissionContext=ignoreUniverse` else var3)
+	t.content = Content.fromUri(if captureType ~= Enum.CaptureType.Video or var1 == nil then if require(appChat.Flags.FFlagAppChatMomentShareCardPermissionContextFix) and game.GameId == 0 then `{var3}&accessContext={var1}` else `{var3}&accessContext={var1}&permissionContext=ignoreUniverse` else var3)
 	t.posterContent = var2
 	t.captureType = captureType
 	

@@ -14,6 +14,10 @@ local useMemo = reactModule.useMemo
 local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
 local useTokens = foundationModule.Hooks.useTokens
 local useSignalState = signalsReactModule.useSignalState
+local eventNames = momentsCommonModule.Analytics.EventNames
+local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
+local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
+local fFlagMomentsTextOverlayV2Redesign = momentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
 local constantsModule = require(momentsCreation.Constants)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
@@ -21,7 +25,7 @@ local minFontSize = constantsModule.TextOverlay.MinFontSize
 local treatmentMaxFontSize = constantsModule.TextOverlay.TreatmentMaxFontSize
 
 return function(p1)
-	-- upvalues: useTokens (ref), useDeviceInsets (ref), useMemo (ref), signalsModule (ref), constantsModule (ref), useSignalState (ref), useCallback (ref), dashModule (ref), reactModule (ref), view (ref), slider (ref), knob (ref), foundationModule (ref), minFontSize (ref), treatmentMaxFontSize (ref)
+	-- upvalues: useTokens (ref), useDeviceInsets (ref), useMemo (ref), signalsModule (ref), constantsModule (ref), useSignalState (ref), useCallback (ref), dashModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), reactModule (ref), view (ref), slider (ref), knob (ref), foundationModule (ref), minFontSize (ref), treatmentMaxFontSize (ref)
 	local controller = p1.controller
 	local var1 = useTokens()
 	
@@ -34,6 +38,12 @@ return function(p1)
 		Slider = reactModule.createElement(slider, {
 			knob = reactModule.createElement(knob, { size = foundationModule.Enums.InputSize.Large }),
 			knobVisibility = foundationModule.Enums.Visibility.Always,
+			onDragStarted = useCallback(function()
+				-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
+				if fFlagMomentsTextOverlayV2Redesign then
+					fireAnalyticsEventModule(eventNames.EditingFlowTextOverlayFontSizeSliderUsed, makeCreationEventFieldsModule.makeTextOverlayEventFields())
+				end
+			end, {}),
 			onValueChanged = useCallback(function(p2)
 				-- upvalues: controller (ref), dashModule (copy)
 				local activeSession = controller.getActiveSession(false)

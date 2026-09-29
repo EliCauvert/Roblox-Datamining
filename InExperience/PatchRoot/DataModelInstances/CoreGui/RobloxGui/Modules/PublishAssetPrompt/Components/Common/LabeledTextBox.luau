@@ -1,12 +1,16 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
 local reactModule = require(corePackagesService.Packages.React)
+local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local cryoModule = require(corePackagesService.Packages.Cryo)
-local useStyle = require(corePackagesService.Packages.UIBlox).Core.Style.useStyle
+local useStyle = UIBloxModule.Core.Style.useStyle
 local nameTextBoxModule = require(script.Parent.NameTextBox)
 local t = { textBoxHeight = 30, topPadding = 0 }
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), nameTextBoxModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), nameTextBoxModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2 = useStyle()
 	local font = var2.Font
@@ -28,7 +32,8 @@ return function(p1)
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Size = UDim2.new(1, 0, 0, 15),
-			Font = captionHeader.Font,
+			Font = if foundationFontFaceMigration then nil else captionHeader.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionLarge.Font) else nil,
 			Text = var1.labelText,
 			TextSize = font.BaseSize * captionHeader.RelativeSize,
 			TextColor3 = var2.Theme.TextDefault.Color,

@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("AppChatLandingConversationListIxpLayer", "Party.LandingPage.ConversationList")

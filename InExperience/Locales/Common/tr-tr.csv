@@ -108,6 +108,7 @@ Authentication.SignUp.Action.ApplyOnNextRespawn,Bir dahaki sıfırlamada uygula
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ExitModalLeave,Ayrıl
 Authentication.SignUp.Action.RespawnNow,Şimdi sıfırla
+Authentication.SignUp.Action.StartPlay,Oynamaya başla
 Authentication.SignUp.Button.OKCaptialized,Tamam
 Authentication.SignUp.Button.RetryLogIn,Giriş yapmayı tekrar dene
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} için hesap zaten bir Roblox hesabına bağlı. Lütfen tekrar giriş yapmayı dene.
@@ -116,6 +117,7 @@ Authentication.SignUp.Description.Try,Dene
 Authentication.SignUp.Description.UsernameChanged,"Her şey tamam! Hesabın hazır ve {platform} ile bağlandı. Güncellenen kullanıcı adını oyunda görmek için şimdi sıfırla, aksi takdirde bir dahaki sefere uygulanacak."
 Authentication.SignUp.Description.UsernameUnchanged,Artık buradasın! Hesabın hazır ve {platform} ile bağlandı. Arkadaşlarınla sohbet et ve milyonlarca Roblox oyunu oyna.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Roblox hesabın, {platform} için hesap bağlanacak. Bu bağlantıyı Ayarlar ekranından istediğin zaman kopartabilirsin. {platform} için hesap başka bir hesaba bağlanmadan önce bir bekleme süresi olabilir. {ctaButton} düğmesine tıklayarak tahkim maddesi de dâhil olmak üzere Kullanım Koşulları'nı kabul etmiş ve Gizlilik Politikası'nı onaylamış olursun."
+Authentication.SignUp.Header.OneLastThing,Son bir şey daha
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Roblox hesabını kur
 Authentication.SignUp.Heading.CountryCodeSelector,Ülke seç
 Authentication.SignUp.Heading.RetryLogIn,
@@ -156,6 +158,7 @@ Authentication.SignUp.Response.InvalidBirthday,Geçersiz doğum günü.
 Authentication.SignUp.Response.InvalidEmail,Geçersiz e-posta adresi.
 Authentication.SignUp.Response.PasswordComplexity,Lütfen daha karmaşık bir şifre oluştur.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Önce kullanıcı adı ayarlanmalı.
+Authentication.SignUp.Subtitle.AddYourBirthday,Roblox hesabını oluşturmak için doğum gününü ekle.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Kurulumu tamamladığında ilerlemen aktarılır.
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,Daha fazla işlem yapabilmek için 2 Aşamalı Doğrulama gerekiyor. 2 Aşamalı Doğrulamayı tamamlamak için Ayarlar > Güvenlik menüsüne git.
@@ -1044,6 +1047,7 @@ CoreScripts.PublishAvatarPrompt.Rotate,
 CoreScripts.PublishAvatarPrompt.Zoom,
 CoreScripts.PublishCommon.Disclaimer,
 CoreScripts.PublishCommon.Leave,
+CoreScripts.PublishCommon.ReviewingCreation,Yaratımın inceleniyor...
 CoreScripts.PublishCommon.Stay,
 CoreScripts.PublishCommon.UnsavedWarning,Kaydedilmemiş değişiklikleri kaybedebilirsin
 CoreScripts.PurchasePrompt.Button.OK,
@@ -2036,6 +2040,7 @@ Feature.Build.Description.BuildReplyNotif,İnşa Et'ten sana bir yanıt geldiği
 Feature.Build.Description.BuyRobuxToCreate,Bir şeyler oluşturmaya devam etmek için daha fazla Robux satın al veya ücretsiz İnşa Et kullanım hakkının yarın sıfırlanmasını bekle.
 Feature.Build.Description.BuyUsageOrWait,Robux ile daha fazla İnşa Et kullanım hakkı satın al veya günlük sınırının sıfırlanmasını bekle.
 Feature.Build.Description.CampaignRunDates,Kampanyanız {startDate}-{endDate} arasında yayınlanacak
+Feature.Build.Description.ChooseAdCampaignLength,Reklamının ne kadar süreyle yayınlanmasını istediğini seç.
 Feature.Build.Description.ChoosePlaytesters,Oyununun ön izlemesini yapacak arkadaşları seç.
 Feature.Build.Description.CreateDeveloperProduct,"{PRICE} Robux karşılığında satışa kapalı olarak ""{NAME}"" oluştur."
 Feature.Build.Description.DeactivateDeveloperProduct,{PRODUCT_ID} geliştirici ürününü satıştan kaldır.
@@ -2348,7 +2353,9 @@ Feature.Build.Notification.Title.NeedInput,İnşa Et için girdin gerekiyor
 Feature.Build.Placeholder.DescribeProduct,Satmak istediğin şeyi açıkla
 Feature.Build.Placeholder.DescribeProductUpdate,Güncellemeyi tarif et
 Feature.Build.Prompt.CreateDeveloperProduct,"Bir geliştirici ürünü oluşturmak, oyuna bağlamak, değişiklikleri doğrulayıp yayınlamak ve satın alınabilir hâle getirmek konusunda bana yardımcı ol."
+Feature.Build.Title.AdActive,Reklam kampanyası aktif
 Feature.Build.Title.AdCampaignDuration,{durationDays} günlük reklam kampanyası
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} gün
 Feature.Build.Title.AdComplete,Reklam tamamlandı
 Feature.Build.Title.AdCreated,Reklam oluşturuldu
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2379,6 +2386,7 @@ Feature.Build.Title.GetUsers,Kullanıcıları al
 Feature.Build.Title.ManagedPricingAcknowledgement,Yönetilen Fiyatlandırma açılsın mı?
 Feature.Build.Title.NoMonetizationProducts,Oyununda kazanmaya başla
 Feature.Build.Title.NoRobuxForUsage,İnşa Et kullanım hakkı için Robux kalmadı
+Feature.Build.Title.PickCampaign,Süre seç
 Feature.Build.Title.PlaytestInviteSendFailed,Davetler gönderilemedi
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Aşağıdaki kullanıcılar eklenemedi:
@@ -3001,14 +3009,6 @@ Feature.Chat.Response.ChatNameFullyModerated,Sohbet grubunun adı denetlendi.
 Feature.Chat.Response.ChatNameFullyModerated.V2,Grup adı denetlendi.
 Feature.Chat.Response.NetworkError,Ağ Hatası
 Feature.Chat.RobloxConnectUnavailableWithUser,Bu kullanıcı şu anda Roblox Connect kullanamıyor.
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,Arkadaş Etkinliği
-Feature.Chat.ShareGameToChat.NoFavoriteGames,Hiç favorilenmiş deneyim yok
-Feature.Chat.ShareGameToChat.NoFriendActivity,Hiç arkadaş etkinliğin yok
-Feature.Chat.ShareGameToChat.NoPopularGames,Hiç popüler deneyim yok
-Feature.Chat.ShareGameToChat.NoRecentGames,Hiç en son oynanan deneyim yok
-Feature.Chat.ShareGameToChat.Popular,
-Feature.Chat.ShareGameToChat.Recent,En Son Oynanan
 Feature.Chat.Text.NoConnections,Henüz arkadaş eklemedin. Başlamak için Roblox'ta arkadaşlarını bul ve ekle.
 Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.FriendsChat,Arkadaş sohbeti

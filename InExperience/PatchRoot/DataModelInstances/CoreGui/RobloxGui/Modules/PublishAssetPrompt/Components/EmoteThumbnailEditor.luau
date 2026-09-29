@@ -5,6 +5,9 @@ local tModule = require(corePackagesService.Packages.t)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local emoteUtility = require(corePackagesService.Packages.Thumbnailing).EmoteUtility
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local withStyle = UIBloxModule.Style.withStyle
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -96,9 +99,9 @@ function emoteThumbnailEditor.updateThumbnailParameters(p1, p2)
 end
 
 function emoteThumbnailEditor.renderMiddle(p1, p2)
-	-- upvalues: withStyle (ref), roactModule (ref), roactGamepadModule (ref), emoteThumbnailViewModule (ref), systemSlider (ref), t (ref)
+	-- upvalues: withStyle (ref), roactModule (ref), roactGamepadModule (ref), emoteThumbnailViewModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), systemSlider (ref), t (ref)
 	return withStyle(function(p3)
-		-- upvalues: p1 (ref), roactModule (copy), roactGamepadModule (copy), emoteThumbnailViewModule (copy), p2 (ref), systemSlider (copy), t (copy)
+		-- upvalues: p1 (ref), roactModule (copy), roactGamepadModule (copy), emoteThumbnailViewModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), p2 (ref), systemSlider (copy), t (copy)
 		local font = p3.Font
 		local theme = p3.Theme
 		local t_1 = {}
@@ -174,7 +177,8 @@ function emoteThumbnailEditor.renderMiddle(p1, p2)
 				TextSize = 12,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 15),
-				Font = font.Body.Font,
+				Font = if foundationFontFaceMigration then nil else font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 				Text = p2.timeLabelText,
 				TextColor3 = theme.TextDefault.Color,
 				TextXAlignment = Enum.TextXAlignment.Left
@@ -197,7 +201,8 @@ function emoteThumbnailEditor.renderMiddle(p1, p2)
 				TextSize = 12,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 15),
-				Font = font.Body.Font,
+				Font = if foundationFontFaceMigration then nil else font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 				Text = p2.rotationLabelText,
 				TextColor3 = theme.TextDefault.Color,
 				TextXAlignment = Enum.TextXAlignment.Left

@@ -4,6 +4,10 @@ local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
 local memo = reactModule.memo
 local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
+local foundationModule = require(parent.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local baseCellModule = require(script.Parent.BaseCell)
 local _ = require(appChat.types)
 local t = {
@@ -27,12 +31,13 @@ local t = {
 }
 
 return memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), baseCellModule (ref), imageSetLabel (ref)
+	-- upvalues: cryoModule (ref), t (ref), foundationFontFaceMigration (ref), useTokens (ref), reactModule (ref), baseCellModule (ref), imageSetLabel (ref), normalizeFontFace (ref)
 	local var1 = cryoModule.Dictionary.union(t, p1)
 	local style = var1.style
 	local theme = style.Theme
 	local font = style.Font
-	local var2 = var1.primaryIcon == nil
+	local var2 = if foundationFontFaceMigration then useTokens() else nil
+	local var3 = var1.primaryIcon == nil
 	
 	return reactModule.createElement(baseCellModule, {
 		Size = UDim2.new(1, var1.widthOffset, 0, 0),
@@ -64,7 +69,7 @@ return memo(function(p1)
 				PaddingTop = UDim.new(0, var1.topPadding),
 				PaddingBottom = UDim.new(0, var1.bottomPadding)
 			}),
-			imageFrame = if not var2 then reactModule.createElement("Frame", {
+			imageFrame = if not var3 then reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				Size = UDim2.new(0, var1.iconCellWidth, 0, var1.primaryIconSize)
@@ -94,11 +99,12 @@ return memo(function(p1)
 					TextWrapped = true,
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, if var2 then 0 else -var1.iconCellWidth, 0, 0),
+					Size = UDim2.new(1, if var3 then 0 else -var1.iconCellWidth, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					Text = var1.Text,
 					TextSize = font.Header2.RelativeSize * font.BaseSize,
-					Font = font.Header2.Font,
+					Font = if foundationFontFaceMigration then nil else font.Header2.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.TitleLarge.Font) else nil,
 					TextColor3 = theme.TextEmphasis.Color,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextTruncate = Enum.TextTruncate.AtEnd
@@ -107,11 +113,12 @@ return memo(function(p1)
 					TextWrapped = true,
 					BackgroundTransparency = 1,
 					LayoutOrder = 3,
-					Size = UDim2.new(1, if var2 then 0 else -var1.iconCellWidth, 0, 0),
+					Size = UDim2.new(1, if var3 then 0 else -var1.iconCellWidth, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					Text = var1.SubTitleText,
 					TextSize = font.BodySmall.RelativeSize * font.BaseSize,
-					Font = font.BodySmall.Font,
+					Font = if foundationFontFaceMigration then nil else font.BodySmall.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.BodySmall.Font) else nil,
 					TextColor3 = theme.TextDefault.Color,
 					TextXAlignment = Enum.TextXAlignment.Left
 				}) else nil

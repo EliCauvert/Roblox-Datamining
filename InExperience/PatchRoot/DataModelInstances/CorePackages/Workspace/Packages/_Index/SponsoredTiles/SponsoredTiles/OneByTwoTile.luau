@@ -67,6 +67,7 @@ local fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad = sharedFlagsModule.FFlagLuaA
 local fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate = sharedFlagsModule.FFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate
 local fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor = sharedFlagsModule.FFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor
 local fFlagLuaAppEnableReportExperience = sharedFlagsModule.FFlagLuaAppEnableReportExperience
+local fFlagLuaAppEnableOneByTwoTileFunnelTelemetry = sharedFlagsModule.FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
 local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local luaAppOneByTwoTileLogoWidthPercentLandscape = game:DefineFastInt("LuaAppOneByTwoTileLogoWidthPercentLandscape", 40)
 local luaAppOneByTwoTileLogoWidthPercentSquare = game:DefineFastInt("LuaAppOneByTwoTileLogoWidthPercentSquare", 25)
@@ -84,7 +85,7 @@ local function _(p1, p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), responsiveModule (ref), reactModule (ref), useIsHoveredTile (ref), omniRecommendationsContentType (ref), luaAppDefaultGameAdTileText (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useGameInfosSelector (ref), useOverflowMenuOpen (ref), useTriggerFeedback (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (ref), discoveryEventErrorLogger (ref), gameCollectionItemTypes (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), useTagAsSponsoredAdViewabilityCandidate (ref), videoPlaybackCoordinator (ref), getAvailableGameTileOverflowMenuItems (ref), fFlagLuaAppEnableReportExperience (ref), fFlagLuaAppSduiSponsoredOneByTwoTile (ref), fFlagLuaAppHapticTriggeredTelemetry (ref), getOverflowMenuSignalStore (ref), fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad (ref), videoLoadingState (ref), oneByTwoTileTelemetry (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfig (ref), useRoactService (ref), roactNetworking (ref), appSessionService (ref), useNavigation (ref), useLocalization (ref), discoveryAnalyticsModule (ref), sponsoredGamesRecordClick (ref), setGamePlaySession (ref), sessionType (ref), hoverTileCoordinator (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), videoEndReason (ref), appPage (ref), impressionsTagUtility (ref), useValidTileBadges (ref), var1 (ref), var2 (ref), buttonSize (ref), videoDisplay (ref), var4 (ref), var5 (ref), var3 (ref), gameTileThumbnailBadges (ref), image (ref), spanTileOverflowMenuModule (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), playButton (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), getPlaybackDetectionMethod (ref), videoPlaybackDetector (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref)
+	-- upvalues: useTokens (ref), responsiveModule (ref), reactModule (ref), useIsHoveredTile (ref), omniRecommendationsContentType (ref), luaAppDefaultGameAdTileText (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useGameInfosSelector (ref), useOverflowMenuOpen (ref), useTriggerFeedback (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (ref), discoveryEventErrorLogger (ref), gameCollectionItemTypes (ref), fFlagLuaAppEnableOneByTwoTileFunnelTelemetry (ref), oneByTwoTileTelemetry (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), useTagAsSponsoredAdViewabilityCandidate (ref), videoPlaybackCoordinator (ref), getAvailableGameTileOverflowMenuItems (ref), fFlagLuaAppEnableReportExperience (ref), fFlagLuaAppSduiSponsoredOneByTwoTile (ref), fFlagLuaAppHapticTriggeredTelemetry (ref), getOverflowMenuSignalStore (ref), fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad (ref), videoLoadingState (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfig (ref), useRoactService (ref), roactNetworking (ref), appSessionService (ref), useNavigation (ref), useLocalization (ref), discoveryAnalyticsModule (ref), sponsoredGamesRecordClick (ref), setGamePlaySession (ref), sessionType (ref), hoverTileCoordinator (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), videoEndReason (ref), appPage (ref), impressionsTagUtility (ref), useValidTileBadges (ref), var1 (ref), var2 (ref), buttonSize (ref), videoDisplay (ref), var4 (ref), var5 (ref), var3 (ref), gameTileThumbnailBadges (ref), image (ref), spanTileOverflowMenuModule (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), playButton (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), getPlaybackDetectionMethod (ref), videoPlaybackDetector (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref)
 	local var6 = useTokens()
 	local var7 = responsiveModule.useResponsive({ responsiveModule.BreakpointConfig.sizes.Small }) == responsiveModule.Keys.Small
 	local var8 = reactModule.useRef(nil)
@@ -161,6 +162,26 @@ return reactModule.memo(function(p1)
 				discoveryEventErrorLogger.reportError("SponsoredTiles", "OneByTwoTile: 1x2 tile is neither left- nor right-pinned", { alignmentType = tostring(p1.alignmentType) })
 			end
 		end, { p1.alignmentType })
+	end
+	if fFlagLuaAppEnableOneByTwoTileFunnelTelemetry then
+		reactModule.useEffect(function()
+			-- upvalues: p1 (ref), oneByTwoTileTelemetry (copy), gameCollectionItemTypes (copy)
+			if p1.oneByTwoTileFlowId then
+				oneByTwoTileTelemetry.logOneByTwoTileRendered({
+					oneByTwoTileFlowId = p1.oneByTwoTileFlowId,
+					recommendationsRequestId = p1.recommendationsRequestId,
+					topicId = p1.topicId,
+					contentType = p1.contentType,
+					adId = p1.adId,
+					componentType = gameCollectionItemTypes.GameCollectionItemType.OneByTwoTile,
+					alignmentType = p1.alignmentType,
+					isSdui = p1.isSdui == true
+				})
+			end
+		end, {
+			p1.oneByTwoTileFlowId, p1.recommendationsRequestId, p1.topicId, p1.contentType,
+			p1.adId, p1.alignmentType, p1.isSdui
+		})
 	end
 	useTagAsViewportAutoplayCandidate(var8, p1.videoPlaybackContext, true, nil, if fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate or fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then 2 else nil, if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then var22 else nil, if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then p1.alignmentType else nil)
 	local var24 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then reactModule.useRef(nil) else nil

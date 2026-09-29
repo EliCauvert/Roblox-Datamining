@@ -4,16 +4,18 @@ local coreGuiService = game:GetService("CoreGui")
 local localizationModule = require(parent_1.Localization)
 local reactModule = require(parent_1.React)
 local UIBloxModule = require(parent_1.UIBlox)
+local foundationModule = require(parent_1.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useAnalyticsModule = require(parent.Analytics.useAnalytics)
 local useLocalization = localizationModule.Hooks.useLocalization
 local useStyle = UIBloxModule.Core.Style.useStyle
 local button = UIBloxModule.App.Button.Button
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local eventNamesModule = require(parent.Analytics.EventNames)
-local capturesAddLegacyVideoRecordingLoggingV2 = game:DefineFastFlag("CapturesAddLegacyVideoRecordingLogging_v2", false)
 
 return function(p1)
-	-- upvalues: useAnalyticsModule (ref), useStyle (ref), useLocalization (ref), reactModule (ref), capturesAddLegacyVideoRecordingLoggingV2 (ref), eventNamesModule (ref), coreGuiService (ref), button (ref), buttonType (ref)
+	-- upvalues: useAnalyticsModule (ref), useStyle (ref), useLocalization (ref), reactModule (ref), eventNamesModule (ref), coreGuiService (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), button (ref), buttonType (ref)
 	local var1 = useAnalyticsModule()
 	local var2 = useStyle()
 	local var3 = useLocalization({
@@ -23,24 +25,14 @@ return function(p1)
 		stopRecording = "Feature.Captures.Control.StopRecordingVideo"
 	})
 	local var4, var5 = reactModule.useState(false)
-	local var6 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: capturesAddLegacyVideoRecordingLoggingV2 (copy), var6 (ref), var1 (ref), eventNamesModule (copy), var5 (ref)
+		-- upvalues: var5 (ref)
 		local videoRecordingChangeRequestConnection = nil
-		local var7 = settings():FindFirstChild("Game Options")
+		local var6 = settings():FindFirstChild("Game Options")
 		
-		if var7 then
-			videoRecordingChangeRequestConnection = var7.VideoRecordingChangeRequest:connect(function(p2)
-				-- upvalues: capturesAddLegacyVideoRecordingLoggingV2 (copy), var6 (copy), var1 (copy), eventNamesModule (copy), var5 (copy)
-				if capturesAddLegacyVideoRecordingLoggingV2 then
-					if p2 then
-						var6.current = os.clock()
-						var1.fireEvent(eventNamesModule.CapturesLegacyVideoRecordBeginSignalFired)
-					elseif var6.current then
-						var1.fireEvent(eventNamesModule.CapturesLegacyVideoRecordingDuration, { statValue = os.clock() - var6.current })
-					end
-					var1.fireEvent(eventNamesModule.CapturesLegacyVideoRecordEndSignalFired)
-				end
+		if var6 then
+			videoRecordingChangeRequestConnection = var6.VideoRecordingChangeRequest:connect(function(p2)
+				-- upvalues: var5 (copy)
 				var5(p2)
 			end)
 		end
@@ -74,7 +66,8 @@ return function(p1)
 			Title = reactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Font = var2.Font.Header2.Font,
+				Font = if foundationFontFaceMigration then nil else var2.Font.Header2.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.TitleLarge.Font) else nil,
 				Size = UDim2.new(1, 0, 0, 30),
 				Text = var3.videoCTATitle,
 				TextColor3 = var2.Theme.TextEmphasis.Color,
@@ -85,7 +78,8 @@ return function(p1)
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				TextWrapped = true,
-				Font = var2.Font.CaptionBody.Font,
+				Font = if foundationFontFaceMigration then nil else var2.Font.CaptionBody.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodySmall.Font) else nil,
 				Size = UDim2.new(1, 0, 0, 40),
 				Text = var3.videoEducationalText,
 				TextColor3 = var2.Theme.TextDefault.Color,

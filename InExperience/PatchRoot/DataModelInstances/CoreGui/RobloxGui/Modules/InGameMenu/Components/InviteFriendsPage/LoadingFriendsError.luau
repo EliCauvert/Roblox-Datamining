@@ -1,5 +1,5 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local textService = game:GetService("TextService")
+﻿local textService = game:GetService("TextService")
+local corePackagesService = game:GetService("CorePackages")
 local guiService = game:GetService("GuiService")
 local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
 local roact = inGameMenuDependenciesModule.Roact
@@ -7,6 +7,7 @@ local t = inGameMenuDependenciesModule.t
 local UIBlox = inGameMenuDependenciesModule.UIBlox
 local button = UIBlox.App.Button.Button
 local buttonType = UIBlox.App.Button.Enum.ButtonType
+local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTextSize
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local parent = script.Parent.Parent.Parent
 local withLocalizationModule = require(parent.Localization.withLocalization)
@@ -15,7 +16,9 @@ local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
 local focusHandlerModule = require(parent.Components.Connection.FocusHandler)
 local rootedConnectionModule = require(parent.Components.Connection.RootedConnection)
 local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local image = require(corePackagesService.Packages.Foundation).Image
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+local image = foundationModule.Image
 local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 local loadingFriendsError = roact.PureComponent:extend("LoadingFriendsError")
 loadingFriendsError.validateProps = t.strictInterface({ onRetry = t.callback, canCaptureFocus = t.boolean })
@@ -26,11 +29,13 @@ function loadingFriendsError.init(p1)
 end
 
 function loadingFriendsError.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), withLocalizationModule (ref), textService (ref), roact (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref), themedTextLabelModule (ref), rootedConnectionModule (ref), focusHandlerModule (ref), guiService (ref), button (ref), buttonType (ref)
+	-- upvalues: withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), withLocalizationModule (ref), getTextSize (ref), textService (ref), roact (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref), themedTextLabelModule (ref), rootedConnectionModule (ref), focusHandlerModule (ref), guiService (ref), button (ref), buttonType (ref)
 	local props = p1.props
 	
 	return withFoundationOrUIBloxStyle(function(p2)
+		-- upvalues: foundationFontFaceMigration (copy)
 		return {
+			Tokens = if foundationFontFaceMigration then p2 else nil,
 			Font = {
 				BaseSize = 1,
 				Body = {
@@ -40,11 +45,13 @@ function loadingFriendsError.render(p1)
 			}
 		}
 	end, function(p2)
-		-- upvalues: withLocalizationModule (copy), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (ref), guiService (copy), p1 (ref), button (copy), buttonType (copy)
+		-- upvalues: withLocalizationModule (copy), foundationFontFaceMigration (copy), getTextSize (copy), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (ref), guiService (copy), p1 (ref), button (copy), buttonType (copy)
 		return withLocalizationModule({
 			errorOccured = "CoreScripts.InGameMenu.InviteFriends.ErrorOccured"
 		})(function(p3)
-			-- upvalues: p2 (ref), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (copy), guiService (copy), p1 (copy), button (copy), buttonType (copy)
+			-- upvalues: p2 (ref), foundationFontFaceMigration (copy), getTextSize (copy), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (copy), guiService (copy), p1 (copy), button (copy), buttonType (copy)
+			local var1 = p2.Font.Body.RelativeSize * p2.Font.BaseSize
+			
 			return roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, 304, 1, 0),
@@ -76,7 +83,7 @@ function loadingFriendsError.render(p1)
 				TextContainer = roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, textService:GetTextSize(p3.errorOccured, p2.Font.Body.RelativeSize * p2.Font.BaseSize, p2.Font.Body.Font, Vector2.new(304, 1e999)).Y + 36)
+					Size = UDim2.new(1, 0, 0, (if foundationFontFaceMigration then getTextSize(p3.errorOccured, var1, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(304, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(p3.errorOccured, var1, p2.Font.Body.Font, Vector2.new(304, 1e999)).Y) + 36)
 				}, {
 					Text = roact.createElement(themedTextLabelModule, {
 						fontKey = "Body",

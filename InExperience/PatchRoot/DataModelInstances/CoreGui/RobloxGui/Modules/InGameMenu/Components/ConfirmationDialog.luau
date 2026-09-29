@@ -10,10 +10,13 @@ local t = inGameMenuDependenciesModule.t
 local UIBlox = inGameMenuDependenciesModule.UIBlox
 local button = UIBlox.App.Button.Button
 local buttonType = UIBlox.App.Button.Enum.ButtonType
+local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTextSize
+local foundationFontFaceMigration = require(corePackagesService.Packages.Foundation).Utility.Flags.FoundationFontFaceMigration
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local parent = script.Parent.Parent
 local constantsModule = require(parent.Resources.Constants)
 local assetsModule = require(parent.Resources.Assets)
+local fFlagIGMDialogButtonsUseUIBloxButtonModule = require(parent.Flags.FFlagIGMDialogButtonsUseUIBloxButton)
 local themedTextLabelModule = require(script.Parent.ThemedTextLabel)
 local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
 local focusHandlerModule = require(script.Parent.Connection.FocusHandler)
@@ -54,11 +57,13 @@ function confirmationDialog.init(p1)
 end
 
 function confirmationDialog.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), textService (ref), roact (ref), coreGuiService (ref), constantsModule (ref), imageSetLabel (ref), assetsModule (ref), themedTextLabelModule (ref), button (ref), buttonType (ref), focusHandlerModule (ref), guiService (ref)
+	-- upvalues: withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), roact (ref), coreGuiService (ref), constantsModule (ref), imageSetLabel (ref), assetsModule (ref), themedTextLabelModule (ref), button (ref), buttonType (ref), fFlagIGMDialogButtonsUseUIBloxButtonModule (ref), focusHandlerModule (ref), guiService (ref)
 	local props = p1.props
 	
 	return withFoundationOrUIBloxStyle(function(p2)
+		-- upvalues: foundationFontFaceMigration (copy)
 		return {
+			Tokens = if foundationFontFaceMigration then p2 else nil,
 			Theme = {
 				Overlay = {
 					Color = p2.Color.Common.Scrim.Color3,
@@ -82,9 +87,11 @@ function confirmationDialog.render(p1)
 			}
 		}
 	end, function(p2)
-		-- upvalues: props (ref), textService (copy), roact (copy), coreGuiService (copy), constantsModule (copy), imageSetLabel (copy), assetsModule (copy), themedTextLabelModule (copy), p1 (ref), button (copy), buttonType (copy), focusHandlerModule (copy), guiService (copy)
+		-- upvalues: props (ref), foundationFontFaceMigration (copy), getTextSize (copy), textService (copy), roact (copy), coreGuiService (copy), constantsModule (copy), imageSetLabel (copy), assetsModule (copy), themedTextLabelModule (copy), p1 (ref), button (copy), buttonType (copy), fFlagIGMDialogButtonsUseUIBloxButtonModule (copy), focusHandlerModule (copy), guiService (copy)
+		local font = p2.Font.Body.Font
 		local var1 = p2.Font.Body.RelativeSize * p2.Font.BaseSize
-		local var2 = math.max(textService:GetTextSize(props.bodyText, var1, p2.Font.Body.Font, Vector2.new(295, 1e999)).Y, var1 * 2) + 20 + 20
+		local bodyText = props.bodyText
+		local var2 = math.max(if foundationFontFaceMigration then getTextSize(bodyText, var1, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(295, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(bodyText, var1, font, Vector2.new(295, 1e999)).Y, var1 * 2) + 20 + 20
 		
 		return roact.createElement(roact.Portal, { target = coreGuiService }, {
 			InGameMenuConfirmationDialog = roact.createElement("ScreenGui", {
@@ -167,7 +174,8 @@ function confirmationDialog.render(p1)
 							buttonType = buttonType.Secondary,
 							size = UDim2.new(0.5, -5, 1, 0),
 							text = props.cancelText,
-							onActivated = props.onCancel
+							onActivated = props.onCancel,
+							DO_NOT_USE_useUIBloxButton = if fFlagIGMDialogButtonsUseUIBloxButtonModule then true else nil
 						}),
 						ConfirmButton = roact.createElement(button, {
 							buttonType = buttonType.PrimarySystem,
@@ -175,7 +183,8 @@ function confirmationDialog.render(p1)
 							size = UDim2.new(0.5, -5, 1, 0),
 							text = props.confirmText,
 							onActivated = props.onConfirm,
-							[roact.Ref] = p1.confirmButtonRef
+							[roact.Ref] = p1.confirmButtonRef,
+							DO_NOT_USE_useUIBloxButton = if fFlagIGMDialogButtonsUseUIBloxButtonModule then true else nil
 						})
 					})
 				})

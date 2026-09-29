@@ -2,6 +2,9 @@
 local parent = profilePlatform.Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local useStyle = UIBloxModule.Core.Style.useStyle
 local images = UIBloxModule.App.ImageSet.Images
@@ -11,7 +14,7 @@ local fFlagProfilePlatformFixResaleLimitedPriceModule = require(profilePlatform.
 local robux = images["icons/common/robux"]
 
 return function(p1)
-	-- upvalues: useStyle (ref), useLocalization (ref), textKeysModule (ref), fFlagProfilePlatformFixResaleLimitedPriceModule (ref), reactModule (ref), imageSetLabel (ref), robux (ref)
+	-- upvalues: useStyle (ref), useLocalization (ref), textKeysModule (ref), fFlagProfilePlatformFixResaleLimitedPriceModule (ref), reactModule (ref), imageSetLabel (ref), robux (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = useStyle()
 	local font = var1.Font
 	local theme = var1.Theme
@@ -60,7 +63,8 @@ return function(p1)
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, if var5 then -(vector2.X + 4) else 0, 1, 0),
-			Font = font.SubHeader1.Font,
+			Font = if foundationFontFaceMigration then nil else font.SubHeader1.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.TitleLarge.Font) else nil,
 			TextColor3 = theme.SecondaryContent.Color,
 			TextTransparency = theme.SecondaryContent.Transparency,
 			TextSize = var2,

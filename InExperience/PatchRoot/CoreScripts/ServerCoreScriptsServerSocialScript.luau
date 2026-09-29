@@ -16,6 +16,7 @@ local useNewDirectChatAPI = game:DefineFastFlag("UseNewDirectChatAPI", false)
 local enableCreatePartyNudge = game:DefineFastFlag("EnableCreatePartyNudge", false)
 local enableCreatePartyNudgeWithVersion = game:DefineFastFlag("EnableCreatePartyNudgeWithVersion", false)
 local fFlagEnablePartyNudgeAfterJoin = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnablePartyNudgeAfterJoin
+local fFlagShowFriendJoinedYouToastForNonReferredJoins = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagShowFriendJoinedYouToastForNonReferredJoins
 local fFlagBadgeVisibilitySettingEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagBadgeVisibilitySettingEnabled
 local fFlagEnableModerateChatRemoteEvent = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableModerateChatRemoteEvent
 local fFlagEnableSummarySystemMessageOnLua = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableSummarySystemMessageOnLua
@@ -28,6 +29,7 @@ local profileSettingsRateLimitWindowSeconds = game:DefineFastInt("ProfileSetting
 local disableRCCAntiHarrasmentAllowList = game:DefineFastFlag("DisableRCCAntiHarrasmentAllowList", false)
 local luaGetCanManageAsync = game:DefineFastFlag("UseGetCanManageAsync", false) and game:GetEngineFeature("LuaGetCanManageAsync")
 local fFlagUserPresenceTokenRccCheckPermissionsLuaModule = require(robloxGui.Modules.Common.Flags.FFlagUserPresenceTokenRccCheckPermissionsLua)
+local shouldShowFriendJoinedPlayerToastModule = require(robloxGui.Modules.Server.shouldShowFriendJoinedPlayerToast)
 local gatePrivateServerNudge = game:DefineFastFlag("GatePrivateServerNudge", false)
 local globalUserBlockingLuaReadsFromSCMCache = game:DefineFastFlag("GlobalUserBlockingLuaReadsFromSCMCache", false)
 local t = {}
@@ -95,6 +97,8 @@ if fFlagEnablePartyNudgeAfterJoin then
 	showPlayerJoinedFriendsToast = Instance.new("RemoteEvent")
 	showPlayerJoinedFriendsToast.Name = "ShowPlayerJoinedFriendsToast"
 	showPlayerJoinedFriendsToast.Parent = robloxReplicatedStorageService
+end
+if fFlagEnablePartyNudgeAfterJoin or fFlagShowFriendJoinedYouToastForNonReferredJoins then
 	showFriendJoinedPlayerToast = Instance.new("RemoteEvent")
 	showFriendJoinedPlayerToast.Name = "ShowFriendJoinedPlayerToast"
 	showFriendJoinedPlayerToast.Parent = robloxReplicatedStorageService
@@ -413,7 +417,7 @@ local function canCreatePartyNudge(p8)
 end
 
 local var3 = function(p8)
-	-- upvalues: playersService (ref), enableCreatePartyNudge (ref), canCreatePartyNudge (ref), url (ref), httpService (ref), enableCreatePartyNudgeWithVersion (ref), gatePrivateServerNudge (ref), httpRbxApiService (ref), createOrJoinParty (ref), showFriendJoinedPlayerToast (write), showPlayerJoinedFriendsToast (write)
+	-- upvalues: playersService (ref), fFlagEnablePartyNudgeAfterJoin (ref), enableCreatePartyNudge (ref), canCreatePartyNudge (ref), url (ref), httpService (ref), enableCreatePartyNudgeWithVersion (ref), gatePrivateServerNudge (ref), httpRbxApiService (ref), createOrJoinParty (ref), fFlagShowFriendJoinedYouToastForNonReferredJoins (ref), shouldShowFriendJoinedPlayerToastModule (ref), showFriendJoinedPlayerToast (write), showPlayerJoinedFriendsToast (write)
 	local v
 	local var4 = nil
 	local players = playersService:GetPlayers()
@@ -426,7 +430,7 @@ local var3 = function(p8)
 	end
 	local var5 = false
 	
-	if enableCreatePartyNudge and canCreatePartyNudge(var4) and canCreatePartyNudge(p8) then
+	if fFlagEnablePartyNudgeAfterJoin and enableCreatePartyNudge and (canCreatePartyNudge(var4) and canCreatePartyNudge(p8)) then
 		local _ = nil
 		v = p8.UserId
 		local userId = var4.UserId
@@ -453,15 +457,17 @@ local var3 = function(p8)
 		end
 	end
 	if not var5 and #players > 0 then
-		if var4 then
+		if var4 and (not fFlagShowFriendJoinedYouToastForNonReferredJoins or shouldShowFriendJoinedPlayerToastModule(p8)) then
 			showFriendJoinedPlayerToast:FireClient(var4, p8)
 		end
-		showPlayerJoinedFriendsToast:FireClient(p8)
+		if fFlagEnablePartyNudgeAfterJoin then
+			showPlayerJoinedFriendsToast:FireClient(p8)
+		end
 	end
 end
 
 local function onPlayerAdded(p9)
-	-- upvalues: sendPlayerBlockList_1 (ref), newPlayerGroupDetails (ref), t_2 (ref), getPlayerGroupDetails (ref), fFlagInExperienceUserProfileSettingsEnabledModule (ref), sendPlayerAllInExperienceNameEnabled (ref), var2 (ref), sendPlayerAllCanManage (ref), getPlayerCanManage (ref), sendCanChatWith (ref), fFlagEnablePartyNudgeAfterJoin (ref), var3 (ref)
+	-- upvalues: sendPlayerBlockList_1 (ref), newPlayerGroupDetails (ref), t_2 (ref), getPlayerGroupDetails (ref), fFlagInExperienceUserProfileSettingsEnabledModule (ref), sendPlayerAllInExperienceNameEnabled (ref), var2 (ref), sendPlayerAllCanManage (ref), getPlayerCanManage (ref), sendCanChatWith (ref), fFlagEnablePartyNudgeAfterJoin (ref), fFlagShowFriendJoinedYouToastForNonReferredJoins (ref), var3 (ref)
 	coroutine.wrap(sendPlayerBlockList_1)(p9)
 	newPlayerGroupDetails:FireClient(p9, t_2)
 	
@@ -476,7 +482,7 @@ local function onPlayerAdded(p9)
 	coroutine.wrap(getPlayerCanManage)(p9)
 	sendCanChatWith(p9)
 	
-	if fFlagEnablePartyNudgeAfterJoin then
+	if fFlagEnablePartyNudgeAfterJoin or fFlagShowFriendJoinedYouToastForNonReferredJoins then
 		coroutine.wrap(var3)(p9)
 	end
 end

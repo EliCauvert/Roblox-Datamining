@@ -5,10 +5,13 @@ local roact = inGameMenuDependenciesModule.Roact
 local UIBlox = inGameMenuDependenciesModule.UIBlox
 local t = inGameMenuDependenciesModule.t
 local cryo = inGameMenuDependenciesModule.Cryo
+local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTextSize
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local images = UIBlox.App.ImageSet.Images
 local foundationModule = require(corePackagesService.Packages.Foundation)
 local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
 local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
 local parent = script.Parent.Parent.Parent
@@ -44,23 +47,27 @@ function textEntryField.init(p1)
 end
 
 function textEntryField.calculateNeedsRescroll(p1, p2, p3)
-	-- upvalues: textService (ref)
+	-- upvalues: foundationFontFaceMigration (ref), getTextSize (ref), textService (ref)
 	p1:setState(function(p4, p5)
-		-- upvalues: p3 (ref), p2 (ref), textService (copy)
+		-- upvalues: p3 (ref), p2 (ref), foundationFontFaceMigration (copy), getTextSize (copy), textService (copy)
 		if p4.cursorPosition == -1 then
 			return nil
 		end
-		local var3 = p3.RelativeSize * p2.Font.BaseSize
-		local var4 = textService:GetTextSize(p5.text:sub(1, p4.cursorPosition - 1), var3, p3.Font, Vector2.new(p5.textBoxWidth, 10000))
+		local var3 = p5.text:sub(1, p4.cursorPosition - 1)
+		local var4 = p3.RelativeSize * p2.Font.BaseSize
+		local vector2 = Vector2.new(p5.textBoxWidth, 10000)
+		local var5 = if foundationFontFaceMigration then getTextSize(var3, var4, p2.Tokens.Typography.BodyLarge.Font, vector2, { addTemporaryPadding = false }) else textService:GetTextSize(var3, var4, p3.Font, vector2)
 		
-		return if p4.scrollingFrameHeight + p4.canvasPosition < var4.Y then { canvasPosition = var4.Y - p4.scrollingFrameHeight } elseif var4.Y - var3 < p4.canvasPosition then { canvasPosition = var4.Y - var3 } else nil
+		return if p4.scrollingFrameHeight + p4.canvasPosition < var5.Y then { canvasPosition = var5.Y - p4.scrollingFrameHeight } elseif var5.Y - var4 < p4.canvasPosition then { canvasPosition = var5.Y - var4 } else nil
 	end)
 end
 
 function textEntryField.renderWithSelectionCursor(p1, p2)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), textService (ref), circle17 (ref), roact (ref), var2 (ref), themedTextLabelModule (ref), images (ref), fillCircleModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref)
+	-- upvalues: withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), circle17 (ref), roact (ref), normalizeFontFace (ref), var2 (ref), themedTextLabelModule (ref), images (ref), fillCircleModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref)
 	return withFoundationOrUIBloxStyle(function(p3)
+		-- upvalues: foundationFontFaceMigration (copy)
 		return {
+			Tokens = if foundationFontFaceMigration then p3 else nil,
 			Theme = {
 				TextDefault = {
 					Color = p3.Color.Content.Default.Color3,
@@ -80,13 +87,13 @@ function textEntryField.renderWithSelectionCursor(p1, p2)
 			}
 		}
 	end, function(p3)
-		-- upvalues: textService (copy), p1 (ref), circle17 (copy), roact (copy), p2 (ref), var2 (copy), themedTextLabelModule (copy), images (copy), fillCircleModule (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy)
+		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), p1 (ref), textService (copy), circle17 (copy), roact (copy), normalizeFontFace (copy), p2 (ref), var2 (copy), themedTextLabelModule (copy), images (copy), fillCircleModule (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy)
 		local textDefault = p3.Theme.TextDefault
 		local body = p3.Font.Body
-		local textTextSize = textService:GetTextSize(p1.props.text, body.RelativeSize * p3.Font.BaseSize, body.Font, Vector2.new(p1.state.textBoxWidth, 10000))
+		local var3 = if foundationFontFaceMigration then getTextSize(p1.props.text, body.RelativeSize * p3.Font.BaseSize, p3.Tokens.Typography.BodyLarge.Font, Vector2.new(p1.state.textBoxWidth, 10000), { addTemporaryPadding = false }) else textService:GetTextSize(p1.props.text, body.RelativeSize * p3.Font.BaseSize, body.Font, Vector2.new(p1.state.textBoxWidth, 10000))
 		local imageRectOffset = circle17.ImageRectOffset
 		local x = circle17.ImageRectSize.X
-		local var3 = x / 2
+		local var4 = x / 2
 		local t = {
 			ScrollingFrame = roact.createElement("ScrollingFrame", {
 				Size = UDim2.new(1, -24, 1, -44),
@@ -94,7 +101,7 @@ function textEntryField.renderWithSelectionCursor(p1, p2)
 				Position = UDim2.new(0.5, 0, 0, 7),
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				CanvasSize = UDim2.new(1, -24, 0, textTextSize.Y),
+				CanvasSize = UDim2.new(1, -24, 0, var3.Y),
 				ScrollBarThickness = 8,
 				VerticalScrollBarInset = Enum.ScrollBarInset.Always,
 				CanvasPosition = Vector2.new(0, p1.state.canvasPosition),
@@ -123,7 +130,8 @@ function textEntryField.renderWithSelectionCursor(p1, p2)
 					TextYAlignment = Enum.TextYAlignment.Top,
 					TextColor3 = textDefault.Color,
 					TextTransparency = textDefault.Transparency,
-					Font = body.Font,
+					Font = if foundationFontFaceMigration then nil else body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 					TextSize = body.RelativeSize * p3.Font.BaseSize,
 					TextWrapped = true,
 					SelectionImageObject = p2(var2.InputFields),
@@ -178,10 +186,10 @@ function textEntryField.renderWithSelectionCursor(p1, p2)
 				AnchorPoint = Vector2.new(0, 1),
 				Position = UDim2.new(0, 0, 1, 0),
 				Size = UDim2.new(1, 0, 0, 32),
-				SliceCenter = Rect.new(var3 - 1, 0, var3 + 1, 1),
+				SliceCenter = Rect.new(var4 - 1, 0, var4 + 1, 1),
 				SliceScale = 1 / images.ImagesResolutionScale,
-				ImageRectSize = Vector2.new(x, var3),
-				ImageRectOffset = imageRectOffset + Vector2.new(0, var3)
+				ImageRectSize = Vector2.new(x, var4),
+				ImageRectOffset = imageRectOffset + Vector2.new(0, var4)
 			}, {
 				TextAmmountIndicator = roact.createElement("Frame", {
 					BackgroundTransparency = 1,

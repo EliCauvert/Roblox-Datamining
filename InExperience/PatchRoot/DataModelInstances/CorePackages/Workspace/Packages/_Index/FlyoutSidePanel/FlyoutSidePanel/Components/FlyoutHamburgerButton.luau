@@ -22,7 +22,6 @@ local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local getTestId = roactUtilsModule.getTestId
 local statusIndicator = foundationModule.StatusIndicator
 local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
-local flags = foundationModule.Utility.Flags
 local useTokens = foundationModule.Hooks.useTokens
 local fFlagLuaAppFixNotificationBadgeCountsSync = require(parent.SharedFlags).FFlagLuaAppFixNotificationBadgeCountsSync
 local fFlagEnableFlyoutOnNavRail = require(parent.SharedFlags).FFlagEnableFlyoutOnNavRail
@@ -56,7 +55,7 @@ local function getTotalNotificationCount(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: useSelector (ref), fFlagLuaAppFixNotificationBadgeCountsSync (ref), getTotalNotificationCount (ref), useTokens (ref), fFlagFlyoutUseOpenHook (ref), useOpenFlyoutSidePanelModule (ref), useSetDrawerVisible (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), flyoutTooltipManagerModule (ref), useLocalization (ref), coreGuiService (ref), tooltipOrientation (ref), userInputService (ref), fFlagEnableFlyoutOnNavRail (ref), fFlagFlyoutHeaderFixPadding (ref), fFlagLuaAppAddTestIdsForArrow (ref), getTestId (ref), foundationModule (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), flyoutAlternateEntryPointModule (ref), icon (ref), builderIconsModule (ref), iconSize (ref), withTooltip (ref)
+	-- upvalues: useSelector (ref), fFlagLuaAppFixNotificationBadgeCountsSync (ref), getTotalNotificationCount (ref), useTokens (ref), fFlagFlyoutUseOpenHook (ref), useOpenFlyoutSidePanelModule (ref), useSetDrawerVisible (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), flyoutTooltipManagerModule (ref), useLocalization (ref), coreGuiService (ref), tooltipOrientation (ref), userInputService (ref), fFlagEnableFlyoutOnNavRail (ref), fFlagFlyoutHeaderFixPadding (ref), fFlagLuaAppAddTestIdsForArrow (ref), getTestId (ref), foundationModule (ref), statusIndicator (ref), statusIndicatorVariant (ref), flyoutAlternateEntryPointModule (ref), icon (ref), builderIconsModule (ref), iconSize (ref), withTooltip (ref)
 	local var1
 	local var2 = getTotalNotificationCount(useSelector(function(p2)
 		return p2.NotificationBadgeCounts or {}
@@ -155,9 +154,7 @@ return function(p1)
 			Position = if p1.isAlternateEntryPointEnabled then if fFlagEnableFlyoutOnNavRail and p1.isIconCentered then UDim2.new(1, 0, 0, var3.Size.Size_100) else UDim2.new(1, if fFlagFlyoutHeaderFixPadding then 0 else -var3.Size.Size_100, 0, var3.Size.Size_100) elseif fFlagEnableFlyoutOnNavRail and p1.isIconCentered then UDim2.new(1, -var3.Size.Size_100, 0, var3.Size.Size_150) else UDim2.new(1, if fFlagFlyoutHeaderFixPadding then -var3.Size.Size_200 else -var3.Size.Size_300, 0, var3.Size.Size_150),
 			AnchorPoint = Vector2.new(1, 0)
 		}, {
-			StatusIndicator = reactModule.createElement(statusIndicator, {
-				variant = if flags.FoundationStatusIndicatorVariantExperiment then statusIndicatorVariant.Contrast_Experiment else statusIndicatorVariant.Emphasis
-			})
+			StatusIndicator = reactModule.createElement(statusIndicator, { variant = statusIndicatorVariant.Emphasis })
 		}) else nil,
 		HamburgerButton = reactModule.createElement(foundationModule.View, {
 			tag = "auto-xy",

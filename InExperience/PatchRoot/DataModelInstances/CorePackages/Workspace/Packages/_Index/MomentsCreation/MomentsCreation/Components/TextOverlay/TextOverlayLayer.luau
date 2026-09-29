@@ -30,6 +30,9 @@ local getScale = momentsCommonModule.Utils.getScale
 local getFFlagMomentsStickerButton = momentsCommonModule.Flags.GetFFlagMomentsStickerButton
 local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
 local fFlagMomentsTextOverlayV2Redesign = momentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
+local eventNames = momentsCommonModule.Analytics.EventNames
+local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
+local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
 local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
 local constantsModule = require(momentsCreation.Constants)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
@@ -42,7 +45,6 @@ local makeDefaultTextOverlayEditModule = require(momentsCreation.Utils.makeDefau
 local makeTextOverlayEditsForEditorModule = require(momentsCreation.Utils.makeTextOverlayEditsForEditor)
 local fitTextOverlayFontSizeModule = require(momentsCreation.Utils.fitTextOverlayFontSize)
 local isPointOverTrashTargetModule = require(momentsCreation.Utils.isPointOverTrashTarget)
-local getFFlagMomentsTextOverlayClampToBoundsModule = require(momentsCreation.Flags.GetFFlagMomentsTextOverlayClampToBounds)
 local getFFlagMomentsCreationTextOverlayResolutionScaleModule = require(momentsCreation.Flags.GetFFlagMomentsCreationTextOverlayResolutionScale)
 local verticalFontSizeSliderModule = require(momentsCreation.Components.TextOverlay.VerticalFontSizeSlider)
 local textOverlayToolbarModule = require(momentsCreation.Components.TextOverlay.TextOverlayToolbar)
@@ -81,7 +83,7 @@ local function GenerateTextButton(p1)
 end
 
 return function(p1)
-	-- upvalues: useSignalState (ref), getFFlagMomentsCreationTextOverlayResolutionScaleModule (ref), getScale (ref), useMemo (ref), signalsModule (ref), creationFlowStateModule (ref), useRef (ref), useBinding (ref), useOnScreenKeyboardHeightModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), constantsModule (ref), fitTextOverlayFontSizeModule (ref), useCallback (ref), getFFlagMomentsStickerButton (ref), dashModule (ref), getFFlagEnableMomentTextGeneration (ref), useDeviceInsets (ref), useAnimatedBinding (ref), useIsMultiTouchActive (ref), UIDragDetectorFixEventPositionEnabledEngineFeature (ref), guiService (ref), isPointOverTrashTargetModule (ref), reactOtterModule (ref), t (ref), useEffect (ref), makeTextOverlayEditsForEditorModule (ref), makeDefaultTextOverlayEditModule (ref), textService (ref), reactModule (ref), view (ref), foundationModule (ref), textOverlay (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref), GenerateTextButton (ref), verticalFontSizeSliderModule (ref), numberSequence (ref), textOverlayToolbarModule (ref), overlayDisplay (ref), getFFlagMomentsTextOverlayClampToBoundsModule (ref), textOverlayDisplay (ref), textOverlayTrashZoneModule (ref)
+	-- upvalues: useSignalState (ref), getFFlagMomentsCreationTextOverlayResolutionScaleModule (ref), getScale (ref), useMemo (ref), signalsModule (ref), creationFlowStateModule (ref), useRef (ref), useBinding (ref), useOnScreenKeyboardHeightModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), constantsModule (ref), fitTextOverlayFontSizeModule (ref), useCallback (ref), getFFlagMomentsStickerButton (ref), dashModule (ref), getFFlagEnableMomentTextGeneration (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), useDeviceInsets (ref), useAnimatedBinding (ref), useIsMultiTouchActive (ref), UIDragDetectorFixEventPositionEnabledEngineFeature (ref), guiService (ref), isPointOverTrashTargetModule (ref), reactOtterModule (ref), t (ref), useEffect (ref), makeTextOverlayEditsForEditorModule (ref), makeDefaultTextOverlayEditModule (ref), textService (ref), reactModule (ref), view (ref), foundationModule (ref), textOverlay (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref), GenerateTextButton (ref), verticalFontSizeSliderModule (ref), numberSequence (ref), textOverlayToolbarModule (ref), overlayDisplay (ref), textOverlayDisplay (ref), textOverlayTrashZoneModule (ref)
 	local controller = p1.controller
 	local var1 = useSignalState(controller.getStep)
 	local var2 = useSignalState(p1.ctx.getItemSize)
@@ -150,79 +152,96 @@ return function(p1)
 	end, { controller })
 	local var18 = nil
 	local var19 = nil
+	local _ = nil
+	local _ = nil
+	local var20 = nil
 	
 	if fFlagMomentsTextOverlayV2Redesign then
+		local var21 = useRef(false)
+		local var22 = useRef(false)
+		var20 = useRef(false)
 		var18 = useCallback(function(p2)
-			-- upvalues: controller (ref), dashModule (copy)
+			-- upvalues: controller (ref), dashModule (copy), var21 (write), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
 			local textOverlays = controller.getComposedEdits(false).textOverlays
-			local var20 = textOverlays and textOverlays[1]
+			local var23 = textOverlays and textOverlays[1]
 			
-			if var20 == nil then
-				return
+			if var23 == nil then return end
+			controller.updateCommittedEdit("text", { dashModule.joinDeep(var23, { scale = p2 }) })
+			
+			if not var21.current then
+				var21.current = true
+				fireAnalyticsEventModule(eventNames.EditingFlowTextOverlayRescaleUsed, makeCreationEventFieldsModule.makeTextOverlayEventFields())
 			end
-			controller.updateCommittedEdit("text", { dashModule.joinDeep(var20, { scale = p2 }) })
 		end, { controller })
 		var19 = useCallback(function(p2)
-			-- upvalues: controller (ref), dashModule (copy)
+			-- upvalues: controller (ref), dashModule (copy), var22 (write), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
 			local textOverlays = controller.getComposedEdits(false).textOverlays
-			local var20 = textOverlays and textOverlays[1]
+			local var23 = textOverlays and textOverlays[1]
 			
-			if var20 == nil then
-				return
+			if var23 == nil then return end
+			controller.updateCommittedEdit("text", { dashModule.joinDeep(var23, { rotation = p2 }) })
+			
+			if not var22.current then
+				var22.current = true
+				fireAnalyticsEventModule(eventNames.EditingFlowTextOverlayRotateUsed, makeCreationEventFieldsModule.makeTextOverlayEventFields())
 			end
-			controller.updateCommittedEdit("text", { dashModule.joinDeep(var20, { rotation = p2 }) })
 		end, { controller })
 	end
-	local var20 = if fFlagMomentsTextOverlayV2Redesign then useDeviceInsets() else nil
-	local var21 = useRef(nil)
-	local var22 = useRef(false)
-	local var23, var24 = useBinding(false)
-	local var25, var26 = useAnimatedBinding(1)
-	local var27, var28 = useAnimatedBinding(1)
-	local var29 = if fFlagMomentsTextOverlayV2Redesign then useIsMultiTouchActive(var1 == creationFlowStateModule.Preview) else false
-	local var30 = useCallback(function(p2)
-		-- upvalues: var21 (ref), fFlagMomentsTextOverlayV2Redesign (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), var20 (write), guiService (copy), isPointOverTrashTargetModule (copy)
-		local current = var21.current
+	local var23 = if fFlagMomentsTextOverlayV2Redesign then useDeviceInsets() else nil
+	local var24 = useRef(nil)
+	local var25 = useRef(false)
+	local var26, var27 = useBinding(false)
+	local var28, var29 = useAnimatedBinding(1)
+	local var30, var31 = useAnimatedBinding(1)
+	local var32 = if fFlagMomentsTextOverlayV2Redesign then useIsMultiTouchActive(var1 == creationFlowStateModule.Preview) else false
+	local var33 = useCallback(function(p2)
+		-- upvalues: var24 (ref), fFlagMomentsTextOverlayV2Redesign (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), var23 (write), guiService (copy), isPointOverTrashTargetModule (copy)
+		local current = var24.current
 		
 		if current == nil then
 			return false
 		end
 		local zero = Vector2.zero
-		local var31 = 0
+		local var34 = 0
 		
-		if fFlagMomentsTextOverlayV2Redesign and not UIDragDetectorFixEventPositionEnabledEngineFeature and var20 ~= nil then
-			zero = guiService:GetGuiInset() + Vector2.new(var20.left, var20.top)
+		if fFlagMomentsTextOverlayV2Redesign and not UIDragDetectorFixEventPositionEnabledEngineFeature and var23 ~= nil then
+			zero = guiService:GetGuiInset() + Vector2.new(var23.left, var23.top)
 		end
 		if fFlagMomentsTextOverlayV2Redesign then
-			var31 = 24
+			var34 = 24
 		end
-		return isPointOverTrashTargetModule(p2, zero, current.AbsolutePosition, current.AbsoluteSize, var31)
-	end, { var20 })
-	local var31 = useCallback(function()
-		-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), p1 (ref), var22 (ref), var26 (ref), reactOtterModule (copy), var28 (ref), var24 (ref)
+		return isPointOverTrashTargetModule(p2, zero, current.AbsolutePosition, current.AbsoluteSize, var34)
+	end, { var23 })
+	local var34 = useCallback(function()
+		-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), p1 (ref), var25 (ref), var29 (ref), reactOtterModule (copy), var31 (ref), var27 (ref), var20 (write), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
 		if not fFlagMomentsTextOverlayV2Redesign then return end
 		if p1.ctx.setIsOverlayDragging then
 			p1.ctx.setIsOverlayDragging(true)
 		end
-		var22.current = false
-		var26(reactOtterModule.instant(1))
-		var28(reactOtterModule.instant(1))
-		var24(true)
-	end, { p1.ctx, var26, var28, var24 })
-	local var32 = useCallback(function(p2)
-		-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), var30 (ref), var22 (ref), var26 (ref), reactOtterModule (copy), t (copy), var28 (ref)
-		if not fFlagMomentsTextOverlayV2Redesign then return end
-		local var33 = var30(p2)
+		var25.current = false
+		var29(reactOtterModule.instant(1))
+		var31(reactOtterModule.instant(1))
+		var27(true)
 		
-		if var33 == var22.current then
+		if not var20.current then
+			var20.current = true
+			fireAnalyticsEventModule(eventNames.EditingFlowTextOverlayRepositionUsed, makeCreationEventFieldsModule.makeTextOverlayEventFields())
+		end
+	end, { p1.ctx, var29, var31, var27 })
+	local var35 = useCallback(function(p2)
+		-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), var33 (ref), var25 (ref), var29 (ref), reactOtterModule (copy), t (copy), var31 (ref)
+		if not fFlagMomentsTextOverlayV2Redesign then return end
+		local var36 = var33(p2)
+		
+		if var36 == var25.current then
 			return
 		end
-		var22.current = var33
-		var26(reactOtterModule.spring(if var33 then 1.15 else 1, t))
-		var28(reactOtterModule.spring(if var33 then 0.45 else 1, t))
-	end, { var30, var26, var28 })
-	local var33 = useCallback(function(p2)
-		-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), var17 (ref), p1 (ref), var22 (ref), var24 (ref), var26 (ref), reactOtterModule (copy), controller (ref), var28 (ref)
+		var25.current = var36
+		var29(reactOtterModule.spring(if var36 then 1.15 else 1, t))
+		var31(reactOtterModule.spring(if var36 then 0.45 else 1, t))
+	end, { var33, var29, var31 })
+	local var36 = useCallback(function(p2)
+		-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), var17 (ref), p1 (ref), var25 (ref), var27 (ref), var29 (ref), reactOtterModule (copy), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), controller (ref), var31 (ref)
 		if not fFlagMomentsTextOverlayV2Redesign then
 			var17(p2)
 			
@@ -230,47 +249,48 @@ return function(p1)
 		elseif p1.ctx.setIsOverlayDragging then
 			p1.ctx.setIsOverlayDragging(false)
 		end
-		local current = var22.current
-		var22.current = false
-		var24(false)
-		var26(reactOtterModule.instant(1))
+		local current = var25.current
+		var25.current = false
+		var27(false)
+		var29(reactOtterModule.instant(1))
 		
 		if current then
+			fireAnalyticsEventModule(eventNames.EditingFlowTextOverlayDeletedViaTrash, makeCreationEventFieldsModule.makeTextOverlayEventFields())
 			controller.updateCommittedEdit("text", nil)
 			
 			return
 		end
-		var28(reactOtterModule.instant(1))
+		var31(reactOtterModule.instant(1))
 		var17(p2)
 	end, {
-		p1.ctx, controller, var17, var24, var26, var28
+		p1.ctx, controller, var17, var27, var29, var31
 	})
 	useEffect(function()
-		-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), textOverlays (ref), var28 (ref), reactOtterModule (copy)
+		-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), textOverlays (ref), var31 (ref), reactOtterModule (copy)
 		if not fFlagMomentsTextOverlayV2Redesign then return end
 		if textOverlays == nil or #textOverlays == 0 then
-			var28(reactOtterModule.instant(1))
+			var31(reactOtterModule.instant(1))
 		end
 	end, { textOverlays })
 	
 	if fFlagMomentsTextOverlayV2Redesign then
 		useEffect(function()
-			-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), var29 (write), var22 (ref), var24 (ref), var26 (ref), reactOtterModule (copy), var28 (ref), p1 (ref)
-			if not fFlagMomentsTextOverlayV2Redesign or not var29 then return end
-			var22.current = false
-			var24(false)
-			var26(reactOtterModule.instant(1))
-			var28(reactOtterModule.instant(1))
+			-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), var32 (write), var25 (ref), var27 (ref), var29 (ref), reactOtterModule (copy), var31 (ref), p1 (ref)
+			if not fFlagMomentsTextOverlayV2Redesign or not var32 then return end
+			var25.current = false
+			var27(false)
+			var29(reactOtterModule.instant(1))
+			var31(reactOtterModule.instant(1))
 			
 			if p1.ctx.setIsOverlayDragging then
 				p1.ctx.setIsOverlayDragging(false)
 			end
 		end, {
-			var29,
+			var32,
 			p1.ctx,
-			var24,
-			var26,
-			var28
+			var27,
+			var29,
+			var31
 		})
 	end
 	useEffect(function()
@@ -283,19 +303,19 @@ return function(p1)
 		end
 		activeSession.update(makeTextOverlayEditsForEditorModule(textOverlays, makeDefaultTextOverlayEditModule(), var5))
 	end, { var7, textOverlays, controller, var5 })
-	local var34 = useRef(false)
+	local var37 = useRef(false)
 	useEffect(function()
-		-- upvalues: var7 (ref), var34 (ref), var9 (ref), var8 (ref), var14 (ref)
+		-- upvalues: var7 (ref), var37 (ref), var9 (ref), var8 (ref), var14 (ref)
 		if var7 then
-			if var34.current or var9.current == nil or var8 == nil then
+			if var37.current or var9.current == nil or var8 == nil then
 				return
 			end
 			var14()
-			var34.current = true
+			var37.current = true
 			
 			return
 		else
-			var34.current = false
+			var37.current = false
 			
 			if var9.current then
 				var9.current:ReleaseFocus()
@@ -319,7 +339,7 @@ return function(p1)
 		var12,
 		var2
 	})
-	local var35 = not fFlagMomentsTextOverlayV2Redesign or var12 == 0
+	local var38 = not fFlagMomentsTextOverlayV2Redesign or var12 == 0
 	
 	if var7 then
 		return if var8 == nil then nil else reactModule.createElement(view, {
@@ -344,7 +364,7 @@ return function(p1)
 				textBoxRef = var9
 			}),
 			GenerateText = if getFFlagMomentsGenerateTextInTextOverlayModule() and controller.getCanGenerateText(false) then reactModule.createElement(GenerateTextButton, { controller = controller }) else nil,
-			VerticalFontSizeSlider = if fFlagMomentsTextOverlayV2Redesign and var35 then reactModule.createElement(verticalFontSizeSliderModule, { controller = controller, mediaHeight = var2.Y }) else nil,
+			VerticalFontSizeSlider = if fFlagMomentsTextOverlayV2Redesign and var38 then reactModule.createElement(verticalFontSizeSliderModule, { controller = controller, mediaHeight = var2.Y }) else nil,
 			BottomScrim = if fFlagMomentsTextOverlayV2Redesign then reactModule.createElement(view, {
 				ZIndex = 5,
 				tag = "position-bottom-center anchor-bottom-center",
@@ -358,54 +378,54 @@ return function(p1)
 	elseif textOverlays == nil or #textOverlays == 0 then
 		return nil
 	end
-	local var36 = var1 == creationFlowStateModule.Preview
-	local var37 = var36 and not var29
-	local var38 = fFlagMomentsTextOverlayV2Redesign and var36
-	local var39 = fFlagMomentsTextOverlayV2Redesign and var36
-	local var40 = if getFFlagMomentsStickerButton() then reactModule.createElement(overlayDisplay, {
+	local var39 = var1 == creationFlowStateModule.Preview
+	local var40 = var39 and not var32
+	local var41 = fFlagMomentsTextOverlayV2Redesign and var39
+	local var42 = fFlagMomentsTextOverlayV2Redesign and var39
+	local var43 = if getFFlagMomentsStickerButton() then reactModule.createElement(overlayDisplay, {
+		clampToBoundsEnabled = true,
 		editable = false,
-		clampToBoundsEnabled = getFFlagMomentsTextOverlayClampToBoundsModule(),
-		draggable = var37,
+		draggable = var40,
 		itemResolution = if var4 then var3 else nil,
 		itemSize = var2,
 		scaleType = Enum.ScaleType.Crop,
-		onOverlayActivated = if var36 then var16 else nil,
-		onOverlayDragBegin = if var36 then var31 else nil,
-		onOverlayDragContinue = if var38 then var32 else nil,
-		onOverlayDragEnd = if var36 then var33 else nil,
-		onOverlayRotationChanged = if var39 then var19 else nil,
-		onOverlayScaleChanged = if var39 then var18 else nil,
+		onOverlayActivated = if var39 then var16 else nil,
+		onOverlayDragBegin = if var39 then var34 else nil,
+		onOverlayDragContinue = if var41 then var35 else nil,
+		onOverlayDragEnd = if var39 then var36 else nil,
+		onOverlayRotationChanged = if var42 then var19 else nil,
+		onOverlayScaleChanged = if var42 then var18 else nil,
 		overlayEdits = textOverlays,
 		overlayComponent = textOverlay,
-		selected = var39,
-		visualScale = if var38 then var27 else nil,
+		selected = var42,
+		visualScale = if var41 then var30 else nil,
 		zIndex = p1.zIndex
 	}) else reactModule.createElement(textOverlayDisplay, {
+		clampToBoundsEnabled = true,
 		editable = false,
-		clampToBoundsEnabled = getFFlagMomentsTextOverlayClampToBoundsModule(),
-		draggable = var37,
+		draggable = var40,
 		itemResolution = if var4 then var3 else nil,
 		itemSize = var2,
 		scaleType = Enum.ScaleType.Crop,
-		onTextOverlayActivated = if var36 then var16 else nil,
-		onTextOverlayDragBegin = if var36 then var31 else nil,
-		onTextOverlayDragContinue = if var38 then var32 else nil,
-		onTextOverlayDragEnd = if var36 then var33 else nil,
-		onTextOverlayRotationChanged = if var39 then var19 else nil,
-		onTextOverlayScaleChanged = if var39 then var18 else nil,
-		selected = var39,
+		onTextOverlayActivated = if var39 then var16 else nil,
+		onTextOverlayDragBegin = if var39 then var34 else nil,
+		onTextOverlayDragContinue = if var41 then var35 else nil,
+		onTextOverlayDragEnd = if var39 then var36 else nil,
+		onTextOverlayRotationChanged = if var42 then var19 else nil,
+		onTextOverlayScaleChanged = if var42 then var18 else nil,
+		selected = var42,
 		textOverlayEdits = textOverlays,
-		visualScale = if var38 then var27 else nil,
+		visualScale = if var41 then var30 else nil,
 		zIndex = p1.zIndex
 	})
 	
-	return if var38 then reactModule.createElement(view, { tag = "size-full", ZIndex = p1.zIndex or 1 }, {
-		Overlay = var40,
+	return if var41 then reactModule.createElement(view, { tag = "size-full", ZIndex = p1.zIndex or 1 }, {
+		Overlay = var43,
 		TrashZone = reactModule.createElement(textOverlayTrashZoneModule, {
-			highlightScale = var25,
-			ref = var21,
-			visible = var23,
+			highlightScale = var28,
+			ref = var24,
+			visible = var26,
 			ZIndex = (p1.zIndex or 1) + 10
 		})
-	}) else var40
+	}) else var43
 end

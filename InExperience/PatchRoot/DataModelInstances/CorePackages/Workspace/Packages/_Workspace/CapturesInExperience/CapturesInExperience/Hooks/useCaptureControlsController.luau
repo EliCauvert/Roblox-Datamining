@@ -12,7 +12,6 @@ local useRef = reactModule.useRef
 local useState = reactModule.useState
 local captureControlsConfigurationModule = require(parent.Utils.CaptureControlsConfiguration)
 local snapDirectionModule = require(parent.Enums.SnapDirection)
-local fFlagCapturesDragEdgeOffsetEnabledModule = require(parent.Flags.FFlagCapturesDragEdgeOffsetEnabled)
 local UIDragDetectorFixEventPositionEnabledEngineFeature = game:GetEngineFeature("UIDragDetectorFixEventPositionEnabled")
 local t = { x = 0.5, y = 0.5 }
 local t_1 = { xOffset = -100, yOffset = -100 }
@@ -33,26 +32,19 @@ local function validateRefs(p1)
 end
 
 local function clampItemPosition(value, minValue, maxValue, p2, p3)
-	-- upvalues: fFlagCapturesDragEdgeOffsetEnabledModule (ref)
 	local var1 = value - maxValue
-	local var2 = if fFlagCapturesDragEdgeOffsetEnabledModule then 50 else 0
-	local var3 = if fFlagCapturesDragEdgeOffsetEnabledModule then p3.Y else 0
+	local var2 = 50
+	local y = p3.Y
+	local var3 = 50
+	local var4 = y
 	
-	if not fFlagCapturesDragEdgeOffsetEnabledModule and var1.X + minValue.X < p3.X and var1.Y < p3.Y then
-		var3 = p3.Y
-	elseif not fFlagCapturesDragEdgeOffsetEnabledModule and var1.Y < p3.Y then
-		var2 = p3.X
+	if minValue.X < p2.X - 50 then
+		var3 = math.clamp(var1.X, var2, p2.X - minValue.X - 50)
 	end
-	local var4 = var2
-	local var5 = var3
-	
-	if minValue.X < p2.X - var2 then
-		var4 = math.clamp(var1.X, var2, p2.X - minValue.X - (if fFlagCapturesDragEdgeOffsetEnabledModule then 50 else 0))
+	if minValue.Y < p2.Y - y then
+		var4 = math.clamp(var1.Y, y, p2.Y - minValue.Y)
 	end
-	if minValue.Y < p2.Y - var3 then
-		var5 = math.clamp(var1.Y, var3, p2.Y - minValue.Y)
-	end
-	return Vector2.new(var4, var5)
+	return Vector2.new(var3, var4)
 end
 
 local function getSnapPosition(p2, p3, p4, p5, p6, p7)

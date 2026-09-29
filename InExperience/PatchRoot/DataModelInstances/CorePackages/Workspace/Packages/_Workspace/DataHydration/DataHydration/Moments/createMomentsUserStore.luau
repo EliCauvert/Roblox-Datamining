@@ -116,10 +116,16 @@ return function(p1)
 		return var4
 	end
 	
+	local function getFreshUserMoments(p3, p4)
+		-- upvalues: httpClientModule (copy), fetchUserMomentsModule (copy), p1 (ref)
+		return httpClientModule.asPromise(fetchUserMomentsModule(p3, p4, p1.network))
+	end
+	
 	local var3, var4 = signalsModule.createSignal(0)
 	
 	return {
 		getUserMoments = getUserMoments,
+		getFreshUserMoments = getFreshUserMoments,
 		getCachedUserMoments = getCachedUserMoments,
 		fetchUserMoments = fetchUserMomentsItem,
 		getAndFetchUserMoments = getAndFetchUserMoments,

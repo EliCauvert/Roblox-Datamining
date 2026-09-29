@@ -6,6 +6,9 @@ local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
 local tModule = require(corePackagesService.Packages.t)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local withStyle = UIBloxModule.Style.withStyle
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -141,9 +144,9 @@ function publishAssetPromptSingleStep.init(p1)
 end
 
 function publishAssetPromptSingleStep.renderMiddle(p1, p2)
-	-- upvalues: withStyle (ref), enableEmotePublishEngineFeature (ref), enableImagePublishEngineFeature (ref), roactModule (ref), roactGamepadModule (ref), imagePreviewModule (ref), objectViewportModule (ref), emoteThumbnailViewModule (ref), iconButton (ref), previewExpand (ref), edit (ref), nameTextBoxModule (ref), assetDescriptionTextBoxModule (ref)
+	-- upvalues: withStyle (ref), enableEmotePublishEngineFeature (ref), enableImagePublishEngineFeature (ref), roactModule (ref), roactGamepadModule (ref), imagePreviewModule (ref), objectViewportModule (ref), emoteThumbnailViewModule (ref), iconButton (ref), previewExpand (ref), edit (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), nameTextBoxModule (ref), assetDescriptionTextBoxModule (ref)
 	return withStyle(function(p3)
-		-- upvalues: enableEmotePublishEngineFeature (copy), p1 (ref), enableImagePublishEngineFeature (copy), roactModule (copy), roactGamepadModule (copy), imagePreviewModule (copy), objectViewportModule (copy), emoteThumbnailViewModule (copy), iconButton (copy), previewExpand (copy), edit (copy), p2 (ref), nameTextBoxModule (copy), assetDescriptionTextBoxModule (copy)
+		-- upvalues: enableEmotePublishEngineFeature (copy), p1 (ref), enableImagePublishEngineFeature (copy), roactModule (copy), roactGamepadModule (copy), imagePreviewModule (copy), objectViewportModule (copy), emoteThumbnailViewModule (copy), iconButton (copy), previewExpand (copy), edit (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), p2 (ref), nameTextBoxModule (copy), assetDescriptionTextBoxModule (copy)
 		local var1
 		local font = p3.Font
 		local theme = p3.Theme
@@ -222,7 +225,8 @@ function publishAssetPromptSingleStep.renderMiddle(p1, p2)
 				TextSize = 12,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 15),
-				Font = font.Body.Font,
+				Font = if foundationFontFaceMigration then nil else font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 				Text = p2.name,
 				TextColor3 = theme.TextDefault.Color,
 				TextXAlignment = Enum.TextXAlignment.Left
@@ -240,7 +244,8 @@ function publishAssetPromptSingleStep.renderMiddle(p1, p2)
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 15),
 				Position = UDim2.new(0, 0, 0, 60),
-				Font = font.Body.Font,
+				Font = if foundationFontFaceMigration then nil else font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 				Text = p2.description,
 				TextColor3 = theme.TextDefault.Color,
 				TextXAlignment = Enum.TextXAlignment.Left
@@ -262,7 +267,8 @@ function publishAssetPromptSingleStep.renderMiddle(p1, p2)
 			Size = UDim2.new(1, 0, 0, 50),
 			TextYAlignment = Enum.TextYAlignment.Center,
 			Text = p2.disclaimer,
-			Font = font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 			TextColor3 = theme.TextEmphasis.Color,
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.fromScale(0, 1)

@@ -8,6 +8,10 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local useSignalBinding = signalsReactModule.useSignalBinding
 local useSignalState = signalsReactModule.useSignalState
+local useLocalization = require(parent.Localization).Hooks.useLocalization
+local useTelemetryModule = require(appChat.Telemetry.useTelemetry)
+local chatLandingTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatLandingTelemetryLayer)
+local chatLandingTelemetryEventsModule = require(appChat.Components.ChatLanding.ChatLandingTelemetryEvents)
 
 local function getFilterText(p1)
 	-- upvalues: getTopBarStoreModule (ref), enumScreensModule (ref)
@@ -40,6 +44,23 @@ local function SearchBackButton(p1)
 	})
 end
 
+local function SearchCancelButton(p1)
+	-- upvalues: getTopBarStoreModule (ref), reactModule (ref), enumScreensModule (ref), foundationModule (ref)
+	local setScreenTopBar = getTopBarStoreModule(false).setScreenTopBar
+	
+	return reactModule.createElement(foundationModule.Button, {
+		testId = "ChatLandingSearchCancel",
+		text = p1.text,
+		variant = foundationModule.Enums.ButtonVariant.Utility,
+		size = foundationModule.Enums.InputSize.Medium,
+		LayoutOrder = p1.LayoutOrder,
+		onActivated = reactModule.useCallback(function()
+			-- upvalues: setScreenTopBar (ref), enumScreensModule (copy)
+			setScreenTopBar(enumScreensModule.ChatLanding, { shouldRenderCenter = false, filterText = "" })
+		end, { setScreenTopBar })
+	})
+end
+
 local function SearchField(p1)
 	-- upvalues: getTopBarStoreModule (ref), useSignalBinding (ref), getFilterText (ref), useSignalState (ref), getShouldAutoFocus (ref), reactModule (ref), enumScreensModule (ref), chatSearchFieldContainerModule (ref)
 	local setScreenTopBar = getTopBarStoreModule(false).setScreenTopBar
@@ -63,15 +84,20 @@ local function SearchField(p1)
 			-- upvalues: setScreenTopBar (ref), enumScreensModule (copy)
 			setScreenTopBar(enumScreensModule.ChatLanding, { shouldRenderCenter = false, filterText = "" })
 		end, { setScreenTopBar }) else nil,
+		onFocusGained = p1.onFocusGained,
 		testId = p1.testId
 	})
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), SearchBackButton (ref), SearchField (ref)
+	-- upvalues: useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useLocalization (ref), reactModule (ref), chatLandingTelemetryEventsModule (ref), foundationModule (ref), SearchBackButton (ref), SearchField (ref), SearchCancelButton (ref)
 	local var1 = p1.hasExit ~= false
+	local exitVariant = p1.exitVariant or "Cancel"
+	local var2 = var1 and exitVariant == "Chevron"
+	local var3 = var1 and exitVariant == "Cancel"
 	local height = p1.height
 	local paddingHorizontal = p1.paddingHorizontal
+	local var4 = useTelemetryModule(chatLandingTelemetryLayerModule.Context)
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = {
@@ -85,9 +111,20 @@ return function(p1)
 			right = UDim.new(0, paddingHorizontal)
 		} else nil
 	}, {
-		back = if var1 then reactModule.createElement(SearchBackButton, { LayoutOrder = 1 }) else nil,
+		back = if var2 then reactModule.createElement(SearchBackButton, { LayoutOrder = 1 }) else nil,
 		field = reactModule.createElement(foundationModule.View, { tag = "grow auto-y", LayoutOrder = 2 }, {
-			input = reactModule.createElement(SearchField, { hasExit = var1, testId = p1.testId })
-		})
+			input = reactModule.createElement(SearchField, {
+				hasExit = var1,
+				testId = p1.testId,
+				onFocusGained = if p1.reportFocusAsSearchEntry then reactModule.useCallback(function()
+					-- upvalues: var4 (ref), chatLandingTelemetryEventsModule (copy)
+					var4.emit(chatLandingTelemetryEventsModule.ChatLandingSearchBtnClicked, {})
+				end, { var4 }) else nil
+			})
+		}),
+		cancel = if var3 then reactModule.createElement(SearchCancelButton, {
+			LayoutOrder = 3,
+			text = useLocalization({ cancelText = "Feature.Chat.Action.Cancel" }).cancelText
+		}) else nil
 	})
 end

@@ -81,10 +81,10 @@ local momentsSurfaceLoadTTISamplingRate = game:DefineFastInt("MomentsSurfaceLoad
 local momentsSurfaceLoadTTIMaxMs = game:DefineFastInt("MomentsSurfaceLoadTTIMaxMs", 0)
 local momentsRemoveDeletedFromProfile = game:DefineFastFlag("MomentsRemoveDeletedFromProfile", false)
 local momentsRefreshOwnMomentsAfterPublish = game:DefineFastFlag("MomentsRefreshOwnMomentsAfterPublish", false)
+local momentsResolvePublishedPostFeedItem = game:DefineFastFlag("MomentsResolvePublishedPostFeedItem", false)
 local momentsPassFeedItemIdToBackendApis = game:DefineFastFlag("MomentsPassFeedItemIdToBackendApis", false)
 local momentsComments = game:DefineFastFlag("MomentsComments", false)
 local momentsCommentsUseMockNetwork = game:DefineFastFlag("MomentsCommentsUseMockNetwork", false)
-local momentsTabReactiveIXP = game:DefineFastFlag("MomentsTabReactiveIXP", false)
 local fixMomentsTabReactiveIXPRace = game:DefineFastFlag("FixMomentsTabReactiveIXPRace", false)
 local guacMomentsFeatureList = game:DefineFastFlag("GuacMomentsFeatureList", false)
 local guacMomentsFeatureList_1 = game:DefineFastFlag("MomentsAutoplayAmpPolicy2", false) and guacMomentsFeatureList
@@ -136,6 +136,7 @@ return {
 	FFlagEnableGroupDetailPane = game:DefineFastFlag("EnableGroupDetailPane", false),
 	FFlagManuallyMigrateDeprecatedIconUsage = game:DefineFastFlag("ManuallyMigrateDeprecatedIconUsage", false),
 	FFlagEnablePopLatencyOverlay = game:DefineFastFlag("EnablePopLatencyOverlay", false),
+	FFlagDebugEnablePopForcePicker = game:DefineFastFlag("DebugEnablePopForcePicker", false),
 	getFFlagRemoveVirtualEventsExperiment = require(script.getFFlagRemoveVirtualEventsExperiment),
 	getFStringWhitelistVerifiedUserId = require(script.getFStringWhitelistVerifiedUserId),
 	getFFlagOverridePlayerVerifiedBadge = require(script.getFFlagOverridePlayerVerifiedBadge),
@@ -196,10 +197,10 @@ return {
 	FIntMomentsSurfaceLoadTTIMaxMs = momentsSurfaceLoadTTIMaxMs,
 	FFlagMomentsRemoveDeletedFromProfile = momentsRemoveDeletedFromProfile,
 	FFlagMomentsRefreshOwnMomentsAfterPublish = momentsRefreshOwnMomentsAfterPublish,
+	FFlagMomentsResolvePublishedPostFeedItem = momentsResolvePublishedPostFeedItem,
 	FFlagMomentsPassFeedItemIdToBackendApis = momentsPassFeedItemIdToBackendApis,
 	FFlagMomentsComments = momentsComments,
 	FFlagMomentsCommentsUseMockNetwork = momentsCommentsUseMockNetwork,
-	FFlagMomentsTabReactiveIXP = momentsTabReactiveIXP,
 	FFlagFixMomentsTabReactiveIXPRace = fixMomentsTabReactiveIXPRace,
 	FFlagGuacMomentsFeatureList = guacMomentsFeatureList,
 	FFlagMomentsAutoplayAmpPolicy = guacMomentsFeatureList_1 and guacMomentsFeatureList,
@@ -365,6 +366,7 @@ return {
 	FFlagAppChatNewChatFixEnabled = game:DefineFastFlag("AppChatNewChatFixEnabled", false),
 	FFlagRemoveFriendsChatUnibarEntrypoints = game:DefineFastFlag("RemoveFriendsChatUnibarEntrypoints", false),
 	FFlagEnablePartyNudgeAfterJoin = require(script.FFlagEnablePartyNudgeAfterJoin),
+	FFlagShowFriendJoinedYouToastForNonReferredJoins = require(script.FFlagShowFriendJoinedYouToastForNonReferredJoins),
 	FFlagCreateConnectionsHub = require(script.FFlagCreateConnectionsHub),
 	FFlagTCStreamNotifEventReceiver = game:DefineFastFlag("TCStreamNotifEventReceiver", false),
 	GetFFlagExpChatGuacChatDisabledReason = require(script.GetFFlagExpChatGuacChatDisabledReason),
@@ -675,6 +677,7 @@ return {
 	GetFIntIntervalPerformanceTrackerEventStream = require(script.GetFIntIntervalPerformanceTrackerEventStream),
 	GetFFlagEnableNavigationPerformanceIntervals = require(script.GetFFlagEnableNavigationPerformanceIntervals),
 	FFlagLuaAppScrollTelemetryIntegration = game:DefineFastFlag("LuaAppScrollTelemetryIntegration", false),
+	FFlagAXScrollTelemetryIntegration = game:DefineFastFlag("AXScrollTelemetryIntegration", false),
 	FFlagLuaAppSkipStartupRouteHop = game:DefineFastFlag("LuaAppSkipStartupRouteHop", false),
 	GetFFlagEnableTenftUiDetailsMoreDropupMenu = require(script.GetFFlagEnableTenftUiDetailsMoreDropupMenu),
 	GetFFlagEnableAbuseReport10ft = require(script.GetFFlagEnableAbuseReport10ft),
@@ -964,7 +967,6 @@ return {
 	FFlagSduiOptionImpressionsEventName = game:DefineFastFlag("SduiOptionImpressionsEventName", false),
 	FFlagLuaAppMoveProfileIntoTopBarIXP = require(script.FFlagLuaAppMoveProfileIntoTopBarIXP),
 	FFlagLuaAppMoveProfileIntoTopBar = require(script.FFlagLuaAppMoveProfileIntoTopBar),
-	FFlagLuaAppChartsAppPage = game:DefineFastFlag("LuaAppChartsAppPage", false),
 	FFlagLuaAppEnableSduiHomePage = game:DefineFastFlag("LuaAppEnableSduiHomePage3", false) and (luaAppSduiHomePageSupport3 and (sduiGameIconSupport and (sduiApiStoreOnSuccessAndRefresh and (homePageSduiPrefetch and (sduiVerticalFeedProgressiveFillOnScroll2 and sduiVerticalFeedPageShellSupport2))))),
 	FFlagLuaAppSduiHomePageSupport = luaAppSduiHomePageSupport3,
 	FFlagLuaAppSharedHomePageInteractive = game:DefineFastFlag("LuaAppSharedHomePageInteractive", false),
@@ -1116,7 +1118,7 @@ return {
 	FFlagInternalOnlyStratusBugReportEnabled = game:DefineFastFlag("InternalOnlyStratusBugReportEnabled", false) and game:GetEngineFeature("StratusBugReport"),
 	FFlagLuaAppStratusBugReportAfterConnect = game:DefineFastFlag("LuaAppStratusBugReportAfterConnect", false) and game:GetEngineFeature("StratusBugReport"),
 	FFlagLuaAppVideoServerDisplayWakeLock = game:DefineFastFlag("LuaAppVideoServerDisplayWakeLock", false) and game:GetEngineFeature("EnableDisplayWakeLock"),
-	FFlagLuaAppWireAudioDeviceInputOnRequest = game:DefineFastFlag("LuaAppWireAudioDeviceInputOnRequest", false) and game:GetEngineFeature("RealtimeMediaRequestAudioInput"),
+	FFlagLuaAppWireAudioDeviceInputOnRequest = game:GetEngineFeature("RealtimeMediaRequestAudioInput"),
 	FFlagLuaAppUseExperienceLogoTrayInGameInfoList = game:DefineFastFlag("LuaAppUseExperienceLogoTrayInGameInfoList", false),
 	FFlagLuaAppSduiUpdateUserSettingsAction = game:DefineFastFlag("LuaAppSduiUpdateUserSettingsAction", false),
 	FFlagMoveSduiUpdateUserSettingsToAccountManagement = game:DefineFastFlag("MoveSduiUpdateUserSettingsToAccountManagement", false),
@@ -1170,6 +1172,7 @@ return {
 	FFlagLuaAppEnableNxMRoduxApportioning = fFlagLuaAppEnableNxMRoduxApportioningModule,
 	FFlagLuaAppEnableNxMApportioningExtraLogging = require(script.FFlagLuaAppEnableNxMApportioningExtraLogging),
 	FFlagLuaAppEnableHomepageOneByTwoTile = require(script.FFlagLuaAppEnableHomepageOneByTwoTile),
+	FFlagLuaAppEnableOneByTwoTileFunnelTelemetry = require(script.FFlagLuaAppEnableOneByTwoTileFunnelTelemetry),
 	FFlagLuaAppAddHasOneByTwoField = require(script.FFlagLuaAppAddHasOneByTwoField),
 	FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad = require(script.FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad),
 	FFlagLuaAppBroadenVideoAnalytics = require(script.FFlagLuaAppBroadenVideoAnalytics),
@@ -1333,14 +1336,9 @@ return {
 	GetFFlagEnableIosAuthServiceLuaIXP = require(script.GetFFlagEnableIosAuthServiceLuaIXP),
 	GetFIntAccountRecoverySecondsBetweenResends = require(script.GetFIntAccountRecoverySecondsBetweenResends),
 	FFlagEnableLuaAccountSwitch = require(script.FFlagEnableLuaAccountSwitch),
-	FFlagEnableNavigateToLoginAfterLogoutAll = require(script.FFlagEnableNavigateToLoginAfterLogoutAll),
 	FFlagUseGenericAccountSwitchSignOutCopy = game:DefineFastFlag("UseGenericAccountSwitchSignOutCopy", false),
-	GetFFlagEnableLoginDisambiguationFoundationSwitcher = require(script.GetFFlagEnableLoginDisambiguationFoundationSwitcher),
-	GetFFlagEnableAccountSwitcherSignedOutAccounts = require(script.GetFFlagEnableAccountSwitcherSignedOutAccounts),
-	GetFFlagEnableAccountSwitcherAddWithMaxSignedOut = require(script.GetFFlagEnableAccountSwitcherAddWithMaxSignedOut),
 	GetFFlagShowInvoluntarilySignedOutAccounts = require(script.GetFFlagShowInvoluntarilySignedOutAccounts),
 	GetFIntAccountSwitcherAccountLimit = require(script.GetFIntAccountSwitcherAccountLimit),
-	GetFFlagEnableManageAccountsRedesign = require(script.GetFFlagEnableManageAccountsRedesign),
 	GetFFlagEnableAccountSwitcherUncheckedBadge = require(script.GetFFlagEnableAccountSwitcherUncheckedBadge),
 	FFlagAddMenuNavigationToggleDialog = require(script.FFlagAddMenuNavigationToggleDialog),
 	FFlagLuaEnableDidSwitchAccount = require(script.FFlagLuaEnableDidSwitchAccount),
@@ -1528,6 +1526,7 @@ return {
 	FFlagAppChatMomentShareCardNavigation = game:DefineFastFlag("AppChatMomentShareCardNavigation", false),
 	FFlagFixMomentsExperienceFallback = game:DefineFastFlag("FixMomentsExperienceFallback", false),
 	FFlagMomentsEntryImmersiveNav = game:DefineFastFlag("MomentsEntryImmersiveNav", false),
+	FFlagFlyoutRemoveMomentsForArgoEnabled = game:DefineFastFlag("FlyoutRemoveMomentsForArgoEnabled", false),
 	FFlagAppIaStatusBar = require(script.FFlagAppIaStatusBar),
 	FFlagLuaAppUseDeviceSafeInsetsForAppContainer = game:DefineFastFlag("LuaAppUseDeviceSafeInsetsForAppContainer3", false),
 	FFlagFixNavigationInsetsOnHiddenTabBar = game:DefineFastFlag("FixNavigationInsetsOnHiddenTabBar", false),
@@ -1731,7 +1730,6 @@ return {
 	FFlagEnableShareSheet = game:DefineFastFlag("EnableShareSheetForBuild", false),
 	FFlagShowSwitchServerButton = require(script.FFlagShowSwitchServerButton),
 	FFlagSideSheetOpenPeoplePage = require(script.FFlagSideSheetOpenPeoplePage),
-	FFlagFixLoginV2LandscapeLayout = game:DefineFastFlag("FixLoginV2LandscapeLayout", false),
 	FFlagEnableLoginV2Modalization = game:DefineFastFlag("EnableLoginV2Modalization19", false),
 	FFlagLoginV2FullFlowDevOverride = game:DefineFastFlag("LoginV2FullFlowDevOverride", false),
 	FFlagLoginV2ModalFocusNavigation = game:DefineFastFlag("LoginV2ModalFocusNavigation", false),
@@ -1784,6 +1782,7 @@ return {
 	FFlagBuildExperienceClientDataModelTools = game:DefineFastFlag("BuildExperienceClientDataModelTools2", false),
 	FFlagBuildExperienceInGameCaptureToChat = game:DefineFastFlag("BuildExperienceInGameCaptureToChat", false),
 	FFlagBuildExperienceInGameShell = game:DefineFastFlag("BuildExperienceInGameShell", false),
+	FFlagBuildExperienceInstanceSelection = game:DefineFastFlag("BuildExperienceInstanceSelection", false),
 	FFlagComposerControlAlignment = game:DefineFastFlag("ComposerControlAlignment", false),
 	FFlagBuildExperiencePinForBuild = game:DefineFastFlag("BuildExperiencePinForBuild", false),
 	FFlagMyStatsMediaSelector = game:DefineFastFlag("MyStatsMediaSelector3", false),

@@ -8,8 +8,9 @@ local _ = require(parent.VideoUtils)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppEnableReportExperience = sharedFlagsModule.FFlagLuaAppEnableReportExperience
 local fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor = sharedFlagsModule.FFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor
+local fFlagLuaAppEnableOneByTwoTileFunnelTelemetry = sharedFlagsModule.FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
 local var1 = reactModule.memo(function(p1)
-	-- upvalues: getTileBadgeByPositionConfigFromEntry (ref), reactModule (ref), oneByTwoTileModule (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (ref), fFlagLuaAppEnableReportExperience (ref)
+	-- upvalues: getTileBadgeByPositionConfigFromEntry (ref), reactModule (ref), oneByTwoTileModule (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (ref), fFlagLuaAppEnableReportExperience (ref), fFlagLuaAppEnableOneByTwoTileFunnelTelemetry (ref)
 	local var2 = -((p1.maxItemIndex or 0) + 1)
 	
 	return reactModule.createElement(oneByTwoTileModule, {
@@ -58,7 +59,10 @@ local var1 = reactModule.memo(function(p1)
 			end
 		end, { p1.onSelectionGained, p1.item, p1.index }),
 		onSelectionLost = p1.onSelectionLost,
-		SelectionOrder = p1.SelectionOrder
+		SelectionOrder = p1.SelectionOrder,
+		oneByTwoTileFlowId = if fFlagLuaAppEnableOneByTwoTileFunnelTelemetry then p1.item.oneByTwoTileFlowId else nil,
+		recommendationsRequestId = if fFlagLuaAppEnableOneByTwoTileFunnelTelemetry then p1.item.recommendationsRequestId else nil,
+		isSdui = if fFlagLuaAppEnableOneByTwoTileFunnelTelemetry then false else nil
 	})
 end)
 

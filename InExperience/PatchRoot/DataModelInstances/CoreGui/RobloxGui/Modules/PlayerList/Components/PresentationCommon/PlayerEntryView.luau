@@ -22,6 +22,9 @@ local useFocusGuiObject = reactFocusNavigationModule.useFocusGuiObject
 local foundationModule = require(corePackagesService.Packages.Foundation)
 local controlState = foundationModule.Enums.ControlState
 local view = foundationModule.View
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local useTokens = foundationModule.Hooks.useTokens
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local entryFrameView = playerListModule.Presentation.EntryFrameView
 local statEntryContainerModule = require(parent_2.Components.Container.StatEntryContainer)
 local cellExtenderModule = require(parent_1.Presentation.CellExtender)
@@ -174,7 +177,7 @@ local var2 = reactModule.memo(function(p1)
 end)
 
 return reactModule.memo(function(p2)
-	-- upvalues: fFlagPlayerListFixLeaderstatsStacking (ref), signalsReactModule (ref), signalsModule (ref), reactModule (ref), fFlagPlayerListUseFocusNavHook (ref), useFocusGuiObject (ref), enabled (ref), useLayoutValues (ref), useStyle (ref), playersService (ref), constants (ref), getFFlagGateLeaderboardPlayerDropdownViaGUAC (ref), inExperienceCapabilities (ref), controlState (ref), t (ref), fFlagEnableMobilePlayerListOnConsole (ref), fFlagRemoveNewPlayerListOverlay (ref), fFlagAddNewPlayerListFocusNav (ref), guiService (ref), fFlagAddNewPlayerListMobileFocusNav (ref), view (ref), var2 (write), entryFrameView (ref), cryoModule (ref)
+	-- upvalues: fFlagPlayerListFixLeaderstatsStacking (ref), signalsReactModule (ref), signalsModule (ref), reactModule (ref), fFlagPlayerListUseFocusNavHook (ref), useFocusGuiObject (ref), enabled (ref), useLayoutValues (ref), useStyle (ref), foundationFontFaceMigration (ref), useTokens (ref), playersService (ref), constants (ref), getFFlagGateLeaderboardPlayerDropdownViaGUAC (ref), inExperienceCapabilities (ref), controlState (ref), t (ref), normalizeFontFace (ref), fFlagEnableMobilePlayerListOnConsole (ref), fFlagRemoveNewPlayerListOverlay (ref), fFlagAddNewPlayerListFocusNav (ref), guiService (ref), fFlagAddNewPlayerListMobileFocusNav (ref), view (ref), var2 (write), entryFrameView (ref), cryoModule (ref)
 	local var5 = if fFlagPlayerListFixLeaderstatsStacking then nil else signalsReactModule.useSignalState(p2.playerData.stats.getCount)
 	local var6 = signalsReactModule.useSignalBinding(signalsModule.createComputed(function(p3)
 		-- upvalues: p2 (ref)
@@ -196,11 +199,12 @@ return reactModule.memo(function(p2)
 	local var16 = enabled()
 	local var17 = useLayoutValues()
 	local var18 = useStyle()
-	local var19 = if p2.size then p2.size else UDim2.new(1, var17.EntryXOffset, 0, var17.PlayerEntrySizeY)
+	local var19 = if foundationFontFaceMigration then useTokens() else nil
+	local var20 = if p2.size then p2.size else UDim2.new(1, var17.EntryXOffset, 0, var17.PlayerEntrySizeY)
 	local isSmallTouchDevice = p2.isSmallTouchDevice
 	local isTenFoot = var17.IsTenFoot
-	local var20 = p2.player == playersService.LocalPlayer
-	local var21 = reactModule.useCallback(function()
+	local var21 = p2.player == playersService.LocalPlayer
+	local var22 = reactModule.useCallback(function()
 		-- upvalues: p2 (ref), fFlagPlayerListUseFocusNavHook (copy), constants (copy), getFFlagGateLeaderboardPlayerDropdownViaGUAC (copy), inExperienceCapabilities (copy), var13 (ref)
 		if not p2.openDropdown or not p2.closeDropdown then return end
 		if p2.dropdownOpen and p2.selectedPlayer == p2.player then
@@ -242,7 +246,7 @@ return reactModule.memo(function(p2)
 		p2.closeDropdown, p2.setDropDownPlayerDimensionY, p2.titlePlayerEntry,
 		p2.setSelectedPlayerId, var13.current
 	})
-	local var22 = reactModule.useCallback(function(p3)
+	local var23 = reactModule.useCallback(function(p3)
 		-- upvalues: controlState (copy), var12 (ref), var10 (ref)
 		if p3 == controlState.Pressed or p3 == controlState.SelectedPressed then
 			var12(true)
@@ -257,56 +261,56 @@ return reactModule.memo(function(p2)
 			var12(false)
 		end
 	end, {})
-	local var23 = reactModule.useMemo(function()
+	local var24 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref), var18 (ref)
 		return {
 			Transparency = 1,
 			Color = if var16 then var18.Theme.BackgroundUIContrast.Color else var18.Theme.BackgroundContrast.Color
 		}
 	end, { var16, isTenFoot })
-	local var24 = reactModule.useMemo(function()
+	local var25 = reactModule.useMemo(function()
 		-- upvalues: var17 (ref)
 		return { Transparency = 0.8, Color = var17.RowHoverColor }
 	end, { var17 })
-	local var25 = reactModule.useMemo(function()
+	local var26 = reactModule.useMemo(function()
 		-- upvalues: var17 (ref)
 		return { Transparency = 0.8, Color = var17.RowDefaultColor }
 	end, { var17 })
-	local var26 = reactModule.useCallback(function()
-		-- upvalues: isSmallTouchDevice (ref), var9 (ref), var11 (ref), var24 (ref), var25 (ref), isTenFoot (ref), var23 (ref), p2 (ref), var17 (ref)
+	local var27 = reactModule.useCallback(function()
+		-- upvalues: isSmallTouchDevice (ref), var9 (ref), var11 (ref), var25 (ref), var26 (ref), isTenFoot (ref), var24 (ref), p2 (ref), var17 (ref)
 		if isSmallTouchDevice then
-			return if var9 or var11 then var24 else var25
+			return if var9 or var11 then var25 else var26
 		elseif not isTenFoot then
-			return var23
+			return var24
 		end
-		local var27 = p2.dropdownOpen and p2.selectedPlayer == p2.player
+		local var28 = p2.dropdownOpen and p2.selectedPlayer == p2.player
 		
 		if p2.titlePlayerEntry and var17.BackgroundStyle then
-			return if var9 and var17.BackgroundStyle.HoveredTitle then var17.BackgroundStyle.HoveredTitle elseif var17.BackgroundStyle.Title then var17.BackgroundStyle.Title elseif var27 and var17.BackgroundStyle and var17.BackgroundStyle.Selected then var17.BackgroundStyle.Selected or var17.BackgroundStyle.Default elseif var9 and var17.BackgroundStyle and var17.BackgroundStyle.Hovered then var17.BackgroundStyle.Hovered elseif var17.BackgroundStyle and var17.BackgroundStyle.Default then var17.BackgroundStyle.Default else var23
+			return if var9 and var17.BackgroundStyle.HoveredTitle then var17.BackgroundStyle.HoveredTitle elseif var17.BackgroundStyle.Title then var17.BackgroundStyle.Title elseif var28 and var17.BackgroundStyle and var17.BackgroundStyle.Selected then var17.BackgroundStyle.Selected or var17.BackgroundStyle.Default elseif var9 and var17.BackgroundStyle and var17.BackgroundStyle.Hovered then var17.BackgroundStyle.Hovered elseif var17.BackgroundStyle and var17.BackgroundStyle.Default then var17.BackgroundStyle.Default else var24
 		end
 	end, {
-		var23, isSmallTouchDevice, p2.dropdownOpen, p2.selectedPlayer, p2.player,
+		var24, isSmallTouchDevice, p2.dropdownOpen, p2.selectedPlayer, p2.player,
 		p2.titlePlayerEntry, var9, var11
 	})
-	local var27 = reactModule.useCallback(function()
-		-- upvalues: isTenFoot (ref), var9 (ref), var17 (ref), var20 (ref), var18 (ref)
+	local var28 = reactModule.useCallback(function()
+		-- upvalues: isTenFoot (ref), var9 (ref), var17 (ref), var21 (ref), var18 (ref)
 		if isTenFoot then
 			if var9 then
 				return var17.HoveredTextStyle, var17.PlayerNameTextSize
 			end
 			return var17.DefaultTextStyle, var17.PlayerNameTextSize
-		elseif var20 then
+		elseif var21 then
 			return var18.Theme.TextEmphasis, var17.PlayerNameTextSize
 		end
 		return var18.Theme.TextDefault, var17.PlayerNameTextSize
 	end, {
 		var9,
-		var20,
+		var21,
 		isTenFoot,
 		var17,
 		var18
 	})
-	local var28 = reactModule.useCallback(function()
+	local var29 = reactModule.useCallback(function()
 		-- upvalues: isTenFoot (ref), p2 (ref), var11 (ref), var18 (ref), var9 (ref), t (copy)
 		if not isTenFoot then
 			return if var11 then var18.Theme.BackgroundOnPress elseif p2.dropdownOpen and p2.selectedPlayer == p2.player then var18.Theme.BackgroundOnPress elseif var9 then var18.Theme.BackgroundOnHover else t
@@ -314,70 +318,72 @@ return reactModule.memo(function(p2)
 	end, {
 		var9, var11, p2.dropdownOpen, p2.selectedPlayer, p2.player, var18, isTenFoot
 	})
-	local var29 = reactModule.useMemo(function()
-		-- upvalues: isSmallTouchDevice (ref), var20 (ref), var18 (ref), fFlagEnableMobilePlayerListOnConsole (copy), var17 (ref), isTenFoot (ref), p2 (ref)
-		return if isSmallTouchDevice then if var20 then {
+	local var30 = reactModule.useMemo(function()
+		-- upvalues: isSmallTouchDevice (ref), var21 (ref), var18 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), var19 (ref), fFlagEnableMobilePlayerListOnConsole (copy), var17 (ref), isTenFoot (ref), p2 (ref)
+		return if isSmallTouchDevice then if var21 then {
 			Font = var18.Font.CaptionHeader.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var19.Typography.CaptionMedium.Font) else nil,
 			Size = if fFlagEnableMobilePlayerListOnConsole then var17.PlayerNameTextSize else var18.Font.CaptionHeader.RelativeSize * var18.Font.BaseSize,
 			MinSize = if fFlagEnableMobilePlayerListOnConsole then var17.PlayerNameTextSize else var18.Font.Footer.RelativeMinSize * var18.Font.BaseSize
 		} else {
 			Font = var18.Font.CaptionBody.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var19.Typography.BodySmall.Font) else nil,
 			Size = if fFlagEnableMobilePlayerListOnConsole then var17.PlayerNameTextSize else var18.Font.CaptionBody.RelativeSize * var18.Font.BaseSize,
 			MinSize = if fFlagEnableMobilePlayerListOnConsole then var17.PlayerNameTextSize else var18.Font.Footer.RelativeMinSize * var18.Font.BaseSize
 		} elseif isTenFoot then if p2.titlePlayerEntry then {
 			Font = var17.TitlePlayerEntryFont,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var17.TitlePlayerEntryFont) else nil,
 			Size = var17.PlayerNameTextSize,
 			MinSize = var17.PlayerNameTextSize
 		} else {
 			Font = var17.PlayerEntryFont,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var17.PlayerEntryFont) else nil,
 			Size = var17.PlayerNameTextSize,
 			MinSize = var17.PlayerNameTextSize
-		} elseif var20 then {
+		} elseif var21 then {
 			Font = var18.Font.CaptionHeader.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var19.Typography.CaptionMedium.Font) else nil,
 			Size = var18.Font.CaptionHeader.RelativeSize * var18.Font.BaseSize,
 			MinSize = var18.Font.Footer.RelativeMinSize * var18.Font.BaseSize
 		} else {
 			Font = var18.Font.CaptionBody.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var19.Typography.BodySmall.Font) else nil,
 			Size = var18.Font.CaptionBody.RelativeSize * var18.Font.BaseSize,
 			MinSize = var18.Font.Footer.RelativeMinSize * var18.Font.BaseSize
 		}
 	end, {
-		isSmallTouchDevice,
-		isTenFoot,
-		var20,
-		var18,
-		var17
+		isSmallTouchDevice, isTenFoot, var21, var18, var17, var19
 	})
-	local var30 = var26()
 	local var31 = var27()
-	local var32 = if not fFlagRemoveNewPlayerListOverlay then var28() else nil
-	local var33 = reactModule.useMemo(function()
-		-- upvalues: p2 (ref), var17 (ref), var30 (ref), fFlagRemoveNewPlayerListOverlay (copy), var32 (write), var11 (ref), var8 (ref), fFlagPlayerListUseFocusNavHook (copy), fFlagAddNewPlayerListFocusNav (copy), var14 (ref), var21 (ref), var22 (ref)
+	local var32 = var28()
+	local var33 = if not fFlagRemoveNewPlayerListOverlay then var29() else nil
+	local var34 = reactModule.useMemo(function()
+		-- upvalues: p2 (ref), var17 (ref), var31 (ref), fFlagRemoveNewPlayerListOverlay (copy), var33 (write), var11 (ref), var8 (ref), fFlagPlayerListUseFocusNavHook (copy), fFlagAddNewPlayerListFocusNav (copy), var14 (ref), var22 (ref), var23 (ref)
 		return {
 			isTeamFrame = false,
 			size = UDim2.new(0, p2.entrySizeX, 0, var17.PlayerEntrySizeY),
-			backgroundStyle = var30,
-			overlayStyle = if fFlagRemoveNewPlayerListOverlay then nil else var32,
+			backgroundStyle = var31,
+			overlayStyle = if fFlagRemoveNewPlayerListOverlay then nil else var33,
 			doubleOverlay = if fFlagRemoveNewPlayerListOverlay then nil else var11,
 			firstPlayerRef = var8,
 			ref = if fFlagPlayerListUseFocusNavHook or not fFlagAddNewPlayerListFocusNav then nil else var14,
-			onActivated = var21,
-			onStateChanged = var22
+			onActivated = var22,
+			onStateChanged = var23
 		}
 	end, {
-		p2.entrySizeX, var17.PlayerEntrySizeY, var30, var32, var11, var14, var21, var22
+		p2.entrySizeX, var17.PlayerEntrySizeY, var31, var33, var11, var14, var22, var23
 	})
-	local var34 = reactModule.useMemo(function()
-		-- upvalues: isSmallTouchDevice (ref), isTenFoot (ref), var17 (ref), var31 (ref), var29 (ref), var9 (ref), var30 (ref), fFlagRemoveNewPlayerListOverlay (copy), var32 (write), var11 (ref), p2 (ref), var5 (ref), var33 (ref)
+	local var35 = reactModule.useMemo(function()
+		-- upvalues: isSmallTouchDevice (ref), isTenFoot (ref), var17 (ref), var32 (ref), var30 (ref), var9 (ref), var31 (ref), fFlagRemoveNewPlayerListOverlay (copy), var33 (write), var11 (ref), p2 (ref), var5 (ref), var34 (ref)
 		return {
 			isSmallTouchDevice = isSmallTouchDevice,
 			isDirectionalPreferred = isTenFoot,
 			layoutValues = var17,
-			textStyle = var31,
-			playerNameFont = var29,
+			textStyle = var32,
+			playerNameFont = var30,
 			isHovered = var9,
-			backgroundStyle = var30,
-			overlayStyle = if fFlagRemoveNewPlayerListOverlay then nil else var32,
+			backgroundStyle = var31,
+			overlayStyle = if fFlagRemoveNewPlayerListOverlay then nil else var33,
 			isPressed = if fFlagRemoveNewPlayerListOverlay then nil else var11,
 			player = p2.player,
 			playerIconInfo = p2.playerIconInfo,
@@ -388,13 +394,13 @@ return reactModule.memo(function(p2)
 			playerStats = p2.playerData.stats,
 			playerStatsCount = var5,
 			gameStatsCount = p2.gameStatsCount,
-			backgroundFrameProps = var33
+			backgroundFrameProps = var34
 		}
 	end, {
-		isSmallTouchDevice, isTenFoot, var17, var31, var29, var9, var30, var32, var11,
+		isSmallTouchDevice, isTenFoot, var17, var32, var30, var9, var31, var33, var11,
 		p2.player, p2.playerIconInfo, p2.playerRelationship, p2.titlePlayerEntry,
 		p2.entrySizeX, p2.playerData.stats, p2.gameStats, var5, p2.gameStatsCount,
-		var33
+		var34
 	})
 	
 	if not fFlagPlayerListUseFocusNavHook then
@@ -445,7 +451,7 @@ return reactModule.memo(function(p2)
 			end
 		end, { p2.unregisterPlayerInstance, p2.player })
 	end
-	local var35 = reactModule.useCallback(function(p3)
+	local var36 = reactModule.useCallback(function(p3)
 		-- upvalues: fFlagPlayerListUseFocusNavHook (copy), p2 (ref), fFlagAddNewPlayerListMobileFocusNav (copy), var14 (ref), var13 (ref)
 		if fFlagPlayerListUseFocusNavHook and p2.registerPlayerInstance then
 			p2.registerPlayerInstance(p2.player.UserId, p3, p2.playerData.order)
@@ -462,30 +468,30 @@ return reactModule.memo(function(p2)
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
 		Image = "",
-		Size = var19,
-		BackgroundColor3 = var30.Color,
-		BackgroundTransparency = var30.Transparency,
+		Size = var20,
+		BackgroundColor3 = var31.Color,
+		BackgroundTransparency = var31.Transparency,
 		LayoutOrder = var7,
-		ref = var35,
-		onActivated = var21,
-		onStateChanged = var22
+		ref = var36,
+		onActivated = var22,
+		onStateChanged = var23
 	}, {
 		ChildrenFrame = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
 			Position = UDim2.new(0, 0, 0, 0)
-		}, reactModule.createElement(var2, var34))
+		}, reactModule.createElement(var2, var35))
 	}) elseif isTenFoot then reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = var19,
+		Size = var20,
 		LayoutOrder = var7,
-		ref = if fFlagPlayerListUseFocusNavHook then var35 else var13
-	}, reactModule.createElement(var2, var34)) else reactModule.createElement("Frame", {
+		ref = if fFlagPlayerListUseFocusNavHook then var36 else var13
+	}, reactModule.createElement(var2, var35)) else reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = var19,
+		Size = var20,
 		LayoutOrder = var7,
-		ref = if fFlagPlayerListUseFocusNavHook then var35 else var13
+		ref = if fFlagPlayerListUseFocusNavHook then var36 else var13
 	}, {
-		PlayerEntryContentFrame = reactModule.createElement(entryFrameView, cryoModule.Dictionary.join(var33, { size = UDim2.new(1, 0, 0, var17.PlayerEntrySizeY) }), reactModule.createElement(var2, var34))
+		PlayerEntryContentFrame = reactModule.createElement(entryFrameView, cryoModule.Dictionary.join(var34, { size = UDim2.new(1, 0, 0, var17.PlayerEntrySizeY) }), reactModule.createElement(var2, var35))
 	})
 end)

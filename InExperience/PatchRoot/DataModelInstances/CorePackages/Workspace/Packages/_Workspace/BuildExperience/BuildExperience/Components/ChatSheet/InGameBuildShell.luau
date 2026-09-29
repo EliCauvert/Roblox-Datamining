@@ -23,39 +23,56 @@ local useTokens = foundationModule.Hooks.useTokens
 
 local function noop() end
 
-local function createToolbarButtons(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), noop (ref)
-	return {
+local function createToolbarButtons(p1, p2, p3)
+	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), noop (ref), inputSize (ref), buttonVariant (ref)
+	return if p1.isSelecting then {
+		Cancel = reactModule.createElement(iconButton, {
+			LayoutOrder = 1,
+			icon = iconName.X,
+			onActivated = p1.onSelectionCancelled or noop,
+			size = inputSize.Medium,
+			testId = `{p3}-cancel-selection`,
+			variant = buttonVariant.Utility
+		}),
+		Confirm = if p1.onSelectionConfirmed ~= nil then nil else reactModule.createElement(iconButton, {
+			LayoutOrder = 2,
+			icon = iconName.CheckLarge,
+			onActivated = p1.onSelectionConfirmed,
+			size = inputSize.Medium,
+			testId = `{p3}-confirm-selection`,
+			variant = buttonVariant.Utility
+		})
+	} else {
 		Chat = reactModule.createElement(iconButton, {
 			LayoutOrder = 1,
 			icon = iconName.Nebula,
-			onActivated = p1,
+			onActivated = p1.onActivated,
 			size = inputSize.Medium,
-			testId = `{p4}-chat`,
+			testId = `{p3}-chat`,
 			variant = buttonVariant.Utility
 		}),
 		Select = reactModule.createElement(iconButton, {
 			LayoutOrder = 2,
 			icon = iconName.CursorStars,
-			onActivated = noop,
+			onActivated = p1.onSelectionActivated or noop,
 			size = inputSize.Medium,
-			testId = `{p4}-select`,
+			testId = `{p3}-select`,
 			variant = buttonVariant.Utility
 		}),
 		Capture = reactModule.createElement(iconButton, {
 			LayoutOrder = 3,
 			icon = iconName.FrameCameraCenter,
-			onActivated = p2 or noop,
+			onActivated = p1.onCaptureActivated or noop,
 			size = inputSize.Medium,
-			testId = `{p4}-capture`,
+			testId = `{p3}-capture`,
 			variant = buttonVariant.Utility
 		}),
 		Publish = reactModule.createElement(iconButton, {
 			LayoutOrder = 4,
 			icon = iconName.ArrowUpRightFromSquare,
-			onActivated = p3,
+			onActivated = p2,
 			size = inputSize.Medium,
-			testId = `{p4}-publish`,
+			testId = `{p3}-publish`,
 			variant = buttonVariant.Utility
 		})
 	}
@@ -259,7 +276,7 @@ return function(p1)
 						ReferenceUIInstance = var18,
 						ResponseStyle = Enum.UIDragDetectorResponseStyle.Scale
 					}),
-					Buttons = reactModule.createElement(reactModule.Fragment, nil, createToolbarButtons(p1.onActivated, p1.onCaptureActivated, var7, "in-game-build-shell-floating")),
+					Buttons = reactModule.createElement(reactModule.Fragment, nil, createToolbarButtons(p1, var7, "in-game-build-shell-floating")),
 					DragAffordance = reactModule.createElement(view, {
 						LayoutOrder = 6,
 						tag = "position-center-center anchor-center-center auto-xy padding-xxsmall"
@@ -287,7 +304,7 @@ return function(p1)
 				},
 				onAbsolutePositionChanged = var31,
 				onAbsoluteSizeChanged = var31
-			}, createToolbarButtons(p1.onActivated, p1.onCaptureActivated, var7, "in-game-build-shell-landscape")) else nil,
+			}, createToolbarButtons(p1, var7, "in-game-build-shell-landscape")) else nil,
 			TopRightInnerCorner = if var15 and not var16 then reactModule.createElement(view, {
 				ZIndex = 1000,
 				tag = "anchor-top-right clip",
@@ -348,7 +365,7 @@ return function(p1)
 					right = UDim.new(0, var11.Padding.Large),
 					bottom = UDim.new(0, var11.Margin.Small + var12.bottom)
 				}
-			}, createToolbarButtons(p1.onActivated, p1.onCaptureActivated, var7, "in-game-build-shell"))
+			}, createToolbarButtons(p1, var7, "in-game-build-shell"))
 		}),
 		PublishSheet = if var5 ~= nil then nil else reactModule.createElement(publishSheetControllerModule, {
 			showPreviewButton = false,

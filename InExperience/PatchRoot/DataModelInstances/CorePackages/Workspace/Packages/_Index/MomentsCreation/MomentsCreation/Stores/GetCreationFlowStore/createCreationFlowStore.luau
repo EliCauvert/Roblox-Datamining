@@ -38,6 +38,7 @@ return function()
 		getGenerationToken = var3.getGenerationToken,
 		getGeneratedTextFeedback = var3.getGeneratedTextFeedback,
 		getGeneratedSummary = var3.getGeneratedSummary,
+		getCommentsEnabled = var3.getCommentsEnabled,
 		getMusicList = var7,
 		getMusicEdit = createComputed(function(p1)
 			-- upvalues: var4 (ref)
@@ -84,6 +85,10 @@ return function()
 			-- upvalues: var3 (ref)
 			var3.setGeneratedSummary(value)
 		end,
+		updateCommentsEnabled = function(p1)
+			-- upvalues: var3 (ref)
+			var3.setCommentsEnabled(p1)
+		end,
 		updateTrimEdit = function(p1)
 			-- upvalues: var4 (ref)
 			var4.setCommitted("trim", p1)
@@ -111,6 +116,7 @@ return function()
 			var2.setSelectedCapture(nil)
 			var1.reset(p1)
 			var3.setDescription("")
+			var3.setCommentsEnabled(true)
 			
 			if fFlagMomentTextGenerationFilteredSignal or getFFlagEnableMomentTextGeneration() then
 				var3.setGeneratedDescription(nil)

@@ -6,6 +6,8 @@ local momentsCommonModule = require(parent.MomentsCommon)
 local _ = require(parent.MomentsTypes)
 local reactModule = require(parent.React)
 local reactUtilsModule = require(parent.ReactUtils)
+local signalsModule = require(parent.Signals)
+local signalsReactModule = require(parent.SignalsReact)
 local text = foundationModule.Text
 local view = foundationModule.View
 local useCompositionLayout = appCompositionModule.useCompositionLayout
@@ -28,9 +30,12 @@ local momentGestureLayerModule = require(script.Parent.Reactions.MomentGestureLa
 local reactionExplosionLayerModule = require(script.Parent.Reactions.ReactionExplosionLayer)
 local fFlagMomentsImmersiveChromeModule = require(moments.Flags.FFlagMomentsImmersiveChrome)
 local fFlagMomentsUseCompositionLibraryModule = require(moments.Flags.FFlagMomentsUseCompositionLibrary)
+local getFFlagMomentsRenderPostAssetsModule = require(parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
 local getFFlagMomentsDisplayWakeLockModule = require(moments.Flags.GetFFlagMomentsDisplayWakeLock)
 local useDisplayWakeLockModule = require(moments.Hooks.useDisplayWakeLock)
 local useIsPlayingModule = require(moments.Hooks.useIsPlaying)
+local deriveMomentFromPostModule = require(moments.Utils.deriveMomentFromPost)
+local momentsGetPostAssetStoreModule = require(parent.DataHydration.MomentsGetPostAssetStore)
 
 local function DisplayWakeLockEffect()
 	-- upvalues: useIsPlayingModule (ref), useDisplayWakeLockModule (ref)
@@ -63,7 +68,7 @@ local function OverlayInfoFrame(p1)
 end
 
 return function(p1)
-	-- upvalues: useTokens (ref), fFlagMomentsUseCompositionLibraryModule (ref), useCompositionLayout (ref), useDeviceInsets (ref), useFormFactor (ref), reactUtilsModule (ref), momentPushedFeedSafeAreaContextModule (ref), fFlagMomentsImmersiveChromeModule (ref), reactModule (ref), topContentModule (ref), scrubberModule (ref), callToActionModule (ref), momentLayoutModule (ref), formFactor (ref), OverlayInfoFrame (ref), view (ref), momentContextModule (ref), text (ref), videoScrimModule (ref), momentGestureLayerModule (ref), gradientBackdrop (ref), playbackToggleIndicatorModule (ref), reactionExplosionLayerModule (ref), getFFlagMomentsDisplayWakeLockModule (ref), DisplayWakeLockEffect (ref), reactionEffectsContextModule (ref)
+	-- upvalues: useTokens (ref), fFlagMomentsUseCompositionLibraryModule (ref), useCompositionLayout (ref), useDeviceInsets (ref), useFormFactor (ref), reactUtilsModule (ref), momentPushedFeedSafeAreaContextModule (ref), getFFlagMomentsRenderPostAssetsModule (ref), reactModule (ref), signalsModule (ref), momentsGetPostAssetStoreModule (ref), signalsReactModule (ref), deriveMomentFromPostModule (ref), fFlagMomentsImmersiveChromeModule (ref), topContentModule (ref), scrubberModule (ref), callToActionModule (ref), momentLayoutModule (ref), formFactor (ref), OverlayInfoFrame (ref), view (ref), momentContextModule (ref), text (ref), videoScrimModule (ref), momentGestureLayerModule (ref), gradientBackdrop (ref), playbackToggleIndicatorModule (ref), reactionExplosionLayerModule (ref), getFFlagMomentsDisplayWakeLockModule (ref), DisplayWakeLockEffect (ref), reactionEffectsContextModule (ref)
 	local var1 = useTokens()
 	local var2 = nil
 	local var3 = nil
@@ -77,20 +82,63 @@ return function(p1)
 	local var6 = momentPushedFeedSafeAreaContextModule.useMomentPushedFeedSafeArea()
 	local var7 = if var6 ~= nil then var3 else var6
 	local var8 = if var2 ~= nil then var1.Padding.XLarge else var2.margin
-	local var9, var10 = reactModule.useBinding(UDim2.fromScale(1, 0))
-	local var11 = 2 * var1.Padding.XLarge
-	local var12 = reactModule.useCallback(function(p2)
-		-- upvalues: var10 (ref), var11 (ref)
-		var10(UDim2.new(1, 0, 0, p2.AbsoluteSize.Y + var11))
-	end, { var11 })
+	local moment = p1.moment
+	local data = p1.data
+	local var9 = nil
+	local mediaSurface = p1.mediaSurface
+	
+	if getFFlagMomentsRenderPostAssetsModule() then
+		local var10 = if p1.moment == nil or p1.moment.postAsset == nil then nil else p1.moment.postAsset.postAssetId
+		local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+			-- upvalues: signalsModule (copy), var10 (ref), momentsGetPostAssetStoreModule (copy)
+			return signalsModule.createComputed(function(p2)
+				-- upvalues: var10 (copy), momentsGetPostAssetStoreModule (copy)
+				return if var10 == nil then nil else momentsGetPostAssetStoreModule(false).getCachedPostAsset(var10).data(p2)
+			end)
+		end, { var10 or false }))
+		local var12 = reactModule.useMemo(function()
+			-- upvalues: p1 (ref), var11 (ref), deriveMomentFromPostModule (copy)
+			return if p1.moment == nil or var11 == nil then nil else deriveMomentFromPostModule(p1.moment, var11)
+		end, { p1.moment, var11 or false })
+		moment = var12 or p1.moment
+		
+		if moment ~= nil and p1.renderMediaSurface ~= nil then
+			mediaSurface = p1.renderMediaSurface(moment)
+		end
+		data = reactModule.useMemo(function()
+			-- upvalues: var12 (ref), p1 (ref)
+			if var12 == nil then
+				return p1.data
+			end
+			local cloned = table.clone(p1.data)
+			cloned.description = var12.metadata.description or cloned.description
+			
+			if cloned.kind == "experience" then
+				cloned.placeId = var12.metadata.placeId or cloned.placeId
+				cloned.universeId = var12.metadata.universeId or cloned.universeId
+				
+				if var12.metadata.hasAuthoritativePartnerUploadType then
+					cloned.isSponsored = var12.metadata.partnerUploadType == "influencer"
+				end
+			end
+			return if if cloned.description == p1.data.description then cloned.kind == "experience" and (p1.data.kind == "experience" and (if cloned.placeId == p1.data.placeId then if cloned.universeId == p1.data.universeId then cloned.isSponsored ~= p1.data.isSponsored else true else true)) else true then cloned else p1.data
+		end, { p1.data, var11 or false })
+		var9 = if data ~= p1.data then nil else `post:{var10}`
+	end
+	local var13, var14 = reactModule.useBinding(UDim2.fromScale(1, 0))
+	local var15 = 2 * var1.Padding.XLarge
+	local var16 = reactModule.useCallback(function(p2)
+		-- upvalues: var14 (ref), var15 (ref)
+		var14(UDim2.new(1, 0, 0, p2.AbsoluteSize.Y + var15))
+	end, { var15 })
 	local t = {
-		TopContent = reactModule.createElement(topContentModule, { LayoutOrder = var5(), moment = p1.moment }),
+		TopContent = reactModule.createElement(topContentModule, { LayoutOrder = var5(), moment = moment }),
 		Scrubber = reactModule.createElement(scrubberModule, { LayoutOrder = var5() }),
 		CallToAction = reactModule.createElement(callToActionModule, { LayoutOrder = var5() })
 	}
-	local var13 = if fFlagMomentsUseCompositionLibraryModule then momentLayoutModule.BOTTOM_UI_MAX_SIZE elseif var4 ~= formFactor.Wide then momentLayoutModule.BOTTOM_UI_MAX_SIZE else nil
+	local var17 = if fFlagMomentsUseCompositionLibraryModule then momentLayoutModule.BOTTOM_UI_MAX_SIZE elseif var4 ~= formFactor.Wide then momentLayoutModule.BOTTOM_UI_MAX_SIZE else nil
 	
-	return reactModule.createElement(reactionEffectsContextModule.Provider, nil, reactModule.createElement(momentContextModule.Provider, { data = p1.data }, {
+	return reactModule.createElement(reactionEffectsContextModule.Provider, nil, reactModule.createElement(momentContextModule.Provider, { data = data, dataVersion = var9 }, {
 		Root = reactModule.createElement(view, {
 			tag = "size-full clip bg-surface-0",
 			testId = "--moments-item-root",
@@ -101,12 +149,12 @@ return function(p1)
 				testId = "--moments-item-video",
 				ZIndex = 1
 			}, {
-				Surface = if p1.mediaSurface ~= nil then reactModule.createElement(view, { tag = "size-full bg-surface-100" }, {
+				Surface = if mediaSurface ~= nil then reactModule.createElement(view, { tag = "size-full bg-surface-100" }, {
 					Label = reactModule.createElement(text, {
 						tag = "size-full text-body-large text-align-x-center text-align-y-center content-emphasis",
 						Text = "[ video ]"
 					})
-				}) else p1.mediaSurface,
+				}) else mediaSurface,
 				Scrim = reactModule.createElement(videoScrimModule, { ZIndex = 2 }),
 				GestureLayer = reactModule.createElement(momentGestureLayerModule, { ZIndex = 3 })
 			}),
@@ -118,14 +166,14 @@ return function(p1)
 				Backdrop = reactModule.createElement(gradientBackdrop, {
 					rotation = 270,
 					color3 = var1.Color.Common.Scrim.Color3,
-					size = var9
+					size = var13
 				}),
 				InfoFrame = if fFlagMomentsImmersiveChromeModule then reactModule.createElement(OverlayInfoFrame, {
 					horizontalPadding = var8,
 					verticalPadding = var1.Padding.XLarge,
 					safeAreaInsets = var7,
-					maxSize = var13,
-					onAbsoluteSizeChanged = var12
+					maxSize = var17,
+					onAbsoluteSizeChanged = var16
 				}, t) elseif var7 ~= nil then reactModule.createElement(view, {
 					tag = "col align-x-center align-y-bottom gap-large position-bottom-center anchor-bottom-center size-full-0 auto-y",
 					testId = "--moments-info-frame-inset",
@@ -136,8 +184,8 @@ return function(p1)
 						right = UDim.new(0, var8),
 						bottom = UDim.new(0, var1.Padding.XLarge)
 					},
-					sizeConstraint = { MaxSize = var13 },
-					onAbsoluteSizeChanged = var12
+					sizeConstraint = { MaxSize = var17 },
+					onAbsoluteSizeChanged = var16
 				}, t) else reactModule.createElement(view, {
 					tag = "col align-x-center align-y-bottom gap-large position-bottom-center anchor-bottom-center size-full-0 auto-y",
 					testId = "--moments-info-frame-inset",
@@ -148,8 +196,8 @@ return function(p1)
 						right = UDim.new(0, math.max(var8, var7.right)),
 						bottom = UDim.new(0, math.max(var1.Padding.XLarge, var7.bottom))
 					},
-					sizeConstraint = { MaxSize = var13 },
-					onAbsoluteSizeChanged = var12
+					sizeConstraint = { MaxSize = var17 },
+					onAbsoluteSizeChanged = var16
 				}, t)
 			}),
 			PlaybackIndicator = reactModule.createElement(playbackToggleIndicatorModule),

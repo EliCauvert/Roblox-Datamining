@@ -4,6 +4,10 @@ local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
 local memo = reactModule.memo
 local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
+local foundationModule = require(parent.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local baseCellModule = require(script.Parent.BaseCell)
 local _ = require(appChat.types)
 local t = {
@@ -23,7 +27,7 @@ local t = {
 }
 
 return memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), baseCellModule (ref), imageSetLabel (ref)
+	-- upvalues: cryoModule (ref), t (ref), foundationFontFaceMigration (ref), useTokens (ref), reactModule (ref), baseCellModule (ref), imageSetLabel (ref), normalizeFontFace (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local style = var1.style
 	local theme = style.Theme
@@ -78,7 +82,8 @@ return memo(function(p1)
 				Size = UDim2.new(1, if var2 then 0 else -var1.iconCellWidth, 1, 0),
 				Text = var1.Text,
 				TextSize = font.Header2.RelativeSize * font.BaseSize,
-				Font = font.Header2.Font,
+				Font = if foundationFontFaceMigration then nil else font.Header2.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace((if foundationFontFaceMigration then useTokens() else nil).Typography.TitleLarge.Font) else nil,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextTruncate = Enum.TextTruncate.AtEnd

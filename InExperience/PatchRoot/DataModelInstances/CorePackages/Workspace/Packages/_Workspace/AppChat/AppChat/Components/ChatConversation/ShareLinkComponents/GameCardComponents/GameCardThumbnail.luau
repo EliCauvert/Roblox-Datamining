@@ -43,13 +43,8 @@ return reactModule.memo(function(p1)
 		
 		return {
 			[roundedVariantModule.Top] = 90,
-			[roundedVariantModule.Bottom] = 270,
-			[roundedVariantModule.Left] = 0,
-			[roundedVariantModule.Right] = 180,
 			[roundedVariantModule.TopLeft] = degrees + 0,
-			[roundedVariantModule.TopRight] = 180 - degrees,
-			[roundedVariantModule.BottomLeft] = degrees + 180,
-			[roundedVariantModule.BottomRight] = 360 - degrees
+			[roundedVariantModule.TopRight] = 180 - degrees
 		}
 	end, { var1.aspectRatio })
 	

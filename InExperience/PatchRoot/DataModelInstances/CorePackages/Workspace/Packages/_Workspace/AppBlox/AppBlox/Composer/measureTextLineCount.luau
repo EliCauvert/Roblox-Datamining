@@ -1,9 +1,13 @@
-﻿local textService = game:GetService("TextService")
+﻿local appBlox = script:FindFirstAncestor("AppBlox")
+local styleModule = require(appBlox.Parent.Style)
+local foundationModule = require(appBlox.Parent.Foundation)
 local getVisibleLineCountModule = require(script.Parent.getVisibleLineCount)
 local composerDebugModule = require(script.Parent.composerDebug)
+local textService = game:GetService("TextService")
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return function(p1)
-	-- upvalues: getVisibleLineCountModule (ref), composerDebugModule (ref), textService (ref)
+	-- upvalues: getVisibleLineCountModule (ref), composerDebugModule (ref), foundationFontFaceMigration (ref), styleModule (ref), textService (ref)
 	local var1 = getVisibleLineCountModule(p1.text, p1.maxLines)
 	local var2 = 1
 	
@@ -29,12 +33,12 @@ return function(p1)
 		
 		return t
 	elseif layoutWidth > 0 then
-		local y = textService:GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000)).Y
-		local y_1 = textService:GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000)).Y
-		var3 = y_1
+		local var6 = if foundationFontFaceMigration then styleModule.GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000), { addTemporaryPadding = false }).Y else textService:GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000)).Y
+		local y = (if foundationFontFaceMigration then styleModule.GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000), { addTemporaryPadding = false }) else textService:GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000))).Y
+		var3 = y
 		
-		if y_1 > 0 and y > 0 then
-			local ceiled = math.ceil(y_1 / y)
+		if y > 0 and var6 > 0 then
+			local ceiled = math.ceil(y / var6)
 			local maxValue = math.max(var2, ceiled)
 			var4 = ceiled
 			var5 = math.clamp(maxValue, 1, p1.maxLines)

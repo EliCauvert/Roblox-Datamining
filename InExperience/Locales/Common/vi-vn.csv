@@ -2036,6 +2036,7 @@ Feature.Build.Description.BuildReplyNotif,Nhận thông báo khi Build gửi ph�
 Feature.Build.Description.BuyRobuxToCreate,Hãy mua thêm Robux để tiếp tục sáng tạo hoặc chờ đến ngày mai để lượt sử dụng Build miễn phí của bạn được làm mới.
 Feature.Build.Description.BuyUsageOrWait,"Dùng Robux để mua thêm lượt sử dụng Build, hoặc đợi hạn mức hằng ngày được làm mới."
 Feature.Build.Description.CampaignRunDates,Chiến dịch của bạn sẽ diễn ra từ {startDate} – {endDate}
+Feature.Build.Description.ChooseAdCampaignLength,Chọn thời gian bạn muốn chạy quảng cáo.
 Feature.Build.Description.ChoosePlaytesters,Chọn bạn bè để xem trước trò chơi của bạn.
 Feature.Build.Description.CreateDeveloperProduct,"Tạo ""{NAME}"" với giá {PRICE} Robux, không đăng bán."
 Feature.Build.Description.DeactivateDeveloperProduct,Ngừng bán sản phẩm {PRODUCT_ID} của nhà phát triển.
@@ -2349,6 +2350,7 @@ Feature.Build.Placeholder.DescribeProduct,Mô tả sản phẩm bạn muốn bá
 Feature.Build.Placeholder.DescribeProductUpdate,Mô tả thông tin trong bản cập nhật
 Feature.Build.Prompt.CreateDeveloperProduct,"Giúp tôi tạo một sản phẩm của nhà phát triển, đưa sản phẩm đó vào trò chơi, xác minh và đăng các thay đổi, rồi cho phép người dùng mua sản phẩm đó."
 Feature.Build.Title.AdCampaignDuration,Chiến dịch quảng cáo dài {durationDays} ngày
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} ngày
 Feature.Build.Title.AdComplete,Đã hoàn tất quảng cáo
 Feature.Build.Title.AdCreated,Đã tạo quảng cáo
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2379,6 +2381,7 @@ Feature.Build.Title.GetUsers,Thu hút người dùng
 Feature.Build.Title.ManagedPricingAcknowledgement,Mở chế độ Giá được quản lý?
 Feature.Build.Title.NoMonetizationProducts,Bắt đầu kiếm tiền trong trò chơi của bạn
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
+Feature.Build.Title.PickCampaign,Chọn thời lượng
 Feature.Build.Title.PlaytestInviteSendFailed,Không gửi được lời mời
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Không thể thêm những người dùng sau:
@@ -3001,14 +3004,6 @@ Feature.Chat.Response.ChatNameFullyModerated,Tên cuộc trò chuyện nhóm đ�
 Feature.Chat.Response.ChatNameFullyModerated.V2,Tên nhóm đã được kiểm duyệt.
 Feature.Chat.Response.NetworkError,Lỗi Mạng
 Feature.Chat.RobloxConnectUnavailableWithUser,Roblox Connect không khả dụng với người dùng này tại thời điểm này.
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,Hoạt Động Của Bạn Bè
-Feature.Chat.ShareGameToChat.NoFavoriteGames,Không có yêu thích
-Feature.Chat.ShareGameToChat.NoFriendActivity,Bạn không có hoạt động của bạn bè
-Feature.Chat.ShareGameToChat.NoPopularGames,Không có trải nghiệm phổ biến
-Feature.Chat.ShareGameToChat.NoRecentGames,Không có gần đây
-Feature.Chat.ShareGameToChat.Popular,Phổ Biến
-Feature.Chat.ShareGameToChat.Recent,Gần Đây
 Feature.Chat.Text.NoConnections,"Bạn chưa thêm người bạn nào. Để bắt đầu, hãy tìm và thêm bạn bè trên Roblox."
 Feature.Chat.Text.NoFriends,"Bạn chưa thêm bất kỳ người bạn nào. Để bắt đầu, hãy tìm và thêm bạn bè trên Roblox."
 Feature.Chat.Title.FriendsChat,Trò chuyện cùng bạn bè

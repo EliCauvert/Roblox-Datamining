@@ -5,6 +5,5 @@
 	getAppChatCommunitiesVisualConfig = require(script.getAppChatCommunitiesVisualConfig),
 	shouldShowOSAForConversation = require(script.shouldShowOSAForConversation),
 	shouldShowU13ChatOptInForConversation = require(script.shouldShowU13ChatOptInForConversation),
-	shouldBlockConversationAccess = require(script.shouldBlockConversationAccess),
 	navigateWithOsaGate = require(script.navigateWithOsaGate)
 }

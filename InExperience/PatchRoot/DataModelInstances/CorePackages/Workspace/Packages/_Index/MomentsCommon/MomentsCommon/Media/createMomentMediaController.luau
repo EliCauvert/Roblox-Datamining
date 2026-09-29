@@ -9,6 +9,7 @@ local mediaRootModule = require(momentsCommon.Media.mediaRoot)
 local _ = require(momentsCommon.Media.mediaNodeRegistry)
 local defaultMediaNodeRegistryModule = require(momentsCommon.Media.defaultMediaNodeRegistry)
 local preloadConstantsModule = require(momentsCommon.Media.Preload.preloadConstants)
+local fFlagMomentsVideoPermissionContextFixModule = require(momentsCommon.Flags.FFlagMomentsVideoPermissionContextFix)
 local _ = require(momentsCommon.Media.Nodes.createVideoNode)
 local _ = require(momentsCommon.Media.Nodes.createScreenshotNode)
 local _ = require(momentsCommon.Media.Nodes.createMusicNode)
@@ -19,7 +20,7 @@ local getFFlagMomentsStickerButtonModule = require(momentsCommon.Flags.GetFFlagM
 local loopEpsilonSeconds = preloadConstantsModule.loopEpsilonSeconds
 
 return function(p1, p2)
-	-- upvalues: defaultMediaNodeRegistryModule (ref), mediaRootModule (ref), createAudioGraphModule (ref), getFFlagMomentsStickerButtonModule (ref), createSignal (ref), createComputed (ref), cryoModule (ref), loopEpsilonSeconds (ref)
+	-- upvalues: defaultMediaNodeRegistryModule (ref), mediaRootModule (ref), createAudioGraphModule (ref), fFlagMomentsVideoPermissionContextFixModule (ref), getFFlagMomentsStickerButtonModule (ref), createSignal (ref), createComputed (ref), cryoModule (ref), loopEpsilonSeconds (ref)
 	local services = p2.services
 	local registry = p2.registry or defaultMediaNodeRegistryModule()
 	local var1 = p1.captureType == Enum.CaptureType.Video
@@ -56,6 +57,7 @@ return function(p1, p2)
 			kind = "video",
 			zIndex = 0,
 			content = p1.content,
+			preloadContent = if fFlagMomentsVideoPermissionContextFixModule then p1.preloadContent else nil,
 			region = if edits ~= nil then nil else edits.trim,
 			parent = folder,
 			cornerRadius = p1.cornerRadius

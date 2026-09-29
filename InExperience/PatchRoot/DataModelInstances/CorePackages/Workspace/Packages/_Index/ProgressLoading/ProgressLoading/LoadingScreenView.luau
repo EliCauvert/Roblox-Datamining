@@ -36,7 +36,7 @@ local t = {
 	DESKTOP = { TOP = 24, BOTTOM = 24, LEFT = 24, RIGHT = 24 },
 	CONSOLE = { TOP = 64, BOTTOM = 64, LEFT = 64, RIGHT = 64 }
 }
-local var3 = guiService:IsTenFootInterface()
+local var3 = require(parent.AppCommonLib).isTenFootInterface()
 local platform = userInputService:GetPlatform()
 local var4 = if platform ~= Enum.Platform.IOS then platform == Enum.Platform.Android else true
 local list = { 150, 256 }

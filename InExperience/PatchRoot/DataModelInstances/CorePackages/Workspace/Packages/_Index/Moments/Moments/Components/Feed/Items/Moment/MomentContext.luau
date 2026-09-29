@@ -3,6 +3,7 @@ local reactModule = require(parent.React)
 local momentsCommonModule = require(parent.MomentsCommon)
 local reactOtterModule = require(parent.ReactOtter)
 local signalsModule = require(parent.Signals)
+local getFFlagMomentsRenderPostAssetsModule = require(parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
 local createMomentStoreModule = require(script.Parent.createMomentStore)
 local mediaPreloadProvider = momentsCommonModule.Media.MediaPreloadProvider
 local t = { duration = 0.08, easingStyle = Enum.EasingStyle.Quad }
@@ -11,12 +12,14 @@ local var1 = reactModule.createContext(nil)
 return table.freeze({
 	Context = var1,
 	Provider = function(p1)
-		-- upvalues: reactModule (ref), createMomentStoreModule (ref), mediaPreloadProvider (ref), signalsModule (ref), reactOtterModule (ref), t (ref), var1 (ref)
+		-- upvalues: reactModule (ref), createMomentStoreModule (ref), getFFlagMomentsRenderPostAssetsModule (ref), mediaPreloadProvider (ref), signalsModule (ref), reactOtterModule (ref), t (ref), var1 (ref)
 		local data = p1.data
 		local var2 = reactModule.useMemo(function()
 			-- upvalues: createMomentStoreModule (copy), data (ref)
 			return createMomentStoreModule(data)
-		end, {})
+		end, {
+			if getFFlagMomentsRenderPostAssetsModule() then p1.dataVersion or false else nil
+		})
 		local var3 = mediaPreloadProvider.useMediaControllerProvider()
 		local var4, var5 = reactModule.useState(nil)
 		reactModule.useEffect(function()
@@ -55,12 +58,12 @@ return table.freeze({
 	end,
 	useMoment = function()
 		-- upvalues: reactModule (ref), var1 (ref)
-		local var2 = reactModule.useContext(var1)
+		local var8 = reactModule.useContext(var1)
 		
-		if var2 == nil then
+		if var8 == nil then
 			error("useMoment must be used within a MomentProvider")
 		end
-		return var2
+		return var8
 	end,
 	SCRUB_FADE_SECONDS = t.duration
 })

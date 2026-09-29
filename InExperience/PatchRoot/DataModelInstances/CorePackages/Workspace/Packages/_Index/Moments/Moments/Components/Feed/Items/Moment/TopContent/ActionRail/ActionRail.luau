@@ -18,6 +18,7 @@ local reactionButtonModule = require(script.Parent.ReactionButton)
 local contextualMenuModule = require(moments.Components.Feed.ContextualMenu)
 local useMomentsSession = require(moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
+local fFlagMomentsActionRailSpacingModule = require(moments.Flags.FFlagMomentsActionRailSpacing)
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
 local fFlagMomentsEngagementMetricsFeature = momentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
@@ -28,7 +29,7 @@ local arrowThickToRight = builderIconsModule.Icon.ArrowThickToRight
 local speechBubbleAlignLeft = builderIconsModule.Icon.SpeechBubbleAlignLeft
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactUtilsModule (ref), momentContextModule (ref), fFlagMomentsEngagementMetricsFeature (ref), sharedFlagsModule (ref), useSignalState (ref), getMomentsCapabilities (ref), useShareMomentModule (ref), useSignalBinding (ref), fFlagMomentsComments (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), useConfigurationModule (ref), useMomentsSession (ref), var1 (ref), getMomentsPreferencesStoreModule (ref), reactModule (ref), reactionButtonModule (ref), railItemModule (ref), speechBubbleAlignLeft (ref), arrowThickToRight (ref), contextualMenuModule (ref), view (ref)
+	-- upvalues: reactUtilsModule (ref), momentContextModule (ref), fFlagMomentsEngagementMetricsFeature (ref), sharedFlagsModule (ref), useSignalState (ref), getMomentsCapabilities (ref), useShareMomentModule (ref), useSignalBinding (ref), fFlagMomentsComments (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), useConfigurationModule (ref), useMomentsSession (ref), var1 (ref), getMomentsPreferencesStoreModule (ref), reactModule (ref), reactionButtonModule (ref), railItemModule (ref), speechBubbleAlignLeft (ref), arrowThickToRight (ref), contextualMenuModule (ref), fFlagMomentsActionRailSpacingModule (ref), view (ref)
 	local var2 = reactUtilsModule.createNextOrder()
 	local var3 = momentContextModule.useMoment()
 	local store = var3.store
@@ -112,7 +113,8 @@ return reactModule.memo(function(p1)
 		})
 	end
 	return reactModule.createElement(view, {
-		tag = "col size-1200-0 auto-y",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = p1.LayoutOrder,
+		tag = if fFlagMomentsActionRailSpacingModule then "col align-x-center gap-large size-1200-0 auto-y" else "col size-1200-0 auto-y",
+		testId = if fFlagMomentsActionRailSpacingModule then "moments-action-rail" else nil
 	}, t)
 end)
