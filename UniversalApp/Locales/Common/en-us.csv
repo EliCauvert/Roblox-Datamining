@@ -1995,6 +1995,7 @@ Feature.Avatar.Label.SetAvatarCount,{itemCount} avatars
 Feature.Avatar.Label.SetLimitReachedBody,You can only have up to {setLimit} sets. Delete one to make room
 Feature.Avatar.Label.SetNameDuplicateBody,"You already have a set called this, choose a different name"
 Feature.Avatar.Label.SetNameNotAllowedBody,Please choose another name
+Feature.Avatar.Label.ShareAvatarToMoments,Share your avatar to Moments
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,Post Avatars to Marketplace
 Feature.Avatar.Label.Shirt,Shirt
 Feature.Avatar.Label.ShirtClassic,Shirt Classic
@@ -3274,14 +3275,6 @@ Feature.Chat.Response.Failed,Failed
 Feature.Chat.Response.NetworkError,Network Error
 Feature.Chat.Response.Sending,Sending
 Feature.Chat.RobloxConnectUnavailableWithUser,"At this time, Roblox Connect is not available with this user."
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,Friend Activity
-Feature.Chat.ShareGameToChat.NoFavoriteGames,No favorites
-Feature.Chat.ShareGameToChat.NoFriendActivity,You have no friend activity
-Feature.Chat.ShareGameToChat.NoPopularGames,No popular experiences available
-Feature.Chat.ShareGameToChat.NoRecentGames,No recents
-Feature.Chat.ShareGameToChat.Popular,Popular
-Feature.Chat.ShareGameToChat.Recent,Recent
 Feature.Chat.Text.NoConnections,"You haven't added any friends yet. To get started, find and add your friends on Roblox."
 Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.MuteChatNotifications,Mute chat notifications from friends during gameplay
@@ -4919,6 +4912,7 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{discountPercent}% of
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"By clicking ""Continue,"" you agree to the {linkStart}Roblox Subscription Terms{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"By clicking ""Try it for free,"" you agree to the {linkStart}Roblox Subscription Terms.{linkEnd} Your free trial will end in 1 month and you will be charged automatically each month and can cancel at any time."
 Feature.RobloxSubscription.Label.FreeTrialText,Get free trial
+Feature.RobloxSubscription.Label.PendingRobux,Pending Robux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Your referrals get
 Feature.RobloxSubscription.Label.ReferralYouGet,You get
@@ -5591,7 +5585,7 @@ IAPExperience.RobuxUpsell.Text.LastPurchased,Last Purchased
 IAPExperience.RobuxUpsell.Text.Loading,
 IAPExperience.RobuxUpsell.Text.MoreRobux,"More Robux, same price"
 IAPExperience.RobuxUpsell.Text.NeedMoreRobux,You need more Robux
-IAPExperience.RobuxUpsell.Text.PopularItem,
+IAPExperience.RobuxUpsell.Text.PopularItem,Popular
 IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet,Buying Robux is not supported on headset devices yet. Please try on a different device.
 IAPExperience.RobuxUpsell.Text.RemainingBalance,The remaining {robux} will be credited to your balance.
 IAPExperience.RobuxUpsell.Text.TermsOfUse,

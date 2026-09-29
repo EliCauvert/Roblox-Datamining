@@ -2342,6 +2342,7 @@ Feature.Build.Description.BuildReplyNotif,Dapatkan notifikasi saat Build memilik
 Feature.Build.Description.BuyRobuxToCreate,"Beli lebih banyak Robux untuk terus berkreasi, atau tunggu hingga kuota penggunaan Build gratismu direset besok."
 Feature.Build.Description.BuyUsageOrWait,"Beli lebih banyak kuota penggunaan Build dengan Robux, atau tunggu hingga batas harianmu direset."
 Feature.Build.Description.CampaignRunDates,Kampanyemu akan berlangsung {startDate}—{endDate}
+Feature.Build.Description.ChooseAdCampaignLength,Pilih durasi yang kamu inginkan untuk menayangkan iklanmu.
 Feature.Build.Description.ChoosePlaytesters,Pilih teman untuk melihat preview game-mu.
 Feature.Build.Description.CreateDeveloperProduct,"Buat ""{NAME}"" dengan membayar {PRICE} Robux, tidak dijual."
 Feature.Build.Description.DeactivateDeveloperProduct,Hentikan penjualan produk delevoper {PRODUCT_ID}.
@@ -2655,6 +2656,7 @@ Feature.Build.Placeholder.DescribeProduct,Deskripsikan apa yang ingin kamu jual
 Feature.Build.Placeholder.DescribeProductUpdate,Deskripsikan perubahan
 Feature.Build.Prompt.CreateDeveloperProduct,"Bantu saya membuat produk developer, menghubungkannya ke game, memverifikasi dan memublikasikan perubahannya, serta membuatnya tersedia untuk dibeli."
 Feature.Build.Title.AdCampaignDuration,Kampanye iklan {durationDays} hari
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} hari
 Feature.Build.Title.AdComplete,Iklan selesai
 Feature.Build.Title.AdCreated,Iklan dibuat
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2685,6 +2687,7 @@ Feature.Build.Title.GetUsers,Dapatkan pengguna
 Feature.Build.Title.ManagedPricingAcknowledgement,Aktifkan Harga Terkelola?
 Feature.Build.Title.NoMonetizationProducts,Mulai hasilkan pendapatan di game-mu
 Feature.Build.Title.NoRobuxForUsage,Tidak ada Robux yang tersisa untuk penggunaan Build
+Feature.Build.Title.PickCampaign,Pilih durasi
 Feature.Build.Title.PlaytestInviteSendFailed,Tidak dapat mengirim undangan
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Tidak dapat menambahkan pengguna berikut:
@@ -3258,14 +3261,6 @@ Feature.Chat.Response.Failed,Gagal
 Feature.Chat.Response.NetworkError,Jaringan Eror
 Feature.Chat.Response.Sending,Mengirim
 Feature.Chat.RobloxConnectUnavailableWithUser,"Saat ini, Roblox Connect tidak tersedia dengan pengguna ini."
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,Aktivitas Teman
-Feature.Chat.ShareGameToChat.NoFavoriteGames,Tidak ada favorit
-Feature.Chat.ShareGameToChat.NoFriendActivity,Tidak ada aktivitas teman
-Feature.Chat.ShareGameToChat.NoPopularGames,Tidak ada pengalaman virtual populer yang tersedia
-Feature.Chat.ShareGameToChat.NoRecentGames,Tidak ada baru-baru ini
-Feature.Chat.ShareGameToChat.Popular,Populer
-Feature.Chat.ShareGameToChat.Recent,Baru-Baru Ini
 Feature.Chat.Text.NoConnections,"Kamu belum menambahkan satu teman pun. Untuk memulai, cari dan tambahkan temanmu di Roblox."
 Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.MuteChatNotifications,Bisukan notifikasi chat dari teman selama gameplay
@@ -4897,6 +4892,7 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,Diskon {discountPerce
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Dengan mengklik ""Lanjutkan"", kamu menyetujui {linkStart}Ketentuan Subscription Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Dengan mengklik ""Coba gratis"", kamu menyetujui {linkStart}Ketentuan Subscription Roblox.{linkEnd} Uji coba gratis kamu akan berakhir dalam 1 bulan, dan biaya akan otomatis dibebankan setiap bulan. Kamu bisa membatalkannya kapan saja."
 Feature.RobloxSubscription.Label.FreeTrialText,Dapatkan uji coba gratis
+Feature.RobloxSubscription.Label.PendingRobux,Robux Pending
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Referralmu mendapatkan
 Feature.RobloxSubscription.Label.ReferralYouGet,Kamu mendapatkan
@@ -5105,7 +5101,7 @@ Feature.SongDetails.Label.SongsBy,Lagu dari {artistName}
 Feature.SongDetails.Label.ThousandPlus,1.000+
 Feature.SongDetails.Label.Vendor,Vendor
 Feature.SplitPane.EditAvatarButtonText,Edit Avatar
-Feature.SplitPane.NoAdditionalAvatarsDialogBody,"Buat avatar lain, lalu ganti tema di sini."
+Feature.SplitPane.NoAdditionalAvatarsDialogBody,"Buat avatar lain, lalu gonta-ganti avatar di sini."
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,Buat Avatar
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,Kami Sudah Menampilkan Semua Avatar Tersimpan
 Feature.SplitPane.UnsavedChangesDialogBody,"Jika kamu mengganti avatar sekarang, perubahan pada avatarmu mungkin hilang. Simpan untuk mempertahankannya."
@@ -5568,7 +5564,7 @@ IAPExperience.RobuxUpsell.Text.LastPurchased,Terakhir Dibeli
 IAPExperience.RobuxUpsell.Text.Loading,
 IAPExperience.RobuxUpsell.Text.MoreRobux,"Lebih banyak Robux, harga sama"
 IAPExperience.RobuxUpsell.Text.NeedMoreRobux,Kamu perlu lebih banyak Robux
-IAPExperience.RobuxUpsell.Text.PopularItem,
+IAPExperience.RobuxUpsell.Text.PopularItem,Populer
 IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet,Membeli Robux melalui headset belum didukung. Coba dengan perangkat yang berbeda.
 IAPExperience.RobuxUpsell.Text.RemainingBalance,{robux} Robux yang tersisa akan ditambahkan ke saldo kamu.
 IAPExperience.RobuxUpsell.Text.TermsOfUse,

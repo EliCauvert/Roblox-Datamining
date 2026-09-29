@@ -1752,14 +1752,6 @@ Feature.Chat.Response.Failed,
 Feature.Chat.Response.NetworkError,Ошибка сети
 Feature.Chat.Response.Sending,Отправка
 Feature.Chat.RobloxConnectUnavailableWithUser,В настоящее время Roblox Connect недоступен с этим пользователем.
-Feature.Chat.ShareGameToChat.Favorites,Избранное
-Feature.Chat.ShareGameToChat.FriendActivity,Активность друзей
-Feature.Chat.ShareGameToChat.NoFavoriteGames,Нет избранных игр
-Feature.Chat.ShareGameToChat.NoFriendActivity,Нет активности друзей
-Feature.Chat.ShareGameToChat.NoPopularGames,Популярные плейсы недоступны
-Feature.Chat.ShareGameToChat.NoRecentGames,Нет недавних игр
-Feature.Chat.ShareGameToChat.Popular,Популярное
-Feature.Chat.ShareGameToChat.Recent,Недавнее
 Feature.Chat.Text.NoConnections,"Ни одного контакта не добавлено. Чтобы начать, найди и добавь контакты в Roblox."
 Feature.Chat.Toast.Error.InvalidUserSelected,Один или несколько человек из этого списка не могут быть добавлены
 Feature.CommunityLinks.Description.CommunityDefault,"Присоединяйся к официальному сообществу Guilded для плейса {experienceName}, чтобы просмотреть объявления и многое другое!"
@@ -1899,7 +1891,7 @@ Feature.ExperienceDetails.UpdateMaturitySettingModal.Label.Title,
 Feature.FaceChat.Subtitle.FeatureDisabled,Анимация лица временно недоступна. Повтори попытку позже.
 Feature.FaceChat.Subtitle.UnableToAccessCamera,"Чтобы анимировать аватар с помощью камеры, перейди в настройки операционной системы, чтобы разрешить использование камеры"
 Feature.Favorites.Label.Favorite,
-Feature.Favorites.Label.Favorited,
+Feature.Favorites.Label.Favorited,Избранное
 Feature.Friends.Action.AcceptFriend,Принять друга
 Feature.Friends.Action.AccountDeleted,Аккаунт удалён
 Feature.Friends.Action.Add,
@@ -3137,7 +3129,7 @@ IAPExperience.RobuxUpsell.Text.LastPurchased,Последняя покупка
 IAPExperience.RobuxUpsell.Text.Loading,
 IAPExperience.RobuxUpsell.Text.MoreRobux,Получи больше Robux за ту же цену
 IAPExperience.RobuxUpsell.Text.NeedMoreRobux,Нужно больше Robux
-IAPExperience.RobuxUpsell.Text.PopularItem,
+IAPExperience.RobuxUpsell.Text.PopularItem,Популярное
 IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet,Покупка Robux пока не поддерживается на гарнитурах. Попробуй другое устройство.
 IAPExperience.RobuxUpsell.Text.RemainingBalance,Оставшиеся {robux} будут начислены на твой счёт.
 IAPExperience.RobuxUpsell.Text.TermsOfUse,

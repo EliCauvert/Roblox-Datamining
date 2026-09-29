@@ -2342,6 +2342,7 @@ Feature.Build.Description.BuildReplyNotif,Receba uma notificação quando a fun�
 Feature.Build.Description.BuyRobuxToCreate,"Compre mais Robux para continuar criando ou aguarde até amanhã, quando o seu limite gratuito da função Criar será restabelecido."
 Feature.Build.Description.BuyUsageOrWait,Use Robux para comprar mais limite para a função Criar ou aguarde o seu limite diário ser restabelecido.
 Feature.Build.Description.CampaignRunDates,Sua campanha será executada de {startDate} a {endDate}
+Feature.Build.Description.ChooseAdCampaignLength,Escolha por quanto tempo você quer que seu anúncio seja veiculado.
 Feature.Build.Description.ChoosePlaytesters,Escolha amizades para visualizar seu jogo.
 Feature.Build.Description.CreateDeveloperProduct,"Criar ""{NAME}"" por {PRICE} Robux, fora de venda."
 Feature.Build.Description.DeactivateDeveloperProduct,Remova o produto de desenvolvedor {PRODUCT_ID} da venda.
@@ -2655,6 +2656,7 @@ Feature.Build.Placeholder.DescribeProduct,Descreva o que você quer vender
 Feature.Build.Placeholder.DescribeProductUpdate,Descreva uma atualização
 Feature.Build.Prompt.CreateDeveloperProduct,"Me ajude a criar um produto de desenvolvedor, conectá-lo ao jogo, verificar e publicar as alterações e disponibilizá-lo para compra."
 Feature.Build.Title.AdCampaignDuration,Campanha de anúncios de {durationDays} dias
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} dias
 Feature.Build.Title.AdComplete,Anúncio concluído
 Feature.Build.Title.AdCreated,Anúncio criado
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2685,6 +2687,7 @@ Feature.Build.Title.GetUsers,Obter usuários
 Feature.Build.Title.ManagedPricingAcknowledgement,Ativar preços gerenciados?
 Feature.Build.Title.NoMonetizationProducts,Comece a ganhar com seu jogo
 Feature.Build.Title.NoRobuxForUsage,Não há mais Robux para usar a função Criar
+Feature.Build.Title.PickCampaign,Escolha uma duração
 Feature.Build.Title.PlaytestInviteSendFailed,Não foi possível enviar os convites
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Não foi possível adicionar os seguintes usuários:
@@ -3260,14 +3263,6 @@ Feature.Chat.Response.Failed,Falha
 Feature.Chat.Response.NetworkError,Erro de rede
 Feature.Chat.Response.Sending,Enviando
 Feature.Chat.RobloxConnectUnavailableWithUser,"No momento, o Roblox Connect não está disponível com este usuário."
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,Atividades de suas amizades
-Feature.Chat.ShareGameToChat.NoFavoriteGames,Nenhum favorito
-Feature.Chat.ShareGameToChat.NoFriendActivity,Você não possui atividades de amizades
-Feature.Chat.ShareGameToChat.NoPopularGames,Nenhuma experiência popular disponível
-Feature.Chat.ShareGameToChat.NoRecentGames,Nenhum recente
-Feature.Chat.ShareGameToChat.Popular,Popular
-Feature.Chat.ShareGameToChat.Recent,
 Feature.Chat.Text.NoConnections,"Você ainda não adicionou nenhum amigo. Para começar, encontre e adicione seus amigos na Roblox."
 Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.MuteChatNotifications,Silenciar notificações de chat das amizades durante o jogo
@@ -4898,6 +4893,7 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{discountPercent}% de
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Ao clicar em “Continuar”, você concorda com os {linkStart}Termos de assinatura da Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Ao clicar em “Teste grátis”, você concorda com os {linkStart}Termos de assinatura da Roblox.{linkEnd} Seu teste grátis termina em 1 mês. A cobrança será automática todo mês até você cancelar."
 Feature.RobloxSubscription.Label.FreeTrialText,Faça um teste grátis
+Feature.RobloxSubscription.Label.PendingRobux,Robux pendentes
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Suas indicações recebem
 Feature.RobloxSubscription.Label.ReferralYouGet,Você recebe
@@ -5569,7 +5565,7 @@ IAPExperience.RobuxUpsell.Text.LastPurchased,Última compra
 IAPExperience.RobuxUpsell.Text.Loading,
 IAPExperience.RobuxUpsell.Text.MoreRobux,"Mais Robux, mesmo preço"
 IAPExperience.RobuxUpsell.Text.NeedMoreRobux,Você precisa de mais Robux
-IAPExperience.RobuxUpsell.Text.PopularItem,
+IAPExperience.RobuxUpsell.Text.PopularItem,Popular
 IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet,"A compra de Robux ainda não é suportada em dispositivos de fone de ouvido. Por favor, tente em um dispositivo diferente."
 IAPExperience.RobuxUpsell.Text.RemainingBalance,Os {robux} restantes serão adicionados ao seu saldo.
 IAPExperience.RobuxUpsell.Text.TermsOfUse,

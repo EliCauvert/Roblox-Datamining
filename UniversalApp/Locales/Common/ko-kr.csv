@@ -3265,14 +3265,6 @@ Feature.Chat.Response.Failed,실패
 Feature.Chat.Response.NetworkError,네트워크 오류
 Feature.Chat.Response.Sending,전송 중
 Feature.Chat.RobloxConnectUnavailableWithUser,현재 이 사용자와는 Roblox Connect를 이용할 수 없습니다.
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,친구 활동
-Feature.Chat.ShareGameToChat.NoFavoriteGames,즐겨찾기 없음
-Feature.Chat.ShareGameToChat.NoFriendActivity,친구 활동이 없어요
-Feature.Chat.ShareGameToChat.NoPopularGames,이용 가능한 인기 체험이 없습니다
-Feature.Chat.ShareGameToChat.NoRecentGames,최근 체험 없음
-Feature.Chat.ShareGameToChat.Popular,인기
-Feature.Chat.ShareGameToChat.Recent,최근
 Feature.Chat.Text.NoConnections,아직 추가한 인맥이 없습니다. 시작하려면 Roblox에서 인맥을 찾아 추가하세요.
 Feature.Chat.Text.NoFriends,아직 추가한 친구가 없습니다. 시작하려면 먼저 Roblox에서 친구를 찾아 추가하세요.
 Feature.Chat.Title.MuteChatNotifications,게임 플레이 중 친구의 채팅 알림 음소거
@@ -4905,6 +4897,7 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{periodIndex}{periodT
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,'계속하기'를 클릭하면 {linkStart}Roblox 구독 약관{linkEnd}에 동의하는 것으로 간주됩니다.
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"'무료 체험'을 클릭하면 {linkStart}Roblox 구독 약관{linkEnd}에 동의하는 것으로 간주됩니다. 무료 체험 기간은 1개월 후 종료되며, 매월 자동으로 요금이 청구됩니다. 언제든지 구독을 취소하실 수 있습니다."
 Feature.RobloxSubscription.Label.FreeTrialText,무료 체험하기
+Feature.RobloxSubscription.Label.PendingRobux,보류 중인 Robux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,추천받은 사람이 수령하는 금액:
 Feature.RobloxSubscription.Label.ReferralYouGet,수령액:
@@ -5576,7 +5569,7 @@ IAPExperience.RobuxUpsell.Text.LastPurchased,최근 구매 내역
 IAPExperience.RobuxUpsell.Text.Loading,
 IAPExperience.RobuxUpsell.Text.MoreRobux,같은 가격으로 더 많은 Robux를 받으세요
 IAPExperience.RobuxUpsell.Text.NeedMoreRobux,
-IAPExperience.RobuxUpsell.Text.PopularItem,
+IAPExperience.RobuxUpsell.Text.PopularItem,인기
 IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet,헤드셋 기기에서는 현재 Robux 구매를 지원하지 않습니다. 다른 기기에서 시도하세요.
 IAPExperience.RobuxUpsell.Text.RemainingBalance,남은 {robux}는 회원님의 계정에 적립됩니다.
 IAPExperience.RobuxUpsell.Text.TermsOfUse,

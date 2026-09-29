@@ -86,6 +86,7 @@ Application.Settings.VR.Comfort.VignetteEnabled.Description,Comfortinstelling di
 Application.Settings.VR.Comfort.VignetteEnabled.Title,Comfortvignet
 Application.Settings.VRAccountSettingsExplanation,"Ga naar het web of een bijbehorend apparaat voor toegang tot je privacy, beveiligingsinstellingen en meer."
 Application.Settings.VRAccountSettingsSubtitle,Web of een bijbehorend apparaat bezoeken
+Application.Settings.VolumeSliderDescription,"Regel het algehele geluidsniveau van Roblox, inclusief menu-effecten, spelgeluid en spraakchat."
 Authentication.AccountPicker.Button.CreateAccount,Account aanmaken
 Authentication.AccountPicker.Button.SignIntoAnotherAccount,Aanmelden bij een ander account
 Authentication.AccountPicker.Label.AllAccounts,Alle accounts
@@ -99,6 +100,8 @@ Authentication.AccountPicker.Label.SignedOut,Afgemeld
 Authentication.AccountRecovery.Action.AddAPasskey,"Ja, een nieuwe toegangssleutel toevoegen"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
+Authentication.AccountRecovery.Action.DeleteAll,Wijzigingen verwijderen
+Authentication.AccountRecovery.Action.DontDeleteCredentials,Alles behouden
 Authentication.AccountRecovery.Action.Next,Volgende
 Authentication.AccountRecovery.Action.Ok,Oké
 Authentication.AccountRecovery.Action.ResetPassword,Wachtwoord resetten
@@ -113,6 +116,7 @@ Authentication.AccountRecovery.Action.UseEmailInstead,Gebruik in plaats daarvan 
 Authentication.AccountRecovery.Action.UsePhone,Telefoonnummer gebruiken
 Authentication.AccountRecovery.Action.UsePhoneInstead,Gebruik in plaats daarvan een telefoonnummer
 Authentication.AccountRecovery.Action.UseUsernameEmailInstead,Gebruik in plaats daarvan een gebruikersnaam of e-mailadres
+Authentication.AccountRecovery.Description.AccountSecuredConfirmation,Alle wijzigingen zijn verwijderd.
 Authentication.AccountRecovery.Description.CannotRecoverAccount,"Voor je veiligheid is een tweede, andere verificatiemethode vereist om je account waarvoor tweestapsverificatie is ingeschakeld, te herstellen. Voor dit account is geen back-upmethode beschikbaar voor een veilig herstel. Probeer weer toegang te krijgen tot je primaire 2SV-methode of gebruik een back-upcode om de 2SV-controle over te slaan."
 Authentication.AccountRecovery.Description.ChooseAccount,Kies het account dat je wilt herstellen.
 Authentication.AccountRecovery.Description.CreateNewPassword,Maak een sterk wachtwoord aan dat anders is dan je oude wachtwoord.
@@ -120,6 +124,7 @@ Authentication.AccountRecovery.Description.CreateNewPasswordAddEmail,Maak een ni
 Authentication.AccountRecovery.Description.DeviceDoesNotSupportPasskey,"Je bent ingeschreven voor het Enhanced Protection Program. Om je account veilig te houden, heb je een toegangssleutel of beveiligingssleutel nodig om je aan te melden. Dit apparaat ondersteunt geen toegangssleutels, dus het kan lastig zijn om je op dit apparaat aan te melden. In de toekomst kun je Snel aanmelden gebruiken om je met een ander ingelogd apparaat aan te melden."
 Authentication.AccountRecovery.Description.EmailCodeSent,"Als er een Roblox-account bestaat voor dit e-mailadres, ontvang je een verificatiecode. Controleer al je mappen, inclusief spam."
 Authentication.AccountRecovery.Description.EmailCodeSentForUser,"We hebben zojuist een 6-cijferige verificatiecode gestuurd naar het door jou opgegeven e-mailadres, als dit is gekoppeld aan je account. Controleer al je mappen, inclusief spam."
+Authentication.AccountRecovery.Description.EmailUnavailableInfo,Sommige e-mailadressen zijn mogelijk niet beschikbaar omdat ze zijn gewijzigd vanwege een leeftijdsverandering. Ze zijn wel nog steeds bruikbaar voor accountherstel.
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,"Je bent ingeschreven voor het Enhanced Protection Program. Om je account veilig te houden, heb je een toegangssleutel of beveiligingssleutel nodig om je aan te melden.{lineBreak}{lineBreak}Als je je persoonlijke apparaat gebruikt, raden we je aan om nu een nieuwe toegangssleutel in te stellen. Dit maakt het in de toekomst gemakkelijker om je op dit apparaat aan te melden. Als je een gedeeld of openbaar apparaat gebruikt, sla je deze stap over."
 Authentication.AccountRecovery.Description.EnterABackupCode,Voer nu een back-upcode in die je hebt opgeslagen.
 Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,"Voer een e-mailadres of telefoonnummer in dat mogelijk aan je account is gekoppeld. Als je eerder een aankoop hebt gedaan, kun je je facturerings-e-mailadres proberen."
@@ -127,7 +132,11 @@ Authentication.AccountRecovery.Description.EnterEmailAddress,Voer nu een e-maila
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"Voer nu een telefoonnummer, back-upcode of een ander e-mailadres in. Dit kan een e-mailadres zijn dat je hebt gebruikt om iets op Roblox te kopen"
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,Voer nu een telefoonnummer in dat aan je account is gekoppeld.
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,Voer nu een telefoonnummer of een ander e-mailadres in. Dit kan een e-mailadres zijn dat je hebt gebruikt om iets op Roblox te kopen.
+Authentication.AccountRecovery.Description.InvalidateCredentialInfo,We hebben een beveiligingswijziging gevonden die je mogelijk niet hebt aangebracht. Verwijder deze als je deze niet herkent.
+Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,We hebben beveiligingswijzigingen gevonden die je mogelijk niet hebt aangebracht. Verwijder alle wijzigingen die je niet herkent.
+Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,"Als je niet-herkende wijzigingen behoudt, loopt je account mogelijk gevaar. Het verwijderen van wijzigingen kan niet ongedaan worden gemaakt."
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,Je hebt {twoStepMethod} ingeschakeld voor je account. Behoud deze als je er nog toegang toe hebt. We vragen je erom wanneer je je opnieuw aanmeldt.
+Authentication.AccountRecovery.Description.NoChangesMade,Houd je account veilig door een extra beveiligingslaag toe te voegen.
 Authentication.AccountRecovery.Description.PhoneCodeSent,"Als er een Roblox-account bestaat voor dit telefoonnummer, ontvang je een verificatiecode. Controleer sms of WhatsApp."
 Authentication.AccountRecovery.Description.PhoneCodeSentForUser,"We hebben zojuist een 6-cijferige verificatiecode gestuurd naar het door jou opgegeven telefoonnummer, als dit is gekoppeld aan je account. De code kan via WhatsApp of sms worden verzonden."
 Authentication.AccountRecovery.Description.PlatformNotSupported,Accountherstel wordt niet ondersteund op dit platform of apparaat. Selecteer OK om dit venster te sluiten en terug te keren naar de aanmeldpagina. Herstel je account op een ander apparaat. Kies vervolgens Snel aanmelden en volg de instructies om veilig in te loggen met het andere aangemelde apparaat.
@@ -139,27 +148,43 @@ Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,"
 Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,"Hallo {username}, je opent je account vanaf een vertrouwde locatie. Je kunt je tweestapsverificatie overslaan en het herstel voltooien."
 Authentication.AccountRecovery.Description.UpdateEmailConfirmation,We hebben gemerkt dat je een ander e-mailadres hebt gebruikt om je account te herstellen. We werken je e-mailadres bij naar: {email}
 Authentication.AccountRecovery.Description.VerifyAgain,Verifieer dat jij het bent voordat je je account met tweestapsverificatie herstelt. Druk op 'Doorgaan' om de tweestapsverificatie-controle opnieuw te activeren.
+Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,Je account is beveiligd
+Authentication.AccountRecovery.Heading.BackupCodesGenerated,Back-upcodes gegenereerd
+Authentication.AccountRecovery.Heading.BillingEmailAdded,E-mailadres voor facturering toegevoegd
 Authentication.AccountRecovery.Heading.CannotRecoverAccount,We kunnen je account niet herstellen
 Authentication.AccountRecovery.Heading.ChooseVerificationMethod,Een verificatiemethode kiezen
+Authentication.AccountRecovery.Heading.EmailAdded,E-mailadres toegevoegd
 Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,Is dit je persoonlijke apparaat?
 Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,Je kunt beperkte functionaliteit ervaren op dit apparaat omdat het geen toegangssleutel ondersteunt
+Authentication.AccountRecovery.Heading.EnrolledInEnhancedProtection,Ingeschreven voor het Enhanced Protection Program
 Authentication.AccountRecovery.Heading.EnterSecondMethod,Een tweede verificatiemethode invoeren
+Authentication.AccountRecovery.Heading.InvalidateCredential,Wijziging in je account
+Authentication.AccountRecovery.Heading.InvalidateCredentials,Wijzigingen in je account
+Authentication.AccountRecovery.Heading.NoChangesMade,Er zijn geen wijzigingen aangebracht
+Authentication.AccountRecovery.Heading.PasskeyAdded,Toegangssleutel toegevoegd
+Authentication.AccountRecovery.Heading.PhoneNumberAdded,Telefoonnummer toegevoegd
 Authentication.AccountRecovery.Heading.ResetPassword,
 Authentication.AccountRecovery.Heading.RobloxAccountRecovery,Herstel van Roblox-account
 Authentication.AccountRecovery.Heading.SaveTwoStepMethod,Moeten we de bestaande tweestapsverificatiemethode behouden?
+Authentication.AccountRecovery.Heading.TwoStepMethodAdded,{value} toegevoegd
 Authentication.AccountRecovery.Heading.UpdateEmail,Je e-mailadres bijwerken
 Authentication.AccountRecovery.Heading.UseAnotherDevice,Een ander apparaat gebruiken
 Authentication.AccountRecovery.Label.AddEmail,Een e-mailadres toevoegen
 Authentication.AccountRecovery.Label.Authenticator2sv,authenticatie-app 2sv
+Authentication.AccountRecovery.Label.Authenticator2svCapitalized,Authenticator 2SV
 Authentication.AccountRecovery.Label.BackupCode,Back-upcode
 Authentication.AccountRecovery.Label.ConfirmNewPasswordV2,Nieuw wachtwoord bevestigen
 Authentication.AccountRecovery.Label.Email2sv,e-mail 2sv
+Authentication.AccountRecovery.Label.Email2svCapitalized,E-mail 2SV
+Authentication.AccountRecovery.Label.EmailUnavailable,e-mailadres niet beschikbaar
 Authentication.AccountRecovery.Label.EnterCode,Voer de code in
 Authentication.AccountRecovery.Label.NewPasswordV2,Nieuw wachtwoord
+Authentication.AccountRecovery.Label.Or,OF
 Authentication.AccountRecovery.Label.PreviousContactMethodVerification,{contactMethod} geverifieerd
 Authentication.AccountRecovery.Label.ResendCode,Code opnieuw versturen
 Authentication.AccountRecovery.Label.ResendCodeTimer,Code opnieuw verzenden over {timeLeft} s
 Authentication.AccountRecovery.Label.SecurityKey2sv,beveiligingssleutel 2sv
+Authentication.AccountRecovery.Label.SecurityKey2svCapitalized,Beveiligingssleutel 2SV
 Authentication.AccountRecovery.Label.UsernameEmail,Gebruikersnaam/e-mailadres
 Authentication.AccountRecovery.LabelEmail,E-mail
 Authentication.AccountRecovery.LabelPhone,Telefoon
@@ -182,6 +207,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,Inloggen op bestaand
 Authentication.AccountSwitch.Action.SwitchAccount,Van account wisselen
 Authentication.AccountSwitch.Description.AccountLimit.2,"Je hebt het maximale aantal accounts bereikt. Verwijder eerst een account, daarna kun je een nieuw account toevoegen."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"Als je doorgaat als {username}, log je uit bij je andere accounts."
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,"Als je doorgaat, log je uit bij je andere accounts."
 Authentication.AccountSwitch.Description.LogoutConfirmation,Je moet uitloggen bij je andere Roblox-accounts op dit apparaat voordat je een nieuw account kunt toevoegen
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Probeer het later nog een keer
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Zodra je je afmeldt, worden alle accounts van dit apparaat verwijderd."
@@ -201,13 +227,18 @@ Authentication.CrossDevice.Action.Enter,Invoeren
 Authentication.CrossDevice.Action.GoBack,Ga terug
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,
+Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Bevestig op je aangemelde apparaat om door te gaan.
+Authentication.CrossDevice.Description.QuickSignInInstructionsModal,Scan op je aangemelde apparaat de QR-code of ga naar <b>Meer > Snel aanmelden</b> en voer de onderstaande code in.
+Authentication.CrossDevice.Description.SigningInAs,Aanmelden als {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,voer vervolgens deze code in
 Authentication.CrossDevice.GoToInstruction,Ga op je computer of telefoon naar:
 Authentication.CrossDevice.Heading.LoginAnotherDevice,Inloggen op een ander apparaat
 Authentication.CrossDevice.Heading.LoginCode,Code voor snel aanmelden
 Authentication.CrossDevice.Heading.LoginWarning,"OM IN TE LOGGEN, ZORG ERVOOR DAT JE:"
 Authentication.CrossDevice.Heading.QuickLogin,Snel aanmelden
+Authentication.CrossDevice.Heading.SignInWithQrCode,Aanmelden met QR-code
 Authentication.CrossDevice.Heading.SigninAnotherDevice,Aanmelden op een ander apparaat
+Authentication.CrossDevice.Heading.WaitingForConfirmation,Wachten op bevestiging
 Authentication.CrossDevice.Heading.Warning,WAARSCHUWING!
 Authentication.CrossDevice.Label.CodeHeader,Optie 2
 Authentication.CrossDevice.Label.CodeNotVerified,De code voor snel aanmelden is niet geverifieerd.
@@ -249,9 +280,11 @@ Authentication.Login.Action.ConnectionError.RetryWait,Opnieuw proberen over: {Wa
 Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,Nu downloaden
 Authentication.Login.Action.EmailACode,Een code per e-mail verzenden
+Authentication.Login.Action.EmailMeCode,Stuur me een code per e-mail
 Authentication.Login.Action.EmailOtpWaitTime,Code opnieuw verzenden over {WaitTime} s
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Wachtwoord of gebruikersnaam vergeten?
 Authentication.Login.Action.ForgotUsername,Gebruikersnaam vergeten?
+Authentication.Login.Action.ForgotUsernameOrPassword,Je gebruikersnaam of wachtwoord vergeten?
 Authentication.Login.Action.LogInEmailOneTimeCode,Stuur me een unieke code per e-mail
 Authentication.Login.Action.NeedHelp,Hulp nodig?
 Authentication.Login.Action.Next,
@@ -259,8 +292,11 @@ Authentication.Login.Action.QQLogin,Inloggen met QQ
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.Save,Opslaan
+Authentication.Login.Action.SendCodeSentenceCase,Code sturen
 Authentication.Login.Action.SendVerificationEmail,Verificatiemail sturen
 Authentication.Login.Action.SignIn,Aanmelden
+Authentication.Login.Action.SignInSentenceCase,
+Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Toegangssleutel gebruiken
 Authentication.Login.Action.WeChatLogin,Inloggen met WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Roblox afsluiten om van account te wisselen voor {platformAccountName}
@@ -271,14 +307,22 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,Voer de code in die we z
 Authentication.Login.Description.GetOneTimeCodeHelp,Voer het e-mailadres in dat is geverifieerd op je account om een unieke code te ontvangen.
 Authentication.Login.Description.PasskeyDescription,"Je account heeft een toegangssleutel, een veiligere aanmeldingsmethode dan een wachtwoord. Je kunt je vingerafdruk, gezicht of schermvergrendeling gebruiken om je op dit apparaat aan te melden."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,We kunnen niet bepalen of je apparaat een toegangssleutel ondersteunt. Probeer het opnieuw of tik op 'Problemen bij het inloggen' om je account te herstellen met een e-mailadres of telefoonnummer.
+Authentication.Login.Description.PasskeyMobileOnly,Toegangssleutels zijn alleen beschikbaar op mobiele apparaten. Kies een andere manier om je aan te melden.
+Authentication.Login.Description.SigningInWith,Aanmelden met <b>{identifier}</b>
+Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
+Authentication.Login.Description.VerificationCodeSentTo,"Als er een Roblox-account bestaat, ontvang je een verificatiecode op {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Voor je account is alleen een toegangssleutel ingesteld om je aan te melden. Probeer je aan te melden met je toegangssleutel of herstel je account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Kan platformaccount niet verifiëren. Probeer het later opnieuw.
+Authentication.Login.Heading.EnterYourCode,Voer je code in
 Authentication.Login.Heading.IncompatibleAccounts,Incompatibele accounts
 Authentication.Login.Heading.Login,Inloggen
 Authentication.Login.Heading.LoginRoblox,Inloggen bij Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,
 Authentication.Login.Heading.NewAppAvailable,Nieuwe Roblox-app downloaden
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInAnotherWay,Op een andere manier aanmelden
+Authentication.Login.Heading.SignInToRoblox,Aanmelden bij Roblox
+Authentication.Login.Heading.SignInWithRoblox,Aanmelden met Roblox
 Authentication.Login.Label.AccountSelectorTitle,Selecteer het account om in te loggen
 Authentication.Login.Label.AgedUpUsername,Voeg een unieke @gebruikersnaam toe
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Sorry, er is een probleem opgetreden bij het bereiken van onze servers.
@@ -292,12 +336,18 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Sorry, er is een probleem 
 Wacht even en probeer het opnieuw."
 Authentication.Login.Label.ConnectionError.Title,Verbindingsfout
 Authentication.Login.Label.Email,
+Authentication.Login.Label.EmailAddress,E-mailadressen
 Authentication.Login.Label.EmailNeedsVerification,Je e-mailadres moet worden geverifieerd
 Authentication.Login.Label.EmailOrPhone,E-mailadres of telefoonnummer
+Authentication.Login.Label.EnterCode,
+Authentication.Login.Label.EnterEmail,E-mailadres invoeren
+Authentication.Login.Label.EnterHere,Hier invoeren
 Authentication.Login.Label.EnterOneTimeCode,Unieke code invoeren
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Voer de code in die we zojuist hebben gestuurd naar je email
-Authentication.Login.Label.EnterYourPassword,Voer je wachtwoord in
-Authentication.Login.Label.ForgotYourPassword,Wachtwoord vergeten?
+Authentication.Login.Label.EnterPassword,Voer je wachtwoord in
+Authentication.Login.Label.EnterYourPassword,
+Authentication.Login.Label.ForgotPassword,Wachtwoord vergeten?
+Authentication.Login.Label.ForgotYourPassword,
 Authentication.Login.Label.GetOneTimeCode,Unieke code ontvangen
 Authentication.Login.Label.LearnMore,Meer informatie
 Authentication.Login.Label.LinkAccountWarning,"Je Roblox-account wordt gekoppeld aan je account op {platform}, en de volgende keer dat je meedoet, word je automatisch ingelogd! Je kunt de koppeling op elk moment ongedaan maken via het scherm Instellingen. Er kan een afkoelperiode zijn voordat je kunt koppelen aan een nieuw account."
@@ -305,6 +355,7 @@ Authentication.Login.Label.PasskeyIncompatible,Toegangssleutel niet compatibel
 Authentication.Login.Label.Password,Wachtwoord
 Authentication.Login.Label.Phone,Telefoonnummer
 Authentication.Login.Label.QQUserCancel,Je bent uitgelogd bij QQ. Log in bij QQ.
+Authentication.Login.Label.SelectAnAccount,Selecteer een account
 Authentication.Login.Label.TroubleSigningIn,Problemen bij het aanmelden?
 Authentication.Login.Label.UnverifiedEmailInstructions,"Om in te loggen met je e-mailadres, moet het geverifieerd zijn. Je kunt ook inloggen met je gebruikersnaam."
 Authentication.Login.Label.Username,Gebruikersnaam
@@ -312,6 +363,7 @@ Authentication.Login.Label.UsernameEmailOrPhoneNumber,"Gebruikersnaam, e-mailadr
 Authentication.Login.Label.UsernameEmailPhone,Gebruikersnaam/e-mailadres/telefoonnummer
 Authentication.Login.Label.UsernameOrEmail,Gebruikersnaam of e-mailadres
 Authentication.Login.Label.UsernameOrPhone,Gebruikersnaam of telefoonnummer
+Authentication.Login.Label.VerificationCode,Verificatiecode
 Authentication.Login.Label.WeChatUserCancel,Je bent uitgelogd bij WeChat. Log in bij WeChat.
 Authentication.Login.Label.WeChatVersionNotSupported,De WeChat-versie wordt niet ondersteund
 Authentication.Login.LinkIllegalChildAccountLinking,Dit Roblox-account kon niet worden gekoppeld aan een Xbox-kinderaccount. Probeer een ander account of controleer je instellingen.
@@ -328,6 +380,7 @@ Authentication.Login.Response.InvalidEmail,Ongeldig e-mailadres.
 Authentication.Login.Response.InvalidPasskeyCredential,Aanmelden lukt niet met deze toegangscode. Ga naar 'Wachtwoord of gebruikersnaam vergeten' om weer toegang te krijgen.
 Authentication.Login.Response.MoreThanOneUsername,Je e-mailadres is gekoppeld aan meer dan één gebruikersnaam. Log in met je gebruikersnaam.
 Authentication.Login.Response.NoLoginMethods,Er zijn geen aanmeldingsmethoden beschikbaar voor dit account. Probeer accountherstel of neem contact op met ondersteuning.
+Authentication.Login.Response.PlatformAlreadyLinked,Dit {platform}-account is al gekoppeld aan een ander Roblox-account. Log in met het gekoppelde Roblox-account.
 Authentication.Login.Response.RelinkingFreeze,Dit Roblox-account is in de afgelopen 90 dagen gekoppeld aan een ander account op {platform}. Probeer in te loggen met een ander Roblox-account.
 Authentication.Login.Response.Require2FA,Tweestapsverificatie wordt niet ondersteund op de console. Volg de instructies aan de rechterkant om veilig in te loggen.
 Authentication.Login.Response.Require2FAGeneric,De vereiste aanvullende verificatie wordt niet ondersteund op dit apparaat. Volg de instructies aan de rechterkant om veilig in te loggen.
@@ -367,6 +420,7 @@ Authentication.Passkey.Label.UpsellTitle,Sneller aanmelden met een toegangssleut
 Authentication.Passkey.Label.UpsellToastPageTitle,Succes! De toegangssleutel is aangemaakt
 Authentication.Passkey.Label.UpsellToastTitle,Toegangssleutel is aangemaakt.
 Authentication.ResetPassword.Response.ResetPasswordStarted,Je moet je wachtwoord resetten voordat je verder kunt gaan.
+Authentication.SignUp.Action.ApplyOnNextRespawn,Toepassen bij de volgende respawn
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
 Authentication.SignUp.Action.CreateAPasskey,Een passkey aanmaken
@@ -376,8 +430,10 @@ Authentication.SignUp.Action.EnableFaceId,Face-ID inschakelen
 Authentication.SignUp.Action.ExitModalLeave,Afsluiten
 Authentication.SignUp.Action.IUnderstand,Begrepen
 Authentication.SignUp.Action.NextWord,
+Authentication.SignUp.Action.RespawnNow,Nu respawnen
 Authentication.SignUp.Action.SetupLater,Later instellen
 Authentication.SignUp.Action.StartOver,Opnieuw beginnen
+Authentication.SignUp.Action.StartPlay,Beginnen met spelen
 Authentication.SignUp.Action.UseEmail,
 Authentication.SignUp.Action.UsePhoneNumber,
 Authentication.SignUp.Button.OKCaptialized,
@@ -386,6 +442,7 @@ Authentication.SignUp.Description.AccountAlreadyLinked,Je account op {platformAc
 Authentication.SignUp.Description.AgreeToTermsWithGuardian.NoParameters,"Ik ga akkoord met de Gebruiksvoorwaarden van Roblox (inclusief arbitrage) en erken het Privacybeleid. Als ik jonger ben dan 18, ga ik ermee akkoord dat mijn ouder/voogd mij toestemming geeft om dit account aan te maken en akkoord gaat met de Gebruiksvoorwaarden."
 Authentication.SignUp.Description.BirthdayHelp,Dit helpt ons om te weten welke content we je moeten laten zien. Deze is niet zichtbaar voor anderen.
 Authentication.SignUp.Description.BirthdayHelp3,Dit helpt ons om je relevante content te laten zien en wordt niet gedeeld met anderen.
+Authentication.SignUp.Description.BirthdayHint,Datum invoeren
 Authentication.SignUp.Description.BirthdayValuePropC,Dit helpt ons om te weten welke content we je moeten laten zien. Deze is niet zichtbaar voor anderen
 Authentication.SignUp.Description.ClickNextAgreeToTerms,"Door Volgende te selecteren, ga je akkoord met de Gebruiksvoorwaarden, inclusief de arbitrageclausule, en erken je het Privacybeleid."
 Authentication.SignUp.Description.CreateAPassword,Een wachtwoord aanmaken voor je Roblox-account
@@ -396,7 +453,7 @@ Authentication.SignUp.Description.EnterParentEmail,Voer het e-mailadres van je o
 Authentication.SignUp.Description.FaceIdPromo,Face-ID is de veiligste en eenvoudigste manier om je aan te melden op Roblox.
 Authentication.SignUp.Description.GenderHelp2,Dit helpt ons om een relevante avatar voor je te kiezen.
 Authentication.SignUp.Description.OneMoreStep,Nog één stap
-Authentication.SignUp.Description.Or,OF
+Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,"We vragen om het e-mailadres van je ouder voor accountherstel, onder voorbehoud van het Privacybeleid van Roblox."
 Authentication.SignUp.Description.PasskeyTryAgain,"Sorry, er is iets misgegaan bij het registreren van je toegangssleutel. Probeer je opnieuw aan te melden met een andere gebruikersnaam."
 Authentication.SignUp.Description.RobloxNotAvailableInRegion,Roblox is tijdelijk niet beschikbaar in jouw regio.
@@ -408,10 +465,12 @@ Authentication.SignUp.Description.SignupAgreement.FullCopy.CreateAccount,
 Authentication.SignUp.Description.ThisKeepYourAccountSecure,Dit houdt je Roblox-account veilig.
 Authentication.SignUp.Description.Try,Proberen
 Authentication.SignUp.Description.UnderAgeAlert,Je voldoet niet aan de minimumleeftijdsvereiste om Roblox te spelen.
+Authentication.SignUp.Description.UsernameChanged,"Alles is geregeld! Je account is klaar en gekoppeld aan {platform}. Respawn nu om je bijgewerkte gebruikersnaam in het spel te zien, anders wordt deze de volgende keer toegepast."
 Authentication.SignUp.Description.UsernameHelp,Zo zien mensen je op Roblox. Onthoud je gebruikersnaam om in de toekomst in te loggen.
 Authentication.SignUp.Description.UsernameHelpV2,"Hiermee kun je je aanmelden en ben je zichtbaar voor anderen, dus zorg ervoor dat je het gemakkelijk kunt onthouden."
 Authentication.SignUp.Description.UsernameRule1,Gebruik 3-20 tekens
 Authentication.SignUp.Description.UsernameRule2,"Alleen letters (a-z), cijfers (0-9) en het underscore-teken (_) zijn toegestaan"
+Authentication.SignUp.Description.UsernameUnchanged,Gelukt! Je account is klaar en gekoppeld aan{platform}. Chat met vrienden en speel miljoenen Roblox-spellen.
 Authentication.SignUp.Description.VerificationLinkingText,"Je Roblox-account wordt gekoppeld aan je account op {platform}. Je kunt de koppeling op elk moment ongedaan maken via het scherm Instellingen. Er kan een afkoelperiode zijn voordat je kunt koppelen aan een ander account op {platform}. Door op registreren te klikken, ga je akkoord met de Gebruiksvoorwaarden, inclusief de arbitrageclausule, en erken je het Privacybeleid."
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Je Roblox-account wordt gekoppeld aan je account op {platform}. Je kunt de koppeling op elk moment ongedaan maken via het scherm Instellingen. Er kan een afkoelperiode zijn voordat je kunt koppelen aan een ander account op {platform}. Door op {ctaButton} te klikken, ga je akkoord met de Gebruiksvoorwaarden, inclusief de arbitrageclausule, en erken je het Privacybeleid."
 Authentication.SignUp.Description.VerificationPage,"Door op Registreren te klikken, ga je akkoord met de Gebruiksvoorwaarden, inclusief de arbitrageclausule, en erken je het Privacybeleid."
@@ -422,7 +481,9 @@ Authentication.SignUp.Header.CreatePassword,"Hoi {username}, maak een wachtwoord
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"Hoi {username}, maak een wachtwoord of toegangssleutel aan"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,We hebben je account gemaakt. Kies hoe je je wilt aanmelden.
 Authentication.SignUp.Header.GenderPage6,Nog één ding! Selecteer je gender. (optioneel).
+Authentication.SignUp.Header.OneLastThing,Nog één ding
 Authentication.SignUp.Header.PleaseTryAgain,Probeer het opnieuw
+Authentication.SignUp.Header.SetUpYourRobloxAccount,Je Roblox-account instellen
 Authentication.SignUp.Header.UsernamePage4,Maak vervolgens een gebruikersnaam aan
 Authentication.SignUp.Header.WhatIsYourBirthday,Wanneer ben je jarig?
 Authentication.SignUp.Heading.CannotSignUp,Kan me niet registreren
@@ -446,6 +507,7 @@ Authentication.SignUp.Label.EmailAddress,E-mailadres
 Authentication.SignUp.Label.EnterYourEmail,Voer je e-mailadres in
 Authentication.SignUp.Label.EnterYourParentsEmail,Voer het e-mailadres van je ouder in
 Authentication.SignUp.Label.Error.MinimumAge5,Nieuwe accounts moeten ouder zijn dan vijf jaar
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,Je moet ouder zijn om dit spel te spelen
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,Gebruikersnaam is al in gebruik
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,Gebruikersnaam mag niet beginnen of eindigen met _
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,"Gebruikersnaam mag alleen letters, cijfers en _ bevatten"
@@ -472,7 +534,9 @@ Authentication.SignUp.Label.OptionalGenderShort,Optioneel
 Authentication.SignUp.Label.ParentEmailAddress,E-mailadres van ouder
 Authentication.SignUp.Label.PasswordError1,Is ten minste 8 tekens lang
 Authentication.SignUp.Label.PasswordError2,Is niet hetzelfde als de gebruikersnaam
+Authentication.SignUp.Label.PasswordError2.V2,
 Authentication.SignUp.Label.PasswordError3,Is geen eenvoudig wachtwoord
+Authentication.SignUp.Label.PasswordError3.V2,
 Authentication.SignUp.Label.PasswordErrorLengthNew,Wachtwoord moet tussen de 8 en 200 tekens lang zijn
 Authentication.SignUp.Label.PasswordErrorSimple,Wachtwoord mag niet te eenvoudig zijn
 Authentication.SignUp.Label.PasswordPlaceholder,Ten minste 8 tekens
@@ -499,12 +563,15 @@ Authentication.SignUp.PasswordErrorLength,Is tussen de 8 en 200 tekens lang
 Authentication.SignUp.Response.AgedUpDisplayNameSetFirst,Naam moet eerst worden ingesteld.
 Authentication.SignUp.Response.BirthdayMustBeSetFirst,Verjaardag moet eerst worden ingesteld.
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.ErrorTryAgain2,Er is iets misgegaan. Probeer het nog een keer.
 Authentication.SignUp.Response.InvalidBirthday,Ongeldige verjaardag.
 Authentication.SignUp.Response.InvalidEmail,
 Authentication.SignUp.Response.InvalidPhoneNumber,Ongeldig telefoonnummer.
 Authentication.SignUp.Response.PasswordComplexity,Maak een complexer wachtwoord aan.
 Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Het nummer is al gekoppeld aan een ander account.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Gebruikersnaam moet eerst worden ingesteld.
+Authentication.SignUp.Subtitle.AddYourBirthday,Voeg je verjaardag toe om je Roblox-account te maken.
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,Je voortgang wordt overgenomen wanneer je de instelling voltooit.
 Authentication.SignUp.Title,"Hallo {username}, maak een wachtwoord aan"
 Authentication.TwoStepVerification.Action.Approve,Goedkeuren
 Authentication.TwoStepVerification.Action.ChangePassword,Wachtwoord wijzigen
@@ -567,8 +634,33 @@ Common.Presence.Label.Invisible,Onzichtbaar
 Common.Presence.Label.Offline,Offline
 Common.Presence.Label.Online,Online
 Common.Presence.Label.RobloxStudio,Roblox Studio
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,De animatie is te lang ({duration} seconden). Emote-animaties mogen maximaal {maxLength} seconden duren.
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,De animatie is te kort ({duration} seconden). Emote-animaties moeten langer zijn dan {minLength} seconden.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Schending van de plaatsing van het kooideel in {cageName}: {upperPart} is niet correct geplaatst boven {lowerPart}.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"Kooideel {partName} in {cageName} heeft {actualCount} vertices, terwijl er ongeveer {expectedCount} worden verwacht. Dit kan wijzen op ontbrekende of gedupliceerde geometrie in dat lichaamsgebied."
+Common.UGCValidation.ErrorLabel.AQSFail_CageUV,"De {cage_name} heeft onjuiste UV-waarden die niet overeenkomen met het sjabloon. {incorrect_uv_count} onjuiste UV's ({unreferenced_vertex_count} zonder referentie, {non_template_uv_count} niet-sjabloon, {duplicate_mapping_count} dubbele toewijzingen), {unmatched_template_count} niet-overeenkomende sjabloonvertices. Corrigeer de kooi-UV, zodat deze overeenkomt met het sjabloon."
+Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Je lichaam bevat kleine niet-verbonden mesh-componenten (mesheilanden). Verwijder de zwevende geometrie en zorg ervoor dat alle mesh-onderdelen goed zijn verbonden.
+Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"{partName} heeft {num_disconnected_components} niet-verbonden componenten, wat het maximum van {max_disconnected_components} overschrijdt."
+Common.UGCValidation.ErrorLabel.AQSInternalError,"De validatie kan niet worden voltooid vanwege een interne fout. Controleer of de invoergegevens correct zijn en probeer het opnieuw, of dien een bugrapport in."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,"De buitenste kooi volgt de weergavemesh niet nauwkeurig. De maximale afstand tussen de buitenste kooi en de mesh is {max_distance}, en {negative_sdf_percent}% van de hoekpunten van de buitenste kooi bevinden zich binnen de weergavemesh."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,"De lichaamskooi volgt de lichaamsmesh niet nauwkeurig. De maximale afstand tussen de lichaamskooi en de mesh is {max_distance}, en {negative_sdf_percent}% van de hoekpunten van de lichaamskooi bevinden zich binnen de lichaamsmesh."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"De hoofdkooi volgt de hoofdmesh niet nauwkeurig. De maximale afstand tussen de hoofdkooi en de mesh is {max_distance}, en {negative_sdf_percent}% van de hoekpunten van de hoofdkooi bevinden zich binnen de hoofdmesh."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,"{irrelevant_percent}% van de gewijzigde hoekpunten van de buitenste kooi bedekken het accessoire niet. Pas de kooi aan, zodat deze beter past bij de vorm van het accessoire."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"De {cage_name} heeft onjuiste UV-waarden. {incorrect_uv_count} onjuiste UV's ({unreferenced_vertex_count} zonder referentie, {non_template_uv_count} niet-sjabloon, {duplicate_mapping_count} dubbele toewijzingen), {unmatched_template_count} niet-overeenkomende sjabloonvertices."
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} heeft {degenerate_triangle_percent}% onjuiste driehoeken.
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Het Dynamische hoofd heeft problemen met de kwaliteit van de uitdrukkingen. Linkeroog gesloten: {left_eye_close}, rechteroog gesloten: {right_eye_close}, mond open: {mouth_open}, blij: {is_happy}, verdrietig: {is_sad}."
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Onverwachte gewricht-configuratie. Totaal aantal gewrichten: {joint_number}, gewrichten linkerhand: {left_hand_joint_number}, gewrichten rechterhand: {right_hand_joint_number}."
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName} heeft {num_small_volume_islands} kleine niet-verbonden mesheilanden van de {num_disconnected_components} componenten in totaal. Verwijder de zwevende geometrie.
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"{partName} heeft een niet-manifoldgeometrie. Controleer op niet-vlakke vlakken, zelfsnijdende oppervlakken of randen die door meer dan twee vlakken worden gedeeld."
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,{partName}-mesh is niet waterdicht ({boundary_edges_percent}% grensranden).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,{mesh_outside_outer_cage_percent}% van de mesh-hoekpunten bevinden zich buiten de buitenste kooi. Pas de buitenste kooi aan zodat deze de weergavemesh volledig omsluit.
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,De validatiegegevens voor {measureName} kon niet worden berekend omdat de invoergegevens onvolledig of ongeldig waren. Dit blokkeert je upload niet.
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,Textuur {textureName} heeft een lage complexiteit. De textuur heeft mogelijk onvoldoende detail of variatie.
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Textuur {textureName} heeft een lage resolutie van {texture_width}x{texture_height}. Overweeg om een textuur met een hogere resolutie te gebruiken.
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Assetkwaliteit: {partName} heeft {intersecting_tri_face_percent}% kruisende driehoekige faces (score: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName} heeft {uv_outside_bound_vert_percent}% UV-hoekpunten buiten de grenzen [0,1]."
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Assetkwaliteit: {partName} heeft {similar_vertex_percent}% vergelijkbare hoekpunten (score: {score}).
+Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,Accessoirebevestiging '{AttachmentName}' in '{PartName}' moet dicht bij het oppervlak van het mesh worden geplaatst. De huidige positie [{CurrentPosition}] bevindt zich buiten het geldige gebied. Verplaats het dichter bij [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Handle is geskinned naar joint{jointName}, die geen deel uitmaakt van het toegestane schema. Alleen standaard R15-joints en skinning-overdrachtsjoints zijn toegestaan."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} moet skinning-overdracht gebruiken, maar je mist de vereiste joint {requiredJointName}."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"Handle is geskinned naar joint {jointName}, maar dit item moet automatisch geskinned zijn. Je mag alleen skinnen naar {validJointNameList}."
@@ -576,19 +668,24 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_RequiredSkinningTransfer,"{ass
 Common.UGCValidation.ErrorLabel.AccessorySkinning_RigidIsSkinned,Het stijve accessoire heeft skinning-gegevens die niet worden ondersteund. Zorg ervoor dat botten niet met de mesh worden geïmporteerd
 Common.UGCValidation.ErrorLabel.AccessorySkinning_TransferJointWithoutAutoSkin,"Handle bevat joint {jointName}, wat alleen is toegestaan wanneer WrapLayer.AutoSkin is ingesteld op EnabledOverride."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,Hoekpunten die zijn geskinned naar overdrachtsjoints moeten volledig gewogen zijn.
+Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,De animatiebundel bevat een dubbele animatie-ID '{animationId}' die door meerdere clips wordt gebruikt: {instancePaths}. Elke animatieclip moet naar een uniek animatie-item verwijzen.
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,In de animatiepakketbundel ontbreekt (ontbreken) het (de) verwachte animatietype(s): {missingAnimationTypes}. Elk animatietype moet één R15Anim-map hebben die precies de verwachte StringValue-child-items bevat.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"Animatie '{animationName}' heeft een gewichtswaarde van {weight}, maar het gewicht moet groter zijn dan 0. Corrigeer de animatie."
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Kan vereiste {ExpectedClass} met de naam {ExpectedName} niet vinden in {ParentPath}
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,De volgende instanties maken geen deel uit van het goedgekeurde schema en moeten worden verwijderd: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"Geüpload item moet een {ExpectedClass} zijn, maar is een {RootClass}."
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"Geüpload item moet de naam {ExpectedClass} hebben, maar heeft in plaats daarvan de naam {RootClass}."
+Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}. {FieldName} bevat nog steeds niet-opgeslagen bewerkbare content. Sla deze op als een asset voordat je publiceert en probeer het opnieuw.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,Lichaamsdeel '{bodyPartName}' in CurveAnimation heeft een Positie-track (translatie). Lichaamsdelen in animatie mogen alleen worden geroteerd; positie-tracks zijn niet toegestaan. Verwijder de Positie-track van dit lichaamsdeel.
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,Lichaamsdeel '{bodyPartName}' in CurveAnimation beweegt {distance} studs vanaf de startpositie. De maximaal toegestane translatie is {maxDistance} studs. Verminder de positieverplaatsing van het lichaamsdeel.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation bevat HRD/DRD-botten en lichaamsdeel '{bodyPartName}' heeft een Position-track (translatie). Wanneer er botten aanwezig zijn in de animatie, mogen er geen lichaamsdelen translateren om joint-scheiding te voorkomen. Verwijder alle Positie-tracks van lichaamsdelen."
 Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,Bot {boneName} in CurveAnimation heeft een positie-track (translatie). HRD/DRD-botten mogen alleen worden geroteerd; positie-tracks veroorzaken joint-scheiding en zijn niet toegestaan. Verwijder de positie-animatie van dit bot.
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,Bot '{boneName}' in CurveAnimation beweegt {distance} studs vanaf de startpositie. De maximaal toegestane translatie is {maxDistance} studs. Verminder de positieverplaatsing van het bot.
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation bevat HRD/DRD-botmappen die nog niet worden ondersteund. Verwijder alle botsubmappen voordat je gaat uploaden.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,Lichaamsdelen in een CurveAnimation mogen niet lager zijn dan {minHeight} studs of meer dan {maxDistance} studs van het HumanoidRootPart verwijderd zijn. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation-child-MarkerCurves en AnimationRigData mogen geen child-items hebben
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"De CurveAnimation-hiërarchie bevat Scripts, LocalScripts of ModuleScripts. Verwijder ze."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,CurveAnimation bevat een dubbele lichaamsdeelmap '{bodyPartName}' op '{instancePath}'. Elk lichaamsdeel mag maximaal één keer voorkomen in de animatiehiërarchie.
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,Het laden van CurveAnimation-gegevens is mislukt. Het animatie-asset is mogelijk ongeldig of ontoegankelijk.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation bevat de lichaamsdeelmap {folderName} met een ongeldige hiërarchie (deze heeft child-items die niet zijn toegestaan of onjuist zijn ingesteld)
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"Map '{boneName}' in CurveAnimation is geen herkende HRD/DRD-botnaam. Submappen van animaties moeten geldige R15-lichaamsdelen of herkende botnamen zijn (bijv. HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase of vingerbotten zoals LeftHandIndex1)."
@@ -616,6 +713,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation beva
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,In CurveAnimation op tijd {time} seconden beweegt lichaamsdeel {bodyPart} met een rotatiesnelheid van {speed} graden/seconde. {maxSpeed} is de maximale snelheid in graden/seconde. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,In CurveAnimation op tijd {time} seconden beweegt lichaamsdeel {bodyPart} met een snelheid van {speed} studs/seconde. {maxSpeed} is de maximale snelheid in studs/seconde. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,Lichaamsdeel {bodyPart} in CurveAnimation beweegt meer dan {maxMovement} studs tussen frames. Corrigeer de animatie.
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,De CurveAnimation-structuur is ongeldig: {detail}. Zorg ervoor dat de animatie het verwachte schema volgt.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation heeft {count} descendants. Het maximaal toegestane aantal is {maxAllowed}. Verminder het aantal descendants.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation bevat Curves met te veel sleutels. {maxAllowed} is het maximum per Curve. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation bevat meer dan {maxAllowed} MarkerCurve(s). Zorg ervoor dat er niet meer dan {maxAllowed} MarkerCurve-descendant(s) zijn.
@@ -629,6 +727,16 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Kan de uitdrukking voor 
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Dynamische hoofden op de marktplaats moeten geanimeerd zijn, maar dit hoofd heeft geen FACS-gegevens."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Kan de uitdrukking voor het sluiten van het rechteroog van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor het rechteroog aan zodat ze overeenkomen met de positie van het rechteroog op het hoofd en zorg dat het oog kan worden gesloten.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Kan de fronsuitdrukking van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor de mond aan zodat ze overeenkomen met de positie van de mond op het hoofd en zorg dat de fronsuitdrukking kan worden getoond.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Emissief gebied boven de drempel.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} straalt te veel. Het stralende gebied × de intensiteit overschrijdt de limiet (momenteel {emissivePercentage}%, moet {maxEmissivePercentage}% of minder zijn). Verklein het stralende gebied of verlaag de EmissiveStrength."
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Emissief gebied overschreden.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} straalt te veel. Het stralende gebied × de intensiteit overschrijdt de limiet (momenteel {emissiveArea}, moet {maxEmissiveArea} of minder zijn). Verklein het stralende gebied of verlaag de EmissiveStrength."
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Dit item maakt gebruik van emissieve maps die alleen beschikbaar zijn voor makers in het Trusted Creator-programma. Verwijder alle inhoud van emissieve maps of word lid van het programma voordat je gaat uploaden.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Er ontbreekt een geldige maximale translatiewaarde van het onderdeel in de gepubliceerde animatie. Publiceer de animatie opnieuw.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Er ontbreekt een geldige UGC-emotemarker in de gepubliceerde animatie. Publiceer de animatie opnieuw.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,De maximale translatie van het onderdeel kon niet worden berekend op basis van de gepubliceerde animatiegegevens. Publiceer de animatie opnieuw.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"De gepubliceerde animatie geeft een maximale translatie van het onderdeel van {taggedTranslation} studs aan, maar de animatiegegevens berekenen {calculatedTranslation} studs. Publiceer de animatie opnieuw."
+Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Het hoofd moet boven UpperTorso worden geplaatst. Het middelpunt van het hoofd bevindt zich onder de bovenkant van de romp, wat aangeeft dat de hoofdmesh is ingeklapt of verkeerd is geplaatst."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,De eigenschap InternalOverrideFACSData op FaceControls moet leeg zijn bij het uploaden.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Er is gedetecteerd dat FACS je hoofd vergroot tot {modPercent}%, maar het wijzigen van het hoofd is in strijd met het marktplaatsbeleid voor gezichtsanimaties."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Er is gedetecteerd dat FACS je hoofd verkleint tot {modPercent}%, maar het wijzigen van het hoofd is in strijd met het marktplaatsbeleid voor gezichtsanimaties."
@@ -675,7 +783,10 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,{partName} -mesh {axis} 
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,{partName}-mesh {axis} asgrootte  van '{currentSize}'-studs is kleiner dan de minimaal toegestane individuele onderdeelgrootte van '{minSize}'-studs. Vergroot de mesh.
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Bijlage {attName} moet precies één keer bestaan binnen {partName}-descendants.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (of de descendants ervan) bevatten attributen. Je moet attributen verwijderen uit het volgende: {InstanceNameList}
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' heeft ongeldige eigenschappen: {ProblematicProperties}. Een weergegeven bytelimiet is overschreden (een limiet van 0 betekent dat de eigenschap leeg moet zijn); elke andere eigenschap bevat NaN/Inf-waarden of overschrijdt de standaardafmetingslimiet.
+Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,Rig-bevestiging '{AttachmentName}' in '{PartName}' moet worden geplaatst nabij de gewrichtsgrens waar dit lichaamsdeel verbonden is met een aangrenzend deel. De huidige positie [{CurrentPosition}] bevindt zich te ver van het verbindingsvlak. Verplaats het dichter bij [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Om een asset naar Roblox te uploaden, moet je precies 1 instantie en het bijbehorende uploadtype selecteren."
+Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,Dit asset is te groot om te uploaden ({sizeBytes} bytes overschrijdt het maximum van {maxSizeBytes} bytes). Verklein deze en probeer het opnieuw.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Het mesh-onderdeel van het hoofd heeft gezichtsanimaties voor {jointName}, die niet in FACS kunnen worden gebruikt. Geef deze joint een andere naam en importeer je hoofd opnieuw."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Lichaamsdeel {partName} is geskinned naar virtuele joint {jointName}, die geen deel uitmaakt van het R15plus-schema."
 Common.VerifiedParentalConsent.Action.Cancel,
@@ -753,11 +864,17 @@ CommonUI.Controls.Label.Wednesday,Woensdag
 CommonUI.Controls.Label.WednesdayAbbreviated,Wo
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,Geen resultaten gevonden
+CommonUI.Features.Action.ClassicThemeSunsetGetPlus,Plus nemen
+CommonUI.Features.Action.ClassicThemeSunsetManage,
+CommonUI.Features.Action.ClassicUnlockGetTheme,Thema downloaden
+CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,
 CommonUI.Features.Action.LessLowercase,minder
 CommonUI.Features.Action.MoreLowercase,meer
 CommonUI.Features.Action.Send,Sturen
+CommonUI.Features.Heading.ClassicThemeSunset,Bedankt voor het vieren van 20 jaar Roblox
+CommonUI.Features.Heading.ClassicUnlock,Vier 20 jaar Roblox
 CommonUI.Features.Heading.GameDetails,Ervaringsdetails
 CommonUI.Features.Label.About,Over
 CommonUI.Features.Label.AboutUs,Over ons
@@ -776,7 +893,12 @@ CommonUI.Features.Label.Catalog,Roblox-catalogus
 CommonUI.Features.Label.ChannelWithChannelName,Kanaal: {channelName}
 CommonUI.Features.Label.Charts,Toplijsten
 CommonUI.Features.Label.Chat,Chat
+CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,Roblox Plus-leden behouden het klassieke thema. Alleen het jubileumpictogram van de app verdwijnt.
+CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,Met je Roblox Plus-lidmaatschap behoud je het klassieke thema. Alleen het jubileumpictogram van de app verdwijnt.
+CommonUI.Features.Label.ClassicUnlockDescription,Geniet tijdelijk van de klassieke look
+CommonUI.Features.Label.ClassicUnlockManagementSnackbar,Klassiek thema beheren in instellingen
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-versie: {clientCoreScriptVersion}
+CommonUI.Features.Label.Connect,Vrienden
 CommonUI.Features.Label.Connection,Connectie
 CommonUI.Features.Label.Connections,Connecties
 CommonUI.Features.Label.ControllerBar.HoldPrefix,Ingedrukt houden
@@ -787,7 +909,7 @@ CommonUI.Features.Label.CreationCenter,Creatiecentrum
 CommonUI.Features.Label.DevSubs,Abonnementen
 CommonUI.Features.Label.Discover,Ontdekken
 CommonUI.Features.Label.ForYou,Voor jou
-CommonUI.Features.Label.Friends,Vrienden
+CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,Ervaringen
 CommonUI.Features.Label.Games,Spelletjes
 CommonUI.Features.Label.GiftCards,Cadeaubonnen kopen
@@ -807,6 +929,7 @@ CommonUI.Features.Label.Messages,Berichten
 CommonUI.Features.Label.Moments,Momenten
 CommonUI.Features.Label.More,Meer
 CommonUI.Features.Label.MoreEvents,Binnenkort meer evenementen!
+CommonUI.Features.Label.Newsroom,Nieuws
 CommonUI.Features.Label.OfficialStore,Officiële winkel
 CommonUI.Features.Label.Parents,Ouders
 CommonUI.Features.Label.Players,Personen
@@ -817,7 +940,9 @@ CommonUI.Features.Label.PrivacyPolicy,
 CommonUI.Features.Label.Profile,Profiel
 CommonUI.Features.Label.RM,
 CommonUI.Features.Label.Redeem,Codes verzilveren
+CommonUI.Features.Label.RemoveConnection,Vriend verwijderen
 CommonUI.Features.Label.ReportLogs,Meldingslogboeken
+CommonUI.Features.Label.ReportLogsSentenceCase,
 CommonUI.Features.Label.Settings,
 CommonUI.Features.Label.Startup,Opstarten
 CommonUI.Features.Label.SupportCenter,Ondersteuningsgeschiedenis van de ervaring
@@ -901,7 +1026,11 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,Ik ga akkoord met alle 
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"Door hieronder op de knop Akkoord te klikken, wijzig je je land naar Vietnam, stap je over op de app Roblox – VNG en kun je dit niet ongedaan maken. Op je gebruik van de app Roblox – VNG zijn de volgende voorwaarden van toepassing. Deze komen in de plaats van alle eerdere voorwaarden van Roblox Corporation. Lees de volgende voorwaarden en stem ermee in:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Bijgewerkte overeenkomst
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,Er is een probleem opgetreden bij het accepteren van de gebruiksvoorwaarden. Probeer het opnieuw.
-CommonUI.UserAgreements.Popup.KISAMessage,Lees de volgende voorwaarden en ga ermee akkoord. Je kunt ervoor kiezen om akkoord of niet akkoord te gaan met individuele voorwaarden. Je kunt Roblox nog steeds gebruiken als je niet akkoord gaat met de optionele voorwaarden.
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,
+CommonUI.UserAgreements.Popup.KISAConsent.Message,Lees de volgende voorwaarden en ga ermee akkoord. Je kunt ervoor kiezen om akkoord of niet akkoord te gaan met individuele voorwaarden. Je kunt Roblox nog steeds gebruiken als je niet akkoord gaat met de optionele voorwaarden.
+CommonUI.UserAgreements.Popup.KISAConsent.Title,
+CommonUI.UserAgreements.Popup.KISAMessage,
 CommonUI.UserAgreements.Popup.Message,Selecteer 'Ik ga akkoord' om akkoord te gaan met onze hieronder vermelde bijgewerkte voorwaarden en Roblox te blijven gebruiken. Ben je minderjarig? Laat dit dan aan je ouder of voogd zien. De volgende documenten zijn gewijzigd:
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"Optioneel: ik wil me ook aanmelden voor e-mails van Roblox over de nieuwste releases, tijdelijke aanbiedingen en meer."
 CommonUI.UserAgreements.Popup.SignupMessage,"Door op Akkoord gaan te klikken, ga je akkoord met de Gebruiksvoorwaarden en bevestig je dat je kennis hebt genomen van het Privacybeleid."
@@ -1067,7 +1196,9 @@ Feature.Accessibility.Action.ScrollDown,Omlaag scrollen
 Feature.Accessibility.Action.ScrollUp,Omhoog scrollen
 Feature.Accessibility.AppTheme.CategoryCalm,Kalm
 Feature.Accessibility.AppTheme.CategoryDynamic,Dynamisch
+Feature.Accessibility.AppTheme.CategorySpecial,Speciaal
 Feature.Accessibility.AppTheme.CircuitRush,Circuitrace
+Feature.Accessibility.AppTheme.Classic,Klassiek
 Feature.Accessibility.AppTheme.CosmicDust,Kosmisch stof
 Feature.Accessibility.AppTheme.Default,
 Feature.Accessibility.AppTheme.ElectricLime,Electrisch groen
@@ -1084,6 +1215,7 @@ Feature.Accessibility.AppTheme.StarBurst,Sterrenexplosie
 Feature.Accessibility.AppTheme.SuperCharge,Volle kracht
 Feature.Accessibility.Description.AppThemeMode,Selecteer een app-modus. Dit heeft geen invloed op je andere apparaten.
 Feature.Accessibility.Description.DeviceAppTheme,Selecteer een app-thema. Dit wordt weergegeven op alle apparaattypes.
+Feature.Accessibility.Description.DeviceAppThemeExclusive,Ontdek exclusieve Plus-thema's om je ervaring aan te passen. Probeer ze nu en abonneer je om je selectie op te slaan.
 Feature.Accessibility.Description.Haptics,Regel de algehele trilling van de Roblox-app
 Feature.Accessibility.Description.LaunchAtStartup,Roblox automatisch starten wanneer ik mijn computer start
 Feature.Accessibility.Description.MinimizeToTray,"Als je het venster sluit, wordt Roblox naar het systeemvak verplaatst in plaats van volledig afgesloten te worden"
@@ -1100,6 +1232,9 @@ Feature.Accessibility.Header.Haptics,Haptiek
 Feature.Accessibility.Header.ShowInMenuBar,Weergeven in menubalk
 Feature.Accessibility.Heading.AppThemeMode,Modus
 Feature.Accessibility.Heading.DeviceAppTheme,App-thema
+Feature.Accessibility.Heading.DevicePreferences,Apparaatvoorkeuren
+Feature.Accessibility.Heading.DevicePreferencesV2,
+Feature.Accessibility.Heading.ExclusiveThemes,Exclusieve thema's
 Feature.Accessibility.Heading.LaunchAtLogin,Starten bij inloggen
 Feature.Accessibility.Heading.LaunchAtStartup,Starten bij opstarten
 Feature.Accessibility.Heading.MinimizeToTray,Minimaliseren naar systeemvak bij sluiten
@@ -1253,6 +1388,7 @@ Feature.AccountSettings.Message.Error.InvalidXUrl,De handle X is ongeldig.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,De YouTube-URL is ongeldig.
 Feature.AddFriends.Action.FriendAdded,Vriend toegevoegd
 Feature.AddFriends.Action.IgnoreAll,Alles negeren
+Feature.AddFriends.Action.IgnoreAllAltCase,
 Feature.AddFriends.Action.IgnoreConnectionRequest,Connectieverzoek negeren
 Feature.AddFriends.Action.IgnoreFriendRequest,Vriendschapsverzoek negeren
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Vertrouwde vriendschapsverzoek negeren
@@ -1275,6 +1411,7 @@ Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.MyQRTile,Mijn QR
 Feature.AddFriends.Label.MyQrCode,Mijn QR-code
 Feature.AddFriends.Label.QRCodeTitle,QR-code
+Feature.AddFriends.Label.SchoolTile,Klasgenoten
 Feature.AddFriends.Label.SearchForFriendsPrompt,
 Feature.AddFriends.Label.ShareQRCodeAddConnection,"Deel je QR-code om personen die je kent, toe te voegen"
 Feature.AddFriends.Label.SyncContactsInvitePeople,Synchroniseer contactpersonen om vrienden te vinden en uit te nodigen!
@@ -1314,6 +1451,7 @@ Feature.AppealsPortal.Description.AppealDenied.Multiple,We hebben je bezwaar voo
 Feature.AppealsPortal.Description.AppealDenied.None,We hebben je bezwaar zorgvuldig beoordeeld en we zijn nog steeds van mening dat je activiteit de regels overtreedt die in onze Communityrichtlijnen worden uitgelegd. We begrijpen dat deze beslissing teleurstellend kan zijn en waarderen de tijd die je hebt genomen om een bezwaar in te dienen.
 Feature.AppealsPortal.Description.AppealDenied.Singular,We hebben je bezwaar voor {singleViolation} zorgvuldig beoordeeld en we zijn nog steeds van mening dat je activiteit de regels overtreedt die in onze Communityrichtlijnen worden uitgelegd. We begrijpen dat deze beslissing teleurstellend kan zijn en waarderen de tijd die je hebt genomen om een bezwaar in te dienen.
 Feature.AppealsPortal.Description.AppealDenied.V2,We hebben je bezwaar voor {violations} zorgvuldig beoordeeld en we zijn nog steeds van mening dat je activiteit de regels overtreedt die in onze Communityrichtlijnen worden uitgelegd. Bedankt voor het indienen van een bezwaar.
+Feature.AppealsPortal.Description.AppealDisclosures,{link}Bezwaarrichtlijnen en toelichtingen bekijken{linkEnd}
 Feature.AppealsPortal.Description.AppealIneligible,Je komt niet langer in aanmerking om een bezwaar te dienen tegen deze beslissing. Verifieer je identiteit en probeer het opnieuw.
 Feature.AppealsPortal.Description.AppealReceived,"We laten je binnenkort weten wat de beslissing is. We verwachten een reactie binnen 5 werkdagen, afhankelijk van de complexiteit van het probleem. Bedankt voor het indienen van een bezwaar."
 Feature.AppealsPortal.Description.AppealReceived.Plural,"We laten je binnenkort weten wat de beslissing is. We verwachten een reactie binnen {number} werkdagen, afhankelijk van de complexiteit van het probleem. Bedankt voor het indienen van een bezwaar."
@@ -1374,6 +1512,7 @@ Feature.AppealsPortal.Label.ChatEvidenceId,ID van chatbewijs
 Feature.AppealsPortal.Label.Cheating,Bedriegen
 Feature.AppealsPortal.Label.ContentMaturity,Indiening vragenlijst contentclassificatie
 Feature.AppealsPortal.Label.DecisionCategory,Tegen wat voor beslissing wil je bezwaar maken?
+Feature.AppealsPortal.Label.DisplayName,Schermnaam
 Feature.AppealsPortal.Label.DropdownPlaceholder,Selecteer er één
 Feature.AppealsPortal.Label.EmailConfirmation,Je e-mailadres bevestigen
 Feature.AppealsPortal.Label.EmailInput,Je e-mailadres
@@ -1397,6 +1536,7 @@ Feature.AppealsPortal.Label.LookName,Naam van gedeelde avatar
 Feature.AppealsPortal.Label.PlaceIDPrompt,Wat is de ID van de plaats?
 Feature.AppealsPortal.Label.PlaceId,Plaats-ID
 Feature.AppealsPortal.Label.PlaceName,Plaatsnaam
+Feature.AppealsPortal.Label.ProfileDescription,Profielbeschrijving
 Feature.AppealsPortal.Label.Reason,Reden
 Feature.AppealsPortal.Label.ReportAndAppeals,
 Feature.AppealsPortal.Label.Type.Asset,Asset
@@ -1417,7 +1557,9 @@ Feature.AppealsPortal.Label.Type.LookText,Naam en beschrijving van gedeelde avat
 Feature.AppealsPortal.Label.Type.Mesh,Mesh
 Feature.AppealsPortal.Label.Type.Model,Model
 Feature.AppealsPortal.Label.Type.Plugin,Plug-in
+Feature.AppealsPortal.Label.Type.Post,Bericht
 Feature.AppealsPortal.Label.Type.Screenshot,Schermafbeelding
+Feature.AppealsPortal.Label.Type.UserProfile,Gebruikersprofiel
 Feature.AppealsPortal.Label.Type.Video,Video
 Feature.AppealsPortal.Label.Type.Voice,Spraakchat
 Feature.AppealsPortal.Label.TypeBrokeRules.Generic,Je gedrag heeft de regels overtreden
@@ -1445,6 +1587,7 @@ Feature.AppealsPortal.Label.TypeLower.Mesh,mesh
 Feature.AppealsPortal.Label.TypeLower.Model,model
 Feature.AppealsPortal.Label.TypeLower.PlaceId,plaats-ID
 Feature.AppealsPortal.Label.TypeLower.Plugin,plug-in
+Feature.AppealsPortal.Label.TypeLower.Post,bericht
 Feature.AppealsPortal.Label.TypeLower.Screenshot,schermafbeelding
 Feature.AppealsPortal.Label.TypeLower.UserProfile,gebruikersprofiel
 Feature.AppealsPortal.Label.TypeLower.Video,video
@@ -1479,9 +1622,13 @@ Feature.Avatar.Action.CancelSelection,Selectie annuleren
 Feature.Avatar.Action.Clear,Wissen
 Feature.Avatar.Action.ComposerPost,Posten
 Feature.Avatar.Action.ComposerPreviewAndPost,Voorbeeld bekijken en posten
+Feature.Avatar.Action.CreateSet,
+Feature.Avatar.Action.CreateSetFirstRun,Set maken
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Standaardweergave
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteAvatars,Avatars verwijderen
+Feature.Avatar.Action.DeleteSet,Set verwijderen
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,Profielfoto bewerken
 Feature.Avatar.Action.GoBack,Vorige
@@ -1497,8 +1644,11 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,Niet nu
 Feature.Avatar.Action.Pan,Pan
 Feature.Avatar.Action.Posting,Bezig met posten
+Feature.Avatar.Action.Remove,
 Feature.Avatar.Action.RemoveAll,Alles verwijderen
+Feature.Avatar.Action.RemoveFromSet,Verwijderen uit set
 Feature.Avatar.Action.Rename,Hernoemen
+Feature.Avatar.Action.RenameSet,Set hernoemen
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Laatst opgeslagen avatar herstellen
 Feature.Avatar.Action.Revert,Terugzetten
@@ -1527,6 +1677,58 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Bestaande look bijwerken
 Feature.Avatar.Action.UpdateMakeupLook,Look bijwerken
 Feature.Avatar.Action.Zoom,Inzoomen
 Feature.Avatar.AvatarWidgetTitle,Stijlen ontdekken
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,Publiceren
+Feature.Avatar.BackgroundGeneration.Action.Upload,Uploaden
+Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Action.ViewExclusiveBackgrounds,
+Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Achtergronden maken met Plus.
+Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,"Je achtergrond is nog niet gepubliceerd. Als je nu stopt, gaat die verloren."
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Je creatie is klaar voor gebruik.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Deze achtergrond is gegenereerd met AI. Door te publiceren, bevestig je dat die voldoet aan de Communityrichtlijnen van Roblox en geen content gebruikt waarvoor je geen rechten hebt. De achtergrond wordt beoordeeld voordat die in je inventaris wordt weergegeven, en gepubliceerde items kunnen niet worden bewerkt."
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Deze achtergrond is gegenereerd met AI. Door te uploaden, bevestig je dat die voldoet aan de Communityrichtlijnen van Roblox en geen content gebruikt waarvoor je geen rechten hebt. De achtergrond wordt beoordeeld voordat die in je inventaris wordt weergegeven. Geüploade items kunnen niet worden bewerkt."
+Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Ontgrendel gratis exclusieve achtergronden met Plus.
+Feature.Avatar.BackgroundGeneration.Description.ViewExclusiveBackgrounds,Bekijk je gratis exclusieve Plus-achtergronden.
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Het item voldeed niet aan de Communityrichtlijnen
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,Je hebt je gebruikslimiet bereikt. Probeer het later opnieuw om verder te gaan met aanpassen.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,Je hebt je gebruikslimiet bereikt. Probeer het morgen opnieuw om verder te gaan met aanpassen.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,Je hebt je gebruikslimiet bereikt. Probeer het over 1 uur opnieuw om verder te gaan met aanpassen.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Je hebt je gebruikslimiet bereikt. Probeer het over 1 minuut opnieuw om verder te gaan met aanpassen.
+Feature.Avatar.BackgroundGeneration.Error.Moderation,Die prompt voldoet niet aan onze richtlijnen. Probeer iets anders te beschrijven.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Deze achtergrond voldoet niet aan de Communityrichtlijnen van Roblox, dus die is niet toegevoegd aan je inventaris. Probeer een nieuwe te genereren."
+Feature.Avatar.BackgroundGeneration.Error.System,Er is iets misgegaan bij het genereren van je achtergrond. Probeer het opnieuw.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,Je hebt je limiet voor het aantal publicaties in totaal bereikt.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,Je hebt je limiet voor het aantal publicaties per dag bereikt. Probeer het morgen nog een keer.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,Je hebt je limiet voor het aantal publicaties per uur bereikt. Probeer het over een uur opnieuw.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,Je hebt je limiet voor het aantal publicaties per maand bereikt. Probeer het volgende maand opnieuw.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,Beschrijving
+Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exclusief met Plus
+Feature.Avatar.BackgroundGeneration.Label.Name,Naam
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,vandaag
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,dit uur
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,deze maand
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,Nog {count} achtergronden
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,Nog {count} achtergrond
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,dagen
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,uur
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,minuten
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Wordt gereset over
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Beschrijf je achtergrond...
+Feature.Avatar.BackgroundGeneration.Status.Generating,Je achtergrond wordt gegenereerd...
+Feature.Avatar.BackgroundGeneration.Status.Preparing,Je achtergrond wordt voorbereid...
+Feature.Avatar.BackgroundGeneration.Title,Achtergrond maken
+Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,Afsluiten zonder te publiceren?
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publiceren in inventaris
+Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
+Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,Uploaden naar inventaris
+Feature.Avatar.BackgroundGeneration.Tooltip.CreateBackground,Maak gratis achtergronden met Plus!
+Feature.Avatar.BackgroundGeneration.Tooltip.PublishBackground,Publiceren in je inventaris
 Feature.Avatar.Backgrounds.Title,Achtergronden
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Aanpassen is niet beschikbaar voor deze lichaamsstijl.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Standaard instellen op originele lichaamskleuren
@@ -1534,6 +1736,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,Huidskleur
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,Creëer je eigen unieke look met eindeloze make-upcombinaties.
 Feature.Avatar.EmoteAlreadyAssigned,Deze emote is al toegewezen aan een slot
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,Laat je inspireren
@@ -1563,6 +1766,10 @@ Feature.Avatar.Heading.Outfits,Outfits
 Feature.Avatar.Heading.RenameCharacter,Personage hernoemen
 Feature.Avatar.Heading.SaveCostume,Personage opslaan
 Feature.Avatar.Heading.SelectToUpdate,Selecteren om bij te werken
+Feature.Avatar.Heading.SetLimitReached,Limiet voor aantal sets bereikt
+Feature.Avatar.Heading.SetNameDuplicate,Naam dupliceren
+Feature.Avatar.Heading.SetNameNotAllowed,Naam niet toegestaan
+Feature.Avatar.Heading.SetUpdateFailed,Kan set niet bijwerken
 Feature.Avatar.Heading.SharePublicAvatar,Deel je avatar
 Feature.Avatar.Heading.SortBy,Sorteren op
 Feature.Avatar.Heading.UsedName,Gebruikte naam
@@ -1587,6 +1794,7 @@ Feature.Avatar.Label.Add,Toevoegen
 Feature.Avatar.Label.AddEdit,Toevoegen/bewerken
 Feature.Avatar.Label.AddManage,Toevoegen/beheren
 Feature.Avatar.Label.AddManage2,
+Feature.Avatar.Label.AllAvatarSets,Alle
 Feature.Avatar.Label.AllFolders,
 Feature.Avatar.Label.AllHeads,Alle hoofden
 Feature.Avatar.Label.AnimationFullSet,Volledige set
@@ -1628,11 +1836,13 @@ Feature.Avatar.Label.ClassicTShirts,Klassieke T-shirts
 Feature.Avatar.Label.ClearByCategory,{category} wissen
 Feature.Avatar.Label.Climb,Klimmen
 Feature.Avatar.Label.ClimbAnimations,Klimanimaties
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Naam mag alleen letters, cijfers en spaties bevatten"
 Feature.Avatar.Label.CountSelected,{itemCount} geselecteerd
 Feature.Avatar.Label.Creations,Creaties
 Feature.Avatar.Label.CurrentlyWearing,Momenteel gedragen
 Feature.Avatar.Label.DefaultBody,Standaardlichaam
+Feature.Avatar.Label.DeleteSetBody,"Als je deze set verwijdert, worden de outfits erin niet verwijderd."
 Feature.Avatar.Label.Details,Details ({quantity})
 Feature.Avatar.Label.DetailsButton,Gegevens
 Feature.Avatar.Label.DressesAndSkirts,Jurken en rokken
@@ -1655,6 +1865,7 @@ Feature.Avatar.Label.FullBody,Volledig lichaam
 Feature.Avatar.Label.FullMasks,Volledige maskers
 Feature.Avatar.Label.FullPair,Volledig paar
 Feature.Avatar.Label.Gear,Uitrusting
+Feature.Avatar.Label.GenericSetError,Er is iets misgegaan. Probeer het opnieuw.
 Feature.Avatar.Label.GetLookQuestion,Wil je deze outfit gratis ontvangen?
 Feature.Avatar.Label.GetOutfitMultiple,Wil je [{numItems}] items gratis ontvangen?
 Feature.Avatar.Label.GetOutfitOne,Wil je [1] item gratis ontvangen?
@@ -1689,6 +1900,7 @@ Feature.Avatar.Label.LeftLegs,Linkerbenen
 Feature.Avatar.Label.LeftShoe,Linkerschoen
 Feature.Avatar.Label.LeftShoes,Linkerschoenen
 Feature.Avatar.Label.LipMakeup,Lippen
+Feature.Avatar.Label.LoadingSets,Sets laden...
 Feature.Avatar.Label.Looks,Looks
 Feature.Avatar.Label.Makeup,Make-up
 Feature.Avatar.Label.MakeupLayer,Laag {layerIndex}
@@ -1701,12 +1913,13 @@ Feature.Avatar.Label.ModerationFailed,Moderatie mislukt
 Feature.Avatar.Label.Mood,Stemming
 Feature.Avatar.Label.MultiNoLongerAvailableInCollection,Deze assets zijn niet meer beschikbaar in deze verzameling:
 Feature.Avatar.Label.MyPostedAvatars.Tooltip,Geposte avatars worden openbaar op de Marktplaats
-Feature.Avatar.Label.Name,Naam
+Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,Nek
 Feature.Avatar.Label.Newest,Nieuwste
 Feature.Avatar.Label.NoExpiredItems,Geen verlopen {itemType}
 Feature.Avatar.Label.NoItems,Geen {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,Het is dan niet meer beschikbaar in deze verzameling
+Feature.Avatar.Label.NoSets,Nog geen sets
 Feature.Avatar.Label.Outerwear,Buitenkleding
 Feature.Avatar.Label.OutfitIncomplete,"De outfit die je hebt gemaakt, is niet gekocht en wordt niet in de ervaring weergegeven"
 Feature.Avatar.Label.OutfitPurchaseFailure,Sorry! [{numItems}] aankopen mislukt!
@@ -1732,8 +1945,10 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,Onlangs gedragen
+Feature.Avatar.Label.RemoveFromSetBody,Deze avatars worden uit deze set verwijderd. Ze worden niet gewist.
 Feature.Avatar.Label.Replace,Vervangen
 Feature.Avatar.Label.ResetToNewCharacter,Je schakelt over naar een nieuw personage. Wil je alle outfit-items resetten of behouden?
+Feature.Avatar.Label.ResetTryOn,Resetten naar huidige avatar
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,Rechterarmen
@@ -1751,6 +1966,10 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Recente zoekopdracht
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Onlangs bekeken
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Blijf shoppen voor
 Feature.Avatar.Label.SelectItem,Item selecteren
+Feature.Avatar.Label.SetAvatarCount,{itemCount} avatars
+Feature.Avatar.Label.SetLimitReachedBody,Je kunt maximaal {setLimit} sets hebben. Verwijder er een om ruimte te maken
+Feature.Avatar.Label.SetNameDuplicateBody,Je hebt al een set met deze naam. Kies een andere naam.
+Feature.Avatar.Label.SetNameNotAllowedBody,Kies een andere naam
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,Avatars op de Marktplaats posten
 Feature.Avatar.Label.Shirt,Shirt
 Feature.Avatar.Label.ShirtClassic,Klassiek shirt
@@ -1785,6 +2004,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Make-up in laagjes
 Feature.Avatar.Label.Title.ManageAvatars,Avatars beheren
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Mijn inventaris
 Feature.Avatar.Label.Title.ProfilePhoto,Profielfoto
 Feature.Avatar.Label.Title.ReplaceAvatar,Avatar vervangen
@@ -1896,6 +2116,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,Schrijf een bijschrift voor je ava
 Feature.Avatar.RevokedItems.BodyText,"{category} item '{item}' is verwijderd uit deze opgeslagen avatar, dus we hebben het oorspronkelijke bedrag dat je hebt betaald, terugbetaald.{lineBreak}Bekijk je inbox voor meer informatie."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"De volgende items zijn verwijderd uit deze opgeslagen avatar, dus we hebben het oorspronkelijke bedrag dat je hebt betaald, terugbetaald.{lineBreak}{items}{lineBreak}Bekijk je inbox voor meer informatie."
 Feature.Avatar.RevokedItems.ViewInbox,Inbox bekijken
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,Breng je make-up in lagen aan
 Feature.Avatar.Title.AvatarRefinement,Avatarverfijning
 Feature.Avatar.Title.BulkDeleteMakeupLooks, {count} make-uplooks verwijderen?
@@ -1907,8 +2128,11 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,Alle animaties wissen?
 Feature.Avatar.Title.ClearBodyConfirmation,Lichaam wissen?
 Feature.Avatar.Title.ClearClothesConfirmation,Alle kleding wissen?
 Feature.Avatar.Title.ClearMakeupConfirmation,Alle make-up wissen?
+Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Look dupliceren
 Feature.Avatar.Title.EnhancedAvatarHeads,Verbeterde avatarhoofden
+Feature.Avatar.Title.FindYourStyle,Vind je stijl
 Feature.Avatar.Title.GetOutfit,Outfit krijgen
 Feature.Avatar.Title.LCSortPage,Kleding sorteren
 Feature.Avatar.Title.LCSortReset,Resetten naar Standaard
@@ -1920,12 +2144,15 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,Bewegen
+Feature.Avatar.Title.MyAvatar,Mijn avatar
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,Aanpassen heeft een nieuwe look!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Nieuw op de Marktplaats
 Feature.Avatar.Title.OutfitIncomplete,Outfit onvolledig
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,Make-uplook hernoemen
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,Resetten naar standaard
 Feature.Avatar.Title.ResetToNewCharacter,Nieuw personage
 Feature.Avatar.Title.RevertToDefault,Terugzetten naar standaard
@@ -1934,6 +2161,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,Je opgeslagen avatars zijn hier
 Feature.Avatar.Title.SelectEmoteForAvatar,Selecteer een emote om je avatar te laten poseren
 Feature.Avatar.Title.SelectMakeupLookForUpdate,Selecteer een make-uplook
 Feature.Avatar.Title.SelectMakeupLooks,Looks selecteren
+Feature.Avatar.Title.SelectSet,Set selecteren
 Feature.Avatar.Title.SingleDeleteOutfit,'{outfitName}' verwijderen?
 Feature.Avatar.Title.TrendingItemWidget,Populaire items
 Feature.Avatar.Title.TrendingLooksWidget,Populaire stijlen
@@ -1951,6 +2179,7 @@ Feature.Avatar.UnavailableItems.BodyText,"{category} item '{item}' wordt beoorde
 Feature.Avatar.UnavailableItems.BodyTextMultiple,"De volgende items worden beoordeeld en zijn momenteel niet beschikbaar.{lineBreak}{items}{lineBreak}Als het item uit Roblox wordt verwijderd, ontvang je binnen een week een terugbetaling."
 Feature.Avatar.UnavailableItems.ConfirmText,
 Feature.Avatar.UnavailableItems.TitleText,Item niet beschikbaar
+Feature.Avatar.profile.tooltip,Je profiel
 Feature.Avatar.tooltip.ExpiredItemsFilter,Verlopen items met getimede optie zoeken
 Feature.AvatarBundleReceivedInteractiveAlert.Action.Ok,
 Feature.AvatarBundleReceivedInteractiveAlert.Action.TakeALook,
@@ -2011,7 +2240,7 @@ Feature.Build.Action.Options,Opties
 Feature.Build.Action.Play,Spelen
 Feature.Build.Action.Playtest,Playtest
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,Publiceren
+Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Nieuwste publiceren
 Feature.Build.Action.Reject,Afwijzen
 Feature.Build.Action.Restore,Herstellen
@@ -2083,8 +2312,11 @@ Feature.Build.Analytics.Title.TotalPlaytime,Totale speeltijd
 Feature.Build.Analytics.Visits,Bezoeken
 Feature.Build.Content.NewGame,Nieuw spel
 Feature.Build.Description.ActivateDeveloperProduct,Zet ontwikkelaarsproduct {PRODUCT_ID} in de uitverkoop.
+Feature.Build.Description.AdActive,Je advertentie wordt weergegeven. Bekijk hoeveel spelers deze bereikt.
 Feature.Build.Description.AdCampaignModerationReview,Alle advertentiecampagnes worden beoordeeld door de moderatie van Roblox. Dit proces kan tot 24 uur duren.
 Feature.Build.Description.AdCampaignSheetRunDates,Loopt {startDate} – {endDate}
+Feature.Build.Description.AdComplete,Je advertentie is gestopt. Controleer je resultaten.
+Feature.Build.Description.AdInReview,Je advertentie wordt beoordeeld en staat gepland voor {startDate} tot {endDate}.
 Feature.Build.Description.AdModerationReview,Alle advertenties worden beoordeeld door de moderatie van Roblox en dit kan tot 24 uur duren.
 Feature.Build.Description.AdvertisingAgreement,"Door Aanmaken te selecteren, ga je akkoord met de Roblox-{advertisingTermsStart}advertentievoorwaarden{advertisingTermsEnd} en -{advertisingStandardsStart}reclamerichtlijnen{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Als je dit spel archiveert, wordt het verwijderd uit Build. Je hebt nog steeds toegang en je kunt het herstellen vanuit Creator Hub of Roblox Studio."
@@ -2095,6 +2327,7 @@ Feature.Build.Description.BuildReplyNotif,Ontvang een melding wanneer Build een 
 Feature.Build.Description.BuyRobuxToCreate,"Koop meer Robux om content te blijven maken, of wacht tot je gratis Build-tegoed morgen wordt gereset."
 Feature.Build.Description.BuyUsageOrWait,"Koop meer Build-tegoed met Robux, of wacht tot je dagelijkse limiet wordt gereset."
 Feature.Build.Description.CampaignRunDates,Je campagne loopt van {startDate} tot en met {endDate}
+Feature.Build.Description.ChooseAdCampaignLength,Kies hoelang je wilt dat je advertentie wordt weergegeven.
 Feature.Build.Description.ChoosePlaytesters,Kies vrienden om een voorbeeld van je spel te bekijken.
 Feature.Build.Description.CreateDeveloperProduct,"'{NAME}' maken voor {PRICE} Robux, niet in de uitverkoop."
 Feature.Build.Description.DeactivateDeveloperProduct,Haal ontwikkelaarsproduct {PRODUCT_ID} uit de uitverkoop.
@@ -2157,7 +2390,7 @@ Feature.Build.Label.AdViews,Advertentieweergaven
 Feature.Build.Label.AdditionalUsage,Extra Build-tegoed
 Feature.Build.Label.AdditionalUsed,{USED} van {LIMIT} gebruikt
 Feature.Build.Label.AdsManager,Ads Manager
-Feature.Build.Label.All,Alle
+Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,{AMOUNT} beschikbaar
 Feature.Build.Label.Autosaved,Automatisch opgeslagen
 Feature.Build.Label.Available,beschikbaar
@@ -2174,7 +2407,7 @@ Feature.Build.Label.DefaultDeveloperProduct,Product {PRODUCT_ID}
 Feature.Build.Label.DefaultDeveloperProductName,ontwikkelaarsproduct
 Feature.Build.Label.Deleted,Verwijderd
 Feature.Build.Label.DescribeIdea,Beschrijf een idee
-Feature.Build.Label.Description,Beschrijving
+Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Beschrijving: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Naam: '{NAME}'
 Feature.Build.Label.DeveloperProductPrice,Prijs: {PRICE} Robux
@@ -2407,7 +2640,11 @@ Feature.Build.Notification.Title.NeedInput,Build heeft je input nodig
 Feature.Build.Placeholder.DescribeProduct,Beschrijf wat je wilt verkopen
 Feature.Build.Placeholder.DescribeProductUpdate,Beschrijf een update
 Feature.Build.Prompt.CreateDeveloperProduct,"Help me een ontwikkelaarsproduct te maken, het in de game te integreren, de wijzigingen te verifiëren en te publiceren en het te koop aan te bieden."
+Feature.Build.Title.AdActive,Advertentiecampagne is actief
 Feature.Build.Title.AdCampaignDuration,Advertentiecampagne van {durationDays} dagen
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} dagen
+Feature.Build.Title.AdComplete,Advertentie voltooid
+Feature.Build.Title.AdCreated,Advertentie gemaakt
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Afbeeldingen toevoegen
 Feature.Build.Title.AdsStatsEmpty,Een campagne starten
@@ -2436,6 +2673,7 @@ Feature.Build.Title.GetUsers,Gebruikers ophalen
 Feature.Build.Title.ManagedPricingAcknowledgement,Beheerde prijzen inschakelen?
 Feature.Build.Title.NoMonetizationProducts,Begin met verdienen in je spel
 Feature.Build.Title.NoRobuxForUsage,Geen Robux meer over voor Build-tegoed
+Feature.Build.Title.PickCampaign,Kies een lengte
 Feature.Build.Title.PlaytestInviteSendFailed,Kan uitnodigingen niet verzenden
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Kon de volgende gebruikers niet toevoegen:
@@ -2480,11 +2718,13 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,Avatar verwijderen
 Feature.Catalog.Action.DescribeAvatar,Beschrijf je avatar (optioneel)
 Feature.Catalog.Action.Favorite,Favoriet
+Feature.Catalog.Action.Favorites.BrowseMarketplace,Marktplaats browsen
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,Itemopties
 Feature.Catalog.Action.LoadMore,Meer laden
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,Details openen
+Feature.Catalog.Action.Owned,{count} in bezit
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,
@@ -2495,6 +2735,7 @@ Feature.Catalog.Action.Report,Melden
 Feature.Catalog.Action.Sell,Verkopen
 Feature.Catalog.Action.ShareVia,Delen via ...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,Probeer
 Feature.Catalog.Action.Upgrade,Upgrade
 Feature.Catalog.Action.ViewDetailsPage,Detailpagina bekijken
 Feature.Catalog.Action.ViewExperienceDetails,Ervaringsdetails bekijken
@@ -2540,9 +2781,11 @@ Feature.Catalog.HeroWidget.CapsulePoolDescription,
 Feature.Catalog.HeroWidget.CapsulePoolTitle,
 Feature.Catalog.HeroWidget.CapsuleTitle,
 Feature.Catalog.Label.Adjustable,Aanpasbaar
+Feature.Catalog.Label.AdvancedMaterials,Geavanceerde materialen
 Feature.Catalog.Label.AllItems,Alle items
 Feature.Catalog.Label.AlreadyOwned,Item al in bezit
 Feature.Catalog.Label.Animation,Animatie
+Feature.Catalog.Label.Attributes,Attributen
 Feature.Catalog.Label.Attribution,Gemaakt in
 Feature.Catalog.Label.AvailableForSale,Beschikbaar voor verkoop
 Feature.Catalog.Label.AvailableToPremiumMembers,Beschikbaar omdat je Premium hebt
@@ -2588,6 +2831,8 @@ Feature.Catalog.Label.CustomizeAvatar,
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,Je kunt deze actie niet ongedaan maken als je deze verwijdert.
 Feature.Catalog.Label.Details,Details
 Feature.Catalog.Label.DynamicHeads,
+Feature.Catalog.Label.Emissive,Stralend
+Feature.Catalog.Label.EmissiveInfo,"Een stralend item gloeit en geeft zelf licht af, waardoor het ook in donkere spelomgevingen helder en zichtbaar blijft."
 Feature.Catalog.Label.Emotes,
 Feature.Catalog.Label.EyeMakeup,
 Feature.Catalog.Label.Eyebrow,Wenkbrauw
@@ -2640,6 +2885,11 @@ Feature.Catalog.Label.ItemInAHold,Item in de wacht?
 Feature.Catalog.Label.ItemOwnedCount,Items in bezit ({itemCount})
 Feature.Catalog.Label.ItemsCount, {itemCount} items
 Feature.Catalog.Label.LeftArm,
+Feature.Catalog.Label.LicensedBy,Gelicentieerd door
+Feature.Catalog.Label.LicensingLicensed,Gelicentieerd
+Feature.Catalog.Label.LicensingLicensedInfo,Goedgekeurd door het merk
+Feature.Catalog.Label.LicensingOfficial,Officieel
+Feature.Catalog.Label.LicensingOfficialInfo,Gemaakt door het merk
 Feature.Catalog.Label.Limited,
 Feature.Catalog.Label.LimitedU,Limited U
 Feature.Catalog.Label.LipMakeup,
@@ -2672,6 +2922,8 @@ Feature.Catalog.Label.PBR.false,Basis
 Feature.Catalog.Label.PBR.true,
 Feature.Catalog.Label.PBRInfo,"Avatar-items met geavanceerde materialen maken gebruik van PBR (physically based rendering) om er natuurlijker uit te zien, met licht en schaduwen die veranderen en glanzen zoals in het echte leven."
 Feature.Catalog.Label.PBRInfoTitle,PBR (physically based rendering)
+Feature.Catalog.Label.ParticleEffects,Effecten met deeltjes
+Feature.Catalog.Label.ParticleEffectsInfo,"Een item met deeltjeseffecten heeft geanimeerde visuals, waardoor het dynamisch en levendig aanvoelt."
 Feature.Catalog.Label.Placement,Plaatsing
 Feature.Catalog.Label.PrePremiumPrice,(Itemprijs:
 Feature.Catalog.Label.Premium,
@@ -2710,6 +2962,7 @@ Feature.Catalog.Label.SellCut,Je verdient:
 Feature.Catalog.Label.SellPageUpsell,Verkopen is alleen beschikbaar voor gebruikers met een Roblox Plus-lidmaatschap.
 Feature.Catalog.Label.SellSuccess,Item in de verkoop
 Feature.Catalog.Label.SerialNumberColon,Serienummer:
+Feature.Catalog.Label.ShareToMoments,Deel naar Momenten
 Feature.Catalog.Label.ShoulderAccessories,Accessoires voor schouders
 Feature.Catalog.Label.SoldOut,
 Feature.Catalog.Label.SupportsHeadShapes,Ondersteunt aanpassing van de hoofdvorm
@@ -2725,6 +2978,7 @@ Feature.Catalog.Label.Timer.Second.Plural,Nog {number} seconden
 Feature.Catalog.Label.Timer.Second.Singular,Nog 1 seconde
 Feature.Catalog.Label.Tops,Bovenkleding
 Feature.Catalog.Label.Torso,
+Feature.Catalog.Label.TotalItemsFraction,Totaal: ({itemCount}/{itemTotal} items)
 Feature.Catalog.Label.TotalItemsParenthesis,
 Feature.Catalog.Label.TotalUnformatted,Totaal
 Feature.Catalog.Label.Tradable,Verhandelbaar
@@ -2769,6 +3023,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,Bekijk of verwijder de items om 
 Feature.Catalog.Message.Checkout.UnavailableItems,Een of meer items kunnen niet worden gekocht. Verwijder ze voordat je verdergaat.
 Feature.Catalog.Message.CollectiblesInfo,"Verzamelitems kunnen na een bepaalde periode van de ene gebruiker aan de andere worden doorverkocht, zelfs als de oorspronkelijke voorraad nog niet is uitverkocht. Roblox Plus-abonnees kunnen verzamelobjecten voor doorverkoop aanbieden."
 Feature.Catalog.Message.FTUXFavoritePillTooltip,Voeg dit toe aan je favorieten
+Feature.Catalog.Message.Favorites.CategoryEmpty,Je hebt nog niets in deze categorie opgeslagen.
+Feature.Catalog.Message.Favorites.Empty,Je hebt nog niets opgeslagen.
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Ontdek de best gemaakte items op Roblox
 Feature.Catalog.Message.HoldingPolicyL1,Aankopen uit doorverkoop worden maximaal {days} dagen in de wacht gezet. Het item kan alleen worden doorverkocht nadat deze wachtperiode is verstreken. Alleen Plus-gebruikers kunnen items doorverkopen.
 Feature.Catalog.Message.HoldingPolicyL2,Na aankoop worden de oorspronkelijke verkopen maximaal {purchaseDays} dagen in de wacht gezet. Het item kan alleen worden doorverkocht nadat deze wachtperiode is verstreken en doorverkopen worden maximaal {resaleDays} dagen in de wacht gezet. Alleen Premium-gebruikers kunnen items doorverkopen.
@@ -2808,6 +3064,7 @@ Feature.Catalog.Title.CheckoutPlural, {count} items afrekenen
 Feature.Catalog.Title.CheckoutSingular,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,Onderste laag vervangen?
 Feature.Catalog.Title.RentalFtuxText,Huur om een item 3 dagen uit te proberen
+Feature.Catalog.Toast.AddedToFavorites,Toegevoegd aan favorieten
 Feature.Catalog.Toast.AvatarPriceChangedBecauseOfOwned,Prijs gewijzigd omdat je {number} items bezit
 Feature.Catalog.Toast.AvatarUnderReview,"Avatar wordt beoordeeld
 Je kunt je avatar delen nadat deze is beoordeeld"
@@ -2853,6 +3110,7 @@ Alle leden van deze groep worden uitgenodigd, maar sommigen komen niet in aanmer
 Feature.Chat.Description.ExpressiveChatLearnMore,"Expressieve chatfuncties omvatten chat zonder filters en Groepsspraak.
 
 De toegang tot Expressieve chat is beperkt totdat alle leden in aanmerking komen en je chat is geüpgraded."
+Feature.Chat.Description.InlineContextCardDescription,Wees voorzichtig wanneer je met onbekenden chat. Deel geen persoonlijke gegevens en ga niet naar een andere chat-app. Je kunt iedereen blokkeren of melden vanuit iemands profiel.
 Feature.Chat.Description.NameGroup,Geef je groep een naam
 Feature.Chat.Description.NameGroupChat,Geef je chatgroep een naam
 Feature.Chat.Description.OSAContextCardDescription,Jouw veiligheid is belangrijk. Voel je je niet op je gemak? Je kunt deze persoon op elk moment blokkeren of melden vanuit het profiel van deze persoon.
@@ -2862,7 +3120,8 @@ Feature.Chat.Drawer.Join,
 Feature.Chat.Drawer.PinGame,Vastpinnen
 Feature.Chat.Drawer.PlayGame,Ervaring bezoeken
 Feature.Chat.Drawer.ViewDetails,
-Feature.Chat.Heading.ChatWithFriends,Chatten met vrienden
+Feature.Chat.Heading.ChatWithConnections,Chatten met vrienden
+Feature.Chat.Heading.ChatWithFriends,
 Feature.Chat.Heading.CreateUnfilteredChatDialog,Nieuwe groep maken met uitgebreide chatfuncties?
 Feature.Chat.Heading.ExpressiveChat,Expressieve chat
 Feature.Chat.Heading.FailedToLeaveGroup,De groep verlaten is mislukt
@@ -2872,11 +3131,15 @@ Feature.Chat.Heading.FirstConversationWithThisUser,Eerste gesprek met deze perso
 Feature.Chat.Heading.FirstInteractionWith,Eerste interactie met {displayName}
 Feature.Chat.Heading.FirstInteractionWithThisPerson,Eerste interactie met deze persoon
 Feature.Chat.Heading.LeaveGroup,Groep verlaten
-Feature.Chat.Heading.PartyWithFriends,Groep met vrienden
+Feature.Chat.Heading.PartyWithConnections,Groep met vrienden
+Feature.Chat.Heading.PartyWithFriends,
+Feature.Chat.Heading.SafeChattingWithThisUser,Chat veilig met deze persoon
+Feature.Chat.Heading.SafeChattingWithUsername,Chat veilig met {displayName}
 Feature.Chat.Heading.ShareGameToChat,Deel ervaring om te chatten
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} heeft je uitgenodigd om deel te nemen
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} heeft je uitgenodigd om lid te worden van een groep
 Feature.Chat.Heading.YouWereInvitedToGroup,Je bent uitgenodigd om lid te worden van de groep
+Feature.Chat.Label.AddConnections,
 Feature.Chat.Label.AddFriends,
 Feature.Chat.Label.Available,Beschikbaar
 Feature.Chat.Label.Blocked,Geblokkeerd
@@ -2900,7 +3163,9 @@ Feature.Chat.Label.Loading,
 Feature.Chat.Label.Members,Leden
 Feature.Chat.Label.MessageNotAvailable,Dit bericht is niet beschikbaar
 Feature.Chat.Label.MuteInGameChatToastNotifications,Chatmeldingen in het spel dempen
+Feature.Chat.Label.MuteInGamePartyToastNotifications,Groepsmeldingen in het spel dempen
 Feature.Chat.Label.New,
+Feature.Chat.Label.NoChatFound,Geen chats gevonden
 Feature.Chat.Label.NoDescriptionYet,Nog geen beschrijving.
 Feature.Chat.Label.NotImplementedMessageType,Dit bericht kon niet worden weergegeven.
 Feature.Chat.Label.NotSet,Niet ingesteld
@@ -2913,8 +3178,9 @@ Feature.Chat.Label.ReplyChatInputPlaceholder,Reageren op {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Reageer op jezelf
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} zei...
 Feature.Chat.Label.ReplyingToYourself,Je zei...
+Feature.Chat.Label.SearchConnections,Vrienden zoeken
 Feature.Chat.Label.SearchForFriendsAndChat,Gesprekken zoeken
-Feature.Chat.Label.SearchFriends,Vrienden zoeken
+Feature.Chat.Label.SearchFriends,
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,Verzonden
 Feature.Chat.Label.SnoozeChatNotifications,Chatmeldingen in de ervaring dempen:
@@ -2930,29 +3196,40 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 m
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} w
 Feature.Chat.Label.Unavailable,
+Feature.Chat.Label.UnfilteredChat,Ongefilterde chat
 Feature.Chat.Label.UnknownUser,onbekende gebruiker
 Feature.Chat.Label.User,Gebruiker
 Feature.Chat.Label.ViewProfile,Profiel bekijken
 Feature.Chat.Label.YouRepliedToYou,Je hebt op jezelf gereageerd
-Feature.Chat.Message.AddFriendsLimit,Je kunt maximaal {connectionsNum} vrienden in een chatgroep hebben.
-Feature.Chat.Message.AddFriendsPartyLimit,Je kunt maximaal {connectionsNum} vrienden in een groep hebben.
-Feature.Chat.Message.AddFriendsPartyLimitSingular,Je kunt vanwege je privacy-instellingen slechts met 1 vriend een groep vormen.
+Feature.Chat.Message.AddConnectionsLimit,Je kunt maximaal {connectionsNum} vrienden in een chatgroep hebben.
+Feature.Chat.Message.AddConnectionsPartyLimit,Je kunt maximaal {connectionsNum} vrienden in een groep hebben.
+Feature.Chat.Message.AddConnectionsPartyLimitSingular,Je kunt vanwege je privacy-instellingen slechts met 1 vriend een groep vormen.
+Feature.Chat.Message.AddFriendsLimit,
+Feature.Chat.Message.AddFriendsPartyLimit,
+Feature.Chat.Message.AddFriendsPartyLimitSingular,
 Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName} heeft een bericht gestuurd dat niet kan worden weergegeven
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,Chat is uitgeschakeld. Je kunt deze inschakelen in je privacy-instellingen.
+Feature.Chat.Message.ChatUnavailableRegion,Op dit moment is de chat niet beschikbaar in jouw regio.
+Feature.Chat.Message.ChatUnavailableWithUser,Op dit moment is de chat niet beschikbaar met deze gebruiker.
 Feature.Chat.Message.Default,Niet iedereen in deze chat kan je bericht zien.
-Feature.Chat.Message.EnableChat.FriendsRename,Schakel de chat in via je Privacy-instellingen om met vrienden te chatten.
-Feature.Chat.Message.EnableParty.FriendsRename,Schakel Groep in via je Privacy-instellingen om met vrienden een groep te vormen.
+Feature.Chat.Message.EnableChat,Schakel de chat in via je Privacy-instellingen om met vrienden te chatten.
+Feature.Chat.Message.EnableChat.FriendsRename,
+Feature.Chat.Message.EnableParty,Schakel Groep in via je Privacy-instellingen om met vrienden een groep te vormen.
+Feature.Chat.Message.EnableParty.FriendsRename,
 Feature.Chat.Message.FailedToLeaveGroup,Je kon niet uit het gesprek {CONVERSATION_TITLE} worden verwijderd.
 Feature.Chat.Message.FailedToLeaveGroup.V2,
 Feature.Chat.Message.FailedToRemoveUser,De gebruiker {USERNAME} kon niet uit het gesprek {CONVERSATION_TITLE} worden verwijderd.
 Feature.Chat.Message.FailedToRemoveUser.V2,De gebruiker {USERNAME} kon niet uit het gesprek {CONVERSATION_TITLE}  worden verwijderd.
 Feature.Chat.Message.FailedToRenameConversation,Het gesprek {EXISTING_NAME} kon niet de nieuwe naam {NEW_NAME} krijgen.
 Feature.Chat.Message.FailedToRenameConversation.V2,
-Feature.Chat.Message.GroupFriendLimitSingular,Je kunt slechts 1 vriend toevoegen om mee te chatten.
+Feature.Chat.Message.GroupConnectionLimitSingular,Je kunt slechts 1 vriend toevoegen om mee te chatten.
+Feature.Chat.Message.GroupFriendLimitSingular,
 Feature.Chat.Message.LeaveGroup,Je kunt niet blijven chatten met deze groep.
 Feature.Chat.Message.LeaveGroup.V2,Weet je zeker dat je de groep wilt verlaten?
-Feature.Chat.Message.MakeFriendsToChat,Maak vrienden op Roblox om samen te chatten
-Feature.Chat.Message.MakeFriendsToParty,Maak vrienden op Roblox om samen een groep te vormen
+Feature.Chat.Message.MakeConnectionsToChat,Maak vrienden op Roblox om samen te chatten
+Feature.Chat.Message.MakeConnectionsToParty,Maak vrienden op Roblox om samen een groep te vormen
+Feature.Chat.Message.MakeFriendsToChat,
+Feature.Chat.Message.MakeFriendsToParty,
 Feature.Chat.Message.MessageContentModerated,Je bericht is gemodereerd en is niet verzonden.
 Feature.Chat.Message.MessageUnavailable,Bericht niet beschikbaar
 Feature.Chat.Message.OneUserTyping,{DISPLAY_NAME} is aan het typen...
@@ -2972,15 +3249,8 @@ Feature.Chat.Response.Failed,Mislukt
 Feature.Chat.Response.NetworkError,Netwerkfout
 Feature.Chat.Response.Sending,
 Feature.Chat.RobloxConnectUnavailableWithUser,Op dit moment is Roblox Connect niet beschikbaar voor deze gebruiker.
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,Activiteit van vriend
-Feature.Chat.ShareGameToChat.NoFavoriteGames,Geen favorieten
-Feature.Chat.ShareGameToChat.NoFriendActivity,Je hebt geen activiteit van een vriend
-Feature.Chat.ShareGameToChat.NoPopularGames,Geen populaire ervaringen beschikbaar
-Feature.Chat.ShareGameToChat.NoRecentGames,Geen recente
-Feature.Chat.ShareGameToChat.Popular,
-Feature.Chat.ShareGameToChat.Recent,Recent
-Feature.Chat.Text.NoFriends,Je hebt nog geen vrienden toegevoegd. Zoek en voeg je vrienden toe op Roblox om te beginnen.
+Feature.Chat.Text.NoConnections,Je hebt nog geen vrienden toegevoegd. Zoek en voeg je vrienden toe op Roblox om te beginnen.
+Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.MuteChatNotifications,Chatmeldingen van vrienden dempen tijdens het spelen
 Feature.Chat.Title.NewChat,Nieuwe chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Een of meerdere mensen in deze lijst kunnen niet worden toegevoegd
@@ -3113,6 +3383,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,Je hebt ouder
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,Opmerkingen
 Feature.ExperienceDetails.Body.StatsInfoTitle,Statistieken en informatie
+Feature.ExperienceDetails.Description.MadeWithBuild,Build-games zijn AI-gegenereerd
+Feature.ExperienceDetails.Label.MadeByCreator,Gemaakt door {creatorName}
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,Gemaakt door {creatorName} met Build
 Feature.ExperienceDetails.Label.NotPlayable,Niet afspeelbaar
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"Er kan een optie zijn om items te kopen die kunnen worden verzilverd voor andere items of functies met Robux ('in-experience tokens'). In-experience tokens zijn uitsluitend bedoeld om van de ervaring te genieten, kunnen niet buiten de ervaring worden gebruikt en vormen geen prepaid betaalinstrumenten. Je aankoop van in-experience tokens is definitief en er vindt in geen geval restitutie plaats. Andere items en functies die kunnen worden ingewisseld voor in-experience tokens kunnen naar goeddunken van de maker worden gewijzigd."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,Ik ga akkoord met de opmerkingen door deze ervaring te spelen
@@ -3120,6 +3393,7 @@ Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,Demo spelen
+Feature.ExperienceDetails.PlayButtonText.Playtest,
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,Ontgrendelen
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -3267,6 +3541,7 @@ Feature.Friends.Label.ContactsCaption,"Om jou en je vrienden te helpen elkaar te
 Feature.Friends.Label.FAEEligibleBanner.Body,
 Feature.Friends.Label.FewestInteractions,Minst interacties
 Feature.Friends.Label.FindFriendsHintBody,Maak contact met vrienden die je al kent of ontdek nieuwe vrienden.
+Feature.Friends.Label.Followed,Gevolgd
 Feature.Friends.Label.Follower,Volger
 Feature.Friends.Label.Followers,Volgers
 Feature.Friends.Label.Following,Volgend
@@ -3302,6 +3577,7 @@ Feature.Friends.Label.MyProfile,Mijn profiel
 Feature.Friends.Label.NewConnection,Nieuwe connectie
 Feature.Friends.Label.NewFriend,Nieuwe vriend
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
+Feature.Friends.Label.NoFriendsYet,{name} heeft nog geen vrienden.
 Feature.Friends.Label.NowTrusted,{username} is nu een vertrouwde vriend
 Feature.Friends.Label.OneMutual,
 Feature.Friends.Label.PYMK,Personen die je misschien kent
@@ -3378,6 +3654,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} is nu een vertrouwde vriend
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Vertrouwde vriend verwijderd
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Recente activiteit
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,Recente activiteit van {username}
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,Recente activiteit bekijken
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
@@ -3402,6 +3680,8 @@ Feature.GameDetails.Action.GiveFeedback,Feedback geven
 Feature.GameDetails.Action.InviteFriends,
 Feature.GameDetails.Action.JoinFriendsInGame,Bij vrienden aansluiten
 Feature.GameDetails.Action.NotInterested,Niet geïnteresseerd
+Feature.GameDetails.Action.PauseVideo,Video pauzeren
+Feature.GameDetails.Action.PlayVideo,Video afspelen
 Feature.GameDetails.Action.Refund,Terugbetaling aanvragen
 Feature.GameDetails.Action.Report,
 Feature.GameDetails.Action.ReportAd,Advertentie melden
@@ -3518,6 +3798,7 @@ Feature.GamepadDisconnect.Label.Message,De verbinding met de controller voor geb
 Feature.GamepadDisconnect.Label.MessageGeneric,De verbinding met de controller van gebruiker '%s' is verbroken. Maak opnieuw verbinding met je controller.
 Feature.GamepadDisconnect.Label.Title,Ontbrekende controller
 Feature.Groups.Action.Cancel,
+Feature.Groups.Action.CancelRequest,Verzoek annuleren
 Feature.Groups.Action.Close,
 Feature.Groups.Action.Continue,
 Feature.Groups.Action.CreateGroup,Community maken
@@ -3638,6 +3919,20 @@ Feature.Home.Experiment.Reminders.ViolationThreatsOrAbuseOfRobloxEmployeesOrAffi
 Feature.Home.Experiment.Reminders.ViolationTrademark,
 Feature.Home.Experiment.Reminders.ViolationViolentContentAndGore,Gewelddadige en gruwelijke inhoud
 Feature.Home.Experiment.Reminders.ViolationVirtualCasino,Virtueel casino
+Feature.Home.Experiment.TextFilterEducation.General.Body.Pii.Modified,Houd je persoonlijke gegevens voor jezelf om te voorkomen dat je de toegang tot de chat verliest.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Pii.Warning,We moesten een aantal van je berichten wijzigen of blokkeren. Vergeet niet: houd je persoonlijke gegevens voor jezelf.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Respect.Modified,Stuur altijd respectvolle berichten om te voorkomen dat je de toegang tot de chat verliest.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Respect.Warning,We moesten een aantal van je berichten wijzigen of blokkeren. Vergeet niet: zorg er altijd voor dat je berichten respectvol zijn.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Romance.Modified,Vermijd romantiek of daten om te voorkomen dat je de toegang tot de chat verliest.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Romance.Warning,We moesten een aantal van je berichten wijzigen of blokkeren. Vergeet niet: vermijd romantiek of daten.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Spam.Modified,Stuur elk bericht maar één keer om te voorkomen dat je de toegang tot de chat verliest.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Spam.Warning,We moesten een aantal van je berichten wijzigen of blokkeren. Vergeet niet: stuur elk bericht maar één keer.
+Feature.Home.Experiment.TextFilterEducation.General.Title.Warning,Je staat op het punt de chat te verliezen
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Pii,"Vergeet niet: houd je naam, school en woonplaats voor jezelf."
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Respect,Vergeet niet: gebruik altijd vriendelijke woorden.
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Spam,Vergeet niet: stuur elk bericht maar één keer.
+Feature.Home.Experiment.TextFilterEducation.Kids.Title.Modified,We moesten een aantal van je berichten wijzigen of blokkeren
+Feature.Home.Experiment.TextFilterEducation.Kids.Title.Warning,Je chat kan verdwijnen
 Feature.Home.Heading.JoinYourFriends,Sluit je aan bij je vrienden
 Feature.Home.HeadingFriends,Vrienden ({friendCount})
 Feature.Home.Label.HappeningNow,Nu gaande
@@ -3701,8 +3996,20 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Nog {time}
+Feature.InExperienceShop.Label.EndTime,Eindigt over {timeRemaining}
+Feature.InExperienceShop.Label.Timer.Day.Plural,{number} dagen
+Feature.InExperienceShop.Label.Timer.Day.Singular,1 dag
+Feature.InExperienceShop.Label.Timer.Hour.Plural,
+Feature.InExperienceShop.Label.Timer.Hour.Singular,1 uur
+Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} minuten
+Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minuut
+Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconden
+Feature.InExperienceShop.Label.Timer.Second.Singular,1 seconde
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Weet je zeker dat je dit item permanent uit je inventaris wilt verwijderen? Als je van gedachten verandert, moet je het opnieuw verdienen in een ervaring."
 Feature.Item.Label.DeleteItemUndercase,Item verwijderen
+Feature.Landing.Action.PlayNow,Speel nu
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,"Door verder te gaan, ga je akkoord met onze {startTermsTag}Gebruiksvoorwaarden{endTermsTag}, inclusief arbitrage, en erken je ons {startPrivacyTag}Privacybeleid{endPrivacyTag}. Als je jonger bent dan 18, moet je ouder of voogd toestemming geven voor je account en akkoord gaan met onze Gebruiksvoorwaarden."
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,Ongepast taalgebruik
 Feature.Landing.Label.BrazilContentDescriptorViolence,Geweld
 Feature.Landing.Label.BrazilContentRatingLogoTitle,LEEFTIJDSADVIES: 12 JAAR
@@ -3710,6 +4017,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,LEEFTIJDSADVIES: 16 JA
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Aankopen binnen een spel (inclusief willekeurige items)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Gebruikers hebben contact
 Feature.Landing.Label.InvitedBy,Uitgenodigd door {name}
+Feature.Landing.Label.PoweredBy,Mogelijk gemaakt door
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Inschakelen
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Help mensen die jouw telefoonnummer al hebben om je als vriend toe te voegen op Roblox
@@ -3774,7 +4082,7 @@ Feature.Moments.Label.DeleteMomentBody,Je kunt een moment dat is verwijderd niet
 Feature.Moments.Label.DeleteMomentTitle,Moment verwijderen?
 Feature.Moments.Label.DeleteVoiceoverBody,Hierdoor worden je tekst en je voice-over gewist. Je kunt op elk moment opnieuw beginnen.
 Feature.Moments.Label.DeleteVoiceoverTitle,Voice-over verwijderen?
-Feature.Moments.Label.Error,Er is iets misgegaan. Probeer het nog een keer.
+Feature.Moments.Label.Error,
 Feature.Moments.Label.ExceedsCharacterLimit,Tekenlimiet overschreden
 Feature.Moments.Label.FeedEndBody,Kom later terug of maak je eigen moment.
 Feature.Moments.Label.FeedEndTitle,Je bent weer helemaal bij
@@ -3844,10 +4152,12 @@ Feature.MusicPlayer.Action.GoToSongDetails,Ga naar nummergegevens
 Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
+Feature.NotApproved.Action.Pending,
 Feature.NotApproved.Action.ReactivateAccount,Mijn account opnieuw activeren
 Feature.NotApproved.Action.ReportMistake,Een fout melden
 Feature.NotApproved.Action.RuleConfirmation,Ik ga ermee akkoord de regels te kennen en na te leven.
 Feature.NotApproved.Action.UserAgree,
+Feature.NotApproved.Action.ViewAppealGuidelines,Bezwaarrichtlijnen en informatieverstrekkingen bekijken
 Feature.NotApproved.Action.ViewLess,Minder bekijken
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,Regels bekijken
@@ -3863,6 +4173,7 @@ Feature.NotApproved.Description.AvatarBrokeRules,"Wijzig je avatar. Binnenkort w
 Feature.NotApproved.Description.AvatarViolation,DIT KAN WORDEN VERWIJDERD
 Feature.NotApproved.Description.Ban,Je account is uitgeschakeld. Je kunt het opnieuw activeren na {date}.
 Feature.NotApproved.Description.Ban.V2,Je account is opgeschort vanwege je overtredingsgeschiedenis. Je kunt het opnieuw activeren na {date}.
+Feature.NotApproved.Description.BannedDescription.Kids,Je kunt dit account niet meer gebruiken.
 Feature.NotApproved.Description.Behavior,Je gedrag
 Feature.NotApproved.Description.BrokeRulesBanned,We hebben je account verbannen vanwege herhaalde of ernstige overtreding van de regels.
 Feature.NotApproved.Description.BrokeRulesGeneric,Je gedrag heeft de regels van onze community overtreden.
@@ -3876,15 +4187,20 @@ Feature.NotApproved.Description.CommunityStandards,Houd je aan de {startLink}Com
 Feature.NotApproved.Description.Delete,Je account is beëindigd.
 Feature.NotApproved.Description.FollowTheRules,Zorg ervoor dat je de regels kent en naleeft.
 Feature.NotApproved.Description.Foreshadow,We kunnen je langer schorsen —of zelfs je account verbannen— als je de regels blijft overtreden.
+Feature.NotApproved.Description.Foreshadow.Kids,"Als je meer regels overtreedt, kun je voor een langere periode worden geschorst. Of worden verbannen."
 Feature.NotApproved.Description.LinkedAccounts,De gevolgen zijn gebaseerd op je gedrag op alle gekoppelde accounts.
 Feature.NotApproved.Description.ManualDetectionAutomatedDecision,Bij het nemen van deze beslissing hebben we gebruikgemaakt van automatisering
 Feature.NotApproved.Description.ManualDetectionAutomatedDecision.V2,We hebben geautomatiseerde systemen gebruikt om deze beslissing te nemen.
 Feature.NotApproved.Description.Mistake,Je kunt hier bezwaar maken of ons vragen om deze beslissing te herzien.
+Feature.NotApproved.Description.Mistake.Kids,Hebben we een fout gemaakt? Je kunt bezwaar indienen.
 Feature.NotApproved.Description.Mistake.V2,Hebben we een fout gemaakt? Je kunt hier bezwaar maken of ons vragen om deze beslissing te herzien.
 Feature.NotApproved.Description.Mistake.V3,"Als je denkt dat we een fout hebben gemaakt, kun je bezwaar maken tegen deze beslissing."
 Feature.NotApproved.Description.PluralViolation,Een van je {type}
 Feature.NotApproved.Description.ReactivationNotice,Selecteer 'Doorgaan' om onze regels te bekijken en je kunt daarna weer verder met spelen.
 Feature.NotApproved.Description.ReviewProcess,We beoordelen je activiteit met behulp van zowel technologie als mensen.
+Feature.NotApproved.Description.RuleExplanation.Bullets.Bullying.Kids,"Wees aardig, plaag mensen niet. 
+Dreig niet om iemand pijn te doen. 
+Bescherm de persoonlijke gegevens van mensen."
 Feature.NotApproved.Description.RuleExplanation.Bullets.MisusingRobloxSystems,"Doen alsof je iemand bent die je niet bent
 Gebruikers rapporteren voor dingen die niet zijn gebeurd
 Liegen om mensen te misleiden om iets te doen
@@ -3902,6 +4218,13 @@ Gevaarlijke fysieke uitdagingen, waaronder online trends in de echte wereld
 Dingen die illegaal of gevaarlijk zijn, zoals alcohol en drugs
 Gokken, wedden of kansspelen voor prijzen
 Instructies voor het maken van echte wapens"
+Feature.NotApproved.Description.RuleExplanation.Bullets.SexualContent.Kids,"We blijven vrienden op Roblox.
+We flirten, kussen of daten niet.
+Onze avatars dragen kleding die niet te veel laat zien."
+Feature.NotApproved.Description.RuleExplanation.Bullets.SharingPII.Kids,"Wachtwoorden
+Echte namen, adressen, telefoonnummers of e-mailadressen
+Gebruikersnamen voor andere accounts
+Foto's van mensen"
 Feature.NotApproved.Description.RuleExplanation.BullyingHarassmentDiscrimination,"Het is nooit oké om gemene dingen tegen iemand te zeggen of over iemand anders te zeggen. Hieronder valt ook het dreigen iemand kwaad te doen, bijvoorbeeld door hun privégegevens te delen of hun in het echte leven pijn te doen.
 Het is ook tegen de regels om gemeen te zijn tegen iemand of iemand uit te sluiten vanwege wie ze zijn, wat ze geloven of waar ze vandaan komen."
 Feature.NotApproved.Description.RuleExplanation.Dating,Chat vriendelijk maar niet flirterig. Romantisch gedrag zoals zoenen of daten is niet toegestaan. Het is ook belangrijk dat de kledij van je avatar niet te onthullend is.
@@ -3912,9 +4235,14 @@ Feature.NotApproved.Description.RuleExplanation.PII,"Om iedereen en hun accounts
 Feature.NotApproved.Description.RuleExplanation.RealLifeEvents,"Het is tegen de regels om respectloos te zijn over specifieke momenten die actueel hebben plaatsgevonden. Hieronder valt het nabootsen of belachelijk maken van gebeurtenissen of de mensen die daarbij betrokken zijn, vooral wanneer deze voor veel mensen triest of beangstigend zijn.
 Dit omvat:"
 Feature.NotApproved.Description.RuleExplanation.SSHAndIllegalRegulatedActivities,"Het is nooit acceptabel om content te creëren, te chatten of grappen te maken over gevaarlijke of schadelijke dingen, zoals:"
+Feature.NotApproved.Description.RuleExplanation.SharingPII.Kids,Deel geen:
 Feature.NotApproved.Description.RuleExplanation.Spam,Het is nooit acceptabel om steeds weer dezelfde woorden te sturen.
 Feature.NotApproved.Description.RuleExplanation.Swearing,"Vloeken is nooit acceptabel. Dit omvat het gebruik van spelfouten, symbolen of andere manieren om te proberen detectiesystemen te omzeilen."
 Feature.NotApproved.Description.RuleExplanation.ViolentContentAndGore,"Het is tegen de regels om realistisch geweld te tonen of iets waardoor het lijkt alsof een persoon, dier of personage ernstig lichamelijk of emotioneel letsel oploopt."
+Feature.NotApproved.Description.RuleImportance.Bullets.SharingPII.Kids,"Het kan lastig zijn om te weten wie je online kunt vertrouwen.
+Vreemden kunnen je gegevens gebruiken om je te vinden.
+Door wachtwoorden te delen, kunnen mensen je account of je Robux stelen."
+Feature.NotApproved.Description.RuleImportance.Bullying.Kids,Onaardig zijn kwetst andere spelers. Vriendelijkheid houdt Roblox leuk voor iedereen.
 Feature.NotApproved.Description.RuleImportance.BullyingHarassmentDiscrimination,"We maken van onze community een leuke plek voor iedereen door geen woorden te gebruiken of dingen te doen die iemand een onveilig of ongemakkelijk gevoel geven. Roblox is voor alle rassen, etnische groepen, genderidentiteiten, vaardigheden, seksuele geaardheden en religies."
 Feature.NotApproved.Description.RuleImportance.Dating,"Door chats en avatars gericht te houden op vriendschap, kan iedereen zich op zijn gemak voelen."
 Feature.NotApproved.Description.RuleImportance.DirectingUsersOffPlatform,"Roblox heeft veiligheidsmaatregelen om chats en interacties zo veilig mogelijk te houden. Links kunnen je naar valse websites leiden die er precies zo uitzien als Roblox, met als doel je account en items te stelen. Op die sites kunnen ook ongepaste afbeeldingen of video’s staan. Als je Robux of items buiten Roblox om ruilt, kunnen mensen liegen en je niet geven wat ze beloofd hebben."
@@ -3923,12 +4251,15 @@ Feature.NotApproved.Description.RuleImportance.MisusingRobloxSystems,
 Feature.NotApproved.Description.RuleImportance.PII,"Als een vreemde erachter komt wie je in het echte leven bent, kan diegene buiten Roblox om contact met je opnemen. Dit kan gevaarlijk zijn, omdat je online moeilijk kunt zien of iemand goed of slecht is. Daarom delen we ook nooit wachtwoorden. Iemand kan je account stelen en alles wat je hebt verdiend."
 Feature.NotApproved.Description.RuleImportance.RealLifeEvents,"Voor iemand die deze dingen heeft meegemaakt, kan het erg aangrijpend zijn om te zien hoe ze worden nagespeeld of hoe er grappen over worden gemaakt."
 Feature.NotApproved.Description.RuleImportance.SSHAndIllegalRegulatedActivities,"Het delen van content over letsel toebrengen aan jezelf of anderen is niet veilig. Als je het moeilijk hebt, is het belangrijk om met een volwassene te praten die je vertrouwt. Het delen van bijvoorbeeld gevaarlijke stunts kan anderen ertoe aanzetten om deze na te doen en daarbij ernstig gewond te raken. Door dit soort dingen niet te delen, help je jezelf en iedereen op Roblox veilig te houden."
+Feature.NotApproved.Description.RuleImportance.SexualContent.Kids,Vriendelijke chats en avatars maken Roblox leuk voor iedereen.
 Feature.NotApproved.Description.RuleImportance.Spam,Spammen maakt het moeilijker om gesprekken te volgen en verpest de pret.
 Feature.NotApproved.Description.RuleImportance.Swearing,"Roblox is voor iedereen, ook voor jonge kinderen. We gebruiken woorden die respectvol en vriendelijk zijn voor onze hele community."
 Feature.NotApproved.Description.RuleImportance.ViolentContentAndGore,Onze community bestaat onder andere uit jonge kinderen en het zien van extreem geweld kan voor hen beangstigend en aangrijpend zijn.
 Feature.NotApproved.Description.SecondChance.Details,Je kunt nu weer gaan spelen. Je kunt later geen bezwaar meer indienen tegen deze beslissing.
 Feature.NotApproved.Description.SecondChance.Second,Je kunt deze ene keer een schorsing vermijden omdat je je in het verleden verantwoord hebt gedragen.
+Feature.NotApproved.Description.SuspendedUntil,Je bent opgeschort tot {date} om {time}.
 Feature.NotApproved.Description.Violation,Onze contentmonitors hebben vastgesteld dat je gedrag op Roblox in strijd is met onze {startLink}Gebruiksvoorwaarden{endLink}.
+Feature.NotApproved.Description.WarningDescription.Kids,Je hebt een regel overtreden. Je kunt worden geschorst als dit doorgaat.
 Feature.NotApproved.Heading.AccountBanned,Account verbannen
 Feature.NotApproved.Heading.AccountDeleted,
 Feature.NotApproved.Heading.AccountTerminated,Account beëindigd
@@ -3941,7 +4272,10 @@ Feature.NotApproved.Heading.BannedOneDayOnly,Verbannen voor 1 dag
 Feature.NotApproved.Heading.BannedOneHour,Verbannen voor 1 uur
 Feature.NotApproved.Heading.BannedOneMinute,Verbannen voor 1 minuut
 Feature.NotApproved.Heading.BannedOneSecond,Verbannen voor 1 seconde
+Feature.NotApproved.Heading.Error,Er is een onbekende fout opgetreden. Probeer het later opnieuw.
 Feature.NotApproved.Heading.ReactivationNotice,Terug naar spelen
+Feature.NotApproved.Heading.RecentlyChecked,Wat we onlangs hebben gecontroleerd
+Feature.NotApproved.Heading.RuleExplanation.Bullying.Kids,Behandel mensen met respect
 Feature.NotApproved.Heading.RuleExplanation.BullyingHarassmentDiscrimination,Zorg ervoor dat iedereen zich welkom voelt
 Feature.NotApproved.Heading.RuleExplanation.Dating,Blijf in de vriendenzone
 Feature.NotApproved.Heading.RuleExplanation.DirectingUsersOffPlatform,Houd het binnen Roblox
@@ -3949,10 +4283,13 @@ Feature.NotApproved.Heading.RuleExplanation.MisusingRobloxSystems,Speel eerlijk 
 Feature.NotApproved.Heading.RuleExplanation.PII,Bescherm privégegevens
 Feature.NotApproved.Heading.RuleExplanation.RealLifeEvents,Denk aan de actualiteit
 Feature.NotApproved.Heading.RuleExplanation.SSHAndIllegalRegulatedActivities,Houd lichaam en geest gezond
+Feature.NotApproved.Heading.RuleExplanation.SexualContent.Kids,Houd het vriendelijk
+Feature.NotApproved.Heading.RuleExplanation.SharingPII.Kids,Houd je gegevens privé
 Feature.NotApproved.Heading.RuleExplanation.Spam,Laat gesprekken soepel verlopen
 Feature.NotApproved.Heading.RuleExplanation.Swearing,Gebruik vriendelijke en respectvolle woorden
 Feature.NotApproved.Heading.RuleExplanation.ViolentContentAndGore,Blijf kalm en speel verder
 Feature.NotApproved.Heading.RuleImportance,Waarom is dit belangrijk?
+Feature.NotApproved.Heading.RuleImportance.Kids,Waarom dit belangrijk is
 Feature.NotApproved.Heading.SecondChance,"Leer deze regel, ga meteen weer spelen"
 Feature.NotApproved.Heading.SecondChance.Details,Deze ene keer een schorsing vermijden?
 Feature.NotApproved.Heading.Suspended,Opgeschort
@@ -3967,6 +4304,8 @@ Feature.NotApproved.Heading.SuspendedSixtyDays,Voor 60 dagen opgeschort
 Feature.NotApproved.Heading.SuspendedThirtyDays,30 dagen opgeschort
 Feature.NotApproved.Heading.SuspendedThreeDays,Voor 3 dagen opgeschort
 Feature.NotApproved.Heading.Warning,
+Feature.NotApproved.Heading.WhatNext,Wat er nu gebeurt
+Feature.NotApproved.Heading.Why,Waarom?
 Feature.NotApproved.Label.AbuseType.AccountTheft,Accountdiefstal
 Feature.NotApproved.Label.AbuseType.AdultContent,Content voor volwassenen
 Feature.NotApproved.Label.AbuseType.Advertisement,Advertentie
@@ -3974,11 +4313,14 @@ Feature.NotApproved.Label.AbuseType.Advertising,Adverteren
 Feature.NotApproved.Label.AbuseType.AssetOwnership,Eigenaarschap van asset
 Feature.NotApproved.Label.AbuseType.Billing,
 Feature.NotApproved.Label.AbuseType.BlockedContent,Geblokkeerde content
+Feature.NotApproved.Label.AbuseType.Bullying.Kids,Pesten
+Feature.NotApproved.Label.AbuseType.Bullying.Note.Kids,We hebben kwetsende termen gevonden in je activiteit.
 Feature.NotApproved.Label.AbuseType.Chargeback,Terugboeking
 Feature.NotApproved.Label.AbuseType.CheatandExploits,Bedriegen en exploitatie
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,In gevaar brengen van kinderen
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V2,Uitbuiting van kinderen
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V3,Schadelijke content/gedrag
+Feature.NotApproved.Label.AbuseType.ChildEndangerment.V4,Kinderveiligheid
 Feature.NotApproved.Label.AbuseType.ClickbaitAds,Clickbait-advertenties
 Feature.NotApproved.Label.AbuseType.Commerce,Handel
 Feature.NotApproved.Label.AbuseType.CompromisedAccount,Gecompromitteerd account
@@ -4051,6 +4393,10 @@ Feature.NotApproved.Label.AbuseType.Scamming,
 Feature.NotApproved.Label.AbuseType.SeekingSexualContent,Zoeken naar seksuele content
 Feature.NotApproved.Label.AbuseType.SexualAdultContent,Seksuele content/content voor volwassenen
 Feature.NotApproved.Label.AbuseType.SexualContent,
+Feature.NotApproved.Label.AbuseType.SexualContent.Kids,
+Feature.NotApproved.Label.AbuseType.SexualContent.Note.Kids,We hebben woorden of afbeeldingen gevonden die niet geschikt zijn voor kinderen. Dingen zoals naaktfoto's of romantiek.
+Feature.NotApproved.Label.AbuseType.SharingPII.Kids,Privégegevens delen
+Feature.NotApproved.Label.AbuseType.SharingPII.Note.Kids,"We hebben dingen gevonden zoals een echte naam, een telefoonnummer of foto's van echte mensen."
 Feature.NotApproved.Label.AbuseType.Shock,Schok
 Feature.NotApproved.Label.AbuseType.Spam,
 Feature.NotApproved.Label.AbuseType.SuggestiveSexualizedImagery,Suggestieve/gesexualiseerde afbeeldingen
@@ -4068,7 +4414,7 @@ Feature.NotApproved.Label.AbuseType.VirtualCasino.Note,"Roblox staat niet toe da
 Feature.NotApproved.Label.ChargebackNextSteps,Wat moet ik nu doen?
 Feature.NotApproved.Label.CommunityStandards,Communityrichtlijnen
 Feature.NotApproved.Label.ConsoleDeviceNoticeUA,Meld je aan bij Roblox.com op een ander apparaat om je account opnieuw te activeren.
-Feature.NotApproved.Label.Days,{number} dagen
+Feature.NotApproved.Label.Days,
 Feature.NotApproved.Label.Decision,Beslissing
 Feature.NotApproved.Label.DecisionMethod,Beslissingsmethode
 Feature.NotApproved.Label.DecisionMethod.V2,Hoe we dit hebben beoordeeld
@@ -4189,6 +4535,12 @@ Feature.NotApproved.Label.Sublabel.CommerceServices,Diensten
 Feature.NotApproved.Label.Sublabel.CommerceTobaccoAndEntheogens,Tabak en entheogenen
 Feature.NotApproved.Label.Sublabel.CommerceToysAndGames,Speelgoed en games
 Feature.NotApproved.Label.Sublabel.CommerceWeaponsFirearmsAndRelatedProducts,"Wapens, vuurwapens en gerelateerde producten"
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingDescriptor,Onjuiste inzending van de vragenlijst over leeftijd en naleving
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingModeratePlusDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingSensitiveDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingUnplayableDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByMoreThanOneBucket,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByOneBucket,
 Feature.NotApproved.Label.Sublabel.EconomicOpportunity,
 Feature.NotApproved.Label.Sublabel.Emissive,Emissief
 Feature.NotApproved.Label.Sublabel.ExperienceSpam,Spam publiceren
@@ -4234,8 +4586,8 @@ Feature.Notifications.Action.PushUpsellAllow,Toestaan
 Feature.Notifications.Action.PushUpsellNotNow,
 Feature.Notifications.Action.SnoozeFifteenMinutes,15 minuten
 Feature.Notifications.Action.SnoozeFourHours,4 uur
-Feature.Notifications.Action.SnoozeOneDay,1 dag
-Feature.Notifications.Action.SnoozeOneHour,1 uur
+Feature.Notifications.Action.SnoozeOneDay,
+Feature.Notifications.Action.SnoozeOneHour,
 Feature.Notifications.Action.UntilITurnItBackOn,Totdat ik het weer aanzet
 Feature.Notifications.Heading.PushUpsellChat,Verbonden blijven
 Feature.Notifications.Heading.PushUpsellGeneric,Mis het niet
@@ -4276,6 +4628,7 @@ Feature.Parents.Title.SomethingWentWrong,
 Feature.PlatformRestriction.Action.Continue,
 Feature.PlatformRestriction.Action.Pending,
 Feature.PlatformRestriction.Action.Signout,
+Feature.PlatformRestriction.Content.NeedPermission,"Om Roblox te gebruiken, heb je ouderlijke toestemming nodig. Zodra je ouder toestemming heeft gegeven, log je uit en vervolgens weer in om toegang te krijgen tot Roblox."
 Feature.PlatformRestriction.Title.AskParent,
 Feature.PlayerSearchResults.Action.AddFriend,Vriend toevoegen
 Feature.PlayerSearchResults.Label.FromSearch,Van zoekopdrachten
@@ -4314,9 +4667,11 @@ Feature.Profile.Action.ViewFullProfile,Volledig profiel bekijken
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,"Laat anderen meer over je weten. Blijf veilig, deel geen persoonlijke gegevens."
 Feature.Profile.Description.InspectAndBuy,Klik om hun look te bekijken en te kopen.
+Feature.Profile.Description.QrCodeDescription,"Laat anderen je QR-code scannen om je als connectie toe te voegen op Roblox. Gebruikers van 13 jaar en ouder van wie de leeftijd is geverifieerd en die verbinding maken via een live QR-scan, worden vertrouwde vrienden."
 Feature.Profile.Description.QrCodeDescription.FriendsRename,"Laat anderen je QR-code scannen om je als connectie toe te voegen op Roblox. Gebruikers van 13 jaar en ouder van wie de leeftijd is geverifieerd en die verbinding maken via een live QR-scan, worden Vertrouwde vrienden."
 Feature.Profile.Description.QrCodeScanning,Laat anderen je Roblox QR-code scannen met de QR-scanner of de camera van hun apparaat om je snel als vriend toe te voegen!
-Feature.Profile.Description.RecognizeFriendsByCustomName,Herken vrienden gemakkelijker door een aangepaste naam in te stellen. Namen die zijn geïmporteerd uit contactpersonen en aangepaste namen zijn alleen voor jou zichtbaar.
+Feature.Profile.Description.RecognizeConnectionsByCustomName,Herken vrienden gemakkelijker door een aangepaste naam in te stellen. Namen die zijn geïmporteerd uit contactpersonen en aangepaste namen zijn alleen voor jou zichtbaar.
+Feature.Profile.Description.RecognizeFriendsByCustomName,
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,Laat bekenden je QR-code scannen om je toe te voegen!
 Feature.Profile.Description.SetCustomName,"Stel een aangepaste naam in voor <font weight=""medium"">{displayName}</font>."
@@ -4336,12 +4691,13 @@ Feature.Profile.Header.Inventory,
 Feature.Profile.Header.Store,
 Feature.Profile.Heading.AgedUpDisplayName,
 Feature.Profile.Heading.AgedUpDisplayNameUpdated,Naam bijgewerkt.
-Feature.Profile.Heading.DisplayName,Schermnaam
+Feature.Profile.Heading.DisplayName,
 Feature.Profile.Heading.DisplayNameUpdated,Schermnaam bijgewerkt
 Feature.Profile.Heading.EditAgedUpDisplayName,Naam bewerken
 Feature.Profile.Heading.EditDisplayName,Schermnaam bewerken
 Feature.Profile.Heading.InsufficientFunds,Onvoldoende saldo
 Feature.Profile.Heading.ProfileFrame,Profielkader
+Feature.Profile.Heading.ProfilePictureSaved,Profielfoto opgeslagen
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,
 Feature.Profile.Heading.Username,
@@ -4385,6 +4741,7 @@ Feature.Profile.Message.InvalidAliasError,De naam kan niet worden opgeslagen. Pr
 Feature.Profile.Message.NoExperienceAccess,{name} zit in een ervaring waartoe je geen toegang hebt.
 Feature.Profile.Message.QRLoadFailed,Laden mislukt.
 Feature.Profile.Message.QRNofificationRequest,heeft je een vriendschapsverzoek gestuurd via je QR-code
+Feature.Profile.Message.QRNotificationRequest,
 Feature.Profile.Message.QRNotificationRequest.FriendsRename,
 Feature.Profile.Title.QrScanner,QR-scanner
 Feature.Profile.Tooltip.CurrencyTransfer.Body,Je kunt nu Robux sturen.
@@ -4467,7 +4824,7 @@ Feature.ReportAbuse.Message.UserTextMuted,Je ontvangt in deze ervaring geen teks
 Feature.ReportAbuse.Message.UserTextMutedErrorDoesNotExist,We konden {name} niet vinden. Mogelijk heeft deze persoon de ervaring al verlaten.
 Feature.ReportAbuse.Message.UserTextMutedErrorSelf,Je kunt geen chats van jezelf blokkeren.
 Feature.ReportAbuse.Message.UserTextMutedSystem,Gebruiker '{name}' is gedempt. '/unmute {name}' om dit ongedaan te maken.
-Feature.ReportAbuse.Problem.Bullying,Pesten
+Feature.ReportAbuse.Problem.Bullying,
 Feature.ReportAbuse.Problem.Cheating,Valsspelen
 Feature.ReportAbuse.Problem.Dating,Daten/seks
 Feature.ReportAbuse.Problem.Hate,Haat
@@ -4489,14 +4846,22 @@ Feature.ReportAbuse.ProblemDescription.Swearing,"Vloeken, schelden of grof taalg
 Feature.ReportAbuse.ProblemDescription.Violence,Extreem geweld of bloedvergieten
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Doorgaan met je melding
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Bedankt voor het starten van je IP-inbreukmelding
+Feature.RobloxSubscription.Action.JoinIn,Doe mee over {time}
+Feature.RobloxSubscription.Action.ReferToPlus,Doorverwijzen naar Plus
 Feature.RobloxSubscription.Action.Subscribe,Abonneren
 Feature.RobloxSubscription.Action.TryItForFree,Probeer het gratis
 Feature.RobloxSubscription.Body.AlreadySubscribed,Je Plus-abonnement biedt al voordelen in-game-voordelen.
 Feature.RobloxSubscription.Body.GenericError,We konden dit nu niet voltooien. Probeer het opnieuw.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Dit abonnement kan niet worden aangeschaft op dit apparaat.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Verifieer je leeftijd met een leeftijdscontrole en ontvang 1 gratis week Roblox Plus als bedankje. Er is geen betaalmethode nodig om van deze gratis proefperiode te genieten.
+Feature.RobloxSubscription.Description.Benefit.Customize,Aanpassen met profielframes en app-thema's
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% korting op de eerste 60 dagen, daarna 20% korting op items en avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Meer plezier voor minder Robux. Abonneer je op Roblox Plus.
+Feature.RobloxSubscription.Description.JoinEarly,Doe eerder mee met Plus
+Feature.RobloxSubscription.Description.ReferralRecipientReward,Aanbieding alleen geldig voor nieuwe Plus-abonnees.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Door op {201C}{ctaText} te klikken{201D}, ga je akkoord met de <a href=""{termsUrl}"">Abonnementsvoorwaarden van Roblox</a>. Er worden elke maand automatisch kosten in rekening gebracht totdat je opzegt."
+Feature.RobloxSubscription.Heading.ReferralHistory,Doorverwijzingsgeschiedenis
+Feature.RobloxSubscription.Heading.ReferralShare,"Deel Plus, krijg"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Gratis privéservers
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,Stuur Robux gratis
@@ -4506,7 +4871,13 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{discountPercent}% ko
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Door op 'Doorgaan' te klikken, ga je akkoord met de {linkStart}Abonnementsvoorwaarden van Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Door op 'Probeer het gratis' te klikken, ga je akkoord met de {linkStart}Abonnementsvoorwaarden van Roblox.{linkEnd} Je gratis proefperiode eindigt over 1 maand en er worden elke maand automatisch kosten in rekening gebracht. Je kunt op elk moment opzeggen."
 Feature.RobloxSubscription.Label.FreeTrialText,Gratis proefperiode krijgen
+Feature.RobloxSubscription.Label.PendingRobux,Robux in behandeling
+Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
+Feature.RobloxSubscription.Label.ReferralTheyGet,Je doorverwezen personen krijgen
+Feature.RobloxSubscription.Label.ReferralYouGet,Je krijgt
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 maand gratis,{boldEnd} daarna {price}/{periodType}"
+Feature.RobloxSubscription.Label.RobuxEarned,Verdiende Robux
+Feature.RobloxSubscription.Label.SuccessfulReferrals,Geslaagde doorverwijzingen
 Feature.RobloxSubscription.Label.month,maand
 Feature.RobloxSubscription.Label.months,maanden
 Feature.RobloxSubscription.Title.AgeCheckTrial,Ontvang 1 gratis week Plus
@@ -4514,7 +4885,11 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Goed nieuws
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus nemen
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus is hier niet beschikbaar
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Je kunt vóór iedereen anders deelnemen aan het evenement.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Vroege toegang met Plus
+Feature.SafetyDashboard.Heading.AccountStatus.V2,"Accountstatus, schendingen en bezwaren"
 Feature.Schools.Action.AlreadyGraduated,Ik ben al afgestudeerd
+Feature.Schools.Action.CantFindSchool,Kun je je school niet vinden?
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,School verwijderen
 Feature.Schools.Action.Ok,
@@ -4523,17 +4898,29 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
+Feature.Schools.Action.UnidaysPrivacyPolicy,Privacybeleid van UNiDAYS
+Feature.Schools.Action.UnidaysTermsOfService,Gebruiksvoorwaarden van UNiDAYS
 Feature.Schools.Body.EnterCode,UNiDAYS heeft een e-mail met je unieke code gestuurd naar {user_email}. Voer de code hieronder in om je school te bevestigen.
 Feature.Schools.Body.UnidaysShare,Je e-mailadres is niet zichtbaar voor anderen.
+Feature.Schools.Body.UnidaysTerms,"We werken samen met UNiDAYS om je school-e-mailadres te verifiëren. Door op 'Doorgaan' te klikken, ga je akkoord met de Servicevoorwaarden en het Privacybeleid van UNiDAYS."
+Feature.Schools.Caption.AlumniGroupOnGraduate,"Zodra je bent afgestudeerd, kom je in de alumnigroep van {school}."
 Feature.Schools.Caption.RemovedOnGraduate,"Zodra je bent afgestudeerd, word je verwijderd uit {school}."
 Feature.Schools.Description.CantFindSchoolNotify,We laten het je weten wanneer je school op Roblox zit.
 Feature.Schools.Description.CantVerifySchool,"Op basis van de informatie die je hebt verstrekt, konden we je school niet verifiëren."
+Feature.Schools.Description.ConnectWithFellowAlumni,Kom in contact met andere alumni
 Feature.Schools.Description.FeatureAvailableBody,Vind vrienden van je school.
+Feature.Schools.Description.InviteFriendsExclusiveItem,Nodig anderen uit om te verifiëren. Krijg een gratis item wanneer je school wordt gelanceerd.
+Feature.Schools.Description.InviteFriendsUnlockSooner,Help de alumnigroep van je school sneller te lanceren.
+Feature.Schools.Description.InviteOthersToVerify,Anderen uitnodigen om te verifiëren
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,Meer geverifieerde alumni vereist
+Feature.Schools.Description.NotAvailableInRegion,De schoolfunctie is nog niet beschikbaar.
 Feature.Schools.Description.RemoveSchoolBody,"Je moet je school-e-mailadres opnieuw verifiëren om je opnieuw bij je school aan te sluiten. Alle beloningsitems die je hebt ontvangen, worden verwijderd."
 Feature.Schools.Description.SchoolIsLiveBody,
+Feature.Schools.Description.SchoolUnavailableBody,Deze school is momenteel niet beschikbaar op Roblox.
 Feature.Schools.Description.UpsellDisclaimer,Je school is alleen zichtbaar voor mensen van dezelfde school. Je kunt je school op elk gewenst moment bijwerken of verwijderen.
 Feature.Schools.Description.UpsellTagline,"Ontdek geverifieerde leerlingen van je school, kom met ze in contact en speel met ze."
+Feature.Schools.Description.WaitlistAlumniBody,Je bent helemaal klaar. We laten het je weten zodra de alumnigroep van je school is gelanceerd.
+Feature.Schools.Description.WaitlistBody,Je bent een van de oprichters. Nodig je klasgenoten uit om samen jullie school te lanceren.
 Feature.Schools.Error.AlreadyLinked,Dit e-mailadres is al gekoppeld aan een ander account.
 Feature.Schools.Error.InvalidEmail,Voer een geldig school-e-mailadres in.
 Feature.Schools.Error.InvalidPassCode,Deze code is onjuist.
@@ -4543,27 +4930,45 @@ Feature.Schools.Error.OtpExpired,Deze code is verlopen.
 Feature.Schools.Error.OtpInvalidFormat,Deze code heeft een ongeldige indeling.
 Feature.Schools.Error.OtpTooManyAttempts,Je hebt het maximale aantal pogingen voor vandaag bereikt.
 Feature.Schools.Error.SomethingWentWrong,
+Feature.Schools.Error.UnidaysEmailNotFound,UNiDAYS kan dit e-mailadres niet vinden.
 Feature.Schools.Filter.AllYears,Alle jaren
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Afstudeerjaar
 Feature.Schools.GiftForYou,Een cadeau voor jou
 Feature.Schools.Heading.AddSchool,School toevoegen
+Feature.Schools.Heading.AddSchoolNow,Sluit je aan bij je klasgenoten
 Feature.Schools.Heading.CantFindSchool,We kunnen je school niet vinden
 Feature.Schools.Heading.CantVerifySchool,We kunnen je school niet verifiëren
 Feature.Schools.Heading.CheckYourEmail,Controleer je e-mail
 Feature.Schools.Heading.EnterSchoolEmail,Voer je school-e-mailadres in
-Feature.Schools.Heading.JoinClassmates,Sluit je aan bij je klasgenoten
+Feature.Schools.Heading.InviteYourClassmates,Je klasgenoten uitnodigen
+Feature.Schools.Heading.InviteYourFriends,Je vrienden uitnodigen
+Feature.Schools.Heading.JoinClassmates,
+Feature.Schools.Heading.MembersWithCount,{count} leden
 Feature.Schools.Heading.RemoveYourSchool,Je school verwijderen
 Feature.Schools.Heading.SchoolIsLive,Je school is nu beschikbaar
+Feature.Schools.Heading.SchoolUnavailable,Je school is niet beschikbaar
 Feature.Schools.Heading.SelectGraduationYear,Afstudeerjaar selecteren
+Feature.Schools.Heading.ShareWithFriends,Delen met vrienden
+Feature.Schools.Heading.ThanksForInterest,Bedankt voor je interesse
+Feature.Schools.Heading.YouJoinedSchool,Je bent aangesloten bij {school}
+Feature.Schools.Heading.YourFounderReward,Je beloning als oprichter
+Feature.Schools.Label.AlumniGroupLaunches,Lanceringen van alumnigroepen
+Feature.Schools.Label.Classmates,
+Feature.Schools.Label.ConfirmSchool,School selecteren
 Feature.Schools.Label.ConnectWithClassmates,Kom in contact met klasgenoten
 Feature.Schools.Label.DidntGetCode,
+Feature.Schools.Label.MoreToUnlockSchool,Nog {count} nodig totdat je school gelanceerd kan worden
 Feature.Schools.Label.ResendInSeconds,Opnieuw verzenden over {time}
+Feature.Schools.Label.SchoolLaunches,Schoollanceringen
+Feature.Schools.Label.SchoolVerified,Je bent geverifieerd
 Feature.Schools.Label.Search,
+Feature.Schools.Label.SuggestedEmail,Bedoelde je {email}?
 Feature.Schools.Label.UnlockAlumniGroup,Alumnigroep in behandeling
 Feature.Schools.Label.UpsellPerkFindFriends,Vind vrienden van je school
 Feature.Schools.Label.UpsellPerkPlayAndChat,Bekijk wie er online is en speel eenvoudig samen
 Feature.Schools.Label.UpsellPerkTrends,Ontdek wat er populair is op je school
+Feature.Schools.Placeholder.Email,E-mailadres van student
 Feature.Schools.Placeholder.SixDigitCode,
 Feature.Schools.RewardGiftBody,Bedankt voor het verifiëren van je school. Je vindt je nieuwe item onder Avatar > Accessoire > Achterkant.
 Feature.Screentime.Content.ScreentimeLimitDialog,Je hebt je dagelijkse schermtijdlimiet bereikt. Kom morgen terug om Roblox weer te gebruiken.
@@ -4654,6 +5059,7 @@ Feature.SocialShare.Response.Error.Subtext,Probeer het later nog een keer.
 Feature.SocialShare.ShareWithPeopleYouKnow,Delen met personen die je kent
 Feature.SocialTab.Label.AddFriendHint,Druk hier om vrienden toe te voegen
 Feature.SocialTab.Label.AddFriendHintBody,Vrienden maken Roblox leuk!
+Feature.SocialTab.Label.Connect,
 Feature.SocialTab.Label.CreateAndExploreGroups,Creëer en ontdek community's
 Feature.SocialTab.Label.Groups,
 Feature.SongDetails.Action.Favorite,
@@ -4673,6 +5079,13 @@ Feature.SongDetails.Label.SongsAvailableBy,Nummers beschikbaar van {artistName}
 Feature.SongDetails.Label.SongsBy,Nummers van {artistName}
 Feature.SongDetails.Label.ThousandPlus,1000+
 Feature.SongDetails.Label.Vendor,Leverancier
+Feature.SplitPane.EditAvatarButtonText,
+Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,Avatar maken
+Feature.SplitPane.NoAdditionalAvatarsDialogTitle,Dat zijn al je opgeslagen avatars
+Feature.SplitPane.UnsavedChangesDialogBody,"Als je nu wisselt, gaan je avatarwijzigingen mogelijk verloren. Sla ze op om ze te behouden."
+Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,Niet opslaan
+Feature.SplitPane.UnsavedChangesDialogTitle,Je wijzigingen opslaan?
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Anderen toevoegen
 Feature.Squads.Action.ConnectToVoice,Verbinding maken met spraak
@@ -4827,6 +5240,8 @@ Feature.Toast.VoteError.AssetNotVoteable,Er mag niet op de ervaring worden geste
 Feature.Toast.VoteError.Default,Actie niet beschikbaar.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Je stemt te snel.
 Feature.Toast.VoteError.PlayGame,Je moet deze ervaring bezoeken voordat je deze kunt beoordelen.
+Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,Je kunt je leeftijd nu niet controleren omdat je herhaaldelijk onze Communityrichtlijnen hebt overtreden. Je kunt het opnieuw proberen nadat de beperking is afgelopen.
+Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Leeftijdscontroles opgeschort
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,Je bent verbannen van deze game vanwege herhaalde of ernstige overtreding van de regels.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,Je kunt deze game niet spelen omdat je gedrag de regels heeft overtreden.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Roblox heeft je van deze game verbannen
@@ -4884,7 +5299,7 @@ Feature.VerificationUpsell.Heading.AddEmail,Verifieer eerst je account
 Feature.VerificationUpsell.Heading.FinishAccountSetup,Accountinstellingen voltooien
 Feature.VerificationUpsell.Heading.PhoneNumberVerified,Telefoonnummer geverifieerd!
 Feature.VerificationUpsell.Heading.TryVoiceChat,Spraakchat proberen
-Feature.VerificationUpsell.Heading.VerificationCode,Verificatiecode
+Feature.VerificationUpsell.Heading.VerificationCode,
 Feature.VerificationUpsell.Heading.VerifiedSuccessfully.V2,Geverifieerd!
 Feature.VerificationUpsell.Heading.VerifyEmail,Controleer je e-mailadres
 Feature.VerificationUpsell.Heading.VerifyOnLogout,Zorg dat je niet wordt buitengesloten van je account!
@@ -5078,6 +5493,7 @@ IAPExperience.PurchasePrompt.BuyRobuxAndSubscription,Robux en abonnement kopen
 IAPExperience.PurchasePrompt.Header.BuyAvatar,
 IAPExperience.PurchasePrompt.Header.BuyRobuxAndAvatar,Robux en avatar kopen
 IAPExperience.PurchasePrompt.Label.BlackbirdDiscount,Plus-voordeel ({discountPercentage}% korting)
+IAPExperience.PurchasePrompt.Label.BlackbirdDiscountEligibleItems,Plus-voordeel ({discountPercentage}% korting op in aanmerking komende artikelen)
 IAPExperience.PurchasePrompt.Label.BlackbirdDiscountNoPercent,Plus-voordeel
 IAPExperience.PurchasePrompt.Label.BlackbirdSummary,Met Plus bespaar je {robuxIcon} {savingsAmount}
 IAPExperience.PurchasePrompt.Label.GenericDiscount,Korting ({discountPercentage}% korting)
@@ -5110,6 +5526,7 @@ IAPExperience.PurchaseSuccess.Title.PurchaseSucceeded,Aankoop geslaagd
 IAPExperience.RobuxUpsell.Action.BuyRobux,
 IAPExperience.RobuxUpsell.Action.BuyRobuxAndItem,
 IAPExperience.RobuxUpsell.Action.Cancel,
+IAPExperience.RobuxUpsell.Action.GetPercentOff,Krijg {discountPercentage}% korting
 IAPExperience.RobuxUpsell.Text.AdditionalRobux,Je hebt nog {robux} nodig.
 IAPExperience.RobuxUpsell.Text.BestValue,Beste waar voor je geld
 IAPExperience.RobuxUpsell.Text.BetterValue,Beter waar voor je geld
@@ -5179,7 +5596,15 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <spe
 InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,"Je connectie, {RBX_NAME}, doet nu mee aan de ervaring."
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,Je kunt niet tegen jezelf fluisteren.
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,Je zit nu in het team '{RBX_NAME}'.
+InstantApps.Shortcuts.Label.AddToDesktopMenuItem,Toevoegen aan bureaublad
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,Toevoegen aan startscherm
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,Toevoegen van {experience_name} aan het bureaublad is mislukt
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,Toevoegen van {experience_name} aan het startscherm is mislukt
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Bestaande snelkoppeling voor {experience_name} vervangen
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,{experience_name} is toegevoegd aan het bureaublad
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name} is toegevoegd aan het startscherm
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,Snelkoppeling bekijken
 Luobu.Authentication.Login.Label.AntiAddictionText,
 Luobu.Authentication.Login.Label.NetworkLicense,
 Luobu.Authentication.Message.UnknownErrorTryAgain,Er is een onbekende fout opgetreden. Probeer de app opnieuw op te starten.
@@ -5233,6 +5658,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,Help deze ervaring te verbeteren
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,Help de maker deze ervaring te verbeteren
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,Kopen niet mogelijk
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,Doe mee met de ervaring om je eerdere aankopen te verzilveren voordat je meer producten koopt.
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,Doe mee om je aankoop te verzilveren
 Purchasing.RobloxProducts.Label.RobuxBalance,Saldo: {var1} Robux
 Roblox.ReferralRewards.AdditionalCreatorTerms,Aanvullende Creator-voorwaarden
 Roblox.ReferralRewards.Expires,Verloopt

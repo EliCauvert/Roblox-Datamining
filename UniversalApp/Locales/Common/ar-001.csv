@@ -2322,6 +2322,7 @@ Feature.Build.Description.BuildReplyNotif,احصل على إشعار عندما 
 Feature.Build.Description.BuyRobuxToCreate,اشترِ المزيد من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيين استخدام ميزة Build المجاني غدًا.
 Feature.Build.Description.BuyUsageOrWait,اشترِ المزيد من استخدام ميزة Build باستخدام عملات Robux، أو انتظر حتى تتم إعادة تعيين الحد اليومي.
 Feature.Build.Description.CampaignRunDates,
+Feature.Build.Description.ChooseAdCampaignLength,اختر المدة التي تريد أن يستمر فيها عرض إعلانك.
 Feature.Build.Description.ChoosePlaytesters,اختر أصدقاء لمعاينة لعبتك.
 Feature.Build.Description.CreateDeveloperProduct,"إنشاء ""{NAME}"" مقابل {PRICE} من عملات Robux، غير معروض للبيع."
 Feature.Build.Description.DeactivateDeveloperProduct,إيقاف بيع منتج المطوّر {PRODUCT_ID}.
@@ -2635,6 +2636,7 @@ Feature.Build.Placeholder.DescribeProduct,صِف ما تريد بيعه
 Feature.Build.Placeholder.DescribeProductUpdate,صِف تحديثًا
 Feature.Build.Prompt.CreateDeveloperProduct,ساعدني في إنشاء منتج المطوّر، وربطه باللعبة، والتحقق من التغييرات ونشرها، وجعله متاحًا للشراء.
 Feature.Build.Title.AdCampaignDuration,حملة إعلانية لمدة {durationDays} من الأيام
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} من الأيام
 Feature.Build.Title.AdComplete,اكتمل الإعلان
 Feature.Build.Title.AdCreated,تم إنشاء الإعلان
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2665,6 +2667,7 @@ Feature.Build.Title.GetUsers,الحصول على المستخدمين
 Feature.Build.Title.ManagedPricingAcknowledgement,هل تريد تشغيل التسعير المُدار؟
 Feature.Build.Title.NoMonetizationProducts,ابدأ الكسب في لعبتك
 Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
+Feature.Build.Title.PickCampaign,اختَر مدة
 Feature.Build.Title.PlaytestInviteSendFailed,تعذَّر إرسال الدعوات
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,تعذَّر إضافة المستخدمين التاليين:
@@ -3240,14 +3243,6 @@ Feature.Chat.Response.Failed,فشل
 Feature.Chat.Response.NetworkError,خطأ في الشبكة
 Feature.Chat.Response.Sending,جاري الإرسال
 Feature.Chat.RobloxConnectUnavailableWithUser,لا تتوفر ميزة Roblox Connect مع هذا المستخدم في الوقت الحالي.
-Feature.Chat.ShareGameToChat.Favorites,المفضلات
-Feature.Chat.ShareGameToChat.FriendActivity,نشاط الأصدقاء
-Feature.Chat.ShareGameToChat.NoFavoriteGames,لا يوجد مفضلة
-Feature.Chat.ShareGameToChat.NoFriendActivity,ليس لديك نشاط صديق
-Feature.Chat.ShareGameToChat.NoPopularGames,لا توجد تجارب شعبية متاحة
-Feature.Chat.ShareGameToChat.NoRecentGames,لا تجارب حديثة
-Feature.Chat.ShareGameToChat.Popular,شعبية
-Feature.Chat.ShareGameToChat.Recent,حديثة
 Feature.Chat.Text.NoConnections,لم تضف أي أصدقاء بعد. للبدء، ابحث عن أصدقائك على منصّة Roblox ثم أضفهم.
 Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.MuteChatNotifications,كتم إشعارات الدردشة من الأصدقاء أثناء اللعب
@@ -4879,6 +4874,7 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,خصم بنسبة {di
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"بالضغط على ""متابعة""، فإنك توافق على {linkStart}شروط الاشتراك في منصّة Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"بالضغط على ""جرب مجانًا""، فإنك توافق على {linkStart}شروط الاشتراك في Roblox.{linkEnd} ستنتهي الفترة التجريبية المجانية بعد شهر واحد وسيتم تحصيل الرسوم منك تلقائيًا كل شهر ويمكنك الإلغاء في أي وقت."
 Feature.RobloxSubscription.Label.FreeTrialText,احصل على فترة تجريبية مجانية
+Feature.RobloxSubscription.Label.PendingRobux,عملات Robux المعلقة
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} من عملات Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,يحصل الأشخاص الذين تدعوهم على
 Feature.RobloxSubscription.Label.ReferralYouGet,ستحصل على
@@ -5086,7 +5082,7 @@ Feature.SongDetails.Label.SongsBy,قائمة أغاني {artistName}
 Feature.SongDetails.Label.ThousandPlus,أكثر من 1000
 Feature.SongDetails.Label.Vendor,المورّد
 Feature.SplitPane.EditAvatarButtonText,
-Feature.SplitPane.NoAdditionalAvatarsDialogBody,أنشئ أفاتارًا آخر، ثم بدّل بينهم هنا.
+Feature.SplitPane.NoAdditionalAvatarsDialogBody,أنشئ أفاتارًا آخر، ثم بدّل بينهما هنا.
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,أنشئ أفاتارًا
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,هذه هي كل أفاتاراتك المحفوظة
 Feature.SplitPane.UnsavedChangesDialogBody,إذا قمت بالتبديل الآن، فقد تُفقد التغييرات التي أجريتها على الأفاتار لديك. احفظها للاحتفاظ بها.
@@ -5549,7 +5545,7 @@ IAPExperience.RobuxUpsell.Text.LastPurchased,آخر عملية شراء
 IAPExperience.RobuxUpsell.Text.Loading,
 IAPExperience.RobuxUpsell.Text.MoreRobux,احصل على المزيد من عملات Robux بنفس السعر
 IAPExperience.RobuxUpsell.Text.NeedMoreRobux,أنت بحاجة إلى المزيد من عملات Robux
-IAPExperience.RobuxUpsell.Text.PopularItem,
+IAPExperience.RobuxUpsell.Text.PopularItem,شعبية
 IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet,شراء Robux غير مدعوم على سماعة الرأس. الرجاء المحاولة على جهاز مختلف.
 IAPExperience.RobuxUpsell.Text.RemainingBalance,سيتم إرجاع {robux} إلى رصيدك.
 IAPExperience.RobuxUpsell.Text.TermsOfUse,

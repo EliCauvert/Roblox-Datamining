@@ -442,7 +442,7 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,立即重生
 Authentication.SignUp.Action.SetupLater,稍后设置
 Authentication.SignUp.Action.StartOver,重新开始
-Authentication.SignUp.Action.StartPlay,
+Authentication.SignUp.Action.StartPlay,开始游玩
 Authentication.SignUp.Action.UseEmail,使用电子邮箱地址
 Authentication.SignUp.Action.UsePhoneNumber,使用手机号码
 Authentication.SignUp.Button.OKCaptialized,
@@ -490,7 +490,7 @@ Authentication.SignUp.Header.CreatePassword,嗨，{username}：请创建一个�
 Authentication.SignUp.Header.CreatePasswordOrPasskey,你好 {username}，请创建一个密码或通行密钥
 Authentication.SignUp.Header.CreatedAccountChooseSignin,我们已为你创建帐户。请选择登录方式。
 Authentication.SignUp.Header.GenderPage6,最后一步！请选择你的性别（选填）
-Authentication.SignUp.Header.OneLastThing,
+Authentication.SignUp.Header.OneLastThing,最后一步
 Authentication.SignUp.Header.PleaseTryAgain,请重试
 Authentication.SignUp.Header.SetUpYourRobloxAccount,设置你的 Roblox 帐户
 Authentication.SignUp.Header.UsernamePage4,下一步，创建用户名
@@ -579,7 +579,7 @@ Authentication.SignUp.Response.InvalidPhoneNumber,手机号码无效。
 Authentication.SignUp.Response.PasswordComplexity,请创建一个更复杂的密码。
 Authentication.SignUp.Response.PhoneNumberAlreadyLinked,此号码已与另一帐户相关联。
 Authentication.SignUp.Response.UsernameMustBeSetFirst,
-Authentication.SignUp.Subtitle.AddYourBirthday,
+Authentication.SignUp.Subtitle.AddYourBirthday,添加你的生日，以创建 Roblox 帐户。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,完成设置后，你的进度会保留。
 Authentication.SignUp.Title,你好 {username}，请创建一个密码
 Authentication.TwoStepVerification.Action.Approve,批准
@@ -1986,6 +1986,7 @@ Feature.Avatar.Label.SetAvatarCount,{itemCount} 个虚拟形象
 Feature.Avatar.Label.SetLimitReachedBody,你最多只能有 {setLimit} 个集合。请删除一个以腾出空间
 Feature.Avatar.Label.SetNameDuplicateBody,你已经有一个同名的集合，请选择其他名称
 Feature.Avatar.Label.SetNameNotAllowedBody,请选择其他名称
+Feature.Avatar.Label.ShareAvatarToMoments,
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,将虚拟形象发布至商城
 Feature.Avatar.Label.Shirt,衬衫
 Feature.Avatar.Label.ShirtClassic,
@@ -2344,7 +2345,7 @@ Feature.Build.Description.BuildReplyNotif,在 Build 回复你后获得通知。
 Feature.Build.Description.BuyRobuxToCreate,购买更多 Robux 以继续创建，或等待你的免费 Build 使用额度在明天重置。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 购买更多 Build 使用额度，或等待你的每日限额重置。
 Feature.Build.Description.CampaignRunDates,你的广告活动将在 {startDate} – {endDate}期间投放
-Feature.Build.Description.ChooseAdCampaignLength,
+Feature.Build.Description.ChooseAdCampaignLength,选择你希望广告投放的时长。
 Feature.Build.Description.ChoosePlaytesters,选择好友来抢先体验你的游戏。
 Feature.Build.Description.CreateDeveloperProduct,创建“{NAME}”，售价 {PRICE} Robux，已下架。
 Feature.Build.Description.DeactivateDeveloperProduct,将开发者产品 {PRODUCT_ID} 下架。
@@ -2657,9 +2658,9 @@ Feature.Build.Notification.Title.NeedInput,构建需要你的输入
 Feature.Build.Placeholder.DescribeProduct,描述你想出售的内容
 Feature.Build.Placeholder.DescribeProductUpdate,描述一项更新
 Feature.Build.Prompt.CreateDeveloperProduct,帮助我创建开发者产品，将其接入游戏，验证并发布更改，供玩家购买。
-Feature.Build.Title.AdActive,
+Feature.Build.Title.AdActive,广告活动已启动
 Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告活动
-Feature.Build.Title.AdCampaignOptionDurationShort,
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
 Feature.Build.Title.AdComplete,广告已完成
 Feature.Build.Title.AdCreated,广告已创建
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2690,7 +2691,7 @@ Feature.Build.Title.GetUsers,获取用户
 Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
 Feature.Build.Title.NoMonetizationProducts,开始在你的游戏中赚取收入
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
-Feature.Build.Title.PickCampaign,
+Feature.Build.Title.PickCampaign,选择时长
 Feature.Build.Title.PlaytestInviteSendFailed,无法发送邀请
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,无法添加以下用户：
@@ -3264,14 +3265,6 @@ Feature.Chat.Response.Failed,失败
 Feature.Chat.Response.NetworkError,网络错误
 Feature.Chat.Response.Sending,正在发送
 Feature.Chat.RobloxConnectUnavailableWithUser,此用户当前无法使用 Roblox Connect 功能。
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,好友动态
-Feature.Chat.ShareGameToChat.NoFavoriteGames,无最近喜爱
-Feature.Chat.ShareGameToChat.NoFriendActivity,你没有好友动态
-Feature.Chat.ShareGameToChat.NoPopularGames,无热门挑战
-Feature.Chat.ShareGameToChat.NoRecentGames,无最近浏览
-Feature.Chat.ShareGameToChat.Popular,
-Feature.Chat.ShareGameToChat.Recent,最近
 Feature.Chat.Text.NoConnections,你尚未添加任何联系人。若要开始，请在 Roblox 上查找并添加你的联系人。
 Feature.Chat.Text.NoFriends,你尚未添加任何好友。若要开始，请在 Roblox 上寻找并添加你的好友。
 Feature.Chat.Title.MuteChatNotifications,在游戏期间将好友聊天通知静音
@@ -4894,7 +4887,7 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具与
 Feature.RobloxSubscription.Description.ExclusiveBenefits,以更少的 Robux 享受更多乐趣。订阅 Roblox Plus。
 Feature.RobloxSubscription.Description.JoinEarly,Plus 订阅用户提前加入
 Feature.RobloxSubscription.Description.ReferralRecipientReward,优惠仅适用于新订阅 Plus 的用户。
-Feature.RobloxSubscription.Description.ReferralReferrerReward,当有人通过你的链接加入 Plus 时。
+Feature.RobloxSubscription.Description.ReferralReferrerReward,当有人通过你的链接购买 Plus 时。
 Feature.RobloxSubscription.Description.ReferralShare,邀请他人加入 Plus。对方加入后，你们双方都将获得 {amount} Robux。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"点按\u{201C}{ctaText}\u{201D}，即表示你同意 <a href=""{termsUrl}"">Roblox 订阅条款</a>。系统将每月自动向你收取费用，直至你取消订阅。"
 Feature.RobloxSubscription.Heading.ReferralHistory,推荐记录
@@ -4908,6 +4901,7 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{periodIndex} {period
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,点按“继续”，即表示你同意{linkStart}《Roblox 订阅条款》{linkEnd}。
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,点按“免费试用”，即表示你同意 {linkStart}Roblox 订阅条款{linkEnd}。你的免费试用期将于 1 个月后结束，系统将每月自动向你收取费用，你可以随时取消订阅。
 Feature.RobloxSubscription.Label.FreeTrialText,获取免费试用
+Feature.RobloxSubscription.Label.PendingRobux,待发放 Robux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,你推荐的人获得
 Feature.RobloxSubscription.Label.ReferralYouGet,你将获得

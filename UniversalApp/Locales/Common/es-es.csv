@@ -2343,6 +2343,7 @@ Feature.Build.Description.BuildReplyNotif,Recibe una notificación cuando la com
 Feature.Build.Description.BuyRobuxToCreate,Compra más Robux para seguir creando o espera a que tu uso gratuito de la compilación se restablezca mañana.
 Feature.Build.Description.BuyUsageOrWait,Compra más uso de la compilación con Robux o espera a que se restablezca tu límite diario.
 Feature.Build.Description.CampaignRunDates,Tu campaña se ejecutará del {startDate} al {endDate}
+Feature.Build.Description.ChooseAdCampaignLength,Elige por cuánto tiempo quieres publicar tu anuncio.
 Feature.Build.Description.ChoosePlaytesters,Elige amistades para que previsualicen tu juego.
 Feature.Build.Description.CreateDeveloperProduct,"Crea ""{NAME}"" por {PRICE} Robux, fuera de venta."
 Feature.Build.Description.DeactivateDeveloperProduct,Retira el producto {PRODUCT_ID} del desarrollador de la venta.
@@ -2656,6 +2657,7 @@ Feature.Build.Placeholder.DescribeProduct,Describe lo que quieres vender
 Feature.Build.Placeholder.DescribeProductUpdate,Describe una actualización
 Feature.Build.Prompt.CreateDeveloperProduct,"Ayúdame a crear un producto de desarrollador, integrarlo en el juego, verificar y publicar los cambios y ponerlo a la venta."
 Feature.Build.Title.AdCampaignDuration,Campaña publicitaria de {durationDays} días
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} días
 Feature.Build.Title.AdComplete,Anuncio completado
 Feature.Build.Title.AdCreated,Anuncio creado
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2686,6 +2688,7 @@ Feature.Build.Title.GetUsers,Obtener usuarios
 Feature.Build.Title.ManagedPricingAcknowledgement,¿Quieres activar Precios gestionados?
 Feature.Build.Title.NoMonetizationProducts,Comienza a ganar en tu juego
 Feature.Build.Title.NoRobuxForUsage,No quedan Robux para el uso de la compilación
+Feature.Build.Title.PickCampaign,Elige una duración
 Feature.Build.Title.PlaytestInviteSendFailed,No se pudieron enviar las invitaciones
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,No se pudieron añadir los siguientes usuarios:
@@ -3261,14 +3264,6 @@ Feature.Chat.Response.Failed,Falla
 Feature.Chat.Response.NetworkError,Error de red
 Feature.Chat.Response.Sending,Enviando
 Feature.Chat.RobloxConnectUnavailableWithUser,"En este momento, Roblox Connect no está disponible para este usuario."
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,Actividad de amigos
-Feature.Chat.ShareGameToChat.NoFavoriteGames,No hay favoritas
-Feature.Chat.ShareGameToChat.NoFriendActivity,No tienes actividad de amigos
-Feature.Chat.ShareGameToChat.NoPopularGames,No hay experiencias populares disponibles
-Feature.Chat.ShareGameToChat.NoRecentGames,No hay recientes
-Feature.Chat.ShareGameToChat.Popular,Populares
-Feature.Chat.ShareGameToChat.Recent,Recientes
 Feature.Chat.Text.NoConnections,"Aún no tienes amistades en Roblox. Para empezar, búscalas y añádelas."
 Feature.Chat.Text.NoFriends,"Aún no has añadido ningún amigo. Para empezar, encuentra y añade tus amigos en Roblox."
 Feature.Chat.Title.MuteChatNotifications,Silenciar las notificaciones de chat de las amistades durante el juego
@@ -4900,6 +4895,7 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{discountPercent}% de
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Al hacer clic en “Continuar”, aceptas los {linkStart}Términos de suscripción de Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Al hacer clic en Haz la prueba gratis, aceptas los {linkStart}Términos de suscripción de Roblox.{linkEnd} Tu prueba gratuita finalizará en 1 mes y se te hará el cargo cada mes de forma automática hasta que canceles la suscripción."
 Feature.RobloxSubscription.Label.FreeTrialText,Obtén una prueba gratuita
+Feature.RobloxSubscription.Label.PendingRobux,Robux pendientes
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Tus referidos obtienen
 Feature.RobloxSubscription.Label.ReferralYouGet,Obtendrás

@@ -450,6 +450,7 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,今すぐリスポーン
 Authentication.SignUp.Action.SetupLater,あとで設定
 Authentication.SignUp.Action.StartOver,
+Authentication.SignUp.Action.StartPlay,プレイ開始
 Authentication.SignUp.Action.UseEmail,メールアドレスを使う
 Authentication.SignUp.Action.UsePhoneNumber,電話番号を使う
 Authentication.SignUp.Button.OKCaptialized,
@@ -497,6 +498,7 @@ Authentication.SignUp.Header.CreatePassword,{username} さん、パスワード�
 Authentication.SignUp.Header.CreatePasswordOrPasskey,{username} さん。パスワードを作成してください
 Authentication.SignUp.Header.CreatedAccountChooseSignin,アカウントを作成しました。ログイン方法を選択してください。
 Authentication.SignUp.Header.GenderPage6,最後に性別を選択してください（任意）
+Authentication.SignUp.Header.OneLastThing,最後のステップ
 Authentication.SignUp.Header.PleaseTryAgain,もう一度お試しください
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Robloxアカウントを設定
 Authentication.SignUp.Header.UsernamePage4,次にユーザーネームを作成
@@ -585,6 +587,7 @@ Authentication.SignUp.Response.InvalidPhoneNumber,電話番号が無効です。
 Authentication.SignUp.Response.PasswordComplexity,もっと複雑なパスワードを作成してください。
 Authentication.SignUp.Response.PhoneNumberAlreadyLinked,すでに他のアカウントと関連付けられている番号です。
 Authentication.SignUp.Response.UsernameMustBeSetFirst,最初にユーザーネームを設定する必要があります。
+Authentication.SignUp.Subtitle.AddYourBirthday,Robloxアカウントを作成するには、生年月日を入力してください。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,設定を完了すると、進行状況が引き継がれます。
 Authentication.SignUp.Title,{username} さん、こんにちは。パスワードを作成してください
 Authentication.TwoStepVerification.Action.Approve,承認する
@@ -2342,6 +2345,7 @@ Feature.Build.Description.BuildReplyNotif,ビルドで返信が届いたとき�
 Feature.Build.Description.BuyRobuxToCreate,作成を続けるには、Robuxをさらに購入するか、明日になって無料のビルド使用量がリセットされるのをお待ちください。
 Feature.Build.Description.BuyUsageOrWait,Robuxでビルド使用量をさらに購入するか、1日あたりの限度額がリセットされるのをお待ちください。
 Feature.Build.Description.CampaignRunDates,キャンペーンは、{startDate}～{endDate}に実施されます。
+Feature.Build.Description.ChooseAdCampaignLength,広告の掲載期間を選択してください。
 Feature.Build.Description.ChoosePlaytesters,ゲームをテストプレイしてもらう友達を選択してください。
 Feature.Build.Description.CreateDeveloperProduct,{PRICE} Robuxの「{NAME}」を作成し、非売品にします。
 Feature.Build.Description.DeactivateDeveloperProduct,開発者製品（{PRODUCT_ID}）を非売品にします。
@@ -2654,7 +2658,9 @@ Feature.Build.Notification.Title.NeedInput,ビルドを続けるには入力が�
 Feature.Build.Placeholder.DescribeProduct,販売したいものについて説明してください
 Feature.Build.Placeholder.DescribeProductUpdate,更新内容を説明してください
 Feature.Build.Prompt.CreateDeveloperProduct,開発者製品を作成してゲームに組み込み、変更を検証して公開し、購入できるようにしてください。
+Feature.Build.Title.AdActive,広告キャンペーンは有効になっています
 Feature.Build.Title.AdCampaignDuration,{durationDays}日間の広告キャンペーン
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}日
 Feature.Build.Title.AdComplete,広告が完了しました
 Feature.Build.Title.AdCreated,広告が作成されました
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2685,6 +2691,7 @@ Feature.Build.Title.GetUsers,ユーザーを獲得
 Feature.Build.Title.ManagedPricingAcknowledgement,管理価格設定をオンにしますか？
 Feature.Build.Title.NoMonetizationProducts,ゲーム内で収益を獲得
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
+Feature.Build.Title.PickCampaign,期間を選択
 Feature.Build.Title.PlaytestInviteSendFailed,招待を送信できませんでした
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,次のユーザーを追加できませんでした：
@@ -3260,14 +3267,6 @@ Feature.Chat.Response.Failed,失敗
 Feature.Chat.Response.NetworkError,ネットワークエラー
 Feature.Chat.Response.Sending,送信中
 Feature.Chat.RobloxConnectUnavailableWithUser,現在、このユーザーはRoblox Connectに応答できません。
-Feature.Chat.ShareGameToChat.Favorites,
-Feature.Chat.ShareGameToChat.FriendActivity,友達のアクティビティ
-Feature.Chat.ShareGameToChat.NoFavoriteGames,お気に入りはありません
-Feature.Chat.ShareGameToChat.NoFriendActivity,友達のアクティビティはありません
-Feature.Chat.ShareGameToChat.NoPopularGames,人気のバーチャル空間はありません
-Feature.Chat.ShareGameToChat.NoRecentGames,最近のものはありません
-Feature.Chat.ShareGameToChat.Popular,人気
-Feature.Chat.ShareGameToChat.Recent,最近
 Feature.Chat.Text.NoConnections,まだ友達を追加していません。まずはRobloxで友達を見つけて追加してください。
 Feature.Chat.Text.NoFriends,まだ友達を追加していません。始めるには、友達を見つけてRobloxに追加してください。
 Feature.Chat.Title.MuteChatNotifications,ゲームプレイ中に友達からのチャット通知をミュートする
@@ -4883,8 +4882,8 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,最初の60日間は10
 Feature.RobloxSubscription.Description.ExclusiveBenefits,少ないRobuxでもっと楽しく。Roblox Plusを定期購入しましょう。
 Feature.RobloxSubscription.Description.JoinEarly,Plusで先行参加
 Feature.RobloxSubscription.Description.ReferralRecipientReward,このオファーは、新規のPlus会員のみが対象です。
-Feature.RobloxSubscription.Description.ReferralReferrerReward,相手があなたのリンクからPlusに参加した場合。
-Feature.RobloxSubscription.Description.ReferralShare,Plusに招待した相手が参加すると、お互いに{amount} Robuxを獲得できます。
+Feature.RobloxSubscription.Description.ReferralReferrerReward,相手があなたのリンクからPlusを定期購入した場合。
+Feature.RobloxSubscription.Description.ReferralShare,Plusに招待した相手がPlusを定期購入すると、お互いに{amount} Robuxを獲得できます。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}をクリックすると、<a href=""{termsUrl}"">Roblox定期購入規約</a>に同意したとみなされます。キャンセルするまで、毎月自動的に料金が課金されます。"
 Feature.RobloxSubscription.Heading.ReferralHistory,紹介履歴
 Feature.RobloxSubscription.Heading.ReferralShare,Plusをシェアして、次を獲得：
@@ -4897,6 +4896,7 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{periodIndex}{periodT
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,「続ける」をクリックすると、{linkStart}Roblox定期購入規約{linkEnd}に同意したものとみなされます。
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,「無料で試す」をクリックすると、{linkStart}Roblox定期購入規約{linkEnd}に同意したものとみなされます。無料トライアルは1か月で終了し、以降は毎月自動的に課金されますが、キャンセルはいつでも可能です。
 Feature.RobloxSubscription.Label.FreeTrialText,無料トライアルを入手
+Feature.RobloxSubscription.Label.PendingRobux,保留中のRobux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,被紹介者の報酬
 Feature.RobloxSubscription.Label.ReferralYouGet,紹介者の報酬
@@ -5105,7 +5105,7 @@ Feature.SongDetails.Label.SongsBy,{artistName} の曲
 Feature.SongDetails.Label.ThousandPlus,1000曲以上
 Feature.SongDetails.Label.Vendor,プロバイダ
 Feature.SplitPane.EditAvatarButtonText,
-Feature.SplitPane.NoAdditionalAvatarsDialogBody,別のアバターを作成すると、ここでアバターを切り替えられます。
+Feature.SplitPane.NoAdditionalAvatarsDialogBody,別のアバターを作成すると、ここでアバターを切りかえられます。
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,アバターを作成
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,保存済みのアバターはこれですべてです
 Feature.SplitPane.UnsavedChangesDialogBody,今切りかえると、アバターの変更内容が失われる可能性があります。保存して維持してください。
@@ -5568,7 +5568,7 @@ IAPExperience.RobuxUpsell.Text.LastPurchased,前回の購入
 IAPExperience.RobuxUpsell.Text.Loading,
 IAPExperience.RobuxUpsell.Text.MoreRobux,同じ価格でロバックスを増量
 IAPExperience.RobuxUpsell.Text.NeedMoreRobux,Robuxがもっと必要です
-IAPExperience.RobuxUpsell.Text.PopularItem,
+IAPExperience.RobuxUpsell.Text.PopularItem,人気
 IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet,ヘッドセットデバイスでは、まだRobuxの購入に対応していません。別のデバイス上でお試しください。
 IAPExperience.RobuxUpsell.Text.RemainingBalance,残りの {robux} が残高に加算されます。
 IAPExperience.RobuxUpsell.Text.TermsOfUse,

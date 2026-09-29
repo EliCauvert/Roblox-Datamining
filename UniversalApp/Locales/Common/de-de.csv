@@ -2336,6 +2336,7 @@ Feature.Build.Description.BuildReplyNotif,"Erhalte Benachrichtigungen, wenn Buil
 Feature.Build.Description.BuyRobuxToCreate,"Kaufe mehr Robux, um weiter zu erstellen, oder warte, bis dein kostenloses Build-Kontingent morgen zurückgesetzt wird."
 Feature.Build.Description.BuyUsageOrWait,"Kaufe mehr Build-Kontingent mit Robux oder warte, bis dein Tageslimit zurückgesetzt wird."
 Feature.Build.Description.CampaignRunDates,Deine Kampagne läuft von {startDate}–{endDate}.
+Feature.Build.Description.ChooseAdCampaignLength,"Wähle aus, wie lange deine Anzeige geschaltet werden soll."
 Feature.Build.Description.ChoosePlaytesters,"Wähle Freunde aus, die eine Vorschau deines Spiels erhalten."
 Feature.Build.Description.CreateDeveloperProduct,"Erstelle ""{NAME}"" für {PRICE} Robux (nicht mehr im Verkauf)."
 Feature.Build.Description.DeactivateDeveloperProduct,Nimm das Entwicklerprodukt {PRODUCT_ID} aus dem Verkauf.
@@ -2649,6 +2650,7 @@ Feature.Build.Placeholder.DescribeProduct,"Beschreibe, was du verkaufen möchtes
 Feature.Build.Placeholder.DescribeProductUpdate,Beschreibe ein Update
 Feature.Build.Prompt.CreateDeveloperProduct,"Hilf mir, ein Entwicklerprodukt zu erstellen, es in das Spiel einzubinden, die Änderungen zu prüfen und zu veröffentlichen und es zum Kauf anzubieten."
 Feature.Build.Title.AdCampaignDuration,{durationDays}-tägige Werbekampagne
+Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} Tage
 Feature.Build.Title.AdComplete,Werbeanzeige abgeschlossen
 Feature.Build.Title.AdCreated,Werbeanzeige erstellt
 Feature.Build.Title.AddFriendsToPlaytest,
@@ -2679,6 +2681,7 @@ Feature.Build.Title.GetUsers,Benutzer gewinnen
 Feature.Build.Title.ManagedPricingAcknowledgement,Verwaltete Preisgestaltung aktivieren?
 Feature.Build.Title.NoMonetizationProducts,"Beginne, in deinem Spiel Einnahmen zu erzielen"
 Feature.Build.Title.NoRobuxForUsage,Keine Robux mehr für das Build-Kontingent übrig
+Feature.Build.Title.PickCampaign,Dauer auswählen
 Feature.Build.Title.PlaytestInviteSendFailed,Einladungen konnten nicht gesendet werden
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Die folgenden Benutzer konnten nicht hinzugefügt werden:
@@ -3254,14 +3257,6 @@ Feature.Chat.Response.Failed,Fehlgeschlagen
 Feature.Chat.Response.NetworkError,Netzwerkfehler
 Feature.Chat.Response.Sending,Wird gesendet
 Feature.Chat.RobloxConnectUnavailableWithUser,Derzeit ist Roblox Connect für diesen Benutzer nicht verfügbar.
-Feature.Chat.ShareGameToChat.Favorites,Lieblingsspiele
-Feature.Chat.ShareGameToChat.FriendActivity,Freundesaktivität
-Feature.Chat.ShareGameToChat.NoFavoriteGames,Keine Favoriten
-Feature.Chat.ShareGameToChat.NoFriendActivity,Du hast keine Freundesaktivität.
-Feature.Chat.ShareGameToChat.NoPopularGames,Keine beliebten Experiences verfügbar
-Feature.Chat.ShareGameToChat.NoRecentGames,Nichts Kürzliches
-Feature.Chat.ShareGameToChat.Popular,Beliebt
-Feature.Chat.ShareGameToChat.Recent,Kürzlich
 Feature.Chat.Text.NoConnections,"Du hast noch keine Freunde hinzugefügt. Um loszulegen, finde deine Freunde auf Roblox und füge sie hinzu."
 Feature.Chat.Text.NoFriends,
 Feature.Chat.Title.MuteChatNotifications,Chat-Benachrichtigungen von Freunden während des Spiels stummschalten
@@ -4890,6 +4885,7 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{discountPercent} % 
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Indem du auf ""Weiter"" klickst, stimmst du den {linkStart}Abonnementbedingungen von Roblox{linkEnd} zu."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Indem du auf ""Kostenlos ausprobieren"" klickst, stimmst du den {linkStart}Abonnementbedingungen von Roblox{linkEnd} zu. Deine kostenlose Testversion endet in 1 Monat. Dir wird jeden Monat automatisch eine Gebühr berechnet und du kannst jederzeit kündigen."
 Feature.RobloxSubscription.Label.FreeTrialText,Kostenlose Testversion holen
+Feature.RobloxSubscription.Label.PendingRobux,Ausstehende Robux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Die von dir eingeladenen Personen erhalten
 Feature.RobloxSubscription.Label.ReferralYouGet,Du bekommst
@@ -5096,7 +5092,7 @@ Feature.SongDetails.Label.SongsBy,Songs von {artistName}
 Feature.SongDetails.Label.ThousandPlus,Über 1.000
 Feature.SongDetails.Label.Vendor,
 Feature.SplitPane.EditAvatarButtonText,
-Feature.SplitPane.NoAdditionalAvatarsDialogBody,Erstelle einen weiteren Avatar und wechsle dann hier zwischen den Designs.
+Feature.SplitPane.NoAdditionalAvatarsDialogBody,Erstelle einen weiteren Avatar und wechsle dann hier zwischen ihnen.
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,Avatar erstellen
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,Das sind alle deine gespeicherten Avatare
 Feature.SplitPane.UnsavedChangesDialogBody,"Wenn du jetzt wechselst, gehen deine Avatar-Änderungen möglicherweise verloren. Speichere sie, damit sie übernommen werden."
@@ -5559,7 +5555,7 @@ IAPExperience.RobuxUpsell.Text.LastPurchased,Zuletzt gekauft
 IAPExperience.RobuxUpsell.Text.Loading,
 IAPExperience.RobuxUpsell.Text.MoreRobux,Mehr Robux zum gleichen Preis
 IAPExperience.RobuxUpsell.Text.NeedMoreRobux,Du brauchst mehr Robux
-IAPExperience.RobuxUpsell.Text.PopularItem,
+IAPExperience.RobuxUpsell.Text.PopularItem,Beliebt
 IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet,Der Kauf von Robux wird auf Headset-Geräten noch nicht unterstützt. Bitte versuche es auf einem anderen Gerät.
 IAPExperience.RobuxUpsell.Text.RemainingBalance,Die verbleibenden {robux} werden deinem Kontostand gutgeschrieben.
 IAPExperience.RobuxUpsell.Text.TermsOfUse,
