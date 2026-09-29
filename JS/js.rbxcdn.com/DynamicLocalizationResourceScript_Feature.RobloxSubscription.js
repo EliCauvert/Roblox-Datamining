@@ -64,8 +64,10 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Body.UnsupportedPlatform": "This subscription isn't available to purchase on this device.",
     "Label.month": "month",
     "Label.months": "months",
+    "label.years": "years",
     "label.week": "week",
     "label.weeks": "weeks",
+    "label.year": "year",
     "Description.SavingWithPlus": "Saving {amountStart}{robuxAmount}{amountEnd} with Plus",
     "Description.SubscriptionLegal": "By clicking \"Subscribe\", you agree to the {linkStart}Roblox Subscription Terms{linkEnd}. You will be automatically charged each month until you cancel.",
     "Disclosure.BlackbirdTermsAgreement": "By clicking \\u{201C}{ctaText}\\u{201D}, you agree to the <a href=\"{termsUrl}\">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel.",
@@ -243,6 +245,14 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Label.PricePerYear": "{price}/year",
     "Label.RobloxPlusPriceRowV3": "{boldStart}{trialDuration} {trialPeriodLabel} free,{boldEnd} then {price}/{periodType}",
     "Label.FreeTrialDisclosureV3": "By clicking \"Try it for free,\" you agree to the {linkStart}Roblox Subscription Terms.{linkEnd} Your free trial will end in {trialDuration} {trialPeriodLabel} and you will be charged automatically each {billingPeriodLabel} and can cancel at any time.",
-    "Description.SubscriptionFreeTrialLegalV2": "By clicking \"Try it for free,\" you agree to the {linkStart}Roblox Subscription Terms{linkEnd}. Your {trialDuration} {trialPeriodLabel} free trial ends on {date} and you will be charged automatically each {billingPeriodLabel} and can cancel at any time."
+    "Description.SubscriptionFreeTrialLegalV2": "By clicking \"Try it for free,\" you agree to the {linkStart}Roblox Subscription Terms{linkEnd}. Your {trialDuration} {trialPeriodLabel} free trial ends on {date} and you will be charged automatically each {billingPeriodLabel} and can cancel at any time.",
+    "Action.Join": "Join",
+    "Heading.PlusReferralShareCard": "Join Plus to get 100 Robux",
+    "Heading.GetRobuxEveryMonth": "Get Robux every month",
+    "Description.GetRobuxEveryMonth": "Add monthly Robux with a Plus bundle",
+    "Label.PlusBundleName": "Plus {robuxAmount}",
+    "Label.IncludesAllPlusBenefits": "Includes all Plus benefits",
+    "Label.RobuxEveryMonth": "{robuxAmount} Robux every month",
+    "Label.TotalValue": "{price} total value"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.RobloxSubscription");

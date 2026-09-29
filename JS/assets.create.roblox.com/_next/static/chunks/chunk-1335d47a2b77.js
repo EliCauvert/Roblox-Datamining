@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "3e2b12f7-dfe4-4a88-82ac-271e18687285")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "69d15522-05ef-42e1-b627-6bfd164f3972")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 736570, t => {
@@ -16035,23 +16035,26 @@
                     y = (0, e0.useDebounce)(t, 100),
                     v = (n = d.home, h ? n.replace(/\/talent\/?$/, "/hire") : n),
                     b = (0, r.useMemo)(() => {
-                        let t;
+                        let t, n;
                         return t = {
                             financeOverview: o.financeOverview,
                             robloxCash: o.robloxCash
+                        }, n = {
+                            overview: g("Heading.Overview"),
+                            wallet: g("Heading.RobloxWallet")
                         }, (null == m ? void 0 : m.visible) ? {
                             overview: {
                                 key: "financeOverview",
-                                label: m.overviewLabel,
+                                label: n.overview,
                                 href: t.financeOverview
                             },
                             wallet: {
                                 key: "robloxCash",
-                                label: m.walletLabel,
+                                label: n.wallet,
                                 href: t.robloxCash
                             }
                         } : {}
-                    }, [m, o.financeOverview, o.robloxCash]),
+                    }, [m, o.financeOverview, o.robloxCash, g]),
                     C = (0, r.useMemo)(() => ({
                         creations: {
                             key: "creations",
@@ -27422,10 +27425,10 @@
         }
         static async getDataset(t) {
             let r;
-            if ("titles" === n.default.env.recommendedSearchType) r = nT("https://assets.create.roblox.com/6268002462c76cc8819d21ed26043437906174a7", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
+            if ("titles" === n.default.env.recommendedSearchType) r = nT("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
             else {
                 if (!nD()) return [];
-                r = nT("https://assets.create.roblox.com/6268002462c76cc8819d21ed26043437906174a7", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
+                r = nT("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
             }
             let o = await fetch(r),
                 a = await o.json();
@@ -33280,5 +33283,5 @@
     }])
 }]);
 
-//# debugId=3e2b12f7-dfe4-4a88-82ac-271e18687285
-//# sourceMappingURL=375aj83u9q537.js.map
+//# debugId=69d15522-05ef-42e1-b627-6bfd164f3972
+//# sourceMappingURL=1vs0b8h4ek4px.js.map

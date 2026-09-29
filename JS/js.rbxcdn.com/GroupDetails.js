@@ -183,8 +183,8 @@
                     u = t.isDeepEqual, p = t.isDeepStrictEqual
                 }
                 var O = !1,
-                    j = t.exports = F,
-                    x = {};
+                    x = t.exports = F,
+                    j = {};
 
                 function I(t) {
                     if (t.message instanceof Error) throw t.message;
@@ -211,7 +211,7 @@
                     for (var t = arguments.length, e = new Array(t), r = 0; r < t; r++) e[r] = arguments[r];
                     U.apply(void 0, [F, e.length].concat(e))
                 }
-                j.fail = function t(e, r, i, a, c) {
+                x.fail = function t(e, r, i, a, c) {
                     var u, p = arguments.length;
                     if (0 === p) u = "Failed";
                     else if (1 === p) i = e, e = void 0;
@@ -229,7 +229,7 @@
                     void 0 !== i && (s.message = i);
                     var l = new m(s);
                     throw u && (l.message = u, l.generatedMessage = !0), l
-                }, j.AssertionError = m, j.ok = F, j.equal = function t(e, r, n) {
+                }, x.AssertionError = m, x.ok = F, x.equal = function t(e, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
                     e != r && I({
                         actual: e,
@@ -238,7 +238,7 @@
                         operator: "==",
                         stackStartFn: t
                     })
-                }, j.notEqual = function t(e, r, n) {
+                }, x.notEqual = function t(e, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
                     e == r && I({
                         actual: e,
@@ -247,7 +247,7 @@
                         operator: "!=",
                         stackStartFn: t
                     })
-                }, j.deepEqual = function t(e, r, n) {
+                }, x.deepEqual = function t(e, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
                     void 0 === u && E(), u(e, r) || I({
                         actual: e,
@@ -256,7 +256,7 @@
                         operator: "deepEqual",
                         stackStartFn: t
                     })
-                }, j.notDeepEqual = function t(e, r, n) {
+                }, x.notDeepEqual = function t(e, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
                     void 0 === u && E(), u(e, r) && I({
                         actual: e,
@@ -265,7 +265,7 @@
                         operator: "notDeepEqual",
                         stackStartFn: t
                     })
-                }, j.deepStrictEqual = function t(e, r, n) {
+                }, x.deepStrictEqual = function t(e, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
                     void 0 === u && E(), p(e, r) || I({
                         actual: e,
@@ -274,7 +274,7 @@
                         operator: "deepStrictEqual",
                         stackStartFn: t
                     })
-                }, j.notDeepStrictEqual = function t(e, r, n) {
+                }, x.notDeepStrictEqual = function t(e, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
                     void 0 === u && E();
                     p(e, r) && I({
@@ -284,7 +284,7 @@
                         operator: "notDeepStrictEqual",
                         stackStartFn: t
                     })
-                }, j.strictEqual = function t(e, r, n) {
+                }, x.strictEqual = function t(e, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
                     w(e, r) || I({
                         actual: e,
@@ -293,7 +293,7 @@
                         operator: "strictEqual",
                         stackStartFn: t
                     })
-                }, j.notStrictEqual = function t(e, r, n) {
+                }, x.notStrictEqual = function t(e, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
                     w(e, r) && I({
                         actual: e,
@@ -364,7 +364,7 @@
                     } catch (t) {
                         return t
                     }
-                    return x
+                    return j
                 }
 
                 function G(t) {
@@ -383,7 +383,7 @@
                         return Promise.resolve().then((function() {
                             return e
                         })).then((function() {
-                            return x
+                            return j
                         })).catch((function(t) {
                             return t
                         }))
@@ -398,7 +398,7 @@
                         } else if (e === r) throw new l("error/message", 'The error "'.concat(e, '" is identical to the message.'));
                         n = r, r = void 0
                     } else if (null != r && "object" !== i(r) && "function" != typeof r) throw new y("error", ["Object", "Error", "Function", "RegExp"], r);
-                    if (e === x) {
+                    if (e === j) {
                         var o = "";
                         r && r.name && (o += " (".concat(r.name, ")")), o += n ? ": ".concat(n) : ".";
                         var a = "rejects" === t.name ? "rejection" : "exception";
@@ -414,7 +414,7 @@
                 }
 
                 function B(t, e, r, n) {
-                    if (e !== x) {
+                    if (e !== j) {
                         if ("string" == typeof r && (n = r, r = void 0), !r || C(e, r)) {
                             var o = n ? ": ".concat(n) : ".",
                                 i = "doesNotReject" === t.name ? "rejection" : "exception";
@@ -452,23 +452,23 @@
                     for (var t = arguments.length, e = new Array(t), r = 0; r < t; r++) e[r] = arguments[r];
                     U.apply(void 0, [N, e.length].concat(e))
                 }
-                j.throws = function t(e) {
+                x.throws = function t(e) {
                     for (var r = arguments.length, n = new Array(r > 1 ? r - 1 : 0), o = 1; o < r; o++) n[o - 1] = arguments[o];
                     T.apply(void 0, [t, k(e)].concat(n))
-                }, j.rejects = function t(e) {
+                }, x.rejects = function t(e) {
                     for (var r = arguments.length, n = new Array(r > 1 ? r - 1 : 0), o = 1; o < r; o++) n[o - 1] = arguments[o];
                     return M(e).then((function(e) {
                         return T.apply(void 0, [t, e].concat(n))
                     }))
-                }, j.doesNotThrow = function t(e) {
+                }, x.doesNotThrow = function t(e) {
                     for (var r = arguments.length, n = new Array(r > 1 ? r - 1 : 0), o = 1; o < r; o++) n[o - 1] = arguments[o];
                     B.apply(void 0, [t, k(e)].concat(n))
-                }, j.doesNotReject = function t(e) {
+                }, x.doesNotReject = function t(e) {
                     for (var r = arguments.length, n = new Array(r > 1 ? r - 1 : 0), o = 1; o < r; o++) n[o - 1] = arguments[o];
                     return M(e).then((function(e) {
                         return B.apply(void 0, [t, e].concat(n))
                     }))
-                }, j.ifError = function t(e) {
+                }, x.ifError = function t(e) {
                     if (null != e) {
                         var r = "ifError got unwanted exception: ";
                         "object" === i(e) && "string" == typeof e.message ? 0 === e.message.length && e.constructor ? r += e.constructor.name : r += e.message : r += b(e);
@@ -494,16 +494,16 @@
                         }
                         throw n
                     }
-                }, j.match = function t(e, r, n) {
+                }, x.match = function t(e, r, n) {
                     _(e, r, n, t, "match")
-                }, j.doesNotMatch = function t(e, r, n) {
+                }, x.doesNotMatch = function t(e, r, n) {
                     _(e, r, n, t, "doesNotMatch")
-                }, j.strict = S(N, j, {
-                    equal: j.strictEqual,
-                    deepEqual: j.deepStrictEqual,
-                    notEqual: j.notStrictEqual,
-                    notDeepEqual: j.notDeepStrictEqual
-                }), j.strict.strict = j.strict
+                }, x.strict = S(N, x, {
+                    equal: x.strictEqual,
+                    deepEqual: x.deepStrictEqual,
+                    notEqual: x.notStrictEqual,
+                    notDeepEqual: x.notDeepStrictEqual
+                }), x.strict.strict = x.strict
             },
             49801: function(t, e, r) {
                 "use strict";
@@ -671,7 +671,7 @@
                     }), r
                 }
 
-                function j(t) {
+                function x(t) {
                     return b(t, {
                         compact: !1,
                         customInspect: !1,
@@ -685,15 +685,15 @@
                     })
                 }
 
-                function x(t, e, r) {
+                function j(t, e, r) {
                     var o = "",
                         i = "",
                         a = 0,
                         c = "",
                         u = !1,
-                        p = j(t),
+                        p = x(t),
                         s = p.split("\n"),
-                        l = j(e).split("\n"),
+                        l = x(e).split("\n"),
                         y = 0,
                         f = "";
                     if ("strictEqual" === r && "object" === m(t) && "object" === m(e) && null !== t && null !== e && (r = "strictEqualObject"), 1 === s.length && 1 === l.length && s[0] !== l[0]) {
@@ -721,20 +721,20 @@
                         return "".concat(E.notIdentical, "\n\n").concat(O.join("\n"), "\n")
                     }
                     y > 3 && (c = "\n".concat(A, "...").concat(P).concat(c), u = !0), "" !== o && (c = "\n  ".concat(o).concat(c), o = "");
-                    var x = 0,
+                    var j = 0,
                         I = E[r] + "\n".concat(S, "+ actual").concat(P, " ").concat(w, "- expected").concat(P),
                         U = " ".concat(A, "...").concat(P, " Lines skipped");
                     for (y = 0; y < v; y++) {
                         var F = y - a;
-                        if (s.length < y + 1) F > 1 && y > 2 && (F > 4 ? (i += "\n".concat(A, "...").concat(P), u = !0) : F > 3 && (i += "\n  ".concat(l[y - 2]), x++), i += "\n  ".concat(l[y - 1]), x++), a = y, o += "\n".concat(w, "-").concat(P, " ").concat(l[y]), x++;
-                        else if (l.length < y + 1) F > 1 && y > 2 && (F > 4 ? (i += "\n".concat(A, "...").concat(P), u = !0) : F > 3 && (i += "\n  ".concat(s[y - 2]), x++), i += "\n  ".concat(s[y - 1]), x++), a = y, i += "\n".concat(S, "+").concat(P, " ").concat(s[y]), x++;
+                        if (s.length < y + 1) F > 1 && y > 2 && (F > 4 ? (i += "\n".concat(A, "...").concat(P), u = !0) : F > 3 && (i += "\n  ".concat(l[y - 2]), j++), i += "\n  ".concat(l[y - 1]), j++), a = y, o += "\n".concat(w, "-").concat(P, " ").concat(l[y]), j++;
+                        else if (l.length < y + 1) F > 1 && y > 2 && (F > 4 ? (i += "\n".concat(A, "...").concat(P), u = !0) : F > 3 && (i += "\n  ".concat(s[y - 2]), j++), i += "\n  ".concat(s[y - 1]), j++), a = y, i += "\n".concat(S, "+").concat(P, " ").concat(s[y]), j++;
                         else {
                             var R = l[y],
                                 C = s[y],
                                 k = C !== R && (!h(C, ",") || C.slice(0, -1) !== R);
-                            k && h(R, ",") && R.slice(0, -1) === C && (k = !1, C += ","), k ? (F > 1 && y > 2 && (F > 4 ? (i += "\n".concat(A, "...").concat(P), u = !0) : F > 3 && (i += "\n  ".concat(s[y - 2]), x++), i += "\n  ".concat(s[y - 1]), x++), a = y, i += "\n".concat(S, "+").concat(P, " ").concat(C), o += "\n".concat(w, "-").concat(P, " ").concat(R), x += 2) : (i += o, o = "", 1 !== F && 0 !== y || (i += "\n  ".concat(C), x++))
+                            k && h(R, ",") && R.slice(0, -1) === C && (k = !1, C += ","), k ? (F > 1 && y > 2 && (F > 4 ? (i += "\n".concat(A, "...").concat(P), u = !0) : F > 3 && (i += "\n  ".concat(s[y - 2]), j++), i += "\n  ".concat(s[y - 1]), j++), a = y, i += "\n".concat(S, "+").concat(P, " ").concat(C), o += "\n".concat(w, "-").concat(P, " ").concat(R), j += 2) : (i += o, o = "", 1 !== F && 0 !== y || (i += "\n  ".concat(C), j++))
                         }
-                        if (x > 20 && y < v - 2) return "".concat(I).concat(U, "\n").concat(i, "\n").concat(A, "...").concat(P).concat(o, "\n") + "".concat(A, "...").concat(P)
+                        if (j > 20 && y < v - 2) return "".concat(I).concat(U, "\n").concat(i, "\n").concat(A, "...").concat(P).concat(o, "\n") + "".concat(A, "...").concat(P)
                     }
                     return "".concat(I).concat(u ? U : "", "\n").concat(i).concat(o).concat(c).concat(f)
                 }
@@ -772,18 +772,18 @@
                             c = t.expected,
                             u = Error.stackTraceLimit;
                         if (Error.stackTraceLimit = 0, null != r) e = y.call(this, String(r));
-                        else if (n.stderr && n.stderr.isTTY && (n.stderr && n.stderr.getColorDepth && 1 !== n.stderr.getColorDepth() ? (A = "[34m", S = "[32m", P = "[39m", w = "[31m") : (A = "", S = "", P = "", w = "")), "object" === m(a) && null !== a && "object" === m(c) && null !== c && "stack" in a && a instanceof Error && "stack" in c && c instanceof Error && (a = O(a), c = O(c)), "deepStrictEqual" === o || "strictEqual" === o) e = y.call(this, x(a, c, o));
+                        else if (n.stderr && n.stderr.isTTY && (n.stderr && n.stderr.getColorDepth && 1 !== n.stderr.getColorDepth() ? (A = "[34m", S = "[32m", P = "[39m", w = "[31m") : (A = "", S = "", P = "", w = "")), "object" === m(a) && null !== a && "object" === m(c) && null !== c && "stack" in a && a instanceof Error && "stack" in c && c instanceof Error && (a = O(a), c = O(c)), "deepStrictEqual" === o || "strictEqual" === o) e = y.call(this, j(a, c, o));
                         else if ("notDeepStrictEqual" === o || "notStrictEqual" === o) {
                             var l = E[o],
-                                f = j(a).split("\n");
+                                f = x(a).split("\n");
                             if ("notStrictEqual" === o && "object" === m(a) && null !== a && (l = E.notStrictEqualObject), f.length > 30)
                                 for (f[26] = "".concat(A, "...").concat(P); f.length > 27;) f.pop();
                             e = 1 === f.length ? y.call(this, "".concat(l, " ").concat(f[0])) : y.call(this, "".concat(l, "\n\n").concat(f.join("\n"), "\n"))
                         } else {
-                            var d = j(a),
+                            var d = x(a),
                                 g = "",
                                 b = E[o];
-                            "notDeepEqual" === o || "notEqual" === o ? (d = "".concat(E[o], "\n\n").concat(d)).length > 1024 && (d = "".concat(d.slice(0, 1021), "...")) : (g = "".concat(j(c)), d.length > 512 && (d = "".concat(d.slice(0, 509), "...")), g.length > 512 && (g = "".concat(g.slice(0, 509), "...")), "deepEqual" === o || "equal" === o ? d = "".concat(b, "\n\n").concat(d, "\n\nshould equal\n\n") : g = " ".concat(o, " ").concat(g)), e = y.call(this, "".concat(d).concat(g))
+                            "notDeepEqual" === o || "notEqual" === o ? (d = "".concat(E[o], "\n\n").concat(d)).length > 1024 && (d = "".concat(d.slice(0, 1021), "...")) : (g = "".concat(x(c)), d.length > 512 && (d = "".concat(d.slice(0, 509), "...")), g.length > 512 && (g = "".concat(g.slice(0, 509), "...")), "deepEqual" === o || "equal" === o ? d = "".concat(b, "\n\n").concat(d, "\n\nshould equal\n\n") : g = " ".concat(o, " ").concat(g)), e = y.call(this, "".concat(d).concat(g))
                         }
                         return Error.stackTraceLimit = u, e.generatedMessage = !r, Object.defineProperty(s(e), "name", {
                             value: "AssertionError [ERR_ASSERTION]",
@@ -1050,8 +1050,8 @@
                     P = m.isNativeError,
                     E = m.isBoxedPrimitive,
                     O = m.isNumberObject,
-                    j = m.isStringObject,
-                    x = m.isBooleanObject,
+                    x = m.isStringObject,
+                    j = m.isBooleanObject,
                     I = m.isBigIntObject,
                     U = m.isSymbolObject,
                     F = m.isFloat32Array,
@@ -1125,7 +1125,7 @@
                         if (b(t)) {
                             if (c = e, (o = t).byteLength !== c.byteLength || 0 !== G(new Uint8Array(o), new Uint8Array(c))) return !1
                         } else if (E(t) && ! function(t, e) {
-                                return O(t) ? O(e) && p(Number.prototype.valueOf.call(t), Number.prototype.valueOf.call(e)) : j(t) ? j(e) && String.prototype.valueOf.call(t) === String.prototype.valueOf.call(e) : x(t) ? x(e) && Boolean.prototype.valueOf.call(t) === Boolean.prototype.valueOf.call(e) : I(t) ? I(e) && BigInt.prototype.valueOf.call(t) === BigInt.prototype.valueOf.call(e) : U(e) && Symbol.prototype.valueOf.call(t) === Symbol.prototype.valueOf.call(e)
+                                return O(t) ? O(e) && p(Number.prototype.valueOf.call(t), Number.prototype.valueOf.call(e)) : x(t) ? x(e) && String.prototype.valueOf.call(t) === String.prototype.valueOf.call(e) : j(t) ? j(e) && Boolean.prototype.valueOf.call(t) === Boolean.prototype.valueOf.call(e) : I(t) ? I(e) && BigInt.prototype.valueOf.call(t) === BigInt.prototype.valueOf.call(e) : U(e) && Symbol.prototype.valueOf.call(t) === Symbol.prototype.valueOf.call(e)
                             }(t, e)) return !1
                     }
                     return B(t, e, r, n, 0)
@@ -1584,8 +1584,8 @@
                         "%WeakSetPrototype%": ["WeakSet", "prototype"]
                     },
                     O = r(83208),
-                    j = r(78554),
-                    x = O.call(Function.call, Array.prototype.concat),
+                    x = r(78554),
+                    j = O.call(Function.call, Array.prototype.concat),
                     I = O.call(Function.apply, Array.prototype.splice),
                     U = O.call(Function.call, String.prototype.replace),
                     F = O.call(Function.call, String.prototype.slice),
@@ -1594,7 +1594,7 @@
                     k = /\\(\\)?/g,
                     G = function(t, e) {
                         var r, n = t;
-                        if (j(E, n) && (n = "%" + (r = E[n])[0] + "%"), j(S, n)) {
+                        if (x(E, n) && (n = "%" + (r = E[n])[0] + "%"), x(S, n)) {
                             var o = S[n];
                             if (o === h && (o = P(n)), void 0 === o && !e) throw new p("intrinsic " + t + " exists, but is not available. Please file an issue!");
                             return {
@@ -1625,13 +1625,13 @@
                         a = o.value,
                         c = !1,
                         s = o.alias;
-                    s && (n = s[0], I(r, x([0, 1], s)));
+                    s && (n = s[0], I(r, j([0, 1], s)));
                     for (var l = 1, y = !0; l < r.length; l += 1) {
                         var d = r[l],
                             g = F(d, 0, 1),
                             m = F(d, -1);
                         if (('"' === g || "'" === g || "`" === g || '"' === m || "'" === m || "`" === m) && g !== m) throw new u("property names with quotes must have matching quotes");
-                        if ("constructor" !== d && y || (c = !0), j(S, i = "%" + (n += "." + d) + "%")) a = S[i];
+                        if ("constructor" !== d && y || (c = !0), x(S, i = "%" + (n += "." + d) + "%")) a = S[i];
                         else if (null != a) {
                             if (!(d in a)) {
                                 if (!e) throw new p("base intrinsic for " + t + " exists, but the property is not available.");
@@ -1640,7 +1640,7 @@
                             if (f && l + 1 >= r.length) {
                                 var b = f(a, d);
                                 a = (y = !!b) && "get" in b && !("originalValue" in b.get) ? b.get : a[d]
-                            } else y = j(a, d), a = a[d];
+                            } else y = x(a, d), a = a[d];
                             y && !c && (S[i] = a)
                         }
                     }
@@ -2050,7 +2050,8 @@
                         experimentLayer: "UserCommunities.Groups.Discovery",
                         socialCommunityExperimentLayer: "Social.CommunityPage",
                         storeExperimentLayer: "Social.Store",
-                        aboutTabWithExperienceExperimentLayer: "UserCommunities.Groups.AboutTabWithExperience"
+                        aboutTabWithExperienceExperimentLayer: "UserCommunities.Groups.AboutTabWithExperience",
+                        announcementArchiveExperimentLayer: "UserCommunities.Groups.AnnouncementArchive"
                     };
                 o.A.constant("groupsConstants", a), e.default = a
             },
@@ -2497,10 +2498,10 @@
                     O = function(t) {
                         return v().logCmntySearchResultsReturnedEvent(t)
                     },
-                    j = (React, function() {
+                    x = (React, function() {
                         return v().mintEntrypointImpressionId()
                     }),
-                    x = function() {
+                    j = function() {
                         return v().mintSearchId()
                     };
 
@@ -2512,8 +2513,8 @@
                         logCmntyEntrypointClickEvent: P,
                         logCmntySearchConductedEvent: E,
                         logCmntySearchResultsReturnedEvent: O,
-                        mintEntrypointImpressionId: j,
-                        mintSearchId: x,
+                        mintEntrypointImpressionId: x,
+                        mintSearchId: j,
                         getCommunitySessionEnterFrom: S
                     }
                 }
@@ -2556,13 +2557,13 @@
                 }
 
                 function c(t) {
-                    var e, r, o, i, c, u, p, s = {},
-                        l = function() {
+                    var e, r, o, i, c, u, p, s, l = {},
+                        y = function() {
                             var t = a(regeneratorRuntime.mark((function t(e) {
                                 return regeneratorRuntime.wrap((function(t) {
                                     for (;;) switch (t.prev = t.next) {
                                         case 0:
-                                            return s[e] || (s[e] = n.ExperimentationService.getAllValuesForLayer(e)), t.abrupt("return", s[e]);
+                                            return l[e] || (l[e] = n.ExperimentationService.getAllValuesForLayer(e)), t.abrupt("return", l[e]);
                                         case 2:
                                         case "end":
                                             return t.stop()
@@ -2574,7 +2575,7 @@
                             }
                         }();
                     return {
-                        getLandingPageExperiment: (p = a(regeneratorRuntime.mark((function e() {
+                        getLandingPageExperiment: (s = a(regeneratorRuntime.mark((function e() {
                             var r, o, i, a, c;
                             return regeneratorRuntime.wrap((function(e) {
                                 for (;;) switch (e.prev = e.next) {
@@ -2588,7 +2589,7 @@
                                         }
                                         return e.abrupt("return", r);
                                     case 3:
-                                        return e.prev = 3, e.next = 6, l(t.experimentLayer);
+                                        return e.prev = 3, e.next = 6, y(t.experimentLayer);
                                     case 6:
                                         (o = e.sent).groupsLandingConfig && (i = o.groupsLandingConfig, a = i.isSearchV2, c = i.useSearchLanding, r.isSearchV2 = a, r.useSearchLanding = c), e.next = 12;
                                         break;
@@ -2604,12 +2605,12 @@
                                 [3, 10]
                             ])
                         }))), function() {
-                            return p.apply(this, arguments)
+                            return s.apply(this, arguments)
                         }),
                         exposeLandingPageExperiment: function() {
                             n.CurrentUser.isAuthenticated && n.ExperimentationService.logLayerExposure(t.experimentLayer)
                         },
-                        isHidingEmptyCommunityTabsExperimentEnabled: (u = a(regeneratorRuntime.mark((function e() {
+                        isHidingEmptyCommunityTabsExperimentEnabled: (p = a(regeneratorRuntime.mark((function e() {
                             var r, o;
                             return regeneratorRuntime.wrap((function(e) {
                                 for (;;) switch (e.prev = e.next) {
@@ -2620,7 +2621,7 @@
                                         }
                                         return e.abrupt("return", !1);
                                     case 2:
-                                        return e.prev = 2, e.next = 5, l(t.socialCommunityExperimentLayer);
+                                        return e.prev = 2, e.next = 5, y(t.socialCommunityExperimentLayer);
                                     case 5:
                                         return o = e.sent, e.abrupt("return", null !== (r = o.hideEmptyCommunityTabs) && void 0 !== r && r);
                                     case 9:
@@ -2635,9 +2636,9 @@
                                 [2, 9]
                             ])
                         }))), function() {
-                            return u.apply(this, arguments)
+                            return p.apply(this, arguments)
                         }),
-                        isGroupsListRedesignExperimentEnabled: (c = a(regeneratorRuntime.mark((function e() {
+                        isGroupsListRedesignExperimentEnabled: (u = a(regeneratorRuntime.mark((function e() {
                             var r, o;
                             return regeneratorRuntime.wrap((function(e) {
                                 for (;;) switch (e.prev = e.next) {
@@ -2648,7 +2649,7 @@
                                         }
                                         return e.abrupt("return", !1);
                                     case 2:
-                                        return e.prev = 2, e.next = 5, l(t.socialCommunityExperimentLayer);
+                                        return e.prev = 2, e.next = 5, y(t.socialCommunityExperimentLayer);
                                     case 5:
                                         return o = e.sent, e.abrupt("return", null === (r = null == o ? void 0 : o.showGroupsListRedesign) || void 0 === r || r);
                                     case 9:
@@ -2663,9 +2664,9 @@
                                 [2, 9]
                             ])
                         }))), function() {
-                            return c.apply(this, arguments)
+                            return u.apply(this, arguments)
                         }),
-                        isGroupExperiencesRedesignExperimentEnabled: (i = a(regeneratorRuntime.mark((function e() {
+                        isGroupExperiencesRedesignExperimentEnabled: (c = a(regeneratorRuntime.mark((function e() {
                             var r, o;
                             return regeneratorRuntime.wrap((function(e) {
                                 for (;;) switch (e.prev = e.next) {
@@ -2676,7 +2677,7 @@
                                         }
                                         return e.abrupt("return", !1);
                                     case 2:
-                                        return e.prev = 2, e.next = 5, l(t.socialCommunityExperimentLayer);
+                                        return e.prev = 2, e.next = 5, y(t.socialCommunityExperimentLayer);
                                     case 5:
                                         return o = e.sent, e.abrupt("return", null !== (r = null == o ? void 0 : o.showGroupExperiencesRedesign) && void 0 !== r && r);
                                     case 9:
@@ -2691,9 +2692,9 @@
                                 [2, 9]
                             ])
                         }))), function() {
-                            return i.apply(this, arguments)
+                            return c.apply(this, arguments)
                         }),
-                        isGroupExperienceServersExperimentEnabled: (o = a(regeneratorRuntime.mark((function e() {
+                        isGroupExperienceServersExperimentEnabled: (i = a(regeneratorRuntime.mark((function e() {
                             var r, o;
                             return regeneratorRuntime.wrap((function(e) {
                                 for (;;) switch (e.prev = e.next) {
@@ -2704,7 +2705,7 @@
                                         }
                                         return e.abrupt("return", !1);
                                     case 2:
-                                        return e.prev = 2, e.next = 5, l(t.aboutTabWithExperienceExperimentLayer);
+                                        return e.prev = 2, e.next = 5, y(t.aboutTabWithExperienceExperimentLayer);
                                     case 5:
                                         return o = e.sent, e.abrupt("return", null !== (r = null == o ? void 0 : o.showGroupExperienceServers) && void 0 !== r && r);
                                     case 9:
@@ -2719,9 +2720,9 @@
                                 [2, 9]
                             ])
                         }))), function() {
-                            return o.apply(this, arguments)
+                            return i.apply(this, arguments)
                         }),
-                        exposeAboutTabExperiment: (r = a(regeneratorRuntime.mark((function e(r) {
+                        exposeAboutTabExperiment: (o = a(regeneratorRuntime.mark((function e(r) {
                             var o;
                             return regeneratorRuntime.wrap((function(e) {
                                 for (;;) switch (e.prev = e.next) {
@@ -2732,7 +2733,7 @@
                                         }
                                         return e.abrupt("return");
                                     case 2:
-                                        return e.prev = 2, e.next = 5, l(t.aboutTabWithExperienceExperimentLayer);
+                                        return e.prev = 2, e.next = 5, y(t.aboutTabWithExperienceExperimentLayer);
                                     case 5:
                                         null != (o = e.sent) && Object.prototype.hasOwnProperty.call(o, "showGroupExperienceServers") && n.ExperimentationService.logLayerExposure(t.aboutTabWithExperienceExperimentLayer), e.next = 11;
                                         break;
@@ -2746,8 +2747,46 @@
                                 [2, 9]
                             ])
                         }))), function(t) {
+                            return o.apply(this, arguments)
+                        }),
+                        isAnnouncementArchiveExperimentEnabled: (r = a(regeneratorRuntime.mark((function e() {
+                            var r;
+                            return regeneratorRuntime.wrap((function(e) {
+                                for (;;) switch (e.prev = e.next) {
+                                    case 0:
+                                        if (n.CurrentUser.isAuthenticated) {
+                                            e.next = 2;
+                                            break
+                                        }
+                                        return e.abrupt("return", void 0);
+                                    case 2:
+                                        return e.prev = 2, e.next = 5, y(t.announcementArchiveExperimentLayer);
+                                    case 5:
+                                        if (null == (r = e.sent) || !Object.prototype.hasOwnProperty.call(r, "isAnnouncementArchiveEnabled")) {
+                                            e.next = 8;
+                                            break
+                                        }
+                                        return e.abrupt("return", !0 === r.isAnnouncementArchiveEnabled);
+                                    case 8:
+                                        e.next = 12;
+                                        break;
+                                    case 10:
+                                        e.prev = 10, e.t0 = e.catch(2);
+                                    case 12:
+                                        return e.abrupt("return", void 0);
+                                    case 13:
+                                    case "end":
+                                        return e.stop()
+                                }
+                            }), e, null, [
+                                [2, 10]
+                            ])
+                        }))), function() {
                             return r.apply(this, arguments)
                         }),
+                        exposeAnnouncementArchiveExperiment: function() {
+                            n.CurrentUser.isAuthenticated && n.ExperimentationService.logLayerExposure(t.announcementArchiveExperimentLayer)
+                        },
                         getCommunityStoreSortOrderExperimentVariant: (e = a(regeneratorRuntime.mark((function e() {
                             var r, o;
                             return regeneratorRuntime.wrap((function(e) {
@@ -2759,7 +2798,7 @@
                                         }
                                         return e.abrupt("return", "Updated");
                                     case 2:
-                                        return e.prev = 2, e.next = 5, l(t.storeExperimentLayer);
+                                        return e.prev = 2, e.next = 5, y(t.storeExperimentLayer);
                                     case 5:
                                         return o = e.sent, n.ExperimentationService.logLayerExposure(t.storeExperimentLayer), e.abrupt("return", null !== (r = null == o ? void 0 : o.communityStoreSortOrder) && void 0 !== r ? r : "Updated");
                                     case 10:
@@ -3818,8 +3857,8 @@
                         "%WeakSetPrototype%": ["WeakSet", "prototype"]
                     },
                     O = r(97768),
-                    j = r(78554),
-                    x = O.call(Function.call, Array.prototype.concat),
+                    x = r(78554),
+                    j = O.call(Function.call, Array.prototype.concat),
                     I = O.call(Function.apply, Array.prototype.splice),
                     U = O.call(Function.call, String.prototype.replace),
                     F = O.call(Function.call, String.prototype.slice),
@@ -3828,7 +3867,7 @@
                     k = /\\(\\)?/g,
                     G = function(t, e) {
                         var r, n = t;
-                        if (j(E, n) && (n = "%" + (r = E[n])[0] + "%"), j(S, n)) {
+                        if (x(E, n) && (n = "%" + (r = E[n])[0] + "%"), x(S, n)) {
                             var o = S[n];
                             if (o === h && (o = P(n)), void 0 === o && !e) throw new p("intrinsic " + t + " exists, but is not available. Please file an issue!");
                             return {
@@ -3859,13 +3898,13 @@
                         a = o.value,
                         c = !1,
                         s = o.alias;
-                    s && (n = s[0], I(r, x([0, 1], s)));
+                    s && (n = s[0], I(r, j([0, 1], s)));
                     for (var l = 1, y = !0; l < r.length; l += 1) {
                         var d = r[l],
                             g = F(d, 0, 1),
                             m = F(d, -1);
                         if (('"' === g || "'" === g || "`" === g || '"' === m || "'" === m || "`" === m) && g !== m) throw new u("property names with quotes must have matching quotes");
-                        if ("constructor" !== d && y || (c = !0), j(S, i = "%" + (n += "." + d) + "%")) a = S[i];
+                        if ("constructor" !== d && y || (c = !0), x(S, i = "%" + (n += "." + d) + "%")) a = S[i];
                         else if (null != a) {
                             if (!(d in a)) {
                                 if (!e) throw new p("base intrinsic for " + t + " exists, but the property is not available.");
@@ -3874,7 +3913,7 @@
                             if (f && l + 1 >= r.length) {
                                 var b = f(a, d);
                                 a = (y = !!b) && "get" in b && !("originalValue" in b.get) ? b.get : a[d]
-                            } else y = j(a, d), a = a[d];
+                            } else y = x(a, d), a = a[d];
                             y && !c && (S[i] = a)
                         }
                     }
@@ -4421,8 +4460,8 @@
                         "%WeakSetPrototype%": ["WeakSet", "prototype"]
                     },
                     O = r(71452),
-                    j = r(78554),
-                    x = O.call(Function.call, Array.prototype.concat),
+                    x = r(78554),
+                    j = O.call(Function.call, Array.prototype.concat),
                     I = O.call(Function.apply, Array.prototype.splice),
                     U = O.call(Function.call, String.prototype.replace),
                     F = O.call(Function.call, String.prototype.slice),
@@ -4431,7 +4470,7 @@
                     k = /\\(\\)?/g,
                     G = function(t, e) {
                         var r, n = t;
-                        if (j(E, n) && (n = "%" + (r = E[n])[0] + "%"), j(S, n)) {
+                        if (x(E, n) && (n = "%" + (r = E[n])[0] + "%"), x(S, n)) {
                             var o = S[n];
                             if (o === h && (o = P(n)), void 0 === o && !e) throw new p("intrinsic " + t + " exists, but is not available. Please file an issue!");
                             return {
@@ -4462,13 +4501,13 @@
                         a = o.value,
                         c = !1,
                         s = o.alias;
-                    s && (n = s[0], I(r, x([0, 1], s)));
+                    s && (n = s[0], I(r, j([0, 1], s)));
                     for (var l = 1, y = !0; l < r.length; l += 1) {
                         var d = r[l],
                             g = F(d, 0, 1),
                             m = F(d, -1);
                         if (('"' === g || "'" === g || "`" === g || '"' === m || "'" === m || "`" === m) && g !== m) throw new u("property names with quotes must have matching quotes");
-                        if ("constructor" !== d && y || (c = !0), j(S, i = "%" + (n += "." + d) + "%")) a = S[i];
+                        if ("constructor" !== d && y || (c = !0), x(S, i = "%" + (n += "." + d) + "%")) a = S[i];
                         else if (null != a) {
                             if (!(d in a)) {
                                 if (!e) throw new p("base intrinsic for " + t + " exists, but the property is not available.");
@@ -4477,7 +4516,7 @@
                             if (f && l + 1 >= r.length) {
                                 var b = f(a, d);
                                 a = (y = !!b) && "get" in b && !("originalValue" in b.get) ? b.get : a[d]
-                            } else y = j(a, d), a = a[d];
+                            } else y = x(a, d), a = a[d];
                             y && !c && (S[i] = a)
                         }
                     }
@@ -4968,8 +5007,8 @@
                         "%WeakSetPrototype%": ["WeakSet", "prototype"]
                     },
                     O = r(44041),
-                    j = r(78554),
-                    x = O.call(Function.call, Array.prototype.concat),
+                    x = r(78554),
+                    j = O.call(Function.call, Array.prototype.concat),
                     I = O.call(Function.apply, Array.prototype.splice),
                     U = O.call(Function.call, String.prototype.replace),
                     F = O.call(Function.call, String.prototype.slice),
@@ -4978,7 +5017,7 @@
                     k = /\\(\\)?/g,
                     G = function(t, e) {
                         var r, n = t;
-                        if (j(E, n) && (n = "%" + (r = E[n])[0] + "%"), j(S, n)) {
+                        if (x(E, n) && (n = "%" + (r = E[n])[0] + "%"), x(S, n)) {
                             var o = S[n];
                             if (o === h && (o = P(n)), void 0 === o && !e) throw new p("intrinsic " + t + " exists, but is not available. Please file an issue!");
                             return {
@@ -5009,13 +5048,13 @@
                         a = o.value,
                         c = !1,
                         s = o.alias;
-                    s && (n = s[0], I(r, x([0, 1], s)));
+                    s && (n = s[0], I(r, j([0, 1], s)));
                     for (var l = 1, y = !0; l < r.length; l += 1) {
                         var d = r[l],
                             g = F(d, 0, 1),
                             m = F(d, -1);
                         if (('"' === g || "'" === g || "`" === g || '"' === m || "'" === m || "`" === m) && g !== m) throw new u("property names with quotes must have matching quotes");
-                        if ("constructor" !== d && y || (c = !0), j(S, i = "%" + (n += "." + d) + "%")) a = S[i];
+                        if ("constructor" !== d && y || (c = !0), x(S, i = "%" + (n += "." + d) + "%")) a = S[i];
                         else if (null != a) {
                             if (!(d in a)) {
                                 if (!e) throw new p("base intrinsic for " + t + " exists, but the property is not available.");
@@ -5024,7 +5063,7 @@
                             if (f && l + 1 >= r.length) {
                                 var b = f(a, d);
                                 a = (y = !!b) && "get" in b && !("originalValue" in b.get) ? b.get : a[d]
-                            } else y = j(a, d), a = a[d];
+                            } else y = x(a, d), a = a[d];
                             y && !c && (S[i] = a)
                         }
                     }
@@ -5642,8 +5681,8 @@
                         "%WeakSetPrototype%": ["WeakSet", "prototype"]
                     },
                     O = r(8280),
-                    j = r(78554),
-                    x = O.call(Function.call, Array.prototype.concat),
+                    x = r(78554),
+                    j = O.call(Function.call, Array.prototype.concat),
                     I = O.call(Function.apply, Array.prototype.splice),
                     U = O.call(Function.call, String.prototype.replace),
                     F = O.call(Function.call, String.prototype.slice),
@@ -5652,7 +5691,7 @@
                     k = /\\(\\)?/g,
                     G = function(t, e) {
                         var r, n = t;
-                        if (j(E, n) && (n = "%" + (r = E[n])[0] + "%"), j(S, n)) {
+                        if (x(E, n) && (n = "%" + (r = E[n])[0] + "%"), x(S, n)) {
                             var o = S[n];
                             if (o === h && (o = P(n)), void 0 === o && !e) throw new p("intrinsic " + t + " exists, but is not available. Please file an issue!");
                             return {
@@ -5683,13 +5722,13 @@
                         a = o.value,
                         c = !1,
                         s = o.alias;
-                    s && (n = s[0], I(r, x([0, 1], s)));
+                    s && (n = s[0], I(r, j([0, 1], s)));
                     for (var l = 1, y = !0; l < r.length; l += 1) {
                         var d = r[l],
                             g = F(d, 0, 1),
                             m = F(d, -1);
                         if (('"' === g || "'" === g || "`" === g || '"' === m || "'" === m || "`" === m) && g !== m) throw new u("property names with quotes must have matching quotes");
-                        if ("constructor" !== d && y || (c = !0), j(S, i = "%" + (n += "." + d) + "%")) a = S[i];
+                        if ("constructor" !== d && y || (c = !0), x(S, i = "%" + (n += "." + d) + "%")) a = S[i];
                         else if (null != a) {
                             if (!(d in a)) {
                                 if (!e) throw new p("base intrinsic for " + t + " exists, but the property is not available.");
@@ -5698,7 +5737,7 @@
                             if (f && l + 1 >= r.length) {
                                 var b = f(a, d);
                                 a = (y = !!b) && "get" in b && !("originalValue" in b.get) ? b.get : a[d]
-                            } else y = j(a, d), a = a[d];
+                            } else y = x(a, d), a = a[d];
                             y && !c && (S[i] = a)
                         }
                     }
@@ -5838,12 +5877,12 @@
                 }, S.working = "undefined" != typeof ArrayBuffer && S(new ArrayBuffer), e.isArrayBuffer = w, P.working = "undefined" != typeof ArrayBuffer && "undefined" != typeof DataView && P(new DataView(new ArrayBuffer(1), 0, 1)), e.isDataView = E;
                 var O = "undefined" != typeof SharedArrayBuffer ? SharedArrayBuffer : void 0;
 
-                function j(t) {
+                function x(t) {
                     return "[object SharedArrayBuffer]" === s(t)
                 }
 
-                function x(t) {
-                    return void 0 !== O && (void 0 === j.working && (j.working = j(new O)), j.working ? j(t) : t instanceof O)
+                function j(t) {
+                    return void 0 !== O && (void 0 === x.working && (x.working = x(new O)), x.working ? x(t) : t instanceof O)
                 }
 
                 function I(t) {
@@ -5865,7 +5904,7 @@
                 function C(t) {
                     return p && m(t, g)
                 }
-                e.isSharedArrayBuffer = x, e.isAsyncFunction = function(t) {
+                e.isSharedArrayBuffer = j, e.isAsyncFunction = function(t) {
                     return "[object AsyncFunction]" === s(t)
                 }, e.isMapIterator = function(t) {
                     return "[object Map Iterator]" === s(t)
@@ -5878,7 +5917,7 @@
                 }, e.isNumberObject = I, e.isStringObject = U, e.isBooleanObject = F, e.isBigIntObject = R, e.isSymbolObject = C, e.isBoxedPrimitive = function(t) {
                     return I(t) || U(t) || F(t) || R(t) || C(t)
                 }, e.isAnyArrayBuffer = function(t) {
-                    return "undefined" != typeof Uint8Array && (w(t) || x(t))
+                    return "undefined" != typeof Uint8Array && (w(t) || j(t))
                 }, ["isProxy", "isExternal", "isModuleNamespaceObject"].forEach((function(t) {
                     Object.defineProperty(e, t, {
                         enumerable: !1,
@@ -5960,7 +5999,7 @@
                 }
 
                 function f(t, r, n) {
-                    if (t.customInspect && r && j(r.inspect) && r.inspect !== e.inspect && (!r.constructor || r.constructor.prototype !== r)) {
+                    if (t.customInspect && r && x(r.inspect) && r.inspect !== e.inspect && (!r.constructor || r.constructor.prototype !== r)) {
                         var o = r.inspect(n, t);
                         return A(o) || (o = f(t, o, n)), o
                     }
@@ -5984,7 +6023,7 @@
                         }(a);
                     if (t.showHidden && (a = Object.getOwnPropertyNames(r)), O(r) && (a.indexOf("message") >= 0 || a.indexOf("description") >= 0)) return d(r);
                     if (0 === a.length) {
-                        if (j(r)) {
+                        if (x(r)) {
                             var u = r.name ? ": " + r.name : "";
                             return t.stylize("[Function" + u + "]", "special")
                         }
@@ -5995,7 +6034,7 @@
                     var p, s = "",
                         l = !1,
                         y = ["{", "}"];
-                    (m(r) && (l = !0, y = ["[", "]"]), j(r)) && (s = " [Function" + (r.name ? ": " + r.name : "") + "]");
+                    (m(r) && (l = !0, y = ["[", "]"]), x(r)) && (s = " [Function" + (r.name ? ": " + r.name : "") + "]");
                     return w(r) && (s = " " + RegExp.prototype.toString.call(r)), E(r) && (s = " " + Date.prototype.toUTCString.call(r)), O(r) && (s = " " + d(r)), 0 !== a.length || l && 0 != r.length ? n < 0 ? w(r) ? t.stylize(RegExp.prototype.toString.call(r), "regexp") : t.stylize("[Object]", "special") : (t.seen.push(r), p = l ? function(t, e, r, n, o) {
                         for (var i = [], a = 0, c = e.length; a < c; ++a) F(e, String(a)) ? i.push(g(t, e, r, n, String(a), !0)) : i.push("");
                         return o.forEach((function(o) {
@@ -6056,7 +6095,7 @@
                 }
 
                 function w(t) {
-                    return P(t) && "[object RegExp]" === x(t)
+                    return P(t) && "[object RegExp]" === j(t)
                 }
 
                 function P(t) {
@@ -6064,18 +6103,18 @@
                 }
 
                 function E(t) {
-                    return P(t) && "[object Date]" === x(t)
+                    return P(t) && "[object Date]" === j(t)
                 }
 
                 function O(t) {
-                    return P(t) && ("[object Error]" === x(t) || t instanceof Error)
-                }
-
-                function j(t) {
-                    return "function" == typeof t
+                    return P(t) && ("[object Error]" === j(t) || t instanceof Error)
                 }
 
                 function x(t) {
+                    return "function" == typeof t
+                }
+
+                function j(t) {
                     return Object.prototype.toString.call(t)
                 }
 
@@ -6119,7 +6158,7 @@
                     return null == t
                 }, e.isNumber = h, e.isString = A, e.isSymbol = function(t) {
                     return "symbol" == typeof t
-                }, e.isUndefined = S, e.isRegExp = w, e.types.isRegExp = w, e.isObject = P, e.isDate = E, e.types.isDate = E, e.isError = O, e.types.isNativeError = O, e.isFunction = j, e.isPrimitive = function(t) {
+                }, e.isUndefined = S, e.isRegExp = w, e.types.isRegExp = w, e.isObject = P, e.isDate = E, e.types.isDate = E, e.isError = O, e.types.isNativeError = O, e.isFunction = x, e.isPrimitive = function(t) {
                     return null === t || "boolean" == typeof t || "number" == typeof t || "string" == typeof t || "symbol" == typeof t || void 0 === t
                 }, e.isBuffer = r(95272);
                 var U = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -6513,8 +6552,8 @@
                         "%WeakSetPrototype%": ["WeakSet", "prototype"]
                     },
                     O = r(14258),
-                    j = r(78554),
-                    x = O.call(Function.call, Array.prototype.concat),
+                    x = r(78554),
+                    j = O.call(Function.call, Array.prototype.concat),
                     I = O.call(Function.apply, Array.prototype.splice),
                     U = O.call(Function.call, String.prototype.replace),
                     F = O.call(Function.call, String.prototype.slice),
@@ -6523,7 +6562,7 @@
                     k = /\\(\\)?/g,
                     G = function(t, e) {
                         var r, n = t;
-                        if (j(E, n) && (n = "%" + (r = E[n])[0] + "%"), j(S, n)) {
+                        if (x(E, n) && (n = "%" + (r = E[n])[0] + "%"), x(S, n)) {
                             var o = S[n];
                             if (o === h && (o = P(n)), void 0 === o && !e) throw new p("intrinsic " + t + " exists, but is not available. Please file an issue!");
                             return {
@@ -6554,13 +6593,13 @@
                         a = o.value,
                         c = !1,
                         s = o.alias;
-                    s && (n = s[0], I(r, x([0, 1], s)));
+                    s && (n = s[0], I(r, j([0, 1], s)));
                     for (var l = 1, y = !0; l < r.length; l += 1) {
                         var d = r[l],
                             g = F(d, 0, 1),
                             m = F(d, -1);
                         if (('"' === g || "'" === g || "`" === g || '"' === m || "'" === m || "`" === m) && g !== m) throw new u("property names with quotes must have matching quotes");
-                        if ("constructor" !== d && y || (c = !0), j(S, i = "%" + (n += "." + d) + "%")) a = S[i];
+                        if ("constructor" !== d && y || (c = !0), x(S, i = "%" + (n += "." + d) + "%")) a = S[i];
                         else if (null != a) {
                             if (!(d in a)) {
                                 if (!e) throw new p("base intrinsic for " + t + " exists, but the property is not available.");
@@ -6569,7 +6608,7 @@
                             if (f && l + 1 >= r.length) {
                                 var b = f(a, d);
                                 a = (y = !!b) && "get" in b && !("originalValue" in b.get) ? b.get : a[d]
-                            } else y = j(a, d), a = a[d];
+                            } else y = x(a, d), a = a[d];
                             y && !c && (S[i] = a)
                         }
                     }
@@ -6681,7 +6720,7 @@
             (0, n.templateCacheGenerator)(e(), "groupsTemplates", o)
         }()
 }();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/9905f95cab1f80bb0013f2946a69a136-groups.bundle.min.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/7569de5e51249f3f46ab581b917d798a-groups.bundle.min.js.map
 
 ! function() {
     var r = {
@@ -8363,7 +8402,7 @@
                         return u = void 0, b && n ? h(e) : (n = o = void 0, a)
                     }
 
-                    function S() {
+                    function P() {
                         var e = d(),
                             r = v(e);
                         if (n = arguments, o = this, c = e, r) {
@@ -8374,11 +8413,11 @@
                         }
                         return void 0 === u && (u = setTimeout(w, t)), a
                     }
-                    return t = m(t) || 0, g(r) && (l = !!r.leading, i = (p = "maxWait" in r) ? f(m(r.maxWait) || 0, t) : i, b = "trailing" in r ? !!r.trailing : b), S.cancel = function() {
+                    return t = m(t) || 0, g(r) && (l = !!r.leading, i = (p = "maxWait" in r) ? f(m(r.maxWait) || 0, t) : i, b = "trailing" in r ? !!r.trailing : b), P.cancel = function() {
                         void 0 !== u && clearTimeout(u), s = 0, n = c = o = u = void 0
-                    }, S.flush = function() {
+                    }, P.flush = function() {
                         return void 0 === u ? a : A(d())
-                    }, S
+                    }, P
                 }
             },
             68550: function(e, t, r) {
@@ -8418,18 +8457,18 @@
 
                     function A() {
                         var e = g();
-                        if (w(e)) return S(e);
+                        if (w(e)) return P(e);
                         c = setTimeout(A, function(e) {
                             var r = t - (e - s);
                             return f ? d(r, a - (e - l)) : r
                         }(e))
                     }
 
-                    function S(e) {
+                    function P(e) {
                         return c = void 0, m && o ? v(e) : (o = i = void 0, u)
                     }
 
-                    function P() {
+                    function S() {
                         var e = g(),
                             r = w(e);
                         if (o = arguments, i = this, s = e, r) {
@@ -8440,11 +8479,11 @@
                         }
                         return void 0 === c && (c = setTimeout(A, t)), u
                     }
-                    return t = h(t) || 0, b(r) && (p = !!r.leading, a = (f = "maxWait" in r) ? y(h(r.maxWait) || 0, t) : a, m = "trailing" in r ? !!r.trailing : m), P.cancel = function() {
+                    return t = h(t) || 0, b(r) && (p = !!r.leading, a = (f = "maxWait" in r) ? y(h(r.maxWait) || 0, t) : a, m = "trailing" in r ? !!r.trailing : m), S.cancel = function() {
                         void 0 !== c && clearTimeout(c), l = 0, o = s = i = c = void 0
-                    }, P.flush = function() {
-                        return void 0 === c ? u : S(g())
-                    }, P
+                    }, S.flush = function() {
+                        return void 0 === c ? u : P(g())
+                    }, S
                 }
 
                 function b(e) {
@@ -8736,21 +8775,21 @@
                             return this.activeObservations_.length > 0
                         }, e
                     }(),
-                    S = "undefined" != typeof WeakMap ? new WeakMap : new n,
-                    P = function e(t) {
+                    P = "undefined" != typeof WeakMap ? new WeakMap : new n,
+                    S = function e(t) {
                         if (!(this instanceof e)) throw new TypeError("Cannot call a class as a function.");
                         if (!arguments.length) throw new TypeError("1 argument required, but only 0 present.");
                         var r = s.getInstance(),
                             n = new A(t, r, this);
-                        S.set(this, n)
+                        P.set(this, n)
                     };
                 ["observe", "unobserve", "disconnect"].forEach((function(e) {
-                    P.prototype[e] = function() {
+                    S.prototype[e] = function() {
                         var t;
-                        return (t = S.get(this))[e].apply(t, arguments)
+                        return (t = P.get(this))[e].apply(t, arguments)
                     }
                 }));
-                var x = void 0 !== i.ResizeObserver ? i.ResizeObserver : P;
+                var x = void 0 !== i.ResizeObserver ? i.ResizeObserver : S;
                 t.A = x
             },
             56852: function(e, t, r) {
@@ -9030,8 +9069,8 @@
                     v = h.isPromise,
                     w = h.isRegExp,
                     A = r(80183)(),
-                    S = r(91911)(),
-                    P = r(45356)("RegExp.prototype.test");
+                    P = r(91911)(),
+                    S = r(45356)("RegExp.prototype.test");
                 new Map;
 
                 function x() {
@@ -9142,7 +9181,7 @@
                     })
                 }, O.strictEqual = function e(t, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
-                    S(t, r) || I({
+                    P(t, r) || I({
                         actual: t,
                         expected: r,
                         message: n,
@@ -9151,7 +9190,7 @@
                     })
                 }, O.notStrictEqual = function e(t, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
-                    S(t, r) && I({
+                    P(t, r) && I({
                         actual: t,
                         expected: r,
                         message: n,
@@ -9164,13 +9203,13 @@
                     ! function(e, t) {
                         if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
                     }(this, e), r.forEach((function(e) {
-                        e in t && (void 0 !== n && "string" == typeof n[e] && w(t[e]) && P(t[e], n[e]) ? o[e] = n[e] : o[e] = t[e])
+                        e in t && (void 0 !== n && "string" == typeof n[e] && w(t[e]) && S(t[e], n[e]) ? o[e] = n[e] : o[e] = t[e])
                     }))
                 }));
 
                 function R(e, t, r, n) {
                     if ("function" != typeof t) {
-                        if (w(t)) return P(t, e);
+                        if (w(t)) return S(t, e);
                         if (2 === arguments.length) throw new f("expected", ["Function", "RegExp"], t);
                         if ("object" !== i(e) || null === e) {
                             var o = new m({
@@ -9186,7 +9225,7 @@
                         if (t instanceof Error) a.push("name", "message");
                         else if (0 === a.length) throw new y("error", t, "may not be an empty object");
                         return void 0 === c && x(), a.forEach((function(o) {
-                            "string" == typeof e[o] && w(t[o]) && P(t[o], e[o]) || function(e, t, r, n, o, i) {
+                            "string" == typeof e[o] && w(t[o]) && S(t[o], e[o]) || function(e, t, r, n, o, i) {
                                 if (!(r in e) || !s(e[r], t[r])) {
                                     if (!n) {
                                         var a = new F(e, o),
@@ -9289,7 +9328,7 @@
                 function T(e, t, r, n, o) {
                     if (!w(t)) throw new f("regexp", "RegExp", t);
                     var a = "match" === o;
-                    if ("string" != typeof e || P(t, e) !== a) {
+                    if ("string" != typeof e || S(t, e) !== a) {
                         if (r instanceof Error) throw r;
                         var u = !r;
                         r = r || ("string" != typeof e ? 'The "string" argument must be of type string. Received type ' + "".concat(i(e), " (").concat(b(e), ")") : (a ? "The input did not match the regular expression " : "The input was expected to not match the regular expression ") + "".concat(b(t), ". Input:\n\n").concat(b(e), "\n"));
@@ -9501,8 +9540,8 @@
                 }
                 var w = "",
                     A = "",
-                    S = "",
                     P = "",
+                    S = "",
                     x = {
                         deepStrictEqual: "Expected values to be strictly deep-equal:",
                         strictEqual: "Expected values to be strictly equal:",
@@ -9573,24 +9612,24 @@
                     if (0 === h) {
                         var E = s.split("\n");
                         if (E.length > 30)
-                            for (E[26] = "".concat(w, "...").concat(P); E.length > 27;) E.pop();
+                            for (E[26] = "".concat(w, "...").concat(S); E.length > 27;) E.pop();
                         return "".concat(x.notIdentical, "\n\n").concat(E.join("\n"), "\n")
                     }
-                    f > 3 && (u = "\n".concat(w, "...").concat(P).concat(u), c = !0), "" !== o && (u = "\n  ".concat(o).concat(u), o = "");
+                    f > 3 && (u = "\n".concat(w, "...").concat(S).concat(u), c = !0), "" !== o && (u = "\n  ".concat(o).concat(u), o = "");
                     var G = 0,
-                        I = x[r] + "\n".concat(A, "+ actual").concat(P, " ").concat(S, "- expected").concat(P),
-                        j = " ".concat(w, "...").concat(P, " Lines skipped");
+                        I = x[r] + "\n".concat(A, "+ actual").concat(S, " ").concat(P, "- expected").concat(S),
+                        j = " ".concat(w, "...").concat(S, " Lines skipped");
                     for (f = 0; f < h; f++) {
                         var C = f - a;
-                        if (l.length < f + 1) C > 1 && f > 2 && (C > 4 ? (i += "\n".concat(w, "...").concat(P), c = !0) : C > 3 && (i += "\n  ".concat(p[f - 2]), G++), i += "\n  ".concat(p[f - 1]), G++), a = f, o += "\n".concat(S, "-").concat(P, " ").concat(p[f]), G++;
-                        else if (p.length < f + 1) C > 1 && f > 2 && (C > 4 ? (i += "\n".concat(w, "...").concat(P), c = !0) : C > 3 && (i += "\n  ".concat(l[f - 2]), G++), i += "\n  ".concat(l[f - 1]), G++), a = f, i += "\n".concat(A, "+").concat(P, " ").concat(l[f]), G++;
+                        if (l.length < f + 1) C > 1 && f > 2 && (C > 4 ? (i += "\n".concat(w, "...").concat(S), c = !0) : C > 3 && (i += "\n  ".concat(p[f - 2]), G++), i += "\n  ".concat(p[f - 1]), G++), a = f, o += "\n".concat(P, "-").concat(S, " ").concat(p[f]), G++;
+                        else if (p.length < f + 1) C > 1 && f > 2 && (C > 4 ? (i += "\n".concat(w, "...").concat(S), c = !0) : C > 3 && (i += "\n  ".concat(l[f - 2]), G++), i += "\n  ".concat(l[f - 1]), G++), a = f, i += "\n".concat(A, "+").concat(S, " ").concat(l[f]), G++;
                         else {
                             var F = p[f],
                                 R = l[f],
                                 k = R !== F && (!v(R, ",") || R.slice(0, -1) !== F);
-                            k && v(F, ",") && F.slice(0, -1) === R && (k = !1, R += ","), k ? (C > 1 && f > 2 && (C > 4 ? (i += "\n".concat(w, "...").concat(P), c = !0) : C > 3 && (i += "\n  ".concat(l[f - 2]), G++), i += "\n  ".concat(l[f - 1]), G++), a = f, i += "\n".concat(A, "+").concat(P, " ").concat(R), o += "\n".concat(S, "-").concat(P, " ").concat(F), G += 2) : (i += o, o = "", 1 !== C && 0 !== f || (i += "\n  ".concat(R), G++))
+                            k && v(F, ",") && F.slice(0, -1) === R && (k = !1, R += ","), k ? (C > 1 && f > 2 && (C > 4 ? (i += "\n".concat(w, "...").concat(S), c = !0) : C > 3 && (i += "\n  ".concat(l[f - 2]), G++), i += "\n  ".concat(l[f - 1]), G++), a = f, i += "\n".concat(A, "+").concat(S, " ").concat(R), o += "\n".concat(P, "-").concat(S, " ").concat(F), G += 2) : (i += o, o = "", 1 !== C && 0 !== f || (i += "\n  ".concat(R), G++))
                         }
-                        if (G > 20 && f < h - 2) return "".concat(I).concat(j, "\n").concat(i, "\n").concat(w, "...").concat(P).concat(o, "\n") + "".concat(w, "...").concat(P)
+                        if (G > 20 && f < h - 2) return "".concat(I).concat(j, "\n").concat(i, "\n").concat(w, "...").concat(S).concat(o, "\n") + "".concat(w, "...").concat(S)
                     }
                     return "".concat(I).concat(c ? j : "", "\n").concat(i).concat(o).concat(u).concat(y)
                 }
@@ -9628,12 +9667,12 @@
                             u = e.expected,
                             c = Error.stackTraceLimit;
                         if (Error.stackTraceLimit = 0, null != r) t = f.call(this, String(r));
-                        else if (n.stderr && n.stderr.isTTY && (n.stderr && n.stderr.getColorDepth && 1 !== n.stderr.getColorDepth() ? (w = "[34m", A = "[32m", P = "[39m", S = "[31m") : (w = "", A = "", P = "", S = "")), "object" === m(a) && null !== a && "object" === m(u) && null !== u && "stack" in a && a instanceof Error && "stack" in u && u instanceof Error && (a = E(a), u = E(u)), "deepStrictEqual" === o || "strictEqual" === o) t = f.call(this, G(a, u, o));
+                        else if (n.stderr && n.stderr.isTTY && (n.stderr && n.stderr.getColorDepth && 1 !== n.stderr.getColorDepth() ? (w = "[34m", A = "[32m", S = "[39m", P = "[31m") : (w = "", A = "", S = "", P = "")), "object" === m(a) && null !== a && "object" === m(u) && null !== u && "stack" in a && a instanceof Error && "stack" in u && u instanceof Error && (a = E(a), u = E(u)), "deepStrictEqual" === o || "strictEqual" === o) t = f.call(this, G(a, u, o));
                         else if ("notDeepStrictEqual" === o || "notStrictEqual" === o) {
                             var p = x[o],
                                 y = O(a).split("\n");
                             if ("notStrictEqual" === o && "object" === m(a) && null !== a && (p = x.notStrictEqualObject), y.length > 30)
-                                for (y[26] = "".concat(w, "...").concat(P); y.length > 27;) y.pop();
+                                for (y[26] = "".concat(w, "...").concat(S); y.length > 27;) y.pop();
                             t = 1 === y.length ? f.call(this, "".concat(p, " ").concat(y[0])) : f.call(this, "".concat(p, "\n\n").concat(y.join("\n"), "\n"))
                         } else {
                             var d = O(a),
@@ -9902,8 +9941,8 @@
                     v = m.isDate,
                     w = m.isMap,
                     A = m.isRegExp,
-                    S = m.isSet,
-                    P = m.isNativeError,
+                    P = m.isSet,
+                    S = m.isNativeError,
                     x = m.isBoxedPrimitive,
                     E = m.isNumberObject,
                     O = m.isStringObject,
@@ -9953,12 +9992,12 @@
                             d = k(t);
                         return y.length === d.length && B(e, t, r, n, 1, y)
                     }
-                    if ("[object Object]" === f && (!w(e) && w(t) || !S(e) && S(t))) return !1;
+                    if ("[object Object]" === f && (!w(e) && w(t) || !P(e) && P(t))) return !1;
                     if (v(e)) {
                         if (!v(t) || Date.prototype.getTime.call(e) !== Date.prototype.getTime.call(t)) return !1
                     } else if (A(e)) {
                         if (!A(t) || (c = e, l = t, !(a ? c.source === l.source && c.flags === l.flags : RegExp.prototype.toString.call(c) === RegExp.prototype.toString.call(l)))) return !1
-                    } else if (P(e) || e instanceof Error) {
+                    } else if (S(e) || e instanceof Error) {
                         if (e.message !== t.message || e.name !== t.name) return !1
                     } else {
                         if (h(e)) {
@@ -9976,7 +10015,7 @@
                                 R = k(t);
                             return m.length === R.length && B(e, t, r, n, 0, m)
                         }
-                        if (S(e)) return !(!S(t) || e.size !== t.size) && B(e, t, r, n, 2);
+                        if (P(e)) return !(!P(t) || e.size !== t.size) && B(e, t, r, n, 2);
                         if (w(e)) return !(!w(t) || e.size !== t.size) && B(e, t, r, n, 3);
                         if (b(e)) {
                             if (u = t, (o = e).byteLength !== u.byteLength || 0 !== U(new Uint8Array(o), new Uint8Array(u))) return !1
@@ -10034,7 +10073,7 @@
                         o.position++
                     }
                     o.val1.set(e, o.position), o.val2.set(t, o.position);
-                    var S = function(e, t, r, o, a, s) {
+                    var P = function(e, t, r, o, a, s) {
                         var l = 0;
                         if (2 === s) {
                             if (! function(e, t, r, n) {
@@ -10105,7 +10144,7 @@
                         }
                         return !0
                     }(e, t, r, s, o, a);
-                    return o.val1.delete(e), o.val2.delete(t), S
+                    return o.val1.delete(e), o.val2.delete(t), P
                 }
 
                 function T(e, t, r, n) {
@@ -10368,10 +10407,10 @@
                 if (h) try {
                     null.error
                 } catch (e) {
-                    var S = h(h(e));
-                    A["%Error.prototype%"] = S
+                    var P = h(h(e));
+                    A["%Error.prototype%"] = P
                 }
-                var P = function e(t) {
+                var S = function e(t) {
                         var r;
                         if ("%AsyncFunction%" === t) r = f("async function () {}");
                         else if ("%GeneratorFunction%" === t) r = f("function* () {}");
@@ -10452,7 +10491,7 @@
                         var r, n = e;
                         if (O(x, n) && (n = "%" + (r = x[n])[0] + "%"), O(A, n)) {
                             var o = A[n];
-                            if (o === v && (o = P(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
+                            if (o === v && (o = S(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
                             return {
                                 alias: r,
                                 name: n,
@@ -11509,7 +11548,7 @@
                     } else if (e.length > 0) {
                         this.model = t || "rgb", n = l[this.model].channels;
                         var i = Array.prototype.slice.call(e, 0, n);
-                        this.color = P(i, n), this.valpha = "number" == typeof e[n] ? e[n] : 1
+                        this.color = S(i, n), this.valpha = "number" == typeof e[n] ? e[n] : 1
                     } else if ("number" == typeof e) this.model = "rgb", this.color = [e >> 16 & 255, e >> 8 & 255, 255 & e], this.valpha = 1;
                     else {
                         this.valpha = 1;
@@ -11521,7 +11560,7 @@
                         var y = l[this.model].labels,
                             d = [];
                         for (r = 0; r < y.length; r++) d.push(e[y[r]]);
-                        this.color = P(d)
+                        this.color = S(d)
                     }
                     if (m[this.model])
                         for (n = l[this.model].channels, r = 0; r < n; r++) {
@@ -11574,28 +11613,28 @@
                     alpha: function(e) {
                         return void 0 !== e ? new b([].concat(a(this.color), [Math.max(0, Math.min(1, e))]), this.model) : this.valpha
                     },
-                    red: A("rgb", 0, S(255)),
-                    green: A("rgb", 1, S(255)),
-                    blue: A("rgb", 2, S(255)),
+                    red: A("rgb", 0, P(255)),
+                    green: A("rgb", 1, P(255)),
+                    blue: A("rgb", 2, P(255)),
                     hue: A(["hsl", "hsv", "hsl", "hwb", "hcg"], 0, (function(e) {
                         return (e % 360 + 360) % 360
                     })),
-                    saturationl: A("hsl", 1, S(100)),
-                    lightness: A("hsl", 2, S(100)),
-                    saturationv: A("hsv", 1, S(100)),
-                    value: A("hsv", 2, S(100)),
-                    chroma: A("hcg", 1, S(100)),
-                    gray: A("hcg", 2, S(100)),
-                    white: A("hwb", 1, S(100)),
-                    wblack: A("hwb", 2, S(100)),
-                    cyan: A("cmyk", 0, S(100)),
-                    magenta: A("cmyk", 1, S(100)),
-                    yellow: A("cmyk", 2, S(100)),
-                    black: A("cmyk", 3, S(100)),
-                    x: A("xyz", 0, S(95.047)),
-                    y: A("xyz", 1, S(100)),
-                    z: A("xyz", 2, S(108.833)),
-                    l: A("lab", 0, S(100)),
+                    saturationl: A("hsl", 1, P(100)),
+                    lightness: A("hsl", 2, P(100)),
+                    saturationv: A("hsv", 1, P(100)),
+                    value: A("hsv", 2, P(100)),
+                    chroma: A("hcg", 1, P(100)),
+                    gray: A("hcg", 2, P(100)),
+                    white: A("hwb", 1, P(100)),
+                    wblack: A("hwb", 2, P(100)),
+                    cyan: A("cmyk", 0, P(100)),
+                    magenta: A("cmyk", 1, P(100)),
+                    yellow: A("cmyk", 2, P(100)),
+                    black: A("cmyk", 3, P(100)),
+                    x: A("xyz", 0, P(95.047)),
+                    y: A("xyz", 1, P(100)),
+                    z: A("xyz", 2, P(108.833)),
+                    l: A("lab", 0, P(100)),
                     a: A("lab", 1),
                     b: A("lab", 2),
                     keyword: function(e) {
@@ -11715,7 +11754,7 @@
                         }, b[e] = function() {
                             for (var r = arguments.length, n = new Array(r), o = 0; o < r; o++) n[o] = arguments[o];
                             var i = n[0];
-                            return "number" == typeof i && (i = P(n, t)), new b(i, e)
+                            return "number" == typeof i && (i = S(n, t)), new b(i, e)
                         }
                     }, v = 0, w = Object.keys(l); v < w.length; v++) h();
 
@@ -11738,13 +11777,13 @@
                         }
                 }
 
-                function S(e) {
+                function P(e) {
                     return function(t) {
                         return Math.max(0, Math.min(e, t))
                     }
                 }
 
-                function P(e, t) {
+                function S(e, t) {
                     for (var r = 0; r < t; r++) "number" != typeof e[r] && (e[r] = 0);
                     return e
                 }
@@ -12294,30 +12333,31 @@
                     }) : e[t] = r, e
                 }
 
-                function b(e, t, r, a, u, c, s, l, f, d, m, b, h, v, w, A, S, P, x, E, O, G, I) {
+                function b(e, t, r, a, u, c, s, l, f, d, m, b, h, v, w, A, P, S, x, E, O, G, I) {
                     var j = p(f.tabs, {
                             about: {
                                 translationKey: "Heading.Home"
                             },
                             forums: {
-                                translationKey: "Heading.Posts"
-                            }
-                        }),
-                        C = p(j, {
-                            forums: {
+                                translationKey: "Heading.Posts",
                                 state: "announcements"
                             }
                         }),
+                        C = !1,
                         F = function() {
-                            return e.isAnnouncementArchiveEnabled ? e.canViewForums() ? j : C : f.tabs
+                            var t, r, n, o, i = e.isAnnouncementArchiveEnabled && !(null !== (t = e.policies) && void 0 !== t && t.isGracefulDegradationEnabled) && (null === (r = e.policies) || void 0 === r ? void 0 : r.displayGroupAnnouncements) && (null === (n = e.library.currentGroup.permissions) || void 0 === n || null === (o = n.groupPostsPermissions) || void 0 === o ? void 0 : o.viewStatus);
+                            return i && e.isAnnouncementArchiveExperimentLoaded && !C && (C = !0, x.exposeAnnouncementArchiveExperiment()), i && e.isAnnouncementArchiveExperimentEnabled
+                        },
+                        R = function() {
+                            return F() ? j : f.tabs
                         };
 
-                    function R() {
+                    function k() {
                         var t = [e.loadGroup(e.library.currentGroup.id), e.loadGroupsList(!0), e.loadGroupMembership(e.library.currentGroup.id), e.refreshProfileHeader(e.library.currentGroup.id)];
                         return v.all(t)
                     }
 
-                    function k(e) {
+                    function U(e) {
                         window.dispatchEvent(new CustomEvent("roblox.group.membershipChanged", {
                             detail: {
                                 groupId: e
@@ -12325,21 +12365,29 @@
                         }))
                     }
 
-                    function U() {
+                    function M() {
                         angular.element(document.querySelector("body")).click()
                     }
-                    var M = !1,
-                        D = function(e) {
+                    var D = !1,
+                        B = function(e) {
                             var t;
                             return null !== (t = f.stateToTab[null == e ? void 0 : e.name]) && void 0 !== t ? t : null == e ? void 0 : e.name
                         },
-                        B = function(t) {
+                        T = function(t) {
+                            var r;
+                            return !(!e.policiesLoaded || B(t) !== f.tabs.forums.key || null === (r = e.policies) || void 0 === r || !r.isGracefulDegradationEnabled) && (I.go(f.tabs.about.state, {
+                                success: !0
+                            }, {
+                                reload: !0
+                            }), !0)
+                        },
+                        N = function(t) {
                             var r, n, o;
-                            if (!M && D(null != t ? t : I.current) === f.tabs.about.key) {
+                            if (!D && B(null != t ? t : I.current) === f.tabs.about.key) {
                                 var a = null === (r = e.profilePlatform) || void 0 === r ? void 0 : r.componentOrdering,
                                     u = null === (n = e.library) || void 0 === n || null === (o = n.currentGroup) || void 0 === o ? void 0 : o.areGroupGamesVisible;
                                 if (Array.isArray(a) && "boolean" == typeof u) {
-                                    M = !0;
+                                    D = !0;
                                     var c = a.includes(i.uA.ExperienceServers) && u;
                                     x.exposeAboutTabExperiment(c)
                                 }
@@ -12354,7 +12402,7 @@
                             neutralButtonText: A.get(f.translations.no)
                         })
                     }, e.showLeaveGroupOrChangeOwnerModal = function(t, n) {
-                        if (U(), e.isCurrentUserOwner()) {
+                        if (M(), e.isCurrentUserOwner()) {
                             var o = e.library.currentGroup.group,
                                 i = {
                                     animation: !1,
@@ -12371,14 +12419,14 @@
                                 };
                             w.open(i)
                         } else e.hasSocialModules ? e.showLeaveGroupModal(t, n) : e.leaveGroup(t, n).then((function() {
-                            R().then((function() {
-                                k(e.library.currentGroup.id)
+                            k().then((function() {
+                                U(e.library.currentGroup.id)
                             }), (function() {}))
                         })).catch((function() {
                             b.warning(A.get(f.translations.unfollowGroupError)), r.debug("--leaveGroup-error---")
                         }))
                     }, e.showLeaveGroupModal = function(t, r) {
-                        U();
+                        M();
                         var n = {
                             animation: !1,
                             templateUrl: d.modals.leaveGroup.templateUrl,
@@ -12389,8 +12437,8 @@
                                     userId: r,
                                     isOwner: e.isCurrentUserOwner(),
                                     refreshGroupData: function() {
-                                        R().then((function() {
-                                            k(e.library.currentGroup.id)
+                                        k().then((function() {
+                                            U(e.library.currentGroup.id)
                                         }), (function() {}))
                                     },
                                     leaveGroup: function() {
@@ -12401,11 +12449,11 @@
                         };
                         w.open(n)
                     }, e.leaveGroup = function(e, t) {
-                        return P.leaveGroup(e, t)
+                        return S.leaveGroup(e, t)
                     }, e.showChangeOwnerModal = function() {
-                        U(), window.location.href = s.changeOwnerCreatorHubUrl(e.library.currentGroup.id)
+                        M(), window.location.href = s.changeOwnerCreatorHubUrl(e.library.currentGroup.id)
                     }, e.showReportAbuseModal = function(t) {
-                        U();
+                        M();
                         var r = g({}, f.reportAbuseName);
                         e.canViewAndReportAnnouncement() || delete r.announcements, 0 === e.library.currentGroup.roles.length && delete r.role;
                         var n = function(n) {
@@ -12435,23 +12483,23 @@
                             })
                         }))
                     }, e.cancelJoinRequest = function(e, t) {
-                        P.cancelGroupJoinRequest(e, t).then((function() {
-                            R()
+                        S.cancelGroupJoinRequest(e, t).then((function() {
+                            k()
                         }), (function() {
                             b.warning(A.get(f.translations.defaultError)), r.debug("--cancelJoinRequest-error---")
                         }))
                     }, e.makePrimary = function(t) {
-                        U(), e.showModal(A.get(f.translations.makePrimaryGroup), A.get(f.translations.makePrimaryGroupWarning), f.makePrimaryActionButtonId).result.then((function() {
-                            P.makePrimaryGroup(t).then((function() {
-                                R()
+                        M(), e.showModal(A.get(f.translations.makePrimaryGroup), A.get(f.translations.makePrimaryGroupWarning), f.makePrimaryActionButtonId).result.then((function() {
+                            S.makePrimaryGroup(t).then((function() {
+                                k()
                             }), (function() {
                                 b.warning(A.get(f.translations.makePrimaryError)), r.debug("--makePrimary-error---")
                             }))
                         }))
                     }, e.removePrimary = function() {
-                        U(), e.showModal(A.get(f.translations.removePrimaryGroup), A.get(f.translations.removePrimaryGroupWarning), f.removePrimaryActionButtonId).result.then((function() {
-                            P.removePrimaryGroup().then((function() {
-                                R()
+                        M(), e.showModal(A.get(f.translations.removePrimaryGroup), A.get(f.translations.removePrimaryGroupWarning), f.removePrimaryActionButtonId).result.then((function() {
+                            S.removePrimaryGroup().then((function() {
+                                k()
                             }), (function() {
                                 b.warning(A.get(f.translations.removePrimaryError)), r.debug("--removePrimary-error---")
                             }))
@@ -12490,8 +12538,8 @@
                             groupId: e.library.currentGroup.id,
                             enterFrom: E.getCommunitySessionEnterFrom()
                         }), v((function(t, i) {
-                            P.joinGroup(e.library.currentGroup.id, n, o || f.challengeData.defaultProofOfWorkData).then((function() {
-                                R().then((function() {
+                            S.joinGroup(e.library.currentGroup.id, n, o || f.challengeData.defaultProofOfWorkData).then((function() {
+                                k().then((function() {
                                     if (e.showJoinGroupButtonUI() === f.joinStatus.joinPending) b.success(A.get(f.translations.joinGroupPendingSuccess));
                                     else {
                                         var r = e.hasSocialModules ? A.get(f.translations.joinGroupSuccess) : A.get(f.translations.followGroupSuccess, {
@@ -12499,7 +12547,7 @@
                                         });
                                         b.success(r)
                                     }
-                                    k(e.library.currentGroup.id), t()
+                                    U(e.library.currentGroup.id), t()
                                 }), (function(e) {
                                     i(e)
                                 }))
@@ -12507,7 +12555,7 @@
                                 if (t && t.errors && t.errors[0]) {
                                     var n = t.errors[0];
                                     switch (n.code) {
-                                        case S.errorCodes.membership.proofOfWork:
+                                        case P.errorCodes.membership.proofOfWork:
                                             var o = {
                                                 sessionId: ""
                                             };
@@ -12522,7 +12570,7 @@
                                                 e.triggerProofOfWorkChallenge(o)
                                             } else b.warning(A.get(f.translations.joinGroupError)), r.debug("--proof-of-work-challenge-error-session-id-missing---");
                                             break;
-                                        case S.errorCodes.membership.captcha:
+                                        case P.errorCodes.membership.captcha:
                                             if (e.captchaInputParams = {
                                                     dataExchange: "",
                                                     unifiedCaptchaId: ""
@@ -12537,8 +12585,8 @@
                                             }
                                             e.triggerCaptcha();
                                             break;
-                                        case S.errorCodes.membership.operationUnavailable:
-                                            b.warning(A.get(S.translations.groupMembershipsUnavailableError));
+                                        case P.errorCodes.membership.operationUnavailable:
+                                            b.warning(A.get(P.translations.groupMembershipsUnavailableError));
                                             break;
                                         default:
                                             b.warning(A.get(f.translations.joinGroupError)), r.debug("--joinGroup-error---")
@@ -12548,21 +12596,24 @@
                             }))
                         })))
                     }, e.claimOwnership = function(e) {
-                        U(), P.claimOwnership(e).then((function() {
-                            b.success(A.get(f.translations.claimOwnershipSuccess)), R()
+                        M(), S.claimOwnership(e).then((function() {
+                            b.success(A.get(f.translations.claimOwnershipSuccess)), k()
                         }), (function() {
                             b.warning(A.get(f.translations.claimOwnershipError)), r.debug("--claimOwnership-error---")
                         }))
                     }, e.isCurrentUserOwner = function() {
                         return e.doesGroupHaveOwner() && e.library.currentUser.id === e.library.currentGroup.group.owner.userId
                     }, e.$on("$stateChangeSuccess", (function(t, r) {
-                        var n = D(r);
-                        if (e.policiesLoaded && I.includes(f.tabs.forums.state) && !e.canViewForums()) return void I.go(f.tabs.about.state, {
-                            success: !0
-                        }, {
-                            reload: !0
-                        });
-                        e.layout.activeTab = F()[n], B(r)
+                        var n = B(r);
+                        if (!T(r)) {
+                            if (e.policiesLoaded && I.includes(f.tabs.forums.state))
+                                if (!e.canViewForums()) return void I.go(f.tabs.about.state, {
+                                    success: !0
+                                }, {
+                                    reload: !0
+                                });
+                            e.layout.activeTab = R()[n], N(r)
+                        }
                     })), e.loadGroup = function(t) {
                         return e.layout.isLoadingGroup = !0, l.getGroup(t).then((function(t) {
                             t && (e.library.currentGroup.group = t)
@@ -12575,7 +12626,7 @@
                         return l.getGroupForums(t).then((function(t) {
                             e.library.currentGroup.forumsEnabled = t.data.length > 0
                         })).finally((function() {
-                            I.includes(f.tabs.forums.state) && !e.library.currentGroup.forumsEnabled && I.go(f.tabs.about.state, {
+                            e.isGroupForumsLoaded = !0, I.includes(f.tabs.forums.state) && !e.library.currentGroup.forumsEnabled && I.go(f.tabs.about.state, {
                                 success: !0
                             }, {
                                 reload: !0
@@ -12609,8 +12660,8 @@
                         })))
                     }, e.loadGroupMembership = function(t) {
                         return e.layout.isLoadingGroupMembership = !0, v((function(n, o) {
-                            P.getGroupMembership(t).then((function(t) {
-                                t && (t.userRole && (e.library.currentGroup.role = t.userRole.role), e.library.currentGroup.isPendingJoin = t.isPendingJoin, e.library.currentGroup.isPrimary = t.isPrimary, t.permissions && (e.library.currentGroup.permissions = t.permissions), t.channelPermissions && (e.library.currentGroup.channelPermissions = t.channelPermissions), e.library.currentGroup.canConfigureGroup = t.canConfigure, e.library.currentGroup.canViewMemberList = t.canViewMemberList, e.library.currentGroup.areGroupFundsVisible = t.areGroupFundsVisible, e.library.currentGroup.areEnemiesAllowed = t.areEnemiesAllowed, e.library.currentGroup.areGroupGamesVisible = t.areGroupGamesVisible, e.library.currentGroup.isBannedFromGroup = t.isBannedFromGroup), B(), n(t)
+                            S.getGroupMembership(t).then((function(t) {
+                                t && (t.userRole && (e.library.currentGroup.role = t.userRole.role), e.library.currentGroup.isPendingJoin = t.isPendingJoin, e.library.currentGroup.isPrimary = t.isPrimary, t.permissions && (e.library.currentGroup.permissions = t.permissions), t.channelPermissions && (e.library.currentGroup.channelPermissions = t.channelPermissions), e.library.currentGroup.canConfigureGroup = t.canConfigure, e.library.currentGroup.canViewMemberList = t.canViewMemberList, e.library.currentGroup.areGroupFundsVisible = t.areGroupFundsVisible, e.library.currentGroup.areEnemiesAllowed = t.areEnemiesAllowed, e.library.currentGroup.areGroupGamesVisible = t.areGroupGamesVisible, e.library.currentGroup.isBannedFromGroup = t.isBannedFromGroup), N(), n(t)
                             }), (function(t) {
                                 r.debug("--loadGroupMembership-error---"), e.layout.loadGroupMembershipError = !0, o(t)
                             })).finally((function() {
@@ -12676,11 +12727,11 @@
                     }, e.canJoinGroup = function() {
                         return !e.isCaptchaActive() && e.canViewGroupDetails() && e.library.currentGroup.roles && e.library.currentGroup.roles.length > 0
                     }, e.canViewCommunityTabs = function() {
-                        return !!e.isAnnouncementArchiveEnabled || !(e.isHidingEmptyCommunityTabsEnabled && e.groupDetailsNumTabs() <= 1)
+                        return !(!e.isGroupForumsLoaded || !e.isAnnouncementArchiveConfigurationLoaded) && (!!F() || !(e.isHidingEmptyCommunityTabsEnabled && e.groupDetailsNumTabs() <= 1))
                     }, e.groupDetailsTabs = function() {
-                        var t = g({}, F());
-                        return e.canViewEvents() || delete t.events, e.isAnnouncementArchiveEnabled || e.canViewForums() || delete t.forums, e.canViewStore() || delete t.store, e.canViewAffiliates() || delete t.affiliates, void 0 !== e.availableProfilePlatformTabs && Object.keys(t).forEach((function(r) {
-                            "forums" === r && e.isAnnouncementArchiveEnabled || e.availableProfilePlatformTabs.has(r) || delete t[r]
+                        var t = g({}, R());
+                        return e.canViewEvents() || delete t.events, F() || e.canViewForums() || delete t.forums, e.canViewStore() || delete t.store, e.canViewAffiliates() || delete t.affiliates, void 0 !== e.availableProfilePlatformTabs && Object.keys(t).forEach((function(r) {
+                            "forums" === r && F() || e.availableProfilePlatformTabs.has(r) || delete t[r]
                         })), t
                     }, e.isBannedFromGroup = function() {
                         return e.library.currentGroup.isBannedFromGroup
@@ -12752,24 +12803,30 @@
                                     return t.stop()
                             }
                         }), t)
-                    }))), e.loadGroupProductFeatures = function(t) {
+                    }))), e.loadAnnouncementArchiveExperiment = function() {
+                        return v.when(x.isAnnouncementArchiveExperimentEnabled()).then((function(t) {
+                            e.isAnnouncementArchiveExperimentEnabled = !0 === t, e.isAnnouncementArchiveExperimentLoaded = void 0 !== t, e.isAnnouncementArchiveConfigurationLoaded = !0
+                        }))
+                    }, e.loadGroupProductFeatures = function(t) {
                         l.getGroupProductFeatures(t).then((function(t) {
-                            e.isReactAffiliatesEnabled = !0 === (null == t ? void 0 : t.ReactGroupAffiliates), e.reactAffiliatesFlagLoaded = !0, e.isAnnouncementArchiveEnabled = !0 === (null == t ? void 0 : t.AnnouncementArchive) && !0 === (null == t ? void 0 : t.AnnouncementsUsingCommsPlat)
+                            e.isReactAffiliatesEnabled = !0 === (null == t ? void 0 : t.ReactGroupAffiliates), e.reactAffiliatesFlagLoaded = !0, e.isAnnouncementArchiveEnabled = !0 === (null == t ? void 0 : t.AnnouncementArchive) && !0 === (null == t ? void 0 : t.AnnouncementsUsingCommsPlat), e.isAnnouncementArchiveEnabled ? e.loadAnnouncementArchiveExperiment() : e.isAnnouncementArchiveConfigurationLoaded = !0
                         }), (function() {
-                            e.isReactAffiliatesEnabled = !1, e.reactAffiliatesFlagLoaded = !0, e.isAnnouncementArchiveEnabled = !1
+                            e.isReactAffiliatesEnabled = !1, e.reactAffiliatesFlagLoaded = !0, e.isAnnouncementArchiveEnabled = !1, e.isAnnouncementArchiveConfigurationLoaded = !0
                         }))
                     }, e.loadGroupDetailPolicies = function(t) {
                         e.loadGroupProductFeatures(t), e.library.metadata.isGroupDetailsPolicyEnabled ? l.getGroupDetailRules(e.library.currentUser.id).then((function(r) {
-                            e.policies = r, e.policiesLoaded = !0, e.loadProfilePlatform(t), e.policies.checkGroupOrigin && e.verifyGroupOrigin(), e.policies.displayGroupForums ? e.loadGroupForums(t) : I.includes(f.tabs.forums.state) && I.go(f.tabs.about.state, {
+                            e.policies = r, e.policiesLoaded = !0, e.loadProfilePlatform(t), e.policies.checkGroupOrigin && e.verifyGroupOrigin();
+                            var n = T(I.current);
+                            !e.policies.isGracefulDegradationEnabled && e.policies.displayGroupForums ? e.loadGroupForums(t) : (e.isGroupForumsLoaded = !0, !n && I.includes(f.tabs.forums.state) && I.go(f.tabs.about.state, {
                                 success: !0
                             }, {
                                 reload: !0
-                            }), e.loadGroupEvents(t), e.loadGroupStore(t), e.loadGroupAffiliates(t)
+                            })), e.loadGroupEvents(t), e.loadGroupStore(t), e.loadGroupAffiliates(t)
                         }), (function() {
-                            r.debug("--loadGroupDetailPolicies-error---"), e.loadProfilePlatform(t)
+                            r.debug("--loadGroupDetailPolicies-error---"), e.isGroupForumsLoaded = !0, e.loadProfilePlatform(t)
                         })) : (Object.keys(f.policies).forEach((function(t) {
                             e.policies[t] = !0
-                        })), e.loadProfilePlatform(t))
+                        })), e.isGroupForumsLoaded = !0, e.loadProfilePlatform(t))
                     }, e.initGroupDetails = function(t) {
                         e.library.currentGroup = {
                             id: t,
@@ -12829,11 +12886,11 @@
                             var u = null == t || null === (o = t.components) || void 0 === o || null === (i = o.CommunityTabs) || void 0 === i ? void 0 : i.tabs;
                             void 0 !== u && (e.availableProfilePlatformTabs = new Set(u.map((function(e) {
                                 return e.toLowerCase()
-                            })))), B()
+                            })))), N()
                         })).catch((function() {
                             e.profilePlatform = {
                                 componentOrdering: [i.uA.CommunityProfileHeader, i.uA.About, i.uA.Announcements, i.uA.Events, i.uA.Experiences, i.uA.ForumsDiscovery, i.uA.Members, i.uA.SocialLinks]
-                            }, B()
+                            }, N()
                         }))
                     }, e.refreshProfileHeader = function(t) {
                         O.refreshProfilePlatform(t, [{
@@ -12860,16 +12917,16 @@
                                 profileId: t.profileId,
                                 componentOrdering: n,
                                 components: o
-                            }, B()
+                            }, N()
                         } else e.profilePlatform = t
                     }, e.updateCommunitiesLayoutVisibility = function() {
                         e.isCommunitiesLayoutVisible = window.location.pathname.includes("/communities/")
                     }, e.init = function() {
                         m.redirectToCommunitiesIfNecessary();
                         var t = m.parseGroupId(a.absUrl());
-                        e.thumbnailTypes = h.thumbnailTypes, e.relationshipTypes = S.relationshipTypes, e.groupDetailsConstants = f, e.policies = e.groupDetailsConstants.policies, e.policiesLoaded = !1, e.isReactAffiliatesEnabled = !1, e.reactAffiliatesFlagLoaded = !1, e.isAuthenticatedUser = n.CurrentUser.isAuthenticated, e.groupAnnouncement = {}, e.layout = {
+                        e.thumbnailTypes = h.thumbnailTypes, e.relationshipTypes = P.relationshipTypes, e.groupDetailsConstants = f, e.policies = e.groupDetailsConstants.policies, e.policiesLoaded = !1, e.isGroupForumsLoaded = !1, e.isReactAffiliatesEnabled = !1, e.reactAffiliatesFlagLoaded = !1, e.isAnnouncementArchiveConfigurationLoaded = !1, e.isAuthenticatedUser = n.CurrentUser.isAuthenticated, e.groupAnnouncement = {}, e.layout = {
                             activeTab: "about"
-                        }, e.library = {}, e.library.moreGroupsUrl = S.absoluteUrls.moreGroups, e.library.currentUser = {
+                        }, e.library = {}, e.library.moreGroupsUrl = P.absoluteUrls.moreGroups, e.library.currentUser = {
                             id: parseInt(n.CurrentUser.userId),
                             groupCount: null,
                             maxGroups: 0
@@ -13516,7 +13573,8 @@
                             permissions: "<",
                             channelsPermissions: "<",
                             isGroupMember: "<",
-                            isEnabled: "<"
+                            isEnabled: "<",
+                            isOwner: "<"
                         },
                         link: function(e, t) {
                             var r = function() {
@@ -13525,7 +13583,8 @@
                                     permissions: e.permissions,
                                     channelsPermissions: e.channelsPermissions,
                                     isGroupMember: e.isGroupMember,
-                                    isEnabled: e.isEnabled
+                                    isEnabled: e.isEnabled,
+                                    isOwner: e.isOwner
                                 }))
                             };
                             t.ready(r), e.$on("$destroy", (function() {
@@ -13537,10 +13596,11 @@
                                     permissions: e.permissions,
                                     channelsPermissions: e.channelsPermissions,
                                     isGroupMember: e.isGroupMember,
-                                    isEnabled: e.isEnabled
+                                    isEnabled: e.isEnabled,
+                                    isOwner: e.isOwner
                                 }
                             }), (function(e, t) {
-                                e.groupId && e.permissions && (e.groupId === t.groupId && e.isEnabled === t.isEnabled && JSON.stringify(e.permissions) === JSON.stringify(t.permissions) && JSON.stringify(e.channelsPermissions) === JSON.stringify(t.channelsPermissions) && e.isGroupMember === t.isGroupMember || r())
+                                e.groupId && e.permissions && (e.groupId === t.groupId && e.isEnabled === t.isEnabled && JSON.stringify(e.permissions) === JSON.stringify(t.permissions) && JSON.stringify(e.channelsPermissions) === JSON.stringify(t.channelsPermissions) && e.isGroupMember === t.isGroupMember && e.isOwner === t.isOwner || r())
                             }), !0)
                         }
                     }
@@ -14423,10 +14483,10 @@
                 if (h) try {
                     null.error
                 } catch (e) {
-                    var S = h(h(e));
-                    A["%Error.prototype%"] = S
+                    var P = h(h(e));
+                    A["%Error.prototype%"] = P
                 }
-                var P = function e(t) {
+                var S = function e(t) {
                         var r;
                         if ("%AsyncFunction%" === t) r = f("async function () {}");
                         else if ("%GeneratorFunction%" === t) r = f("function* () {}");
@@ -14507,7 +14567,7 @@
                         var r, n = e;
                         if (O(x, n) && (n = "%" + (r = x[n])[0] + "%"), O(A, n)) {
                             var o = A[n];
-                            if (o === v && (o = P(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
+                            if (o === v && (o = S(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
                             return {
                                 alias: r,
                                 name: n,
@@ -14821,15 +14881,15 @@
                     v = r(79138),
                     w = r(92571),
                     A = v.call(Function.call, Array.prototype.concat),
-                    S = v.call(Function.apply, Array.prototype.splice),
-                    P = v.call(Function.call, String.prototype.replace),
+                    P = v.call(Function.apply, Array.prototype.splice),
+                    S = v.call(Function.call, String.prototype.replace),
                     x = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g,
                     E = /\\(\\)?/g;
                 e.exports = function(e, t) {
                     if ("string" != typeof e || 0 === e.length) throw new a("intrinsic name must be a non-empty string");
                     if (arguments.length > 1 && "boolean" != typeof t) throw new a('"allowMissing" argument must be a boolean');
-                    var r, n = (r = [], P(e, x, (function(e, t, n, o) {
-                            r[r.length] = n ? P(o, E, "$1") : t || e
+                    var r, n = (r = [], S(e, x, (function(e, t, n, o) {
+                            r[r.length] = n ? S(o, E, "$1") : t || e
                         })), r),
                         i = n.length > 0 ? n[0] : "",
                         u = function(e, t) {
@@ -14849,7 +14909,7 @@
                         l = u.value,
                         p = !1,
                         f = u.alias;
-                    f && (i = f[0], S(n, A([0, 1], f)));
+                    f && (i = f[0], P(n, A([0, 1], f)));
                     for (var y = 1, d = !0; y < n.length; y += 1) {
                         var g = n[y];
                         if ("constructor" !== g && d || (p = !0), w(b, s = "%" + (i += "." + g) + "%")) l = b[s];
@@ -15026,10 +15086,10 @@
                 if (h) try {
                     null.error
                 } catch (e) {
-                    var S = h(h(e));
-                    A["%Error.prototype%"] = S
+                    var P = h(h(e));
+                    A["%Error.prototype%"] = P
                 }
-                var P = function e(t) {
+                var S = function e(t) {
                         var r;
                         if ("%AsyncFunction%" === t) r = f("async function () {}");
                         else if ("%GeneratorFunction%" === t) r = f("function* () {}");
@@ -15110,7 +15170,7 @@
                         var r, n = e;
                         if (O(x, n) && (n = "%" + (r = x[n])[0] + "%"), O(A, n)) {
                             var o = A[n];
-                            if (o === v && (o = P(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
+                            if (o === v && (o = S(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
                             return {
                                 alias: r,
                                 name: n,
@@ -15381,7 +15441,7 @@
                 e.exports = '<li class="list-item item-card"> <a ng-href="{{ $ctrl.urlPath | seoUrl:$ctrl.item.id:$ctrl.item.name}}" target="_self" class="item-card-container"> <div class="item-card-link"> <div class="item-card-thumb-container"> <thumbnail-2d class="item-card-thumb" thumbnail-type="$ctrl.thumbnailType" thumbnail-target-id="$ctrl.item.id"></thumbnail-2d> </div> </div> <div class="item-card-caption"> <div class="item-card-name-link"> <div class="item-card-name" title="{{ $ctrl.item.name }}" ng-bind="$ctrl.item.name"></div> </div> <div ng-if="$ctrl.item.price" class="text-overflow item-card-price"> <span class="icon-robux-16x16"></span> <span class="text-robux" ng-bind="$ctrl.item.price | number"></span> </div> </div> </a> </li>'
             },
             85781: function(e) {
-                e.exports = '<div ng-if="canViewGroupDetails()" class="tab-content rbx-tab-content col-xs-12"> <community-tiers-disclosure-banner group-id="library.currentGroup.id" is-group-member="isInGroup()" is-community-page="isCommunitiesLayoutVisible"></community-tiers-disclosure-banner> <ng-container ng-repeat="component in profilePlatform.componentOrdering" ng-switch="component"> <div ng-switch-when="Videos" id="group-videos" ng-if="profilePlatform.components.Videos.assetIds.length > 0"> <group-react-videos group-id="library.currentGroup.id" videos-data="profilePlatform.components.Videos"> </group-react-videos> </div> <group-announcements ng-switch-when="Announcements" id="group-announcements" is-owner="isCurrentUserOwner()" community-info="linkedCommunityInfo" group="library.currentGroup.group" join-group="joinGroup" can-create-announcements="canCreateAnnouncements()" can-view-announcements="canViewAnnouncements()" on-announcement-loaded="onAnnouncementLoaded" allowed-to-join-group="showJoinGroupButtonUI() == groupDetailsConstants.joinStatus.allowed" policies="policies" metadata="library.metadata" ng-if="showReactAnnouncement()" announcements-data="profilePlatform.components.Announcements" refresh-announcements="refreshAnnouncements"></group-announcements> <group-events ng-switch-when="Events" only-show-featured-event="true" group="library.currentGroup.group" can-set-featured-event="isCurrentUserOwner()" ng-if="canViewEvents()"></group-events> <group-public-servers ng-switch-when="ExperienceServers" ng-if="isGroupExperienceServersExperimentEnabled && library.currentGroup.areGroupGamesVisible" group-id="library.currentGroup.id"></group-public-servers> <group-games ng-switch-when="Experiences" ng-if="library.currentGroup.areGroupGamesVisible" group-id="library.currentGroup.id"></group-games> <group-forums-discovery ng-switch-when="ForumsDiscovery" group-id="library.currentGroup.id" is-enabled="canViewForums()" permissions="library.currentGroup.permissions" channels-permissions="library.currentGroup.channelPermissions" is-group-member="isInGroup()"></group-forums-discovery> </ng-container> <group-payouts ng-if="isAuthenticatedUser" group-id="library.currentGroup.id" policies="policies"></group-payouts> <div class="clearfix"></div> </div> '
+                e.exports = '<div ng-if="canViewGroupDetails()" class="tab-content rbx-tab-content col-xs-12"> <community-tiers-disclosure-banner group-id="library.currentGroup.id" is-group-member="isInGroup()" is-community-page="isCommunitiesLayoutVisible"></community-tiers-disclosure-banner> <ng-container ng-repeat="component in profilePlatform.componentOrdering" ng-switch="component"> <div ng-switch-when="Videos" id="group-videos" ng-if="profilePlatform.components.Videos.assetIds.length > 0"> <group-react-videos group-id="library.currentGroup.id" videos-data="profilePlatform.components.Videos"> </group-react-videos> </div> <group-announcements ng-switch-when="Announcements" id="group-announcements" is-owner="isCurrentUserOwner()" community-info="linkedCommunityInfo" group="library.currentGroup.group" join-group="joinGroup" can-create-announcements="canCreateAnnouncements()" can-view-announcements="canViewAnnouncements()" on-announcement-loaded="onAnnouncementLoaded" allowed-to-join-group="showJoinGroupButtonUI() == groupDetailsConstants.joinStatus.allowed" policies="policies" metadata="library.metadata" ng-if="showReactAnnouncement()" announcements-data="profilePlatform.components.Announcements" refresh-announcements="refreshAnnouncements"></group-announcements> <group-events ng-switch-when="Events" only-show-featured-event="true" group="library.currentGroup.group" can-set-featured-event="isCurrentUserOwner()" ng-if="canViewEvents()"></group-events> <group-public-servers ng-switch-when="ExperienceServers" ng-if="isGroupExperienceServersExperimentEnabled && library.currentGroup.areGroupGamesVisible" group-id="library.currentGroup.id"></group-public-servers> <group-games ng-switch-when="Experiences" ng-if="library.currentGroup.areGroupGamesVisible" group-id="library.currentGroup.id"></group-games> <group-forums-discovery ng-switch-when="ForumsDiscovery" group-id="library.currentGroup.id" is-enabled="canViewForums()" permissions="library.currentGroup.permissions" channels-permissions="library.currentGroup.channelPermissions" is-group-member="isInGroup()" is-owner="isCurrentUserOwner()"></group-forums-discovery> </ng-container> <group-payouts ng-if="isAuthenticatedUser" group-id="library.currentGroup.id" policies="policies"></group-payouts> <div class="clearfix"></div> </div> '
             },
             45775: function(e) {
                 e.exports = '<div ng-cloak ng-controller="groupController" ng-class="{\'group-details-container-desktop-and-tablet\': !library.metadata.isPhone,\'no-list\': !isAuthenticatedUser || !isCommunitiesLayoutVisible, \'new-list\': showGroupsList() && isGroupsListRedesignEnabled,\'group-details-container-mobile\': library.metadata.isPhone}" class="section" group-page-scroll-tracker> <system-feedback></system-feedback> <div ng-if="isGroupsListRedesignEnabled && profilePlatform.components.CoverPhoto && profilePlatform.components.CoverPhoto.coverPhotoId"> <group-react-cover-photo group-id="library.currentGroup.id" cover-photo-data="profilePlatform.components.CoverPhoto"> </group-react-cover-photo> </div> <div ng-if="!library.metadata.isPhone && isCommunitiesLayoutVisible && !isGroupsListRedesignEnabled" class="container-header see-all-container-header"> <h1 ng-bind="\'Heading.Groups\' | translate"></h1> <a ng-href="{{ library.moreGroupsUrl }}" class="btn-secondary-xs btn-more see-all-link-icon" target="_self" ng-bind="\'Action.MoreGroups\' | translate"></a> </div> <groups-list ng-if="showGroupsList() && !isGroupsListRedesignEnabled" group-list="library.groupsList.groups" current-group="library.currentGroup" max-groups="library.metadata.groupLimit" is-loading-groups="library.groupsList.isLoadingGroups" load-failure="library.groupsList.loadFailure" class="groups-list col-xs-12 col-sm-3"></groups-list> <div class="groups-list-sidebar" ng-if="showGroupsList() && isGroupsListRedesignEnabled"> <group-react-groups-list groups-list="library.groupsList.groups" current-group="library.currentGroup" show-member-counts="true" can-create-group="canCreateGroup()" is-sidebar="true" is-loading-groups="library.groupsList.isLoadingGroups" load-failure="library.groupsList.loadFailure"> </group-react-groups-list> </div> <div class="group-details col-xs-12" ng-if="layout.isMetadataLoaded" ng-class="{\'col-sm-9\' : isAuthenticatedUser && !library.metadata.isPhone && isCommunitiesLayoutVisible && !isGroupsListRedesignEnabled}"> <div ng-if="isLockedGroup()" class="section-content"> <p ng-bind="\'Label.GroupLocked\' | translate"></p> <button ng-if="isInGroup() && !isCurrentUserOwner()" type="submit" id="leave-locked-group" class="btn-secondary-md group-button" ng-click="showLeaveGroupModal(library.currentGroup.id, library.currentUser.id)" ng-bind="\'Action.LeaveGroup\' | translate"></button> </div> <div ng-if="isGroupRestrictedByPolicy()" class="section-content-off" ng-bind="\'Message.GroupRestricted\' | translate"></div> <div ng-if="layout.loadGroupMetadataError" class="section-content-off" ng-bind="\'Message.LoadGroupMetadataError\' | translate"></div> <div ng-if="!isLockedGroup() && !isGroupRestrictedByPolicy() && !layout.loadGroupMetadataError"> <div ng-if="isGroupsListRedesignEnabled && profilePlatform.components.CoverPhoto && profilePlatform.components.CoverPhoto.coverPhotoId" class="profile-header-with-cover"> <div class="group-profile-header-over-cover"> <group-react-profile-header group-id="library.currentGroup.id" is-community-profile="isCommunitiesLayoutVisible" community-profile-header-data="profilePlatform.components.CommunityProfileHeader" roles-data="library.currentGroup.roles" user-role="library.currentGroup.role" permissions="library.currentGroup.permissions" policies="policies" can-view-members="canViewMembers()" is-group-verification-required-to-join="policies.isGroupVerificationRequiredToJoin" actions-data="profilePlatform.components.Actions" about-data="profilePlatform.components.About" join-group="joinGroup()" cancel-join-request="cancelJoinRequest(library.currentGroup.id, library.currentUser.id)" show-leave-group-or-change-owner-modal="showLeaveGroupOrChangeOwnerModal(library.currentGroup.id, library.currentUser.id)" make-primary="makePrimary(library.currentGroup.id)" remove-primary="removePrimary()" show-report-abuse-modal="showReportAbuseModal(library.currentGroup.id)" show-change-owner-modal="showChangeOwnerModal()" claim-ownership="claimOwnership(library.currentGroup.id)"> </group-react-profile-header> </div> </div> <div ng-if="!profilePlatform.components.CoverPhoto || !profilePlatform.components.CoverPhoto.coverPhotoId || !isGroupsListRedesignEnabled"> <group-react-profile-header group-id="library.currentGroup.id" is-community-profile="isCommunitiesLayoutVisible" community-profile-header-data="profilePlatform.components.CommunityProfileHeader" roles-data="library.currentGroup.roles" user-role="library.currentGroup.role" permissions="library.currentGroup.permissions" policies="policies" can-view-members="canViewMembers()" is-group-verification-required-to-join="policies.isGroupVerificationRequiredToJoin" actions-data="profilePlatform.components.Actions" about-data="profilePlatform.components.About" join-group="joinGroup()" cancel-join-request="cancelJoinRequest(library.currentGroup.id, library.currentUser.id)" show-leave-group-or-change-owner-modal="showLeaveGroupOrChangeOwnerModal(library.currentGroup.id, library.currentUser.id)" make-primary="makePrimary(library.currentGroup.id)" remove-primary="removePrimary()" show-report-abuse-modal="showReportAbuseModal(library.currentGroup.id)" show-change-owner-modal="showChangeOwnerModal()" claim-ownership="claimOwnership(library.currentGroup.id)"> </group-react-profile-header> </div> <div class="rbx-tabs-horizontal" ng-if="canViewGroupDetails() && canViewCommunityTabs()"> <ul id="horizontal-tabs" class="nav nav-tabs group-foundation-tabs" role="tablist"> <li ng-repeat="tab in groupDetailsTabs()" active-tab="layout.activeTab" tab="tab" num-tabs="groupDetailsNumTabs()" group-tab></li> </ul> </div> <div ng-if="layout.activeTab.key === groupDetailsConstants.tabs.about.key" group-about></div> <div ng-if="layout.activeTab.key === groupDetailsConstants.tabs.forums.key" class="tab-content rbx-tab-content section col-xs-12"> <group-posts group="library.currentGroup.group" permissions="library.currentGroup.permissions" channels-permissions="library.currentGroup.channelPermissions" user-id="library.currentUser.id" is-group-member="isInGroup()" forums-enabled="library.currentGroup.forumsEnabled" policies="policies"></group-posts> </div> <group-store ng-if="layout.activeTab.key === groupDetailsConstants.tabs.store.key" group-id="library.currentGroup.id" group-name="library.currentGroup.group.name" permissions="library.currentGroup.permissions" metadata="library.metadata"></group-store> <div ng-if="layout.activeTab.key === groupDetailsConstants.tabs.affiliates.key && isReactAffiliatesEnabled" class="tab-content rbx-tab-content section col-xs-12" group-react-affiliates group-id="library.currentGroup.id" are-enemies-allowed="library.currentGroup.areEnemiesAllowed"></div> <div ng-if="layout.activeTab.key === groupDetailsConstants.tabs.affiliates.key && reactAffiliatesFlagLoaded && !isReactAffiliatesEnabled" class="tab-content rbx-tab-content section col-xs-12"> <group-affiliates group-id="library.currentGroup.id" section-title="\'Heading.Allies\'" no-affiliates-message="\'Label.NoAllies\'" relationship-type="relationshipTypes.allies"> </group-affiliates> <group-affiliates ng-if="library.currentGroup.areEnemiesAllowed" group-id="library.currentGroup.id" section-title="\'Heading.Enemies\'" no-affiliates-message="\'Label.NoEnemies\'" relationship-type="relationshipTypes.enemies"></group-affiliates> </div> <div ng-if="layout.activeTab.key === groupDetailsConstants.tabs.events.key" class="tab-content rbx-tab-content section col-xs-12"> <group-events ng-if="canViewEvents()" group="library.currentGroup.group" can-set-featured-event="isCurrentUserOwner()"></group-events> </div> </div> </div> <span id="2sv-popup-container"></span> <div id="pow-popup-container"></div> </div> '
@@ -15615,10 +15675,10 @@
                 if (h) try {
                     null.error
                 } catch (e) {
-                    var S = h(h(e));
-                    A["%Error.prototype%"] = S
+                    var P = h(h(e));
+                    A["%Error.prototype%"] = P
                 }
-                var P = function e(t) {
+                var S = function e(t) {
                         var r;
                         if ("%AsyncFunction%" === t) r = f("async function () {}");
                         else if ("%GeneratorFunction%" === t) r = f("function* () {}");
@@ -15699,7 +15759,7 @@
                         var r, n = e;
                         if (O(x, n) && (n = "%" + (r = x[n])[0] + "%"), O(A, n)) {
                             var o = A[n];
-                            if (o === v && (o = P(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
+                            if (o === v && (o = S(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
                             return {
                                 alias: r,
                                 name: n,
@@ -16289,10 +16349,10 @@
                 if (h) try {
                     null.error
                 } catch (e) {
-                    var S = h(h(e));
-                    A["%Error.prototype%"] = S
+                    var P = h(h(e));
+                    A["%Error.prototype%"] = P
                 }
-                var P = function e(t) {
+                var S = function e(t) {
                         var r;
                         if ("%AsyncFunction%" === t) r = f("async function () {}");
                         else if ("%GeneratorFunction%" === t) r = f("function* () {}");
@@ -16373,7 +16433,7 @@
                         var r, n = e;
                         if (O(x, n) && (n = "%" + (r = x[n])[0] + "%"), O(A, n)) {
                             var o = A[n];
-                            if (o === v && (o = P(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
+                            if (o === v && (o = S(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
                             return {
                                 alias: r,
                                 name: n,
@@ -16509,16 +16569,16 @@
                     return "[object ArrayBuffer]" === l(e)
                 }
 
-                function S(e) {
+                function P(e) {
                     return "undefined" != typeof ArrayBuffer && (A.working ? A(e) : e instanceof ArrayBuffer)
                 }
 
-                function P(e) {
+                function S(e) {
                     return "[object DataView]" === l(e)
                 }
 
                 function x(e) {
-                    return "undefined" != typeof DataView && (P.working ? P(e) : e instanceof DataView)
+                    return "undefined" != typeof DataView && (S.working ? S(e) : e instanceof DataView)
                 }
                 t.isArgumentsObject = n, t.isGeneratorFunction = o, t.isTypedArray = a, t.isPromise = function(e) {
                     return "undefined" != typeof Promise && e instanceof Promise || null !== e && "object" == typeof e && "function" == typeof e.then && "function" == typeof e.catch
@@ -16554,7 +16614,7 @@
                     return "undefined" != typeof WeakMap && (v.working ? v(e) : e instanceof WeakMap)
                 }, w.working = "undefined" != typeof WeakSet && w(new WeakSet), t.isWeakSet = function(e) {
                     return w(e)
-                }, A.working = "undefined" != typeof ArrayBuffer && A(new ArrayBuffer), t.isArrayBuffer = S, P.working = "undefined" != typeof ArrayBuffer && "undefined" != typeof DataView && P(new DataView(new ArrayBuffer(1), 0, 1)), t.isDataView = x;
+                }, A.working = "undefined" != typeof ArrayBuffer && A(new ArrayBuffer), t.isArrayBuffer = P, S.working = "undefined" != typeof ArrayBuffer && "undefined" != typeof DataView && S(new DataView(new ArrayBuffer(1), 0, 1)), t.isDataView = x;
                 var E = "undefined" != typeof SharedArrayBuffer ? SharedArrayBuffer : void 0;
 
                 function O(e) {
@@ -16597,7 +16657,7 @@
                 }, t.isNumberObject = I, t.isStringObject = j, t.isBooleanObject = C, t.isBigIntObject = F, t.isSymbolObject = R, t.isBoxedPrimitive = function(e) {
                     return I(e) || j(e) || C(e) || F(e) || R(e)
                 }, t.isAnyArrayBuffer = function(e) {
-                    return "undefined" != typeof Uint8Array && (S(e) || G(e))
+                    return "undefined" != typeof Uint8Array && (P(e) || G(e))
                 }, ["isProxy", "isExternal", "isModuleNamespaceObject"].forEach((function(e) {
                     Object.defineProperty(t, e, {
                         enumerable: !1,
@@ -16638,7 +16698,7 @@
                                 default:
                                     return e
                             }
-                        })), u = n[r]; r < o; u = n[++r]) h(u) || !P(u) ? i += " " + u : i += " " + l(u);
+                        })), u = n[r]; r < o; u = n[++r]) h(u) || !S(u) ? i += " " + u : i += " " + l(u);
                     return i
                 }, t.deprecate = function(e, r) {
                     if (void 0 !== n && !0 === n.noDeprecation) return e;
@@ -16707,7 +16767,7 @@
                             var c = r.name ? ": " + r.name : "";
                             return e.stylize("[Function" + c + "]", "special")
                         }
-                        if (S(r)) return e.stylize(RegExp.prototype.toString.call(r), "regexp");
+                        if (P(r)) return e.stylize(RegExp.prototype.toString.call(r), "regexp");
                         if (x(r)) return e.stylize(Date.prototype.toString.call(r), "date");
                         if (E(r)) return d(r)
                     }
@@ -16715,7 +16775,7 @@
                         p = !1,
                         f = ["{", "}"];
                     (m(r) && (p = !0, f = ["[", "]"]), O(r)) && (l = " [Function" + (r.name ? ": " + r.name : "") + "]");
-                    return S(r) && (l = " " + RegExp.prototype.toString.call(r)), x(r) && (l = " " + Date.prototype.toUTCString.call(r)), E(r) && (l = " " + d(r)), 0 !== a.length || p && 0 != r.length ? n < 0 ? S(r) ? e.stylize(RegExp.prototype.toString.call(r), "regexp") : e.stylize("[Object]", "special") : (e.seen.push(r), s = p ? function(e, t, r, n, o) {
+                    return P(r) && (l = " " + RegExp.prototype.toString.call(r)), x(r) && (l = " " + Date.prototype.toUTCString.call(r)), E(r) && (l = " " + d(r)), 0 !== a.length || p && 0 != r.length ? n < 0 ? P(r) ? e.stylize(RegExp.prototype.toString.call(r), "regexp") : e.stylize("[Object]", "special") : (e.seen.push(r), s = p ? function(e, t, r, n, o) {
                         for (var i = [], a = 0, u = t.length; a < u; ++a) C(t, String(a)) ? i.push(g(e, t, r, n, String(a), !0)) : i.push("");
                         return o.forEach((function(o) {
                             o.match(/^\d+$/) || i.push(g(e, t, r, n, o, !0))
@@ -16774,20 +16834,20 @@
                     return void 0 === e
                 }
 
-                function S(e) {
-                    return P(e) && "[object RegExp]" === G(e)
+                function P(e) {
+                    return S(e) && "[object RegExp]" === G(e)
                 }
 
-                function P(e) {
+                function S(e) {
                     return "object" == typeof e && null !== e
                 }
 
                 function x(e) {
-                    return P(e) && "[object Date]" === G(e)
+                    return S(e) && "[object Date]" === G(e)
                 }
 
                 function E(e) {
-                    return P(e) && ("[object Error]" === G(e) || e instanceof Error)
+                    return S(e) && ("[object Error]" === G(e) || e instanceof Error)
                 }
 
                 function O(e) {
@@ -16838,7 +16898,7 @@
                     return null == e
                 }, t.isNumber = v, t.isString = w, t.isSymbol = function(e) {
                     return "symbol" == typeof e
-                }, t.isUndefined = A, t.isRegExp = S, t.types.isRegExp = S, t.isObject = P, t.isDate = x, t.types.isDate = x, t.isError = E, t.types.isNativeError = E, t.isFunction = O, t.isPrimitive = function(e) {
+                }, t.isUndefined = A, t.isRegExp = P, t.types.isRegExp = P, t.isObject = S, t.isDate = x, t.types.isDate = x, t.isError = E, t.types.isNativeError = E, t.isFunction = O, t.isPrimitive = function(e) {
                     return null === e || "boolean" == typeof e || "number" == typeof e || "string" == typeof e || "symbol" == typeof e || void 0 === e
                 }, t.isBuffer = r(95272);
                 var j = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -16850,7 +16910,7 @@
                     var e, r;
                     o.log("%s - %s", (e = new Date, r = [I(e.getHours()), I(e.getMinutes()), I(e.getSeconds())].join(":"), [e.getDate(), j[e.getMonth()], r].join(" ")), t.format.apply(t, arguments))
                 }, t.inherits = r(35615), t._extend = function(e, t) {
-                    if (!t || !P(t)) return e;
+                    if (!t || !S(t)) return e;
                     for (var r = Object.keys(t), n = r.length; n--;) e[r[n]] = t[r[n]];
                     return e
                 };
@@ -17160,10 +17220,10 @@
                 if (h) try {
                     null.error
                 } catch (e) {
-                    var S = h(h(e));
-                    A["%Error.prototype%"] = S
+                    var P = h(h(e));
+                    A["%Error.prototype%"] = P
                 }
-                var P = function e(t) {
+                var S = function e(t) {
                         var r;
                         if ("%AsyncFunction%" === t) r = f("async function () {}");
                         else if ("%GeneratorFunction%" === t) r = f("function* () {}");
@@ -17244,7 +17304,7 @@
                         var r, n = e;
                         if (O(x, n) && (n = "%" + (r = x[n])[0] + "%"), O(A, n)) {
                             var o = A[n];
-                            if (o === v && (o = P(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
+                            if (o === v && (o = S(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
                             return {
                                 alias: r,
                                 name: n,
@@ -17406,7 +17466,7 @@
                     }
                 });
                 r(19919), r(41594);
-                var n, o, i, a, u, c, s, l, p, f, y, d, g, m, b, h, v, w, A, S, P = r(20459),
+                var n, o, i, a, u, c, s, l, p, f, y, d, g, m, b, h, v, w, A, P, S = r(20459),
                     x = (r(4452), r(90883)),
                     E = (r(14777), r(68550), r(47895));
                 r(28601), r(58074);
@@ -17550,7 +17610,7 @@
                     e.UserProfileHeader = "UserProfileHeader", e.About = "About", e.SocialLinks = "SocialLinks", e.CurrentlyPlaying = "CurrentlyPlaying", e.CurrentlyWearing = "CurrentlyWearing", e.ViewFullProfile = "ViewFullProfile", e.Actions = "Actions", e.QuickLinks = "QuickLinks", e.FavoriteExperiences = "FavoriteExperiences", e.Inventory = "Inventory", e.Store = "Store", e.ContactProfileHeader = "ContactProfileHeader", e.ContactDescription = "ContactDescription", e.CommunityProfileHeader = "CommunityProfileHeader", e.CommunityTabs = "CommunityTabs", e.Experiences = "Experiences", e.ExperienceServers = "ExperienceServers", e.Announcements = "Announcements", e.ForumsDiscovery = "ForumsDiscovery", e.Events = "Events", e.Members = "Members", e.Shout = "Shout", e.Videos = "Videos", e.CoverPhoto = "CoverPhoto", e.ProfileBackground = "ProfileBackground", e.Friends = "Friends", e.Collections = "Collections", e.Communities = "Communities", e.RobloxBadges = "RobloxBadges", e.PlayerBadges = "PlayerBadges", e.CommunityLocked = "CommunityLocked", e.TrustedFriendModal = "TrustedFriendModal"
                 }(m || (m = {}));
                 var U = null !== (v = null === (h = null === (b = null === window || void 0 === window ? void 0 : window.Roblox) || void 0 === b ? void 0 : b.EnvironmentUrls) || void 0 === h ? void 0 : h.apiGatewayUrl) && void 0 !== v ? v : "https://apis.roblox.com",
-                    M = (S = null === (A = null === (w = null === window || void 0 === window ? void 0 : window.Roblox) || void 0 === w ? void 0 : w.EnvironmentUrls) || void 0 === A ? void 0 : A.friendsApi, "".concat(U, "/profile-platform-api/v1/profiles/get")),
+                    M = (P = null === (A = null === (w = null === window || void 0 === window ? void 0 : window.Roblox) || void 0 === w ? void 0 : w.EnvironmentUrls) || void 0 === A ? void 0 : A.friendsApi, "".concat(U, "/profile-platform-api/v1/profiles/get")),
                     D = ("".concat(U, "/profile-platform-api/v1/profiles/batch/get"), function() {
                         var e = k(regeneratorRuntime.mark((function e(t) {
                             var r, n, o;
@@ -17574,7 +17634,7 @@
                             return e.apply(this, arguments)
                         }
                     }());
-                (0, P.makeStyles)()((function(e, t) {
+                (0, S.makeStyles)()((function(e, t) {
                     var r = t.color,
                         n = t.width,
                         o = t.iconOverrideStyles;
@@ -17607,7 +17667,7 @@
                         whiteSpace: "nowrap",
                         wordWrap: "break-word"
                     };
-                (0, P.makeStyles)()((function() {
+                (0, S.makeStyles)()((function() {
                     return {
                         linkContainerOverride: {
                             color: "inherit",
@@ -17639,7 +17699,7 @@
                             lineHeight: r.LineHeight
                         }))
                     };
-                (0, P.makeStyles)()((function(e, t) {
+                (0, S.makeStyles)()((function(e, t) {
                     var r = t.gap,
                         n = t.textColor,
                         o = t.fontStyle,
@@ -17666,7 +17726,7 @@
                             flexShrink: 0
                         }
                     }
-                })), (0, P.makeStyles)({
+                })), (0, S.makeStyles)({
                     name: "AttributionTextContent"
                 })((function(e, t) {
                     var r = t.subtitleMaxLines,
@@ -17692,7 +17752,7 @@
                             WebkitBoxOrient: "vertical"
                         }, _(V, o, n))
                     }
-                })), (0, P.makeStyles)()((function(e, t) {
+                })), (0, S.makeStyles)()((function(e, t) {
                     var r = t.height;
                     return {
                         attributionRowContainer: {
@@ -17747,7 +17807,7 @@
                     minItemCount: 1,
                     maxItemCount: 1,
                     fractionalItemAmount: .1
-                }), (0, P.makeStyles)()((function(e, t) {
+                }), (0, S.makeStyles)()((function(e, t) {
                     var r, n, o = t.itemWidth,
                         i = t.columnGap,
                         a = t.sideMargin,
@@ -17816,7 +17876,7 @@
                         }
                     }
                 }));
-                (0, P.makeStyles)()((function(e, t) {
+                (0, S.makeStyles)()((function(e, t) {
                     var r = t.itemWidth,
                         n = t.columnGap,
                         o = t.sideMargin,
@@ -17847,7 +17907,7 @@
                     };
                     return t
                 };
-                (0, P.makeStyles)()((function(e, t) {
+                (0, S.makeStyles)()((function(e, t) {
                     var r = t.iconWidth,
                         n = t.avatarContainerBackgroundColor,
                         o = t.avatarImageBackgroundColor,
@@ -17884,7 +17944,7 @@
                             }
                         })
                     }
-                })), (0, P.makeStyles)({
+                })), (0, S.makeStyles)({
                     name: "Gradient"
                 })((function(e, t) {
                     var r = t.linearGradient,
@@ -17901,7 +17961,7 @@
                             background: r
                         })
                     }
-                })), (0, P.makeStyles)({
+                })), (0, S.makeStyles)({
                     name: "ImageWithGradient"
                 })((function(e, t) {
                     var r = t.imageContainerHeight,
@@ -17927,7 +17987,7 @@
                     }
                 }));
                 var H = "2px 2px 4px rgba(0, 0, 0, 0.15)";
-                (0, P.makeStyles)()((function(e, t) {
+                (0, S.makeStyles)()((function(e, t) {
                     var r = t.hasTitleImage,
                         n = t.forceSmallView,
                         o = t.forceMediumView,
@@ -18021,7 +18081,7 @@
                             }
                         })
                     }
-                })), (0, P.makeStyles)()((function(e, t) {
+                })), (0, S.makeStyles)()((function(e, t) {
                     var r = t.forceViewportWidth,
                         n = t.maxForegroundHeightPercentString,
                         o = t.forceSmallOrMediumView,
@@ -18080,7 +18140,7 @@
                             }
                         })
                     }
-                })), (0, P.makeStyles)()((function(e, t) {
+                })), (0, S.makeStyles)()((function(e, t) {
                     var r = t.verticalGap;
                     return {
                         sectionHeader: C({
@@ -18218,7 +18278,7 @@
                         pointerEvents: "none",
                         position: "absolute"
                     };
-                (0, P.makeStyles)()((function(e, t) {
+                (0, S.makeStyles)()((function(e, t) {
                     var r = t.padding,
                         n = t.containerOverrideStyles,
                         o = Object.keys(J).reduce((function(e, t) {
@@ -18263,7 +18323,7 @@
                             o = document.createElement("style");
                         o.type = "text/css", "top" === r && n.firstChild ? n.insertBefore(o, n.firstChild) : n.appendChild(o), o.styleSheet ? o.styleSheet.cssText = e : o.appendChild(document.createTextNode(e))
                     }
-                }(0, P.makeStyles)()((function(e, t) {
+                }(0, S.makeStyles)()((function(e, t) {
                     var r = t.textColor,
                         n = t.fontStyle,
                         o = t.backgroundColor,
@@ -18284,7 +18344,7 @@
                             backgroundColor: X(o, i)
                         }, c)
                     }
-                })), (0, P.makeStyles)()((function(e, t) {
+                })), (0, S.makeStyles)()((function(e, t) {
                     var r = t.titleHeight,
                         n = t.titleLines,
                         o = t.titleColor,
@@ -18324,7 +18384,7 @@
                             overflow: "hidden"
                         }, 1 === n && C({}, W)), _(V, o, i))
                     }
-                })), (0, P.makeStyles)()((function(e, t) {
+                })), (0, S.makeStyles)()((function(e, t) {
                     var r = t.imageAspectRatio,
                         n = t.isContained,
                         o = t.containmentBackgroundColor,
@@ -18388,7 +18448,7 @@
                             borderBottomRightRadius: "0px"
                         })
                     }
-                })), (0, P.makeStyles)()((function(e, t) {
+                })), (0, S.makeStyles)()((function(e, t) {
                     var r = t.textHeight,
                         n = t.textColor,
                         o = t.textIconGap,
@@ -18431,7 +18491,7 @@
                             alignItems: "center"
                         }
                     }
-                })), (0, P.makeStyles)({
+                })), (0, S.makeStyles)({
                     name: "VerticalFeed"
                 })((function(e, t) {
                     var r = t.maxWidth,
@@ -18453,7 +18513,7 @@
                             maxWidth: r ? "".concat(r, "px") : "100%"
                         }
                     }
-                })), (0, P.makeStyles)({
+                })), (0, S.makeStyles)({
                     name: "DetailsPageHeader"
                 })((function(e, t) {
                     var r = t.backgroundMaxWidth,
@@ -18485,7 +18545,7 @@
                             maxWidth: n ? "".concat(n, "px") : "100%"
                         }
                     }
-                })), (0, P.makeStyles)({
+                })), (0, S.makeStyles)({
                     name: "Page"
                 })((function(e, t) {
                     var r = t.backgroundColor;
@@ -18565,7 +18625,7 @@
             }))
         }()
 }();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/fb65e8aadfb74844ed3120f321dcad23-groupDetails.bundle.min.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/8f0fa39c6d1e3734edd7ce9e24edc1f1-groupDetails.bundle.min.js.map
 
 /*! For license information please see groupProfileHeader.bundle.min.js.LICENSE.txt */
 ! function() {
@@ -35224,6 +35284,7 @@
                         IsOwnerRolesetDeprecated: !1,
                         ForumsAttachmentsCreate: !1,
                         ForumsAttachmentsView: !1,
+                        ForumsImages: !1,
                         CommunityTiers: !1,
                         CommunityTiersDisclosureBanner: !1,
                         AnnouncementAnalytics: !1,
@@ -42506,6 +42567,9 @@
                         var r = new URLSearchParams;
                         return n && r.append("includeCommentCount", "true"), "".concat(fS, "/").concat(e, "/forums/").concat(t, "/posts?").concat(r.toString())
                     },
+                    getForumImageUploadEndpoint: function(e, t) {
+                        return "".concat(fS, "/").concat(e, "/forums/").concat(t, "/image-upload")
+                    },
                     getForumCommentsEndpoint: function(e, t, n) {
                         return "".concat(fS, "/").concat(e, "/forums/").concat(t, "/posts/").concat(n, "/comments")
                     },
@@ -43172,7 +43236,7 @@
             })
         }()
 }();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/5f8b3af7a5880bf3fc94775fa9531d9d-groupProfileHeader.bundle.min.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/b2b857a1a4218e19260e0336666503b4-groupProfileHeader.bundle.min.js.map
 
 /*! For license information please see groupExperiences.bundle.min.js.LICENSE.txt */
 ! function() {

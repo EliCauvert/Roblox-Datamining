@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "0becb296-4a4b-e9b1-3e4e-5a4d787a9a13")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "77d559ca-55e4-0de8-ba37-904ceec3f03c")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 199475, e => {
@@ -180,7 +180,7 @@
             robux: (0, r.exists)(e, "robux") ? e.robux : void 0
         }
     }
-    var h = function(e) {
+    var v = function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
@@ -324,7 +324,7 @@
                 })
             }, t
         }(r.BaseAPI),
-        v = function(e) {
+        h = function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
@@ -1099,7 +1099,7 @@
         constructor() {
             (0, t._)(this, "currencyApi", void 0), (0, t._)(this, "cashoutApi", void 0), (0, t._)(this, "productApi", void 0), (0, t._)(this, "groupPayoutsApi", void 0);
             const e = (0, I.createClientConfiguration)("economy", "bedev1");
-            this.currencyApi = new v(e), this.cashoutApi = new h(e), this.productApi = new f(e), this.groupPayoutsApi = new m(e)
+            this.currencyApi = new h(e), this.cashoutApi = new v(e), this.productApi = new f(e), this.groupPayoutsApi = new m(e)
         }
     };
     e.s(["default", 0, b], 199475)
@@ -1109,7 +1109,7 @@
         s = e.i(416340),
         n = e.i(639102),
         a = e.i(199475),
-        i = ((t = {}).enableExample = "enableExample", t.enableActivityFeedLocation = "enableActivityFeedLocation", t.enableDevexMaintenanceBanner = "enableDevexMaintenanceBanner", t.enablePlayerFeedbackCategoryResetBeforeResponse = "enablePlayerFeedbackCategoryResetBeforeResponse", t.enableEnvironments = "enableEnvironments", t.enableYourPlaceCreationExperimentDate = "enableYourPlaceCreationExperimentDate", t.unratedExperienceBannerLink = "unratedExperienceBannerLink", t.enableRentables = "enableRentables", t.rentablesPostLaunchWhitelist = "rentablesPostLaunchWhitelist", t.enableQuestionnaireHelpDialog = "enableQuestionnaireHelpDialog", t.ageVerificationUpsellBannerStartDate = "ageVerificationUpsellBannerStartDate", t.ageVerificationUpsellBannerEndDate = "ageVerificationUpsellBannerEndDate", t.ageVerificationUpsellBannerHighPriorityDate = "ageVerificationUpsellBannerHighPriorityDate", t.ageVerificationUpsellGetStartedUrl = "ageVerificationUpsellGetStartedUrl", t.ageVerificationUpsellViewDetailsUrl = "ageVerificationUpsellViewDetailsUrl", t.enableImageTranslationEnrollment = "enableImageTranslationEnrollment", t.enableImageTranslationListingTab = "enableImageTranslationListingTab", t.enableSharedTranslationListComponents = "enableSharedTranslationListComponents", t.showTaxonomyOnAvatarItemAnalyticsTab = "showTaxonomyOnAvatarItemAnalyticsTab", t.serverManagementCustomPayloadReady = "serverManagementCustomPayloadReady", t.serverManagementShowShutdownServers = "serverManagementShowShutdownServers", t.establishTrustUpsellGetStartedUrl = "establishTrustUpsellGetStartedUrl", t.establishTrustUpsellViewDetailsUrl = "establishTrustUpsellViewDetailsUrl", t.starterPlaceTemplateId = "starterPlaceTemplateId", t.enableTalentHubV2 = "enableTalentHubV2", t.enableTalentHubV2M2 = "enableTalentHubV2M2", t.enableIpPlatformConditionalOffers = "enableIpPlatformConditionalOffers", t.impactedBannerScoutMaxPages = "impactedBannerScoutMaxPages", t.impactedExperiencesAgeLearnMoreUrl = "impactedExperiencesAgeLearnMoreUrl", t.enableGroupModerationPage = "enableGroupModerationPage", t.isHdEnabled = "isHdEnabled", t.enableReducedMarketplaceVisibilityBanner = "enableReducedMarketplaceVisibilityBanner", t.enableCoreContentGatedBanner = "enableCoreContentGatedBanner", t.enableAudioUploadRevamp = "enableAudioUploadRevamp", t.enableRtbfSetting = "enableRtbfSetting", t.rtbfSettingAllowlist = "rtbfSettingAllowlist", t.enable2D3DUnificationBanner = "enable2D3DUnificationBanner", t.unification2D3DBannerLearnMoreUrl = "unification2D3DBannerLearnMoreUrl", t.enableUgcUploadPublishBlockBanner = "enableUgcUploadPublishBlockBanner", t.enableDataStoreRequestSourceAnalytics = "enableDataStoreRequestSourceAnalytics", t.enableIpPlatformMatchesTableEsIndexImprovements = "enableIpPlatformMatchesTableEsIndexImprovements", t.enableEmissive = "enableEmissive", t.presetChatMinPresetsPerCategory = "presetChatMinPresetsPerCategory", t.presetChatMaxPresetsPerCategory = "presetChatMaxPresetsPerCategory", t);
+        i = ((t = {}).enableExample = "enableExample", t.enableActivityFeedLocation = "enableActivityFeedLocation", t.enableDevexMaintenanceBanner = "enableDevexMaintenanceBanner", t.enablePlayerFeedbackCategoryResetBeforeResponse = "enablePlayerFeedbackCategoryResetBeforeResponse", t.enableEnvironments = "enableEnvironments", t.enableYourPlaceCreationExperimentDate = "enableYourPlaceCreationExperimentDate", t.unratedExperienceBannerLink = "unratedExperienceBannerLink", t.enableRentables = "enableRentables", t.ageVerificationUpsellBannerStartDate = "ageVerificationUpsellBannerStartDate", t.ageVerificationUpsellBannerEndDate = "ageVerificationUpsellBannerEndDate", t.ageVerificationUpsellBannerHighPriorityDate = "ageVerificationUpsellBannerHighPriorityDate", t.ageVerificationUpsellGetStartedUrl = "ageVerificationUpsellGetStartedUrl", t.ageVerificationUpsellViewDetailsUrl = "ageVerificationUpsellViewDetailsUrl", t.enableImageTranslationEnrollment = "enableImageTranslationEnrollment", t.enableImageTranslationListingTab = "enableImageTranslationListingTab", t.enableSharedTranslationListComponents = "enableSharedTranslationListComponents", t.showTaxonomyOnAvatarItemAnalyticsTab = "showTaxonomyOnAvatarItemAnalyticsTab", t.serverManagementCustomPayloadReady = "serverManagementCustomPayloadReady", t.serverManagementShowShutdownServers = "serverManagementShowShutdownServers", t.establishTrustUpsellViewDetailsUrl = "establishTrustUpsellViewDetailsUrl", t.enableTalentHubV2 = "enableTalentHubV2", t.enableTalentHubV2M2 = "enableTalentHubV2M2", t.enableIpPlatformConditionalOffers = "enableIpPlatformConditionalOffers", t.enableGroupModerationPage = "enableGroupModerationPage", t.isHdEnabled = "isHdEnabled", t.enableReducedMarketplaceVisibilityBanner = "enableReducedMarketplaceVisibilityBanner", t.enableCoreContentGatedBanner = "enableCoreContentGatedBanner", t.enableAudioUploadRevamp = "enableAudioUploadRevamp", t.enableRtbfSetting = "enableRtbfSetting", t.rtbfSettingAllowlist = "rtbfSettingAllowlist", t.enable2D3DUnificationBanner = "enable2D3DUnificationBanner", t.unification2D3DBannerLearnMoreUrl = "unification2D3DBannerLearnMoreUrl", t.enableUgcUploadPublishBlockBanner = "enableUgcUploadPublishBlockBanner", t.enableDataStoreRequestSourceAnalytics = "enableDataStoreRequestSourceAnalytics", t.enableIpPlatformMatchesTableEsIndexImprovements = "enableIpPlatformMatchesTableEsIndexImprovements", t.enableEmissive = "enableEmissive", t.presetChatMinPresetsPerCategory = "presetChatMinPresetsPerCategory", t.presetChatMaxPresetsPerCategory = "presetChatMaxPresetsPerCategory", t);
     let o = {
         enableExample: !1,
         enableActivityFeedLocation: !1,
@@ -1119,8 +1119,6 @@
         enableYourPlaceCreationExperimentDate: new Date("2025-09-23").toISOString(),
         unratedExperienceBannerLink: "",
         enableRentables: !1,
-        rentablesPostLaunchWhitelist: "",
-        enableQuestionnaireHelpDialog: !1,
         ageVerificationUpsellBannerStartDate: new Date("2025-12-03").toISOString(),
         ageVerificationUpsellBannerEndDate: new Date("2026-06-01").toISOString(),
         ageVerificationUpsellBannerHighPriorityDate: new Date("2026-01-21").toISOString(),
@@ -1132,14 +1130,10 @@
         showTaxonomyOnAvatarItemAnalyticsTab: !1,
         serverManagementCustomPayloadReady: !1,
         serverManagementShowShutdownServers: !1,
-        establishTrustUpsellGetStartedUrl: "https://www.roblox.com/my/account?creatorCollaboration",
         establishTrustUpsellViewDetailsUrl: "https://devforum.roblox.com/t/age-check-notifications-in-studio-and-creator-hub/4117693",
-        starterPlaceTemplateId: 0x5cc7aab30524,
         enableTalentHubV2: !1,
         enableTalentHubV2M2: !1,
         enableIpPlatformConditionalOffers: !1,
-        impactedBannerScoutMaxPages: 8,
-        impactedExperiencesAgeLearnMoreUrl: "https://en.help.roblox.com/hc/en-us/articles/39143693116052-Understanding-Age-Checks-on-Roblox",
         enableGroupModerationPage: !1,
         isHdEnabled: !1,
         enableReducedMarketplaceVisibilityBanner: !1,
@@ -1194,7 +1188,7 @@
             } catch (e) {
                 return d
             }
-        }, h = (0, s.createContext)({
+        }, v = (0, s.createContext)({
             settings: {
                 ...l
             },
@@ -1223,7 +1217,7 @@
                     status: e.find(e => "rejected" === e.status) ? "error" : "success"
                 })
             })()
-        }, []), (0, r.jsx)(h.Provider, {
+        }, []), (0, r.jsx)(v.Provider, {
             value: n,
             children: t
         })
@@ -1232,7 +1226,7 @@
             settings: e,
             status: t,
             isFetched: r
-        } = (0, s.useContext)(h), n = (0, s.useRef)(e);
+        } = (0, s.useContext)(v), n = (0, s.useRef)(e);
         return {
             settings: (0, s.useMemo)(() => {
                 let t = n.current;
@@ -1244,5 +1238,5 @@
     }], 486736)
 }]);
 
-//# debugId=0becb296-4a4b-e9b1-3e4e-5a4d787a9a13
-//# sourceMappingURL=1zvtkkptgk0mp.js.map
+//# debugId=77d559ca-55e4-0de8-ba37-904ceec3f03c
+//# sourceMappingURL=277wqfyyo-g8_.js.map

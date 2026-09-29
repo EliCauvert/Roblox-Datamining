@@ -186,6 +186,7 @@ Roblox.LangDynamic["Feature.GroupManagement"] = {
     "Group.ConfigureGroup.Subtext": "Configure your community's name, description, emblem, and cover photo.",
     "Group.GroupConfigurer.Label": "Configure group profile",
     "Group.GroupConfigurer.Subtext": "Configure your community's name, description, emblem, cover photo, and social links.",
-    "Group.AvatarItemManager.Subtext": "Configure sales details, manage restocks, and sponsor avatar items."
+    "Group.AvatarItemManager.Subtext": "Configure sales details, manage restocks, and sponsor avatar items.",
+    "Group.ManageGroupGames.Subtext": "Grants broad access to all group experiences and assets, including editing and publishing, managing assets and events, viewing and editing data stores, and more. Use more specific permissions instead whenever possible."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.GroupManagement");

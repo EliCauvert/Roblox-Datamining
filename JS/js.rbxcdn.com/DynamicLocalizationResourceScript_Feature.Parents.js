@@ -475,7 +475,7 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "ODPChallenge.ToS.PrivacyLinkLabel": "Privacy Policy",
     "ODPChallenge.OdpHandoff.HeaderTitle": "Get a parent",
     "ODPChallenge.OdpHandoff.Headline": "Hand this device to your parent",
-    "ODPChallenge.OdpHandoff.Body": "Once they confirm they're a parent, they’ll be able to help with the request, adjust your communication, content, and privacy settings.",
+    "ODPChallenge.OdpHandoff.Body": "Once they confirm they're a parent, they can help with your ask and adjust your settings.",
     "ODPChallenge.OdpHandoff.ContinueLabel": "Continue as a parent",
     "Email.PrivatePlaytest.Subject": "Friend game previews are coming to Roblox",
     "Email.PrivatePlaytest.Intro": "Your child will soon be able to preview games created by friends in similar age groups or trusted friends, before they're available in our games catalog for kids and young teens. When your child tests a game, Roblox will conduct a preliminary review against our safety standards.",

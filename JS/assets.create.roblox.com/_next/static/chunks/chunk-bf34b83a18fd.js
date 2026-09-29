@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "c566dd38-02dc-ea8a-2b85-eefc2873e430")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "bf392109-4e2e-4783-5fa7-bcebe06f9f95")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 889311, e => {
@@ -235,8 +235,8 @@
                 onExiting: w,
                 style: k,
                 timeout: x = "auto",
-                TransitionComponent: L = r.T
-            } = e, P = (0, a._)(e, d), N = (0, o.u)(), U = i.useRef(), A = (0, n.u)(), V = i.useRef(null), R = (0, c.u)(V, (0, l.g)(y), h), B = e => t => {
+                TransitionComponent: P = r.T
+            } = e, L = (0, a._)(e, d), N = (0, o.u)(), U = i.useRef(), A = (0, n.u)(), V = i.useRef(null), R = (0, c.u)(V, (0, l.g)(y), h), B = e => t => {
                 if (e) {
                     let a = V.current;
                     void 0 === t ? e(a) : e(a, t)
@@ -284,7 +284,7 @@
                     easing: n
                 })].join(","), e.style.opacity = 0, e.style.transform = g(.75), E && E(e)
             }), z = B(I);
-            return (0, s.jsx)(L, (0, t._)({
+            return (0, s.jsx)(P, (0, t._)({
                 appear: v,
                 in: b,
                 nodeRef: V,
@@ -298,7 +298,7 @@
                     "auto" === x && N.start(U.current || 0, e), m && m(V.current, e)
                 },
                 timeout: "auto" === x ? null : x
-            }, P, {
+            }, L, {
                 children: (e, a) => i.cloneElement(y, (0, t._)({
                     style: (0, t._)({
                         opacity: 0,
@@ -728,7 +728,7 @@
                 currentUrl: String(t),
                 additionalProperties: {
                     ...r,
-                    loggerVersion: "1.6.2",
+                    loggerVersion: "1.7.0",
                     viewportWidth: i,
                     viewportHeight: n
                 }
@@ -904,7 +904,10 @@
             }
         }
         logEventToLogger(e) {
-            this.eventLoggers.forEach(t => {
+            this.commonEventParameters && (e.parameters = {
+                ...this.commonEventParameters,
+                ...e.parameters
+            }), this.eventLoggers.forEach(t => {
                 t.logEvent(e)
             })
         }
@@ -1090,6 +1093,7 @@
                 context: a,
                 properties: {
                     ...n,
+                    ...this.commonEventParameters,
                     ...i
                 },
                 sessionId: s,
@@ -1118,12 +1122,13 @@
         constructor({
             eventBaseUrl: e,
             product: a,
-            debugMode: i,
-            eventLogger: n,
-            sessionProductGroup: r,
-            disableSession: s = !1
+            commonEventParameters: i,
+            debugMode: n,
+            eventLogger: r,
+            sessionProductGroup: s,
+            disableSession: o = !1
         }) {
-            (0, t._)(this, "eventLoggers", []), (0, t._)(this, "debugMode", !1), (0, t._)(this, "product", void 0), (0, t._)(this, "sessionProductGroup", void 0), (0, t._)(this, "sessionService", void 0), (0, t._)(this, "hostRoutedEventStreamLogger", void 0), (0, t._)(this, "disableSession", void 0), (0, t._)(this, "lastPageLoadUrl", void 0), (0, t._)(this, "referrer", void 0), (0, t._)(this, "isAutoCollectEnabled", !1), (0, t._)(this, "events", function() {
+            (0, t._)(this, "eventLoggers", []), (0, t._)(this, "debugMode", !1), (0, t._)(this, "product", void 0), (0, t._)(this, "commonEventParameters", void 0), (0, t._)(this, "sessionProductGroup", void 0), (0, t._)(this, "sessionService", void 0), (0, t._)(this, "hostRoutedEventStreamLogger", void 0), (0, t._)(this, "disableSession", void 0), (0, t._)(this, "lastPageLoadUrl", void 0), (0, t._)(this, "referrer", void 0), (0, t._)(this, "isAutoCollectEnabled", !1), (0, t._)(this, "events", function() {
                 let e = new Map;
                 return {
                     on(t, a) {
@@ -1144,11 +1149,11 @@
                     eventName: "sessionStart",
                     sessionId: e
                 })
-            }), this.eventLoggers.push(null != n ? n : new y({
+            }), this.eventLoggers.push(null != r ? r : new y({
                 eventBaseUrl: e
-            })), this.debugMode = !!i, this.product = a, this.sessionProductGroup = null != r ? r : a, this.debugMode && this.eventLoggers.push(new f), this.hostRoutedEventStreamLogger = new b({
+            })), this.debugMode = !!n, this.product = a, this.commonEventParameters = i, this.sessionProductGroup = null != s ? s : a, this.debugMode && this.eventLoggers.push(new f), this.hostRoutedEventStreamLogger = new b({
                 eventBaseUrl: e
-            }), this.disableSession = s, this.sessionService = this.disableSession ? {
+            }), this.disableSession = o, this.sessionService = this.disableSession ? {
                 getOrCreateSessionId: () => {}
             } : new T({
                 productName: this.sessionProductGroup,
@@ -1158,5 +1163,5 @@
     }])
 }]);
 
-//# debugId=c566dd38-02dc-ea8a-2b85-eefc2873e430
-//# sourceMappingURL=33dxxb54mxs_w.js.map
+//# debugId=bf392109-4e2e-4783-5fa7-bcebe06f9f95
+//# sourceMappingURL=384_wv_a8p63k.js.map

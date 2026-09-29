@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "b51ac7cf-1bb7-e0a0-5499-00c59b5145c8")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "30d9167a-cb70-429f-0e88-4e2e18a9b0a2")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 779433, e => {
@@ -23,13 +23,8 @@
             namespace: "content-suitability",
             name: "questionnaireSectionStepperEnabled",
             defaultValue: !1
-        }),
-        n = (0, t.defineFlag)({
-            namespace: "content-suitability",
-            name: "questionnaireUsePackage",
-            defaultValue: !1
         });
-    e.s(["questionnaireSectionStepperEnabled", 0, r, "questionnaireUsePackage", 0, n, "questionnaireV2Allowlist", 0, s, "questionnaireV2Q1Release", 0, i])
+    e.s(["questionnaireSectionStepperEnabled", 0, r, "questionnaireV2Allowlist", 0, s, "questionnaireV2Q1Release", 0, i])
 }, 787617, e => {
     "use strict";
     var t = e.i(157700);
@@ -4418,5 +4413,5 @@
     }])
 }]);
 
-//# debugId=b51ac7cf-1bb7-e0a0-5499-00c59b5145c8
-//# sourceMappingURL=1pof3pwmw3v6q.js.map
+//# debugId=30d9167a-cb70-429f-0e88-4e2e18a9b0a2
+//# sourceMappingURL=1pc-_cw6b8qg4.js.map
