@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "69b9103b-5df3-55d7-37d4-93f314394ba5")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "87f634e0-5aaf-e7ad-5612-744dbbf291a4")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 97782, e => {
@@ -3531,7 +3531,7 @@
                     color: "secondary",
                     component: "span",
                     children: [z, (0, t.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/84bfd1b916847bb3f028725bd65308b634cbd5fb/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -4937,5 +4937,5 @@
     }, "useCookieConsentContext", 0, j], 260241)
 }]);
 
-//# debugId=69b9103b-5df3-55d7-37d4-93f314394ba5
-//# sourceMappingURL=3nyt13iuk9pde.js.map
+//# debugId=87f634e0-5aaf-e7ad-5612-744dbbf291a4
+//# sourceMappingURL=3uwadzcetirav.js.map

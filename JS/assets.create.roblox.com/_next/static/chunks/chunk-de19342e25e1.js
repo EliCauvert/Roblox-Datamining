@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "884e640f-9200-db9a-be6e-d5cad3e46ada")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "d5602720-f3e1-d635-e0fe-55f18f6203c0")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 531007, e => {
@@ -60,7 +60,7 @@
     e.s(["RAQIV2SummaryType", 0, m, "default", 0, T, "isRAQIV2DoubleMetricSummaryType", 0, y, "isRAQIV2SingleMetricSummaryType", 0, e => !y(e)], 510785);
     var v = ((t = v || {}).InExperienceCurrency = "inExperienceCurrency", t);
     e.s(["default", 0, v], 548152);
-    var f = ((i = {}).PercentageOfFirstPoint = "PercentageOfFirstPoint", i.ScaleBackBy100 = "ScaleBackBy100", i.ScaleBackBy60 = "ScaleBackBy60", i.ScaleBackBy3600 = "ScaleBackBy3600", i.ScaleBackBy1000000000 = "ScaleBackBy1000000000", i);
+    var f = ((i = {}).PercentageOfFirstPoint = "PercentageOfFirstPoint", i.ScaleBackBy100 = "ScaleBackBy100", i.ScaleBackBy60 = "ScaleBackBy60", i.ScaleBackBy3600 = "ScaleBackBy3600", i.ScaleBackBy1000 = "ScaleBackBy1000", i.ScaleBackBy1000000000 = "ScaleBackBy1000000000", i);
 
     function g(e) {
         return (t, i) => {
@@ -76,6 +76,7 @@
         ScaleBackBy100: g(.01),
         ScaleBackBy60: g(1 / 60),
         ScaleBackBy3600: g(1 / 3600),
+        ScaleBackBy1000: g(.001),
         ScaleBackBy1000000000: g(1e-9)
     };
     e.s(["NumericDataPointTransformerType", () => f, "default", 0, R], 875907);
@@ -89,6 +90,14 @@
         I = {
             [a.RAQIV2Metric.VideoServiceExclusivePlaybackSeconds]: {
                 unit: a.RAQIV2MetricUnit.Hours,
+                decimalPrecision: 1
+            },
+            [a.RAQIV2Metric.BandwidthTotalRecvMaxBytes]: {
+                unit: a.RAQIV2MetricUnit.Kilobytes,
+                decimalPrecision: 1
+            },
+            [a.RAQIV2Metric.BandwidthTotalSendMaxBytes]: {
+                unit: a.RAQIV2MetricUnit.Kilobytes,
                 decimalPrecision: 1
             }
         };
@@ -1168,9 +1177,15 @@
             [a.RAQIV2Metric.VideoServiceExclusivePlaybackSeconds]: {
                 defaultTotalSummaryTypes: M,
                 dataPointTransformerType: f.ScaleBackBy3600
+            },
+            [a.RAQIV2Metric.BandwidthTotalRecvMaxBytes]: {
+                dataPointTransformerType: f.ScaleBackBy1000
+            },
+            [a.RAQIV2Metric.BandwidthTotalSendMaxBytes]: {
+                dataPointTransformerType: f.ScaleBackBy1000
             }
         },
-        b = {
+        V = {
             [a.RAQIV2Metric.ThumbnailWinningSegments]: {
                 rendererType: "WinningSegments",
                 valueTranslationKeys: {
@@ -1195,9 +1210,9 @@
                 }
             }
         },
-        V = e => {
+        b = e => {
             let t = a.RAQIV2MetricDisplayConfig[e],
-                i = t.valueType === a.RAQIV2MetricValueType.Numeric ? P[e] : b[e],
+                i = t.valueType === a.RAQIV2MetricValueType.Numeric ? P[e] : V[e],
                 n = {
                     ...A,
                     ...t,
@@ -1206,9 +1221,9 @@
                 r = I[e];
             return null != r && (n.unit = r.unit, n.decimalPrecision = r.decimalPrecision), n
         };
-    e.s(["RAQIV2MetricValueRendererType", () => D, "default", 0, V, "getPreferredChartType", 0, e => {
+    e.s(["RAQIV2MetricValueRendererType", () => D, "default", 0, b, "getPreferredChartType", 0, e => {
         var t;
-        return e && null != (t = V(e).exploreModeChartType) ? t : o.ChartType.Spline
+        return e && null != (t = b(e).exploreModeChartType) ? t : o.ChartType.Spline
     }, "isNumericUIMetric", 0, e => {
         var t;
         return h(e) && (null == (t = a.RAQIV2MetricDisplayConfig[e]) ? void 0 : t.valueType) === a.RAQIV2MetricValueType.Numeric
@@ -3058,5 +3073,5 @@
     }])
 }]);
 
-//# debugId=884e640f-9200-db9a-be6e-d5cad3e46ada
-//# sourceMappingURL=0pe_ovc_q0mih.js.map
+//# debugId=d5602720-f3e1-d635-e0fe-55f18f6203c0
+//# sourceMappingURL=1o4byul0c19ex.js.map
