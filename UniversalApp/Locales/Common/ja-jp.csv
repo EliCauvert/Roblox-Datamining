@@ -2567,7 +2567,6 @@ Feature.Build.Label.World,世界
 Feature.Build.Message.AccountRequirements,アカウントがビルドを使用するための要件を満たしていません。
 Feature.Build.Message.AccountTooNew,お持ちのアカウントは公開するには新しすぎます。2日目になってからもう一度お試しください。
 Feature.Build.Message.AdCampaignCreateFailed,キャンペーンを作成できませんでした。もう一度お試しください。
-Feature.Build.Message.AdCampaignCreated,広告キャンペーンが作成されました
 Feature.Build.Message.AdPerformanceLoadFailed,広告のパフォーマンスを読み込めませんでした
 Feature.Build.Message.AdsPromotionBannerSubtitle,オーディエンスを無料で拡大しましょう
 Feature.Build.Message.AdsPromotionBannerTitle,無料プロモーションがあと{promotionCount}回残っています
@@ -3246,7 +3245,6 @@ Feature.Chat.Message.LeaveGroup,このグループでチャットを続けるこ
 Feature.Chat.Message.LeaveGroup.V2,このグループを抜けますか？
 Feature.Chat.Message.MakeConnectionsToChat,Robloxで友達を作ってチャットしよう
 Feature.Chat.Message.MakeConnectionsToParty,Robloxで友達を作ってパーティを結成しよう
-Feature.Chat.Message.MakeFriendsToChat,チャットを始めてRoblox上で友達を作ろう
 Feature.Chat.Message.MakeFriendsToParty,パーティ機能でRobloxで友達を作ろう
 Feature.Chat.Message.MessageContentModerated,メッセージは、規制により送信されませんでした。
 Feature.Chat.Message.MessageUnavailable,メッセージが利用できません
@@ -3257,8 +3255,6 @@ Feature.Chat.Message.RemoveUser,このチャットグループから {USERNAME} 
 Feature.Chat.Message.RemoveUser.V2,このグループから {USERNAME} さんを削除しますか？
 Feature.Chat.Message.RemovedFromConversation,あなたはグループから削除されました。
 Feature.Chat.Message.SeveralUsersTyping,何人かのユーザーが入力中...
-Feature.Chat.Message.TurnOnChat,友達とチャットするには、「プライバシー設定」でチャットを有効にしてください。
-Feature.Chat.Message.TurnOnParty,友達とパーティ機能を使用するには、[プライバシー設定] で [パーティ] をオンにしてください。
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} と {DISPLAY_NAME_2} が入力中です...
 Feature.Chat.PresetChat.Disclaimer,短いメッセージを使うと、すべての年齢層のプレイヤーがゲームプレイを調整できます。
 Feature.Chat.Response.ChatNameFullyModerated,チャットグループ名が規制対象です。
@@ -3798,6 +3794,9 @@ Feature.GameFollows.TooltipNotificationsButtonDescription,アクティビティ�
 Feature.GameFollows.TooltipNotificationsLimitReached,制限に達しました。まず、他のバーチャル空間の通知をオフにしてください。
 Feature.GameFollows.TooltipTurnedOffNotifications,{experienceName} の通知をオフにしました
 Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} の通知を有効にしました
+Feature.GameJoin.Description.DifferentServer,別のサーバーで開始します
+Feature.GameJoin.Label.PlayTogether,一緒にプレイできます
+Feature.GameJoin.Label.PlayTogetherSoon,もうすぐ一緒にプレイできるようになります
 Feature.GamePage.Action.BackToTop,トップに戻る
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,スポンサー広告
@@ -4097,6 +4096,7 @@ Feature.Moments.Description.HowToCaptureStep3,ゲームプレイの写真とビ�
 Feature.Moments.Description.LeaveMomentsCreation,変更内容はすべて失われますが、この切り抜きは引き続き<b>切り抜き</b>ギャラリーに保存されます。
 Feature.Moments.Description.NoMusicResults,音楽が見つかりません
 Feature.Moments.Description.NonInfiniteScrollEndBody,モーメントの停止ポイントに達しました。視聴を続けるには以下をタップしてください。
+Feature.Moments.Description.NothingHereYet,まだ何もありません...
 Feature.Moments.Description.PublishMoment,モーメントの説明をしてください
 Feature.Moments.Description.TooManyUploads,本日アップロードしたビデオの数が多すぎます。明日もう一度お試しください。
 Feature.Moments.Disclaimer.EveryoneMoments,モーメント内の全員が、公開されているものを閲覧できます
@@ -4895,12 +4895,14 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,ゲーム内アイテ�
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{periodIndex}{periodType}より後は、これらのアイテムが{discountPercent}%オフ
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,「続ける」をクリックすると、{linkStart}Roblox定期購入規約{linkEnd}に同意したものとみなされます。
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,「無料で試す」をクリックすると、{linkStart}Roblox定期購入規約{linkEnd}に同意したものとみなされます。無料トライアルは1か月で終了し、以降は毎月自動的に課金されますが、キャンセルはいつでも可能です。
+Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,「無料で試す」をクリックすると、{linkStart}Roblox定期購入規約{linkEnd}に同意したものとみなされます。無料トライアルは{trialDuration}{trialPeriodLabel}で終了し、以降は{billingPeriodLabel}ごとに自動的に課金されますが、キャンセルはいつでも可能です。
 Feature.RobloxSubscription.Label.FreeTrialText,無料トライアルを入手
 Feature.RobloxSubscription.Label.PendingRobux,保留中のRobux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,被紹介者の報酬
 Feature.RobloxSubscription.Label.ReferralYouGet,紹介者の報酬
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}1か月無料、{boldEnd}その後{price}（{periodType}）
+Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration}{trialPeriodLabel}無料、{boldEnd}その後{price}/{periodType}
 Feature.RobloxSubscription.Label.RobuxEarned,獲得済みRobux
 Feature.RobloxSubscription.Label.SuccessfulReferrals,完了した紹介
 Feature.RobloxSubscription.Label.month,か月
@@ -4912,6 +4914,8 @@ Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plusを取得する
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plusはこちらではご利用いただけません
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,誰よりも先にイベントに参加できます。
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Plusで早期アクセス
+Feature.RobloxSubscription.label.week,週
+Feature.RobloxSubscription.label.weeks,
 Feature.SafetyDashboard.Heading.AccountStatus.V2,アカウント状況、違反、異議申し立て
 Feature.Schools.Action.AlreadyGraduated,卒業済みです
 Feature.Schools.Action.CantFindSchool,学校が見つからない場合
@@ -5277,6 +5281,14 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Robloxにより、このゲームの利用が{number}時間停止されました
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Robloxにより、このゲームの利用が1分間停止されました
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Robloxにより、このゲームの利用が{number}分間停止されました
+Feature.UniversalShareSheet.Action.CopiedLink,コピーしました
+Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,メッセージを共有
+Feature.UniversalShareSheet.Response.NotSharedMessage,メッセージを送信できません
+Feature.UniversalShareSheet.Response.NotSharedMultipleMessages,
+Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + その他1件
+Feature.UniversalShareSheet.Response.SharedMessage,メッセージが送信されました
+Feature.UniversalShareSheet.Response.SharedMultipleMessages,
+Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + その他{N}件
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,ボイスチャット用の電話番号を追加
 Feature.VerificationUpsell.Action.ChangeEmail,メールアドレスの変更

@@ -450,6 +450,7 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Reaparecer ahora
 Authentication.SignUp.Action.SetupLater,Configurar más tarde
 Authentication.SignUp.Action.StartOver,Empezar de nuevo
+Authentication.SignUp.Action.StartPlay,Comenzar a jugar
 Authentication.SignUp.Action.UseEmail,Usar dirección de correo electrónico
 Authentication.SignUp.Action.UsePhoneNumber,Usar número de teléfono
 Authentication.SignUp.Button.OKCaptialized,
@@ -497,6 +498,7 @@ Authentication.SignUp.Header.CreatePassword,"Hola, {username}: crea una contrase
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"Hola, {username}: crea una contraseña o una llave de acceso"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,Creamos tu cuenta. Elige cómo iniciarás sesión.
 Authentication.SignUp.Header.GenderPage6,"¡Ah, una última cosa! Selecciona tu género (opcional)"
+Authentication.SignUp.Header.OneLastThing,Una última cosa
 Authentication.SignUp.Header.PleaseTryAgain,
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Configura tu cuenta de Roblox
 Authentication.SignUp.Header.UsernamePage4,"A continuación, crea un nombre de usuario"
@@ -585,6 +587,7 @@ Authentication.SignUp.Response.InvalidPhoneNumber,Número de teléfono no válid
 Authentication.SignUp.Response.PasswordComplexity,Crea una contraseña más complicada.
 Authentication.SignUp.Response.PhoneNumberAlreadyLinked,El número ya está asociado a otra cuenta.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Antes debes determinar el nombre de usuario.
+Authentication.SignUp.Subtitle.AddYourBirthday,Agrega tu fecha de nacimiento para crear tu cuenta de Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Tu progreso se transfiere cuando completas la configuración.
 Authentication.SignUp.Title,"Hola, {username}, crea una contraseña"
 Authentication.TwoStepVerification.Action.Approve,Aprobar
@@ -2565,7 +2568,6 @@ Feature.Build.Label.World,Mundo
 Feature.Build.Message.AccountRequirements,Tu cuenta no cumple los requisitos para usar la compilación.
 Feature.Build.Message.AccountTooNew,Tu cuenta es demasiado nueva para publicar. Inténtalo de nuevo cuando tenga 2 días.
 Feature.Build.Message.AdCampaignCreateFailed,No se pudo crear tu campaña. Inténtalo de nuevo.
-Feature.Build.Message.AdCampaignCreated,Campaña de anuncios creada
 Feature.Build.Message.AdPerformanceLoadFailed,No se pudo cargar el rendimiento del anuncio
 Feature.Build.Message.AdsPromotionBannerSubtitle,Aumenta tu público de forma gratuita
 Feature.Build.Message.AdsPromotionBannerTitle,Te quedan {promotionCount} promociones gratuitas
@@ -2656,6 +2658,7 @@ Feature.Build.Notification.Title.NeedInput,La compilación necesita tu participa
 Feature.Build.Placeholder.DescribeProduct,Describe lo que quieres vender
 Feature.Build.Placeholder.DescribeProductUpdate,Describe una actualización
 Feature.Build.Prompt.CreateDeveloperProduct,"Ayúdame a crear un producto de desarrollador, integrarlo en el juego, verificar y publicar los cambios y ponerlo a la venta."
+Feature.Build.Title.AdActive,La campaña de anuncios está activa
 Feature.Build.Title.AdCampaignDuration,Campaña publicitaria de {durationDays} días
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} días
 Feature.Build.Title.AdComplete,Anuncio completado
@@ -3243,7 +3246,6 @@ Feature.Chat.Message.LeaveGroup,No podrás seguir chateando en este grupo.
 Feature.Chat.Message.LeaveGroup.V2,¿Realmente quieres salir del grupo?
 Feature.Chat.Message.MakeConnectionsToChat,Haz amistades en Roblox y empieza a chatear
 Feature.Chat.Message.MakeConnectionsToParty,¡Haz amistades en Roblox para formar Equipo!
-Feature.Chat.Message.MakeFriendsToChat,Haz amistades en Roblox y empieza a chatear juntos
 Feature.Chat.Message.MakeFriendsToParty,¡Haz amigos en Roblox para formar Equipo!
 Feature.Chat.Message.MessageContentModerated,Tu mensaje ha sido moderado y no se ha enviado.
 Feature.Chat.Message.MessageUnavailable,Mensaje no disponible
@@ -3254,8 +3256,6 @@ Feature.Chat.Message.RemoveUser,¿Quieres eliminar a {USERNAME} del grupo de cha
 Feature.Chat.Message.RemoveUser.V2,¿Realmente quieres eliminar a {USERNAME} del grupo?
 Feature.Chat.Message.RemovedFromConversation,Te eliminaron del grupo.
 Feature.Chat.Message.SeveralUsersTyping,Varios usuarios están escribiendo...
-Feature.Chat.Message.TurnOnChat,
-Feature.Chat.Message.TurnOnParty,
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} y {DISPLAY_NAME_2} están escribiendo...
 Feature.Chat.PresetChat.Disclaimer,Quick Words permite a los jugadores de todas las edades coordinar el juego.
 Feature.Chat.Response.ChatNameFullyModerated,Se ha moderado el nombre del grupo de chat.
@@ -3795,6 +3795,9 @@ Feature.GameFollows.TooltipNotificationsButtonDescription,Activa las notificacio
 Feature.GameFollows.TooltipNotificationsLimitReached,Límite alcanzado. Desactiva las notificaciones de otras experiencias primero para seguir esta.
 Feature.GameFollows.TooltipTurnedOffNotifications,Notificaciones desactivadas para {experienceName}
 Feature.GameFollows.TooltipTurnedOnNotifications,Notificaciones activadas para {experienceName}
+Feature.GameJoin.Description.DifferentServer,Comenzarán en un servidor diferente
+Feature.GameJoin.Label.PlayTogether,Pueden jugar juntos
+Feature.GameJoin.Label.PlayTogetherSoon,Pronto podrán jugar juntos
 Feature.GamePage.Action.BackToTop,Volver arriba
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,Patrocinadas
@@ -4094,6 +4097,7 @@ Feature.Moments.Description.HowToCaptureStep3,Captura fotos y videos del juego
 Feature.Moments.Description.LeaveMomentsCreation,"Perderás todos tus cambios, pero aún podrás encontrar esta captura en tu galería de <b>Capturas</b>."
 Feature.Moments.Description.NoMusicResults,No se encontró música
 Feature.Moments.Description.NonInfiniteScrollEndBody,Llegaste a un punto de pausa en Momentos. Toca abajo para seguir viendo.
+Feature.Moments.Description.NothingHereYet,Aún no hay nada aquí…
 Feature.Moments.Description.PublishMoment,Describe tu Momento
 Feature.Moments.Description.TooManyUploads,Hoy subiste demasiados videos. Inténtalo de nuevo mañana.
 Feature.Moments.Disclaimer.EveryoneMoments,Todas las personas que participan en Momentos pueden ver lo que se publica
@@ -4881,8 +4885,8 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,10% de descuento los p
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Más diversión por menos Robux. Suscríbete a Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Únete antes con Plus
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Oferta válida solo para nuevos suscriptores Plus.
-Feature.RobloxSubscription.Description.ReferralReferrerReward,Cuando alguien se une a Plus con tu enlace.
-Feature.RobloxSubscription.Description.ReferralShare,Invita a alguien a Plus y tanto tú como esa persona recibirán {amount} Robux cuando se una.
+Feature.RobloxSubscription.Description.ReferralReferrerReward,Cuando alguien compra Plus con tu enlace.
+Feature.RobloxSubscription.Description.ReferralShare,Invita a alguien a Plus y tanto tú como esa persona recibirán {amount} Robux cuando compre Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Al hacer clic en \u{201C}{ctaText}\u{201D}, aceptas los <a href=""{termsUrl}"">Términos de suscripción de Roblox</a>. Se te te hará el cargo automáticamente cada mes hasta que canceles la suscripción."
 Feature.RobloxSubscription.Heading.ReferralHistory,Historial de invitaciones
 Feature.RobloxSubscription.Heading.ReferralShare,Comparte Plus y obtén
@@ -4894,12 +4898,14 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,"{discountPercent}% de
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{discountPercent}% de descuento en estos objetos después del {periodIndex} {periodType}
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Al hacer clic en “Continuar”, aceptas los {linkStart}Términos de suscripción de Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Al hacer clic en Haz la prueba gratis, aceptas los {linkStart}Términos de suscripción de Roblox.{linkEnd} Tu prueba gratuita finalizará en 1 mes y se te hará el cargo cada mes de forma automática hasta que canceles la suscripción."
+Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Al hacer clic en Haz la prueba gratis, aceptas los {linkStart}Términos de suscripción de Roblox.{linkEnd} Tu prueba gratuita finalizará en {trialDuration} {trialPeriodLabel} y se te hará el cargo automáticamente cada {billingPeriodLabel} hasta que canceles la suscripción."
 Feature.RobloxSubscription.Label.FreeTrialText,Obtén una prueba gratuita
 Feature.RobloxSubscription.Label.PendingRobux,Robux pendientes
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Tus referidos obtienen
 Feature.RobloxSubscription.Label.ReferralYouGet,Obtendrás
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}1 mes gratis{boldEnd} y luego {price} cada {periodType}
+Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration} {trialPeriodLabel} gratis{boldEnd} y luego {price} cada {periodType}
 Feature.RobloxSubscription.Label.RobuxEarned,Robux ganados
 Feature.RobloxSubscription.Label.SuccessfulReferrals,Referidos exitosos
 Feature.RobloxSubscription.Label.month,mes
@@ -4911,6 +4917,8 @@ Feature.RobloxSubscription.Title.GetBlackbird,Obtén Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus no está disponible aquí
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Puedes unirte al evento antes que todos los demás.
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Acceso anticipado con Plus
+Feature.RobloxSubscription.label.week,semana
+Feature.RobloxSubscription.label.weeks,semanas
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Estado de la cuenta, las infracciones y las apelaciones"
 Feature.Schools.Action.AlreadyGraduated,Ya me gradué
 Feature.Schools.Action.CantFindSchool,¿No encuentras tu escuela?
@@ -5276,6 +5284,14 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox te suspendió de este juego por {number} horas
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox te suspendió de este juego por 1 minuto
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox te suspendió de este juego por {number} minutos
+Feature.UniversalShareSheet.Action.CopiedLink,
+Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,Compartir un mensaje
+Feature.UniversalShareSheet.Response.NotSharedMessage,El mensaje no se puede enviar
+Feature.UniversalShareSheet.Response.NotSharedMultipleMessages,Los mensajes no se pueden enviar
+Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 más
+Feature.UniversalShareSheet.Response.SharedMessage,El mensaje se envió
+Feature.UniversalShareSheet.Response.SharedMultipleMessages,Los mensajes se enviaron
+Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} más
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,
 Feature.VerificationUpsell.Action.ChangeEmail,

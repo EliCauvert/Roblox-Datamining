@@ -432,6 +432,7 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,إعادة الظهور الآن
 Authentication.SignUp.Action.SetupLater,الإعداد لاحقًا
 Authentication.SignUp.Action.StartOver,البدء من جديد
+Authentication.SignUp.Action.StartPlay,بدء اللعب
 Authentication.SignUp.Action.UseEmail,استخدام عنوان البريد الإلكتروني
 Authentication.SignUp.Action.UsePhoneNumber,استخدام رقم الهاتف
 Authentication.SignUp.Button.OKCaptialized,
@@ -479,6 +480,7 @@ Authentication.SignUp.Header.CreatePassword,مرحبًا {username}، أنشئ �
 Authentication.SignUp.Header.CreatePasswordOrPasskey,مرحبًا {username}، أنشئ كلمة مرور أو مفتاح مرور
 Authentication.SignUp.Header.CreatedAccountChooseSignin,لقد أنشأنا حسابك. اختَر الطريقة التي ستسجل بها الدخول.
 Authentication.SignUp.Header.GenderPage6,شيء أخير. حدّد جنسك (اختياري)
+Authentication.SignUp.Header.OneLastThing,شيء أخير
 Authentication.SignUp.Header.PleaseTryAgain,يُرجى إعادة المحاولة
 Authentication.SignUp.Header.SetUpYourRobloxAccount,إعداد حسابك على منصّة Roblox
 Authentication.SignUp.Header.UsernamePage4,بعد ذلك، أنشئ اسم مستخدم
@@ -567,6 +569,7 @@ Authentication.SignUp.Response.InvalidPhoneNumber,رقم الهاتف غير ص�
 Authentication.SignUp.Response.PasswordComplexity,الرجاء إنشاء كلمة مرور أكثر تعقيدا.
 Authentication.SignUp.Response.PhoneNumberAlreadyLinked,رقم مرتبط بالفعل بحساب آخر.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,لا بد من تعيين اسم المستخدم أولاً.
+Authentication.SignUp.Subtitle.AddYourBirthday,أضِف تاريخ ميلادك لإنشاء حسابك على منصّة Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,سيتم حفظ تقدمك عند إكمال الإعداد.
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,موافقة
@@ -2544,7 +2547,6 @@ Feature.Build.Label.World,العالم
 Feature.Build.Message.AccountRequirements,لا يفي حسابك بمتطلبات استخدام ميزة Build.
 Feature.Build.Message.AccountTooNew,حسابك جديد جدًا بحيث لا يمكن النشر. حاول مرة أخرى بعد يومين من إنشائه.
 Feature.Build.Message.AdCampaignCreateFailed,تعذَّر إنشاء حملتك. يُرجى المحاولة مرة أخرى.
-Feature.Build.Message.AdCampaignCreated,تم إنشاء الحملة الإعلانية
 Feature.Build.Message.AdPerformanceLoadFailed,تعذَّر تحميل أداء الإعلان
 Feature.Build.Message.AdsPromotionBannerSubtitle,زوِّد أعداد جمهورك مجانًا
 Feature.Build.Message.AdsPromotionBannerTitle,لديك {promotionCount} من العروض الخاصة المجانية المتبقية
@@ -2635,6 +2637,7 @@ Feature.Build.Notification.Title.NeedInput,ميزة Build بحاجة إلى إد
 Feature.Build.Placeholder.DescribeProduct,صِف ما تريد بيعه
 Feature.Build.Placeholder.DescribeProductUpdate,صِف تحديثًا
 Feature.Build.Prompt.CreateDeveloperProduct,ساعدني في إنشاء منتج المطوّر، وربطه باللعبة، والتحقق من التغييرات ونشرها، وجعله متاحًا للشراء.
+Feature.Build.Title.AdActive,الحملة الإعلانية نشطة
 Feature.Build.Title.AdCampaignDuration,حملة إعلانية لمدة {durationDays} من الأيام
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} من الأيام
 Feature.Build.Title.AdComplete,اكتمل الإعلان
@@ -3222,7 +3225,6 @@ Feature.Chat.Message.LeaveGroup,لن تتمكن من مواصلة الدردشة
 Feature.Chat.Message.LeaveGroup.V2,هل أنت متأكد من أنك تريد مغادرة هذه المجموعة؟
 Feature.Chat.Message.MakeConnectionsToChat,أنشئ صداقات على منصّة Roblox لبدء الدردشة معًا
 Feature.Chat.Message.MakeConnectionsToParty,أنشئ صداقات على منصّة Roblox للانضمام إلى الفرقة معًا
-Feature.Chat.Message.MakeFriendsToChat,أنشئ صداقات على Roblox لبدء الدردشة معها
 Feature.Chat.Message.MakeFriendsToParty,كوّن صداقات على Roblox لإنشاء فرقة معًا
 Feature.Chat.Message.MessageContentModerated,تم الإشراف على رسالتك ولم يتم إرسالها.
 Feature.Chat.Message.MessageUnavailable,الرسالة غير متوفرة
@@ -3233,8 +3235,6 @@ Feature.Chat.Message.RemoveUser,هل أنت متأكد من أنك تريد إز
 Feature.Chat.Message.RemoveUser.V2,هل أنت متأكد من أنك تريد إزالة {USERNAME} من هذه المجموعة؟
 Feature.Chat.Message.RemovedFromConversation,لقد تمت إزالتك من المجموعة.
 Feature.Chat.Message.SeveralUsersTyping,العديد من المستخدمين يكتبون...
-Feature.Chat.Message.TurnOnChat,
-Feature.Chat.Message.TurnOnParty,
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} و {DISPLAY_NAME_2} يكتبان...
 Feature.Chat.PresetChat.Disclaimer,تتيح العبارات السريعة للاعبين من جميع الأعمار تنسيق اللعب.
 Feature.Chat.Response.ChatNameFullyModerated,تم الإشراف على اسم مجموعة الدردشة.
@@ -3774,6 +3774,9 @@ Feature.GameFollows.TooltipNotificationsButtonDescription,تشغيل الإشع�
 Feature.GameFollows.TooltipNotificationsLimitReached,وصلت للحد الأقصى. الرجاء إيقاف تشغيل إشعارات بعض التجارب الأخرى أولاً.
 Feature.GameFollows.TooltipTurnedOffNotifications,تم إيقاف إشعارات التجربة {experienceName}
 Feature.GameFollows.TooltipTurnedOnNotifications,تم تشغيل الإشعارات للتجربة {experienceName}
+Feature.GameJoin.Description.DifferentServer,ستبدأ في خادم مختلف
+Feature.GameJoin.Label.PlayTogether,يمكنكما اللعب معًا
+Feature.GameJoin.Label.PlayTogetherSoon,يمكنكما اللعب معًا قريبًا
 Feature.GamePage.Action.BackToTop,العودة إلى الأعلى
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,برعاية
@@ -4073,6 +4076,7 @@ Feature.Moments.Description.HowToCaptureStep3,التقط صورًا ومقاطع
 Feature.Moments.Description.LeaveMomentsCreation,ستفقد جميع التغييرات التي أجريتها، لكن لا يزال بإمكانك العثور على هذه اللقطة في معرض <b>اللقطات</b>.
 Feature.Moments.Description.NoMusicResults,لم يتم العثور على أي موسيقى
 Feature.Moments.Description.NonInfiniteScrollEndBody,لقد وصلت إلى نقطة توقف في اللحظات. اضغط أدناه لمواصلة المشاهدة.
+Feature.Moments.Description.NothingHereYet,لا يوجد شيء هنا حتى الآن...
 Feature.Moments.Description.PublishMoment,صِف لحظتك
 Feature.Moments.Description.TooManyUploads,لقد رفعت عددًا كبيرًا من مقاطع الفيديو اليوم. حاول مرة أخرى غدًا.
 Feature.Moments.Disclaimer.EveryoneMoments,يمكن للجميع في اللحظات عرض ما يتم نشره
@@ -4860,8 +4864,8 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,خصم بنسبة 10% 
 Feature.RobloxSubscription.Description.ExclusiveBenefits,متعة أكثر مقابل عدد أقل من عملات Robux. اشترِك في Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,انضم مبكرًا مع اشتراك Plus
 Feature.RobloxSubscription.Description.ReferralRecipientReward,العرض صالح لمشتركي Plus الجدد فقط.
-Feature.RobloxSubscription.Description.ReferralReferrerReward,عندما ينضم أي شخص إلى اشتراك Plus باستخدام رابطك.
-Feature.RobloxSubscription.Description.ReferralShare,ادعُ شخصًا إلى اشتراك Plus وسيحصل كلاكما على {amount} من عملات Robux عند الانضمام.
+Feature.RobloxSubscription.Description.ReferralReferrerReward,عندما يشتري أي شخص اشتراك Plus باستخدام رابطك.
+Feature.RobloxSubscription.Description.ReferralShare,ادعُ شخصًا إلى اشتراك Plus وسيحصل كلاكما على {amount} من عملات Robux عند شرائه اشتراك Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"بالضغط على \u{201C}{ctaText}\u{201D}، فإنك توافق على <a href=""{termsUrl}"">شروط الاشتراك في منصّة Roblox</a>. سيتم تحصيل الرسوم منك تلقائيًا كل شهر حتى تقوم بالإلغاء."
 Feature.RobloxSubscription.Heading.ReferralHistory,سجل الإحالات
 Feature.RobloxSubscription.Heading.ReferralShare,شارك Plus، واحصل على
@@ -4873,12 +4877,14 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,خصم بنسبة {dis
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,خصم بنسبة {discountPercent}% على هذه العناصر بعد {periodIndex} {periodType}
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"بالضغط على ""متابعة""، فإنك توافق على {linkStart}شروط الاشتراك في منصّة Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"بالضغط على ""جرب مجانًا""، فإنك توافق على {linkStart}شروط الاشتراك في Roblox.{linkEnd} ستنتهي الفترة التجريبية المجانية بعد شهر واحد وسيتم تحصيل الرسوم منك تلقائيًا كل شهر ويمكنك الإلغاء في أي وقت."
+Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"بالضغط على ""جرِّب مجانًا""، فإنك توافق على {linkStart}شروط الاشتراك في منصّة Roblox.{linkEnd} ستنتهي الفترة التجريبية المجانية بعد {trialDuration} {trialPeriodLabel} وسيتم تحصيل الرسوم منك تلقائيًا كل {billingPeriodLabel} ويمكنك الإلغاء في أي وقت."
 Feature.RobloxSubscription.Label.FreeTrialText,احصل على فترة تجريبية مجانية
 Feature.RobloxSubscription.Label.PendingRobux,عملات Robux المعلقة
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} من عملات Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,يحصل الأشخاص الذين تدعوهم على
 Feature.RobloxSubscription.Label.ReferralYouGet,ستحصل على
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}شهر واحد مجانًا،{boldEnd} ثم {price}/{periodType}
+Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration} {trialPeriodLabel} مجانًا،{boldEnd} ثم {price}/{periodType}
 Feature.RobloxSubscription.Label.RobuxEarned,عملات Robux المكتسبة
 Feature.RobloxSubscription.Label.SuccessfulReferrals,الإحالات الناجحة
 Feature.RobloxSubscription.Label.month,
@@ -4890,6 +4896,8 @@ Feature.RobloxSubscription.Title.GetBlackbird,اشترِك في Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,اشتراك Roblox Plus غير متاح هنا
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,يمكنك الانضمام إلى الحدث قبل أي شخص آخر.
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,الوصول المبكر مع اشتراك Plus
+Feature.RobloxSubscription.label.week,أسبوع
+Feature.RobloxSubscription.label.weeks,أسابيع
 Feature.SafetyDashboard.Heading.AccountStatus.V2,حالة الحساب، والانتهاكات، والاستئنافات
 Feature.Schools.Action.AlreadyGraduated,لقد تخرجت بالفعل
 Feature.Schools.Action.CantFindSchool,هل لا تستطيع العثور على مدرستك؟
@@ -5254,6 +5262,14 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,تم تعليق وصولك إلى هذه اللعبة من قِبل منصة Roblox لمدة {number} من الساعات
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,تم تعليق وصولك إلى هذه اللعبة من قِبل منصة Roblox لمدة دقيقة واحدة
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,تم تعليق وصولك إلى هذه اللعبة من قِبل منصة Roblox لمدة {number} من الدقائق
+Feature.UniversalShareSheet.Action.CopiedLink,تم النسخ
+Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,مشاركة رسالة
+Feature.UniversalShareSheet.Response.NotSharedMessage,تعذّر إرسال الرسالة
+Feature.UniversalShareSheet.Response.NotSharedMultipleMessages,تعذّر إرسال الرسائل
+Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + شخص واحد آخر
+Feature.UniversalShareSheet.Response.SharedMessage,تم إرسال الرسالة
+Feature.UniversalShareSheet.Response.SharedMultipleMessages,تم إرسال الرسائل
+Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} من الأشخاص الآخرين
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,إضافة هاتف للمحادثة الصوتية
 Feature.VerificationUpsell.Action.ChangeEmail,

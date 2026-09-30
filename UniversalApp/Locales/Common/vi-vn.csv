@@ -450,6 +450,7 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Hồi sinh ngay
 Authentication.SignUp.Action.SetupLater,Thiết lập sau
 Authentication.SignUp.Action.StartOver,Bắt Đầu Lại
+Authentication.SignUp.Action.StartPlay,Bắt đầu chơi
 Authentication.SignUp.Action.UseEmail,Sử dụng địa chỉ email
 Authentication.SignUp.Action.UsePhoneNumber,Sử dụng số điện thoại
 Authentication.SignUp.Button.OKCaptialized,
@@ -497,6 +498,7 @@ Authentication.SignUp.Header.CreatePassword,"{username} ơi, hãy tạo một m�
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"{username} ơi, hãy tạo mật khẩu hoặc mã xác nhận"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,Chúng tôi đã tạo tài khoản cho bạn. Hãy chọn cách bạn đăng nhập.
 Authentication.SignUp.Header.GenderPage6,Một bước cuối cùng! Hãy chọn giới tính của bạn (không bắt buộc)
+Authentication.SignUp.Header.OneLastThing,Một bước cuối cùng
 Authentication.SignUp.Header.PleaseTryAgain,Vui Lòng Thử Lại
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Thiết lập tài khoản Roblox của bạn
 Authentication.SignUp.Header.UsernamePage4,"Tiếp theo, hãy tạo tên tài khoản"
@@ -585,6 +587,7 @@ Authentication.SignUp.Response.InvalidPhoneNumber,Số điện thoại không h�
 Authentication.SignUp.Response.PasswordComplexity,Vui lòng tạo mật khẩu khó đoán hơn.
 Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Số điện thoại đó đã được liên kết với tài khoản khác.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Phải đặt tên người dùng trước.
+Authentication.SignUp.Subtitle.AddYourBirthday,Hãy bổ sung ngày sinh của bạn để tạo tài khoản Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Tiến trình của bạn sẽ được giữ nguyên khi bạn thiết lập xong.
 Authentication.SignUp.Title,"Xin chào {username}, hãy tạo một mật khẩu"
 Authentication.TwoStepVerification.Action.Approve,Chấp nhận
@@ -1985,6 +1988,7 @@ Feature.Avatar.Label.SetAvatarCount,{itemCount} avatar
 Feature.Avatar.Label.SetLimitReachedBody,Bạn chỉ được có tối đa {setLimit} bộ. Hãy xóa bớt một bộ để có thêm chỗ trống
 Feature.Avatar.Label.SetNameDuplicateBody,"Bạn đã có một bộ lấy tên này, vui lòng chọn tên khác"
 Feature.Avatar.Label.SetNameNotAllowedBody,Vui lòng chọn tên khác
+Feature.Avatar.Label.ShareAvatarToMoments,Chia sẻ avatar của bạn lên Khoảnh khắc
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,Đăng Avatar lên Chợ
 Feature.Avatar.Label.Shirt,Áo Sơ Mi
 Feature.Avatar.Label.ShirtClassic,Áo sơ mi cổ điển
@@ -2564,7 +2568,6 @@ Feature.Build.Label.World,Thế giới
 Feature.Build.Message.AccountRequirements,Tài khoản của bạn không đáp ứng các yêu cầu để sử dụng Build.
 Feature.Build.Message.AccountTooNew,Tài khoản của bạn còn quá mới nên chưa thể đăng. Hãy thử lại khi bạn đã tạo tài khoản được 2 ngày.
 Feature.Build.Message.AdCampaignCreateFailed,Không tạo được chiến dịch. Vui lòng thử lại.
-Feature.Build.Message.AdCampaignCreated,Đã tạo chiến dịch quảng cáo
 Feature.Build.Message.AdPerformanceLoadFailed,Không tải được hiệu suất quảng cáo
 Feature.Build.Message.AdsPromotionBannerSubtitle,Miễn phí thu hút thêm đối tượng
 Feature.Build.Message.AdsPromotionBannerTitle,Bạn còn {promotionCount} lượt quảng bá miễn phí
@@ -2655,6 +2658,7 @@ Feature.Build.Notification.Title.NeedInput,Tính năng Tạo dựng cần bạn 
 Feature.Build.Placeholder.DescribeProduct,Mô tả sản phẩm bạn muốn bán
 Feature.Build.Placeholder.DescribeProductUpdate,Mô tả thông tin trong bản cập nhật
 Feature.Build.Prompt.CreateDeveloperProduct,"Giúp tôi tạo một sản phẩm của nhà phát triển, đưa sản phẩm đó vào trò chơi, xác minh và đăng các thay đổi, rồi cho phép người dùng mua sản phẩm đó."
+Feature.Build.Title.AdActive,Chiến dịch quảng cáo đang hoạt động
 Feature.Build.Title.AdCampaignDuration,Chiến dịch quảng cáo dài {durationDays} ngày
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} ngày
 Feature.Build.Title.AdComplete,Đã hoàn tất quảng cáo
@@ -3242,7 +3246,6 @@ Feature.Chat.Message.LeaveGroup,Bạn sẽ không thể tiếp tục trò chuy�
 Feature.Chat.Message.LeaveGroup.V2,Bạn có chắc chắn muốn rời khỏi nhóm không?
 Feature.Chat.Message.MakeConnectionsToChat,Kết bạn trên Roblox để bắt đầu trò chuyện cùng nhau
 Feature.Chat.Message.MakeConnectionsToParty,Kết bạn trên Roblox để lập Party cùng nhau
-Feature.Chat.Message.MakeFriendsToChat,
 Feature.Chat.Message.MakeFriendsToParty,Kết bạn trên Roblox để lập Tổ Đội cùng nhau
 Feature.Chat.Message.MessageContentModerated,Tin nhắn của bạn đã được kiểm duyệt và không được gửi.
 Feature.Chat.Message.MessageUnavailable,Không thể xem tin nhắn
@@ -3253,8 +3256,6 @@ Feature.Chat.Message.RemoveUser,Bạn có chắc muốn loại bỏ {USERNAME} k
 Feature.Chat.Message.RemoveUser.V2,Bạn có chắc muốn loại bỏ {USERNAME} khỏi nhóm này không?
 Feature.Chat.Message.RemovedFromConversation,Bạn đã bị loại khỏi nhóm.
 Feature.Chat.Message.SeveralUsersTyping,Vài người chơi đang đánh máy...
-Feature.Chat.Message.TurnOnChat,"Để trò chuyện với bạn bè, bật trò chuyện trong Cài Đặt Quyền Riêng Tư."
-Feature.Chat.Message.TurnOnParty,"Để lập Tổ Đội với bạn bè, hãy bật tính năng Tổ Đội trong Cài Đặt Quyền Riêng Tư."
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} và {DISPLAY_NAME_2} đang đánh máy...
 Feature.Chat.PresetChat.Disclaimer,Tính năng Tin nhắn nhanh cho phép người chơi ở mọi độ tuổi trao đổi với nhau khi chơi.
 Feature.Chat.Response.ChatNameFullyModerated,Tên cuộc trò chuyện nhóm đã được kiểm duyệt.
@@ -3794,6 +3795,9 @@ Feature.GameFollows.TooltipNotificationsButtonDescription,Bật thông báo đ�
 Feature.GameFollows.TooltipNotificationsLimitReached,Đã đạt giới hạn. Hãy tắt thông báo dành cho các trải nghiệm khác trước.
 Feature.GameFollows.TooltipTurnedOffNotifications,Đã tắt thông báo cho {experienceName}
 Feature.GameFollows.TooltipTurnedOnNotifications,Đã mở thông báo cho {experienceName}
+Feature.GameJoin.Description.DifferentServer,Bạn sẽ bắt đầu ở máy chủ khác
+Feature.GameJoin.Label.PlayTogether,Các bạn có thể chơi cùng nhau
+Feature.GameJoin.Label.PlayTogetherSoon,Các bạn sẽ sớm có thể chơi cùng nhau
 Feature.GamePage.Action.BackToTop,Về đầu trang
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,Được Tài Trợ
@@ -4093,6 +4097,7 @@ Feature.Moments.Description.HowToCaptureStep3,Chụp ảnh và quay màn hình t
 Feature.Moments.Description.LeaveMomentsCreation,"Mọi thay đổi bạn đã thực hiện sẽ biến mất, nhưng bạn vẫn có thể tìm lại bản ghi này trong thư viện <b>Bản ghi</b> của mình."
 Feature.Moments.Description.NoMusicResults,Không tìm thấy nhạc
 Feature.Moments.Description.NonInfiniteScrollEndBody,Bạn đã đến điểm dừng khi xem Khoảnh khắc. Nhấn vào phần bên dưới để tiếp tục xem.
+Feature.Moments.Description.NothingHereYet,Chưa có gì ở đây...
 Feature.Moments.Description.PublishMoment,Mô tả Khoảnh khắc của bạn
 Feature.Moments.Description.TooManyUploads,Bạn đã tải lên quá nhiều video cho hôm nay. Hãy thử lại vào ngày mai.
 Feature.Moments.Disclaimer.EveryoneMoments,Ai trong Khoảnh khắc cũng có thể xem nội dung được đăng
@@ -4880,8 +4885,8 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Giảm 10% trong 60 n
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Vui hơn, tốn ít Robux hơn. Đăng ký Roblox Plus ngay."
 Feature.RobloxSubscription.Description.JoinEarly,Mua gói Plus để được tham gia sớm
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Ưu đãi chỉ áp dụng cho người mới đăng ký Plus.
-Feature.RobloxSubscription.Description.ReferralReferrerReward,Khi có người tham gia Plus bằng đường liên kết của bạn.
-Feature.RobloxSubscription.Description.ReferralShare,Mời bạn bè tham gia Plus để cả hai cùng nhận được {amount} Robux khi họ tham gia.
+Feature.RobloxSubscription.Description.ReferralReferrerReward,Khi có người mua gói Plus bằng đường liên kết của bạn.
+Feature.RobloxSubscription.Description.ReferralShare,Mời bạn bè tham gia Plus – cả hai sẽ cùng nhận được {amount} Robux khi người được mời mua gói đăng ký.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Khi nhấp chuột vào \u{201C}{ctaText}\u{201D}, bạn đồng ý với <a href=""{termsUrl}"">Điều khoản gói đăng ký của Roblox</a>. Hệ thống sẽ tự động thu phí hằng tháng cho đến khi bạn hủy."
 Feature.RobloxSubscription.Heading.ReferralHistory,Lịch sử giới thiệu
 Feature.RobloxSubscription.Heading.ReferralShare,"Chia sẻ Plus, nhận"
@@ -4893,12 +4898,14 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,"Giảm {discountPerce
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,Giảm {discountPercent}% cho các vật phẩm này sau {periodIndex} {periodType}
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Khi nhấp vào ""Tiếp tục"", bạn đồng ý với {linkStart}Điều khoản về gói đăng ký của Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Khi nhấp chuột vào ""Dùng thử miễn phí"", bạn đồng ý với {linkStart}Điều khoản của gói đăng ký của Roblox{linkEnd}. Thời gian dùng thử miễn phí của bạn sẽ kết thúc sau 1 tháng. Hệ thống sẽ tự động thu phí hằng tháng và bạn có thể hủy gói bất cứ lúc nào."
+Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Khi nhấp chuột vào ""Dùng thử miễn phí"", bạn đồng ý với {linkStart}Điều khoản về gói đăng ký của Roblox.{linkEnd} Thời gian dùng thử miễn phí của bạn sẽ kết thúc sau {trialDuration} {trialPeriodLabel}. Hệ thống sẽ tự động thu phí mỗi {billingPeriodLabel} và bạn có thể hủy gói bất cứ lúc nào."
 Feature.RobloxSubscription.Label.FreeTrialText,Nhận gói dùng thử miễn phí
 Feature.RobloxSubscription.Label.PendingRobux,Robux đang chờ xử lý
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Người được giới thiệu nhận được
 Feature.RobloxSubscription.Label.ReferralYouGet,Bạn nhận được
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 tháng miễn phí,{boldEnd} sau đó là {price}/{periodType}"
+Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}Miễn phí {trialDuration} {trialPeriodLabel},{boldEnd} sau đó là {price}/{periodType}"
 Feature.RobloxSubscription.Label.RobuxEarned,Số Robux đã kiếm được
 Feature.RobloxSubscription.Label.SuccessfulReferrals,Lượt giới thiệu thành công
 Feature.RobloxSubscription.Label.month,tháng
@@ -4910,6 +4917,8 @@ Feature.RobloxSubscription.Title.GetBlackbird,Mua gói Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Gói Roblox Plus không hỗ trợ nền tảng này
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Bạn có thể tham gia sự kiện sớm hơn những người khác.
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Mua gói Plus để có quyền truy cập sớm
+Feature.RobloxSubscription.label.week,tuần
+Feature.RobloxSubscription.label.weeks,
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Trạng thái tài khoản, vi phạm và khiếu nại"
 Feature.Schools.Action.AlreadyGraduated,Tôi đã tốt nghiệp
 Feature.Schools.Action.CantFindSchool,Bạn không tìm thấy trường học của mình?
@@ -5275,6 +5284,14 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox đã tạm rút quyền chơi trò chơi này của bạn trong {number} giờ
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox đã tạm rút quyền chơi trò chơi này của bạn trong 1 phút
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox đã tạm rút quyền chơi trò chơi này của bạn trong {number} phút
+Feature.UniversalShareSheet.Action.CopiedLink,Đã sao chép
+Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,Chia sẻ tin nhắn
+Feature.UniversalShareSheet.Response.NotSharedMessage,Không thể gửi tin nhắn
+Feature.UniversalShareSheet.Response.NotSharedMultipleMessages,
+Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 người khác
+Feature.UniversalShareSheet.Response.SharedMessage,Tin nhắn đã được gửi
+Feature.UniversalShareSheet.Response.SharedMultipleMessages,
+Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} người khác
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Thêm số điện thoại vào Cuộc nói chuyện
 Feature.VerificationUpsell.Action.ChangeEmail,Thay Đổi Email

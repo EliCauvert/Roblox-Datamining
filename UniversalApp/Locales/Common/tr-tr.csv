@@ -1988,6 +1988,7 @@ Feature.Avatar.Label.SetAvatarCount,{itemCount} avatar
 Feature.Avatar.Label.SetLimitReachedBody,En fazla {setLimit} setin olabilir. Yer açmak için birini sil
 Feature.Avatar.Label.SetNameDuplicateBody,"Bu ada sahip bir setin zaten var, farklı bir ad seç"
 Feature.Avatar.Label.SetNameNotAllowedBody,Lütfen başka bir ad seç
+Feature.Avatar.Label.ShareAvatarToMoments,Avatarını Anlar'da paylaş
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,Avatarları Pazar Yeri'nde Paylaş
 Feature.Avatar.Label.Shirt,Gömlek
 Feature.Avatar.Label.ShirtClassic,Gömlek Klasik
@@ -2567,7 +2568,6 @@ Feature.Build.Label.World,Dünya
 Feature.Build.Message.AccountRequirements,"Hesabın, İnşa Et'i kullanma gerekliliklerini karşılamıyor."
 Feature.Build.Message.AccountTooNew,Hesabın yayınlanamayacak kadar yeni. 2 günü doldurduğunda tekrar dene.
 Feature.Build.Message.AdCampaignCreateFailed,Kampanyan oluşturulamadı. Lütfen tekrar dene.
-Feature.Build.Message.AdCampaignCreated,Reklam kampanyası oluşturuldu
 Feature.Build.Message.AdPerformanceLoadFailed,Reklam performansı yüklenemedi
 Feature.Build.Message.AdsPromotionBannerSubtitle,Kitleni ücretsiz olarak genişlet
 Feature.Build.Message.AdsPromotionBannerTitle,{promotionCount} ücretsiz promosyonun kaldı
@@ -3246,7 +3246,6 @@ Feature.Chat.Message.LeaveGroup,Bu grupla konuşmaya devam edemeyeceksin.
 Feature.Chat.Message.LeaveGroup.V2,Gruptan ayrılmak istediğine emin misin?
 Feature.Chat.Message.MakeConnectionsToChat,Birlikte sohbet etmeye başlamak için Roblox'ta arkadaş edin
 Feature.Chat.Message.MakeConnectionsToParty,Birlikte Parti oluşturmak için Roblox'ta arkadaş edin
-Feature.Chat.Message.MakeFriendsToChat,
 Feature.Chat.Message.MakeFriendsToParty,Birlikte Parti yapmaya başlamak için Roblox'ta arkadaş edin
 Feature.Chat.Message.MessageContentModerated,Mesajın denetlendi ve gönderilmedi.
 Feature.Chat.Message.MessageUnavailable,Mesaj kullanılamıyor
@@ -3257,8 +3256,6 @@ Feature.Chat.Message.RemoveUser,{USERNAME} adlı kullanıcıyı bu sohbet grubun
 Feature.Chat.Message.RemoveUser.V2,{USERNAME} adlı kullanıcıyı bu gruptan çıkarmak istediğine emin misin?
 Feature.Chat.Message.RemovedFromConversation,Gruptan çıkarıldın.
 Feature.Chat.Message.SeveralUsersTyping,Birkaç kullanıcı yazıyor...
-Feature.Chat.Message.TurnOnChat,
-Feature.Chat.Message.TurnOnParty,
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} ve {DISPLAY_NAME_2} yazıyor...
 Feature.Chat.PresetChat.Disclaimer,"Hızlı Sözler, her yaştan oyuncunun oyunu koordine etmesini sağlar."
 Feature.Chat.Response.ChatNameFullyModerated,Sohbet grubunun adı denetlendi.
@@ -3798,6 +3795,9 @@ Feature.GameFollows.TooltipNotificationsButtonDescription,Etkinlikleri kaçırma
 Feature.GameFollows.TooltipNotificationsLimitReached,Sınıra ulaşıldı. Lütfen önce diğer deneyimlerin bildirimlerini kapat.
 Feature.GameFollows.TooltipTurnedOffNotifications,{experienceName} için bildirimler kapatıldı
 Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} için bildirimler açıldı
+Feature.GameJoin.Description.DifferentServer,Farklı bir sunucuda başlayacaksın
+Feature.GameJoin.Label.PlayTogether,Birlikte oynayabilirsiniz
+Feature.GameJoin.Label.PlayTogetherSoon,Yakında birlikte oynayabileceksiniz
 Feature.GamePage.Action.BackToTop,Başa dön
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -4097,6 +4097,7 @@ Feature.Moments.Description.HowToCaptureStep3,Oynanışın fotoğraflarını ve 
 Feature.Moments.Description.LeaveMomentsCreation,Tüm değişikliklerini kaybedeceksin ancak yakalanan bu ekran görüntüsünü <b>Yakalananlar</b> galerinde bulabilirsin.
 Feature.Moments.Description.NoMusicResults,Müzik bulunamadı
 Feature.Moments.Description.NonInfiniteScrollEndBody,Anlar'da bir durma noktasına ulaştın. İzlemeye devam etmek için aşağıya dokun.
+Feature.Moments.Description.NothingHereYet,Burada henüz bir şey yok...
 Feature.Moments.Description.PublishMoment,Anını anlat
 Feature.Moments.Description.TooManyUploads,Bugün çok fazla video yükledin. Yarın tekrar dene.
 Feature.Moments.Disclaimer.EveryoneMoments,Anlardaki herkes yayınlananları görüntüleyebilir
@@ -4897,12 +4898,14 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,"Oyun içi öğeler, a
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{periodIndex} {periodType} sonrasında bu öğelerde yüzde {discountPercent} indirim
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"""Devam Et"" düğmesine tıklayarak {linkStart}Roblox Abonelik Koşulları{linkEnd}'nı kabul etmiş olursun."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"""Ücretsiz dene"" düğmesine tıklayarak {linkStart}Roblox Abonelik Koşulları{linkEnd}'nı kabul etmiş olursun. Ücretsiz deneme süren 1 ay içinde sona erer ve ondan sonra her ay senden otomatik olarak ücret alınır. Dilediğin zaman iptal edebilirsin."
+Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"""Ücretsiz dene"" düğmesine tıklayarak {linkStart}Roblox Abonelik Koşulları{linkEnd}'nı kabul etmiş olursun. Ücretsiz deneme süren {trialDuration} {trialPeriodLabel} içinde sona erer ve ondan sonra her {billingPeriodLabel} senden otomatik olarak ücret alınır. Dilediğin zaman iptal edebilirsin."
 Feature.RobloxSubscription.Label.FreeTrialText,Ücretsiz deneme al
 Feature.RobloxSubscription.Label.PendingRobux,Bekleyen Robux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Yönlendirdiğin kişilerin kazancı:
 Feature.RobloxSubscription.Label.ReferralYouGet,
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 ay ücretsiz,{boldEnd} sonrasında {price}/{periodType}"
+Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} ücretsiz,{boldEnd} sonrasında {price}/{periodType}"
 Feature.RobloxSubscription.Label.RobuxEarned,Kazanılan Robux
 Feature.RobloxSubscription.Label.SuccessfulReferrals,Başarılı yönlendirmeler
 Feature.RobloxSubscription.Label.month,ay
@@ -4914,6 +4917,8 @@ Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus'a geç
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus burada kullanılamıyor
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Etkinliğe herkesten önce katılabilirsin.
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Plus ile erken erişim
+Feature.RobloxSubscription.label.week,hafta
+Feature.RobloxSubscription.label.weeks,
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Hesap durumu, ihlaller ve itirazlar"
 Feature.Schools.Action.AlreadyGraduated,Zaten mezun oldum
 Feature.Schools.Action.CantFindSchool,Okulunu bulamıyor musun?
@@ -5279,6 +5284,14 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox bu oyuna erişimini {number} saatliğine askıya aldı
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox bu oyuna erişimini 1 dakikalığına askıya aldı
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox bu oyuna erişimini {number} dakikalığına askıya aldı
+Feature.UniversalShareSheet.Action.CopiedLink,
+Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,Bir mesaj paylaş
+Feature.UniversalShareSheet.Response.NotSharedMessage,Mesaj gönderilemiyor
+Feature.UniversalShareSheet.Response.NotSharedMultipleMessages,Mesajlar gönderilemiyor
+Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE}: 1 kişiyle daha
+Feature.UniversalShareSheet.Response.SharedMessage,Mesaj gönderildi
+Feature.UniversalShareSheet.Response.SharedMultipleMessages,Mesajlar gönderildi
+Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE}: {N} kişiyle daha
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Sesli Sohbet için Telefon ekle
 Feature.VerificationUpsell.Action.ChangeEmail,E-posta Adresini Değiştir

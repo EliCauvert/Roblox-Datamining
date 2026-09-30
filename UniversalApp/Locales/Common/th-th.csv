@@ -433,6 +433,7 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,เกิดใหม่ตอนนี้เลย
 Authentication.SignUp.Action.SetupLater,ตั้งค่าภายหลัง
 Authentication.SignUp.Action.StartOver,เริ่มต้นใหม่หมด
+Authentication.SignUp.Action.StartPlay,เริ่มเล่น
 Authentication.SignUp.Action.UseEmail,ใช้ที่อยู่อีเมล
 Authentication.SignUp.Action.UsePhoneNumber,ใช้หมายเลขโทรศัพท์
 Authentication.SignUp.Button.OKCaptialized,
@@ -480,6 +481,7 @@ Authentication.SignUp.Header.CreatePassword,สวัสดี {username} โป
 Authentication.SignUp.Header.CreatePasswordOrPasskey,สวัสดี {username} โปรดสร้างรหัสผ่านหรือพาสคีย์
 Authentication.SignUp.Header.CreatedAccountChooseSignin,เราสร้างบัญชีให้คุณแล้ว เลือกวิธีที่คุณต้องการลงชื่อเข้าใช้
 Authentication.SignUp.Header.GenderPage6,ขั้นสุดท้าย เลือกเพศของคุณ (ไม่บังคับ)
+Authentication.SignUp.Header.OneLastThing,ขั้นสุดท้าย
 Authentication.SignUp.Header.PleaseTryAgain,กรุณาลองใหม่อีกครั้ง
 Authentication.SignUp.Header.SetUpYourRobloxAccount,ตั้งค่าบัญชี Roblox ของคุณ
 Authentication.SignUp.Header.UsernamePage4,ต่อไปเป็นการสร้างชื่อผู้ใช้
@@ -568,6 +570,7 @@ Authentication.SignUp.Response.InvalidPhoneNumber,หมายเลขโทร
 Authentication.SignUp.Response.PasswordComplexity,โปรดสร้างรหัสผ่านที่ซับซ้อนมากกว่านี้
 Authentication.SignUp.Response.PhoneNumberAlreadyLinked,หมายเลขโทรศัพท์นี้เชื่อมโยงกับบัญชีอื่นอยู่แล้ว
 Authentication.SignUp.Response.UsernameMustBeSetFirst,ต้องระบุชื่อผู้ใช้ก่อน
+Authentication.SignUp.Subtitle.AddYourBirthday,เพิ่มวันเกิดของคุณเพื่อสร้างบัญชี Roblox
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,พอตั้งค่าเสร็จ ก็เล่นต่อจากเดิมได้เลย
 Authentication.SignUp.Title,สวัสดี {username} โปรดสร้างรหัสผ่าน
 Authentication.TwoStepVerification.Action.Approve,อนุมัติ
@@ -1968,6 +1971,7 @@ Feature.Avatar.Label.SetAvatarCount,อวาตาร์ {itemCount} ตัว
 Feature.Avatar.Label.SetLimitReachedBody,คุณสร้างได้สูงสุด {setLimit} ชุดเท่านั้น ลบออก 1 ชุดเพื่อเพิ่มพื้นที่
 Feature.Avatar.Label.SetNameDuplicateBody,คุณมีชุดที่ใช้ชื่อนี้อยู่แล้ว โปรดเลือกชื่ออื่น
 Feature.Avatar.Label.SetNameNotAllowedBody,โปรดเลือกชื่ออื่น
+Feature.Avatar.Label.ShareAvatarToMoments,แชร์อวาตาร์ของคุณไปยังโมเมนต์
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,โพสต์อวาตาร์ไปยังมาร์เก็ตเพลส
 Feature.Avatar.Label.Shirt,เสื้อเชิ้ต
 Feature.Avatar.Label.ShirtClassic,
@@ -2547,7 +2551,6 @@ Feature.Build.Label.World,โลก
 Feature.Build.Message.AccountRequirements,บัญชีของคุณมีคุณสมบัติไม่ตรงตามข้อกำหนดในการใช้ Build
 Feature.Build.Message.AccountTooNew,บัญชีของคุณยังใหม่เกินไปที่จะเผยแพร่ ลองอีกครั้งเมื่อบัญชีมีอายุ 2 วัน
 Feature.Build.Message.AdCampaignCreateFailed,ไม่สามารถสร้างแคมเปญของคุณได้ โปรดลองอีกครั้ง
-Feature.Build.Message.AdCampaignCreated,สร้างแคมเปญโฆษณาแล้ว
 Feature.Build.Message.AdPerformanceLoadFailed,ไม่สามารถโหลดประสิทธิภาพโฆษณาได้
 Feature.Build.Message.AdsPromotionBannerSubtitle,เพิ่มกลุ่มเป้าหมายของคุณได้ฟรี
 Feature.Build.Message.AdsPromotionBannerTitle,คุณเหลือโปรโมชันฟรีอีก {promotionCount} ครั้ง
@@ -2638,6 +2641,7 @@ Feature.Build.Notification.Title.NeedInput,Build ต้องการอิน�
 Feature.Build.Placeholder.DescribeProduct,อธิบายสิ่งที่คุณต้องการขาย
 Feature.Build.Placeholder.DescribeProductUpdate,อธิบายเกี่ยวกับการอัปเดต
 Feature.Build.Prompt.CreateDeveloperProduct,ช่วยฉันสร้างผลิตภัณฑ์นักพัฒนา เชื่อมโยงเข้ากับเกม ตรวจสอบและเผยแพร่การเปลี่ยนแปลง และเปิดให้ซื้อ
+Feature.Build.Title.AdActive,แคมเปญโฆษณาเปิดใช้งานอยู่
 Feature.Build.Title.AdCampaignDuration,แคมเปญโฆษณา {durationDays} วัน
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} วัน
 Feature.Build.Title.AdComplete,โฆษณาเสร็จแล้ว
@@ -3225,7 +3229,6 @@ Feature.Chat.Message.LeaveGroup,คุณไม่สามารถแชทก
 Feature.Chat.Message.LeaveGroup.V2,คุณแน่ใจหรือไม่ว่าคุณต้องการออกจากกลุ่ม?
 Feature.Chat.Message.MakeConnectionsToChat,หาเพื่อนบน Roblox แล้วเริ่มแชทกันได้เลย
 Feature.Chat.Message.MakeConnectionsToParty,หาเพื่อนบน Roblox เพื่อมา Party ด้วยกัน
-Feature.Chat.Message.MakeFriendsToChat,
 Feature.Chat.Message.MakeFriendsToParty,
 Feature.Chat.Message.MessageContentModerated,ข้อความของคุณไม่ผ่านเกณฑ์การกลั่นกรองจึงไม่ถูกส่ง
 Feature.Chat.Message.MessageUnavailable,ไม่สามารถดูข้อความได้
@@ -3236,8 +3239,6 @@ Feature.Chat.Message.RemoveUser,คุณแน่ใจหรือไม่ว
 Feature.Chat.Message.RemoveUser.V2,คุณแน่ใจหรือไม่ว่าคุณต้องการลบ {USERNAME} ออกจากกลุ่มนี้?
 Feature.Chat.Message.RemovedFromConversation,คุณถูกลบออกจากกลุ่มแล้ว
 Feature.Chat.Message.SeveralUsersTyping,ผู้ใช้หลายคนกำลังพิมพ์...
-Feature.Chat.Message.TurnOnChat,หากต้องการแชทกับเพื่อน เปิดการแชทในการตั้งค่าความเป็นส่วนตัวของคุณ
-Feature.Chat.Message.TurnOnParty,
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} และ {DISPLAY_NAME_2} กำลังพิมพ์...
 Feature.Chat.PresetChat.Disclaimer,Quick Words ช่วยให้ผู้เล่นทุกวัยสามารถประสานการเล่นเกมได้
 Feature.Chat.Response.ChatNameFullyModerated,ชื่อกลุ่มแชทไม่ผ่านเกณฑ์การกลั่นกรอง
@@ -3777,6 +3778,9 @@ Feature.GameFollows.TooltipNotificationsButtonDescription,เปิดการ�
 Feature.GameFollows.TooltipNotificationsLimitReached,ถึงขีดจํากัดแล้ว โปรดปิดการแจ้งเตือนสําหรับประสบการณ์อื่นก่อน
 Feature.GameFollows.TooltipTurnedOffNotifications,"ปิดการแจ้งเตือนสำหรับ ""{experienceName}"""
 Feature.GameFollows.TooltipTurnedOnNotifications,"เปิดการแจ้งเตือนสําหรับ ""{experienceName}"""
+Feature.GameJoin.Description.DifferentServer,คุณจะเริ่มในเซิร์ฟเวอร์อื่น
+Feature.GameJoin.Label.PlayTogether,คุณเล่นด้วยกันได้
+Feature.GameJoin.Label.PlayTogetherSoon,คุณจะเล่นด้วยกันได้เร็วๆ นี้
 Feature.GamePage.Action.BackToTop,กลับไปด้านบน
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -4076,6 +4080,7 @@ Feature.Moments.Description.HowToCaptureStep3,จับภาพและวิ�
 Feature.Moments.Description.LeaveMomentsCreation,ข้อมูลที่เปลี่ยนแปลงทั้งหมดจะหายไป แต่คุณยังค้นหาภาพที่จับนี้ได้ในแกลเลอรี<b>การจับภาพ</b>
 Feature.Moments.Description.NoMusicResults,ไม่พบดนตรี
 Feature.Moments.Description.NonInfiniteScrollEndBody,คุณมาถึงจุดพักในโมเมนต์แล้ว แตะด้านล่างเพื่อดูต่อ
+Feature.Moments.Description.NothingHereYet,ยังไม่มีอะไรในนี้...
 Feature.Moments.Description.PublishMoment,อธิบายเกี่ยวกับโมเมนต์ของคุณ
 Feature.Moments.Description.TooManyUploads,คุณอัปโหลดวิดีโอมากเกินไปในวันนี้ โปรดลองอีกครั้งในวันพรุ่งนี้
 Feature.Moments.Disclaimer.EveryoneMoments,ทุกคนในโมเมนต์สามารถดูสิ่งที่เผยแพร่ได้
@@ -4863,8 +4868,8 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,ส่วนลด 10%
 Feature.RobloxSubscription.Description.ExclusiveBenefits,สนุกมากขึ้น แต่ใช้ Robux น้อยลง สมัครสมาชิก Roblox Plus เลย
 Feature.RobloxSubscription.Description.JoinEarly,เข้าร่วมได้ก่อนใครเมื่อสมัคร Plus
 Feature.RobloxSubscription.Description.ReferralRecipientReward,ข้อเสนอใช้ได้กับสมาชิก Plus รายใหม่เท่านั้น
-Feature.RobloxSubscription.Description.ReferralReferrerReward,เมื่อมีคนเข้าร่วม Plus ด้วยลิงก์ของคุณ
-Feature.RobloxSubscription.Description.ReferralShare,ชวนเพื่อนมาใช้ Plus แล้วรับ {amount} Robux ไปเลยทั้งคู่เมื่อเพื่อนเข้าร่วม
+Feature.RobloxSubscription.Description.ReferralReferrerReward,เมื่อมีคนซื้อ Plus ด้วยลิงก์ของคุณ
+Feature.RobloxSubscription.Description.ReferralShare,ชวนเพื่อนมาใช้ Plus แล้วรับ {amount} Robux ไปเลยทั้งคู่เมื่อเพื่อนซื้อ Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"การคลิก \u{201C}{ctaText}\u{201D} จะถือว่าคุณยอมรับ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
 Feature.RobloxSubscription.Heading.ReferralHistory,ประวัติการแนะนำ
 Feature.RobloxSubscription.Heading.ReferralShare,แชร์ Plus แล้วรับ
@@ -4876,12 +4881,14 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,ส่วนลด {di
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,ลด {discountPercent}% สำหรับไอเท็มเหล่านี้หลังจาก {periodIndex} {periodType}
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"การคลิก ""ดำเนินการต่อ"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd}"
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"การคลิก ""ลองใช้ฟรี"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd} ช่วงทดลองใช้ฟรีของคุณจะสิ้นสุดในอีก 1 เดือน โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติและคุณยกเลิกได้ทุกเมื่อ"
+Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"การคลิก ""ลองใช้ฟรี"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd} ช่วงทดลองใช้ฟรีของคุณจะสิ้นสุดในอีก {trialDuration} {trialPeriodLabel} โดยจะมีการเรียกเก็บเงินในแต่ละ{billingPeriodLabel}โดยอัตโนมัติ และคุณยกเลิกได้ทุกเมื่อ"
 Feature.RobloxSubscription.Label.FreeTrialText,ทดลองใช้ฟรี
 Feature.RobloxSubscription.Label.PendingRobux,Robux ที่รอดำเนินการ
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,ผู้ที่คุณแนะนำจะได้รับ
 Feature.RobloxSubscription.Label.ReferralYouGet,คุณจะได้รับ
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}ฟรี 1 เดือน{boldEnd} จากนั้น {price}/{periodType}
+Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration} {trialPeriodLabel}ฟรี {boldEnd}จากนั้น {price}/{periodType}
 Feature.RobloxSubscription.Label.RobuxEarned,Robux ที่ได้รับ
 Feature.RobloxSubscription.Label.SuccessfulReferrals,การแนะนำที่สำเร็จ
 Feature.RobloxSubscription.Label.month,
@@ -4893,6 +4900,8 @@ Feature.RobloxSubscription.Title.GetBlackbird,รับ Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus ใช้งานไม่ได้ที่นี่
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,คุณสามารถเข้าร่วมกิจกรรมได้ก่อนใคร
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,รับสิทธิ์เข้าถึงได้ก่อนเผยแพร่เมื่อสมัคร Plus
+Feature.RobloxSubscription.label.week,สัปดาห์
+Feature.RobloxSubscription.label.weeks,
 Feature.SafetyDashboard.Heading.AccountStatus.V2,สถานะบัญชี การละเมิด และการอุทธรณ์
 Feature.Schools.Action.AlreadyGraduated,ฉันสำเร็จการศึกษาแล้ว
 Feature.Schools.Action.CantFindSchool,ไม่พบโรงเรียนของคุณใช่ไหม?
@@ -5258,6 +5267,14 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox ระงับไม่ให้คุณเล่นเกมนี้เป็นเวลา {number} ชั่วโมง
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox ระงับไม่ให้คุณเล่นเกมนี้เป็นเวลา 1 นาที
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox ระงับไม่ให้คุณเล่นเกมนี้เป็นเวลา {number} นาที
+Feature.UniversalShareSheet.Action.CopiedLink,
+Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,แชร์ข้อความ
+Feature.UniversalShareSheet.Response.NotSharedMessage,ไม่สามารถส่งข้อความได้
+Feature.UniversalShareSheet.Response.NotSharedMultipleMessages,
+Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + อีก 1 คน
+Feature.UniversalShareSheet.Response.SharedMessage,ส่งข้อความแล้ว
+Feature.UniversalShareSheet.Response.SharedMultipleMessages,
+Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + อีก {N} คน
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,เพิ่มหมายเลขโทรศัพท์สำหรับการแชทด้วยเสียง
 Feature.VerificationUpsell.Action.ChangeEmail,

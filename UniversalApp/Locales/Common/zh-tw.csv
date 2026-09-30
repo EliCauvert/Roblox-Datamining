@@ -449,6 +449,7 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,立即重生
 Authentication.SignUp.Action.SetupLater,稍後設定
 Authentication.SignUp.Action.StartOver,重新開始
+Authentication.SignUp.Action.StartPlay,開始遊玩
 Authentication.SignUp.Action.UseEmail,
 Authentication.SignUp.Action.UsePhoneNumber,使用手機號碼
 Authentication.SignUp.Button.OKCaptialized,
@@ -496,6 +497,7 @@ Authentication.SignUp.Header.CreatePassword,嗨，{username}，建立一個密�
 Authentication.SignUp.Header.CreatePasswordOrPasskey, {username} 您好，請建立密碼或密碼金鑰
 Authentication.SignUp.Header.CreatedAccountChooseSignin,已建立你的帳號。請選擇登入方式。
 Authentication.SignUp.Header.GenderPage6,來到最後了！請選擇您的性別（選填）
+Authentication.SignUp.Header.OneLastThing,最後一步
 Authentication.SignUp.Header.PleaseTryAgain,請再試一次
 Authentication.SignUp.Header.SetUpYourRobloxAccount,設定你的 Roblox 帳號
 Authentication.SignUp.Header.UsernamePage4,接下來，請建立使用者名稱
@@ -584,6 +586,7 @@ Authentication.SignUp.Response.InvalidPhoneNumber,手機號碼無效。
 Authentication.SignUp.Response.PasswordComplexity,請輸入更複雜的密碼。
 Authentication.SignUp.Response.PhoneNumberAlreadyLinked,已有帳號加入此手機號碼。
 Authentication.SignUp.Response.UsernameMustBeSetFirst,請先設定使用者名稱。
+Authentication.SignUp.Subtitle.AddYourBirthday,請新增你的生日，以建立 Roblox 帳號。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,完成設定後，你的進度將會保留。
 Authentication.SignUp.Title,{username}，您好，請建立密碼
 Authentication.TwoStepVerification.Action.Approve,批准
@@ -2563,7 +2566,6 @@ Feature.Build.Label.World,世界
 Feature.Build.Message.AccountRequirements,你的帳號不符合使用組建的要求。
 Feature.Build.Message.AccountTooNew,你的帳號太新，無法發佈。請在 2 天後再試一次。
 Feature.Build.Message.AdCampaignCreateFailed,無法建立你的廣告活動，請再試一次。
-Feature.Build.Message.AdCampaignCreated,已建立廣告活動
 Feature.Build.Message.AdPerformanceLoadFailed,無法載入廣告成效
 Feature.Build.Message.AdsPromotionBannerSubtitle,免費拓展受眾
 Feature.Build.Message.AdsPromotionBannerTitle,你還有 {promotionCount} 次免費促銷機會
@@ -2654,6 +2656,7 @@ Feature.Build.Notification.Title.NeedInput,組建需要你的輸入
 Feature.Build.Placeholder.DescribeProduct,描述你想要銷售的產品
 Feature.Build.Placeholder.DescribeProductUpdate,描述一項更新
 Feature.Build.Prompt.CreateDeveloperProduct,協助我建立開發者產品、將其連接到遊戲中、驗證和發佈變更，並開放購買。
+Feature.Build.Title.AdActive,廣告活動已生效
 Feature.Build.Title.AdCampaignDuration,為期 {durationDays} 天的廣告活動
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
 Feature.Build.Title.AdComplete,廣告已完成
@@ -3241,7 +3244,6 @@ Feature.Chat.Message.LeaveGroup,您將無法在此群組聊天。
 Feature.Chat.Message.LeaveGroup.V2,確定要離開群組嗎？
 Feature.Chat.Message.MakeConnectionsToChat,在 Roblox 結交好友即可一起聊天
 Feature.Chat.Message.MakeConnectionsToParty,在 Roblox 上結交朋友，一起組隊遊玩
-Feature.Chat.Message.MakeFriendsToChat,
 Feature.Chat.Message.MakeFriendsToParty,在 Roblox 上結交朋友來進行隊伍遊玩
 Feature.Chat.Message.MessageContentModerated,訊息遭到過濾，無法傳送。
 Feature.Chat.Message.MessageUnavailable,無法查看訊息
@@ -3252,8 +3254,6 @@ Feature.Chat.Message.RemoveUser,確定從此群組移除 {USERNAME}？
 Feature.Chat.Message.RemoveUser.V2,確定要從此群組中移除 {USERNAME} 嗎？
 Feature.Chat.Message.RemovedFromConversation,您已被移出群組。
 Feature.Chat.Message.SeveralUsersTyping,多位使用者正在輸入訊息……
-Feature.Chat.Message.TurnOnChat,若要與好友聊天，請先在您的隱私設定中開啟聊天功能。
-Feature.Chat.Message.TurnOnParty,若要與好友組成隊伍，請在「隱私設定」中開啟「隊伍」功能。
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} 與 {DISPLAY_NAME_2} 正在輸入訊息……
 Feature.Chat.PresetChat.Disclaimer,簡短文字讓所有年齡層的玩家都能在遊戲遊玩中合作。
 Feature.Chat.Response.ChatNameFullyModerated,群組名稱遭到過濾。
@@ -3793,6 +3793,9 @@ Feature.GameFollows.TooltipNotificationsButtonDescription,開啟通知，免得�
 Feature.GameFollows.TooltipNotificationsLimitReached,已達上限。請先關閉其他體驗的通知。
 Feature.GameFollows.TooltipTurnedOffNotifications,{experienceName} 的通知已關閉
 Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} 的通知已開啟
+Feature.GameJoin.Description.DifferentServer,你將在不同的伺服器上開始遊戲
+Feature.GameJoin.Label.PlayTogether,你們可以一起玩
+Feature.GameJoin.Label.PlayTogetherSoon,你們很快就可以一起玩了
 Feature.GamePage.Action.BackToTop,回到頂端
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -4092,6 +4095,7 @@ Feature.Moments.Description.HowToCaptureStep3,擷取遊戲遊玩的照片和影�
 Feature.Moments.Description.LeaveMomentsCreation,你即將失去所有變更，但仍可在<b>截圖</b>圖庫中找到此截圖。
 Feature.Moments.Description.NoMusicResults,找不到音樂
 Feature.Moments.Description.NonInfiniteScrollEndBody,你已到達「美好時光」的中斷處。輕觸下方即可繼續觀看。
+Feature.Moments.Description.NothingHereYet,這裡還沒有任何內容...
 Feature.Moments.Description.PublishMoment,描述你的「美好時光」
 Feature.Moments.Description.TooManyUploads,你今天上傳了太多的影片，請明天再試。
 Feature.Moments.Disclaimer.EveryoneMoments,參與「美好時光」的所有人皆可檢視已發佈的內容
@@ -4879,8 +4883,8 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具和
 Feature.RobloxSubscription.Description.ExclusiveBenefits,用更少的 Robux 享受更多樂趣。訂閱 Roblox Plus。
 Feature.RobloxSubscription.Description.JoinEarly,透過 Plus 搶先加入
 Feature.RobloxSubscription.Description.ReferralRecipientReward,優惠僅適用於新的 Plus 訂閱者。
-Feature.RobloxSubscription.Description.ReferralReferrerReward,當有人使用你的連結加入 Plus 時。
-Feature.RobloxSubscription.Description.ReferralShare,邀請他人加入 Plus，對方加入時，雙方皆可獲得 {amount} Robux。
+Feature.RobloxSubscription.Description.ReferralReferrerReward,當有人使用你的連結購買 Plus 時。
+Feature.RobloxSubscription.Description.ReferralShare,邀請他人加入 Plus，對方購買 Plus 時，雙方皆可獲得 {amount} Robux。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"按一下\u{201C}{ctaText}\u{201D}，即表示您同意 <a href=""{termsUrl}"">Roblox 訂閱條款</a>。系統將每月自動向您收取費用，直到取消訂閱為止。"
 Feature.RobloxSubscription.Heading.ReferralHistory,推薦歷史紀錄
 Feature.RobloxSubscription.Heading.ReferralShare,分享 Plus，獲得
@@ -4892,12 +4896,14 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,遊戲內物品、虛�
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,在 {periodIndex} {periodType}後，這些物品可享 {discountPercent}% 折扣
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,按一下「繼續」，即表示你同意 {linkStart}Roblox 訂閱條款{linkEnd}。
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,按一下「免費試用」，即表示您同意 {linkStart}Roblox 訂閱條款。{linkEnd}您的免費試用期將於 1 個月後結束，之後系統將每月自動向您收費。您可以隨時取消訂閱。
+Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,按一下「免費試用」，即表示您同意 {linkStart}Roblox 訂閱條款{linkEnd}。您的免費試用期將於 {trialDuration} {trialPeriodLabel}後結束，之後系統將每{billingPeriodLabel}自動向您收費。您可以隨時取消訂閱。
 Feature.RobloxSubscription.Label.FreeTrialText,取得免費試用
 Feature.RobloxSubscription.Label.PendingRobux,待處理的 Robux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,你的推薦對象將獲得
 Feature.RobloxSubscription.Label.ReferralYouGet,你將獲得
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}免費試用 1 個月{boldEnd}，之後 {price}／{periodType}
+Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}免費試用 {trialDuration} {trialPeriodLabel}，{boldEnd}之後 {price}／{periodType}
 Feature.RobloxSubscription.Label.RobuxEarned,已賺取的 Robux
 Feature.RobloxSubscription.Label.SuccessfulReferrals,成功推薦
 Feature.RobloxSubscription.Label.month,個月
@@ -4909,6 +4915,8 @@ Feature.RobloxSubscription.Title.GetBlackbird,取得 Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,此處無法使用 Roblox Plus
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,你可以比其他人更早加入活動。
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,透過 Plus 搶先體驗
+Feature.RobloxSubscription.label.week,週
+Feature.RobloxSubscription.label.weeks,
 Feature.SafetyDashboard.Heading.AccountStatus.V2,帳號狀態、違規和上訴
 Feature.Schools.Action.AlreadyGraduated,我已經畢業了
 Feature.Schools.Action.CantFindSchool,找不到學校嗎？
@@ -5274,6 +5282,14 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox 已暫時禁止你遊玩此遊戲 {number} 小時
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox 已暫時禁止你遊玩此遊戲 1 分鐘
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox 已暫時禁止你遊玩此遊戲 {number} 分鐘
+Feature.UniversalShareSheet.Action.CopiedLink,
+Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,分享訊息
+Feature.UniversalShareSheet.Response.NotSharedMessage,無法傳送訊息
+Feature.UniversalShareSheet.Response.NotSharedMultipleMessages,
+Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} 和另外 1 人
+Feature.UniversalShareSheet.Response.SharedMessage,訊息已傳送
+Feature.UniversalShareSheet.Response.SharedMultipleMessages,
+Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} 和另外 {N} 人
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,新增手機號碼以使用語音聊天
 Feature.VerificationUpsell.Action.ChangeEmail,

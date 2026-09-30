@@ -1986,7 +1986,7 @@ Feature.Avatar.Label.SetAvatarCount,{itemCount} 个虚拟形象
 Feature.Avatar.Label.SetLimitReachedBody,你最多只能有 {setLimit} 个集合。请删除一个以腾出空间
 Feature.Avatar.Label.SetNameDuplicateBody,你已经有一个同名的集合，请选择其他名称
 Feature.Avatar.Label.SetNameNotAllowedBody,请选择其他名称
-Feature.Avatar.Label.ShareAvatarToMoments,
+Feature.Avatar.Label.ShareAvatarToMoments,将你的虚拟形象分享至“精彩瞬间”
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,将虚拟形象发布至商城
 Feature.Avatar.Label.Shirt,衬衫
 Feature.Avatar.Label.ShirtClassic,
@@ -2567,7 +2567,6 @@ Feature.Build.Label.World,世界
 Feature.Build.Message.AccountRequirements,你的帐户不符合使用 Build 的要求。
 Feature.Build.Message.AccountTooNew,你的帐户刚刚创建，暂时无法发布。请在帐户创建 2 天后重试。
 Feature.Build.Message.AdCampaignCreateFailed,无法创建广告活动。请重试。
-Feature.Build.Message.AdCampaignCreated,广告活动已创建
 Feature.Build.Message.AdPerformanceLoadFailed,无法加载广告效果
 Feature.Build.Message.AdsPromotionBannerSubtitle,免费扩大受众群体
 Feature.Build.Message.AdsPromotionBannerTitle,你还有 {promotionCount} 次免费推广机会
@@ -2663,6 +2662,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告活动
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
 Feature.Build.Title.AdComplete,广告已完成
 Feature.Build.Title.AdCreated,广告已创建
+Feature.Build.Title.AdCreatedPeriod,广告已创建。
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,添加图片
 Feature.Build.Title.AdsStatsEmpty,开始广告活动
@@ -3244,7 +3244,6 @@ Feature.Chat.Message.LeaveGroup,你将无法与此群组继续聊天。
 Feature.Chat.Message.LeaveGroup.V2,是否确定要离开此群组？
 Feature.Chat.Message.MakeConnectionsToChat,在 Roblox 上结交好友，一起聊天
 Feature.Chat.Message.MakeConnectionsToParty,在 Roblox 上结交好友，一起 Party
-Feature.Chat.Message.MakeFriendsToChat,在罗布乐思结交好友即可一起聊天
 Feature.Chat.Message.MakeFriendsToParty,在 Roblox 结交好友即可一起组队游玩
 Feature.Chat.Message.MessageContentModerated,你的信息已被过滤，未能发送。
 Feature.Chat.Message.MessageUnavailable,消息不可见
@@ -3255,8 +3254,6 @@ Feature.Chat.Message.RemoveUser,是否确定将“{USERNAME}”从此群聊中�
 Feature.Chat.Message.RemoveUser.V2,是否确定将“{USERNAME}”从此群组中移除？
 Feature.Chat.Message.RemovedFromConversation,你已被移出群。
 Feature.Chat.Message.SeveralUsersTyping,多名用户正在输入...
-Feature.Chat.Message.TurnOnChat,若要与好友聊天，请在你的隐私设置中开启聊天功能
-Feature.Chat.Message.TurnOnParty,若要与好友组队，请在你的隐私设置中开启组队功能
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1}和{DISPLAY_NAME_2}正在输入...
 Feature.Chat.PresetChat.Disclaimer,快捷短语让所有年龄段的玩家都能协同游戏。
 Feature.Chat.Response.ChatNameFullyModerated,群聊名称已被过滤。
@@ -3796,6 +3793,9 @@ Feature.GameFollows.TooltipNotificationsButtonDescription,开启通知以免错�
 Feature.GameFollows.TooltipNotificationsLimitReached,已达上限。请先关闭其他体验的通知。
 Feature.GameFollows.TooltipTurnedOffNotifications,已关闭关于“{experienceName}”的通知
 Feature.GameFollows.TooltipTurnedOnNotifications,已开启关于“{experienceName}”的通知
+Feature.GameJoin.Description.DifferentServer,你们将在不同的服务器上开始游戏
+Feature.GameJoin.Label.PlayTogether,你们可以一起游玩
+Feature.GameJoin.Label.PlayTogetherSoon,你们很快就可以一起游玩了
 Feature.GamePage.Action.BackToTop,返回顶部
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -4094,6 +4094,7 @@ Feature.Moments.Description.HowToCaptureStep3,截取游戏的照片和视频
 Feature.Moments.Description.LeaveMomentsCreation,你将丢失所有更改，但仍然可以在<b>截图</b>图库中找到此截图。
 Feature.Moments.Description.NoMusicResults,未找到音乐
 Feature.Moments.Description.NonInfiniteScrollEndBody,你已到达“精彩瞬间”中的停止点。轻点下方以继续观看。
+Feature.Moments.Description.NothingHereYet,这里什么都没有...
 Feature.Moments.Description.PublishMoment,描述你的精彩瞬间
 Feature.Moments.Description.TooManyUploads,你今天上传的视频太多了。请明天再试。
 Feature.Moments.Disclaimer.EveryoneMoments,“精彩瞬间”中的每个人都可以查看已发布的内容
@@ -4884,6 +4885,7 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,此订阅无法在此设备�
 Feature.RobloxSubscription.Description.AgeCheckTrial,为表达我们的谢意，完成年龄验证即可免费使用 Roblox Plus 一周。无需提供付款方式即可享受此免费试用。
 Feature.RobloxSubscription.Description.Benefit.Customize,使用个人资料边框和 App 主题进行自定义
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具与虚拟形象九折优惠，之后享八折优惠
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,前 {trialUnlockDays} 天享道具与虚拟形象九折优惠，之后享八折优惠
 Feature.RobloxSubscription.Description.ExclusiveBenefits,以更少的 Robux 享受更多乐趣。订阅 Roblox Plus。
 Feature.RobloxSubscription.Description.JoinEarly,Plus 订阅用户提前加入
 Feature.RobloxSubscription.Description.ReferralRecipientReward,优惠仅适用于新订阅 Plus 的用户。
@@ -4900,12 +4902,14 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,游戏内道具、虚�
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{periodIndex} {periodType}之后，这些道具可享 {discountPercent}% 优惠
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,点按“继续”，即表示你同意{linkStart}《Roblox 订阅条款》{linkEnd}。
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,点按“免费试用”，即表示你同意 {linkStart}Roblox 订阅条款{linkEnd}。你的免费试用期将于 1 个月后结束，系统将每月自动向你收取费用，你可以随时取消订阅。
+Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,点按“免费试用”，即表示你同意 {linkStart}Roblox 订阅条款。{linkEnd}你的免费试用期将于 {trialDuration}{trialPeriodLabel}后结束，系统将每{billingPeriodLabel}自动向你收取费用。你可以随时取消订阅。
 Feature.RobloxSubscription.Label.FreeTrialText,获取免费试用
 Feature.RobloxSubscription.Label.PendingRobux,待发放 Robux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,你推荐的人获得
 Feature.RobloxSubscription.Label.ReferralYouGet,你将获得
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}免费试用 1 个月，{boldEnd}之后每{periodType} {price}
+Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration} {trialPeriodLabel}免费试用，{boldEnd}之后每{periodType} {price}
 Feature.RobloxSubscription.Label.RobuxEarned,已赚取的 Robux
 Feature.RobloxSubscription.Label.SuccessfulReferrals,成功推荐
 Feature.RobloxSubscription.Label.month,个月
@@ -4917,6 +4921,8 @@ Feature.RobloxSubscription.Title.GetBlackbird,获取 Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus 在这里不可用
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,你可以比其他人更早加入活动。
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Plus 订阅用户抢先体验
+Feature.RobloxSubscription.label.week,周
+Feature.RobloxSubscription.label.weeks,
 Feature.SafetyDashboard.Heading.AccountStatus.V2,帐户状态、违规和申诉
 Feature.Schools.Action.AlreadyGraduated,我已经毕业了
 Feature.Schools.Action.CantFindSchool,找不到你的学校？
@@ -5283,6 +5289,14 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox 已暂停你游玩此游戏 {number} 小时
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox 已暂停你游玩此游戏 1 分钟
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox 已暂停你游玩此游戏 {number} 分钟
+Feature.UniversalShareSheet.Action.CopiedLink,
+Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,分享信息
+Feature.UniversalShareSheet.Response.NotSharedMessage,信息无法发送
+Feature.UniversalShareSheet.Response.NotSharedMultipleMessages,
+Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE}和另外 1 人
+Feature.UniversalShareSheet.Response.SharedMessage,信息已发送
+Feature.UniversalShareSheet.Response.SharedMultipleMessages,
+Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE}和另外 {N} 人
 Feature.VerificationUpsell.Action.AddPhone,添加手机
 Feature.VerificationUpsell.Action.AddPhoneVoice,添加手机号码，以使用语音聊天
 Feature.VerificationUpsell.Action.ChangeEmail,更改电子邮件地址

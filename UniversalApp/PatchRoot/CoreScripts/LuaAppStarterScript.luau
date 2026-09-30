@@ -2,10 +2,10 @@
 local debugInfo = debug.info(1, "s")
 
 if debugInfo and type(debugInfo) == "string" then
-	_G.LUAUFORGE_SENTRY_DEBUG_IDS[debugInfo] = "3cbc27f1-415e-5264-bad7-f2b30e40c0aa"
+	_G.LUAUFORGE_SENTRY_DEBUG_IDS[debugInfo] = "2f8270c2-4143-5a1a-bcbf-683c30125946"
 end
 local _ = _G.LUAUFORGE_SENTRY_DEBUG_IDS
-_G.IS_PRODUCTION = true
+_G.ENVIRONMENT = "PRODUCTION"
 _ = "apps/UniversalApp/build/app/bootstrap.luau"
 local t = nil
 t = {

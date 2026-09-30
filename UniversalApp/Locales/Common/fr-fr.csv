@@ -450,6 +450,7 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Réapparaître
 Authentication.SignUp.Action.SetupLater,Configurer plus tard
 Authentication.SignUp.Action.StartOver,Recommencer
+Authentication.SignUp.Action.StartPlay,Jouer
 Authentication.SignUp.Action.UseEmail,Utiliser une adresse e-mail
 Authentication.SignUp.Action.UsePhoneNumber,Utiliser un numéro de téléphone
 Authentication.SignUp.Button.OKCaptialized,
@@ -497,6 +498,7 @@ Authentication.SignUp.Header.CreatePassword,"Salut {username}, crée un mot de p
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"Salut {username}, crée un mot de passe ou un passkey"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,Nous avons créé ton compte. Choisis comment tu vas te connecter.
 Authentication.SignUp.Header.GenderPage6,Une dernière chose ! Sélectionne ton sexe (facultatif)
+Authentication.SignUp.Header.OneLastThing,Une dernière chose
 Authentication.SignUp.Header.PleaseTryAgain,
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Configurer ton compte Roblox
 Authentication.SignUp.Header.UsernamePage4,"Ensuite, créer un nom d'utilisateur"
@@ -585,6 +587,7 @@ Authentication.SignUp.Response.InvalidPhoneNumber,Numéro de téléphone non val
 Authentication.SignUp.Response.PasswordComplexity,Veuillez créer un mot de passe plus complexe.
 Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Le numéro est déjà associé à un autre compte.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Le nom d'utilisateur doit être défini en premier.
+Authentication.SignUp.Subtitle.AddYourBirthday,Ajoute ta date de naissance pour créer ton compte Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Ta progression sera enregistrée une fois la configuration terminée.
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,Approuver
@@ -1985,6 +1988,7 @@ Feature.Avatar.Label.SetAvatarCount,{itemCount} avatar
 Feature.Avatar.Label.SetLimitReachedBody,Tu peux créer jusqu'à {setLimit} ensembles. Supprimes-en un pour faire de la place.
 Feature.Avatar.Label.SetNameDuplicateBody,"Un ensemble porte déjà ce nom, choisis-en un autre"
 Feature.Avatar.Label.SetNameNotAllowedBody,Essaie d'en trouver un autre
+Feature.Avatar.Label.ShareAvatarToMoments,Partager ton avatar sur Moments
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,Poster des avatars sur le Marketplace
 Feature.Avatar.Label.Shirt,Chemise
 Feature.Avatar.Label.ShirtClassic,Chemise classique
@@ -2564,7 +2568,6 @@ Feature.Build.Label.World,
 Feature.Build.Message.AccountRequirements,Ton compte ne répond pas aux exigences pour utiliser la fonctionnalité Construire.
 Feature.Build.Message.AccountTooNew,Ton compte est trop récent pour publier. Réessaye lorsqu'il aura 2 jours.
 Feature.Build.Message.AdCampaignCreateFailed,Impossible de créer ta campagne. Réessaie.
-Feature.Build.Message.AdCampaignCreated,Campagne publicitaire créée
 Feature.Build.Message.AdPerformanceLoadFailed,Impossible de charger les performances de l'annonce
 Feature.Build.Message.AdsPromotionBannerSubtitle,Élargis ton audience gratuitement
 Feature.Build.Message.AdsPromotionBannerTitle,Il te reste {promotionCount} promotions gratuites
@@ -2655,6 +2658,7 @@ Feature.Build.Notification.Title.NeedInput,Construire a besoin de ton avis
 Feature.Build.Placeholder.DescribeProduct,Décris ce que tu veux vendre
 Feature.Build.Placeholder.DescribeProductUpdate,Décris une mise à jour
 Feature.Build.Prompt.CreateDeveloperProduct,"Aide-moi à créer un produit développeur, à l'intégrer au jeu, à vérifier et à publier les modifications, et à le rendre disponible à l'achat."
+Feature.Build.Title.AdActive,La campagne publicitaire est active
 Feature.Build.Title.AdCampaignDuration,Campagne publicitaire de {durationDays} jours
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} jours
 Feature.Build.Title.AdComplete,Annonce terminée
@@ -3242,7 +3246,6 @@ Feature.Chat.Message.LeaveGroup,Vous ne pourrez plus continuer à discuter avec 
 Feature.Chat.Message.LeaveGroup.V2,Veux-tu vraiment quitter le groupe ?
 Feature.Chat.Message.MakeConnectionsToChat,Fais-toi des amis sur Roblox pour discuter avec eux
 Feature.Chat.Message.MakeConnectionsToParty,Fais-toi des amis sur Roblox et retrouve-les au cours d'une Party
-Feature.Chat.Message.MakeFriendsToChat,Fais-toi des amis sur Roblox pour commencer à bavarder ensemble
 Feature.Chat.Message.MakeFriendsToParty,Fais-toi des amis sur Roblox et retrouver vous sur Party
 Feature.Chat.Message.MessageContentModerated,Ton message a été modéré et n'a pas été envoyé.
 Feature.Chat.Message.MessageUnavailable,Message indisponible
@@ -3253,8 +3256,6 @@ Feature.Chat.Message.RemoveUser,Voulez-vous vraiment retirer {USERNAME} de ce gr
 Feature.Chat.Message.RemoveUser.V2,Veux-tu vraiment retirer {USERNAME} de ce groupe ?
 Feature.Chat.Message.RemovedFromConversation,Vous avez été retiré(e) du groupe.
 Feature.Chat.Message.SeveralUsersTyping,Plusieurs utilisateurs sont en train de taper...
-Feature.Chat.Message.TurnOnChat,"Pour discuter avec vos amis, activez le chat dans vos paramètres de confidentialité."
-Feature.Chat.Message.TurnOnParty,"Pour rejoindre la Party avec des amis, active l'option Party dans tes paramètres de confidentialité."
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} et {DISPLAY_NAME_2} sont en train de taper...
 Feature.Chat.PresetChat.Disclaimer,Les mots rapides permettent aux joueurs de tous âges de coordonner la partie.
 Feature.Chat.Response.ChatNameFullyModerated,Le nom du groupe de chat a été modéré.
@@ -3794,6 +3795,9 @@ Feature.GameFollows.TooltipNotificationsButtonDescription,Active les notificatio
 Feature.GameFollows.TooltipNotificationsLimitReached,Limite atteinte. Commencez par désactiver les notifications pour les autres expériences.
 Feature.GameFollows.TooltipTurnedOffNotifications,Notifications désactivées pour {experienceName}
 Feature.GameFollows.TooltipTurnedOnNotifications,Notifications activées pour {experienceName}
+Feature.GameJoin.Description.DifferentServer,Tu commenceras sur un autre serveur
+Feature.GameJoin.Label.PlayTogether,Vous pouvez jouer ensemble
+Feature.GameJoin.Label.PlayTogetherSoon,Vous pourrez bientôt jouer ensemble
 Feature.GamePage.Action.BackToTop,Haut de la page
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,Sponsorisés
@@ -4028,7 +4032,7 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} secondes
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 seconde
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Tu confirmes vouloir supprimer définitivement cet item de ton inventaire ? Si tu changes d'avis, tu devras l'obtenir à nouveau dans une expérience."
 Feature.Item.Label.DeleteItemUndercase,Supprimer l'item
-Feature.Landing.Action.PlayNow,Jouer
+Feature.Landing.Action.PlayNow,
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,"En continuant, tu acceptes nos {startTermsTag}Conditions{endTermsTag}, y compris la clause d'arbitrage, et reconnais avoir pris connaissance de notre {startPrivacyTag}Politique de confidentialité{endPrivacyTag}. Si tu as moins de 18 ans, ton parent ou tuteur légal doit autoriser ton compte et accepter nos Conditions."
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,Langue inappropriée
@@ -4093,6 +4097,7 @@ Feature.Moments.Description.HowToCaptureStep3,Capture des photos et des vidéos 
 Feature.Moments.Description.LeaveMomentsCreation,"Tu perdras tous tes changements, mais tu pourras toujours retrouver cette capture dans ta galerie de <b>captures</b>."
 Feature.Moments.Description.NoMusicResults,Aucune musique trouvée
 Feature.Moments.Description.NonInfiniteScrollEndBody,Tu as atteint la fin des Moments. Touche ci-dessous pour continuer à regarder.
+Feature.Moments.Description.NothingHereYet,Rien ici pour l'instant…
 Feature.Moments.Description.PublishMoment,Décris ton Moment
 Feature.Moments.Description.TooManyUploads,Tu as téléchargé trop de vidéos aujourd'hui. Réessaie demain.
 Feature.Moments.Disclaimer.EveryoneMoments,Tous les participants aux Moments peuvent voir ce qui est publié
@@ -4893,12 +4898,14 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,"-{discountPercent} %
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{discountPercent} % de réduction sur ces items après {periodIndex} {periodType}
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"En cliquant sur « Continuer », tu acceptes les {linkStart}Conditions d'abonnement de Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"En cliquant sur « Essayer gratuitement », tu acceptes les {linkStart}Conditions de l'abonnement de Roblox{linkEnd}. Ton essai gratuit se terminera dans un mois. L'abonnement est facturé automatiquement chaque mois, mais tu peux l'annuler à tout moment."
+Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"En cliquant sur « Essayer gratuitement », tu acceptes les {linkStart}Conditions de l'abonnement de Roblox{linkEnd}. Ton essai gratuit se termine dans {trialDuration} {trialPeriodLabel}. L'abonnement est facturé automatiquement par période de {billingPeriodLabel}. Tu peux l'annuler à tout moment."
 Feature.RobloxSubscription.Label.FreeTrialText,Obtenir un essai gratuit
 Feature.RobloxSubscription.Label.PendingRobux,Robux en attente
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Tes parrainages te donnent
 Feature.RobloxSubscription.Label.ReferralYouGet,Reçois
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 mois gratuit{boldEnd}, puis {price}/{periodType}"
+Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} gratuitement,{boldEnd} puis {price}/{periodType}"
 Feature.RobloxSubscription.Label.RobuxEarned,Robux gagnés
 Feature.RobloxSubscription.Label.SuccessfulReferrals,Parrainages réussis
 Feature.RobloxSubscription.Label.month,mois
@@ -4910,6 +4917,8 @@ Feature.RobloxSubscription.Title.GetBlackbird,
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus n'est pas disponible ici
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Prend part à cet événement avant tout le monde.
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Accès anticipé avec Plus
+Feature.RobloxSubscription.label.week,semaine
+Feature.RobloxSubscription.label.weeks,semaines
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Statut du compte, violations et appels"
 Feature.Schools.Action.AlreadyGraduated,J'ai déjà obtenu mon diplôme
 Feature.Schools.Action.CantFindSchool,Tu ne trouves pas ton école ?
@@ -5275,6 +5284,14 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox a suspendu ton accès à cette expérience pour {number} heures
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox a suspendu ton accès à cette expérience pour 1 minute
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox a suspendu ton accès à cette expérience pour {number} minutes
+Feature.UniversalShareSheet.Action.CopiedLink,
+Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,Partager un message
+Feature.UniversalShareSheet.Response.NotSharedMessage,Impossible d'envoyer le message
+Feature.UniversalShareSheet.Response.NotSharedMultipleMessages,Impossible d'envoyer les messages
+Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 autre
+Feature.UniversalShareSheet.Response.SharedMessage,Le message a bien été envoyé
+Feature.UniversalShareSheet.Response.SharedMultipleMessages,Les messages ont bien été envoyés
+Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} autres
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Ajouter un téléphone pour le chat vocal
 Feature.VerificationUpsell.Action.ChangeEmail,Changer d'email
