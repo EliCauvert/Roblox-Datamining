@@ -903,7 +903,6 @@ CommonUI.Features.Label.AdjustScreen,Sesuaikan Layar
 CommonUI.Features.Label.AppInformation,Informasi aplikasi
 CommonUI.Features.Label.Avatar,Avatar
 CommonUI.Features.Label.Badges,Lencana
-CommonUI.Features.Label.Blog,Blog
 CommonUI.Features.Label.Careers,Karier
 CommonUI.Features.Label.Catalog,Marketplace
 CommonUI.Features.Label.ChannelWithChannelName,Channel: {channelName}

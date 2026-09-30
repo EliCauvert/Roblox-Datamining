@@ -506,7 +506,6 @@ CommonUI.Features.Label.AdjustScreen,Настройка экрана
 CommonUI.Features.Label.AppInformation,Информация о приложении
 CommonUI.Features.Label.Avatar,Аватар
 CommonUI.Features.Label.Badges,Значки
-CommonUI.Features.Label.Blog,Блог
 CommonUI.Features.Label.Careers,Вакансии
 CommonUI.Features.Label.Catalog,Каталог Roblox
 CommonUI.Features.Label.ChannelWithChannelName,Канал: {channelName}

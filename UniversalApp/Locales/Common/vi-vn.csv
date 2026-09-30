@@ -903,7 +903,6 @@ CommonUI.Features.Label.AdjustScreen,Điều chỉnh màn hình
 CommonUI.Features.Label.AppInformation,Thông tin ứng dụng
 CommonUI.Features.Label.Avatar,Avatar
 CommonUI.Features.Label.Badges,Huy hiệu
-CommonUI.Features.Label.Blog,Blog
 CommonUI.Features.Label.Careers,Tuyển dụng
 CommonUI.Features.Label.Catalog,Danh Mục Roblox
 CommonUI.Features.Label.ChannelWithChannelName,Kênh: {channelName}

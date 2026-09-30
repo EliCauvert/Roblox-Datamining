@@ -886,7 +886,6 @@ CommonUI.Features.Label.AdjustScreen,调整屏幕
 CommonUI.Features.Label.AppInformation,应用信息
 CommonUI.Features.Label.Avatar,虚拟形象
 CommonUI.Features.Label.Badges,徽章
-CommonUI.Features.Label.Blog,博客
 CommonUI.Features.Label.Careers,职位
 CommonUI.Features.Label.Catalog,Roblox 商店
 CommonUI.Features.Label.ChannelWithChannelName,频道：{channelName}

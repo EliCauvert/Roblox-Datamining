@@ -903,7 +903,6 @@ CommonUI.Features.Label.AdjustScreen,Bildschirm anpassen
 CommonUI.Features.Label.AppInformation,App-Informationen
 CommonUI.Features.Label.Avatar,Avatar
 CommonUI.Features.Label.Badges,Abzeichen
-CommonUI.Features.Label.Blog,Blog
 CommonUI.Features.Label.Careers,Jobs
 CommonUI.Features.Label.Catalog,Roblox-Katalog
 CommonUI.Features.Label.ChannelWithChannelName,Kanal: {channelName}

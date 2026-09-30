@@ -886,7 +886,6 @@ CommonUI.Features.Label.AdjustScreen,ปรับหน้าจอ
 CommonUI.Features.Label.AppInformation,ข้อมูลแอป
 CommonUI.Features.Label.Avatar,อวาตาร์
 CommonUI.Features.Label.Badges,เหรียญตรา
-CommonUI.Features.Label.Blog,บล็อก
 CommonUI.Features.Label.Careers,เส้นทางอาชีพ
 CommonUI.Features.Label.Catalog,แค็ตตาล็อก Roblox
 CommonUI.Features.Label.ChannelWithChannelName,แชนเนล: {channelName}

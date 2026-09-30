@@ -887,7 +887,6 @@ CommonUI.Features.Label.AdjustScreen,Scherm aanpassen
 CommonUI.Features.Label.AppInformation,App-informatie
 CommonUI.Features.Label.Avatar,Avatar
 CommonUI.Features.Label.Badges,Badges
-CommonUI.Features.Label.Blog,Blog
 CommonUI.Features.Label.Careers,Vacatures
 CommonUI.Features.Label.Catalog,Roblox-catalogus
 CommonUI.Features.Label.ChannelWithChannelName,Kanaal: {channelName}

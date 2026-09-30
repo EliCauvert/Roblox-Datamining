@@ -885,7 +885,6 @@ CommonUI.Features.Label.AdjustScreen,ضبط الشاشة
 CommonUI.Features.Label.AppInformation,معلومات التطبيق
 CommonUI.Features.Label.Avatar,الأفاتار
 CommonUI.Features.Label.Badges,شارات
-CommonUI.Features.Label.Blog,المدونة
 CommonUI.Features.Label.Careers,الوظائف
 CommonUI.Features.Label.Catalog,كتالوج Roblox
 CommonUI.Features.Label.ChannelWithChannelName,القناة: {channelName}

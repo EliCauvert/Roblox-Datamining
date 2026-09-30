@@ -904,7 +904,6 @@ CommonUI.Features.Label.AdjustScreen,화면 조정
 CommonUI.Features.Label.AppInformation,앱 정보
 CommonUI.Features.Label.Avatar,아바타
 CommonUI.Features.Label.Badges,배지
-CommonUI.Features.Label.Blog,블로그
 CommonUI.Features.Label.Careers,인재 채용
 CommonUI.Features.Label.Catalog,Roblox 카탈로그
 CommonUI.Features.Label.ChannelWithChannelName,채널: {channelName}

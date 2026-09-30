@@ -903,7 +903,6 @@ CommonUI.Features.Label.AdjustScreen,スクリーンを調整
 CommonUI.Features.Label.AppInformation,アプリ情報
 CommonUI.Features.Label.Avatar,アバター
 CommonUI.Features.Label.Badges,バッジ
-CommonUI.Features.Label.Blog,ブログ
 CommonUI.Features.Label.Careers,採用情報
 CommonUI.Features.Label.Catalog,Robloxカタログ
 CommonUI.Features.Label.ChannelWithChannelName,チャンネル: {channelName}

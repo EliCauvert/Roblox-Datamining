@@ -887,7 +887,6 @@ CommonUI.Features.Label.AdjustScreen,Regola schermo
 CommonUI.Features.Label.AppInformation,Informazioni sull'app
 CommonUI.Features.Label.Avatar,Avatar
 CommonUI.Features.Label.Badges,Contrassegni
-CommonUI.Features.Label.Blog,Blog
 CommonUI.Features.Label.Careers,Lavora con noi
 CommonUI.Features.Label.Catalog,Catalogo Roblox
 CommonUI.Features.Label.ChannelWithChannelName,Canale: {channelName}

@@ -903,7 +903,6 @@ CommonUI.Features.Label.AdjustScreen,Ekranı Ayarla
 CommonUI.Features.Label.AppInformation,Uygulama bilgileri
 CommonUI.Features.Label.Avatar,Avatar
 CommonUI.Features.Label.Badges,Rozetler
-CommonUI.Features.Label.Blog,Blog
 CommonUI.Features.Label.Careers,Kariyer Olanakları
 CommonUI.Features.Label.Catalog,Roblox Kataloğu
 CommonUI.Features.Label.ChannelWithChannelName,Kanal: {channelName}
