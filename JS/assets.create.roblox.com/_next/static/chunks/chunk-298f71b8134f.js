@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "4ab72377-8c7d-3923-c418-5cda6e801aca")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "4137694f-5345-8ddd-19c7-a8f4c67f7740")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 428993, e => {
@@ -62,7 +62,7 @@
         o = (0, t.defineFlag)({
             namespace: "financial-platform",
             name: "taxFormDeliveryConsentRolloutPercentage",
-            defaultValue: 1
+            defaultValue: 100
         });
     e.s(["isTaxDocumentationOpenToDevexEligible", 0, i, "isTaxFormDeliveryConsentEnabled", 0, a, "taxFormDeliveryConsentRolloutPercentage", 0, o], 426173)
 }, 137521, e => {
@@ -1555,5 +1555,5 @@
     }])
 }]);
 
-//# debugId=4ab72377-8c7d-3923-c418-5cda6e801aca
-//# sourceMappingURL=3e31brnxi-ewm.js.map
+//# debugId=4137694f-5345-8ddd-19c7-a8f4c67f7740
+//# sourceMappingURL=2fslqifvhq-zm.js.map

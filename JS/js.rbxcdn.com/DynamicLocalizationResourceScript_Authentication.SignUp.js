@@ -261,6 +261,10 @@ Roblox.LangDynamic["Authentication.SignUp"] = {
     "Description.BirthdayHint": "Enter date",
     "Heading.PlayCreateConnect": "Play, create, and connect with millions of players.",
     "Label.AddPassword": "Add password",
-    "Description.CreateAccountAgreement": "By creating an account, you agree to our Terms, including arbitration, and acknowledge our Privacy Policy. If you’re under 18, your parent or guardian must permit your account and agree to our Terms."
+    "Description.CreateAccountAgreement": "By creating an account, you agree to our Terms, including arbitration, and acknowledge our Privacy Policy. If you’re under 18, your parent or guardian must permit your account and agree to our Terms.",
+    "Header.OneLastThing": "One last thing",
+    "Subtitle.AddYourBirthday": "Add your birthday to create your Roblox account.",
+    "Action.StartPlay": "Start play",
+    "Response.PasswordTooSimilarToUsername": "Password shouldn't be too similar to your username."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Authentication.SignUp");

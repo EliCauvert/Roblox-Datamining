@@ -135,7 +135,7 @@ Roblox.LangDynamic["Feature.Transactions"] = {
     "Label.LicensingPaymentClawback": "Licensing Payment Clawback",
     "Label.Loading": "Loading...",
     "Label.Licensed": "Licensed",
-    "Label.LicensedTooltip": "This experience is licensed and a percentage of its revenue amount goes towards a licensing fee.",
+    "Label.LicensedTooltip": "A percentage of revenue goes to a licensing fee.",
     "Description.CreatorRewards": "Creator rewards for universe {item}",
     "Description.PurchasePayout": "Purchase Payout",
     "Message.MyTransactionsPageDisabled": "Due to high demand, the transactions page is currently unavailable. Please try again later.",
@@ -183,6 +183,6 @@ Roblox.LangDynamic["Feature.Transactions"] = {
     "Label.ReferralPayouts": "Referral Payouts",
     "Description.ReferralPayout": "Plus Referral Payout",
     "Description.PendingRobuxReferralPayout": "These Robux are pending and will be released in 21 days.",
-    "Label.LicensedMarketplaceTooltip": "This item is licensed, and a percentage of its sales revenue goes toward a licensing fee."
+    "Label.LicensedMarketplaceTooltip": "A percentage of revenue goes to a licensing fee."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Transactions");

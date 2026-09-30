@@ -174,7 +174,7 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Description.Benefit.Customize": "Customize with profile frames and app themes",
     "Label.ReferralRewardRobux": "{amount} Robux",
     "Heading.ReferralShare": "Share Plus, get",
-    "Description.ReferralShare": "Invite someone to Plus and you both get {amount} Robux when they buy plus.",
+    "Description.ReferralShare": "Invite someone to Plus and you both get {amount} Robux when they buy Plus.",
     "Description.ReferralReferrerReward": "When anyone buys Plus with your link.",
     "Label.ReferralYouGet": "You get",
     "Description.ReferralRecipientReward": "Offer valid for new Plus subscribers only.",

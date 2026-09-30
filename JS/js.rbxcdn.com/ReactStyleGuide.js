@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "e3e47aae6dc8dfa84cfd06572766495a0b6ae0a0"
+            id: "5690ea7bf840f017788de8e800bea68dcf38055e"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "aef5c2b9-f6d1-42c3-abe2-0a50006e7074", e._sentryDebugIdIdentifier = "sentry-dbid-aef5c2b9-f6d1-42c3-abe2-0a50006e7074")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "bfaeaaeb-370f-4563-ab30-e36cb1a88c59", e._sentryDebugIdIdentifier = "sentry-dbid-bfaeaaeb-370f-4563-ab30-e36cb1a88c59")
     } catch (e) {}
 }(),
 function() {
@@ -21621,7 +21621,7 @@ function() {
             try {
                 ! function() {
                     var e, t, n, r = null == (n = (0, eJ.authenticatedUser)()) || null == (t = n.id) ? void 0 : t.toString();
-                    if (null != r) {
+                    if (null != r && (0, eJ.isBlackbirdUser)()) {
                         var o = null != (e = lx("classic-theme-variant")) ? e : {
                             version: 0,
                             data: []
@@ -21664,4 +21664,4 @@ function() {
             } catch (e) {}
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("ReactStyleGuide");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/reactStyleGuide-235d6b5ee6970e8e.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/reactStyleGuide-13a0772a53a910a2.js.map

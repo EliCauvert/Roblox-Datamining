@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "7e38bd66-e92d-9480-d515-8795d4658340")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "6e97f71b-87b6-9a5e-7d66-a2fbef8bff2b")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 790806, e => {
@@ -184,7 +184,7 @@
         AssetModerated: "Label.FilterOptionAssetModerated"
     }, "GroupMembersMenuState", () => g, "GroupNameChangeCost", 0, 100, "GroupSocialLinkTypesPatternMap", 0, l, "GroupSocialLinkTypesToNameMap", 0, u, "InviteQueryKey", 0, "invitationGroupId", "MaximumRoles", 0, 99, "MembersPageSize", 0, 10, "MigratedGroupStatus", 0, "Migrated", "NewGroupPrice", 0, 100, "RoleColorTypeToHexMap", 0, d, "SocialLinksLimit", 0, 3, "SupportedRoleColorTypes", 0, p, "THIRTY_DAYS", 0, 2592e6, "getEndOfDay", 0, function(e) {
         return new Date(e.getFullYear(), e.getMonth(), e.getDate(), 23, 59, 59, 999)
-    }, "noResultsIconPath", 0, "".concat("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/assets", "/group/no_results.svg"), "universeEvents", 0, y])
+    }, "noResultsIconPath", 0, "".concat("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/assets", "/group/no_results.svg"), "universeEvents", 0, y])
 }, 270384, e => {
     "use strict";
     var t = e.i(690569),
@@ -806,5 +806,5 @@
     e.s(["QueryClient", 0, _], 387125)
 }]);
 
-//# debugId=7e38bd66-e92d-9480-d515-8795d4658340
-//# sourceMappingURL=3eonnzft0qnwq.js.map
+//# debugId=6e97f71b-87b6-9a5e-7d66-a2fbef8bff2b
+//# sourceMappingURL=3oc65pc1vuv9o.js.map

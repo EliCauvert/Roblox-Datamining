@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "7a69159f-3eda-ec8a-c885-5aa1b6e01685")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "5a4cfb56-d055-603f-7f66-025d68b9b4d4")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 138726, e => {
@@ -227,7 +227,7 @@
         r = "https://advertise.".concat("roblox.com"),
         i = e => "".concat(n, "/groups/").concat(e),
         o = e => "".concat(n, "/users/").concat(e, "/profile");
-    e.s(["AdsManagerUrl", 0, r, "BUY_ROBUX_CTX_CREATOR_HUB", 0, "creatorhub", "getAccountSecurityUrl", 0, () => "".concat(n, "/my/account#!/security"), "getAccountSettingsUrl", 0, () => "".concat(n, "/my/account#!/info"), "getAdvertiseAssetUrl", 0, e => "".concat(r, "?targetId=").concat(e, "&targetType=Asset"), "getAdvertisePassUrl", 0, e => "".concat(r, "?targetId=").concat(e, "&targetType=GamePass"), "getAppealsPortalUrl", 0, () => "".concat(n, "/report-appeals#"), "getBadgeUrl", 0, e => "".concat(n, "/badges/").concat(e), "getBundleUrl", 0, e => "".concat(n, "/bundles/").concat(e), "getBuyRobuxUrl", 0, e => "".concat(n, "/upgrades/robux?ctx=").concat(encodeURIComponent(e)), "getCatalogUrl", 0, e => "".concat(n, "/catalog/").concat(e), "getConfigureGroupRevenueSalesUrl", 0, e => "".concat(n, "/groups/configure?id=").concat(e, "#!/revenue/sales"), "getConfigureGroupRolesUrl", 0, e => "".concat(n, "/groups/configure?id=").concat(e, "#!/roles"), "getCreatorUrl", 0, (e, n) => e === t.default.Group ? i(n) : o(n), "getEventUrl", 0, e => "".concat(n, "/events/").concat(e), "getFriendsUrl", 0, e => "".concat(n, "/users/").concat(e, "/friends#!/friends"), "getGameDetailsUrl", 0, e => "".concat(n, "/games/").concat(e), "getGamePassUrl", 0, e => "".concat(n, "/game-pass/").concat(e), "getGroupUrl", 0, i, "getHomeUrl", 0, () => "".concat(n, "/home"), "getLegacyGroupTransactionsUrl", 0, e => "".concat(n, "/groups/configure?id=").concat(e, "#!/revenue/sales"), "getLegacyTransactionsUrl", 0, () => "".concat(n, "/transactions"), "getLookUrl", 0, e => "".concat(n, "/looks/").concat(e), "getSponsorAvatarItemsUrl", 0, () => "".concat(n, "/sponsorships/list#!/avatar-items"), "getSponsorExperienceCreateUrl", 0, e => "".concat(r, "/create?universeId=").concat(e), "getSponsorExperienceUrl", 0, e => "".concat(r, "?universeId=").concat(e), "getSupportFormUrl", 0, () => "".concat(n, "/support"), "getTermsUrl", 0, () => "".concat(n, "/info/terms"), "getTransactionsUrl", 0, () => "".concat(n, "/transactions"), "getUrl", 0, () => n, "getUserUrl", 0, o])
+    e.s(["AdsManagerUrl", 0, r, "BUY_ROBUX_CTX_CREATOR_HUB", 0, "creatorhub", "getAccountSecurityUrl", 0, () => "".concat(n, "/my/account#!/security"), "getAccountSettingsUrl", 0, () => "".concat(n, "/my/account#!/info"), "getAdvertiseAssetUrl", 0, e => "".concat(r, "?targetId=").concat(e, "&targetType=Asset"), "getAdvertisePassUrl", 0, e => "".concat(r, "?targetId=").concat(e, "&targetType=GamePass"), "getAppealsPortalUrl", 0, () => "".concat(n, "/report-appeals#"), "getBadgeUrl", 0, e => "".concat(n, "/badges/").concat(e), "getBundleUrl", 0, e => "".concat(n, "/bundles/").concat(e), "getBuyRobuxUrl", 0, e => "".concat(n, "/upgrades/robux?ctx=").concat(encodeURIComponent(e)), "getCatalogUrl", 0, e => "".concat(n, "/catalog/").concat(e), "getCommunitiesUrl", 0, e => "".concat(n, "/communities/").concat(e), "getConfigureGroupRevenueSalesUrl", 0, e => "".concat(n, "/groups/configure?id=").concat(e, "#!/revenue/sales"), "getConfigureGroupRolesUrl", 0, e => "".concat(n, "/groups/configure?id=").concat(e, "#!/roles"), "getCreatorUrl", 0, (e, n) => e === t.default.Group ? i(n) : o(n), "getEventUrl", 0, e => "".concat(n, "/events/").concat(e), "getFriendsUrl", 0, e => "".concat(n, "/users/").concat(e, "/friends#!/friends"), "getGameDetailsUrl", 0, e => "".concat(n, "/games/").concat(e), "getGamePassUrl", 0, e => "".concat(n, "/game-pass/").concat(e), "getGroupUrl", 0, i, "getHomeUrl", 0, () => "".concat(n, "/home"), "getLegacyGroupTransactionsUrl", 0, e => "".concat(n, "/groups/configure?id=").concat(e, "#!/revenue/sales"), "getLegacyTransactionsUrl", 0, () => "".concat(n, "/transactions"), "getLookUrl", 0, e => "".concat(n, "/looks/").concat(e), "getSponsorAvatarItemsUrl", 0, () => "".concat(n, "/sponsorships/list#!/avatar-items"), "getSponsorExperienceCreateUrl", 0, e => "".concat(r, "/create?universeId=").concat(e), "getSponsorExperienceUrl", 0, e => "".concat(r, "?universeId=").concat(e), "getSupportFormUrl", 0, () => "".concat(n, "/support"), "getTermsUrl", 0, () => "".concat(n, "/info/terms"), "getTransactionsUrl", 0, () => "".concat(n, "/transactions"), "getUrl", 0, () => n, "getUserUrl", 0, o])
 }, 982690, e => {
     "use strict";
     var t = e.i(851439);
@@ -678,13 +678,13 @@
             this.url = e, this.frameRemoveDelay = r, this.maxUrlLength = i, [this.debouncedFlush] = (0, c.debounce)(() => this.flush(), n)
         }
     }
-    let C = d.Locale.English;
-    class S {
+    let S = d.Locale.English;
+    class C {
         getStudioConfiguration() {
             var e;
             if (!b() || !(null == (e = window.rbx) ? void 0 : e.messageBus)) throw new m(h.WEBVIEW_NOT_INITIALIZED);
             let t = window.rbx.studio;
-            return Object.values(d.Locale).includes(t.locale) || (console.warn("Locale: ".concat(t.locale, " is not valid. Defaulting to ").concat(C, ".")), t.locale = C), Object.values(p).includes(t.theme) || (console.warn("Theme: ".concat(t.theme, " is not valid. Defaulting to ").concat(w, ".")), t.theme = w), t
+            return Object.values(d.Locale).includes(t.locale) || (console.warn("Locale: ".concat(t.locale, " is not valid. Defaulting to ").concat(S, ".")), t.locale = S), Object.values(p).includes(t.theme) || (console.warn("Theme: ".concat(t.theme, " is not valid. Defaulting to ").concat(w, ".")), t.theme = w), t
         }
         getOrCreateEventListenersMap(e) {
             let t = e.events;
@@ -817,7 +817,7 @@
             (0, u._)(this, "namespace", void 0), this.namespace = e.namespace
         }
     }
-    var T = ((a = {}).changeTheme = "internal:changeTheme", a.changeVolume = "internal:changeVolume", a.init = "internal:init", a.deprecatedSendAnalyticsCounterEvent = "sendAnalyticsCounterEvent", a.deprecatedSendAnalyticsEvent = "sendAnalyticsEvent", a);
+    var T = ((a = {}).changeTheme = "internal:changeTheme", a.changeVolume = "internal:changeVolume", a.hideSnackbar = "internal:hideSnackbar", a.init = "internal:init", a.showSnackbar = "internal:showSnackbar", a.deprecatedSendAnalyticsCounterEvent = "sendAnalyticsCounterEvent", a.deprecatedSendAnalyticsEvent = "sendAnalyticsEvent", a);
 
     function L(e, t) {
         let n = e.getElementsByTagName("video"),
@@ -837,18 +837,18 @@
             var e, t, n;
             (null == (e = window.rbx) ? void 0 : e.postMessage) && !M && (M = !0, null == (n = window.rbx) || null == (t = n.postMessage) || t.call(n, "loadprogress", "afterInteractive"))
         },
-        _ = () => {
+        k = () => {
             "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", U, {
                 once: !0
             }) : U()
         };
-    (null == (t = window.rbx) ? void 0 : t.postMessage) && (null == (r = window.rbx) || null == (n = r.postMessage) || n.call(r, "loadprogress", "beforeInteractive"), y() || _());
-    let k = [],
+    (null == (t = window.rbx) ? void 0 : t.postMessage) && (null == (r = window.rbx) || null == (n = r.postMessage) || n.call(r, "loadprogress", "beforeInteractive"), y() || k());
+    let _ = [],
         A = !1;
 
     function W() {}
     let F = () => () => W;
-    e.s(["StubMessageBus", 0, class extends S {
+    e.s(["StubMessageBus", 0, class extends C {
         async initHandshake(e) {
             let {
                 capabilities: t
@@ -886,7 +886,7 @@
         let {
             children: r,
             useContextHook: i,
-            capabilities: o = k,
+            capabilities: o = _,
             isReadyToInitialize: s
         } = e, {
             isWebView: a,
@@ -934,7 +934,7 @@
             }
             return () => {}
         }, [x, b, a, h, d, v]), (0, f.useEffect)(() => {
-            !a || A || y() && !1 === s || (A = !0, _(), c({
+            !a || A || y() && !1 === s || (A = !0, k(), c({
                 capabilities: o
             }))
         }, [a, c, o, s]), f.default.createElement(f.default.Fragment, null, r)
@@ -964,7 +964,7 @@
             useSearchParams: n,
             MockMessageBus: r,
             defaultToMockWebView: i = !1
-        } = e, o = (0, f.createContext)(null), s = new S({
+        } = e, o = (0, f.createContext)(null), s = new C({
             namespace: t
         }), a = (e => {
             let {
@@ -977,17 +977,17 @@
             return function(e) {
                 let {
                     children: s
-                } = e, a = (0, f.useMemo)(() => b(), []), u = r(), [c, g] = (0, v.useSessionStorage)("mock_web_view", null), h = (0, f.useRef)(null), m = !a && (!0 === c || o), x = a || m, y = (0, f.useMemo)(() => m ? (null != h.current || (h.current = new i), h.current) : n, [m]), E = (0, f.useCallback)((e, t, n) => y.call(e, t, n), [y]), C = (0, f.useCallback)((e, t) => {
+                } = e, a = (0, f.useMemo)(() => b(), []), u = r(), [c, g] = (0, v.useSessionStorage)("mock_web_view", null), h = (0, f.useRef)(null), m = !a && (!0 === c || o), x = a || m, y = (0, f.useMemo)(() => m ? (null != h.current || (h.current = new i), h.current) : n, [m]), E = (0, f.useCallback)((e, t, n) => y.call(e, t, n), [y]), S = (0, f.useCallback)((e, t) => {
                     y.fire(e, t)
-                }, [y]), S = (0, f.useCallback)(() => y.getStudioConfiguration(), [y]), [T, L] = (0, f.useState)(null), M = (0, f.useCallback)(async e => {
+                }, [y]), C = (0, f.useCallback)(() => y.getStudioConfiguration(), [y]), [T, L] = (0, f.useState)(null), M = (0, f.useCallback)(async e => {
                     let t = await y.initHandshake(e);
                     return L(t), t
                 }, [y]), U = (0, f.useCallback)(() => {
                     y.loadWebView()
-                }, [y]), _ = (0, f.useMemo)(() => {
+                }, [y]), k = (0, f.useMemo)(() => {
                     var e;
                     return !!(null == (e = window.rbx) ? void 0 : e.studio.isPrewarm)
-                }, []), k = (0, f.useMemo)(() => {
+                }, []), _ = (0, f.useMemo)(() => {
                     var e, t;
                     let n;
                     return void 0 === (n = null == (t = window) || null == (e = t.navigator) ? void 0 : e.deviceMemory) || n >= 8
@@ -1009,24 +1009,24 @@
                     }
                 }, [a, u, g, R, V, O, B, m]);
                 let j = (0, f.useMemo)(() => {
-                        let e = x && 1 ? S().theme : w;
+                        let e = x && 1 ? C().theme : w;
                         return null != N ? N : e
-                    }, [S, x, N]),
+                    }, [C, x, N]),
                     P = (0, f.useMemo)(() => {
                         var e;
-                        let t = x && 1 ? S().locale : d.Locale.English;
+                        let t = x && 1 ? C().locale : d.Locale.English;
                         return m && null != (e = null != V ? V : I(D)) ? e : t
-                    }, [S, m, x, V, D]),
+                    }, [C, m, x, V, D]),
                     q = (0, f.useMemo)(() => ({
                         call: E,
                         currentStudioLocale: P,
                         currentStudioTheme: j,
-                        fire: C,
-                        getStudioConfiguration: S,
+                        fire: S,
+                        getStudioConfiguration: C,
                         initHandshake: M,
                         initHandshakeResponse: T,
-                        isPrewarm: _,
-                        isRecommendedSpecOrAbove: k,
+                        isPrewarm: k,
+                        isRecommendedSpecOrAbove: _,
                         isWebView: x,
                         isWebViewAvailable: x,
                         loadWebView: U,
@@ -1034,7 +1034,7 @@
                         setListener: W,
                         setStudioThemeOverride: B,
                         studioVersion: A
-                    }), [E, P, C, S, M, T, _, k, x, U, F, W, B, j, A]);
+                    }), [E, P, S, C, M, T, k, _, x, U, F, W, B, j, A]);
                 return f.default.createElement(t.Provider, {
                     value: q
                 }, s)
@@ -1059,5 +1059,5 @@
     }])
 }]);
 
-//# debugId=7a69159f-3eda-ec8a-c885-5aa1b6e01685
-//# sourceMappingURL=04dcll-dziyzx.js.map
+//# debugId=5a4cfb56-d055-603f-7f66-025d68b9b4d4
+//# sourceMappingURL=3svoxbijhlsm3.js.map

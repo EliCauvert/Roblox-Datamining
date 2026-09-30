@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "1810f541-57f7-32fa-fa75-5116bd886082")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "7a8b2c3b-6557-8ab9-3fe2-9b8fad8b58bc")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 656350, t => {
@@ -9830,8 +9830,9 @@
         lU = t.i(199972),
         lV = t.i(477797),
         lF = t.i(100022),
-        lG = t.i(494192);
-    let lW = [{
+        lG = t.i(494192),
+        lW = t.i(378089);
+    let lH = [{
         flag: lb.enhancedAntiCheatAccess,
         metadata: {
             namespace: "anti-cheat",
@@ -9881,6 +9882,15 @@
         metadata: {
             namespace: "avatar-marketplace",
             name: "isAutoPublishPreferencesEnabled",
+            defaultValue: !1,
+            valueType: "boolean",
+            contextType: "static"
+        }
+    }, {
+        flag: lw.showTaxonomyOnAvatarItemAnalyticsTab,
+        metadata: {
+            namespace: "avatar-marketplace",
+            name: "showTaxonomyOnAvatarItemAnalyticsTab",
             defaultValue: !1,
             valueType: "boolean",
             contextType: "static"
@@ -10516,6 +10526,24 @@
             contextType: "static"
         }
     }, {
+        flag: lA.enablePlayerSupportCategoryChange,
+        metadata: {
+            namespace: "creator-gameops",
+            name: "enablePlayerSupportCategoryChange",
+            defaultValue: !1,
+            valueType: "boolean",
+            contextType: "static"
+        }
+    }, {
+        flag: lA.enableEarlyTestersUserOwnedGame,
+        metadata: {
+            namespace: "creator-gameops",
+            name: "enableEarlyTestersUserOwnedGame",
+            defaultValue: !1,
+            valueType: "boolean",
+            contextType: "static"
+        }
+    }, {
         flag: lC.isUpdatedPublishingFlowEnabled,
         metadata: {
             namespace: "creator-platform",
@@ -10601,7 +10629,7 @@
         metadata: {
             namespace: "financial-platform",
             name: "taxFormDeliveryConsentRolloutPercentage",
-            defaultValue: 1,
+            defaultValue: 100,
             valueType: "number",
             contextType: "static"
         }
@@ -10774,12 +10802,30 @@
             name: "presetChatEnabled",
             defaultValue: !1,
             valueType: "boolean",
+            contextType: "universe"
+        }
+    }, {
+        flag: lW.enableTalentHubV2,
+        metadata: {
+            namespace: "talent-hub",
+            name: "enableTalentHubV2",
+            defaultValue: !1,
+            valueType: "boolean",
+            contextType: "static"
+        }
+    }, {
+        flag: lW.enableTalentHubV2M2,
+        metadata: {
+            namespace: "talent-hub",
+            name: "enableTalentHubV2M2",
+            defaultValue: !1,
+            valueType: "boolean",
             contextType: "static"
         }
     }];
-    var lH = t.i(745873);
-    let lK = null,
-        lz = (0, ly.default)(() => t.A(73576).then(t => {
+    var lK = t.i(745873);
+    let lz = null,
+        lJ = (0, ly.default)(() => t.A(73576).then(t => {
             let {
                 FloatingDraggableWidget: n
             } = t;
@@ -10790,22 +10836,22 @@
             },
             ssr: !1
         }),
-        lJ = () => {
+        lQ = () => {
             let t = (0, oc.useRouter)(),
-                n = (0, lH.useCurrentGroup)(),
+                n = (0, lK.useCurrentGroup)(),
                 [r, i] = (0, ol.useState)(!1);
             (0, ol.useEffect)(() => {
                 let t = !0;
                 return async function() {
                     try {
-                        null != lK || (lK = (0, lg.initFlags)({
+                        null != lz || (lz = (0, lg.initFlags)({
                             applicationId: "creator-dashboard",
                             baseUrl: "https://apis.roblox.com"
                         }).enableOverrides({
                             mode: "authorized-only",
                             useDefault: !0
                         }));
-                        let n = await lK;
+                        let n = await lz;
                         t && i(n)
                     } catch (n) {
                         t && i(!1)
@@ -10827,13 +10873,13 @@
                     } : {}
                 }
             }, [n, t.query]);
-            return r ? (0, v.jsx)(lz, {
-                flags: lW,
+            return r ? (0, v.jsx)(lJ, {
+                flags: lH,
                 contexts: a
             }) : null
         };
-    var lQ = t.i(911502);
-    let lX = t => {
+    var lX = t.i(911502);
+    let l$ = t => {
         let {
             providers: n,
             children: r
@@ -10843,11 +10889,11 @@
             children: i
         })
     };
-    var l$ = t.i(893949),
-        lZ = t.i(413019),
-        lY = t.i(758835),
-        l0 = t.i(823062);
-    let l1 = t => {
+    var lZ = t.i(893949),
+        lY = t.i(413019),
+        l0 = t.i(758835),
+        l1 = t.i(823062);
+    let l2 = t => {
         let {
             children: n,
             unifiedLogger: r,
@@ -10857,19 +10903,19 @@
         } = (0, oc.useRouter)(), s = (0, ol.useMemo)(() => {
             if (o) return "".concat(window.location.origin).concat(o)
         }, [o]);
-        return (0, v.jsx)(l0.UnifiedLoggerProvider, {
+        return (0, v.jsx)(l1.UnifiedLoggerProvider, {
             unifiedLogger: a,
             pageLoggerConfig: i,
             path: s,
             children: n
         })
     };
-    var l2 = t.i(681559),
-        l4 = t.i(272749),
-        l6 = t.i(252842);
-    let l3 = ["https://vitals.vercel-insights.com/v1/vitals"];
-    var l8 = t.i(120654);
-    let l5 = t => {
+    var l4 = t.i(681559),
+        l6 = t.i(272749),
+        l3 = t.i(252842);
+    let l8 = ["https://vitals.vercel-insights.com/v1/vitals"];
+    var l5 = t.i(120654);
+    let l9 = t => {
         let {
             children: n
         } = t, {
@@ -10877,10 +10923,10 @@
         } = (0, ls.useAuthentication)(), i = (0, ol.useRef)(window.aegis);
         (0, ol.useEffect)(() => {
             i.current && i.current.setConfig({
-                beforeReport: t => !(t.msg && l3.some(n => t.msg.includes(n))),
+                beforeReport: t => !(t.msg && l8.some(n => t.msg.includes(n))),
                 api: {
                     retCodeHandler(t, n, r) {
-                        let i = !(r.status === l6.StatusCodes.FORBIDDEN && r.headers.has("x-csrf-token") || r.status === l6.StatusCodes.OK || r.status === l6.StatusCodes.ACCEPTED),
+                        let i = !(r.status === l3.StatusCodes.FORBIDDEN && r.headers.has("x-csrf-token") || r.status === l3.StatusCodes.OK || r.status === l3.StatusCodes.ACCEPTED),
                             a = "unknown";
                         try {
                             let n = JSON.parse(t);
@@ -10903,16 +10949,16 @@
             captureError: () => {},
             reportEvent: () => {}
         }), [i]);
-        return (0, v.jsx)(l8.default.Provider, {
+        return (0, v.jsx)(l5.default.Provider, {
             value: a,
             children: n
         })
     };
-    var l9 = t.i(37819),
-        l7 = t.i(532045),
-        ce = t.i(881670);
-    let ct = "".concat("".concat("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/assets", "/opengraph"), "/global_og_image.png"),
-        cn = (0, ox.withTranslation)(t => {
+    var l7 = t.i(37819),
+        ce = t.i(532045),
+        ct = t.i(881670);
+    let cn = "".concat("".concat("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/assets", "/opengraph"), "/global_og_image.png"),
+        cr = (0, ox.withTranslation)(t => {
             let {
                 openGraphMetadata: {
                     title: n,
@@ -10921,8 +10967,8 @@
                 }
             } = t, {
                 translate: a
-            } = (0, ox.useTranslation)(), o = new URL(ct, "https://create.roblox.com").href, s = (0, l7.useTheme)();
-            return (0, v.jsxs)(l9.HubMeta, {
+            } = (0, ox.useTranslation)(), o = new URL(cn, "https://create.roblox.com").href, s = (0, ce.useTheme)();
+            return (0, v.jsxs)(l7.HubMeta, {
                 seoTitle: a("Label.CreatorDashboard"),
                 ogTitle: n,
                 description: r,
@@ -10959,49 +11005,49 @@
                     content: i
                 }, "og:locale")]
             })
-        }, [ce.TranslationNamespace.Features]);
-    var cr = t.i(984656),
-        ci = t.i(157310),
-        ca = t.i(75584),
-        co = t.i(182012),
-        cs = t.i(905943),
-        cu = t.i(95899),
-        cl = t.i(631226),
-        cc = t.i(659332),
-        cd = t.i(818170),
-        cf = t.i(655831),
-        ch = t.i(932471),
-        ch = ch,
-        cp = t.i(748089),
-        cv = t.i(61856),
-        cm = t.i(239523);
+        }, [ct.TranslationNamespace.Features]);
+    var ci = t.i(984656),
+        ca = t.i(157310),
+        co = t.i(75584),
+        cs = t.i(182012),
+        cu = t.i(905943),
+        cl = t.i(95899),
+        cc = t.i(631226),
+        cd = t.i(659332),
+        cf = t.i(818170),
+        ch = t.i(655831),
+        cp = t.i(932471),
+        cp = cp,
+        cv = t.i(748089),
+        cm = t.i(61856),
+        cy = t.i(239523);
     t.i(490742), t.i(925633), t.i(402171);
-    var cy = t.i(455162);
-    let cg = cf.$constructor("ZodMiniType", (t, n) => {
+    var cg = t.i(455162);
+    let cb = ch.$constructor("ZodMiniType", (t, n) => {
             if (!t._zod) throw Error("Uninitialized schema in ZodMiniType.");
-            cv.$ZodType.init(t, n), t.def = n, t.type = n.type
+            cm.$ZodType.init(t, n), t.def = n, t.type = n.type
         }, {
             get with() {
                 return this.check
             },
             set with(value) {
-                cp.own(this, "with", value)
+                cv.own(this, "with", value)
             },
             parse(t, n) {
-                return cy.parse(this, t, n, {
+                return cg.parse(this, t, n, {
                     callee: this.parse
                 })
             },
             parseAsync(t, n) {
-                return cy.parseAsync(this, t, n, {
+                return cg.parseAsync(this, t, n, {
                     callee: this.parseAsync
                 })
             },
             safeParse(t, n) {
-                return cy.safeParse(this, t, n)
+                return cg.safeParse(this, t, n)
             },
             safeParseAsync(t, n) {
-                return cy.safeParseAsync(this, t, n)
+                return cg.safeParseAsync(this, t, n)
             },
             check() {
                 for (var t, n = arguments.length, r = Array(n), i = 0; i < n; i++) r[i] = arguments[i];
@@ -11022,7 +11068,7 @@
                 })
             },
             clone(t, n) {
-                return cp.clone(this, t, n)
+                return cv.clone(this, t, n)
             },
             brand() {
                 return this
@@ -11035,109 +11081,109 @@
                 return 0 === r.length ? t(this) : t(this, ...r)
             }
         }),
-        cb = cf.$constructor("ZodMiniString", (t, n) => {
-            cv.$ZodString.init(t, n), cg.init(t, n)
+        cw = ch.$constructor("ZodMiniString", (t, n) => {
+            cm.$ZodString.init(t, n), cb.init(t, n)
         });
 
-    function cw(t) {
-        return cm._string(cb, t)
+    function cx(t) {
+        return cy._string(cw, t)
     }(t, n) => {
-        cv.$ZodStringFormat.init(t, n), cb.init(t, n)
+        cm.$ZodStringFormat.init(t, n), cw.init(t, n)
     }, (t, n) => {
-        cv.$ZodBigInt.init(t, n), cg.init(t, n)
+        cm.$ZodBigInt.init(t, n), cb.init(t, n)
     };
-    let cx = cf.$constructor("ZodMiniUnknown", (t, n) => {
-            cv.$ZodUnknown.init(t, n), cg.init(t, n)
+    let cP = ch.$constructor("ZodMiniUnknown", (t, n) => {
+            cm.$ZodUnknown.init(t, n), cb.init(t, n)
         }),
-        cP = cf.$constructor("ZodMiniArray", (t, n) => {
-            cv.$ZodArray.init(t, n), cg.init(t, n)
+        cR = ch.$constructor("ZodMiniArray", (t, n) => {
+            cm.$ZodArray.init(t, n), cb.init(t, n)
         });
 
-    function cR(t, n) {
-        return new cP({
+    function cT(t, n) {
+        return new cR({
             type: "array",
             element: t,
-            ...cp.normalizeParams(n)
+            ...cv.normalizeParams(n)
         })
     }
-    let cT = cf.$constructor("ZodMiniObject", (t, n) => {
-        cv.$ZodObject.init(t, n), cg.init(t, n), cp.installLazyProp(t, "shape", t => t._zod.def.shape, !1)
+    let cS = ch.$constructor("ZodMiniObject", (t, n) => {
+        cm.$ZodObject.init(t, n), cb.init(t, n), cv.installLazyProp(t, "shape", t => t._zod.def.shape, !1)
     });
 
-    function cS(t, n) {
-        return new cT({
+    function cE(t, n) {
+        return new cS({
             type: "object",
             shape: null != t ? t : {},
-            ...cp.normalizeParams(n)
+            ...cv.normalizeParams(n)
         })
     }
-    let cE = cf.$constructor("ZodMiniUnion", (t, n) => {
-            cv.$ZodUnion.init(t, n), cg.init(t, n)
+    let cq = ch.$constructor("ZodMiniUnion", (t, n) => {
+            cm.$ZodUnion.init(t, n), cb.init(t, n)
         }),
-        cq = cf.$constructor("ZodMiniRecord", (t, n) => {
-            cv.$ZodRecord.init(t, n), cg.init(t, n)
+        ck = ch.$constructor("ZodMiniRecord", (t, n) => {
+            cm.$ZodRecord.init(t, n), cb.init(t, n)
         }),
-        ck = cf.$constructor("ZodMiniLiteral", (t, n) => {
-            cv.$ZodLiteral.init(t, n), cg.init(t, n)
+        cA = ch.$constructor("ZodMiniLiteral", (t, n) => {
+            cm.$ZodLiteral.init(t, n), cb.init(t, n)
         });
 
-    function cA(t, n) {
-        return new ck({
+    function cC(t, n) {
+        return new cA({
             type: "literal",
             values: Array.isArray(t) ? t : [t],
-            ...cp.normalizeParams(n)
+            ...cv.normalizeParams(n)
         })
     }
-    let cC = cf.$constructor("ZodMiniOptional", (t, n) => {
-        cv.$ZodOptional.init(t, n), cg.init(t, n)
+    let cI = ch.$constructor("ZodMiniOptional", (t, n) => {
+        cm.$ZodOptional.init(t, n), cb.init(t, n)
     });
 
-    function cI(t) {
-        return new cC({
+    function cj(t) {
+        return new cI({
             type: "optional",
             innerType: t
         })
     }(t, n) => {
-        cv.$ZodPipe.init(t, n), cg.init(t, n)
+        cm.$ZodPipe.init(t, n), cb.init(t, n)
     };
-    let cj = cf.$constructor("ZodMiniCustom", (t, n) => {
-        cv.$ZodCustom.init(t, n), cg.init(t, n)
+    let cL = ch.$constructor("ZodMiniCustom", (t, n) => {
+        cm.$ZodCustom.init(t, n), cb.init(t, n)
     });
 
-    function cL(t) {
+    function cO(t) {
         let n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-        return cm._refine(cj, t, n)
+        return cy._refine(cL, t, n)
     }
-    cm.describe, cm.meta;
-    var cO = t.i(566387),
-        cN = t.i(41466),
-        cD = t.i(306607),
-        c_ = t.i(904451),
-        cM = (0, ol.createContext)(void 0),
-        cB = t => {
+    cy.describe, cy.meta;
+    var cN = t.i(566387),
+        cD = t.i(41466),
+        c_ = t.i(306607),
+        cM = t.i(904451),
+        cB = (0, ol.createContext)(void 0),
+        cU = t => {
             let {
                 config: n,
                 children: r
             } = t;
-            return (0, v.jsx)(cM.Provider, {
+            return (0, v.jsx)(cB.Provider, {
                 value: n,
                 children: r
             })
         },
-        cU = () => {
-            let t = (0, ol.useContext)(cM);
+        cV = () => {
+            let t = (0, ol.useContext)(cB);
             if (!t) throw Error("useNotApprovedUIConfig must be used within a NotApprovedUIProvider");
             return t
         },
-        cV = ((i = cV || {}).AccountReactivationPageRendered = "accountReactivationPageRendered", i.PageRendered = "pageRendered", i.UnmappedViolationKey = "unmappedViolationKey", i.CheckboxChecked = "checkboxChecked", i.LogoutClicked = "logoutClicked", i.ReactivateClicked = "reactivateClicked", i.ParentVerificationClicked = "parentVerificationClicked", i.EmailVerificationClicked = "emailVerificationClicked", i.TermsOfUseClicked = "termsOfUseClicked", i.AppealsProcessClicked = "appealsProcessClicked", i.CommunityGuidelineClicked = "communityGuidelineClicked", i.UGCGuidelinesClicked = "ugcGuidelinesClicked", i.AppealsPortalClicked = "appealsPortalClicked", i.ContinueClicked = "continueClicked", i.BackClicked = "backClicked", i.SecondChanceReactivateClicked = "secondChanceReactivateClicked", i.MissingTranslation = "missingTranslation", i.Error = "error", i.VerificationRedirectRendered = "verificationRedirectRendered", i.AccountReactivationRedirectRendered = "accountReactivationRedirectRendered", i),
-        cF = ((a = cF || {}).NotApprovedPage = "NotApprovedPageV2", a);
+        cF = ((i = cF || {}).AccountReactivationPageRendered = "accountReactivationPageRendered", i.PageRendered = "pageRendered", i.UnmappedViolationKey = "unmappedViolationKey", i.CheckboxChecked = "checkboxChecked", i.LogoutClicked = "logoutClicked", i.ReactivateClicked = "reactivateClicked", i.ParentVerificationClicked = "parentVerificationClicked", i.EmailVerificationClicked = "emailVerificationClicked", i.TermsOfUseClicked = "termsOfUseClicked", i.AppealsProcessClicked = "appealsProcessClicked", i.CommunityGuidelineClicked = "communityGuidelineClicked", i.UGCGuidelinesClicked = "ugcGuidelinesClicked", i.AppealsPortalClicked = "appealsPortalClicked", i.ContinueClicked = "continueClicked", i.BackClicked = "backClicked", i.SecondChanceReactivateClicked = "secondChanceReactivateClicked", i.MissingTranslation = "missingTranslation", i.Error = "error", i.VerificationRedirectRendered = "verificationRedirectRendered", i.AccountReactivationRedirectRendered = "accountReactivationRedirectRendered", i),
+        cG = ((a = cG || {}).NotApprovedPage = "NotApprovedPageV2", a);
 
-    function cG() {
+    function cW() {
         let {
             sendAnalyticsEvent: t,
             platform: n,
             readOnly: r
-        } = cU();
+        } = cV();
         return (0, ol.useCallback)((i, a) => {
             null != r && r || t({
                 eventName: "NotApprovedPageEvent",
@@ -11151,9 +11197,9 @@
             })
         }, [t, n, r])
     }
-    var cW = "UserSafety.NotApprovedPage.UserID",
-        cH = ((o = cH || {}).Warn = "Warn", o.Delete = "Delete", o.Hour1 = "Ban 1 Hour", o.Hour6 = "Ban 6 Hours", o.Day1 = "Ban 1 Day", o.Day3 = "Ban 3 Days", o.Day7 = "Ban 7 Days", o.Day14 = "Ban 14 Days", o.Day30 = "Ban 30 Days", o.Day60 = "Ban 60 Days", o.Month6 = "Ban 6 Months", o.Year1 = "Ban 1 Year", o),
-        cK = {
+    var cH = "UserSafety.NotApprovedPage.UserID",
+        cK = ((o = cK || {}).Warn = "Warn", o.Delete = "Delete", o.Hour1 = "Ban 1 Hour", o.Hour6 = "Ban 6 Hours", o.Day1 = "Ban 1 Day", o.Day3 = "Ban 3 Days", o.Day7 = "Ban 7 Days", o.Day14 = "Ban 14 Days", o.Day30 = "Ban 30 Days", o.Day60 = "Ban 60 Days", o.Month6 = "Ban 6 Months", o.Year1 = "Ban 1 Year", o),
+        cz = {
             "Ban 1 Hour": "Heading.SuspendedOneHour",
             "Ban 6 Hours": "Heading.SuspendedSixHours",
             "Ban 1 Day": "Heading.SuspendedOneDay",
@@ -11167,7 +11213,7 @@
             Warn: "Heading.Warning",
             Delete: "Heading.Banned"
         },
-        cz = {
+        cJ = {
             "Label.Type.Avatar": "Label.TypePlural.Avatar",
             "Label.Type.Audio": "Label.TypePlural.Audio",
             "Label.Type.AvatarAccessory": "Label.TypePlural.AvatarAccessory",
@@ -11184,15 +11230,15 @@
             "Label.Type.Video": "Label.TypePlural.Video",
             "Label.Type.Voice": "Label.TypePlural.Voice"
         },
-        cJ = "Email";
+        cQ = "Email";
 
-    function cQ(t, n, r) {
-        if (r === cJ || "VPC" === r) return !0;
+    function cX(t, n, r) {
+        if (r === cQ || "VPC" === r) return !0;
         let i = new Date(n) < new Date;
         return "Warn" === t || "Delete" !== t && i
     }
-    var cX = (0, ol.createContext)(void 0),
-        c$ = t => {
+    var c$ = (0, ol.createContext)(void 0),
+        cZ = t => {
             var n, r;
             let {
                 pages: i,
@@ -11230,17 +11276,17 @@
                     hasNavigatedForward: d
                 }
             }, [l, h, p, b, w, m, y, x, i, o, a, d]);
-            return (0, v.jsx)(cX.Provider, {
+            return (0, v.jsx)(c$.Provider, {
                 value: P,
                 children: u
             })
         },
-        cZ = () => {
-            let t = (0, ol.useContext)(cX);
+        cY = () => {
+            let t = (0, ol.useContext)(c$);
             if (!t) throw Error("usePageNavigation must be used within PageNavigationProvider");
             return t
         },
-        cY = t => {
+        c0 = t => {
             let {
                 punishmentData: n,
                 commutationEligibility: r
@@ -11248,7 +11294,7 @@
                 isFirstPage: i,
                 currentPageConfigs: a,
                 currentPageName: o
-            } = cZ(), s = a.map(t => {
+            } = cY(), s = a.map(t => {
                 if (!t.getIsVisible(n, o, r)) return null;
                 let i = t.renderComponent;
                 return (0, v.jsx)("div", {
@@ -11262,14 +11308,14 @@
                 children: s
             })
         },
-        c0 = () => {
-            let t = cU().translate,
+        c1 = () => {
+            let t = cV().translate,
                 {
                     onLogout: n
-                } = cU(),
-                r = cG(),
+                } = cV(),
+                r = cW(),
                 [i, a] = (0, ol.useState)(!1),
-                o = (0, co.useMutation)({
+                o = (0, cs.useMutation)({
                     mutationFn: async () => {
                         await n()
                     },
@@ -11284,29 +11330,29 @@
                     },
                     retry: 0
                 });
-            return (0, v.jsxs)(cs.Popover, {
-                children: [(0, v.jsx)(cs.PopoverTrigger, {
+            return (0, v.jsxs)(cu.Popover, {
+                children: [(0, v.jsx)(cu.PopoverTrigger, {
                     asChild: !0,
-                    children: (0, v.jsx)(cc.IconButton, {
+                    children: (0, v.jsx)(cd.IconButton, {
                         icon: "icon-filled-three-dots-vertical",
                         ariaLabel: t("Label.OpenMenu"),
                         variant: "Utility",
                         size: "Medium"
                     })
-                }), (0, v.jsx)(cs.PopoverContent, {
+                }), (0, v.jsx)(cu.PopoverContent, {
                     side: "bottom",
                     align: "end",
                     ariaLabel: t("Label.MenuContent"),
-                    children: (0, v.jsx)(cu.Menu, {
+                    children: (0, v.jsx)(cl.Menu, {
                         size: "Medium",
-                        children: (0, v.jsx)(cu.MenuItem, {
+                        children: (0, v.jsx)(cl.MenuItem, {
                             value: "one",
                             title: t("Action.LogOut"),
                             onSelect: () => {
                                 o.mutate()
                             },
                             disabled: i,
-                            trailing: i ? (0, v.jsx)(cl.ProgressCircle, {
+                            trailing: i ? (0, v.jsx)(cc.ProgressCircle, {
                                 size: "Small",
                                 ariaLabel: t("Label.LogoutProgress"),
                                 variant: "Indeterminate"
@@ -11316,13 +11362,13 @@
                 })]
             })
         },
-        c1 = () => {
-            let t = cU().translate,
+        c2 = () => {
+            let t = cV().translate,
                 {
                     getProgress: n
-                } = cZ(),
+                } = cY(),
                 r = n();
-            return (0, v.jsx)(cd.ProgressBar, {
+            return (0, v.jsx)(cf.ProgressBar, {
                 value: r,
                 ariaLabel: t("Label.PageProgress"),
                 style: {
@@ -11330,12 +11376,12 @@
                 }
             })
         },
-        c2 = () => {
-            let t = cU().translate,
+        c4 = () => {
+            let t = cV().translate,
                 {
                     goToPreviousPage: n
-                } = cZ();
-            return (0, v.jsx)(cc.IconButton, {
+                } = cY();
+            return (0, v.jsx)(cd.IconButton, {
                 size: "Medium",
                 variant: "Utility",
                 icon: "icon-filled-chevron-large-left",
@@ -11345,26 +11391,26 @@
                 ariaLabel: t("Action.Back")
             })
         },
-        c4 = t => {
+        c6 = t => {
             var n;
             let {
                 punishmentData: r
             } = t, {
                 isFirstPage: i,
                 totalPages: a
-            } = cZ(), {
+            } = cY(), {
                 readOnly: o
-            } = cU(), s = cU().translate, {
+            } = cV(), s = cV().translate, {
                 punishmentTypeDescription: u,
                 verificationCategory: l
-            } = r, c = l ? s("Heading.Suspended") : s(null != (n = cK[u]) ? n : "") || s("Heading.Suspended");
+            } = r, c = l ? s("Heading.Suspended") : s(null != (n = cz[u]) ? n : "") || s("Heading.Suspended");
             return i ? (0, v.jsx)("div", {
                 "data-testid": "not-approved-dialog-header",
                 children: (0, v.jsxs)("div", {
                     className: "flex justify-between items-center gap-medium",
                     children: [(0, v.jsxs)("div", {
                         className: "flex gap-small items-center padding-y-medium",
-                        children: [(0, v.jsx)(ca.Icon, {
+                        children: [(0, v.jsx)(co.Icon, {
                             name: "Delete" === u ? "icon-regular-circle-slash" : "icon-regular-triangle-exclamation",
                             size: "Large",
                             className: "Warn" !== u || l ? "content-system-alert" : "content-system-warning"
@@ -11372,24 +11418,24 @@
                             className: "text-heading-small",
                             children: c
                         })]
-                    }), !o && (0, v.jsx)(c0, {})]
+                    }), !o && (0, v.jsx)(c1, {})]
                 })
             }) : (0, v.jsx)("div", {
                 "data-testid": "not-approved-dialog-header",
                 children: (0, v.jsxs)("div", {
                     className: "flex flex-col gap-large items-start",
-                    children: [(0, v.jsx)(c2, {}), a > 2 && (0, v.jsx)(c1, {})]
+                    children: [(0, v.jsx)(c4, {}), a > 2 && (0, v.jsx)(c2, {})]
                 })
             })
         },
-        c6 = t => {
+        c3 = t => {
             let {
                 punishmentData: n,
                 setIsDialogOpen: r
             } = t, {
                 CurrentCtaComponent: i,
                 currentPageName: a
-            } = cZ();
+            } = cY();
             return i ? (0, v.jsx)("div", {
                 className: "flex flex-col gap-large justify-between medium:items-end",
                 children: (0, v.jsx)(i, {
@@ -11398,7 +11444,7 @@
                 }, a)
             }) : null
         },
-        c3 = t => {
+        c8 = t => {
             let {
                 readOnly: n
             } = t;
@@ -11411,7 +11457,7 @@
                 })]
             })
         },
-        c8 = () => (0, v.jsxs)("div", {
+        c5 = () => (0, v.jsxs)("div", {
             className: "flex flex-col gap-large",
             "data-testid": "loading-skeleton-content",
             children: [(0, v.jsx)("div", {
@@ -11432,30 +11478,30 @@
                 })]
             })]
         }),
-        c5 = () => (0, v.jsx)("div", {
+        c9 = () => (0, v.jsx)("div", {
             className: "shrink-0 flex width-full justify-end medium:flex-row",
             children: (0, v.jsx)("div", {
                 className: "bg-shift-100 height-[40px] width-full medium:width-[90px] radius-medium"
             })
         }),
-        c9 = () => {
+        c7 = () => {
             let {
                 readOnly: t
-            } = cU();
+            } = cV();
             return t ? null : (0, v.jsx)("div", {
                 className: "shrink-0 flex justify-end items-center",
-                children: (0, v.jsx)(c0, {})
+                children: (0, v.jsx)(c1, {})
             })
         },
-        c7 = t => {
+        de = t => {
             let {
                 error: n
-            } = t, r = cU().translate;
+            } = t, r = cV().translate;
             return n && console.error(n), (0, v.jsx)("div", {
                 className: "flex flex-col height-full min-height-0",
                 children: (0, v.jsxs)("div", {
                     className: "grow-1 flex flex-col items-center justify-center gap-medium padding-xxlarge radius-medium bg-surface-100 width-full min-height-[225px]",
-                    children: [(0, v.jsx)(ca.Icon, {
+                    children: [(0, v.jsx)(co.Icon, {
                         name: "icon-regular-triangle-exclamation",
                         size: "XLarge"
                     }), (0, v.jsx)("span", {
@@ -11465,55 +11511,55 @@
                 })
             })
         };
-    cf.config(ch.en());
-    var de = cS({
-            type: cA("platform"),
-            displayMeta: cI(cS({
-                lowercaseKey: cw().check(cO.minLength(1)),
-                capitalizedKey: cw().check(cO.minLength(1)),
-                icon: cw()
+    ch.config(cp.en());
+    var dt = cE({
+            type: cC("platform"),
+            displayMeta: cj(cE({
+                lowercaseKey: cx().check(cN.minLength(1)),
+                capitalizedKey: cx().check(cN.minLength(1)),
+                icon: cx()
             })),
-            elements: cI(cR(cm._unknown(cx)))
+            elements: cj(cT(cy._unknown(cP)))
         }),
-        dt = new cE({
+        dn = new cq({
             type: "union",
-            options: [cS({
-                type: cA("text"),
-                labelKey: cw(),
-                text: cI(cw()),
-                textKey: cI(cw()),
-                textKeyParameters: cI((s = cw(), new cq((u = cw()) && u._zod ? {
+            options: [cE({
+                type: cC("text"),
+                labelKey: cx(),
+                text: cj(cx()),
+                textKey: cj(cx()),
+                textKeyParameters: cj((s = cx(), new ck((u = cx()) && u._zod ? {
                     type: "record",
                     keyType: s,
                     valueType: u,
-                    ...cp.normalizeParams(void 0)
+                    ...cv.normalizeParams(void 0)
                 } : {
                     type: "record",
-                    keyType: cw(),
+                    keyType: cx(),
                     valueType: s,
-                    ...cp.normalizeParams(u)
+                    ...cv.normalizeParams(u)
                 })))
-            }).check(cL(t => void 0 !== t.text || void 0 !== t.textKey, {
+            }).check(cO(t => void 0 !== t.text || void 0 !== t.textKey, {
                 message: "Either 'text' or 'textKey' must be provided"
-            }), cL(t => !t.textKeyParameters || void 0 !== t.textKey, {
+            }), cO(t => !t.textKeyParameters || void 0 !== t.textKey, {
                 message: "'textKeyParameters' requires 'textKey' to be provided"
-            })), cS({
-                type: cA("image"),
-                labelKey: cw(),
-                url: cw(),
-                altLabelKey: cI(cw())
+            })), cE({
+                type: cC("image"),
+                labelKey: cx(),
+                url: cx(),
+                altLabelKey: cj(cx())
             })],
-            ...cp.normalizeParams(void 0)
+            ...cv.normalizeParams(void 0)
         }),
-        dn = t => {
-            let n = dt.safeParse(t);
+        dr = t => {
+            let n = dn.safeParse(t);
             return !!n.success || (console.warn("Failed to parse platform element: ", n.error), !1)
         },
-        dr = cS({
-            ...de.shape,
-            elements: cI(cR(dt))
+        di = cE({
+            ...dt.shape,
+            elements: cj(cT(dn))
         }),
-        di = t => {
+        da = t => {
             let n = t.violation;
             if (!n) return !1;
             let {
@@ -11521,25 +11567,25 @@
             } = n;
             if (!r || !(t => {
                     if ("platform" !== t.type) return !1;
-                    let n = de.safeParse(t);
+                    let n = dt.safeParse(t);
                     return !!n.success || (console.warn("Failed to parse platform evidence: ", n.error), !1)
                 })(r)) return !1;
-            let i = null == (a = r.elements) ? void 0 : a.filter(t => dn(t));
+            let i = null == (a = r.elements) ? void 0 : a.filter(t => dr(t));
             if (!i || 0 === i.length) return !1;
             var a, o = {
                 ...r,
                 elements: i
             };
             if ("platform" !== o.type) return !1;
-            let s = dr.safeParse(o);
+            let s = di.safeParse(o);
             return !!s.success || (console.warn("Failed to parse platform evidence fully typed: ", s.error), !1)
         },
-        da = (0, ol.createContext)(void 0),
-        ds = t => {
+        ds = (0, ol.createContext)(void 0),
+        du = t => {
             let {
                 enableIxp: n = !1,
                 children: r
-            } = t, i = cU().translate, {
+            } = t, i = cV().translate, {
                 data: a,
                 isLoading: o,
                 error: s
@@ -11547,8 +11593,8 @@
                 let {
                     httpGet: t,
                     userModerationApiUrl: n
-                } = cU();
-                return (0, ci.useQuery)({
+                } = cV();
+                return (0, ca.useQuery)({
                     queryKey: ["not-approved-data"],
                     queryFn: () => t("".concat(n, "/v1/not-approved")),
                     staleTime: 1 / 0
@@ -11562,13 +11608,13 @@
                     enabled: n
                 } = t, {
                     ixp: r
-                } = cU();
-                return (0, ci.useQuery)({
-                    queryKey: ["ixp/".concat(cW)],
+                } = cV();
+                return (0, ca.useQuery)({
+                    queryKey: ["ixp/".concat(cH)],
                     queryFn: async () => {
                         if (!r) return {};
                         try {
-                            return await r.fetchLayer(cW)
+                            return await r.fetchLayer(cH)
                         } catch (t) {
                             return {}
                         }
@@ -11585,8 +11631,8 @@
                 let {
                     httpGet: t,
                     apiGatewayUrl: n
-                } = cU();
-                return (0, ci.useQuery)({
+                } = cV();
+                return (0, ca.useQuery)({
                     queryKey: ["commutation-eligibility"],
                     queryFn: async () => {
                         try {
@@ -11602,7 +11648,7 @@
             })(), h = (null == a ? void 0 : a.punishedUserId) ? a : void 0, p = (0, ol.useMemo)(() => {
                 let t = new Set,
                     n = new Set;
-                if ((null == h ? void 0 : h.violation) && di(h)) h.violation.abuseTypeTranslationKeys.forEach(r => {
+                if ((null == h ? void 0 : h.violation) && da(h)) h.violation.abuseTypeTranslationKeys.forEach(r => {
                     t.add(i(r)), n.add(r)
                 });
                 else {
@@ -11623,25 +11669,25 @@
                 ixpData: u,
                 commutationEligibility: d
             }), [m, s, h, p, u, d]);
-            return (0, v.jsx)(da.Provider, {
+            return (0, v.jsx)(ds.Provider, {
                 value: y,
                 children: r
             })
         },
-        du = () => {
-            let t = (0, ol.useContext)(da);
+        dl = () => {
+            let t = (0, ol.useContext)(ds);
             if (!t) throw Error("useNotApprovedPagePunishment must be used within a NotApprovedPagePunishmentProvider");
             return t
         },
-        dl = (0, ol.createContext)(void 0),
-        dc = t => {
+        dc = (0, ol.createContext)(void 0),
+        dd = t => {
             let {
                 children: n
             } = t, {
                 currentPage: r,
                 currentPageName: i,
                 unmappedViolationKeys: a
-            } = cZ(), o = cG(), s = (0, ol.useRef)(Date.now()), u = (0, ol.useRef)(r), l = (0, ol.useRef)(i), c = (0, ol.useRef)(!0), d = () => Date.now() - s.current;
+            } = cY(), o = cW(), s = (0, ol.useRef)(Date.now()), u = (0, ol.useRef)(r), l = (0, ol.useRef)(i), c = (0, ol.useRef)(!0), d = () => Date.now() - s.current;
             (0, ol.useEffect)(() => {
                 a.forEach(t => {
                     o("unmappedViolationKey", {
@@ -11670,17 +11716,17 @@
                 h = (0, ol.useMemo)(() => ({
                     sendPageEvent: f
                 }), [f]);
-            return (0, v.jsx)(dl.Provider, {
+            return (0, v.jsx)(dc.Provider, {
                 value: h,
                 children: n
             })
         },
-        dd = () => {
-            let t = (0, ol.useContext)(dl);
+        df = () => {
+            let t = (0, ol.useContext)(dc);
             if (!t) throw Error("usePageAnalytics must be used within PageAnalyticsProvider");
             return t
         },
-        df = {
+        dh = {
             ruleTitle: "Heading.RuleExplanation.Dating",
             ruleSubtitle: "SubHeading.RuleExplanation.Dating",
             ruleDescription: "Description.RuleExplanation.Dating",
@@ -11688,7 +11734,7 @@
             importanceDescription: "Description.RuleImportance.Dating",
             policyKey: "dating"
         },
-        dh = {
+        dp = {
             ruleTitle: "Heading.RuleExplanation.BullyingHarassmentDiscrimination",
             ruleSubtitle: "SubHeading.RuleExplanation.BullyingHarassmentDiscrimination",
             ruleDescription: "Description.RuleExplanation.BullyingHarassmentDiscrimination",
@@ -11696,7 +11742,7 @@
             importanceDescription: "Description.RuleImportance.BullyingHarassmentDiscrimination",
             policyKey: "bullying-harassment-discrimination"
         },
-        dp = {
+        dv = {
             ruleTitle: "Heading.RuleExplanation.MisusingRobloxSystems",
             ruleSubtitle: "SubHeading.RuleExplanation.MisusingRobloxSystems",
             ruleDescription: "Description.RuleExplanation.MisusingRobloxSystems",
@@ -11705,7 +11751,7 @@
             importanceDescription: "Description.RuleImportance.MisusingRobloxSystems",
             policyKey: "misusing-roblox-systems"
         },
-        dv = {
+        dm = {
             ruleTitle: "Heading.RuleExplanation.PII",
             ruleSubtitle: "SubHeading.RuleExplanation.PII",
             ruleDescription: "Description.RuleExplanation.PII",
@@ -11714,7 +11760,7 @@
             importanceDescription: "Description.RuleImportance.PII",
             policyKey: "pii"
         },
-        dm = {
+        dy = {
             ruleTitle: "Heading.RuleExplanation.SSHAndIllegalRegulatedActivities",
             ruleSubtitle: "SubHeading.RuleExplanation.SSHAndIllegalRegulatedActivities",
             ruleDescription: "Description.RuleExplanation.SSHAndIllegalRegulatedActivities",
@@ -11723,10 +11769,10 @@
             importanceDescription: "Description.RuleImportance.SSHAndIllegalRegulatedActivities",
             policyKey: "ssh-and-illegal-regulated-activities"
         },
-        dy = {
-            "Label.AbuseType.CheatandExploits": dp,
-            "Label.AbuseType.ContestsandSweepstakes": dm,
-            "Label.AbuseType.Dating": df,
+        dg = {
+            "Label.AbuseType.CheatandExploits": dv,
+            "Label.AbuseType.ContestsandSweepstakes": dy,
+            "Label.AbuseType.Dating": dh,
             "Label.AbuseType.DirectingUsersOffPlatform": {
                 ruleTitle: "Heading.RuleExplanation.DirectingUsersOffPlatform",
                 ruleSubtitle: "SubHeading.RuleExplanation.DirectingUsersOffPlatform",
@@ -11735,21 +11781,21 @@
                 importanceDescription: "Description.RuleImportance.DirectingUsersOffPlatform",
                 policyKey: "directing-users-off-platform"
             },
-            "Label.AbuseType.DiscriminatoryContent": dh,
-            "Label.AbuseType.DisruptiveAudio": dp,
-            "Label.AbuseType.EncouragingDangerousBehavior": dm,
-            "Label.AbuseType.ExtortionandBlackmail": dh,
-            "Label.AbuseType.Harassment": dh,
-            "Label.AbuseType.IllegalandRegulatedContent": dm,
-            "Label.AbuseType.Impersonation": dh,
-            "Label.AbuseType.IrlDangerousActivities": dm,
-            "Label.AbuseType.MisusingRobloxSystems": dp,
-            "Label.AbuseType.OffPlatformSpeechandBehavior": dh,
-            "Label.AbuseType.PrivacyAskingforPII": dv,
-            "Label.AbuseType.PrivacyGivingPII": dv,
-            "Label.AbuseType.RealLifeThreats": dh,
-            "Label.AbuseType.Scamming": dp,
-            "Label.AbuseType.SexualContent": df,
+            "Label.AbuseType.DiscriminatoryContent": dp,
+            "Label.AbuseType.DisruptiveAudio": dv,
+            "Label.AbuseType.EncouragingDangerousBehavior": dy,
+            "Label.AbuseType.ExtortionandBlackmail": dp,
+            "Label.AbuseType.Harassment": dp,
+            "Label.AbuseType.IllegalandRegulatedContent": dy,
+            "Label.AbuseType.Impersonation": dp,
+            "Label.AbuseType.IrlDangerousActivities": dy,
+            "Label.AbuseType.MisusingRobloxSystems": dv,
+            "Label.AbuseType.OffPlatformSpeechandBehavior": dp,
+            "Label.AbuseType.PrivacyAskingforPII": dm,
+            "Label.AbuseType.PrivacyGivingPII": dm,
+            "Label.AbuseType.RealLifeThreats": dp,
+            "Label.AbuseType.Scamming": dv,
+            "Label.AbuseType.SexualContent": dh,
             "Label.AbuseType.Spam": {
                 ruleTitle: "Heading.RuleExplanation.Spam",
                 ruleSubtitle: "SubHeading.RuleExplanation.Spam",
@@ -11758,7 +11804,7 @@
                 importanceDescription: "Description.RuleImportance.Spam",
                 policyKey: "spam"
             },
-            "Label.AbuseType.SuicideSelfHarm": dm,
+            "Label.AbuseType.SuicideSelfHarm": dy,
             "Label.AbuseType.Swearing": {
                 ruleTitle: "Heading.RuleExplanation.Swearing",
                 ruleSubtitle: "SubHeading.RuleExplanation.Swearing",
@@ -11767,7 +11813,7 @@
                 importanceDescription: "Description.RuleImportance.Swearing",
                 policyKey: "swearing"
             },
-            "Label.AbuseType.ThreatsOrAbuseOfRobloxEmployeesOrAffiliates": dh,
+            "Label.AbuseType.ThreatsOrAbuseOfRobloxEmployeesOrAffiliates": dp,
             "Label.AbuseType.ViolentContentAndGore": {
                 ruleTitle: "Heading.RuleExplanation.ViolentContentAndGore",
                 ruleSubtitle: "SubHeading.RuleExplanation.ViolentContentAndGore",
@@ -11776,7 +11822,7 @@
                 importanceDescription: "Description.RuleImportance.ViolentContentAndGore",
                 policyKey: "violent-content-and-gore"
             },
-            "Label.AbuseType.VirtualCasino": dm,
+            "Label.AbuseType.VirtualCasino": dy,
             "Label.Sublabel.RealLifeEvents": {
                 ruleTitle: "Heading.RuleExplanation.RealLifeEvents",
                 ruleSubtitle: "SubHeading.RuleExplanation.RealLifeEvents",
@@ -11786,17 +11832,17 @@
                 importanceDescription: "Description.RuleImportance.RealLifeEvents",
                 policyKey: "real-life-events"
             },
-            "Label.Sublabel.RomanceOrSex": df
+            "Label.Sublabel.RomanceOrSex": dh
         },
-        dg = "{startLink}",
-        db = "{endLink}",
-        dw = (t, n) => (r, i, a, o) => {
+        db = "{startLink}",
+        dw = "{endLink}",
+        dx = (t, n) => (r, i, a, o) => {
             var s;
             let [u, l] = t(r, {
-                startLink: dg,
-                endLink: db,
+                startLink: db,
+                endLink: dw,
                 ...a
-            }).split(dg, 2), [c, d] = null != (s = null == l ? void 0 : l.split(db, 2)) ? s : [];
+            }).split(db, 2), [c, d] = null != (s = null == l ? void 0 : l.split(dw, 2)) ? s : [];
             return (0, v.jsxs)("p", {
                 className: "text-body-large",
                 children: [u, (0, v.jsx)("a", {
@@ -11810,14 +11856,14 @@
                 }), d]
             })
         },
-        dx = {
-            getIsVisible: t => [cJ, "VPC"].includes(t.verificationCategory),
+        dP = {
+            getIsVisible: t => [cQ, "VPC"].includes(t.verificationCategory),
             renderComponent: t => {
                 let {
                     punishmentData: n
-                } = t, r = cU().translate, {
+                } = t, r = cV().translate, {
                     websiteUrl: i
-                } = cU(), a = dw(r), {
+                } = cV(), a = dx(r), {
                     verificationCategory: o
                 } = n, s = "".concat(i, "/"), u = a("VPC" === o ? "Label.ParentReactivationNotice" : "Label.EmailReactivationNotice", s);
                 return (0, v.jsxs)("div", {
@@ -11830,14 +11876,14 @@
             },
             configName: "chargeback-steps"
         },
-        dP = {
+        dR = {
             getIsVisible: t => "Delete" !== t.punishmentTypeDescription,
             renderComponent: t => {
                 let {
                     punishmentData: n
-                } = t, r = cU().translate, i = cG(), {
+                } = t, r = cV().translate, i = cW(), {
                     hasEducationalPages: a
-                } = cZ(), {
+                } = cY(), {
                     showUGCAvatarGuidelinesLink: o,
                     context: s
                 } = n, u = null == s ? void 0 : s.IS_ALT_INFORMED;
@@ -11854,7 +11900,7 @@
                         }), u && (0, v.jsx)("p", {
                             className: "text-body-large",
                             children: r("Description.LinkedAccounts")
-                        }), (!!o || !a) && (0, v.jsx)(cN.Button, {
+                        }), (!!o || !a) && (0, v.jsx)(cD.Button, {
                             as: "a",
                             href: o ? "https://create.roblox.com/docs/marketplace/marketplace-policy#general-creation-guidelines" : "https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Standards",
                             target: "_blank",
@@ -11871,9 +11917,9 @@
             },
             configName: "prevention-steps"
         },
-        dR = function(t, n, r, i) {
+        dT = function(t, n, r, i) {
             if ("Delete" === r) return i("Description.BrokeRulesBanned");
-            let a = cz[null != n ? n : ""],
+            let a = cJ[null != n ? n : ""],
                 o = a ? i(a) : "";
             return t.length > 0 ? o ? i("Description.BrokeRulesTypePolicy.V2", {
                 type: o,
@@ -11884,18 +11930,18 @@
                 type: o
             }) : i("Description.BrokeRulesGeneric")
         },
-        dT = {
+        dS = {
             getIsVisible: () => !0,
             renderComponent: t => {
                 var n, r, i;
                 let {
                     punishmentData: a
-                } = t, o = cU().translate, {
+                } = t, o = cV().translate, {
                     violationReasons: s
-                } = du(), {
+                } = dl(), {
                     violation: u,
                     punishmentTypeDescription: l
-                } = a, c = null == u || null == (i = u.evidence) || null == (r = i.displayMeta) ? void 0 : r.capitalizedKey, d = dR(null != (n = null == s ? void 0 : s.translatedReasons) ? n : [], c, l, o);
+                } = a, c = null == u || null == (i = u.evidence) || null == (r = i.displayMeta) ? void 0 : r.capitalizedKey, d = dT(null != (n = null == s ? void 0 : s.translatedReasons) ? n : [], c, l, o);
                 return (0, v.jsx)("span", {
                     className: "text-body-medium",
                     children: d
@@ -11903,36 +11949,36 @@
             },
             configName: "punishment-description"
         },
-        dS = () => {
+        dE = () => {
             let {
                 websiteUrl: t,
                 platform: n,
                 onAppealsRedirect: r
-            } = cU(), {
+            } = cV(), {
                 ixpData: i
-            } = du(), a = cG();
+            } = dl(), a = cW();
             return {
                 handleAppealsClick: (0, ol.useCallback)(() => {
                     (a("appealsPortalClicked"), r) ? r(): i && "FFlagEnableSafetyDashboard" in i && !0 === i.FFlagEnableSafetyDashboard ? window.open("".concat(t, "/safety-dashboard?t_source=").concat(encodeURIComponent(n)), "_blank", "noopener,noreferrer") : window.open("".concat(t, "/report-appeals?t_source=nap-web"), "_blank", "noopener,noreferrer")
                 }, [a, r, i, t, n])
             }
         },
-        dE = {
+        dq = {
             getIsVisible: (t, n, r) => {
                 var i;
                 return !(null != (i = null == r ? void 0 : r.educational_pass_eligible) && i) || "second-chance-intro" === n
             },
             renderComponent: () => {
-                let t = cU().translate,
+                let t = cV().translate,
                     {
                         handleAppealsClick: n
-                    } = dS();
+                    } = dE();
                 return (0, v.jsxs)("div", {
                     className: "flex flex-col gap-medium",
                     children: [(0, v.jsx)("p", {
                         className: "text-body-large",
                         children: t("Description.Mistake.V3")
-                    }), (0, v.jsx)(cN.Button, {
+                    }), (0, v.jsx)(cD.Button, {
                         variant: "Standard",
                         size: "Small",
                         onClick: n,
@@ -11942,11 +11988,11 @@
             },
             configName: "report-mistake"
         },
-        dq = t => {
+        dk = t => {
             let {
                 url: n,
                 altLabelKey: r
-            } = t, i = cU().translate, [a, o] = (0, ol.useState)(!0);
+            } = t, i = cV().translate, [a, o] = (0, ol.useState)(!0);
             return (0, v.jsxs)("div", {
                 className: "flex aspect-1-1 justify-center items-center bg-shift-200 radius-medium",
                 children: [(0, v.jsx)("img", {
@@ -11965,7 +12011,7 @@
                 }), (0, v.jsx)("div", {
                     "data-testid": "spinner-container",
                     className: a ? void 0 : "hidden",
-                    children: (0, v.jsx)(cl.ProgressCircle, {
+                    children: (0, v.jsx)(cc.ProgressCircle, {
                         ariaLabel: i("Label.LoadingImage"),
                         size: "Medium",
                         variant: "Indeterminate"
@@ -11973,7 +12019,7 @@
                 })]
             })
         },
-        dk = t => new Date(t).toLocaleString(void 0, {
+        dA = t => new Date(t).toLocaleString(void 0, {
             month: "long",
             day: "numeric",
             year: "numeric",
@@ -11981,13 +12027,13 @@
             minute: "numeric"
         });
 
-    function dA() {
+    function dC() {
         let {
             formatFullDate: t
-        } = cU();
-        return null != t ? t : dk
+        } = cV();
+        return null != t ? t : dA
     }
-    var dC = t => {
+    var dI = t => {
             let {
                 fieldLabel: n,
                 fieldValue: r,
@@ -12008,23 +12054,23 @@
                 })]
             })
         },
-        dI = () => {
-            let t = cU().translate,
+        dj = () => {
+            let t = cV().translate,
                 {
                     handleAppealsClick: n
-                } = dS(),
+                } = dE(),
                 {
                     readOnly: r
-                } = cU();
-            return r ? null : (0, v.jsx)(cN.Button, {
+                } = cV();
+            return r ? null : (0, v.jsx)(cD.Button, {
                 onClick: n,
                 variant: "Standard",
                 size: "Small",
                 children: t("Action.ViewMore")
             })
         },
-        dj = {
-            getIsVisible: di,
+        dL = {
+            getIsVisible: da,
             renderComponent: t => {
                 var n, r;
                 let {
@@ -12032,13 +12078,13 @@
                 } = t, {
                     violation: a,
                     consequenceTransparencyMessage: o
-                } = i, s = cU().translate, u = dA(), l = cG(), c = null == a || null == (r = a.evidence) ? void 0 : r.elements, d = null != (n = null == c ? void 0 : c.filter(t => dn(t))) ? n : [], f = [], h = [];
+                } = i, s = cV().translate, u = dC(), l = cW(), c = null == a || null == (r = a.evidence) ? void 0 : r.elements, d = null != (n = null == c ? void 0 : c.filter(t => dr(t))) ? n : [], f = [], h = [];
                 d.forEach(t => {
                     var n;
-                    "image" === t.type ? f.push((0, v.jsx)(dq, {
+                    "image" === t.type ? f.push((0, v.jsx)(dk, {
                         url: t.url,
                         altLabelKey: t.labelKey
-                    }, t.url)) : h.push((0, v.jsx)(dC, {
+                    }, t.url)) : h.push((0, v.jsx)(dI, {
                         fieldLabel: s(t.labelKey),
                         fieldValue: t.textKey ? ((t, n, r, i) => {
                             if (!r) return t(n);
@@ -12064,22 +12110,22 @@
                         children: f[0]
                     }), (0, v.jsxs)("div", {
                         className: "flex flex-col gap-small width-full",
-                        children: [h, (0, v.jsx)(dC, {
+                        children: [h, (0, v.jsx)(dI, {
                             fieldLabel: s("Label.ReviewDate"),
                             fieldValue: u(i.beginDate)
-                        }), o && (0, v.jsx)(dC, {
+                        }), o && (0, v.jsx)(dI, {
                             fieldLabel: s("Label.DecisionMethod"),
                             fieldValue: o
-                        }), (0, v.jsx)(dI, {})]
+                        }), (0, v.jsx)(dj, {})]
                     })]
                 })
             },
             configName: "violation-evidence"
         },
-        dL = t => {
+        dO = t => {
             let {
                 badUtterances: n
-            } = t, [r, i] = (0, ol.useState)(!1), a = cU().translate;
+            } = t, [r, i] = (0, ol.useState)(!1), a = cV().translate;
             return (0, v.jsxs)("div", {
                 className: "flex flex-col gap-small",
                 children: [(0, v.jsxs)("div", {
@@ -12103,7 +12149,7 @@
                             children: t.utteranceText
                         }, t.utteranceText))]
                     })]
-                }), n.length > 4 && (0, v.jsx)(cN.Button, {
+                }), n.length > 4 && (0, v.jsx)(cD.Button, {
                     className: "self-start margin-left-[-7px]",
                     variant: "Link",
                     size: "XSmall",
@@ -12115,42 +12161,42 @@
                 })]
             })
         },
-        dO = {
+        dN = {
             getIsVisible: t => {
                 var n, r;
-                return !di(t) && (null != (n = null == (r = t.badUtterances) ? void 0 : r.length) ? n : 0) > 0
+                return !da(t) && (null != (n = null == (r = t.badUtterances) ? void 0 : r.length) ? n : 0) > 0
             },
             renderComponent: t => {
                 let {
                     punishmentData: n
-                } = t, r = cU().translate, i = dA(), {
+                } = t, r = cV().translate, i = dC(), {
                     badUtterances: a,
                     consequenceTransparencyMessage: o
                 } = n;
                 return (0, v.jsxs)("div", {
                     className: "flex flex-col gap-small",
                     "data-testid": "bad-utterances",
-                    children: [(0, v.jsx)(dL, {
+                    children: [(0, v.jsx)(dO, {
                         badUtterances: null != a ? a : []
-                    }), (0, v.jsx)(cD.Divider, {}), (0, v.jsx)(dC, {
+                    }), (0, v.jsx)(c_.Divider, {}), (0, v.jsx)(dI, {
                         fieldLabel: r("Label.ReviewDate"),
                         fieldValue: i(n.beginDate)
-                    }), o && (0, v.jsx)(dC, {
+                    }), o && (0, v.jsx)(dI, {
                         fieldLabel: r("Label.DecisionMethod"),
                         fieldValue: o
-                    }), (0, v.jsx)(dI, {})]
+                    }), (0, v.jsx)(dj, {})]
                 })
             },
             configName: "bad-utterances"
         },
-        dN = {
+        dD = {
             getIsVisible: t => {
                 var n, r;
-                return !di(t) && (null != (n = null == (r = t.badUtterances) ? void 0 : r.length) ? n : 0) === 0
+                return !da(t) && (null != (n = null == (r = t.badUtterances) ? void 0 : r.length) ? n : 0) === 0
             },
             renderComponent: t => {
-                let n = cU().translate,
-                    r = dA(),
+                let n = cV().translate,
+                    r = dC(),
                     {
                         punishmentData: i
                     } = t,
@@ -12161,23 +12207,23 @@
                 return (0, v.jsxs)("div", {
                     className: "flex flex-col gap-small",
                     "data-testid": "simple-evidence",
-                    children: [(0, v.jsx)(dC, {
+                    children: [(0, v.jsx)(dI, {
                         fieldLabel: n("Label.ReviewDate"),
                         fieldValue: r(a)
-                    }), o && (0, v.jsx)(dC, {
+                    }), o && (0, v.jsx)(dI, {
                         fieldLabel: n("Label.DecisionMethod"),
                         fieldValue: o
-                    }), (0, v.jsx)(dI, {})]
+                    }), (0, v.jsx)(dj, {})]
                 })
             },
             configName: "simple-evidence"
         },
-        dD = {
+        d_ = {
             getIsVisible: () => !0,
             renderComponent: t => {
                 let {
                     punishmentData: n
-                } = t, r = cU().translate, i = [dj, dO, dN].map(t => t.getIsVisible(n) ? (0, v.jsx)("div", {
+                } = t, r = cV().translate, i = [dL, dN, dD].map(t => t.getIsVisible(n) ? (0, v.jsx)("div", {
                     children: t.renderComponent({
                         punishmentData: n
                     })
@@ -12202,10 +12248,10 @@
             },
             configName: "rewiewed-evidence"
         },
-        d_ = {
+        dM = {
             getIsVisible: () => !0,
             renderComponent: () => {
-                let t = cU().translate;
+                let t = cV().translate;
                 return (0, v.jsxs)("div", {
                     className: "flex flex-col gap-medium",
                     children: [(0, v.jsx)("span", {
@@ -12219,10 +12265,10 @@
             },
             configName: "second-chance-conclusion"
         },
-        dM = {
+        dB = {
             getIsVisible: () => !0,
             renderComponent: () => {
-                let t = cU().translate;
+                let t = cV().translate;
                 return (0, v.jsxs)("div", {
                     className: "flex flex-col gap-large",
                     children: [(0, v.jsx)("span", {
@@ -12236,14 +12282,14 @@
             },
             configName: "second-chance-intro"
         },
-        dB = {
+        dU = {
             getIsVisible: () => !0,
             renderComponent: t => {
                 var n;
-                let r = cU().translate,
+                let r = cV().translate,
                     {
                         violationReasons: i
-                    } = du(),
+                    } = dl(),
                     {
                         punishmentData: a
                     } = t,
@@ -12258,10 +12304,10 @@
                         children: r("Label.WhatHappened")
                     }), (0, v.jsxs)("div", {
                         className: "padding-large bg-shift-100 radius-medium flex flex-col gap-small",
-                        children: [(0, v.jsx)(dC, {
+                        children: [(0, v.jsx)(dI, {
                             fieldLabel: r("Label.Reason"),
                             fieldValue: (null != (n = null == i ? void 0 : i.translatedReasons) ? n : []).join(", ") || r("Label.AbuseType.Other")
-                        }), (0, v.jsx)(dC, {
+                        }), (0, v.jsx)(dI, {
                             fieldLabel: r("Label.ModeratorNote"),
                             fieldValue: o || r("Description.Violation", {
                                 startLink: "",
@@ -12274,14 +12320,14 @@
             },
             configName: "what-happened"
         },
-        dU = t => t.split("\n").map(t => t.trim()).filter(Boolean),
-        dV = t => ({
+        dV = t => t.split("\n").map(t => t.trim()).filter(Boolean),
+        dF = t => ({
             getIsVisible: () => !0,
             renderComponent: () => {
-                let n = cU().translate,
-                    r = dU(n(t.description)),
+                let n = cV().translate,
+                    r = dV(n(t.description)),
                     i = t.descriptionBullets ? n(t.descriptionBullets) : void 0,
-                    a = i ? dU(i) : [];
+                    a = i ? dV(i) : [];
                 return (0, v.jsxs)("div", {
                     className: "flex flex-col gap-medium",
                     "data-testid": t.policyKey,
@@ -12317,13 +12363,13 @@
             },
             configName: t.policyKey
         }),
-        dF = t => {
+        dG = t => {
             let {
                 isDisabled: n = !1
-            } = t, r = cU().translate, {
+            } = t, r = cV().translate, {
                 goToNextPage: i
-            } = cZ();
-            return (0, v.jsx)(cN.Button, {
+            } = cY();
+            return (0, v.jsx)(cD.Button, {
                 variant: "Emphasis",
                 size: "Medium",
                 onClick: i,
@@ -12332,11 +12378,11 @@
                 children: r("Action.Continue")
             })
         },
-        dG = t => {
+        dW = t => {
             let {
                 setIsDialogOpen: n
-            } = t, r = cU().translate;
-            return (0, v.jsx)(cN.Button, {
+            } = t, r = cV().translate;
+            return (0, v.jsx)(cD.Button, {
                 variant: "Emphasis",
                 size: "Medium",
                 onClick: () => {
@@ -12347,11 +12393,11 @@
                 children: r("Action.OK")
             })
         },
-        dW = ((l = dW || {})[l.Reactivate = 0] = "Reactivate", l[l.Paused = 1] = "Paused", l[l.VerifyEmail = 2] = "VerifyEmail", l[l.VerifyVPC = 3] = "VerifyVPC", l),
-        dH = t => {
+        dH = ((l = dH || {})[l.Reactivate = 0] = "Reactivate", l[l.Paused = 1] = "Paused", l[l.VerifyEmail = 2] = "VerifyEmail", l[l.VerifyVPC = 3] = "VerifyVPC", l),
+        dK = t => {
             let {
                 onClose: n
-            } = t, r = cU().translate;
+            } = t, r = cV().translate;
             return (0, v.jsxs)("div", {
                 className: "width-full flex gap-large items-center justify-between radius-medium padding-medium stroke-system-alert stroke-standard maf-error-alert",
                 style: {
@@ -12360,14 +12406,14 @@
                 "data-testid": "error-alert",
                 children: [(0, v.jsxs)("div", {
                     className: "flex gap-small items-center",
-                    children: [(0, v.jsx)(ca.Icon, {
+                    children: [(0, v.jsx)(co.Icon, {
                         name: "icon-filled-circle-x",
                         className: "content-system-alert"
                     }), (0, v.jsx)("span", {
                         className: "text-body-medium",
                         children: r("Heading.Error")
                     })]
-                }), (0, v.jsx)(cc.IconButton, {
+                }), (0, v.jsx)(cd.IconButton, {
                     icon: "icon-regular-x-small",
                     ariaLabel: "Close",
                     onClick: n,
@@ -12378,26 +12424,26 @@
                 })]
             })
         },
-        dK = t => {
+        dz = t => {
             let n, {
                     proceedAction: r,
                     setIsDialogOpen: i,
                     isAgreed: a,
                     isDisabled: o = !1
                 } = t,
-                s = cU().translate,
+                s = cV().translate,
                 {
                     sendPageEvent: u
-                } = dd(),
+                } = df(),
                 {
                     userModerationApiUrl: l,
                     httpPost: c,
                     onVerifyEmail: d,
                     onVerifyParent: f,
                     onAccountReactivated: h
-                } = cU(),
+                } = cV(),
                 [p, m] = (0, ol.useState)(!1),
-                y = (0, co.useMutation)({
+                y = (0, cs.useMutation)({
                     mutationFn: () => c("".concat(l, "/v1/not-approved/reactivate")),
                     onSuccess: async () => {
                         await new Promise(t => {
@@ -12450,11 +12496,11 @@
                 }
             };
             return (0, v.jsxs)(ol.Fragment, {
-                children: [y.isError && (0, v.jsx)(dH, {
+                children: [y.isError && (0, v.jsx)(dK, {
                     onClose: () => {
                         y.reset()
                     }
-                }), (0, v.jsx)(cN.Button, {
+                }), (0, v.jsx)(cD.Button, {
                     onClick: () => {
                         g().catch(t => {
                             console.warn("NotApprovedProceedButton onClick error", t instanceof Error ? t.message : "unknown")
@@ -12469,25 +12515,25 @@
                 })]
             })
         },
-        dz = function(t) {
+        dJ = function(t) {
             let {
                 punishmentTypeDescription: n,
                 endDate: r,
                 verificationCategory: i
             } = t;
             switch (i) {
-                case cJ:
+                case cQ:
                     return 2;
                 case "VPC":
                     return 3;
                 default:
-                    return +!cQ(n, r, i)
+                    return +!cX(n, r, i)
             }
         },
-        dJ = t => {
+        dQ = t => {
             let {
                 endDate: n
-            } = t, r = cU().translate, i = ((t, n) => {
+            } = t, r = cV().translate, i = ((t, n) => {
                 let r = new Date(t),
                     i = Date.now();
                 if (Number.isNaN(r.getTime())) return n("Label.Hours", {
@@ -12508,7 +12554,7 @@
             return (0, v.jsxs)("div", {
                 "data-testid": "suspension-duration-alert",
                 className: "flex flex-wrap gap-small bg-shift-100 padding-x-medium padding-y-small stroke-standard stroke-default items-center radius-medium",
-                children: [(0, v.jsx)(ca.Icon, {
+                children: [(0, v.jsx)(co.Icon, {
                     name: "icon-filled-triangle-exclamation",
                     className: "content-system-warning"
                 }), (0, v.jsx)("span", {
@@ -12520,33 +12566,33 @@
                 })]
             })
         },
-        dQ = t => {
+        dX = t => {
             let {
                 punishmentData: n,
                 setIsDialogOpen: r
-            } = t, i = cU().translate, a = cG(), {
+            } = t, i = cV().translate, a = cW(), {
                 endDate: o,
                 punishmentTypeDescription: s
-            } = n, u = dz(n), [l, c] = (0, ol.useState)(!1), [d, f] = (0, ol.useState)(!1);
+            } = n, u = dJ(n), [l, c] = (0, ol.useState)(!1), [d, f] = (0, ol.useState)(!1);
             return (0, ol.useEffect)(() => {
                 let t;
-                return Object.values(cH).includes(s) && s.startsWith("Ban") && (t = setTimeout(() => {
+                return Object.values(cK).includes(s) && s.startsWith("Ban") && (t = setTimeout(() => {
                     f(t => !t)
                 }, 6e4)), () => {
                     clearTimeout(t)
                 }
             }, [d, s]), 1 === u ? (0, v.jsxs)("div", {
                 className: "flex flex-col gap-large medium:flex-row",
-                children: [(0, v.jsx)(dJ, {
+                children: [(0, v.jsx)(dQ, {
                     endDate: o
-                }), (0, v.jsx)(dK, {
+                }), (0, v.jsx)(dz, {
                     proceedAction: u,
                     setIsDialogOpen: r,
                     isAgreed: l,
                     isDisabled: !0
                 })]
             }) : (0, v.jsxs)(ol.Fragment, {
-                children: [(0, v.jsx)(c_.Checkbox, {
+                children: [(0, v.jsx)(cM.Checkbox, {
                     label: i("Label.RuleAcknowledgment"),
                     placement: "Start",
                     size: "Small",
@@ -12556,7 +12602,7 @@
                     },
                     className: "self-start",
                     "data-testid": "rule-confirmation-checkbox"
-                }), (0, v.jsx)(dK, {
+                }), (0, v.jsx)(dz, {
                     proceedAction: u,
                     setIsDialogOpen: r,
                     isAgreed: l,
@@ -12564,12 +12610,12 @@
                 })]
             })
         },
-        dX = () => {
-            let t = cU().translate,
+        d$ = () => {
+            let t = cV().translate,
                 {
                     handleAppealsClick: n
-                } = dS();
-            return (0, v.jsx)(cN.Button, {
+                } = dE();
+            return (0, v.jsx)(cD.Button, {
                 variant: "SoftEmphasis",
                 size: "Medium",
                 onClick: n,
@@ -12577,24 +12623,24 @@
                 children: t("Action.ReportMistake")
             })
         },
-        d$ = async (t, n) => n("".concat(t, "/moderation-appeal-service/v2/consequence-commutation"), {
+        dZ = async (t, n) => n("".concat(t, "/moderation-appeal-service/v2/consequence-commutation"), {
             type: "EDUCATIONAL_PASS"
-        }), dZ = () => {
-            let t = cU().translate,
+        }), dY = () => {
+            let t = cV().translate,
                 {
                     sendPageEvent: n
-                } = dd(),
+                } = df(),
                 {
                     httpPost: r,
                     apiGatewayUrl: i,
                     onAccountReactivated: a
-                } = cU(),
+                } = cV(),
                 {
                     handleAppealsClick: o
-                } = dS(),
+                } = dE(),
                 [s, u] = (0, ol.useState)(!1),
-                l = (0, co.useMutation)({
-                    mutationFn: () => d$(i, r),
+                l = (0, cs.useMutation)({
+                    mutationFn: () => dZ(i, r),
                     onMutate: () => {
                         u(!0), n("secondChanceReactivateClicked")
                     },
@@ -12609,13 +12655,13 @@
                     retry: 0
                 });
             return (0, v.jsxs)(ol.Fragment, {
-                children: [l.isError && (0, v.jsx)(dH, {
+                children: [l.isError && (0, v.jsx)(dK, {
                     onClose: () => {
                         l.reset()
                     }
                 }), (0, v.jsxs)("div", {
                     className: "flex flex-col gap-small medium:flex-row-reverse",
-                    children: [(0, v.jsx)(cN.Button, {
+                    children: [(0, v.jsx)(cD.Button, {
                         onClick: () => {
                             l.mutate()
                         },
@@ -12626,7 +12672,7 @@
                         isLoading: s,
                         isDisabled: s,
                         children: t("Action.OK")
-                    }), (0, v.jsx)(cN.Button, {
+                    }), (0, v.jsx)(cD.Button, {
                         onClick: o,
                         variant: "Standard",
                         size: "Medium",
@@ -12635,11 +12681,11 @@
                     })]
                 })]
             })
-        }, dY = () => {
-            let t = cU().translate,
+        }, d0 = () => {
+            let t = cV().translate,
                 [n, r] = (0, ol.useState)(!1);
             return (0, v.jsxs)(ol.Fragment, {
-                children: [(0, v.jsx)(c_.Checkbox, {
+                children: [(0, v.jsx)(cM.Checkbox, {
                     label: t("Label.RuleAcknowledgment"),
                     placement: "Start",
                     size: "Small",
@@ -12649,23 +12695,23 @@
                     },
                     className: "self-start",
                     "data-testid": "understand-continue-checkbox"
-                }), (0, v.jsx)(dF, {
+                }), (0, v.jsx)(dG, {
                     isDisabled: !n
                 })]
             })
-        }, d0 = t => {
+        }, d1 = t => {
             let {
                 onOpenChange: n,
                 children: r
             } = t, {
                 readOnly: i
-            } = cU(), {
+            } = cV(), {
                 punishmentData: a,
                 violationReasons: o,
                 isLoading: s,
                 error: u,
                 commutationEligibility: l
-            } = du(), c = null == o ? void 0 : o.untranslatedReasons, d = (0, ol.useMemo)(() => (null != c ? c : []).some(t => t in dy), [c]), {
+            } = dl(), c = null == o ? void 0 : o.untranslatedReasons, d = (0, ol.useMemo)(() => (null != c ? c : []).some(t => t in dg), [c]), {
                 pages: f,
                 unmappedViolationKeys: h
             } = (0, ol.useMemo)(() => a ? ((t, n, r, i) => {
@@ -12675,29 +12721,29 @@
                     d = null != (a = null == r ? void 0 : r.educational_pass_eligible) && a;
                 if (l.push({
                         pageName: "intro",
-                        pageItems: [dT, dB, dD],
-                        CtaComponent: c ? dX : dF
+                        pageItems: [dS, dU, d_],
+                        CtaComponent: c ? d$ : dG
                     }), c) return {
                     pages: l,
                     unmappedViolationKeys: []
                 };
                 d && !i && l.push({
                     pageName: "second-chance-intro",
-                    pageItems: [dM, dE],
-                    CtaComponent: dF
+                    pageItems: [dB, dq],
+                    CtaComponent: dG
                 });
                 let {
                     educationalPages: f,
                     unmappedViolationKeys: h
                 } = (o = [], s = new Set, u = new Set, n.forEach(t => {
-                    let n = dy[t];
+                    let n = dg[t];
                     if (!n) return void s.add(t);
                     if (u.has(n.policyKey)) return;
                     u.add(n.policyKey);
-                    let r = d && !i ? dY : dF;
+                    let r = d && !i ? d0 : dG;
                     o.push({
                         pageName: "policy-rule-".concat(n.policyKey),
-                        pageItems: [dV({
+                        pageItems: [dF({
                             title: n.ruleTitle,
                             subtitle: n.ruleSubtitle,
                             description: n.ruleDescription,
@@ -12707,7 +12753,7 @@
                         CtaComponent: r
                     }), o.push({
                         pageName: "policy-importance-".concat(n.policyKey),
-                        pageItems: [dV({
+                        pageItems: [dF({
                             title: n.importanceTitle,
                             description: n.importanceDescription,
                             policyKey: n.policyKey
@@ -12720,12 +12766,12 @@
                 });
                 return l.push(...f), l.push({
                     pageName: "resolution",
-                    pageItems: [dP, dx, dE],
-                    CtaComponent: i ? dG : d ? dY : dQ
+                    pageItems: [dR, dP, dq],
+                    CtaComponent: i ? dW : d ? d0 : dX
                 }), d && !i && l.push({
                     pageName: "second-chance-conclusion",
-                    pageItems: [d_],
-                    CtaComponent: dZ
+                    pageItems: [dM],
+                    CtaComponent: dY
                 }), {
                     pages: l,
                     unmappedViolationKeys: h
@@ -12735,49 +12781,49 @@
                 unmappedViolationKeys: []
             }, [a, c, l, i]);
             return s ? r({
-                header: (0, v.jsx)(c3, {
+                header: (0, v.jsx)(c8, {
                     readOnly: !!i
                 }),
-                body: (0, v.jsx)(c8, {}),
-                ctas: (0, v.jsx)(c5, {})
+                body: (0, v.jsx)(c5, {}),
+                ctas: (0, v.jsx)(c9, {})
             }) : u || !a ? r({
-                header: (0, v.jsx)(c9, {}),
-                body: (0, v.jsx)(c7, {
+                header: (0, v.jsx)(c7, {}),
+                body: (0, v.jsx)(de, {
                     error: u
                 })
-            }) : (0, v.jsx)(c$, {
+            }) : (0, v.jsx)(cZ, {
                 pages: f,
                 unmappedViolationKeys: h,
                 hasEducationalPages: d,
                 commutationEligibility: l,
-                children: (0, v.jsx)(dc, {
+                children: (0, v.jsx)(dd, {
                     children: r({
-                        header: (0, v.jsx)(c4, {
+                        header: (0, v.jsx)(c6, {
                             punishmentData: a
                         }),
-                        body: (0, v.jsx)(cY, {
+                        body: (0, v.jsx)(c0, {
                             punishmentData: a,
                             commutationEligibility: l
                         }),
-                        ctas: (0, v.jsx)(c6, {
+                        ctas: (0, v.jsx)(c3, {
                             punishmentData: a,
                             setIsDialogOpen: n
                         })
                     })
                 })
             })
-        }, d1 = t => {
+        }, d2 = t => {
             let {
                 impressionEvent: n
             } = t, {
                 translate: r,
                 websiteUrl: i,
                 onLogout: a
-            } = cU(), o = cG(), s = dw(r, o), [u, l] = (0, ol.useState)(!1);
+            } = cV(), o = cW(), s = dx(r, o), [u, l] = (0, ol.useState)(!1);
             (0, ol.useEffect)(() => {
                 o(n)
             }, [o, n]);
-            let c = (0, co.useMutation)({
+            let c = (0, cs.useMutation)({
                 mutationFn: async () => {
                     await a()
                 },
@@ -12792,22 +12838,22 @@
                 },
                 retry: 0
             });
-            return (0, v.jsx)(cr.Dialog, {
+            return (0, v.jsx)(ci.Dialog, {
                 open: !0,
                 isModal: !0,
                 size: "Medium",
                 hasCloseAffordance: !1,
-                children: (0, v.jsxs)(cr.DialogContent, {
+                children: (0, v.jsxs)(ci.DialogContent, {
                     className: "[&_p]:margin-none [&_h2]:margin-none",
-                    children: [(0, v.jsxs)(cr.DialogBody, {
+                    children: [(0, v.jsxs)(ci.DialogBody, {
                         className: "gap-large flex flex-col",
-                        children: [(0, v.jsx)(cr.DialogTitle, {
+                        children: [(0, v.jsx)(ci.DialogTitle, {
                             className: "text-heading-large margin-none",
                             children: r("Heading.AccountIssue")
                         }), s("Description.ResolveIssue", i)]
-                    }), (0, v.jsxs)(cr.DialogFooter, {
+                    }), (0, v.jsxs)(ci.DialogFooter, {
                         className: "flex justify-end gap-small flex-col-reverse medium:flex-row",
-                        children: [(0, v.jsx)(cN.Button, {
+                        children: [(0, v.jsx)(cD.Button, {
                             variant: "Standard",
                             size: "Medium",
                             isLoading: u,
@@ -12816,7 +12862,7 @@
                                 c.mutate()
                             },
                             children: r("Action.Logout")
-                        }), (0, v.jsx)(cN.Button, {
+                        }), (0, v.jsx)(cD.Button, {
                             variant: "Emphasis",
                             size: "Medium",
                             onClick: () => {
@@ -12827,7 +12873,7 @@
                     })]
                 })
             })
-        }, d2 = t => {
+        }, d4 = t => {
             var n;
             let {
                 open: r,
@@ -12840,34 +12886,34 @@
                 shouldShowGenericFallback: d,
                 ixp: f,
                 readOnly: h
-            } = cU(), p = cG(), {
+            } = cV(), p = cW(), {
                 punishmentData: m,
                 isLoading: y,
                 error: g,
                 ixpData: b
-            } = du(), w = b && "FFlagEnableSafetyDashboard" in b, x = !y && !g && void 0 !== m, P = !y && !g && !m;
+            } = dl(), w = b && "FFlagEnableSafetyDashboard" in b, x = !y && !g && void 0 !== m, P = !y && !g && !m;
             if ((0, ol.useEffect)(() => {
                     if (m) {
                         var t;
                         p((null == (t = m.context) ? void 0 : t.SelfServiceDeactivated) ? "accountReactivationPageRendered" : "pageRendered", {
                             interventionId: m.interventionId,
                             punishedUserId: m.punishedUserId,
-                            isReactivationEligible: cQ(m.punishmentTypeDescription, m.endDate, m.verificationCategory),
+                            isReactivationEligible: cX(m.punishmentTypeDescription, m.endDate, m.verificationCategory),
                             verificationCategory: m.verificationCategory
                         })
                     }
                 }, [m]), (0, ol.useEffect)(() => {
-                    w && !h && m && (null == f || f.logExposure(cW))
+                    w && !h && m && (null == f || f.logExposure(cH))
                 }, [w, h, m, f]), P && !h) return null;
             if (x && (null == (n = m.context) ? void 0 : n.SelfServiceDeactivated)) return c ? (0, v.jsx)(ol.Fragment, {
                 children: c()
-            }) : (0, v.jsx)(d1, {
+            }) : (0, v.jsx)(d2, {
                 impressionEvent: "accountReactivationRedirectRendered"
             });
             let R = x && (null == d ? void 0 : d(m));
-            return R ? (0, v.jsx)(d1, {
+            return R ? (0, v.jsx)(d2, {
                 impressionEvent: R
-            }) : (0, v.jsx)(cr.Dialog, {
+            }) : (0, v.jsx)(ci.Dialog, {
                 open: null != r ? r : a,
                 size: "Large",
                 hasCloseAffordance: !!h,
@@ -12876,14 +12922,14 @@
                 onOpenChange: h ? t => {
                     t || u(!1)
                 } : void 0,
-                children: (0, v.jsx)(cr.DialogContent, {
+                children: (0, v.jsx)(ci.DialogContent, {
                     className: "width-full [&_p]:margin-none [&_h2]:margin-none",
                     onOpenAutoFocus: t => {
                         t.preventDefault()
                     },
-                    children: (0, v.jsx)(cr.DialogBody, {
+                    children: (0, v.jsx)(ci.DialogBody, {
                         className: "flex flex-col height-[85vh] max-height-[800px]",
-                        children: (0, v.jsx)(d0, {
+                        children: (0, v.jsx)(d1, {
                             onOpenChange: u,
                             children: t => {
                                 let {
@@ -12893,7 +12939,7 @@
                                 } = t;
                                 return (0, v.jsxs)("div", {
                                     className: "flex flex-col gap-large height-full min-height-0",
-                                    children: [(0, v.jsx)(cr.DialogTitle, {
+                                    children: [(0, v.jsx)(ci.DialogTitle, {
                                         className: "padding-none",
                                         children: n
                                     }), (0, v.jsxs)("div", {
@@ -12919,7 +12965,7 @@
                     })
                 })
             })
-        }, d4 = new oh.QueryClient({
+        }, d6 = new oh.QueryClient({
             defaultOptions: {
                 queries: {
                     refetchOnWindowFocus: !1,
@@ -12928,23 +12974,23 @@
                     staleTime: 6e4
                 }
             }
-        }), d6 = function(t) {
+        }), d3 = function(t) {
             let {
                 open: n,
                 onClose: r
             } = t;
             return (0, v.jsx)(op.QueryClientProvider, {
-                client: d4,
-                children: (0, v.jsx)(ds, {
+                client: d6,
+                children: (0, v.jsx)(du, {
                     enableIxp: !0,
-                    children: (0, v.jsx)(d2, {
+                    children: (0, v.jsx)(d4, {
                         open: n,
                         onClose: r
                     })
                 })
             })
-        }, d3 = t.i(894244), d8 = t.i(839165);
-    let d5 = function() {
+        }, d8 = t.i(894244), d5 = t.i(839165);
+    let d9 = function() {
             let {
                 translate: t
             } = (0, ox.useTranslation)(), n = (0, ls.useAuthentication)(), r = (0, oc.useRouter)(), i = "https://usermoderation.".concat("roblox.com"), a = "https://apis.roblox.com", o = "https://".concat("roblox.com"), s = "CreatorHub", u = (0, ol.useCallback)(t => {
@@ -12953,8 +12999,8 @@
                     context: t.context,
                     properties: t.properties
                 })
-            }, []), l = (0, ol.useCallback)(t => !!t.verificationCategory && cV.VerificationRedirectRendered, []), c = (0, ol.useCallback)(async () => {
-                let t = await (0, d3.getAuthorizationEndpoint)({
+            }, []), l = (0, ol.useCallback)(t => !!t.verificationCategory && cF.VerificationRedirectRendered, []), c = (0, ol.useCallback)(async () => {
+                let t = await (0, d8.getAuthorizationEndpoint)({
                     redirectUri: "https://create.roblox.com"
                 });
                 await n.logout(), await r.push(t)
@@ -12963,8 +13009,8 @@
             }, [r]);
             return (0, ol.useMemo)(() => ({
                 translate: t,
-                httpGet: d8.authenticatedHttpGet,
-                httpPost: d8.authenticatedHttpPost,
+                httpGet: d5.authenticatedHttpGet,
+                httpPost: d5.authenticatedHttpPost,
                 userModerationApiUrl: i,
                 apiGatewayUrl: a,
                 websiteUrl: o,
@@ -12975,55 +13021,55 @@
                 onAccountReactivated: d
             }), [t, i, a, o, u, s, l, c, d])
         },
-        d9 = () => {
-            let t = d5();
-            return (0, v.jsx)(cB, {
+        d7 = () => {
+            let t = d9();
+            return (0, v.jsx)(cU, {
                 config: t,
-                children: (0, v.jsx)(d6, {})
+                children: (0, v.jsx)(d3, {})
             })
         },
-        d7 = (0, ox.withTranslation)(() => {
+        fe = (0, ox.withTranslation)(() => {
             let {
                 themeMode: t
             } = (0, lo.useThemeMode)();
             return (0, v.jsx)(lc.UIThemeProvider, {
                 theme: t,
-                children: (0, v.jsx)(d9, {})
+                children: (0, v.jsx)(d7, {})
             })
-        }, [ce.TranslationNamespace.NotApproved, ce.TranslationNamespace.Moderation, ce.TranslationNamespace.AppealsPortal, ce.TranslationNamespace.CommonUIControls, ce.TranslationNamespace.Error, ce.TranslationNamespace.DashboardModeration]),
-        fe = () => {
+        }, [ct.TranslationNamespace.NotApproved, ct.TranslationNamespace.Moderation, ct.TranslationNamespace.AppealsPortal, ct.TranslationNamespace.CommonUIControls, ct.TranslationNamespace.Error, ct.TranslationNamespace.DashboardModeration]),
+        ft = () => {
             let {
                 status: t
             } = (0, ls.useAuthentication)();
-            return "moderated" === t ? (0, v.jsx)(d7, {}) : null
+            return "moderated" === t ? (0, v.jsx)(fe, {}) : null
         };
-    var ft = t.i(200400);
-    let fn = (0, ly.default)(() => t.A(14667), {
+    var fn = t.i(200400);
+    let fr = (0, ly.default)(() => t.A(14667), {
             loadableGenerated: {
                 modules: [573249]
             },
             ssr: !1
         }),
-        fr = t => {
+        fi = t => {
             let {
                 children: n
             } = t;
-            return (0, v.jsx)(ft.UniversalFeatureRestrictionsProvider, {
-                Surface: fn,
+            return (0, v.jsx)(fn.UniversalFeatureRestrictionsProvider, {
+                Surface: fr,
                 children: n
             })
         };
-    var fi = t.i(336964);
+    var fa = t.i(336964);
 
-    function fa(t) {
+    function fo(t) {
         return "object" == typeof t && null !== t && "Component" in t
     }
 
-    function fo(t) {
+    function fs(t) {
         var n;
         let {
             store: r
-        } = t, i = null != r ? r : fi.dialogStore, {
+        } = t, i = null != r ? r : fa.dialogStore, {
             render: a,
             options: o,
             isOpen: s
@@ -13033,16 +13079,16 @@
                 let t = setTimeout(() => i.clearContent(), 150);
                 return () => clearTimeout(t)
             }, [s, o, i]), null === a) return null;
-        if ((null == o ? void 0 : o.mode) === "standalone" && fa(a)) return (0, ol.createElement)(a.Component, {
+        if ((null == o ? void 0 : o.mode) === "standalone" && fo(a)) return (0, ol.createElement)(a.Component, {
             ...a.props,
             open: s,
             onOpenChange: t => {
                 t || i.close()
             }
         });
-        let u = null != o ? o : fi.DEFAULT_RESOLVED_CONTENT_OPTIONS,
-            l = fa(a) ? (0, ol.createElement)(a.Component, a.props) : a;
-        return (0, v.jsx)(cr.Dialog, {
+        let u = null != o ? o : fa.DEFAULT_RESOLVED_CONTENT_OPTIONS,
+            l = fo(a) ? (0, ol.createElement)(a.Component, a.props) : a;
+        return (0, v.jsx)(ci.Dialog, {
             open: s,
             onOpenChange: t => {
                 t || i.close()
@@ -13057,61 +13103,61 @@
             children: l
         })
     }
-    var fs = t.i(18685),
-        fu = t.i(209534);
+    var fu = t.i(18685),
+        fl = t.i(209534);
 
-    function fl() {
+    function fc() {
         let {
             current: t
-        } = (0, ol.useSyncExternalStore)(fu.snackbarStore.subscribe, fu.snackbarStore.getSnapshot, fu.snackbarStore.getSnapshot);
-        return null === t ? null : (0, v.jsx)(fs.Snackbar, {
+        } = (0, ol.useSyncExternalStore)(fl.snackbarStore.subscribe, fl.snackbarStore.getSnapshot, fl.snackbarStore.getSnapshot);
+        return null === t ? null : (0, v.jsx)(fu.Snackbar, {
             ...t.props,
-            onClose: () => fu.snackbarStore.dismiss()
+            onClose: () => fl.snackbarStore.dismiss()
         }, t.id)
     }
-    var fc = t.i(692734),
-        fd = t.i(943758);
-    let ff = (0, ol.createContext)({
+    var fd = t.i(692734),
+        ff = t.i(943758);
+    let fh = (0, ol.createContext)({
         primarySidebarExpanded: !1,
         setPrimarySidebarExpanded: () => {
             throw Error("Function not implemented. You may be trying to use this context outside of a provider.")
         }
     });
-    ff.displayName = "LeftNavigationStateContext";
-    let fh = t => {
+    fh.displayName = "LeftNavigationStateContext";
+    let fp = t => {
         let {
             children: n
         } = t, [r, i] = (0, ol.useState)(!0), a = (0, ol.useMemo)(() => ({
             primarySidebarExpanded: r,
             setPrimarySidebarExpanded: i
         }), [r]);
-        return (0, v.jsx)(ff.Provider, {
+        return (0, v.jsx)(fh.Provider, {
             value: a,
             children: n
         })
     };
-    var fp = t.i(729904),
-        fv = t.i(486736),
-        fm = t.i(142330),
-        fy = t.i(623983),
-        fg = t.i(226519),
-        fb = t.i(458442),
-        fw = t.i(686762),
-        fx = t.i(196990),
-        fP = t.i(533968),
-        fR = t.i(210205);
-    let fT = {
-            [fm.AgreementType.ChildrenPrivacyPolicy]: "Label.ChildrenPrivacyPolicy",
-            [fm.AgreementType.ConsentFlow]: "Label.ConsentFlow",
-            [fm.AgreementType.LuobuThirdPartyDataUse]: "Label.LuobuThirdPartyDataUse",
-            [fm.AgreementType.PersonalInformationPolicy]: "Label.PersonalInformationPolicy",
-            [fm.AgreementType.PrivacyPolicy]: "Label.PrivacyPolicy",
-            [fm.AgreementType.RefundTerms]: "Label.RefundTerms",
-            [fm.AgreementType.RiderTerms]: "Label.RiderTerms",
-            [fm.AgreementType.TermsOfService]: "Label.TermsOfService"
+    var fv = t.i(729904),
+        fm = t.i(486736),
+        fy = t.i(142330),
+        fg = t.i(623983),
+        fb = t.i(226519),
+        fw = t.i(458442),
+        fx = t.i(686762),
+        fP = t.i(196990),
+        fR = t.i(533968),
+        fT = t.i(210205);
+    let fS = {
+            [fy.AgreementType.ChildrenPrivacyPolicy]: "Label.ChildrenPrivacyPolicy",
+            [fy.AgreementType.ConsentFlow]: "Label.ConsentFlow",
+            [fy.AgreementType.LuobuThirdPartyDataUse]: "Label.LuobuThirdPartyDataUse",
+            [fy.AgreementType.PersonalInformationPolicy]: "Label.PersonalInformationPolicy",
+            [fy.AgreementType.PrivacyPolicy]: "Label.PrivacyPolicy",
+            [fy.AgreementType.RefundTerms]: "Label.RefundTerms",
+            [fy.AgreementType.RiderTerms]: "Label.RiderTerms",
+            [fy.AgreementType.TermsOfService]: "Label.TermsOfService"
         },
-        fS = ["/v1-studio-login"],
-        fE = (0, ox.withTranslation)(() => {
+        fE = ["/v1-studio-login"],
+        fq = (0, ox.withTranslation)(() => {
             var t, n;
             let r = (0, oc.useRouter)(),
                 {
@@ -13126,7 +13172,7 @@
                     captureError: u,
                     error: l,
                     info: c
-                } = (0, fR.useMetricsMonitoring)(),
+                } = (0, fT.useMetricsMonitoring)(),
                 [d, f] = (0, ol.useState)(!1),
                 [h, p] = (0, ol.useState)(!1),
                 [m, y] = (0, ol.useState)([]),
@@ -13135,11 +13181,11 @@
                         if (r <= 0) return void l("User Agreement accept failed after retried ".concat(3, " times"));
                         try {
                             var i;
-                            let a = null == (i = (await fx.userAgreementsClient.acceptUserAgreements(t)).results) ? void 0 : i.filter(t => 0 !== t.errorCode).map(t => t.agreementId);
+                            let a = null == (i = (await fP.userAgreementsClient.acceptUserAgreements(t)).results) ? void 0 : i.filter(t => 0 !== t.errorCode).map(t => t.agreementId);
                             a && a.length > 0 && await n(a, r - 1)
                         } catch (a) {
-                            let i = (0, fP.getResponseFromError)(a);
-                            (null == i ? void 0 : i.status) === l6.StatusCodes.UNAUTHORIZED ? (c("User Agreement accept failed with 401 from backend"), await oc.default.push("/login")) : (l("User Agreement accept failed with status code ".concat(null == i ? void 0 : i.status)), await n(t, r - 1))
+                            let i = (0, fR.getResponseFromError)(a);
+                            (null == i ? void 0 : i.status) === l3.StatusCodes.UNAUTHORIZED ? (c("User Agreement accept failed with 401 from backend"), await oc.default.push("/login")) : (l("User Agreement accept failed with status code ".concat(null == i ? void 0 : i.status)), await n(t, r - 1))
                         }
                     }
                     await n(t, 3)
@@ -13159,8 +13205,8 @@
                 }, [g, m]),
                 x = (0, ol.useCallback)(async () => {
                     try {
-                        let t = fx.userAgreementsClient.getUserAgreements({
-                                clientType: fm.ClientType.Studio
+                        let t = fP.userAgreementsClient.getUserAgreements({
+                                clientType: fy.ClientType.Studio
                             }),
                             n = await t;
                         n.length > 0 && (y([...n]), f(!0))
@@ -13169,15 +13215,15 @@
                     }
                 }, [u, l]);
             return (0, ol.useEffect)(() => {
-                (null == a ? void 0 : a.id) === void 0 || s.current || !r.isReady || fS.some(t => r.pathname.startsWith(t)) || (x(), s.current = !0)
-            }, [a, x, r.isReady, r.pathname]), (0, v.jsx)(fg.Dialog, {
+                (null == a ? void 0 : a.id) === void 0 || s.current || !r.isReady || fE.some(t => r.pathname.startsWith(t)) || (x(), s.current = !0)
+            }, [a, x, r.isReady, r.pathname]), (0, v.jsx)(fb.Dialog, {
                 open: d,
-                children: (0, v.jsx)(fb.DialogTemplate, {
+                children: (0, v.jsx)(fw.DialogTemplate, {
                     onConfirm: w,
                     onCancel: b,
                     title: i("Heading.AgreementsUpdate"),
                     content: (0, v.jsxs)(v.Fragment, {
-                        children: [(0, v.jsx)(fy.Typography, {
+                        children: [(0, v.jsx)(fg.Typography, {
                             component: "p",
                             variant: "body1",
                             children: null != (t = null == (n = m.find(t => null != t.agreementBodyText)) ? void 0 : n.agreementBodyText) ? t : i("Description.AgreementsUpdate")
@@ -13186,10 +13232,10 @@
                                 var n;
                                 let r;
                                 return (0, v.jsx)("li", {
-                                    children: (0, v.jsx)(fw.Link, {
+                                    children: (0, v.jsx)(fx.Link, {
                                         href: t.displayUrl,
                                         target: "__blank",
-                                        children: (n = t.agreementType, void 0 === (r = fT[n]) ? i(r) : n)
+                                        children: (n = t.agreementType, void 0 === (r = fS[n]) ? i(r) : n)
                                     })
                                 }, t.id)
                             })
@@ -13200,19 +13246,19 @@
                     loading: h
                 })
             })
-        }, [ce.TranslationNamespace.AgreementsUpdate]),
+        }, [ct.TranslationNamespace.AgreementsUpdate]),
         {
-            authenticationApi: fq
+            authenticationApi: fk
         } = {
             authenticationApi: u7
         },
         {
-            discoveryApi: fk
+            discoveryApi: fA
         } = uq.ApplicationAuthorizationsClient,
         {
-            usersApi: fA
+            usersApi: fC
         } = lt.UsersClient,
-        fC = (r = lp.default, t => {
+        fI = (r = lp.default, t => {
             var n, i, a, o, s, u, l, c, d;
             let f, h;
             return r.logWebVitalsEvent({
@@ -13239,7 +13285,7 @@
     (0, ob.c)({
         unifiedLogger: lp.default
     });
-    let fI = (ud && (f = null != (c = document.querySelector('meta[name="'.concat("emotion-insertion-point-mui", '"]'))) ? c : void 0, h = null != (d = document.querySelector('meta[name="'.concat("emotion-insertion-point-tss", '"]'))) ? d : void 0), {
+    let fj = (ud && (f = null != (c = document.querySelector('meta[name="'.concat("emotion-insertion-point-mui", '"]'))) ? c : void 0, h = null != (d = document.querySelector('meta[name="'.concat("emotion-insertion-point-tss", '"]'))) ? d : void 0), {
         muiCache: (0, oT.c)({
             key: ul,
             prepend: !0,
@@ -13251,12 +13297,12 @@
         })
     });
     (0, oP.createThumbnailsClient)((0, ln.getBEDEV1ServiceBasePath)("thumbnails"));
-    let fj = {
-            locale: l4.defaultLocale,
-            nativeName: l4.defaultNativeName
+    let fL = {
+            locale: l6.defaultLocale,
+            nativeName: l6.defaultNativeName
         },
-        fL = new l2.TranslationResourceProvider(fj, l4.fallbackLocale),
-        fO = t => {
+        fO = new l4.TranslationResourceProvider(fL, l6.fallbackLocale),
+        fN = t => {
             let n, r, {
                 children: i
             } = t;
@@ -13288,54 +13334,54 @@
                 children: i
             })
         },
-        fN = {
-            defaultLocale: l4.defaultLocale,
-            title: l4.defaultMetadataJson["OpenGraph.Title"],
-            description: l4.defaultMetadataJson["OpenGraph.Description"]
+        fD = {
+            defaultLocale: l6.defaultLocale,
+            title: l6.defaultMetadataJson["OpenGraph.Title"],
+            description: l6.defaultMetadataJson["OpenGraph.Description"]
         },
-        fD = t => t,
-        f_ = () => ((() => {
+        f_ = t => t,
+        fM = () => ((() => {
             let {
                 trackerClient: t
             } = (0, lf.useEventTrackerProvider)(), n = (0, ol.useCallback)(() => {
-                let n = (0, lZ.loadPageEventModel)();
+                let n = (0, lY.loadPageEventModel)();
                 t.sendEvent(n)
             }, [t]);
-            (0, lY.default)(void 0, n), (0, ol.useEffect)(() => n(), [n]), (0, ol.useEffect)(() => {
+            (0, l0.default)(void 0, n), (0, ol.useEffect)(() => n(), [n]), (0, ol.useEffect)(() => {
                 lp.default.trackPageLoad()
             }, [])
-        })(), (0, od.useReportWebVitals)(fC), null),
-        fM = {
+        })(), (0, od.useReportWebVitals)(fI), null),
+        fB = {
             enabled: !0,
             isFetched: !0
         },
-        fB = t => {
+        fU = t => {
             let {
                 children: n
             } = t, {
                 settings: r
-            } = (0, fv.useSettings)(), i = (() => {
+            } = (0, fm.useSettings)(), i = (() => {
                 let {
                     ready: t,
                     value: n
-                } = (0, fc.useFlag)(lq.newCreatorWallets);
+                } = (0, fd.useFlag)(lq.newCreatorWallets);
                 return (0, ol.useMemo)(() => ({
                     visible: t && n
                 }), [t, n])
             })();
             return (0, v.jsx)(og.NavigationConfigsProvider, {
                 currentProduct: "CreatorDashboard",
-                environment: (0, fp.default)(),
+                environment: (0, fv.default)(),
                 robloxEnvironment: "production",
                 target: "global",
                 drawerVariant: "belowAppBar",
-                signalRCrossTab: fM,
+                signalRCrossTab: fB,
                 creatorWalletsNavigation: i,
                 enableGroupModeration: r.enableGroupModerationPage,
                 children: n
             })
         },
-        fU = new oh.QueryClient({
+        fV = new oh.QueryClient({
             defaultOptions: {
                 queries: {
                     refetchOnWindowFocus: !1,
@@ -13343,8 +13389,8 @@
                 }
             }
         }),
-        fV = (0, ov.initializeAuthStore)(),
-        fF = t => {
+        fF = (0, ov.initializeAuthStore)(),
+        fG = t => {
             var n;
             let {
                 Component: r,
@@ -13352,42 +13398,42 @@
                 cache: a
             } = t, {
                 query: o
-            } = (0, oc.useRouter)(), s = null != (n = r.getPageLayout) ? n : fD, u = (0, ol.useMemo)(() => ({
-                ...fN,
+            } = (0, oc.useRouter)(), s = null != (n = r.getPageLayout) ? n : f_, u = (0, ol.useMemo)(() => ({
+                ...fD,
                 ...r.pageMetadata
             }), [r.pageMetadata]);
             return (0, oy.useMaintenanceObserver)("https://create.roblox.com"), (0, ol.useEffect)(() => {
                 uf()
             }, []), lh.default.setUnifiedLoggerClient(lp.default), (0, v.jsx)(of.ErrorBoundary, {
                 children: (0, v.jsx)(uh, {
-                    cache: null != a ? a : fI,
-                    children: (0, v.jsxs)(lX, {
-                        providers: [(0, v.jsx)(fd.BreadcrumbItemNameProvider, {}), (0, v.jsx)(op.QueryClientProvider, {
-                            client: fU
+                    cache: null != a ? a : fj,
+                    children: (0, v.jsxs)(l$, {
+                        providers: [(0, v.jsx)(ff.BreadcrumbItemNameProvider, {}), (0, v.jsx)(op.QueryClientProvider, {
+                            client: fV
                         }), (0, v.jsx)(ow.C, {
                             client: le.default
-                        }), (0, v.jsx)(lv.CustomDashboardServiceProvider, {}), (0, v.jsx)(lv.UniverseFlaggedCustomDashboardProvider, {}), (0, v.jsx)(fO, {}), (0, v.jsx)(l1, {
+                        }), (0, v.jsx)(lv.CustomDashboardServiceProvider, {}), (0, v.jsx)(lv.UniverseFlaggedCustomDashboardProvider, {}), (0, v.jsx)(fN, {}), (0, v.jsx)(l2, {
                             pageLoggerConfig: r.loggerConfig
                         }), (0, v.jsx)(lf.EventTrackerProvider, {
                             trackerClient: lh.default
                         }), (0, v.jsx)(ov.RobloxAuthenticationProvider, {
                             clientId: "4273917941353191905",
-                            authenticationClient: fq,
-                            discoveryClient: fk,
-                            usersClient: fA,
-                            store: fV
-                        }), (0, v.jsx)(lH.GroupsProvider, {}), (0, v.jsx)(lu, {}), (0, v.jsx)(ld, {
+                            authenticationClient: fk,
+                            discoveryClient: fA,
+                            usersClient: fC,
+                            store: fF
+                        }), (0, v.jsx)(lK.GroupsProvider, {}), (0, v.jsx)(lu, {}), (0, v.jsx)(ld, {
                             themeElement: "u" > typeof document ? document.documentElement : void 0
                         }), (0, v.jsx)(ox.LocalizationProvider, {
-                            provider: fL
+                            provider: fO
                         }), (0, v.jsx)(up.SnackbarProvider, {}), (0, v.jsx)(uv.DialogProvider, {}), (0, v.jsx)(ll.default, {}), (0, v.jsx)(oP.ThumbnailsProvider, {
                             baseUrl: lh.eventStreamBaseUrl
-                        }), (0, v.jsx)(fv.SettingsProvider, {}), (0, v.jsx)(fB, {}), (0, v.jsx)(l$.ThemeAwareStudioResourcesProvider, {}), (0, v.jsx)(l5, {}), (0, v.jsx)(lQ.default, {}), (0, v.jsx)(fh, {}), (0, v.jsx)(om.CookieConsentProvider, {
+                        }), (0, v.jsx)(fm.SettingsProvider, {}), (0, v.jsx)(fU, {}), (0, v.jsx)(lZ.ThemeAwareStudioResourcesProvider, {}), (0, v.jsx)(l9, {}), (0, v.jsx)(lX.default, {}), (0, v.jsx)(fp, {}), (0, v.jsx)(om.CookieConsentProvider, {
                             robloxSiteDomain: "roblox.com"
-                        }), (0, v.jsx)(uE.AgeVerificationUpsellProvider, {}), (0, v.jsx)(fr, {})],
-                        children: [(0, v.jsx)(f_, {}), (0, v.jsx)(la, {
-                            provider: fL
-                        }), (0, v.jsx)(fl, {}), (0, v.jsx)(fo, {}), (0, v.jsx)(fe, {}), (0, v.jsx)(fE, {}), (0, v.jsx)(lJ, {}), (0, v.jsx)(cn, {
+                        }), (0, v.jsx)(uE.AgeVerificationUpsellProvider, {}), (0, v.jsx)(fi, {})],
+                        children: [(0, v.jsx)(fM, {}), (0, v.jsx)(la, {
+                            provider: fO
+                        }), (0, v.jsx)(fc, {}), (0, v.jsx)(fs, {}), (0, v.jsx)(ft, {}), (0, v.jsx)(fq, {}), (0, v.jsx)(lQ, {}), (0, v.jsx)(cr, {
                             openGraphMetadata: u
                         }), s((0, v.jsx)(r, {
                             ...i
@@ -13398,7 +13444,7 @@
                 })
             })
         };
-    t.s(["CustomApp", 0, fF, "default", 0, fF, "reportWebVitals", 0, fC], 656350)
+    t.s(["CustomApp", 0, fG, "default", 0, fG, "reportWebVitals", 0, fI], 656350)
 }, 681109, (t, n, r) => {
     let i = "/_app";
     (window.__NEXT_P = window.__NEXT_P || []).push([i, () => t.r(656350)]), n.hot && n.hot.dispose(function() {
@@ -13805,5 +13851,5 @@
     n.exports = t.r(816657)
 }]);
 
-//# debugId=1810f541-57f7-32fa-fa75-5116bd886082
-//# sourceMappingURL=199xbd2r2-iwv.js.map
+//# debugId=7a8b2c3b-6557-8ab9-3fe2-9b8fad8b58bc
+//# sourceMappingURL=2qioixg7msrng.js.map

@@ -3,12 +3,12 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "f3a261fe-5c57-f166-28ee-f6278f800246")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "ee402f37-b789-4e00-66ca-120e66bc86a7")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 773057, 324562, 368851, 269780, 858832, 570006, e => {
     "use strict";
-    var t, s, r, n, i, a, o, u, d, c, v, l, h = e.i(721281),
+    var t, s, r, n, i, a, o, u, d, v, c, l, h = e.i(721281),
         p = e.i(483869),
         I = e.i(132248),
         m = e.i(213067),
@@ -27,9 +27,9 @@
     var q = ((u = q || {})[u.UnknownError = 0] = "UnknownError", u[u.InvalidUniverse = 1] = "InvalidUniverse", u[u.InvalidUniversePermissions = 2] = "InvalidUniversePermissions", u[u.NameOrDescriptionRejected = 7] = "NameOrDescriptionRejected", u[u.NameTooLong = 8] = "NameTooLong", u[u.NoRootPlace = 12] = "NoRootPlace", u[u.MissingLuobuTerms = 29] = "MissingLuobuTerms", u[u.CreatorAccountTooYoung = 40] = "CreatorAccountTooYoung", u[u.PromotionalTextRejected = 52] = "PromotionalTextRejected", u[u.PromotionalTextSafetyUnavailable = 53] = "PromotionalTextSafetyUnavailable", u);
     e.s(["default", 0, q], 858832);
     var T = ((d = T || {})[d.UnknownError = 0] = "UnknownError", d[d.InvalidUniverse = 1] = "InvalidUniverse", d[d.InvalidUniversePermissions = 3] = "InvalidUniversePermissions", d[d.UpdateTextBlocked = 7] = "UpdateTextBlocked", d),
-        S = ((c = S || {})[c.UnknownError = 0] = "UnknownError", c[c.InvalidUniverse = 2] = "InvalidUniverse", c[c.NoRootPlace = 3] = "NoRootPlace", c[c.UpdatedTooOften = 5] = "UpdatedTooOften", c);
+        S = ((v = S || {})[v.UnknownError = 0] = "UnknownError", v[v.InvalidUniverse = 2] = "InvalidUniverse", v[v.NoRootPlace = 3] = "NoRootPlace", v[v.UpdatedTooOften = 5] = "UpdatedTooOften", v);
     e.s(["default", 0, S], 570006);
-    var G = ((v = G || {}).User = "User", v.Group = "Group", v.Team = "Team", v),
+    var G = ((c = G || {}).User = "User", c.Group = "Group", c.Team = "Team", c),
         x = ((l = x || {}).GameName = "GameName", l.GameCreated = "GameCreated", l.LastUpdated = "LastUpdated", l);
     let C = new class {
         async isUserEmailVerified() {
@@ -139,6 +139,19 @@
                 universeId: e
             })
         }
+        getPlaytesters(e) {
+            return this.universeSettingsApi.v1UniversesUniverseIdConfigurationPlaytestersGet({
+                universeId: e
+            })
+        }
+        removePlaytesters(e, t) {
+            return this.universeSettingsApi.v1UniversesUniverseIdConfigurationPlaytestersDelete({
+                universeId: e,
+                request: {
+                    playtesters: t
+                }
+            })
+        }
         setUniverseConfiguration(e, t) {
             return this.universeSettingsApi.v1UniversesUniverseIdConfigurationPatch({
                 universeId: e,
@@ -147,7 +160,7 @@
                 }
             })
         }
-        setUniverseConfigurationV2(e, t, s, r, n, i, a, o, u, d, c, v, l, h, p, I) {
+        setUniverseConfigurationV2(e, t, s, r, n, i, a, o, u, d, v, c, l, h, p, I) {
             return this.universeSettingsApiV2.v2UniversesUniverseIdConfigurationPatch({
                 universeId: e,
                 model: {
@@ -160,8 +173,8 @@
                     isFriendsOnly: o,
                     playableDevices: u,
                     isForSale: d,
-                    price: c,
-                    fiatBasePriceId: v,
+                    price: v,
+                    fiatBasePriceId: c,
                     fiatProductChangeType: l,
                     audiences: h,
                     demoModeEnabled: p,
@@ -209,14 +222,14 @@
         searchUniverses(e, t, s, r, n, i, a, o, u) {
             let d = "";
             void 0 !== t && (d += t), void 0 !== r && (d += " archived:".concat(r ? "True" : "False")), void 0 !== n && (d += " active:".concat(n ? "True" : "False")), d += " creator:".concat(e), e === G.Group && void 0 !== s && (d += " groups:".concat(s));
-            let c = [];
+            let v = [];
             if (void 0 !== i) {
                 let e = a === p.V1SearchUniversesGetSortOrderEnum.Desc ? "-" : "+";
-                c.push(e + i)
+                v.push(e + i)
             }
             return this.searchApi.v1SearchUniversesGet({
                 q: d,
-                sort: c,
+                sort: v,
                 sortOrder: a && p.V1SearchUniversesGetSortOrderEnum[a],
                 limit: o,
                 cursor: u
@@ -547,7 +560,7 @@
         }
     }
 
-    function c(e) {
+    function v(e) {
         var s;
         return null == (s = e) ? s : {
             gameTemplateType: (0, t.exists)(s, "gameTemplateType") ? s.gameTemplateType : void 0,
@@ -556,7 +569,7 @@
         }
     }
 
-    function v(e) {
+    function c(e) {
         var s;
         return null == (s = e) ? s : {
             universeId: (0, t.exists)(s, "universeId") ? s.universeId : void 0,
@@ -1429,7 +1442,7 @@
                             case 1:
                                 return i = s.sent(), [2, new t.JSONApiResponse(i, function(e) {
                                     return null == e ? e : {
-                                        data: (0, t.exists)(e, "data") ? e.data.map(c) : void 0
+                                        data: (0, t.exists)(e, "data") ? e.data.map(v) : void 0
                                     }
                                 })]
                         }
@@ -1507,7 +1520,7 @@
                                 }, r)];
                             case 1:
                                 return a = s.sent(), [2, new t.JSONApiResponse(a, function(e) {
-                                    return e.map(v)
+                                    return e.map(c)
                                 })]
                         }
                     })
@@ -1543,7 +1556,7 @@
                                 }, r)];
                             case 1:
                                 return a = s.sent(), [2, new t.JSONApiResponse(a, function(e) {
-                                    return v(e)
+                                    return c(e)
                                 })]
                         }
                     })
@@ -4243,7 +4256,7 @@
         }
     }
 
-    function c(e) {
+    function v(e) {
         if (void 0 !== e) return null === e ? null : {
             height: e.height,
             width: e.width,
@@ -4254,7 +4267,7 @@
         }
     }
 
-    function v(e, s) {
+    function c(e, s) {
         var r;
         return null == e ? e : {
             allowPrivateServers: (0, t.exists)(e, "allowPrivateServers") ? e.allowPrivateServers : void 0,
@@ -4713,7 +4726,7 @@
                                 }, r)];
                             case 1:
                                 return a = s.sent(), [2, new t.JSONApiResponse(a, function(e) {
-                                    return v(e)
+                                    return c(e)
                                 })]
                         }
                     })
@@ -4763,8 +4776,8 @@
                                             isForSale: e.isForSale,
                                             price: e.price,
                                             universeAvatarAssetOverrides: void 0 === e.universeAvatarAssetOverrides ? void 0 : e.universeAvatarAssetOverrides.map(u),
-                                            universeAvatarMinScales: c(e.universeAvatarMinScales),
-                                            universeAvatarMaxScales: c(e.universeAvatarMaxScales),
+                                            universeAvatarMinScales: v(e.universeAvatarMinScales),
+                                            universeAvatarMaxScales: v(e.universeAvatarMaxScales),
                                             studioAccessToApisAllowed: e.studioAccessToApisAllowed,
                                             permissions: function(e) {
                                                 if (void 0 !== e) return null === e ? null : {
@@ -4785,7 +4798,7 @@
                                 }, r)];
                             case 1:
                                 return a = s.sent(), [2, new t.JSONApiResponse(a, function(e) {
-                                    return v(e)
+                                    return c(e)
                                 })]
                         }
                     })
@@ -5004,5 +5017,5 @@
     }])
 }]);
 
-//# debugId=f3a261fe-5c57-f166-28ee-f6278f800246
-//# sourceMappingURL=0riz0et49hkjd.js.map
+//# debugId=ee402f37-b789-4e00-66ca-120e66bc86a7
+//# sourceMappingURL=3yk5_a99fp6xy.js.map

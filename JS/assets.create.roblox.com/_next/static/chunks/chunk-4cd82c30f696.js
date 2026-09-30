@@ -3,24 +3,24 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "becb2f16-f9d2-15b9-53d2-cfde76a1827a")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "9c1b039b-7369-0ff8-1b39-6966a4b22a53")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 29929, e => {
     "use strict";
     let a;
-    var t, r, s, o, i, n, l, c, d, u, b, g, m, f, p, h, v, x, _, k, C = e.i(650502),
+    var t, r, s, o, c, i, n, l, d, u, b, g, m, f, p, h, v, x, _, k, C = e.i(650502),
         y = e.i(864392),
         S = ((t = {}).ShowVrDeviceOption = "showVrDeviceOption", t.ShowIXPClientTest = "showIXPClientTest", t.ShowMemoryStoresDashboard = "showMemoryStoresDashboard", t.ShowAdvancedSettingsPage = "showAdvancedSettingsPage", t.EnableIA = "enableIA", t.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", t.EnableDevexEarnedRobux = "enableDevexEarnedRobux", t.EnableExperienceGenre = "enableExperienceGenre", t.EnablePlayerFeedbackTranslationsWeb = "EnablePlayerFeedbackTranslationsWeb", t.EnablePlayerFeedbackTranslationRetries = "EnablePlayerFeedbackTranslationRetries", t.EnablePlayerFeedbackDetailedFilter = "enablePlayerFeedbackDetailedFilter", t.EnableEventRequestFeaturing = "enableEventRequestFeaturing", t.EnableCollaboratorsPageV2 = "enableCollaboratorsPageV2", t),
         E = ((r = {}).EnableRightsManager = "enableRightsManager", r.EnableBulkFiling = "enableBulkFiling", r.EnableOnDemandSearch = "enableOnDemandSearch", r.EnableEditRegistration = "enableEditRegistration", r.EnableImageSearch = "enableImageSearch", r.EnableClaimsAgainstMe = "enableClaimsAgainstMe", r.EnableGenAiOptOut = "enableGenAiOptOut", r.EnableInExperienceIpReporting = "enableInExperienceIpReporting", r.EnableIpContentSearch = "enableIpContentSearch", r.EnableTrademark = "enableTrademark", r),
         w = ((s = {}).EnableIPRecommender = "enableIPRecommender", s),
         P = ((o = P || {}).EnableVideoOnboarding = "enableVideoOnboarding", o),
-        q = ((i = q || {}).EnableSignalLookup = "enableSignalLookup", i.AlwaysShow = "alwaysShow", i),
+        q = ((c = q || {}).EnableSignalLookup = "enableSignalLookup", c.AlwaysShow = "alwaysShow", c),
         H = H || {},
-        j = ((n = j || {}).mobileVariant = "mobileVariant", n),
+        j = ((i = j || {}).mobileVariant = "mobileVariant", i),
         I = I || {},
-        R = ((l = {}).ShowEditInStudioButton = "showEditInStudioButton", l.EnableCreationsNavLayout = "enableCreationsIPNavLayout", l),
-        A = ((c = {}).EnableBulkAssetUpload = "enableBulkAssetUpload", c),
+        R = ((n = {}).ShowEditInStudioButton = "showEditInStudioButton", n.EnableCreationsNavLayout = "enableCreationsIPNavLayout", n),
+        A = ((l = {}).EnableBulkAssetUpload = "enableBulkAssetUpload", l),
         T = ((d = {}).EnableAudienceReachOnOverview = "enableAudienceReachOnOverviewPage", d.EnableAudienceReachGrowthOpportunitiesBanner = "enableAudienceReachGrowthOpportunitiesBanner", d.EnableAudienceControls = "enableAudienceControls", d.EnableNewBadgePattern = "enableNewBadgePattern", d.EnableAtRiskAnnotationOnExperiences = "enableAtRiskAnnotationOnExperiences", d.EnableAudiencesReplacement = "enableAudiencesReplacement", d),
         z = ((u = {}).EnableTalentHubV2 = "enableTalentHubV2", u.EnableTalentHubV2M2 = "enableTalentHubV2M2", u),
         M = ((b = {}).StarterPlaceTemplateId = "starterPlaceTemplateId", b),
@@ -96,10 +96,10 @@
         r = e.i(697973),
         s = e.i(776344),
         o = e.i(462863),
-        i = e.i(343885),
-        n = e.i(609794),
-        l = e.i(57561),
-        c = e.i(509747),
+        c = e.i(343885),
+        i = e.i(609794),
+        n = e.i(57561),
+        l = e.i(509747),
         d = e.i(475555),
         u = e.i(538302),
         b = e.i(387707),
@@ -150,10 +150,10 @@
         er = e.i(818392),
         es = e.i(173034),
         eo = e.i(780078),
-        ei = e.i(756885),
-        en = e.i(260123),
-        el = e.i(507792),
-        ec = e.i(850994);
+        ec = e.i(756885),
+        ei = e.i(260123),
+        en = e.i(507792),
+        el = e.i(850994);
     let ed = {
         secrets: {
             light: z.default,
@@ -168,8 +168,8 @@
             dark: W.default
         },
         experiences: {
-            light: el.default,
-            dark: en.default
+            light: en.default,
+            dark: ei.default
         },
         shareLinks: {
             light: ea.default,
@@ -192,8 +192,8 @@
             dark: G.default
         },
         audio: {
-            light: c.default,
-            dark: l.default
+            light: l.default,
+            dark: n.default
         },
         decals: {
             light: x.default,
@@ -204,8 +204,8 @@
             dark: w.default
         },
         videos: {
-            light: ec.default,
-            dark: ei.default
+            light: el.default,
+            dark: ec.default
         },
         meshes: {
             light: N.default,
@@ -244,8 +244,8 @@
             dark: b.default
         },
         apiKeys: {
-            light: n.default,
-            dark: i.default
+            light: i.default,
+            dark: c.default
         },
         signin: {
             light: er.default,
@@ -277,7 +277,7 @@
         }
     };
     e.s(["default", 0, ed], 938429);
-    let eu = "".concat("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/assets", "/spot_illustrations"),
+    let eu = "".concat("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/assets", "/spot_illustrations"),
         eb = {
             small: {
                 analytics: "".concat(eu, "/small/analytics.svg"),
@@ -353,11 +353,11 @@
                 darkSrc: s.dark,
                 alt: t
             });
-            let i = t ? eb[r][t] : null;
-            return i && (0, a.jsx)("img", {
+            let c = t ? eb[r][t] : null;
+            return c && (0, a.jsx)("img", {
                 height: "large" === r ? 240 : 96,
                 width: "large" === r ? 320 : 96,
-                src: i,
+                src: c,
                 alt: t
             })
         },
@@ -365,12 +365,12 @@
             let {
                 children: r,
                 title: o,
-                description: i,
-                size: n = "large",
-                illustration: l
+                description: c,
+                size: i = "large",
+                illustration: n
             } = e, {
                 classes: {
-                    smallContainer: c,
+                    smallContainer: l,
                     largeContainer: d,
                     smallText: u,
                     largeText: b
@@ -380,20 +380,20 @@
             return (0, a.jsxs)(s.default, {
                 classes: {
                     root: g({
-                        [c]: "small" === n,
-                        [d]: "large" === n
+                        [l]: "small" === i,
+                        [d]: "large" === i
                     })
                 },
                 flexDirection: "column",
                 alignItems: "center",
                 children: [(0, a.jsx)(em, {
-                    illustration: l,
-                    size: n
+                    illustration: n,
+                    size: i
                 }), (0, a.jsxs)(s.default, {
                     classes: {
                         root: g({
-                            [u]: "small" === n,
-                            [b]: "large" === n
+                            [u]: "small" === i,
+                            [b]: "large" === i
                         })
                     },
                     flexDirection: "column",
@@ -403,10 +403,10 @@
                         variant: "h4",
                         color: "primary",
                         children: o
-                    }), i && (0, a.jsx)(t.Typography, {
+                    }), c && (0, a.jsx)(t.Typography, {
                         textAlign: "center",
                         color: "secondary",
-                        children: i
+                        children: c
                     })]
                 }), r]
             })
@@ -429,26 +429,26 @@
             let o = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {
                     skipHistory: !1
                 },
-                i = null != (t = s.query) ? t : {},
-                n = {
-                    ...i
+                c = null != (t = s.query) ? t : {},
+                i = {
+                    ...c
                 };
             e.forEach(e => {
                 if (!Object.hasOwn(a, e)) return;
                 let t = a[e];
-                null == t ? delete n[e] : Array.isArray(t) ? n[e] = t.map(e => e.toString()) : n[e] = t.toString()
-            }), Array.from(new Set([...Object.keys(i), ...Object.keys(n)])).every(e => ((e, a) => {
+                null == t ? delete i[e] : Array.isArray(t) ? i[e] = t.map(e => e.toString()) : i[e] = t.toString()
+            }), Array.from(new Set([...Object.keys(c), ...Object.keys(i)])).every(e => ((e, a) => {
                 if (null == e && null == a) return !0;
                 if (null == e || null == a) return !1;
                 let t = Array.isArray(e) ? e : [e],
                     r = Array.isArray(a) ? a : [a];
                 return t.length === r.length && t.every((e, a) => e === r[a])
-            })(i[e], n[e])) || (o.skipHistory ? s.replace({
+            })(c[e], i[e])) || (o.skipHistory ? s.replace({
                 pathname: s.pathname,
-                query: n
+                query: i
             }) : s.push({
                 pathname: s.pathname,
-                query: n
+                query: i
             }, void 0, r))
         }, [s, e, r])]
     }, "normalizeSingleQueryParam", 0, e => {
@@ -475,22 +475,22 @@
         r = e.i(458451),
         s = e.i(533414),
         o = e.i(157310),
-        i = e.i(279149),
-        n = e.i(602635),
-        l = e.i(814975);
-    let c = (0, e.i(272593).createClientConfiguration)("creator-home-api", "bedev2"),
-        d = new i.GroupsApi(c),
+        c = e.i(279149),
+        i = e.i(602635),
+        n = e.i(814975);
+    let l = (0, e.i(272593).createClientConfiguration)("creator-home-api", "bedev2"),
+        d = new c.GroupsApi(l),
         u = function() {
             let {
                 user: e
-            } = (0, l.useAuthentication)();
+            } = (0, n.useAuthentication)();
             return (0, o.useQuery)({
-                queryKey: n.getGroupsQueryKey,
+                queryKey: i.getGroupsQueryKey,
                 enabled: !!e,
                 queryFn: () => {
                     let e;
                     return e = {
-                        surface: i.GroupListSurface.CreatorHub
+                        surface: c.GroupListSurface.CreatorHub
                     }, d.groupsListGroups(e)
                 }
             })
@@ -500,12 +500,12 @@
         let {
             children: o
         } = e, {
-            user: i
+            user: c
         } = (0, r.useRobloxAuthentication)(), {
-            data: n,
-            isLoading: l,
-            refetch: c
-        } = u(), [d, g] = (0, s.useLocalStorage)("creatorHubGroups.".concat(null == i ? void 0 : i.id), null), [m, f] = (0, s.useLocalStorage)("creatorHubGroup.".concat(null == i ? void 0 : i.id), null), [p, h] = (0, s.useLocalStorage)("creatorHubGroupData.".concat(null == i ? void 0 : i.id), {}), v = (0, t.useCallback)(e => {
+            data: i,
+            isLoading: n,
+            refetch: l
+        } = u(), [d, g] = (0, s.useLocalStorage)("creatorHubGroups.".concat(null == c ? void 0 : c.id), null), [m, f] = (0, s.useLocalStorage)("creatorHubGroup.".concat(null == c ? void 0 : c.id), null), [p, h] = (0, s.useLocalStorage)("creatorHubGroupData.".concat(null == c ? void 0 : c.id), {}), v = (0, t.useCallback)(e => {
             f(e);
             let a = null === e ? "user" : e;
             h(e => {
@@ -526,14 +526,14 @@
                 }
             })
         }, [f, h]), x = (0, t.useMemo)(() => {
-            if (null == n ? void 0 : n.groups) return null == n ? void 0 : n.groups;
+            if (null == i ? void 0 : i.groups) return null == i ? void 0 : i.groups;
             if (null === d) return [];
             try {
                 return "string" == typeof d ? JSON.parse(d) : d
             } catch (e) {
                 return []
             }
-        }, [d, null == n ? void 0 : n.groups]), _ = (0, t.useMemo)(() => {
+        }, [d, null == i ? void 0 : i.groups]), _ = (0, t.useMemo)(() => {
             var e;
             return m && null != (e = x.find(e => {
                 let {
@@ -543,16 +543,16 @@
             })) ? e : null
         }, [m, x]);
         (0, t.useEffect)(() => {
-            (null == i ? void 0 : i.id) && (null == n ? void 0 : n.groups) && !l && g(null == n ? void 0 : n.groups)
-        }, [null == n ? void 0 : n.groups, x, l, g, null == i ? void 0 : i.id]);
+            (null == c ? void 0 : c.id) && (null == i ? void 0 : i.groups) && !n && g(null == i ? void 0 : i.groups)
+        }, [null == i ? void 0 : i.groups, x, n, g, null == c ? void 0 : c.id]);
         let k = (0, t.useMemo)(() => ({
             groups: x,
             currentGroup: _,
             groupData: p,
-            isFetched: !l && !!(null == i ? void 0 : i.id),
-            refreshGroups: c,
+            isFetched: !n && !!(null == c ? void 0 : c.id),
+            refreshGroups: l,
             setCurrentGroup: v
-        }), [_, p, x, l, c, v, null == i ? void 0 : i.id]);
+        }), [_, p, x, n, l, v, null == c ? void 0 : c.id]);
         return (0, a.jsx)(b.Provider, {
             value: k,
             children: o
@@ -567,125 +567,125 @@
         return e
     }], 745873)
 }, 127792, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/alert_dark.1spa8ixzmujxs.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/alert_dark.1spa8ixzmujxs.svg")
 }, 858517, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/alert_light.3o6_fob3g_8zu.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/alert_light.3o6_fob3g_8zu.svg")
 }, 343885, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/api_key_dark.1k1v6y4zm3j28.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/api_key_dark.1k1v6y4zm3j28.svg")
 }, 609794, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/api_key_light.06t4q4202-77s.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/api_key_light.06t4q4202-77s.svg")
 }, 57561, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/audio_dark.16razgllw2ska.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/audio_dark.16razgllw2ska.svg")
 }, 509747, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/audio_light.3ra073_18pbj-.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/audio_light.3ra073_18pbj-.svg")
 }, 475555, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/avatar_setup_dark.0orjsl7i089hc.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/avatar_setup_dark.0orjsl7i089hc.svg")
 }, 538302, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/avatar_setup_light.32r86q54d7kuh.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/avatar_setup_light.32r86q54d7kuh.svg")
 }, 387707, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/badge_dark.3m45r-3favo3f.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/badge_dark.3m45r-3favo3f.svg")
 }, 262135, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/badge_light.3fxfvj8ub7utb.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/badge_light.3fxfvj8ub7utb.svg")
 }, 240731, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/bar_graph_dark.01vf9sty52re2.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/bar_graph_dark.01vf9sty52re2.svg")
 }, 956923, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/bar_graph_light.1iiixo_d8ur81.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/bar_graph_light.1iiixo_d8ur81.svg")
 }, 84362, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/collaborators_dark.30gxkwssilacj.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/collaborators_dark.30gxkwssilacj.svg")
 }, 214665, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/collaborators_light.3x7fovqhay1x5.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/collaborators_light.3x7fovqhay1x5.svg")
 }, 455506, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/decals_dark.2jpntsljojhzc.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/decals_dark.2jpntsljojhzc.svg")
 }, 918290, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/decals_light.16_gp3tnuc5p_.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/decals_light.16_gp3tnuc5p_.svg")
 }, 716933, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/envelope_dark.2-ouf9shuihi4.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/envelope_dark.2-ouf9shuihi4.svg")
 }, 347319, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/envelope_light.1me9hqye66z7w.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/envelope_light.1me9hqye66z7w.svg")
 }, 543657, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/event_calendar_dark.3lx4_kse68by8.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/event_calendar_dark.3lx4_kse68by8.svg")
 }, 850412, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/event_calendar_light.1pq-t84d90ty1.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/event_calendar_light.1pq-t84d90ty1.svg")
 }, 103329, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/find_people_dark.220q6_cs04hcq.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/find_people_dark.220q6_cs04hcq.svg")
 }, 692706, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/find_people_light.1gkb3pmwc8s2n.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/find_people_light.1gkb3pmwc8s2n.svg")
 }, 405654, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/image_dark.2giew28wx4z86.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/image_dark.2giew28wx4z86.svg")
 }, 891409, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/image_light.0ouq8tcgpznz7.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/image_light.0ouq8tcgpznz7.svg")
 }, 758060, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/leaderboard_dark.301ypg94lbxpv.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/leaderboard_dark.301ypg94lbxpv.svg")
 }, 710005, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/leaderboard_light.43sjz_ibwkiq_.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/leaderboard_light.43sjz_ibwkiq_.svg")
 }, 495550, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/line_chart_dark.0k7qf3mhepo6s.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/line_chart_dark.0k7qf3mhepo6s.svg")
 }, 320429, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/line_chart_light.049gcvvmai0ax.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/line_chart_light.049gcvvmai0ax.svg")
 }, 106017, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/localization_dark.1ia7wat2mwyfi.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/localization_dark.1ia7wat2mwyfi.svg")
 }, 821978, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/localization_light.2jss_xvx2fuq0.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/localization_light.2jss_xvx2fuq0.svg")
 }, 766389, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/lockSecrets_dark.0na6naigcbnkj.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/lockSecrets_dark.0na6naigcbnkj.svg")
 }, 374717, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/lockSecrets_light.0rzix2i1i13lt.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/lockSecrets_light.0rzix2i1i13lt.svg")
 }, 756733, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/makeup_look_dark.26-5-yn8598c9.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/makeup_look_dark.26-5-yn8598c9.svg")
 }, 251697, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/makeup_look_light.0rc05t5n5al4m.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/makeup_look_light.0rc05t5n5al4m.svg")
 }, 411118, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/managed_pricing_dark.2zdkf2-ctboa2.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/managed_pricing_dark.2zdkf2-ctboa2.svg")
 }, 839596, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/managed_pricing_light.0sioq_hruq1qp.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/managed_pricing_light.0sioq_hruq1qp.svg")
 }, 729733, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/meshes_dark.2tlm50ns1pq5o.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/meshes_dark.2tlm50ns1pq5o.svg")
 }, 66217, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/meshes_light.36wh96flp2o3r.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/meshes_light.36wh96flp2o3r.svg")
 }, 148865, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/models_dark.30suu5lj5-ua5.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/models_dark.30suu5lj5-ua5.svg")
 }, 45512, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/models_light.0kiw6k3ejw-rn.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/models_light.0kiw6k3ejw-rn.svg")
 }, 706478, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/models_plugins_parts_dark.3jp6jislnsqf8.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/models_plugins_parts_dark.3jp6jislnsqf8.svg")
 }, 166181, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/models_plugins_parts_light.2nj1xhv0bfg_u.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/models_plugins_parts_light.2nj1xhv0bfg_u.svg")
 }, 37474, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/notifications_dark.2l_rf34_xo6o8.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/notifications_dark.2l_rf34_xo6o8.svg")
 }, 147189, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/notifications_light.3p-b4rzvwwfmj.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/notifications_light.3p-b4rzvwwfmj.svg")
 }, 105897, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/oauth_dark.42jv8--11_1i0.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/oauth_dark.42jv8--11_1i0.svg")
 }, 123524, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/oauth_light.17vwiebwrn8ox.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/oauth_light.17vwiebwrn8ox.svg")
 }, 752739, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/rights_manager_dark.0m7ca17sdbgim.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/rights_manager_dark.0m7ca17sdbgim.svg")
 }, 331105, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/rights_manager_light.1moaenz1cbft0.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/rights_manager_light.1moaenz1cbft0.svg")
 }, 564908, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/run_dark.1sun4tvxh_arh.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/run_dark.1sun4tvxh_arh.svg")
 }, 663412, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/run_light.29f-3jyw910_v.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/run_light.29f-3jyw910_v.svg")
 }, 215887, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/shareLinks_dark.1l5fwuv6cgzmy.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/shareLinks_dark.1l5fwuv6cgzmy.svg")
 }, 962803, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/shareLinks_light.116igf-ldibmu.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/shareLinks_light.116igf-ldibmu.svg")
 }, 914865, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/signin_dark.1k_gzn1-5q0ca.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/signin_dark.1k_gzn1-5q0ca.svg")
 }, 818392, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/signin_light.1o1-jng_ct0y2.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/signin_light.1o1-jng_ct0y2.svg")
 }, 173034, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/token_dark.2qy4jy9ffjhax.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/token_dark.2qy4jy9ffjhax.svg")
 }, 780078, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/token_light.2xc00j5zp1q8_.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/token_light.2xc00j5zp1q8_.svg")
 }, 756885, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/video_dark.2-gdpodjtsjj3.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/video_dark.2-gdpodjtsjj3.svg")
 }, 260123, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/video_game_dark.0tuxtkttj8gcu.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/video_game_dark.0tuxtkttj8gcu.svg")
 }, 507792, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/video_game_light.3l155817mjupj.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/video_game_light.3l155817mjupj.svg")
 }, 850994, e => {
-    e.q("https://assets.create.roblox.com/7b6474626e3f0ae883761c63d41addfbc2b59b9d/_next/static/media/video_light.1fum3vlxctp7w.svg")
+    e.q("https://assets.create.roblox.com/07be10e78180f047a6bc961ccc8d9b462fc796a0/_next/static/media/video_light.1fum3vlxctp7w.svg")
 }, 367808, e => {
     "use strict";
     var a = e.i(194250),
@@ -693,18 +693,18 @@
         r = e.i(863605),
         s = e.i(154502),
         o = e.i(945146),
-        i = e.i(690569),
-        n = e.i(251635),
-        l = e.i(787802),
-        c = e.i(221628),
+        c = e.i(690569),
+        i = e.i(251635),
+        n = e.i(787802),
+        l = e.i(221628),
         d = e.i(396249),
         u = e.i(121880);
 
     function b(e) {
-        return (0, i.g)("MuiAlertTitle", e)
-    }(0, l.g)("MuiAlertTitle", ["root"]);
+        return (0, c.g)("MuiAlertTitle", e)
+    }(0, n.g)("MuiAlertTitle", ["root"]);
     let g = ["className"],
-        m = (0, n.s)(d.T, {
+        m = (0, i.s)(d.T, {
             name: "MuiAlertTitle",
             slot: "Root",
             overridesResolver: (e, a) => a.root
@@ -725,21 +725,21 @@
                 {
                     className: r
                 } = t,
-                s = (0, i._)(t, g),
-                l = (e => {
+                s = (0, c._)(t, g),
+                n = (e => {
                     let {
                         classes: a
                     } = e;
-                    return (0, n.a)({
+                    return (0, i.a)({
                         root: ["root"]
                     }, b, a)
                 })(t);
-            return (0, c.jsx)(m, (0, o._)({
+            return (0, l.jsx)(m, (0, o._)({
                 gutterBottom: !0,
                 component: "div",
                 ownerState: t,
                 ref: a,
-                className: (0, n.c)(l.root, r)
+                className: (0, i.c)(n.root, r)
             }, s))
         });
     var p = (0, r.default)({
@@ -753,15 +753,15 @@
         }),
         h = (0, t.forwardRef)(function(e, r) {
             var o = e.classes,
-                i = e.className,
-                n = (0, a.a)(e, ["classes", "className"]),
-                l = p(void 0, {
+                c = e.className,
+                i = (0, a.a)(e, ["classes", "className"]),
+                n = p(void 0, {
                     props: {
-                        classes: (0, s.default)(o, i)
+                        classes: (0, s.default)(o, c)
                     }
                 });
-            return t.default.createElement(f, (0, a._)({}, n, {
-                classes: l.classes,
+            return t.default.createElement(f, (0, a._)({}, i, {
+                classes: n.classes,
                 ref: r
             }))
         });
@@ -773,10 +773,10 @@
         r = e.i(863605),
         s = e.i(154502),
         o = e.i(787802),
-        i = e.i(690569),
-        n = e.i(945146),
-        l = e.i(251635),
-        c = e.i(51928),
+        c = e.i(690569),
+        i = e.i(945146),
+        n = e.i(251635),
+        l = e.i(51928),
         d = e.i(634034),
         u = e.i(221628),
         b = e.i(176595),
@@ -789,26 +789,26 @@
         p = (0, d.c)((0, u.jsx)("path", {
             d: "M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
         }), "RadioButtonChecked");
-    let h = (0, l.s)("span", {
+    let h = (0, n.s)("span", {
             name: "MuiRadioButtonIcon",
-            shouldForwardProp: l.r
+            shouldForwardProp: n.r
         })({
             position: "relative",
             display: "flex"
         }),
-        v = (0, l.s)(f, {
+        v = (0, n.s)(f, {
             name: "MuiRadioButtonIcon"
         })({
             transform: "scale(1)"
         }),
-        x = (0, l.s)(p, {
+        x = (0, n.s)(p, {
             name: "MuiRadioButtonIcon"
         })(e => {
             let {
                 theme: a,
                 ownerState: t
             } = e;
-            return (0, n._)({
+            return (0, i._)({
                 left: 0,
                 position: "absolute",
                 transform: "scale(0)",
@@ -830,7 +830,7 @@
             checked: a = !1,
             classes: t = {},
             fontSize: r
-        } = e, s = (0, n._)({}, e, {
+        } = e, s = (0, i._)({}, e, {
             checked: a
         });
         return (0, u.jsxs)(h, {
@@ -849,30 +849,30 @@
     }
 
     function k(e) {
-        return (0, i.g)("MuiRadio", e)
+        return (0, c.g)("MuiRadio", e)
     }
     var C = (0, o.g)("MuiRadio", ["root", "checked", "disabled", "colorPrimary", "colorSecondary", "sizeSmall"]);
     let y = ["checked", "checkedIcon", "color", "icon", "name", "onChange", "size", "className"],
-        S = (0, l.s)(c.S, {
-            shouldForwardProp: e => (0, l.r)(e) || "classes" === e,
+        S = (0, n.s)(l.S, {
+            shouldForwardProp: e => (0, n.r)(e) || "classes" === e,
             name: "MuiRadio",
             slot: "Root",
             overridesResolver: (e, a) => {
                 let {
                     ownerState: t
                 } = e;
-                return [a.root, "medium" !== t.size && a["size".concat((0, i.a)(t.size))], a["color".concat((0, i.a)(t.color))]]
+                return [a.root, "medium" !== t.size && a["size".concat((0, c.a)(t.size))], a["color".concat((0, c.a)(t.color))]]
             }
         })(e => {
             let {
                 theme: a,
                 ownerState: t
             } = e;
-            return (0, n._)({
+            return (0, i._)({
                 color: (a.vars || a).palette.text.secondary
             }, !t.disableRipple && {
                 "&:hover": {
-                    backgroundColor: a.vars ? "rgba(".concat("default" === t.color ? a.vars.palette.action.activeChannel : a.vars.palette[t.color].mainChannel, " / ").concat(a.vars.palette.action.hoverOpacity, ")") : (0, i.b)("default" === t.color ? a.palette.action.active : a.palette[t.color].main, a.palette.action.hoverOpacity),
+                    backgroundColor: a.vars ? "rgba(".concat("default" === t.color ? a.vars.palette.action.activeChannel : a.vars.palette[t.color].mainChannel, " / ").concat(a.vars.palette.action.hoverOpacity, ")") : (0, c.b)("default" === t.color ? a.palette.action.active : a.palette[t.color].main, a.palette.action.hoverOpacity),
                     "@media (hover: none)": {
                         backgroundColor: "transparent"
                     }
@@ -892,7 +892,7 @@
         }),
         w = (0, u.jsx)(_, {}),
         P = t.forwardRef(function(e, a) {
-            var r, s, o, c;
+            var r, s, o, l;
             let d = (0, g.u)({
                     props: e,
                     name: "MuiRadio"
@@ -907,8 +907,8 @@
                     size: C = "medium",
                     className: P
                 } = d,
-                q = (0, i._)(d, y),
-                H = (0, n._)({}, d, {
+                q = (0, c._)(d, y),
+                H = (0, i._)({}, d, {
                     color: h,
                     size: C
                 }),
@@ -918,15 +918,15 @@
                         color: t,
                         size: r
                     } = e, s = {
-                        root: ["root", "color".concat((0, i.a)(t)), "medium" !== r && "size".concat((0, i.a)(r))]
+                        root: ["root", "color".concat((0, c.a)(t)), "medium" !== r && "size".concat((0, c.a)(r))]
                     };
-                    return (0, n._)({}, a, (0, l.a)(s, k, a))
+                    return (0, i._)({}, a, (0, n.a)(s, k, a))
                 })(H),
                 I = t.useContext(b.R),
                 R = f,
                 A = (0, m.c)(_, I && I.onChange),
                 T = x;
-            return I && (void 0 === R && (o = I.value, R = "object" == typeof(c = d.value) && null !== c ? o === c : String(o) === String(c)), void 0 === T && (T = I.name)), (0, u.jsx)(S, (0, n._)({
+            return I && (void 0 === R && (o = I.value, R = "object" == typeof(l = d.value) && null !== l ? o === l : String(o) === String(l)), void 0 === T && (T = I.name)), (0, u.jsx)(S, (0, i._)({
                 type: "radio",
                 icon: t.cloneElement(v, {
                     fontSize: null != (r = w.props.fontSize) ? r : C
@@ -940,7 +940,7 @@
                 checked: R,
                 onChange: A,
                 ref: a,
-                className: (0, l.c)(j.root, P)
+                className: (0, n.c)(j.root, P)
             }, q))
         });
     var q = (0, r.default)({
@@ -968,23 +968,23 @@
         }),
         H = (0, t.forwardRef)(function(e, r) {
             var o = e.classes,
-                i = e.color,
-                n = e.inputProps,
-                l = e["aria-label"],
-                c = e.className,
+                c = e.color,
+                i = e.inputProps,
+                n = e["aria-label"],
+                l = e.className,
                 d = (0, a.a)(e, ["classes", "color", "inputProps", "aria-label", "className"]),
                 u = q(void 0, {
                     props: {
-                        classes: (0, s.default)(o, c)
+                        classes: (0, s.default)(o, l)
                     }
                 });
             return t.default.createElement(P, (0, a._)({}, d, {
                 classes: u.classes,
-                color: void 0 === i ? "primary" : i,
+                color: void 0 === c ? "primary" : c,
                 ref: r,
                 inputProps: (0, a._)({
-                    "aria-label": l
-                }, n)
+                    "aria-label": n
+                }, i)
             }))
         });
     e.s(["Radio", 0, H], 957474)
@@ -1010,7 +1010,7 @@
         }
     });
     e.s(["default", 0, function(e) {
-        var o, i, n, l, c = e.children,
+        var o, c, i, n, l = e.children,
             d = (0, a.a)(e, ["children"]),
             u = (0, t.useRef)(null),
             b = (0, t.useState)(!1),
@@ -1044,8 +1044,8 @@
         }, [x, v]);
         return t.default.createElement(t.default.Fragment, null, t.default.createElement(s.Provider, {
             value: _
-        }, c), t.default.createElement(r.S, (0, a._)({}, (null == (o = p[0]) ? void 0 : o.props) || {}, d, {
-            TransitionProps: (0, a._)((0, a._)({}, (null == (n = null == (i = p[0]) ? void 0 : i.props) ? void 0 : n.TransitionProps) || {}), {
+        }, l), t.default.createElement(r.S, (0, a._)({}, (null == (o = p[0]) ? void 0 : o.props) || {}, d, {
+            TransitionProps: (0, a._)((0, a._)({}, (null == (i = null == (c = p[0]) ? void 0 : c.props) ? void 0 : i.TransitionProps) || {}), {
                 onExited: function(e) {
                     var t, r, s, o;
                     h(function(e) {
@@ -1059,7 +1059,7 @@
                 (null == (t = p[0]) ? void 0 : t.shouldClose(a)) && m(!1), (null == (r = p[0]) ? void 0 : r.props.onClose) && (null == (s = p[0]) || s.props.onClose(e, a))
             },
             open: g
-        }), null == (l = p[0]) ? void 0 : l.props.children))
+        }), null == (n = p[0]) ? void 0 : n.props.children))
     }, "useSnackbar", 0, function() {
         var e = (0, t.useContext)(s);
         return {
@@ -1089,13 +1089,13 @@
         s = ["pageload", "click", "impression", "hover", "webvitals", "apivitals", "formvitals", "error", "session"],
         o = new Set(["TTFB", "FCP", "LCP", "FID", "CLS", "INP"]);
     e.s(["UnifiedLoggerProvider", 0, e => {
-        var i;
+        var c;
         let {
-            children: n,
-            unifiedLogger: l,
-            pageLoggerConfig: c,
+            children: i,
+            unifiedLogger: n,
+            pageLoggerConfig: l,
             path: d
-        } = e, u = null != (i = null == c ? void 0 : c.tags) ? i : r, b = null == c ? void 0 : c.rosId, g = (0, a.useMemo)(() => ({
+        } = e, u = null != (c = null == l ? void 0 : l.tags) ? c : r, b = null == l ? void 0 : l.rosId, g = (0, a.useMemo)(() => ({
             tags: u,
             rosId: b,
             path: d
@@ -1115,20 +1115,20 @@
                 }), r.tags.forEach(a => e.addTag(a)), void 0 !== r.rosId && e.addTag("owner: ".concat(r.rosId))
             };
             return s.forEach(a => {
-                l.events.on(a, e)
+                n.events.on(a, e)
             }), () => {
                 s.forEach(a => {
-                    l.events.off(a, e)
+                    n.events.off(a, e)
                 })
             }
-        }, [l]);
+        }, [n]);
         let p = (0, a.useMemo)(() => ({
-            unifiedLogger: l,
+            unifiedLogger: n,
             pageContext: g
-        }), [l, g]);
+        }), [n, g]);
         return a.default.createElement(t.Provider, {
             value: p
-        }, n)
+        }, i)
     }, "useOptionalUnifiedLoggerProvider", 0, function() {
         return (0, a.useContext)(t)
     }, "useUnifiedLoggerProvider", 0, function() {
@@ -1138,5 +1138,5 @@
     }])
 }]);
 
-//# debugId=becb2f16-f9d2-15b9-53d2-cfde76a1827a
-//# sourceMappingURL=334a03lkv3qmt.js.map
+//# debugId=9c1b039b-7369-0ff8-1b39-6966a4b22a53
+//# sourceMappingURL=3g_0v30afdnkc.js.map

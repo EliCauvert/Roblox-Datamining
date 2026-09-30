@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "46a1e870-9ab7-e803-9534-cbc19ba1a480")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "12663877-5e24-2c01-6226-62ee45f8d712")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 730530, e => {
@@ -99,8 +99,8 @@
         p = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/publishing-to-marketplace#sale-location");
     (0, o.getProductionCreatorHubUrl)("global");
     let f = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/subscriptions#creating-subscriptions"),
-        b = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/game-design/subscription-design#bundles"),
-        m = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/subscriptions#earning-with-subscriptions"),
+        m = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/game-design/subscription-design#bundles"),
+        b = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/subscriptions#earning-with-subscriptions"),
         y = (0, o.resolveUrl)("robloxCommunityStandardsUrl", "production", "global"),
         A = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/marketplace-policy#ugc-program-guidelines"),
         h = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/marketplace-fees-and-commissions#publishing-advance");
@@ -112,7 +112,7 @@
         L = (0, o.resolveUrl)("advertisingStandardsUrl", "production", "global"),
         E = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/account-verification"),
         C = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/avatar-creation-token");
-    e.s(["ACCOUNT_VERIFICATION_URL", 0, E, "ASSET_ACCESS_PRIVACY", 0, u, "BADGE_LEARN_MORE_URL", 0, c, "CREATOR_STORE_VERIFICATION_URL", 0, v, "DEVELOPER_PRODUCT_LEARN_MORE_URL", 0, s, "DISTRIBUTE_MODELS", 0, g, "LAUNCH_DATA_LEARN_MORE_URL", 0, n, "MARKETPLACE_POLICY", 0, A, "MOMENTS_LEARN_MORE_URL", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "PASS_LEARN_MORE_URL", 0, i, "PRIVATE_SERVER_LEARN_MORE_URL", 0, l, "PUBLISHING_ADVANCE", 0, h, "RELEASE_EXPERIENCE_TO_PUBLIC_URL", 0, d, "ROBLOX_ADVERTISING_STANDARDS", 0, L, "ROBLOX_COMMUNITY_STANDARDS", 0, y, "ROBLOX_TERMS_OF_USE", 0, P, "SALE_LOCATION_LEARN_MORE_URL", 0, p, "SUBSCRIPTION_LEARN_MORE_PRICING_URL", 0, m, "SUBSCRIPTION_LEARN_MORE_PRODUCT_TYPES_URL", 0, b, "SUBSCRIPTION_LEARN_MORE_URL", 0, f, "SUBSCRIPTION_TERMS_OF_USE", 0, U, "TOKEN_LEARN_MORE_URL", 0, C], 253536);
+    e.s(["ACCOUNT_VERIFICATION_URL", 0, E, "ASSET_ACCESS_PRIVACY", 0, u, "BADGE_LEARN_MORE_URL", 0, c, "CREATOR_STORE_VERIFICATION_URL", 0, v, "DEVELOPER_PRODUCT_LEARN_MORE_URL", 0, s, "DISTRIBUTE_MODELS", 0, g, "LAUNCH_DATA_LEARN_MORE_URL", 0, n, "MARKETPLACE_POLICY", 0, A, "MOMENTS_LEARN_MORE_URL", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "PASS_LEARN_MORE_URL", 0, i, "PRIVATE_SERVER_LEARN_MORE_URL", 0, l, "PUBLISHING_ADVANCE", 0, h, "RELEASE_EXPERIENCE_TO_PUBLIC_URL", 0, d, "ROBLOX_ADVERTISING_STANDARDS", 0, L, "ROBLOX_COMMUNITY_STANDARDS", 0, y, "ROBLOX_TERMS_OF_USE", 0, P, "SALE_LOCATION_LEARN_MORE_URL", 0, p, "SUBSCRIPTION_LEARN_MORE_PRICING_URL", 0, b, "SUBSCRIPTION_LEARN_MORE_PRODUCT_TYPES_URL", 0, m, "SUBSCRIPTION_LEARN_MORE_URL", 0, f, "SUBSCRIPTION_TERMS_OF_USE", 0, U, "TOKEN_LEARN_MORE_URL", 0, C], 253536);
     let S = {
             [t.default.Place]: r.default.Game,
             [t.default.SharedExperiences]: r.default.Game,
@@ -448,7 +448,7 @@
             [r.default.Alert]: null,
             [r.default.Journey]: null
         },
-        B = {
+        H = {
             [r.default.Badge]: c,
             [r.default.DeveloperProduct]: s,
             [r.default.GamePass]: i,
@@ -457,7 +457,7 @@
             [r.default.AvatarCreationToken]: C,
             [r.default.Look]: void 0
         };
-    e.s(["AllSettlePromiseFailed", 0, "rejected", "AllSettlePromiseSuccess", 0, "fulfilled", "assetFullNameKeys", 0, k, "assetTypeToItemType", 0, S, "assetTypeToSingularNameKeys", 0, M, "itemFullNameKeys", 0, D, "itemTypeToCreatePath", 0, w, "itemTypeToLearnMoreUrl", 0, B, "itemTypeToNameKeys", 0, G, "itemTypeToPath", 0, T, "itemTypeToReorderPath", 0, I, "itemTypeToReturnPolicyType", 0, R, "itemTypeToSingularNameKeys", 0, z, "itemTypeToThumbnailType", 0, x, "toastDurationTime", 0, 3e3, "uninitializedUniverseId", 0, -1], 759283)
+    e.s(["AllSettlePromiseFailed", 0, "rejected", "AllSettlePromiseSuccess", 0, "fulfilled", "assetFullNameKeys", 0, k, "assetTypeToItemType", 0, S, "assetTypeToSingularNameKeys", 0, M, "itemFullNameKeys", 0, D, "itemTypeToCreatePath", 0, w, "itemTypeToLearnMoreUrl", 0, H, "itemTypeToNameKeys", 0, G, "itemTypeToPath", 0, T, "itemTypeToReorderPath", 0, I, "itemTypeToReturnPolicyType", 0, R, "itemTypeToSingularNameKeys", 0, z, "itemTypeToThumbnailType", 0, x, "toastDurationTime", 0, 3e3, "uninitializedUniverseId", 0, -1], 759283)
 }, 307529, e => {
     "use strict";
     var a, t = ((a = t || {}).Place = "Place", a.MyExperiences = "MyExperiences", a.SharedExperiences = "SharedExperiences", a.TShirt = "TShirt", a.Shirt = "Shirt", a.Pants = "Pants", a.Hat = "Hat", a.HairAccessory = "HairAccessory", a.FaceAccessory = "FaceAccessory", a.NeckAccessory = "NeckAccessory", a.ShoulderAccessory = "ShoulderAccessory", a.FrontAccessory = "FrontAccessory", a.BackAccessory = "BackAccessory", a.WaistAccessory = "WaistAccessory", a.TShirtAccessory = "TShirtAccessory", a.ShirtAccessory = "ShirtAccessory", a.PantsAccessory = "PantsAccessory", a.JacketAccessory = "JacketAccessory", a.SweaterAccessory = "SweaterAccessory", a.ShortsAccessory = "ShortsAccessory", a.DressSkirtAccessory = "DressSkirtAccessory", a.EyebrowAccessory = "EyebrowAccessory", a.EyelashAccessory = "EyelashAccessory", a.FaceMakeup = "FaceMakeup", a.LipMakeup = "LipMakeup", a.EyeMakeup = "EyeMakeup", a.AvatarBackground = "AvatarBackground", a.AvatarLooks = "AvatarLooks", a.Showcase = "Showcase", a.Decal = "Decal", a.Image = "Image", a.Audio = "Audio", a.Model = "Model", a.Mesh = "Mesh", a.MeshPart = "MeshPart", a.Plugin = "Plugin", a.EmoteAnimation = "EmoteAnimation", a.Animation = "Animation", a.Video = "Video", a.TextDocument = "TextDocument", a.Event = "Event", a.UpcomingEvent = "UpcomingEvent", a.DraftEvent = "DraftEvent", a.PastEvent = "PastEvent", a.FontFamily = "FontFamily", a.ShareLink = "ShareLink", a.Moments = "Moments", a.StorePreviewVideo = "StorePreviewVideo", a.GamePreviewVideo = "GamePreviewVideo", a.AllCatalogAsset = "All", a.AssetPermissionRequests = "AssetPermissionRequests", a);
@@ -729,7 +729,10 @@
         getCloudServicesMemoryStoresMemoryUsageUrl: () => "".concat(n, "/cloud-services/memory-stores/observability#memory-usage-alerts"),
         getExperimentationUrl: () => "".concat(n, "/production/experiments"),
         getExperimentationBestPracticesUrl: () => "".concat(n, "/production/experiments#best-practices-for-experiments"),
-        getExperimentationViewAndInterpretResultsUrl: () => "".concat(n, "/production/experiments#view-and-interpret-results"),
+        getExperimentationDailyResultsUrl: () => "".concat(n, "/production/experiments#daily-results"),
+        getExperimentationEarlyHarmMetricsUrl: () => "".concat(n, "/production/experiments#early-harm-metrics"),
+        getExperimentationEarlyHarmThresholdsUrl: () => "".concat(n, "/production/experiments#early-harm-thresholds"),
+        getExperimentationSrmUrl: () => "".concat(n, "/production/experiments#sample-ratio-mismatch"),
         getReleaseNotesUrl: e => "".concat(n, "/release-notes/release-notes-").concat(e),
         getProductIntelligenceApisUrl: () => "".concat(n, "/production/monetization/developer-products#personalize-your-in-experience-store")
     }, "getDataCollectionSettingsUrl", 0, function(e, a) {
@@ -753,5 +756,5 @@
     e.s(["creatorHub", 0, a])
 }]);
 
-//# debugId=46a1e870-9ab7-e803-9534-cbc19ba1a480
-//# sourceMappingURL=0n_6a86isgw8s.js.map
+//# debugId=12663877-5e24-2c01-6226-62ee45f8d712
+//# sourceMappingURL=1ltrbhvj_cnn4.js.map

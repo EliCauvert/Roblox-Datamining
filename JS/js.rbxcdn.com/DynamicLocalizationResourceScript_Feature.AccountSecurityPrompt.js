@@ -127,6 +127,8 @@ Roblox.LangDynamic["Feature.AccountSecurityPrompt"] = {
     "Action.SetUpAuthenticatorAccountRestoresPolicyUpsell": "Set Up Authenticator",
     "Action.SetUpEmail2SV": "Set Up",
     "Description.Email2SVUpsellMessageBody": "Protect your account and valuables with security codes sent to your email. Enable Email 2-Step Verification today!",
-    "Header.Email2SVUpsell": "Boost Your Account Security!"
+    "Header.Email2SVUpsell": "Boost Your Account Security!",
+    "Response.PasswordLowComplexity": "Password must contain at least one letter and at least one number or symbol.",
+    "Response.PasswordTooSimilarToUsername": "Password shouldn't be too similar to your username."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSecurityPrompt");
