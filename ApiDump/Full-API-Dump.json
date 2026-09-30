@@ -8809,6 +8809,43 @@
                         "Animation"
                     ],
                     "MemberType": "Function",
+                    "Name": "GetAnimationValueNodeDefinition",
+                    "Parameters": [
+                        {
+                            "Name": "type",
+                            "Type": {
+                                "Category": "Enum",
+                                "Name": "AnimationValueNodeType"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Group",
+                        "Name": "Dictionary"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "Capabilities": [
+                        "Animation"
+                    ],
+                    "MemberType": "Function",
+                    "Name": "GetAnimationValueNodeTypes",
+                    "Parameters": [
+                    ],
+                    "ReturnType": {
+                        "Category": "Group",
+                        "Name": "Array"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "Capabilities": [
+                        "Animation"
+                    ],
+                    "MemberType": "Function",
                     "Name": "GetMemStats",
                     "Parameters": [
                     ],
@@ -15218,6 +15255,14 @@
                                 "Category": "Group",
                                 "Name": "Dictionary"
                             }
+                        },
+                        {
+                            "Default": "nil",
+                            "Name": "progressCallback",
+                            "Type": {
+                                "Category": "DataType",
+                                "Name": "Function?"
+                            }
                         }
                     ],
                     "ReturnType": {
@@ -16783,6 +16828,28 @@
                     "ThreadSafety": "Unsafe"
                 },
                 {
+                    "MemberType": "Function",
+                    "Name": "CreateTextContentAsync",
+                    "Parameters": [
+                        {
+                            "Name": "text",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "DataType",
+                        "Name": "Content"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "Tags": [
+                        "Yields"
+                    ],
+                    "ThreadSafety": "Unsafe"
+                },
+                {
                     "Capabilities": [
                         "Basic"
                     ],
@@ -17051,6 +17118,28 @@
                         "Name": "Tuple"
                     },
                     "Security": "None",
+                    "Tags": [
+                        "Yields"
+                    ],
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "ReadTextContentAsync",
+                    "Parameters": [
+                        {
+                            "Name": "content",
+                            "Type": {
+                                "Category": "DataType",
+                                "Name": "Content"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "string"
+                    },
+                    "Security": "RobloxScriptSecurity",
                     "Tags": [
                         "Yields"
                     ],
@@ -24148,6 +24237,33 @@
                     "Category": "State",
                     "Default": "",
                     "MemberType": "Property",
+                    "Name": "Locale",
+                    "Security": {
+                        "Read": "RobloxScriptSecurity",
+                        "Write": "RobloxScriptSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": false
+                    },
+                    "Tags": [
+                        "Hidden"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Primitive",
+                        "Name": "string"
+                    }
+                },
+                {
+                    "Capabilities": {
+                        "Read": [
+                            "Audio"
+                        ]
+                    },
+                    "Category": "State",
+                    "Default": "",
+                    "MemberType": "Property",
                     "Name": "Text",
                     "Security": {
                         "Read": "None",
@@ -28745,6 +28861,35 @@
                         "Category": "DataType",
                         "Name": "Vector3"
                     }
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "WillLimitLayeredAccessoryAsync",
+                    "Parameters": [
+                        {
+                            "Name": "humanoid",
+                            "Type": {
+                                "Category": "Class",
+                                "Name": "Humanoid"
+                            }
+                        },
+                        {
+                            "Name": "accessory",
+                            "Type": {
+                                "Category": "Class",
+                                "Name": "Accoutrement"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "bool"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "Tags": [
+                        "Yields"
+                    ],
+                    "ThreadSafety": "Unsafe"
                 }
             ],
             "MemoryCategory": "Instances",
@@ -31958,6 +32103,41 @@
             "Tags": [
                 "NotCreatable",
                 "Service"
+            ]
+        },
+        {
+            "Members": [
+            ],
+            "MemoryCategory": "Instances",
+            "Name": "BackendReplicatedStorage",
+            "Superclass": "Instance",
+            "Tags": [
+                "NotCreatable",
+                "Service"
+            ]
+        },
+        {
+            "Members": [
+            ],
+            "MemoryCategory": "Instances",
+            "Name": "BackendServerScriptService",
+            "Superclass": "Instance",
+            "Tags": [
+                "NotCreatable",
+                "Service",
+                "NotReplicated"
+            ]
+        },
+        {
+            "Members": [
+            ],
+            "MemoryCategory": "Instances",
+            "Name": "BackendServerStorage",
+            "Superclass": "Instance",
+            "Tags": [
+                "NotCreatable",
+                "Service",
+                "NotReplicated"
             ]
         },
         {
@@ -61485,6 +61665,18 @@
             "Members": [
                 {
                     "MemberType": "Function",
+                    "Name": "ConsumePendingExperienceLeaveWithReason",
+                    "Parameters": [
+                    ],
+                    "ReturnType": {
+                        "Category": "Group",
+                        "Name": "Dictionary"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
                     "Name": "ExecuteCrossExperienceCall",
                     "Parameters": [
                         {
@@ -61639,6 +61831,25 @@
                             "Type": {
                                 "Category": "DataType",
                                 "Name": "Function"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "null"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "LeaveExperienceWithReason",
+                    "Parameters": [
+                        {
+                            "Name": "reason",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
                             }
                         }
                     ],
@@ -64618,14 +64829,13 @@
                     "Name": "LocalizedTextureContent",
                     "Security": {
                         "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
+                        "Write": "NotAccessibleSecurity"
                     },
                     "Serialization": {
                         "CanLoad": false,
                         "CanSave": false
                     },
                     "Tags": [
-                        "ReadOnly",
                         "NotReplicated"
                     ],
                     "ThreadSafety": "ReadSafe",
@@ -66869,6 +67079,350 @@
             "Tags": [
                 "NotCreatable",
                 "Service"
+            ]
+        },
+        {
+            "Members": [
+                {
+                    "Category": "State",
+                    "Default": "",
+                    "MemberType": "Property",
+                    "Name": "CallId",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Primitive",
+                        "Name": "string"
+                    }
+                },
+                {
+                    "Category": "State",
+                    "Default": "0",
+                    "MemberType": "Property",
+                    "Name": "ConversationId",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Primitive",
+                        "Name": "int64"
+                    }
+                },
+                {
+                    "Category": "State",
+                    "Default": "None",
+                    "MemberType": "Property",
+                    "Name": "EndReason",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Enum",
+                        "Name": "FriendsCallingEndReason"
+                    }
+                },
+                {
+                    "Category": "State",
+                    "Default": "0",
+                    "MemberType": "Property",
+                    "Name": "InitiatorUserId",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Primitive",
+                        "Name": "int64"
+                    }
+                },
+                {
+                    "Category": "State",
+                    "Default": "false",
+                    "MemberType": "Property",
+                    "Name": "IsDeafened",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Primitive",
+                        "Name": "bool"
+                    }
+                },
+                {
+                    "Category": "State",
+                    "Default": "Idle",
+                    "MemberType": "Property",
+                    "Name": "Phase",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Enum",
+                        "Name": "FriendsCallingPhase"
+                    }
+                },
+                {
+                    "Category": "State",
+                    "Default": "1",
+                    "MemberType": "Property",
+                    "Name": "Volume",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Primitive",
+                        "Name": "float"
+                    }
+                }
+            ],
+            "MemoryCategory": "Instances",
+            "Name": "FriendsCallingInstance",
+            "Superclass": "Instance",
+            "Tags": [
+                "NotCreatable",
+                "NotReplicated"
+            ]
+        },
+        {
+            "Members": [
+                {
+                    "Category": "State",
+                    "Default": "None",
+                    "MemberType": "Property",
+                    "Name": "Error",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Enum",
+                        "Name": "FriendsCallingParticipantErrors"
+                    }
+                },
+                {
+                    "Category": "State",
+                    "Default": "false",
+                    "MemberType": "Property",
+                    "Name": "IsLocalMuted",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Primitive",
+                        "Name": "bool"
+                    }
+                },
+                {
+                    "Category": "State",
+                    "Default": "false",
+                    "MemberType": "Property",
+                    "Name": "IsSpeaking",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Primitive",
+                        "Name": "bool"
+                    }
+                },
+                {
+                    "Category": "State",
+                    "Default": "None",
+                    "MemberType": "Property",
+                    "Name": "LeaveReason",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Enum",
+                        "Name": "FriendsCallingParticipantLeaveReason"
+                    }
+                },
+                {
+                    "Category": "State",
+                    "Default": "Invited",
+                    "MemberType": "Property",
+                    "Name": "Status",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Enum",
+                        "Name": "FriendsCallingParticipantStatus"
+                    }
+                },
+                {
+                    "Category": "State",
+                    "Default": "0",
+                    "MemberType": "Property",
+                    "Name": "UserId",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Primitive",
+                        "Name": "int64"
+                    }
+                },
+                {
+                    "Category": "State",
+                    "Default": "1",
+                    "MemberType": "Property",
+                    "Name": "Volume",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Primitive",
+                        "Name": "float"
+                    }
+                }
+            ],
+            "MemoryCategory": "Instances",
+            "Name": "FriendsCallingParticipant",
+            "Superclass": "Instance",
+            "Tags": [
+                "NotCreatable",
+                "NotReplicated"
             ]
         },
         {
@@ -72863,14 +73417,13 @@
                     "Name": "LocalizedImageContent",
                     "Security": {
                         "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
+                        "Write": "NotAccessibleSecurity"
                     },
                     "Serialization": {
-                        "CanLoad": false,
+                        "CanLoad": true,
                         "CanSave": false
                     },
                     "Tags": [
-                        "ReadOnly",
                         "NotReplicated"
                     ],
                     "ThreadSafety": "ReadSafe",
@@ -74083,14 +74636,13 @@
                     "Name": "LocalizedImageContent",
                     "Security": {
                         "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
+                        "Write": "NotAccessibleSecurity"
                     },
                     "Serialization": {
-                        "CanLoad": false,
+                        "CanLoad": true,
                         "CanSave": false
                     },
                     "Tags": [
-                        "ReadOnly",
                         "NotReplicated"
                     ],
                     "ThreadSafety": "ReadSafe",
@@ -86761,6 +87313,49 @@
                             "Type": {
                                 "Category": "Enum",
                                 "Name": "Material"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "null"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "Tags": [
+                        "Yields"
+                    ],
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "ImportHeightmapWithMaterialSlotsAsync",
+                    "Parameters": [
+                        {
+                            "Name": "region",
+                            "Type": {
+                                "Category": "DataType",
+                                "Name": "Region3"
+                            }
+                        },
+                        {
+                            "Name": "heightmapAssetId",
+                            "Type": {
+                                "Category": "DataType",
+                                "Name": "ContentId"
+                            }
+                        },
+                        {
+                            "Name": "colormapAssetId",
+                            "Type": {
+                                "Category": "DataType",
+                                "Name": "ContentId"
+                            }
+                        },
+                        {
+                            "Name": "defaultMaterialIndex",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "int"
                             }
                         }
                     ],
@@ -108741,6 +109336,35 @@
                     "ThreadSafety": "Unsafe"
                 },
                 {
+                    "MemberType": "Event",
+                    "Name": "PromptBulkPurchaseRequestedV3",
+                    "Parameters": [
+                        {
+                            "Name": "player",
+                            "Type": {
+                                "Category": "Class",
+                                "Name": "Instance"
+                            }
+                        },
+                        {
+                            "Name": "status",
+                            "Type": {
+                                "Category": "Enum",
+                                "Name": "MarketplaceBulkPurchasePromptStatus"
+                            }
+                        },
+                        {
+                            "Name": "response",
+                            "Type": {
+                                "Category": "Group",
+                                "Name": "Dictionary"
+                            }
+                        }
+                    ],
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
                     "Capabilities": [
                         "PromptExternalPurchase"
                     ],
@@ -116205,6 +116829,36 @@
                         "Players"
                     ],
                     "MemberType": "Function",
+                    "Name": "SubscribeToTopic",
+                    "Parameters": [
+                        {
+                            "Name": "token",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        },
+                        {
+                            "Default": "",
+                            "Name": "replaceToken",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "null"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "Capabilities": [
+                        "Players"
+                    ],
+                    "MemberType": "Function",
                     "Name": "SwitchedToAppShellFeature",
                     "Parameters": [
                         {
@@ -116212,6 +116866,28 @@
                             "Type": {
                                 "Category": "Enum",
                                 "Name": "AppShellFeature"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "null"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "Capabilities": [
+                        "Players"
+                    ],
+                    "MemberType": "Function",
+                    "Name": "UnsubscribeFromTopic",
+                    "Parameters": [
+                        {
+                            "Name": "token",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
                             }
                         }
                     ],
@@ -116406,6 +117082,24 @@
                     ],
                     "MemberType": "Event",
                     "Name": "RobloxEventReceived",
+                    "Parameters": [
+                        {
+                            "Name": "eventData",
+                            "Type": {
+                                "Category": "Group",
+                                "Name": "Map"
+                            }
+                        }
+                    ],
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "Capabilities": [
+                        "Players"
+                    ],
+                    "MemberType": "Event",
+                    "Name": "TopicNotificationReceived",
                     "Parameters": [
                         {
                             "Name": "eventData",
@@ -121729,6 +122423,28 @@
                     "Tags": [
                         "Deprecated"
                     ],
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "Capabilities": [
+                        "Environment"
+                    ],
+                    "MemberType": "Function",
+                    "Name": "IsMaterialSlotInvalid",
+                    "Parameters": [
+                        {
+                            "Name": "slotIndex",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "int"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "bool"
+                    },
+                    "Security": "RobloxScriptSecurity",
                     "ThreadSafety": "Unsafe"
                 },
                 {
@@ -139955,6 +140671,25 @@
                         "Social"
                     ],
                     "MemberType": "Function",
+                    "Name": "GetFriendsInServerAsync",
+                    "Parameters": [
+                    ],
+                    "ReturnType": {
+                        "Category": "Group",
+                        "Name": "Array"
+                    },
+                    "Security": "None",
+                    "Tags": [
+                        "Yields"
+                    ],
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "Capabilities": [
+                        "Players",
+                        "Social"
+                    ],
+                    "MemberType": "Function",
                     "Name": "GetFriendsInUniverseAsync",
                     "Parameters": [
                     ],
@@ -148153,6 +148888,520 @@
         {
             "Members": [
                 {
+                    "Category": "Data",
+                    "Default": "__api_dump_no_string_value__",
+                    "MemberType": "Property",
+                    "Name": "ContentMap",
+                    "Security": {
+                        "Read": "RobloxSecurity",
+                        "Write": "RobloxSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": true,
+                        "CanSave": true
+                    },
+                    "Tags": [
+                        "Hidden",
+                        "NotScriptable"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "DataType",
+                        "Name": "NetAssetRef"
+                    }
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "CreateFolder",
+                    "Parameters": [
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "null"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "Exists",
+                    "Parameters": [
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "bool"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "GetContentMapMemoryBytes",
+                    "Parameters": [
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "int64"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "GetOrphanPathSubscribers",
+                    "Parameters": [
+                    ],
+                    "ReturnType": {
+                        "Category": "Group",
+                        "Name": "Array"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "GetPathSubscribers",
+                    "Parameters": [
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Group",
+                        "Name": "Array"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "GetPaths",
+                    "Parameters": [
+                        {
+                            "Name": "folderPath",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string?"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Group",
+                        "Name": "Array"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "Move",
+                    "Parameters": [
+                        {
+                            "Name": "fromPath",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        },
+                        {
+                            "Name": "toPath",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "null"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "RemovePath",
+                    "Parameters": [
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "null"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "RemovePathSubscribers",
+                    "Parameters": [
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "null"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "ResolveContent",
+                    "Parameters": [
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "DataType",
+                        "Name": "Content"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "SetContent",
+                    "Parameters": [
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        },
+                        {
+                            "Name": "value",
+                            "Type": {
+                                "Category": "DataType",
+                                "Name": "Content"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "null"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "GetMetaDataAsync",
+                    "Parameters": [
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string?"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Group",
+                        "Name": "Array"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "Tags": [
+                        "Yields"
+                    ],
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Event",
+                    "Name": "ContentMapCreateFolderRequested",
+                    "Parameters": [
+                        {
+                            "Name": "operationId",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "int64"
+                            }
+                        },
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        },
+                        {
+                            "Name": "dependencyOperationIds",
+                            "Type": {
+                                "Category": "Group",
+                                "Name": "Array"
+                            }
+                        }
+                    ],
+                    "Security": "RobloxSecurity",
+                    "Tags": [
+                        "Hidden"
+                    ],
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Event",
+                    "Name": "ContentMapMoveRequested",
+                    "Parameters": [
+                        {
+                            "Name": "operationId",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "int64"
+                            }
+                        },
+                        {
+                            "Name": "fromPath",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        },
+                        {
+                            "Name": "toPath",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        },
+                        {
+                            "Name": "dependencyOperationIds",
+                            "Type": {
+                                "Category": "Group",
+                                "Name": "Array"
+                            }
+                        }
+                    ],
+                    "Security": "RobloxSecurity",
+                    "Tags": [
+                        "Hidden"
+                    ],
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Event",
+                    "Name": "ContentMapMutationResult",
+                    "Parameters": [
+                        {
+                            "Name": "operationId",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "int64"
+                            }
+                        },
+                        {
+                            "Name": "result",
+                            "Type": {
+                                "Category": "Enum",
+                                "Name": "ProjectServiceOperationResult"
+                            }
+                        },
+                        {
+                            "Name": "authoritativeRevision",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "int64"
+                            }
+                        }
+                    ],
+                    "Security": "RobloxSecurity",
+                    "Tags": [
+                        "Hidden"
+                    ],
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Event",
+                    "Name": "ContentMapRemovePathRequested",
+                    "Parameters": [
+                        {
+                            "Name": "operationId",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "int64"
+                            }
+                        },
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        },
+                        {
+                            "Name": "dependencyOperationIds",
+                            "Type": {
+                                "Category": "Group",
+                                "Name": "Array"
+                            }
+                        }
+                    ],
+                    "Security": "RobloxSecurity",
+                    "Tags": [
+                        "Hidden"
+                    ],
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Event",
+                    "Name": "ContentMapSetContentRequested",
+                    "Parameters": [
+                        {
+                            "Name": "operationId",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "int64"
+                            }
+                        },
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        },
+                        {
+                            "Name": "content",
+                            "Type": {
+                                "Category": "DataType",
+                                "Name": "Content"
+                            }
+                        },
+                        {
+                            "Name": "dependencyOperationIds",
+                            "Type": {
+                                "Category": "Group",
+                                "Name": "Array"
+                            }
+                        }
+                    ],
+                    "Security": "RobloxSecurity",
+                    "Tags": [
+                        "Hidden"
+                    ],
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Event",
+                    "Name": "EffectivePathsChanged",
+                    "Parameters": [
+                    ],
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Event",
+                    "Name": "PathAdded",
+                    "Parameters": [
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Event",
+                    "Name": "PathChanged",
+                    "Parameters": [
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Event",
+                    "Name": "PathMoved",
+                    "Parameters": [
+                        {
+                            "Name": "fromPath",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        },
+                        {
+                            "Name": "toPath",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Event",
+                    "Name": "PathRemoved",
+                    "Parameters": [
+                        {
+                            "Name": "path",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                }
+            ],
+            "MemoryCategory": "Instances",
+            "Name": "ProjectService",
+            "Superclass": "Instance",
+            "Tags": [
+                "NotCreatable",
+                "Service"
+            ]
+        },
+        {
+            "Members": [
+                {
                     "Capabilities": {
                         "Read": [
                             "UI",
@@ -154577,6 +155826,21 @@
                         "Basic"
                     ],
                     "MemberType": "Function",
+                    "Name": "GetRobloxClientIxpEnrolledExperiments",
+                    "Parameters": [
+                    ],
+                    "ReturnType": {
+                        "Category": "Primitive",
+                        "Name": "string"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "Capabilities": [
+                        "Basic"
+                    ],
+                    "MemberType": "Function",
                     "Name": "GetRobloxGuiFocused",
                     "Parameters": [
                     ],
@@ -158040,6 +159304,36 @@
                         "Name": "Tuple"
                     },
                     "Security": "PluginSecurity",
+                    "Tags": [
+                        "Yields"
+                    ],
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "OpenStringValueDocumentAsync",
+                    "Parameters": [
+                        {
+                            "Name": "stringValue",
+                            "Type": {
+                                "Category": "Class",
+                                "Name": "StringValue"
+                            }
+                        },
+                        {
+                            "Default": "nil",
+                            "Name": "options",
+                            "Type": {
+                                "Category": "Group",
+                                "Name": "Dictionary"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Group",
+                        "Name": "Tuple"
+                    },
+                    "Security": "RobloxScriptSecurity",
                     "Tags": [
                         "Yields"
                     ],
@@ -169001,286 +170295,6 @@
                         ]
                     },
                     "Category": "Character",
-                    "Default": "0",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsAssetIDFace",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "Primitive",
-                        "Name": "int64"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsAssetIDHead",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "Primitive",
-                        "Name": "int64"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsAssetIDLeftArm",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "Primitive",
-                        "Name": "int64"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsAssetIDLeftLeg",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "Primitive",
-                        "Name": "int64"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsAssetIDPants",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "Primitive",
-                        "Name": "int64"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsAssetIDRightArm",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "Primitive",
-                        "Name": "int64"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsAssetIDRightLeg",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "Primitive",
-                        "Name": "int64"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsAssetIDShirt",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "Primitive",
-                        "Name": "int64"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsAssetIDTeeShirt",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "Primitive",
-                        "Name": "int64"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsAssetIDTorso",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "Primitive",
-                        "Name": "int64"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
                     "Default": "R15",
                     "MemberType": "Property",
                     "Name": "GameSettingsAvatar",
@@ -169327,146 +170341,6 @@
                     "ValueType": {
                         "Category": "Enum",
                         "Name": "R15CollisionType"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0 1 ",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsScaleRangeBodyType",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "DataType",
-                        "Name": "NumberRange"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0.95 1 ",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsScaleRangeHead",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "DataType",
-                        "Name": "NumberRange"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0.9 1.05 ",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsScaleRangeHeight",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "DataType",
-                        "Name": "NumberRange"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0 1 ",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsScaleRangeProportion",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "DataType",
-                        "Name": "NumberRange"
-                    }
-                },
-                {
-                    "Capabilities": {
-                        "Read": [
-                            "Players"
-                        ]
-                    },
-                    "Category": "Character",
-                    "Default": "0.7 1 ",
-                    "MemberType": "Property",
-                    "Name": "GameSettingsScaleRangeWidth",
-                    "Security": {
-                        "Read": "RobloxScriptSecurity",
-                        "Write": "RobloxScriptSecurity"
-                    },
-                    "Serialization": {
-                        "CanLoad": true,
-                        "CanSave": true
-                    },
-                    "Tags": [
-                        "Hidden",
-                        "NotReplicated"
-                    ],
-                    "ThreadSafety": "ReadSafe",
-                    "ValueType": {
-                        "Category": "DataType",
-                        "Name": "NumberRange"
                     }
                 },
                 {
@@ -175356,6 +176230,28 @@
                     "ThreadSafety": "Unsafe"
                 },
                 {
+                    "MemberType": "Function",
+                    "Name": "UploadAndInsertAssetForJobAsync",
+                    "Parameters": [
+                        {
+                            "Name": "jobId",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Class",
+                        "Name": "Instance"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "Tags": [
+                        "Yields"
+                    ],
+                    "ThreadSafety": "Unsafe"
+                },
+                {
                     "MemberType": "Event",
                     "Name": "OnConvertToPackageResult",
                     "Parameters": [
@@ -176003,6 +176899,28 @@
                         "Name": "StudioScreenshotCapture"
                     },
                     "Security": "PluginSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "MemberType": "Function",
+                    "Name": "CapturePluginGuiByPluginGuiIdAsync",
+                    "Parameters": [
+                        {
+                            "Name": "pluginGuiId",
+                            "Type": {
+                                "Category": "Primitive",
+                                "Name": "string"
+                            }
+                        }
+                    ],
+                    "ReturnType": {
+                        "Category": "Class",
+                        "Name": "StudioScreenshotCapture"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "Tags": [
+                        "Yields"
+                    ],
                     "ThreadSafety": "Unsafe"
                 },
                 {
@@ -183262,6 +184180,29 @@
                     }
                 },
                 {
+                    "Category": "Data",
+                    "Default": "false",
+                    "MemberType": "Property",
+                    "Name": "Enabled",
+                    "Security": {
+                        "Read": "None",
+                        "Write": "None"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": false
+                    },
+                    "Tags": [
+                        "ReadOnly",
+                        "NotReplicated"
+                    ],
+                    "ThreadSafety": "Unsafe",
+                    "ValueType": {
+                        "Category": "Primitive",
+                        "Name": "bool"
+                    }
+                },
+                {
                     "Category": "Results",
                     "Default": "0",
                     "MemberType": "Property",
@@ -186806,6 +187747,33 @@
                         ]
                     },
                     "Category": "Data",
+                    "Default": "false",
+                    "MemberType": "Property",
+                    "Name": "IsHistorical",
+                    "Security": {
+                        "Read": "RobloxScriptSecurity",
+                        "Write": "RobloxScriptSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": false,
+                        "CanSave": false
+                    },
+                    "Tags": [
+                        "Hidden"
+                    ],
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "Primitive",
+                        "Name": "bool"
+                    }
+                },
+                {
+                    "Capabilities": {
+                        "Read": [
+                            "Chat"
+                        ]
+                    },
+                    "Category": "Data",
                     "Default": "",
                     "MemberType": "Property",
                     "Name": "MessageId",
@@ -189540,6 +190508,35 @@
             "Tags": [
                 "NotCreatable",
                 "Service"
+            ]
+        },
+        {
+            "Members": [
+                {
+                    "Category": "Data",
+                    "Default": "__api_dump_no_string_value__",
+                    "MemberType": "Property",
+                    "Name": "TextContent",
+                    "Security": {
+                        "Read": "PluginSecurity",
+                        "Write": "PluginSecurity"
+                    },
+                    "Serialization": {
+                        "CanLoad": true,
+                        "CanSave": true
+                    },
+                    "ThreadSafety": "ReadSafe",
+                    "ValueType": {
+                        "Category": "DataType",
+                        "Name": "Content"
+                    }
+                }
+            ],
+            "MemoryCategory": "Instances",
+            "Name": "TextDocument",
+            "Superclass": "Instance",
+            "Tags": [
+                "NotBrowsable"
             ]
         },
         {
@@ -206973,6 +207970,22 @@
                         "Chat"
                     ],
                     "MemberType": "Function",
+                    "Name": "lastVoiceChatConnectivity",
+                    "Parameters": [
+                    ],
+                    "ReturnType": {
+                        "Category": "Group",
+                        "Name": "Dictionary"
+                    },
+                    "Security": "RobloxScriptSecurity",
+                    "ThreadSafety": "Unsafe"
+                },
+                {
+                    "Capabilities": [
+                        "Audio",
+                        "Chat"
+                    ],
+                    "MemberType": "Function",
                     "Name": "lastVoiceChatStats",
                     "Parameters": [
                     ],
@@ -218111,6 +219124,159 @@
         {
             "Items": [
                 {
+                    "Name": "None",
+                    "Value": 0
+                },
+                {
+                    "Name": "LocalHangup",
+                    "Value": 1
+                },
+                {
+                    "Name": "RemoteHangup",
+                    "Value": 2
+                },
+                {
+                    "Name": "Missed",
+                    "Value": 3
+                },
+                {
+                    "Name": "Declined",
+                    "Value": 4
+                },
+                {
+                    "Name": "Failed",
+                    "Value": 5
+                },
+                {
+                    "Name": "Canceled",
+                    "Value": 6
+                }
+            ],
+            "Name": "FriendsCallingEndReason"
+        },
+        {
+            "Items": [
+                {
+                    "Name": "None",
+                    "Value": 0
+                },
+                {
+                    "Name": "Unknown",
+                    "Value": 1
+                },
+                {
+                    "Name": "ConnectionFailed",
+                    "Value": 2
+                },
+                {
+                    "Name": "PublishFailed",
+                    "Value": 3
+                },
+                {
+                    "Name": "PermissionDenied",
+                    "Value": 4
+                }
+            ],
+            "Name": "FriendsCallingParticipantErrors"
+        },
+        {
+            "Items": [
+                {
+                    "Name": "None",
+                    "Value": 0
+                },
+                {
+                    "Name": "Hangup",
+                    "Value": 1
+                },
+                {
+                    "Name": "Declined",
+                    "Value": 2
+                },
+                {
+                    "Name": "Missed",
+                    "Value": 3
+                },
+                {
+                    "Name": "Removed",
+                    "Value": 4
+                },
+                {
+                    "Name": "Failed",
+                    "Value": 5
+                },
+                {
+                    "Name": "TimedOut",
+                    "Value": 6
+                }
+            ],
+            "Name": "FriendsCallingParticipantLeaveReason"
+        },
+        {
+            "Items": [
+                {
+                    "Name": "Invited",
+                    "Value": 0
+                },
+                {
+                    "Name": "Ringing",
+                    "Value": 1
+                },
+                {
+                    "Name": "Joined",
+                    "Value": 2
+                },
+                {
+                    "Name": "Declined",
+                    "Value": 3
+                },
+                {
+                    "Name": "Left",
+                    "Value": 4
+                },
+                {
+                    "Name": "Removed",
+                    "Value": 5
+                },
+                {
+                    "Name": "Ineligible",
+                    "Value": 6
+                },
+                {
+                    "Name": "TimedOut",
+                    "Value": 7
+                },
+                {
+                    "Name": "Muted",
+                    "Value": 8
+                }
+            ],
+            "Name": "FriendsCallingParticipantStatus"
+        },
+        {
+            "Items": [
+                {
+                    "Name": "Idle",
+                    "Value": 0
+                },
+                {
+                    "Name": "Ringing",
+                    "Value": 1
+                },
+                {
+                    "Name": "Active",
+                    "Value": 2
+                },
+                {
+                    "Name": "Ended",
+                    "Value": 3
+                }
+            ],
+            "Name": "FriendsCallingPhase"
+        },
+        {
+            "Items": [
+                {
                     "Name": "Default",
                     "Value": 0
                 },
@@ -218392,6 +219558,10 @@
                 {
                     "Name": "Conical",
                     "Value": 2
+                },
+                {
+                    "Name": "Elliptical",
+                    "Value": 3
                 }
             ],
             "Name": "GradientType"
@@ -223368,6 +224538,11 @@
                 }
             ],
             "Name": "ProductPurchaseDecision"
+        },
+        {
+            "Items": [
+            ],
+            "Name": "ProjectServiceOperationResult"
         },
         {
             "Items": [

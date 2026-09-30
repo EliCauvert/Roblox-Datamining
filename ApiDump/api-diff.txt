@@ -1,70 +1,163 @@
-Version version-6b0e880a1a144428 (2026-09-27 19:34:35 UTC)
+Version version-76e1a02649ad4f35 (2026-09-30 18:37:40 UTC)
 ============================================================
 
-Added Property AudioTextToSpeech.AutoLocalize: boolean {🚧Audio}
-Added Property InputAction.DisplayName: string {🚧Input} {🚀SimAccess}
-Added Property TeleportOptions.ReservedServerId: string {🚧Teleport}
-Added Property TeleportOptions.VipServerId: string {🚧Teleport}
-Added Property Workspace.StreamingEnabledStorage: boolean [Hidden] [NotReplicated] [NotScriptable] {🔒RobloxEngine}
+Added Class BackendReplicatedStorage : Instance [NotCreatable] [Service]
+Added Class BackendServerScriptService : Instance [NotCreatable] [Service] [NotReplicated]
+Added Class BackendServerStorage : Instance [NotCreatable] [Service] [NotReplicated]
 
-Added Function CaptureService:StartVideoCaptureForMCPAsync(onCaptureReady: (...any) -> ...any) -> Enum.VideoCaptureStartedResult [Yields] {🚧Capture} {🔒RobloxScript}
-Added Function CaptureService:StopVideoCaptureForMCP() -> () {🚧Capture} {🔒RobloxScript}
-Added Function MarketplaceService:RefreshBulkPurchase(batchPurchaseAuthToken: string, options: { [string]: any }? = nil) -> () {🔒RobloxScript}
-Added Function Plugin:GetPreinitPayload() -> any [CustomLuaState] {🔒RobloxScript}
-Added Function TeleportService:TeleportSwitchServer() -> () {🚧Teleport} {🔒RobloxScript}
-Added Function WrapTextureTransfer:PrepareProjectionMeshDataAsync() -> () [Yields] {🚧AvatarAppearance + DynamicGeneration}
-Added Function AssetQualityService:FetchAssetQualitySummaryFromJobIdV2Async(jobId: string, desiredQualityChecks: { any }) -> { [string]: any } [Yields] {🔒RobloxScript}
-Added Function MomentsService:FetchPostAsync(assetId: number) -> buffer [Yields] {🚧Capture} {🔒RobloxScript}
-Added Function PerformanceControlService:SetUserActivity(state: Enum.ScrollState) -> () {🔒RobloxScript}
+Added Class TextDocument : Instance [NotBrowsable]
+	Added Property TextDocument.TextContent: Content {🔒Plugin}
 
-Added Event MarketplaceService.PromptBulkPurchaseRefreshed(player: Instance, status: Enum.MarketplaceBulkPurchasePromptStatus, response: { [string]: any }) {🔒RobloxScript}
-Added Event MarketplaceService.RefreshBulkPurchaseRequested(playerId: number, batchPurchaseAuthToken: string, options: { [string]: any }) {🔒RobloxScript}
+Added Class FriendsCallingInstance : Instance {🔒RobloxEngine} [NotCreatable] [NotReplicated]
+	Added Property FriendsCallingInstance.CallId: string [ReadOnly] {🔒RobloxEngine}
+	Added Property FriendsCallingInstance.ConversationId: number [ReadOnly] {🔒RobloxEngine}
+	Added Property FriendsCallingInstance.EndReason: Enum.FriendsCallingEndReason [ReadOnly] {🔒RobloxEngine}
+	Added Property FriendsCallingInstance.InitiatorUserId: number [ReadOnly] {🔒RobloxEngine}
+	Added Property FriendsCallingInstance.IsDeafened: boolean [ReadOnly] {🔒RobloxEngine}
+	Added Property FriendsCallingInstance.Phase: Enum.FriendsCallingPhase [ReadOnly] {🔒RobloxEngine}
+	Added Property FriendsCallingInstance.Volume: number [ReadOnly] {🔒RobloxEngine}
 
-Added EnumItem TeleportMethod.TeleportSwitchServer : 8
+Added Class FriendsCallingParticipant : Instance {🔒RobloxEngine} [NotCreatable] [NotReplicated]
+	Added Property FriendsCallingParticipant.Error: Enum.FriendsCallingParticipantErrors [ReadOnly] {🔒RobloxEngine}
+	Added Property FriendsCallingParticipant.IsLocalMuted: boolean [ReadOnly] {🔒RobloxEngine}
+	Added Property FriendsCallingParticipant.IsSpeaking: boolean [ReadOnly] {🔒RobloxEngine}
+	Added Property FriendsCallingParticipant.LeaveReason: Enum.FriendsCallingParticipantLeaveReason [ReadOnly] {🔒RobloxEngine}
+	Added Property FriendsCallingParticipant.Status: Enum.FriendsCallingParticipantStatus [ReadOnly] {🔒RobloxEngine}
+	Added Property FriendsCallingParticipant.UserId: number [ReadOnly] {🔒RobloxEngine}
+	Added Property FriendsCallingParticipant.Volume: number [ReadOnly] {🔒RobloxEngine}
 
-Added Tag [CustomLuaState] to Function Plugin:FinishFullLoading
-Added Tag [Deprecated] to Function LocalizationService:GetTranslatorForPlayer
-Added Tag [ReadOnly] to Property WorldRoot.PhysicsStepTime
+Added Class ProjectService : Instance {🔒RobloxEngine} [NotCreatable] [Service]
+	Added Property ProjectService.ContentMap: NetAssetRef [Hidden] [NotScriptable] {🔒RobloxEngine}
+	Added Function ProjectService:CreateFolder(path: string) -> () {🔒RobloxScript}
+	Added Function ProjectService:Exists(path: string) -> boolean {🔒RobloxScript}
+	Added Function ProjectService:GetContentMapMemoryBytes() -> number {🔒RobloxScript}
+	Added Function ProjectService:GetMetaDataAsync(path: string?) -> { any } [Yields] {🔒RobloxScript}
+	Added Function ProjectService:GetOrphanPathSubscribers() -> { any } {🔒RobloxScript}
+	Added Function ProjectService:GetPathSubscribers(path: string) -> { any } {🔒RobloxScript}
+	Added Function ProjectService:GetPaths(folderPath: string?) -> { any } {🔒RobloxScript}
+	Added Function ProjectService:Move(fromPath: string, toPath: string) -> () {🔒RobloxScript}
+	Added Function ProjectService:RemovePath(path: string) -> () {🔒RobloxScript}
+	Added Function ProjectService:RemovePathSubscribers(path: string) -> () {🔒RobloxScript}
+	Added Function ProjectService:ResolveContent(path: string) -> Content {🔒RobloxScript}
+	Added Function ProjectService:SetContent(path: string, value: Content) -> () {🔒RobloxScript}
+	Added Event ProjectService.ContentMapCreateFolderRequested(operationId: number, path: string, dependencyOperationIds: { any }) [Hidden] {🔒RobloxEngine}
+	Added Event ProjectService.ContentMapMoveRequested(operationId: number, fromPath: string, toPath: string, dependencyOperationIds: { any }) [Hidden] {🔒RobloxEngine}
+	Added Event ProjectService.ContentMapMutationResult(operationId: number, result: Enum.ProjectServiceOperationResult, authoritativeRevision: number) [Hidden] {🔒RobloxEngine}
+	Added Event ProjectService.ContentMapRemovePathRequested(operationId: number, path: string, dependencyOperationIds: { any }) [Hidden] {🔒RobloxEngine}
+	Added Event ProjectService.ContentMapSetContentRequested(operationId: number, path: string, content: Content, dependencyOperationIds: { any }) [Hidden] {🔒RobloxEngine}
+	Added Event ProjectService.EffectivePathsChanged() {🔒RobloxScript}
+	Added Event ProjectService.PathAdded(path: string) {🔒RobloxScript}
+	Added Event ProjectService.PathChanged(path: string) {🔒RobloxScript}
+	Added Event ProjectService.PathMoved(fromPath: string, toPath: string) {🔒RobloxScript}
+	Added Event ProjectService.PathRemoved(path: string) {🔒RobloxScript}
 
-Changed the capabilities and write permissions of Property Lighting.LightingStyle 
-	from: {🚧Environment} {✏️RobloxScript}
-	  to: {🚧🔎Environment} {🚧✏️PluginOrOpenCloud} 
+Added Property TestService.Enabled: boolean [ReadOnly] {🧬Unsafe}
+Added Property AudioSpeechToText.Locale: string [Hidden] {🚧Audio} {🔒RobloxScript}
+Added Property TextChatMessage.IsHistorical: boolean [Hidden] {🚧Chat} {🔒RobloxScript}
 
-Changed the capabilities and write permissions of Property Lighting.PrioritizeLightingQuality 
-	from: {🚧Environment} {✏️RobloxScript}
-	  to: {🚧🔎Environment} {🚧✏️PluginOrOpenCloud} 
+Added Function AnimationClipProvider:GetAnimationValueNodeDefinition(type: Enum.AnimationValueNodeType) -> { [string]: any } {🚧Animation} {🔒RobloxScript}
+Added Function AnimationClipProvider:GetAnimationValueNodeTypes() -> { any } {🚧Animation} {🔒RobloxScript}
+Added Function AssetService:CreateTextContentAsync(text: string) -> Content [Yields] {🔒RobloxScript}
+Added Function AssetService:ReadTextContentAsync(content: Content) -> string [Yields] {🔒RobloxScript}
+Added Function NotificationService:SubscribeToTopic(token: string, replaceToken: string? = "") -> () {🚧Players} {🔒RobloxScript}
+Added Function NotificationService:UnsubscribeFromTopic(token: string) -> () {🚧Players} {🔒RobloxScript}
+Added Function Player:GetFriendsInServerAsync() -> { any } [Yields] {🚧Players + Social}
+Added Function RunService:GetRobloxClientIxpEnrolledExperiments() -> string {🚧Basic} {🔒RobloxScript}
+Added Function ScriptEditorService:OpenStringValueDocumentAsync(stringValue: StringValue, options: { [string]: any }? = nil) -> ...any [Yields] {🔒RobloxScript}
+Added Function StudioCaptureService:CapturePluginGuiByPluginGuiIdAsync(pluginGuiId: string) -> StudioScreenshotCapture [Yields] {🔒RobloxScript}
+Added Function Terrain:IsMaterialSlotInvalid(slotIndex: number) -> boolean {🚧Environment} {🔒RobloxScript}
+Added Function VoiceChatService:lastVoiceChatConnectivity() -> { [string]: any } {🚧Audio + Chat} {🔒RobloxScript}
+Added Function AvatarClothingRules:WillLimitLayeredAccessoryAsync(humanoid: Humanoid, accessory: Accoutrement) -> boolean [Yields] {🔒RobloxScript}
+Added Function ExperienceService:ConsumePendingExperienceLeaveWithReason() -> { [string]: any } {🔒RobloxScript}
+Added Function ExperienceService:LeaveExperienceWithReason(reason: string) -> () {🔒RobloxScript}
+Added Function HeightmapImporterService:ImportHeightmapWithMaterialSlotsAsync(region: Region3, heightmapAssetId: string, colormapAssetId: string, defaultMaterialIndex: number) -> () [Yields] {🔒RobloxScript}
+Added Function StudioAssetService:UploadAndInsertAssetForJobAsync(jobId: string) -> Instance? [Yields] {🔒RobloxScript}
 
-Changed the capabilities and write permissions of Property PartOperation.RenderFidelity 
-	from: {🚧Basic + CSG} {✏️Plugin}
-	  to: {🚧🔎Basic + CSG} {🚧✏️PluginOrOpenCloud} 
+Added Event MarketplaceService.PromptBulkPurchaseRequestedV3(player: Instance, status: Enum.MarketplaceBulkPurchasePromptStatus, response: { [string]: any }) {🔒RobloxScript}
+Added Event NotificationService.TopicNotificationReceived(eventData: { [any]: any }) {🚧Players} {🔒RobloxScript}
 
-Changed the capabilities and write permissions of Property PartOperation.SmoothingAngle 
-	from: {🚧Basic + CSG} {✏️Plugin}
-	  to: {🚧🔎Basic + CSG} {🚧✏️PluginOrOpenCloud} 
+Added Enum FriendsCallingEndReason
+	Added EnumItem FriendsCallingEndReason.None : 0
+	Added EnumItem FriendsCallingEndReason.LocalHangup : 1
+	Added EnumItem FriendsCallingEndReason.RemoteHangup : 2
+	Added EnumItem FriendsCallingEndReason.Missed : 3
+	Added EnumItem FriendsCallingEndReason.Declined : 4
+	Added EnumItem FriendsCallingEndReason.Failed : 5
+	Added EnumItem FriendsCallingEndReason.Canceled : 6
 
-Changed the capabilities and write permissions of Property TriangleMeshPart.FluidFidelity 
-	from: {🚧Basic} {✏️Plugin}
-	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
+Added Enum FriendsCallingParticipantErrors
+	Added EnumItem FriendsCallingParticipantErrors.None : 0
+	Added EnumItem FriendsCallingParticipantErrors.Unknown : 1
+	Added EnumItem FriendsCallingParticipantErrors.ConnectionFailed : 2
+	Added EnumItem FriendsCallingParticipantErrors.PublishFailed : 3
+	Added EnumItem FriendsCallingParticipantErrors.PermissionDenied : 4
 
-Changed the capabilities and write permissions of Property TriangleMeshPart.CollisionFidelity 
-	from: {🚧Basic} {✏️Plugin}
-	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
+Added Enum FriendsCallingParticipantLeaveReason
+	Added EnumItem FriendsCallingParticipantLeaveReason.None : 0
+	Added EnumItem FriendsCallingParticipantLeaveReason.Hangup : 1
+	Added EnumItem FriendsCallingParticipantLeaveReason.Declined : 2
+	Added EnumItem FriendsCallingParticipantLeaveReason.Missed : 3
+	Added EnumItem FriendsCallingParticipantLeaveReason.Removed : 4
+	Added EnumItem FriendsCallingParticipantLeaveReason.Failed : 5
+	Added EnumItem FriendsCallingParticipantLeaveReason.TimedOut : 6
 
-Changed the parameters of Function EditableImage:DrawImageProjected 
-	from: (mesh: EditableMesh, projection: { [string]: any }, brushConfig: { [string]: any })
-	  to: (projectionSource: Object, projection: { [string]: any }, brushConfig: { [string]: any })
+Added Enum FriendsCallingParticipantStatus
+	Added EnumItem FriendsCallingParticipantStatus.Invited : 0
+	Added EnumItem FriendsCallingParticipantStatus.Ringing : 1
+	Added EnumItem FriendsCallingParticipantStatus.Joined : 2
+	Added EnumItem FriendsCallingParticipantStatus.Declined : 3
+	Added EnumItem FriendsCallingParticipantStatus.Left : 4
+	Added EnumItem FriendsCallingParticipantStatus.Removed : 5
+	Added EnumItem FriendsCallingParticipantStatus.Ineligible : 6
+	Added EnumItem FriendsCallingParticipantStatus.TimedOut : 7
+	Added EnumItem FriendsCallingParticipantStatus.Muted : 8
 
-Changed the parameters of Function EditableImage:SampleImageProjected 
-	from: (sourceMesh: EditableMesh, sourceTexture: EditableImage, projectionConfig: { [string]: any }, brushConfig: { [string]: any })
-	  to: (projectionSource: Object, sourceTexture: EditableImage, projectionConfig: { [string]: any }, brushConfig: { [string]: any })
+Added Enum FriendsCallingPhase
+	Added EnumItem FriendsCallingPhase.Idle : 0
+	Added EnumItem FriendsCallingPhase.Ringing : 1
+	Added EnumItem FriendsCallingPhase.Active : 2
+	Added EnumItem FriendsCallingPhase.Ended : 3
 
-Changed the parameters of Function Plugin:FinishFullLoading 
-	from: ()
-	  to: (payload: any)
+Added Enum ProjectServiceOperationResult
 
-Removed Class SnippetService
+Added EnumItem GradientType.Elliptical : 3
 
-Removed Enum Language
-	Removed EnumItem Language.Default
+Added Tag [NotReplicated] to Property Decal.LocalizedTextureContent
+Added Tag [NotReplicated] to Property ImageButton.LocalizedImageContent
+Added Tag [NotReplicated] to Property ImageLabel.LocalizedImageContent
 
-Removed Tag [NotReplicated] from Property WorldRoot.PhysicsStepTime
+Changed the read permissions and write permissions of Property Decal.LocalizedTextureContent 
+	from: {🔒RobloxScript} {✏️RobloxScript}
+	  to: {🔍RobloxScript} {✏️NotAccessible}
+
+Changed the read permissions, write permissions and serialization of Property ImageButton.LocalizedImageContent 
+	from: {🔒RobloxScript} {✏️RobloxScript} [🚫None]
+	  to: {🔍RobloxScript} {✏️NotAccessible} [📁LoadOnly]
+
+Changed the read permissions, write permissions and serialization of Property ImageLabel.LocalizedImageContent 
+	from: {🔒RobloxScript} {✏️RobloxScript} [🚫None]
+	  to: {🔍RobloxScript} {✏️NotAccessible} [📁LoadOnly]
+
+Changed the parameters of Function AssetImportService:UploadAssetFromPathAsync 
+	from: (filepath: string, createAssetRequest: { [string]: any })
+	  to: (filepath: string, createAssetRequest: { [string]: any }, progressCallback: ((...any) -> ...any)?)
+
+Removed Property StarterPlayer.GameSettingsAssetIDFace
+Removed Property StarterPlayer.GameSettingsAssetIDHead
+Removed Property StarterPlayer.GameSettingsAssetIDLeftArm
+Removed Property StarterPlayer.GameSettingsAssetIDLeftLeg
+Removed Property StarterPlayer.GameSettingsAssetIDPants
+Removed Property StarterPlayer.GameSettingsAssetIDRightArm
+Removed Property StarterPlayer.GameSettingsAssetIDRightLeg
+Removed Property StarterPlayer.GameSettingsAssetIDShirt
+Removed Property StarterPlayer.GameSettingsAssetIDTeeShirt
+Removed Property StarterPlayer.GameSettingsAssetIDTorso
+Removed Property StarterPlayer.GameSettingsScaleRangeBodyType
+Removed Property StarterPlayer.GameSettingsScaleRangeHead
+Removed Property StarterPlayer.GameSettingsScaleRangeHeight
+Removed Property StarterPlayer.GameSettingsScaleRangeProportion
+Removed Property StarterPlayer.GameSettingsScaleRangeWidth
+
+Removed Tag [ReadOnly] from Property Decal.LocalizedTextureContent
+Removed Tag [ReadOnly] from Property ImageButton.LocalizedImageContent
+Removed Tag [ReadOnly] from Property ImageLabel.LocalizedImageContent
