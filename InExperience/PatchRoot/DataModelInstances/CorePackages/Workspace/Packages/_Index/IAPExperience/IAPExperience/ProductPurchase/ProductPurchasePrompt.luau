@@ -6,6 +6,9 @@ local roactFitComponentsModule = require(parent_1.RoactFitComponents)
 local fitFrameVertical = roactFitComponentsModule.FitFrameVertical
 local fitTextLabel = roactFitComponentsModule.FitTextLabel
 local UIBloxModule = require(parent_1.UIBlox)
+local foundationModule = require(parent_1.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local images = UIBloxModule.App.ImageSet.Images
@@ -130,7 +133,7 @@ function name.render(p1)
 end
 
 function name.renderAlert(p1, p2)
-	-- upvalues: loggerModule (ref), getAppContextModule (ref), default (ref), purchaseModalV1ShownCounter (ref), withStyle (ref), char (ref), roactModule (ref), modelViewportModule (ref), imageSetLabel (ref), interactiveAlert (ref), fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (ref), fitFrameVertical (ref), fitTextLabel (ref), buttonType (ref), robux (ref)
+	-- upvalues: loggerModule (ref), getAppContextModule (ref), default (ref), purchaseModalV1ShownCounter (ref), withStyle (ref), char (ref), roactModule (ref), modelViewportModule (ref), imageSetLabel (ref), interactiveAlert (ref), fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (ref), fitFrameVertical (ref), fitTextLabel (ref), buttonType (ref), robux (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local props = p1.props
 	loggerModule.debug({
 		message = "Purchase Modal V1 Shown",
@@ -147,7 +150,7 @@ function name.renderAlert(p1, p2)
 	})
 	
 	return withStyle(function(p3)
-		-- upvalues: p1 (ref), p2 (ref), char (copy), roactModule (copy), modelViewportModule (copy), imageSetLabel (copy), interactiveAlert (copy), fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), fitFrameVertical (copy), fitTextLabel (copy), buttonType (copy), robux (copy)
+		-- upvalues: p1 (ref), p2 (ref), char (copy), roactModule (copy), modelViewportModule (copy), imageSetLabel (copy), interactiveAlert (copy), fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), fitFrameVertical (copy), fitTextLabel (copy), buttonType (copy), robux (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		local theme = p3.Theme
 		local font = p3.Font
 		local color = theme.IconEmphasis.Color
@@ -229,7 +232,7 @@ function name.renderAlert(p1, p2)
 				}
 			},
 			footerContent = function()
-				-- upvalues: p1 (copy), roactModule (copy), fitFrameVertical (copy), var1 (ref), font (ref), formattedText (ref), theme (ref), fitTextLabel (copy), p2 (copy)
+				-- upvalues: p1 (copy), roactModule (copy), fitFrameVertical (copy), var1 (ref), foundationFontFaceMigration (copy), font (ref), normalizeFontFace (copy), p3 (ref), formattedText (ref), theme (ref), fitTextLabel (copy), p2 (copy)
 				return if p1.props.currentBalanceValid then if p1.props.testPurchase then roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,
 					width = UDim.new(1, 0),
@@ -267,7 +270,8 @@ function name.renderAlert(p1, p2)
 						Position = UDim2.fromScale(0, 0.5),
 						Size = UDim2.fromOffset(var1, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
-						Font = font.Footer.Font,
+						Font = if foundationFontFaceMigration then nil else font.Footer.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.CaptionSmall.Font) else nil,
 						Text = formattedText,
 						TextSize = font.BaseSize * font.Footer.RelativeSize,
 						TextColor3 = theme.TextDefault.Color

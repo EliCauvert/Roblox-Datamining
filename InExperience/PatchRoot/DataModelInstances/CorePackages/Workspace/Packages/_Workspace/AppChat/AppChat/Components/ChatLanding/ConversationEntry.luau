@@ -14,6 +14,8 @@ local text = require(parent.AppCommonLib).Text
 local cryoModule = require(parent.Cryo)
 local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
+local getTextSize = require(parent.Style).GetTextSize
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local getBoldTextThemeModule = require(script.Parent.Utils.getBoldTextTheme)
 local conversationCell = require(appChat.Components.Cells).ConversationCell
 local conversationRelativeTimestampModule = require(script.Parent.ConversationRelativeTimestamp)
@@ -50,7 +52,7 @@ local t = {
 }
 
 return memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useTextSizeOffset (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useIsUserPendingModule (ref), getBoldTextThemeModule (ref), useDispatch (ref), useChatPlacementContext (ref), useChatPagePaddingModule (ref), useRelativeTimestampBindingModule (ref), useMemo (ref), text (ref), fFlagAppChatTimestampInSubtitleModule (ref), reactModule (ref), useNavigation (ref), getOverlayStoreModule (ref), enumScreensModule (ref), overlayTypesModule (ref), conversationModule (ref), removedConversationModule (ref), shouldShowU13ChatOptInForConversationModule (ref), constantsModule (ref), shouldShowOSAForConversationModule (ref), httpService (ref), fFlagAppChatSquadJoinButtonU13OSAModule (ref), fFlagAppChatUseActivationOnFocus (ref), useActivationOnFocus (ref), reactFocusNavigationModule (ref), useCanAccessPartyModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), squadButtonSourceEnum (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), conversationCell (ref), getFFlagDebugAppChatModule (ref), conversationRelativeTimestampModule (ref), foundationModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useTextSizeOffset (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useIsUserPendingModule (ref), getBoldTextThemeModule (ref), useDispatch (ref), useChatPlacementContext (ref), useChatPagePaddingModule (ref), useRelativeTimestampBindingModule (ref), useMemo (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), fFlagAppChatTimestampInSubtitleModule (ref), reactModule (ref), useNavigation (ref), getOverlayStoreModule (ref), enumScreensModule (ref), overlayTypesModule (ref), conversationModule (ref), removedConversationModule (ref), shouldShowU13ChatOptInForConversationModule (ref), constantsModule (ref), shouldShowOSAForConversationModule (ref), httpService (ref), fFlagAppChatSquadJoinButtonU13OSAModule (ref), fFlagAppChatUseActivationOnFocus (ref), useActivationOnFocus (ref), reactFocusNavigationModule (ref), useCanAccessPartyModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), squadButtonSourceEnum (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), conversationCell (ref), getFFlagDebugAppChatModule (ref), conversationRelativeTimestampModule (ref), foundationModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2 = useStyle()
 	local var3 = useTokens()
@@ -69,9 +71,15 @@ return memo(function(p1)
 	local shortRelativeTime = var1.conversation.shortRelativeTime or ""
 	local var13 = useRelativeTimestampBindingModule(var1.conversation.unixTime)
 	local var14 = useMemo(function()
-		-- upvalues: text (copy), shortRelativeTime (ref), captionSubHeader (ref), var12 (ref)
-		return text.GetTextWidth(shortRelativeTime, captionSubHeader.Font, var12)
-	end, { shortRelativeTime, captionSubHeader.Font, var12, var4 })
+		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), shortRelativeTime (ref), var12 (ref), var3 (ref), text (copy), captionSubHeader (ref)
+		return if foundationFontFaceMigration then getTextSize(shortRelativeTime, var12, var3.Typography.CaptionLarge.Font, Vector2.new(10000, 10000)).X else text.GetTextWidth(shortRelativeTime, captionSubHeader.Font, var12)
+	end, {
+		shortRelativeTime,
+		captionSubHeader.Font,
+		var12,
+		var4,
+		if foundationFontFaceMigration then var3.Typography.CaptionLarge.Font else nil
+	})
 	local var15 = if fFlagAppChatTimestampInSubtitleModule then var13 else nil
 	local var16 = reactModule.useRef(nil)
 	local var17 = useNavigation()

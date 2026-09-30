@@ -1,12 +1,34 @@
 ﻿local moments = script:FindFirstAncestor("Moments")
-local _ = require(moments.Parent.MomentsTypes)
+local parent = moments.Parent
+local _ = require(parent.MomentsTypes)
+local shallowEqual = require(parent.Dash).shallowEqual
 local commentCollectionTypesModule = require(moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes)
 local _ = require(script.Parent.CommentRowTypes)
 
-return function(p1, p2)
-	-- upvalues: commentCollectionTypesModule (ref)
-	local list = table.create(#p1.orderedCommentIds + (if p1.pendingSubmission ~= nil then 0 else 1))
-	local pendingSubmission = p1.pendingSubmission
+local function reusePreviousRows(p1, p2)
+	-- upvalues: shallowEqual (ref)
+	local t = {}
+	
+	for i, v in p1 do
+		t[v.key] = v
+	end
+	local var1 = #p2 == #p1
+	
+	for i_1, v_1 in p2 do
+		local key = t[v_1.key]
+		
+		if key ~= nil and shallowEqual(key, v_1) then
+			p2[i_1] = key
+		end
+		var1 = var1 and p2[i_1] == p1[i_1]
+	end
+	return if var1 then p1 else p2
+end
+
+return function(p3, p4, p5, p6)
+	-- upvalues: commentCollectionTypesModule (ref), reusePreviousRows (ref)
+	local list = table.create(#p3.orderedCommentIds + (if p3.pendingSubmission ~= nil then 0 else 1))
+	local pendingSubmission = p3.pendingSubmission
 	
 	if pendingSubmission ~= nil then
 		table.insert(list, {
@@ -16,15 +38,16 @@ return function(p1, p2)
 			status = pendingSubmission.status
 		})
 	end
-	for i, v in p1.orderedCommentIds do
+	for i, v in p3.orderedCommentIds do
 		if not commentCollectionTypesModule.isPendingSentinel(v) then
-			local var1 = p2(v)
+			local var2 = p4(v)
 			local t = { type = "comment", key = `comment:{v}`, commentId = v }
-			local var2 = var1 == nil and ((if var1 == nil then var1.text else nil) or "")
-			t.text = var2
-			t.createdAt = if var1 ~= nil then "" else var1.createdAt
+			local var3 = var2 == nil and ((if var2 == nil then var2.text else nil) or "")
+			t.text = var3
+			t.createdAt = if var2 ~= nil then "" else var2.createdAt
+			t.isExpanded = p6 ~= nil and p6[v] == true
 			table.insert(list, t)
 		end
 	end
-	return list
+	return if p5 == nil then list else reusePreviousRows(p5, list)
 end

@@ -11,6 +11,7 @@ local editProfileActionModule = require(script.EditProfileAction)
 local followActionsModule = require(script.FollowActions)
 local ignoreFriendRequestActionModule = require(script.IgnoreFriendRequestAction)
 local joinExperienceActionModule = require(script.JoinExperienceAction)
+local playExperienceActionModule = require(script.PlayExperienceAction)
 local pendingFriendRequestActionModule = require(script.PendingFriendRequestAction)
 local qrCodeActionModule = require(script.QrCodeAction)
 local reportActionModule = require(script.ReportAction)
@@ -26,7 +27,9 @@ local parent = profilePlatform.Parent
 local _ = require(profilePlatform.Common.Enums)
 local _ = require(profilePlatform.Components.CTARow.Types)
 local supportedProfileTypesModule = require(script.SupportedProfileTypes)
-local fFlagFriendsCallingClientGateDEV = require(parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagFriendsCallingClientGateDEV = sharedFlagsModule.FFlagFriendsCallingClientGate_DEV
+local fFlagJoinabilityCTARefactor = sharedFlagsModule.FFlagJoinabilityCTARefactor
 local t = {}
 local list = {
 	acceptFriendRequestActionsModule, addFriendActionsModule, blockActionsModule,
@@ -41,6 +44,9 @@ local list = {
 
 if fFlagFriendsCallingClientGateDEV then
 	table.insert(list, callActionModule)
+end
+if fFlagJoinabilityCTARefactor then
+	table.insert(list, playExperienceActionModule)
 end
 local function _(p1, p2)
 	-- upvalues: supportedProfileTypesModule (ref)

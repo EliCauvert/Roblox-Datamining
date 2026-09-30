@@ -108,6 +108,7 @@ Authentication.SignUp.Action.ApplyOnNextRespawn,다음 리스폰 시 적용
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ExitModalLeave,나가기
 Authentication.SignUp.Action.RespawnNow,지금 리스폰
+Authentication.SignUp.Action.StartPlay,플레이 시작
 Authentication.SignUp.Button.OKCaptialized,확인
 Authentication.SignUp.Button.RetryLogIn,로그인 재시도
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} 계정은 이미 Roblox계정에 연결되어 있습니다. 로그인을 다시 시도하세요.
@@ -116,6 +117,7 @@ Authentication.SignUp.Description.Try,사용해 보기
 Authentication.SignUp.Description.UsernameChanged,모두 완료되었습니다! 계정이 준비되었으며 {platform}에 연결되었습니다. 지금 리스폰하여 게임에서 업데이트된 사용자 이름을 확인하세요. 그렇지 않으면 다음에 적용됩니다.
 Authentication.SignUp.Description.UsernameUnchanged,가입을 완료하셨습니다! 계정이 준비되었으며 {platform}에 연결되었습니다. 친구들과 채팅하고 수백만 개의 Roblox 게임을 플레이하세요.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Roblox 계정이 {platform}상의 계정에 연결됩니다. 언제든지 설정 화면에서 연결을 해제할 수 있습니다. {platform}상의 다른 계정에 연결하기 전에 잠시 지연이 발생할 수 있습니다. '{ctaButton}'을(를) 클릭하면, 중재 조항을 포함한 이용 약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다."
+Authentication.SignUp.Header.OneLastThing,마지막으로 하나 더
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Roblox 계정 설정
 Authentication.SignUp.Heading.CountryCodeSelector,국가 선택
 Authentication.SignUp.Heading.RetryLogIn,
@@ -156,6 +158,7 @@ Authentication.SignUp.Response.InvalidBirthday,유효하지 않은 생년월일
 Authentication.SignUp.Response.InvalidEmail,유효하지 않은 이메일입니다.
 Authentication.SignUp.Response.PasswordComplexity,좀 더 복잡한 비밀번호를 만드세요.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,먼저 사용자 이름을 설정해야 합니다.
+Authentication.SignUp.Subtitle.AddYourBirthday,Roblox 계정을 만들려면 생년월일을 입력하세요.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,설정을 완료하면 진행 상황이 이전됩니다.
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,거래를 진행하려면 2단계 인증이 되어 있어야 합니다. 설정> 보안으로 이동해 2단계 인증을 완료하세요.
@@ -464,6 +467,7 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,해제
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,재설정
+CommonUI.Messages.Action.View,보기
 CommonUI.Messages.Label.Password,비밀번호
 CommonUI.Messages.Response.NoResults,결과 없음
 CommonUI.Messages.Response.PageError,페이지를 불러오는 중 오류 발생
@@ -1043,6 +1047,7 @@ CoreScripts.PublishAvatarPrompt.Rotate,
 CoreScripts.PublishAvatarPrompt.Zoom,줌
 CoreScripts.PublishCommon.Disclaimer,
 CoreScripts.PublishCommon.Leave,
+CoreScripts.PublishCommon.ReviewingCreation,작품 검토 중...
 CoreScripts.PublishCommon.Stay,
 CoreScripts.PublishCommon.UnsavedWarning,저장하지 않은 변경 사항은 손실될 수 있습니다
 CoreScripts.PurchasePrompt.Button.OK,
@@ -1383,7 +1388,7 @@ Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
 Feature.Avatar.BackgroundGeneration.Action.Upload,업로드하기
-Feature.Avatar.BackgroundGeneration.Action.View,보기
+Feature.Avatar.BackgroundGeneration.Action.View,
 Feature.Avatar.BackgroundGeneration.Action.ViewExclusiveBackgrounds,
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Plus로 배경을 만드세요.
 Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,배경이 아직 게시되지 않았습니다. 지금 나가면 배경이 삭제됩니다.
@@ -1669,6 +1674,7 @@ Feature.Avatar.Label.SetAvatarCount,아바타 {itemCount}개
 Feature.Avatar.Label.SetLimitReachedBody,최대 {setLimit}개 세트만 보유할 수 있습니다. 공간을 확보하려면 하나를 삭제하세요
 Feature.Avatar.Label.SetNameDuplicateBody,이미 해당 이름의 세트가 있습니다. 다른 이름을 선택하세요.
 Feature.Avatar.Label.SetNameNotAllowedBody,다른 이름을 선택하세요
+Feature.Avatar.Label.ShareAvatarToMoments,모멘트에 아바타 공유
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,마켓플레이스에 아바타 게시
 Feature.Avatar.Label.Shirt,셔츠
 Feature.Avatar.Label.ShirtClassic,기본형 셔츠
@@ -2257,7 +2263,6 @@ Feature.Build.Label.World,월드
 Feature.Build.Message.AccountRequirements,회원님의 계정이 Build 사용 요건을 충족하지 않습니다.
 Feature.Build.Message.AccountTooNew,계정을 새로 만든 지 얼마 안 돼서 게시할 수 없습니다. 2일 후에 다시 시도해 보세요.
 Feature.Build.Message.AdCampaignCreateFailed,캠페인을 생성하지 못했습니다. 다시 시도해 보세요.
-Feature.Build.Message.AdCampaignCreated,광고 캠페인 생성됨
 Feature.Build.Message.AdPerformanceLoadFailed,광고 실적을 불러올 수 없습니다
 Feature.Build.Message.AdsPromotionBannerSubtitle,무료로 오디언스를 확대하세요
 Feature.Build.Message.AdsPromotionBannerTitle,무료 프로모션이 {promotionCount}건 남았습니다
@@ -2348,10 +2353,12 @@ Feature.Build.Notification.Title.NeedInput,빌드에 대한 의견 필요
 Feature.Build.Placeholder.DescribeProduct,판매하고자 하는 제품에 대해 설명해 주세요
 Feature.Build.Placeholder.DescribeProductUpdate,업데이트 설명
 Feature.Build.Prompt.CreateDeveloperProduct,"개발자 상품을 만들고, 게임에 연결하고, 변경 사항을 확인 및 게시하고, 구매할 수 있도록 도와주세요."
+Feature.Build.Title.AdActive,광고 캠페인이 활성화되었습니다
 Feature.Build.Title.AdCampaignDuration,{durationDays}일 광고 캠페인
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}일
 Feature.Build.Title.AdComplete,광고 종료
 Feature.Build.Title.AdCreated,광고 생성됨
+Feature.Build.Title.AdCreatedPeriod,광고가 생성되었습니다.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,이미지 추가
 Feature.Build.Title.AdsStatsEmpty,캠페인 시작하기
@@ -2985,7 +2992,6 @@ Feature.Chat.Message.LeaveGroup,회원님은 본 그룹과 채팅할 수 없게 
 Feature.Chat.Message.LeaveGroup.V2,그룹에서 정말 나가시겠어요?
 Feature.Chat.Message.MakeConnectionsToChat,Roblox에서 친구를 사귀고 함께 채팅하세요
 Feature.Chat.Message.MakeConnectionsToParty,Roblox에서 친구를 사귀고 함께 파티를 구성하세요
-Feature.Chat.Message.MakeFriendsToChat,
 Feature.Chat.Message.MakeFriendsToParty,
 Feature.Chat.Message.MessageContentModerated,메시지가 규정에 맞지 않아 전송하지 못했습니다.
 Feature.Chat.Message.MessageUnavailable,메시지 확인 불가
@@ -2996,8 +3002,6 @@ Feature.Chat.Message.RemoveUser,{USERNAME} 님을 채팅그룹에서 정말 삭�
 Feature.Chat.Message.RemoveUser.V2,{USERNAME} 님을 그룹에서 정말 삭제할까요?
 Feature.Chat.Message.RemovedFromConversation,회원님은 그룹에서 삭제되었습니다.
 Feature.Chat.Message.SeveralUsersTyping,여러 사용자가 메시지 입력 중...
-Feature.Chat.Message.TurnOnChat,친구와 이야기를 나누려면 개인정보 설정에서 채팅을 활성화하세요.
-Feature.Chat.Message.TurnOnParty,친구와 파티를 구성하려면 개인정보 설정에서 파티를 활성화하세요.
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} 님 및 {DISPLAY_NAME_2} 님이 메시지 입력 중...
 Feature.Chat.PresetChat.Disclaimer,'간단한 메시지'를 통해 모든 연령대의 플레이어가 게임 플레이를 조율할 수 있습니다.
 Feature.Chat.Response.ChatNameFullyModerated,채팅 그룹 이름이 규정에 맞지 않습니다.
@@ -3389,6 +3393,9 @@ Feature.GameFollows.TooltipFollowLimitReached,제한에 도달했어요. 이 체
 Feature.GameFollows.TooltipNotificationsLimitReached,한도에 도달했습니다. 먼저 다른 체험에 대한 알림을 끄세요.
 Feature.GameFollows.TooltipTurnedOffNotifications,{experienceName}에 대한 알림 사용이 중지되었습니다
 Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName}에 대한 알림이 사용 설정되었습니다
+Feature.GameJoin.Description.DifferentServer,다른 서버에서 시작하게 됩니다
+Feature.GameJoin.Label.PlayTogether,함께 플레이하실 수 있습니다
+Feature.GameJoin.Label.PlayTogetherSoon,곧 함께 플레이하실 수 있습니다
 Feature.GamePage.Action.BackToTop,맨 위로 돌아가기
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -4029,6 +4036,7 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,현재 기기에서는 이 �
 Feature.RobloxSubscription.Description.AgeCheckTrial,나이 확인을 완료하고 감사 선물로 Roblox Plus 1주일 무료 체험 혜택을 받으세요. 무료 체험은 결제 수단 입력 없이 이용하실 수 있습니다.
 Feature.RobloxSubscription.Description.Benefit.Customize,프로필 프레임 및 앱 테마로 사용자 정의하기
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"아이템 및 아바타 첫 60일 동안 10% 할인, 이후 20% 할인"
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,"아이템 및 아바타 첫 {trialUnlockDays}일 동안 10% 할인, 이후 20% 할인"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Roblox Plus 구독을 통해 적은 Robux로 더 큰 즐거움을 누리세요.
 Feature.RobloxSubscription.Description.JoinEarly,Plus로 일찍 참여하기
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}를 클릭하면 <a href=""{termsUrl}"">Roblox 구독 약관</a>에 동의하는 것으로 간주됩니다. 구독을 취소하기 전까지 매월 자동으로 요금이 청구됩니다."
@@ -4040,8 +4048,10 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,"게임 내 아이템,
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{periodIndex}{periodType} 이후 이 아이템 {discountPercent}% 할인 
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,'계속하기'를 클릭하면 {linkStart}Roblox 구독 약관{linkEnd}에 동의하는 것으로 간주됩니다.
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"'무료 체험'을 클릭하면 {linkStart}Roblox 구독 약관{linkEnd}에 동의하는 것으로 간주됩니다. 무료 체험 기간은 1개월 후 종료되며, 매월 자동으로 요금이 청구됩니다. 언제든지 구독을 취소하실 수 있습니다."
+Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"'무료 체험'을 클릭하면 {linkStart}Roblox 구독 약관{linkEnd}에 동의하는 것으로 간주됩니다. 무료 체험 기간은 {trialDuration}{trialPeriodLabel} 후 종료되며, {billingPeriodLabel}마다 자동으로 요금이 청구됩니다. 구독은 언제든지 취소하실 수 있습니다."
 Feature.RobloxSubscription.Label.FreeTrialText,무료 체험하기
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}1개월 무료 이용{boldEnd} 후 {price}/{periodType}
+Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration}{trialPeriodLabel} 무료 이용{boldEnd} 후 {price}/{periodType}
 Feature.RobloxSubscription.Label.month,개월
 Feature.RobloxSubscription.Label.months,
 Feature.RobloxSubscription.Title.AgeCheckTrial,Plus 1주일 무료 구독하기
@@ -4051,6 +4061,8 @@ Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus 구독하기
 Feature.RobloxSubscription.Title.UnsupportedPlatform,여기에서는 Roblox Plus를 이용할 수 없습니다
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,다른 사람보다 먼저 이벤트에 참가할 수 있습니다.
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Plus 구독으로 얼리 액세스
+Feature.RobloxSubscription.label.week,주
+Feature.RobloxSubscription.label.weeks,
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"계정 상태, 규정 위반 및 이의 신청"
 Feature.Schools.Label.Classmates,학급 친구
 Feature.Screentime.Content.ScreentimeLimitDialog,일일 스크린 타임 한도에 도달했습니다. Roblox에 액세스하려면 내일 다시 오세요.
@@ -4442,6 +4454,14 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox에서 {number}시간 동안 회원님의 이 게임 이용을 정지했습니다
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox에서 1분 동안 회원님의 이 게임 이용을 정지했습니다
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox에서 {number}분 동안 회원님의 이 게임 이용을 정지했습니다
+Feature.UniversalShareSheet.Action.CopiedLink,
+Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,메시지 공유
+Feature.UniversalShareSheet.Response.NotSharedMessage,메시지를 전송할 수 없습니다.
+Feature.UniversalShareSheet.Response.NotSharedMultipleMessages,
+Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} 외 1명
+Feature.UniversalShareSheet.Response.SharedMessage,메시지가 전송되었습니다.
+Feature.UniversalShareSheet.Response.SharedMultipleMessages,
+Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} 외 {N}명
 Feature.VerificationUpsell.Action.AddPhone,휴대폰 번호 추가
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,음성 채팅을 위해 휴대폰 번호 추가

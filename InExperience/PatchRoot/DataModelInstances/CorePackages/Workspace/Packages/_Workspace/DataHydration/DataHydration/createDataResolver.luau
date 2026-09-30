@@ -6,13 +6,12 @@ local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalP
 local createRequestQueueModule = require(dataHydration.createRequestQueue)
 local createMutationLayerModule = require(dataHydration.createMutationLayer)
 local promiseModule = require(parent.Promise)
-local fFlagLuaAppDataHydrationDataResolverOnClear = require(parent.SharedFlags).FFlagLuaAppDataHydrationDataResolverOnClear
 local luaAppDataHydrationDefaultBatchSize = game:DefineFastInt("LuaAppDataHydrationDefaultBatchSize", 50)
 local luaAppDataHydrationQueueProcessDelaySec = game:DefineFastInt("LuaAppDataHydrationQueueProcessDelaySec", 1)
 local luaAppDataHydrationDefaultRequestTimeoutSec = game:DefineFastInt("LuaAppDataHydrationDefaultRequestTimeoutSec", 30)
 
 return function(p1)
-	-- upvalues: luaAppDataHydrationDefaultBatchSize (ref), luaAppDataHydrationQueueProcessDelaySec (ref), luaAppDataHydrationDefaultRequestTimeoutSec (ref), createRequestQueueModule (ref), getLocalPlayerUserId (ref), createMutationLayerModule (ref), promiseModule (ref), fFlagLuaAppDataHydrationDataResolverOnClear (ref), playersService (ref)
+	-- upvalues: luaAppDataHydrationDefaultBatchSize (ref), luaAppDataHydrationQueueProcessDelaySec (ref), luaAppDataHydrationDefaultRequestTimeoutSec (ref), createRequestQueueModule (ref), getLocalPlayerUserId (ref), createMutationLayerModule (ref), promiseModule (ref), playersService (ref)
 	local var1 = p1.supportsMultiGet ~= nil or p1.supportsMultiGet
 	local var2 = p1.requestBatchSize or luaAppDataHydrationDefaultBatchSize
 	
@@ -493,7 +492,7 @@ return function(p1)
 	end
 	
 	local function clear()
-		-- upvalues: var5 (write), t (write), cache (ref), var4 (ref), var7 (write), fFlagLuaAppDataHydrationDataResolverOnClear (copy), p1 (ref)
+		-- upvalues: var5 (write), t (write), cache (ref), var4 (ref), var7 (write), p1 (ref)
 		if var5 then
 			task.cancel(var5)
 			var5 = nil
@@ -505,7 +504,7 @@ return function(p1)
 		if var7 then
 			var7.clearAll()
 		end
-		if fFlagLuaAppDataHydrationDataResolverOnClear and p1.onClear then
+		if p1.onClear then
 			p1.onClear()
 		end
 	end

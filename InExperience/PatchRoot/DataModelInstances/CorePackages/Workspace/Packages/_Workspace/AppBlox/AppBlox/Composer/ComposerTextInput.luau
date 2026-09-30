@@ -4,6 +4,7 @@ local parent_1 = script:FindFirstAncestor("AppBlox").Parent
 local reactModule = require(parent.React)
 local reactUtilsModule = require(parent.ReactUtils)
 local fFlagComposerControlAlignment = require(parent_1.SharedFlags).FFlagComposerControlAlignment
+local composerMultiLineCaretFix = game:DefineFastFlag("ComposerMultiLineCaretFix", false)
 local foundationFontFaceMigration = require(parent_1.Foundation).Utility.Flags.FoundationFontFaceMigration
 local components = foundation.Components
 local iconModule = require(components.Icon)
@@ -76,6 +77,7 @@ local var1 = reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		[reactModule.Tag] = p1.tag,
 		[reactModule.Change.Text] = p1.onTextChanged,
 		[reactModule.Change.CursorPosition] = p1.onCursorPositionChanged,
+		[reactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged,
 		[reactModule.Event.Focused] = p1.onFocusGained,
 		[reactModule.Event.FocusLost] = p1.onFocusLost,
 		[reactModule.Event.InputChanged] = p1.onInputChanged,
@@ -86,7 +88,7 @@ local var1 = reactModule.memo(reactModule.forwardRef(function(p1, p2)
 end))
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), getBindableValueModule (ref), useTextInputVariantsModule (ref), fFlagComposerControlAlignment (ref), inputVariantModule (ref), useStyleTagsModule (ref), usePreferredInputModule (ref), useComposerFocusLockModule (ref), getDisabledStyleModule (ref), getMultiLineTextHeightModule (ref), composerDebugModule (ref), measureTextLineCountModule (ref), foundationFontFaceMigration (ref), normalizeFontFaceModule (ref), inputFocusBehaviorModule (ref), useComposerKeyboardConnectionsModule (ref), controlStateModule (ref), radiusModule (ref), truncateTextToCursorModule (ref), useBindableModule (ref), reactUtilsModule (ref), viewModule (ref), withCommonPropsModule (ref), blendTransparenciesModule (ref), constantsModule (ref), stateLayerAffordanceModule (ref), scrollViewModule (ref), var1 (ref), mapBindableModule (ref), iconModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), getBindableValueModule (ref), useTextInputVariantsModule (ref), fFlagComposerControlAlignment (ref), inputVariantModule (ref), useStyleTagsModule (ref), usePreferredInputModule (ref), useComposerFocusLockModule (ref), getDisabledStyleModule (ref), getMultiLineTextHeightModule (ref), composerDebugModule (ref), measureTextLineCountModule (ref), foundationFontFaceMigration (ref), normalizeFontFaceModule (ref), composerMultiLineCaretFix (ref), inputFocusBehaviorModule (ref), useComposerKeyboardConnectionsModule (ref), controlStateModule (ref), radiusModule (ref), truncateTextToCursorModule (ref), useBindableModule (ref), reactUtilsModule (ref), viewModule (ref), withCommonPropsModule (ref), blendTransparenciesModule (ref), constantsModule (ref), stateLayerAffordanceModule (ref), scrollViewModule (ref), var1 (ref), mapBindableModule (ref), iconModule (ref)
 	local var2 = p1
 	
 	if p1.Selectable == nil then
@@ -157,7 +159,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		return if current and current.AbsoluteSize.X > 0 then current.AbsoluteSize.X else 0
 	end, {})
 	local var42 = reactModule.useCallback(function(p3)
-		-- upvalues: measureTextLineCountModule (copy), var3 (ref), var33 (ref), var41 (ref), foundationFontFaceMigration (copy), normalizeFontFaceModule (copy), fontStyle (ref), fontSize (ref), var37 (ref)
+		-- upvalues: measureTextLineCountModule (copy), var3 (ref), var33 (ref), var41 (ref), foundationFontFaceMigration (copy), normalizeFontFaceModule (copy), fontStyle (ref), fontSize (ref), composerMultiLineCaretFix (copy), var37 (ref), getMultiLineTextHeightModule (copy), lineHeight (ref)
 		local var43 = measureTextLineCountModule({
 			text = p3,
 			maxLines = var3.maxLines,
@@ -166,8 +168,12 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			font = if foundationFontFaceMigration then normalizeFontFaceModule(fontStyle.Font) else fontStyle.Font,
 			fontSize = fontSize
 		})
-		var37(math.max(if var43.boundsY and var43.boundsY > 0 then math.ceil(var43.boundsY) else var33, var43.lineCount * var33))
 		
+		if composerMultiLineCaretFix then
+			var37(getMultiLineTextHeightModule(fontSize, var43.unclampedLineCount, lineHeight))
+		else
+			var37(math.max(if var43.boundsY and var43.boundsY > 0 then math.ceil(var43.boundsY) else var33, var43.lineCount * var33))
+		end
 		return var43.lineCount
 	end, {
 		fontSize, lineHeight, fontStyle.Font, var3.maxLines, var41, var33
@@ -609,7 +615,16 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			current.CanvasPosition += Vector2.new(0, y_1 - var93)
 		end
 	end, { var77 })
-	local var91 = reactModule.useCallback(function(p3)
+	local var91 = if composerMultiLineCaretFix then reactModule.useCallback(function(p3)
+		-- upvalues: var90 (ref)
+		if p3:IsFocused() then
+			p3.CursorPosition = p3.CursorPosition
+			var90(p3)
+			
+			return
+		end
+	end, { var90 }) else nil
+	local var92 = reactModule.useCallback(function(p3)
 		-- upvalues: var8 (ref), var12 (ref)
 		if p3 == nil then
 			return
@@ -618,7 +633,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		p3.ClipsDescendants = true
 		p3.CanvasPosition = var12.current
 	end, {})
-	local var92 = reactModule.useCallback(function(p3)
+	local var93 = reactModule.useCallback(function(p3)
 		-- upvalues: var9 (ref)
 		if p3 then
 			p3.Text = var9.current
@@ -631,11 +646,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			end)
 		end
 	end, {})
-	local var93 = reactModule.useCallback(function(p3)
+	local var94 = reactModule.useCallback(function(p3)
 		-- upvalues: var12 (ref)
 		var12.current = p3.CanvasPosition
 	end, {})
-	local var94 = reactModule.useMemo(function()
+	local var95 = reactModule.useMemo(function()
 		-- upvalues: var3 (ref), reactModule (copy), var68 (ref), var69 (ref), var70 (ref), var17 (ref), isDisabled (ref)
 		return if var3.onDragStarted or var3.onDrag or var3.onDragEnded then reactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
@@ -648,9 +663,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		var68, var69, var70, var17, isDisabled, var3.onDragStarted, var3.onDrag,
 		var3.onDragEnded
 	})
-	local var95 = useBindableModule(if var3.horizontalPadding then var3.horizontalPadding.left or UDim.new(0, 0) else UDim.new(0, 0))
-	local var96 = useBindableModule(if var3.horizontalPadding then var3.horizontalPadding.right or UDim.new(0, 0) else UDim.new(0, 0))
-	local var97 = reactModule.useMemo(function()
+	local var96 = useBindableModule(if var3.horizontalPadding then var3.horizontalPadding.left or UDim.new(0, 0) else UDim.new(0, 0))
+	local var97 = useBindableModule(if var3.horizontalPadding then var3.horizontalPadding.right or UDim.new(0, 0) else UDim.new(0, 0))
+	local var98 = reactModule.useMemo(function()
 		-- upvalues: var3 (ref), container (ref), var4 (ref)
 		return if var3.hasClearButton then UDim2.fromOffset(0, (container.minHeight - var4.Stroke.Standard) / 2) else nil
 	end, {
@@ -658,9 +673,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		container.minHeight,
 		var4.Stroke.Standard
 	})
-	local var98 = reactUtilsModule.useComposedRef(var6, var92)
+	local var99 = reactUtilsModule.useComposedRef(var6, var93)
 	local createElement = reactModule.createElement
-	local var99 = withCommonPropsModule(var3, {
+	local var100 = withCommonPropsModule(var3, {
 		Size = UDim2.new(1, 0, 0, var78),
 		selection = {
 			Selectable = var3.Selectable and not isDisabled,
@@ -678,11 +693,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		} else nil,
 		cornerRadius = var75,
 		padding = {
-			left = var95:map(function(p3)
+			left = var96:map(function(p3)
 				-- upvalues: standard (ref)
 				return UDim.new(0, standard) + p3
 			end),
-			right = if var3.trailingElement == nil and var3.hasClearButton then UDim.new(0, standard) else var96:map(function(p3)
+			right = if var3.trailingElement == nil and var3.hasClearButton then UDim.new(0, standard) else var97:map(function(p3)
 				-- upvalues: standard (ref)
 				return UDim.new(0, standard) + p3
 			end),
@@ -706,7 +721,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		testId = `{var3.testId}--outer-container`
 	})
 	local t_1 = {
-		DragDetector = var94,
+		DragDetector = var95,
 		Background = var3.backgroundGradient,
 		Leading = if var3.leadingElement then reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
@@ -716,7 +731,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}, var3.leadingElement) else nil
 	}
 	local createElement_1 = reactModule.createElement
-	local var100 = if var45 then scrollViewModule else viewModule
+	local var101 = if var45 then scrollViewModule else viewModule
 	local t_2 = {
 		LayoutOrder = 2,
 		tag = "fill size-full clip",
@@ -724,12 +739,12 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		selection = { Selectable = false },
 		scroll = var89,
 		layout = var88,
-		onCanvasPositionChanged = if var45 then var93 else nil,
-		scrollingFrameRef = if var45 then var91 else nil
+		onCanvasPositionChanged = if var45 then var94 else nil,
+		scrollingFrameRef = if var45 then var92 else nil
 	}
 	local t_3 = {}
 	local createElement_2 = reactModule.createElement
-	local var101 = viewModule
+	local var102 = viewModule
 	local t_4 = {
 		Size = if var80 then UDim2.new(1, 0, 0, var87) else nil,
 		tag = { ["fill size-full"] = not var80 },
@@ -765,12 +780,13 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			onFocusLost = if var45 and var29 then nil else var66,
 			onTextChanged = var56,
 			onCursorPositionChanged = if var45 then var90 else nil,
+			onAbsoluteSizeChanged = if composerMultiLineCaretFix and var45 then var91 else nil,
 			onInputChanged = var58,
 			onInputEnded = var65,
 			manualFocusRelease = if var29 then var3.manualFocusRelease else nil,
 			shouldEmitReturnEvents = if var29 and var3.manualFocusRelease == true and var3.alwaysMultiLine == true then true else nil
 		}, {
-			DragDetector = var94,
+			DragDetector = var95,
 			BoundsChecker = if var45 then reactModule.createElement(var1, {
 				isBoundsChecker = true,
 				fontStyle = fontStyle,
@@ -780,7 +796,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			}) else nil
 		})
 	end
-	local var102
+	local var103
 	t_5.TextBox = createElement_3
 	t_5.MobileFocusTarget = if var45 and var29 and (not var27 and not isDisabled) then reactModule.createElement(viewModule, {
 		tag = "size-full",
@@ -792,8 +808,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	}) else nil
 	
 	if var46 then
-		var102 = reactModule.createElement
-		var102 = var102(var1, {
+		var103 = reactModule.createElement
+		var103 = var103(var1, {
 			overlayNativeInput = nil,
 			text = var43,
 			placeholder = var3.placeholder,
@@ -803,7 +819,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			isMultiLine = var45,
 			isDisabled = isDisabled,
 			padding = var84,
-			ref = var98,
+			ref = var99,
 			tag = `{var23 or ""} data-testid={var3.testId}--mobile-textbox`,
 			Size = uDim2_1,
 			onFocusGained = var64,
@@ -815,11 +831,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			shouldEmitReturnEvents = if var29 and var3.manualFocusRelease == true and var3.alwaysMultiLine == true then true else nil
 		})
 	else
-		var102 = nil
+		var103 = nil
 	end
-	t_5.MobileTextBox = var102
-	t_3.TextContent = createElement_2(var101, t_4, t_5)
-	t_1.TextBoxWrapper = createElement_1(var100, t_2, t_3)
+	t_5.MobileTextBox = var103
+	t_3.TextContent = createElement_2(var102, t_4, t_5)
+	t_1.TextBoxWrapper = createElement_1(var101, t_2, t_3)
 	t_1.Clear = if var3.hasClearButton then reactModule.createElement(viewModule, {
 		LayoutOrder = 3,
 		isDisabled = isDisabled,
@@ -833,7 +849,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			tag = "anchor-center-left auto-xy",
 			onActivated = var55,
 			padding = UDim.new(0, var19.clearButton.padding),
-			Position = var97,
+			Position = var98,
 			stateLayer = { affordance = stateLayerAffordanceModule.None },
 			testId = `{var3.testId}--clear-button`
 		}, {
@@ -850,5 +866,5 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		testId = `{var3.testId}--trailing`
 	}, var3.trailingElement) else nil
 	
-	return createElement(viewModule, var99, t_1)
+	return createElement(viewModule, var100, t_1)
 end))

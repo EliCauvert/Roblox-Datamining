@@ -39,10 +39,17 @@ return function()
 	if var13 ~= nil and var13 > 0 and var14 ~= nil then
 		var16 = `Comments ({if var6 == nil or not var6.countIsCapped then var14 else `{var14}+`})`
 	end
+	local setSnapPointIndex = var1.setSnapPointIndex
+	
 	return {
 		isOpen = var2,
 		title = var16,
 		onClose = var1.close,
+		onSnapPointChanged = reactModule.useCallback(function(_, p1)
+			-- upvalues: setSnapPointIndex (ref)
+			setSnapPointIndex(p1)
+		end, { setSnapPointIndex }),
+		isListDisplayed = var15.contentState == "list" and var3 ~= nil,
 		scrollingFrameRef = var7,
 		actionsRef = var9,
 		panelBodyProps = {

@@ -13,11 +13,10 @@ local getIsQuestPlatformModule = require(parent_1.Utility.getIsQuestPlatform)
 local default = require(parent_2.LoggingProtocol).default
 local preparePaymentCheckCounterModule = require(parent.Events.PreparePaymentCheckCounter)
 local usePlaystationPaymentsProtocolCommonFunctions = game:DefineFastFlag("UsePlaystationPaymentsProtocolCommonFunctions", false)
-local enableVRPreparePaymentCheck = game:DefineFastFlag("EnableVRPreparePaymentCheck", false)
 
 function GetPaymentMethod(p1)
-	-- upvalues: paymentPlatformModule (ref), enableVRPreparePaymentCheck (ref), getIsQuestPlatformModule (ref)
-	return if p1 == Enum.Platform.PS4 then "PlaystationStore" elseif p1 == paymentPlatformModule.Maquettes or enableVRPreparePaymentCheck and getIsQuestPlatformModule() then "QuestStore" elseif p1 == Enum.Platform.XBoxOne then "XboxStore" else ""
+	-- upvalues: paymentPlatformModule (ref), getIsQuestPlatformModule (ref)
+	return if p1 == Enum.Platform.PS4 then "PlaystationStore" elseif p1 == paymentPlatformModule.Maquettes or getIsQuestPlatformModule() then "QuestStore" elseif p1 == Enum.Platform.XBoxOne then "XboxStore" else ""
 end
 
 function IsPreparePaymentSuccessful(p1, p2)

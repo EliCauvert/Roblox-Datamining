@@ -7,7 +7,10 @@ local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local loadableImage = UIBloxModule.App.Loading.LoadableImage
 local useCursor = UIBloxModule.App.SelectionCursor.useCursor
-local useTokens = require(parent.Foundation).Hooks.useTokens
+local foundationModule = require(parent.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local rightAlignedButtonWrapperModule = require(gameTile.Footer.RightAlignedButtonWrapper)
 local zoomAnimatedFrameModule = require(gameTile.ZoomAnimatedFrame)
 local gameTileViewConfigModule = require(gameTile.GameTileViewConfig)
@@ -17,7 +20,7 @@ local fFlagLuaAppGameViewTileBackgroundColorOverride = require(parent.SharedFlag
 local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 
 return function(p1)
-	-- upvalues: useDesignTokens (ref), useTokens (ref), gameTileViewConfigModule (ref), useCursor (ref), fFlagLuaAppMigrateGameTileHoverFixes (ref), fFlagLuaAppGameViewTileBackgroundColorOverride (ref), reactModule (ref), fFlagLuaAppContinueSortInstantPlay (ref), zoomAnimatedFrameModule (ref), imageSetLabel (ref), images (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), loadableImage (ref), rightAlignedButtonWrapperModule (ref)
+	-- upvalues: useDesignTokens (ref), useTokens (ref), gameTileViewConfigModule (ref), useCursor (ref), fFlagLuaAppMigrateGameTileHoverFixes (ref), fFlagLuaAppGameViewTileBackgroundColorOverride (ref), reactModule (ref), fFlagLuaAppContinueSortInstantPlay (ref), zoomAnimatedFrameModule (ref), imageSetLabel (ref), images (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), loadableImage (ref), rightAlignedButtonWrapperModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = useDesignTokens()
 	local var2 = if p1.isUnifiedGameTile then p1.numLinesForTitle or 1 else nil
 	local numLinesForMetadata = p1.numLinesForMetadata or 1
@@ -249,7 +252,8 @@ return function(p1)
 			Position = UDim2.new(0, var10, 0, var13),
 			Size = UDim2.new(1, -2 * var10, 0, var15),
 			Text = p1.title,
-			Font = var6.Font,
+			Font = if foundationFontFaceMigration then nil else var6.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var6.Font) else nil,
 			TextSize = fontSize,
 			TextTransparency = var7.Transparency,
 			TextColor3 = var7.Color3

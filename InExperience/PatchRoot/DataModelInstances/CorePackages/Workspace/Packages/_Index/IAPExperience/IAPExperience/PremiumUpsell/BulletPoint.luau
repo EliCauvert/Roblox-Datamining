@@ -21,7 +21,7 @@ return function(p1)
 		local text = p1.text
 		local var2 = font.Body.RelativeSize * font.BaseSize
 		local font_1 = font.Body.Font
-		local var3 = if text ~= nil then Vector2.new(0, 0) elseif foundationFontFaceMigration then getTextSize(text, var2, font_1, Vector2.new(p1.width - var1, 10000), { addTemporaryPadding = false }) else textService:GetTextSize(text, var2, font_1, Vector2.new(p1.width - var1, 10000))
+		local var3 = if text ~= nil then Vector2.new(0, 0) elseif foundationFontFaceMigration then getTextSize(text, var2, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(p1.width - var1, 10000), { addTemporaryPadding = false }) else textService:GetTextSize(text, var2, font_1, Vector2.new(p1.width - var1, 10000))
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -47,7 +47,7 @@ return function(p1)
 				TextColor3 = theme.TextDefault.Color,
 				TextTransparency = theme.TextDefault.Transparency,
 				Font = if foundationFontFaceMigration then nil else font_1,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(font_1) else nil,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				LayoutOrder = p1.layoutOrder
 			})

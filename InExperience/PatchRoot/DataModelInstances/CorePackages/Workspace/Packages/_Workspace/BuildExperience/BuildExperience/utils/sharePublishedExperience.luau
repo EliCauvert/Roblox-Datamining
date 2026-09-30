@@ -6,6 +6,8 @@ local reactModule = require(parent.React)
 local universalShareSheet = require(parent.ShareSheet).UniversalShareSheet
 local sharedFlagsModule = require(parent.SharedFlags)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local createExperienceShareLinkModule = require(buildExperience.utils.createExperienceShareLink)
+local fFlagBuildExperiencePublishedShareLinkModule = require(buildExperience.Flags.FFlagBuildExperiencePublishedShareLink)
 local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
 local isSubjectToDesktopPolicies = sharedFlagsModule.isSubjectToDesktopPolicies
 local var1 = if fFlagEnableShareSheet then require(parent.DataHydration) else nil
@@ -51,7 +53,7 @@ return {
 	getGameShareUrl = getGameShareUrl,
 	sharePublishedExperience = sharePublishedExperience,
 	useSharePublishedExperience = if fFlagEnableShareSheet then function(p1)
-		-- upvalues: reactModule (ref), var2 (ref), var1 (ref), var3 (ref), localizationModule (ref), localizationStringsModule (ref), universalShareSheet (ref)
+		-- upvalues: reactModule (ref), var2 (ref), var1 (ref), var3 (ref), localizationModule (ref), localizationStringsModule (ref), universalShareSheet (ref), fFlagBuildExperiencePublishedShareLinkModule (ref), createExperienceShareLinkModule (ref)
 		local var4 = if p1 then tostring(p1) else nil
 		local var5 = var3.useSignalState(reactModule.useMemo(function()
 			-- upvalues: var2 (copy), var4 (ref), var1 (copy)
@@ -78,7 +80,32 @@ return {
 		local messagePlaceholder = var7.messagePlaceholder
 		
 		return reactModule.useCallback(function(p2)
-			-- upvalues: universalShareSheet (copy), var9 (ref), messagePlaceholder (ref)
+			-- upvalues: universalShareSheet (copy), var9 (ref), messagePlaceholder (ref), fFlagBuildExperiencePublishedShareLinkModule (copy), p1 (ref), createExperienceShareLinkModule (copy)
+			local function showShareSheet(p3)
+				-- upvalues: universalShareSheet (copy), p2 (ref), var9 (copy), messagePlaceholder (copy)
+				universalShareSheet.show({
+					context = "BuildExperienceGameShare",
+					telemetryId = tostring(p2),
+					formatSuccessSnackbarText = var9,
+					messagePlaceholder = messagePlaceholder,
+					url = p3 or `https://www.roblox.com/games/{p2}`
+				})
+			end
+			
+			if fFlagBuildExperiencePublishedShareLinkModule and p1 ~= nil then
+				createExperienceShareLinkModule(p1, false):andThen(showShareSheet, function()
+					-- upvalues: universalShareSheet (copy), p2 (ref), var9 (copy), messagePlaceholder (copy)
+					universalShareSheet.show({
+						context = "BuildExperienceGameShare",
+						telemetryId = tostring(p2),
+						formatSuccessSnackbarText = var9,
+						messagePlaceholder = messagePlaceholder,
+						url = `https://www.roblox.com/games/{p2}`
+					})
+				end)
+				
+				return
+			end
 			universalShareSheet.show({
 				context = "BuildExperienceGameShare",
 				telemetryId = tostring(p2),
@@ -86,7 +113,7 @@ return {
 				messagePlaceholder = messagePlaceholder,
 				url = `https://www.roblox.com/games/{p2}`
 			})
-		end, { var9, messagePlaceholder })
+		end, { var9, messagePlaceholder, p1 })
 	end else function()
 		-- upvalues: reactModule (ref), sharePublishedExperience (ref)
 		return reactModule.useCallback(function(p1)

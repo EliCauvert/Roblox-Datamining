@@ -1,10 +1,11 @@
 ﻿local parent = script:FindFirstAncestor("ChatLineReporting").Parent
 local fFlagExpChatPresetChatEnabled = require(parent.ExpChatShared).Flags.FFlagExpChatPresetChatEnabled
 local fFlagEnableChatReportingTextChannelTag = require(parent.SharedFlags).FFlagEnableChatReportingTextChannelTag
+local changePresetTagName = game:DefineFastFlag("ChangePresetTagName", false)
 local t = { Variant = { CLRv1 = "CLRv1" } }
 
 function buildReport(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: t (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableChatReportingTextChannelTag (ref)
+	-- upvalues: t (ref), fFlagExpChatPresetChatEnabled (ref), changePresetTagName (ref), fFlagEnableChatReportingTextChannelTag (ref)
 	local t_1 = {
 		tags = {
 			ENTRY_POINT = { valueList = { { data = "in-experience" } } },
@@ -21,10 +22,17 @@ function buildReport(p1, p2, p3, p4, p5, p6, p7, p8)
 		t_1.tags.REPORT_TARGET_MESSAGE_ID = { valueList = { { data = p5 } } }
 	end
 	if fFlagExpChatPresetChatEnabled and p6 and p6 ~= "" then
-		t_1.tags.REPORT_TARGET_PRESET_ID = { valueList = { { data = p6 } } }
-		
+		if changePresetTagName then
+			t_1.tags.PRESET_ID = { valueList = { { data = p6 } } }
+		else
+			t_1.tags.REPORT_TARGET_PRESET_ID = { valueList = { { data = p6 } } }
+		end
 		if p7 and p7 ~= "" then
-			t_1.tags.REPORT_TARGET_PRESET_VERSION = { valueList = { { data = p7 } } }
+			if changePresetTagName then
+				t_1.tags.PRESET_CHAT_VERSION = { valueList = { { data = p7 } } }
+			else
+				t_1.tags.REPORT_TARGET_PRESET_VERSION = { valueList = { { data = p7 } } }
+			end
 		end
 	end
 	if fFlagEnableChatReportingTextChannelTag then

@@ -103,18 +103,15 @@ if RAKickLogic2 then
 		var6 = true
 	end
 end
-local fFlagConnectionAmpUpsellOnLeave = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionAmpUpsellOnLeave
 local fFlagConnectionAmpParentalApprovalUpsell = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionAmpParentalApprovalUpsell
 local fFlagConnectionParentalApprovalLeaveOnly = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionParentalApprovalLeaveOnly
 local fFlagConnectionUpsellAnalytics = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionUpsellAnalytics
-local fFlagUniversalFeatureRestrictionReceivers = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagUniversalFeatureRestrictionReceivers
 local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
 local fFlagErrorPromptUseLeaveGameHelper = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagErrorPromptUseLeaveGameHelper or isPioneerLaunch()
 local var8 = if fFlagErrorPromptUseLeaveGameHelper then require(robloxGui.Modules.Settings.leaveGame) else nil
 local addCollaborationCoreGatedConnectionError2 = game:DefineFastFlag("AddCollaborationCoreGatedConnectionError2", false)
 local placelaunchCollaborationCoreGatedConnectionErrorEngineFeature = game:GetEngineFeature("PlacelaunchCollaborationCoreGatedConnectionError")
-local robloxExperienceKickOverride = game:DefineFastFlag("RobloxExperienceKickOverride", false)
-local var9 = if fFlagConnectionAmpUpsellOnLeave then require(robloxGui.Modules.ConnectionAmpUpsellOnLeave) else nil
+local connectionAmpUpsellOnLeaveModule = require(robloxGui.Modules.ConnectionAmpUpsellOnLeave)
 local buildRobloxExperienceKickContentModule = require(corePackagesService.Workspace.Packages.InterventionShared.buildRobloxExperienceKickContent)
 local showFeatureRestrictionDirectModule = require(corePackagesService.Workspace.Packages.UniversalFeatureRestrictions.showFeatureRestrictionDirect)
 
@@ -138,11 +135,11 @@ end
 local function translateString(p1, p2)
 	-- upvalues: localizationService (ref), localization (ref), logging (ref)
 	local robloxLocaleId = localizationService.RobloxLocaleId
-	local var10 = localization.new(robloxLocaleId)
-	var10:SetLocale(robloxLocaleId)
+	local var9 = localization.new(robloxLocaleId)
+	var9:SetLocale(robloxLocaleId)
 	local ok, status = pcall(function()
-		-- upvalues: var10 (ref), p1 (ref), p2 (ref)
-		return var10:Format(p1, p2)
+		-- upvalues: var9 (ref), p1 (ref), p2 (ref)
+		return var9:Format(p1, p2)
 	end)
 	
 	if ok then
@@ -153,8 +150,8 @@ local function translateString(p1, p2)
 	return ""
 end
 
-local var10 = nil
-local var11 = -1
+local var9 = nil
+local var10 = -1
 local x = robloxGui.AbsoluteSize.X
 local y = robloxGui.AbsoluteSize.Y
 local t_1 = {
@@ -188,13 +185,11 @@ local t_2 = {
 	[t_1.RECONNECT_DISABLED] = "Error",
 	[t_1.OUT_OF_MEMORY_KEEPPLAYING_LEAVE] = "Low Memory Warning",
 	[t_1.RECONNECT_CONNECT_FAILURE] = "Connection Failed",
-	[t_1.RECONNECT_DISABLED_CONNECT_FAILURE] = "Connection Failed"
+	[t_1.RECONNECT_DISABLED_CONNECT_FAILURE] = "Connection Failed",
+	[t_1.RECONNECT_AGE_CHECK_REQUIRED] = "Join Error",
+	[t_1.RECONNECT_PARENT_APPROVAL_REQUIRED] = "Join Error"
 }
 
-if fFlagConnectionAmpUpsellOnLeave then
-	t_2[t_1.RECONNECT_AGE_CHECK_REQUIRED] = "Join Error"
-	t_2[t_1.RECONNECT_PARENT_APPROVAL_REQUIRED] = "Join Error"
-end
 if addCollaborationCoreGatedConnectionError2 then
 	t_2[t_1.RECONNECT_COLLABORATION_CORE_GATED] = "Join Error"
 end
@@ -210,20 +205,18 @@ local t_3 = {
 	[t_1.RECONNECT_DISABLED] = "InGame.CommonUI.Title.Error",
 	[t_1.OUT_OF_MEMORY_KEEPPLAYING_LEAVE] = "InGame.ConnectionError.Title.LowMemoryWarning",
 	[t_1.RECONNECT_CONNECT_FAILURE] = "InGame.ConnectionError.Title.ConnectionFailed",
-	[t_1.RECONNECT_DISABLED_CONNECT_FAILURE] = "InGame.ConnectionError.Title.ConnectionFailed"
+	[t_1.RECONNECT_DISABLED_CONNECT_FAILURE] = "InGame.ConnectionError.Title.ConnectionFailed",
+	[t_1.RECONNECT_AGE_CHECK_REQUIRED] = "InGame.ConnectionError.Title.JoinError",
+	[t_1.RECONNECT_PARENT_APPROVAL_REQUIRED] = "InGame.ConnectionError.Title.JoinError"
 }
 
-if fFlagConnectionAmpUpsellOnLeave then
-	t_3[t_1.RECONNECT_AGE_CHECK_REQUIRED] = "InGame.ConnectionError.Title.JoinError"
-	t_3[t_1.RECONNECT_PARENT_APPROVAL_REQUIRED] = "InGame.ConnectionError.Title.JoinError"
-end
 if addCollaborationCoreGatedConnectionError2 then
 	t_3[t_1.RECONNECT_COLLABORATION_CORE_GATED] = "InGame.ConnectionError.Title.JoinError"
 end
 if connectionEnableAutoReconnect then
 	t_3[t_1.AUTO_RECONNECTING] = "InGame.ConnectionError.Title.Disconnected"
 end
-local var12 = create("Frame")({
+local var11 = create("Frame")({
 	Name = "promptOverlay",
 	BackgroundTransparency = 1,
 	Active = false,
@@ -239,11 +232,11 @@ local var12 = create("Frame")({
 	})
 })
 coroutine.wrap(function()
-	-- upvalues: robloxGui (ref), var12 (ref)
+	-- upvalues: robloxGui (ref), var11 (ref)
 	local constantsModule = require(robloxGui.Modules.TopBar.Constants)
-	local var13 = constantsModule.ApplyDisplayScale(constantsModule.TopBarHeight)
-	var12.Size = UDim2.new(1, 0, 1, var13)
-	var12.Position = UDim2.new(0, 0, 0, -var13)
+	local var12 = constantsModule.ApplyDisplayScale(constantsModule.TopBarHeight)
+	var11.Size = UDim2.new(1, 0, 1, var12)
+	var11.Position = UDim2.new(0, 0, 0, -var12)
 end)()
 
 local function openCollaboratorsPageForUniverseId(p1)
@@ -254,7 +247,7 @@ local function openCollaboratorsPageForUniverseId(p1)
 	linkingProtocol.default:openURL(string.format("%sdashboard/creations/experiences/%s/safety/collaborators", url.CREATE_URL, tostring(p1)))
 end
 
-local var13 = function()
+local var12 = function()
 	-- upvalues: telemetryService (ref), t (ref), openCollaboratorsPageForUniverseId (ref), fetchUniverseIdFromPlaceId (ref)
 	telemetryService:LogCounter(t, {
 		customFields = { selectedItem = "ViewCollaboratorsInitiated" }
@@ -271,10 +264,10 @@ local var13 = function()
 	if placeId and placeId ~= 0 then
 		coroutine.wrap(function()
 			-- upvalues: fetchUniverseIdFromPlaceId (copy), placeId (ref), telemetryService (copy), t (copy), openCollaboratorsPageForUniverseId (copy)
-			local var14 = fetchUniverseIdFromPlaceId(placeId)
+			local var13 = fetchUniverseIdFromPlaceId(placeId)
 			
-			if var14 then
-				openCollaboratorsPageForUniverseId(var14)
+			if var13 then
+				openCollaboratorsPageForUniverseId(var13)
 				
 				return
 			end
@@ -290,8 +283,8 @@ local var13 = function()
 	}, 1)
 end
 
-local var14 = function()
-	-- upvalues: NONE (write), t_1 (ref), telemetryService (ref), t (ref), rbxAnalyticsService (ref), var10 (write), teleportService (ref), fFlagCoreScriptShowTeleportPromptModule (ref), refactorReconnectUnblockTeleport (ref), guiService (ref)
+local var13 = function()
+	-- upvalues: NONE (write), t_1 (ref), telemetryService (ref), t (ref), rbxAnalyticsService (ref), var9 (write), teleportService (ref), fFlagCoreScriptShowTeleportPromptModule (ref), refactorReconnectUnblockTeleport (ref), guiService (ref)
 	local _ = tick()
 	
 	if NONE == t_1.IS_RECONNECTING then
@@ -304,7 +297,7 @@ local var14 = function()
 	telemetryService:LogCounter(t, { customFields = { selectedItem = "ReconnectInitiated" } }, 1)
 	rbxAnalyticsService:ReportCounter("ReconnectPrompt-ReconnectActivated")
 	NONE = t_1.IS_RECONNECTING
-	var10:primaryShimmerPlay()
+	var9:primaryShimmerPlay()
 	telemetryService:LogCounter(t, { customFields = { selectedItem = "ReconnectSameServer" } }, 1)
 	teleportService:TeleportReconnect()
 	
@@ -318,8 +311,8 @@ local var14 = function()
 	end
 end
 
-local var15 = function()
-	-- upvalues: NONE (write), t_1 (ref), telemetryService (ref), t (ref), var10 (write), guiService (ref), teleportService (ref)
+local var14 = function()
+	-- upvalues: NONE (write), t_1 (ref), telemetryService (ref), t (ref), var9 (write), guiService (ref), teleportService (ref)
 	if NONE == t_1.IS_RECONNECTING then
 		telemetryService:LogCounter(t, {
 			customFields = { selectedItem = "UserClickWhileReconnecting" }
@@ -334,7 +327,7 @@ local var15 = function()
 			customFields = { selectedItem = "PlacelaunchRetryInitiated" }
 		}, 1)
 		NONE = t_1.IS_RECONNECTING
-		var10:primaryShimmerPlay()
+		var9:primaryShimmerPlay()
 		guiService:ClearError()
 		teleportService:Teleport(placeId)
 		
@@ -345,7 +338,7 @@ local var15 = function()
 	}, 1)
 end
 
-local var16 = function()
+local var15 = function()
 	-- upvalues: telemetryService (ref), t (ref), fFlagErrorPromptUseLeaveGameHelper (ref), var8 (write), isPioneerLaunch (ref), guiService (ref), runService (ref)
 	telemetryService:LogCounter(t, { customFields = { selectedItem = "LeaveInitiated" } }, 1)
 	
@@ -364,7 +357,7 @@ local var16 = function()
 	game:Shutdown()
 end
 
-local var17 = function()
+local var16 = function()
 	-- upvalues: guiService (ref)
 	guiService:ClearError()
 end
@@ -382,39 +375,39 @@ local t_4 = {
 }
 
 local _ = function(p1, p2)
-	-- upvalues: var10 (write), getFFlagDisplayChannelNameOnErrorPromptModule (ref)
-	if not var10 then return end
+	-- upvalues: var9 (write), getFFlagDisplayChannelNameOnErrorPromptModule (ref)
+	if not var9 then return end
 	if getFFlagDisplayChannelNameOnErrorPromptModule() then
-		var10:onErrorChanged(p1, p2, true)
+		var9:onErrorChanged(p1, p2, true)
 		
 		return
 	end
-	var10:onErrorChanged(p1, p2)
+	var9:onErrorChanged(p1, p2)
 end
 
 local function renderAutoReconnectPrompt()
-	-- upvalues: var10 (write), NONE (write), t_1 (ref), t_4 (ref), translateString (ref), getFFlagDisplayChannelNameOnErrorPromptModule (ref)
-	if not var10 then return end
+	-- upvalues: var9 (write), NONE (write), t_1 (ref), t_4 (ref), translateString (ref), getFFlagDisplayChannelNameOnErrorPromptModule (ref)
+	if not var9 then return end
 	if NONE ~= t_1.AUTO_RECONNECTING and NONE ~= t_1.IS_RECONNECTING then return end
-	local var18 = if NONE == t_1.IS_RECONNECTING then -1 else math.max(0, math.ceil(t_4.nextAttemptAt - tick()))
+	local var17 = if NONE == t_1.IS_RECONNECTING then -1 else math.max(0, math.ceil(t_4.nextAttemptAt - tick()))
 	
-	if var18 == t_4.lastRemaining then return end
-	t_4.lastRemaining = var18
+	if var17 == t_4.lastRemaining then return end
+	t_4.lastRemaining = var17
 	local attempt = t_4.attempt
-	local var19 = if var18 <= 0 then translateString("InGame.ConnectionError.ReconnectingAttempt", { RBX_ATTEMPT = attempt }) elseif var18 == 1 then translateString("InGame.ConnectionError.ReconnectingAttemptInSecond", { RBX_ATTEMPT = attempt }) else translateString("InGame.ConnectionError.ReconnectingAttemptInSeconds", { RBX_ATTEMPT = attempt, RBX_SECONDS = var18 })
-	local var20 = if t_4.baseMessage and t_4.baseMessage ~= "" then t_4.baseMessage .. "\n" .. var94 else var19
+	local var18 = if var17 <= 0 then translateString("InGame.ConnectionError.ReconnectingAttempt", { RBX_ATTEMPT = attempt }) elseif var17 == 1 then translateString("InGame.ConnectionError.ReconnectingAttemptInSecond", { RBX_ATTEMPT = attempt }) else translateString("InGame.ConnectionError.ReconnectingAttemptInSeconds", { RBX_ATTEMPT = attempt, RBX_SECONDS = var17 })
+	local var19 = if t_4.baseMessage and t_4.baseMessage ~= "" then t_4.baseMessage .. "\n" .. var93 else var18
 	
-	if var20 == t_4.lastRenderedText then return end
-	t_4.lastRenderedText = var20
+	if var19 == t_4.lastRenderedText then return end
+	t_4.lastRenderedText = var19
 	local errorCode = t_4.errorCode
 	
-	if not var10 then return end
+	if not var9 then return end
 	if getFFlagDisplayChannelNameOnErrorPromptModule() then
-		var10:onErrorChanged(var20, errorCode, true)
+		var9:onErrorChanged(var19, errorCode, true)
 		
 		return
 	end
-	var10:onErrorChanged(var20, errorCode)
+	var9:onErrorChanged(var19, errorCode)
 end
 
 local _ = function()
@@ -457,22 +450,22 @@ local _ = function(p1)
 end
 
 local function fireAutoReconnect()
-	-- upvalues: t_4 (ref), NONE (write), t_1 (ref), telemetryService (ref), t (ref), renderAutoReconnectPrompt (ref), var10 (write), teleportService (ref), fFlagCoreScriptShowTeleportPromptModule (ref), refactorReconnectUnblockTeleport (ref), guiService (ref)
+	-- upvalues: t_4 (ref), NONE (write), t_1 (ref), telemetryService (ref), t (ref), renderAutoReconnectPrompt (ref), var9 (write), teleportService (ref), fFlagCoreScriptShowTeleportPromptModule (ref), refactorReconnectUnblockTeleport (ref), guiService (ref)
 	t_4.pendingThread = nil
 	
 	if NONE == t_1.IS_RECONNECTING then return end
-	local var18 = t
+	local var17 = t
 	local t_2 = {}
 	local t_3 = { selectedItem = "AutoReconnectAttempt" }
 	local attempt = t_4.attempt
 	t_3.attemptBucket = if attempt <= 5 then tostring(attempt) elseif attempt <= 8 then "6-8" else "9+"
 	t_2.customFields = t_3
-	telemetryService:LogCounter(var18, t_2, 1)
+	telemetryService:LogCounter(var17, t_2, 1)
 	NONE = t_1.IS_RECONNECTING
 	renderAutoReconnectPrompt()
 	
-	if var10 then
-		var10:primaryShimmerPlay()
+	if var9 then
+		var9:primaryShimmerPlay()
 	end
 	teleportService:TeleportReconnect()
 	
@@ -496,13 +489,13 @@ local function scheduleAutoReconnect()
 	end
 	t_4.attempt += 1
 	local attempt = t_4.attempt
-	local var18 = if attempt <= 1 then connectionAutoReconnectFirstDelayMs elseif attempt == 2 then connectionAutoReconnectBaseDelayMs else math.min(connectionAutoReconnectBaseDelayMs * 2 ^ (attempt - 2), connectionAutoReconnectMaxDelayMs)
+	local var17 = if attempt <= 1 then connectionAutoReconnectFirstDelayMs elseif attempt == 2 then connectionAutoReconnectBaseDelayMs else math.min(connectionAutoReconnectBaseDelayMs * 2 ^ (attempt - 2), connectionAutoReconnectMaxDelayMs)
 	
 	if connectionAutoReconnectJitterMs > 0 then
-		var18 += var1:NextInteger(0, connectionAutoReconnectJitterMs)
+		var17 += var1:NextInteger(0, connectionAutoReconnectJitterMs)
 	end
-	local var19 = var18 / 1000
-	t_4.nextAttemptAt = tick() + var19
+	local var18 = var17 / 1000
+	t_4.nextAttemptAt = tick() + var18
 	t_4.lastRenderedText = nil
 	t_4.lastRemaining = nil
 	telemetryService:LogCounter(t, {
@@ -521,7 +514,7 @@ local function scheduleAutoReconnect()
 			end
 		end)
 	end
-	t_4.pendingThread = task.delay(var19, fireAutoReconnect)
+	t_4.pendingThread = task.delay(var18, fireAutoReconnect)
 end
 
 local function autoReconnectNowFunction()
@@ -544,8 +537,8 @@ local function autoReconnectNowFunction()
 	fireAutoReconnect()
 end
 
-local var20 = function()
-	-- upvalues: telemetryService (ref), t (ref), t_4 (ref), var16 (ref)
+local var19 = function()
+	-- upvalues: telemetryService (ref), t (ref), t_4 (ref), var15 (ref)
 	telemetryService:LogCounter(t, { customFields = { selectedItem = "AutoReconnectLeave" } }, 1)
 	t_4.active = false
 	t_4.attempt = 0
@@ -563,7 +556,7 @@ local var20 = function()
 		task.cancel(t_4.tickerThread)
 		t_4.tickerThread = nil
 	end
-	var16()
+	var15()
 end
 
 local t_5 = {
@@ -618,10 +611,10 @@ end
 if addVipOwnerNotPresentConnectionError and not vipOwnerNotPresentEnableReconnect then
 	t_5[Enum.ConnectionError.PlacelaunchVipOwnerNotPresent] = true
 end
-local var21 = if addCollaborationCoreGatedConnectionError2 and placelaunchCollaborationCoreGatedConnectionErrorEngineFeature then Enum.ConnectionError.PlacelaunchCollaborationCoreGated else nil
+local var20 = if addCollaborationCoreGatedConnectionError2 and placelaunchCollaborationCoreGatedConnectionErrorEngineFeature then Enum.ConnectionError.PlacelaunchCollaborationCoreGated else nil
 
-if addCollaborationCoreGatedConnectionError2 and var21 then
-	t_5[var21] = true
+if addCollaborationCoreGatedConnectionError2 and var20 then
+	t_5[var20] = true
 end
 if RAKickLogic2 and var6 then
 	t_5[Enum.ConnectionError.DisconnectRemoteAttestationUnsupported] = true
@@ -657,13 +650,13 @@ local t_7 = {
 			LocalizationKey = "InGame.CommonUI.Button.Retry",
 			LayoutOrder = 2,
 			Primary = true,
-			Callback = var14
+			Callback = var13
 		},
 		{
 			Text = "Cancel",
 			LocalizationKey = "Feature.SettingsHub.Action.CancelSearch",
 			LayoutOrder = 1,
-			Callback = var16
+			Callback = var15
 		}
 	},
 	[t_1.RECONNECT_DISCONNECT] = {
@@ -672,13 +665,13 @@ local t_7 = {
 			LocalizationKey = "InGame.ConnectionError.Button.Reconnect",
 			LayoutOrder = 2,
 			Primary = true,
-			Callback = var14
+			Callback = var13
 		},
 		{
 			Text = "Leave",
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
 			LayoutOrder = 1,
-			Callback = var16
+			Callback = var15
 		}
 	},
 	[t_1.TELEPORT_FAILED] = {
@@ -687,7 +680,7 @@ local t_7 = {
 			LocalizationKey = "InGame.CommonUI.Button.Ok",
 			LayoutOrder = 1,
 			Primary = true,
-			Callback = var17
+			Callback = var16
 		}
 	},
 	[t_1.RECONNECT_DISABLED_DISCONNECT] = {
@@ -696,7 +689,7 @@ local t_7 = {
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
 			LayoutOrder = 1,
 			Primary = true,
-			Callback = var16
+			Callback = var15
 		}
 	},
 	[t_1.RECONNECT_DISABLED_PLACELAUNCH] = {
@@ -705,7 +698,7 @@ local t_7 = {
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
 			LayoutOrder = 1,
 			Primary = true,
-			Callback = var16
+			Callback = var15
 		}
 	},
 	[t_1.RECONNECT_DISABLED] = {
@@ -714,7 +707,7 @@ local t_7 = {
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
 			LayoutOrder = 1,
 			Primary = true,
-			Callback = var16
+			Callback = var15
 		}
 	},
 	[t_1.OUT_OF_MEMORY_KEEPPLAYING_LEAVE] = {
@@ -722,14 +715,14 @@ local t_7 = {
 			Text = "Keep Playing",
 			LocalizationKey = "InGame.CommonUI.Button.KeepPlaying",
 			LayoutOrder = 1,
-			Callback = var17
+			Callback = var16
 		},
 		{
 			Text = "Leave",
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
 			LayoutOrder = 2,
 			Primary = true,
-			Callback = var16
+			Callback = var15
 		}
 	},
 	[t_1.RECONNECT_CONNECT_FAILURE] = {
@@ -738,13 +731,13 @@ local t_7 = {
 			LocalizationKey = "InGame.CommonUI.Button.Retry",
 			LayoutOrder = 2,
 			Primary = true,
-			Callback = var14
+			Callback = var13
 		},
 		{
 			Text = "Cancel",
 			LocalizationKey = "Feature.SettingsHub.Action.CancelSearch",
 			LayoutOrder = 1,
-			Callback = var16
+			Callback = var15
 		}
 	},
 	[t_1.RECONNECT_DISABLED_CONNECT_FAILURE] = {
@@ -753,42 +746,40 @@ local t_7 = {
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
 			LayoutOrder = 1,
 			Primary = true,
-			Callback = var16
+			Callback = var15
 		}
-	}
-}
-
-if fFlagConnectionAmpUpsellOnLeave then
-	t_7[t_1.RECONNECT_AGE_CHECK_REQUIRED] = {
+	},
+	[t_1.RECONNECT_AGE_CHECK_REQUIRED] = {
 		{
 			Text = "Leave",
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
 			LayoutOrder = 1,
-			Callback = var16
+			Callback = var15
 		},
 		{
 			LayoutOrder = 2,
 			Primary = true,
-			Text = var9.PrimaryButtonText,
-			LocalizationKey = var9.PrimaryButtonLocalizationKey,
-			Callback = var9.createAgeCheckCallback(t, var15, 9)
+			Text = connectionAmpUpsellOnLeaveModule.PrimaryButtonText,
+			LocalizationKey = connectionAmpUpsellOnLeaveModule.PrimaryButtonLocalizationKey,
+			Callback = connectionAmpUpsellOnLeaveModule.createAgeCheckCallback(t, var14, 9)
 		}
 	}
-end
+}
+
 if fFlagConnectionAmpParentalApprovalUpsell then
 	t_7[t_1.RECONNECT_PARENT_APPROVAL_REQUIRED] = {
 		{
 			Text = "Leave",
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
 			LayoutOrder = 1,
-			Callback = var16
+			Callback = var15
 		},
 		{
 			LayoutOrder = 2,
 			Primary = true,
-			Text = var9.PrimaryButtonText,
-			LocalizationKey = var9.PrimaryButtonLocalizationKey,
-			Callback = var9.createParentalApprovalCallback(t, var15, 9)
+			Text = connectionAmpUpsellOnLeaveModule.PrimaryButtonText,
+			LocalizationKey = connectionAmpUpsellOnLeaveModule.PrimaryButtonLocalizationKey,
+			Callback = connectionAmpUpsellOnLeaveModule.createParentalApprovalCallback(t, var14, 9)
 		}
 	}
 end
@@ -799,7 +790,7 @@ if fFlagConnectionParentalApprovalLeaveOnly then
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
 			LayoutOrder = 1,
 			Primary = true,
-			Callback = var16
+			Callback = var15
 		}
 	}
 end
@@ -809,14 +800,14 @@ if addCollaborationCoreGatedConnectionError2 then
 			Text = "Ok",
 			LocalizationKey = "InGame.ConnectionError.Action.Ok",
 			LayoutOrder = 1,
-			Callback = var16
+			Callback = var15
 		},
 		{
 			Text = "View collaborators",
 			LocalizationKey = "InGame.ConnectionError.Action.ViewCollaborators",
 			LayoutOrder = 2,
 			Primary = true,
-			Callback = var13
+			Callback = var12
 		}
 	}
 end
@@ -833,14 +824,14 @@ if connectionEnableAutoReconnect then
 			Text = "Leave",
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
 			LayoutOrder = 1,
-			Callback = var20
+			Callback = var19
 		}
 	}
 end
 if isPioneerLaunch() then
 	for i, v in pairs(t_7) do
 		for i_1, v_1 in ipairs(v) do
-			if v_1.Callback == var16 or v_1.Callback == var20 then
+			if v_1.Callback == var15 or v_1.Callback == var19 then
 				v_1.Text = "Quit"
 				v_1.LocalizationKey = "Feature.SettingsHub.Label.QuitButton"
 			end
@@ -849,118 +840,115 @@ if isPioneerLaunch() then
 end
 local t_8 = {
 	[t_1.NONE] = function()
-		-- upvalues: runService (ref), var12 (ref)
+		-- upvalues: runService (ref), var11 (ref)
 		runService:SetRobloxGuiFocused(false)
-		var12.Active = false
-		var12.Transparency = 1
+		var11.Active = false
+		var11.Transparency = 1
 	end,
 	[t_1.RECONNECT_DISCONNECT] = function()
-		-- upvalues: VRService (ref), runService (ref), var12 (ref)
+		-- upvalues: VRService (ref), runService (ref), var11 (ref)
 		if VRService.VREnabled then
 			runService:SetRobloxGuiFocused(false)
 		else
 			runService:SetRobloxGuiFocused(true)
 		end
-		var12.Active = true
-		var12.Transparency = 1
+		var11.Active = true
+		var11.Transparency = 1
 	end,
 	[t_1.RECONNECT_PLACELAUNCH] = function()
-		-- upvalues: runService (ref), var12 (ref)
+		-- upvalues: runService (ref), var11 (ref)
 		runService:SetRobloxGuiFocused(false)
-		var12.Active = true
-		var12.Transparency = 0.3
+		var11.Active = true
+		var11.Transparency = 0.3
 	end,
 	[t_1.TELEPORT_FAILED] = function()
-		-- upvalues: runService (ref), var12 (ref)
+		-- upvalues: runService (ref), var11 (ref)
 		runService:SetRobloxGuiFocused(false)
-		var12.Active = true
-		var12.Transparency = 0.3
+		var11.Active = true
+		var11.Transparency = 0.3
 	end,
 	[t_1.RECONNECT_DISABLED_DISCONNECT] = function()
-		-- upvalues: VRService (ref), runService (ref), var12 (ref)
+		-- upvalues: VRService (ref), runService (ref), var11 (ref)
 		if VRService.VREnabled then
 			runService:SetRobloxGuiFocused(false)
 		else
 			runService:SetRobloxGuiFocused(true)
 		end
-		var12.Active = true
-		var12.Transparency = 1
+		var11.Active = true
+		var11.Transparency = 1
 	end,
 	[t_1.RECONNECT_DISABLED_PLACELAUNCH] = function()
-		-- upvalues: runService (ref), var12 (ref)
+		-- upvalues: runService (ref), var11 (ref)
 		runService:SetRobloxGuiFocused(false)
-		var12.Active = true
-		var12.Transparency = 0.3
+		var11.Active = true
+		var11.Transparency = 0.3
 	end,
 	[t_1.RECONNECT_DISABLED] = function()
-		-- upvalues: VRService (ref), runService (ref), var12 (ref)
+		-- upvalues: VRService (ref), runService (ref), var11 (ref)
 		if VRService.VREnabled then
 			runService:SetRobloxGuiFocused(false)
 		else
 			runService:SetRobloxGuiFocused(true)
 		end
-		var12.Active = true
-		var12.Transparency = 1
+		var11.Active = true
+		var11.Transparency = 1
 	end,
 	[t_1.RECONNECT_CONNECT_FAILURE] = function()
-		-- upvalues: runService (ref), var12 (ref)
+		-- upvalues: runService (ref), var11 (ref)
 		runService:SetRobloxGuiFocused(false)
-		var12.Active = true
-		var12.Transparency = 0.3
+		var11.Active = true
+		var11.Transparency = 0.3
 	end,
 	[t_1.RECONNECT_DISABLED_CONNECT_FAILURE] = function()
-		-- upvalues: runService (ref), var12 (ref)
+		-- upvalues: runService (ref), var11 (ref)
 		runService:SetRobloxGuiFocused(false)
-		var12.Active = true
-		var12.Transparency = 0.3
+		var11.Active = true
+		var11.Transparency = 0.3
 	end
 }
+local RECONNECT_PLACELAUNCH = t_8[t_1.RECONNECT_PLACELAUNCH]
+t_8[t_1.RECONNECT_AGE_CHECK_REQUIRED] = RECONNECT_PLACELAUNCH
 
-if fFlagConnectionAmpUpsellOnLeave then
-	local RECONNECT_PLACELAUNCH = t_8[t_1.RECONNECT_PLACELAUNCH]
-	t_8[t_1.RECONNECT_AGE_CHECK_REQUIRED] = RECONNECT_PLACELAUNCH
-	
-	if fFlagConnectionAmpParentalApprovalUpsell then
-		t_8[t_1.RECONNECT_PARENT_APPROVAL_REQUIRED] = RECONNECT_PLACELAUNCH
-	end
+if fFlagConnectionAmpParentalApprovalUpsell then
+	t_8[t_1.RECONNECT_PARENT_APPROVAL_REQUIRED] = RECONNECT_PLACELAUNCH
 end
 if addCollaborationCoreGatedConnectionError2 then
 	t_8[t_1.RECONNECT_COLLABORATION_CORE_GATED] = function()
-		-- upvalues: runService (ref), var12 (ref)
+		-- upvalues: runService (ref), var11 (ref)
 		runService:SetRobloxGuiFocused(false)
-		var12.Active = true
-		var12.Transparency = 0.3
+		var11.Active = true
+		var11.Transparency = 0.3
 	end
 end
 if connectionEnableAutoReconnect then
 	t_8[t_1.AUTO_RECONNECTING] = t_8[t_1.RECONNECT_DISCONNECT]
 end
 local function onEnter(p1)
-	-- upvalues: var10 (write), debugEnableErrorStringTesting (ref), errorPromptModule (ref), var12 (ref), x (write), y (write), t_8 (ref), t_2 (ref), t_3 (ref), t_7 (ref)
-	if not var10 then
-		var10 = errorPromptModule.new("Default", {
+	-- upvalues: var9 (write), debugEnableErrorStringTesting (ref), errorPromptModule (ref), var11 (ref), x (write), y (write), t_8 (ref), t_2 (ref), t_3 (ref), t_7 (ref)
+	if not var9 then
+		var9 = errorPromptModule.new("Default", {
 			MenuIsOpenKey = "ConnectionErrorPrompt",
 			PlayAnimation = not debugEnableErrorStringTesting
 		})
-		var10:setParent(var12)
-		var10:resizeWidthAndHeight(x, y)
+		var9:setParent(var11)
+		var9:resizeWidthAndHeight(x, y)
 	end
 	if t_8[p1] then
 		t_8[p1]()
 	end
-	var10:setErrorTitle(t_2[p1], t_3[p1])
-	var10:updateButtons(t_7[p1])
+	var9:setErrorTitle(t_2[p1], t_3[p1])
+	var9:updateButtons(t_7[p1])
 end
 
-local _ = function(p1)
-	-- upvalues: t_1 (ref), var10 (write)
+local function i(p1)
+	-- upvalues: t_1 (ref), var9 (write)
 	if p1 == t_1.IS_RECONNECTING then
-		var10:primaryShimmerStop()
+		var9:primaryShimmerStop()
 	end
 end
 
 local function stateTransit(p1, p2, p3)
-	-- upvalues: fFlagAllowDisconnectGuiForOkUnknownModule (ref), t_1 (ref), reconnectDisabledFFlag (ref), currentTime (write), var11 (write), var3 (ref), OK (write), t_5 (ref), telemetryService (ref), t (ref), rbxAnalyticsService (ref), connectionEnableAutoReconnect (ref), t_6 (write), fFlagConnectionAmpUpsellOnLeave (ref), var9 (write), fFlagConnectionUpsellAnalytics (ref), fFlagConnectionAmpParentalApprovalUpsell (ref), addCollaborationCoreGatedConnectionError2 (ref), var21 (ref), potentialClientTimeoutSeconds (ref), t_4 (ref), connectionAutoReconnectMaxDurationSeconds (ref)
+	-- upvalues: fFlagAllowDisconnectGuiForOkUnknownModule (ref), t_1 (ref), reconnectDisabledFFlag (ref), currentTime (write), var10 (write), var3 (ref), OK (write), t_5 (ref), telemetryService (ref), t (ref), rbxAnalyticsService (ref), connectionEnableAutoReconnect (ref), t_6 (write), connectionAmpUpsellOnLeaveModule (ref), fFlagConnectionUpsellAnalytics (ref), fFlagConnectionAmpParentalApprovalUpsell (ref), addCollaborationCoreGatedConnectionError2 (ref), var20 (ref), potentialClientTimeoutSeconds (ref), t_4 (ref), connectionAutoReconnectMaxDurationSeconds (ref)
 	if fFlagAllowDisconnectGuiForOkUnknownModule then
 		if p2 == Enum.ConnectionError.OK then
 			return t_1.NONE
@@ -976,7 +964,7 @@ local function stateTransit(p1, p2, p3)
 				if p1 == Enum.ConnectionError.OK then
 					return t_1.RECONNECT_DISCONNECT
 				elseif p1 == Enum.ConnectionError.ConnectErrors then
-					var11 = tick() + var3
+					var10 = tick() + var3
 					OK = Enum.ConnectionError.ConnectErrors
 					
 					if t_5[p2] then
@@ -987,7 +975,7 @@ local function stateTransit(p1, p2, p3)
 					
 					return t_1.RECONNECT_CONNECT_FAILURE
 				elseif p1 == Enum.ConnectionError.DisconnectErrors then
-					var11 = tick() + var3
+					var10 = tick() + var3
 					OK = Enum.ConnectionError.DisconnectErrors
 					
 					if p2 == Enum.ConnectionError.DisconnectOutOfMemoryKeepPlayingLeave then
@@ -1001,45 +989,42 @@ local function stateTransit(p1, p2, p3)
 					return if connectionEnableAutoReconnect and t_6[p2] then t_1.AUTO_RECONNECTING else t_1.RECONNECT_DISCONNECT
 				elseif p1 == Enum.ConnectionError.PlacelaunchErrors then
 					OK = Enum.ConnectionError.PlacelaunchErrors
+					local ageVerificationRequiredEnum = connectionAmpUpsellOnLeaveModule.AgeVerificationRequiredEnum
 					
-					if fFlagConnectionAmpUpsellOnLeave then
-						local ageVerificationRequiredEnum = var9.AgeVerificationRequiredEnum
+					if ageVerificationRequiredEnum and p2 == ageVerificationRequiredEnum then
+						telemetryService:LogCounter(t, {
+							customFields = { selectedItem = "PlaceLaunchAgeVerificationRequired" }
+						}, 1)
 						
-						if ageVerificationRequiredEnum and p2 == ageVerificationRequiredEnum then
+						if fFlagConnectionUpsellAnalytics then
+							connectionAmpUpsellOnLeaveModule.fireImpressionAgeCheck(t, game.PlaceId)
+						end
+						return t_1.RECONNECT_AGE_CHECK_REQUIRED
+					elseif fFlagConnectionAmpParentalApprovalUpsell then
+						local parentalApprovalRequiredEnum = connectionAmpUpsellOnLeaveModule.ParentalApprovalRequiredEnum
+						
+						if parentalApprovalRequiredEnum and p2 == parentalApprovalRequiredEnum then
 							telemetryService:LogCounter(t, {
-								customFields = { selectedItem = "PlaceLaunchAgeVerificationRequired" }
+								customFields = { selectedItem = "PlaceLaunchParentalApprovalRequired" }
 							}, 1)
 							
 							if fFlagConnectionUpsellAnalytics then
-								var9.fireImpressionAgeCheck(t, game.PlaceId)
+								connectionAmpUpsellOnLeaveModule.fireImpressionParentalApproval(t, game.PlaceId)
 							end
-							return t_1.RECONNECT_AGE_CHECK_REQUIRED
-						elseif fFlagConnectionAmpParentalApprovalUpsell then
-							local parentalApprovalRequiredEnum = var9.ParentalApprovalRequiredEnum
+							return t_1.RECONNECT_PARENT_APPROVAL_REQUIRED
+						elseif addCollaborationCoreGatedConnectionError2 and var20 and p2 == var20 then
+							telemetryService:LogCounter(t, {
+								customFields = { selectedItem = "PlaceLaunchCollaborationCoreGated" }
+							}, 1)
 							
-							if parentalApprovalRequiredEnum and p2 == parentalApprovalRequiredEnum then
-								telemetryService:LogCounter(t, {
-									customFields = { selectedItem = "PlaceLaunchParentalApprovalRequired" }
-								}, 1)
-								
-								if fFlagConnectionUpsellAnalytics then
-									var9.fireImpressionParentalApproval(t, game.PlaceId)
-								end
-								return t_1.RECONNECT_PARENT_APPROVAL_REQUIRED
-							elseif addCollaborationCoreGatedConnectionError2 and var21 and p2 == var21 then
-								telemetryService:LogCounter(t, {
-									customFields = { selectedItem = "PlaceLaunchCollaborationCoreGated" }
-								}, 1)
-								
-								return t_1.RECONNECT_COLLABORATION_CORE_GATED
-							elseif t_5[p2] then
-								return t_1.RECONNECT_DISABLED_PLACELAUNCH
-							end
-							telemetryService:LogCounter(t, { customFields = { selectedItem = "PlaceLaunchError" } }, 1)
-							rbxAnalyticsService:ReportCounter("ReconnectPrompt-PlaceLaunch")
-							
-							return t_1.RECONNECT_PLACELAUNCH
+							return t_1.RECONNECT_COLLABORATION_CORE_GATED
+						elseif t_5[p2] then
+							return t_1.RECONNECT_DISABLED_PLACELAUNCH
 						end
+						telemetryService:LogCounter(t, { customFields = { selectedItem = "PlaceLaunchError" } }, 1)
+						rbxAnalyticsService:ReportCounter("ReconnectPrompt-PlaceLaunch")
+						
+						return t_1.RECONNECT_PLACELAUNCH
 					end
 				elseif p1 == Enum.ConnectionError.TeleportErrors then
 					telemetryService:LogCounter(t, { customFields = { selectedItem = "TeleportError" } }, 1)
@@ -1067,9 +1052,9 @@ local function stateTransit(p1, p2, p3)
 							}, 1)
 							
 							if connectionEnableAutoReconnect and t_4.active then
-								local var22 = connectionAutoReconnectMaxDurationSeconds
+								local var21 = connectionAutoReconnectMaxDurationSeconds
 								
-								if var22 <= 0 or tick() <= currentTime + var22 then
+								if var21 <= 0 or tick() <= currentTime + var21 then
 									return t_1.AUTO_RECONNECTING
 								end
 								telemetryService:LogCounter(t, {
@@ -1101,43 +1086,43 @@ local function getCreatorBanString(p1)
 	if not errorDetails then
 		return p1
 	end
-	local var22
+	local var21
 	local _ = nil
 	
 	if errorDetails.time then
 		local minutes = errorDetails.minutes
 		local hours = errorDetails.hours
 		local days = errorDetails.days
-		local var23 = if minutes == 1 then translateString("InGame.ConnectionError.CreatorBanMinutesSingular") else translateString("InGame.ConnectionError.CreatorBanMinutesPlural", { RBX_TIME_MINUTES = minutes })
-		local var24 = if hours == 1 then translateString("InGame.ConnectionError.CreatorBanHoursSingular") else translateString("InGame.ConnectionError.CreatorBanHoursPlural", { RBX_TIME_HOURS = hours })
-		local var25 = if days == 1 then translateString("InGame.ConnectionError.CreatorBanDaysSingular") else translateString("InGame.ConnectionError.CreatorBanDaysPlural", { RBX_TIME_DAYS = days })
+		local var22 = if minutes == 1 then translateString("InGame.ConnectionError.CreatorBanMinutesSingular") else translateString("InGame.ConnectionError.CreatorBanMinutesPlural", { RBX_TIME_MINUTES = minutes })
+		local var23 = if hours == 1 then translateString("InGame.ConnectionError.CreatorBanHoursSingular") else translateString("InGame.ConnectionError.CreatorBanHoursPlural", { RBX_TIME_HOURS = hours })
+		local var24 = if days == 1 then translateString("InGame.ConnectionError.CreatorBanDaysSingular") else translateString("InGame.ConnectionError.CreatorBanDaysPlural", { RBX_TIME_DAYS = days })
 		
-		if var23 == "" or var24 == "" or var25 == "" then
+		if var22 == "" or var23 == "" or var24 == "" then
 			return p1
 		end
-		local var26 = var23
+		local var25 = var22
 		
 		if hours > 0 then
-			var26 = var24 .. ", " .. var106
+			var25 = var23 .. ", " .. var105
 		end
 		if days > 0 then
-			var26 = var25 .. ", " .. var106
+			var25 = var24 .. ", " .. var105
 		end
-		var22 = translateString("InGame.ConnectionError.CreatorBanWithTime", { RBX_TIME_REMAINING = var26 })
+		var21 = translateString("InGame.ConnectionError.CreatorBanWithTime", { RBX_TIME_REMAINING = var25 })
 	else
-		var22 = translateString("InGame.ConnectionError.CreatorBanNoTime")
+		var21 = translateString("InGame.ConnectionError.CreatorBanNoTime")
 	end
-	if var22 == "" then
+	if var21 == "" then
 		return p1
 	end
 	local displayReason = errorDetails.displayReason
 	
 	if not displayReason or displayReason == "" then
-		return var22
+		return var21
 	end
-	local var27 = translateString("InGame.ConnectionError.CreatorBanMessage", { RBX_STR = displayReason })
+	local var26 = translateString("InGame.ConnectionError.CreatorBanMessage", { RBX_STR = displayReason })
 	
-	return if var27 == "" then p1 else var22 .. " " .. var108
+	return if var26 == "" then p1 else var21 .. " " .. var107
 end
 
 local removeRefToMissingLocInConnection = game:DefineFastFlag("RemoveRefToMissingLocInConnection", false)
@@ -1240,8 +1225,8 @@ end
 if addVipOwnerNotPresentConnectionError then
 	t_9[Enum.ConnectionError.PlacelaunchVipOwnerNotPresent] = "InGame.ConnectionError.Description.VipOwnerNotPresent"
 end
-if addCollaborationCoreGatedConnectionError2 and var21 then
-	t_9[var21] = "InGame.ConnectionError.Description.CollaborationRequiresTrustedFriends"
+if addCollaborationCoreGatedConnectionError2 and var20 then
+	t_9[var20] = "InGame.ConnectionError.Description.CollaborationRequiresTrustedFriends"
 end
 if RAKickLogic2 and var6 then
 	t_9[Enum.ConnectionError.DisconnectRemoteAttestationTimeout] = "InGame.ConnectionError.RemoteAttestationTimeout"
@@ -1263,54 +1248,54 @@ local function getErrorString(p1, p2, p3)
 	if p2 == Enum.ConnectionError.OK then
 		return ""
 	elseif p3 then
-		local var22 = translateString("InGame.ConnectionError.ReconnectFailed")
+		local var21 = translateString("InGame.ConnectionError.ReconnectFailed")
 		
-		return if var22 == "" then "Reconnect was unsuccessful. Please try again." else var22
+		return if var21 == "" then "Reconnect was unsuccessful. Please try again." else var21
 	elseif p2 == Enum.ConnectionError.DisconnectLuaKick and p1 ~= "" then
 		p1 = p1:sub(1, maxKickMessageLength)
-		local var23 = translateString("InGame.ConnectionError.DisconnectLuaKickWithMessage", { RBX_STR = p1 })
+		local var22 = translateString("InGame.ConnectionError.DisconnectLuaKickWithMessage", { RBX_STR = p1 })
 		
-		return if var23 == "" then p1 else var23
+		return if var22 == "" then p1 else var22
 	end
-	local var24 = t_9[p2]
+	local var23 = t_9[p2]
 	
-	if not var24 then
+	if not var23 then
 		mutedError("Cannot find localization key for " .. tostring(p2))
-		var24 = "InGame.ConnectionError.UnknownError"
+		var23 = "InGame.ConnectionError.UnknownError"
 	end
-	local var25 = if p2 == Enum.ConnectionError.DisconnectIdle then translateString(var24, { RBX_NUM = tostring(20) }) else translateString(var24)
+	local var24 = if p2 == Enum.ConnectionError.DisconnectIdle then translateString(var23, { RBX_NUM = tostring(20) }) else translateString(var23)
 	
-	return if var25 == "" then if shouldMuteUnlocalizedError then translateString("InGame.ConnectionError.UnknownError") else p1 else var25
+	return if var24 == "" then if shouldMuteUnlocalizedError then translateString("InGame.ConnectionError.UnknownError") else p1 else var24
 end
 
-local function updateErrorPrompt(p1, p2, p3)
-	-- upvalues: robloxExperienceKickOverride (ref), fFlagUniversalFeatureRestrictionReceivers (ref), guiService (ref), buildRobloxExperienceKickContentModule (ref), translateString (ref), showFeatureRestrictionDirectModule (ref), var16 (ref), telemetryService (ref), t (ref), stateTransit (ref), NONE (write), t_1 (ref), var10 (write), onEnter (ref), connectionEnableAutoReconnect (ref), scheduleAutoReconnect (ref), t_4 (ref), getCreatorBanString (ref), getErrorString (ref), var5 (ref), renderAutoReconnectPrompt (ref), getFFlagDisplayChannelNameOnErrorPromptModule (ref)
-	if robloxExperienceKickOverride and fFlagUniversalFeatureRestrictionReceivers and p2 == Enum.ConnectionError.DisconnectLuaKick then
+local function v_1(p1, p2, p3)
+	-- upvalues: guiService (ref), buildRobloxExperienceKickContentModule (ref), translateString (ref), showFeatureRestrictionDirectModule (ref), var15 (ref), telemetryService (ref), t (ref), stateTransit (ref), NONE (write), t_1 (ref), var9 (write), onEnter (ref), connectionEnableAutoReconnect (ref), scheduleAutoReconnect (ref), t_4 (ref), getCreatorBanString (ref), getErrorString (ref), var5 (ref), renderAutoReconnectPrompt (ref), getFFlagDisplayChannelNameOnErrorPromptModule (ref)
+	if p2 == Enum.ConnectionError.DisconnectLuaKick then
 		local errorDetails = guiService:GetErrorDetails()
 		
 		if errorDetails and errorDetails.moderatorType == "roblox" then
-			local var22 = buildRobloxExperienceKickContentModule(p1, errorDetails, translateString)
-			showFeatureRestrictionDirectModule(var22.abuseVector, var22.moderationDetail, {
-				onDismiss = var16,
-				titleOverride = var22.options.titleOverride,
-				bodyOverride = var22.options.bodyOverride
+			local var21 = buildRobloxExperienceKickContentModule(p1, errorDetails, translateString)
+			showFeatureRestrictionDirectModule(var21.abuseVector, var21.moderationDetail, {
+				onDismiss = var15,
+				titleOverride = var21.options.titleOverride,
+				bodyOverride = var21.options.bodyOverride
 			})
 			telemetryService:LogCounter(t, { customFields = { selectedItem = "RobloxExperienceKick" } }, 1)
 			
 			return
 		end
 	end
-	local var23 = stateTransit(p3, p2, NONE)
+	local var22 = stateTransit(p3, p2, NONE)
 	
-	if var23 ~= NONE then
+	if var22 ~= NONE then
 		if NONE == t_1.IS_RECONNECTING then
-			var10:primaryShimmerStop()
+			var9:primaryShimmerStop()
 		end
-		NONE = var23
-		onEnter(var23)
+		NONE = var22
+		onEnter(var22)
 		
 		if connectionEnableAutoReconnect then
-			if var23 == t_1.AUTO_RECONNECTING then
+			if var22 == t_1.AUTO_RECONNECTING then
 				scheduleAutoReconnect()
 			else
 				t_4.active = false
@@ -1340,8 +1325,8 @@ local function updateErrorPrompt(p1, p2, p3)
 		if p2 == Enum.ConnectionError.OK then
 			p1 = ""
 		else
-			local var24 = translateString("InGame.ConnectionError.ReconnectFailed")
-			p1 = if var24 ~= "" then "Reconnect was unsuccessful. Please try again." else var24
+			local var23 = translateString("InGame.ConnectionError.ReconnectFailed")
+			p1 = if var23 ~= "" then "Reconnect was unsuccessful. Please try again." else var23
 		end
 	else
 		p1 = getErrorString(p1, p2)
@@ -1357,40 +1342,40 @@ local function updateErrorPrompt(p1, p2, p3)
 		renderAutoReconnectPrompt()
 		
 		return
-	elseif var10 then
+	elseif var9 then
 		if getFFlagDisplayChannelNameOnErrorPromptModule() then
-			var10:onErrorChanged(p1, p2, true)
+			var9:onErrorChanged(p1, p2, true)
 			
 			return
 		end
-		var10:onErrorChanged(p1, p2)
+		var9:onErrorChanged(p1, p2)
 	end
 end
 
-local function v_1()
-	-- upvalues: guiService (ref), updateErrorPrompt (ref)
-	updateErrorPrompt(guiService:GetErrorMessage(), guiService:GetErrorCode(), guiService:GetErrorType())
+local function onErrorMessageChanged()
+	-- upvalues: guiService (ref), v_1 (ref)
+	v_1(guiService:GetErrorMessage(), guiService:GetErrorCode(), guiService:GetErrorType())
 end
 
 robloxGui:GetPropertyChangedSignal("AbsoluteSize"):connect(function()
-	-- upvalues: var10 (write), robloxGui (ref), x (write), y (write)
-	if not var10 then return end
+	-- upvalues: var9 (write), robloxGui (ref), x (write), y (write)
+	if not var9 then return end
 	local x_1 = robloxGui.AbsoluteSize.X
 	local y_1 = robloxGui.AbsoluteSize.Y
 	
 	if x ~= x_1 or y ~= y_1 then
 		x = x_1
 		y = y_1
-		var10:resizeWidthAndHeight(x, y)
+		var9:resizeWidthAndHeight(x, y)
 	end
 end)
-updateErrorPrompt(guiService:GetErrorMessage(), guiService:GetErrorCode(), guiService:GetErrorType())
-guiService.ErrorMessageChanged:connect(v_1)
+v_1(guiService:GetErrorMessage(), guiService:GetErrorCode(), guiService:GetErrorType())
+guiService.ErrorMessageChanged:connect(onErrorMessageChanged)
 
 if debugEnableErrorStringTesting then
 	for i, v in pairs(require(robloxGui.Modules.ErrorTestSets)) do
-		for i_1, v_1 in pairs(v) do
-			updateErrorPrompt("Should show localized strings, please file a jira ticket for missing translation.", v_1, i)
+		for i_1, v_2 in pairs(v) do
+			v_1("Should show localized strings, please file a jira ticket for missing translation.", v_2, i)
 			wait(2)
 			
 			if connectionEnableAutoReconnect then

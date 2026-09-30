@@ -1,6 +1,7 @@
 ﻿local parent = script:FindFirstAncestor("AppChat").Parent
 local reactModule = require(parent.React)
 local _ = require(parent.Foundation)
+local fFlagLuaAppAllowNilHookDepsCleanup = require(parent.SharedFlags).FFlagLuaAppAllowNilHookDepsCleanup
 local inputHandlersModule = require(parent.InputHandlers)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local focusNavigationEventNameEnum = require(parent.FocusNavigationUtils).FocusNavigationEventNameEnum
@@ -8,7 +9,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local _ = require(script.Parent.ChatSearchFieldView)
 
 return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref)
+	-- upvalues: reactModule (ref), useLocalization (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), fFlagLuaAppAllowNilHookDepsCleanup (ref)
 	local var1 = reactModule.useRef(nil)
 	local onExit = p1.onExit
 	local onChanged = p1.onChanged
@@ -43,7 +44,10 @@ return function(p1)
 		if var6.current and var9 and var9.focusedGuiObject:getValue() ~= nil then
 			var8(var6.current)
 		end
-	end, { var8, var9 or false })
+	end, {
+		var8,
+		if fFlagLuaAppAllowNilHookDepsCleanup then var9 else var9 or false
+	})
 	local var11 = reactModule.useCallback(function(p2)
 		-- upvalues: var4 (ref), var10 (ref), var1 (ref), onChanged (ref)
 		if p2 == "" then

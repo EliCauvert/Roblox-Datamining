@@ -3,12 +3,14 @@ local foundationModule = require(parent.Foundation)
 local iconButton = foundationModule.IconButton
 local iconSize = foundationModule.Enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local reactModule = require(parent.React)
 local responsiveModule = require(parent.Responsive)
 local fFlagLuaAppChartsFilterOptionTextTag = require(parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return function(p1)
-	-- upvalues: useTokens (ref), responsiveModule (ref), reactModule (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), iconButton (ref), iconSize (ref)
+	-- upvalues: useTokens (ref), responsiveModule (ref), reactModule (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), iconButton (ref), iconSize (ref)
 	local var1 = useTokens()
 	local headingSmall = var1.Typography.HeadingSmall
 	
@@ -40,7 +42,8 @@ return function(p1)
 			TextWrapped = true,
 			AutomaticSize = Enum.AutomaticSize.XY,
 			Text = p1.title,
-			Font = headingSmall.Font,
+			Font = if foundationFontFaceMigration then nil else headingSmall.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(headingSmall.Font) else nil,
 			TextSize = headingSmall.FontSize,
 			TextColor3 = var1.Color.Content.Emphasis.Color3,
 			TextXAlignment = Enum.TextXAlignment.Left,

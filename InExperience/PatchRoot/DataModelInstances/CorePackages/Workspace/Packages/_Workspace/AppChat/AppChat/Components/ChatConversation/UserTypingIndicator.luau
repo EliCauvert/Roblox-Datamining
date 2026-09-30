@@ -2,6 +2,9 @@
 local roactModule = require(parent.Roact)
 local withStyle = require(parent.UIBlox).Style.withStyle
 local otterModule = require(parent.Otter)
+local foundationModule = require(parent.Foundation)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local UIBloxModule = require(parent.UIBlox)
 local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -51,9 +54,9 @@ function userTypingIndicator.didUpdate(p1, p2, _)
 end
 
 function userTypingIndicator.render(p1)
-	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), images (ref)
+	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), images (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	return withStyle(function(p2)
-		-- upvalues: roactModule (copy), p1 (ref), imageSetLabel (copy), images (copy)
+		-- upvalues: roactModule (copy), p1 (ref), imageSetLabel (copy), images (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		local font = p2.Font
 		
 		return roactModule.createElement("Frame", {
@@ -107,7 +110,8 @@ function userTypingIndicator.render(p1)
 					BackgroundTransparency = 1,
 					Text = p1.getDisplayText(),
 					TextSize = font.BaseSize * font.Footer.RelativeSize,
-					Font = font.Footer.Font,
+					Font = if foundationFontFaceMigration then nil else font.Footer.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.CaptionSmall.Font) else nil,
 					TextColor3 = p2.Theme.TextMuted.Color,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Center,

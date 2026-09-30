@@ -3,13 +3,13 @@ local parent = buildExperience.Parent
 local default = require(parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
 local universalShareSheet = require(parent.ShareSheet).UniversalShareSheet
 local sharedFlagsModule = require(parent.SharedFlags)
-local createPrivateShareLinkModule = require(buildExperience.utils.createPrivateShareLink)
+local createExperienceShareLinkModule = require(buildExperience.utils.createExperienceShareLink)
 local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
 local isSubjectToDesktopPolicies = sharedFlagsModule.isSubjectToDesktopPolicies
 
 return function(p1)
-	-- upvalues: createPrivateShareLinkModule (ref), fFlagEnableShareSheet (ref), universalShareSheet (ref), isSubjectToDesktopPolicies (ref), default (ref)
-	return createPrivateShareLinkModule(p1):andThen(function(p2)
+	-- upvalues: createExperienceShareLinkModule (ref), fFlagEnableShareSheet (ref), universalShareSheet (ref), isSubjectToDesktopPolicies (ref), default (ref)
+	return createExperienceShareLinkModule(p1):andThen(function(p2)
 		-- upvalues: fFlagEnableShareSheet (copy), universalShareSheet (copy), isSubjectToDesktopPolicies (copy), default (copy)
 		if p2 == nil then
 			error("sharePrivateExperience: no share link returned")

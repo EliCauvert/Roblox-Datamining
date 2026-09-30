@@ -8,17 +8,21 @@ local getExperienceDetailsSheetStoreModule = require(script.Parent.getExperience
 local useHideTabBarWhileOpenModule = require(script.Parent.useHideTabBarWhileOpen)
 local useJoinExperienceModule = require(moments.ExperienceDetailsSheet.Join.useJoinExperience)
 local fFlagMomentsFixRecommendationImpressionLifecycleModule = require(moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
+local fFlagMomentsTabsBehindModalScrimModule = require(moments.Flags.FFlagMomentsTabsBehindModalScrim)
 local analytics = momentsCommonModule.Analytics
 local eventNames = analytics.EventNames
 local fireAnalyticsEvent = analytics.fireAnalyticsEvent
 
 return reactModule.memo(function()
-	-- upvalues: getExperienceDetailsSheetStoreModule (ref), useSignalState (ref), useJoinExperienceModule (ref), useHideTabBarWhileOpenModule (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), analytics (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), inExperienceDetailsPromptContainerModule (ref)
+	-- upvalues: getExperienceDetailsSheetStoreModule (ref), useSignalState (ref), useJoinExperienceModule (ref), fFlagMomentsTabsBehindModalScrimModule (ref), useHideTabBarWhileOpenModule (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), analytics (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), inExperienceDetailsPromptContainerModule (ref)
 	local var1 = getExperienceDetailsSheetStoreModule(false)
 	local var2 = useSignalState(var1.getIsOpen)
 	local var3 = useSignalState(var1.getContext)
 	local var4 = useJoinExperienceModule()
-	useHideTabBarWhileOpenModule(var2)
+	
+	if not fFlagMomentsTabsBehindModalScrimModule then
+		useHideTabBarWhileOpenModule(var2)
+	end
 	reactModule.useEffect(function()
 		-- upvalues: var2 (ref), var3 (ref), fireAnalyticsEvent (copy), eventNames (copy), analytics (copy)
 		if var2 and var3 then

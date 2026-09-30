@@ -5,6 +5,7 @@ local foundationModule = require(parent.Foundation)
 local momentsCommonModule = require(parent.MomentsCommon)
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
+local fFlagMomentsComments = require(parent.SharedFlags).FFlagMomentsComments
 local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputPlacement = foundationModule.Enums.InputPlacement
@@ -30,7 +31,7 @@ local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMome
 local fFlagMomentsCommentsCreatorControlModule = require(momentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
 
 local function AllowCommentsToggle(p1)
-	-- upvalues: getCreationFlowStoreModule (ref), useSignalState (ref), useCallback (ref), reactModule (ref), toggle (ref), inputPlacement (ref), inputSize (ref)
+	-- upvalues: getCreationFlowStoreModule (ref), useSignalState (ref), useCallback (ref), fFlagMomentsComments (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), reactModule (ref), toggle (ref), inputPlacement (ref), inputSize (ref)
 	local var1 = getCreationFlowStoreModule(false)
 	
 	return reactModule.createElement(toggle, {
@@ -39,8 +40,12 @@ local function AllowCommentsToggle(p1)
 		isChecked = useSignalState(var1.getCommentsEnabled),
 		LayoutOrder = p1.layoutOrder,
 		onActivated = useCallback(function(p2)
-			-- upvalues: var1 (ref)
+			-- upvalues: var1 (ref), fFlagMomentsComments (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy)
 			var1.updateCommentsEnabled(p2)
+			
+			if fFlagMomentsComments then
+				fireAnalyticsEventModule(eventNames.MomentCommentsSettingToggled, cryoModule.Dictionary.join(makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)), { commentsEnabled = tostring(p2) }))
+			end
 		end, { var1.updateCommentsEnabled }),
 		placement = inputPlacement.End,
 		size = inputSize.Medium

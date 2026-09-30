@@ -24,13 +24,16 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local text = foundationModule.Text
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
+local getTextBoundsAsync = foundationModule.Utility.getTextBoundsAsync
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local gameTileThumbnailBadges = gameTileModule.GameTileThumbnailBadges
 local scrollView = foundationModule.ScrollView
 local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
 local luaAppFixRsvpPromptDescriptionScrolling = game:DefineFastFlag("LuaAppFixRsvpPromptDescriptionScrolling", false)
 
 return function(p1)
-	-- upvalues: useScreenSize (ref), useLocalization (ref), reactModule (ref), mouseIconOverrideService (ref), constantsModule (ref), useRoactService (ref), roactNetworking (ref), formatDateLocalizedModule (ref), useContext (ref), serviceOverrideContextModule (ref), postRsvpStatusModule (ref), notificationModalsManagerModule (ref), buttonType (ref), useDesignTokens (ref), useTokens (ref), luaAppFixRsvpPromptDescriptionScrolling (ref), textService (ref), loadableImage (ref), gameTileThumbnailBadges (ref), scrollView (ref), scrollBarVisibility (ref), text (ref), view (ref), interactiveAlert (ref)
+	-- upvalues: useScreenSize (ref), useLocalization (ref), reactModule (ref), mouseIconOverrideService (ref), constantsModule (ref), useRoactService (ref), roactNetworking (ref), formatDateLocalizedModule (ref), useContext (ref), serviceOverrideContextModule (ref), postRsvpStatusModule (ref), notificationModalsManagerModule (ref), buttonType (ref), useDesignTokens (ref), useTokens (ref), luaAppFixRsvpPromptDescriptionScrolling (ref), foundationFontFaceMigration (ref), getTextBoundsAsync (ref), textService (ref), loadableImage (ref), gameTileThumbnailBadges (ref), normalizeFontFace (ref), scrollView (ref), scrollBarVisibility (ref), text (ref), view (ref), interactiveAlert (ref)
 	local var1 = useScreenSize()
 	local var2 = p1.enableInputDelayed ~= nil or p1.enableInputDelayed
 	local var3 = useLocalization({
@@ -168,10 +171,33 @@ return function(p1)
 		end
 	end, { overrideUseWideMode, displayDescription })
 	reactModule.useEffect(function()
-		-- upvalues: luaAppFixRsvpPromptDescriptionScrolling (copy), var20 (ref), var18 (ref), var19 (ref), displayDescription (ref), textService (copy), var16 (ref)
+		-- upvalues: luaAppFixRsvpPromptDescriptionScrolling (copy), var20 (ref), var18 (ref), foundationFontFaceMigration (copy), var19 (ref), getTextBoundsAsync (copy), displayDescription (ref), var16 (ref), textService (copy)
 		if luaAppFixRsvpPromptDescriptionScrolling then
 			if var20.current then
 				var18(var20.current.AbsoluteSize.Y)
+			end
+			return
+		elseif foundationFontFaceMigration then
+			local current = var19.current
+			
+			if current then
+				local var23 = false
+				task.spawn(function()
+					-- upvalues: getTextBoundsAsync (copy), displayDescription (copy), current (ref), var23 (write), var16 (copy), var20 (copy), var18 (copy)
+					local var24 = getTextBoundsAsync(displayDescription, current.FontFace, current.TextSize, current.AbsoluteSize.X)
+					
+					if var23 or not var24 then return end
+					var16(var24.Y * current.LineHeight)
+					
+					if var20.current then
+						var18(var20.current.AbsoluteSize.Y)
+					end
+				end)
+				
+				return function()
+					-- upvalues: var23 (write)
+					var23 = true
+				end
 			end
 			return
 		elseif not var19.current then return end
@@ -192,7 +218,7 @@ return function(p1)
 		onCloseClicked = var10,
 		buttonStackInfo = var11,
 		middleContent = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), overrideUseWideMode (ref), var12 (ref), constantsModule (copy), luaAppFixRsvpPromptDescriptionScrolling (copy), var17 (ref), size300 (ref), var15 (ref), reactModule (copy), loadableImage (copy), var4 (write), dateTime (write), gameTileThumbnailBadges (copy), var7 (write), displayDescription (ref), bodyLarge (ref), var22 (ref), var21 (ref), var19 (ref), scrollView (copy), scrollBarVisibility (copy), text (copy), view (copy), var14 (ref), displayTitle (ref), var20 (ref)
+			-- upvalues: var1 (ref), overrideUseWideMode (ref), var12 (ref), constantsModule (copy), luaAppFixRsvpPromptDescriptionScrolling (copy), var17 (ref), size300 (ref), var15 (ref), reactModule (copy), loadableImage (copy), var4 (write), dateTime (write), gameTileThumbnailBadges (copy), var7 (write), displayDescription (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), bodyLarge (ref), var22 (ref), var21 (ref), var19 (ref), scrollView (copy), scrollBarVisibility (copy), text (copy), view (copy), var14 (ref), displayTitle (ref), var20 (ref)
 			local var23 = var1.Y - 80 - 200
 			
 			if var23 < 80 then
@@ -273,7 +299,7 @@ return function(p1)
 						Text = displayDescription,
 						TextTruncate = Enum.TextTruncate.None,
 						TextWrapped = true,
-						FontFace = Font.fromEnum(bodyLarge.Font),
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(bodyLarge.Font) else Font.fromEnum(bodyLarge.Font),
 						TextSize = bodyLarge.FontSize,
 						LineHeight = bodyLarge.LineHeight,
 						TextColor3 = var22.Color.Content.Emphasis.Color3,

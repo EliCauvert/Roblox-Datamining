@@ -9,7 +9,10 @@ local useMemo = reactModule.useMemo
 local useStyle = UIBloxModule.Core.Style.useStyle
 local buttonStack = UIBloxModule.App.Button.ButtonStack
 local enum = UIBloxModule.App.Button.Enum
-local useTokens = require(parent.Foundation).Hooks.useTokens
+local foundationModule = require(parent.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useChatPagePaddingModule = require(appChat.Contexts.ChatPagePadding.useChatPagePadding)
 local useIsInExperienceModule = require(appChat.Hooks.useIsInExperience)
 local t = {
@@ -20,7 +23,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useIsInExperienceModule (ref), useChatPagePaddingModule (ref), useEffect (ref), useMemo (ref), enum (ref), reactModule (ref), buttonStack (ref)
+	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useIsInExperienceModule (ref), useChatPagePaddingModule (ref), useEffect (ref), useMemo (ref), enum (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), buttonStack (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local style = var1.style or useStyle()
 	local var2 = useTokens()
@@ -98,7 +101,8 @@ return function(p1)
 			LayoutOrder = 1,
 			TextWrapped = true,
 			TextSize = style.Tokens.FontSize.FontSize_300,
-			Font = style.Font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else style.Font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.BodyLarge.Font) else nil,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Text = var1.bodyText,

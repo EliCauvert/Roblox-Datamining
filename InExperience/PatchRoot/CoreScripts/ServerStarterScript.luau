@@ -13,6 +13,7 @@ local getFFlagEnableReferredPlayerJoinRemoteEvent = require(corePackagesService.
 local debugLogExpchatMigration = game:DefineFastFlag("DebugLogExpchatMigration", false)
 local fFlagAXEnableInspectAndBuyBulkPurchase = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase
 local fFlagPlatformLeaderboardRccEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagPlatformLeaderboardRccEnabled
+local debugServerPlatformLeaderboardDevMock = game:DefineFastFlag("DebugServerPlatformLeaderboardDevMock", false)
 local emoteSkinningDisableEnabled = game:DefineFastFlag("EmoteSkinningDisableEnabled", false)
 local robloxGui = coreGuiService:WaitForChild("RobloxGui", 1e999)
 assert(robloxGui ~= nil, "RobloxGui should exist")
@@ -33,7 +34,9 @@ scriptContextService:AddCoreScriptLocal("ServerCoreScripts/ServerSocialScript", 
 if emoteSkinningDisableEnabled then
 	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/EmoteSkinningDisable", script.Parent)
 end
-if fFlagPlatformLeaderboardRccEnabled then
+if debugServerPlatformLeaderboardDevMock and runService:IsStudio() then
+	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/ServerPlatformLeaderboardDevMock", script.Parent)
+elseif fFlagPlatformLeaderboardRccEnabled then
 	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/ServerPlatformLeaderboard", script.Parent)
 end
 scriptContextService:AddCoreScriptLocal("ServerCoreScripts/ServerLeaderstats", script.Parent)

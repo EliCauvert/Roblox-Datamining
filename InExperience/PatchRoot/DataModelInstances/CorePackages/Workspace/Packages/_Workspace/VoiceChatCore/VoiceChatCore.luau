@@ -14,7 +14,8 @@ return {
 		GetFFlagEnableExpJoinMicPermAnalytics = require(flags.GetFFlagEnableExpJoinMicPermAnalytics),
 		GetFFlagEnableSeamlessVoiceFeature = require(flags.GetFFlagEnableSeamlessVoiceFeature),
 		GetFFlagFixGetPlayerByUserIdStringCast = require(flags.GetFFlagFixGetPlayerByUserIdStringCast),
-		GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry = require(flags.GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry)
+		GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry = require(flags.GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry),
+		GetFFlagMicConsumerRegistry = require(flags.GetFFlagMicConsumerRegistry)
 	},
 	Requests = {
 		GetShowAgeVerificationOverlay = require(script.Requests.GetShowAgeVerificationOverlay)

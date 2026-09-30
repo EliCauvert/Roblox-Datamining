@@ -1,6 +1,9 @@
 ﻿local parent = script:FindFirstAncestor("GamePlayButton").Parent
 local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
+local foundationModule = require(parent.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local useRoactService = require(parent.RobloxAppHooks).useRoactService
 local appLinking = require(parent.RoactServiceTags).AppLinking
@@ -11,7 +14,7 @@ local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
 local extractAndStyleRichTextLinks = require(parent.DiscoveryUtils).extractAndStyleRichTextLinks
 
 return function(p1)
-	-- upvalues: useTokens (ref), useDispatch (ref), useRoactService (ref), appLinking (ref), reactModule (ref), extractAndStyleRichTextLinks (ref), setCentralOverlay (ref), centralOverlayType (ref), closeCentralOverlay (ref)
+	-- upvalues: useTokens (ref), useDispatch (ref), useRoactService (ref), appLinking (ref), reactModule (ref), extractAndStyleRichTextLinks (ref), setCentralOverlay (ref), centralOverlayType (ref), closeCentralOverlay (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = useTokens()
 	local var2 = useDispatch()
 	local var3 = useRoactService(appLinking)
@@ -32,7 +35,8 @@ return function(p1)
 		Size = UDim2.new(1, 0, 0, 0),
 		Text = var4.styledText,
 		TextSize = var1.Typography.BodyLarge.FontSize,
-		Font = var1.Typography.BodyLarge.Font,
+		Font = if foundationFontFaceMigration then nil else var1.Typography.BodyLarge.Font,
+		FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.BodyLarge.Font) else nil,
 		TextWrapped = true,
 		TextXAlignment = Enum.TextXAlignment.Left,
 		TextYAlignment = Enum.TextYAlignment.Center,

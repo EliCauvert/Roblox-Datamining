@@ -5,6 +5,9 @@ local _ = require(gameTile.GameTileTypes)
 local parent = gameTile.Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useStyle = UIBloxModule.Core.Style.useStyle
 local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local statGroup = UIBloxModule.App.Indicator.StatGroup
@@ -21,7 +24,7 @@ local getUserInputIsSelectionOnlyModule = require(gameTile.Footer.getUserInputIs
 local uDim2 = UDim2.fromScale(1, 1)
 
 return function(p1)
-	-- upvalues: argCheckModule (ref), usePlayerCountTextModule (ref), useStyle (ref), useDesignTokens (ref), useLocalization (ref), getUserInputIsSelectionOnlyModule (ref), reactModule (ref), styledTextLabel (ref), sponsoredTooltipHover (ref), tooltipOrientation (ref), uDim2 (ref), coPlayFooter (ref), colors (ref), coPlayFooterModule (ref), textFooter (ref), socialProofFooter (ref), statGroup (ref)
+	-- upvalues: argCheckModule (ref), usePlayerCountTextModule (ref), useStyle (ref), useDesignTokens (ref), useLocalization (ref), getUserInputIsSelectionOnlyModule (ref), reactModule (ref), styledTextLabel (ref), sponsoredTooltipHover (ref), tooltipOrientation (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), uDim2 (ref), coPlayFooter (ref), colors (ref), coPlayFooterModule (ref), textFooter (ref), socialProofFooter (ref), statGroup (ref)
 	if p1.automaticSize then
 		argCheckModule.isNotNil(p1.size, "If props.automaticSize is defined, props.size should also be defined.  Otherwise size falls back to a 1, 1 scale for this component.")
 	end
@@ -74,7 +77,8 @@ return function(p1)
 					Text = var3.sponsoredText,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					Font = var2.Font.CaptionHeader.Font,
+					Font = if foundationFontFaceMigration then nil else var2.Font.CaptionHeader.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionLarge.Font) else nil,
 					TextSize = var2.Font.BaseSize * var2.Font.CaptionHeader.RelativeSize,
 					TextColor3 = var2.Tokens.Color.Content.Emphasis.Color3,
 					TextTransparency = var2.Tokens.Color.Content.Emphasis.Transparency
@@ -198,7 +202,8 @@ return function(p1)
 			BackgroundTransparency = 1,
 			Size = p1.size or uDim2,
 			TextColor3 = theme.TextMuted.Color,
-			Font = font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodyLarge.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			Text = p1.friendActivityTitle,

@@ -129,10 +129,19 @@ return function(p1)
 		getCachedUserMoments = getCachedUserMoments,
 		fetchUserMoments = fetchUserMomentsItem,
 		getAndFetchUserMoments = getAndFetchUserMoments,
-		invalidateUser = function(p3)
-			-- upvalues: t_2 (write), t_1 (write), var4 (ref), var3 (ref)
+		evictUserMoments = function(p3)
+			-- upvalues: t_2 (write), t_1 (write)
 			for i, v in t_2 do
 				if v == p3 then
+					t_1[i] = nil
+					t_2[i] = nil
+				end
+			end
+		end,
+		invalidateUser = function(p4)
+			-- upvalues: t_2 (write), t_1 (write), var4 (ref), var3 (ref)
+			for i, v in t_2 do
+				if v == p4 then
 					t_1[i] = nil
 					t_2[i] = nil
 				end

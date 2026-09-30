@@ -16,6 +16,9 @@ local enumScreensModule = require(appChat.EnumScreens)
 local cryoModule = require(parent.Cryo)
 local foundationModule = require(parent.Foundation)
 local skeleton = foundationModule.Skeleton
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local getTextSize = require(parent.Style).GetTextSize
 local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local conversationModule = require(appChat.Models.Conversation)
 local getReplyLabelDescriptorModule = require(appChat.Utils.getReplyLabelDescriptor)
@@ -96,7 +99,7 @@ local t = {
 local var2 = if getFFlagDebugAppChatModule() then "TextButton" else "Frame"
 
 function ChatMessageContainer(p1)
-	-- upvalues: cryoModule (ref), t (ref), messageModelModule (ref), reactModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), useStyle (ref), useChatPagePaddingModule (ref), foundationModule (ref), appChatUseSymmetricSwipe (ref), swipeDirectionModule (ref), uDim2 (ref), uDim2_1 (ref), appChatReplyIconSwipeOffset (ref), vector2 (ref), vector2_1 (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useTriggerFeedback (ref), useDescendantSelected (ref), reactFocusNavigationModule (ref), globalLongPressSignalModule (ref), messageFtuxTooltipDismissSignal (ref), messageFtuxTooltipVariant (ref), chatConversationTelemetryEventsModule (ref), useNavigation (ref), useGetConversationFromIdModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), getReplyingToStoreModule (ref), shouldReadMessageListFromSignalsStore (ref), var1 (ref), useReplyingToMessageDispatchModule (ref), useLocalUserId (ref), hapticFeedbackContext (ref), hapticFeedbackType (ref), useSwipeGestureModule (ref), enumScreensModule (ref), setTimeout (ref), appChatMessageLongPressDistanceThreshold (ref), userInputService (ref), fFlagAppChatEnableMessageContextMenuModule (ref), chatMessageContainerConstantsModule (ref), optionsEnumModule (ref), conversationModule (ref), getReplyLabelDescriptorModule (ref), userProfilesModule (ref), useLocalization (ref), textService (ref), getFFlagDebugAppChatModule (ref), optionsModule (ref), userTile (ref), layoutMode (ref), userPresence (ref), skeleton (ref), messageFtuxTooltip (ref), appChatEnableRepliesUIIxpEnabled2 (ref), IXPService (ref), appChatEnableRepliesUIIxpLayer1 (ref), var2 (ref), systemMessageModule (ref), noticeTextModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), messageModelModule (ref), reactModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), useStyle (ref), useChatPagePaddingModule (ref), foundationModule (ref), appChatUseSymmetricSwipe (ref), swipeDirectionModule (ref), uDim2 (ref), uDim2_1 (ref), appChatReplyIconSwipeOffset (ref), vector2 (ref), vector2_1 (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useTriggerFeedback (ref), useDescendantSelected (ref), reactFocusNavigationModule (ref), globalLongPressSignalModule (ref), messageFtuxTooltipDismissSignal (ref), messageFtuxTooltipVariant (ref), chatConversationTelemetryEventsModule (ref), useNavigation (ref), useGetConversationFromIdModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), getReplyingToStoreModule (ref), shouldReadMessageListFromSignalsStore (ref), var1 (ref), useReplyingToMessageDispatchModule (ref), useLocalUserId (ref), hapticFeedbackContext (ref), hapticFeedbackType (ref), useSwipeGestureModule (ref), enumScreensModule (ref), setTimeout (ref), appChatMessageLongPressDistanceThreshold (ref), userInputService (ref), fFlagAppChatEnableMessageContextMenuModule (ref), chatMessageContainerConstantsModule (ref), optionsEnumModule (ref), conversationModule (ref), getReplyLabelDescriptorModule (ref), userProfilesModule (ref), useLocalization (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), getFFlagDebugAppChatModule (ref), optionsModule (ref), userTile (ref), layoutMode (ref), userPresence (ref), normalizeFontFace (ref), skeleton (ref), messageFtuxTooltip (ref), appChatEnableRepliesUIIxpEnabled2 (ref), IXPService (ref), appChatEnableRepliesUIIxpLayer1 (ref), var2 (ref), systemMessageModule (ref), noticeTextModule (ref)
 	local var3
 	local var4 = cryoModule.Dictionary.join(t, p1)
 	
@@ -429,15 +432,17 @@ function ChatMessageContainer(p1)
 	end
 	local displayName = useLocalization(if senderTargetId then { displayName = var47 } else {}).displayName or var47
 	local var49 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), chatMessageContainerConstantsModule (copy), textService (copy), displayName (write), var6 (ref)
-		local var50 = textService:GetTextSize(displayName, var6.Font.BaseSize * var6.Font.Footer.RelativeSize, var6.Font.Footer.Font, Vector2.new(math.max(1, var4.messageMaxWidth - chatMessageContainerConstantsModule.TAIL_WIDTH), 1e999))
+		-- upvalues: var4 (ref), chatMessageContainerConstantsModule (copy), foundationFontFaceMigration (copy), getTextSize (copy), displayName (write), var6 (ref), var8 (ref), textService (copy)
+		local vector2 = Vector2.new(math.max(1, var4.messageMaxWidth - chatMessageContainerConstantsModule.TAIL_WIDTH), 1e999)
+		local var50 = if foundationFontFaceMigration then getTextSize(displayName, var6.Font.BaseSize * var6.Font.Footer.RelativeSize, var8.Typography.CaptionSmall.Font, vector2, { addTemporaryPadding = false }) else textService:GetTextSize(displayName, var6.Font.BaseSize * var6.Font.Footer.RelativeSize, var6.Font.Footer.Font, vector2)
 		
 		return UDim2.new(0, var50.X, 0, var50.Y)
 	end, {
 		var6.Font.BaseSize * var6.Font.Footer.RelativeSize,
 		var6.Font.Footer.Font,
 		var4.messageMaxWidth - chatMessageContainerConstantsModule.TAIL_WIDTH,
-		displayName
+		displayName,
+		if foundationFontFaceMigration then var8.Typography.CaptionSmall.Font else nil
 	})
 	local var50 = 0
 	
@@ -492,7 +497,7 @@ function ChatMessageContainer(p1)
 	end) else nil
 	
 	local function renderMessage()
-		-- upvalues: reactModule (copy), var60 (ref), var42 (write), var43 (write), var50 (write), var4 (ref), left (ref), var51 (ref), var7 (ref), var52 (ref), foundationModule (copy), userTile (copy), layoutMode (copy), userPresence (copy), var5 (ref), var8 (ref), shouldShowName (ref), chatMessageContainerConstantsModule (copy), isIncoming (ref), senderTargetId (ref), var46 (write), var6 (ref), var49 (ref), displayName (write), skeleton (copy), fFlagAppChatConsoleFocusFixesModule (copy), var3 (ref), var24 (write), var27 (write), var40 (write), var41 (write), var44 (write), var45 (write), var18 (write), var58 (write), var12 (ref), var11 (ref), messageFtuxTooltip (copy), messageFtuxTooltipVariant (copy), var9 (ref), var61 (ref), var59 (ref)
+		-- upvalues: reactModule (copy), var60 (ref), var42 (write), var43 (write), var50 (write), var4 (ref), left (ref), var51 (ref), var7 (ref), var52 (ref), foundationModule (copy), userTile (copy), layoutMode (copy), userPresence (copy), var5 (ref), var8 (ref), shouldShowName (ref), chatMessageContainerConstantsModule (copy), isIncoming (ref), senderTargetId (ref), var46 (write), foundationFontFaceMigration (copy), var6 (ref), normalizeFontFace (copy), var49 (ref), displayName (write), skeleton (copy), fFlagAppChatConsoleFocusFixesModule (copy), var3 (ref), var24 (write), var27 (write), var40 (write), var41 (write), var44 (write), var45 (write), var18 (write), var58 (write), var12 (ref), var11 (ref), messageFtuxTooltip (copy), messageFtuxTooltipVariant (copy), var9 (ref), var61 (ref), var59 (ref)
 		local createElement = reactModule.createElement
 		createElement = createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -559,7 +564,8 @@ function ChatMessageContainer(p1)
 					DisplayName = if not var46 then reactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
-						Font = var6.Font.Footer.Font,
+						Font = if foundationFontFaceMigration then nil else var6.Font.Footer.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(var8.Typography.CaptionSmall.Font) else nil,
 						Size = var49(),
 						AnchorPoint = if isIncoming then Vector2.new(0, 0) else Vector2.new(1, 0),
 						Position = if isIncoming then UDim2.fromScale(0, 0) else UDim2.fromScale(1, 0),

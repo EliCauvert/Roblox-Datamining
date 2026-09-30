@@ -2,6 +2,9 @@
 local parent = coreScriptsPlayerFeedback.Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useStyle = UIBloxModule.Core.Style.useStyle
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -12,7 +15,7 @@ local useEscapeDismissModule = require(coreScriptsPlayerFeedback.Hooks.useEscape
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
 return reactModule.memo(function(p1)
-	-- upvalues: useScreenSize (ref), useStyle (ref), reactModule (ref), useLastInputMethod (ref), useLocalization (ref), useEscapeDismissModule (ref), guiService (ref), buttonType (ref), interactiveAlert (ref)
+	-- upvalues: useScreenSize (ref), useStyle (ref), reactModule (ref), useLastInputMethod (ref), useLocalization (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), useEscapeDismissModule (ref), guiService (ref), buttonType (ref), interactiveAlert (ref)
 	local headerUnder13, hintUnder13
 	local var1 = useScreenSize()
 	local var2 = useStyle()
@@ -50,7 +53,7 @@ return reactModule.memo(function(p1)
 		hintUnder13 = var7.HintDefault
 	end
 	local var8 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), reactModule (copy), headerUnder13 (write), hintUnder13 (write)
+		-- upvalues: var2 (ref), reactModule (copy), headerUnder13 (write), foundationFontFaceMigration (copy), normalizeFontFace (copy), hintUnder13 (write)
 		local body = var2.Font.Body
 		local header2 = var2.Font.Header2 or var2.Font.Body
 		local baseSize = var2.Font.BaseSize
@@ -75,7 +78,8 @@ return reactModule.memo(function(p1)
 				TextYAlignment = Enum.TextYAlignment.Top,
 				TextColor3 = var2.Theme.TextEmphasis.Color,
 				TextTransparency = var2.Theme.TextEmphasis.Transparency,
-				Font = header2.Font,
+				Font = if foundationFontFaceMigration then nil else header2.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.TitleLarge.Font) else nil,
 				TextSize = math.floor(header2.RelativeSize * baseSize),
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
@@ -89,7 +93,8 @@ return reactModule.memo(function(p1)
 				TextYAlignment = Enum.TextYAlignment.Top,
 				TextColor3 = var2.Theme.TextMuted.Color,
 				TextTransparency = var2.Theme.TextMuted.Transparency,
-				Font = body.Font,
+				Font = if foundationFontFaceMigration then nil else body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodyLarge.Font) else nil,
 				TextSize = math.floor(body.RelativeSize * baseSize),
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y

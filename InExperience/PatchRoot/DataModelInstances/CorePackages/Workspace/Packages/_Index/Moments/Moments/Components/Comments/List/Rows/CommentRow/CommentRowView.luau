@@ -14,25 +14,25 @@ local thumbnailSize = foundationModule.Enums.ThumbnailSize
 local thumbnailType = foundationModule.Enums.ThumbnailType
 local getRbxThumb = foundationModule.Utility.getRbxThumb
 local useComposedRef = reactUtilsModule.useComposedRef
+local useTokens = foundationModule.Hooks.useTokens
 
 local function noop() end
 
 return function(p1)
-	-- upvalues: reactModule (ref), useComposedRef (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), foundationModule (ref), commentRowHighlightModule (ref), noop (ref), stateLayerAffordance (ref), imageWithSkeletonModule (ref), radius (ref), commentReactionButtonModule (ref), commentActionsMenuModule (ref), commentDeleteConfirmationDialogModule (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), useComposedRef (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), foundationModule (ref), commentRowHighlightModule (ref), noop (ref), stateLayerAffordance (ref), imageWithSkeletonModule (ref), radius (ref), commentReactionButtonModule (ref), commentActionsMenuModule (ref), commentDeleteConfirmationDialogModule (ref)
+	local var1 = useTokens()
 	local actionsMenu = p1.actionsMenu
 	local deleteConfirmation = p1.deleteConfirmation
-	local var1 = actionsMenu ~= nil and actionsMenu.anchorRef ~= nil
-	local var2, var3 = reactModule.useState(nil)
+	local var2 = actionsMenu ~= nil and actionsMenu.anchorRef ~= nil
+	local var3, var4 = reactModule.useState(nil)
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "size-full-0 auto-y",
 		LayoutOrder = p1.LayoutOrder,
 		GroupTransparency = p1.GroupTransparency,
-		ref = p1.rowRef,
-		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
 		testId = `moments-comment-row-{p1.commentId}`
 	}, {
-		Highlight = if actionsMenu == nil or not var1 then nil else reactModule.createElement(commentRowHighlightModule, {
+		Highlight = if actionsMenu == nil or not var2 then nil else reactModule.createElement(commentRowHighlightModule, {
 			commentId = p1.commentId,
 			phase = if actionsMenu.isOpen then "Active" elseif p1.isLongPressCharging then "Charging" else "Idle"
 		}),
@@ -41,8 +41,9 @@ return function(p1)
 				["row gap-medium size-full-0 auto-y padding-x-small padding-top-small"] = true,
 				["padding-bottom-small"] = not p1.showReactionControl
 			},
-			ref = useComposedRef(p1.gestureRef, var3),
+			ref = useComposedRef(p1.gestureRef, var4),
 			onActivated = if p1.isGestureSurfaceActive then noop else nil,
+			onStateChanged = if p1.isGestureSurfaceActive then p1.onContentStateChanged else nil,
 			stateLayer = if p1.isGestureSurfaceActive then { affordance = stateLayerAffordance.None } else nil,
 			selection = { Selectable = false },
 			testId = `moments-comment-row-content-{p1.commentId}`
@@ -99,10 +100,22 @@ return function(p1)
 						HeaderAction = if p1.headerAction ~= nil then nil else reactModule.createElement(foundationModule.View, { tag = "auto-xy", LayoutOrder = 4 }, { Action = p1.headerAction })
 					}),
 					Body = reactModule.createElement(foundationModule.Text, {
-						tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
+						tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left",
 						LayoutOrder = 2,
-						Text = p1.text,
+						Text = p1.bodyText or p1.text,
+						RichText = p1.bodyText ~= nil,
+						textStyle = p1.bodyTextStyle or var1.Color.Content.Emphasis,
+						ref = p1.bodyRef,
+						onAbsoluteSizeChanged = p1.onBodyAbsoluteSizeChanged,
 						testId = `moments-comment-body-{p1.commentId}`
+					}),
+					BodyMeasure = if p1.bodyMeasureRef ~= nil then nil else reactModule.createElement(foundationModule.Text, {
+						tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left",
+						LayoutOrder = 3,
+						RichText = true,
+						Visible = false,
+						ref = p1.bodyMeasureRef,
+						testId = `moments-comment-body-measure-{p1.commentId}`
 					})
 				}),
 				Reaction = if p1.showReactionControl then reactModule.createElement(commentReactionButtonModule, {
@@ -114,7 +127,7 @@ return function(p1)
 					onReactionActivated = p1.onReactionActivated or noop
 				}) else nil
 			}),
-			ActionsMenu = if actionsMenu == nil or var1 then nil else reactModule.createElement(commentActionsMenuModule, {
+			ActionsMenu = if actionsMenu == nil or var2 then nil else reactModule.createElement(commentActionsMenuModule, {
 				LayoutOrder = 3,
 				commentId = p1.commentId,
 				items = actionsMenu.items,
@@ -123,14 +136,14 @@ return function(p1)
 				onClose = actionsMenu.onClose
 			})
 		}),
-		RowActionsMenu = if actionsMenu == nil or not var1 or var2 == nil then nil else reactModule.createElement(commentActionsMenuModule, {
+		RowActionsMenu = if actionsMenu == nil or not var2 or var3 == nil then nil else reactModule.createElement(commentActionsMenuModule, {
 			commentId = p1.commentId,
 			items = actionsMenu.items,
 			isOpen = actionsMenu.isOpen,
 			anchorRef = reactModule.useMemo(function()
-				-- upvalues: var2 (ref)
-				return { current = var2 }
-			end, { var2 }),
+				-- upvalues: var3 (ref)
+				return { current = var3 }
+			end, { var3 }),
 			onButtonActivated = actionsMenu.onButtonActivated,
 			onClose = actionsMenu.onClose
 		}),

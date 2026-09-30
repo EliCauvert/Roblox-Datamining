@@ -2,7 +2,10 @@
 local parent = gameTile.Parent
 local reactModule = require(parent.React)
 local useDesignTokens = require(parent.Style).useDesignTokens
-local useTokens = require(parent.Foundation).Hooks.useTokens
+local foundationModule = require(parent.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useTextSizeOffset = require(parent.UIBlox).Core.Style.useTextSizeOffset
 local getGameTileMetadataFontModule = require(gameTile.Footer.getGameTileMetadataFont)
 
@@ -11,7 +14,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), getGameTileMetadataFontModule (ref), reactModule (ref)
+	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), getGameTileMetadataFontModule (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = useDesignTokens()
 	local var2 = useTextSizeOffset()
 	local var3 = useTokens()
@@ -36,7 +39,8 @@ return function(p1)
 			Position = UDim2.new(0, 0, 0.5, 0),
 			AnchorPoint = Vector2.new(0, 0.5),
 			TextSize = var6.FontSize,
-			Font = var6.Font,
+			Font = if foundationFontFaceMigration then nil else var6.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var6.Font) else nil,
 			TextTransparency = var5.Transparency,
 			TextColor3 = var5.Color3,
 			TextWrapped = p1.TextWrapped or false,

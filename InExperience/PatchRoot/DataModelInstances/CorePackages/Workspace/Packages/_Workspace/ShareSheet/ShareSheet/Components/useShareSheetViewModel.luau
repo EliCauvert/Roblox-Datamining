@@ -3,6 +3,7 @@ local parent = shareSheet.Parent
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local fFlagShareSheetHoldRecipientsWhileSendingModule = require(shareSheet.Flags.FFlagShareSheetHoldRecipientsWhileSending)
+local fFlagShareSheetLocalizeStringsModule = require(shareSheet.Flags.FFlagShareSheetLocalizeStrings)
 local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 local var1 = if fFlagShareSheetPeoplePickerEnabledModule then require(shareSheet.Stores.GetUniversalShareSheetStore) else nil
 local getExternalChatMessageSenderStoreModule = require(parent.AppChat.GetExternalChatMessageSenderStore)
@@ -16,7 +17,7 @@ local useShareSheetSelectionModule = require(script.Parent.useShareSheetSelectio
 local useShareSheetSendModule = require(script.Parent.useShareSheetSend)
 
 return function(p1)
-	-- upvalues: fFlagShareSheetPeoplePickerEnabledModule (ref), var1 (ref), signalsReactModule (ref), getExternalChatMessageSenderStoreModule (ref), useShareSheetSelectionModule (ref), fFlagShareSheetHoldRecipientsWhileSendingModule (ref), useShareSheetSendModule (ref), useShareSheetConversationModelModule (ref), useLocalization (ref), reactModule (ref), shareSheetTelemetryModule (ref), var2 (ref), getAppFeaturePolicies (ref)
+	-- upvalues: fFlagShareSheetPeoplePickerEnabledModule (ref), var1 (ref), signalsReactModule (ref), getExternalChatMessageSenderStoreModule (ref), useShareSheetSelectionModule (ref), fFlagShareSheetHoldRecipientsWhileSendingModule (ref), useShareSheetSendModule (ref), useShareSheetConversationModelModule (ref), useLocalization (ref), fFlagShareSheetLocalizeStringsModule (ref), reactModule (ref), shareSheetTelemetryModule (ref), var2 (ref), getAppFeaturePolicies (ref)
 	local var3 = nil
 	local var4 = nil
 	
@@ -47,7 +48,8 @@ return function(p1)
 	})
 	local var9 = useLocalization({
 		send = "CommonUI.Features.Action.Send",
-		share = "Feature.SocialShare.Action.Share"
+		share = "Feature.SocialShare.Action.Share",
+		messagePlaceholder = if fFlagShareSheetLocalizeStringsModule then "Feature.UniversalShareSheet.InputPlaceholder.ShareMessage" else nil
 	})
 	local var10 = reactModule.useCallback(function()
 		-- upvalues: shareSheetTelemetryModule (copy), p1 (ref)
@@ -120,7 +122,7 @@ return function(p1)
 		isPeoplePickerDisplayed = if fFlagShareSheetPeoplePickerEnabledModule then var4 else nil,
 		isSending = var7.isSending,
 		isSocialRowLoading = var8.isSocialRowLoading,
-		messagePlaceholder = p1.messagePlaceholder or "Share a message",
+		messagePlaceholder = p1.messagePlaceholder or (if fFlagShareSheetLocalizeStringsModule then var9.messagePlaceholder else "Share a message"),
 		onComposerFocused = var10,
 		onCloseWithReason = p1.onCloseWithReason,
 		onConversationActivated = var11,

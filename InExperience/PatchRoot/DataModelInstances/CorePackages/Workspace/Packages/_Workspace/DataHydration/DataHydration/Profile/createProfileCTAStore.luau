@@ -4,6 +4,7 @@ local createDataCacheModule = require(dataHydration.createDataCache)
 local createDataResolverModule = require(dataHydration.createDataResolver)
 local _ = require(dataHydration.DataHydrationTypes)
 local cryoModule = require(parent.Cryo)
+local promiseModule = require(parent.Promise)
 local name = require(parent.Loggers).Logger:new(script.Name)
 local requestsModule = require(dataHydration.Profile.Requests)
 local _ = require(dataHydration.Profile.Enums.ProfileCTAEnums)
@@ -23,7 +24,7 @@ local list = {
 local list_1 = { { component = "JoinUserActions" } }
 
 return function(p1)
-	-- upvalues: createDataCacheModule (ref), fFlagJoinabilityCTARefactor (ref), list (ref), cryoModule (ref), requestsModule (ref), fFlagProfileCTAHydratePresenceFromMetadataModule (ref), hydratePresenceFromProfileMetadataModule (ref), createDataResolverModule (ref), profileJoinUserActionsProcessDelaySec (ref), name (ref), list_1 (ref)
+	-- upvalues: createDataCacheModule (ref), fFlagJoinabilityCTARefactor (ref), list (ref), cryoModule (ref), requestsModule (ref), fFlagProfileCTAHydratePresenceFromMetadataModule (ref), hydratePresenceFromProfileMetadataModule (ref), createDataResolverModule (ref), profileJoinUserActionsProcessDelaySec (ref), name (ref), list_1 (ref), dataHydration (ref), promiseModule (ref)
 	local var1 = createDataCacheModule()
 	local var2 = if fFlagJoinabilityCTARefactor then createDataCacheModule() else nil
 	local var3 = if fFlagJoinabilityCTARefactor and p1 and p1.components then p1.components else list
@@ -94,56 +95,87 @@ return function(p1)
 			name:warning(`Failed to fetch JoinUserActions: {tostring(p7)}`)
 		end,
 		fetchFn = function(p7)
-			-- upvalues: fetchComponent (ref), list_1 (copy)
-			return fetchComponent(p7, list_1, list_1[1].component, true)
+			-- upvalues: list_1 (copy), cryoModule (copy), requestsModule (copy), fFlagProfileCTAHydratePresenceFromMetadataModule (copy), hydratePresenceFromProfileMetadataModule (copy), dataHydration (copy), promiseModule (copy)
+			local component = list_1[1].component
+			local var9 = cryoModule.Dictionary.keys(p7)
+			local var10 = true
+			local joinUserActionsTelemetryModule = require(dataHydration.Profile.JoinUserActionsTelemetry)
+			
+			return requestsModule.GetUserProfileCTA(var9, list_1):andThen(function(p8)
+				-- upvalues: var9 (ref), component (ref), fFlagProfileCTAHydratePresenceFromMetadataModule (copy), var10 (ref), hydratePresenceFromProfileMetadataModule (copy)
+				local t = {}
+				
+				if p8.responseBody and p8.responseBody.profiles then
+					for i, v in var9 do
+						local var11 = tostring(v)
+						local var12 = p8.responseBody.profiles[var11]
+						t[var11] = var12 and (var12.components and (var12.components[component] or {}))
+						
+						if fFlagProfileCTAHydratePresenceFromMetadataModule and var10 then
+							hydratePresenceFromProfileMetadataModule(var11, var12 and var12.metadata)
+						end
+					end
+				end
+				return t
+			end):andThen(function(p9)
+				-- upvalues: joinUserActionsTelemetryModule (ref)
+				joinUserActionsTelemetryModule.logFetchResult("Success")
+				
+				return p9
+			end):catch(function(p9)
+				-- upvalues: joinUserActionsTelemetryModule (ref), promiseModule (copy)
+				joinUserActionsTelemetryModule.logFetchResult("Failed")
+				
+				return promiseModule.reject(p9)
+			end)
 		end
 	}) else nil
 	
 	return {
-		getCTA = function(p7, p8)
+		getCTA = function(p8, p9)
 			-- upvalues: var6 (ref)
-			local var9 = nil
+			local var11 = nil
 			
-			if p8 ~= nil then
-				local var10 = p8 == true
+			if p9 ~= nil then
+				local var12 = p9 == true
 				
-				var9 = function(_)
-					-- upvalues: var10 (ref)
-					return var10
+				var11 = function(_)
+					-- upvalues: var12 (ref)
+					return var12
 				end
 			end
-			return var6.getAndFetchItem(p7, var9)
+			return var6.getAndFetchItem(p8, var11)
 		end,
-		getBatchCTAs = function(p7, p8)
+		getBatchCTAs = function(p8, p9)
 			-- upvalues: var6 (ref)
-			local var9 = nil
+			local var11 = nil
 			
-			if p8 then
-				local var10 = 0
+			if p9 then
+				local var12 = 0
 				
-				var9 = function(_)
-					-- upvalues: var10 (write), p7 (ref), p8 (ref)
-					var10 += 1
-					local var11 = p7[var10]
+				var11 = function(_)
+					-- upvalues: var12 (write), p8 (ref), p9 (ref)
+					var12 += 1
+					local var13 = p8[var12]
 					
-					return if var11 then p8[var11] == true else false
+					return if var13 then p9[var13] == true else false
 				end
 			end
-			return var6.getAndFetchItems(p7, var9)
+			return var6.getAndFetchItems(p8, var11)
 		end,
-		getJoinUserActions = if fFlagJoinabilityCTARefactor then function(p7, p8)
+		getJoinUserActions = if fFlagJoinabilityCTARefactor then function(p8, p9)
 			-- upvalues: var8 (ref)
-			local var9 = nil
+			local var11 = nil
 			
-			if p8 ~= nil then
-				local var10 = p8 == true
+			if p9 ~= nil then
+				local var12 = p9 == true
 				
-				var9 = function(_)
-					-- upvalues: var10 (ref)
-					return var10
+				var11 = function(_)
+					-- upvalues: var12 (ref)
+					return var12
 				end
 			end
-			return var8.getAndFetchItem(p7, var9)
+			return var8.getAndFetchItem(p8, var11)
 		end else nil,
 		clear = function()
 			-- upvalues: var1 (ref), var6 (ref), fFlagJoinabilityCTARefactor (copy), var2 (ref), var8 (ref)

@@ -2,7 +2,7 @@
 local logging = require(parent.Parent.AppCommonLib).Logging
 local checkAndSendEventModule = require(parent.Utils.checkAndSendEvent)
 
-return function(p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: logging (ref), checkAndSendEventModule (ref)
 	local t = {}
 	
@@ -29,6 +29,18 @@ return function(p1, p2, p3, p4)
 			return
 		end
 		t.origin = p4
+	end
+	if p5 ~= nil then
+		if type(p5) ~= "string" then
+			logging.warn("Failure logging authPageLoad: Expected field to be a string but got " .. type(p5))
+		end
+		t.field = tostring(p5)
+	end
+	if p6 ~= nil then
+		if type(p6) ~= "string" then
+			logging.warn("Failure logging authPageLoad: Expected associatedText to be a string but got " .. type(p6))
+		end
+		t.associatedText = tostring(p6)
 	end
 	checkAndSendEventModule(p1, "authPageload", t)
 end

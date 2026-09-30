@@ -3,11 +3,14 @@ local signalsModule = require(parent.Signals)
 local appCompositionModule = require(parent.AppComposition)
 local appSplitViewModule = require(parent.AppSplitView)
 local displayModule = require(parent.Display)
+local sharedFlagsModule = require(parent.SharedFlags)
 local createCurrentScreenOrientationSignalModule = require(script.Parent.Parent.Utils.createCurrentScreenOrientationSignal)
 local supportPaneWidthRulesModule = require(script.Parent.Parent.Utils.supportPaneWidthRules)
+local splitPaneVariantModule = require(script.Parent.Parent.Utils.SplitPaneVariant)
 local getRegionOverrides = appCompositionModule.getRegionOverrides
 local regionName = appCompositionModule.RegionName
 local supportPaneMode = appSplitViewModule.Enums.SupportPaneMode
+local fFlagSplitPaneFixClassicThemeHeader = sharedFlagsModule.FFlagSplitPaneFixClassicThemeHeader
 
 local function _()
 	-- upvalues: getRegionOverrides (ref), regionName (ref)
@@ -22,15 +25,15 @@ local function _()
 end
 
 local function evaluateShouldDefaultToCollapsed(p1)
-	-- upvalues: displayModule (ref), supportPaneWidthRulesModule (ref)
-	return supportPaneWidthRulesModule.shouldDefaultToCollapsed(displayModule.GetDisplayStore(p1).getDesignSpaceViewportWidth(p1))
+	-- upvalues: splitPaneVariantModule (ref), displayModule (ref), supportPaneWidthRulesModule (ref)
+	return if splitPaneVariantModule.isPaneCollapsedByDefault() then true else supportPaneWidthRulesModule.shouldDefaultToCollapsed(displayModule.GetDisplayStore(p1).getDesignSpaceViewportWidth(p1))
 end
 
 local var1 = nil
 local var2 = nil
 
 local function createSplitPaneStore()
-	-- upvalues: getRegionOverrides (ref), regionName (ref), var2 (write), createCurrentScreenOrientationSignalModule (ref), displayModule (ref), supportPaneWidthRulesModule (ref), signalsModule (ref), evaluateShouldDefaultToCollapsed (ref), supportPaneMode (ref), var1 (write)
+	-- upvalues: getRegionOverrides (ref), regionName (ref), var2 (write), createCurrentScreenOrientationSignalModule (ref), displayModule (ref), supportPaneWidthRulesModule (ref), signalsModule (ref), evaluateShouldDefaultToCollapsed (ref), supportPaneMode (ref), var1 (write), fFlagSplitPaneFixClassicThemeHeader (ref)
 	local var3 = if getRegionOverrides and regionName then getRegionOverrides(regionName.SupportRegion) else nil
 	local var4 = if var3 and var3.widthScale then var3.widthScale else 0.33
 	local var5 = if var3 and var3.minWidth then var3.minWidth else 0
@@ -84,7 +87,15 @@ local function createSplitPaneStore()
 		
 		return if designSpaceViewportWidth <= 0 then var4 else (var9(p1) or math.clamp(designSpaceViewportWidth * var4, var5, var6)) / designSpaceViewportWidth
 	end)
-	local var19, var20 = signalsModule.createSignal(false)
+	local var19 = nil
+	local var20 = nil
+	
+	if fFlagSplitPaneFixClassicThemeHeader then
+		local var21, var22 = signalsModule.createSignal(nil)
+		var19 = var21
+		var20 = var22
+	end
+	local var23, var24 = signalsModule.createSignal(false)
 	
 	local function setSupportWidth(value)
 		-- upvalues: displayModule (copy), var10 (ref), var5 (ref), var6 (ref)
@@ -92,13 +103,13 @@ local function createSplitPaneStore()
 		var10(math.clamp(value / (if platformScale and platformScale > 0 then platformScale else 1), var5, var6))
 	end
 	
-	local var21 = signalsModule.createComputed(function(p1)
-		-- upvalues: evaluateBreakpointEnabled (ref), var19 (ref)
-		return evaluateBreakpointEnabled(p1) and var19(p1)
+	local var25 = signalsModule.createComputed(function(p1)
+		-- upvalues: evaluateBreakpointEnabled (ref), var23 (ref)
+		return evaluateBreakpointEnabled(p1) and var23(p1)
 	end)
-	local var22 = signalsModule.createComputed(function(p1)
-		-- upvalues: var21 (ref), var16 (ref)
-		return if var21(p1) then var16(p1) else nil
+	local var26 = signalsModule.createComputed(function(p1)
+		-- upvalues: var25 (ref), var16 (ref)
+		return if var25(p1) then var16(p1) else nil
 	end)
 	
 	return {
@@ -117,18 +128,20 @@ local function createSplitPaneStore()
 			-- upvalues: var6 (ref)
 			return var6
 		end,
+		getContentRegionRect = if fFlagSplitPaneFixClassicThemeHeader then var19 else nil,
+		setContentRegionRect = if fFlagSplitPaneFixClassicThemeHeader then var20 else nil,
 		getIsBreakpointEnabled = signalsModule.createComputed(evaluateBreakpointEnabled),
-		getIsSplitPaneActive = var21,
-		getIsSplitEnabled = var21,
-		getSupportPaneModeIfActive = var22,
+		getIsSplitPaneActive = var25,
+		getIsSplitEnabled = var25,
+		getSupportPaneModeIfActive = var26,
 		getIsSplitPaneCollapsedOrNotActive = signalsModule.createComputed(function(p1)
-			-- upvalues: var22 (ref), supportPaneMode (copy)
-			local var23 = var22(p1)
+			-- upvalues: var26 (ref), supportPaneMode (copy)
+			local var27 = var26(p1)
 			
-			return if var23 ~= nil then var23 == supportPaneMode.Collapsed else true
+			return if var27 ~= nil then var27 == supportPaneMode.Collapsed else true
 		end),
-		getIsSplitEligible = var19,
-		setIsSplitEligible = var20,
+		getIsSplitEligible = var23,
+		setIsSplitEligible = var24,
 		getSupportPaneMode = getSupportPaneMode,
 		getShouldDefaultToCollapsed = var15,
 		setSupportPaneMode = function(value)
@@ -146,14 +159,14 @@ local function createSplitPaneStore()
 		end,
 		toggleSupportPaneMode = function(p1)
 			-- upvalues: var16 (ref), supportPaneMode (copy), var13 (ref), var14 (ref), var12 (ref)
-			local var23 = if var16(false) == p1 then supportPaneMode.Normal else p1
+			local var27 = if var16(false) == p1 then supportPaneMode.Normal else p1
 			
 			if var13(false) == nil then
-				var12(var23)
+				var12(var27)
 				
 				return
 			end
-			var14(var23)
+			var14(var27)
 		end
 	}
 end

@@ -4,6 +4,9 @@ local parent_2 = parent_1.Parent
 local roactModule = require(parent_2.Roact)
 local fitFrameVertical = require(parent_2.RoactFitComponents).FitFrameVertical
 local UIBloxModule = require(parent_2.UIBlox)
+local foundationModule = require(parent_2.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local withStyle = UIBloxModule.Core.Style.withStyle
@@ -52,11 +55,11 @@ function name.render(p1)
 end
 
 function name.renderAlert(p1, p2)
-	-- upvalues: withStyle (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), productDetailsModule (ref), buttonType (ref)
+	-- upvalues: withStyle (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), productDetailsModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), buttonType (ref)
 	local props = p1.props
 	
 	return withStyle(function(p3)
-		-- upvalues: props (ref), p2 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p1 (ref), productDetailsModule (copy), buttonType (copy)
+		-- upvalues: props (ref), p2 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p1 (ref), productDetailsModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), buttonType (copy)
 		local theme = p3.Theme
 		local font = p3.Font
 		local var1 = p2.YouNeed:gsub("{robux}", string.format("<font color=\"rgb(%s)\">%s%s</font>", tostring(Color3.new(math.round(theme.TextEmphasis.Color.R * 255), math.round(theme.TextEmphasis.Color.G * 255), math.round(theme.TextEmphasis.Color.B * 255))), utf8.char(57346), tostring(props.itemRobuxCost - props.balanceAmount)))
@@ -67,7 +70,7 @@ function name.renderAlert(p1, p2)
 			anchorPoint = props.anchorPoint,
 			title = p2.InsufficientRobuxTitle,
 			middleContent = function()
-				-- upvalues: roactModule (copy), fitFrameVertical (copy), p1 (copy), productDetailsModule (copy), props (copy), theme (ref), font (ref), var1 (ref)
+				-- upvalues: roactModule (copy), fitFrameVertical (copy), p1 (copy), productDetailsModule (copy), props (copy), theme (ref), foundationFontFaceMigration (copy), font (ref), normalizeFontFace (copy), p3 (ref), var1 (ref)
 				return roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,
 					width = UDim.new(1, 0),
@@ -99,7 +102,8 @@ function name.renderAlert(p1, p2)
 						TextWrapped = true,
 						Size = UDim2.new(0, p1.state.contentSize.X, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
-						Font = font.Body.Font,
+						Font = if foundationFontFaceMigration then nil else font.Body.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 						Text = var1,
 						TextSize = font.BaseSize * font.Body.RelativeSize,
 						TextColor3 = theme.TextDefault.Color,

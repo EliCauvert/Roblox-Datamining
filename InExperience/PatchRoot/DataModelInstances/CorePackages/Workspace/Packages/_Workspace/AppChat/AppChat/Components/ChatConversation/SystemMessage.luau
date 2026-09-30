@@ -2,7 +2,12 @@
 local text = require(parent.AppCommonLib).Text
 local roactModule = require(parent.Roact)
 local memoize = require(parent.AppCommonLib).memoize
-local withStyle = require(parent.UIBlox).Style.withStyle
+local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local getTextSize = require(parent.Style).GetTextSize
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+local withStyle = UIBloxModule.Style.withStyle
 local systemMessage = roactModule.PureComponent:extend("SystemMessage")
 systemMessage.defaultProps = {
 	LayoutOrder = nil,
@@ -11,20 +16,20 @@ systemMessage.defaultProps = {
 }
 
 function systemMessage.init(p1)
-	-- upvalues: memoize (ref), text (ref)
+	-- upvalues: memoize (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref)
 	p1.calculateSize = memoize(function(p2, p3, p4, p5)
-		-- upvalues: text (copy)
-		return text.GetTextBounds(p2, p4, p5, Vector2.new(p3, 1000))
+		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), text (copy)
+		return if foundationFontFaceMigration then getTextSize(p2, p5, p4, Vector2.new(p3, 1000)) else text.GetTextBounds(p2, p4, p5, Vector2.new(p3, 1000))
 	end)
 end
 
 function systemMessage.render(p1)
-	-- upvalues: withStyle (ref), roactModule (ref)
+	-- upvalues: withStyle (ref), foundationFontFaceMigration (ref), roactModule (ref), normalizeFontFace (ref)
 	return withStyle(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy)
+		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), roactModule (copy), normalizeFontFace (copy)
 		local captionBody = p2.Font.CaptionBody
 		local var1 = p2.Font.BaseSize * captionBody.RelativeSize
-		local var2 = p1.calculateSize(p1.props.Text, p1.props.maxWidth, captionBody.Font, var1)
+		local var2 = p1.calculateSize(p1.props.Text, p1.props.maxWidth, if foundationFontFaceMigration then p2.Tokens.Typography.BodySmall.Font else captionBody.Font, var1)
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -54,7 +59,8 @@ function systemMessage.render(p1)
 					BorderSizePixel = 0,
 					TextWrapped = true,
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Font = captionBody.Font,
+					Font = if foundationFontFaceMigration then nil else captionBody.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodySmall.Font) else nil,
 					Position = UDim2.new(0.5, 0, 0.5, 0),
 					Size = UDim2.new(1, 0, 1, 0),
 					Text = p1.props.Text,

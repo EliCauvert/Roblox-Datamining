@@ -94,6 +94,8 @@ return {
 					name = v_1.name,
 					items = v_1.items,
 					categoryType = v_1.categoryType,
+					stableCategoryId = v_1.stableCategoryId,
+					categoryGroup = v_1.categoryGroup,
 					paymentSessionId = v_1.paymentSessionId,
 					bonusJwt = v_1.bonusJwt,
 					robuxPackages = list_1

@@ -9,15 +9,17 @@ local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemet
 local copyLinkModule = require(shareSheet.copyLink)
 local shareLinkModule = require(shareSheet.shareLink)
 local iconName = foundationModule.Enums.IconName
+local fFlagShareSheetLocalizeStringsModule = require(shareSheet.Flags.FFlagShareSheetLocalizeStrings)
 local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
 return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), copyLinkModule (ref), shareSheetTelemetryModule (ref), shareLinkModule (ref), shareSheetRowModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), shareSheetItemContainerModule (ref), iconName (ref)
+	-- upvalues: reactModule (ref), useLocalization (ref), fFlagShareSheetLocalizeStringsModule (ref), copyLinkModule (ref), shareSheetTelemetryModule (ref), shareLinkModule (ref), shareSheetRowModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), shareSheetItemContainerModule (ref), iconName (ref)
 	local var1, var2 = reactModule.useState(false)
 	local var3 = reactModule.useRef(nil)
 	local var4 = useLocalization({
 		copyLink = "Feature.SocialShare.Action.CopyLink",
-		share = "Feature.SocialShare.Action.Share"
+		share = "Feature.SocialShare.Action.Share",
+		copied = if fFlagShareSheetLocalizeStringsModule then "Feature.UniversalShareSheet.Action.CopiedLink" else nil
 	})
 	local var5 = reactModule.useCallback(function()
 		-- upvalues: var2 (ref), var3 (ref)
@@ -68,7 +70,7 @@ return function(p1)
 		CopyLink = reactModule.createElement(shareSheetItemContainerModule, {
 			LayoutOrder = 1,
 			icon = if var1 then iconName.Check else iconName.ChainLink,
-			label = if var1 then "Copied" else var4.copyLink,
+			label = if var1 then if fFlagShareSheetLocalizeStringsModule then var4.copied else "Copied" else var4.copyLink,
 			onActivated = var6,
 			shouldAnimate = var1
 		}),

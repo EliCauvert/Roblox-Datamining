@@ -6,11 +6,12 @@ local constants = require(parent.NavigationRodux).Constants
 local splitPaneContextModule = require(script.Parent.Parent.Context.SplitPaneContext)
 local splitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
 local isSupportPaneScreenModule = require(script.Parent.Parent.Utils.isSupportPaneScreen)
+local splitPaneVariantModule = require(script.Parent.Parent.Utils.SplitPaneVariant)
 local supportPaneMode = appSplitViewModule.Enums.SupportPaneMode
 local tempRnSwitchNavigatorName = constants.TempRnSwitchNavigatorName
 
 return function(p1, p2, p3, p4)
-	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), supportPaneMode (ref), isSupportPaneScreenModule (ref)
+	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), splitPaneVariantModule (ref), supportPaneMode (ref), isSupportPaneScreenModule (ref)
 	local store = splitPaneStoreModule.getStore()
 	local var1 = signalsReactModule.useSignalState(store.getSupportPaneMode)
 	local var2 = signalsReactModule.useSignalState(store.getSupportWidth)
@@ -62,12 +63,25 @@ return function(p1, p2, p3, p4)
 	local var9 = p1[1] ~= nil and (p1[1].descriptor ~= nil and (p1[1].descriptor.state ~= nil and p1[1].descriptor.state.routeName == tempRnSwitchNavigatorName))
 	local var10 = reactModule.useRef(0)
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var5 (ref), var9 (ref), var1 (ref), supportPaneMode (copy), store (ref)
+		-- upvalues: var10 (ref), var5 (ref), var9 (ref), splitPaneVariantModule (copy), store (ref), var1 (ref), supportPaneMode (copy)
 		local current = var10.current
 		var10.current = var5
 		
-		if not var9 or var1 == supportPaneMode.Normal then return end
-		if (current > 0 and var5 == 0) or (current == 0 and var5 > 0) then
+		if not var9 then return end
+		local var11 = current > 0 and var5 == 0
+		local var12 = current == 0 and var5 > 0
+		
+		if var11 and splitPaneVariantModule.shouldCollapseOnSupportClose() then
+			store.resetSupportPaneMode()
+			
+			return
+		elseif var12 and splitPaneVariantModule.shouldAutoExpandOnSupportOpen() and var1 ~= supportPaneMode.Normal then
+			store.setSupportPaneMode(supportPaneMode.Normal)
+			
+			return
+		elseif splitPaneVariantModule.isPaneCollapsedByDefault() and not splitPaneVariantModule.shouldAutoExpandOnSupportOpen() then return end
+		if var1 == supportPaneMode.Normal then return end
+		if var11 or var12 then
 			store.setSupportPaneMode(supportPaneMode.Normal)
 		end
 	end, { var9, var5, store, var1 })

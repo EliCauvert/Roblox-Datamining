@@ -451,6 +451,7 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Resetten
+CommonUI.Messages.Action.View,Bekijken
 CommonUI.Messages.Label.Password,Wachtwoord
 CommonUI.Messages.Response.NoResults,Geen resultaten
 CommonUI.Messages.Response.PageError,Fout bij het laden van pagina
@@ -1370,7 +1371,7 @@ Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,Publiceren
 Feature.Avatar.BackgroundGeneration.Action.Upload,Uploaden
-Feature.Avatar.BackgroundGeneration.Action.View,Bekijken
+Feature.Avatar.BackgroundGeneration.Action.View,
 Feature.Avatar.BackgroundGeneration.Action.ViewExclusiveBackgrounds,
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Achtergronden maken met Plus.
 Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,"Je achtergrond is nog niet gepubliceerd. Als je nu stopt, gaat die verloren."
@@ -2244,7 +2245,6 @@ Feature.Build.Label.World,Wereld
 Feature.Build.Message.AccountRequirements,Je account voldoet niet aan de vereisten om Build te gebruiken.
 Feature.Build.Message.AccountTooNew,Je account is te nieuw om te publiceren. Probeer het nog een keer wanneer het 2 dagen oud is.
 Feature.Build.Message.AdCampaignCreateFailed,Kan je campagne niet aanmaken. Probeer het opnieuw.
-Feature.Build.Message.AdCampaignCreated,Advertentiecampagne is aangemaakt
 Feature.Build.Message.AdPerformanceLoadFailed,Kan advertentieprestaties niet laden
 Feature.Build.Message.AdsPromotionBannerSubtitle,Vergroot gratis je doelgroep
 Feature.Build.Message.AdsPromotionBannerTitle,Je hebt nog {promotionCount} gratis promoties over
@@ -2972,7 +2972,6 @@ Feature.Chat.Message.LeaveGroup,Je kunt niet blijven chatten met deze groep.
 Feature.Chat.Message.LeaveGroup.V2,Weet je zeker dat je de groep wilt verlaten?
 Feature.Chat.Message.MakeConnectionsToChat,Maak vrienden op Roblox om samen te chatten
 Feature.Chat.Message.MakeConnectionsToParty,Maak vrienden op Roblox om samen een groep te vormen
-Feature.Chat.Message.MakeFriendsToChat,
 Feature.Chat.Message.MakeFriendsToParty,
 Feature.Chat.Message.MessageContentModerated,Je bericht is gemodereerd en is niet verzonden.
 Feature.Chat.Message.MessageUnavailable,Bericht niet beschikbaar
@@ -2983,8 +2982,6 @@ Feature.Chat.Message.RemoveUser,Weet je zeker dat je {USERNAME} uit deze chatgro
 Feature.Chat.Message.RemoveUser.V2,Weet je zeker dat je {USERNAME} uit deze groep wilt verwijderen?
 Feature.Chat.Message.RemovedFromConversation,Je bent uit de groep verwijderd.
 Feature.Chat.Message.SeveralUsersTyping,Meerdere gebruikers zijn aan het typen...
-Feature.Chat.Message.TurnOnChat,
-Feature.Chat.Message.TurnOnParty,
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} en {DISPLAY_NAME_2} zijn aan het typen...
 Feature.Chat.PresetChat.Disclaimer,Met Quick Words kunnen spelers van alle leeftijden de game coördineren.
 Feature.Chat.Response.ChatNameFullyModerated,De naam van de chatgroep is gemodereerd.
@@ -3376,6 +3373,9 @@ Feature.GameFollows.TooltipFollowLimitReached,Limiet bereikt. Stop met het volge
 Feature.GameFollows.TooltipNotificationsLimitReached,Limiet bereikt. Schakel eerst meldingen voor andere ervaringen uit.
 Feature.GameFollows.TooltipTurnedOffNotifications,Meldingen uitgeschakeld voor {experienceName}
 Feature.GameFollows.TooltipTurnedOnNotifications,Meldingen ingeschakeld voor {experienceName}
+Feature.GameJoin.Description.DifferentServer,Je begint op een andere server
+Feature.GameJoin.Label.PlayTogether,Jullie kunnen samen spelen
+Feature.GameJoin.Label.PlayTogetherSoon,Jullie kunnen binnenkort samen spelen
 Feature.GamePage.Action.BackToTop,Terug naar boven
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -4019,8 +4019,10 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,"{discountPercent}% ko
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{discountPercent}% korting op deze items na {periodIndex} {periodType}
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Door op 'Doorgaan' te klikken, ga je akkoord met de {linkStart}Abonnementsvoorwaarden van Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Door op 'Probeer het gratis' te klikken, ga je akkoord met de {linkStart}Abonnementsvoorwaarden van Roblox.{linkEnd} Je gratis proefperiode eindigt over 1 maand en er worden elke maand automatisch kosten in rekening gebracht. Je kunt op elk moment opzeggen."
+Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Door op 'Probeer het gratis' te klikken, ga je akkoord met de {linkStart}Abonnementsvoorwaarden van Roblox.{linkEnd} Je gratis proefperiode eindigt over {trialDuration} {trialPeriodLabel} en er worden elke {billingPeriodLabel} automatisch kosten in rekening gebracht. Je kunt op elk moment opzeggen."
 Feature.RobloxSubscription.Label.FreeTrialText,Gratis proefperiode krijgen
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 maand gratis,{boldEnd} daarna {price}/{periodType}"
+Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} gratis,{boldEnd} daarna {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,maand
 Feature.RobloxSubscription.Label.months,maanden
 Feature.RobloxSubscription.Title.AgeCheckTrial,Ontvang 1 gratis week Plus
@@ -4030,6 +4032,8 @@ Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus nemen
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus is hier niet beschikbaar
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Je kunt vóór iedereen anders deelnemen aan het evenement.
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Vroege toegang met Plus
+Feature.RobloxSubscription.label.week,week
+Feature.RobloxSubscription.label.weeks,weken
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Accountstatus, schendingen en bezwaren"
 Feature.Schools.Label.Classmates,Klasgenoten
 Feature.Screentime.Content.ScreentimeLimitDialog,Je hebt je dagelijkse schermtijdlimiet bereikt. Kom morgen terug om Roblox weer te gebruiken.
@@ -4421,6 +4425,14 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox heeft je deelname aan deze game {number} uur opgeschort
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox heeft je deelname aan deze game 1 minuut opgeschort
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox heeft je deelname aan deze game {number} minuten opgeschort
+Feature.UniversalShareSheet.Action.CopiedLink,
+Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,Een bericht delen
+Feature.UniversalShareSheet.Response.NotSharedMessage,Bericht kan niet worden verzonden
+Feature.UniversalShareSheet.Response.NotSharedMultipleMessages,Berichten kunnen niet worden verzonden
+Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 andere
+Feature.UniversalShareSheet.Response.SharedMessage,Bericht is verzonden
+Feature.UniversalShareSheet.Response.SharedMultipleMessages,Berichten zijn verzonden
+Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} anderen
 Feature.VerificationUpsell.Action.AddPhone,Telefoonnummer toevoegen
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Telefoonnummer toevoegen voor spraakchat

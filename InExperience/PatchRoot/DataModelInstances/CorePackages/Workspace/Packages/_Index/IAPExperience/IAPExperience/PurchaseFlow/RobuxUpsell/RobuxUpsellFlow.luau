@@ -55,7 +55,6 @@ local fIntLegacyPurchaseFPSTrackingTimeout = require(parent_2.SharedFlags).FIntL
 local fIntTTIUnifiedPurchaseSamplingRate = require(parent_2.SharedFlags).FIntTTIUnifiedPurchaseSamplingRate
 local fFlagAddCenterDialogForUnifiedPurchaseModal = require(parent_2.SharedFlags).FFlagAddCenterDialogForUnifiedPurchaseModal
 game:DefineFastFlag("DisableNonSchematizedInGameRobuxUpsellEvent", false)
-game:DefineFastFlag("EnableSchematizedInGameRobuxUpsellEvent2", false)
 local fixUnifiedUpsellCompletionModal = game:DefineFastFlag("FixUnifiedUpsellCompletionModal", false)
 local _ = require(parent_1.ProductPurchase.PricingTypes)
 local _ = require(parent_1.ProductPurchase.v3.UnifiedProductPurchaseModalTypes)
@@ -802,19 +801,17 @@ function name.reportUserInput(p1, p2)
 	if not game:GetFastFlag("DisableNonSchematizedInGameRobuxUpsellEvent") and p1.props.onAnalyticEvent then
 		props.onAnalyticEvent("UserPurchaseFlow", var1)
 	end
-	if game:GetFastFlag("EnableSchematizedInGameRobuxUpsellEvent2") then
-		default:logRobloxTelemetryEvent(inGameRobuxUpsellEventModule, {
-			default.StandardizedFields.addOsInfo,
-			default.StandardizedFields.addSessionId
-		}, {
-			universe_id = game.GameId,
-			price = props.itemRobuxCost,
-			view_name = var1.view_name,
-			purchase_event_type = var1.purchase_event_type,
-			input_type = p2,
-			user_id = tostring(if playersService.LocalPlayer and playersService.LocalPlayer.UserId > 0 then playersService.LocalPlayer.UserId else nil)
-		})
-	end
+	default:logRobloxTelemetryEvent(inGameRobuxUpsellEventModule, {
+		default.StandardizedFields.addOsInfo,
+		default.StandardizedFields.addSessionId
+	}, {
+		universe_id = game.GameId,
+		price = props.itemRobuxCost,
+		view_name = var1.view_name,
+		purchase_event_type = var1.purchase_event_type,
+		input_type = p2,
+		user_id = tostring(if playersService.LocalPlayer and playersService.LocalPlayer.UserId > 0 then playersService.LocalPlayer.UserId else nil)
+	})
 end
 
 function name.purchaseStateToOverlayState(_, p1)

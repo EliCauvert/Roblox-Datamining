@@ -5,12 +5,15 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 local UIBloxModule = require(parent.UIBlox)
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local getGameTileMetadataFontModule = require(gameTile.Footer.getGameTileMetadataFont)
-local useTokens = require(parent.Foundation).Hooks.useTokens
+local foundationModule = require(parent.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useTextSizeOffset = UIBloxModule.Core.Style.useTextSizeOffset
 local gameTileTypesModule = require(gameTile.GameTileTypes)
 
 return function(p1)
-	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), gameTileTypesModule (ref), getGameTileMetadataFontModule (ref), reactModule (ref), imageSetLabel (ref)
+	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), gameTileTypesModule (ref), getGameTileMetadataFontModule (ref), reactModule (ref), imageSetLabel (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1, var2
 	local var3 = useDesignTokens()
 	local var4 = useTextSizeOffset()
@@ -65,7 +68,8 @@ return function(p1)
 			Position = UDim2.new(0, var2 + var7, 0.5, 0),
 			AnchorPoint = Vector2.new(0, 0.5),
 			TextSize = fontSize,
-			Font = var9.Font,
+			Font = if foundationFontFaceMigration then nil else var9.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var9.Font) else nil,
 			TextTransparency = var8.Transparency,
 			TextColor3 = var8.Color3,
 			TextTruncate = Enum.TextTruncate.AtEnd,

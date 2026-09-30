@@ -3,6 +3,8 @@ local text = require(parent.AppCommonLib).Text
 local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 local foundationModule = require(parent.Foundation)
+local getTextSize = require(parent.Style).GetTextSize
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local enums = foundationModule.Enums
 local useMessageFtuxTooltipModule = require(script.Parent.useMessageFtuxTooltip)
 local messageFtuxTooltipVariantModule = require(script.Parent.MessageFtuxTooltipVariant)
@@ -12,17 +14,17 @@ local t = {
 }
 
 local var1 = function(p1)
-	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), useMessageFtuxTooltipModule (ref), reactModule (ref), text (ref), enums (ref)
+	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), useMessageFtuxTooltipModule (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), enums (ref)
 	local var2 = cryoModule.Dictionary.union(t, p1)
 	local var3 = foundationModule.Hooks.useTokens()
 	local var4 = useMessageFtuxTooltipModule(var2.variant)
 	local var5, var6 = reactModule.useState(false)
 	local var7, var8 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), text (copy), var4 (ref), var6 (ref), var2 (ref), var8 (ref)
+		-- upvalues: var3 (ref), foundationFontFaceMigration (copy), getTextSize (copy), var4 (ref), text (copy), var6 (ref), var2 (ref), var8 (ref)
 		local var9
 		local titleSmall = var3.Typography.TitleSmall
-		local var10 = text.GetTextWidth(var4.text, titleSmall.Font, titleSmall.FontSize) + var3.Padding.Small * 2
+		local var10 = if foundationFontFaceMigration then getTextSize(var4.text, titleSmall.FontSize, titleSmall.Font, Vector2.new(10000, 10000)).X + var3.Padding.Small * 2 else text.GetTextWidth(var4.text, titleSmall.Font, titleSmall.FontSize) + var3.Padding.Small * 2
 		
 		if var2.messageRef.current then
 			var9 = var2.messageRef.current.AbsoluteSize.X < var10

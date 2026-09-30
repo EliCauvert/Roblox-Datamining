@@ -38,7 +38,6 @@ local chatConversationTelemetryEventsModule = require(script.Parent.Parent.Paren
 local appGame = roactServices.AppGame
 local experienceService = require(parent.ExperienceService).ExperienceService
 local setGamePlaySession = require(parent.RobloxAppSessionization).SetGamePlaySession
-local useIsInExperienceModule = require(appChat.Hooks.useIsInExperience)
 local httpRequestModule = require(parent.HttpRequest)
 local var1 = httpRequestModule.config({
 	requestFunction = function(p1, p2, p3)
@@ -51,7 +50,6 @@ local var1 = httpRequestModule.config({
 })
 local enumScreensModule = require(appChat.EnumScreens)
 local appChatShutdownBeforeLaunch = game:DefineFastFlag("AppChatShutdownBeforeLaunch", false)
-local getFFlagAppChatHidePlayButtonsInExpModule = require(appChat.Flags.getFFlagAppChatHidePlayButtonsInExp)
 local t = {
 	placeId = nil,
 	universeId = nil,
@@ -107,7 +105,7 @@ local _ = function(p1, p2)
 end
 
 function GameCardContainer(p1)
-	-- upvalues: cryoModule (ref), t (ref), useSelector (ref), useCallback (ref), constructGameThumbnailUrlModule (ref), constantsModule (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), useDispatch (ref), apiFetchGameDetails (ref), apiFetchPlayabilityStatus (ref), dataHydrationModule (ref), signalsModule (ref), useMemo (ref), useSignalState (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useEffect (ref), chatConversationTelemetryEventsModule (ref), roundedVariantModule (ref), reactModule (ref), gameCardGroupableModule (ref), useIsInExperienceModule (ref), getFFlagAppChatHidePlayButtonsInExpModule (ref), withLocalization (ref)
+	-- upvalues: cryoModule (ref), t (ref), useSelector (ref), useCallback (ref), constructGameThumbnailUrlModule (ref), constantsModule (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), useDispatch (ref), apiFetchGameDetails (ref), apiFetchPlayabilityStatus (ref), dataHydrationModule (ref), signalsModule (ref), useMemo (ref), useSignalState (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useEffect (ref), chatConversationTelemetryEventsModule (ref), roundedVariantModule (ref), reactModule (ref), gameCardGroupableModule (ref), withLocalization (ref)
 	local var2 = cryoModule.Dictionary.join(t, p1)
 	
 	if not var2.universeId then
@@ -207,16 +205,15 @@ function GameCardContainer(p1)
 		})
 	end
 	
-	local var18 = if getFFlagAppChatHidePlayButtonsInExpModule() then if useIsInExperienceModule() then false else true else true
-	
 	return withLocalization({
 		purchaseGameText = "Feature.GameDetails.Heading.PurchaseGame",
 		viewDetailsText = "Feature.Chat.Action.ViewAssetDetails",
 		playText = "Common.VisitGame.Label.Play",
 		noDescriptionText = "Feature.Chat.Label.NoDescriptionYet"
 	})(function(_)
-		-- upvalues: cryoModule (copy), var2 (ref), var3 (ref), var4 (ref), universeId (ref), placeId (ref), name (ref), description (ref), price (ref), var18 (ref), var6 (ref), enumScreensModule (copy), var8 (ref), var5 (ref), var13 (ref), var12 (ref), renderCard (ref)
+		-- upvalues: cryoModule (copy), var2 (ref), var3 (ref), var4 (ref), universeId (ref), placeId (ref), name (ref), description (ref), price (ref), var6 (ref), enumScreensModule (copy), var8 (ref), var5 (ref), var13 (ref), var12 (ref), renderCard (ref)
 		return renderCard(cryoModule.Dictionary.join(var2, {
+			isPlayButtonEnabled = true,
 			details = var3,
 			playabilityStatus = var4,
 			gameIcon = universeId,
@@ -224,7 +221,6 @@ function GameCardContainer(p1)
 			gameName = name,
 			gameDescription = description,
 			gamePrice = price,
-			isPlayButtonEnabled = var18,
 			viewDetailsEnabled = var6[enumScreensModule.GameDetail],
 			fetchGameData = var8,
 			gameThumbnail = var5,

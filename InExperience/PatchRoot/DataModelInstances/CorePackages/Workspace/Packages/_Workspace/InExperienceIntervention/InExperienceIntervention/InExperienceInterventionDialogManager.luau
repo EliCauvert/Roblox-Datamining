@@ -19,7 +19,6 @@ local constants = require(parent.InterventionShared).Utils.Constants
 local _ = require(inExperienceIntervention.Utils.Types)
 local getFFlagGameJoinTimeoutChatAttemptEnabled = require(parent.SharedFlags).GetFFlagGameJoinTimeoutChatAttemptEnabled
 local fFlagTemporaryAvatarKickWarningDialogModule = require(parent.InterventionShared.FFlagTemporaryAvatarKickWarningDialog)
-local fFlagUniversalFeatureRestrictionReceivers = require(parent.SharedFlags).FFlagUniversalFeatureRestrictionReceivers
 local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
 local var2 = reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), reactFocusNavigationModule (ref), var1 (ref), provider (ref), cursorProvider (ref)
@@ -31,7 +30,7 @@ local var2 = reactModule.memo(function(p1)
 end)
 
 function InExperienceInterventionDialogManager(p1)
-	-- upvalues: reactModule (ref), constants (ref), fFlagUniversalFeatureRestrictionReceivers (ref), fFlagTemporaryAvatarKickWarningDialogModule (ref), SSUIMetaLuaEngineFeature (ref), chatNudgeCustomDialogModule (ref), chatTimeoutCustomDialogModule (ref), chatNudgeToastModule (ref), chatTimeoutToastModule (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (ref), var2 (ref), partyChatNudgeCustomDialog (ref), partyChatTimeoutCustomDialog (ref), chatTimeoutCustomDialogV2Module (ref), chatNudgeCustomDialogV2Module (ref), universalFeatureRestrictionDialog (ref), temporaryAvatarKickWarningDialogModule (ref)
+	-- upvalues: reactModule (ref), constants (ref), fFlagTemporaryAvatarKickWarningDialogModule (ref), SSUIMetaLuaEngineFeature (ref), chatNudgeCustomDialogModule (ref), chatTimeoutCustomDialogModule (ref), chatNudgeToastModule (ref), chatTimeoutToastModule (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (ref), var2 (ref), partyChatNudgeCustomDialog (ref), partyChatTimeoutCustomDialog (ref), chatTimeoutCustomDialogV2Module (ref), chatNudgeCustomDialogV2Module (ref), universalFeatureRestrictionDialog (ref), temporaryAvatarKickWarningDialogModule (ref)
 	local var3 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), constants (copy)
 		p1.uiStateDispatch({
@@ -43,7 +42,7 @@ function InExperienceInterventionDialogManager(p1)
 	local uiState = p1.uiState
 	local treatmentType = uiState.treatmentType
 	local detail = uiState.detail
-	local var4 = if fFlagUniversalFeatureRestrictionReceivers and detail then detail.options else nil
+	local var4 = if detail then detail.options else nil
 	local var5 = if fFlagTemporaryAvatarKickWarningDialogModule and detail then detail.extras else nil
 	reactModule.useEffect(function()
 		-- upvalues: SSUIMetaLuaEngineFeature (copy), uiState (ref)
@@ -107,7 +106,7 @@ function InExperienceInterventionDialogManager(p1)
 				onDismiss = var3,
 				moderationDetail = detail.moderationDetail
 			})
-		}) elseif fFlagUniversalFeatureRestrictionReceivers and treatmentType == constants.TreatmentType.UniversalFeatureRestriction and detail.moderationDetail then reactModule.createElement(var2, {}, {
+		}) elseif treatmentType == constants.TreatmentType.UniversalFeatureRestriction and detail.moderationDetail then reactModule.createElement(var2, {}, {
 			reactModule.createElement(universalFeatureRestrictionDialog, {
 				onDismiss = var3,
 				moderationDetail = detail.moderationDetail,

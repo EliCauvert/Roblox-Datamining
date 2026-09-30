@@ -16,6 +16,8 @@ local momentGeneratedTextFeedbackModule = require(moments.Feedback.momentGenerat
 local refreshOwnMomentsAfterPublishModule = require(moments.Upload.refreshOwnMomentsAfterPublish)
 local setPublishedMomentOnUploadStoreModule = require(moments.Upload.setPublishedMomentOnUploadStore)
 local createPublishedPostResolverModule = require(moments.Upload.createPublishedPostResolver)
+local postLifecycleSubscriptionModule = require(moments.Upload.postLifecycleSubscription)
+local fFlagMomentsRefreshProfileOnPostStatus = sharedFlagsModule.FFlagMomentsRefreshProfileOnPostStatus
 local fFlagMomentsHydratePublishedFeedItemModule = require(moments.Flags.FFlagMomentsHydratePublishedFeedItem)
 local fFlagMomentsRefreshOwnMomentsAfterPublish = sharedFlagsModule.FFlagMomentsRefreshOwnMomentsAfterPublish
 local fFlagMomentsResolvePublishedPostFeedItem = sharedFlagsModule.FFlagMomentsResolvePublishedPostFeedItem
@@ -79,7 +81,7 @@ local function setPublishedPostOnUploadStore(value, p1)
 end
 
 local function makeUploadStore(p1, p2, p3, p4, p5)
-	-- upvalues: fFlagMomentsResolvePublishedPostFeedItem (ref), getFFlagMomentsUseUploadPostAsync (ref), createPublishedPostResolverModule (ref), setPublishedPostOnUploadStore (ref), fFlagMomentsHydratePublishedFeedItemModule (ref), setPublishedMomentOnUploadStoreModule (ref), makeUploadedMomentItem (ref), fFlagMomentsRefreshOwnMomentsAfterPublish (ref), refreshOwnMomentsAfterPublishModule (ref)
+	-- upvalues: fFlagMomentsResolvePublishedPostFeedItem (ref), getFFlagMomentsUseUploadPostAsync (ref), createPublishedPostResolverModule (ref), fFlagMomentsRefreshProfileOnPostStatus (ref), postLifecycleSubscriptionModule (ref), setPublishedPostOnUploadStore (ref), fFlagMomentsHydratePublishedFeedItemModule (ref), setPublishedMomentOnUploadStoreModule (ref), makeUploadedMomentItem (ref), fFlagMomentsRefreshOwnMomentsAfterPublish (ref), refreshOwnMomentsAfterPublishModule (ref)
 	local var2 = if fFlagMomentsResolvePublishedPostFeedItem and getFFlagMomentsUseUploadPostAsync() then createPublishedPostResolverModule({
 		captureType = p2.CaptureType,
 		description = p4,
@@ -88,11 +90,16 @@ local function makeUploadStore(p1, p2, p3, p4, p5)
 	}) else nil
 	
 	return {
-		setUploading = if var2 ~= nil then p1.setUploading else function()
-			-- upvalues: var2 (ref), p1 (ref)
-			var2.captureSnapshot()
+		setUploading = if fFlagMomentsRefreshProfileOnPostStatus or var2 ~= nil then function()
+			-- upvalues: fFlagMomentsRefreshProfileOnPostStatus (copy), postLifecycleSubscriptionModule (copy), var2 (ref), p1 (ref)
+			if fFlagMomentsRefreshProfileOnPostStatus then
+				postLifecycleSubscriptionModule.subscribe()
+			end
+			if var2 ~= nil then
+				var2.captureSnapshot()
+			end
 			p1.setUploading()
-		end,
+		end else p1.setUploading,
 		setFailed = p1.setFailed,
 		setSuccess = function(value)
 			-- upvalues: p1 (ref), var2 (ref), setPublishedPostOnUploadStore (copy), fFlagMomentsHydratePublishedFeedItemModule (copy), setPublishedMomentOnUploadStoreModule (copy), makeUploadedMomentItem (copy), p2 (ref), p3 (ref), p4 (ref), p5 (ref), fFlagMomentsRefreshOwnMomentsAfterPublish (copy), refreshOwnMomentsAfterPublishModule (copy)

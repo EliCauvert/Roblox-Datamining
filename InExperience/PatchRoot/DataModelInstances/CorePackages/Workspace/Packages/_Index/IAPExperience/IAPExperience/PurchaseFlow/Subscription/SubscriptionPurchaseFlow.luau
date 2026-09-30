@@ -8,7 +8,6 @@ local subscriptionPurchaseFlowStateModule = require(parent.SubscriptionPurchaseF
 local animatorModule = require(parent_1.Generic.Animator)
 local purchaseErrorPromptModule = require(parent_1.Generic.PurchaseErrorPrompt)
 local subscriptionPurchasePromptModule = require(parent_1.Subscription.SubscriptionPurchasePrompt)
-local getEnableDisableSubPurchaseModule = require(parent_1.Flags.getEnableDisableSubPurchase)
 local formatSubscriptionPurchaseEventDataModule = require(parent_1.Utility.formatSubscriptionPurchaseEventData)
 local name = roactModule.Component:extend(script.Name)
 local purchaseFlowTypeModule = require(parent_1.Generic.PurchaseFlowType)
@@ -41,7 +40,7 @@ function name.reportPurchaseEvent(p1, p2, p3)
 end
 
 function name.render(p1)
-	-- upvalues: getPartialPageModalMiddleContentWidth (ref), roactModule (ref), animatorModule (ref), subscriptionPurchaseFlowStateModule (ref), subscriptionPurchasePromptModule (ref), getEnableDisableSubPurchaseModule (ref), purchaseErrorPromptModule (ref), purchaseFlowTypeModule (ref), verifiedParentalConsentDialog (ref)
+	-- upvalues: getPartialPageModalMiddleContentWidth (ref), roactModule (ref), animatorModule (ref), subscriptionPurchaseFlowStateModule (ref), subscriptionPurchasePromptModule (ref), purchaseErrorPromptModule (ref), purchaseFlowTypeModule (ref), verifiedParentalConsentDialog (ref)
 	local props = p1.props
 	local purchaseState = props.purchaseState
 	
@@ -51,7 +50,7 @@ function name.render(p1)
 			shouldShow = purchaseState == subscriptionPurchaseFlowStateModule.PurchaseModal,
 			animateDown = getPartialPageModalMiddleContentWidth(props.screenSize.X) == 492,
 			renderChildren = function()
-				-- upvalues: roactModule (copy), subscriptionPurchasePromptModule (copy), props (ref), getEnableDisableSubPurchaseModule (copy), p1 (ref)
+				-- upvalues: roactModule (copy), subscriptionPurchasePromptModule (copy), props (ref), p1 (ref)
 				return roactModule.createElement(subscriptionPurchasePromptModule, {
 					name = props.name,
 					subscriptionProviderName = props.subscriptionProviderName,
@@ -60,8 +59,8 @@ function name.render(p1)
 					disclaimerText = props.disclaimerText,
 					description = props.description,
 					itemIcon = props.itemIcon,
-					disablePurchase = if getEnableDisableSubPurchaseModule() or props.shouldUseNewModalDesign then props.disablePurchase else nil,
-					disablePurchaseText = if getEnableDisableSubPurchaseModule() or props.shouldUseNewModalDesign then props.disablePurchaseText else nil,
+					disablePurchase = props.disablePurchase,
+					disablePurchaseText = props.disablePurchaseText,
 					shouldUseNewModalDesign = props.shouldUseNewModalDesign,
 					isRobuxSubscription = props.isRobuxSubscription,
 					creatorName = props.creatorName,

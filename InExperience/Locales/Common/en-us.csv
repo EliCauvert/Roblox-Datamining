@@ -468,6 +468,7 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,Dismiss
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Reset
+CommonUI.Messages.Action.View,View
 CommonUI.Messages.Label.Password,Password
 CommonUI.Messages.Response.NoResults,No results
 CommonUI.Messages.Response.PageError,Error loading page
@@ -1387,7 +1388,7 @@ Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,Publish
 Feature.Avatar.BackgroundGeneration.Action.Upload,Upload
-Feature.Avatar.BackgroundGeneration.Action.View,View
+Feature.Avatar.BackgroundGeneration.Action.View,
 Feature.Avatar.BackgroundGeneration.Action.ViewExclusiveBackgrounds,
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Create backgrounds with Plus.
 Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,"Your background hasn't been published yet. If you leave now, you'll lose it."
@@ -2263,7 +2264,6 @@ Feature.Build.Label.World,World
 Feature.Build.Message.AccountRequirements,Your account doesn't meet the requirements to use Build.
 Feature.Build.Message.AccountTooNew,Your account is too new to publish. Try again when it's 2 days old.
 Feature.Build.Message.AdCampaignCreateFailed,Couldn't create your campaign. Please try again.
-Feature.Build.Message.AdCampaignCreated,Ad campaign created
 Feature.Build.Message.AdPerformanceLoadFailed,Couldn't load ad performance
 Feature.Build.Message.AdsPromotionBannerSubtitle,Boost your audience for free
 Feature.Build.Message.AdsPromotionBannerTitle,You have {promotionCount} free promotions left
@@ -2359,6 +2359,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays}-day ad campaign
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}-days
 Feature.Build.Title.AdComplete,Ad complete
 Feature.Build.Title.AdCreated,Ad created
+Feature.Build.Title.AdCreatedPeriod,Ad created.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Add images
 Feature.Build.Title.AdsStatsEmpty,Start a campaign
@@ -2992,7 +2993,6 @@ Feature.Chat.Message.LeaveGroup,You won't be able to keep chatting with this gro
 Feature.Chat.Message.LeaveGroup.V2,Are you sure you want to leave the group?
 Feature.Chat.Message.MakeConnectionsToChat,Make friends on Roblox to start chatting together
 Feature.Chat.Message.MakeConnectionsToParty,Make friends on Roblox to Party together
-Feature.Chat.Message.MakeFriendsToChat,
 Feature.Chat.Message.MakeFriendsToParty,
 Feature.Chat.Message.MessageContentModerated,Your message was moderated and not sent.
 Feature.Chat.Message.MessageUnavailable,Message unavailable
@@ -3003,8 +3003,6 @@ Feature.Chat.Message.RemoveUser,Are you sure you want to remove {USERNAME} from 
 Feature.Chat.Message.RemoveUser.V2,Are you sure you want to remove {USERNAME} from this group?
 Feature.Chat.Message.RemovedFromConversation,You have been removed from the group.
 Feature.Chat.Message.SeveralUsersTyping,Several users are typing...
-Feature.Chat.Message.TurnOnChat,
-Feature.Chat.Message.TurnOnParty,
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} and {DISPLAY_NAME_2} are typing...
 Feature.Chat.PresetChat.Disclaimer,Quick Words allow players of all ages to coordinate gameplay.
 Feature.Chat.Response.ChatNameFullyModerated,Chat group name was moderated.
@@ -3396,6 +3394,9 @@ Feature.GameFollows.TooltipFollowLimitReached,Limit reached. Please unfollow oth
 Feature.GameFollows.TooltipNotificationsLimitReached,Limit reached. Please turn off notifications for other experiences first.
 Feature.GameFollows.TooltipTurnedOffNotifications,Notifications turned off for {experienceName}
 Feature.GameFollows.TooltipTurnedOnNotifications,Notifications turned on for {experienceName}
+Feature.GameJoin.Description.DifferentServer,You'll start in a different server
+Feature.GameJoin.Label.PlayTogether,You can play together
+Feature.GameJoin.Label.PlayTogetherSoon,You can play together soon
 Feature.GamePage.Action.BackToTop,Back to top
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -4039,6 +4040,7 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,This subscription isn't avai
 Feature.RobloxSubscription.Description.AgeCheckTrial,Verify your age with an age check and get 1 free week of Roblox Plus as our thank you. No payment method is needed to enjoy this free trial.
 Feature.RobloxSubscription.Description.Benefit.Customize,Customize with profile frames and app themes
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% off first 60 days, then 20% off items and avatars"
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10% off first {trialUnlockDays} days, then 20% off items and avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,More fun for less Robux. Subscribe to Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Join early with Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
@@ -4050,8 +4052,10 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,"{discountPercent}% of
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{discountPercent}% off these items after {periodIndex} {periodType}
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"By clicking ""Continue,"" you agree to the {linkStart}Roblox Subscription Terms{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"By clicking ""Try it for free,"" you agree to the {linkStart}Roblox Subscription Terms.{linkEnd} Your free trial will end in 1 month and you will be charged automatically each month and can cancel at any time."
+Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"By clicking ""Try it for free,"" you agree to the {linkStart}Roblox Subscription Terms.{linkEnd} Your free trial will end in {trialDuration} {trialPeriodLabel} and you will be charged automatically each {billingPeriodLabel} and can cancel at any time."
 Feature.RobloxSubscription.Label.FreeTrialText,Get free trial
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 month free,{boldEnd} then {price}/{periodType}"
+Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} free,{boldEnd} then {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,month
 Feature.RobloxSubscription.Label.months,months
 Feature.RobloxSubscription.Title.AgeCheckTrial,Get 1 free week of Plus
@@ -4061,6 +4065,8 @@ Feature.RobloxSubscription.Title.GetBlackbird,Get Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus unavailable here
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,You can join the event before everybody else.
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Early access with Plus
+Feature.RobloxSubscription.label.week,week
+Feature.RobloxSubscription.label.weeks,weeks
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Account status, violations, and appeals"
 Feature.Schools.Label.Classmates,Classmates
 Feature.Screentime.Content.ScreentimeLimitDialog,You've reached your daily screen time limit. Come back tomorrow to access Roblox again.
@@ -4453,6 +4459,14 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox suspended you from this game for {number} hours
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox suspended you from this game for 1 minute
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox suspended you from this game for {number} minutes
+Feature.UniversalShareSheet.Action.CopiedLink,
+Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,Share a message
+Feature.UniversalShareSheet.Response.NotSharedMessage,Message can't be sent
+Feature.UniversalShareSheet.Response.NotSharedMultipleMessages,Messages can't be sent
+Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 other
+Feature.UniversalShareSheet.Response.SharedMessage,Message was sent
+Feature.UniversalShareSheet.Response.SharedMultipleMessages,Messages were sent
+Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} others
 Feature.VerificationUpsell.Action.AddPhone,Add Phone
 Feature.VerificationUpsell.Action.AddPhoneNumber,Add Phone Number
 Feature.VerificationUpsell.Action.AddPhoneVoice,Add Phone for Voice Chat

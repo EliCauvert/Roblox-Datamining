@@ -1,4 +1,6 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
+﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
+local parent = shareSheet.Parent
+local fFlagShareSheetRemoveSnackbarCloseModule = require(shareSheet.Flags.FFlagShareSheetRemoveSnackbarClose)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
@@ -15,7 +17,7 @@ local function UniversalShareSheetContent(p1)
 end
 
 return reactModule.memo(function()
-	-- upvalues: reactModule (ref), useOverlay (ref), useTokens (ref), useUniversalShareSheetViewModelModule (ref), shareSheetSnackbarAutoDismissSeconds (ref), UniversalShareSheetContent (ref), reactRobloxModule (ref), foundationModule (ref)
+	-- upvalues: reactModule (ref), useOverlay (ref), useTokens (ref), useUniversalShareSheetViewModelModule (ref), shareSheetSnackbarAutoDismissSeconds (ref), UniversalShareSheetContent (ref), reactRobloxModule (ref), foundationModule (ref), fFlagShareSheetRemoveSnackbarCloseModule (ref)
 	local var1, var2 = reactModule.useState(nil)
 	local var3 = useOverlay()
 	local var4 = useTokens()
@@ -63,7 +65,7 @@ return reactModule.memo(function()
 				text = var7.text
 			} else nil,
 			AnchorPoint = Vector2.new(0.5, 1),
-			onClose = var6,
+			onClose = if fFlagShareSheetRemoveSnackbarCloseModule then nil else var6,
 			Position = UDim2.new(0.5, 0, 1, -var4.Padding.XLarge),
 			title = var1.title
 		}), var3) else nil

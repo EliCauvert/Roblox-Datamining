@@ -5,6 +5,8 @@ local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local text = require(parent.AppCommonLib).Text
+local getTextSize = require(parent.Style).GetTextSize
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useUserDataModule = require(appChat.Hooks.useUserData)
 local useTokens = foundationModule.Hooks.useTokens
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
@@ -13,15 +15,15 @@ local repeated = string.rep("W", 20)
 local t = { showDivider = true }
 
 return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useUserDataModule (ref), useTokens (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), reactModule (ref), text (ref), repeated (ref), foundationModule (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useUserDataModule (ref), useTokens (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), repeated (ref), text (ref), foundationModule (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref)
 	local var1 = cryoModule.Dictionary.union(t, p1)
 	local var2 = useUserDataModule(var1.userId)
 	local var3 = useTokens()
 	local var4 = reactModule.useMemo(function()
-		-- upvalues: text (copy), repeated (copy), var3 (ref)
-		local textBounds = text.GetTextBounds(repeated, var3.Typography.TitleLarge.Font, var3.Typography.TitleLarge.FontSize, Vector2.zero)
+		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), repeated (copy), var3 (ref), text (copy)
+		local var5 = if foundationFontFaceMigration then getTextSize(repeated, var3.Typography.TitleLarge.FontSize, var3.Typography.TitleLarge.Font, Vector2.zero) else text.GetTextBounds(repeated, var3.Typography.TitleLarge.Font, var3.Typography.TitleLarge.FontSize, Vector2.zero)
 		
-		return UDim2.fromOffset(textBounds.X, textBounds.Y)
+		return UDim2.fromOffset(var5.X, var5.Y)
 	end, {
 		var3.Typography.TitleLarge.Font,
 		var3.Typography.TitleLarge.FontSize
@@ -52,10 +54,10 @@ return reactModule.memo(function(p1)
 			UserDataSkeleton = reactModule.createElement(foundationModule.Skeleton, {
 				LayoutOrder = 1,
 				Size = UDim2.new(var4.X, var4.Y + reactModule.useMemo(function()
-					-- upvalues: text (copy), var3 (ref)
-					local textBounds = text.GetTextBounds("Roblox Studio", var3.Typography.CaptionMedium.Font, var3.Typography.CaptionMedium.FontSize, Vector2.zero)
+					-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), var3 (ref), text (copy)
+					local var5 = if foundationFontFaceMigration then getTextSize("Roblox Studio", var3.Typography.CaptionMedium.FontSize, var3.Typography.CaptionMedium.Font, Vector2.zero) else text.GetTextBounds("Roblox Studio", var3.Typography.CaptionMedium.Font, var3.Typography.CaptionMedium.FontSize, Vector2.zero)
 					
-					return UDim2.fromOffset(textBounds.X, textBounds.Y)
+					return UDim2.fromOffset(var5.X, var5.Y)
 				end, {
 					var3.Typography.CaptionMedium.Font,
 					var3.Typography.CaptionMedium.FontSize

@@ -6,7 +6,7 @@ local dataHydrationModule = require(parent.DataHydration)
 local createDetachedEffect = require(parent.SignalsUtils).createDetachedEffect
 local _ = require(parent.AppChat.GetExternalChatMessageSenderStore)
 local getChatModerationStatusDataHydrationModule = require(parent.AppChat.GetChatModerationStatusDataHydration)
-local createPrivateShareLinkModule = require(buildExperience.utils.createPrivateShareLink)
+local createExperienceShareLinkModule = require(buildExperience.utils.createExperienceShareLink)
 
 local function placeholderConversation(p1)
 	return {
@@ -36,9 +36,9 @@ local function warmUserModerationStatus()
 end
 
 return function(p1, p2, p3, p4)
-	-- upvalues: promiseModule (ref), createPrivateShareLinkModule (ref), warmUserModerationStatus (ref), placeholderConversation (ref), logger (ref)
+	-- upvalues: promiseModule (ref), createExperienceShareLinkModule (ref), warmUserModerationStatus (ref), placeholderConversation (ref), logger (ref)
 	return if #p3 == 0 then promiseModule.resolve({}) elseif p1 == nil or not p1.isAvailable then promiseModule.resolve(table.clone(p3)) else promiseModule.all({
-		createPrivateShareLinkModule(p2),
+		createExperienceShareLinkModule(p2),
 		warmUserModerationStatus()
 	}):andThen(function(p5)
 		-- upvalues: p4 (ref), p3 (ref), p1 (ref), placeholderConversation (copy), logger (copy), p2 (ref), promiseModule (copy)

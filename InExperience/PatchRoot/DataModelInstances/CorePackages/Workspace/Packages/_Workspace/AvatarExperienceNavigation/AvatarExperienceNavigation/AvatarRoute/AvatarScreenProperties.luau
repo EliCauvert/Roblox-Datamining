@@ -13,7 +13,6 @@ local fFlagAXOutfitPageRevamp = avatarExperienceFlagsModule.FFlagAXOutfitPageRev
 local fFlagAXAvatarFoldersEnabled = avatarExperienceFlagsModule.FFlagAXAvatarFoldersEnabled
 local fFlagAXBackgroundGenerationAnalytics = avatarExperienceFlagsModule.FFlagAXBackgroundGenerationAnalytics
 local fFlagAXPhotoboothMomentsPage = avatarExperienceFlagsModule.FFlagAXPhotoboothMomentsPage
-local AXEnableMultiTryOnUI = game:DefineFastFlag("AXEnableMultiTryOnUI", false)
 local AXKeepTryOnsInAvatarEditor = game:DefineFastFlag("AXKeepTryOnsInAvatarEditor", false)
 local fFlagAXFixAvatarScreenVR = avatarExperienceFlagsModule.FFlagAXFixAvatarScreenVR
 local fFlagAXMakeupReleaseFTUX = avatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX
@@ -33,7 +32,7 @@ local t = {
 local t_1 = {
 	[avatarScreenModule.AccessoryAdjustment] = {
 		isRefinementPage = true,
-		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else AXEnableMultiTryOnUI,
+		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else false,
 		analyticsData = {
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
 		}
@@ -50,7 +49,7 @@ local t_1 = {
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true,
-		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else AXEnableMultiTryOnUI,
+		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else false,
 		analyticsData = {
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CATALOG
 		}
@@ -60,7 +59,7 @@ local t_1 = {
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true,
-		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else AXEnableMultiTryOnUI,
+		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else false,
 		analyticsData = {
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.SEARCH_RESULTS
 		}
@@ -69,7 +68,7 @@ local t_1 = {
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true,
-		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else AXEnableMultiTryOnUI,
+		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else false,
 		analyticsData = {
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.SEARCH_LANDING_PAGE
 		}
@@ -102,7 +101,7 @@ local t_1 = {
 	[avatarScreenModule.LayeredClothingSort] = {
 		isRefinementPage = true,
 		VRPanelPlacement = "Center",
-		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else AXEnableMultiTryOnUI,
+		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else false,
 		analyticsData = {
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
 		}

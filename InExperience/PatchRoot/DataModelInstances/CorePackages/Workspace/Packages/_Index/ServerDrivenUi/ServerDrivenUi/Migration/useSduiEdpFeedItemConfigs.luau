@@ -8,7 +8,6 @@ local _ = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local getSduiFeedStoreModule = require(serverDrivenUi.DataStore.getSduiFeedStore)
 local _ = require(serverDrivenUi.DataStore.SduiFeedStoreTypes)
-local fFlagSduiGetItemCollectionKeys = require(serverDrivenUi.Flags).FFlagSduiGetItemCollectionKeys
 
 local function _(p1, p2, p3, p4, p5)
 	if p1 and p3[p1] then
@@ -24,18 +23,18 @@ local function _(p1, p2, p3, p4, p5)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), getSduiFeedStoreModule (ref), fFlagSduiGetItemCollectionKeys (ref), signalsReactModule (ref), sduiErrors (ref), sduiComponent (ref)
+	-- upvalues: reactModule (ref), getSduiFeedStoreModule (ref), signalsReactModule (ref), sduiErrors (ref), sduiComponent (ref)
 	local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: p1 (ref), getSduiFeedStoreModule (copy), fFlagSduiGetItemCollectionKeys (copy)
+		-- upvalues: p1 (ref), getSduiFeedStoreModule (copy)
 		return function(p2)
-			-- upvalues: p1 (copy), getSduiFeedStoreModule (copy), fFlagSduiGetItemCollectionKeys (copy)
+			-- upvalues: p1 (copy), getSduiFeedStoreModule (copy)
 			if not p1.shouldInterleaveSdui then
 				return {}
 			end
 			local var2 = getSduiFeedStoreModule(p1.storeKey)
 			local t = {}
 			
-			for i, v in if fFlagSduiGetItemCollectionKeys and var2.getItemCollectionKeys then var2.getItemCollectionKeys(p2) else {} do
+			for i, v in if var2.getItemCollectionKeys then var2.getItemCollectionKeys(p2) else {} do
 				local itemCollection = var2.getItemCollection(v)
 				
 				if itemCollection then

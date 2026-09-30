@@ -1,5 +1,6 @@
 ﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local fFlagConnectionsToFriendsRename = require(profilePlatform.Parent.SharedFlags).FFlagConnectionsToFriendsRename
+local sharedFlagsModule = require(profilePlatform.Parent.SharedFlags)
+local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
 
 return {
 	Profile = "CommonUI.Features.Label.Profile",
@@ -28,6 +29,7 @@ return {
 	IgnoreFriendRequest = "Feature.AddFriends.Action.IgnoreFriendRequest",
 	IgnoreConnectionRequest = if fFlagConnectionsToFriendsRename then nil else "Feature.AddFriends.Action.IgnoreConnectionRequest",
 	Join = "Feature.Chat.Drawer.Join",
+	Play = if sharedFlagsModule.FFlagJoinabilityCTARefactor then "Feature.ExperienceDetails.PlayButtonText.Play" else nil,
 	More = "Feature.Groups.Action.More",
 	PendingRequest = "Feature.Friends.Action.PendingRequest",
 	Report = "Feature.Catalog.Action.Report",
@@ -164,5 +166,7 @@ return {
 	Statistics = "Feature.Profile.Heading.Statistics",
 	JoinedInYear = "Feature.Friends.Label.JoinedInYear",
 	EventsListTitle = "Feature.VirtualEvents.EventsListTitle",
-	MomentsFeedEndTitle = "Feature.Moments.Label.FeedEndTitle"
+	MomentsFeedEndTitle = "Feature.Moments.Label.FeedEndTitle",
+	PlayTogether = "Feature.GameJoin.Label.PlayTogether",
+	PlayTogetherSoon = "Feature.GameJoin.Label.PlayTogetherSoon"
 }

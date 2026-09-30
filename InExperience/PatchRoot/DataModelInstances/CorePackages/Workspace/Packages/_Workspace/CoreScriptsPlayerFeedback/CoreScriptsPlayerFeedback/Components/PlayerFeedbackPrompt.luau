@@ -2,6 +2,9 @@
 local parent = coreScriptsPlayerFeedback.Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useStyle = UIBloxModule.Core.Style.useStyle
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -19,7 +22,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local circle21 = images["component_assets/circle_21"]
 
 return reactModule.memo(function(p1)
-	-- upvalues: useScreenSize (ref), useStyle (ref), useLastInputMethod (ref), reactModule (ref), useLocalization (ref), guiService (ref), constantsModule (ref), mouseIconOverrideService (ref), telemetryService (ref), useEscapeDismissModule (ref), contextActionService (ref), imageSetLabel (ref), circle21 (ref), buttonType (ref), interactiveAlert (ref)
+	-- upvalues: useScreenSize (ref), useStyle (ref), useLastInputMethod (ref), reactModule (ref), useLocalization (ref), guiService (ref), constantsModule (ref), mouseIconOverrideService (ref), telemetryService (ref), useEscapeDismissModule (ref), contextActionService (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), imageSetLabel (ref), circle21 (ref), buttonType (ref), interactiveAlert (ref)
 	local var1 = useScreenSize()
 	local var2 = useStyle()
 	local var3 = useLastInputMethod()
@@ -214,7 +217,7 @@ return reactModule.memo(function(p1)
 			var9
 		}),
 		middleContent = reactModule.useCallback(function()
-			-- upvalues: var2 (ref), var1 (ref), constantsModule (copy), reactModule (copy), var6 (ref), imageSetLabel (copy), circle21 (copy), var7 (ref), placeholder (ref), var11 (ref), var16 (ref)
+			-- upvalues: var2 (ref), var1 (ref), constantsModule (copy), reactModule (copy), var6 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), imageSetLabel (copy), circle21 (copy), var7 (ref), placeholder (ref), var11 (ref), var16 (ref)
 			local body = var2.Font.Body
 			local floored = math.floor(body.RelativeSize * var2.Font.BaseSize)
 			local maxValue = math.max(constantsModule.MIN_TEXTBOX_HEIGHT, math.min(constantsModule.MAX_TEXTBOX_HEIGHT, math.clamp(var1.Y - 320, constantsModule.MIN_TEXTBOX_HEIGHT, constantsModule.MAX_TEXTBOX_HEIGHT)))
@@ -240,7 +243,8 @@ return reactModule.memo(function(p1)
 					TextYAlignment = Enum.TextYAlignment.Top,
 					TextColor3 = var2.Theme.TextEmphasis.Color,
 					TextTransparency = var2.Theme.TextEmphasis.Transparency,
-					Font = body.Font,
+					Font = if foundationFontFaceMigration then nil else body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodyLarge.Font) else nil,
 					TextSize = floored,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
@@ -278,7 +282,8 @@ return reactModule.memo(function(p1)
 							TextColor3 = var2.Theme.TextEmphasis.Color,
 							TextTransparency = var2.Theme.TextEmphasis.Transparency,
 							PlaceholderColor3 = var2.Theme.TextMuted.Color,
-							Font = body.Font,
+							Font = if foundationFontFaceMigration then nil else body.Font,
+							FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodyLarge.Font) else nil,
 							TextSize = floored,
 							ClearTextOnFocus = false,
 							MultiLine = true,
@@ -296,7 +301,7 @@ return reactModule.memo(function(p1)
 		defaultChildRef = if var4 then var11 else nil,
 		isRoactGamepadEnabled = var4,
 		footerContent = reactModule.useCallback(function()
-			-- upvalues: footer (ref), reactModule (copy), var2 (ref)
+			-- upvalues: footer (ref), reactModule (copy), var2 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 			local var17 = footer
 			
 			if type(var17) == "string" and string.find(var17, "Roblox Terms of Use", 1, true) then
@@ -318,7 +323,8 @@ return reactModule.memo(function(p1)
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
 					TextSize = math.floor(var2.Font.CaptionHeader.RelativeSize * var2.Font.BaseSize),
-					Font = var2.Font.CaptionHeader.Font,
+					Font = if foundationFontFaceMigration then nil else var2.Font.CaptionHeader.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionLarge.Font) else nil,
 					TextColor3 = var2.Theme.TextMuted.Color,
 					TextTransparency = var2.Theme.TextMuted.Transparency,
 					Size = UDim2.new(1, 0, 0, 0),

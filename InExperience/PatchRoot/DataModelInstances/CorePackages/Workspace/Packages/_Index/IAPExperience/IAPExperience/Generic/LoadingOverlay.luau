@@ -8,6 +8,8 @@ local UIBloxModule = require(parent_2.UIBlox)
 local foundationModule = require(parent_2.Foundation)
 local iconSize = foundationModule.Enums.IconSize
 local loading = foundationModule.Loading
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local withStyle = UIBloxModule.Core.Style.withStyle
 local multiTextLocalizerModule = require(parent_1.Locale.MultiTextLocalizer)
 local loadingOverlayStateModule = require(parent.LoadingOverlayState)
@@ -59,13 +61,13 @@ function name.render(p1)
 end
 
 function name.renderAlert(p1, p2)
-	-- upvalues: loadingOverlayStateModule (ref), withStyle (ref), roactModule (ref), loading (ref), iconSize (ref)
+	-- upvalues: loadingOverlayStateModule (ref), withStyle (ref), roactModule (ref), loading (ref), iconSize (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local props = p1.props
 	local var1 = props.loadingState ~= loadingOverlayStateModule.None and props.loadingState ~= nil
 	local var2 = p1:getLoadingMessage(p2, props.loadingState)
 	
 	return withStyle(function(p3)
-		-- upvalues: roactModule (copy), p1 (ref), props (ref), var1 (ref), loading (copy), iconSize (copy), var2 (ref)
+		-- upvalues: roactModule (copy), p1 (ref), props (ref), var1 (ref), loading (copy), iconSize (copy), var2 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		local theme = p3.Theme
 		local font = p3.Font
 		
@@ -106,17 +108,18 @@ function name.renderAlert(p1, p2)
 					Position = UDim2.fromScale(0.5, 0.5),
 					AnchorPoint = Vector2.new(0.5, 0.5)
 				}) or nil,
-				PreText = var2 and roactModule.createElement("TextLabel", {
+				PreText = var2 and (roactModule.createElement("TextLabel", {
 					LayoutOrder = 1,
 					BackgroundTransparency = 1,
 					TextWrapped = true,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Font = font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 					Text = var2,
 					TextSize = font.BaseSize * font.Body.RelativeSize,
 					TextColor3 = theme.TextDefault.Color,
 					TextTransparency = theme.TextDefault.Transparency
-				}) or nil
+				}) or nil)
 			}),
 			Children = roactModule.createElement("Frame", {
 				BorderSizePixel = 0,

@@ -1,6 +1,7 @@
 ﻿return {
 	["jest.config"] = script["jest.config"],
 	useAppFocusRoot = require(script.useAppFocusRoot),
+	useAnyDescendantHasFocus = require(script.useAnyDescendantHasFocus),
 	useAutoFocus = require(script.useAutoFocus),
 	useDescendantHasFocus = require(script.useDescendantHasFocus),
 	useFirstFocusableDescendantRef = require(script.useFirstFocusableDescendantRef),

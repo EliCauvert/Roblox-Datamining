@@ -14,7 +14,10 @@ local imageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local withStyle = UIBloxModule.Core.Style.withStyle
 local useStyleMetadata = UIBloxModule.Core.Style.useStyleMetadata
-local colorMode = require(parent_2.Foundation).Enums.ColorMode
+local foundationModule = require(parent_2.Foundation)
+local colorMode = foundationModule.Enums.ColorMode
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local roactFitComponentsModule = require(parent_2.RoactFitComponents)
 local fitFrameHorizontal = roactFitComponentsModule.FitFrameHorizontal
 local fitTextLabel = roactFitComponentsModule.FitTextLabel
@@ -154,11 +157,11 @@ function name.reportScrollingFrameCompensationHappened(p1)
 end
 
 function name.renderWithLocale(p1, p2, p3)
-	-- upvalues: withStyle (ref), roactModule (ref), robuxPackageModule (ref), list (ref), fFlagEnableLeftNavOnConsole (ref), fullscreenFrame (ref), roactGamepadModule (ref), colorMode (ref), imageSetButton (ref), close (ref), cursorKind (ref), animatorModule (ref), imageSetLabel (ref), block (ref), fitTextLabel (ref), fitFrameHorizontal (ref), goldrobux (ref), formatNumberModule (ref), localizationService (ref)
+	-- upvalues: withStyle (ref), roactModule (ref), robuxPackageModule (ref), list (ref), fFlagEnableLeftNavOnConsole (ref), fullscreenFrame (ref), roactGamepadModule (ref), colorMode (ref), imageSetButton (ref), close (ref), cursorKind (ref), animatorModule (ref), imageSetLabel (ref), block (ref), fitTextLabel (ref), fitFrameHorizontal (ref), goldrobux (ref), formatNumberModule (ref), localizationService (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local props = p1.props
 	
 	return withStyle(function(p4)
-		-- upvalues: props (ref), p1 (ref), roactModule (copy), robuxPackageModule (copy), list (copy), fFlagEnableLeftNavOnConsole (copy), fullscreenFrame (copy), roactGamepadModule (copy), colorMode (copy), imageSetButton (copy), close (copy), p3 (ref), cursorKind (copy), animatorModule (copy), imageSetLabel (copy), block (copy), fitTextLabel (copy), p2 (ref), fitFrameHorizontal (copy), goldrobux (copy), formatNumberModule (copy), localizationService (copy)
+		-- upvalues: props (ref), p1 (ref), roactModule (copy), robuxPackageModule (copy), list (copy), fFlagEnableLeftNavOnConsole (copy), fullscreenFrame (copy), roactGamepadModule (copy), colorMode (copy), imageSetButton (copy), close (copy), p3 (ref), cursorKind (copy), animatorModule (copy), imageSetLabel (copy), block (copy), fitTextLabel (copy), p2 (ref), fitFrameHorizontal (copy), goldrobux (copy), formatNumberModule (copy), localizationService (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		local theme = p4.Theme
 		local font = p4.Font
 		local var1 = props.robuxPackages ~= nil
@@ -347,7 +350,8 @@ function name.renderWithLocale(p1, p2, p3)
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Font = font.Title.Font,
+					Font = if foundationFontFaceMigration then nil else font.Title.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p4.Tokens.Typography.HeadingLarge.Font) else nil,
 					Text = p2.BannerTitle,
 					TextSize = 46 * p1:getScale(),
 					TextColor3 = if props.showBackground then Color3.new(255, 255, 255) else theme.TextEmphasis.Color
@@ -358,7 +362,8 @@ function name.renderWithLocale(p1, p2, p3)
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Font = font.Header1.Font,
+					Font = if foundationFontFaceMigration then nil else font.Header1.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p4.Tokens.Typography.HeadingSmall.Font) else nil,
 					Text = p2.BannerText,
 					TextSize = 38 * p1:getScale(),
 					TextColor3 = if props.showBackground then Color3.new(255, 255, 255) else theme.TextEmphasis.Color

@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagBuildAgentAdCampaignCard

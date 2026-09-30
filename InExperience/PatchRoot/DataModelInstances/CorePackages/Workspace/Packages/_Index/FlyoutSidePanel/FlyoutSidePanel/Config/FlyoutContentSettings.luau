@@ -19,6 +19,7 @@ local fFlagEnableBlackbird = sharedFlagsModule.FFlagEnableBlackbird
 local fFlagEnableBlackbirdOnFlyoutMenu = sharedFlagsModule.FFlagEnableBlackbirdOnFlyoutMenu
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
 local fFlagFlyoutSidePanelTradesEntryModule = require(script.Parent.Parent.Flags.FFlagFlyoutSidePanelTradesEntry)
+local fFlagFlyoutFilterWebViewsAndBrowserLinks = sharedFlagsModule.FFlagFlyoutFilterWebViewsAndBrowserLinks
 local fFlagEnableLuaCommunityList = sharedFlagsModule.FFlagEnableLuaCommunityList
 local fFlagFlyoutResolveItemContextOnActivationModule = require(flyoutSidePanel.Flags.FFlagFlyoutResolveItemContextOnActivation)
 local communityListRouting = require(parent.Groups).CommunityListRouting
@@ -77,19 +78,68 @@ local t_2 = {
 	[t.Terms] = "CommonUI.Features.Label.Terms",
 	[t.Privacy] = "CommonUI.Features.Label.Privacy"
 }
-local fFlagFlyoutResolveItemContextOnActivationModule_1 = fFlagEnableLuaCommunityList and fFlagFlyoutResolveItemContextOnActivationModule
 local t_3 = {
+	WebView = "WebView",
+	WebLink = "WebLink",
+	AppPage = "AppPage",
+	GameSortDeeplink = "GameSortDeeplink",
+	PlaceLaunch = "PlaceLaunch"
+}
+
+local function getCommunitiesContext()
+	-- upvalues: communityListRouting (ref), appPage (ref), t_3 (ref), urlBuilder (ref)
+	return if communityListRouting.getShouldUseLuaCommunityList() then { appPage = appPage.Groups, destinationType = t_3.AppPage } else {
+		url = urlBuilder.static.groups(),
+		destinationType = t_3.WebView
+	}
+end
+
+local function _(p1)
+	-- upvalues: fFlagFlyoutResolveItemContextOnActivationModule (ref)
+	return if fFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
+end
+
+local _ = function(p1)
+	-- upvalues: fFlagFlyoutResolveItemContextOnActivationModule (ref)
+	local var1 = if fFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
+	
+	return if var1 then var1.destinationType else nil
+end
+
+local function itemRequiresWebView(p1, p2)
+	-- upvalues: fFlagFlyoutResolveItemContextOnActivationModule (ref), t_3 (ref)
+	local var1 = if fFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
+	local var2 = if var1 then var1.destinationType else nil
+	
+	return if var2 ~= t_3.WebView then var2 == t_3.WebLink and not p2 else true
+end
+
+local function itemIsGameSortDeeplink(p1)
+	-- upvalues: fFlagFlyoutResolveItemContextOnActivationModule (ref), t_3 (ref)
+	local var1 = if fFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
+	
+	return (if var1 then var1.destinationType else nil) == t_3.GameSortDeeplink
+end
+
+local fFlagFlyoutResolveItemContextOnActivationModule_1 = fFlagEnableLuaCommunityList and fFlagFlyoutResolveItemContextOnActivationModule
+local t_4 = {
 	[t.Favorites] = {
 		itemType = t.Favorites,
 		textKey = t_2[t.Favorites],
 		icon = builderIconsModule.Icon.Bookmark,
-		context = { appUri = FAVORITES_URI }
+		context = {
+			appUri = FAVORITES_URI,
+			destinationType = t_3.GameSortDeeplink
+		}
 	},
 	[t.ContinuePlaying] = {
 		itemType = t.ContinuePlaying,
 		textKey = t_2[t.ContinuePlaying],
 		icon = builderIconsModule.Icon.ClockSpinReverse,
-		context = { appUri = CONTINUE_PLAYING_URI }
+		context = {
+			appUri = CONTINUE_PLAYING_URI,
+			destinationType = t_3.GameSortDeeplink
+		}
 	},
 	[t.Inventory] = {
 		itemType = t.Inventory,
@@ -99,7 +149,8 @@ local t_3 = {
 			urlGenerator = function(p1)
 				-- upvalues: urlBuilder (ref)
 				return p1 and urlBuilder.user.inventory({ userId = p1 }) or nil
-			end
+			end,
+			destinationType = t_3.WebView
 		}
 	},
 	[t.Connections] = {
@@ -107,54 +158,70 @@ local t_3 = {
 		textKey = t_2[t.Connections],
 		icon = builderIconsModule.Icon.TwoPeople,
 		context = {
-			appPage = if fFlagCreateConnectionsHub then appPage.CoHubMyConnections else appPage.ViewFriends
+			appPage = if fFlagCreateConnectionsHub then appPage.CoHubMyConnections else appPage.ViewFriends,
+			destinationType = t_3.AppPage
 		}
 	},
 	[t.Communities] = {
 		itemType = t.Communities,
 		textKey = t_2[t.Communities],
 		icon = builderIconsModule.Icon.ThreePeople,
-		context = if fFlagFlyoutResolveItemContextOnActivationModule_1 then nil else { url = urlBuilder.static.groups() },
-		getContext = if fFlagFlyoutResolveItemContextOnActivationModule_1 then function()
-			-- upvalues: communityListRouting (ref), appPage (ref), urlBuilder (ref)
-			return if communityListRouting.getShouldUseLuaCommunityList() then { appPage = appPage.Groups } else { url = urlBuilder.static.groups() }
-		end else nil
+		context = if fFlagFlyoutResolveItemContextOnActivationModule_1 then nil else {
+			url = urlBuilder.static.groups(),
+			destinationType = t_3.WebView
+		},
+		getContext = if fFlagFlyoutResolveItemContextOnActivationModule_1 then getCommunitiesContext else nil
 	},
 	[t.Messages] = {
 		itemType = t.Messages,
 		textKey = t_2[t.Messages],
 		icon = builderIconsModule.Icon.Envelope,
-		context = { url = urlBuilder.static.messages() }
+		context = {
+			url = urlBuilder.static.messages(),
+			destinationType = t_3.WebView
+		}
 	},
 	[t.Settings] = {
 		itemType = t.Settings,
 		textKey = t_2[t.Settings],
 		icon = builderIconsModule.Icon.Gear,
-		context = { appPage = appPage.Settings }
+		context = {
+			appPage = appPage.Settings,
+			destinationType = t_3.AppPage
+		}
 	},
 	[t.HelpAndSafety] = {
 		itemType = t.HelpAndSafety,
 		textKey = t_2[t.HelpAndSafety],
 		icon = builderIconsModule.Icon.ShieldLock,
-		context = { appPage = appPage.SafetySupport }
+		context = {
+			appPage = appPage.SafetySupport,
+			destinationType = t_3.AppPage
+		}
 	},
 	[t.Moments] = {
 		itemType = t.Moments,
 		textKey = t_2[t.Moments],
 		icon = builderIconsModule.Icon.Moments,
-		context = if (fFlagEnableArgusFlyoutEntry or fFlagArgusTabImpliesFlyout) and fFlagEnableArgus then { appPage = appPage.Moments } else { appUri = flyoutMomentsPlaceURI }
+		context = if (fFlagEnableArgusFlyoutEntry or fFlagArgusTabImpliesFlyout) and fFlagEnableArgus then { appPage = appPage.Moments, destinationType = t_3.AppPage } else {
+			appUri = flyoutMomentsPlaceURI,
+			destinationType = t_3.PlaceLaunch
+		}
 	},
 	[t.Charts] = {
 		itemType = t.Charts,
 		textKey = t_2[t.Charts],
 		icon = builderIconsModule.Icon.ChartThreeVerticalBars,
-		context = {}
+		context = { destinationType = t_3.AppPage }
 	},
 	[t.Learn] = {
 		itemType = t.Learn,
 		textKey = t_2[t.Learn],
 		icon = builderIconsModule.Icon.PersonGraduate,
-		context = { appUri = flyoutLearnPlaceURI }
+		context = {
+			appUri = flyoutLearnPlaceURI,
+			destinationType = t_3.PlaceLaunch
+		}
 	},
 	[t.CreateGames] = {
 		itemType = t.CreateGames,
@@ -163,14 +230,18 @@ local t_3 = {
 		context = {
 			urlGenerator = function(p1)
 				return p1({ utm_content = "side_panel" })
-			end
+			end,
+			destinationType = if fFlagFlyoutFilterWebViewsAndBrowserLinks then t_3.WebLink else t_3.WebView
 		}
 	},
 	[t.Premium] = {
 		itemType = t.Premium,
 		textKey = t_2[t.Premium],
 		icon = builderIconsModule.Icon.Premium,
-		context = { appPage = appPage.BuildersClub }
+		context = {
+			appPage = appPage.BuildersClub,
+			destinationType = t_3.WebView
+		}
 	},
 	[t.GiftCards] = {
 		itemType = t.GiftCards,
@@ -180,27 +251,35 @@ local t_3 = {
 			urlGenerator = function(p1)
 				-- upvalues: urlBuilder (ref)
 				return urlBuilder.static.giftCards(p1)
-			end
+			end,
+			destinationType = if fFlagFlyoutFilterWebViewsAndBrowserLinks then t_3.WebLink else t_3.WebView
 		}
 	},
 	[t.Redeem] = {
 		itemType = t.Redeem,
 		textKey = t_2[t.Redeem],
 		icon = builderIconsModule.Icon.Wallet,
-		context = { url = urlBuilder.static.redeem() }
+		context = {
+			url = urlBuilder.static.redeem(),
+			destinationType = t_3.WebView
+		}
 	},
 	[t.Trades] = if fFlagFlyoutSidePanelTradesEntryModule then {
 		itemType = t.Trades,
 		textKey = t_2[t.Trades],
 		icon = builderIconsModule.Icon.HandTwoArrowsHorizontal,
-		context = { url = urlBuilder.static.trades() }
+		context = {
+			url = urlBuilder.static.trades(),
+			destinationType = t_3.WebView
+		}
 	} else nil,
 	[t.Events] = {
 		itemType = t.Events,
 		textKey = t_2[t.Events],
 		icon = builderIconsModule.Icon.CalendarStar,
 		context = {
-			url = if getFStringPlatformEventUrl() ~= "" then urlBuilder.static.help() else urlBuilder.fromString(getFStringPlatformEventUrl())()
+			url = if getFStringPlatformEventUrl() ~= "" then urlBuilder.static.help() else urlBuilder.fromString(getFStringPlatformEventUrl())(),
+			destinationType = t_3.WebView
 		}
 	},
 	[t.Terms] = {
@@ -215,7 +294,8 @@ local t_3 = {
 					var1 = urlBuilder.static.about.terms({ useGameQQUrls = true })
 				end
 				return var1
-			end
+			end,
+			destinationType = if fFlagFlyoutFilterWebViewsAndBrowserLinks then t_3.WebLink else t_3.WebView
 		}
 	},
 	[t.Privacy] = {
@@ -230,7 +310,8 @@ local t_3 = {
 					var1 = urlBuilder.static.about.privacy({ useGameQQUrls = true })
 				end
 				return var1
-			end
+			end,
+			destinationType = if fFlagFlyoutFilterWebViewsAndBrowserLinks then t_3.WebLink else t_3.WebView
 		}
 	}
 }
@@ -239,17 +320,23 @@ if fFlagEnableBlackbird and fFlagEnableBlackbirdOnFlyoutMenu then
 	t.Blackbird = "Blackbird"
 	t_1[t.Blackbird] = "Blackbird"
 	t_2[t.Blackbird] = "CommonUI.Features.Label.X"
-	t_3[t.Blackbird] = {
+	t_4[t.Blackbird] = {
 		itemType = t.Blackbird,
 		textKey = t_2[t.Blackbird],
 		icon = foundationModule.Enums.IconName.RobloxPlus,
-		context = { appPage = appPage.Blackbird }
+		context = {
+			appPage = appPage.Blackbird,
+			destinationType = t_3.WebView
+		}
 	}
 end
 return {
 	ItemType = t,
 	ItemTextKey = t_2,
-	ItemInfo = t_3,
+	ItemInfo = t_4,
 	EventNameMappings = t_1,
-	MomentsExperienceUri = flyoutMomentsPlaceURI
+	MomentsExperienceUri = flyoutMomentsPlaceURI,
+	DestinationType = t_3,
+	itemRequiresWebView = itemRequiresWebView,
+	itemIsGameSortDeeplink = itemIsGameSortDeeplink
 }

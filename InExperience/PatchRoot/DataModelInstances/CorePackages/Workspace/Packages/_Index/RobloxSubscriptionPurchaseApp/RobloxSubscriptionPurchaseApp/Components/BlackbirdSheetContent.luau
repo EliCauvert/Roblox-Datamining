@@ -25,18 +25,20 @@ local logRobloxSubscriptionUpsellCounterModule = require(robloxSubscriptionPurch
 local logSubscriptionPurchaseFlowEventModule = require(robloxSubscriptionPurchaseApp.Utils.logSubscriptionPurchaseFlowEvent)
 local fFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagEnableSubscriptionPurchaseFlowEventIngest)
 local isRobloxSubscriptionProductFreeTrialModule = require(robloxSubscriptionPurchaseApp.Utils.isRobloxSubscriptionProductFreeTrial)
+local getFreeTrialOfferModule = require(robloxSubscriptionPurchaseApp.Utils.getFreeTrialOffer)
 local robloxSubscriptionUpsellTelemetryModule = require(robloxSubscriptionPurchaseApp.Events.RobloxSubscriptionUpsellTelemetry)
 local promptStateModule = require(robloxSubscriptionPurchaseApp.Enums.PromptState)
 local signalsReactModule = require(parent.SignalsReact)
 local fFlagSupportFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagSupportFreeTrial)
 local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
+local fFlagRobloxPlusDynamicFreeTrialLengthModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusDynamicFreeTrialLength)
 local t = {
 	[promptStateModule.SubscriptionPurchaseInProgress] = true,
 	[promptStateModule.SubscriptionStatusPolling] = true
 }
 
 return function()
-	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), signalsReactModule (ref), useLocalization (ref), isRobloxSubscriptionProductFreeTrialModule (ref), reactModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), promptStateModule (ref), finalizeRobloxSubscriptionUpsellFlowModule (ref), completeRobloxSubscriptionUpsellFlowModule (ref), performRobloxSubscriptionPurchaseModule (ref), t (ref), sheet (ref), view (ref), text (ref), getIconRichText (ref), iconName (ref), handleBackButtonActionModule (ref), robloxSubscriptionPriceRowModule (ref), robloxSubscriptionFeatureListModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), legalDisclosureModule (ref), fFlagSupportFreeTrialModule (ref)
+	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), signalsReactModule (ref), useLocalization (ref), isRobloxSubscriptionProductFreeTrialModule (ref), fFlagRobloxPlusDynamicFreeTrialLengthModule (ref), getFreeTrialOfferModule (ref), reactModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), promptStateModule (ref), finalizeRobloxSubscriptionUpsellFlowModule (ref), completeRobloxSubscriptionUpsellFlowModule (ref), performRobloxSubscriptionPurchaseModule (ref), t (ref), sheet (ref), view (ref), text (ref), getIconRichText (ref), iconName (ref), handleBackButtonActionModule (ref), robloxSubscriptionPriceRowModule (ref), robloxSubscriptionFeatureListModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), legalDisclosureModule (ref), fFlagSupportFreeTrialModule (ref)
 	local createElement_2
 	local var1 = robloxSubscriptionStoreModule.get()
 	local var2 = if fFlagRobloxPlusFAEFreeTrialModule then var1.getOnCtaOverride() else nil
@@ -47,12 +49,14 @@ return function()
 		buttonText = "Feature.RobloxSubscription.Action.Subscribe",
 		getFreeTrialText = "Feature.RobloxSubscription.Action.TryItForFree"
 	})
-	local var6 = isRobloxSubscriptionProductFreeTrialModule(signalsReactModule.useSignalState(var1.getRobloxSubscriptionProduct))
-	local var7 = if fFlagRobloxPlusFAEFreeTrialModule then var3.description else nil
-	local var8 = if var6 then var5.getFreeTrialText else var5.buttonText
-	local var9 = var3.showLegalDisclosure ~= nil or var3.showLegalDisclosure
-	local var10 = if fFlagRobloxPlusFAEFreeTrialModule and var3.noPurchaseMethodRequired ~= nil then var3.noPurchaseMethodRequired else false
-	local var11 = reactModule.useCallback(function(p1)
+	local var6 = signalsReactModule.useSignalState(var1.getRobloxSubscriptionProduct)
+	local var7 = isRobloxSubscriptionProductFreeTrialModule(var6)
+	local var8 = if fFlagRobloxPlusDynamicFreeTrialLengthModule then getFreeTrialOfferModule(var6) else nil
+	local var9 = if fFlagRobloxPlusFAEFreeTrialModule then var3.description else nil
+	local var10 = if var7 then var5.getFreeTrialText else var5.buttonText
+	local var11 = var3.showLegalDisclosure ~= nil or var3.showLegalDisclosure
+	local var12 = if fFlagRobloxPlusFAEFreeTrialModule and var3.noPurchaseMethodRequired ~= nil then var3.noPurchaseMethodRequired else false
+	local var13 = reactModule.useCallback(function(p1)
 		-- upvalues: fFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), logSubscriptionPurchaseFlowEventModule (copy), logRobloxSubscriptionUpsellCounterModule (copy), robloxSubscriptionUpsellTelemetryModule (copy)
 		if p1 then
 			if fFlagEnableSubscriptionPurchaseFlowEventIngestModule then
@@ -85,7 +89,7 @@ return function()
 		performRobloxSubscriptionPurchaseModule()
 	end
 	
-	local var12 = t[var4] == true
+	local var14 = t[var4] == true
 	local t_1 = {
 		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
 			View = reactModule.createElement(view, { LayoutOrder = 1, tag = "row gap-small auto-xy" }, {
@@ -107,17 +111,17 @@ return function()
 		Content = reactModule.createElement(sheet.Content, { LayoutOrder = 2 }, {
 			ContentContainer = reactModule.createElement(view, {
 				tag = {
-					["col size-full-0 auto-y"] = fFlagRobloxPlusFAEFreeTrialModule and var7 ~= nil,
-					col = not (fFlagRobloxPlusFAEFreeTrialModule and var7 ~= nil)
+					["col size-full-0 auto-y"] = fFlagRobloxPlusFAEFreeTrialModule and var9 ~= nil,
+					col = not (fFlagRobloxPlusFAEFreeTrialModule and var9 ~= nil)
 				},
-				Size = if fFlagRobloxPlusFAEFreeTrialModule and var7 ~= nil then nil else UDim2.new(1, 0, 0, 140)
+				Size = if fFlagRobloxPlusFAEFreeTrialModule and var9 ~= nil then nil else UDim2.new(1, 0, 0, 140)
 			}, {
-				PriceRow = if fFlagRobloxPlusFAEFreeTrialModule and var7 ~= nil then reactModule.createElement(text, {
+				PriceRow = if fFlagRobloxPlusFAEFreeTrialModule and var9 ~= nil then reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
-					Text = var7
-				}) else reactModule.createElement(robloxSubscriptionPriceRowModule, { layoutOrder = 1, isFreeTrial = var6 }),
-				FeatureList = reactModule.createElement(robloxSubscriptionFeatureListModule, { layoutOrder = 2, noPurchaseMethodRequired = var10 })
+					Text = var9
+				}) else reactModule.createElement(robloxSubscriptionPriceRowModule, { layoutOrder = 1, isFreeTrial = var7 }),
+				FeatureList = reactModule.createElement(robloxSubscriptionFeatureListModule, { layoutOrder = 2, noPurchaseMethodRequired = var12 })
 			})
 		})
 	}
@@ -133,24 +137,27 @@ return function()
 	local t_5 = {
 		SubscribeButton = reactModule.createElement(button, {
 			LayoutOrder = 1,
-			ref = var11,
-			text = if fFlagRobloxPlusFAEFreeTrialModule and var3.ctaText then var3.ctaText else var8,
+			ref = var13,
+			text = if fFlagRobloxPlusFAEFreeTrialModule and var3.ctaText then var3.ctaText else var10,
 			onActivated = onSubscribe,
 			fillBehavior = fillBehavior.Fill,
 			variant = buttonVariant.Emphasis,
-			isLoading = var12
+			isLoading = var14
 		})
 	}
 	
-	if fFlagRobloxPlusFAEFreeTrialModule and not var9 then
+	if fFlagRobloxPlusFAEFreeTrialModule and not var11 then
 		createElement_2 = nil
 	else
 		createElement_2 = reactModule.createElement
 		createElement_2 = createElement_2(legalDisclosureModule, {
 			layoutOrder = 2,
-			ctaText = if fFlagRobloxPlusFAEFreeTrialModule and var3.ctaText then var3.ctaText else var8,
-			isFreeTrial = if fFlagSupportFreeTrialModule then var6 else nil,
-			shortenFreeTrialTerms = if fFlagRobloxPlusFAEFreeTrialModule then var10 else nil
+			ctaText = if fFlagRobloxPlusFAEFreeTrialModule and var3.ctaText then var3.ctaText else var10,
+			isFreeTrial = if fFlagSupportFreeTrialModule then var7 else nil,
+			shortenFreeTrialTerms = if fFlagRobloxPlusFAEFreeTrialModule then var12 else nil,
+			trialDuration = if var8 then var8.Duration else nil,
+			trialPeriodType = if var8 then var8.PeriodType else nil,
+			billingPeriodType = if var8 and var6 then var6.PeriodType else nil
 		})
 	end
 	t_5.LegalDisclosure = createElement_2

@@ -8,11 +8,13 @@ local constants = require(parent.NavigationRodux).Constants
 local splitPaneContextModule = require(script.Parent.Parent.Context.SplitPaneContext)
 local splitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
 local computeSplitEligibilityModule = require(script.Parent.Parent.Utils.computeSplitEligibility)
+local splitPaneVariantModule = require(script.Parent.Parent.Utils.SplitPaneVariant)
+local supportPaneMode = appSplitViewModule.Enums.SupportPaneMode
 local splitPaneSlot = appSplitViewModule.Enums.SplitPaneSlot
 local tempRnSwitchNavigatorName = constants.TempRnSwitchNavigatorName
 
 return function(p1, p2)
-	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), computeSplitEligibilityModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), splitPaneSlot (ref), viewState (ref), roactNavigationModule (ref)
+	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), computeSplitEligibilityModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), splitPaneVariantModule (ref), supportPaneMode (ref), splitPaneSlot (ref), viewState (ref), roactNavigationModule (ref)
 	local options, v
 	local store = splitPaneStoreModule.getStore()
 	local var1 = signalsReactModule.useSignalState(store.getIsBreakpointEnabled)
@@ -24,12 +26,16 @@ return function(p1, p2)
 	local t = {}
 	local var7 = nil
 	local var8 = false
+	local var9 = splitPaneVariantModule.isPaneCollapsedByDefault() and (not splitPaneVariantModule.shouldAutoExpandOnSupportOpen() and var2 == supportPaneMode.Collapsed)
 	
 	if var4 then
 		for i = #p1, 1, -1 do
 			options = p1[i].descriptor.options
 			v = options.splitPaneEligibility
 			
+			if var9 and v == splitPaneSlot.Support then
+				v = nil
+			end
 			if v == splitPaneSlot.Support then
 				table.insert(t, 1, i)
 			elseif (options.transparent or options.overlayEnabled) and v == nil or #t <= 0 then
@@ -45,8 +51,8 @@ return function(p1, p2)
 			end
 		end
 	end
-	local var9 = var7 ~= nil and #t > 0
-	options = var8 or (var9 or var4 and (var5 and p2 >= 1))
+	local var10 = var7 ~= nil and #t > 0
+	options = var8 or (var10 or var4 and (var5 and p2 >= 1))
 	v = nil
 	
 	if var4 then
@@ -54,6 +60,9 @@ return function(p1, p2)
 			local options_1 = p1[i_1].descriptor.options
 			local splitPaneEligibility = options_1.splitPaneEligibility
 			
+			if var9 and splitPaneEligibility == splitPaneSlot.Support then
+				splitPaneEligibility = nil
+			end
 			if splitPaneEligibility == splitPaneSlot.Support or (options_1.transparent or options_1.overlayEnabled) and splitPaneEligibility == nil then
 				continue
 			end
@@ -80,10 +89,10 @@ return function(p1, p2)
 				local splitPaneEligibility = descriptor_1.options.splitPaneEligibility
 				
 				if splitPaneEligibility ~= nil and splitPaneEligibility ~= splitPaneSlot.Content then
-					local var10 = if descriptor_1.state ~= nil then descriptor_1.state.key else nil
+					local var11 = if descriptor_1.state ~= nil then descriptor_1.state.key else nil
 					
-					if var10 ~= nil then
-						navigation.dispatch(roactNavigationModule.StackActions.pop({ prune = false, immediate = true, key = var10 }))
+					if var11 ~= nil then
+						navigation.dispatch(roactNavigationModule.StackActions.pop({ prune = false, immediate = true, key = var11 }))
 					end
 				end
 			end
@@ -104,7 +113,7 @@ return function(p1, p2)
 	
 	return {
 		isSplitLayoutEnabled = options,
-		isRouteActiveOnPane = var9,
+		isRouteActiveOnPane = var10,
 		paneIndices = t,
 		contentTopCandidate = v,
 		splitPrimaryIndex = var7,

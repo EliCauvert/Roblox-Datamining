@@ -41,7 +41,6 @@ local useWebViewModule = require(interventionShared.Hooks.useWebView)
 local fFlagNavigateToSafetyDashboardForAppeals = require(parent.SharedFlags).FFlagNavigateToSafetyDashboardForAppeals
 local fFlagUFRImprovementsModule = require(interventionShared.Flags.FFlagUFRImprovements)
 local fFlagUFRInlineAppealLinkModule = require(interventionShared.Flags.FFlagUFRInlineAppealLink)
-local fFlagUniversalFeatureRestrictionReceivers = require(parent.SharedFlags).FFlagUniversalFeatureRestrictionReceivers
 local accept = images["icons/actions/accept"]
 
 local function _(p1)
@@ -49,7 +48,7 @@ local function _(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useRef (ref), useInterventionPlacementModule (ref), useLocalization (ref), constantsModule (ref), usePreferredInput (ref), responsiveModule (ref), fFlagNavigateToSafetyDashboardForAppeals (ref), urlBuilder (ref), useWebViewModule (ref), linkingProtocol (ref), useInterventionFocusRootModule (ref), focusNavigableSurfaceIdentifierEnum (ref), useEffect (ref), interventionAnalyticsModule (ref), useCallback (ref), postDismissInterventionModule (ref), fFlagUniversalFeatureRestrictionReceivers (ref), notificationModalsManagerModule (ref), accept (ref), VRService (ref), fFlagUFRInlineAppealLinkModule (ref), reactModule (ref), text (ref), fFlagUFRImprovementsModule (ref), view (ref), divider (ref), evidenceFieldModule (ref), badge (ref), badgeVariant (ref), iconName (ref), iconPosition (ref), iconVariant (ref), cryoModule (ref), button (ref), buttonVariant (ref), buttonSize (ref), dialog (ref), dialogSize (ref), interventionDialogLoadingSkeletonModule (ref), interventionDialogFooterModule (ref)
+	-- upvalues: useTokens (ref), useRef (ref), useInterventionPlacementModule (ref), useLocalization (ref), constantsModule (ref), usePreferredInput (ref), responsiveModule (ref), fFlagNavigateToSafetyDashboardForAppeals (ref), urlBuilder (ref), useWebViewModule (ref), linkingProtocol (ref), useInterventionFocusRootModule (ref), focusNavigableSurfaceIdentifierEnum (ref), useEffect (ref), interventionAnalyticsModule (ref), useCallback (ref), postDismissInterventionModule (ref), notificationModalsManagerModule (ref), accept (ref), VRService (ref), fFlagUFRInlineAppealLinkModule (ref), reactModule (ref), text (ref), fFlagUFRImprovementsModule (ref), view (ref), divider (ref), evidenceFieldModule (ref), badge (ref), badgeVariant (ref), iconName (ref), iconPosition (ref), iconVariant (ref), cryoModule (ref), button (ref), buttonVariant (ref), buttonSize (ref), dialog (ref), dialogSize (ref), interventionDialogLoadingSkeletonModule (ref), interventionDialogFooterModule (ref)
 	local var1 = useTokens()
 	local interventionId = p1.interventionId
 	local var2 = if interventionId == "" then nil else interventionId
@@ -128,7 +127,7 @@ return reactModule.memo(function(p1)
 		p1.onAcknowledgementSuccess
 	})
 	local var17 = useCallback(function()
-		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var10 (ref), var9 (ref), fFlagUniversalFeatureRestrictionReceivers (copy), var16 (ref), var2 (ref), postDismissInterventionModule (copy)
+		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var10 (ref), var9 (ref), var16 (ref)
 		interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogCtaClicked, {
 			eventType = interventionAnalyticsModule.Constants.EventTypes.CtaClicked,
 			interventionType = p1.interventionTypeForAnalytics,
@@ -138,39 +137,7 @@ return reactModule.memo(function(p1)
 			acknowledgeable = p1.acknowledgeable,
 			abuseVector = p1.abuseVectorForAnalytics
 		})
-		
-		if fFlagUniversalFeatureRestrictionReceivers then
-			var16()
-		elseif p1.acknowledgeable and var2 then
-			postDismissInterventionModule(var2):andThen(function(_)
-				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var10 (copy), var9 (copy)
-				interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissSuccess, {
-					eventType = interventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissSuccess,
-					interventionType = p1.interventionTypeForAnalytics,
-					placement = var10,
-					renderedTimestamp = var9.current,
-					eventId = p1.eventId,
-					acknowledgeable = p1.acknowledgeable,
-					abuseVector = p1.abuseVectorForAnalytics
-				})
-				
-				if p1.onAcknowledgementSuccess then
-					p1.onAcknowledgementSuccess()
-				end
-			end):catch(function(p2)
-				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var10 (copy), var9 (copy)
-				interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissFailed, {
-					eventType = interventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissFailed,
-					interventionType = p1.interventionTypeForAnalytics,
-					placement = var10,
-					renderedTimestamp = var9.current,
-					eventId = p1.eventId,
-					error = p2.error,
-					acknowledgeable = p1.acknowledgeable,
-					abuseVector = p1.abuseVectorForAnalytics
-				})
-			end)
-		end
+		var16()
 		p1.onDismiss()
 	end, {
 		p1.onDismiss, p1.interventionTypeForAnalytics, var10, var9.current,
@@ -178,7 +145,7 @@ return reactModule.memo(function(p1)
 		p1.onAcknowledgementSuccess
 	})
 	local var18 = useCallback(function()
-		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var10 (ref), var9 (ref), fFlagUniversalFeatureRestrictionReceivers (copy), var16 (ref), notificationModalsManagerModule (copy), accept (copy), var11 (ref), var1 (ref), VRService (copy), var12 (ref), default (ref), var13 (ref), var14 (ref)
+		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var10 (ref), var9 (ref), var16 (ref), notificationModalsManagerModule (copy), accept (copy), var11 (ref), var1 (ref), VRService (copy), var12 (ref), default (ref), var13 (ref), var14 (ref)
 		interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogAppealClicked, {
 			eventType = interventionAnalyticsModule.Constants.EventTypes.AppealClicked,
 			interventionType = p1.interventionTypeForAnalytics,
@@ -189,7 +156,7 @@ return reactModule.memo(function(p1)
 			abuseVector = p1.abuseVectorForAnalytics
 		})
 		
-		if fFlagUniversalFeatureRestrictionReceivers and p1.useDetailedLayout and p1.onAppeal then
+		if p1.useDetailedLayout and p1.onAppeal then
 			p1.onAppeal()
 			
 			if not p1.shouldOpenAppealsPortal then
@@ -222,7 +189,7 @@ return reactModule.memo(function(p1)
 		var1.Color.System.Success.Color3, var16
 	})
 	local t = {}
-	local useDetailedLayout = fFlagUniversalFeatureRestrictionReceivers and p1.useDetailedLayout
+	local useDetailedLayout = p1.useDetailedLayout
 	local useDetailedLayout_1 = fFlagUFRInlineAppealLinkModule and useDetailedLayout
 	
 	if p1.bodyText and p1.bodyText ~= "" then

@@ -2,10 +2,12 @@
 local parent_1 = parent.Parent
 local reactModule = require(parent_1.React)
 local textService = game:GetService("TextService")
+local getTextSize = require(parent_1.Style).GetTextSize
 local UIBloxModule = require(parent_1.UIBlox)
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local foundationModule = require(parent_1.Foundation)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 local useTextSizeOffset = foundationModule.Hooks.useTextSizeOffset
@@ -24,7 +26,7 @@ local purchaseModalV2ShownCounter = require(parent.Generic.Events.PurchaseModalC
 local fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule = require(parent.Flags.FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePrompt)
 
 local function ProductPurchaseModal(p1)
-	-- upvalues: fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (ref), useDefaultFocusBehavior (ref), reactModule (ref), loggerModule (ref), getAppContextModule (ref), default (ref), purchaseModalV2ShownCounter (ref), useLocalization (ref), formatNumberModule (ref), localizationService (ref), useTokens (ref), useTextSizeOffset (ref), textService (ref), interactiveAlert (ref), productDetailsModule (ref), buttonType (ref), text (ref)
+	-- upvalues: fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (ref), useDefaultFocusBehavior (ref), reactModule (ref), loggerModule (ref), getAppContextModule (ref), default (ref), purchaseModalV2ShownCounter (ref), useLocalization (ref), formatNumberModule (ref), localizationService (ref), useTokens (ref), useTextSizeOffset (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), interactiveAlert (ref), productDetailsModule (ref), buttonType (ref), text (ref)
 	local var1 = nil
 	local var2 = nil
 	
@@ -76,8 +78,8 @@ local function ProductPurchaseModal(p1)
 		end
 	end, { p1 })
 	local var14 = reactModule.useMemo(function()
-		-- upvalues: var6 (ref), textService (copy), var12 (write), var10 (write)
-		return var6.LineHeight * textService:GetTextSize(var12, var6.FontSize, var6.Font, Vector2.new(var10, 1e999)).Y
+		-- upvalues: var6 (ref), foundationFontFaceMigration (copy), getTextSize (copy), var12 (write), var10 (write), textService (copy)
+		return var6.LineHeight * (if foundationFontFaceMigration then getTextSize(var12, var6.FontSize, var6.Font, Vector2.new(var10, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(var12, var6.FontSize, var6.Font, Vector2.new(var10, 1e999)).Y)
 	end, { var10, var7, var12 })
 	
 	return reactModule.createElement(interactiveAlert, {

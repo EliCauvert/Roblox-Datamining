@@ -6,6 +6,7 @@ local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 local UIBloxModule = require(parent.UIBlox)
 local foundationModule = require(parent.Foundation)
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local text = require(parent.AppCommonLib).Text
 local memoize = require(parent.AppCommonLib).memoize
 local textButton = UIBloxModule.App.Button.TextButton
@@ -83,7 +84,7 @@ function searchTopBar.willUnmount(p1)
 end
 
 function searchTopBar.render(p1)
-	-- upvalues: UIBloxModule (ref), roactModule (ref), textButton (ref), withSelectionCursorProvider (ref), foundationModule (ref), cursorKind (ref), imageSetLabel (ref), t (ref), iconSize (ref), search (ref), callbackInputBox (ref), clearSmall (ref)
+	-- upvalues: UIBloxModule (ref), roactModule (ref), textButton (ref), withSelectionCursorProvider (ref), foundationModule (ref), cursorKind (ref), imageSetLabel (ref), t (ref), iconSize (ref), search (ref), callbackInputBox (ref), foundationFontFaceMigration (ref), clearSmall (ref)
 	local var1 = function(p2)
 		-- upvalues: p1 (ref)
 		if (not p2 or #p2 <= 0) and p1.focusNavigationService and p1.inputBoxRef.current then
@@ -100,7 +101,7 @@ function searchTopBar.render(p1)
 	end
 	
 	return UIBloxModule.Style.withStyle(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy), textButton (copy), withSelectionCursorProvider (copy), foundationModule (copy), cursorKind (copy), imageSetLabel (copy), t (copy), iconSize (copy), search (copy), callbackInputBox (copy), clearSmall (copy), var1 (ref)
+		-- upvalues: p1 (ref), roactModule (copy), textButton (copy), withSelectionCursorProvider (copy), foundationModule (copy), cursorKind (copy), imageSetLabel (copy), t (copy), iconSize (copy), search (copy), callbackInputBox (copy), foundationFontFaceMigration (copy), clearSmall (copy), var1 (ref)
 		local cancelText = p1.props.cancelText
 		local header2 = p2.Font.Header2
 		local textWidth = p1.getTextWidth(cancelText, header2.Font, p2.Font.BaseSize * header2.RelativeSize)
@@ -137,7 +138,7 @@ function searchTopBar.render(p1)
 				onActivated = p1.props.cancelCallback
 			}) else nil,
 			filterBoxContainer = withSelectionCursorProvider(function(p3)
-				-- upvalues: roactModule (copy), foundationModule (copy), var2 (write), cursorKind (copy), p1 (copy), imageSetLabel (copy), t (copy), p2 (ref), iconSize (copy), search (copy), callbackInputBox (copy), body (ref), var3 (ref), clearSmall (copy), var1 (copy)
+				-- upvalues: roactModule (copy), foundationModule (copy), var2 (write), cursorKind (copy), p1 (copy), imageSetLabel (copy), t (copy), p2 (ref), iconSize (copy), search (copy), callbackInputBox (copy), foundationFontFaceMigration (copy), body (ref), var3 (ref), clearSmall (copy), var1 (copy)
 				return roactModule.createElement(foundationModule.View, {
 					LayoutOrder = 1,
 					Size = var2,
@@ -187,7 +188,7 @@ function searchTopBar.render(p1)
 								clearButtonDisabled = false,
 								initialInputText = p1.props.initialInputText,
 								inputTextColor3 = p2.Theme.TextEmphasis.Color,
-								inputTextFont = body.Font,
+								inputTextFont = if foundationFontFaceMigration then p2.Tokens.Typography.BodyLarge.Font else body.Font,
 								inputTextSize = var3,
 								inputTextTransparency = p2.Theme.TextEmphasis.Transparency,
 								inputTextXAlignment = Enum.TextXAlignment.Left,

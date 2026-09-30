@@ -9,12 +9,10 @@ local useSelectionCursor = UIBloxModule.App.SelectionImage.useSelectionCursor
 local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local _ = require(avatarExperienceUIKit.BackgroundLayers.BackgroundLayers)
 local itemCardBackgroundsWrapperModule = require(script.Parent.ItemCardBackgroundsWrapper)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
-local fFlagAXSelectedBorderWrapsBackground = avatarExperienceFlagsModule.FFlagAXSelectedBorderWrapsBackground
+local fFlagAXMISEnableMultiShopping = require(parent.AvatarExperienceFlags).FFlagAXMISEnableMultiShopping
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useSelectionCursor (ref), cursorKind (ref), useTokens (ref), reactModule (ref), fFlagAXMISEnableMultiShopping (ref), itemCardBackgroundsWrapperModule (ref), fFlagAXSelectedBorderWrapsBackground (ref), view (ref)
+	-- upvalues: useSelectionCursor (ref), cursorKind (ref), useTokens (ref), reactModule (ref), fFlagAXMISEnableMultiShopping (ref), itemCardBackgroundsWrapperModule (ref), view (ref)
 	return reactModule.createElement("TextButton", {
 		Selectable = if fFlagAXMISEnableMultiShopping then p1.Selectable else nil,
 		SelectionImageObject = useSelectionCursor(cursorKind.RoundedRect),
@@ -46,7 +44,7 @@ return reactModule.forwardRef(function(p1, p2)
 			headerSlot = p1.headerSlot,
 			footerSlot = p1.footerSlot
 		}),
-		SelectedBorder = if fFlagAXSelectedBorderWrapsBackground and p1.showSelectionBorderWithBackground then reactModule.createElement(view, {
+		SelectedBorder = if p1.showSelectionBorderWithBackground then reactModule.createElement(view, {
 			tag = "size-full stroke-standard stroke-system-contrast radius-medium",
 			testId = "card-selection-stroke",
 			ZIndex = 2

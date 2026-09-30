@@ -39,13 +39,17 @@ local mobileGameJoinCardShowExperienceNameOnly = game:DefineFastFlag("MobileGame
 local fFlagMobileGameJoinCardEDPFromTitleModule = require(gameJoinCard.Flags.FFlagMobileGameJoinCardEDPFromTitle)
 local fFlagMobileGameJoinCardEDPFromThumbnailModule = require(gameJoinCard.Flags.FFlagMobileGameJoinCardEDPFromThumbnail)
 local mobileGameCardDontShowChatWith = game:DefineFastFlag("MobileGameCardDontShowChatWith", false)
+local fFlagJoinabilityCTARefactor = require(parent.SharedFlags).FFlagJoinabilityCTARefactor
+local _ = require(gameJoinCard.Components.Actions.Types)
+local buildJoinCardActionsComponentModule = require(gameJoinCard.Components.Actions.buildJoinCardActionsComponent)
+local userCtaAction = require(parent.UserCtaCommon).Enums.UserCtaAction
 local t = {
 	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), fFlagMobileGameJoinCardThumbnailModule (ref), foundationModule (ref), guiService (ref), fFlagMobileGameJoinCardGamepadSupport (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), useMostRecentOrDefaultFocusBehavior (ref), useFocusOnMount (ref), gameJoinCardTTIModule (ref), viewProfileSourceValues (ref), fFlagMobileGameJoinCardEDPFromThumbnailModule (ref), viewEDPsourceValues (ref), fFlagMobileGameJoinCardEDPFromTitleModule (ref), useJoinCardCtaLoadTimeModule (ref), ctaType (ref), useLocalization (ref), overlayProvider (ref), sheet (ref), view (ref), mobileGameJoinCardHideUserAvatar (ref), image (ref), stateLayerAffordance (ref), skeleton (ref), mobileGameJoinCardShowExperienceNameOnly (ref), text (ref), userTile (ref), layoutMode (ref), ageCheckUpsellCTAModule (ref), button (ref), buttonVariant (ref), inputSize (ref), mobileGameCardDontShowChatWith (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), fFlagMobileGameJoinCardThumbnailModule (ref), foundationModule (ref), guiService (ref), fFlagMobileGameJoinCardGamepadSupport (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), useMostRecentOrDefaultFocusBehavior (ref), useFocusOnMount (ref), gameJoinCardTTIModule (ref), viewProfileSourceValues (ref), fFlagMobileGameJoinCardEDPFromThumbnailModule (ref), viewEDPsourceValues (ref), fFlagMobileGameJoinCardEDPFromTitleModule (ref), fFlagJoinabilityCTARefactor (ref), userCtaAction (ref), useJoinCardCtaLoadTimeModule (ref), ctaType (ref), useLocalization (ref), skeleton (ref), buildJoinCardActionsComponentModule (ref), button (ref), overlayProvider (ref), sheet (ref), view (ref), mobileGameJoinCardHideUserAvatar (ref), image (ref), stateLayerAffordance (ref), mobileGameJoinCardShowExperienceNameOnly (ref), text (ref), userTile (ref), layoutMode (ref), ageCheckUpsellCTAModule (ref), buttonVariant (ref), inputSize (ref), mobileGameCardDontShowChatWith (ref)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState(false)
 	local var4 = nil
@@ -135,16 +139,29 @@ return function(p1)
 	local var28 = var1.Typography.TitleMedium.FontSize * var1.Typography.TitleMedium.LineHeight
 	local var29 = var28 + var1.Typography.BodyMedium.FontSize * var1.Typography.BodyMedium.LineHeight + var1.Padding.Small
 	local var30 = 88 + var29
-	local var31 = p1.ageCheckRequired == true
+	local var31 = false
+	
+	if fFlagJoinabilityCTARefactor then
+		for i, v in p1.actions do
+			if v.id == userCtaAction.UnlockExperience then
+				var31 = true
+				break
+			end
+		end
+	end
+	local var32 = if fFlagJoinabilityCTARefactor then var31 else p1.ageCheckRequired == true
 	useJoinCardCtaLoadTimeModule({
-		isLoading = p1.isLoading,
-		ctaType = if var31 then ctaType.AgeCheckUnlock else ctaType.Join,
+		isLoading = p1.isLoading or fFlagJoinabilityCTARefactor and p1.areActionsLoading == true,
+		ctaType = if var32 then ctaType.AgeCheckUnlock else ctaType.Join,
 		wasCached = p1.wasPlayabilityCached
 	})
-	local var32 = useLocalization({
+	local var33 = useLocalization({
 		join = "Feature.Profile.Action.JoinGame",
 		viewProfile = "Feature.Profile.Action.ViewProfile",
 		chat = "Feature.Profile.Action.Chat",
+		playTogether = "Feature.GameJoin.Label.PlayTogether",
+		playTogetherSoon = "Feature.GameJoin.Label.PlayTogetherSoon",
+		differentServer = "Feature.GameJoin.Description.DifferentServer",
 		playingExperience = {
 			"Feature.Profile.Label.PlayingExperience",
 			experienceName = p1.experienceName
@@ -159,40 +176,74 @@ return function(p1)
 			username = p1.playerName
 		}
 	})
+	local t_1 = {}
+	local var34 = nil
+	
+	if fFlagJoinabilityCTARefactor then
+		if p1.areActionsLoading then
+			t_1.ActionsLoading = reactModule.createElement(skeleton, {
+				LayoutOrder = 1,
+				Size = UDim2.new(1, 0, 0, var1.Size.Size_600)
+			})
+		else
+			local var35, var36 = buildJoinCardActionsComponentModule(p1.actions, {
+				playTogether = var33.playTogether,
+				playTogetherSoon = var33.playTogetherSoon,
+				differentServer = var33.differentServer
+			}, p1.onClose, function(p2, p3)
+				-- upvalues: reactModule (copy), button (copy)
+				return reactModule.createElement(button, {
+					text = p2.text,
+					onActivated = function()
+						-- upvalues: p2 (ref)
+						p2.onActivated()
+					end,
+					variant = p2.variant,
+					size = p2.inputSize,
+					isLoading = p2.isLoading,
+					isDisabled = p2.isDisabled,
+					width = p2.width,
+					LayoutOrder = p3
+				})
+			end)
+			t_1 = var35
+			var34 = var36
+		end
+	end
 	local createElement = reactModule.createElement
-	local var33 = "Frame"
-	local t_1 = {
+	local var37 = "Frame"
+	local t_2 = {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
 		ref = var10
 	}
-	local t_2 = {}
-	local var34 = var9
+	local t_3 = {}
+	local var38 = var9
 	
-	if var34 then
-		local var35
-		var34 = reactModule.createElement
-		local var36 = overlayProvider
-		local t_3 = { gui = var9 }
-		local t_4 = {}
+	if var38 then
+		local t_12
+		var38 = reactModule.createElement
+		local var39 = overlayProvider
+		local t_4 = { gui = var9 }
+		local t_5 = {}
 		local createElement_1 = reactModule.createElement
 		local root = sheet.Root
-		local t_5 = {
+		local t_6 = {
 			preferCenterSheet = true,
 			onClose = p1.onClose,
 			ref = if fFlagMobileGameJoinCardGamepadSupport then var16 else nil
 		}
-		local t_6 = {}
+		local t_7 = {}
 		local createElement_2 = reactModule.createElement
 		local content = sheet.Content
-		local var37 = nil
-		local t_7 = {
+		local var40 = nil
+		local t_8 = {
 			BottomPadding = if var12 then reactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, var1.Padding.Medium) }) else nil
 		}
 		local createElement_3 = reactModule.createElement
-		local var38 = view
-		local t_8 = { tag = "col gap-medium size-full-0 auto-y" }
-		local t_9 = {
+		local var41 = view
+		local t_9 = { tag = "col gap-medium size-full-0 auto-y" }
+		local t_10 = {
 			BannerImageContainer = reactModule.createElement(view, {
 				tag = "size-full-0",
 				LayoutOrder = 1,
@@ -255,72 +306,93 @@ return function(p1)
 						LayoutOrder = 1,
 						RichText = true,
 						fontStyle = var1.Typography.BodyMedium,
-						Text = var32.userIsPlayingExperience
+						Text = var33.userIsPlayingExperience
 					})
 				}) else reactModule.createElement(userTile, {
 					userId = p1.userId,
 					title = p1.playerName,
-					subtitle = var32.playingExperience,
+					subtitle = var33.playingExperience,
 					layoutMode = layoutMode.compact,
 					avatarSize = UDim2.fromOffset(88, 88),
 					backplateStyle = var1.Color.Surface.Surface_100,
 					onActivated = var24
 				})
-			}) else nil
+			}) else nil,
+			CtaContext = if var34 ~= nil then nil else reactModule.createElement(view, {
+				tag = "col align-x-center items-center gap-xxsmall size-full-0 auto-y",
+				LayoutOrder = 3
+			}, {
+				CtaContextTitle = reactModule.createElement(text, {
+					tag = "auto-xy text-body-medium text-align-x-center content-emphasis",
+					LayoutOrder = 1,
+					Text = var34.title
+				}),
+				CtaContextSubtitle = if var34.subtitle ~= nil then nil else reactModule.createElement(text, {
+					tag = "auto-xy text-label-small text-align-x-center content-muted",
+					LayoutOrder = 2,
+					Text = var34.subtitle
+				})
+			})
 		}
 		local createElement_4 = reactModule.createElement
-		local var39 = view
-		local t_10 = {
-			tag = "col gap-small size-full-0 auto-y",
-			LayoutOrder = 3
-		}
+		local var42 = view
 		local t_11 = {
-			PrimaryButton = if var31 then reactModule.createElement(ageCheckUpsellCTAModule, {
-				LayoutOrder = 1,
-				onUnlockPressed = p1.onAgeCheckPressed or function() end,
-				focusRef = if fFlagMobileGameJoinCardGamepadSupport then var19 else nil
-			}) else reactModule.createElement(button, {
-				LayoutOrder = 1,
-				ref = if fFlagMobileGameJoinCardGamepadSupport then var19 else nil,
-				text = var32.join,
-				onActivated = p1.onJoin,
-				variant = buttonVariant.Emphasis,
-				inputSize = inputSize.Medium,
-				isLoading = p1.isLoading,
-				isDisabled = not p1.isInExperience,
-				width = UDim.new(1, 0)
-			})
+			tag = "col gap-small size-full-0 auto-y",
+			LayoutOrder = if var34 ~= nil then 3 else 4
 		}
 		
-		if p1.canUsePlatformChat then
-			var35 = reactModule.createElement
-			var35 = var35(button, {
-				LayoutOrder = 2,
-				text = if mobileGameJoinCardShowExperienceNameOnly and not mobileGameCardDontShowChatWith then var32.chatWithName else var32.chat,
-				onActivated = p1.onChat,
-				variant = buttonVariant.Standard,
+		if fFlagJoinabilityCTARefactor then
+			t_12 = t_1
+		else
+			local var43
+			t_12 = {
+				PrimaryButton = if var32 then reactModule.createElement(ageCheckUpsellCTAModule, {
+					LayoutOrder = 1,
+					onUnlockPressed = p1.onAgeCheckPressed or function() end,
+					focusRef = if fFlagMobileGameJoinCardGamepadSupport then var19 else nil
+				}) else reactModule.createElement(button, {
+					LayoutOrder = 1,
+					ref = if fFlagMobileGameJoinCardGamepadSupport then var19 else nil,
+					text = var33.join,
+					onActivated = p1.onJoin,
+					variant = buttonVariant.Emphasis,
+					inputSize = inputSize.Medium,
+					isLoading = p1.isLoading,
+					isDisabled = not p1.isInExperience,
+					width = UDim.new(1, 0)
+				})
+			}
+			
+			if p1.canUsePlatformChat then
+				var43 = reactModule.createElement
+				var43 = var43(button, {
+					LayoutOrder = 2,
+					text = if mobileGameJoinCardShowExperienceNameOnly and not mobileGameCardDontShowChatWith then var33.chatWithName else var33.chat,
+					onActivated = p1.onChat,
+					variant = buttonVariant.Standard,
+					inputSize = inputSize.Medium,
+					width = UDim.new(1, 0)
+				})
+			else
+				var43 = nil
+			end
+			t_12.ChatButton = var43
+			t_12.SecondaryButton = reactModule.createElement(button, {
+				LayoutOrder = 3,
+				text = var33.viewProfile,
+				onActivated = var25,
+				variant = buttonVariant.Utility,
 				inputSize = inputSize.Medium,
 				width = UDim.new(1, 0)
 			})
-		else
-			var35 = nil
 		end
-		t_11.ChatButton = var35
-		t_11.SecondaryButton = reactModule.createElement(button, {
-			LayoutOrder = 3,
-			text = var32.viewProfile,
-			onActivated = var25,
-			variant = buttonVariant.Utility,
-			inputSize = inputSize.Medium,
-			width = UDim.new(1, 0)
-		})
-		t_9.Buttons = createElement_4(var39, t_10, t_11)
-		t_7.Layout = createElement_3(var38, t_8, t_9)
-		t_6.Content = createElement_2(content, var37, t_7)
-		t_4.SheetRoot = createElement_1(root, t_5, t_6)
-		var34 = var34(var36, t_3, t_4)
+		t_10.Buttons = createElement_4(var42, t_11, t_12)
+		t_8.Layout = createElement_3(var41, t_9, t_10)
+		t_7.Content = createElement_2(content, var40, t_8)
+		t_5.SheetRoot = createElement_1(root, t_6, t_7)
+		var38 = var38(var39, t_4, t_5)
 	end
-	t_2.SheetProvider = var34
+	t_3.SheetProvider = var38
 	
-	return createElement(var33, t_1, t_2)
+	return createElement(var37, t_2, t_3)
 end

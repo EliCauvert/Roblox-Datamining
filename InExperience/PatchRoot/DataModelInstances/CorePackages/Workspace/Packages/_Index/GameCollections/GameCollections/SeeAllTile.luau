@@ -1,6 +1,9 @@
 ﻿local parent = script:FindFirstAncestor("GameCollections").Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local images = UIBloxModule.App.ImageSet.Images
 local useCursor = UIBloxModule.App.SelectionCursor.useCursor
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -9,7 +12,7 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 local pushRight = images["icons/navigation/pushRight"]
 
 function SeeAllTile(p1)
-	-- upvalues: useDesignTokens (ref), useLocalization (ref), useCursor (ref), pushRight (ref), reactModule (ref), imageSetLabel (ref)
+	-- upvalues: useDesignTokens (ref), useLocalization (ref), useCursor (ref), pushRight (ref), reactModule (ref), imageSetLabel (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local size = p1.size
 	local layoutOrder = p1.layoutOrder
 	local var1 = useDesignTokens()
@@ -51,7 +54,8 @@ function SeeAllTile(p1)
 			Text = p1.title or var2.seeAll,
 			Size = UDim2.new(1, 0, 0, titleLarge.FontSize),
 			TextXAlignment = Enum.TextXAlignment.Center,
-			Font = titleLarge.Font,
+			Font = if foundationFontFaceMigration then nil else titleLarge.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(titleLarge.Font) else nil,
 			TextSize = titleLarge.FontSize,
 			TextColor3 = var1.Color.Content.Emphasis.Color3,
 			TextTruncate = Enum.TextTruncate.AtEnd

@@ -13,6 +13,8 @@ local fFlagProfilePlatformAddTC = sharedFlagsModule.FFlagProfilePlatformAddTC
 local fFlagFixTFLinksVRGatingModule = require(profilePlatform.Flags.FFlagFixTFLinksVRGating)
 local fFlagProfilePlatformEnableUnlockChatModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableUnlockChat)
 local fFlagProfilePlatformEnableUserFollowModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableUserFollow)
+local fFlagFriendsCallingClientGateDEV = sharedFlagsModule.FFlagFriendsCallingClientGate_DEV
+local fFlagJoinabilityCTARefactor = sharedFlagsModule.FFlagJoinabilityCTARefactor
 local list = {
 	enumsModule.ProfileActions.AddFriend,
 	enumsModule.ProfileActions.CannotAddFriend,
@@ -29,8 +31,11 @@ local list = {
 	enumsModule.ProfileActions.RemoveTrustedConnection
 }
 
-if sharedFlagsModule.FFlagFriendsCallingClientGate_DEV then
+if fFlagFriendsCallingClientGateDEV then
 	table.insert(list, enumsModule.ProfileActions.Call)
+end
+if fFlagJoinabilityCTARefactor then
+	table.insert(list, enumsModule.ProfileActions.PlayExperience)
 end
 if fFlagProfilePlatformEnableUnlockChatModule then
 	table.insert(list, enumsModule.ProfileActions.UnlockChat)

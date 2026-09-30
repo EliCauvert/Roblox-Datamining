@@ -23,10 +23,27 @@ return reactModule.memo(function(p1)
 	local var1 = useTokens()
 	local commentId = `moments-comment-reaction-button-{p1.commentId}`
 	local var2, var3 = reactOtterModule.useAnimatedBinding(if p1.isReactionSelected then 1 else 0)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), reactOtterModule (copy), p1 (ref), t_1 (copy), t_2 (copy)
-		var3(reactOtterModule.spring(if p1.isReactionSelected then 1 else 0, if p1.isReactionSelected then t_1 else t_2))
-	end, { p1.isReactionSelected })
+	local var4 = reactModule.useRef({
+		commentId = p1.commentId,
+		isReactionSelected = p1.isReactionSelected
+	})
+	reactModule.useLayoutEffect(function()
+		-- upvalues: var4 (ref), p1 (ref), var3 (ref), reactOtterModule (copy), t_1 (copy), t_2 (copy)
+		local current = var4.current
+		var4.current = {
+			commentId = p1.commentId,
+			isReactionSelected = p1.isReactionSelected
+		}
+		local var5 = if p1.isReactionSelected then 1 else 0
+		
+		if current.commentId ~= p1.commentId then
+			var3(reactOtterModule.instant(var5))
+			
+			return
+		elseif current.isReactionSelected ~= p1.isReactionSelected then
+			var3(reactOtterModule.spring(var5, if p1.isReactionSelected then t_1 else t_2))
+		end
+	end, { p1.commentId, p1.isReactionSelected })
 	local small = var1.Padding.Small
 	
 	return reactModule.createElement(view, {
@@ -59,7 +76,7 @@ return reactModule.memo(function(p1)
 							size = iconSize.Medium,
 							style = var2:map(function(p2)
 								-- upvalues: getColorStyleWithTransparencyModule (copy), var1 (ref)
-								return getColorStyleWithTransparencyModule(var1.Color.Content.Emphasis, math.clamp(p2, 0, 1))
+								return getColorStyleWithTransparencyModule(var1.Color.Content.Default, math.clamp(p2, 0, 1))
 							end),
 							AnchorPoint = Vector2.new(0.5, 0.5),
 							Position = UDim2.fromScale(0.5, 0.5),
@@ -82,8 +99,12 @@ return reactModule.memo(function(p1)
 					})
 				}),
 				Count = reactModule.createElement(text, {
-					tag = "auto-xy text-title-small content-emphasis",
 					LayoutOrder = 2,
+					tag = {
+						["auto-xy"] = true,
+						["text-title-small content-emphasis"] = p1.isReactionSelected,
+						["text-body-small content-default"] = not p1.isReactionSelected
+					},
 					Text = p1.reactionCountLabel,
 					testId = `moments-comment-reaction-count-{p1.commentId}`
 				})

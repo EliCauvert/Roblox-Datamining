@@ -11,6 +11,9 @@ local roactFitComponentsModule = require(parent_2.RoactFitComponents)
 local fitFrameVertical = roactFitComponentsModule.FitFrameVertical
 local fitTextLabel = roactFitComponentsModule.FitTextLabel
 local UIBloxModule = require(parent_2.UIBlox)
+local foundationModule = require(parent_2.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local images = UIBloxModule.App.ImageSet.Images
@@ -25,7 +28,6 @@ local multiTextLocalizerModule = require(parent_1.Locale.MultiTextLocalizer)
 local productDetailsModule = require(parent.ProductDetails)
 local robux = images["icons/common/robux"]
 local name = roactModule.Component:extend(script.Name)
-local getEnableFixRobuxUpsellPriceCrashModule = require(parent_1.Flags.getEnableFixRobuxUpsellPriceCrash)
 local fFlagIntroduceMetricsLegacyUpsellModule = require(parent_1.Flags.FFlagIntroduceMetricsLegacyUpsell)
 local default = require(parent_2.LoggingProtocol).default
 local legacyUpsellCounterModule = require(parent_1.Generic.Events.LegacyUpsellCounter)
@@ -123,12 +125,12 @@ function name.render(p1)
 end
 
 function name.renderAlert(p1, p2)
-	-- upvalues: withStyle (ref), getEnableFixRobuxUpsellPriceCrashModule (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), productDetailsModule (ref), fitTextLabel (ref), imageSetLabel (ref), robux (ref), buttonType (ref), iconSize (ref)
+	-- upvalues: withStyle (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), productDetailsModule (ref), fitTextLabel (ref), imageSetLabel (ref), robux (ref), buttonType (ref), iconSize (ref)
 	return withStyle(function(p3)
-		-- upvalues: getEnableFixRobuxUpsellPriceCrashModule (copy), p1 (ref), roactModule (copy), interactiveAlert (copy), p2 (ref), fitFrameVertical (copy), productDetailsModule (copy), fitTextLabel (copy), imageSetLabel (copy), robux (copy), buttonType (copy), iconSize (copy)
+		-- upvalues: p1 (ref), roactModule (copy), interactiveAlert (copy), p2 (ref), fitFrameVertical (copy), productDetailsModule (copy), fitTextLabel (copy), imageSetLabel (copy), robux (copy), buttonType (copy), iconSize (copy)
 		local theme = p3.Theme
 		local font = p3.Font
-		local var1 = if getEnableFixRobuxUpsellPriceCrashModule() then (p1.props.balanceAmount or 0) + (p1.props.robuxPurchaseAmount or 0) - (p1.props.itemRobuxCost or 0) else p1.props.balanceAmount + p1.props.robuxPurchaseAmount - p1.props.itemRobuxCost
+		local var1 = (p1.props.balanceAmount or 0) + (p1.props.robuxPurchaseAmount or 0) - (p1.props.itemRobuxCost or 0)
 		
 		return roactModule.createElement(interactiveAlert, {
 			screenSize = p1.props.screenSize,
@@ -258,7 +260,7 @@ function name.renderAlert(p1, p2)
 				}
 			},
 			footerContent = function()
-				-- upvalues: p2 (copy), roactModule (copy), fitFrameVertical (copy), p1 (copy), fitTextLabel (copy), font (ref), theme (ref), imageSetLabel (copy), iconSize (copy), robux (copy), var1 (write)
+				-- upvalues: p2 (copy), roactModule (copy), fitFrameVertical (copy), p1 (copy), fitTextLabel (copy), font (ref), theme (ref), imageSetLabel (copy), iconSize (copy), robux (copy), var1 (ref)
 				local parts = string.split(p2.RemainingBalance, " {robux} ")
 				
 				return roactModule.createElement(fitFrameVertical, {
@@ -460,7 +462,7 @@ function name.renderNewAlert(p1)
 end
 
 function name.renderFooterExperiment(p1, p2, p3, p4)
-	-- upvalues: colors (ref), roactModule (ref), fitFrameVertical (ref), fFlagLowCogsBannerInfoIconModule (ref), infoIconWithTooltipModule (ref)
+	-- upvalues: colors (ref), roactModule (ref), fitFrameVertical (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), fFlagLowCogsBannerInfoIconModule (ref), infoIconWithTooltipModule (ref)
 	local font = p2.Font
 	local flint = colors.Flint
 	
@@ -496,7 +498,8 @@ function name.renderFooterExperiment(p1, p2, p3, p4)
 					RichText = true,
 					TextWrap = true,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Font = font.Footer.Font,
+					Font = if foundationFontFaceMigration then nil else font.Footer.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.CaptionSmall.Font) else nil,
 					Text = p3,
 					TextSize = font.BaseSize * font.Footer.RelativeSize,
 					TextColor3 = flint

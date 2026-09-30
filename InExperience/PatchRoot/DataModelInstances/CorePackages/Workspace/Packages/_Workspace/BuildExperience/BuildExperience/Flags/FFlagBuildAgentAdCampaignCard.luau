@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BuildAgentAdCampaignCard", false) and require(script.Parent.FFlagBuildAdUpsell)
+﻿return require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags).FFlagBuildAgentAdCampaignCard and require(script.Parent.FFlagBuildAdUpsell)

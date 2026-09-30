@@ -14,16 +14,14 @@ local socialTabsEmptyStateModule = require(socialTabsPage.Components.SocialTabsE
 local rowDataProviderModule = require(socialTabsPage.Components.RowDataProvider)
 local useSocialTabsContextModule = require(socialTabsPage.Contexts.useSocialTabsContext)
 local useFriendsListModule = require(socialTabsPage.Hooks.useFriendsList)
-local useFetchPresencesModule = require(socialTabsPage.Hooks.useFetchPresences)
 local useUserListCTAsModule = require(socialTabsPage.Hooks.useUserListCTAs)
 local useCTAActionHandlersModule = require(socialTabsPage.Hooks.useCTAActionHandlers)
 local socialTabsCtaConfigModule = require(socialTabsPage.Common.SocialTabsCtaConfig)
 local textKeysModule = require(socialTabsPage.Common.TextKeys)
-local fFlagSocialTabsPagePresenceSignalsMigrationModule = require(socialTabsPage.Flags.FFlagSocialTabsPagePresenceSignalsMigration)
 local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 
 return function()
-	-- upvalues: useSocialTabsContextModule (ref), useFriendsListModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), dashModule (ref), entityType (ref), fFlagSocialTabsPagePresenceSignalsMigrationModule (ref), useFetchPresencesModule (ref), fFlagUserListCtaIntegrationEnabled (ref), useUserListCTAsModule (ref), useCTAActionHandlersModule (ref), rowDataProviderModule (ref), view (ref), loading (ref), socialTabsEmptyStateModule (ref), userListLayoutAdaptor (ref), layoutMode (ref), socialTabsCtaConfigModule (ref)
+	-- upvalues: useSocialTabsContextModule (ref), useFriendsListModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), dashModule (ref), entityType (ref), fFlagUserListCtaIntegrationEnabled (ref), useUserListCTAsModule (ref), useCTAActionHandlersModule (ref), rowDataProviderModule (ref), view (ref), loading (ref), socialTabsEmptyStateModule (ref), userListLayoutAdaptor (ref), layoutMode (ref), socialTabsCtaConfigModule (ref)
 	local var1 = useSocialTabsContextModule()
 	local title = var1.title
 	local var2 = useFriendsListModule({ targetUserId = var1.profileId })
@@ -47,10 +45,6 @@ return function()
 			return p1.id
 		end)
 	end, { var4 })
-	
-	if not fFlagSocialTabsPagePresenceSignalsMigrationModule then
-		useFetchPresencesModule(var5)
-	end
 	local var6 = nil
 	
 	if not fFlagUserListCtaIntegrationEnabled then

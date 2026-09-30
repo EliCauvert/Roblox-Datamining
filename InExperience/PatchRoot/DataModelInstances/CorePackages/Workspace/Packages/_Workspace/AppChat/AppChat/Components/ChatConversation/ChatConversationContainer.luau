@@ -81,6 +81,8 @@ local shouldShowU13ChatOptInForConversationModule = require(appChat.Utils.should
 local navigateWithOsaGate = require(appChat.Utils).navigateWithOsaGate
 local fFlagAppChatReactToFaeForOsaModule = require(appChat.Flags.FFlagAppChatReactToFaeForOsa)
 local fFlagAppChatConversationLoadingSkeletonModule = require(appChat.Flags.FFlagAppChatConversationLoadingSkeleton)
+local fFlagAppChatBlueSentBubblesIxpEnabledModule = require(appChat.Flags.FFlagAppChatBlueSentBubblesIxpEnabled)
+local fStringAppChatBlueSentBubblesIxpLayerModule = require(appChat.Flags.FStringAppChatBlueSentBubblesIxpLayer)
 local isSyntheticSystemMessageIdModule = require(script.Parent.Utils.isSyntheticSystemMessageId)
 local fFlagAppChatConversationTrustedFriendUpsellBanner = require(parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
 local var1 = if fFlagAppChatConversationTrustedFriendUpsellBanner then require(appChat.Sdui.seedConversationTopModalFromRequest) else nil
@@ -171,7 +173,7 @@ local function getOsaState(p1, p2, p3)
 end
 
 function ChatConversationContainer(p1)
-	-- upvalues: cryoModule (ref), t (ref), useAnalyticsModule (ref), reactModule (ref), roactChatAnalyticsModule (ref), useMapDispatchModule (ref), mapDispatchToPropsModule (ref), useGetConversationFromIdModule (ref), useRecipientIdsModule (ref), httpService (ref), useLocalUserId (ref), useChatIsVisibleModule (ref), useIsChatUserMessagesEnabledModule (ref), useIsChatEnabledModule (ref), useDispatch (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), useEffect (ref), fFlagAppChatNavigateBackIfOSAUnacknowledged (ref), fFlagAppChatShowOSAOnPageEntry (ref), roactNavigationModule (ref), navigateWithOsaGate (ref), shouldShowOSAForConversationModule (ref), fFlagAppChatReactToFaeForOsaModule (ref), shouldShowU13ChatOptInForConversationModule (ref), useSignal (ref), interventionTreatmentShownSignal (ref), constants (ref), userProfilesModule (ref), getOtherParticipantsModule (ref), getConversationTitleModule (ref), useGetUsersModule (ref), useGetUsersTypingModule (ref), signalsMigrationConfigModule (ref), useMessageItemList (ref), selectMessagesPureModule (ref), getOsaState (ref), enumMessageTypesModule (ref), enumCustomEntryTypesModule (ref), fFlagAppChatConversationLoadingSkeletonModule (ref), useSelector (ref), appChatNetworkingModule (ref), roduxNetworkingModule (ref), getFFlagEnableAppChatInExperience (ref), useIsInExperienceModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), getReplyingToStoreModule (ref), getConversationMessageViewModelStoreModule (ref), useSignalState (ref), useReplyingToMessageModule (ref), useReplyingToMessageDispatchModule (ref), useLocalization (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), chatConversationTelemetryStateModule (ref), useIsUserPendingModule (ref), fFlagAppChatEnableDoubleOptIn (ref), useCallbackWithDynamicConversationIdModule (ref), loggerModule (ref), fFlagAppChatConversationTrustedFriendUpsellBanner (ref), var1 (ref), fFlagDebugEnableTCDoubleOptInDEV (ref), useKeybindModule (ref), fFlagTCUpsellModalEnabledDEV (ref), useShouldShowConversationOverlayModule (ref), useChatTimeoutDetailsModule (ref), chatConversationTelemetryEventsModule (ref), appChatConversationPageSyntheticSystemMessageIxpEnabled (ref), isSyntheticSystemMessageIdModule (ref), IXPService (ref), appChatConversationPageSyntheticSystemMessageIxpLayer (ref), conversationChannelsModule (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), conversationModule (ref), genericDialogTypeModule (ref), fFlagAppChatUniversalFeatureRestriction (ref), parent (ref), fFlagAppChatReactiveFeatureRestrictions (ref), chatInputBoxDisabledPressedSignal (ref), getAllRemainingOlderMessagesModule (ref), getOlderMessagesModule (ref), appChatGetAllMessagesDepth (ref), pendingStateConversationPageModule (ref), chatConversationModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useAnalyticsModule (ref), reactModule (ref), roactChatAnalyticsModule (ref), useMapDispatchModule (ref), mapDispatchToPropsModule (ref), useGetConversationFromIdModule (ref), useRecipientIdsModule (ref), httpService (ref), useLocalUserId (ref), useChatIsVisibleModule (ref), useIsChatUserMessagesEnabledModule (ref), useIsChatEnabledModule (ref), useDispatch (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), useEffect (ref), fFlagAppChatNavigateBackIfOSAUnacknowledged (ref), fFlagAppChatShowOSAOnPageEntry (ref), roactNavigationModule (ref), navigateWithOsaGate (ref), shouldShowOSAForConversationModule (ref), fFlagAppChatReactToFaeForOsaModule (ref), shouldShowU13ChatOptInForConversationModule (ref), useSignal (ref), interventionTreatmentShownSignal (ref), constants (ref), userProfilesModule (ref), getOtherParticipantsModule (ref), getConversationTitleModule (ref), useGetUsersModule (ref), useGetUsersTypingModule (ref), signalsMigrationConfigModule (ref), useMessageItemList (ref), selectMessagesPureModule (ref), getOsaState (ref), enumMessageTypesModule (ref), enumCustomEntryTypesModule (ref), fFlagAppChatConversationLoadingSkeletonModule (ref), useSelector (ref), appChatNetworkingModule (ref), roduxNetworkingModule (ref), getFFlagEnableAppChatInExperience (ref), useIsInExperienceModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), getReplyingToStoreModule (ref), getConversationMessageViewModelStoreModule (ref), useSignalState (ref), useReplyingToMessageModule (ref), useReplyingToMessageDispatchModule (ref), useLocalization (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), chatConversationTelemetryStateModule (ref), useIsUserPendingModule (ref), fFlagAppChatEnableDoubleOptIn (ref), useCallbackWithDynamicConversationIdModule (ref), loggerModule (ref), fFlagAppChatConversationTrustedFriendUpsellBanner (ref), var1 (ref), fFlagDebugEnableTCDoubleOptInDEV (ref), useKeybindModule (ref), fFlagTCUpsellModalEnabledDEV (ref), useShouldShowConversationOverlayModule (ref), useChatTimeoutDetailsModule (ref), chatConversationTelemetryEventsModule (ref), appChatConversationPageSyntheticSystemMessageIxpEnabled (ref), isSyntheticSystemMessageIdModule (ref), IXPService (ref), appChatConversationPageSyntheticSystemMessageIxpLayer (ref), fFlagAppChatBlueSentBubblesIxpEnabledModule (ref), fStringAppChatBlueSentBubblesIxpLayerModule (ref), conversationChannelsModule (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), conversationModule (ref), genericDialogTypeModule (ref), fFlagAppChatUniversalFeatureRestriction (ref), parent (ref), fFlagAppChatReactiveFeatureRestrictions (ref), chatInputBoxDisabledPressedSignal (ref), getAllRemainingOlderMessagesModule (ref), getOlderMessagesModule (ref), appChatGetAllMessagesDepth (ref), pendingStateConversationPageModule (ref), chatConversationModule (ref)
 	local var2 = cryoModule.Dictionary.join(t, p1)
 	local var3 = useAnalyticsModule()
 	local var4 = reactModule.useCallback(function(p2)
@@ -625,24 +627,41 @@ function ChatConversationContainer(p1)
 			end
 		end, { var2.conversationId, var55 })
 	end
-	local var56 = reactModule.useCallback(function(p2)
+	if fFlagAppChatBlueSentBubblesIxpEnabledModule then
+		local var56 = reactModule.useMemo(function()
+			-- upvalues: var21 (ref), enumMessageTypesModule (copy)
+			for i, v in var21 do
+				if not v.isIncoming and v.messageType == enumMessageTypesModule.PlainText then
+					return true
+				end
+			end
+			return false
+		end, { var21 })
+		useEffect(function()
+			-- upvalues: var56 (ref), IXPService (copy), fStringAppChatBlueSentBubblesIxpLayerModule (copy)
+			if var56 then
+				IXPService:LogFlagLinkedUserLayerExposure(fStringAppChatBlueSentBubblesIxpLayerModule)
+			end
+		end, { var2.conversationId, var56 })
+	end
+	local var57 = reactModule.useCallback(function(p2)
 		-- upvalues: var31 (ref), chatConversationTelemetryEventsModule (copy), var41 (ref)
 		var31.emit(chatConversationTelemetryEventsModule.ScreenExit, { conversationExitType = p2 })
 		var41()
 	end, { var31, var41 })
 	var6 = var6 or {}
-	local var57 = var6.participantPendingStatus ~= conversationChannelsModule.UserPendingStatus.Pending and var11
-	local var58 = not var57 and var11
-	local var59 = useIsExternalNavigationAvailableModule({ enumScreensModule.ViewUserProfile })
-	local var60 = var6.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION
-	local var61 = useSelector(function(p2)
-		-- upvalues: var60 (ref), var6 (write)
-		return var60 and var6.initiator == p2.LocalUserId
+	local var58 = var6.participantPendingStatus ~= conversationChannelsModule.UserPendingStatus.Pending and var11
+	local var59 = not var58 and var11
+	local var60 = useIsExternalNavigationAvailableModule({ enumScreensModule.ViewUserProfile })
+	local var61 = var6.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION
+	local var62 = useSelector(function(p2)
+		-- upvalues: var61 (ref), var6 (write)
+		return var61 and var6.initiator == p2.LocalUserId
 	end)
 	
-	local var62 = function(p2)
-		-- upvalues: var59 (ref), enumScreensModule (copy), var4 (ref), var2 (ref), genericDialogTypeModule (copy), var44 (ref), var60 (ref), var61 (ref)
-		if var59[enumScreensModule.ViewUserProfile] then
+	local var63 = function(p2)
+		-- upvalues: var60 (ref), enumScreensModule (copy), var4 (ref), var2 (ref), genericDialogTypeModule (copy), var44 (ref), var61 (ref), var62 (ref)
+		if var60[enumScreensModule.ViewUserProfile] then
 			var4(p2)
 			
 			return
@@ -650,16 +669,16 @@ function ChatConversationContainer(p1)
 		var2.navigateToScreen(genericDialogTypeModule.ParticipantDialog, {
 			conversationId = var2.conversationId,
 			participantId = p2,
-			showRemoveUserButton = not var44 and (var60 and var61)
+			showRemoveUserButton = not var44 and (var61 and var62)
 		}, true)
 	end
 	
-	local var63 = if if fFlagAppChatSignalsReplyStoreModule then var37 else var35 then if var39 then var30.replyToYourselfChatInputPlaceholder else var30.replyChatInputPlaceholder else var30.chatInputPlaceholder
+	local var64 = if if fFlagAppChatSignalsReplyStoreModule then var37 else var35 then if var39 then var30.replyToYourselfChatInputPlaceholder else var30.replyChatInputPlaceholder else var30.chatInputPlaceholder
 	useEffect(function()
 		-- upvalues: var2 (ref), var16 (write)
 		var2.updateConversationTitle(var16)
 	end, { var16, var2.updateConversationTitle })
-	local var64 = reactModule.useCallback(function()
+	local var65 = reactModule.useCallback(function()
 		-- upvalues: fFlagAppChatUniversalFeatureRestriction (copy), parent (copy), var2 (ref), fFlagAppChatReactiveFeatureRestrictions (copy), chatInputBoxDisabledPressedSignal (copy), timeoutEndTimestamp (write), decisionEventId (write), duration (write)
 		if not fFlagAppChatUniversalFeatureRestriction then
 			chatInputBoxDisabledPressedSignal:fire({
@@ -692,26 +711,26 @@ function ChatConversationContainer(p1)
 		decisionEventId,
 		duration
 	})
-	local var65, var66 = reactModule.useState(var2.navigation and (var2.navigation.isFocused and var2.navigation.isFocused()))
-	local var67 = nil
+	local var66, var67 = reactModule.useState(var2.navigation and (var2.navigation.isFocused and var2.navigation.isFocused()))
 	local var68 = nil
-	
-	if fFlagAppChatPerfTrackingModule then
-		var67 = if var2.isFocused and not var2.isFocused() then false else var65
-		var68 = var67 and not var44
-	end
 	local var69 = nil
 	
 	if fFlagAppChatPerfTrackingModule then
-		local var70 = reactModule.useRef(false)
+		var68 = if var2.isFocused and not var2.isFocused() then false else var66
+		var69 = var68 and not var44
+	end
+	local var70 = nil
+	
+	if fFlagAppChatPerfTrackingModule then
+		local var71 = reactModule.useRef(false)
 		reactModule.useEffect(function()
-			-- upvalues: var70 (ref), var57 (ref)
-			var70.current = not var57
-		end, { var2.conversationId, var57 })
-		local var71 = reactModule.useCallback(function(p2)
-			-- upvalues: appChatPerfTrackerModule (copy), var2 (ref), var68 (write), var70 (ref), loggerModule (copy), var21 (ref)
-			if not appChatPerfTrackerModule.isActive(appChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = var2.conversationId }) or not var68 then return end
-			if var70.current then
+			-- upvalues: var71 (ref), var58 (ref)
+			var71.current = not var58
+		end, { var2.conversationId, var58 })
+		local var72 = reactModule.useCallback(function(p2)
+			-- upvalues: appChatPerfTrackerModule (copy), var2 (ref), var69 (write), var71 (ref), loggerModule (copy), var21 (ref)
+			if not appChatPerfTrackerModule.isActive(appChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = var2.conversationId }) or not var69 then return end
+			if var71.current then
 				appChatPerfTrackerModule.finish(appChatPerfTrackerModule.Events.ChatConversationTTI, {
 					conversationId = var2.conversationId,
 					numElementsRendered = #var21
@@ -719,24 +738,24 @@ function ChatConversationContainer(p1)
 				
 				return
 			end
-			loggerModule:debug("TTI: Messages ready but waiting for input bar (chatInputBarReady={}, reason={})", var70.current, p2)
-		end, { var2.conversationId, var65, var44, #var21 })
+			loggerModule:debug("TTI: Messages ready but waiting for input bar (chatInputBarReady={}, reason={})", var71.current, p2)
+		end, { var2.conversationId, var66, var44, #var21 })
 		reactModule.useEffect(function()
-			-- upvalues: var71 (ref)
-			var71("messages_ready")
-		end, { var71, #var21, var2.conversationId })
-		var69 = reactModule.useCallback(function()
-			-- upvalues: var70 (ref), var71 (ref)
-			var70.current = true
-			var71("input_bar_ready")
-		end, { var71 })
+			-- upvalues: var72 (ref)
+			var72("messages_ready")
+		end, { var72, #var21, var2.conversationId })
+		var70 = reactModule.useCallback(function()
+			-- upvalues: var71 (ref), var72 (ref)
+			var71.current = true
+			var72("input_bar_ready")
+		end, { var72 })
 	end
 	if fFlagAppChatPerfTrackingModule then
-		local var72 = reactModule.useRef(nil)
+		local var73 = reactModule.useRef(nil)
 		reactModule.useEffect(function()
-			-- upvalues: loggerModule (copy), var2 (ref), var72 (ref), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy)
+			-- upvalues: loggerModule (copy), var2 (ref), var73 (ref), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy)
 			loggerModule:debug("Perf: Resetting message perf tracking for conversation {}", var2.conversationId)
-			var72.current = nil
+			var73.current = nil
 			local t = { conversationId = var2.conversationId }
 			
 			if fFlagAppChatMessageTTIMilestonesModule then
@@ -751,16 +770,16 @@ function ChatConversationContainer(p1)
 			appChatPerfTrackerModule.cancel(appChatPerfTrackerModule.Events.MessageReceiveToRender, t)
 		end, { var2.conversationId })
 		reactModule.useEffect(function()
-			-- upvalues: var21 (ref), var2 (ref), var9 (ref), var72 (ref), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy)
-			local var73 = var21[1]
+			-- upvalues: var21 (ref), var2 (ref), var9 (ref), var73 (ref), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy)
+			local var74 = var21[1]
 			
-			if not var73 or not var73.id then return end
+			if not var74 or not var74.id then return end
 			local t = { conversationId = var2.conversationId }
-			local var74 = var73.senderTargetId == var9
+			local var75 = var74.senderTargetId == var9
 			
-			if not var73.isSending and (if var73.senderType ~= "system" then not var74 else true) then
-				if var73.id ~= var72.current then
-					var72.current = var73.id
+			if not var74.isSending and (if var74.senderType ~= "system" then not var75 else true) then
+				if var74.id ~= var73.current then
+					var73.current = var74.id
 					
 					if fFlagAppChatMessageTTIMilestonesModule then
 						appChatPerfTrackerModule.finish(appChatPerfTrackerModule.Events.MessageReceiveTTI, t)
@@ -775,9 +794,9 @@ function ChatConversationContainer(p1)
 			elseif appChatPerfTrackerModule.isActive(appChatPerfTrackerModule.Events.MessageReceiveToRender, t) then
 				appChatPerfTrackerModule.cancel(appChatPerfTrackerModule.Events.MessageReceiveToRender, t)
 			end
-			if not var74 then return end
+			if not var75 then return end
 			if fFlagAppChatMessageTTIMilestonesModule then
-				if var73.isSending then
+				if var74.isSending then
 					appChatPerfTrackerModule.trackMilestone(appChatPerfTrackerModule.Events.MessageSendTTI, appChatPerfTrackerModule.Milestone.FunctionallyReady, t)
 					
 					return
@@ -785,7 +804,7 @@ function ChatConversationContainer(p1)
 				appChatPerfTrackerModule.finish(appChatPerfTrackerModule.Events.MessageSendTTI, t)
 				
 				return
-			elseif var73.isSending then
+			elseif var74.isSending then
 				appChatPerfTrackerModule.finish(appChatPerfTrackerModule.Events.MessageSendToPendingRender, t)
 				
 				return
@@ -795,12 +814,12 @@ function ChatConversationContainer(p1)
 		end, { var21, var9, var2.conversationId })
 	end
 	useEffect(function()
-		-- upvalues: var2 (ref), roactNavigationModule (copy), fFlagAppChatPerfTrackingModule (copy), var66 (ref), appChatPerfTrackerModule (copy)
+		-- upvalues: var2 (ref), roactNavigationModule (copy), fFlagAppChatPerfTrackingModule (copy), var67 (ref), appChatPerfTrackerModule (copy)
 		local willBlur = var2.navigation and (var2.navigation.addListener and var2.navigation.addListener(roactNavigationModule.Events.WillBlur, function(p2)
-			-- upvalues: fFlagAppChatPerfTrackingModule (copy), var66 (copy), appChatPerfTrackerModule (copy), var2 (copy)
+			-- upvalues: fFlagAppChatPerfTrackingModule (copy), var67 (copy), appChatPerfTrackerModule (copy), var2 (copy)
 			if fFlagAppChatPerfTrackingModule then
 				local isOverlay = p2 and (p2.action and (p2.action.params and (p2.action.params.isOverlay or false)))
-				var66(isOverlay)
+				var67(isOverlay)
 				
 				if isOverlay then return end
 				if appChatPerfTrackerModule.isActive(appChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = var2.conversationId }) then
@@ -809,15 +828,15 @@ function ChatConversationContainer(p1)
 					return
 				end
 			elseif p2 and p2.action and (p2.action.params and p2.action.params.isOverlay) then
-				var66(true)
+				var67(true)
 				
 				return
 			end
-			var66(false)
+			var67(false)
 		end))
 		local willFocus = var2.navigation and (var2.navigation.addListener and var2.navigation.addListener(roactNavigationModule.Events.WillFocus, function(_)
-			-- upvalues: var66 (copy)
-			var66(true)
+			-- upvalues: var67 (copy)
+			var67(true)
 		end))
 		
 		return function()
@@ -843,13 +862,13 @@ function ChatConversationContainer(p1)
 	end, { var22.shouldShowOsaCardOnInitialLoad })
 	local getCanAccessParty = var2.getCanAccessParty
 	
-	return if fFlagAppChatPerfTrackingModule then if var67 then if var44 then reactModule.createElement(pendingStateConversationPageModule, {
+	return if fFlagAppChatPerfTrackingModule then if var68 then if var44 then reactModule.createElement(pendingStateConversationPageModule, {
 		conversationId = var2.conversationId,
 		topBarHeight = var2.topBarHeight,
 		networkErrorText = var30.networkErrorText,
 		navigateToToast = var2.navigateToToast,
 		wideMode = var2.wideMode,
-		onConversationUnmount = var56,
+		onConversationUnmount = var57,
 		navigateBack = var2.navigateBack
 	}) else reactModule.createElement(chatConversationModule, cryoModule.Dictionary.join(var2, var5, var30, {
 		moreMenuEnabled = getCanAccessParty,
@@ -858,35 +877,35 @@ function ChatConversationContainer(p1)
 		itemList = var23,
 		localUserId = var9,
 		openGameDetailsPage = var2.openGameDetailsPage,
-		openViewProfile = var62,
+		openViewProfile = var63,
 		readingMessagesIsEnabled = var2.getReadingMessagesIsEnabled(),
 		Users = var17,
 		usersTyping = var18,
 		displayNamesAvailable = var29,
-		onConversationUnmount = var56,
+		onConversationUnmount = var57,
 		recipientIdsSerialized = var8,
 		chatIsVisible = var10,
-		chatInputPlaceholder = var63,
+		chatInputPlaceholder = var64,
 		replyingToMessageId = if fFlagAppChatSignalsReplyStoreModule then var37 else nil,
 		replyingToMessage = if not fFlagAppChatSignalsReplyStoreModule then var35 else nil,
 		replyingToMessageDispatch = if not fFlagAppChatSignalsReplyStoreModule then var36 else nil,
-		shouldShowChatInputBar = var57,
-		shouldShowLegacyBottomModal = var58,
+		shouldShowChatInputBar = var58,
+		shouldShowLegacyBottomModal = var59,
 		shouldDisableChatInputBar = isTimedOut,
-		onChatInputBarReady = if fFlagAppChatPerfTrackingModule then var69 else nil,
+		onChatInputBarReady = if fFlagAppChatPerfTrackingModule then var70 else nil,
 		inputBarDisabledEndTimestampDisplay = timeoutEndTimestamp,
-		onDisabledInputBarActivated = var64,
+		onDisabledInputBarActivated = var65,
 		scrollToTopOnInitialOsaLoad = var22.shouldShowOsaCardOnInitialLoad and var22.fetchedOldestMessage,
 		navigateToSquadLobby = if getCanAccessParty then var2.navigateToSquadLobby else nil,
-		shouldHideMoreMenuButton = if getCanAccessParty then not var57 else nil,
+		shouldHideMoreMenuButton = if getCanAccessParty then not var58 else nil,
 		isInitialMessageLoading = if fFlagAppChatConversationLoadingSkeletonModule then var24 else nil
-	})) else nil elseif var65 then if var2.isFocused and not var2.isFocused() then nil elseif var44 then reactModule.createElement(pendingStateConversationPageModule, {
+	})) else nil elseif var66 then if var2.isFocused and not var2.isFocused() then nil elseif var44 then reactModule.createElement(pendingStateConversationPageModule, {
 		conversationId = var2.conversationId,
 		topBarHeight = var2.topBarHeight,
 		networkErrorText = var30.networkErrorText,
 		navigateToToast = var2.navigateToToast,
 		wideMode = var2.wideMode,
-		onConversationUnmount = var56,
+		onConversationUnmount = var57,
 		navigateBack = var2.navigateBack,
 		style = var2.style
 	}) else reactModule.createElement(chatConversationModule, cryoModule.Dictionary.join(var2, var5, var30, {
@@ -896,27 +915,27 @@ function ChatConversationContainer(p1)
 		itemList = var23,
 		localUserId = var9,
 		openGameDetailsPage = var2.openGameDetailsPage,
-		openViewProfile = var62,
+		openViewProfile = var63,
 		readingMessagesIsEnabled = var2.getReadingMessagesIsEnabled(),
 		Users = var17,
 		usersTyping = var18,
 		displayNamesAvailable = var29,
-		onConversationUnmount = var56,
+		onConversationUnmount = var57,
 		recipientIdsSerialized = var8,
 		chatIsVisible = var10,
-		chatInputPlaceholder = var63,
+		chatInputPlaceholder = var64,
 		replyingToMessageId = if fFlagAppChatSignalsReplyStoreModule then var37 else nil,
 		replyingToMessage = if not fFlagAppChatSignalsReplyStoreModule then var35 else nil,
 		replyingToMessageDispatch = if not fFlagAppChatSignalsReplyStoreModule then var36 else nil,
-		shouldShowChatInputBar = var57,
-		shouldShowLegacyBottomModal = var58,
+		shouldShowChatInputBar = var58,
+		shouldShowLegacyBottomModal = var59,
 		shouldDisableChatInputBar = isTimedOut,
-		onChatInputBarReady = if fFlagAppChatPerfTrackingModule then var69 else nil,
+		onChatInputBarReady = if fFlagAppChatPerfTrackingModule then var70 else nil,
 		inputBarDisabledEndTimestampDisplay = timeoutEndTimestamp,
-		onDisabledInputBarActivated = var64,
+		onDisabledInputBarActivated = var65,
 		scrollToTopOnInitialOsaLoad = var22.shouldShowOsaCardOnInitialLoad and var22.fetchedOldestMessage,
 		navigateToSquadLobby = if getCanAccessParty then var2.navigateToSquadLobby else nil,
-		shouldHideMoreMenuButton = if getCanAccessParty then not var57 else nil,
+		shouldHideMoreMenuButton = if getCanAccessParty then not var58 else nil,
 		isInitialMessageLoading = if fFlagAppChatConversationLoadingSkeletonModule then var24 else nil
 	})) else nil
 end

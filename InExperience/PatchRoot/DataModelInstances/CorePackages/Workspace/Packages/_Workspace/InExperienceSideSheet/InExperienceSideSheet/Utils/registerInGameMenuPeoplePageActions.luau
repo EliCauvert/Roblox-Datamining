@@ -1,4 +1,5 @@
-﻿local var1 = nil
+﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local var1 = nil
 local var2 = nil
 
 return {
@@ -16,8 +17,11 @@ return {
 			var1()
 		end
 	end,
-	closePeoplePage = function()
-		-- upvalues: var2 (write)
+	closePeoplePage = function(p1)
+		-- upvalues: inExperienceSideSheet (ref), var2 (write)
+		if p1 ~= nil and require(inExperienceSideSheet.Flags.FFlagClosePeoplePageWhenNoRoomBesideSideSheet) and not require(inExperienceSideSheet.Utils.getHasRoomForPeoplePage)(false, p1) then
+			require(inExperienceSideSheet.Stores.GetSideSheetConfigStore)(false).setDidSideSheetOpenWithPeoplePage(false)
+		end
 		if var2 then
 			var2()
 		end

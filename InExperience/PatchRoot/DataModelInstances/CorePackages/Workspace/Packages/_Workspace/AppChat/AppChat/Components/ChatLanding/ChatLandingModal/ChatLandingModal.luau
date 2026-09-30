@@ -12,17 +12,20 @@ local labelModule = require(appChat.Components.Label.Label)
 local useChatPagePaddingModule = require(appChat.Contexts.ChatPagePadding.useChatPagePadding)
 local appChatNetworkingModule = require(parent.AppChatNetworking)
 local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local favoriteOn = UIBloxModule.App.ImageSet.Images["icons/actions/favoriteOn"]
 local x = foundationModule.Enums.IconName.X
 local t = {
 	[appChatNetworkingModule.Constants.ModalContentType.Link] = function(p1)
-		-- upvalues: useStyle (ref), reactModule (ref)
+		-- upvalues: useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 		local var1 = useStyle()
 		
 		return reactModule.createElement("TextButton", {
 			Size = UDim2.new(1, 0, 0, 0),
 			LayoutOrder = p1.layoutOrder,
-			Font = var1.Font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
 			BorderSizePixel = 0,
 			Text = `<u>{p1.content.text}</u>`,
 			RichText = true,
@@ -36,7 +39,7 @@ local t = {
 		})
 	end,
 	[appChatNetworkingModule.Constants.ModalContentType.Text] = function(p1)
-		-- upvalues: useStyle (ref), reactModule (ref)
+		-- upvalues: useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 		local var1 = useStyle()
 		
 		return reactModule.createElement("TextLabel", {
@@ -45,7 +48,8 @@ local t = {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			LayoutOrder = p1.layoutOrder,
-			Font = var1.Font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
 			Text = p1.content.text,
 			TextColor3 = var1.Theme.TextDefault.Color,
 			TextSize = var1.Font.CaptionBody.RelativeSize * var1.Font.BaseSize,
@@ -67,29 +71,30 @@ local t_1 = {
 }
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: cryoModule (ref), t_1 (ref), useStyle (ref), useChatPagePaddingModule (ref), foundationModule (ref), reactModule (ref), t (ref), name (ref), labelModule (ref), favoriteOn (ref), x (ref), buttonStack (ref)
+	-- upvalues: cryoModule (ref), t_1 (ref), useStyle (ref), useChatPagePaddingModule (ref), foundationModule (ref), reactModule (ref), t (ref), name (ref), labelModule (ref), favoriteOn (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), x (ref), buttonStack (ref)
 	local var1 = cryoModule.Dictionary.join(t_1, p1)
 	local style = var1.style or useStyle()
 	local var2 = useChatPagePaddingModule()
 	local size200 = style.Tokens.Size.Size_200
 	local size1000 = style.Tokens.Size.Size_1000
-	local size600 = foundationModule.Hooks.useTokens().Size.Size_600
-	local var3, var4 = reactModule.useMemo(function()
+	local var3 = foundationModule.Hooks.useTokens()
+	local size600 = var3.Size.Size_600
+	local var4, var5 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), var1 (ref), t (copy), reactModule (copy), name (copy)
-		local var5 = cryoModule.Dictionary.map(var1.additionalContent, function(p3, p4)
+		local var6 = cryoModule.Dictionary.map(var1.additionalContent, function(p3, p4)
 			-- upvalues: t (copy), reactModule (copy), name (copy)
 			local type = t[p3.type]
-			local var6 = if type then reactModule.createElement(type, { layoutOrder = p4 + 2, content = p3 }) else nil
+			local var7 = if type then reactModule.createElement(type, { layoutOrder = p4 + 2, content = p3 }) else nil
 			
-			if var6 then
-				return var6, `additionalContent_{p4}`
+			if var7 then
+				return var7, `additionalContent_{p4}`
 			end
 			name:warning(`Unsupported additional content type: {p3.type}`)
 			
 			return nil, nil
 		end)
 		
-		return var5, not cryoModule.isEmpty(var5)
+		return var6, not cryoModule.isEmpty(var6)
 	end, { var1.additionalContent })
 	
 	return reactModule.createElement("Frame", {
@@ -176,7 +181,8 @@ return reactModule.forwardRef(function(p1, p2)
 							TextWrapped = true,
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, 0, 0, 0),
-							Font = style.Font.Title.Font,
+							Font = if foundationFontFaceMigration then nil else style.Font.Title.Font,
+							FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Typography.HeadingLarge.Font) else nil,
 							Text = var1.titleText,
 							TextColor3 = style.Theme.TextEmphasis.Color,
 							TextSize = style.Font.Header2.RelativeSize * style.Font.BaseSize,
@@ -192,14 +198,15 @@ return reactModule.forwardRef(function(p1, p2)
 						TextWrapped = true,
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 0),
-						Font = style.Font.Body.Font,
+						Font = if foundationFontFaceMigration then nil else style.Font.Body.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Typography.BodyLarge.Font) else nil,
 						Text = var1.bodyText,
 						TextColor3 = style.Theme.TextDefault.Color,
 						TextSize = style.Font.CaptionBody.RelativeSize * style.Font.BaseSize,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						AutomaticSize = Enum.AutomaticSize.Y
 					}),
-					AdditionalContent = if var4 then reactModule.createElement(reactModule.Fragment, {}, var3) else nil
+					AdditionalContent = if var5 then reactModule.createElement(reactModule.Fragment, {}, var4) else nil
 				}),
 				ImageIcon = reactModule.createElement(foundationModule.View, {
 					LayoutOrder = 2,

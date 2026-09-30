@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnablePaidAds", false) and (require(script.Parent.FFlagBuildAdUpsell) and require(script.Parent.FFlagEnableBuildAdPromotion))
+﻿return game:DefineFastFlag("EnablePaidAds1", false) and (require(script.Parent.FFlagBuildAdUpsell) and require(script.Parent.FFlagEnableBuildAdPromotion))

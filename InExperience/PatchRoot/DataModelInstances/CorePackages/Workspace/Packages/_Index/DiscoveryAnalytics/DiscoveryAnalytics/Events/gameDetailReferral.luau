@@ -11,7 +11,6 @@ local fFlagEnableTopSongsSort = require(parent.SharedFlags).FFlagEnableTopSongsS
 local fFlagLuaAppGameDetailEventMobileAdsId = require(parent.SharedFlags).FFlagLuaAppGameDetailEventMobileAdsId
 local fFlagLuaAppMigrateGameEventsTelemetryService = require(parent.SharedFlags).FFlagLuaAppMigrateGameEventsTelemetryService
 local fFlagLuaAppGameEventsTelemetryServiceShadowTraffic = require(parent.SharedFlags).FFlagLuaAppGameEventsTelemetryServiceShadowTraffic
-local fFlagLuaAppAddSeeAllFlagToGameDetailReferral = require(parent.SharedFlags).FFlagLuaAppAddSeeAllFlagToGameDetailReferral
 local var1 = if fFlagLuaAppMigrateGameEventsTelemetryService then {
 	eventName = "gameDetailReferral",
 	description = "Fires when the user navigates to game details",
@@ -64,7 +63,7 @@ local var3 = tModule.strictInterface({
 	tileType = tModule.optional(tModule.string),
 	sortSubId = tModule.optional(tModule.string),
 	analyticsData = tModule.optional(tModule.table),
-	seeAllFlag = if fFlagLuaAppAddSeeAllFlagToGameDetailReferral then tModule.optional(tModule.number) else nil
+	seeAllFlag = tModule.optional(tModule.number)
 })
 
 local function _(p1)

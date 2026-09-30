@@ -7,12 +7,14 @@ local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
 local useDesignTokens = require(parent.Style).useDesignTokens
+local normalizeFontFace = require(parent.Foundation).Utility.normalizeFontFace
 local iconWithTooltip = require(parent.AppBlox).IconWithTooltip
 local responsiveModule = require(parent.Responsive)
 local usePreferredInput = responsiveModule.usePreferredInput
 local checkAndFormatPossibleLinkModule = require(collectionViews.checkAndFormatPossibleLink)
 local _ = require(collectionViews.SeeAllButtonType_Legacy)
 local fFlagLuaAppSortHeaderAnchorTag = require(parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag
+local foundationFontFaceMigration = require(parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local truncationCollapseSmall = images["icons/actions/truncationCollapse_small"]
 local cycleRight = images["icons/actions/cycleRight"]
 local t = {
@@ -42,7 +44,7 @@ local function HeaderButton(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), usePreferredInput (ref), useDesignTokens (ref), responsiveModule (ref), checkAndFormatPossibleLinkModule (ref), fFlagLuaAppSortHeaderAnchorTag (ref), HeaderButton (ref), cycleRight (ref), truncationCollapseSmall (ref), iconWithTooltip (ref), tooltipOrientation (ref)
+	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), usePreferredInput (ref), useDesignTokens (ref), responsiveModule (ref), checkAndFormatPossibleLinkModule (ref), fFlagLuaAppSortHeaderAnchorTag (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), HeaderButton (ref), cycleRight (ref), truncationCollapseSmall (ref), iconWithTooltip (ref), tooltipOrientation (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2, var3 = reactModule.useBinding(0)
 	local var4 = reactModule.useCallback(function(p2)
@@ -128,7 +130,8 @@ return reactModule.memo(function(p1)
 					Text = var1.title,
 					AutomaticSize = Enum.AutomaticSize.XY,
 					Size = UDim2.new(0, 0, 0, 0),
-					Font = titleTypography.Font,
+					Font = if foundationFontFaceMigration then nil else titleTypography.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(titleTypography.Font) else nil,
 					TextSize = titleTypography.FontSize,
 					TextTransparency = titleColor.Transparency,
 					TextColor3 = titleColor.Color3,
@@ -150,7 +153,7 @@ return reactModule.memo(function(p1)
 					image = cycleRight
 				}) or nil
 			}),
-			SubtitleFrame = var13 and reactModule.createElement(if var19 then "TextButton" else "Frame", {
+			SubtitleFrame = var13 and (reactModule.createElement(if var19 then "TextButton" else "Frame", {
 				LayoutOrder = 2,
 				Text = if var19 then "" else nil,
 				Size = UDim2.new(1, 0, 0, 0),
@@ -176,7 +179,8 @@ return reactModule.memo(function(p1)
 					Text = var15,
 					AutomaticSize = Enum.AutomaticSize.XY,
 					Size = UDim2.new(0, 0, 0, 0),
-					Font = subtitleTypography.Font,
+					Font = if foundationFontFaceMigration then nil else subtitleTypography.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(subtitleTypography.Font) else nil,
 					TextSize = var7,
 					TextTransparency = titleColor.Transparency,
 					TextColor3 = subtitleColor.Color3,
@@ -207,7 +211,7 @@ return reactModule.memo(function(p1)
 						AnchorPoint = Vector2.new(0.5, 0.5)
 					})
 				}) or nil
-			}) or nil
+			}) or nil)
 		}),
 		IconWithTooltip = var9 and (reactModule.createElement(iconWithTooltip, {
 			triggerPointName = "IconWithTooltip",

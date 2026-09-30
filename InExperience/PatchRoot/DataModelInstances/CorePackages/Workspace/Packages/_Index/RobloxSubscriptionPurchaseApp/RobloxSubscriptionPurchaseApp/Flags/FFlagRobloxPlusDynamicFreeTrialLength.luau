@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("RobloxPlusDynamicFreeTrialLength", false) and game:GetEngineFeature("EnableSubscriptionFreeTrialOfferDetails")

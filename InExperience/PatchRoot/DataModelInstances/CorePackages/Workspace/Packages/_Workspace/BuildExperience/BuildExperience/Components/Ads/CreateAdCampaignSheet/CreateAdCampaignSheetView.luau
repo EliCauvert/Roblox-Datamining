@@ -175,9 +175,9 @@ local function CampaignPrice(p7)
 			Strikethrough = reactModule.createElement(view, {
 				ZIndex = 2,
 				tag = "position-center-left anchor-center-left",
-				testId = "two-options-ad-campaign-free-strikethrough",
 				Size = UDim2.new(1, 0, 0, 1),
-				backgroundStyle = useTokens().Color.Content.Default
+				backgroundStyle = useTokens().Color.Content.Default,
+				testId = `{p7.testId}-strikethrough`
 			})
 		}),
 		Free = reactModule.createElement(text, {
@@ -315,21 +315,21 @@ return function(p7)
 						value = p7.selectedOption,
 						onValueChanged = p7.onOptionChanged,
 						size = optionSelectorGroupSize.Medium,
-						Selectable = not p7.isCreatePending
+						Selectable = not p7.isCreatePending and not p7.hasCreateError
 					}, {
-						Free = reactModule.createElement(CampaignOptionItem, {
+						Feedback = if p7.feedbackOption ~= nil then nil else reactModule.createElement(CampaignOptionItem, {
 							LayoutOrder = 1,
-							testId = "two-options-ad-campaign-free-option",
-							option = p7.freeOption,
-							optionRef = p7.freeOptionRef,
-							isInteractionDisabled = p7.isCreatePending
+							testId = "two-options-ad-campaign-feedback-option",
+							option = p7.feedbackOption,
+							optionRef = if p7.selectedOption == p7.feedbackOption.value then p7.defaultOptionRef else nil,
+							isInteractionDisabled = p7.isCreatePending or p7.hasCreateError
 						}),
-						Paid = reactModule.createElement(CampaignOptionItem, {
+						Plays = if p7.playsOption ~= nil then nil else reactModule.createElement(CampaignOptionItem, {
 							LayoutOrder = 2,
-							optionRef = nil,
-							testId = "two-options-ad-campaign-paid-option",
-							option = p7.paidOption,
-							isInteractionDisabled = p7.isCreatePending
+							testId = "two-options-ad-campaign-plays-option",
+							option = p7.playsOption,
+							optionRef = if p7.selectedOption == p7.playsOption.value then p7.defaultOptionRef else nil,
+							isInteractionDisabled = p7.isCreatePending or p7.hasCreateError
 						})
 					})
 				}) else reactModule.createElement(view, {
@@ -419,7 +419,7 @@ return function(p7)
 					variant = buttonVariant.Emphasis,
 					width = UDim.new(1, 0),
 					isDisabled = if isTwoOptions then p7.isCreateDisabled else nil,
-					isLoading = p7.isCreatePending,
+					isLoading = p7.isCreatePending or isTwoOptions and p7.isFundingCheckPending,
 					onActivated = p7.onCreate,
 					testId = `{var6}-create-button`
 				}),

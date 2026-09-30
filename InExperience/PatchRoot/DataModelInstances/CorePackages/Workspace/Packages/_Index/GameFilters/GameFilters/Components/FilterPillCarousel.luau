@@ -7,13 +7,16 @@ local screenSizeImpressionsTracker = require(parent.Impressions).ScreenSizeImpre
 local frameBoundsImpressionsTracker = require(parent.Impressions).FrameBoundsImpressionsTracker
 local variableItemWidthCarousel = require(parent.VariableItemWidthCarousel).VariableItemWidthCarousel
 local useCollectionImpressionsSignal = require(parent.CollectionViews).useCollectionImpressionsSignal
-local useTokens = require(parent.Foundation).Hooks.useTokens
+local foundationModule = require(parent.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local filterPillModule = require(gameFilters.Components.FilterPill)
 local fFlagLuaAppUseFrameBoundsImpressions = require(parent.SharedFlags).FFlagLuaAppUseFrameBoundsImpressions
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local _ = require(gameFilters.FilterCallbackTypes)
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), useCollectionImpressionsSignal (ref), filterPillModule (ref), cryoModule (ref), variableItemWidthCarousel (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), useCollectionImpressionsSignal (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), filterPillModule (ref), cryoModule (ref), variableItemWidthCarousel (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState({})
 	local var4 = reactModule.useRef(nil)
@@ -24,7 +27,7 @@ return function(p1)
 		FilterCarousel = reactModule.createElement(variableItemWidthCarousel, {
 			scrollButtonEnabled = true,
 			title = if p1.title and p1.title ~= "" then reactModule.useCallback(function()
-				-- upvalues: var1 (ref), reactModule (copy), p1 (ref)
+				-- upvalues: var1 (ref), reactModule (copy), p1 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 				local bodyMedium = var1.Typography.BodyMedium
 				local muted = var1.Color.Content.Muted
 				
@@ -35,7 +38,8 @@ return function(p1)
 					Text = p1.title,
 					Size = UDim2.new(0, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Font = bodyMedium.Font,
+					Font = if foundationFontFaceMigration then nil else bodyMedium.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(bodyMedium.Font) else nil,
 					TextSize = bodyMedium.FontSize,
 					TextTransparency = muted.Transparency,
 					TextColor3 = muted.Color3,

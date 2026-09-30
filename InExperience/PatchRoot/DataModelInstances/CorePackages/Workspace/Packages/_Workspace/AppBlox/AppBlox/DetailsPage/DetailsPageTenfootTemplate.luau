@@ -18,8 +18,6 @@ local _ = require(parent.RobloxAppEnums)
 local _ = require(parent.ReactOtter)
 local _ = require(script.Parent.Types)
 local reactModule = require(parent.React)
-local fFlagExtendScrollingFramesBySafeInsets = require(parent.SharedFlags).FFlagExtendScrollingFramesBySafeInsets
-local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
 local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
 local t = {
 	itemPadding = 36,
@@ -29,7 +27,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), fFlagEnableLeftNavOnConsole (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref)
+	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref)
 	local var1 = t
 	
 	if p1.tokens then
@@ -92,11 +90,10 @@ return function(p1)
 		var1.actionBarHeight, var1.actionBarWidth, p1.actionBarWidth,
 		p1.renderActionBarLabelImpressionsDetector, var12
 	}), var6, var1.safeAreaSize)
-	local var16 = if fFlagEnableLeftNavOnConsole or fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
+	local var16 = useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding)
 	
-	return reactModule.createElement(if fFlagEnableLeftNavOnConsole then fullscreenFrameModule else "Frame", {
+	return reactModule.createElement(fullscreenFrameModule, {
 		[reactModule.Change.AbsoluteSize] = var8,
-		Size = if fFlagEnableLeftNavOnConsole then nil else UDim2.fromScale(1, 1),
 		BackgroundTransparency = 1,
 		ref = var5
 	}, {
@@ -128,6 +125,7 @@ return function(p1)
 		Content = reactModule.createElement(animatedFlatList, {
 			animated = true,
 			UNSTABLE_forceSiblingLayoutUpdate = true,
+			overrideAutomaticCanvasSize = false,
 			isSequentiallySelectable = true,
 			onSelectedIndexChanged = reactModule.useCallback(function(p2)
 				-- upvalues: var12 (ref), var15 (ref), var3 (ref)
@@ -176,12 +174,11 @@ return function(p1)
 				ScrollingEnabled = true,
 				Selectable = false,
 				ZIndex = 3,
-				Position = if fFlagEnableLeftNavOnConsole then UDim2.fromOffset(0, -var16.top) else nil,
-				Size = if fFlagExtendScrollingFramesBySafeInsets or fFlagEnableLeftNavOnConsole then UDim2.new(1, 0, 1, var16.top + var16.bottom) else nil,
+				Position = UDim2.fromOffset(0, -var16.top),
+				Size = UDim2.new(1, 0, 1, var16.top + var16.bottom),
 				VerticalScrollBarInset = Enum.ScrollBarInset.None
 			},
-			animationConfig = var1.animationConfig,
-			overrideAutomaticCanvasSize = if fFlagEnableLeftNavOnConsole then false else true
+			animationConfig = var1.animationConfig
 		}),
 		Fullscreen = reactModule.createElement("CanvasGroup", {
 			BorderSizePixel = 0,

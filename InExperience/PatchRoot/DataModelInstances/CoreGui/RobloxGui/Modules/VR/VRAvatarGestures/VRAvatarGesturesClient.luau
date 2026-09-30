@@ -9,7 +9,14 @@ local coreScriptsCommonModule = require(corePackagesService.Workspace.Packages.C
 local connectionUtil = coreScriptsCommonModule.ConnectionUtil
 local avatarUtil = coreScriptsCommonModule.AvatarUtil
 local debugImmersionModeNonVR = game:DefineFastFlag("DebugImmersionModeNonVR", false)
+local VRAvatarGesturesFixFirstPersonHeadScale = game:DefineFastFlag("VRAvatarGesturesFixFirstPersonHeadScale", false)
 local VRAvatarGesturesAnalyticsThrottleHundrethsPercent = game:DefineFastInt("VRAvatarGesturesAnalyticsThrottleHundrethsPercent", 0)
+
+local function _(p1)
+	-- upvalues: VRAvatarGesturesFixFirstPersonHeadScale (ref)
+	return (p1.CFrame.Position - p1.Focus.Position).Magnitude <= (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * p1.HeadScale else 5)
+end
+
 local t = {}
 t.__index = t
 
@@ -31,7 +38,7 @@ function t.new()
 end
 
 function t:onCharacterChanged(p1)
-	-- upvalues: VRService (ref)
+	-- upvalues: VRAvatarGesturesFixFirstPersonHeadScale (ref), VRService (ref)
 	local humanoid = p1:FindFirstChild("Humanoid")
 	
 	if not humanoid then return end
@@ -50,9 +57,9 @@ function t:onCharacterChanged(p1)
 	
 	if currentCamera then
 		local function updateSeated(p2)
-			-- upvalues: currentCamera (ref), humanoid (ref)
+			-- upvalues: currentCamera (ref), VRAvatarGesturesFixFirstPersonHeadScale (copy), humanoid (ref)
 			local vehicleSeat = currentCamera.CameraSubject and currentCamera.CameraSubject:IsA("VehicleSeat")
-			local var2 = (currentCamera.CFrame.Position - currentCamera.Focus.Position).Magnitude <= 5
+			local var2 = (currentCamera.CFrame.Position - currentCamera.Focus.Position).Magnitude <= (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * currentCamera.HeadScale else 5)
 			local trackedIKHead = humanoid:FindFirstChild("TrackedIKHead")
 			
 			if trackedIKHead then
@@ -67,11 +74,15 @@ function t:onCharacterChanged(p1)
 		
 		updateSeated(humanoid.Sit)
 		self.connections:connect("Seated", humanoid.Seated, function(p2)
-			-- upvalues: updateSeated (ref), currentCamera (ref), VRService (copy)
+			-- upvalues: updateSeated (ref), currentCamera (ref), VRAvatarGesturesFixFirstPersonHeadScale (copy), VRService (copy)
 			updateSeated(p2)
 			
-			if p2 and (currentCamera.CFrame.Position - currentCamera.Focus.Position).Magnitude <= 5 then
-				VRService:RecenterUserHeadCFrame()
+			if p2 then
+				local var2 = currentCamera
+				
+				if (var2.CFrame.Position - var2.Focus.Position).Magnitude <= (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * var2.HeadScale else 5) then
+					VRService:RecenterUserHeadCFrame()
+				end
 			end
 		end)
 		
@@ -124,7 +135,7 @@ function t:onAvatarGesturesChanged()
 end
 
 function t.updateCFrames(_, p2, p3)
-	-- upvalues: playersService (ref), VRService (ref)
+	-- upvalues: playersService (ref), VRService (ref), VRAvatarGesturesFixFirstPersonHeadScale (ref)
 	local localPlayer = playersService.LocalPlayer
 	
 	if not playersService.LocalPlayer then return end
@@ -149,7 +160,15 @@ function t.updateCFrames(_, p2, p3)
 		local var5 = currentCamera.CFrame * p3
 		local head = character:FindFirstChild("Head")
 		
-		if (currentCamera.CFrame.Position - currentCamera.Focus.Position).Magnitude > 5 and head then
+		if (currentCamera.CFrame.Position - currentCamera.Focus.Position).Magnitude <= (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * currentCamera.HeadScale else 5) or not head then
+			var3.Position = var5.Position
+			
+			if p2 == "TrackedHead" then
+				var4.CFrame = var5
+			else
+				var4.CFrame = var5 * CFrame.Angles(1.570796326795, 0, 0)
+			end
+		else
 			local headUserCFrame = VRService:GetUserCFrame(Enum.UserCFrame.Head)
 			local var6 = currentCamera.CFrame * (headUserCFrame.Rotation + headUserCFrame.Position * currentCamera.HeadScale) * CFrame.new(0, 0, 0.5)
 			
@@ -161,14 +180,6 @@ function t.updateCFrames(_, p2, p3)
 				local var7 = head.CFrame:ToWorldSpace(var6:ToObjectSpace(var5))
 				var3.Position = var7.Position
 				var4.CFrame = var7 * CFrame.Angles(1.570796326795, 0, 0)
-			end
-		else
-			var3.Position = var5.Position
-			
-			if p2 == "TrackedHead" then
-				var4.CFrame = var5
-			else
-				var4.CFrame = var5 * CFrame.Angles(1.570796326795, 0, 0)
 			end
 		end
 	else

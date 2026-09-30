@@ -1683,7 +1683,6 @@ Feature.Chat.Message.LeaveGroup,Ты не можешь продолжать об
 Feature.Chat.Message.LeaveGroup.V2,
 Feature.Chat.Message.MakeConnectionsToChat,"Добавь контакты в Roblox, чтобы начать общаться"
 Feature.Chat.Message.MakeConnectionsToParty,"Добавь контакты в Roblox, чтобы создать общую команду"
-Feature.Chat.Message.MakeFriendsToChat,"Заведи друзей на Roblox, чтобы начать общаться"
 Feature.Chat.Message.MakeFriendsToParty,"Заведи друзей на Roblox, чтобы создавать команды"
 Feature.Chat.Message.MessageContentModerated,Твоё сообщение подверглось модерации и не было отправлено.
 Feature.Chat.Message.MessageUnavailable,Сообщение недоступно
@@ -1694,8 +1693,6 @@ Feature.Chat.Message.RemoveUser,Ты точно хочешь исключить 
 Feature.Chat.Message.RemoveUser.V2,Ты точно хочешь исключить пользователя {USERNAME} из этой группы?
 Feature.Chat.Message.RemovedFromConversation,Тебя исключили из группы.
 Feature.Chat.Message.SeveralUsersTyping,Несколько пользователей печатают...
-Feature.Chat.Message.TurnOnChat,"Чтобы общаться с друзьями, включи чат в Настройках конфиденциальности."
-Feature.Chat.Message.TurnOnParty,"Чтобы создать команду с друзьями, включи «Команду» в Настройках конфиденциальности."
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} и {DISPLAY_NAME_2} печатают...
 Feature.Chat.Response.ChatNameFullyModerated,Название группового чата было отмодерировано.
 Feature.Chat.Response.ChatNameFullyModerated.V2,Название группы было отмодерировано.

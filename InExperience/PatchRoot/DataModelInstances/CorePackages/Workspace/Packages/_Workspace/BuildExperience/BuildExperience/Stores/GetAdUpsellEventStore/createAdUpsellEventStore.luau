@@ -4,6 +4,7 @@ local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local signalsModule = require(parent.Signals)
 local universeConfigurationModule = require(parent.DataHydration.UniverseConfiguration)
 local chatTypesModule = require(buildExperience.Chat.chatTypes)
+local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local getAdUpsellEligibilityModule = require(buildExperience.Components.Ads.getAdUpsellEligibility)
 local observeAdUpsellEligibilityModule = require(buildExperience.Components.Ads.observeAdUpsellEligibility)
 local fIntBuildAdUpsellCompletedTurnGapModule = require(buildExperience.Flags.FIntBuildAdUpsellCompletedTurnGap)
@@ -11,10 +12,12 @@ local fIntBuildAdUpsellPublishIntervalModule = require(buildExperience.Flags.FIn
 local gameConfigurationLabelsModule = require(buildExperience.utils.GameConfigurationLabels)
 local buildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKey")
 local var1 = if buildAppStorageKeyEngineFeature then require(buildExperience.Storage.BuildAppStorage) else nil
+local _ = require(buildExperience.Storage.createAdCampaignCardStorage)
 
 local function defaultDependencies()
-	-- upvalues: buildAppStorageKeyEngineFeature (ref), var1 (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), getAdUpsellEligibilityModule (ref), observeAdUpsellEligibilityModule (ref)
+	-- upvalues: buildAppStorageKeyEngineFeature (ref), fFlagBuildAgentAdCampaignCardModule (ref), var1 (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), getAdUpsellEligibilityModule (ref), observeAdUpsellEligibilityModule (ref)
 	return if buildAppStorageKeyEngineFeature then {
+		getAdCampaignCardStorage = if fFlagBuildAgentAdCampaignCardModule then var1.getAdCampaignCardStorage else nil,
 		recordCompletedTurn = var1.recordAdUpsellCompletedTurn,
 		recordPublish = var1.recordAdUpsellPublish,
 		attachPendingMilestones = var1.attachPendingAdUpsellMilestones,
@@ -54,7 +57,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: defaultDependencies (ref), signalsModule (ref), fIntBuildAdUpsellCompletedTurnGapModule (ref), fIntBuildAdUpsellPublishIntervalModule (ref), chatTypesModule (ref), creatorAgentChatModule (ref)
+	-- upvalues: defaultDependencies (ref), signalsModule (ref), fIntBuildAdUpsellCompletedTurnGapModule (ref), fIntBuildAdUpsellPublishIntervalModule (ref), chatTypesModule (ref), creatorAgentChatModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
 	p1 = p1 or defaultDependencies()
 	local var2, var3 = signalsModule.createSignal(0)
 	local t = {}
@@ -70,6 +73,21 @@ return function(p1)
 		var3(function(p2)
 			return p2 + 1
 		end)
+	end
+	
+	local _ = function()
+		-- upvalues: p1 (ref)
+		return if p1 == nil then nil else p1.getAdCampaignCardStorage()
+	end
+	
+	local function recordCardMutation(p2, p3, p4)
+		-- upvalues: var3 (ref)
+		if p3 or p2 and p4 then
+			var3(function(p5)
+				return p5 + 1
+			end)
+		end
+		return p2, p3
 	end
 	
 	local _ = function(p2)
@@ -414,6 +432,100 @@ return function(p1)
 	end
 	
 	return {
+		getAdCampaignCard = if fFlagBuildAgentAdCampaignCardModule then function(p3, p4)
+			-- upvalues: p1 (ref)
+			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
+			
+			return if var15 == nil then { isAvailable = false, isPersisted = false } else var15.get(p3, p4)
+		end else nil,
+		listAdCampaignCards = if fFlagBuildAgentAdCampaignCardModule then function(p3)
+			-- upvalues: p1 (ref)
+			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
+			
+			return if var15 == nil then { isAvailable = false, records = {} } else var15.list(p3)
+		end else nil,
+		recordAdCampaignCreateStarted = if fFlagBuildAgentAdCampaignCardModule then function(p3)
+			-- upvalues: p1 (ref), recordCardMutation (ref)
+			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
+			
+			if var15 == nil then
+				return false, false
+			end
+			local var16 = var15.hasPendingWrites()
+			local var17, var18 = var15.start(p3)
+			
+			return recordCardMutation(var17, var18, var16)
+		end else nil,
+		recordAdCampaignCreateProcessing = if fFlagBuildAgentAdCampaignCardModule then function(p3, p4, p5)
+			-- upvalues: p1 (ref), recordCardMutation (ref)
+			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
+			
+			if var15 == nil then
+				return false, false
+			end
+			local var16 = var15.hasPendingWrites()
+			local var17, var18 = var15.processing(p3, p4, p5)
+			
+			return recordCardMutation(var17, var18, var16)
+		end else nil,
+		recordAdCampaignCreated = if fFlagBuildAgentAdCampaignCardModule then function(p3, p4, p5, p6, p7)
+			-- upvalues: p1 (ref), recordCardMutation (ref)
+			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
+			
+			if var15 == nil then
+				return false, false
+			end
+			local var16 = var15.hasPendingWrites()
+			local var17, var18 = var15.created(p3, p4, p5, p6, p7)
+			
+			return recordCardMutation(var17, var18, var16)
+		end else nil,
+		recordAdCampaignCreateFailure = if fFlagBuildAgentAdCampaignCardModule then function(p3, p4, p5, p6, p7, p8)
+			-- upvalues: p1 (ref), recordCardMutation (ref)
+			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
+			
+			if var15 == nil then
+				return false, false
+			end
+			local var16 = var15.hasPendingWrites()
+			local var17, var18 = var15.fail(p3, p4, p5, p6, p7, p8)
+			
+			return recordCardMutation(var17, var18, var16)
+		end else nil,
+		retryAdCampaignCardWrites = if fFlagBuildAgentAdCampaignCardModule then function()
+			-- upvalues: p1 (ref), var3 (ref)
+			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
+			
+			if var15 == nil then
+				return false
+			end
+			local var16 = var15.hasPendingWrites()
+			
+			if not var15.retryWrites() then
+				return false
+			elseif var16 then
+				var3(function(p3)
+					return p3 + 1
+				end)
+			end
+			return true
+		end else nil,
+		pruneAdCampaignCards = if fFlagBuildAgentAdCampaignCardModule then function(p3)
+			-- upvalues: p1 (ref), var3 (ref)
+			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
+			
+			if var15 == nil then
+				return false, false
+			end
+			local var16, var17 = var15.prune(p3)
+			
+			if var17 then
+				var3(function(p4)
+					return p4 + 1
+				end)
+			end
+			return var16, var17
+		end else nil,
 		getRevision = var2,
 		reportAssistantTurnCompleted = function(p3)
 			-- upvalues: p1 (ref), chatTypesModule (copy), creatorAgentChatModule (copy), retainPending (ref), var6 (write)

@@ -7,10 +7,9 @@ local API = require(parent.AppChatNetworking).rodux.GetConversationDetails.API
 local removedConversationModule = require(appChat.Conversations.Actions.RemovedConversation)
 local enumScreensModule = require(appChat.EnumScreens)
 local groupOSADialogModule = require(script.Parent.GroupOSADialog)
-local appChatGroupOsaDisablePortal = game:DefineFastFlag("AppChatGroupOsaDisablePortal", false)
 
 return function()
-	-- upvalues: useNavigation (ref), useDispatch (ref), reactModule (ref), API (ref), enumScreensModule (ref), removedConversationModule (ref), groupOSADialogModule (ref), appChatGroupOsaDisablePortal (ref)
+	-- upvalues: useNavigation (ref), useDispatch (ref), reactModule (ref), API (ref), enumScreensModule (ref), removedConversationModule (ref), groupOSADialogModule (ref)
 	local var1 = useNavigation()
 	local var2 = useDispatch()
 	local conversationId = var1.getParam("conversationId", nil)
@@ -42,7 +41,6 @@ return function()
 				var1.goBack()
 			end
 		end, { var1, var2, conversationId }),
-		disablePortal = appChatGroupOsaDisablePortal,
 		impressionId = var1.getParam("impressionId", nil),
 		modalVariant = var1.getParam("modalVariant", nil)
 	})

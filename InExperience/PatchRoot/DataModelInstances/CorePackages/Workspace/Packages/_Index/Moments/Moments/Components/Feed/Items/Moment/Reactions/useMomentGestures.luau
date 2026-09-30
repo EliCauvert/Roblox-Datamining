@@ -168,7 +168,7 @@ return function(p1, p2, p3, p4)
 	})
 	useEventConnection(userInputService.InputChanged, var23, { var23 })
 	local var24 = reactModule.useCallback(function(p5)
-		-- upvalues: var8 (ref), var6 (ref), var20 (ref), var9 (ref), var12 (ref), var13 (ref), var2 (ref), var5 (ref), var7 (ref), var4 (ref)
+		-- upvalues: var8 (ref), var6 (ref), var20 (ref), var9 (ref), var12 (ref), var13 (ref), var2 (ref), var4 (ref), var5 (ref), var7 (ref)
 		if var8.current ~= p5 then return end
 		var8.current = nil
 		
@@ -183,7 +183,7 @@ return function(p1, p2, p3, p4)
 			local onTap = var2.current.onTap
 			
 			if onTap then
-				onTap()
+				onTap(var4.current, var5.current)
 			end
 			if var5.current >= 2 then
 				if var7.current then
@@ -201,15 +201,16 @@ return function(p1, p2, p3, p4)
 			elseif var7.current then
 				task.cancel(var7.current)
 			end
+			local current = var4.current
 			var7.current = task.delay(0.25, function()
-				-- upvalues: var7 (copy), var5 (copy), var2 (copy)
+				-- upvalues: var7 (copy), var5 (copy), var2 (copy), current (ref)
 				var7.current = nil
 				
 				if var5.current == 1 then
 					local onSingleTapConfirmed = var2.current.onSingleTapConfirmed
 					
 					if onSingleTapConfirmed then
-						onSingleTapConfirmed()
+						onSingleTapConfirmed(current)
 					end
 				end
 				var5.current = 0

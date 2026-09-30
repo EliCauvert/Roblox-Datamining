@@ -5,12 +5,15 @@ local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
 local memo = reactModule.memo
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local useStyle = UIBloxModule.Core.Style.useStyle
 local t = { bodyText = "" }
 
 return memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), imageSetLabel (ref)
+	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), imageSetLabel (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local style = var1.style or useStyle()
 	local size100 = style.Tokens.Size.Size_100
@@ -49,7 +52,8 @@ return memo(function(p1)
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			AutomaticSize = Enum.AutomaticSize.X,
-			Font = style.Font.Body.Font,
+			Font = if foundationFontFaceMigration then nil else style.Font.Body.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(style.Tokens.Typography.BodyLarge.Font) else nil,
 			Size = UDim2.new(0, 0, 1, 0),
 			Text = var1.bodyText,
 			TextColor3 = var1.bodyTextColor3 or style.Theme.TextEmphasis.Color,

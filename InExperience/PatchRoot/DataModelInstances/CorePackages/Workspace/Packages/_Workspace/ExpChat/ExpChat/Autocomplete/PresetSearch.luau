@@ -1,6 +1,7 @@
 ﻿local expChat = script:FindFirstAncestor("ExpChat")
 local _ = require(expChat.Stores.GetPresetChatStore.createPresetChatStore)
 local constantsModule = require(expChat.PresetChat.Constants)
+local t = { Substring = 0, WordStart = 1 }
 local var1 = nil
 local var2 = nil
 
@@ -37,17 +38,33 @@ local function getCatalog(p2)
 	return var2
 end
 
-local function _(p2, p3)
+local function getRank(p2, p3)
 	local matchIndex = string.find(p2, p3, 1, true)
 	
 	return if matchIndex == nil then nil elseif matchIndex == 1 then 1 elseif string.match(string.sub(p2, matchIndex - 1, matchIndex - 1), "%w") == nil then 2 else 3
 end
 
+local function getWordStartRank(p2, p3)
+	local matchIndex = string.find(p2, p3, 1, true)
+	while matchIndex ~= nil do
+		if matchIndex ~= 1 then
+			if string.match(string.sub(p2, matchIndex - 1, matchIndex - 1), "%w") ~= nil then
+				matchIndex = string.find(p2, p3, matchIndex + 1, true)
+				continue
+			end
+			return 2
+		end
+		return 1
+	end
+	return nil
+end
+
 return {
 	MIN_QUERY_LENGTH = 2,
-	findMatchingPresets = function(value, p2)
-		-- upvalues: getCatalog (ref)
-		if (utf8.len(p2) or #p2) < 2 then
+	SearchMode = t,
+	findMatchingPresets = function(value, p4, p5)
+		-- upvalues: getCatalog (ref), t (ref), getWordStartRank (ref), getRank (ref)
+		if (utf8.len(p4) or #p4) < (if p5 and p5.minQueryLength then p5.minQueryLength else 2) then
 			return {}
 		end
 		local presetCooldownEndsAt = value.getPresetCooldownEndsAt(false)
@@ -60,31 +77,31 @@ return {
 		if var3 == nil then
 			return {}
 		end
-		local lowerText = string.lower(p2)
-		local t = {}
+		local lowerText = string.lower(p4)
+		local var4 = if p5 and p5.mode == t.WordStart then getWordStartRank else getRank
+		local t_1 = {}
 		
 		for i, v in var3.lowerValues do
-			local matchIndex = string.find(v, lowerText, 1, true)
-			local var4 = if matchIndex == nil then nil elseif matchIndex == 1 then 1 elseif string.match(string.sub(v, matchIndex - 1, matchIndex - 1), "%w") == nil then 2 else 3
+			local var5 = var4(v, lowerText)
 			
-			if var4 ~= nil then
-				table.insert(t, { rank = var4, index = i })
+			if var5 ~= nil then
+				table.insert(t_1, { rank = var5, index = i })
 			end
 		end
-		table.sort(t, function(p3, p4)
-			return if p3.rank == p4.rank then p3.index < p4.index else p3.rank < p4.rank
+		table.sort(t_1, function(p6, p7)
+			return if p6.rank == p7.rank then p6.index < p7.index else p6.rank < p7.rank
 		end)
-		local list = table.create(#t)
+		local list = table.create(#t_1)
 		
-		for i_1, v_1 in t do
+		for i_1, v_1 in t_1 do
 			table.insert(list, var3.values[v_1.index])
 		end
 		return list
 	end,
-	getPresetIdForValue = function(value, p3)
+	getPresetIdForValue = function(value, p6)
 		-- upvalues: getCatalog (ref)
-		local var5 = getCatalog(value)
+		local var6 = getCatalog(value)
 		
-		return if var5 == nil then nil else var5.presetIdByValue[p3]
+		return if var6 == nil then nil else var6.presetIdByValue[p6]
 	end
 }

@@ -9,36 +9,42 @@ local _ = require(parent.DataHydration.CampaignStats)
 local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local useRefreshAdsDataModule = require(script.Parent.useRefreshAdsData)
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
+local fFlagEnablePaidAdsModule = require(buildExperience.Flags.FFlagEnablePaidAds)
 local asPromise = httpClientModule.asPromise
 
 return function(p1, p2, p3)
-	-- upvalues: sendBuildExperienceEventModule (ref), reactModule (ref), useRefreshAdsDataModule (ref), httpService (ref), asPromise (ref), creatorAgentChatModule (ref)
+	-- upvalues: sendBuildExperienceEventModule (ref), reactModule (ref), fFlagEnablePaidAdsModule (ref), useRefreshAdsDataModule (ref), httpService (ref), asPromise (ref), creatorAgentChatModule (ref)
 	p3 = p3 or {}
 	local sendEvent = p3.sendEvent or sendBuildExperienceEventModule
 	local var1, var2 = reactModule.useState(false)
 	local var3, var4 = reactModule.useState(false)
 	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef(false)
-	local var7 = reactModule.useRef(true)
+	local var6 = if fFlagEnablePaidAdsModule then reactModule.useRef(nil) else nil
+	local var7 = reactModule.useRef(false)
+	local var8 = reactModule.useRef(true)
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref)
-		var7.current = true
+		-- upvalues: var8 (ref)
+		var8.current = true
 		
 		return function()
-			-- upvalues: var7 (copy)
-			var7.current = false
+			-- upvalues: var8 (copy)
+			var8.current = false
 		end
 	end, {})
-	local var8 = reactModule.useCallback(function()
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref)
 		var4(false)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var8 (ref)
+		-- upvalues: var5 (ref), fFlagEnablePaidAdsModule (copy), var6 (ref), var9 (ref)
 		var5.current = nil
-		var8()
-	end, { p1, var8 })
-	local var9 = useRefreshAdsDataModule(p1, {
+		
+		if fFlagEnablePaidAdsModule then
+			var6.current = nil
+		end
+		var9()
+	end, { p1, var9 })
+	local var10 = useRefreshAdsDataModule(p1, {
 		includeEligibility = true,
 		adCampaignsStore = p3.adCampaignsStore,
 		campaignStatsStore = p3.campaignStatsStore,
@@ -46,44 +52,63 @@ return function(p1, p2, p3)
 	})
 	
 	return {
-		createCampaign = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), var6 (ref), var5 (ref), p3 (ref), httpService (copy), var2 (ref), var4 (ref), asPromise (copy), creatorAgentChatModule (copy), sendEvent (ref), p2 (ref), var9 (ref), var7 (ref)
-			if p1 == nil or p1 == 0 or var6.current then return end
-			if var5.current == nil then
+		createCampaign = reactModule.useCallback(function(p4)
+			-- upvalues: p1 (ref), var7 (ref), fFlagEnablePaidAdsModule (copy), var6 (ref), var4 (ref), var5 (ref), p3 (ref), httpService (copy), var2 (ref), asPromise (copy), creatorAgentChatModule (copy), sendEvent (ref), p2 (ref), var10 (ref), var8 (ref)
+			if p1 == nil or p1 == 0 or var7.current then return end
+			if fFlagEnablePaidAdsModule and p4 == nil then return end
+			local var11 = if fFlagEnablePaidAdsModule then var6.current else nil
+			
+			if var11 ~= nil and (if var11.paymentType == p4.paymentType then var11.campaignOption ~= p4.campaignOption else true) then
+				var4(true)
+				
+				return
+			elseif var5.current == nil then
 				local generateIdempotencyKey = p3.generateIdempotencyKey
 				var5.current = if generateIdempotencyKey ~= nil then httpService:GenerateGUID(false) else generateIdempotencyKey()
 			end
-			var6.current = true
+			if fFlagEnablePaidAdsModule then
+				var6.current = p4
+			end
+			var7.current = true
 			var2(true)
-			var4(false);
-			(p3.createCampaignAsync or function(p4)
+			var4(false)
+			local t = { universeId = p1, idempotencyKey = var5.current }
+			
+			if fFlagEnablePaidAdsModule then
+				t.selectedOption = p4
+			end;
+			(p3.createCampaignAsync or function(p5)
 				-- upvalues: asPromise (copy), creatorAgentChatModule (copy)
-				return asPromise(creatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignCreate(p4))
-			end)({ universeId = p1, idempotencyKey = var5.current }):andThen(function(p4)
-				-- upvalues: sendEvent (copy), p1 (copy), p2 (copy), var5 (copy), var9 (copy), var6 (copy), var7 (copy), var2 (copy)
-				sendEvent("AD_CAMPAIGN_CREATE_SUCCESS", { universeId = p1, conversationId = p2 }, { campaignId = p4.campaignId })
+				return asPromise(creatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignCreate(p5))
+			end)(t):andThen(function(p5)
+				-- upvalues: sendEvent (copy), p1 (copy), p2 (copy), var5 (copy), fFlagEnablePaidAdsModule (copy), var6 (copy), var10 (copy), var7 (copy), var8 (copy), var2 (copy)
+				sendEvent("AD_CAMPAIGN_CREATE_SUCCESS", { universeId = p1, conversationId = p2 }, { campaignId = p5.campaignId })
 				var5.current = nil
-				var9()
-				var6.current = false
 				
-				if var7.current then
+				if fFlagEnablePaidAdsModule then
+					var6.current = nil
+				end
+				var10()
+				var7.current = false
+				
+				if var8.current then
 					var2(false)
 				end
-			end):catch(function(p4)
-				-- upvalues: sendEvent (copy), p1 (copy), p2 (copy), var6 (copy), var7 (copy), var4 (copy), var2 (copy)
-				sendEvent("AD_CAMPAIGN_CREATE_FAILURE", { universeId = p1, conversationId = p2 }, { error = tostring(p4) })
-				var6.current = false
+			end):catch(function(p5)
+				-- upvalues: sendEvent (copy), p1 (copy), p2 (copy), var7 (copy), var8 (copy), var4 (copy), var2 (copy)
+				sendEvent("AD_CAMPAIGN_CREATE_FAILURE", { universeId = p1, conversationId = p2 }, { error = tostring(p5) })
+				var7.current = false
 				
-				if var7.current then
+				if var8.current then
 					var4(true)
 					var2(false)
 				end
 			end)
 		end, {
-			p1, p2, var9, sendEvent, p3.createCampaignAsync, p3.generateIdempotencyKey
+			p1, p2, var10, sendEvent, p3.createCampaignAsync, p3.generateIdempotencyKey
 		}),
-		clearCreateError = var8,
-		refresh = var9,
+		clearCreateError = var9,
+		refresh = var10,
 		isCreatePending = var1,
 		hasCreateError = var3
 	}

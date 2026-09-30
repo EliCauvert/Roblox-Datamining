@@ -1,7 +1,9 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
+﻿local moments = script:FindFirstAncestor("Moments")
+local parent = moments.Parent
 local foundationModule = require(parent.Foundation)
 local foundationCloudAssetsModule = require(parent.FoundationCloudAssets)
 local reactModule = require(parent.React)
+local commentsListSkeletonViewModule = require(moments.Components.Comments.List.CommentsListSkeletonView)
 local button = foundationModule.Button
 local empty = foundationModule.Empty
 local text = foundationModule.Text
@@ -10,7 +12,6 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconSize = foundationModule.Enums.IconSize
 local inputSize = foundationModule.Enums.InputSize
 local t = {
-	loading = "Loading comments\226\128\166",
 	empty = "No comments yet",
 	disabled = "Comments are disabled",
 	unavailable = "Comments are unavailable"
@@ -18,8 +19,8 @@ local t = {
 foundationCloudAssetsModule.preloadAsset("pictograms/chat")
 
 return function(p1)
-	-- upvalues: reactModule (ref), empty (ref), iconSize (ref), t (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref)
-	return if p1.state == "empty" then reactModule.createElement(empty, {
+	-- upvalues: reactModule (ref), commentsListSkeletonViewModule (ref), empty (ref), iconSize (ref), t (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref)
+	return if p1.state == "loading" then reactModule.createElement(commentsListSkeletonViewModule, { testId = `moments-comments-state-{p1.state}` }) elseif p1.state == "empty" then reactModule.createElement(empty, {
 		icon = { name = "pictograms/chat", size = iconSize.XXLarge },
 		text = if p1.isReadOnly then t[p1.state] else "No comments yet. Be the first to comment!",
 		testId = `moments-comments-state-{p1.state}`

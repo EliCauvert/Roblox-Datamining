@@ -16,7 +16,7 @@ local var2 = createComputed(function()
 	return dataStatus.NotReady
 end)
 
-return function(p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: reactModule (ref), fFlagJoinabilityCTARefactor (ref), profileCTAStore (ref), useSignalState (ref), var1 (ref), var2 (ref)
 	local var3 = p2 == true
 	local var4 = reactModule.useRef(nil)
@@ -27,7 +27,7 @@ return function(p1, p2)
 			
 			return if getJoinUserActions then getJoinUserActions(p1, true) else nil
 		end
-	end, { p1, var3 })
+	end, { p1, var3, p3 })
 	
 	if var5 then
 		var4.current = { userId = p1, result = var5 }

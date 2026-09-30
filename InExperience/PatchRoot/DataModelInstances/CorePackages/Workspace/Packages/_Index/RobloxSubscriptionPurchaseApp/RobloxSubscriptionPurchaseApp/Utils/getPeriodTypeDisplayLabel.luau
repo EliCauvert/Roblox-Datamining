@@ -8,8 +8,8 @@
 		plural = "Feature.RobloxSubscription.Label.years"
 	},
 	week = {
-		singular = "Feature.RobloxSubscription.Label.week",
-		plural = "Feature.RobloxSubscription.Label.weeks"
+		singular = "Feature.RobloxSubscription.label.week",
+		plural = "Feature.RobloxSubscription.label.weeks"
 	}
 }
 local t_1 = {

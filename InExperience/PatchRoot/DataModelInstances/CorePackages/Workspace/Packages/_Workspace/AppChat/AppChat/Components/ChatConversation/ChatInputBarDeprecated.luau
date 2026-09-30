@@ -3,6 +3,8 @@ local parent = appChat.Parent
 local socialLibrariesModule = require(appChat.SocialLibraries)
 local roactModule = require(parent.Roact)
 local text = require(parent.AppCommonLib).Text
+local foundationFontFaceMigration = require(parent.Foundation).Utility.Flags.FoundationFontFaceMigration
+local getTextSize = require(parent.Style).GetTextSize
 local isTenFootInterface = require(parent.AppCommonLib).isTenFootInterface
 local UIBloxModule = require(parent.UIBlox)
 local images = UIBloxModule.App.ImageSet.Images
@@ -59,7 +61,7 @@ chatInputBarDeprecated.defaultProps = {
 }
 
 function chatInputBarDeprecated.init(p1)
-	-- upvalues: roactModule (ref), userInputService (ref), text (ref), getAppFeaturePolicies (ref), getFIntAppChatBehaviorCollectionEnabledPercentageModule (ref), playersService (ref), isMessageValidModule (ref), isKeyCodePressedModule (ref), appChatUseTextBoxTextOnSend (ref), sendButtonClickActionResultModule (ref), fFlagAppChatOnConsoles (ref), isTenFootInterface (ref)
+	-- upvalues: roactModule (ref), userInputService (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), getAppFeaturePolicies (ref), getFIntAppChatBehaviorCollectionEnabledPercentageModule (ref), playersService (ref), isMessageValidModule (ref), isKeyCodePressedModule (ref), appChatUseTextBoxTextOnSend (ref), sendButtonClickActionResultModule (ref), fFlagAppChatOnConsoles (ref), isTenFootInterface (ref)
 	p1.isMounted = false
 	p1.state = {
 		showSendChat = false,
@@ -77,8 +79,8 @@ function chatInputBarDeprecated.init(p1)
 	p1.textChangedFallback = p1.props.textChangedFallback or not userInputService.KeyboardEnabled
 	
 	function p0.heightOfFourLines(p2, p3, p4)
-		-- upvalues: text (copy)
-		return text.GetTextHeight("A\nB\nC\nD", p2, p3, p4)
+		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), text (copy)
+		return if foundationFontFaceMigration then getTextSize("A\nB\nC\nD", p3, p2, Vector2.new(p4, 10000)).Y else text.GetTextHeight("A\nB\nC\nD", p2, p3, p4)
 	end
 	
 	function p0.isMoreMenuEnabled()
@@ -87,15 +89,15 @@ function chatInputBarDeprecated.init(p1)
 	end
 	
 	function p0.calculateInputBoxHeight(p2, p3, p4, p5)
-		-- upvalues: text (copy), p1 (ref)
-		local textHeight = text.GetTextHeight(p2, p3, p4, p5)
-		local var1 = p1.heightOfFourLines(p3, p4, p5)
-		local var2 = if p1.isMoreMenuEnabled() then p4 + math.min(textHeight, var1) else p4 + math.min(textHeight, var1) + 16
+		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), text (copy), p1 (ref)
+		local var1 = if foundationFontFaceMigration then getTextSize(p2, p4, p3, Vector2.new(p5, 10000)).Y else text.GetTextHeight(p2, p3, p4, p5)
+		local var2 = p1.heightOfFourLines(p3, p4, p5)
+		local var3 = if p1.isMoreMenuEnabled() then p4 + math.min(var1, var2) else p4 + math.min(var1, var2) + 16
 		
 		if p1.props.onHeightChanged then
-			p1.props.onHeightChanged(var2)
+			p1.props.onHeightChanged(var3)
 		end
-		return var2
+		return var3
 	end
 	
 	p1.inputConnectionActive = false
@@ -242,21 +244,21 @@ function chatInputBarDeprecated.render(p1)
 end
 
 function chatInputBarDeprecated.renderContent(p1, p2)
-	-- upvalues: withStyle (ref), withChatPagePaddingModule (ref), withSelectionCursorProvider (ref), fFlagAppChatOnConsoles (ref), isVRAppBuild (ref), isTenFootInterface (ref), roactModule (ref), imageSetLabel (ref), images (ref), interactable (ref), cursorKind (ref), fFlagAppChatGamepadSendButtonNavModule (ref), chatInputBoxDisabledModule (ref), callbackInputBox (ref), iconSize (ref)
+	-- upvalues: withStyle (ref), withChatPagePaddingModule (ref), withSelectionCursorProvider (ref), foundationFontFaceMigration (ref), fFlagAppChatOnConsoles (ref), isVRAppBuild (ref), isTenFootInterface (ref), roactModule (ref), imageSetLabel (ref), images (ref), interactable (ref), cursorKind (ref), fFlagAppChatGamepadSendButtonNavModule (ref), chatInputBoxDisabledModule (ref), callbackInputBox (ref), iconSize (ref)
 	return withStyle(function(p3)
-		-- upvalues: withChatPagePaddingModule (copy), withSelectionCursorProvider (copy), fFlagAppChatOnConsoles (copy), isVRAppBuild (copy), isTenFootInterface (copy), p1 (ref), p2 (ref), roactModule (copy), imageSetLabel (copy), images (copy), interactable (copy), cursorKind (copy), fFlagAppChatGamepadSendButtonNavModule (copy), chatInputBoxDisabledModule (copy), callbackInputBox (copy), iconSize (copy)
+		-- upvalues: withChatPagePaddingModule (copy), withSelectionCursorProvider (copy), foundationFontFaceMigration (copy), fFlagAppChatOnConsoles (copy), isVRAppBuild (copy), isTenFootInterface (copy), p1 (ref), p2 (ref), roactModule (copy), imageSetLabel (copy), images (copy), interactable (copy), cursorKind (copy), fFlagAppChatGamepadSendButtonNavModule (copy), chatInputBoxDisabledModule (copy), callbackInputBox (copy), iconSize (copy)
 		return withChatPagePaddingModule(function(p4)
-			-- upvalues: withSelectionCursorProvider (copy), p3 (ref), fFlagAppChatOnConsoles (copy), isVRAppBuild (copy), isTenFootInterface (copy), p1 (copy), p2 (copy), roactModule (copy), imageSetLabel (copy), images (copy), interactable (copy), cursorKind (copy), fFlagAppChatGamepadSendButtonNavModule (copy), chatInputBoxDisabledModule (copy), callbackInputBox (copy), iconSize (copy)
+			-- upvalues: withSelectionCursorProvider (copy), p3 (ref), foundationFontFaceMigration (copy), fFlagAppChatOnConsoles (copy), isVRAppBuild (copy), isTenFootInterface (copy), p1 (copy), p2 (copy), roactModule (copy), imageSetLabel (copy), images (copy), interactable (copy), cursorKind (copy), fFlagAppChatGamepadSendButtonNavModule (copy), chatInputBoxDisabledModule (copy), callbackInputBox (copy), iconSize (copy)
 			return withSelectionCursorProvider(function(p5)
-				-- upvalues: p3 (copy), fFlagAppChatOnConsoles (copy), isVRAppBuild (copy), isTenFootInterface (copy), p1 (copy), p4 (ref), p2 (copy), roactModule (copy), imageSetLabel (copy), images (copy), interactable (copy), cursorKind (copy), fFlagAppChatGamepadSendButtonNavModule (copy), chatInputBoxDisabledModule (copy), callbackInputBox (copy), withSelectionCursorProvider (copy), iconSize (copy)
+				-- upvalues: p3 (copy), foundationFontFaceMigration (copy), fFlagAppChatOnConsoles (copy), isVRAppBuild (copy), isTenFootInterface (copy), p1 (copy), p4 (ref), p2 (copy), roactModule (copy), imageSetLabel (copy), images (copy), interactable (copy), cursorKind (copy), fFlagAppChatGamepadSendButtonNavModule (copy), chatInputBoxDisabledModule (copy), callbackInputBox (copy), withSelectionCursorProvider (copy), iconSize (copy)
 				local font = p3.Font
-				local font_1 = font.Body.Font
-				local var1 = font.BaseSize * font.Body.RelativeSize
-				local var2 = if fFlagAppChatOnConsoles then isVRAppBuild() or isTenFootInterface() else nil
+				local var1 = if foundationFontFaceMigration then p3.Tokens.Typography.BodyLarge.Font else font.Body.Font
+				local var2 = font.BaseSize * font.Body.RelativeSize
+				local var3 = if fFlagAppChatOnConsoles then isVRAppBuild() or isTenFootInterface() else nil
 				local frameHeight = p1.state.frameHeight
 				
 				if frameHeight == 0 then
-					frameHeight = p1.calculateInputBoxHeight(p1.state.inputText, font_1, var1, p1.state.chatBarWidth)
+					frameHeight = p1.calculateInputBoxHeight(p1.state.inputText, var1, var2, p1.state.chatBarWidth)
 				end
 				return roactModule.createElement("Frame", {
 					BorderSizePixel = 0,
@@ -309,21 +311,21 @@ function chatInputBarDeprecated.renderContent(p1, p2)
 								SliceCenter = Rect.new(8, 8, 9, 9)
 							}, {
 								padding = roactModule.createElement("UIPadding", {
-									PaddingTop = if p1.isMoreMenuEnabled() then nil else UDim.new(0, var1 / 2.5),
+									PaddingTop = if p1.isMoreMenuEnabled() then nil else UDim.new(0, var2 / 2.5),
 									PaddingLeft = UDim.new(0.02, 0),
 									PaddingRight = UDim.new(0.02, 0)
 								}),
 								inputBox = if p2 then roactModule.createElement(chatInputBoxDisabledModule, {
 									bodyText = p1.props.inputBarDisabledText,
-									contentSize = var1,
+									contentSize = var2,
 									endTimestamp = p1.props.disabledEndTimestampDisplay,
-									font = font_1,
+									font = var1,
 									onActivated = p1.onDisabledInputBarActivated
 								}) else roactModule.createElement(callbackInputBox, {
 									initialInputText = p1.props.initialInputText,
-									inputTextFont = font_1,
+									inputTextFont = var1,
 									inputTextColor3 = p3.Theme.TextEmphasis.Color,
-									inputTextSize = var1,
+									inputTextSize = var2,
 									inputTextXAlignment = Enum.TextXAlignment.Left,
 									inputTextYAlignment = if p1.isMoreMenuEnabled() then Enum.TextYAlignment.Center else Enum.TextYAlignment.Top,
 									placeholderText = p1.props.placeholderText,
@@ -337,15 +339,15 @@ function chatInputBarDeprecated.renderContent(p1, p2)
 									clearButtonDisabled = true,
 									clearButtonSize = 0,
 									textChangedCallback = function(p6)
-										-- upvalues: p1 (copy), font_1 (ref), var1 (ref)
-										p1.onTextChanged(p6, font_1, var1, p1.state.chatBarWidth)
+										-- upvalues: p1 (copy), var1 (ref), var2 (ref)
+										p1.onTextChanged(p6, var1, var2, p1.state.chatBarWidth)
 									end,
 									[roactModule.Change.AbsoluteSize] = function(p6)
-										-- upvalues: p1 (copy), font_1 (ref), var1 (ref)
-										p1.chatBoxSizeChanged(p6, p1.state.inputText, font_1, var1)
+										-- upvalues: p1 (copy), var1 (ref), var2 (ref)
+										p1.chatBoxSizeChanged(p6, p1.state.inputText, var1, var2)
 									end,
 									inputBoxRef = p1.inputBoxRef,
-									returnPressedFromOnScreenKeyboardCallback = if fFlagAppChatOnConsoles then if var2 then p1.onSendActivated else nil elseif isVRAppBuild() then p1.onSendActivated else nil
+									returnPressedFromOnScreenKeyboardCallback = if fFlagAppChatOnConsoles then if var3 then p1.onSendActivated else nil elseif isVRAppBuild() then p1.onSendActivated else nil
 								})
 							})
 						})

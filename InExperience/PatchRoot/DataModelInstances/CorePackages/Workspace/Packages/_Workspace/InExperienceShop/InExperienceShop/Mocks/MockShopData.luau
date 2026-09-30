@@ -212,6 +212,8 @@ local list_2 = {
 	{ name = "Home" },
 	{
 		name = "Top picks",
+		stableCategoryId = "Top picks",
+		categoryGroup = "Featured",
 		items = pickRandomItems(),
 		categoryType = constantsModule.TOP_PICKS_CATEGORY_TYPE
 	},
@@ -308,7 +310,9 @@ local function buildShopData()
 				items = v.items or {},
 				robuxPackages = v.robuxPackages,
 				bonusJwt = v.bonusJwt,
-				categoryType = v.categoryType
+				categoryType = v.categoryType,
+				stableCategoryId = v.stableCategoryId,
+				categoryGroup = v.categoryGroup
 			})
 		end
 	end

@@ -38,6 +38,9 @@
 	setupPeoplePageOpenTracking = function(value)
 		require(script.Utils.setupPeoplePageOpenTracking)(value)
 	end,
+	closePeoplePageWhenNoRoomBesideSideSheet = function(p1)
+		return require(script.Utils.closePeoplePageWhenNoRoomBesideSideSheet)(p1)
+	end,
 	setIsRespawnEnabled = require(script.Utils.setIsRespawnEnabled),
 	["jest.config"] = script["jest.config"]
 }

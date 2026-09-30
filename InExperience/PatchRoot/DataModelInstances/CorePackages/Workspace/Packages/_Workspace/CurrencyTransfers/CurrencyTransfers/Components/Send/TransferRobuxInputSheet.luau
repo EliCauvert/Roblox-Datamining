@@ -17,6 +17,8 @@ local icon = foundationModule.Icon
 local fillBehavior = foundationModule.Enums.FillBehavior
 local useScaledValue = foundationModule.Hooks.useScaledValue
 local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local robuxTextModule = require(currencyTransfers.Components.Generic.RobuxText)
 local transferRobuxHeaderModule = require(currencyTransfers.Components.Generic.TransferRobuxHeader)
@@ -43,7 +45,7 @@ local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobux
 local formatNumberModule = require(currencyTransfers.Utils.formatNumber)
 
 return function(_)
-	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTokens (ref), getFFlagCurrencyTransferFixDesktopInputModule (ref), userInputService (ref), useTransferStoreModule (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), signalsReactModule (ref), getFFlagCurrencyTransferUseBackendTransferLimitsModule (ref), getFIntCurrencyTransferMinAmountModule (ref), getFIntCurrencyTransferMaxAmountModule (ref), setTransferPromptStateModule (ref), promptStateModule (ref), proceedToConfirmModule (ref), useTextBoxOnChangeRefModule (ref), getFFlagCurrencyTransferFocusNavigationModule (ref), useTransferSheetFocusModule (ref), useAutoFocusTextBoxOnMountModule (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), formatNumberModule (ref), localizationService (ref), transferLocaleFormatModule (ref), useScaledValue (ref), sheet (ref), transferRobuxHeaderModule (ref), view (ref), getFFlagCurrencyTransferFixTextBoxInputModule (ref), transferProfileThumbnailModule (ref), robuxTextModule (ref), icon (ref), text (ref), transferAmountOptionChipsModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
+	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTokens (ref), getFFlagCurrencyTransferFixDesktopInputModule (ref), userInputService (ref), useTransferStoreModule (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), signalsReactModule (ref), getFFlagCurrencyTransferUseBackendTransferLimitsModule (ref), getFIntCurrencyTransferMinAmountModule (ref), getFIntCurrencyTransferMaxAmountModule (ref), setTransferPromptStateModule (ref), promptStateModule (ref), proceedToConfirmModule (ref), useTextBoxOnChangeRefModule (ref), getFFlagCurrencyTransferFocusNavigationModule (ref), useTransferSheetFocusModule (ref), useAutoFocusTextBoxOnMountModule (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), formatNumberModule (ref), localizationService (ref), transferLocaleFormatModule (ref), useScaledValue (ref), sheet (ref), transferRobuxHeaderModule (ref), view (ref), getFFlagCurrencyTransferFixTextBoxInputModule (ref), transferProfileThumbnailModule (ref), robuxTextModule (ref), icon (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), text (ref), transferAmountOptionChipsModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local createElement_3
 	local var1 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxInputSheet)
 	local var2 = useTokens()
@@ -297,7 +299,8 @@ return function(_)
 				LayoutOrder = 2,
 				Text = if getSelectedAmount and getSelectedAmount > 0 then tostring(getSelectedAmount) else "",
 				TextInputType = Enum.TextInputType.Number,
-				Font = var2.Typography.DisplaySmall.Font,
+				Font = if foundationFontFaceMigration then nil else var2.Typography.DisplaySmall.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.DisplaySmall.Font) else nil,
 				TextSize = var2.Typography.DisplaySmall.FontSize,
 				TextColor3 = var2.Color.Content.Emphasis.Color3,
 				PlaceholderColor3 = var2.Color.Content.Emphasis.Color3,

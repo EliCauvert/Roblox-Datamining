@@ -6,6 +6,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 	local _ = require(parent.MomentsTypes)
 	local reactModule = require(parent.React)
 	local text = require(parent.AppCommonLib).Text
+	local getTextSize = require(parent.Style).GetTextSize
 	local plainTextModule = require(script.Parent.PlainText)
 	local assetCardModule = require(script.Parent.AssetCard)
 	local hiddenMessageModule = require(script.Parent.HiddenMessage)
@@ -18,6 +19,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 	local fFlagChatModeratedMaskRandomLength = require(parent.SharedFlags).FFlagChatModeratedMaskRandomLength
 	local messageModelModule = require(appChat.Models.MessageModel)
 	local foundationModule = require(parent.Foundation)
+	local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 	local view = foundationModule.View
 	local image = foundationModule.Image
 	local t = {
@@ -89,7 +91,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 	}
 	
 	return function(p1)
-		-- upvalues: cryoModule (ref), t_2 (ref), fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), useTokens (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), text (ref), messageModelModule (ref), t_1 (ref), t (ref), pruneConsecutiveNewLines (ref), loggerModule (ref), view (ref), chatMessageContainerModule (ref), image (ref)
+		-- upvalues: cryoModule (ref), t_2 (ref), fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), useTokens (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), messageModelModule (ref), t_1 (ref), t (ref), pruneConsecutiveNewLines (ref), loggerModule (ref), view (ref), chatMessageContainerModule (ref), image (ref)
 		local var1 = cryoModule.Dictionary.union(t_2, p1)
 		
 		local function _(p2)
@@ -108,11 +110,11 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 		
 		local var2 = useTokens()
 		local var3 = if fFlagAppChatEnableAutotranslationModule then reactModule.useCallback(function(p2, p3, p4, p5, p6)
-			-- upvalues: text (copy), var2 (ref)
-			return if p6 then math.max(text.GetTextBounds(p3, p5, var2.Typography.BodySmall.FontSize, Vector2.new(p2, 10000)).X, text.GetTextBounds(p6, p5, p4, Vector2.new(p2, 10000)).X) + 20 else text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000)).X + 20
-		end) else reactModule.useCallback(function(p2, p3, p4, p5)
-			-- upvalues: text (copy)
-			return text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000)).X + 20
+			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), var2 (ref), text (copy)
+			return if p6 then math.max((if foundationFontFaceMigration then getTextSize(p3, var2.Typography.BodySmall.FontSize, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, var2.Typography.BodySmall.FontSize, Vector2.new(p2, 10000))).X, (if foundationFontFaceMigration then getTextSize(p6, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p6, p5, p4, Vector2.new(p2, 10000))).X) + 20 else (if foundationFontFaceMigration then getTextSize(p3, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000))).X + 20
+		end) else reactModule.useCallback(function(p2, p3, p4, p5, _)
+			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), text (copy)
+			return (if foundationFontFaceMigration then getTextSize(p3, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000))).X + 20
 		end)
 		local var4 = if var1 and var1.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[var1.messageType]
 		local var5 = reactModule.useMemo(function()

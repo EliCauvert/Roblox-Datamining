@@ -49,6 +49,8 @@ local function withoutFeaturedPromotion(p2)
 		name = var2.name,
 		items = var2.items,
 		categoryType = var2.categoryType,
+		stableCategoryId = var2.stableCategoryId,
+		categoryGroup = var2.categoryGroup,
 		robuxPackages = var2.robuxPackages
 	}
 	
@@ -124,6 +126,8 @@ return {
 				name = var7.name,
 				items = var7.items,
 				categoryType = var7.categoryType,
+				stableCategoryId = var7.stableCategoryId,
+				categoryGroup = var7.categoryGroup,
 				paymentSessionId = var7.paymentSessionId,
 				bonusJwt = var7.bonusJwt,
 				robuxPackages = var7.robuxPackages,

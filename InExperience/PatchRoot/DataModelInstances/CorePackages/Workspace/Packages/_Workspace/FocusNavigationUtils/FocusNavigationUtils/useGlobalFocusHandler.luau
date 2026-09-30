@@ -14,9 +14,11 @@ local useLastInputModeModule = require(focusNavigationUtils.useLastInputMode)
 local useFocusGuiObject = reactFocusNavigationModule.useFocusGuiObject
 local useFocusedGuiObject = reactFocusNavigationModule.useFocusedGuiObject
 local useRegistryEntry = require(focusNavigationUtils.FocusNavigableSurfaceRegistry).useRegistryEntry
+local useRegistryEntries = require(focusNavigationUtils.FocusNavigableSurfaceRegistry).useRegistryEntries
 local focusNavigableSurfaceIdentifierEnumModule = require(focusNavigationUtils.FocusNavigableSurfaceIdentifierEnum)
 local useAutoFocusModule = require(focusNavigationUtils.useAutoFocus)
 local useDescendantHasFocusModule = require(focusNavigationUtils.useDescendantHasFocus)
+local useAnyDescendantHasFocusModule = require(focusNavigationUtils.useAnyDescendantHasFocus)
 local globalFocusTelemetryModule = require(focusNavigationUtils.GlobalFocusTelemetry)
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local autoFocusFailsafeThreshold = game:DefineFastInt("AutoFocusFailsafeThreshold", 5)
@@ -26,6 +28,7 @@ local fFlagAppIaHomeSubTab = sharedFlagsModule.FFlagAppIaHomeSubTab
 local fFlagLuaAppResponsiveEnginePreferredInput = sharedFlagsModule.FFlagLuaAppResponsiveEnginePreferredInput
 local fFlagLuaAppsDefaultSelection = sharedFlagsModule.FFlagLuaAppsDefaultSelection
 local fFlagEnableDrawerFocusNav = sharedFlagsModule.FFlagEnableDrawerFocusNav
+local fFlagSearchAllRegistryEntriesForAutoFocus = sharedFlagsModule.FFlagSearchAllRegistryEntriesForAutoFocus
 local t = {
 	[Enum.UserInputType.MouseButton1] = true,
 	[Enum.UserInputType.MouseButton2] = true,
@@ -80,7 +83,7 @@ local function createGameLeaveSubscription(p1)
 end
 
 return function(p1)
-	-- upvalues: useLastInputMethodModule (ref), useFocusGuiObject (ref), useFocusedGuiObject (ref), reactModule (ref), useLastInputModeModule (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), responsiveModule (ref), sessionService (ref), sessionType (ref), globalFocusTelemetryModule (ref), userInputService (ref), t (ref), navigationModule (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnumModule (ref), fFlagEnablePeekViewFocusNav (ref), fFlagAppIaHomeSubTab (ref), fFlagEnableDrawerFocusNav (ref), useAutoFocusModule (ref), useDescendantHasFocusModule (ref), fFlagLuaAppsDefaultSelection (ref), useSelector (ref), runService (ref), autoFocusFailsafeThreshold (ref), createGameLeaveSubscription (ref)
+	-- upvalues: useLastInputMethodModule (ref), useFocusGuiObject (ref), useFocusedGuiObject (ref), reactModule (ref), useLastInputModeModule (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), responsiveModule (ref), sessionService (ref), sessionType (ref), globalFocusTelemetryModule (ref), userInputService (ref), t (ref), navigationModule (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnumModule (ref), fFlagEnablePeekViewFocusNav (ref), fFlagAppIaHomeSubTab (ref), fFlagEnableDrawerFocusNav (ref), useAutoFocusModule (ref), useDescendantHasFocusModule (ref), fFlagSearchAllRegistryEntriesForAutoFocus (ref), useRegistryEntries (ref), useAnyDescendantHasFocusModule (ref), fFlagLuaAppsDefaultSelection (ref), useSelector (ref), runService (ref), autoFocusFailsafeThreshold (ref), createGameLeaveSubscription (ref)
 	local var2 = useLastInputMethodModule()
 	local var3 = useFocusGuiObject()
 	local var4 = useFocusedGuiObject()
@@ -211,62 +214,63 @@ return function(p1)
 	local var28 = useAutoFocusModule(var27, 0.1)
 	local var29 = useDescendantHasFocusModule(var15)
 	local var30 = useDescendantHasFocusModule(var16)
-	local var31 = useDescendantHasFocusModule(var17)
-	local var32 = useDescendantHasFocusModule(var18)
-	local var33 = useDescendantHasFocusModule(var20)
-	local var34 = useDescendantHasFocusModule(var19)
-	local var35 = useDescendantHasFocusModule(var21)
-	local var36 = useDescendantHasFocusModule(var23)
-	local var37 = useDescendantHasFocusModule(var24)
-	local var38 = if fFlagEnablePeekViewFocusNav then useDescendantHasFocusModule(var22) else false
-	local var39 = if fFlagAppIaHomeSubTab then useDescendantHasFocusModule(var25) else false
-	local var40 = if fFlagEnableDrawerFocusNav then useDescendantHasFocusModule(var26) else false
+	local var31 = if fFlagSearchAllRegistryEntriesForAutoFocus then useAnyDescendantHasFocusModule(useRegistryEntries(focusNavigableSurfaceIdentifierEnumModule.RouterView)) else nil
+	local var32 = useDescendantHasFocusModule(var17)
+	local var33 = useDescendantHasFocusModule(var18)
+	local var34 = useDescendantHasFocusModule(var20)
+	local var35 = useDescendantHasFocusModule(var19)
+	local var36 = useDescendantHasFocusModule(var21)
+	local var37 = useDescendantHasFocusModule(var23)
+	local var38 = useDescendantHasFocusModule(var24)
+	local var39 = if fFlagEnablePeekViewFocusNav then useDescendantHasFocusModule(var22) else false
+	local var40 = if fFlagAppIaHomeSubTab then useDescendantHasFocusModule(var25) else false
+	local var41 = if fFlagEnableDrawerFocusNav then useDescendantHasFocusModule(var26) else false
 	local _ = nil
-	local var41 = if var18 then var32 elseif var17 then var31 elseif var20 then var33 elseif var19 then var34 elseif var22 then var38 elseif fFlagEnableDrawerFocusNav and var26 then var40 else var29 or (var30 or (var35 or (var36 or (var37 or fFlagAppIaHomeSubTab and var39))))
-	local var42 = nil
+	local var42 = if var18 then var33 elseif var17 then var32 elseif var20 then var34 elseif var19 then var35 elseif var22 then var39 elseif fFlagEnableDrawerFocusNav and var26 then var41 else var29 or ((if fFlagSearchAllRegistryEntriesForAutoFocus then var31 else var30) or (var36 or (var37 or (var38 or fFlagAppIaHomeSubTab and var40))))
+	local var43 = nil
 	
 	if fFlagLuaAppsDefaultSelection then
-		var42 = reactModule.useRef(var27)
-		local var43 = if var18 and not var32 then true elseif var17 and not var31 then true elseif var20 and not var33 then true elseif var19 and not var34 then true elseif var22 and not var38 then true elseif fFlagEnableDrawerFocusNav and var26 and not var40 then true elseif var16 and not var30 then true elseif var23 and not var36 then true elseif var15 and not var29 then true elseif var21 and not var35 then true elseif var24 and not var37 then true elseif fFlagAppIaHomeSubTab and var25 and not var39 then true else false
+		var43 = reactModule.useRef(var27)
+		local var44 = if var18 and not var33 then true elseif var17 and not var32 then true elseif var20 and not var34 then true elseif var19 and not var35 then true elseif var22 and not var39 then true elseif fFlagEnableDrawerFocusNav and var26 and not var41 then true elseif var16 and not var30 then true elseif var23 and not var37 then true elseif var15 and not var29 then true elseif var21 and not var36 then true elseif var24 and not var38 then true elseif fFlagAppIaHomeSubTab and var25 and not var40 then true else false
 		reactModule.useEffect(function()
-			-- upvalues: var7 (ref), responsiveModule (copy), var42 (write), var27 (ref), p1 (ref), var43 (ref), var3 (ref)
-			if var7 == responsiveModule.Input.Directional and var42.current ~= var27 and (not p1 and var43) then
+			-- upvalues: var7 (ref), responsiveModule (copy), var43 (write), var27 (ref), p1 (ref), var44 (ref), var3 (ref)
+			if var7 == responsiveModule.Input.Directional and var43.current ~= var27 and (not p1 and var44) then
 				var3(nil)
 			end
-			var42.current = var27
+			var43.current = var27
 		end, {
 			var27,
 			var7,
 			p1,
-			var43,
+			var44,
 			var3
 		})
 	end
-	local var44 = useSelector(function(p2)
+	local var45 = useSelector(function(p2)
 		return p2.CentralOverlay.OverlayType
 	end)
-	local var45 = if fFlagLuaAppResponsiveEnginePreferredInput then if var7 ~= responsiveModule.Input.Directional then isFocus else true else isFocus
-	var45 = var45 and (not var41 and not p1)
+	local var46 = if fFlagLuaAppResponsiveEnginePreferredInput then if var7 ~= responsiveModule.Input.Directional then isFocus else true else isFocus
+	var46 = var46 and (not var42 and not p1)
 	reactModule.useEffect(function()
-		-- upvalues: var28 (ref), var45 (ref), globalFocusTelemetryModule (copy), var27 (ref), var4 (ref), var42 (write), var18 (ref), var17 (ref), var20 (ref), var19 (ref), var22 (ref), var16 (ref), var23 (ref), var15 (ref), var21 (ref), var24 (ref), var25 (ref), var13 (ref), var12 (ref), var44 (ref), var6 (ref), runService (copy), autoFocusFailsafeThreshold (copy), createGameLeaveSubscription (copy)
-		local var46 = nil
+		-- upvalues: var28 (ref), var46 (ref), globalFocusTelemetryModule (copy), var27 (ref), var4 (ref), var43 (write), var18 (ref), var17 (ref), var20 (ref), var19 (ref), var22 (ref), var16 (ref), var23 (ref), var15 (ref), var21 (ref), var24 (ref), var25 (ref), var13 (ref), var12 (ref), var45 (ref), var6 (ref), runService (copy), autoFocusFailsafeThreshold (copy), createGameLeaveSubscription (copy)
+		local var47 = nil
 		local heartbeatConnection = nil
 		
 		local function setAutoFocusing()
-			-- upvalues: var46 (write), var28 (copy)
-			if var46 then
-				var46.cancel()
+			-- upvalues: var47 (write), var28 (copy)
+			if var47 then
+				var47.cancel()
 			end
-			var46 = var28()
+			var47 = var28()
 		end
 		
-		if var45 then
-			var46 = var28()
+		if var46 then
+			var47 = var28()
 			
-			local var47 = function()
-				-- upvalues: globalFocusTelemetryModule (copy), var27 (copy), var4 (copy), var42 (copy), var18 (copy), var17 (copy), var20 (copy), var19 (copy), var22 (copy), var16 (copy), var23 (copy), var15 (copy), var21 (copy), var24 (copy), var25 (copy), var13 (copy), var12 (copy), var44 (copy), var6 (copy), var46 (write), var28 (copy)
+			local var48 = function()
+				-- upvalues: globalFocusTelemetryModule (copy), var27 (copy), var4 (copy), var43 (copy), var18 (copy), var17 (copy), var20 (copy), var19 (copy), var22 (copy), var16 (copy), var23 (copy), var15 (copy), var21 (copy), var24 (copy), var25 (copy), var13 (copy), var12 (copy), var45 (copy), var6 (copy), var47 (write), var28 (copy)
 				globalFocusTelemetryModule.sendAutoFocusFailureCounter(var27)
-				globalFocusTelemetryModule.sendAutoFocusFailureEvent(var4, if var42 then var42.current else {}, var27, {
+				globalFocusTelemetryModule.sendAutoFocusFailureEvent(var4, if var43 then var43.current else {}, var27, {
 					moderationOverlay = var18,
 					centralOverlay = var17,
 					contextualMenu = var20,
@@ -278,44 +282,44 @@ return function(p1)
 					searchBar = var21,
 					auxiliaryView = var24,
 					headerView = var25
-				}, var13.current, var12.current, var44)
+				}, var13.current, var12.current, var45)
 				var6.current = true
 				
-				if var46 then
-					var46.cancel()
+				if var47 then
+					var47.cancel()
 				end
-				var46 = var28()
+				var47 = var28()
 			end
 			
-			local var48 = false
-			local var49 = 0
+			local var49 = false
+			local var50 = 0
 			heartbeatConnection = runService.Heartbeat:Connect(function(p2)
-				-- upvalues: var49 (write), autoFocusFailsafeThreshold (copy), var48 (write), var47 (ref)
-				var21 += p2
+				-- upvalues: var50 (write), autoFocusFailsafeThreshold (copy), var49 (write), var48 (ref)
+				var50 += p2
 				
-				if autoFocusFailsafeThreshold < var21 and not var48 then
-					var47()
-					var48 = true
-					var21 = 0
+				if autoFocusFailsafeThreshold < var50 and not var49 then
+					var48()
+					var49 = true
+					var50 = 0
 				end
 			end)
 		end
-		local var50 = if var45 then createGameLeaveSubscription(setAutoFocusing) else nil
+		local var51 = if var46 then createGameLeaveSubscription(setAutoFocusing) else nil
 		
 		return function()
-			-- upvalues: var46 (write), var50 (write), heartbeatConnection (write)
-			if var46 then
-				var46.cancel()
+			-- upvalues: var47 (write), var51 (write), heartbeatConnection (write)
+			if var47 then
+				var47.cancel()
 			end
-			if var50 then
-				var50.unsubscribe()
+			if var51 then
+				var51.unsubscribe()
 			end
 			if heartbeatConnection then
 				heartbeatConnection:Disconnect()
 			end
 		end
 	end, {
-		var45,
+		var46,
 		var28,
 		var27,
 		if fFlagLuaAppsDefaultSelection then var4 else nil

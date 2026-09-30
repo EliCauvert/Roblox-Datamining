@@ -18,14 +18,13 @@ local name = require(appChat.Logger):new(script.Name)
 local networkingFriendsModule = require(appChat.Http.NetworkingFriends)
 local _ = require(appChat.types)
 local useGetFriendshipStatus = require(parent.FriendsHydrationReact).useGetFriendshipStatus
-local appChatDisablePCMExperienceCTAs = game:DefineFastFlag("AppChatDisablePCMExperienceCTAs", false)
 local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
 local fFlagAppChatMigrateFriendshipStatusesModule = require(appChat.Flags.FFlagAppChatMigrateFriendshipStatuses)
 local fFlagSkipBlockModal = sharedFlagsModule.FFlagSkipBlockModal
 local var1 = if fFlagAppChatPresenceStoreMigrationModule then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
 
 function PlayerContextualMenuWrapper(p1)
-	-- upvalues: useDispatch (ref), responsiveModule (ref), fFlagAppChatPresenceStoreMigrationModule (ref), var1 (ref), useSelector (ref), convertUserPresenceTypeToString (ref), fFlagAppChatMigrateFriendshipStatusesModule (ref), useGetFriendshipStatus (ref), useEffect (ref), networkingFriendsModule (ref), useIsInExperienceModule (ref), appChatDisablePCMExperienceCTAs (ref), reactModule (ref), interactable (ref), component (ref), name (ref), fFlagSkipBlockModal (ref), images (ref)
+	-- upvalues: useDispatch (ref), responsiveModule (ref), fFlagAppChatPresenceStoreMigrationModule (ref), var1 (ref), useSelector (ref), convertUserPresenceTypeToString (ref), fFlagAppChatMigrateFriendshipStatusesModule (ref), useGetFriendshipStatus (ref), useEffect (ref), networkingFriendsModule (ref), useIsInExperienceModule (ref), reactModule (ref), interactable (ref), component (ref), name (ref), fFlagSkipBlockModal (ref), images (ref)
 	local var2
 	local var3 = useDispatch()
 	local var4 = responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.Small)
@@ -74,7 +73,7 @@ function PlayerContextualMenuWrapper(p1)
 		[reactModule.Event.Activated] = p1.onDismiss
 	}, {
 		PCM = reactModule.createElement(component, {
-			enableExperienceCTAs = if appChatDisablePCMExperienceCTAs then false elseif useIsInExperienceModule() then false else true,
+			enableExperienceCTAs = if useIsInExperienceModule() then false else true,
 			subjectPresence = var2,
 			subjectUserId = p1.participantId,
 			robloxFriendshipStatus = var6,

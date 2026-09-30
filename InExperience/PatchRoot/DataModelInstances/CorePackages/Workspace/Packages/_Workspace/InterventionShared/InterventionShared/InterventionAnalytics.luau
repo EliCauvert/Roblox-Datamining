@@ -3,7 +3,6 @@ local parent = script:FindFirstAncestor("InterventionShared").Parent
 local cryoModule = require(parent.Cryo)
 local loggingProtocolModule = require(parent.LoggingProtocol)
 local default = loggingProtocolModule.default
-local fFlagUniversalFeatureRestrictionReceivers = require(parent.SharedFlags).FFlagUniversalFeatureRestrictionReceivers
 local t = {
 	EventContext = "InExperienceInterventionEvent",
 	EventName = "InExperienceInterventionEvent",
@@ -35,7 +34,7 @@ local t_1 = {
 	eventName = t.EventName,
 	backends = { loggingProtocolModule.TelemetryBackends.EventIngest },
 	formatCustomFields = function(p1)
-		-- upvalues: playersService (ref), cryoModule (ref), fFlagUniversalFeatureRestrictionReceivers (ref), t (ref)
+		-- upvalues: playersService (ref), cryoModule (ref), t (ref)
 		local eventType = p1.eventType
 		local interventionType = p1.interventionType
 		local renderedTimestamp = p1.renderedTimestamp
@@ -58,7 +57,7 @@ local t_1 = {
 		if acknowledgeable ~= nil then
 			t_1 = cryoModule.Dictionary.join({ acknowledgeable = tostring(acknowledgeable) }, t_1)
 		end
-		if fFlagUniversalFeatureRestrictionReceivers and p1.abuseVector ~= nil then
+		if p1.abuseVector ~= nil then
 			t_1 = cryoModule.Dictionary.join({ abuse_vector = p1.abuseVector }, t_1)
 		end
 		if eventType == t.EventTypes.CtaClicked or eventType == t.EventTypes.AppealClicked or (eventType == t.EventTypes.NudgeToastDismissed or eventType == t.EventTypes.ChatAttemptToastDismissed) then

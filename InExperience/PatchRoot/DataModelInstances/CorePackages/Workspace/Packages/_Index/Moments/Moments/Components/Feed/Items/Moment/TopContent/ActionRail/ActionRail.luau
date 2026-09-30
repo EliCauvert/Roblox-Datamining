@@ -24,7 +24,7 @@ local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
 local fFlagMomentsEngagementMetricsFeature = momentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
 local useConfigurationModule = require(moments.Hooks.useConfiguration)
 local useShareMomentModule = require(moments.Share.useShareMoment)
-local var1 = if fFlagMomentsComments then require(moments.Components.Comments.useCommentsRecommendationEvents) else nil
+local var1 = if fFlagMomentsComments then require(moments.Components.Comments.useCommentsEvents) else nil
 local arrowThickToRight = builderIconsModule.Icon.ArrowThickToRight
 local speechBubbleAlignLeft = builderIconsModule.Icon.SpeechBubbleAlignLeft
 

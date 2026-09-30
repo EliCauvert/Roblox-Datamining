@@ -3,49 +3,45 @@ local parent = serverDrivenUi.Parent
 local signalsModule = require(parent.Signals)
 local _ = require(serverDrivenUi.DataStore.SduiFeedStoreTypes)
 local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local fFlagSduiGetItemCollectionKeys = require(serverDrivenUi.Flags).FFlagSduiGetItemCollectionKeys
 local fFlagLuaAppRfySignalApportioning = require(parent.SharedFlags).FFlagLuaAppRfySignalApportioning
 local luaAppNilApportionedItems = game:DefineFastFlag("LuaAppNilApportionedItems", false)
 local fFlagLuaAppAddRequestIdToRfySignalApportioning = require(parent.SharedFlags).FFlagLuaAppAddRequestIdToRfySignalApportioning
 local var1 = game:DefineFastInt("SduiCreateSduiFeedStoreLogDelayMs", 1000) / 1000
 
 return function()
-	-- upvalues: signalsModule (ref), fFlagSduiGetItemCollectionKeys (ref), fFlagLuaAppRfySignalApportioning (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (ref), var1 (ref), discoveryEventErrorLogger (ref), luaAppNilApportionedItems (ref)
+	-- upvalues: signalsModule (ref), fFlagLuaAppRfySignalApportioning (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (ref), var1 (ref), discoveryEventErrorLogger (ref), luaAppNilApportionedItems (ref)
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
 	local var2, var3 = signalsModule.createSignal({})
 	local var4, var5 = signalsModule.createSignal(0)
-	local var6 = nil
-	local var7 = nil
+	local _ = nil
+	local _ = nil
+	local var6, var7 = signalsModule.createSignal({})
+	local var8 = var7
 	
-	if fFlagSduiGetItemCollectionKeys then
-		local var8, var9 = signalsModule.createSignal({})
-		var6 = var8
-		var7 = var9
-	end
 	local function _(value, p1)
 		-- upvalues: signalsModule (copy), t (ref)
-		local var10, var11 = signalsModule.createSignal(p1)
-		t[value] = { get = var10, set = var11 }
+		local var9, var10 = signalsModule.createSignal(p1)
+		t[value] = { get = var9, set = var10 }
 		
 		return t[value]
 	end
 	
 	local function getItemCollection(p1, p2)
 		-- upvalues: t (ref), signalsModule (copy)
-		local var10 = t[p1]
+		local var9 = t[p1]
 		
-		if var10 == nil then
+		if var9 == nil then
 			if p2 then
-				local var11, var12 = signalsModule.createSignal(nil)
-				t[p1] = { get = var11, set = var12 }
-				var10 = t[p1]
+				local var10, var11 = signalsModule.createSignal(nil)
+				t[p1] = { get = var10, set = var11 }
+				var9 = t[p1]
 			else
 				error(`createSduiFeedStore missing item collection for feedItemKey {p1}`)
 			end
 		end
-		return var10.get
+		return var9.get
 	end
 	
 	local function getFirstItemCollectionWithFilter(p3)
@@ -64,8 +60,8 @@ return function()
 			if t[i] then
 				t[i].set(v)
 			else
-				local var13, var14 = signalsModule.createSignal(v)
-				t[i] = { get = var13, set = var14 }
+				local var12, var13 = signalsModule.createSignal(v)
+				t[i] = { get = var12, set = var13 }
 				local _ = t[i]
 			end
 		end
@@ -77,25 +73,25 @@ return function()
 	local getApportionedItems = nil
 	
 	if fFlagLuaAppRfySignalApportioning then
-		local var15 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then function(p4, p5)
+		local var14 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then function(p4, p5)
 			return if p5 then p4 .. "_" .. p5 else p4
 		end else nil
 		
 		local function createApportioningDataSignals(value, p4, p5)
-			-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var15 (ref), signalsModule (copy), t_1 (ref), t_2 (ref)
-			local var16 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var15(value, p5) else value
-			local var17, var18 = signalsModule.createSignal(p4.items)
-			local var19, var20 = signalsModule.createSignal(p4.gridApportioningMetadata)
-			local var21, var22 = signalsModule.createSignal({
+			-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var14 (ref), signalsModule (copy), t_1 (ref), t_2 (ref)
+			local var15 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var14(value, p5) else value
+			local var16, var17 = signalsModule.createSignal(p4.items)
+			local var18, var19 = signalsModule.createSignal(p4.gridApportioningMetadata)
+			local var20, var21 = signalsModule.createSignal({
 				isCapacityUpdateScheduled = false,
 				capacityUpdateCoroutine = nil,
-				getItems = var17,
-				setItems = var18,
-				getGridApportioningMetadata = var19,
-				setGridApportioningMetadata = var20,
+				getItems = var16,
+				setItems = var17,
+				getGridApportioningMetadata = var18,
+				setGridApportioningMetadata = var19,
 				scheduledCapacityUpdates = {}
 			})
-			t_1[var16] = { get = var21, set = var22 }
+			t_1[var15] = { get = var20, set = var21 }
 			
 			if fFlagLuaAppAddRequestIdToRfySignalApportioning then
 				local previousKey = t_2[value] and t_2[value].previousKey
@@ -104,35 +100,35 @@ return function()
 				if previousKey then
 					t_1[previousKey] = nil
 				end
-				t_2[value] = { previousKey = currentKey, currentKey = var16 }
+				t_2[value] = { previousKey = currentKey, currentKey = var15 }
 			end
 		end
 		
-		local var16 = function(p4, p5)
-			-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var15 (ref), t_1 (ref), createApportioningDataSignals (ref)
-			local var17 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var15(p4, p5) else p4
+		local var15 = function(p4, p5)
+			-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var14 (ref), t_1 (ref), createApportioningDataSignals (ref)
+			local var16 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var14(p4, p5) else p4
 			
-			if not t_1[var17] then
+			if not t_1[var16] then
 				createApportioningDataSignals(p4, { items = {}, gridApportioningMetadata = {} }, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p5 else nil)
 			end
-			return t_1[var17].get
+			return t_1[var16].get
 		end
 		
 		setApportioningData = function(value, p4)
-			-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var15 (ref), t_1 (ref), createApportioningDataSignals (ref)
+			-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var14 (ref), t_1 (ref), createApportioningDataSignals (ref)
 			for i, v in value do
-				local var17 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var15(i, p4) else i
+				local var16 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var14(i, p4) else i
 				
-				if t_1[var17] then
-					local var18 = t_1[var17].get(false)
-					var18.setItems(v.items)
-					var18.setGridApportioningMetadata(v.gridApportioningMetadata)
-					var18.scheduledCapacityUpdates = {}
-					var18.isCapacityUpdateScheduled = false
+				if t_1[var16] then
+					local var17 = t_1[var16].get(false)
+					var17.setItems(v.items)
+					var17.setGridApportioningMetadata(v.gridApportioningMetadata)
+					var17.scheduledCapacityUpdates = {}
+					var17.isCapacityUpdateScheduled = false
 					
-					if var18.capacityUpdateCoroutine then
-						task.cancel(var18.capacityUpdateCoroutine)
-						var18.capacityUpdateCoroutine = nil
+					if var17.capacityUpdateCoroutine then
+						task.cancel(var17.capacityUpdateCoroutine)
+						var17.capacityUpdateCoroutine = nil
 					end
 				else
 					createApportioningDataSignals(i, v, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p4 else nil)
@@ -141,70 +137,70 @@ return function()
 		end
 		
 		local function updateGridApportioningMetadata(p5, p6)
-			-- upvalues: var16 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var15 (ref), var1 (copy), t_1 (ref), discoveryEventErrorLogger (copy)
-			local var19 = var16(p5, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p6 else nil)(false)
-			local gridApportioningMetadata = var19.getGridApportioningMetadata(false)
-			local scheduledCapacityUpdates = var19.scheduledCapacityUpdates
+			-- upvalues: var15 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var14 (ref), var1 (copy), t_1 (ref), discoveryEventErrorLogger (copy)
+			local var18 = var15(p5, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p6 else nil)(false)
+			local gridApportioningMetadata = var18.getGridApportioningMetadata(false)
+			local scheduledCapacityUpdates = var18.scheduledCapacityUpdates
 			
 			if #gridApportioningMetadata == 0 then
-				local var20 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var15(p5, p6) else p5
+				local var19 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var14(p5, p6) else p5
 				task.delay(var1, function()
-					-- upvalues: t_1 (copy), var20 (ref), discoveryEventErrorLogger (copy)
-					local var21 = t_1[var20].get(false)
+					-- upvalues: t_1 (copy), var19 (ref), discoveryEventErrorLogger (copy)
+					local var20 = t_1[var19].get(false)
 					
-					if #(var21 and var21.getGridApportioningMetadata(false) or {}) == 0 then
-						discoveryEventErrorLogger.reportError("ApportioningEmptyGridMetadata", `Apportioning grid metadata is empty for {var20} in updateGridApportioningMetadata`, { apportioningKey = var20 })
+					if #(var20 and var20.getGridApportioningMetadata(false) or {}) == 0 then
+						discoveryEventErrorLogger.reportError("ApportioningEmptyGridMetadata", `Apportioning grid metadata is empty for {var19} in updateGridApportioningMetadata`, { apportioningKey = var19 })
 					end
 				end)
 				
 				return
 			end
-			local var21 = 1
+			local var20 = 1
 			local t = {}
 			
 			for i, v in gridApportioningMetadata do
-				local var22 = if scheduledCapacityUpdates[v.sortIndex] then scheduledCapacityUpdates[v.sortIndex] else v.capacity
+				local var21 = if scheduledCapacityUpdates[v.sortIndex] then scheduledCapacityUpdates[v.sortIndex] else v.capacity
 				table.insert(t, {
 					sortIndex = v.sortIndex,
-					startingItemIndex = var21,
-					capacity = var22
+					startingItemIndex = var20,
+					capacity = var21
 				})
-				var21 += var22
+				var20 += var21
 			end
-			var19.setGridApportioningMetadata(t)
+			var18.setGridApportioningMetadata(t)
 		end
 		
 		updateApportioningCapacity = function(p7, p8, p9, p10)
-			-- upvalues: var16 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), updateGridApportioningMetadata (ref)
-			local var23 = var16(p7, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p10 else nil)(false)
-			var23.scheduledCapacityUpdates[p8] = p9
+			-- upvalues: var15 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), updateGridApportioningMetadata (ref)
+			local var22 = var15(p7, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p10 else nil)(false)
+			var22.scheduledCapacityUpdates[p8] = p9
 			
-			if not var23.isCapacityUpdateScheduled then
-				var23.isCapacityUpdateScheduled = true
-				var23.capacityUpdateCoroutine = task.defer(function()
-					-- upvalues: updateGridApportioningMetadata (copy), p7 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), p10 (ref), var23 (ref)
+			if not var22.isCapacityUpdateScheduled then
+				var22.isCapacityUpdateScheduled = true
+				var22.capacityUpdateCoroutine = task.defer(function()
+					-- upvalues: updateGridApportioningMetadata (copy), p7 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), p10 (ref), var22 (ref)
 					updateGridApportioningMetadata(p7, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p10 else nil)
-					var23.scheduledCapacityUpdates = {}
-					var23.isCapacityUpdateScheduled = false
-					var23.capacityUpdateCoroutine = nil
+					var22.scheduledCapacityUpdates = {}
+					var22.isCapacityUpdateScheduled = false
+					var22.capacityUpdateCoroutine = nil
 				end)
 			end
 		end
 		
 		getSingleGridApportioningMetadata = function(p7, p8, p9)
-			-- upvalues: signalsModule (copy), var16 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var1 (copy), var15 (ref), t_1 (ref), discoveryEventErrorLogger (copy)
+			-- upvalues: signalsModule (copy), var15 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var1 (copy), var14 (ref), t_1 (ref), discoveryEventErrorLogger (copy)
 			return signalsModule.createComputed(function(p10)
-				-- upvalues: var16 (copy), p7 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), p9 (ref), var1 (copy), var15 (copy), t_1 (copy), discoveryEventErrorLogger (copy), p8 (ref)
-				local gridApportioningMetadata = var16(p7, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p9 else nil)(p10).getGridApportioningMetadata(p10)
+				-- upvalues: var15 (copy), p7 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), p9 (ref), var1 (copy), var14 (copy), t_1 (copy), discoveryEventErrorLogger (copy), p8 (ref)
+				local gridApportioningMetadata = var15(p7, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p9 else nil)(p10).getGridApportioningMetadata(p10)
 				
 				if #gridApportioningMetadata == 0 then
 					task.delay(var1, function()
-						-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var15 (copy), p7 (copy), p9 (copy), t_1 (copy), discoveryEventErrorLogger (copy), p8 (copy)
-						local var23 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var15(p7, p9) else p7
-						local var24 = t_1[var23].get(false)
+						-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var14 (copy), p7 (copy), p9 (copy), t_1 (copy), discoveryEventErrorLogger (copy), p8 (copy)
+						local var22 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var14(p7, p9) else p7
+						local var23 = t_1[var22].get(false)
 						
-						if #(var24 and var24.getGridApportioningMetadata(false) or {}) == 0 then
-							discoveryEventErrorLogger.reportError("ApportioningEmptyGridMetadata", `Apportioning grid metadata is empty for {var23} in getSingleGridApportioningMetadata`, { apportioningKey = var23, sortIndex = p8 })
+						if #(var23 and var23.getGridApportioningMetadata(false) or {}) == 0 then
+							discoveryEventErrorLogger.reportError("ApportioningEmptyGridMetadata", `Apportioning grid metadata is empty for {var22} in getSingleGridApportioningMetadata`, { apportioningKey = var22, sortIndex = p8 })
 						end
 					end)
 					
@@ -220,42 +216,42 @@ return function()
 		end
 		
 		getApportionedItems = function(p11, p12, p13)
-			-- upvalues: signalsModule (copy), var16 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), getSingleGridApportioningMetadata (write), var15 (ref), var1 (copy), t_1 (ref), discoveryEventErrorLogger (copy), luaAppNilApportionedItems (copy)
+			-- upvalues: signalsModule (copy), var15 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), getSingleGridApportioningMetadata (write), var14 (ref), var1 (copy), t_1 (ref), discoveryEventErrorLogger (copy), luaAppNilApportionedItems (copy)
 			return signalsModule.createComputed(function(p14)
-				-- upvalues: var16 (copy), p11 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), p13 (ref), getSingleGridApportioningMetadata (copy), p12 (ref), var15 (copy), var1 (copy), t_1 (copy), discoveryEventErrorLogger (copy), luaAppNilApportionedItems (copy)
+				-- upvalues: var15 (copy), p11 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), p13 (ref), getSingleGridApportioningMetadata (copy), p12 (ref), var14 (copy), var1 (copy), t_1 (copy), discoveryEventErrorLogger (copy), luaAppNilApportionedItems (copy)
 				local startingItemIndex
-				local var23 = var16(p11, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p13 else nil)(p14)
-				local items = var23.getItems(p14)
-				local var24 = getSingleGridApportioningMetadata(p11, p12, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p13 else nil)(p14)
+				local var22 = var15(p11, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p13 else nil)(p14)
+				local items = var22.getItems(p14)
+				local var23 = getSingleGridApportioningMetadata(p11, p12, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p13 else nil)(p14)
 				
-				if #items == 0 and #var23.getGridApportioningMetadata(false) == 0 then
-					local var25 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var15(p11, p13) else p11
+				if #items == 0 and #var22.getGridApportioningMetadata(false) == 0 then
+					local var24 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var14(p11, p13) else p11
 					task.delay(var1, function()
-						-- upvalues: t_1 (copy), var25 (ref), discoveryEventErrorLogger (copy), p12 (copy)
-						local var26 = t_1[var25].get(false)
+						-- upvalues: t_1 (copy), var24 (ref), discoveryEventErrorLogger (copy), p12 (copy)
+						local var25 = t_1[var24].get(false)
 						
-						if #(var26 and var26.getItems(false) or {}) == 0 and #(var26 and var26.getGridApportioningMetadata(false) or {}) == 0 then
-							discoveryEventErrorLogger.reportError("ApportioningEmptyData", `All apportioning data is empty for {var25} in getApportionedItems`, { apportioningKey = var25, sortIndex = p12 })
+						if #(var25 and var25.getItems(false) or {}) == 0 and #(var25 and var25.getGridApportioningMetadata(false) or {}) == 0 then
+							discoveryEventErrorLogger.reportError("ApportioningEmptyData", `All apportioning data is empty for {var24} in getApportionedItems`, { apportioningKey = var24, sortIndex = p12 })
 						end
 					end)
 					
 					return if luaAppNilApportionedItems then nil else {}
-				elseif not var24 then
+				elseif not var23 then
 					startingItemIndex = nil
 					task.delay(var1, function()
-						-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var15 (copy), p11 (copy), p13 (copy), getSingleGridApportioningMetadata (copy), p12 (copy), t_1 (copy), startingItemIndex (write), discoveryEventErrorLogger (copy)
-						local var27 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var15(p11, p13) else p11
+						-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var14 (copy), p11 (copy), p13 (copy), getSingleGridApportioningMetadata (copy), p12 (copy), t_1 (copy), startingItemIndex (write), discoveryEventErrorLogger (copy)
+						local var26 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var14(p11, p13) else p11
 						
 						if not getSingleGridApportioningMetadata(p11, p12, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p13 else nil)(false) then
-							local var28 = t_1[var27].get(false)
+							local var27 = t_1[var26].get(false)
 							local t = {}
 							
-							for i, v in var28 and var28.getGridApportioningMetadata(false) or {} do
+							for i, v in var27 and var27.getGridApportioningMetadata(false) or {} do
 								table.insert(t, v.sortIndex)
 							end
 							startingItemIndex = if #t > 0 then table.concat(t, ",") else "none"
-							discoveryEventErrorLogger.reportError("ApportioningSortIndexNotFound", `Sort index {p12} not found in apportioning data for {var27}`, {
-								apportioningKey = var27,
+							discoveryEventErrorLogger.reportError("ApportioningSortIndexNotFound", `Sort index {p12} not found in apportioning data for {var26}`, {
+								apportioningKey = var26,
 								sortIndex = p12,
 								availableSortIndices = startingItemIndex
 							})
@@ -264,10 +260,10 @@ return function()
 					
 					return {}
 				end
-				startingItemIndex = var24.startingItemIndex
+				startingItemIndex = var23.startingItemIndex
 				local t = {}
 				
-				for i = startingItemIndex, math.min(startingItemIndex + var24.capacity - 1, #items) do
+				for i = startingItemIndex, math.min(startingItemIndex + var23.capacity - 1, #items) do
 					table.insert(t, items[i])
 				end
 				return t
@@ -279,12 +275,12 @@ return function()
 		getItemCollection = getItemCollection,
 		getTemplates = var2,
 		getDataUpdatedTimestamp = var4,
-		getItemCollectionKeys = if fFlagSduiGetItemCollectionKeys then var6 else nil,
+		getItemCollectionKeys = var6,
 		updateApportioningCapacity = if fFlagLuaAppRfySignalApportioning then updateApportioningCapacity else nil,
 		getSingleGridApportioningMetadata = if fFlagLuaAppRfySignalApportioning then getSingleGridApportioningMetadata else nil,
 		getApportionedItems = if fFlagLuaAppRfySignalApportioning then getApportionedItems else nil,
 		updateData = function(p15, p16)
-			-- upvalues: var3 (ref), var5 (ref), setItemCollections (ref), fFlagSduiGetItemCollectionKeys (copy), var7 (write), fFlagLuaAppRfySignalApportioning (copy), setApportioningData (write), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy)
+			-- upvalues: var3 (ref), var5 (ref), setItemCollections (ref), var8 (write), fFlagLuaAppRfySignalApportioning (copy), setApportioningData (write), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy)
 			if p15.templates then
 				var3(p15.templates)
 			end
@@ -293,15 +289,12 @@ return function()
 			end
 			if p15.itemCollections then
 				setItemCollections(p15.itemCollections)
+				local t = {}
 				
-				if fFlagSduiGetItemCollectionKeys then
-					local t = {}
-					
-					for i in p15.itemCollections do
-						table.insert(t, i)
-					end
-					var7(t)
+				for i in p15.itemCollections do
+					table.insert(t, i)
 				end
+				var8(t)
 			end
 			if fFlagLuaAppRfySignalApportioning and p15.apportioningData then
 				setApportioningData(p15.apportioningData, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p16 else nil)

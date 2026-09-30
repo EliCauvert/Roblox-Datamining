@@ -45,6 +45,7 @@ local t_1 = {
 	hasAdCampaignCreateError = false,
 	adCampaignDurationDays = nil,
 	adCampaignEstimatedPriceRobux = nil,
+	adCampaignOffers = nil,
 	adCampaignRunStartTimeMs = nil,
 	adCampaignRunEndTimeMs = nil,
 	isAdCampaignCreatedToastVisible = false,

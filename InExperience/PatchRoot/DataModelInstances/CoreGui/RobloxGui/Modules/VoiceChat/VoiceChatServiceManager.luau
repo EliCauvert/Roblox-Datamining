@@ -32,6 +32,7 @@ local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeatur
 local getFFlagEnableSeamlessVoiceDataConsentToastModule = require(robloxGui.Modules.Flags.GetFFlagEnableSeamlessVoiceDataConsentToast)
 local getFFlagSeamlessVoiceConsentToastPolicy = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagSeamlessVoiceConsentToastPolicy
 local getFFlagEnableFtuxExitOnMuteToggle = voiceChatCoreModule.Flags.GetFFlagEnableFtuxExitOnMuteToggle
+local getFFlagMicConsumerRegistry = voiceChatCoreModule.Flags.GetFFlagMicConsumerRegistry
 local getFFlagEnableVoiceChatMuteForVideoCaptures = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableVoiceChatMuteForVideoCaptures
 local getFFlagEnableCrossExperienceVoiceCaptureMute = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableCrossExperienceVoiceCaptureMute
 local getFFlagExpChatUseVoiceParticipantsStore = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagExpChatUseVoiceParticipantsStore
@@ -248,7 +249,7 @@ function t:__newindex(p1, p2)
 end
 
 function t.new(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: analytics (ref), getCamMicPermissionsModule (ref), t (ref), WATCHED_MESSAGE_TYPES (ref), getFIntThrottleParticipantsUpdateMs (ref), IXPServiceWrapper (ref), voiceUIImprovementsIXPLayerName (ref), throttleParticipantsUpdateIXPLayerValue (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), expChatModule (ref), getFFlagEnableUniveralVoiceToastsModule (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), debugSkipVoicePermissionCheck (ref), fFlagDebugShowAudioDeviceInputDebugger (ref), fFlagEnablePartyVoiceChangersInLua (ref), microphoneDevicePermissionsLoggingModule (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (ref), voiceVolumeControlsEligibility (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (ref), VOICE_JOIN_PROGRESS (ref), constantsModule (ref), disableLeaveToastInStudio (ref), promptTypeModule (ref), debugSimulateConnectDisconnect (ref), name (ref), appStorageService (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), voiceNudgeUseNewDACopyModule (ref), getFFlagShowDevicePermissionsModal (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), getFFlagNonVoiceFTUX (ref), getFFlagEnableVoiceChatMuteForVideoCaptures (ref), getFFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref)
+	-- upvalues: analytics (ref), getCamMicPermissionsModule (ref), t (ref), WATCHED_MESSAGE_TYPES (ref), getFIntThrottleParticipantsUpdateMs (ref), IXPServiceWrapper (ref), voiceUIImprovementsIXPLayerName (ref), throttleParticipantsUpdateIXPLayerValue (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), expChatModule (ref), getFFlagEnableUniveralVoiceToastsModule (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), debugSkipVoicePermissionCheck (ref), getFFlagMicConsumerRegistry (ref), fFlagDebugShowAudioDeviceInputDebugger (ref), fFlagEnablePartyVoiceChangersInLua (ref), microphoneDevicePermissionsLoggingModule (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (ref), voiceVolumeControlsEligibility (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (ref), VOICE_JOIN_PROGRESS (ref), constantsModule (ref), disableLeaveToastInStudio (ref), promptTypeModule (ref), debugSimulateConnectDisconnect (ref), name (ref), appStorageService (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), voiceNudgeUseNewDACopyModule (ref), getFFlagShowDevicePermissionsModal (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), getFFlagNonVoiceFTUX (ref), getFFlagEnableVoiceChatMuteForVideoCaptures (ref), getFFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref)
 	local tbl = setmetatable({
 		_mutedAnyone = false,
 		voiceConnectEventReportedForActiveSession = false,
@@ -358,6 +359,16 @@ function t.new(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 		end
 	end)
 	
+	if getFFlagMicConsumerRegistry() then
+		tbl.coreVoiceManager:subscribe("OnMicPermissionDeniedToast", function()
+			-- upvalues: tbl (ref)
+			tbl:showPrompt("MicPermissionDenied")
+		end)
+		tbl.coreVoiceManager:subscribe("OnMicFirstUnmutePrivacy", function()
+			-- upvalues: tbl (ref)
+			tbl:showPrompt("MicFirstUnmutePrivacy")
+		end)
+	end
 	if fFlagDebugShowAudioDeviceInputDebugger then
 		tbl.coreVoiceManager:subscribe("OnDevicePlayerChanged", function()
 			-- upvalues: tbl (ref)
@@ -590,6 +601,10 @@ end
 
 function t:getService()
 	return self.service
+end
+
+function t:GetMicManager()
+	return if self.coreVoiceManager then self.coreVoiceManager.micManager else nil
 end
 
 function t:GetMutedAnyone()

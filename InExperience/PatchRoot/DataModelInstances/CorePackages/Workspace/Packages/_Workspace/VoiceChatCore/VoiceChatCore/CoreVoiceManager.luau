@@ -82,6 +82,7 @@ local fFlagEnablePartyVoiceChangersInLua = require(parent_1.SharedFlags).FFlagEn
 local fFlagSkipVoiceInTeamCreateViewerModule = require(flags.FFlagSkipVoiceInTeamCreateViewer)
 local getFFlagEnableVoiceUxUpdates = require(parent_1.SharedFlags).GetFFlagEnableVoiceUxUpdates
 local getFFlagCoreMicManagerRefactorModule = require(flags.GetFFlagCoreMicManagerRefactor)
+local getFFlagMicConsumerRegistryModule = require(flags.GetFFlagMicConsumerRegistry)
 local var7 = if getFFlagCoreMicManagerRefactorModule() then require(script.Parent.MicInputManager) else nil
 local WATCHED_NAMESPACES = constantsModule.WATCHED_NAMESPACES
 local WATCHED_MESSAGE_TYPES = constantsModule.WATCHED_MESSAGE_TYPES
@@ -205,7 +206,7 @@ function t_1:__newindex(p1, p2)
 end
 
 function t_1.new(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
-	-- upvalues: utilsModule (ref), analyticsModule (ref), appStorageService (ref), t_1 (ref), WATCHED_MESSAGE_TYPES (ref), getFIntThrottleParticipantsUpdateMsModule (ref), playersService_1 (ref), name (ref), IXPServiceWrapper (ref), voicePerformanceThrottlingIXPLayerName (ref), throttleParticipantsUpdateIXPLayerValue (ref), getFFlagCoreMicManagerRefactorModule (ref), var7 (ref), var6 (ref)
+	-- upvalues: utilsModule (ref), analyticsModule (ref), appStorageService (ref), t_1 (ref), WATCHED_MESSAGE_TYPES (ref), getFIntThrottleParticipantsUpdateMsModule (ref), playersService_1 (ref), name (ref), IXPServiceWrapper (ref), voicePerformanceThrottlingIXPLayerName (ref), throttleParticipantsUpdateIXPLayerValue (ref), getFFlagCoreMicManagerRefactorModule (ref), var7 (ref), var6 (ref), getFFlagMicConsumerRegistryModule (ref)
 	local tbl = setmetatable({
 		previousSessionId = nil,
 		HttpRbxApiService = p3,
@@ -283,6 +284,14 @@ function t_1.new(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
 					-- upvalues: tbl (ref)
 					tbl:emit("OnShowDataConsentToast")
 				end,
+				emitOnMicPermissionDeniedToast = function()
+					-- upvalues: tbl (ref)
+					tbl:emit("OnMicPermissionDeniedToast")
+				end,
+				emitOnMicFirstUnmutePrivacy = function()
+					-- upvalues: tbl (ref)
+					tbl:emit("OnMicFirstUnmutePrivacy")
+				end,
 				getAudioDevices = function()
 					-- upvalues: tbl (ref)
 					return tbl.audioDevices
@@ -333,6 +342,11 @@ function t_1.new(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
 		})
 		tbl.muteChanged = tbl.micManager.muteChanged
 		tbl.talkingChanged = tbl.micManager.talkingChanged
+		
+		if getFFlagMicConsumerRegistryModule() then
+			tbl.hasConsumersChanged = tbl.micManager.hasConsumersChanged
+			tbl.micManager:SetupDeveloperDeviceTracking()
+		end
 	end
 	return tbl
 end
@@ -1284,7 +1298,7 @@ function t_1:_updateRecentUsersInteractionData()
 end
 
 function t_1:SetupParticipantListeners()
-	-- upvalues: name (ref), getFFlagClearUserFromRecentVoiceDataOnLeaveModule (ref), stringKeyFixForParticipantsTable (ref), getFFlagFixGetPlayerByUserIdStringCastModule (ref), playersService (ref), voiceChatService (ref), fFlagEnablePartyVoiceChangersInLua (ref), getFFlagBatchVoiceParticipantsUpdatesModule (ref), var6 (ref), getFFlagVoiceChatClientRewriteMasterLua (ref), stopModerationConnectionOnLeave (ref), var4 (ref), disableRejoinGroupIdDoubleRead (ref), voiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (ref), getFFlagDisconnectToastClientRewrite (ref), var5 (ref), voiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (ref), getFFlagEnableVoiceSignal (ref), VOICE_JOIN_PROGRESS (ref), voiceVolumeControlsEligibilityModule (ref), getFFlagCoreMicManagerRefactorModule (ref), var3 (ref), MIN_VOICE_CHAT_API_VERSION_LOCAL_MIC_ACTIVITY (ref), getFFlagLocalMutedNilFix (ref), var1 (ref), getFFlagLuaConsumePlayerModeratedModule (ref), getFFlagEnableVoiceReverseNudgeModule (ref), utilsModule (ref), t (ref)
+	-- upvalues: name (ref), getFFlagClearUserFromRecentVoiceDataOnLeaveModule (ref), stringKeyFixForParticipantsTable (ref), getFFlagFixGetPlayerByUserIdStringCastModule (ref), playersService (ref), voiceChatService (ref), fFlagEnablePartyVoiceChangersInLua (ref), getFFlagBatchVoiceParticipantsUpdatesModule (ref), var6 (ref), getFFlagMicConsumerRegistryModule (ref), getFFlagCoreMicManagerRefactorModule (ref), getFFlagVoiceChatClientRewriteMasterLua (ref), stopModerationConnectionOnLeave (ref), var4 (ref), disableRejoinGroupIdDoubleRead (ref), voiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (ref), getFFlagDisconnectToastClientRewrite (ref), var5 (ref), voiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (ref), getFFlagEnableVoiceSignal (ref), VOICE_JOIN_PROGRESS (ref), voiceVolumeControlsEligibilityModule (ref), var3 (ref), MIN_VOICE_CHAT_API_VERSION_LOCAL_MIC_ACTIVITY (ref), getFFlagLocalMutedNilFix (ref), var1 (ref), getFFlagLuaConsumePlayerModeratedModule (ref), getFFlagEnableVoiceReverseNudgeModule (ref), utilsModule (ref), t (ref)
 	self:ensureInitialized("setup participant listeners")
 	
 	if not self.participants then
@@ -1370,23 +1384,24 @@ function t_1:SetupParticipantListeners()
 				self.updatedParticipants = {}
 			end
 		end)
+		local var17 = getFFlagMicConsumerRegistryModule() and getFFlagCoreMicManagerRefactorModule()
 		
 		local function onStateChanged(p24, p25)
-			-- upvalues: self (ref), getFFlagVoiceChatClientRewriteMasterLua (copy), name (copy), stopModerationConnectionOnLeave (copy), var4 (copy), disableRejoinGroupIdDoubleRead (copy), voiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (copy), getFFlagDisconnectToastClientRewrite (copy), var5 (copy), voiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy), getFFlagEnableVoiceSignal (copy), VOICE_JOIN_PROGRESS (copy), voiceVolumeControlsEligibilityModule (copy), voiceChatService (copy)
+			-- upvalues: self (ref), getFFlagVoiceChatClientRewriteMasterLua (copy), name (copy), stopModerationConnectionOnLeave (copy), var4 (copy), disableRejoinGroupIdDoubleRead (copy), var17 (ref), voiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (copy), getFFlagDisconnectToastClientRewrite (copy), var5 (copy), voiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy), getFFlagEnableVoiceSignal (copy), VOICE_JOIN_PROGRESS (copy), voiceVolumeControlsEligibilityModule (copy), voiceChatService (copy)
 			self:emit("OnStateChanged", p24, p25)
-			local var17 = p25 == Enum.VoiceChatState.Failed
-			local var18 = p25 == Enum.VoiceChatState.Joining
-			local var19 = p25 == Enum.VoiceChatState.Leaving
-			local var20 = p25 == Enum.VoiceChatState.Ended
-			local var21 = self.service:IsPublishPaused()
+			local var18 = p25 == Enum.VoiceChatState.Failed
+			local var19 = p25 == Enum.VoiceChatState.Joining
+			local var20 = p25 == Enum.VoiceChatState.Leaving
+			local var21 = p25 == Enum.VoiceChatState.Ended
+			local var22 = self.service:IsPublishPaused()
 			
-			if var21 ~= self.localMuted and not var17 and (not var18 and not var19) and not var20 then
-				self.localMuted = var21
-				self.muteChanged:Fire(var21)
-			elseif var18 or var19 or var20 then
+			if var22 ~= self.localMuted and not var18 and (not var19 and not var20) and not var21 then
+				self.localMuted = var22
+				self.muteChanged:Fire(var22)
+			elseif var19 or var20 or var21 then
 				self.localMuted = nil
 			end
-			if getFFlagVoiceChatClientRewriteMasterLua() and p25 == Enum.VoiceChatState.Joined and (self.isInCall and var21 ~= self.callMutedState) then
+			if getFFlagVoiceChatClientRewriteMasterLua() and p25 == Enum.VoiceChatState.Joined and (self.isInCall and var22 ~= self.callMutedState) then
 				name:debug("In call, setting local muted to call muted state {}", self.callMutedState)
 				self:ToggleMic("InitInCall")
 			end
@@ -1402,10 +1417,13 @@ function t_1:SetupParticipantListeners()
 				end
 				self.previousMutedState = self.service:IsPublishPaused()
 			end
-			if p25 == Enum.VoiceChatState.Ended or var17 then
+			if p25 == Enum.VoiceChatState.Ended or var18 then
 				self.participants = {}
 				self.localMuted = nil
 				
+				if var17 then
+					self.micManager:UnregisterConsumer("voice_chat")
+				end
 				if voiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry then
 					self._voiceVolumeEligibilityReported = false
 				end
@@ -1417,7 +1435,7 @@ function t_1:SetupParticipantListeners()
 				if var4 then
 					self:_syncLocalAudioDeviceActive()
 				end
-				if var17 then
+				if var18 then
 					name:debug("State Changed to Failed. Reason: {}", self.service:GetAndClearCallFailureMessage())
 				end
 				if p24 == Enum.VoiceChatState.Joining or p24 == Enum.VoiceChatState.JoiningRetry or p24 == Enum.VoiceChatState.Joined then
@@ -1466,6 +1484,15 @@ function t_1:SetupParticipantListeners()
 		
 		if getFFlagCoreMicManagerRefactorModule() then
 			self.micManager:SetupMicActivityListener(self.service)
+			
+			if getFFlagMicConsumerRegistryModule() then
+				local localPlayer = playersService.LocalPlayer
+				self.micManager:RegisterConsumer({
+					id = "voice_chat",
+					consumerType = "VoiceChat",
+					device = if localPlayer then localPlayer:FindFirstChildOfClass("AudioDeviceInput") else nil
+				})
+			end
 		elseif var3 and voiceChatService.UseNewAudioApi then
 			if not self.localMeteringTask then
 				self.localMeteringTask = task.spawn(function()
@@ -1580,14 +1607,14 @@ function t_1:SetupParticipantListeners()
 	end
 end
 
-local var17 = nil
+local var18 = nil
 
 function t_1.CheckAudioInputExists(p24)
-	-- upvalues: name (ref), var17 (write), promiseModule (ref), cryoModule (ref)
+	-- upvalues: name (ref), var18 (write), promiseModule (ref), cryoModule (ref)
 	name:trace("Checking for AudioDeviceInput")
 	
-	if not var17 then
-		var17 = promiseModule.new(function(p25, _)
+	if not var18 then
+		var18 = promiseModule.new(function(p25, _)
 			-- upvalues: cryoModule (copy), p24 (ref), name (copy)
 			if #cryoModule.Dictionary.keys(p24.audioDevices) > 0 then
 				name:trace("Found existing AudioDeviceInput")
@@ -1602,7 +1629,7 @@ function t_1.CheckAudioInputExists(p24)
 			end)
 		end)
 	end
-	return var17
+	return var18
 end
 
 function t_1:checkAndUpdateSequence(p24, p25)
@@ -1613,12 +1640,12 @@ function t_1:checkAndUpdateSequence(p24, p25)
 		
 		return 0
 	end
-	local var18 = p25 - self.SequenceNumbers[p24]
+	local var19 = p25 - self.SequenceNumbers[p24]
 	
-	if var18 > 0 then
+	if var19 > 0 then
 		self.SequenceNumbers[p24] = p25
 	end
-	return var18 - 1
+	return var19 - 1
 end
 
 local function _(value)
@@ -1702,15 +1729,15 @@ end
 function t_1.GetAnalyzer(_, p24)
 	-- upvalues: robloxReplicatedStorageService (ref)
 	local text = p24.Name .. "_Analyzer"
-	local var18 = robloxReplicatedStorageService:FindFirstChild(text)
+	local var19 = robloxReplicatedStorageService:FindFirstChild(text)
 	
-	if not var18 then
-		var18 = Instance.new("AudioAnalyzer")
-		var18.SpectrumEnabled = false
-		var18.Name = text
-		var18.Parent = robloxReplicatedStorageService
+	if not var19 then
+		var19 = Instance.new("AudioAnalyzer")
+		var19.SpectrumEnabled = false
+		var19.Name = text
+		var19.Parent = robloxReplicatedStorageService
 	end
-	return var18
+	return var19
 end
 
 local _ = function(p24)
@@ -1722,9 +1749,9 @@ function t_1:IsSignalActive(p24)
 	if not var3 then
 		return false
 	end
-	local var18 = playersService:GetPlayerByUserId(p24)
+	local var19 = playersService:GetPlayerByUserId(p24)
 	
-	return if var18 then math.log10(self:GetAnalyzer(var18).PeakLevel) * 20 > -36 else false
+	return if var19 then math.log10(self:GetAnalyzer(var19).PeakLevel) * 20 > -36 else false
 end
 
 function t_1.StopAnalysis(_, p24)
@@ -1746,11 +1773,11 @@ function t_1:StartAnalysis(p25)
 	local player = p25.Player
 	
 	if player then
-		local var18 = self:GetAnalyzer(player)
+		local var19 = self:GetAnalyzer(player)
 		local wire = Instance.new("Wire")
 		wire.SourceInstance = p25
-		wire.TargetInstance = var18
-		wire.Parent = var18
+		wire.TargetInstance = var19
+		wire.Parent = var19
 		
 		return
 	end
@@ -1857,11 +1884,11 @@ end
 function t_1:CreateAudioDeviceData(p25)
 	-- upvalues: playersService (ref), enableMutedByLocalUserEngineFeature (ref), name (ref), fFlagDebugShowAudioDeviceInputDebugger (ref), var4 (ref), voiceChatService (ref)
 	local t = {}
-	local var18 = p25.Player == playersService.LocalPlayer
+	local var19 = p25.Player == playersService.LocalPlayer
 	
 	if enableMutedByLocalUserEngineFeature then
 		if not p25.MutedByLocalUser then
-			if self.muteAll and not var18 then
+			if self.muteAll and not var19 then
 				p25.MutedByLocalUser = true
 			end
 			if p25.Player and self.mutedPlayers[p25.Player.UserId] then
@@ -1869,40 +1896,40 @@ function t_1:CreateAudioDeviceData(p25)
 			end
 		end
 	elseif p25.Active then
-		if self.muteAll and not var18 then
+		if self.muteAll and not var19 then
 			p25.Active = false
 		end
 		if p25.Player and self.mutedPlayers[p25.Player.UserId] then
 			p25.Active = false
 		end
 	end
-	if p25.Active and var18 and self.localMuted == nil then
+	if p25.Active and var19 and self.localMuted == nil then
 		self:SetAndSyncActive(p25, false)
 	end
-	if var18 and self.localMuted ~= nil and (self.localMuted ~= not p25.Active and not self.isInCall) then
+	if var19 and self.localMuted ~= nil and (self.localMuted ~= not p25.Active and not self.isInCall) then
 		name:debug("Mismatch between LocalMuted and device.Active")
-		local var19 = not self.localMuted
-		p25.Active = var19
-		local sendMuteEvent = self:GetSendMuteEvent()
-		
-		if sendMuteEvent then
-			sendMuteEvent:FireServer(var19)
-		end
-	elseif self.isInCall and var18 then
-		local var20 = not self.callMutedState
-		name:debug("Overwriting Active State to match Iris call. .Active = {}", var20)
+		local var20 = not self.localMuted
 		p25.Active = var20
 		local sendMuteEvent = self:GetSendMuteEvent()
 		
 		if sendMuteEvent then
 			sendMuteEvent:FireServer(var20)
 		end
+	elseif self.isInCall and var19 then
+		local var21 = not self.callMutedState
+		name:debug("Overwriting Active State to match Iris call. .Active = {}", var21)
+		p25.Active = var21
+		local sendMuteEvent = self:GetSendMuteEvent()
+		
+		if sendMuteEvent then
+			sendMuteEvent:FireServer(var21)
+		end
 	end
 	t.onPlayerChanged = p25:GetPropertyChangedSignal("Player"):Connect(function()
-		-- upvalues: var18 (write), p25 (ref), playersService (copy), self (ref), name (copy), enableMutedByLocalUserEngineFeature (copy)
-		var18 = p25.Player == playersService.LocalPlayer
+		-- upvalues: var19 (write), p25 (ref), playersService (copy), self (ref), name (copy), enableMutedByLocalUserEngineFeature (copy)
+		var19 = p25.Player == playersService.LocalPlayer
 		
-		if var18 then
+		if var19 then
 			if p25.Active and self.localMuted == nil then
 				name:debug("Player is still in connecting state, setting Active to false")
 				self:SetAndSyncActive(p25, false)
@@ -1927,10 +1954,10 @@ function t_1:CreateAudioDeviceData(p25)
 	
 	if not enableMutedByLocalUserEngineFeature then
 		t.onActiveChanged = p25:GetPropertyChangedSignal("Active"):Connect(function()
-			-- upvalues: self (ref), var18 (write), p25 (ref)
+			-- upvalues: self (ref), var19 (write), p25 (ref)
 			self:emit("OnDeviceActiveChanged")
 			
-			if self.muteAll and not var18 then
+			if self.muteAll and not var19 then
 				p25.Active = false
 			end
 			if p25.Player and self.mutedPlayers[p25.Player.UserId] then
@@ -1964,24 +1991,24 @@ function t_1:onInstanceRemove(p25)
 		if fFlagExpChatDictation and p25:IsDescendantOf(coreGuiService) then return end
 		self:StopAnalysis(p25)
 		name:trace("Removing AudioDeviceInput {} {} {}", p25, "for user", p25.Player and p25.Player.UserId)
-		local var18 = self.audioDevices[p25]
+		local var19 = self.audioDevices[p25]
 		
-		if var18 then
+		if var19 then
 			if not enableMutedByLocalUserEngineFeature then
-				var18.onActiveChanged:Disconnect()
+				var19.onActiveChanged:Disconnect()
 			elseif fFlagDebugShowAudioDeviceInputDebugger then
-				if var18.onActiveChanged then
-					var18.onActiveChanged:Disconnect()
+				if var19.onActiveChanged then
+					var19.onActiveChanged:Disconnect()
 				end
-				if var18.onMutedByLocalUserChanged then
-					var18.onMutedByLocalUserChanged:Disconnect()
+				if var19.onMutedByLocalUserChanged then
+					var19.onMutedByLocalUserChanged:Disconnect()
 				end
 			end
-			var18.onMutedChanged:Disconnect()
-			var18.onPlayerChanged:Disconnect()
+			var19.onMutedChanged:Disconnect()
+			var19.onPlayerChanged:Disconnect()
 			
-			if var18.onActiveChangedDisconnectGuard then
-				var18.onActiveChangedDisconnectGuard:Disconnect()
+			if var19.onActiveChangedDisconnectGuard then
+				var19.onActiveChangedDisconnectGuard:Disconnect()
 			end
 		end
 		self.audioDevices[p25] = nil
@@ -2055,13 +2082,13 @@ function t_1.RejoinCurrentChannel(p25)
 		local groupId = p25.service:GetGroupId()
 		
 		if groupId and groupId ~= "" then
-			local var18 = p25.service:IsPublishPaused()
+			local var19 = p25.service:IsPublishPaused()
 			p25.service:Leave()
 			name:debug("Rejoining current channel {}", groupId)
 			p25.participants = {}
 			p25.participantsUpdate:Fire(p25.participants)
 			
-			if not p25.service:JoinByGroupIdToken(groupId, var18, true) then
+			if not p25.service:JoinByGroupIdToken(groupId, var19, true) then
 				p25:emit("OnInitialJoinFailed")
 			end
 		end
@@ -2103,21 +2130,21 @@ function t_1:watchSignalR()
 		local namespace = p25.namespace
 		
 		if not WATCHED_NAMESPACES[namespace] then return end
-		local var18 = utilsModule.jsonDecode(p25.detail)
-		local type = self.SignalREventTable[var18.type]
+		local var19 = utilsModule.jsonDecode(p25.detail)
+		local type = self.SignalREventTable[var19.type]
 		
 		if type then
-			type:Fire(var18)
+			type:Fire(var19)
 		end
-		local sequenceNumber = var18.SequenceNumber
+		local sequenceNumber = var19.SequenceNumber
 		name:trace("SignalR message {}: {}", namespace, sequenceNumber)
-		local var19 = self:checkAndUpdateSequence(namespace, sequenceNumber)
+		local var20 = self:checkAndUpdateSequence(namespace, sequenceNumber)
 		
-		if var19 > 0 then
+		if var20 > 0 then
 			self.Analytics:reportReconnectDueToMissedSequence()
 			
 			return
-		elseif var19 < -1 then
+		elseif var20 < -1 then
 			self.Analytics:reportOutOfOrderSequence()
 		end
 	end)
@@ -2132,11 +2159,11 @@ function t_1:watchSignalR()
 			for i, v in pairs(utilsModule.jsonDecode(p27)) do
 				if WATCHED_NAMESPACES[i] then
 					name:trace("SignalR message {}: {}", i, v)
-					local var18 = self:checkAndUpdateSequence(i, v)
+					local var19 = self:checkAndUpdateSequence(i, v)
 					
-					if var18 > 0 then
+					if var19 > 0 then
 						self.Analytics:reportReconnectDueToMissedSequence()
-					elseif var18 < -1 then
+					elseif var19 < -1 then
 						self.Analytics:reportOutOfOrderSequence()
 					end
 				end
@@ -2195,16 +2222,16 @@ function t_1:ToggleMic(p25)
 			return
 		elseif voiceChatService.UseNewAudioApi then
 			self.localMuted = not self.localMuted
-			local var18 = not self.localMuted
-			name:trace("Setting self mute to {} context: {}", var18, p25)
+			local var19 = not self.localMuted
+			name:trace("Setting self mute to {} context: {}", var19, p25)
 			local sendMuteEvent = self:GetSendMuteEvent()
 			
 			if sendMuteEvent then
-				sendMuteEvent:FireServer(var18)
+				sendMuteEvent:FireServer(var19)
 				
 				for i in self.audioDevices do
 					if i.Player and i.Player == playersService.LocalPlayer then
-						i.Active = var18
+						i.Active = var19
 					end
 				end
 				self.muteChanged:Fire(self.localMuted)
@@ -2212,11 +2239,11 @@ function t_1:ToggleMic(p25)
 				name:error("Could not find SendMuteEvent")
 			end
 		else
-			local var19 = not self.service:IsPublishPaused()
-			name:trace("Setting self mute to {} context: {}", var19, p25)
-			self.service:PublishPause(var19)
-			self.localMuted = var19
-			self.muteChanged:Fire(var19)
+			local var20 = not self.service:IsPublishPaused()
+			name:trace("Setting self mute to {} context: {}", var20, p25)
+			self.service:PublishPause(var20)
+			self.localMuted = var20
+			self.muteChanged:Fire(var20)
 		end
 		if not self.localMuted then
 			self.talkingChanged:Fire(self.isTalking)
@@ -2325,11 +2352,11 @@ function t_1:_syncLocalAudioDeviceActive()
 	if getFFlagCoreMicManagerRefactorModule() then
 		return self.micManager:SyncLocalAudioDeviceActive()
 	elseif not voiceChatService.UseNewAudioApi then return end
-	local var20 = if self.localMuted == nil then false else not self.localMuted
+	local var21 = if self.localMuted == nil then false else not self.localMuted
 	
 	for i in self.audioDevices do
 		if i.Player and i.Player == playersService.LocalPlayer then
-			i.Active = var20
+			i.Active = var21
 		end
 	end
 end
@@ -2351,17 +2378,17 @@ function t_1:_setupEarlyAudioDeviceGuard()
 		end
 		p26:GetPropertyChangedSignal("Player"):Connect(function()
 			-- upvalues: p26 (ref), voiceChatService (copy), fFlagExpChatDictation (copy), coreGuiService (copy), playersService (copy), self (copy)
-			local var21 = p26
+			local var22 = p26
 			
-			if voiceChatService.UseNewAudioApi and (not (fFlagExpChatDictation and var21:IsDescendantOf(coreGuiService)) and (var21.Player == playersService.LocalPlayer and (var21.Active and self.localMuted == nil))) then
+			if voiceChatService.UseNewAudioApi and (not (fFlagExpChatDictation and var22:IsDescendantOf(coreGuiService)) and (var22.Player == playersService.LocalPlayer and (var22.Active and self.localMuted == nil))) then
 				p26.Active = false
 			end
 		end)
 		p26:GetPropertyChangedSignal("Active"):Connect(function()
 			-- upvalues: p26 (ref), voiceChatService (copy), fFlagExpChatDictation (copy), coreGuiService (copy), playersService (copy), self (copy)
-			local var21 = p26
+			local var22 = p26
 			
-			if voiceChatService.UseNewAudioApi and (not (fFlagExpChatDictation and var21:IsDescendantOf(coreGuiService)) and (var21.Player == playersService.LocalPlayer and (var21.Active and self.localMuted == nil))) then
+			if voiceChatService.UseNewAudioApi and (not (fFlagExpChatDictation and var22:IsDescendantOf(coreGuiService)) and (var22.Player == playersService.LocalPlayer and (var22.Active and self.localMuted == nil))) then
 				p26.Active = false
 			end
 		end)
@@ -2390,19 +2417,19 @@ function t_1:_asyncInit()
 	end
 	return self:canUseServiceAsync():andThen(function(_)
 		-- upvalues: name (copy), MIN_VOICE_CHAT_API_VERSION_IS_CONTEXT_ENABLED (copy), self (ref), getFFlagVoiceChatClientRewriteMasterLua (copy), voiceChatService (copy), analyticsModule (copy), promiseModule (copy)
-		local var21 = "VoiceChatService"
+		local var22 = "VoiceChatService"
 		
 		if game:GetEngineFeature("UseNewVoiceChatService") then
-			var21 = "VoiceChatInternal"
+			var22 = "VoiceChatInternal"
 			name:debug("Using VoiceChatInternal")
 		end
 		local ok, status = pcall(function()
-			-- upvalues: var21 (write), MIN_VOICE_CHAT_API_VERSION_IS_CONTEXT_ENABLED (copy), self (copy)
-			local var22 = game:GetService(var21)
+			-- upvalues: var22 (write), MIN_VOICE_CHAT_API_VERSION_IS_CONTEXT_ENABLED (copy), self (copy)
+			local var23 = game:GetService(var22)
 			
-			if var22 and (var22:GetVoiceChatApiVersion() < MIN_VOICE_CHAT_API_VERSION_IS_CONTEXT_ENABLED or var22:IsContextVoiceEnabled()) then
+			if var23 and (var23:GetVoiceChatApiVersion() < MIN_VOICE_CHAT_API_VERSION_IS_CONTEXT_ENABLED or var23:IsContextVoiceEnabled()) then
 				self.voiceEnabled = true
-				self.service = var22
+				self.service = var23
 				self:SetupParticipantListeners()
 			end
 		end)
@@ -2460,10 +2487,10 @@ function t_1:FireTalkingChangedDebounced(p26)
 	if getFFlagCoreMicManagerRefactorModule() then
 		return self.micManager:FireTalkingChangedDebounced(p26)
 	end
-	local var21 = tick() * 1000
+	local var22 = tick() * 1000
 	
-	if p26 ~= self._lastTalkingChangedFireValue or var2 < var21 - self._lastTalkingChangedFireTime then
-		self._lastTalkingChangedFireTime = var21
+	if p26 ~= self._lastTalkingChangedFireValue or var2 < var22 - self._lastTalkingChangedFireTime then
+		self._lastTalkingChangedFireTime = var22
 		self._lastTalkingChangedFireValue = p26
 		self.talkingChanged:Fire(p26)
 	end
@@ -2481,11 +2508,11 @@ function t_1:asyncInit()
 		if self.AdService then
 			(function(value)
 				-- upvalues: constantsModule (copy), getFFlagCoreMicManagerRefactorModule (copy)
-				local var21 = false
+				local var22 = false
 				value.AdService.RewardedVideoAdStarted:Connect(function()
-					-- upvalues: value (ref), var21 (write), constantsModule (copy), getFFlagCoreMicManagerRefactorModule (copy)
+					-- upvalues: value (ref), var22 (write), constantsModule (copy), getFFlagCoreMicManagerRefactorModule (copy)
 					if value.localMuted == nil then return end
-					var21 = value.localMuted
+					var22 = value.localMuted
 					
 					if not value.localMuted then
 						value:ToggleMic(constantsModule.REWARDED_VIDEO_AD_STARTED)
@@ -2497,14 +2524,14 @@ function t_1:asyncInit()
 					end
 				end)
 				value.AdService.RewardedVideoAdEnded:Connect(function()
-					-- upvalues: value (ref), getFFlagCoreMicManagerRefactorModule (copy), var21 (write), constantsModule (copy)
+					-- upvalues: value (ref), getFFlagCoreMicManagerRefactorModule (copy), var22 (write), constantsModule (copy)
 					if value.localMuted == nil then return end
 					value.isPlayerWatchingAd = false
 					
 					if getFFlagCoreMicManagerRefactorModule() then
 						value.micManager:SetAdMuteBlocked(false)
 					end
-					if var21 ~= value.localMuted then
+					if var22 ~= value.localMuted then
 						value:ToggleMic(constantsModule.REWARDED_VIDEO_AD_ENDED)
 					end
 				end)
@@ -2518,10 +2545,10 @@ function t_1:asyncInit()
 				if voiceChangerWasToggledEvent then
 					voiceChangerWasToggledEvent.OnClientEvent:Connect(function(p26, p27)
 						-- upvalues: stringKeyFixForParticipantsTable (copy), self (copy)
-						local var21 = if stringKeyFixForParticipantsTable then self.participants[tostring(p26)] else self.participants[p26]
+						local var22 = if stringKeyFixForParticipantsTable then self.participants[tostring(p26)] else self.participants[p26]
 						
-						if var21 then
-							var21.isVoiceChangerActive = p27
+						if var22 then
+							var22.isVoiceChangerActive = p27
 							self.voiceChangerActivePlayers[p26] = p27
 							self.participantsUpdate:Fire(self.participants)
 						end
@@ -2556,8 +2583,11 @@ function t_1:GetChannelId()
 end
 
 function t_1:Disconnect()
-	-- upvalues: getFFlagCoreMicManagerRefactorModule (ref), var6 (ref)
+	-- upvalues: getFFlagCoreMicManagerRefactorModule (ref), getFFlagMicConsumerRegistryModule (ref), var6 (ref)
 	if getFFlagCoreMicManagerRefactorModule() then
+		if getFFlagMicConsumerRegistryModule() then
+			self.micManager:UnregisterConsumer("voice_chat")
+		end
 		self.micManager:Disconnect()
 	end
 	if self.participantConnection then

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("UniversalFeatureRestrictionReceivers10", false)

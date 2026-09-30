@@ -101,7 +101,7 @@ return {
 		TradeItems = if fFlagProfilePlatformEnableTradeItemsModule then "TradeItems" else "",
 		ContextualOverflow = if fFlagProfilePlatformCTAsRefactorModule then "ContextualOverflow" else "",
 		UnlockChat = "UnlockChat",
-		PlayExperience = "",
+		PlayExperience = if fFlagJoinabilityCTARefactor then "PlayExperience" else "",
 		ViewProfile = "",
 		UnlockExperience = ""
 	},

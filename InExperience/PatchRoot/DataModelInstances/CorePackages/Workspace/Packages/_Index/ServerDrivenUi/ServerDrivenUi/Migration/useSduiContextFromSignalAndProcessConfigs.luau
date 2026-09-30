@@ -7,14 +7,13 @@ local getSduiFeedStoreModule = require(serverDrivenUi.DataStore.getSduiFeedStore
 local processCollectionConfigModule = require(serverDrivenUi.System.processCollectionConfig)
 local getItemCollectionKeyModule = require(serverDrivenUi.DataStore.getItemCollectionKey)
 local _ = require(parent.SduiCoreSystem)
-local fFlagSduiGetItemCollectionKeys = require(serverDrivenUi.Flags).FFlagSduiGetItemCollectionKeys
 
 return function(value, p1, p2)
-	-- upvalues: reactModule (ref), getSduiFeedStoreModule (ref), fFlagSduiGetItemCollectionKeys (ref), signalsReactModule (ref), useSduiContextModule (ref), getItemCollectionKeyModule (ref), processCollectionConfigModule (ref)
+	-- upvalues: reactModule (ref), getSduiFeedStoreModule (ref), signalsReactModule (ref), useSduiContextModule (ref), getItemCollectionKeyModule (ref), processCollectionConfigModule (ref)
 	local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: p2 (ref), getSduiFeedStoreModule (copy), value (ref), fFlagSduiGetItemCollectionKeys (copy)
+		-- upvalues: p2 (ref), getSduiFeedStoreModule (copy), value (ref)
 		return function(p3)
-			-- upvalues: p2 (copy), getSduiFeedStoreModule (copy), value (copy), fFlagSduiGetItemCollectionKeys (copy)
+			-- upvalues: p2 (copy), getSduiFeedStoreModule (copy), value (copy)
 			if not p2 then
 				return {}
 			end
@@ -23,7 +22,7 @@ return function(value, p1, p2)
 			local dataUpdatedTimestamp = var2.getDataUpdatedTimestamp(p3)
 			local t = {}
 			
-			for i, v in if fFlagSduiGetItemCollectionKeys and var2.getItemCollectionKeys then var2.getItemCollectionKeys(p3) else {} do
+			for i, v in if var2.getItemCollectionKeys then var2.getItemCollectionKeys(p3) else {} do
 				local itemCollection = var2.getItemCollection(v)
 				
 				if itemCollection then

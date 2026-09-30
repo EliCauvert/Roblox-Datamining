@@ -26,11 +26,10 @@ local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFon
 local useTokens = foundationModule.Hooks.useTokens
 local multiTextLocalizerModule = require(parent.Locale.MultiTextLocalizer)
 local subscriptionTitleModule = require(parent.Subscription.SubscriptionTitle)
-local getEnableDisableSubPurchaseModule = require(parent.Flags.getEnableDisableSubPurchase)
 local fFlagHideDevSubsPriceIfSubscribed = require(parent.Parent.SharedFlags).FFlagHideDevSubsPriceIfSubscribed
 local fFlagEnableDevSubsFastFollowFixes = require(parent.Parent.SharedFlags).FFlagEnableDevSubsFastFollowFixes
 
-local function generateTestmodeDisclaimer(p1, p2, p3, p4)
+local function generateTestmodeDisclaimer(p1, p2, p3, p4, p5)
 	-- upvalues: foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), reactModule (ref), normalizeFontFace (ref)
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -46,9 +45,9 @@ local function generateTestmodeDisclaimer(p1, p2, p3, p4)
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			TextSize = 12,
-			Size = UDim2.new(1, 0, 0, if foundationFontFaceMigration then getTextSize(p1, 12, p2.Footer.Font, Vector2.new(p4, 1e999), { addTemporaryPadding = false }).Y + 2 else textService:GetTextSize(p1, 12, p2.Footer.Font, Vector2.new(p4, 1e999)).Y + 2),
+			Size = UDim2.new(1, 0, 0, if foundationFontFaceMigration then getTextSize(p1, 12, p5.Typography.CaptionSmall.Font, Vector2.new(p4, 1e999), { addTemporaryPadding = false }).Y + 2 else textService:GetTextSize(p1, 12, p2.Footer.Font, Vector2.new(p4, 1e999)).Y + 2),
 			Font = if foundationFontFaceMigration then nil else p2.Footer.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Footer.Font) else nil,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(p5.Typography.CaptionSmall.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			Text = p1,
 			TextColor3 = p3.TextDefault.Color
@@ -56,7 +55,7 @@ local function generateTestmodeDisclaimer(p1, p2, p3, p4)
 	})
 end
 
-local function generatePromptText(p1, p2, p3, p4, p5, p6)
+local function generatePromptText(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), getTextSize (ref), textService (ref)
 	return reactModule.createElement("TextLabel", {
 		LayoutOrder = p6 or 2,
@@ -65,23 +64,23 @@ local function generatePromptText(p1, p2, p3, p4, p5, p6)
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left,
 		Font = if foundationFontFaceMigration then nil else p2.Body.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Body.Font) else nil,
+		FontFace = if foundationFontFaceMigration then normalizeFontFace(p7.Typography.BodyLarge.Font) else nil,
 		Text = p1.description,
 		TextSize = 16,
 		TextWrapped = true,
 		TextColor3 = p3.TextDefault.Color,
 		TextTransparency = p3.TextDefault.Transparency,
 		RichText = true,
-		[reactModule.Change.AbsoluteSize] = function(p7)
-			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), p2 (ref), textService (copy), p5 (ref)
-			p5(if foundationFontFaceMigration then getTextSize(p7.Text, p7.TextSize, p2.Body.Font, Vector2.new(p7.AbsoluteSize.X, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(p7.Text, p7.TextSize, p7.Font, Vector2.new(p7.AbsoluteSize.X, 1e999)).Y)
+		[reactModule.Change.AbsoluteSize] = function(p8)
+			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), p7 (ref), textService (copy), p5 (ref)
+			p5(if foundationFontFaceMigration then getTextSize(p8.Text, p8.TextSize, p7.Typography.BodyLarge.Font, Vector2.new(p8.AbsoluteSize.X, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(p8.Text, p8.TextSize, p8.Font, Vector2.new(p8.AbsoluteSize.X, 1e999)).Y)
 		end
 	})
 end
 
 local function createSubscribeButtonStacks(p1, p2)
-	-- upvalues: getEnableDisableSubPurchaseModule (ref), buttonType (ref)
-	if (getEnableDisableSubPurchaseModule() or p1.shouldUseNewModalDesign) and p1.disablePurchase then
+	-- upvalues: buttonType (ref)
+	if p1.disablePurchase then
 		return {
 			{
 				buttonType = buttonType.PrimarySystem,
@@ -162,7 +161,7 @@ local function generateDisclosure(p1, p2)
 			LayoutOrder = 3,
 			RichText = true,
 			tag = "auto-xy text-body content-default text-align-x-left content-muted text-caption-small",
-			Text = "<u>" .. p13.TermsOfUse .. "</u>",
+			Text = "<u>" .. p15.TermsOfUse .. "</u>",
 			onActivated = p2
 		}),
 		AfterText = reactModule.createElement(text, {
@@ -185,8 +184,8 @@ local function renderNewModalDesign(value, p1, p2, p3, p4, p5, p6, p7, p8)
 		},
 		onCloseClicked = value.cancelPurchaseActivated,
 		footerContent = function()
-			-- upvalues: value (ref), generateTestmodeDisclaimer (copy), p1 (ref), p3 (ref), p2 (ref), p4 (ref), fFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), p6 (ref)
-			return if value.isTestingMode then generateTestmodeDisclaimer(p1.footerText, p3, p2, p4) elseif fFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p1, p6)
+			-- upvalues: value (ref), generateTestmodeDisclaimer (copy), p1 (ref), p3 (ref), p2 (ref), p4 (ref), p8 (ref), fFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), p6 (ref)
+			return if value.isTestingMode then generateTestmodeDisclaimer(p1.footerText, p3, p2, p4, p8) elseif fFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p1, p6)
 		end
 	}, {
 		reactModule.createElement("Frame", {
@@ -273,7 +272,7 @@ local function renderNewModalDesign(value, p1, p2, p3, p4, p5, p6, p7, p8)
 						onActivated = value.onReport
 					}) else nil
 				}),
-				generatePromptText(value, p3, p2, p4, p7, 3)
+				generatePromptText(value, p3, p2, p4, p7, 3, p8)
 			})
 		})
 	})
@@ -355,8 +354,8 @@ return function(p1)
 					},
 					onCloseClicked = p1.cancelPurchaseActivated,
 					footerContent = function()
-						-- upvalues: p1 (copy), generateTestmodeDisclaimer (copy), p2 (copy), font (ref), theme (ref), var6 (ref), fFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), openTermsOfUse (copy)
-						return if p1.isTestingMode then generateTestmodeDisclaimer(p2.footerText, font, theme, var6) elseif fFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p2, openTermsOfUse)
+						-- upvalues: p1 (copy), generateTestmodeDisclaimer (copy), p2 (copy), font (ref), theme (ref), var6 (ref), var5 (copy), fFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), openTermsOfUse (copy)
+						return if p1.isTestingMode then generateTestmodeDisclaimer(p2.footerText, font, theme, var6, var5) elseif fFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p2, openTermsOfUse)
 					end
 				}, {
 					reactModule.createElement("Frame", {
@@ -395,7 +394,7 @@ return function(p1)
 								contentHeight = p1.screenSize.Y - 240,
 								itemIcon = p1.itemIcon
 							}),
-							generatePromptText(p1, font, theme, var6, calculatePromptHeight, 2)
+							generatePromptText(p1, font, theme, var6, calculatePromptHeight, 2, var5)
 						})
 					})
 				})

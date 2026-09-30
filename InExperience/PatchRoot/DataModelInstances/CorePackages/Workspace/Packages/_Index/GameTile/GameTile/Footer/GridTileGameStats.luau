@@ -2,8 +2,12 @@
 local gameTile = script:FindFirstAncestor("GameTile")
 local parent = gameTile.Parent
 local reactModule = require(parent.React)
-local useDesignTokens = require(parent.Style).useDesignTokens
-local useTokens = require(parent.Foundation).Hooks.useTokens
+local styleModule = require(parent.Style)
+local useDesignTokens = styleModule.useDesignTokens
+local foundationModule = require(parent.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local UIBloxModule = require(parent.UIBlox)
 local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -21,7 +25,7 @@ local var1 = images["icons/status/games/people-playing_small"]
 local vector2 = Vector2.new(1e999, 1e999)
 
 return function(p1)
-	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), fFlagLuaAppFixSmallScreenFooterStatsOverlap (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), gameTileTypesModule (ref), fFlagLuaAppMigrateGameTileFooterValueFixes (ref), getGameTileMetadataFontModule (ref), reactModule (ref), fFlagLuaAppNarrowTileHideRating (ref), textService (ref), vector2 (ref), imageSetLabel (ref), ratingSmall (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), var1 (ref)
+	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), fFlagLuaAppFixSmallScreenFooterStatsOverlap (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), gameTileTypesModule (ref), fFlagLuaAppMigrateGameTileFooterValueFixes (ref), getGameTileMetadataFontModule (ref), reactModule (ref), fFlagLuaAppNarrowTileHideRating (ref), foundationFontFaceMigration (ref), styleModule (ref), vector2 (ref), textService (ref), imageSetLabel (ref), ratingSmall (ref), normalizeFontFace (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), var1 (ref)
 	local var2
 	local var3 = useDesignTokens()
 	local var4 = useTextSizeOffset()
@@ -50,8 +54,8 @@ return function(p1)
 	local var13 = fontSize / 1.26
 	local ratingText = p1.ratingText
 	local var14 = reactModule.useMemo(function()
-		-- upvalues: fFlagLuaAppNarrowTileHideRating (copy), p1 (ref), ratingText (ref), textService (copy), fontSize (ref), font (ref), vector2 (copy)
-		return if fFlagLuaAppNarrowTileHideRating and p1.hideRating or (ratingText == nil or ratingText == "") then 0 else textService:GetTextSize(ratingText, fontSize, font, vector2).X
+		-- upvalues: fFlagLuaAppNarrowTileHideRating (copy), p1 (ref), ratingText (ref), foundationFontFaceMigration (copy), styleModule (copy), fontSize (ref), font (ref), vector2 (copy), textService (copy)
+		return if fFlagLuaAppNarrowTileHideRating and p1.hideRating or (ratingText == nil or ratingText == "") then 0 elseif foundationFontFaceMigration then styleModule.GetTextSize(ratingText, fontSize, font, vector2, { addTemporaryPadding = false }).X else textService:GetTextSize(ratingText, fontSize, font, vector2).X
 	end, {
 		ratingText,
 		fontSize,
@@ -109,7 +113,8 @@ return function(p1)
 				Position = UDim2.new(0, var13 + var8, 0.5, 0),
 				AnchorPoint = Vector2.new(0, 0.5),
 				TextSize = fontSize,
-				Font = var11.Font,
+				Font = if foundationFontFaceMigration then nil else var11.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var11.Font) else nil,
 				TextTransparency = var10.Transparency,
 				TextColor3 = var10.Color3,
 				TextTruncate = Enum.TextTruncate.AtEnd,
@@ -155,7 +160,8 @@ return function(p1)
 				Position = UDim2.new(0, var13 + var8, 0.5, 0),
 				AnchorPoint = Vector2.new(0, 0.5),
 				TextSize = var11.FontSize,
-				Font = var11.Font,
+				Font = if foundationFontFaceMigration then nil else var11.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(var11.Font) else nil,
 				TextTransparency = var10.Transparency,
 				TextColor3 = var10.Color3,
 				TextTruncate = Enum.TextTruncate.AtEnd,

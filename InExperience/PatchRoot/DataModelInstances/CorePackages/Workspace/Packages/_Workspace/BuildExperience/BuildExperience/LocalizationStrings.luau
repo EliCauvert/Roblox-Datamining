@@ -232,7 +232,7 @@ return {
 	ADS_STATS_EMPTY_SUBTITLE = "Feature.Build.Message.AdsStatsEmpty",
 	ADS_STATS_EMPTY_TITLE_FREE = "Feature.Build.Title.AdsStatsEmptyFree",
 	ADS_STATS_EMPTY_SUBTITLE_FREE = "Feature.Build.Message.AdsStatsEmptyFree",
-	ADS_STATS_CREATE_SUCCESS = "Feature.Build.Message.AdCampaignCreated",
+	ADS_STATS_CREATE_SUCCESS = "Feature.Build.Title.AdCreatedPeriod",
 	BUILD_MENU_INVITE_TO_PLAYTEST = "Feature.Build.Action.AddToPlaytest",
 	BUILD_MENU_LOADING = "Feature.Build.Label.Loading",
 	BUILD_MENU_PLAYTEST = "Feature.Build.Action.Playtest",

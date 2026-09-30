@@ -2,6 +2,7 @@
 local parent = dataHydration.Parent
 local httpClientModule = require(parent.HttpClient)
 local signalsModule = require(parent.Signals)
+local fFlagBuildAgentAdCampaignCardModule = require(script.Parent.FFlagBuildAgentAdCampaignCard)
 local acpProtocolModule = require(script.Parent.Acp.AcpProtocol)
 local historyIngestModule = require(script.Parent.CasStore.historyIngest)
 local ingestFrameHandlerModule = require(script.Parent.CasStore.ingestFrameHandler)
@@ -53,7 +54,7 @@ local t = {
 }
 
 return function(p3)
-	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref), acpProtocolModule (ref), t (ref), rpcDecoderModule (ref), signalsModule (ref), onTerminalModule (ref), appendSessionListEntries (ref), createTurnHandleModule (ref), experimentOverrideModule (ref), historyIngestModule (ref), sessionRegistryModule (ref), constantsModule (ref), ingestFrameHandlerModule (ref)
+	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref), acpProtocolModule (ref), t (ref), rpcDecoderModule (ref), signalsModule (ref), onTerminalModule (ref), appendSessionListEntries (ref), fFlagBuildAgentAdCampaignCardModule (ref), createTurnHandleModule (ref), experimentOverrideModule (ref), historyIngestModule (ref), sessionRegistryModule (ref), constantsModule (ref), ingestFrameHandlerModule (ref)
 	p3 = p3 or {}
 	local network = p3.network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
 	local baseUrl = p3.baseUrl or acpProtocolModule.acpUrl()
@@ -443,12 +444,34 @@ return function(p3)
 	end
 	
 	local function adCampaignCreate(p7)
-		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
+		-- upvalues: fFlagBuildAgentAdCampaignCardModule (copy), rpcCallSync (ref), acpProtocolModule (copy)
 		assert(typeof(p7) == "table", "adCampaignCreate requires params")
 		assert(typeof(p7.universeId) == "number" and p7.universeId > 0, "universeId must be a positive number")
 		assert(typeof(p7.idempotencyKey) == "string" and p7.idempotencyKey ~= "", "idempotencyKey is required")
+		local decodeAdCampaignCreateResultModule = require(script.Parent.decodeAdCampaignCreateResult)
 		
-		return rpcCallSync(acpProtocolModule.Methods.AdCampaignCreate, p7, require(script.Parent.decodeAdCampaignCreateResult))
+		if fFlagBuildAgentAdCampaignCardModule and p7.toolCallId ~= nil then
+			assert(typeof(p7.toolCallId) == "string" and p7.toolCallId ~= "", "toolCallId is required")
+			
+			return rpcCallSync(acpProtocolModule.Methods.AdCampaignCreate, p7, function(p8)
+				-- upvalues: decodeAdCampaignCreateResultModule (ref), p7 (ref)
+				local var16, var17 = decodeAdCampaignCreateResultModule(p8)
+				
+				if var16 == nil or var16.toolCallId == nil or var16.toolCallId == p7.toolCallId then
+					return var16, var17
+				end
+				return nil, "Ad campaign create response does not match the requested tool call"
+			end)
+		end
+		return rpcCallSync(acpProtocolModule.Methods.AdCampaignCreate, p7, decodeAdCampaignCreateResultModule)
+	end
+	
+	local function adCampaignCheckFunds(p7)
+		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
+		assert(typeof(p7) == "table", "adCampaignCheckFunds requires params")
+		assert(if p7.campaignOption ~= "feedback" then p7.campaignOption == "plays" else true, "campaignOption must be feedback or plays")
+		
+		return rpcCallSync(acpProtocolModule.Methods.AdCampaignCheckFunds, p7, require(script.Parent.decodeAdCampaignCheckFundsResult))
 	end
 	
 	local _ = function(p7, p8, p9, p10)
@@ -686,6 +709,7 @@ return function(p3)
 		sessionUpdateInfo = sessionUpdateInfo,
 		sessionSaveAndPublish = sessionSaveAndPublish,
 		adCampaignEligibility = adCampaignEligibility,
+		adCampaignCheckFunds = adCampaignCheckFunds,
 		adCampaignCreate = adCampaignCreate,
 		ingestSessionHistory = ingestSessionHistory,
 		ingestFrame = function(p15, p16)

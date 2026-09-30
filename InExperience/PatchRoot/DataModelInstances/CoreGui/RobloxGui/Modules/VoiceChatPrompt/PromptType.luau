@@ -31,5 +31,7 @@
 	VoiceDataConsentOptOutToast = "VoiceDataConsentOptOutToast",
 	UnifiedJoinVoiceToast = "UnifiedJoinVoiceToast",
 	AgeCheckForVoiceToast = "AgeCheckForVoiceToast",
-	UpdateOnAutoJoinToast = "UpdateOnAutoJoinToast"
+	UpdateOnAutoJoinToast = "UpdateOnAutoJoinToast",
+	MicPermissionDenied = "MicPermissionDenied",
+	MicFirstUnmutePrivacy = "MicFirstUnmutePrivacy"
 }

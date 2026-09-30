@@ -24,8 +24,8 @@ return function(p1)
 	return reactModule.createElement(foundationModule.Menu, {
 		isOpen = p1.isOpen,
 		items = p1.items,
-		side = popoverSide.Bottom,
-		align = if p1.anchorRef ~= nil then popoverAlign.End else popoverAlign.Start,
+		side = if p1.anchorRef ~= nil then popoverSide.Bottom else popoverSide.Top,
+		align = popoverAlign.End,
 		anchorRef = p1.anchorRef,
 		onPressedOutside = onClose,
 		ref = useFocusRoot({

@@ -7,10 +7,14 @@ local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Stor
 local _ = require(robloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local getPeriodTypeDisplayLabelModule = require(robloxSubscriptionPurchaseApp.Utils.getPeriodTypeDisplayLabel)
+local getFreeTrialOfferModule = require(robloxSubscriptionPurchaseApp.Utils.getFreeTrialOffer)
+local getTrialUnlockDaysModule = require(robloxSubscriptionPurchaseApp.Utils.getTrialUnlockDays)
+local isSupportedTrialPeriodTypeModule = require(robloxSubscriptionPurchaseApp.Utils.isSupportedTrialPeriodType)
 local signalsReactModule = require(parent.SignalsReact)
 local robloxPlusUpdateDiscountIcons = game:DefineFastFlag("RobloxPlusUpdateDiscountIcons", false)
 local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
 local fFlagRobloxPlusEnableNewFeatureListModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusEnableNewFeatureList)
+local fFlagRobloxPlusTrialDiscountTimingModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusTrialDiscountTiming)
 local array = luauPolyfillModule.Array
 local view = foundationModule.View
 local text = foundationModule.Text
@@ -59,31 +63,37 @@ local function _(p2)
 end
 
 return function(p2)
-	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), getPeriodTypeDisplayLabelModule (ref), useLocalization (ref), getVirtualTransactionDiscounts (ref), array (ref), FeatureRow (ref), fFlagRobloxPlusEnableNewFeatureListModule (ref), iconName (ref), robloxPlusUpdateDiscountIcons (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), reactModule (ref), view (ref)
+	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), getPeriodTypeDisplayLabelModule (ref), fFlagRobloxPlusTrialDiscountTimingModule (ref), getFreeTrialOfferModule (ref), isSupportedTrialPeriodTypeModule (ref), useLocalization (ref), getVirtualTransactionDiscounts (ref), array (ref), getTrialUnlockDaysModule (ref), FeatureRow (ref), fFlagRobloxPlusEnableNewFeatureListModule (ref), iconName (ref), robloxPlusUpdateDiscountIcons (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), reactModule (ref), view (ref)
 	local var3 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getRobloxSubscriptionProduct)
-	local var4 = useLocalization({
-		periodType = getPeriodTypeDisplayLabelModule(var3 and (var3.PeriodType and (tostring(var3.PeriodType) or "")), true)
-	})
+	local periodType = var3 and (var3.PeriodType and (tostring(var3.PeriodType) or ""))
+	local var4 = getPeriodTypeDisplayLabelModule(periodType, true)
+	local var5 = if fFlagRobloxPlusTrialDiscountTimingModule then getFreeTrialOfferModule(var3) else nil
+	local var6 = fFlagRobloxPlusTrialDiscountTimingModule and (var5 ~= nil and isSupportedTrialPeriodTypeModule(var5.PeriodType))
+	local var7 = useLocalization({ periodType = var4 })
 	local featureConfig = var3 and (var3.ProductTypeDetails and (var3.ProductTypeDetails.RobloxSubscriptionProductDetails and var3.ProductTypeDetails.RobloxSubscriptionProductDetails.FeatureConfig))
-	local var5, var6 = getVirtualTransactionDiscounts(featureConfig)
-	local var7 = if featureConfig and featureConfig.PrivateServerDiscounts then array.find(featureConfig.PrivateServerDiscounts, function(p3)
+	local var8, var9 = getVirtualTransactionDiscounts(featureConfig)
+	local var10 = if featureConfig and featureConfig.PrivateServerDiscounts then array.find(featureConfig.PrivateServerDiscounts, function(p3)
 		return typeof(p3) == "table" and (typeof(p3.PeriodIndex) == "number" and p3.PeriodIndex == 0)
 	end) else nil
-	local var8 = useLocalization({
+	local var11 = useLocalization({
 		robuxTransfersText = "Feature.RobloxSubscription.Label.BlackbirdTr",
 		privateServerDiscountText = "Feature.RobloxSubscription.Label.BlackbirdPSDiscount",
 		discountFeatureText = "Feature.RobloxSubscription.Description.Benefit.DiscountV2",
 		customizeFeatureText = "Feature.RobloxSubscription.Description.Benefit.Customize",
 		baseVirtualTransactionDiscountText = {
 			"Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst",
-			discountPercent = if var5 then var5.DiscountPercent else 0
+			discountPercent = if var8 then var8.DiscountPercent else 0
 		},
 		nextVirtualTransactionDiscountText = {
 			"Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond",
-			discountPercent = if var6 then var6.DiscountPercent else 0,
-			periodIndex = if var6 then var6.PeriodIndex else 0,
-			periodType = var4.periodType
-		}
+			discountPercent = if var9 then var9.DiscountPercent else 0,
+			periodIndex = if var9 then var9.PeriodIndex else 0,
+			periodType = var7.periodType
+		},
+		discountFeatureTextV3 = if var6 then {
+			"Feature.RobloxSubscription.Description.Benefit.DiscountV3",
+			trialUnlockDays = if var6 then getTrialUnlockDaysModule(var5, var9 and var9.PeriodIndex, periodType) else nil
+		} else nil
 	})
 	local t = {}
 	
@@ -93,58 +103,58 @@ return function(p2)
 	end
 	
 	if not fFlagRobloxPlusEnableNewFeatureListModule then
-		if var5 and typeof(var5.DiscountPercent) == "number" then
+		if var8 and typeof(var8.DiscountPercent) == "number" then
 			table.insert(t, FeatureRow({
 				layoutOrder = #t + 1,
 				iconName = if robloxPlusUpdateDiscountIcons then iconName.Tag else iconName.TagSparkle,
-				text = var8.baseVirtualTransactionDiscountText
+				text = var11.baseVirtualTransactionDiscountText
 			}))
 		end
-		if var6 and typeof(var6.DiscountPercent) == "number" and (not fFlagRobloxPlusFAEFreeTrialModule or not p2.noPurchaseMethodRequired) then
+		if var9 and typeof(var9.DiscountPercent) == "number" and (not fFlagRobloxPlusFAEFreeTrialModule or not p2.noPurchaseMethodRequired) then
 			table.insert(t, FeatureRow({
 				layoutOrder = #t + 1,
 				iconName = if robloxPlusUpdateDiscountIcons then iconName.TagArrowUp else iconName.TagSparkleArrowUp,
-				text = var8.nextVirtualTransactionDiscountText
+				text = var11.nextVirtualTransactionDiscountText
 			}))
 		end
 	elseif not p2.noPurchaseMethodRequired then
-		if var5 and var6 then
+		if var8 and var9 then
 			table.insert(t, FeatureRow({
 				layoutOrder = #t + 1,
 				iconName = iconName.Tag,
-				text = var8.discountFeatureText
+				text = if var6 then var11.discountFeatureTextV3 else var11.discountFeatureText
 			}))
-		elseif var5 and not var6 then
+		elseif var8 and not var9 then
 			table.insert(t, FeatureRow({
 				layoutOrder = #t + 1,
 				iconName = iconName.Tag,
-				text = var8.baseVirtualTransactionDiscountText
+				text = var11.baseVirtualTransactionDiscountText
 			}))
 		end
 		table.insert(t, FeatureRow({
 			layoutOrder = #t + 1,
 			iconName = iconName.PaintBrush,
-			text = var8.customizeFeatureText
+			text = var11.customizeFeatureText
 		}))
-	elseif var5 then
+	elseif var8 then
 		table.insert(t, FeatureRow({
 			layoutOrder = #t + 1,
 			iconName = iconName.Tag,
-			text = var8.baseVirtualTransactionDiscountText
+			text = var11.baseVirtualTransactionDiscountText
 		}))
 	end
-	if var7 and typeof(var7.DiscountPercent) == "number" then
+	if var10 and typeof(var10.DiscountPercent) == "number" then
 		table.insert(t, FeatureRow({
 			layoutOrder = #t + 1,
 			iconName = iconName.Controller,
-			text = var8.privateServerDiscountText
+			text = var11.privateServerDiscountText
 		}))
 	end
 	if featureConfig and featureConfig.IsRobuxTransferEnabled then
 		table.insert(t, FeatureRow({
 			layoutOrder = #t + 1,
 			iconName = iconName.Robux,
-			text = var8.robuxTransfersText
+			text = var11.robuxTransfersText
 		}))
 	end
 	return reactModule.createElement(view, {

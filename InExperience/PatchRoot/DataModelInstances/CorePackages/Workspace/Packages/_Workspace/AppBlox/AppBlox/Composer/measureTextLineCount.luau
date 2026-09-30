@@ -20,10 +20,12 @@ return function(p1)
 	local var3 = nil
 	local var4 = nil
 	local var5 = var1
+	local var6 = var2
 	
 	if p1.text == "" then
 		local t = {
 			lineCount = 1,
+			unclampedLineCount = 1,
 			newlineLineCount = 1,
 			wrappedLineCount = nil,
 			boundsY = nil,
@@ -33,20 +35,22 @@ return function(p1)
 		
 		return t
 	elseif layoutWidth > 0 then
-		local var6 = if foundationFontFaceMigration then styleModule.GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000), { addTemporaryPadding = false }).Y else textService:GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000)).Y
+		local var7 = if foundationFontFaceMigration then styleModule.GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000), { addTemporaryPadding = false }).Y else textService:GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000)).Y
 		local y = (if foundationFontFaceMigration then styleModule.GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000), { addTemporaryPadding = false }) else textService:GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000))).Y
 		var3 = y
 		
-		if y > 0 and var6 > 0 then
-			local ceiled = math.ceil(y / var6)
+		if y > 0 and var7 > 0 then
+			local ceiled = math.ceil(y / var7)
 			local maxValue = math.max(var2, ceiled)
 			var4 = ceiled
 			var5 = math.clamp(maxValue, 1, p1.maxLines)
+			var6 = maxValue
 			var3 = maxValue * p1.singleLineHeight
 		end
 	end
 	local t = {
 		lineCount = var5,
+		unclampedLineCount = var6,
 		newlineLineCount = var1,
 		wrappedLineCount = var4,
 		layoutWidth = layoutWidth,

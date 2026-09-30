@@ -27,7 +27,7 @@ local function noopGetRootSignal()
 	}
 end
 
-if _G.IS_PRODUCTION or script:FindFirstChild("DevOnly") == nil then
+if _G.ENVIRONMENT == "PRODUCTION" or script:FindFirstChild("DevOnly") == nil then
 	return {
 		["jest.config"] = script["jest.config"],
 		DebugPanel = NoopComponent,

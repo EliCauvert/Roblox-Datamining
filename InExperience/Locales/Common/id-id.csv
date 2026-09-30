@@ -108,6 +108,7 @@ Authentication.SignUp.Action.ApplyOnNextRespawn,Terapkan pada respawn berikutnya
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ExitModalLeave,Keluar
 Authentication.SignUp.Action.RespawnNow,Respawn sekarang
+Authentication.SignUp.Action.StartPlay,Mulai bermain
 Authentication.SignUp.Button.OKCaptialized,OKE
 Authentication.SignUp.Button.RetryLogIn,Coba log in lagi
 Authentication.SignUp.Description.AccountAlreadyLinked,Akunmu di {platformAccountName} sudah terhubung dengan akun Roblox. Coba log in lagi.
@@ -116,6 +117,7 @@ Authentication.SignUp.Description.Try,Coba
 Authentication.SignUp.Description.UsernameChanged,"Semua siap. Akunmu sudah siap dan terhubung ke {platform}. Respawn sekarang untuk melihat nama pengguna terbarumu dalam game, atau nama pengguna akan diterapkan pada lain waktu."
 Authentication.SignUp.Description.UsernameUnchanged,Kamu sudah masuk. Akunmu sudah siap dan terhubung ke {platform}. Chat dengan teman dan mainkan jutaan game Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Akun Roblox-mu akan dihubungkan ke akunmu di {platform}. Kamu dapat memutus hubungan dari layar Pengaturan kapan saja. Kamu mungkin harus menunggu beberapa saat sebelum dapat terhubung ke akun lain di {platform}. Dengan mengklik {ctaButton}, kamu menyetujui Ketentuan Penggunaan termasuk klausa arbitrase dan menerima Kebijakan Privasi."
+Authentication.SignUp.Header.OneLastThing,Satu hal terakhir
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Siapkan akun Roblox-mu
 Authentication.SignUp.Heading.CountryCodeSelector,Pilih negara
 Authentication.SignUp.Heading.RetryLogIn,
@@ -156,6 +158,7 @@ Authentication.SignUp.Response.InvalidBirthday,Tanggal lahir tidak valid.
 Authentication.SignUp.Response.InvalidEmail,Alamat email tidak valid.
 Authentication.SignUp.Response.PasswordComplexity,Buat password yang lebih kompleks.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Nama pengguna harus diatur terlebih dahulu.
+Authentication.SignUp.Subtitle.AddYourBirthday,Tambahkan tanggal lahirmu untuk membuat akun Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Progresmu akan tetap tersimpan setelah kamu menyelesaikan penyiapan.
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,Verifikasi 2 Langkah diperlukan untuk melakukan transaksi lebih lanjut. Buka Pengaturan > Keamanan untuk menyelesaikan Verifikasi 2 Langkah.
@@ -464,6 +467,7 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Reset
+CommonUI.Messages.Action.View,Lihat
 CommonUI.Messages.Label.Password,Password
 CommonUI.Messages.Response.NoResults,
 CommonUI.Messages.Response.PageError,Terjadi eror saat me-load halaman
@@ -1044,6 +1048,7 @@ CoreScripts.PublishAvatarPrompt.Rotate,
 CoreScripts.PublishAvatarPrompt.Zoom,Perbesar/Perkecil
 CoreScripts.PublishCommon.Disclaimer,
 CoreScripts.PublishCommon.Leave,
+CoreScripts.PublishCommon.ReviewingCreation,Me-review kreasimu...
 CoreScripts.PublishCommon.Stay,
 CoreScripts.PublishCommon.UnsavedWarning,Perubahan yang belum disimpan dapat hilang
 CoreScripts.PurchasePrompt.Button.OK,
@@ -1384,7 +1389,7 @@ Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,Publikasikan
 Feature.Avatar.BackgroundGeneration.Action.Upload,Upload
-Feature.Avatar.BackgroundGeneration.Action.View,Lihat
+Feature.Avatar.BackgroundGeneration.Action.View,
 Feature.Avatar.BackgroundGeneration.Action.ViewExclusiveBackgrounds,Tampilan
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Buat latar belakang dengan Plus.
 Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,"Latar belakangmu belum dipublikasikan. Jika kamu keluar sekarang, latar belakangmu akan hilang."
@@ -1670,6 +1675,7 @@ Feature.Avatar.Label.SetAvatarCount,{itemCount} avatar
 Feature.Avatar.Label.SetLimitReachedBody,Kamu hanya bisa memiliki maksimal {setLimit} set. Hapus 1 set untuk membuat ruang
 Feature.Avatar.Label.SetNameDuplicateBody,Kamu sudah memiliki set dengan nama ini. Pilih nama lain
 Feature.Avatar.Label.SetNameNotAllowedBody,Pilih nama lain
+Feature.Avatar.Label.ShareAvatarToMoments,Bagikan avatarmu ke Moment
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,Posting Avatar ke Marketplace
 Feature.Avatar.Label.Shirt,Kemeja
 Feature.Avatar.Label.ShirtClassic,
@@ -2258,7 +2264,6 @@ Feature.Build.Label.World,Dunia
 Feature.Build.Message.AccountRequirements,Akunmu tidak memenuhi persyaratan untuk menggunakan Build.
 Feature.Build.Message.AccountTooNew,Akunmu terlalu baru untuk dipublikasikan. Coba lagi setelah 2 hari.
 Feature.Build.Message.AdCampaignCreateFailed,Tidak dapat membuat kampanyemu. Coba lagi.
-Feature.Build.Message.AdCampaignCreated,Kampanye iklan telah dibuat
 Feature.Build.Message.AdPerformanceLoadFailed,Tidak dapat me-load performa iklan
 Feature.Build.Message.AdsPromotionBannerSubtitle,Jangkau lebih banyak audiens secara gratis
 Feature.Build.Message.AdsPromotionBannerTitle,Kamu masih punya {promotionCount} promosi gratis
@@ -2349,6 +2354,7 @@ Feature.Build.Notification.Title.NeedInput,Build membutuhkan input darimu
 Feature.Build.Placeholder.DescribeProduct,Deskripsikan apa yang ingin kamu jual
 Feature.Build.Placeholder.DescribeProductUpdate,Deskripsikan perubahan
 Feature.Build.Prompt.CreateDeveloperProduct,"Bantu saya membuat produk developer, menghubungkannya ke game, memverifikasi dan memublikasikan perubahannya, serta membuatnya tersedia untuk dibeli."
+Feature.Build.Title.AdActive,Kampanye iklan aktif
 Feature.Build.Title.AdCampaignDuration,Kampanye iklan {durationDays} hari
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} hari
 Feature.Build.Title.AdComplete,Iklan selesai
@@ -2983,7 +2989,6 @@ Feature.Chat.Message.LeaveGroup,Kamu tidak akan dapat tetap chat dengan grup ini
 Feature.Chat.Message.LeaveGroup.V2,Yakin ingin keluar dari grup ini?
 Feature.Chat.Message.MakeConnectionsToChat,Berteman di Roblox untuk mulai chat
 Feature.Chat.Message.MakeConnectionsToParty,Berteman di Roblox agar bisa mengadakan Party bersama
-Feature.Chat.Message.MakeFriendsToChat,
 Feature.Chat.Message.MakeFriendsToParty,
 Feature.Chat.Message.MessageContentModerated,Pesan dimoderasi dan tidak terkirim.
 Feature.Chat.Message.MessageUnavailable,Pesan tidak tersedia
@@ -2994,8 +2999,6 @@ Feature.Chat.Message.RemoveUser,Kamu yakin ingin mengeluarkan {USERNAME} dari ch
 Feature.Chat.Message.RemoveUser.V2,Yakin ingin mengeluarkan {USERNAME} dari grup ini?
 Feature.Chat.Message.RemovedFromConversation,Kamu telah dikeluarkan dari grup.
 Feature.Chat.Message.SeveralUsersTyping,Beberapa pengguna sedang mengetik...
-Feature.Chat.Message.TurnOnChat,"Untuk chat dengan teman, nyalakan chat di Pengaturan Privasi."
-Feature.Chat.Message.TurnOnParty,"Untuk mengadakan Party dengan teman, aktifkan fitur Party di Pengaturan Privasimu."
 Feature.Chat.Message.TwoUsersTyping,{DISPLAY_NAME_1} dan {DISPLAY_NAME_2} sedang mengetik...
 Feature.Chat.PresetChat.Disclaimer,Pesan Cepat memungkinkan pemain dari semua usia untuk berkoordinasi dalam gameplay.
 Feature.Chat.Response.ChatNameFullyModerated,Nama chat grup dimoderasi.
@@ -3387,6 +3390,9 @@ Feature.GameFollows.TooltipFollowLimitReached,Batasan tercapai. Berhenti mengiku
 Feature.GameFollows.TooltipNotificationsLimitReached,Batas tercapai. Matikan notifikasi pengalaman virtual lain terlebih dahulu.
 Feature.GameFollows.TooltipTurnedOffNotifications,Notifikasi dimatikan untuk {experienceName}
 Feature.GameFollows.TooltipTurnedOnNotifications,Notifikasi dinyalakan untuk {experienceName}
+Feature.GameJoin.Description.DifferentServer,Kamu akan memulai di server yang berbeda
+Feature.GameJoin.Label.PlayTogether,Kamu bisa bermain bersama
+Feature.GameJoin.Label.PlayTogetherSoon,Kamu bisa segera bermain bersama
 Feature.GamePage.Action.BackToTop,Kembali ke atas
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -4037,8 +4043,10 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,"Diskon {discountPerce
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,Diskon {discountPercent}% untuk item ini setelah {periodIndex} {periodType}
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Dengan mengklik ""Lanjutkan"", kamu menyetujui {linkStart}Ketentuan Subscription Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Dengan mengklik ""Coba gratis"", kamu menyetujui {linkStart}Ketentuan Subscription Roblox.{linkEnd} Uji coba gratis kamu akan berakhir dalam 1 bulan, dan biaya akan otomatis dibebankan setiap bulan. Kamu bisa membatalkannya kapan saja."
+Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Dengan mengeklik ""Coba gratis"", kamu menyetujui {linkStart}Ketentuan Subscription Roblox.{linkEnd} Uji coba gratis kamu akan berakhir dalam {trialDuration} {trialPeriodLabel} dan biaya akan otomatis dibebankan setiap {billingPeriodLabel}. Kamu bisa membatalkannya kapan saja."
 Feature.RobloxSubscription.Label.FreeTrialText,Dapatkan uji coba gratis
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}Gratis 1 bulan,{boldEnd} lalu {price}/{periodType}"
+Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} gratis,{boldEnd} lalu {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,bulan
 Feature.RobloxSubscription.Label.months,
 Feature.RobloxSubscription.Title.AgeCheckTrial,Dapatkan uji coba Plus gratis selama 1 minggu
@@ -4048,6 +4056,8 @@ Feature.RobloxSubscription.Title.GetBlackbird,Dapatkan Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus tidak tersedia di sini
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Kamu dapat menjadi yang pertama bergabung ke acara ini.
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Akses awal dengan Plus
+Feature.RobloxSubscription.label.week,minggu
+Feature.RobloxSubscription.label.weeks,
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Status akun, pelanggaran, dan banding"
 Feature.Schools.Label.Classmates,Teman sekelas
 Feature.Screentime.Content.ScreentimeLimitDialog,Kamu telah mencapai batas durasi layar harian. Coba lagi besok untuk mengakses Roblox.
@@ -4439,6 +4449,14 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox telah menangguhkan aksesmu ke game ini selama {number} jam
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox telah menangguhkan aksesmu ke game ini selama 1 menit
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox telah menangguhkan aksesmu ke game ini selama {number} menit
+Feature.UniversalShareSheet.Action.CopiedLink,Tersalin
+Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,Bagikan pesan
+Feature.UniversalShareSheet.Response.NotSharedMessage,Pesan tidak dapat dikirim
+Feature.UniversalShareSheet.Response.NotSharedMultipleMessages,Beberapa pesan tidak dapat dikirim
+Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 lainnya
+Feature.UniversalShareSheet.Response.SharedMessage,Pesan terkirim
+Feature.UniversalShareSheet.Response.SharedMultipleMessages,Beberapa pesan terkirim
+Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} lainnya
 Feature.VerificationUpsell.Action.AddPhone,Tambahkan Nomor Ponsel
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Tambahkan Ponsel untuk Chat Suara

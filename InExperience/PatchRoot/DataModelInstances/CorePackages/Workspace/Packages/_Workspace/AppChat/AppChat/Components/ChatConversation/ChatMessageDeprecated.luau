@@ -5,6 +5,7 @@ local reactModule = require(parent.React)
 local roactModule = require(parent.Roact)
 local text = require(parent.AppCommonLib).Text
 local memoize = require(parent.AppCommonLib).memoize
+local getTextSize = require(parent.Style).GetTextSize
 local plainTextModule = require(script.Parent.PlainText)
 local withStyle = require(parent.UIBlox).Style.withStyle
 local assetCardModule = require(script.Parent.AssetCard)
@@ -17,6 +18,7 @@ local getModeratedMaskTextModule = require(appChat.Utils.getModeratedMaskText)
 local fFlagAppChatEnableAutotranslationModule = require(appChat.Flags.FFlagAppChatEnableAutotranslation)
 local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
 local fFlagChatModeratedMaskRandomLength = require(parent.SharedFlags).FFlagChatModeratedMaskRandomLength
+local foundationFontFaceMigration = require(parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local messageModelModule = require(appChat.Models.MessageModel)
 local t = {
 	[enumMessageTypesModule.PlainText] = {
@@ -87,7 +89,7 @@ chatMessage.defaultProps = {
 }
 
 function chatMessage.init(p1)
-	-- upvalues: fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), fFlagAppChatEnableAutotranslationModule (ref), memoize (ref), text (ref)
+	-- upvalues: fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), fFlagAppChatEnableAutotranslationModule (ref), memoize (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref)
 	function p1.getModeratedText(p2)
 		-- upvalues: fFlagChatModeratedMaskRandomLength (copy), getModeratedMaskTextModule (copy), p1 (ref)
 		return if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(p1.props.messageId or p2) else string.gsub(p2, "[^%s]", "#")
@@ -104,20 +106,20 @@ function chatMessage.init(p1)
 	
 	if fFlagAppChatEnableAutotranslationModule then
 		p1.getBubbleMaxWidth = memoize(function(p2, p3, p4, p5, p6)
-			-- upvalues: text (copy), p1 (ref)
-			return if p6 then math.max(text.GetTextBounds(p3, p5, p1.props.autotranslationOriginalTextFontSize, Vector2.new(p2, 10000)).X, text.GetTextBounds(p6, p5, p4, Vector2.new(p2, 10000)).X) + 20 else text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000)).X + 20
+			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), p1 (ref), text (copy)
+			return if p6 then math.max((if foundationFontFaceMigration then getTextSize(p3, p1.props.autotranslationOriginalTextFontSize, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, p1.props.autotranslationOriginalTextFontSize, Vector2.new(p2, 10000))).X, (if foundationFontFaceMigration then getTextSize(p6, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p6, p5, p4, Vector2.new(p2, 10000))).X) + 20 else (if foundationFontFaceMigration then getTextSize(p3, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000))).X + 20
 		end)
 		
 		return
 	end
 	p1.getBubbleMaxWidth = memoize(function(p2, p3, p4, p5)
-		-- upvalues: text (copy)
-		return text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000)).X + 20
+		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), text (copy)
+		return (if foundationFontFaceMigration then getTextSize(p3, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000))).X + 20
 	end)
 end
 
 function chatMessage.render(p1)
-	-- upvalues: messageModelModule (ref), t_1 (ref), t (ref), loggerModule (ref), pruneConsecutiveNewLines (ref), withStyle (ref), roactModule (ref), chatMessageContainerModule (ref), cryoModule (ref), reactModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), fFlagAppChatEnableAutotranslationModule (ref)
+	-- upvalues: messageModelModule (ref), t_1 (ref), t (ref), loggerModule (ref), pruneConsecutiveNewLines (ref), withStyle (ref), roactModule (ref), chatMessageContainerModule (ref), cryoModule (ref), reactModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), foundationFontFaceMigration (ref), fFlagAppChatEnableAutotranslationModule (ref)
 	local props = p1.props
 	local var1 = if props and props.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[props.messageType]
 	props = p1.messageMaxWidth(p1.props.wideMode, p1.props.parentWidth)
@@ -128,7 +130,7 @@ function chatMessage.render(p1)
 		local content = p1.props.repliesTo and (p1.props.repliesTo.messageType and p1.props.repliesTo.content)
 		
 		return withStyle(function(p2)
-			-- upvalues: roactModule (copy), chatMessageContainerModule (copy), cryoModule (copy), p1 (ref), props (ref), var1 (ref), reactModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), content (ref), messageModelModule (copy), t_1 (copy), t (copy), fFlagAppChatEnableAutotranslationModule (copy), var2 (ref)
+			-- upvalues: roactModule (copy), chatMessageContainerModule (copy), cryoModule (copy), p1 (ref), props (ref), var1 (ref), reactModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), content (ref), messageModelModule (copy), t_1 (copy), t (copy), foundationFontFaceMigration (copy), fFlagAppChatEnableAutotranslationModule (copy), var2 (ref)
 			local body = p2.Font.Body
 			local var3 = p2.Font.BaseSize * body.RelativeSize
 			local var4 = p2.Font.BaseSize * p2.Font.BodySmall.RelativeSize
@@ -140,7 +142,7 @@ function chatMessage.render(p1)
 				isPending = p1.props.isSending or (p1.props.moderated or p1.props.failed),
 				visibility = p1.props.visibility,
 				renderMessage = function(p3, p4)
-					-- upvalues: reactModule (copy), cryoModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), p1 (copy), content (copy), roactModule (copy), messageModelModule (copy), t_1 (copy), t (copy), body (ref), props (copy), var4 (ref), p2 (ref), var1 (copy), fFlagAppChatEnableAutotranslationModule (copy), var2 (copy), var3 (ref)
+					-- upvalues: reactModule (copy), cryoModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), p1 (copy), content (copy), roactModule (copy), messageModelModule (copy), t_1 (copy), t (copy), foundationFontFaceMigration (copy), p2 (ref), body (ref), props (copy), var4 (ref), var1 (copy), fFlagAppChatEnableAutotranslationModule (copy), var2 (copy), var3 (ref)
 					local var5
 					local createElement = reactModule.createElement
 					local var6 = "ImageButton"
@@ -164,7 +166,7 @@ function chatMessage.render(p1)
 						local repliesTo = p1.props.repliesTo
 						var5 = var5((if repliesTo and repliesTo.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[repliesTo.messageType]).component, {
 							additionalProps = p1.props.additionalProps,
-							font = body.Font,
+							font = if foundationFontFaceMigration then p2.Tokens.Typography.BodyLarge.Font else body.Font,
 							hasTail = false,
 							innerPadding = 10,
 							isIncoming = p1.props.isIncoming,
@@ -203,7 +205,7 @@ function chatMessage.render(p1)
 						Icons = if p4 then p4.Icons else nil,
 						[var1.name] = roactModule.createElement(var1.component, {
 							additionalProps = p1.props.additionalProps,
-							font = body.Font,
+							font = if foundationFontFaceMigration then p2.Tokens.Typography.BodyLarge.Font else body.Font,
 							hasTail = p1.props.isNewSender,
 							innerPadding = 10,
 							isIncoming = p1.props.isIncoming,
@@ -213,7 +215,7 @@ function chatMessage.render(p1)
 							isLastIncomingChatMessage = p1.props.isLastIncomingChatMessage,
 							isPressed = if p4 then p4.isPressed else nil,
 							bubbleRef = if p4 then p4.bubbleRef else nil,
-							maxWidth = if fFlagAppChatEnableAutotranslationModule then p1.getBubbleMaxWidth(props, var2, var3, body.Font, p1.props.translatedText) else p1.getBubbleMaxWidth(props, var2, var3, body.Font),
+							maxWidth = if fFlagAppChatEnableAutotranslationModule then p1.getBubbleMaxWidth(props, var2, var3, if foundationFontFaceMigration then p2.Tokens.Typography.BodyLarge.Font else body.Font, p1.props.translatedText) else p1.getBubbleMaxWidth(props, var2, var3, if foundationFontFaceMigration then p2.Tokens.Typography.BodyLarge.Font else body.Font),
 							messageDefaultNoticeText = p1.props.messageDefaultNoticeText,
 							messageModeratedNoticeText = p1.props.messageModeratedNoticeText,
 							parentWidth = p1.props.parentWidth,

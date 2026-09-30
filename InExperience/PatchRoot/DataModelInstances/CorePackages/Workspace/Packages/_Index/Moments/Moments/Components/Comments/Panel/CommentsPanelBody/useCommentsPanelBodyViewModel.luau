@@ -61,7 +61,6 @@ return function(p1)
 		canRetryInitial = panelState.canRetryInitial,
 		feedItemId = feedItemId,
 		sessionId = p1.sessionId,
-		scrollingFrameRef = p1.scrollingFrameRef,
 		stateMinHeight = useVisibleContentHeightModule(p1.scrollingFrameRef, p1.actionsFrame),
 		onRetryInitial = reactModule.useCallback(function()
 			-- upvalues: feedItemId (ref), var6 (ref), p1 (ref)

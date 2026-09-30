@@ -105,6 +105,12 @@ return {
 		
 		return if var3 == nil or #var3 == 0 then nil else var3[#var3]
 	end,
+	useRegistryEntries = function(p5)
+		-- upvalues: reactModule (ref), var1 (ref)
+		local var2 = reactModule.useContext(var1)
+		
+		return if var2 == nil then nil else var2.state[p5]
+	end,
 	useFocusRegistryEntry = function(p5)
 		-- upvalues: useFocusGuiObject (ref), reactModule (ref), var1 (ref)
 		local var2

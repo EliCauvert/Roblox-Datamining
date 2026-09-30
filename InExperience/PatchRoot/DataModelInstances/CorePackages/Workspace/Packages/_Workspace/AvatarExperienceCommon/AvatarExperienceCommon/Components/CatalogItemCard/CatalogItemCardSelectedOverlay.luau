@@ -17,7 +17,6 @@ local useSelectedOverlayButtonModule = require(script.Parent.useSelectedOverlayB
 local fFlagAXInventoryDurablesSupport = avatarExperienceFlagsModule.FFlagAXInventoryDurablesSupport
 local fFlagAXFixBadgeStatusConfigOptions = avatarExperienceFlagsModule.FFlagAXFixBadgeStatusConfigOptions
 local fFlagAXShowFaeUpsell = avatarExperienceFlagsModule.FFlagAXShowFaeUpsell
-local fFlagAXSelectedBorderWrapsBackground = avatarExperienceFlagsModule.FFlagAXSelectedBorderWrapsBackground
 local fFlagAXMarketplaceItemCardIndicatorStack = avatarExperienceFlagsModule.FFlagAXMarketplaceItemCardIndicatorStack
 
 local var1 = function(p1)
@@ -30,7 +29,7 @@ local var1 = function(p1)
 end
 
 return function(p1)
-	-- upvalues: useTokens (ref), fFlagAXMarketplaceItemCardIndicatorStack (ref), useSelectedOverlayButtonModule (ref), useLastInput (ref), useIsSpatial (ref), responsiveModule (ref), reactModule (ref), fFlagAXSelectedBorderWrapsBackground (ref), view (ref), itemCardBadge (ref), fFlagAXFixBadgeStatusConfigOptions (ref), fFlagAXShowFaeUpsell (ref), var1 (ref), fFlagAXInventoryDurablesSupport (ref), itemCardIcon (ref), button (ref), buttonType (ref)
+	-- upvalues: useTokens (ref), fFlagAXMarketplaceItemCardIndicatorStack (ref), useSelectedOverlayButtonModule (ref), useLastInput (ref), useIsSpatial (ref), responsiveModule (ref), reactModule (ref), view (ref), itemCardBadge (ref), fFlagAXFixBadgeStatusConfigOptions (ref), fFlagAXShowFaeUpsell (ref), var1 (ref), fFlagAXInventoryDurablesSupport (ref), itemCardIcon (ref), button (ref), buttonType (ref)
 	local isVisible, bottomOffset, height
 	local var2 = useTokens()
 	local _ = nil
@@ -58,13 +57,13 @@ return function(p1)
 	}
 	local t_1 = {
 		CatalogItemCardSelectedOverlayCornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var2.Radius.Medium) }),
-		CatalogItemCardSelectedOverlayStroke = if fFlagAXSelectedBorderWrapsBackground and p1.suppressBorder then nil else reactModule.createElement("UIStroke", {
+		CatalogItemCardSelectedOverlayStroke = if not p1.suppressBorder then reactModule.createElement("UIStroke", {
 			Color = var2.Color.Content.Emphasis.Color3,
 			Transparency = var2.Color.Content.Emphasis.Transparency,
 			Thickness = var2.Stroke.Standard,
 			LineJoinMode = Enum.LineJoinMode.Round,
 			[reactModule.Tag] = "data-testid=selection-stroke"
-		})
+		}) else nil
 	}
 	
 	if p1.badge then

@@ -2,7 +2,9 @@
 local parent = playerFeedback.Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
-local checkbox = require(parent.Foundation).Checkbox
+local foundationModule = require(parent.Foundation)
+local checkbox = foundationModule.Checkbox
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local useStyle = UIBloxModule.Core.Style.useStyle
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
@@ -23,6 +25,7 @@ local setNetworkingErrorToast = require(parent.RobloxAppToastsRodux).Thunks.SetN
 local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local appPage = require(parent.RobloxAppEnums).AppPage
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
@@ -110,7 +113,7 @@ local var3 = argCheckModule.wrap(tModule.interface({
 }))
 
 return function(p2)
-	-- upvalues: var3 (ref), useStyle (ref), useDispatch (ref), useRoactService (ref), roactNetworking (ref), appEventIngestService (ref), useSelector (ref), useState (ref), reactModule (ref), getFFlagEdpPlayerFeedbackCommentsOnly (ref), useLocalization (ref), useEffect (ref), playerFeedbackEventsModule (ref), submitGamePlayerFeedbackModule (ref), setCurrentToastMessage (ref), setNetworkingErrorToast (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), fFlagAddThumbnailSelectorReport (ref), addThumbnailReportToPlayerFeedback (ref), closeCentralOverlay (ref), appPage (ref), urlBuilder (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), userInputService (ref), partialPageModal (ref), verticalScrollView (ref), CategoryCheckboxes (ref), buttonStack (ref), buttonType (ref), fFlagEnableAbuseReportRevampFlow (ref), enableAbuseReportRevampFeedback (ref)
+	-- upvalues: var3 (ref), useStyle (ref), useDispatch (ref), useRoactService (ref), roactNetworking (ref), appEventIngestService (ref), useSelector (ref), useState (ref), reactModule (ref), getFFlagEdpPlayerFeedbackCommentsOnly (ref), useLocalization (ref), useEffect (ref), playerFeedbackEventsModule (ref), submitGamePlayerFeedbackModule (ref), setCurrentToastMessage (ref), setNetworkingErrorToast (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), fFlagAddThumbnailSelectorReport (ref), addThumbnailReportToPlayerFeedback (ref), closeCentralOverlay (ref), appPage (ref), urlBuilder (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), userInputService (ref), partialPageModal (ref), verticalScrollView (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), CategoryCheckboxes (ref), buttonStack (ref), buttonType (ref), fFlagEnableAbuseReportRevampFlow (ref), enableAbuseReportRevampFeedback (ref)
 	assert(var3(p2))
 	local var4 = useStyle()
 	local var5 = useDispatch()
@@ -358,7 +361,8 @@ return function(p2)
 			TextSize = var4.Font.BaseSize,
 			TextColor3 = tokens.Color.Content.Emphasis.Color3,
 			TextTransparency = tokens.Color.Content.Emphasis.Transparency,
-			Font = tokens.Typography.TitleLarge.Font,
+			Font = if foundationFontFaceMigration then nil else tokens.Typography.TitleLarge.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.TitleLarge.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0)
@@ -377,7 +381,8 @@ return function(p2)
 			TextSize = var4.Font.BaseSize,
 			TextColor3 = tokens.Color.Content.Emphasis.Color3,
 			TextTransparency = tokens.Color.Content.Emphasis.Transparency,
-			Font = tokens.Typography.TitleLarge.Font,
+			Font = if foundationFontFaceMigration then nil else tokens.Typography.TitleLarge.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.TitleLarge.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0)
@@ -413,7 +418,8 @@ return function(p2)
 				TextTransparency = tokens.Color.Content.Emphasis.Transparency,
 				BackgroundColor3 = tokens.Color.Surface.Surface_200.Color3,
 				BackgroundTransparency = tokens.Color.Surface.Surface_200.Transparency,
-				Font = tokens.Typography.BodyLarge.Font,
+				Font = if foundationFontFaceMigration then nil else tokens.Typography.BodyLarge.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.BodyLarge.Font) else nil,
 				TextSize = tokens.Typography.BodyLarge.FontSize,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BorderSizePixel = 0,
@@ -430,7 +436,8 @@ return function(p2)
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
 			TextColor3 = var4.Theme.Alert.Color,
-			Font = tokens.Typography.CaptionSmall.Font,
+			Font = if foundationFontFaceMigration then nil else tokens.Typography.CaptionSmall.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.CaptionSmall.Font) else nil,
 			TextSize = tokens.Typography.CaptionLarge.FontSize,
 			LineHeight = tokens.Typography.CaptionSmall.LineHeight,
 			Size = UDim2.new(1, 0, 0, 0),
@@ -459,7 +466,8 @@ return function(p2)
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0),
-			Font = var4.Font.CaptionHeader.Font,
+			Font = if foundationFontFaceMigration then nil else var4.Font.CaptionHeader.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.CaptionLarge.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextWrapped = true,
 			Text = metadata.disclaimer_label,
@@ -487,7 +495,8 @@ return function(p2)
 			TextSize = tokens.Typography.CaptionLarge.FontSize,
 			TextColor3 = var4.Theme.TextMuted.Color,
 			TextTransparency = var4.Theme.TextMuted.Transparency,
-			Font = tokens.Typography.BodyLarge.Font,
+			Font = if foundationFontFaceMigration then nil else tokens.Typography.BodyLarge.Font,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.BodyLarge.Font) else nil,
 			LineHeight = tokens.LineHeight.LineHeight_140,
 			LayoutOrder = 7
 		})

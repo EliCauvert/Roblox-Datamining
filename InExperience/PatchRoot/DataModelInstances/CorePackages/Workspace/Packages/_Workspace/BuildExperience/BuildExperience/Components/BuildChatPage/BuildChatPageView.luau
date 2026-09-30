@@ -407,7 +407,6 @@ return function(p4)
 		AdCampaignSheet = if fFlagBuildAdUpsellModule and p4.isAdUpsellVisible then reactModule.createElement(var4, {
 			waitForCreateResult = true,
 			useLocalRunDates = true,
-			freeOriginalPriceRobux = 500,
 			isOpen = p4.isAdCampaignSheetOpen,
 			onClose = p4.onAdCampaignSheetClose,
 			onCreate = p4.onAdCampaignSheetCreate,
@@ -415,6 +414,7 @@ return function(p4)
 			hasCreateError = p4.hasAdCampaignCreateError,
 			campaignDurationDays = p4.adCampaignDurationDays,
 			estimatedPriceRobux = p4.adCampaignEstimatedPriceRobux,
+			campaignOffers = p4.adCampaignOffers,
 			runStartTimeMs = p4.adCampaignRunStartTimeMs,
 			runEndTimeMs = p4.adCampaignRunEndTimeMs
 		}) else nil,
@@ -422,7 +422,6 @@ return function(p4)
 			isOpen = true,
 			waitForCreateResult = true,
 			useLocalRunDates = true,
-			freeOriginalPriceRobux = 500,
 			onClose = p4.onAgentAdCampaignSheetClose,
 			onCreate = p4.onAgentAdCampaignSheetCreate,
 			isCreatePending = p4.isAgentAdCampaignCreatePending,

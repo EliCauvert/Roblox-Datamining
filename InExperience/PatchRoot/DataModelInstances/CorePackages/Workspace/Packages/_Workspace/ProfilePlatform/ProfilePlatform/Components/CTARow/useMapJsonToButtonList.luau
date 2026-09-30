@@ -24,6 +24,7 @@ local fFlagPortEnableCommunityVerificationModalModule = require(profilePlatform.
 local fFlagEnableProfilePlatformDisabledReasonTextModule = require(profilePlatform.Flags.FFlagEnableProfilePlatformDisabledReasonText)
 local fFlagProfilePlatformAddCurrentlyPlayingModule = require(profilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
 local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
+local fFlagJoinabilityCTARefactor = require(parent.SharedFlags).FFlagJoinabilityCTARefactor
 local var2 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.DataHydration).Presence.PresenceStore.get() else nil
 local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
 local eventNamesModule = require(profilePlatform.Analytics.EventNames)
@@ -69,18 +70,21 @@ local function contextualMenuItemsFromJsonActions(p1, p2, p3)
 	return t
 end
 
-local function _(p4)
-	-- upvalues: enumsModule (ref)
+local function hasJoinExperience(p4)
+	-- upvalues: enumsModule (ref), fFlagJoinabilityCTARefactor (ref)
 	for i, v in p4 do
-		if v.type == enumsModule.ProfileActions.JoinExperience then
-			return true
+		if v.type ~= enumsModule.ProfileActions.JoinExperience then
+			if fFlagJoinabilityCTARefactor and v.type == enumsModule.ProfileActions.PlayExperience then
+				return true
+			end
 		end
+		return true
 	end
 	return false
 end
 
 return function(p5)
-	-- upvalues: useDispatch (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useProfileActionsModule (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useSelector (ref), networkingPresenceModule (ref), networkStatus (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), reactModule (ref), var2 (ref), useEffectOnce (ref), contextualMenuItemsFromJsonActions (ref), fFlagEnableProfilePlatformDisabledActions (ref), fFlagEnableCommunityVerificationModalModule (ref), fFlagPortEnableCommunityVerificationModalModule (ref), iconName (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), fFlagEnableProfilePlatformDisabledReasonTextModule (ref), buttonVariant (ref), profileMenuItemFromResolvedAction (ref), eventNamesModule (ref)
+	-- upvalues: useDispatch (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useProfileActionsModule (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useSelector (ref), networkingPresenceModule (ref), networkStatus (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), reactModule (ref), hasJoinExperience (ref), var2 (ref), useEffectOnce (ref), contextualMenuItemsFromJsonActions (ref), fFlagEnableProfilePlatformDisabledActions (ref), fFlagEnableCommunityVerificationModalModule (ref), fFlagPortEnableCommunityVerificationModalModule (ref), iconName (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), fFlagEnableProfilePlatformDisabledReasonTextModule (ref), buttonVariant (ref), profileMenuItemFromResolvedAction (ref), eventNamesModule (ref)
 	local var5 = useDispatch()
 	local actions = useProfileJsonComponentModule(enumsModule.Components.Actions) or {}
 	local var6 = useProfileActionsModule(enumsModule.ButtonSurface.Actions)
@@ -93,29 +97,18 @@ return function(p5)
 	
 	if fFlagProfilePlatformAddCurrentlyPlayingModule then
 		reactModule.useEffect(function()
-			-- upvalues: actions (ref), enumsModule (copy), fFlagProfilePlatformPresenceStoreMigrationModule (copy), var2 (copy), p5 (ref), var5 (ref), networkingPresenceModule (copy)
-			if actions.buttons then
-				local var9
-				for i, v in actions.buttons do
-					if v.type == enumsModule.ProfileActions.JoinExperience then
-						var9 = true
-						if var9 then
-							if fFlagProfilePlatformPresenceStoreMigrationModule then
-								var2.RefreshPresenceByUserId(p5)
-								
-								return
-							end
-							var5(networkingPresenceModule.GetPresencesFromUserIds.API({ p5 }))
-						end
-					end
+			-- upvalues: actions (ref), hasJoinExperience (copy), fFlagProfilePlatformPresenceStoreMigrationModule (copy), var2 (copy), p5 (ref), var5 (ref), networkingPresenceModule (copy)
+			if actions.buttons and hasJoinExperience(actions.buttons) then
+				if fFlagProfilePlatformPresenceStoreMigrationModule then
+					var2.RefreshPresenceByUserId(p5)
+					
+					return
 				end
-				var9 = false
+				var5(networkingPresenceModule.GetPresencesFromUserIds.API({ p5 }))
 			end
 		end, { actions.buttons, var5, p5 })
 	else
-		local var10 = useEffectOnce
-		
-		local var11 = function()
+		useEffectOnce(function()
 			-- upvalues: fFlagProfilePlatformPresenceStoreMigrationModule (copy), var2 (copy), p5 (ref), var5 (ref), networkingPresenceModule (copy)
 			if fFlagProfilePlatformPresenceStoreMigrationModule then
 				var2.RefreshPresenceByUserId(p5)
@@ -123,20 +116,7 @@ return function(p5)
 				return
 			end
 			var5(networkingPresenceModule.GetPresencesFromUserIds.API({ p5 }))
-		end
-		
-		local var12 = false
-		
-		if actions.buttons ~= nil then
-			for i, v in actions.buttons do
-				if v.type == enumsModule.ProfileActions.JoinExperience then
-					var12 = true
-					var12 = var12 and (if fFlagProfilePlatformPresenceStoreMigrationModule then true else var8)
-				end
-			end
-			var12 = false
-		end
-		var10(var11, var12)
+		end, actions.buttons ~= nil and (hasJoinExperience(actions.buttons) and (if fFlagProfilePlatformPresenceStoreMigrationModule then true else var8)))
 	end
 	return reactModule.useMemo(function()
 		-- upvalues: actions (ref), var6 (ref), contextualMenuItemsFromJsonActions (copy), profileType (ref), fFlagEnableProfilePlatformDisabledActions (copy), fFlagEnableCommunityVerificationModalModule (copy), enumsModule (copy), fFlagPortEnableCommunityVerificationModalModule (copy), iconName (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (ref), navigateDown (copy), fFlagEnableProfilePlatformDisabledReasonTextModule (copy), buttonVariant (copy), profileMenuItemFromResolvedAction (copy), var7 (ref), eventNamesModule (copy)
@@ -150,7 +130,7 @@ return function(p5)
 				continue
 			end
 			local cloned = table.clone(type)
-			local var13 = contextualMenuItemsFromJsonActions(v.subActions, var6, profileType)
+			local var9 = contextualMenuItemsFromJsonActions(v.subActions, var6, profileType)
 			
 			if fFlagEnableProfilePlatformDisabledActions and v.disabledReason then
 				if fFlagEnableCommunityVerificationModalModule and v.type == enumsModule.ProfileActions.JoinCommunity and (v.disabledReason == enumsModule.DisabledReasons.InsufficientVerificationLevelLow or v.disabledReason == enumsModule.DisabledReasons.InsufficientVerificationLevelMedium or v.disabledReason == enumsModule.DisabledReasons.InsufficientVerificationLevelHigh) then
@@ -172,22 +152,22 @@ return function(p5)
 				end
 			end
 			local _ = nil
-			local var14 = if #t == 0 and not cloned.isDisabled then cloned.variant or buttonVariant.Emphasis else buttonVariant.Standard
-			local var15 = profileMenuItemFromResolvedAction(v.type, cloned, profileType)
+			local var10 = if #t == 0 and not cloned.isDisabled then cloned.variant or buttonVariant.Emphasis else buttonVariant.Standard
+			local var11 = profileMenuItemFromResolvedAction(v.type, cloned, profileType)
 			
-			if var15 then
+			if var11 then
 				table.insert(t, {
-					contextualMenuItems = var13,
-					menuItem = var15,
-					buttonStyle = var14,
+					contextualMenuItems = var9,
+					menuItem = var11,
+					buttonStyle = var10,
 					isLoading = cloned.isLoading,
 					disabledReason = cloned.disabledReason
 				})
 			end
 		end
-		local var16 = contextualMenuItemsFromJsonActions(actions.contextual, var6, profileType)
+		local var12 = contextualMenuItemsFromJsonActions(actions.contextual, var6, profileType)
 		
-		if #var16 > 0 then
+		if #var12 > 0 then
 			table.insert(t, {
 				menuItem = {
 					id = enumsModule.ProfileActions.ContextualOverflow,
@@ -197,7 +177,7 @@ return function(p5)
 						var7.fireAnalyticsEvent(eventNamesModule.ContextualMenuButton)
 					end
 				},
-				contextualMenuItems = var16,
+				contextualMenuItems = var12,
 				buttonStyle = buttonVariant.Standard
 			})
 		end

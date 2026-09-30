@@ -2,6 +2,7 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local _ = require(parent.DataHydration.CreatorAgentChat)
 local _ = require(buildExperience.Components.Analytics.StatsCard.StatsCard)
 local statsCardContainerModule = require(buildExperience.Components.Analytics.StatsCardContainer)
 local pastCampaignsListModule = require(script.Parent.PastCampaignsList)
@@ -152,7 +153,6 @@ return function(p3)
 		PromotionSheet = reactModule.createElement(createAdCampaignSheetContainerModule, {
 			waitForCreateResult = true,
 			useLocalRunDates = true,
-			freeOriginalPriceRobux = 500,
 			isOpen = p3.isPromotionSheetOpen,
 			onClose = p3.onClosePromotionSheet,
 			onCreate = p3.onCreateCampaign,
@@ -160,6 +160,7 @@ return function(p3)
 			hasCreateError = p3.hasPromotionCreateError,
 			campaignDurationDays = p3.adCampaignDurationDays,
 			estimatedPriceRobux = p3.adCampaignEstimatedPriceRobux,
+			campaignOffers = p3.adCampaignOffers,
 			runStartTimeMs = p3.adCampaignRunStartTimeMs,
 			runEndTimeMs = p3.adCampaignRunEndTimeMs
 		})

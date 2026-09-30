@@ -3,8 +3,11 @@ local parent = appChat.Parent
 local fFlagAppChatUseProfileFrameThumbnailModule = require(appChat.Flags.FFlagAppChatUseProfileFrameThumbnail)
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
+local signalsReactModule = require(parent.SignalsReact)
 local text = require(parent.AppCommonLib).Text
-local useSignalState = require(parent.SignalsReact).useSignalState
+local getTextSize = require(parent.Style).GetTextSize
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+local useSignalState = signalsReactModule.useSignalState
 local getSelectedUsersStoreModule = require(appChat.Stores.GetSelectedUsersStore)
 local useUserDataModule = require(appChat.Hooks.useUserData)
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
@@ -17,7 +20,7 @@ local function noOp() end
 local repeated = string.rep("W", 20)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useUserDataModule (ref), foundationModule (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), getSelectedUsersStoreModule (ref), useSignalState (ref), reactModule (ref), text (ref), repeated (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref), noOp (ref)
+	-- upvalues: useUserDataModule (ref), foundationModule (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), getSelectedUsersStoreModule (ref), useSignalState (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), repeated (ref), text (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref), noOp (ref)
 	local var1 = useUserDataModule(p1.userId)
 	local var2 = foundationModule.Hooks.useTokens()
 	local var3 = useIsRobloxSubscriber(if fFlagEnableBlackbirdCheck then p1.userId else nil)
@@ -28,19 +31,19 @@ return reactModule.memo(function(p1)
 		var4.toggleUserId(p1.userId)
 	end, { p1.userId })
 	local var7 = reactModule.useMemo(function()
-		-- upvalues: text (copy), repeated (copy), var2 (ref)
-		local textBounds = text.GetTextBounds(repeated, var2.Typography.TitleLarge.Font, var2.Typography.TitleLarge.FontSize, Vector2.zero)
+		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), repeated (copy), var2 (ref), text (copy)
+		local var8 = if foundationFontFaceMigration then getTextSize(repeated, var2.Typography.TitleLarge.FontSize, var2.Typography.TitleLarge.Font, Vector2.zero) else text.GetTextBounds(repeated, var2.Typography.TitleLarge.Font, var2.Typography.TitleLarge.FontSize, Vector2.zero)
 		
-		return UDim2.fromOffset(textBounds.X, textBounds.Y)
+		return UDim2.fromOffset(var8.X, var8.Y)
 	end, {
 		var2.Typography.TitleLarge.Font,
 		var2.Typography.TitleLarge.FontSize
 	})
 	local var8 = reactModule.useMemo(function()
-		-- upvalues: text (copy), var2 (ref)
-		local textBounds = text.GetTextBounds("Roblox Studio", var2.Typography.CaptionMedium.Font, var2.Typography.CaptionMedium.FontSize, Vector2.zero)
+		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), var2 (ref), text (copy)
+		local var9 = if foundationFontFaceMigration then getTextSize("Roblox Studio", var2.Typography.CaptionMedium.FontSize, var2.Typography.CaptionMedium.Font, Vector2.zero) else text.GetTextBounds("Roblox Studio", var2.Typography.CaptionMedium.Font, var2.Typography.CaptionMedium.FontSize, Vector2.zero)
 		
-		return UDim2.fromOffset(textBounds.X, textBounds.Y)
+		return UDim2.fromOffset(var9.X, var9.Y)
 	end, {
 		var2.Typography.CaptionMedium.Font,
 		var2.Typography.CaptionMedium.FontSize

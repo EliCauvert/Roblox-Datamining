@@ -6,7 +6,6 @@ local getFFlagMomentsRenderPostAssetsModule = require(parent.MomentsCommon.GetFF
 local _ = require(dataHydration.Moments.MomentsStoreTypes)
 local convertApiMomentCommentsModule = require(dataHydration.Moments.Util.convertApiMomentComments)
 local fFlagMomentsStickerOverlayNormalizationModule = require(dataHydration.Moments.FFlagMomentsStickerOverlayNormalization)
-local fFlagMomentsRequireApiFeedItemIdModule = require(dataHydration.Moments.FFlagMomentsRequireApiFeedItemId)
 local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
 local fFlagEnableMomentsCommentReporting = sharedFlagsModule.FFlagEnableMomentsCommentReporting
 local momentStatus = momentsTypesModule.Enums.MomentStatus
@@ -192,13 +191,13 @@ local _ = function(p2)
 end
 
 local function convertApiMomentToMomentItem(p3)
-	-- upvalues: fFlagMomentsRequireApiFeedItemIdModule (ref), normalizeCaptureEdits (ref), momentStatus (ref), fFlagEnableMomentsCommentReporting (ref), getFFlagMomentsRenderPostAssetsModule (ref), fFlagMomentsComments (ref), convertApiMomentCommentsModule (ref)
+	-- upvalues: normalizeCaptureEdits (ref), momentStatus (ref), fFlagEnableMomentsCommentReporting (ref), getFFlagMomentsRenderPostAssetsModule (ref), fFlagMomentsComments (ref), convertApiMomentCommentsModule (ref)
 	local captionedAssetMoment = p3.captionedAssetMoment
 	local owner = p3.owner
 	local entityId = p3.entityId or p3.id
 	local feedItemId = p3.feedItemId
 	
-	if captionedAssetMoment == nil or captionedAssetMoment.assetId == nil or (owner == nil or owner.id == nil) or entityId == nil or fFlagMomentsRequireApiFeedItemIdModule and (feedItemId == nil or feedItemId == "") then
+	if captionedAssetMoment == nil or captionedAssetMoment.assetId == nil or (owner == nil or owner.id == nil) or (entityId == nil or feedItemId == nil or feedItemId == "") then
 		return nil
 	end
 	local var8

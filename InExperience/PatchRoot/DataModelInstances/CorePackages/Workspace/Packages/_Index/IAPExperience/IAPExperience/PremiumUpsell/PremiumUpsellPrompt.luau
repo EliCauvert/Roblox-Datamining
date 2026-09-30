@@ -4,6 +4,9 @@ local parent_2 = parent_1.Parent
 local roactModule = require(parent_2.Roact)
 local fitFrameVertical = require(parent_2.RoactFitComponents).FitFrameVertical
 local UIBloxModule = require(parent_2.UIBlox)
+local foundationModule = require(parent_2.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
 local getPartialPageModalMiddleContentWidth = UIBloxModule.App.Dialog.Modal.getPartialPageModalMiddleContentWidth
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -103,9 +106,9 @@ function name.render(p1)
 end
 
 function name.renderCondensedPremiumInfo(_, b)
-	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), images (ref)
+	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), images (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	return withStyle(function(p1)
-		-- upvalues: roactModule (copy), imageSetLabel (copy), images (copy), b (ref)
+		-- upvalues: roactModule (copy), imageSetLabel (copy), images (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), b (ref)
 		local theme = p1.Theme
 		local font = p1.Font
 		
@@ -159,7 +162,8 @@ function name.renderCondensedPremiumInfo(_, b)
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Font = font.Header2.Font,
+					Font = if foundationFontFaceMigration then nil else font.Header2.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p1.Tokens.Typography.TitleLarge.Font) else nil,
 					Text = b.headerLocalizedText,
 					TextSize = font.BaseSize * font.Header2.RelativeSize,
 					TextColor3 = theme.TextEmphasis.Color,
@@ -173,7 +177,8 @@ function name.renderCondensedPremiumInfo(_, b)
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Font = font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p1.Tokens.Typography.BodyLarge.Font) else nil,
 					Text = b.priceLocalizedText,
 					TextSize = font.BaseSize,
 					TextColor3 = theme.TextEmphasis.Color,
@@ -186,7 +191,8 @@ function name.renderCondensedPremiumInfo(_, b)
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Font = font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p1.Tokens.Typography.BodyLarge.Font) else nil,
 					Text = b.policyLocalizedText,
 					TextSize = font.BaseSize,
 					TextColor3 = theme.TextDefault.Color,
@@ -198,9 +204,9 @@ function name.renderCondensedPremiumInfo(_, b)
 end
 
 function name.renderBulletInfo(p1, p2)
-	-- upvalues: withStyle (ref), getPartialPageModalMiddleContentWidth (ref), roactModule (ref), fitFrameVertical (ref), bulletPointModule (ref)
+	-- upvalues: withStyle (ref), getPartialPageModalMiddleContentWidth (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), fitFrameVertical (ref), bulletPointModule (ref)
 	return withStyle(function(p3)
-		-- upvalues: getPartialPageModalMiddleContentWidth (copy), p1 (ref), roactModule (copy), p2 (ref), fitFrameVertical (copy), bulletPointModule (copy)
+		-- upvalues: getPartialPageModalMiddleContentWidth (copy), p1 (ref), roactModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), p2 (ref), fitFrameVertical (copy), bulletPointModule (copy)
 		local theme = p3.Theme
 		local font = p3.Font
 		local var1 = getPartialPageModalMiddleContentWidth(p1.props.screenSize.X)
@@ -223,7 +229,8 @@ function name.renderBulletInfo(p1, p2)
 				Size = UDim2.new(0, var1, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Font = font.Body.Font,
+				Font = if foundationFontFaceMigration then nil else font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 				Text = p2.descLocalizedText,
 				TextSize = font.BaseSize * font.Body.RelativeSize,
 				TextColor3 = theme.TextDefault.Color,
@@ -256,9 +263,9 @@ function name.renderBulletInfo(p1, p2)
 end
 
 function name.renderDisclosure(_, p1)
-	-- upvalues: withStyle (ref), roactModule (ref)
+	-- upvalues: withStyle (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	return withStyle(function(p2)
-		-- upvalues: roactModule (copy), p1 (ref)
+		-- upvalues: roactModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), p1 (ref)
 		local theme = p2.Theme
 		local font = p2.Font
 		
@@ -276,7 +283,8 @@ function name.renderDisclosure(_, p1)
 				TextWrapped = true,
 				AutomaticSize = Enum.AutomaticSize.XY,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Font = font.Body.Font,
+				Font = if foundationFontFaceMigration then nil else font.Body.Font,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
 				Text = p1.shortDisclosure,
 				TextSize = font.BaseSize * font.Body.RelativeSize,
 				TextColor3 = theme.TextDefault.Color,
@@ -377,11 +385,11 @@ function name.renderPortraitPrompt(p1, p2)
 end
 
 function name.renderUpdatedPrompt(p1, p2)
-	-- upvalues: withStyle (ref), getPartialPageModalMiddleContentWidth (ref), roactModule (ref), partialPageModal (ref), buttonType (ref), fitFrameVertical (ref), imageSetLabel (ref), images (ref), bulletPointModule (ref)
+	-- upvalues: withStyle (ref), getPartialPageModalMiddleContentWidth (ref), roactModule (ref), partialPageModal (ref), buttonType (ref), fitFrameVertical (ref), imageSetLabel (ref), images (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), bulletPointModule (ref)
 	local props = p1.props
 	
 	return withStyle(function(p3)
-		-- upvalues: getPartialPageModalMiddleContentWidth (copy), p1 (ref), roactModule (copy), partialPageModal (copy), p2 (ref), props (ref), buttonType (copy), fitFrameVertical (copy), imageSetLabel (copy), images (copy), bulletPointModule (copy)
+		-- upvalues: getPartialPageModalMiddleContentWidth (copy), p1 (ref), roactModule (copy), partialPageModal (copy), p2 (ref), props (ref), buttonType (copy), fitFrameVertical (copy), imageSetLabel (copy), images (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), bulletPointModule (copy)
 		local theme = p3.Theme
 		local font = p3.Font
 		local var1 = getPartialPageModalMiddleContentWidth(p1.props.screenSize.X)
@@ -442,7 +450,8 @@ function name.renderUpdatedPrompt(p1, p2)
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						TextXAlignment = Enum.TextXAlignment.Center,
-						Font = font.Header2.Font,
+						Font = if foundationFontFaceMigration then nil else font.Header2.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.TitleLarge.Font) else nil,
 						Text = p2.headerLocalizedText,
 						TextSize = font.BaseSize * font.Header2.RelativeSize,
 						TextColor3 = theme.TextEmphasis.Color,
@@ -455,7 +464,8 @@ function name.renderUpdatedPrompt(p1, p2)
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						TextXAlignment = Enum.TextXAlignment.Center,
-						Font = font.Body.Font,
+						Font = if foundationFontFaceMigration then nil else font.Body.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 						Text = p2.priceLocalizedText,
 						TextSize = font.BaseSize,
 						TextColor3 = theme.TextEmphasis.Color,
@@ -467,7 +477,8 @@ function name.renderUpdatedPrompt(p1, p2)
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						TextXAlignment = Enum.TextXAlignment.Center,
-						Font = font.Body.Font,
+						Font = if foundationFontFaceMigration then nil else font.Body.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 						Text = p2.policyLocalizedText,
 						TextSize = font.BaseSize,
 						TextColor3 = theme.TextDefault.Color,
@@ -480,7 +491,8 @@ function name.renderUpdatedPrompt(p1, p2)
 					Size = UDim2.new(0, var1, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Font = font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 					Text = p2.descLocalizedText,
 					TextSize = font.BaseSize * font.Body.RelativeSize,
 					TextColor3 = theme.TextDefault.Color,

@@ -2,28 +2,30 @@
 local reactModule = require(virtualEvents.Parent.React)
 local foundationModule = require(virtualEvents.Parent.Foundation)
 local text = require(virtualEvents.Parent.AppCommonLib).Text
+local getTextSize = require(virtualEvents.Parent.Style).GetTextSize
 local useAnimationModule = require(virtualEvents.Hooks.useAnimation)
 local text_1 = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), text (ref), useAnimationModule (ref), text_1 (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), useAnimationModule (ref), text_1 (ref)
 	local var1 = useTokens()
 	local bodyLarge = var1.Typography.BodyLarge
 	local var2, var3 = reactModule.useState(0)
 	
-	local function _(p2, p3)
-		-- upvalues: text (copy), bodyLarge (ref), var3 (ref)
-		var3(text.GetTextHeight(p3, bodyLarge.Font, bodyLarge.FontSize, p2))
+	local function updateDescriptionHeight(p2, p3)
+		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), bodyLarge (ref), text (copy), var3 (ref)
+		var3(if foundationFontFaceMigration then getTextSize(p3, bodyLarge.FontSize, bodyLarge.Font, Vector2.new(p2, 1e999)).Y else text.GetTextHeight(p3, bodyLarge.Font, bodyLarge.FontSize, p2))
 	end
 	
 	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), text (copy), bodyLarge (ref), var3 (ref)
-		var3(text.GetTextHeight(p1.description, bodyLarge.Font, bodyLarge.FontSize, p2.AbsoluteSize.X))
+		-- upvalues: updateDescriptionHeight (ref), p1 (ref)
+		updateDescriptionHeight(p2.AbsoluteSize.X, p1.description)
 	end, { p1.description })
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), text (copy), bodyLarge (ref), var3 (ref)
-		var3(text.GetTextHeight(p1.description, bodyLarge.Font, bodyLarge.FontSize, p1.width))
+		-- upvalues: updateDescriptionHeight (ref), p1 (ref)
+		updateDescriptionHeight(p1.width, p1.description)
 	end, { p1.description, p1.width })
 	local var5 = p1.isExpanded and math.min(var2, p1.maxHeight) or math.min(var2, 40)
 	local var6, var7 = reactModule.useState(var5)

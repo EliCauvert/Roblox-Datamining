@@ -5,6 +5,9 @@ local roactModule = require(parent_2.Roact)
 local fitFrameVertical = require(parent_2.RoactFitComponents).FitFrameVertical
 local colors = require(parent_2.Style).Colors
 local UIBloxModule = require(parent_2.UIBlox)
+local foundationModule = require(parent_2.Foundation)
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local withStyle = UIBloxModule.Core.Style.withStyle
@@ -117,12 +120,12 @@ function name.render(p1)
 end
 
 function name.renderAlert(p1, p2)
-	-- upvalues: withStyle (ref), getEnableCondenseRobuxUpsellModule (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), constantsModule (ref), productDetailsModule (ref), buttonType (ref)
+	-- upvalues: withStyle (ref), getEnableCondenseRobuxUpsellModule (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), constantsModule (ref), productDetailsModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), buttonType (ref)
 	local props = p1.props
 	local state = p1.state
 	
 	return withStyle(function(p3)
-		-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), p2 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p1 (ref), productDetailsModule (copy), buttonType (copy)
+		-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), p2 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p1 (ref), productDetailsModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), buttonType (copy)
 		local theme = p3.Theme
 		local font = p3.Font
 		local var1 = font.BaseSize * font.Body.RelativeSize
@@ -144,7 +147,7 @@ function name.renderAlert(p1, p2)
 			anchorPoint = props.anchorPoint,
 			title = p2.InsufficientRobuxTitle,
 			middleContent = function()
-				-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p1 (copy), productDetailsModule (copy), props (copy), theme (ref), font (ref), var2 (ref), var3 (ref), var1 (write), p2 (copy), parts (ref), termsOfUse (write)
+				-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p1 (copy), productDetailsModule (copy), props (copy), theme (ref), foundationFontFaceMigration (copy), font (ref), normalizeFontFace (copy), p3 (ref), var2 (ref), var3 (ref), var1 (write), p2 (copy), parts (ref), termsOfUse (write)
 				return roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,
 					width = UDim.new(1, 0),
@@ -178,8 +181,9 @@ function name.renderAlert(p1, p2)
 						TextWrapped = true,
 						Size = UDim2.new(0, p1.state.contentSize.X, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
-						Font = font.Body.Font,
-						Text = if p1.props.isQuest then var2 else var2 .. " " .. var19,
+						Font = if foundationFontFaceMigration then nil else font.Body.Font,
+						FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
+						Text = if p1.props.isQuest then var2 else var2 .. " " .. var20,
 						TextSize = var1,
 						TextColor3 = theme.TextDefault.Color,
 						TextTransparency = theme.TextDefault.Transparency
@@ -205,7 +209,8 @@ function name.renderAlert(p1, p2)
 							BackgroundTransparency = 1,
 							TextWrapped = true,
 							AutomaticSize = Enum.AutomaticSize.XY,
-							Font = font.Body.Font,
+							Font = if foundationFontFaceMigration then nil else font.Body.Font,
+							FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 							Text = if p1.props.isQuest then p2.PurchaseNotAvailableOnHeadSet else p2.DisclosurePayment,
 							TextSize = var1,
 							TextColor3 = theme.TextDefault.Color,
@@ -224,7 +229,8 @@ function name.renderAlert(p1, p2)
 								LayoutOrder = 0,
 								BackgroundTransparency = 1,
 								AutomaticSize = Enum.AutomaticSize.XY,
-								Font = font.Body.Font,
+								Font = if foundationFontFaceMigration then nil else font.Body.Font,
+								FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 								Text = parts[1],
 								TextSize = var1,
 								TextColor3 = theme.TextDefault.Color,
@@ -235,7 +241,8 @@ function name.renderAlert(p1, p2)
 								BackgroundTransparency = 1,
 								RichText = true,
 								AutomaticSize = Enum.AutomaticSize.XY,
-								Font = font.Body.Font,
+								Font = if foundationFontFaceMigration then nil else font.Body.Font,
+								FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 								Text = termsOfUse,
 								TextSize = var1,
 								TextColor3 = theme.TextDefault.Color,
@@ -247,7 +254,8 @@ function name.renderAlert(p1, p2)
 								LayoutOrder = 2,
 								BackgroundTransparency = 1,
 								AutomaticSize = Enum.AutomaticSize.XY,
-								Font = font.Body.Font,
+								Font = if foundationFontFaceMigration then nil else font.Body.Font,
+								FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 								Text = parts[2],
 								TextSize = var1,
 								TextColor3 = theme.TextDefault.Color,
@@ -298,7 +306,7 @@ function name.renderAlert(p1, p2)
 end
 
 function name.renderAlertNewProductDetails(p1, _)
-	-- upvalues: withLocalization (ref), withStyle (ref), getEnableCondenseRobuxUpsellModule (ref), constantsModule (ref), roactModule (ref), productDetailsNewModule (ref), productDetailsModule (ref), interactiveAlert (ref), fitFrameVertical (ref), buttonType (ref)
+	-- upvalues: withLocalization (ref), withStyle (ref), getEnableCondenseRobuxUpsellModule (ref), constantsModule (ref), roactModule (ref), productDetailsNewModule (ref), productDetailsModule (ref), interactiveAlert (ref), fitFrameVertical (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), buttonType (ref)
 	local props = p1.props
 	local state = p1.state
 	
@@ -316,9 +324,9 @@ function name.renderAlertNewProductDetails(p1, _)
 		BadgeText = "IAPExperience.RobuxUpsell.Text.PopularItem",
 		DisclosureTermsURL = if p1.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTermsURL" else "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL"
 	})(function(p2)
-		-- upvalues: withStyle (copy), getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), constantsModule (copy), roactModule (copy), productDetailsNewModule (copy), productDetailsModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p1 (ref), buttonType (copy)
+		-- upvalues: withStyle (copy), getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), constantsModule (copy), roactModule (copy), productDetailsNewModule (copy), productDetailsModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p1 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), buttonType (copy)
 		return withStyle(function(p3)
-			-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (copy), props (copy), p2 (ref), constantsModule (copy), roactModule (copy), productDetailsNewModule (copy), productDetailsModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p1 (copy), buttonType (copy)
+			-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (copy), props (copy), p2 (ref), constantsModule (copy), roactModule (copy), productDetailsNewModule (copy), productDetailsModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p1 (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), buttonType (copy)
 			local theme = p3.Theme
 			local font = p3.Font
 			local var1 = font.BaseSize * font.Body.RelativeSize
@@ -373,7 +381,7 @@ function name.renderAlertNewProductDetails(p1, _)
 					anchorPoint = props.anchorPoint,
 					title = p2.NeedMoreRobux,
 					middleContent = function()
-						-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p1 (copy), var10 (write), theme (ref), font (ref), var2 (ref), var3 (ref), var1 (write), p2 (copy), parts (ref), termsOfUse (write), props (copy)
+						-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p1 (copy), var10 (write), theme (ref), foundationFontFaceMigration (copy), font (ref), normalizeFontFace (copy), p3 (ref), var2 (ref), var3 (ref), var1 (write), p2 (copy), parts (ref), termsOfUse (write), props (copy)
 						return roactModule.createElement(fitFrameVertical, {
 							BackgroundTransparency = 1,
 							width = UDim.new(1, 0),
@@ -404,8 +412,9 @@ function name.renderAlertNewProductDetails(p1, _)
 								TextWrapped = true,
 								Size = UDim2.new(0, p1.state.contentSize.X, 0, 0),
 								AutomaticSize = Enum.AutomaticSize.Y,
-								Font = font.Body.Font,
-								Text = if p1.props.isQuest then var2 else var2 .. " " .. var23,
+								Font = if foundationFontFaceMigration then nil else font.Body.Font,
+								FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
+								Text = if p1.props.isQuest then var2 else var2 .. " " .. var24,
 								TextSize = var1,
 								TextColor3 = theme.TextDefault.Color,
 								TextTransparency = theme.TextDefault.Transparency
@@ -431,7 +440,8 @@ function name.renderAlertNewProductDetails(p1, _)
 									BackgroundTransparency = 1,
 									TextWrapped = true,
 									AutomaticSize = Enum.AutomaticSize.XY,
-									Font = font.Body.Font,
+									Font = if foundationFontFaceMigration then nil else font.Body.Font,
+									FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 									Text = if p1.props.isQuest then p2.PurchaseNotAvailableOnHeadSet else p2.DisclosurePayment,
 									TextSize = var1,
 									TextColor3 = theme.TextDefault.Color,
@@ -450,7 +460,8 @@ function name.renderAlertNewProductDetails(p1, _)
 										LayoutOrder = 0,
 										BackgroundTransparency = 1,
 										AutomaticSize = Enum.AutomaticSize.XY,
-										Font = font.Body.Font,
+										Font = if foundationFontFaceMigration then nil else font.Body.Font,
+										FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 										Text = parts[1],
 										TextSize = var1,
 										TextColor3 = theme.TextDefault.Color,
@@ -461,7 +472,8 @@ function name.renderAlertNewProductDetails(p1, _)
 										BackgroundTransparency = 1,
 										RichText = true,
 										AutomaticSize = Enum.AutomaticSize.XY,
-										Font = font.Body.Font,
+										Font = if foundationFontFaceMigration then nil else font.Body.Font,
+										FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 										Text = termsOfUse,
 										TextSize = var1,
 										TextColor3 = theme.TextDefault.Color,
@@ -473,7 +485,8 @@ function name.renderAlertNewProductDetails(p1, _)
 										LayoutOrder = 2,
 										BackgroundTransparency = 1,
 										AutomaticSize = Enum.AutomaticSize.XY,
-										Font = font.Body.Font,
+										Font = if foundationFontFaceMigration then nil else font.Body.Font,
+										FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 										Text = parts[2],
 										TextSize = var1,
 										TextColor3 = theme.TextDefault.Color,
@@ -526,7 +539,7 @@ function name.renderAlertNewProductDetails(p1, _)
 end
 
 function name.renderNewAlert(p1)
-	-- upvalues: withLocalization (ref), withStyle (ref), getEnableCondenseRobuxUpsellModule (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), constantsModule (ref), productDetailsModule (ref), buttonType (ref)
+	-- upvalues: withLocalization (ref), withStyle (ref), getEnableCondenseRobuxUpsellModule (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), constantsModule (ref), productDetailsModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), buttonType (ref)
 	local props = p1.props
 	local state = p1.state
 	
@@ -545,9 +558,9 @@ function name.renderNewAlert(p1)
 		BonusBannerInfo = "IAPExperience.RobuxUpsell.Text.BonusBannerInfo",
 		DisclosureTermsURL = if p1.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTermsURL" else "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL"
 	})(function(p2)
-		-- upvalues: withStyle (copy), getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p1 (ref), productDetailsModule (copy), buttonType (copy)
+		-- upvalues: withStyle (copy), getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p1 (ref), productDetailsModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), buttonType (copy)
 		return withStyle(function(p3)
-			-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (copy), props (copy), p2 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p1 (copy), productDetailsModule (copy), buttonType (copy)
+			-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (copy), props (copy), p2 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p1 (copy), productDetailsModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), buttonType (copy)
 			local theme = p3.Theme
 			local font = p3.Font
 			local var1 = font.BaseSize * font.Body.RelativeSize
@@ -576,7 +589,7 @@ function name.renderNewAlert(p1)
 				anchorPoint = props.anchorPoint,
 				title = p2.NeedMoreRobux,
 				middleContent = function()
-					-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p1 (copy), productDetailsModule (copy), props (copy), theme (ref), font (ref), var3 (ref), var4 (write), var1 (write), p2 (copy), var2 (ref), parts (ref), termsOfUse (write)
+					-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p1 (copy), productDetailsModule (copy), props (copy), theme (ref), foundationFontFaceMigration (copy), font (ref), normalizeFontFace (copy), p3 (ref), var3 (ref), var4 (write), var1 (write), p2 (copy), var2 (ref), parts (ref), termsOfUse (write)
 					return roactModule.createElement(fitFrameVertical, {
 						BackgroundTransparency = 1,
 						BackgroundColor3 = Color3.fromRGB(0, 255, 0),
@@ -611,8 +624,9 @@ function name.renderNewAlert(p1)
 							TextWrapped = true,
 							Size = UDim2.new(0, p1.state.contentSize.X, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y,
-							Font = font.Body.Font,
-							Text = if p1.props.isQuest then var3 else var3 .. " " .. var37,
+							Font = if foundationFontFaceMigration then nil else font.Body.Font,
+							FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
+							Text = if p1.props.isQuest then var3 else var3 .. " " .. var38,
 							TextSize = var1,
 							TextColor3 = theme.TextDefault.Color,
 							TextTransparency = theme.TextDefault.Transparency
@@ -638,7 +652,8 @@ function name.renderNewAlert(p1)
 								BackgroundTransparency = 1,
 								TextWrapped = true,
 								AutomaticSize = Enum.AutomaticSize.XY,
-								Font = font.Body.Font,
+								Font = if foundationFontFaceMigration then nil else font.Body.Font,
+								FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 								Text = if p1.props.isQuest then p2.PurchaseNotAvailableOnHeadSet else p2.DisclosurePayment,
 								TextSize = var2,
 								TextColor3 = theme.TextDefault.Color,
@@ -657,7 +672,8 @@ function name.renderNewAlert(p1)
 									LayoutOrder = 0,
 									BackgroundTransparency = 1,
 									AutomaticSize = Enum.AutomaticSize.XY,
-									Font = font.Body.Font,
+									Font = if foundationFontFaceMigration then nil else font.Body.Font,
+									FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 									Text = parts[1],
 									TextSize = var2,
 									TextColor3 = theme.TextDefault.Color,
@@ -668,7 +684,8 @@ function name.renderNewAlert(p1)
 									BackgroundTransparency = 1,
 									RichText = true,
 									AutomaticSize = Enum.AutomaticSize.XY,
-									Font = font.Body.Font,
+									Font = if foundationFontFaceMigration then nil else font.Body.Font,
+									FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 									Text = termsOfUse,
 									TextSize = var2,
 									TextColor3 = theme.TextDefault.Color,
@@ -680,7 +697,8 @@ function name.renderNewAlert(p1)
 									LayoutOrder = 2,
 									BackgroundTransparency = 1,
 									AutomaticSize = Enum.AutomaticSize.XY,
-									Font = font.Body.Font,
+									Font = if foundationFontFaceMigration then nil else font.Body.Font,
+									FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
 									Text = parts[2],
 									TextSize = var2,
 									TextColor3 = theme.TextDefault.Color,
@@ -736,7 +754,7 @@ function name.renderNewAlert(p1)
 end
 
 function name.renderFooterExperiment(p1, p2, p3, p4)
-	-- upvalues: colors (ref), roactModule (ref), fitFrameVertical (ref), fFlagLowCogsBannerInfoIconModule (ref), infoIconWithTooltipModule (ref)
+	-- upvalues: colors (ref), roactModule (ref), fitFrameVertical (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), fFlagLowCogsBannerInfoIconModule (ref), infoIconWithTooltipModule (ref)
 	local font = p2.Font
 	local flint = colors.Flint
 	
@@ -772,7 +790,8 @@ function name.renderFooterExperiment(p1, p2, p3, p4)
 					RichText = true,
 					TextWrapped = true,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Font = font.Footer.Font,
+					Font = if foundationFontFaceMigration then nil else font.Footer.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.CaptionSmall.Font) else nil,
 					Text = p3,
 					TextSize = font.BaseSize * font.Footer.RelativeSize,
 					TextColor3 = flint

@@ -3,6 +3,9 @@ local friendsChat = script:FindFirstAncestor("FriendsChat")
 local parent = friendsChat.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
+local getTextBoundsAsync = foundationModule.Utility.getTextBoundsAsync
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local getMessageTextSize = require(parent.ChatUIPrimitives).Utils.getMessageTextSize
@@ -19,11 +22,11 @@ local _ = function(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), getMessageTextSize (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), fFlagFriendsChatMessageSendPerfTrackingModule (ref), useFinishChatWindowMessageRenderIntervals (ref), textService (ref)
+	-- upvalues: foundationModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), getMessageTextSize (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), fFlagFriendsChatMessageSendPerfTrackingModule (ref), useFinishChatWindowMessageRenderIntervals (ref), getTextBoundsAsync (ref), textService (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local chatWindowSettings = p1.chatWindowSettings
 	local var2 = (if chatWindowSettings then chatWindowSettings.FontFace else nil) or var1.Typography.BodySmall.Font
-	local var3 = if typeof(var2) == "Font" then var2 else Font.fromEnum(var2)
+	local var3 = if foundationFontFaceMigration then normalizeFontFace(var2) elseif typeof(var2) == "Font" then var2 else Font.fromEnum(var2)
 	local font = Font.new(var3.Family, Enum.FontWeight.SemiBold, var3.Style)
 	local var4 = getMessageTextSize(chatWindowSettings, p1.isSpatialUIEnabled) or var1.Typography.BodySmall.FontSize
 	local maxValue = math.max(1, var4 - 2)
@@ -78,24 +81,35 @@ return reactModule.memo(function(p1)
 		var16(var14)
 	end, { var14 })
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var4 (ref), textService (copy), var16 (ref)
+		-- upvalues: foundationFontFaceMigration (copy), getTextBoundsAsync (copy), var3 (ref), var4 (ref), var16 (ref), textService (copy)
 		local var17 = false
 		task.spawn(function()
-			-- upvalues: var3 (copy), var4 (copy), textService (copy), var17 (write), var16 (copy)
-			local getTextBoundsParams = Instance.new("GetTextBoundsParams")
-			getTextBoundsParams.Text = "          "
-			getTextBoundsParams.Font = var3
-			getTextBoundsParams.Size = var4
-			getTextBoundsParams.Width = 1e999
-			local ok, status = pcall(function()
-				-- upvalues: textService (copy), getTextBoundsParams (ref)
-				return textService:GetTextBoundsAsync(getTextBoundsParams)
-			end)
-			
-			if var17 or not ok or status == nil then
+			-- upvalues: foundationFontFaceMigration (copy), getTextBoundsAsync (copy), var3 (copy), var4 (copy), var17 (write), var16 (copy), textService (copy)
+			if foundationFontFaceMigration then
+				local var18 = getTextBoundsAsync("          ", var3, var4)
+				
+				if var17 or var18 == nil then
+					return
+				end
+				var16(UDim2.fromOffset(var18.X, var18.Y))
+				
 				return
+			else
+				local getTextBoundsParams = Instance.new("GetTextBoundsParams")
+				getTextBoundsParams.Text = "          "
+				getTextBoundsParams.Font = var3
+				getTextBoundsParams.Size = var4
+				getTextBoundsParams.Width = 1e999
+				local ok, status = pcall(function()
+					-- upvalues: textService (copy), getTextBoundsParams (ref)
+					return textService:GetTextBoundsAsync(getTextBoundsParams)
+				end)
+				
+				if var17 or not ok or status == nil then
+					return
+				end
+				var16(UDim2.fromOffset(status.X, status.Y))
 			end
-			var16(UDim2.fromOffset(status.X, status.Y))
 		end)
 		
 		return function()

@@ -1,6 +1,7 @@
 ﻿local typesModule = require(script.types)
 
 return {
+	FFlagBuildAgentAdCampaignCard = require(script.FFlagBuildAgentAdCampaignCard),
 	getCreatorAgentChatStore = require(script.getCreatorAgentChatStore),
 	createCreatorAgentChatStore = require(script.createCreatorAgentChatStore),
 	createMockStore = require(script.createMockStore),
@@ -16,6 +17,8 @@ return {
 	StudioClientDataModelTools = require(script.StudioClientDataModelTools),
 	StudioManageDevProductTool = require(script.StudioManageDevProductTool),
 	ClientToolItems = require(script.ClientToolItems),
+	decodeAdCampaignEligibilityResult = require(script.decodeAdCampaignEligibilityResult),
+	classifyAdCampaignFailure = require(script.classifyAdCampaignFailure),
 	debug = require(script.debug),
 	experimentOverride = require(script.experimentOverride),
 	ErrorCodes = require(script.Acp.AcpProtocol).ErrorCodes,

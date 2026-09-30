@@ -1,12 +1,16 @@
 ﻿local parent = script:FindFirstAncestor("VirtualEvents").Parent
 local reactModule = require(parent.React)
+local styleModule = require(parent.Style)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useDesignTokens = require(parent.Style).useDesignTokens
-local useTokens = require(parent.Foundation).Hooks.useTokens
+local foundationModule = require(parent.Foundation)
+local useDesignTokens = styleModule.useDesignTokens
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local footerCornerButtonStyle = require(parent.GameTile).FooterCornerButtonStyle
 
 return function(p1)
-	-- upvalues: useDesignTokens (ref), useTokens (ref), useLocalization (ref), footerCornerButtonStyle (ref), reactModule (ref)
+	-- upvalues: useDesignTokens (ref), useTokens (ref), useLocalization (ref), footerCornerButtonStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = useDesignTokens()
 	local var2 = useTokens()
 	local var3 = useLocalization({
@@ -34,7 +38,8 @@ return function(p1)
 		Position = UDim2.new(0, 0, 1, 0),
 		AnchorPoint = Vector2.new(0, 1),
 		TextSize = var1.Size.Size_350,
-		Font = var1.Typography.HeadingSmall.Font,
+		Font = if foundationFontFaceMigration then nil else var1.Typography.HeadingSmall.Font,
+		FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.HeadingSmall.Font) else nil,
 		BackgroundColor3 = color3,
 		TextColor3 = color3_1,
 		AutoButtonColor = false,

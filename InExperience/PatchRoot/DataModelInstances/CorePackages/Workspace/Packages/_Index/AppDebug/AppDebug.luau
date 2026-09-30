@@ -13,7 +13,7 @@ return {
 	LogTree = require(script.LogTree),
 	register = function()
 		-- upvalues: devOnly (ref), var1 (ref), var2 (write), var3 (write)
-		if _G.IS_PRODUCTION or devOnly == nil then
+		if _G.ENVIRONMENT == "PRODUCTION" or devOnly == nil then
 			return var1
 		elseif var2 then
 			return var3 or var1

@@ -3,6 +3,7 @@ local guiService = game:GetService("GuiService")
 local switchServer = script:FindFirstAncestor("SwitchServer")
 local parent = switchServer.Parent
 local runService = game:GetService("RunService")
+local teleportService = game:GetService("TeleportService")
 local foundationModule = require(parent.Foundation)
 local localizationModule = require(parent.Localization)
 local reactModule = require(parent.React)
@@ -24,28 +25,34 @@ local t = {
 local launchGame = require(parent.GameLaunch).LaunchGame
 local default = require(parent.ExperienceService).GameProtocol.default
 local switchServerTelemetryModule = require(switchServer.Telemetry.SwitchServerTelemetry)
+local fFlagUseTeleportForLuaSwitchServerImplModule = require(switchServer.Flags.FFlagUseTeleportForLuaSwitchServerImpl)
+
+local function _()
+	-- upvalues: guiService (ref), runService (ref)
+	guiService.SelectedCoreObject = nil
+	runService.RenderStepped:Wait()
+	runService.RenderStepped:Wait()
+	game:Shutdown()
+end
 
 local function SwitchServerConfirmationDialog(p1)
-	-- upvalues: useLocalization (ref), constantsModule (ref), guiService (ref), runService (ref), reactModule (ref), switchServerTelemetryModule (ref), launchGame (ref), default (ref), contextActionService (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), dialog (ref), dialogSize (ref), orientation (ref), buttonVariant (ref)
+	-- upvalues: useLocalization (ref), constantsModule (ref), reactModule (ref), switchServerTelemetryModule (ref), fFlagUseTeleportForLuaSwitchServerImplModule (ref), teleportService (ref), launchGame (ref), default (ref), guiService (ref), runService (ref), contextActionService (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), dialog (ref), dialogSize (ref), orientation (ref), buttonVariant (ref)
 	local var1 = useLocalization({
 		title = constantsModule.CONFIRMATION.TITLE,
 		body = constantsModule.CONFIRMATION.BODY,
 		confirm = constantsModule.CONFIRMATION.CONFIRM,
 		cancel = constantsModule.CONFIRMATION.CANCEL
 	})
-	
-	local _ = function()
-		-- upvalues: guiService (copy), runService (copy)
-		guiService.SelectedCoreObject = nil
-		runService.RenderStepped:Wait()
-		runService.RenderStepped:Wait()
-		game:Shutdown()
-	end
-	
 	local var2 = reactModule.useCallback(function()
-		-- upvalues: switchServerTelemetryModule (copy), p1 (ref), launchGame (copy), constantsModule (copy), default (copy), guiService (copy), runService (copy)
+		-- upvalues: switchServerTelemetryModule (copy), p1 (ref), fFlagUseTeleportForLuaSwitchServerImplModule (copy), teleportService (copy), launchGame (copy), constantsModule (copy), default (copy), guiService (copy), runService (copy)
 		switchServerTelemetryModule.sendSwitchServerConfirmationActions({ event_type = "confirm" })
 		p1.setSwitchServerConfirmationOpen(false)
+		
+		if fFlagUseTeleportForLuaSwitchServerImplModule and game:GetEngineFeature("SwitchServerAvailable") then
+			teleportService:TeleportSwitchServer()
+			
+			return
+		end
 		launchGame(tostring(game.PlaceId), constantsModule.REFERRAL_PAGE, { gameIdToExclude = tostring(game.JobId) }, default, constantsModule.SOURCE)
 		guiService.SelectedCoreObject = nil
 		runService.RenderStepped:Wait()

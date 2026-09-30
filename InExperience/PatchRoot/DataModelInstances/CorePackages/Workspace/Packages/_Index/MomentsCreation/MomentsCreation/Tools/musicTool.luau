@@ -7,6 +7,8 @@ local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local createEditSessionModule = require(momentsCreation.Stores.createEditSession)
 local musicOverlayModule = require(momentsCreation.Components.MusicOverlay)
+local musicPickerV2ContainerModule = require(momentsCreation.Components.MusicPickerV2Container)
+local fFlagMomentsCreationMusicPickerV2Module = require(momentsCreation.Flags.FFlagMomentsCreationMusicPickerV2)
 local eventNames = momentsCommonModule.Analytics.EventNames
 
 return {
@@ -28,8 +30,8 @@ return {
 		return createEditSessionModule()
 	end,
 	renderEditor = function(p1)
-		-- upvalues: reactModule (ref), musicOverlayModule (ref)
-		return reactModule.createElement(musicOverlayModule, { controller = p1 })
+		-- upvalues: fFlagMomentsCreationMusicPickerV2Module (ref), reactModule (ref), musicPickerV2ContainerModule (ref), musicOverlayModule (ref)
+		return if fFlagMomentsCreationMusicPickerV2Module then reactModule.createElement(musicPickerV2ContainerModule, { controller = p1 }) else reactModule.createElement(musicOverlayModule, { controller = p1 })
 	end,
 	toEdits = function(p1)
 		return { music = p1 }

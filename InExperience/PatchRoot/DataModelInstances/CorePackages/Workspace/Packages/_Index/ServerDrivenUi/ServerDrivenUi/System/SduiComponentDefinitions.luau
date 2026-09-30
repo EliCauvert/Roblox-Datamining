@@ -37,7 +37,6 @@ local getLuaTableEnumParser = sduiParsers.getLuaTableEnumParser
 local sduiBadgeComponent = game:DefineFastFlag("SduiBadgeComponent", false)
 local fFlagSduiTileDisableLegacyHover = require(serverDrivenUi.Flags).FFlagSduiTileDisableLegacyHover
 local fFlagSduiEnableHeroUnitBottomRow = require(serverDrivenUi.Flags).FFlagSduiEnableHeroUnitBottomRow
-local fFlagSduiEnableAssociatedItemsRow = require(parent.SharedFlags).FFlagSduiEnableAssociatedItemsRow
 local fFlagSduiAttributionRowV2 = require(parent.SharedFlags).FFlagSduiAttributionRowV2
 local fFlagSduiExperienceDetailsSocialProof = require(parent.SharedFlags).FFlagSduiExperienceDetailsSocialProof
 local fFlagSduiChipAccessoryProps = require(parent.SharedFlags).FFlagSduiChipAccessoryProps
@@ -53,7 +52,7 @@ local t_1 = {}
 t_1.__index = t_1
 
 function t_1.new()
-	-- upvalues: parseVector2Prop (ref), getEngineEnumParser (ref), parseColor3Prop (ref), parseNumberProp (ref), parseIntegerProp (ref), parseUDim2Prop (ref), cryoModule (ref), parseBooleanProp (ref), parseStringProp (ref), sduiComponentType (ref), parent (ref), fFlagSduiAttributionRowV2 (ref), parseCallbackProp (ref), parseUiComponentProp (ref), parseTypographyTokenProp (ref), parseColorTokenProp (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseImageStringProp (ref), tModule (ref), parseIconProp (ref), parseUDimProp (ref), serverDrivenUi (ref), collectionItemSize (ref), itemHeightModeModule (ref), fFlagSduiCollectionCarouselOverrides (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), getArrayMetatableParser (ref), parseLazyUiComponentProp (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiOptionSelectorCollection (ref), fFlagSduiCollectionGridRevealRows (ref), parseFocusNavActionsProp (ref), reactModule (ref), parseGradientProp (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), parseImageSetOrImageProp (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiGameTileDirectAction (ref), fFlagSduiEnableHeroUnitBottomRow (ref), fFlagSduiChipAccessoryProps (ref), fFlagSduiEnableAssociatedItemsRow (ref), fFlagSduiExperienceDetailsSocialProof (ref), sduiBadgeComponent (ref), fFlagLuaAppDismissUnlockUpsell (ref), t_1 (ref)
+	-- upvalues: parseVector2Prop (ref), getEngineEnumParser (ref), parseColor3Prop (ref), parseNumberProp (ref), parseIntegerProp (ref), parseUDim2Prop (ref), cryoModule (ref), parseBooleanProp (ref), parseStringProp (ref), sduiComponentType (ref), parent (ref), fFlagSduiAttributionRowV2 (ref), parseCallbackProp (ref), parseUiComponentProp (ref), parseTypographyTokenProp (ref), parseColorTokenProp (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseImageStringProp (ref), tModule (ref), parseIconProp (ref), parseUDimProp (ref), serverDrivenUi (ref), collectionItemSize (ref), itemHeightModeModule (ref), fFlagSduiCollectionCarouselOverrides (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), getArrayMetatableParser (ref), parseLazyUiComponentProp (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiOptionSelectorCollection (ref), fFlagSduiCollectionGridRevealRows (ref), parseFocusNavActionsProp (ref), reactModule (ref), parseGradientProp (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), parseImageSetOrImageProp (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiGameTileDirectAction (ref), fFlagSduiEnableHeroUnitBottomRow (ref), fFlagSduiChipAccessoryProps (ref), fFlagSduiExperienceDetailsSocialProof (ref), sduiBadgeComponent (ref), fFlagLuaAppDismissUnlockUpsell (ref), t_1 (ref)
 	local t = {
 		anchorPoint = parseVector2Prop,
 		automaticSize = getEngineEnumParser(Enum.AutomaticSize),
@@ -656,17 +655,14 @@ function t_1.new()
 			trailingOnActivated = parseCallbackProp
 		}
 	}
-	
-	if fFlagSduiEnableAssociatedItemsRow then
-		t_3._registeredComponents[sduiComponentType.AssociatedItemsRow] = {
-			component = require(serverDrivenUi.Content.SduiAssociatedItemsRow),
-			propParsers = {
-				layoutOrder = parseIntegerProp,
-				items = getArrayMetatableParser(parseLazyUiComponentProp),
-				footerComponent = parseUiComponentProp
-			}
+	t_3._registeredComponents[sduiComponentType.AssociatedItemsRow] = {
+		component = require(serverDrivenUi.Content.SduiAssociatedItemsRow),
+		propParsers = {
+			layoutOrder = parseIntegerProp,
+			items = getArrayMetatableParser(parseLazyUiComponentProp),
+			footerComponent = parseUiComponentProp
 		}
-	end
+	}
 	t_3._registeredComponents[sduiComponentType.ExperienceAssociatedItemsRow] = {
 		component = require(serverDrivenUi.Content.ExperienceDetails.ExperienceAssociatedItemsRow),
 		propParsers = {

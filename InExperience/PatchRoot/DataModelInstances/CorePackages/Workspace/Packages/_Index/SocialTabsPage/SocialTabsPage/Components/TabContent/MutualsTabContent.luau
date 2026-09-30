@@ -12,16 +12,14 @@ local entityType = userListModule.Enums.EntityType
 local rowDataProviderModule = require(socialTabsPage.Components.RowDataProvider)
 local useSocialTabsContextModule = require(socialTabsPage.Contexts.useSocialTabsContext)
 local useMutualsListModule = require(socialTabsPage.Hooks.useMutualsList)
-local useFetchPresencesModule = require(socialTabsPage.Hooks.useFetchPresences)
 local useSortedEntitiesByPresenceModule = require(socialTabsPage.Hooks.useSortedEntitiesByPresence)
 local useUserListCTAsModule = require(socialTabsPage.Hooks.useUserListCTAs)
 local useCTAActionHandlersModule = require(socialTabsPage.Hooks.useCTAActionHandlers)
 local socialTabsCtaConfigModule = require(socialTabsPage.Common.SocialTabsCtaConfig)
-local fFlagSocialTabsPagePresenceSignalsMigrationModule = require(socialTabsPage.Flags.FFlagSocialTabsPagePresenceSignalsMigration)
 local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 
 return function()
-	-- upvalues: useSocialTabsContextModule (ref), useMutualsListModule (ref), reactModule (ref), dashModule (ref), entityType (ref), fFlagSocialTabsPagePresenceSignalsMigrationModule (ref), useFetchPresencesModule (ref), useSortedEntitiesByPresenceModule (ref), fFlagUserListCtaIntegrationEnabled (ref), useUserListCTAsModule (ref), useCTAActionHandlersModule (ref), rowDataProviderModule (ref), view (ref), loading (ref), userListLayoutAdaptor (ref), layoutMode (ref), socialTabsCtaConfigModule (ref)
+	-- upvalues: useSocialTabsContextModule (ref), useMutualsListModule (ref), reactModule (ref), dashModule (ref), entityType (ref), useSortedEntitiesByPresenceModule (ref), fFlagUserListCtaIntegrationEnabled (ref), useUserListCTAsModule (ref), useCTAActionHandlersModule (ref), rowDataProviderModule (ref), view (ref), loading (ref), userListLayoutAdaptor (ref), layoutMode (ref), socialTabsCtaConfigModule (ref)
 	local var1 = useMutualsListModule(useSocialTabsContextModule().profileId)
 	local var2 = reactModule.useMemo(function()
 		-- upvalues: dashModule (copy), var1 (ref), entityType (copy)
@@ -36,10 +34,6 @@ return function()
 			return p1.id
 		end)
 	end, { var2 })
-	
-	if not fFlagSocialTabsPagePresenceSignalsMigrationModule then
-		useFetchPresencesModule(var3)
-	end
 	local var4 = useSortedEntitiesByPresenceModule(var2)
 	local var5 = nil
 	

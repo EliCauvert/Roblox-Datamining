@@ -30,10 +30,16 @@ return function(p1, p2, p3, p4)
 			var2 = true
 			var1 = nil
 		end,
-		logComment = function()
+		logComment = function(p5)
 			-- upvalues: var2 (write), p1 (ref), cloned (ref), p3 (ref)
 			if not var2 then
-				p1("Comment", cloned, { momentsSessionId = p3 })
+				p1("Comment", cloned, { momentsSessionId = p3, commentText = p5 })
+			end
+		end,
+		logCommentDelete = function()
+			-- upvalues: var2 (write), p1 (ref), cloned (ref), p3 (ref)
+			if not var2 then
+				p1("CommentDelete", cloned, { momentsSessionId = p3 })
 			end
 		end
 	}
