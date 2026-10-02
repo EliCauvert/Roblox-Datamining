@@ -292,6 +292,7 @@ Authentication.CrossDevice.Label.Warning2,• 他のユーザーのコードは�
 Authentication.CrossDevice.Response.InvalidCode,入力したコードは無効です。正しく入力したかどうか、確認してください。
 Authentication.CrossDevice.Response.LoginFail,ログインできませんでした
 Authentication.CrossDevice.Response.LoginSuccess,ログインできました
+Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,再試行する
 Authentication.Login.Action.ConnectionError.RetryWait,{WaitTime} で再試行する
 Authentication.Login.Action.Continue,
@@ -302,6 +303,7 @@ Authentication.Login.Action.EmailOtpWaitTime,あと {WaitTime}秒でコードを
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,パスワード、またはユーザーネームをお忘れですか？
 Authentication.Login.Action.ForgotUsername,ユーザーネームを忘れた場合
 Authentication.Login.Action.ForgotUsernameOrPassword,ユーザーネームまたはパスワードをお忘れですか？
+Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,ワンタイムコードをメールで送信
 Authentication.Login.Action.NeedHelp,ヘルプが必要ですか？
 Authentication.Login.Action.Next,
@@ -1412,7 +1414,6 @@ Feature.AddFriends.Action.IgnoreTrustedFriendRequest,信頼できる友達リク
 Feature.AddFriends.Action.RequestIgnored,リクエストを無視しました
 Feature.AddFriends.Description.CameraPermissionWarning,カメラアクセスが有効化されていません。QRコードスキャン機能を使用するには、お持ちのスマホの [設定] > [アプリ] > [Roblox] でカメラへのアクセスを許可してください。
 Feature.AddFriends.Heading.AddFriends,
-Feature.AddFriends.Heading.FindPeople,人を見つける
 Feature.AddFriends.Label.AddFriendsTooltip,まずは友達を見つけることから始めましょう。Robloxを一緒に楽しめます。
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Robloxで人を見つけるには、ユーザーネームか名前で検索してください。
 Feature.AddFriends.Label.ConnectWithContacts,連絡先にある人を招待するか、すでに知っている友達とロブロックスでつながりましょう！
@@ -1423,9 +1424,7 @@ Feature.AddFriends.Label.EmptyState,Robloxで誰と一緒に探検しますか�
 Feature.AddFriends.Label.EmptyState.FriendsRename,誰と一緒にRobloxを探検する？友達を追加してRobloxをもっと楽しもう！
 Feature.AddFriends.Label.EmptyStatePrompt,誰と一緒にRobloxを楽しみますか？新しくつながる人を検索したり、すでに知っている友達とつながりましょう！
 Feature.AddFriends.Label.FriendRequests,友達リクエスト
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,人を探す
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,人をサーチ
-Feature.AddFriends.Label.MyQRTile,自分のQR
 Feature.AddFriends.Label.MyQrCode,マイQRコード
 Feature.AddFriends.Label.QRCodeTitle,QRコード
 Feature.AddFriends.Label.SchoolTile,クラスメート
@@ -1987,6 +1986,7 @@ Feature.Avatar.Label.SetAvatarCount,{itemCount}個のアバター
 Feature.Avatar.Label.SetLimitReachedBody,セットは最大{setLimit}件までに制限されています。容量を確保するには、1件削除してください
 Feature.Avatar.Label.SetNameDuplicateBody,この名前のセットはすでにあります。別の名前を入力してください
 Feature.Avatar.Label.SetNameNotAllowedBody,別の名前を入力してください
+Feature.Avatar.Label.ShareAvatarToMoments,アバターをモーメントにシェア
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,アバターをマーケットプレイスに投稿
 Feature.Avatar.Label.Shirt,シャツ
 Feature.Avatar.Label.ShirtClassic,クラシックシャツ
@@ -2247,6 +2247,7 @@ Feature.Build.Action.DontShowAgain,
 Feature.Build.Action.EarnRobux,Robuxを獲得
 Feature.Build.Action.Edit,編集
 Feature.Build.Action.HideAutosaved,自動保存済みバージョンを非表示
+Feature.Build.Action.KeepBuilding,作成を続行
 Feature.Build.Action.ManageLimit,限度額を管理
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
@@ -2272,6 +2273,7 @@ Feature.Build.Action.Share,シェア
 Feature.Build.Action.ShareLink,リンクを共有
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,統計
+Feature.Build.Action.Stop,停止
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,レーティングを更新
 Feature.Build.Action.UpdateWithChanges,変更を反映して更新
@@ -2381,7 +2383,12 @@ Feature.Build.Description.RevertToVersion,確認して最後の変更を元に�
 Feature.Build.Description.ShareLatest,最新バージョンの変更内容を共有しましょう。
 Feature.Build.Description.ShopButton,ショップボタンを追加
 Feature.Build.Description.ShortAdCampaign,ゲームに対するプレイヤーの反応を簡単に確認する方法です。
+Feature.Build.Description.StopBuild,このリクエストはまだ進行中です。今停止すると作業が完了せず、再度送信する必要があります。
 Feature.Build.Description.UpdateDeveloperProduct,開発者製品{PRODUCT_ID}を更新してください。
+Feature.Build.Error.AdForbidden,現在、ご利用のアカウントまたはゲームで広告を掲載できません。これが誤りであると思われる場合は、サポートまでご連絡ください。
+Feature.Build.Error.AdInsufficientFunds,この広告を作成するのに必要なRobuxが足りません。Robuxを追加してもう一度お試しください。
+Feature.Build.Error.AdInternalError,
+Feature.Build.Error.AdMissingThumbnail,広告を掲載するには、ゲームにサムネイルが必要です。サムネイルを追加してから、もう一度お試しください。
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"詳細は1,000文字以下で入力してください。"
 Feature.Build.Error.DeveloperProductNameRequired,製品名を入力してください。
 Feature.Build.Error.DeveloperProductNameTooLong,名前は50文字以下にしてください。
@@ -2567,9 +2574,6 @@ Feature.Build.Message.AccountRequirements,アカウントがビルドを使用�
 Feature.Build.Message.AccountTooNew,お持ちのアカウントは公開するには新しすぎます。2日目になってからもう一度お試しください。
 Feature.Build.Message.AdCampaignCreateFailed,キャンペーンを作成できませんでした。もう一度お試しください。
 Feature.Build.Message.AdPerformanceLoadFailed,広告のパフォーマンスを読み込めませんでした
-Feature.Build.Message.AdsPromotionBannerSubtitle,オーディエンスを無料で拡大しましょう
-Feature.Build.Message.AdsPromotionBannerTitle,無料プロモーションがあと{promotionCount}回残っています
-Feature.Build.Message.AdsPromotionBannerTitleSingular,無料プロモーションが1回残っています
 Feature.Build.Message.AdsStatsEmpty,広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう
 Feature.Build.Message.AdsStatsEmptyFree,無料の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう
 Feature.Build.Message.AllFriendsAdded,すべての友達を早期テスターとして招待しました。
@@ -2661,6 +2665,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays}日間の広告キャンペ
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}日
 Feature.Build.Title.AdComplete,広告が完了しました
 Feature.Build.Title.AdCreated,広告が作成されました
+Feature.Build.Title.AdCreatedPeriod,広告が作成されました。
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,画像を追加
 Feature.Build.Title.AdsStatsEmpty,キャンペーンを開始
@@ -2701,6 +2706,7 @@ Feature.Build.Title.PromoteGameFreeSingular,無料の広告を受け取りまし
 Feature.Build.Title.PromoteGamePaid,さらに多くのプレイヤーが待っています
 Feature.Build.Title.PushNotifications,プッシュ通知
 Feature.Build.Title.RevertLastChange,最後の変更を元に戻しますか？
+Feature.Build.Title.StopBuild,作成を停止しますか？
 Feature.Build.Title.Tasks,タスク
 Feature.Build.Title.TurnActivity,ターン内のアクティビティ
 Feature.Build.Title.VersionHistory,バージョン履歴
@@ -3525,7 +3531,6 @@ Feature.Friends.FriendingTooltipBody,電話番号であなたを見つけたユ�
 Feature.Friends.Heading.Activities,アクティビティ
 Feature.Friends.Heading.FilterBy,並べ替え：
 Feature.Friends.Heading.Friends,
-Feature.Friends.Heading.MyConnections,自分の友達
 Feature.Friends.Label.AddConnectionVPC,この信頼するつながりを追加するには、保護者の許可が必要です。
 Feature.Friends.Label.AddConnectionsHint,人とつながるとRobloxがさらに楽しくなります！
 Feature.Friends.Label.AddConnectionsHintBody,知り合いを追加するか、新しいつながりを見つけましょう
@@ -3603,7 +3608,7 @@ Feature.Friends.Label.PlayedByUserAndOthers.FriendsRename,<b>{name}</b>さんと
 Feature.Friends.Label.RenameInfoText,Robloxで「友達」が「つながり」に変わりました。知り合いを 「つながり」（つながっている人）に追加して、オンライン状況の閲覧やパーティ結成機能を使って一緒にプレイしましょう。<br /><br />現在、年齢チェック済みの13歳以上のユーザーは、対象となるつながりと広範囲対応チャット機能を使用できるようになりました。その他にも新機能が近日公開される予定です！
 Feature.Friends.Label.Request,リクエスト
 Feature.Friends.Label.SearchFriends,
-Feature.Friends.Label.SearchPeople,
+Feature.Friends.Label.SearchPeople,人を探す
 Feature.Friends.Label.SentFromWithContext,{gameName} から送信されました
 Feature.Friends.Label.SingularMutualFriend,
 Feature.Friends.Label.Suggested,
@@ -3662,7 +3667,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,信頼する友達を�
 Feature.Friends.TrustedFriend.AddBack.Header,信頼する友達リクエスト
 Feature.Friends.TrustedFriend.Info.Modal.Header,新しい信頼する友達
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,信頼する友達を追加
-Feature.Friends.TrustedFriend.Label.AddTrustedFriends,「信頼できる友達」を追加
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,信頼できる友達に追加
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}さんが信頼する友達になりました
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信頼する友達が削除されました
@@ -4664,6 +4668,7 @@ Feature.PlayerSearchResults.Label.You,あなた
 Feature.PlayerSearchResults.Label.YouAreConnections,つながっています
 Feature.PlayerSearchResults.Label.YouAreFollowing,フォローしています
 Feature.PlayerSearchResults.Label.YouAreFriends,友達になりました
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studioは、プライベートサーバーの購入には対応していません。
 Feature.Profile.Action.AboutThisProfile,このプロフィールについて
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,友達を承認する
@@ -4878,12 +4883,14 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,この定期購入は、こ�
 Feature.RobloxSubscription.Description.AgeCheckTrial,年齢チェックで年齢をご確認ください。Robloxからのお礼として、Roblox Plusを1週間無料でご利用いただけます。この無料トライアルのご利用にお支払い方法の入力は必要ありません。
 Feature.RobloxSubscription.Description.Benefit.Customize,プロフィールフレームとアプリのテーマでカスタマイズ
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,最初の60日間は10%オフ、その後はアイテムとアバターが20%オフ
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,最初の{trialUnlockDays}日間は10%オフ、その後はアイテムとアバターが20%オフ
 Feature.RobloxSubscription.Description.ExclusiveBenefits,少ないRobuxでもっと楽しく。Roblox Plusを定期購入しましょう。
 Feature.RobloxSubscription.Description.JoinEarly,Plusで先行参加
 Feature.RobloxSubscription.Description.ReferralRecipientReward,このオファーは、新規のPlus会員のみが対象です。
 Feature.RobloxSubscription.Description.ReferralReferrerReward,相手があなたのリンクからPlusを定期購入した場合。
 Feature.RobloxSubscription.Description.ReferralShare,Plusに招待した相手がPlusを定期購入すると、お互いに{amount} Robuxを獲得できます。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}をクリックすると、<a href=""{termsUrl}"">Roblox定期購入規約</a>に同意したとみなされます。キャンセルするまで、毎月自動的に料金が課金されます。"
+Feature.RobloxSubscription.Heading.ReferralEntry,Plusをシェアして、{amount} Robuxを獲得
 Feature.RobloxSubscription.Heading.ReferralHistory,紹介履歴
 Feature.RobloxSubscription.Heading.ReferralShare,Plusをシェアして、次を獲得：
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,無料プライベートサーバー
@@ -4896,6 +4903,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,「続ける」をク�
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,「無料で試す」をクリックすると、{linkStart}Roblox定期購入規約{linkEnd}に同意したものとみなされます。無料トライアルは1か月で終了し、以降は毎月自動的に課金されますが、キャンセルはいつでも可能です。
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,「無料で試す」をクリックすると、{linkStart}Roblox定期購入規約{linkEnd}に同意したものとみなされます。無料トライアルは{trialDuration}{trialPeriodLabel}で終了し、以降は{billingPeriodLabel}ごとに自動的に課金されますが、キャンセルはいつでも可能です。
 Feature.RobloxSubscription.Label.FreeTrialText,無料トライアルを入手
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.PendingRobux,保留中のRobux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,被紹介者の報酬
@@ -4920,6 +4928,7 @@ Feature.Schools.Action.AlreadyGraduated,卒業済みです
 Feature.Schools.Action.CantFindSchool,学校が見つからない場合
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,学校を削除
+Feature.Schools.Action.NoSchoolEmail,学校のメールアドレスをお持ちではない場合。
 Feature.Schools.Action.Ok,
 Feature.Schools.Action.PrivacyPolicy,
 Feature.Schools.Action.Remove,
@@ -4942,6 +4951,7 @@ Feature.Schools.Description.InviteFriendsUnlockSooner,該当校の卒業生グ�
 Feature.Schools.Description.InviteOthersToVerify,他の人を招待して認証しましょう
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,認証済みの卒業生がもっと必要です
 Feature.Schools.Description.NotAvailableInRegion,学校機能はまだ利用できません。
+Feature.Schools.Description.NotifyWhenSchoolAvailable,通っている学校を教えてください。学校がRobloxで利用可能になったときにお知らせします。
 Feature.Schools.Description.RemoveSchoolBody,学校に再参加するには、学校のメールアドレスを再確認する必要があります。受け取った報酬アイテムはすべて削除されます。
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,現在、この学校はRobloxでは利用できません。
@@ -4997,6 +5007,7 @@ Feature.Schools.Label.UpsellPerkFindFriends,学校の友達を見つける
 Feature.Schools.Label.UpsellPerkPlayAndChat,オンライン状況を確認して、簡単に一緒にプレイ
 Feature.Schools.Label.UpsellPerkTrends,学校でのトレンドを見つけよう
 Feature.Schools.Placeholder.Email,生徒のメールアドレス
+Feature.Schools.Placeholder.SchoolName,学校名
 Feature.Schools.Placeholder.SixDigitCode,
 Feature.Schools.RewardGiftBody,学校の確認ありがとうございます。新しいアイテムは [アバター] > [アクセサリー] > [背中] に追加されました。
 Feature.Screentime.Content.ScreentimeLimitDialog,1日のスクリーン時間制限に達しました。また明日、Robloxにアクセスしてください。
@@ -5108,6 +5119,11 @@ Feature.SongDetails.Label.SongsBy,{artistName} の曲
 Feature.SongDetails.Label.ThousandPlus,1000曲以上
 Feature.SongDetails.Label.Vendor,プロバイダ
 Feature.SplitPane.EditAvatarButtonText,
+Feature.SplitPane.Label.CollapseAvatar,アバターを折りたたむ
+Feature.SplitPane.Label.ExpandAvatar,アバターを展開
+Feature.SplitPane.Label.NextAvatar,次のアバター
+Feature.SplitPane.Label.PreviousAvatar,前のアバター
+Feature.SplitPane.Label.Rotate,
 Feature.SplitPane.NoAdditionalAvatarsDialogBody,別のアバターを作成すると、ここでアバターを切りかえられます。
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,アバターを作成
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,保存済みのアバターはこれですべてです

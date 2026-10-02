@@ -869,7 +869,6 @@ Feature.AddFriends.Label.DeclineAllBackgrounded,Отклоняем все зап
 Feature.AddFriends.Label.EmptyState,"С кем ты будешь исследовать Roblox? Добавь контакты, чтобы делать это вместе!"
 Feature.AddFriends.Label.EmptyStatePrompt,С кем ты будешь исследовать Roblox? Общайся со своими друзьями и находи новых!
 Feature.AddFriends.Label.FriendRequests,Запросы дружбы
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Поиск людей
 Feature.AddFriends.Label.MyQrCode,Мой QR-код
 Feature.AddFriends.Label.SearchForFriendsPrompt,"Найди людей в Roblox, используя поиск по имени пользователя или отображаемому имени."
 Feature.AddFriends.Label.ShareQRCodeAddConnection,"Поделиться QR-кодом, чтобы добавить знакомых"
@@ -1931,7 +1930,6 @@ Feature.Friends.Error.UserNotPassedCaptcha,Капча не пройдена
 Feature.Friends.Feature.Friends.Heading.AddFriends,
 Feature.Friends.FriendingTooltipBody,"Некоторые запросы в друзья могут поступать от пользователей, нашедших тебя по номеру телефона. Убедись, что вы знакомы, прежде чем стать друзьями."
 Feature.Friends.Heading.FilterBy,Фильтр по
-Feature.Friends.Heading.MyConnections,Мои контакты
 Feature.Friends.Label.AddConnectionsHint,С контактами Roblox веселее!
 Feature.Friends.Label.AddConnectionsHintBody,Добавь знакомых или найди новые контакты
 Feature.Friends.Label.All,
@@ -1975,7 +1973,7 @@ Feature.Friends.Label.PYMK,Возможно вы знакомы
 Feature.Friends.Label.Pending,
 Feature.Friends.Label.Request,Запрос
 Feature.Friends.Label.SearchFriends,Поиск друзей
-Feature.Friends.Label.SearchPeople,
+Feature.Friends.Label.SearchPeople,Поиск людей
 Feature.Friends.Label.SentFromWithContext,Отправлено из: {gameName}
 Feature.Friends.Label.SingularMutualFriend,общий друг
 Feature.Friends.Label.Suggested,Рекомендуемый

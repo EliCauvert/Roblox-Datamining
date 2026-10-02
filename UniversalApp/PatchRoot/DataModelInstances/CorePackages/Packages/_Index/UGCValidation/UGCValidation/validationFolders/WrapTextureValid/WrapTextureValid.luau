@@ -7,6 +7,7 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local wrapTargetCageUVReferenceValuesModule = require(parent.WrapTargetCageUVReferenceValues)
 local createEditableInstancesForContextModule = require(parent.util.createEditableInstancesForContext)
 local getFFlagUGCValidationAllowFullVaasModule = require(parent.flags.getFFlagUGCValidationAllowFullVaas)
+local getFFlagUGCValidateTransitionMakeupBoundsModule = require(parent.flags.getFFlagUGCValidateTransitionMakeupBounds)
 local t = {
 	Publish = true,
 	Backend = true,
@@ -14,6 +15,8 @@ local t = {
 	InExpServer = true
 }
 local t_1 = { InExpServer = true, InExpClient = true }
+local vector2 = Vector2.new(3.28941798, 0.313124001)
+local vector2_1 = Vector2.new(3.71058202, 0.734287024)
 
 return {
 	categories = { validationEnumsModule.UploadCategory.MAKEUP },
@@ -23,7 +26,7 @@ return {
 	},
 	expectedFailures = {},
 	run = function(p1, p2)
-		-- upvalues: getFFlagUGCValidationAllowFullVaasModule (ref), validationEnumsModule (ref), t (ref), t_1 (ref), createEditableInstancesForContextModule (ref), errorSourceStringsModule (ref), UGCValidationService (ref), wrapTargetCageUVReferenceValuesModule (ref), constantsModule (ref)
+		-- upvalues: getFFlagUGCValidationAllowFullVaasModule (ref), validationEnumsModule (ref), t (ref), t_1 (ref), createEditableInstancesForContextModule (ref), errorSourceStringsModule (ref), UGCValidationService (ref), wrapTargetCageUVReferenceValuesModule (ref), constantsModule (ref), getFFlagUGCValidateTransitionMakeupBoundsModule (ref), vector2 (ref), vector2_1 (ref)
 		local rootInstance = p2.rootInstance
 		local wrapTextureTransfer = rootInstance:FindFirstChildOfClass("WrapTextureTransfer")
 		
@@ -59,21 +62,37 @@ return {
 					return
 				end
 				local MAKEUP_INFO = constantsModule.MAKEUP_INFO
+				local var4 = false
 				
-				if not wrapTextureTransfer.UVMinBound:FuzzyEq(MAKEUP_INFO.WrapTextureTransferUVBounds.MinBound) then
-					p1:fail(errorSourceStringsModule.Keys.WrapTexture_InvalidMinBound, {
-						instanceName = wrapTextureTransfer:GetFullName(),
-						actual = tostring(wrapTextureTransfer.UVMinBound),
-						expected = tostring(MAKEUP_INFO.WrapTextureTransferUVBounds.MinBound)
-					})
-					
-					return
-				elseif not wrapTextureTransfer.UVMaxBound:FuzzyEq(MAKEUP_INFO.WrapTextureTransferUVBounds.MaxBound) then
-					p1:fail(errorSourceStringsModule.Keys.WrapTexture_InvalidMaxBound, {
-						instanceName = wrapTextureTransfer:GetFullName(),
-						actual = tostring(wrapTextureTransfer.UVMaxBound),
-						expected = tostring(MAKEUP_INFO.WrapTextureTransferUVBounds.MaxBound)
-					})
+				if getFFlagUGCValidateTransitionMakeupBoundsModule() then
+					var4 = wrapTextureTransfer.UVMinBound:FuzzyEq(vector2) and wrapTextureTransfer.UVMaxBound:FuzzyEq(vector2_1)
+				end
+				if not var4 then
+					if not wrapTextureTransfer.UVMinBound:FuzzyEq(MAKEUP_INFO.WrapTextureTransferUVBounds.MinBound) then
+						p1:fail(errorSourceStringsModule.Keys.WrapTexture_InvalidMinBound, {
+							instanceName = wrapTextureTransfer:GetFullName(),
+							actual = tostring(wrapTextureTransfer.UVMinBound),
+							expected = tostring(MAKEUP_INFO.WrapTextureTransferUVBounds.MinBound)
+						})
+						
+						return
+					elseif not wrapTextureTransfer.UVMaxBound:FuzzyEq(MAKEUP_INFO.WrapTextureTransferUVBounds.MaxBound) then
+						p1:fail(errorSourceStringsModule.Keys.WrapTexture_InvalidMaxBound, {
+							instanceName = wrapTextureTransfer:GetFullName(),
+							actual = tostring(wrapTextureTransfer.UVMaxBound),
+							expected = tostring(MAKEUP_INFO.WrapTextureTransferUVBounds.MaxBound)
+						})
+						
+						if getFFlagUGCValidateTransitionMakeupBoundsModule() then return end
+					end
+				end
+				if getFFlagUGCValidateTransitionMakeupBoundsModule() and var1 then
+					if var4 then
+						p1:setTelemetryContext("makeupBounds=Old")
+						
+						return
+					end
+					p1:setTelemetryContext("makeupBounds=New")
 				end
 				return
 			elseif var1 then

@@ -292,6 +292,7 @@ Authentication.CrossDevice.Label.Warning2,• Nunca insira um código de outro u
 Authentication.CrossDevice.Response.InvalidCode,O código que você inseriu não é válido. Verifique se você inseriu o código corretamente.
 Authentication.CrossDevice.Response.LoginFail,Falha ao entrar
 Authentication.CrossDevice.Response.LoginSuccess,Sucesso ao entrar na conta
+Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,Repetir
 Authentication.Login.Action.ConnectionError.RetryWait,Tentar novamente em: {WaitTime}
 Authentication.Login.Action.Continue,
@@ -302,6 +303,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Reenviar código em {WaitTime}s
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Esqueceu a senha ou nome de usuário?
 Authentication.Login.Action.ForgotUsername,Esqueceu o nome de usuário?
 Authentication.Login.Action.ForgotUsernameOrPassword,Esqueceu o nome de usuário/senha?
+Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Envie-me um código único por e-mail
 Authentication.Login.Action.NeedHelp,Precisa de ajuda?
 Authentication.Login.Action.Next,
@@ -1412,7 +1414,6 @@ Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignorar pedido de amizade c
 Feature.AddFriends.Action.RequestIgnored,Pedido ignorado
 Feature.AddFriends.Description.CameraPermissionWarning,"O acesso à câmera não foi permitido. Para usar a funcionalidade de escanear códigos QR, permita que o aplicativo acesse a câmera de seu telefone em ""Configurações"" > ""Aplicativos"" > ""Roblox"""
 Feature.AddFriends.Heading.AddFriends,Adicionar amizades
-Feature.AddFriends.Heading.FindPeople,Encontrar pessoas
 Feature.AddFriends.Label.AddFriendsTooltip,Comece encontrando seus amizades para que vocês possam explorar a Roblox juntos.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Encontre pessoas na Roblox pesquisando pelo nome de usuário ou nome.
 Feature.AddFriends.Label.ConnectWithContacts,Convide seus contatos ou conecte-se com amizades que já estão na Roblox!
@@ -1423,10 +1424,8 @@ Feature.AddFriends.Label.EmptyState,Com quem você vai explorar a Roblox? Adicio
 Feature.AddFriends.Label.EmptyState.FriendsRename,Com quem você vai explorar a Roblox? Adicione amigos para fazer mais na Roblox!
 Feature.AddFriends.Label.EmptyStatePrompt,Com quem você vai explorar a Roblox? Procure pessoas para adicionar ou conecte-se com amizades que você já conhece!
 Feature.AddFriends.Label.FriendRequests,Pedidos de amizade
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Pesquisar pessoas
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
-Feature.AddFriends.Label.MyQRTile,Meu código QR
-Feature.AddFriends.Label.MyQrCode,
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Pesquisar pessoas
+Feature.AddFriends.Label.MyQrCode,Meu código QR
 Feature.AddFriends.Label.QRCodeTitle,Código QR
 Feature.AddFriends.Label.SchoolTile,Colegas da escola
 Feature.AddFriends.Label.SearchForFriendsPrompt,Encontre pessoas na Roblox procurando seu nome de usuário ou nome de exibição.
@@ -1987,6 +1986,7 @@ Feature.Avatar.Label.SetAvatarCount,{itemCount} avatar
 Feature.Avatar.Label.SetLimitReachedBody,Você pode ter até {setLimit} conjuntos. Exclua um para liberar espaço
 Feature.Avatar.Label.SetNameDuplicateBody,Você já tem um conjunto com este nome. Escolha outro.
 Feature.Avatar.Label.SetNameNotAllowedBody,Escolha outro nome
+Feature.Avatar.Label.ShareAvatarToMoments,Compartilhe seu avatar nos Momentos
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,Publicar avatares no mercado
 Feature.Avatar.Label.Shirt,Camisas
 Feature.Avatar.Label.ShirtClassic,Camisa clássica
@@ -2247,6 +2247,7 @@ Feature.Build.Action.DontShowAgain,Não mostrar novamente
 Feature.Build.Action.EarnRobux,Ganhe Robux
 Feature.Build.Action.Edit,Editar
 Feature.Build.Action.HideAutosaved,Ocultar versões salvas automaticamente
+Feature.Build.Action.KeepBuilding,Continuar a construção
 Feature.Build.Action.ManageLimit,Gerenciar limite
 Feature.Build.Action.Next,Avançar
 Feature.Build.Action.NotNow,
@@ -2272,6 +2273,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,Compartilhar link
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,Estatísticas
+Feature.Build.Action.Stop,Parar
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Atualizar classificação
 Feature.Build.Action.UpdateWithChanges,Atualizar com alterações
@@ -2381,7 +2383,12 @@ Feature.Build.Description.RevertToVersion,Confirme para reverter a última alter
 Feature.Build.Description.ShareLatest,Compartilhe o que mudou na sua versão mais recente.
 Feature.Build.Description.ShopButton,Adicionar um ponto de entrada de compras
 Feature.Build.Description.ShortAdCampaign,Uma maneira rápida de ver o que os jogadores acham do seu jogo.
+Feature.Build.Description.StopBuild,"Esta solicitação ainda está em andamento. Se você parar agora, ela não será concluída e você precisará enviá-la novamente."
 Feature.Build.Description.UpdateDeveloperProduct,Atualize o produto de desenvolvedor {PRODUCT_ID}.
+Feature.Build.Error.AdForbidden,Sua conta ou seu jogo não podem exibir um anúncio no momento. Entre em contato com o suporte se achar que isto é um erro.
+Feature.Build.Error.AdInsufficientFunds,Você não tem Robux suficiente para criar este anúncio. Adicione mais e tente novamente.
+Feature.Build.Error.AdInternalError,
+Feature.Build.Error.AdMissingThumbnail,Seu jogo precisa de uma miniatura para que você possa veicular um anúncio. Adicione uma e tente novamente.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,A descrição deve ter 1.000 caracteres ou menos.
 Feature.Build.Error.DeveloperProductNameRequired,Insira um nome de produto.
 Feature.Build.Error.DeveloperProductNameTooLong,O nome deve ter 50 caracteres ou menos.
@@ -2567,9 +2574,6 @@ Feature.Build.Message.AccountRequirements,Sua conta não atende aos requisitos p
 Feature.Build.Message.AccountTooNew,Sua conta é muito recente para publicar. Tente novamente quando ela tiver 2 dias.
 Feature.Build.Message.AdCampaignCreateFailed,Não foi possível criar sua campanha. Tente novamente.
 Feature.Build.Message.AdPerformanceLoadFailed,Não foi possível carregar o desempenho da publicidade
-Feature.Build.Message.AdsPromotionBannerSubtitle,Aumente seu público gratuitamente
-Feature.Build.Message.AdsPromotionBannerTitle,Você tem {promotionCount} promoções gratuitas restantes
-Feature.Build.Message.AdsPromotionBannerTitleSingular,Você tem 1 promoção gratuita restante
 Feature.Build.Message.AdsStatsEmpty,Aumente seu público com uma campanha de anúncios e faça com que seu jogo seja descoberto
 Feature.Build.Message.AdsStatsEmptyFree,Aumente seu público com uma campanha de anúncios gratuita e faça com que seu jogo seja descoberto
 Feature.Build.Message.AllFriendsAdded,Você convidou todas as suas amizades como testadores antecipados.
@@ -2661,6 +2665,7 @@ Feature.Build.Title.AdCampaignDuration,Campanha de anúncios de {durationDays} d
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} dias
 Feature.Build.Title.AdComplete,Anúncio concluído
 Feature.Build.Title.AdCreated,Anúncio criado
+Feature.Build.Title.AdCreatedPeriod,Anúncio criado.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Adicionar imagens
 Feature.Build.Title.AdsStatsEmpty,Iniciar uma campanha
@@ -2701,6 +2706,7 @@ Feature.Build.Title.PromoteGameFreeSingular,Você tem um anúncio gratuito
 Feature.Build.Title.PromoteGamePaid,Mais jogadores estão à sua espera
 Feature.Build.Title.PushNotifications,Notificações push
 Feature.Build.Title.RevertLastChange,Reverter a última alteração?
+Feature.Build.Title.StopBuild,Parar de compilar?
 Feature.Build.Title.Tasks,Tarefas
 Feature.Build.Title.TurnActivity,Ações do assistente durante a resposta
 Feature.Build.Title.VersionHistory,Histórico do lançamento
@@ -3525,7 +3531,6 @@ Feature.Friends.FriendingTooltipBody,Alguns pedidos de amizade podem vir de usu�
 Feature.Friends.Heading.Activities,Atividades
 Feature.Friends.Heading.FilterBy,Filtrar por
 Feature.Friends.Heading.Friends,
-Feature.Friends.Heading.MyConnections,Minhas amizades
 Feature.Friends.Label.AddConnectionVPC,"Para adicionar esta conexão confiável, você precisa da permissão do responsável."
 Feature.Friends.Label.AddConnectionsHint,Conexões fazem a Roblox divertida!
 Feature.Friends.Label.AddConnectionsHintBody,Adicione pessoas que você já conhece ou descubra novas conexões
@@ -3662,8 +3667,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Remover dos amigos conf
 Feature.Friends.TrustedFriend.AddBack.Header,Pedido de amizade confiável
 Feature.Friends.TrustedFriend.Info.Modal.Header,Nova amizade confiável
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Adicionar aos amigos confiáveis
-Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Adicionar amizades confiáveis
-Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Adicionar amizades confiáveis
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,Agora {name} faz parte dos seus amigos confiáveis
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Amizade confiável removida
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Pedido de amizade confiável enviado
@@ -4667,6 +4671,7 @@ Feature.PlayerSearchResults.Label.You,Você
 Feature.PlayerSearchResults.Label.YouAreConnections,Você estão conectados
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Amizade formada
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,As compras de servidores privados não são suportadas no Studio.
 Feature.Profile.Action.AboutThisProfile,Sobre este perfil
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4879,12 +4884,14 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,Esta assinatura não está d
 Feature.RobloxSubscription.Description.AgeCheckTrial,Faça a verificação de idade e ganhe 1 semana grátis do Roblox Plus como agradecimento. Não é necessário informar um método de pagamento para aproveitar esse teste grátis.
 Feature.RobloxSubscription.Description.Benefit.Customize,Personalize com molduras de perfil e temas do aplicativo
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% de desconto nos primeiros 60 dias, depois 20% de desconto em itens e avatares"
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,"Desconto de 10% nos primeiros {trialUnlockDays} dias. Depois, desconto de 20% em itens e avatares."
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Mais diversão por menos Robux. Assine o Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Entre antes com o Plus
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Oferta válida apenas para novos assinantes do Plus.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Quando alguém assina o Plus com o seu link.
 Feature.RobloxSubscription.Description.ReferralShare,Convide alguém para o Plus e todos receberão {amount} Robux quando a pessoa entrar.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Ao clicar em \u{201C}{ctaText}\u{201D}, você concorda com os <a href=""{termsUrl}"">Termos de assinatura da Roblox</a>. A cobrança será feita automaticamente todo mês até você cancelar."
+Feature.RobloxSubscription.Heading.ReferralEntry,Compartilhe o Plus e ganhe {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,Histórico de indicações
 Feature.RobloxSubscription.Heading.ReferralShare,Compartilhe o Plus e ganhe
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Servidores privados gratuitos
@@ -4897,6 +4904,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Ao clicar em “Conti
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Ao clicar em “Teste grátis”, você concorda com os {linkStart}Termos de assinatura da Roblox.{linkEnd} Seu teste grátis termina em 1 mês. A cobrança será automática todo mês até você cancelar."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Ao clicar em “Teste grátis”, você concorda com os {linkStart}Termos de assinatura da Roblox.{linkEnd} Seu teste grátis termina em {trialDuration} {trialPeriodLabel}, e a cobrança será automática a cada {billingPeriodLabel} até você cancelar."
 Feature.RobloxSubscription.Label.FreeTrialText,Faça um teste grátis
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.PendingRobux,Robux pendentes
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Suas indicações recebem
@@ -4921,6 +4929,7 @@ Feature.Schools.Action.AlreadyGraduated,Eu já me formei
 Feature.Schools.Action.CantFindSchool,Não consegue encontrar a sua escola?
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,Remover escola
+Feature.Schools.Action.NoSchoolEmail,Você não tem um e-mail da escola?
 Feature.Schools.Action.Ok,
 Feature.Schools.Action.PrivacyPolicy,
 Feature.Schools.Action.Remove,
@@ -4943,6 +4952,7 @@ Feature.Schools.Description.InviteFriendsUnlockSooner,Ajude a lançar o grupo de
 Feature.Schools.Description.InviteOthersToVerify,Convide outros para fazerem a verificação
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,Mais ex-alunos verificados são necessários
 Feature.Schools.Description.NotAvailableInRegion,O recurso de escola ainda não está disponível.
+Feature.Schools.Description.NotifyWhenSchoolAvailable,Diga-nos em qual escola você estuda para podermos notificar você quando sua escola estiver disponível na Roblox.
 Feature.Schools.Description.RemoveSchoolBody,Você terá que verificar novamente o endereço de e-mail da sua escola para voltar a participar. Todos os itens de recompensa que você recebeu serão excluídos.
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,Esta escola não está disponível na Roblox no momento.
@@ -4998,6 +5008,7 @@ Feature.Schools.Label.UpsellPerkFindFriends,Encontre amigos da sua escola
 Feature.Schools.Label.UpsellPerkPlayAndChat,É muito simples ver quem está online para jogar
 Feature.Schools.Label.UpsellPerkTrends,Descubra o que está em alta na sua escola
 Feature.Schools.Placeholder.Email,E-mail do aluno
+Feature.Schools.Placeholder.SchoolName,Nome da escola
 Feature.Schools.Placeholder.SixDigitCode,
 Feature.Schools.RewardGiftBody,Agradecemos por fazer a verificação de sua escola. Você pode encontrar seu novo item em Avatar > Acessório > Costas.
 Feature.Screentime.Content.ScreentimeLimitDialog,Você atingiu seu limite diário de tempo de tela. Volte amanhã para acessar a Roblox novamente.
@@ -5109,6 +5120,11 @@ Feature.SongDetails.Label.SongsBy,Músicas de {artistName}
 Feature.SongDetails.Label.ThousandPlus,mais de 1000
 Feature.SongDetails.Label.Vendor,Fornecedor
 Feature.SplitPane.EditAvatarButtonText,
+Feature.SplitPane.Label.CollapseAvatar,Recolher avatar
+Feature.SplitPane.Label.ExpandAvatar,Expandir avatar
+Feature.SplitPane.Label.NextAvatar,Próximo avatar
+Feature.SplitPane.Label.PreviousAvatar,Avatar anterior
+Feature.SplitPane.Label.Rotate,
 Feature.SplitPane.NoAdditionalAvatarsDialogBody,"Crie outro avatar e, em seguida, alterne entre os temas aqui."
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,Criar avatar
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,Esses são todos os seus avatares salvos

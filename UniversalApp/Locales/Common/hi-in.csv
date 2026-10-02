@@ -275,6 +275,7 @@ Authentication.CrossDevice.Label.Warning2,• कभी भी दूसरे �
 Authentication.CrossDevice.Response.InvalidCode,"आपने जो कोड डाला है, वह अमान्य है. सही कोड डालें."
 Authentication.CrossDevice.Response.LoginFail,लॉग इन नहीं हो सका
 Authentication.CrossDevice.Response.LoginSuccess,लॉग इन हो गया
+Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,इतनी देर बाद कोशिश करें : {WaitTime}
 Authentication.Login.Action.Continue,
@@ -285,6 +286,7 @@ Authentication.Login.Action.EmailOtpWaitTime,{WaitTime} सेकंड मे�
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,क्या आप पासवर्ड या यूज़रनेम भूल गए हैं?
 Authentication.Login.Action.ForgotUsername,यूज़रनेम भूल गए हैं?
 Authentication.Login.Action.ForgotUsernameOrPassword,यूज़रनेम या पासवर्ड याद नहीं है?
+Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,मुझे वन-टाइम कोड ईमेल करें
 Authentication.Login.Action.NeedHelp,मदद चाहिए?
 Authentication.Login.Action.Next,
@@ -1392,7 +1394,6 @@ Feature.AddFriends.Action.IgnoreTrustedFriendRequest,भरोसेमंद �
 Feature.AddFriends.Action.RequestIgnored,रिक्वेस्ट इग्नोर की गई
 Feature.AddFriends.Description.CameraPermissionWarning,"कैमरे का ऐक्सेस चालू नहीं है. QR कोड स्कैन करने का फ़ीचर इस्तेमाल के लिए, अपने फ़ोन में ""सेटिंग्स "">"" ऐप्लिकेशन "" > ""Roblox"" में कैमरा ऐक्सेस करने की परमिशन दें"
 Feature.AddFriends.Heading.AddFriends,फ़्रेंड्स जोड़ें
-Feature.AddFriends.Heading.FindPeople,लोगों को खोजें
 Feature.AddFriends.Label.AddFriendsTooltip,"फ़्रेंड्स ढूँढना शुरू करें, ताकि आप Roblox को एक साथ एक्सप्लोर कर सकें."
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"लोगों को उनके यूज़रनेम या नाम से सर्च करके, उन्हें Roblox पर ढूँढे."
 Feature.AddFriends.Label.ConnectWithContacts,कॉन्टैक्ट्स को इनवाइट करें या Roblox पर पहले से मौजूद फ़्रेंड्स से कनेक्ट हों!
@@ -1403,9 +1404,7 @@ Feature.AddFriends.Label.EmptyState,Roblox को किसके साथ ए�
 Feature.AddFriends.Label.EmptyState.FriendsRename,आपको Roblox किसके साथ एक्सप्लोर करना है? Roblox पर ज़्यादा मज़ा करने के लिए फ़्रेंड्स जोड़ें!
 Feature.AddFriends.Label.EmptyStatePrompt,"आप Roblox को किसके साथ एक्सप्लोर करेंगे? लोगों को जोड़ने के लिए सर्च करें या उन फ़्रेंड्स से कनेक्ट हों, जिन्हें आप पहले से जानते हैं!"
 Feature.AddFriends.Label.FriendRequests,फ़्रेंड रिक्वेस्ट
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,लोगों को सर्च करें
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
-Feature.AddFriends.Label.MyQRTile,मेरा QR
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,लोगों को सर्च करें
 Feature.AddFriends.Label.MyQrCode,मेरा QR कोड
 Feature.AddFriends.Label.QRCodeTitle,QR कोड
 Feature.AddFriends.Label.SchoolTile,क्लासमेट
@@ -2228,6 +2227,7 @@ Feature.Build.Action.DontShowAgain,फिर से न दिखाएँ
 Feature.Build.Action.EarnRobux,Robux कमाएँ
 Feature.Build.Action.Edit,एडिट करें
 Feature.Build.Action.HideAutosaved,ऑटो-सेव किए गए छिपाएँ
+Feature.Build.Action.KeepBuilding,बिल्ड करना जारी रखें
 Feature.Build.Action.ManageLimit,लिमिट मैनेज करें
 Feature.Build.Action.Next,आगे बढ़ें
 Feature.Build.Action.NotNow,
@@ -2253,6 +2253,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,लिंक शेयर करें
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,आँकड़े
+Feature.Build.Action.Stop,रोकें
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,रेटिंग अपडेट करें
 Feature.Build.Action.UpdateWithChanges,बदलावों के साथ अपडेट करें
@@ -2362,7 +2363,12 @@ Feature.Build.Description.RevertToVersion,सबसे नए बदलाव �
 Feature.Build.Description.ShareLatest,शेयर करें कि आपके सबसे नए वर्ज़न में क्या बदला है.
 Feature.Build.Description.ShopButton,शॉपिंग एंट्री पॉइंट जोड़ें
 Feature.Build.Description.ShortAdCampaign,यह देखने का एक तेज़ तरीका कि प्लेयर्स आपके गेम के बारे में क्या सोचते हैं.
+Feature.Build.Description.StopBuild,"इस रिक्वेस्ट पर अभी भी काम चल रहा है. अगर आपने इसे अभी रोका, तो यह पूरा नहीं होगा और आपको इसे फिर से भेजना होगा."
 Feature.Build.Description.UpdateDeveloperProduct,डेवलपर प्रॉडक्ट {PRODUCT_ID} को अपडेट करें.
+Feature.Build.Error.AdForbidden,"आपके अकाउंट या गेम में इस समय कोई ऐड नहीं चल सकता. अगर आपको यह कोई गड़बड़ी लगती है, तो सपोर्ट टीम से संपर्क करें."
+Feature.Build.Error.AdInsufficientFunds,"आपके पास यह ऐड क्रिएट करने के लिए, पर्याप्त Robux नहीं हैं. और Robux जोड़कर फिर से कोशिश करें."
+Feature.Build.Error.AdInternalError,कोई गड़बड़ी हुई है. बाद में फिर से कोशिश करें.
+Feature.Build.Error.AdMissingThumbnail,ऐड चलाने से पहले आपके गेम में एक थंबनेल होना चाहिए. कोई थंबनेल जोड़कर फिर से कोशिश करें.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"विवरण में 1,000 या इससे कम कैरेक्टर होने चाहिए."
 Feature.Build.Error.DeveloperProductNameRequired,प्रॉडक्ट का नाम डालें.
 Feature.Build.Error.DeveloperProductNameTooLong,नाम में 50 या इससे कम कैरेक्टर होने चाहिए.
@@ -2548,9 +2554,6 @@ Feature.Build.Message.AccountRequirements,"आपका अकाउंट, ब�
 Feature.Build.Message.AccountTooNew,आपका अकाउंट बिल्कुल नया होने की वजह से पब्लिश नहीं किया जा सकता. 2 दिन बाद फिर से कोशिश करें.
 Feature.Build.Message.AdCampaignCreateFailed,आपका कैंपेन क्रिएट नहीं हो सका. फिर से कोशिश करें.
 Feature.Build.Message.AdPerformanceLoadFailed,ऐड परफ़ॉर्मेंस लोड नहीं हो सकी
-Feature.Build.Message.AdsPromotionBannerSubtitle,फ़्री में अपनी ऑडियंस बढ़ाएँ
-Feature.Build.Message.AdsPromotionBannerTitle,आपके पास {promotionCount} फ़्री प्रमोशंस बचे हैं
-Feature.Build.Message.AdsPromotionBannerTitleSingular,आपके पास 1 फ़्री प्रमोशन बचा है
 Feature.Build.Message.AdsStatsEmpty,"ऐड कैंपेन की मदद से, अपनी ऑडियंस बढ़ाएँ और अपने गेम को लोगों की नज़रों में लाएँ"
 Feature.Build.Message.AdsStatsEmptyFree,"फ़्री ऐड कैंपेन की मदद से, अपनी ऑडियंस बढ़ाएँ और अपने गेम को लोगों की नज़रों में लाएँ"
 Feature.Build.Message.AllFriendsAdded,आपने अपने सभी फ़्रेंड्स को अर्ली टेस्टर्स के रूप में इनवाइट किया है.
@@ -2642,6 +2645,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays}-दिन का ऐड �
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}-दिन
 Feature.Build.Title.AdComplete,ऐड पूरा हुआ
 Feature.Build.Title.AdCreated,ऐड क्रिएट किया गया
+Feature.Build.Title.AdCreatedPeriod,ऐड क्रिएट हो गया.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,इमेज जोड़ें
 Feature.Build.Title.AdsStatsEmpty,कैंपेन शुरू करें
@@ -2682,6 +2686,7 @@ Feature.Build.Title.PromoteGameFreeSingular,आपको एक फ़्री 
 Feature.Build.Title.PromoteGamePaid,और प्लेयर्स इंतज़ार कर रहे हैं
 Feature.Build.Title.PushNotifications,पुश नोटिफ़िकेशंस
 Feature.Build.Title.RevertLastChange,पिछला बदलाव रिवर्ट करना है?
+Feature.Build.Title.StopBuild,बिल्ड करने से रोकना है?
 Feature.Build.Title.Tasks,टास्क
 Feature.Build.Title.TurnActivity,टर्न ऐक्टिविटी
 Feature.Build.Title.VersionHistory,वर्ज़न हिस्ट्री
@@ -3506,7 +3511,6 @@ Feature.Friends.FriendingTooltipBody,"कुछ फ़्रेंड रिक�
 Feature.Friends.Heading.Activities,ऐक्टिविटीज़
 Feature.Friends.Heading.FilterBy,इस आधार पर फ़िल्टर करें
 Feature.Friends.Heading.Friends,
-Feature.Friends.Heading.MyConnections,मेरे फ़्रेंड्स
 Feature.Friends.Label.AddConnectionVPC,"इस भरोसेमंद कनेक्शन को जोड़ने के लिए, आपको पेरेंट की परमिशन चाहिए."
 Feature.Friends.Label.AddConnectionsHint,कनेक्शन Roblox को मज़ेदार बनाते हैं!
 Feature.Friends.Label.AddConnectionsHintBody,उन लोगों को जोड़ें जिनसे आप पहले से परिचित हैं या नए कनेक्शन खोजें
@@ -3643,7 +3647,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,भरोसेमं�
 Feature.Friends.TrustedFriend.AddBack.Header,भरोसेमंद फ़्रेंड की रिक्वेस्ट
 Feature.Friends.TrustedFriend.Info.Modal.Header,नया भरोसेमंद फ़्रेंड
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,भरोसेमंद फ़्रेंड जोड़ें
-Feature.Friends.TrustedFriend.Label.AddTrustedFriends,भरोसेमंद दोस्त जोड़ें
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,भरोसेमंद फ़्रेंड्स जोड़ें
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} अब एक भरोसेमंद फ़्रेंड हैं
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,भरोसेमंद फ़्रेंड को हटाया गया
@@ -4647,6 +4650,7 @@ Feature.PlayerSearchResults.Label.You,आप
 Feature.PlayerSearchResults.Label.YouAreConnections,आप दोनों एक-दूसरे के कनेक्शन में हैं
 Feature.PlayerSearchResults.Label.YouAreFollowing,आप इन्हें फ़ॉलो कर रहे/रही हैं
 Feature.PlayerSearchResults.Label.YouAreFriends,आप फ़्रेंड्स हैं
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio में प्राइवेट सर्वर नहीं खरीदे जा सकते.
 Feature.Profile.Action.AboutThisProfile,इस प्रोफ़ाइल के बारे में जानकारी
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4861,12 +4865,14 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,यह सब्सक्र
 Feature.RobloxSubscription.Description.AgeCheckTrial,उम्र का वेरिफ़िकेशन करके अपनी उम्र वेरिफ़ाई करें और धन्यवाद के तौर पर Roblox Plus का 1 हफ़्ते का फ़्री ट्रायल पाएँ. इस फ़्री ट्रायल के लिए किसी भी पेमेंट के तरीके की ज़रूरत नहीं है.
 Feature.RobloxSubscription.Description.Benefit.Customize,प्रोफ़ाइल फ़्रेम और ऐप थीम के साथ कस्टमाइज़ करें
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"अलग-अलग आइटम और अवतार पर, पहले 60 दिनों में 10%, और फिर 20% की छूट"
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,"आइटम और अवतार पर, पहले {trialUnlockDays} दिनों में 10% और उसके बाद 20% की छूट"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,कम Robux में ज़्यादा मज़ा. Roblox Plus को सब्सक्राइब करें.
 Feature.RobloxSubscription.Description.JoinEarly,Plus के साथ जल्दी जॉइन करें
 Feature.RobloxSubscription.Description.ReferralRecipientReward,ऑफ़र सिर्फ़ Plus के नए सब्सक्राइबर्स के लिए मान्य है.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,जब कोई आपके लिंक से Plus खरीदता है.
-Feature.RobloxSubscription.Description.ReferralShare,किसी को Plus जॉइन करने के लिए इनवाइट करें और उनके plus खरीदने पर आप दोनों को {amount} Robux मिलेंगे.
+Feature.RobloxSubscription.Description.ReferralShare,किसी को Plus जॉइन करने के लिए इन्वाइट करें और उनके Plus खरीदने पर आप दोनों को {amount} Robux मिलेंगे.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} पर क्लिक करने का मतलब है कि आप <a href=""{termsUrl}"">Roblox के सब्सक्रिप्शन की शर्तों</a> से सहमत हैं. आपके कैंसिल करने तक आपसे हर महीने अपने आप शुल्क ले लिया जाएगा."
+Feature.RobloxSubscription.Heading.ReferralEntry,Plus शेयर करें और {amount} Robux पाएँ
 Feature.RobloxSubscription.Heading.ReferralHistory,रेफ़रल हिस्ट्री
 Feature.RobloxSubscription.Heading.ReferralShare,Plus शेयर करें और पाएँ
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,फ़्री प्राइवेट सर्वर्स
@@ -4879,6 +4885,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"""जारी रख
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"""इसे फ़्री में आज़माएँ"" पर क्लिक करने का मतलब है कि आप {linkStart}Roblox के सब्सक्रिप्शन की शर्तों{linkEnd} से सहमत हैं. आपका फ़्री ट्रायल 1 महीने में खत्म हो जाएगा और आपसे हर महीने शुल्क अपने आप ले लिया जाएगा. सब्सक्रिप्शन को कभी भी कैंसिल किया जा सकता है."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"""इसे फ़्री में आज़माएँ"" पर क्लिक करने का मतलब है कि आप {linkStart}Roblox के सब्सक्रिप्शन की शर्तों{linkEnd} से सहमत हैं. आपका फ़्री ट्रायल {trialDuration} {trialPeriodLabel} में खत्म हो जाएगा और आपसे हर {billingPeriodLabel} में अपने-आप शुल्क ले लिया जाएगा. सब्सक्रिप्शन को कभी भी कैंसिल किया जा सकता है."
 Feature.RobloxSubscription.Label.FreeTrialText,फ़्री ट्रायल पाएँ
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.PendingRobux,पेंडिंग Robux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,आपके रेफ़रल को मिलता है
@@ -4903,6 +4910,7 @@ Feature.Schools.Action.AlreadyGraduated,मैंने पहले ही ग�
 Feature.Schools.Action.CantFindSchool,आपको अपना स्कूल नहीं मिल रहा?
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,स्कूल हटाएँ
+Feature.Schools.Action.NoSchoolEmail,क्या आपके पास स्कूल का ईमेल पता नहीं है?
 Feature.Schools.Action.Ok,
 Feature.Schools.Action.PrivacyPolicy,
 Feature.Schools.Action.Remove,
@@ -4925,6 +4933,7 @@ Feature.Schools.Description.InviteFriendsUnlockSooner,अपने स्कू�
 Feature.Schools.Description.InviteOthersToVerify,वेरिफ़ाई करने के लिए दूसरों को इनवाइट करें
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,वेरिफ़ाई किए जा चुके और एल्युमनाई चाहिए
 Feature.Schools.Description.NotAvailableInRegion,स्कूल का फ़ीचर अभी तक उपलब्ध नहीं है.
+Feature.Schools.Description.NotifyWhenSchoolAvailable,"हमें बताएँ कि आपने किस स्कूल में पढ़ाई की है, ताकि जब आपका स्कूल Roblox पर उपलब्ध हो, तो हम आपको सूचित कर सकें."
 Feature.Schools.Description.RemoveSchoolBody,"अपने स्कूल में फिर से शामिल होने के लिए, आपको अपने स्कूल का ईमेल पता फिर से वेरिफ़ाई करना होगा. आपको मिले सभी रिवॉर्ड आइटम डिलीट कर दिए जाएँगे."
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,यह स्कूल फ़िलहाल Roblox पर उपलब्ध नहीं है.
@@ -4980,6 +4989,7 @@ Feature.Schools.Label.UpsellPerkFindFriends,अपने स्कूल के 
 Feature.Schools.Label.UpsellPerkPlayAndChat,देखें कि कौन ऑनलाइन है और आसानी से एक साथ खेलें
 Feature.Schools.Label.UpsellPerkTrends,जानें कि आपके स्कूल में क्या ट्रेंड चल रहा है
 Feature.Schools.Placeholder.Email,स्टूडेंट का ईमेल
+Feature.Schools.Placeholder.SchoolName,स्कूल का नाम
 Feature.Schools.Placeholder.SixDigitCode,
 Feature.Schools.RewardGiftBody,अपना स्कूल वेरिफ़ाई करने के लिए धन्यवाद. अपना नया आइटम अवतार > ऐक्सेसरी > 'वापस जाएँ' में देखा जा सकता है.
 Feature.Screentime.Content.ScreentimeLimitDialog,आपकी डेली स्क्रीन टाइम लिमिट पूरी हो गई हैं. फिर से Roblox ऐक्सेस करने के लिए कल वापस आएं.
@@ -5090,6 +5100,11 @@ Feature.SongDetails.Label.SongsBy,
 Feature.SongDetails.Label.ThousandPlus,1000+
 Feature.SongDetails.Label.Vendor,वेंडर
 Feature.SplitPane.EditAvatarButtonText,
+Feature.SplitPane.Label.CollapseAvatar,अवतार छोटा करें
+Feature.SplitPane.Label.ExpandAvatar,अवतार बड़ा करें
+Feature.SplitPane.Label.NextAvatar,अगला अवतार
+Feature.SplitPane.Label.PreviousAvatar,पिछला अवतार
+Feature.SplitPane.Label.Rotate,
 Feature.SplitPane.NoAdditionalAvatarsDialogBody,"कोई दूसरा अवतार क्रिएट करें, फिर उनके बीच यहाँ स्विच करें."
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,अवतार क्रिएट करें
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,आपके सेव किए गए सभी अवतार बस यही हैं

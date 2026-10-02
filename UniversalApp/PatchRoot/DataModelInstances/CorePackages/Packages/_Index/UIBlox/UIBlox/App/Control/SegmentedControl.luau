@@ -4,6 +4,7 @@ local core = parent.Core
 local roactModule = require(parent_1.Roact)
 local tModule = require(parent_1.t)
 local cryoModule = require(parent_1.Cryo)
+local foundationFontFaceMigration = require(parent_1.Foundation).Utility.Flags.FoundationFontFaceMigration
 local withStyleModule = require(parent.Core.Style.withStyle)
 local otterModule = require(parent_1.Otter)
 local imagesModule = require(parent.App.ImageSet.Images)
@@ -12,8 +13,11 @@ local controlStateModule = require(core.Control.Enum.ControlState)
 local segmentedControlTabNameModule = require(script.Parent.SegmentedControlTabName)
 local imageSetComponentModule = require(core.ImageSet.ImageSetComponent)
 local getContentStyleModule = require(core.Button.getContentStyle)
+local getIconSizeModule = require(parent.App.ImageSet.getIconSize)
+local iconSizeModule = require(parent.App.ImageSet.Enum.IconSize)
 local getTextSizeModule = require(parent.Core.Text.GetTextSize)
-local var1 = require(parent.App.ImageSet.getIconSize)(require(parent.App.ImageSet.Enum.IconSize).Medium)
+local getFontFromFontStyleModule = require(parent.Core.Text.GetFontFromFontStyle)
+local var1 = getIconSizeModule(iconSizeModule.Medium)
 local t = { frequency = 10, dampingRatio = 1 }
 local circle17 = imagesModule["component_assets/circle_17"]
 local t_1 = { [controlStateModule.Default] = "BackgroundUIDefault" }
@@ -89,9 +93,9 @@ function segmentedControl.init(p1)
 end
 
 function segmentedControl.render(p1)
-	-- upvalues: withStyleModule (ref), controlStateModule (ref), getContentStyleModule (ref), t_1 (ref), t_2 (ref), t_3 (ref), var1 (ref), getTextSizeModule (ref), roactModule (ref), roactGamepadModule (ref), cryoModule (ref), segmentedControlTabNameModule (ref), t_4 (ref), imageSetComponentModule (ref), circle17 (ref)
+	-- upvalues: withStyleModule (ref), controlStateModule (ref), getContentStyleModule (ref), t_1 (ref), t_2 (ref), t_3 (ref), var1 (ref), getTextSizeModule (ref), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), roactModule (ref), roactGamepadModule (ref), cryoModule (ref), segmentedControlTabNameModule (ref), t_4 (ref), imageSetComponentModule (ref), circle17 (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), controlStateModule (copy), getContentStyleModule (copy), t_1 (copy), t_2 (copy), t_3 (copy), var1 (copy), getTextSizeModule (copy), roactModule (copy), roactGamepadModule (copy), cryoModule (copy), segmentedControlTabNameModule (copy), t_4 (copy), imageSetComponentModule (copy), circle17 (copy)
+		-- upvalues: p1 (ref), controlStateModule (copy), getContentStyleModule (copy), t_1 (copy), t_2 (copy), t_3 (copy), var1 (copy), getTextSizeModule (copy), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), roactModule (copy), roactGamepadModule (copy), cryoModule (copy), segmentedControlTabNameModule (copy), t_4 (copy), imageSetComponentModule (copy), circle17 (copy)
 		local controlState = p1.state.controlState
 		local tabsCount = #p1.props.tabs
 		local var2 = if p1.props.tabs[p1.props.selectedTabIndex].isDisabled then controlStateModule.Disabled else controlState
@@ -109,7 +113,7 @@ function segmentedControl.render(p1)
 			local var10 = 0
 			
 			for i = 1, tabsCount do
-				var10 = math.max(var10, getTextSizeModule(p1.props.tabs[i].tabName, var9, Enum.Font.BuilderSans, Vector2.new(1e999, 1e999)).X)
+				var10 = math.max(var10, getTextSizeModule(p1.props.tabs[i].tabName, var9, if foundationFontFaceMigration then getFontFromFontStyleModule(p2.Font.Header2) else Enum.Font.BuilderSans, Vector2.new(1e999, 1e999)).X)
 			end
 			local var11 = (var6 + (var10 + 8)) * tabsCount + 8
 			p1:setState({

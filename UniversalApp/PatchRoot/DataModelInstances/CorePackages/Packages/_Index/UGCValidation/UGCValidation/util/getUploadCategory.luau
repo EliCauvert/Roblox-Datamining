@@ -2,10 +2,11 @@
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local constantsModule = require(parent.Constants)
 local constantsInterfaceModule = require(parent.ConstantsInterface)
+local getFFlagUGCValidationEyebrowEyelashCategoryModule = require(parent.flags.getFFlagUGCValidationEyebrowEyelashCategory)
 local parts = string.split(require(parent.flags.getFStringUGCLCAllowedAssetTypeIds)(), ",")
 
 return function(p1, p2, p3)
-	-- upvalues: validationEnumsModule (ref), constantsModule (ref), parts (ref), constantsInterfaceModule (ref)
+	-- upvalues: validationEnumsModule (ref), constantsModule (ref), parts (ref), getFFlagUGCValidationEyebrowEyelashCategoryModule (ref), constantsInterfaceModule (ref)
 	if p3 == nil then
 		assert(p2)
 		local ANIMATION = nil
@@ -15,7 +16,7 @@ return function(p1, p2, p3)
 		elseif constantsModule.ASSET_TYPE_INFO[p2] and constantsModule.ASSET_TYPE_INFO[p2].isBodyPart then
 			ANIMATION = if p2 == Enum.AssetType.DynamicHead then validationEnumsModule.UploadCategory.DYNAMIC_HEAD else validationEnumsModule.UploadCategory.TORSO_AND_LIMBS
 		elseif table.find(parts, tostring(p2.Value)) then
-			ANIMATION = validationEnumsModule.UploadCategory.LAYERED_CLOTHING
+			ANIMATION = if getFFlagUGCValidationEyebrowEyelashCategoryModule() and (if p2 ~= Enum.AssetType.EyebrowAccessory then p2 == Enum.AssetType.EyelashAccessory else true) then validationEnumsModule.UploadCategory.EYEBROW_EYELASH else validationEnumsModule.UploadCategory.LAYERED_CLOTHING
 		elseif constantsModule.ASSET_TYPE_INFO[p2] and constantsModule.ASSET_TYPE_INFO[p2].rigidAllowed then
 			ANIMATION = validationEnumsModule.UploadCategory.RIGID_ACCESSORY
 		elseif constantsInterfaceModule.isMakeupAsset(p2) then

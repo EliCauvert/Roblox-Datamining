@@ -284,6 +284,7 @@ Authentication.CrossDevice.Label.Warning2,• 切勿输入其他用户的验证�
 Authentication.CrossDevice.Response.InvalidCode,你输入的代码无效。请确保你的输入正确无误。
 Authentication.CrossDevice.Response.LoginFail,登录失败
 Authentication.CrossDevice.Response.LoginSuccess,登录成功
+Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,重试...
 Authentication.Login.Action.ConnectionError.RetryWait,重试在: {WaitTime}
 Authentication.Login.Action.Continue,
@@ -294,6 +295,7 @@ Authentication.Login.Action.EmailOtpWaitTime,{WaitTime} 秒后重新发送验证
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,忘记密码或用户名？
 Authentication.Login.Action.ForgotUsername,忘记用户名？
 Authentication.Login.Action.ForgotUsernameOrPassword,忘记了用户名或密码？
+Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,通过电子邮件向我发送一次性验证码
 Authentication.Login.Action.NeedHelp,需要帮助？
 Authentication.Login.Action.Next,
@@ -1409,7 +1411,6 @@ Feature.AddFriends.Action.IgnoreTrustedFriendRequest,忽略可信好友请求
 Feature.AddFriends.Action.RequestIgnored,申请已忽略
 Feature.AddFriends.Description.CameraPermissionWarning,摄像头访问权限未启用。要使用扫描二维码功能，请前往手机的“设置”>“应用”>“罗布乐思”并允许访问摄像头。
 Feature.AddFriends.Heading.AddFriends,
-Feature.AddFriends.Heading.FindPeople,查找人员
 Feature.AddFriends.Label.AddFriendsTooltip,找到你的好友，一起开始探索 Roblox。
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,通过搜索用户名或昵称，在 Roblox 上找到你想找的人。
 Feature.AddFriends.Label.ConnectWithContacts,邀请联系人或与已经在 Roblox 上的好友交流！
@@ -1420,10 +1421,8 @@ Feature.AddFriends.Label.EmptyState,你想和谁一起探索 Roblox？添加联�
 Feature.AddFriends.Label.EmptyState.FriendsRename,想和谁一起探索 Roblox 呢？添加好友，在 Roblox 上享受更多乐趣！
 Feature.AddFriends.Label.EmptyStatePrompt,你要和谁一起探索 Roblox？寻找新的朋友，或添加你认识的人为好友！
 Feature.AddFriends.Label.FriendRequests,好友邀请
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,搜索用户
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
-Feature.AddFriends.Label.MyQRTile,我的二维码
-Feature.AddFriends.Label.MyQrCode,
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,搜索用户
+Feature.AddFriends.Label.MyQrCode,我的二维码
 Feature.AddFriends.Label.QRCodeTitle,二维码
 Feature.AddFriends.Label.SchoolTile,同学
 Feature.AddFriends.Label.SearchForFriendsPrompt,搜索用户名或昵称，在 Roblox 上找到对方。
@@ -1453,6 +1452,7 @@ Feature.AgeVerificationUpsell.Modal.ContentText,"请验证您的年龄以访问�
 "
 Feature.AgeVerificationUpsell.Modal.Title,
 Feature.AgeVerificationUpsell.Title.AgeSettingsRedirect,在设置中完成年龄验证
+Feature.AppealsPortal.Action.AskForReview,
 Feature.AppealsPortal.Action.FinalAppeal,提交最终申诉
 Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Action.Send,
@@ -1479,7 +1479,9 @@ Feature.AppealsPortal.Description.AppealSubmittedDecisionTime.Singular,我们预
 Feature.AppealsPortal.Description.AppealSubmittedUpdate,我们会将处理结果及采取的措施发送至你提供的电子邮箱。
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,除非你已告知我们不希望收到更多关于此申诉的通知，否则我们会将处理结果及采取的措施发送至你提供的电子邮箱。
 Feature.AppealsPortal.Description.AppealsPortal,查看过去的违规行为并管理你的申诉。所有内容和行为都必须遵守 {link}Roblox 社区准则{linkEnd}
+Feature.AppealsPortal.Description.AskForReview,
 Feature.AppealsPortal.Description.DetailsUnavailable,
+Feature.AppealsPortal.Description.FixByDate,
 Feature.AppealsPortal.Description.IssueClosed,我们已关闭此问题，因为你决定了解并遵守我们的规定，以避免被封号。
 Feature.AppealsPortal.Description.MatchEmail,电子邮件必须匹配。
 Feature.AppealsPortal.Description.MiscAppeal,如果你认为我们判断有误，请告知。
@@ -1854,6 +1856,7 @@ Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,名称只能包含字母、数字和空格。
 Feature.Avatar.Label.CountSelected,已选择 {itemCount} 个物品
 Feature.Avatar.Label.Creations,
+Feature.Avatar.Label.Current,
 Feature.Avatar.Label.CurrentlyWearing,当前穿戴
 Feature.Avatar.Label.DefaultBody,默认身体
 Feature.Avatar.Label.DeleteSetBody,删除此集合不会删除其中的穿搭。
@@ -2247,6 +2250,7 @@ Feature.Build.Action.DontShowAgain,不再显示
 Feature.Build.Action.EarnRobux,赚取 Robux
 Feature.Build.Action.Edit,编辑
 Feature.Build.Action.HideAutosaved,隐藏自动保存版本
+Feature.Build.Action.KeepBuilding,继续构建
 Feature.Build.Action.ManageLimit,管理限额
 Feature.Build.Action.Next,下一个
 Feature.Build.Action.NotNow,
@@ -2272,6 +2276,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,分享链接
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,统计数据
+Feature.Build.Action.Stop,停止
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,更新评级
 Feature.Build.Action.UpdateWithChanges,应用更改
@@ -2381,7 +2386,12 @@ Feature.Build.Description.RevertToVersion,确认以还原上次更改并返回�
 Feature.Build.Description.ShareLatest,分享最新版本的变化。
 Feature.Build.Description.ShopButton,添加购物入口
 Feature.Build.Description.ShortAdCampaign,快速了解玩家对你游戏的看法。
+Feature.Build.Description.StopBuild,此请求仍在进行中。如果现在停止，请求将无法完成，你需要再次发送。
 Feature.Build.Description.UpdateDeveloperProduct,更新开发者产品 {PRODUCT_ID}。
+Feature.Build.Error.AdForbidden,你的帐户或游戏当前无法投放广告。如果你认为这是个错误，请联系技术支持。
+Feature.Build.Error.AdInsufficientFunds,你的 Robux 不足，无法创建此广告。请充值并重试。
+Feature.Build.Error.AdInternalError,
+Feature.Build.Error.AdMissingThumbnail,你的游戏需要一张缩略图才能投放广告。请添加一张缩略图并重试。
 Feature.Build.Error.DeveloperProductDescriptionTooLong,描述不能超过 1000 个字符。
 Feature.Build.Error.DeveloperProductNameRequired,输入产品名称。
 Feature.Build.Error.DeveloperProductNameTooLong,名称不能超过 50 个字符。
@@ -2567,9 +2577,6 @@ Feature.Build.Message.AccountRequirements,你的帐户不符合使用 Build 的�
 Feature.Build.Message.AccountTooNew,你的帐户刚刚创建，暂时无法发布。请在帐户创建 2 天后重试。
 Feature.Build.Message.AdCampaignCreateFailed,无法创建广告活动。请重试。
 Feature.Build.Message.AdPerformanceLoadFailed,无法加载广告效果
-Feature.Build.Message.AdsPromotionBannerSubtitle,免费扩大受众群体
-Feature.Build.Message.AdsPromotionBannerTitle,你还有 {promotionCount} 次免费推广机会
-Feature.Build.Message.AdsPromotionBannerTitleSingular,你还有 1 次免费推广机会
 Feature.Build.Message.AdsStatsEmpty,通过广告活动扩大受众群体，让更多玩家发现你的游戏
 Feature.Build.Message.AdsStatsEmptyFree,通过免费广告活动扩大受众群体，让更多玩家发现你的游戏
 Feature.Build.Message.AllFriendsAdded,你已邀请所有好友成为初期测试玩家。
@@ -2702,6 +2709,7 @@ Feature.Build.Title.PromoteGameFreeSingular,你获得了一条免费广告
 Feature.Build.Title.PromoteGamePaid,更多玩家正在等待
 Feature.Build.Title.PushNotifications,推送通知
 Feature.Build.Title.RevertLastChange,是否还原上次更改？
+Feature.Build.Title.StopBuild,停止构建？
 Feature.Build.Title.Tasks,任务
 Feature.Build.Title.TurnActivity,轮次活动
 Feature.Build.Title.VersionHistory,版本历史记录
@@ -3079,6 +3087,7 @@ Feature.Catalog.Title.Checkout.UnavailableItems,不可用道具
 Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle,要穿戴虚拟形象吗？
 Feature.Catalog.Title.CheckoutPlural,结账 {count} 件
 Feature.Catalog.Title.CheckoutSingular,
+Feature.Catalog.Title.Explore,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,要替换底层图层吗？
 Feature.Catalog.Title.RentalFtuxText,租借道具以试玩 3 天
 Feature.Catalog.Toast.AddedToFavorites,已添加到“最爱”
@@ -3524,7 +3533,6 @@ Feature.Friends.FriendingTooltipBody,有些人可能会通过手机号码找到�
 Feature.Friends.Heading.Activities,活动
 Feature.Friends.Heading.FilterBy,过滤条件
 Feature.Friends.Heading.Friends,
-Feature.Friends.Heading.MyConnections,我的好友
 Feature.Friends.Label.AddConnectionVPC,要添加此可信赖的联系人，你需要得到家长的许可。
 Feature.Friends.Label.AddConnectionsHint,连接让 Roblox 更加有趣！
 Feature.Friends.Label.AddConnectionsHintBody,添加你已认识的人，或结识新的朋友
@@ -3661,8 +3669,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,移除信赖的好友
 Feature.Friends.TrustedFriend.AddBack.Header,“信赖的好友”请求
 Feature.Friends.TrustedFriend.Info.Modal.Header,新的信赖好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,添加信赖的好友
-Feature.Friends.TrustedFriend.Label.AddTrustedFriends,添加可信好友
-Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,添加可信好友
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}现已成为你的信赖好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信赖的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,“信赖的好友”请求已发送
@@ -4056,12 +4063,16 @@ Feature.Moments.Action.AddSticker,添加贴纸
 Feature.Moments.Action.AddText,添加文本
 Feature.Moments.Action.AddVoice,添加语音
 Feature.Moments.Action.Back,
+Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentShowLess,
+Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
 Feature.Moments.Action.CreateVoiceover,创建旁白
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.DiscardChange,删除更改
 Feature.Moments.Action.Done,
+Feature.Moments.Action.Edit,
 Feature.Moments.Action.Expand,
 Feature.Moments.Action.GenerateText,生成文本
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,没有帮助
@@ -4077,6 +4088,7 @@ Feature.Moments.Action.Play,播放
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
+Feature.Moments.Action.RetryLoadingComments,
 Feature.Moments.Action.Return,返回图库
 Feature.Moments.Action.ReturnToEditing,返回编辑
 Feature.Moments.Action.SaveVoiceover,
@@ -4098,8 +4110,35 @@ Feature.Moments.Description.PublishMoment,描述你的精彩瞬间
 Feature.Moments.Description.TooManyUploads,你今天上传的视频太多了。请明天再试。
 Feature.Moments.Disclaimer.EveryoneMoments,“精彩瞬间”中的每个人都可以查看已发布的内容
 Feature.Moments.Label.All,
+Feature.Moments.Label.AllowComments,
 Feature.Moments.Label.AttemptingJoinExperience,正在尝试加入“{placeName}”。可能需要几秒钟时间。
 Feature.Moments.Label.CaptureLibrary,你的截图库
+Feature.Moments.Label.ChooseVoice,
+Feature.Moments.Label.CommentAuthorFallback,
+Feature.Moments.Label.CommentAuthorUnknown,
+Feature.Moments.Label.CommentDeleteFailed,
+Feature.Moments.Label.CommentNotAllowed,
+Feature.Moments.Label.CommentPostFailed,
+Feature.Moments.Label.CommentPostOutcomeUnknown,
+Feature.Moments.Label.CommentRateLimited,
+Feature.Moments.Label.CommentRejectedByFilter,
+Feature.Moments.Label.CommentSendStatusUnknown,
+Feature.Moments.Label.CommentSending,
+Feature.Moments.Label.CommentSignInRequired,
+Feature.Moments.Label.CommentTimestampDays,
+Feature.Moments.Label.CommentTimestampHours,
+Feature.Moments.Label.CommentTimestampMinutes,
+Feature.Moments.Label.CommentTimestampMonths,
+Feature.Moments.Label.CommentTimestampNow,
+Feature.Moments.Label.CommentTimestampWeeks,
+Feature.Moments.Label.CommentTimestampYears,
+Feature.Moments.Label.CommentingUnavailable,
+Feature.Moments.Label.CommentsDisabled,
+Feature.Moments.Label.CommentsReadOnly,
+Feature.Moments.Label.CommentsTurnedOff,
+Feature.Moments.Label.CommentsUnavailable,
+Feature.Moments.Label.DeleteCommentBody,
+Feature.Moments.Label.DeleteCommentTitle,
 Feature.Moments.Label.DeleteMomentBody,精彩瞬间一旦删除，便无法恢复。
 Feature.Moments.Label.DeleteMomentTitle,是否删除精彩瞬间？
 Feature.Moments.Label.DeleteVoiceoverBody,此操作将清除你的文本和旁白。你可以随时重新开始。
@@ -4111,6 +4150,7 @@ Feature.Moments.Label.FeedEndTitle,你都看完啦
 Feature.Moments.Label.FeedFailedToLoad,无法加载推送
 Feature.Moments.Label.FeedMyMoments,我的精彩瞬间
 Feature.Moments.Label.FeedTrending,
+Feature.Moments.Label.FirstCommentInvite,
 Feature.Moments.Label.HowToUseCaptureTitle,如何使用截图
 Feature.Moments.Label.LinkCopied,链接已复制
 Feature.Moments.Label.LinkCopyFailed,无法复制链接。
@@ -4119,12 +4159,14 @@ Feature.Moments.Label.MomentDeletedBody,
 Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,出错了。
 Feature.Moments.Label.MomentFailedToPostTitle,无法发布精彩瞬间
+Feature.Moments.Label.MomentNoLongerAvailable,
 Feature.Moments.Label.MomentPublishedBody,精彩瞬间已成功发布。
 Feature.Moments.Label.MomentPublishedTitle,精彩瞬间已发布
 Feature.Moments.Label.MomentUnavailable,精彩瞬间不可用
 Feature.Moments.Label.MomentUnavailableDefault,此精彩瞬间不可用。
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NoCommentsYet,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,全部都看完啦
 Feature.Moments.Label.Photos,照片
 Feature.Moments.Label.PostDeleted,精彩瞬间已删除
@@ -4165,6 +4207,10 @@ Feature.Moments.Label.VoiceLimitReachedBody,请等待一分钟，然后重试
 Feature.Moments.Label.VoiceModerationError,你的脚本必须遵守安全规则
 Feature.Moments.Label.VoicePlaceholder,请输入你的旁白脚本。字符数限制为 {maxCount} 个
 Feature.Moments.Label.VoiceTimeoutBody,旁白生成超时。
+Feature.Moments.Label.WriteComment,
+Feature.Moments.Title.Comments,
+Feature.Moments.Title.CommentsWithCappedCount,
+Feature.Moments.Title.CommentsWithCount,
 Feature.Moments.Title.GenerateTextFeedbackReason,内容有什么问题？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？
@@ -4670,6 +4716,7 @@ Feature.PlayerSearchResults.Label.You,你自己
 Feature.PlayerSearchResults.Label.YouAreConnections,你们是联系人
 Feature.PlayerSearchResults.Label.YouAreFollowing,你正关注
 Feature.PlayerSearchResults.Label.YouAreFriends,你们是好友
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio 中不支持购买私人服务器。
 Feature.Profile.Action.AboutThisProfile,关于此个人资料
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4889,8 +4936,9 @@ Feature.RobloxSubscription.Description.ExclusiveBenefits,以更少的 Robux 享�
 Feature.RobloxSubscription.Description.JoinEarly,Plus 订阅用户提前加入
 Feature.RobloxSubscription.Description.ReferralRecipientReward,优惠仅适用于新订阅 Plus 的用户。
 Feature.RobloxSubscription.Description.ReferralReferrerReward,当有人通过你的链接购买 Plus 时。
-Feature.RobloxSubscription.Description.ReferralShare,邀请他人加入 Plus。对方加入后，你们双方都将获得 {amount} Robux。
+Feature.RobloxSubscription.Description.ReferralShare,邀请他人加入 Plus。对方购买 Plus 后，你们双方都将获得 {amount} Robux。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"点按\u{201C}{ctaText}\u{201D}，即表示你同意 <a href=""{termsUrl}"">Roblox 订阅条款</a>。系统将每月自动向你收取费用，直至你取消订阅。"
+Feature.RobloxSubscription.Heading.ReferralEntry,分享 Plus，获得 {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,推荐记录
 Feature.RobloxSubscription.Heading.ReferralShare,分享 Plus，获得
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免费私人服务器
@@ -4903,6 +4951,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,点按“继续”，�
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,点按“免费试用”，即表示你同意 {linkStart}Roblox 订阅条款{linkEnd}。你的免费试用期将于 1 个月后结束，系统将每月自动向你收取费用，你可以随时取消订阅。
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,点按“免费试用”，即表示你同意 {linkStart}Roblox 订阅条款。{linkEnd}你的免费试用期将于 {trialDuration}{trialPeriodLabel}后结束，系统将每{billingPeriodLabel}自动向你收取费用。你可以随时取消订阅。
 Feature.RobloxSubscription.Label.FreeTrialText,获取免费试用
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.PendingRobux,待发放 Robux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,你推荐的人获得
@@ -4927,6 +4976,7 @@ Feature.Schools.Action.AlreadyGraduated,我已经毕业了
 Feature.Schools.Action.CantFindSchool,找不到你的学校？
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,移除学校
+Feature.Schools.Action.NoSchoolEmail,没有学校电子邮件地址吗？
 Feature.Schools.Action.Ok,
 Feature.Schools.Action.PrivacyPolicy,
 Feature.Schools.Action.Remove,
@@ -4949,6 +4999,7 @@ Feature.Schools.Description.InviteFriendsUnlockSooner,让你们学校的校友�
 Feature.Schools.Description.InviteOthersToVerify,邀请其他人进行验证
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,需要更多通过验证的校友
 Feature.Schools.Description.NotAvailableInRegion,学校功能尚不可用。
+Feature.Schools.Description.NotifyWhenSchoolAvailable,请告诉我们你就读的学校，我们会在你的学校加入 Roblox 时通知你。
 Feature.Schools.Description.RemoveSchoolBody,你必须重新验证学校电子邮件地址，才能再次加入学校。你收到的所有奖励道具都将被删除。
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,此学校目前在 Roblox 上不可用。
@@ -5004,6 +5055,7 @@ Feature.Schools.Label.UpsellPerkFindFriends,寻找同校的好友
 Feature.Schools.Label.UpsellPerkPlayAndChat,查看在线好友，轻松一起游玩
 Feature.Schools.Label.UpsellPerkTrends,探索你学校的热门内容
 Feature.Schools.Placeholder.Email,学生电子邮件
+Feature.Schools.Placeholder.SchoolName,学校名称
 Feature.Schools.Placeholder.SixDigitCode,
 Feature.Schools.RewardGiftBody,感谢你验证学校。你可以在“虚拟形象”>“配饰”>“背部”下找到你的新道具。
 Feature.Screentime.Content.ScreentimeLimitDialog,你已达到每日屏幕时间限制。明天再回来访问 Roblox。
@@ -5115,6 +5167,11 @@ Feature.SongDetails.Label.SongsBy,{artistName} 的歌曲
 Feature.SongDetails.Label.ThousandPlus,1000+
 Feature.SongDetails.Label.Vendor,供应商
 Feature.SplitPane.EditAvatarButtonText,
+Feature.SplitPane.Label.CollapseAvatar,收起虚拟形象
+Feature.SplitPane.Label.ExpandAvatar,展开虚拟形象
+Feature.SplitPane.Label.NextAvatar,下一个虚拟形象
+Feature.SplitPane.Label.PreviousAvatar,上一个虚拟形象
+Feature.SplitPane.Label.Rotate,
 Feature.SplitPane.NoAdditionalAvatarsDialogBody,创建另一个虚拟形象，然后在此处切换主题。
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,创建虚拟形象
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,这就是你保存的所有虚拟形象

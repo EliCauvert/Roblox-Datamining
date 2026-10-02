@@ -7,7 +7,10 @@ local UGCValidationCageMeshDistanceMaxNegativeSDFThresholdLC = game:DefineFastIn
 local getFFlagUGCValidateAQScoreWarningsModule = require(parent.flags.getFFlagUGCValidateAQScoreWarnings)
 
 return {
-	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
+	categories = {
+		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
+	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQCageQualityLC),
 	run = function(p1, p2)
 		-- upvalues: UGCValidationCageMeshDistanceMaxCageMeshDistanceLC (ref), errorSourceStringsModule (ref), UGCValidationCageMeshDistanceMaxNegativeSDFThresholdLC (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)

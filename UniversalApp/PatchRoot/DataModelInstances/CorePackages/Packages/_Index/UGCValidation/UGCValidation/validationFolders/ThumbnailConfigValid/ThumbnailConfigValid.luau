@@ -8,6 +8,7 @@ local UGCValidationAddThumbnailFrustumCheckingv2 = game:DefineFastFlag("UGCValid
 return {
 	categories = {
 		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
 		validationEnumsModule.UploadCategory.RIGID_ACCESSORY
 	},
 	requiredData = {

@@ -8,6 +8,9 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local getFFlagUGCValidateSerializedAssetSizeBoundedModule = require(parent.flags.getFFlagUGCValidateSerializedAssetSizeBounded)
 local getEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysicsModule = require(parent.flags.getEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysics)
 local getFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesDefault)
+local getFIntUGCValidateMaxSerializedAssetSizeBytesTorsoAndLimbsModule = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesTorsoAndLimbs)
+local getFIntUGCValidateMaxSerializedAssetSizeBytesDynamicHeadModule = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesDynamicHead)
+local getFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothingModule = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothing)
 local t = {
 	categories = constantsModule.AllAssetUploadCategories,
 	requiredData = {
@@ -18,9 +21,10 @@ local t = {
 	fflag = getFFlagUGCValidateSerializedAssetSizeBoundedModule
 }
 local t_1 = {
-	[validationEnumsModule.UploadCategory.TORSO_AND_LIMBS] = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesTorsoAndLimbs),
-	[validationEnumsModule.UploadCategory.DYNAMIC_HEAD] = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesDynamicHead),
-	[validationEnumsModule.UploadCategory.LAYERED_CLOTHING] = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothing),
+	[validationEnumsModule.UploadCategory.TORSO_AND_LIMBS] = getFIntUGCValidateMaxSerializedAssetSizeBytesTorsoAndLimbsModule,
+	[validationEnumsModule.UploadCategory.DYNAMIC_HEAD] = getFIntUGCValidateMaxSerializedAssetSizeBytesDynamicHeadModule,
+	[validationEnumsModule.UploadCategory.LAYERED_CLOTHING] = getFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothingModule,
+	[validationEnumsModule.UploadCategory.EYEBROW_EYELASH] = getFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothingModule,
 	[validationEnumsModule.UploadCategory.RIGID_ACCESSORY] = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesRigidAccessory)
 }
 

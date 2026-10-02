@@ -16,7 +16,9 @@ local genericTextLabelModule = require(core.Text.GenericTextLabel.GenericTextLab
 local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
 local skeleton = foundationModule.Skeleton
 local radius = foundationModule.Enums.Radius
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local getTextSizeModule = require(parent_1.Core.Text.GetTextSize)
+local getFontFromFontStyleModule = require(parent_1.Core.Text.GetFontFromFontStyle)
 local pill = roactModule.PureComponent:extend("Pill")
 pill.validateProps = tModule.strictInterface({
 	text = tModule.optional(tModule.string),
@@ -39,9 +41,9 @@ function pill.init(p1)
 end
 
 function pill.render(p1)
-	-- upvalues: withStyleModule (ref), controlStateModule (ref), getContentStyleModule (ref), getIconSizeModule (ref), iconSizeModule (ref), getTextSizeModule (ref), roactModule (ref), interactableModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref), skeleton (ref), radius (ref)
+	-- upvalues: withStyleModule (ref), controlStateModule (ref), getContentStyleModule (ref), getIconSizeModule (ref), iconSizeModule (ref), getTextSizeModule (ref), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), roactModule (ref), interactableModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref), skeleton (ref), radius (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), controlStateModule (copy), getContentStyleModule (copy), getIconSizeModule (copy), iconSizeModule (copy), getTextSizeModule (copy), roactModule (copy), interactableModule (copy), imageSetComponentModule (copy), genericTextLabelModule (copy), skeleton (copy), radius (copy)
+		-- upvalues: p1 (ref), controlStateModule (copy), getContentStyleModule (copy), getIconSizeModule (copy), iconSizeModule (copy), getTextSizeModule (copy), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), roactModule (copy), interactableModule (copy), imageSetComponentModule (copy), genericTextLabelModule (copy), skeleton (copy), radius (copy)
 		local var1
 		local font = p2.Font
 		local isSelected = p1.props.isSelected
@@ -67,7 +69,7 @@ function pill.render(p1)
 		local var4 = getContentStyleModule(t_2, p1.state.controlState, p2)
 		local var5 = getIconSizeModule(iconSizeModule.Small)
 		local var6 = font.CaptionHeader.RelativeSize * font.BaseSize
-		local x = getTextSizeModule(text, var6, font.CaptionHeader.Font, Vector2.new(10000, 10000)).X
+		local x = getTextSizeModule(text, var6, if foundationFontFaceMigration then getFontFromFontStyleModule(font.CaptionHeader) else font.CaptionHeader.Font, Vector2.new(10000, 10000)).X
 		local var7 = x + 24
 		local var8 = 240 - (28 + var5)
 		

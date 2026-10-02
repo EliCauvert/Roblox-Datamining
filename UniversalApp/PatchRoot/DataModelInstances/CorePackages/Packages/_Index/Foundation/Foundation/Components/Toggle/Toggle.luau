@@ -12,14 +12,12 @@ local useUncontrolledStateModule = require(components.InternalInput.useUncontrol
 local builderIconsModule = require(parent.BuilderIcons)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
 local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
 local _ = require(foundation.Enums.ControlState)
 local useToggleVariantsModule = require(script.Parent.useToggleVariants)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local _ = require(foundation.Enums.InputLabelSize)
 local inputPlacementModule = require(foundation.Enums.InputPlacement)
-local flagsModule = require(foundation.Utility.Flags)
 local useInputGroupDefaultsModule = require(components.InternalInputGroup.useInputGroupDefaults)
 local t = { frequency = 4 }
 local t_1 = {
@@ -31,8 +29,8 @@ local t_1 = {
 local t_2 = { colorNamespace = colorNamespaceModule.Color }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: flagsModule (ref), useInputGroupDefaultsModule (ref), t_1 (ref), withDefaultsModule (ref), useTokensModule (ref), useToggleVariantsModule (ref), useUncontrolledStateModule (ref), inputSizeModule (ref), reactModule (ref), otterModule (ref), t (ref), internalInputModule (ref), withCommonPropsModule (ref), constantsModule (ref), presentationContextModule (ref), t_2 (ref), knobModule (ref), builderIconsModule (ref)
-	local var1 = if flagsModule.FoundationInputGroup then useInputGroupDefaultsModule(p1, t_1) else withDefaultsModule(p1, t_1)
+	-- upvalues: useInputGroupDefaultsModule (ref), t_1 (ref), useTokensModule (ref), useToggleVariantsModule (ref), useUncontrolledStateModule (ref), inputSizeModule (ref), reactModule (ref), otterModule (ref), t (ref), internalInputModule (ref), withCommonPropsModule (ref), constantsModule (ref), presentationContextModule (ref), t_2 (ref), knobModule (ref), builderIconsModule (ref)
+	local var1 = useInputGroupDefaultsModule(p1, t_1)
 	local var2 = useToggleVariantsModule(useTokensModule(), var1.size)
 	local var3, var4 = useUncontrolledStateModule(var1.isChecked, var1.onActivated)
 	local var5 = if var1.size == inputSizeModule.Large then inputSizeModule.Medium else var1.size

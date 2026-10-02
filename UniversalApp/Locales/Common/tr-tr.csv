@@ -292,6 +292,7 @@ Authentication.CrossDevice.Label.Warning2,• Asla başka bir kullanıcının ko
 Authentication.CrossDevice.Response.InvalidCode,Girdiğin kod geçersiz. Lütfen doğru girdiğinden emin ol.
 Authentication.CrossDevice.Response.LoginFail,Giriş Başarısız
 Authentication.CrossDevice.Response.LoginSuccess,Giriş Başarılı
+Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Tekrar Deneme Bekleme Süresi: {WaitTime}
 Authentication.Login.Action.Continue,Devam Et
@@ -302,6 +303,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Kodu {WaitTime} sn. sonra tekrar g�
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Kullanıcı Adını veya Şifreni mi unuttun?
 Authentication.Login.Action.ForgotUsername,Kullanıcı adını mı unuttun?
 Authentication.Login.Action.ForgotUsernameOrPassword,Kullanıcı adını veya şifreni mi unuttun?
+Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Tek Kullanımlık Kodu Bana E-postayla Gönder
 Authentication.Login.Action.NeedHelp,Yardıma mı ihtiyacın var?
 Authentication.Login.Action.Next,
@@ -1412,7 +1414,6 @@ Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Güvenilir arkadaş olarak 
 Feature.AddFriends.Action.RequestIgnored,İstek Yok Sayıldı
 Feature.AddFriends.Description.CameraPermissionWarning,"Kamera Erişimi Etkin Değil. QR kodunu tarama özelliğini kullanmak için lütfen telefonunun ""Ayarlar"" > ""Uygulamalar"" > ""Roblox"" menüsünden kamera erişimine izin ver."
 Feature.AddFriends.Heading.AddFriends,Arkadaş ekle
-Feature.AddFriends.Heading.FindPeople,Kişi bul
 Feature.AddFriends.Label.AddFriendsTooltip,Roblox'u birlikte keşfedebilmen için arkadaşlarını bul.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Kullanıcı adlarını veya adlarını arayarak Roblox'taki kişileri bul.
 Feature.AddFriends.Label.ConnectWithContacts,Rehberindeki kişileri davet et veya hâlihazırda Roblox'ta olan arkadaşlarınla bağlantı kur!
@@ -1423,9 +1424,7 @@ Feature.AddFriends.Label.EmptyState,Roblox'u kiminle birlikte keşfedeceksin? Ro
 Feature.AddFriends.Label.EmptyState.FriendsRename,Roblox'u kiminle birlikte keşfedeceksin? Roblox'ta daha fazlasını yapmak için arkadaş ekle!
 Feature.AddFriends.Label.EmptyStatePrompt,Roblox'u kiminle keşfedeceksin? Eklemek istediğin kişileri ara veya zaten tanıdığın arkadaşlarınla bağlantı kur!
 Feature.AddFriends.Label.FriendRequests,Arkadaş İstekleri
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,İnsanlar Ara
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,İnsanlar ara
-Feature.AddFriends.Label.MyQRTile,QR'ım
 Feature.AddFriends.Label.MyQrCode,QR Kodum
 Feature.AddFriends.Label.QRCodeTitle,QR kodu
 Feature.AddFriends.Label.SchoolTile,Sınıf arkadaşları
@@ -2248,6 +2247,7 @@ Feature.Build.Action.DontShowAgain,Tekrar gösterme
 Feature.Build.Action.EarnRobux,Robux kazan
 Feature.Build.Action.Edit,Düzenle
 Feature.Build.Action.HideAutosaved,Otomatik kaydedilenleri gizle
+Feature.Build.Action.KeepBuilding,İnşa etmeye devam et
 Feature.Build.Action.ManageLimit,Sınırı yönet
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,Şimdi değil
@@ -2273,6 +2273,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,Bağlantıyı paylaş
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,İstatistikler
+Feature.Build.Action.Stop,Durdur
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Derecelendirmeyi güncelle
 Feature.Build.Action.UpdateWithChanges,Değişikliklerle güncelle
@@ -2382,7 +2383,12 @@ Feature.Build.Description.RevertToVersion,En son değişikliği geri döndürmek
 Feature.Build.Description.ShareLatest,En son versiyonunda nelerin değiştiğini paylaş.
 Feature.Build.Description.ShopButton,Bir alışveriş giriş noktası ekle
 Feature.Build.Description.ShortAdCampaign,"Oyuncuların, oyunun hakkında ne düşündüğünü görmenin hızlı bir yolu."
+Feature.Build.Description.StopBuild,Bu talep hâlâ devam ediyor. Şimdi son verirsen tamamlanmayacak ve talebi tekrar göndermen gerekecek.
 Feature.Build.Description.UpdateDeveloperProduct,Geliştirici ürününü ({PRODUCT_ID}) güncelle.
+Feature.Build.Error.AdForbidden,Hesabın veya oyunun şu anda reklam yayınlayamıyor. Bunun bir hata olduğunu düşünüyorsan destek ile iletişime geç.
+Feature.Build.Error.AdInsufficientFunds,Bu reklamı oluşturmak için yeterli Robux'un yok. Daha fazla Robux ekle ve tekrar dene.
+Feature.Build.Error.AdInternalError,Bir şeyler ters gitti. Daha sonra tekrar dene.
+Feature.Build.Error.AdMissingThumbnail,Reklam yayınlamadan önce oyununun bir küçük resme ihtiyacı var. Bir tane ekle ve tekrar dene.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Açıklama 1.000 karakter veya daha kısa olmalıdır.
 Feature.Build.Error.DeveloperProductNameRequired,Bir ürün adı gir.
 Feature.Build.Error.DeveloperProductNameTooLong,Ad 50 karakter veya daha kısa olmalıdır.
@@ -2568,9 +2574,6 @@ Feature.Build.Message.AccountRequirements,"Hesabın, İnşa Et'i kullanma gerekl
 Feature.Build.Message.AccountTooNew,Hesabın yayınlanamayacak kadar yeni. 2 günü doldurduğunda tekrar dene.
 Feature.Build.Message.AdCampaignCreateFailed,Kampanyan oluşturulamadı. Lütfen tekrar dene.
 Feature.Build.Message.AdPerformanceLoadFailed,Reklam performansı yüklenemedi
-Feature.Build.Message.AdsPromotionBannerSubtitle,Kitleni ücretsiz olarak genişlet
-Feature.Build.Message.AdsPromotionBannerTitle,{promotionCount} ücretsiz promosyonun kaldı
-Feature.Build.Message.AdsPromotionBannerTitleSingular,1 ücretsiz promosyonun kaldı
 Feature.Build.Message.AdsStatsEmpty,Bir reklam kampanyasıyla kitleni genişlet ve oyununun keşfedilmesini sağla
 Feature.Build.Message.AdsStatsEmptyFree,Ücretsiz bir reklam kampanyasıyla kitleni genişlet ve oyununun keşfedilmesini sağla
 Feature.Build.Message.AllFriendsAdded,Tüm arkadaşlarını erken test kullanıcısı olmaya davet ettin.
@@ -2662,6 +2665,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays} günlük reklam kampanyas�
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} gün
 Feature.Build.Title.AdComplete,Reklam tamamlandı
 Feature.Build.Title.AdCreated,Reklam oluşturuldu
+Feature.Build.Title.AdCreatedPeriod,Reklam oluşturuldu.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Görsel ekle
 Feature.Build.Title.AdsStatsEmpty,Bir kampanya başlat
@@ -2702,6 +2706,7 @@ Feature.Build.Title.PromoteGameFreeSingular,Ücretsiz bir reklamın var
 Feature.Build.Title.PromoteGamePaid,Daha fazla oyuncu seni bekliyor
 Feature.Build.Title.PushNotifications,Anlık bildirimler
 Feature.Build.Title.RevertLastChange,Son değişiklik geri döndürülsün mü?
+Feature.Build.Title.StopBuild,İnşa etme işlemi durdurulsun mu?
 Feature.Build.Title.Tasks,Görevler
 Feature.Build.Title.TurnActivity,Etkinliği aç
 Feature.Build.Title.VersionHistory,Sürüm geçmişi
@@ -3526,7 +3531,6 @@ Feature.Friends.FriendingTooltipBody,"Bazı arkadaşlık istekleri, seni telefon
 Feature.Friends.Heading.Activities,Etkinlikler
 Feature.Friends.Heading.FilterBy,Filtrele
 Feature.Friends.Heading.Friends,
-Feature.Friends.Heading.MyConnections,Arkadaşlarım
 Feature.Friends.Label.AddConnectionVPC,Bu kişiyi Güvenilir Etkileşim Ağına eklemek için ebeveyn iznine ihtiyacın var.
 Feature.Friends.Label.AddConnectionsHint,Roblox'u eğlenceli kılan şey bağlantılardır!
 Feature.Friends.Label.AddConnectionsHintBody,Hâlihazırda tanıdığın kişileri ekle veya yeni Bağlantılar keşfet
@@ -3663,7 +3667,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Güvenilir arkadaşlard
 Feature.Friends.TrustedFriend.AddBack.Header,Güvenilir arkadaş olma talebi
 Feature.Friends.TrustedFriend.Info.Modal.Header,Yeni güvenilir arkadaş
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Güvenilir arkadaş olarak ekle
-Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Güvenilir arkadaşlara ekle
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Güvenilir Arkadaş Ekle
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} artık güvenilir arkadaşın
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Güvenilir arkadaş kaldırıldı
@@ -4103,6 +4106,7 @@ Feature.Moments.Disclaimer.EveryoneMoments,Anlardaki herkes yayınlananları gö
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,{placeName} dünyasına katılmaya çalışılıyor. Bu işlem birkaç saniye sürebilir.
 Feature.Moments.Label.CaptureLibrary,Yakalama kütüphanen
+Feature.Moments.Label.ChooseVoice,Ses seç
 Feature.Moments.Label.DeleteMomentBody,Bir An silindikten sonra onu kurtarmak mümkün olmaz.
 Feature.Moments.Label.DeleteMomentTitle,An silinsin mi?
 Feature.Moments.Label.DeleteVoiceoverBody,"Bu, işlem metnini ve seslendirmeni siler. İstediğin zaman baştan başlayabilirsin."
@@ -4667,6 +4671,7 @@ Feature.PlayerSearchResults.Label.You,Sen
 Feature.PlayerSearchResults.Label.YouAreConnections,Bağlantıdasınız
 Feature.PlayerSearchResults.Label.YouAreFollowing,Takip ediyorsun
 Feature.PlayerSearchResults.Label.YouAreFriends,Arkadaşsınız
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Özel sunucu satın alma işlemleri Studio'da desteklenmiyor.
 Feature.Profile.Action.AboutThisProfile,Bu profil hakkında
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4881,12 +4886,14 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,Bu abonelik bu cihazda satı
 Feature.RobloxSubscription.Description.AgeCheckTrial,Yaş kontrolüyle yaşını doğrula ve bizden sana bir teşekkür hediyesi olarak 1 haftalık ücretsiz Roblox Plus kullanım hakkı kazan. Bu ücretsiz denemeden yararlanmak için herhangi bir ödeme şekli gerekmez.
 Feature.RobloxSubscription.Description.Benefit.Customize,Profil çerçeveleri ve uygulama temaları ile özelleştir
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"İlk 60 gün %10 indirim, ardından öğeler ve avatarlarda %20 indirim"
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,"İlk {trialUnlockDays} gün %10 indirim, ardından öğe ve avatarlarda %20 indirim"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Daha az Robux karşılığında daha fazla eğlence. Roblox Plus'a abone ol.
 Feature.RobloxSubscription.Description.JoinEarly,Plus ile erken katıl
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Teklif yalnızca yeni Plus aboneleri için geçerlidir.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Herhangi biri senin bağlantınla Plus satın aldığında.
 Feature.RobloxSubscription.Description.ReferralShare,Birini Plus'a davet et; o Plus'ı satın aldığında ikiniz de {amount} Robux kazanın.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} düğmesine tıklayarak <a href=""{termsUrl}"">Roblox Abonelik Koşulları</a>'nı kabul etmiş olursun. Sen iptal edene kadar her ay otomatik tahsilat yapılır."
+Feature.RobloxSubscription.Heading.ReferralEntry,Plus'ı paylaşarak {amount} Robux kazan
 Feature.RobloxSubscription.Heading.ReferralHistory,Yönlendirme geçmişi
 Feature.RobloxSubscription.Heading.ReferralShare,Plus'ı paylaş ve kazan
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Ücretsiz özel sunucular
@@ -4899,6 +4906,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"""Devam Et"" düğmes
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"""Ücretsiz dene"" düğmesine tıklayarak {linkStart}Roblox Abonelik Koşulları{linkEnd}'nı kabul etmiş olursun. Ücretsiz deneme süren 1 ay içinde sona erer ve ondan sonra her ay senden otomatik olarak ücret alınır. Dilediğin zaman iptal edebilirsin."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"""Ücretsiz dene"" düğmesine tıklayarak {linkStart}Roblox Abonelik Koşulları{linkEnd}'nı kabul etmiş olursun. Ücretsiz deneme süren {trialDuration} {trialPeriodLabel} içinde sona erer ve ondan sonra her {billingPeriodLabel} senden otomatik olarak ücret alınır. Dilediğin zaman iptal edebilirsin."
 Feature.RobloxSubscription.Label.FreeTrialText,Ücretsiz deneme al
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.PendingRobux,Bekleyen Robux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Yönlendirdiğin kişilerin kazancı:
@@ -4923,6 +4931,7 @@ Feature.Schools.Action.AlreadyGraduated,Zaten mezun oldum
 Feature.Schools.Action.CantFindSchool,Okulunu bulamıyor musun?
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,Okulu kaldır
+Feature.Schools.Action.NoSchoolEmail,Okul e-postan yok mu?
 Feature.Schools.Action.Ok,
 Feature.Schools.Action.PrivacyPolicy,
 Feature.Schools.Action.Remove,
@@ -4945,6 +4954,7 @@ Feature.Schools.Description.InviteFriendsUnlockSooner,Okulunun mezunlar grubunun
 Feature.Schools.Description.InviteOthersToVerify,Başkalarını doğrulamaya davet et
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,Daha fazla doğrulanmış mezun gerekiyor
 Feature.Schools.Description.NotAvailableInRegion,Okul özelliği henüz kullanılamıyor.
+Feature.Schools.Description.NotifyWhenSchoolAvailable,Okulun Roblox'a geldiğinde seni bilgilendirebilmemiz için hangi okula gittiğini bize bildir.
 Feature.Schools.Description.RemoveSchoolBody,Okuluna yeniden katılmak için okul e-posta adresini yeniden doğrulaman gerekecek. Aldığın tüm ödül öğeleri silinecek.
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,Bu okul şu anda Roblox'ta mevcut değil.
@@ -5000,6 +5010,7 @@ Feature.Schools.Label.UpsellPerkFindFriends,Okulundan arkadaşlarını bul
 Feature.Schools.Label.UpsellPerkPlayAndChat,Kimin çevrimiçi olduğunu gör ve kolayca birlikte oyna
 Feature.Schools.Label.UpsellPerkTrends,Okulundaki trendleri keşfet
 Feature.Schools.Placeholder.Email,Öğrenci e-postası
+Feature.Schools.Placeholder.SchoolName,Okul adı
 Feature.Schools.Placeholder.SixDigitCode,6 basamaklı kod
 Feature.Schools.RewardGiftBody,Okulunu doğruladığın için teşekkürler. Yeni öğeni Avatar > Aksesuar > Arka Taraf altında bulabilirsin.
 Feature.Screentime.Content.ScreentimeLimitDialog,Günlük ekran süresi sınırına ulaştın. Roblox'a erişebilmek için yarın tekrar gel.
@@ -5111,6 +5122,11 @@ Feature.SongDetails.Label.SongsBy,{artistName} adlı sanatçının şarkıları
 Feature.SongDetails.Label.ThousandPlus,1000'den fazla
 Feature.SongDetails.Label.Vendor,Satıcı
 Feature.SplitPane.EditAvatarButtonText,Avatarı Düzenle
+Feature.SplitPane.Label.CollapseAvatar,Avatarı daralt
+Feature.SplitPane.Label.ExpandAvatar,Avatarı genişlet
+Feature.SplitPane.Label.NextAvatar,Sonraki avatar
+Feature.SplitPane.Label.PreviousAvatar,Önceki avatar
+Feature.SplitPane.Label.Rotate,
 Feature.SplitPane.NoAdditionalAvatarsDialogBody,"Başka bir avatar oluştur, ardından buradan aralarında geçiş yap."
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,Avatar Oluştur
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,Kaydedilmiş Tüm Avatarların Bunlar

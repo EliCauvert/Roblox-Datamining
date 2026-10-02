@@ -16,7 +16,8 @@ local t = {
 return {
 	categories = {
 		validationEnumsModule.UploadCategory.RIGID_ACCESSORY,
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING
+		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
 	},
 	requiredData = {},
 	conditionalData = { validationEnumsModule.SharedDataMember.meshTextures },

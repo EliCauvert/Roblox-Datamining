@@ -292,6 +292,7 @@ Authentication.CrossDevice.Label.Warning2,• Không bao giờ nhập mã của 
 Authentication.CrossDevice.Response.InvalidCode,Mã bạn đã nhập không hợp lệ. Vui lòng đảm bảo bạn đã nhập đúng.
 Authentication.CrossDevice.Response.LoginFail,Đăng Nhập Thất Bại
 Authentication.CrossDevice.Response.LoginSuccess,Đăng Nhập Thành Công
+Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Thử lại: {WaitTime}
 Authentication.Login.Action.Continue,
@@ -302,6 +303,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Gửi lại mã sau {WaitTime} giâ
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Bạn quên Mật khẩu hoặc Tên người dùng?
 Authentication.Login.Action.ForgotUsername,Đã quên tên tài khoản?
 Authentication.Login.Action.ForgotUsernameOrPassword,Quên tên tài khoản hoặc mật khẩu?
+Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Gửi mã một lần cho tôi qua email
 Authentication.Login.Action.NeedHelp,Bạn cần trợ giúp?
 Authentication.Login.Action.Next,
@@ -1412,7 +1414,6 @@ Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Bỏ qua yêu cầu làm b�
 Feature.AddFriends.Action.RequestIgnored,Đã Bỏ Qua Yêu Cầu
 Feature.AddFriends.Description.CameraPermissionWarning,"Chưa Cho Phép Truy Cập Camera. Để sử dụng tính năng quét mã QR, vui lòng cho phép truy cập camera trong ""Cài Đặt"" > ""Ứng Dụng"" > ""Roblox"" trên điện thoại của bạn"
 Feature.AddFriends.Heading.AddFriends,
-Feature.AddFriends.Heading.FindPeople,Tìm người
 Feature.AddFriends.Label.AddFriendsTooltip,Bắt đầu bằng cách tìm bạn bè của bạn để bạn có thể khám phá Roblox cùng nhau.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Tìm người chơi trên Roblox bằng cách tìm kiếm tên tài khoản hoặc tên của họ.
 Feature.AddFriends.Label.ConnectWithContacts,Mời liên hệ hoặc kết nối với bạn bè đang chơi Roblox!
@@ -1423,9 +1424,7 @@ Feature.AddFriends.Label.EmptyState,Bạn muốn khám phá Roblox cùng ai? Th�
 Feature.AddFriends.Label.EmptyState.FriendsRename,Bạn muốn khám phá Roblox cùng ai? Thêm bạn bè để có trải nghiệm thú vị hơn trên Roblox!
 Feature.AddFriends.Label.EmptyStatePrompt,Bạn sẽ khám phá Roblox với ai? Tìm kiếm người chơi để thêm hoặc kết nối với bạn bè mà bạn đã biết!
 Feature.AddFriends.Label.FriendRequests,Yêu Cầu Kết Bạn
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Tìm Kiếm Người Chơi
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Tìm kiếm mọi người
-Feature.AddFriends.Label.MyQRTile,Mã QR của tôi
 Feature.AddFriends.Label.MyQrCode,Mã QR Của Tôi
 Feature.AddFriends.Label.QRCodeTitle,Mã QR
 Feature.AddFriends.Label.SchoolTile,Bạn cùng lớp
@@ -2248,6 +2247,7 @@ Feature.Build.Action.DontShowAgain,Không hiển thị lại
 Feature.Build.Action.EarnRobux,Kiếm Robux
 Feature.Build.Action.Edit,Chỉnh sửa
 Feature.Build.Action.HideAutosaved,Ẩn phiên bản lưu tự động
+Feature.Build.Action.KeepBuilding,Tiếp tục tạo dựng
 Feature.Build.Action.ManageLimit,Quản lý hạn mức
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
@@ -2273,6 +2273,7 @@ Feature.Build.Action.Share,Chia sẻ
 Feature.Build.Action.ShareLink,Chia sẻ đường liên kết
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,Số liệu
+Feature.Build.Action.Stop,Dừng
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Cập nhật mức phân loại
 Feature.Build.Action.UpdateWithChanges,Cập nhật các thay đổi
@@ -2382,7 +2383,12 @@ Feature.Build.Description.RevertToVersion,Xác nhận trả về bản thay đ�
 Feature.Build.Description.ShareLatest,Chia sẻ về những thay đổi trong phiên bản mới nhất của bạn.
 Feature.Build.Description.ShopButton,Thêm điểm truy cập cửa hàng
 Feature.Build.Description.ShortAdCampaign,Cách nhanh chóng để biết người chơi nghĩ gì về trò chơi của bạn.
+Feature.Build.Description.StopBuild,"Yêu cầu này vẫn đang được xử lý. Nếu dừng lúc này, yêu cầu sẽ không được hoàn tất và bạn cần phải gửi lại."
 Feature.Build.Description.UpdateDeveloperProduct,Cập nhật sản phẩm của nhà phát triển {PRODUCT_ID}.
+Feature.Build.Error.AdForbidden,Tài khoản hoặc trò chơi của bạn hiện không thể chạy quảng cáo. Hãy liên hệ với bộ phận hỗ trợ nếu bạn cho rằng đây là sự nhầm lẫn.
+Feature.Build.Error.AdInsufficientFunds,Bạn không có đủ Robux để tạo quảng cáo này. Hãy nạp thêm rồi thử lại.
+Feature.Build.Error.AdInternalError,
+Feature.Build.Error.AdMissingThumbnail,Trò chơi của bạn cần có hình nhỏ trước khi có thể chạy quảng cáo. Hãy thêm hình nhỏ rồi thử lại.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Nội dung mô tả không được quá 1.000 ký tự.
 Feature.Build.Error.DeveloperProductNameRequired,Nhập tên sản phẩm.
 Feature.Build.Error.DeveloperProductNameTooLong,Tên chỉ được chứa tối đa 50 ký tự.
@@ -2568,9 +2574,6 @@ Feature.Build.Message.AccountRequirements,Tài khoản của bạn không đáp 
 Feature.Build.Message.AccountTooNew,Tài khoản của bạn còn quá mới nên chưa thể đăng. Hãy thử lại khi bạn đã tạo tài khoản được 2 ngày.
 Feature.Build.Message.AdCampaignCreateFailed,Không tạo được chiến dịch. Vui lòng thử lại.
 Feature.Build.Message.AdPerformanceLoadFailed,Không tải được hiệu suất quảng cáo
-Feature.Build.Message.AdsPromotionBannerSubtitle,Miễn phí thu hút thêm đối tượng
-Feature.Build.Message.AdsPromotionBannerTitle,Bạn còn {promotionCount} lượt quảng bá miễn phí
-Feature.Build.Message.AdsPromotionBannerTitleSingular,Bạn còn 1 lượt quảng bá miễn phí
 Feature.Build.Message.AdsStatsEmpty,Thu hút thêm người chơi bằng một chiến dịch quảng cáo và giúp trò chơi của bạn tiếp cận được nhiều người hơn
 Feature.Build.Message.AdsStatsEmptyFree,Thu hút thêm người chơi bằng chiến dịch quảng cáo miễn phí và giúp trò chơi của bạn tiếp cận được nhiều người hơn
 Feature.Build.Message.AllFriendsAdded,Bạn đã mời tất cả bạn bè tham gia thử nghiệm sớm.
@@ -2662,6 +2665,7 @@ Feature.Build.Title.AdCampaignDuration,Chiến dịch quảng cáo dài {duratio
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} ngày
 Feature.Build.Title.AdComplete,Đã hoàn tất quảng cáo
 Feature.Build.Title.AdCreated,Đã tạo quảng cáo
+Feature.Build.Title.AdCreatedPeriod,Đã tạo quảng cáo.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Thêm hình ảnh
 Feature.Build.Title.AdsStatsEmpty,Khởi tạo chiến dịch
@@ -2702,6 +2706,7 @@ Feature.Build.Title.PromoteGameFreeSingular,Bạn có một quảng cáo miễn 
 Feature.Build.Title.PromoteGamePaid,Nhiều người chơi khác đang chờ bạn
 Feature.Build.Title.PushNotifications,Thông báo đẩy
 Feature.Build.Title.RevertLastChange,Trả về bản thay đổi gần nhất?
+Feature.Build.Title.StopBuild,Dừng tạo dựng?
 Feature.Build.Title.Tasks,Nhiệm vụ
 Feature.Build.Title.TurnActivity,Hoạt động trong lượt
 Feature.Build.Title.VersionHistory,Lịch sử phiên bản
@@ -3526,7 +3531,6 @@ Feature.Friends.FriendingTooltipBody,Một số yêu cầu kết bạn có thể
 Feature.Friends.Heading.Activities,Hoạt động
 Feature.Friends.Heading.FilterBy,Lọc Theo
 Feature.Friends.Heading.Friends,
-Feature.Friends.Heading.MyConnections,Bạn bè của tôi
 Feature.Friends.Label.AddConnectionVPC,"Để thêm Người thân này, bạn cần có sự cho phép của cha mẹ."
 Feature.Friends.Label.AddConnectionsHint,"Giao lưu càng nhiều, chơi Roblox càng vui!"
 Feature.Friends.Label.AddConnectionsHintBody,Thêm những người bạn đã biết hoặc tìm hiểu Người quen mới
@@ -3663,7 +3667,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Xóa bạn bè đáng t
 Feature.Friends.TrustedFriend.AddBack.Header,Yêu cầu trở thành Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Info.Modal.Header,Bạn bè đáng tin cậy mới
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Thêm bạn bè đáng tin cậy
-Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} đã trở thành bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Đã xóa Bạn bè đáng tin cậy
@@ -4667,6 +4670,7 @@ Feature.PlayerSearchResults.Label.You,Bạn
 Feature.PlayerSearchResults.Label.YouAreConnections,Các bạn đã kết nối
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Đã trở thành bạn bè
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Không hỗ trợ giao dịch mua máy chủ riêng tư trong Studio.
 Feature.Profile.Action.AboutThisProfile,Về hồ sơ này
 Feature.Profile.Action.Accept,Chấp Nhận
 Feature.Profile.Action.AcceptFriends,Chấp Nhận Làm Bạn
@@ -4881,12 +4885,14 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,Không hỗ trợ mua gói �
 Feature.RobloxSubscription.Description.AgeCheckTrial,Hãy xác minh tuổi bằng quy trình kiểm tra độ tuổi để nhận ngay 1 tuần sử dụng Roblox Plus miễn phí thay lời tri ân của chúng tôi. Bạn không cần thêm phương thức thanh toán để nhận ưu đãi dùng thử này.
 Feature.RobloxSubscription.Description.Benefit.Customize,Tùy chỉnh bằng khung hồ sơ và chủ đề của ứng dụng
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Giảm 10% trong 60 ngày đầu, sau đó giảm 20% cho vật phẩm và avatar"
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,"Giảm 10% trong {trialUnlockDays} ngày đầu tiên, sau đó giảm 20% cho vật phẩm và avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Vui hơn, tốn ít Robux hơn. Đăng ký Roblox Plus ngay."
 Feature.RobloxSubscription.Description.JoinEarly,Mua gói Plus để được tham gia sớm
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Ưu đãi chỉ áp dụng cho người mới đăng ký Plus.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Khi có người mua gói Plus bằng đường liên kết của bạn.
-Feature.RobloxSubscription.Description.ReferralShare,Mời bạn bè tham gia Plus – cả hai sẽ cùng nhận được {amount} Robux khi người được mời mua gói đăng ký.
+Feature.RobloxSubscription.Description.ReferralShare,Mời bạn bè đăng ký gói Plus để cả hai cùng nhận được {amount} Robux khi họ mua gói Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Khi nhấp chuột vào \u{201C}{ctaText}\u{201D}, bạn đồng ý với <a href=""{termsUrl}"">Điều khoản gói đăng ký của Roblox</a>. Hệ thống sẽ tự động thu phí hằng tháng cho đến khi bạn hủy."
+Feature.RobloxSubscription.Heading.ReferralEntry,Chia sẻ Plus để nhận {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,Lịch sử giới thiệu
 Feature.RobloxSubscription.Heading.ReferralShare,"Chia sẻ Plus, nhận"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Máy chủ riêng miễn phí
@@ -4899,6 +4905,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Khi nhấp vào ""Ti�
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Khi nhấp chuột vào ""Dùng thử miễn phí"", bạn đồng ý với {linkStart}Điều khoản của gói đăng ký của Roblox{linkEnd}. Thời gian dùng thử miễn phí của bạn sẽ kết thúc sau 1 tháng. Hệ thống sẽ tự động thu phí hằng tháng và bạn có thể hủy gói bất cứ lúc nào."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Khi nhấp chuột vào ""Dùng thử miễn phí"", bạn đồng ý với {linkStart}Điều khoản về gói đăng ký của Roblox.{linkEnd} Thời gian dùng thử miễn phí của bạn sẽ kết thúc sau {trialDuration} {trialPeriodLabel}. Hệ thống sẽ tự động thu phí mỗi {billingPeriodLabel} và bạn có thể hủy gói bất cứ lúc nào."
 Feature.RobloxSubscription.Label.FreeTrialText,Nhận gói dùng thử miễn phí
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.PendingRobux,Robux đang chờ xử lý
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Người được giới thiệu nhận được
@@ -4923,6 +4930,7 @@ Feature.Schools.Action.AlreadyGraduated,Tôi đã tốt nghiệp
 Feature.Schools.Action.CantFindSchool,Bạn không tìm thấy trường học của mình?
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,Xóa trường học
+Feature.Schools.Action.NoSchoolEmail,Bạn không có email do trường cấp?
 Feature.Schools.Action.Ok,
 Feature.Schools.Action.PrivacyPolicy,
 Feature.Schools.Action.Remove,
@@ -4945,6 +4953,7 @@ Feature.Schools.Description.InviteFriendsUnlockSooner,Giúp ra mắt nhóm cựu
 Feature.Schools.Description.InviteOthersToVerify,Mời người khác xác minh
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,Cần thêm cựu học sinh đã được xác minh
 Feature.Schools.Description.NotAvailableInRegion,Tính năng trường học chưa hoạt động.
+Feature.Schools.Description.NotifyWhenSchoolAvailable,Hãy cho chúng tôi biết bạn học ở trường nào để chúng tôi có thể thông báo cho bạn khi trường của bạn có trên Roblox.
 Feature.Schools.Description.RemoveSchoolBody,Bạn sẽ phải xác minh lại địa chỉ email trường học để tham gia lại vào trường học. Mọi vật phẩm thưởng bạn đã nhận được sẽ bị xóa.
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,Trường học này hiện chưa hoạt động trên Roblox.
@@ -5000,6 +5009,7 @@ Feature.Schools.Label.UpsellPerkFindFriends,Tìm bạn bè học cùng trường
 Feature.Schools.Label.UpsellPerkPlayAndChat,Dễ dàng biết ai đang trực tuyến để chơi cùng nhau
 Feature.Schools.Label.UpsellPerkTrends,Khám phá xu hướng tại trường bạn học
 Feature.Schools.Placeholder.Email,Email học sinh/sinh viên
+Feature.Schools.Placeholder.SchoolName,Tên trường
 Feature.Schools.Placeholder.SixDigitCode,
 Feature.Schools.RewardGiftBody,Cảm ơn bạn đã xác minh trường học. Bạn có thể tìm thấy vật phẩm mới của mình trong mục Avatar > Phụ kiện > Lưng.
 Feature.Screentime.Content.ScreentimeLimitDialog,Bạn đã đạt giới hạn thời gian dùng máy hàng ngày. Hãy quay lại vào ngày mai để truy cập lại vào Roblox.
@@ -5111,6 +5121,11 @@ Feature.SongDetails.Label.SongsBy,Những bài hát của {artistName}
 Feature.SongDetails.Label.ThousandPlus,1000+
 Feature.SongDetails.Label.Vendor,Bên cung cấp
 Feature.SplitPane.EditAvatarButtonText,
+Feature.SplitPane.Label.CollapseAvatar,Thu gọn avatar
+Feature.SplitPane.Label.ExpandAvatar,Mở rộng avatar
+Feature.SplitPane.Label.NextAvatar,Avatar tiếp theo
+Feature.SplitPane.Label.PreviousAvatar,Avatar trước
+Feature.SplitPane.Label.Rotate,
 Feature.SplitPane.NoAdditionalAvatarsDialogBody,"Hãy tạo một avatar khác, sau đó chuyển đổi giữa các avatar tại đây."
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,Tạo avatar
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,Bạn đã xem hết avatar đã lưu

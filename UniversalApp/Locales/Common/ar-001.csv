@@ -275,6 +275,7 @@ Authentication.CrossDevice.Label.Warning2,• لا تدخل أبدًا رمز م
 Authentication.CrossDevice.Response.InvalidCode,الرمز الذي أدخلته غير صالح. الرجاء التأكد من إدخاله بشكل صحيح.
 Authentication.CrossDevice.Response.LoginFail,تعذر تسجيل الدخول
 Authentication.CrossDevice.Response.LoginSuccess,تم تسجيل الدخول بنجاح
+Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,إعادة المحاولة في: {WaitTime}
 Authentication.Login.Action.Continue,
@@ -285,6 +286,7 @@ Authentication.Login.Action.EmailOtpWaitTime,إعادة إرسال الكود ف
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,نسيت كلمة المرور أو اسم المستخدم؟
 Authentication.Login.Action.ForgotUsername,هل نسيت اسم المستخدم؟
 Authentication.Login.Action.ForgotUsernameOrPassword,هل نسيت اسم المستخدم أو كلمة المرور؟
+Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,إرسال رمز صالح لمرة واحدة عبر البريد إلكتروني
 Authentication.Login.Action.NeedHelp,بحاجة إلى مساعدة؟
 Authentication.Login.Action.Next,
@@ -1392,7 +1394,6 @@ Feature.AddFriends.Action.IgnoreTrustedFriendRequest,تجاهل طلب الصد�
 Feature.AddFriends.Action.RequestIgnored,تم تجاهل الطلب
 Feature.AddFriends.Description.CameraPermissionWarning,"الوصول إلى الكاميرا غير مفعل. لاستخدام ميزة مسح رمز QR، يرجى إعطاء الإذن للكاميرا. انتقل إلى ""الإعدادات"" عل هاتفك > ""التطبيقات"" > ""Roblox"""
 Feature.AddFriends.Heading.AddFriends,إضافة أصدقاء
-Feature.AddFriends.Heading.FindPeople,العثور على أشخاص
 Feature.AddFriends.Label.AddFriendsTooltip,ابدأ بالبحث عن أصدقائك لاستكشاف Roblox برفقتهم.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,العثور على أشخاص على Roblox عن طريق البحث عن اسم المستخدم أو اسم العرض.
 Feature.AddFriends.Label.ConnectWithContacts,دعوة جهات اتصالك أو الاتصال بأصدقاء على Roblox.
@@ -1403,9 +1404,7 @@ Feature.AddFriends.Label.EmptyState,مع مَن تود استكشاف منصة R
 Feature.AddFriends.Label.EmptyState.FriendsRename,مع مَن تود استكشاف منصة Roblox؟ أضِف الأصدقاء للاستمتاع بالمزيد على منصة Roblox!
 Feature.AddFriends.Label.EmptyStatePrompt,من سيستكشف Roblox معك؟ ابحث عن أشخاص لإضافتهم أو اتصل بالأصدقاء الذين تعرفهم.
 Feature.AddFriends.Label.FriendRequests,طلبات الصداقة
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,البحث عن أشخاص
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
-Feature.AddFriends.Label.MyQRTile,كود QR الخاص بي
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,البحث عن أشخاص
 Feature.AddFriends.Label.MyQrCode,رمز QR الشخصي
 Feature.AddFriends.Label.QRCodeTitle,كود QR
 Feature.AddFriends.Label.SchoolTile,زملاء الدراسة
@@ -1967,6 +1966,7 @@ Feature.Avatar.Label.SetAvatarCount,{itemCount} من الأفاتارات
 Feature.Avatar.Label.SetLimitReachedBody,يمكنك الحصول على ما يصل إلى {setLimit} من المجموعات فقط. احذف واحدة لإفساح المجال
 Feature.Avatar.Label.SetNameDuplicateBody,لديك مجموعة بهذا الاسم بالفعل، اختر اسمًا مختلفًا
 Feature.Avatar.Label.SetNameNotAllowedBody,يُرجى اختيار اسم آخر
+Feature.Avatar.Label.ShareAvatarToMoments,شارِك أفاتارك في اللحظات
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,نشر مجموعة الأفاتار على المتجر
 Feature.Avatar.Label.Shirt,قميص
 Feature.Avatar.Label.ShirtClassic,قميص كلاسيكي
@@ -2227,6 +2227,7 @@ Feature.Build.Action.DontShowAgain,عدم الإظهار مرة أخرى
 Feature.Build.Action.EarnRobux,اربح عملات Robux
 Feature.Build.Action.Edit,تحرير
 Feature.Build.Action.HideAutosaved,إخفاء ما تم حفظه تلقائيًا
+Feature.Build.Action.KeepBuilding,مواصلة ميزة Build
 Feature.Build.Action.ManageLimit,إدارة الحد
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
@@ -2252,6 +2253,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,مشاركة الرابط
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,الإحصائيات
+Feature.Build.Action.Stop,إيقاف
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,تحديث التصنيف
 Feature.Build.Action.UpdateWithChanges,التحديث بالتغييرات
@@ -2361,7 +2363,12 @@ Feature.Build.Description.RevertToVersion,تأكيد التراجع عن الت�
 Feature.Build.Description.ShareLatest,شارك التغييرات التي أُجريت على أحدث إصدار لديك.
 Feature.Build.Description.ShopButton,إضافة نقطة إدخال للتسوق
 Feature.Build.Description.ShortAdCampaign,طريقة سريعة لمعرفة رأي اللاعبين في لعبتك.
+Feature.Build.Description.StopBuild,لا يزال هذا الطلب قيد المعالجة. إذا قمت بالإيقاف الآن، فلن يكتمل وستحتاج إلى إرساله مرة أخرى.
 Feature.Build.Description.UpdateDeveloperProduct,تحديث منتج المطوّر {PRODUCT_ID}.
+Feature.Build.Error.AdForbidden,لا يمكن لحسابك أو لعبتك تشغيل إعلان في الوقت الحالي. اتصل بالدعم إذا كنت تعتقد أن هذا خطأ.
+Feature.Build.Error.AdInsufficientFunds,ليس لديك ما يكفي من عملات Robux لإنشاء هذا الإعلان. أضِف المزيد وحاول مرة أخرى.
+Feature.Build.Error.AdInternalError,حدث خطأ ما. حاول مرة أخرى لاحقًا.
+Feature.Build.Error.AdMissingThumbnail,تحتاج لعبتك إلى صورة مصغرة قبل أن تتمكن من تشغيل إعلان. أضِف صورة مصغرة وحاول مرة أخرى.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,يجب أن يتكون الوصف من 1000 حرفٍ أو أقل.
 Feature.Build.Error.DeveloperProductNameRequired,أدخل اسم المنتج.
 Feature.Build.Error.DeveloperProductNameTooLong,يجب أن يتكون الاسم من 50 حرفًا أو أقل.
@@ -2547,9 +2554,6 @@ Feature.Build.Message.AccountRequirements,لا يفي حسابك بمتطلبا�
 Feature.Build.Message.AccountTooNew,حسابك جديد جدًا بحيث لا يمكن النشر. حاول مرة أخرى بعد يومين من إنشائه.
 Feature.Build.Message.AdCampaignCreateFailed,تعذَّر إنشاء حملتك. يُرجى المحاولة مرة أخرى.
 Feature.Build.Message.AdPerformanceLoadFailed,تعذَّر تحميل أداء الإعلان
-Feature.Build.Message.AdsPromotionBannerSubtitle,زوِّد أعداد جمهورك مجانًا
-Feature.Build.Message.AdsPromotionBannerTitle,لديك {promotionCount} من العروض الخاصة المجانية المتبقية
-Feature.Build.Message.AdsPromotionBannerTitleSingular,لديك عرض خاص مجاني واحد متبقٍ
 Feature.Build.Message.AdsStatsEmpty,زوِّد أعداد جمهورك من خلال حملة إعلانية واجعل لعبتك متاحة للاكتشاف
 Feature.Build.Message.AdsStatsEmptyFree,زوِّد أعداد جمهورك من خلال حملة إعلانية مجانية واجعل لعبتك متاحة للاكتشاف
 Feature.Build.Message.AllFriendsAdded,لقد دعوت جميع أصدقائك كمختبري لعب مبكرين.
@@ -2641,6 +2645,7 @@ Feature.Build.Title.AdCampaignDuration,حملة إعلانية لمدة {duratio
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} من الأيام
 Feature.Build.Title.AdComplete,اكتمل الإعلان
 Feature.Build.Title.AdCreated,تم إنشاء الإعلان
+Feature.Build.Title.AdCreatedPeriod,تم إنشاء الإعلان.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,إضافة صور
 Feature.Build.Title.AdsStatsEmpty,بدء حملة
@@ -2681,6 +2686,7 @@ Feature.Build.Title.PromoteGameFreeSingular,لقد حصلت على إعلان م
 Feature.Build.Title.PromoteGamePaid,المزيد من اللاعبين في انتظارك
 Feature.Build.Title.PushNotifications,الإشعارات الفورية
 Feature.Build.Title.RevertLastChange,هل تريد التراجع عن التغيير الأخير؟
+Feature.Build.Title.StopBuild,هل تريد إيقاف عمل ميزة Build؟
 Feature.Build.Title.Tasks,المهام
 Feature.Build.Title.TurnActivity,نشاط الدور
 Feature.Build.Title.VersionHistory,سجل الإصدارات
@@ -3505,7 +3511,6 @@ Feature.Friends.FriendingTooltipBody,قد تأتي بعض طلبات الصدا�
 Feature.Friends.Heading.Activities,الأنشطة
 Feature.Friends.Heading.FilterBy,تصفية حسب
 Feature.Friends.Heading.Friends,
-Feature.Friends.Heading.MyConnections,أصدقائي
 Feature.Friends.Label.AddConnectionVPC,لإضافة جهة التواصل الموثوقة هذه، أنت بحاجة إلى إذن والديك.
 Feature.Friends.Label.AddConnectionsHint,جهات الاتصال تجعل Roblox أكثر متعة!
 Feature.Friends.Label.AddConnectionsHintBody,أضِف الناس الذين تعرفهم بالفعل أو اكتشِف جهات اتصال جديدة
@@ -3642,8 +3647,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,إزالة صديق م�
 Feature.Friends.TrustedFriend.AddBack.Header,طلب صديق موثوق
 Feature.Friends.TrustedFriend.Info.Modal.Header,صديق موثوق جديد
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,إضافة صديق موثوق
-Feature.Friends.TrustedFriend.Label.AddTrustedFriends,إضافة أصدقاء موثوق بهم
-Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,إضافة أصدقاء موثوق بهم
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,أصبح {name} الآن من أصدقائك الموثوقين
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,تم إزالة الصديق الموثوق
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,تم إرسال طلب إضافة كصديق موثوق
@@ -4646,6 +4650,7 @@ Feature.PlayerSearchResults.Label.You,أنت
 Feature.PlayerSearchResults.Label.YouAreConnections,أنتم جهات اتصال
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,صرت صديقًا
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,عمليات شراء الخوادم الخاصة غير مدعومة في Studio.
 Feature.Profile.Action.AboutThisProfile,حول هذا الملف الشخصي
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4860,12 +4865,14 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,هذا الاشتراك غي
 Feature.RobloxSubscription.Description.AgeCheckTrial,تحقق من عمرك من خلال إجراء عملية تقدير العمر واحصل على أسبوع مجاني من اشتراك Roblox Plus كتعبير عن شكرنا لك. لا يلزم وجود طريقة دفع للاستمتاع بهذه الفترة التجريبية المجانية.
 Feature.RobloxSubscription.Description.Benefit.Customize,التخصيص باستخدام إطارات الملف الشخصي وسمات التطبيق
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,خصم بنسبة 10% في أول 60 يومًا، ثم خصم بنسبة 20% على العناصر والأفاتارات
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,خصم بنسبة 10% في أول {trialUnlockDays} من الأيام، ثم خصم بنسبة 20% على العناصر والأفاتارات
 Feature.RobloxSubscription.Description.ExclusiveBenefits,متعة أكثر مقابل عدد أقل من عملات Robux. اشترِك في Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,انضم مبكرًا مع اشتراك Plus
 Feature.RobloxSubscription.Description.ReferralRecipientReward,العرض صالح لمشتركي Plus الجدد فقط.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,عندما يشتري أي شخص اشتراك Plus باستخدام رابطك.
 Feature.RobloxSubscription.Description.ReferralShare,ادعُ شخصًا إلى اشتراك Plus وسيحصل كلاكما على {amount} من عملات Robux عند شرائه اشتراك Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"بالضغط على \u{201C}{ctaText}\u{201D}، فإنك توافق على <a href=""{termsUrl}"">شروط الاشتراك في منصّة Roblox</a>. سيتم تحصيل الرسوم منك تلقائيًا كل شهر حتى تقوم بالإلغاء."
+Feature.RobloxSubscription.Heading.ReferralEntry,شارك Plus للحصول على {amount} من عملات Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,سجل الإحالات
 Feature.RobloxSubscription.Heading.ReferralShare,شارك Plus، واحصل على
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,خوادم خاصة مجانية
@@ -4878,6 +4885,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"بالضغط على "
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"بالضغط على ""جرب مجانًا""، فإنك توافق على {linkStart}شروط الاشتراك في Roblox.{linkEnd} ستنتهي الفترة التجريبية المجانية بعد شهر واحد وسيتم تحصيل الرسوم منك تلقائيًا كل شهر ويمكنك الإلغاء في أي وقت."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"بالضغط على ""جرِّب مجانًا""، فإنك توافق على {linkStart}شروط الاشتراك في منصّة Roblox.{linkEnd} ستنتهي الفترة التجريبية المجانية بعد {trialDuration} {trialPeriodLabel} وسيتم تحصيل الرسوم منك تلقائيًا كل {billingPeriodLabel} ويمكنك الإلغاء في أي وقت."
 Feature.RobloxSubscription.Label.FreeTrialText,احصل على فترة تجريبية مجانية
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.PendingRobux,عملات Robux المعلقة
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} من عملات Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,يحصل الأشخاص الذين تدعوهم على
@@ -4902,6 +4910,7 @@ Feature.Schools.Action.AlreadyGraduated,لقد تخرجت بالفعل
 Feature.Schools.Action.CantFindSchool,هل لا تستطيع العثور على مدرستك؟
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,إزالة المدرسة
+Feature.Schools.Action.NoSchoolEmail,أليس لديك بريد إلكتروني مدرسي؟
 Feature.Schools.Action.Ok,
 Feature.Schools.Action.PrivacyPolicy,
 Feature.Schools.Action.Remove,
@@ -4924,6 +4933,7 @@ Feature.Schools.Description.InviteFriendsUnlockSooner,ساعد في فتح مج�
 Feature.Schools.Description.InviteOthersToVerify,ادعُ الآخرين لإجراء عملية التحقق
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,يلزم إضافة المزيد من الخريجين الذين تم التحقق منهم
 Feature.Schools.Description.NotAvailableInRegion,ميزة المدرسة غير متوفرة بعد.
+Feature.Schools.Description.NotifyWhenSchoolAvailable,أخبرنا بالمدرسة التي تدرس فيها لنتمكن من إعلامك عندما تصبح مدرستك متاحة على منصّة Roblox.
 Feature.Schools.Description.RemoveSchoolBody,سيتعين عليك إعادة التحقق من عنوان بريدك الإلكتروني المدرسي للانضمام مرة أخرى إلى مدرستك. سيتم حذف أي عناصر مكافأة تلقيتها.
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,هذه المدرسة غير متاحة حاليًا على منصّة Roblox.
@@ -4979,6 +4989,7 @@ Feature.Schools.Label.UpsellPerkFindFriends,ابحث عن الأصدقاء من 
 Feature.Schools.Label.UpsellPerkPlayAndChat,اطلع على الأشخاص المتواجدين أون لاين والعبوا معًا بسهولة
 Feature.Schools.Label.UpsellPerkTrends,اكتشف ما هو رائج في مدرستك
 Feature.Schools.Placeholder.Email,البريد الإلكتروني للطالب
+Feature.Schools.Placeholder.SchoolName,اسم المدرسة
 Feature.Schools.Placeholder.SixDigitCode,كود مكون من 6 أرقام
 Feature.Schools.RewardGiftBody,شكرًا لك على إجراء خطوات التحقُّق من مدرستك. يمكنك العثور على العنصر الجديد ضمن الأفاتار > الإكسسوار > الظهر.
 Feature.Screentime.Content.ScreentimeLimitDialog,لقد وصلت إلى الحدّ اليومي المخصص لوقت الشاشة. يمكنك العودة غدًا لمواصلة استخدام Roblox مرة أخرى.
@@ -5089,6 +5100,11 @@ Feature.SongDetails.Label.SongsBy,قائمة أغاني {artistName}
 Feature.SongDetails.Label.ThousandPlus,أكثر من 1000
 Feature.SongDetails.Label.Vendor,المورّد
 Feature.SplitPane.EditAvatarButtonText,
+Feature.SplitPane.Label.CollapseAvatar,طيّ الأفاتار
+Feature.SplitPane.Label.ExpandAvatar,توسيع الأفاتار
+Feature.SplitPane.Label.NextAvatar,الأفاتار التالي
+Feature.SplitPane.Label.PreviousAvatar,الأفاتار السابق
+Feature.SplitPane.Label.Rotate,
 Feature.SplitPane.NoAdditionalAvatarsDialogBody,أنشئ أفاتارًا آخر، ثم بدّل بينهما هنا.
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,أنشئ أفاتارًا
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,هذه هي كل أفاتاراتك المحفوظة

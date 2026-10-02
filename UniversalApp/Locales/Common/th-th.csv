@@ -275,6 +275,7 @@ Authentication.CrossDevice.Label.Warning2,• ห้ามกรอกรหั�
 Authentication.CrossDevice.Response.InvalidCode,รหัสที่คุณกรอกไม่ถูกต้อง โปรดตรวจสอบว่าคุณได้กรอกรหัสอย่างถูกต้อง
 Authentication.CrossDevice.Response.LoginFail,ลงชื่อเข้าใช้ไม่สำเร็จ
 Authentication.CrossDevice.Response.LoginSuccess,ลงชื่อเข้าใช้สำเร็จแล้ว
+Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,ลองอีกครั้งในอีก: {WaitTime}
 Authentication.Login.Action.Continue,
@@ -285,6 +286,7 @@ Authentication.Login.Action.EmailOtpWaitTime,ส่งรหัสอีกค�
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,ลืมรหัสผ่านหรือชื่อผู้ใช้ใช่ไหม?
 Authentication.Login.Action.ForgotUsername,ลืมชื่อผู้ใช้ใช่ไหม?
 Authentication.Login.Action.ForgotUsernameOrPassword,ลืมชื่อผู้ใช้หรือรหัสผ่านใช่ไหม?
+Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,ส่งรหัสแบบใช้ครั้งเดียวให้ฉันทางอีเมล
 Authentication.Login.Action.NeedHelp,ต้องการความช่วยเหลือใช่หรือไม่?
 Authentication.Login.Action.Next,
@@ -1395,7 +1397,6 @@ Feature.AddFriends.Action.IgnoreTrustedFriendRequest,ปฏิเสธคำข
 Feature.AddFriends.Action.RequestIgnored,คำขอถูกปฏิเสธ
 Feature.AddFriends.Description.CameraPermissionWarning,"การเข้าถึงกล้องถูกปิดใช้งาน หากต้องการใช้คุณสมบัติการสแกนรหัส QR โปรดให้สิทธิ์ในการเข้าถึงกล้องบนโทรศัพท์ของคุณที่ ""การตั้งค่า"" > ""แอปพลิเคชัน"" > ""Roblox"""
 Feature.AddFriends.Heading.AddFriends,
-Feature.AddFriends.Heading.FindPeople,ค้นหาผู้คน
 Feature.AddFriends.Label.AddFriendsTooltip,เริ่มต้นด้วยการค้นหาเพื่อนๆ ของคุณเพื่อจะได้ไปสำรวจ Roblox ด้วยกัน
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,ค้นหาผู้ใช้บน Roblox โดยใช้ชื่อผู้ใช้หรือชื่อในการค้นหา
 Feature.AddFriends.Label.ConnectWithContacts,เชิญเพื่อนจากรายชื่อผู้ติดต่อหรือเชื่อมต่อกับเพื่อนๆ ที่อยู่บน Roblox อยู่แล้วก็ได้!
@@ -1406,10 +1407,8 @@ Feature.AddFriends.Label.EmptyState,คุณจะออกสำรวจ Robl
 Feature.AddFriends.Label.EmptyState.FriendsRename,คุณจะออกสำรวจ Roblox กับใครดี? เพิ่มเพื่อนเพื่อทำสิ่งต่างๆ บน Roblox ได้มากขึ้น!
 Feature.AddFriends.Label.EmptyStatePrompt,ใครที่คุณจะสำรวจ Roblox ด้วย? ค้นหาผู้ใช้เพื่อเพิ่มเป็นเพื่อนหรือเชื่อมต่อกับเพื่อนๆ ที่คุณรู้จักอยู่แล้วก็ได้!
 Feature.AddFriends.Label.FriendRequests,คำขอเป็นเพื่อน
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,ค้นหาผู้ใช้
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
-Feature.AddFriends.Label.MyQRTile,รหัส QR ของฉัน
-Feature.AddFriends.Label.MyQrCode,
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,ค้นหาผู้ใช้
+Feature.AddFriends.Label.MyQrCode,รหัส QR ของฉัน
 Feature.AddFriends.Label.QRCodeTitle,รหัส QR
 Feature.AddFriends.Label.SchoolTile,เพื่อนร่วมชั้น
 Feature.AddFriends.Label.SearchForFriendsPrompt,ค้นหาผู้ใช้บน Roblox โดยใช้ชื่อผู้ใช้หรือชื่อที่แสดงในการค้นหา
@@ -2231,6 +2230,7 @@ Feature.Build.Action.DontShowAgain,ไม่ต้องแสดงอีก
 Feature.Build.Action.EarnRobux,รับ Robux
 Feature.Build.Action.Edit,แก้ไข
 Feature.Build.Action.HideAutosaved,ซ่อนรายการที่บันทึกอัตโนมัติ
+Feature.Build.Action.KeepBuilding,สร้างต่อ
 Feature.Build.Action.ManageLimit,จัดการวงเงิน
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
@@ -2256,6 +2256,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,แชร์ลิงก์
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,สถิติ
+Feature.Build.Action.Stop,หยุด
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,อัปเดตระดับความเหมาะสม
 Feature.Build.Action.UpdateWithChanges,อัปเดตตามการเปลี่ยนแปลง
@@ -2365,7 +2366,12 @@ Feature.Build.Description.RevertToVersion,ยืนยันเพื่อย�
 Feature.Build.Description.ShareLatest,แชร์ว่าเวอร์ชันล่าสุดของคุณมีอะไรเปลี่ยนแปลงไปบ้าง
 Feature.Build.Description.ShopButton,เพิ่มจุดเริ่มต้นการช็อปปิ้ง
 Feature.Build.Description.ShortAdCampaign,วิธีดูแบบเร็วๆ ว่าผู้เล่นคิดอย่างไรเกี่ยวกับเกมของคุณ
+Feature.Build.Description.StopBuild,คำขอนี้ยังอยู่ระหว่างดำเนินการ หากคุณหยุดตอนนี้ การดำเนินการจะไม่เสร็จสิ้น และคุณจะต้องส่งคำขออีกครั้ง
 Feature.Build.Description.UpdateDeveloperProduct,อัปเดตผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
+Feature.Build.Error.AdForbidden,บัญชีหรือเกมของคุณไม่สามารถเผยแพร่โฆษณาได้ในตอนนี้ โปรดติดต่อฝ่ายบริการช่วยเหลือหากคุณคิดว่านี่เป็นข้อผิดพลาด
+Feature.Build.Error.AdInsufficientFunds,คุณมี Robux ไม่เพียงพอที่จะสร้างโฆษณานี้ โปรดเพิ่ม Robux แล้วลองอีกครั้ง
+Feature.Build.Error.AdInternalError,มีปัญหาบางอย่างเกิดขึ้น โปรดลองอีกครั้งภายหลัง
+Feature.Build.Error.AdMissingThumbnail,เกมของคุณต้องมีภาพขนาดย่อก่อนจึงจะเผยแพร่โฆษณาได้ โปรดเพิ่มภาพขนาดย่อแล้วลองอีกครั้ง
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"คำอธิบายต้องมีความยาวไม่เกิน 1,000 อักขระ"
 Feature.Build.Error.DeveloperProductNameRequired,กรอกชื่อผลิตภัณฑ์
 Feature.Build.Error.DeveloperProductNameTooLong,ชื่อต้องมีความยาวไม่เกิน 50 อักขระ
@@ -2551,9 +2557,6 @@ Feature.Build.Message.AccountRequirements,บัญชีของคุณม�
 Feature.Build.Message.AccountTooNew,บัญชีของคุณยังใหม่เกินไปที่จะเผยแพร่ ลองอีกครั้งเมื่อบัญชีมีอายุ 2 วัน
 Feature.Build.Message.AdCampaignCreateFailed,ไม่สามารถสร้างแคมเปญของคุณได้ โปรดลองอีกครั้ง
 Feature.Build.Message.AdPerformanceLoadFailed,ไม่สามารถโหลดประสิทธิภาพโฆษณาได้
-Feature.Build.Message.AdsPromotionBannerSubtitle,เพิ่มกลุ่มเป้าหมายของคุณได้ฟรี
-Feature.Build.Message.AdsPromotionBannerTitle,คุณเหลือโปรโมชันฟรีอีก {promotionCount} ครั้ง
-Feature.Build.Message.AdsPromotionBannerTitleSingular,คุณเหลือโปรโมชันฟรีอีก 1 ครั้ง
 Feature.Build.Message.AdsStatsEmpty,เพิ่มกลุ่มเป้าหมายของคุณด้วยแคมเปญโฆษณาและทำให้เกมของคุณเป็นที่รู้จัก
 Feature.Build.Message.AdsStatsEmptyFree,เพิ่มกลุ่มเป้าหมายของคุณด้วยแคมเปญโฆษณาฟรีและทำให้เกมของคุณเป็นที่รู้จัก
 Feature.Build.Message.AllFriendsAdded,คุณเชิญเพื่อนทุกคนมาเป็นผู้ทดลองเล่นระยะแรกแล้ว
@@ -2645,6 +2648,7 @@ Feature.Build.Title.AdCampaignDuration,แคมเปญโฆษณา {durati
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} วัน
 Feature.Build.Title.AdComplete,โฆษณาเสร็จแล้ว
 Feature.Build.Title.AdCreated,สร้างโฆษณาแล้ว
+Feature.Build.Title.AdCreatedPeriod,
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,เพิ่มภาพ
 Feature.Build.Title.AdsStatsEmpty,เริ่มใช้แคมเปญ
@@ -2685,6 +2689,7 @@ Feature.Build.Title.PromoteGameFreeSingular,คุณได้รับสิท
 Feature.Build.Title.PromoteGamePaid,มีผู้เล่นอีกมากมายรออยู่
 Feature.Build.Title.PushNotifications,การแจ้งเตือนแบบพุช
 Feature.Build.Title.RevertLastChange,แปลงกลับการเปลี่ยนแปลงล่าสุดไหม?
+Feature.Build.Title.StopBuild,หยุดสร้างใช่ไหม?
 Feature.Build.Title.Tasks,งาน
 Feature.Build.Title.TurnActivity,เปลี่ยนกิจกรรม
 Feature.Build.Title.VersionHistory,ประวัติเวอร์ชัน
@@ -3509,7 +3514,6 @@ Feature.Friends.FriendingTooltipBody,คำขอเป็นเพื่อน�
 Feature.Friends.Heading.Activities,กิจกรรม
 Feature.Friends.Heading.FilterBy,กรองตาม
 Feature.Friends.Heading.Friends,
-Feature.Friends.Heading.MyConnections,เพื่อนของฉัน
 Feature.Friends.Label.AddConnectionVPC,หากต้องการเพิ่มคนรู้จักที่เชื่อได้นี้ คุณต้องได้รับอนุญาตจากผู้ปกครองก่อน
 Feature.Friends.Label.AddConnectionsHint,เครือข่ายทำให้ Roblox สนุกยิ่งขึ้น!
 Feature.Friends.Label.AddConnectionsHintBody,เพิ่มคนที่คุณรู้จักอยู่แล้วหรือค้นหาเครือข่ายใหม่ๆ
@@ -3646,7 +3650,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,ลบเพื่อ�
 Feature.Friends.TrustedFriend.AddBack.Header,
 Feature.Friends.TrustedFriend.Info.Modal.Header,เพื่อนที่เชื่อได้รายใหม่
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,เพิ่มเพื่อนที่เชื่อได้
-Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} เป็นเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,ลบเพื่อนที่เชื่อได้แล้ว
@@ -4650,6 +4653,7 @@ Feature.PlayerSearchResults.Label.You,คุณ
 Feature.PlayerSearchResults.Label.YouAreConnections,คุณเป็นคนรู้จักกัน
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,คุณเป็นเพื่อนกันแล้ว
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio ไม่รองรับการซื้อเซิร์ฟเวอร์ส่วนตัว
 Feature.Profile.Action.AboutThisProfile,เกี่ยวกับโปรไฟล์นี้
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4864,12 +4868,14 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,การสมัครส�
 Feature.RobloxSubscription.Description.AgeCheckTrial,ตรวจสอบยืนยันอายุของคุณ แล้วรับสิทธิ์ทดลองใช้ Roblox Plus ฟรี 1 สัปดาห์แทนคำขอบคุณ ไม่ต้องระบุวิธีการชำระเงิน ก็สนุกกับสิทธิ์ทดลองใช้ฟรีนี้ได้เลย
 Feature.RobloxSubscription.Description.Benefit.Customize,ปรับแต่งด้วยกรอบโปรไฟล์และธีมแอป
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,ส่วนลด 10% ใน 60 วันแรก จากนั้นลด 20% สำหรับไอเท็มและอวาตาร์
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,ส่วนลด 10% ใน {trialUnlockDays} วันแรก จากนั้นลด 20% สำหรับไอเท็มและอวาตาร์
 Feature.RobloxSubscription.Description.ExclusiveBenefits,สนุกมากขึ้น แต่ใช้ Robux น้อยลง สมัครสมาชิก Roblox Plus เลย
 Feature.RobloxSubscription.Description.JoinEarly,เข้าร่วมได้ก่อนใครเมื่อสมัคร Plus
 Feature.RobloxSubscription.Description.ReferralRecipientReward,ข้อเสนอใช้ได้กับสมาชิก Plus รายใหม่เท่านั้น
 Feature.RobloxSubscription.Description.ReferralReferrerReward,เมื่อมีคนซื้อ Plus ด้วยลิงก์ของคุณ
 Feature.RobloxSubscription.Description.ReferralShare,ชวนเพื่อนมาใช้ Plus แล้วรับ {amount} Robux ไปเลยทั้งคู่เมื่อเพื่อนซื้อ Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"การคลิก \u{201C}{ctaText}\u{201D} จะถือว่าคุณยอมรับ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
+Feature.RobloxSubscription.Heading.ReferralEntry,แชร์ Plus แล้วรับ {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,ประวัติการแนะนำ
 Feature.RobloxSubscription.Heading.ReferralShare,แชร์ Plus แล้วรับ
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,เซิร์ฟเวอร์ส่วนตัวฟรี
@@ -4882,6 +4888,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"การคลิก
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"การคลิก ""ลองใช้ฟรี"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd} ช่วงทดลองใช้ฟรีของคุณจะสิ้นสุดในอีก 1 เดือน โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติและคุณยกเลิกได้ทุกเมื่อ"
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"การคลิก ""ลองใช้ฟรี"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd} ช่วงทดลองใช้ฟรีของคุณจะสิ้นสุดในอีก {trialDuration} {trialPeriodLabel} โดยจะมีการเรียกเก็บเงินในแต่ละ{billingPeriodLabel}โดยอัตโนมัติ และคุณยกเลิกได้ทุกเมื่อ"
 Feature.RobloxSubscription.Label.FreeTrialText,ทดลองใช้ฟรี
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.PendingRobux,Robux ที่รอดำเนินการ
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,ผู้ที่คุณแนะนำจะได้รับ
@@ -4906,6 +4913,7 @@ Feature.Schools.Action.AlreadyGraduated,ฉันสำเร็จการศ�
 Feature.Schools.Action.CantFindSchool,ไม่พบโรงเรียนของคุณใช่ไหม?
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,ลบโรงเรียน
+Feature.Schools.Action.NoSchoolEmail,ไม่มีอีเมลของโรงเรียนใช่ไหม?
 Feature.Schools.Action.Ok,
 Feature.Schools.Action.PrivacyPolicy,
 Feature.Schools.Action.Remove,
@@ -4928,6 +4936,7 @@ Feature.Schools.Description.InviteFriendsUnlockSooner,ช่วยให้ก�
 Feature.Schools.Description.InviteOthersToVerify,เชิญคนอื่นมายืนยันตัวตนกัน
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,ต้องมีศิษย์เก่าที่ตรวจสอบยืนยันแล้วมากกว่านี้
 Feature.Schools.Description.NotAvailableInRegion,คุณสมบัติโรงเรียนยังไม่พร้อมใช้งาน
+Feature.Schools.Description.NotifyWhenSchoolAvailable,บอกเราว่าคุณเรียนที่ไหน เราจะได้แจ้งให้คุณทราบเมื่อโรงเรียนของคุณพร้อมใช้งานบน Roblox
 Feature.Schools.Description.RemoveSchoolBody,คุณจะต้องตรวจสอบยืนยันที่อยู่อีเมลของโรงเรียนเพื่อเข้าร่วมโรงเรียนของคุณอีกครั้ง และรางวัลที่เคยได้รับจะถูกลบออก
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,โรงเรียนนี้ยังไม่พร้อมให้บริการบน Roblox
@@ -4983,6 +4992,7 @@ Feature.Schools.Label.UpsellPerkFindFriends,
 Feature.Schools.Label.UpsellPerkPlayAndChat,ดูว่าใครออนไลน์อยู่แล้วเล่นด้วยกัน ง่ายๆ เลย
 Feature.Schools.Label.UpsellPerkTrends,ค้นพบว่ามีอะไรที่กำลังเป็นที่นิยมในโรงเรียนของคุณบ้าง
 Feature.Schools.Placeholder.Email,อีเมลนักเรียน
+Feature.Schools.Placeholder.SchoolName,ชื่อโรงเรียน
 Feature.Schools.Placeholder.SixDigitCode,
 Feature.Schools.RewardGiftBody,ขอบคุณที่ยืนยันโรงเรียนของคุณ ดูไอเท็มใหม่ได้ในส่วน อวาตาร์ > ไอเท็มเสริม > ด้านหลัง
 Feature.Screentime.Content.ScreentimeLimitDialog,คุณใช้งานจนถึงขีดจำกัดเวลาการใช้หน้าจอต่อวันแล้ว โปรดกลับมาใหม่ในวันพรุ่งนี้เพื่อใช้งาน Roblox อีกครั้ง
@@ -5094,6 +5104,11 @@ Feature.SongDetails.Label.SongsBy,เพลงที่แต่งโดย {ar
 Feature.SongDetails.Label.ThousandPlus,"1,000+"
 Feature.SongDetails.Label.Vendor,
 Feature.SplitPane.EditAvatarButtonText,
+Feature.SplitPane.Label.CollapseAvatar,ย่ออวาตาร์
+Feature.SplitPane.Label.ExpandAvatar,ขยายอวาตาร์
+Feature.SplitPane.Label.NextAvatar,อวาตาร์ถัดไป
+Feature.SplitPane.Label.PreviousAvatar,อวาตาร์ก่อนหน้า
+Feature.SplitPane.Label.Rotate,
 Feature.SplitPane.NoAdditionalAvatarsDialogBody,สร้างอวาตาร์อีก แล้วสลับธีมที่นี่
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,สร้างอวาตาร์
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,ดูอวาตาร์ทั้งหมดที่คุณบันทึกไว้ครบแล้ว

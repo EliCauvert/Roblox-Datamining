@@ -8,6 +8,7 @@ local getFIntUGCValidateTriangleLimitToleranceModule = require(parent.flags.getF
 local t = {
 	categories = {
 		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
 		validationEnumsModule.UploadCategory.RIGID_ACCESSORY,
 		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD

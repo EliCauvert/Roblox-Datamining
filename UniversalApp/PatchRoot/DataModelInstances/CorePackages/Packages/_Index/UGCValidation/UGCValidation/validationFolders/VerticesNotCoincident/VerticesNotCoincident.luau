@@ -6,7 +6,10 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local getFIntUGCLCCageVerticesSimilarityMaximumModule = require(parent.flags.getFIntUGCLCCageVerticesSimilarityMaximum)
 
 return {
-	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
+	categories = {
+		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
+	},
 	requiredData = {
 		validationEnumsModule.SharedDataMember.innerCagesData,
 		validationEnumsModule.SharedDataMember.outerCagesData

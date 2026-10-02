@@ -7,9 +7,6 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local createEditableInstancesForContextModule = require(parent.util.createEditableInstancesForContext)
 local destroyEditableInstancesModule = require(parent.util.destroyEditableInstances)
 local _ = require(parent.validation.validateBundleReadyForUpload)
-local getFFlagUGCValidationAnimationPackFolderStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackFolderStructure)
-local getFFlagUGCValidationAnimationPackDisableModelStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackDisableModelStructure)
-local getFFlagUGCValidationAnimationPackMissingTypeMessageModule = require(parent.flags.getFFlagUGCValidationAnimationPackMissingTypeMessage)
 local legacyValidationAdapterModule = require(parent.util.LegacyValidationAdapter)
 local httpService = game:GetService("HttpService")
 
@@ -39,7 +36,7 @@ local function hasExactStringValueNames(p1, p2)
 end
 
 return function(p3, p4, p5, p6, p7, p8)
-	-- upvalues: promiseModule (ref), constantsModule (ref), getFFlagUGCValidationAnimationPackDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref), hasExactStringValueNames (ref), getFFlagUGCValidationAnimationPackMissingTypeMessageModule (ref), errorSourceStringsModule (ref), httpService (ref), createEditableInstancesForContextModule (ref), legacyValidationAdapterModule (ref), destroyEditableInstancesModule (ref)
+	-- upvalues: promiseModule (ref), constantsModule (ref), hasExactStringValueNames (ref), errorSourceStringsModule (ref), httpService (ref), createEditableInstancesForContextModule (ref), legacyValidationAdapterModule (ref), destroyEditableInstancesModule (ref)
 	p6 = p6 or function() end
 	assert(p6 ~= nil, "Luau")
 	
@@ -61,53 +58,32 @@ return function(p3, p4, p5, p6, p7, p8)
 	local t = {}
 	
 	if constantsModule.ANIMATION_ASSET_INFO then
+		local var1
 		local t_1 = {}
 		local t_2 = {}
+		t_3 = {}
 		
-		if getFFlagUGCValidationAnimationPackDisableModelStructureModule() or getFFlagUGCValidationAnimationPackFolderStructureModule() and p3:FindFirstChild("R15Anim") ~= nil then
-			local var1
-			t_3 = {}
+		for i, v in constantsModule.ANIMATION_ASSET_INFO do
+			var1 = false
 			
-			for i, v in constantsModule.ANIMATION_ASSET_INFO do
-				var1 = false
-				
-				for i_1, v_2 in p3:GetChildren() do
-					if not t_3[v_2] and (v_2.Name == "R15Anim" and (v_2:IsA("Folder") and hasExactStringValueNames(v_2, v.stringValueNames))) then
-						t[i] = { v_2 }
-						t_3[v_2] = true
-						var1 = true
-						break
-					end
-				end
-				if not var1 then
-					table.insert(t_2, i.Name)
-				end
-			end
 			for i_1, v_1 in p3:GetChildren() do
-				if not t_3[v_1] and (v_1.Name ~= "R15Anim" or not getFFlagUGCValidationAnimationPackMissingTypeMessageModule()) then
-					table.insert(t_1, v_1.Name)
+				if not t_3[v_1] and (v_1.Name == "R15Anim" and (v_1:IsA("Folder") and hasExactStringValueNames(v_1, v.stringValueNames))) then
+					t[i] = { v_1 }
+					t_3[v_1] = true
+					var1 = true
+					break
 				end
 			end
-		else
-			local t_3 = {}
-			
-			for i, v in constantsModule.ANIMATION_ASSET_INFO do
-				t_3[v.modelName] = true
-			end
-			for i_1, v_1 in constantsModule.ANIMATION_ASSET_INFO do
-				local modelName = p3:FindFirstChild(v_1.modelName)
-				
-				if modelName then
-					t[i_1] = { modelName }
-				end
-			end
-			for i_2, v_2 in p3:GetChildren() do
-				if not t_3[v_2.Name] then
-					table.insert(t_1, v_2.Name)
-				end
+			if not var1 then
+				table.insert(t_2, i.Name)
 			end
 		end
-		if getFFlagUGCValidationAnimationPackMissingTypeMessageModule() and #t_2 > 0 then
+		for i_1, v_1 in p3:GetChildren() do
+			if not t_3[v_1] and v_1.Name ~= "R15Anim" then
+				table.insert(t_1, v_1.Name)
+			end
+		end
+		if #t_2 > 0 then
 			return promiseModule.resolve({
 				errors = {
 					{
@@ -139,16 +115,16 @@ return function(p3, p4, p5, p6, p7, p8)
 	local t_2 = {}
 	t_3 = {}
 	
-	for i, v_1 in p4[p5].allowedAssetTypeSettings do
+	for i, v in p4[p5].allowedAssetTypeSettings do
 		local var2 = assert(Enum.AssetType[i], "Asset type name doesn't map to an enum item")
 		
-		if v_1.isEligibleForUpload then
+		if v.isEligibleForUpload then
 			local var3 = t[var2]
 			local var4 = var3 and var3[1]
 			t_1[var2] = {
 				assetType = var2,
 				instance = var4,
-				settings = v_1,
+				settings = v,
 				status = if var4 == nil then "finished" else "pending"
 			}
 			

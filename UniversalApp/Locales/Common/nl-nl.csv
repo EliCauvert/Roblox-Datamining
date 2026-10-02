@@ -275,6 +275,7 @@ Authentication.CrossDevice.Label.Warning2,• Nooit de code van een andere gebru
 Authentication.CrossDevice.Response.InvalidCode,"De code die je hebt ingevoerd, was ongeldig. Zorg ervoor dat je deze correct invoert."
 Authentication.CrossDevice.Response.LoginFail,Inloggen mislukt
 Authentication.CrossDevice.Response.LoginSuccess,Inloggen gelukt
+Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Opnieuw proberen over: {WaitTime}
 Authentication.Login.Action.Continue,
@@ -285,6 +286,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Code opnieuw verzenden over {WaitTi
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Wachtwoord of gebruikersnaam vergeten?
 Authentication.Login.Action.ForgotUsername,Gebruikersnaam vergeten?
 Authentication.Login.Action.ForgotUsernameOrPassword,Je gebruikersnaam of wachtwoord vergeten?
+Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Stuur me een unieke code per e-mail
 Authentication.Login.Action.NeedHelp,Hulp nodig?
 Authentication.Login.Action.Next,
@@ -1394,7 +1396,6 @@ Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Vertrouwde vriendschapsverz
 Feature.AddFriends.Action.RequestIgnored,Verzoek genegeerd
 Feature.AddFriends.Description.CameraPermissionWarning,"Toegang tot camera niet ingeschakeld. Om de functie voor het scannen van QR-codes te gebruiken, moet je toegang tot de camera toestaan in je telefoon via 'Instellingen' > 'Applicaties' > 'Roblox'"
 Feature.AddFriends.Heading.AddFriends,Vrienden toevoegen
-Feature.AddFriends.Heading.FindPeople,Personen zoeken
 Feature.AddFriends.Label.AddFriendsTooltip,"Ga aan de slag door je vrienden te vinden, zodat jullie Roblox samen kunnen verkennen."
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Vind personen op Roblox door te zoeken op hun gebruikersnaam of schermnaam.
 Feature.AddFriends.Label.ConnectWithContacts,Nodig contactpersonen uit of maak contact met vrienden die al op Roblox zitten!
@@ -1405,9 +1406,7 @@ Feature.AddFriends.Label.EmptyState,Met wie ga je Roblox verkennen? Voeg Connect
 Feature.AddFriends.Label.EmptyState.FriendsRename,Met wie ga je Roblox verkennen? Voeg vrienden toe om meer te doen op Roblox!
 Feature.AddFriends.Label.EmptyStatePrompt,Met wie ga je Roblox verkennen? Zoek naar personen om toe te voegen of maak contact met vrienden die je al kent!
 Feature.AddFriends.Label.FriendRequests,Vriendschapsverzoeken
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
-Feature.AddFriends.Label.MyQRTile,Mijn QR
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Personen zoeken
 Feature.AddFriends.Label.MyQrCode,Mijn QR-code
 Feature.AddFriends.Label.QRCodeTitle,QR-code
 Feature.AddFriends.Label.SchoolTile,Klasgenoten
@@ -1969,6 +1968,7 @@ Feature.Avatar.Label.SetAvatarCount,{itemCount} avatars
 Feature.Avatar.Label.SetLimitReachedBody,Je kunt maximaal {setLimit} sets hebben. Verwijder er een om ruimte te maken
 Feature.Avatar.Label.SetNameDuplicateBody,Je hebt al een set met deze naam. Kies een andere naam.
 Feature.Avatar.Label.SetNameNotAllowedBody,Kies een andere naam
+Feature.Avatar.Label.ShareAvatarToMoments,Deel je avatar naar Momenten
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,Avatars op de Marktplaats posten
 Feature.Avatar.Label.Shirt,Shirt
 Feature.Avatar.Label.ShirtClassic,Klassiek shirt
@@ -2229,6 +2229,7 @@ Feature.Build.Action.DontShowAgain,Niet meer weergeven
 Feature.Build.Action.EarnRobux,Robux verdienen
 Feature.Build.Action.Edit,Bewerken
 Feature.Build.Action.HideAutosaved,Automatisch opgeslagen verbergen
+Feature.Build.Action.KeepBuilding,Blijf bouwen
 Feature.Build.Action.ManageLimit,Limiet beheren
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
@@ -2254,6 +2255,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,Deellink
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,Statistieken
+Feature.Build.Action.Stop,Stop
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Classificatie bijwerken
 Feature.Build.Action.UpdateWithChanges,Wijzigingen doorvoeren
@@ -2363,7 +2365,12 @@ Feature.Build.Description.RevertToVersion,Bevestigen om de meest recente wijzigi
 Feature.Build.Description.ShareLatest,Deel wat er is veranderd in je nieuwste versie.
 Feature.Build.Description.ShopButton,Een winkeltoegangspunt toevoegen
 Feature.Build.Description.ShortAdCampaign,Een snelle manier om te zien wat spelers van je spel vinden.
+Feature.Build.Description.StopBuild,"Dit verzoek is nog in uitvoering. Als je nu stopt, wordt het niet voltooid en moet je het opnieuw verzenden."
 Feature.Build.Description.UpdateDeveloperProduct,Ontwikkelaarsproduct {PRODUCT_ID} bijwerken.
+Feature.Build.Error.AdForbidden,Je account of spel kan nu geen advertentie weergeven. Neem contact op met ondersteuning als je denkt dat dit een fout is.
+Feature.Build.Error.AdInsufficientFunds,Je hebt niet genoeg Robux om deze advertentie te maken. Koop meer Robux en probeer het opnieuw.
+Feature.Build.Error.AdInternalError,
+Feature.Build.Error.AdMissingThumbnail,Je spel heeft een miniatuur nodig voordat je een advertentie kunt weergeven. Voeg er een toe en probeer het opnieuw.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Beschrijving moet 1.000 tekens of minder zijn.
 Feature.Build.Error.DeveloperProductNameRequired,Voer een productnaam in.
 Feature.Build.Error.DeveloperProductNameTooLong,Naam moet 50 tekens of minder zijn.
@@ -2549,9 +2556,6 @@ Feature.Build.Message.AccountRequirements,Je account voldoet niet aan de vereist
 Feature.Build.Message.AccountTooNew,Je account is te nieuw om te publiceren. Probeer het nog een keer wanneer het 2 dagen oud is.
 Feature.Build.Message.AdCampaignCreateFailed,Kan je campagne niet aanmaken. Probeer het opnieuw.
 Feature.Build.Message.AdPerformanceLoadFailed,Kan advertentieprestaties niet laden
-Feature.Build.Message.AdsPromotionBannerSubtitle,Vergroot gratis je doelgroep
-Feature.Build.Message.AdsPromotionBannerTitle,Je hebt nog {promotionCount} gratis promoties over
-Feature.Build.Message.AdsPromotionBannerTitleSingular,Je hebt nog 1 gratis promotie over
 Feature.Build.Message.AdsStatsEmpty,Vergroot je doelgroep met een advertentiecampagne en zorg ervoor dat je spel wordt ontdekt
 Feature.Build.Message.AdsStatsEmptyFree,Vergroot je doelgroep met een gratis advertentiecampagne en zorg ervoor dat je spel wordt ontdekt
 Feature.Build.Message.AllFriendsAdded,Je hebt al je vrienden uitgenodigd als vroege testers.
@@ -2643,6 +2647,7 @@ Feature.Build.Title.AdCampaignDuration,Advertentiecampagne van {durationDays} da
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} dagen
 Feature.Build.Title.AdComplete,Advertentie voltooid
 Feature.Build.Title.AdCreated,Advertentie gemaakt
+Feature.Build.Title.AdCreatedPeriod,Advertentie gemaakt.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Afbeeldingen toevoegen
 Feature.Build.Title.AdsStatsEmpty,Een campagne starten
@@ -2683,6 +2688,7 @@ Feature.Build.Title.PromoteGameFreeSingular,Je hebt een gratis advertentie
 Feature.Build.Title.PromoteGamePaid,Er staan nog meer spelers voor je klaar
 Feature.Build.Title.PushNotifications,Pushmeldingen
 Feature.Build.Title.RevertLastChange,Laatste wijziging terugzetten?
+Feature.Build.Title.StopBuild,Bouwen stoppen?
 Feature.Build.Title.Tasks,Taken
 Feature.Build.Title.TurnActivity,Activiteit in chatgesprek
 Feature.Build.Title.VersionHistory,Versiegeschiedenis
@@ -3507,7 +3513,6 @@ Feature.Friends.FriendingTooltipBody,Sommige vriendschapsverzoeken kunnen afkoms
 Feature.Friends.Heading.Activities,Activiteiten
 Feature.Friends.Heading.FilterBy,Filteren op
 Feature.Friends.Heading.Friends,
-Feature.Friends.Heading.MyConnections,Mijn vrienden
 Feature.Friends.Label.AddConnectionVPC,"Om deze vertrouwde connectie toe te voegen, heb je ouderlijke toestemming nodig."
 Feature.Friends.Label.AddConnectionsHint,Connecties maken Roblox leuk!
 Feature.Friends.Label.AddConnectionsHintBody,Voeg mensen toe die je al kent of ontdek nieuwe connecties
@@ -3644,8 +3649,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Vertrouwde vriend verwi
 Feature.Friends.TrustedFriend.AddBack.Header,Vriendschapsverzoek voor vertrouwde vrienden gestuurd
 Feature.Friends.TrustedFriend.Info.Modal.Header,Nieuwe vertrouwde vriend
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Vertrouwde vriend toevoegen
-Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Vertrouwde vrienden toevoegen
-Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Vertrouwde vrienden toevoegen
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} is nu een vertrouwde vriend
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Vertrouwde vriend verwijderd
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,
@@ -4641,6 +4645,7 @@ Feature.PlayerSearchResults.Label.You,Jij
 Feature.PlayerSearchResults.Label.YouAreConnections,Jullie zijn connecties
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Jullie zijn vrienden
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Aankopen van privéservers worden niet ondersteund in Studio.
 Feature.Profile.Action.AboutThisProfile,Over dit profiel
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4855,10 +4860,13 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,Dit abonnement kan niet word
 Feature.RobloxSubscription.Description.AgeCheckTrial,Verifieer je leeftijd met een leeftijdscontrole en ontvang 1 gratis week Roblox Plus als bedankje. Er is geen betaalmethode nodig om van deze gratis proefperiode te genieten.
 Feature.RobloxSubscription.Description.Benefit.Customize,Aanpassen met profielframes en app-thema's
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% korting op de eerste 60 dagen, daarna 20% korting op items en avatars"
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10% korting op de eerste {trialUnlockDays} dagen, daarna 20% korting op items en avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Meer plezier voor minder Robux. Abonneer je op Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Doe eerder mee met Plus
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Aanbieding alleen geldig voor nieuwe Plus-abonnees.
+Feature.RobloxSubscription.Description.ReferralReferrerReward,Wanneer iemand Plus afsluit via jouw link.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Door op {201C}{ctaText} te klikken{201D}, ga je akkoord met de <a href=""{termsUrl}"">Abonnementsvoorwaarden van Roblox</a>. Er worden elke maand automatisch kosten in rekening gebracht totdat je opzegt."
+Feature.RobloxSubscription.Heading.ReferralEntry,Deel Plus om {amount} Robux te krijgen
 Feature.RobloxSubscription.Heading.ReferralHistory,Doorverwijzingsgeschiedenis
 Feature.RobloxSubscription.Heading.ReferralShare,"Deel Plus, krijg"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Gratis privéservers
@@ -4871,6 +4879,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Door op 'Doorgaan' te
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Door op 'Probeer het gratis' te klikken, ga je akkoord met de {linkStart}Abonnementsvoorwaarden van Roblox.{linkEnd} Je gratis proefperiode eindigt over 1 maand en er worden elke maand automatisch kosten in rekening gebracht. Je kunt op elk moment opzeggen."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Door op 'Probeer het gratis' te klikken, ga je akkoord met de {linkStart}Abonnementsvoorwaarden van Roblox.{linkEnd} Je gratis proefperiode eindigt over {trialDuration} {trialPeriodLabel} en er worden elke {billingPeriodLabel} automatisch kosten in rekening gebracht. Je kunt op elk moment opzeggen."
 Feature.RobloxSubscription.Label.FreeTrialText,Gratis proefperiode krijgen
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.PendingRobux,Robux in behandeling
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Je doorverwezen personen krijgen
@@ -4895,6 +4904,7 @@ Feature.Schools.Action.AlreadyGraduated,Ik ben al afgestudeerd
 Feature.Schools.Action.CantFindSchool,Kun je je school niet vinden?
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,School verwijderen
+Feature.Schools.Action.NoSchoolEmail,Heb je geen studentenmailadres?
 Feature.Schools.Action.Ok,
 Feature.Schools.Action.PrivacyPolicy,
 Feature.Schools.Action.Remove,
@@ -4917,6 +4927,7 @@ Feature.Schools.Description.InviteFriendsUnlockSooner,Help de alumnigroep van je
 Feature.Schools.Description.InviteOthersToVerify,Anderen uitnodigen om te verifiëren
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,Meer geverifieerde alumni vereist
 Feature.Schools.Description.NotAvailableInRegion,De schoolfunctie is nog niet beschikbaar.
+Feature.Schools.Description.NotifyWhenSchoolAvailable,"Laat ons weten naar welke school je gaat, dan laten wij je weten wanneer die beschikbaar is op Roblox."
 Feature.Schools.Description.RemoveSchoolBody,"Je moet je school-e-mailadres opnieuw verifiëren om je opnieuw bij je school aan te sluiten. Alle beloningsitems die je hebt ontvangen, worden verwijderd."
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,Deze school is momenteel niet beschikbaar op Roblox.
@@ -4972,6 +4983,7 @@ Feature.Schools.Label.UpsellPerkFindFriends,Vind vrienden van je school
 Feature.Schools.Label.UpsellPerkPlayAndChat,Bekijk wie er online is en speel eenvoudig samen
 Feature.Schools.Label.UpsellPerkTrends,Ontdek wat er populair is op je school
 Feature.Schools.Placeholder.Email,E-mailadres van student
+Feature.Schools.Placeholder.SchoolName,Naam van de school
 Feature.Schools.Placeholder.SixDigitCode,
 Feature.Schools.RewardGiftBody,Bedankt voor het verifiëren van je school. Je vindt je nieuwe item onder Avatar > Accessoire > Achterkant.
 Feature.Screentime.Content.ScreentimeLimitDialog,Je hebt je dagelijkse schermtijdlimiet bereikt. Kom morgen terug om Roblox weer te gebruiken.
@@ -5083,6 +5095,12 @@ Feature.SongDetails.Label.SongsBy,Nummers van {artistName}
 Feature.SongDetails.Label.ThousandPlus,1000+
 Feature.SongDetails.Label.Vendor,Leverancier
 Feature.SplitPane.EditAvatarButtonText,
+Feature.SplitPane.Label.CollapseAvatar,Avatar inklappen
+Feature.SplitPane.Label.ExpandAvatar,Avatar uitklappen
+Feature.SplitPane.Label.NextAvatar,Volgende avatar
+Feature.SplitPane.Label.PreviousAvatar,Vorige avatar
+Feature.SplitPane.Label.Rotate,
+Feature.SplitPane.NoAdditionalAvatarsDialogBody,Maak nog een avatar en wissel hier tussen je avatars.
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,Avatar maken
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,Dat zijn al je opgeslagen avatars
 Feature.SplitPane.UnsavedChangesDialogBody,"Als je nu wisselt, gaan je avatarwijzigingen mogelijk verloren. Sla ze op om ze te behouden."

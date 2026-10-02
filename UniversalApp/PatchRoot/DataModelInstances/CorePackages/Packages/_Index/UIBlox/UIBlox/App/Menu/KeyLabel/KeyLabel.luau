@@ -11,11 +11,12 @@ local _ = require(parent.Types)
 local constantsModule = require(parent.Constants)
 local utilitiesModule = require(parent.Utilities)
 local useStyleModule = require(parent_2.Core.Style.useStyle)
+local getFontFromFontStyleModule = require(parent_2.Core.Text.GetFontFromFontStyle)
 local imagesModule = require(parent_1.ImageSet.Images)
 local label = require(parent_2.Core.ImageSet.ImageSetComponent).Label
 
 return function(p1)
-	-- upvalues: useStyleModule (ref), constantsModule (ref), utilitiesModule (ref), reactModule (ref), imagesModule (ref), label (ref), luauPolyfillModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
+	-- upvalues: useStyleModule (ref), constantsModule (ref), utilitiesModule (ref), reactModule (ref), imagesModule (ref), label (ref), luauPolyfillModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), getFontFromFontStyleModule (ref)
 	local var1 = useStyleModule()
 	local var2 = var1.Theme[p1.iconThemeKey or constantsModule.DEFAULT_ICON_THEME]
 	local keyCodeContent = utilitiesModule.getKeyCodeContent(p1.keyCode)
@@ -68,7 +69,7 @@ return function(p1)
 				TextYAlignment = Enum.TextYAlignment.Center,
 				TextSize = var4,
 				Font = if foundationFontFaceMigration then nil else captionHeader.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(captionHeader.Font) else nil,
+				FontFace = if foundationFontFaceMigration then normalizeFontFace(getFontFromFontStyleModule(captionHeader)) else nil,
 				Position = UDim2.fromOffset(0, constantsModule.TEXT_CENTER_OFFSET),
 				Size = UDim2.fromScale(1, 1)
 			}, { Icon = var6 })

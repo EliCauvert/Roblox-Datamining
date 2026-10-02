@@ -293,6 +293,7 @@ Authentication.CrossDevice.Label.Warning2,• Never enter another user's code
 Authentication.CrossDevice.Response.InvalidCode,The code you entered was invalid. Please make sure you entered it correctly.
 Authentication.CrossDevice.Response.LoginFail,Log in Failed
 Authentication.CrossDevice.Response.LoginSuccess,Log in Successful
+Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Retry in: {WaitTime}
 Authentication.Login.Action.Continue,
@@ -303,6 +304,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Resend code in {WaitTime}s
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Forgot Password or Username?
 Authentication.Login.Action.ForgotUsername,Forgot username?
 Authentication.Login.Action.ForgotUsernameOrPassword,Forgot username or password?
+Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Email Me a One-Time Code
 Authentication.Login.Action.NeedHelp,Need help?
 Authentication.Login.Action.Next,
@@ -1418,7 +1420,6 @@ Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignore trusted friend reque
 Feature.AddFriends.Action.RequestIgnored,Request Ignored
 Feature.AddFriends.Description.CameraPermissionWarning,"Camera Access Not Enabled. To use the scanning QR code feature, please allow access of camera in your phone ""Settings"" > ""Applications"" > ""Roblox"""
 Feature.AddFriends.Heading.AddFriends,Add friends
-Feature.AddFriends.Heading.FindPeople,Find people
 Feature.AddFriends.Label.AddFriendsTooltip,Get started by finding your friends so you can explore Roblox together.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Find people on Roblox by searching for their username or name.
 Feature.AddFriends.Label.ConnectWithContacts,Invite contacts or connect with friends already on Roblox!
@@ -1429,9 +1430,7 @@ Feature.AddFriends.Label.EmptyState,Who will you explore Roblox with? Add Connec
 Feature.AddFriends.Label.EmptyState.FriendsRename,Who will you explore Roblox with? Add friends to do more on Roblox!
 Feature.AddFriends.Label.EmptyStatePrompt,"Who will you explore Roblox with? Search for people to add, or connect with friends you already know!"
 Feature.AddFriends.Label.FriendRequests,Friend Requests
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Search for People
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Search for people
-Feature.AddFriends.Label.MyQRTile,My QR
 Feature.AddFriends.Label.MyQrCode,My QR Code
 Feature.AddFriends.Label.QRCodeTitle,QR code
 Feature.AddFriends.Label.SchoolTile,Classmates
@@ -1462,6 +1461,7 @@ Feature.AgeVerificationUpsell.Modal.ContentText,"Verify your age to access this 
 "
 Feature.AgeVerificationUpsell.Modal.Title,
 Feature.AgeVerificationUpsell.Title.AgeSettingsRedirect,Get an age check in settings
+Feature.AppealsPortal.Action.AskForReview,Ask for review
 Feature.AppealsPortal.Action.FinalAppeal,Send final appeal
 Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Action.Send,
@@ -1488,7 +1488,9 @@ Feature.AppealsPortal.Description.AppealSubmittedDecisionTime.Singular,We estima
 Feature.AppealsPortal.Description.AppealSubmittedUpdate,We’ll send an update with our decision and any action taken to the email address you provided.
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,"We’ll send an update with our decision and any action taken to the email address you provided, unless you told us you don’t want more communications about this appeal."
 Feature.AppealsPortal.Description.AppealsPortal,View past violations and manage your appeals. All content and behavior must adhere to the {link}Roblox Community Standards.{linkEnd}
+Feature.AppealsPortal.Description.AskForReview,You're confirming that you've fixed this issue. We'll review this {contentType} again.
 Feature.AppealsPortal.Description.DetailsUnavailable,
+Feature.AppealsPortal.Description.FixByDate,"Fix the issue in Studio by {date}, then come back and ask for review."
 Feature.AppealsPortal.Description.IssueClosed,We closed this issue because you decided to learn one of our rules to avoid a suspension.
 Feature.AppealsPortal.Description.MatchEmail,Emails must match.
 Feature.AppealsPortal.Description.MiscAppeal,Tell us if you think we made a mistake.
@@ -1863,6 +1865,7 @@ Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Name can only contain letter, numbers, and spaces"
 Feature.Avatar.Label.CountSelected,{itemCount} Selected
 Feature.Avatar.Label.Creations,Creations
+Feature.Avatar.Label.Current,Current
 Feature.Avatar.Label.CurrentlyWearing,Currently Wearing
 Feature.Avatar.Label.DefaultBody,Default Body
 Feature.Avatar.Label.DeleteSetBody,Deleting this set won't delete the outfits inside it.
@@ -2255,6 +2258,7 @@ Feature.Build.Action.DontShowAgain,Don't show again
 Feature.Build.Action.EarnRobux,Earn Robux
 Feature.Build.Action.Edit,Edit
 Feature.Build.Action.HideAutosaved,Hide autosaved
+Feature.Build.Action.KeepBuilding,Keep building
 Feature.Build.Action.ManageLimit,Manage limit
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,Not now
@@ -2280,6 +2284,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,Share link
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,Stats
+Feature.Build.Action.Stop,Stop
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Update rating
 Feature.Build.Action.UpdateWithChanges,Update with changes
@@ -2389,7 +2394,12 @@ Feature.Build.Description.RevertToVersion,Confirm to revert the latest change an
 Feature.Build.Description.ShareLatest,Share what’s changed in your latest version.
 Feature.Build.Description.ShopButton,Add a shopping entry point
 Feature.Build.Description.ShortAdCampaign,A quick way to see what players think of your game.
+Feature.Build.Description.StopBuild,"This request is still in progress. If you stop now, it won't finish and you'll need to send it again."
 Feature.Build.Description.UpdateDeveloperProduct,Update developer product {PRODUCT_ID}.
+Feature.Build.Error.AdForbidden,Your account or game can't run an ad right now. Contact support if you think this is a mistake.
+Feature.Build.Error.AdInsufficientFunds,You don't have enough Robux to create this ad. Add more and try again.
+Feature.Build.Error.AdInternalError,Something went wrong. Try again later.
+Feature.Build.Error.AdMissingThumbnail,Your game needs a thumbnail before you can run an ad. Add one and try again.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"Description must be 1,000 characters or fewer."
 Feature.Build.Error.DeveloperProductNameRequired,Enter a product name.
 Feature.Build.Error.DeveloperProductNameTooLong,Name must be 50 characters or fewer.
@@ -2575,9 +2585,6 @@ Feature.Build.Message.AccountRequirements,Your account doesn't meet the requirem
 Feature.Build.Message.AccountTooNew,Your account is too new to publish. Try again when it's 2 days old.
 Feature.Build.Message.AdCampaignCreateFailed,Couldn't create your campaign. Please try again.
 Feature.Build.Message.AdPerformanceLoadFailed,Couldn't load ad performance
-Feature.Build.Message.AdsPromotionBannerSubtitle,Boost your audience for free
-Feature.Build.Message.AdsPromotionBannerTitle,You have {promotionCount} free promotions left
-Feature.Build.Message.AdsPromotionBannerTitleSingular,You have 1 free promotion left
 Feature.Build.Message.AdsStatsEmpty,Boost your audience with an ad campaign and get your game discovered
 Feature.Build.Message.AdsStatsEmptyFree,Boost your audience with a free ad campaign and get your game discovered
 Feature.Build.Message.AllFriendsAdded,You've invited all your friends as early testers.
@@ -2710,6 +2717,7 @@ Feature.Build.Title.PromoteGameFreeSingular,You've got a free ad
 Feature.Build.Title.PromoteGamePaid,More players are waiting
 Feature.Build.Title.PushNotifications,Push notifications
 Feature.Build.Title.RevertLastChange,Revert last change?
+Feature.Build.Title.StopBuild,Stop building?
 Feature.Build.Title.Tasks,Tasks
 Feature.Build.Title.TurnActivity,Turn activity
 Feature.Build.Title.VersionHistory,Version history
@@ -3087,6 +3095,7 @@ Feature.Catalog.Title.Checkout.UnavailableItems,
 Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle,Wear Avatar?
 Feature.Catalog.Title.CheckoutPlural,Checkout {count} items
 Feature.Catalog.Title.CheckoutSingular,
+Feature.Catalog.Title.Explore,Explore
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,Replace bottom layer?
 Feature.Catalog.Title.RentalFtuxText,Rent to try an item out for 3 days
 Feature.Catalog.Toast.AddedToFavorites,Added to favorites
@@ -3534,7 +3543,6 @@ Feature.Friends.FriendingTooltipBody,Some friend requests may come from users wh
 Feature.Friends.Heading.Activities,Activities
 Feature.Friends.Heading.FilterBy,Filter By
 Feature.Friends.Heading.Friends,
-Feature.Friends.Heading.MyConnections,My Friends
 Feature.Friends.Label.AddConnectionVPC,"To add this Trusted Connection, you need parent permission."
 Feature.Friends.Label.AddConnectionsHint,Connections make Roblox fun!
 Feature.Friends.Label.AddConnectionsHintBody,Add people you already know or discover new Connections
@@ -3671,7 +3679,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Remove trusted friend
 Feature.Friends.TrustedFriend.AddBack.Header,Trusted friend request
 Feature.Friends.TrustedFriend.Info.Modal.Header,New trusted friend
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Add trusted friend
-Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Add trusted friends
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Add Trusted Friends
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} is a trusted friend now
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Trusted friend removed
@@ -4067,12 +4074,16 @@ Feature.Moments.Action.AddSticker,Add Sticker
 Feature.Moments.Action.AddText,Add Text
 Feature.Moments.Action.AddVoice,Add Voice
 Feature.Moments.Action.Back,
+Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentShowLess,Show less
+Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
 Feature.Moments.Action.CreateVoiceover,Create voiceover
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.DiscardChange,Delete change
 Feature.Moments.Action.Done,
+Feature.Moments.Action.Edit,
 Feature.Moments.Action.Expand,Expand
 Feature.Moments.Action.GenerateText,Generate Text
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Not helpful
@@ -4088,6 +4099,7 @@ Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
+Feature.Moments.Action.RetryLoadingComments,Retry loading comments
 Feature.Moments.Action.Return,Return to Gallery
 Feature.Moments.Action.ReturnToEditing,Return to Editing
 Feature.Moments.Action.SaveVoiceover,
@@ -4109,8 +4121,35 @@ Feature.Moments.Description.PublishMoment,Describe your Moment
 Feature.Moments.Description.TooManyUploads,You have uploaded too many videos today. Try again tomorrow.
 Feature.Moments.Disclaimer.EveryoneMoments,Everyone in Moments can view what is published
 Feature.Moments.Label.All,
+Feature.Moments.Label.AllowComments,Allow comments
 Feature.Moments.Label.AttemptingJoinExperience,Attempting to join {placeName}. This may take a few seconds.
 Feature.Moments.Label.CaptureLibrary,Your Capture library
+Feature.Moments.Label.ChooseVoice,Choose voice
+Feature.Moments.Label.CommentAuthorFallback,User {userId}
+Feature.Moments.Label.CommentAuthorUnknown,Unknown user
+Feature.Moments.Label.CommentDeleteFailed,Couldn't delete comment
+Feature.Moments.Label.CommentNotAllowed,You can't comment on this Moment.
+Feature.Moments.Label.CommentPostFailed,Your comment couldn't be posted. Please try again.
+Feature.Moments.Label.CommentPostOutcomeUnknown,We couldn't confirm your last comment posted. Check the comments before sending again.
+Feature.Moments.Label.CommentRateLimited,You are commenting too quickly. Please try again later.
+Feature.Moments.Label.CommentRejectedByFilter,Your comment was not posted. Please revise it and try again.
+Feature.Moments.Label.CommentSendStatusUnknown,Send status unknown
+Feature.Moments.Label.CommentSending,Sending…
+Feature.Moments.Label.CommentSignInRequired,Please sign in again to comment.
+Feature.Moments.Label.CommentTimestampDays,{count}d
+Feature.Moments.Label.CommentTimestampHours,{count}h
+Feature.Moments.Label.CommentTimestampMinutes,{count}m
+Feature.Moments.Label.CommentTimestampMonths,{count}mo
+Feature.Moments.Label.CommentTimestampNow,
+Feature.Moments.Label.CommentTimestampWeeks,{count}w
+Feature.Moments.Label.CommentTimestampYears,{count}y
+Feature.Moments.Label.CommentingUnavailable,Commenting isn't available right now. Please try again later.
+Feature.Moments.Label.CommentsDisabled,Comments are disabled
+Feature.Moments.Label.CommentsReadOnly,Comments are read-only
+Feature.Moments.Label.CommentsTurnedOff,Comments are turned off for this Moment.
+Feature.Moments.Label.CommentsUnavailable,Comments are unavailable
+Feature.Moments.Label.DeleteCommentBody,This comment will be permanently deleted.
+Feature.Moments.Label.DeleteCommentTitle,Delete comment?
 Feature.Moments.Label.DeleteMomentBody,You can't recover a Moment once it's gone.
 Feature.Moments.Label.DeleteMomentTitle,Delete Moment?
 Feature.Moments.Label.DeleteVoiceoverBody,This clears your text and voiceover. You can start over anytime.
@@ -4122,6 +4161,7 @@ Feature.Moments.Label.FeedEndTitle,You're all caught up
 Feature.Moments.Label.FeedFailedToLoad,Feed failed to load
 Feature.Moments.Label.FeedMyMoments,My Moments
 Feature.Moments.Label.FeedTrending,
+Feature.Moments.Label.FirstCommentInvite,No comments yet. Be the first to comment!
 Feature.Moments.Label.HowToUseCaptureTitle,How to use Capture
 Feature.Moments.Label.LinkCopied,Link copied
 Feature.Moments.Label.LinkCopyFailed,Failed to copy link.
@@ -4130,12 +4170,14 @@ Feature.Moments.Label.MomentDeletedBody,
 Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,Something went wrong.
 Feature.Moments.Label.MomentFailedToPostTitle,Moment failed to post
+Feature.Moments.Label.MomentNoLongerAvailable,This Moment is no longer available.
 Feature.Moments.Label.MomentPublishedBody,Your Moment has been published successfully.
 Feature.Moments.Label.MomentPublishedTitle,Moment published
 Feature.Moments.Label.MomentUnavailable,Moment unavailable
 Feature.Moments.Label.MomentUnavailableDefault,This Moment isn't available.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NoCommentsYet,No comments yet
 Feature.Moments.Label.NonInfiniteScrollEndTitle,You're all caught up for now
 Feature.Moments.Label.Photos,Photos
 Feature.Moments.Label.PostDeleted,Moment deleted
@@ -4176,6 +4218,10 @@ Feature.Moments.Label.VoiceLimitReachedBody,"Wait a minute, then try again"
 Feature.Moments.Label.VoiceModerationError,Your script must follow the safety rules
 Feature.Moments.Label.VoicePlaceholder,Type your voiceover script. {maxCount} character limit
 Feature.Moments.Label.VoiceTimeoutBody,Voiceover generation timed out.
+Feature.Moments.Label.WriteComment,Write a comment
+Feature.Moments.Title.Comments,Comments
+Feature.Moments.Title.CommentsWithCappedCount,Comments ({count}+)
+Feature.Moments.Title.CommentsWithCount,Comments ({count})
 Feature.Moments.Title.GenerateTextFeedbackReason,What went wrong?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
@@ -4681,6 +4727,7 @@ Feature.PlayerSearchResults.Label.You,You
 Feature.PlayerSearchResults.Label.YouAreConnections,You are Connections
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,You are friends
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Private server purchases are not supported in Studio.
 Feature.Profile.Action.AboutThisProfile,About this profile
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4902,6 +4949,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientReward,Offer valid for n
 Feature.RobloxSubscription.Description.ReferralReferrerReward,When anyone buys Plus with your link.
 Feature.RobloxSubscription.Description.ReferralShare,Invite someone to Plus and you both get {amount} Robux when they buy Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
+Feature.RobloxSubscription.Heading.ReferralEntry,Share Plus to get {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,Referral history
 Feature.RobloxSubscription.Heading.ReferralShare,"Share Plus, get"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Free private servers
@@ -4914,6 +4962,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"By clicking ""Continu
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"By clicking ""Try it for free,"" you agree to the {linkStart}Roblox Subscription Terms.{linkEnd} Your free trial will end in 1 month and you will be charged automatically each month and can cancel at any time."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"By clicking ""Try it for free,"" you agree to the {linkStart}Roblox Subscription Terms.{linkEnd} Your free trial will end in {trialDuration} {trialPeriodLabel} and you will be charged automatically each {billingPeriodLabel} and can cancel at any time."
 Feature.RobloxSubscription.Label.FreeTrialText,Get free trial
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.PendingRobux,Pending Robux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Your referrals get
@@ -4938,6 +4987,7 @@ Feature.Schools.Action.AlreadyGraduated,I've already graduated
 Feature.Schools.Action.CantFindSchool,Can't find your school?
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,Remove school
+Feature.Schools.Action.NoSchoolEmail,Don't have a school email?
 Feature.Schools.Action.Ok,
 Feature.Schools.Action.PrivacyPolicy,Privacy policy
 Feature.Schools.Action.Remove,
@@ -4960,6 +5010,7 @@ Feature.Schools.Description.InviteFriendsUnlockSooner,Help launch your school's 
 Feature.Schools.Description.InviteOthersToVerify,Invite others to verify
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,More verified alumni needed
 Feature.Schools.Description.NotAvailableInRegion,The school feature is not available yet.
+Feature.Schools.Description.NotifyWhenSchoolAvailable,Tell us which school you attend so we can notify you when your school is available on Roblox.
 Feature.Schools.Description.RemoveSchoolBody,You’ll have to re-verify your school email address to rejoin your school. Any reward items you’ve received will be deleted.
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,This school isn't currently available on Roblox.
@@ -5015,6 +5066,7 @@ Feature.Schools.Label.UpsellPerkFindFriends,Find friends from your school
 Feature.Schools.Label.UpsellPerkPlayAndChat,See who's online and play together easily
 Feature.Schools.Label.UpsellPerkTrends,Discover what's trending at your school
 Feature.Schools.Placeholder.Email,Student email
+Feature.Schools.Placeholder.SchoolName,School name
 Feature.Schools.Placeholder.SixDigitCode,6-digit code
 Feature.Schools.RewardGiftBody,Thanks for verifying your school. You can find your new item under Avatar > Accessory > Back.
 Feature.Screentime.Content.ScreentimeLimitDialog,You've reached your daily screen time limit. Come back tomorrow to access Roblox again.
@@ -5126,6 +5178,11 @@ Feature.SongDetails.Label.SongsBy,Songs by {artistName}
 Feature.SongDetails.Label.ThousandPlus,1000+
 Feature.SongDetails.Label.Vendor,Vendor
 Feature.SplitPane.EditAvatarButtonText,Edit Avatar
+Feature.SplitPane.Label.CollapseAvatar,Collapse avatar
+Feature.SplitPane.Label.ExpandAvatar,Expand avatar
+Feature.SplitPane.Label.NextAvatar,Next avatar
+Feature.SplitPane.Label.PreviousAvatar,Previous avatar
+Feature.SplitPane.Label.Rotate,
 Feature.SplitPane.NoAdditionalAvatarsDialogBody,"Create another avatar, then switch between them here."
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,Create Avatar
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,That's All Your Saved Avatars
@@ -5691,7 +5748,7 @@ Notifications.DesktopPushNotificationPrompts.Description.SystemTrayPrompt,Roblox
 Notifications.DesktopPushNotificationPrompts.Heading.EnablePrompt,Stay connected in the background
 Notifications.DesktopPushNotificationPrompts.Heading.SystemTrayPrompt,Roblox is always a click away
 Notifications.DesktopPushNotificationPrompts.Label.GetNotifications,Get notifications
-Notifications.NotificationStream.Bundle.ShowLess,Show less
+Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} more
 Notifications.NotificationStream.Label.AllCaughtUp,All caught up!
 Notifications.NotificationStream.Label.Notifications,

@@ -2,6 +2,7 @@
 local t = {
 	ThemeName = { Dark = "Dark", Light = "Light" },
 	FontName = { Gotham = "Gotham", Classic = "Classic" },
+	ComicNeueFontFamily = "rbxassetid://127896232205472",
 	DeviceType = {
 		Desktop = "Desktop",
 		Tablet = "Tablet",
