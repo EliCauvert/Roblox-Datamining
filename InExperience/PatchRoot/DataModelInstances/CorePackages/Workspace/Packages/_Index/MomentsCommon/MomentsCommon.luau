@@ -68,6 +68,7 @@ return {
 		mediaTelemetry = require(script.Media.Telemetry.mediaTelemetry),
 		selectPreloadPolicy = require(script.Media.Preload.selectPreloadPolicy),
 		MediaPreloadProvider = require(script.Media.Components.MediaPreloadProvider),
+		MediaSurfaceContext = require(script.Media.Components.MediaSurfaceContext),
 		MomentMediaView = require(script.Media.Components.MomentMediaView),
 		MomentMediaTile = require(script.Media.Components.MomentMediaTile),
 		useMomentMediaController = require(script.Media.Components.useMomentMediaController),

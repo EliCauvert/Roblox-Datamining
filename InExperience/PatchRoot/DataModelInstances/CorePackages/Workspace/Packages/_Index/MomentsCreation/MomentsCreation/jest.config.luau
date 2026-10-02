@@ -3,6 +3,7 @@
 return {
 	displayName = "MomentsCreation",
 	setupFilesAfterEnv = {
+		jestConfigsModule.setupFiles.UIBloxInitializer,
 		jestConfigsModule.setupFiles.LogHandler,
 		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
 		jestConfigsModule.setupFiles.RetryTimes

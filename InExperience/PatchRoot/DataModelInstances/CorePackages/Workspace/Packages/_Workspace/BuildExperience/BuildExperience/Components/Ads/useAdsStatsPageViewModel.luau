@@ -103,9 +103,13 @@ return function(p1, p2, p3, p4, p5, p6)
 	local var21, var22 = reactModule.useState(false)
 	local var23 = reactModule.useRef(nil)
 	local var24 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref)
+		-- upvalues: var13 (ref), fFlagEnablePaidAdsModule (copy), var11 (ref)
 		var13(false)
-	end, {})
+		
+		if fFlagEnablePaidAdsModule then
+			var11.clearCreateError()
+		end
+	end, { var11.clearCreateError })
 	local var25, var26 = reactModule.useState(false)
 	local var27 = reactModule.useCallback(function()
 		-- upvalues: var26 (ref)
@@ -312,12 +316,11 @@ return function(p1, p2, p3, p4, p5, p6)
 		hasCampaigns = var38,
 		emptyTitle = if var46 then var30.emptyTitleFree else var30.emptyTitle,
 		emptySubtitle = if var46 then var30.emptySubtitleFree else var30.emptySubtitle,
-		showPromotionCard = var38 and var46,
-		promotionFreeCreditsRemaining = adCampaignEligibilityUtilsModule.freeCreditsRemaining(var9),
 		createButtonText = var30.create,
 		createButtonIsExternal = not var20,
 		isPromotionCreatePending = var11.isCreatePending or var21,
 		hasPromotionCreateError = var11.hasCreateError,
+		promotionCreateErrorKind = var11.createErrorKind,
 		showCreateSuccessToast = var41,
 		createSuccessToastText = var30.createSuccess,
 		onDismissCreateSuccessToast = var27,

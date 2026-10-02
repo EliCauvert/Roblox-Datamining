@@ -71,31 +71,32 @@ local function createSplitPaneStore()
 		return var16(p1)
 	end
 	
-	local var17 = var15(false)
+	local var17, var18 = signalsModule.createSignal(nil)
+	local var19 = var15(false)
 	var1 = signalsModule.createEffect(function(p1)
-		-- upvalues: var15 (ref), var17 (write), var12 (ref)
-		local var18 = var15(p1)
+		-- upvalues: var15 (ref), var19 (write), var12 (ref)
+		local var20 = var15(p1)
 		
-		if var18 ~= var17 then
+		if var20 ~= var19 then
 			var12(nil)
 		end
-		var17 = var18
+		var19 = var20
 	end)
-	local var18 = signalsModule.createComputed(function(p1)
+	local var20 = signalsModule.createComputed(function(p1)
 		-- upvalues: displayModule (copy), var4 (ref), var9 (ref), var5 (ref), var6 (ref)
 		local designSpaceViewportWidth = displayModule.GetDisplayStore(p1).getDesignSpaceViewportWidth(p1)
 		
 		return if designSpaceViewportWidth <= 0 then var4 else (var9(p1) or math.clamp(designSpaceViewportWidth * var4, var5, var6)) / designSpaceViewportWidth
 	end)
-	local var19 = nil
-	local var20 = nil
+	local var21 = nil
+	local var22 = nil
 	
 	if fFlagSplitPaneFixClassicThemeHeader then
-		local var21, var22 = signalsModule.createSignal(nil)
-		var19 = var21
-		var20 = var22
+		local var23, var24 = signalsModule.createSignal(nil)
+		var21 = var23
+		var22 = var24
 	end
-	local var23, var24 = signalsModule.createSignal(false)
+	local var25, var26 = signalsModule.createSignal(false)
 	
 	local function setSupportWidth(value)
 		-- upvalues: displayModule (copy), var10 (ref), var5 (ref), var6 (ref)
@@ -103,18 +104,18 @@ local function createSplitPaneStore()
 		var10(math.clamp(value / (if platformScale and platformScale > 0 then platformScale else 1), var5, var6))
 	end
 	
-	local var25 = signalsModule.createComputed(function(p1)
-		-- upvalues: evaluateBreakpointEnabled (ref), var23 (ref)
-		return evaluateBreakpointEnabled(p1) and var23(p1)
+	local var27 = signalsModule.createComputed(function(p1)
+		-- upvalues: evaluateBreakpointEnabled (ref), var25 (ref)
+		return evaluateBreakpointEnabled(p1) and var25(p1)
 	end)
-	local var26 = signalsModule.createComputed(function(p1)
-		-- upvalues: var25 (ref), var16 (ref)
-		return if var25(p1) then var16(p1) else nil
+	local var28 = signalsModule.createComputed(function(p1)
+		-- upvalues: var27 (ref), var16 (ref)
+		return if var27(p1) then var16(p1) else nil
 	end)
 	
 	return {
 		getSupportWidth = var9,
-		getSupportWidthFraction = var18,
+		getSupportWidthFraction = var20,
 		setSupportWidth = setSupportWidth,
 		resetSupportWidth = function()
 			-- upvalues: var10 (ref)
@@ -128,20 +129,20 @@ local function createSplitPaneStore()
 			-- upvalues: var6 (ref)
 			return var6
 		end,
-		getContentRegionRect = if fFlagSplitPaneFixClassicThemeHeader then var19 else nil,
-		setContentRegionRect = if fFlagSplitPaneFixClassicThemeHeader then var20 else nil,
+		getContentRegionRect = if fFlagSplitPaneFixClassicThemeHeader then var21 else nil,
+		setContentRegionRect = if fFlagSplitPaneFixClassicThemeHeader then var22 else nil,
 		getIsBreakpointEnabled = signalsModule.createComputed(evaluateBreakpointEnabled),
-		getIsSplitPaneActive = var25,
-		getIsSplitEnabled = var25,
-		getSupportPaneModeIfActive = var26,
+		getIsSplitPaneActive = var27,
+		getIsSplitEnabled = var27,
+		getSupportPaneModeIfActive = var28,
 		getIsSplitPaneCollapsedOrNotActive = signalsModule.createComputed(function(p1)
-			-- upvalues: var26 (ref), supportPaneMode (copy)
-			local var27 = var26(p1)
+			-- upvalues: var28 (ref), supportPaneMode (copy)
+			local var29 = var28(p1)
 			
-			return if var27 ~= nil then var27 == supportPaneMode.Collapsed else true
+			return if var29 ~= nil then var29 == supportPaneMode.Collapsed else true
 		end),
-		getIsSplitEligible = var23,
-		setIsSplitEligible = var24,
+		getIsSplitEligible = var25,
+		setIsSplitEligible = var26,
 		getSupportPaneMode = getSupportPaneMode,
 		getShouldDefaultToCollapsed = var15,
 		setSupportPaneMode = function(value)
@@ -159,15 +160,17 @@ local function createSplitPaneStore()
 		end,
 		toggleSupportPaneMode = function(p1)
 			-- upvalues: var16 (ref), supportPaneMode (copy), var13 (ref), var14 (ref), var12 (ref)
-			local var27 = if var16(false) == p1 then supportPaneMode.Normal else p1
+			local var29 = if var16(false) == p1 then supportPaneMode.Normal else p1
 			
 			if var13(false) == nil then
-				var12(var27)
+				var12(var29)
 				
 				return
 			end
-			var14(var27)
-		end
+			var14(var29)
+		end,
+		getSupportPaneEntryTarget = var17,
+		setSupportPaneEntryTarget = var18
 	}
 end
 

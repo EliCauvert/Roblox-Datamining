@@ -9,9 +9,10 @@ local userListFooterModule = require(userList.Components.UserListFooter)
 local verticalUserListModule = require(script.Parent.VerticalUserList)
 local userListTightHeaderSpacing = game:DefineFastFlag("UserListTightHeaderSpacing", false)
 local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
+local fFlagUserListSurfaceExtensions = require(parent.SharedFlags).FFlagUserListSurfaceExtensions
 
 return function(p1)
-	-- upvalues: reactModule (ref), view (ref), userListTightHeaderSpacing (ref), userListHeaderModule (ref), userListFooterModule (ref), verticalUserListModule (ref), fFlagUserListCtaIntegrationEnabled (ref)
+	-- upvalues: reactModule (ref), view (ref), userListTightHeaderSpacing (ref), userListHeaderModule (ref), userListFooterModule (ref), verticalUserListModule (ref), fFlagUserListCtaIntegrationEnabled (ref), fFlagUserListSurfaceExtensions (ref)
 	local var1 = if p1.header then reactModule.createElement(view, {
 		tag = {
 			["size-full-0 auto-y"] = true,
@@ -42,7 +43,9 @@ return function(p1)
 		renderRow = p1.renderRow,
 		ctaConfig = if fFlagUserListCtaIntegrationEnabled then p1.ctaConfig else nil,
 		layoutOrder = p1.layoutOrder,
-		configs = p1.configs
+		configs = p1.configs,
+		onEndReached = if fFlagUserListSurfaceExtensions then p1.onEndReached else nil,
+		firstRowRef = if fFlagUserListSurfaceExtensions then p1.firstRowRef else nil
 	}) else reactModule.createElement(view, {
 		tag = {
 			["col size-full-0 auto-y"] = userListTightHeaderSpacing,
@@ -59,7 +62,8 @@ return function(p1)
 			onRowSelected = p1.onRowSelectedOverride,
 			renderRow = p1.renderRow,
 			ctaConfig = if fFlagUserListCtaIntegrationEnabled then p1.ctaConfig else nil,
-			configs = p1.configs
+			configs = p1.configs,
+			firstRowRef = if fFlagUserListSurfaceExtensions then p1.firstRowRef else nil
 		}),
 		Footer = var2
 	})

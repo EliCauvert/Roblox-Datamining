@@ -12,6 +12,7 @@ local UGCValidationTriangleIntersectionMaxPercent = game:DefineFastInt("UGCValid
 return {
 	categories = {
 		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
 		validationEnumsModule.UploadCategory.FULL_BODY,
 		validationEnumsModule.UploadCategory.RIGID_ACCESSORY,
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD

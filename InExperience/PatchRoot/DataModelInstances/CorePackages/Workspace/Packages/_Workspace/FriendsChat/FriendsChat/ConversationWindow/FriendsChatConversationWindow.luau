@@ -10,6 +10,7 @@ local _ = require(parent.AppChat.ConversationChannels)
 local getConversationMessageListStoreModule = require(parent.AppChat.GetConversationMessageListStore)
 local getConversationStoreModule = require(parent.AppChat.GetConversationStore)
 local fFlagDebugFriendsChatModule = require(script.Parent.Parent.Flags.FFlagDebugFriendsChat)
+local fFlagFriendsChatConversationListFocusNav = sharedFlagsModule.FFlagFriendsChatConversationListFocusNav
 local fFlagFriendsChatOsaSystemMessage = sharedFlagsModule.FFlagFriendsChatOsaSystemMessage
 local fStringDebugFriendsChatConversationIdModule = require(script.Parent.Parent.Flags.FStringDebugFriendsChatConversationId)
 local useInterpolatedClientSettingsModule = require(parent.ExpChatIntegration.useInterpolatedClientSettings)
@@ -18,6 +19,7 @@ local expChatConversationListAdapterModule = require(script.Parent.Parent.Conver
 local friendsChatConversationHeaderBarModule = require(script.Parent.Parent.HeaderBar.FriendsChatConversationHeaderBar)
 local friendsChatMessageListModule = require(script.Parent.FriendsChatMessageList)
 local friendsChatInputBarHostModule = require(script.Parent.FriendsChatInputBarHost)
+local useFocusInputBarOnWindowEnterModule = require(script.Parent.useFocusInputBarOnWindowEnter)
 local friendsChatOsaAcknowledgementModule = require(script.Parent.FriendsChatOsaAcknowledgement)
 local useConversationHeaderFadeLayoutModule = require(script.Parent.useConversationHeaderFadeLayout)
 local useConversationHeaderPropsModule = require(script.Parent.useConversationHeaderProps)
@@ -28,7 +30,7 @@ local layoutConstantsModule = require(friendsChat.LayoutConstants)
 local useFriendsChatConversationTelemetryModule = require(script.Parent.Parent.Telemetry.ChatConversation.useFriendsChatConversationTelemetry)
 
 return function(p1)
-	-- upvalues: useChatWindowSettingsModule (ref), reactModule (ref), useInterpolatedClientSettingsModule (ref), fFlagDebugFriendsChatModule (ref), fStringDebugFriendsChatConversationIdModule (ref), playersService (ref), expChatConversationListAdapterModule (ref), signalsModule (ref), fFlagFriendsChatOsaSystemMessage (ref), getConversationStoreModule (ref), signalsReactModule (ref), appChatNetworkingModule (ref), friendsChatOsaAcknowledgementModule (ref), useConversationHeaderPropsModule (ref), useConversationModerationTypeModule (ref), useConversationMessagePoolModule (ref), getConversationMessageListStoreModule (ref), useFriendsChatConversationTelemetryModule (ref), useConversationHeaderFadeLayoutModule (ref), friendsChatConversationHeaderBarModule (ref), resolveFadeModule (ref), layoutConstantsModule (ref), friendsChatMessageListModule (ref), friendsChatInputBarHostModule (ref)
+	-- upvalues: useChatWindowSettingsModule (ref), reactModule (ref), useInterpolatedClientSettingsModule (ref), fFlagDebugFriendsChatModule (ref), fStringDebugFriendsChatConversationIdModule (ref), playersService (ref), expChatConversationListAdapterModule (ref), signalsModule (ref), fFlagFriendsChatOsaSystemMessage (ref), getConversationStoreModule (ref), signalsReactModule (ref), appChatNetworkingModule (ref), friendsChatOsaAcknowledgementModule (ref), useConversationHeaderPropsModule (ref), useConversationModerationTypeModule (ref), useConversationMessagePoolModule (ref), getConversationMessageListStoreModule (ref), useFriendsChatConversationTelemetryModule (ref), useConversationHeaderFadeLayoutModule (ref), fFlagFriendsChatConversationListFocusNav (ref), useFocusInputBarOnWindowEnterModule (ref), friendsChatConversationHeaderBarModule (ref), resolveFadeModule (ref), layoutConstantsModule (ref), friendsChatMessageListModule (ref), friendsChatInputBarHostModule (ref)
 	local var1 = useChatWindowSettingsModule()
 	local chatWindowSettings = p1.chatWindowSettings or reactModule.useMemo(function()
 		-- upvalues: var1 (ref)
@@ -92,10 +94,21 @@ return function(p1)
 	local parentLayoutOrder = p1.parentLayoutOrder or 1
 	local onOpenDetails = p1.onOpenDetails
 	local fireInfoButtonClicked = var10.fireInfoButtonClicked
-	local var11 = useConversationHeaderFadeLayoutModule({
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: fireInfoButtonClicked (ref), onOpenDetails (ref), conversationId (write)
+		fireInfoButtonClicked()
+		onOpenDetails(conversationId)
+	end, { fireInfoButtonClicked, onOpenDetails, conversationId })
+	local var12 = useConversationHeaderFadeLayoutModule({
 		transparencyValue = p1.transparencyValue,
 		conversationId = conversationId
 	})
+	local var13 = if fFlagFriendsChatConversationListFocusNav then reactModule.useRef(nil) else nil
+	local var14 = reactModule.useRef(nil)
+	local var15 = reactModule.useRef(nil)
+	local var16 = if fFlagFriendsChatConversationListFocusNav then var14 else nil
+	local var17 = if fFlagFriendsChatConversationListFocusNav then var15 else nil
+	useFocusInputBarOnWindowEnterModule(var14, var15)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		friendsChatHeaderWindow = reactModule.createElement("Frame", {
@@ -104,18 +117,20 @@ return function(p1)
 			LayoutOrder = parentLayoutOrder,
 			BackgroundColor3 = var2.BackgroundColor3 or (var2.BackgroundColor or var1.ChatWindowBackgroundColor3),
 			BackgroundTransparency = resolveFadeModule(var2.BackgroundTransparency, p1.transparencyValue),
-			Size = UDim2.new(1, 0, 1, layoutConstantsModule.PanelTopSpacerHeight)
+			Size = UDim2.new(1, 0, 1, layoutConstantsModule.PanelTopSpacerHeight),
+			ref = var16
 		}, {
 			layout = reactModule.createElement("UIListLayout", {
 				Name = "FriendsChatHeaderWindowLayout",
 				FillDirection = Enum.FillDirection.Vertical,
-				Padding = var11.headerLayoutPadding,
+				Padding = var12.headerLayoutPadding,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
 			header = reactModule.createElement(friendsChatConversationHeaderBarModule, {
 				layoutOrder = 1,
 				suppressBackground = true,
 				zIndex = 2,
+				backButtonRef = var13,
 				localUserId = var4,
 				participantUserIds = if var7 then var7.participantUserIds else nil,
 				titleText = if var7 then var7.titleText else nil,
@@ -124,22 +139,18 @@ return function(p1)
 				onHovered = p1.onHovered,
 				onUnhovered = p1.onUnhovered,
 				onBack = p1.onBack,
-				onActivated = if p1.onOpenDetails and var5 then reactModule.useCallback(function()
-					-- upvalues: fireInfoButtonClicked (ref), onOpenDetails (ref), conversationId (write)
-					fireInfoButtonClicked()
-					onOpenDetails(conversationId)
-				end, { fireInfoButtonClicked, onOpenDetails, conversationId }) else nil,
-				onAbsoluteSizeChanged = var11.onHeaderAbsoluteSizeChanged,
-				interactable = var11.headerInteractable
+				onActivated = if p1.onOpenDetails and var5 then var11 else nil,
+				onAbsoluteSizeChanged = var12.onHeaderAbsoluteSizeChanged,
+				interactable = var12.headerInteractable
 			}),
 			windowSlot = reactModule.createElement(friendsChatMessageListModule, {
 				layoutOrder = 2,
 				conversationId = conversationId,
 				scrollViewChildrenSignal = var9,
-				contentTopPadding = var11.contentTopPadding,
-				messageFadeSequence = var11.messageFadeSequence,
-				onCanvasPositionChanged = var11.onMessageCanvasPositionChanged,
-				onViewportAbsoluteSizeChanged = var11.onMessageViewportAbsoluteSizeChanged,
+				contentTopPadding = var12.contentTopPadding,
+				messageFadeSequence = var12.messageFadeSequence,
+				onCanvasPositionChanged = var12.onMessageCanvasPositionChanged,
+				onViewportAbsoluteSizeChanged = var12.onMessageViewportAbsoluteSizeChanged,
 				chatWindowSettings = chatWindowSettings,
 				transparencyValue = p1.transparencyValue,
 				textTransparency = p1.textTransparency,
@@ -161,7 +172,9 @@ return function(p1)
 			transparencyValue = p1.transparencyValue,
 			isSpatialUIEnabled = p1.isSpatialUIEnabled,
 			onHovered = p1.onHovered,
-			onUnhovered = p1.onUnhovered
+			onUnhovered = p1.onUnhovered,
+			backButtonRef = var13,
+			rootRef = var17
 		})
 	})
 end

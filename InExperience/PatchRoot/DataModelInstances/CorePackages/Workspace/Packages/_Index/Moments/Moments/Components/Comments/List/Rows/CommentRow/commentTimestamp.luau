@@ -17,13 +17,19 @@ end
 
 return {
 	parseTimestamp = parseTimestamp,
-	formatTimestamp = function(p1, p2)
+	getRelativeAge = function(p1, p2)
 		if p1 == nil then
 			return nil
 		end
 		local maxValue = math.max(p2 - p1, 0)
 		
-		return if maxValue < 60000 then "now" elseif maxValue < 3600000 then `{math.floor(maxValue / 60000)}m` elseif maxValue < 86400000 then `{math.floor(maxValue / 3600000)}h` elseif maxValue < 604800000 then `{math.floor(maxValue / 86400000)}d` elseif maxValue < 2592000000 then `{math.floor(maxValue / 604800000)}w` elseif maxValue < 31536000000 then `{math.floor(maxValue / 2592000000)}mo` else `{math.floor(maxValue / 31536000000)}y`
+		return if maxValue < 60000 then { unit = "now", count = 0 } elseif maxValue < 3600000 then { unit = "minutes", count = math.floor(maxValue / 60000) } elseif maxValue < 86400000 then { unit = "hours", count = math.floor(maxValue / 3600000) } elseif maxValue < 604800000 then { unit = "days", count = math.floor(maxValue / 86400000) } elseif maxValue < 2592000000 then { unit = "weeks", count = math.floor(maxValue / 604800000) } elseif maxValue < 31536000000 then {
+			unit = "months",
+			count = math.floor(maxValue / 2592000000)
+		} else {
+			unit = "years",
+			count = math.floor(maxValue / 31536000000)
+		}
 	end,
 	getNextChangeTimestamp = function(p1, p2)
 		if p1 == nil then

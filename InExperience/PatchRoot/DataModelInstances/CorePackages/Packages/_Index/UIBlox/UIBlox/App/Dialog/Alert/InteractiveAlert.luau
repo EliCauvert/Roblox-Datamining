@@ -4,6 +4,7 @@ local parent_2 = parent_1.Parent
 local parent_3 = parent_2.Parent
 local roactModule = require(parent_3.Roact)
 local tModule = require(parent_3.t)
+local foundationFontFaceMigration = require(parent_3.Foundation).Utility.Flags.FoundationFontFaceMigration
 local alertModule = require(parent.Alert)
 local alertTypeModule = require(parent.Enum.AlertType)
 local fitFrameOnAxis = require(parent_3.FitFrame).FitFrameOnAxis
@@ -12,6 +13,7 @@ local var2 = 400
 local genericTextLabelModule = require(parent_2.Core.Text.GenericTextLabel.GenericTextLabel)
 local imageSetComponentModule = require(parent_2.Core.ImageSet.ImageSetComponent)
 local getTextHeightModule = require(parent_2.Core.Text.GetTextHeight)
+local getFontFromFontStyleModule = require(parent_2.Core.Text.GetFontFromFontStyle)
 local withStyleModule = require(parent_2.Core.Style.withStyle)
 local UIBloxConfigModule = require(parent_2.UIBloxConfig)
 local interactiveAlert = roactModule.PureComponent:extend("InteractiveAlert")
@@ -40,16 +42,16 @@ interactiveAlert.validateProps = tModule.strictInterface({
 interactiveAlert.defaultProps = { bottomMargin = 24 }
 
 function interactiveAlert.render(p1)
-	-- upvalues: withStyleModule (ref), var1 (write), UIBloxConfigModule (ref), var2 (write), roactModule (ref), fitFrameOnAxis (ref), imageSetComponentModule (ref), getTextHeightModule (ref), genericTextLabelModule (ref), alertModule (ref), alertTypeModule (ref)
+	-- upvalues: withStyleModule (ref), var1 (write), UIBloxConfigModule (ref), var2 (write), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), roactModule (ref), fitFrameOnAxis (ref), imageSetComponentModule (ref), getTextHeightModule (ref), genericTextLabelModule (ref), alertModule (ref), alertTypeModule (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: var1 (copy), UIBloxConfigModule (copy), var2 (copy), p1 (ref), roactModule (copy), fitFrameOnAxis (copy), imageSetComponentModule (copy), getTextHeightModule (copy), genericTextLabelModule (copy), alertModule (copy), alertTypeModule (copy)
+		-- upvalues: var1 (copy), UIBloxConfigModule (copy), var2 (copy), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), p1 (ref), roactModule (copy), fitFrameOnAxis (copy), imageSetComponentModule (copy), getTextHeightModule (copy), genericTextLabelModule (copy), alertModule (copy), alertTypeModule (copy)
 		var1 = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_400 else p2.Tokens.Global.Size_200) * 17
 		var2 = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_1000 else p2.Tokens.Global.Size_500) * 10
 		local theme = p2.Theme
 		local font = p2.Font
-		local font_1 = font.Body.Font
-		local var3 = font.BaseSize * font.Body.RelativeSize
-		local var4 = if p1.props.titleIcon then function()
+		local var3 = if foundationFontFaceMigration then getFontFromFontStyleModule(font.Body) else font.Body.Font
+		local var4 = font.BaseSize * font.Body.RelativeSize
+		local var5 = if p1.props.titleIcon then function()
 			-- upvalues: roactModule (copy), fitFrameOnAxis (copy), imageSetComponentModule (copy), p1 (copy), theme (ref)
 			return roactModule.createElement(fitFrameOnAxis, {
 				BackgroundTransparency = 1,
@@ -66,27 +68,28 @@ function interactiveAlert.render(p1)
 				})
 			})
 		end else p1.props.titleContent
-		local var5 = math.clamp(p1.props.screenSize.X - 48, var1, var2) - 48
+		local var6 = math.clamp(p1.props.screenSize.X - 48, var1, var2) - 48
 		local footerContent = p1.props.footerContent
 		
 		if p1.props.footerText then
-			local footerText = p1.props.footerText and getTextHeightModule(p1.props.footerText, font.Footer.Font, font.BaseSize * font.Footer.RelativeSize, var5, 100) or 0
+			local var7 = if foundationFontFaceMigration then font.BaseSize * font.Footer.RelativeSize else nil
+			local footerText = p1.props.footerText and getTextHeightModule(p1.props.footerText, if foundationFontFaceMigration then getFontFromFontStyleModule(font.Footer) else font.Footer.Font, font.BaseSize * font.Footer.RelativeSize, var6, 100) or 0
 			
 			footerContent = function()
-				-- upvalues: roactModule (copy), genericTextLabelModule (copy), theme (ref), font (ref), p1 (copy), var3 (ref), footerText (ref)
+				-- upvalues: roactModule (copy), genericTextLabelModule (copy), theme (ref), font (ref), p1 (copy), foundationFontFaceMigration (copy), var7 (ref), var4 (ref), footerText (ref)
 				return roactModule.createElement(genericTextLabelModule, {
 					BackgroundTransparency = 1,
 					LayoutOrder = 4,
 					colorStyle = theme.TextDefault,
 					fontStyle = font.Footer,
 					Text = p1.props.footerText,
-					TextSize = var3,
+					TextSize = if foundationFontFaceMigration then var7 else var4,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					Size = UDim2.new(1, 0, 0, footerText)
 				})
 			end
 		end
-		local bodyText = p1.props.bodyText and getTextHeightModule(p1.props.bodyText, font_1, var3, var5, 200) or 0
+		local bodyText = p1.props.bodyText and getTextHeightModule(p1.props.bodyText, var3, var4, var6, 200) or 0
 		
 		return roactModule.createElement(alertModule, {
 			anchorPoint = p1.props.anchorPoint,
@@ -101,7 +104,7 @@ function interactiveAlert.render(p1)
 			minWidth = var1,
 			buttonStackInfo = p1.props.buttonStackInfo,
 			middleContent = if p1.props.bodyText then function()
-				-- upvalues: roactModule (copy), fitFrameOnAxis (copy), genericTextLabelModule (copy), theme (ref), font (ref), p1 (copy), var3 (ref), bodyText (ref)
+				-- upvalues: roactModule (copy), fitFrameOnAxis (copy), genericTextLabelModule (copy), theme (ref), font (ref), p1 (copy), var4 (ref), bodyText (ref)
 				return roactModule.createElement(fitFrameOnAxis, {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
@@ -115,7 +118,7 @@ function interactiveAlert.render(p1)
 						fontStyle = font.Body,
 						Text = p1.props.bodyText,
 						RichText = p1.props.richText,
-						TextSize = var3,
+						TextSize = var4,
 						TextXAlignment = Enum.TextXAlignment.Center,
 						Size = UDim2.new(1, 0, 0, bodyText)
 					}),
@@ -132,7 +135,7 @@ function interactiveAlert.render(p1)
 			position = p1.props.position,
 			screenSize = p1.props.screenSize,
 			title = p1.props.title,
-			titleContent = var4,
+			titleContent = var5,
 			footerContent = footerContent,
 			isFooterContentFocusable = p1.props.isFooterContentFocusable,
 			onCloseClicked = p1.props.onCloseClicked,

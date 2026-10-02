@@ -63,7 +63,6 @@ return function(p1)
 		-- upvalues: displayModule (copy)
 		return displayModule.GetDisplayStore(p2).getUIScale(p2)
 	end)
-	local _ = constantsModule.TopBarButtonHeight * var6
 	local var7 = constantsModule.TopBarButtonPadding * var6
 	local var8 = constantsModule.MENU_ICON_SIZE * var6
 	local var9 = reactModule.useMemo(function()
@@ -205,7 +204,7 @@ return function(p1)
 			end)
 		}) else withTooltip(p2, p3, p4)
 	end)(t, t_1, reactModule.useCallback(function(p2)
-		-- upvalues: reactModule (copy), view (copy), isSideSheetEnabledModule (copy), var12 (ref), var5 (ref), var16 (write), fFlagSideSheetFocusNav (copy), var25 (ref), p1 (ref), var29 (ref), var28 (ref), badgeOver12Module (copy), var7 (ref), icon (copy), foundationModule (copy), var10 (ref), var4 (ref)
+		-- upvalues: reactModule (copy), view (copy), isSideSheetEnabledModule (copy), var12 (ref), var5 (ref), p1 (ref), var16 (write), fFlagSideSheetFocusNav (copy), var25 (ref), var29 (ref), var28 (ref), badgeOver12Module (copy), var7 (ref), icon (copy), foundationModule (copy), var10 (ref), var4 (ref)
 		return reactModule.createElement(view, {
 			tag = "radius-circle aspect-1-1",
 			backgroundStyle = if not isSideSheetEnabledModule then var12:map(function(p3)
@@ -214,7 +213,7 @@ return function(p1)
 				
 				return var5
 			end) else nil,
-			Size = UDim2.fromScale(1, 1),
+			Size = if p1.buttonSize then UDim2.fromOffset(p1.buttonSize, p1.buttonSize) else UDim2.fromScale(1, 1),
 			NextSelectionRight = var16,
 			selection = if isSideSheetEnabledModule and fFlagSideSheetFocusNav then { Selectable = false } else { Selectable = true, SelectionImageObject = var25 },
 			selectionGroup = {
@@ -238,6 +237,7 @@ return function(p1)
 			})
 		})
 	end, {
-		var12, var16, var25, var29, var28, p1.showBadgeOver12, var4, var5
+		var12, var16, var25, var29, var28, p1.showBadgeOver12, var4, var5,
+		p1.buttonSize
 	}))
 end

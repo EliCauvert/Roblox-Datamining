@@ -1,5 +1,6 @@
 ﻿return {
 	authButtonClick = require(script.authButtonClick),
+	authButtonShown = require(script.authButtonShown),
 	authClientError = require(script.authClientError),
 	authOperationTiming = require(script.authOperationTiming),
 	authFormInteraction = require(script.authFormInteraction),

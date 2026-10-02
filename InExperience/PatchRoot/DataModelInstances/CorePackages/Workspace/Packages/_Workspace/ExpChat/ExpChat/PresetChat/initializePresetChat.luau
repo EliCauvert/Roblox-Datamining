@@ -1,17 +1,22 @@
 ﻿local textChatService = game:GetService("TextChatService")
 local gameSettings = UserSettings().GameSettings
 local expChat = script:FindFirstAncestor("ExpChat")
+local parent = expChat.Parent
+local expChatSharedModule = require(parent.ExpChatShared)
+local engineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
 local _ = require(expChat.Stores.GetPresetChatStore.createPresetChatStore)
-local initializePresetChat = require(expChat.Parent.ExpChatShared).Logger:new("ExpChat/PresetChat/initializePresetChat")
+local initializePresetChat = expChatSharedModule.Logger:new("ExpChat/PresetChat/initializePresetChat")
 
-local function _(value, p1)
-	-- upvalues: textChatService (ref), initializePresetChat (ref)
+local function getPresetsFromEngine()
+	-- upvalues: textChatService (ref)
+	return textChatService:GetPresetsAsync()
+end
+
+local function _(value, p1, p2)
+	-- upvalues: initializePresetChat (ref), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref)
 	task.spawn(function()
-		-- upvalues: textChatService (copy), p1 (ref), initializePresetChat (copy), value (ref)
-		local ok, status = pcall(function()
-			-- upvalues: textChatService (copy)
-			return textChatService:GetPresetsAsync()
-		end)
+		-- upvalues: p2 (ref), p1 (ref), initializePresetChat (copy), value (ref), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
+		local ok, status = pcall(p2)
 		
 		if p1 then
 			if not ok then
@@ -28,13 +33,13 @@ local function _(value, p1)
 			
 			return
 		end
-		local accessLevel = status.accessLevel or "Disabled"
-		value.setAccessLevel(accessLevel)
+		local var1 = (if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then status.status else status.accessLevel) or "Disabled"
+		value.setAccessLevel(var1)
 		
-		if accessLevel ~= "Disabled" then
+		if var1 ~= "Disabled" then
 			local version = status.version
 			
-			if not version or version == "" then
+			if not engineFeaturePresetChatUseExpressionTrayOptionsEndpoint and (not version or version == "") then
 				initializePresetChat:warning("Missing version in GetPresetsAsync response, treating as disabled")
 				value.setAccessLevel("Disabled")
 				value.setIsLoading(false)
@@ -45,7 +50,7 @@ local function _(value, p1)
 			
 			if categoryGroups and #categoryGroups > 0 then
 				value.setCategoryGroups(categoryGroups)
-				value.setVersion(version)
+				value.setVersion(version or "")
 				value.setIsEnabled(true)
 			end
 		end
@@ -53,14 +58,12 @@ local function _(value, p1)
 	end)
 end
 
-return function(value, p1)
-	-- upvalues: textChatService (ref), initializePresetChat (ref), gameSettings (ref)
+return function(value, p1, p2)
+	-- upvalues: getPresetsFromEngine (ref), initializePresetChat (ref), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref), gameSettings (ref)
+	p2 = p2 or getPresetsFromEngine
 	task.spawn(function()
-		-- upvalues: textChatService (copy), p1 (ref), initializePresetChat (copy), value (ref)
-		local ok, status = pcall(function()
-			-- upvalues: textChatService (copy)
-			return textChatService:GetPresetsAsync()
-		end)
+		-- upvalues: p2 (ref), p1 (ref), initializePresetChat (copy), value (ref), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
+		local ok, status = pcall(p2)
 		
 		if p1 then
 			if not ok then
@@ -77,13 +80,13 @@ return function(value, p1)
 			
 			return
 		end
-		local accessLevel = status.accessLevel or "Disabled"
-		value.setAccessLevel(accessLevel)
+		local var1 = (if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then status.status else status.accessLevel) or "Disabled"
+		value.setAccessLevel(var1)
 		
-		if accessLevel ~= "Disabled" then
+		if var1 ~= "Disabled" then
 			local version = status.version
 			
-			if not version or version == "" then
+			if not engineFeaturePresetChatUseExpressionTrayOptionsEndpoint and (not version or version == "") then
 				initializePresetChat:warning("Missing version in GetPresetsAsync response, treating as disabled")
 				value.setAccessLevel("Disabled")
 				value.setIsLoading(false)
@@ -94,23 +97,20 @@ return function(value, p1)
 			
 			if categoryGroups and #categoryGroups > 0 then
 				value.setCategoryGroups(categoryGroups)
-				value.setVersion(version)
+				value.setVersion(version or "")
 				value.setIsEnabled(true)
 			end
 		end
 		value.setIsLoading(false)
 	end)
 	gameSettings:GetPropertyChangedSignal("ChatTranslationLocale"):Connect(function()
-		-- upvalues: p1 (ref), value (ref), textChatService (copy), initializePresetChat (copy)
+		-- upvalues: p1 (ref), value (ref), p2 (ref), initializePresetChat (copy), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
 		if not p1 then
 			value.setIsLoading(true)
 		end
 		task.spawn(function()
-			-- upvalues: textChatService (copy), p1 (ref), initializePresetChat (copy), value (ref)
-			local ok, status = pcall(function()
-				-- upvalues: textChatService (copy)
-				return textChatService:GetPresetsAsync()
-			end)
+			-- upvalues: p2 (ref), p1 (ref), initializePresetChat (copy), value (ref), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
+			local ok, status = pcall(p2)
 			
 			if p1 then
 				if not ok then
@@ -127,13 +127,13 @@ return function(value, p1)
 				
 				return
 			end
-			local accessLevel = status.accessLevel or "Disabled"
-			value.setAccessLevel(accessLevel)
+			local var1 = (if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then status.status else status.accessLevel) or "Disabled"
+			value.setAccessLevel(var1)
 			
-			if accessLevel ~= "Disabled" then
+			if var1 ~= "Disabled" then
 				local version = status.version
 				
-				if not version or version == "" then
+				if not engineFeaturePresetChatUseExpressionTrayOptionsEndpoint and (not version or version == "") then
 					initializePresetChat:warning("Missing version in GetPresetsAsync response, treating as disabled")
 					value.setAccessLevel("Disabled")
 					value.setIsLoading(false)
@@ -144,7 +144,7 @@ return function(value, p1)
 				
 				if categoryGroups and #categoryGroups > 0 then
 					value.setCategoryGroups(categoryGroups)
-					value.setVersion(version)
+					value.setVersion(version or "")
 					value.setIsEnabled(true)
 				end
 			end
@@ -152,16 +152,13 @@ return function(value, p1)
 		end)
 	end)
 	gameSettings:GetPropertyChangedSignal("ChatTranslationEnabled"):Connect(function()
-		-- upvalues: p1 (ref), value (ref), textChatService (copy), initializePresetChat (copy)
+		-- upvalues: p1 (ref), value (ref), p2 (ref), initializePresetChat (copy), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
 		if not p1 then
 			value.setIsLoading(true)
 		end
 		task.spawn(function()
-			-- upvalues: textChatService (copy), p1 (ref), initializePresetChat (copy), value (ref)
-			local ok, status = pcall(function()
-				-- upvalues: textChatService (copy)
-				return textChatService:GetPresetsAsync()
-			end)
+			-- upvalues: p2 (ref), p1 (ref), initializePresetChat (copy), value (ref), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
+			local ok, status = pcall(p2)
 			
 			if p1 then
 				if not ok then
@@ -178,13 +175,13 @@ return function(value, p1)
 				
 				return
 			end
-			local accessLevel = status.accessLevel or "Disabled"
-			value.setAccessLevel(accessLevel)
+			local var1 = (if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then status.status else status.accessLevel) or "Disabled"
+			value.setAccessLevel(var1)
 			
-			if accessLevel ~= "Disabled" then
+			if var1 ~= "Disabled" then
 				local version = status.version
 				
-				if not version or version == "" then
+				if not engineFeaturePresetChatUseExpressionTrayOptionsEndpoint and (not version or version == "") then
 					initializePresetChat:warning("Missing version in GetPresetsAsync response, treating as disabled")
 					value.setAccessLevel("Disabled")
 					value.setIsLoading(false)
@@ -195,7 +192,7 @@ return function(value, p1)
 				
 				if categoryGroups and #categoryGroups > 0 then
 					value.setCategoryGroups(categoryGroups)
-					value.setVersion(version)
+					value.setVersion(version or "")
 					value.setIsEnabled(true)
 				end
 			end

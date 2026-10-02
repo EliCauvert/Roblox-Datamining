@@ -121,8 +121,8 @@ function variantsFactory(p1)
 end
 
 return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: flagsModule (ref), var1 (ref), statusIndicatorVariantModule (ref), indexBindableModule (ref), variantsContextModule (ref), composeStyleVariantModule (ref)
-	if not flagsModule.FoundationStatusIndicatorVariantExperiment and var1 then
+	-- upvalues: var1 (ref), statusIndicatorVariantModule (ref), indexBindableModule (ref), variantsContextModule (ref), composeStyleVariantModule (ref)
+	if var1 then
 		if p2 == statusIndicatorVariantModule.Contrast_Experiment then
 			error("Contrast is not a supported StatusIndicator variant.")
 		end

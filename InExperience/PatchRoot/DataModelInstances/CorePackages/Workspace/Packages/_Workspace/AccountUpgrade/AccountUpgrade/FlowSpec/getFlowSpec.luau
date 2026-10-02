@@ -20,7 +20,7 @@ local t = {
 	},
 	[accountUpgradeFlowModule.PioneerU13] = {
 		canDismiss = false,
-		upgradeType = "Pioneer",
+		upgradeType = "PioneerU13",
 		titleTextKey = "Authentication.SignUp.Header.SetUpYourRobloxAccount",
 		subtitleTextKey = "Authentication.SignUp.Subtitle.YourProgressCarriesOver",
 		submitTextKey = "Authentication.Login.Action.Save",

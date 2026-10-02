@@ -1,4 +1,5 @@
 ﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
+local parent = friendsLanding.Parent
 local dependenciesModule = require(friendsLanding.dependencies)
 local roact = dependenciesModule.Roact
 local withLocalization = dependenciesModule.withLocalization
@@ -7,15 +8,14 @@ local friendsLandingContextModule = require(friendsLanding.FriendsLandingContext
 local friendsLandingHeaderBarPresentationalModule = require(script.FriendsLandingHeaderBarPresentational)
 local appHeaderBar = dependenciesModule.AppHeaderBar
 local getActiveChildNavigationOptionsSafelyModule = require(friendsLanding.Navigator.getActiveChildNavigationOptionsSafely)
-local fFlagEnableLeftNavOnConsole = dependenciesModule.FFlagEnableLeftNavOnConsole
-local guiService = dependenciesModule.GuiService
+local isTenFootInterface = require(parent.AppCommonLib).isTenFootInterface
 local friendsLandingHeaderBar = roact.PureComponent:extend("FriendsLandingHeaderBar")
 
 function friendsLandingHeaderBar.init(p1)
-	-- upvalues: appHeaderBar (ref), fFlagEnableLeftNavOnConsole (ref), guiService (ref), actions (ref)
+	-- upvalues: appHeaderBar (ref), isTenFootInterface (ref), actions (ref)
 	function p0.renderLeft(p2, _, _)
-		-- upvalues: appHeaderBar (copy), fFlagEnableLeftNavOnConsole (copy), guiService (copy), actions (copy)
-		return if fFlagEnableLeftNavOnConsole and guiService:IsTenFootInterface() then nil else appHeaderBar.makeBackButton(function()
+		-- upvalues: appHeaderBar (copy), isTenFootInterface (copy), actions (copy)
+		return if isTenFootInterface() then nil else appHeaderBar.makeBackButton(function()
 			-- upvalues: p2 (ref), actions (copy)
 			p2.dispatch(actions.back())
 		end)

@@ -12,7 +12,6 @@ local useTokens = foundationModule.Hooks.useTokens
 local useDesignTokens = require(parent.Style).useDesignTokens
 local getLocalizedPriceModule = require(avatarExperienceUIKit.ItemCard.Utils.getLocalizedPrice)
 local fFlagAXDurablesFooter = avatarExperienceFlagsModule.FFlagAXDurablesFooter
-local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
 local fFlagAXItemCardComponentsMemo = avatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo
 
 local function renderIconTextPair(p1)
@@ -80,7 +79,7 @@ local function renderContentChildren(p1, p2, p3, p4, p5, p6, p7)
 end
 
 local function ItemCardPriceLine(p1)
-	-- upvalues: useTokens (ref), useDesignTokens (ref), reactModule (ref), badge (ref), badgeVariant (ref), fFlagAXMISEnableMultiShopping (ref), iconSize (ref), fFlagAXDurablesFooter (ref), renderContentChildren (ref), icon (ref), text (ref), getLocalizedPriceModule (ref)
+	-- upvalues: useTokens (ref), useDesignTokens (ref), reactModule (ref), badge (ref), badgeVariant (ref), iconSize (ref), fFlagAXDurablesFooter (ref), renderContentChildren (ref), icon (ref), text (ref), getLocalizedPriceModule (ref)
 	local var1 = useTokens()
 	local var2 = useDesignTokens()
 	
@@ -100,8 +99,8 @@ local function ItemCardPriceLine(p1)
 		})
 	end
 	local var3 = if p1.content and p1.content.colorStyle then p1.content.colorStyle else var1.Color.Content.Emphasis
-	local var4 = if fFlagAXMISEnableMultiShopping and p1.content and p1.content.iconSize then p1.content.iconSize else iconSize.Small
-	local var5 = if fFlagAXMISEnableMultiShopping and p1.content and p1.content.fontStyle then p1.content.fontStyle else var1.Typography.BodyMedium
+	local var4 = if p1.content and p1.content.iconSize then p1.content.iconSize else iconSize.Small
+	local var5 = if p1.content and p1.content.fontStyle then p1.content.fontStyle else var1.Typography.BodyMedium
 	
 	if not fFlagAXDurablesFooter or p1.content.type ~= "multi" then
 		return reactModule.createElement("Frame", {
@@ -165,12 +164,12 @@ local function ItemCardPriceLine(p1)
 				Position = UDim2.new(0, 0, 0, -var1.Gap.XXSmall)
 			})
 			var6 += 1
-			continue
+		else
+			for i_1, v_1 in renderContentChildren(v, `priceLine{i}`, var6, var6 + 1, if v.colorStyle then v.colorStyle else var1.Color.Content.Emphasis, var1, var2) do
+				t[i_1] = v_1
+			end
+			var6 += 2
 		end
-		for i_1, v_1 in renderContentChildren(v, `priceLine{i}`, var6, var6 + 1, if v.colorStyle then v.colorStyle else var1.Color.Content.Emphasis, var1, var2) do
-			t[i_1] = v_1
-		end
-		var6 += 2
 	end
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

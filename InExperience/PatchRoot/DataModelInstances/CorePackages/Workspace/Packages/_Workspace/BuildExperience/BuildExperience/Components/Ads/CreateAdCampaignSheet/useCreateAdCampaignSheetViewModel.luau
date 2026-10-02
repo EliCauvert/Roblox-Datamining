@@ -86,36 +86,37 @@ local function useTwoOptionsControls(value, p3, p4, p5, p6, p7, p8)
 	local adCampaignCheckFunds = creatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignCheckFunds
 	local campaignOption = (if p5.feedback ~= nil and p5.feedback.fundingType == "free" then if p5.plays == nil or p5.plays.fundingType ~= "free" then p5.feedback or p5.plays else p5.plays else p5.feedback).campaignOption
 	local var3, var4 = reactModule.useState(campaignOption)
-	local var5, var6 = reactModule.useState(nil)
-	local var7 = signalsReactModule.useSignalState(if var5 ~= nil then var1 else var5.state)
-	local var8 = reactModule.useCallback(function(p9)
-		-- upvalues: var6 (ref), adCampaignCheckFunds (ref)
+	local var5 = reactModule.useRef(nil)
+	local var6, var7 = reactModule.useState(nil)
+	local var8 = signalsReactModule.useSignalState(if var6 ~= nil then var1 else var6.state)
+	local var9 = reactModule.useCallback(function(p9)
+		-- upvalues: var7 (ref), adCampaignCheckFunds (ref)
 		if p9 == nil or p9.fundingType ~= "paid" then
-			var6(nil)
+			var7(nil)
 			
 			return
 		end
-		var6(adCampaignCheckFunds({ campaignOption = p9.campaignOption }))
+		var7(adCampaignCheckFunds({ campaignOption = p9.campaignOption }))
 	end, { adCampaignCheckFunds })
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref)
-		if var5 == nil then
+		-- upvalues: var6 (ref)
+		if var6 == nil then
 			return
 		end
 		return function()
-			-- upvalues: var5 (copy)
-			var5.dispose()
+			-- upvalues: var6 (copy)
+			var6.dispose()
 		end
-	end, { var5 or false })
+	end, { var6 or false })
 	reactModule.useEffect(function()
-		-- upvalues: value (ref), p7 (ref), var4 (ref), campaignOption (ref), var6 (ref), p6 (ref), p5 (ref)
+		-- upvalues: value (ref), p7 (ref), var4 (ref), campaignOption (ref), var7 (ref), p6 (ref), p5 (ref)
 		if value then
 			var4(function(p9)
 				-- upvalues: p6 (copy), p7 (copy), p5 (copy), campaignOption (copy)
 				if p6 or p7 then
-					local var9 = p5
+					local var10 = p5
 					
-					return if (if p9 == "feedback" then var9.feedback elseif p9 == "plays" then var9.plays else nil) == nil then campaignOption else p9
+					return if (if p9 == "feedback" then var10.feedback elseif p9 == "plays" then var10.plays else nil) == nil then campaignOption else p9
 				end
 			end)
 			
@@ -123,7 +124,7 @@ local function useTwoOptionsControls(value, p3, p4, p5, p6, p7, p8)
 		elseif not p7 then
 			var4(campaignOption)
 		end
-		var6(nil)
+		var7(nil)
 	end, {
 		value,
 		p6,
@@ -131,20 +132,21 @@ local function useTwoOptionsControls(value, p3, p4, p5, p6, p7, p8)
 		campaignOption,
 		p5
 	})
-	local var9 = if var3 == "feedback" then p5.feedback elseif var3 == "plays" then p5.plays else nil
+	local var10 = if var3 == "feedback" then p5.feedback elseif var3 == "plays" then p5.plays else nil
+	local var11 = p7 and (if var5.current ~= nil then var5.current == var3 else true)
 	reactModule.useEffect(function()
-		-- upvalues: value (ref), p7 (ref), p6 (ref), var8 (ref), var9 (ref)
-		if value and not p7 and not p6 then
-			var8(var9)
+		-- upvalues: value (ref), var11 (ref), p6 (ref), var9 (ref), var10 (ref)
+		if value and not var11 and not p6 then
+			var9(var10)
 		end
 	end, {
 		value,
 		p6,
-		p7,
-		var9,
-		var8
+		var11,
+		var10,
+		var9
 	})
-	local var10, var11 = useDefaultFocusBehavior(useFocusRoot({
+	local var12, var13 = useDefaultFocusBehavior(useFocusRoot({
 		isAutoFocusRoot = true,
 		shouldRestoreFocus = false,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
@@ -163,63 +165,62 @@ local function useTwoOptionsControls(value, p3, p4, p5, p6, p7, p8)
 			}
 		end, { p3 })
 	}))
-	local var12 = reactModule.useCallback(function(p9)
-		-- upvalues: p7 (ref), var4 (ref)
-		if p7 then
-			return
-		end
+	local var14 = reactModule.useCallback(function(p9)
+		-- upvalues: var4 (ref)
 		var4(p9)
-	end, { p7 })
-	local result = var7.result
-	local var13 = var9 ~= nil and var9.fundingType == "paid"
-	local var14 = not p6 and (not p7 and (var13 and (if var5 ~= nil then var7.status == "pending" else true)))
-	local var15 = not p6 and (not p7 and (var13 and var7.status == "failed"))
-	local var16 = var13 and (var7.status == "succeeded" and (result ~= nil and result.canFund))
-	local var17 = not p6 and (not p7 and (var13 and (var7.status == "succeeded" and (result ~= nil and not result.canFund))))
-	local var18 = useOpenBuyRobuxWebViewModule(reactModule.useCallback(function()
-		-- upvalues: p8 (ref), value (ref), var13 (ref), var8 (ref), var9 (ref)
+	end, {})
+	local result = var8.result
+	local var15 = var10 ~= nil and var10.fundingType == "paid"
+	local var16 = not p6 and (not var11 and (var15 and (if var6 ~= nil then var8.status == "pending" else true)))
+	local var17 = not p6 and (not var11 and (var15 and var8.status == "failed"))
+	local var18 = var15 and (var8.status == "succeeded" and (result ~= nil and result.canFund))
+	local var19 = not p6 and (not var11 and (var15 and (var8.status == "succeeded" and (result ~= nil and not result.canFund))))
+	local var20 = useOpenBuyRobuxWebViewModule(reactModule.useCallback(function()
+		-- upvalues: p8 (ref), value (ref), var15 (ref), var9 (ref), var10 (ref)
 		p8()
 		
-		if value and var13 then
-			var8(var9)
+		if value and var15 then
+			var9(var10)
 		end
 	end, {
 		value,
-		var13,
+		var15,
+		var10,
 		var9,
-		var8,
 		p8
 	}))
 	
 	return {
-		sheetRootRef = var11,
-		defaultOptionRef = var10,
+		sheetRootRef = var13,
+		defaultOptionRef = var12,
 		selectedOption = var3,
 		showCloseButton = var2 ~= responsiveModule.Input.Directional,
-		isFundingCheckPending = var14,
-		isPrimaryActionDisabled = if var9 ~= nil then not p7 and (var13 and (not var16 and (not var17 and not var15))) else true,
-		shouldBuyRobux = var17,
-		onOptionChanged = var12,
+		isFundingCheckPending = var16,
+		isPrimaryActionDisabled = if var10 ~= nil then not var11 and (var15 and (not var18 and (not var19 and not var17))) else true,
+		shouldBuyRobux = var19,
+		isErrorForSelectedOption = var11,
+		onOptionChanged = var14,
 		onCreate = reactModule.useCallback(function()
-			-- upvalues: var17 (ref), var18 (ref), var15 (ref), var8 (ref), var9 (ref), var13 (ref), p7 (ref), var16 (ref), p4 (ref)
-			if var17 then
-				var18()
+			-- upvalues: var19 (ref), var20 (ref), var17 (ref), var9 (ref), var10 (ref), var15 (ref), var11 (ref), var18 (ref), var5 (ref), p4 (ref)
+			if var19 then
+				var20()
 				
 				return
-			elseif var15 then
-				var8(var9)
+			elseif var17 then
+				var9(var10)
 				
 				return
-			elseif var13 and not p7 and not var16 then return end
-			if var9 == nil then
+			elseif var15 and not var11 and not var18 then return end
+			if var10 == nil then
 				return
 			end
+			var5.current = var10.campaignOption
 			p4({
-				paymentType = var9.fundingType,
-				campaignOption = var9.campaignOption
+				paymentType = var10.fundingType,
+				campaignOption = var10.campaignOption
 			})
 		end, {
-			p4, var9, var17, var18, var13, p7, var16, var15, var8
+			p4, var10, var19, var20, var15, var11, var18, var17, var9
 		})
 	}
 end
@@ -299,6 +300,10 @@ return function(p3)
 	}
 	
 	if fFlagEnablePaidAdsModule then
+		t.forbiddenError = localizationStringsModule.AD_CAMPAIGN_SHEET_FORBIDDEN_ERROR
+		t.insufficientFundsError = localizationStringsModule.AD_CAMPAIGN_SHEET_INSUFFICIENT_FUNDS_ERROR
+		t.internalError = localizationStringsModule.AD_CAMPAIGN_SHEET_INTERNAL_ERROR
+		t.missingThumbnailError = localizationStringsModule.AD_CAMPAIGN_SHEET_MISSING_THUMBNAIL_ERROR
 		t.introduction = localizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_INTRODUCTION
 		t.startCampaignTitle = localizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_CAMPAIGN_PICKER_TITLE
 		
@@ -328,26 +333,32 @@ return function(p3)
 		end
 		t.buyRobux = localizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_BUTTON
 	end
-	local var13, var14
-	local var15 = useLocalization(t)
-	local var16 = p3.waitForCreateResult == true
-	local var17 = var16 and p3.isCreatePending == true
-	local var18 = var16 and p3.hasCreateError == true
+	local var13 = useLocalization(t)
+	local var14 = p3.waitForCreateResult == true
+	local var15 = var14 and p3.isCreatePending == true
+	local var16 = var14 and p3.hasCreateError == true
+	local createError = var13.createError
+	
+	if fFlagEnablePaidAdsModule and var16 then
+		local createErrorKind = p3.createErrorKind
+		createError = if createErrorKind == "payment_required" then var13.insufficientFundsError elseif createErrorKind == "ineligible" then var13.forbiddenError elseif createErrorKind == "missing_thumbnail" then var13.missingThumbnailError else var13.internalError
+	end
+	local var17, var18
 	local var19 = reactModule.useCallback(function()
-		-- upvalues: var17 (ref), p3 (ref)
-		if var17 then
+		-- upvalues: var15 (ref), p3 (ref)
+		if var15 then
 			return
 		end
 		p3.onClose()
-	end, { p3.onClose, var17 })
+	end, { p3.onClose, var15 })
 	local var20 = reactModule.useCallback(function(p4)
-		-- upvalues: p3 (ref), var16 (ref), var19 (ref)
+		-- upvalues: p3 (ref), var14 (ref), var19 (ref)
 		p3.onCreate(p4)
 		
-		if not var16 then
+		if not var14 then
 			var19()
 		end
-	end, { p3.onCreate, var19, var16 })
+	end, { p3.onCreate, var19, var14 })
 	local var21 = reactModule.useCallback(function(p4)
 		-- upvalues: var6 (ref), createAdCampaignSheetConfigModule (copy)
 		var6(createAdCampaignSheetConfigModule.ADVERTISING_TERMS_URL, p4)
@@ -356,7 +367,7 @@ return function(p3)
 		-- upvalues: var6 (ref), createAdCampaignSheetConfigModule (copy)
 		var6(createAdCampaignSheetConfigModule.ADVERTISING_STANDARDS_URL, p4)
 	end, { var6 })
-	local var23 = if fFlagEnablePaidAdsModule then useTwoOptionsControls(p3.isOpen, var19, var20, var2, var17, var18, reactModule.useCallback(function()
+	local var23 = if fFlagEnablePaidAdsModule then useTwoOptionsControls(p3.isOpen, var19, var20, var2, var15, var16, reactModule.useCallback(function()
 		-- upvalues: creatorCreditStore (ref)
 		creatorCreditStore.refreshQuotaSummary():catch(function() end)
 	end, { creatorCreditStore })) else nil
@@ -364,14 +375,14 @@ return function(p3)
 	local _ = nil
 	
 	if var4 ~= nil then
-		var13 = "ready"
-		var14 = numberLocalization.localize(string.format("%.0f", math.floor(var4.robuxBalance)), localizationService.RobloxLocaleId)
+		var17 = "ready"
+		var18 = numberLocalization.localize(string.format("%.0f", math.floor(var4.robuxBalance)), localizationService.RobloxLocaleId)
 	elseif var5 == dataStatus.Failed then
-		var13 = "failed"
-		var14 = createAdCampaignSheetConfigModule.BALANCE_UNAVAILABLE
+		var17 = "failed"
+		var18 = createAdCampaignSheetConfigModule.BALANCE_UNAVAILABLE
 	else
-		var13 = "loading"
-		var14 = createAdCampaignSheetConfigModule.BALANCE_LOADING
+		var17 = "loading"
+		var18 = createAdCampaignSheetConfigModule.BALANCE_LOADING
 	end
 	if fFlagEnablePaidAdsModule then
 		local var24 = var23
@@ -380,23 +391,23 @@ return function(p3)
 			variant = "twoOptions",
 			isOpen = p3.isOpen,
 			sheetRootRef = var24.sheetRootRef,
-			title = var15.title,
-			description = var15.introduction,
-			startCampaignTitle = var15.startCampaignTitle,
+			title = var13.title,
+			description = var13.introduction,
+			startCampaignTitle = var13.startCampaignTitle,
 			selectedOption = var24.selectedOption,
 			defaultOptionRef = var24.defaultOptionRef,
-			feedbackOption = if campaignOffers ~= nil then nil else toCampaignOption(campaignOffers, var15.feedbackOptionTitle, var15.feedbackRunDates, var15.feedbackDescription, var15.free),
-			playsOption = if var7 ~= nil then nil else toCampaignOption(var7, var15.playsOptionTitle, var15.playsRunDates, var15.playsDescription, var15.free),
-			legalText = var15.legal,
-			createText = if var24.shouldBuyRobux then var15.buyRobux else var15.create,
-			moderationNotice = var15.moderationNotice,
-			isCreatePending = var17,
+			feedbackOption = if campaignOffers ~= nil then nil else toCampaignOption(campaignOffers, var13.feedbackOptionTitle, var13.feedbackRunDates, var13.feedbackDescription, var13.free),
+			playsOption = if var7 ~= nil then nil else toCampaignOption(var7, var13.playsOptionTitle, var13.playsRunDates, var13.playsDescription, var13.free),
+			legalText = var13.legal,
+			createText = if var24.shouldBuyRobux then var13.buyRobux else var13.create,
+			moderationNotice = var13.moderationNotice,
+			isCreatePending = var15,
 			isFundingCheckPending = var24.isFundingCheckPending,
 			isCreateDisabled = var24.isPrimaryActionDisabled,
-			hasCreateError = var18,
-			createErrorText = var15.createError,
-			balanceState = var13,
-			balanceText = var14,
+			hasCreateError = var24.isErrorForSelectedOption,
+			createErrorText = createError,
+			balanceState = var17,
+			balanceText = var18,
 			showCloseButton = var24.showCloseButton,
 			onOptionChanged = var24.onOptionChanged,
 			onClose = var19,
@@ -408,30 +419,30 @@ return function(p3)
 	return {
 		variant = "freeOptionOnly",
 		isOpen = p3.isOpen,
-		title = var15.title,
-		description = var15.description,
-		campaignTitle = var15.campaignTitle,
+		title = var13.title,
+		description = var13.description,
+		campaignTitle = var13.campaignTitle,
 		estimatedPriceText = numberLocalization.localize(string.format("%.0f", math.floor(var9)), localizationService.RobloxLocaleId),
-		freeText = var15.free,
-		earnedRobuxDisclaimer = var15.earnedRobuxDisclaimer,
-		includedTitle = var15.includedTitle,
+		freeText = var13.free,
+		earnedRobuxDisclaimer = var13.earnedRobuxDisclaimer,
+		includedTitle = var13.includedTitle,
 		benefits = {
-			{ icon = iconName.Calendar, text = var15.runDates },
-			{ icon = iconName.CirclePlay, text = var15.maximizePlays },
-			{ icon = iconName.ThreePeople, text = var15.targetPlayers },
+			{ icon = iconName.Calendar, text = var13.runDates },
+			{ icon = iconName.CirclePlay, text = var13.maximizePlays },
+			{ icon = iconName.ThreePeople, text = var13.targetPlayers },
 			{
 				icon = iconName.ChartScatterPlot,
-				text = var15.performanceReport
+				text = var13.performanceReport
 			}
 		},
-		legalText = var15.legal,
-		createText = var15.create,
-		moderationNotice = var15.moderationNotice,
-		balanceState = var13,
-		balanceText = var14,
-		isCreatePending = var17,
-		hasCreateError = var18,
-		createErrorText = var15.createError,
+		legalText = var13.legal,
+		createText = var13.create,
+		moderationNotice = var13.moderationNotice,
+		balanceState = var17,
+		balanceText = var18,
+		isCreatePending = var15,
+		hasCreateError = var16,
+		createErrorText = createError,
 		onClose = var19,
 		onCreate = var20,
 		onAdvertisingTerms = var21,

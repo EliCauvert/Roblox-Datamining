@@ -14,12 +14,13 @@ local sendUnifiedPurchaseEventLogModule = require(parent.Utils.sendUnifiedPurcha
 local unifiedPurchaseEventNameEnumModule = require(parent.Enums.UnifiedPurchaseEventNameEnum)
 local fFlagEnableInExperienceOffersPurchaseFlow = require(parent.Parent.SharedFlags).FFlagEnableInExperienceOffersPurchaseFlow
 local getFeatureKeyForSurfaceModule = require(parent.Utils.getFeatureKeyForSurface)
+local fFlagRefetchBothOfferKeysAfterPurchaseModule = require(parent.Flags.FFlagRefetchBothOfferKeysAfterPurchase)
 local inExperienceOffersModule = require(parent.Parent.InExperienceOffers)
 
 return function(p1)
-	-- upvalues: thunkModule (ref), workspaceService (ref), purchaseCompleteRecievedModule (ref), AXEnsureOfferBannerRefetchUnified (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), inExperienceOffersModule (ref), getFeatureKeyForSurfaceModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), sendUnifiedPurchaseEventLogModule (ref), unifiedPurchaseEventNameEnumModule (ref), fFlagSkipCompletionModalForMarketplace (ref), setPromptStateModule (ref), promptStateModule (ref), completeRequestModule (ref)
+	-- upvalues: thunkModule (ref), workspaceService (ref), purchaseCompleteRecievedModule (ref), AXEnsureOfferBannerRefetchUnified (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), inExperienceOffersModule (ref), fFlagRefetchBothOfferKeysAfterPurchaseModule (ref), getFeatureKeyForSurfaceModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), sendUnifiedPurchaseEventLogModule (ref), unifiedPurchaseEventNameEnumModule (ref), fFlagSkipCompletionModalForMarketplace (ref), setPromptStateModule (ref), promptStateModule (ref), completeRequestModule (ref)
 	return thunkModule.new(script.Name, {}, function(p2, _)
-		-- upvalues: workspaceService (copy), purchaseCompleteRecievedModule (copy), AXEnsureOfferBannerRefetchUnified (copy), fFlagEnableInExperienceOffersPurchaseFlow (copy), inExperienceOffersModule (copy), getFeatureKeyForSurfaceModule (copy), p1 (ref), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), sendUnifiedPurchaseEventLogModule (copy), unifiedPurchaseEventNameEnumModule (copy), fFlagSkipCompletionModalForMarketplace (copy), setPromptStateModule (copy), promptStateModule (copy), completeRequestModule (copy)
+		-- upvalues: workspaceService (copy), purchaseCompleteRecievedModule (copy), AXEnsureOfferBannerRefetchUnified (copy), fFlagEnableInExperienceOffersPurchaseFlow (copy), inExperienceOffersModule (copy), fFlagRefetchBothOfferKeysAfterPurchaseModule (copy), getFeatureKeyForSurfaceModule (copy), p1 (ref), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), sendUnifiedPurchaseEventLogModule (copy), unifiedPurchaseEventNameEnumModule (copy), fFlagSkipCompletionModalForMarketplace (copy), setPromptStateModule (copy), promptStateModule (copy), completeRequestModule (copy)
 		local var1 = workspaceService.DistributedGameTime - p2:getState().purchasingStartTime
 		p2:dispatch(purchaseCompleteRecievedModule())
 		
@@ -33,12 +34,19 @@ return function(p1)
 				local offersStore = inExperienceOffersModule.getOffersStore(false)
 				local offers = offersStore.getOffers(false)
 				local featureKeys = inExperienceOffersModule.FeatureKeys
+				local getOffersForKey = inExperienceOffersModule.Utils.getOffersForKey
 				
-				if getFeatureKeyForSurfaceModule(purchaseAnalyticsMetadata.surface) == featureKeys.RobloxShop then
-					if inExperienceOffersModule.Utils.getOffersForKey(offers, featureKeys.RobloxShop) ~= nil then
+				if fFlagRefetchBothOfferKeysAfterPurchaseModule then
+					local list = { featureKeys.RobloxShop, featureKeys.DeveloperShop }
+					
+					if inExperienceOffersModule.Utils.hasOfferForAnyKey(offers, list) then
+						offersStore.fetchOffers(list)
+					end
+				elseif getFeatureKeyForSurfaceModule(purchaseAnalyticsMetadata.surface) == featureKeys.RobloxShop then
+					if getOffersForKey(offers, featureKeys.RobloxShop) ~= nil then
 						offersStore.fetchOffers({ featureKeys.RobloxShop })
 					end
-				elseif inExperienceOffersModule.Utils.getOffersForKey(offers, featureKeys.DeveloperShop) ~= nil then
+				elseif getOffersForKey(offers, featureKeys.DeveloperShop) ~= nil then
 					offersStore.fetchOffers({ featureKeys.DeveloperShop })
 				end
 			end

@@ -3,7 +3,10 @@
 return {
 	displayName = "Moments-MockDataModel",
 	mockDataModel = true,
-	testMatch = { "**/Analytics/**/*.test" },
+	testMatch = {
+		"**/Analytics/**/*.test",
+		"**/Upload/postLifecycleSubscription.test"
+	},
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.LogHandler,
 		jestConfigsModule.setupFiles.UIBloxInitializer,

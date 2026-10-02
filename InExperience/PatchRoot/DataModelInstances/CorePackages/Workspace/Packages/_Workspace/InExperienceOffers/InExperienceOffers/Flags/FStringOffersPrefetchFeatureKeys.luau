@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("OffersPrefetchFeatureKeys", "ROBLOX_SHOP,DEVELOPER_SHOP")

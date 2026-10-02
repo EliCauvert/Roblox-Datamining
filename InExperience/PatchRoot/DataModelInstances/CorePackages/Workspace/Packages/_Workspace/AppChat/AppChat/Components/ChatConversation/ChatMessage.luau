@@ -22,6 +22,10 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 	local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 	local view = foundationModule.View
 	local image = foundationModule.Image
+	local chatMessageContainerConstantsModule = require(script.Parent.ChatMessageContainerConstants)
+	local BUBBLE_PADDING = chatMessageContainerConstantsModule.BUBBLE_PADDING
+	local TEXT_BUBBLE_X_PADDING = chatMessageContainerConstantsModule.TEXT_BUBBLE_X_PADDING
+	local TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING = chatMessageContainerConstantsModule.TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING
 	local t = {
 		[enumMessageTypesModule.PlainText] = {
 			name = "PlainText",
@@ -91,7 +95,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 	}
 	
 	return function(p1)
-		-- upvalues: cryoModule (ref), t_2 (ref), fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), useTokens (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), messageModelModule (ref), t_1 (ref), t (ref), pruneConsecutiveNewLines (ref), loggerModule (ref), view (ref), chatMessageContainerModule (ref), image (ref)
+		-- upvalues: cryoModule (ref), t_2 (ref), fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), TEXT_BUBBLE_X_PADDING (ref), BUBBLE_PADDING (ref), TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING (ref), useTokens (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), messageModelModule (ref), t_1 (ref), t (ref), pruneConsecutiveNewLines (ref), loggerModule (ref), view (ref), chatMessageContainerModule (ref), image (ref)
 		local var1 = cryoModule.Dictionary.union(t_2, p1)
 		
 		local function _(p2)
@@ -100,31 +104,32 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 		end
 		
 		local function messageMaxWidth(a, b)
-			local var2 = 128
+			-- upvalues: TEXT_BUBBLE_X_PADDING (copy), BUBBLE_PADDING (copy), TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING (copy)
+			local var2 = (TEXT_BUBBLE_X_PADDING + BUBBLE_PADDING) * 2
 			
 			if a then
-				var2 += 112
+				var2 += TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING
 			end
 			return b - var2
 		end
 		
 		local var2 = useTokens()
 		local var3 = if fFlagAppChatEnableAutotranslationModule then reactModule.useCallback(function(p2, p3, p4, p5, p6)
-			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), var2 (ref), text (copy)
-			return if p6 then math.max((if foundationFontFaceMigration then getTextSize(p3, var2.Typography.BodySmall.FontSize, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, var2.Typography.BodySmall.FontSize, Vector2.new(p2, 10000))).X, (if foundationFontFaceMigration then getTextSize(p6, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p6, p5, p4, Vector2.new(p2, 10000))).X) + 20 else (if foundationFontFaceMigration then getTextSize(p3, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000))).X + 20
+			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), var2 (ref), text (copy), BUBBLE_PADDING (copy)
+			return if p6 then math.max((if foundationFontFaceMigration then getTextSize(p3, var2.Typography.BodySmall.FontSize, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, var2.Typography.BodySmall.FontSize, Vector2.new(p2, 10000))).X, (if foundationFontFaceMigration then getTextSize(p6, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p6, p5, p4, Vector2.new(p2, 10000))).X) + BUBBLE_PADDING * 2 else (if foundationFontFaceMigration then getTextSize(p3, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000))).X + BUBBLE_PADDING * 2
 		end) else reactModule.useCallback(function(p2, p3, p4, p5, _)
-			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), text (copy)
-			return (if foundationFontFaceMigration then getTextSize(p3, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000))).X + 20
+			-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), text (copy), BUBBLE_PADDING (copy)
+			return (if foundationFontFaceMigration then getTextSize(p3, p4, p5, Vector2.new(p2, 10000)) else text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000))).X + BUBBLE_PADDING * 2
 		end)
 		local var4 = if var1 and var1.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[var1.messageType]
 		local var5 = reactModule.useMemo(function()
-			-- upvalues: var1 (ref)
+			-- upvalues: var1 (ref), TEXT_BUBBLE_X_PADDING (copy), BUBBLE_PADDING (copy), TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING (copy)
 			local wideMode = var1.wideMode
 			local parentWidth = var1.parentWidth
-			local var6 = 128
+			local var6 = (TEXT_BUBBLE_X_PADDING + BUBBLE_PADDING) * 2
 			
 			if wideMode then
-				var6 += 112
+				var6 += TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING
 			end
 			return parentWidth - var6
 		end, { messageMaxWidth, var1.wideMode, var1.parentWidth })
@@ -144,7 +149,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 				isPending = var1.isSending or (var1.moderated or var1.failed),
 				visibility = var1.visibility,
 				renderMessage = function(p2, p3)
-					-- upvalues: reactModule (copy), image (copy), cryoModule (copy), var1 (ref), content (ref), messageModelModule (copy), t_1 (copy), t (copy), bodyLarge (ref), var5 (ref), fontSize_1 (ref), view (copy), var4 (ref), fFlagAppChatEnableAutotranslationModule (copy), var3 (write), var6 (ref), fontSize (ref)
+					-- upvalues: reactModule (copy), image (copy), cryoModule (copy), var1 (ref), content (ref), messageModelModule (copy), t_1 (copy), t (copy), bodyLarge (ref), BUBBLE_PADDING (copy), var5 (ref), fontSize_1 (ref), view (copy), var4 (ref), fFlagAppChatEnableAutotranslationModule (copy), var3 (write), var6 (ref), fontSize (ref)
 					local var8
 					local createElement = reactModule.createElement
 					local var9 = cryoModule.Dictionary.union({
@@ -165,12 +170,12 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 						local repliesTo = var1.repliesTo
 						var8 = var8((if repliesTo and repliesTo.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[repliesTo.messageType]).component, {
 							hasTail = false,
-							innerPadding = 10,
 							isPending = false,
 							isRepliedTo = true,
 							LayoutOrder = 1,
 							additionalProps = var1.additionalProps,
 							font = bodyLarge.Font,
+							innerPadding = BUBBLE_PADDING,
 							isIncoming = var1.isIncoming,
 							isUnfiltered = var1.isUnfiltered,
 							isLastMessageInMessageGroup = var1.isLastMessageInMessageGroup,
@@ -193,10 +198,10 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 					}, {
 						Icons = if p3 then p3.Icons else nil,
 						[var4.name] = reactModule.createElement(var4.component, {
-							innerPadding = 10,
 							additionalProps = var1.additionalProps,
 							font = bodyLarge.Font,
 							hasTail = var1.isNewSender == true,
+							innerPadding = BUBBLE_PADDING,
 							isIncoming = var1.isIncoming,
 							isPending = var1.isSending or (var1.moderated or var1.failed),
 							isUnfiltered = var1.isUnfiltered,

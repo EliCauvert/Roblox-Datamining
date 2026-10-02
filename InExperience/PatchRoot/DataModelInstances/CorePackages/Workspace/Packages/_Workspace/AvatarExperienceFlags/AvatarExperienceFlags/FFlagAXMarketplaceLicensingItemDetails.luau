@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXMarketplaceLicensingItemDetails2", false) and require(script.Parent.FFlagAXMarketplaceLicensing)
+﻿return game:DefineFastFlag("AXMarketplaceLicensingItemDetails3", false) and require(script.Parent.FFlagAXMarketplaceLicensing)

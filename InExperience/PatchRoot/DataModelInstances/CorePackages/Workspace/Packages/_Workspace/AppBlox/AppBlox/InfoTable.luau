@@ -6,10 +6,11 @@ local useResponsive = require(parent.Foundation).Hooks.useResponsive
 local responsiveProvider = require(parent.Foundation).ResponsiveProvider
 local cryoModule = require(parent.Cryo)
 local luaAppInfoTableResponsiveProviderOverride = game:DefineFastFlag("LuaAppInfoTableResponsiveProviderOverride", false)
+local fFlagInfoTableStableItemKeys = require(parent.SharedFlags).FFlagInfoTableStableItemKeys
 local breakpoint = foundationModule.Enums.Breakpoint
 
 local function buildColumnMajorChildren(p1, p2, p3)
-	-- upvalues: reactModule (ref), foundationModule (ref)
+	-- upvalues: reactModule (ref), foundationModule (ref), fFlagInfoTableStableItemKeys (ref)
 	local p0Count = #p1
 	local ceiled = math.ceil(p0Count / p2)
 	local t = {}
@@ -19,7 +20,7 @@ local function buildColumnMajorChildren(p1, p2, p3)
 		for i = 1, p2 do
 			var1 += 1
 			local var2 = (i - 1) * ceiled + i_1
-			t[`Cell_{var1}`] = reactModule.createElement(foundationModule.Grid.Cell, {
+			t[if fFlagInfoTableStableItemKeys then if var2 <= p0Count then `Cell_{var2}` else `Placeholder_{var1}` else `Cell_{var1}`] = reactModule.createElement(foundationModule.Grid.Cell, {
 				tag = "size-full-0 auto-y",
 				size = p3,
 				LayoutOrder = var1

@@ -22,6 +22,7 @@
 	parseCredentialsProtocolIsAvailableResponse = require(script.parseCredentialsProtocolIsAvailableResponse),
 	getTwoStepLoginErrorKey = require(script.getTwoStepLoginErrorKey),
 	isIosAuthServiceEnabled = require(script.isIosAuthServiceEnabled),
+	shouldSkipLegacyPasswordSaveEvent = require(script.shouldSkipLegacyPasswordSaveEvent),
 	coarseLoginErrorBucket = require(script.coarseLoginErrorBucket),
 	isNonTerminalLoginError = require(script.isNonTerminalLoginError)
 }

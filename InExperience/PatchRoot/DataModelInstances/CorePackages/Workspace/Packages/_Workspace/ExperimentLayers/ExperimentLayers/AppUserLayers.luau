@@ -152,6 +152,7 @@ return {
 	ConsoleVoiceLayer = "User.Communication.ConsoleVoice",
 	FriendsChatRestrictionUserIDLayer = "UserSafety.FriendsChatRestriction.UserID",
 	NotApprovedPageUserIDLayer = "UserSafety.NotApprovedPage.UserID",
+	VoiceUserIDLayer = "UserSafety.Voice.UserID",
 	EconomyDeveloperMonetizationEdpVirtualProductsRanking = "Economy.DeveloperMonetization.EdpVirtualProductsRanking",
 	RMLayer = sharedFlagsModule.FStringRMLayer,
 	PlayerAppBadgesExposure = fStringLuaAppBadgesSeeAllIxpLayer,

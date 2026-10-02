@@ -1,6 +1,7 @@
 ﻿local httpService = game:GetService("HttpService")
 local safeAppStorageService = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AvatarExperienceCommon).Lib.SafeAppStorageService
 local AXCatalogSaveOptionsUseMemStorage = game:DefineFastFlag("AXCatalogSaveOptionsUseMemStorage", false)
+local AXSetSaveAsAvatarDefault = game:DefineFastFlag("AXSetSaveAsAvatarDefault", false)
 
 local function getStorage()
 	-- upvalues: safeAppStorageService (ref), AXCatalogSaveOptionsUseMemStorage (ref), httpService (ref)
@@ -28,7 +29,7 @@ local function _(value)
 end
 
 return function()
-	-- upvalues: getStorage (ref), httpService (ref), safeAppStorageService (ref), AXCatalogSaveOptionsUseMemStorage (ref)
+	-- upvalues: getStorage (ref), AXSetSaveAsAvatarDefault (ref), httpService (ref), safeAppStorageService (ref), AXCatalogSaveOptionsUseMemStorage (ref)
 	return {
 		setWearAfterPurchase = function(p1)
 			-- upvalues: getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogSaveOptionsUseMemStorage (copy)
@@ -57,10 +58,10 @@ return function()
 			end)
 		end,
 		getAddToAvatars = function()
-			-- upvalues: getStorage (copy)
+			-- upvalues: getStorage (copy), AXSetSaveAsAvatarDefault (copy)
 			local var1 = getStorage()
 			
-			return if var1.addToAvatars == nil then false else var1.addToAvatars
+			return if var1.addToAvatars == nil then AXSetSaveAsAvatarDefault else var1.addToAvatars
 		end
 	}
 end

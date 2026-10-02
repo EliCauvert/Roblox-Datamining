@@ -81,18 +81,85 @@ local function parseProductKey(p3)
 	} else { Id = "", Type = "" }
 end
 
+local function parseEligibleOffersFromRest(p3)
+	if type(p3) ~= "table" then
+		return {}
+	end
+	local t = {}
+	
+	for i, v in ipairs(p3) do
+		if type(v) == "table" then
+			local var1 = if type(v.freeTrialOffer) == "table" then v.freeTrialOffer else nil
+			table.insert(t, {
+				Duration = tonumber(var1 and var1.duration) or 0,
+				OfferType = tostring(v.offerType or ""),
+				PeriodType = tostring(if var1 then var1.periodType else "")
+			})
+		end
+	end
+	return t
+end
+
+local function parseDiscountsFromRest(p4)
+	if type(p4) ~= "table" then
+		return nil
+	end
+	local t = {}
+	
+	for i, v in ipairs(p4) do
+		if type(v) == "table" then
+			table.insert(t, {
+				DiscountPercent = tonumber(v.discountPercent) or 0,
+				PeriodIndex = tonumber(v.periodIndex) or 0,
+				TierId = tostring(v.tierId or "")
+			})
+		end
+	end
+	return t
+end
+
+local function parseFeatureConfigFromRest(p5)
+	-- upvalues: parseDiscountsFromRest (ref)
+	local var2 = if type(p5) == "table" then p5 else {}
+	
+	return {
+		IsRobuxTransferEnabled = var2.isRobuxTransferEnabled == true,
+		IsTradingEnabled = var2.isTradingEnabled == true,
+		IsUgcPublishingEnabled = var2.isUgcPublishingEnabled == true,
+		VirtualTransactionDiscounts = parseDiscountsFromRest(var2.virtualTransactionDiscounts),
+		PrivateServerDiscounts = parseDiscountsFromRest(var2.privateServerDiscounts)
+	}
+end
+
+local function parseLocalizedPriceFromRest(p5)
+	local var2 = if type(p5) == "table" then p5 else {}
+	
+	return {
+		CurrencyCode = tostring(var2.currencyCode or ""),
+		Nanos = tonumber(var2.nanos) or 0,
+		Units = tonumber(var2.units) or 0
+	}
+end
+
+local function parseProductKeyFromRest(p5)
+	return if type(p5) == "table" then {
+		Id = tostring(p5.id or ""),
+		Type = tostring(p5.type or "")
+	} else { Id = "", Type = "" }
+end
+
 local t = {
-	new = function(p3)
-		return p3
+	new = function(p5)
+		return p5
 	end
 }
 
-function t.format(p3)
+function t.format(p5)
 	-- upvalues: parseEligibleOffers (ref), parseLocalizedPrice (ref), parseProductKey (ref), parseFeatureConfig (ref), t (ref)
-	assert(type(p3) == "table", "Expected products response to be a table")
+	assert(type(p5) == "table", "Expected products response to be a table")
 	local t_1 = {}
 	
-	for i, v in ipairs(p3) do
+	for i, v in ipairs(p5) do
 		if type(v) == "table" then
 			assert(type(v.PeriodType) == "string" and v.PeriodType ~= "", "Missing or invalid PeriodType")
 			local t_2 = {
@@ -119,7 +186,36 @@ function t.format(p3)
 	return t_1
 end
 
-function t.mock(p4)
+function t.formatFromRest(p6)
+	-- upvalues: parseEligibleOffersFromRest (ref), parseLocalizedPriceFromRest (ref), parseProductKeyFromRest (ref), parseFeatureConfigFromRest (ref), t (ref)
+	assert(type(p6) == "table", "Expected products response to be a table")
+	local products = p6.products
+	
+	if type(products) ~= "table" then
+		return {}
+	end
+	local t_1 = {}
+	
+	for i, v in ipairs(products) do
+		if type(v) == "table" and type(v.periodType) == "string" and v.periodType ~= "" then
+			table.insert(t_1, t.new({
+				EligibleOffers = parseEligibleOffersFromRest(v.eligibleOffers),
+				LocalizedPrice = parseLocalizedPriceFromRest(v.localizedPrice),
+				LocalizedPriceDisplayString = if type(v.localizedPriceDisplayString) == "string" then v.localizedPriceDisplayString else nil,
+				PeriodType = tostring(v.periodType),
+				ProductKey = parseProductKeyFromRest(v.productKey),
+				ProductTypeDetails = {
+					RobloxSubscriptionProductDetails = {
+						FeatureConfig = parseFeatureConfigFromRest(v.productTypeDetails and (v.productTypeDetails.robloxSubscriptionProductDetails and v.productTypeDetails.robloxSubscriptionProductDetails.featureConfig))
+					}
+				}
+			}))
+		end
+	end
+	return t_1
+end
+
+function t.mock(p7)
 	-- upvalues: t (ref)
 	local t_1 = {
 		LocalizedPriceDisplayString = "$12.99",
@@ -159,8 +255,8 @@ function t.mock(p4)
 		}
 	}
 	
-	if type(p4) == "table" then
-		for i, v in pairs(p4) do
+	if type(p7) == "table" then
+		for i, v in pairs(p7) do
 			t_1[i] = v
 		end
 	end

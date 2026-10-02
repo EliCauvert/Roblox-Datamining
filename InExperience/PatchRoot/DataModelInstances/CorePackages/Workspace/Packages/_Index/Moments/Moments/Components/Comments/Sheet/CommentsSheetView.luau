@@ -10,6 +10,7 @@ local view = foundationModule.View
 local useComposedRef = reactUtilsModule.useComposedRef
 local commentsComposerContainerModule = require(moments.Components.Comments.Composer.CommentsComposerContainer)
 local commentsPanelBodyContainerModule = require(moments.Components.Comments.Panel.CommentsPanelBody.CommentsPanelBodyContainer)
+local sheetShimModule = require(moments.Components.SheetShim)
 local commentsSheetSnapPointsModule = require(script.Parent.CommentsSheetSnapPoints)
 
 local function sizeContentForList(p1)
@@ -47,12 +48,14 @@ local function useTopSnapPointReporter(value)
 end
 
 return function(p1)
-	-- upvalues: useTopSnapPointReporter (ref), useComposedRef (ref), sizeContentForList (ref), sizeContentToFit (ref), reactModule (ref), sheet (ref), dialogSize (ref), commentsSheetSnapPointsModule (ref), text (ref), view (ref), commentsPanelBodyContainerModule (ref), commentsComposerContainerModule (ref)
-	return reactModule.createElement(sheet.Root, {
+	-- upvalues: useTopSnapPointReporter (ref), useComposedRef (ref), sizeContentForList (ref), sizeContentToFit (ref), reactModule (ref), sheetShimModule (ref), dialogSize (ref), commentsSheetSnapPointsModule (ref), sheet (ref), text (ref), view (ref), commentsPanelBodyContainerModule (ref), commentsComposerContainerModule (ref)
+	return reactModule.createElement(sheetShimModule.Root, {
+		hideBackdrop = true,
 		testId = "moments-comments-sheet",
 		isOpen = p1.isOpen,
 		onClose = p1.onClose,
 		onSnapPointChanged = p1.onSnapPointChanged,
+		onContentInsetChanged = p1.onContentInsetChanged,
 		size = dialogSize.Medium,
 		snapPoints = commentsSheetSnapPointsModule
 	}, {

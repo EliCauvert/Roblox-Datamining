@@ -2,6 +2,7 @@
 local components = streamNotifications.components
 local parent = streamNotifications.Parent
 local reactModule = require(parent.React)
+local foundationModule = require(parent.Foundation)
 local constantsModule = require(streamNotifications.constants)
 local reactOtterModule = require(parent.ReactOtter)
 local notificationsCommonModule = require(parent.NotificationsCommon)
@@ -10,6 +11,9 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local notificationHelper = notificationsCommonModule.NotificationHelper
 local UIBloxModule = require(parent.UIBlox)
 local useStyle = UIBloxModule.Core.Style.useStyle
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local truncationExpand = images["icons/actions/truncationExpand"]
@@ -23,27 +27,29 @@ local analyticsConstantsModule = require(streamNotifications.analytics.analytics
 local t = { stiffness = 207, damping = 24, mass = 1 }
 
 return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), reactOtterModule (ref), useLocalization (ref), constantsModule (ref), notificationHelper (ref), eventStream (ref), analyticsConstantsModule (ref), t (ref), streamNotificationAnimationWrapperModule (ref), uDim (ref), uDim_1 (ref), imageSetLabel (ref), uDim2 (ref), truncationCollapse (ref), var1 (ref), truncationExpand (ref)
+	-- upvalues: useStyle (ref), foundationFontFaceMigration (ref), useTokens (ref), normalizeFontFace (ref), reactModule (ref), reactOtterModule (ref), useLocalization (ref), constantsModule (ref), notificationHelper (ref), eventStream (ref), analyticsConstantsModule (ref), t (ref), streamNotificationAnimationWrapperModule (ref), uDim (ref), uDim_1 (ref), imageSetLabel (ref), uDim2 (ref), truncationCollapse (ref), var1 (ref), truncationExpand (ref)
 	local var2 = useStyle()
+	local var3 = if foundationFontFaceMigration then useTokens() else nil
 	local font = var2.Font
-	local font_1 = font.Header1.Font
-	local var3 = font.BaseSize * font.CaptionHeader.RelativeSize
-	local var4, var5 = reactModule.useState(true)
-	local var6, var7 = reactModule.useState(74)
-	local var8, var9 = reactModule.useState(true)
-	local var10, var11 = reactOtterModule.useAnimatedBinding({ shadowHeight = 0, shadowWidth = 1 })
-	local var12 = useLocalization({
+	local var4 = if foundationFontFaceMigration then nil else font.Header1.Font
+	local var5 = if foundationFontFaceMigration then normalizeFontFace(var3.Typography.TitleMedium.Font) else nil
+	local var6 = if foundationFontFaceMigration then var3.Typography.TitleMedium.FontSize else font.BaseSize * font.CaptionHeader.RelativeSize
+	local var7, var8 = reactModule.useState(true)
+	local var9, var10 = reactModule.useState(74)
+	local var11, var12 = reactModule.useState(true)
+	local var13, var14 = reactOtterModule.useAnimatedBinding({ shadowHeight = 0, shadowWidth = 1 })
+	local var15 = useLocalization({
 		moreText = constantsModule.Text.ShowMoreKey,
 		lessText = constantsModule.Text.ShowLessKey
 	})
-	local var13 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var4 (ref), var7 (ref)
-		if p2 == 1 and var4 then
-			var7(p3)
+	local var16 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var7 (ref), var10 (ref)
+		if p2 == 1 and var7 then
+			var10(p3)
 		end
 	end)
 	
-	local var14 = function(p2)
+	local var17 = function(p2)
 		local t = {}
 		
 		for i, v in p2 do
@@ -54,14 +60,14 @@ return function(p1)
 		return t
 	end
 	
-	local var15 = function()
-		-- upvalues: var5 (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), p1 (ref), var14 (ref)
-		var5(function(p3)
-			-- upvalues: notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), p1 (copy), var14 (copy)
+	local var18 = function()
+		-- upvalues: var8 (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), p1 (ref), var17 (ref)
+		var8(function(p3)
+			-- upvalues: notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), p1 (copy), var17 (copy)
 			notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.click, if p3 then analyticsConstantsModule.EventNames.bundleOpened else analyticsConstantsModule.EventNames.bundleClosed, {
 				bundleKey = p1.notifications[1].content.bundleKey or nil,
 				totalNotifications = #p1.notifications or nil,
-				notificationIds = var14(p1.notifications) or nil
+				notificationIds = var17(p1.notifications) or nil
 			})
 			
 			if p3 then
@@ -80,27 +86,27 @@ return function(p1)
 	end
 	
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), reactOtterModule (copy), var4 (ref), t (copy)
-		var11({
-			shadowHeight = reactOtterModule.spring(if var4 then 0 else 1, t),
-			shadowWidth = reactOtterModule.spring(if var4 then 1 else 0, t)
+		-- upvalues: var14 (ref), reactOtterModule (copy), var7 (ref), t (copy)
+		var14({
+			shadowHeight = reactOtterModule.spring(if var7 then 0 else 1, t),
+			shadowWidth = reactOtterModule.spring(if var7 then 1 else 0, t)
 		})
-	end, { var4 })
+	end, { var7 })
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), p1 (ref)
-		var9(#p1.notifications > 1)
+		-- upvalues: var12 (ref), p1 (ref)
+		var12(#p1.notifications > 1)
 	end, { p1.notifications })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: p1 (ref), var4 (ref), var8 (ref), reactModule (copy), streamNotificationAnimationWrapperModule (copy), var13 (ref), var10 (ref), var6 (ref), constantsModule (copy), var2 (ref), uDim (copy), font_1 (ref), var3 (ref), var15 (ref), uDim_1 (copy), var12 (ref), imageSetLabel (copy), uDim2 (copy), truncationCollapse (copy), var1 (copy), truncationExpand (copy)
+		-- upvalues: p1 (ref), var7 (ref), var11 (ref), reactModule (copy), streamNotificationAnimationWrapperModule (copy), var16 (ref), var13 (ref), var9 (ref), constantsModule (copy), var2 (ref), uDim (copy), var4 (ref), var5 (ref), var6 (ref), var18 (ref), uDim_1 (copy), var15 (ref), imageSetLabel (copy), uDim2 (copy), truncationCollapse (copy), var1 (copy), truncationExpand (copy)
 		local t = {}
 		
 		for i, v in ipairs(p1.notifications) do
-			local var16 = false
-			local var17 = if p1.impressionMetadataByNotificationId then p1.impressionMetadataByNotificationId[v.id] else nil
+			local var19 = false
+			local var20 = if p1.impressionMetadataByNotificationId then p1.impressionMetadataByNotificationId[v.id] else nil
 			
-			if var4 and var8 then
-				var16 = true
+			if var7 and var11 then
+				var19 = true
 			end
 			t[v.id] = reactModule.createElement(streamNotificationAnimationWrapperModule, {
 				layoutOrder = i,
@@ -108,26 +114,26 @@ return function(p1)
 				finishDismissNotification = p1.finishDismissNotification,
 				handleActions = p1.handleActions,
 				openMetaActions = p1.openMetaActions,
-				onHeightChange = var13,
-				collapsed = var16,
+				onHeightChange = var16,
+				collapsed = var19,
 				impressionsTag = p1.impressionsTag,
-				impressionIndex = if var17 then var17.impressionIndex else nil
+				impressionIndex = if var20 then var20.impressionIndex else nil
 			})
 		end
 		t.UIPadding = reactModule.createElement("UIPadding", {
-			PaddingTop = if var4 or not var8 then UDim.new(0, 0) else UDim.new(0, 40)
+			PaddingTop = if var7 or not var11 then UDim.new(0, 0) else UDim.new(0, 40)
 		})
 		t.UIListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center
 		})
-		t.Shadow1 = if var4 and var8 then reactModule.createElement("Frame", {
+		t.Shadow1 = if var7 and var11 then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = var10:map(function(p3)
-				-- upvalues: var6 (copy), constantsModule (copy)
-				return UDim2.new(1, 0, 0, p3.shadowHeight * var6 + constantsModule.DefaultPadding)
+			Size = var13:map(function(p3)
+				-- upvalues: var9 (copy), constantsModule (copy)
+				return UDim2.new(1, 0, 0, p3.shadowHeight * var9 + constantsModule.DefaultPadding)
 			end),
 			LayoutOrder = #p1.notifications + 1,
 			ZIndex = -(#p1.notifications + 1)
@@ -135,9 +141,9 @@ return function(p1)
 			reactModule.createElement("Frame", {
 				BackgroundTransparency = 0,
 				BorderSizePixel = 0,
-				Size = var10:map(function(p3)
-					-- upvalues: constantsModule (copy), var6 (copy)
-					return UDim2.new(1, -(constantsModule.DefaultPadding * 4 * p3.shadowWidth), 0, var6 - constantsModule.DefaultPadding)
+				Size = var13:map(function(p3)
+					-- upvalues: constantsModule (copy), var9 (copy)
+					return UDim2.new(1, -(constantsModule.DefaultPadding * 4 * p3.shadowWidth), 0, var9 - constantsModule.DefaultPadding)
 				end),
 				BackgroundColor3 = var2.Theme.BackgroundDefault.Color,
 				Position = UDim2.new(0.5, 0, 0, 0),
@@ -146,12 +152,12 @@ return function(p1)
 				UICorner = reactModule.createElement("UICorner", { CornerRadius = uDim })
 			})
 		}) else nil
-		t.Shadow2 = if var4 and var8 then reactModule.createElement("Frame", {
+		t.Shadow2 = if var7 and var11 then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = var10:map(function(p3)
-				-- upvalues: var6 (copy), constantsModule (copy)
-				return UDim2.new(1, 0, 0, p3.shadowHeight * var6 + constantsModule.DefaultPadding * 2)
+			Size = var13:map(function(p3)
+				-- upvalues: var9 (copy), constantsModule (copy)
+				return UDim2.new(1, 0, 0, p3.shadowHeight * var9 + constantsModule.DefaultPadding * 2)
 			end),
 			LayoutOrder = #p1.notifications + 2,
 			ZIndex = -(#p1.notifications + 2)
@@ -159,9 +165,9 @@ return function(p1)
 			reactModule.createElement("Frame", {
 				BackgroundTransparency = 0,
 				BorderSizePixel = 0,
-				Size = var10:map(function(p3)
-					-- upvalues: constantsModule (copy), var6 (copy)
-					return UDim2.new(1, -(constantsModule.DefaultPadding * 6 * p3.shadowWidth), 0, var6 - constantsModule.DefaultPadding)
+				Size = var13:map(function(p3)
+					-- upvalues: constantsModule (copy), var9 (copy)
+					return UDim2.new(1, -(constantsModule.DefaultPadding * 6 * p3.shadowWidth), 0, var9 - constantsModule.DefaultPadding)
 				end),
 				BackgroundColor3 = var2.Theme.BackgroundContrast.Color,
 				Position = UDim2.new(0.5, 0, 0, 0),
@@ -179,14 +185,15 @@ return function(p1)
 			LayoutOrder = p1.layoutOrder
 		}, {
 			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingBottom = if var4 and var8 then UDim.new(0, constantsModule.DefaultPadding) else UDim.new(0, 0)
+				PaddingBottom = if var7 and var11 then UDim.new(0, constantsModule.DefaultPadding) else UDim.new(0, 0)
 			}),
-			ShowLessButton = if var4 or not var8 then nil else reactModule.createElement("TextButton", {
+			ShowLessButton = if var7 or not var11 then nil else reactModule.createElement("TextButton", {
 				Size = UDim2.new(0, 160, 0, 40),
 				Text = "",
-				Font = font_1,
-				TextSize = var3,
-				[reactModule.Event.Activated] = var15,
+				Font = var4,
+				FontFace = var5,
+				TextSize = var6,
+				[reactModule.Event.Activated] = var18,
 				BackgroundTransparency = 1,
 				BackgroundColor3 = var2.Theme.BackgroundMuted.Color,
 				AutoButtonColor = false,
@@ -221,9 +228,10 @@ return function(p1)
 						ShowLessText = reactModule.createElement("TextLabel", {
 							LayoutOrder = 1,
 							BackgroundTransparency = 1,
-							Text = var12 and var12.lessText,
-							Font = font_1,
-							TextSize = var3,
+							Text = var15 and var15.lessText,
+							Font = var4,
+							FontFace = var5,
+							TextSize = var6,
 							TextColor3 = var2.Theme.TextMuted.Color,
 							Size = UDim2.new(0, 0, 1, 0),
 							AutomaticSize = Enum.AutomaticSize.X
@@ -246,15 +254,15 @@ return function(p1)
 				})
 			}),
 			InvisibleExpandButton = reactModule.createElement("TextButton", {
-				Size = UDim2.new(1, 0, 0, if var4 and var8 then var6 + constantsModule.DefaultPadding * 2 else 0),
+				Size = UDim2.new(1, 0, 0, if var7 and var11 then var9 + constantsModule.DefaultPadding * 2 else 0),
 				BackgroundTransparency = 1,
 				Text = "",
-				[reactModule.Event.Activated] = var15,
+				[reactModule.Event.Activated] = var18,
 				ZIndex = 5,
 				BorderSizePixel = 0,
 				AutoButtonColor = false
 			}),
-			NumberMoreButton = if var6 == 0 or not var4 or #p1.notifications <= 1 then nil else reactModule.createElement("Frame", {
+			NumberMoreButton = if var9 == 0 or not var7 or #p1.notifications <= 1 then nil else reactModule.createElement("Frame", {
 				ZIndex = 10,
 				BackgroundTransparency = 0,
 				Size = UDim2.new(0, 125, 0, var1),
@@ -279,9 +287,10 @@ return function(p1)
 					NumberMoreText = reactModule.createElement("TextLabel", {
 						LayoutOrder = 1,
 						BackgroundTransparency = 1,
-						Text = var12 and (var12.moreText and string.gsub(var12.moreText, "{notificationCount}", tostring(#p1.notifications - 1))),
-						Font = font_1,
-						TextSize = var3,
+						Text = var15 and (var15.moreText and string.gsub(var15.moreText, "{notificationCount}", tostring(#p1.notifications - 1))),
+						Font = var4,
+						FontFace = var5,
+						TextSize = var6,
 						TextColor3 = var2.Theme.TextMuted.Color,
 						Size = UDim2.new(0, 0, 1, 0),
 						AutomaticSize = Enum.AutomaticSize.X
@@ -311,7 +320,9 @@ return function(p1)
 			}, t)
 		})
 	end, {
-		p1.notifications, var4, var6, var8, p1.impressionsTag,
-		p1.impressionMetadataByNotificationId
+		p1.notifications, var7, var9, var11, p1.impressionsTag,
+		p1.impressionMetadataByNotificationId,
+		if foundationFontFaceMigration then var5 else nil,
+		if foundationFontFaceMigration then var6 else nil
 	})
 end

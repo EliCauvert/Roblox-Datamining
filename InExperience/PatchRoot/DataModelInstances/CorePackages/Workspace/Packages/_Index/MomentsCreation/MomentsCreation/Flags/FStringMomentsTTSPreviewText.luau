@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("MomentsTTSPreviewText", "Hi there, this is how I sound")

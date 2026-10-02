@@ -10,9 +10,12 @@ local notificationType = require(parent.RobloxAppEnums).NotificationType
 local authCommonModule = require(parent.AuthCommon)
 local authMemStorageKeys = authCommonModule.Enums.AuthMemStorageKeys
 local reportEphemeralCounter = authCommonModule.Analytics.reportEphemeralCounter
+local shouldSkipLegacyPasswordSaveEvent = authCommonModule.Utils.shouldSkipLegacyPasswordSaveEvent
 local statusCodes = require(parent.Http).StatusCodes
 local logger = require(parent.Loggers).Logger
-local fFlagDisableMemStorageServicePasswordEvent = require(parent.SharedFlags).FFlagDisableMemStorageServicePasswordEvent
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagDisableMemStorageServicePasswordEvent = sharedFlagsModule.FFlagDisableMemStorageServicePasswordEvent
+local fFlagLuaAppSkipDuplicateIosPasswordSavePrompt = sharedFlagsModule.FFlagLuaAppSkipDuplicateIosPasswordSavePrompt
 local credentialsProtocolModule = require(parent.CredentialsProtocol)
 local constants = credentialsProtocolModule.Constants
 local default = credentialsProtocolModule.CredentialsProtocol.default
@@ -23,13 +26,14 @@ local function _(value, p1)
 end
 
 return function(p1, _, p2, _, _, p3, p4, _, _)
-	-- upvalues: signUpRequestsModule (ref), notificationType (ref), reportEphemeralCounter (ref), appSignupCounterNamesModule (ref), fFlagDisableMemStorageServicePasswordEvent (ref), memStorageService (ref), authMemStorageKeys (ref), httpService (ref), default (ref), constants (ref), logger (ref), promiseModule (ref), signUpV2ErrorCodesModule (ref), statusCodes (ref)
+	-- upvalues: signUpRequestsModule (ref), notificationType (ref), reportEphemeralCounter (ref), appSignupCounterNamesModule (ref), fFlagLuaAppSkipDuplicateIosPasswordSavePrompt (ref), shouldSkipLegacyPasswordSaveEvent (ref), fFlagDisableMemStorageServicePasswordEvent (ref), memStorageService (ref), authMemStorageKeys (ref), httpService (ref), default (ref), constants (ref), logger (ref), promiseModule (ref), signUpV2ErrorCodesModule (ref), statusCodes (ref)
 	return signUpRequestsModule.signUpV2(p1, p3, {}):andThen(function(p5)
-		-- upvalues: p2 (ref), notificationType (copy), reportEphemeralCounter (copy), appSignupCounterNamesModule (copy), p3 (ref), fFlagDisableMemStorageServicePasswordEvent (copy), memStorageService (copy), authMemStorageKeys (copy), httpService (copy), p4 (ref), default (copy), constants (copy), logger (copy), promiseModule (copy)
+		-- upvalues: p2 (ref), notificationType (copy), reportEphemeralCounter (copy), appSignupCounterNamesModule (copy), p3 (ref), fFlagLuaAppSkipDuplicateIosPasswordSavePrompt (copy), shouldSkipLegacyPasswordSaveEvent (copy), p4 (ref), fFlagDisableMemStorageServicePasswordEvent (copy), memStorageService (copy), authMemStorageKeys (copy), httpService (copy), default (copy), constants (copy), logger (copy), promiseModule (copy)
 		p2:BroadcastNotification("", notificationType.DID_SIGN_UP)
 		reportEphemeralCounter(appSignupCounterNamesModule.Success, 1)
+		local var1 = p3.username and (p3.password and string.len(p3.password) > 0)
 		
-		if not fFlagDisableMemStorageServicePasswordEvent and (p3.username and (p3.password and string.len(p3.password) > 0)) then
+		if not fFlagDisableMemStorageServicePasswordEvent and var1 and not (fFlagLuaAppSkipDuplicateIosPasswordSavePrompt and shouldSkipLegacyPasswordSaveEvent(p4 == true and var1 == true)) then
 			memStorageService:Fire(authMemStorageKeys.AuthenticatedCredentials, httpService:JSONEncode({
 				authType = "signup",
 				cvalue = p3.username,
@@ -39,14 +43,14 @@ return function(p1, _, p2, _, _, p3, p4, _, _)
 		if p4 and p3.password and #p3.password > 0 then
 			default:registerCredentials(default.CredentialsTypes.password, httpService:JSONEncode({ username = p3.username, password = p3.password }), constants.Defaults.PASSWORD_REGISTRATION_CREDENTIALSPROTOCOL_TIMEOUT):andThen(function(p6)
 				-- upvalues: httpService (copy), logger (copy)
-				local var1 = if p6 then httpService:JSONDecode(p6) else {}
+				local var2 = if p6 then httpService:JSONDecode(p6) else {}
 				
-				if var1 and var1.errorCode == nil then
+				if var2 and var2.errorCode == nil then
 					logger:info("Successfully registered password.")
 					
 					return
 				end
-				logger:warning("Error registering password: " .. tostring(var1.errorMsg))
+				logger:warning("Error registering password: " .. tostring(var2.errorMsg))
 			end, function(p6)
 				-- upvalues: logger (copy)
 				logger:warning("Error registering password: " .. tostring(p6))

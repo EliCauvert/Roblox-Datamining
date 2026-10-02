@@ -115,6 +115,52 @@ local _ = function(p1)
 	return if p1 == "succeeded" or p1 == "failed" or p1 == "filtered" then p1 else "unknown"
 end
 
+local _ = function(p1)
+	return if p1 == "watch_tab" or p1 == "profile" then p1 else "unknown"
+end
+
+local t_7 = {
+	attempted = "attempted",
+	succeeded = "succeeded",
+	failed = "failed"
+}
+
+local _ = function(p1)
+	-- upvalues: t_7 (ref)
+	return t_7[p1] or "unknown"
+end
+
+local t_8 = {
+	initial = "initial",
+	pagination = "pagination",
+	refresh = "refresh"
+}
+
+local _ = function(p1)
+	-- upvalues: t_8 (ref)
+	return t_8[p1] or "unknown"
+end
+
+local t_9 = {
+	attempted = "attempted",
+	success = "success",
+	rejected = "rejected",
+	failed = "failed",
+	unknown = "unknown",
+	cancelled = "cancelled"
+}
+
+local _ = function(p1)
+	-- upvalues: t_9 (ref)
+	return t_9[p1] or "unknown"
+end
+
+local _ = function(p1)
+	return if p1 == nil or string.find(p1, "^unknown_") ~= nil then "unknown" else p1
+end
+
+local t_10 = { rejected = true, failed = true, unknown = true }
+
 local _ = function(p1, p2)
 	local t = { status = p1.status, feedType = p1.feedType }
 	
@@ -454,6 +500,59 @@ return {
 					local status = p1.status
 					t.status = if status == "succeeded" or status == "failed" or status == "filtered" then status else "unknown"
 					
+					return t
+				end
+			}
+		}
+	}),
+	[realtimeEventNamesModule.MomentsCommentsListLoad] = telemetry.new({
+		description = "Counts Moments comment list requests in real time by bounded status, load type, surface and (failed only) failure reason. Mirrors the product list-load events.",
+		throttlingThousandths = 10000,
+		name = realtimeEventNamesModule.MomentsCommentsListLoad,
+		lastUpdated = { 2026, 9, 29 },
+		backendsList = {
+			{
+				incrementValue = 1,
+				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1)
+					-- upvalues: t_7 (ref), t_8 (ref)
+					local status = t_7[p1.status] or "unknown"
+					local t = {
+						status = status,
+						loadType = t_8[p1.loadType] or "unknown"
+					}
+					local surface = p1.surface
+					t.surface = if surface == "watch_tab" or surface == "profile" then surface else "unknown"
+					
+					if status == "failed" then
+						surface = p1.failureReason
+						t.failureReason = if surface == nil or string.find(surface, "^unknown_") ~= nil then "unknown" else surface
+					end
+					return t
+				end
+			}
+		}
+	}),
+	[realtimeEventNamesModule.MomentsCommentPost] = telemetry.new({
+		description = "Counts Moments comment post requests and outcomes in real time by bounded status, surface and (rejected/failed/unknown only) failure reason. Mirrors the product post events.",
+		throttlingThousandths = 10000,
+		name = realtimeEventNamesModule.MomentsCommentPost,
+		lastUpdated = { 2026, 9, 29 },
+		backendsList = {
+			{
+				incrementValue = 1,
+				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1)
+					-- upvalues: t_9 (ref), t_10 (ref)
+					local status = t_9[p1.status] or "unknown"
+					local t = { status = status }
+					local surface = p1.surface
+					t.surface = if surface == "watch_tab" or surface == "profile" then surface else "unknown"
+					
+					if t_10[status] then
+						surface = p1.failureReason
+						t.failureReason = if surface == nil or string.find(surface, "^unknown_") ~= nil then "unknown" else surface
+					end
 					return t
 				end
 			}

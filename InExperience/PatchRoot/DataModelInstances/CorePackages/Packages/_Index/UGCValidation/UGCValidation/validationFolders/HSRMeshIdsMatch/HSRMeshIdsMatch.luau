@@ -10,7 +10,8 @@ local t = {
 	categories = {
 		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING
+		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
 	},
 	requiredData = {
 		validationEnumsModule.SharedDataMember.rootInstance,

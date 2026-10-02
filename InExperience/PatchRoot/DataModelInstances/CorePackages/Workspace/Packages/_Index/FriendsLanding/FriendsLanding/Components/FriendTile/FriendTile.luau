@@ -16,21 +16,14 @@ local socialCommonModule = require(parent.SocialCommon)
 local buttonTypes = require(parent.UserList).Enums.ButtonTypes
 local buttonVariant = require(parent.Foundation).Enums.ButtonVariant
 local friendTileWithTrustedIndicatorModule = require(script.Parent.FriendTileWithTrustedIndicator)
-local fFlagFriendsPageAlwaysOpenPPV = require(parent.SharedFlags).FFlagFriendsPageAlwaysOpenPPV
 local fFlagFriendsPageUserListEnabled = require(parent.SharedFlags).FFlagFriendsPageUserListEnabled
 local fFlagFriendsPageViewBtnEnabled = require(parent.SharedFlags).FFlagFriendsPageViewBtnEnabled
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
-local fFlagFriendsPageUnifiedOpenProfileLogic = require(parent.SharedFlags).FFlagFriendsPageUnifiedOpenProfileLogic
 local friendTile = roact.PureComponent:extend("FriendTile")
-
-local var1 = function()
-	return function() end
-end
-
 friendTile.validateProps = t.strictInterface({
 	user = t.table,
 	index = t.number,
-	openPlayerProfileHandle = t.optional(t.callback),
+	openPlayerProfileHandle = t.callback,
 	pageLoadingTimeReport = t.optional(t.callback),
 	createRow = t.optional(t.callback),
 	selected = t.optional(t.boolean),
@@ -44,41 +37,22 @@ friendTile.validateProps = t.strictInterface({
 		onActivated = t.optional(t.callback),
 		isSecondary = t.optional(t.boolean),
 		isDisabled = t.optional(t.boolean)
-	}))),
-	openPlayerProfile = t.optional(t.callback),
-	isPlayerContextualMenuEnabled = t.optional(t.boolean)
+	})))
 })
 friendTile.defaultProps = {
 	isLuobu = false,
 	index = 1,
 	buttons = nil,
-	isPlayerContextualMenuEnabled = false,
 	trustedConnection = false,
 	user = { username = "" },
-	openPlayerProfile = var1
+	openPlayerProfileHandle = function() end
 }
 
 function friendTile.init(p1)
-	-- upvalues: memoize (ref), createRelevancyInfoModule (ref), roact (ref), fFlagFriendsPageAlwaysOpenPPV (ref), fFlagFriendsPageUnifiedOpenProfileLogic (ref), fFlagFriendsPageUserListEnabled (ref), socialCommonModule (ref)
+	-- upvalues: memoize (ref), createRelevancyInfoModule (ref), roact (ref), fFlagFriendsPageUserListEnabled (ref), socialCommonModule (ref)
 	p1.state = { isFirstRender = true }
 	p1.makeRelevancyInfo = memoize(createRelevancyInfoModule)
 	p1.playerTileRef = roact.createRef()
-	p1.openPlayerProfile = if fFlagFriendsPageAlwaysOpenPPV or fFlagFriendsPageUnifiedOpenProfileLogic then nil elseif p1.props.isPlayerContextualMenuEnabled then function(_, _)
-		-- upvalues: p1 (ref)
-		return p1.props.openPlayerProfile(p1.props.user)
-	end else function(p2, p3)
-		-- upvalues: p1 (ref)
-		local user = p1.props.user
-		
-		return if p2 and p3 then p1.props.openPlayerProfile(user.id, p1.props.index, user, p2, p3) else p1.props.openPlayerProfile(user.id, p1.props.index, user)
-	end
-	p1.openPlayerProfileForRelevancyInfo = if fFlagFriendsPageAlwaysOpenPPV or fFlagFriendsPageUnifiedOpenProfileLogic then nil else function(p2, p3)
-		-- upvalues: p1 (ref)
-		return function()
-			-- upvalues: p1 (copy), p2 (ref), p3 (ref)
-			return p1.openPlayerProfile(p2, p3)
-		end
-	end
 	
 	function p0.checkAndSetSelected()
 		-- upvalues: p1 (ref)
@@ -95,10 +69,11 @@ function friendTile.init(p1)
 		-- upvalues: socialCommonModule (copy)
 		return string.gsub(tostring(p2 or ""), "PresenceType%.", "") or socialCommonModule.Enums.PresenceTypes.Offline
 	end else nil
-	p1.openProfilePeekViewHandle = if fFlagFriendsPageUserListEnabled or fFlagFriendsPageUnifiedOpenProfileLogic then function()
-		-- upvalues: p1 (ref), fFlagFriendsPageUnifiedOpenProfileLogic (copy)
-		return p1.props.openPlayerProfileHandle(p1.props.user.id, p1.props.index, if fFlagFriendsPageUnifiedOpenProfileLogic then p1.props.user else nil)
-	end else nil
+	
+	function p0.openProfilePeekViewHandle()
+		-- upvalues: p1 (ref)
+		return p1.props.openPlayerProfileHandle(p1.props.user.id, p1.props.index, p1.props.user)
+	end
 end
 
 function friendTile.didMount(p1)
@@ -109,43 +84,33 @@ function friendTile.didMount(p1)
 end
 
 function friendTile.render(p1)
-	-- upvalues: getCorrectUserPresenceModule (ref), userPresenceTextModule (ref), userPresenceIconModule (ref), withStyle (ref), withLocalization (ref), fFlagFriendsPageUserListEnabled (ref), fFlagFriendsPageAlwaysOpenPPV (ref), fFlagFriendsPageUnifiedOpenProfileLogic (ref), fFlagFriendsPageViewBtnEnabled (ref), buttonTypes (ref), buttonVariant (ref), userProfilesModule (ref), react (ref), friendTileWithTrustedIndicatorModule (ref), fFlagEnableBlackbirdCheck (ref)
+	-- upvalues: getCorrectUserPresenceModule (ref), userPresenceTextModule (ref), userPresenceIconModule (ref), withStyle (ref), withLocalization (ref), fFlagFriendsPageUserListEnabled (ref), fFlagFriendsPageViewBtnEnabled (ref), buttonTypes (ref), buttonVariant (ref), userProfilesModule (ref), react (ref), friendTileWithTrustedIndicatorModule (ref), fFlagEnableBlackbirdCheck (ref)
 	local user = p1.props.user
-	local var2 = getCorrectUserPresenceModule(user)
-	local var3 = userPresenceTextModule[var2]
-	local var4 = userPresenceIconModule[var2]
-	local absoluteSize = nil
-	local absolutePosition = nil
-	local value = p1.playerTileRef:getValue()
+	local var1 = getCorrectUserPresenceModule(user)
+	local var2 = userPresenceTextModule[var1]
+	local var3 = userPresenceIconModule[var1]
 	
-	if value then
-		absoluteSize = value.AbsoluteSize
-		absolutePosition = value.AbsolutePosition
-	else
+	if not p1.playerTileRef:getValue() then
 		p1:setState({ isFirstRender = false })
 	end
 	return withStyle(function(p2)
-		-- upvalues: withLocalization (copy), var3 (ref), fFlagFriendsPageUserListEnabled (copy), p1 (ref), user (ref), var4 (ref), fFlagFriendsPageAlwaysOpenPPV (copy), fFlagFriendsPageUnifiedOpenProfileLogic (copy), absoluteSize (write), absolutePosition (write), var2 (ref), fFlagFriendsPageViewBtnEnabled (copy), buttonTypes (copy), buttonVariant (copy), userProfilesModule (copy), react (copy), friendTileWithTrustedIndicatorModule (copy), fFlagEnableBlackbirdCheck (copy)
+		-- upvalues: withLocalization (copy), var2 (ref), fFlagFriendsPageUserListEnabled (copy), p1 (ref), user (ref), var3 (ref), var1 (ref), fFlagFriendsPageViewBtnEnabled (copy), buttonTypes (copy), buttonVariant (copy), userProfilesModule (copy), react (copy), friendTileWithTrustedIndicatorModule (copy), fFlagEnableBlackbirdCheck (copy)
 		return withLocalization({
 			accountDeletedText = "Feature.Friends.Action.AccountDeleted",
 			trustedText = "Feature.Friends.TrustedConnection.Label.Trusted",
-			presenceText = var3
+			presenceText = var2
 		})(function(p3)
-			-- upvalues: fFlagFriendsPageUserListEnabled (copy), p1 (copy), user (copy), var4 (copy), fFlagFriendsPageAlwaysOpenPPV (copy), fFlagFriendsPageUnifiedOpenProfileLogic (copy), absoluteSize (copy), absolutePosition (copy), p2 (ref), var2 (copy), fFlagFriendsPageViewBtnEnabled (copy), buttonTypes (copy), buttonVariant (copy), userProfilesModule (copy), react (copy), friendTileWithTrustedIndicatorModule (copy), fFlagEnableBlackbirdCheck (copy)
+			-- upvalues: fFlagFriendsPageUserListEnabled (copy), p1 (copy), user (copy), var3 (copy), p2 (ref), var1 (copy), fFlagFriendsPageViewBtnEnabled (copy), buttonTypes (copy), buttonVariant (copy), userProfilesModule (copy), react (copy), friendTileWithTrustedIndicatorModule (copy), fFlagEnableBlackbirdCheck (copy)
 			local presenceText = p3.presenceText or nil
 			local accountDeletedText = p3.accountDeletedText
 			
 			if fFlagFriendsPageUserListEnabled then
-				local makeRelevancyInfo = p1.makeRelevancyInfo
-				makeRelevancyInfo = makeRelevancyInfo(user, presenceText, var4, if fFlagFriendsPageAlwaysOpenPPV or fFlagFriendsPageUnifiedOpenProfileLogic then nil else p1.openPlayerProfileForRelevancyInfo(absoluteSize, absolutePosition), p2.Theme, p1.props.index, p1.props.isLuobu, p2.Font, accountDeletedText, true)
+				local var4 = p1.makeRelevancyInfo(user, presenceText, var3, nil, p2.Theme, p1.props.index, p1.props.isLuobu, p2.Font, accountDeletedText, true)
 				
 				return p1.props.createRow({
 					onRowActivated = p1.openProfilePeekViewHandle,
-					contextualInfo = makeRelevancyInfo and {
-						text = makeRelevancyInfo.text,
-						icon = makeRelevancyInfo.icon
-					},
-					presence = p1.getPresenceType(var2),
+					contextualInfo = var4 and { text = var4.text, icon = var4.icon },
+					presence = p1.getPresenceType(var1),
 					primaryCta = if fFlagFriendsPageViewBtnEnabled then {
 						minWidth = 64,
 						maxWidth = 90,
@@ -163,24 +128,14 @@ function friendTile.render(p1)
 				var5 = userProfilesModule.Formatters.formatUsername(p1.props.userProfile.names.username)
 				user.isDeleted = p1.props.userProfile.isDeleted
 			end
-			local var6
-			local var7 = combinedName or user.displayName
-			local var8 = var5 or "@" .. user.username
-			
-			if combinedName then
-				var6 = p1.makeRelevancyInfo
-				var6 = var6(user, presenceText, var4, if fFlagFriendsPageAlwaysOpenPPV or fFlagFriendsPageUnifiedOpenProfileLogic then nil else p1.openPlayerProfileForRelevancyInfo(absoluteSize, absolutePosition), p2.Theme, p1.props.index, p1.props.isLuobu, p2.Font, accountDeletedText, true)
-			else
-				var6 = nil
-			end
 			return react.createElement(friendTileWithTrustedIndicatorModule, {
 				user = user,
-				userPresence = var2,
-				title = var7,
-				subtitle = var8,
-				relevancyInfo = var6,
+				userPresence = var1,
+				title = combinedName or user.displayName,
+				subtitle = var5 or "@" .. user.username,
+				relevancyInfo = if not combinedName then nil else p1.makeRelevancyInfo(user, presenceText, var3, nil, p2.Theme, p1.props.index, p1.props.isLuobu, p2.Font, accountDeletedText, true),
 				index = p1.props.index,
-				openPlayerProfile = if fFlagFriendsPageUnifiedOpenProfileLogic then p1.openProfilePeekViewHandle elseif fFlagFriendsPageAlwaysOpenPPV then p1.props.openPlayerProfile(user.id, p1.props.index) else p1.openPlayerProfile(absoluteSize, absolutePosition, var7, var8, var6),
+				openPlayerProfile = p1.openProfilePeekViewHandle,
 				playerTileRef = p1.playerTileRef,
 				buttons = p1.props.buttons,
 				isTrustedConnection = p1.props.trustedConnection,

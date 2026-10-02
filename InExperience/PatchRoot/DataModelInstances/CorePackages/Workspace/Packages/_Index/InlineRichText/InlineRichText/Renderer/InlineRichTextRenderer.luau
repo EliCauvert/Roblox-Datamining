@@ -61,6 +61,7 @@ local t_1 = {
 }
 local t_2 = {
 	errorToastText = nil,
+	onActivatedSubscriber = nil,
 	evaluateLinkBehavior = function(_, p1)
 		-- upvalues: t_1 (ref), linkBehaviorModule (ref)
 		return t_1[p1] or linkBehaviorModule.ErrorToast
@@ -95,11 +96,28 @@ return function(p1)
 	local var3 = cryoModule.Dictionary.union(t_2, p1.linkerOptions or {})
 	local var4 = useLinkerOnActivatedModule({ errorToastTextOverride = var3.errorToastText })
 	local var5 = reactModule.useCallback(function(p2)
+		-- upvalues: var4 (ref), var3 (ref), name (copy)
+		var4(p2)
+		
+		if var3.onActivatedSubscriber then
+			local ok, status = pcall(function()
+				-- upvalues: var3 (copy), p2 (ref)
+				var3.onActivatedSubscriber(p2)
+				
+				return true
+			end)
+			
+			if not ok then
+				name:warning(`Error notifying link activation subscriber: {tostring(status)}`)
+			end
+		end
+	end, { var3.onActivatedSubscriber, var4 })
+	local var6 = reactModule.useCallback(function(p2)
 		-- upvalues: var3 (ref), getLinkTypeModule (copy)
 		return var3.evaluateLinkBehavior(p2, getLinkTypeModule(p2))
 	end, { var3.evaluateLinkBehavior })
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), t (copy), p1 (ref), processChildrenModule (copy), default (ref), t_1 (ref), var2 (ref), var4 (ref), var5 (ref)
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: cryoModule (copy), t (copy), p1 (ref), processChildrenModule (copy), default (ref), t_1 (ref), var2 (ref), var5 (ref), var6 (ref)
 		return {
 			inlineCustomRenderers = cryoModule.Dictionary.join(t, p1.renderers or {}),
 			processChildren = processChildrenModule,
@@ -109,20 +127,20 @@ return function(p1)
 				fontStyle = cryoModule.Dictionary.union(t_1, p1.fontStyle or {})
 			},
 			tokens = var2,
-			linker = { onActivated = var4, evaluateLinkBehavior = var5 }
+			linker = { onActivated = var5, evaluateLinkBehavior = var6 }
 		}
 	end, {
-		p1.renderers, p1.nodeProps, p1.textStyle, p1.fontStyle, var4, var5
+		p1.renderers, p1.nodeProps, p1.textStyle, p1.fontStyle, var5, var6
 	})
 	
 	return reactModule.createElement(foundationModule.View, p1.wrapperProps, {
 		RichTextRoot = reactModule.createElement(inlineLayout, {
 			Elements = reactModule.useMemo(function()
-				-- upvalues: processChildrenModule (copy), var1 (ref), var6 (ref)
-				return processChildrenModule(var1, var6)
-			end, { var1 and var1.children, var6 }),
+				-- upvalues: processChildrenModule (copy), var1 (ref), var7 (ref)
+				return processChildrenModule(var1, var7)
+			end, { var1 and var1.children, var7 }),
 			HorizontalAlignment = p1.HorizontalAlignment,
-			VerticalPadding = UDim.new(0, var6.styles.fontStyle.FontSize * (var6.styles.fontStyle.LineHeight - 1) / 2)
+			VerticalPadding = UDim.new(0, var7.styles.fontStyle.FontSize * (var7.styles.fontStyle.LineHeight - 1) / 2)
 		})
 	})
 end

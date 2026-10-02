@@ -12,6 +12,9 @@ local numberLocalization = localizationModule.NumberLocalization
 local useLocalization = localizationModule.Hooks.useLocalization
 local agentCardModule = require(script.Parent.AgentCard)
 local agentCardActionsModule = require(script.Parent.AgentCardActions)
+local chatCardPriorityModule = require(buildExperience.Components.Chat.ChatCardEmphasis.ChatCardPriority)
+local useChatCardEmphasisModule = require(buildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
+local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 local button = foundationModule.Button
 local image = foundationModule.Image
 local sheet = foundationModule.Sheet
@@ -72,7 +75,7 @@ local function summaryText(p1, p2, p3, p4)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), localizationRoactContext (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), sheet (ref), text (ref), view (ref), image (ref), assetId (write), summaryText (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), agentCardModule (ref), agentCardActionsModule (ref)
+	-- upvalues: reactModule (ref), localizationRoactContext (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), sheet (ref), text (ref), view (ref), image (ref), assetId (write), summaryText (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), agentCardModule (ref), agentCardActionsModule (ref)
 	local var2 = reactModule.useContext(localizationRoactContext)
 	local var3 = useLocalization({
 		title = localizationStringsModule.AGENT_DEV_PRODUCT_TITLE,
@@ -86,18 +89,19 @@ return function(p1)
 	local testId = p1.testId or "agent-dev-product-card"
 	local var4 = p1.isActionDisabled == true
 	local var5 = fFlagBuildExperienceMonetizationNativeUIModule and p1.action == "create"
-	local var6 = false
-	local var7 = nil
+	local var6 = if fFlagBuildExperienceChatCardEmphasisModule then useChatCardEmphasisModule(if var4 then nil else chatCardPriorityModule.AgentProposal) else nil
+	local var7 = false
 	local var8 = nil
+	local var9 = nil
 	
 	if fFlagBuildExperienceMonetizationNativeUIModule then
-		local var9, var10 = reactModule.useState(false)
-		var6 = var9
+		local var10, var11 = reactModule.useState(false)
 		var7 = var10
-		var8 = reactModule.useCallback(function()
-			-- upvalues: var7 (write)
-			var7(true)
-		end, { var7 })
+		var8 = var11
+		var9 = reactModule.useCallback(function()
+			-- upvalues: var8 (write)
+			var8(true)
+		end, { var8 })
 	end
 	return reactModule.createElement(agentCardModule, {
 		title = if var5 then p1.name or var3.defaultName else var3.title,
@@ -107,13 +111,13 @@ return function(p1)
 		testId = testId
 	}, {
 		Preview = if var5 then reactModule.createElement(sheet.Root, {
-			isOpen = var6,
+			isOpen = var7,
 			onClose = function()
-				-- upvalues: var6 (write), var4 (ref), p1 (ref), var7 (write)
-				if not var6 and not var4 then
+				-- upvalues: var7 (write), var4 (ref), p1 (ref), var8 (write)
+				if not var7 and not var4 then
 					p1.onApprove()
 				end
-				var7(false)
+				var8(false)
 			end,
 			snapPoints = { 0.5, 1 },
 			testId = `{testId}-preview`
@@ -125,11 +129,17 @@ return function(p1)
 				})
 			}),
 			Content = reactModule.createElement(sheet.Content, nil, {
-				Details = reactModule.createElement(view, { tag = "col gap-large size-full-0 auto-y" }, {
-					Image = reactModule.createElement(image, {
+				Details = reactModule.createElement(view, { tag = "col align-x-center gap-large size-full-0 auto-y" }, {
+					Image = if p1.imageAssetId ~= nil then reactModule.createElement(image, {
 						LayoutOrder = 1,
 						tag = "size-3000-3000 content-emphasis",
 						Image = assetId,
+						ScaleType = Enum.ScaleType.Fit,
+						testId = `{testId}-preview-image`
+					}) else reactModule.createElement(image, {
+						LayoutOrder = 1,
+						tag = "size-3000-3000 radius-medium",
+						Image = `rbxassetid://{p1.imageAssetId}`,
 						ScaleType = Enum.ScaleType.Fit,
 						testId = `{testId}-preview-image`
 					}),
@@ -152,27 +162,36 @@ return function(p1)
 					size = inputSize.Large,
 					variant = buttonVariant.Emphasis,
 					fillBehavior = fillBehavior.Fill,
-					isDisabled = not var6,
+					isDisabled = not var7,
 					onActivated = function()
-						-- upvalues: var4 (ref), var6 (write), var7 (write)
-						if var4 or not var6 then
+						-- upvalues: var4 (ref), var7 (write), var8 (write)
+						if var4 or not var7 then
 							return
 						end
-						var7(false)
+						var8(false)
 					end,
 					testId = `{testId}-create-button`
 				})
 			}) else nil
 		}) else nil,
-		Actions = reactModule.createElement(agentCardActionsModule, nil, {
+		ImagePreview = if var5 or p1.imageAssetId == nil then nil else reactModule.createElement(image, {
+			LayoutOrder = 3,
+			tag = "size-3000-3000 radius-medium",
+			Image = `rbxassetid://{p1.imageAssetId}`,
+			ScaleType = Enum.ScaleType.Fit,
+			testId = `{testId}-image-preview`
+		}),
+		Actions = reactModule.createElement(agentCardActionsModule, {
+			layoutOrder = if var5 or p1.imageAssetId == nil then 3 else 4
+		}, {
 			Approve = reactModule.createElement(button, {
 				LayoutOrder = 1,
 				text = if var5 then var3.preview else var3.approve,
 				size = inputSize.Small,
-				variant = buttonVariant.Emphasis,
+				variant = if var6 == false then buttonVariant.SoftEmphasis else buttonVariant.Emphasis,
 				fillBehavior = fillBehavior.Fill,
 				isDisabled = if var5 then false else var4,
-				onActivated = if var5 then var8 else reactModule.useCallback(function()
+				onActivated = if var5 then var9 else reactModule.useCallback(function()
 					-- upvalues: var4 (ref), p1 (ref)
 					if var4 then
 						return

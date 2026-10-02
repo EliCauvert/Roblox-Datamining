@@ -1282,8 +1282,7 @@ Feature.AddFriends.Action.RequestIgnored,تم تجاهل الطلب
 Feature.AddFriends.Label.AddFriendsTooltip,ابدأ بالبحث عن أصدقائك لاستكشاف Roblox برفقتهم.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,العثور على أشخاص على Roblox عن طريق البحث عن اسم المستخدم أو اسم العرض.
 Feature.AddFriends.Label.ConnectWithContacts,دعوة جهات اتصالك أو الاتصال بأصدقاء على Roblox.
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,البحث عن أشخاص
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,البحث عن أشخاص
 Feature.AddFriends.Label.SearchForFriendsPrompt,
 Feature.AddFriends.Label.SyncWithContacts,قم بمزامنة جهات الاتصال للعثور على الأصدقاء ودعوتهم.
 Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox أكثر متعة مع الأصدقاء!
@@ -1655,6 +1654,7 @@ Feature.Avatar.Label.SetAvatarCount,{itemCount} من الأفاتارات
 Feature.Avatar.Label.SetLimitReachedBody,يمكنك الحصول على ما يصل إلى {setLimit} من المجموعات فقط. احذف واحدة لإفساح المجال
 Feature.Avatar.Label.SetNameDuplicateBody,لديك مجموعة بهذا الاسم بالفعل، اختر اسمًا مختلفًا
 Feature.Avatar.Label.SetNameNotAllowedBody,يُرجى اختيار اسم آخر
+Feature.Avatar.Label.ShareAvatarToMoments,شارِك أفاتارك في اللحظات
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,نشر مجموعة الأفاتار على المتجر
 Feature.Avatar.Label.Shirt,قميص
 Feature.Avatar.Label.ShirtClassic,قميص كلاسيكي
@@ -1924,6 +1924,7 @@ Feature.Build.Action.DontShowAgain,عدم الإظهار مرة أخرى
 Feature.Build.Action.EarnRobux,اربح عملات Robux
 Feature.Build.Action.Edit,تحرير
 Feature.Build.Action.HideAutosaved,إخفاء ما تم حفظه تلقائيًا
+Feature.Build.Action.KeepBuilding,مواصلة ميزة Build
 Feature.Build.Action.ManageLimit,إدارة الحد
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
@@ -1949,6 +1950,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,مشاركة الرابط
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,الإحصائيات
+Feature.Build.Action.Stop,إيقاف
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,تحديث التصنيف
 Feature.Build.Action.UpdateWithChanges,التحديث بالتغييرات
@@ -2058,7 +2060,12 @@ Feature.Build.Description.RevertToVersion,تأكيد التراجع عن الت�
 Feature.Build.Description.ShareLatest,شارك التغييرات التي أُجريت على أحدث إصدار لديك.
 Feature.Build.Description.ShopButton,إضافة نقطة إدخال للتسوق
 Feature.Build.Description.ShortAdCampaign,طريقة سريعة لمعرفة رأي اللاعبين في لعبتك.
+Feature.Build.Description.StopBuild,لا يزال هذا الطلب قيد المعالجة. إذا قمت بالإيقاف الآن، فلن يكتمل وستحتاج إلى إرساله مرة أخرى.
 Feature.Build.Description.UpdateDeveloperProduct,تحديث منتج المطوّر {PRODUCT_ID}.
+Feature.Build.Error.AdForbidden,لا يمكن لحسابك أو لعبتك تشغيل إعلان في الوقت الحالي. اتصل بالدعم إذا كنت تعتقد أن هذا خطأ.
+Feature.Build.Error.AdInsufficientFunds,ليس لديك ما يكفي من عملات Robux لإنشاء هذا الإعلان. أضِف المزيد وحاول مرة أخرى.
+Feature.Build.Error.AdInternalError,حدث خطأ ما. حاول مرة أخرى لاحقًا.
+Feature.Build.Error.AdMissingThumbnail,تحتاج لعبتك إلى صورة مصغرة قبل أن تتمكن من تشغيل إعلان. أضِف صورة مصغرة وحاول مرة أخرى.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,يجب أن يتكون الوصف من 1000 حرفٍ أو أقل.
 Feature.Build.Error.DeveloperProductNameRequired,أدخل اسم المنتج.
 Feature.Build.Error.DeveloperProductNameTooLong,يجب أن يتكون الاسم من 50 حرفًا أو أقل.
@@ -2244,9 +2251,6 @@ Feature.Build.Message.AccountRequirements,لا يفي حسابك بمتطلبا�
 Feature.Build.Message.AccountTooNew,حسابك جديد جدًا بحيث لا يمكن النشر. حاول مرة أخرى بعد يومين من إنشائه.
 Feature.Build.Message.AdCampaignCreateFailed,تعذَّر إنشاء حملتك. يُرجى المحاولة مرة أخرى.
 Feature.Build.Message.AdPerformanceLoadFailed,تعذَّر تحميل أداء الإعلان
-Feature.Build.Message.AdsPromotionBannerSubtitle,زوِّد أعداد جمهورك مجانًا
-Feature.Build.Message.AdsPromotionBannerTitle,لديك {promotionCount} من العروض الخاصة المجانية المتبقية
-Feature.Build.Message.AdsPromotionBannerTitleSingular,لديك عرض خاص مجاني واحد متبقٍ
 Feature.Build.Message.AdsStatsEmpty,زوِّد أعداد جمهورك من خلال حملة إعلانية واجعل لعبتك متاحة للاكتشاف
 Feature.Build.Message.AdsStatsEmptyFree,زوِّد أعداد جمهورك من خلال حملة إعلانية مجانية واجعل لعبتك متاحة للاكتشاف
 Feature.Build.Message.AllFriendsAdded,لقد دعوت جميع أصدقائك كمختبري لعب مبكرين.
@@ -2338,6 +2342,7 @@ Feature.Build.Title.AdCampaignDuration,حملة إعلانية لمدة {duratio
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} من الأيام
 Feature.Build.Title.AdComplete,اكتمل الإعلان
 Feature.Build.Title.AdCreated,تم إنشاء الإعلان
+Feature.Build.Title.AdCreatedPeriod,تم إنشاء الإعلان.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,إضافة صور
 Feature.Build.Title.AdsStatsEmpty,بدء حملة
@@ -2378,6 +2383,7 @@ Feature.Build.Title.PromoteGameFreeSingular,لقد حصلت على إعلان م
 Feature.Build.Title.PromoteGamePaid,المزيد من اللاعبين في انتظارك
 Feature.Build.Title.PushNotifications,الإشعارات الفورية
 Feature.Build.Title.RevertLastChange,هل تريد التراجع عن التغيير الأخير؟
+Feature.Build.Title.StopBuild,هل تريد إيقاف عمل ميزة Build؟
 Feature.Build.Title.Tasks,المهام
 Feature.Build.Title.TurnActivity,نشاط الدور
 Feature.Build.Title.VersionHistory,سجل الإصدارات
@@ -3767,6 +3773,7 @@ Feature.PlayerSearchResults.Label.FromSearch,من البحث
 Feature.PlayerSearchResults.Label.Previously,سابقًا
 Feature.PlayerSearchResults.Label.ThisIsYou,هذا أنت
 Feature.PlayerSearchResults.Label.YouAreFollowing,أنت تتابع
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,عمليات شراء الخوادم الخاصة غير مدعومة في Studio.
 Feature.Profile.Action.AboutThisProfile,حول هذا الملف الشخصي
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4013,9 +4020,11 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,هذا الاشتراك غي
 Feature.RobloxSubscription.Description.AgeCheckTrial,تحقق من عمرك من خلال إجراء عملية تقدير العمر واحصل على أسبوع مجاني من اشتراك Roblox Plus كتعبير عن شكرنا لك. لا يلزم وجود طريقة دفع للاستمتاع بهذه الفترة التجريبية المجانية.
 Feature.RobloxSubscription.Description.Benefit.Customize,التخصيص باستخدام إطارات الملف الشخصي وسمات التطبيق
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,خصم بنسبة 10% في أول 60 يومًا، ثم خصم بنسبة 20% على العناصر والأفاتارات
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,خصم بنسبة 10% في أول {trialUnlockDays} من الأيام، ثم خصم بنسبة 20% على العناصر والأفاتارات
 Feature.RobloxSubscription.Description.ExclusiveBenefits,متعة أكثر مقابل عدد أقل من عملات Robux. اشترِك في Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,انضم مبكرًا مع اشتراك Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"بالضغط على \u{201C}{ctaText}\u{201D}، فإنك توافق على <a href=""{termsUrl}"">شروط الاشتراك في منصّة Roblox</a>. سيتم تحصيل الرسوم منك تلقائيًا كل شهر حتى تقوم بالإلغاء."
+Feature.RobloxSubscription.Heading.ReferralEntry,شارك Plus للحصول على {amount} من عملات Robux
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,خوادم خاصة مجانية
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,إرسال عملات Robux مجانًا
@@ -4026,6 +4035,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"بالضغط على "
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"بالضغط على ""جرب مجانًا""، فإنك توافق على {linkStart}شروط الاشتراك في Roblox.{linkEnd} ستنتهي الفترة التجريبية المجانية بعد شهر واحد وسيتم تحصيل الرسوم منك تلقائيًا كل شهر ويمكنك الإلغاء في أي وقت."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"بالضغط على ""جرِّب مجانًا""، فإنك توافق على {linkStart}شروط الاشتراك في منصّة Roblox.{linkEnd} ستنتهي الفترة التجريبية المجانية بعد {trialDuration} {trialPeriodLabel} وسيتم تحصيل الرسوم منك تلقائيًا كل {billingPeriodLabel} ويمكنك الإلغاء في أي وقت."
 Feature.RobloxSubscription.Label.FreeTrialText,احصل على فترة تجريبية مجانية
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}شهر واحد مجانًا،{boldEnd} ثم {price}/{periodType}
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration} {trialPeriodLabel} مجانًا،{boldEnd} ثم {price}/{periodType}
 Feature.RobloxSubscription.Label.month,
@@ -4274,6 +4284,8 @@ Feature.SongDetails.Action.ReportAudio,الإبلاغ عن مقطع صوتي
 Feature.SongDetails.Label.InappropriateAudio,مقطع صوتي غير لائق
 Feature.SongDetails.Label.InappropriateThumbnail,صورة مصغّرة غير لائقة
 Feature.SongDetails.Label.SongPreview,معاينة الأغنية
+Feature.SplitPane.Label.CollapseAvatar,طيّ الأفاتار
+Feature.SplitPane.Label.ExpandAvatar,توسيع الأفاتار
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,إضافة آخرين
 Feature.Squads.Action.ConnectToVoice,الاتصال بالمحادثة الصوتية
@@ -4421,6 +4433,8 @@ Feature.Toast.VoteError.FloodCheckThresholdMet,أنت تصوت بسرعة كبي
 Feature.Toast.VoteError.PlayGame,يتعين عليك زيارة هذه التجربة قبل تصنيفها.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,لا يمكنك التحقق من عمرك الآن لأنك انتهكت معايير مجتمعنا بشكلٍ متكرر. يمكنك إعادة المحاولة بعد انتهاء فترة التقييد.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,تم تعليق عمليات تقدير العمر
+Feature.UniversalFeatureRestrictions.AbuseVector.LabelName.Voice,
+Feature.UniversalFeatureRestrictions.AbuseVector.Lowercase.LabelName.Voice,
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,لقد تم حظرك من لعب هذه اللعبة بسبب الانتهاك المتكرر أو الجسيم للقواعد.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,لا يمكنك لعب هذه اللعبة لأن سلوكك انتهك القواعد.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,تم حظرك من هذه اللعبة من قِبل منصة Roblox
@@ -4430,6 +4444,13 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,تم تعليق وصولك إلى هذه اللعبة من قِبل منصة Roblox لمدة {number} من الساعات
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,تم تعليق وصولك إلى هذه اللعبة من قِبل منصة Roblox لمدة دقيقة واحدة
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,تم تعليق وصولك إلى هذه اللعبة من قِبل منصة Roblox لمدة {number} من الدقائق
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Banned,لا يمكنك استخدام هذه الميزة لأن سلوكك انتهك قواعد مجتمعنا.
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Nudge,قد يتم تعليق استخدامك لهذه الميزة إذا واصلت انتهاك قواعد مجتمعنا.
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Suspended,لا يمكنك استخدام هذه الميزة لأن سلوكك انتهك قواعد مجتمعنا. وإذا خالفت القواعد مرة أخرى، فقد يتم حظرك.
+Feature.UniversalFeatureRestrictions.Generic.DialogTitle.Banned,تم حظرك من استخدام {abuseVector}
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Nudge,قد تفقد الوصول إلى {abuseVector}
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minute,تم تعليق {abuseVector} لمدة دقيقة واحدة
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minutes,تم تعليق {abuseVector} لمدة {number} من الدقائق
 Feature.UniversalShareSheet.Action.CopiedLink,تم النسخ
 Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,مشاركة رسالة
 Feature.UniversalShareSheet.Response.NotSharedMessage,تعذّر إرسال الرسالة
@@ -4892,6 +4913,7 @@ InGame.GameplayPaused.Body,اللعبة متوقفة مؤقتًا. الرجاء 
 InGame.GameplayPaused.Title,اللعبة متوقفة مؤقتًا
 InGame.HelpMenu.Controls.ToggleGameMenu,تقليب قائمة اللعبة
 InGame.HelpMenu.DownArrow,سهم للأسفل
+InGame.HelpMenu.GenericAction,إجراء
 InGame.HelpMenu.Label.ClientCoreScriptVersion,إصدار تطبيق CoreScript:
 InGame.HelpMenu.Label.ClientVersion,إصدار التطبيق:
 InGame.HelpMenu.Label.PlaceVersion,إصدار المكان:

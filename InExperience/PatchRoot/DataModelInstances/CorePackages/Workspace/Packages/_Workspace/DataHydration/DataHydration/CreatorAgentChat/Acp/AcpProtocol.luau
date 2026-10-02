@@ -38,7 +38,10 @@ return {
 		Conflict = -32003,
 		UpstreamUnavailable = -32004,
 		Gone = -32005,
-		OutOfCredits = -32006
+		OutOfCredits = -32006,
+		PayloadTooLarge = -32007,
+		InsufficientFunds = -32008,
+		MissingThumbnail = -32009
 	},
 	AskTool = { Name = "ask_tool" },
 	extractSessionNewProject = function(p1)

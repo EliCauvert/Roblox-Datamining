@@ -14,6 +14,7 @@ local requestExperiencePurchaseModule = require(purchasePrompt.Actions.RequestEx
 local requestLookPurchaseModule = require(purchasePrompt.Actions.RequestLookPurchase)
 local requestRobuxUpsellPurchaseModule = require(purchasePrompt.Actions.RequestRobuxUpsellPurchase)
 local requestDeveloperSubscriptionPurchaseModule = require(purchasePrompt.Actions.RequestDeveloperSubscriptionPurchase)
+local requestVIPServerPurchaseModule = require(purchasePrompt.Actions.RequestVIPServerPurchase)
 local completeRequestModule = require(purchasePrompt.Actions.CompleteRequest)
 local refreshExpectedPriceModule = require(purchasePrompt.Actions.RefreshExpectedPrice)
 local requestTypeModule = require(purchasePrompt.Enums.RequestType)
@@ -139,6 +140,10 @@ return rodux.createReducer(t, {
 			subscriptionId = p1.subscriptionId,
 			expectedPrice = p1.expectedPrice
 		}
+	end,
+	[requestVIPServerPurchaseModule.name] = function(_, _)
+		-- upvalues: requestTypeModule (ref)
+		return { requestType = requestTypeModule.VIPServer }
 	end,
 	[refreshExpectedPriceModule.name] = function(p1, p2)
 		local cloned = table.clone(p1)

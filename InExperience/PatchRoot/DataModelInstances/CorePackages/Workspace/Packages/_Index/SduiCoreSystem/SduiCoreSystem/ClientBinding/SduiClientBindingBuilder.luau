@@ -10,13 +10,11 @@ local sduiComponentTypeModule = require(sduiCoreSystem.SduiComponentType)
 local propResultCategory = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 local protoVariableMapperModule = require(sduiCoreSystem.ClientBinding.ProtoVariableMapper)
 local sduiParseHelpersModule = require(sduiCoreSystem.SduiParseHelpers)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiOneofPropSupport = sharedFlagsModule.FFlagSduiOneofPropSupport
-local fFlagSduiExperimentalComponent = sharedFlagsModule.FFlagSduiExperimentalComponent
+local fFlagSduiExperimentalComponent = require(parent.SharedFlags).FFlagSduiExperimentalComponent
 
 local function buildProp(p1, p2, p3, p4, p5)
-	-- upvalues: fFlagSduiOneofPropSupport (ref), buildProp (ref)
-	if fFlagSduiOneofPropSupport and p1.oneof_prop and p1.oneof_prop.value then
+	-- upvalues: buildProp (ref)
+	if p1.oneof_prop and p1.oneof_prop.value then
 		return buildProp(p1.oneof_prop.value, p2, p3, p4, p5)
 	elseif typeof(p1) == "table" and p1.descriptor == nil then
 		return p4.getPropBuilder("ContainerProp")(nil, p1, p2, p3, p4, p5)
@@ -34,7 +32,7 @@ local function buildProp(p1, p2, p3, p4, p5)
 	local propBuilder = p4.getPropBuilder(name)
 	local value = p1.kind and p1.kind.value
 	
-	if fFlagSduiOneofPropSupport and value == nil then
+	if value == nil then
 		error(`No propDefinitionValue provided for {type}`)
 	end
 	local var1, var2, var3 = propBuilder(type, value, p2, p3, p4, p5)

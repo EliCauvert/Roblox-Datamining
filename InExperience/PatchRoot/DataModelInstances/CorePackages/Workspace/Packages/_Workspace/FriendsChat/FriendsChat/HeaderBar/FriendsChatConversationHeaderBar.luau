@@ -92,7 +92,8 @@ return function(p1)
 					icon = iconName.ChevronLargeLeft,
 					variant = buttonVariant.Utility,
 					size = buttonSize.XSmall,
-					onActivated = var6
+					onActivated = var6,
+					ref = p1.backButtonRef
 				}),
 				FacePileContainer = reactModule.createElement(view, { tag = "fill size-0-800", LayoutOrder = 2 }, {
 					FacePile = reactModule.createElement(friendsChatFacePileModule, {

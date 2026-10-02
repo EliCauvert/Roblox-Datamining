@@ -1,8 +1,19 @@
-﻿local reactModule = require(script:FindFirstAncestor("Moments").Parent.React)
+﻿local parent = script:FindFirstAncestor("Moments").Parent
+local localizationModule = require(parent.Localization)
+local reactModule = require(parent.React)
 local commentTimestampModule = require(script.Parent.commentTimestamp)
+local useLocalization = localizationModule.Hooks.useLocalization
+local t = {
+	minutes = "Feature.Moments.Label.CommentTimestampMinutes",
+	hours = "Feature.Moments.Label.CommentTimestampHours",
+	days = "Feature.Moments.Label.CommentTimestampDays",
+	weeks = "Feature.Moments.Label.CommentTimestampWeeks",
+	months = "Feature.Moments.Label.CommentTimestampMonths",
+	years = "Feature.Moments.Label.CommentTimestampYears"
+}
 
 return function(p1)
-	-- upvalues: reactModule (ref), commentTimestampModule (ref)
+	-- upvalues: reactModule (ref), commentTimestampModule (ref), useLocalization (ref), t (ref)
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: commentTimestampModule (copy), p1 (ref)
 		return commentTimestampModule.parseTimestamp(p1)
@@ -54,6 +65,9 @@ return function(p1)
 			end
 		end
 	end, { var1 })
+	local relativeAge = commentTimestampModule.getRelativeAge(var1, var2)
 	
-	return commentTimestampModule.formatTimestamp(var1, var2)
+	return if relativeAge == nil then nil else useLocalization({
+		timestamp = if relativeAge == nil then nil elseif relativeAge.unit == "now" then "Feature.Moments.Label.CommentTimestampNow" else { t[relativeAge.unit], count = relativeAge.count }
+	}).timestamp
 end

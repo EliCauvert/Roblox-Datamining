@@ -1,6 +1,7 @@
 ﻿local coreGuiService = game:GetService("CoreGui")
 local playersService = game:GetService("Players")
 local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
+local finishDictationInputModule = require(script.Parent.finishDictationInput)
 local engineAudioSTTIsDictationEnabled = game:DefineFastFlag("EngineAudioSTTIsDictationEnabled", false)
 
 local function _(p1)
@@ -57,7 +58,7 @@ local _ = function(p1)
 end
 
 return function()
-	-- upvalues: reactModule (ref), playersService (ref), coreGuiService (ref), engineAudioSTTIsDictationEnabled (ref)
+	-- upvalues: reactModule (ref), playersService (ref), coreGuiService (ref), engineAudioSTTIsDictationEnabled (ref), finishDictationInputModule (ref)
 	local var1, var2 = reactModule.useState(nil)
 	local var3 = reactModule.useRef(nil)
 	local var4 = reactModule.useRef(nil)
@@ -252,12 +253,16 @@ return function()
 	end, { var9 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var11 (ref), var10 (ref), var1 (ref), var3 (ref)
+		-- upvalues: var11 (ref), finishDictationInputModule (copy), var9 (ref), var10 (ref), var1 (ref), var3 (ref)
 		return {
 			start = var11,
+			finishInput = function()
+				-- upvalues: finishDictationInputModule (copy), var9 (copy)
+				return finishDictationInputModule(var9.audioSTT.current)
+			end,
 			stop = var10,
 			audioDeviceInput = var1,
 			audioDeviceInputRef = var3
 		}
-	end, { var11, var10, var1 })
+	end, { var11, var10, var1, var9 })
 end

@@ -27,10 +27,11 @@ return function(p1)
 		local hasGenerated = p1.hasGenerated or p1.hasCleared
 		local var9 = p1.lastGeneratedText ~= p1.lastSavedText
 		local var10 = p1.hasGenerated and (p1.startTime or 0) ~= (p1.lastSavedStartTime or 0)
-		local var11 = hasGenerated
+		local var11 = p1.hasGenerated and (p1.voiceId or 0) ~= (p1.lastSavedVoiceId or 0)
+		local var12 = hasGenerated
 		
-		if var11 and not var9 then
-			var11 = var10 and (not var2 and (not isLoading and not isError))
+		if var12 and not var9 and not var10 then
+			var12 = var11 and (not var2 and (not isLoading and not isError))
 		end
 		return {
 			isGenerating = isLoading,
@@ -39,7 +40,7 @@ return function(p1)
 			isOverLimit = var5,
 			canGenerate = var1,
 			isModerated = var4,
-			showSave = var11
+			showSave = var12
 		}
 	end
 end

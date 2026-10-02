@@ -11,9 +11,10 @@ local sduiTileFooterModule = require(serverDrivenUi.Content.SduiTileFooter)
 local sduiInGameFriendsDataModule = require(serverDrivenUi.DataStore.SduiInGameFriendsData)
 local fFlagLuaAppFixInlineSignalsReactPattern = require(parent.SharedFlags).FFlagLuaAppFixInlineSignalsReactPattern
 local fFlagLuaAppSduiGameTileMetadataFontStyle = require(parent.SharedFlags).FFlagLuaAppSduiGameTileMetadataFontStyle
+local fFlagSduiGameTileUseFooterComponentAsDefault = require(parent.SharedFlags).FFlagSduiGameTileUseFooterComponentAsDefault
 
 return reactModule.memo(function(p1)
-	-- upvalues: sduiInGameFriendsDataModule (ref), fFlagLuaAppFixInlineSignalsReactPattern (ref), reactModule (ref), signalsReactModule (ref), sduiTileFooterModule (ref), fFlagLuaAppSduiGameTileMetadataFontStyle (ref), sduiGameTileActiveFriendsFooterModule (ref), images (ref), abbreviateCount (ref)
+	-- upvalues: sduiInGameFriendsDataModule (ref), fFlagLuaAppFixInlineSignalsReactPattern (ref), reactModule (ref), signalsReactModule (ref), sduiTileFooterModule (ref), fFlagLuaAppSduiGameTileMetadataFontStyle (ref), sduiGameTileActiveFriendsFooterModule (ref), fFlagSduiGameTileUseFooterComponentAsDefault (ref), images (ref), abbreviateCount (ref)
 	local _ = nil
 	local getInGameFriendsByGame = sduiInGameFriendsDataModule.getInGameFriendsByGame
 	local var1 = if fFlagLuaAppFixInlineSignalsReactPattern then signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
@@ -54,7 +55,7 @@ return reactModule.memo(function(p1)
 			sduiContext = p1.sduiContext,
 			analyticsContext = p1.analyticsContext
 		})
-	elseif not p1.ratingText or p1.ratingText == "" then
+	elseif fFlagSduiGameTileUseFooterComponentAsDefault and p1.useFooterComponentAsDefault or (not p1.ratingText or p1.ratingText == "") then
 		return p1.footerComponent
 	end
 	local sduiContext = p1.sduiContext

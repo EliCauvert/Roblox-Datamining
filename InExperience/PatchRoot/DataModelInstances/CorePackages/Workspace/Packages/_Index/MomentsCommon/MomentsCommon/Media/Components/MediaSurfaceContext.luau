@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("MomentsCommon").Parent.React).createContext(table.freeze({}))

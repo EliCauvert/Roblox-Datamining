@@ -233,6 +233,7 @@ return function(_)
 	local t_1 = {
 		MenuIcon = if not isSideSheetEnabledModule then reactModule.createElement(selectionCursorProvider, {}, {
 			Icon = reactModule.createElement(menuIconModule, {
+				buttonSize = if fFlagShowGameAgeRating_1 then var30 else nil,
 				showBadgeOver12 = var11 and not var23,
 				menuIconRef = var24,
 				unibarMenuRef = var18

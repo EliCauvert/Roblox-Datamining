@@ -9,6 +9,7 @@ local promiseModule = require(parent.Promise)
 local view = foundationModule.View
 local fIntShopOwnershipFetchMaxAttemptsModule = require(inExperienceShop.Flags.FIntShopOwnershipFetchMaxAttempts)
 local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
+local fFlagEnableCategoryLoggingInShopModule = require(inExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
 local fFlagShopUseMockUserOwnsGamePassModule = require(inExperienceShop.Flags.FFlagShopUseMockUserOwnsGamePass)
 local fFlagSkipPaymentSessionForPlainRobuxModule = require(inExperienceShop.Flags.FFlagSkipPaymentSessionForPlainRobux)
 local fFlagHideBonusInShopWhenNotClaimableModule = require(inExperienceShop.Flags.FFlagHideBonusInShopWhenNotClaimable)
@@ -33,7 +34,7 @@ local function _(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), promoteBonusRobuxPackageToTopPicksModule (ref), fFlagEnableBonusJwtInShop (ref), getRobuxPackageBonusPresentationModule (ref), fFlagHideBonusInShopWhenNotClaimableModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), parent (ref), sessionService (ref), shopDebugLoggerModule (ref), fFlagShopUseMockUserOwnsGamePassModule (ref), mockUserOwnsGamePassModule (ref), userOwnsGamePassHttpModule (ref), fIntShopOwnershipFetchMaxAttemptsModule (ref), fFlagRefetchRobuxWidgetAfterPurchaseModule (ref), fFlagSkipPaymentSessionForPlainRobuxModule (ref), fFlagShopListenNativePurchaseFinishedModule (ref), fFlagShopRobuxPurchaseCompletionModalModule (ref), purchasePromptModule (ref), fFlagEnableShopRobuxBuyTelemetryModule (ref), inExperienceShop (ref), redeemBonusTokenModule (ref), promiseModule (ref), getBlockRobuxTileClickInShopModule (ref), view (ref), robuxPackageTileModule (ref)
+	-- upvalues: reactModule (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), promoteBonusRobuxPackageToTopPicksModule (ref), fFlagEnableBonusJwtInShop (ref), getRobuxPackageBonusPresentationModule (ref), fFlagHideBonusInShopWhenNotClaimableModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), parent (ref), fFlagEnableCategoryLoggingInShopModule (ref), sessionService (ref), shopDebugLoggerModule (ref), fFlagShopUseMockUserOwnsGamePassModule (ref), mockUserOwnsGamePassModule (ref), userOwnsGamePassHttpModule (ref), fIntShopOwnershipFetchMaxAttemptsModule (ref), fFlagRefetchRobuxWidgetAfterPurchaseModule (ref), fFlagSkipPaymentSessionForPlainRobuxModule (ref), fFlagShopListenNativePurchaseFinishedModule (ref), fFlagShopRobuxPurchaseCompletionModalModule (ref), purchasePromptModule (ref), fFlagEnableShopRobuxBuyTelemetryModule (ref), inExperienceShop (ref), redeemBonusTokenModule (ref), promiseModule (ref), getBlockRobuxTileClickInShopModule (ref), view (ref), robuxPackageTileModule (ref)
 	local pkg = p1.pkg
 	local var1 = reactModule.useRef(nil)
 	local var2 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
@@ -89,10 +90,10 @@ return reactModule.memo(function(p1)
 		end
 		local var13 = hasBonusItem and (not fFlagHideBonusInShopWhenNotClaimableModule or var10)
 		reactModule.useEffect(function()
-			-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), parent (copy), pkg (ref), productId (ref), p1 (ref), var1 (ref), sessionService (copy)
+			-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), parent (copy), pkg (ref), productId (ref), p1 (ref), fFlagEnableCategoryLoggingInShopModule (copy), var1 (ref), sessionService (copy)
 			if fFlagEnableInExperienceShopUnifiedLoggingModule then
 				task.defer(function()
-					-- upvalues: parent (copy), pkg (copy), productId (copy), p1 (copy), var1 (copy), sessionService (copy)
+					-- upvalues: parent (copy), pkg (copy), productId (copy), p1 (copy), fFlagEnableCategoryLoggingInShopModule (copy), var1 (copy), sessionService (copy)
 					local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
 					local marketplaceUnifiedItemType = avatarExperienceAnalyticsModule.UnifiedEventLogEnums.MarketplaceUnifiedItemType
 					avatarExperienceAnalyticsModule.addUnifiedEventLogging(var1, {
@@ -102,7 +103,10 @@ return reactModule.memo(function(p1)
 						categoryId = p1.categoryId,
 						categoryType = p1.categoryType,
 						gridPositionRow = p1.gridPositionRow,
-						gridPositionColumn = p1.gridPositionColumn
+						gridPositionColumn = p1.gridPositionColumn,
+						stableCategoryId = if fFlagEnableCategoryLoggingInShopModule then p1.stableCategoryId else nil,
+						categoryGroup = if fFlagEnableCategoryLoggingInShopModule then p1.categoryGroup else nil,
+						categoryName = if fFlagEnableCategoryLoggingInShopModule then p1.categoryName else nil
 					}, { sessionTagName = sessionService:GetSessionTag("level2a") })
 				end)
 				
@@ -110,7 +114,10 @@ return reactModule.memo(function(p1)
 			end
 		end, {
 			pkg.id, productId, pkg.bonusItem, p1.categoryId, p1.categoryType,
-			p1.gridPositionRow, p1.gridPositionColumn
+			p1.gridPositionRow, p1.gridPositionColumn,
+			if fFlagEnableCategoryLoggingInShopModule then p1.stableCategoryId else nil,
+			if fFlagEnableCategoryLoggingInShopModule then p1.categoryGroup else nil,
+			if fFlagEnableCategoryLoggingInShopModule then p1.categoryName else nil
 		})
 		local var14 = reactModule.useCallback(function()
 			-- upvalues: bonusGamePassId (ref), shopDebugLoggerModule (copy), fFlagShopUseMockUserOwnsGamePassModule (copy), mockUserOwnsGamePassModule (copy), userOwnsGamePassHttpModule (copy), var2 (ref), fIntShopOwnershipFetchMaxAttemptsModule (copy), fFlagRefetchRobuxWidgetAfterPurchaseModule (copy), fFlagSkipPaymentSessionForPlainRobuxModule (copy)

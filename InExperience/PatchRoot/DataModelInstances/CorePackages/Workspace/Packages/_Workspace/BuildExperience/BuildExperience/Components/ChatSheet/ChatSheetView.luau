@@ -12,11 +12,13 @@ local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local buildEmptyStateModule = require(buildExperience.Components.BuildEmptyState.BuildEmptyState)
 local buildPillMenuPortalModule = require(buildExperience.Components.BuildPillMenu.BuildPillMenuPortal)
 local chatActionsModule = require(buildExperience.Components.Chat.ChatActions)
+local chatCardEmphasisProviderModule = require(buildExperience.Components.Chat.ChatCardEmphasis.ChatCardEmphasisProvider)
 local chatMessageListModule = require(buildExperience.Components.Chat.ChatMessageList)
 local _ = require(buildExperience.Chat.chatTypes)
 local _ = require(buildExperience.Chat.useChatSessionCore)
 local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
 local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
+local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 local fFlagBuildExperienceInGameShell = require(parent.SharedFlags).FFlagBuildExperienceInGameShell
 local fFlagBuildExperienceUseFoundationSheetModule = require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet)
 local fFlagBuildExperienceChatImageAttachmentsModule = require(buildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
@@ -70,7 +72,7 @@ local function ChatSheetContent(p1)
 end
 
 return function(p1)
-	-- upvalues: var1 (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), fFlagBuildDesktopReadinessModule (ref), fFlagBuildExperienceLibrary (ref), reactModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), reactUtilsModule (ref), noopSheetRef (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), view (ref), dialogSize (ref), ChatSheetContent (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), fFlagBuildExperienceInGameShell (ref), buildPillMenuPortalModule (ref)
+	-- upvalues: var1 (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), fFlagBuildDesktopReadinessModule (ref), fFlagBuildExperienceLibrary (ref), reactModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), reactUtilsModule (ref), noopSheetRef (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), view (ref), dialogSize (ref), ChatSheetContent (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), fFlagBuildExperienceInGameShell (ref), buildPillMenuPortalModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), chatCardEmphasisProviderModule (ref)
 	local sheetComponent = p1.sheetComponent or var1
 	local var2 = useLocalization({
 		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER
@@ -128,8 +130,8 @@ return function(p1)
 		onPlaytest = p1.onPlaytest,
 		isPlaytestLoading = p1.isPlaytestLoading
 	}))
-	
-	return reactModule.createElement(sheetComponent.Root, {
+	local createElement_1 = reactModule.createElement
+	createElement_1 = createElement_1(sheetComponent.Root, {
 		ref = var8,
 		isOpen = p1.isOpen,
 		snapPoints = p1.snapPoints,
@@ -172,4 +174,6 @@ return function(p1)
 			onOpenChat = p1.onOpenChat
 		})
 	})
+	
+	return if fFlagBuildExperienceChatCardEmphasisModule then reactModule.createElement(chatCardEmphasisProviderModule, nil, createElement_1) else createElement_1
 end

@@ -2,6 +2,7 @@
 local decodeLuauUnicodeEscapesModule = require(IAPExperience.Utility.decodeLuauUnicodeEscapes)
 local fFlagCartPricingSupportGameItemOfferModule = require(IAPExperience.Flags.FFlagCartPricingSupportGameItemOffer)
 local discountType = require(script.Parent.Parent.PricingTypes).DiscountType
+local fFlagPurchasePromptFetchCartPricingForLooks = require(IAPExperience.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks
 local t = {
 	RobloxPlus = "ROBLOX_PLUS",
 	MarketplaceOffer = "MARKETPLACE_OFFER",
@@ -106,14 +107,36 @@ return {
 		end
 		return t_1
 	end,
-	computePriceWithoutOffersDiscounts = function(p3, p4)
-		-- upvalues: t (ref), fFlagCartPricingSupportGameItemOfferModule (ref)
-		local var1 = p4
+	consolidateRobloxPlusDiscounts = if fFlagPurchasePromptFetchCartPricingForLooks then function(p3)
+		-- upvalues: discountType (ref)
+		local t = {}
+		local tCount = nil
 		
-		if type(p3) ~= "table" then
+		for i, v in p3 do
+			if v.type ~= discountType.RobloxPlusSubscription then
+				table.insert(t, v)
+			elseif tCount == nil then
+				table.insert(t, {
+					type = v.type,
+					amountInRobux = v.amountInRobux,
+					percent = v.percent,
+					localizedDiscountAttribution = v.localizedDiscountAttribution
+				})
+				tCount = #t
+			else
+				t[tCount].amountInRobux += v.amountInRobux
+			end
+		end
+		return t
+	end else nil,
+	computePriceWithoutOffersDiscounts = function(p4, p5)
+		-- upvalues: t (ref), fFlagCartPricingSupportGameItemOfferModule (ref)
+		local var1 = p5
+		
+		if type(p4) ~= "table" then
 			return var1
 		end
-		for i, v in p3 do
+		for i, v in p4 do
 			if type(v) == "table" then
 				local discountInformation = v.discountInformation
 				
@@ -140,12 +163,12 @@ return {
 		end
 		return var1
 	end,
-	extractCartPricingSavingsSummary = function(p5)
+	extractCartPricingSavingsSummary = function(p6)
 		-- upvalues: decodeLuauUnicodeEscapesModule (ref)
-		if type(p5) ~= "table" then
+		if type(p6) ~= "table" then
 			return nil
 		end
-		local savingsSummary = p5.savingsSummary
+		local savingsSummary = p6.savingsSummary
 		
 		return if type(savingsSummary) == "string" and savingsSummary ~= "" then decodeLuauUnicodeEscapesModule(savingsSummary) else nil
 	end

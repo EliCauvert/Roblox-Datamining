@@ -21,6 +21,7 @@ local consumeEntrySourceModule = require(moments.Utils.consumeEntrySource)
 local logMomentsLayerExposure = momentsCommonModule.Utils.logMomentsLayerExposure
 local innerNavigatorModule = require(moments.Navigation.InnerNavigator)
 local momentsHostShellModule = require(moments.Components.MomentsHostShell)
+local _ = require(moments.MomentsHostContext)
 local useResetTeleportingOnGameLeaveModule = require(moments.Hooks.useResetTeleportingOnGameLeave)
 local getExperienceDetailsSheetStoreModule = require(moments.ExperienceDetailsSheet.Sheet.getExperienceDetailsSheetStore)
 local momentsGetMomentsReactionsStoreModule = require(parent.DataHydration.MomentsGetMomentsReactionsStore)
@@ -403,13 +404,15 @@ local function MomentsTabEntry(p4)
 				openOwnMoments()
 			end else nil,
 			openMomentsFeedReport = p4.openMomentsFeedReport,
-			openMomentCommentReport = p4.openMomentCommentReport
+			openMomentCommentReport = p4.openMomentCommentReport,
+			openBlockUser = p4.openBlockUser
 		}
 	end, {
 		p4.openProfile,
 		p4.openOwnMoments,
 		p4.openMomentsFeedReport,
-		p4.openMomentCommentReport
+		p4.openMomentCommentReport,
+		p4.openBlockUser
 	})
 	
 	return if canRenderNativeMoments(useMomentsGating()) then reactModule.createElement(momentsHostShellModule, {
@@ -417,7 +420,8 @@ local function MomentsTabEntry(p4)
 		openProfile = var25.openProfile,
 		openOwnMoments = var25.openOwnMoments,
 		openMomentsFeedReport = var25.openMomentsFeedReport,
-		openMomentCommentReport = var25.openMomentCommentReport
+		openMomentCommentReport = var25.openMomentCommentReport,
+		openBlockUser = var25.openBlockUser
 	}, reactModule.createElement(innerNavigatorModule, { navigation = p4.navigation })) else nil
 end
 

@@ -27,7 +27,6 @@ local useAvatarRoute = avatarExperienceNavigationModule.AvatarRoute.Hooks.useAva
 local avatarScreen = avatarExperienceNavigationModule.Enums.AvatarScreen
 local characterHistoryStateChangeButtonActivated = avatarExperienceCommonModule.State.Actions.CharacterHistoryStateChangeButtonActivated
 local clearScreens = avatarExperienceNavigationModule.Actions.ClearScreens
-local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
 local menuItemEnumModule = require(avatarExperienceControlBar.Enums.MenuItemEnum)
 local var1 = if fFlagAXResetAvatarButton then avatarExperienceSaveModule.Selectors.selectCharacterData else nil
 local clearTryOns = require(parent.AvatarExperienceRodux).Actions.ClearTryOns
@@ -40,7 +39,7 @@ local var2 = if fFlagAXResetAvatarButton then {
 } else nil
 
 return function()
-	-- upvalues: useNavigation (ref), useDispatch (ref), fFlagAXMigrateBuilderIcons (ref), useTokens (ref), useAvatarSaveContext (ref), fFlagAXResetAvatarButton (ref), useSelectorSignal (ref), var1 (ref), tutilsModule (ref), fFlagAXExtendUndoRedoTracking (ref), useAvatarRoute (ref), signalsReactModule (ref), reactModule (ref), constantsModule (ref), slotBasedEditorAnalytics (ref), characterHistoryStateChangeButtonActivated (ref), fFlagAXMISEnableMultiShopping (ref), avatarScreen (ref), clearScreens (ref), clearTryOns (ref), setCurrentToastMessage (ref), var2 (ref), menuItemEnumModule (ref), iconName (ref)
+	-- upvalues: useNavigation (ref), useDispatch (ref), fFlagAXMigrateBuilderIcons (ref), useTokens (ref), useAvatarSaveContext (ref), fFlagAXResetAvatarButton (ref), useSelectorSignal (ref), var1 (ref), tutilsModule (ref), fFlagAXExtendUndoRedoTracking (ref), useAvatarRoute (ref), signalsReactModule (ref), reactModule (ref), constantsModule (ref), slotBasedEditorAnalytics (ref), characterHistoryStateChangeButtonActivated (ref), clearScreens (ref), avatarScreen (ref), clearTryOns (ref), setCurrentToastMessage (ref), var2 (ref), menuItemEnumModule (ref), iconName (ref)
 	local var3 = useNavigation()
 	local var4 = useDispatch()
 	local var5 = if fFlagAXMigrateBuilderIcons then useTokens() else nil
@@ -75,7 +74,7 @@ return function()
 		return true
 	end, { var11, var9 }) else nil
 	local var15 = reactModule.useCallback(function(p1)
-		-- upvalues: var6 (ref), var10 (ref), slotBasedEditorAnalytics (copy), fFlagAXExtendUndoRedoTracking (copy), var8 (ref), var4 (ref), characterHistoryStateChangeButtonActivated (copy), fFlagAXMISEnableMultiShopping (copy), var3 (ref), avatarScreen (copy), clearScreens (copy)
+		-- upvalues: var6 (ref), var10 (ref), slotBasedEditorAnalytics (copy), fFlagAXExtendUndoRedoTracking (copy), var8 (ref), var4 (ref), characterHistoryStateChangeButtonActivated (copy), var3 (ref), clearScreens (copy), avatarScreen (copy)
 		if var6 then
 			local var16 = var6.updateHistoryIndexAndGetCharacterData(var10 + (if p1 then -1 else 1))
 			
@@ -86,12 +85,6 @@ return function()
 					equipped = var16.equipped,
 					tryOn = var16.tryOn
 				}))
-				
-				if var16.tryOn.OutfitTryOn and var16.tryOn.OutfitTryOn.LookId ~= nil and (var16.tryOn.OutfitTryOn.LookId ~= "" and not fFlagAXMISEnableMultiShopping) then
-					var3.navigate(avatarScreen.LookDetails)
-					
-					return
-				end
 				var3.dispatch(clearScreens({ avatarScreen.LookDetails }))
 			end
 		end

@@ -1,9 +1,8 @@
 ﻿local signalsModule = require(script:FindFirstAncestor("TextChannelWindow").Parent.Signals)
 local _ = require(script.Parent.Message)
-local fFlagExpChatTrimMessageStoreModule = require(script.Parent.Flags.FFlagExpChatTrimMessageStore)
 
 return function()
-	-- upvalues: signalsModule (ref), fFlagExpChatTrimMessageStoreModule (ref)
+	-- upvalues: signalsModule (ref)
 	local t = {}
 	
 	local function getOrCreate(p1)
@@ -38,7 +37,7 @@ return function()
 	end
 	
 	local function upsertMessage(p2, p3)
-		-- upvalues: getOrCreate (ref), fFlagExpChatTrimMessageStoreModule (copy)
+		-- upvalues: getOrCreate (ref)
 		local var5 = getOrCreate(p2)
 		local messageId = p3.messageId
 		var5.setByMessageId(function(p4)
@@ -48,9 +47,9 @@ return function()
 			
 			return cloned
 		end)
-		local var6 = if fFlagExpChatTrimMessageStoreModule then {} else nil
+		local t = {}
 		var5.setOrderedIds(function(p4)
-			-- upvalues: messageId (ref), var6 (ref)
+			-- upvalues: messageId (ref), t (ref)
 			for i, v in p4 do
 				if v == messageId then
 					return p4
@@ -65,26 +64,26 @@ return function()
 			local list = table.create(200)
 			table.move(cloned, #cloned - 200 + 1, #cloned, 1, list)
 			
-			if var6 then
+			if t then
 				for v = 1, #cloned - 200 do
-					table.insert(var6, cloned[v])
+					table.insert(t, cloned[v])
 				end
 			end
 			return list
 		end)
 		
-		if var6 and #var6 > 0 then
+		if t and #t > 0 then
 			var5.setByMessageId(function(p5)
-				-- upvalues: var6 (ref)
+				-- upvalues: t (ref)
 				local cloned = table.clone(p5)
 				
-				for i, v in var6 do
+				for i, v in t do
 					cloned[v] = nil
 				end
 				return cloned
 			end)
 			
-			for i, v in var6 do
+			for i, v in t do
 				var5.messageGetters[v] = nil
 			end
 		end
@@ -94,8 +93,8 @@ return function()
 		upsertMessage = upsertMessage,
 		removeMessage = function(p5, p6)
 			-- upvalues: getOrCreate (ref)
-			local var7 = getOrCreate(p5)
-			var7.setByMessageId(function(p7)
+			local var6 = getOrCreate(p5)
+			var6.setByMessageId(function(p7)
 				-- upvalues: p6 (ref)
 				if p7[p6] == nil then
 					return p7
@@ -105,7 +104,7 @@ return function()
 				
 				return cloned
 			end)
-			var7.setOrderedIds(function(p7)
+			var6.setOrderedIds(function(p7)
 				-- upvalues: p6 (ref)
 				local index = table.find(p7, p6)
 				
@@ -132,16 +131,16 @@ return function()
 		end,
 		clearChannel = function(p5)
 			-- upvalues: t (ref)
-			local var7 = t[p5]
+			local var6 = t[p5]
 			
-			if var7 then
-				var7.setByMessageId(function()
+			if var6 then
+				var6.setByMessageId(function()
 					return {}
 				end)
-				var7.setOrderedIds(function()
+				var6.setOrderedIds(function()
 					return {}
 				end)
-				table.clear(var7.messageGetters)
+				table.clear(var6.messageGetters)
 				
 				return
 			end
@@ -152,15 +151,15 @@ return function()
 		end,
 		getMessageById = function(p5, p6)
 			-- upvalues: getOrCreate (ref), signalsModule (copy)
-			local var7 = getOrCreate(p5)
+			local var6 = getOrCreate(p5)
 			
-			if not var7.messageGetters[p6] then
-				var7.messageGetters[p6] = signalsModule.createComputed(function(p7)
-					-- upvalues: var7 (ref), p6 (ref)
-					return var7.getByMessageId(p7)[p6]
+			if not var6.messageGetters[p6] then
+				var6.messageGetters[p6] = signalsModule.createComputed(function(p7)
+					-- upvalues: var6 (ref), p6 (ref)
+					return var6.getByMessageId(p7)[p6]
 				end)
 			end
-			return var7.messageGetters[p6]
+			return var6.messageGetters[p6]
 		end
 	}
 end

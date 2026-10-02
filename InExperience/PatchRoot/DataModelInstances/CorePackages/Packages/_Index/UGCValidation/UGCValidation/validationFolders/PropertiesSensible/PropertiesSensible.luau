@@ -13,7 +13,8 @@ local describeProblematicPropertiesModule = require(script.Parent.describeProble
 local list = {
 	validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
 	validationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-	validationEnumsModule.UploadCategory.LAYERED_CLOTHING
+	validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+	validationEnumsModule.UploadCategory.EYEBROW_EYELASH
 }
 local t = {
 	categories = if require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)() then constantsModule.AllAssetUploadCategories else constantsModule.AllAssetUploadCategoriesIncludingMakeup,

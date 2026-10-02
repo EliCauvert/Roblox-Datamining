@@ -1,4 +1,5 @@
 ﻿local expChat = script:FindFirstAncestor("ExpChat")
+local engineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(expChat.Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
 local _ = require(expChat.Stores.GetPresetChatStore.createPresetChatStore)
 local constantsModule = require(expChat.PresetChat.Constants)
 local t = { Substring = 0, WordStart = 1 }
@@ -6,17 +7,20 @@ local var1 = nil
 local var2 = nil
 
 local function flatten(p1)
+	-- upvalues: engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref)
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
 	
 	for i, v in p1 do
 		for i_1, v_1 in v.categories do
-			for i_2, v_2 in v_1.messages do
-				if t_2[v_2.value] == nil then
-					t_2[v_2.value] = v_2.presetId
-					table.insert(t, v_2.value)
-					table.insert(t_1, string.lower(v_2.value))
+			for i_2, v_2 in if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then v_1.contents else v_1.messages do
+				local var3 = if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then v_2.text else v_2.value
+				
+				if t_2[var3] == nil then
+					t_2[var3] = v_2.presetId
+					table.insert(t, var3)
+					table.insert(t_1, string.lower(var3))
 				end
 			end
 		end
@@ -72,20 +76,20 @@ return {
 		if presetCooldownEndsAt ~= nil and os.clock() < presetCooldownEndsAt then
 			return {}
 		end
-		local var3 = getCatalog(value)
+		local var4 = getCatalog(value)
 		
-		if var3 == nil then
+		if var4 == nil then
 			return {}
 		end
 		local lowerText = string.lower(p4)
-		local var4 = if p5 and p5.mode == t.WordStart then getWordStartRank else getRank
+		local var5 = if p5 and p5.mode == t.WordStart then getWordStartRank else getRank
 		local t_1 = {}
 		
-		for i, v in var3.lowerValues do
-			local var5 = var4(v, lowerText)
+		for i, v in var4.lowerValues do
+			local var6 = var5(v, lowerText)
 			
-			if var5 ~= nil then
-				table.insert(t_1, { rank = var5, index = i })
+			if var6 ~= nil then
+				table.insert(t_1, { rank = var6, index = i })
 			end
 		end
 		table.sort(t_1, function(p6, p7)
@@ -94,14 +98,14 @@ return {
 		local list = table.create(#t_1)
 		
 		for i_1, v_1 in t_1 do
-			table.insert(list, var3.values[v_1.index])
+			table.insert(list, var4.values[v_1.index])
 		end
 		return list
 	end,
 	getPresetIdForValue = function(value, p6)
 		-- upvalues: getCatalog (ref)
-		local var6 = getCatalog(value)
+		local var7 = getCatalog(value)
 		
-		return if var6 == nil then nil else var6.presetIdByValue[p6]
+		return if var7 == nil then nil else var7.presetIdByValue[p6]
 	end
 }

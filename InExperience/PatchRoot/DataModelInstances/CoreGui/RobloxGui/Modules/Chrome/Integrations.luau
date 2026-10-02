@@ -7,6 +7,7 @@ local fFlagAddInviteFriendsIntegration = sharedFlagsModule.FFlagAddInviteFriends
 local fFlagAppNavMyStatsTab = sharedFlagsModule.FFlagAppNavMyStatsTab
 local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local fFlagEnableInExperienceShop = sharedFlagsModule.FFlagEnableInExperienceShop
+local fFlagEnableOffersPrefetch = sharedFlagsModule.FFlagEnableOffersPrefetch
 local fFlagIntegrateTraversalHistoryInSideSheet = sharedFlagsModule.FFlagIntegrateTraversalHistoryInSideSheet
 local fFlagRemoveFriendsChatUnibarEntrypoints = sharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints
 local fFlagExpChatCanShowFriendsTab = sharedFlagsModule.FFlagExpChatCanShowFriendsTab
@@ -43,6 +44,7 @@ return {
 	RespawnConfirmation = if isSideSheetEnabledModule then require(script.Pages.RespawnConfirmation) else nil,
 	RobuxWidget = if require(script.Parent.Flags.FFlagEnableSideSheetRobuxWidget) and isSideSheetEnabledModule then require(script.RobuxWidget) else nil,
 	ShopEntrypoint = if fFlagEnableInExperienceShop then require(script.InExperienceShop.ShopEntrypoint) else nil,
+	InitOffersPrefetch = if fFlagEnableOffersPrefetch then require(script.InExperienceOffers.initOffersPrefetch) else nil,
 	SwitchServer = if isSideSheetEnabledModule and (isPioneerLaunch() or fFlagShowSwitchServerButton) then require(script.SwitchServer) else nil,
 	AccountUpsell = if isPioneerLaunch() then require(script.AccountUpsell) else nil
 }

@@ -31,6 +31,7 @@ local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPrefer
 local getModeratedItemsStoreModule = require(moments.Stores.GetModeratedItemsStore)
 local getToastStoreModule = require(moments.Stores.GetToastStore)
 local signalActionTypeModule = require(moments.Enums.SignalActionType)
+local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
 local momentsUseSmallOverflowMenu = game:DefineFastFlag("MomentsUseSmallOverflowMenu", false)
@@ -50,7 +51,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useFeed (ref), useMomentsHost (ref), useToggleState (ref), reactModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), getModeratedItemsStoreModule (ref), getToastStoreModule (ref), signalsReactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), checkDebugAccessModule (ref), reportMomentModule (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), makeFeedActionFieldsModule (ref), getPostFeedItemIdModule (ref), reportModalCovering (ref), localPlayer (ref), foundationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), menu (ref), momentsUseSmallOverflowMenu (ref), iconButton (ref), threeDotsVertical (ref), reportMomentDialogModule (ref), ipReportConfirmationDialogModule (ref), view (ref), speakerSlash (ref), speaker (ref)
+	-- upvalues: useLocalization (ref), t (ref), useFeed (ref), useMomentsHost (ref), useToggleState (ref), reactModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), getModeratedItemsStoreModule (ref), getToastStoreModule (ref), signalsReactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), checkDebugAccessModule (ref), reportMomentModule (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), makeFeedActionFieldsModule (ref), getPostFeedItemIdModule (ref), reportModalCovering (ref), localPlayer (ref), foundationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), fFlagMomentsOptimisticProfilePending (ref), menu (ref), momentsUseSmallOverflowMenu (ref), iconButton (ref), threeDotsVertical (ref), reportMomentDialogModule (ref), ipReportConfirmationDialogModule (ref), view (ref), speakerSlash (ref), speaker (ref)
 	local var1 = useLocalization(t)
 	local var2 = useFeed()
 	local openMomentsFeedReport = useMomentsHost().openMomentsFeedReport
@@ -219,7 +220,7 @@ return function(p1)
 		align = foundationModule.Enums.PopoverAlign.End,
 		isOpen = var3.enabled,
 		items = reactModule.useMemo(function()
-			-- upvalues: var19 (ref), var1 (ref), var21 (ref), var20 (ref), var22 (ref), p1 (ref), localPlayer (copy), foundationModule (copy), var25 (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), var28 (ref), checkDebugAccessModule (copy), var23 (ref)
+			-- upvalues: var19 (ref), var1 (ref), var21 (ref), var20 (ref), var22 (ref), p1 (ref), localPlayer (copy), foundationModule (copy), var25 (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), fFlagMomentsOptimisticProfilePending (copy), var28 (ref), checkDebugAccessModule (copy), var23 (ref)
 			local list = {
 				{
 					id = "details",
@@ -243,7 +244,7 @@ return function(p1)
 					text = var1.report,
 					onActivated = var25
 				})
-			elseif not fFlagMomentsPassFeedItemIdToBackendApis or var31 then
+			elseif (not fFlagMomentsPassFeedItemIdToBackendApis or var31) and (not fFlagMomentsOptimisticProfilePending or p1.moment.status ~= "Pending") then
 				table.insert(list, {
 					id = "delete",
 					icon = "icons/actions/delete",

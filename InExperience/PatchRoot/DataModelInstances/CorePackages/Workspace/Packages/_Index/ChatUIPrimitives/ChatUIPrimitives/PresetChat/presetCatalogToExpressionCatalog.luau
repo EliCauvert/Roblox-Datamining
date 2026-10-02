@@ -1,4 +1,5 @@
-﻿local _ = require(script.Parent.Types)
+﻿local engineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
+local _ = require(script.Parent.Types)
 local _ = require(script.Parent.Parent.UniversalMessage.Types)
 local presetMessageToContentModule = require(script.Parent.presetMessageToContent)
 
@@ -7,10 +8,10 @@ local function _(p1)
 end
 
 local function presetCategoryToExpressionCategory(value)
-	-- upvalues: presetMessageToContentModule (ref)
+	-- upvalues: engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref), presetMessageToContentModule (ref)
 	local t = {}
 	
-	for i, v in value.messages do
+	for i, v in if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then value.contents else value.messages do
 		local var1 = presetMessageToContentModule.presetMessageToExpressionItem(v)
 		
 		if var1 ~= nil then

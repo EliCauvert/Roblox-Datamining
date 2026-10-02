@@ -5,7 +5,11 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local reactModule = require(parent.React)
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local UIBloxModule = require(parent.UIBlox)
+local foundationModule = require(parent.Foundation)
 local useStyle = UIBloxModule.Core.Style.useStyle
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local iconButton = UIBloxModule.App.Button.IconButton
 local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local userInputService = game:GetService("UserInputService")
@@ -22,26 +26,28 @@ local function _(value, p1)
 end
 
 return function(p1)
-	-- upvalues: useStyle (ref), userInputService (ref), useLocalization (ref), constantsModule (ref), streamNotificationDropdownExperimentationModule (ref), fFlagStreamNotificationUXSettingsHeader (ref), useDispatch (ref), streamNotificationSettingsExperimentationModule (ref), streamNotificationSettingsActivationModule (ref), reactModule (ref), iconButton (ref), iconSize (ref), notificationHelper (ref), eventStream (ref), analyticsConstantsModule (ref)
+	-- upvalues: useStyle (ref), foundationFontFaceMigration (ref), useTokens (ref), normalizeFontFace (ref), userInputService (ref), useLocalization (ref), constantsModule (ref), streamNotificationDropdownExperimentationModule (ref), fFlagStreamNotificationUXSettingsHeader (ref), useDispatch (ref), streamNotificationSettingsExperimentationModule (ref), streamNotificationSettingsActivationModule (ref), reactModule (ref), iconButton (ref), iconSize (ref), notificationHelper (ref), eventStream (ref), analyticsConstantsModule (ref)
 	local var1 = useStyle()
+	local var2 = if foundationFontFaceMigration then useTokens() else nil
 	local font = var1.Font
-	local font_1 = font.Header1.Font
-	local var2 = font.BaseSize * font.Header1.RelativeSize
-	local var3 = if userInputService.StatusBarSize and p1.isSmallScreen then userInputService.StatusBarSize.Y else 0
-	local var4 = useLocalization({ headerText = constantsModule.Text.HeaderKey })
+	local var3 = if foundationFontFaceMigration then nil else font.Header1.Font
+	local var4 = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.HeadingSmall.Font) else nil
+	local var5 = if foundationFontFaceMigration then var2.Typography.HeadingSmall.FontSize else font.BaseSize * font.Header1.RelativeSize
+	local var6 = if userInputService.StatusBarSize and p1.isSmallScreen then userInputService.StatusBarSize.Y else 0
+	local var7 = useLocalization({ headerText = constantsModule.Text.HeaderKey })
 	local dropdownEnabled = streamNotificationDropdownExperimentationModule.getDropdownEnabled()
 	local _ = nil
 	local settingsGearEnabled = false
 	
-	local var5 = function() end
+	local var8 = function() end
 	
 	if fFlagStreamNotificationUXSettingsHeader then
 		settingsGearEnabled = streamNotificationSettingsExperimentationModule.getSettingsGearEnabled()
-		var5 = streamNotificationSettingsActivationModule.createOnSettingsActivated(settingsGearEnabled, dropdownEnabled, p1.displayStream, useDispatch())
+		var8 = streamNotificationSettingsActivationModule.createOnSettingsActivated(settingsGearEnabled, dropdownEnabled, p1.displayStream, useDispatch())
 	end
 	if dropdownEnabled then
 		local headerMinHeight = constantsModule.Dropdown.HeaderMinHeight
-		local var6 = headerMinHeight - constantsModule.DefaultPadding * 2
+		local var9 = headerMinHeight - constantsModule.DefaultPadding * 2
 		
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -50,27 +56,28 @@ return function(p1)
 		}, {
 			HeaderText = reactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Text = var4 and var4.headerText,
-				Font = font_1,
-				TextSize = var2,
+				Text = var7 and var7.headerText,
+				Font = var3,
+				FontFace = var4,
+				TextSize = var5,
 				TextColor3 = var1.Theme.TextEmphasis.Color,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				Size = UDim2.new(1, -(if settingsGearEnabled then var6 else 0), 1, 0)
+				Size = UDim2.new(1, -(if settingsGearEnabled then var9 else 0), 1, 0)
 			}),
 			SettingsButton = if fFlagStreamNotificationUXSettingsHeader and settingsGearEnabled then reactModule.createElement(iconButton, {
 				anchorPoint = Vector2.new(1, 0.5),
 				iconSize = iconSize.Medium,
 				icon = constantsModule.Modal.SettingsIcon,
 				position = UDim2.new(1, 0, 0.5, 0),
-				size = UDim2.fromOffset(var6, var6),
-				onActivated = var5
+				size = UDim2.fromOffset(var9, var9),
+				onActivated = var8
 			}) else nil
 		})
 	end
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, constantsModule.Modal.HeaderHeight + var3)
+		Size = UDim2.new(1, 0, 0, constantsModule.Modal.HeaderHeight + var6)
 	}, {
 		HeaderFrame = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -95,9 +102,10 @@ return function(p1)
 			}),
 			HeaderText = reactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Text = var4 and var4.headerText,
-				Font = font_1,
-				TextSize = var2,
+				Text = var7 and var7.headerText,
+				Font = var3,
+				FontFace = var4,
+				TextSize = var5,
 				TextColor3 = var1.Theme.TextEmphasis.Color,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.new(0.5, 0, 0.5, 0),
@@ -109,7 +117,7 @@ return function(p1)
 				icon = constantsModule.Modal.SettingsIcon,
 				position = UDim2.new(1, -constantsModule.Modal.Padding, 0, constantsModule.Modal.Padding),
 				size = UDim2.fromOffset(constantsModule.Modal.HeaderHeight - constantsModule.Modal.Padding * 2, constantsModule.Modal.HeaderHeight - constantsModule.Modal.Padding * 2),
-				onActivated = var5
+				onActivated = var8
 			}) else nil
 		})
 	})

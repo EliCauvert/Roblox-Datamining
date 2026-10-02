@@ -13,6 +13,7 @@ local fFlagFriendsPageViewBtnEnabled = require(parent.SharedFlags).FFlagFriendsP
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
 local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 local fFlagAddStatusIndicatorToBaseRow = require(parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
+local fFlagUserListSurfaceExtensions = require(parent.SharedFlags).FFlagUserListSurfaceExtensions
 local view = foundationModule.View
 local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
@@ -25,12 +26,19 @@ local statusIndicator = foundationModule.StatusIndicator
 local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
 local useTokens = foundationModule.Hooks.useTokens
 local fillBehavior = foundationModule.Enums.FillBehavior
+local t = {
+	SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
+	SelectionBehaviorRight = Enum.SelectionBehavior.Stop,
+	SelectionBehaviorUp = Enum.SelectionBehavior.Escape,
+	SelectionBehaviorDown = Enum.SelectionBehavior.Escape
+}
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), userListUseActionAddTranslation (ref), useLocalization (ref), textKeysModule (ref), enumsModule (ref), fFlagFriendsPageViewBtnEnabled (ref), fFlagUserListCtaIntegrationEnabled (ref), reactModule (ref), view (ref), constantsModule (ref), userTile (ref), foundationModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagAddStatusIndicatorToBaseRow (ref), statusIndicator (ref), statusIndicatorVariant (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), skeleton (ref), radius (ref), iconButton (ref), iconSize (ref)
+	-- upvalues: useTokens (ref), fFlagUserListSurfaceExtensions (ref), userListUseActionAddTranslation (ref), useLocalization (ref), textKeysModule (ref), enumsModule (ref), fFlagFriendsPageViewBtnEnabled (ref), fFlagUserListCtaIntegrationEnabled (ref), reactModule (ref), view (ref), constantsModule (ref), userTile (ref), foundationModule (ref), fFlagEnableBlackbirdCheck (ref), t (ref), fFlagAddStatusIndicatorToBaseRow (ref), statusIndicator (ref), statusIndicatorVariant (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), skeleton (ref), radius (ref), iconButton (ref), iconSize (ref)
 	local var1
 	local var2 = useTokens()
-	local var3 = if userListUseActionAddTranslation then useLocalization({
+	local var3 = fFlagUserListSurfaceExtensions and p1.disableRowActivation == true
+	local var4 = if userListUseActionAddTranslation then useLocalization({
 		Accept = textKeysModule.Accept,
 		Add = textKeysModule.Add,
 		Chat = textKeysModule.Chat,
@@ -39,7 +47,7 @@ return reactModule.memo(function(p1)
 		[enumsModule.ButtonTypes.View] = if fFlagFriendsPageViewBtnEnabled or fFlagUserListCtaIntegrationEnabled then textKeysModule.View else nil
 	}) else nil
 	local createElement = reactModule.createElement
-	local t = {
+	local t_1 = {
 		LayoutOrder = p1.layoutOrder,
 		tag = {
 			["size-full-0 auto-y align-y-center"] = true,
@@ -47,7 +55,7 @@ return reactModule.memo(function(p1)
 			["col gap-small padding-medium bg-surface-100 radius-medium"] = p1.layoutMode == enumsModule.RowLayoutMode.Compact
 		}
 	}
-	local t_1 = {
+	local t_2 = {
 		UserTileContainer = reactModule.createElement(view, {
 			LayoutOrder = 1,
 			tag = {
@@ -63,8 +71,8 @@ return reactModule.memo(function(p1)
 				title = p1.title,
 				subtitle = p1.subtitle,
 				layoutMode = p1.layoutMode,
-				onActivated = p1.onActivated,
-				selectable = p1.selectable ~= nil or p1.selectable,
+				onActivated = if var3 then nil else p1.onActivated,
+				selectable = if var3 then false else p1.selectable ~= nil or p1.selectable,
 				isTitleLoading = p1.isTitleLoading,
 				isSubtitleLoading = p1.isSubtitleLoading,
 				contextualInfo = p1.contextualInfo and p1.contextualInfo.text,
@@ -76,15 +84,16 @@ return reactModule.memo(function(p1)
 		})
 	}
 	local createElement_1 = reactModule.createElement
-	local t_2 = {
+	local t_3 = {
 		LayoutOrder = 2,
 		tag = {
 			["gap-xsmall"] = true,
 			["row align-y-center auto-xy"] = p1.layoutMode == enumsModule.RowLayoutMode.Wide,
 			["col size-full-0 auto-y align-x-center"] = p1.layoutMode == enumsModule.RowLayoutMode.Compact
-		}
+		},
+		selectionGroup = if var3 and p1.layoutMode == enumsModule.RowLayoutMode.Wide then t else nil
 	}
-	local t_3 = {
+	local t_4 = {
 		StatusIndicatorContainer = if fFlagAddStatusIndicatorToBaseRow and p1.shouldShowNewIndicator then reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy padding-right-small" }, {
 			StatusIndicator = reactModule.createElement(statusIndicator, { variant = statusIndicatorVariant.Emphasis })
 		}) else nil
@@ -102,7 +111,7 @@ return reactModule.memo(function(p1)
 				}
 			}, {
 				Button = reactModule.createElement(button, {
-					text = if userListUseActionAddTranslation then var3[p1.primaryCta.type] else p1.primaryCta.type,
+					text = if userListUseActionAddTranslation then var4[p1.primaryCta.type] else p1.primaryCta.type,
 					size = inputSize.Small,
 					variant = if fFlagFriendsPageViewBtnEnabled or fFlagUserListCtaIntegrationEnabled then p1.primaryCta.variant or buttonVariant.SoftEmphasis else buttonVariant.SoftEmphasis,
 					onActivated = p1.primaryCta.onActivated,
@@ -114,7 +123,7 @@ return reactModule.memo(function(p1)
 		else
 			var1 = reactModule.createElement
 			var1 = var1(button, {
-				text = if userListUseActionAddTranslation then var3[p1.primaryCta.type] else p1.primaryCta.type,
+				text = if userListUseActionAddTranslation then var4[p1.primaryCta.type] else p1.primaryCta.type,
 				size = inputSize.Small,
 				variant = if fFlagFriendsPageViewBtnEnabled or fFlagUserListCtaIntegrationEnabled then p1.primaryCta.variant or buttonVariant.SoftEmphasis else buttonVariant.SoftEmphasis,
 				onActivated = p1.primaryCta.onActivated,
@@ -129,8 +138,8 @@ return reactModule.memo(function(p1)
 		Size = UDim2.fromOffset(p1.ctaLoading.minWidth or 0, var2.Size.Size_800),
 		radius = radius.Medium
 	}) else nil
-	t_3.PrimaryActionCta = var1
-	t_3.SecondaryActionCta = if p1.layoutMode == enumsModule.RowLayoutMode.Wide and p1.secondaryCta and (p1.secondaryCta.icon and p1.secondaryCta.onActivated) then reactModule.createElement(iconButton, {
+	t_4.PrimaryActionCta = var1
+	t_4.SecondaryActionCta = if p1.layoutMode == enumsModule.RowLayoutMode.Wide and p1.secondaryCta and (p1.secondaryCta.icon and p1.secondaryCta.onActivated) then reactModule.createElement(iconButton, {
 		icon = p1.secondaryCta.icon,
 		size = iconSize.Small,
 		variant = buttonVariant.Utility,
@@ -139,11 +148,11 @@ return reactModule.memo(function(p1)
 		isLoading = p1.secondaryCta.isLoading,
 		LayoutOrder = if fFlagAddStatusIndicatorToBaseRow then 3 else 2
 	}) else nil
-	t_3.TrailingContentWrapper = if p1.layoutMode == enumsModule.RowLayoutMode.Wide and p1.trailingContent then reactModule.createElement(view, {
+	t_4.TrailingContentWrapper = if p1.layoutMode == enumsModule.RowLayoutMode.Wide and p1.trailingContent then reactModule.createElement(view, {
 		tag = "auto-xy",
 		LayoutOrder = if fFlagAddStatusIndicatorToBaseRow then 4 else 3
 	}, { Content = p1.trailingContent }) else nil
-	t_1.TrailingSection = createElement_1(view, t_2, t_3)
+	t_2.TrailingSection = createElement_1(view, t_3, t_4)
 	
-	return createElement(view, t, t_1)
+	return createElement(view, t_1, t_2)
 end)

@@ -60,6 +60,7 @@ return reactModule.memo(function(p1)
 		end, { configKey }),
 		contentTag = compositionTags.ContentRegion.Body,
 		stickyContentTag = compositionTags.ContentRegion.Header,
+		scrollPerformanceIntervalName = chartsConstantsModule.ScrollPerformanceIntervalName,
 		pageTopPadding = p1.pageTopPadding,
 		feedTopMargin = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.feedTopMargin else nil,
 		scrollAway = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.scrollAway else nil

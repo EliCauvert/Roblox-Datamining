@@ -46,6 +46,21 @@ return function()
 				recentlyBlockedAuthorIds = cloned
 			})
 		end,
+		unmarkAuthorRecentlyBlocked = function(p1)
+			-- upvalues: var1 (ref), var2 (ref)
+			local var3 = var1(false)
+			
+			if var3.recentlyBlockedAuthorIds[p1] == true then
+				local cloned = table.clone(var3.recentlyBlockedAuthorIds)
+				cloned[p1] = nil
+				var2({
+					sessionHiddenCommentIds = var3.sessionHiddenCommentIds,
+					recentlyBlockedAuthorIds = cloned
+				})
+				
+				return
+			end
+		end,
 		isCommentSessionHidden = function(p1)
 			-- upvalues: var1 (ref)
 			return var1(false).sessionHiddenCommentIds[p1] == true

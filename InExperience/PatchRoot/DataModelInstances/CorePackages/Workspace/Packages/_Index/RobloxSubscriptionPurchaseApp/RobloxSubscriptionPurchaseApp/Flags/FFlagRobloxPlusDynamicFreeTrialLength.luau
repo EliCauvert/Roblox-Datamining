@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("RobloxPlusDynamicFreeTrialLength", false) and game:GetEngineFeature("EnableSubscriptionFreeTrialOfferDetails")
+﻿return if game:DefineFastFlag("RobloxPlusDynamicFreeTrialLength", false) then game:GetEngineFeature("EnableSubscriptionFreeTrialOfferDetails") or require(script.Parent.FFlagRobloxSubscriptionProductsDirectFetch) else game:DefineFastFlag("RobloxPlusDynamicFreeTrialLength", false)

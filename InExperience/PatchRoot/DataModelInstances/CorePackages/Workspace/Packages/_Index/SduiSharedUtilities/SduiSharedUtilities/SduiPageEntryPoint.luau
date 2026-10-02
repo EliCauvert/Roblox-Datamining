@@ -36,10 +36,12 @@ local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagL
 local fFlagSduiPageEntryPointResolvedSlot = require(parent.SharedFlags).FFlagSduiPageEntryPointResolvedSlot
 local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
 local fFlagSduiSrpScrollAway = require(parent.SharedFlags).FFlagSduiSrpScrollAway
+local fFlagSduiVerticalFeedScrollTelemetry = require(parent.SharedFlags).FFlagSduiVerticalFeedScrollTelemetry
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
+local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 
 local function SduiPageEntryPoint(p1, p2)
-	-- upvalues: useTokens (ref), useDispatch (ref), fFlagSduiPageEntryUseSharedHooks (ref), useComponentConfigModule (ref), reactModule (ref), getSduiApiStoreModule (ref), signalsReactModule (ref), useUiStatusModule (ref), uiStatus (ref), fFlagSduiPageEntryPointResolvedSlot (ref), useComponentLifecycleTimingModule (ref), useLocalAnalyticsDataModule (ref), useStatefulRefModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), reactFocusNavigationModule (ref), useCloseWithBackButton (ref), fFlagLuaAppSduiPageEntryPointSnackbar (ref), usePageEntrySnackbarModule (ref), useDataUpdatedTimestampModule (ref), useCreateClientBindingSduiContextModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagLuaAppSduiVideoThumbnail (ref), getSduiComponentWrapper (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), fFlagSduiSrpScrollAway (ref), sduiPageNavigationHeaderModule (ref), compositionTags (ref), navButtonType (ref), foundationModule (ref), loading (ref), sduiPageErrorStateModule (ref), reactRobloxModule (ref), snackbar (ref), coreGuiService (ref)
+	-- upvalues: useTokens (ref), useDispatch (ref), fFlagSduiPageEntryUseSharedHooks (ref), useComponentConfigModule (ref), reactModule (ref), getSduiApiStoreModule (ref), signalsReactModule (ref), useUiStatusModule (ref), uiStatus (ref), fFlagSduiPageEntryPointResolvedSlot (ref), useComponentLifecycleTimingModule (ref), useLocalAnalyticsDataModule (ref), useStatefulRefModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), reactFocusNavigationModule (ref), useCloseWithBackButton (ref), fFlagLuaAppSduiPageEntryPointSnackbar (ref), usePageEntrySnackbarModule (ref), useDataUpdatedTimestampModule (ref), useCreateClientBindingSduiContextModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), getSduiComponentWrapper (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), fFlagSduiSrpScrollAway (ref), fFlagSduiVerticalFeedScrollTelemetry (ref), sduiPageNavigationHeaderModule (ref), compositionTags (ref), navButtonType (ref), foundationModule (ref), loading (ref), sduiPageErrorStateModule (ref), reactRobloxModule (ref), snackbar (ref), coreGuiService (ref)
 	local appPage = p1.appPage
 	local configKey = p1.configKey or appPage
 	local var2 = `SduiPageEntryPoint-{configKey}`
@@ -65,7 +67,7 @@ local function SduiPageEntryPoint(p1, p2)
 		local _ = true
 		local var13 = typeof(var5)
 		local _ = var13 == "table" and ((if var13 == "table" then fFlagSduiPageEntryPointResolvedSlot else nil) and var10)
-		var11(var12, u344)
+		var11(var12, u357)
 	else
 		reactModule.useEffect(function()
 			-- upvalues: pageTimer (ref)
@@ -121,10 +123,10 @@ local function SduiPageEntryPoint(p1, p2)
 	local var24 = if fFlagLuaAppSduiPageEntryPointSnackbar then usePageEntrySnackbarModule(configKey) else nil
 	local var25 = useDataUpdatedTimestampModule(configKey, p1.identifier)
 	local var26, var27 = reactModule.useState(nil)
-	local var28 = useCreateClientBindingSduiContextModule(appPage, var26, nil, var25, configKey, nil, p1.routeName, if fFlagLuaAppSduiStickyHeaderScrollAway then p1.scrollAway else nil, if fFlagLuaAppSduiVideoThumbnail then p1.videoPlaybackContext else nil)
+	local var28 = useCreateClientBindingSduiContextModule(appPage, var26, nil, var25, configKey, nil, p1.routeName, if fFlagLuaAppSduiStickyHeaderScrollAway then p1.scrollAway else nil, if fFlagLuaAppSduiVideoThumbnail or fFlagLuaAppOneByTwoHoverIdleAutoplay then p1.videoPlaybackContext else nil)
 	local var29 = var14 == nil
 	local var30 = reactModule.useMemo(function()
-		-- upvalues: var5 (write), getSduiComponentWrapper (copy), reactModule (copy), var2 (ref), var28 (ref), var16 (ref), p1 (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), fFlagLuaAppMediaGalleryGamepadSupport (copy), fFlagSduiSrpScrollAway (copy)
+		-- upvalues: var5 (write), getSduiComponentWrapper (copy), reactModule (copy), var2 (ref), var28 (ref), var16 (ref), p1 (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), fFlagLuaAppMediaGalleryGamepadSupport (copy), fFlagSduiSrpScrollAway (copy), fFlagSduiVerticalFeedScrollTelemetry (copy)
 		return if var5 == nil then nil else reactModule.createElement(getSduiComponentWrapper(var5), {
 			debugName = var2,
 			componentConfig = var5,
@@ -137,7 +139,8 @@ local function SduiPageEntryPoint(p1, p2)
 				scrollToSelectionRevealOnly = if fFlagLuaAppMediaGalleryGamepadSupport then p1.scrollToSelectionRevealOnly else nil,
 				onScrollDirectionChanged = if fFlagSduiSrpScrollAway then p1.onScrollDirectionChanged else nil,
 				defaultContentTag = p1.contentTag,
-				defaultStickyContentTag = p1.stickyContentTag
+				defaultStickyContentTag = p1.stickyContentTag,
+				scrollPerformanceIntervalName = if fFlagSduiVerticalFeedScrollTelemetry then p1.scrollPerformanceIntervalName else nil
 			}
 		})
 	end, {
@@ -146,7 +149,8 @@ local function SduiPageEntryPoint(p1, p2)
 		if fFlagLuaAppSduiStickyHeaderScrollAway then p1.feedTopMargin else nil,
 		p1.scrollingFrameRef,
 		if fFlagLuaAppMediaGalleryGamepadSupport then p1.scrollToSelectionRevealOnly else nil,
-		if fFlagSduiSrpScrollAway then p1.onScrollDirectionChanged else nil
+		if fFlagSduiSrpScrollAway then p1.onScrollDirectionChanged else nil,
+		if fFlagSduiVerticalFeedScrollTelemetry then p1.scrollPerformanceIntervalName else nil
 	})
 	local var31 = p1.scrollingFrameRef ~= nil
 	local createElement = reactModule.createElement

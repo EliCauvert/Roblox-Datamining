@@ -52,6 +52,12 @@ return {
 			end
 		end
 	end,
+	setTempHideSnapshot = function(value)
+		-- upvalues: var6 (write)
+		if var6 ~= nil then
+			var6 = value
+		end
+	end,
 	reset = function()
 		-- upvalues: var3 (write), var6 (write), var5 (ref), var2 (ref)
 		var3 = false

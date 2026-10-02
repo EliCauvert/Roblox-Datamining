@@ -13,9 +13,11 @@ local radius = foundationModule.Enums.Radius
 local fFlagAppChatMomentShareCardUseFoundationImageModule = require(appChat.Flags.FFlagAppChatMomentShareCardUseFoundationImage)
 local fFlagAppChatNativeFoundationCornerRadiiModule = require(appChat.Flags.FFlagAppChatNativeFoundationCornerRadii)
 local fFlagAppChatMomentShareCardLoadingSkeletonsModule = require(appChat.Flags.FFlagAppChatMomentShareCardLoadingSkeletons)
+local fFlagAppChatMomentShareCardHideMomentsGlyphModule = require(appChat.Flags.FFlagAppChatMomentShareCardHideMomentsGlyph)
 local fFlagAppChatMomentShareCardUseFoundationImageModule_1 = fFlagAppChatNativeFoundationCornerRadiiModule and fFlagAppChatMomentShareCardUseFoundationImageModule
 local gameCardErrorModule = require(script.Parent.Parent.GameCardComponents.GameCardError)
 local momentDetailsStatusModule = require(script.Parent.MomentDetailsStatus)
+local momentShareCardUnavailableModule = require(script.Parent.MomentShareCardUnavailable)
 
 local function _(p1)
 	return if type(p1) == "number" then UDim.new(0, p1) else p1
@@ -42,9 +44,11 @@ local function roundedCorner(value)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: momentDetailsStatusModule (ref), reactModule (ref), gameCardErrorModule (ref), view (ref), roundedCorner (ref), skeleton (ref), radius (ref), fFlagAppChatMomentShareCardUseFoundationImageModule_1 (ref), image (ref), icon (ref), iconName (ref), iconSize (ref), fFlagAppChatNativeFoundationCornerRadiiModule (ref), fFlagAppChatMomentShareCardLoadingSkeletonsModule (ref), text (ref)
+	-- upvalues: momentDetailsStatusModule (ref), reactModule (ref), gameCardErrorModule (ref), momentShareCardUnavailableModule (ref), view (ref), roundedCorner (ref), skeleton (ref), radius (ref), fFlagAppChatMomentShareCardUseFoundationImageModule_1 (ref), image (ref), icon (ref), iconName (ref), iconSize (ref), fFlagAppChatNativeFoundationCornerRadiiModule (ref), fFlagAppChatMomentShareCardLoadingSkeletonsModule (ref), text (ref), fFlagAppChatMomentShareCardHideMomentsGlyphModule (ref)
 	if p1.status == momentDetailsStatusModule.Error then
 		return reactModule.createElement(gameCardErrorModule)
+	elseif p1.status == momentDetailsStatusModule.Unavailable or p1.status == momentDetailsStatusModule.Locked then
+		return reactModule.createElement(momentShareCardUnavailableModule)
 	end
 	local var1
 	local createElement = reactModule.createElement
@@ -141,7 +145,7 @@ return reactModule.memo(function(p1)
 			testId = "MomentShareMetadata",
 			LayoutOrder = 2
 		}, {
-			MomentsGlyph = reactModule.createElement(icon, {
+			MomentsGlyph = if fFlagAppChatMomentShareCardHideMomentsGlyphModule then nil else reactModule.createElement(icon, {
 				testId = "MomentShareMomentsGlyph",
 				LayoutOrder = 1,
 				name = iconName.Moments,

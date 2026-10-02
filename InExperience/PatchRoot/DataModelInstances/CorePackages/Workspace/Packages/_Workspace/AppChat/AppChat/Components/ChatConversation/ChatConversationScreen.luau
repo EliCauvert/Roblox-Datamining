@@ -13,6 +13,7 @@ local fFlagAppChatIxpScreenExposureModule = require(appChat.Flags.FFlagAppChatIx
 local fFlagAppChatIxpParallelScreenLayersModule = require(appChat.Flags.FFlagAppChatIxpParallelScreenLayers)
 local fStringAppChatConversationComposerIxpLayerModule = require(appChat.Flags.FStringAppChatConversationComposerIxpLayer)
 local fStringAppChatConversationPerformanceIxpLayerModule = require(appChat.Flags.FStringAppChatConversationPerformanceIxpLayer)
+local fStringAppChatConversationMessagesIxpLayerModule = require(appChat.Flags.FStringAppChatConversationMessagesIxpLayer)
 local fFlagAppChatMomentShareCardModule = require(appChat.Flags.FFlagAppChatMomentShareCard)
 local IXPNavigationUtilsModule = require(appChat.Utils.IXPNavigationUtils)
 local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
@@ -56,11 +57,12 @@ function chatConversationScreen.navigationOptions(p1)
 end
 
 function chatConversationScreen.init(p1)
-	-- upvalues: fFlagAppChatIxpScreenExposureModule (ref), IXPNavigationUtilsModule (ref), fFlagAppChatIxpParallelScreenLayersModule (ref), fStringAppChatConversationComposerIxpLayerModule (ref), fStringAppChatConversationPerformanceIxpLayerModule (ref), roactModule (ref), loggerModule (ref), enumScreensModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), fFlagAppChatFixBackButtonOnRotationModule (ref), canPopParentStackModule (ref), getTopBarStoreModule (ref), cryoModule (ref), readingMessagesIsEnabledModule (ref)
+	-- upvalues: fFlagAppChatIxpScreenExposureModule (ref), IXPNavigationUtilsModule (ref), fFlagAppChatIxpParallelScreenLayersModule (ref), fStringAppChatConversationComposerIxpLayerModule (ref), fStringAppChatConversationPerformanceIxpLayerModule (ref), fStringAppChatConversationMessagesIxpLayerModule (ref), roactModule (ref), loggerModule (ref), enumScreensModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), fFlagAppChatFixBackButtonOnRotationModule (ref), canPopParentStackModule (ref), getTopBarStoreModule (ref), cryoModule (ref), readingMessagesIsEnabledModule (ref)
 	local var1, var2
 	p1.ixpSubscription = if fFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, "Party.ConversationPage") else nil
 	p1.composerIxpSubscription = if fFlagAppChatIxpScreenExposureModule and fFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, fStringAppChatConversationComposerIxpLayerModule) else nil
 	p1.performanceIxpSubscription = if fFlagAppChatIxpScreenExposureModule and fFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, fStringAppChatConversationPerformanceIxpLayerModule) else nil
+	p1.messagesIxpSubscription = if fFlagAppChatIxpScreenExposureModule and fFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, fStringAppChatConversationMessagesIxpLayerModule) else nil
 	p1.toastProps = nil
 	p1.inputBoxRef = roactModule.createRef()
 	p1.lastHeaderText = nil
@@ -347,6 +349,9 @@ function chatConversationScreen.willUnmount(p1)
 	end
 	if p1.performanceIxpSubscription then
 		p1.performanceIxpSubscription.remove()
+	end
+	if p1.messagesIxpSubscription then
+		p1.messagesIxpSubscription.remove()
 	end
 end
 

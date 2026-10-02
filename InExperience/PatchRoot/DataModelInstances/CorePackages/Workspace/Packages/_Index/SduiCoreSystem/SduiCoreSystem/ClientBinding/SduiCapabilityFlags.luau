@@ -39,5 +39,6 @@ return {
 	CAPABILITY_SUPPORTS_EXTENDED_CLIENT_CAPABILITIES = sharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets,
 	CAPABILITY_SUPPORTS_PREFERRED_TEXT_SIZE_LINE_BUDGETS = sharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets,
 	CAPABILITY_SUPPORTS_CONTAINER_QUERIES = sharedFlagsModule.FFlagSduiContainerQueries,
-	CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL = sharedFlagsModule.FFlagEnableGameJoinEarlyAccess
+	CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL = sharedFlagsModule.FFlagEnableGameJoinEarlyAccess,
+	CAPABILITY_SUPPORTS_EDP_INFO_TABLE_STABLE_ITEM_KEYS = sharedFlagsModule.FFlagInfoTableStableItemKeys
 }

@@ -23,8 +23,7 @@ return reactModule.memo(function(p1)
 				-- upvalues: p1 (ref), v (ref)
 				p1.onTabActivated(v.id)
 			end,
-			selection = if p1.focusNavEnabled and not var2 then { Selectable = false } else nil,
-			ref = if p1.focusNavEnabled and var2 and i == 1 then p1.firstTabRef else nil
+			selection = if p1.focusNavEnabled and not var2 then { Selectable = false } else nil
 		}, {
 			Label = reactModule.createElement(foundationModule.Text, {
 				Text = v.text,

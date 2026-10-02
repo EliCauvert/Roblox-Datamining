@@ -488,6 +488,7 @@ t.AllAssetUploadCategories = {
 	validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
 	validationEnumsModule.UploadCategory.DYNAMIC_HEAD,
 	validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+	validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
 	validationEnumsModule.UploadCategory.RIGID_ACCESSORY,
 	validationEnumsModule.UploadCategory.EMOTE_ANIMATION
 }

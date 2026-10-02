@@ -37,7 +37,6 @@ local fFlagTCLearnMoreLinkModule = require(trustedContacts.Flags.FFlagTCLearnMor
 local fFlagTrustedContactsModalFixFocusNavigationModule = require(trustedContacts.Flags.FFlagTrustedContactsModalFixFocusNavigation)
 local fFlagTrustedContactsSheetFocusNavigationModule = require(trustedContacts.Flags.FFlagTrustedContactsSheetFocusNavigation)
 local fFlagTCModalUseFoundationOverlay = require(parent.SharedFlags).FFlagTCModalUseFoundationOverlay
-local fFlagTrustedFriendsUseEnumCTA = require(parent.SharedFlags).FFlagTrustedFriendsUseEnumCTA
 local fFlagTrustedFriendsUseFoundationSheet = require(parent.SharedFlags).FFlagTrustedFriendsUseFoundationSheet
 local _ = require(script.Parent.useModalButtonActions)
 local t = {
@@ -46,7 +45,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useLayerCollector (ref), useScreenSize (ref), responsiveModule (ref), fFlagTrustedContactsModalFixFocusNavigationModule (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), fFlagTrustedContactsSheetFocusNavigationModule (ref), fFlagTrustedFriendsUseFoundationSheet (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), useMostRecentOrDefaultFocusBehavior (ref), useFocusOnMount (ref), TCMountMinLoadingTimeMs (ref), useTokens (ref), loading (ref), iconSize (ref), sheet (ref), text (ref), fFlagTCLearnMoreLinkModule (ref), view (ref), socialMetadataSectionModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref), fFlagTrustedFriendsUseEnumCTA (ref), dialog (ref), dialogSize (ref), fFlagTCModalUseFoundationOverlay (ref), onCloseCallbackReason (ref), TCDialogCloseBtn (ref), fullPageModal (ref), partialPageModal (ref), scrollView (ref), foundationModule (ref), sources (ref), focusRoot (ref)
+	-- upvalues: useLayerCollector (ref), useScreenSize (ref), responsiveModule (ref), fFlagTrustedContactsModalFixFocusNavigationModule (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), fFlagTrustedContactsSheetFocusNavigationModule (ref), fFlagTrustedFriendsUseFoundationSheet (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), useMostRecentOrDefaultFocusBehavior (ref), useFocusOnMount (ref), TCMountMinLoadingTimeMs (ref), useTokens (ref), loading (ref), iconSize (ref), sheet (ref), text (ref), fFlagTCLearnMoreLinkModule (ref), view (ref), socialMetadataSectionModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref), dialog (ref), dialogSize (ref), fFlagTCModalUseFoundationOverlay (ref), onCloseCallbackReason (ref), TCDialogCloseBtn (ref), fullPageModal (ref), partialPageModal (ref), scrollView (ref), foundationModule (ref), sources (ref), focusRoot (ref)
 	local isVerticallyConstrained = p1.isVerticallyConstrained
 	local var1 = useLayerCollector()
 	local var2 = useScreenSize()
@@ -171,7 +170,7 @@ return function(p1)
 					fillBehavior = fillBehavior.Fill,
 					width = UDim.new(1, 0),
 					ref = var9,
-					isDisabled = if fFlagTrustedFriendsUseEnumCTA then var16.isDisabled else nil
+					isDisabled = var16.isDisabled
 				}) or nil,
 				Second = var17 and reactModule.createElement(button, {
 					LayoutOrder = 2,
@@ -182,7 +181,7 @@ return function(p1)
 					variant = buttonVariant.Standard,
 					fillBehavior = fillBehavior.Fill,
 					width = UDim.new(1, 0),
-					isDisabled = if fFlagTrustedFriendsUseEnumCTA then var17.isDisabled else nil
+					isDisabled = var17.isDisabled
 				}) or nil
 			}) else nil
 		})
@@ -250,7 +249,7 @@ return function(p1)
 						icon = var16.icon,
 						isLoading = var16.isLoading,
 						ref = var9,
-						isDisabled = if fFlagTrustedFriendsUseEnumCTA then var16.isDisabled else nil
+						isDisabled = var16.isDisabled
 					} else nil,
 					if var17 then {
 						variant = buttonVariant.Standard,
@@ -258,7 +257,7 @@ return function(p1)
 						onActivated = var17.onActivated,
 						icon = var17.icon,
 						isLoading = var17.isLoading,
-						isDisabled = if fFlagTrustedFriendsUseEnumCTA then var17.isDisabled else nil
+						isDisabled = var17.isDisabled
 					} else nil
 				}
 			})
@@ -339,7 +338,7 @@ return function(p1)
 						variant = buttonVariant.Emphasis,
 						fillBehavior = fillBehavior.Fill,
 						ref = var9,
-						isDisabled = if fFlagTrustedFriendsUseEnumCTA then var16.isDisabled else nil
+						isDisabled = var16.isDisabled
 					}) or nil,
 					Second = var17 and reactModule.createElement(button, {
 						LayoutOrder = 2,
@@ -349,7 +348,7 @@ return function(p1)
 						isLoading = var17.isLoading,
 						variant = buttonVariant.Standard,
 						fillBehavior = fillBehavior.Fill,
-						isDisabled = if fFlagTrustedFriendsUseEnumCTA then var17.isDisabled else nil
+						isDisabled = var17.isDisabled
 					}) or nil
 				}) else nil
 			})

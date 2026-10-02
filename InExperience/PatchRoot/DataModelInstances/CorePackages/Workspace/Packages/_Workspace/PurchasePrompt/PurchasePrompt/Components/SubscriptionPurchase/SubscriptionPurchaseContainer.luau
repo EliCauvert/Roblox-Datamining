@@ -19,12 +19,10 @@ local externalEventConnectionModule = require(purchasePrompt.Components.Connecti
 local subscriptionPurchaseOverlayModule = require(script.Parent.SubscriptionPurchaseOverlay)
 local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
 local name = roact.Component:extend(script.Name)
-local getFFlagFixPlayerGuiSelectionBugOnPromptExitModule = require(purchasePrompt.Flags.GetFFlagFixPlayerGuiSelectionBugOnPromptExit)
 local getFFlagEnableSubscriptionPurchaseToastModule = require(purchasePrompt.Flags.GetFFlagEnableSubscriptionPurchaseToast)
 local fFlagSetMenuOnPurchasePromptModule = require(purchasePrompt.Flags.FFlagSetMenuOnPurchasePrompt)
 
 function name.init(p1)
-	-- upvalues: getFFlagFixPlayerGuiSelectionBugOnPromptExitModule (ref)
 	p1.state = { screenSize = Vector2.new(0, 0) }
 	
 	function p0.changeScreenSize(p2)
@@ -34,43 +32,33 @@ function name.init(p1)
 		end
 	end
 	
-	if getFFlagFixPlayerGuiSelectionBugOnPromptExitModule() then
-		p1.savedSelectedCoreObject = nil
-		
-		function p0.endPurchase()
-			-- upvalues: p1 (ref)
-			p1:restoreSelectedObject()
-			p1.props.completeRequest()
-		end
+	p1.savedSelectedCoreObject = nil
+	
+	function p0.endPurchase()
+		-- upvalues: p1 (ref)
+		p1:restoreSelectedObject()
+		p1.props.completeRequest()
 	end
 end
 
 function name.saveSelectedObject(p1)
-	-- upvalues: getFFlagFixPlayerGuiSelectionBugOnPromptExitModule (ref), guiService (ref)
-	if getFFlagFixPlayerGuiSelectionBugOnPromptExitModule() then
-		p1.savedSelectedCoreObject = guiService.SelectedCoreObject
-		guiService.SelectedCoreObject = nil
-		
-		return
-	end
+	-- upvalues: guiService (ref)
+	p1.savedSelectedCoreObject = guiService.SelectedCoreObject
+	guiService.SelectedCoreObject = nil
 end
 
 function name.restoreSelectedObject(p1)
-	-- upvalues: getFFlagFixPlayerGuiSelectionBugOnPromptExitModule (ref), coreGuiService (ref), guiService (ref)
-	if not getFFlagFixPlayerGuiSelectionBugOnPromptExitModule() then return end
+	-- upvalues: coreGuiService (ref), guiService (ref)
 	if p1.savedSelectedCoreObject == nil or p1.savedSelectedCoreObject:IsDescendantOf(coreGuiService) then
 		guiService.SelectedCoreObject = p1.savedSelectedCoreObject
 	end
 end
 
 function name.createElement(p1)
-	-- upvalues: getFFlagFixPlayerGuiSelectionBugOnPromptExitModule (ref), roact (ref), subscriptionPurchaseOverlayModule (ref), externalEventConnectionModule (ref), guiService (ref), fFlagSetMenuOnPurchasePromptModule (ref)
+	-- upvalues: roact (ref), subscriptionPurchaseOverlayModule (ref), externalEventConnectionModule (ref), guiService (ref), fFlagSetMenuOnPurchasePromptModule (ref)
 	local props = p1.props
 	local state = p1.state
-	
-	if getFFlagFixPlayerGuiSelectionBugOnPromptExitModule() then
-		p1:saveSelectedObject()
-	end
+	p1:saveSelectedObject()
 	local primaryPaymentProviderType = nil
 	local var1 = nil
 	local subscriptionPurchaseInfo = props.subscriptionPurchaseInfo
@@ -104,7 +92,7 @@ function name.createElement(p1)
 			isGamepadEnabled = props.isGamepadEnabled,
 			isTestingMode = props.subscriptionPurchaseInfo.IsTestingMode,
 			promptSubscriptionPurchase = props.promptSubscriptionPurchase,
-			endPurchase = if getFFlagFixPlayerGuiSelectionBugOnPromptExitModule() then p1.endPurchase else props.completeRequest,
+			endPurchase = p1.endPurchase,
 			onAnalyticEvent = props.onAnalyticEvent,
 			setCurrentToastMessage = props.setCurrentToastMessage
 		}),

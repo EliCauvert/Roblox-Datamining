@@ -100,7 +100,5 @@ return {
 	UserLibConstants = require(parent.UserLib).Utils.Constants,
 	useFocusGuiObject = require(parent.ReactFocusNavigation).useFocusGuiObject,
 	AppHeaderBar = require(parent.AppHeaderBar),
-	GetFFlagFixConnectTabSearchBarHeight = require(parent.SharedFlags).GetFFlagFixConnectTabSearchBarHeight,
-	FFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole,
-	GuiService = game:GetService("GuiService")
+	GetFFlagFixConnectTabSearchBarHeight = require(parent.SharedFlags).GetFFlagFixConnectTabSearchBarHeight
 }

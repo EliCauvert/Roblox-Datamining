@@ -46,10 +46,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var2 = useTokensModule()
 	local var3 = useScaledValueModule(if flagsModule.FoundationEducationalTooltipRefresh then constantsModule.TOOLTIP_MAX_WIDTH else 320)
 	local var4 = useScaledValueModule(240)
-	local var5 = if var1.onClose then {
+	local var5 = if flagsModule.FoundationEducationalTooltipMinMediaWidth then if var1.media then var4 else var2.Size.Size_3000 else var4
+	local var6 = if var1.onClose then {
 		MaxSize = Vector2.new(var3 - var2.Size.Size_1200, 1e999)
 	} else nil
-	local var6 = reactModule.useMemo(function()
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: var1 (ref), flagsModule (copy), loggerModule (copy), inputSizeModule (copy), fillBehaviorModule (copy), dashModule (copy), reactModule (copy), buttonModule (copy)
 		local t = {}
 		
@@ -92,10 +93,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}, reactModule.createElement(presentationContextModule.Provider, {
 			value = if flagsModule.FoundationStableContextValues then t_1 else { colorNamespace = colorNamespaceModule.Inverse }
 		}, reactModule.createElement(viewModule, {
+			testId = var1.testId,
 			tag = if flagsModule.FoundationEducationalTooltipRefresh then "col auto-xy" else "col gap-medium auto-xy padding-bottom-medium",
 			sizeConstraint = {
 				MaxSize = Vector2.new(var3, 1e999),
-				MinSize = if flagsModule.FoundationEducationalTooltipRefresh then Vector2.new(var4, 0) else nil
+				MinSize = if flagsModule.FoundationEducationalTooltipRefresh then Vector2.new(var5, 0) else nil
 			}
 		}, {
 			CloseAffordanceContainer = if var1.onClose then reactModule.createElement("Folder", {}, {
@@ -118,21 +120,21 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					LayoutOrder = 1,
 					Text = translatorModule:FormatByKey("CommonUI.Controls.Label.PageCount", { current = var1.steps.current, total = var1.steps.total }),
 					tag = if flagsModule.FoundationEducationalTooltipRefresh then "auto-xy text-caption-medium text-align-x-left text-truncate-end content-inverse-default" else "auto-xy text-label-small text-align-x-left text-truncate-end content-inverse-default",
-					sizeConstraint = var5,
+					sizeConstraint = var6,
 					testId = `{var1.testId}--step-indicator`
 				}) else nil,
 				Header = if var1.title ~= "" then nil else reactModule.createElement(textModule, {
 					LayoutOrder = 2,
 					tag = "auto-xy text-title-large text-align-x-left text-truncate-split content-inverse-emphasis",
 					Text = var1.title,
-					sizeConstraint = var5,
+					sizeConstraint = var6,
 					testId = `{var1.testId}--header`
 				}),
 				Text = if var1.text and var1.text ~= "" then reactModule.createElement(textModule, {
 					LayoutOrder = 3,
-					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-inverse-default",
 					Text = var1.text,
-					padding = if flagsModule.FoundationEducationalTooltipRefresh then { top = UDim.new(0, var2.Size.Size_100) } else nil,
+					tag = if flagsModule.FoundationEducationalTooltipMinMediaWidth then "auto-xy text-body-medium text-wrap text-align-x-left content-inverse-default" else "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-inverse-default",
+					padding = if flagsModule.FoundationEducationalTooltipRefresh then if flagsModule.FoundationEducationalTooltipMinMediaWidth then if var1.title ~= "" then nil else { top = UDim.new(0, var2.Size.Size_100) } else { top = UDim.new(0, var2.Size.Size_100) } else nil,
 					testId = `{var1.testId}--text`
 				}) else nil
 			}),
@@ -142,12 +144,12 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			}, if flagsModule.FoundationEducationalTooltipRefresh then {
 				ButtonGroup = reactModule.createElement(buttonGroupModule, {
 					maxButtonCount = 2,
-					buttons = var6,
+					buttons = var7,
 					orientation = orientationModule.Horizontal,
 					size = inputSizeModule.Small,
 					testId = `{var1.testId}--actions`
 				})
-			} else var6) else nil
+			} else var7) else nil
 		})))
 	})
 end))

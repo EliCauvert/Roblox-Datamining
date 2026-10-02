@@ -32,6 +32,7 @@ local fFlagEnableLeftNavOnConsole = sharedFlagsModule.FFlagEnableLeftNavOnConsol
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
 local fFlagSocialCarouselPressXToViewProfile = sharedFlagsModule.FFlagSocialCarouselPressXToViewProfile
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
+local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
 local t = {
 	[Enum.KeyCode.Thumbstick1] = {
 		vertical = "rbxasset://textures/ui/Controls/DesignSystem/Thumbstick1Vertical.png",
@@ -76,6 +77,10 @@ table.insert(list_1, focusNavigationEventNameEnum.OpenItemDetailsPage)
 
 if fFlagAXMigrateCatalogPageInputBindings then
 	table.insert(list_1, focusNavigationEventNameEnum.ToggleTryOnManager)
+end
+if fFlagEnableSplitPane then
+	table.insert(list_1, focusNavigationEventNameEnum.CollapseAvatar)
+	table.insert(list_1, focusNavigationEventNameEnum.ExpandAvatar)
 end
 local t_1 = {
 	[Enum.KeyCode.ButtonA] = true,
@@ -176,7 +181,9 @@ local t_5 = {
 	[Enum.KeyCode.ButtonR3] = {
 		[focusNavigationEventNameEnum.ExitAvatarFullView] = t_3[Enum.KeyCode.ButtonR3],
 		[focusNavigationEventNameEnum.Fullscreen] = t_3[Enum.KeyCode.ButtonR3],
-		[focusNavigationEventNameEnum.ExitFullscreen] = t_3[Enum.KeyCode.ButtonR3]
+		[focusNavigationEventNameEnum.ExitFullscreen] = t_3[Enum.KeyCode.ButtonR3],
+		[focusNavigationEventNameEnum.CollapseAvatar] = if fFlagEnableSplitPane then t_3[Enum.KeyCode.ButtonR3] else nil,
+		[focusNavigationEventNameEnum.ExpandAvatar] = if fFlagEnableSplitPane then t_3[Enum.KeyCode.ButtonR3] else nil
 	},
 	[Enum.KeyCode.ButtonL3] = {
 		[focusNavigationEventNameEnum.OpenCatalogContextMenu] = t_3[Enum.KeyCode.ButtonL3],
@@ -274,7 +281,9 @@ local t_7 = {
 	[focusNavigationEventNameEnum.MoveClothingTile] = "Feature.Avatar.Title.Move",
 	[focusNavigationEventNameEnum.RemoveClothingTile] = "Feature.Catalog.Action.Remove",
 	[focusNavigationEventNameEnum.CancelAndReset] = "Feature.Catalog.Action.Cancel",
-	[focusNavigationEventNameEnum.ViewProfile] = if fFlagSocialCarouselPressXToViewProfile then "Feature.Profile.Action.ViewProfile" else nil
+	[focusNavigationEventNameEnum.ViewProfile] = if fFlagSocialCarouselPressXToViewProfile then "Feature.Profile.Action.ViewProfile" else nil,
+	[focusNavigationEventNameEnum.CollapseAvatar] = if fFlagEnableSplitPane then "Feature.SplitPane.Label.CollapseAvatar" else nil,
+	[focusNavigationEventNameEnum.ExpandAvatar] = if fFlagEnableSplitPane then "Feature.SplitPane.Label.ExpandAvatar" else nil
 }
 local t_8 = {
 	[focusNavigationEventNameEnum.HoldToPlay] = "Common.VisitGame.Label.Play",

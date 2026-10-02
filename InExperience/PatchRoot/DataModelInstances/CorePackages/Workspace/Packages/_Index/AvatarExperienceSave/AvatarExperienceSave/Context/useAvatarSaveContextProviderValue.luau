@@ -48,7 +48,6 @@ local getGearAssetIdFromEquippedAssets = avatarExperienceCommonModule.Utils.getG
 local getAssetIdToAssetTypeIdFromHumanoidDescription = avatarExperienceCommonModule.Utils.getAssetIdToAssetTypeIdFromHumanoidDescription
 local fIntAXMinSaveIntervalSeconds = game:DefineFastInt("FIntAXMinSaveIntervalSeconds", 2)
 local AXMaxUndoRedoHistory = game:DefineFastInt("AXMaxUndoRedoHistory", 20)
-local AXEnableMaxUndoRedoHistory = game:DefineFastFlag("AXEnableMaxUndoRedoHistory", false)
 local fFlagAXEnableManualSavingBlockingPrompt = avatarExperienceFlagsModule.FFlagAXEnableManualSavingBlockingPrompt
 local fFlagAXBackgroundsPersistence = avatarExperienceFlagsModule.FFlagAXBackgroundsPersistence
 local t = {
@@ -89,7 +88,7 @@ local function _(p1)
 end
 
 return function()
-	-- upvalues: useDispatch (ref), useNavigation (ref), useSelectorSignal (ref), selectCharacterDataModule (ref), tutilsModule (ref), selectHasAvatarDataModule (ref), useSignal (ref), reactModule (ref), signalsModule (ref), shouldInsertNewHistoryEntryModule (ref), dashModule (ref), AXEnableMaxUndoRedoHistory (ref), AXMaxUndoRedoHistory (ref), shouldReplaceLastHistoryEntryModule (ref), removeInvalidAssetsFromCharacterDataModule (ref), avatarExperienceCommonModule (ref), useComputedSignal (ref), saveStatusEnumModule (ref), checkHasChangesToSaveModule (ref), checkCharacterDataHasTryOnItemsModule (ref), getInvalidAssetIdsToAssetTypeIdMapModule (ref), getAssetIdToAssetTypeIdFromHumanoidDescription (ref), setCurrentToastMessage (ref), t_2 (ref), t_1 (ref), characterHistoryStateChangeButtonActivated (ref), t (ref), t_3 (ref), promiseModule (ref), fIntAXMinSaveIntervalSeconds (ref), buildHumanoidDescription (ref), getSaveDictModule (ref), fFlagAXBackgroundsPersistence (ref), avatarExperienceFlagsModule (ref), cryoModule (ref), saveProfileConfigurationModule (ref), getGearAssetIdFromEquippedAssets (ref), saveAvatarModule (ref), fFlagAXEnableManualSavingBlockingPrompt (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateToRoute (ref), actions (ref), avatarScreen (ref), t_4 (ref), registerCustomGetStateForAction (ref), customGetStateForAction (ref)
+	-- upvalues: useDispatch (ref), useNavigation (ref), useSelectorSignal (ref), selectCharacterDataModule (ref), tutilsModule (ref), selectHasAvatarDataModule (ref), useSignal (ref), reactModule (ref), signalsModule (ref), shouldInsertNewHistoryEntryModule (ref), dashModule (ref), AXMaxUndoRedoHistory (ref), shouldReplaceLastHistoryEntryModule (ref), removeInvalidAssetsFromCharacterDataModule (ref), avatarExperienceCommonModule (ref), useComputedSignal (ref), saveStatusEnumModule (ref), checkHasChangesToSaveModule (ref), checkCharacterDataHasTryOnItemsModule (ref), getInvalidAssetIdsToAssetTypeIdMapModule (ref), getAssetIdToAssetTypeIdFromHumanoidDescription (ref), setCurrentToastMessage (ref), t_2 (ref), t_1 (ref), characterHistoryStateChangeButtonActivated (ref), t (ref), t_3 (ref), promiseModule (ref), fIntAXMinSaveIntervalSeconds (ref), buildHumanoidDescription (ref), getSaveDictModule (ref), fFlagAXBackgroundsPersistence (ref), avatarExperienceFlagsModule (ref), cryoModule (ref), saveProfileConfigurationModule (ref), getGearAssetIdFromEquippedAssets (ref), saveAvatarModule (ref), fFlagAXEnableManualSavingBlockingPrompt (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateToRoute (ref), actions (ref), avatarScreen (ref), t_4 (ref), registerCustomGetStateForAction (ref), customGetStateForAction (ref)
 	local var2 = useDispatch()
 	local var3 = useNavigation()
 	local var4 = useSelectorSignal(selectCharacterDataModule, tutilsModule.deepEqual)
@@ -116,9 +115,9 @@ return function()
 		end)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var4 (ref), var6 (ref), var8 (ref), shouldInsertNewHistoryEntryModule (copy), dashModule (copy), AXEnableMaxUndoRedoHistory (copy), AXMaxUndoRedoHistory (copy), var7 (ref), var9 (ref), shouldReplaceLastHistoryEntryModule (copy)
+		-- upvalues: signalsModule (copy), var4 (ref), var6 (ref), var8 (ref), shouldInsertNewHistoryEntryModule (copy), dashModule (copy), AXMaxUndoRedoHistory (copy), var7 (ref), var9 (ref), shouldReplaceLastHistoryEntryModule (copy)
 		return signalsModule.createEffect(function(p1)
-			-- upvalues: var4 (copy), var6 (copy), var8 (copy), shouldInsertNewHistoryEntryModule (copy), dashModule (copy), AXEnableMaxUndoRedoHistory (copy), AXMaxUndoRedoHistory (copy), var7 (copy), var9 (copy), shouldReplaceLastHistoryEntryModule (copy)
+			-- upvalues: var4 (copy), var6 (copy), var8 (copy), shouldInsertNewHistoryEntryModule (copy), dashModule (copy), AXMaxUndoRedoHistory (copy), var7 (copy), var9 (copy), shouldReplaceLastHistoryEntryModule (copy)
 			local var18 = var4(p1)
 			local var19 = var6(false)
 			local var20 = var8(false)
@@ -127,24 +126,16 @@ return function()
 			if shouldInsertNewHistoryEntryModule(var21, var18) and #var19 > 0 then
 				local var22 = dashModule.slice(var19, 1, var20)
 				table.insert(var22, var18)
+				local var23 = var20 + 1
 				
-				if AXEnableMaxUndoRedoHistory then
-					local var23 = var20 + 1
-					
-					if AXMaxUndoRedoHistory < #var22 then
-						table.remove(var22, 1)
-						var23 -= 1
-					end
-					var7(var22)
-					var9(var23)
-					
-					return
-				else
-					var7(var22)
-					var9(var20 + 1)
-					
-					return
+				if AXMaxUndoRedoHistory < #var22 then
+					table.remove(var22, 1)
+					var23 -= 1
 				end
+				var7(var22)
+				var9(var23)
+				
+				return
 			elseif shouldReplaceLastHistoryEntryModule(var21, var18) and #var19 > 0 then
 				local var24 = dashModule.slice(var19)
 				var24[var20] = var18

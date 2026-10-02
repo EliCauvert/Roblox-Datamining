@@ -3,6 +3,7 @@ local parent = moments.Parent
 local httpService = game:GetService("HttpService")
 local foundationModule = require(parent.Foundation)
 local momentsCommonModule = require(parent.MomentsCommon)
+local fFlagMomentsOptimisticProfilePending = require(parent.SharedFlags).FFlagMomentsOptimisticProfilePending
 local tutilsModule = require(parent.tutils)
 local _ = require(moments.Components.Feed.FeedTypes)
 local fFlagMomentsTTSFeedPlaybackModule = require(moments.Flags.FFlagMomentsTTSFeedPlayback)
@@ -32,7 +33,7 @@ local function getMediaContents(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: getFFlagMomentsRenderPostAssetsModule (ref), httpService (ref), getRbxThumb (ref), thumbnailType (ref), fFlagMomentsTTSFeedPlaybackModule (ref), getMediaContents (ref), momentsGetPostAssetStoreModule (ref), deriveMomentFromPostModule (ref), tutilsModule (ref)
+	-- upvalues: getFFlagMomentsRenderPostAssetsModule (ref), fFlagMomentsOptimisticProfilePending (ref), httpService (ref), getRbxThumb (ref), thumbnailType (ref), fFlagMomentsTTSFeedPlaybackModule (ref), getMediaContents (ref), momentsGetPostAssetStoreModule (ref), deriveMomentFromPostModule (ref), tutilsModule (ref)
 	if p1.kind ~= "moment" then
 		return nil
 	end
@@ -43,11 +44,12 @@ return function(p1)
 		return nil
 	elseif getFFlagMomentsRenderPostAssetsModule() then
 		local function createMediaItem(p2, p3)
-			-- upvalues: httpService (copy), getRbxThumb (copy), thumbnailType (copy), fFlagMomentsTTSFeedPlaybackModule (copy), getMediaContents (copy)
+			-- upvalues: fFlagMomentsOptimisticProfilePending (copy), httpService (copy), getRbxThumb (copy), thumbnailType (copy), fFlagMomentsTTSFeedPlaybackModule (copy), getMediaContents (copy)
+			local var2 = if fFlagMomentsOptimisticProfilePending then p2.localContent else nil
 			local assetId = p2.assetId
 			local assetAccessContext = p2.metadata.assetAccessContext
-			local var2 = if assetAccessContext == nil or assetAccessContext == "" then nil else httpService:UrlEncode(assetAccessContext)
-			local var3 = if assetId > 0 then Content.fromUri(if var2 ~= nil then getRbxThumb(thumbnailType.Asset, assetId) else `{getRbxThumb(thumbnailType.Asset, assetId)}&accessContext={var2}`) else nil
+			local var3 = if assetAccessContext == nil or assetAccessContext == "" then nil else httpService:UrlEncode(assetAccessContext)
+			local var4 = if var2 ~= nil then if assetId > 0 then Content.fromUri(if var3 ~= nil then getRbxThumb(thumbnailType.Asset, assetId) else `{getRbxThumb(thumbnailType.Asset, assetId)}&accessContext={var3}`) else nil else var2
 			local edits = p2.metadata.edits
 			
 			if not fFlagMomentsTTSFeedPlaybackModule and edits ~= nil and edits.ttsAudios ~= nil then
@@ -55,14 +57,14 @@ return function(p1)
 				cloned.ttsAudios = nil
 				edits = cloned
 			end
-			local var4, var5 = getMediaContents(assetId, p2.metadata.captureType, var2)
+			local var5, var6 = getMediaContents(assetId, p2.metadata.captureType, var3)
 			
 			return {
 				momentId = p2.momentId,
 				sourceKey = p3,
-				content = var4,
-				preloadContent = var5,
-				posterContent = var3,
+				content = var2 or var5,
+				preloadContent = if var2 == nil then var6 else nil,
+				posterContent = var4,
 				captureType = p2.metadata.captureType,
 				edits = edits
 			}
@@ -97,9 +99,10 @@ return function(p1)
 		return var2
 	else
 		local assetId = moment.assetId
-		local assetAccessContext = moment.metadata.assetAccessContext
-		var1 = if assetAccessContext == nil or assetAccessContext == "" then nil else httpService:UrlEncode(assetAccessContext)
-		local var3 = if assetId > 0 then Content.fromUri(if var1 ~= nil then getRbxThumb(thumbnailType.Asset, assetId) else `{getRbxThumb(thumbnailType.Asset, assetId)}&accessContext={var1}`) else nil
+		local var3 = if fFlagMomentsOptimisticProfilePending then moment.localContent else nil
+		var1 = moment.metadata.assetAccessContext
+		local var4 = if var1 == nil or var1 == "" then nil else httpService:UrlEncode(var1)
+		local var5 = if var3 ~= nil then if assetId > 0 then Content.fromUri(if var4 ~= nil then getRbxThumb(thumbnailType.Asset, assetId) else `{getRbxThumb(thumbnailType.Asset, assetId)}&accessContext={var4}`) else nil else var3
 		local edits = moment.metadata.edits
 		
 		if not fFlagMomentsTTSFeedPlaybackModule and edits ~= nil and edits.ttsAudios ~= nil then
@@ -107,13 +110,13 @@ return function(p1)
 			cloned.ttsAudios = nil
 			edits = cloned
 		end
-		local var4, var5 = getMediaContents(assetId, moment.metadata.captureType, var1)
+		local var6, var7 = getMediaContents(assetId, moment.metadata.captureType, var4)
 		
 		return {
 			momentId = moment.momentId,
-			content = var4,
-			preloadContent = var5,
-			posterContent = var3,
+			content = var3 or var6,
+			preloadContent = if var3 == nil then var7 else nil,
+			posterContent = var5,
 			captureType = moment.metadata.captureType,
 			edits = edits
 		}

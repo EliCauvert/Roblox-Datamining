@@ -4,9 +4,11 @@ local parent_2 = parent_1.Parent
 local roactModule = require(parent_2.Roact)
 local tModule = require(parent_2.t)
 local cryoModule = require(parent_2.Cryo)
+local foundationFontFaceMigration = require(parent_2.Foundation).Utility.Flags.FoundationFontFaceMigration
 local withStyleModule = require(parent_1.Core.Style.withStyle)
 local controllerBarHintModule = require(script.Parent.ControllerBarHint)
 local getTextSizeModule = require(parent_1.Core.Text.GetTextSize)
+local getFontFromFontStyleModule = require(parent_1.Core.Text.GetFontFromFontStyle)
 local controllerBarHintInternalPadding = require(script.Parent.BarConstants).ControllerBarHintInternalPadding
 local defaultKeyLabelSize = require(parent.Menu.MenuConstants).DefaultKeyLabelSize
 local controllerBar = roactModule.PureComponent:extend("ControllerBar")
@@ -60,14 +62,14 @@ function controllerBar.getDerivedStateFromProps(p3)
 end
 
 function controllerBar.calculateHintSize(p3, p4, p5)
-	-- upvalues: getTextSizeModule (ref)
+	-- upvalues: getTextSizeModule (ref), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref)
 	local var6 = p4 - p3.state.requiredSpace
 	local var7 = p5.Header2.RelativeSize * p5.BaseSize
 	local var8 = p5.Header2.RelativeMinSize * p5.BaseSize
-	local x = getTextSizeModule(p3.state.hintStringsConcat, var8, p5.Header2.Font, Vector2.new(10000, 10000)).X
+	local x = getTextSizeModule(p3.state.hintStringsConcat, var8, if foundationFontFaceMigration then getFontFromFontStyleModule(p5.Header2) else p5.Header2.Font, Vector2.new(10000, 10000)).X
 	
 	if x <= var6 then
-		local x_1 = getTextSizeModule(p3.state.hintStringsConcat, var7, p5.Header2.Font, Vector2.new(10000, 10000)).X
+		local x_1 = getTextSizeModule(p3.state.hintStringsConcat, var7, if foundationFontFaceMigration then getFontFromFontStyleModule(p5.Header2) else p5.Header2.Font, Vector2.new(10000, 10000)).X
 		local var9 = (var7 - var8) / (x_1 - x)
 		
 		return nil, math.clamp(var6 * var9 + (var7 - var9 * x_1), var8, var7)

@@ -18,7 +18,7 @@ local emptyAndErrorStatesModule = require(parent.Components.Presentation.EmptyAn
 local resolveDisplayNameModule = require(parent.Common.resolveDisplayName)
 local getPeopleHeaderLabelModule = require(parent.Common.getPeopleHeaderLabel)
 local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
-local fFlagPlayerListReskinViewChangeTelemetryModule = require(parent.Flags.FFlagPlayerListReskinViewChangeTelemetry)
+local fFlagPlayerListReskinModule = require(parent.Flags.FFlagPlayerListReskin)
 local useLocalization = require(parent_1.Localization).Hooks.useLocalization
 local loadingState = emptyAndErrorStatesModule.LoadingState
 local emptyFriendsState = emptyAndErrorStatesModule.EmptyFriendsState
@@ -42,7 +42,7 @@ local _ = function(p1, p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: usePlatformLeaderboardModule (ref), useTokens (ref), constantsModule (ref), useReportPanelContentHeightModule (ref), reactModule (ref), useGamepadStickScrollModule (ref), var4 (ref), var2 (ref), var3 (ref), signalsReactModule (ref), signalsModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), fFlagPlayerListReskinViewChangeTelemetryModule (ref), var1 (write), parent (ref), playersService (ref), resolveDisplayNameModule (ref), getPeopleHeaderLabelModule (ref), serviceUnavailableState (ref), loadingState (ref), emptyFriendsState (ref), platformEntryViewModule (ref), scrollView (ref), view (ref), text (ref)
+	-- upvalues: usePlatformLeaderboardModule (ref), useTokens (ref), constantsModule (ref), useReportPanelContentHeightModule (ref), reactModule (ref), useGamepadStickScrollModule (ref), var4 (ref), var2 (ref), var3 (ref), signalsReactModule (ref), signalsModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), fFlagPlayerListReskinModule (ref), var1 (write), parent (ref), playersService (ref), resolveDisplayNameModule (ref), getPeopleHeaderLabelModule (ref), serviceUnavailableState (ref), loadingState (ref), emptyFriendsState (ref), platformEntryViewModule (ref), scrollView (ref), view (ref), text (ref)
 	local tab = p1.tab
 	local isFriends = tab == "Friends"
 	local var5 = p1.legacyPanelBackgroundColor ~= nil
@@ -206,7 +206,7 @@ return reactModule.memo(function(p1)
 		end
 	end, { var6, tab, var24, var20 })
 	
-	if fFlagPlayerListReskinViewChangeTelemetryModule then
+	if fFlagPlayerListReskinModule then
 		reactModule.useEffect(function()
 			-- upvalues: var5 (ref), loading (ref), var1 (copy), parent (copy), tab (ref)
 			if var5 or loading ~= "error" then return end
@@ -224,8 +224,8 @@ return reactModule.memo(function(p1)
 	local var34 = signalsReactModule.useSignalState(var19)
 	local var35 = getPeopleHeaderLabelModule()
 	local var36 = reactModule.useCallback(function()
-		-- upvalues: fFlagPlayerListReskinViewChangeTelemetryModule (copy), var5 (ref), var1 (copy), parent (copy), tab (ref), var6 (ref), loading_1 (ref), var21 (ref)
-		if fFlagPlayerListReskinViewChangeTelemetryModule and not var5 then
+		-- upvalues: fFlagPlayerListReskinModule (copy), var5 (ref), var1 (copy), parent (copy), tab (ref), var6 (ref), loading_1 (ref), var21 (ref)
+		if fFlagPlayerListReskinModule and not var5 then
 			if var1 == nil then
 				var1 = require(parent.Common.LeaderboardViewChangeTelemetry)
 			end

@@ -125,7 +125,7 @@ local function SizeRules(p3)
 	return t
 end
 
-local function TypographyRules(p4, p5)
+local function TypographyRules(p4, p5, p6)
 	-- upvalues: kebabToPascal (ref)
 	local t = {}
 	
@@ -134,7 +134,8 @@ local function TypographyRules(p4, p5)
 		table.insert(t, {
 			tag = `text-{i}`,
 			properties = {
-				Font = `$Font{var5}`,
+				Font = if p6 then nil else `$Font{var5}`,
+				FontFace = if p6 then `$Font{var5}` else nil,
 				TextSize = `$TextSize{var5}`,
 				LineHeight = v.LineHeight
 			},
@@ -164,7 +165,7 @@ local function TypographyRules(p4, p5)
 	return t
 end
 
-local function PaddingRules(p6, p7)
+local function PaddingRules(p7, p8)
 	-- upvalues: kebabToPascal (ref)
 	local t = {}
 	local t_1 = {
@@ -176,7 +177,7 @@ local function PaddingRules(p6, p7)
 		right = { "PaddingRight" }
 	}
 	
-	for i, v in p6 do
+	for i, v in p7 do
 		local var6 = kebabToPascal(v.name)
 		table.insert(t, {
 			pseudo = "UIPadding",
@@ -190,7 +191,7 @@ local function PaddingRules(p6, p7)
 			attributes = { { name = `Padding{var6}`, value = v.size } }
 		})
 	end
-	for i_1, v_1 in p7 do
+	for i_1, v_1 in p8 do
 		local var7 = kebabToPascal(v_1.name)
 		table.insert(t, {
 			pseudo = "UIPadding",
@@ -205,7 +206,7 @@ local function PaddingRules(p6, p7)
 		})
 	end
 	for i_2, v_2 in t_1 do
-		for i_3, v_3 in p6 do
+		for i_3, v_3 in p7 do
 			local var8 = kebabToPascal(v_3.name)
 			local t_2 = {}
 			
@@ -219,7 +220,7 @@ local function PaddingRules(p6, p7)
 				attributes = { { name = `Padding{var8}`, value = v_3.size } }
 			})
 		end
-		for i_3, v_3 in p7 do
+		for i_3, v_3 in p8 do
 			local var9 = kebabToPascal(v_3.name)
 			local t_2 = {}
 			
@@ -261,23 +262,26 @@ local function GuiObjectDefaultRules()
 	}
 end
 
-local function DefaultFontRules(p8)
+local function DefaultFontRules(p9, p10)
 	return {
 		{
 			tag = "text-defaults",
 			priority = -1,
-			properties = { Font = "$FontBodyLarge" },
+			properties = {
+				Font = if p10 then nil else "$FontBodyLarge",
+				FontFace = if p10 then "$FontBodyLarge" else nil
+			},
 			attributes = {
 				{
 					name = "FontBodyLarge",
-					value = p8.Typography.BodyLarge.Font
+					value = p9.Typography.BodyLarge.Font
 				}
 			}
 		}
 	}
 end
 
-local function DefaultColorRules(p8)
+local function DefaultColorRules(p9)
 	return {
 		{
 			tag = "text-color-defaults",
@@ -289,18 +293,18 @@ local function DefaultColorRules(p8)
 			attributes = {
 				{
 					name = "ColorContentDefaultColor3",
-					value = p8.Color.Content.Default.Color3
+					value = p9.Color.Content.Default.Color3
 				},
 				{
 					name = "ColorContentDefaultTransparency",
-					value = p8.Color.Content.Default.Transparency
+					value = p9.Color.Content.Default.Transparency
 				}
 			}
 		}
 	}
 end
 
-local function BackgroundRules(value, p8)
+local function BackgroundRules(value, p9)
 	-- upvalues: t (ref), tokenAttributePascalNameModule (ref), kebabToPascal (ref)
 	local t_1 = {}
 	
@@ -325,7 +329,7 @@ local function BackgroundRules(value, p8)
 			end
 		end
 	end
-	for i_1, v_1 in p8 do
+	for i_1, v_1 in p9 do
 		local var11 = kebabToPascal(i_1)
 		table.insert(t_1, {
 			tag = `bg-{i_1}`,
@@ -348,11 +352,11 @@ local function BackgroundRules(value, p8)
 	return t_1
 end
 
-local function StrokeSizeRules(p9)
+local function StrokeSizeRules(p10)
 	-- upvalues: kebabToPascal (ref)
 	local t = {}
 	
-	for i, v in p9 do
+	for i, v in p10 do
 		if v.name ~= "none" then
 			local var12 = kebabToPascal(v.name)
 			table.insert(t, {
@@ -366,11 +370,11 @@ local function StrokeSizeRules(p9)
 	return t
 end
 
-local function StrokeRules(p10, p11)
+local function StrokeRules(p11, p12)
 	-- upvalues: t (ref), tokenAttributePascalNameModule (ref), kebabToPascal (ref)
 	local t_1 = {}
 	
-	for i, v in p10 do
+	for i, v in p11 do
 		if table.find(t[i], "stroke") then
 			for i_1, v_1 in v do
 				local var13 = tokenAttributePascalNameModule(i, i_1)
@@ -392,7 +396,7 @@ local function StrokeRules(p10, p11)
 			end
 		end
 	end
-	for i_1, v_1 in p11 do
+	for i_1, v_1 in p12 do
 		local var14 = kebabToPascal(i_1)
 		table.insert(t_1, {
 			pseudo = "UIStroke",
@@ -427,11 +431,11 @@ local function StrokeRules(p10, p11)
 	return t_1
 end
 
-local function ContentRules(p12, p13)
+local function ContentRules(p13, p14)
 	-- upvalues: t (ref), tokenAttributePascalNameModule (ref), kebabToPascal (ref)
 	local t_1 = {}
 	
-	for i, v in p12 do
+	for i, v in p13 do
 		if table.find(t[i], "content") then
 			for i_1, v_1 in v do
 				local var15 = tokenAttributePascalNameModule(i, i_1)
@@ -454,7 +458,7 @@ local function ContentRules(p12, p13)
 			end
 		end
 	end
-	for i_1, v_1 in p13 do
+	for i_1, v_1 in p14 do
 		local var16 = kebabToPascal(i_1)
 		table.insert(t_1, {
 			tag = `content-{i_1}`,
@@ -479,11 +483,11 @@ local function ContentRules(p12, p13)
 	return t_1
 end
 
-local function DeprecatedColorRules(p14)
+local function DeprecatedColorRules(p15)
 	-- upvalues: tokenAttributePascalNameModule (ref)
 	local t = {}
 	
-	for i, v in p14.System do
+	for i, v in p15.System do
 		local var17 = i:sub(8)
 		local var18 = tokenAttributePascalNameModule("System", i)
 		table.insert(t, {
@@ -821,8 +825,8 @@ local function ClipsDescendantRules()
 	}
 end
 
-local _ = function(value, p15)
-	local var19 = 10 ^ p15
+local _ = function(value, p16)
+	local var19 = 10 ^ p16
 	
 	return math.round(value * var19) / var19
 end
@@ -851,20 +855,20 @@ local function AspectRatioRules()
 end
 
 return {
-	rulesGenerator = function(p15, p16)
+	rulesGenerator = function(p16, p17, p18)
 		-- upvalues: dashModule (ref), GuiObjectDefaultRules (ref), EngineDefaultBypassRules (ref), FlexItemRules (ref), TextRules (ref), AutomaticSizeRules (ref), PositionRules (ref), AnchorPointRules (ref), ClipsDescendantRules (ref), AspectRatioRules (ref), ListLayoutRules (ref), ListLayoutSpacingRules (ref), cornerRulesModule (ref), kebabToPascal (ref), shadowRulesModule (ref), SizeRules (ref), StrokeSizeRules (ref), PaddingRules (ref), DefaultColorRules (ref), DeprecatedColorRules (ref), BackgroundRules (ref), StrokeRules (ref), ContentRules (ref), DefaultFontRules (ref), DefaultSizeRules (ref), TypographyRules (ref)
-		local colors = p16.colors
-		local variants = p16.variants
-		local typography = p16.typography
+		local colors = p17.colors
+		local variants = p17.variants
+		local typography = p17.typography
 		
-		return dashModule.joinArrays(GuiObjectDefaultRules(), EngineDefaultBypassRules(), FlexItemRules(), TextRules(), AutomaticSizeRules(), PositionRules(), AnchorPointRules(), ClipsDescendantRules(), AspectRatioRules()), dashModule.joinArrays(ListLayoutRules(), ListLayoutSpacingRules(p16.gaps, p16.gutters), cornerRulesModule(p16.radii, function(p17)
+		return dashModule.joinArrays(GuiObjectDefaultRules(), EngineDefaultBypassRules(), FlexItemRules(), TextRules(), AutomaticSizeRules(), PositionRules(), AnchorPointRules(), ClipsDescendantRules(), AspectRatioRules()), dashModule.joinArrays(ListLayoutRules(), ListLayoutSpacingRules(p17.gaps, p17.gutters), cornerRulesModule(p17.radii, function(p19)
 			-- upvalues: kebabToPascal (copy)
-			local var19 = kebabToPascal(p17.name)
+			local var19 = kebabToPascal(p19.name)
 			
 			return {
 				cornerValue = `$Radius{var19}`,
-				attributes = { { name = `Radius{var19}`, value = p17.size } }
+				attributes = { { name = `Radius{var19}`, value = p19.size } }
 			}
-		end), shadowRulesModule(p15), SizeRules(p16.sizes), StrokeSizeRules(p16.strokes), PaddingRules(p16.paddings, p16.margins)), dashModule.joinArrays(DefaultColorRules(p15), DeprecatedColorRules(colors), BackgroundRules(colors, variants), StrokeRules(colors, variants), ContentRules(colors, variants)), dashModule.joinArrays(DefaultFontRules(p15), DefaultSizeRules(typography["body-large"], p15.Config.Text.NominalScale), TypographyRules(typography, p15.Config.Text.NominalScale))
+		end), shadowRulesModule(p16), SizeRules(p17.sizes), StrokeSizeRules(p17.strokes), PaddingRules(p17.paddings, p17.margins)), dashModule.joinArrays(DefaultColorRules(p16), DeprecatedColorRules(colors), BackgroundRules(colors, variants), StrokeRules(colors, variants), ContentRules(colors, variants)), dashModule.joinArrays(DefaultFontRules(p16, p18), DefaultSizeRules(typography["body-large"], p16.Config.Text.NominalScale), TypographyRules(typography, p16.Config.Text.NominalScale, p18))
 	end
 }

@@ -3,6 +3,7 @@
 return {
 	FeedVideoPlaybackContext = require(script.FeedVideoPlaybackContext),
 	VideoPlaybackCoordinator = require(script.VideoPlaybackCoordinator),
+	ViewportVideoAutoplayMode = require(script.ViewportVideoAutoplayMode),
 	VideoPlaybackDetectionMethod = require(script.VideoPlaybackDetectionMethod),
 	VideoPlaybackDetector = require(script.VideoPlaybackDetector),
 	ViewportVideoAutoplayController = require(script.ViewportVideoAutoplayController),

@@ -126,6 +126,30 @@ return {
 		end
 		return if next(t) == nil then {} else t
 	end,
+	makeVoicePublishSummaryFields = function(p3, p4, p5)
+		if p3 == nil then
+			return {}
+		end
+		local t = {}
+		
+		if p3.voiceId ~= nil then
+			t.ttsVoiceId = tostring(p3.voiceId)
+		end
+		if p3.text ~= nil then
+			t.ttsCharCount = tostring(utf8.len(p3.text) or #p3.text)
+		end
+		if p5 ~= nil and p5 > 0 then
+			t.ttsDuration = tostring(p5)
+		end
+		local startTime = p3.startTime or 0
+		t.ttsStartTimeSeconds = tostring(startTime)
+		
+		if p4 ~= nil then
+			t.ttsVideoDurationSeconds = tostring(p4)
+			t.ttsStartTimeFraction = tostring(if p4 > 0 then startTime / p4 else 0)
+		end
+		return t
+	end,
 	makeCaptureDescriptorFields = function(p3)
 		local t = {
 			sourcePlaceId = tostring(p3.SourcePlaceId),

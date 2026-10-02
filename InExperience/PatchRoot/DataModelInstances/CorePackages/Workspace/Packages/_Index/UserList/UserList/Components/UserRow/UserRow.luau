@@ -13,9 +13,10 @@ local fFlagFixUserRowCombinedName = require(parent.SharedFlags).FFlagFixUserRowC
 local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 local fFlagUserListUsernameFallbackConfig = require(parent.SharedFlags).FFlagUserListUsernameFallbackConfig
 local fFlagAddStatusIndicatorToBaseRow = require(parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
+local fFlagUserListSurfaceExtensions = require(parent.SharedFlags).FFlagUserListSurfaceExtensions
 
 return reactModule.memo(function(p1)
-	-- upvalues: useUserDataValuesModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), fFlagFixUserRowCombinedName (ref), fFlagUserListUsernameFallbackConfig (ref), foundationModule (ref), convertToFoundationPresenceEnum (ref), reactModule (ref), baseRowModule (ref), fFlagAddStatusIndicatorToBaseRow (ref), fFlagUserListCtaIntegrationEnabled (ref), enumsModule (ref)
+	-- upvalues: useUserDataValuesModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), fFlagFixUserRowCombinedName (ref), fFlagUserListUsernameFallbackConfig (ref), foundationModule (ref), convertToFoundationPresenceEnum (ref), reactModule (ref), baseRowModule (ref), fFlagAddStatusIndicatorToBaseRow (ref), fFlagUserListCtaIntegrationEnabled (ref), enumsModule (ref), fFlagUserListSurfaceExtensions (ref)
 	local var1 = useUserDataValuesModule(p1.entityId)
 	local var2 = if fFlagEnableBlackbirdCheck then useIsRobloxSubscriber(if p1.entityId then p1.entityId else nil) else nil
 	local var3 = if fFlagFixUserRowCombinedName then if var1.combinedName ~= "" then nil else var1.combinedName elseif var1.displayName ~= "" then nil else var1.displayName
@@ -40,6 +41,7 @@ return reactModule.memo(function(p1)
 		trailingContent = p1.trailingContent,
 		layoutOrder = p1.layoutOrder,
 		trustedConnectionIndicatorEnabled = p1.layoutMode == enumsModule.RowLayoutMode.Wide,
-		isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var2 else nil
+		isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var2 else nil,
+		disableRowActivation = if fFlagUserListSurfaceExtensions and p1.configs then p1.configs.disableRowActivation else nil
 	})
 end)

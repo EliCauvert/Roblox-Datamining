@@ -4,10 +4,13 @@ local appSplitViewModule = require(parent.AppSplitView)
 local splitView = appSplitViewModule.SplitView
 local enums = appSplitViewModule.Enums
 local useSplitPaneRenderModule = require(script.Parent.Parent.Hooks.useSplitPaneRender)
+local useSplitPaneFocusNavBridgeModule = require(script.Parent.Parent.Hooks.useSplitPaneFocusNavBridge)
 
 return function(p1)
-	-- upvalues: useSplitPaneRenderModule (ref), reactModule (ref), enums (ref), splitView (ref)
+	-- upvalues: useSplitPaneRenderModule (ref), reactModule (ref), useSplitPaneFocusNavBridgeModule (ref), enums (ref), splitView (ref)
 	local var1 = useSplitPaneRenderModule(p1.screens, p1.cards, p1.paneIndices, p1.isRouteActiveOnPane)
+	local var2 = reactModule.useRef(nil)
+	useSplitPaneFocusNavBridgeModule(var2)
 	
 	if var1.isBreakpointEnabled then
 		local supportPaneMode = var1.supportPaneMode
@@ -29,7 +32,14 @@ return function(p1)
 				supportResizerAbovePane = var1.supportResizerAbovePane,
 				onSupportPaneWidthChanged = var1.onSupportPaneWidthChanged,
 				onContentRegionRectChanged = var1.onContentRegionRectChanged
-			}, var1.primarySlotChildren),
+			}, {
+				ContentPaneSurface = reactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					BorderSizePixel = 0,
+					Size = UDim2.fromScale(1, 1),
+					ref = var2
+				}, var1.primarySlotChildren)
+			}),
 			Overlay = if next(var1.overlaySlotChildren) ~= nil then reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,

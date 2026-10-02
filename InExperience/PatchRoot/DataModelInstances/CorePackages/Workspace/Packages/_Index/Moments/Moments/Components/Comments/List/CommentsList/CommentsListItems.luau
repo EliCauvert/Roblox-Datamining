@@ -36,6 +36,7 @@ local frozen = table.freeze({
 				onToggleReaction = var2.onToggleReaction,
 				onAddReaction = var2.onAddReaction,
 				onReportComment = var2.onReportComment,
+				onBlockCommentAuthor = var2.onBlockCommentAuthor,
 				onDeleteComment = var2.onDeleteComment,
 				isExpanded = var1.isExpanded,
 				onToggleExpanded = var2.onToggleCommentExpanded

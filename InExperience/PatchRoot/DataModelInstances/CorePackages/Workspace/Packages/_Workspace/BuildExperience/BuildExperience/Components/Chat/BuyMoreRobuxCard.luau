@@ -1,6 +1,10 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
+﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
+local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local chatCardPriorityModule = require(script.Parent.ChatCardEmphasis.ChatCardPriority)
+local useChatCardEmphasisModule = require(script.Parent.ChatCardEmphasis.useChatCardEmphasis)
+local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 local button = foundationModule.Button
 local text = foundationModule.Text
 local view = foundationModule.View
@@ -9,7 +13,7 @@ local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
 
 return function(p1)
-	-- upvalues: reactModule (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
+	-- upvalues: fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), reactModule (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
 	return reactModule.createElement(view, {
 		tag = "col gap-medium size-full-0 auto-y padding-large stroke-standard stroke-default radius-large",
 		testId = "BuyMoreRobuxCard",
@@ -34,7 +38,7 @@ return function(p1)
 				testId = "BuyMoreRobuxCard.PrimaryAction",
 				text = p1.primaryActionText,
 				size = inputSize.Small,
-				variant = buttonVariant.Emphasis,
+				variant = if (if fFlagBuildExperienceChatCardEmphasisModule then useChatCardEmphasisModule(chatCardPriorityModule.BuyMoreRobux) else nil) == false then buttonVariant.SoftEmphasis else buttonVariant.Emphasis,
 				fillBehavior = fillBehavior.Fill,
 				onActivated = p1.onPrimaryAction
 			}),

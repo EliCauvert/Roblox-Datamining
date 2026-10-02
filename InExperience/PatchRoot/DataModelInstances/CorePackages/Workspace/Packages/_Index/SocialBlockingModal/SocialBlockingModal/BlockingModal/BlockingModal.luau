@@ -31,9 +31,10 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local fFlagEnableAbuseReportRevampFlow = require(parent.SharedFlags).FFlagEnableAbuseReportRevampFlow
 local fFlagDisableBlockAndReport = require(parent.SharedFlags).FFlagDisableBlockAndReport
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
+local fFlagEnableMomentsCommentBlocking = require(parent.SharedFlags).FFlagEnableMomentsCommentBlocking
 
 return function()
-	-- upvalues: useNavigation (ref), fFlagDisableBlockAndReport (ref), useLocalUserId (ref), useDispatch (ref), useScreenSize (ref), useLayerCollector (ref), reactModule (ref), useSocialBlockingModalAnalytics (ref), eventNames (ref), useShowToastOnErrorModule (ref), myUserBlockingNetworkingModule (ref), fFlagEnableAbuseReportRevampFlow (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), userProfilesModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), buttonType (ref), interactiveAlert (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
+	-- upvalues: useNavigation (ref), fFlagDisableBlockAndReport (ref), useLocalUserId (ref), useDispatch (ref), useScreenSize (ref), useLayerCollector (ref), reactModule (ref), useSocialBlockingModalAnalytics (ref), eventNames (ref), useShowToastOnErrorModule (ref), fFlagEnableMomentsCommentBlocking (ref), myUserBlockingNetworkingModule (ref), fFlagEnableAbuseReportRevampFlow (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), userProfilesModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), buttonType (ref), interactiveAlert (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var2 = useNavigation()
 	local navProps = var2.getParam("navProps")
 	local userId = navProps.userId
@@ -59,19 +60,26 @@ return function()
 	end, { userId })
 	local var9 = useShowToastOnErrorModule()
 	local var10 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), myUserBlockingNetworkingModule (copy), userId (ref), var4 (ref), onBlockSuccess (ref), var9 (ref), var8 (ref)
+		-- upvalues: fFlagEnableMomentsCommentBlocking (copy), navProps (ref), var5 (ref), myUserBlockingNetworkingModule (copy), userId (ref), var4 (ref), onBlockSuccess (ref), var9 (ref), var8 (ref)
+		if fFlagEnableMomentsCommentBlocking and navProps.onBlockConfirmed then
+			navProps.onBlockConfirmed()
+		end
 		var5(myUserBlockingNetworkingModule.BlockUserById.API({ userId = userId, currentUserId = var4 })):andThen(function()
 			-- upvalues: onBlockSuccess (copy)
 			if onBlockSuccess then
 				onBlockSuccess()
 			end
 		end):catch(function(p1)
-			-- upvalues: var9 (copy)
+			-- upvalues: var9 (copy), fFlagEnableMomentsCommentBlocking (copy), navProps (copy)
 			var9(p1)
+			
+			if fFlagEnableMomentsCommentBlocking and navProps.onBlockFailed then
+				navProps.onBlockFailed()
+			end
 		end)
 		var8()
 	end, {
-		onBlockSuccess, var8, userId, var4, var5, var9
+		onBlockSuccess, navProps, var8, userId, var4, var5, var9
 	})
 	local var11 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var10 (ref)

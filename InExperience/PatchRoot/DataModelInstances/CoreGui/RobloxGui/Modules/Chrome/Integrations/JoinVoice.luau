@@ -2,12 +2,14 @@
 local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local corePackagesService = game:GetService("CorePackages")
 local reactModule = require(corePackagesService.Packages.React)
+local signalsModule = require(corePackagesService.Packages.Signals)
 local foundationModule = require(corePackagesService.Packages.Foundation)
 local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 local constantsModule = require(robloxGui.Modules.VoiceChat.Constants)
 local commonIconModule = require(chrome.Integrations.CommonIcon)
 local commonFtuxTooltipModule = require(chrome.Integrations.CommonFtuxTooltip)
 local constantsModule_1 = require(chrome.ChromeShared.Unibar.Constants)
+local isVoiceChatSupportedModule = require(chrome.Integrations.isVoiceChatSupported)
 local VOICE_JOIN_PROGRESS = constantsModule.VOICE_JOIN_PROGRESS
 local promptTypeModule = require(robloxGui.Modules.VoiceChatPrompt.PromptType)
 local observeCurrentContextId = require(corePackagesService.Workspace.Packages.CrossExperience).Utils.observeCurrentContextId
@@ -16,6 +18,7 @@ local CONTEXT_ID = require(corePackagesService.Workspace.Packages.CrossExperienc
 local getFFlagIntegratePhoneUpsellJoinVoice = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagIntegratePhoneUpsellJoinVoice
 local getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice
 local getFFlagEnableVoiceUxUpdates = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableVoiceUxUpdates
+local fFlagProactiveVoiceRestrictionsUFRModule = require(robloxGui.Modules.VoiceChat.Flags.FFlagProactiveVoiceRestrictionsUFR)
 local fFlagTokenizeUnibarConstantsWithStyleProvider = require(chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
 local checkShouldShowJoinVoiceInEvent = game:DefineFastFlag("CheckShouldShowJoinVoiceInEvent", false)
 local replaceJoinVoiceIconToMuted = game:DefineFastFlag("ReplaceJoinVoiceIconToMuted", false)
@@ -46,7 +49,10 @@ local var3 = serviceModule:register({
 	initialAvailability = serviceModule.AvailabilitySignal.Unavailable,
 	sideSheetPlacement = sideSheetPlacement.Unibar,
 	activated = function()
-		-- upvalues: getFFlagIntegratePhoneUpsellJoinVoice (ref), robloxGui (ref), default (ref), constantsModule (ref)
+		-- upvalues: fFlagProactiveVoiceRestrictionsUFRModule (ref), default (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), robloxGui (ref), constantsModule (ref)
+		if fFlagProactiveVoiceRestrictionsUFRModule and default:GetVoiceRestrictionState(false) ~= "normal" then
+			return
+		end
 		local var4 = if getFFlagIntegratePhoneUpsellJoinVoice() then require(robloxGui.Modules.Settings.SettingsHub) else nil
 		default.pendingConnectionSource = constantsModule.VOICE_CONNECTION_SOURCE.IN_EXPERIENCE
 		default:JoinVoice(var4)
@@ -85,8 +91,13 @@ local var3 = serviceModule:register({
 if getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() then
 	return var3
 end
-local function _(value)
-	-- upvalues: unavailable (write), var1 (write), serviceModule (ref), var3 (write)
+local function setAvailability(value)
+	-- upvalues: fFlagProactiveVoiceRestrictionsUFRModule (ref), default (ref), var3 (write), unavailable (write), var1 (write), serviceModule (ref)
+	if fFlagProactiveVoiceRestrictionsUFRModule and default:GetVoiceRestrictionState(false) ~= "normal" then
+		var3.availability:unavailable()
+		
+		return
+	end
 	unavailable = value
 	
 	if not var1 then
@@ -101,33 +112,18 @@ local function _(value)
 end
 
 local function HideOrShowJoinVoiceButton(p1)
-	-- upvalues: VOICE_JOIN_PROGRESS (ref), checkShouldShowJoinVoiceInEvent (ref), default (ref), serviceModule (ref), unavailable (write), var1 (write), var3 (write), constantsModule (ref), promptTypeModule (ref)
-	if p1 == VOICE_JOIN_PROGRESS.Suspended and (not checkShouldShowJoinVoiceInEvent or default:ShouldShowJoinVoice()) then
-		local available = serviceModule.AvailabilitySignal.Available
-		unavailable = available
+	-- upvalues: fFlagProactiveVoiceRestrictionsUFRModule (ref), default (ref), var3 (write), VOICE_JOIN_PROGRESS (ref), checkShouldShowJoinVoiceInEvent (ref), setAvailability (ref), serviceModule (ref), constantsModule (ref), promptTypeModule (ref)
+	if fFlagProactiveVoiceRestrictionsUFRModule and default:GetVoiceRestrictionState(false) ~= "normal" then
+		var3.availability:unavailable()
 		
-		if not var1 then
-			if available == serviceModule.AvailabilitySignal.Available then
-				var3.availability:available()
-				
-				return
-			elseif available == serviceModule.AvailabilitySignal.Unavailable then
-				var3.availability:unavailable()
-				
-				return
-			end
-		end
+		return
+	elseif p1 == VOICE_JOIN_PROGRESS.Suspended and (not checkShouldShowJoinVoiceInEvent or default:ShouldShowJoinVoice()) then
+		setAvailability(serviceModule.AvailabilitySignal.Available)
+		
+		return
 	elseif p1 == VOICE_JOIN_PROGRESS.Joined then
-		local unavailable_1 = serviceModule.AvailabilitySignal.Unavailable
-		unavailable = unavailable_1
+		setAvailability(serviceModule.AvailabilitySignal.Unavailable)
 		
-		if not var1 then
-			if unavailable_1 == serviceModule.AvailabilitySignal.Available then
-				var3.availability:available()
-			elseif unavailable_1 == serviceModule.AvailabilitySignal.Unavailable then
-				var3.availability:unavailable()
-			end
-		end
 		if default.inExpUpsellEntrypoint == constantsModule.IN_EXP_UPSELL_ENTRYPOINTS.JOIN_VOICE then
 			default:ToggleMic()
 			default:showPrompt(promptTypeModule.VoiceConsentAcceptedToast)
@@ -135,8 +131,16 @@ local function HideOrShowJoinVoiceButton(p1)
 	end
 end
 
+if fFlagProactiveVoiceRestrictionsUFRModule then
+	script.Destroying:Once(signalsModule.createEffect(function(p1)
+		-- upvalues: default (ref), var3 (write)
+		if default:GetVoiceRestrictionState(p1) ~= "normal" then
+			var3.availability:unavailable()
+		end
+	end))
+end
 observeCurrentContextId(function(p1)
-	-- upvalues: CONTEXT_ID (ref), var1 (write), unavailable (write), var3 (write), serviceModule (ref)
+	-- upvalues: CONTEXT_ID (ref), var1 (write), unavailable (write), var3 (write), setAvailability (ref)
 	local var4 = p1 == CONTEXT_ID
 	
 	if var1 ~= var4 then
@@ -148,80 +152,31 @@ observeCurrentContextId(function(p1)
 			
 			return
 		end
-		local var5 = unavailable
-		unavailable = var5
-		
-		if not var1 then
-			if var5 == serviceModule.AvailabilitySignal.Available then
-				var3.availability:available()
-				
-				return
-			elseif var5 == serviceModule.AvailabilitySignal.Unavailable then
-				var3.availability:unavailable()
-			end
-		end
+		setAvailability(unavailable)
 	end
 end)
 
-if game:GetEngineFeature("VoiceChatSupported") then
+if isVoiceChatSupportedModule() then
 	if getFFlagIntegratePhoneUpsellJoinVoice() then
 		task.spawn(function()
-			-- upvalues: default (ref), serviceModule (ref), unavailable (write), var1 (write), var3 (write), HideOrShowJoinVoiceButton (ref)
+			-- upvalues: default (ref), setAvailability (ref), serviceModule (ref), HideOrShowJoinVoiceButton (ref)
 			if default:ShouldShowJoinVoice() then
-				local available = serviceModule.AvailabilitySignal.Available
-				unavailable = available
-				
-				if not var1 then
-					if available == serviceModule.AvailabilitySignal.Available then
-						var3.availability:available()
-					elseif available == serviceModule.AvailabilitySignal.Unavailable then
-						var3.availability:unavailable()
-					end
-				end
+				setAvailability(serviceModule.AvailabilitySignal.Available)
 			end
 			default.VoiceJoinProgressChanged.Event:Connect(HideOrShowJoinVoiceButton)
 		end)
 	elseif default:ShouldShowJoinVoice() then
-		local available = serviceModule.AvailabilitySignal.Available
-		unavailable = available
-		
-		if available == serviceModule.AvailabilitySignal.Available then
-			var3.availability:available()
-		elseif available == serviceModule.AvailabilitySignal.Unavailable then
-			var3.availability:unavailable()
-		end
+		setAvailability(serviceModule.AvailabilitySignal.Available)
 	end
 	default.VoiceJoinProgressChanged.Event:Connect(HideOrShowJoinVoiceButton)
 	if not getFFlagEnableVoiceUxUpdates() then
 		default.showVoiceUI.Event:Connect(function()
-			-- upvalues: serviceModule (ref), unavailable (write), var1 (write), var3 (write)
-			local unavailable_1 = serviceModule.AvailabilitySignal.Unavailable
-			unavailable = unavailable_1
-			
-			if not var1 then
-				if unavailable_1 == serviceModule.AvailabilitySignal.Available then
-					var3.availability:available()
-					
-					return
-				elseif unavailable_1 == serviceModule.AvailabilitySignal.Unavailable then
-					var3.availability:unavailable()
-				end
-			end
+			-- upvalues: setAvailability (ref), serviceModule (ref)
+			setAvailability(serviceModule.AvailabilitySignal.Unavailable)
 		end)
 		default.hideVoiceUI.Event:Connect(function()
-			-- upvalues: serviceModule (ref), unavailable (write), var1 (write), var3 (write)
-			local available = serviceModule.AvailabilitySignal.Available
-			unavailable = available
-			
-			if not var1 then
-				if available == serviceModule.AvailabilitySignal.Available then
-					var3.availability:available()
-					
-					return
-				elseif available == serviceModule.AvailabilitySignal.Unavailable then
-					var3.availability:unavailable()
-				end
-			end
+			-- upvalues: setAvailability (ref), serviceModule (ref)
+			setAvailability(serviceModule.AvailabilitySignal.Available)
 		end)
 	end
 end

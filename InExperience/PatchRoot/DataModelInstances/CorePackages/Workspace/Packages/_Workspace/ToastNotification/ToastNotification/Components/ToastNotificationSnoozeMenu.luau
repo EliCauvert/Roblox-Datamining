@@ -6,7 +6,10 @@ local showNotificationSnoozeMenuSignal = require(parent.Signals).ShowNotificatio
 local dismissNotificationSnoozeMenuSignal = require(parent.Signals).DismissNotificationSnoozeMenuSignal
 local notificationSnoozeMenuVisibleSignal = require(parent.Signals).NotificationSnoozeMenuVisibleSignal
 local default = require(parent.ToastNotificationSnoozeManager).default
-local useTokens = require(parent_1.Foundation).Hooks.useTokens
+local foundationModule = require(parent_1.Foundation)
+local useTokens = foundationModule.Hooks.useTokens
+local normalizeFontFace = foundationModule.Utility.normalizeFontFace
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local cryo = dependenciesModule.Cryo
 local localization = dependenciesModule.Localization
 local react = dependenciesModule.React
@@ -43,9 +46,9 @@ local t_2 = {
 }
 
 return function()
-	-- upvalues: useStyle (ref), fFlagEnableAppChatSnoozeMenuFocus (ref), useTokens (ref), useLocalization (ref), cryo (ref), t_1 (ref), react (ref), showNotificationSnoozeMenuSignal (ref), getFFlagAppChatInExpToastSnoozeMenuDismissFix (ref), dismissNotificationSnoozeMenuSignal (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), notificationSnoozeMenuVisibleSignal (ref), useCursor (ref), t_2 (write), colors (ref), default (ref), interactable (ref), focusRoot (ref), t (ref), focusNavigableSurfaceIdentifierEnum (ref), snoozeMenuTextXAlignment (ref), roact (ref)
+	-- upvalues: useStyle (ref), fFlagEnableAppChatSnoozeMenuFocus (ref), foundationFontFaceMigration (ref), useTokens (ref), useLocalization (ref), cryo (ref), t_1 (ref), react (ref), showNotificationSnoozeMenuSignal (ref), getFFlagAppChatInExpToastSnoozeMenuDismissFix (ref), dismissNotificationSnoozeMenuSignal (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), notificationSnoozeMenuVisibleSignal (ref), useCursor (ref), t_2 (write), normalizeFontFace (ref), colors (ref), default (ref), interactable (ref), focusRoot (ref), t (ref), focusNavigableSurfaceIdentifierEnum (ref), snoozeMenuTextXAlignment (ref), roact (ref)
 	local var1 = useStyle()
-	local var2 = if fFlagEnableAppChatSnoozeMenuFocus then useTokens() else nil
+	local var2 = if fFlagEnableAppChatSnoozeMenuFocus or foundationFontFaceMigration then useTokens() else nil
 	local var3 = useLocalization(cryo.Dictionary.union(t_1, {
 		fifteenMinutes = "Feature.Notifications.Action.SnoozeFifteenMinutes",
 		fourHours = "Feature.Notifications.Action.SnoozeFourHours",
@@ -168,7 +171,8 @@ return function()
 					LayoutOrder = 1,
 					TextWrapped = true,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Font = var1.Font.Body.Font,
+					Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.BodyLarge.Font) else nil,
 					Text = var6.title or "",
 					TextSize = var1.Font.Body.RelativeSize * var1.Font.BaseSize,
 					TextColor3 = colors.White,
@@ -178,7 +182,8 @@ return function()
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Font = var1.Font.CaptionBody.Font,
+					Font = if foundationFontFaceMigration then nil else var1.Font.CaptionBody.Font,
+					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.BodySmall.Font) else nil,
 					Text = var6.description or "",
 					TextSize = var1.Font.CaptionBody.RelativeSize * var1.Font.BaseSize,
 					TextColor3 = var1.Theme.TextDefault.Color
@@ -195,14 +200,15 @@ return function()
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
 				SnoozeOptions = roact.createFragment(react.useMemo(function()
-					-- upvalues: t_2 (copy), react (copy), fFlagEnableAppChatSnoozeMenuFocus (copy), var2 (ref), var1 (ref), var10 (ref), var3 (ref), colors (copy), var6 (ref), default (copy), var5 (ref)
+					-- upvalues: t_2 (copy), react (copy), fFlagEnableAppChatSnoozeMenuFocus (copy), var2 (ref), foundationFontFaceMigration (copy), var1 (ref), normalizeFontFace (copy), var10 (ref), var3 (ref), colors (copy), var6 (ref), default (copy), var5 (ref)
 					local t = {}
 					
 					for i, v in ipairs(t_2) do
 						table.insert(t, react.createElement("TextButton", {
 							Size = UDim2.new(1, 0, 0, if fFlagEnableAppChatSnoozeMenuFocus then var2.Size.Size_1400 else 56),
 							BackgroundTransparency = 1,
-							Font = var1.Font.Header2.Font,
+							Font = if foundationFontFaceMigration then nil else var1.Font.Header2.Font,
+							FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.TitleLarge.Font) else nil,
 							LayoutOrder = i,
 							SelectionImageObject = var10,
 							Text = var3[v.textKey],
@@ -237,7 +243,10 @@ return function()
 						i += 1
 					end
 					return t
-				end, { var6 }))
+				end, {
+					var6,
+					if foundationFontFaceMigration then var2.Typography.TitleLarge.Font else nil
+				}))
 			})
 		})
 	}) else nil

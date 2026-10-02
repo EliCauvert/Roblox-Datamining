@@ -14,6 +14,7 @@ local shopItemFooterModule = require(inExperienceShop.Components.ShopItemFooter)
 local getInExperienceShopStoreModule = require(inExperienceShop.Stores.getInExperienceShopStore)
 local SHOP_ITEM_MEDIA_HEIGHT_SCALE = require(inExperienceShop.Components.computeShopRowTileWidths).SHOP_ITEM_MEDIA_HEIGHT_SCALE
 local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
+local fFlagEnableCategoryLoggingInShopModule = require(inExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
 local fFlagFixThumbnailBackgroundInExperienceShopModule = require(inExperienceShop.Flags.FFlagFixThumbnailBackgroundInExperienceShop)
 local fFlagEnableDiscountOnInShopTileModule = require(inExperienceShop.Flags.FFlagEnableDiscountOnInShopTile)
 local fFlagLuaAppEnableGamePassFreeTrialsModule = require(inExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
@@ -23,7 +24,7 @@ local _ = require(inExperienceShop.Types)
 local constantsModule = require(inExperienceShop.Constants)
 
 return reactModule.memo(function(p1)
-	-- upvalues: signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), parent (ref), inExperienceShop (ref), sessionService (ref), fFlagEnableDiscountOnInShopTileModule (ref), var1 (ref), view (ref), image (ref), fFlagFixThumbnailBackgroundInExperienceShopModule (ref), SHOP_ITEM_MEDIA_HEIGHT_SCALE (ref), text (ref), icon (ref), constantsModule (ref), iconSize (ref), getIconRichText (ref), enums (ref), shopItemFooterModule (ref)
+	-- upvalues: signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), parent (ref), inExperienceShop (ref), fFlagEnableCategoryLoggingInShopModule (ref), sessionService (ref), fFlagEnableDiscountOnInShopTileModule (ref), var1 (ref), view (ref), image (ref), fFlagFixThumbnailBackgroundInExperienceShopModule (ref), SHOP_ITEM_MEDIA_HEIGHT_SCALE (ref), text (ref), icon (ref), constantsModule (ref), iconSize (ref), getIconRichText (ref), enums (ref), shopItemFooterModule (ref)
 	local var2
 	local var3 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
 	local var4 = reactModule.useRef(nil)
@@ -42,10 +43,10 @@ return reactModule.memo(function(p1)
 		return if fFlagLuaAppEnableGamePassFreeTrialsModule and p1.itemType == "GamePass" then var3.getTrialAvailabilities(p2).available[p1.itemId] == true else false
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), parent (copy), inExperienceShop (copy), p1 (ref), var4 (ref), sessionService (copy)
+		-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), parent (copy), inExperienceShop (copy), p1 (ref), fFlagEnableCategoryLoggingInShopModule (copy), var4 (ref), sessionService (copy)
 		if fFlagEnableInExperienceShopUnifiedLoggingModule then
 			task.defer(function()
-				-- upvalues: parent (copy), inExperienceShop (copy), p1 (copy), var4 (copy), sessionService (copy)
+				-- upvalues: parent (copy), inExperienceShop (copy), p1 (copy), fFlagEnableCategoryLoggingInShopModule (copy), var4 (copy), sessionService (copy)
 				local addUnifiedEventLogging = require(parent.AvatarExperienceAnalytics).addUnifiedEventLogging
 				local var7 = require(inExperienceShop.Utils.mapShopItemTypeToUnifiedItemType)(p1.itemType)
 				
@@ -58,7 +59,11 @@ return reactModule.memo(function(p1)
 					itemType = var7,
 					categoryId = p1.categoryId,
 					gridPositionRow = p1.gridPositionRow,
-					gridPositionColumn = p1.gridPositionColumn
+					gridPositionColumn = p1.gridPositionColumn,
+					categoryType = if fFlagEnableCategoryLoggingInShopModule then p1.categoryType else nil,
+					stableCategoryId = if fFlagEnableCategoryLoggingInShopModule then p1.stableCategoryId else nil,
+					categoryGroup = if fFlagEnableCategoryLoggingInShopModule then p1.categoryGroup else nil,
+					categoryName = if fFlagEnableCategoryLoggingInShopModule then p1.categoryName else nil
 				}, { sessionTagName = sessionService:GetSessionTag("level2a") })
 			end)
 			
@@ -66,7 +71,11 @@ return reactModule.memo(function(p1)
 		end
 	end, {
 		p1.itemId, p1.itemType, p1.universeId, p1.categoryId, p1.gridPositionRow,
-		p1.gridPositionColumn
+		p1.gridPositionColumn,
+		if fFlagEnableCategoryLoggingInShopModule then p1.categoryType else nil,
+		if fFlagEnableCategoryLoggingInShopModule then p1.stableCategoryId else nil,
+		if fFlagEnableCategoryLoggingInShopModule then p1.categoryGroup else nil,
+		if fFlagEnableCategoryLoggingInShopModule then p1.categoryName else nil
 	})
 	local onItemActivated = p1.onItemActivated
 	local itemType = p1.itemType
@@ -142,7 +151,7 @@ return reactModule.memo(function(p1)
 				tag = "auto-xy text-body-small text-truncate-end content-default",
 				RichText = true,
 				LayoutOrder = 2,
-				Text = "<s>" .. getIconRichText(enums.IconName.Robux) .. " " .. var19 .. "</s>"
+				Text = "<s>" .. getIconRichText(enums.IconName.Robux) .. " " .. var20 .. "</s>"
 			}) else nil
 		})
 	else

@@ -6,7 +6,6 @@ local cryoModule = require(parent.Cryo)
 local _ = require(parent.Dash)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXEditorSubcategoryFilters = avatarExperienceFlagsModule.FFlagAXEditorSubcategoryFilters
-local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
 local fFlagAXEnableExpiredUserLookCheckout = avatarExperienceFlagsModule.FFlagAXEnableExpiredUserLookCheckout
 local fFlagAXFixGamepadNavigationOnOutfitManagement = avatarExperienceFlagsModule.FFlagAXFixGamepadNavigationOnOutfitManagement
 local fFlagAXOutfitPageRevamp = avatarExperienceFlagsModule.FFlagAXOutfitPageRevamp
@@ -26,13 +25,11 @@ local t = {
 	isRefinementPage = false,
 	refinementButtonVisible = false,
 	VRPanelRoundedCorners = false,
-	VRPanelPlacement = "Center",
-	isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else false
+	VRPanelPlacement = "Center"
 }
 local t_1 = {
 	[avatarScreenModule.AccessoryAdjustment] = {
 		isRefinementPage = true,
-		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else false,
 		analyticsData = {
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
 		}
@@ -49,7 +46,6 @@ local t_1 = {
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true,
-		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else false,
 		analyticsData = {
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CATALOG
 		}
@@ -59,7 +55,6 @@ local t_1 = {
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true,
-		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else false,
 		analyticsData = {
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.SEARCH_RESULTS
 		}
@@ -68,7 +63,6 @@ local t_1 = {
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true,
-		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else false,
 		analyticsData = {
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.SEARCH_LANDING_PAGE
 		}
@@ -101,7 +95,6 @@ local t_1 = {
 	[avatarScreenModule.LayeredClothingSort] = {
 		isRefinementPage = true,
 		VRPanelPlacement = "Center",
-		isMultiTryOn = if fFlagAXMISEnableMultiShopping then nil else false,
 		analyticsData = {
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
 		}
@@ -354,17 +347,16 @@ end
 if fFlagAXEditorSubcategoryFilters then
 	t_1[avatarScreenModule.SubcategoryFiltersDropdown] = { isTransparent = true, VRPanelPlacement = "Left" }
 end
-if fFlagAXMISEnableMultiShopping then
-	t_1[avatarScreenModule.Checkout] = {
-		isTransparent = true,
-		coversSceneWhenExpanded = true,
-		VRPanelPlacement = "Right",
-		VRPanelRoundedCorners = true,
-		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CATALOG
-		}
+t_1[avatarScreenModule.Checkout] = {
+	isTransparent = true,
+	coversSceneWhenExpanded = true,
+	VRPanelPlacement = "Right",
+	VRPanelRoundedCorners = true,
+	analyticsData = {
+		unifiedLoggingSurface = unifiedLoggingSurfaceModule.CATALOG
 	}
-end
+}
+
 if fFlagAXEnableProfileTab then
 	t_1[avatarScreenModule.Profile] = {
 		refinementButtonVisible = true,

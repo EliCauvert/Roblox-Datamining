@@ -98,7 +98,7 @@ return reactModule.memo(function(p1)
 						testId = `{commentId}--image`
 					})
 				}),
-				Count = reactModule.createElement(text, {
+				Count = if p1.isReactionCountHidden then nil else reactModule.createElement(text, {
 					LayoutOrder = 2,
 					tag = {
 						["auto-xy"] = true,

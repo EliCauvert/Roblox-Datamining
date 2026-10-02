@@ -10,6 +10,7 @@ local fFlagExpChatDictationFTUXModule = require(expChat.Flags.FFlagExpChatDictat
 local expChatFocusablePlaceholderText = game:DefineFastFlag("ExpChatFocusablePlaceholderText", false)
 local fFlagExpChatInputBarV2CornerAndTruncationFixModule = require(expChat.Flags.FFlagExpChatInputBarV2CornerAndTruncationFix)
 local fFlagExpChatComposerInputBarFigmaParityModule = require(expChat.Flags.FFlagExpChatComposerInputBarFigmaParity)
+local fFlagExpChatDictationStopReplacesSendModule = require(expChat.Flags.FFlagExpChatDictationStopReplacesSend)
 local fFlagEnableConsoleExpControls = require(parent.SharedFlags).FFlagEnableConsoleExpControls
 local channelChipModule = require(script.Parent.ChannelChip)
 local stopCountdownModule = require(script.Parent.StopCountdown)
@@ -24,7 +25,7 @@ local function _(startValue, endValue, alpha)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), useDictationInputBarModule (ref), dictationAffordancesModule (ref), reactModule (ref), useDictationTextAreaModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), stopCountdownModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatComposerInputBarFigmaParityModule (ref), dictationWaveformModule (ref), fFlagExpChatDictationFTUXModule (ref), dictationFTUXModule (ref)
+	-- upvalues: foundationModule (ref), useDictationInputBarModule (ref), dictationAffordancesModule (ref), reactModule (ref), useDictationTextAreaModule (ref), fFlagExpChatDictationStopReplacesSendModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), stopCountdownModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatComposerInputBarFigmaParityModule (ref), dictationWaveformModule (ref), fFlagExpChatDictationFTUXModule (ref), dictationFTUXModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local setTransparency = p1.setTransparency
 	local chatInputBarSettings = p1.chatInputBarSettings
@@ -88,6 +89,7 @@ return reactModule.memo(function(p1)
 	})
 	local useLongPressOverlay = var4.useLongPressOverlay
 	local micGestureHandlers = var3.micGestureHandlers
+	local isRecording = fFlagExpChatDictationStopReplacesSendModule and var3.isRecording
 	local createElement = reactModule.createElement
 	local var10 = "Frame"
 	local t = {
@@ -122,7 +124,7 @@ return reactModule.memo(function(p1)
 		Size = UDim2.fromScale(1, 0)
 	}
 	local t_5 = {
-		StopCountdown = reactModule.createElement(stopCountdownModule, {
+		StopCountdown = if fFlagExpChatDictationStopReplacesSendModule then nil else reactModule.createElement(stopCountdownModule, {
 			LayoutOrder = 1,
 			countdownProgress = var3.dictation.bindings.countdownProgress,
 			onActivated = var3.dictation.stopDictation,
@@ -259,6 +261,10 @@ return reactModule.memo(function(p1)
 		ref = var3.micButtonSlotRef,
 		GroupTransparency = var8
 	}, {
+		TrailingStopCountdown = if isRecording then reactModule.createElement(stopCountdownModule, {
+			countdownProgress = var3.dictation.bindings.countdownProgress,
+			onActivated = var3.dictation.stopDictation
+		}) else nil,
 		SendButton = reactModule.createElement(foundationModule.IconButton, {
 			isCircular = true,
 			icon = var4.icon,
@@ -266,7 +272,8 @@ return reactModule.memo(function(p1)
 			size = foundationModule.Enums.InputSize.Small,
 			isDisabled = var4.isDisabled,
 			Selectable = if useLongPressOverlay then false else nil,
-			onActivated = if useLongPressOverlay then function() end else var4.onActivated
+			onActivated = if useLongPressOverlay then function() end else var4.onActivated,
+			Visible = if isRecording then false else nil
 		}),
 		InputTarget = if useLongPressOverlay and micGestureHandlers ~= nil then reactModule.createElement("TextButton", {
 			Active = true,

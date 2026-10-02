@@ -1,1 +1,1 @@
-﻿return if require(script:FindFirstAncestor("TrustedContacts").Parent.SharedFlags).FFlagTrustedFriendsUseEnumCTA then require(script.useModalButtonActions) else require(script.useModalButtonActions_legacy)
+﻿return require(script.useModalButtonActions)

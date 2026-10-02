@@ -184,6 +184,7 @@ return function(p1)
 		isAdUpsellCreatePending = isCreatePending,
 		isAdCampaignSheetOpen = var11,
 		hasAdCampaignCreateError = var10.hasCreateError,
+		adCampaignCreateErrorKind = var10.createErrorKind,
 		adCampaignDurationDays = if var13 ~= nil then nil else var13.durationDays,
 		adCampaignEstimatedPriceRobux = if var13 ~= nil then nil else var13.estimatedPriceRobux,
 		adCampaignOffers = if var13 ~= nil then nil else var13.campaignOffers,
@@ -240,9 +241,13 @@ return function(p1)
 			end
 		end, { var2, p1.universeId or 0, p1.sessionId or "" }),
 		onAdCampaignSheetClose = reactModule.useCallback(function()
-			-- upvalues: var12 (ref)
+			-- upvalues: var12 (ref), fFlagEnablePaidAdsModule (copy), var10 (ref)
 			var12(false)
-		end, {}),
+			
+			if fFlagEnablePaidAdsModule then
+				var10.clearCreateError()
+			end
+		end, { var10.clearCreateError }),
 		onAdCampaignSheetCreate = reactModule.useCallback(function(p2)
 			-- upvalues: sendBuildExperienceEventModule (copy), p1 (ref), var17 (ref), var20 (ref), var7 (ref), fFlagEnablePaidAdsModule (copy), var21 (ref), var5 (ref), var10 (ref)
 			sendBuildExperienceEventModule("AD_UPSELL_CREATE_CONFIRM_CLICK", {

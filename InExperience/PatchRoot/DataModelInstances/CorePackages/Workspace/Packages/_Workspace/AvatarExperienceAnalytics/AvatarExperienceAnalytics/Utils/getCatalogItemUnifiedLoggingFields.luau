@@ -8,7 +8,6 @@ local getItemSelectionActionModule = require(avatarExperienceAnalytics.Utils.get
 local getTimedOptionForItemDataModule = require(avatarExperienceAnalytics.Utils.getTimedOptionForItemData)
 local unifiedEventLoggingUtilsModule = require(avatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAddTypesToWidgetItems = avatarExperienceFlagsModule.FFlagAddTypesToWidgetItems
 local fFlagAXOrganicItemPosition = avatarExperienceFlagsModule.FFlagAXOrganicItemPosition
 local fFlagAXEditorRecommendedItemsUnifiedImpressions = avatarExperienceFlagsModule.FFlagAXEditorRecommendedItemsUnifiedImpressions
 
@@ -60,7 +59,7 @@ local function isReadyToLog(p1)
 end
 
 local function buildFields(p1)
-	-- upvalues: fFlagAXOrganicItemPosition (ref), getMarketplaceUnifiedItemTypeModule (ref), getItemSelectionActionModule (ref), fFlagAXEditorRecommendedItemsUnifiedImpressions (ref), unifiedEventLoggingUtilsModule (ref), getTimedOptionForItemDataModule (ref), fFlagAddTypesToWidgetItems (ref), cryoModule (ref)
+	-- upvalues: fFlagAXOrganicItemPosition (ref), getMarketplaceUnifiedItemTypeModule (ref), getItemSelectionActionModule (ref), fFlagAXEditorRecommendedItemsUnifiedImpressions (ref), unifiedEventLoggingUtilsModule (ref), getTimedOptionForItemDataModule (ref), cryoModule (ref)
 	local itemData = p1.itemData
 	local lookData = p1.lookData
 	local hydratedContent = p1.hydratedContent
@@ -92,8 +91,8 @@ local function buildFields(p1)
 		widgetItemPrice = if widgetAnalyticsInfo then if lookData then lookData.totalPrice elseif hydratedContent then hydratedContent.price else nil else nil,
 		organicTimedOption = if isOrganic and itemData then getTimedOptionForItemDataModule(itemData) else nil,
 		widgetTimedOption = if isOrganic or not itemData then nil else getTimedOptionForItemDataModule(itemData),
-		widgetAssetType = if fFlagAddTypesToWidgetItems and not isOrganic and itemData then itemData.assetType else nil,
-		widgetBundleType = if fFlagAddTypesToWidgetItems and not isOrganic and itemData then itemData.bundleType else nil
+		widgetAssetType = if isOrganic or not itemData then nil else itemData.assetType,
+		widgetBundleType = if isOrganic or not itemData then nil else itemData.bundleType
 	})
 end
 

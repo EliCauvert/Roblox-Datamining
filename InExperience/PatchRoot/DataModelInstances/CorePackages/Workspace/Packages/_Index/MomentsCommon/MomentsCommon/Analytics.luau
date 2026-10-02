@@ -33,5 +33,6 @@ return {
 	reportMomentsPublishedByCaptureType = reportMomentsRealtimeEventModule.reportMomentsPublishedByCaptureType,
 	reportMomentsEditToolOpened = reportMomentsRealtimeEventModule.reportMomentsEditToolOpened,
 	reportMomentsEditToolAbandoned = reportMomentsRealtimeEventModule.reportMomentsEditToolAbandoned,
-	reportMomentsGenerateText = reportMomentsRealtimeEventModule.reportMomentsGenerateText
+	reportMomentsGenerateText = reportMomentsRealtimeEventModule.reportMomentsGenerateText,
+	reportMomentsComments = reportMomentsRealtimeEventModule.reportMomentsComments
 }

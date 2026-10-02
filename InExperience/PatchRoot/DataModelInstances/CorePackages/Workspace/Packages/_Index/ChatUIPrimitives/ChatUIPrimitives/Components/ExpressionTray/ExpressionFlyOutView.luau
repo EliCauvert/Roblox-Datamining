@@ -3,9 +3,15 @@ local parent = chatUIPrimitives.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local useDismissOnEscapeOrMenuModule = require(chatUIPrimitives.Hooks.useDismissOnEscapeOrMenu)
+local t = {
+	SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
+	SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
+	SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
+	SelectionBehaviorRight = Enum.SelectionBehavior.Stop
+}
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDismissOnEscapeOrMenuModule (ref), reactModule (ref), foundationModule (ref)
+	-- upvalues: useDismissOnEscapeOrMenuModule (ref), reactModule (ref), foundationModule (ref), t (ref)
 	useDismissOnEscapeOrMenuModule(p1.isOpen, p1.onPressedOutside)
 	
 	return reactModule.createElement(foundationModule.Popover.Root, { isOpen = p1.isOpen }, {
@@ -30,7 +36,8 @@ return reactModule.memo(function(p1)
 		}, {
 			ContentWrapper = reactModule.createElement(foundationModule.View, {
 				Size = UDim2.fromOffset(p1.width or 360, p1.height or 240),
-				ref = p1.contentRef
+				ref = p1.contentRef,
+				selectionGroup = if p1.focusNavEnabled then t else nil
 			}, { Container = p1.content })
 		})
 	})

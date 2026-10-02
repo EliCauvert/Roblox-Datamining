@@ -35,7 +35,7 @@ local teamListViewModule = require(parent.Components.Presentation.TeamListView)
 local consoleFocusScrollViewModule = require(parent.Components.Presentation.ConsoleFocusScrollView)
 local entryViewModule = require(parent.Components.Presentation.EntryView)
 local tabbedLeaderboardBodyModule = require(parent.Components.Presentation.TabbedLeaderboardBody)
-local fFlagPlayerListTwoTabsModule = require(parent.Flags.FFlagPlayerListTwoTabs)
+local fFlagPlayerListReskinModule = require(parent.Flags.FFlagPlayerListReskin)
 local fallbackSignalsModule = require(parent.Common.FallbackSignals)
 local var1 = createSignalMap()
 local var2 = createSignalMap()
@@ -73,7 +73,7 @@ local function renderWithSlideAndZoomDecorations(p1, p2, p3, p4, p5, p6, p7)
 end
 
 local function PlayerListPanelContent(p1)
-	-- upvalues: useLeaderboardStoreModule (ref), var1 (ref), var2 (ref), signalsReactModule (ref), fFlagPlayerListTwoTabsModule (ref), usePlatformLeaderboardModule (ref), fallbackSignalsModule (ref), usePanelLayoutModule (ref), useTokens (ref), usePreferredBackgroundStyleModule (ref), playerListVisibilityStoreModule (ref), reactModule (ref), playerContextualMenuStoreModule (ref), toggleContextMenu (ref), reactOtterModule (ref), MOBILE_ZOOM_SPRING (ref), MENU_ZOOM_CLOSED_SCALE (ref), PANEL_RECESS_SCALE (ref), PANEL_RECESS_TRANSPARENCY (ref), createZoomDecorations (ref), useReportPanelContentHeightModule (ref), panelContentHeightStoreModule (ref), computeStatColumnsModule (ref), constantsModule (ref), consoleFocusScrollViewModule (ref), teamListViewModule (ref), scrollView (ref), entryViewModule (ref), columnHeaderRowModule (ref), panelHeaderModule (ref), foundationModule (ref), view (ref), renderWithSlideAndZoomDecorations (ref), tabbedLeaderboardBodyModule (ref)
+	-- upvalues: useLeaderboardStoreModule (ref), var1 (ref), var2 (ref), signalsReactModule (ref), fFlagPlayerListReskinModule (ref), usePlatformLeaderboardModule (ref), fallbackSignalsModule (ref), usePanelLayoutModule (ref), useTokens (ref), usePreferredBackgroundStyleModule (ref), playerListVisibilityStoreModule (ref), reactModule (ref), playerContextualMenuStoreModule (ref), toggleContextMenu (ref), reactOtterModule (ref), MOBILE_ZOOM_SPRING (ref), MENU_ZOOM_CLOSED_SCALE (ref), PANEL_RECESS_SCALE (ref), PANEL_RECESS_TRANSPARENCY (ref), createZoomDecorations (ref), useReportPanelContentHeightModule (ref), panelContentHeightStoreModule (ref), computeStatColumnsModule (ref), constantsModule (ref), consoleFocusScrollViewModule (ref), teamListViewModule (ref), scrollView (ref), entryViewModule (ref), columnHeaderRowModule (ref), panelHeaderModule (ref), foundationModule (ref), view (ref), renderWithSlideAndZoomDecorations (ref), tabbedLeaderboardBodyModule (ref)
 	local var3 = p1.isSmallTouchDevice == true
 	local title = p1.title
 	local platformLeaderboardOverride = p1.platformLeaderboardOverride
@@ -84,8 +84,8 @@ local function PlayerListPanelContent(p1)
 	local var7 = signalsReactModule.useSignalState(var5.getAllData)
 	local var8 = signalsReactModule.useSignalState(var6.getAllData)
 	local count = var6.getCount(false)
-	local var9 = if fFlagPlayerListTwoTabsModule then platformLeaderboardOverride or usePlatformLeaderboardModule() else nil
-	local var10 = usePanelLayoutModule(var3, count, if fFlagPlayerListTwoTabsModule then signalsReactModule.useSignalState(if var9 then var9.getHasActiveLeaderboard else fallbackSignalsModule.getHasActiveLeaderboard) else false)
+	local var9 = if fFlagPlayerListReskinModule then platformLeaderboardOverride or usePlatformLeaderboardModule() else nil
+	local var10 = usePanelLayoutModule(var3, count, if fFlagPlayerListReskinModule then signalsReactModule.useSignalState(if var9 then var9.getHasActiveLeaderboard else fallbackSignalsModule.getHasActiveLeaderboard) else false)
 	local var11 = useTokens()
 	local var12 = usePreferredBackgroundStyleModule(var11.Color.OverMedia.OverMedia_200)
 	local var13 = signalsReactModule.useSignalState(playerListVisibilityStoreModule.getEffectiveVisible)
@@ -271,7 +271,7 @@ local function PlayerListPanelContent(p1)
 	})
 	local var31 = reactModule.createElement(foundationModule.Divider, { LayoutOrder = 2 })
 	
-	return if fFlagPlayerListTwoTabsModule then renderWithSlideAndZoomDecorations(tabbedLeaderboardBodyModule, {
+	return if fFlagPlayerListReskinModule then renderWithSlideAndZoomDecorations(tabbedLeaderboardBodyModule, {
 		serverBody = reactModule.createElement(view, { LayoutOrder = 4, tag = "col fill size-full-0" }, t_1),
 		panelHeader = var30,
 		panelDivider = var31,

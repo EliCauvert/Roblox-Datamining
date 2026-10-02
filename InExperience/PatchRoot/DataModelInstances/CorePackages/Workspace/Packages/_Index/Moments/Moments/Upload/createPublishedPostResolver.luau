@@ -1,11 +1,14 @@
 ﻿local moments = script:FindFirstAncestor("Moments")
 local parent = moments.Parent
-local playersService = game:GetService("Players")
 local _ = require(parent.MomentsTypes)
 local promiseModule = require(parent.Promise)
+local sharedFlagsModule = require(parent.SharedFlags)
+local signalsModule = require(parent.Signals)
 local _ = require(parent.DataHydration.MomentsStoreTypes)
 local momentsGetMomentsUserStoreModule = require(parent.DataHydration.MomentsGetMomentsUserStore)
+local getLocalUserIdModule = require(moments.Utils.getLocalUserId)
 local shouldShowMomentInFeedModule = require(moments.Stores.GetMomentsStore.shouldShowMomentInFeed)
+local postLifecycleSubscriptionModule = require(script.Parent.postLifecycleSubscription)
 game:DefineFastInt("MomentsPublishedPostPollIntervalSeconds", 10)
 game:DefineFastInt("MomentsPublishedPostMaxPollAttempts", 30)
 local var1 = nil
@@ -19,6 +22,39 @@ local function _()
 end
 
 local var2 = 0
+
+local function waitForLifecycleChange(p1, p2, p3, p4)
+	-- upvalues: promiseModule (ref), signalsModule (ref), postLifecycleSubscriptionModule (ref)
+	local var3 = function() end
+	
+	local var4 = nil
+	local _, var5 = promiseModule.race({
+		promiseModule.new(function(p5)
+			-- upvalues: var3 (write), signalsModule (copy), postLifecycleSubscriptionModule (copy), p2 (ref), p1 (ref), var4 (write)
+			var3 = signalsModule.createEffect(function(p6)
+				-- upvalues: postLifecycleSubscriptionModule (copy), p2 (copy), p1 (copy), var4 (copy), p5 (ref)
+				if postLifecycleSubscriptionModule.getWakeVersion(p6, p2) ~= p1 and var4 == nil then
+					var4 = task.defer(function()
+						-- upvalues: var4 (copy), p5 (copy)
+						var4 = nil
+						p5(true)
+					end)
+				end
+			end)
+		end),
+		promiseModule.new(function(p5)
+			-- upvalues: p4 (ref), p3 (ref)
+			p4(p3)
+			p5(false)
+		end)
+	}):await()
+	var3()
+	
+	if var4 ~= nil then
+		task.cancel(var4)
+	end
+	return var5 == true
+end
 
 local _ = function(p1, p2, p3)
 	local var3, var4 = p1.getFreshUserMoments(p2, p3):await()
@@ -255,7 +291,7 @@ local function logCandidate(p16, p17)
 end
 
 return function(p16, p17)
-	-- upvalues: momentsGetMomentsUserStoreModule (ref), var2 (write), var1 (write), parent (ref), addToSnapshot (ref), logSnapshotPage (ref), playersService (ref), logExpectation (ref), promiseModule (ref), findPublishedPost (ref), logCandidate (ref)
+	-- upvalues: momentsGetMomentsUserStoreModule (ref), var2 (write), var1 (write), parent (ref), addToSnapshot (ref), logSnapshotPage (ref), getLocalUserIdModule (ref), logExpectation (ref), promiseModule (ref), sharedFlagsModule (ref), postLifecycleSubscriptionModule (ref), waitForLifecycleChange (ref), findPublishedPost (ref), logCandidate (ref)
 	p17 = p17 or {}
 	local var10 = if p17.userStore ~= nil then momentsGetMomentsUserStoreModule(false) else p17.userStore
 	local wait = p17.wait or function(p18)
@@ -306,16 +342,11 @@ return function(p16, p17)
 	
 	return {
 		captureSnapshot = function()
-			-- upvalues: var2 (copy), var11 (write), p17 (ref), var12 (write), playersService (copy), var1 (copy), parent (copy), logExpectation (copy), p16 (ref), var13 (write), promiseModule (copy), takeSnapshot (ref)
+			-- upvalues: var2 (copy), var11 (write), p17 (ref), var12 (write), getLocalUserIdModule (copy), var1 (copy), parent (copy), logExpectation (copy), p16 (ref), var13 (write), promiseModule (copy), takeSnapshot (ref)
 			var2 += 1
 			var11 = var2
+			var12 = if p17.getLocalUserId ~= nil then getLocalUserIdModule() else p17.getLocalUserId()
 			
-			if p17.getLocalUserId == nil then
-				local localPlayer = playersService.LocalPlayer
-				var12 = if localPlayer ~= nil then nil else localPlayer.UserId
-			else
-				var12 = p17.getLocalUserId()
-			end
 			if var1 == nil then
 				var1 = require(parent.Loggers).Logger:new("Moments.Upload")
 			end
@@ -327,8 +358,8 @@ return function(p16, p17)
 				p19(if var20 ~= nil then nil else takeSnapshot(var20))
 			end)
 		end,
-		resolve = function()
-			-- upvalues: var13 (write), var1 (copy), parent (copy), var12 (write), var11 (write), wait (ref), var2 (copy), var10 (ref), findPublishedPost (copy), p16 (ref), logCandidate (copy)
+		resolve = function(p19)
+			-- upvalues: var13 (write), var1 (copy), parent (copy), var12 (write), var11 (write), sharedFlagsModule (copy), postLifecycleSubscriptionModule (copy), waitForLifecycleChange (copy), wait (ref), var2 (copy), var10 (ref), findPublishedPost (copy), p16 (ref), logCandidate (copy)
 			if var13 == nil then
 				if var1 == nil then
 					var1 = require(parent.Loggers).Logger:new("Moments.Upload")
@@ -346,49 +377,111 @@ return function(p16, p17)
 					if var1 == nil then
 						var1 = require(parent.Loggers).Logger:new("Moments.Upload")
 					end
+					local var22
 					var1:debug("event=published_post_polling resolverId={} intervalSeconds={} maxAttempts={}", tostring(var11), tostring(momentsPublishedPostPollIntervalSecondsFastInt), tostring(momentsPublishedPostMaxPollAttemptsFastInt))
-					
-					for i = 1, momentsPublishedPostMaxPollAttemptsFastInt do
-						wait(momentsPublishedPostPollIntervalSecondsFastInt)
-						local var22 = var11 ~= 0 and var11 == var2
+					local var23 = sharedFlagsModule.FFlagMomentsOptimisticProfilePending and p19 ~= nil
+					local var24 = if var23 then postLifecycleSubscriptionModule.getWakeVersion(false, var12) else 0
+					local var25 = os.clock() + momentsPublishedPostPollIntervalSecondsFastInt
+					local var26 = 0
+					local var27 = 0
+					while var26 < momentsPublishedPostMaxPollAttemptsFastInt do
+						if var23 then
+							if var27 > 0 and not waitForLifecycleChange(var24, var12, math.max(0, var25 - os.clock()), wait) then
+								var26 += 1
+								var25 = os.clock() + momentsPublishedPostPollIntervalSecondsFastInt
+							end
+							var24 = postLifecycleSubscriptionModule.getWakeVersion(false, var12)
+						else
+							wait(momentsPublishedPostPollIntervalSecondsFastInt)
+							var26 += 1
+						end
+						var27 += 1
+						var22 = var11 ~= 0 and var11 == var2
 						
-						if var22 then
-							local var23, var24 = var10.getFreshUserMoments(var12, nil):await()
-							var22 = if var23 then var24 else nil
-							
-							if var22 == nil then
-								if var1 == nil then
-									var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+						if var22 or sharedFlagsModule.FFlagMomentsOptimisticProfilePending and p19 ~= nil then
+							if sharedFlagsModule.FFlagMomentsOptimisticProfilePending and p19 ~= nil then
+								var22 = false
+								
+								for i, v in var10.getPendingUserMoments(false)[var12] or {} do
+									if v.moment.momentId == p19 then
+										if v.publishedMoment == nil then
+											var22 = true
+											break
+										end
+										return v.publishedMoment
+									end
 								end
-								var1:debug("event=published_post_poll_read_failed resolverId={} attempt={}", tostring(var11), tostring(i))
+								if var22 then
+									local t, v_1
+									local var28, var29 = var10.getFreshUserMoments(var12, nil):await()
+									var22 = if var28 then var29 else nil
+									
+									if sharedFlagsModule.FFlagMomentsOptimisticProfilePending and p19 ~= nil and var22 ~= nil then
+										local feedItemId
+										t = {}
+										
+										for v, v in var10.getPendingUserMoments(false)[var12] or {} do
+											v_1 = v.publishedMoment
+											
+											if v_1 ~= nil then
+												t[v_1.momentId] = true
+												feedItemId = v_1.recommendationMetadata.feedItemId
+												
+												if feedItemId ~= nil and feedItemId ~= "" then
+													t[feedItemId] = true
+												end
+											end
+										end
+										local t_1 = {}
+										
+										for v, v_1 in var22.moments do
+											feedItemId = v_1.recommendationMetadata.feedItemId
+											
+											if not t[v_1.momentId] and (feedItemId == nil or not t[feedItemId]) then
+												table.insert(t_1, v_1)
+											end
+										end
+										var22 = table.clone(var22)
+										var22.moments = t_1
+									end
+									if var22 == nil then
+										if var1 == nil then
+											var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+										end
+										var1:debug("event=published_post_poll_read_failed resolverId={} attempt={}", tostring(var11), tostring(var27))
+									else
+										t, var96 = findPublishedPost(var22, var21, p16)
+										local excludedMomentIds = var22.excludedMomentIds or {}
+										
+										if var1 == nil then
+											var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+										end
+										var1:debug("event=published_post_poll resolverId={} attempt={} moments={} excluded={} unknown={}", tostring(var11), tostring(var27), tostring(#var22.moments), tostring(#excludedMomentIds), tostring(#var96))
+										
+										for v, v_1 in var96 do
+											logCandidate(var27, v_1)
+										end
+										if t == nil then continue end
+										if sharedFlagsModule.FFlagMomentsOptimisticProfilePending and p19 ~= nil and not var10.resolvePendingUserMoment(var12, p19, t) then
+											return nil
+										end
+										var10.invalidateUser(var12)
+										
+										if var1 == nil then
+											var1 = require(parent.Loggers).Logger:new("Moments.Upload")
+										end
+										var1:debug("event=published_post_resolved resolverId={} attempt={} momentId={} feedItemId={} assetId={}", tostring(var11), tostring(var27), t.momentId, tostring(t.recommendationMetadata.feedItemId), tostring(t.assetId))
+										
+										return t
+									end
+								end
+								return nil
 							end
-							local var25, var26 = findPublishedPost(var22, var21, p16)
-							local excludedMomentIds = var22.excludedMomentIds or {}
-							
-							if var1 == nil then
-								var1 = require(parent.Loggers).Logger:new("Moments.Upload")
-							end
-							var1:debug("event=published_post_poll resolverId={} attempt={} moments={} excluded={} unknown={}", tostring(var11), tostring(i), tostring(#var22.moments), tostring(#excludedMomentIds), tostring(#var26))
-							
-							for i, v in var26 do
-								logCandidate(i, v)
-							end
-							if var25 == nil then
-								continue
-							end
-							var10.invalidateUser(var12)
-							
-							if var1 == nil then
-								var1 = require(parent.Loggers).Logger:new("Moments.Upload")
-							end
-							var1:debug("event=published_post_resolved resolverId={} attempt={} momentId={} feedItemId={} assetId={}", tostring(var11), tostring(i), var25.momentId, tostring(var25.recommendationMetadata.feedItemId), tostring(var25.assetId))
-							
-							return var25
 						end
 						if var1 == nil then
 							var1 = require(parent.Loggers).Logger:new("Moments.Upload")
 						end
-						var1:debug("event=published_post_unresolved resolverId={} reason=superseded attempt={}", tostring(var11), tostring(i))
+						var1:debug("event=published_post_unresolved resolverId={} reason=superseded attempt={}", tostring(var11), tostring(var27))
 						
 						return nil
 					end

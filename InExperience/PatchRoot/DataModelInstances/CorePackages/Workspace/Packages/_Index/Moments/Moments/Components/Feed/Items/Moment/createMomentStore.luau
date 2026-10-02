@@ -4,6 +4,7 @@ local _ = require(parent.MomentsCommon)
 local _ = require(parent.DataHydration.MomentsStoreTypes)
 local _ = require(parent.MomentsTypes)
 local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local signalsModule = require(parent.Signals)
 local getReactionsStoreModule = require(moments.Stores.GetReactionsStore)
 local getShareCountsStoreModule = require(moments.Stores.GetShareCountsStore)
@@ -16,7 +17,7 @@ local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 
 return function(p1, p2)
-	-- upvalues: createSignal (ref), getReactionsStoreModule (ref), getShareCountsStoreModule (ref), var1 (ref), createComputed (ref), fFlagMomentsReactToFeedItemV2Module (ref), reactionActionModule (ref)
+	-- upvalues: createSignal (ref), getReactionsStoreModule (ref), getShareCountsStoreModule (ref), var1 (ref), createComputed (ref), fFlagMomentsOptimisticProfilePending (ref), fFlagMomentsReactToFeedItemV2Module (ref), reactionActionModule (ref)
 	local var2 = createSignal(p1)
 	local momentId = p1.momentId
 	p2 = p2 or {}
@@ -64,7 +65,8 @@ return function(p1, p2)
 	end
 	
 	local function commitReaction(p3)
-		-- upvalues: var3 (ref), p1 (ref), momentId (ref)
+		-- upvalues: fFlagMomentsOptimisticProfilePending (copy), p1 (ref), var3 (ref), momentId (ref)
+		if fFlagMomentsOptimisticProfilePending and p1.isPending then return end
 		local var14 = var3.reactToFeedItem({
 			entityType = "userCreatedMoment",
 			feedItemId = p1.feedItemId or momentId,
@@ -79,7 +81,8 @@ return function(p1, p2)
 	end
 	
 	local function clearReaction()
-		-- upvalues: fFlagMomentsReactToFeedItemV2Module (copy), userReactionForMoment (ref), var3 (ref), p1 (ref), momentId (ref), reactionActionModule (copy)
+		-- upvalues: fFlagMomentsOptimisticProfilePending (copy), p1 (ref), fFlagMomentsReactToFeedItemV2Module (copy), userReactionForMoment (ref), var3 (ref), momentId (ref), reactionActionModule (copy)
+		if fFlagMomentsOptimisticProfilePending and p1.isPending then return end
 		if fFlagMomentsReactToFeedItemV2Module then
 			local var14 = userReactionForMoment(false)
 			

@@ -2,8 +2,10 @@
 local parent_1 = parent.Parent
 local roactModule = require(parent_1.Roact)
 local tModule = require(parent_1.t)
+local foundationFontFaceMigration = require(parent_1.Foundation).Utility.Flags.FoundationFontFaceMigration
 local withStyleModule = require(parent.Core.Style.withStyle)
 local getTextSizeModule = require(parent.Core.Text.GetTextSize)
+local getFontFromFontStyleModule = require(parent.Core.Text.GetFontFromFontStyle)
 local genericTextLabelModule = require(parent.Core.Text.GenericTextLabel.GenericTextLabel)
 local imagesModule = require(parent.App.ImageSet.Images)
 local imageSetComponentModule = require(parent.Core.ImageSet.ImageSetComponent)
@@ -32,9 +34,9 @@ badge.defaultProps = {
 }
 
 function badge.render(p1)
-	-- upvalues: withStyleModule (ref), tModule (ref), badgeStatesModule (ref), getTextSizeModule (ref), UIBloxConfigModule (ref), badgeVariantModule (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), divideTransparencyModule (ref), circle25 (ref), circle21 (ref), genericTextLabelModule (ref)
+	-- upvalues: withStyleModule (ref), tModule (ref), badgeStatesModule (ref), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), getTextSizeModule (ref), UIBloxConfigModule (ref), badgeVariantModule (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), divideTransparencyModule (ref), circle25 (ref), circle21 (ref), genericTextLabelModule (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), tModule (copy), badgeStatesModule (copy), getTextSizeModule (copy), UIBloxConfigModule (copy), badgeVariantModule (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), divideTransparencyModule (copy), circle25 (copy), circle21 (copy), genericTextLabelModule (copy)
+		-- upvalues: p1 (ref), tModule (copy), badgeStatesModule (copy), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), getTextSizeModule (copy), UIBloxConfigModule (copy), badgeVariantModule (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), divideTransparencyModule (copy), circle25 (copy), circle21 (copy), genericTextLabelModule (copy)
 		local theme = p2.Theme
 		local font = p2.Font
 		local var1 = tostring(p1.props.value)
@@ -47,7 +49,7 @@ function badge.render(p1)
 		if p1.props.value == badgeStatesModule.isEmpty then
 			var1 = ""
 		end
-		local var2 = getTextSizeModule(var1, font.CaptionBody.RelativeSize * p2.Font.BaseSize, font.CaptionBody.Font, Vector2.new(10000, 10000)).X + 10 + 4
+		local var2 = getTextSizeModule(var1, font.CaptionBody.RelativeSize * p2.Font.BaseSize, if foundationFontFaceMigration then getFontFromFontStyleModule(font.CaptionBody) else font.CaptionBody.Font, Vector2.new(10000, 10000)).X + 10 + 4
 		
 		if var2 < 24 then
 			var2 = 24

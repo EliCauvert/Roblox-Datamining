@@ -10,6 +10,7 @@ local getFitSizeModule = require(momentsCommon.Utils.getFitSize)
 local fFlagMomentsVideoCropRoundedCornersModule = require(momentsCommon.Flags.FFlagMomentsVideoCropRoundedCorners)
 local fFlagMomentsPreloadVideoPlayerInstanceModule = require(momentsCommon.Flags.FFlagMomentsPreloadVideoPlayerInstance)
 local fFlagMomentsVideoPermissionContextFixModule = require(momentsCommon.Flags.FFlagMomentsVideoPermissionContextFix)
+local fFlagMomentsOptimisticProfilePending = require(parent.SharedFlags).FFlagMomentsOptimisticProfilePending
 local useSignalState = signalsReactModule.useSignalState
 local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
@@ -44,7 +45,7 @@ local function VideoSurface(p1)
 		ZIndex = p1.zIndex,
 		ref = p1.setSurface
 	}, {
-		Corner = if p1.cornerRadius ~= nil then nil else reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) })
+		Corner = if p1.cornerRadius ~= nil then if p1.surfaceCornerRadius ~= nil then nil else reactModule.createElement("UICorner", { CornerRadius = p1.surfaceCornerRadius }) else reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) })
 	})
 end
 
@@ -72,7 +73,7 @@ end
 return {
 	kind = "video",
 	create = function(p1, p2)
-		-- upvalues: fFlagMomentsVideoPermissionContextFixModule (ref), createSignal (ref), defaultObserveLoaded (ref), createComputed (ref), fFlagMomentsPreloadVideoPlayerInstanceModule (ref), reactModule (ref), VideoSurface (ref)
+		-- upvalues: fFlagMomentsVideoPermissionContextFixModule (ref), createSignal (ref), defaultObserveLoaded (ref), createComputed (ref), fFlagMomentsPreloadVideoPlayerInstanceModule (ref), fFlagMomentsOptimisticProfilePending (ref), reactModule (ref), VideoSurface (ref)
 		local id = p1.id
 		local content = p1.content
 		local var2 = if fFlagMomentsVideoPermissionContextFixModule then p1.preloadContent or content else content
@@ -292,7 +293,7 @@ return {
 			audioStem = { defaultVolume = 1, stemId = id },
 			assets = assets,
 			download = function()
-				-- upvalues: var38 (write), fFlagMomentsPreloadVideoPlayerInstanceModule (copy), var23 (write), content (ref), var3 (ref), parent (ref), var31 (write), contentProvider (ref), var39 (write), var32 (write), var2 (write), var6 (ref), startLoadIfReady (ref)
+				-- upvalues: var38 (write), fFlagMomentsPreloadVideoPlayerInstanceModule (copy), var23 (write), content (ref), var3 (ref), parent (ref), var31 (write), contentProvider (ref), var39 (write), var32 (write), fFlagMomentsOptimisticProfilePending (copy), var2 (write), var6 (ref), startLoadIfReady (ref)
 				if fFlagMomentsPreloadVideoPlayerInstanceModule then
 					local var40 = var23
 					
@@ -319,7 +320,7 @@ return {
 					
 					if var39 or var38 ~= var38 or var23 ~= var40 then return end
 					var32 = true
-				else
+				elseif not fFlagMomentsOptimisticProfilePending or var2.Uri ~= nil then
 					contentProvider:PreloadAsync({ var2.Uri })
 				end
 				if var39 or var38 ~= var38 then
@@ -458,7 +459,8 @@ return {
 					getScaleType = p3.getScaleType,
 					setSurface = p3.setSurface,
 					zIndex = zIndex,
-					cornerRadius = cornerRadius
+					cornerRadius = cornerRadius,
+					surfaceCornerRadius = p3.cornerRadius
 				})
 			end,
 			play = function()

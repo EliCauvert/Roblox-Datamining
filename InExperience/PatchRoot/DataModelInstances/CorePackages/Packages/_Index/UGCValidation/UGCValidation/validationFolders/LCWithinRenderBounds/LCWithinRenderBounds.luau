@@ -6,7 +6,10 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local getEngineFeatureEngineUGCValidationLCOOBModule = require(parent.flags.getEngineFeatureEngineUGCValidationLCOOB)
 
 return {
-	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
+	categories = {
+		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
+	},
 	requiredData = {},
 	expectedFailures = {},
 	run = function(p1, p2)

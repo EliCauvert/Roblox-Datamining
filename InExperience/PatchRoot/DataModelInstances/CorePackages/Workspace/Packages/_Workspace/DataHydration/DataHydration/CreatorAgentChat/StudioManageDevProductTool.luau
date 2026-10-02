@@ -26,8 +26,9 @@ local t_1 = {
 			},
 			name = { type = "string" },
 			description = { type = "string" },
-			priceInRobux = { type = "integer" },
-			productId = { type = "integer" }
+			priceInRobux = { type = "integer", minimum = 1, maximum = 100 },
+			productId = { type = "integer" },
+			imageAssetId = { type = "integer", minimum = 1 }
 		}
 	}
 }
@@ -158,6 +159,7 @@ return {
 		if not t[lowerText] then
 			return nil
 		end
+		local var3, var4
 		local t_1 = { action = lowerText }
 		
 		if typeof(p4.name) == "string" then
@@ -166,17 +168,29 @@ return {
 		if typeof(p4.description) == "string" then
 			t_1.description = p4.description
 		end
-		local var3 = tonumber(p4.priceInRobux)
-		local var4 = if var3 == nil or var3 % 1 ~= 0 then nil else var3
-		
-		if var4 ~= nil then
+		if p4.priceInRobux ~= nil then
+			var3 = tonumber(p4.priceInRobux)
+			var4 = if var3 == nil or var3 % 1 ~= 0 then nil else var3
+			
+			if var4 == nil or var4 < 1 or var4 > 100 then
+				return nil
+			end
 			t_1.priceInRobux = var4
 		end
-		local var5 = tonumber(p4.productId)
-		local var6 = if var5 == nil or var5 % 1 ~= 0 then nil else var5
+		var3 = tonumber(p4.productId)
+		var4 = if var3 == nil or var3 % 1 ~= 0 then nil else var3
 		
-		if var6 ~= nil then
-			t_1.productId = var6
+		if var4 ~= nil then
+			t_1.productId = var4
+		end
+		if p4.imageAssetId ~= nil then
+			local var5 = tonumber(p4.imageAssetId)
+			local var6 = if var5 == nil or var5 % 1 ~= 0 then nil else var5
+			
+			if var6 == nil or var6 < 1 or lowerText ~= "create" then
+				return nil
+			end
+			t_1.imageAssetId = var6
 		end
 		if lowerText == "create" then
 			if t_1.name == nil or t_1.name == "" or t_1.priceInRobux == nil then

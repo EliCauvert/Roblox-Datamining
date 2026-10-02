@@ -1,1 +1,1 @@
-﻿return table.freeze({ 0.6, 0.95 })
+﻿return table.freeze({ 0.65, 1 })

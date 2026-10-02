@@ -24,9 +24,10 @@ local connectButtonModule = require(peopleReactView.Components.Card.ConnectButto
 local fFlagSideSheetOpenPeoplePage = require(parent.SharedFlags).FFlagSideSheetOpenPeoplePage
 local getFFlagPeoplePageLazyRenderCards = peopleServiceModule.getService("Flags").GetFFlagPeoplePageLazyRenderCards
 local peoplePageCardMenuUseVisibleProperty = game:DefineFastFlag("PeoplePageCardMenuUseVisibleProperty", false)
+local peoplePageFixCardMenuZIndex = game:DefineFastFlag("PeoplePageFixCardMenuZIndex", false)
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), getFFlagPeoplePageLazyRenderCards (ref), usePreferredInput (ref), useLastInputMode (ref), useGetPeopleServiceModule (ref), personButtonConfigsModule (ref), signalsReactModule (ref), fFlagSideSheetOpenPeoplePage (ref), useIsComponentInputEndedModule (ref), controlState (ref), input (ref), view (ref), stateLayerAffordance (ref), image (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), peoplePageCardMenuUseVisibleProperty (ref), cardMenuModule (ref), connectButtonModule (ref), inputSize (ref)
+	-- upvalues: reactModule (ref), getFFlagPeoplePageLazyRenderCards (ref), usePreferredInput (ref), useLastInputMode (ref), useGetPeopleServiceModule (ref), personButtonConfigsModule (ref), signalsReactModule (ref), fFlagSideSheetOpenPeoplePage (ref), useIsComponentInputEndedModule (ref), controlState (ref), input (ref), view (ref), stateLayerAffordance (ref), image (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), peoplePageFixCardMenuZIndex (ref), peoplePageCardMenuUseVisibleProperty (ref), cardMenuModule (ref), connectButtonModule (ref), inputSize (ref)
 	local var1 = reactModule.useRef(nil)
 	local var2 = if not getFFlagPeoplePageLazyRenderCards() then usePreferredInput() else nil
 	local var3 = if not getFFlagPeoplePageLazyRenderCards() then useLastInputMode() else nil
@@ -84,7 +85,8 @@ return reactModule.memo(function(p1)
 			})
 		}),
 		ThumbnailHeaderBar = reactModule.createElement(view, {
-			tag = "row size-full-0 auto-y align-x-right padding-small"
+			tag = "row size-full-0 auto-y align-x-right padding-small",
+			ZIndex = if peoplePageFixCardMenuZIndex then 2 else nil
 		}, {
 			CardMenuBackground = if peoplePageCardMenuUseVisibleProperty or var20 then reactModule.createElement(view, {
 				AutomaticSize = Enum.AutomaticSize.XY,

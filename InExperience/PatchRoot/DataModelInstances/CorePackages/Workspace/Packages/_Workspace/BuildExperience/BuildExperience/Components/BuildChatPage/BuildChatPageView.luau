@@ -412,6 +412,7 @@ return function(p4)
 			onCreate = p4.onAdCampaignSheetCreate,
 			isCreatePending = p4.isAdUpsellCreatePending,
 			hasCreateError = p4.hasAdCampaignCreateError,
+			createErrorKind = p4.adCampaignCreateErrorKind,
 			campaignDurationDays = p4.adCampaignDurationDays,
 			estimatedPriceRobux = p4.adCampaignEstimatedPriceRobux,
 			campaignOffers = p4.adCampaignOffers,

@@ -1301,7 +1301,6 @@ Feature.AddFriends.Action.RequestIgnored,요청이 무시됨
 Feature.AddFriends.Label.AddFriendsTooltip,"먼저 친구를 찾은 후, 함께 Roblox를 탐험하세요."
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"사용자 이름이나 이름으로 검색해, 아는 사람들을 Roblox에서 찾으세요."
 Feature.AddFriends.Label.ConnectWithContacts,"연락처 목록의 친구들을 초대하거나, 이미 Roblox에 있는 친구들과 소통하세요!"
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,회원 검색
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,사람 검색
 Feature.AddFriends.Label.SearchForFriendsPrompt,"사용자 이름이나 표시 이름으로 검색해, 아는 사람들을 Roblox에서 찾으세요."
 Feature.AddFriends.Label.SyncWithContacts,연락처를 동기화해 친구를 찾고 초대하세요!
@@ -1944,6 +1943,7 @@ Feature.Build.Action.DontShowAgain,
 Feature.Build.Action.EarnRobux,Robux 획득
 Feature.Build.Action.Edit,편집
 Feature.Build.Action.HideAutosaved,자동 저장된 버전 숨기기
+Feature.Build.Action.KeepBuilding,계속 제작
 Feature.Build.Action.ManageLimit,한도 관리
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,나중에
@@ -1969,6 +1969,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,링크 공유
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,통계
+Feature.Build.Action.Stop,중지
 Feature.Build.Action.Submit,제출하기
 Feature.Build.Action.UpdateRating,등급 업데이트
 Feature.Build.Action.UpdateWithChanges,변경 사항으로 업데이트
@@ -2078,7 +2079,12 @@ Feature.Build.Description.RevertToVersion,확인을 눌러 최신 변경 사항�
 Feature.Build.Description.ShareLatest,최신 버전에서 변경된 사항을 공유하세요.
 Feature.Build.Description.ShopButton,쇼핑 진입점 추가
 Feature.Build.Description.ShortAdCampaign,플레이어들이 내 게임에 대해 어떻게 생각하는지 빠르게 확인할 수 있는 방법입니다.
+Feature.Build.Description.StopBuild,"이 요청은 아직 진행 중입니다. 지금 중지하면 요청이 완료되지 않으며, 다시 요청하셔야 합니다."
 Feature.Build.Description.UpdateDeveloperProduct,개발자 상품 {PRODUCT_ID}을(를) 업데이트하세요.
+Feature.Build.Error.AdForbidden,지금은 계정이나 게임에서 광고를 게재할 수 없습니다. 오류라고 생각되면 지원 센터로 문의하세요.
+Feature.Build.Error.AdInsufficientFunds,Robux가 부족해 이 광고를 만들 수 없습니다. Robux를 추가하고 다시 시도하세요.
+Feature.Build.Error.AdInternalError,
+Feature.Build.Error.AdMissingThumbnail,광고를 게재하려면 게임에 섬네일이 있어야 합니다. 섬네일을 추가하고 다시 시도하세요.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"설명은 1,000자 이하여야 합니다."
 Feature.Build.Error.DeveloperProductNameRequired,상품 이름을 입력하세요.
 Feature.Build.Error.DeveloperProductNameTooLong,이름은 50자 이하여야 합니다.
@@ -2264,9 +2270,6 @@ Feature.Build.Message.AccountRequirements,회원님의 계정이 Build 사용 �
 Feature.Build.Message.AccountTooNew,계정을 새로 만든 지 얼마 안 돼서 게시할 수 없습니다. 2일 후에 다시 시도해 보세요.
 Feature.Build.Message.AdCampaignCreateFailed,캠페인을 생성하지 못했습니다. 다시 시도해 보세요.
 Feature.Build.Message.AdPerformanceLoadFailed,광고 실적을 불러올 수 없습니다
-Feature.Build.Message.AdsPromotionBannerSubtitle,무료로 오디언스를 확대하세요
-Feature.Build.Message.AdsPromotionBannerTitle,무료 프로모션이 {promotionCount}건 남았습니다
-Feature.Build.Message.AdsPromotionBannerTitleSingular,무료 프로모션이 1건 남았습니다
 Feature.Build.Message.AdsStatsEmpty,광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요
 Feature.Build.Message.AdsStatsEmptyFree,무료 광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요
 Feature.Build.Message.AllFriendsAdded,모든 친구를 얼리 테스터로 초대했습니다.
@@ -2399,6 +2402,7 @@ Feature.Build.Title.PromoteGameFreeSingular,무료 광고를 이용할 수 있�
 Feature.Build.Title.PromoteGamePaid,더 많은 플레이어가 기다리고 있어요
 Feature.Build.Title.PushNotifications,푸시 알림
 Feature.Build.Title.RevertLastChange,마지막 변경 사항을 되돌리시겠어요?
+Feature.Build.Title.StopBuild,빌드를 중지하시겠습니까?
 Feature.Build.Title.Tasks,작업
 Feature.Build.Title.TurnActivity,턴 활동
 Feature.Build.Title.VersionHistory,버전 기록
@@ -3790,6 +3794,7 @@ Feature.PlayerSearchResults.Label.FromSearch,검색에서
 Feature.PlayerSearchResults.Label.Previously,
 Feature.PlayerSearchResults.Label.ThisIsYou,회원님이네요
 Feature.PlayerSearchResults.Label.YouAreFollowing,내가 현재 팔로잉
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio에서는 비공개 서버 구매가 지원되지 않습니다.
 Feature.Profile.Action.AboutThisProfile,프로필 정보
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4040,6 +4045,7 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV3,"아이템 및 아바�
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Roblox Plus 구독을 통해 적은 Robux로 더 큰 즐거움을 누리세요.
 Feature.RobloxSubscription.Description.JoinEarly,Plus로 일찍 참여하기
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}를 클릭하면 <a href=""{termsUrl}"">Roblox 구독 약관</a>에 동의하는 것으로 간주됩니다. 구독을 취소하기 전까지 매월 자동으로 요금이 청구됩니다."
+Feature.RobloxSubscription.Heading.ReferralEntry,Plus를 공유하고 {amount} Robux  받기
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,무료 비공개 서버
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,Robux 무료로 보내기
@@ -4050,6 +4056,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,'계속하기'를 클�
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"'무료 체험'을 클릭하면 {linkStart}Roblox 구독 약관{linkEnd}에 동의하는 것으로 간주됩니다. 무료 체험 기간은 1개월 후 종료되며, 매월 자동으로 요금이 청구됩니다. 언제든지 구독을 취소하실 수 있습니다."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"'무료 체험'을 클릭하면 {linkStart}Roblox 구독 약관{linkEnd}에 동의하는 것으로 간주됩니다. 무료 체험 기간은 {trialDuration}{trialPeriodLabel} 후 종료되며, {billingPeriodLabel}마다 자동으로 요금이 청구됩니다. 구독은 언제든지 취소하실 수 있습니다."
 Feature.RobloxSubscription.Label.FreeTrialText,무료 체험하기
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}1개월 무료 이용{boldEnd} 후 {price}/{periodType}
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration}{trialPeriodLabel} 무료 이용{boldEnd} 후 {price}/{periodType}
 Feature.RobloxSubscription.Label.month,개월
@@ -4298,6 +4305,8 @@ Feature.SongDetails.Action.ReportAudio,오디오 신고
 Feature.SongDetails.Label.InappropriateAudio,부적절한 오디오
 Feature.SongDetails.Label.InappropriateThumbnail,부적절한 섬네일
 Feature.SongDetails.Label.SongPreview,노래 미리 보기
+Feature.SplitPane.Label.CollapseAvatar,아바타 접기
+Feature.SplitPane.Label.ExpandAvatar,아바타 펼치기
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,다른 사용자 추가
 Feature.Squads.Action.ConnectToVoice,음성에 연결
@@ -4445,6 +4454,8 @@ Feature.Toast.VoteError.FloodCheckThresholdMet,너무 자주 투표를 하시는
 Feature.Toast.VoteError.PlayGame,체험을 평가하려면 먼저 이 체험을 방문하셔야 합니다.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,커뮤니티 규정을 반복적으로 위반하셨기 때문에 지금은 회원님의 나이를 확인할 수 없습니다. 제한이 종료된 후 다시 시도하세요.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,나이 확인 일시 중지됨
+Feature.UniversalFeatureRestrictions.AbuseVector.LabelName.Voice,음성
+Feature.UniversalFeatureRestrictions.AbuseVector.Lowercase.LabelName.Voice,
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,규칙을 반복해서 위반했거나 위반 정도가 심각해 이 게임을 플레이하는 것이 금지되었습니다.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,규칙을 어기는 행동을 하셨기 때문에 이 게임을 플레이할 수 없습니다.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Roblox에서 회원님의 이 게임 이용을 일시 정지했습니다
@@ -4454,6 +4465,13 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox에서 {number}시간 동안 회원님의 이 게임 이용을 정지했습니다
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox에서 1분 동안 회원님의 이 게임 이용을 정지했습니다
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox에서 {number}분 동안 회원님의 이 게임 이용을 정지했습니다
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Banned,커뮤니티 규칙에 맞지 않는 행동을 하셨기 때문에 이 기능을 사용할 수 없습니다.
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Nudge,커뮤니티 규칙을 계속 위반하는 경우 이 기능 사용이 일시 중지될 수 있습니다.
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Suspended,커뮤니티 규칙에 맞지 않는 행동을 하셨기 때문에 이 기능을 사용할 수 없습니다. 재차 규정을 위반하면 일시 정지 조치가 취해질 수 있습니다.
+Feature.UniversalFeatureRestrictions.Generic.DialogTitle.Banned,회원님의 {abuseVector} 이용이 영구 정지되었습니다
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Nudge,{abuseVector}에 대한 액세스 권한을 잃을 수 있습니다
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minute,{abuseVector} 사용이 1분 동안 정지되었습니다
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minutes,{abuseVector} 사용이 {number}분 동안 정지되었습니다
 Feature.UniversalShareSheet.Action.CopiedLink,
 Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,메시지 공유
 Feature.UniversalShareSheet.Response.NotSharedMessage,메시지를 전송할 수 없습니다.
@@ -4916,6 +4934,7 @@ InGame.GameplayPaused.Body,플레이가 일시 중지되었습니다. 게임 콘
 InGame.GameplayPaused.Title,플레이가 일시 중지됨
 InGame.HelpMenu.Controls.ToggleGameMenu,
 InGame.HelpMenu.DownArrow,
+InGame.HelpMenu.GenericAction,액션
 InGame.HelpMenu.Label.ClientCoreScriptVersion,클라이언트 CoreScript 버전:
 InGame.HelpMenu.Label.ClientVersion,클라이언트 버전:
 InGame.HelpMenu.Label.PlaceVersion,플레이스 버전:

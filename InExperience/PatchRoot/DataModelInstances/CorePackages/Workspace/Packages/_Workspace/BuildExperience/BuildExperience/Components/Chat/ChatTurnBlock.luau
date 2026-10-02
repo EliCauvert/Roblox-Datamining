@@ -227,6 +227,7 @@ local function DevProductProposalSection(p1)
 			description = devProductProposal.description,
 			priceInRobux = devProductProposal.priceInRobux,
 			productId = devProductProposal.productId,
+			imageAssetId = devProductProposal.imageAssetId,
 			onApprove = p1.onApprove or function() end,
 			onReject = p1.onReject or function() end,
 			isActionDisabled = not (devProductProposal.isApproved ~= true and devProductProposal.isRejected ~= true)

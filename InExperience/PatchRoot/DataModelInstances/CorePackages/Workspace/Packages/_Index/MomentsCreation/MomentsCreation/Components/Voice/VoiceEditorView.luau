@@ -1,14 +1,17 @@
 ﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
 local parent = momentsCreation.Parent
+local builderIconsModule = require(parent.BuilderIcons)
 local foundationModule = require(parent.Foundation)
 local momentsCommonModule = require(parent.MomentsCommon)
 local reactModule = require(parent.React)
 local button = foundationModule.Button
+local icon = foundationModule.Icon
 local text = foundationModule.Text
 local textArea = foundationModule.TextArea
 local view = foundationModule.View
 local inputSize = foundationModule.Enums.InputSize
 local inputVariant = foundationModule.Enums.InputVariant
+local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
 local useTokens = foundationModule.Hooks.useTokens
 local audioWaveformOverlayModule = require(momentsCreation.Components.Voice.AudioWaveformOverlay)
@@ -18,7 +21,7 @@ local _ = require(momentsCreation.Types.CreationFlowTypes)
 local getFFlagMomentsTTSStartTimePositioningModule = require(momentsCreation.Flags.GetFFlagMomentsTTSStartTimePositioning)
 
 return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), view (ref), videoTimelineModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), audioWaveformOverlayModule (ref), textArea (ref), inputSize (ref), inputVariant (ref), text (ref), voiceActionBarModule (ref), foundationModule (ref), button (ref)
+	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), view (ref), videoTimelineModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), audioWaveformOverlayModule (ref), textArea (ref), inputSize (ref), inputVariant (ref), stateLayerAffordance (ref), text (ref), icon (ref), builderIconsModule (ref), foundationModule (ref), voiceActionBarModule (ref), button (ref)
 	local var1
 	local var2 = useDeviceInsets()
 	local var3 = useTokens()
@@ -56,7 +59,10 @@ return function(p1)
 		ComposerSection = reactModule.createElement(view, { LayoutOrder = 2, tag = "col size-full-0 auto-y" }, {
 			InputContainer = reactModule.createElement(view, {
 				LayoutOrder = 1,
-				tag = "size-full-0 auto-y",
+				tag = {
+					["col size-full-0 auto-y"] = p1.showVoiceSelector,
+					["size-full-0 auto-y"] = not p1.showVoiceSelector
+				},
 				stroke = {
 					Color = if isInputInvalid then var3.Color.System.Alert.Color3 else var3.Color.Stroke.Emphasis.Color3,
 					Transparency = if isInputInvalid then 0 else var3.Color.Stroke.Emphasis.Transparency,
@@ -67,6 +73,7 @@ return function(p1)
 				ref = p1.composerContainerRef
 			}, {
 				Composer = reactModule.createElement(textArea, {
+					LayoutOrder = 1,
 					label = "",
 					text = p1.text,
 					width = UDim.new(1, 0),
@@ -78,7 +85,42 @@ return function(p1)
 					onFocusLost = p1.onTextBoxFocusLost,
 					isDisabled = isGenerating,
 					textBoxRef = p1.textBoxRef
-				})
+				}),
+				VoicePill = if p1.showVoiceSelector then reactModule.createElement(view, {
+					LayoutOrder = 2,
+					tag = "auto-xy",
+					padding = {
+						top = UDim.new(0, var3.Padding.Small),
+						bottom = UDim.new(0, var3.Padding.Small),
+						left = UDim.new(0, var3.Padding.Small),
+						right = UDim.new(0, var3.Padding.Small)
+					}
+				}, {
+					Pill = reactModule.createElement(view, {
+						tag = "row align-y-center gap-small auto-xy radius-circle bg-surface-300",
+						ref = p1.voiceSelectorButtonRef,
+						onActivated = p1.onOpenVoiceSelector,
+						stateLayer = { affordance = stateLayerAffordance.Background },
+						padding = {
+							top = UDim.new(0, var3.Padding.Small),
+							bottom = UDim.new(0, var3.Padding.Small),
+							left = UDim.new(0, var3.Padding.Medium),
+							right = UDim.new(0, var3.Padding.Medium)
+						}
+					}, {
+						Label = reactModule.createElement(text, {
+							LayoutOrder = 1,
+							tag = "auto-xy text-label-small content-emphasis",
+							Text = p1.selectedVoiceName or ""
+						}),
+						Chevron = reactModule.createElement(icon, {
+							LayoutOrder = 2,
+							name = builderIconsModule.Icon.ChevronSmallDown,
+							size = foundationModule.Enums.IconSize.Small,
+							style = var3.Color.Content.Default
+						})
+					})
+				}) else nil
 			}),
 			HelperRow = reactModule.createElement(view, {
 				LayoutOrder = 2,

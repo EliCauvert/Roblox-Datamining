@@ -1,5 +1,6 @@
 ﻿return {
 	Deleted = "Deleted",
 	Public = "Public",
-	FailedToLoad = "FailedToLoad"
+	FailedToLoad = "FailedToLoad",
+	Pending = "Pending"
 }

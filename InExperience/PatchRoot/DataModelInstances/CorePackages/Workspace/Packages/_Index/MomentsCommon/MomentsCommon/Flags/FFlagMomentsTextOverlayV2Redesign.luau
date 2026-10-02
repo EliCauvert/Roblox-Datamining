@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("MomentsTextOverlayV2Redesign", false)
+﻿return game:DefineFastFlag("MomentsTextOverlayV2RedesignPhase1", false)

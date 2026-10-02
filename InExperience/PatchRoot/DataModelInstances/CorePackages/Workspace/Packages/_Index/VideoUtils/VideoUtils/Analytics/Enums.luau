@@ -1,8 +1,10 @@
 ﻿return {
 	VideoEndReason = {
 		AppBackgrounded = "appBackgrounded",
+		Completed = "completed",
 		ExitViewport = "exitViewport",
 		ExperienceLaunched = "experienceLaunched",
+		HoverTakeover = "hoverTakeover",
 		PlayabilityCheckFailed = "playabilityCheckFailed",
 		ScrollStart = "scrollStart",
 		ScrollSettled = "scrollSettled",

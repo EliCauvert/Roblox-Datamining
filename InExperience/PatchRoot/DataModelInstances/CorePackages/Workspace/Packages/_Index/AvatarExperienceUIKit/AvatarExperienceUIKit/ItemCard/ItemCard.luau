@@ -9,12 +9,11 @@ local useSelectionCursor = UIBloxModule.App.SelectionImage.useSelectionCursor
 local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local _ = require(avatarExperienceUIKit.BackgroundLayers.BackgroundLayers)
 local itemCardBackgroundsWrapperModule = require(script.Parent.ItemCardBackgroundsWrapper)
-local fFlagAXMISEnableMultiShopping = require(parent.AvatarExperienceFlags).FFlagAXMISEnableMultiShopping
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useSelectionCursor (ref), cursorKind (ref), useTokens (ref), reactModule (ref), fFlagAXMISEnableMultiShopping (ref), itemCardBackgroundsWrapperModule (ref), view (ref)
+	-- upvalues: useSelectionCursor (ref), cursorKind (ref), useTokens (ref), reactModule (ref), itemCardBackgroundsWrapperModule (ref), view (ref)
 	return reactModule.createElement("TextButton", {
-		Selectable = if fFlagAXMISEnableMultiShopping then p1.Selectable else nil,
+		Selectable = p1.Selectable,
 		SelectionImageObject = useSelectionCursor(cursorKind.RoundedRect),
 		Text = "",
 		AutoButtonColor = false,

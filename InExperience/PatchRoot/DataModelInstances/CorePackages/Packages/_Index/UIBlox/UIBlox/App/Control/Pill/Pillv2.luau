@@ -19,7 +19,9 @@ local genericTextLabelModule = require(core.Text.GenericTextLabel.GenericTextLab
 local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
 local skeleton = foundationModule.Skeleton
 local radius = foundationModule.Enums.Radius
+local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local getTextSizeModule = require(parent_1.Core.Text.GetTextSize)
+local getFontFromFontStyleModule = require(parent_1.Core.Text.GetFontFromFontStyle)
 local t = {
 	hasBorder = false,
 	isDisabled = false,
@@ -54,7 +56,7 @@ local t_6 = {
 }
 
 local function Pillv2(p1)
-	-- upvalues: cryoModule (ref), t (ref), useControlStateModule (ref), reactModule (ref), useStyleModule (ref), useSelectionCursorModule (ref), cursorKindModule (ref), t_3 (ref), t_2 (ref), t_5 (ref), t_4 (ref), getContentStyleModule (ref), t_1 (ref), t_6 (ref), getIconSizeModule (ref), iconSizeModule (ref), getTextSizeModule (ref), skeleton (ref), radius (ref), controlStateModule (ref), interactableModule (ref), genericTextLabelModule (ref), imageSetComponentModule (ref), imagesModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useControlStateModule (ref), reactModule (ref), useStyleModule (ref), useSelectionCursorModule (ref), cursorKindModule (ref), t_3 (ref), t_2 (ref), t_5 (ref), t_4 (ref), getContentStyleModule (ref), t_1 (ref), t_6 (ref), getIconSizeModule (ref), iconSizeModule (ref), getTextSizeModule (ref), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), skeleton (ref), radius (ref), controlStateModule (ref), interactableModule (ref), genericTextLabelModule (ref), imageSetComponentModule (ref), imagesModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local text = var1.text
 	local var2, var3 = useControlStateModule()
@@ -76,7 +78,7 @@ local function Pillv2(p1)
 	local var12 = getContentStyleModule(t_6, var2, var5)
 	local var13 = getIconSizeModule(iconSizeModule.Small)
 	local var14 = font.CaptionHeader.RelativeSize * font.BaseSize
-	local x = getTextSizeModule(text, var14, font.CaptionHeader.Font, Vector2.new(10000, 10000)).X
+	local x = getTextSizeModule(text, var14, if foundationFontFaceMigration then getFontFromFontStyleModule(font.CaptionHeader) else font.CaptionHeader.Font, Vector2.new(10000, 10000)).X
 	local var15 = x + 24
 	local var16 = 216
 	

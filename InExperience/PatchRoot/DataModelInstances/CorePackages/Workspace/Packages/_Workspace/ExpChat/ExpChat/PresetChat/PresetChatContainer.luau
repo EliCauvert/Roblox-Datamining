@@ -7,8 +7,10 @@ local expChatSharedModule = require(parent.ExpChatShared)
 local foundationModule = require(parent.Foundation)
 local inputTypeModule = require(parent.InputType)
 local reactModule = require(parent.React)
+local roactUtilsModule = require(parent.RoactUtils)
 local signalsReactModule = require(parent.SignalsReact)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local engineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
+local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local text = foundationModule.Text
 local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
 local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
@@ -34,7 +36,7 @@ local function _()
 end
 
 return reactModule.memo(function(value)
-	-- upvalues: foundationModule (ref), getPresetChatStoreModule (ref), useDispatch (ref), signalsReactModule (ref), getMessagesStoreModule (ref), localizationModule (ref), reactModule (ref), setIsPresetTrayOpenModule (ref), presetTrayKeyboardSelectedModule (ref), expChatSharedModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), inputTypeModule (ref), userInputService (ref), guiService (ref), getTransparencyStoreModule (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (ref), var1 (ref), sendPresetModule (ref), presetChatContainer (ref), textChatService (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), presetMessageButtonModule (ref), text (ref), presetCooldownProviderModule (ref)
+	-- upvalues: foundationModule (ref), getPresetChatStoreModule (ref), useDispatch (ref), signalsReactModule (ref), getMessagesStoreModule (ref), localizationModule (ref), reactModule (ref), setIsPresetTrayOpenModule (ref), presetTrayKeyboardSelectedModule (ref), expChatSharedModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), inputTypeModule (ref), userInputService (ref), guiService (ref), getTransparencyStoreModule (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (ref), var1 (ref), sendPresetModule (ref), presetChatContainer (ref), textChatService (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref), presetMessageButtonModule (ref), text (ref), presetCooldownProviderModule (ref)
 	local var2 = foundationModule.Hooks.useTokens()
 	local var3 = getPresetChatStoreModule(false)
 	local var4 = useDispatch()
@@ -239,10 +241,10 @@ return reactModule.memo(function(value)
 		for i_1, v_1 in var17.categories do
 			local t_2 = {}
 			
-			for i_2, v_2 in v_1.messages do
+			for i_2, v_2 in if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then v_1.contents else v_1.messages do
 				t_2["Msg_" .. v_2.presetId] = reactModule.createElement(presetMessageButtonModule, {
 					presetId = v_2.presetId,
-					text = v_2.value,
+					text = if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then v_2.text else v_2.value,
 					layoutOrder = i_2,
 					onActivated = var16,
 					buttonRef = if var18 then var11 else nil

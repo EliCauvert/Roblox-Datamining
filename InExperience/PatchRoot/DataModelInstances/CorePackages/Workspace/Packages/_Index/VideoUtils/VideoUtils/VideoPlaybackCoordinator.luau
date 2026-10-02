@@ -7,6 +7,7 @@ local signal = require(parent.AppCommonLib).Signal
 local _ = require(videoUtils.Analytics.VideoAnalyticsTypes)
 local getIsInstanceVisibleModule = require(videoUtils.getIsInstanceVisible)
 local fFlagLuaAppEdpMediaGalleryFullScreen = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
+local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 local t = {}
 t.__index = t
 t.preferredFramerateThrottling = false
@@ -121,7 +122,7 @@ function t:reset(p1, _, p2, _)
 end
 
 function t:__cancelCurrentPlayback(p3, p4, p5, p6)
-	-- upvalues: argCheckModule (ref), var1 (write)
+	-- upvalues: argCheckModule (ref), var1 (write), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref)
 	local currentPlaybackSessionStartTime = self.currentPlaybackSessionStartTime
 	
 	if p6 then
@@ -137,6 +138,12 @@ function t:__cancelCurrentPlayback(p3, p4, p5, p6)
 	self.currentPlaybackSessionStartTime = nil
 	self.videoAnalytics = nil
 	self.playingVideoItemIndex = nil
+	
+	if fFlagLuaAppOneByTwoHoverIdleAutoplay then
+		self.changed:fire(nil, p3)
+		
+		return
+	end
 	self.changed:fire(nil)
 end
 

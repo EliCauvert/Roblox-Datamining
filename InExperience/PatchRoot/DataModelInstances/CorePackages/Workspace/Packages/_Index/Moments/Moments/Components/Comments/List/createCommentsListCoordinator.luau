@@ -13,7 +13,6 @@ local signalsExperimentalModule = require(parent.SignalsExperimental)
 local _ = require(moments.Components.Comments.GetCommentCollectionStore.createCommentCollectionStore)
 local _ = require(moments.Components.Comments.GetCommentSessionFiltersStore.createCommentSessionFiltersStore)
 local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
-local fFlagMomentsCommentRecommendationTextModule = require(moments.Flags.FFlagMomentsCommentRecommendationText)
 local _ = require(moments.Stores.GetCommentReactionsStore.createCommentReactionsStore)
 local loadStatus = require(moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes).LoadStatus
 local list = { 250, 500 }
@@ -192,7 +191,7 @@ end
 local function noOp() end
 
 return function(p1)
-	-- upvalues: momentsCommentsModule (ref), defaultSchedule (ref), defaultReadStatusCode (ref), defaultReadRetryAfter (ref), signalsModule (ref), parseHttpDateMs (ref), loadStatus (ref), signalsExperimentalModule (ref), t (ref), t_2 (ref), observeRequest (ref), list (ref), fFlagMomentsComments (ref), eventNames (ref), getCommentsFailureReasonModule (ref), fFlagMomentsCommentRecommendationTextModule (ref), t_1 (ref), rejectReactionMutation (ref), noOp (ref)
+	-- upvalues: momentsCommentsModule (ref), defaultSchedule (ref), defaultReadStatusCode (ref), defaultReadRetryAfter (ref), signalsModule (ref), parseHttpDateMs (ref), loadStatus (ref), signalsExperimentalModule (ref), t (ref), t_2 (ref), observeRequest (ref), list (ref), fFlagMomentsComments (ref), eventNames (ref), getCommentsFailureReasonModule (ref), t_1 (ref), rejectReactionMutation (ref), noOp (ref)
 	local collectionStore = p1.collectionStore
 	local commentsStore = p1.commentsStore
 	local reactionStore = p1.reactionStore
@@ -1136,7 +1135,7 @@ return function(p1)
 	end
 	
 	local function startPendingPost(p10, p11, p12, p13, p14)
-		-- upvalues: var2 (write), commentsStore (ref), fFlagMomentsComments (copy), readRetryAfter (ref), var9 (write), eventNames (copy), postComment (ref), p1 (ref), observeRequest (copy), var7 (write), var1 (write), collectionStore (ref), incrementMomentCommentCount (ref), var8 (write), fFlagMomentsCommentRecommendationTextModule (copy), readStatusCode (ref), momentsCommentsModule (copy), setPostCooldown (ref), getCommentsFailureReasonModule (copy), t_1 (copy), markFeedUnavailable (ref), revokeViewerWrite (ref)
+		-- upvalues: var2 (write), commentsStore (ref), fFlagMomentsComments (copy), readRetryAfter (ref), var9 (write), eventNames (copy), postComment (ref), p1 (ref), observeRequest (copy), var7 (write), var1 (write), collectionStore (ref), incrementMomentCommentCount (ref), var8 (write), readStatusCode (ref), momentsCommentsModule (copy), setPostCooldown (ref), getCommentsFailureReasonModule (copy), t_1 (copy), markFeedUnavailable (ref), revokeViewerWrite (ref)
 		if var2 ~= nil then
 			return false
 		end
@@ -1167,7 +1166,7 @@ return function(p1)
 		}
 		var2 = t
 		t.cancel = observeRequest(var25, function(p15)
-			-- upvalues: var2 (copy), t (ref), p11 (ref), p12 (ref), ownerGeneration (ref), p10 (ref), var7 (copy), var1 (copy), commentsStore (copy), collectionStore (copy), incrementMomentCommentCount (copy), fFlagMomentsComments (copy), var9 (ref), eventNames (copy), var8 (copy), fFlagMomentsCommentRecommendationTextModule (copy), readStatusCode (copy), var22 (write), momentsCommentsModule (copy), p14 (ref), setPostCooldown (copy), var23 (write), getCommentsFailureReasonModule (copy), t_1 (copy), markFeedUnavailable (copy), revokeViewerWrite (copy)
+			-- upvalues: var2 (copy), t (ref), p11 (ref), p12 (ref), ownerGeneration (ref), p10 (ref), var7 (copy), var1 (copy), commentsStore (copy), collectionStore (copy), incrementMomentCommentCount (copy), fFlagMomentsComments (copy), var9 (ref), eventNames (copy), var8 (copy), readStatusCode (copy), var22 (write), momentsCommentsModule (copy), p14 (ref), setPostCooldown (copy), var23 (write), getCommentsFailureReasonModule (copy), t_1 (copy), markFeedUnavailable (copy), revokeViewerWrite (copy)
 			if var2 == t and t.feedItemId == p11 and (t.sessionId == p12 and t.ownerGeneration == ownerGeneration) then
 				local var26 = p10
 				local var27 = ownerGeneration
@@ -1191,7 +1190,7 @@ return function(p1)
 						var8 = nil
 						
 						if var29 ~= nil then
-							var29(if fFlagMomentsCommentRecommendationTextModule then p15.result.text else nil)
+							var29(p15.result.text)
 						end
 					end
 					return
@@ -1588,9 +1587,41 @@ return function(p1)
 		return ensureInitialLoad(p10, p11)
 	end
 	
-	local var22 = signalsModule.createEffect(function(p10)
+	local function retryLoadMore(p10, p11)
+		-- upvalues: var1 (write), var7 (write), commentsStore (ref), collectionStore (ref), loadStatus (copy), retryInitial (ref), var13 (write)
+		local var22 = var1
+		local var23 = if var7 or var22 == nil or (var22.feedItemId ~= p10 or var22.sessionId ~= p11) or (var22.ownerGeneration ~= commentsStore.getOwnerGeneration(false) or var22.refCount == 0) then nil else var22
+		
+		if var23 == nil then
+			return false
+		end
+		var22 = collectionStore.getState(p10)(false)
+		
+		return not (var22.hasMore ~= true or var22.initialLoadStatus == loadStatus.Loading or var22.loadMoreStatus == loadStatus.Loading) and (if var22.nextCursor == nil or var23.requestedCursors[var22.nextCursor or "<initial>"] == true then retryInitial(p10, p11) else var13(p10, p11, "more", var22.nextCursor))
+	end
+	
+	local function resolveCommentAuthor(p10)
+		-- upvalues: commentsStore (ref)
+		local var22 = commentsStore.getCachedComment(p10).data(false)
+		
+		return if var22 == nil or var22.author == nil then nil else var22.author.userId
+	end
+	
+	local _ = function(p10, p11)
+		-- upvalues: commentsStore (ref)
+		for i, v in p10 do
+			local var22 = commentsStore.getCachedComment(v).data(false)
+			
+			if (if var22 == nil or var22.author == nil then nil else var22.author.userId) == p11 then
+				return true
+			end
+		end
+		return false
+	end
+	
+	local var23 = signalsModule.createEffect(function(p12)
 		-- upvalues: commentsStore (ref), ownerGeneration (write), fFlagMomentsComments (copy), var8 (write), var1 (write), var2 (write), eventNames (copy), var9 (write), t_4 (write), clearReactionState (ref), var6 (write), var5 (ref), collectionStore (ref)
-		local ownerGeneration_1 = commentsStore.getOwnerGeneration(p10)
+		local ownerGeneration_1 = commentsStore.getOwnerGeneration(p12)
 		
 		if ownerGeneration_1 == ownerGeneration then return end
 		ownerGeneration = ownerGeneration_1
@@ -1642,18 +1673,7 @@ return function(p1)
 		ensureInitialLoad = ensureInitialLoad,
 		loadMore = loadMore,
 		retryInitial = retryInitial,
-		retryLoadMore = function(p11, p12)
-			-- upvalues: var1 (write), var7 (write), commentsStore (ref), collectionStore (ref), loadStatus (copy), retryInitial (ref), var13 (write)
-			local var23 = var1
-			local var24 = if var7 or var23 == nil or (var23.feedItemId ~= p11 or var23.sessionId ~= p12) or (var23.ownerGeneration ~= commentsStore.getOwnerGeneration(false) or var23.refCount == 0) then nil else var23
-			
-			if var24 == nil then
-				return false
-			end
-			var23 = collectionStore.getState(p11)(false)
-			
-			return not (var23.hasMore ~= true or var23.initialLoadStatus == loadStatus.Loading or var23.loadMoreStatus == loadStatus.Loading) and (if var23.nextCursor == nil or var24.requestedCursors[var23.nextCursor or "<initial>"] == true then retryInitial(p11, p12) else var13(p11, p12, "more", var23.nextCursor))
-		end,
+		retryLoadMore = retryLoadMore,
 		submitComment = submitComment,
 		retryPendingSubmission = retryPendingSubmission,
 		editPendingSubmission = editPendingSubmission,
@@ -1662,11 +1682,59 @@ return function(p1)
 		ensureReactionAbsent = if fFlagMomentsComments then ensureReactionAbsent else rejectReactionMutation,
 		clearReactionState = if fFlagMomentsComments then clearReactionState else noOp,
 		deleteComment = deleteComment_1,
+		hideCommentsByAuthor = function(p13, p14)
+			-- upvalues: var7 (write), sessionFilters (ref), collectionStore (ref), commentsStore (ref), resolveCommentAuthor (ref), var1 (write), loadMore (ref)
+			if var7 then return end
+			if sessionFilters ~= nil then
+				sessionFilters.markAuthorRecentlyBlocked(p14)
+			end
+			local var24, var25
+			local var26 = collectionStore.getState(p13)(false)
+			
+			for i, v in var26.orderedCommentIds do
+				var24 = commentsStore.getCachedComment(v).data(false)
+				
+				if (if var24 == nil or var24.author == nil then nil else var24.author.userId) == p14 then
+					var25 = true
+					if not var25 then
+						for i, v_1 in var26.stickyPostedCommentIds do
+							var24 = commentsStore.getCachedComment(v_1).data(false)
+							
+							if (if var24 == nil or var24.author == nil then nil else var24.author.userId) == p14 then
+								var25 = true
+								if var25 then
+									collectionStore.removeCommentIdsByAuthor(p13, p14, resolveCommentAuthor)
+									var25 = var1
+									
+									if var25 ~= nil and #collectionStore.getState(p13)(false).orderedCommentIds == 0 then
+										loadMore(p13, var25.sessionId)
+									end
+								end
+								return
+							end
+						end
+						var25 = false
+					end
+				end
+			end
+			var25 = false
+		end,
+		restoreCommentsByAuthor = function(p15, p16)
+			-- upvalues: var7 (write), sessionFilters (ref), var1 (write), retryInitial (ref)
+			if var7 then return end
+			if sessionFilters ~= nil then
+				if not sessionFilters.isAuthorRecentlyBlocked(p16) then return end
+				sessionFilters.unmarkAuthorRecentlyBlocked(p16)
+			end
+			if var1 ~= nil then
+				retryInitial(p15, var1.sessionId)
+			end
+		end,
 		dispose = function()
-			-- upvalues: var7 (write), var22 (ref), fFlagMomentsComments (copy), var8 (write), var1 (write), var2 (write), commentsStore (ref), eventNames (copy), var9 (write), t_4 (write), clearReactionState (ref), var6 (write), var5 (ref), collectionStore (ref)
+			-- upvalues: var7 (write), var23 (ref), fFlagMomentsComments (copy), var8 (write), var1 (write), var2 (write), commentsStore (ref), eventNames (copy), var9 (write), t_4 (write), clearReactionState (ref), var6 (write), var5 (ref), collectionStore (ref)
 			if var7 then return end
 			var7 = true
-			var22()
+			var23()
 			
 			if fFlagMomentsComments then
 				var8 = nil

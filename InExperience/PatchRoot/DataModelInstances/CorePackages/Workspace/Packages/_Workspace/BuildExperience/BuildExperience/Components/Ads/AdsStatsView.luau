@@ -7,7 +7,6 @@ local _ = require(buildExperience.Components.Analytics.StatsCard.StatsCard)
 local statsCardContainerModule = require(buildExperience.Components.Analytics.StatsCardContainer)
 local pastCampaignsListModule = require(script.Parent.PastCampaignsList)
 local _ = require(script.Parent.PastCampaignRow)
-local promotionCardModule = require(script.Parent.PromotionCard)
 local createAdCampaignSheetContainerModule = require(script.Parent.CreateAdCampaignSheet.CreateAdCampaignSheetContainer)
 local icon = foundationModule.Icon
 local text = foundationModule.Text
@@ -147,7 +146,7 @@ local function EmptyState(p3)
 end
 
 return function(p3)
-	-- upvalues: reactModule (ref), createAdCampaignSheetContainerModule (ref), text (ref), LoadingSkeleton (ref), promotionCardModule (ref), EmptyState (ref), renderActiveCampaign (ref), view (ref), pastCampaignsListModule (ref)
+	-- upvalues: reactModule (ref), createAdCampaignSheetContainerModule (ref), text (ref), LoadingSkeleton (ref), EmptyState (ref), renderActiveCampaign (ref), view (ref), pastCampaignsListModule (ref)
 	local testId = p3.testId or "AdsStatsView"
 	local t = {
 		PromotionSheet = reactModule.createElement(createAdCampaignSheetContainerModule, {
@@ -158,6 +157,7 @@ return function(p3)
 			onCreate = p3.onCreateCampaign,
 			isCreatePending = p3.isPromotionCreatePending,
 			hasCreateError = p3.hasPromotionCreateError,
+			createErrorKind = p3.promotionCreateErrorKind,
 			campaignDurationDays = p3.adCampaignDurationDays,
 			estimatedPriceRobux = p3.adCampaignEstimatedPriceRobux,
 			campaignOffers = p3.adCampaignOffers,
@@ -175,13 +175,7 @@ return function(p3)
 		})
 	elseif p3.isLoading then
 		t.Loading = reactModule.createElement(LoadingSkeleton, { layoutOrder = 1, testId = `{testId}-loading` })
-	elseif p3.showPromotionCard then
-		t.PromotionCard = reactModule.createElement(promotionCardModule, {
-			LayoutOrder = 0,
-			freePromotionsRemaining = p3.promotionFreeCreditsRemaining
-		})
-	end
-	if p3.hasCampaigns then
+	elseif p3.hasCampaigns then
 		if #p3.activeCampaigns > 0 then
 			local t_1 = {}
 			

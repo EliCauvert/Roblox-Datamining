@@ -20,8 +20,6 @@ local fFlagAddNewPlayerListFocusNavModule = require(parent.Flags.FFlagAddNewPlay
 local fFlagEnablePlayerListExposureEventsModule = require(parent.Flags.FFlagEnablePlayerListExposureEvents)
 local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
 local fFlagPlayerListReskinModule = require(parent.Flags.FFlagPlayerListReskin)
-local fFlagPlayerListReskinViewChangeTelemetryModule = require(parent.Flags.FFlagPlayerListReskinViewChangeTelemetry)
-local fFlagPlayerListTwoTabsModule = require(parent.Flags.FFlagPlayerListTwoTabs)
 local fStringPlayerListIXPLayerModule = require(parent.Flags.FStringPlayerListIXPLayer)
 local IXPService = game:GetService("IXPService")
 local var1 = nil
@@ -35,7 +33,7 @@ local function _()
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagPlayerListReskinModule (ref), reactModule (ref), createLayoutValuesModule (ref), focusNavigationService (ref), reactFocusNavigationModule (ref), signalsReactModule (ref), fFlagEnablePlayerListExposureEventsModule (ref), IXPService (ref), fStringPlayerListIXPLayerModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), inExperienceLocalesModule (ref), localizationService (ref), fFlagPlayerListReskinViewChangeTelemetryModule (ref), signalsModule (ref), playerListVisibilityStoreModule (ref), var1 (write), parent (ref), fFlagPlayerListTwoTabsModule (ref), platformLeaderboardContainerModule (ref), leaderboardStoreContextModule (ref), layoutValuesContextModule (ref), fFlagAddNewPlayerListFocusNavModule (ref), focusNavigationContext (ref), gameTextTranslatorContextModule (ref), localizationProvider (ref)
+	-- upvalues: fFlagPlayerListReskinModule (ref), reactModule (ref), createLayoutValuesModule (ref), focusNavigationService (ref), reactFocusNavigationModule (ref), signalsReactModule (ref), fFlagEnablePlayerListExposureEventsModule (ref), IXPService (ref), fStringPlayerListIXPLayerModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), inExperienceLocalesModule (ref), localizationService (ref), signalsModule (ref), playerListVisibilityStoreModule (ref), var1 (write), parent (ref), platformLeaderboardContainerModule (ref), leaderboardStoreContextModule (ref), layoutValuesContextModule (ref), fFlagAddNewPlayerListFocusNavModule (ref), focusNavigationContext (ref), gameTextTranslatorContextModule (ref), localizationProvider (ref)
 	local var2, var3
 	local _ = nil
 	local _ = nil
@@ -66,13 +64,13 @@ return reactModule.memo(function(p1)
 		return inExperienceLocalesModule.Localization.new(localizationService.RobloxLocaleId)
 	end, {}) else nil
 	
-	if fFlagPlayerListReskinModule and fFlagPlayerListReskinViewChangeTelemetryModule then
+	if fFlagPlayerListReskinModule then
 		reactModule.useEffect(function()
-			-- upvalues: signalsModule (copy), playerListVisibilityStoreModule (copy), var1 (copy), parent (copy), fFlagPlayerListTwoTabsModule (copy)
+			-- upvalues: signalsModule (copy), playerListVisibilityStoreModule (copy), var1 (copy), parent (copy)
 			local var6 = false
 			
 			return signalsModule.createEffect(function(p2)
-				-- upvalues: playerListVisibilityStoreModule (copy), var6 (write), var1 (copy), parent (copy), fFlagPlayerListTwoTabsModule (copy)
+				-- upvalues: playerListVisibilityStoreModule (copy), var6 (write), var1 (copy), parent (copy)
 				local effectiveVisible = playerListVisibilityStoreModule.getEffectiveVisible(p2)
 				
 				if not var6 then
@@ -82,11 +80,11 @@ return reactModule.memo(function(p1)
 				elseif var1 == nil then
 					var1 = require(parent.Common.LeaderboardViewChangeTelemetry)
 				end
-				var1.logVisibility(effectiveVisible, fFlagPlayerListTwoTabsModule)
+				var1.logVisibility(effectiveVisible, true)
 			end)
 		end, {})
 	end
-	local var6 = if fFlagPlayerListTwoTabsModule then reactModule.createElement(platformLeaderboardContainerModule, {}, p1.children) else p1.children
+	local var6 = if fFlagPlayerListReskinModule then reactModule.createElement(platformLeaderboardContainerModule, {}, p1.children) else p1.children
 	local var7 = reactModule.createElement(leaderboardStoreContextModule.Provider, { value = var4 }, {
 		LayoutValuesProvider = reactModule.createElement(layoutValuesContextModule.Provider, { value = var2 }, if fFlagAddNewPlayerListFocusNavModule then {
 			FocusNavigationProvider = reactModule.createElement(focusNavigationContext.Provider, { value = var3 }, var6)

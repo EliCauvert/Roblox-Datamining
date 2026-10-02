@@ -10,13 +10,18 @@ local useNavigationFocus = require(parent.Navigation).useNavigationFocus
 local videoEndReason = require(videoUtils.Analytics.Enums).VideoEndReason
 local _ = require(videoUtils.VideoPlaybackCoordinator)
 local _ = require(videoUtils.ViewportVideoAutoplayController)
+local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 local fFlagLuaAppEdpMediaGalleryFullScreen = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
 local fFlagVideoPlaybackDetectorCancelPendingScanTask = require(parent.SharedFlags).FFlagVideoPlaybackDetectorCancelPendingScanTask
-local var1 = signalsModule.createSignal({ instance = nil, shouldUseDwell = true })
+local var1 = signalsModule.createSignal({
+	instance = nil,
+	shouldUseDwell = true,
+	isUserIntentWinner = if fFlagLuaAppOneByTwoHoverIdleAutoplay then false else nil
+})
 local var2 = if fFlagVideoPlaybackDetectorCancelPendingScanTask then require(parent.SharedFlags).FIntVideoPlaybackDetectorScanDebounceInMilliseconds / 1000 else 0.5
 
 return function(p1)
-	-- upvalues: useNavigationFocus (ref), useSelector (ref), reactModule (ref), signalsReactModule (ref), var1 (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), videoEndReason (ref), appLifecycleObserverService (ref), experienceService (ref), var2 (ref), fFlagVideoPlaybackDetectorCancelPendingScanTask (ref)
+	-- upvalues: useNavigationFocus (ref), useSelector (ref), reactModule (ref), signalsReactModule (ref), var1 (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), videoEndReason (ref), appLifecycleObserverService (ref), experienceService (ref), var2 (ref), fFlagVideoPlaybackDetectorCancelPendingScanTask (ref)
 	local var3 = useNavigationFocus()
 	local var4 = useSelector(function(p2)
 		return p2.ScreenSize
@@ -35,20 +40,54 @@ return function(p1)
 		}
 	end, { var5, var4, var6 })
 	local var8 = signalsReactModule.useSignalState(if p1.viewportVideoAutoplayController then p1.viewportVideoAutoplayController.getWinnerState else var1)
+	
+	if fFlagLuaAppOneByTwoHoverIdleAutoplay then
+		reactModule.useEffect(function()
+			-- upvalues: p1 (ref)
+			local viewportVideoAutoplayController = p1.viewportVideoAutoplayController
+			local current = p1.itemFrameRef.current
+			
+			if viewportVideoAutoplayController and viewportVideoAutoplayController:isUserIntentWithSelectiveAutoplay() and current then
+				viewportVideoAutoplayController:setCandidateUserIntent(current, p1.hasVideoPlaybackUserIntent == true)
+				
+				return function()
+					-- upvalues: viewportVideoAutoplayController (ref), current (ref)
+					viewportVideoAutoplayController:setCandidateUserIntent(current, false)
+				end
+			end
+		end, {
+			p1.viewportVideoAutoplayController,
+			p1.itemFrameRef,
+			p1.hasVideoPlaybackUserIntent
+		})
+	end
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var8 (ref), var3 (ref), fFlagLuaAppEdpMediaGalleryFullScreen (copy), videoEndReason (copy)
-		if not p1.viewportVideoAutoplayController then return end
-		if p1.itemFrameRef.current ~= nil and var8.instance == p1.itemFrameRef.current then
-			if p1.videoPlaybackCoordinator:isPlaybackAllowed(var3, if fFlagLuaAppEdpMediaGalleryFullScreen then p1.isItemOccluded else nil) then
-				p1.requestVideoPlayback(var8.shouldUseDwell)
+		-- upvalues: p1 (ref), var8 (ref), var3 (ref), fFlagLuaAppEdpMediaGalleryFullScreen (copy), fFlagLuaAppOneByTwoHoverIdleAutoplay (copy), videoEndReason (copy)
+		local viewportVideoAutoplayController = p1.viewportVideoAutoplayController
+		
+		if not viewportVideoAutoplayController then return end
+		local current = p1.itemFrameRef.current
+		
+		if current ~= nil and var8.instance == current then
+			if not p1.videoPlaybackCoordinator:isPlaybackAllowed(var3, if fFlagLuaAppEdpMediaGalleryFullScreen then p1.isItemOccluded else nil) then
+				p1.cancelVideoPlayback(videoEndReason.ExitViewport)
+				
+				return
+			elseif fFlagLuaAppOneByTwoHoverIdleAutoplay then
+				viewportVideoAutoplayController:requestWinnerPlayback(current, p1.requestVideoPlayback)
 				
 				return
 			end
+			p1.requestVideoPlayback(var8.shouldUseDwell)
+			
+			return
+		elseif fFlagLuaAppOneByTwoHoverIdleAutoplay and viewportVideoAutoplayController:isUserIntentWithSelectiveAutoplay() and p1.videoPlaybackCoordinator.playingVideoKey == p1.videoKey then
 			p1.cancelVideoPlayback(videoEndReason.ExitViewport)
 		end
 	end, {
 		p1.viewportVideoAutoplayController, p1.itemFrameRef, p1.requestVideoPlayback,
-		p1.cancelVideoPlayback, p1.videoPlaybackCoordinator, var3, var8,
+		p1.cancelVideoPlayback, p1.videoPlaybackCoordinator,
+		if fFlagLuaAppOneByTwoHoverIdleAutoplay then p1.videoKey else nil, var3, var8,
 		if fFlagLuaAppEdpMediaGalleryFullScreen then p1.isItemOccluded else nil
 	})
 	reactModule.useEffect(function()

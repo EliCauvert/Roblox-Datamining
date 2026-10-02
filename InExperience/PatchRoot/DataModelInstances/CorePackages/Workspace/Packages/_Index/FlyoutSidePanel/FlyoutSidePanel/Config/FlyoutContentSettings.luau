@@ -13,8 +13,6 @@ local flyoutMomentsPlaceURI = game:DefineFastString("FlyoutMomentsPlaceURI", "ro
 local flyoutLearnPlaceURI = game:DefineFastString("FlyoutLearnPlaceURI", "roblox://experiences/start?placeId=92498145666402")
 local fFlagCreateConnectionsHub = sharedFlagsModule.FFlagCreateConnectionsHub
 local fFlagEnableArgus = sharedFlagsModule.FFlagEnableArgus
-local fFlagEnableArgusFlyoutEntry = sharedFlagsModule.FFlagEnableArgusFlyoutEntry
-local fFlagArgusTabImpliesFlyout = sharedFlagsModule.FFlagArgusTabImpliesFlyout
 local fFlagEnableBlackbird = sharedFlagsModule.FFlagEnableBlackbird
 local fFlagEnableBlackbirdOnFlyoutMenu = sharedFlagsModule.FFlagEnableBlackbirdOnFlyoutMenu
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
@@ -203,7 +201,7 @@ local t_4 = {
 		itemType = t.Moments,
 		textKey = t_2[t.Moments],
 		icon = builderIconsModule.Icon.Moments,
-		context = if (fFlagEnableArgusFlyoutEntry or fFlagArgusTabImpliesFlyout) and fFlagEnableArgus then { appPage = appPage.Moments, destinationType = t_3.AppPage } else {
+		context = if fFlagEnableArgus then { appPage = appPage.Moments, destinationType = t_3.AppPage } else {
 			appUri = flyoutMomentsPlaceURI,
 			destinationType = t_3.PlaceLaunch
 		}

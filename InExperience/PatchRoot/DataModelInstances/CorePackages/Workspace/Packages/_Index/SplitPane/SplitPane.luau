@@ -14,5 +14,7 @@ return {
 	SplitL3SessionHelper = require(script.Utils.SplitL3SessionHelper),
 	SplitL3SessionManager = require(script.Components.SplitL3SessionManager),
 	SupportPaneMode = appSplitViewModule.Enums.SupportPaneMode,
-	["jest.config"] = script["jest.config"]
+	["jest.config"] = script["jest.config"],
+	getSplitPaneEducationalTourStore = require(script.Stores.getSplitPaneEducationalTourStore),
+	isSplitPaneTourSupported = require(script.Utils.isSplitPaneTourSupported)
 }

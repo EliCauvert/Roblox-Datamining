@@ -10,5 +10,9 @@ return {
 	useCurrentSong = require(script.Hooks.useCurrentSong),
 	useSongAlbumArt = require(script.Hooks.useSongAlbumArt),
 	useAudioMetadata = require(script.Hooks.useAudioMetadata),
+	Analytics = {
+		sendAudioPlayerAnalytics = require(script.Analytics.sendAudioPlayerAnalytics),
+		AnalyticActions = require(script.Analytics.AnalyticActions)
+	},
 	["jest.config"] = script["jest.config"]
 }

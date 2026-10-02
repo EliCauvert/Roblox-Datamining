@@ -8,6 +8,9 @@ local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local agentCardModule = require(script.Parent.AgentCard)
 local agentCardActionsModule = require(script.Parent.AgentCardActions)
 local getMarkdownRendererPropsModule = require(buildExperience.utils.getMarkdownRendererProps)
+local chatCardPriorityModule = require(buildExperience.Components.Chat.ChatCardEmphasis.ChatCardPriority)
+local useChatCardEmphasisModule = require(buildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
+local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 local button = foundationModule.Button
 local sheet = foundationModule.Sheet
 local text = foundationModule.Text
@@ -64,7 +67,7 @@ local function AgentPlanSheet(p1)
 end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), agentCardModule (ref), agentCardActionsModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), AgentPlanSheet (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), agentCardModule (ref), agentCardActionsModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), AgentPlanSheet (ref)
 	local var1 = useLocalization({
 		build = localizationStringsModule.AGENT_PLAN_BUILD,
 		view = localizationStringsModule.AGENT_PLAN_VIEW
@@ -84,7 +87,7 @@ return function(p1)
 					LayoutOrder = 1,
 					text = var1.build,
 					size = inputSize.Small,
-					variant = buttonVariant.Emphasis,
+					variant = if (if fFlagBuildExperienceChatCardEmphasisModule then useChatCardEmphasisModule(if p1.isBuildDisabled == true then nil else chatCardPriorityModule.AgentProposal) else nil) == false then buttonVariant.SoftEmphasis else buttonVariant.Emphasis,
 					fillBehavior = fillBehavior.Fill,
 					isDisabled = p1.isBuildDisabled == true,
 					onActivated = reactModule.useCallback(function()

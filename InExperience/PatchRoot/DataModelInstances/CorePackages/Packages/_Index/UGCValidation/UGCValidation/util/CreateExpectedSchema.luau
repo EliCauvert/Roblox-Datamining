@@ -11,8 +11,7 @@ local createAccessorySchemaModule = require(parent.util.createAccessorySchema)
 local createEmoteSchemaModule = require(parent.util.createEmoteSchema)
 local createAnimationSchemaModule = require(parent.util.createAnimationSchema)
 local getUploadCategoryModule = require(parent.util.getUploadCategory)
-local getFFlagUGCValidationAnimationPackFolderStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackFolderStructure)
-local getFFlagUGCValidationAnimationPackDisableModelStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackDisableModelStructure)
+local getFFlagUGCValidationEyebrowEyelashCategoryModule = require(parent.flags.getFFlagUGCValidationEyebrowEyelashCategory)
 local t = {}
 
 local function _(p1)
@@ -76,8 +75,12 @@ local t_1 = {
 		return createBodyPartSchema(p4)
 	end,
 	LAYERED_CLOTHING = function(p4, _)
-		-- upvalues: createEyebrowEyelashSchemaModule (ref), constantsModule (ref), createLayeredClothingSchemaModule (ref)
-		return if p4 == Enum.AssetType.EyebrowAccessory or p4 == Enum.AssetType.EyelashAccessory then createEyebrowEyelashSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames) else createLayeredClothingSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames)
+		-- upvalues: getFFlagUGCValidationEyebrowEyelashCategoryModule (ref), createEyebrowEyelashSchemaModule (ref), constantsModule (ref), createLayeredClothingSchemaModule (ref)
+		return if getFFlagUGCValidationEyebrowEyelashCategoryModule() or p4 ~= Enum.AssetType.EyebrowAccessory and p4 ~= Enum.AssetType.EyelashAccessory then createLayeredClothingSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames) else createEyebrowEyelashSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames)
+	end,
+	EYEBROW_EYELASH = function(p4, _)
+		-- upvalues: createEyebrowEyelashSchemaModule (ref), constantsModule (ref)
+		return createEyebrowEyelashSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames)
 	end,
 	RIGID_ACCESSORY = function(p4, p5)
 		-- upvalues: constantsModule (ref), createMeshPartAccessorySchemaModule (ref), createAccessorySchemaModule (ref)
@@ -89,9 +92,9 @@ local t_1 = {
 		-- upvalues: createMakeupSchemaModule (ref)
 		return createMakeupSchemaModule()
 	end,
-	ANIMATION = function(p4, p5)
+	ANIMATION = function(p4, _)
 		-- upvalues: createAnimationSchemaModule (ref)
-		return createAnimationSchemaModule(p4, p5)
+		return createAnimationSchemaModule(p4)
 	end
 }
 
@@ -100,53 +103,16 @@ function t.generateAssetSchema(value, p4, p5)
 	return t_1[value](p4, p5)
 end
 
-local _ = function(p4)
-	if not p4 then
-		return false
-	end
-	for i, v in p4:GetChildren() do
-		if v.Name == "R15Anim" then
-			return true
-		end
-	end
-	return false
-end
-
-function t.generateAnimationPackBundleSchema(p5)
-	-- upvalues: getFFlagUGCValidationAnimationPackDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref), constantsModule (ref)
+function t.generateAnimationPackBundleSchema()
+	-- upvalues: constantsModule (ref)
 	local t = { ClassName = "Model", _children = {} }
-	local var3 = getFFlagUGCValidationAnimationPackDisableModelStructureModule()
 	
-	if not var3 then
-		var3 = getFFlagUGCValidationAnimationPackFolderStructureModule()
-		
-		if var3 then
-			if p5 then
-				for i, v in p5:GetChildren() do
-					if v.Name == "R15Anim" then
-						var3 = true
-					end
-				end
-				var3 = false
-			else
-				var3 = false
-			end
-		end
-	end
-	for i, v in constantsModule.ANIMATION_ASSET_INFO do
-		if var3 then
-			table.insert(t._children, {
-				ClassName = "Folder",
-				Name = "R15Anim",
-				_ignoreDescendants = true
-			})
-		else
-			table.insert(t._children, {
-				ClassName = "Model",
-				_ignoreDescendants = true,
-				Name = v.modelName
-			})
-		end
+	for i in constantsModule.ANIMATION_ASSET_INFO do
+		table.insert(t._children, {
+			ClassName = "Folder",
+			Name = "R15Anim",
+			_ignoreDescendants = true
+		})
 	end
 	return t
 end

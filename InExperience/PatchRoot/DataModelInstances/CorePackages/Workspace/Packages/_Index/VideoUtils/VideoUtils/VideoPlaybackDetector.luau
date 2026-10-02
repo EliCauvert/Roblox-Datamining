@@ -6,6 +6,7 @@ local _ = require(parent.AppCommonLib)
 local reactModule = require(parent.React)
 local responsiveModule = require(parent.Responsive)
 local useLastInput = responsiveModule.useLastInput
+local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 local _ = require(videoUtils.Analytics.VideoAnalyticsTypes)
 local videoEndReason = require(videoUtils.Analytics.Enums).VideoEndReason
 local videoPlaybackCoordinatorModule = require(videoUtils.VideoPlaybackCoordinator)
@@ -18,7 +19,7 @@ local fFlagLuaAppEdpMediaGalleryVideoPreview = require(parent.SharedFlags).FFlag
 local fFlagLuaAppGameTileSelectionVideoPlayback = require(parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
 
 return function(p1)
-	-- upvalues: videoPlaybackCoordinatorModule (ref), reactModule (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), useLastInput (ref), appLifecycleObserverService (ref), videoEndReason (ref), experienceService (ref), videoPlaybackDetectionMethodModule (ref), videoHoverPlaybackDetectorModule (ref), videoViewportPlaybackDetectorModule (ref), videoSelectionPlaybackDetectorModule (ref), responsiveModule (ref)
+	-- upvalues: videoPlaybackCoordinatorModule (ref), reactModule (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), useLastInput (ref), appLifecycleObserverService (ref), videoEndReason (ref), experienceService (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), videoPlaybackDetectionMethodModule (ref), videoViewportPlaybackDetectorModule (ref), videoHoverPlaybackDetectorModule (ref), videoSelectionPlaybackDetectorModule (ref), responsiveModule (ref)
 	local videoPlaybackCoordinator = p1.videoPlaybackCoordinator or videoPlaybackCoordinatorModule.default
 	local var1, var2 = reactModule.useState(false)
 	local var3 = if fFlagLuaAppEdpMediaGalleryVideoPreview or fFlagLuaAppGameTileSelectionVideoPlayback then nil else useLastInput()
@@ -134,7 +135,45 @@ return function(p1)
 		p1.itemFrameRef
 	})
 	
-	if fFlagLuaAppGameTileSelectionVideoPlayback then
+	if fFlagLuaAppOneByTwoHoverIdleAutoplay then
+		return if p1.playbackDetectionMethod == videoPlaybackDetectionMethodModule.Hover then if p1.viewportVideoAutoplayController == nil or not p1.viewportVideoAutoplayController:isUserIntentWithSelectiveAutoplay() then reactModule.createElement(videoHoverPlaybackDetectorModule, {
+			videoPlaybackCoordinator = videoPlaybackCoordinator,
+			requestVideoPlayback = var4,
+			cancelVideoPlayback = var5,
+			isHovered = p1.isHovered
+		}) else reactModule.createElement(videoViewportPlaybackDetectorModule, {
+			videoKey = p1.videoKey,
+			videoPlaybackCoordinator = videoPlaybackCoordinator,
+			requestVideoPlayback = var4,
+			cancelVideoPlayback = var5,
+			itemFrameRef = p1.itemFrameRef,
+			isItemOccluded = p1.isItemOccluded,
+			videoVisiblePercent = p1.videoVisiblePercent,
+			viewportVideoAutoplayController = p1.viewportVideoAutoplayController,
+			hasVideoPlaybackUserIntent = p1.hasVideoPlaybackUserIntent
+		}) elseif p1.playbackDetectionMethod == videoPlaybackDetectionMethodModule.Viewport then reactModule.createElement(videoViewportPlaybackDetectorModule, {
+			videoKey = p1.videoKey,
+			videoPlaybackCoordinator = videoPlaybackCoordinator,
+			requestVideoPlayback = var4,
+			cancelVideoPlayback = var5,
+			itemFrameRef = p1.itemFrameRef,
+			isItemOccluded = p1.isItemOccluded,
+			videoVisiblePercent = p1.videoVisiblePercent,
+			viewportVideoAutoplayController = p1.viewportVideoAutoplayController
+		}) elseif p1.playbackDetectionMethod == videoPlaybackDetectionMethodModule.Selection then reactModule.createElement(videoSelectionPlaybackDetectorModule, {
+			requestVideoPlayback = var4,
+			cancelVideoPlayback = var5,
+			isSelected = p1.isSelected
+		}) elseif fFlagLuaAppEdpMediaGalleryVideoPreview and p1.autoplay or var3 == responsiveModule.Input.Touch then reactModule.createElement(videoViewportPlaybackDetectorModule, {
+			videoPlaybackCoordinator = videoPlaybackCoordinator,
+			requestVideoPlayback = var4,
+			cancelVideoPlayback = var5,
+			itemFrameRef = p1.itemFrameRef,
+			isItemOccluded = p1.isItemOccluded,
+			videoVisiblePercent = p1.videoVisiblePercent,
+			viewportVideoAutoplayController = p1.viewportVideoAutoplayController
+		}) else nil
+	elseif fFlagLuaAppGameTileSelectionVideoPlayback then
 		if p1.playbackDetectionMethod == videoPlaybackDetectionMethodModule.Hover then
 			return reactModule.createElement(videoHoverPlaybackDetectorModule, {
 				videoPlaybackCoordinator = videoPlaybackCoordinator,

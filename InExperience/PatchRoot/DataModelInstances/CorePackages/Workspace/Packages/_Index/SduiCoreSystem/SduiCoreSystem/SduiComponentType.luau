@@ -63,6 +63,8 @@
 	ItemMediaHeader = "ItemMediaHeader",
 	LineLimitedText = "LineLimitedText",
 	LinkText = "LinkText",
+	ListItem = "ListItem",
+	ListRoot = "ListRoot",
 	MarkdownText = "MarkdownText",
 	MarketplaceFavoritesCategoryMenu = "MarketplaceFavoritesCategoryMenu",
 	MediaGallery = "MediaGallery",

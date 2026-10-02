@@ -12,9 +12,10 @@ local makeRecommendationAttributionModule = require(moments.Analytics.makeRecomm
 local getCommentsSheetStoreModule = require(script.Parent.Sheet.getCommentsSheetStore)
 local createCommentsRecommendationSessionModule = require(script.Parent.createCommentsRecommendationSession)
 local createCommentsAnalyticsSessionModule = require(script.Parent.createCommentsAnalyticsSession)
+local useCommentCapabilitiesModule = require(script.Parent.useCommentCapabilities)
 
 return function(p1, p2)
-	-- upvalues: useFeedOptional (ref), useRoactService (ref), appAppLifecycleObserverService (ref), getCommentsSheetStoreModule (ref), reactModule (ref), signalsModule (ref), makeRecommendationAttributionModule (ref), createCommentsRecommendationSessionModule (ref), momentsGetMomentsCommentsStoreModule (ref), momentsCommonModule (ref), createCommentsAnalyticsSessionModule (ref)
+	-- upvalues: useFeedOptional (ref), useRoactService (ref), appAppLifecycleObserverService (ref), getCommentsSheetStoreModule (ref), reactModule (ref), signalsModule (ref), useCommentCapabilitiesModule (ref), makeRecommendationAttributionModule (ref), createCommentsRecommendationSessionModule (ref), momentsGetMomentsCommentsStoreModule (ref), momentsCommonModule (ref), createCommentsAnalyticsSessionModule (ref)
 	local var1 = useFeedOptional()
 	local var2 = useRoactService(appAppLifecycleObserverService)
 	local var3 = getCommentsSheetStoreModule(false)
@@ -93,12 +94,13 @@ return function(p1, p2)
 			end
 		end
 	end, {})
+	local canRead = useCommentCapabilitiesModule().canRead
 	
-	return function()
-		-- upvalues: p1 (ref), makeRecommendationAttributionModule (copy), var1 (ref), createCommentsRecommendationSessionModule (copy), p2 (ref), momentsGetMomentsCommentsStoreModule (copy), momentsCommonModule (copy), createCommentsAnalyticsSessionModule (copy), var4 (ref), var5 (ref), var3 (ref)
+	return reactModule.useCallback(function()
+		-- upvalues: p1 (ref), canRead (ref), makeRecommendationAttributionModule (copy), var1 (ref), createCommentsRecommendationSessionModule (copy), p2 (ref), momentsGetMomentsCommentsStoreModule (copy), momentsCommonModule (copy), createCommentsAnalyticsSessionModule (copy), var4 (ref), var5 (ref), var3 (ref)
 		local var8 = if p1 ~= nil then nil else p1.feedItemId
 		
-		if var8 == nil or var8 == "" then return end
+		if var8 == nil or var8 == "" or not canRead then return end
 		local var9 = nil
 		local var10 = makeRecommendationAttributionModule(p1)
 		
@@ -114,5 +116,11 @@ return function(p1, p2)
 		var4.current = var9
 		var5.current = var12
 		var3.open(var8, var9, var12)
-	end
+	end, {
+		p1 or false,
+		var1 or false,
+		var3,
+		p2,
+		canRead
+	})
 end

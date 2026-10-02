@@ -19,13 +19,14 @@ local eventNames = momentsCommonModule.Analytics.EventNames
 local useNavigation = navigationModule.useNavigation
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local navigateDown = navigationRoduxModule.Thunks.NavigateDown
+local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
 local fFlagProfileMomentsFeedRootRoute = sharedFlagsModule.FFlagProfileMomentsFeedRootRoute
 local fFlagProfileMomentsLoadFailureAnalyticsModule = require(profilePlatform.Flags.FFlagProfileMomentsLoadFailureAnalytics)
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
 return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useNavigation (ref), fFlagProfileMomentsFeedRootRoute (ref), useDispatch (ref), useUserMomentsModule (ref), fFlagProfileMomentsLoadFailureAnalyticsModule (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), eventNamesModule (ref), enumsModule (ref), makeProfileTileFieldsModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), momentsCarouselModule (ref)
+	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useNavigation (ref), fFlagProfileMomentsFeedRootRoute (ref), useDispatch (ref), useUserMomentsModule (ref), fFlagProfileMomentsLoadFailureAnalyticsModule (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), eventNamesModule (ref), enumsModule (ref), makeProfileTileFieldsModule (ref), fFlagMomentsOptimisticProfilePending (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), momentsCarouselModule (ref)
 	local var2 = useProfileWrapperContextModule()
 	local var3 = useProfileAnalyticsContextModule()
 	local var4 = useNavigation()
@@ -51,7 +52,7 @@ return function(p1)
 			var4.navigate(enumsModule.Screens.MomentsAll, { extraProps = { profileId = profileId } })
 		end, { var3, var4, profileId }),
 		onSelectMoment = reactModule.useCallback(function(p2)
-			-- upvalues: moments (ref), profileId (ref), makeProfileTileFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), fFlagProfileMomentsFeedRootRoute (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (ref), navigateDown (copy), var4 (ref), enumsModule (copy)
+			-- upvalues: moments (ref), profileId (ref), makeProfileTileFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsOptimisticProfilePending (copy), fFlagProfileMomentsFeedRootRoute (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (ref), navigateDown (copy), var4 (ref), enumsModule (copy)
 			local var7 = moments[p2]
 			
 			if var7 and profileId then
@@ -63,7 +64,8 @@ return function(p1)
 			end
 			local t = {
 				targetUserId = tonumber(profileId) or 0,
-				initialIndex = p2
+				initialIndex = p2,
+				initialMomentId = if fFlagMomentsOptimisticProfilePending and var7 ~= nil then var7.momentId else nil
 			}
 			
 			if not fFlagProfileMomentsFeedRootRoute then

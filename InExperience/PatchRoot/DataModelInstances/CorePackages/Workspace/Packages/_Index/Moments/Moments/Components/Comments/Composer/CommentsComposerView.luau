@@ -2,21 +2,23 @@
 local composerModule = require(parent.AppBlox.Composer)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local useLocalization = require(parent.Localization).Hooks.useLocalization
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
+local t = { placeholder = "Feature.Moments.Label.WriteComment" }
 
 return function(p1)
-	-- upvalues: reactModule (ref), composerModule (ref), inputSize (ref), foundationModule (ref), stateLayerAffordance (ref), iconName (ref), buttonVariant (ref)
+	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), composerModule (ref), inputSize (ref), foundationModule (ref), stateLayerAffordance (ref), iconName (ref), buttonVariant (ref)
 	return reactModule.createElement(composerModule, {
 		minLines = 1,
 		maxLines = 5,
 		label = "",
-		placeholder = "Write a comment",
 		testId = "moments-comments-composer",
 		width = UDim.new(1, 0),
 		size = inputSize.Medium,
+		placeholder = useLocalization(t).placeholder,
 		text = p1.text,
 		hint = p1.errorMessage,
 		hasError = p1.errorMessage ~= nil,

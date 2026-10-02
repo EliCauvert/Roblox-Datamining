@@ -9,14 +9,13 @@ local reactionActionModule = require(moments.Enums.ReactionAction)
 local momentsGetMomentsReactionsStoreModule = require(parent.DataHydration.MomentsGetMomentsReactionsStore)
 local momentsResolveEmoteIdModule = require(parent.DataHydration.MomentsResolveEmoteId)
 local fFlagMomentsReactToFeedItemV2Module = require(moments.Flags.FFlagMomentsReactToFeedItemV2)
-local fIntMomentsReactionDebounceMsModule = require(moments.Flags.FIntMomentsReactionDebounceMs)
 local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 local reactionType = momentsTypesModule.Enums.ReactionType
 local t = {}
 
 return function(p1)
-	-- upvalues: momentsGetMomentsReactionsStoreModule (ref), debounce (ref), createSignal (ref), t (ref), createComputed (ref), reactionType (ref), cryoModule (ref), reactionActionModule (ref), momentsResolveEmoteIdModule (ref), fFlagMomentsReactToFeedItemV2Module (ref), fIntMomentsReactionDebounceMsModule (ref)
+	-- upvalues: momentsGetMomentsReactionsStoreModule (ref), debounce (ref), createSignal (ref), t (ref), createComputed (ref), reactionType (ref), cryoModule (ref), reactionActionModule (ref), momentsResolveEmoteIdModule (ref), fFlagMomentsReactToFeedItemV2Module (ref)
 	p1 = p1 or {}
 	local var1 = if p1.momentsReactionsStore ~= nil then momentsGetMomentsReactionsStoreModule(false) else p1.momentsReactionsStore
 	local debounce_1 = p1.debounce or debounce
@@ -217,7 +216,7 @@ return function(p1)
 	end
 	
 	local _ = function(p4)
-		-- upvalues: t_6 (ref), var4 (write), debounce_1 (ref), flushSync (ref), fIntMomentsReactionDebounceMsModule (copy)
+		-- upvalues: t_6 (ref), var4 (write), debounce_1 (ref), flushSync (ref)
 		local entityId = p4.entityId
 		local var7 = t_6[entityId]
 		
@@ -230,7 +229,7 @@ return function(p1)
 					
 					return
 				end
-			end, fIntMomentsReactionDebounceMsModule / 1000)
+			end, 0.5)
 			t_6[entityId] = var7
 		end
 		var7(p4.feedItemId, p4.entityType, p4.feedSessionId)
@@ -248,7 +247,7 @@ return function(p1)
 		clear = clear,
 		updateReaction = updateReaction,
 		reactToFeedItem = function(p4)
-			-- upvalues: var2 (ref), t (copy), t_5 (ref), updateReaction (ref), reactionActionModule (copy), t_6 (ref), var4 (write), debounce_1 (ref), flushSync (ref), fIntMomentsReactionDebounceMsModule (copy)
+			-- upvalues: var2 (ref), t (copy), t_5 (ref), updateReaction (ref), reactionActionModule (copy), t_6 (ref), var4 (write), debounce_1 (ref), flushSync (ref)
 			local userReaction = (var2(false)[p4.entityId] or t).userReaction
 			local entityId = p4.entityId
 			
@@ -272,7 +271,7 @@ return function(p1)
 						
 						return
 					end
-				end, fIntMomentsReactionDebounceMsModule / 1000)
+				end, 0.5)
 				t_6[entityId_1] = var7
 			end
 			var7(p4.feedItemId, p4.entityType, p4.feedSessionId)
@@ -280,7 +279,7 @@ return function(p1)
 			return nil
 		end,
 		removeFeedItemReaction = function(p4)
-			-- upvalues: t_5 (ref), var2 (ref), t (copy), updateReaction (ref), reactionActionModule (copy), t_6 (ref), var4 (write), debounce_1 (ref), flushSync (ref), fIntMomentsReactionDebounceMsModule (copy)
+			-- upvalues: t_5 (ref), var2 (ref), t (copy), updateReaction (ref), reactionActionModule (copy), t_6 (ref), var4 (write), debounce_1 (ref), flushSync (ref)
 			local entityId = p4.entityId
 			
 			if t_5[entityId] == nil then
@@ -303,7 +302,7 @@ return function(p1)
 						
 						return
 					end
-				end, fIntMomentsReactionDebounceMsModule / 1000)
+				end, 0.5)
 				t_6[entityId_1] = var7
 			end
 			var7(p4.feedItemId, p4.entityType, p4.feedSessionId)

@@ -1,1 +1,7 @@
-﻿return { Loading = "loading", Ready = "ready", Error = "error" }
+﻿return {
+	Loading = "loading",
+	Ready = "ready",
+	Unavailable = "unavailable",
+	Locked = "locked",
+	Error = "error"
+}

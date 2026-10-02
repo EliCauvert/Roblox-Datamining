@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableCategoryLoggingInShop", false) and require(script.Parent.FFlagEnableInExperienceShopUnifiedLogging)

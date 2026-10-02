@@ -8,9 +8,10 @@ local computeStickyOffsetModule = require(appPageShell.computeStickyOffset)
 local view = foundationModule.View
 local useDeviceInsets = responsiveModule.useDeviceInsets
 local useTokens = foundationModule.Hooks.useTokens
+local fFlagSduiFeedScrollBarFixes = require(parent.SharedFlags).FFlagSduiFeedScrollBarFixes
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), useDeviceInsets (ref), computeStickyOffsetModule (ref), view (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), fFlagSduiFeedScrollBarFixes (ref), useDeviceInsets (ref), computeStickyOffsetModule (ref), view (ref)
 	local topPadding = p1.topPadding
 	local backgroundStyle = p1.backgroundStyle
 	local slots = p1.slots
@@ -18,8 +19,19 @@ return reactModule.memo(function(p1)
 	local liveChromeHeightBinding = p1.liveChromeHeightBinding
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useBinding(0)
-	local top = useDeviceInsets().top
-	local var4 = reactModule.useMemo(function()
+	local var4 = nil
+	
+	if not fFlagSduiFeedScrollBarFixes then
+		local top = useDeviceInsets().top
+		var4 = reactModule.useMemo(function()
+			-- upvalues: liveChromeHeightBinding (ref), chromeHeight (ref), computeStickyOffsetModule (copy), top (ref)
+			return if liveChromeHeightBinding == nil or chromeHeight <= 0 then UDim2.fromOffset(0, 0) else liveChromeHeightBinding:map(function(p2)
+				-- upvalues: computeStickyOffsetModule (copy), chromeHeight (copy), top (copy)
+				return UDim2.fromOffset(0, computeStickyOffsetModule(p2, chromeHeight, top))
+			end)
+		end, { liveChromeHeightBinding, chromeHeight, top })
+	end
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: slots (ref)
 		if slots == nil or next(slots) == nil then
 			return nil
@@ -32,7 +44,7 @@ return reactModule.memo(function(p1)
 		return t
 	end, { slots })
 	
-	return if var4 == nil then nil else reactModule.createElement(view, {
+	return if var5 == nil then nil else reactModule.createElement(view, {
 		LayoutOrder = 1,
 		ZIndex = 2,
 		ClipsDescendants = false,
@@ -46,13 +58,7 @@ return reactModule.memo(function(p1)
 		Translation = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Position = reactModule.useMemo(function()
-				-- upvalues: liveChromeHeightBinding (ref), chromeHeight (ref), computeStickyOffsetModule (copy), top (ref)
-				return if liveChromeHeightBinding == nil or chromeHeight <= 0 then UDim2.fromOffset(0, 0) else liveChromeHeightBinding:map(function(p2)
-					-- upvalues: computeStickyOffsetModule (copy), chromeHeight (copy), top (copy)
-					return UDim2.fromOffset(0, computeStickyOffsetModule(p2, chromeHeight, top))
-				end)
-			end, { liveChromeHeightBinding, chromeHeight, top }),
+			Position = if fFlagSduiFeedScrollBarFixes then nil else var4,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			ClipsDescendants = false,
@@ -83,7 +89,7 @@ return reactModule.memo(function(p1)
 					LayoutOrder = 1,
 					Size = UDim2.new(1, 0, 0, topPadding)
 				}) else nil,
-				Body = reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, var4)
+				Body = reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, var5)
 			})
 		})
 	})

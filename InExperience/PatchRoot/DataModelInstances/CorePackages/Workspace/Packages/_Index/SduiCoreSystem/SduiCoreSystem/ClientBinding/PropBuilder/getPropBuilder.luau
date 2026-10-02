@@ -24,6 +24,7 @@ local fFlagSduiBannerContextComponent = require(parent.SharedFlags).FFlagSduiBan
 local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
 local fFlagSduiParseProtoGradientFields = require(parent.SharedFlags).FFlagSduiParseProtoGradientFields
 local fFlagLuaAppSduiHomePageSupport = require(parent.SharedFlags).FFlagLuaAppSduiHomePageSupport
+local fFlagSduiListComponents = require(parent.SharedFlags).FFlagSduiListComponents
 
 local function _(p1, p2)
 	return function(p3, p4, p5, p6, p7, p8)
@@ -426,6 +427,7 @@ end
 
 t.FillBehaviorProp = buildDefaultPropModule
 t.InputSizeProp = buildDefaultPropModule
+t.ListItemInputControlProp = if fFlagSduiListComponents then buildTablePropModule else nil
 t.LaunchExperienceAction_ExperienceJoinData = buildTablePropModule
 t.AvatarConfigProp = buildTablePropModule
 t.ArrayOfAvatarProp = buildRepeatedPropModule

@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("OffersPrefetchOnGameJoinFallbackDelayMs", 5000)

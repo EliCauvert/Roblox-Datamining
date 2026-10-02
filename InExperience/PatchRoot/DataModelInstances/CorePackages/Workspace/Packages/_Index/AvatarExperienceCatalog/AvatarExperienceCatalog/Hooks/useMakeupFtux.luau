@@ -3,7 +3,6 @@ local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local safeAppStorageService = require(parent.AvatarExperienceCommon).Lib.SafeAppStorageService
 local fFlagAXMakeupReleaseFTUX = avatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX
-local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
 local AXCatalogMakeupFtuxUseMemStorage = game:DefineFastFlag("AXCatalogMakeupFtuxUseMemStorage", false)
 local fFlagAXMakeupLayeringTooltipFTUX = avatarExperienceFlagsModule.FFlagAXMakeupLayeringTooltipFTUX
 local fFlagAXSkipMakeupFTUX = avatarExperienceFlagsModule.FFlagAXSkipMakeupFTUX
@@ -37,16 +36,16 @@ local function _(value)
 end
 
 return function()
-	-- upvalues: fFlagAXMISEnableMultiShopping (ref), getStorage (ref), httpService (ref), safeAppStorageService (ref), AXCatalogMakeupFtuxUseMemStorage (ref), fFlagAXSkipMakeupFTUX (ref), AXMakeupMax6LayersPromptMaxSeenCount (ref), fFlagAXMakeupLayeringTooltipFTUX (ref), var1 (write), AXMakeupLayeringTooltipMaxSeenCount (ref), fFlagAXMakeupReleaseFTUX (ref)
+	-- upvalues: getStorage (ref), httpService (ref), safeAppStorageService (ref), AXCatalogMakeupFtuxUseMemStorage (ref), fFlagAXSkipMakeupFTUX (ref), AXMakeupMax6LayersPromptMaxSeenCount (ref), fFlagAXMakeupLayeringTooltipFTUX (ref), var1 (write), AXMakeupLayeringTooltipMaxSeenCount (ref), fFlagAXMakeupReleaseFTUX (ref)
 	return {
 		shouldShowMakeupMax6LayersPrompt = function()
-			-- upvalues: fFlagAXSkipMakeupFTUX (copy), getStorage (copy), fFlagAXMISEnableMultiShopping (copy), AXMakeupMax6LayersPromptMaxSeenCount (copy)
+			-- upvalues: fFlagAXSkipMakeupFTUX (copy), getStorage (copy), AXMakeupMax6LayersPromptMaxSeenCount (copy)
 			if fFlagAXSkipMakeupFTUX then
 				return false
 			end
 			local var2 = getStorage()
 			
-			return not var2.hideMakeupMax6LayersPrompt and (if fFlagAXMISEnableMultiShopping then if var2.seenMakeupMax6LayersCount ~= nil then var2.seenMakeupMax6LayersCount < AXMakeupMax6LayersPromptMaxSeenCount else true else not fFlagAXMISEnableMultiShopping)
+			return not var2.hideMakeupMax6LayersPrompt and (if var2.seenMakeupMax6LayersCount ~= nil then var2.seenMakeupMax6LayersCount < AXMakeupMax6LayersPromptMaxSeenCount else true)
 		end,
 		hideMakeupMax6LayersPrompt = function()
 			-- upvalues: getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
@@ -88,18 +87,14 @@ return function()
 			end)
 		end else nil,
 		incrementSeenMakeupMax6LayersPrompt = function()
-			-- upvalues: fFlagAXMISEnableMultiShopping (copy), getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
-			if fFlagAXMISEnableMultiShopping then
-				local var2 = getStorage()
-				var2.seenMakeupMax6LayersCount = if var2.seenMakeupMax6LayersCount == nil then 1 else var2.seenMakeupMax6LayersCount + 1
-				pcall(function()
-					-- upvalues: httpService (copy), var2 (ref), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
-					safeAppStorageService.setItem("AXCatalogMakeupFTUX", httpService:JSONEncode(var2), AXCatalogMakeupFtuxUseMemStorage)
-					safeAppStorageService.flush()
-				end)
-				
-				return
-			end
+			-- upvalues: getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
+			local var2 = getStorage()
+			var2.seenMakeupMax6LayersCount = if var2.seenMakeupMax6LayersCount == nil then 1 else var2.seenMakeupMax6LayersCount + 1
+			pcall(function()
+				-- upvalues: httpService (copy), var2 (ref), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
+				safeAppStorageService.setItem("AXCatalogMakeupFTUX", httpService:JSONEncode(var2), AXCatalogMakeupFtuxUseMemStorage)
+				safeAppStorageService.flush()
+			end)
 		end
 	}
 end

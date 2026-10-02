@@ -8,6 +8,7 @@ return {
 	devstore = require(script.devstore.v1beta1),
 	experiencedetails = require(script.experiencedetails.v1beta1),
 	experienceevents = require(script.experienceevents.v1beta1),
+	groups = require(script.groups.v1beta1),
 	home = require(script.home.v1beta1),
 	marketplacecatalog = require(script.marketplacecatalog.v1beta1),
 	partychat = require(script.partychat.v1beta1),

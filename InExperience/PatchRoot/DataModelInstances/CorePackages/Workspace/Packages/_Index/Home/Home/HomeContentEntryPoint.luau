@@ -16,6 +16,7 @@ local homeConstantsModule = require(home.HomeConstants)
 local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
 local fFlagLuaAppAddHomeExtraTopPadding = require(parent.SharedFlags).FFlagLuaAppAddHomeExtraTopPadding
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
+local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 local fFlagSduiDismissPromptPageScope = require(parent.SharedFlags).FFlagSduiDismissPromptPageScope
 local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
 local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
@@ -25,7 +26,7 @@ local function _(p1, p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: homeConstantsModule (ref), fFlagLuaAppAddHomeExtraTopPadding (ref), useEntrySurfacing (ref), fFlagSduiDismissPromptPageScope (ref), usePageScopeRef (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref), home (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), responsiveModule (ref), videoUtilsModule (ref), sduiPageWrapperEntryPoint (ref), refreshHomePageModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagAppPageShellScrollToTopFocus (ref), fFlagLuaAppsDefaultSelection (ref)
+	-- upvalues: homeConstantsModule (ref), fFlagLuaAppAddHomeExtraTopPadding (ref), useEntrySurfacing (ref), fFlagSduiDismissPromptPageScope (ref), usePageScopeRef (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref), home (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), responsiveModule (ref), videoUtilsModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiPageWrapperEntryPoint (ref), refreshHomePageModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagAppPageShellScrollToTopFocus (ref), fFlagLuaAppsDefaultSelection (ref)
 	local configKey = homeConstantsModule.ConfigKey
 	local var1 = nil
 	
@@ -52,12 +53,15 @@ return reactModule.memo(function(p1)
 	useHomeCollectionLayoutSyncModule()
 	local var4 = nil
 	
-	if fFlagLuaAppSduiVideoThumbnail then
-		local var5 = responsiveModule.usePreferredInput() == responsiveModule.Input.Touch
+	if fFlagLuaAppOneByTwoHoverIdleAutoplay then
+		local var5 = responsiveModule.usePreferredInput()
+		var4 = videoUtilsModule.useFeedVideoPlaybackContext(nil, nil, nil, nil, videoUtilsModule.getPlaybackDetectionMethod(var5, var5 == responsiveModule.Input.Pointer))
+	elseif fFlagLuaAppSduiVideoThumbnail then
+		local var6 = responsiveModule.usePreferredInput() == responsiveModule.Input.Touch
 		var4 = reactModule.useMemo(function()
-			-- upvalues: videoUtilsModule (copy), var5 (ref)
-			return videoUtilsModule.FeedVideoPlaybackContext.new(var5)
-		end, { var5 })
+			-- upvalues: videoUtilsModule (copy), var6 (ref)
+			return videoUtilsModule.FeedVideoPlaybackContext.new(var6)
+		end, { var6 })
 	end
 	return reactModule.createElement(sduiPageWrapperEntryPoint, {
 		appPage = appPage.Home,
@@ -69,7 +73,7 @@ return reactModule.memo(function(p1)
 		feedTopMargin = if fFlagLuaAppSduiStickyHeaderScrollAway then if fFlagLuaAppAddHomeExtraTopPadding then var1 else p1.feedTopMargin else nil,
 		stickyTopPadding = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.feedTopMargin else nil,
 		scrollAway = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.scrollAway else nil,
-		videoPlaybackContext = if fFlagLuaAppSduiVideoThumbnail then var4 else nil,
+		videoPlaybackContext = if fFlagLuaAppSduiVideoThumbnail or fFlagLuaAppOneByTwoHoverIdleAutoplay then var4 else nil,
 		handleBackButton = if fFlagAppPageShellScrollToTopFocus then false else nil,
 		defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil
 	})

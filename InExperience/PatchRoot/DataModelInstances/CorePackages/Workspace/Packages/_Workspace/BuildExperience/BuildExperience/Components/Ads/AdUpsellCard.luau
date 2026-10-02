@@ -5,6 +5,9 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
+local chatCardPriorityModule = require(buildExperience.Components.Chat.ChatCardEmphasis.ChatCardPriority)
+local useChatCardEmphasisModule = require(buildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
 local button = foundationModule.Button
 local icon = foundationModule.Icon
 local text = foundationModule.Text
@@ -15,7 +18,7 @@ local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
 return function(p1)
-	-- upvalues: foundationModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
+	-- upvalues: foundationModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = useLocalization({
 		title = localizationStringsModule.AD_UPSELL_CARD_TITLE,
@@ -87,7 +90,7 @@ return function(p1)
 				testId = "AdUpsellCard.Create",
 				text = var2.create,
 				size = inputSize.Small,
-				variant = buttonVariant.SoftEmphasis,
+				variant = if (if fFlagBuildExperienceChatCardEmphasisModule then useChatCardEmphasisModule(chatCardPriorityModule.AdUpsell, p1.emphasisOrder) else nil) == true then buttonVariant.Emphasis else buttonVariant.SoftEmphasis,
 				fillBehavior = fillBehavior.Fill,
 				width = UDim.new(1, 0),
 				isLoading = p1.isCreatePending == true,

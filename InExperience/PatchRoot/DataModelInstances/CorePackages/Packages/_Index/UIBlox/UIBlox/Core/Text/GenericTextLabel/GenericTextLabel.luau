@@ -7,6 +7,7 @@ local roactModule = require(parent_1.Roact)
 local cryoModule = require(parent_1.Cryo)
 local tModule = require(parent_1.t)
 local getTextSizeModule = require(parent.Core.Text.GetTextSize)
+local getFontFromFontStyleModule = require(parent.Core.Text.GetFontFromFontStyle)
 local validateFontInfoModule = require(parent.Core.Style.Validator.validateFontInfo)
 local validateTypographyInfoModule = require(parent.Core.Style.Validator.validateTypographyInfo)
 local validateColorInfoModule = require(parent.Core.Style.Validator.validateColorInfo)
@@ -28,12 +29,12 @@ genericTextLabel.defaultProps = {
 }
 
 function genericTextLabel.render(p1)
-	-- upvalues: withStyleModule (ref), getTextSizeModule (ref), cryoModule (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), UIBloxConfigModule (ref)
+	-- upvalues: withStyleModule (ref), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), getTextSizeModule (ref), cryoModule (ref), roactModule (ref), normalizeFontFace (ref), UIBloxConfigModule (ref)
 	local text = p1.props.Text
 	local fluidSizing = p1.props.fluidSizing
 	
 	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), text (ref), getTextSizeModule (copy), cryoModule (copy), roactModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), fluidSizing (ref), UIBloxConfigModule (copy)
+		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), text (ref), getTextSizeModule (copy), cryoModule (copy), roactModule (copy), normalizeFontFace (copy), fluidSizing (ref), UIBloxConfigModule (copy)
 		local fontStyle = p1.props.fontStyle
 		local colorStyle = p1.props.colorStyle
 		local color = colorStyle.Color or colorStyle.Color3
@@ -42,19 +43,19 @@ function genericTextLabel.render(p1)
 		local baseSize = p2.Font.BaseSize
 		local var1 = if fontStyle.RelativeMinSize then baseSize * fontStyle.RelativeMinSize else fontStyle.FontSize
 		local var2 = if fontStyle.RelativeSize then baseSize * fontStyle.RelativeSize else fontStyle.FontSize
-		local font = fontStyle.Font
+		local var3 = if foundationFontFaceMigration then getFontFromFontStyleModule(fontStyle) else fontStyle.Font
 		local size = p1.props.Size
 		
 		if size == nil then
-			local var3 = text
+			local var4 = text
 			
 			if p1.props.TextTruncate == Enum.TextTruncate.AtEnd then
-				var3 ..= "..."
+				var4 ..= "..."
 			end
-			local var4 = getTextSizeModule(var3, if p1.props.LineHeight then var2 * p1.props.LineHeight else var2, font, p1.props.maxSize)
-			size = UDim2.new(0, var4.X, 0, var4.Y)
+			local var5 = getTextSizeModule(var4, if p1.props.LineHeight then var2 * p1.props.LineHeight else var2, var3, p1.props.maxSize)
+			size = UDim2.new(0, var5.X, 0, var5.Y)
 		end
-		local var5 = cryoModule.Dictionary.join(p1.props, {
+		local var6 = cryoModule.Dictionary.join(p1.props, {
 			[roactModule.Children] = cryoModule.None,
 			fluidSizing = cryoModule.None,
 			fontStyle = cryoModule.None,
@@ -63,8 +64,8 @@ function genericTextLabel.render(p1)
 			maxSize = cryoModule.None,
 			Size = if p1.props.AutomaticSize == nil or p1.props.AutomaticSize == Enum.AutomaticSize.None then size else nil,
 			Text = text,
-			Font = if foundationFontFaceMigration then cryoModule.None else font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(font) else cryoModule.None,
+			Font = if foundationFontFaceMigration then cryoModule.None else var3,
+			FontFace = if foundationFontFaceMigration then normalizeFontFace(var3) else cryoModule.None,
 			TextSize = p1.props.TextSize or var2,
 			AutomaticSize = p1.props.AutomaticSize or nil,
 			TextColor3 = color,
@@ -76,9 +77,9 @@ function genericTextLabel.render(p1)
 		})
 		
 		if UIBloxConfigModule.enableOpenTypeSupport and p1.props.openTypeFeatures then
-			var5 = cryoModule.Dictionary.join(var5, { OpenTypeFeatures = p1.props.openTypeFeatures })
+			var6 = cryoModule.Dictionary.join(var6, { OpenTypeFeatures = p1.props.openTypeFeatures })
 		end
-		return roactModule.createElement("TextLabel", var5, cryoModule.Dictionary.join({
+		return roactModule.createElement("TextLabel", var6, cryoModule.Dictionary.join({
 			UITextSizeConstraint = fluidSizing and roactModule.createElement("UITextSizeConstraint", { MaxTextSize = var2, MinTextSize = var1 } or nil)
 		}, p1.props[roactModule.Children] or {}))
 	end)

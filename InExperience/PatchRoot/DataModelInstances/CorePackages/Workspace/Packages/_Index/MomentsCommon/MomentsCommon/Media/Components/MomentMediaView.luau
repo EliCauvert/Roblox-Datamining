@@ -5,6 +5,7 @@ local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local foundationModule = require(parent.Foundation)
 local _ = require(momentsCommon.Media.MediaTypes)
+local mediaSurfaceContextModule = require(momentsCommon.Media.Components.MediaSurfaceContext)
 local useMomentMediaControllerModule = require(momentsCommon.Media.Components.useMomentMediaController)
 local useHasPresentedFrameModule = require(momentsCommon.Media.useHasPresentedFrame)
 local fFlagMomentsTextOverlayAfterVideoLoadedModule = require(momentsCommon.Flags.FFlagMomentsTextOverlayAfterVideoLoaded)
@@ -15,13 +16,14 @@ local useSignalBinding = signalsReactModule.useSignalBinding
 local frozen = table.freeze({})
 
 return function(p1)
-	-- upvalues: useMomentMediaControllerModule (ref), reactModule (ref), signalsModule (ref), useSignalBinding (ref), useSignalState (ref), fFlagMomentsTextOverlayAfterVideoLoadedModule (ref), useHasPresentedFrameModule (ref), frozen (ref), view (ref), skeleton (ref), foundationModule (ref)
+	-- upvalues: useMomentMediaControllerModule (ref), reactModule (ref), signalsModule (ref), useSignalBinding (ref), mediaSurfaceContextModule (ref), useSignalState (ref), fFlagMomentsTextOverlayAfterVideoLoadedModule (ref), useHasPresentedFrameModule (ref), frozen (ref), view (ref), skeleton (ref), foundationModule (ref)
 	local var1 = useMomentMediaControllerModule(p1.momentId)
 	local getScaleType = p1.getScaleType or reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy)
 		return signalsModule.createSignal(Enum.ScaleType.Crop)
 	end, {})
 	local var2 = useSignalBinding(getScaleType)
+	local cornerRadius = reactModule.useContext(mediaSurfaceContextModule).cornerRadius
 	local var3 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy)
 		local var4, var5 = signalsModule.createSignal(Vector2.zero)
@@ -69,7 +71,7 @@ return function(p1)
 		end)
 	end, { var1 }))
 	local cloned = table.clone(reactModule.useMemo(function()
-		-- upvalues: var1 (ref), var12 (ref), var3 (ref), var2 (ref), getScaleType (ref), reactModule (copy), view (copy), fFlagMomentsTextOverlayAfterVideoLoadedModule (copy), var9 (write)
+		-- upvalues: var1 (ref), var12 (ref), var3 (ref), var2 (ref), getScaleType (ref), cornerRadius (ref), reactModule (copy), view (copy), fFlagMomentsTextOverlayAfterVideoLoadedModule (copy), var9 (write)
 		local t = {}
 		
 		if var1 ~= nil then
@@ -92,14 +94,15 @@ return function(p1)
 							var1.setSurface(id, value)
 						end,
 						scaleType = var2,
-						getScaleType = getScaleType
+						getScaleType = getScaleType,
+						cornerRadius = cornerRadius
 					})
 				})
 			end
 		end
 		return t
 	end, {
-		var1, var12, var3, var2, getScaleType,
+		var1, var12, var3, var2, getScaleType, cornerRadius or false,
 		if fFlagMomentsTextOverlayAfterVideoLoadedModule then var9 else nil
 	}))
 	
@@ -116,7 +119,7 @@ return function(p1)
 			ImageContent = p1.posterContent,
 			Visible = var11
 		}, {
-			Corner = if p1.cornerRadius ~= nil then nil else reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) })
+			Corner = if p1.cornerRadius ~= nil then if cornerRadius ~= nil then nil else reactModule.createElement("UICorner", { CornerRadius = cornerRadius }) else reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) })
 		})
 	end
 	local var13 = var1 ~= nil and not var5

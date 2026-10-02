@@ -12,11 +12,11 @@ local panelContentHeightStoreModule = require(parent.Common.PanelContentHeightSt
 local layoutValuesContextModule = require(parent.Common.LayoutValuesContext)
 local getDeviceBottomInsetModule = require(parent.Common.getDeviceBottomInset)
 local useViewportSizeModule = require(parent.Hooks.useViewportSize)
-local fFlagPlayerListTwoTabsModule = require(parent.Flags.FFlagPlayerListTwoTabs)
+local fFlagPlayerListReskinModule = require(parent.Flags.FFlagPlayerListReskin)
 local fFlagPlayerListFixPlatformLeaderboardSizingModule = require(parent.Flags.FFlagPlayerListFixPlatformLeaderboardSizing)
 
 return function(p1, p2, p3)
-	-- upvalues: useViewportSizeModule (ref), useTokens (ref), reactModule (ref), layoutValuesContextModule (ref), signalsReactModule (ref), panelContentHeightStoreModule (ref), constantsModule (ref), useScaledValue (ref), getDeviceBottomInsetModule (ref), computeMobilePanelSizeModule (ref), fFlagPlayerListTwoTabsModule (ref), fFlagPlayerListFixPlatformLeaderboardSizingModule (ref), computeDesktopPanelHeightModule (ref)
+	-- upvalues: useViewportSizeModule (ref), useTokens (ref), reactModule (ref), layoutValuesContextModule (ref), signalsReactModule (ref), panelContentHeightStoreModule (ref), constantsModule (ref), useScaledValue (ref), getDeviceBottomInsetModule (ref), computeMobilePanelSizeModule (ref), fFlagPlayerListReskinModule (ref), fFlagPlayerListFixPlatformLeaderboardSizingModule (ref), computeDesktopPanelHeightModule (ref)
 	local var1, var2
 	local var3 = useViewportSizeModule()
 	local var4 = useTokens()
@@ -46,7 +46,7 @@ return function(p1, p2, p3)
 		var1 = if p3 then constantsModule.PLATFORM_PANEL_WIDTH * scale else 2 * size200 + var15
 		local var17 = var6 + constantsModule.PANEL_HEADER_DIVIDER_HEIGHT * scale
 		
-		if fFlagPlayerListTwoTabsModule and p3 then
+		if fFlagPlayerListReskinModule and p3 then
 			var17 += constantsModule.PANEL_TABS_HEIGHT * scale
 		end
 		local var18 = var17 + var5

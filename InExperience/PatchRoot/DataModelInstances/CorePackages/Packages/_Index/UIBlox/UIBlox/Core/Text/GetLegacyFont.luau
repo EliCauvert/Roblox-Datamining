@@ -1,5 +1,7 @@
-﻿local t = {}
+﻿local constantsModule = require(script.Parent.Parent.Parent.App.Style.Constants)
+local t = {}
 local family = Font.fromEnum(Enum.Font.Cartoon).Family
+local comicNeueFontFamily = constantsModule.ComicNeueFontFamily
 
 local function _(p1)
 	return `{p1.Family}|{p1.Weight.Value}|{p1.Style.Value}`
@@ -19,12 +21,12 @@ local function getBuilderSansFallback(p1)
 end
 
 local _ = function(p1)
-	-- upvalues: family (ref)
-	return if p1.Family == "rbxassetid://127896232205472" or p1.Family == family then Enum.Font.Cartoon else nil
+	-- upvalues: comicNeueFontFamily (ref), family (ref)
+	return if p1.Family == comicNeueFontFamily or p1.Family == family then Enum.Font.Cartoon else nil
 end
 
 return function(p1)
-	-- upvalues: t (ref), family (ref), getBuilderSansFallback (ref)
+	-- upvalues: t (ref), comicNeueFontFamily (ref), family (ref), getBuilderSansFallback (ref)
 	if typeof(p1) == "EnumItem" then
 		if p1 == Enum.Font.Unknown then
 			return nil, false
@@ -36,7 +38,7 @@ return function(p1)
 		if family_1 then
 			return family_1, false
 		end
-		local var1 = if p1.Family == "rbxassetid://127896232205472" or p1.Family == family then Enum.Font.Cartoon else nil
+		local var1 = if p1.Family == comicNeueFontFamily or p1.Family == family then Enum.Font.Cartoon else nil
 		
 		if var1 then
 			return var1, true

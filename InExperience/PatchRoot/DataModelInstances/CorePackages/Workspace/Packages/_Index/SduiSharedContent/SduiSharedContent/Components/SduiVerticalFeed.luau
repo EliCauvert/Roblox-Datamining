@@ -32,6 +32,7 @@ local buildSduiFeedChildrenModule = require(sduiSharedContent.Components.buildSd
 local sduiFeedImpressionsDetectorModule = require(sduiSharedContent.Components.SduiFeedImpressionsDetector)
 local backToTopButtonModule = require(sduiSharedContent.Components.BackToTopButton)
 local scrollDetector = require(parent.ScrollTelemetry).ScrollDetector
+local createScrollIntervalPerformanceTracker = require(parent.IntervalPerformanceTracker).createScrollIntervalPerformanceTracker
 local viewportVideoAutoplaySync = require(parent.VideoUtils).ViewportVideoAutoplaySync
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppSduiStickyHeaderScrollAway = sharedFlagsModule.FFlagLuaAppSduiStickyHeaderScrollAway
@@ -45,10 +46,14 @@ local sduiVerticalFeedScrollUnderfillDebounceMs = game:DefineFastInt("SduiVertic
 local sduiEnableBackToTop = game:DefineFastFlag("SduiEnableBackToTop", false)
 local sduiVerticalFeedBottomSpacerLayoutOrderConstant = game:DefineFastFlag("SduiVerticalFeedBottomSpacerLayoutOrderConstant", false)
 local fFlagSduiVerticalFeedPageShellSupport = sharedFlagsModule.FFlagSduiVerticalFeedPageShellSupport
+local fFlagSduiPageCanvasCollectionLayout = sharedFlagsModule.FFlagSduiPageCanvasCollectionLayout
 local fFlagLuaAppSduiVideoThumbnail = sharedFlagsModule.FFlagLuaAppSduiVideoThumbnail
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
+local fFlagLuaAppOneByTwoHoverIdleAutoplay = sharedFlagsModule.FFlagLuaAppOneByTwoHoverIdleAutoplay
 local fFlagAppPageShellScrollToTopFocus = sharedFlagsModule.FFlagAppPageShellScrollToTopFocus
 local fFlagLuaAppsDefaultSelection = sharedFlagsModule.FFlagLuaAppsDefaultSelection
+local fFlagSduiVerticalFeedScrollTelemetry = sharedFlagsModule.FFlagSduiVerticalFeedScrollTelemetry
+local fFlagSduiIndividualFeedItemSpacing = sharedFlagsModule.FFlagSduiIndividualFeedItemSpacing
 local var1 = if fFlagSduiVerticalFeedProgressiveFillOnScroll then signalsModule.createSignal(nil) else nil
 local var2 = if fFlagSduiVerticalFeedProgressiveFillOnScroll then table.freeze({}) else nil
 
@@ -119,11 +124,11 @@ local function useProgressiveRowCapWithScroll(p1, p2, p3, p4, p5, p6, p7, p8)
 end
 
 return reactModule.memo(function(p9)
-	-- upvalues: fFlagLuaAppSduiVideoThumbnail (ref), useTokens (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), useNavBarPlacement (ref), appNavBarModule (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), fFlagSduiVerticalFeedPageShellSupport (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref), appCommonLibModule (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), fFlagSduiSrpScrollAway (ref), scrollMovementDirection (ref), sduiEnableBackToTop (ref), useAnimateScrollViewToSelection (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), useLastInputMode (ref), useProgressiveRowCapWithScroll (ref), sduiVerticalFeedScrollUnderfillDebounceMs (ref), useProgressiveRowCapModule (ref), useVerticalScrolledToEndThresholdModule (ref), sduiVerticalFeedBottomSpacerLayoutOrderConstant (ref), backToTopButtonModule (ref), PoolStoreLayoutStoreWiring (ref), sduiFeedImpressionsDetectorModule (ref), buildSduiFeedChildrenModule (ref), fFlagAppPageShellScrollToTopFocus (ref), discoveryTypesModule (ref), fFlagLuaAppsDefaultSelection (ref), sduiFeedContextModule (ref), collectionLayoutStoreProvider (ref), view (ref), viewportVideoAutoplaySync (ref), scrollDetector (ref), sduiStickyHeaderModule (ref), pullToRefreshSpinner (ref)
+	-- upvalues: fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), useTokens (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), useNavBarPlacement (ref), appNavBarModule (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), fFlagSduiVerticalFeedPageShellSupport (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref), appCommonLibModule (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), fFlagSduiSrpScrollAway (ref), scrollMovementDirection (ref), sduiEnableBackToTop (ref), fFlagSduiVerticalFeedScrollTelemetry (ref), createScrollIntervalPerformanceTracker (ref), useAnimateScrollViewToSelection (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), useLastInputMode (ref), useProgressiveRowCapWithScroll (ref), sduiVerticalFeedScrollUnderfillDebounceMs (ref), useProgressiveRowCapModule (ref), useVerticalScrolledToEndThresholdModule (ref), sduiVerticalFeedBottomSpacerLayoutOrderConstant (ref), backToTopButtonModule (ref), fFlagSduiIndividualFeedItemSpacing (ref), PoolStoreLayoutStoreWiring (ref), sduiFeedImpressionsDetectorModule (ref), buildSduiFeedChildrenModule (ref), fFlagAppPageShellScrollToTopFocus (ref), discoveryTypesModule (ref), fFlagLuaAppsDefaultSelection (ref), sduiFeedContextModule (ref), fFlagSduiPageCanvasCollectionLayout (ref), collectionLayoutStoreProvider (ref), view (ref), viewportVideoAutoplaySync (ref), scrollDetector (ref), sduiStickyHeaderModule (ref), pullToRefreshSpinner (ref)
 	local var7
 	local analyticsContext = p9.analyticsContext
 	local sduiContext = p9.sduiContext
-	local var8 = if fFlagLuaAppSduiVideoThumbnail then sduiContext.videoPlaybackContext else nil
+	local var8 = if fFlagLuaAppSduiVideoThumbnail or fFlagLuaAppOneByTwoHoverIdleAutoplay then sduiContext.videoPlaybackContext else nil
 	local feedItems = p9.feedItems
 	local debugName = p9.debugName
 	local contentTag = p9.contentTag or p9.defaultContentTag
@@ -270,6 +275,25 @@ return reactModule.memo(function(p9)
 			end
 		end, { var17, p9.enableBackToTop })
 	end
+	if fFlagSduiVerticalFeedScrollTelemetry then
+		reactModule.useEffect(function()
+			-- upvalues: p9 (ref), var17 (write), createScrollIntervalPerformanceTracker (copy)
+			local scrollPerformanceIntervalName = p9.scrollPerformanceIntervalName
+			local current = var17.current
+			
+			if scrollPerformanceIntervalName == nil or current == nil then
+				return
+			end
+			local var32 = createScrollIntervalPerformanceTracker(scrollPerformanceIntervalName, current)
+			local var33 = current:GetPropertyChangedSignal("CanvasPosition"):Connect(var32.onScrollTick)
+			
+			return function()
+				-- upvalues: var33 (ref), var32 (ref)
+				var33:Disconnect()
+				var32.cleanup()
+			end
+		end, { var17, p9.scrollPerformanceIntervalName })
+	end
 	reactModule.useEffect(function()
 		-- upvalues: p9 (ref), fFlagSduiSrpScrollAway (copy), var23 (ref), var25 (ref), var20 (ref)
 		if not p9.scrollingFrameRef or not p9.scrollingFrameRef.current then
@@ -309,7 +333,7 @@ return reactModule.memo(function(p9)
 	local var34 = nil
 	local var35 = nil
 	
-	if fFlagLuaAppSduiVideoThumbnail then
+	if fFlagLuaAppSduiVideoThumbnail or fFlagLuaAppOneByTwoHoverIdleAutoplay then
 		var33 = if var8 then var8.viewportVideoAutoplayController else nil
 		var34 = reactModule.useCallback(function()
 			-- upvalues: var33 (write)
@@ -340,7 +364,7 @@ return reactModule.memo(function(p9)
 	useVerticalScrolledToEndThresholdModule(var17, thresholdFromEnd, if var37 then nil else p9.onScrollToEnd)
 	
 	local var42 = function()
-		-- upvalues: feedItems (ref), p9 (ref), sduiEnableBackToTop (copy), var28 (write), reactModule (copy), sduiVerticalFeedBottomSpacerLayoutOrderConstant (copy), backToTopButtonModule (copy), var17 (write), sduiContext (ref), gapBetweenFeedItems (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (copy), var18 (ref), var7 (ref), gapAfterStickyItems (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), PoolStoreLayoutStoreWiring (copy), impressionsTag (ref), sduiFeedImpressionsDetectorModule (copy), var19 (ref), buildSduiFeedChildrenModule (copy), debugName (ref), selectionBehaviorLeft (ref), selectionBehaviorRight (ref), var27 (ref), fFlagAppPageShellScrollToTopFocus (copy), discoveryTypesModule (copy), fFlagLuaAppsDefaultSelection (copy), var36 (write)
+		-- upvalues: feedItems (ref), p9 (ref), sduiEnableBackToTop (copy), var28 (write), reactModule (copy), sduiVerticalFeedBottomSpacerLayoutOrderConstant (copy), backToTopButtonModule (copy), var17 (write), sduiContext (ref), fFlagSduiIndividualFeedItemSpacing (copy), gapBetweenFeedItems (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (copy), var18 (ref), var7 (ref), gapAfterStickyItems (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), PoolStoreLayoutStoreWiring (copy), impressionsTag (ref), sduiFeedImpressionsDetectorModule (copy), var19 (ref), buildSduiFeedChildrenModule (copy), debugName (ref), selectionBehaviorLeft (ref), selectionBehaviorRight (ref), var27 (ref), fFlagAppPageShellScrollToTopFocus (copy), discoveryTypesModule (copy), fFlagLuaAppsDefaultSelection (copy), var36 (write)
 		if feedItems == nil then
 			return nil
 		end
@@ -375,18 +399,18 @@ return reactModule.memo(function(p9)
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, gapBetweenFeedItems),
+				Padding = UDim.new(0, if fFlagSduiIndividualFeedItemSpacing then 0 else gapBetweenFeedItems),
 				ref = if fFlagSduiVerticalFeedProgressiveFillOnScroll then var18 else nil
 			}),
 			StickyGap = if var7 and gapAfterStickyItems and gapAfterStickyItems > 0 then reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 0,
-				Size = UDim2.new(1, 0, 0, math.max(0, gapAfterStickyItems - gapBetweenFeedItems))
+				Size = UDim2.new(1, 0, 0, if fFlagSduiIndividualFeedItemSpacing then math.max(gapAfterStickyItems, gapBetweenFeedItems) else math.max(0, gapAfterStickyItems - gapBetweenFeedItems))
 			}) else nil,
 			NoStickyTopMargin = if fFlagLuaAppSduiStickyHeaderScrollAway and not var7 and (p9.feedTopMargin and p9.feedTopMargin > 0) then reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 0,
-				Size = UDim2.new(1, 0, 0, math.max(0, p9.feedTopMargin - gapBetweenFeedItems))
+				Size = UDim2.new(1, 0, 0, if fFlagSduiIndividualFeedItemSpacing then math.max(p9.feedTopMargin, gapBetweenFeedItems) else math.max(0, p9.feedTopMargin - gapBetweenFeedItems))
 			}) else nil,
 			PoolStoreLayoutStoreWiring = if sduiContext.configKey ~= nil then nil else reactModule.createElement(PoolStoreLayoutStoreWiring, { configKey = sduiContext.configKey }),
 			FeedImpressionsDetector = if impressionsTag and feedItems then reactModule.createElement(sduiFeedImpressionsDetectorModule, {
@@ -409,7 +433,9 @@ return reactModule.memo(function(p9)
 			extraLocalProps = var27,
 			selectionOrderBase = if fFlagAppPageShellScrollToTopFocus then discoveryTypesModule.Constants.SORT_SELECTION_ORDER_BASE else nil,
 			defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p9.defaultFocusRef else nil,
-			maxConfigs = var36
+			maxConfigs = var36,
+			gapBetweenFeedItems = if fFlagSduiIndividualFeedItemSpacing then gapBetweenFeedItems else nil,
+			gapAfterFirstFeedItem = if fFlagSduiIndividualFeedItemSpacing then p9.gapAfterFirstFeedItem else nil
 		}) do
 			t[i] = v
 		end
@@ -418,8 +444,10 @@ return reactModule.memo(function(p9)
 	
 	var42 = reactModule.useMemo(var42, {
 		feedItems, debugName, var16, var19, sduiContext, analyticsContext,
-		gapBetweenFeedItems, impressionsTag, selectionBehaviorLeft,
-		selectionBehaviorRight, var7, gapAfterStickyItems,
+		gapBetweenFeedItems,
+		if fFlagSduiIndividualFeedItemSpacing then p9.gapAfterFirstFeedItem else nil,
+		impressionsTag, selectionBehaviorLeft, selectionBehaviorRight, var7,
+		gapAfterStickyItems,
 		if fFlagLuaAppSduiStickyHeaderScrollAway then p9.feedTopMargin else nil,
 		var27, var9, p9.pageBottomPadding,
 		if sduiEnableBackToTop then p9.enableBackToTop else nil,
@@ -430,17 +458,19 @@ return reactModule.memo(function(p9)
 	if var26 then
 		var42 = reactModule.createElement(sduiFeedContextModule.Provider, { value = var26 }, var42)
 	end
-	local var43 = reactModule.createElement(collectionLayoutStoreProvider, { container = var14 }, var42)
+	if not fFlagSduiPageCanvasCollectionLayout or not p9.disableCollectionLayoutStoreProvider then
+		var42 = reactModule.createElement(collectionLayoutStoreProvider, { container = var14 }, var42)
+	end
 	local t = { ["size-full-0 auto-y"] = true }
 	
 	if var9 then
 		t[contentTag] = true
 	end
-	local var44 = reactModule.createElement(view, { tag = t, LayoutOrder = p9.layoutOrder, ref = var15 }, var43)
+	var42 = reactModule.createElement(view, { tag = t, LayoutOrder = p9.layoutOrder, ref = var15 }, var42)
 	
-	if fFlagLuaAppSduiVideoThumbnail then
-		var44 = reactModule.createElement(reactModule.Fragment, nil, {
-			Content = var44,
+	if fFlagLuaAppSduiVideoThumbnail or fFlagLuaAppOneByTwoHoverIdleAutoplay then
+		var42 = reactModule.createElement(reactModule.Fragment, nil, {
+			Content = var42,
 			ViewportVideoAutoplaySync = if var33 then reactModule.createElement(viewportVideoAutoplaySync, {
 				viewportAutoplayController = var33,
 				scrollingFrameRef = var17
@@ -500,7 +530,7 @@ return reactModule.memo(function(p9)
 			ClipsDescendants = false
 		}, {
 			FlexFill = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
-			Content = var44
+			Content = var42
 		})
-	}) else var44
+	}) else var42
 end)

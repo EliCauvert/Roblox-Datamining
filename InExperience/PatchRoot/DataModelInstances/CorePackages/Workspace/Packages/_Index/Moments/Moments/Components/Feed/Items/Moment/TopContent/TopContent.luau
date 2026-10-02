@@ -12,6 +12,10 @@ return reactModule.memo(function(p1)
 		LayoutOrder = p1.LayoutOrder
 	}, {
 		VideoInfo = reactModule.createElement(videoInfoModule, { LayoutOrder = 1 }),
-		ActionRail = reactModule.createElement(actionRailModule, { LayoutOrder = 2, moment = p1.moment })
+		ActionRail = reactModule.createElement(actionRailModule, {
+			LayoutOrder = 2,
+			moment = p1.moment,
+			onOpenComments = p1.onOpenComments
+		})
 	})
 end)

@@ -1,12 +1,14 @@
 ﻿local userList = script:FindFirstAncestor("UserList")
-local reactModule = require(userList.Parent.React)
+local parent = userList.Parent
+local reactModule = require(parent.React)
 local _ = require(userList.Common.Types)
 local _ = require(userList.Common.Enums)
 local baseRowModule = require(script.Parent.BaseRow)
 local useContactsDataModule = require(userList.Hooks.useContactsData)
+local fFlagUserListSurfaceExtensions = require(parent.SharedFlags).FFlagUserListSurfaceExtensions
 
 return reactModule.memo(function(p1)
-	-- upvalues: useContactsDataModule (ref), reactModule (ref), baseRowModule (ref)
+	-- upvalues: useContactsDataModule (ref), reactModule (ref), baseRowModule (ref), fFlagUserListSurfaceExtensions (ref)
 	local var1 = useContactsDataModule(p1.entityId)
 	
 	return if var1 == nil then nil else reactModule.createElement(baseRowModule, {
@@ -20,6 +22,7 @@ return reactModule.memo(function(p1)
 		primaryCta = p1.primaryCta,
 		secondaryCta = p1.secondaryCta,
 		trailingContent = p1.trailingContent,
-		layoutOrder = p1.layoutOrder
+		layoutOrder = p1.layoutOrder,
+		disableRowActivation = if fFlagUserListSurfaceExtensions and p1.configs then p1.configs.disableRowActivation else nil
 	})
 end)

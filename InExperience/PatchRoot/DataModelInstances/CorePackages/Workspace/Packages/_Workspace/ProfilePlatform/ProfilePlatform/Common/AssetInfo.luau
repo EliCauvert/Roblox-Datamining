@@ -3,6 +3,7 @@ local parent = profilePlatform.Parent
 local enumsModule = require(profilePlatform.Common.Enums)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
 local fFlagProfilePlatformEnableBundlesInAssetsCarousel = require(parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
+local fFlagProfileStoreShowLimitedResalePriceModule = require(profilePlatform.Flags.FFlagProfileStoreShowLimitedResalePrice)
 local var1 = 0
 
 local _ = function()
@@ -30,7 +31,7 @@ return {
 		return t
 	end,
 	fromAsset = function(value)
-		-- upvalues: fFlagProfilePlatformEnableBundlesInAssetsCarousel (ref), fFlagSocialEnableProfileInspectAndBuy (ref)
+		-- upvalues: fFlagProfilePlatformEnableBundlesInAssetsCarousel (ref), fFlagSocialEnableProfileInspectAndBuy (ref), fFlagProfileStoreShowLimitedResalePriceModule (ref)
 		local t = {
 			id = tostring(value.id),
 			assetType = tostring(value.assetType or (if fFlagProfilePlatformEnableBundlesInAssetsCarousel then value.bundleType else nil)),
@@ -49,6 +50,11 @@ return {
 			t.owned = value.owned
 			t.bundledItems = value.bundledItems
 			t.taxonomyName = if value.taxonomy and #value.taxonomy > 0 then value.taxonomy[1].taxonomyName else nil
+		end
+		if fFlagProfileStoreShowLimitedResalePriceModule then
+			t.hasResellers = value.hasResellers
+			t.unitsAvailableForConsumption = value.unitsAvailableForConsumption
+			t.itemRestrictions = value.itemRestrictions
 		end
 		return t
 	end

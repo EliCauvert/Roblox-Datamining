@@ -3,7 +3,7 @@
 return {
 	displayName = "Moments",
 	testMatch = { "**/*.test" },
-	testPathIgnorePatterns = { "/Analytics/" },
+	testPathIgnorePatterns = { "/Analytics/", "/Upload/postLifecycleSubscription.test" },
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.LogHandler,
 		jestConfigsModule.setupFiles.UIBloxInitializer,

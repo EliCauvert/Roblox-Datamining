@@ -1302,7 +1302,6 @@ Feature.AddFriends.Action.RequestIgnored,İstek Yok Sayıldı
 Feature.AddFriends.Label.AddFriendsTooltip,Roblox'u birlikte keşfedebilmen için arkadaşlarını bul.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Kullanıcı adlarını veya adlarını arayarak Roblox'taki kişileri bul.
 Feature.AddFriends.Label.ConnectWithContacts,Rehberindeki kişileri davet et veya hâlihazırda Roblox'ta olan arkadaşlarınla bağlantı kur!
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,İnsanlar Ara
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,İnsanlar ara
 Feature.AddFriends.Label.SearchForFriendsPrompt,Kullanıcı adlarını veya görünen adlarını arayarak Roblox'taki kişileri bul.
 Feature.AddFriends.Label.SyncWithContacts,Rehberini senkronize et ve arkadaşlarını davet et!
@@ -1945,6 +1944,7 @@ Feature.Build.Action.DontShowAgain,Tekrar gösterme
 Feature.Build.Action.EarnRobux,Robux kazan
 Feature.Build.Action.Edit,Düzenle
 Feature.Build.Action.HideAutosaved,Otomatik kaydedilenleri gizle
+Feature.Build.Action.KeepBuilding,İnşa etmeye devam et
 Feature.Build.Action.ManageLimit,Sınırı yönet
 Feature.Build.Action.Next,Sonraki
 Feature.Build.Action.NotNow,Şimdi değil
@@ -1970,6 +1970,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,Bağlantıyı paylaş
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,İstatistikler
+Feature.Build.Action.Stop,Durdur
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Derecelendirmeyi güncelle
 Feature.Build.Action.UpdateWithChanges,Değişikliklerle güncelle
@@ -2079,7 +2080,12 @@ Feature.Build.Description.RevertToVersion,En son değişikliği geri döndürmek
 Feature.Build.Description.ShareLatest,En son versiyonunda nelerin değiştiğini paylaş.
 Feature.Build.Description.ShopButton,Bir alışveriş giriş noktası ekle
 Feature.Build.Description.ShortAdCampaign,"Oyuncuların, oyunun hakkında ne düşündüğünü görmenin hızlı bir yolu."
+Feature.Build.Description.StopBuild,Bu talep hâlâ devam ediyor. Şimdi son verirsen tamamlanmayacak ve talebi tekrar göndermen gerekecek.
 Feature.Build.Description.UpdateDeveloperProduct,Geliştirici ürününü ({PRODUCT_ID}) güncelle.
+Feature.Build.Error.AdForbidden,Hesabın veya oyunun şu anda reklam yayınlayamıyor. Bunun bir hata olduğunu düşünüyorsan destek ile iletişime geç.
+Feature.Build.Error.AdInsufficientFunds,Bu reklamı oluşturmak için yeterli Robux'un yok. Daha fazla Robux ekle ve tekrar dene.
+Feature.Build.Error.AdInternalError,Bir şeyler ters gitti. Daha sonra tekrar dene.
+Feature.Build.Error.AdMissingThumbnail,Reklam yayınlamadan önce oyununun bir küçük resme ihtiyacı var. Bir tane ekle ve tekrar dene.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Açıklama 1.000 karakter veya daha kısa olmalıdır.
 Feature.Build.Error.DeveloperProductNameRequired,Bir ürün adı gir.
 Feature.Build.Error.DeveloperProductNameTooLong,Ad 50 karakter veya daha kısa olmalıdır.
@@ -2265,9 +2271,6 @@ Feature.Build.Message.AccountRequirements,"Hesabın, İnşa Et'i kullanma gerekl
 Feature.Build.Message.AccountTooNew,Hesabın yayınlanamayacak kadar yeni. 2 günü doldurduğunda tekrar dene.
 Feature.Build.Message.AdCampaignCreateFailed,Kampanyan oluşturulamadı. Lütfen tekrar dene.
 Feature.Build.Message.AdPerformanceLoadFailed,Reklam performansı yüklenemedi
-Feature.Build.Message.AdsPromotionBannerSubtitle,Kitleni ücretsiz olarak genişlet
-Feature.Build.Message.AdsPromotionBannerTitle,{promotionCount} ücretsiz promosyonun kaldı
-Feature.Build.Message.AdsPromotionBannerTitleSingular,1 ücretsiz promosyonun kaldı
 Feature.Build.Message.AdsStatsEmpty,Bir reklam kampanyasıyla kitleni genişlet ve oyununun keşfedilmesini sağla
 Feature.Build.Message.AdsStatsEmptyFree,Ücretsiz bir reklam kampanyasıyla kitleni genişlet ve oyununun keşfedilmesini sağla
 Feature.Build.Message.AllFriendsAdded,Tüm arkadaşlarını erken test kullanıcısı olmaya davet ettin.
@@ -2359,6 +2362,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays} günlük reklam kampanyas�
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} gün
 Feature.Build.Title.AdComplete,Reklam tamamlandı
 Feature.Build.Title.AdCreated,Reklam oluşturuldu
+Feature.Build.Title.AdCreatedPeriod,Reklam oluşturuldu.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Görsel ekle
 Feature.Build.Title.AdsStatsEmpty,Bir kampanya başlat
@@ -2399,6 +2403,7 @@ Feature.Build.Title.PromoteGameFreeSingular,Ücretsiz bir reklamın var
 Feature.Build.Title.PromoteGamePaid,Daha fazla oyuncu seni bekliyor
 Feature.Build.Title.PushNotifications,Anlık bildirimler
 Feature.Build.Title.RevertLastChange,Son değişiklik geri döndürülsün mü?
+Feature.Build.Title.StopBuild,İnşa etme işlemi durdurulsun mu?
 Feature.Build.Title.Tasks,Görevler
 Feature.Build.Title.TurnActivity,Etkinliği aç
 Feature.Build.Title.VersionHistory,Sürüm geçmişi
@@ -3618,6 +3623,7 @@ Feature.Moments.Disclaimer.EveryoneMoments,Anlardaki herkes yayınlananları gö
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,{placeName} dünyasına katılmaya çalışılıyor. Bu işlem birkaç saniye sürebilir.
 Feature.Moments.Label.CaptureLibrary,Yakalama kütüphanen
+Feature.Moments.Label.ChooseVoice,Ses seç
 Feature.Moments.Label.DeleteMomentBody,Bir An silindikten sonra onu kurtarmak mümkün olmaz.
 Feature.Moments.Label.DeleteMomentTitle,An silinsin mi?
 Feature.Moments.Label.DeleteVoiceoverBody,"Bu, işlem metnini ve seslendirmeni siler. İstediğin zaman baştan başlayabilirsin."
@@ -3788,6 +3794,7 @@ Feature.PlayerSearchResults.Label.FromSearch,Aramadan
 Feature.PlayerSearchResults.Label.Previously,Önceki Adı
 Feature.PlayerSearchResults.Label.ThisIsYou,Bu sensin
 Feature.PlayerSearchResults.Label.YouAreFollowing,Takip ediyorsun
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Özel sunucu satın alma işlemleri Studio'da desteklenmiyor.
 Feature.Profile.Action.AboutThisProfile,Bu profil hakkında
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4034,9 +4041,11 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,Bu abonelik bu cihazda satı
 Feature.RobloxSubscription.Description.AgeCheckTrial,Yaş kontrolüyle yaşını doğrula ve bizden sana bir teşekkür hediyesi olarak 1 haftalık ücretsiz Roblox Plus kullanım hakkı kazan. Bu ücretsiz denemeden yararlanmak için herhangi bir ödeme şekli gerekmez.
 Feature.RobloxSubscription.Description.Benefit.Customize,Profil çerçeveleri ve uygulama temaları ile özelleştir
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"İlk 60 gün %10 indirim, ardından öğeler ve avatarlarda %20 indirim"
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,"İlk {trialUnlockDays} gün %10 indirim, ardından öğe ve avatarlarda %20 indirim"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Daha az Robux karşılığında daha fazla eğlence. Roblox Plus'a abone ol.
 Feature.RobloxSubscription.Description.JoinEarly,Plus ile erken katıl
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} düğmesine tıklayarak <a href=""{termsUrl}"">Roblox Abonelik Koşulları</a>'nı kabul etmiş olursun. Sen iptal edene kadar her ay otomatik tahsilat yapılır."
+Feature.RobloxSubscription.Heading.ReferralEntry,Plus'ı paylaşarak {amount} Robux kazan
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Ücretsiz özel sunucular
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,Ücretsiz Robux gönder
@@ -4047,6 +4056,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"""Devam Et"" düğmes
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"""Ücretsiz dene"" düğmesine tıklayarak {linkStart}Roblox Abonelik Koşulları{linkEnd}'nı kabul etmiş olursun. Ücretsiz deneme süren 1 ay içinde sona erer ve ondan sonra her ay senden otomatik olarak ücret alınır. Dilediğin zaman iptal edebilirsin."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"""Ücretsiz dene"" düğmesine tıklayarak {linkStart}Roblox Abonelik Koşulları{linkEnd}'nı kabul etmiş olursun. Ücretsiz deneme süren {trialDuration} {trialPeriodLabel} içinde sona erer ve ondan sonra her {billingPeriodLabel} senden otomatik olarak ücret alınır. Dilediğin zaman iptal edebilirsin."
 Feature.RobloxSubscription.Label.FreeTrialText,Ücretsiz deneme al
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 ay ücretsiz,{boldEnd} sonrasında {price}/{periodType}"
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} ücretsiz,{boldEnd} sonrasında {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,ay
@@ -4295,6 +4305,8 @@ Feature.SongDetails.Action.ReportAudio,Sesi Bildir
 Feature.SongDetails.Label.InappropriateAudio,Uygunsuz Ses
 Feature.SongDetails.Label.InappropriateThumbnail,Uygunsuz Küçük Resim
 Feature.SongDetails.Label.SongPreview,Şarkı Ön İzlemesi
+Feature.SplitPane.Label.CollapseAvatar,Avatarı daralt
+Feature.SplitPane.Label.ExpandAvatar,Avatarı genişlet
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Başkalarını ekle
 Feature.Squads.Action.ConnectToVoice,Sese bağlan
@@ -4442,6 +4454,8 @@ Feature.Toast.VoteError.FloodCheckThresholdMet,Çok hızlı oy veriyorsun.
 Feature.Toast.VoteError.PlayGame,Değerlendirmeden önce bu deneyimi ziyaret etmelisin.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,Topluluk Standartlarımızı defalarca ihlal ettiğin için şu anda yaşını kontrol edemezsin. Kısıtlama sona erdikten sonra tekrar deneyebilirsin.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Yaş kontrolleri askıya alındı
+Feature.UniversalFeatureRestrictions.AbuseVector.LabelName.Voice,
+Feature.UniversalFeatureRestrictions.AbuseVector.Lowercase.LabelName.Voice,ses
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,Tekrarlanan veya ciddi kural ihlali nedeniyle bu oyunu oynaman yasaklandı.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,Davranışın kuralları ihlal ettiği için bu oyunu oynayamazsın.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Roblox bu oyuna erişimini yasakladı
@@ -4451,6 +4465,13 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox bu oyuna erişimini {number} saatliğine askıya aldı
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox bu oyuna erişimini 1 dakikalığına askıya aldı
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox bu oyuna erişimini {number} dakikalığına askıya aldı
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Banned,Davranışın topluluğumuzun kurallarını ihlal ettiği için bu özelliği kullanamazsın.
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Nudge,Topluluğumuzun kurallarını ihlal etmeye devam edersen bu özelliği kullanma erişimin askıya alınabilir.
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Suspended,Davranışın topluluğumuzun kurallarını ihlal ettiği için bu özelliği kullanamazsın. Kuralları tekrar çiğnemen hâlinde engellenebilirsin.
+Feature.UniversalFeatureRestrictions.Generic.DialogTitle.Banned,{abuseVector} için erişimini yasakladık
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Nudge,{abuseVector} erişimini kaybedebilirsin
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minute,{abuseVector} 1 dakikalığına askıya alındı
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minutes,{abuseVector} {number} dakikalığına askıya alındı
 Feature.UniversalShareSheet.Action.CopiedLink,
 Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,Bir mesaj paylaş
 Feature.UniversalShareSheet.Response.NotSharedMessage,Mesaj gönderilemiyor
@@ -4913,6 +4934,7 @@ InGame.GameplayPaused.Body,Oyun duraklatıldı: Oyun içeriği yüklenirken lüt
 InGame.GameplayPaused.Title,Oyun Duraklatıldı
 InGame.HelpMenu.Controls.ToggleGameMenu,Oyun Menüsü Geçişi
 InGame.HelpMenu.DownArrow,Aşağı Ok Tuşu
+InGame.HelpMenu.GenericAction,Aksiyon
 InGame.HelpMenu.Label.ClientCoreScriptVersion,İstemci CoreScript Sürümü:
 InGame.HelpMenu.Label.ClientVersion,İstemci Sürümü:
 InGame.HelpMenu.Label.PlaceVersion,Dünya Sürümü:

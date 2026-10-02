@@ -1,17 +1,20 @@
 ﻿local httpService = game:GetService("HttpService")
 local expChat = script:FindFirstAncestor("ExpChat")
-local expChatSharedModule = require(expChat.Parent.ExpChatShared)
+local parent = expChat.Parent
+local expChatSharedModule = require(parent.ExpChatShared)
+local engineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
 local constantsModule = require(expChat.PresetChat.Constants)
 local _ = require(expChat.Stores.GetPresetChatStore.createPresetChatStore)
 
 local function buildPresetTrayItems(value, p1)
+	-- upvalues: engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref)
 	local t = {}
 	
 	for i, v in value do
 		for i_1, v_1 in v.categories do
 			local name = v_1.name or v_1.categoryId
 			
-			for i_2, v_2 in v_1.messages do
+			for i_2, v_2 in if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then v_1.contents else v_1.messages do
 				table.insert(t, {
 					category = name,
 					preset_id = v_2.presetId,

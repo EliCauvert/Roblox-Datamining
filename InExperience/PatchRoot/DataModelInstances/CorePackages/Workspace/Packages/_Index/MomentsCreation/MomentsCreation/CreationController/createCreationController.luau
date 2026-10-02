@@ -17,6 +17,8 @@ local clampTtsStartTimeModule = require(momentsCreation.Utils.clampTtsStartTime)
 local fFlagMomentsCommentsCreatorControlModule = require(momentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
 local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
 local getFFlagMomentsTTSStartTimePositioningModule = require(momentsCreation.Flags.GetFFlagMomentsTTSStartTimePositioning)
+local fFlagMomentsTTSVoiceSelectorModule = require(momentsCreation.Flags.FFlagMomentsTTSVoiceSelector)
+local fFlagMomentsTTSPublishMetadataEditsModule = require(momentsCreation.Flags.FFlagMomentsTTSPublishMetadataEdits)
 local getFFlagMomentsGenerateTextInTextOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsGenerateTextInTextOverlay)
 local momentsDraftStorageModule = require(momentsCreation.Storage.MomentsDraftStorage)
 local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
@@ -34,7 +36,7 @@ local createComputed = signalsModule.createComputed
 local createSignal = signalsModule.createSignal
 
 return function(p1)
-	-- upvalues: creationToolRegistryModule (ref), defaultCreationToolsModule (ref), sessionManager (ref), funnelEventNames (ref), createSignal (ref), createComputed (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSAudioOverlayModule (ref), createCapturePreviewControllerModule (ref), createTTSAudioManagerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), getFFlagMomentsCreationSaveDraft (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), clampTtsStartTimeModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), dialogTypeModule (ref), fFlagMomentsCommentsCreatorControlModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), makeDefaultTextOverlayEditModule (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref)
+	-- upvalues: creationToolRegistryModule (ref), defaultCreationToolsModule (ref), sessionManager (ref), funnelEventNames (ref), createSignal (ref), createComputed (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSAudioOverlayModule (ref), createCapturePreviewControllerModule (ref), createTTSAudioManagerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), getFFlagMomentsCreationSaveDraft (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), clampTtsStartTimeModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), dialogTypeModule (ref), fFlagMomentsCommentsCreatorControlModule (ref), fFlagMomentsTTSPublishMetadataEditsModule (ref), fFlagMomentsTTSVoiceSelectorModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), makeDefaultTextOverlayEditModule (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref)
 	local store = p1.store
 	local host = p1.host or {}
 	local registry = p1.registry or creationToolRegistryModule(defaultCreationToolsModule)
@@ -104,25 +106,26 @@ return function(p1)
 	end
 	
 	local var10, var11 = createSignal(false)
-	local var12 = createComputed(function(p3)
+	local var12, var13 = createSignal(nil)
+	local var14 = createComputed(function(p3)
 		-- upvalues: store (ref), host (ref), var4 (ref), registry (ref)
 		local selectedCapture = store.getSelectedCapture(p3)
-		local var13 = if selectedCapture ~= nil then nil else selectedCapture.CaptureType
+		local var15 = if selectedCapture ~= nil then nil else selectedCapture.CaptureType
 		local t = {
 			canGenerateText = host.generateMomentText ~= nil,
-			captureType = var13,
+			captureType = var15,
 			getComposedEdits = var4
 		}
 		local t_1 = {}
 		
 		for i, v in registry.getAll() do
-			if (if v.supportedCaptureTypes ~= nil then var13 ~= nil and table.find(v.supportedCaptureTypes, var13) ~= nil else true) and (v.isAvailable == nil or v.isAvailable(t)) then
+			if (if v.supportedCaptureTypes ~= nil then var15 ~= nil and table.find(v.supportedCaptureTypes, var15) ~= nil else true) and (v.isAvailable == nil or v.isAvailable(t)) then
 				table.insert(t_1, v)
 			end
 		end
 		return t_1
 	end)
-	local var14 = createComputed(function(p4)
+	local var16 = createComputed(function(p4)
 		-- upvalues: store (ref), registry (ref)
 		local step = store.getStep(p4)
 		
@@ -133,56 +136,56 @@ return function(p1)
 		end
 		return nil
 	end)
-	local var15 = createComputed(function(p5)
-		-- upvalues: getFFlagMomentsTTSAudioOverlayModule (copy), var14 (ref), getActiveSession (write), var4 (ref)
+	local var17 = createComputed(function(p5)
+		-- upvalues: getFFlagMomentsTTSAudioOverlayModule (copy), var16 (ref), getActiveSession (write), var4 (ref)
 		if not getFFlagMomentsTTSAudioOverlayModule then
 			return nil
 		end
-		local var16 = var14(p5)
+		local var18 = var16(p5)
 		
-		if var16 ~= nil and var16.kind == "voice" then
-			local var17 = getActiveSession(p5)
-			local var18 = if var17 ~= nil then nil else var17.getDraft(p5)
+		if var18 ~= nil and var18.kind == "voice" then
+			local var19 = getActiveSession(p5)
+			local var20 = if var19 ~= nil then nil else var19.getDraft(p5)
 			
-			return if var18 == nil or var18.text == nil or var18.text == "" then var4(p5).tts else var18
+			return if var20 == nil or var20.text == nil or var20.text == "" then var4(p5).tts else var20
 		end
 	end)
 	local preview = p1.preview or createCapturePreviewControllerModule(store, createComputed(function(p5)
-		-- upvalues: var14 (ref), getActiveSession (write), var4 (ref)
-		local var16 = var14(p5)
+		-- upvalues: var16 (ref), getActiveSession (write), var4 (ref)
+		local var18 = var16(p5)
 		
-		if var16 ~= nil and var16.kind == "trim" then
-			local var17 = getActiveSession(p5)
-			local var18 = if var17 ~= nil then nil else var17.getDraft(p5)
+		if var18 ~= nil and var18.kind == "trim" then
+			local var19 = getActiveSession(p5)
+			local var20 = if var19 ~= nil then nil else var19.getDraft(p5)
 			
-			if var18 ~= nil and var18.startTime ~= nil and var18.endTime ~= nil then
-				return { startTime = var18.startTime, endTime = var18.endTime }
+			if var20 ~= nil and var20.startTime ~= nil and var20.endTime ~= nil then
+				return { startTime = var20.startTime, endTime = var20.endTime }
 			end
 		end
 		local trim = var4(p5).trim
 		
 		return if trim == nil or trim.startTime == nil or trim.endTime == nil then nil else { startTime = trim.startTime, endTime = trim.endTime }
 	end), createComputed(function(p5)
-		-- upvalues: var14 (ref), getActiveSession (write), var4 (ref)
-		local var16 = var14(p5)
+		-- upvalues: var16 (ref), getActiveSession (write), var4 (ref)
+		local var18 = var16(p5)
 		
-		if var16 ~= nil and var16.kind == "music" then
-			local var17 = getActiveSession(p5)
-			local var18 = if var17 ~= nil then nil else var17.getDraft(p5)
+		if var18 ~= nil and var18.kind == "music" then
+			local var19 = getActiveSession(p5)
+			local var20 = if var19 ~= nil then nil else var19.getDraft(p5)
 			
-			return if var18 == nil or var18.assetId == nil then var4(p5).music else var18
+			return if var20 == nil or var20.assetId == nil then var4(p5).music else var20
 		end
 	end))
-	local var16 = nil
+	local var18 = nil
 	
 	if p1.ttsAudio ~= nil then
-		var16 = p1.ttsAudio
+		var18 = p1.ttsAudio
 	elseif getFFlagMomentsTTSAudioOverlayModule then
-		var16 = store.getTTSAudio(false)
+		var18 = store.getTTSAudio(false)
 		
-		if var16 == nil then
-			var16 = createTTSAudioManagerModule()
-			store.setTTSAudio(var16)
+		if var18 == nil then
+			var18 = createTTSAudioManagerModule()
+			store.setTTSAudio(var18)
 		end
 	end
 	local function showModal(p5)
@@ -211,12 +214,12 @@ return function(p1)
 	end
 	
 	local function returnToGallery()
-		-- upvalues: getFFlagEnableMomentTextGeneration (copy), getActiveGeneration (write), setActiveGeneration (write), setIsGenerating (write), store (ref), creationFlowStateModule (copy), setActiveSession (write), var16 (write), getFFlagMomentsCreationSaveDraft (copy), momentsDraftStorageModule (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref)
+		-- upvalues: getFFlagEnableMomentTextGeneration (copy), getActiveGeneration (write), setActiveGeneration (write), setIsGenerating (write), store (ref), creationFlowStateModule (copy), setActiveSession (write), var18 (write), getFFlagMomentsCreationSaveDraft (copy), momentsDraftStorageModule (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref)
 		if getFFlagEnableMomentTextGeneration() then
-			local var17 = getActiveGeneration(false)
+			local var19 = getActiveGeneration(false)
 			
-			if var17 ~= nil then
-				var17.promise:cancel()
+			if var19 ~= nil then
+				var19.promise:cancel()
 				setActiveGeneration(nil)
 				setIsGenerating(false)
 			end
@@ -224,8 +227,8 @@ return function(p1)
 		store.clearEdits(creationFlowStateModule.Gallery)
 		setActiveSession(nil)
 		
-		if var16 ~= nil then
-			var16.reset()
+		if var18 ~= nil then
+			var18.reset()
 		end
 		if getFFlagMomentsCreationSaveDraft() then
 			momentsDraftStorageModule.clear()
@@ -235,13 +238,13 @@ return function(p1)
 	
 	local function selectCapture(p5)
 		-- upvalues: getActiveGeneration (write), getFFlagEnableMomentTextGeneration (copy), setActiveGeneration (write), setIsGenerating (write), store (ref), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy)
-		local var17 = getActiveGeneration(false)
+		local var19 = getActiveGeneration(false)
 		
-		if getFFlagEnableMomentTextGeneration() and var17 ~= nil and p5 ~= var17.capture then
-			local var18 = getActiveGeneration(false)
+		if getFFlagEnableMomentTextGeneration() and var19 ~= nil and p5 ~= var19.capture then
+			local var20 = getActiveGeneration(false)
 			
-			if var18 ~= nil then
-				var18.promise:cancel()
+			if var20 ~= nil then
+				var20.promise:cancel()
 				setActiveGeneration(nil)
 				setIsGenerating(false)
 			end
@@ -264,28 +267,28 @@ return function(p1)
 	
 	local function beginTool(p5)
 		-- upvalues: registry (ref), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), var1 (write), createEditSessionModule (copy), store (ref), setActiveSession (write)
-		local var17 = registry.get(p5)
+		local var19 = registry.get(p5)
 		
-		if var17 == nil then return end
+		if var19 == nil then return end
 		if fFlagMomentsContentStatsTelemetry then
-			momentsCommonModule.Analytics.reportMomentsEditToolOpened(var17.kind)
+			momentsCommonModule.Analytics.reportMomentsEditToolOpened(var19.kind)
 		end
-		if var17.cta.analyticsEvent ~= nil then
-			fireAnalyticsEventModule(var17.cta.analyticsEvent, withCreationSession(makeCreationEventFieldsModule.makeToolField(var17)))
+		if var19.cta.analyticsEvent ~= nil then
+			fireAnalyticsEventModule(var19.cta.analyticsEvent, withCreationSession(makeCreationEventFieldsModule.makeToolField(var19)))
 		end
-		if var17.presentation == "InstantAction" then
-			if var17.apply ~= nil then
-				var17.apply(var1)
+		if var19.presentation == "InstantAction" then
+			if var19.apply ~= nil then
+				var19.apply(var1)
 			end
 			return
 		else
 			local _ = nil
-			local createSession = var17.createSession
-			local var18 = if createSession ~= nil then createEditSessionModule() else createSession()
+			local createSession = var19.createSession
+			local var20 = if createSession ~= nil then createEditSessionModule() else createSession()
 			
-			if var17.step == nil or store.navigate(var17.step) then
-				var18.begin(store.getEditsMap(false)[p5])
-				setActiveSession(var18)
+			if var19.step == nil or store.navigate(var19.step) then
+				var20.begin(store.getEditsMap(false)[p5])
+				setActiveSession(var20)
 				
 				return
 			end
@@ -293,88 +296,88 @@ return function(p1)
 	end
 	
 	local function commitActiveTool()
-		-- upvalues: getActiveSession (write), var14 (ref), store (ref), creationFlowStateModule (copy), var1 (write), getFFlagMomentsTTSStartTimePositioningModule (copy), var4 (ref), clampTtsStartTimeModule (copy), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), setActiveSession (write)
-		local var17 = getActiveSession(false)
-		local var18 = var14(false)
+		-- upvalues: getActiveSession (write), var16 (ref), store (ref), creationFlowStateModule (copy), var1 (write), getFFlagMomentsTTSStartTimePositioningModule (copy), var4 (ref), clampTtsStartTimeModule (copy), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), setActiveSession (write)
+		local var19 = getActiveSession(false)
+		local var20 = var16(false)
 		
-		if var17 == nil or var18 == nil then
+		if var19 == nil or var20 == nil then
 			store.navigate(creationFlowStateModule.Preview)
 			
 			return
 		end
-		local var19 = var17.commit()
+		local var21 = var19.commit()
 		
-		if var18.onCommit ~= nil and var18.onCommit(var19, var1) == false then return end
-		store.setCommittedEdit(var18.kind, var19)
+		if var20.onCommit ~= nil and var20.onCommit(var21, var1) == false then return end
+		store.setCommittedEdit(var20.kind, var21)
 		
-		if getFFlagMomentsTTSStartTimePositioningModule and var18.kind == "trim" and (var19 ~= nil and var19.startTime ~= nil) and var19.endTime ~= nil then
-			local var20 = var19.endTime - var19.startTime
+		if getFFlagMomentsTTSStartTimePositioningModule and var20.kind == "trim" and (var21 ~= nil and var21.startTime ~= nil) and var21.endTime ~= nil then
+			local var22 = var21.endTime - var21.startTime
 			local tts = var4(false).tts
 			
-			if tts ~= nil and tts.startTime ~= nil and var20 > 0 then
-				local var21 = clampTtsStartTimeModule(tts.startTime, var20)
+			if tts ~= nil and tts.startTime ~= nil and var22 > 0 then
+				local var23 = clampTtsStartTimeModule(tts.startTime, var22)
 				
-				if var21 ~= tts.startTime then
+				if var23 ~= tts.startTime then
 					local cloned = table.clone(tts)
-					cloned.startTime = var21
+					cloned.startTime = var23
 					store.setCommittedEdit("voice", cloned)
 				end
 			end
 		end
-		if var18.cta.commitAnalyticsEvent ~= nil and (not var18.cta.commitRequiresEdit or (if var18.toEdits ~= nil then next(var18.toEdits(var19)) ~= nil else true)) then
-			fireAnalyticsEventModule(var18.cta.commitAnalyticsEvent, withCreationSession(makeCreationEventFieldsModule.makeToolField(var18)))
+		if var20.cta.commitAnalyticsEvent ~= nil and (not var20.cta.commitRequiresEdit or (if var20.toEdits ~= nil then next(var20.toEdits(var21)) ~= nil else true)) then
+			fireAnalyticsEventModule(var20.cta.commitAnalyticsEvent, withCreationSession(makeCreationEventFieldsModule.makeToolField(var20)))
 		end
 		setActiveSession(nil)
 		store.navigate(creationFlowStateModule.Preview)
 	end
 	
 	local function saveActiveTool()
-		-- upvalues: getActiveSession (write), var14 (ref), store (ref)
-		local var17 = getActiveSession(false)
-		local var18 = var14(false)
+		-- upvalues: getActiveSession (write), var16 (ref), store (ref)
+		local var19 = getActiveSession(false)
+		local var20 = var16(false)
 		
-		if var17 == nil or var18 == nil then
+		if var19 == nil or var20 == nil then
 			return
 		end
-		store.setCommittedEdit(var18.kind, var17.commit())
+		store.setCommittedEdit(var20.kind, var19.commit())
 	end
 	
 	local function clearActiveTool()
-		-- upvalues: getActiveSession (write), var14 (ref), var16 (write)
-		local var17 = getActiveSession(false)
-		local var18 = var14(false)
+		-- upvalues: getActiveSession (write), var16 (ref), var18 (write)
+		local var19 = getActiveSession(false)
+		local var20 = var16(false)
 		
-		if var18 == nil then return end
-		if var17 ~= nil then
-			var17.update(nil)
+		if var20 == nil then return end
+		if var19 ~= nil then
+			var19.update(nil)
 		end
-		if var18.kind == "voice" and var16 ~= nil then
-			var16.reset()
+		if var20.kind == "voice" and var18 ~= nil then
+			var18.reset()
 		end
 	end
 	
 	local function discardActiveTool()
-		-- upvalues: getActiveSession (write), var14 (ref), var16 (write), var4 (ref), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), setActiveSession (write), store (ref), creationFlowStateModule (copy)
-		local var17 = getActiveSession(false)
-		local var18 = var14(false)
+		-- upvalues: getActiveSession (write), var16 (ref), var18 (write), var4 (ref), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), setActiveSession (write), store (ref), creationFlowStateModule (copy)
+		local var19 = getActiveSession(false)
+		local var20 = var16(false)
 		
-		if var17 ~= nil then
-			var17.discard()
+		if var19 ~= nil then
+			var19.discard()
 		end
-		if var18 ~= nil and var18.kind == "voice" and var16 ~= nil then
+		if var20 ~= nil and var20.kind == "voice" and var18 ~= nil then
 			local tts = var4(false).tts
 			
 			if tts == nil or tts.text == nil or tts.text == "" then
-				var16.reset()
+				var18.reset()
 			else
-				var16.generate(tts.text, tts.voiceId)
+				var18.generate(tts.text, tts.voiceId)
 			end
 		end
-		if var18 ~= nil and var18.cta.cancelAnalyticsEvent ~= nil then
-			fireAnalyticsEventModule(var18.cta.cancelAnalyticsEvent, withCreationSession(makeCreationEventFieldsModule.makeToolField(var18)))
+		if var20 ~= nil and var20.cta.cancelAnalyticsEvent ~= nil then
+			fireAnalyticsEventModule(var20.cta.cancelAnalyticsEvent, withCreationSession(makeCreationEventFieldsModule.makeToolField(var20)))
 		end
-		if fFlagMomentsContentStatsTelemetry and var18 ~= nil then
-			momentsCommonModule.Analytics.reportMomentsEditToolAbandoned(var18.kind)
+		if fFlagMomentsContentStatsTelemetry and var20 ~= nil then
+			momentsCommonModule.Analytics.reportMomentsEditToolAbandoned(var20.kind)
 		end
 		setActiveSession(nil)
 		store.navigate(creationFlowStateModule.Preview)
@@ -386,12 +389,12 @@ return function(p1)
 	end
 	
 	local function dismiss()
-		-- upvalues: getFFlagEnableMomentTextGeneration (copy), getActiveGeneration (write), setActiveGeneration (write), setIsGenerating (write), host (ref), var3 (ref), p1 (ref), creationFlowStateModule (copy), store (ref), var16 (write), getFFlagMomentsCreationSaveDraft (copy), momentsDraftStorageModule (copy)
+		-- upvalues: getFFlagEnableMomentTextGeneration (copy), getActiveGeneration (write), setActiveGeneration (write), setIsGenerating (write), host (ref), var3 (ref), p1 (ref), creationFlowStateModule (copy), store (ref), var18 (write), getFFlagMomentsCreationSaveDraft (copy), momentsDraftStorageModule (copy)
 		if getFFlagEnableMomentTextGeneration() then
-			local var17 = getActiveGeneration(false)
+			local var19 = getActiveGeneration(false)
 			
-			if var17 ~= nil then
-				var17.promise:cancel()
+			if var19 ~= nil then
+				var19.promise:cancel()
 				setActiveGeneration(nil)
 				setIsGenerating(false)
 			end
@@ -402,8 +405,8 @@ return function(p1)
 		var3(nil)
 		store.clearEdits(if p1.excludeGallery then creationFlowStateModule.Preview else creationFlowStateModule.Gallery)
 		
-		if var16 ~= nil then
-			var16.destroy()
+		if var18 ~= nil then
+			var18.destroy()
 			store.setTTSAudio(nil)
 		end
 		if getFFlagMomentsCreationSaveDraft() then
@@ -433,11 +436,11 @@ return function(p1)
 		selectCapture = selectCapture,
 		getDescription = store.getDescription,
 		setDescription = setDescription,
-		getAvailableTools = var12,
-		getActiveTool = var14,
+		getAvailableTools = var14,
+		getActiveTool = var16,
 		getActiveSession = getActiveSession,
 		getComposedEdits = var4,
-		getEffectiveTTS = var15,
+		getEffectiveTTS = var17,
 		beginTool = beginTool,
 		commitActiveTool = commitActiveTool,
 		saveActiveTool = saveActiveTool,
@@ -455,8 +458,10 @@ return function(p1)
 		dismissModal = dismissModal,
 		getVoiceCoachmarkDismissed = var10,
 		dismissVoiceCoachmark = dismissVoiceCoachmark,
+		getSelectedVoiceId = var12,
+		setSelectedVoiceId = var13,
 		publish = function()
-			-- upvalues: store (ref), host (ref), var3 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), sessionManager (copy), funnelEventNames (copy), preview (ref), fFlagMomentsCommentsCreatorControlModule (copy), var4 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), getFFlagMomentsTTSAudioOverlayModule (copy), getFFlagMomentsTTSStartTimePositioningModule (copy), fFlagMomentsTextOverlayV2Redesign (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), dismiss (ref)
+			-- upvalues: store (ref), host (ref), var3 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), sessionManager (copy), funnelEventNames (copy), preview (ref), fFlagMomentsCommentsCreatorControlModule (copy), var4 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), getFFlagMomentsTTSAudioOverlayModule (copy), fFlagMomentsTTSPublishMetadataEditsModule (copy), fFlagMomentsTTSVoiceSelectorModule (copy), getFFlagMomentsTTSStartTimePositioningModule (copy), var18 (write), fFlagMomentsTextOverlayV2Redesign (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), dismiss (ref)
 			local description = store.getDescription(false)
 			
 			if host.isTextFiltered ~= nil and host.isTextFiltered(description) then
@@ -485,69 +490,86 @@ return function(p1)
 				end
 			end
 			local textOverlayEdits
-			local var17 = cryoModule.Dictionary.join(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowPublished), makeCreationEventFieldsModule.makeCreationBaseFields(sessionId))
+			local var19 = cryoModule.Dictionary.join(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowPublished), makeCreationEventFieldsModule.makeCreationBaseFields(sessionId))
 			
 			if getFFlagEnableMomentTextGeneration() then
 				textOverlayEdits = store.getTextOverlayEdits(false)
-				var17 = cryoModule.Dictionary.join(var17, makeCreationEventFieldsModule.makeGeneratedTextOutcomeFields(store.getGeneratedDescription(false), description, store.getGeneratedSummary(false), if textOverlayEdits == nil or textOverlayEdits[1] == nil then nil else textOverlayEdits[1].text))
+				var19 = cryoModule.Dictionary.join(var19, makeCreationEventFieldsModule.makeGeneratedTextOutcomeFields(store.getGeneratedDescription(false), description, store.getGeneratedSummary(false), if textOverlayEdits == nil or textOverlayEdits[1] == nil then nil else textOverlayEdits[1].text))
 			end
-			if getFFlagMomentsTTSAudioOverlayModule and getFFlagMomentsTTSStartTimePositioningModule then
-				textOverlayEdits = var4(false)
-				local tts = textOverlayEdits.tts
+			textOverlayEdits = getFFlagMomentsTTSAudioOverlayModule and fFlagMomentsTTSPublishMetadataEditsModule
+			
+			if fFlagMomentsTTSVoiceSelectorModule and not textOverlayEdits then
+				local tts = var4(false).tts
+				
+				if tts ~= nil then
+					var19 = cryoModule.Dictionary.join(var19, { voiceId = tostring(tts.voiceId) })
+				end
+			end
+			if getFFlagMomentsTTSAudioOverlayModule and getFFlagMomentsTTSStartTimePositioningModule and not textOverlayEdits then
+				local var20 = var4(false)
+				local tts = var20.tts
 				
 				if tts ~= nil then
 					local startTime = tts.startTime or 0
-					local var18 = if textOverlayEdits.trim ~= nil then preview.playback.getTimeLength(false) else textOverlayEdits.trim.endTime - textOverlayEdits.trim.startTime
-					var17 = cryoModule.Dictionary.join(var17, {
+					local var21 = if var20.trim ~= nil then preview.playback.getTimeLength(false) else var20.trim.endTime - var20.trim.startTime
+					var19 = cryoModule.Dictionary.join(var19, {
 						ttsStartTimeSeconds = tostring(startTime),
-						ttsVideoDurationSeconds = tostring(var18),
-						ttsStartTimeFraction = tostring(if var18 > 0 then startTime / var18 else 0)
+						ttsVideoDurationSeconds = tostring(var21),
+						ttsStartTimeFraction = tostring(if var21 > 0 then startTime / var21 else 0)
 					})
 				end
 			end
-			if fFlagMomentsTextOverlayV2Redesign then
-				textOverlayEdits = var4(false).textOverlays
-				var17 = cryoModule.Dictionary.join(var17, makeCreationEventFieldsModule.makeTextOverlayPublishSummaryFields(textOverlayEdits and textOverlayEdits[1]))
+			if textOverlayEdits then
+				local var22 = var4(false)
+				local tts = var22.tts
+				
+				if tts ~= nil then
+					var19 = cryoModule.Dictionary.join(var19, makeCreationEventFieldsModule.makeVoicePublishSummaryFields(tts, if var22.trim ~= nil then preview.playback.getTimeLength(false) else var22.trim.endTime - var22.trim.startTime, if not (var18 == nil or var18.getLoadedText(false) ~= tts.text or var18.getLoadedVoiceId(false) ~= tts.voiceId) then var18.getTimeLength(false) else nil))
+				end
 			end
-			fireAnalyticsEventModule(eventNames.MomentsEditingFlowPublished, var17)
+			if fFlagMomentsTextOverlayV2Redesign then
+				local textOverlays = var4(false).textOverlays
+				var19 = cryoModule.Dictionary.join(var19, makeCreationEventFieldsModule.makeTextOverlayPublishSummaryFields(textOverlays and textOverlays[1]))
+			end
+			fireAnalyticsEventModule(eventNames.MomentsEditingFlowPublished, var19)
 			
 			if fFlagMomentsRealtimeSessionTelemetry then
 				momentsCommonModule.Analytics.reportMomentsCreationStep("published")
 			end
 			if fFlagMomentsContentStatsTelemetry then
-				textOverlayEdits = momentsCommonModule.Analytics
-				local var19 = var4(false)
-				local var20 = 0
+				local analytics = momentsCommonModule.Analytics
+				local var23 = var4(false)
+				local var24 = 0
 				
-				if var19.music ~= nil then
-					var20 += 1
-					textOverlayEdits.reportMomentsPublishedWithEdit("music")
+				if var23.music ~= nil then
+					var24 += 1
+					analytics.reportMomentsPublishedWithEdit("music")
 				end
-				if var19.trim ~= nil then
-					var20 += 1
-					textOverlayEdits.reportMomentsPublishedWithEdit("trim")
+				if var23.trim ~= nil then
+					var24 += 1
+					analytics.reportMomentsPublishedWithEdit("trim")
 				end
-				if var19.textOverlays ~= nil and #var19.textOverlays > 0 then
-					var20 += 1
-					textOverlayEdits.reportMomentsPublishedWithEdit("text_overlay")
+				if var23.textOverlays ~= nil and #var23.textOverlays > 0 then
+					var24 += 1
+					analytics.reportMomentsPublishedWithEdit("text_overlay")
 				end
-				if var19.stickerOverlays ~= nil and #var19.stickerOverlays > 0 then
-					var20 += 1
-					textOverlayEdits.reportMomentsPublishedWithEdit("sticker")
+				if var23.stickerOverlays ~= nil and #var23.stickerOverlays > 0 then
+					var24 += 1
+					analytics.reportMomentsPublishedWithEdit("sticker")
 				end
 				if description ~= nil and description ~= "" then
-					var20 += 1
-					textOverlayEdits.reportMomentsPublishedWithEdit("description")
+					var24 += 1
+					analytics.reportMomentsPublishedWithEdit("description")
 				end
-				if getFFlagMomentsTTSAudioOverlayModule and var19.tts ~= nil then
-					var20 += 1
-					textOverlayEdits.reportMomentsPublishedWithEdit("tts")
+				if getFFlagMomentsTTSAudioOverlayModule and var23.tts ~= nil then
+					var24 += 1
+					analytics.reportMomentsPublishedWithEdit("tts")
 				end
-				textOverlayEdits.reportMomentsPublishedEditCount(var20)
+				analytics.reportMomentsPublishedEditCount(var24)
 				local selectedCapture = store.getSelectedCapture(false)
 				
 				if selectedCapture ~= nil then
-					textOverlayEdits.reportMomentsPublishedByCaptureType(if selectedCapture.CaptureType == Enum.CaptureType.Video then "video" elseif selectedCapture.CaptureType == Enum.CaptureType.Screenshot then "screenshot" else "unknown")
+					analytics.reportMomentsPublishedByCaptureType(if selectedCapture.CaptureType == Enum.CaptureType.Video then "video" elseif selectedCapture.CaptureType == Enum.CaptureType.Screenshot then "screenshot" else "unknown")
 				end
 			end
 			dismiss()
@@ -558,7 +580,7 @@ return function(p1)
 			dismiss()
 		end,
 		generateText = function(p5)
-			-- upvalues: getIsGenerating (write), host (ref), store (ref), getFFlagEnableMomentTextGeneration (copy), setIsGenerating (write), setActiveGeneration (write), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), makeDefaultTextOverlayEditModule (copy), getFFlagMomentsGenerateTextInTextOverlayModule (copy), getActiveSession (write), var14 (ref)
+			-- upvalues: getIsGenerating (write), host (ref), store (ref), getFFlagEnableMomentTextGeneration (copy), setIsGenerating (write), setActiveGeneration (write), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), makeDefaultTextOverlayEditModule (copy), getFFlagMomentsGenerateTextInTextOverlayModule (copy), getActiveSession (write), var16 (ref)
 			if getIsGenerating(false) then return end
 			if host.generateMomentText == nil then return end
 			local selectedCapture = store.getSelectedCapture(false)
@@ -572,17 +594,17 @@ return function(p1)
 				end
 			end
 			setIsGenerating(true)
-			local var17 = host.generateMomentText(selectedCapture, p5)
+			local var19 = host.generateMomentText(selectedCapture, p5)
 			
-			if var17 == nil then
+			if var19 == nil then
 				setIsGenerating(false)
 				
 				return
 			elseif getFFlagEnableMomentTextGeneration() then
-				setActiveGeneration({ promise = var17, capture = selectedCapture })
+				setActiveGeneration({ promise = var19, capture = selectedCapture })
 			end
-			var17:andThen(function(p6)
-				-- upvalues: getFFlagEnableMomentTextGeneration (copy), setActiveGeneration (copy), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), host (copy), setIsGenerating (copy), store (copy), makeDefaultTextOverlayEditModule (copy), getFFlagMomentsGenerateTextInTextOverlayModule (copy), getActiveSession (copy), var14 (copy)
+			var19:andThen(function(p6)
+				-- upvalues: getFFlagEnableMomentTextGeneration (copy), setActiveGeneration (copy), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), host (copy), setIsGenerating (copy), store (copy), makeDefaultTextOverlayEditModule (copy), getFFlagMomentsGenerateTextInTextOverlayModule (copy), getActiveSession (copy), var16 (copy)
 				if getFFlagEnableMomentTextGeneration() then
 					setActiveGeneration(nil)
 				end
@@ -611,43 +633,43 @@ return function(p1)
 					
 					return
 				elseif p6.summary ~= nil and p6.summary ~= "" then
-					local var18
+					local var20
 					local textOverlayEdits = store.getTextOverlayEdits(false)
-					local var19 = if textOverlayEdits ~= nil then nil else textOverlayEdits[1]
+					local var21 = if textOverlayEdits ~= nil then nil else textOverlayEdits[1]
 					local _ = nil
 					
-					if getFFlagEnableMomentTextGeneration() and var19 ~= nil then
-						var18 = table.clone(var19)
-						var18.text = p6.summary
+					if getFFlagEnableMomentTextGeneration() and var21 ~= nil then
+						var20 = table.clone(var21)
+						var20.text = p6.summary
 					else
-						var18 = makeDefaultTextOverlayEditModule()
-						var18.text = p6.summary
+						var20 = makeDefaultTextOverlayEditModule()
+						var20.text = p6.summary
 					end
 					local cloned
 					local _ = nil
 					
 					if textOverlayEdits == nil or #textOverlayEdits == 0 then
-						cloned = { var18 }
+						cloned = { var20 }
 					else
 						cloned = table.clone(textOverlayEdits)
-						cloned[1] = var18
+						cloned[1] = var20
 					end
 					store.updateTextOverlayEdits(cloned)
 					
 					if getFFlagMomentsGenerateTextInTextOverlayModule() then
-						local var20 = getActiveSession(false)
-						local var21 = var14(false)
+						local var22 = getActiveSession(false)
+						local var23 = var16(false)
 						
-						if var20 ~= nil and var21 ~= nil and var21.kind == "text" then
-							local draft = var20.getDraft(false)
-							local var22 = draft and draft[1]
+						if var22 ~= nil and var23 ~= nil and var23.kind == "text" then
+							local draft = var22.getDraft(false)
+							local var24 = draft and draft[1]
 							
-							if var22 == nil then
-								var20.update(cloned)
+							if var24 == nil then
+								var22.update(cloned)
 							else
-								local cloned_1 = table.clone(var22)
+								local cloned_1 = table.clone(var24)
 								cloned_1.text = p6.summary
-								var20.update({ cloned_1 })
+								var22.update({ cloned_1 })
 							end
 						end
 					end
@@ -706,6 +728,6 @@ return function(p1)
 			store.setGeneratedTextFeedback(p5)
 		end,
 		preview = preview,
-		ttsAudio = var16
+		ttsAudio = var18
 	}
 end

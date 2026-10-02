@@ -206,6 +206,80 @@ return {
 			return if var4.supportSlotEligible then if p1 == appSplitViewModule.Enums.SupportPaneMode.Collapsed and not var4.profileSupportSlotEligibleWhenCollapsed then nil else splitPaneSlot.Support else nil
 		end
 	end,
+	getProfileRoutePresentation = function(p1)
+		-- upvalues: fFlagSplitPaneExperimentVariants (ref), splitPaneSlot (ref), var1 (write), t (ref), fFlagSplitPaneVariantCollapsedAutoOpen (ref), t_3 (ref), fFlagSplitPaneVariantAvatarOnHomeOnly (ref), t_2 (ref), fFlagSplitPaneVariantDefaultCollapsed (ref), t_1 (ref), var2 (write), appSplitViewModule (ref)
+		local var3
+		if not fFlagSplitPaneExperimentVariants then
+			return {
+				rendersAboveSplitPane = false,
+				splitPaneEligibility = if p1 ~= nil then nil else splitPaneSlot.Support,
+				rendersOverlay = p1 == nil
+			}
+		elseif p1 == nil then
+			var3 = nil
+		elseif fFlagSplitPaneExperimentVariants then
+			if not var1 then
+				local var4 = t
+				
+				if fFlagSplitPaneVariantCollapsedAutoOpen then
+					var4 = t_3
+				elseif fFlagSplitPaneVariantAvatarOnHomeOnly then
+					var4 = t_2
+				elseif fFlagSplitPaneVariantDefaultCollapsed then
+					var4 = t_1
+				end
+				var1 = true
+				var2 = var4
+			end
+			local var5 = var2
+			var3 = if not var5.supportSlotEligible then if p1 == appSplitViewModule.Enums.SupportPaneMode.Collapsed and not var5.profileSupportSlotEligibleWhenCollapsed then nil else splitPaneSlot.Support else nil
+		end
+		local var6 = var3 ~= nil
+		local var7 = not var6
+		
+		if var7 then
+			var7 = true
+			
+			if p1 ~= nil then
+				if not var1 then
+					local var8 = t
+					
+					if fFlagSplitPaneVariantCollapsedAutoOpen then
+						var8 = t_3
+					elseif fFlagSplitPaneVariantAvatarOnHomeOnly then
+						var8 = t_2
+					elseif fFlagSplitPaneVariantDefaultCollapsed then
+						var8 = t_1
+					end
+					var1 = true
+					var2 = var8
+				end
+				var7 = not var2.defaultOpen
+				
+				if var7 then
+					if not var1 then
+						local var9 = t
+						
+						if fFlagSplitPaneVariantCollapsedAutoOpen then
+							var9 = t_3
+						elseif fFlagSplitPaneVariantAvatarOnHomeOnly then
+							var9 = t_2
+						elseif fFlagSplitPaneVariantDefaultCollapsed then
+							var9 = t_1
+						end
+						var1 = true
+						var2 = var9
+					end
+					var7 = not var2.autoExpandOnSupportOpen
+				end
+			end
+		end
+		return {
+			splitPaneEligibility = var3,
+			rendersOverlay = var7,
+			rendersAboveSplitPane = not var6 and not var7
+		}
+	end,
 	getExperienceDetailSplitPaneEligibility = function()
 		-- upvalues: fFlagSplitPaneExperimentVariants (ref), var1 (write), t (ref), fFlagSplitPaneVariantCollapsedAutoOpen (ref), t_3 (ref), fFlagSplitPaneVariantAvatarOnHomeOnly (ref), t_2 (ref), fFlagSplitPaneVariantDefaultCollapsed (ref), t_1 (ref), var2 (write), splitPaneSlot (ref)
 		if fFlagSplitPaneExperimentVariants then

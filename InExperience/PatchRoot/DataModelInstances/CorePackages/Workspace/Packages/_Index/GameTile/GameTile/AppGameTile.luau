@@ -92,6 +92,7 @@ local fFlagLuaAppNarrowTileHidePlayerCount = require(parent.SharedFlags).FFlagLu
 local fIntLuaAppGameTileVideoDwellTimeInSec = require(parent.SharedFlags).FIntLuaAppGameTileVideoDwellTimeInSec
 local fIntLuaAppGameTileVideoVisiblePercent = require(parent.SharedFlags).FIntLuaAppGameTileVideoVisiblePercent
 local fFlagLuaAppTileVideoCandidateOnly = require(parent.SharedFlags).FFlagLuaAppTileVideoCandidateOnly
+local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 local luaAppKeepTileBadgesDuringVideo = game:DefineFastFlag("LuaAppKeepTileBadgesDuringVideo", false)
 local fFlagLuaAppVideoTileDisableActivation = require(parent.SharedFlags).FFlagLuaAppVideoTileDisableActivation
 local fFlagLuaAppFixHiddenTileVideoCleanup = require(parent.SharedFlags).FFlagLuaAppFixHiddenTileVideoCleanup
@@ -1104,7 +1105,7 @@ if not fFlagLuaAppGameDetailsAttributionFix then
 	appGameTile = roactServices.connect({ networking = roactNetworking })(appGameTile)
 end
 local var9 = function(p2)
-	-- upvalues: reactModule (ref), useTokens (ref), fFlagMigrateGameIconsToStore (ref), gameHydrationReactModule (ref), useIsHoveredTileModule (ref), useUiModeInfo (ref), uiMode (ref), useValidTileBadgesModule (ref), useSelector (ref), fFlagLuaAppMigrateGameTileActiveFriendsHydrationFix (ref), useHasInGameFriendsModule (ref), fFlagGameTileMigrateOffLegacyPresence (ref), var1 (ref), cryoModule (ref), useInGameUserIdsModule (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), fFlagLuaAppSearchResultsPageGameTileVideo (ref), fFlagLuaAppGateVideoPlaybackOnNavigationFocus (ref), fFlagLuaAppFixHiddenTileVideoCleanup (ref), fFlagLuaAppGameDetailsAttributionFix (ref), useRoactService (ref), roactNetworking (ref), sponsoredGamesRecordClick (ref), hoverTileCoordinatorModule (ref), videoEndReasonModule (ref), videoPlaybackCoordinator (ref), gameCollectionItemTypes (ref), getFFlagEnableNavigationPerformanceIntervals (ref), intervalPerformanceTracker (ref), useOverflowMenuOpen (ref), useTriggerFeedback (ref), fFlagLuaAppContinueSortInstantPlay (ref), var6 (ref), getAvailableGameTileOverflowMenuItemsModule (ref), fFlagLuaAppEnableReportExperience (ref), useHasVideoThumbnailSelectorModule (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppTileVideoCandidateOnly (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref), usePreferredInput (ref), gameVideoPlaybackDetectorModule (ref), responsiveModule (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), appGameTile (write)
+	-- upvalues: reactModule (ref), useTokens (ref), fFlagMigrateGameIconsToStore (ref), gameHydrationReactModule (ref), useIsHoveredTileModule (ref), useUiModeInfo (ref), uiMode (ref), useValidTileBadgesModule (ref), useSelector (ref), fFlagLuaAppMigrateGameTileActiveFriendsHydrationFix (ref), useHasInGameFriendsModule (ref), fFlagGameTileMigrateOffLegacyPresence (ref), var1 (ref), cryoModule (ref), useInGameUserIdsModule (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), fFlagLuaAppSearchResultsPageGameTileVideo (ref), fFlagLuaAppGateVideoPlaybackOnNavigationFocus (ref), fFlagLuaAppFixHiddenTileVideoCleanup (ref), fFlagLuaAppGameDetailsAttributionFix (ref), useRoactService (ref), roactNetworking (ref), sponsoredGamesRecordClick (ref), hoverTileCoordinatorModule (ref), videoEndReasonModule (ref), videoPlaybackCoordinator (ref), gameCollectionItemTypes (ref), getFFlagEnableNavigationPerformanceIntervals (ref), intervalPerformanceTracker (ref), useOverflowMenuOpen (ref), useTriggerFeedback (ref), fFlagLuaAppContinueSortInstantPlay (ref), var6 (ref), getAvailableGameTileOverflowMenuItemsModule (ref), fFlagLuaAppEnableReportExperience (ref), useHasVideoThumbnailSelectorModule (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppTileVideoCandidateOnly (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref), usePreferredInput (ref), gameVideoPlaybackDetectorModule (ref), responsiveModule (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), appGameTile (write)
 	local var10 = reactModule.useRef(nil)
 	local var11 = useTokens()
 	local useHoverTile = p2.useHoverTile
@@ -1261,7 +1262,10 @@ local var9 = function(p2)
 			if fFlagLuaAppEnableReportExperience then p2.enableReportExperience else nil
 		})
 		local var42 = if p2.entry.primaryWideVideoAssetId == nil then useHasVideoThumbnailSelectorModule(p2.entry.universeId, p2.topicId) else true
-		useTagAsViewportAutoplayCandidate(var10, p2.videoPlaybackContext, if fFlagLuaAppTileVideoCandidateOnly then var42 else nil, if fFlagLuaAppFixHiddenTileVideoCleanup then p2.isHidden else nil)
+		useTagAsViewportAutoplayCandidate(var10, p2.videoPlaybackContext, if fFlagLuaAppTileVideoCandidateOnly then var42 else nil, if fFlagLuaAppFixHiddenTileVideoCleanup then p2.isHidden else nil, nil, nil, nil, if fFlagLuaAppOneByTwoHoverIdleAutoplay and var42 then {
+			isUserIntentModeAutoplayCandidate = false,
+			videoKey = var13
+		} else nil)
 		local var43 = if not fFlagLuaAppGameTileSelectionVideoPlayback then if fFlagLuaAppEdpMediaGalleryVideoPreview then usePreferredInput() else nil else nil
 		
 		if var42 and not p2.isHidden then

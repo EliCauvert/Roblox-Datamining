@@ -9,12 +9,13 @@ local pageContext = appPageShellModule.PageContext
 local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
 local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
 local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
+local fFlagSduiPageCanvasCollectionLayout = require(parent.SharedFlags).FFlagSduiPageCanvasCollectionLayout
 local useComponentConfigModule = require(sduiSharedUtilities.hooks.useComponentConfig)
 local useComponentLifecycleTimingModule = require(sduiSharedUtilities.hooks.useComponentLifecycleTiming)
 local _ = require(sduiSharedUtilities.SduiLoadTimer)
 
 local function SduiPageWholeContent(p1)
-	-- upvalues: reactModule (ref), pageContext (ref), fFlagAppPageShellScrollToTopFocus (ref), fFlagLuaAppsDefaultSelection (ref), getSduiComponentWrapper (ref)
+	-- upvalues: reactModule (ref), pageContext (ref), fFlagAppPageShellScrollToTopFocus (ref), fFlagLuaAppsDefaultSelection (ref), fFlagSduiPageCanvasCollectionLayout (ref), getSduiComponentWrapper (ref)
 	local var1 = reactModule.useContext(pageContext)
 	local verticalScrollingFrameRef = var1.verticalScrollingFrameRef
 	
@@ -24,14 +25,15 @@ local function SduiPageWholeContent(p1)
 		sduiContext = p1.sduiContext,
 		localAnalyticsData = p1.localAnalyticsData,
 		extraLocalProps = reactModule.useMemo(function()
-			-- upvalues: verticalScrollingFrameRef (ref), var1 (ref), p1 (ref), fFlagAppPageShellScrollToTopFocus (copy), fFlagLuaAppsDefaultSelection (copy)
+			-- upvalues: verticalScrollingFrameRef (ref), var1 (ref), p1 (ref), fFlagAppPageShellScrollToTopFocus (copy), fFlagLuaAppsDefaultSelection (copy), fFlagSduiPageCanvasCollectionLayout (copy)
 			return {
 				scrollToSelectionAnimationManagedByParent = true,
 				scrollingFrameRef = verticalScrollingFrameRef,
 				verticalScrollingFrameRef = verticalScrollingFrameRef,
 				scrollViewPositionChangedSignal = var1.scrollViewPositionChangedSignal,
 				refreshSignal = p1.refreshSignal,
-				defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil
+				defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil,
+				disableCollectionLayoutStoreProvider = if fFlagSduiPageCanvasCollectionLayout then true else nil
 			}
 		end, {
 			var1,

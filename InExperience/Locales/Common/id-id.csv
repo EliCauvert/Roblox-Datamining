@@ -1302,8 +1302,7 @@ Feature.AddFriends.Action.RequestIgnored,Permintaan Diabaikan
 Feature.AddFriends.Label.AddFriendsTooltip,Mulai dengan menemukan teman kamu supaya kamu bisa menjelajahi Roblox bersama mereka.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Temukan pengguna di Roblox dengan memasukkan nama pengguna atau nama mereka.
 Feature.AddFriends.Label.ConnectWithContacts,Undang kontak atau terhubung dengan teman yang sudah ada di Roblox.
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Cari orang
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Cari orang
 Feature.AddFriends.Label.SearchForFriendsPrompt,Temukan pengguna di Roblox dengan memasukkan nama pengguna atau nama display mereka.
 Feature.AddFriends.Label.SyncWithContacts,Sinkronkan kontak untuk menemukan dan mengundang teman
 Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox lebih seru dengan teman!
@@ -1945,6 +1944,7 @@ Feature.Build.Action.DontShowAgain,Jangan tampilkan lagi
 Feature.Build.Action.EarnRobux,Dapatkan Robux
 Feature.Build.Action.Edit,Edit
 Feature.Build.Action.HideAutosaved,Sembunyikan yang disimpan otomatis
+Feature.Build.Action.KeepBuilding,Lanjutkan proses
 Feature.Build.Action.ManageLimit,Kelola batas
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
@@ -1970,6 +1970,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,Bagikan link
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,Statistik
+Feature.Build.Action.Stop,Berhenti
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Perbarui rating
 Feature.Build.Action.UpdateWithChanges,Perbarui dengan perubahan
@@ -2079,7 +2080,12 @@ Feature.Build.Description.RevertToVersion,Konfirmasi untuk membatalkan perubahan
 Feature.Build.Description.ShareLatest,Bagikan apa yang berubah di versi terbarumu.
 Feature.Build.Description.ShopButton,Tambahkan entry point belanja
 Feature.Build.Description.ShortAdCampaign,Cara cepat untuk melihat pendapat pemain tentang game-mu.
+Feature.Build.Description.StopBuild,"Permintaan ini masih dalam proses. Jika kamu berhenti sekarang, permintaan ini tidak akan selesai dan kamu harus mengirimkannya lagi."
 Feature.Build.Description.UpdateDeveloperProduct,Perbarui produk developer {PRODUCT_ID}.
+Feature.Build.Error.AdForbidden,Akun atau game-mu tidak dapat menayangkan iklan saat ini. Hubungi dukungan pelanggan jika menurutmu ini kesalahan.
+Feature.Build.Error.AdInsufficientFunds,Kamu tidak memiliki cukup Robux untuk membuat iklan ini. Tambahkan lebih banyak lalu coba lagi.
+Feature.Build.Error.AdInternalError,
+Feature.Build.Error.AdMissingThumbnail,Game-mu memerlukan thumbnail sebelum kamu dapat menayangkan iklan. Tambahkan thumbnail lalu coba lagi.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Deskripsi maksimal 1.000 karakter.
 Feature.Build.Error.DeveloperProductNameRequired,Masukkan nama produk.
 Feature.Build.Error.DeveloperProductNameTooLong,Nama harus terdiri dari maksimal 50 karakter.
@@ -2265,9 +2271,6 @@ Feature.Build.Message.AccountRequirements,Akunmu tidak memenuhi persyaratan untu
 Feature.Build.Message.AccountTooNew,Akunmu terlalu baru untuk dipublikasikan. Coba lagi setelah 2 hari.
 Feature.Build.Message.AdCampaignCreateFailed,Tidak dapat membuat kampanyemu. Coba lagi.
 Feature.Build.Message.AdPerformanceLoadFailed,Tidak dapat me-load performa iklan
-Feature.Build.Message.AdsPromotionBannerSubtitle,Jangkau lebih banyak audiens secara gratis
-Feature.Build.Message.AdsPromotionBannerTitle,Kamu masih punya {promotionCount} promosi gratis
-Feature.Build.Message.AdsPromotionBannerTitleSingular,Kamu masih punya 1 promosi gratis
 Feature.Build.Message.AdsStatsEmpty,Jangkau lebih banyak audiens dengan kampanye iklan agar game-mu lebih mudah ditemukan
 Feature.Build.Message.AdsStatsEmptyFree,Jangkau lebih banyak audiens dengan kampanye iklan gratis agar game-mu lebih mudah ditemukan
 Feature.Build.Message.AllFriendsAdded,Kamu telah mengundang semua temanmu sebagai penguji tahap awal.
@@ -2359,6 +2362,7 @@ Feature.Build.Title.AdCampaignDuration,Kampanye iklan {durationDays} hari
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} hari
 Feature.Build.Title.AdComplete,Iklan selesai
 Feature.Build.Title.AdCreated,Iklan dibuat
+Feature.Build.Title.AdCreatedPeriod,Iklan dibuat.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Tambahkan gambar
 Feature.Build.Title.AdsStatsEmpty,Mulai kampanye
@@ -2399,6 +2403,7 @@ Feature.Build.Title.PromoteGameFreeSingular,Kamu mendapatkan iklan gratis
 Feature.Build.Title.PromoteGamePaid,Lebih banyak pemain menanti
 Feature.Build.Title.PushNotifications,Notifikasi Push
 Feature.Build.Title.RevertLastChange,Batalkan perubahan terakhir?
+Feature.Build.Title.StopBuild,Hentikan proses?
 Feature.Build.Title.Tasks,Tugas
 Feature.Build.Title.TurnActivity,Aktivitas chat saat ini
 Feature.Build.Title.VersionHistory,Riwayat versi
@@ -3786,6 +3791,7 @@ Feature.PlayerSearchResults.Label.FromSearch,Dari Pencarian
 Feature.PlayerSearchResults.Label.Previously,Sebelumnya
 Feature.PlayerSearchResults.Label.ThisIsYou,Ini adalah kamu
 Feature.PlayerSearchResults.Label.YouAreFollowing,Kamu mengikuti
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Pembelian server privat tidak didukung di Studio.
 Feature.Profile.Action.AboutThisProfile,Tentang profil ini
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Menerima Teman
@@ -4032,9 +4038,11 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,Subscription ini tidak terse
 Feature.RobloxSubscription.Description.AgeCheckTrial,Verifikasi usiamu dengan pemeriksaan usia dan dapatkan Roblox Plus gratis selama 1 minggu sebagai ucapan terima kasih kami. Tidak diperlukan metode pembayaran untuk menikmati uji coba gratis ini.
 Feature.RobloxSubscription.Description.Benefit.Customize,Kustomisasi dengan bingkai profil dan tema aplikasi
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Diskon 10% selama 60 hari pertama, kemudian diskon 20% untuk item dan avatar"
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,"Diskon 10% selama {trialUnlockDays} hari pertama, lalu diskon 20% untuk item dan avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Lebih seru, lebih hemat Robux. Subscribe Roblox Plus."
 Feature.RobloxSubscription.Description.JoinEarly,Bergabung lebih awal dengan Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Dengan mengklik \u{201C}{ctaText}\u{201D}, kamu menyetujui <a href=""{termsUrl}"">Ketentuan Subscription Roblox</a>. Biaya akan otomatis dibebankan setiap bulan hingga kamu membatalkan."
+Feature.RobloxSubscription.Heading.ReferralEntry,Bagikan Plus untuk mendapatkan {amount} Robux
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Server privat gratis
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,Kirim Robux secara gratis
@@ -4045,6 +4053,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Dengan mengklik ""Lan
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Dengan mengklik ""Coba gratis"", kamu menyetujui {linkStart}Ketentuan Subscription Roblox.{linkEnd} Uji coba gratis kamu akan berakhir dalam 1 bulan, dan biaya akan otomatis dibebankan setiap bulan. Kamu bisa membatalkannya kapan saja."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Dengan mengeklik ""Coba gratis"", kamu menyetujui {linkStart}Ketentuan Subscription Roblox.{linkEnd} Uji coba gratis kamu akan berakhir dalam {trialDuration} {trialPeriodLabel} dan biaya akan otomatis dibebankan setiap {billingPeriodLabel}. Kamu bisa membatalkannya kapan saja."
 Feature.RobloxSubscription.Label.FreeTrialText,Dapatkan uji coba gratis
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}Gratis 1 bulan,{boldEnd} lalu {price}/{periodType}"
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} gratis,{boldEnd} lalu {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,bulan
@@ -4293,6 +4302,8 @@ Feature.SongDetails.Action.ReportAudio,Laporkan Audio
 Feature.SongDetails.Label.InappropriateAudio,Audio Tidak Pantas
 Feature.SongDetails.Label.InappropriateThumbnail,Thumbnail Tidak Pantas
 Feature.SongDetails.Label.SongPreview,Preview Lagu
+Feature.SplitPane.Label.CollapseAvatar,Ciutkan avatar
+Feature.SplitPane.Label.ExpandAvatar,Perluas avatar
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Tambahkan lainnya
 Feature.Squads.Action.ConnectToVoice,Aktifkan suara
@@ -4440,6 +4451,8 @@ Feature.Toast.VoteError.FloodCheckThresholdMet,Kamu memilih terlalu cepat.
 Feature.Toast.VoteError.PlayGame,Kamu harus mengunjungi pengalaman virtual sebelum memberi rating.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,Kamu tidak dapat memeriksa usiamu saat ini karena kamu sudah berulang kali melanggar Standar Komunitas kami. Kamu dapat mencoba lagi setelah pembatasan berakhir.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Pemeriksaan usia ditangguhkan
+Feature.UniversalFeatureRestrictions.AbuseVector.LabelName.Voice,
+Feature.UniversalFeatureRestrictions.AbuseVector.Lowercase.LabelName.Voice,suara
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,Kamu telah diblokir dari memainkan game ini karena pelanggaran peraturan yang berulang atau serius.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,Kamu tidak dapat memainkan game ini karena perilakumu melanggar peraturan.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Roblox telah memblokir aksesmu ke game ini
@@ -4449,6 +4462,13 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox telah menangguhkan aksesmu ke game ini selama {number} jam
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox telah menangguhkan aksesmu ke game ini selama 1 menit
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox telah menangguhkan aksesmu ke game ini selama {number} menit
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Banned,Kamu tidak dapat menggunakan fitur ini karena perilakumu melanggar peraturan komunitas kami.
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Nudge,Kamu mungkin akan ditangguhkan dari penggunaan fitur ini jika kamu terus melanggar peraturan komunitas kami.
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Suspended,"Kamu tidak dapat menggunakan fitur ini karena perilakumu melanggar peraturan komunitas kami. Jika kembali melanggar, kamu mungkin akan diblokir."
+Feature.UniversalFeatureRestrictions.Generic.DialogTitle.Banned,Kami telah memblokir aksesmu ke {abuseVector}
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Nudge,Kamu dapat kehilangan akses ke {abuseVector}
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minute,{abuseVector} ditangguhkan selama 1 menit
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minutes,{abuseVector} ditangguhkan selama {number} menit
 Feature.UniversalShareSheet.Action.CopiedLink,Tersalin
 Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,Bagikan pesan
 Feature.UniversalShareSheet.Response.NotSharedMessage,Pesan tidak dapat dikirim
@@ -4911,6 +4931,7 @@ InGame.GameplayPaused.Body,Gameplay terjeda: harap tunggu sementara konten game 
 InGame.GameplayPaused.Title,Gameplay Terjeda
 InGame.HelpMenu.Controls.ToggleGameMenu,Tombol Menu Game
 InGame.HelpMenu.DownArrow,Panah Bawah
+InGame.HelpMenu.GenericAction,Tindakan
 InGame.HelpMenu.Label.ClientCoreScriptVersion,Versi CoreScript Aplikasi:
 InGame.HelpMenu.Label.ClientVersion,Versi Aplikasi:
 InGame.HelpMenu.Label.PlaceVersion,Versi Tempat:

@@ -10,22 +10,18 @@ local _ = require(components.Types)
 local useUncontrolledStateModule = require(components.InternalInput.useUncontrolledState)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
 local useCheckboxVariantsModule = require(script.Parent.useCheckboxVariants)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local inputPlacementModule = require(foundation.Enums.InputPlacement)
-local flagsModule = require(foundation.Utility.Flags)
 local useInputGroupDefaultsModule = require(components.InternalInputGroup.useInputGroupDefaults)
 local t = {
 	Selectable = true,
 	testId = "--foundation-checkbox",
-	size = inputSizeModule.Medium,
-	placement = inputPlacementModule.Start
+	size = require(foundation.Enums.InputSize).Medium,
+	placement = require(foundation.Enums.InputPlacement).Start
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: flagsModule (ref), useInputGroupDefaultsModule (ref), t (ref), withDefaultsModule (ref), useTokensModule (ref), useCheckboxVariantsModule (ref), useUncontrolledStateModule (ref), reactModule (ref), internalInputModule (ref), withCommonPropsModule (ref), constantsModule (ref), textModule (ref), builderIconsModule (ref)
-	local var1 = if flagsModule.FoundationInputGroup then useInputGroupDefaultsModule(p1, t) else withDefaultsModule(p1, t)
+	-- upvalues: useInputGroupDefaultsModule (ref), t (ref), useTokensModule (ref), useCheckboxVariantsModule (ref), useUncontrolledStateModule (ref), reactModule (ref), internalInputModule (ref), withCommonPropsModule (ref), constantsModule (ref), textModule (ref), builderIconsModule (ref)
+	local var1 = useInputGroupDefaultsModule(p1, t)
 	local var2 = useCheckboxVariantsModule(useTokensModule(), var1.size)
 	local var3, var4 = useUncontrolledStateModule(var1.isChecked, var1.onActivated)
 	local isIndeterminate = var1.isIndeterminate or false

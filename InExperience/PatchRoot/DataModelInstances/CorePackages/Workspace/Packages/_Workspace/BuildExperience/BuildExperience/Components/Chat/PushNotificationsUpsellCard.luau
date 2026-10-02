@@ -4,7 +4,10 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local chatCardPriorityModule = require(script.Parent.ChatCardEmphasis.ChatCardPriority)
+local useChatCardEmphasisModule = require(script.Parent.ChatCardEmphasis.useChatCardEmphasis)
 local fFlagBuildExperienceDontAskAgainPushUpsellModule = require(buildExperience.Flags.FFlagBuildExperienceDontAskAgainPushUpsell)
+local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 local button = foundationModule.Button
 local text = foundationModule.Text
 local view = foundationModule.View
@@ -13,7 +16,7 @@ local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), fFlagBuildExperienceDontAskAgainPushUpsellModule (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), reactModule (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), fFlagBuildExperienceDontAskAgainPushUpsellModule (ref)
 	local var1 = useLocalization({
 		disabledDescription = localizationStringsModule.CHAT_NOTIFICATION_DISABLED_DESCRIPTION,
 		dontAskAgain = localizationStringsModule.CHAT_DONT_ASK_AGAIN,
@@ -48,7 +51,7 @@ return function(p1)
 				LayoutOrder = 1,
 				text = if var2 then var1.openSettings else var1.notifyMe,
 				size = inputSize.Small,
-				variant = buttonVariant.Emphasis,
+				variant = if (if fFlagBuildExperienceChatCardEmphasisModule then useChatCardEmphasisModule(chatCardPriorityModule.PushNotificationsUpsell) else nil) == false then buttonVariant.SoftEmphasis else buttonVariant.Emphasis,
 				fillBehavior = fillBehavior.Fill,
 				isLoading = p1.isRequestPending == true,
 				onActivated = if var2 then p1.onOpenSettings else p1.onNotifyMe,

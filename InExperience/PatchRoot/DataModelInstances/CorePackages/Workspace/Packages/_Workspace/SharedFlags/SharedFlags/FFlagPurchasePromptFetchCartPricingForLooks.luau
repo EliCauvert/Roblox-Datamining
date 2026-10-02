@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("PurchasePromptFetchCartPricingForLooks2", false) and (require(script.Parent.FFlagMarketplaceOffersRoot) and require(script.Parent.FFlagPurchasePromptFetchCartPricing))
+﻿return game:DefineFastFlag("PurchasePromptFetchCartPricingForLooks3", false) and (require(script.Parent.FFlagMarketplaceOffersRoot) and require(script.Parent.FFlagPurchasePromptFetchCartPricing))

@@ -46,7 +46,7 @@ return function(p1)
 			if var5.shouldProceed then
 				var4(focusChatHotKeyActivatedModule())
 				
-				return var5.onFocusKeyPressed(keyCode)
+				return var5.onFocusKeyPressed(keyCode) or Enum.ContextActionResult.Sink
 			end
 			return Enum.ContextActionResult.Pass
 		end, false, Enum.UserInputType.Keyboard)

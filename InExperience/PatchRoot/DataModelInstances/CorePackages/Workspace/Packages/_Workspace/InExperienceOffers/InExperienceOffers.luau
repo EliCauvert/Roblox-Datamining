@@ -12,13 +12,15 @@ return {
 	Hooks = {
 		useOfferBadgeText = require(script.Hooks.useOfferBadgeText),
 		useOffersForKey = require(script.Hooks.useOffersForKey),
-		useRemainingTimeText = require(script.Hooks.useRemainingTimeText)
+		useRemainingTimeText = require(script.Hooks.useRemainingTimeText),
+		useShopHasItems = require(script.Hooks.useShopHasItems)
 	},
 	Utils = {
 		createOfferBadgeTextSignal = require(script.Utils.createOfferBadgeTextSignal),
 		getOfferBadgeText = require(script.Utils.getOfferBadgeText),
 		getOffersForKey = require(script.Utils.getOffersForKey),
 		getRemainingTimeText = require(script.Utils.getRemainingTimeText),
+		hasOfferForAnyKey = require(script.Utils.hasOfferForAnyKey),
 		isNotificationEligible = require(script.Utils.isNotificationEligible),
 		selectActiveOffer = require(script.Utils.selectActiveOffer)
 	},

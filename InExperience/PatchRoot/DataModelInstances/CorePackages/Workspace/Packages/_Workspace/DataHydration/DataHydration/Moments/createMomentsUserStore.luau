@@ -122,6 +122,7 @@ return function(p1)
 	end
 	
 	local var3, var4 = signalsModule.createSignal(0)
+	local var5, var6 = signalsModule.createSignal({})
 	
 	return {
 		getUserMoments = getUserMoments,
@@ -149,8 +150,62 @@ return function(p1)
 			var4(var3(false) + 1)
 		end,
 		getUserMomentsVersion = var3,
+		getPendingUserMoments = var5,
+		prependPendingUserMoment = function(p5, p6)
+			-- upvalues: var5 (ref), var6 (ref)
+			local cloned = table.clone(var5(false))
+			local cloned_1 = table.clone(cloned[p5] or {})
+			table.insert(cloned_1, 1, { moment = p6 })
+			cloned[p5] = cloned_1
+			var6(cloned)
+		end,
+		removePendingUserMoment = function(p5, p6)
+			-- upvalues: var5 (ref), var6 (ref)
+			local cloned = table.clone(var5(false))
+			local var7 = cloned[p5]
+			
+			if var7 == nil then return end
+			local t = {}
+			
+			for i, v in var7 do
+				if v.moment.momentId ~= p6 then
+					table.insert(t, v)
+				end
+			end
+			cloned[p5] = if #t > 0 then t else nil
+			var6(cloned)
+		end,
+		resolvePendingUserMoment = function(p7, p8, p9)
+			-- upvalues: var5 (ref), var6 (ref)
+			local cloned = table.clone(var5(false))
+			local var8 = cloned[p7] or {}
+			local var9 = nil
+			local feedItemId = p9.recommendationMetadata.feedItemId
+			
+			for i, v in var8 do
+				if v.moment.momentId == p8 then
+					var9 = i
+				elseif v.publishedMoment ~= nil then
+					local publishedMoment = v.publishedMoment
+					
+					if publishedMoment.momentId == p9.momentId or feedItemId ~= nil and feedItemId ~= "" and publishedMoment.recommendationMetadata.feedItemId == feedItemId then
+						return false
+					end
+				end
+			end
+			if var9 == nil then
+				return false
+			end
+			local cloned_1 = table.clone(var8)
+			cloned_1[var9] = { moment = var8[var9].moment, publishedMoment = p9 }
+			cloned[p7] = cloned_1
+			var6(cloned)
+			
+			return true
+		end,
 		clear = function()
-			-- upvalues: t (write), fFlagProfileMomentsOrderingAndReactions (copy), t_1 (write), t_2 (write), var1 (ref)
+			-- upvalues: var6 (ref), t (write), fFlagProfileMomentsOrderingAndReactions (copy), t_1 (write), t_2 (write), var1 (ref)
+			var6({})
 			t = {}
 			
 			if fFlagProfileMomentsOrderingAndReactions then
@@ -160,7 +215,8 @@ return function(p1)
 			var1.clear()
 		end,
 		dispose = function()
-			-- upvalues: t (write), fFlagProfileMomentsOrderingAndReactions (copy), t_1 (write), t_2 (write), var1 (ref)
+			-- upvalues: var6 (ref), t (write), fFlagProfileMomentsOrderingAndReactions (copy), t_1 (write), t_2 (write), var1 (ref)
+			var6({})
 			t = {}
 			
 			if fFlagProfileMomentsOrderingAndReactions then

@@ -21,6 +21,7 @@ local performLookPurchaseModule = require(purchasePrompt.Network.performLookPurc
 local performDeveloperSubscriptionRobuxPurchaseModule = require(purchasePrompt.Network.performDeveloperSubscriptionRobuxPurchase)
 local performDeveloperSubscriptionFiatPurchaseModule = require(purchasePrompt.Network.performDeveloperSubscriptionFiatPurchase)
 local deriveSelectedOfferIdsFromCartPricingModule = require(purchasePrompt.Utils.deriveSelectedOfferIdsFromCartPricing)
+local applyCartPricingOffersToLineItemsModule = require(purchasePrompt.Utils.applyCartPricingOffersToLineItems)
 local selectProductPriceModule = require(purchasePrompt.Selectors.selectProductPrice)
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local fFlagPurchasePromptFetchCartPricingForLooks = require(parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks
@@ -65,10 +66,10 @@ local function handleGenericPurchaseError(p1, p2, p3)
 end
 
 return function()
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), analyticsModule (ref), constantsModule (ref), fFlagEnableRequestLocationTypeForSduiPurchaseModule (ref), t (ref), fFlagEnablePurchasePayloadForDevProductPurchaseModule (ref), httpService (ref), performDevProductEdpPurchaseModule (ref), completePurchaseModule (ref), promiseModule (ref), handleGenericPurchaseError (ref), fFlagEnablePriceChangedErrorHandlingModule (ref), productTypeEnum (ref), performExperiencePurchaseModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), selectProductPriceModule (ref), deriveSelectedOfferIdsFromCartPricingModule (ref), performLookPurchaseModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), performDeveloperSubscriptionRobuxPurchaseModule (ref), performDeveloperSubscriptionFiatPurchaseModule (ref)
+	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), analyticsModule (ref), constantsModule (ref), fFlagEnableRequestLocationTypeForSduiPurchaseModule (ref), t (ref), fFlagEnablePurchasePayloadForDevProductPurchaseModule (ref), httpService (ref), performDevProductEdpPurchaseModule (ref), completePurchaseModule (ref), promiseModule (ref), handleGenericPurchaseError (ref), fFlagEnablePriceChangedErrorHandlingModule (ref), productTypeEnum (ref), performExperiencePurchaseModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), selectProductPriceModule (ref), deriveSelectedOfferIdsFromCartPricingModule (ref), applyCartPricingOffersToLineItemsModule (ref), performLookPurchaseModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), performDeveloperSubscriptionRobuxPurchaseModule (ref), performDeveloperSubscriptionFiatPurchaseModule (ref)
 	return thunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: networkModule (copy), analyticsModule (copy), constantsModule (copy), fFlagEnableRequestLocationTypeForSduiPurchaseModule (copy), t (copy), fFlagEnablePurchasePayloadForDevProductPurchaseModule (copy), httpService (copy), performDevProductEdpPurchaseModule (copy), completePurchaseModule (copy), promiseModule (copy), handleGenericPurchaseError (copy), fFlagEnablePriceChangedErrorHandlingModule (copy), productTypeEnum (copy), performExperiencePurchaseModule (copy), fFlagPurchasePromptFetchCartPricingForLooks (copy), selectProductPriceModule (copy), deriveSelectedOfferIdsFromCartPricingModule (copy), performLookPurchaseModule (copy), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), performDeveloperSubscriptionRobuxPurchaseModule (copy), performDeveloperSubscriptionFiatPurchaseModule (copy)
-		local purchasePayload, ok
+		-- upvalues: networkModule (copy), analyticsModule (copy), constantsModule (copy), fFlagEnableRequestLocationTypeForSduiPurchaseModule (copy), t (copy), fFlagEnablePurchasePayloadForDevProductPurchaseModule (copy), httpService (copy), performDevProductEdpPurchaseModule (copy), completePurchaseModule (copy), promiseModule (copy), handleGenericPurchaseError (copy), fFlagEnablePriceChangedErrorHandlingModule (copy), productTypeEnum (copy), performExperiencePurchaseModule (copy), fFlagPurchasePromptFetchCartPricingForLooks (copy), selectProductPriceModule (copy), deriveSelectedOfferIdsFromCartPricingModule (copy), applyCartPricingOffersToLineItemsModule (copy), performLookPurchaseModule (copy), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), performDeveloperSubscriptionRobuxPurchaseModule (copy), performDeveloperSubscriptionFiatPurchaseModule (copy)
+		local purchasePayload, ok, status
 		local var1 = p2[networkModule]
 		local var2 = p2[analyticsModule]
 		local state = p1:getState()
@@ -129,16 +130,22 @@ return function()
 		elseif productPayload.kind == productTypeEnum.Look then
 			local expectedPrice = productPayload.expectedPrice
 			local t_1 = nil
+			purchasePayload = nil
 			
 			if fFlagPurchasePromptFetchCartPricingForLooks then
-				purchasePayload = state.cartPricing
-				ok = purchasePayload and purchasePayload.response
+				purchasePayload = productPayload.bulkPurchaseLineItems
+				ok = state.cartPricing
+				status = ok and ok.response
 				
-				if ok == nil then
+				if status == nil then
 					t_1 = {}
 				else
 					expectedPrice = selectProductPriceModule(state) or expectedPrice
-					t_1 = deriveSelectedOfferIdsFromCartPricingModule(ok)
+					t_1 = deriveSelectedOfferIdsFromCartPricingModule(status)
+					
+					if purchasePayload ~= nil then
+						purchasePayload = applyCartPricingOffersToLineItemsModule(purchasePayload, status, t_1)
+					end
 				end
 			end
 			return performLookPurchaseModule(var1, productPayload.id, {
@@ -149,7 +156,8 @@ return function()
 				excludedAssets = productPayload.excludedAssetIds,
 				excludedBundles = productPayload.excludedBundleIds,
 				timedOptions = productPayload.timedOptions,
-				selectedOfferIds = t_1
+				selectedOfferIds = t_1,
+				bulkPurchaseLineItems = if fFlagPurchasePromptFetchCartPricingForLooks then purchasePayload else nil
 			}):andThen(function(p3)
 				-- upvalues: p1 (ref), completePurchaseModule (copy), promiseModule (copy)
 				p1:dispatch(completePurchaseModule(p3))

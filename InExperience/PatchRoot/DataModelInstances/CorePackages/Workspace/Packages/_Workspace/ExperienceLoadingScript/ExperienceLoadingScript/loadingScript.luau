@@ -7,6 +7,10 @@ local runService = require(parent.MockableProxyServices).RunService
 local VRService = require(parent.MockableProxyServices).VRService
 local splashScreenManager = require(parent.SplashScreenManager).SplashScreenManager
 local isVRAppBuild = require(parent.AppCommonLib).IsVRAppBuild
+local loadingScreenMilestonesModule = require(parent.ProgressLoading.LoadingScreenMilestones)
+local abortReason = loadingScreenMilestonesModule.AbortReason
+local fFlagLoadingScreenMilestones = require(parent.SharedFlags).FFlagLoadingScreenMilestones
+local fFlagTiltLoadingScreenEnterExitHold = require(parent.SharedFlags).FFlagTiltLoadingScreenEnterExitHold
 local fFlagEnableTiltLoadingScreen = require(parent.SharedFlags).FFlagEnableTiltLoadingScreen
 local coreGuiService = game:GetService("CoreGui")
 local game = require(parent.MockableProxyServices).game
@@ -44,8 +48,8 @@ local function GenerateDevGUIBlackoutCurtain()
 	return var1
 end
 
-local function mountTiltLoadingScreen(p1, p2)
-	-- upvalues: parent (ref), coreGuiService (ref), game (ref), loggingProtocolModule (ref)
+local function mountTiltLoadingScreen(p1, p2, p3)
+	-- upvalues: parent (ref), coreGuiService (ref), fFlagLoadingScreenMilestones (ref), abortReason (ref), game (ref), loggingProtocolModule (ref)
 	local reactModule = require(parent.React)
 	local reactRobloxModule = require(parent.ReactRoblox)
 	local tiltLoadingScreen = require(parent.ProgressLoading).TiltLoadingScreen
@@ -56,25 +60,35 @@ local function mountTiltLoadingScreen(p1, p2)
 	local var2 = false
 	
 	local function unmount()
-		-- upvalues: var1 (ref), robloxLoadingGUI (ref)
+		-- upvalues: fFlagLoadingScreenMilestones (copy), p3 (ref), abortReason (copy), var1 (ref), robloxLoadingGUI (ref)
+		if fFlagLoadingScreenMilestones and p3 then
+			p3.abort(abortReason.Unmounted)
+		end
 		var1:unmount()
 		robloxLoadingGUI:Destroy()
 	end
 	
 	var1:render(reactModule.createElement(tiltLoadingScreen, {
+		milestones = if fFlagLoadingScreenMilestones then p3 else nil,
 		placeId = p1,
-		onCancel = function(p3, p4)
-			-- upvalues: var2 (write), game (copy), loggingProtocolModule (copy)
-			if var2 or p4 and game:IsLoaded() then return end
+		onCancel = function(p4, p5)
+			-- upvalues: var2 (write), game (copy), fFlagLoadingScreenMilestones (copy), p3 (ref), abortReason (copy), loggingProtocolModule (copy)
+			if var2 or p5 and game:IsLoaded() then return end
 			var2 = true
 			
-			if p3 then
+			if fFlagLoadingScreenMilestones and p3 then
+				p3.abort(abortReason.Cancelled)
+			end
+			if p4 then
 				loggingProtocolModule.default:logEventOnce("first_experience_cancelled")
 			end
 			game:Shutdown()
 		end,
 		onDismissComplete = function()
-			-- upvalues: var1 (ref), robloxLoadingGUI (ref), p2 (ref), loggingProtocolModule (copy)
+			-- upvalues: fFlagLoadingScreenMilestones (copy), p3 (ref), abortReason (copy), var1 (ref), robloxLoadingGUI (ref), p2 (ref), loggingProtocolModule (copy)
+			if fFlagLoadingScreenMilestones and p3 then
+				p3.abort(abortReason.Unmounted)
+			end
 			var1:unmount()
 			robloxLoadingGUI:Destroy()
 			p2()
@@ -88,7 +102,7 @@ end
 local _ = nil
 
 local var1 = function(p1, p2)
-	-- upvalues: GenerateDevGUIBlackoutCurtain (ref), parent (ref), loadingScreenReducerModule (ref), loadingScreenModule (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), experienceLoadingScreenFixStyleLink (ref), coreGuiService (ref), runService (ref), waitProxy (ref), splashScreenManager (ref), experienceLoadingScript (ref), players (ref), game (ref), VRService (ref), isVRAppBuild (ref), fFlagEnableTiltLoadingScreen (ref), replicatedFirst (ref), loggingProtocolModule (ref), mountTiltLoadingScreen (ref), var1 (write), settingsProxy (ref)
+	-- upvalues: GenerateDevGUIBlackoutCurtain (ref), parent (ref), loadingScreenReducerModule (ref), loadingScreenModule (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), experienceLoadingScreenFixStyleLink (ref), coreGuiService (ref), runService (ref), waitProxy (ref), splashScreenManager (ref), experienceLoadingScript (ref), players (ref), game (ref), VRService (ref), isVRAppBuild (ref), fFlagEnableTiltLoadingScreen (ref), replicatedFirst (ref), loggingProtocolModule (ref), fFlagLoadingScreenMilestones (ref), loadingScreenMilestonesModule (ref), fFlagTiltLoadingScreenEnterExitHold (ref), mountTiltLoadingScreen (ref), abortReason (ref), var1 (write), settingsProxy (ref)
 	local var2 = true
 	local var3 = false
 	local var4 = false
@@ -249,7 +263,11 @@ local var1 = function(p1, p2)
 		else
 			local var12 = nil
 			local var13 = true
-			local var14 = mountTiltLoadingScreen(p1, function()
+			local var14 = if fFlagLoadingScreenMilestones then loadingScreenMilestonesModule.start({
+				holdEnabled = fFlagTiltLoadingScreenEnterExitHold,
+				reducedMotion = UserSettings():GetService("UserGameSettings").ReducedMotion
+			}) else nil
+			local var15 = mountTiltLoadingScreen(p1, function()
 				-- upvalues: var13 (write), var12 (write), var7 (write)
 				var13 = false
 				
@@ -262,11 +280,14 @@ local var1 = function(p1, p2)
 					var7:Destroy()
 					var7 = nil
 				end
-			end)
+			end, var14)
 			
 			local function _()
-				-- upvalues: var13 (write), var12 (write), var7 (write), var14 (ref), var1 (copy), p1 (ref), p2 (ref)
+				-- upvalues: var13 (write), fFlagLoadingScreenMilestones (copy), var14 (write), abortReason (copy), var12 (write), var7 (write), var15 (ref), var1 (copy), p1 (ref), p2 (ref)
 				if not var13 then return end
+				if fFlagLoadingScreenMilestones and var14 then
+					var14.abort(abortReason.VRHandoff)
+				end
 				var13 = false
 				
 				if var12 then
@@ -278,14 +299,17 @@ local var1 = function(p1, p2)
 					var7:Destroy()
 					var7 = nil
 				end
-				var14()
+				var15()
 				var1(p1, p2)
 			end
 			
 			var12 = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
-				-- upvalues: VRService (copy), var13 (write), var12 (write), var7 (write), var14 (ref), var1 (copy), p1 (ref), p2 (ref)
+				-- upvalues: VRService (copy), var13 (write), fFlagLoadingScreenMilestones (copy), var14 (write), abortReason (copy), var12 (write), var7 (write), var15 (ref), var1 (copy), p1 (ref), p2 (ref)
 				if VRService.VREnabled then
 					if not var13 then return end
+					if fFlagLoadingScreenMilestones and var14 then
+						var14.abort(abortReason.VRHandoff)
+					end
 					var13 = false
 					
 					if var12 then
@@ -297,12 +321,15 @@ local var1 = function(p1, p2)
 						var7:Destroy()
 						var7 = nil
 					end
-					var14()
+					var15()
 					var1(p1, p2)
 				end
 			end)
 			
 			if VRService.VREnabled then
+				if fFlagLoadingScreenMilestones and var14 then
+					var14.abort(abortReason.VRHandoff)
+				end
 				var13 = false
 				
 				if var12 then
@@ -314,7 +341,7 @@ local var1 = function(p1, p2)
 					var7:Destroy()
 					var7 = nil
 				end
-				var14()
+				var15()
 				var1(p1, p2)
 			end
 			if var13 then

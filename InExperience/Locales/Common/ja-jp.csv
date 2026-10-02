@@ -1302,7 +1302,6 @@ Feature.AddFriends.Action.RequestIgnored,リクエストを無視しました
 Feature.AddFriends.Label.AddFriendsTooltip,まずは友達を見つけることから始めましょう。Robloxを一緒に楽しめます。
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Robloxで人を見つけるには、ユーザーネームか名前で検索してください。
 Feature.AddFriends.Label.ConnectWithContacts,連絡先にある人を招待するか、すでに知っている友達とロブロックスでつながりましょう！
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,人を探す
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,人をサーチ
 Feature.AddFriends.Label.SearchForFriendsPrompt,Robloxで人を見つけるには、ユーザーネームや表示名で検索してください。
 Feature.AddFriends.Label.SyncWithContacts,連絡先を同期して友達を見つけて招待しましょう！
@@ -1675,6 +1674,7 @@ Feature.Avatar.Label.SetAvatarCount,{itemCount}個のアバター
 Feature.Avatar.Label.SetLimitReachedBody,セットは最大{setLimit}件までに制限されています。容量を確保するには、1件削除してください
 Feature.Avatar.Label.SetNameDuplicateBody,この名前のセットはすでにあります。別の名前を入力してください
 Feature.Avatar.Label.SetNameNotAllowedBody,別の名前を入力してください
+Feature.Avatar.Label.ShareAvatarToMoments,アバターをモーメントにシェア
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,アバターをマーケットプレイスに投稿
 Feature.Avatar.Label.Shirt,シャツ
 Feature.Avatar.Label.ShirtClassic,クラシックシャツ
@@ -1944,6 +1944,7 @@ Feature.Build.Action.DontShowAgain,
 Feature.Build.Action.EarnRobux,Robuxを獲得
 Feature.Build.Action.Edit,編集
 Feature.Build.Action.HideAutosaved,自動保存済みバージョンを非表示
+Feature.Build.Action.KeepBuilding,作成を続行
 Feature.Build.Action.ManageLimit,限度額を管理
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
@@ -1969,6 +1970,7 @@ Feature.Build.Action.Share,シェア
 Feature.Build.Action.ShareLink,リンクを共有
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,統計
+Feature.Build.Action.Stop,停止
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,レーティングを更新
 Feature.Build.Action.UpdateWithChanges,変更を反映して更新
@@ -2078,7 +2080,12 @@ Feature.Build.Description.RevertToVersion,確認して最後の変更を元に�
 Feature.Build.Description.ShareLatest,最新バージョンの変更内容を共有しましょう。
 Feature.Build.Description.ShopButton,ショップボタンを追加
 Feature.Build.Description.ShortAdCampaign,ゲームに対するプレイヤーの反応を簡単に確認する方法です。
+Feature.Build.Description.StopBuild,このリクエストはまだ進行中です。今停止すると作業が完了せず、再度送信する必要があります。
 Feature.Build.Description.UpdateDeveloperProduct,開発者製品{PRODUCT_ID}を更新してください。
+Feature.Build.Error.AdForbidden,現在、ご利用のアカウントまたはゲームで広告を掲載できません。これが誤りであると思われる場合は、サポートまでご連絡ください。
+Feature.Build.Error.AdInsufficientFunds,この広告を作成するのに必要なRobuxが足りません。Robuxを追加してもう一度お試しください。
+Feature.Build.Error.AdInternalError,
+Feature.Build.Error.AdMissingThumbnail,広告を掲載するには、ゲームにサムネイルが必要です。サムネイルを追加してから、もう一度お試しください。
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"詳細は1,000文字以下で入力してください。"
 Feature.Build.Error.DeveloperProductNameRequired,製品名を入力してください。
 Feature.Build.Error.DeveloperProductNameTooLong,名前は50文字以下にしてください。
@@ -2264,9 +2271,6 @@ Feature.Build.Message.AccountRequirements,アカウントがビルドを使用�
 Feature.Build.Message.AccountTooNew,お持ちのアカウントは公開するには新しすぎます。2日目になってからもう一度お試しください。
 Feature.Build.Message.AdCampaignCreateFailed,キャンペーンを作成できませんでした。もう一度お試しください。
 Feature.Build.Message.AdPerformanceLoadFailed,広告のパフォーマンスを読み込めませんでした
-Feature.Build.Message.AdsPromotionBannerSubtitle,オーディエンスを無料で拡大しましょう
-Feature.Build.Message.AdsPromotionBannerTitle,無料プロモーションがあと{promotionCount}回残っています
-Feature.Build.Message.AdsPromotionBannerTitleSingular,無料プロモーションが1回残っています
 Feature.Build.Message.AdsStatsEmpty,広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう
 Feature.Build.Message.AdsStatsEmptyFree,無料の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう
 Feature.Build.Message.AllFriendsAdded,すべての友達を早期テスターとして招待しました。
@@ -2358,6 +2362,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays}日間の広告キャンペ
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}日
 Feature.Build.Title.AdComplete,広告が完了しました
 Feature.Build.Title.AdCreated,広告が作成されました
+Feature.Build.Title.AdCreatedPeriod,広告が作成されました。
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,画像を追加
 Feature.Build.Title.AdsStatsEmpty,キャンペーンを開始
@@ -2398,6 +2403,7 @@ Feature.Build.Title.PromoteGameFreeSingular,無料の広告を受け取りまし
 Feature.Build.Title.PromoteGamePaid,さらに多くのプレイヤーが待っています
 Feature.Build.Title.PushNotifications,プッシュ通知
 Feature.Build.Title.RevertLastChange,最後の変更を元に戻しますか？
+Feature.Build.Title.StopBuild,作成を停止しますか？
 Feature.Build.Title.Tasks,タスク
 Feature.Build.Title.TurnActivity,ターン内のアクティビティ
 Feature.Build.Title.VersionHistory,バージョン履歴
@@ -3786,6 +3792,7 @@ Feature.PlayerSearchResults.Label.FromSearch,サーチから
 Feature.PlayerSearchResults.Label.Previously,前の名前は
 Feature.PlayerSearchResults.Label.ThisIsYou,これがあなたです
 Feature.PlayerSearchResults.Label.YouAreFollowing,フォローしています
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studioは、プライベートサーバーの購入には対応していません。
 Feature.Profile.Action.AboutThisProfile,このプロフィールについて
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,友達を承認する
@@ -4032,9 +4039,11 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,この定期購入は、こ�
 Feature.RobloxSubscription.Description.AgeCheckTrial,年齢チェックで年齢をご確認ください。Robloxからのお礼として、Roblox Plusを1週間無料でご利用いただけます。この無料トライアルのご利用にお支払い方法の入力は必要ありません。
 Feature.RobloxSubscription.Description.Benefit.Customize,プロフィールフレームとアプリのテーマでカスタマイズ
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,最初の60日間は10%オフ、その後はアイテムとアバターが20%オフ
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,最初の{trialUnlockDays}日間は10%オフ、その後はアイテムとアバターが20%オフ
 Feature.RobloxSubscription.Description.ExclusiveBenefits,少ないRobuxでもっと楽しく。Roblox Plusを定期購入しましょう。
 Feature.RobloxSubscription.Description.JoinEarly,Plusで先行参加
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}をクリックすると、<a href=""{termsUrl}"">Roblox定期購入規約</a>に同意したとみなされます。キャンセルするまで、毎月自動的に料金が課金されます。"
+Feature.RobloxSubscription.Heading.ReferralEntry,Plusをシェアして、{amount} Robuxを獲得
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,無料プライベートサーバー
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,Robuxを無料で送信
@@ -4045,6 +4054,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,「続ける」をク�
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,「無料で試す」をクリックすると、{linkStart}Roblox定期購入規約{linkEnd}に同意したものとみなされます。無料トライアルは1か月で終了し、以降は毎月自動的に課金されますが、キャンセルはいつでも可能です。
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,「無料で試す」をクリックすると、{linkStart}Roblox定期購入規約{linkEnd}に同意したものとみなされます。無料トライアルは{trialDuration}{trialPeriodLabel}で終了し、以降は{billingPeriodLabel}ごとに自動的に課金されますが、キャンセルはいつでも可能です。
 Feature.RobloxSubscription.Label.FreeTrialText,無料トライアルを入手
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}1か月無料、{boldEnd}その後{price}（{periodType}）
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration}{trialPeriodLabel}無料、{boldEnd}その後{price}/{periodType}
 Feature.RobloxSubscription.Label.month,か月
@@ -4293,6 +4303,8 @@ Feature.SongDetails.Action.ReportAudio,音声を報告
 Feature.SongDetails.Label.InappropriateAudio,不適切な音声
 Feature.SongDetails.Label.InappropriateThumbnail,不適切なサムネイル画像
 Feature.SongDetails.Label.SongPreview,曲のプレビュー
+Feature.SplitPane.Label.CollapseAvatar,アバターを折りたたむ
+Feature.SplitPane.Label.ExpandAvatar,アバターを展開
 Feature.Squads.Action.Add,追加する
 Feature.Squads.Action.AddOthers,他の人を追加
 Feature.Squads.Action.ConnectToVoice,ボイスに接続
@@ -4440,6 +4452,8 @@ Feature.Toast.VoteError.FloodCheckThresholdMet,頻繁に投票しすぎです。
 Feature.Toast.VoteError.PlayGame,評価する前に、このバーチャル空間に行くことが必須です。
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,当社のコミュニティ基準に繰り返し違反したため、現在、年齢チェックを利用できません。制限が解除された後、もう一度お試しください。
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,年齢チェックの利用停止
+Feature.UniversalFeatureRestrictions.AbuseVector.LabelName.Voice,ボイス
+Feature.UniversalFeatureRestrictions.AbuseVector.Lowercase.LabelName.Voice,
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,度重なるルール違反または重大なルール違反により、このゲームへのアクセスが停止されました。
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,あなたの言動にルール違反があったため、このゲームをプレイすることはできません。
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Robloxにより、このゲームの利用が停止されました
@@ -4449,6 +4463,13 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Robloxにより、このゲームの利用が{number}時間停止されました
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Robloxにより、このゲームの利用が1分間停止されました
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Robloxにより、このゲームの利用が{number}分間停止されました
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Banned,あなたの言動に当社のコミュニティルール違反があったため、この機能を利用することはできません。
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Nudge,当社のコミュニティルールへの違反を繰り返す場合、この機能の使用が一時停止される可能性があります。
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Suspended,あなたの言動に当社のコミュニティルール違反があったため、この機能を利用することはできません。再び規則に違反した場合、アカウント停止になる可能性があります。
+Feature.UniversalFeatureRestrictions.Generic.DialogTitle.Banned,{abuseVector}へのアクセスが停止されました
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Nudge,{abuseVector}を利用できなくなる可能性があります
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minute,{abuseVector}の利用が1分間停止されました
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minutes,{abuseVector}の利用が{number}分間停止されました
 Feature.UniversalShareSheet.Action.CopiedLink,コピーしました
 Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,メッセージを共有
 Feature.UniversalShareSheet.Response.NotSharedMessage,メッセージを送信できません
@@ -4911,6 +4932,7 @@ InGame.GameplayPaused.Body,ゲームプレイが一時停止しました: ゲー
 InGame.GameplayPaused.Title,ゲームプレイが一時停止しました
 InGame.HelpMenu.Controls.ToggleGameMenu,
 InGame.HelpMenu.DownArrow,
+InGame.HelpMenu.GenericAction,アクション
 InGame.HelpMenu.Label.ClientCoreScriptVersion,クライアントCoreScriptバージョン:
 InGame.HelpMenu.Label.ClientVersion,クライアントバージョン:
 InGame.HelpMenu.Label.PlaceVersion,プレースバージョン:

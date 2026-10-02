@@ -31,13 +31,13 @@ local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMome
 local fFlagMomentsCommentsCreatorControlModule = require(momentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
 
 local function AllowCommentsToggle(p1)
-	-- upvalues: getCreationFlowStoreModule (ref), useSignalState (ref), useCallback (ref), fFlagMomentsComments (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), reactModule (ref), toggle (ref), inputPlacement (ref), inputSize (ref)
+	-- upvalues: useCreationFlowStringsModule (ref), getCreationFlowStoreModule (ref), useSignalState (ref), useCallback (ref), fFlagMomentsComments (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), reactModule (ref), toggle (ref), inputPlacement (ref), inputSize (ref)
 	local var1 = getCreationFlowStoreModule(false)
 	
 	return reactModule.createElement(toggle, {
-		label = "Allow comments",
 		testId = "moments-allow-comments-toggle",
 		isChecked = useSignalState(var1.getCommentsEnabled),
+		label = useCreationFlowStringsModule().PublishingAllowComments,
 		LayoutOrder = p1.layoutOrder,
 		onActivated = useCallback(function(p2)
 			-- upvalues: var1 (ref), fFlagMomentsComments (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy)

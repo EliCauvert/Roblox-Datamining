@@ -1,1 +1,5 @@
-﻿return { Default = "Default", Link = "Link" }
+﻿return {
+	Default = "Default",
+	Link = "Link",
+	Foundation = "Foundation"
+}

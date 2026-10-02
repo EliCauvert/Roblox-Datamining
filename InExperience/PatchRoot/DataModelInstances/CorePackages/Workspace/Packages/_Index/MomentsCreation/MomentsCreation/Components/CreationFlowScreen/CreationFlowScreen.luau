@@ -60,6 +60,7 @@ local textFilteredDialogModule = require(momentsCreation.Components.Dialogs.Text
 local generateTextOptionsDialogModule = require(momentsCreation.Components.Dialogs.GenerateTextOptionsDialog)
 local voiceoverErrorDialogModule = require(momentsCreation.Components.Dialogs.VoiceoverErrorDialog)
 local voiceoverDeleteConfirmDialogModule = require(momentsCreation.Components.Dialogs.VoiceoverDeleteConfirmDialog)
+local voiceSelectorDialogModule = require(momentsCreation.Components.Dialogs.VoiceSelectorDialog)
 local voiceBackControlsModule = require(momentsCreation.Components.Voice.VoiceBackControls)
 local sampleCapturesModule = require(momentsCreation.Capture.sampleCaptures)
 local publishMomentModule = require(momentsCreation.Upload.publishMoment)
@@ -90,7 +91,7 @@ local function GallerySourceView(p1)
 end
 
 local function CreationFlowContent(p1)
-	-- upvalues: useCreationController (ref), getFFlagMomentsCreationSaveDraft (ref), useDraftRestoreEffectModule (ref), useDraftSaveEffectModule (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), useToggleState (ref), useAutoDismissStateModule (ref), useSignalState (ref), useDescriptionKeyboardInsetModule (ref), creationFlowStateModule (ref), getFFlagMomentsTTSAudioOverlayModule (ref), useCallback (ref), sessionManager (ref), funnelEventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), dialogTypeModule (ref), useRef (ref), useEffect (ref), getFFlagMomentsStickerButton (ref), fFlagMomentsCreationToolsIxpEnabledModule (ref), logMomentsLayerExposure (ref), fStringMomentsCreationToolsIxpLayerModule (ref), reactModule (ref), exitConfirmationDialogModule (ref), textFilteredDialogModule (ref), generateTextOptionsDialogModule (ref), voiceoverErrorDialogModule (ref), voiceoverDeleteConfirmDialogModule (ref), stepStubModule (ref), useMemo (ref), signalsModule (ref), view (ref), t (ref), formFactor (ref), noopActivated (ref), voiceBackControlsModule (ref), getFFlagMomentsCreationCloseButtonZIndexFixModule (ref), icon (ref), foundationModule (ref), captureViewModule (ref), getFFlagMomentsCreationTextOverlayResolutionScaleModule (ref), gradientBackdrop (ref), musicChipModule (ref), fFlagMomentsCreationMusicChipRemoveButtonModule (ref), playbackControlsModule (ref), editCTABarModule (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSCoachmarkModule (ref), GallerySourceView (ref), galleryViewModule (ref), var2 (ref), previewViewModule (ref), descriptionViewModule (ref), creationMediaProviderModule (ref)
+	-- upvalues: useCreationController (ref), getFFlagMomentsCreationSaveDraft (ref), useDraftRestoreEffectModule (ref), useDraftSaveEffectModule (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), useToggleState (ref), useAutoDismissStateModule (ref), useSignalState (ref), useDescriptionKeyboardInsetModule (ref), creationFlowStateModule (ref), getFFlagMomentsTTSAudioOverlayModule (ref), useCallback (ref), sessionManager (ref), funnelEventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), dialogTypeModule (ref), useRef (ref), useEffect (ref), getFFlagMomentsStickerButton (ref), fFlagMomentsCreationToolsIxpEnabledModule (ref), logMomentsLayerExposure (ref), fStringMomentsCreationToolsIxpLayerModule (ref), reactModule (ref), exitConfirmationDialogModule (ref), textFilteredDialogModule (ref), generateTextOptionsDialogModule (ref), voiceoverErrorDialogModule (ref), voiceoverDeleteConfirmDialogModule (ref), voiceSelectorDialogModule (ref), stepStubModule (ref), useMemo (ref), signalsModule (ref), view (ref), t (ref), formFactor (ref), noopActivated (ref), voiceBackControlsModule (ref), getFFlagMomentsCreationCloseButtonZIndexFixModule (ref), icon (ref), foundationModule (ref), captureViewModule (ref), getFFlagMomentsCreationTextOverlayResolutionScaleModule (ref), gradientBackdrop (ref), musicChipModule (ref), fFlagMomentsCreationMusicChipRemoveButtonModule (ref), playbackControlsModule (ref), editCTABarModule (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSCoachmarkModule (ref), GallerySourceView (ref), galleryViewModule (ref), var2 (ref), previewViewModule (ref), descriptionViewModule (ref), creationMediaProviderModule (ref)
 	local var3 = useCreationController()
 	
 	if getFFlagMomentsCreationSaveDraft() then
@@ -112,7 +113,7 @@ local function CreationFlowContent(p1)
 	local var17 = useSignalState(var3.getIsGenerating)
 	local music = var13.music
 	local var18 = if var11 ~= creationFlowStateModule.Description then getFFlagMomentsTTSAudioOverlayModule and var11 == creationFlowStateModule.Voice else true
-	var62, var61 = useDescriptionKeyboardInsetModule(var18)
+	var63, var62 = useDescriptionKeyboardInsetModule(var18)
 	local captureSource = p1.captureSource
 	local var19 = useCallback(function(p2)
 		-- upvalues: var3 (ref), var10 (ref)
@@ -224,8 +225,8 @@ local function CreationFlowContent(p1)
 		end
 	end, { var11, var8.disable })
 	local var30 = useCallback(function()
-		-- upvalues: var16 (ref), dialogTypeModule (copy), reactModule (copy), exitConfirmationDialogModule (copy), textFilteredDialogModule (copy), generateTextOptionsDialogModule (copy), voiceoverErrorDialogModule (copy), voiceoverDeleteConfirmDialogModule (copy)
-		return if not (not var16 or not var16.modalType) then if var16.modalType == dialogTypeModule.ExitCreationConfirmation then reactModule.createElement(exitConfirmationDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.TextFiltered then reactModule.createElement(textFilteredDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.GenerateTextOptions then reactModule.createElement(generateTextOptionsDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.VoiceoverError then reactModule.createElement(voiceoverErrorDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.VoiceoverDelete then reactModule.createElement(voiceoverDeleteConfirmDialogModule, var16.modalProps) else nil else nil
+		-- upvalues: var16 (ref), dialogTypeModule (copy), reactModule (copy), exitConfirmationDialogModule (copy), textFilteredDialogModule (copy), generateTextOptionsDialogModule (copy), voiceoverErrorDialogModule (copy), voiceoverDeleteConfirmDialogModule (copy), voiceSelectorDialogModule (copy)
+		return if not (not var16 or not var16.modalType) then if var16.modalType == dialogTypeModule.ExitCreationConfirmation then reactModule.createElement(exitConfirmationDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.TextFiltered then reactModule.createElement(textFilteredDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.GenerateTextOptions then reactModule.createElement(generateTextOptionsDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.VoiceoverError then reactModule.createElement(voiceoverErrorDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.VoiceoverDelete then reactModule.createElement(voiceoverDeleteConfirmDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.VoiceSelector then reactModule.createElement(voiceSelectorDialogModule, var16.modalProps) else nil else nil
 	end, { var16 })
 	local var31 = useCallback(function(p2)
 		-- upvalues: var15 (ref), var11 (ref), var3 (ref), reactModule (copy), stepStubModule (copy)
@@ -339,7 +340,7 @@ local function CreationFlowContent(p1)
 	local createElement_3 = reactModule.createElement
 	local t_7 = {
 		tag = "col align-x-center",
-		Size = var62:map(function(p2)
+		Size = var63:map(function(p2)
 			return UDim2.new(1, 0, 1, -p2)
 		end)
 	}

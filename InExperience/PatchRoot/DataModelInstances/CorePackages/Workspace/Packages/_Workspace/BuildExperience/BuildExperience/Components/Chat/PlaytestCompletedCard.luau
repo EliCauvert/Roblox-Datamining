@@ -4,6 +4,9 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local chatCardPriorityModule = require(script.Parent.ChatCardEmphasis.ChatCardPriority)
+local useChatCardEmphasisModule = require(script.Parent.ChatCardEmphasis.useChatCardEmphasis)
+local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 local button = foundationModule.Button
 local iconName = foundationModule.Enums.IconName
 local text = foundationModule.Text
@@ -12,7 +15,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), button (ref), iconName (ref), inputSize (ref), buttonVariant (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), reactModule (ref), view (ref), text (ref), button (ref), iconName (ref), inputSize (ref), buttonVariant (ref)
 	local var1 = useLocalization({
 		description = localizationStringsModule.CHAT_COMPLETED_GAME_CREATION_DESCRIPTION,
 		playtest = localizationStringsModule.CHAT_PLAYTEST,
@@ -40,7 +43,7 @@ return function(p1)
 			text = var1.playtest,
 			icon = iconName.PlaySmall,
 			size = inputSize.Small,
-			variant = buttonVariant.Emphasis,
+			variant = if (if fFlagBuildExperienceChatCardEmphasisModule then useChatCardEmphasisModule(chatCardPriorityModule.PlaytestCompleted) else nil) == false then buttonVariant.SoftEmphasis else buttonVariant.Emphasis,
 			width = UDim.new(1, 0),
 			isLoading = p1.isLoading == true,
 			onActivated = p1.onPlaytest

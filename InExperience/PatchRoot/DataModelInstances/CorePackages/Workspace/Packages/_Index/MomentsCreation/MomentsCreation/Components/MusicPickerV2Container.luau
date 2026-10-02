@@ -246,6 +246,7 @@ return function(p1)
 		end, { var13 or 0, var17, var29, var30 })
 	}, {
 		Picker = reactModule.createElement(musicPicker, {
+			source = "moments",
 			titleText = var7.EditingCtaMusic,
 			searchPlaceholder = var7.GeneralSearchPlaceholder,
 			showTabs = fFlagMomentsCreationMusicPickerTabsModule,

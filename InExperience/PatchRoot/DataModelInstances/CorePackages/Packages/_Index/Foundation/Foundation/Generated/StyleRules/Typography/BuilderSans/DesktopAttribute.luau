@@ -15,12 +15,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontBodyMedium",
+			LineHeight = 1.111,
 			TextSize = "$TextSizeBodyMedium",
-			LineHeight = 1.111
+			FontFace = "$FontBodyMedium"
 		},
 		attributes = {
-			[1] = { name = "FontBodyMedium", value = Enum.Font.BuilderSans },
+			[1] = {
+				name = "FontBodyMedium",
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeBodyMedium", value = 18 }
 		}
 	},
@@ -43,14 +46,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontDisplayMedium",
+			LineHeight = 0.958,
 			TextSize = "$TextSizeDisplayMedium",
-			LineHeight = 0.958
+			FontFace = "$FontDisplayMedium"
 		},
 		attributes = {
 			[1] = {
 				name = "FontDisplayMedium",
-				value = Enum.Font.BuilderSansBold
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeDisplayMedium", value = 71 }
 		}
@@ -71,14 +74,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontTitleSmall",
+			LineHeight = 1.2,
 			TextSize = "$TextSizeTitleSmall",
-			LineHeight = 1.2
+			FontFace = "$FontTitleSmall"
 		},
 		attributes = {
 			[1] = {
 				name = "FontTitleSmall",
-				value = Enum.Font.BuilderSansBold
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeTitleSmall", value = 15 }
 		}
@@ -99,14 +102,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontHeadingSmall",
+			LineHeight = 0.96,
 			TextSize = "$TextSizeHeadingSmall",
-			LineHeight = 0.96
+			FontFace = "$FontHeadingSmall"
 		},
 		attributes = {
 			[1] = {
 				name = "FontHeadingSmall",
-				value = Enum.Font.BuilderSansBold
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeHeadingSmall", value = 25 }
 		}
@@ -127,23 +130,26 @@
 			}
 		},
 		properties = {
-			Font = "$FontCaptionLarge",
+			LineHeight = 1.111,
 			TextSize = "$TextSizeCaptionLarge",
-			LineHeight = 1.111
+			FontFace = "$FontCaptionLarge"
 		},
 		attributes = {
 			[1] = {
 				name = "FontCaptionLarge",
-				value = Enum.Font.BuilderSansMedium
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeCaptionLarge", value = 18 }
 		}
 	},
 	["text-defaults"] = {
-		properties = { Font = "$FontBodyLarge" },
+		properties = { FontFace = "$FontBodyLarge" },
 		priority = -1,
 		attributes = {
-			[1] = { name = "FontBodyLarge", value = Enum.Font.BuilderSans }
+			[1] = {
+				name = "FontBodyLarge",
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+			}
 		}
 	},
 	["text-caption-medium"] = {
@@ -165,14 +171,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontCaptionMedium",
+			LineHeight = 1.2,
 			TextSize = "$TextSizeCaptionMedium",
-			LineHeight = 1.2
+			FontFace = "$FontCaptionMedium"
 		},
 		attributes = {
 			[1] = {
 				name = "FontCaptionMedium",
-				value = Enum.Font.BuilderSansMedium
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeCaptionMedium", value = 15 }
 		}
@@ -196,14 +202,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontHeadingMedium",
+			LineHeight = 1.067,
 			TextSize = "$TextSizeHeadingMedium",
-			LineHeight = 1.067
+			FontFace = "$FontHeadingMedium"
 		},
 		attributes = {
 			[1] = {
 				name = "FontHeadingMedium",
-				value = Enum.Font.BuilderSansBold
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeHeadingMedium", value = 30 }
 		}
@@ -243,14 +249,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontCaptionSmall",
+			LineHeight = 1.077,
 			TextSize = "$TextSizeCaptionSmall",
-			LineHeight = 1.077
+			FontFace = "$FontCaptionSmall"
 		},
 		attributes = {
 			[1] = {
 				name = "FontCaptionSmall",
-				value = Enum.Font.BuilderSansMedium
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeCaptionSmall", value = 13 }
 		}
@@ -271,12 +277,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontBodySmall",
+			LineHeight = 1.2,
 			TextSize = "$TextSizeBodySmall",
-			LineHeight = 1.2
+			FontFace = "$FontBodySmall"
 		},
 		attributes = {
-			[1] = { name = "FontBodySmall", value = Enum.Font.BuilderSans },
+			[1] = {
+				name = "FontBodySmall",
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeBodySmall", value = 15 }
 		}
 	},
@@ -299,14 +308,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontDisplaySmall",
+			LineHeight = 0.96,
 			TextSize = "$TextSizeDisplaySmall",
-			LineHeight = 0.96
+			FontFace = "$FontDisplaySmall"
 		},
 		attributes = {
 			[1] = {
 				name = "FontDisplaySmall",
-				value = Enum.Font.BuilderSansBold
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeDisplaySmall", value = 50 }
 		}
@@ -330,14 +339,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontDisplayLarge",
+			LineHeight = 0.951,
 			TextSize = "$TextSizeDisplayLarge",
-			LineHeight = 0.951
+			FontFace = "$FontDisplayLarge"
 		},
 		attributes = {
 			[1] = {
 				name = "FontDisplayLarge",
-				value = Enum.Font.BuilderSansBold
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeDisplayLarge", value = 101 }
 		}
@@ -358,14 +367,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontLabelLarge",
+			LineHeight = 0.8,
 			TextSize = "$TextSizeLabelLarge",
-			LineHeight = 0.8
+			FontFace = "$FontLabelLarge"
 		},
 		attributes = {
 			[1] = {
 				name = "FontLabelLarge",
-				value = Enum.Font.BuilderSansMedium
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeLabelLarge", value = 20 }
 		}
@@ -386,14 +395,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontLabelSmall",
+			LineHeight = 0.8,
 			TextSize = "$TextSizeLabelSmall",
-			LineHeight = 0.8
+			FontFace = "$FontLabelSmall"
 		},
 		attributes = {
 			[1] = {
 				name = "FontLabelSmall",
-				value = Enum.Font.BuilderSansMedium
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeLabelSmall", value = 15 }
 		}
@@ -414,12 +423,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontBodyLarge",
+			LineHeight = 1.1,
 			TextSize = "$TextSizeBodyLarge",
-			LineHeight = 1.1
+			FontFace = "$FontBodyLarge"
 		},
 		attributes = {
-			[1] = { name = "FontBodyLarge", value = Enum.Font.BuilderSans },
+			[1] = {
+				name = "FontBodyLarge",
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeBodyLarge", value = 20 }
 		}
 	},
@@ -439,14 +451,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontTitleLarge",
+			LineHeight = 1.1,
 			TextSize = "$TextSizeTitleLarge",
-			LineHeight = 1.1
+			FontFace = "$FontTitleLarge"
 		},
 		attributes = {
 			[1] = {
 				name = "FontTitleLarge",
-				value = Enum.Font.BuilderSansBold
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeTitleLarge", value = 20 }
 		}
@@ -467,14 +479,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontTitleMedium",
+			LineHeight = 1.111,
 			TextSize = "$TextSizeTitleMedium",
-			LineHeight = 1.111
+			FontFace = "$FontTitleMedium"
 		},
 		attributes = {
 			[1] = {
 				name = "FontTitleMedium",
-				value = Enum.Font.BuilderSansBold
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeTitleMedium", value = 18 }
 		}
@@ -495,14 +507,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontHeadingLarge",
+			LineHeight = 0.971,
 			TextSize = "$TextSizeHeadingLarge",
-			LineHeight = 0.971
+			FontFace = "$FontHeadingLarge"
 		},
 		attributes = {
 			[1] = {
 				name = "FontHeadingLarge",
-				value = Enum.Font.BuilderSansBold
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeHeadingLarge", value = 35 }
 		}
@@ -523,14 +535,14 @@
 			}
 		},
 		properties = {
-			Font = "$FontLabelMedium",
+			LineHeight = 0.778,
 			TextSize = "$TextSizeLabelMedium",
-			LineHeight = 0.778
+			FontFace = "$FontLabelMedium"
 		},
 		attributes = {
 			[1] = {
 				name = "FontLabelMedium",
-				value = Enum.Font.BuilderSansMedium
+				value = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 			},
 			[2] = { name = "TextSizeLabelMedium", value = 18 }
 		}

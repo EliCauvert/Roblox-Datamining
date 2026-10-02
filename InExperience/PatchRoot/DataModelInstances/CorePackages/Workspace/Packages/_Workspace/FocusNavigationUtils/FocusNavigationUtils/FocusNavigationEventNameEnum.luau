@@ -78,5 +78,9 @@
 	PlayVideo = "PlayVideo",
 	PauseVideo = "PauseVideo",
 	SquadJoin = "SquadJoin",
-	ViewProfile = "ViewProfile"
+	ViewProfile = "ViewProfile",
+	ExpandAvatar = "ExpandAvatar",
+	CollapseAvatar = "CollapseAvatar",
+	SwitchOutfitPrevious = "SwitchOutfitPrevious",
+	SwitchOutfitNext = "SwitchOutfitNext"
 }

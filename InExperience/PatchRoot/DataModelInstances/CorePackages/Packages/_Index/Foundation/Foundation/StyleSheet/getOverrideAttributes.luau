@@ -1,7 +1,6 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local _ = require(foundation.Enums.ColorMode)
 local _ = require(foundation.Enums.Device)
-local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Enums.ThemeName)
 local tokenProcessingUtilitiesModule = require(foundation.Providers.Style.Tokens.TokenProcessingUtilities)
 local tokensModule = require(foundation.Providers.Style.Tokens)
@@ -23,12 +22,10 @@ local function emitLeafAttributes(p1, p2, p3)
 end
 
 return function(p4, p5, p6, p7)
-	-- upvalues: flagsModule (ref), tokensModule (ref), tokenProcessingUtilitiesModule (ref), emitLeafAttributes (ref)
+	-- upvalues: tokensModule (ref), tokenProcessingUtilitiesModule (ref), emitLeafAttributes (ref)
 	local t = {}
 	
-	if not flagsModule.FoundationTokenOverrides then
-		return t
-	elseif not p7 or not next(p7) then
+	if not p7 or not next(p7) then
 		return t
 	end
 	local tokens = tokensModule.getTokens(p5, p6, 1, nil, p4)

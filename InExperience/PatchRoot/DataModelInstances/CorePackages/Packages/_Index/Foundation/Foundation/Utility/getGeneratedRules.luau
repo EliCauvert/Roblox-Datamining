@@ -224,16 +224,38 @@ local t_2 = {
 		end
 	}
 }
+local t_3 = {
+	[fontNameModule.BuilderSans] = {
+		Desktop = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.Legacy.Typography.BuilderSans.DesktopAttribute)
+		end,
+		Console = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.Legacy.Typography.BuilderSans.ConsoleAttribute)
+		end
+	},
+	[fontNameModule.Cartoon] = {
+		Desktop = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.Legacy.Typography.Cartoon.DesktopAttribute)
+		end,
+		Console = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.Legacy.Typography.Cartoon.ConsoleAttribute)
+		end
+	}
+}
 
 return function(p1, p2, p3)
-	-- upvalues: themeNameModule (ref), t (ref), t_1 (ref), deviceModule (ref), flagsModule (ref), typographyVariantsModule (ref), builderSans (ref), t_2 (ref)
+	-- upvalues: themeNameModule (ref), t (ref), t_1 (ref), deviceModule (ref), flagsModule (ref), typographyVariantsModule (ref), builderSans (ref), t_2 (ref), t_3 (ref)
 	p1 = p1 or themeNameModule.Default
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	local var1 = t.Common()
 	local var2 = (t_1[p1] or t_1[themeNameModule.Default])[p2]()
-	local var3 = if p3 == deviceModule.Console and not flagsModule.FoundationDisableTokenScaling then t.Console() else t.Desktop()
+	local var3 = if p3 == deviceModule.Console and not flagsModule.FoundationDisableTokenScaling then t[deviceModule.Console]() else t[deviceModule.Desktop]()
 	
 	if not var2 or not var3 or not var1 then
 		return {}
@@ -246,13 +268,14 @@ return function(p1, p2, p3)
 	for i_1, v_1 in var2 do
 		var2[i_1] = v_1
 	end
-	local var4 = (t_2[typographyVariantsModule[p1] or builderSans] or t_2[builderSans])[if p3 == deviceModule.Console and not flagsModule.FoundationDisableTokenScaling then deviceModule.Console else deviceModule.Desktop]
+	local var4 = typographyVariantsModule[p1] or builderSans
+	local var5 = (if flagsModule.FoundationFontFaceMigration then t_2[var4] or t_2[builderSans] else t_3[var4] or t_3[builderSans])[if p3 == deviceModule.Console and not flagsModule.FoundationDisableTokenScaling then deviceModule.Console else deviceModule.Desktop]
 	
-	if var4 then
-		local var5 = var4()
+	if var5 then
+		local var6 = var5()
 		
-		if var5 then
-			for i_2, v_2 in var5 do
+		if var6 then
+			for i_2, v_2 in var6 do
 				var2[i_2] = v_2
 			end
 		end

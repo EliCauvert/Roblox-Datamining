@@ -15,12 +15,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontBodyMedium",
+			LineHeight = 1.177,
 			TextSize = "$TextSizeBodyMedium",
-			LineHeight = 1.177
+			FontFace = "$FontBodyMedium"
 		},
 		attributes = {
-			[1] = { name = "FontBodyMedium", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontBodyMedium",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeBodyMedium", value = 25.5 }
 		}
 	},
@@ -43,12 +46,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontDisplayMedium",
+			LineHeight = 1,
 			TextSize = "$TextSizeDisplayMedium",
-			LineHeight = 1
+			FontFace = "$FontDisplayMedium"
 		},
 		attributes = {
-			[1] = { name = "FontDisplayMedium", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontDisplayMedium",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeDisplayMedium", value = 102 }
 		}
 	},
@@ -68,12 +74,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontTitleSmall",
+			LineHeight = 1.2,
 			TextSize = "$TextSizeTitleSmall",
-			LineHeight = 1.2
+			FontFace = "$FontTitleSmall"
 		},
 		attributes = {
-			[1] = { name = "FontTitleSmall", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontTitleSmall",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeTitleSmall", value = 22.5 }
 		}
 	},
@@ -93,12 +102,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontHeadingSmall",
+			LineHeight = 1,
 			TextSize = "$TextSizeHeadingSmall",
-			LineHeight = 1
+			FontFace = "$FontHeadingSmall"
 		},
 		attributes = {
-			[1] = { name = "FontHeadingSmall", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontHeadingSmall",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeHeadingSmall", value = 36 }
 		}
 	},
@@ -118,20 +130,26 @@
 			}
 		},
 		properties = {
-			Font = "$FontCaptionLarge",
+			LineHeight = 1.177,
 			TextSize = "$TextSizeCaptionLarge",
-			LineHeight = 1.177
+			FontFace = "$FontCaptionLarge"
 		},
 		attributes = {
-			[1] = { name = "FontCaptionLarge", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontCaptionLarge",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeCaptionLarge", value = 25.5 }
 		}
 	},
 	["text-defaults"] = {
-		properties = { Font = "$FontBodyLarge" },
+		properties = { FontFace = "$FontBodyLarge" },
 		priority = -1,
 		attributes = {
-			[1] = { name = "FontBodyLarge", value = Enum.Font.Cartoon }
+			[1] = {
+				name = "FontBodyLarge",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+			}
 		}
 	},
 	["text-caption-medium"] = {
@@ -153,12 +171,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontCaptionMedium",
+			LineHeight = 1.2,
 			TextSize = "$TextSizeCaptionMedium",
-			LineHeight = 1.2
+			FontFace = "$FontCaptionMedium"
 		},
 		attributes = {
-			[1] = { name = "FontCaptionMedium", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontCaptionMedium",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeCaptionMedium", value = 22.5 }
 		}
 	},
@@ -181,12 +202,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontHeadingMedium",
+			LineHeight = 1.103,
 			TextSize = "$TextSizeHeadingMedium",
-			LineHeight = 1.103
+			FontFace = "$FontHeadingMedium"
 		},
 		attributes = {
-			[1] = { name = "FontHeadingMedium", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontHeadingMedium",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeHeadingMedium", value = 43.5 }
 		}
 	},
@@ -225,12 +249,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontCaptionSmall",
+			LineHeight = 1.167,
 			TextSize = "$TextSizeCaptionSmall",
-			LineHeight = 1.167
+			FontFace = "$FontCaptionSmall"
 		},
 		attributes = {
-			[1] = { name = "FontCaptionSmall", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontCaptionSmall",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeCaptionSmall", value = 18 }
 		}
 	},
@@ -250,12 +277,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontBodySmall",
+			LineHeight = 1.2,
 			TextSize = "$TextSizeBodySmall",
-			LineHeight = 1.2
+			FontFace = "$FontBodySmall"
 		},
 		attributes = {
-			[1] = { name = "FontBodySmall", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontBodySmall",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeBodySmall", value = 22.5 }
 		}
 	},
@@ -275,12 +305,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontDisplaySmall",
+			LineHeight = 1,
 			TextSize = "$TextSizeDisplaySmall",
-			LineHeight = 1
+			FontFace = "$FontDisplaySmall"
 		},
 		attributes = {
-			[1] = { name = "FontDisplaySmall", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontDisplaySmall",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeDisplaySmall", value = 72 }
 		}
 	},
@@ -300,12 +333,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontDisplayLarge",
+			LineHeight = 0.99,
 			TextSize = "$TextSizeDisplayLarge",
-			LineHeight = 0.99
+			FontFace = "$FontDisplayLarge"
 		},
 		attributes = {
-			[1] = { name = "FontDisplayLarge", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontDisplayLarge",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeDisplayLarge", value = 145.5 }
 		}
 	},
@@ -325,12 +361,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontLabelLarge",
+			LineHeight = 0.842,
 			TextSize = "$TextSizeLabelLarge",
-			LineHeight = 0.842
+			FontFace = "$FontLabelLarge"
 		},
 		attributes = {
-			[1] = { name = "FontLabelLarge", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontLabelLarge",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeLabelLarge", value = 28.5 }
 		}
 	},
@@ -350,12 +389,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontLabelSmall",
+			LineHeight = 0.8,
 			TextSize = "$TextSizeLabelSmall",
-			LineHeight = 0.8
+			FontFace = "$FontLabelSmall"
 		},
 		attributes = {
-			[1] = { name = "FontLabelSmall", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontLabelSmall",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeLabelSmall", value = 22.5 }
 		}
 	},
@@ -375,12 +417,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontBodyLarge",
+			LineHeight = 1.158,
 			TextSize = "$TextSizeBodyLarge",
-			LineHeight = 1.158
+			FontFace = "$FontBodyLarge"
 		},
 		attributes = {
-			[1] = { name = "FontBodyLarge", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontBodyLarge",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeBodyLarge", value = 28.5 }
 		}
 	},
@@ -400,12 +445,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontTitleLarge",
+			LineHeight = 1.158,
 			TextSize = "$TextSizeTitleLarge",
-			LineHeight = 1.158
+			FontFace = "$FontTitleLarge"
 		},
 		attributes = {
-			[1] = { name = "FontTitleLarge", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontTitleLarge",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeTitleLarge", value = 28.5 }
 		}
 	},
@@ -425,12 +473,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontTitleMedium",
+			LineHeight = 1.177,
 			TextSize = "$TextSizeTitleMedium",
-			LineHeight = 1.177
+			FontFace = "$FontTitleMedium"
 		},
 		attributes = {
-			[1] = { name = "FontTitleMedium", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontTitleMedium",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeTitleMedium", value = 25.5 }
 		}
 	},
@@ -450,12 +501,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontHeadingLarge",
+			LineHeight = 1,
 			TextSize = "$TextSizeHeadingLarge",
-			LineHeight = 1
+			FontFace = "$FontHeadingLarge"
 		},
 		attributes = {
-			[1] = { name = "FontHeadingLarge", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontHeadingLarge",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeHeadingLarge", value = 51 }
 		}
 	},
@@ -475,12 +529,15 @@
 			}
 		},
 		properties = {
-			Font = "$FontLabelMedium",
+			LineHeight = 0.824,
 			TextSize = "$TextSizeLabelMedium",
-			LineHeight = 0.824
+			FontFace = "$FontLabelMedium"
 		},
 		attributes = {
-			[1] = { name = "FontLabelMedium", value = Enum.Font.Cartoon },
+			[1] = {
+				name = "FontLabelMedium",
+				value = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+			},
 			[2] = { name = "TextSizeLabelMedium", value = 25.5 }
 		}
 	}

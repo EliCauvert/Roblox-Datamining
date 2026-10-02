@@ -12,6 +12,7 @@ local UGCValidationVertexSimilarityMaxPercent = game:DefineFastInt("UGCValidatio
 return {
 	categories = {
 		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
 		validationEnumsModule.UploadCategory.FULL_BODY,
 		validationEnumsModule.UploadCategory.RIGID_ACCESSORY,
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD

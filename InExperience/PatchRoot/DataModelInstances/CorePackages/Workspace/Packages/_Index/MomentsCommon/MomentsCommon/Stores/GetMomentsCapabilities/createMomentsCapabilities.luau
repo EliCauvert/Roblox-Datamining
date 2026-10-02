@@ -5,6 +5,8 @@ local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePo
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagMomentsAutoplayAmpPolicy = sharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
 local fFlagGuacMomentsFeatureList = sharedFlagsModule.FFlagGuacMomentsFeatureList
+local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
+local fFlagMomentsCommentsIxpEnabled = sharedFlagsModule.FFlagMomentsCommentsIxpEnabled
 local fFlagMomentsEngagementMetricsFeatureModule = require(momentsCommon.Flags.FFlagMomentsEngagementMetricsFeature)
 local getFFlagMomentsNonInfiniteScrollModule = require(momentsCommon.Flags.GetFFlagMomentsNonInfiniteScroll)
 local getFIntMomentsNonInfiniteScrollLimitModule = require(momentsCommon.Flags.GetFIntMomentsNonInfiniteScrollLimit)
@@ -23,7 +25,7 @@ local function readInfiniteScrollPolicy()
 end
 
 return function(p1)
-	-- upvalues: getFFlagMomentsNonInfiniteScrollModule (ref), getFIntMomentsNonInfiniteScrollLimitModule (ref), fFlagGuacMomentsFeatureList (ref), createComputed (ref), getAppPolicyStore (ref), fFlagMomentsAutoplayAmpPolicy (ref), fFlagMomentsEngagementMetricsFeatureModule (ref), readInfiniteScrollPolicy (ref), createSignal (ref)
+	-- upvalues: getFFlagMomentsNonInfiniteScrollModule (ref), getFIntMomentsNonInfiniteScrollLimitModule (ref), fFlagGuacMomentsFeatureList (ref), createComputed (ref), getAppPolicyStore (ref), fFlagMomentsAutoplayAmpPolicy (ref), fFlagMomentsEngagementMetricsFeatureModule (ref), fFlagMomentsComments (ref), fFlagMomentsCommentsIxpEnabled (ref), readInfiniteScrollPolicy (ref), createSignal (ref)
 	local var1
 	local var2 = getFFlagMomentsNonInfiniteScrollModule()
 	local maxValue = math.max(1, getFIntMomentsNonInfiniteScrollLimitModule())
@@ -43,11 +45,52 @@ return function(p1)
 		-- upvalues: getAppPolicyStore (copy)
 		return table.find(getAppPolicyStore(false).getAppPolicy(p2).getMomentsFeatureList(), "engagement_metrics") ~= nil
 	end) else nil
+	
+	local function _(p2)
+		-- upvalues: createComputed (copy), getAppPolicyStore (copy)
+		return createComputed(function(p3)
+			-- upvalues: getAppPolicyStore (copy), p2 (ref)
+			return table.find(getAppPolicyStore(false).getAppPolicy(p3).getMomentsFeatureList(), p2) ~= nil
+		end)
+	end
+	
+	local fFlagMomentsComments_1 = fFlagMomentsComments or fFlagMomentsCommentsIxpEnabled
+	
+	if fFlagMomentsComments_1 then
+		local var7 = "comments_read"
+		var1 = createComputed(function(p2)
+			-- upvalues: getAppPolicyStore (copy), var7 (ref)
+			return table.find(getAppPolicyStore(false).getAppPolicy(p2).getMomentsFeatureList(), var7) ~= nil
+		end)
+	else
+		var1 = nil
+	end
+	local var8
+	if fFlagMomentsComments_1 then
+		local var9 = "comments_write"
+		var8 = createComputed(function(p2)
+			-- upvalues: getAppPolicyStore (copy), var9 (ref)
+			return table.find(getAppPolicyStore(false).getAppPolicy(p2).getMomentsFeatureList(), var9) ~= nil
+		end)
+	else
+		var8 = nil
+	end
+	local var10
+	if fFlagMomentsComments_1 then
+		local var11 = "comments_react"
+		var10 = createComputed(function(p2)
+			-- upvalues: getAppPolicyStore (copy), var11 (ref)
+			return table.find(getAppPolicyStore(false).getAppPolicy(p2).getMomentsFeatureList(), var11) ~= nil
+		end)
+	else
+		var10 = nil
+	end
+	local var12
 	local _ = nil
 	local _ = nil
 	
 	if fFlagGuacMomentsFeatureList then
-		var1 = createComputed(function(p2)
+		var12 = createComputed(function(p2)
 			-- upvalues: var2 (ref), getAppPolicyStore (copy)
 			if not var2 then
 				return true
@@ -57,17 +100,17 @@ return function(p1)
 			return next(momentsFeatureList) == nil or table.find(momentsFeatureList, "infinite_scroll") ~= nil
 		end)
 		
-		local var7 = function(_) end
+		local var13 = function(_) end
 	else
-		local var8, var9 = createSignal(if var2 then (p1 or readInfiniteScrollPolicy)() else true)
-		var1 = createComputed(function(p2)
-			-- upvalues: var2 (ref), var8 (ref)
-			return if var2 then var8(p2) else true
+		local var14, var15 = createSignal(if var2 then (p1 or readInfiniteScrollPolicy)() else true)
+		var12 = createComputed(function(p2)
+			-- upvalues: var2 (ref), var14 (ref)
+			return if var2 then var14(p2) else true
 		end)
 		
-		local var7 = function(p2)
-			-- upvalues: var9 (ref)
-			var9(p2)
+		local var13 = function(p2)
+			-- upvalues: var15 (ref)
+			var15(p2)
 		end
 	end
 	return {
@@ -75,11 +118,14 @@ return function(p1)
 		getIsInfluencerContentEnabled = var4,
 		getIsAutoPlayEnabled = var5,
 		getIsEngagementMetricsEnabled = var6,
-		getIsInfiniteScrollEnabled = var1,
+		getCanReadComments = var1,
+		getCanWriteComments = var8,
+		getCanReactToComments = var10,
+		getIsInfiniteScrollEnabled = var12,
 		getMaxMomentsBeforeEndState = createComputed(function(_)
 			-- upvalues: maxValue (ref)
 			return maxValue
 		end),
-		setInfiniteScrollAllowedByPolicy = var7
+		setInfiniteScrollAllowedByPolicy = var13
 	}
 end

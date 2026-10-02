@@ -2,11 +2,13 @@
 local parent_1 = parent.Parent
 local parent_2 = parent_1.Parent
 local parent_3 = parent_2.Parent
+local foundationFontFaceMigration = require(parent_3.Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local _ = require(parent.Types)
 local constantsModule = require(parent.Constants)
 local _ = require(parent_2.Style.Fonts)
 local imagesModule = require(parent_2.ImageSet.Images)
 local getTextSizeModule = require(parent_3.Core.Text.GetTextSize)
+local getFontFromFontStyleModule = require(parent_3.Core.Text.GetFontFromFontStyle)
 local platformIconMapModule = require(parent_1.platformIconMap)
 local userInputService = game:GetService("UserInputService")
 local DIRECTIONAL_GAMEPAD_ICONS = platformIconMapModule.DIRECTIONAL_GAMEPAD_ICONS
@@ -56,11 +58,11 @@ local function getKeyCodeContent(p1)
 end
 
 local function getWidthFromContent(p1, p2)
-	-- upvalues: getTextSizeModule (ref), constantsModule (ref)
+	-- upvalues: foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), getTextSizeModule (ref), constantsModule (ref)
 	if p1.inputType == "keyboard" then
 		if type(p1.content) == "string" then
 			local captionBody = p2.CaptionBody
-			local x = getTextSizeModule(p1.content, p2.BaseSize * captionBody.RelativeSize, captionBody.Font, Vector2.zero).X
+			local x = getTextSizeModule(p1.content, p2.BaseSize * captionBody.RelativeSize, if foundationFontFaceMigration then getFontFromFontStyleModule(captionBody) else captionBody.Font, Vector2.zero).X
 			
 			return if constantsModule.PREFERRED_WIDTH < x + 2 * constantsModule.MIN_SIDE_PADDING then x + 2 * constantsModule.SIDE_PADDING else constantsModule.PREFERRED_WIDTH
 		elseif p1.inputType == "gamepad" then

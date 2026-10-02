@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableOffersPrefetch", false) and require(script.Parent.FFlagEnableUserOffers)

@@ -6,10 +6,12 @@ local roactGamepadModule = require(parent_3.RoactGamepad)
 local reactModule = require(parent_3.React)
 local cryoModule = require(parent_3.Cryo)
 local tModule = require(parent_3.t)
+local foundationFontFaceMigration = require(parent_3.Foundation).Utility.Flags.FoundationFontFaceMigration
 local withStyleModule = require(parent_2.Core.Style.withStyle)
 local validateFontInfoModule = require(parent_2.Core.Style.Validator.validateFontInfo)
 local validateTypographyInfoModule = require(parent_2.Core.Style.Validator.validateTypographyInfo)
 local getTextSizeModule = require(parent_2.Core.Text.GetTextSize)
+local getFontFromFontStyleModule = require(parent_2.Core.Text.GetFontFromFontStyle)
 local getWrappedTextWithIconModule = require(parent_2.Core.Text.GetWrappedTextWithIcon)
 local withTextSizeOffsetModule = require(parent_2.Core.Style.withTextSizeOffset)
 local cursorKindModule = require(parent_1.SelectionImage.CursorKind)
@@ -110,7 +112,7 @@ function tile.init(p1)
 end
 
 function tile.render(p1)
-	-- upvalues: withTextSizeOffsetModule (ref), withStyleModule (ref), withSelectionCursorProviderModule (ref), imagesModule (ref), getWrappedTextWithIconModule (ref), getTextSizeModule (ref), reactModule (ref), roactGamepadModule (ref), interactableModule (ref), cursorKindModule (ref), tileThumbnailModule (ref), uDim (ref), tileNameModule (ref), styledTextLabelModule (ref), tileBannerModule (ref)
+	-- upvalues: withTextSizeOffsetModule (ref), withStyleModule (ref), withSelectionCursorProviderModule (ref), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), imagesModule (ref), getWrappedTextWithIconModule (ref), getTextSizeModule (ref), reactModule (ref), roactGamepadModule (ref), interactableModule (ref), cursorKindModule (ref), tileThumbnailModule (ref), uDim (ref), tileNameModule (ref), styledTextLabelModule (ref), tileBannerModule (ref)
 	local footer = p1.props.footer
 	local name = p1.props.name
 	local subtitle = p1.props.subtitle
@@ -139,11 +141,11 @@ function tile.render(p1)
 	local horizontalAlignment = p1.props.horizontalAlignment
 	
 	return withTextSizeOffsetModule(function(p2)
-		-- upvalues: withStyleModule (copy), withSelectionCursorProviderModule (copy), p1 (ref), titleTextLineCount (ref), innerPadding (ref), titleTopPadding (ref), addSubtitleSpace (ref), useMaxTitleHeight (ref), name (ref), titleIcon (ref), imagesModule (copy), getWrappedTextWithIconModule (copy), getTextSizeModule (copy), subtitle (ref), footer (ref), bannerText (ref), reactModule (copy), isDisabled (ref), onActivated (ref), roactGamepadModule (copy), interactableModule (copy), cursorKindModule (copy), horizontalAlignment (ref), thumbnailFrameSize (ref), tileThumbnailModule (copy), thumbnail (ref), hasRoundedCorners (ref), uDim (copy), isSelected (ref), multiSelect (ref), thumbnailOverlayComponents (ref), thumbnailSize (ref), thumbnailColor (ref), thumbnailTransparency (ref), backgroundImage (ref), subtitleTopPadding (ref), tileNameModule (copy), hasVerifiedBadge (ref), styledTextLabelModule (copy), footerTopPadding (ref), tileBannerModule (copy)
+		-- upvalues: withStyleModule (copy), withSelectionCursorProviderModule (copy), p1 (ref), titleTextLineCount (ref), innerPadding (ref), titleTopPadding (ref), addSubtitleSpace (ref), useMaxTitleHeight (ref), name (ref), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), titleIcon (ref), imagesModule (copy), getWrappedTextWithIconModule (copy), getTextSizeModule (copy), subtitle (ref), footer (ref), bannerText (ref), reactModule (copy), isDisabled (ref), onActivated (ref), roactGamepadModule (copy), interactableModule (copy), cursorKindModule (copy), horizontalAlignment (ref), thumbnailFrameSize (ref), tileThumbnailModule (copy), thumbnail (ref), hasRoundedCorners (ref), uDim (copy), isSelected (ref), multiSelect (ref), thumbnailOverlayComponents (ref), thumbnailSize (ref), thumbnailColor (ref), thumbnailTransparency (ref), backgroundImage (ref), subtitleTopPadding (ref), tileNameModule (copy), hasVerifiedBadge (ref), styledTextLabelModule (copy), footerTopPadding (ref), tileBannerModule (copy)
 		return withStyleModule(function(p3)
-			-- upvalues: withSelectionCursorProviderModule (copy), p1 (copy), titleTextLineCount (copy), p2 (ref), innerPadding (copy), titleTopPadding (copy), addSubtitleSpace (copy), useMaxTitleHeight (copy), name (copy), titleIcon (copy), imagesModule (copy), getWrappedTextWithIconModule (copy), getTextSizeModule (copy), subtitle (copy), footer (copy), bannerText (copy), reactModule (copy), isDisabled (copy), onActivated (copy), roactGamepadModule (copy), interactableModule (copy), cursorKindModule (copy), horizontalAlignment (copy), thumbnailFrameSize (copy), tileThumbnailModule (copy), thumbnail (copy), hasRoundedCorners (copy), uDim (copy), isSelected (copy), multiSelect (copy), thumbnailOverlayComponents (copy), thumbnailSize (copy), thumbnailColor (copy), thumbnailTransparency (copy), backgroundImage (copy), subtitleTopPadding (copy), tileNameModule (copy), hasVerifiedBadge (copy), styledTextLabelModule (copy), footerTopPadding (copy), tileBannerModule (copy)
+			-- upvalues: withSelectionCursorProviderModule (copy), p1 (copy), titleTextLineCount (copy), p2 (ref), innerPadding (copy), titleTopPadding (copy), addSubtitleSpace (copy), useMaxTitleHeight (copy), name (copy), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), titleIcon (copy), imagesModule (copy), getWrappedTextWithIconModule (copy), getTextSizeModule (copy), subtitle (copy), footer (copy), bannerText (copy), reactModule (copy), isDisabled (copy), onActivated (copy), roactGamepadModule (copy), interactableModule (copy), cursorKindModule (copy), horizontalAlignment (copy), thumbnailFrameSize (copy), tileThumbnailModule (copy), thumbnail (copy), hasRoundedCorners (copy), uDim (copy), isSelected (copy), multiSelect (copy), thumbnailOverlayComponents (copy), thumbnailSize (copy), thumbnailColor (copy), thumbnailTransparency (copy), backgroundImage (copy), subtitleTopPadding (copy), tileNameModule (copy), hasVerifiedBadge (copy), styledTextLabelModule (copy), footerTopPadding (copy), tileBannerModule (copy)
 			return withSelectionCursorProviderModule(function(p4)
-				-- upvalues: p3 (ref), p1 (copy), titleTextLineCount (copy), p2 (copy), innerPadding (copy), titleTopPadding (copy), addSubtitleSpace (copy), useMaxTitleHeight (copy), name (copy), titleIcon (copy), imagesModule (copy), getWrappedTextWithIconModule (copy), getTextSizeModule (copy), subtitle (copy), footer (copy), bannerText (copy), reactModule (copy), isDisabled (copy), onActivated (copy), roactGamepadModule (copy), interactableModule (copy), cursorKindModule (copy), horizontalAlignment (copy), thumbnailFrameSize (copy), tileThumbnailModule (copy), thumbnail (copy), hasRoundedCorners (copy), uDim (copy), isSelected (copy), multiSelect (copy), thumbnailOverlayComponents (copy), thumbnailSize (copy), thumbnailColor (copy), thumbnailTransparency (copy), backgroundImage (copy), subtitleTopPadding (copy), tileNameModule (copy), hasVerifiedBadge (copy), styledTextLabelModule (copy), footerTopPadding (copy), tileBannerModule (copy)
+				-- upvalues: p3 (ref), p1 (copy), titleTextLineCount (copy), p2 (copy), innerPadding (copy), titleTopPadding (copy), addSubtitleSpace (copy), useMaxTitleHeight (copy), name (copy), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), titleIcon (copy), imagesModule (copy), getWrappedTextWithIconModule (copy), getTextSizeModule (copy), subtitle (copy), footer (copy), bannerText (copy), reactModule (copy), isDisabled (copy), onActivated (copy), roactGamepadModule (copy), interactableModule (copy), cursorKindModule (copy), horizontalAlignment (copy), thumbnailFrameSize (copy), tileThumbnailModule (copy), thumbnail (copy), hasRoundedCorners (copy), uDim (copy), isSelected (copy), multiSelect (copy), thumbnailOverlayComponents (copy), thumbnailSize (copy), thumbnailColor (copy), thumbnailTransparency (copy), backgroundImage (copy), subtitleTopPadding (copy), tileNameModule (copy), hasVerifiedBadge (copy), styledTextLabelModule (copy), footerTopPadding (copy), tileBannerModule (copy)
 				local vector2
 				local font = p3.Font
 				local theme = p3.Theme
@@ -168,20 +170,20 @@ function tile.render(p1)
 					vector2 = Vector2.new(0, ceiled)
 				else
 					local name_1 = name or ""
-					local font_1 = titleFontStyle.Font
+					local var4 = if foundationFontFaceMigration then getFontFromFontStyleModule(titleFontStyle) else titleFontStyle.Font
 					
 					if titleIcon then
-						name_1 = getWrappedTextWithIconModule(name_1, var1, font_1, titleIcon.ImageRectSize.X / imagesModule.ImagesResolutionScale, 4)
+						name_1 = getWrappedTextWithIconModule(name_1, var1, var4, titleIcon.ImageRectSize.X / imagesModule.ImagesResolutionScale, 4)
 					end
-					local var4 = getTextSizeModule(name_1, var1, font_1, Vector2.new(tileWidth, ceiled))
-					vector2 = Vector2.new(var4.X, math.min(var4.Y, ceiled))
+					local var5 = getTextSizeModule(name_1, var1, var4, Vector2.new(tileWidth, ceiled))
+					vector2 = Vector2.new(var5.X, math.min(var5.Y, ceiled))
 				end
 				if subtitle ~= nil and subtitle ~= "" then
 					var3 = math.ceil(var2) + p2
 					ceiled -= var3
 				end
 				local maxValue = math.max(0, ceiled)
-				local var5 = if footer == nil then bannerText ~= nil else true
+				local var6 = if footer == nil then bannerText ~= nil else true
 				local renderTileInset = p1.props.renderTileInset
 				local uDim2 = UDim2.new(1, 0, 0, vector2.Y + var3 + titleTopPadding)
 				local UIPadding = nil
@@ -295,7 +297,7 @@ function tile.render(p1)
 							textTruncate = Enum.TextTruncate.AtEnd
 						}))
 					}),
-					FooterContainer = var5 and reactModule.createElement("Frame", {
+					FooterContainer = var6 and reactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 3,
 						Size = UDim2.new(1, 0, 0, maxValue)

@@ -2,6 +2,7 @@
 local corePackagesService = game:GetService("CorePackages")
 local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local reactModule = require(corePackagesService.Packages.React)
+local signalsModule = require(corePackagesService.Packages.Signals)
 local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 local crossExperienceVoiceModule = require(corePackagesService.Workspace.Packages.CrossExperienceVoice)
 local var1 = if require(corePackagesService.Workspace.Packages.Chrome).Enabled() then require(chrome.ChromeShared.Service) else nil
@@ -14,6 +15,7 @@ local promptTypeModule = require(robloxGui.Modules.VoiceChatPrompt.PromptType)
 local getFFlagIntegratePhoneUpsellJoinVoice = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagIntegratePhoneUpsellJoinVoice
 local getFFlagEnableVoiceUxUpdates = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableVoiceUxUpdates
 local fFlagVoiceRewarmTelemetry = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagVoiceRewarmTelemetry
+local fFlagProactiveVoiceRestrictionsUFRModule = require(robloxGui.Modules.VoiceChat.Flags.FFlagProactiveVoiceRestrictionsUFR)
 
 local _ = function(p1)
 	local var2 = false
@@ -41,13 +43,13 @@ local var4 = function(...)
 	if var3 then
 		return nil
 	end
-	var11 = true
+	var13 = true
 	
 	return var2(...)
 end
 
 return function()
-	-- upvalues: useIsVoiceFocused (ref), useIsVoiceConnecting (ref), reactModule (ref), var1 (ref), var4 (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), default (ref), isVoiceFocused (ref), VOICE_JOIN_PROGRESS (ref), getFFlagEnableVoiceUxUpdates (ref), constantsModule (ref), promptTypeModule (ref)
+	-- upvalues: useIsVoiceFocused (ref), useIsVoiceConnecting (ref), reactModule (ref), var1 (ref), fFlagProactiveVoiceRestrictionsUFRModule (ref), default (ref), var4 (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), isVoiceFocused (ref), VOICE_JOIN_PROGRESS (ref), getFFlagEnableVoiceUxUpdates (ref), constantsModule (ref), promptTypeModule (ref), signalsModule (ref)
 	local var5 = useIsVoiceFocused()
 	local var6 = useIsVoiceConnecting()
 	local var7 = reactModule.useMemo(function()
@@ -59,9 +61,13 @@ return function()
 		return if var1 then var1:integrations().join_voice else nil
 	end, {})
 	local var9 = reactModule.useCallback(function(p1)
-		-- upvalues: var8 (ref), var1 (copy), var5 (ref), var4 (copy)
+		-- upvalues: var8 (ref), var1 (copy), fFlagProactiveVoiceRestrictionsUFRModule (copy), default (copy), var5 (ref), var4 (copy)
 		if not var8 or not var1 then return end
-		if not var5 then
+		if fFlagProactiveVoiceRestrictionsUFRModule and default:GetVoiceRestrictionState(false) ~= "normal" then
+			var8.availability:unavailable()
+			
+			return
+		elseif not var5 then
 			if p1 == var1.AvailabilitySignal.Available then
 				var4()
 				var8.availability:available()
@@ -89,9 +95,13 @@ return function()
 		end
 	end, { var8, var7 })
 	local var11 = reactModule.useCallback(function(p1)
-		-- upvalues: var8 (ref), var7 (ref), isVoiceFocused (copy), VOICE_JOIN_PROGRESS (copy), var10 (ref), getFFlagEnableVoiceUxUpdates (copy), default (copy), constantsModule (copy), promptTypeModule (copy)
+		-- upvalues: var8 (ref), fFlagProactiveVoiceRestrictionsUFRModule (copy), default (copy), var7 (ref), isVoiceFocused (copy), VOICE_JOIN_PROGRESS (copy), var10 (ref), getFFlagEnableVoiceUxUpdates (copy), constantsModule (copy), promptTypeModule (copy)
 		if not var8 then return end
-		if var7 or isVoiceFocused() then
+		if fFlagProactiveVoiceRestrictionsUFRModule and default:GetVoiceRestrictionState(false) ~= "normal" then
+			var8.availability:unavailable()
+			
+			return
+		elseif var7 or isVoiceFocused() then
 			var8.availability:unavailable()
 			
 			return
@@ -117,8 +127,12 @@ return function()
 		var8.availability:unavailable()
 	end, { var8 })
 	local var13 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), isVoiceFocused (copy), var8 (ref)
-		if var7 or isVoiceFocused() then
+		-- upvalues: fFlagProactiveVoiceRestrictionsUFRModule (copy), default (copy), var8 (ref), var7 (ref), isVoiceFocused (copy)
+		if fFlagProactiveVoiceRestrictionsUFRModule and default:GetVoiceRestrictionState(false) ~= "normal" then
+			var8.availability:unavailable()
+			
+			return
+		elseif var7 or isVoiceFocused() then
 			var8.availability:unavailable()
 			
 			return
@@ -126,9 +140,15 @@ return function()
 		var8.availability:available()
 	end, { var8, var7 })
 	local var14 = reactModule.useCallback(function()
-		-- upvalues: default (copy), var11 (ref), var12 (ref), getFFlagEnableVoiceUxUpdates (copy), var13 (ref)
+		-- upvalues: fFlagProactiveVoiceRestrictionsUFRModule (copy), var8 (ref), signalsModule (copy), default (copy), var11 (ref), var12 (ref), getFFlagEnableVoiceUxUpdates (copy), var13 (ref)
 		local _ = nil
 		local eventConnection = nil
+		local var15 = if fFlagProactiveVoiceRestrictionsUFRModule and var8 then signalsModule.createEffect(function(p1)
+			-- upvalues: default (copy), var8 (copy)
+			if default:GetVoiceRestrictionState(p1) ~= "normal" then
+				var8.availability:unavailable()
+			end
+		end) else nil
 		local eventConnection_1 = default.VoiceJoinProgressChanged.Event:Connect(var11)
 		local eventConnection_2 = default.showVoiceUI.Event:Connect(var12)
 		
@@ -136,7 +156,10 @@ return function()
 			eventConnection = default.hideVoiceUI.Event:Connect(var13)
 		end
 		return function()
-			-- upvalues: eventConnection_1 (ref), eventConnection_2 (write), eventConnection (write)
+			-- upvalues: var15 (write), eventConnection_1 (ref), eventConnection_2 (write), eventConnection (write)
+			if var15 then
+				var15()
+			end
 			if eventConnection_1 then
 				eventConnection_1:Disconnect()
 			end
@@ -149,9 +172,15 @@ return function()
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var14 (ref)
+		-- upvalues: var10 (ref), fFlagProactiveVoiceRestrictionsUFRModule (copy), var14 (ref)
 		var10()
+		
+		if fFlagProactiveVoiceRestrictionsUFRModule then
+			return var14()
+		end
 		var14()
+		
+		return nil
 	end, {})
 	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), default (copy)

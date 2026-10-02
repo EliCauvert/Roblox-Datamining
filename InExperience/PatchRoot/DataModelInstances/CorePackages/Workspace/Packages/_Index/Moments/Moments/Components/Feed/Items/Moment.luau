@@ -6,8 +6,9 @@ local momentItemModule = require(script.MomentItem)
 local momentItemSkeletonModule = require(script.MomentItemSkeleton)
 local _ = require(script.createMomentStore)
 local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.MomentsTypes)
+local momentsTypesModule = require(parent.MomentsTypes)
 local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
 local getFFlagMomentsRenderPostAssetsModule = require(parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
 local makeRecommendationAttributionModule = require(moments.Analytics.makeRecommendationAttribution)
@@ -47,7 +48,7 @@ return {
 			return momentAttribution(p1.moment)
 		end,
 		render = function(p1, _)
-			-- upvalues: getFFlagMomentsRenderPostAssetsModule (ref), toMediaItemModule (ref), reactModule (ref), momentMediaView (ref), getMomentsPreferencesStoreModule (ref), sharedFlagsModule (ref), commentsModule (ref), momentItemModule (ref), createMediaSurface (ref)
+			-- upvalues: getFFlagMomentsRenderPostAssetsModule (ref), toMediaItemModule (ref), reactModule (ref), momentMediaView (ref), getMomentsPreferencesStoreModule (ref), fFlagMomentsOptimisticProfilePending (ref), momentsTypesModule (ref), sharedFlagsModule (ref), commentsModule (ref), momentItemModule (ref), createMediaSurface (ref)
 			local moment = p1.moment
 			
 			if moment == nil then
@@ -81,6 +82,7 @@ return {
 					isSponsored = moment.metadata.partnerUploadType == "influencer",
 					description = moment.metadata.description,
 					isModerated = moment.isModerated == true,
+					isPending = fFlagMomentsOptimisticProfilePending and moment.status == momentsTypesModule.Enums.MomentStatus.Pending,
 					commentCount = if sharedFlagsModule.FFlagMomentsComments then commentsModule.getSeededCommentCount(moment.comments) else nil,
 					feedItemId = if recommendationMetadata ~= nil then nil else recommendationMetadata.feedItemId,
 					feedSessionId = if recommendationMetadata ~= nil then nil else recommendationMetadata.tracingId

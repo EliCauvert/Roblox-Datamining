@@ -176,10 +176,12 @@ return {
 			COL_SCALE_VR = 0.75,
 			IMAGE_MULTIPLIER_PORTRAIT = 0.75,
 			IMAGE_MULTIPLIER_VR = 0.45,
-			LEFT_COL_SCALE = 0.285,
 			RIGHT_COL_SCALE = 0.75,
 			RIGHT_COL_SCALE_VR = 0.715,
-			NO_PADDING_CUTOFF_Y = 650
+			NO_PADDING_CUTOFF_Y = 650,
+			COL_SIZE = 0.25,
+			COL_SIZE_PORTRAIT = 0.5,
+			LEFT_COL_SCALE = if require(parent.Flags.FFlagHelpPageCCL) then 0.25 else 0.285
 		},
 		TOUCH_ENUM_TO_ICON = {
 			[touchControlsEnumModule.TopLeft] = t.ZOOM,

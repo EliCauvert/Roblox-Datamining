@@ -7,6 +7,7 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 return {
 	categories = {
 		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
 		validationEnumsModule.UploadCategory.RIGID_ACCESSORY,
 		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
 		validationEnumsModule.UploadCategory.MAKEUP

@@ -9,7 +9,6 @@ local fFlagEnableArgus = sharedFlagsModule.FFlagEnableArgus
 local fFlagEnableArgusFlyoutEntry = sharedFlagsModule.FFlagEnableArgusFlyoutEntry
 local fFlagEnableArgusTab = sharedFlagsModule.FFlagEnableArgusTab
 local fFlagArgoEnableMoments = sharedFlagsModule.FFlagArgoEnableMoments
-local fFlagArgusTabImpliesFlyout = sharedFlagsModule.FFlagArgusTabImpliesFlyout
 local debugMomentsGating = game:DefineFastFlag("DebugMomentsGating", false)
 local fFlagGuacMomentsFeatureList = sharedFlagsModule.FFlagGuacMomentsFeatureList
 local fFlagFlyoutRemoveMomentsForArgoEnabled = sharedFlagsModule.FFlagFlyoutRemoveMomentsForArgoEnabled
@@ -18,7 +17,7 @@ local getMomentsCapabilitiesModule = require(momentsCommon.Stores.GetMomentsCapa
 local var2 = if fFlagFlyoutRemoveMomentsForArgoEnabled then require(momentsCommon.Utils.getIsSupportedOnPlatform) else nil
 
 return function()
-	-- upvalues: fFlagEnableArgus (ref), fFlagGuacMomentsFeatureList (ref), getMomentsCapabilitiesModule (ref), useSignalState (ref), useAppPolicy (ref), fFlagFlyoutRemoveMomentsForArgoEnabled (ref), var2 (ref), argusExperimentModule (ref), reactModule (ref), fFlagArgoEnableMoments (ref), fFlagEnableArgusFlyoutEntry (ref), fFlagArgusTabImpliesFlyout (ref), fFlagEnableArgusTab (ref), debugMomentsGating (ref), var1 (ref)
+	-- upvalues: fFlagEnableArgus (ref), fFlagGuacMomentsFeatureList (ref), getMomentsCapabilitiesModule (ref), useSignalState (ref), useAppPolicy (ref), fFlagFlyoutRemoveMomentsForArgoEnabled (ref), var2 (ref), argusExperimentModule (ref), reactModule (ref), fFlagArgoEnableMoments (ref), fFlagEnableArgusFlyoutEntry (ref), fFlagEnableArgusTab (ref), debugMomentsGating (ref), var1 (ref)
 	local var3 = nil
 	local var4 = nil
 	
@@ -34,7 +33,7 @@ return function()
 	local var8 = fFlagEnableArgus and var6
 	local var9 = argusExperimentModule.useExperimentConfig({ isExposureEnabled = false })
 	local var10 = reactModule.useMemo(function()
-		-- upvalues: var9 (ref), fFlagArgoEnableMoments (copy), var8 (ref), fFlagEnableArgus (ref), var6 (ref), var7 (ref), fFlagEnableArgusFlyoutEntry (copy), fFlagArgusTabImpliesFlyout (copy), fFlagEnableArgusTab (copy), fFlagGuacMomentsFeatureList (copy), var4 (write)
+		-- upvalues: var9 (ref), fFlagArgoEnableMoments (copy), var8 (ref), fFlagEnableArgus (ref), var6 (ref), var7 (ref), fFlagEnableArgusFlyoutEntry (copy), fFlagEnableArgusTab (copy), fFlagGuacMomentsFeatureList (copy), var4 (write)
 		local entryType = var9.entryType
 		local isTab = entryType == "tab"
 		local var11_1_1 = fFlagArgoEnableMoments and var8
@@ -44,7 +43,7 @@ return function()
 			isAmpPolicyEnabled = var6,
 			isMomentsEnabled = var8,
 			isSupportedOnPlatform = var7,
-			isFlyoutEntryEnabled = var11_1_1 or (var8 and (if entryType ~= "flyout" then fFlagEnableArgusFlyoutEntry or fFlagArgusTabImpliesFlyout and isTab else true)),
+			isFlyoutEntryEnabled = var11_1_1 or (var8 and (if entryType ~= "flyout" then fFlagEnableArgusFlyoutEntry or isTab else true)),
 			isTabEnabled = var11_1_1 or var8 and (isTab or fFlagEnableArgusTab),
 			platformIntegrationEnabled = var11_1_1 or var8 and var9.platformIntegration,
 			influencerUploadsEnabled = var8 and (var9.influencerUploads and (if fFlagGuacMomentsFeatureList then var4 else true)),

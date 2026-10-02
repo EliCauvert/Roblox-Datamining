@@ -7,7 +7,10 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 
 return {
 	fflag = require(parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning),
-	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
+	categories = {
+		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
+	},
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
 	run = function(p1, p2)
 		-- upvalues: UGCValidationService (ref), constantsModule (ref), errorSourceStringsModule (ref)

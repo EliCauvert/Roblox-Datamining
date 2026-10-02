@@ -1,5 +1,6 @@
 ﻿local moments = script:FindFirstAncestor("Moments")
 local parent = moments.Parent
+local localizationModule = require(parent.Localization)
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local useEventCallback = require(parent.ReactUtils).useEventCallback
@@ -9,23 +10,34 @@ local getCommentsListCoordinatorModule = require(moments.Components.Comments.Lis
 local _ = require(script.Parent.CommentsComposerView)
 local normalizeCommentTextModule = require(script.Parent.normalizeCommentText)
 local truncateToMaxLengthModule = require(script.Parent.truncateToMaxLength)
+local useLocalization = localizationModule.Hooks.useLocalization
 local t = {
-	TextFilterRejected = "Your comment was not posted. Please revise it and try again.",
-	RateLimited = "You are commenting too quickly. Please try again later.",
-	InvalidRequest = "Your comment couldn't be posted. Please try again.",
-	CommentsDisabledByCreator = "Comments are turned off for this Moment.",
-	ViewerNotEligibleToWrite = "You can't comment on this Moment.",
-	ViewerNotEligibleToRead = "This Moment is no longer available.",
-	MomentUnavailable = "This Moment is no longer available.",
-	AuthenticationRequired = "Please sign in again to comment.",
-	CommentsEndpointDisabled = "Commenting isn't available right now. Please try again later.",
-	CommentsEndpointNotImplemented = "Commenting isn't available right now. Please try again later.",
-	SubmissionOutcomeUnknown = "We couldn't confirm your last comment posted. Check the comments before sending again."
+	textFilterRejected = "Feature.Moments.Label.CommentRejectedByFilter",
+	rateLimited = "Feature.Moments.Label.CommentRateLimited",
+	submissionFailed = "Feature.Moments.Label.CommentPostFailed",
+	outcomeUnknown = "Feature.Moments.Label.CommentPostOutcomeUnknown",
+	commentsDisabled = "Feature.Moments.Label.CommentsTurnedOff",
+	writeNotAllowed = "Feature.Moments.Label.CommentNotAllowed",
+	momentUnavailable = "Feature.Moments.Label.MomentNoLongerAvailable",
+	signInRequired = "Feature.Moments.Label.CommentSignInRequired",
+	commentsOff = "Feature.Moments.Label.CommentingUnavailable"
+}
+local t_1 = {
+	TextFilterRejected = "textFilterRejected",
+	RateLimited = "rateLimited",
+	CommentsDisabledByCreator = "commentsDisabled",
+	ViewerNotEligibleToWrite = "writeNotAllowed",
+	ViewerNotEligibleToRead = "momentUnavailable",
+	MomentUnavailable = "momentUnavailable",
+	AuthenticationRequired = "signInRequired",
+	CommentsEndpointDisabled = "commentsOff",
+	CommentsEndpointNotImplemented = "commentsOff",
+	SubmissionOutcomeUnknown = "outcomeUnknown"
 }
 
 local function _(p1)
-	-- upvalues: t (ref)
-	return t[p1] or "Your comment could not be posted. Please try again."
+	-- upvalues: t_1 (ref)
+	return t_1[p1] or "submissionFailed"
 end
 
 local _ = function(p1)
@@ -34,7 +46,7 @@ local _ = function(p1)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), getCommentCollectionStoreModule (ref), signalsReactModule (ref), getCommentsListCoordinatorModule (ref), t (ref), normalizeCommentTextModule (ref), fIntMomentsCommentMaxLengthModule (ref), truncateToMaxLengthModule (ref), useEventCallback (ref)
+	-- upvalues: reactModule (ref), useLocalization (ref), t (ref), getCommentCollectionStoreModule (ref), signalsReactModule (ref), getCommentsListCoordinatorModule (ref), t_1 (ref), normalizeCommentTextModule (ref), fIntMomentsCommentMaxLengthModule (ref), truncateToMaxLengthModule (ref), useEventCallback (ref)
 	local var1, var2 = reactModule.useState("")
 	local var3, var4 = reactModule.useBinding("")
 	local var5 = reactModule.useCallback(function(p2)
@@ -42,49 +54,51 @@ return function(p1)
 		var2(p2)
 		var4(p2)
 	end, { var4 })
-	local var6, var7 = reactModule.useState(nil)
-	local var8 = getCommentCollectionStoreModule(false)
-	local var9 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var8 (ref), p1 (ref)
-		return var8.getState(p1.feedItemId)
-	end, { var8, p1.feedItemId }))
-	local var10 = getCommentsListCoordinatorModule(false)
-	local submissionError = var9.submissionError
-	local var11 = DateTime.now().UnixTimestampMillis < signalsReactModule.useSignalState(var10.getPostCooldownUntilMs)
+	local var6 = useLocalization(t)
+	local var7, var8 = reactModule.useState(nil)
+	local var9 = getCommentCollectionStoreModule(false)
+	local var10 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: var9 (ref), p1 (ref)
+		return var9.getState(p1.feedItemId)
+	end, { var9, p1.feedItemId }))
+	local var11 = getCommentsListCoordinatorModule(false)
+	local submissionError = var10.submissionError
+	local var12 = DateTime.now().UnixTimestampMillis < signalsReactModule.useSignalState(var11.getPostCooldownUntilMs)
 	reactModule.useEffect(function()
-		-- upvalues: submissionError (ref), var5 (ref), var7 (ref), t (copy), var8 (ref), p1 (ref)
+		-- upvalues: submissionError (ref), var5 (ref), var8 (ref), t_1 (copy), var9 (ref), p1 (ref)
 		if submissionError == nil then
 			return
 		end
 		var5(submissionError.text)
-		var7(t[submissionError.errorCode] or "Your comment could not be posted. Please try again.")
-		var8.clearSubmissionError(p1.feedItemId)
+		var8(t_1[submissionError.errorCode] or "submissionFailed")
+		var9.clearSubmissionError(p1.feedItemId)
 	end, {
-		var8,
+		var9,
 		p1.feedItemId,
 		var5,
 		if submissionError ~= nil then nil else submissionError.errorCode,
 		if submissionError ~= nil then nil else submissionError.text
 	})
-	local var12 = var9.pendingSubmission ~= nil
-	local var13 = if var11 then false else not var12 and not (normalizeCommentTextModule(var1) == "")
+	local var13 = var10.pendingSubmission ~= nil
+	local var14 = if var12 then false else not var13 and not (normalizeCommentTextModule(var1) == "")
+	local var15 = if var12 and var7 == nil then "rateLimited" else var7
 	
 	return {
 		text = var3,
-		isInputDisabled = var12,
-		isSubmitEnabled = var13,
-		errorMessage = if var11 and var6 == nil then "You are commenting too quickly. Please try again later." else var6,
+		isInputDisabled = var13,
+		isSubmitEnabled = var14,
+		errorMessage = if var15 ~= nil then nil else var6[var15],
 		onTextChanged = reactModule.useCallback(function(p2)
-			-- upvalues: var5 (ref), fIntMomentsCommentMaxLengthModule (copy), truncateToMaxLengthModule (copy), var7 (ref)
+			-- upvalues: var5 (ref), fIntMomentsCommentMaxLengthModule (copy), truncateToMaxLengthModule (copy), var8 (ref)
 			var5(if fIntMomentsCommentMaxLengthModule > 0 then truncateToMaxLengthModule(p2, fIntMomentsCommentMaxLengthModule) else p2)
-			var7(nil)
+			var8(nil)
 		end, { var5 }),
 		onSubmit = useEventCallback(function()
-			-- upvalues: var13 (write), var10 (ref), p1 (ref), normalizeCommentTextModule (copy), var1 (ref), var5 (ref), var7 (ref)
-			if not var13 then return end
-			if var10.submitComment(p1.feedItemId, p1.sessionId, normalizeCommentTextModule(var1)) then
+			-- upvalues: var14 (write), var11 (ref), p1 (ref), normalizeCommentTextModule (copy), var1 (ref), var5 (ref), var8 (ref)
+			if not var14 then return end
+			if var11.submitComment(p1.feedItemId, p1.sessionId, normalizeCommentTextModule(var1)) then
 				var5("")
-				var7(nil)
+				var8(nil)
 			end
 		end)
 	}

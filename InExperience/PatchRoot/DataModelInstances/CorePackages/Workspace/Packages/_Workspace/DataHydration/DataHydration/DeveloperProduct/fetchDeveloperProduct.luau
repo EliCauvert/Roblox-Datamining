@@ -40,15 +40,16 @@ local _ = function(p1, p2, p3)
 	return ("%s/%d"):format(("%s/developer-products/v2/universes/%d/developer-products"):format(p1, p2), p3)
 end
 
-local _ = function(p1, p2)
-	return p1 .. "--" .. "-------DeveloperProductFormBoundary" .. "\r\n" .. ("Content-Disposition: form-data; name=\"%s\""):format(p2.name) .. "\r\n" .. "\r\n" .. p13.value .. "\r\n"
+local function appendPart(p1, p2)
+	return p1 .. "--" .. "-------DeveloperProductFormBoundary" .. "\r\n" .. (if p2.fileName ~= nil then ("Content-Disposition: form-data; name=\"%s\""):format(p2.name) else ("Content-Disposition: form-data; name=\"%s\"; filename=\"%s\""):format(p2.name, p2.fileName)) .. "\r\n" .. (if p2.contentType ~= nil then "" else "Content-Type: " .. p13.contentType .. "\r\n") .. "\r\n" .. p13.value .. "\r\n"
 end
 
 local _ = function(p1)
+	-- upvalues: appendPart (ref)
 	local var1 = ""
 	
 	for i, v in p1 do
-		var1 ..= "--" .. "-------DeveloperProductFormBoundary" .. "\r\n" .. ("Content-Disposition: form-data; name=\"%s\""):format(v.name) .. "\r\n" .. "\r\n" .. v.value .. "\r\n"
+		var1 = appendPart(var1, v)
 	end
 	return var1 .. "--" .. "-------DeveloperProductFormBoundary" .. "--" .. "\r\n"
 end
@@ -72,6 +73,14 @@ local function requestParts(p2)
 		table.insert(t, {
 			name = "isManagedPricingEnabled",
 			value = tostring(p2.isManagedPricingEnabled)
+		})
+	end
+	if p2.imageFile ~= nil then
+		table.insert(t, {
+			name = "imageFile",
+			value = p2.imageFile.content,
+			fileName = p2.imageFile.fileName,
+			contentType = p2.imageFile.contentType
 		})
 	end
 	return t
@@ -149,12 +158,12 @@ local _ = function(p2)
 end
 
 local function multipartRequest(p2, p3, p4, p5, p6, p7)
-	-- upvalues: createRequest (ref), encodeRaw (ref), asPromise (ref)
+	-- upvalues: createRequest (ref), appendPart (ref), encodeRaw (ref), asPromise (ref)
 	local t = { networkImpl = p2, method = p3, url = p4 }
 	local var2 = ""
 	
 	for i, v in p5 do
-		var2 ..= "--" .. "-------DeveloperProductFormBoundary" .. "\r\n" .. ("Content-Disposition: form-data; name=\"%s\""):format(v.name) .. "\r\n" .. "\r\n" .. v.value .. "\r\n"
+		var2 = appendPart(var2, v)
 	end
 	t.body = var2 .. "--" .. "-------DeveloperProductFormBoundary" .. "--" .. "\r\n"
 	t.headers = {}
@@ -235,7 +244,8 @@ function t.create(p10, p11, p12)
 		description = p11.description,
 		priceInRobux = p11.priceInRobux,
 		isForSale = if p11.isForSale ~= nil then false else p11.isForSale,
-		isManagedPricingEnabled = p11.isManagedPricingEnabled
+		isManagedPricingEnabled = p11.isManagedPricingEnabled,
+		imageFile = p11.imageFile
 	}), "developer-product.create", decodeConfig)
 end
 
@@ -256,7 +266,14 @@ function t.update(p10, p11, p12, p13)
 		}
 	end
 	
-	return multipartRequest((p13 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()), "PATCH", ("%s/%d"):format(("%s/developer-products/v2/universes/%d/developer-products"):format(p13.baseUrl or urlBase.APIS, p10), p11), requestParts(p12), "developer-product.update", function(p14)
+	return multipartRequest((p13 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()), "PATCH", ("%s/%d"):format(("%s/developer-products/v2/universes/%d/developer-products"):format(p13.baseUrl or urlBase.APIS, p10), p11), requestParts({
+		imageFile = nil,
+		name = p12.name,
+		description = p12.description,
+		priceInRobux = p12.priceInRobux,
+		isForSale = p12.isForSale,
+		isManagedPricingEnabled = p12.isManagedPricingEnabled
+	}), "developer-product.update", function(p14)
 		-- upvalues: errorFrom (copy), var3 (ref)
 		local statusCode = p14.statusCode
 		

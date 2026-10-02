@@ -7,6 +7,8 @@ local _ = require(robloxSubscriptionPurchaseApp.types)
 local _ = require(robloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
 local createPaymentSessionModule = require(robloxSubscriptionPurchaseApp.Network.createPaymentSession)
 local getRobloxSubscriptionProductsModule = require(robloxSubscriptionPurchaseApp.Network.getRobloxSubscriptionProducts)
+local getRobloxSubscriptionProductsDirectModule = require(robloxSubscriptionPurchaseApp.Network.getRobloxSubscriptionProductsDirect)
+local fFlagRobloxSubscriptionProductsDirectFetchModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxSubscriptionProductsDirectFetch)
 local getAmpFeatureAccessModule = require(robloxSubscriptionPurchaseApp.Network.getAmpFeatureAccess)
 local logRobloxSubscriptionUpsellCounterModule = require(robloxSubscriptionPurchaseApp.Utils.logRobloxSubscriptionUpsellCounter)
 local logSubscriptionPurchaseFlowEventModule = require(robloxSubscriptionPurchaseApp.Utils.logSubscriptionPurchaseFlowEvent)
@@ -20,7 +22,7 @@ local ampAccessResponseModule = require(robloxSubscriptionPurchaseApp.Enums.AmpA
 local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
 
 function initiateRobloxSubscriptionPurchaseInternal(p1)
-	-- upvalues: logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), getAppFeaturePolicies (ref), transitionToErrorModule (ref), errorReasonModule (ref), promptStateModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), createPaymentSessionModule (ref), getRobloxSubscriptionProductsModule (ref), fFlagRobloxPlusAmpSubscriptionCheckModule (ref), getAmpFeatureAccessModule (ref), promiseModule (ref), ampAccessResponseModule (ref)
+	-- upvalues: logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), getAppFeaturePolicies (ref), transitionToErrorModule (ref), errorReasonModule (ref), promptStateModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), createPaymentSessionModule (ref), fFlagRobloxSubscriptionProductsDirectFetchModule (ref), getRobloxSubscriptionProductsDirectModule (ref), getRobloxSubscriptionProductsModule (ref), fFlagRobloxPlusAmpSubscriptionCheckModule (ref), getAmpFeatureAccessModule (ref), promiseModule (ref), ampAccessResponseModule (ref)
 	logRobloxSubscriptionUpsellCounterModule(robloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalInitiatedCounter)
 	local var1 = robloxSubscriptionStoreModule.get()
 	local var2 = if fFlagRobloxPlusFAEFreeTrialModule then var1.getPurchaseUIOptions() else nil
@@ -37,7 +39,7 @@ function initiateRobloxSubscriptionPurchaseInternal(p1)
 	end
 	local list = {
 		createPaymentSessionModule(p1),
-		getRobloxSubscriptionProductsModule()
+		if fFlagRobloxSubscriptionProductsDirectFetchModule then getRobloxSubscriptionProductsDirectModule() else getRobloxSubscriptionProductsModule()
 	}
 	
 	if fFlagRobloxPlusAmpSubscriptionCheckModule then

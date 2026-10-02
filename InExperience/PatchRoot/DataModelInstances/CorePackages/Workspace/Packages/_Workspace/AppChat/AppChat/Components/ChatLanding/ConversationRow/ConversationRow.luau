@@ -16,7 +16,7 @@ local squadComponentAccessWrapper = squadsModule.SquadComponentAccessWrapper
 local squadJoinButton = squadsModule.SquadJoinButton
 local var1 = reactModule.memo(conversationFacePileModule)
 
-return reactModule.memo(function(p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useConversationRowPresentationModule (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), fFlagAppChatExtendConversationListRowDividersModule (ref), var1 (ref), fFlagAppChatTimestampInSubtitleConversationRowModule (ref), conversationRowSubtitleModule (ref), squadComponentAccessWrapper (ref), squadJoinButton (ref), squadButtonSourceEnum (ref), domLocatorsModule (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
 	local var2 = useConversationRowPresentationModule({
 		conversationId = p1.conversationId,
@@ -30,11 +30,24 @@ return reactModule.memo(function(p1)
 		fireClickEvent = p1.fireClickEvent
 	})
 	local var3 = foundationModule.Hooks.useTokens()
+	local rowRef = var2.rowRef
+	local var4 = reactModule.useCallback(function(p3)
+		-- upvalues: rowRef (ref), p2 (ref)
+		rowRef.current = p3
+		
+		if type(p2) == "function" then
+			p2(p3)
+			
+			return
+		elseif p2 ~= nil then
+			p2.current = p3
+		end
+	end, { p2, rowRef })
 	
 	if not var2.hasConversation then
 		return nil
 	end
-	local var4
+	local var5
 	local uDim = UDim.new(0, var2.pagePaddingLeft)
 	local uDim_1 = UDim.new(0, var2.pagePaddingRight)
 	local showBackground = var2.showBackground
@@ -59,7 +72,7 @@ return reactModule.memo(function(p1)
 		stateLayer = if showBackground then {
 			affordance = foundationModule.Enums.StateLayerAffordance.Background
 		} else nil,
-		ref = var2.rowRef
+		ref = var4
 	}
 	local t_3 = {
 		debugCellContainer = if p1.debugCellValue then reactModule.createElement("Folder", {}, {
@@ -154,8 +167,8 @@ return reactModule.memo(function(p1)
 	local t_11 = {}
 	
 	if var2.showSquadButton then
-		var4 = reactModule.createElement
-		var4 = var4(foundationModule.View, {
+		var5 = reactModule.createElement
+		var5 = var5(foundationModule.View, {
 			tag = "row align-x-right align-y-center auto-xy",
 			LayoutOrder = 0
 		}, {
@@ -175,9 +188,9 @@ return reactModule.memo(function(p1)
 			})
 		})
 	else
-		var4 = nil
+		var5 = nil
 	end
-	t_11.squadButton = var4
+	t_11.squadButton = var5
 	t_11.timestampCluster = reactModule.createElement(foundationModule.View, {
 		tag = "row align-y-center gap-xsmall auto-xy",
 		Name = "timestampCluster",
@@ -211,4 +224,4 @@ return reactModule.memo(function(p1)
 	t_1.cell = createElement_1(view_1, t_2, t_3)
 	
 	return createElement(view, t, t_1)
-end)
+end))

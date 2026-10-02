@@ -16,14 +16,11 @@ local function _(p1, p2)
 	elseif p2 == nil then
 		p2 = 1
 	end
-	return (if p1 == deviceModule.Console then 1.5 else 1) * u160
+	return (if p1 == deviceModule.Console then 1.5 else 1) * u159
 end
 
 local function applyTokenOverrides(p1, p2)
-	-- upvalues: flagsModule (ref), tokenProcessingUtilitiesModule (ref)
-	if not flagsModule.FoundationTokenOverrides then
-		return p1
-	end
+	-- upvalues: tokenProcessingUtilitiesModule (ref)
 	for i, v in p2 do
 		local var2 = tokenProcessingUtilitiesModule.resolveTokenOverride(p1, i, v)
 		

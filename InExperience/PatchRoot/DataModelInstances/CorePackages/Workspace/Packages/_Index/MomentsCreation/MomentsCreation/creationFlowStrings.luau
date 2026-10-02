@@ -31,6 +31,7 @@ return {
 	MusicSavedEmptySubtitle = "Feature.Catalog.Message.Favorites.Empty",
 	MusicSavedEmptyTitle = "Feature.Moments.Description.NothingHereYet",
 	MusicTabTrending = "Feature.Moments.Label.FeedTrending",
+	PublishingAllowComments = "Feature.Moments.Label.AllowComments",
 	PublishingCtaContinue = "Feature.Moments.Action.Continue",
 	PublishingCtaPrimary = "Feature.Moments.Action.Post",
 	PublishingCtaReturn = if fFlagMomentsCreationBackCta then "Feature.Moments.Action.Back" else "Feature.Moments.Action.Return",

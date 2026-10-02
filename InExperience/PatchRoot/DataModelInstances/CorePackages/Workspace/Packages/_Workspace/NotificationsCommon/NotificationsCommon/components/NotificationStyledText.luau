@@ -5,6 +5,7 @@ local useStyle = dependenciesModule.UIBlox.Core.Style.useStyle
 local _ = require(parent_1.type)
 local text = require(parent.AppCommonLib).Text
 local react = dependenciesModule.React
+local foundationFontFaceMigration = require(parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local t = {
 	highlight = function(p1)
 		return "<b>" .. p0 .. "</b>"
@@ -81,7 +82,7 @@ local function formatString(p1)
 end
 
 return function(p2)
-	-- upvalues: useStyle (ref), formatString (ref), react (ref)
+	-- upvalues: useStyle (ref), formatString (ref), react (ref), foundationFontFaceMigration (ref)
 	local var5 = useStyle()
 	
 	return react.createElement("TextLabel", {
@@ -91,7 +92,8 @@ return function(p2)
 		Text = if p2.Text then formatString(p2.Text) else "",
 		TextColor3 = p2.TextColor3 or var5.Theme.TextDefault.Color,
 		TextTransparency = p2.TextTransparency or var5.Theme.TextDefault.Transparency,
-		Font = p2.Font or var5.Font.Body.Font,
+		Font = if foundationFontFaceMigration and p2.FontFace then nil else p2.Font or var5.Font.Body.Font,
+		FontFace = if foundationFontFaceMigration then p2.FontFace else nil,
 		AutomaticSize = p2.AutomaticSize,
 		Size = p2.Size,
 		TextSize = p2.TextSize,

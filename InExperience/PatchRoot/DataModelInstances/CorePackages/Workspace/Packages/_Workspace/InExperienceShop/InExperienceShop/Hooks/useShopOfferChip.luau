@@ -2,11 +2,14 @@
 local parent = inExperienceShop.Parent
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
-local fFlagEnableUserOffers = require(parent.SharedFlags).FFlagEnableUserOffers
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagEnableUserOffers = sharedFlagsModule.FFlagEnableUserOffers
+local fFlagHideOfferNotificationsWhenShopEmpty = sharedFlagsModule.FFlagHideOfferNotificationsWhenShopEmpty
 local inExperienceOffersModule = require(parent.InExperienceOffers)
 local useOffersForKey = inExperienceOffersModule.Hooks.useOffersForKey
 local selectActiveOffer = inExperienceOffersModule.Utils.selectActiveOffer
 local useRemainingTimeText = inExperienceOffersModule.Hooks.useRemainingTimeText
+local useShopHasItems = inExperienceOffersModule.Hooks.useShopHasItems
 local offerDialogStateModule = require(inExperienceShop.Components.OfferDialogs.OfferDialogState)
 local useCloseOnCoreMenuModule = require(inExperienceShop.Hooks.useCloseOnCoreMenu)
 local useOfferModalTextModule = require(inExperienceShop.Hooks.useOfferModalText)
@@ -14,7 +17,7 @@ local fFlagShopCloseOfferDialogOnCoreMenuModule = require(inExperienceShop.Flags
 local fFlagShowLargerOfferBannerOnDesktop2Module = require(inExperienceShop.Flags.FFlagShowLargerOfferBannerOnDesktop2)
 
 return function(p1, p2)
-	-- upvalues: useOffersForKey (ref), reactModule (ref), selectActiveOffer (ref), useRemainingTimeText (ref), fFlagEnableUserOffers (ref), useLocalization (ref), fFlagShowLargerOfferBannerOnDesktop2Module (ref), useOfferModalTextModule (ref), offerDialogStateModule (ref), fFlagShopCloseOfferDialogOnCoreMenuModule (ref), useCloseOnCoreMenuModule (ref)
+	-- upvalues: useOffersForKey (ref), reactModule (ref), selectActiveOffer (ref), useRemainingTimeText (ref), fFlagHideOfferNotificationsWhenShopEmpty (ref), useShopHasItems (ref), fFlagEnableUserOffers (ref), useLocalization (ref), fFlagShowLargerOfferBannerOnDesktop2Module (ref), useOfferModalTextModule (ref), offerDialogStateModule (ref), fFlagShopCloseOfferDialogOnCoreMenuModule (ref), useCloseOnCoreMenuModule (ref)
 	local var1 = useOffersForKey(p1)
 	local var2 = reactModule.useMemo(function()
 		-- upvalues: selectActiveOffer (copy), var1 (ref)
@@ -23,6 +26,10 @@ return function(p1, p2)
 	local var3 = if var2 ~= nil then nil else var2.presentationData.banner
 	local var4 = useRemainingTimeText(if var2 then var2.expirationTimeInUTC else nil)
 	local var5 = fFlagEnableUserOffers and (var2 ~= nil and var4 ~= nil)
+	
+	if fFlagHideOfferNotificationsWhenShopEmpty and not useShopHasItems() then
+		var5 = false
+	end
 	local var6 = useLocalization({
 		offerEndTime = {
 			"Feature.InExperienceShop.Label.OfferEndTime",

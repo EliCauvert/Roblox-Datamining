@@ -17,5 +17,7 @@
 	MomentsPublishedByCaptureType = "MomentsPublishedByCaptureType",
 	MomentsEditToolOpened = "MomentsEditToolOpened",
 	MomentsEditToolAbandoned = "MomentsEditToolAbandoned",
-	MomentsGenerateText = "MomentsGenerateText"
+	MomentsGenerateText = "MomentsGenerateText",
+	MomentsCommentsListLoad = "MomentsCommentsListLoad",
+	MomentsCommentPost = "MomentsCommentPost"
 }

@@ -6,7 +6,10 @@ local getFFlagUGCValidateAQScoreWarningsModule = require(parent.flags.getFFlagUG
 local UGCMinCageRelevancyThreshold = game:DefineFastInt("UGCMinCageRelevancyThreshold", 10)
 
 return {
-	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
+	categories = {
+		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
+	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQCageQualityLC),
 	run = function(p1, p2)
 		-- upvalues: UGCMinCageRelevancyThreshold (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)

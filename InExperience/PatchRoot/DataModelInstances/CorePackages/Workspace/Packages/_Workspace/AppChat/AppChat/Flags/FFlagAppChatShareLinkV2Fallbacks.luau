@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AppChatShareLinkV2Fallbacks", false) and require(script:FindFirstAncestor("AppChat").Flags.FFlagAppChatResolveShareLinkV2)

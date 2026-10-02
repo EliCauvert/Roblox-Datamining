@@ -16,7 +16,6 @@ local trustedContactsModalModule = require(script.Parent.TrustedContactsModal)
 local normalizeTFActionsEnumToModalVariantModule = require(trustedContacts.TrustedFriendActions.normalizeTFActionsEnumToModalVariant)
 local fFlagTCLearnMoreLinkModule = require(trustedContacts.Flags.FFlagTCLearnMoreLink)
 local fFlagTFWithActionsCheck = require(parent.SharedFlags).FFlagTFWithActionsCheck
-local fFlagTrustedFriendsUseEnumCTA = require(parent.SharedFlags).FFlagTrustedFriendsUseEnumCTA
 local fFlagTFUpdateAnalyticsModule = require(trustedContacts.Flags.FFlagTFUpdateAnalytics)
 local fFlagTFNonFriendsPermittedModule = require(trustedContacts.Flags.FFlagTFNonFriendsPermitted)
 local fFlagEnableTrustedFriendsWizardVPCPrologueModule = require(trustedContacts.Flags.FFlagEnableTrustedFriendsWizardVPCPrologue)
@@ -34,7 +33,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: fFlagTFWithActionsCheck (ref), reactModule (ref), normalizeTFActionsEnumToModalVariantModule (ref), sources (ref), trustedConnectionStatus (ref), fFlagTFNonFriendsPermittedModule (ref), getTCStatusModule (ref), useTCAnalytics (ref), fFlagTFUpdateAnalyticsModule (ref), eventNames (ref), useLocalization (ref), fFlagTCLearnMoreLinkModule (ref), list (ref), roactUtilsModule (ref), useModalTextsModule (ref), useModalButtonActionsModule (ref), fFlagEnableTrustedFriendsWizardVPCPrologueModule (ref), fFlagTrustedFriendsUseEnumCTA (ref), trustedConnectionsLearnMoreLink (ref), trustedContactsModalModule (ref)
+	-- upvalues: fFlagTFWithActionsCheck (ref), reactModule (ref), normalizeTFActionsEnumToModalVariantModule (ref), sources (ref), trustedConnectionStatus (ref), fFlagTFNonFriendsPermittedModule (ref), getTCStatusModule (ref), useTCAnalytics (ref), fFlagTFUpdateAnalyticsModule (ref), eventNames (ref), useLocalization (ref), fFlagTCLearnMoreLinkModule (ref), list (ref), roactUtilsModule (ref), useModalTextsModule (ref), useModalButtonActionsModule (ref), fFlagEnableTrustedFriendsWizardVPCPrologueModule (ref), trustedConnectionsLearnMoreLink (ref), trustedContactsModalModule (ref)
 	local var1
 	local _ = nil
 	local _ = nil
@@ -136,7 +135,7 @@ return function(p1)
 			shareUrl = p1.externalNavigation.shareUrl,
 			openAmpWizard = if fFlagEnableTrustedFriendsWizardVPCPrologueModule then p1.externalNavigation.openAmpWizard else nil,
 			dismissModal = if fFlagEnableTrustedFriendsWizardVPCPrologueModule then p1.externalNavigation.closeModal else nil,
-			fireAnalyticsEvent = if fFlagTrustedFriendsUseEnumCTA then fireAnalyticsEvent else nil
+			fireAnalyticsEvent = fireAnalyticsEvent
 		}),
 		onCloseModal = var5,
 		learnMoreText = if fFlagTCLearnMoreLinkModule then var6.learnMoreText else nil,

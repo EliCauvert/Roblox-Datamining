@@ -124,6 +124,7 @@ return function(p1)
 					isReactionSelected = p1.isReactionSelected == true,
 					isReactionDisabled = p1.isReactionDisabled == true,
 					reactionCountLabel = p1.reactionCountLabel or "0",
+					isReactionCountHidden = p1.isReactionCountHidden,
 					onReactionActivated = p1.onReactionActivated or noop
 				}) else nil
 			}),

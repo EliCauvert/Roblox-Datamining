@@ -23,6 +23,7 @@ local messageType = enumsModule.MessageType
 local messageVisibility = enumsModule.MessageVisibility
 local getFFlagEnableSocialCards = sharedFlagsModule.GetFFlagEnableSocialCards
 local getConversationMessageViewModelStoreModule = require(appChat.Stores.GetConversationMessageViewModelStore)
+local fFlagAppChatIncrementalPaginationProjectionModule = require(appChat.Flags.FFlagAppChatIncrementalPaginationProjection)
 local fFlagAppChatSignalsMessageStoreModule = require(appChat.Flags.FFlagAppChatSignalsMessageStore)
 
 local function _(a, b, p1, p2)
@@ -156,19 +157,27 @@ local t = {
 		end
 	end,
 	[messageModerated.name] = function(p6, p7)
-		-- upvalues: messageStatus (ref)
+		-- upvalues: messageStatus (ref), fFlagAppChatIncrementalPaginationProjectionModule (ref)
 		local messageId = p6.messageId
 		
 		if messageId then
 			p7.conversationMessageStore.updateMessage(messageId, { status = messageStatus.Moderated })
+			
+			if fFlagAppChatIncrementalPaginationProjectionModule and p6.conversationId then
+				p7.conversationMessageListStore.publishMessageUpdates(p6.conversationId, { messageId })
+			end
 		end
 	end,
 	[messageFailedToSend.name] = function(p6, p7)
-		-- upvalues: messageStatus (ref)
+		-- upvalues: messageStatus (ref), fFlagAppChatIncrementalPaginationProjectionModule (ref)
 		local messageId = p6.messageId
 		
 		if messageId then
 			p7.conversationMessageStore.updateMessage(messageId, { status = messageStatus.Failed })
+			
+			if fFlagAppChatIncrementalPaginationProjectionModule and p6.conversationId then
+				p7.conversationMessageListStore.publishMessageUpdates(p6.conversationId, { messageId })
+			end
 		end
 	end,
 	[appChatNetworkingModule.rodux.GetOlderMessages.Succeeded.name] = function(p6, _)

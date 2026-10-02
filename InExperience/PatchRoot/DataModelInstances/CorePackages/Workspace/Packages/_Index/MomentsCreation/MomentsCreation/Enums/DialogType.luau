@@ -3,5 +3,6 @@
 	TextFiltered = "TextFiltered",
 	GenerateTextOptions = "GenerateTextOptions",
 	VoiceoverError = "VoiceoverError",
-	VoiceoverDelete = "VoiceoverDelete"
+	VoiceoverDelete = "VoiceoverDelete",
+	VoiceSelector = "VoiceSelector"
 }

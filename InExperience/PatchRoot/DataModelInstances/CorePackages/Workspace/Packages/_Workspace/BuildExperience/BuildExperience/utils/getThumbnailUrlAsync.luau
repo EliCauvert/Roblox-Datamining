@@ -1,25 +1,27 @@
 ﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
 local httpClientModule = require(parent.HttpClient)
 local promiseModule = require(parent.Promise)
+local url = require(parent.Http).Url
 local debug = require(parent.DataHydration.CreatorAgentChat).debug
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
+local text = url.THUMBNAILS_URL .. "v1/batch"
 
 return function(p1, p2)
-	-- upvalues: debug (ref), promiseModule (ref), fetch (ref), asPromise (ref)
+	-- upvalues: debug (ref), promiseModule (ref), fetch (ref), text (ref), asPromise (ref)
 	p2 = p2 or "420x420"
 	debug.log("info", "thumbnail_url polling", { assetId = p1 })
 	
 	return promiseModule.new(function(p3, p4)
-		-- upvalues: fetch (copy), p1 (ref), p2 (ref), asPromise (copy), debug (copy)
+		-- upvalues: fetch (copy), text (copy), p1 (ref), p2 (ref), asPromise (copy), debug (copy)
 		local var1 = 0
 		
 		local function poll(p5)
-			-- upvalues: fetch (copy), p1 (copy), p2 (copy), asPromise (copy), p4 (ref), debug (copy), p3 (ref), var1 (write), poll (ref)
+			-- upvalues: fetch (copy), text (copy), p1 (copy), p2 (copy), asPromise (copy), p4 (ref), debug (copy), p3 (ref), var1 (write), poll (ref)
 			asPromise(fetch({
 				method = "POST",
-				url = "https://thumbnails.roblox.com/v1/batch",
 				analyticsKey = "build-experience.get-thumbnail-url",
+				url = text,
 				body = {
 					{ type = "Asset", format = "Png", targetId = p1, size = p2 }
 				},

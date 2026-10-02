@@ -9,10 +9,9 @@ local iconButton = foundationModule.IconButton
 local iconName = enums.IconName
 local iconSize = enums.IconSize
 local iconVariant = enums.IconVariant
-local fFlagAddFriendsIgnoreAllFoundationMenu = require(parent.SharedFlags).FFlagAddFriendsIgnoreAllFoundationMenu
 
 return function(p1)
-	-- upvalues: reactModule (ref), view (ref), text (ref), enums (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref), iconButton (ref), fFlagAddFriendsIgnoreAllFoundationMenu (ref)
+	-- upvalues: reactModule (ref), view (ref), text (ref), enums (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref), iconButton (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y col gap-xxsmall align-x-left",
 		LayoutOrder = p1.layoutOrder
@@ -44,7 +43,7 @@ return function(p1)
 				icon = p1.trailingIcon,
 				size = iconSize.Small,
 				onActivated = p1.onTrailingIconActivated,
-				ref = if fFlagAddFriendsIgnoreAllFoundationMenu then p1.trailingIconRef else nil
+				ref = p1.trailingIconRef
 			}))
 		}),
 		Subtitle = p1.subtitle and reactModule.createElement(text, {

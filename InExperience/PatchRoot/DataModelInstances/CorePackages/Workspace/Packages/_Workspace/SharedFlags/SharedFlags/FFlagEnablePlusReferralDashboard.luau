@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnablePlusReferralDashboard_v0", false)
+﻿return game:DefineFastFlag("EnablePlusReferralDashboard_v1", false)

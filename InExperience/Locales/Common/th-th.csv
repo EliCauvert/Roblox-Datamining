@@ -1285,8 +1285,7 @@ Feature.AddFriends.Action.RequestIgnored,คำขอถูกปฏิเสธ
 Feature.AddFriends.Label.AddFriendsTooltip,เริ่มต้นด้วยการค้นหาเพื่อนๆ ของคุณเพื่อจะได้ไปสำรวจ Roblox ด้วยกัน
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,ค้นหาผู้ใช้บน Roblox โดยใช้ชื่อผู้ใช้หรือชื่อในการค้นหา
 Feature.AddFriends.Label.ConnectWithContacts,เชิญเพื่อนจากรายชื่อผู้ติดต่อหรือเชื่อมต่อกับเพื่อนๆ ที่อยู่บน Roblox อยู่แล้วก็ได้!
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,ค้นหาผู้ใช้
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,ค้นหาผู้ใช้
 Feature.AddFriends.Label.SearchForFriendsPrompt,ค้นหาผู้ใช้บน Roblox โดยใช้ชื่อผู้ใช้หรือชื่อที่แสดงในการค้นหา
 Feature.AddFriends.Label.SyncWithContacts,ซิงค์รายชื่อติดต่อเพื่อค้นหาและเชิญเพื่อน!
 Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox จะสนุกยิ่งขึ้นถ้าเล่นกับเพื่อน!
@@ -1928,6 +1927,7 @@ Feature.Build.Action.DontShowAgain,ไม่ต้องแสดงอีก
 Feature.Build.Action.EarnRobux,รับ Robux
 Feature.Build.Action.Edit,แก้ไข
 Feature.Build.Action.HideAutosaved,ซ่อนรายการที่บันทึกอัตโนมัติ
+Feature.Build.Action.KeepBuilding,สร้างต่อ
 Feature.Build.Action.ManageLimit,จัดการวงเงิน
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
@@ -1953,6 +1953,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,แชร์ลิงก์
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,สถิติ
+Feature.Build.Action.Stop,หยุด
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,อัปเดตระดับความเหมาะสม
 Feature.Build.Action.UpdateWithChanges,อัปเดตตามการเปลี่ยนแปลง
@@ -2062,7 +2063,12 @@ Feature.Build.Description.RevertToVersion,ยืนยันเพื่อย�
 Feature.Build.Description.ShareLatest,แชร์ว่าเวอร์ชันล่าสุดของคุณมีอะไรเปลี่ยนแปลงไปบ้าง
 Feature.Build.Description.ShopButton,เพิ่มจุดเริ่มต้นการช็อปปิ้ง
 Feature.Build.Description.ShortAdCampaign,วิธีดูแบบเร็วๆ ว่าผู้เล่นคิดอย่างไรเกี่ยวกับเกมของคุณ
+Feature.Build.Description.StopBuild,คำขอนี้ยังอยู่ระหว่างดำเนินการ หากคุณหยุดตอนนี้ การดำเนินการจะไม่เสร็จสิ้น และคุณจะต้องส่งคำขออีกครั้ง
 Feature.Build.Description.UpdateDeveloperProduct,อัปเดตผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
+Feature.Build.Error.AdForbidden,บัญชีหรือเกมของคุณไม่สามารถเผยแพร่โฆษณาได้ในตอนนี้ โปรดติดต่อฝ่ายบริการช่วยเหลือหากคุณคิดว่านี่เป็นข้อผิดพลาด
+Feature.Build.Error.AdInsufficientFunds,คุณมี Robux ไม่เพียงพอที่จะสร้างโฆษณานี้ โปรดเพิ่ม Robux แล้วลองอีกครั้ง
+Feature.Build.Error.AdInternalError,มีปัญหาบางอย่างเกิดขึ้น โปรดลองอีกครั้งภายหลัง
+Feature.Build.Error.AdMissingThumbnail,เกมของคุณต้องมีภาพขนาดย่อก่อนจึงจะเผยแพร่โฆษณาได้ โปรดเพิ่มภาพขนาดย่อแล้วลองอีกครั้ง
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"คำอธิบายต้องมีความยาวไม่เกิน 1,000 อักขระ"
 Feature.Build.Error.DeveloperProductNameRequired,กรอกชื่อผลิตภัณฑ์
 Feature.Build.Error.DeveloperProductNameTooLong,ชื่อต้องมีความยาวไม่เกิน 50 อักขระ
@@ -2248,9 +2254,6 @@ Feature.Build.Message.AccountRequirements,บัญชีของคุณม�
 Feature.Build.Message.AccountTooNew,บัญชีของคุณยังใหม่เกินไปที่จะเผยแพร่ ลองอีกครั้งเมื่อบัญชีมีอายุ 2 วัน
 Feature.Build.Message.AdCampaignCreateFailed,ไม่สามารถสร้างแคมเปญของคุณได้ โปรดลองอีกครั้ง
 Feature.Build.Message.AdPerformanceLoadFailed,ไม่สามารถโหลดประสิทธิภาพโฆษณาได้
-Feature.Build.Message.AdsPromotionBannerSubtitle,เพิ่มกลุ่มเป้าหมายของคุณได้ฟรี
-Feature.Build.Message.AdsPromotionBannerTitle,คุณเหลือโปรโมชันฟรีอีก {promotionCount} ครั้ง
-Feature.Build.Message.AdsPromotionBannerTitleSingular,คุณเหลือโปรโมชันฟรีอีก 1 ครั้ง
 Feature.Build.Message.AdsStatsEmpty,เพิ่มกลุ่มเป้าหมายของคุณด้วยแคมเปญโฆษณาและทำให้เกมของคุณเป็นที่รู้จัก
 Feature.Build.Message.AdsStatsEmptyFree,เพิ่มกลุ่มเป้าหมายของคุณด้วยแคมเปญโฆษณาฟรีและทำให้เกมของคุณเป็นที่รู้จัก
 Feature.Build.Message.AllFriendsAdded,คุณเชิญเพื่อนทุกคนมาเป็นผู้ทดลองเล่นระยะแรกแล้ว
@@ -2342,6 +2345,7 @@ Feature.Build.Title.AdCampaignDuration,แคมเปญโฆษณา {durati
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} วัน
 Feature.Build.Title.AdComplete,โฆษณาเสร็จแล้ว
 Feature.Build.Title.AdCreated,สร้างโฆษณาแล้ว
+Feature.Build.Title.AdCreatedPeriod,
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,เพิ่มภาพ
 Feature.Build.Title.AdsStatsEmpty,เริ่มใช้แคมเปญ
@@ -2382,6 +2386,7 @@ Feature.Build.Title.PromoteGameFreeSingular,คุณได้รับสิท
 Feature.Build.Title.PromoteGamePaid,มีผู้เล่นอีกมากมายรออยู่
 Feature.Build.Title.PushNotifications,การแจ้งเตือนแบบพุช
 Feature.Build.Title.RevertLastChange,แปลงกลับการเปลี่ยนแปลงล่าสุดไหม?
+Feature.Build.Title.StopBuild,หยุดสร้างใช่ไหม?
 Feature.Build.Title.Tasks,งาน
 Feature.Build.Title.TurnActivity,เปลี่ยนกิจกรรม
 Feature.Build.Title.VersionHistory,ประวัติเวอร์ชัน
@@ -3771,6 +3776,7 @@ Feature.PlayerSearchResults.Label.FromSearch,จากการค้นหา
 Feature.PlayerSearchResults.Label.Previously,
 Feature.PlayerSearchResults.Label.ThisIsYou,ตัวคุณเอง
 Feature.PlayerSearchResults.Label.YouAreFollowing,คุณกำลังติดตาม
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio ไม่รองรับการซื้อเซิร์ฟเวอร์ส่วนตัว
 Feature.Profile.Action.AboutThisProfile,เกี่ยวกับโปรไฟล์นี้
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4017,9 +4023,11 @@ Feature.RobloxSubscription.Body.UnsupportedPlatform,การสมัครส�
 Feature.RobloxSubscription.Description.AgeCheckTrial,ตรวจสอบยืนยันอายุของคุณ แล้วรับสิทธิ์ทดลองใช้ Roblox Plus ฟรี 1 สัปดาห์แทนคำขอบคุณ ไม่ต้องระบุวิธีการชำระเงิน ก็สนุกกับสิทธิ์ทดลองใช้ฟรีนี้ได้เลย
 Feature.RobloxSubscription.Description.Benefit.Customize,ปรับแต่งด้วยกรอบโปรไฟล์และธีมแอป
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,ส่วนลด 10% ใน 60 วันแรก จากนั้นลด 20% สำหรับไอเท็มและอวาตาร์
+Feature.RobloxSubscription.Description.Benefit.DiscountV3,ส่วนลด 10% ใน {trialUnlockDays} วันแรก จากนั้นลด 20% สำหรับไอเท็มและอวาตาร์
 Feature.RobloxSubscription.Description.ExclusiveBenefits,สนุกมากขึ้น แต่ใช้ Robux น้อยลง สมัครสมาชิก Roblox Plus เลย
 Feature.RobloxSubscription.Description.JoinEarly,เข้าร่วมได้ก่อนใครเมื่อสมัคร Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"การคลิก \u{201C}{ctaText}\u{201D} จะถือว่าคุณยอมรับ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
+Feature.RobloxSubscription.Heading.ReferralEntry,แชร์ Plus แล้วรับ {amount} Robux
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,เซิร์ฟเวอร์ส่วนตัวฟรี
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,ส่ง Robux ฟรี
@@ -4030,6 +4038,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"การคลิก
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"การคลิก ""ลองใช้ฟรี"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd} ช่วงทดลองใช้ฟรีของคุณจะสิ้นสุดในอีก 1 เดือน โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติและคุณยกเลิกได้ทุกเมื่อ"
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"การคลิก ""ลองใช้ฟรี"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd} ช่วงทดลองใช้ฟรีของคุณจะสิ้นสุดในอีก {trialDuration} {trialPeriodLabel} โดยจะมีการเรียกเก็บเงินในแต่ละ{billingPeriodLabel}โดยอัตโนมัติ และคุณยกเลิกได้ทุกเมื่อ"
 Feature.RobloxSubscription.Label.FreeTrialText,ทดลองใช้ฟรี
+Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}ฟรี 1 เดือน{boldEnd} จากนั้น {price}/{periodType}
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration} {trialPeriodLabel}ฟรี {boldEnd}จากนั้น {price}/{periodType}
 Feature.RobloxSubscription.Label.month,
@@ -4278,6 +4287,8 @@ Feature.SongDetails.Action.ReportAudio,รายงานเกี่ยวก�
 Feature.SongDetails.Label.InappropriateAudio,เสียงไม่เหมาะสม
 Feature.SongDetails.Label.InappropriateThumbnail,ภาพขนาดย่อไม่เหมาะสม
 Feature.SongDetails.Label.SongPreview,ฟังตัวอย่างเพลง
+Feature.SplitPane.Label.CollapseAvatar,ย่ออวาตาร์
+Feature.SplitPane.Label.ExpandAvatar,ขยายอวาตาร์
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,เพิ่มผู้ใช้คนอื่น
 Feature.Squads.Action.ConnectToVoice,เชื่อมต่อกับเสียง
@@ -4425,6 +4436,8 @@ Feature.Toast.VoteError.FloodCheckThresholdMet,คุณโหวตบ่อย
 Feature.Toast.VoteError.PlayGame,คุณต้องเยี่ยมชมประสบการณ์นี้ก่อนจึงจะสามารถโหวตได้
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,คุณตรวจสอบอายุของคุณไม่ได้ในตอนนี้ เนื่องจากมีการละเมิดมาตรฐานชุมชนของเราหลายครั้ง โปรดลองอีกครั้งหลังสิ้นสุดระยะเวลาการจำกัด
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,การตรวจสอบอายุถูกระงับ
+Feature.UniversalFeatureRestrictions.AbuseVector.LabelName.Voice,
+Feature.UniversalFeatureRestrictions.AbuseVector.Lowercase.LabelName.Voice,
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,คุณถูกแบนจากการเล่นเกมนี้เนื่องจากมีการละเมิดกฎซ้ำๆ หรือร้ายแรง
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,คุณไม่สามารถเล่นเกมนี้ได้เนื่องจากมีพฤติกรรมละเมิดกฎ
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Roblox แบนไม่ให้คุณเล่นเกมนี้
@@ -4434,6 +4447,13 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox ระงับไม่ให้คุณเล่นเกมนี้เป็นเวลา {number} ชั่วโมง
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox ระงับไม่ให้คุณเล่นเกมนี้เป็นเวลา 1 นาที
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox ระงับไม่ให้คุณเล่นเกมนี้เป็นเวลา {number} นาที
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Banned,คุณไม่สามารถใช้คุณสมบัตินี้ได้ เนื่องจากพฤติกรรมของคุณละเมิดกฎของชุมชน
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Nudge,เราอาจระงับไม่ให้คุณใช้คุณสมบัตินี้หากยังละเมิดกฎของชุมชนต่อ
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Suspended,คุณไม่สามารถใช้คุณสมบัตินี้ได้ เนื่องจากพฤติกรรมของคุณละเมิดกฎของชุมชน หากฝ่าฝืนอีกครั้ง คุณอาจถูกแบน
+Feature.UniversalFeatureRestrictions.Generic.DialogTitle.Banned,เราแบนไม่ให้คุณใช้{abuseVector}
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Nudge,คุณอาจเสียสิทธิ์ในการเข้าถึง{abuseVector}
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minute,{abuseVector} ถูกระงับเป็นเวลา 1 นาที
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minutes,{abuseVector} ถูกระงับเป็นเวลา {number} นาที
 Feature.UniversalShareSheet.Action.CopiedLink,
 Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,แชร์ข้อความ
 Feature.UniversalShareSheet.Response.NotSharedMessage,ไม่สามารถส่งข้อความได้
@@ -4896,6 +4916,7 @@ InGame.GameplayPaused.Body,การเล่นเกมถูกหยุด�
 InGame.GameplayPaused.Title,การเล่นเกมถูกหยุดชั่วคราว
 InGame.HelpMenu.Controls.ToggleGameMenu,
 InGame.HelpMenu.DownArrow,
+InGame.HelpMenu.GenericAction,การดำเนินการ
 InGame.HelpMenu.Label.ClientCoreScriptVersion,เวอร์ชัน CoreScript ของไคลเอ็นต์:
 InGame.HelpMenu.Label.ClientVersion,เวอร์ชันไคลเอ็นต์:
 InGame.HelpMenu.Label.PlaceVersion,เวอร์ชันสถานที่:

@@ -1,8 +1,9 @@
 ﻿local cartPricingResponseLineItemModule = require(script.Parent.cartPricingResponseLineItem)
+local fFlagPurchasePromptFetchCartPricingForLooks = require(script:FindFirstAncestor("IAPExperience").Parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks
 local _ = require(script.Parent.Parent.PricingTypes)
 
 return function(p1)
-	-- upvalues: cartPricingResponseLineItemModule (ref)
+	-- upvalues: cartPricingResponseLineItemModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref)
 	if type(p1) ~= "table" then
 		return nil
 	end
@@ -46,7 +47,7 @@ return function(p1)
 		priceWithoutOffersDiscounts = cartPricingResponseLineItemModule.computePriceWithoutOffersDiscounts(items, var1),
 		hasSavings = var1 < var2,
 		itemCount = #items,
-		discounts = cartPricingResponseLineItemModule.extractDiscountRowsFromLineItems(items),
+		discounts = if fFlagPurchasePromptFetchCartPricingForLooks then if fFlagPurchasePromptFetchCartPricingForLooks then cartPricingResponseLineItemModule.consolidateRobloxPlusDiscounts(cartPricingResponseLineItemModule.extractDiscountRowsFromLineItems(items)) else nil else cartPricingResponseLineItemModule.extractDiscountRowsFromLineItems(items),
 		offers = var3,
 		selectedOfferIds = t,
 		savingsSummary = cartPricingResponseLineItemModule.extractCartPricingSavingsSummary(p1)

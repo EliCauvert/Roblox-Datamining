@@ -8,7 +8,10 @@ local vector3UtilsModule = require(parent.util.Vector3Utils)
 local valueToStringModule = require(parent.util.valueToString)
 local t = {
 	fflag = require(parent.flags.getEngineFeatureEngineUGCValidationExactLCDeformationSize),
-	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
+	categories = {
+		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
+	},
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData }
 }
 local getEngineFeatureLayeredClothingDecompositionModule = require(parent.flags.getEngineFeatureLayeredClothingDecomposition)

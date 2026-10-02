@@ -5,17 +5,18 @@ local momentsTypesModule = require(parent.MomentsTypes)
 local sharedFlagsModule = require(parent.SharedFlags)
 local _ = require(parent.DataHydration.MomentsStoreTypes)
 local momentsGetMomentsStoreModule = require(parent.DataHydration.MomentsGetMomentsStore)
+local fFlagAppChatMomentShareCardEdgeCasesModule = require(appChat.Flags.FFlagAppChatMomentShareCardEdgeCases)
 local name = require(appChat.Logger):new(script.Name)
 local momentStatus = momentsTypesModule.Enums.MomentStatus
 local shareLinkTargetIdType = momentsTypesModule.Enums.ShareLinkTargetIdType
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 
 return function(p1)
-	-- upvalues: dataHydrationModule (ref), name (ref), momentsGetMomentsStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), momentStatus (ref), shareLinkTargetIdType (ref)
+	-- upvalues: dataHydrationModule (ref), name (ref), momentsGetMomentsStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), momentStatus (ref), fFlagAppChatMomentShareCardEdgeCasesModule (ref), shareLinkTargetIdType (ref)
 	p1 = p1 or {}
 	
 	local function createResolver(p2)
-		-- upvalues: dataHydrationModule (copy), p1 (ref), name (copy), momentsGetMomentsStoreModule (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), momentStatus (copy), shareLinkTargetIdType (copy)
+		-- upvalues: dataHydrationModule (copy), p1 (ref), name (copy), momentsGetMomentsStoreModule (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), momentStatus (copy), fFlagAppChatMomentShareCardEdgeCasesModule (copy), shareLinkTargetIdType (copy)
 		return dataHydrationModule.createDataResolver({
 			supportsMultiGet = true,
 			queueProcessDelaySec = 0,
@@ -26,7 +27,7 @@ return function(p1)
 				name:warning(`Error resolving Moment details: {tostring(p3)}`)
 			end,
 			fetchFn = function(p3)
-				-- upvalues: momentsGetMomentsStoreModule (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), p2 (ref), momentStatus (copy), shareLinkTargetIdType (copy)
+				-- upvalues: momentsGetMomentsStoreModule (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), p2 (ref), momentStatus (copy), fFlagAppChatMomentShareCardEdgeCasesModule (copy), shareLinkTargetIdType (copy)
 				local t = {}
 				
 				for i in p3 do
@@ -35,11 +36,11 @@ return function(p1)
 				local var1 = momentsGetMomentsStoreModule(false)
 				
 				return (if fFlagMomentsPassFeedItemIdToBackendApis then var1.getMomentsByIds(t, p2) else var1.getMomentsByIds(t)):andThen(function(p4)
-					-- upvalues: momentStatus (copy), p2 (copy), shareLinkTargetIdType (copy), p3 (ref)
+					-- upvalues: momentStatus (copy), fFlagAppChatMomentShareCardEdgeCasesModule (copy), p2 (copy), shareLinkTargetIdType (copy), p3 (ref)
 					local t = {}
 					
 					for i, v in p4.moments do
-						if v.isModerated ~= true and v.status ~= momentStatus.Deleted then
+						if fFlagAppChatMomentShareCardEdgeCasesModule or (v.isModerated ~= true and v.status ~= momentStatus.Deleted) then
 							local var2 = if p2 == shareLinkTargetIdType.FeedItemId then v.recommendationMetadata.feedItemId else v.momentId
 							
 							if var2 ~= nil and p3[var2] ~= nil then

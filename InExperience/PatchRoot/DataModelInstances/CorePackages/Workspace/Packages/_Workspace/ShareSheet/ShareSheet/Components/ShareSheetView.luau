@@ -2,6 +2,7 @@
 local parent = shareSheet.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local dialogSize = foundationModule.Enums.DialogSize
 local divider = foundationModule.Divider
 local sheet = foundationModule.Sheet
 local text = foundationModule.Text
@@ -9,6 +10,7 @@ local view = foundationModule.View
 local useOverlay = foundationModule.Hooks.useOverlay
 local useScaledValue = foundationModule.Hooks.useScaledValue
 local useTokens = foundationModule.Hooks.useTokens
+local fFlagShareSheetDesktopReadinessModule = require(shareSheet.Flags.FFlagShareSheetDesktopReadiness)
 local fFlagShareSheetFixPeoplePickerCenterSheetOverflowModule = require(shareSheet.Flags.FFlagShareSheetFixPeoplePickerCenterSheetOverflow)
 local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 local fIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent = require(shareSheet.ShareSheetConstants).FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent
@@ -63,7 +65,7 @@ local function useOverlaySize()
 end
 
 return function(p1)
-	-- upvalues: var1 (ref), useTokens (ref), useOverlaySize (ref), useScaledValue (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), fIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent (ref), getCenterSheetHeightModule (ref), reactModule (ref), shareSheetTelemetryModule (ref), sheet (ref), peoplePickerModule (ref), text (ref), setPeoplePickerContentScrollingFrameRef (ref), setDefaultContentScrollingFrameRef (ref), view (ref), shareSheetSocialRowModule (ref), divider (ref), shareSendRowModule (ref), shareSheetActionRowModule (ref)
+	-- upvalues: var1 (ref), useTokens (ref), useOverlaySize (ref), useScaledValue (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), fIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent (ref), getCenterSheetHeightModule (ref), reactModule (ref), shareSheetTelemetryModule (ref), sheet (ref), fFlagShareSheetDesktopReadinessModule (ref), dialogSize (ref), peoplePickerModule (ref), text (ref), setPeoplePickerContentScrollingFrameRef (ref), setDefaultContentScrollingFrameRef (ref), view (ref), shareSheetSocialRowModule (ref), divider (ref), shareSendRowModule (ref), shareSheetActionRowModule (ref)
 	local var2 = nil
 	local var3 = nil
 	local var4 = nil
@@ -97,6 +99,7 @@ return function(p1)
 			-- upvalues: p1 (ref), shareSheetTelemetryModule (copy)
 			p1.onCloseWithReason(shareSheetTelemetryModule.CloseReason.UserDismissed)
 		end, { p1.onCloseWithReason }),
+		size = if fFlagShareSheetDesktopReadinessModule then dialogSize.Large else nil,
 		snapPoints = if fFlagShareSheetPeoplePickerEnabledModule then list else nil
 	}, {
 		Header = reactModule.createElement(sheet.Header, {

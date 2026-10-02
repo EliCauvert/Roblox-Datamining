@@ -858,7 +858,6 @@ Feature.AddFriends.Action.RequestIgnored,Запрос заблокирован
 Feature.AddFriends.Label.AddFriendsTooltip,"Начни с поиска друзей, чтобы исследовать Roblox вместе."
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"Находи пользователей Roblox, используя поиск по имени пользователя или отображаемому имени."
 Feature.AddFriends.Label.ConnectWithContacts,"Приглашай своих друзей или общайся с друзьями, которые уже в Roblox!"
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Поиск людей
 Feature.AddFriends.Label.SearchForFriendsPrompt,"Найди людей в Roblox, используя поиск по имени пользователя или отображаемому имени."
 Feature.AddFriends.Label.SyncWithContacts,"Синхронизируй контакты, чтобы найти и пригласить друзей!"
 Feature.AddFriends.Title.AddFriendsTooltipTitle,В Roblox намного веселее с друзьями!

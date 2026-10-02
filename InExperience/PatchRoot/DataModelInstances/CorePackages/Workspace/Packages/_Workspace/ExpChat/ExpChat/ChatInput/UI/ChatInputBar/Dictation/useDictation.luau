@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("ExpChat").Parent
+﻿local expChat = script:FindFirstAncestor("ExpChat")
+local parent = expChat.Parent
 local reactModule = require(parent.React)
 local reactOtterModule = require(parent.ReactOtter)
 local signalsModule = require(parent.Signals)
@@ -6,6 +7,7 @@ local signalsReactModule = require(parent.SignalsReact)
 local dictation = require(parent.ExpChatShared).Logger:new("ExpChat/Dictation")
 local dictationModeModule = require(script.Parent.DictationMode)
 local dictationAnalyticsModule = require(script.Parent.DictationAnalytics)
+local fFlagExpChatDictationExplicitFinishModule = require(expChat.Flags.FFlagExpChatDictationExplicitFinish)
 local useDictationAudioPipelineModule = require(script.Parent.useDictationAudioPipeline)
 local requestMicPermissionModule = require(script.Parent.requestMicPermission)
 local requestMicPermission = requestMicPermissionModule.requestMicPermission
@@ -54,7 +56,7 @@ end
 return {
 	MAX_RECORDING_SECONDS = 10,
 	useDictation = function(p3)
-		-- upvalues: reactModule (ref), createSignal (ref), t (ref), useDictationAudioPipelineModule (ref), reactOtterModule (ref), useSignalBinding (ref), dictation (ref), dictationAnalyticsModule (ref), t_1 (ref), dictationModeModule (ref), t_2 (ref), requestMicPermission (ref), permissionStatus (ref), formatTime (ref)
+		-- upvalues: reactModule (ref), createSignal (ref), t (ref), useDictationAudioPipelineModule (ref), reactOtterModule (ref), useSignalBinding (ref), dictation (ref), dictationAnalyticsModule (ref), fFlagExpChatDictationExplicitFinishModule (ref), t_1 (ref), dictationModeModule (ref), t_2 (ref), requestMicPermission (ref), permissionStatus (ref), formatTime (ref)
 		local var1 = reactModule.useMemo(function()
 			-- upvalues: createSignal (copy), t (copy)
 			local var2, var3 = createSignal(t.Idle)
@@ -202,7 +204,7 @@ return {
 		
 		local var21 = reactModule.useRef(nil)
 		local var22 = reactModule.useCallback(function(p4)
-			-- upvalues: dictationAnalyticsModule (copy), get (ref), t (copy), dictation (copy), var2 (ref), var18 (ref), var17 (ref), var6 (ref), reactOtterModule (copy), set (ref), var15 (ref), var14 (ref), var20 (ref), var16 (ref), handleError (ref), t_1 (copy)
+			-- upvalues: dictationAnalyticsModule (copy), get (ref), t (copy), dictation (copy), var2 (ref), var18 (ref), var17 (ref), var6 (ref), reactOtterModule (copy), set (ref), var15 (ref), var14 (ref), var20 (ref), var16 (ref), fFlagExpChatDictationExplicitFinishModule (copy), handleError (ref), t_1 (copy)
 			p4 = p4 or dictationAnalyticsModule.TriggerTypes.UserManual
 			local var23 = get(false)
 			
@@ -252,6 +254,9 @@ return {
 			if var16.current then
 				if var2.audioDeviceInputRef.current then
 					var2.audioDeviceInputRef.current.Muted = true
+				end
+				if fFlagExpChatDictationExplicitFinishModule and not var2.finishInput() then
+					dictation:warning("Dictation: explicit finish unavailable, waiting for muted input to end speech")
 				end
 				local transcribing = t.Transcribing
 				set(transcribing)

@@ -18,7 +18,8 @@ return {
 		FFlagLuaAppsEnableMarkButtonSeq = require(script.Flags.FFlagLuaAppsEnableMarkButtonSeq)
 	},
 	Utils = {
-		shouldShowLeftHeader = require(script.Utils.shouldShowLeftHeader)
+		shouldShowLeftHeader = require(script.Utils.shouldShowLeftHeader),
+		logCTAChangeMorePageFlyoutButtonTextExposure = if sharedFlagsModule.FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled then require(script.Utils.logCTAChangeMorePageFlyoutButtonTextExposure) else nil
 	},
 	Hooks = {
 		useOpenFlyoutSidePanel = if sharedFlagsModule.FFlagFlyoutUseOpenHook then require(script.Hooks.useOpenFlyoutSidePanel) else nil

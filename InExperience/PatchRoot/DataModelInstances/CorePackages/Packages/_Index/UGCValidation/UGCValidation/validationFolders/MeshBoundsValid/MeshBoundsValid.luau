@@ -17,6 +17,7 @@ local fIntUGCValidationScaleMaximumThousandths = game:DefineFastInt("FIntUGCVali
 local t = {
 	categories = {
 		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
 		validationEnumsModule.UploadCategory.RIGID_ACCESSORY
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },

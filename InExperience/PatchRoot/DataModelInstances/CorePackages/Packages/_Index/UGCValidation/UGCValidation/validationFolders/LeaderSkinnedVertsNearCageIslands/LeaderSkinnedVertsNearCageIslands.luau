@@ -6,7 +6,10 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local eyelashCageUVReferenceValuesModule = require(parent.EyelashCageUVReferenceValues)
 local t = {
 	fflag = require(parent.flags.getEngineFeatureEngineUGCValidateLeaderVertsNearCageIslands),
-	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
+	categories = {
+		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
+	},
 	requiredData = {
 		validationEnumsModule.SharedDataMember.renderMeshesData,
 		validationEnumsModule.SharedDataMember.innerCagesData

@@ -7,6 +7,7 @@ local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local _ = require(sduiCoreSystem.SduiComponentType)
 local _ = require(sduiCoreSystem.SduiErrors)
 local fFlagLuaAppAddHasOneByTwoField = require(parent.SharedFlags).FFlagLuaAppAddHasOneByTwoField
+local fFlagLuaAppAddHasOneByTwoFieldSdui = require(parent.SharedFlags).FFlagLuaAppAddHasOneByTwoFieldSdui
 local fFlagLuaAppSduiHomeFeedStats = require(parent.SharedFlags).FFlagLuaAppSduiHomeFeedStats
 local discoverySduiErrorHundredthsPercent = game:DefineFastInt("DiscoverySduiErrorHundredthsPercent", 0)
 local discoverySduiTimerEventsHundredthsPercent = game:DefineFastInt("DiscoverySduiTimerEventsHundredthsPercent", 0)
@@ -185,8 +186,8 @@ return {
 			loggingProtocolModule.StandardizedFields.addOsInfo
 		}, t_2, p6)
 	end,
-	reportSduiV2FeedStats = if fFlagLuaAppSduiHomeFeedStats then function(p10, p11, p12, p13)
-		-- upvalues: loggingProtocolModule (ref), t_3 (ref)
+	reportSduiV2FeedStats = if fFlagLuaAppSduiHomeFeedStats then function(p10, p11, p12, p13, p14)
+		-- upvalues: loggingProtocolModule (ref), fFlagLuaAppAddHasOneByTwoFieldSdui (ref), t_3 (ref)
 		p13 = p13 or loggingProtocolModule.default
 		assert(p13, "loggingProtocol must exist")
 		
@@ -203,6 +204,10 @@ return {
 		t.appPage = p11
 		t.sduiResponseRequestId = p12
 		t.feedSource = "SduiV2FullPage"
+		
+		if fFlagLuaAppAddHasOneByTwoFieldSdui then
+			t.hasOneByTwo = p14
+		end
 		p13:logRobloxTelemetryEvent(t_3, {
 			"addSessionInfo",
 			loggingProtocolModule.StandardizedFields.addOsInfo

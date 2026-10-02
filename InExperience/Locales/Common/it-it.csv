@@ -1283,7 +1283,6 @@ Feature.AddFriends.Action.RequestIgnored,Richiesta Ignorata
 Feature.AddFriends.Label.AddFriendsTooltip,Inizia a trovare i tuoi amici in modo da poter esplorare Roblox insieme.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Trova persone su Roblox cercando il loro nome utente o il nome visualizzato.
 Feature.AddFriends.Label.ConnectWithContacts,Invita contatti o connettiti con amici già su Roblox!
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Ricerca per Persone
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Ricerca gente
 Feature.AddFriends.Label.SearchForFriendsPrompt,
 Feature.AddFriends.Label.SyncWithContacts,Sincronizza i contatti per trovare e invitare amici!
@@ -1926,6 +1925,7 @@ Feature.Build.Action.DontShowAgain,Non mostrare più
 Feature.Build.Action.EarnRobux,Guadagna Robux
 Feature.Build.Action.Edit,Modifica
 Feature.Build.Action.HideAutosaved,Nascondi salvataggi automatici
+Feature.Build.Action.KeepBuilding,Continua a costruire
 Feature.Build.Action.ManageLimit,Gestisci limite
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
@@ -1951,6 +1951,7 @@ Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,Condividi link
 Feature.Build.Action.ShowMore,
 Feature.Build.Action.Stats,Statistiche
+Feature.Build.Action.Stop,Interrompi
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Aggiorna classificazione
 Feature.Build.Action.UpdateWithChanges,Aggiorna con modifiche
@@ -2060,7 +2061,12 @@ Feature.Build.Description.RevertToVersion,Conferma per ripristinare l'ultima mod
 Feature.Build.Description.ShareLatest,Condividi le modifiche apportate alla tua ultima versione.
 Feature.Build.Description.ShopButton,Aggiungi un punto di accesso per gli acquisti
 Feature.Build.Description.ShortAdCampaign,Un modo rapido per scoprire cosa pensano i giocatori del tuo gioco.
+Feature.Build.Description.StopBuild,"Questa richiesta è ancora in corso. Se ti fermi ora, non verrà completata e dovrai inviarla di nuovo."
 Feature.Build.Description.UpdateDeveloperProduct,Aggiorna il Developer Product {PRODUCT_ID}.
+Feature.Build.Error.AdForbidden,"Non puoi pubblicare annunci dal tuo account o nel tuo gioco, in questo momento. Contatta l'assistenza se ritieni che si tratti di un errore."
+Feature.Build.Error.AdInsufficientFunds,Non hai abbastanza Robux per creare questo annuncio. Aggiungine altri e riprova.
+Feature.Build.Error.AdInternalError,Si è verificato un errore. Riprova più tardi.
+Feature.Build.Error.AdMissingThumbnail,"Per pubblicare un annuncio nel tuo gioco, quest'ultimo deve avere una miniatura. Aggiungine una e riprova."
 Feature.Build.Error.DeveloperProductDescriptionTooLong,La descrizione deve contenere 1.000 caratteri o meno.
 Feature.Build.Error.DeveloperProductNameRequired,Inserisci un nome per il prodotto.
 Feature.Build.Error.DeveloperProductNameTooLong,Il nome deve contenere 50 caratteri o meno.
@@ -2246,9 +2252,6 @@ Feature.Build.Message.AccountRequirements,Il tuo account non soddisfa i requisit
 Feature.Build.Message.AccountTooNew,Il tuo account è troppo recente per essere pubblicato. Riprova tra 2 giorni.
 Feature.Build.Message.AdCampaignCreateFailed,Non è stato possibile creare la campagna. Riprova.
 Feature.Build.Message.AdPerformanceLoadFailed,Impossibile caricare le prestazioni dell'annuncio
-Feature.Build.Message.AdsPromotionBannerSubtitle,Aumenta il tuo pubblico gratuitamente
-Feature.Build.Message.AdsPromotionBannerTitle,Hai {promotionCount} promozioni gratuite rimaste
-Feature.Build.Message.AdsPromotionBannerTitleSingular,Hai ancora 1 promozione gratuita
 Feature.Build.Message.AdsStatsEmpty,Fai crescere il tuo pubblico con una campagna pubblicitaria per far scoprire il tuo gioco
 Feature.Build.Message.AdsStatsEmptyFree,Fai crescere il tuo pubblico con una campagna pubblicitaria gratuita per far scoprire il tuo gioco
 Feature.Build.Message.AllFriendsAdded,Hai invitato tutti i tuoi amici come early tester.
@@ -2381,6 +2384,7 @@ Feature.Build.Title.PromoteGameFreeSingular,Hai un annuncio gratuito
 Feature.Build.Title.PromoteGamePaid,Altri giocatori ti aspettano
 Feature.Build.Title.PushNotifications,Notifiche push
 Feature.Build.Title.RevertLastChange,Ripristinare l'ultima modifica?
+Feature.Build.Title.StopBuild,Vuoi interrompere la creazione?
 Feature.Build.Title.Tasks,Attività
 Feature.Build.Title.TurnActivity,Gira attività
 Feature.Build.Title.VersionHistory,Cronologia versioni
@@ -2789,7 +2793,7 @@ Feature.Catalog.Message.SuccessfullyPosted,
 Feature.Catalog.Message.TitleLimit,
 Feature.Catalog.RFYFeedTitle,Continua a esplorare
 Feature.Catalog.RFYWidgetTitle,Consigliati per te
-Feature.Catalog.Response.GenericError,Si è verificato un errore. Riprova più tardi.
+Feature.Catalog.Response.GenericError,
 Feature.Catalog.Response.NoItemsFound,Oggetti non trovati.
 Feature.Catalog.Response.PlacedOnSaleSuccess,Messo in vendita con successo
 Feature.Catalog.Response.ReportSubmitted,Segnalazione inviata e sarà esaminata dal nostro team a breve.
@@ -3770,6 +3774,7 @@ Feature.PlayerSearchResults.Label.FromSearch,Dallo strumento di ricerca
 Feature.PlayerSearchResults.Label.Previously,Precedentemente
 Feature.PlayerSearchResults.Label.ThisIsYou,Questo sei tu
 Feature.PlayerSearchResults.Label.YouAreFollowing,Stai seguendo
+Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Gli acquisti di server privati non sono supportati in Studio.
 Feature.Profile.Action.AboutThisProfile,Informazioni su questo profilo
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Accetta amico/a
@@ -4020,6 +4025,7 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10% di sconto per i p
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Più divertimento con meno Robux. Abbonati a Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Unisciti in anticipo con il piano Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Cliccando su \u{201C}{ctaText}\u{201D}, accetti le <a href=""{termsUrl}"">Condizioni di abbonamento di Roblox</a>. Ti verrà addebitato automaticamente un importo a cadenza mensile fino all'eventuale disdetta."
+Feature.RobloxSubscription.Heading.ReferralEntry,Condividi il piano Plus per ottenere {amount} Robux
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Server privati gratuiti
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,Invia Robux gratuitamente
@@ -4030,6 +4036,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Cliccando su ""Contin
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Cliccando su ""Prova gratis"", accetti i {linkStart}Termini di abbonamento di Roblox{linkEnd}. La tua prova gratuita scadrà tra 1 mese, dopodiché ti verrà addebitato automaticamente un importo a cadenza mensile e potrai disdire l'abbonamento in qualsiasi momento."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Cliccando su ""Prova gratis"", accetti i {linkStart}Termini di abbonamento di Roblox{linkEnd}. La tua prova gratuita scadrà tra {trialDuration} {trialPeriodLabel}, dopodiché ti verrà addebitato automaticamente un importo a cadenza {billingPeriodLabel} e potrai disdire l'abbonamento in qualsiasi momento."
 Feature.RobloxSubscription.Label.FreeTrialText,Ottieni una prova gratuita
+Feature.RobloxSubscription.Label.New,Novità
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 mese gratis,{boldEnd} poi {price}/{periodType}"
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} gratis,{boldEnd} poi {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,mese
@@ -4278,6 +4285,8 @@ Feature.SongDetails.Action.ReportAudio,Segnala audio
 Feature.SongDetails.Label.InappropriateAudio,Audio inappropriato
 Feature.SongDetails.Label.InappropriateThumbnail,Miniatura inappropriata
 Feature.SongDetails.Label.SongPreview,Anteprima canzone
+Feature.SplitPane.Label.CollapseAvatar,Riduci avatar
+Feature.SplitPane.Label.ExpandAvatar,Espandi avatar
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Aggiungi altri
 Feature.Squads.Action.ConnectToVoice,Connettiti alla chat vocale
@@ -4425,6 +4434,8 @@ Feature.Toast.VoteError.FloodCheckThresholdMet,Stai votando troppo velocemente.
 Feature.Toast.VoteError.PlayGame,Devi visitare l'esperienza prima di poterla votare.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,Non puoi verificare la tua età in questo momento perché hai ripetutamente violato le nostre norme della community. Puoi riprovare al termine della restrizione.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Verifiche dell'età sospese
+Feature.UniversalFeatureRestrictions.AbuseVector.LabelName.Voice,Voce
+Feature.UniversalFeatureRestrictions.AbuseVector.Lowercase.LabelName.Voice,voce
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,Hai ricevuto un ban da questo gioco a causa di ripetute o gravi violazioni delle regole.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,Non puoi giocare a questo gioco perché hai violato le regole.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Roblox ti ha bandito da questo gioco
@@ -4434,6 +4445,13 @@ Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspende
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox ti ha sospeso da questo gioco per {number} ore
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox ti ha sospeso da questo gioco per 1 minuto
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox ti ha sospeso da questo gioco per {number} minuti
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Banned,Non puoi usare questa funzionalità perché il tuo comportamento ha violato le regole della nostra community.
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Nudge,"Se continui a infrangere le regole della nostra community, potresti perdere temporaneamente la capacità di usare questa funzionalità."
+Feature.UniversalFeatureRestrictions.Generic.DialogBody.Suspended,"Non puoi usare questa funzionalità perché il tuo comportamento ha violato le regole della nostra community. Se dovesse capitare di nuovo, potresti incorrere in un ban."
+Feature.UniversalFeatureRestrictions.Generic.DialogTitle.Banned,Abbiamo sospeso il tuo accesso alla seguente funzionalità: {abuseVector}
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Nudge,Potresti perdere l'accesso alla seguente funzionalità: {abuseVector}
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minute,{abuseVector}: funzione sospesa per 1 minuto
+Feature.UniversalFeatureRestrictions.Generic.DialogTitleV2.Suspended.Minutes,{abuseVector}: funzione sospesa per {number} minuti
 Feature.UniversalShareSheet.Action.CopiedLink,
 Feature.UniversalShareSheet.InputPlaceholder.ShareMessage,Condividi un messaggio
 Feature.UniversalShareSheet.Response.NotSharedMessage,Il messaggio non può essere inviato
@@ -4896,6 +4914,7 @@ InGame.GameplayPaused.Body,Il gioco è stato messo in pausa: attendi durante il 
 InGame.GameplayPaused.Title,Gioco in pausa
 InGame.HelpMenu.Controls.ToggleGameMenu,
 InGame.HelpMenu.DownArrow,
+InGame.HelpMenu.GenericAction,Azione
 InGame.HelpMenu.Label.ClientCoreScriptVersion,Versione CoreScript del client:
 InGame.HelpMenu.Label.ClientVersion,Versione del client:
 InGame.HelpMenu.Label.PlaceVersion,Versione della località:

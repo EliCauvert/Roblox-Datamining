@@ -4,6 +4,7 @@ local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local parent = script:FindFirstAncestor("FriendsChat").Parent
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
+local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local foundationModule = require(parent.Foundation)
 local enumScreensModule = require(parent.AppChat.EnumScreens)
 local getChatModerationStatusDataHydrationModule = require(parent.AppChat.GetChatModerationStatusDataHydration)
@@ -32,12 +33,14 @@ local expChatPerfTracker = require(parent.ChatUIPrimitives).Telemetry.ExpChatPer
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagAppChatReactiveFeatureRestrictions = sharedFlagsModule.FFlagAppChatReactiveFeatureRestrictions
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
+local fFlagFriendsChatConversationListFocusNav = sharedFlagsModule.FFlagFriendsChatConversationListFocusNav
+local fFlagFriendsChatFocusInputOnConversationActivatedModule = require(script.Parent.Flags.FFlagFriendsChatFocusInputOnConversationActivated)
 local fFlagFriendsChatIxpScreenExposureModule = require(script.Parent.Flags.FFlagFriendsChatIxpScreenExposure)
 local var1 = IXPNavigationUtilsModule.createExposureHandler(require(script.Parent.Flags.FStringFriendsChatLandingPageIxpLayer))
 local var2 = IXPNavigationUtilsModule.createExposureHandler(require(script.Parent.Flags.FStringFriendsChatConversationPageIxpLayer))
 
 local function FriendsChatMainContent(p1)
-	-- upvalues: useFriendsChatVisibilityTelemetryModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), getChatModerationStatusDataHydrationModule (ref), getFriendsChatNavigationStoreModule (ref), getFriendsChatRealtimeStoreModule (ref), fFlagAppChatReactiveFeatureRestrictions (ref), usePartyChatReactiveFeatureRestrictionModule (ref), fFlagExpChatEnableFriendsTab (ref), expChatPerfTracker (ref), friendsChatTabNameModule (ref), signalsReactModule (ref), fFlagFriendsChatIxpScreenExposureModule (ref), var2 (ref), var1 (ref), playersService (ref), localization (ref), localizationService (ref), chatSessionRefCountModule (ref), inExperienceAppChatModalModule (ref), enumScreensModule (ref), socialCommonModule (ref), friendsChatLandingTelemetryProvidersModule (ref), conversationListModule (ref), friendsChatConversationTelemetryProvidersModule (ref), friendsChatConversationWindowModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), localizationProvider (ref), foundationModule (ref)
+	-- upvalues: useFriendsChatVisibilityTelemetryModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), getChatModerationStatusDataHydrationModule (ref), getFriendsChatNavigationStoreModule (ref), getFriendsChatRealtimeStoreModule (ref), fFlagFriendsChatConversationListFocusNav (ref), reactFocusNavigationModule (ref), fFlagAppChatReactiveFeatureRestrictions (ref), usePartyChatReactiveFeatureRestrictionModule (ref), fFlagExpChatEnableFriendsTab (ref), expChatPerfTracker (ref), friendsChatTabNameModule (ref), signalsReactModule (ref), fFlagFriendsChatIxpScreenExposureModule (ref), var2 (ref), var1 (ref), playersService (ref), localization (ref), localizationService (ref), fFlagFriendsChatFocusInputOnConversationActivatedModule (ref), chatSessionRefCountModule (ref), inExperienceAppChatModalModule (ref), enumScreensModule (ref), socialCommonModule (ref), friendsChatLandingTelemetryProvidersModule (ref), conversationListModule (ref), friendsChatConversationTelemetryProvidersModule (ref), friendsChatConversationWindowModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), localizationProvider (ref), foundationModule (ref)
 	useFriendsChatVisibilityTelemetryModule()
 	local var3 = useChatWindowSettingsModule()
 	local var4 = reactModule.useMemo(function()
@@ -50,6 +53,7 @@ local function FriendsChatMainContent(p1)
 	local var5 = getChatModerationStatusDataHydrationModule(false)
 	local var6 = getFriendsChatNavigationStoreModule(false)
 	local var7 = getFriendsChatRealtimeStoreModule(false)
+	local var8 = if fFlagFriendsChatConversationListFocusNav then reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext) else nil
 	
 	if fFlagAppChatReactiveFeatureRestrictions then
 		usePartyChatReactiveFeatureRestrictionModule(true)
@@ -77,38 +81,42 @@ local function FriendsChatMainContent(p1)
 		-- upvalues: expChatPerfTracker (copy), friendsChatTabNameModule (copy)
 		expChatPerfTracker.finish(expChatPerfTracker.Events.ChatWindowTabSwitchTTI, { tabId = friendsChatTabNameModule }, { tabName = friendsChatTabNameModule })
 	end, {})
-	local var8 = signalsReactModule.useSignalState(var6.getEffectiveConversationId)
+	local var9 = signalsReactModule.useSignalState(var6.getEffectiveConversationId)
 	
 	if fFlagFriendsChatIxpScreenExposureModule then
-		local var9 = var8 ~= nil
-		local var10 = reactModule.useRef(nil)
+		local var10 = var9 ~= nil
+		local var11 = reactModule.useRef(nil)
 		
-		if var10.current ~= var9 then
-			var10.current = var9
-			pcall(if var9 then var2 else var1)
+		if var11.current ~= var10 then
+			var11.current = var10
+			pcall(if var10 then var2 else var1)
 		end
 	end
 	local chatWindowSettings = p1.chatWindowSettings or var4
 	local parentLayoutOrder = p1.parentLayoutOrder or 1
 	local localPlayer = playersService.LocalPlayer
-	local var11 = if localPlayer then tostring(localPlayer.UserId) else nil
-	local var12 = reactModule.useMemo(function()
+	local var12 = if localPlayer then tostring(localPlayer.UserId) else nil
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: localization (copy), localizationService (copy)
 		return localization.new(localizationService.RobloxLocaleId)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var8 (ref)
-		var7.setActiveConversationId(var8)
+		-- upvalues: var7 (ref), var9 (ref)
+		var7.setActiveConversationId(var9)
 		
 		return function()
 			-- upvalues: var7 (copy)
 			var7.setActiveConversationId(nil)
 		end
-	end, { var7, var8 })
+	end, { var7, var9 })
+	local var14 = if fFlagFriendsChatConversationListFocusNav then reactModule.useCallback(function()
+		-- upvalues: var8 (write)
+		return var8 ~= nil and var8.focusedGuiObject:getValue() ~= nil
+	end, { var8 }) else nil
 	
-	return reactModule.createElement(localizationProvider, { localization = var12 }, {
+	return reactModule.createElement(localizationProvider, { localization = var13 }, {
 		Content = reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-			Content = if var8 == nil then reactModule.createElement(friendsChatLandingTelemetryProvidersModule, nil, {
+			Content = if var9 == nil then reactModule.createElement(friendsChatLandingTelemetryProvidersModule, nil, {
 				ConversationList = reactModule.createElement(conversationListModule, {
 					LayoutOrder = parentLayoutOrder,
 					chatWindowSettings = chatWindowSettings,
@@ -120,14 +128,17 @@ local function FriendsChatMainContent(p1)
 					onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
 					onAbsolutePositionChanged = p1.onAbsolutePositionChanged,
 					onConversationActivated = reactModule.useCallback(function(p2)
-						-- upvalues: var6 (ref)
+						-- upvalues: fFlagFriendsChatConversationListFocusNav (copy), var14 (write), fFlagFriendsChatFocusInputOnConversationActivatedModule (copy), var6 (ref)
+						if fFlagFriendsChatConversationListFocusNav and var14() or fFlagFriendsChatFocusInputOnConversationActivatedModule then
+							var6.requestFocusInputBar()
+						end
 						var6.setSelectedConversationId(p2)
-					end, { var6 }),
-					localUserId = var11
+					end, { var6, var14 }),
+					localUserId = var12
 				})
-			}) else reactModule.createElement(friendsChatConversationTelemetryProvidersModule, { conversationId = var8 }, {
+			}) else reactModule.createElement(friendsChatConversationTelemetryProvidersModule, { conversationId = var9 }, {
 				ConversationWindow = reactModule.createElement(friendsChatConversationWindowModule, {
-					conversationId = var8,
+					conversationId = var9,
 					parentLayoutOrder = parentLayoutOrder,
 					chatWindowSettings = chatWindowSettings,
 					transparencyValue = p1.transparencyValue,
@@ -139,9 +150,12 @@ local function FriendsChatMainContent(p1)
 					onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
 					onAbsolutePositionChanged = p1.onAbsolutePositionChanged,
 					onBack = reactModule.useCallback(function()
-						-- upvalues: var6 (ref)
+						-- upvalues: fFlagFriendsChatConversationListFocusNav (copy), var14 (write), var6 (ref)
+						if fFlagFriendsChatConversationListFocusNav and var14() then
+							var6.requestFocusConversationList()
+						end
 						var6.setSelectedConversationId(nil)
-					end, { var6 }),
+					end, { var6, var14 }),
 					onOpenDetails = if getFFlagAppChatEnableRootedNavigationModule() then reactModule.useCallback(function(p2)
 						-- upvalues: chatSessionRefCountModule (copy), inExperienceAppChatModalModule (copy), enumScreensModule (copy), socialCommonModule (copy)
 						chatSessionRefCountModule.reserve()

@@ -1,25 +1,27 @@
 ﻿local httpService = game:GetService("HttpService")
 local momentsCommonModule = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon)
 local eventNames = momentsCommonModule.Analytics.EventNames
+local reportMomentsComments = momentsCommonModule.Analytics.reportMomentsComments
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: momentsCommonModule (ref), httpService (ref), eventNames (ref)
+return function(p1, p2, p3, p4, p5, p6)
+	-- upvalues: momentsCommonModule (ref), httpService (ref), reportMomentsComments (ref), eventNames (ref)
 	p4 = p4 or momentsCommonModule.Analytics.fireAnalyticsEvent
 	p5 = p5 or httpService:GenerateGUID(false)
 	local var1 = false
 	local var2 = false
 	local var3 = false
 	
-	local function logEvent(p6, p7)
-		-- upvalues: var3 (write), p3 (ref), p1 (ref), p2 (ref), p5 (ref), p4 (ref)
+	local function logEvent(p7, p8)
+		-- upvalues: var3 (write), p3 (ref), p1 (ref), p2 (ref), p5 (ref), p4 (ref), reportMomentsComments (copy), p6 (ref)
 		if var3 or not p3() then
 			return
 		end
-		local cloned = table.clone(p7 or {})
+		local cloned = table.clone(p8 or {})
 		cloned.feedItemId = p1
 		cloned.surface = p2
 		cloned.commentPanelSessionId = p5
-		p4(p6, cloned)
+		p4(p7, cloned)
+		reportMomentsComments(p7, cloned, p6)
 	end
 	
 	return {
@@ -36,11 +38,11 @@ return function(p1, p2, p3, p4, p5)
 				var1 = true
 			end
 		end,
-		finishView = function(p6)
+		finishView = function(p7)
 			-- upvalues: var1 (write), logEvent (ref), eventNames (copy)
 			if var1 then
 				var1 = false
-				logEvent(eventNames.MomentCommentsPanelClosed, { closeReason = p6 })
+				logEvent(eventNames.MomentCommentsPanelClosed, { closeReason = p7 })
 			end
 		end,
 		cancel = function()

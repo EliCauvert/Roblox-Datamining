@@ -315,21 +315,21 @@ return function(p7)
 						value = p7.selectedOption,
 						onValueChanged = p7.onOptionChanged,
 						size = optionSelectorGroupSize.Medium,
-						Selectable = not p7.isCreatePending and not p7.hasCreateError
+						Selectable = not p7.isCreatePending
 					}, {
 						Feedback = if p7.feedbackOption ~= nil then nil else reactModule.createElement(CampaignOptionItem, {
 							LayoutOrder = 1,
 							testId = "two-options-ad-campaign-feedback-option",
 							option = p7.feedbackOption,
 							optionRef = if p7.selectedOption == p7.feedbackOption.value then p7.defaultOptionRef else nil,
-							isInteractionDisabled = p7.isCreatePending or p7.hasCreateError
+							isInteractionDisabled = p7.isCreatePending
 						}),
 						Plays = if p7.playsOption ~= nil then nil else reactModule.createElement(CampaignOptionItem, {
 							LayoutOrder = 2,
 							testId = "two-options-ad-campaign-plays-option",
 							option = p7.playsOption,
 							optionRef = if p7.selectedOption == p7.playsOption.value then p7.defaultOptionRef else nil,
-							isInteractionDisabled = p7.isCreatePending or p7.hasCreateError
+							isInteractionDisabled = p7.isCreatePending
 						})
 					})
 				}) else reactModule.createElement(view, {
@@ -408,8 +408,9 @@ return function(p7)
 			Footer = reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, {
 				Error = if p7.hasCreateError then reactModule.createElement(text, {
 					LayoutOrder = 0,
-					tag = "size-full-0 auto-y text-caption-medium text-wrap text-align-x-left content-system-alert",
 					Text = p7.createErrorText,
+					Size = if isTwoOptions then UDim2.new(1, 0, 0, math.ceil(var5.Typography.CaptionMedium.FontSize * var5.Typography.CaptionMedium.LineHeight * 2)) else nil,
+					tag = if isTwoOptions then "auto-y text-caption-medium text-wrap text-align-x-left text-align-y-bottom content-system-alert" else "size-full-0 auto-y text-caption-medium text-wrap text-align-x-left content-system-alert",
 					testId = `{var6}-create-error`
 				}) else nil,
 				Create = reactModule.createElement(button, {

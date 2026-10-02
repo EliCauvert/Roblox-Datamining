@@ -18,6 +18,7 @@ local getMomentsCapabilities = momentsCommonModule.Stores.GetMomentsCapabilities
 local _ = require(parent.DataHydration.MomentsStoreTypes)
 local toMediaItemModule = require(parent.Moments.ToMediaItem)
 local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local fFlagMomentsAutoplayAmpPolicy = sharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
 local fFlagProfileMomentsVideoPlaybackFix = sharedFlagsModule.FFlagProfileMomentsVideoPlaybackFix
 local useSignalState = signalsReactModule.useSignalState
@@ -28,12 +29,12 @@ local function _()
 end
 
 local function defaultCreateCoordinator(p1, p2)
-	-- upvalues: enableAudioPlaybackInApp (ref), coreGuiService (ref), fFlagProfileMomentsVideoPlaybackFix (ref), runService (ref), contentProviderService (ref), media (ref)
+	-- upvalues: enableAudioPlaybackInApp (ref), coreGuiService (ref), fFlagProfileMomentsVideoPlaybackFix (ref), fFlagMomentsOptimisticProfilePending (ref), runService (ref), contentProviderService (ref), media (ref)
 	enableAudioPlaybackInApp()
 	local profileMomentsAudioOutput = Instance.new("AudioDeviceOutput")
 	profileMomentsAudioOutput.Name = "ProfileMomentsAudioOutput"
 	profileMomentsAudioOutput.Parent = coreGuiService
-	local profileMomentsMediaHost = if fFlagProfileMomentsVideoPlaybackFix then Instance.new("Folder") else nil
+	local profileMomentsMediaHost = if fFlagProfileMomentsVideoPlaybackFix or fFlagMomentsOptimisticProfilePending then Instance.new("Folder") else nil
 	
 	if profileMomentsMediaHost ~= nil then
 		profileMomentsMediaHost.Name = "ProfileMomentsMediaHost"

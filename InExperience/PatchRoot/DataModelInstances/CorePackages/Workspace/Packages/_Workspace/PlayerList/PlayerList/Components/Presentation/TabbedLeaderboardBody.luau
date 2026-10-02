@@ -7,7 +7,7 @@ local view = require(parent_1.Foundation).View
 local leaderboardTabsBodyModule = require(parent.Components.Presentation.LeaderboardTabsBody)
 local usePlatformLeaderboardModule = require(parent.Hooks.usePlatformLeaderboard)
 local fallbackSignalsModule = require(parent.Common.FallbackSignals)
-local fFlagPlayerListReskinViewChangeTelemetryModule = require(parent.Flags.FFlagPlayerListReskinViewChangeTelemetry)
+local fFlagPlayerListReskinModule = require(parent.Flags.FFlagPlayerListReskin)
 local var1 = nil
 
 local function _()
@@ -19,11 +19,11 @@ local function _()
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), fFlagPlayerListReskinViewChangeTelemetryModule (ref), usePlatformLeaderboardModule (ref), fallbackSignalsModule (ref), signalsModule (ref), var1 (write), parent (ref), leaderboardTabsBodyModule (ref), cryoModule (ref), view (ref)
+	-- upvalues: reactModule (ref), fFlagPlayerListReskinModule (ref), usePlatformLeaderboardModule (ref), fallbackSignalsModule (ref), signalsModule (ref), var1 (write), parent (ref), leaderboardTabsBodyModule (ref), cryoModule (ref), view (ref)
 	local server, server_1 = reactModule.useState("server")
 	local var2 = server_1
 	
-	if fFlagPlayerListReskinViewChangeTelemetryModule then
+	if fFlagPlayerListReskinModule then
 		local var3 = usePlatformLeaderboardModule()
 		local var4 = if var3 ~= nil then fallbackSignalsModule.getHasActiveLeaderboard else var3.getHasActiveLeaderboard
 		reactModule.useEffect(function()

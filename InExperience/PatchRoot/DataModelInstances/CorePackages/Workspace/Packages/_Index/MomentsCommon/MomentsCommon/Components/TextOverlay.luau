@@ -1,6 +1,7 @@
 ﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
 local parent = momentsCommon.Parent
 local textService = game:GetService("TextService")
+local fFlagMomentsTextOverlayReturnFocusFixModule = require(momentsCommon.Flags.FFlagMomentsTextOverlayReturnFocusFix)
 local fFlagMomentsTextOverlayV2RedesignModule = require(momentsCommon.Flags.FFlagMomentsTextOverlayV2Redesign)
 local getFFlagMomentsStickerButtonModule = require(momentsCommon.Flags.GetFFlagMomentsStickerButton)
 local foundationModule = require(parent.Foundation)
@@ -23,7 +24,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: getFFlagMomentsStickerButtonModule (ref), fFlagMomentsTextOverlayV2RedesignModule (ref), useState (ref), responsiveModule (ref), reactModule (ref), useCallback (ref), t (ref), t_1 (ref), textService (ref), foundationModule (ref), view (ref), hexColor (ref), textOverlaySelectionControlsModule (ref)
+	-- upvalues: getFFlagMomentsStickerButtonModule (ref), fFlagMomentsTextOverlayV2RedesignModule (ref), useState (ref), responsiveModule (ref), reactModule (ref), useCallback (ref), t (ref), t_1 (ref), textService (ref), fFlagMomentsTextOverlayReturnFocusFixModule (ref), foundationModule (ref), view (ref), hexColor (ref), textOverlaySelectionControlsModule (ref)
 	local _ = nil
 	local var1 = if getFFlagMomentsStickerButtonModule() then p1.overlayEdit or p1.textOverlayEdit else p1.textOverlayEdit
 	local var2 = nil
@@ -98,6 +99,7 @@ return function(p1)
 		size = UDim2.fromOffset(math.ceil(textTextSize.X) + var17, math.ceil(textTextSize.Y) + var16)
 		var14 = nil
 	end
+	local var18 = fFlagMomentsTextOverlayV2RedesignModule and (fFlagMomentsTextOverlayReturnFocusFixModule and (p1.editable == true and var4 == responsiveModule.Input.Touch))
 	local textBox = reactModule.createElement("TextBox", {
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1,
@@ -106,6 +108,8 @@ return function(p1)
 		Font = var1.textOverlayStyle.font,
 		Interactable = p1.editable == true,
 		MultiLine = fFlagMomentsTextOverlayV2RedesignModule and p1.editable == true,
+		ManualFocusRelease = if var18 then true else nil,
+		ShouldEmitReturnEvents = if var18 then true else nil,
 		Text = var1.text,
 		TextColor3 = var1.textOverlayStyle.fontColor,
 		TextSize = var1.textOverlayStyle.fontSize,
@@ -144,8 +148,8 @@ return function(p1)
 	local vector2 = Vector2.new(300, 1e999)
 	
 	if fFlagMomentsTextOverlayV2RedesignModule and p1.selected == true then
-		local var18 = var4 == responsiveModule.Input.Pointer and not var2
-		local var19 = reactModule.createElement(view, {
+		local var19 = var4 == responsiveModule.Input.Pointer and not var2
+		local var20 = reactModule.createElement(view, {
 			tag = "auto-xy radius-medium",
 			ZIndex = 1,
 			padding = {
@@ -160,7 +164,7 @@ return function(p1)
 			stroke = {
 				Thickness = 1.5,
 				Color = hexColor,
-				Transparency = if var18 then 0.45 else 1
+				Transparency = if var19 then 0.45 else 1
 			}
 		}, {
 			Chip = reactModule.createElement(view, {
@@ -178,7 +182,7 @@ return function(p1)
 		
 		return reactModule.createElement(view, t_2, {
 			UIDragDetector = var13,
-			Selection = var19,
+			Selection = var20,
 			SelectionControls = reactModule.createElement(textOverlaySelectionControlsModule, {
 				borderGap = 4,
 				containerRef = p1.containerRef,
@@ -186,11 +190,11 @@ return function(p1)
 				onScaleChanged = p1.onScaleChanged,
 				rotation = var1.rotation,
 				scale = var1.scale,
-				visible = var18
+				visible = var19
 			})
 		})
 	elseif fFlagMomentsTextOverlayV2RedesignModule then
-		local var20 = reactModule.createElement(view, {
+		local var21 = reactModule.createElement(view, {
 			tag = "auto-xy padding-medium radius-medium bg-contrast",
 			GroupTransparency = var5,
 			scale = t_2.scale,
@@ -202,7 +206,7 @@ return function(p1)
 		t_2.scale = nil
 		t_2.tag = "position-center-center anchor-center-center auto-xy"
 		
-		return reactModule.createElement(view, t_2, { UIDragDetector = var13, Chip = var20 })
+		return reactModule.createElement(view, t_2, { UIDragDetector = var13, Chip = var21 })
 	end
 	t_2.tag = "position-center-center anchor-center-center auto-xy padding-medium radius-medium bg-contrast"
 	t_2.sizeConstraint = { MaxSize = vector2 }

@@ -1,1 +1,1 @@
-﻿return script.Parent.Parent.Parent._Index["RbxDesignFoundations-31ab8d40-1.1.107"].RbxDesignFoundations
+﻿return require(script.Parent.Parent.Parent._Index["RbxDesignFoundations-31ab8d40-5.0.0"].RbxDesignFoundations)

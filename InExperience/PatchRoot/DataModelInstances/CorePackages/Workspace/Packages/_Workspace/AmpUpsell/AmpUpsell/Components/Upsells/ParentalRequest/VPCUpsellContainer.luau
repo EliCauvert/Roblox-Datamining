@@ -28,9 +28,10 @@ local argCheckModule = require(parent.ArgCheck)
 local appLinking = require(parent.RoactServiceTags).AppLinking
 local getFFlagEnableExternalBrowserForVPCPrivacyPolicyModule = require(ampUpsell.Flags.GetFFlagEnableExternalBrowserForVPCPrivacyPolicy)
 local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
+local fFlagLuaAppOdpRequestSentToast = require(parent.SharedFlags).FFlagLuaAppOdpRequestSentToast
 
 return function(p1)
-	-- upvalues: VPCApiProviderModule (ref), ampApiProviderModule (ref), useRoactService (ref), roactNetworking (ref), getFFlagEnableExternalBrowserForVPCPrivacyPolicyModule (ref), useAppPolicy (ref), appLinking (ref), reactModule (ref), actionTypeEnum (ref), VPCStepEnum (ref), useLocalization (ref), vpcUpsellGatherEmailStrings (ref), useNavigation (ref), argCheckModule (ref), getFStringPrivacyPolicyLinkModule (ref), appScreensModule (ref), isStringEmail (ref), accessResponseEnum (ref), authMsgShown (ref), vpcEventConstants (ref), VPCConfirmationScreenModule (ref), vpcConfirmationScreenStrings (ref), authButtonClick (ref), VPCNewParentUpsellModule (ref), authFormInteraction (ref), VPCErrorScreenModule (ref)
+	-- upvalues: VPCApiProviderModule (ref), ampApiProviderModule (ref), useRoactService (ref), roactNetworking (ref), getFFlagEnableExternalBrowserForVPCPrivacyPolicyModule (ref), useAppPolicy (ref), appLinking (ref), reactModule (ref), actionTypeEnum (ref), VPCStepEnum (ref), useLocalization (ref), vpcUpsellGatherEmailStrings (ref), useNavigation (ref), argCheckModule (ref), getFStringPrivacyPolicyLinkModule (ref), appScreensModule (ref), isStringEmail (ref), fFlagLuaAppOdpRequestSentToast (ref), accessResponseEnum (ref), authMsgShown (ref), vpcEventConstants (ref), VPCConfirmationScreenModule (ref), vpcConfirmationScreenStrings (ref), authButtonClick (ref), VPCNewParentUpsellModule (ref), authFormInteraction (ref), VPCErrorScreenModule (ref)
 	local onCancel = p1.onCancel
 	local onSuccess = p1.onSuccess
 	local var1 = if p1.vpcApiProvider then p1.vpcApiProvider else VPCApiProviderModule
@@ -41,6 +42,7 @@ return function(p1)
 	local parentConsentTypes = p1.parentConsentTypes
 	local var4 = if p1.disablePortal then p1.disablePortal else false
 	local var5 = if p1.isInExperienceEntry then p1.isInExperienceEntry else false
+	local onRequestSent = p1.onRequestSent
 	local var6 = useRoactService(roactNetworking)
 	local var7 = false
 	local var8 = nil
@@ -128,28 +130,31 @@ return function(p1)
 		var10(if recourseAction == actionTypeEnum.ParentLink then VPCStepEnum.NewParentCollectEmail else VPCStepEnum.AlreadyLinkedSendRequest)
 	end
 	
+	local function finishSuccessfulRequest(p2)
+		-- upvalues: var10 (ref), VPCStepEnum (copy), fFlagLuaAppOdpRequestSentToast (copy), onRequestSent (ref)
+		var10(VPCStepEnum.RequestSent)
+		
+		if fFlagLuaAppOdpRequestSentToast and onRequestSent then
+			pcall(onRequestSent, if p2 then p2.sessionId else nil)
+		end
+	end
+	
 	local function getLinkedParentEmailsAndSendRequestToAllParents()
-		-- upvalues: var1 (ref), var6 (ref), var12 (ref), parentConsentTypes (ref), recourseData (ref), var10 (ref), VPCStepEnum (copy), unknown_1 (ref)
+		-- upvalues: var1 (ref), var6 (ref), var12 (ref), parentConsentTypes (ref), recourseData (ref), finishSuccessfulRequest (ref), unknown_1 (ref), var10 (ref), VPCStepEnum (copy)
 		var1.getLinkedParentEmails(var6):andThen(function(p2)
 			-- upvalues: var12 (copy)
 			var12(p2.parentEmails)
 		end):catch(function(_) end)
-		var1.sendRequestToAllParents(var6, parentConsentTypes, recourseData):andThen(function(_)
-			-- upvalues: var10 (copy), VPCStepEnum (copy)
-			var10(VPCStepEnum.RequestSent)
-		end):catch(function(p2)
+		var1.sendRequestToAllParents(var6, parentConsentTypes, recourseData):andThen(finishSuccessfulRequest):catch(function(p2)
 			-- upvalues: unknown_1 (copy), var10 (copy), VPCStepEnum (copy)
 			unknown_1(p2.code)
 			var10(VPCStepEnum.Error)
 		end)
 	end
 	
-	local function sendRequestToNewParent(p2)
-		-- upvalues: var1 (ref), var6 (ref), parentConsentTypes (ref), recourseData (ref), var10 (ref), VPCStepEnum (copy), unknown_1 (ref)
-		var1.sendRequestToNewParent(var6, p2, parentConsentTypes, recourseData):andThen(function(_)
-			-- upvalues: var10 (copy), VPCStepEnum (copy)
-			var10(VPCStepEnum.RequestSent)
-		end):catch(function(p3)
+	local _ = function(p2)
+		-- upvalues: var1 (ref), var6 (ref), parentConsentTypes (ref), recourseData (ref), finishSuccessfulRequest (ref), unknown_1 (ref), var10 (ref), VPCStepEnum (copy)
+		var1.sendRequestToNewParent(var6, p2, parentConsentTypes, recourseData):andThen(finishSuccessfulRequest):catch(function(p3)
 			-- upvalues: unknown_1 (copy), var10 (copy), VPCStepEnum (copy)
 			unknown_1(p3.code)
 			var10(VPCStepEnum.Error)
@@ -194,11 +199,15 @@ return function(p1)
 		return reactModule.createElement(VPCNewParentUpsellModule, {
 			onCancel = onCancel,
 			onCollectEmailAndSendRequest = function(p2)
-				-- upvalues: authButtonClick (copy), var3 (ref), vpcEventConstants (copy), var12 (ref), var10 (ref), VPCStepEnum (copy), sendRequestToNewParent (ref)
+				-- upvalues: authButtonClick (copy), var3 (ref), vpcEventConstants (copy), var12 (ref), var10 (ref), VPCStepEnum (copy), var1 (ref), var6 (ref), parentConsentTypes (ref), recourseData (ref), finishSuccessfulRequest (ref), unknown_1 (ref)
 				authButtonClick(var3, vpcEventConstants.collectEmailPageSubmitButton)
 				var12({ p2 })
 				var10(VPCStepEnum.NewParentSendRequest)
-				sendRequestToNewParent(p2)
+				var1.sendRequestToNewParent(var6, p2, parentConsentTypes, recourseData):andThen(finishSuccessfulRequest):catch(function(p3)
+					-- upvalues: unknown_1 (copy), var10 (copy), VPCStepEnum (copy)
+					unknown_1(p3.code)
+					var10(VPCStepEnum.Error)
+				end)
 			end,
 			onTextChange = function(p2)
 				-- upvalues: authFormInteraction (copy), var3 (ref), vpcEventConstants (copy), handleEmailInput (ref)

@@ -7,6 +7,7 @@ local _ = require(dataHydration.Moments.MomentsStoreTypes)
 local convertApiMomentCommentsModule = require(dataHydration.Moments.Util.convertApiMomentComments)
 local fFlagMomentsStickerOverlayNormalizationModule = require(dataHydration.Moments.FFlagMomentsStickerOverlayNormalization)
 local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
+local fFlagMomentsCommentsIxpEnabled = sharedFlagsModule.FFlagMomentsCommentsIxpEnabled
 local fFlagEnableMomentsCommentReporting = sharedFlagsModule.FFlagEnableMomentsCommentReporting
 local momentStatus = momentsTypesModule.Enums.MomentStatus
 local builderSansMedium = Enum.Font.BuilderSansMedium
@@ -191,7 +192,7 @@ local _ = function(p2)
 end
 
 local function convertApiMomentToMomentItem(p3)
-	-- upvalues: normalizeCaptureEdits (ref), momentStatus (ref), fFlagEnableMomentsCommentReporting (ref), getFFlagMomentsRenderPostAssetsModule (ref), fFlagMomentsComments (ref), convertApiMomentCommentsModule (ref)
+	-- upvalues: normalizeCaptureEdits (ref), momentStatus (ref), fFlagEnableMomentsCommentReporting (ref), getFFlagMomentsRenderPostAssetsModule (ref), fFlagMomentsComments (ref), fFlagMomentsCommentsIxpEnabled (ref), convertApiMomentCommentsModule (ref)
 	local captionedAssetMoment = p3.captionedAssetMoment
 	local owner = p3.owner
 	local entityId = p3.entityId or p3.id
@@ -241,7 +242,7 @@ local function convertApiMomentToMomentItem(p3)
 	t.recommendationMetadata = { feedItemId = feedItemId, tracingId = p3.feedSessionId }
 	t.status = var11
 	
-	if fFlagMomentsComments then
+	if fFlagMomentsComments or fFlagMomentsCommentsIxpEnabled then
 		local var13 = convertApiMomentCommentsModule(p3.comments)
 		
 		if var13 ~= nil then

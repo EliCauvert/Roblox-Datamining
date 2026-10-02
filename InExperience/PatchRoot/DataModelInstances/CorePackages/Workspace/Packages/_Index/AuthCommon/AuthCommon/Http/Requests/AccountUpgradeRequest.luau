@@ -11,7 +11,7 @@ return function(p1, p2)
 			upgradeType = p2.upgradeType,
 			username = p2.username,
 			password = if p2.password == "" then nil else p2.password,
-			birthday = p2.birthday,
+			birthday = if p2.birthday == "" then nil else p2.birthday,
 			email = if p2.email == "" then nil else p2.email,
 			gender = p2.gender
 		}),

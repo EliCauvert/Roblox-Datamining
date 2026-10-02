@@ -11,6 +11,7 @@ local useIsVideoEligibleModule = require(gameTile.Video.useIsVideoEligible)
 local usePreferredInput = require(parent.Responsive).usePreferredInput
 local videoUtilsModule = require(parent.VideoUtils)
 local getPlaybackDetectionMethod = videoUtilsModule.getPlaybackDetectionMethod
+local videoPlaybackDetectionMethod = videoUtilsModule.VideoPlaybackDetectionMethod
 local videoPlaybackDetector = videoUtilsModule.VideoPlaybackDetector
 local videoEndReason = videoUtilsModule.AnalyticsEnums.VideoEndReason
 local useCanDevicePlayVideoPreview = videoUtilsModule.useCanDevicePlayVideoPreview
@@ -19,9 +20,10 @@ local fetchGamePlayabilityAndProductInfo = require(parent.GameDetailRodux).Fetch
 local fFlagLuaAppEdpMediaGalleryVideoPreview = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryVideoPreview
 local fFlagLuaAppUsePrevalidatedVideoGamePlayability = require(parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
 local fFlagLuaAppGameTileSelectionVideoPlayback = require(parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
+local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), fetchGamePlayabilityAndProductInfo (ref), useIsVideoEligibleModule (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), reactModule (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfigModule (ref), retrievalStatus (ref), videoEndReason (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), usePreferredInput (ref), getPlaybackDetectionMethod (ref), videoPlaybackDetector (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref)
+	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), fetchGamePlayabilityAndProductInfo (ref), useIsVideoEligibleModule (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), reactModule (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfigModule (ref), retrievalStatus (ref), videoEndReason (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), usePreferredInput (ref), getPlaybackDetectionMethod (ref), videoPlaybackDetector (ref), videoPlaybackDetectionMethod (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref)
 	local var1 = useDispatch()
 	local var2 = useRoactService(roactNetworking)
 	local var3 = useSelector(function(p2)
@@ -31,15 +33,17 @@ return function(p1)
 	local var4 = useIsVideoEligibleModule(p1.universeId, if fFlagLuaAppUsePrevalidatedVideoGamePlayability then p1.hasPrevalidatedVideoGamePlayability else nil)
 	local var5, var6 = reactModule.useState(false)
 	local var7 = useCanDevicePlayVideoPreview(tileVideoBlockingConfigModule, p1.universeId, p1.pageContext)
+	local var8 = if fFlagLuaAppGameTileSelectionVideoPlayback or fFlagLuaAppOneByTwoHoverIdleAutoplay then getPlaybackDetectionMethod(usePreferredInput(), p1.isHoverSupported) else nil
 	
 	return reactModule.createElement(videoPlaybackDetector, {
 		videoKey = p1.videoKey,
 		itemIndex = p1.itemIndex,
 		itemFrameRef = p1.tileRef,
-		playbackDetectionMethod = if fFlagLuaAppGameTileSelectionVideoPlayback then if fFlagLuaAppGameTileSelectionVideoPlayback then getPlaybackDetectionMethod(usePreferredInput(), p1.isHoverSupported) else nil else nil,
+		playbackDetectionMethod = if fFlagLuaAppGameTileSelectionVideoPlayback or fFlagLuaAppOneByTwoHoverIdleAutoplay then var8 else nil,
 		isHoverSupported = if fFlagLuaAppGameTileSelectionVideoPlayback then nil else p1.isHoverSupported,
 		isHovered = p1.isHovered,
 		isSelected = if fFlagLuaAppGameTileSelectionVideoPlayback then p1.isSelected else nil,
+		hasVideoPlaybackUserIntent = if fFlagLuaAppOneByTwoHoverIdleAutoplay and var8 == videoPlaybackDetectionMethod.Hover then p1.isHovered else nil,
 		autoplay = if fFlagLuaAppGameTileSelectionVideoPlayback then nil elseif fFlagLuaAppEdpMediaGalleryVideoPreview then p1.autoplay else nil,
 		videoPlaybackCoordinator = if p1.videoPlaybackContext then p1.videoPlaybackContext.videoPlaybackCoordinator else nil,
 		onPlaybackChange = p1.onPlaybackChange,

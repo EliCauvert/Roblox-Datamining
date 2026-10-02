@@ -43,6 +43,7 @@ local t_1 = {
 	isAdUpsellCreatePending = false,
 	isAdCampaignSheetOpen = false,
 	hasAdCampaignCreateError = false,
+	adCampaignCreateErrorKind = nil,
 	adCampaignDurationDays = nil,
 	adCampaignEstimatedPriceRobux = nil,
 	adCampaignOffers = nil,

@@ -70,6 +70,8 @@
 		GoHome = "goHome",
 		RegisterPasskey = "registerPasskey",
 		PlayNow = "playNow",
+		GoogleSso = "googleSso",
+		AppleSso = "appleSso",
 		AccountPickerSignInAnotherAccount = "accountPickerSignInAnotherAccount",
 		AccountPickerCreateAccount = "accountPickerCreateAccount",
 		AccountPickerMoreOptions = "accountPickerMoreOptions",

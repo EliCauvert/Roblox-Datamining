@@ -11,87 +11,98 @@ local buildMomentShareCardMediaModule = require(script.Parent.buildMomentShareCa
 local getMomentShareCardCornerRadiiModule = require(script.Parent.getMomentShareCardCornerRadii)
 local resolveMomentShareCardMetadataTextModule = require(script.Parent.resolveMomentShareCardMetadataText)
 local useExperienceNameModule = require(script.Parent.useExperienceName)
+local useIsMomentsViewingEligibleModule = require(script.Parent.useIsMomentsViewingEligible)
 local useMomentDetailsModule = require(script.Parent.useMomentDetails)
 local useMomentShareCardVideoFrameModule = require(script.Parent.useMomentShareCardVideoFrame)
 local constantsModule = require(appChat.Constants)
 local fFlagAppChatMomentShareCardLoadingSkeletonsModule = require(appChat.Flags.FFlagAppChatMomentShareCardLoadingSkeletons)
+local fFlagAppChatMomentShareCardEdgeCasesModule = require(appChat.Flags.FFlagAppChatMomentShareCardEdgeCases)
 local useScaledValue = foundationModule.Hooks.useScaledValue
 local useAssetFetchStatus = roactUtilsModule.Hooks.useAssetFetchStatus
 local useTokens = foundationModule.Hooks.useTokens
 
 return function(p1)
-	-- upvalues: useMomentDetailsModule (ref), useScaledValue (ref), constantsModule (ref), useTokens (ref), userProfilesModule (ref), resolveMomentShareCardMetadataTextModule (ref), useExperienceNameModule (ref), momentDetailsStatusModule (ref), fFlagAppChatMomentShareCardLoadingSkeletonsModule (ref), reactModule (ref), buildMomentShareCardMediaModule (ref), useMomentShareCardVideoFrameModule (ref), useAssetFetchStatus (ref), getMomentShareCardCornerRadiiModule (ref)
+	-- upvalues: useMomentDetailsModule (ref), useScaledValue (ref), constantsModule (ref), useTokens (ref), fFlagAppChatMomentShareCardEdgeCasesModule (ref), useIsMomentsViewingEligibleModule (ref), userProfilesModule (ref), resolveMomentShareCardMetadataTextModule (ref), useExperienceNameModule (ref), momentDetailsStatusModule (ref), fFlagAppChatMomentShareCardLoadingSkeletonsModule (ref), reactModule (ref), buildMomentShareCardMediaModule (ref), useMomentShareCardVideoFrameModule (ref), useAssetFetchStatus (ref), getMomentShareCardCornerRadiiModule (ref)
 	local var1
 	local var2 = useMomentDetailsModule(p1.momentId, p1.targetIdType)
 	local status = var2.status
 	local var3 = useScaledValue(constantsModule.GameCard.THUMBNAIL_WIDTH)
 	local var4 = useTokens()
+	local var5 = fFlagAppChatMomentShareCardEdgeCasesModule and not (if fFlagAppChatMomentShareCardEdgeCasesModule then useIsMomentsViewingEligibleModule() else true)
 	local creatorId = var2.creatorId
-	local var5 = userProfilesModule.Hooks.useUserProfilesFetch({
+	local var6 = userProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = if creatorId then { tostring(creatorId) } else {},
 		query = userProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
 	})
-	local var6 = if creatorId and var5.data then userProfilesModule.Selectors.getUsernameFromId(var5.data, creatorId) else nil
-	local var7 = resolveMomentShareCardMetadataTextModule(var2.description, nil, nil)
-	local var8 = resolveMomentShareCardMetadataTextModule(nil, var2.experienceName, nil)
-	local var9 = useExperienceNameModule(var2.universeId, var7 == nil and var8 == nil)
-	local var10 = resolveMomentShareCardMetadataTextModule(var7, var8, var9.name)
-	local var11 = status == momentDetailsStatusModule.Loading
-	local var12 = fFlagAppChatMomentShareCardLoadingSkeletonsModule and (var6 == nil and (var11 or (creatorId ~= nil and (if var5.loading ~= true then var5.isRetrying == true else true))))
-	local var13 = fFlagAppChatMomentShareCardLoadingSkeletonsModule and (var10 == nil and (var11 or var9.isLoading))
+	local var7 = if creatorId and var6.data then userProfilesModule.Selectors.getUsernameFromId(var6.data, creatorId) else nil
+	local var8 = resolveMomentShareCardMetadataTextModule(var2.description, nil, nil)
+	local var9 = resolveMomentShareCardMetadataTextModule(nil, var2.experienceName, nil)
+	local var10 = useExperienceNameModule(var2.universeId, var8 == nil and var9 == nil)
+	local var11 = resolveMomentShareCardMetadataTextModule(var8, var9, var10.name)
+	local var12 = status == momentDetailsStatusModule.Loading
+	local var13 = fFlagAppChatMomentShareCardLoadingSkeletonsModule and (var7 == nil and (var12 or (creatorId ~= nil and (if var6.loading ~= true then var6.isRetrying == true else true))))
+	local var14 = fFlagAppChatMomentShareCardLoadingSkeletonsModule and (var11 == nil and (var12 or var10.isLoading))
 	local assetId = var2.assetId
 	local captureType = var2.captureType
 	local assetAccessContext = var2.assetAccessContext
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: status (ref), momentDetailsStatusModule (copy), buildMomentShareCardMediaModule (copy), assetId (ref), captureType (ref), assetAccessContext (ref)
-		return if status == momentDetailsStatusModule.Ready then buildMomentShareCardMediaModule({
+	local var15 = reactModule.useMemo(function()
+		-- upvalues: var5 (ref), status (ref), momentDetailsStatusModule (copy), buildMomentShareCardMediaModule (copy), assetId (ref), captureType (ref), assetAccessContext (ref)
+		return if var5 or status ~= momentDetailsStatusModule.Ready then nil else buildMomentShareCardMediaModule({
 			assetId = assetId,
 			captureType = captureType,
 			assetAccessContext = assetAccessContext
-		}) else nil
-	end, { status, assetId, captureType, assetAccessContext })
-	local var15 = var14 ~= nil and var14.captureType == Enum.CaptureType.Video
-	local var16 = useMomentShareCardVideoFrameModule(if var14 == nil or var14.captureType ~= Enum.CaptureType.Video then nil else var14.content)
-	local var17 = if var14 == nil then nil elseif var15 then var16 else var14.posterContent
-	local var18 = useAssetFetchStatus(if var15 or var17 == nil then nil else var17.Uri) == Enum.AssetFetchStatus.Success
+		})
+	end, {
+		var5,
+		status,
+		assetId,
+		captureType,
+		assetAccessContext
+	})
+	local var16 = var15 ~= nil and var15.captureType == Enum.CaptureType.Video
+	local var17 = useMomentShareCardVideoFrameModule(if var15 == nil or var15.captureType ~= Enum.CaptureType.Video then nil else var15.content)
+	local var18 = if var15 == nil then nil elseif var16 then var17 else var15.posterContent
+	local var19 = useAssetFetchStatus(if var16 or var18 == nil then nil else var18.Uri) == Enum.AssetFetchStatus.Success
 	
-	if var15 then
-		var1 = var16 ~= nil
+	if var16 then
+		var1 = var17 ~= nil
 		var1 = nil
 	else
-		var1 = var18
+		var1 = var19
 	end
 	local size500 = var4.Size.Size_500
 	local openMomentsDeepLink = p1.openMomentsDeepLink
 	
 	return {
-		status = var2.status,
+		status = if var5 then momentDetailsStatusModule.Locked else var2.status,
 		mediaSize = var3,
-		hasMedia = if status ~= momentDetailsStatusModule.Loading then var14 ~= nil else true,
-		isVideo = var15,
+		hasMedia = not var5 and (if status ~= momentDetailsStatusModule.Loading then var15 ~= nil else true),
+		isVideo = var16,
 		playIconStyle = var4.Color.Content.Emphasis,
-		posterContent = var17,
+		posterContent = var18,
 		isPosterLoaded = var1,
 		cornerRadii = reactModule.useMemo(function()
 			-- upvalues: getMomentShareCardCornerRadiiModule (copy), p1 (ref), size500 (ref)
 			return getMomentShareCardCornerRadiiModule(p1.isStartOfGroup, p1.isIncoming, size500)
 		end, { p1.isStartOfGroup, p1.isIncoming, size500 }),
-		username = var6,
-		metadataText = var10,
-		isUsernameLoading = var12,
-		isMetadataLoading = var13,
+		username = var7,
+		metadataText = var11,
+		isUsernameLoading = var13,
+		isMetadataLoading = var14,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: openMomentsDeepLink (ref), var2 (ref), momentDetailsStatusModule (copy), p1 (ref)
+			-- upvalues: var5 (ref), openMomentsDeepLink (ref), var2 (ref), momentDetailsStatusModule (copy), p1 (ref)
+			if var5 then return end
 			if openMomentsDeepLink and var2.status == momentDetailsStatusModule.Ready then
 				openMomentsDeepLink(p1.momentId, p1.targetIdType)
 			end
 		end, {
+			var5,
 			openMomentsDeepLink,
 			var2.status,
 			p1.momentId,
 			p1.targetIdType
 		}),
-		selectable = status == momentDetailsStatusModule.Ready and openMomentsDeepLink ~= nil,
+		selectable = not var5 and (status == momentDetailsStatusModule.Ready and openMomentsDeepLink ~= nil),
 		LayoutOrder = p1.LayoutOrder
 	}
 end

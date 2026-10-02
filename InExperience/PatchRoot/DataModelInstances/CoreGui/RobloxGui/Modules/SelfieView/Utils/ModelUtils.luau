@@ -1,5 +1,4 @@
 ﻿local collectionService = game:GetService("CollectionService")
-local selfViewNeckCheck = game:DefineFastFlag("SelfViewNeckCheck", false)
 local t = {
 	Accessory = "Accessory",
 	CharacterMesh = "CharacterMesh",
@@ -21,7 +20,6 @@ local function getFaceControls(p1)
 end
 
 local function getNeck(p1, p2)
-	-- upvalues: selfViewNeckCheck (ref)
 	if p1 == nil or p2 == nil then
 		return nil
 	end
@@ -32,17 +30,9 @@ local function getNeck(p1, p2)
 			return v
 		end
 	end
-	if selfViewNeckCheck == true then
-		for i, v in descendants do
-			if v:IsA("AnimationConstraint") and v.Parent == p2 and (v.Attachment0 ~= nil and v.Attachment0.Name == "NeckRigAttachment" or v.Name == "Neck") then
-				return v
-			end
-		end
-	else
-		for i, v in descendants do
-			if v:IsA("AnimationConstraint") and v.Parent == p2 and (v.Attachment0.Name == "NeckRigAttachment" or v.Name == "Neck") then
-				return v
-			end
+	for i, v in descendants do
+		if v:IsA("AnimationConstraint") and v.Parent == p2 and (v.Attachment0 ~= nil and v.Attachment0.Name == "NeckRigAttachment" or v.Name == "Neck") then
+			return v
 		end
 	end
 	return nil

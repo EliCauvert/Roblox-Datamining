@@ -6,6 +6,7 @@ local chatConstantsModule = require(script.Parent.chatConstants)
 local _ = require(script.Parent.localToolOverlay)
 local createManageDevProductStoreModule = require(script.Parent.createManageDevProductStore)
 local toolControllerUtilsModule = require(script.Parent.toolControllerUtils)
+local downloadGeneratedImageAsyncModule = require(buildExperience.utils.downloadGeneratedImageAsync)
 local studioManageDevProductTool = creatorAgentChatModule.StudioManageDevProductTool
 local debug = creatorAgentChatModule.debug
 local awaitRequestState = toolControllerUtilsModule.awaitRequestState
@@ -33,7 +34,7 @@ local function awaitPromise(p1)
 	p1:cancel()
 	var3 = "The request timed out and its outcome is unknown. List developer products before retrying."
 	
-	return var2, u359
+	return var2, u388
 end
 
 local function _(p2)
@@ -53,7 +54,7 @@ local function awaitMutation(p2)
 	if var6 ~= nil then
 		return var6, nil
 	end
-	local var8 = nil
+	local var8 = if typeof(var7) == "table" then var7.product else nil
 	
 	if typeof(var7) == "table" and typeof(var7.errorMessage) == "string" then
 		return var8, var7.errorMessage
@@ -63,7 +64,7 @@ local function awaitMutation(p2)
 	return var8, tostring(var7)
 end
 
-local _ = function(p2, p3, p4)
+local function proposalFromFlow(p2, p3, p4)
 	return {
 		toolCallId = p2.toolCallId,
 		callOrder = p2.callOrder,
@@ -72,6 +73,7 @@ local _ = function(p2, p3, p4)
 		description = p2.description,
 		priceInRobux = p2.priceInRobux,
 		productId = p2.productId,
+		imageAssetId = p2.imageAssetId,
 		isApproved = p3,
 		isRejected = p4
 	}
@@ -82,7 +84,7 @@ local function moderationError(p2, p3)
 end
 
 return function(p2, p3, p4, p5)
-	-- upvalues: var1 (ref), awaitMutation (ref), debug (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), awaitRequestState (ref), chatConstantsModule (ref), moderationError (ref), detailCodeForFailure (ref), studioManageDevProductTool (ref), awaitPromise (ref), getToolCallOrder (ref)
+	-- upvalues: var1 (ref), downloadGeneratedImageAsyncModule (ref), awaitPromise (ref), awaitMutation (ref), proposalFromFlow (ref), debug (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), awaitRequestState (ref), chatConstantsModule (ref), moderationError (ref), detailCodeForFailure (ref), studioManageDevProductTool (ref), getToolCallOrder (ref)
 	local var6 = nil
 	local t = {}
 	local var7 = nil
@@ -90,19 +92,43 @@ return function(p2, p3, p4, p5)
 	local _ = nil
 	
 	local function performMutation(p6)
-		-- upvalues: awaitMutation (copy), var1 (ref)
+		-- upvalues: downloadGeneratedImageAsyncModule (copy), awaitPromise (copy), awaitMutation (copy), var1 (ref)
 		local universeId = p6.universeId
 		
 		if universeId == nil then
 			return nil, "No universe is associated with this session."
+		elseif p6.priceInRobux ~= nil and (p6.priceInRobux < 1 or p6.priceInRobux > 100) then
+			return nil, "Developer-product prices must be between 1 and 100 Robux."
 		elseif p6.action == "create" then
 			if p6.name == nil or p6.name == "" or p6.priceInRobux == nil then
 				return nil, "A name and price are required to create a developer product."
 			end
+			local var8 = nil
+			
+			if p6.imageAssetId ~= nil then
+				local var9, var10
+				local _ = nil
+				local var11, var12 = awaitPromise(downloadGeneratedImageAsyncModule(p6.imageAssetId))
+				
+				if var11 == nil then
+					var9 = if typeof(var12) == "table" then var12.product else nil
+					var10 = if typeof(var12) == "table" and typeof(var12.errorMessage) == "string" then var12.errorMessage elseif var12 == nil then "The request timed out." else tostring(var12)
+				else
+					var9 = var11
+					var10 = nil
+				end
+				var8 = var9
+				local var13 = var10
+				
+				if var8 == nil then
+					return nil, var13
+				end
+			end
 			return awaitMutation(var1.create(universeId, {
 				name = p6.name,
 				description = p6.description,
-				priceInRobux = p6.priceInRobux
+				priceInRobux = p6.priceInRobux,
+				imageFile = var8
 			}))
 		elseif p6.productId == nil then
 			return nil, "A productId is required for this action."
@@ -127,28 +153,18 @@ return function(p2, p3, p4, p5)
 	end
 	
 	local _ = function(p6, p7, p8)
-		-- upvalues: p5 (ref), p4 (ref)
+		-- upvalues: p5 (ref), p4 (ref), proposalFromFlow (copy)
 		p6.submitted = false
 		
 		if p5 == nil then
 			return
 		end
-		p4.setDevProductTool({
-			isApproved = false,
-			isRejected = false,
-			toolCallId = p6.toolCallId,
-			callOrder = p6.callOrder,
-			action = p6.action,
-			name = p6.name,
-			description = p6.description,
-			priceInRobux = p6.priceInRobux,
-			productId = p6.productId
-		})
+		p4.setDevProductTool(proposalFromFlow(p6, false, false))
 		p5(p7, p8)
 	end
 	
 	local function submitResult(p6, p7, p8, p9)
-		-- upvalues: p2 (ref), debug (copy), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), p5 (ref), p4 (ref), awaitRequestState (copy), chatConstantsModule (copy), p3 (ref), var6 (write)
+		-- upvalues: p2 (ref), debug (copy), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), p5 (ref), p4 (ref), proposalFromFlow (copy), awaitRequestState (copy), chatConstantsModule (copy), p3 (ref), var6 (write)
 		local var8 = p2.submitActiveToolResult(p7, p8, p6.turnId, p6.referenceId)
 		
 		if var8 == nil then
@@ -160,17 +176,7 @@ return function(p2, p3, p4, p5)
 				if p5 == nil then
 					return
 				end
-				p4.setDevProductTool({
-					isApproved = false,
-					isRejected = false,
-					toolCallId = p6.toolCallId,
-					callOrder = p6.callOrder,
-					action = p6.action,
-					name = p6.name,
-					description = p6.description,
-					priceInRobux = p6.priceInRobux,
-					productId = p6.productId
-				})
+				p4.setDevProductTool(proposalFromFlow(p6, false, false))
 				p5(p9, nil)
 				
 				return
@@ -196,17 +202,7 @@ return function(p2, p3, p4, p5)
 				p6.submitted = false
 				
 				if p5 ~= nil then
-					p4.setDevProductTool({
-						isApproved = false,
-						isRejected = false,
-						toolCallId = p6.toolCallId,
-						callOrder = p6.callOrder,
-						action = p6.action,
-						name = p6.name,
-						description = p6.description,
-						priceInRobux = p6.priceInRobux,
-						productId = p6.productId
-					})
+					p4.setDevProductTool(proposalFromFlow(p6, false, false))
 					p5(p9, errorCode)
 				end
 			else
@@ -240,7 +236,7 @@ return function(p2, p3, p4, p5)
 			result = var9
 			resultError = var10
 			
-			if result ~= nil then
+			if result ~= nil and resultError == nil then
 				resultError = moderationError(p6, result)
 				
 				if resultError ~= nil then
@@ -277,19 +273,9 @@ return function(p2, p3, p4, p5)
 	end
 	
 	local function submitRejection(p6, p7)
-		-- upvalues: p4 (ref), submitApproval (ref), studioManageDevProductTool (copy), submitResult (ref)
+		-- upvalues: p4 (ref), proposalFromFlow (copy), submitApproval (ref), studioManageDevProductTool (copy), submitResult (ref)
 		if p6.attempted then
-			p4.setDevProductTool({
-				isApproved = true,
-				isRejected = false,
-				toolCallId = p6.toolCallId,
-				callOrder = p6.callOrder,
-				action = p6.action,
-				name = p6.name,
-				description = p6.description,
-				priceInRobux = p6.priceInRobux,
-				productId = p6.productId
-			})
+			p4.setDevProductTool(proposalFromFlow(p6, true, false))
 			submitApproval(p6)
 			
 			return
@@ -298,22 +284,12 @@ return function(p2, p3, p4, p5)
 	end
 	
 	local function onApproveImpl()
-		-- upvalues: var6 (write), p4 (ref), submitApproval (ref)
+		-- upvalues: var6 (write), p4 (ref), proposalFromFlow (copy), submitApproval (ref)
 		if var6 == nil or var6.submitted then
 			return
 		end
 		var6.submitted = true
-		p4.setDevProductTool({
-			isApproved = true,
-			isRejected = false,
-			toolCallId = var6.toolCallId,
-			callOrder = var6.callOrder,
-			action = var6.action,
-			name = var6.name,
-			description = var6.description,
-			priceInRobux = var6.priceInRobux,
-			productId = var6.productId
-		})
+		p4.setDevProductTool(proposalFromFlow(var6, true, false))
 		task.spawn(function()
 			-- upvalues: submitApproval (copy), var6 (ref)
 			submitApproval(var6)
@@ -321,22 +297,12 @@ return function(p2, p3, p4, p5)
 	end
 	
 	local function onRejectImpl()
-		-- upvalues: var6 (write), p4 (ref), submitRejection (ref)
+		-- upvalues: var6 (write), p4 (ref), proposalFromFlow (copy), submitRejection (ref)
 		if var6 == nil or var6.submitted then
 			return
 		end
 		var6.submitted = true
-		p4.setDevProductTool({
-			isApproved = false,
-			isRejected = true,
-			toolCallId = var6.toolCallId,
-			callOrder = var6.callOrder,
-			action = var6.action,
-			name = var6.name,
-			description = var6.description,
-			priceInRobux = var6.priceInRobux,
-			productId = var6.productId
-		})
+		p4.setDevProductTool(proposalFromFlow(var6, false, true))
 		task.spawn(function()
 			-- upvalues: submitRejection (copy), var6 (ref)
 			submitRejection(var6, nil)
@@ -357,7 +323,7 @@ return function(p2, p3, p4, p5)
 			local var12, var13 = awaitPromise(var1.list(universeId))
 			
 			if var12 == nil then
-				var10 = nil
+				var10 = if typeof(var13) == "table" then var13.product else nil
 				var11 = if typeof(var13) == "table" and typeof(var13.errorMessage) == "string" then var13.errorMessage elseif var13 == nil then "The request timed out." else tostring(var13)
 			else
 				var10 = var12
@@ -426,7 +392,7 @@ return function(p2, p3, p4, p5)
 	
 	return {
 		syncManageDevProductRequests = function(p6)
-			-- upvalues: studioManageDevProductTool (copy), p3 (ref), var6 (write), p4 (ref), var7 (write), t (ref), p2 (ref), awaitRequestState (copy), chatConstantsModule (copy), runListRequest (ref), getToolCallOrder (copy), onApproveImpl (write), onRejectImpl (write), debug (copy)
+			-- upvalues: studioManageDevProductTool (copy), p3 (ref), var6 (write), p4 (ref), var7 (write), t (ref), p2 (ref), awaitRequestState (copy), chatConstantsModule (copy), runListRequest (ref), getToolCallOrder (copy), proposalFromFlow (copy), onApproveImpl (write), onRejectImpl (write), debug (copy)
 			local var8, var9, var10, var11 = studioManageDevProductTool.findManageDevProductRequestInTurnState(p6, p3)
 			
 			if var8 == nil then
@@ -496,20 +462,11 @@ return function(p2, p3, p4, p5)
 						name = var12.name,
 						description = var12.description,
 						priceInRobux = var12.priceInRobux,
-						productId = var12.productId
+						productId = var12.productId,
+						imageAssetId = var12.imageAssetId
 					}
 					var6 = t_1
-					p4.setDevProductTool({
-						isApproved = false,
-						isRejected = false,
-						toolCallId = t_1.toolCallId,
-						callOrder = t_1.callOrder,
-						action = t_1.action,
-						name = t_1.name,
-						description = t_1.description,
-						priceInRobux = t_1.priceInRobux,
-						productId = t_1.productId
-					})
+					p4.setDevProductTool(proposalFromFlow(t_1, false, false))
 					p4.setDevProductAction(var8, onApproveImpl, onRejectImpl)
 					debug.log("info", "manage_developer_product proposal displayed", {
 						toolCallId = var8,
@@ -541,22 +498,12 @@ return function(p2, p3, p4, p5)
 			return var8
 		end,
 		trySubmitComposerText = function(p6)
-			-- upvalues: var6 (write), p4 (ref), submitRejection (ref)
+			-- upvalues: var6 (write), p4 (ref), proposalFromFlow (copy), submitRejection (ref)
 			if var6 == nil or var6.submitted then
 				return false
 			end
 			var6.submitted = true
-			p4.setDevProductTool({
-				isApproved = false,
-				isRejected = true,
-				toolCallId = var6.toolCallId,
-				callOrder = var6.callOrder,
-				action = var6.action,
-				name = var6.name,
-				description = var6.description,
-				priceInRobux = var6.priceInRobux,
-				productId = var6.productId
-			})
+			p4.setDevProductTool(proposalFromFlow(var6, false, true))
 			task.spawn(function()
 				-- upvalues: submitRejection (copy), var6 (ref), p6 (ref)
 				submitRejection(var6, p6)
