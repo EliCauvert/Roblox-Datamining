@@ -565,6 +565,11 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "Heading.ODPAllDone": "All done",
     "Heading.ConversationalRequest.BlockExperience": "Do you want to block this game for your child?",
     "Heading.ConversationalRequest.ApproveExperience": "Do you want to approve this game for your child?",
-    "Heading.ConversationalRequest.BlockUser": "Do you want to block this user for your child?"
+    "Heading.ConversationalRequest.BlockUser": "Do you want to block this user for your child?",
+    "ODPChallenge.Prologue.Action.ManageExperience": "unblock this experience",
+    "ODPChallenge.Prologue.Action.ManageFriend": "unblock this user",
+    "ODPChallenge.Prologue.Action.AddTrustedConnection": "add this trusted friend",
+    "ODPChallenge.Prologue.Action.SendTransfer": "send Robux",
+    "ODPChallenge.Prologue.Action.ReceiveTransfer": "receive Robux"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Parents");

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "30d9167a-cb70-429f-0e88-4e2e18a9b0a2")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "db70129a-9ccb-1ed8-df2b-b486650e04f1")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 779433, e => {
@@ -14,36 +14,30 @@
             name: "questionnaireV2Allowlist",
             defaultValue: !1
         }),
-        i = (0, t.defineFlag)({
+        r = (0, t.defineFlag)({
             namespace: "content-suitability",
             name: "questionnaireV2Q1Release",
             defaultValue: !1
         }),
-        r = (0, t.defineFlag)({
+        i = (0, t.defineFlag)({
             namespace: "content-suitability",
             name: "questionnaireSectionStepperEnabled",
             defaultValue: !1
         });
-    e.s(["questionnaireSectionStepperEnabled", 0, r, "questionnaireV2Allowlist", 0, s, "questionnaireV2Q1Release", 0, i])
+    e.s(["questionnaireSectionStepperEnabled", 0, i, "questionnaireV2Allowlist", 0, s, "questionnaireV2Q1Release", 0, r])
 }, 787617, e => {
     "use strict";
-    var t = e.i(157700);
-    let s = (0, t.defineFlag)({
-            namespace: "creator-platform",
-            name: "isUpdatedPublishingFlowEnabled",
-            defaultValue: !1
-        }),
-        i = (0, t.defineFlag)({
-            namespace: "creator-platform",
-            name: "isUpdatedSettingsNavigationEnabled",
-            defaultValue: !1
-        });
-    e.s(["isUpdatedPublishingFlowEnabled", 0, s, "isUpdatedSettingsNavigationEnabled", 0, i])
+    let t = (0, e.i(157700).defineFlag)({
+        namespace: "creator-platform",
+        name: "isUpdatedPublishingFlowEnabled",
+        defaultValue: !1
+    });
+    e.s(["isUpdatedPublishingFlowEnabled", 0, t])
 }, 261482, 858148, 966956, 719743, 477749, e => {
     "use strict";
     var t, s = e.i(157310),
-        i = e.i(721281),
-        r = e.i(677753),
+        r = e.i(721281),
+        i = e.i(677753),
         n = function(e, t) {
             return (n = Object.setPrototypeOf || ({
                 __proto__: []
@@ -63,11 +57,11 @@
         n(e, t), e.prototype = null === t ? Object.create(t) : (s.prototype = t.prototype, new s)
     }
 
-    function o(e, t, s, i) {
-        return new(s || (s = Promise))(function(r, n) {
+    function o(e, t, s, r) {
+        return new(s || (s = Promise))(function(i, n) {
             function a(e) {
                 try {
-                    u(i.next(e))
+                    u(r.next(e))
                 } catch (e) {
                     n(e)
                 }
@@ -75,7 +69,7 @@
 
             function o(e) {
                 try {
-                    u(i.throw(e))
+                    u(r.throw(e))
                 } catch (e) {
                     n(e)
                 }
@@ -83,20 +77,20 @@
 
             function u(e) {
                 var t;
-                e.done ? r(e.value) : ((t = e.value) instanceof s ? t : new s(function(e) {
+                e.done ? i(e.value) : ((t = e.value) instanceof s ? t : new s(function(e) {
                     e(t)
                 })).then(a, o)
             }
-            u((i = i.apply(e, t || [])).next())
+            u((r = r.apply(e, t || [])).next())
         })
     }
 
     function u(e, t) {
-        var s, i, r, n = {
+        var s, r, i, n = {
                 label: 0,
                 sent: function() {
-                    if (1 & r[0]) throw r[1];
-                    return r[1]
+                    if (1 & i[0]) throw i[1];
+                    return i[1]
                 },
                 trys: [],
                 ops: []
@@ -111,11 +105,11 @@
                 var d = [o, u];
                 if (s) throw TypeError("Generator is already executing.");
                 for (; a && (a = 0, d[0] && (n = 0)), n;) try {
-                    if (s = 1, i && (r = 2 & d[0] ? i.return : d[0] ? i.throw || ((r = i.return) && r.call(i), 0) : i.next) && !(r = r.call(i, d[1])).done) return r;
-                    switch (i = 0, r && (d = [2 & d[0], r.value]), d[0]) {
+                    if (s = 1, r && (i = 2 & d[0] ? r.return : d[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) && !(i = i.call(r, d[1])).done) return i;
+                    switch (r = 0, i && (d = [2 & d[0], i.value]), d[0]) {
                         case 0:
                         case 1:
-                            r = d;
+                            i = d;
                             break;
                         case 4:
                             return n.label++, {
@@ -123,36 +117,36 @@
                                 done: !1
                             };
                         case 5:
-                            n.label++, i = d[1], d = [0];
+                            n.label++, r = d[1], d = [0];
                             continue;
                         case 7:
                             d = n.ops.pop(), n.trys.pop();
                             continue;
                         default:
-                            if (!(r = (r = n.trys).length > 0 && r[r.length - 1]) && (6 === d[0] || 2 === d[0])) {
+                            if (!(i = (i = n.trys).length > 0 && i[i.length - 1]) && (6 === d[0] || 2 === d[0])) {
                                 n = 0;
                                 continue
                             }
-                            if (3 === d[0] && (!r || d[1] > r[0] && d[1] < r[3])) {
+                            if (3 === d[0] && (!i || d[1] > i[0] && d[1] < i[3])) {
                                 n.label = d[1];
                                 break
                             }
-                            if (6 === d[0] && n.label < r[1]) {
-                                n.label = r[1], r = d;
+                            if (6 === d[0] && n.label < i[1]) {
+                                n.label = i[1], i = d;
                                 break
                             }
-                            if (r && n.label < r[2]) {
-                                n.label = r[2], n.ops.push(d);
+                            if (i && n.label < i[2]) {
+                                n.label = i[2], n.ops.push(d);
                                 break
                             }
-                            r[2] && n.ops.pop(), n.trys.pop();
+                            i[2] && n.ops.pop(), n.trys.pop();
                             continue
                     }
                     d = t.call(e, n)
                 } catch (e) {
-                    d = [6, e], i = 0
+                    d = [6, e], r = 0
                 } finally {
-                    s = r = 0
+                    s = i = 0
                 }
                 if (5 & d[0]) throw d[1];
                 return {
@@ -180,45 +174,45 @@
     function c(e) {
         var t, s;
         return null == (t = e) ? t : {
-            virtualPurchasingProductId: (0, r.exists)(t, "virtualPurchasingProductId") ? t.virtualPurchasingProductId : void 0,
-            virtualPurchasingProductType: (0, r.exists)(t, "virtualPurchasingProductType") ? t.virtualPurchasingProductType : void 0,
-            virtualPurchasingProductTargetId: (0, r.exists)(t, "virtualPurchasingProductTargetId") ? t.virtualPurchasingProductTargetId : void 0,
-            universalProductIdentifier: (0, r.exists)(t, "universalProductIdentifier") ? null == (s = t.universalProductIdentifier) ? s : {
-                namespace: (0, r.exists)(s, "namespace") ? s.namespace : void 0,
-                targetIdentifier: (0, r.exists)(s, "targetIdentifier") ? s.targetIdentifier : void 0
+            virtualPurchasingProductId: (0, i.exists)(t, "virtualPurchasingProductId") ? t.virtualPurchasingProductId : void 0,
+            virtualPurchasingProductType: (0, i.exists)(t, "virtualPurchasingProductType") ? t.virtualPurchasingProductType : void 0,
+            virtualPurchasingProductTargetId: (0, i.exists)(t, "virtualPurchasingProductTargetId") ? t.virtualPurchasingProductTargetId : void 0,
+            universalProductIdentifier: (0, i.exists)(t, "universalProductIdentifier") ? null == (s = t.universalProductIdentifier) ? s : {
+                namespace: (0, i.exists)(s, "namespace") ? s.namespace : void 0,
+                targetIdentifier: (0, i.exists)(s, "targetIdentifier") ? s.targetIdentifier : void 0
             } : void 0
         }
     }
     "function" == typeof SuppressedError && SuppressedError;
 
     function l(e) {
-        var t, s, i;
+        var t, s, r;
         return null == (t = e) ? t : {
-            bonus: (0, r.exists)(t, "bonus") ? c(t.bonus) : void 0,
-            gamePassPayload: (0, r.exists)(t, "gamePassPayload") ? null == (s = t.gamePassPayload) ? s : {
-                rootPlaceId: (0, r.exists)(s, "rootPlaceId") ? s.rootPlaceId : void 0,
-                gamePassDisplayName: (0, r.exists)(s, "gamePassDisplayName") ? s.gamePassDisplayName : void 0,
-                experienceDisplayName: (0, r.exists)(s, "experienceDisplayName") ? s.experienceDisplayName : void 0,
-                gamePassDisplayImageUrl: (0, r.exists)(s, "gamePassDisplayImageUrl") ? s.gamePassDisplayImageUrl : void 0,
-                experienceImageUrl: (0, r.exists)(s, "experienceImageUrl") ? s.experienceImageUrl : void 0,
-                experienceRatingText: (0, r.exists)(s, "experienceRatingText") ? s.experienceRatingText : void 0
+            bonus: (0, i.exists)(t, "bonus") ? c(t.bonus) : void 0,
+            gamePassPayload: (0, i.exists)(t, "gamePassPayload") ? null == (s = t.gamePassPayload) ? s : {
+                rootPlaceId: (0, i.exists)(s, "rootPlaceId") ? s.rootPlaceId : void 0,
+                gamePassDisplayName: (0, i.exists)(s, "gamePassDisplayName") ? s.gamePassDisplayName : void 0,
+                experienceDisplayName: (0, i.exists)(s, "experienceDisplayName") ? s.experienceDisplayName : void 0,
+                gamePassDisplayImageUrl: (0, i.exists)(s, "gamePassDisplayImageUrl") ? s.gamePassDisplayImageUrl : void 0,
+                experienceImageUrl: (0, i.exists)(s, "experienceImageUrl") ? s.experienceImageUrl : void 0,
+                experienceRatingText: (0, i.exists)(s, "experienceRatingText") ? s.experienceRatingText : void 0
             } : void 0,
-            avatarItemPayload: (0, r.exists)(t, "avatarItemPayload") ? null == (i = t.avatarItemPayload) ? i : {
-                assetId: (0, r.exists)(i, "assetId") ? i.assetId : void 0,
-                displayName: (0, r.exists)(i, "displayName") ? i.displayName : void 0,
-                thumbnailUrl: (0, r.exists)(i, "thumbnailUrl") ? i.thumbnailUrl : void 0,
-                hasThumbnailUrl: (0, r.exists)(i, "hasThumbnailUrl") ? i.hasThumbnailUrl : void 0,
-                creatorName: (0, r.exists)(i, "creatorName") ? i.creatorName : void 0,
-                hasCreatorName: (0, r.exists)(i, "hasCreatorName") ? i.hasCreatorName : void 0,
-                creatorIsVerified: (0, r.exists)(i, "creatorIsVerified") ? i.creatorIsVerified : void 0,
-                hasCreatorIsVerified: (0, r.exists)(i, "hasCreatorIsVerified") ? i.hasCreatorIsVerified : void 0,
-                backgroundImageUrl: (0, r.exists)(i, "backgroundImageUrl") ? i.backgroundImageUrl : void 0,
-                hasBackgroundImageUrl: (0, r.exists)(i, "hasBackgroundImageUrl") ? i.hasBackgroundImageUrl : void 0,
-                thumbnailAnimatedUrl: (0, r.exists)(i, "thumbnailAnimatedUrl") ? i.thumbnailAnimatedUrl : void 0,
-                hasThumbnailAnimatedUrl: (0, r.exists)(i, "hasThumbnailAnimatedUrl") ? i.hasThumbnailAnimatedUrl : void 0
+            avatarItemPayload: (0, i.exists)(t, "avatarItemPayload") ? null == (r = t.avatarItemPayload) ? r : {
+                assetId: (0, i.exists)(r, "assetId") ? r.assetId : void 0,
+                displayName: (0, i.exists)(r, "displayName") ? r.displayName : void 0,
+                thumbnailUrl: (0, i.exists)(r, "thumbnailUrl") ? r.thumbnailUrl : void 0,
+                hasThumbnailUrl: (0, i.exists)(r, "hasThumbnailUrl") ? r.hasThumbnailUrl : void 0,
+                creatorName: (0, i.exists)(r, "creatorName") ? r.creatorName : void 0,
+                hasCreatorName: (0, i.exists)(r, "hasCreatorName") ? r.hasCreatorName : void 0,
+                creatorIsVerified: (0, i.exists)(r, "creatorIsVerified") ? r.creatorIsVerified : void 0,
+                hasCreatorIsVerified: (0, i.exists)(r, "hasCreatorIsVerified") ? r.hasCreatorIsVerified : void 0,
+                backgroundImageUrl: (0, i.exists)(r, "backgroundImageUrl") ? r.backgroundImageUrl : void 0,
+                hasBackgroundImageUrl: (0, i.exists)(r, "hasBackgroundImageUrl") ? r.hasBackgroundImageUrl : void 0,
+                thumbnailAnimatedUrl: (0, i.exists)(r, "thumbnailAnimatedUrl") ? r.thumbnailAnimatedUrl : void 0,
+                hasThumbnailAnimatedUrl: (0, i.exists)(r, "hasThumbnailAnimatedUrl") ? r.hasThumbnailAnimatedUrl : void 0
             } : void 0,
-            offeringType: (0, r.exists)(t, "offeringType") ? t.offeringType : void 0,
-            expirationTimestampMs: (0, r.exists)(t, "expirationTimestampMs") ? t.expirationTimestampMs : void 0
+            offeringType: (0, i.exists)(t, "offeringType") ? t.offeringType : void 0,
+            expirationTimestampMs: (0, i.exists)(t, "expirationTimestampMs") ? t.expirationTimestampMs : void 0
         }
     }
 
@@ -233,37 +227,37 @@
     function v(e) {
         var t, s;
         return null == (t = e) ? t : {
-            key: (0, r.exists)(t, "key") ? null == (s = t.key) ? s : {
-                productNamespace: (0, r.exists)(s, "productNamespace") ? s.productNamespace : void 0,
-                productId: (0, r.exists)(s, "productId") ? s.productId : void 0,
-                bonusPoliciesName: (0, r.exists)(s, "bonusPoliciesName") ? s.bonusPoliciesName : void 0,
-                hasBonusPoliciesName: (0, r.exists)(s, "hasBonusPoliciesName") ? s.hasBonusPoliciesName : void 0
+            key: (0, i.exists)(t, "key") ? null == (s = t.key) ? s : {
+                productNamespace: (0, i.exists)(s, "productNamespace") ? s.productNamespace : void 0,
+                productId: (0, i.exists)(s, "productId") ? s.productId : void 0,
+                bonusPoliciesName: (0, i.exists)(s, "bonusPoliciesName") ? s.bonusPoliciesName : void 0,
+                hasBonusPoliciesName: (0, i.exists)(s, "hasBonusPoliciesName") ? s.hasBonusPoliciesName : void 0
             } : void 0,
-            displayableBonuses: (0, r.exists)(t, "displayableBonuses") ? null === t.displayableBonuses ? null : t.displayableBonuses.map(l) : void 0
+            displayableBonuses: (0, i.exists)(t, "displayableBonuses") ? null === t.displayableBonuses ? null : t.displayableBonuses.map(l) : void 0
         }
     }
 
     function m(e, t) {
         return null == e ? e : {
-            selectedDisplayableBonuses: (0, r.exists)(e, "selectedDisplayableBonuses") ? null === e.selectedDisplayableBonuses ? null : e.selectedDisplayableBonuses.map(l) : void 0
+            selectedDisplayableBonuses: (0, i.exists)(e, "selectedDisplayableBonuses") ? null === e.selectedDisplayableBonuses ? null : e.selectedDisplayableBonuses.map(l) : void 0
         }
     }
-    var h = r.BaseAPI;
+    var h = i.BaseAPI;
 
     function f() {
         return null !== h && h.apply(this, arguments) || this
     }
     a(f, h), f.prototype.paymentsBonusModerationApplyBonusModerationDecisionRaw = function(e, t) {
         return o(this, void 0, void 0, function() {
-            var s, i, n;
+            var s, r, n;
             return u(this, function(a) {
                 switch (a.label) {
                     case 0:
-                        return s = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                        return s = {}, (r = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (r["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                             path: "/v1/moderation-decision",
                             schemaPath: "/v1/moderation-decision",
                             method: "POST",
-                            headers: i,
+                            headers: r,
                             query: s,
                             body: function(e) {
                                 if (void 0 !== e) return null === e ? null : {
@@ -302,7 +296,7 @@
                             }(e.paymentsBonusModerationApplyBonusModerationDecisionRequest)
                         }, t)];
                     case 1:
-                        return n = a.sent(), [2, new r.JSONApiResponse(n)]
+                        return n = a.sent(), [2, new i.JSONApiResponse(n)]
                 }
             })
         })
@@ -321,15 +315,15 @@
         })
     }, f.prototype.paymentsBonusModerationFixBonusOptInStatusRaw = function(e, t) {
         return o(this, void 0, void 0, function() {
-            var s, i, n;
+            var s, r, n;
             return u(this, function(a) {
                 switch (a.label) {
                     case 0:
-                        return s = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
+                        return s = {}, (r = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (r["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
                             path: "/v1/fix-bonus-opt-in-status",
                             schemaPath: "/v1/fix-bonus-opt-in-status",
                             method: "POST",
-                            headers: i,
+                            headers: r,
                             query: s,
                             body: function(e) {
                                 if (void 0 !== e) return null === e ? null : {
@@ -338,7 +332,7 @@
                             }(e.paymentsBonusModerationFixBonusOptInStatusRequest)
                         }, t)];
                     case 1:
-                        return n = a.sent(), [2, new r.JSONApiResponse(n)]
+                        return n = a.sent(), [2, new i.JSONApiResponse(n)]
                 }
             })
         })
@@ -362,15 +356,15 @@
             }
             return a(t, e), t.prototype.paymentsBonusServiceCreateOrUpdateBonusOptInStatusRaw = function(e, t) {
                 return o(this, void 0, void 0, function() {
-                    var s, i, n;
+                    var s, r, n;
                     return u(this, function(a) {
                         switch (a.label) {
                             case 0:
-                                return s = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
+                                return s = {}, (r = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
                                     path: "/v1/opt-in-status",
                                     schemaPath: "/v1/opt-in-status",
                                     method: "POST",
-                                    headers: i,
+                                    headers: r,
                                     query: s,
                                     body: function(e) {
                                         if (void 0 !== e) return null === e ? null : {
@@ -381,7 +375,7 @@
                                     }(e.paymentsBonusServiceCreateOrUpdateBonusOptInStatusRequest)
                                 }, t)];
                             case 1:
-                                return n = a.sent(), [2, new r.JSONApiResponse(n)]
+                                return n = a.sent(), [2, new i.JSONApiResponse(n)]
                         }
                     })
                 })
@@ -400,24 +394,24 @@
                 })
             }, t.prototype.paymentsBonusServiceGetBonusOptInInfoRaw = function(e, t) {
                 return o(this, void 0, void 0, function() {
-                    var s, i, n;
+                    var s, r, n;
                     return u(this, function(a) {
                         switch (a.label) {
                             case 0:
-                                return s = {}, void 0 !== e.productType && (s.productType = e.productType), void 0 !== e.productTargetId && (s.productTargetId = e.productTargetId), i = {}, [4, this.request({
+                                return s = {}, void 0 !== e.productType && (s.productType = e.productType), void 0 !== e.productTargetId && (s.productTargetId = e.productTargetId), r = {}, [4, this.request({
                                     path: "/v1/opt-in-status",
                                     schemaPath: "/v1/opt-in-status",
                                     method: "GET",
-                                    headers: i,
+                                    headers: r,
                                     query: s
                                 }, t)];
                             case 1:
-                                return n = a.sent(), [2, new r.JSONApiResponse(n, function(e) {
+                                return n = a.sent(), [2, new i.JSONApiResponse(n, function(e) {
                                     return null == e ? e : {
-                                        isBonusOptedIn: (0, r.exists)(e, "isBonusOptedIn") ? e.isBonusOptedIn : void 0,
-                                        isEligible: (0, r.exists)(e, "isEligible") ? e.isEligible : void 0,
-                                        moderationStatus: (0, r.exists)(e, "moderationStatus") ? e.moderationStatus : void 0,
-                                        isBonusOptInVisible: (0, r.exists)(e, "isBonusOptInVisible") ? e.isBonusOptInVisible : void 0
+                                        isBonusOptedIn: (0, i.exists)(e, "isBonusOptedIn") ? e.isBonusOptedIn : void 0,
+                                        isEligible: (0, i.exists)(e, "isEligible") ? e.isEligible : void 0,
+                                        moderationStatus: (0, i.exists)(e, "moderationStatus") ? e.moderationStatus : void 0,
+                                        isBonusOptInVisible: (0, i.exists)(e, "isBonusOptInVisible") ? e.isBonusOptInVisible : void 0
                                     }
                                 })]
                         }
@@ -438,21 +432,21 @@
                 })
             }, t.prototype.paymentsBonusServiceGetBonusSessionRaw = function(e, t) {
                 return o(this, void 0, void 0, function() {
-                    var s, i, n;
+                    var s, r, n;
                     return u(this, function(a) {
                         switch (a.label) {
                             case 0:
-                                return s = {}, void 0 !== e.paymentSessionId && (s.paymentSessionId = e.paymentSessionId), i = {}, [4, this.request({
+                                return s = {}, void 0 !== e.paymentSessionId && (s.paymentSessionId = e.paymentSessionId), r = {}, [4, this.request({
                                     path: "/v1/bonus-sessions",
                                     schemaPath: "/v1/bonus-sessions",
                                     method: "GET",
-                                    headers: i,
+                                    headers: r,
                                     query: s
                                 }, t)];
                             case 1:
-                                return n = a.sent(), [2, new r.JSONApiResponse(n, function(e) {
+                                return n = a.sent(), [2, new i.JSONApiResponse(n, function(e) {
                                     return null == e ? e : {
-                                        selectedBonuses: (0, r.exists)(e, "selectedBonuses") ? null === e.selectedBonuses ? null : e.selectedBonuses.map(c) : void 0
+                                        selectedBonuses: (0, i.exists)(e, "selectedBonuses") ? null === e.selectedBonuses ? null : e.selectedBonuses.map(c) : void 0
                                     }
                                 })]
                         }
@@ -473,15 +467,15 @@
                 })
             }, t.prototype.paymentsBonusServiceGetOrCreateBonusSessionRaw = function(e, t) {
                 return o(this, void 0, void 0, function() {
-                    var s, i, n;
+                    var s, r, n;
                     return u(this, function(a) {
                         switch (a.label) {
                             case 0:
-                                return s = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
+                                return s = {}, (r = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
                                     path: "/v1/bonus-sessions",
                                     schemaPath: "/v1/bonus-sessions",
                                     method: "POST",
-                                    headers: i,
+                                    headers: r,
                                     query: s,
                                     body: function(e) {
                                         if (void 0 !== e) return null === e ? null : {
@@ -491,11 +485,11 @@
                                     }(e.paymentsBonusServiceGetOrCreateBonusSessionRequest)
                                 }, t)];
                             case 1:
-                                return n = a.sent(), [2, new r.JSONApiResponse(n, function(e) {
+                                return n = a.sent(), [2, new i.JSONApiResponse(n, function(e) {
                                     return null == e ? e : {
-                                        selectedDisplayableBonuses: (0, r.exists)(e, "selectedDisplayableBonuses") ? null === e.selectedDisplayableBonuses ? null : e.selectedDisplayableBonuses.map(l) : void 0,
-                                        created: (0, r.exists)(e, "created") ? e.created : void 0,
-                                        productDisplayableBonuses: (0, r.exists)(e, "productDisplayableBonuses") ? null === e.productDisplayableBonuses ? null : e.productDisplayableBonuses.map(v) : void 0
+                                        selectedDisplayableBonuses: (0, i.exists)(e, "selectedDisplayableBonuses") ? null === e.selectedDisplayableBonuses ? null : e.selectedDisplayableBonuses.map(l) : void 0,
+                                        created: (0, i.exists)(e, "created") ? e.created : void 0,
+                                        productDisplayableBonuses: (0, i.exists)(e, "productDisplayableBonuses") ? null === e.productDisplayableBonuses ? null : e.productDisplayableBonuses.map(v) : void 0
                                     }
                                 })]
                         }
@@ -516,20 +510,20 @@
                 })
             }, t.prototype.paymentsBonusServiceGetPaymentBonusByCheckoutSessionIdRaw = function(e, t) {
                 return o(this, void 0, void 0, function() {
-                    var s, i, n;
+                    var s, r, n;
                     return u(this, function(a) {
                         switch (a.label) {
                             case 0:
-                                if (null === e.checkoutSessionId || void 0 === e.checkoutSessionId) throw new r.RequiredError("checkoutSessionId", "Required parameter requestParameters.checkoutSessionId was null or undefined when calling paymentsBonusServiceGetPaymentBonusByCheckoutSessionId.");
-                                return s = {}, i = {}, [4, this.request({
+                                if (null === e.checkoutSessionId || void 0 === e.checkoutSessionId) throw new i.RequiredError("checkoutSessionId", "Required parameter requestParameters.checkoutSessionId was null or undefined when calling paymentsBonusServiceGetPaymentBonusByCheckoutSessionId.");
+                                return s = {}, r = {}, [4, this.request({
                                     path: "/v1/checkout-session/{checkoutSessionId}/payment-bonus".replace("{".concat("checkoutSessionId", "}"), encodeURIComponent(String(e.checkoutSessionId))),
                                     schemaPath: "/v1/checkout-session/{checkoutSessionId}/payment-bonus",
                                     method: "GET",
-                                    headers: i,
+                                    headers: r,
                                     query: s
                                 }, t)];
                             case 1:
-                                return n = a.sent(), [2, new r.JSONApiResponse(n, function(e) {
+                                return n = a.sent(), [2, new i.JSONApiResponse(n, function(e) {
                                     return m(e)
                                 })]
                         }
@@ -550,20 +544,20 @@
                 })
             }, t.prototype.paymentsBonusServiceGetPaymentBonusByPaymentSessionIdRaw = function(e, t) {
                 return o(this, void 0, void 0, function() {
-                    var s, i, n;
+                    var s, r, n;
                     return u(this, function(a) {
                         switch (a.label) {
                             case 0:
-                                if (null === e.paymentSessionId || void 0 === e.paymentSessionId) throw new r.RequiredError("paymentSessionId", "Required parameter requestParameters.paymentSessionId was null or undefined when calling paymentsBonusServiceGetPaymentBonusByPaymentSessionId.");
-                                return s = {}, i = {}, [4, this.request({
+                                if (null === e.paymentSessionId || void 0 === e.paymentSessionId) throw new i.RequiredError("paymentSessionId", "Required parameter requestParameters.paymentSessionId was null or undefined when calling paymentsBonusServiceGetPaymentBonusByPaymentSessionId.");
+                                return s = {}, r = {}, [4, this.request({
                                     path: "/v1/payment-session/{paymentSessionId}/payment-bonus".replace("{".concat("paymentSessionId", "}"), encodeURIComponent(String(e.paymentSessionId))),
                                     schemaPath: "/v1/payment-session/{paymentSessionId}/payment-bonus",
                                     method: "GET",
-                                    headers: i,
+                                    headers: r,
                                     query: s
                                 }, t)];
                             case 1:
-                                return n = a.sent(), [2, new r.JSONApiResponse(n, function(e) {
+                                return n = a.sent(), [2, new i.JSONApiResponse(n, function(e) {
                                     return m(e)
                                 })]
                         }
@@ -584,15 +578,15 @@
                 })
             }, t.prototype.paymentsBonusServiceHandleGameJoinEventRaw = function(e, t) {
                 return o(this, void 0, void 0, function() {
-                    var s, i, n;
+                    var s, r, n;
                     return u(this, function(a) {
                         switch (a.label) {
                             case 0:
-                                return s = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
+                                return s = {}, (r = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
                                     path: "/v1/handle-game-join-event",
                                     schemaPath: "/v1/handle-game-join-event",
                                     method: "POST",
-                                    headers: i,
+                                    headers: r,
                                     query: s,
                                     body: function(e) {
                                         if (void 0 !== e) return null === e ? null : {
@@ -604,7 +598,7 @@
                                     }(e.paymentsBonusServiceHandleGameJoinEventRequest)
                                 }, t)];
                             case 1:
-                                return n = a.sent(), [2, new r.JSONApiResponse(n)]
+                                return n = a.sent(), [2, new i.JSONApiResponse(n)]
                         }
                     })
                 })
@@ -622,7 +616,7 @@
                     })
                 })
             }, t
-        }(r.BaseAPI),
+        }(i.BaseAPI),
         g = e.i(272593),
         P = ((t = {})[t.Unspecified = 0] = "Unspecified", t[t.PendingReview = 1] = "PendingReview", t[t.Approved = 2] = "Approved", t[t.Rejected = 3] = "Rejected", t);
     let y = new class {
@@ -633,7 +627,7 @@
             return this.bonusItemApi.paymentsBonusServiceCreateOrUpdateBonusOptInStatus(e)
         }
         constructor() {
-            (0, i._)(this, "bonusItemApi", void 0), this.bonusItemApi = new I((0, g.createClientConfiguration)("payments-bonus-service", "bedev2"))
+            (0, r._)(this, "bonusItemApi", void 0), this.bonusItemApi = new I((0, g.createClientConfiguration)("payments-bonus-service", "bedev2"))
         }
     };
     e.s(["BonusOptInModerationStatus", () => P, "GamePassProductType", 0, 6, "default", 0, y], 858148);
@@ -659,19 +653,19 @@
     e.s(["DEFAULT_RETRIES", 0, 1, "DEFAULT_STALE_TIME", 0, b], 719743), e.s(["useGetGamePassBonusOptIn", 0, function(e) {
         var t;
         let {
-            universeId: i,
-            gamePassId: r
+            universeId: r,
+            gamePassId: i
         } = e, n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
         return (0, s.useQuery)({
-            queryKey: w.bonusOptIn(i, r),
+            queryKey: w.bonusOptIn(r, i),
             queryFn: () => y.getOptInStatus({
-                productTargetId: r,
+                productTargetId: i,
                 productType: 6
             }),
             staleTime: b,
             retry: 1,
             ...n,
-            enabled: (null == (t = n.enabled) || t) && !!i && !!r
+            enabled: (null == (t = n.enabled) || t) && !!r && !!i
         })
     }], 261482);
     var A = e.i(589624);
@@ -700,8 +694,8 @@
     "use strict";
     var t = e.i(721281),
         s = e.i(677753),
-        i = function(e, t) {
-            return (i = Object.setPrototypeOf || ({
+        r = function(e, t) {
+            return (r = Object.setPrototypeOf || ({
                 __proto__: []
             }) instanceof Array && function(e, t) {
                 e.__proto__ = t
@@ -710,20 +704,20 @@
             })(e, t)
         };
 
-    function r(e, t) {
+    function i(e, t) {
         if ("function" != typeof t && null !== t) throw TypeError("Class extends value " + String(t) + " is not a constructor or null");
 
         function s() {
             this.constructor = e
         }
-        i(e, t), e.prototype = null === t ? Object.create(t) : (s.prototype = t.prototype, new s)
+        r(e, t), e.prototype = null === t ? Object.create(t) : (s.prototype = t.prototype, new s)
     }
 
-    function n(e, t, s, i) {
-        return new(s || (s = Promise))(function(r, n) {
+    function n(e, t, s, r) {
+        return new(s || (s = Promise))(function(i, n) {
             function a(e) {
                 try {
-                    u(i.next(e))
+                    u(r.next(e))
                 } catch (e) {
                     n(e)
                 }
@@ -731,7 +725,7 @@
 
             function o(e) {
                 try {
-                    u(i.throw(e))
+                    u(r.throw(e))
                 } catch (e) {
                     n(e)
                 }
@@ -739,20 +733,20 @@
 
             function u(e) {
                 var t;
-                e.done ? r(e.value) : ((t = e.value) instanceof s ? t : new s(function(e) {
+                e.done ? i(e.value) : ((t = e.value) instanceof s ? t : new s(function(e) {
                     e(t)
                 })).then(a, o)
             }
-            u((i = i.apply(e, t || [])).next())
+            u((r = r.apply(e, t || [])).next())
         })
     }
 
     function a(e, t) {
-        var s, i, r, n = {
+        var s, r, i, n = {
                 label: 0,
                 sent: function() {
-                    if (1 & r[0]) throw r[1];
-                    return r[1]
+                    if (1 & i[0]) throw i[1];
+                    return i[1]
                 },
                 trys: [],
                 ops: []
@@ -767,11 +761,11 @@
                 var d = [o, u];
                 if (s) throw TypeError("Generator is already executing.");
                 for (; a && (a = 0, d[0] && (n = 0)), n;) try {
-                    if (s = 1, i && (r = 2 & d[0] ? i.return : d[0] ? i.throw || ((r = i.return) && r.call(i), 0) : i.next) && !(r = r.call(i, d[1])).done) return r;
-                    switch (i = 0, r && (d = [2 & d[0], r.value]), d[0]) {
+                    if (s = 1, r && (i = 2 & d[0] ? r.return : d[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) && !(i = i.call(r, d[1])).done) return i;
+                    switch (r = 0, i && (d = [2 & d[0], i.value]), d[0]) {
                         case 0:
                         case 1:
-                            r = d;
+                            i = d;
                             break;
                         case 4:
                             return n.label++, {
@@ -779,36 +773,36 @@
                                 done: !1
                             };
                         case 5:
-                            n.label++, i = d[1], d = [0];
+                            n.label++, r = d[1], d = [0];
                             continue;
                         case 7:
                             d = n.ops.pop(), n.trys.pop();
                             continue;
                         default:
-                            if (!(r = (r = n.trys).length > 0 && r[r.length - 1]) && (6 === d[0] || 2 === d[0])) {
+                            if (!(i = (i = n.trys).length > 0 && i[i.length - 1]) && (6 === d[0] || 2 === d[0])) {
                                 n = 0;
                                 continue
                             }
-                            if (3 === d[0] && (!r || d[1] > r[0] && d[1] < r[3])) {
+                            if (3 === d[0] && (!i || d[1] > i[0] && d[1] < i[3])) {
                                 n.label = d[1];
                                 break
                             }
-                            if (6 === d[0] && n.label < r[1]) {
-                                n.label = r[1], r = d;
+                            if (6 === d[0] && n.label < i[1]) {
+                                n.label = i[1], i = d;
                                 break
                             }
-                            if (r && n.label < r[2]) {
-                                n.label = r[2], n.ops.push(d);
+                            if (i && n.label < i[2]) {
+                                n.label = i[2], n.ops.push(d);
                                 break
                             }
-                            r[2] && n.ops.pop(), n.trys.pop();
+                            i[2] && n.ops.pop(), n.trys.pop();
                             continue
                     }
                     d = t.call(e, n)
                 } catch (e) {
-                    d = [6, e], i = 0
+                    d = [6, e], r = 0
                 } finally {
-                    s = r = 0
+                    s = i = 0
                 }
                 if (5 & d[0]) throw d[1];
                 return {
@@ -824,7 +818,7 @@
     }
 
     function u(e) {
-        var t, i;
+        var t, r;
         return null == (t = e) ? t : {
             productId: t.productId,
             name: t.name,
@@ -832,9 +826,9 @@
             iconImageAssetId: t.iconImageAssetId,
             universeId: t.universeId,
             isForSale: t.isForSale,
-            priceInformation: null == (i = t.priceInformation) ? i : {
-                defaultPriceInRobux: i.defaultPriceInRobux,
-                enabledFeatures: i.enabledFeatures.map(o)
+            priceInformation: null == (r = t.priceInformation) ? r : {
+                defaultPriceInRobux: r.defaultPriceInRobux,
+                enabledFeatures: r.enabledFeatures.map(o)
             },
             isImmutable: t.isImmutable,
             createdTimestamp: new Date(t.createdTimestamp),
@@ -857,14 +851,14 @@
     }
 
     function c(e) {
-        var t, i;
+        var t, r;
         return null == (t = e) ? t : {
             productId: t.productId,
-            error: null == (i = t.error) ? i : {
-                errorCode: (0, s.exists)(i, "errorCode") ? i.errorCode : void 0,
-                errorMessage: (0, s.exists)(i, "errorMessage") ? i.errorMessage : void 0,
-                field: (0, s.exists)(i, "field") ? i.field : void 0,
-                hint: (0, s.exists)(i, "hint") ? i.hint : void 0
+            error: null == (r = t.error) ? r : {
+                errorCode: (0, s.exists)(r, "errorCode") ? r.errorCode : void 0,
+                errorMessage: (0, s.exists)(r, "errorMessage") ? r.errorMessage : void 0,
+                field: (0, s.exists)(r, "field") ? r.field : void 0,
+                hint: (0, s.exists)(r, "hint") ? r.hint : void 0
             }
         }
     }
@@ -931,19 +925,19 @@
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            return r(t, e), t.prototype.developerProductsBatchGetDeveloperProductConfigsRaw = function(e, t) {
+            return i(t, e), t.prototype.developerProductsBatchGetDeveloperProductConfigsRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling developerProductsBatchGetDeveloperProductConfigs.");
-                                return i = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
+                                return r = {}, (i = {})["Content-Type"] = "application/json", [4, this.request({
                                     path: "/v2/universes/{universeId}/developer-products/creator:batchGet".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                     schemaPath: "/v2/universes/{universeId}/developer-products/creator:batchGet",
                                     method: "POST",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: function(e) {
                                         if (void 0 !== e) return null === e ? null : {
                                             productIds: e.productIds
@@ -974,20 +968,20 @@
                 })
             }, t.prototype.developerProductsCreateDeveloperProductV2Raw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n, o;
+                    var r, i, n, o;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling developerProductsCreateDeveloperProductV2.");
                                 if (null === e.name || void 0 === e.name) throw new s.RequiredError("name", "Required parameter requestParameters.name was null or undefined when calling developerProductsCreateDeveloperProductV2.");
-                                return i = {}, r = {}, n = (0, s.canConsumeForm)([{
+                                return r = {}, i = {}, n = (0, s.canConsumeForm)([{
                                     contentType: "multipart/form-data"
                                 }]) ? new FormData : new URLSearchParams, void 0 !== e.name && n.append("name", e.name), void 0 !== e.description && n.append("description", e.description), void 0 !== e.isForSale && n.append("isForSale", e.isForSale), void 0 !== e.price && n.append("price", e.price), void 0 !== e.imageFile && n.append("imageFile", e.imageFile), void 0 !== e.isManagedPricingEnabled && n.append("isManagedPricingEnabled", e.isManagedPricingEnabled), [4, this.request({
                                     path: "/v2/universes/{universeId}/developer-products".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                     schemaPath: "/v2/universes/{universeId}/developer-products",
                                     method: "POST",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: n
                                 }, t)];
                             case 1:
@@ -1012,18 +1006,18 @@
                 })
             }, t.prototype.developerProductsGetDeveloperProductConfigV2Raw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling developerProductsGetDeveloperProductConfigV2.");
                                 if (null === e.productId || void 0 === e.productId) throw new s.RequiredError("productId", "Required parameter requestParameters.productId was null or undefined when calling developerProductsGetDeveloperProductConfigV2.");
-                                return i = {}, r = {}, [4, this.request({
+                                return r = {}, i = {}, [4, this.request({
                                     path: "/v2/universes/{universeId}/developer-products/{productId}/creator".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))).replace("{".concat("productId", "}"), encodeURIComponent(String(e.productId))),
                                     schemaPath: "/v2/universes/{universeId}/developer-products/{productId}/creator",
                                     method: "GET",
-                                    headers: r,
-                                    query: i
+                                    headers: i,
+                                    query: r
                                 }, t)];
                             case 1:
                                 return n = a.sent(), [2, new s.JSONApiResponse(n, function(e) {
@@ -1047,17 +1041,17 @@
                 })
             }, t.prototype.developerProductsListDeveloperProductConfigsByUniverseV2Raw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling developerProductsListDeveloperProductConfigsByUniverseV2.");
-                                return i = {}, void 0 !== e.pageSize && (i.pageSize = e.pageSize), void 0 !== e.pageToken && (i.pageToken = e.pageToken), void 0 !== e.isArchived && (i.isArchived = e.isArchived), r = {}, [4, this.request({
+                                return r = {}, void 0 !== e.pageSize && (r.pageSize = e.pageSize), void 0 !== e.pageToken && (r.pageToken = e.pageToken), void 0 !== e.isArchived && (r.isArchived = e.isArchived), i = {}, [4, this.request({
                                     path: "/v2/universes/{universeId}/developer-products/creator".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                     schemaPath: "/v2/universes/{universeId}/developer-products/creator",
                                     method: "GET",
-                                    headers: r,
-                                    query: i
+                                    headers: i,
+                                    query: r
                                 }, t)];
                             case 1:
                                 return n = a.sent(), [2, new s.JSONApiResponse(n, function(e) {
@@ -1084,20 +1078,20 @@
                 })
             }, t.prototype.developerProductsUpdateDeveloperProductV2Raw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n, o;
+                    var r, i, n, o;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling developerProductsUpdateDeveloperProductV2.");
                                 if (null === e.productId || void 0 === e.productId) throw new s.RequiredError("productId", "Required parameter requestParameters.productId was null or undefined when calling developerProductsUpdateDeveloperProductV2.");
-                                return i = {}, r = {}, n = (0, s.canConsumeForm)([{
+                                return r = {}, i = {}, n = (0, s.canConsumeForm)([{
                                     contentType: "multipart/form-data"
                                 }]) ? new FormData : new URLSearchParams, void 0 !== e.name && n.append("name", e.name), void 0 !== e.description && n.append("description", e.description), void 0 !== e.isForSale && n.append("isForSale", e.isForSale), void 0 !== e.price && n.append("price", e.price), void 0 !== e.imageFile && n.append("imageFile", e.imageFile), void 0 !== e.isManagedPricingEnabled && n.append("isManagedPricingEnabled", e.isManagedPricingEnabled), void 0 !== e.isArchived && n.append("isArchived", e.isArchived), [4, this.request({
                                     path: "/v2/universes/{universeId}/developer-products/{productId}".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))).replace("{".concat("productId", "}"), encodeURIComponent(String(e.productId))),
                                     schemaPath: "/v2/universes/{universeId}/developer-products/{productId}",
                                     method: "PATCH",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: n
                                 }, t)];
                             case 1:
@@ -1122,18 +1116,18 @@
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            return r(t, e), t.prototype.developerProductsApiBatchGetDeveloperProductsTempRaw = function(e, t) {
+            return i(t, e), t.prototype.developerProductsApiBatchGetDeveloperProductsTempRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
-                                return i = {}, e.productIds && (i.productIds = e.productIds), r = {}, [4, this.request({
+                                return r = {}, e.productIds && (r.productIds = e.productIds), i = {}, [4, this.request({
                                     path: "/v1/developer-products/batch",
                                     schemaPath: "/v1/developer-products/batch",
                                     method: "GET",
-                                    headers: r,
-                                    query: i
+                                    headers: i,
+                                    query: r
                                 }, t)];
                             case 1:
                                 return n = a.sent(), [2, new s.JSONApiResponse(n, function(e) {
@@ -1157,17 +1151,17 @@
                 })
             }, t.prototype.developerProductsApiBulkUpdateDeveloperProductsRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling developerProductsApiBulkUpdateDeveloperProducts.");
-                                return i = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
+                                return r = {}, (i = {})["Content-Type"] = "application/json", [4, this.request({
                                     path: "/v1/universes/{universeId}/developer-products".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                     schemaPath: "/v1/universes/{universeId}/developer-products",
                                     method: "PATCH",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: function(e) {
                                         if (void 0 !== e) return null === e ? null : {
                                             developerProductUpdates: e.developerProductUpdates.map(d)
@@ -1198,17 +1192,17 @@
                 })
             }, t.prototype.developerProductsApiGetDeveloperProductDetailsRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.productId || void 0 === e.productId) throw new s.RequiredError("productId", "Required parameter requestParameters.productId was null or undefined when calling developerProductsApiGetDeveloperProductDetails.");
-                                return i = {}, r = {}, [4, this.request({
+                                return r = {}, i = {}, [4, this.request({
                                     path: "/v1/developer-products/{productId}/details".replace("{".concat("productId", "}"), encodeURIComponent(String(e.productId))),
                                     schemaPath: "/v1/developer-products/{productId}/details",
                                     method: "GET",
-                                    headers: r,
-                                    query: i
+                                    headers: i,
+                                    query: r
                                 }, t)];
                             case 1:
                                 return n = a.sent(), [2, new s.JSONApiResponse(n, function(e) {
@@ -1268,17 +1262,17 @@
                 })
             }, t.prototype.developerProductsApiGetGiftingTradingStatusRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling developerProductsApiGetGiftingTradingStatus.");
-                                return i = {}, r = {}, [4, this.request({
+                                return r = {}, i = {}, [4, this.request({
                                     path: "/v1/universes/{universeId}/gifting-trading".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                     schemaPath: "/v1/universes/{universeId}/gifting-trading",
                                     method: "GET",
-                                    headers: r,
-                                    query: i
+                                    headers: i,
+                                    query: r
                                 }, t)];
                             case 1:
                                 return n = a.sent(), [2, new s.JSONApiResponse(n, function(e) {
@@ -1304,17 +1298,17 @@
                 })
             }, t.prototype.developerProductsApiListDeveloperProductsCursoredRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling developerProductsApiListDeveloperProductsCursored.");
-                                return i = {}, e.productIds && (i.productIds = e.productIds), void 0 !== e.cursor && (i.cursor = e.cursor), void 0 !== e.limit && (i.limit = e.limit), r = {}, [4, this.request({
+                                return r = {}, e.productIds && (r.productIds = e.productIds), void 0 !== e.cursor && (r.cursor = e.cursor), void 0 !== e.limit && (r.limit = e.limit), i = {}, [4, this.request({
                                     path: "/v2/universes/{universeId}/developerproducts".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                     schemaPath: "/v2/universes/{universeId}/developerproducts",
                                     method: "GET",
-                                    headers: r,
-                                    query: i
+                                    headers: i,
+                                    query: r
                                 }, t)];
                             case 1:
                                 return n = a.sent(), [2, new s.JSONApiResponse(n, function(e) {
@@ -1338,17 +1332,17 @@
                 })
             }, t.prototype.developerProductsApiPurchaseDeveloperProductRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.productId || void 0 === e.productId) throw new s.RequiredError("productId", "Required parameter requestParameters.productId was null or undefined when calling developerProductsApiPurchaseDeveloperProduct.");
-                                return i = {}, void 0 !== e.requestLocationType && (i.requestLocationType = e.requestLocationType), (r = {})["Content-Type"] = "application/json", [4, this.request({
+                                return r = {}, void 0 !== e.requestLocationType && (r.requestLocationType = e.requestLocationType), (i = {})["Content-Type"] = "application/json", [4, this.request({
                                     path: "/v1/developer-products/{productId}/purchase".replace("{".concat("productId", "}"), encodeURIComponent(String(e.productId))),
                                     schemaPath: "/v1/developer-products/{productId}/purchase",
                                     method: "POST",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: function(e) {
                                         if (void 0 !== e) return null === e ? null : {
                                             expectedPrice: e.expectedPrice,
@@ -1394,17 +1388,17 @@
                 })
             }, t.prototype.developerProductsApiSetGiftingTradingStatusRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling developerProductsApiSetGiftingTradingStatus.");
-                                return i = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
+                                return r = {}, (i = {})["Content-Type"] = "application/json", [4, this.request({
                                     path: "/v1/universes/{universeId}/gifting-trading".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                     schemaPath: "/v1/universes/{universeId}/gifting-trading",
                                     method: "POST",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: function(e) {
                                         if (void 0 !== e) return null === e ? null : {
                                             hasGiftingTrading: e.hasGiftingTrading
@@ -1535,8 +1529,8 @@
     "use strict";
     var t = e.i(721281),
         s = e.i(677753),
-        i = function(e, t) {
-            return (i = Object.setPrototypeOf || ({
+        r = function(e, t) {
+            return (r = Object.setPrototypeOf || ({
                 __proto__: []
             }) instanceof Array && function(e, t) {
                 e.__proto__ = t
@@ -1545,11 +1539,11 @@
             })(e, t)
         };
 
-    function r(e, t, s, i) {
-        return new(s || (s = Promise))(function(r, n) {
+    function i(e, t, s, r) {
+        return new(s || (s = Promise))(function(i, n) {
             function a(e) {
                 try {
-                    u(i.next(e))
+                    u(r.next(e))
                 } catch (e) {
                     n(e)
                 }
@@ -1557,7 +1551,7 @@
 
             function o(e) {
                 try {
-                    u(i.throw(e))
+                    u(r.throw(e))
                 } catch (e) {
                     n(e)
                 }
@@ -1565,20 +1559,20 @@
 
             function u(e) {
                 var t;
-                e.done ? r(e.value) : ((t = e.value) instanceof s ? t : new s(function(e) {
+                e.done ? i(e.value) : ((t = e.value) instanceof s ? t : new s(function(e) {
                     e(t)
                 })).then(a, o)
             }
-            u((i = i.apply(e, t || [])).next())
+            u((r = r.apply(e, t || [])).next())
         })
     }
 
     function n(e, t) {
-        var s, i, r, n = {
+        var s, r, i, n = {
                 label: 0,
                 sent: function() {
-                    if (1 & r[0]) throw r[1];
-                    return r[1]
+                    if (1 & i[0]) throw i[1];
+                    return i[1]
                 },
                 trys: [],
                 ops: []
@@ -1593,11 +1587,11 @@
                 var d = [o, u];
                 if (s) throw TypeError("Generator is already executing.");
                 for (; a && (a = 0, d[0] && (n = 0)), n;) try {
-                    if (s = 1, i && (r = 2 & d[0] ? i.return : d[0] ? i.throw || ((r = i.return) && r.call(i), 0) : i.next) && !(r = r.call(i, d[1])).done) return r;
-                    switch (i = 0, r && (d = [2 & d[0], r.value]), d[0]) {
+                    if (s = 1, r && (i = 2 & d[0] ? r.return : d[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) && !(i = i.call(r, d[1])).done) return i;
+                    switch (r = 0, i && (d = [2 & d[0], i.value]), d[0]) {
                         case 0:
                         case 1:
-                            r = d;
+                            i = d;
                             break;
                         case 4:
                             return n.label++, {
@@ -1605,36 +1599,36 @@
                                 done: !1
                             };
                         case 5:
-                            n.label++, i = d[1], d = [0];
+                            n.label++, r = d[1], d = [0];
                             continue;
                         case 7:
                             d = n.ops.pop(), n.trys.pop();
                             continue;
                         default:
-                            if (!(r = (r = n.trys).length > 0 && r[r.length - 1]) && (6 === d[0] || 2 === d[0])) {
+                            if (!(i = (i = n.trys).length > 0 && i[i.length - 1]) && (6 === d[0] || 2 === d[0])) {
                                 n = 0;
                                 continue
                             }
-                            if (3 === d[0] && (!r || d[1] > r[0] && d[1] < r[3])) {
+                            if (3 === d[0] && (!i || d[1] > i[0] && d[1] < i[3])) {
                                 n.label = d[1];
                                 break
                             }
-                            if (6 === d[0] && n.label < r[1]) {
-                                n.label = r[1], r = d;
+                            if (6 === d[0] && n.label < i[1]) {
+                                n.label = i[1], i = d;
                                 break
                             }
-                            if (r && n.label < r[2]) {
-                                n.label = r[2], n.ops.push(d);
+                            if (i && n.label < i[2]) {
+                                n.label = i[2], n.ops.push(d);
                                 break
                             }
-                            r[2] && n.ops.pop(), n.trys.pop();
+                            i[2] && n.ops.pop(), n.trys.pop();
                             continue
                     }
                     d = t.call(e, n)
                 } catch (e) {
-                    d = [6, e], i = 0
+                    d = [6, e], r = 0
                 } finally {
-                    s = r = 0
+                    s = i = 0
                 }
                 if (5 & d[0]) throw d[1];
                 return {
@@ -1650,7 +1644,7 @@
     }
 
     function o(e) {
-        var t, i;
+        var t, r;
         return null == (t = e) ? t : {
             gamePassId: t.gamePassId,
             name: t.name,
@@ -1660,9 +1654,9 @@
             createdTimestamp: new Date(t.createdTimestamp),
             updatedTimestamp: new Date(t.updatedTimestamp),
             isArchived: (0, s.exists)(t, "isArchived") ? t.isArchived : void 0,
-            priceInformation: null == (i = t.priceInformation) ? i : {
-                defaultPriceInRobux: i.defaultPriceInRobux,
-                enabledFeatures: i.enabledFeatures.map(a)
+            priceInformation: null == (r = t.priceInformation) ? r : {
+                defaultPriceInRobux: r.defaultPriceInRobux,
+                enabledFeatures: r.enabledFeatures.map(a)
             },
             isManagedPricingEnabled: t.isManagedPricingEnabled,
             isTrialEnabled: (0, s.exists)(t, "isTrialEnabled") ? t.isTrialEnabled : void 0
@@ -1713,7 +1707,7 @@
     }
 
     function v(e) {
-        var t, i;
+        var t, r;
         return null == (t = e) ? t : {
             id: t.id,
             productId: t.productId,
@@ -1723,11 +1717,11 @@
             userBasePriceInRobux: (0, s.exists)(t, "userBasePriceInRobux") ? t.userBasePriceInRobux : void 0,
             priceDiscountDetails: (0, s.exists)(t, "priceDiscountDetails") ? null === t.priceDiscountDetails ? null : t.priceDiscountDetails.map(p) : void 0,
             isOwned: (0, s.exists)(t, "isOwned") ? t.isOwned : void 0,
-            creator: (0, s.exists)(t, "creator") ? null == (i = t.creator) ? i : {
-                creatorType: (0, s.exists)(i, "creatorType") ? i.creatorType : void 0,
-                creatorId: (0, s.exists)(i, "creatorId") ? i.creatorId : void 0,
-                name: (0, s.exists)(i, "name") ? i.name : void 0,
-                deprecatedId: (0, s.exists)(i, "deprecatedId") ? i.deprecatedId : void 0
+            creator: (0, s.exists)(t, "creator") ? null == (r = t.creator) ? r : {
+                creatorType: (0, s.exists)(r, "creatorType") ? r.creatorType : void 0,
+                creatorId: (0, s.exists)(r, "creatorId") ? r.creatorId : void 0,
+                name: (0, s.exists)(r, "name") ? r.name : void 0,
+                deprecatedId: (0, s.exists)(r, "deprecatedId") ? r.deprecatedId : void 0
             } : void 0,
             displayName: t.displayName,
             displayDescription: t.displayDescription,
@@ -1756,14 +1750,14 @@
     }
 
     function f(e) {
-        var t, i;
+        var t, r;
         return null == (t = e) ? t : {
             gamePassId: t.gamePassId,
-            error: null == (i = t.error) ? i : {
-                errorCode: (0, s.exists)(i, "errorCode") ? i.errorCode : void 0,
-                errorMessage: (0, s.exists)(i, "errorMessage") ? i.errorMessage : void 0,
-                field: (0, s.exists)(i, "field") ? i.field : void 0,
-                hint: (0, s.exists)(i, "hint") ? i.hint : void 0
+            error: null == (r = t.error) ? r : {
+                errorCode: (0, s.exists)(r, "errorCode") ? r.errorCode : void 0,
+                errorMessage: (0, s.exists)(r, "errorMessage") ? r.errorMessage : void 0,
+                field: (0, s.exists)(r, "field") ? r.field : void 0,
+                hint: (0, s.exists)(r, "hint") ? r.hint : void 0
             }
         }
     }
@@ -1776,7 +1770,7 @@
     }
 
     function g(e) {
-        var t, i;
+        var t, r;
         return null == (t = e) ? t : {
             gamePassId: (0, s.exists)(t, "gamePassId") ? t.gamePassId : void 0,
             iconAssetId: (0, s.exists)(t, "iconAssetId") ? t.iconAssetId : void 0,
@@ -1784,10 +1778,10 @@
             description: (0, s.exists)(t, "description") ? t.description : void 0,
             isForSale: (0, s.exists)(t, "isForSale") ? t.isForSale : void 0,
             price: (0, s.exists)(t, "price") ? t.price : void 0,
-            creator: (0, s.exists)(t, "creator") ? null == (i = t.creator) ? i : {
-                creatorType: (0, s.exists)(i, "creatorType") ? i.creatorType : void 0,
-                creatorId: (0, s.exists)(i, "creatorId") ? i.creatorId : void 0,
-                name: (0, s.exists)(i, "name") ? i.name : void 0
+            creator: (0, s.exists)(t, "creator") ? null == (r = t.creator) ? r : {
+                creatorType: (0, s.exists)(r, "creatorType") ? r.creatorType : void 0,
+                creatorId: (0, s.exists)(r, "creatorId") ? r.creatorId : void 0,
+                name: (0, s.exists)(r, "name") ? r.name : void 0
             } : void 0
         }
     }
@@ -1802,20 +1796,20 @@
             function s() {
                 this.constructor = e
             }
-            i(e, t), e.prototype = null === t ? Object.create(t) : (s.prototype = t.prototype, new s)
+            r(e, t), e.prototype = null === t ? Object.create(t) : (s.prototype = t.prototype, new s)
         }(t, e), t.prototype.gamePassesBatchGetGamePassConfigsRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a;
+            return i(this, void 0, void 0, function() {
+                var r, i, a;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
                             if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling gamePassesBatchGetGamePassConfigs.");
-                            return i = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
+                            return r = {}, (i = {})["Content-Type"] = "application/json", [4, this.request({
                                 path: "/v1/universes/{universeId}/game-passes/creator:batchGet".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                 schemaPath: "/v1/universes/{universeId}/game-passes/creator:batchGet",
                                 method: "POST",
-                                headers: r,
-                                query: i,
+                                headers: i,
+                                query: r,
                                 body: function(e) {
                                     if (void 0 !== e) return null === e ? null : {
                                         gamePassIds: e.gamePassIds
@@ -1832,7 +1826,7 @@
                 })
             })
         }, t.prototype.gamePassesBatchGetGamePassConfigs = function(e, t) {
-            return r(this, void 0, void 0, function() {
+            return i(this, void 0, void 0, function() {
                 return n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -1845,17 +1839,17 @@
                 })
             })
         }, t.prototype.gamePassesBatchGetGamePassOwnershipsRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a;
+            return i(this, void 0, void 0, function() {
+                var r, i, a;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
-                            return i = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
+                            return r = {}, (i = {})["Content-Type"] = "application/json", [4, this.request({
                                 path: "/v1/game-passes:batchGetOwnership",
                                 schemaPath: "/v1/game-passes:batchGetOwnership",
                                 method: "POST",
-                                headers: r,
-                                query: i,
+                                headers: i,
+                                query: r,
                                 body: function(e) {
                                     if (void 0 !== e) return null === e ? null : {
                                         ownershipIdentifiers: e.ownershipIdentifiers.map(d),
@@ -1874,7 +1868,7 @@
                 })
             })
         }, t.prototype.gamePassesBatchGetGamePassOwnerships = function() {
-            return r(this, arguments, void 0, function(e, t) {
+            return i(this, arguments, void 0, function(e, t) {
                 return void 0 === e && (e = {}), n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -1887,17 +1881,17 @@
                 })
             })
         }, t.prototype.gamePassesBatchGetGamePassesRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a;
+            return i(this, void 0, void 0, function() {
+                var r, i, a;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
-                            return i = {}, (r = {})["Content-Type"] = "application/json", void 0 !== e.robloxUniverseId && null !== e.robloxUniverseId && (r["roblox-Universe-Id"] = String(e.robloxUniverseId)), [4, this.request({
+                            return r = {}, (i = {})["Content-Type"] = "application/json", void 0 !== e.robloxUniverseId && null !== e.robloxUniverseId && (i["roblox-Universe-Id"] = String(e.robloxUniverseId)), [4, this.request({
                                 path: "/v1/game-passes:batchGet",
                                 schemaPath: "/v1/game-passes:batchGet",
                                 method: "POST",
-                                headers: r,
-                                query: i,
+                                headers: i,
+                                query: r,
                                 body: function(e) {
                                     if (void 0 !== e) return null === e ? null : {
                                         gamePassIds: e.gamePassIds,
@@ -1915,7 +1909,7 @@
                 })
             })
         }, t.prototype.gamePassesBatchGetGamePasses = function() {
-            return r(this, arguments, void 0, function(e, t) {
+            return i(this, arguments, void 0, function(e, t) {
                 return void 0 === e && (e = {}), n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -1928,18 +1922,18 @@
                 })
             })
         }, t.prototype.gamePassesBulkUpdateRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a;
+            return i(this, void 0, void 0, function() {
+                var r, i, a;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
                             if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling gamePassesBulkUpdate.");
-                            return i = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
+                            return r = {}, (i = {})["Content-Type"] = "application/json", [4, this.request({
                                 path: "/v1/game-passes/universes/{universeId}/bulk-update".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                 schemaPath: "/v1/game-passes/universes/{universeId}/bulk-update",
                                 method: "POST",
-                                headers: r,
-                                query: i,
+                                headers: i,
+                                query: r,
                                 body: function(e) {
                                     if (void 0 !== e) return null === e ? null : {
                                         gamePassUpdates: e.gamePassUpdates.map(h)
@@ -1956,7 +1950,7 @@
                 })
             })
         }, t.prototype.gamePassesBulkUpdate = function(e, t) {
-            return r(this, void 0, void 0, function() {
+            return i(this, void 0, void 0, function() {
                 return n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -1969,21 +1963,21 @@
                 })
             })
         }, t.prototype.gamePassesCreateGamePassRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a, u;
+            return i(this, void 0, void 0, function() {
+                var r, i, a, u;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
                             if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling gamePassesCreateGamePass.");
                             if (null === e.name || void 0 === e.name) throw new s.RequiredError("name", "Required parameter requestParameters.name was null or undefined when calling gamePassesCreateGamePass.");
-                            return i = {}, r = {}, a = (0, s.canConsumeForm)([{
+                            return r = {}, i = {}, a = (0, s.canConsumeForm)([{
                                 contentType: "multipart/form-data"
                             }]) ? new FormData : new URLSearchParams, void 0 !== e.name && a.append("name", e.name), void 0 !== e.description && a.append("description", e.description), void 0 !== e.imageFile && a.append("imageFile", e.imageFile), void 0 !== e.isForSale && a.append("isForSale", e.isForSale), void 0 !== e.price && a.append("price", e.price), void 0 !== e.isManagedPricingEnabled && a.append("isManagedPricingEnabled", e.isManagedPricingEnabled), void 0 !== e.isTrialEnabled && a.append("isTrialEnabled", e.isTrialEnabled), [4, this.request({
                                 path: "/v1/universes/{universeId}/game-passes".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                 schemaPath: "/v1/universes/{universeId}/game-passes",
                                 method: "POST",
-                                headers: r,
-                                query: i,
+                                headers: i,
+                                query: r,
                                 body: a
                             }, t)];
                         case 1:
@@ -1994,7 +1988,7 @@
                 })
             })
         }, t.prototype.gamePassesCreateGamePass = function(e, t) {
-            return r(this, void 0, void 0, function() {
+            return i(this, void 0, void 0, function() {
                 return n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -2007,19 +2001,19 @@
                 })
             })
         }, t.prototype.gamePassesGetGamePassConfigRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a;
+            return i(this, void 0, void 0, function() {
+                var r, i, a;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
                             if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling gamePassesGetGamePassConfig.");
                             if (null === e.gamePassId || void 0 === e.gamePassId) throw new s.RequiredError("gamePassId", "Required parameter requestParameters.gamePassId was null or undefined when calling gamePassesGetGamePassConfig.");
-                            return i = {}, r = {}, [4, this.request({
+                            return r = {}, i = {}, [4, this.request({
                                 path: "/v1/universes/{universeId}/game-passes/{gamePassId}/creator".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))).replace("{".concat("gamePassId", "}"), encodeURIComponent(String(e.gamePassId))),
                                 schemaPath: "/v1/universes/{universeId}/game-passes/{gamePassId}/creator",
                                 method: "GET",
-                                headers: r,
-                                query: i
+                                headers: i,
+                                query: r
                             }, t)];
                         case 1:
                             return a = n.sent(), [2, new s.JSONApiResponse(a, function(e) {
@@ -2029,7 +2023,7 @@
                 })
             })
         }, t.prototype.gamePassesGetGamePassConfig = function(e, t) {
-            return r(this, void 0, void 0, function() {
+            return i(this, void 0, void 0, function() {
                 return n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -2042,20 +2036,20 @@
                 })
             })
         }, t.prototype.gamePassesGetGamePassMetadataRaw = function(e) {
-            return r(this, void 0, void 0, function() {
-                var t, i, r;
+            return i(this, void 0, void 0, function() {
+                var t, r, i;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
-                            return t = {}, i = {}, [4, this.request({
+                            return t = {}, r = {}, [4, this.request({
                                 path: "/v1/metadata",
                                 schemaPath: "/v1/metadata",
                                 method: "GET",
-                                headers: i,
+                                headers: r,
                                 query: t
                             }, e)];
                         case 1:
-                            return r = n.sent(), [2, new s.JSONApiResponse(r, function(e) {
+                            return i = n.sent(), [2, new s.JSONApiResponse(i, function(e) {
                                 return null == e ? e : {
                                     gamePassMaxNameLength: (0, s.exists)(e, "gamePassMaxNameLength") ? e.gamePassMaxNameLength : void 0,
                                     gamePassMaxDescriptionLength: (0, s.exists)(e, "gamePassMaxDescriptionLength") ? e.gamePassMaxDescriptionLength : void 0,
@@ -2069,7 +2063,7 @@
                 })
             })
         }, t.prototype.gamePassesGetGamePassMetadata = function(e) {
-            return r(this, void 0, void 0, function() {
+            return i(this, void 0, void 0, function() {
                 return n(this, function(t) {
                     switch (t.label) {
                         case 0:
@@ -2082,18 +2076,18 @@
                 })
             })
         }, t.prototype.gamePassesGetPassProductInfoRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a;
+            return i(this, void 0, void 0, function() {
+                var r, i, a;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
                             if (null === e.gamePassId || void 0 === e.gamePassId) throw new s.RequiredError("gamePassId", "Required parameter requestParameters.gamePassId was null or undefined when calling gamePassesGetPassProductInfo.");
-                            return i = {}, r = {}, [4, this.request({
+                            return r = {}, i = {}, [4, this.request({
                                 path: "/v1/game-passes/{gamePassId}/product-info".replace("{".concat("gamePassId", "}"), encodeURIComponent(String(e.gamePassId))),
                                 schemaPath: "/v1/game-passes/{gamePassId}/product-info",
                                 method: "GET",
-                                headers: r,
-                                query: i
+                                headers: i,
+                                query: r
                             }, t)];
                         case 1:
                             return a = n.sent(), [2, new s.JSONApiResponse(a, function(e) {
@@ -2134,7 +2128,7 @@
                 })
             })
         }, t.prototype.gamePassesGetPassProductInfo = function(e, t) {
-            return r(this, void 0, void 0, function() {
+            return i(this, void 0, void 0, function() {
                 return n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -2147,18 +2141,18 @@
                 })
             })
         }, t.prototype.gamePassesGetSalesLimitInfoRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a;
+            return i(this, void 0, void 0, function() {
+                var r, i, a;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
                             if (null === e.universeid || void 0 === e.universeid) throw new s.RequiredError("universeid", "Required parameter requestParameters.universeid was null or undefined when calling gamePassesGetSalesLimitInfo.");
-                            return i = {}, r = {}, [4, this.request({
+                            return r = {}, i = {}, [4, this.request({
                                 path: "/v1/game-passes/universes/{universeid}/sales-limit".replace("{".concat("universeid", "}"), encodeURIComponent(String(e.universeid))),
                                 schemaPath: "/v1/game-passes/universes/{universeid}/sales-limit",
                                 method: "GET",
-                                headers: r,
-                                query: i
+                                headers: i,
+                                query: r
                             }, t)];
                         case 1:
                             return a = n.sent(), [2, new s.JSONApiResponse(a, function(e) {
@@ -2171,7 +2165,7 @@
                 })
             })
         }, t.prototype.gamePassesGetSalesLimitInfo = function(e, t) {
-            return r(this, void 0, void 0, function() {
+            return i(this, void 0, void 0, function() {
                 return n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -2184,18 +2178,18 @@
                 })
             })
         }, t.prototype.gamePassesGetUserGamePassesRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a;
+            return i(this, void 0, void 0, function() {
+                var r, i, a;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
                             if (null === e.userId || void 0 === e.userId) throw new s.RequiredError("userId", "Required parameter requestParameters.userId was null or undefined when calling gamePassesGetUserGamePasses.");
-                            return i = {}, void 0 !== e.exclusiveStartId && (i.exclusiveStartId = e.exclusiveStartId), void 0 !== e.count && (i.count = e.count), r = {}, [4, this.request({
+                            return r = {}, void 0 !== e.exclusiveStartId && (r.exclusiveStartId = e.exclusiveStartId), void 0 !== e.count && (r.count = e.count), i = {}, [4, this.request({
                                 path: "/v1/users/{userId}/game-passes".replace("{".concat("userId", "}"), encodeURIComponent(String(e.userId))),
                                 schemaPath: "/v1/users/{userId}/game-passes",
                                 method: "GET",
-                                headers: r,
-                                query: i
+                                headers: i,
+                                query: r
                             }, t)];
                         case 1:
                             return a = n.sent(), [2, new s.JSONApiResponse(a, function(e) {
@@ -2207,7 +2201,7 @@
                 })
             })
         }, t.prototype.gamePassesGetUserGamePasses = function(e, t) {
-            return r(this, void 0, void 0, function() {
+            return i(this, void 0, void 0, function() {
                 return n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -2220,18 +2214,18 @@
                 })
             })
         }, t.prototype.gamePassesListGamePassConfigsByUniverseRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a;
+            return i(this, void 0, void 0, function() {
+                var r, i, a;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
                             if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling gamePassesListGamePassConfigsByUniverse.");
-                            return i = {}, void 0 !== e.pageSize && (i.pageSize = e.pageSize), void 0 !== e.pageToken && (i.pageToken = e.pageToken), void 0 !== e.isArchived && (i.isArchived = e.isArchived), r = {}, [4, this.request({
+                            return r = {}, void 0 !== e.pageSize && (r.pageSize = e.pageSize), void 0 !== e.pageToken && (r.pageToken = e.pageToken), void 0 !== e.isArchived && (r.isArchived = e.isArchived), i = {}, [4, this.request({
                                 path: "/v1/universes/{universeId}/game-passes/creator".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                 schemaPath: "/v1/universes/{universeId}/game-passes/creator",
                                 method: "GET",
-                                headers: r,
-                                query: i
+                                headers: i,
+                                query: r
                             }, t)];
                         case 1:
                             return a = n.sent(), [2, new s.JSONApiResponse(a, function(e) {
@@ -2244,7 +2238,7 @@
                 })
             })
         }, t.prototype.gamePassesListGamePassConfigsByUniverse = function(e, t) {
-            return r(this, void 0, void 0, function() {
+            return i(this, void 0, void 0, function() {
                 return n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -2257,18 +2251,18 @@
                 })
             })
         }, t.prototype.gamePassesListGamePassesByUniverseRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a;
+            return i(this, void 0, void 0, function() {
+                var r, i, a;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
                             if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling gamePassesListGamePassesByUniverse.");
-                            return i = {}, void 0 !== e.pageSize && (i.pageSize = e.pageSize), void 0 !== e.pageToken && (i.pageToken = e.pageToken), void 0 !== e.passView && (i.passView = e.passView), r = {}, [4, this.request({
+                            return r = {}, void 0 !== e.pageSize && (r.pageSize = e.pageSize), void 0 !== e.pageToken && (r.pageToken = e.pageToken), void 0 !== e.passView && (r.passView = e.passView), i = {}, [4, this.request({
                                 path: "/v1/universes/{universeId}/game-passes".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
                                 schemaPath: "/v1/universes/{universeId}/game-passes",
                                 method: "GET",
-                                headers: r,
-                                query: i
+                                headers: i,
+                                query: r
                             }, t)];
                         case 1:
                             return a = n.sent(), [2, new s.JSONApiResponse(a, function(e) {
@@ -2281,7 +2275,7 @@
                 })
             })
         }, t.prototype.gamePassesListGamePassesByUniverse = function(e, t) {
-            return r(this, void 0, void 0, function() {
+            return i(this, void 0, void 0, function() {
                 return n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -2294,18 +2288,18 @@
                 })
             })
         }, t.prototype.gamePassesPurchaseGamePassRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a;
+            return i(this, void 0, void 0, function() {
+                var r, i, a;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
                             if (null === e.productId || void 0 === e.productId) throw new s.RequiredError("productId", "Required parameter requestParameters.productId was null or undefined when calling gamePassesPurchaseGamePass.");
-                            return i = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
+                            return r = {}, (i = {})["Content-Type"] = "application/json", [4, this.request({
                                 path: "/v1/game-passes/{productId}/purchase".replace("{".concat("productId", "}"), encodeURIComponent(String(e.productId))),
                                 schemaPath: "/v1/game-passes/{productId}/purchase",
                                 method: "POST",
-                                headers: r,
-                                query: i,
+                                headers: i,
+                                query: r,
                                 body: function(e) {
                                     if (void 0 !== e) return null === e ? null : {
                                         expectedPrice: e.expectedPrice,
@@ -2348,7 +2342,7 @@
                 })
             })
         }, t.prototype.gamePassesPurchaseGamePass = function(e, t) {
-            return r(this, void 0, void 0, function() {
+            return i(this, void 0, void 0, function() {
                 return n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -2361,18 +2355,18 @@
                 })
             })
         }, t.prototype.gamePassesRevokeGamePassRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a;
+            return i(this, void 0, void 0, function() {
+                var r, i, a;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
                             if (null === e.gamePassId || void 0 === e.gamePassId) throw new s.RequiredError("gamePassId", "Required parameter requestParameters.gamePassId was null or undefined when calling gamePassesRevokeGamePass.");
-                            return i = {}, r = {}, [4, this.request({
+                            return r = {}, i = {}, [4, this.request({
                                 path: "/v1/game-passes/{gamePassId}:revokeOwnership".replace("{".concat("gamePassId", "}"), encodeURIComponent(String(e.gamePassId))),
                                 schemaPath: "/v1/game-passes/{gamePassId}:revokeOwnership",
                                 method: "POST",
-                                headers: r,
-                                query: i
+                                headers: i,
+                                query: r
                             }, t)];
                         case 1:
                             return a = n.sent(), [2, new s.VoidApiResponse(a)]
@@ -2380,7 +2374,7 @@
                 })
             })
         }, t.prototype.gamePassesRevokeGamePass = function(e, t) {
-            return r(this, void 0, void 0, function() {
+            return i(this, void 0, void 0, function() {
                 return n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -2391,21 +2385,21 @@
                 })
             })
         }, t.prototype.gamePassesUpdateGamePassRaw = function(e, t) {
-            return r(this, void 0, void 0, function() {
-                var i, r, a, o;
+            return i(this, void 0, void 0, function() {
+                var r, i, a, o;
                 return n(this, function(n) {
                     switch (n.label) {
                         case 0:
                             if (null === e.universeId || void 0 === e.universeId) throw new s.RequiredError("universeId", "Required parameter requestParameters.universeId was null or undefined when calling gamePassesUpdateGamePass.");
                             if (null === e.gamePassId || void 0 === e.gamePassId) throw new s.RequiredError("gamePassId", "Required parameter requestParameters.gamePassId was null or undefined when calling gamePassesUpdateGamePass.");
-                            return i = {}, r = {}, a = (0, s.canConsumeForm)([{
+                            return r = {}, i = {}, a = (0, s.canConsumeForm)([{
                                 contentType: "multipart/form-data"
                             }]) ? new FormData : new URLSearchParams, void 0 !== e.name && a.append("name", e.name), void 0 !== e.description && a.append("description", e.description), void 0 !== e.file && a.append("file", e.file), void 0 !== e.imageFile && a.append("imageFile", e.imageFile), void 0 !== e.isForSale && a.append("isForSale", e.isForSale), void 0 !== e.price && a.append("price", e.price), void 0 !== e.isManagedPricingEnabled && a.append("isManagedPricingEnabled", e.isManagedPricingEnabled), void 0 !== e.isArchived && a.append("isArchived", e.isArchived), void 0 !== e.isTrialEnabled && a.append("isTrialEnabled", e.isTrialEnabled), [4, this.request({
                                 path: "/v1/universes/{universeId}/game-passes/{gamePassId}".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))).replace("{".concat("gamePassId", "}"), encodeURIComponent(String(e.gamePassId))),
                                 schemaPath: "/v1/universes/{universeId}/game-passes/{gamePassId}",
                                 method: "PATCH",
-                                headers: r,
-                                query: i,
+                                headers: i,
+                                query: r,
                                 body: a
                             }, t)];
                         case 1:
@@ -2414,7 +2408,7 @@
                 })
             })
         }, t.prototype.gamePassesUpdateGamePass = function(e, t) {
-            return r(this, void 0, void 0, function() {
+            return i(this, void 0, void 0, function() {
                 return n(this, function(s) {
                     switch (s.label) {
                         case 0:
@@ -2505,8 +2499,8 @@
 }, 239320, e => {
     "use strict";
     var t, s = e.i(677753),
-        i = function(e, t) {
-            return (i = Object.setPrototypeOf || ({
+        r = function(e, t) {
+            return (r = Object.setPrototypeOf || ({
                 __proto__: []
             }) instanceof Array && function(e, t) {
                 e.__proto__ = t
@@ -2515,20 +2509,20 @@
             })(e, t)
         };
 
-    function r(e, t) {
+    function i(e, t) {
         if ("function" != typeof t && null !== t) throw TypeError("Class extends value " + String(t) + " is not a constructor or null");
 
         function s() {
             this.constructor = e
         }
-        i(e, t), e.prototype = null === t ? Object.create(t) : (s.prototype = t.prototype, new s)
+        r(e, t), e.prototype = null === t ? Object.create(t) : (s.prototype = t.prototype, new s)
     }
 
-    function n(e, t, s, i) {
-        return new(s || (s = Promise))(function(r, n) {
+    function n(e, t, s, r) {
+        return new(s || (s = Promise))(function(i, n) {
             function a(e) {
                 try {
-                    u(i.next(e))
+                    u(r.next(e))
                 } catch (e) {
                     n(e)
                 }
@@ -2536,7 +2530,7 @@
 
             function o(e) {
                 try {
-                    u(i.throw(e))
+                    u(r.throw(e))
                 } catch (e) {
                     n(e)
                 }
@@ -2544,20 +2538,20 @@
 
             function u(e) {
                 var t;
-                e.done ? r(e.value) : ((t = e.value) instanceof s ? t : new s(function(e) {
+                e.done ? i(e.value) : ((t = e.value) instanceof s ? t : new s(function(e) {
                     e(t)
                 })).then(a, o)
             }
-            u((i = i.apply(e, t || [])).next())
+            u((r = r.apply(e, t || [])).next())
         })
     }
 
     function a(e, t) {
-        var s, i, r, n = {
+        var s, r, i, n = {
                 label: 0,
                 sent: function() {
-                    if (1 & r[0]) throw r[1];
-                    return r[1]
+                    if (1 & i[0]) throw i[1];
+                    return i[1]
                 },
                 trys: [],
                 ops: []
@@ -2572,11 +2566,11 @@
                 var d = [o, u];
                 if (s) throw TypeError("Generator is already executing.");
                 for (; a && (a = 0, d[0] && (n = 0)), n;) try {
-                    if (s = 1, i && (r = 2 & d[0] ? i.return : d[0] ? i.throw || ((r = i.return) && r.call(i), 0) : i.next) && !(r = r.call(i, d[1])).done) return r;
-                    switch (i = 0, r && (d = [2 & d[0], r.value]), d[0]) {
+                    if (s = 1, r && (i = 2 & d[0] ? r.return : d[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) && !(i = i.call(r, d[1])).done) return i;
+                    switch (r = 0, i && (d = [2 & d[0], i.value]), d[0]) {
                         case 0:
                         case 1:
-                            r = d;
+                            i = d;
                             break;
                         case 4:
                             return n.label++, {
@@ -2584,36 +2578,36 @@
                                 done: !1
                             };
                         case 5:
-                            n.label++, i = d[1], d = [0];
+                            n.label++, r = d[1], d = [0];
                             continue;
                         case 7:
                             d = n.ops.pop(), n.trys.pop();
                             continue;
                         default:
-                            if (!(r = (r = n.trys).length > 0 && r[r.length - 1]) && (6 === d[0] || 2 === d[0])) {
+                            if (!(i = (i = n.trys).length > 0 && i[i.length - 1]) && (6 === d[0] || 2 === d[0])) {
                                 n = 0;
                                 continue
                             }
-                            if (3 === d[0] && (!r || d[1] > r[0] && d[1] < r[3])) {
+                            if (3 === d[0] && (!i || d[1] > i[0] && d[1] < i[3])) {
                                 n.label = d[1];
                                 break
                             }
-                            if (6 === d[0] && n.label < r[1]) {
-                                n.label = r[1], r = d;
+                            if (6 === d[0] && n.label < i[1]) {
+                                n.label = i[1], i = d;
                                 break
                             }
-                            if (r && n.label < r[2]) {
-                                n.label = r[2], n.ops.push(d);
+                            if (i && n.label < i[2]) {
+                                n.label = i[2], n.ops.push(d);
                                 break
                             }
-                            r[2] && n.ops.pop(), n.trys.pop();
+                            i[2] && n.ops.pop(), n.trys.pop();
                             continue
                     }
                     d = t.call(e, n)
                 } catch (e) {
-                    d = [6, e], i = 0
+                    d = [6, e], r = 0
                 } finally {
-                    s = r = 0
+                    s = i = 0
                 }
                 if (5 & d[0]) throw d[1];
                 return {
@@ -2650,20 +2644,20 @@
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            return r(t, e), t.prototype.v1AssetQuotasGetRaw = function(e, t) {
+            return i(t, e), t.prototype.v1AssetQuotasGetRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.resourceType || void 0 === e.resourceType) throw new s.RequiredError("resourceType", "Required parameter requestParameters.resourceType was null or undefined when calling v1AssetQuotasGet.");
                                 if (null === e.assetType || void 0 === e.assetType) throw new s.RequiredError("assetType", "Required parameter requestParameters.assetType was null or undefined when calling v1AssetQuotasGet.");
-                                return i = {}, void 0 !== e.resourceType && (i.resourceType = e.resourceType), void 0 !== e.assetType && (i.assetType = e.assetType), void 0 !== e.useDummyData && (i.useDummyData = e.useDummyData), r = {}, [4, this.request({
+                                return r = {}, void 0 !== e.resourceType && (r.resourceType = e.resourceType), void 0 !== e.assetType && (r.assetType = e.assetType), void 0 !== e.useDummyData && (r.useDummyData = e.useDummyData), i = {}, [4, this.request({
                                     path: "/v1/asset-quotas",
                                     schemaPath: "/v1/asset-quotas",
                                     method: "GET",
-                                    headers: r,
-                                    query: i
+                                    headers: i,
+                                    query: r
                                 }, t)];
                             case 1:
                                 return n = a.sent(), [2, new s.JSONApiResponse(n, function(e) {
@@ -2693,19 +2687,19 @@
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            return r(t, e), t.prototype.v1AssetsAssetIdMediaGetRaw = function(e, t) {
+            return i(t, e), t.prototype.v1AssetsAssetIdMediaGetRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.assetId || void 0 === e.assetId) throw new s.RequiredError("assetId", "Required parameter requestParameters.assetId was null or undefined when calling v1AssetsAssetIdMediaGet.");
-                                return i = {}, r = {}, [4, this.request({
+                                return r = {}, i = {}, [4, this.request({
                                     path: "/v1/assets/{assetId}/media".replace("{".concat("assetId", "}"), encodeURIComponent(String(e.assetId))),
                                     schemaPath: "/v1/assets/{assetId}/media",
                                     method: "GET",
-                                    headers: r,
-                                    query: i
+                                    headers: i,
+                                    query: r
                                 }, t)];
                             case 1:
                                 return n = a.sent(), [2, new s.JSONApiResponse(n, function(e) {
@@ -2729,18 +2723,18 @@
                 })
             }, t.prototype.v1AssetsAssetIdMediaMediaAssetIdDeleteRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.assetId || void 0 === e.assetId) throw new s.RequiredError("assetId", "Required parameter requestParameters.assetId was null or undefined when calling v1AssetsAssetIdMediaMediaAssetIdDelete.");
                                 if (null === e.mediaAssetId || void 0 === e.mediaAssetId) throw new s.RequiredError("mediaAssetId", "Required parameter requestParameters.mediaAssetId was null or undefined when calling v1AssetsAssetIdMediaMediaAssetIdDelete.");
-                                return i = {}, r = {}, [4, this.request({
+                                return r = {}, i = {}, [4, this.request({
                                     path: "/v1/assets/{assetId}/media/{mediaAssetId}".replace("{".concat("assetId", "}"), encodeURIComponent(String(e.assetId))).replace("{".concat("mediaAssetId", "}"), encodeURIComponent(String(e.mediaAssetId))),
                                     schemaPath: "/v1/assets/{assetId}/media/{mediaAssetId}",
                                     method: "DELETE",
-                                    headers: r,
-                                    query: i
+                                    headers: i,
+                                    query: r
                                 }, t)];
                             case 1:
                                 return n = a.sent(), [2, new s.JSONApiResponse(n)]
@@ -2762,18 +2756,18 @@
                 })
             }, t.prototype.v1AssetsAssetIdMediaOrderPostRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.assetId || void 0 === e.assetId) throw new s.RequiredError("assetId", "Required parameter requestParameters.assetId was null or undefined when calling v1AssetsAssetIdMediaOrderPost.");
                                 if (null === e.mediaAssetIds || void 0 === e.mediaAssetIds) throw new s.RequiredError("mediaAssetIds", "Required parameter requestParameters.mediaAssetIds was null or undefined when calling v1AssetsAssetIdMediaOrderPost.");
-                                return i = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
+                                return r = {}, (i = {})["Content-Type"] = "application/json", [4, this.request({
                                     path: "/v1/assets/{assetId}/media/order".replace("{".concat("assetId", "}"), encodeURIComponent(String(e.assetId))),
                                     schemaPath: "/v1/assets/{assetId}/media/order",
                                     method: "POST",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: e.mediaAssetIds
                                 }, t)];
                             case 1:
@@ -2796,19 +2790,19 @@
                 })
             }, t.prototype.v1AssetsAssetIdMediaPostRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n, o;
+                    var r, i, n, o;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.assetId || void 0 === e.assetId) throw new s.RequiredError("assetId", "Required parameter requestParameters.assetId was null or undefined when calling v1AssetsAssetIdMediaPost.");
-                                return i = {}, r = {}, n = (0, s.canConsumeForm)([{
+                                return r = {}, i = {}, n = (0, s.canConsumeForm)([{
                                     contentType: "multipart/form-data"
                                 }]) ? new FormData : new URLSearchParams, void 0 !== e.requestFiles && n.append("request.files", e.requestFiles), [4, this.request({
                                     path: "/v1/assets/{assetId}/media".replace("{".concat("assetId", "}"), encodeURIComponent(String(e.assetId))),
                                     schemaPath: "/v1/assets/{assetId}/media",
                                     method: "POST",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: n
                                 }, t)];
                             case 1:
@@ -2833,17 +2827,17 @@
                 })
             }, t.prototype.v1AssetsAssetIdThumbnailDeleteRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.assetId || void 0 === e.assetId) throw new s.RequiredError("assetId", "Required parameter requestParameters.assetId was null or undefined when calling v1AssetsAssetIdThumbnailDelete.");
-                                return i = {}, r = {}, [4, this.request({
+                                return r = {}, i = {}, [4, this.request({
                                     path: "/v1/assets/{assetId}/thumbnail".replace("{".concat("assetId", "}"), encodeURIComponent(String(e.assetId))),
                                     schemaPath: "/v1/assets/{assetId}/thumbnail",
                                     method: "DELETE",
-                                    headers: r,
-                                    query: i
+                                    headers: i,
+                                    query: r
                                 }, t)];
                             case 1:
                                 return n = a.sent(), [2, new s.JSONApiResponse(n)]
@@ -2865,17 +2859,17 @@
                 })
             }, t.prototype.v1AssetsAssetIdThumbnailGetRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.assetId || void 0 === e.assetId) throw new s.RequiredError("assetId", "Required parameter requestParameters.assetId was null or undefined when calling v1AssetsAssetIdThumbnailGet.");
-                                return i = {}, r = {}, [4, this.request({
+                                return r = {}, i = {}, [4, this.request({
                                     path: "/v1/assets/{assetId}/thumbnail".replace("{".concat("assetId", "}"), encodeURIComponent(String(e.assetId))),
                                     schemaPath: "/v1/assets/{assetId}/thumbnail",
                                     method: "GET",
-                                    headers: r,
-                                    query: i
+                                    headers: i,
+                                    query: r
                                 }, t)];
                             case 1:
                                 return n = a.sent(), [2, new s.JSONApiResponse(n, function(e) {
@@ -2899,19 +2893,19 @@
                 })
             }, t.prototype.v1AssetsAssetIdThumbnailPostRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n, o;
+                    var r, i, n, o;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.assetId || void 0 === e.assetId) throw new s.RequiredError("assetId", "Required parameter requestParameters.assetId was null or undefined when calling v1AssetsAssetIdThumbnailPost.");
-                                return i = {}, r = {}, n = (0, s.canConsumeForm)([{
+                                return r = {}, i = {}, n = (0, s.canConsumeForm)([{
                                     contentType: "multipart/form-data"
                                 }]) ? new FormData : new URLSearchParams, void 0 !== e.requestFiles && n.append("request.files", e.requestFiles), [4, this.request({
                                     path: "/v1/assets/{assetId}/thumbnail".replace("{".concat("assetId", "}"), encodeURIComponent(String(e.assetId))),
                                     schemaPath: "/v1/assets/{assetId}/thumbnail",
                                     method: "POST",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: n
                                 }, t)];
                             case 1:
@@ -2940,19 +2934,19 @@
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            r(t, e), t.prototype.v1AudioPostRaw = function(e, t) {
+            i(t, e), t.prototype.v1AudioPostRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.request || void 0 === e.request) throw new s.RequiredError("request", "Required parameter requestParameters.request was null or undefined when calling v1AudioPost.");
-                                return i = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
+                                return r = {}, (i = {})["Content-Type"] = "application/json", [4, this.request({
                                     path: "/v1/audio",
                                     schemaPath: "/v1/audio",
                                     method: "POST",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: function(e) {
                                         if (void 0 !== e) return null === e ? null : {
                                             name: e.name,
@@ -2990,17 +2984,17 @@
                 })
             }, t.prototype.v1AudioVerifyPostRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n;
+                    var r, i, n;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.request || void 0 === e.request) throw new s.RequiredError("request", "Required parameter requestParameters.request was null or undefined when calling v1AudioVerifyPost.");
-                                return i = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
+                                return r = {}, (i = {})["Content-Type"] = "application/json", [4, this.request({
                                     path: "/v1/audio/verify",
                                     schemaPath: "/v1/audio/verify",
                                     method: "POST",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: function(e) {
                                         if (void 0 !== e) return null === e ? null : {
                                             name: e.name,
@@ -3042,21 +3036,21 @@
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            return r(t, e), t.prototype.v1BadgesBadgeIdIconPostRaw = function(e, t) {
+            return i(t, e), t.prototype.v1BadgesBadgeIdIconPostRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n, o;
+                    var r, i, n, o;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.badgeId || void 0 === e.badgeId) throw new s.RequiredError("badgeId", "Required parameter requestParameters.badgeId was null or undefined when calling v1BadgesBadgeIdIconPost.");
-                                return i = {}, r = {}, n = (0, s.canConsumeForm)([{
+                                return r = {}, i = {}, n = (0, s.canConsumeForm)([{
                                     contentType: "multipart/form-data"
                                 }]) ? new FormData : new URLSearchParams, void 0 !== e.requestFiles && n.append("request.files", e.requestFiles), [4, this.request({
                                     path: "/v1/badges/{badgeId}/icon".replace("{".concat("badgeId", "}"), encodeURIComponent(String(e.badgeId))),
                                     schemaPath: "/v1/badges/{badgeId}/icon",
                                     method: "POST",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: n
                                 }, t)];
                             case 1:
@@ -3085,21 +3079,21 @@
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            return r(t, e), t.prototype.v1GamesGameIdIconPostRaw = function(e, t) {
+            return i(t, e), t.prototype.v1GamesGameIdIconPostRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n, o;
+                    var r, i, n, o;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.gameId || void 0 === e.gameId) throw new s.RequiredError("gameId", "Required parameter requestParameters.gameId was null or undefined when calling v1GamesGameIdIconPost.");
-                                return i = {}, r = {}, n = (0, s.canConsumeForm)([{
+                                return r = {}, i = {}, n = (0, s.canConsumeForm)([{
                                     contentType: "multipart/form-data"
                                 }]) ? new FormData : new URLSearchParams, void 0 !== e.requestFiles && n.append("request.files", e.requestFiles), [4, this.request({
                                     path: "/v1/games/{gameId}/icon".replace("{".concat("gameId", "}"), encodeURIComponent(String(e.gameId))),
                                     schemaPath: "/v1/games/{gameId}/icon",
                                     method: "POST",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: n
                                 }, t)];
                             case 1:
@@ -3128,21 +3122,21 @@
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            return r(t, e), t.prototype.v1GamesGameIdThumbnailImagePostRaw = function(e, t) {
+            return i(t, e), t.prototype.v1GamesGameIdThumbnailImagePostRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n, o;
+                    var r, i, n, o;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.gameId || void 0 === e.gameId) throw new s.RequiredError("gameId", "Required parameter requestParameters.gameId was null or undefined when calling v1GamesGameIdThumbnailImagePost.");
-                                return i = {}, r = {}, n = (0, s.canConsumeForm)([{
+                                return r = {}, i = {}, n = (0, s.canConsumeForm)([{
                                     contentType: "multipart/form-data"
                                 }]) ? new FormData : new URLSearchParams, void 0 !== e.requestFiles && n.append("request.files", e.requestFiles), [4, this.request({
                                     path: "/v1/games/{gameId}/thumbnail/image".replace("{".concat("gameId", "}"), encodeURIComponent(String(e.gameId))),
                                     schemaPath: "/v1/games/{gameId}/thumbnail/image",
                                     method: "POST",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: n
                                 }, t)];
                             case 1:
@@ -3171,21 +3165,21 @@
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            return r(t, e), t.prototype.v1PluginsPluginIdIconPostRaw = function(e, t) {
+            return i(t, e), t.prototype.v1PluginsPluginIdIconPostRaw = function(e, t) {
                 return n(this, void 0, void 0, function() {
-                    var i, r, n, o;
+                    var r, i, n, o;
                     return a(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (null === e.pluginId || void 0 === e.pluginId) throw new s.RequiredError("pluginId", "Required parameter requestParameters.pluginId was null or undefined when calling v1PluginsPluginIdIconPost.");
-                                return i = {}, r = {}, n = (0, s.canConsumeForm)([{
+                                return r = {}, i = {}, n = (0, s.canConsumeForm)([{
                                     contentType: "multipart/form-data"
                                 }]) ? new FormData : new URLSearchParams, void 0 !== e.requestFiles && n.append("request.files", e.requestFiles), [4, this.request({
                                     path: "/v1/plugins/{pluginId}/icon".replace("{".concat("pluginId", "}"), encodeURIComponent(String(e.pluginId))),
                                     schemaPath: "/v1/plugins/{pluginId}/icon",
                                     method: "POST",
-                                    headers: r,
-                                    query: i,
+                                    headers: i,
+                                    query: r,
                                     body: n
                                 }, t)];
                             case 1:
@@ -3339,8 +3333,8 @@
 }, 691450, 720054, e => {
     "use strict";
     var t, s = e.i(221628),
-        i = e.i(416340),
-        r = e.i(589624),
+        r = e.i(416340),
+        i = e.i(589624),
         n = e.i(795621),
         a = e.i(751846),
         o = e.i(814975),
@@ -3350,62 +3344,61 @@
         l = e.i(671376),
         p = e.i(627636),
         v = e.i(450639),
-        m = e.i(486736),
-        h = e.i(970494),
-        f = e.i(995849),
-        I = e.i(403028),
-        g = e.i(309999),
-        P = e.i(255382),
-        y = e.i(392782),
-        w = e.i(239320),
-        b = e.i(17829);
-    let A = async e => {
+        m = e.i(970494),
+        h = e.i(995849),
+        f = e.i(403028),
+        I = e.i(309999),
+        g = e.i(255382),
+        P = e.i(392782),
+        y = e.i(239320),
+        w = e.i(17829);
+    let b = async e => {
         var t;
-        let s = null == (t = (await w.default.getAssetQuotas("RateLimitCreatorMarketplaceDistribute", e)).quotas) ? void 0 : t[0];
-        if (s && void 0 !== s.usage && void 0 !== s.capacity && void 0 !== s.duration && s.duration in w.QuotaDuration) return {
+        let s = null == (t = (await y.default.getAssetQuotas("RateLimitCreatorMarketplaceDistribute", e)).quotas) ? void 0 : t[0];
+        if (s && void 0 !== s.usage && void 0 !== s.capacity && void 0 !== s.duration && s.duration in y.QuotaDuration) return {
             capacity: s.capacity,
             duration: s.duration,
             expirationTime: s.expirationTime ? new Date(s.expirationTime) : void 0,
             usage: s.usage
         };
         throw Error("empty quota")
-    }, S = async e => await P.default.getAssetPermissions(e), R = async (e, t) => await P.default.batchCheckAssetPermissions(t.map(t => ({
+    }, A = async e => await g.default.getAssetPermissions(e), S = async (e, t) => await g.default.batchCheckAssetPermissions(t.map(t => ({
         assetId: e,
-        subject: f.SubjectType.Universe,
+        subject: h.SubjectType.Universe,
         subjectId: t.toString(),
-        permissionType: f.AssetConsumerAction.Use
-    }))), x = async (e, t) => {
-        var s, i, r, n;
-        let a = await P.default.batchCheckAssetPermissions([{
+        permissionType: h.AssetConsumerAction.Use
+    }))), R = async (e, t) => {
+        var s, r, i, n;
+        let a = await g.default.batchCheckAssetPermissions([{
             assetId: t,
-            subject: f.SubjectType.User,
+            subject: h.SubjectType.User,
             subjectId: e.toString(),
-            permissionType: f.AssetConsumerAction.Edit
+            permissionType: h.AssetConsumerAction.Edit
         }]);
-        if (!a || a.length < 1 || a[0].error) throw Error(null != (i = null == a || null == (n = a[0]) || null == (r = n.error) ? void 0 : r.message) ? i : "Something went wrong fetching asset edit permissions");
-        return (null == (s = a[0].value) ? void 0 : s.status) === f.ApiPermissionStatus.HasPermission
-    }, T = async e => {
+        if (!a || a.length < 1 || a[0].error) throw Error(null != (r = null == a || null == (n = a[0]) || null == (i = n.error) ? void 0 : i.message) ? r : "Something went wrong fetching asset edit permissions");
+        return (null == (s = a[0].value) ? void 0 : s.status) === h.ApiPermissionStatus.HasPermission
+    }, x = async e => {
         if (0 === e.length) return null;
-        let t = await y.default.getDetails(e);
+        let t = await P.default.getDetails(e);
         return t.data && t.data.length > 0 ? t.data.filter(e => e && e.id && e.name && e.creator && e.creator.name && e.creator.id && e.creator.type).map(e => {
-            var t, s, i;
+            var t, s, r;
             return {
                 universeId: e.id,
                 experienceName: e.name,
                 creatorName: null == (t = e.creator) ? void 0 : t.name,
                 creatorId: null == (s = e.creator) ? void 0 : s.id,
-                creatorType: null == (i = e.creator) ? void 0 : i.type
+                creatorType: null == (r = e.creator) ? void 0 : r.type
             }
         }) : null
     };
-    var C = ((t = {}).AssetNotPublic = "AssetNotPublic", t.UserNotVerified = "UserNotVerified", t.InvalidAssetType = "InvalidAssetType", t.PotentialPolicyViolation = "PotentialPolicyViolation", t.IneligibleFiatSeller = "IneligibleFiatSeller", t.Other = "Other", t.Unauthorized = "Unauthorized", t.NotStarted = "NotStarted", t.NotStartedAudioDistribution = "NotStartedAudioDistribution", t.Approved = "Approved", t.PackageIneligible = "PackageIneligible", t.RightsClaim = "RightsClaim", t.CompositeAssetBrokenDependencies = "CompositeAssetBrokenDependencies", t.CompositeAssetIneligibleDependencies = "CompositeAssetIneligibleDependencies", t.CompositeAssetDependenciesLimit = "CompositeAssetDependenciesLimit", t.HiddenFromSearch = "HiddenFromSearch", t.IneligiblePublisher = "IneligiblePublisher", t.NoPublishedVersion = "NoPublishedVersion", t);
-    e.s(["DistributionErrorState", () => C, "getAssetPermissions", 0, S, "getBackToCreationsPageLink", 0, e => {
+    var T = ((t = {}).AssetNotPublic = "AssetNotPublic", t.UserNotVerified = "UserNotVerified", t.InvalidAssetType = "InvalidAssetType", t.PotentialPolicyViolation = "PotentialPolicyViolation", t.IneligibleFiatSeller = "IneligibleFiatSeller", t.Other = "Other", t.Unauthorized = "Unauthorized", t.NotStarted = "NotStarted", t.NotStartedAudioDistribution = "NotStartedAudioDistribution", t.Approved = "Approved", t.PackageIneligible = "PackageIneligible", t.RightsClaim = "RightsClaim", t.CompositeAssetBrokenDependencies = "CompositeAssetBrokenDependencies", t.CompositeAssetIneligibleDependencies = "CompositeAssetIneligibleDependencies", t.CompositeAssetDependenciesLimit = "CompositeAssetDependenciesLimit", t.HiddenFromSearch = "HiddenFromSearch", t.IneligiblePublisher = "IneligiblePublisher", t.NoPublishedVersion = "NoPublishedVersion", t);
+    e.s(["DistributionErrorState", () => T, "getAssetPermissions", 0, A, "getBackToCreationsPageLink", 0, e => {
         let t = "/dashboard/creations";
-        return (null == e ? void 0 : e.type) && ((null == e ? void 0 : e.creator.type) === b.default.Group ? t += "?activeTab=".concat(e.type, "&groupId=").concat(e.creator.id) : t += "?activeTab=".concat(e.type)), t
-    }, "getDeveloperItemDistributionQuota", 0, A, "getDistributionErrorStateForRestrictions", 0, (e, t, s, i, r, n, a) => e.includes(I.Restriction.NoPublishedVersion) ? "NoPublishedVersion" : e.includes(I.Restriction.CompositeAssetSubcomponentsRestricted) ? "CompositeAssetIneligibleDependencies" : e.includes(I.Restriction.CompositeAssetBrokenUnknownPermissions) || e.includes(I.Restriction.CompositeAssetBrokenReferencedAssetNotFound) ? "CompositeAssetBrokenDependencies" : e.includes(I.Restriction.CompositeAssetBrokenDependenciesLimit) ? "CompositeAssetDependenciesLimit" : e.includes(I.Restriction.AgeVerification) || e.includes(I.Restriction.Moderation) ? "IneligiblePublisher" : e.includes(I.Restriction.SafetyStatus) ? "PotentialPolicyViolation" : e.includes(I.Restriction.AssetType) ? "InvalidAssetType" : e.includes(I.Restriction.Authorization) ? "Unauthorized" : e.includes(I.Restriction.Packages) ? "PackageIneligible" : t ? n && (s.includes(I.Restriction.Moderation) || s.includes(I.Restriction.ModerationHistory) || s.includes(I.Restriction.TwoStepVerification) || s.includes(I.Restriction.Verification)) ? "IneligibleFiatSeller" : e.includes(I.Restriction.RightsClaim) || s.includes(I.Restriction.RightsClaim) ? "RightsClaim" : !i && n ? "Other" : a === g.ToolboxVisibilityStatus.Hidden ? "HiddenFromSearch" : void 0 : "Other", "getExperienceDetails", 0, T, "getUniverseHasPermission", 0, R, "getUserHasEditPermissionForAsset", 0, x, "postDeveloperItemDetails", 0, (e, t) => d.default.updateAsset(parseInt(e, 10), {
+        return (null == e ? void 0 : e.type) && ((null == e ? void 0 : e.creator.type) === w.default.Group ? t += "?activeTab=".concat(e.type, "&groupId=").concat(e.creator.id) : t += "?activeTab=".concat(e.type)), t
+    }, "getDeveloperItemDistributionQuota", 0, b, "getDistributionErrorStateForRestrictions", 0, (e, t, s, r, i, n, a) => e.includes(f.Restriction.NoPublishedVersion) ? "NoPublishedVersion" : e.includes(f.Restriction.CompositeAssetSubcomponentsRestricted) ? "CompositeAssetIneligibleDependencies" : e.includes(f.Restriction.CompositeAssetBrokenUnknownPermissions) || e.includes(f.Restriction.CompositeAssetBrokenReferencedAssetNotFound) ? "CompositeAssetBrokenDependencies" : e.includes(f.Restriction.CompositeAssetBrokenDependenciesLimit) ? "CompositeAssetDependenciesLimit" : e.includes(f.Restriction.AgeVerification) || e.includes(f.Restriction.Moderation) ? "IneligiblePublisher" : e.includes(f.Restriction.SafetyStatus) ? "PotentialPolicyViolation" : e.includes(f.Restriction.AssetType) ? "InvalidAssetType" : e.includes(f.Restriction.Authorization) ? "Unauthorized" : e.includes(f.Restriction.Packages) ? "PackageIneligible" : t ? n && (s.includes(f.Restriction.Moderation) || s.includes(f.Restriction.ModerationHistory) || s.includes(f.Restriction.TwoStepVerification) || s.includes(f.Restriction.Verification)) ? "IneligibleFiatSeller" : e.includes(f.Restriction.RightsClaim) || s.includes(f.Restriction.RightsClaim) ? "RightsClaim" : !r && n ? "Other" : a === I.ToolboxVisibilityStatus.Hidden ? "HiddenFromSearch" : void 0 : "Other", "getExperienceDetails", 0, x, "getUniverseHasPermission", 0, S, "getUserHasEditPermissionForAsset", 0, R, "postDeveloperItemDetails", 0, (e, t) => d.default.updateAsset(parseInt(e, 10), {
         ...t
     })], 720054);
-    let q = (0, i.createContext)({
+    let C = (0, r.createContext)({
         canConfigureDeveloperItem: void 0,
         developerItemDetails: null,
         developerItemId: void 0,
@@ -3419,127 +3412,125 @@
             throw Error("function is not implemented")
         }
     });
-    q.displayName = "DeveloperItemDetail", e.s(["DeveloperItemProvider", 0, e => {
+    C.displayName = "DeveloperItemDetail", e.s(["DeveloperItemProvider", 0, e => {
         var t;
         let {
-            children: f
-        } = e, [I, g] = (0, i.useState)(!0), [P, y] = (0, i.useState)(void 0), [w, b] = (0, i.useState)(null), [A, S] = (0, i.useState)(), R = (0, n.useQueryClient)(), {
-            user: T
+            children: h
+        } = e, [f, I] = (0, r.useState)(!0), [g, P] = (0, r.useState)(void 0), [y, w] = (0, r.useState)(null), [b, A] = (0, r.useState)(), S = (0, n.useQueryClient)(), {
+            user: x
         } = (0, o.useAuthentication)(), {
-            settings: C
-        } = (0, m.useSettings)(), {
-            query: D,
-            isReady: G
-        } = (0, r.useRouter)(), E = (0, i.useMemo)(() => {
-            if (G) {
+            query: T,
+            isReady: q
+        } = (0, i.useRouter)(), D = (0, r.useMemo)(() => {
+            if (q) {
                 let {
                     id: e
-                } = D;
+                } = T;
                 if (e) {
                     let t = parseInt(String(e), 10);
                     return t > 0 ? t : void 0
                 }
             }
-        }, [D, G]), [B, U] = (0, i.useState)(null);
-        (0, i.useEffect)(() => {
-            C.enableAudioUploadRevamp && E && (null == w ? void 0 : w.type) === l.Asset.Audio && u.default.getAsset(E, [u.FieldMask.ICON]).then(e => {
+        }, [T, q]), [G, E] = (0, r.useState)(null);
+        (0, r.useEffect)(() => {
+            D && (null == y ? void 0 : y.type) === l.Asset.Audio && u.default.getAsset(D, [u.FieldMask.ICON]).then(e => {
                 if (e.icon) {
                     let t = parseInt(e.icon.replace("assets/", ""), 10);
-                    Number.isNaN(t) || U(t)
+                    Number.isNaN(t) || E(t)
                 }
             })
-        }, [E, null == w ? void 0 : w.type, C.enableAudioUploadRevamp]);
-        let N = null != (t = null != B ? B : E) ? t : 0,
+        }, [D, null == y ? void 0 : y.type]);
+        let B = null != (t = null != G ? G : D) ? t : 0,
             {
-                thumbnailImage: k,
-                refreshThumbnail: O
+                thumbnailImage: U,
+                refreshThumbnail: k
             } = (0, v.default)({
-                targetId: N,
+                targetId: B,
                 targetType: a.ThumbnailTypes.assetThumbnail,
                 fontColor: "dark",
                 returnPolicy: a.ReturnPolicy.PlaceHolder
             }),
-            M = (0, i.useCallback)(e => {
+            N = (0, r.useCallback)(e => {
                 var t, s;
-                let i = Object.values(l.Asset),
-                    r = e.type && i.includes(e.type);
-                return e.id && r && e.name && (null == (t = e.creator) ? void 0 : t.targetId) && (null == (s = e.creator) ? void 0 : s.type) && void 0 !== e.enableComments && void 0 !== e.isCopyingAllowed
+                let r = Object.values(l.Asset),
+                    i = e.type && r.includes(e.type);
+                return e.id && i && e.name && (null == (t = e.creator) ? void 0 : t.targetId) && (null == (s = e.creator) ? void 0 : s.type) && void 0 !== e.enableComments && void 0 !== e.isCopyingAllowed
             }, []),
-            L = (0, i.useCallback)(async (e, t) => {
-                g(!0);
-                let [s, i] = await Promise.allSettled([d.default.getAssetDetails([e]), x(t, e)]);
-                if (s.status === c.AllSettlePromiseSuccess && i.status === c.AllSettlePromiseSuccess) {
-                    var r, n, a, o, u, v, m, f;
-                    let t = null == (r = s.value.data) ? void 0 : r[0];
-                    if (t && M(t)) {
+            O = (0, r.useCallback)(async (e, t) => {
+                I(!0);
+                let [s, r] = await Promise.allSettled([d.default.getAssetDetails([e]), R(t, e)]);
+                if (s.status === c.AllSettlePromiseSuccess && r.status === c.AllSettlePromiseSuccess) {
+                    var i, n, a, o, u, v, h, f;
+                    let t = null == (i = s.value.data) ? void 0 : i[0];
+                    if (t && N(t)) {
                         let s = Object.values(l.Asset).find(e => e === t.type),
-                            i = Object.values(p.CreatorType).find(e => {
+                            r = Object.values(p.CreatorType).find(e => {
                                 var s;
                                 return e === (null == (s = t.creator) ? void 0 : s.type)
                             });
-                        if (!s || !i) {
-                            b(null), S(void 0), g(!1);
+                        if (!s || !r) {
+                            w(null), A(void 0), I(!1);
                             return
                         }
-                        let r = {
+                        let i = {
                                 id: (null != (n = t.id) ? n : 0).toString(),
                                 type: s,
                                 name: null != (a = t.name) ? a : "",
                                 creator: {
                                     id: null != (o = null == (f = t.creator) ? void 0 : f.targetId) ? o : 0,
-                                    type: i
+                                    type: r
                                 },
                                 enableComments: null != (u = t.enableComments) && u,
                                 isCopyingAllowed: null != (v = t.isCopyingAllowed) && v,
-                                isVersioningEnabled: null != (m = t.isVersioningEnabled) && m,
+                                isVersioningEnabled: null != (h = t.isVersioningEnabled) && h,
                                 description: t.description
                             },
-                            d = (0, h.reconcileDeveloperItemDetailsMetadata)(R, e, r);
-                        b(d.details), S(d.expiresAt)
-                    } else b(null), S(void 0);
-                    y(i.value)
-                } else b(null), S(void 0);
-                g(!1)
-            }, [M, R]),
-            F = (0, i.useCallback)(async function() {
+                            d = (0, m.reconcileDeveloperItemDetailsMetadata)(S, e, i);
+                        w(d.details), A(d.expiresAt)
+                    } else w(null), A(void 0);
+                    P(r.value)
+                } else w(null), A(void 0);
+                I(!1)
+            }, [N, S]),
+            M = (0, r.useCallback)(async function() {
                 let e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
-                if (e && O(), E && (null == T ? void 0 : T.id)) return L(E, T.id)
-            }, [T, E, L, O]);
-        (0, i.useEffect)(() => {
+                if (e && k(), D && (null == x ? void 0 : x.id)) return O(D, x.id)
+            }, [x, D, O, k]);
+        (0, r.useEffect)(() => {
             let e = window.setTimeout(() => {
-                F()
+                M()
             }, 0);
             return () => window.clearTimeout(e)
-        }, [F]), (0, i.useEffect)(() => {
-            if (null == A) return;
+        }, [M]), (0, r.useEffect)(() => {
+            if (null == b) return;
             let e = window.setTimeout(() => {
-                S(void 0), F()
-            }, Math.max(0, A - Date.now()));
+                A(void 0), M()
+            }, Math.max(0, b - Date.now()));
             return () => window.clearTimeout(e)
-        }, [A, F]);
-        let V = (0, i.useMemo)(() => ({
-            canConfigureDeveloperItem: P,
-            developerItemId: E,
-            iconAssetId: B,
-            isLoadingDeveloperItem: I,
-            developerItemDetails: w,
-            refreshDeveloperItemDetails: F,
-            developerItemImage: k,
-            updateIconAssetId: U
-        }), [P, w, E, B, I, F, k]);
-        return (0, s.jsx)(q.Provider, {
-            value: V,
-            children: f
+        }, [b, M]);
+        let L = (0, r.useMemo)(() => ({
+            canConfigureDeveloperItem: g,
+            developerItemId: D,
+            iconAssetId: G,
+            isLoadingDeveloperItem: f,
+            developerItemDetails: y,
+            refreshDeveloperItemDetails: M,
+            developerItemImage: U,
+            updateIconAssetId: E
+        }), [g, y, D, G, f, M, U]);
+        return (0, s.jsx)(C.Provider, {
+            value: L,
+            children: h
         })
     }, "useCurrentDeveloperItem", 0, function() {
-        return (0, i.useContext)(q)
+        return (0, r.useContext)(C)
     }], 691450)
 }, 914570, e => {
     "use strict";
     var t = e.i(221628),
         s = e.i(416340),
-        i = e.i(863755),
-        r = e.i(495011),
+        r = e.i(863755),
+        i = e.i(495011),
         n = e.i(92653);
     let a = (0, s.createContext)({
         developerProductDetails: void 0,
@@ -3556,7 +3547,7 @@
             universeId: u
         } = (0, n.useUniverseId)(), {
             productId: d
-        } = (0, r.useProductId)(), c = (0, i.useGetDeveloperProductConfig)({
+        } = (0, i.useProductId)(), c = (0, r.useGetDeveloperProductConfig)({
             universeId: u,
             productId: d
         }, {
@@ -3619,8 +3610,8 @@
     "use strict";
     var t = e.i(221628),
         s = e.i(416340),
-        i = e.i(261482),
-        r = e.i(477749),
+        r = e.i(261482),
+        i = e.i(477749),
         n = e.i(92653),
         a = e.i(157310),
         o = e.i(851130),
@@ -3638,7 +3629,7 @@
             universeId: l
         } = (0, n.useUniverseId)(), {
             passId: p
-        } = (0, r.usePassId)(), v = !!l && !!p, {
+        } = (0, i.usePassId)(), v = !!l && !!p, {
             data: m,
             isLoading: h,
             isRefetching: f
@@ -3646,25 +3637,25 @@
             var t;
             let {
                 universeId: s,
-                gamePassId: i
-            } = e, r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
+                gamePassId: r
+            } = e, i = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
             return (0, a.useQuery)({
-                queryKey: u.gamePassKeys.config(s, i),
+                queryKey: u.gamePassKeys.config(s, r),
                 queryFn: e => {
                     let {
                         signal: t
                     } = e;
                     return o.default.getGamePassConfig({
                         universeId: s,
-                        gamePassId: i
+                        gamePassId: r
                     }, {
                         signal: t
                     })
                 },
                 staleTime: u.DEFAULT_STALE_TIME,
                 retry: u.DEFAULT_RETRIES,
-                ...r,
-                enabled: (null == (t = r.enabled) || t) && !!s && s > 0 && !!i
+                ...i,
+                enabled: (null == (t = i.enabled) || t) && !!s && s > 0 && !!r
             })
         }({
             universeId: l,
@@ -3674,7 +3665,7 @@
         }), {
             data: I,
             isLoading: g
-        } = (0, i.useGetGamePassBonusOptIn)({
+        } = (0, r.useGetGamePassBonusOptIn)({
             universeId: l,
             gamePassId: p
         }, {
@@ -3711,16 +3702,16 @@
     "use strict";
     var t = e.i(157310),
         s = e.i(503725);
-    let i = {
+    let r = {
         all: e => ["universes", e, "developerproducts"],
-        list: (e, t) => [...i.all(e), "list", t],
-        config: (e, t) => [...i.all(e), "config", t],
-        batchConfigs: (e, t) => [...i.all(e), "batchConfigs", [...t].sort((e, t) => e - t)],
-        create: e => [...i.all(e), "create"],
-        update: (e, t) => [...i.all(e), t, "update"],
-        batchUpdate: e => [...i.all(e), "batchUpdate"]
+        list: (e, t) => [...r.all(e), "list", t],
+        config: (e, t) => [...r.all(e), "config", t],
+        batchConfigs: (e, t) => [...r.all(e), "batchConfigs", [...t].sort((e, t) => e - t)],
+        create: e => [...r.all(e), "create"],
+        update: (e, t) => [...r.all(e), t, "update"],
+        batchUpdate: e => [...r.all(e), "batchUpdate"]
     };
-    e.s(["BULK_UPDATE_LIMIT", 0, 3e3, "DEFAULT_PAGE_SIZE", 0, 400, "DEFAULT_RETRIES", 0, 3, "DEFAULT_STALE_TIME", 0, 6e5, "INITIAL_FETCH_TOTAL", 0, 3e3, "developerProductKeys", 0, i, "matchesDeveloperProductBatchConfigsQuery", 0, function(e, t) {
+    e.s(["BULK_UPDATE_LIMIT", 0, 3e3, "DEFAULT_PAGE_SIZE", 0, 400, "DEFAULT_RETRIES", 0, 3, "DEFAULT_STALE_TIME", 0, 6e5, "INITIAL_FETCH_TOTAL", 0, 3e3, "developerProductKeys", 0, r, "matchesDeveloperProductBatchConfigsQuery", 0, function(e, t) {
         let s = e.queryKey;
         return "universes" === s[0] && s[1] === t && "developerproducts" === s[2] && "batchConfigs" === s[3] && Array.isArray(s[4])
     }, "matchesDeveloperProductListQuery", 0, function(e, t) {
@@ -3728,17 +3719,17 @@
         return "universes" === s[0] && s[1] === t && "developerproducts" === s[2] && "list" === s[3]
     }], 285040), e.s(["useGetDeveloperProductConfig", 0, function(e) {
         let {
-            universeId: r,
+            universeId: i,
             productId: n
         } = e, a = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
         return (0, t.useQuery)({
-            queryKey: i.config(r, n),
+            queryKey: r.config(i, n),
             queryFn: e => {
                 let {
                     signal: t
                 } = e;
                 return s.default.getDeveloperProductConfig({
-                    universeId: r,
+                    universeId: i,
                     productId: n
                 }, {
                     signal: t
@@ -3748,9 +3739,9 @@
             ...a
         })
     }], 863755);
-    var r = e.i(589624);
+    var i = e.i(589624);
     e.s(["useProductId", 0, function() {
-        let e = (0, r.useRouter)(),
+        let e = (0, i.useRouter)(),
             t = e.query.productId;
         if (!e.isReady) return {
             isLoading: !0,
@@ -3777,13 +3768,13 @@
     e.s(["default", 0, () => {
         let {
             ready: e,
-            value: i
+            value: r
         } = (0, t.useFlag)(s.questionnaireV2Allowlist), {
-            ready: r,
+            ready: i,
             value: n
-        } = (0, t.useFlag)(s.questionnaireV2Q1Release), a = e && r;
+        } = (0, t.useFlag)(s.questionnaireV2Q1Release), a = e && i;
         return {
-            shouldUseV2: a && (n || i),
+            shouldUseV2: a && (n || r),
             isFetched: a
         }
     }])
@@ -3801,12 +3792,12 @@
             isLoading: !1,
             isError: !0
         };
-        let i = Number(s);
-        return Number.isNaN(i) || !Number.isInteger(i) ? {
+        let r = Number(s);
+        return Number.isNaN(r) || !Number.isInteger(r) ? {
             isLoading: !1,
             isError: !0
         } : {
-            universeId: i,
+            universeId: r,
             isLoading: !1,
             isError: !1
         }
@@ -3815,10 +3806,10 @@
     "use strict";
     var t = e.i(221628),
         s = e.i(416340);
-    let i = (0, s.createContext)(null);
+    let r = (0, s.createContext)(null);
     e.s(["BreadcrumbItemNameProvider", 0, function(e) {
         let {
-            children: r
+            children: i
         } = e, n = (0, s.useRef)({}), a = (0, s.useRef)(new Set), o = (0, s.useCallback)(() => n.current, []), u = (0, s.useCallback)(e => (a.current.add(e), () => {
             a.current.delete(e)
         }), []), d = (0, s.useCallback)(() => {
@@ -3841,16 +3832,16 @@
             register: c,
             unregister: l
         }), [o, u, c, l]);
-        return (0, t.jsx)(i.Provider, {
+        return (0, t.jsx)(r.Provider, {
             value: p,
-            children: r
+            children: i
         })
     }, "useBreadcrumbItemNames", 0, function() {
-        let e = (0, s.useContext)(i);
+        let e = (0, s.useContext)(r);
         if (!e) throw Error("useBreadcrumbItemNames must be used within an BreadcrumbItemNameProvider");
         return (0, s.useSyncExternalStore)(e.subscribe, e.getSnapshot, e.getSnapshot)
     }, "useBreadcrumbRegister", 0, function() {
-        let e = (0, s.useContext)(i);
+        let e = (0, s.useContext)(r);
         if (!e) throw Error("useBreadcrumbRegister must be used within an BreadcrumbItemNameProvider");
         return e
     }])
@@ -3862,8 +3853,8 @@
     "use strict";
     var t = e.i(416340),
         s = e.i(589624),
-        i = e.i(692734),
-        r = e.i(79187),
+        r = e.i(692734),
+        i = e.i(79187),
         n = e.i(787617),
         a = e.i(34213),
         o = e.i(54842),
@@ -3889,39 +3880,36 @@
             pathname: e
         } = (0, s.useRouter)(), {
             translate: R
-        } = (0, r.useTranslation)(), {
+        } = (0, i.useTranslation)(), {
             shouldUseV2: x
         } = (0, a.default)(), {
             ready: T,
             value: C
-        } = (0, i.useFlag)(n.isUpdatedPublishingFlowEnabled), {
-            ready: q,
-            value: D
-        } = (0, i.useFlag)(n.isUpdatedSettingsNavigationEnabled), {
-            itemNameMapping: G,
-            currentItemType: E,
-            currentItemGroupId: B,
-            isCurrentItemLoading: U,
-            id: N,
-            badgeId: k,
-            passId: O,
-            groupId: M,
-            assetId: L,
-            bundleId: F,
-            experienceSubscriptionId: V,
-            lookId: _,
-            developerItemDetails: j,
-            experimentId: J,
-            environmentId: z
+        } = (0, r.useFlag)(n.isUpdatedPublishingFlowEnabled), {
+            itemNameMapping: q,
+            currentItemType: D,
+            currentItemGroupId: G,
+            isCurrentItemLoading: E,
+            id: B,
+            badgeId: U,
+            passId: k,
+            groupId: N,
+            assetId: O,
+            bundleId: M,
+            experienceSubscriptionId: L,
+            lookId: F,
+            developerItemDetails: V,
+            experimentId: _,
+            environmentId: j
         } = function() {
-            var e, i, n, a, R, x, T, C, q, D, G, E;
+            var e, r, n, a, R, x, T, C, q, D, G, E;
             let {
                 translate: B
-            } = (0, r.useTranslation)(), {
+            } = (0, i.useTranslation)(), {
                 gameDetails: U,
-                isLoadingGame: N
+                isLoadingGame: k
             } = (0, b.useCurrentGame)(), {
-                isLoadingItem: k,
+                isLoadingItem: N,
                 marketplaceItemDetails: O
             } = (0, v.default)(), {
                 badgeDetails: M
@@ -3951,27 +3939,27 @@
                 notificationCategory: ee,
                 activeTab: et,
                 experimentId: es,
-                environmentId: ei
-            } = (0, w.default)(Y), er = (0, t.useMemo)(() => {
+                environmentId: er
+            } = (0, w.default)(Y), ei = (0, t.useMemo)(() => {
                 var e, t;
                 return (null == U || null == (e = U.creator) ? void 0 : e.type) === "Group" ? null == U || null == (t = U.creator) ? void 0 : t.id : void 0
             }, [U]), en = (0, t.useMemo)(() => {
-                var e, t, s, i;
-                if (null == O || null == (t = O.item) || null == (e = t.marketplaceItemDetails) ? void 0 : e.assetDetails) return null == O || null == (i = O.item) || null == (s = i.id) ? void 0 : s.toString()
+                var e, t, s, r;
+                if (null == O || null == (t = O.item) || null == (e = t.marketplaceItemDetails) ? void 0 : e.assetDetails) return null == O || null == (r = O.item) || null == (s = r.id) ? void 0 : s.toString()
             }, [O]), ea = (0, t.useMemo)(() => {
                 var e;
                 return null == F || null == (e = F.gamePassId) ? void 0 : e.toString()
             }, [F]), eo = (0, t.useMemo)(() => {
-                var e, t, s, i;
-                if (null == O || null == (t = O.item) || null == (e = t.marketplaceItemDetails) ? void 0 : e.bundleDetails) return null == O || null == (i = O.item) || null == (s = i.id) ? void 0 : s.toString()
+                var e, t, s, r;
+                if (null == O || null == (t = O.item) || null == (e = t.marketplaceItemDetails) ? void 0 : e.bundleDetails) return null == O || null == (r = O.item) || null == (s = r.id) ? void 0 : s.toString()
             }, [O]), eu = (0, t.useMemo)(() => {
                 var e;
                 return null != (e = null == Q ? void 0 : Q.id) ? e : void 0
             }, [Q]), ed = (0, t.useMemo)(() => {
-                var e, t, s, i, r;
-                return (null == O || null == (t = O.item) || null == (e = t.creator) ? void 0 : e.kindCase) === 2 ? null == O || null == (r = O.item) || null == (i = r.creator) || null == (s = i.group) ? void 0 : s.groupId : er
-            }, [er, null == O || null == (n = O.item) || null == (i = n.creator) || null == (e = i.group) ? void 0 : e.groupId, null == O || null == (R = O.item) || null == (a = R.creator) ? void 0 : a.kindCase]), ec = (0, t.useMemo)(() => null == V ? void 0 : V.lookId, [V]), el = (0, t.useMemo)(() => {
-                var e, t, s, i, r, n, a;
+                var e, t, s, r, i;
+                return (null == O || null == (t = O.item) || null == (e = t.creator) ? void 0 : e.kindCase) === 2 ? null == O || null == (i = O.item) || null == (r = i.creator) || null == (s = r.group) ? void 0 : s.groupId : ei
+            }, [ei, null == O || null == (n = O.item) || null == (r = n.creator) || null == (e = r.group) ? void 0 : e.groupId, null == O || null == (R = O.item) || null == (a = R.creator) ? void 0 : a.kindCase]), ec = (0, t.useMemo)(() => null == V ? void 0 : V.lookId, [V]), el = (0, t.useMemo)(() => {
+                var e, t, s, r, i, n, a;
                 return {
                     [S.default.Bundle]: null == O || null == (n = O.item) ? void 0 : n.name,
                     [S.default.Games]: null == U ? void 0 : U.name,
@@ -3983,32 +3971,32 @@
                     [S.default.Event]: null != (s = null == J ? void 0 : J.title) ? s : void 0,
                     [S.default.CreatorStore]: null == H ? void 0 : H.name,
                     [S.default.Category]: ee ? B("Label.Category".concat(ee)) : void 0,
-                    [S.default.ExperienceSubscription]: null != (i = null == Q ? void 0 : Q.name) ? i : void 0,
-                    [S.default.Look]: null != (r = null == V ? void 0 : V.name) ? r : void 0,
+                    [S.default.ExperienceSubscription]: null != (r = null == Q ? void 0 : Q.name) ? r : void 0,
+                    [S.default.Look]: null != (i = null == V ? void 0 : V.name) ? i : void 0,
                     ...W
                 }
             }, [null == O || null == (x = O.item) ? void 0 : x.name, null == U ? void 0 : U.name, null == M ? void 0 : M.name, null == L ? void 0 : L.name, null == F ? void 0 : F.name, null == j ? void 0 : j.name, null == J ? void 0 : J.title, null == H ? void 0 : H.name, ee, B, null == Q ? void 0 : Q.name, null == V ? void 0 : V.name, W]), ep = (0, t.useMemo)(() => Z.includes(S.default.ExperienceSubscription) ? I.Item.ExperienceSubscription : Z.includes(S.default.Badge) ? I.Item.Badge : Z.includes(S.default.ReferralRewards) ? I.Item.ReferralRewards : Z.includes(S.default.Bundle) ? I.Item.Bundle : Z.includes(S.default.GamePass) ? I.Item.GamePass : Z.includes(S.default.DeveloperProduct) ? I.Item.DeveloperProduct : Z.includes(S.default.Catalog) ? I.Item.CatalogAsset : Z.includes(S.default.CreatorStore) ? I.Item.LibraryAsset : Z.includes(S.default.Places) ? I.Item.Places : Z.includes(S.default.Environments) ? I.Item.Environment : Z.includes(S.default.Alerts) ? I.Item.Alert : Z.includes(S.default.Event) ? I.Item.Event : Z.includes(S.default.Notifications) ? I.Item.Notifications : Z.includes(S.default.AssociatedItems) && "string" == typeof et && (0, y.isItem)(et) ? et : Z.includes(S.default.AvatarCreationTokens) ? I.Item.AvatarCreationToken : Z.includes(g.itemTypeToPath[I.Item.Journey]) ? I.Item.Journey : Z.includes(S.default.Experiences) ? I.Item.Game : Z.includes(S.default.Advanced) ? I.Item.Advanced : Z.includes(S.default.Look) ? I.Item.Look : void 0, [et, Z]), {
                 currentItemGroupId: ev,
                 isCurrentItemLoading: em
             } = (0, t.useMemo)(() => {
-                var e, t, s, i, r, n;
+                var e, t, s, r, i, n;
                 return ep === I.Item.Bundle || ep === I.Item.CatalogAsset ? {
-                    currentItemGroupId: null != ed ? ed : er,
-                    isCurrentItemLoading: k
+                    currentItemGroupId: null != ed ? ed : ei,
+                    isCurrentItemLoading: N
                 } : ep === I.Item.DeveloperProduct || ep === I.Item.LibraryAsset ? {
-                    currentItemGroupId: (null == H || null == (e = H.creator) ? void 0 : e.type) === P.default.Group ? null == H || null == (t = H.creator) ? void 0 : t.id : er,
+                    currentItemGroupId: (null == H || null == (e = H.creator) ? void 0 : e.type) === P.default.Group ? null == H || null == (t = H.creator) ? void 0 : t.id : ei,
                     isCurrentItemLoading: K
                 } : ep === I.Item.Event ? {
-                    currentItemGroupId: (null == J || null == (s = J.host) ? void 0 : s.hostType) === o.HostType.Group ? null == J || null == (i = J.host) ? void 0 : i.hostId : er,
+                    currentItemGroupId: (null == J || null == (s = J.host) ? void 0 : s.hostType) === o.HostType.Group ? null == J || null == (r = J.host) ? void 0 : r.hostId : ei,
                     isCurrentItemLoading: z
                 } : ep === I.Item.Look ? {
-                    currentItemGroupId: (null == V || null == (r = V.curator) ? void 0 : r.type) === P.default.Group ? null == V || null == (n = V.curator) ? void 0 : n.id : er,
+                    currentItemGroupId: (null == V || null == (i = V.curator) ? void 0 : i.type) === P.default.Group ? null == V || null == (n = V.curator) ? void 0 : n.id : ei,
                     isCurrentItemLoading: _
                 } : {
-                    currentItemGroupId: er,
-                    isCurrentItemLoading: N
+                    currentItemGroupId: ei,
+                    isCurrentItemLoading: k
                 }
-            }, [ep, ed, er, k, null == H || null == (T = H.creator) ? void 0 : T.type, null == H || null == (C = H.creator) ? void 0 : C.id, K, null == J || null == (q = J.host) ? void 0 : q.hostType, null == J || null == (D = J.host) ? void 0 : D.hostId, z, N, null == V || null == (G = V.curator) ? void 0 : G.type, null == V || null == (E = V.curator) ? void 0 : E.id, _]);
+            }, [ep, ed, ei, N, null == H || null == (T = H.creator) ? void 0 : T.type, null == H || null == (C = H.creator) ? void 0 : C.id, K, null == J || null == (q = J.host) ? void 0 : q.hostType, null == J || null == (D = J.host) ? void 0 : D.hostId, z, k, null == V || null == (G = V.curator) ? void 0 : G.type, null == V || null == (E = V.curator) ? void 0 : E.id, _]);
             return {
                 itemNameMapping: el,
                 currentItemType: ep,
@@ -4018,7 +4006,7 @@
                 id: X,
                 badgeId: $,
                 passId: ea,
-                groupId: er,
+                groupId: ei,
                 assetId: en,
                 bundleId: eo,
                 experienceSubscriptionId: eu,
@@ -4026,39 +4014,38 @@
                 lookId: ec,
                 developerItemDetails: H,
                 experimentId: es,
-                environmentId: ei
+                environmentId: er
             }
-        }(), H = (0, t.useMemo)(() => ({
+        }(), J = (0, t.useMemo)(() => ({
             translate: R,
-            itemType: E,
+            itemType: D,
             enableQuestionnaireV2: x,
             isUpdatedPublishingFlowEnabled: T && C,
-            isUpdatedSettingsNavigationEnabled: q && D,
             pathname: e
-        }), [E, x, C, T, D, q, e, R]);
+        }), [D, x, C, T, e, R]);
         return {
-            itemNameMapping: G,
+            itemNameMapping: q,
             pathLinkParams: (0, t.useMemo)(() => {
                 var e, t;
                 return {
-                    baseId: null == N ? void 0 : N.toString(),
-                    badgeId: null == k ? void 0 : k.toString(),
-                    passId: O,
-                    groupId: null != (e = null == M ? void 0 : M.toString()) ? e : B ? B.toString() : void 0,
-                    assetId: L,
-                    bundleId: F,
-                    developerItemId: null != (t = null == j ? void 0 : j.id) ? t : void 0,
-                    associatedItemType: E,
-                    experienceSubscriptionId: V,
-                    environmentId: null != z ? z : void 0,
-                    experimentId: null != J ? J : void 0,
-                    lookId: null != _ ? _ : void 0
+                    baseId: null == B ? void 0 : B.toString(),
+                    badgeId: null == U ? void 0 : U.toString(),
+                    passId: k,
+                    groupId: null != (e = null == N ? void 0 : N.toString()) ? e : G ? G.toString() : void 0,
+                    assetId: O,
+                    bundleId: M,
+                    developerItemId: null != (t = null == V ? void 0 : V.id) ? t : void 0,
+                    associatedItemType: D,
+                    experienceSubscriptionId: L,
+                    environmentId: null != j ? j : void 0,
+                    experimentId: null != _ ? _ : void 0,
+                    lookId: null != F ? F : void 0
                 }
-            }, [N, k, O, M, B, L, F, null == j ? void 0 : j.id, E, V, z, J, _]),
-            displayNameParam: H,
-            currentItemType: E,
-            currentItemGroupId: B,
-            isCurrentItemLoading: U
+            }, [B, U, k, N, G, O, M, null == V ? void 0 : V.id, D, L, j, _, F]),
+            displayNameParam: J,
+            currentItemType: D,
+            currentItemGroupId: G,
+            isCurrentItemLoading: E
         }
     }], 509049)
 }, 403028, e => {
@@ -4074,11 +4061,11 @@
             })(e, t)
         };
 
-    function i(e, t, s, i) {
-        return new(s || (s = Promise))(function(r, n) {
+    function r(e, t, s, r) {
+        return new(s || (s = Promise))(function(i, n) {
             function a(e) {
                 try {
-                    u(i.next(e))
+                    u(r.next(e))
                 } catch (e) {
                     n(e)
                 }
@@ -4086,7 +4073,7 @@
 
             function o(e) {
                 try {
-                    u(i.throw(e))
+                    u(r.throw(e))
                 } catch (e) {
                     n(e)
                 }
@@ -4094,20 +4081,20 @@
 
             function u(e) {
                 var t;
-                e.done ? r(e.value) : ((t = e.value) instanceof s ? t : new s(function(e) {
+                e.done ? i(e.value) : ((t = e.value) instanceof s ? t : new s(function(e) {
                     e(t)
                 })).then(a, o)
             }
-            u((i = i.apply(e, t || [])).next())
+            u((r = r.apply(e, t || [])).next())
         })
     }
 
-    function r(e, t) {
-        var s, i, r, n = {
+    function i(e, t) {
+        var s, r, i, n = {
                 label: 0,
                 sent: function() {
-                    if (1 & r[0]) throw r[1];
-                    return r[1]
+                    if (1 & i[0]) throw i[1];
+                    return i[1]
                 },
                 trys: [],
                 ops: []
@@ -4122,11 +4109,11 @@
                 var d = [o, u];
                 if (s) throw TypeError("Generator is already executing.");
                 for (; a && (a = 0, d[0] && (n = 0)), n;) try {
-                    if (s = 1, i && (r = 2 & d[0] ? i.return : d[0] ? i.throw || ((r = i.return) && r.call(i), 0) : i.next) && !(r = r.call(i, d[1])).done) return r;
-                    switch (i = 0, r && (d = [2 & d[0], r.value]), d[0]) {
+                    if (s = 1, r && (i = 2 & d[0] ? r.return : d[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) && !(i = i.call(r, d[1])).done) return i;
+                    switch (r = 0, i && (d = [2 & d[0], i.value]), d[0]) {
                         case 0:
                         case 1:
-                            r = d;
+                            i = d;
                             break;
                         case 4:
                             return n.label++, {
@@ -4134,36 +4121,36 @@
                                 done: !1
                             };
                         case 5:
-                            n.label++, i = d[1], d = [0];
+                            n.label++, r = d[1], d = [0];
                             continue;
                         case 7:
                             d = n.ops.pop(), n.trys.pop();
                             continue;
                         default:
-                            if (!(r = (r = n.trys).length > 0 && r[r.length - 1]) && (6 === d[0] || 2 === d[0])) {
+                            if (!(i = (i = n.trys).length > 0 && i[i.length - 1]) && (6 === d[0] || 2 === d[0])) {
                                 n = 0;
                                 continue
                             }
-                            if (3 === d[0] && (!r || d[1] > r[0] && d[1] < r[3])) {
+                            if (3 === d[0] && (!i || d[1] > i[0] && d[1] < i[3])) {
                                 n.label = d[1];
                                 break
                             }
-                            if (6 === d[0] && n.label < r[1]) {
-                                n.label = r[1], r = d;
+                            if (6 === d[0] && n.label < i[1]) {
+                                n.label = i[1], i = d;
                                 break
                             }
-                            if (r && n.label < r[2]) {
-                                n.label = r[2], n.ops.push(d);
+                            if (i && n.label < i[2]) {
+                                n.label = i[2], n.ops.push(d);
                                 break
                             }
-                            r[2] && n.ops.pop(), n.trys.pop();
+                            i[2] && n.ops.pop(), n.trys.pop();
                             continue
                     }
                     d = t.call(e, n)
                 } catch (e) {
-                    d = [6, e], i = 0
+                    d = [6, e], r = 0
                 } finally {
-                    s = r = 0
+                    s = i = 0
                 }
                 if (5 & d[0]) throw d[1];
                 return {
@@ -4207,40 +4194,40 @@
         return function(e, t) {
             if ("function" != typeof t && null !== t) throw TypeError("Class extends value " + String(t) + " is not a constructor or null");
 
-            function i() {
+            function r() {
                 this.constructor = e
             }
-            s(e, t), e.prototype = null === t ? Object.create(t) : (i.prototype = t.prototype, new i)
+            s(e, t), e.prototype = null === t ? Object.create(t) : (r.prototype = t.prototype, new r)
         }(c, e), c.prototype.marketplacePublishingRequirementsApiGetRequirementsRaw = function(e, s) {
-            return i(this, void 0, void 0, function() {
-                var i, c, l;
-                return r(this, function(r) {
-                    switch (r.label) {
+            return r(this, void 0, void 0, function() {
+                var r, c, l;
+                return i(this, function(i) {
+                    switch (i.label) {
                         case 0:
-                            return i = {}, void 0 !== e.marketplaceType && (i.MarketplaceType = e.marketplaceType), void 0 !== e.assetType && (i.AssetType = e.assetType), e.assetSubTypes && (i.AssetSubTypes = e.assetSubTypes), void 0 !== e.assetId && (i.AssetId = e.assetId), void 0 !== e.assetVersionNumber && (i.AssetVersionNumber = e.assetVersionNumber), e.requirementChecks && (i.RequirementChecks = e.requirementChecks), c = {}, [4, this.request({
+                            return r = {}, void 0 !== e.marketplaceType && (r.MarketplaceType = e.marketplaceType), void 0 !== e.assetType && (r.AssetType = e.assetType), e.assetSubTypes && (r.AssetSubTypes = e.assetSubTypes), void 0 !== e.assetId && (r.AssetId = e.assetId), void 0 !== e.assetVersionNumber && (r.AssetVersionNumber = e.assetVersionNumber), e.requirementChecks && (r.RequirementChecks = e.requirementChecks), c = {}, [4, this.request({
                                 path: "/v1/requirements",
                                 schemaPath: "/v1/requirements",
                                 method: "GET",
                                 headers: c,
-                                query: i
+                                query: r
                             }, s)];
                         case 1:
-                            return l = r.sent(), [2, new t.JSONApiResponse(l, function(e) {
-                                var s, i, r, c, l, p, v;
+                            return l = i.sent(), [2, new t.JSONApiResponse(l, function(e) {
+                                var s, r, i, c, l, p, v;
                                 return null == e ? e : {
                                     publishing: (0, t.exists)(e, "publishing") ? null == (s = e.publishing) ? s : {
                                         restrictions: (0, t.exists)(s, "restrictions") ? null === s.restrictions ? null : s.restrictions.map(n) : void 0,
                                         allowedSubTypes: (0, t.exists)(s, "allowedSubTypes") ? null === s.allowedSubTypes ? null : s.allowedSubTypes.map(a) : void 0,
                                         isAllowed: (0, t.exists)(s, "isAllowed") ? s.isAllowed : void 0
                                     } : void 0,
-                                    verification: (0, t.exists)(e, "verification") ? null == (i = e.verification) ? i : {
-                                        isVerified: (0, t.exists)(i, "isVerified") ? i.isVerified : void 0,
-                                        status: (0, t.exists)(i, "status") ? i.status : void 0,
-                                        supportedTypes: (0, t.exists)(i, "supportedTypes") ? null === i.supportedTypes ? null : i.supportedTypes.map(u) : void 0
+                                    verification: (0, t.exists)(e, "verification") ? null == (r = e.verification) ? r : {
+                                        isVerified: (0, t.exists)(r, "isVerified") ? r.isVerified : void 0,
+                                        status: (0, t.exists)(r, "status") ? r.status : void 0,
+                                        supportedTypes: (0, t.exists)(r, "supportedTypes") ? null === r.supportedTypes ? null : r.supportedTypes.map(u) : void 0
                                     } : void 0,
-                                    sellerOnboarding: (0, t.exists)(e, "sellerOnboarding") ? null == (r = e.sellerOnboarding) ? r : {
-                                        restrictions: (0, t.exists)(r, "restrictions") ? null === r.restrictions ? null : r.restrictions.map(n) : void 0,
-                                        isAllowed: (0, t.exists)(r, "isAllowed") ? r.isAllowed : void 0
+                                    sellerOnboarding: (0, t.exists)(e, "sellerOnboarding") ? null == (i = e.sellerOnboarding) ? i : {
+                                        restrictions: (0, t.exists)(i, "restrictions") ? null === i.restrictions ? null : i.restrictions.map(n) : void 0,
+                                        isAllowed: (0, t.exists)(i, "isAllowed") ? i.isAllowed : void 0
                                     } : void 0,
                                     pricing: (0, t.exists)(e, "pricing") ? null == (c = e.pricing) ? c : {
                                         restrictions: (0, t.exists)(c, "restrictions") ? null === c.restrictions ? null : c.restrictions.map(n) : void 0,
@@ -4263,8 +4250,8 @@
                 })
             })
         }, c.prototype.marketplacePublishingRequirementsApiGetRequirements = function() {
-            return i(this, arguments, void 0, function(e, t) {
-                return void 0 === e && (e = {}), r(this, function(s) {
+            return r(this, arguments, void 0, function(e, t) {
+                return void 0 === e && (e = {}), i(this, function(s) {
                     switch (s.label) {
                         case 0:
                             return [4, this.marketplacePublishingRequirementsApiGetRequirementsRaw(e, t)];
@@ -4413,5 +4400,5 @@
     }])
 }]);
 
-//# debugId=30d9167a-cb70-429f-0e88-4e2e18a9b0a2
-//# sourceMappingURL=1pc-_cw6b8qg4.js.map
+//# debugId=db70129a-9ccb-1ed8-df2b-b486650e04f1
+//# sourceMappingURL=1jmuyu0z_5b0h.js.map

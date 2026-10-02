@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "47045983-48f3-8bc7-6dbf-284712a6173f")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "4d4e91a2-834c-8293-4146-80220323acc2")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 15645, 172753, e => {
@@ -2570,28 +2570,34 @@
     }, {
         scopeType: "verification",
         operations: ["read"]
-    }], eR = async e => {
+    }], eR = async (e, t) => {
         let {
-            clientId: t,
-            bedev2BasePath: i
-        } = e, n, r, o = new et(new d.Configuration({
-            basePath: "".concat(i, "/oauth"),
+            clientId: i,
+            bedev2BasePath: n
+        } = e, r, o, a, s = new et(new d.Configuration({
+            basePath: "".concat(n, "/oauth"),
             credentials: "include",
             enableMrRouter: !0
-        })), a = (n = new Uint8Array(64), globalThis.crypto.getRandomValues(n), r = "", n.forEach(e => {
-            r += String.fromCharCode(e)
-        }), btoa(r));
+        })), l = (o = new Uint8Array(64), globalThis.crypto.getRandomValues(o), a = "", o.forEach(e => {
+            a += String.fromCharCode(e)
+        }), btoa(a));
         try {
-            let e = await ey(i);
-            if (!e || !e.enablePersonalizedStudioLaunch && !e.enablePersonalizedStudioLaunchInMac || !("permissionRequestCreateMagicAuthorizationGrant" in o) || "function" != typeof o.permissionRequestCreateMagicAuthorizationGrant) return;
-            return (await o.permissionRequestCreateMagicAuthorizationGrant({
+            r = await ey(n)
+        } catch (e) {
+            return
+        }
+        if (r && (r.enablePersonalizedStudioLaunch || r.enablePersonalizedStudioLaunchInMac) && "permissionRequestCreateMagicAuthorizationGrant" in s && "function" == typeof s.permissionRequestCreateMagicAuthorizationGrant) try {
+            return (await s.permissionRequestCreateMagicAuthorizationGrant({
                 permissionRequestCreateMagicAuthorizationGrantRequest: {
-                    clientId: t,
+                    clientId: i,
                     scopes: eA,
-                    nonce: a
+                    nonce: l
                 }
             })).code
         } catch (e) {
+            try {
+                null == t || t(e instanceof Error ? e : Error(String(e)))
+            } catch (e) {}
             return
         }
     }, ex = e => {
@@ -2703,7 +2709,7 @@
                     var c, p, d, h;
                     let i, v;
                     m(e), y("Loading"), null == t || null == (p = t.startAttempt) || p.call(t, e);
-                    let [f, w, b] = await Promise.all([o.fetchUserChannel(), eg(o), eR(o)]);
+                    let [f, w, b] = await Promise.all([o.fetchUserChannel(), eg(o), eR(o, t => o.onError(t, e))]);
                     u(w);
                     let g = {
                             userId: null != (c = null == n ? void 0 : n.toString()) ? c : "",
@@ -2753,7 +2759,13 @@
                                 task: e.task
                             })
                     }
-                    h = A, (i = document.querySelector('[data-testid="studio-protocol-iframe"]')) && i.remove(), (v = document.createElement("iframe")).style.display = "none", v.src = h, v.setAttribute("data-testid", "studio-protocol-iframe"), document.body.appendChild(v), null == t || null == (d = t.startSuccess) || d.call(t, e), await new Promise(e => {
+                    h = A, (i = document.querySelector('[data-testid="studio-protocol-iframe"]')) && i.remove(), (v = document.createElement("iframe")).style.display = "none", v.src = h, v.setAttribute("data-testid", "studio-protocol-iframe"), document.body.appendChild(v);
+                    let R = void 0 !== b && "" !== b,
+                        x = R ? await eq(b).catch(() => "hash_failed") : void 0;
+                    null == t || null == (d = t.startSuccess) || d.call(t, e, {
+                        hasAuthCode: R,
+                        authCodeHash: x
+                    }), await new Promise(e => {
                         setTimeout(e, 3e3)
                     }), y("Download")
                 } catch (t) {
@@ -2798,5 +2810,5 @@
     }], 581577)
 }]);
 
-//# debugId=47045983-48f3-8bc7-6dbf-284712a6173f
-//# sourceMappingURL=32w3c1_vjnxtn.js.map
+//# debugId=4d4e91a2-834c-8293-4146-80220323acc2
+//# sourceMappingURL=3qt-3gq1e6rc3.js.map

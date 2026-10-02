@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "414d9454-10d6-ac74-67af-7721740652e2")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "1a6b6496-fb5f-72ed-f7a0-29aa42ce7d4a")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 118413, e => {
@@ -154,17 +154,22 @@
             name: "isMetricVariantChartStateEnabled",
             defaultValue: !1
         }),
+        B = (0, t.defineFlag)({
+            namespace: "creator-analytics",
+            name: "isPeriodSummaryBridgeEnabled",
+            defaultValue: !1
+        }),
         w = (0, t.defineFlag)({
             namespace: "creator-analytics",
             name: "isExperimentSegmentationEnabled",
             defaultValue: !1
         }),
-        B = (0, t.defineFlag)({
+        P = (0, t.defineFlag)({
             namespace: "creator-analytics",
             name: "isClientSessionDetailsV2Enabled",
             defaultValue: !1
         });
-    e.s(["acquisitionMigrationMetricsEnabled", 0, u, "analyticsChartLoadEventstreamEnabled", 0, r, "isAnalyticsAssistantChatEnabled", 0, m, "isAnalyticsAssistantIssueBannerEnabled", 0, y, "isAnalyticsAssistantStreamSilenceRecoveryEnabled", 0, g, "isAnalyticsMetricAwareYAxisFormatterEnabled", 0, T, "isAssistantChartOverflowMenuEnabled", 0, M, "isClientSessionDetailsV2Enabled", 0, B, "isClientSessionsEnabled", 0, _, "isCustomDashboardsLocalStorageEnabled", 0, R, "isCustomMetricsBackendEnabled", 0, o, "isEhdResultsAlwaysFetched", 0, C, "isEhdResultsEnabled", 0, N, "isExperimentNullControlValueEnabled", 0, f, "isExperimentRolloutEnabled", 0, c, "isExperimentSegmentationEnabled", 0, w, "isExperimentTargetingEnabled", 0, s, "isExperimentationTemplatesEnabled", 0, a, "isGeneralBreakGlassBannerEnabled", 0, d, "isJourneyEventsEnabled", 0, x, "isLimitedAnalyticsAdminMonitoringNavigationEnabled", 0, n, "isMetricVariantChartStateEnabled", 0, S, "isMonetizationBreakGlassBannerEnabled", 0, h, "isPlayerFeedbackExampleCommentsEnabled", 0, p, "isRotraceMetricEnabled", 0, v, "isTargetingConfigsEnabled", 0, l, "isTelemetryMigrationEnabled", 0, A, "isTreemapColorBySiblingProportionEnabled", 0, I, "showCreatorRewardsReportingDisclaimer", 0, E, "showVideoServiceDashboard", 0, b, "visibleAssetIdInPersonalizationEnabled", 0, i])
+    e.s(["acquisitionMigrationMetricsEnabled", 0, u, "analyticsChartLoadEventstreamEnabled", 0, r, "isAnalyticsAssistantChatEnabled", 0, m, "isAnalyticsAssistantIssueBannerEnabled", 0, y, "isAnalyticsAssistantStreamSilenceRecoveryEnabled", 0, g, "isAnalyticsMetricAwareYAxisFormatterEnabled", 0, T, "isAssistantChartOverflowMenuEnabled", 0, M, "isClientSessionDetailsV2Enabled", 0, P, "isClientSessionsEnabled", 0, _, "isCustomDashboardsLocalStorageEnabled", 0, R, "isCustomMetricsBackendEnabled", 0, o, "isEhdResultsAlwaysFetched", 0, C, "isEhdResultsEnabled", 0, N, "isExperimentNullControlValueEnabled", 0, f, "isExperimentRolloutEnabled", 0, c, "isExperimentSegmentationEnabled", 0, w, "isExperimentTargetingEnabled", 0, s, "isExperimentationTemplatesEnabled", 0, a, "isGeneralBreakGlassBannerEnabled", 0, d, "isJourneyEventsEnabled", 0, x, "isLimitedAnalyticsAdminMonitoringNavigationEnabled", 0, n, "isMetricVariantChartStateEnabled", 0, S, "isMonetizationBreakGlassBannerEnabled", 0, h, "isPeriodSummaryBridgeEnabled", 0, B, "isPlayerFeedbackExampleCommentsEnabled", 0, p, "isRotraceMetricEnabled", 0, v, "isTargetingConfigsEnabled", 0, l, "isTelemetryMigrationEnabled", 0, A, "isTreemapColorBySiblingProportionEnabled", 0, I, "showCreatorRewardsReportingDisclaimer", 0, E, "showVideoServiceDashboard", 0, b, "visibleAssetIdInPersonalizationEnabled", 0, i])
 }, 36826, 61925, e => {
     "use strict";
     var t, r, n, i, a, o, s = e.i(677753),
@@ -1372,5 +1377,5 @@
     a.ab = "/ROOT/node_modules/.pnpm/next@16.3.0_@babel+core@7.29.0_supports-color@8.1.1__@opentelemetry+api@1.9.1_@playwrig_2bf1aa2500abc393a8e8c0b283d26d6e/node_modules/next/dist/compiled/buffer/", t.exports = a(230)
 }]);
 
-//# debugId=414d9454-10d6-ac74-67af-7721740652e2
-//# sourceMappingURL=28srmiv2i91pz.js.map
+//# debugId=1a6b6496-fb5f-72ed-f7a0-29aa42ce7d4a
+//# sourceMappingURL=2crqmtskjugam.js.map

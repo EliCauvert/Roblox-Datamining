@@ -1352,6 +1352,7 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Label.Voted": "Voted",
     "Label.ResponseCountSingular": "response",
     "Label.ResponseCountPlural": "responses",
-    "Action.React": "React"
+    "Action.React": "React",
+    "Action.RemoveAffiliate": "Remove"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Groups");

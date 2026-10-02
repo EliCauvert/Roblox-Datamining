@@ -265,6 +265,7 @@ Roblox.LangDynamic["Authentication.SignUp"] = {
     "Header.OneLastThing": "One last thing",
     "Subtitle.AddYourBirthday": "Add your birthday to create your Roblox account.",
     "Action.StartPlay": "Start play",
+    "Response.PasswordLowComplexity": "Password must contain at least one letter and at least one number or symbol.",
     "Response.PasswordTooSimilarToUsername": "Password shouldn't be too similar to your username."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Authentication.SignUp");

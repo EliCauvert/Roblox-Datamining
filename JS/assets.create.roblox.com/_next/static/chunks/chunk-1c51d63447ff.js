@@ -3,10 +3,26 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "87f634e0-5aaf-e7ad-5612-744dbbf291a4")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "576d921e-501c-4975-1e59-d8829df376c5")
     } catch (e) {}
 }();
-(globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 97782, e => {
+(globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 665869, 729904, e => {
+    "use strict";
+    var t = e.i(157700);
+    let a = (0, t.defineFlag)({
+            namespace: "groups",
+            name: "enableGroupGameEarlyTesters",
+            defaultValue: !1
+        }),
+        n = (0, t.defineFlag)({
+            namespace: "groups",
+            name: "enableGroupModerationPage",
+            defaultValue: !1
+        });
+    e.s(["enableGroupGameEarlyTesters", 0, a, "enableGroupModerationPage", 0, n], 665869), e.s(["default", 0, function() {
+        return "production"
+    }], 729904)
+}, 97782, e => {
     "use strict";
     var t = e.i(730530),
         a = e.i(881670);
@@ -184,17 +200,17 @@
             pathPattern: /\/analytics\/journeys\/create/,
             title: (0, t.translationKey)("Heading.JourneyEventsConfigCreate", a.TranslationNamespace.Navigation)
         },
-        j = {
+        G = {
             path: "/analytics/journeys/edit",
             pathPattern: /\/analytics\/journeys\/edit/,
             title: (0, t.translationKey)("Heading.JourneyEventsConfigCreate", a.TranslationNamespace.Navigation)
         },
-        B = {
+        j = {
             path: "/analytics/journeys/view",
             pathPattern: /\/analytics\/journeys\/view/,
             title: (0, t.translationKey)("Heading.Journeys", a.TranslationNamespace.Navigation)
         },
-        G = {
+        B = {
             path: "/feedback",
             pathPattern: /\/feedback/,
             title: (0, t.translationKey)("Heading.Feedback", a.TranslationNamespace.PlayerFeedback)
@@ -215,12 +231,12 @@
             pathPattern: /\/configs\/config-create/,
             title: (0, t.translationKey)("Heading.ConfigCreate", a.TranslationNamespace.Navigation)
         },
-        O = {
+        F = {
             path: "/alerts",
             pathPattern: /\/alerts(?!\/)/,
             title: (0, t.translationKey)("Heading.Alerts", a.TranslationNamespace.Navigation)
         },
-        F = {
+        O = {
             path: "/alerts/create",
             pathPattern: /\/alerts\/create/,
             title: (0, t.translationKey)("Heading.CreateAlert", a.TranslationNamespace.ExperienceAlerts)
@@ -307,8 +323,8 @@
             titleOverrideForIAM2: (0, t.translationKey)("Heading.AvatarCreationTokens", a.TranslationNamespace.Navigation),
             group: n
         },
-        ei = [R, H, E, S, n, o, s, l, c, d, u, p, m, y, g, h, b, f, en, v, k, N, C, T, I, P, x, M, L, j, B, A, w, D, X, W, J, G, _, z, U, q, V, $, Z, r, i, Q, Y, ee, et, ea, F, K, O, er];
-    e.s(["analyticsAgentNavigationItem", 0, W, "analyticsAiChatNavigationItem", 0, J, "analyticsAlertConfifurationNavigationItem", 0, K, "analyticsAlertCreationNavigationItem", 0, F, "analyticsAlertsNavigationItem", 0, O, "analyticsAnalyticsHomeNavigationItem", 0, r, "analyticsAssistantNavigationItem", 0, X, "analyticsAudienceNavigationItem", 0, I, "analyticsAvatarCreationTokensNavigationItem", 0, er, "analyticsBountyPayoutsNavigationItem", 0, k, "analyticsCommerceNavigationItem", 0, V, "analyticsConfigsHistoryNavigationItem", 0, _, "analyticsConfigsNavigationItem", 0, z, "analyticsCrashesNavigationItem", 0, C, "analyticsCreationOverviewNavigationItem", 0, Z, "analyticsCustomDashboardsManageNavigationItem", 0, w, "analyticsCustomEventsNavigationItem", 0, D, "analyticsDataStoresNavigationItem", 0, m, "analyticsEngagementNavigationItem", 0, E, "analyticsErrorReportNavigationItem", 0, T, "analyticsExperienceCreatorRewardsNavigationItem", 0, v, "analyticsExperienceSubscriptionsNavigationItem", 0, ea, "analyticsExperimentsCreateNavigationItem", 0, Q, "analyticsExperimentsNavigationItem", 0, i, "analyticsExploreNavigationItem", 0, A, "analyticsFeedbackNavigationItem", 0, G, "analyticsGenerativeAINavigationItem", 0, en, "analyticsHttpServiceNavigationItem", 0, y, "analyticsImmersiveAdsNavigationItem", 0, d, "analyticsItemMonetizationAvatarItemsNavigationItem", 0, l, "analyticsItemMonetizationDeveloperProductsNavigationItem", 0, o, "analyticsItemMonetizationPassesNavigationItem", 0, s, "analyticsMatchmakingNavigationItem", 0, q, "analyticsMemoryStoresNavigationItem", 0, p, "analyticsMessagingServiceNavigationItem", 0, g, "analyticsMonetizationNavigationItem", 0, n, "analyticsNotificationsNavigationItem", 0, et, "analyticsPerformanceNavigationItem", 0, N, "analyticsRecommendationServiceNavigationItem", 0, Y, "analyticsRecommendedEventsEconomyNavigationItem", 0, P, "analyticsRecommendedEventsFunnelsNavigationItem", 0, x, "analyticsRecommendedEventsJourneyCreateNavigationItem", 0, L, "analyticsRecommendedEventsJourneyEditNavigationItem", 0, j, "analyticsRecommendedEventsJourneyNavigationItem", 0, M, "analyticsRecommendedEventsJourneyViewNavigationItem", 0, B, "analyticsRetentionNavigationItem", 0, S, "analyticsSafetyNavigationItem", 0, $, "analyticsSpeechToTextNavigationItem", 0, h, "analyticsSubscriptionsNavigationItem", 0, u, "analyticsTextToSpeechNavigationItem", 0, b, "analyticsUserAcquisitionNavigationItem", 0, H, "analyticsUserAcquisitionRFYNavigationItem", 0, R, "analyticsVideoServiceNavigationItem", 0, f, "getAnalyticsNavigationItemFromPath", 0, function(e) {
+        ei = [R, H, E, S, n, o, s, l, c, d, u, p, m, y, g, h, b, f, en, v, k, N, C, T, I, P, x, M, L, G, j, A, w, D, X, W, J, B, _, z, U, q, V, $, Z, r, i, Q, Y, ee, et, ea, O, K, F, er];
+    e.s(["analyticsAgentNavigationItem", 0, W, "analyticsAiChatNavigationItem", 0, J, "analyticsAlertConfifurationNavigationItem", 0, K, "analyticsAlertCreationNavigationItem", 0, O, "analyticsAlertsNavigationItem", 0, F, "analyticsAnalyticsHomeNavigationItem", 0, r, "analyticsAssistantNavigationItem", 0, X, "analyticsAudienceNavigationItem", 0, I, "analyticsAvatarCreationTokensNavigationItem", 0, er, "analyticsBountyPayoutsNavigationItem", 0, k, "analyticsCommerceNavigationItem", 0, V, "analyticsConfigsHistoryNavigationItem", 0, _, "analyticsConfigsNavigationItem", 0, z, "analyticsCrashesNavigationItem", 0, C, "analyticsCreationOverviewNavigationItem", 0, Z, "analyticsCustomDashboardsManageNavigationItem", 0, w, "analyticsCustomEventsNavigationItem", 0, D, "analyticsDataStoresNavigationItem", 0, m, "analyticsEngagementNavigationItem", 0, E, "analyticsErrorReportNavigationItem", 0, T, "analyticsExperienceCreatorRewardsNavigationItem", 0, v, "analyticsExperienceSubscriptionsNavigationItem", 0, ea, "analyticsExperimentsCreateNavigationItem", 0, Q, "analyticsExperimentsNavigationItem", 0, i, "analyticsExploreNavigationItem", 0, A, "analyticsFeedbackNavigationItem", 0, B, "analyticsGenerativeAINavigationItem", 0, en, "analyticsHttpServiceNavigationItem", 0, y, "analyticsImmersiveAdsNavigationItem", 0, d, "analyticsItemMonetizationAvatarItemsNavigationItem", 0, l, "analyticsItemMonetizationDeveloperProductsNavigationItem", 0, o, "analyticsItemMonetizationPassesNavigationItem", 0, s, "analyticsMatchmakingNavigationItem", 0, q, "analyticsMemoryStoresNavigationItem", 0, p, "analyticsMessagingServiceNavigationItem", 0, g, "analyticsMonetizationNavigationItem", 0, n, "analyticsNotificationsNavigationItem", 0, et, "analyticsPerformanceNavigationItem", 0, N, "analyticsRecommendationServiceNavigationItem", 0, Y, "analyticsRecommendedEventsEconomyNavigationItem", 0, P, "analyticsRecommendedEventsFunnelsNavigationItem", 0, x, "analyticsRecommendedEventsJourneyCreateNavigationItem", 0, L, "analyticsRecommendedEventsJourneyEditNavigationItem", 0, G, "analyticsRecommendedEventsJourneyNavigationItem", 0, M, "analyticsRecommendedEventsJourneyViewNavigationItem", 0, j, "analyticsRetentionNavigationItem", 0, S, "analyticsSafetyNavigationItem", 0, $, "analyticsSpeechToTextNavigationItem", 0, h, "analyticsSubscriptionsNavigationItem", 0, u, "analyticsTextToSpeechNavigationItem", 0, b, "analyticsUserAcquisitionNavigationItem", 0, H, "analyticsUserAcquisitionRFYNavigationItem", 0, R, "analyticsVideoServiceNavigationItem", 0, f, "getAnalyticsNavigationItemFromPath", 0, function(e) {
         return ei.find(t => t.pathPattern.test(e))
     }])
 }, 533968, e => {
@@ -335,46 +351,47 @@
         a = e.i(416340),
         n = e.i(37819),
         r = e.i(602635),
-        i = e.i(79187),
-        o = e.i(844333),
-        s = e.i(729904),
-        l = e.i(486736),
-        c = e.i(507742),
-        d = e.i(260241),
-        u = e.i(298964),
-        p = e.i(623983),
-        m = e.i(345886),
-        y = e.i(581577),
-        g = e.i(894854),
-        h = e.i(881670),
-        b = e.i(174528),
-        f = e.i(537068),
-        v = e.i(589624),
-        k = e.i(194250),
-        N = e.i(863605),
-        C = e.i(154502),
-        T = e.i(945146),
-        I = e.i(690569);
+        i = e.i(692734),
+        o = e.i(79187),
+        s = e.i(844333),
+        l = e.i(665869),
+        c = e.i(729904),
+        d = e.i(507742),
+        u = e.i(260241),
+        p = e.i(298964),
+        m = e.i(623983),
+        y = e.i(345886),
+        g = e.i(581577),
+        h = e.i(894854),
+        b = e.i(881670),
+        f = e.i(174528),
+        v = e.i(537068),
+        k = e.i(589624),
+        N = e.i(194250),
+        C = e.i(863605),
+        T = e.i(154502),
+        I = e.i(945146),
+        P = e.i(690569);
     e.i(535072);
-    var P = e.i(251635),
-        x = e.i(634034),
-        A = e.i(690768),
-        w = e.i(787802),
-        S = e.i(396249),
-        E = e.i(121880),
-        H = e.i(15686);
+    var x = e.i(251635),
+        A = e.i(634034),
+        w = e.i(690768),
+        S = e.i(787802),
+        E = e.i(396249),
+        H = e.i(121880),
+        R = e.i(15686);
     e.i(39651);
-    var R = (0, x.c)((0, t.jsx)("path", {
+    var D = (0, A.c)((0, t.jsx)("path", {
         d: "M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
     }), "MoreHoriz");
-    let D = ["slots", "slotProps"],
-        M = (0, P.s)(A.B, {
+    let M = ["slots", "slotProps"],
+        L = (0, x.s)(w.B, {
             name: "MuiBreadcrumbCollapsed"
         })(e => {
             let {
                 theme: t
             } = e;
-            return (0, T._)({
+            return (0, I._)({
                 display: "flex",
                 marginLeft: "calc(".concat(t.spacing(1), " * 0.5)"),
                 marginRight: "calc(".concat(t.spacing(1), " * 0.5)")
@@ -386,21 +403,21 @@
                 color: t.palette.grey[100]
             }, {
                 borderRadius: 2,
-                "&:hover, &:focus": (0, T._)({}, "light" === t.palette.mode ? {
+                "&:hover, &:focus": (0, I._)({}, "light" === t.palette.mode ? {
                     backgroundColor: t.palette.grey[200]
                 } : {
                     backgroundColor: t.palette.grey[600]
                 }),
-                "&:active": (0, T._)({
+                "&:active": (0, I._)({
                     boxShadow: t.shadows[0]
                 }, "light" === t.palette.mode ? {
-                    backgroundColor: (0, I.n)(t.palette.grey[200], .12)
+                    backgroundColor: (0, P.n)(t.palette.grey[200], .12)
                 } : {
-                    backgroundColor: (0, I.n)(t.palette.grey[600], .12)
+                    backgroundColor: (0, P.n)(t.palette.grey[600], .12)
                 })
             })
         }),
-        L = (0, P.s)(R)({
+        G = (0, x.s)(D)({
             width: 24,
             height: 16
         });
@@ -409,13 +426,13 @@
         let {
             slots: a = {},
             slotProps: n = {}
-        } = e, r = (0, I._)(e, D);
+        } = e, r = (0, P._)(e, M);
         return (0, t.jsx)("li", {
-            children: (0, t.jsx)(M, (0, T._)({
+            children: (0, t.jsx)(L, (0, I._)({
                 focusRipple: !0
             }, r, {
                 ownerState: e,
-                children: (0, t.jsx)(L, (0, T._)({
+                children: (0, t.jsx)(G, (0, I._)({
                     as: a.CollapsedIcon,
                     ownerState: e
                 }, n.collapsedIcon))
@@ -424,18 +441,18 @@
     }
 
     function B(e) {
-        return (0, I.g)("MuiBreadcrumbs", e)
+        return (0, P.g)("MuiBreadcrumbs", e)
     }
-    var G = (0, w.g)("MuiBreadcrumbs", ["root", "ol", "li", "separator"]);
-    let _ = ["children", "className", "component", "slots", "slotProps", "expandText", "itemsAfterCollapse", "itemsBeforeCollapse", "maxItems", "separator"],
-        z = (0, P.s)(S.T, {
+    var _ = (0, S.g)("MuiBreadcrumbs", ["root", "ol", "li", "separator"]);
+    let z = ["children", "className", "component", "slots", "slotProps", "expandText", "itemsAfterCollapse", "itemsBeforeCollapse", "maxItems", "separator"],
+        U = (0, x.s)(E.T, {
             name: "MuiBreadcrumbs",
             slot: "Root",
             overridesResolver: (e, t) => [{
-                ["& .".concat(G.li)]: t.li
+                ["& .".concat(_.li)]: t.li
             }, t.root]
         })({}),
-        U = (0, P.s)("ol", {
+        F = (0, x.s)("ol", {
             name: "MuiBreadcrumbs",
             slot: "Ol",
             overridesResolver: (e, t) => t.ol
@@ -447,7 +464,7 @@
             margin: 0,
             listStyle: "none"
         }),
-        O = (0, P.s)("li", {
+        O = (0, x.s)("li", {
             name: "MuiBreadcrumbs",
             slot: "Separator",
             overridesResolver: (e, t) => t.separator
@@ -457,9 +474,9 @@
             marginLeft: 8,
             marginRight: 8
         }),
-        F = a.forwardRef(function(e, n) {
+        K = a.forwardRef(function(e, n) {
             var r, i;
-            let o = (0, E.u)({
+            let o = (0, H.u)({
                     props: e,
                     name: "MuiBreadcrumbs"
                 }),
@@ -475,9 +492,9 @@
                     maxItems: g = 8,
                     separator: h = "/"
                 } = o,
-                b = (0, I._)(o, _),
+                b = (0, P._)(o, z),
                 [f, v] = a.useState(!1),
-                k = (0, T._)({}, o, {
+                k = (0, I._)({}, o, {
                     component: c,
                     expanded: f,
                     expandText: p,
@@ -490,33 +507,33 @@
                     let {
                         classes: t
                     } = e;
-                    return (0, P.a)({
+                    return (0, x.a)({
                         root: ["root"],
                         li: ["li"],
                         ol: ["ol"],
                         separator: ["separator"]
                     }, B, t)
                 })(k),
-                C = (0, H.u)({
+                C = (0, R.u)({
                     elementType: d.CollapsedIcon,
                     externalSlotProps: u.collapsedIcon,
                     ownerState: k
                 }),
-                x = a.useRef(null),
+                T = a.useRef(null),
                 A = a.Children.toArray(s).filter(e => a.isValidElement(e)).map((e, a) => (0, t.jsx)("li", {
                     className: N.li,
                     children: e
                 }, "child-".concat(a)));
-            return (0, t.jsx)(z, (0, T._)({
+            return (0, t.jsx)(U, (0, I._)({
                 ref: n,
                 component: c,
                 color: "text.secondary",
-                className: (0, P.c)(N.root, l),
+                className: (0, x.c)(N.root, l),
                 ownerState: k
             }, b, {
-                children: (0, t.jsx)(U, {
+                children: (0, t.jsx)(F, {
                     className: N.ol,
-                    ref: x,
+                    ref: T,
                     ownerState: k,
                     children: (r = f || g && A.length <= g || y + m >= A.length ? A : [...A.slice(0, y), (0, t.jsx)(j, {
                         "aria-label": p,
@@ -528,7 +545,7 @@
                         },
                         onClick: () => {
                             v(!0);
-                            let e = x.current.querySelector("a[href],button,[tabindex]");
+                            let e = T.current.querySelector("a[href],button,[tabindex]");
                             e && e.focus()
                         }
                     }, "ellipsis"), ...A.slice(A.length - m, A.length)], i = N.separator, r.reduce((e, a, n) => (n < r.length - 1 ? e = e.concat(a, (0, t.jsx)(O, {
@@ -540,81 +557,81 @@
                 })
             }))
         });
-    var K = (0, N.default)({
+    var q = (0, C.default)({
             name: "Breadcrumbs"
         })(function(e) {
             return {
-                root: (0, k._)((0, k._)({}, e.typography.body1), {
+                root: (0, N._)((0, N._)({}, e.typography.body1), {
                     color: e.palette.content.muted
                 })
             }
         }),
-        q = (0, a.forwardRef)(function(e, t) {
+        V = (0, a.forwardRef)(function(e, t) {
             var n = e.classes,
                 r = e.className,
-                i = (0, k.a)(e, ["classes", "className"]),
-                o = K(void 0, {
+                i = (0, N.a)(e, ["classes", "className"]),
+                o = q(void 0, {
                     props: {
-                        classes: (0, C.default)(n, r)
+                        classes: (0, T.default)(n, r)
                     }
                 });
-            return a.default.createElement(F, (0, k._)({
+            return a.default.createElement(K, (0, N._)({
                 classes: o.classes
             }, i, {
                 ref: t
             }))
         });
-    e.s(["Breadcrumbs", 0, q], 556499);
-    var V = e.i(686762),
-        X = e.i(83265),
-        W = e.i(114209),
-        J = e.i(97782),
-        Q = e.i(475360),
-        Y = e.i(759283),
-        $ = e.i(829425),
-        Z = e.i(726474),
-        ee = e.i(128106);
-    let et = (e, t) => e.args && e.args.value ? t(e.key, {
+    e.s(["Breadcrumbs", 0, V], 556499);
+    var X = e.i(686762),
+        W = e.i(83265),
+        J = e.i(114209),
+        Q = e.i(97782),
+        Y = e.i(475360),
+        $ = e.i(759283),
+        Z = e.i(829425),
+        ee = e.i(726474),
+        et = e.i(128106);
+    let ea = (e, t) => e.args && e.args.value ? t(e.key, {
             [e.args.param]: t(e.args.value)
         }) : t(e.key),
-        ea = e => {
+        en = e => {
             var t;
             let a = parseInt(null != (t = e.developerItemId) ? t : "", 10);
-            return Number.isNaN(a) ? Z.dashboard.configureCreatorStoreItemBasePath : Z.dashboard.getConfigureCreatorStoreItemUrl(a)
+            return Number.isNaN(a) ? ee.dashboard.configureCreatorStoreItemBasePath : ee.dashboard.getConfigureCreatorStoreItemUrl(a)
         },
-        en = {
+        er = {
             analytics: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Analytics"
                     }, t)
                 },
-                breadcrumbType: ee.default.Catalog
+                breadcrumbType: et.default.Catalog
             },
             observability: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Observability"
                     }, t) || "Observability"
                 },
-                breadcrumbType: ee.default.Observability
+                breadcrumbType: et.default.Observability
             },
             creations: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Creations"
                     }, t)
                 },
-                breadcrumbType: ee.default.Creations,
+                breadcrumbType: et.default.Creations,
                 getLinkPath: e => (null == e ? void 0 : e.groupId) ? "/dashboard/creations?groupId=".concat(null == e ? void 0 : e.groupId) : "/dashboard/creations"
             },
             experiences: {
@@ -622,11 +639,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Games"
                     }, t)
                 },
-                breadcrumbType: ee.default.Games,
+                breadcrumbType: et.default.Games,
                 withId: !0,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/overview")
             },
@@ -635,11 +652,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Tab.Collaborators"
                     }, t)
                 },
-                breadcrumbType: ee.default.Collaborators,
+                breadcrumbType: et.default.Collaborators,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/collaborators")
             },
             badges: {
@@ -647,11 +664,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Badges"
                     }, t)
                 },
-                breadcrumbType: ee.default.Badge,
+                breadcrumbType: et.default.Badge,
                 parentItemTypeName: "associated-items",
                 withId: !0,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/badges/").concat(e.badgeId, "/overview")
@@ -661,11 +678,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ReferralRewards"
                     }, t)
                 },
-                breadcrumbType: ee.default.ReferralRewards,
+                breadcrumbType: et.default.ReferralRewards,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/referral-reward-details"),
                 parentItemTypeName: "referral-reward-details",
                 withId: !0
@@ -675,11 +692,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Creations"
                     }, t)
                 },
-                breadcrumbType: ee.default.Bundle,
+                breadcrumbType: et.default.Bundle,
                 getLinkPath: e => "/dashboard/creations/bundle/".concat(e.bundleId, "/configure"),
                 withId: !0
             },
@@ -688,11 +705,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Subscriptions"
                     }, t)
                 },
-                breadcrumbType: ee.default.ExperienceSubscription,
+                breadcrumbType: et.default.ExperienceSubscription,
                 parentItemTypeName: "associated-items",
                 withId: !0
             },
@@ -702,25 +719,25 @@
                         translate: t,
                         itemType: a
                     } = e;
-                    return a ? et({
-                        key: Y.itemFullNameKeys[a]
-                    }, t) : et({
+                    return a ? ea({
+                        key: $.itemFullNameKeys[a]
+                    }, t) : ea({
                         key: "Heading.AssociatedItems"
                     }, t)
                 },
-                breadcrumbType: ee.default.AssociatedItems,
-                getLinkPath: e => (null == e ? void 0 : e.associatedItemType) === Q.Item.DeveloperProduct ? "/dashboard/creations/experiences/".concat(e.baseId, "/monetization/developer-products") : (null == e ? void 0 : e.associatedItemType) === Q.Item.ExperienceSubscription ? "/dashboard/creations/experiences/".concat(e.baseId, "/monetization/subscriptions") : (null == e ? void 0 : e.associatedItemType) === Q.Item.GamePass ? "/dashboard/creations/experiences/".concat(e.baseId, "/monetization/passes") : (null == e ? void 0 : e.associatedItemType) ? "/dashboard/creations/experiences/".concat(e.baseId, "/associated-items?activeTab=").concat(e.associatedItemType) : "/dashboard/creations/experiences/".concat(e.baseId, "/associated-items")
+                breadcrumbType: et.default.AssociatedItems,
+                getLinkPath: e => (null == e ? void 0 : e.associatedItemType) === Y.Item.DeveloperProduct ? "/dashboard/creations/experiences/".concat(e.baseId, "/monetization/developer-products") : (null == e ? void 0 : e.associatedItemType) === Y.Item.ExperienceSubscription ? "/dashboard/creations/experiences/".concat(e.baseId, "/monetization/subscriptions") : (null == e ? void 0 : e.associatedItemType) === Y.Item.GamePass ? "/dashboard/creations/experiences/".concat(e.baseId, "/monetization/passes") : (null == e ? void 0 : e.associatedItemType) ? "/dashboard/creations/experiences/".concat(e.baseId, "/associated-items?activeTab=").concat(e.associatedItemType) : "/dashboard/creations/experiences/".concat(e.baseId, "/associated-items")
             },
             catalog: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Creations"
                     }, t)
                 },
-                breadcrumbType: ee.default.Catalog,
+                breadcrumbType: et.default.Catalog,
                 getLinkPath: e => "/dashboard/creations/catalog/".concat(e.assetId, "/configure"),
                 withId: !0
             },
@@ -729,12 +746,12 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Creations"
                     }, t)
                 },
-                breadcrumbType: ee.default.CreatorStore,
-                getLinkPath: ea,
+                breadcrumbType: et.default.CreatorStore,
+                getLinkPath: en,
                 withId: !0
             },
             "version-history": {
@@ -742,12 +759,12 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.VersionHistory"
                     }, t)
                 },
-                breadcrumbType: ee.default.CreatorStore,
-                getLinkPath: ea,
+                breadcrumbType: et.default.CreatorStore,
+                getLinkPath: en,
                 withId: !1
             },
             dependencies: {
@@ -755,12 +772,12 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Dependencies"
                     }, t)
                 },
-                breadcrumbType: ee.default.CreatorStore,
-                getLinkPath: ea,
+                breadcrumbType: et.default.CreatorStore,
+                getLinkPath: en,
                 withId: !1
             },
             localization: {
@@ -768,11 +785,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Localization"
                     }, t)
                 },
-                breadcrumbType: ee.default.Localization,
+                breadcrumbType: et.default.Localization,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/localization")
             },
             "activity-history": {
@@ -780,11 +797,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ActivityFeed"
                     }, t)
                 },
-                breadcrumbType: ee.default.ActivityHistory,
+                breadcrumbType: et.default.ActivityHistory,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/activity-history")
             },
             activityFeed: {
@@ -792,11 +809,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ActivityFeed"
                     }, t)
                 },
-                breadcrumbType: ee.default.ActivityHistory,
+                breadcrumbType: et.default.ActivityHistory,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/activity-history")
             },
             notifications: {
@@ -804,11 +821,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Notifications"
                     }, t)
                 },
-                breadcrumbType: ee.default.Notifications,
+                breadcrumbType: et.default.Notifications,
                 getLinkPath: e => e.baseId ? "/dashboard/creations/experiences/".concat(e.baseId, "/notifications") : "/settings/notifications"
             },
             update: {
@@ -816,22 +833,22 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Notifications.UpdateContent"
                     }, t)
                 },
-                breadcrumbType: ee.default.Notifications
+                breadcrumbType: et.default.Notifications
             },
             "social-links": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.SocialLinks"
                     }, t)
                 },
-                breadcrumbType: ee.default.SocialLinks,
+                breadcrumbType: et.default.SocialLinks,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/social-links")
             },
             updates: {
@@ -839,11 +856,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Updates"
                     }, t)
                 },
-                breadcrumbType: ee.default.Updates,
+                breadcrumbType: et.default.Updates,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/updates")
             },
             translation: {
@@ -851,11 +868,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Translation"
                     }, t)
                 },
-                breadcrumbType: ee.default.Translation,
+                breadcrumbType: et.default.Translation,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/associated-items")
             },
             overview: {
@@ -863,22 +880,22 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Overview"
                     }, t)
                 },
-                breadcrumbType: ee.default.Overview
+                breadcrumbType: et.default.Overview
             },
             passes: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.GamePass"
                     }, t)
                 },
-                breadcrumbType: ee.default.GamePass,
+                breadcrumbType: et.default.GamePass,
                 parentItemTypeName: "associated-items",
                 withId: !0
             },
@@ -887,11 +904,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.DeveloperProduct"
                     }, t)
                 },
-                breadcrumbType: ee.default.DeveloperProduct,
+                breadcrumbType: et.default.DeveloperProduct,
                 withId: !0,
                 parentItemTypeName: "associated-items"
             },
@@ -900,451 +917,451 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ExternalPurchaseSettings"
                     }, t)
                 },
-                breadcrumbType: ee.default.ExternalPurchaseSettings
+                breadcrumbType: et.default.ExternalPurchaseSettings
             },
             "avatar-items": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Label.ThirdPartyAvatarItemCommissions"
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsMonetization
+                breadcrumbType: et.default.AnalyticsMonetization
             },
             "avatar-creation-tokens": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.AvatarCreationTokens"
                     }, t)
                 },
-                getLinkPath: e => $.creatorHub.dashboard.getMonetizationAvatarCreationTokensUrl(Number(e.baseId)),
-                breadcrumbType: ee.default.AnalyticsMonetization
+                getLinkPath: e => Z.creatorHub.dashboard.getMonetizationAvatarCreationTokensUrl(Number(e.baseId)),
+                breadcrumbType: et.default.AnalyticsMonetization
             },
             subscriptions: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Label.Subscriptions"
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsMonetization
+                breadcrumbType: et.default.AnalyticsMonetization
             },
             commerce: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Commerce"
                     }, t)
                 },
-                getLinkPath: e => $.creatorHub.dashboard.getMonetizationCommerceUrl(Number(e.baseId)),
-                breadcrumbType: ee.default.Commerce
+                getLinkPath: e => Z.creatorHub.dashboard.getMonetizationCommerceUrl(Number(e.baseId)),
+                breadcrumbType: et.default.Commerce
             },
             "create-products": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.CreateProduct"
                     }, t)
                 },
-                getLinkPath: e => $.creatorHub.dashboard.getMonetizationCommerceCreateProductUrl(Number(e.baseId)),
-                breadcrumbType: ee.default.CreateProducts
+                getLinkPath: e => Z.creatorHub.dashboard.getMonetizationCommerceCreateProductUrl(Number(e.baseId)),
+                breadcrumbType: et.default.CreateProducts
             },
             eligibility: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Eligibility"
                     }, t)
                 },
                 getLinkPath: () => "/settings/eligibility",
-                breadcrumbType: ee.default.Eligibility
+                breadcrumbType: et.default.Eligibility
             },
             "priced-assets": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.PricedAssets"
                     }, t)
                 },
-                breadcrumbType: ee.default.PricedAssets
+                breadcrumbType: et.default.PricedAssets
             },
             "audio-distribution": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.AudioDistribution"
                     }, t)
                 },
-                breadcrumbType: ee.default.AudioDistribution
+                breadcrumbType: et.default.AudioDistribution
             },
             "paid-access": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.PaidAccess"
                     }, t)
                 },
-                breadcrumbType: ee.default.PaidAccess
+                breadcrumbType: et.default.PaidAccess
             },
             "extended-services": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ExtendedServices"
                     }, t)
                 },
-                breadcrumbType: ee.default.ExtendedServices
+                breadcrumbType: et.default.ExtendedServices
             },
             "public-publish": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.PublicPublish"
                     }, t)
                 },
-                breadcrumbType: ee.default.PublicPublish
+                breadcrumbType: et.default.PublicPublish
             },
             "publishing-permissions": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.PublishingPermissions"
                     }, t)
                 },
-                breadcrumbType: ee.default.PublishingPermissions
+                breadcrumbType: et.default.PublishingPermissions
             },
             "us-o18-devex-rate": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.DevExO18UsSettingsNav"
                     }, t)
                 },
-                breadcrumbType: ee.default.UsO18DevexRate
+                breadcrumbType: et.default.UsO18DevexRate
             },
             "contribution-report": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ContributionReports"
                     }, t)
                 },
-                breadcrumbType: ee.default.ContributionReport
+                breadcrumbType: et.default.ContributionReport
             },
             acquisition: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Acquisition"
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsAcquisition
+                breadcrumbType: et.default.AnalyticsAcquisition
             },
             engagement: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Engagement"
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsEngagement
+                breadcrumbType: et.default.AnalyticsEngagement
             },
             retention: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Retention"
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsRetention
+                breadcrumbType: et.default.AnalyticsRetention
             },
             monetization: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Monetization"
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsMonetization,
-                getLinkPath: e => $.creatorHub.dashboard.getMonetizationOverviewUrl(Number(e.baseId))
+                breadcrumbType: et.default.AnalyticsMonetization,
+                getLinkPath: e => Z.creatorHub.dashboard.getMonetizationOverviewUrl(Number(e.baseId))
             },
             performance: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsPerformanceNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsPerformanceNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsPerformance
+                breadcrumbType: et.default.AnalyticsPerformance
             },
             crashes: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsCrashesNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsCrashesNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsCrashes
+                breadcrumbType: et.default.AnalyticsCrashes
             },
             audience: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsAudienceNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsAudienceNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsAudience
+                breadcrumbType: et.default.AnalyticsAudience
             },
             economy: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsRecommendedEventsEconomyNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsRecommendedEventsEconomyNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsEconomy
+                breadcrumbType: et.default.AnalyticsEconomy
             },
             funnels: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsRecommendedEventsFunnelsNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsRecommendedEventsFunnelsNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsFunnels
+                breadcrumbType: et.default.AnalyticsFunnels
             },
             journeys: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsRecommendedEventsJourneyNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsRecommendedEventsJourneyNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsJourneys,
+                breadcrumbType: et.default.AnalyticsJourneys,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/analytics/journeys")
             },
             view: {
                 displayName: () => "",
                 withId: !0,
-                breadcrumbType: ee.default.AnalyticsJourneyDetail
+                breadcrumbType: et.default.AnalyticsJourneyDetail
             },
             edit: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Action.Edit"
                     }, t)
                 },
-                breadcrumbType: ee.default.Create
+                breadcrumbType: et.default.Create
             },
             preview: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Action.CustomDashboards.Preview"
                     }, t)
                 },
-                breadcrumbType: ee.default.Create
+                breadcrumbType: et.default.Create
             },
             errors: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsErrorReportNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsErrorReportNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsErrorReport
+                breadcrumbType: et.default.AnalyticsErrorReport
             },
             "memory-stores": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsMemoryStoresNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsMemoryStoresNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsMemoryStores
+                breadcrumbType: et.default.AnalyticsMemoryStores
             },
             "data-stores": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsDataStoresNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsDataStoresNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsDataStores
+                breadcrumbType: et.default.AnalyticsDataStores
             },
             leaderboard: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Leaderboard"
                     }, t)
                 },
-                breadcrumbType: ee.default.Leaderboard
+                breadcrumbType: et.default.Leaderboard
             },
             "http-service": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsHttpServiceNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsHttpServiceNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsHttpServicce
+                breadcrumbType: et.default.AnalyticsHttpServicce
             },
             "messaging-service": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsMessagingServiceNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsMessagingServiceNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsMessagingService
+                breadcrumbType: et.default.AnalyticsMessagingService
             },
             "speech-to-text": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsSpeechToTextNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsSpeechToTextNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsSpeechToText
+                breadcrumbType: et.default.AnalyticsSpeechToText
             },
             "text-to-speech": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsTextToSpeechNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsTextToSpeechNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsTextToSpeech
+                breadcrumbType: et.default.AnalyticsTextToSpeech
             },
             "video-service": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsVideoServiceNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsVideoServiceNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsVideoService
+                breadcrumbType: et.default.AnalyticsVideoService
             },
             "generative-ai": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsGenerativeAINavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsGenerativeAINavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsGenerativeAI
+                breadcrumbType: et.default.AnalyticsGenerativeAI
             },
             custom: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsCustomEventsNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsCustomEventsNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticCustomEvents
+                breadcrumbType: et.default.AnalyticCustomEvents
             },
             explore: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsExploreNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsExploreNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsExploreMode
+                breadcrumbType: et.default.AnalyticsExploreMode
             },
             dashboards: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsCustomDashboardsManageNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsCustomDashboardsManageNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsCustomDashboards,
+                breadcrumbType: et.default.AnalyticsCustomDashboards,
                 parentItemTypeName: "dashboards",
                 withId: !0,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/analytics/dashboards")
@@ -1354,11 +1371,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ManagedPricing"
                     }, t)
                 },
-                breadcrumbType: ee.default.ManagedPricing,
+                breadcrumbType: et.default.ManagedPricing,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/monetization/managed-pricing")
             },
             shop: {
@@ -1366,11 +1383,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.PersonalizedShop"
                     }, t)
                 },
-                breadcrumbType: ee.default.PersonalizedShop,
+                breadcrumbType: et.default.PersonalizedShop,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/monetization/shop")
             },
             "developer-product-purchases-blocked": {
@@ -1378,23 +1395,23 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.DeveloperProductPurchasesBlocked"
                     }, t)
                 },
-                breadcrumbType: ee.default.DeveloperProductPurchasesBlocked,
-                getLinkPath: e => Z.dashboard.getDeveloperProductPurchasesBlockedUrl(Number(e.baseId))
+                breadcrumbType: et.default.DeveloperProductPurchasesBlocked,
+                getLinkPath: e => ee.dashboard.getDeveloperProductPurchasesBlockedUrl(Number(e.baseId))
             },
             "hard-coded-prices": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.HardCodedPrices"
                     }, t)
                 },
-                breadcrumbType: ee.default.HardCodedPrices,
+                breadcrumbType: et.default.HardCodedPrices,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/monetization/hard-coded-prices")
             },
             "price-optimization": {
@@ -1402,11 +1419,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.PriceOptimization"
                     }, t)
                 },
-                breadcrumbType: ee.default.PriceOptimization,
+                breadcrumbType: et.default.PriceOptimization,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/monetization/price-optimization")
             },
             "price-check": {
@@ -1414,45 +1431,45 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.DynamicPriceCheck"
                     }, t)
                 },
-                breadcrumbType: ee.default.PriceCheck
+                breadcrumbType: et.default.PriceCheck
             },
             "immersive-ads": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Ads"
                     }, t)
                 },
-                breadcrumbType: ee.default.ImmersiveAds,
-                getLinkPath: e => $.creatorHub.dashboard.getMonetizationImmersiveAdsUrl(Number(e.baseId))
+                breadcrumbType: et.default.ImmersiveAds,
+                getLinkPath: e => Z.creatorHub.dashboard.getMonetizationImmersiveAdsUrl(Number(e.baseId))
             },
             "create-placement": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.AdsCreatePlacement"
                     }, t)
                 },
-                breadcrumbType: ee.default.ImmersiveAdsCreatePlacement
+                breadcrumbType: et.default.ImmersiveAdsCreatePlacement
             },
             "creator-rewards": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.CreatorRewards"
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsMonetization,
+                breadcrumbType: et.default.AnalyticsMonetization,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/monetization/creator-rewards")
             },
             "roblox-plus": {
@@ -1460,11 +1477,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.RobloxPlusDeveloperProgram"
                     }, t)
                 },
-                breadcrumbType: ee.default.AnalyticsMonetization,
+                breadcrumbType: et.default.AnalyticsMonetization,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/monetization/roblox-plus")
             },
             "experience-questionnaire": {
@@ -1472,25 +1489,24 @@
                     let {
                         translate: t,
                         enableQuestionnaireV2: a,
-                        isUpdatedPublishingFlowEnabled: n,
-                        isUpdatedSettingsNavigationEnabled: r
-                    } = e, i = "Heading.ExperienceQuestionnaire";
-                    return (a || n || r) && (i = "Heading.ContentRatings"), et({
-                        key: i
+                        isUpdatedPublishingFlowEnabled: n
+                    } = e, r = "Heading.ExperienceQuestionnaire";
+                    return (a || n) && (r = "Heading.ContentRatings"), ea({
+                        key: r
                     }, t)
                 },
-                breadcrumbType: ee.default.Questionnaire
+                breadcrumbType: et.default.Questionnaire
             },
             guidelines: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Guidelines"
                     }, t)
                 },
-                breadcrumbType: ee.default.Questionnaire
+                breadcrumbType: et.default.Questionnaire
             },
             configure: {
                 displayName: e => {
@@ -1498,30 +1514,30 @@
                         translate: t,
                         itemType: a
                     } = e;
-                    return a === Q.Item.CatalogAsset || a === Q.Item.LibraryAsset || a === Q.Item.Bundle || a === Q.Item.Event || a === Q.Item.AvatarCreationToken || a === Q.Item.Environment || a === Q.Item.Look ? et({
+                    return a === Y.Item.CatalogAsset || a === Y.Item.LibraryAsset || a === Y.Item.Bundle || a === Y.Item.Event || a === Y.Item.AvatarCreationToken || a === Y.Item.Environment || a === Y.Item.Look ? ea({
                         key: "Heading.Configure"
-                    }, t) : a === Q.Item.Game ? et({
+                    }, t) : a === Y.Item.Game ? ea({
                         key: "Heading.ContentSettings"
-                    }, t) : a === Q.Item.ExperienceSubscription ? et({
+                    }, t) : a === Y.Item.ExperienceSubscription ? ea({
                         key: "Heading.UpdateSubscription"
-                    }, t) : a === Q.Item.Alert ? et({
+                    }, t) : a === Y.Item.Alert ? ea({
                         key: "Heading.ConfigureAlert"
-                    }, t) : et({
+                    }, t) : ea({
                         key: "Heading.BasicSettings"
                     }, t)
                 },
-                breadcrumbType: ee.default.Configure
+                breadcrumbType: et.default.Configure
             },
             "communication-settings": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.CommunicationSettings"
                     }, t)
                 },
-                breadcrumbType: ee.default.CommunicationSettings,
+                breadcrumbType: et.default.CommunicationSettings,
                 getLinkPath: e => "/creations/experiences/".concat(e.baseId, "/communication-settings")
             },
             sales: {
@@ -1529,22 +1545,22 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Sales"
                     }, t)
                 },
-                breadcrumbType: ee.default.Sales
+                breadcrumbType: et.default.Sales
             },
             promotions: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Promotions"
                     }, t)
                 },
-                breadcrumbType: ee.default.Promotions
+                breadcrumbType: et.default.Promotions
             },
             create: {
                 displayName: e => {
@@ -1552,28 +1568,28 @@
                         translate: t,
                         itemType: a
                     } = e;
-                    return a ? et({
+                    return a ? ea({
                         key: "Heading.Create",
                         args: {
                             param: "itemType",
-                            value: Y.itemTypeToSingularNameKeys[a]
+                            value: $.itemTypeToSingularNameKeys[a]
                         }
-                    }, t) : et({
+                    }, t) : ea({
                         key: "Heading.Create"
                     }, t)
                 },
-                breadcrumbType: ee.default.Create
+                breadcrumbType: et.default.Create
             },
             places: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Places"
                     }, t)
                 },
-                breadcrumbType: ee.default.Places,
+                breadcrumbType: et.default.Places,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/places"),
                 parentItemTypeName: "places",
                 withId: !0
@@ -1583,11 +1599,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Environments"
                     }, t)
                 },
-                breadcrumbType: ee.default.Environments,
+                breadcrumbType: et.default.Environments,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/environments"),
                 parentItemTypeName: "environments",
                 withId: !0
@@ -1597,11 +1613,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Action.CreateEnvironment"
                     }, t)
                 },
-                breadcrumbType: ee.default.Environments,
+                breadcrumbType: et.default.Environments,
                 parentItemTypeName: "environments"
             },
             manage: {
@@ -1609,33 +1625,33 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Manage"
                     }, t)
                 },
-                breadcrumbType: ee.default.Manage
+                breadcrumbType: et.default.Manage
             },
             icon: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Icon"
                     }, t)
                 },
-                breadcrumbType: ee.default.Icon
+                breadcrumbType: et.default.Icon
             },
             events: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Events"
                     }, t)
                 },
-                breadcrumbType: ee.default.Event,
+                breadcrumbType: et.default.Event,
                 withId: !0,
                 parentItemTypeName: "events",
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/events")
@@ -1645,98 +1661,98 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Title.SelectEligibility"
                     }, t)
                 },
-                breadcrumbType: ee.default.SelectEligibility
+                breadcrumbType: et.default.SelectEligibility
             },
             thumbnails: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.PlaceThumbnails"
                     }, t)
                 },
-                breadcrumbType: ee.default.Thumbnails
+                breadcrumbType: et.default.Thumbnails
             },
             videos: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.PlaceVideos"
                     }, t)
                 },
-                breadcrumbType: ee.default.Videos
+                breadcrumbType: et.default.Videos
             },
             access: {
                 displayName: e => {
                     var t;
                     let {
                         translate: a,
-                        isUpdatedSettingsNavigationEnabled: n,
+                        isUpdatedPublishingFlowEnabled: n,
                         pathname: r
                     } = e, i = null != (t = null == r ? void 0 : r.split("/").includes("places")) && t;
-                    return et({
+                    return ea({
                         key: n && !i ? "Heading.GameAccess" : "Heading.AccessSettings"
                     }, a)
                 },
-                breadcrumbType: ee.default.Access
+                breadcrumbType: et.default.Access
             },
             secrets: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Secrets"
                     }, t)
                 },
-                breadcrumbType: ee.default.Secrets
+                breadcrumbType: et.default.Secrets
             },
             matchmaking: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.CustomMatchmaking"
                     }, t)
                 },
-                breadcrumbType: ee.default.CustomMatchmaking,
-                getLinkPath: e => Z.dashboard.getCustomMatchmakingDashboardUrl(Number(e.baseId))
+                breadcrumbType: et.default.CustomMatchmaking,
+                getLinkPath: e => ee.dashboard.getCustomMatchmakingDashboardUrl(Number(e.baseId))
             },
             "server-management": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ServerManagement"
                     }, t)
                 },
-                breadcrumbType: ee.default.ServerManagement,
-                getLinkPath: e => Z.dashboard.getServerManagementUrl(Number(e.baseId))
+                breadcrumbType: et.default.ServerManagement,
+                getLinkPath: e => ee.dashboard.getServerManagementUrl(Number(e.baseId))
             },
             "client-sessions": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ClientSessions"
                     }, t)
                 },
-                breadcrumbType: ee.default.ClientSessions,
-                getLinkPath: e => Z.dashboard.getClientSessionsUrl(Number(e.baseId))
+                breadcrumbType: et.default.ClientSessions,
+                getLinkPath: e => ee.dashboard.getClientSessionsUrl(Number(e.baseId))
             },
             "[sessionId]": {
                 displayName: () => "",
-                breadcrumbType: ee.default.ClientSession,
+                breadcrumbType: et.default.ClientSession,
                 withId: !0
             },
             "create-configuration": {
@@ -1744,248 +1760,248 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.CreateConfiguration"
                     }, t)
                 },
-                breadcrumbType: ee.default.CreateMatchmakingConfiguration
+                breadcrumbType: et.default.CreateMatchmakingConfiguration
             },
             "edit-configuration": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.EditConfiguration"
                     }, t)
                 },
-                breadcrumbType: ee.default.EditMatchmakingConfiguration
+                breadcrumbType: et.default.EditMatchmakingConfiguration
             },
             "create-attribute": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.CreateAttribute"
                     }, t)
                 },
-                breadcrumbType: ee.default.CreateMatchmakingAttribute,
-                getLinkPath: e => Z.dashboard.getCustomMatchmakingAttributeCreationUrl(Number(e.baseId))
+                breadcrumbType: et.default.CreateMatchmakingAttribute,
+                getLinkPath: e => ee.dashboard.getCustomMatchmakingAttributeCreationUrl(Number(e.baseId))
             },
             "edit-player-attribute": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.EditPlayerAttribute"
                     }, t)
                 },
-                breadcrumbType: ee.default.EditMatchmakingPlayerAttribute
+                breadcrumbType: et.default.EditMatchmakingPlayerAttribute
             },
             "edit-server-attribute": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.EditServerAttribute"
                     }, t)
                 },
-                breadcrumbType: ee.default.EditMatchmakingServerAttribute
+                breadcrumbType: et.default.EditMatchmakingServerAttribute
             },
             settings: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Settings"
                     }, t)
                 },
-                breadcrumbType: ee.default.Settings
+                breadcrumbType: et.default.Settings
             },
             permissions: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Permissions"
                     }, t)
                 },
-                breadcrumbType: ee.default.Permissions
+                breadcrumbType: et.default.Permissions
             },
             webhooks: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Webhooks"
                     }, t)
                 },
-                breadcrumbType: ee.default.Webhooks
+                breadcrumbType: et.default.Webhooks
             },
             "data-collection": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.DataSharing"
                     }, t)
                 },
-                breadcrumbType: ee.default.DataSharing
+                breadcrumbType: et.default.DataSharing
             },
             "[notificationCategory]": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Notifications"
                     }, t)
                 },
                 withId: !0,
-                breadcrumbType: ee.default.Category
+                breadcrumbType: et.default.Category
             },
             preferences: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Preferences"
                     }, t)
                 },
-                breadcrumbType: ee.default.Preferences
+                breadcrumbType: et.default.Preferences
             },
             advanced: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Header.Title"
                     }, t)
                 },
-                breadcrumbType: ee.default.Advanced
+                breadcrumbType: et.default.Advanced
             },
             bans: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Moderation"
                     }, t)
                 },
-                breadcrumbType: ee.default.Bans,
-                getLinkPath: e => $.creatorHub.dashboard.getUserBansUrl(Number(e.baseId))
+                breadcrumbType: et.default.Bans,
+                getLinkPath: e => Z.creatorHub.dashboard.getUserBansUrl(Number(e.baseId))
             },
             "anti-cheat": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Moderation"
                     }, t)
                 },
-                breadcrumbType: ee.default.AntiCheat,
-                getLinkPath: e => $.creatorHub.dashboard.getAntiCheatUrl(Number(e.baseId))
+                breadcrumbType: et.default.AntiCheat,
+                getLinkPath: e => Z.creatorHub.dashboard.getAntiCheatUrl(Number(e.baseId))
             },
             add: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.AddUsersToBan"
                     }, t)
                 },
-                breadcrumbType: ee.default.Add
+                breadcrumbType: et.default.Add
             },
             reorder: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Reorder"
                     }, t)
                 },
-                breadcrumbType: ee.default.Reorder
+                breadcrumbType: et.default.Reorder
             },
             feedback: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Feedback"
                     }, t)
                 },
-                breadcrumbType: ee.default.Feedback
+                breadcrumbType: et.default.Feedback
             },
             "api-settings": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.APISettings"
                     }, t)
                 },
-                breadcrumbType: ee.default.ApiSettings
+                breadcrumbType: et.default.ApiSettings
             },
             configs: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Configs"
                     }, t)
                 },
-                breadcrumbType: ee.default.Configs,
-                getLinkPath: e => $.creatorHub.dashboard.getAnalyticsConfigsUrl(Number(e.baseId))
+                breadcrumbType: et.default.Configs,
+                getLinkPath: e => Z.creatorHub.dashboard.getAnalyticsConfigsUrl(Number(e.baseId))
             },
             experiments: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Experiments"
                     }, t)
                 },
-                breadcrumbType: ee.default.Experiments,
-                getLinkPath: e => $.creatorHub.dashboard.getExperimentsUrl(Number(e.baseId))
+                breadcrumbType: et.default.Experiments,
+                getLinkPath: e => Z.creatorHub.dashboard.getExperimentsUrl(Number(e.baseId))
             },
             "experiment-create": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ExperimentCreate"
                     }, t)
                 },
-                breadcrumbType: ee.default.ExperimentCreate
+                breadcrumbType: et.default.ExperimentCreate
             },
             "experiment-details": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ExperimentDetails"
                     }, t)
                 },
-                breadcrumbType: ee.default.ExperimentDetails,
+                breadcrumbType: et.default.ExperimentDetails,
                 withId: !0
             },
             alerts: {
@@ -1993,11 +2009,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Alerts"
                     }, t)
                 },
-                breadcrumbType: ee.default.Alerts,
+                breadcrumbType: et.default.Alerts,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/alerts"),
                 parentItemTypeName: "alerts",
                 withId: !0
@@ -2007,45 +2023,45 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ConfigsHistory"
                     }, t)
                 },
-                breadcrumbType: ee.default.ConfigsHistory
+                breadcrumbType: et.default.ConfigsHistory
             },
             "config-create": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ConfigCreate"
                     }, t)
                 },
-                breadcrumbType: ee.default.ConfigCreate
+                breadcrumbType: et.default.ConfigCreate
             },
             variants: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Variants"
                     }, t)
                 },
                 getLinkPath: e => "/dashboard/creations/catalog/".concat(e.assetId, "/variants"),
-                breadcrumbType: ee.default.Catalog
+                breadcrumbType: et.default.Catalog
             },
             look: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Creations"
                     }, t)
                 },
-                breadcrumbType: ee.default.Look,
+                breadcrumbType: et.default.Look,
                 getLinkPath: e => "/dashboard/creations/look/".concat(e.lookId, "/configure"),
                 withId: !0
             },
@@ -2054,11 +2070,11 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.AudienceReach"
                     }, t)
                 },
-                breadcrumbType: ee.default.AudienceReach,
+                breadcrumbType: et.default.AudienceReach,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/audience-reach")
             },
             "game-details": {
@@ -2066,83 +2082,83 @@
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.GameDetails"
                     }, t)
                 },
-                breadcrumbType: ee.default.GameDetails
+                breadcrumbType: et.default.GameDetails
             },
             "content-rating": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.ContentRatings"
                     }, t)
                 },
-                breadcrumbType: ee.default.ContentRating
+                breadcrumbType: et.default.ContentRating
             },
             "game-join": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.GameAccess"
                     }, t)
                 },
-                breadcrumbType: ee.default.GameJoin
+                breadcrumbType: et.default.GameJoin
             },
             publishing: {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.Publishing"
                     }, t)
                 },
-                breadcrumbType: ee.default.Publishing
+                breadcrumbType: et.default.Publishing
             },
             "player-support": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
+                    return ea({
                         key: "Heading.PlayerSupport"
                     }, t)
                 },
-                breadcrumbType: ee.default.PlayerSupport,
+                breadcrumbType: et.default.PlayerSupport,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/player-support")
             },
             "[ticketId]": {
                 displayName: () => "",
-                breadcrumbType: ee.default.PlayerSupportTicket
+                breadcrumbType: et.default.PlayerSupportTicket
             },
             "recommendation-service": {
                 displayName: e => {
                     let {
                         translate: t
                     } = e;
-                    return et({
-                        key: J.analyticsRecommendationServiceNavigationItem.title.key
+                    return ea({
+                        key: Q.analyticsRecommendationServiceNavigationItem.title.key
                     }, t)
                 },
-                breadcrumbType: ee.default.RecommendationService
+                breadcrumbType: et.default.RecommendationService
             }
         };
-    var er = e.i(509049);
-    let ei = (0, a.createContext)({
+    var ei = e.i(509049);
+    let eo = (0, a.createContext)({
         insideTopNavigationDrawer: !1
     });
 
-    function eo() {
-        return (0, a.useContext)(ei)
+    function es() {
+        return (0, a.useContext)(eo)
     }
-    ei.displayName = "TopNavigationSidebarDrawerContext", e.s(["default", 0, eo], 634877);
-    let es = (0, e.i(697973).makeStyles)()(e => ({
+    eo.displayName = "TopNavigationSidebarDrawerContext", e.s(["default", 0, es], 634877);
+    let el = (0, e.i(697973).makeStyles)()(e => ({
             linkStyle: {
                 fontWeight: e.typography.fontWeightRegular,
                 color: e.palette.content.muted
@@ -2165,81 +2181,81 @@
                 paddingTop: 12
             }
         })),
-        el = (e, t) => t && e.replaceAll(/\[[^\]]*?\]/g, "") === (null == t ? void 0 : t.replaceAll(/\d+/g, "")) ? void 0 : t,
-        ec = (0, i.withTranslation)(e => {
+        ec = (e, t) => t && e.replaceAll(/\[[^\]]*?\]/g, "") === (null == t ? void 0 : t.replaceAll(/\d+/g, "")) ? void 0 : t,
+        ed = (0, o.withTranslation)(e => {
             let {
                 inLayoutHeader: i = !1
             } = e, {
                 pathname: o,
                 query: s
-            } = (0, v.useRouter)(), {
+            } = (0, k.useRouter)(), {
                 classes: {
                     linkStyle: l,
                     compactBreadCrumbLinkStyle: c,
                     breadcrumb: d,
                     breadcrumbBottomSpace: u,
-                    compactBreadCrumb: y
+                    compactBreadCrumb: p
                 }
-            } = es(), {
+            } = el(), {
                 insideTopNavigationDrawer: g
-            } = eo(), h = (0, X.useMediaQuery)(e => e.breakpoints.down("Medium")), {
+            } = es(), h = (0, W.useMediaQuery)(e => e.breakpoints.down("Medium")), {
                 gameDetails: b
-            } = (0, W.useCurrentGame)(), k = (0, a.useMemo)(() => {
+            } = (0, J.useCurrentGame)(), f = (0, a.useMemo)(() => {
                 let e = o.includes("/analytics/dashboards/");
                 return o.split("/").filter(e => !!e).filter(t => "analytics" !== t || !e)
             }, [o]), {
                 itemNameMapping: N,
                 pathLinkParams: C,
                 displayNameParam: T
-            } = (0, er.default)(), I = "string" == typeof s.dashboardId ? s.dashboardId : void 0, P = "string" == typeof s.id ? s.id : void 0, x = o.endsWith("/analytics/dashboards/[dashboardId]/edit") && P && I ? "/dashboard/creations/experiences/".concat(P, "/analytics/dashboards/").concat(I) : void 0, A = (0, a.useCallback)((e, a) => g ? a ? (0, t.jsx)(f.default, {
+            } = (0, ei.default)(), I = "string" == typeof s.dashboardId ? s.dashboardId : void 0, P = "string" == typeof s.id ? s.id : void 0, x = o.endsWith("/analytics/dashboards/[dashboardId]/edit") && P && I ? "/dashboard/creations/experiences/".concat(P, "/analytics/dashboards/").concat(I) : void 0, A = (0, a.useCallback)((e, a) => g ? a ? (0, t.jsx)(v.default, {
                 href: a,
                 passHref: !0,
                 legacyBehavior: !0,
-                children: (0, t.jsx)(V.Link, {
+                children: (0, t.jsx)(X.Link, {
                     underline: "always",
                     color: "inherit",
-                    children: (0, t.jsx)(p.Typography, {
+                    children: (0, t.jsx)(m.Typography, {
                         color: "primary",
                         variant: "largeLabel1",
                         children: e
                     })
                 })
-            }, e) : (0, t.jsx)(p.Typography, {
+            }, e) : (0, t.jsx)(m.Typography, {
                 color: "primary",
                 variant: "largeLabel1",
                 children: e
-            }, e) : a ? (0, t.jsx)(f.default, {
+            }, e) : a ? (0, t.jsx)(v.default, {
                 href: a,
                 passHref: !0,
                 legacyBehavior: !0,
-                children: (0, t.jsx)(V.Link, {
+                children: (0, t.jsx)(X.Link, {
                     classes: {
                         root: l
                     },
                     children: e
                 })
-            }, e) : (0, t.jsx)(p.Typography, {
+            }, e) : (0, t.jsx)(m.Typography, {
                 color: "secondary",
                 children: e
             }, e), [g, l]), w = (0, a.useCallback)(e => {
                 var t, a;
-                let n = e.parentItemTypeName ? en[e.parentItemTypeName] : null,
+                let n = e.parentItemTypeName ? er[e.parentItemTypeName] : null,
                     r = N[e.breadcrumbType],
-                    i = e.breadcrumbType === ee.default.AnalyticsCustomDashboards && x ? x : void 0,
+                    i = e.breadcrumbType === et.default.AnalyticsCustomDashboards && x ? x : void 0,
                     s = null != i ? i : null == (t = e.getLinkPath) ? void 0 : t.call(e, C),
                     l = void 0 !== i || null === n || e.breadcrumbType !== n.breadcrumbType;
-                return [n ? A(n.displayName(T), el(o, null == (a = n.getLinkPath) ? void 0 : a.call(n, C))) : null, r ? A(r, l ? el(o, s) : void 0) : null]
+                return [n ? A(n.displayName(T), ec(o, null == (a = n.getLinkPath) ? void 0 : a.call(n, C))) : null, r ? A(r, l ? ec(o, s) : void 0) : null]
             }, [N, C, A, T, o, x]), S = (0, a.useMemo)(() => {
                 let e;
-                return e = [], k.filter(e => en[e]).forEach(t => {
-                    let a = en[t],
+                return e = [], f.filter(e => er[e]).forEach(t => {
+                    let a = er[t],
                         n = a.displayName(T);
                     if (n && e.push(n), a.withId) {
                         let t = N[a.breadcrumbType];
                         t && e.push(t)
                     }
                 }), e
-            }, [k, T, N]), E = (0, a.useMemo)(() => (function(e) {
+            }, [f, T, N]), E = (0, a.useMemo)(() => (function(e) {
                 if (e.length < 2) return;
                 let t = e[e.length - 1],
                     a = e[e.length - 2];
@@ -2264,9 +2280,9 @@
                         }
                         return e.displayName(T)
                     },
-                    a = k.map(e => ({
+                    a = f.map(e => ({
                         key: e,
-                        breadcrumbDetails: en[e]
+                        breadcrumbDetails: er[e]
                     })).filter(e => e.breadcrumbDetails);
                 if (i && h) {
                     var n;
@@ -2282,14 +2298,14 @@
                             breadcrumbDetails: a
                         } = t;
                         return e(a)
-                    }), l = null == (n = o.getLinkPath) ? void 0 : n.call(o, C), d = (0, t.jsx)(p.Typography, {
+                    }), l = null == (n = o.getLinkPath) ? void 0 : n.call(o, C), d = (0, t.jsx)(m.Typography, {
                         color: "primary",
                         "aria-current": "page",
                         variant: h && i ? "h3" : void 0,
                         children: e(o)
                     }, r);
                     return l ? {
-                        breadcrumbsContents: [(0, t.jsx)(f.default, {
+                        breadcrumbsContents: [(0, t.jsx)(v.default, {
                             href: l,
                             className: c,
                             children: d
@@ -2313,17 +2329,17 @@
                     if (s === a.length - 1) {
                         let a = e(u);
                         if (!a) return n;
-                        let r = u.parentItemTypeName ? en[u.parentItemTypeName] : null,
+                        let r = u.parentItemTypeName ? er[u.parentItemTypeName] : null,
                             s = N[u.breadcrumbType];
-                        if (u.withId && u.breadcrumbType === ee.default.AnalyticsCustomDashboards && null !== r && void 0 !== s) {
+                        if (u.withId && u.breadcrumbType === et.default.AnalyticsCustomDashboards && null !== r && void 0 !== s) {
                             let e = r.displayName(T);
                             return {
-                                contents: [...n.contents, A(e, el(o, null == (c = r.getLinkPath) ? void 0 : c.call(r, C))), A(s, x)],
+                                contents: [...n.contents, A(e, ec(o, null == (c = r.getLinkPath) ? void 0 : c.call(r, C))), A(s, x)],
                                 names: [...n.names, e, s]
                             }
                         }
                         return {
-                            contents: [...n.contents, (0, t.jsx)(p.Typography, {
+                            contents: [...n.contents, (0, t.jsx)(m.Typography, {
                                 color: "primary",
                                 "aria-current": "page",
                                 variant: h && i ? "h3" : void 0,
@@ -2333,17 +2349,17 @@
                         }
                     }
                     if (u.withId) {
-                        let e = u.parentItemTypeName ? en[u.parentItemTypeName] : null,
+                        let e = u.parentItemTypeName ? er[u.parentItemTypeName] : null,
                             t = N[u.breadcrumbType];
                         return {
                             contents: n.contents.concat(w(u)),
                             names: [...n.names, ...e ? [e.displayName(T)] : [], ...t ? [t] : []]
                         }
                     }
-                    let m = u.displayName(T);
-                    return m ? {
-                        contents: [...n.contents, A(m, null == (l = u.getLinkPath) ? void 0 : l.call(u, C))],
-                        names: [...n.names, m]
+                    let p = u.displayName(T);
+                    return p ? {
+                        contents: [...n.contents, A(p, null == (l = u.getLinkPath) ? void 0 : l.call(u, C))],
+                        names: [...n.names, p]
                     } : n
                 }, {
                     contents: [],
@@ -2353,46 +2369,46 @@
                     breadcrumbsContents: r,
                     breadcrumbNames: s
                 }
-            }, [k, i, h, T, N, C, c, A, x, w, o]), M = (0, a.useMemo)(() => D[D.length - 1], [D]), L = (0, a.useMemo)(() => (0, n.buildBreadcrumb)(...D), [D]), j = E && (0, t.jsx)(n.HubMeta, {
+            }, [f, i, h, T, N, C, c, A, x, w, o]), M = (0, a.useMemo)(() => D[D.length - 1], [D]), L = (0, a.useMemo)(() => (0, n.buildBreadcrumb)(...D), [D]), G = E && (0, t.jsx)(n.HubMeta, {
                 title: M,
                 breadcrumb: L,
                 seoTitle: E,
                 ...H
             });
-            return h ? (0, t.jsxs)(m.Grid, {
-                className: i ? void 0 : y,
-                children: [j, (0, t.jsx)(q, {
+            return h ? (0, t.jsxs)(y.Grid, {
+                className: i ? void 0 : p,
+                children: [G, (0, t.jsx)(V, {
                     id: "navigation-breadcrumbs",
                     maxItems: 3,
                     "aria-label": "breadcrumb",
                     children: (i || R.length > 1) && R
                 })]
-            }) : g ? (0, t.jsxs)(m.Grid, {
-                children: [j, (0, t.jsxs)(q, {
+            }) : g ? (0, t.jsxs)(y.Grid, {
+                children: [G, (0, t.jsxs)(V, {
                     maxItems: 3,
                     "aria-label": "breadcrumb",
-                    children: [(0, t.jsx)(p.Typography, {
+                    children: [(0, t.jsx)(m.Typography, {
                         color: "primary",
                         variant: "largeLabel1",
                         children: (0, t.jsx)(r.CurrentProductName, {})
                     }, "product-name"), R.slice(0, -1)]
                 })]
-            }) : (0, t.jsxs)(m.Grid, {
+            }) : (0, t.jsxs)(y.Grid, {
                 className: "".concat(d, " ").concat(R.length > 1 && !i ? u : ""),
-                children: [j, (0, t.jsx)(q, {
+                children: [G, (0, t.jsx)(V, {
                     id: "navigation-breadcrumbs",
                     maxItems: 8,
                     "aria-label": "breadcrumb",
                     children: R.length > 1 && R
                 }), " "]
             })
-        }, [h.TranslationNamespace.Creations, h.TranslationNamespace.Features, h.TranslationNamespace.AssetTypes, h.TranslationNamespace.SendrNotificationPreferences, h.TranslationNamespace.Advanced, h.TranslationNamespace.OpenCloud, h.TranslationNamespace.Error, h.TranslationNamespace.DataCollectionSettings, h.TranslationNamespace.UnifiedNavigation, h.TranslationNamespace.Payouts, h.TranslationNamespace.Matchmaking, h.TranslationNamespace.Environments, h.TranslationNamespace.Navigation, h.TranslationNamespace.MarketplaceOnboarding, h.TranslationNamespace.PublicPublish, h.TranslationNamespace.ExperienceAlerts, h.TranslationNamespace.PlayerFeedback, h.TranslationNamespace.DevEx, h.TranslationNamespace.Publishing]),
-        ed = () => {
+        }, [b.TranslationNamespace.Creations, b.TranslationNamespace.Features, b.TranslationNamespace.AssetTypes, b.TranslationNamespace.SendrNotificationPreferences, b.TranslationNamespace.Advanced, b.TranslationNamespace.OpenCloud, b.TranslationNamespace.Error, b.TranslationNamespace.DataCollectionSettings, b.TranslationNamespace.UnifiedNavigation, b.TranslationNamespace.Payouts, b.TranslationNamespace.Matchmaking, b.TranslationNamespace.Environments, b.TranslationNamespace.Navigation, b.TranslationNamespace.MarketplaceOnboarding, b.TranslationNamespace.PublicPublish, b.TranslationNamespace.ExperienceAlerts, b.TranslationNamespace.PlayerFeedback, b.TranslationNamespace.DevEx, b.TranslationNamespace.Publishing]),
+        eu = () => {
             let {
                 currentItemType: e,
                 isCurrentItemLoading: t,
                 currentItemGroupId: n
-            } = (0, er.default)(), {
+            } = (0, ei.default)(), {
                 isLoading: i,
                 setWorkspaceByGroupId: o
             } = (0, r.useWorkspaces)();
@@ -2400,123 +2416,123 @@
                 !e || t || i || o(null != n ? n : null)
             }, [n, e, t, i, o]), null
         },
-        eu = "applayout-scroll-container",
-        ep = (0, c.default)(() => Promise.resolve(b.default), {
+        ep = "applayout-scroll-container",
+        em = (0, d.default)(() => Promise.resolve(f.default), {
             ssr: !1
         }),
-        em = (0, i.withTranslation)(e => {
+        ey = (0, o.withTranslation)(e => {
             var n;
             let {
-                title: o,
+                title: i,
                 beta: s = !1,
                 secondaryRail: l,
                 pageBanner: c,
-                useBreadcrumbs: h = !1,
+                useBreadcrumbs: d = !1,
                 secondarySize: b = "small",
                 omitPageTitle: f = !1,
                 children: v
             } = e, {
                 open: k,
                 dialog: N
-            } = (0, g.useStudio)(), {
+            } = (0, h.useStudio)(), {
                 translate: C
-            } = (0, i.useTranslation)(), T = (0, a.useCallback)(() => {
+            } = (0, o.useTranslation)(), T = (0, a.useCallback)(() => {
                 k({
-                    task: y.EStudioTaskType.Default
+                    task: g.EStudioTaskType.Default
                 })
-            }, [k]), I = a.default.isValidElement(o) && o.type === i.Translate, P = "string" == typeof o ? (0, t.jsx)("h1", {
+            }, [k]), I = a.default.isValidElement(i) && i.type === o.Translate, P = "string" == typeof i ? (0, t.jsx)("h1", {
                 className: "text-heading-large margin-none",
-                children: C(o)
+                children: C(i)
             }) : I ? (0, t.jsx)("h1", {
                 className: "text-heading-large margin-none",
-                children: o
-            }) : null != o ? o : null;
+                children: i
+            }) : null != i ? i : null;
             return (0, t.jsxs)(r.CreatorHubLayout, {
-                children: [(0, t.jsx)(ed, {}), N, (0, t.jsx)(r.CreatorHubLayout.Rail, {
+                children: [(0, t.jsx)(eu, {}), N, (0, t.jsx)(r.CreatorHubLayout.Rail, {
                     openStudio: T,
                     secondarySize: b,
                     children: l
                 }), (0, t.jsx)(r.CreatorHubLayout.Header, {
-                    children: h ? (0, t.jsx)(ec, {
+                    children: d ? (0, t.jsx)(ed, {
                         inLayoutHeader: !0
-                    }) : (0, t.jsxs)(m.Grid, {
+                    }) : (0, t.jsxs)(y.Grid, {
                         container: !0,
                         alignItems: "center",
                         gap: "8px",
-                        children: [P, s && (0, t.jsx)(p.Typography, {
-                            children: (0, t.jsx)(u.Label, {
+                        children: [P, s && (0, t.jsx)(m.Typography, {
+                            children: (0, t.jsx)(p.Label, {
                                 labelText: C("Label.Beta")
                             })
                         })]
                     })
                 }), (0, t.jsx)(r.CreatorHubLayout.PageContent, {
-                    id: eu,
+                    id: ep,
                     banner: c,
-                    additionalLinks: (0, t.jsx)(ep, {
+                    additionalLinks: (0, t.jsx)(em, {
                         inline: !0
                     }),
                     children: (0, t.jsxs)("div", {
                         className: "width-full height-full",
-                        children: [h && (null != (n = !f && P) ? n : s) && (0, t.jsxs)("div", {
+                        children: [d && (null != (n = !f && P) ? n : s) && (0, t.jsxs)("div", {
                             className: "flex items-center gap-small padding-bottom-large",
-                            children: [!f && P, s && (0, t.jsx)(p.Typography, {
-                                children: (0, t.jsx)(u.Label, {
+                            children: [!f && P, s && (0, t.jsx)(m.Typography, {
+                                children: (0, t.jsx)(p.Label, {
                                     labelText: C("Label.Beta")
                                 })
                             })]
-                        }), v, (0, t.jsx)(d.CookieConsentBanner, {})]
+                        }), v, (0, t.jsx)(u.CookieConsentBanner, {})]
                     })
                 })]
             })
-        }, [...r.REQUIRED_TRANSLATION_NAMESPACES, h.TranslationNamespace.RightsPortal, h.TranslationNamespace.DeveloperProducts, h.TranslationNamespace.Passes, h.TranslationNamespace.Creations, h.TranslationNamespace.PageTitles, h.TranslationNamespace.Features, h.TranslationNamespace.Privacy, h.TranslationNamespace.Error, h.TranslationNamespace.Analytics, h.TranslationNamespace.TalentHubV2, h.TranslationNamespace.Licenses, h.TranslationNamespace.PlayerFeedback, h.TranslationNamespace.RevenueShareAgreements, h.TranslationNamespace.TaxDocumentation]);
-    e.s(["SCROLL_CONTAINER_ID", 0, eu, "default", 0, em], 966501);
-    let ey = {
+        }, [...r.REQUIRED_TRANSLATION_NAMESPACES, b.TranslationNamespace.RightsPortal, b.TranslationNamespace.DeveloperProducts, b.TranslationNamespace.Passes, b.TranslationNamespace.Creations, b.TranslationNamespace.PageTitles, b.TranslationNamespace.Features, b.TranslationNamespace.Privacy, b.TranslationNamespace.Error, b.TranslationNamespace.Analytics, b.TranslationNamespace.TalentHubV2, b.TranslationNamespace.Licenses, b.TranslationNamespace.PlayerFeedback, b.TranslationNamespace.RevenueShareAgreements, b.TranslationNamespace.TaxDocumentation]);
+    e.s(["SCROLL_CONTAINER_ID", 0, ep, "default", 0, ey], 966501);
+    let eg = {
         enabled: !0,
         isFetched: !0
     };
     e.s(["default", 0, e => {
         let {
-            product: c,
-            children: d,
-            beta: u,
-            title: p,
-            secondarySize: m = "large",
-            secondaryRail: y,
-            pageBanner: g,
-            omitPageTitle: h,
-            analyticsAssistantChatHref: b,
-            analyticsAssistantChatUniverseId: f,
-            ...v
+            product: d,
+            children: u,
+            beta: p,
+            title: m,
+            secondarySize: y = "large",
+            secondaryRail: g,
+            pageBanner: h,
+            omitPageTitle: b,
+            analyticsAssistantChatHref: f,
+            analyticsAssistantChatUniverseId: v,
+            ...k
         } = e, {
-            noBreadCrumbs: k,
-            leftNavigationContents: N
-        } = v, {
-            settings: C
-        } = (0, l.useSettings)(), {
-            translate: T
-        } = (0, i.useTranslation)(), I = "string" == typeof p ? T(p) : a.default.isValidElement(p) && p.type === i.Translate ? T(p.props.translationKey, p.props.args) : void 0;
-        return (0, t.jsxs)(o.NoSSR, {
-            children: [k && I && (0, t.jsx)(n.HubMeta, {
-                title: I
+            noBreadCrumbs: N,
+            leftNavigationContents: C
+        } = k, {
+            value: T
+        } = (0, i.useFlag)(l.enableGroupModerationPage), {
+            translate: I
+        } = (0, o.useTranslation)(), P = "string" == typeof m ? I(m) : a.default.isValidElement(m) && m.type === o.Translate ? I(m.props.translationKey, m.props.args) : void 0;
+        return (0, t.jsxs)(s.NoSSR, {
+            children: [N && P && (0, t.jsx)(n.HubMeta, {
+                title: P
             }), (0, t.jsx)(r.NavigationConfigsProvider, {
-                currentProduct: null != c ? c : "CreatorDashboard",
-                environment: (0, s.default)(),
+                currentProduct: null != d ? d : "CreatorDashboard",
+                environment: (0, c.default)(),
                 robloxEnvironment: "production",
                 target: "global",
                 drawerVariant: "belowAppBar",
-                signalRCrossTab: ey,
-                enableGroupModeration: C.enableGroupModerationPage,
-                analyticsAssistantChatHref: b,
-                analyticsAssistantChatUniverseId: f,
-                children: (0, t.jsx)(em, {
-                    beta: u,
-                    title: p,
-                    secondaryRail: null != y ? y : N,
-                    pageBanner: g,
-                    useBreadcrumbs: !k,
-                    secondarySize: m,
-                    omitPageTitle: h,
-                    children: d
+                signalRCrossTab: eg,
+                enableGroupModeration: null != T && T,
+                analyticsAssistantChatHref: f,
+                analyticsAssistantChatUniverseId: v,
+                children: (0, t.jsx)(ey, {
+                    beta: p,
+                    title: m,
+                    secondaryRail: null != g ? g : C,
+                    pageBanner: h,
+                    useBreadcrumbs: !N,
+                    secondarySize: y,
+                    omitPageTitle: b,
+                    children: u
                 })
             })]
         })
@@ -3234,7 +3250,7 @@
         D = "Body.GpcDetectedSettingDisabledEligible",
         M = "Body.GpcDetectedSettingEnabledIneligible",
         L = "Body.GpcMissingSettingIneligible",
-        j = (0, w.makeStyles)()(() => ({
+        G = (0, w.makeStyles)()(() => ({
             modalLink: {
                 color: "inherit",
                 textDecoration: "none",
@@ -3256,7 +3272,7 @@
                 verticalAlign: "middle"
             }
         })),
-        B = e => {
+        j = e => {
             var n, r;
             let {
                 gpcState: s,
@@ -3371,7 +3387,7 @@
                 })]
             })
         },
-        G = e => {
+        B = e => {
             let {
                 inline: r = !1
             } = e, {
@@ -3383,7 +3399,7 @@
                 }
             } = E(), {
                 classes: b
-            } = j(), f = (0, a.useCallback)(() => {
+            } = G(), f = (0, a.useCallback)(() => {
                 if ("u" < typeof document) return {};
                 let e = document.cookie.split("; ").find(e => e.startsWith("RBXcb="));
                 if (!e) return {};
@@ -3510,13 +3526,13 @@
             }), M = (0, a.useMemo)(() => c.locale ? (0, I.toRobloxLocale)(c.locale) : "en_us", [c.locale]), L = (0, a.useMemo)(() => {
                 let e = "/my/account#!/privacy/AdPreferences?locale=".concat(M);
                 return "https://www.roblox.com".concat(e)
-            }, [M]), G = (0, a.useCallback)(e => {
+            }, [M]), B = (0, a.useCallback)(e => {
                 e.preventDefault(), y(!0)
             }, []), _ = (0, a.useCallback)(() => {
                 y(!1)
             }, []), z = o("Label.YourPrivacyChoices") || "", U = (0, t.jsx)("button", {
                 type: "button",
-                onClick: G,
+                onClick: B,
                 style: {
                     display: "inline-flex",
                     alignItems: "center",
@@ -3531,7 +3547,7 @@
                     color: "secondary",
                     component: "span",
                     children: [z, (0, t.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/84bfd1b916847bb3f028725bd65308b634cbd5fb/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/4ea788136d868e187df8cd40d75b4aa590316f76/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -3567,7 +3583,7 @@
                                 className: "text-body-medium",
                                 children: o("Description.Loading") || ""
                             })]
-                        }) : (0, t.jsx)(B, {
+                        }) : (0, t.jsx)(j, {
                             gpcState: N,
                             modalData: R,
                             translate: o,
@@ -3585,18 +3601,13 @@
             inline: a = !1
         } = e;
         try {
-            return (0, t.jsx)(G, {
+            return (0, t.jsx)(B, {
                 inline: a
             })
         } catch (e) {
             return console.error("Error rendering PrivacyChoicesFooterLink:", e), null
         }
     }], 174528)
-}, 729904, e => {
-    "use strict";
-    e.s(["default", 0, function() {
-        return "production"
-    }])
 }, 114209, 559227, e => {
     "use strict";
     var t = e.i(221628),
@@ -4487,12 +4498,12 @@
             GoogleAnalytics: !0
         },
         L = (0, a.createContext)(null),
-        j = () => {
+        G = () => {
             let e = (0, a.useContext)(L);
             if (!e) throw Error("useCookieConsentContext must be used within a CookieConsentProvider");
             return e
         },
-        B = e => {
+        j = e => {
             let t, a = Object.entries(e).map(e => {
                 let [t, a] = e;
                 return "".concat(t, "=").concat(a)
@@ -4504,7 +4515,7 @@
             let n = new Date;
             n.setDate(n.getDate() + 180), document.cookie = "".concat(D, "=").concat(a, "; expires=").concat(n.toUTCString(), "; path=/; domain=").concat((t = window.location.hostname.split(".")).length <= 2 ? window.location.hostname : ".".concat(t.slice(1).join(".")))
         },
-        G = e => {
+        B = e => {
             let {
                 cookieName: t,
                 description: n
@@ -4547,7 +4558,7 @@
                 translate: n
             } = (0, t.useTranslation)(), {
                 cookiePolicy: r
-            } = j(), {
+            } = G(), {
                 classes: i
             } = _();
             return r && (null == (e = r.EssentialCookieList) ? void 0 : e.length) ? a.default.createElement(p.Accordion, {
@@ -4556,14 +4567,14 @@
                 className: i.accordionSummary
             }, a.default.createElement(c.Typography, {
                 variant: "h6"
-            }, n(E.EssentialCookie))), a.default.createElement(y.AccordionDetails, null, r.EssentialCookieList.map(e => a.default.createElement(G, {
+            }, n(E.EssentialCookie))), a.default.createElement(y.AccordionDetails, null, r.EssentialCookieList.map(e => a.default.createElement(B, {
                 key: e.cookieName,
                 cookieName: e.cookieName,
                 description: n(e.description)
             })))) : null
         };
     var U = ((S = {}).RBXViralAcquisition = "RBXViralAcquisition", S.RBXSource = "RBXSource", S.GoogleAnalytics = "GoogleAnalytics", S);
-    let O = e => {
+    let F = e => {
             let {
                 title: t,
                 content: n,
@@ -4578,7 +4589,7 @@
                 color: "secondary"
             }, n))
         },
-        F = () => {
+        O = () => {
             let {
                 translate: e
             } = (0, t.useTranslation)(), n = e(E.GAReadMore);
@@ -4652,11 +4663,11 @@
                 },
                 "aria-label": o(E.AnalyticsCookie),
                 size: "small"
-            })), a.default.createElement(y.AccordionDetails, null, a.default.createElement(G, {
+            })), a.default.createElement(y.AccordionDetails, null, a.default.createElement(B, {
                 key: U.RBXViralAcquisition,
                 cookieName: U.RBXViralAcquisition,
                 description: o(E.RBXViralAcquisitionDescription)
-            }), a.default.createElement(G, {
+            }), a.default.createElement(B, {
                 key: U.RBXSource,
                 cookieName: U.RBXSource,
                 description: o(E.RBXSourceDescription)
@@ -4666,17 +4677,17 @@
             }), a.default.createElement(c.Typography, {
                 variant: "body2",
                 paragraph: !0
-            }, o(E.OwnedBy), " ", "Google Inc."), a.default.createElement(O, {
+            }, o(E.OwnedBy), " ", "Google Inc."), a.default.createElement(F, {
                 title: o(E.GoogleAnalyticsPurposeHeader),
                 content: o(E.GoogleAnalyticsPurposeDescription)
             }), a.default.createElement(c.Typography, {
                 variant: "body2"
-            }, o(E.CompanyCollectionHeader)), A.map(e => a.default.createElement(O, {
+            }, o(E.CompanyCollectionHeader)), A.map(e => a.default.createElement(F, {
                 key: e.label,
                 title: o(e.label),
                 content: o(e.content),
                 secondary: !0
-            })), a.default.createElement(F, null)))
+            })), a.default.createElement(O, null)))
         },
         X = (0, n.makeStyles)()(e => ({
             accordionSummary: {
@@ -4754,7 +4765,7 @@
                 classes: p
             } = X(), {
                 cookiePolicy: m
-            } = j();
+            } = G();
             return m ? a.default.createElement(v.Dialog, {
                 open: r,
                 onClose: i
@@ -4816,7 +4827,7 @@
                 acceptAll: o,
                 declineAll: s,
                 hasAcceptedAnalyticsCookie: l
-            } = j(), [c, d] = (0, a.useState)(l), u = (0, a.useCallback)(() => {
+            } = G(), [c, d] = (0, a.useState)(l), u = (0, a.useCallback)(() => {
                 c ? o() : s(), r()
             }, [o, s, c, r]);
             return i ? a.default.createElement(W, {
@@ -4832,7 +4843,7 @@
                 acceptAll: e,
                 declineAll: t,
                 shouldShowBanner: n
-            } = j(), [r, i] = (0, a.useState)(!1), [o, s] = (0, a.useState)(!1);
+            } = G(), [r, i] = (0, a.useState)(!1), [o, s] = (0, a.useState)(!1);
             (0, a.useEffect)(() => {
                 n && s(!0)
             }, [n]);
@@ -4900,7 +4911,7 @@
                         ...a,
                         [e]: t
                     };
-                    return B(n), n
+                    return j(n), n
                 })
             }, []),
             b = (0, a.useCallback)(() => {
@@ -4909,7 +4920,7 @@
                     ...e,
                     [t]: !0
                 }), M);
-                B(e), d(e)
+                j(e), d(e)
             }, [s]),
             f = (0, a.useCallback)(() => {
                 if (!s) return;
@@ -4917,7 +4928,7 @@
                     ...e,
                     [t]: !1
                 }), M);
-                B(e), d(e)
+                j(e), d(e)
             }, [s]),
             v = (0, a.useMemo)(() => Object.values(c).some(e => !0 === e), [c]),
             k = (0, a.useMemo)(() => ({
@@ -4934,8 +4945,8 @@
         return a.default.createElement(L.Provider, {
             value: k
         }, t)
-    }, "useCookieConsentContext", 0, j], 260241)
+    }, "useCookieConsentContext", 0, G], 260241)
 }]);
 
-//# debugId=87f634e0-5aaf-e7ad-5612-744dbbf291a4
-//# sourceMappingURL=3uwadzcetirav.js.map
+//# debugId=576d921e-501c-4975-1e59-d8829df376c5
+//# sourceMappingURL=171-2vtzcrkzf.js.map

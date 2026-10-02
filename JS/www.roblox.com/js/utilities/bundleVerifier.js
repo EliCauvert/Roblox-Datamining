@@ -145,8 +145,13 @@ Roblox.BundleDetector = (function() {
                 "&cdnName=" + (cdnProvider || "unknown") +
                 "&statusCode=" + (status || "unknown") +
                 "&loadDuration=" + Math.floor(duration);
-            var img = new Image();
-            img.src = esUrl + params;
+
+            var url = esUrl + params;
+            fetch(url, {
+                mode: 'cors',
+                credentials: 'include',
+                keepalive: true
+            }).catch(function() {});
         },
 
         getCdnInfo: function(failedBundle, ctx, fileType) {

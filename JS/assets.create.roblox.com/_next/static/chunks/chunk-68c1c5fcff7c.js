@@ -3,10 +3,26 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "0fa2f16f-a398-01fa-839a-6646e601537a")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "d51bd7f6-b156-7113-572a-989b2395c370")
     } catch (e) {}
 }();
-(globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 533968, e => {
+(globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 665869, 729904, e => {
+    "use strict";
+    var t = e.i(157700);
+    let a = (0, t.defineFlag)({
+            namespace: "groups",
+            name: "enableGroupGameEarlyTesters",
+            defaultValue: !1
+        }),
+        o = (0, t.defineFlag)({
+            namespace: "groups",
+            name: "enableGroupModerationPage",
+            defaultValue: !1
+        });
+    e.s(["enableGroupGameEarlyTesters", 0, a, "enableGroupModerationPage", 0, o], 665869), e.s(["default", 0, function() {
+        return "production"
+    }], 729904)
+}, 533968, e => {
     "use strict";
     var t = e.i(185915);
     e.s(["getResponseFromError", () => t.default])
@@ -227,11 +243,6 @@
         }, {})
     }, "readQueryValue", 0, function(e) {
         if (null != e) return Array.isArray(e) ? e.at(0) : e
-    }])
-}, 729904, e => {
-    "use strict";
-    e.s(["default", 0, function() {
-        return "production"
     }])
 }, 114209, 559227, e => {
     "use strict";
@@ -1225,7 +1236,7 @@
                 color: "inherit"
             }, e(T.GoogleAnalytics)), r)
         },
-        U = (0, o.makeStyles)()(() => ({
+        F = (0, o.makeStyles)()(() => ({
             button: {
                 paddingLeft: 5,
                 ["&.".concat(f.buttonClasses.root)]: {
@@ -1242,13 +1253,13 @@
                 }
             }
         })),
-        F = e => {
+        U = e => {
             let {
                 href: t,
                 text: o
             } = e, {
                 classes: n
-            } = U();
+            } = F();
             return a.default.createElement("div", null, a.default.createElement(u.Button, {
                 className: n.button,
                 variant: "text",
@@ -1292,7 +1303,7 @@
                 key: z.RBXSource,
                 cookieName: z.RBXSource,
                 description: l(T.RBXSourceDescription)
-            }), a.default.createElement(F, {
+            }), a.default.createElement(U, {
                 href: "https://marketingplatform.google.com/about/analytics/",
                 text: l(T.GoogleAnalytics)
             }), a.default.createElement(s.Typography, {
@@ -1413,10 +1424,10 @@
                 paragraph: !0,
                 className: p.paragraph,
                 color: "secondary"
-            }, d(T.InfoPartnerCollectionContent)), a.default.createElement(F, {
+            }, d(T.InfoPartnerCollectionContent)), a.default.createElement(U, {
                 href: "https://www.roblox.com/support",
                 text: d(T.RequestData)
-            }), a.default.createElement(F, {
+            }), a.default.createElement(U, {
                 href: E,
                 text: d(T.PrivacyPolicy)
             }), a.default.createElement("div", {
@@ -1569,5 +1580,5 @@
     }, "useCookieConsentContext", 0, L], 260241)
 }]);
 
-//# debugId=0fa2f16f-a398-01fa-839a-6646e601537a
-//# sourceMappingURL=39jmij04jsp9v.js.map
+//# debugId=d51bd7f6-b156-7113-572a-989b2395c370
+//# sourceMappingURL=22b30cb3ubz1l.js.map

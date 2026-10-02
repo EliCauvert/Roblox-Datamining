@@ -53124,7 +53124,7 @@
             }
             var f_, v_, m_ = function(e) {
                     return e.slate ? {
-                        slate: JSON.stringify(e.slate)
+                        slate: "string" == typeof e.slate ? e.slate : JSON.stringify(e.slate)
                     } : {
                         content: e.plainText || ""
                     }
@@ -53520,22 +53520,24 @@
                         }))
                     }))
                 },
-                j_ = function(e, t, n, r, o) {
+                j_ = function(e, t, n, r, o, i) {
                     return w_(void 0, void 0, Promise, (function() {
-                        var i, a, u;
-                        return E_(this, (function(s) {
-                            switch (s.label) {
+                        var a, u, s;
+                        return E_(this, (function(l) {
+                            switch (l.label) {
                                 case 0:
-                                    i = {
+                                    a = {
                                         url: eG.urls.forumCommentEndpoint(e, t, n, r),
                                         withCredentials: !0
-                                    }, a = m_(o), s.label = 1;
+                                    }, u = b_(b_({}, m_(o)), i && {
+                                        mediaAssetIds: i
+                                    }), l.label = 1;
                                 case 1:
-                                    return s.trys.push([1, 3, , 4]), [4, _j.httpService.patch(i, a)];
+                                    return l.trys.push([1, 3, , 4]), [4, _j.httpService.patch(a, u)];
                                 case 2:
-                                    return [2, s.sent().data];
+                                    return [2, l.sent().data];
                                 case 3:
-                                    throw u = s.sent(), D_(u);
+                                    throw s = l.sent(), D_(s);
                                 case 4:
                                     return [2]
                             }
@@ -71877,6 +71879,9 @@
                     })
                 },
                 K5 = function(e) {
+                    return !(e.target instanceof Node && e.currentTarget.contains(e.target))
+                },
+                Q5 = function(e) {
                     var t = e.onLongPress,
                         n = (0, r.useRef)(null),
                         o = (0, r.useRef)(!1),
@@ -71885,18 +71890,18 @@
                             n.current && (clearTimeout(n.current), n.current = null)
                         }), []),
                         u = (0, r.useCallback)((function(e) {
-                            i.current = "touch" === e.pointerType, "touch" === e.pointerType && (e.preventDefault(), e.stopPropagation(), o.current = !1, n.current = setTimeout((function() {
+                            K5(e) || (i.current = "touch" === e.pointerType, "touch" === e.pointerType && (e.preventDefault(), e.stopPropagation(), o.current = !1, n.current = setTimeout((function() {
                                 o.current = !0, t()
-                            }), 500))
+                            }), 500)))
                         }), [t]),
                         s = (0, r.useCallback)((function(e) {
-                            "touch" === e.pointerType && (e.preventDefault(), e.stopPropagation(), a())
+                            "touch" !== e.pointerType || K5(e) || (e.preventDefault(), e.stopPropagation(), a())
                         }), [a]),
                         l = (0, r.useCallback)((function() {
                             return !!o.current && (o.current = !1, !0)
                         }), []),
                         c = (0, r.useCallback)((function(e) {
-                            i.current && e.preventDefault()
+                            i.current && !K5(e) && e.preventDefault()
                         }), []);
                     return {
                         onPointerDown: u,
@@ -71906,7 +71911,7 @@
                         consumeLongPressClick: l
                     }
                 },
-                Q5 = {
+                Y5 = {
                     "&amp;": "&",
                     "&lt;": "<",
                     "&gt;": ">",
@@ -71917,12 +71922,12 @@
                     "&nbsp;": " "
                 };
 
-            function Y5(e) {
+            function $5(e) {
                 return e.split(/<em>|<\/em>/).map((function(e, t) {
                     var n = function(e) {
                         return e.replace(/&(?:amp|lt|gt|quot|nbsp|#39|#x27|#x2F);/g, (function(e) {
                             var t;
-                            return null !== (t = Q5[e]) && void 0 !== t ? t : e
+                            return null !== (t = Y5[e]) && void 0 !== t ? t : e
                         }))
                     }(e);
                     return t % 2 == 1 ? o().createElement("mark", {
@@ -71933,14 +71938,14 @@
                     }, n)
                 }))
             }
-            var $5 = function() {
-                    return $5 = Object.assign || function(e) {
+            var J5 = function() {
+                    return J5 = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, $5.apply(this, arguments)
+                    }, J5.apply(this, arguments)
                 },
-                J5 = function(e, t) {
+                X5 = function(e, t) {
                     var n = {};
                     for (var r in e) Object.prototype.hasOwnProperty.call(e, r) && t.indexOf(r) < 0 && (n[r] = e[r]);
                     if (null != e && "function" == typeof Object.getOwnPropertySymbols) {
@@ -71949,34 +71954,102 @@
                     }
                     return n
                 },
-                X5 = (0, r.forwardRef)((function(e, t) {
+                Z5 = (0, r.forwardRef)((function(e, t) {
                     var n = e.href,
                         r = e.blockedSelector,
                         i = e.onNavigate,
                         a = e.onModifiedClick,
                         u = e.children,
-                        s = J5(e, ["href", "blockedSelector", "onNavigate", "onModifiedClick", "children"]);
-                    return o().createElement("a", $5({
+                        s = X5(e, ["href", "blockedSelector", "onNavigate", "onModifiedClick", "children"]);
+                    return o().createElement("a", J5({
                         ref: t,
                         href: n,
                         onClick: function(e) {
-                            e.target instanceof Element && e.target.closest(r) ? e.target.closest("a[href]") === e.currentTarget && e.preventDefault() : e.metaKey || e.ctrlKey || e.shiftKey || e.altKey ? null == a || a() : i && (e.preventDefault(), i())
+                            K5(e) || (e.target instanceof Element && e.target.closest(r) ? e.target.closest("a[href]") === e.currentTarget && e.preventDefault() : e.metaKey || e.ctrlKey || e.shiftKey || e.altKey ? null == a || a() : i && (e.preventDefault(), i()))
                         }
                     }, s), u)
                 }));
-            X5.displayName = "ContentPreviewCard", X5.defaultProps = {
+            Z5.displayName = "ContentPreviewCard", Z5.defaultProps = {
                 onNavigate: void 0,
                 onModifiedClick: void 0
             };
-            var Z5 = X5,
-                e6 = function() {
-                    return e6 = Object.assign || function(e) {
+            var e6 = Z5,
+                t6 = function(e) {
+                    var t = e.assetId,
+                        n = e.onClose,
+                        i = (0, u.useTranslation)().translate,
+                        a = (0, r.useCallback)((function(e) {
+                            e || n()
+                        }), [n]);
+                    return o().createElement(eh, {
+                        open: !0,
+                        onOpenChange: a,
+                        size: "Large",
+                        type: "Default",
+                        isModal: !0,
+                        hasCloseAffordance: !0,
+                        closeLabel: i("Action.Close")
+                    }, o().createElement(th, {
+                        className: "image-viewer-dialog"
+                    }, o().createElement(oh, {
+                        hidden: !0
+                    }, i("Label.Image")), o().createElement("div", {
+                        className: "image-viewer-dialog-frame"
+                    }, o().createElement(EA.Thumbnail2d, {
+                        containerClass: "image-viewer-dialog-thumbnail",
+                        targetId: t,
+                        size: EA.ThumbnailAssetsSize.size700,
+                        format: EA.ThumbnailFormat.png,
+                        type: EA.ThumbnailTypes.assetThumbnail
+                    }))))
+                };
+            t6.displayName = "ImageViewerDialog";
+            var n6 = t6,
+                r6 = "forum-media-attachment",
+                o6 = function(e) {
+                    var t = e.attachments,
+                        n = (0, u.useTranslation)().translate,
+                        i = (0, r.useState)(null),
+                        a = i[0],
+                        s = i[1],
+                        l = (0, r.useCallback)((function() {
+                            return s(null)
+                        }), []);
+                    return t && 0 !== t.length ? o().createElement(o().Fragment, null, o().createElement("div", {
+                        className: "forum-media-attachments",
+                        "data-testid": "forum-media-attachments"
+                    }, t.map((function(e, t) {
+                        var r = e.assetId;
+                        return o().createElement("button", {
+                            key: r,
+                            type: "button",
+                            className: r6,
+                            "data-testid": "forum-media-attachment-".concat(r),
+                            "aria-label": "".concat(n("Label.Image"), " ").concat(t + 1),
+                            onClick: function(e) {
+                                e.currentTarget.querySelector(".thumbnail-2d-container:not([class*='icon-']) img:not(.loading)") && s(r)
+                            }
+                        }, o().createElement(EA.Thumbnail2d, {
+                            containerClass: "forum-media-attachment-thumbnail",
+                            targetId: r,
+                            size: EA.ThumbnailAssetsSize.size420,
+                            type: EA.ThumbnailTypes.assetThumbnail
+                        }))
+                    }))), null !== a && o().createElement(n6, {
+                        assetId: a,
+                        onClose: l
+                    })) : null
+                };
+            o6.displayName = "ForumMediaAttachments";
+            var i6 = o6,
+                a6 = function() {
+                    return a6 = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, e6.apply(this, arguments)
+                    }, a6.apply(this, arguments)
                 },
-                t6 = function(e, t) {
+                u6 = function(e, t) {
                     var n = {};
                     for (var r in e) Object.prototype.hasOwnProperty.call(e, r) && t.indexOf(r) < 0 && (n[r] = e[r]);
                     if (null != e && "function" == typeof Object.getOwnPropertySymbols) {
@@ -71985,10 +72058,10 @@
                     }
                     return n
                 },
-                n6 = "group-posts-preview-menu",
-                r6 = function() {},
-                o6 = [".".concat(n6), ".".concat(I$), ".".concat(QY), ".".concat(T$), ".".concat("post-preview-inline-reactions"), ".".concat("post-preview-inline-reactions-mobile-overlay"), ".".concat(c$)].join(", "),
-                i6 = (0, u.withTranslations)((function(e) {
+                s6 = "group-posts-preview-menu",
+                l6 = function() {},
+                c6 = [".".concat(s6), ".".concat(I$), ".".concat(QY), ".".concat(T$), ".".concat("post-preview-inline-reactions"), ".".concat("post-preview-inline-reactions-mobile-overlay"), ".".concat(c$), ".".concat(r6)].join(", "),
+                d6 = (0, u.withTranslations)((function(e) {
                     var t = e.post,
                         n = e.onHighlightComplete,
                         i = e.hasMenu,
@@ -72002,10 +72075,10 @@
                         f = e.showCategoryName,
                         v = e.showPinned,
                         m = e.refetchPosts,
-                        h = void 0 === m ? r6 : m,
+                        h = void 0 === m ? l6 : m,
                         g = e.onMenuOpened,
                         y = e.togglePostNotifications,
-                        b = void 0 === y ? r6 : y,
+                        b = void 0 === y ? l6 : y,
                         w = e.highlightedTitle,
                         E = e.highlightedBody,
                         I = e.isConcealedAndShown,
@@ -72036,13 +72109,13 @@
                         j = (0, r.useState)(!1),
                         G = j[0],
                         U = j[1],
-                        L = K5({
+                        L = Q5({
                             onLongPress: function() {
                                 T && U(!0)
                             }
                         }),
                         q = L.consumeLongPressClick,
-                        z = t6(L, ["consumeLongPressClick"]),
+                        z = u6(L, ["consumeLongPressClick"]),
                         _ = (0, r.useRef)(null),
                         V = (0, r.useRef)(!1);
                     if ((0, r.useEffect)((function() {
@@ -72078,9 +72151,10 @@
                         ne = Z.groupRoleName,
                         re = Q.content,
                         oe = Q.reactions,
-                        ie = oe.length > 0,
-                        ae = Y || v && $ || J,
-                        ue = function() {
+                        ie = Q.mediaAttachments,
+                        ae = oe.length > 0,
+                        ue = Y || v && $ || J,
+                        se = function() {
                             return o().createElement("div", {
                                 className: "group-posts-preview-meta-data-replies text-default flex-shrink-0"
                             }, o().createElement("span", {
@@ -72090,9 +72164,9 @@
                                 value: B
                             }), " ", C(1 === B ? "Label.Reply" : "Label.Replies"))
                         },
-                        se = M$(X, t.groupId, c, t.shortId, t.createdBy),
-                        le = !!f && !!l;
-                    return o().createElement(Z5, e6({
+                        le = M$(X, t.groupId, c, t.shortId, t.createdBy),
+                        ce = !!f && !!l;
+                    return o().createElement(e6, a6({
                         ref: _,
                         className: qj()("group-posts-preview", I && "group-forums-post-preview-concealed-shown"),
                         "data-id": t.shortId,
@@ -72104,7 +72178,7 @@
                             q() && (e.preventDefault(), e.stopPropagation())
                         }
                     }, T ? z : {}, {
-                        blockedSelector: o6,
+                        blockedSelector: c6,
                         onNavigate: s ? function() {
                             S(document.documentElement.scrollTop), OV({
                                 groupId: t.groupId,
@@ -72124,9 +72198,9 @@
                         userDisplayName: ee,
                         hasVerifiedBadge: te,
                         groupRoleName: null != ne ? ne : C("Label.FormerMember"),
-                        metaTrailing: se || le ? o().createElement(o().Fragment, null, se, le && o().createElement(o().Fragment, null, se && " • ", o().createElement("span", null, l))) : void 0
+                        metaTrailing: le || ce ? o().createElement(o().Fragment, null, le, ce && o().createElement(o().Fragment, null, le && " • ", o().createElement("span", null, l))) : void 0
                     }), a && o().createElement("div", {
-                        className: n6
+                        className: s6
                     }, o().createElement(D$, {
                         post: t,
                         onRefetchPosts: h,
@@ -72145,7 +72219,7 @@
                         className: "group-posts-preview-content"
                     }, o().createElement("div", {
                         className: "group-posts-preview-title-container"
-                    }, ae && o().createElement("div", {
+                    }, ue && o().createElement("div", {
                         className: "group-posts-preview-statuses"
                     }, Y && o().createElement("div", {
                         className: "group-posts-preview-unread-status"
@@ -72155,11 +72229,13 @@
                         className: "group-posts-preview-locked-status-icon"
                     })), o().createElement("h2", {
                         className: "group-posts-preview-title text-emphasis text-overflow"
-                    }, w ? Y5(w) : W)), o().createElement("div", {
+                    }, w ? $5(w) : W)), o().createElement("div", {
                         className: qj()("group-posts-preview-content-comment", "richtext-base", Y ? "font-bold text-emphasis" : "text-default")
-                    }, E ? Y5(E) : o().createElement(W5, {
+                    }, E ? $5(E) : o().createElement(W5, {
                         content: re
-                    })), F ? T ? o().createElement("div", {
+                    })), o().createElement(i6, {
+                        attachments: ie
+                    }), F ? T ? o().createElement("div", {
                         className: "group-posts-preview-meta-data"
                     }, o().createElement(d$, {
                         post: t,
@@ -72168,22 +72244,22 @@
                         onOpenRequestHandled: function() {
                             return U(!1)
                         }
-                    }), ue()) : o().createElement("div", {
+                    }), se()) : o().createElement("div", {
                         className: "group-posts-preview-meta-data"
-                    }, ie && o().createElement(o().Fragment, null, o().createElement("div", {
+                    }, ae && o().createElement(o().Fragment, null, o().createElement("div", {
                         className: "group-forums-post-preview-meta-data-reactions text-default"
                     }, o().createElement(ZY, {
                         reactions: oe
                     })), o().createElement("div", {
                         className: "group-posts-preview-meta-data-separator"
-                    }, " • ")), ue()) : o().createElement("div", {
+                    }, " • ")), se()) : o().createElement("div", {
                         className: "group-posts-preview-meta-data"
                     })), n && o().createElement(H5, {
                         onComplete: n,
                         enableScrollIntoView: !1
                     }))
                 }), Gj),
-                a6 = function(e, t, n, r) {
+                p6 = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -72210,7 +72286,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                u6 = function(e, t) {
+                f6 = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -72282,10 +72358,10 @@
                         }
                     }
                 },
-                s6 = function() {
+                v6 = function() {
                     return null
                 },
-                l6 = function(e) {
+                m6 = function(e) {
                     var t = e.translate,
                         n = e.groupId,
                         r = (0, s.useSystemFeedback)(),
@@ -72293,8 +72369,8 @@
                         a = r.SystemFeedbackComponent,
                         u = (0, l.useQuery)({
                             queryFn: function() {
-                                return a6(void 0, void 0, void 0, (function() {
-                                    return u6(this, (function(e) {
+                                return p6(void 0, void 0, void 0, (function() {
+                                    return f6(this, (function(e) {
                                         switch (e.label) {
                                             case 0:
                                                 return [4, $_(n, 5)];
@@ -72315,8 +72391,8 @@
                         p = (0, l.useQuery)({
                             queryKey: YH(n),
                             queryFn: function() {
-                                return a6(void 0, void 0, void 0, (function() {
-                                    return u6(this, (function(e) {
+                                return p6(void 0, void 0, void 0, (function() {
+                                    return f6(this, (function(e) {
                                         switch (e.label) {
                                             case 0:
                                                 return [4, C_(n, !1)];
@@ -72353,7 +72429,7 @@
                         className: "group-forums-post-list-content"
                     }, d.map((function(e) {
                         var t, n;
-                        return o().createElement(i6, {
+                        return o().createElement(d6, {
                             hasMenu: !1,
                             hasRouter: !1,
                             showPinned: !1,
@@ -72361,22 +72437,22 @@
                             post: e,
                             categoryName: (null === (t = m.get(e.categoryId)) || void 0 === t ? void 0 : t.name) || "",
                             categoryShortId: (null === (n = m.get(e.categoryId)) || void 0 === n ? void 0 : n.shortId) || "",
-                            refetchPosts: s6,
-                            togglePostNotifications: s6
+                            refetchPosts: v6,
+                            togglePostNotifications: v6
                         })
                     })))), o().createElement(a, null))
                 };
-            l6.displayName = "GroupForumUpdates";
-            var c6, d6 = (0, u.withTranslations)(l6, Gj),
-                p6 = new l.QueryClient,
-                f6 = function(e) {
+            m6.displayName = "GroupForumUpdates";
+            var h6, g6 = (0, u.withTranslations)(m6, Gj),
+                y6 = new l.QueryClient,
+                b6 = function(e) {
                     var t = e.groupId,
                         n = e.permissions,
                         r = e.channelsPermissions,
                         i = e.isGroupMember,
                         a = e.isOwner;
                     return e.isEnabled && t ? o().createElement(s.SystemFeedbackProvider, null, o().createElement(l.QueryClientProvider, {
-                        client: p6
+                        client: y6
                     }, o().createElement(UV, {
                         groupId: t
                     }, o().createElement(WK, {
@@ -72391,20 +72467,20 @@
                         channelsPermissions: r,
                         isGroupMember: i,
                         isOwner: a
-                    }, o().createElement(d6, {
+                    }, o().createElement(g6, {
                         groupId: t
                     })))))))))) : null
                 },
-                v6 = e.EnvironmentUrls.groupsApi,
-                m6 = "".concat(v6, "/v1/groups"),
-                h6 = {
+                w6 = e.EnvironmentUrls.groupsApi,
+                E6 = "".concat(w6, "/v1/groups"),
+                I6 = {
                     urls: {
                         getTopicSubscriptionTokenEndpoint: function(e) {
-                            return "".concat(m6, "/").concat(e, "/realtime/token")
+                            return "".concat(E6, "/").concat(e, "/realtime/token")
                         }
                     }
                 },
-                g6 = function(e, t, n, r) {
+                D6 = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -72431,7 +72507,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                y6 = function(e, t) {
+                C6 = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -72505,54 +72581,54 @@
                 };
             ! function(e) {
                 e[e.Group = 1] = "Group", e[e.Forum = 2] = "Forum", e[e.ForumCategory = 3] = "ForumCategory", e[e.ForumCategoryReactions = 4] = "ForumCategoryReactions", e[e.ForumPost = 5] = "ForumPost", e[e.ForumPostReactions = 6] = "ForumPostReactions"
-            }(c6 || (c6 = {}));
-            var b6 = function() {
+            }(h6 || (h6 = {}));
+            var x6 = function() {
                     function e() {}
                     return e.community = function(e) {
                         return {
-                            topicType: c6.Group,
+                            topicType: h6.Group,
                             groupId: e
                         }
                     }, e.forums = function(e) {
                         return {
-                            topicType: c6.Forum,
+                            topicType: h6.Forum,
                             groupId: e
                         }
                     }, e.category = function(e, t) {
                         return {
-                            topicType: c6.ForumCategory,
+                            topicType: h6.ForumCategory,
                             groupId: e,
                             entityId: t
                         }
                     }, e.categoryReactions = function(e, t) {
                         return {
-                            topicType: c6.ForumCategoryReactions,
+                            topicType: h6.ForumCategoryReactions,
                             groupId: e,
                             entityId: t
                         }
                     }, e.post = function(e, t) {
                         return {
-                            topicType: c6.ForumPost,
+                            topicType: h6.ForumPost,
                             groupId: e,
                             entityId: t
                         }
                     }, e.postReactions = function(e, t) {
                         return {
-                            topicType: c6.ForumPostReactions,
+                            topicType: h6.ForumPostReactions,
                             groupId: e,
                             entityId: t
                         }
                     }, e
                 }(),
-                w6 = {
+                A6 = {
                     createTopicSubscriptionToken: function(e) {
-                        return g6(void 0, void 0, Promise, (function() {
+                        return D6(void 0, void 0, Promise, (function() {
                             var t, n;
-                            return y6(this, (function(r) {
+                            return C6(this, (function(r) {
                                 switch (r.label) {
                                     case 0:
                                         return t = {
-                                            url: h6.urls.getTopicSubscriptionTokenEndpoint(e.groupId),
+                                            url: I6.urls.getTopicSubscriptionTokenEndpoint(e.groupId),
                                             withCredentials: !0
                                         }, n = {
                                             topicType: e.topicType,
@@ -72565,12 +72641,12 @@
                         }))
                     }
                 },
-                E6 = w6,
-                I6 = n(4364),
-                D6 = "AnnouncementReactionChanged",
-                C6 = "AnnouncementPollResponded",
-                x6 = e.RealTime.Factory.GetClient(),
-                A6 = function() {
+                S6 = A6,
+                P6 = n(4364),
+                k6 = "AnnouncementReactionChanged",
+                R6 = "AnnouncementPollResponded",
+                O6 = e.RealTime.Factory.GetClient(),
+                F6 = function() {
                     function e(e) {
                         this.subscriptions = new Map, this.dispatch = e
                     }
@@ -72585,23 +72661,23 @@
                             };
                             this.subscriptions.set(t, r), r.subscriptionGeneration += 1;
                             var o = r.subscriptionGeneration;
-                            E6.createTopicSubscriptionToken(e).then((function(e) {
+                            S6.createTopicSubscriptionToken(e).then((function(e) {
                                 var r = n.subscriptions.get(t);
                                 if (r && o === r.subscriptionGeneration) {
                                     if (!e.token) throw new Error("No token received");
-                                    r.token = e.token, r.clearTopicSubscription = x6.SubscribeToTopicNotification(e.token, (function(e) {
+                                    r.token = e.token, r.clearTopicSubscription = O6.SubscribeToTopicNotification(e.token, (function(e) {
                                         var r = n.subscriptions.get(t);
                                         if (null == r ? void 0 : r.channelType) try {
                                             var o = JSON.parse(e);
                                             n.dispatch(r.channelType, o)
                                         } catch (t) {
-                                            I6.error("Failed to deserialize realtime message", t, e)
+                                            P6.error("Failed to deserialize realtime message", t, e)
                                         }
                                     })).unsubscribe
                                 }
                             })).catch((function(e) {
                                 var r = n.subscriptions.get(t);
-                                r && o === r.subscriptionGeneration && I6.error("Failed to get realtime token", e)
+                                r && o === r.subscriptionGeneration && P6.error("Failed to get realtime token", e)
                             }))
                         }
                     }, e.prototype.unsubscribeChannel = function(e) {
@@ -72614,27 +72690,27 @@
                         }
                     }, e
                 }(),
-                S6 = (0, r.createContext)(void 0),
-                P6 = function(e) {
+                T6 = (0, r.createContext)(void 0),
+                N6 = function(e) {
                     switch (e.topicType) {
-                        case c6.Group:
+                        case h6.Group:
                             return "".concat(e.groupId);
-                        case c6.Forum:
+                        case h6.Forum:
                             return "".concat(e.groupId, ":forums");
-                        case c6.ForumCategory:
-                        case c6.ForumCategoryReactions:
-                        case c6.ForumPost:
-                        case c6.ForumPostReactions:
+                        case h6.ForumCategory:
+                        case h6.ForumCategoryReactions:
+                        case h6.ForumPost:
+                        case h6.ForumPostReactions:
                             return "".concat(e.groupId, ":forums:").concat(e.entityId, ":").concat(e.topicType);
                         default:
                             throw new Error("Unknown channel type")
                     }
                 };
 
-            function k6(e, t, n) {
+            function M6(e, t, n) {
                 void 0 === n && (n = 500);
                 var o = function() {
-                        var e = (0, r.useContext)(S6);
+                        var e = (0, r.useContext)(T6);
                         if (!e) throw new Error("useRealtime must be used within a RealtimeProvider");
                         return e
                     }(),
@@ -72661,18 +72737,18 @@
                     }
                 }), [e, i, a, n])
             }
-            var R6 = function(e) {
+            var B6 = function(e) {
                     var t = e.children,
                         n = (0, r.useRef)(new Map),
                         i = (0, r.useRef)(null),
                         a = (0, r.useCallback)((function(e, t) {
-                            var r = P6(e),
+                            var r = N6(e),
                                 o = n.current.get(r);
                             o && Array.from(o).forEach((function(e) {
                                 return e(t)
                             }))
                         }), []);
-                    i.current || (i.current = new A6(a)), (0, r.useEffect)((function() {
+                    i.current || (i.current = new F6(a)), (0, r.useEffect)((function() {
                         var e = n.current,
                             t = i.current;
                         return function() {
@@ -72680,28 +72756,28 @@
                         }
                     }), []);
                     var u = (0, r.useCallback)((function(e, t) {
-                            var r, o = P6(e);
+                            var r, o = N6(e);
                             n.current.has(o) || (null === (r = i.current) || void 0 === r || r.subscribe(e, o), n.current.set(o, new Set));
                             var a = n.current.get(o);
                             a && (a.has(t) || a.add(t))
                         }), [n]),
                         s = (0, r.useCallback)((function(e, t) {
-                            var r, o, a, u = P6(e);
+                            var r, o, a, u = N6(e);
                             null === (r = n.current.get(u)) || void 0 === r || r.delete(t), 0 === (null === (o = n.current.get(u)) || void 0 === o ? void 0 : o.size) && (n.current.delete(u), null === (a = i.current) || void 0 === a || a.unsubscribeChannel(u))
                         }), [n]);
-                    return o().createElement(S6.Provider, {
+                    return o().createElement(T6.Provider, {
                         value: {
                             subscribe: u,
                             unsubscribe: s
                         }
                     }, t)
                 },
-                O6 = function(e) {
+                j6 = function(e) {
                     var t = e.children,
                         n = e.permissions,
                         r = e.groupId,
                         i = e.isOwner;
-                    return o().createElement(s.SystemFeedbackProvider, null, o().createElement(R6, null, o().createElement(l.QueryClientProvider, {
+                    return o().createElement(s.SystemFeedbackProvider, null, o().createElement(B6, null, o().createElement(l.QueryClientProvider, {
                         client: u.queryClient
                     }, o().createElement(UV, {
                         groupId: r
@@ -72716,274 +72792,12 @@
                         hashType: "hashbang"
                     }, t)))))))))
                 },
-                F6 = e.EnvironmentUrls.apiGatewayUrl,
-                T6 = {
+                G6 = e.EnvironmentUrls.apiGatewayUrl,
+                U6 = {
                     blockUser: function(e) {
-                        return "".concat(F6, "/user-blocking-api/v1/users/").concat(e, "/block-user")
+                        return "".concat(G6, "/user-blocking-api/v1/users/").concat(e, "/block-user")
                     }
                 },
-                N6 = function(e, t, n, r) {
-                    return new(n || (n = Promise))((function(o, i) {
-                        function a(e) {
-                            try {
-                                s(r.next(e))
-                            } catch (e) {
-                                i(e)
-                            }
-                        }
-
-                        function u(e) {
-                            try {
-                                s(r.throw(e))
-                            } catch (e) {
-                                i(e)
-                            }
-                        }
-
-                        function s(e) {
-                            var t;
-                            e.done ? o(e.value) : (t = e.value, t instanceof n ? t : new n((function(e) {
-                                e(t)
-                            }))).then(a, u)
-                        }
-                        s((r = r.apply(e, t || [])).next())
-                    }))
-                },
-                M6 = function(e, t) {
-                    var n, r, o, i = {
-                            label: 0,
-                            sent: function() {
-                                if (1 & o[0]) throw o[1];
-                                return o[1]
-                            },
-                            trys: [],
-                            ops: []
-                        },
-                        a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
-                    return a.next = u(0), a.throw = u(1), a.return = u(2), "function" == typeof Symbol && (a[Symbol.iterator] = function() {
-                        return this
-                    }), a;
-
-                    function u(u) {
-                        return function(s) {
-                            return function(u) {
-                                if (n) throw new TypeError("Generator is already executing.");
-                                for (; a && (a = 0, u[0] && (i = 0)), i;) try {
-                                    if (n = 1, r && (o = 2 & u[0] ? r.return : u[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, u[1])).done) return o;
-                                    switch (r = 0, o && (u = [2 & u[0], o.value]), u[0]) {
-                                        case 0:
-                                        case 1:
-                                            o = u;
-                                            break;
-                                        case 4:
-                                            return i.label++, {
-                                                value: u[1],
-                                                done: !1
-                                            };
-                                        case 5:
-                                            i.label++, r = u[1], u = [0];
-                                            continue;
-                                        case 7:
-                                            u = i.ops.pop(), i.trys.pop();
-                                            continue;
-                                        default:
-                                            if (!(o = i.trys, (o = o.length > 0 && o[o.length - 1]) || 6 !== u[0] && 2 !== u[0])) {
-                                                i = 0;
-                                                continue
-                                            }
-                                            if (3 === u[0] && (!o || u[1] > o[0] && u[1] < o[3])) {
-                                                i.label = u[1];
-                                                break
-                                            }
-                                            if (6 === u[0] && i.label < o[1]) {
-                                                i.label = o[1], o = u;
-                                                break
-                                            }
-                                            if (o && i.label < o[2]) {
-                                                i.label = o[2], i.ops.push(u);
-                                                break
-                                            }
-                                            o[2] && i.ops.pop(), i.trys.pop();
-                                            continue
-                                    }
-                                    u = t.call(e, i)
-                                } catch (e) {
-                                    u = [6, e], r = 0
-                                } finally {
-                                    n = o = 0
-                                }
-                                if (5 & u[0]) throw u[1];
-                                return {
-                                    value: u[0] ? u[1] : void 0,
-                                    done: !0
-                                }
-                            }([u, s])
-                        }
-                    }
-                },
-                B6 = function(e) {
-                    return N6(void 0, void 0, Promise, (function() {
-                        var t;
-                        return M6(this, (function(n) {
-                            switch (n.label) {
-                                case 0:
-                                    return t = {
-                                        url: T6.blockUser(e),
-                                        withCredentials: !0
-                                    }, [4, _j.httpService.post(t)];
-                                case 1:
-                                    return [2, n.sent().data]
-                            }
-                        }))
-                    }))
-                },
-                j6 = function(e, t, n, r) {
-                    return new(n || (n = Promise))((function(o, i) {
-                        function a(e) {
-                            try {
-                                s(r.next(e))
-                            } catch (e) {
-                                i(e)
-                            }
-                        }
-
-                        function u(e) {
-                            try {
-                                s(r.throw(e))
-                            } catch (e) {
-                                i(e)
-                            }
-                        }
-
-                        function s(e) {
-                            var t;
-                            e.done ? o(e.value) : (t = e.value, t instanceof n ? t : new n((function(e) {
-                                e(t)
-                            }))).then(a, u)
-                        }
-                        s((r = r.apply(e, t || [])).next())
-                    }))
-                },
-                G6 = function(e, t) {
-                    var n, r, o, i = {
-                            label: 0,
-                            sent: function() {
-                                if (1 & o[0]) throw o[1];
-                                return o[1]
-                            },
-                            trys: [],
-                            ops: []
-                        },
-                        a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
-                    return a.next = u(0), a.throw = u(1), a.return = u(2), "function" == typeof Symbol && (a[Symbol.iterator] = function() {
-                        return this
-                    }), a;
-
-                    function u(u) {
-                        return function(s) {
-                            return function(u) {
-                                if (n) throw new TypeError("Generator is already executing.");
-                                for (; a && (a = 0, u[0] && (i = 0)), i;) try {
-                                    if (n = 1, r && (o = 2 & u[0] ? r.return : u[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, u[1])).done) return o;
-                                    switch (r = 0, o && (u = [2 & u[0], o.value]), u[0]) {
-                                        case 0:
-                                        case 1:
-                                            o = u;
-                                            break;
-                                        case 4:
-                                            return i.label++, {
-                                                value: u[1],
-                                                done: !1
-                                            };
-                                        case 5:
-                                            i.label++, r = u[1], u = [0];
-                                            continue;
-                                        case 7:
-                                            u = i.ops.pop(), i.trys.pop();
-                                            continue;
-                                        default:
-                                            if (!(o = i.trys, (o = o.length > 0 && o[o.length - 1]) || 6 !== u[0] && 2 !== u[0])) {
-                                                i = 0;
-                                                continue
-                                            }
-                                            if (3 === u[0] && (!o || u[1] > o[0] && u[1] < o[3])) {
-                                                i.label = u[1];
-                                                break
-                                            }
-                                            if (6 === u[0] && i.label < o[1]) {
-                                                i.label = o[1], o = u;
-                                                break
-                                            }
-                                            if (o && i.label < o[2]) {
-                                                i.label = o[2], i.ops.push(u);
-                                                break
-                                            }
-                                            o[2] && i.ops.pop(), i.trys.pop();
-                                            continue
-                                    }
-                                    u = t.call(e, i)
-                                } catch (e) {
-                                    u = [6, e], r = 0
-                                } finally {
-                                    n = o = 0
-                                }
-                                if (5 & u[0]) throw u[1];
-                                return {
-                                    value: u[0] ? u[1] : void 0,
-                                    done: !0
-                                }
-                            }([u, s])
-                        }
-                    }
-                },
-                U6 = (0, u.withTranslations)((function(e) {
-                    var t = e.translate,
-                        n = g$(),
-                        i = n.dialogState,
-                        a = n.closeBlockDialog,
-                        u = (0, s.createModal)(),
-                        l = u[0],
-                        c = u[1],
-                        d = MQ.use.blockUser(),
-                        p = (0, s.useSystemFeedback)().systemFeedbackService;
-                    if ((0, r.useEffect)((function() {
-                            i.userId && "block" === i.type ? c.open() : c.close()
-                        }), [c, i.userId, i.type]), !i.userId || "block" !== i.type) return null;
-                    var f = function() {
-                        a()
-                    };
-                    return o().createElement(l, {
-                        footerText: t("Description.BlockUserFooterDialog"),
-                        title: t("Heading.BlockUserWarning"),
-                        onClose: f,
-                        body: t("Description.BlockUserWarning"),
-                        actionButtonShow: !0,
-                        actionButtonText: t("Action.BlockUser"),
-                        onAction: function() {
-                            return j6(void 0, void 0, void 0, (function() {
-                                return G6(this, (function(e) {
-                                    switch (e.label) {
-                                        case 0:
-                                            if (!(null == i ? void 0 : i.userId)) return [3, 5];
-                                            e.label = 1;
-                                        case 1:
-                                            return e.trys.push([1, 3, , 4]), [4, B6(i.userId)];
-                                        case 2:
-                                            return e.sent(), p.success(t("Message.BlockUserSuccess")), d(i.userId), [3, 4];
-                                        case 3:
-                                            return e.sent(), p.warning(t("NetworkError")), [3, 4];
-                                        case 4:
-                                            a(), e.label = 5;
-                                        case 5:
-                                            return [2]
-                                    }
-                                }))
-                            }))
-                        },
-                        neutralButtonText: t("Action.Cancel"),
-                        onNeutral: f
-                    })
-                }), aH),
                 L6 = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
@@ -73083,8 +72897,270 @@
                         }
                     }
                 },
-                z6 = "delete-all-posts-checkbox",
-                _6 = (0, u.withTranslations)((function(e) {
+                z6 = function(e) {
+                    return L6(void 0, void 0, Promise, (function() {
+                        var t;
+                        return q6(this, (function(n) {
+                            switch (n.label) {
+                                case 0:
+                                    return t = {
+                                        url: U6.blockUser(e),
+                                        withCredentials: !0
+                                    }, [4, _j.httpService.post(t)];
+                                case 1:
+                                    return [2, n.sent().data]
+                            }
+                        }))
+                    }))
+                },
+                _6 = function(e, t, n, r) {
+                    return new(n || (n = Promise))((function(o, i) {
+                        function a(e) {
+                            try {
+                                s(r.next(e))
+                            } catch (e) {
+                                i(e)
+                            }
+                        }
+
+                        function u(e) {
+                            try {
+                                s(r.throw(e))
+                            } catch (e) {
+                                i(e)
+                            }
+                        }
+
+                        function s(e) {
+                            var t;
+                            e.done ? o(e.value) : (t = e.value, t instanceof n ? t : new n((function(e) {
+                                e(t)
+                            }))).then(a, u)
+                        }
+                        s((r = r.apply(e, t || [])).next())
+                    }))
+                },
+                V6 = function(e, t) {
+                    var n, r, o, i = {
+                            label: 0,
+                            sent: function() {
+                                if (1 & o[0]) throw o[1];
+                                return o[1]
+                            },
+                            trys: [],
+                            ops: []
+                        },
+                        a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
+                    return a.next = u(0), a.throw = u(1), a.return = u(2), "function" == typeof Symbol && (a[Symbol.iterator] = function() {
+                        return this
+                    }), a;
+
+                    function u(u) {
+                        return function(s) {
+                            return function(u) {
+                                if (n) throw new TypeError("Generator is already executing.");
+                                for (; a && (a = 0, u[0] && (i = 0)), i;) try {
+                                    if (n = 1, r && (o = 2 & u[0] ? r.return : u[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, u[1])).done) return o;
+                                    switch (r = 0, o && (u = [2 & u[0], o.value]), u[0]) {
+                                        case 0:
+                                        case 1:
+                                            o = u;
+                                            break;
+                                        case 4:
+                                            return i.label++, {
+                                                value: u[1],
+                                                done: !1
+                                            };
+                                        case 5:
+                                            i.label++, r = u[1], u = [0];
+                                            continue;
+                                        case 7:
+                                            u = i.ops.pop(), i.trys.pop();
+                                            continue;
+                                        default:
+                                            if (!(o = i.trys, (o = o.length > 0 && o[o.length - 1]) || 6 !== u[0] && 2 !== u[0])) {
+                                                i = 0;
+                                                continue
+                                            }
+                                            if (3 === u[0] && (!o || u[1] > o[0] && u[1] < o[3])) {
+                                                i.label = u[1];
+                                                break
+                                            }
+                                            if (6 === u[0] && i.label < o[1]) {
+                                                i.label = o[1], o = u;
+                                                break
+                                            }
+                                            if (o && i.label < o[2]) {
+                                                i.label = o[2], i.ops.push(u);
+                                                break
+                                            }
+                                            o[2] && i.ops.pop(), i.trys.pop();
+                                            continue
+                                    }
+                                    u = t.call(e, i)
+                                } catch (e) {
+                                    u = [6, e], r = 0
+                                } finally {
+                                    n = o = 0
+                                }
+                                if (5 & u[0]) throw u[1];
+                                return {
+                                    value: u[0] ? u[1] : void 0,
+                                    done: !0
+                                }
+                            }([u, s])
+                        }
+                    }
+                },
+                W6 = (0, u.withTranslations)((function(e) {
+                    var t = e.translate,
+                        n = g$(),
+                        i = n.dialogState,
+                        a = n.closeBlockDialog,
+                        u = (0, s.createModal)(),
+                        l = u[0],
+                        c = u[1],
+                        d = MQ.use.blockUser(),
+                        p = (0, s.useSystemFeedback)().systemFeedbackService;
+                    if ((0, r.useEffect)((function() {
+                            i.userId && "block" === i.type ? c.open() : c.close()
+                        }), [c, i.userId, i.type]), !i.userId || "block" !== i.type) return null;
+                    var f = function() {
+                        a()
+                    };
+                    return o().createElement(l, {
+                        footerText: t("Description.BlockUserFooterDialog"),
+                        title: t("Heading.BlockUserWarning"),
+                        onClose: f,
+                        body: t("Description.BlockUserWarning"),
+                        actionButtonShow: !0,
+                        actionButtonText: t("Action.BlockUser"),
+                        onAction: function() {
+                            return _6(void 0, void 0, void 0, (function() {
+                                return V6(this, (function(e) {
+                                    switch (e.label) {
+                                        case 0:
+                                            if (!(null == i ? void 0 : i.userId)) return [3, 5];
+                                            e.label = 1;
+                                        case 1:
+                                            return e.trys.push([1, 3, , 4]), [4, z6(i.userId)];
+                                        case 2:
+                                            return e.sent(), p.success(t("Message.BlockUserSuccess")), d(i.userId), [3, 4];
+                                        case 3:
+                                            return e.sent(), p.warning(t("NetworkError")), [3, 4];
+                                        case 4:
+                                            a(), e.label = 5;
+                                        case 5:
+                                            return [2]
+                                    }
+                                }))
+                            }))
+                        },
+                        neutralButtonText: t("Action.Cancel"),
+                        onNeutral: f
+                    })
+                }), aH),
+                H6 = function(e, t, n, r) {
+                    return new(n || (n = Promise))((function(o, i) {
+                        function a(e) {
+                            try {
+                                s(r.next(e))
+                            } catch (e) {
+                                i(e)
+                            }
+                        }
+
+                        function u(e) {
+                            try {
+                                s(r.throw(e))
+                            } catch (e) {
+                                i(e)
+                            }
+                        }
+
+                        function s(e) {
+                            var t;
+                            e.done ? o(e.value) : (t = e.value, t instanceof n ? t : new n((function(e) {
+                                e(t)
+                            }))).then(a, u)
+                        }
+                        s((r = r.apply(e, t || [])).next())
+                    }))
+                },
+                K6 = function(e, t) {
+                    var n, r, o, i = {
+                            label: 0,
+                            sent: function() {
+                                if (1 & o[0]) throw o[1];
+                                return o[1]
+                            },
+                            trys: [],
+                            ops: []
+                        },
+                        a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
+                    return a.next = u(0), a.throw = u(1), a.return = u(2), "function" == typeof Symbol && (a[Symbol.iterator] = function() {
+                        return this
+                    }), a;
+
+                    function u(u) {
+                        return function(s) {
+                            return function(u) {
+                                if (n) throw new TypeError("Generator is already executing.");
+                                for (; a && (a = 0, u[0] && (i = 0)), i;) try {
+                                    if (n = 1, r && (o = 2 & u[0] ? r.return : u[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, u[1])).done) return o;
+                                    switch (r = 0, o && (u = [2 & u[0], o.value]), u[0]) {
+                                        case 0:
+                                        case 1:
+                                            o = u;
+                                            break;
+                                        case 4:
+                                            return i.label++, {
+                                                value: u[1],
+                                                done: !1
+                                            };
+                                        case 5:
+                                            i.label++, r = u[1], u = [0];
+                                            continue;
+                                        case 7:
+                                            u = i.ops.pop(), i.trys.pop();
+                                            continue;
+                                        default:
+                                            if (!(o = i.trys, (o = o.length > 0 && o[o.length - 1]) || 6 !== u[0] && 2 !== u[0])) {
+                                                i = 0;
+                                                continue
+                                            }
+                                            if (3 === u[0] && (!o || u[1] > o[0] && u[1] < o[3])) {
+                                                i.label = u[1];
+                                                break
+                                            }
+                                            if (6 === u[0] && i.label < o[1]) {
+                                                i.label = o[1], o = u;
+                                                break
+                                            }
+                                            if (o && i.label < o[2]) {
+                                                i.label = o[2], i.ops.push(u);
+                                                break
+                                            }
+                                            o[2] && i.ops.pop(), i.trys.pop();
+                                            continue
+                                    }
+                                    u = t.call(e, i)
+                                } catch (e) {
+                                    u = [6, e], r = 0
+                                } finally {
+                                    n = o = 0
+                                }
+                                if (5 & u[0]) throw u[1];
+                                return {
+                                    value: u[0] ? u[1] : void 0,
+                                    done: !0
+                                }
+                            }([u, s])
+                        }
+                    }
+                },
+                Q6 = "delete-all-posts-checkbox",
+                Y6 = (0, u.withTranslations)((function(e) {
                     var t = e.translate,
                         n = e.title,
                         i = e.bodyText,
@@ -73109,9 +73185,9 @@
                             marginTop: "16px"
                         }
                     }, o().createElement("label", {
-                        htmlFor: z6
+                        htmlFor: Q6
                     }, o().createElement("input", {
-                        id: z6,
+                        id: Q6,
                         style: {
                             marginRight: "6px"
                         },
@@ -73128,9 +73204,9 @@
                         actionButtonShow: !0,
                         actionButtonText: a,
                         onAction: function() {
-                            return L6(void 0, void 0, void 0, (function() {
+                            return H6(void 0, void 0, void 0, (function() {
                                 var e;
-                                return q6(this, (function(n) {
+                                return K6(this, (function(n) {
                                     switch (n.label) {
                                         case 0:
                                             if (!(null == p ? void 0 : p.userId) || !(null == p ? void 0 : p.groupId)) return [3, 5];
@@ -73170,7 +73246,7 @@
                         onNeutral: c
                     })
                 }), aH),
-                V6 = function(e, t, n, r) {
+                $6 = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -73197,7 +73273,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                W6 = function(e, t) {
+                J6 = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -73269,7 +73345,7 @@
                         }
                     }
                 },
-                H6 = (0, u.withTranslations)((function(e) {
+                X6 = (0, u.withTranslations)((function(e) {
                     var t = e.translate,
                         n = g$(),
                         i = n.dialogState,
@@ -73280,15 +73356,15 @@
                     (0, r.useEffect)((function() {
                         i.userId && i.groupId && "ban" === i.type ? c.open() : c.close()
                     }), [c, i.userId, i.groupId, i.type]);
-                    return o().createElement(_6, {
+                    return o().createElement(Y6, {
                         dialogComponent: l,
                         title: t("Label.Warning"),
                         bodyText: t("Description.BanUserWarning"),
                         successText: t("Message.BanUserSuccess"),
                         actionButtonText: t("Action.Ban"),
                         moderateUserAction: function() {
-                            return V6(void 0, void 0, void 0, (function() {
-                                return W6(this, (function(e) {
+                            return $6(void 0, void 0, void 0, (function() {
+                                return J6(this, (function(e) {
                                     switch (e.label) {
                                         case 0:
                                             return (null == i ? void 0 : i.userId) && (null == i ? void 0 : i.groupId) ? [4, LY(i.groupId, i.userId)] : [3, 2];
@@ -73304,374 +73380,9 @@
                         closeDialog: a
                     })
                 }), aH),
-                K6 = function() {
+                Z6 = function() {
                     return SV().mintEntrypointImpressionId()
                 },
-                Q6 = function(e, t, n, r) {
-                    return new(n || (n = Promise))((function(o, i) {
-                        function a(e) {
-                            try {
-                                s(r.next(e))
-                            } catch (e) {
-                                i(e)
-                            }
-                        }
-
-                        function u(e) {
-                            try {
-                                s(r.throw(e))
-                            } catch (e) {
-                                i(e)
-                            }
-                        }
-
-                        function s(e) {
-                            var t;
-                            e.done ? o(e.value) : (t = e.value, t instanceof n ? t : new n((function(e) {
-                                e(t)
-                            }))).then(a, u)
-                        }
-                        s((r = r.apply(e, t || [])).next())
-                    }))
-                },
-                Y6 = function(e, t) {
-                    var n, r, o, i = {
-                            label: 0,
-                            sent: function() {
-                                if (1 & o[0]) throw o[1];
-                                return o[1]
-                            },
-                            trys: [],
-                            ops: []
-                        },
-                        a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
-                    return a.next = u(0), a.throw = u(1), a.return = u(2), "function" == typeof Symbol && (a[Symbol.iterator] = function() {
-                        return this
-                    }), a;
-
-                    function u(u) {
-                        return function(s) {
-                            return function(u) {
-                                if (n) throw new TypeError("Generator is already executing.");
-                                for (; a && (a = 0, u[0] && (i = 0)), i;) try {
-                                    if (n = 1, r && (o = 2 & u[0] ? r.return : u[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, u[1])).done) return o;
-                                    switch (r = 0, o && (u = [2 & u[0], o.value]), u[0]) {
-                                        case 0:
-                                        case 1:
-                                            o = u;
-                                            break;
-                                        case 4:
-                                            return i.label++, {
-                                                value: u[1],
-                                                done: !1
-                                            };
-                                        case 5:
-                                            i.label++, r = u[1], u = [0];
-                                            continue;
-                                        case 7:
-                                            u = i.ops.pop(), i.trys.pop();
-                                            continue;
-                                        default:
-                                            if (!(o = i.trys, (o = o.length > 0 && o[o.length - 1]) || 6 !== u[0] && 2 !== u[0])) {
-                                                i = 0;
-                                                continue
-                                            }
-                                            if (3 === u[0] && (!o || u[1] > o[0] && u[1] < o[3])) {
-                                                i.label = u[1];
-                                                break
-                                            }
-                                            if (6 === u[0] && i.label < o[1]) {
-                                                i.label = o[1], o = u;
-                                                break
-                                            }
-                                            if (o && i.label < o[2]) {
-                                                i.label = o[2], i.ops.push(u);
-                                                break
-                                            }
-                                            o[2] && i.ops.pop(), i.trys.pop();
-                                            continue
-                                    }
-                                    u = t.call(e, i)
-                                } catch (e) {
-                                    u = [6, e], r = 0
-                                } finally {
-                                    n = o = 0
-                                }
-                                if (5 & u[0]) throw u[1];
-                                return {
-                                    value: u[0] ? u[1] : void 0,
-                                    done: !0
-                                }
-                            }([u, s])
-                        }
-                    }
-                },
-                $6 = (0, u.withTranslations)((function(e) {
-                    var t = e.translate,
-                        n = g$(),
-                        i = n.dialogState,
-                        a = n.closeDeleteDialog,
-                        u = i.type,
-                        s = i.isReply,
-                        l = i.showPreventSimilar,
-                        c = i.onConfirmDelete,
-                        d = GV().features,
-                        p = (0, r.useState)(!1),
-                        f = p[0],
-                        v = p[1],
-                        m = "deletePost" === u,
-                        h = (m || "deleteComment" === u) && !!c,
-                        g = m ? "post" : s ? "reply" : "comment",
-                        y = !!l,
-                        b = !!y && f,
-                        w = (0, r.useRef)("");
-                    (0, r.useEffect)((function() {
-                        var e;
-                        h && (v(!1), d.ForumPreventSimilar && (w.current = K6(), e = {
-                            contentType: g,
-                            preventSimilarShown: y,
-                            deleteDialogImpressionId: w.current
-                        }, SV().logCmntyForumsDeleteDialogShownEvent(e)))
-                    }), [h, g, y, d.ForumPreventSimilar]);
-                    var E = (0, r.useCallback)((function(e) {
-                        e || a()
-                    }), [a]);
-                    if (!h) return null;
-                    var I = {
-                            post: {
-                                title: t("Label.DeletePost"),
-                                confirmation: t("Label.DeletePostConfirmation")
-                            },
-                            comment: {
-                                title: t("Label.DeleteComment"),
-                                confirmation: t("Label.DeleteCommentConfirmation")
-                            },
-                            reply: {
-                                title: t("Label.DeleteReply"),
-                                confirmation: t("Label.DeleteReplyConfirmation")
-                            }
-                        } [g],
-                        D = I.title,
-                        C = I.confirmation;
-                    return o().createElement(eh, {
-                        open: !0,
-                        onOpenChange: E,
-                        isModal: !0,
-                        size: "Small",
-                        type: "Default",
-                        hasCloseAffordance: !0,
-                        closeLabel: t("Action.Close")
-                    }, o().createElement(th, {
-                        className: "delete-forum-entity-dialog"
-                    }, o().createElement(oh, {
-                        className: "text-heading-small padding-left-large padding-top-medium"
-                    }, D), o().createElement(rh, null, o().createElement("p", {
-                        className: "text-body-large"
-                    }, C), y && o().createElement("div", {
-                        className: "padding-top-large"
-                    }, o().createElement(_h, {
-                        label: t("Label.PreventSimilarContent"),
-                        hint: t("Description.PreventSimilarContent"),
-                        size: "Medium",
-                        placement: "Start",
-                        isChecked: f,
-                        onCheckedChange: function(e) {
-                            return v(!0 === e)
-                        },
-                        "data-testid": "prevent-similar-checkbox"
-                    }))), o().createElement(ih, {
-                        className: "flex gap-x-small"
-                    }, o().createElement(q, {
-                        variant: "Alert",
-                        size: "Medium",
-                        className: "fill basis-0",
-                        onClick: function() {
-                            return Q6(void 0, void 0, void 0, (function() {
-                                return Y6(this, (function(e) {
-                                    switch (e.label) {
-                                        case 0:
-                                            return d.ForumPreventSimilar && (t = {
-                                                contentType: g,
-                                                preventSimilarShown: y,
-                                                preventSimilar: b,
-                                                deleteDialogImpressionId: w.current
-                                            }, SV().logCmntyForumsDeleteConfirmEvent(t)), a(), c ? [4, c(b)] : [3, 2];
-                                        case 1:
-                                            e.sent(), e.label = 2;
-                                        case 2:
-                                            return [2]
-                                    }
-                                    var t
-                                }))
-                            }))
-                        }
-                    }, t("Action.Delete")), o().createElement(q, {
-                        variant: "Standard",
-                        size: "Medium",
-                        className: "fill basis-0",
-                        onClick: a
-                    }, t("Action.Cancel")))))
-                }), aH),
-                J6 = function(e, t, n, r) {
-                    return new(n || (n = Promise))((function(o, i) {
-                        function a(e) {
-                            try {
-                                s(r.next(e))
-                            } catch (e) {
-                                i(e)
-                            }
-                        }
-
-                        function u(e) {
-                            try {
-                                s(r.throw(e))
-                            } catch (e) {
-                                i(e)
-                            }
-                        }
-
-                        function s(e) {
-                            var t;
-                            e.done ? o(e.value) : (t = e.value, t instanceof n ? t : new n((function(e) {
-                                e(t)
-                            }))).then(a, u)
-                        }
-                        s((r = r.apply(e, t || [])).next())
-                    }))
-                },
-                X6 = function(e, t) {
-                    var n, r, o, i = {
-                            label: 0,
-                            sent: function() {
-                                if (1 & o[0]) throw o[1];
-                                return o[1]
-                            },
-                            trys: [],
-                            ops: []
-                        },
-                        a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
-                    return a.next = u(0), a.throw = u(1), a.return = u(2), "function" == typeof Symbol && (a[Symbol.iterator] = function() {
-                        return this
-                    }), a;
-
-                    function u(u) {
-                        return function(s) {
-                            return function(u) {
-                                if (n) throw new TypeError("Generator is already executing.");
-                                for (; a && (a = 0, u[0] && (i = 0)), i;) try {
-                                    if (n = 1, r && (o = 2 & u[0] ? r.return : u[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, u[1])).done) return o;
-                                    switch (r = 0, o && (u = [2 & u[0], o.value]), u[0]) {
-                                        case 0:
-                                        case 1:
-                                            o = u;
-                                            break;
-                                        case 4:
-                                            return i.label++, {
-                                                value: u[1],
-                                                done: !1
-                                            };
-                                        case 5:
-                                            i.label++, r = u[1], u = [0];
-                                            continue;
-                                        case 7:
-                                            u = i.ops.pop(), i.trys.pop();
-                                            continue;
-                                        default:
-                                            if (!(o = i.trys, (o = o.length > 0 && o[o.length - 1]) || 6 !== u[0] && 2 !== u[0])) {
-                                                i = 0;
-                                                continue
-                                            }
-                                            if (3 === u[0] && (!o || u[1] > o[0] && u[1] < o[3])) {
-                                                i.label = u[1];
-                                                break
-                                            }
-                                            if (6 === u[0] && i.label < o[1]) {
-                                                i.label = o[1], o = u;
-                                                break
-                                            }
-                                            if (o && i.label < o[2]) {
-                                                i.label = o[2], i.ops.push(u);
-                                                break
-                                            }
-                                            o[2] && i.ops.pop(), i.trys.pop();
-                                            continue
-                                    }
-                                    u = t.call(e, i)
-                                } catch (e) {
-                                    u = [6, e], r = 0
-                                } finally {
-                                    n = o = 0
-                                }
-                                if (5 & u[0]) throw u[1];
-                                return {
-                                    value: u[0] ? u[1] : void 0,
-                                    done: !0
-                                }
-                            }([u, s])
-                        }
-                    }
-                },
-                Z6 = (0, u.withTranslations)((function(e) {
-                    var t = e.translate,
-                        n = g$(),
-                        i = n.dialogState,
-                        a = n.closeHideDialog,
-                        u = (0, s.createModal)(),
-                        l = u[0],
-                        c = u[1],
-                        d = (0, s.useSystemFeedback)().systemFeedbackService,
-                        p = i.groupId,
-                        f = i.categoryId,
-                        v = i.postId,
-                        m = i.threadId,
-                        h = i.commentId,
-                        g = i.type,
-                        y = i.onHideSuccess,
-                        b = "hidePost" === g,
-                        w = "hideComment" === g,
-                        E = (0, r.useMemo)((function() {
-                            return (b || w) && !!(p && f && v && m && h)
-                        }), [w, b, p, f, v, m, h]);
-                    if ((0, r.useEffect)((function() {
-                            E ? c.open() : c.close()
-                        }), [c, E]), !E) return null;
-                    var I = t("Action.Hide"),
-                        D = t(b ? "Label.HidePostConfirmation" : "Label.HideCommentConfirmation"),
-                        C = t(b ? "Description.HidePostConfirmationFooter" : "Description.HideCommentConfirmationFooter");
-                    return o().createElement(l, {
-                        title: t("Label.Warning"),
-                        onClose: a,
-                        body: D,
-                        footerText: C,
-                        actionButtonShow: !0,
-                        actionButtonText: I,
-                        onAction: function() {
-                            return J6(void 0, void 0, void 0, (function() {
-                                return X6(this, (function(e) {
-                                    switch (e.label) {
-                                        case 0:
-                                            if (!(p && f && v && m && h)) return [2];
-                                            a(), e.label = 1;
-                                        case 1:
-                                            return e.trys.push([1, 5, , 6]), [4, aV(p, f, v, m, h)];
-                                        case 2:
-                                            return e.sent(), d.success(t(b ? "Response.PostHidden" : "Response.CommentHidden")), y ? [4, y()] : [3, 4];
-                                        case 3:
-                                            e.sent(), e.label = 4;
-                                        case 4:
-                                            return [3, 6];
-                                        case 5:
-                                            return e.sent(), d.warning(t("NetworkError")), [3, 6];
-                                        case 6:
-                                            return [2]
-                                    }
-                                }))
-                            }))
-                        },
-                        neutralButtonText: t("Action.Cancel"),
-                        onNeutral: a
-                    })
-                }), aH),
                 e9 = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
@@ -73775,45 +73486,109 @@
                     var t = e.translate,
                         n = g$(),
                         i = n.dialogState,
-                        a = n.closeKickDialog,
-                        u = (0, s.createModal)(),
-                        l = u[0],
-                        c = u[1];
+                        a = n.closeDeleteDialog,
+                        u = i.type,
+                        s = i.isReply,
+                        l = i.showPreventSimilar,
+                        c = i.onConfirmDelete,
+                        d = GV().features,
+                        p = (0, r.useState)(!1),
+                        f = p[0],
+                        v = p[1],
+                        m = "deletePost" === u,
+                        h = (m || "deleteComment" === u) && !!c,
+                        g = m ? "post" : s ? "reply" : "comment",
+                        y = !!l,
+                        b = !!y && f,
+                        w = (0, r.useRef)("");
                     (0, r.useEffect)((function() {
-                        i.userId && i.groupId && "kick" === i.type ? c.open() : c.close()
-                    }), [c, i.userId, i.groupId, i.type]);
-                    return o().createElement(_6, {
-                        title: t("Label.Warning"),
-                        bodyText: t("Description.KickUserWarning"),
-                        successText: t("Message.KickUserSuccess"),
-                        actionButtonText: t("Action.Kick"),
-                        moderateUserAction: function() {
+                        var e;
+                        h && (v(!1), d.ForumPreventSimilar && (w.current = Z6(), e = {
+                            contentType: g,
+                            preventSimilarShown: y,
+                            deleteDialogImpressionId: w.current
+                        }, SV().logCmntyForumsDeleteDialogShownEvent(e)))
+                    }), [h, g, y, d.ForumPreventSimilar]);
+                    var E = (0, r.useCallback)((function(e) {
+                        e || a()
+                    }), [a]);
+                    if (!h) return null;
+                    var I = {
+                            post: {
+                                title: t("Label.DeletePost"),
+                                confirmation: t("Label.DeletePostConfirmation")
+                            },
+                            comment: {
+                                title: t("Label.DeleteComment"),
+                                confirmation: t("Label.DeleteCommentConfirmation")
+                            },
+                            reply: {
+                                title: t("Label.DeleteReply"),
+                                confirmation: t("Label.DeleteReplyConfirmation")
+                            }
+                        } [g],
+                        D = I.title,
+                        C = I.confirmation;
+                    return o().createElement(eh, {
+                        open: !0,
+                        onOpenChange: E,
+                        isModal: !0,
+                        size: "Small",
+                        type: "Default",
+                        hasCloseAffordance: !0,
+                        closeLabel: t("Action.Close")
+                    }, o().createElement(th, {
+                        className: "delete-forum-entity-dialog"
+                    }, o().createElement(oh, {
+                        className: "text-heading-small padding-left-large padding-top-medium"
+                    }, D), o().createElement(rh, null, o().createElement("p", {
+                        className: "text-body-large"
+                    }, C), y && o().createElement("div", {
+                        className: "padding-top-large"
+                    }, o().createElement(_h, {
+                        label: t("Label.PreventSimilarContent"),
+                        hint: t("Description.PreventSimilarContent"),
+                        size: "Medium",
+                        placement: "Start",
+                        isChecked: f,
+                        onCheckedChange: function(e) {
+                            return v(!0 === e)
+                        },
+                        "data-testid": "prevent-similar-checkbox"
+                    }))), o().createElement(ih, {
+                        className: "flex gap-x-small"
+                    }, o().createElement(q, {
+                        variant: "Alert",
+                        size: "Medium",
+                        className: "fill basis-0",
+                        onClick: function() {
                             return e9(void 0, void 0, void 0, (function() {
                                 return t9(this, (function(e) {
                                     switch (e.label) {
                                         case 0:
-                                            return (null == i ? void 0 : i.userId) && (null == i ? void 0 : i.groupId) ? [4, UY(i.groupId, i.userId)] : [3, 2];
+                                            return d.ForumPreventSimilar && (t = {
+                                                contentType: g,
+                                                preventSimilarShown: y,
+                                                preventSimilar: b,
+                                                deleteDialogImpressionId: w.current
+                                            }, SV().logCmntyForumsDeleteConfirmEvent(t)), a(), c ? [4, c(b)] : [3, 2];
                                         case 1:
                                             e.sent(), e.label = 2;
                                         case 2:
                                             return [2]
                                     }
+                                    var t
                                 }))
                             }))
-                        },
-                        translate: t,
-                        closeDialog: a,
-                        dialogComponent: l
-                    })
+                        }
+                    }, t("Action.Delete")), o().createElement(q, {
+                        variant: "Standard",
+                        size: "Medium",
+                        className: "fill basis-0",
+                        onClick: a
+                    }, t("Action.Cancel")))))
                 }), aH),
-                r9 = function() {
-                    return r9 = Object.assign || function(e) {
-                        for (var t, n = 1, r = arguments.length; n < r; n++)
-                            for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
-                        return e
-                    }, r9.apply(this, arguments)
-                },
-                o9 = function(e, t, n, r) {
+                r9 = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -73840,7 +73615,308 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                i9 = function(e, t) {
+                o9 = function(e, t) {
+                    var n, r, o, i = {
+                            label: 0,
+                            sent: function() {
+                                if (1 & o[0]) throw o[1];
+                                return o[1]
+                            },
+                            trys: [],
+                            ops: []
+                        },
+                        a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
+                    return a.next = u(0), a.throw = u(1), a.return = u(2), "function" == typeof Symbol && (a[Symbol.iterator] = function() {
+                        return this
+                    }), a;
+
+                    function u(u) {
+                        return function(s) {
+                            return function(u) {
+                                if (n) throw new TypeError("Generator is already executing.");
+                                for (; a && (a = 0, u[0] && (i = 0)), i;) try {
+                                    if (n = 1, r && (o = 2 & u[0] ? r.return : u[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, u[1])).done) return o;
+                                    switch (r = 0, o && (u = [2 & u[0], o.value]), u[0]) {
+                                        case 0:
+                                        case 1:
+                                            o = u;
+                                            break;
+                                        case 4:
+                                            return i.label++, {
+                                                value: u[1],
+                                                done: !1
+                                            };
+                                        case 5:
+                                            i.label++, r = u[1], u = [0];
+                                            continue;
+                                        case 7:
+                                            u = i.ops.pop(), i.trys.pop();
+                                            continue;
+                                        default:
+                                            if (!(o = i.trys, (o = o.length > 0 && o[o.length - 1]) || 6 !== u[0] && 2 !== u[0])) {
+                                                i = 0;
+                                                continue
+                                            }
+                                            if (3 === u[0] && (!o || u[1] > o[0] && u[1] < o[3])) {
+                                                i.label = u[1];
+                                                break
+                                            }
+                                            if (6 === u[0] && i.label < o[1]) {
+                                                i.label = o[1], o = u;
+                                                break
+                                            }
+                                            if (o && i.label < o[2]) {
+                                                i.label = o[2], i.ops.push(u);
+                                                break
+                                            }
+                                            o[2] && i.ops.pop(), i.trys.pop();
+                                            continue
+                                    }
+                                    u = t.call(e, i)
+                                } catch (e) {
+                                    u = [6, e], r = 0
+                                } finally {
+                                    n = o = 0
+                                }
+                                if (5 & u[0]) throw u[1];
+                                return {
+                                    value: u[0] ? u[1] : void 0,
+                                    done: !0
+                                }
+                            }([u, s])
+                        }
+                    }
+                },
+                i9 = (0, u.withTranslations)((function(e) {
+                    var t = e.translate,
+                        n = g$(),
+                        i = n.dialogState,
+                        a = n.closeHideDialog,
+                        u = (0, s.createModal)(),
+                        l = u[0],
+                        c = u[1],
+                        d = (0, s.useSystemFeedback)().systemFeedbackService,
+                        p = i.groupId,
+                        f = i.categoryId,
+                        v = i.postId,
+                        m = i.threadId,
+                        h = i.commentId,
+                        g = i.type,
+                        y = i.onHideSuccess,
+                        b = "hidePost" === g,
+                        w = "hideComment" === g,
+                        E = (0, r.useMemo)((function() {
+                            return (b || w) && !!(p && f && v && m && h)
+                        }), [w, b, p, f, v, m, h]);
+                    if ((0, r.useEffect)((function() {
+                            E ? c.open() : c.close()
+                        }), [c, E]), !E) return null;
+                    var I = t("Action.Hide"),
+                        D = t(b ? "Label.HidePostConfirmation" : "Label.HideCommentConfirmation"),
+                        C = t(b ? "Description.HidePostConfirmationFooter" : "Description.HideCommentConfirmationFooter");
+                    return o().createElement(l, {
+                        title: t("Label.Warning"),
+                        onClose: a,
+                        body: D,
+                        footerText: C,
+                        actionButtonShow: !0,
+                        actionButtonText: I,
+                        onAction: function() {
+                            return r9(void 0, void 0, void 0, (function() {
+                                return o9(this, (function(e) {
+                                    switch (e.label) {
+                                        case 0:
+                                            if (!(p && f && v && m && h)) return [2];
+                                            a(), e.label = 1;
+                                        case 1:
+                                            return e.trys.push([1, 5, , 6]), [4, aV(p, f, v, m, h)];
+                                        case 2:
+                                            return e.sent(), d.success(t(b ? "Response.PostHidden" : "Response.CommentHidden")), y ? [4, y()] : [3, 4];
+                                        case 3:
+                                            e.sent(), e.label = 4;
+                                        case 4:
+                                            return [3, 6];
+                                        case 5:
+                                            return e.sent(), d.warning(t("NetworkError")), [3, 6];
+                                        case 6:
+                                            return [2]
+                                    }
+                                }))
+                            }))
+                        },
+                        neutralButtonText: t("Action.Cancel"),
+                        onNeutral: a
+                    })
+                }), aH),
+                a9 = function(e, t, n, r) {
+                    return new(n || (n = Promise))((function(o, i) {
+                        function a(e) {
+                            try {
+                                s(r.next(e))
+                            } catch (e) {
+                                i(e)
+                            }
+                        }
+
+                        function u(e) {
+                            try {
+                                s(r.throw(e))
+                            } catch (e) {
+                                i(e)
+                            }
+                        }
+
+                        function s(e) {
+                            var t;
+                            e.done ? o(e.value) : (t = e.value, t instanceof n ? t : new n((function(e) {
+                                e(t)
+                            }))).then(a, u)
+                        }
+                        s((r = r.apply(e, t || [])).next())
+                    }))
+                },
+                u9 = function(e, t) {
+                    var n, r, o, i = {
+                            label: 0,
+                            sent: function() {
+                                if (1 & o[0]) throw o[1];
+                                return o[1]
+                            },
+                            trys: [],
+                            ops: []
+                        },
+                        a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
+                    return a.next = u(0), a.throw = u(1), a.return = u(2), "function" == typeof Symbol && (a[Symbol.iterator] = function() {
+                        return this
+                    }), a;
+
+                    function u(u) {
+                        return function(s) {
+                            return function(u) {
+                                if (n) throw new TypeError("Generator is already executing.");
+                                for (; a && (a = 0, u[0] && (i = 0)), i;) try {
+                                    if (n = 1, r && (o = 2 & u[0] ? r.return : u[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, u[1])).done) return o;
+                                    switch (r = 0, o && (u = [2 & u[0], o.value]), u[0]) {
+                                        case 0:
+                                        case 1:
+                                            o = u;
+                                            break;
+                                        case 4:
+                                            return i.label++, {
+                                                value: u[1],
+                                                done: !1
+                                            };
+                                        case 5:
+                                            i.label++, r = u[1], u = [0];
+                                            continue;
+                                        case 7:
+                                            u = i.ops.pop(), i.trys.pop();
+                                            continue;
+                                        default:
+                                            if (!(o = i.trys, (o = o.length > 0 && o[o.length - 1]) || 6 !== u[0] && 2 !== u[0])) {
+                                                i = 0;
+                                                continue
+                                            }
+                                            if (3 === u[0] && (!o || u[1] > o[0] && u[1] < o[3])) {
+                                                i.label = u[1];
+                                                break
+                                            }
+                                            if (6 === u[0] && i.label < o[1]) {
+                                                i.label = o[1], o = u;
+                                                break
+                                            }
+                                            if (o && i.label < o[2]) {
+                                                i.label = o[2], i.ops.push(u);
+                                                break
+                                            }
+                                            o[2] && i.ops.pop(), i.trys.pop();
+                                            continue
+                                    }
+                                    u = t.call(e, i)
+                                } catch (e) {
+                                    u = [6, e], r = 0
+                                } finally {
+                                    n = o = 0
+                                }
+                                if (5 & u[0]) throw u[1];
+                                return {
+                                    value: u[0] ? u[1] : void 0,
+                                    done: !0
+                                }
+                            }([u, s])
+                        }
+                    }
+                },
+                s9 = (0, u.withTranslations)((function(e) {
+                    var t = e.translate,
+                        n = g$(),
+                        i = n.dialogState,
+                        a = n.closeKickDialog,
+                        u = (0, s.createModal)(),
+                        l = u[0],
+                        c = u[1];
+                    (0, r.useEffect)((function() {
+                        i.userId && i.groupId && "kick" === i.type ? c.open() : c.close()
+                    }), [c, i.userId, i.groupId, i.type]);
+                    return o().createElement(Y6, {
+                        title: t("Label.Warning"),
+                        bodyText: t("Description.KickUserWarning"),
+                        successText: t("Message.KickUserSuccess"),
+                        actionButtonText: t("Action.Kick"),
+                        moderateUserAction: function() {
+                            return a9(void 0, void 0, void 0, (function() {
+                                return u9(this, (function(e) {
+                                    switch (e.label) {
+                                        case 0:
+                                            return (null == i ? void 0 : i.userId) && (null == i ? void 0 : i.groupId) ? [4, UY(i.groupId, i.userId)] : [3, 2];
+                                        case 1:
+                                            e.sent(), e.label = 2;
+                                        case 2:
+                                            return [2]
+                                    }
+                                }))
+                            }))
+                        },
+                        translate: t,
+                        closeDialog: a,
+                        dialogComponent: l
+                    })
+                }), aH),
+                l9 = function() {
+                    return l9 = Object.assign || function(e) {
+                        for (var t, n = 1, r = arguments.length; n < r; n++)
+                            for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
+                        return e
+                    }, l9.apply(this, arguments)
+                },
+                c9 = function(e, t, n, r) {
+                    return new(n || (n = Promise))((function(o, i) {
+                        function a(e) {
+                            try {
+                                s(r.next(e))
+                            } catch (e) {
+                                i(e)
+                            }
+                        }
+
+                        function u(e) {
+                            try {
+                                s(r.throw(e))
+                            } catch (e) {
+                                i(e)
+                            }
+                        }
+
+                        function s(e) {
+                            var t;
+                            e.done ? o(e.value) : (t = e.value, t instanceof n ? t : new n((function(e) {
+                                e(t)
+                            }))).then(a, u)
+                        }
+                        s((r = r.apply(e, t || [])).next())
+                    }))
+                },
+                d9 = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -73912,7 +73988,7 @@
                         }
                     }
                 };
-            var a9 = function(e) {
+            var p9 = function(e) {
                     var t = uW("group-details-ui"),
                         n = t.data,
                         o = t.isLoading,
@@ -73929,13 +74005,13 @@
                         return !o && !u && (!(null == n ? void 0 : n.isGracefulDegradationEnabled) && ((null == n ? void 0 : n.isMemberListVisibilityEnforced) ? !0 === (null == a ? void 0 : a.canViewMemberList) : !0 === (null == n ? void 0 : n.displayMembers)))
                     }), [o, u, n, a])
                 },
-                u9 = function(e, t, n) {
+                f9 = function(e, t, n) {
                     if (n || 2 === arguments.length)
                         for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                     return e.concat(r || Array.prototype.slice.call(t))
                 },
-                s9 = new l.QueryClient,
-                l9 = function(e) {
+                v9 = new l.QueryClient,
+                m9 = function(e) {
                     var t = e.children,
                         n = e.permissions,
                         i = e.channelsPermissions,
@@ -73945,7 +74021,7 @@
                         p = MQ.use.categories(),
                         f = MQ.use.archivedCategories(),
                         v = MQ.use.categoryId(),
-                        m = a9(a),
+                        m = p9(a),
                         h = (0, u.useTranslation)().translate,
                         g = (0, s.useSystemFeedback)().systemFeedbackService,
                         y = GV(),
@@ -73968,8 +74044,8 @@
                                         return {
                                             queryKey: tK(n, e),
                                             queryFn: function() {
-                                                return o9(t, void 0, void 0, (function() {
-                                                    return i9(this, (function(t) {
+                                                return c9(t, void 0, void 0, (function() {
+                                                    return d9(this, (function(t) {
                                                         return [2, Z_(n, e)]
                                                     }))
                                                 }))
@@ -73982,7 +74058,7 @@
                                 }),
                                 u = a.reduce((function(e, t, n) {
                                     var o;
-                                    return t.data ? r9(r9({}, e), ((o = {})[r[n]] = uK(t.data), o)) : e
+                                    return t.data ? l9(l9({}, e), ((o = {})[r[n]] = uK(t.data), o)) : e
                                 }), {}),
                                 s = void 0 !== o ? a[r.indexOf(o)] : void 0;
                             return {
@@ -73992,7 +74068,7 @@
                         }({
                             groupId: a,
                             categoryIds: (0, r.useMemo)((function() {
-                                return Array.from(new Set(u9(u9(u9(u9([], (i || []).map((function(e) {
+                                return Array.from(new Set(f9(f9(f9(f9([], (i || []).map((function(e) {
                                     return e.channelId
                                 })), !0), p.map((function(e) {
                                     return e.id
@@ -74017,24 +74093,24 @@
                         isOwner: d
                     }, t)
                 },
-                c9 = function(e) {
+                h9 = function(e) {
                     var t = e.children,
                         n = e.permissions,
                         r = e.channelsPermissions,
                         i = e.groupId,
                         a = e.isGroupMember,
                         u = e.isOwner;
-                    return o().createElement(bY, null, o().createElement(l9, {
+                    return o().createElement(bY, null, o().createElement(m9, {
                         groupId: i,
                         permissions: n,
                         channelsPermissions: r,
                         isGroupMember: a,
                         isOwner: u
                     }, o().createElement(l.QueryClientProvider, {
-                        client: s9
+                        client: v9
                     }, t)))
                 },
-                d9 = function(e, t, n, r) {
+                g9 = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -74061,7 +74137,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                p9 = function(e, t) {
+                y9 = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -74133,7 +74209,7 @@
                         }
                     }
                 },
-                f9 = (0, u.withTranslations)((function(e) {
+                b9 = (0, u.withTranslations)((function(e) {
                     var t = e.translate,
                         n = VK(),
                         i = n.forumsRead,
@@ -74156,8 +74232,8 @@
                         variant: "Emphasis",
                         isLoading: p,
                         onClick: function() {
-                            return d9(void 0, void 0, Promise, (function() {
-                                return p9(this, (function(e) {
+                            return g9(void 0, void 0, Promise, (function() {
+                                return y9(this, (function(e) {
                                     switch (e.label) {
                                         case 0:
                                             f(!0), e.label = 1;
@@ -74179,7 +74255,7 @@
                         }
                     }, t("Action.ReenableForums")))) : null
                 }), aH),
-                v9 = function(e) {
+                w9 = function(e) {
                     var t = e.iconName;
                     return o().createElement("div", {
                         className: "relative flex items-center justify-center width-2200 height-2200"
@@ -74197,7 +74273,7 @@
                         }
                     }))
                 },
-                m9 = (0, u.withTranslations)((function(e) {
+                E9 = (0, u.withTranslations)((function(e) {
                     var t, n = e.children,
                         r = e.userId,
                         i = e.group,
@@ -74210,11 +74286,11 @@
                         className: "section-disclaimer section-content-off flex flex-col items-center justify-center grow"
                     }) : l.isDisabled && !c ? o().createElement("div", {
                         className: "section-disclaimer section-content-off flex flex-col items-center justify-center grow"
-                    }, o().createElement(v9, {
+                    }, o().createElement(w9, {
                         iconName: "icon-regular-lock-closed"
                     }), o().createElement("h2", null, a("Title.ForumsUnavailable")), o().createElement("p", null, a("Description.ForumsUnavailable"))) : o().createElement(o().Fragment, null, n)
                 }), aH),
-                h9 = function(e) {
+                I9 = function(e) {
                     var t = e.category,
                         n = e.isActive,
                         i = e.onClick,
@@ -74237,13 +74313,13 @@
                         className: "group-posts-destination-pill-lock-icon"
                     }), t.name)
                 },
-                g9 = function(e) {
+                D9 = function(e) {
                     var t = e.size;
                     return o().createElement("div", {
                         className: qj()("group-forums-category-pill-skeleton", "group-forums-skeleton", t && "group-forums-category-pill-skeleton-length-".concat(t))
                     })
                 },
-                y9 = function(e) {
+                C9 = function(e) {
                     var t = e.onSetActiveCategory,
                         n = e.locked,
                         i = e.activeCategoryId,
@@ -74275,7 +74351,7 @@
                         }),
                         ref: c
                     }, s.map((function(e) {
-                        return (!a || a(e)) && o().createElement(h9, {
+                        return (!a || a(e)) && o().createElement(I9, {
                             key: e.shortId,
                             category: e,
                             isActive: d === e.shortId,
@@ -74283,19 +74359,19 @@
                         })
                     }))) : o().createElement("div", {
                         className: "group-forums-categories-list group-posts-destination-list list-vignette"
-                    }, o().createElement(g9, {
+                    }, o().createElement(D9, {
                         size: DV.Small
-                    }), o().createElement(g9, {
+                    }), o().createElement(D9, {
                         size: DV.Large
-                    }), o().createElement(g9, {
+                    }), o().createElement(D9, {
                         size: DV.Medium
-                    }), o().createElement(g9, {
+                    }), o().createElement(D9, {
                         size: DV.Small
-                    }), o().createElement(g9, {
+                    }), o().createElement(D9, {
                         size: DV.Large
                     }))
                 },
-                b9 = function() {
+                x9 = function() {
                     return o().createElement("div", {
                         className: "group-forums-user-display-skeleton"
                     }, o().createElement("div", {
@@ -74304,10 +74380,10 @@
                         className: "user-display-with-time-skeleton group-forums-skeleton"
                     }))
                 },
-                w9 = function() {
+                A9 = function() {
                     return o().createElement("div", {
                         className: "group-posts-preview-skeleton"
-                    }, o().createElement(b9, null), o().createElement("div", {
+                    }, o().createElement(x9, null), o().createElement("div", {
                         className: "group-posts-preview-title-skeleton group-forums-skeleton"
                     }), o().createElement("div", {
                         className: "group-posts-preview-content-skeleton group-forums-skeleton"
@@ -74335,7 +74411,7 @@
                         className: "group-posts-preview-reaction-count-skeleton group-forums-skeleton"
                     }))))
                 },
-                E9 = function(e) {
+                S9 = function(e) {
                     var t = e.onLoadMore,
                         n = e.viewingThreshold,
                         i = (0, r.useRef)(null);
@@ -74357,13 +74433,13 @@
                         }
                     })
                 },
-                I9 = function(e, t) {
+                P9 = function(e, t) {
                     return e.id === t.id
                 },
-                D9 = function(e, t) {
+                k9 = function(e, t) {
                     return e.id === t.id
                 },
-                C9 = function(e) {
+                R9 = function(e) {
                     var t = e.className,
                         n = e.iconClassName,
                         r = e.heading,
@@ -74380,14 +74456,14 @@
                         onClick: u
                     }, a))
                 };
-            C9.defaultProps = {
+            R9.defaultProps = {
                 className: void 0,
                 buttonText: void 0,
                 onClick: void 0
             };
-            var x9 = C9;
+            var O9 = R9;
 
-            function A9(e) {
+            function F9(e) {
                 var t = e.map((function(e) {
                     return e.forumPostId
                 })).filter((function(e) {
@@ -74395,13 +74471,13 @@
                 }));
                 return Array.from(new Set(t))
             }
-            var S9 = function(e, t, n) {
+            var T9 = function(e, t, n) {
                 if (n || 2 === arguments.length)
                     for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                 return e.concat(r || Array.prototype.slice.call(t))
             };
 
-            function P9(e) {
+            function N9(e) {
                 var t = e.groupId,
                     n = e.categoryId,
                     o = e.realtimeMessagingEnabled,
@@ -74434,33 +74510,33 @@
                                 return !r.has(e)
                             }));
                         o.length > 0 && u((function(e) {
-                            return new Set(S9(S9([], Array.from(e), !0), o, !0))
+                            return new Set(T9(T9([], Array.from(e), !0), o, !0))
                         })), l.current = t
                     }
-                }), [i, u]), k6((0, r.useMemo)((function() {
-                    return n && o ? b6.category(t, n) : null
+                }), [i, u]), M6((0, r.useMemo)((function() {
+                    return n && o ? x6.category(t, n) : null
                 }), [n, o, t]), (function(e) {
-                    0 !== A9(e).length && a()
-                })), k6((0, r.useMemo)((function() {
-                    return n && o ? b6.categoryReactions(t, n) : null
+                    0 !== F9(e).length && a()
+                })), M6((0, r.useMemo)((function() {
+                    return n && o ? x6.categoryReactions(t, n) : null
                 }), [n, o, t]), (function(e) {
-                    0 !== A9(e).length && a()
+                    0 !== F9(e).length && a()
                 }))
             }
-            var k9 = function(e) {
+            var M9 = function(e) {
                     var t = (0, r.useCallback)((function(t) {
                         "Enter" !== t.key && " " !== t.key || (t.preventDefault(), null == e || e())
                     }), [e]);
                     return e ? t : void 0
                 },
-                R9 = function() {
-                    return R9 = Object.assign || function(e) {
+                B9 = function() {
+                    return B9 = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, R9.apply(this, arguments)
+                    }, B9.apply(this, arguments)
                 },
-                O9 = function(e, t) {
+                j9 = function(e, t) {
                     var n = {};
                     for (var r in e) Object.prototype.hasOwnProperty.call(e, r) && t.indexOf(r) < 0 && (n[r] = e[r]);
                     if (null != e && "function" == typeof Object.getOwnPropertySymbols) {
@@ -74469,23 +74545,23 @@
                     }
                     return n
                 },
-                F9 = function(e) {
+                G9 = function(e) {
                     var t = e.onClick,
                         n = e.children,
-                        r = O9(e, ["onClick", "children"]),
-                        i = k9(t);
-                    return o().createElement("div", R9({
+                        r = j9(e, ["onClick", "children"]),
+                        i = M9(t);
+                    return o().createElement("div", B9({
                         role: "button",
                         tabIndex: 0,
                         onClick: t,
                         onKeyDown: i
                     }, r), n)
                 };
-            F9.defaultProps = {
+            G9.defaultProps = {
                 onClick: void 0
             };
-            var T9, N9, M9, B9 = F9,
-                j9 = {
+            var U9, L9, q9, z9 = G9,
+                _9 = {
                     comment: {
                         showOne: "Action.ShowHiddenMessage",
                         showMany: "Action.ShowHiddenMessages",
@@ -74505,7 +74581,7 @@
                         headerMany: "Label.HiddenPostsHeader"
                     }
                 },
-                G9 = (0, u.withTranslations)((function(e) {
+                V9 = (0, u.withTranslations)((function(e) {
                     var t, n = e.count,
                         i = e.renderItems,
                         a = e.isRevealed,
@@ -74516,8 +74592,8 @@
                         d = void 0 === c ? "comment" : c,
                         p = e.translate,
                         f = GV().features,
-                        v = j9["post" === d ? "post" : "comment"],
-                        m = ((t = (0, r.useRef)("")).current || (t.current = K6()), t.current),
+                        v = _9["post" === d ? "post" : "comment"],
+                        m = ((t = (0, r.useRef)("")).current || (t.current = Z6()), t.current),
                         h = !l && !a,
                         g = (0, r.useRef)(!1);
                     (0, r.useEffect)((function() {
@@ -74533,7 +74609,7 @@
                             className: qj()("group-forums-concealed-run", t && "group-forums-concealed-run-revealed")
                         }, "post" !== d && o().createElement("span", {
                             className: "group-forums-concealed-run-dash"
-                        }), o().createElement(B9, {
+                        }), o().createElement(z9, {
                             className: "group-forums-concealed-run-toggle",
                             "aria-expanded": t,
                             "aria-label": e,
@@ -74573,7 +74649,7 @@
                         count: n
                     }), !1)
                 }), Gj),
-                U9 = function(e, t, n, r) {
+                W9 = function(e, t, n, r) {
                     var o = [],
                         i = null;
                     return e.forEach((function(e) {
@@ -74586,7 +74662,7 @@
                         }, o.push(i))
                     })), o
                 },
-                L9 = function(e) {
+                H9 = function(e) {
                     var t = e.items,
                         n = e.isConcealmentEnabled,
                         i = e.forceRevealIds,
@@ -74605,14 +74681,14 @@
                         p = d[0],
                         f = d[1],
                         v = (0, r.useMemo)((function() {
-                            return U9(t, n, p, i)
+                            return W9(t, n, p, i)
                         }), [t, n, p, i]);
                     return o().createElement(o().Fragment, null, v.map((function(e) {
                         if ("plain" !== e.mode) {
                             var t = e.items.map((function(e) {
                                 return e.id
                             }));
-                            return o().createElement(G9, {
+                            return o().createElement(V9, {
                                 key: "concealed-".concat(e.items[0].id),
                                 messageType: s,
                                 count: e.items.length,
@@ -74644,14 +74720,14 @@
                         })))
                     })))
                 },
-                q9 = function() {
-                    return q9 = Object.assign || function(e) {
+                K9 = function() {
+                    return K9 = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, q9.apply(this, arguments)
+                    }, K9.apply(this, arguments)
                 },
-                z9 = function(e, t, n, r) {
+                Q9 = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -74678,7 +74754,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                _9 = function(e, t) {
+                Y9 = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -74750,7 +74826,7 @@
                         }
                     }
                 },
-                V9 = (0, u.withTranslations)((function(e) {
+                $9 = (0, u.withTranslations)((function(e) {
                     var t = e.translate,
                         n = MQ.use.groupId(),
                         i = MQ.use.categoryId(),
@@ -74786,9 +74862,9 @@
                         A = (0, l.useQuery)({
                             queryKey: $H(n, i),
                             queryFn: function(e) {
-                                return z9(void 0, [e], void 0, (function(e) {
+                                return Q9(void 0, [e], void 0, (function(e) {
                                     var t, n, r = e.queryKey;
-                                    return _9(this, (function(e) {
+                                    return Y9(this, (function(e) {
                                         return t = r[1], n = r[2], [2, N_(t, n)]
                                     }))
                                 }))
@@ -74805,10 +74881,10 @@
                             retry: 1,
                             queryKey: JH(n, i),
                             queryFn: function(e) {
-                                return z9(void 0, [e], void 0, (function(e) {
+                                return Q9(void 0, [e], void 0, (function(e) {
                                     var t, n, r, o = e.queryKey,
                                         i = e.pageParam;
-                                    return _9(this, (function(e) {
+                                    return Y9(this, (function(e) {
                                         switch (e.label) {
                                             case 0:
                                                 return t = o[1], n = o[2], [4, R_(t, n, eG.pageCounts.postsPerPage, i)];
@@ -74832,7 +74908,7 @@
                         M = R.hasNextPage,
                         B = R.error,
                         j = R.refetch;
-                    P9({
+                    N9({
                         groupId: n,
                         categoryId: i,
                         realtimeMessagingEnabled: !!C.RealtimeMessaging,
@@ -74854,7 +74930,7 @@
                                 return !(f.length > 0 && f.includes(e.createdBy))
                             })).map((function(e) {
                                 var t;
-                                return q9(q9({}, e), {
+                                return K9(K9({}, e), {
                                     isConcealed: !0 === (null === (t = e.firstComment) || void 0 === t ? void 0 : t.isConcealed)
                                 })
                             }))
@@ -74868,19 +74944,19 @@
                     var _ = (0, r.useCallback)((function(e) {
                             var t;
                             if (null == P ? void 0 : P.data.findIndex((function(t) {
-                                    return I9(t, e)
+                                    return P9(t, e)
                                 }))) {
                                 var r = null !== (t = null == P ? void 0 : P.data.map((function(t) {
-                                    return I9(t, e) ? e : t
+                                    return P9(t, e) ? e : t
                                 }))) && void 0 !== t ? t : [];
                                 E.setQueryData($H(n, i), (function() {
                                     return r
                                 }))
                             } else {
                                 var o = (null == T ? void 0 : T.pages.map((function(t) {
-                                    return q9(q9({}, t), {
+                                    return K9(K9({}, t), {
                                         data: t.data.map((function(t) {
-                                            return I9(t, e) ? e : t
+                                            return P9(t, e) ? e : t
                                         }))
                                     })
                                 }))) || [];
@@ -74896,14 +74972,14 @@
                             j(), k()
                         }), [k, j]),
                         W = (0, r.useCallback)((function(e) {
-                            return z9(void 0, void 0, void 0, (function() {
+                            return Q9(void 0, void 0, void 0, (function() {
                                 var r, o;
-                                return _9(this, (function(a) {
+                                return Y9(this, (function(a) {
                                     switch (a.label) {
                                         case 0:
                                             return a.trys.push([0, 2, , 3]), r = !e.notificationPreference || e.notificationPreference === v_.None, [4, K_(n, i, e.id, r)];
                                         case 1:
-                                            return a.sent(), o = q9(q9({}, e), {
+                                            return a.sent(), o = K9(K9({}, e), {
                                                 notificationPreference: r ? v_.All : v_.None
                                             }), _(o), I.success(t("Message.NotificationPreferenceUpdated")), [3, 3];
                                         case 2:
@@ -74946,7 +75022,7 @@
                             behavior: "smooth"
                         })
                     }), []);
-                    if (B) return o().createElement(x9, {
+                    if (B) return o().createElement(O9, {
                         className: "group-forums-posts-list-no-post",
                         iconClassName: "icon-status-alert",
                         heading: t("Error.LoadCategoryTitle"),
@@ -74956,8 +75032,8 @@
                     });
                     if (O || S) return o().createElement("div", {
                         className: "group-posts-list group-posts-list-skeleton"
-                    }, o().createElement(w9, null), o().createElement(w9, null), o().createElement(w9, null));
-                    if (!U.length && !G.length) return o().createElement(x9, {
+                    }, o().createElement(A9, null), o().createElement(A9, null), o().createElement(A9, null));
+                    if (!U.length && !G.length) return o().createElement(O9, {
                         className: "group-forums-posts-list-no-post",
                         iconClassName: "chat-side-icon",
                         heading: t("Label.NoPostsFoundHeader"),
@@ -74980,7 +75056,7 @@
                     })), o().createElement("div", {
                         className: "group-forums-post-list-content"
                     }, G.map((function(e) {
-                        return o().createElement(i6, {
+                        return o().createElement(d6, {
                             showPinned: !0,
                             key: "".concat(e.id, "_pinned"),
                             post: e,
@@ -74992,13 +75068,13 @@
                                 return W(e)
                             }
                         })
-                    })), o().createElement(L9, {
+                    })), o().createElement(H9, {
                         items: q,
                         isConcealmentEnabled: L,
                         forceRevealIds: z,
                         entity: "post",
                         renderItem: function(e, t) {
-                            return o().createElement(i6, {
+                            return o().createElement(d6, {
                                 key: e.id,
                                 onHighlightComplete: m.has(e.id) ? function() {
                                     return x(e.id)
@@ -75015,7 +75091,7 @@
                                 isConcealedAndShown: t
                             })
                         }
-                    }), o().createElement(E9, {
+                    }), o().createElement(S9, {
                         onLoadMore: N,
                         viewingThreshold: 1
                     }), F && o().createElement("div", {
@@ -75024,23 +75100,23 @@
                 }), Gj);
             ! function(e) {
                 e.Any = "Any", e.Post = "Post", e.Comment = "Comment"
-            }(T9 || (T9 = {})),
+            }(U9 || (U9 = {})),
             function(e) {
                 e.Day = "day", e.Week = "week", e.Month = "month", e.All = "all"
-            }(N9 || (N9 = {})),
+            }(L9 || (L9 = {})),
             function(e) {
                 e.Browse = "Browse", e.FilteredBrowse = "FilteredBrowse", e.Search = "Search"
-            }(M9 || (M9 = {}));
-            var W9 = "all",
-                H9 = function(e) {
-                    return !e || e === W9
+            }(q9 || (q9 = {}));
+            var J9 = "all",
+                X9 = function(e) {
+                    return !e || e === J9
                 },
-                K9 = "search",
-                Q9 = "searchType",
-                Y9 = "timeRange",
-                $9 = "searchCategory";
+                Z9 = "search",
+                e7 = "searchType",
+                t7 = "timeRange",
+                n7 = "searchCategory";
 
-            function J9(e) {
+            function r7(e) {
                 if (!e.startsWith("@")) return null;
                 var t = e.slice(1),
                     n = t.indexOf(" ");
@@ -75055,24 +75131,24 @@
                 }
             }
 
-            function X9(e) {
+            function o7(e) {
                 var t = new URLSearchParams;
-                e.query && t.set(K9, e.query), e.contentType && t.set(Q9, e.contentType), e.timeRange !== N9.All && t.set(Y9, e.timeRange), e.categoryId && t.set($9, e.categoryId);
+                e.query && t.set(Z9, e.query), e.contentType && t.set(e7, e.contentType), e.timeRange !== L9.All && t.set(t7, e.timeRange), e.categoryId && t.set(n7, e.categoryId);
                 var n = t.toString();
                 return n ? "?".concat(n) : ""
             }
-            var Z9 = function() {
-                    return Z9 = Object.assign || function(e) {
+            var i7 = function() {
+                    return i7 = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, Z9.apply(this, arguments)
+                    }, i7.apply(this, arguments)
                 },
-                e7 = /@\S+/g,
-                t7 = function() {
+                a7 = /@\S+/g,
+                u7 = function() {
                     return SV().mintSearchId() || "local-".concat(Date.now(), "-").concat(Math.random().toString(36).slice(2))
                 };
-            var n7 = function(e) {
+            var s7 = function(e) {
                 var t, n, o = e.groupId,
                     i = e.urlState,
                     a = e.mode,
@@ -75084,9 +75160,9 @@
                     f = e.navEntryKey,
                     v = i.query,
                     m = i.timeRange,
-                    h = null !== (t = i.contentType) && void 0 !== t ? t : T9.Any,
+                    h = null !== (t = i.contentType) && void 0 !== t ? t : U9.Any,
                     g = (0, r.useMemo)((function() {
-                        var e = s ? J9(v) : null;
+                        var e = s ? r7(v) : null;
                         return v ? (null == e ? void 0 : e.isComplete) ? e.username.length < 2 ? {
                             authorUsername: "",
                             effectiveQuery: e.contentQuery || v
@@ -75126,16 +75202,16 @@
                     }), [y, E]),
                     C = (0, r.useMemo)((function() {
                         return function(e, t) {
-                            if (void 0 === t && (t = new Date), e !== N9.All) {
+                            if (void 0 === t && (t = new Date), e !== L9.All) {
                                 var n = new Date(t.getTime());
                                 switch (e) {
-                                    case N9.Day:
+                                    case L9.Day:
                                         n.setDate(n.getDate() - 1);
                                         break;
-                                    case N9.Week:
+                                    case L9.Week:
                                         n.setDate(n.getDate() - 7);
                                         break;
-                                    case N9.Month:
+                                    case L9.Month:
                                         n.setMonth(n.getMonth() - 1);
                                         break;
                                     default:
@@ -75146,13 +75222,13 @@
                         }(m)
                     }), [m]),
                     x = (0, r.useMemo)((function() {
-                        return a !== M9.Search ? u : H9(i.categoryId) ? void 0 : i.categoryId
+                        return a !== q9.Search ? u : X9(i.categoryId) ? void 0 : i.categoryId
                     }), [a, u, i.categoryId]),
                     A = y.length > 0,
                     S = (null !== (n = null == D ? void 0 : D.length) && void 0 !== n ? n : 0) > 0,
-                    P = d && a !== M9.Browse && !I && (!A || S),
+                    P = d && a !== q9.Browse && !I && (!A || S),
                     k = pV.Text;
-                a === M9.FilteredBrowse ? k = pV.FiltersOnly : A && (k = pV.Member);
+                a === q9.FilteredBrowse ? k = pV.FiltersOnly : A && (k = pV.Member);
                 var R = function(e, t, n, r, o, i, a) {
                         return ["forumSearch", e, t, n, r, o, i, a]
                     }(o, v, h, m, C, x, null == D ? void 0 : D.join(",")),
@@ -75170,7 +75246,7 @@
                     navEntryKey: f,
                     key: M,
                     retryCount: F,
-                    id: t7()
+                    id: u7()
                 });
                 var B = N.current.id,
                     j = (0, l.useInfiniteQuery)({
@@ -75196,7 +75272,7 @@
                                 }))
                             }(o, {
                                 query: b || void 0,
-                                contentType: h !== T9.Any ? h : void 0,
+                                contentType: h !== U9.Any ? h : void 0,
                                 fromTime: C,
                                 toTime: void 0,
                                 categoryIds: x ? [x] : void 0,
@@ -75235,7 +75311,7 @@
                                 return !!e.post
                             })).forEach((function(e, o) {
                                 var i, a, u = t.get(e.post.categoryId);
-                                n.push(Z9(Z9({}, e), {
+                                n.push(i7(i7({}, e), {
                                     searchId: B,
                                     resultType: "Comment" === e.contentType && e.comment ? vV.Comment : vV.Post,
                                     pageIndex: r,
@@ -75264,7 +75340,7 @@
                             groupId: o,
                             surface: dV.ForumsSearch,
                             searchMode: k,
-                            searchKeyword: (n = b, n.replace(e7, " ").replace(/\s+/g, " ").trim()),
+                            searchKeyword: (n = b, n.replace(a7, " ").replace(/\s+/g, " ").trim()),
                             isMemberSearch: A,
                             searchTrigger: p,
                             contentType: h,
@@ -75285,7 +75361,7 @@
                                     results: H.filter((function(t) {
                                         return t.pageIndex === e
                                     })).map((function(e) {
-                                        return Z9(Z9({
+                                        return i7(i7({
                                             resultType: e.resultType,
                                             postId: e.post.id
                                         }, e.comment && {
@@ -75309,7 +75385,7 @@
                     isFetchingNextPage: V
                 }
             };
-            var r7 = function(e) {
+            var l7 = function(e) {
                     var t, n, o = e.currentCategoryId,
                         i = (0, kY.useHistory)(),
                         a = (0, kY.useLocation)(),
@@ -75318,21 +75394,21 @@
                             return function(e) {
                                 var t, n, r = new URLSearchParams(e);
                                 return {
-                                    query: null !== (t = r.get(K9)) && void 0 !== t ? t : "",
-                                    contentType: r.get(Q9) || void 0,
-                                    timeRange: r.get(Y9) || N9.All,
-                                    categoryId: null !== (n = r.get($9)) && void 0 !== n ? n : void 0
+                                    query: null !== (t = r.get(Z9)) && void 0 !== t ? t : "",
+                                    contentType: r.get(e7) || void 0,
+                                    timeRange: r.get(t7) || L9.All,
+                                    categoryId: null !== (n = r.get(n7)) && void 0 !== n ? n : void 0
                                 }
                             }(a.search)
                         }), [a.search]),
                         l = (0, r.useMemo)((function() {
-                            return t = (e = s).query.trim().length >= 2, n = void 0 !== e.contentType || e.timeRange !== N9.All || !H9(e.categoryId), t ? M9.Search : n ? M9.FilteredBrowse : M9.Browse;
+                            return t = (e = s).query.trim().length >= 2, n = void 0 !== e.contentType || e.timeRange !== L9.All || !X9(e.categoryId), t ? q9.Search : n ? q9.FilteredBrowse : q9.Browse;
                             var e, t, n
                         }), [s]),
                         c = s.query,
                         d = s.timeRange,
                         p = s.categoryId,
-                        f = null !== (t = s.contentType) && void 0 !== t ? t : T9.Any,
+                        f = null !== (t = s.contentType) && void 0 !== t ? t : U9.Any,
                         v = (0, r.useCallback)((function(e, t) {
                             void 0 === t && (t = fV.Search), i.push({
                                 pathname: u,
@@ -75350,7 +75426,7 @@
                         }), [i.action, a]),
                         h = (0, r.useCallback)((function(e) {
                             var t = e.trim().length >= 2;
-                            v(X9({
+                            v(o7({
                                 query: e,
                                 contentType: s.contentType,
                                 timeRange: d,
@@ -75359,18 +75435,18 @@
                         }), [v, s.contentType, d, p, o]),
                         g = (0, r.useCallback)((function(e) {
                             var t;
-                            v(X9({
+                            v(o7({
                                 query: c,
                                 contentType: e.contentType,
                                 timeRange: e.timeRange,
-                                categoryId: l === M9.Search ? null !== (t = e.categoryId) && void 0 !== t ? t : o : void 0
+                                categoryId: l === q9.Search ? null !== (t = e.categoryId) && void 0 !== t ? t : o : void 0
                             }))
                         }), [v, c, l, o]),
                         y = (0, r.useCallback)((function() {
-                            v(X9({
+                            v(o7({
                                 query: c,
                                 contentType: void 0,
-                                timeRange: N9.All,
+                                timeRange: L9.All,
                                 categoryId: void 0
                             }), fV.Reset)
                         }), [v, c]),
@@ -75392,39 +75468,39 @@
                         navEntryKey: null !== (n = a.key) && void 0 !== n ? n : ""
                     }
                 },
-                o7 = "IsForumsSearchEnabled";
-            var i7 = function(t) {
+                c7 = "IsForumsSearchEnabled";
+            var d7 = function(t) {
                     var n = (0, r.useState)(!1),
                         o = n[0],
                         i = n[1];
                     return (0, r.useEffect)((function() {
                         t && e.ExperimentationService.getAllValuesForLayer(pY).then((function(t) {
-                            i(!0 === (null == t ? void 0 : t[o7])), t && o7 in t && e.ExperimentationService.logLayerExposure(pY)
+                            i(!0 === (null == t ? void 0 : t[c7])), t && c7 in t && e.ExperimentationService.logLayerExposure(pY)
                         })).catch((function() {
                             i(!1)
                         }))
                     }), [t]), o
                 },
-                a7 = function() {
-                    return a7 = Object.assign || function(e) {
+                p7 = function() {
+                    return p7 = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, a7.apply(this, arguments)
+                    }, p7.apply(this, arguments)
                 },
-                u7 = function(e, t, n) {
+                f7 = function(e, t, n) {
                     if (n || 2 === arguments.length)
                         for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                     return e.concat(r || Array.prototype.slice.call(t))
                 },
-                s7 = (0, r.createContext)(void 0),
-                l7 = function() {
-                    var e = (0, r.useContext)(s7);
+                v7 = (0, r.createContext)(void 0),
+                m7 = function() {
+                    var e = (0, r.useContext)(v7);
                     if (!e) throw new Error("useForumsSearchContext must be used within a ForumsSearchProvider");
                     return e
                 };
 
-            function c7(e) {
+            function h7(e) {
                 var t = e.children,
                     n = MQ.use.groupId(),
                     i = MQ.use.categoryId(),
@@ -75432,15 +75508,15 @@
                     u = MQ.use.archivedCategories(),
                     s = EY().canViewMembers,
                     l = GV().features,
-                    c = i7(!!l.ForumsSearch),
+                    c = d7(!!l.ForumsSearch),
                     d = !!l.ForumsSearch && c,
-                    p = r7({
+                    p = l7({
                         currentCategoryId: i
                     }),
                     f = (0, r.useMemo)((function() {
-                        return u7(u7([], a, !0), u, !0)
+                        return f7(f7([], a, !0), u, !0)
                     }), [a, u]),
-                    v = n7({
+                    v = s7({
                         groupId: n,
                         urlState: p.urlState,
                         mode: p.mode,
@@ -75451,18 +75527,18 @@
                         searchTrigger: p.searchTrigger,
                         navEntryKey: p.navEntryKey
                     }),
-                    m = a7(a7({
+                    m = p7(p7({
                         isEnabled: d,
-                        isSearchActive: d && p.mode !== M9.Browse,
+                        isSearchActive: d && p.mode !== q9.Browse,
                         groupId: n,
                         categories: a,
                         canViewMembers: s
                     }, p), v);
-                return o().createElement(s7.Provider, {
+                return o().createElement(v7.Provider, {
                     value: m
                 }, t)
             }
-            var d7 = function(e) {
+            var g7 = function(e) {
                     var t = e.post,
                         n = e.highlights,
                         r = e.categoryName,
@@ -75472,7 +75548,7 @@
                         s = e.onResultClick;
                     return o().createElement("div", {
                         className: "group-forums-search-result-post"
-                    }, o().createElement(i6, {
+                    }, o().createElement(d6, {
                         showPinned: !1,
                         hasMenu: !1,
                         post: t,
@@ -75485,7 +75561,7 @@
                         onOpened: s
                     }))
                 },
-                p7 = (0, u.withTranslations)((function(e) {
+                y7 = (0, u.withTranslations)((function(e) {
                     var t, n, i, a, u = e.post,
                         s = e.comment,
                         l = e.highlights,
@@ -75528,25 +75604,25 @@
                         createdTime: s.createdAt
                     }), o().createElement("div", {
                         className: "group-forums-search-result-comment-content richtext-base"
-                    }, (null == l ? void 0 : l.body) ? o().createElement("span", null, Y5(l.body)) : o().createElement(W5, {
+                    }, (null == l ? void 0 : l.body) ? o().createElement("span", null, $5(l.body)) : o().createElement(W5, {
                         content: s.content
                     }))))
                 }), Gj),
-                f7 = function() {
-                    return f7 = Object.assign || function(e) {
+                b7 = function() {
+                    return b7 = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, f7.apply(this, arguments)
+                    }, b7.apply(this, arguments)
                 },
-                v7 = function() {
+                w7 = function() {
                     return o().createElement("div", {
                         className: "group-posts-list group-posts-list-skeleton"
-                    }, o().createElement(w9, null), o().createElement(w9, null), o().createElement(w9, null))
+                    }, o().createElement(A9, null), o().createElement(A9, null), o().createElement(A9, null))
                 },
-                m7 = function() {
+                E7 = function() {
                     var e = (0, u.useTranslation)().translate,
-                        t = l7(),
+                        t = m7(),
                         n = t.results,
                         i = t.isLoading,
                         a = t.isError,
@@ -75559,7 +75635,7 @@
                         v = t.groupId,
                         m = (0, r.useCallback)((function(e) {
                             var t;
-                            t = f7(f7({
+                            t = b7(b7({
                                 searchId: e.searchId,
                                 groupId: v,
                                 surface: dV.ForumsSearch,
@@ -75573,8 +75649,8 @@
                                 pageIndex: e.pageIndex
                             }), SV().logCmntyForumsSearchResultClickedEvent(t)
                         }), [v]),
-                        h = p === M9.Search && H9(f.categoryId);
-                    return i ? o().createElement(v7, null) : a ? o().createElement(x9, {
+                        h = p === q9.Search && X9(f.categoryId);
+                    return i ? o().createElement(w7, null) : a ? o().createElement(O9, {
                         className: "group-forums-posts-list-no-post",
                         iconClassName: "icon-status-alert",
                         heading: e("Error.LoadCategoryTitle"),
@@ -75588,7 +75664,7 @@
                     }, o().createElement("div", {
                         className: "group-forums-post-list-content"
                     }, n.map((function(e) {
-                        return "Comment" === e.contentType && e.comment ? o().createElement(p7, {
+                        return "Comment" === e.contentType && e.comment ? o().createElement(y7, {
                             key: "".concat(e.post.id, "-").concat(e.comment.id),
                             post: e.post,
                             comment: e.comment,
@@ -75599,7 +75675,7 @@
                             onResultClick: function() {
                                 return m(e)
                             }
-                        }) : o().createElement(d7, {
+                        }) : o().createElement(g7, {
                             key: e.post.id,
                             post: e.post,
                             highlights: e.highlights,
@@ -75611,19 +75687,19 @@
                                 return m(e)
                             }
                         })
-                    })), l && o().createElement(E9, {
+                    })), l && o().createElement(S9, {
                         onLoadMore: d,
                         viewingThreshold: 1
                     }), c && o().createElement("div", {
                         className: "spinner spinner-default spinner-infinite-scroll"
-                    }))) : o().createElement(x9, {
+                    }))) : o().createElement(O9, {
                         className: "group-forums-posts-list-no-post",
                         iconClassName: "icon-regular-magnifying-glass",
                         heading: e("Label.NoSearchResults"),
                         message: e("Label.NoSearchResultsText")
                     })
                 },
-                h7 = function() {
+                I7 = function() {
                     var e, t = MQ.use.groupId(),
                         n = GV(),
                         r = n.features,
@@ -75640,7 +75716,7 @@
                         isTierGated: !0 === r.CommunityTiers && null != a && a.currentTier < wW && !c && "Eligible" !== d
                     }
                 },
-                g7 = function(e) {
+                D7 = function(e) {
                     var t, n = e.label,
                         r = e.disabled,
                         i = e.onClick,
@@ -75650,7 +75726,7 @@
                         l = u.canCreatePost,
                         c = MQ.use.isCategoryArchived(),
                         d = VK().forumsWrite,
-                        p = h7().isTierGated;
+                        p = I7().isTierGated;
                     r && (d.isDisabled ? t = a("Description.CreatePostDisabled") : p ? t = a("Description.TierGatedForumWrite") : c ? t = a("Description.CategoryArchived") : s && !l ? t = a("Description.NoPostPermission") : s || (t = a("Description.JoinCommunityFirst")));
                     var f = "create-post-button",
                         v = "".concat(f, "-tooltip");
@@ -75673,17 +75749,17 @@
                         tabIndex: r ? -1 : 0
                     }, n))
                 };
-            g7.displayName = "CreatePostButton";
-            var y7 = (0, u.withTranslations)(g7, Gj),
-                b7 = "app-bumper-container",
-                w7 = function() {
+            D7.displayName = "CreatePostButton";
+            var C7 = (0, u.withTranslations)(D7, Gj),
+                x7 = "app-bumper-container",
+                A7 = function() {
                     var e = (0, r.useState)((function() {
-                            return document.getElementsByClassName(b7).length > 0
+                            return document.getElementsByClassName(x7).length > 0
                         })),
                         t = e[0],
                         n = e[1];
                     return (0, r.useEffect)((function() {
-                        var e = document.getElementsByClassName(b7)[0];
+                        var e = document.getElementsByClassName(x7)[0];
                         if (!e || !e.parentElement) return function() {
                             return null
                         };
@@ -75702,12 +75778,12 @@
                             }
                     }), []), t
                 },
-                E7 = function(e) {
+                S7 = function(e) {
                     var t = e.fixed,
                         n = e.children,
                         i = e.footerContainerClass,
                         a = void 0 === i ? "groups-page-footer" : i,
-                        u = w7();
+                        u = A7();
                     return (0, r.useEffect)((function() {
                         var e;
                         return t ? (null === (e = document.getElementById("footer-container")) || void 0 === e || e.classList.add(a), function() {
@@ -75720,7 +75796,7 @@
                         className: qj()("groups-native-footer", t && "groups-native-footer-fixed", t && u && "groups-native-footer-with-bumper")
                     }, n)
                 },
-                I7 = function(e) {
+                P7 = function(e) {
                     var t, n = e.user,
                         i = e.groupId,
                         a = e.content,
@@ -75786,10 +75862,10 @@
                         })
                     })))))) : null))
                 },
-                D7 = function(e, t) {
+                k7 = function(e, t) {
                     return "".concat(e, "-option-").concat(t)
                 };
-            var C7 = function(e) {
+            var R7 = function(e) {
                     var t = e.listboxId,
                         n = e.optionCount,
                         o = e.isOpen,
@@ -75818,12 +75894,12 @@
                             "aria-expanded": o,
                             "aria-controls": t,
                             "aria-autocomplete": "list",
-                            "aria-activedescendant": o && u >= 0 ? D7(t, u) : void 0
+                            "aria-activedescendant": o && u >= 0 ? k7(t, u) : void 0
                         },
                         handleKeyDown: c
                     }
                 },
-                x7 = function() {
+                O7 = function() {
                     return o().createElement("div", {
                         className: "group-forums-member-suggestion-skeleton"
                     }, o().createElement("div", {
@@ -75836,7 +75912,7 @@
                         className: "group-forums-member-suggestion-line-skeleton group-forums-skeleton"
                     })))
                 },
-                A7 = (0, u.withTranslations)((function(e) {
+                F7 = (0, u.withTranslations)((function(e) {
                     var t = e.listboxId,
                         n = e.status,
                         r = e.members,
@@ -75849,14 +75925,14 @@
                         role: "listbox",
                         className: "group-forums-member-suggestions"
                     }, function() {
-                        if ("loading" === n) return o().createElement(x7, null);
+                        if ("loading" === n) return o().createElement(O7, null);
                         var e = "error" === n ? s("Label.MemberSearchError") : "belowMinLength" === n ? s("Label.MemberSearchHint") : 0 === r.length ? s("Label.NoMembersFound") : null;
                         return null !== e ? o().createElement("div", {
                             className: "group-forums-member-suggestions-message content-muted text-body-small"
                         }, e) : o().createElement(o().Fragment, null, r.map((function(e, n) {
                             return o().createElement("div", {
                                 key: e.userId,
-                                id: D7(t, n),
+                                id: k7(t, n),
                                 role: "option",
                                 tabIndex: -1,
                                 "aria-selected": n === a,
@@ -75864,14 +75940,14 @@
                                 onClick: function(t) {
                                     t.preventDefault(), u(e)
                                 }
-                            }, o().createElement(I7, {
+                            }, o().createElement(P7, {
                                 user: e,
                                 groupId: i
                             }))
                         })))
                     }())
                 }), aH);
-            var S7 = function(e, t, n) {
+            var T7 = function(e, t, n) {
                 var o = void 0 === n ? {} : n,
                     i = o.enabled,
                     a = void 0 === i || i,
@@ -75907,7 +75983,7 @@
                 }
             };
 
-            function P7(e, t) {
+            function N7(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -75930,46 +76006,46 @@
                     return n
                 }(e, t) || function(e, t) {
                     if (!e) return;
-                    if ("string" == typeof e) return k7(e, t);
+                    if ("string" == typeof e) return M7(e, t);
                     var n = Object.prototype.toString.call(e).slice(8, -1);
                     "Object" === n && e.constructor && (n = e.constructor.name);
                     if ("Map" === n || "Set" === n) return Array.from(e);
-                    if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return k7(e, t)
+                    if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return M7(e, t)
                 }(e, t) || function() {
                     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function k7(e, t) {
+            function M7(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = new Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function R7(e) {
-                return R7 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
+            function B7(e) {
+                return B7 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
                     return typeof e
                 } : function(e) {
                     return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e
-                }, R7(e)
+                }, B7(e)
             }
-            var O7 = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof window ? window : void 0 !== n.g ? n.g : "undefined" != typeof self ? self : {},
-                F7 = "object" == R7(O7) && O7 && O7.Object === Object && O7,
-                T7 = "object" == ("undefined" == typeof self ? "undefined" : R7(self)) && self && self.Object === Object && self;
-            F7 || T7 || Function("return this")();
-            var N7 = "undefined" != typeof window ? r.useLayoutEffect : r.useEffect,
-                M7 = "undefined" == typeof window;
+            var j7 = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof window ? window : void 0 !== n.g ? n.g : "undefined" != typeof self ? self : {},
+                G7 = "object" == B7(j7) && j7 && j7.Object === Object && j7,
+                U7 = "object" == ("undefined" == typeof self ? "undefined" : B7(self)) && self && self.Object === Object && self;
+            G7 || U7 || Function("return this")();
+            var L7 = "undefined" != typeof window ? r.useLayoutEffect : r.useEffect,
+                q7 = "undefined" == typeof window;
 
-            function B7(e) {
+            function z7(e) {
                 var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
                     n = t.defaultValue,
                     o = void 0 !== n && n,
                     i = t.initializeWithValue,
                     a = void 0 === i || i,
                     u = function(e) {
-                        return M7 ? o : window.matchMedia(e).matches
+                        return q7 ? o : window.matchMedia(e).matches
                     },
-                    s = P7((0, r.useState)((function() {
+                    s = N7((0, r.useState)((function() {
                         return a ? u(e) : o
                     })), 2),
                     l = s[0],
@@ -75978,7 +76054,7 @@
                 function d() {
                     c(u(e))
                 }
-                return N7((function() {
+                return L7((function() {
                     var t = window.matchMedia(e);
                     return d(), t.addListener ? t.addListener(d) : t.addEventListener("change", d),
                         function() {
@@ -75987,7 +76063,7 @@
                 }), [e]), l
             }
             T("@keyframes fui-base-sheet-overlay-fade-in{0%{background-color:transparent}to{background-color:var(--color-common-backdrop)}}@keyframes fui-base-sheet-overlay-fade-out{0%{background-color:var(--color-common-backdrop)}to{background-color:transparent}}@keyframes fui-base-sheet-slide-in-from-right{0%{transform:translateX(110%)}to{transform:translateX(0)}}@keyframes fui-base-sheet-slide-out-to-right{0%{transform:translateX(0)}to{transform:translateX(110%)}}@keyframes fui-base-sheet-slide-in-from-left{0%{transform:translateX(-110%)}to{transform:translateX(0)}}@keyframes fui-base-sheet-slide-out-to-left{0%{transform:translateX(0)}to{transform:translateX(-110%)}}@keyframes fui-base-sheet-fade-in{0%{opacity:0}to{opacity:1}}@keyframes fui-base-sheet-fade-out{0%{opacity:1}to{opacity:0}}@keyframes fui-base-sheet-slide-in-from-bottom{0%{transform:translateY(110%)}to{transform:translateY(0)}}@keyframes fui-base-sheet-slide-out-to-bottom{0%{transform:translateY(0)}to{transform:translateY(110%)}}.fui-base-sheet-overlay{background-color:var(--color-common-backdrop)}.fui-base-sheet-overlay[data-state=open]{animation:fui-base-sheet-overlay-fade-in var(--time-100) var(--ease-linear)}.fui-base-sheet-overlay[data-state=closed]{animation:fui-base-sheet-overlay-fade-out var(--time-100) var(--ease-linear)}.fui-base-sheet-overlay[data-type=bottomSheet]{align-items:flex-end;justify-content:center}.fui-base-sheet-overlay[data-type=bottomSheet] .fui-base-sheet-content{border-top-left-radius:var(--radius-large);border-top-right-radius:var(--radius-large);margin-left:env(safe-area-inset-left);margin-right:env(safe-area-inset-right);max-height:90vh;max-width:440px;padding-bottom:env(safe-area-inset-bottom);width:100%}.fui-base-sheet-overlay .fui-base-sheet-content[data-state=open]{animation-duration:var(--time-300);animation-timing-function:var(--ease-standard-out)}.fui-base-sheet-overlay .fui-base-sheet-content[data-state=closed]{animation-duration:var(--time-100);animation-timing-function:var(--ease-standard-in)}.fui-base-sheet-overlay[data-type=bottomSheet] .fui-base-sheet-content[data-state=open]{animation-name:fui-base-sheet-slide-in-from-bottom}.fui-base-sheet-overlay[data-type=bottomSheet] .fui-base-sheet-content[data-state=closed]{animation-name:fui-base-sheet-slide-out-to-bottom}.fui-base-sheet-overlay[data-type=sideSheet][data-side=right]{align-items:stretch;justify-content:flex-end}.fui-base-sheet-overlay[data-type=sideSheet][data-side=left]{align-items:stretch;justify-content:flex-start}.fui-base-sheet-overlay[data-type=sideSheet][data-flush=true] .fui-base-sheet-content{max-height:100vh;padding-bottom:env(safe-area-inset-bottom);padding-top:env(safe-area-inset-top);width:100%}.fui-base-sheet-overlay[data-type=sideSheet][data-flush=true][data-side=right] .fui-base-sheet-content{max-width:360px;max-width:max(env(safe-area-inset-right) + 360px,360px);padding-right:env(safe-area-inset-right)}.fui-base-sheet-overlay[data-type=sideSheet][data-flush=true][data-side=left] .fui-base-sheet-content{max-width:360px;max-width:max(env(safe-area-inset-right) + 360px,360px);padding-left:env(safe-area-inset-left)}.fui-base-sheet-overlay[data-type=sideSheet][data-side=right] .fui-base-sheet-content[data-state=open]{animation-name:fui-base-sheet-slide-in-from-right}.fui-base-sheet-overlay[data-type=sideSheet][data-side=right] .fui-base-sheet-content[data-state=closed]{animation-name:fui-base-sheet-slide-out-to-right}.fui-base-sheet-overlay[data-type=sideSheet][data-side=left] .fui-base-sheet-content[data-state=open]{animation-name:fui-base-sheet-slide-in-from-left}.fui-base-sheet-overlay[data-type=sideSheet][data-side=left] .fui-base-sheet-content[data-state=closed]{animation-name:fui-base-sheet-slide-out-to-left}.fui-base-sheet-overlay[data-type=sideSheet][data-flush=false] .fui-base-sheet-content{border-radius:var(--radius-large);margin:var(--padding-medium);margin-bottom:max(env(safe-area-inset-bottom),var(--padding-medium));margin-top:max(env(safe-area-inset-top),var(--padding-medium));max-height:100vh;max-width:360px;width:100%}.fui-base-sheet-overlay[data-type=sideSheet][data-flush=false][data-side=right] .fui-base-sheet-content{margin-right:max(env(safe-area-inset-right),var(--padding-medium))}.fui-base-sheet-overlay[data-type=sideSheet][data-flush=false][data-side=left] .fui-base-sheet-content{margin-left:max(env(safe-area-inset-left),var(--padding-medium))}.fui-base-sheet-overlay[data-type=centerSheet]{align-items:center;justify-content:center;padding:var(--padding-medium)}.fui-base-sheet-overlay[data-type=centerSheet] .fui-base-sheet-content{border-radius:var(--radius-large);max-height:90vh}.fui-base-sheet-overlay[data-type=centerSheet][data-size=Medium] .fui-base-sheet-content{max-width:480px;width:100%}.fui-base-sheet-overlay[data-type=centerSheet][data-size=Large] .fui-base-sheet-content{max-width:640px;width:100%}.fui-base-sheet-overlay[data-type=centerSheet] .fui-base-sheet-content[data-state=open]{animation-name:fui-base-sheet-fade-in}.fui-base-sheet-overlay[data-type=centerSheet] .fui-base-sheet-content[data-state=closed]{animation-name:fui-base-sheet-fade-out}");
-            var j7 = function(e) {
+            var _7 = function(e) {
                     var t = e.type,
                         n = e.sideSheetSide,
                         r = void 0 === n ? "right" : n,
@@ -76020,7 +76096,7 @@
                         onInteractOutside: g
                     }, l)))
                 },
-                G7 = function(e) {
+                V7 = function(e) {
                     var t = e.currentTarget;
                     if (t) {
                         var n = t.querySelectorAll("[data-autofocus-priority]");
@@ -76052,14 +76128,14 @@
                         }
                     }
                 },
-                U7 = (0, r.createContext)(null),
-                L7 = function() {
-                    var e = (0, r.useContext)(U7);
+                W7 = (0, r.createContext)(null),
+                H7 = function() {
+                    var e = (0, r.useContext)(W7);
                     if (!e) throw new Error("Sheet components must be used within a Sheet");
                     return e
                 },
-                q7 = "padding-x-xlarge",
-                z7 = function(e) {
+                K7 = "padding-x-xlarge",
+                Q7 = function(e) {
                     var t = e.open,
                         n = e.onOpenChange,
                         r = e.defaultOpen,
@@ -76071,7 +76147,7 @@
                         modal: !0
                     }, i)
                 },
-                _7 = function(e) {
+                Y7 = function(e) {
                     var t, n = e.children,
                         i = e.centerSheetSize,
                         a = void 0 === i ? "Medium" : i,
@@ -76087,8 +76163,8 @@
                         g = e.onPointerDownOutside,
                         y = e.onEscapeKeyDown,
                         b = e.onInteractOutside,
-                        w = B7("(orientation: portrait) and (max-width: 600px)"),
-                        E = B7("(orientation: landscape) and (max-height: 600px)");
+                        w = z7("(orientation: portrait) and (max-width: 600px)"),
+                        E = z7("(orientation: landscape) and (max-height: 600px)");
                     t = w ? "bottomSheet" : E || "side" === s ? "sideSheet" : "centerSheet";
                     var I = (0, r.useMemo)((function() {
                             return {
@@ -76101,41 +76177,41 @@
                             }
                         }), [a, s, l, w, E, t]),
                         D = v(c, w && d, E && p, !w && !E && f);
-                    return o().createElement(U7.Provider, {
+                    return o().createElement(W7.Provider, {
                         value: I
-                    }, o().createElement(j7, {
+                    }, o().createElement(_7, {
                         type: t,
                         sideSheetSide: "right",
                         isSideSheetFlush: E,
                         centerSheetSize: a,
                         contentClassName: D,
-                        onOpenAutoFocus: null != m ? m : G7,
+                        onOpenAutoFocus: null != m ? m : V7,
                         onCloseAutoFocus: h,
                         onPointerDownOutside: g,
                         onEscapeKeyDown: y,
                         onInteractOutside: b
                     }, n))
                 },
-                V7 = (0, r.forwardRef)((function(e, t) {
+                $7 = (0, r.forwardRef)((function(e, t) {
                     var n = e.children,
                         r = e.className,
                         i = e.hasPaddingX,
                         a = void 0 === i || i,
                         u = d(e, ["children", "className", "hasPaddingX"]),
-                        s = L7().type;
+                        s = H7().type;
                     return o().createElement("div", Object.assign({
                         ref: t,
-                        className: v("scroll-y", a && q7, "sideSheet" === s ? "grow-1" : "", r)
+                        className: v("scroll-y", a && K7, "sideSheet" === s ? "grow-1" : "", r)
                     }, u), n)
                 }));
-            V7.displayName = "SheetBody";
-            var W7 = function(e) {
+            $7.displayName = "SheetBody";
+            var J7 = function(e) {
                     var t = e.className,
                         n = e.children,
                         r = e.navigation,
                         i = e.utilities,
                         a = e.visuallyHideTitleText,
-                        u = L7().closeLabel,
+                        u = H7().closeLabel,
                         s = o().createElement(Rm, {
                             className: "text-heading-small margin-none"
                         }, n);
@@ -76157,23 +76233,23 @@
                         "data-autofocus-priority": "1000"
                     })))))
                 },
-                H7 = function(e) {
+                X7 = function(e) {
                     var t = e.children,
                         n = e.className,
                         r = d(e, ["children", "className"]);
                     return o().createElement(o().Fragment, null, o().createElement(D5, null), o().createElement("div", Object.assign({
-                        className: v(q7, "margin-y-small shrink-0", n)
+                        className: v(K7, "margin-y-small shrink-0", n)
                     }, r), t))
                 },
-                K7 = function(e) {
+                Z7 = function(e) {
                     return o().createElement(Om, Object.assign({
                         asChild: !0
                     }, e))
                 },
-                Q7 = function(e) {
+                eee = function(e) {
                     var t = e.onClose,
                         n = (0, u.useTranslation)().translate,
-                        i = l7(),
+                        i = m7(),
                         a = i.contentType,
                         s = i.timeRange,
                         l = i.filterCategoryId,
@@ -76182,7 +76258,7 @@
                         p = i.mode,
                         f = i.applyFilters,
                         v = i.resetFilters,
-                        m = p !== M9.Browse,
+                        m = p !== q9.Browse,
                         h = d.query.length > 0,
                         g = (0, r.useState)(m ? a : ""),
                         y = g[0],
@@ -76190,30 +76266,30 @@
                         w = (0, r.useState)(m ? s : ""),
                         E = w[0],
                         I = w[1],
-                        D = (0, r.useState)(m ? null != l ? l : W9 : void 0),
+                        D = (0, r.useState)(m ? null != l ? l : J9 : void 0),
                         C = D[0],
                         x = D[1],
                         A = (0, r.useCallback)((function() {
                             f({
-                                contentType: y || T9.Any,
-                                timeRange: E || N9.All,
+                                contentType: y || U9.Any,
+                                timeRange: E || L9.All,
                                 categoryId: C
                             }), t()
                         }), [y, E, C, f, t]),
                         S = (0, r.useCallback)((function() {
                             v(), t()
                         }), [v, t]);
-                    return o().createElement(z7, {
+                    return o().createElement(Q7, {
                         open: !0,
                         onOpenChange: function(e) {
                             return !e && t()
                         }
-                    }, o().createElement(_7, {
+                    }, o().createElement(Y7, {
                         className: "group-forums-search-filters-sheet",
                         centerSheetSize: "Medium",
                         largeScreenVariant: "center",
                         closeLabel: n("Action.Close")
-                    }, o().createElement(W7, null, n("Action.Filters")), o().createElement(V7, {
+                    }, o().createElement(J7, null, n("Action.Filters")), o().createElement($7, {
                         className: "flex flex-col gap-xlarge padding-bottom-large"
                     }, o().createElement("div", {
                         className: "flex flex-col gap-small"
@@ -76226,15 +76302,15 @@
                             return b(e)
                         }
                     }, o().createElement(Cx, {
-                        value: T9.Any,
+                        value: U9.Any,
                         label: n("Label.SearchAll"),
                         "aria-label": n("Label.SearchAll")
                     }), o().createElement(Cx, {
-                        value: T9.Post,
+                        value: U9.Post,
                         label: n("Label.SearchPosts"),
                         "aria-label": n("Label.SearchPosts")
                     }), o().createElement(Cx, {
-                        value: T9.Comment,
+                        value: U9.Comment,
                         label: n("Label.SearchComments"),
                         "aria-label": n("Label.SearchComments")
                     }))), h && o().createElement("div", {
@@ -76248,7 +76324,7 @@
                             return x(e)
                         }
                     }, o().createElement(Cx, {
-                        value: W9,
+                        value: J9,
                         label: n("Label.AllCategories"),
                         "aria-label": n("Label.AllCategories")
                     }), c.map((function(e) {
@@ -76269,22 +76345,22 @@
                             return I(e)
                         }
                     }, o().createElement(Cx, {
-                        value: N9.Day,
+                        value: L9.Day,
                         label: n("Label.TimeRangeDay"),
                         "aria-label": n("Label.TimeRangeDay")
                     }), o().createElement(Cx, {
-                        value: N9.Week,
+                        value: L9.Week,
                         label: n("Label.TimeRangeWeek"),
                         "aria-label": n("Label.TimeRangeWeek")
                     }), o().createElement(Cx, {
-                        value: N9.Month,
+                        value: L9.Month,
                         label: n("Label.TimeRangeMonth"),
                         "aria-label": n("Label.TimeRangeMonth")
                     }), o().createElement(Cx, {
-                        value: N9.All,
+                        value: L9.All,
                         label: n("Label.TimeRangeAll"),
                         "aria-label": n("Label.TimeRangeAll")
-                    })))), o().createElement(H7, {
+                    })))), o().createElement(X7, {
                         className: "group-forums-search-filters-actions"
                     }, o().createElement(q, {
                         variant: "Emphasis",
@@ -76296,18 +76372,18 @@
                         onClick: S
                     }, n("Action.Reset")))))
                 },
-                Y7 = function() {
-                    return Y7 = Object.assign || function(e) {
+                tee = function() {
+                    return tee = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, Y7.apply(this, arguments)
+                    }, tee.apply(this, arguments)
                 },
-                $7 = "group-forums-member-suggestions",
-                J7 = function(e) {
+                nee = "group-forums-member-suggestions",
+                ree = function(e) {
                     var t = e.onCollapse,
                         n = (0, u.useTranslation)().translate,
-                        i = l7(),
+                        i = m7(),
                         a = i.groupId,
                         s = i.canViewMembers,
                         l = i.urlState,
@@ -76322,12 +76398,12 @@
                         f(l.query)
                     }), [l.query]);
                     var g = (0, r.useMemo)((function() {
-                            return s ? J9(p) : null
+                            return s ? r7(p) : null
                         }), [s, p]),
                         y = !!g && !g.isComplete,
                         b = g && !g.isComplete ? g.username : "",
                         w = y && !m,
-                        E = S7(a, b, {
+                        E = T7(a, b, {
                             enabled: s && y
                         }),
                         I = E.members,
@@ -76343,8 +76419,8 @@
                             var t = I[e];
                             t && C(t)
                         }), [I, C]),
-                        A = C7({
-                            listboxId: $7,
+                        A = R7({
+                            listboxId: nee,
                             optionCount: I.length,
                             isOpen: w,
                             onCommit: x
@@ -76369,7 +76445,7 @@
                     return o().createElement("div", {
                         ref: O,
                         className: "group-forums-search-bar"
-                    }, o().createElement(Zh, Y7({
+                    }, o().createElement(Zh, tee({
                         autoFocus: !0,
                         value: p,
                         size: "Medium",
@@ -76386,8 +76462,8 @@
                             isCircular: !0,
                             onClick: t
                         })
-                    })), w && o().createElement(A7, {
-                        listboxId: $7,
+                    })), w && o().createElement(F7, {
+                        listboxId: nee,
                         status: D,
                         members: I,
                         groupId: a,
@@ -76395,9 +76471,9 @@
                         onSelect: C
                     }))
                 },
-                X7 = function() {
+                oee = function() {
                     var e = (0, u.useTranslation)().translate,
-                        t = l7(),
+                        t = m7(),
                         n = t.groupId,
                         i = t.mode,
                         a = t.contentType,
@@ -76412,7 +76488,7 @@
                             exposureType: uV.GroupForumsSearchExposureEvent
                         })
                     }), [n]);
-                    var p = i === M9.Search,
+                    var p = i === q9.Search,
                         f = (0, r.useState)(p),
                         v = f[0],
                         m = f[1],
@@ -76424,7 +76500,7 @@
                         }), [d]),
                         w = (0, r.useMemo)((function() {
                             var e = 0;
-                            return !c || p && a === T9.Any || (e += 1), s !== N9.All && (e += 1), p && l && (e += 1), e
+                            return !c || p && a === U9.Any || (e += 1), s !== L9.All && (e += 1), p && l && (e += 1), e
                         }), [c, a, s, l, p]),
                         E = o().createElement(o().Fragment, null, o().createElement("div", {
                             className: "group-forums-filter-button-wrapper"
@@ -76439,14 +76515,14 @@
                             }
                         }), w > 0 && o().createElement("span", {
                             className: "group-forums-filter-badge"
-                        }, w)), g && o().createElement(Q7, {
+                        }, w)), g && o().createElement(eee, {
                             onClose: function() {
                                 return y(!1)
                             }
                         }));
                     return v ? o().createElement("div", {
                         className: "group-forums-search-expanded"
-                    }, o().createElement(J7, {
+                    }, o().createElement(ree, {
                         onCollapse: b
                     }), E) : o().createElement("div", {
                         className: "group-forums-search-triggers"
@@ -76462,7 +76538,7 @@
                         }
                     }), E)
                 },
-                Z7 = function(e, t) {
+                iee = function(e, t) {
                     var n = t.categoryShortId,
                         r = t.categoryName,
                         o = t.postShortId,
@@ -76474,7 +76550,7 @@
                     }
                     if (a && n && r && !Zj(r, e.categoryName)) return eG.router.getCategoryRoute(n, r)
                 },
-                eee = function(e, t) {
+                aee = function(e, t) {
                     var n = (0, kY.useRouteMatch)(),
                         o = (0, kY.useHistory)(),
                         i = MQ.use.onRouteChange(),
@@ -76487,7 +76563,7 @@
                     }), [n, i, a]), (0, r.useEffect)((function() {
                         if (e && "PUSH" !== o.action && "REPLACE" !== o.action) {
                             var r = n.params,
-                                i = Z7(r, {
+                                i = iee(r, {
                                     categoryShortId: u,
                                     categoryName: l,
                                     postShortId: s,
@@ -76498,7 +76574,7 @@
                         }
                     }), [e, n, o, u, l, s, a, t])
                 },
-                tee = function(t) {
+                uee = function(t) {
                     var n, i = t.testId,
                         a = void 0 === i ? "forum-tier-gate" : i,
                         u = t.translate,
@@ -76537,16 +76613,16 @@
                         onClick: v
                     }, u("Action.Continue")))
                 };
-            tee.displayName = "ForumTierGateMessage";
-            var nee = (0, u.withTranslations)(tee, Gj),
-                ree = function() {
-                    return ree = Object.assign || function(e) {
+            uee.displayName = "ForumTierGateMessage";
+            var see = (0, u.withTranslations)(uee, Gj),
+                lee = function() {
+                    return lee = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, ree.apply(this, arguments)
+                    }, lee.apply(this, arguments)
                 },
-                oee = (0, u.withTranslations)((function(t) {
+                cee = (0, u.withTranslations)((function(t) {
                     var n = t.translate,
                         i = t.open,
                         a = t.onClose,
@@ -76554,14 +76630,14 @@
                         l = t.shouldTriggerFae,
                         c = (0, s.useSystemFeedback)().systemFeedbackService,
                         d = (0, r.useMemo)((function() {
-                            return ree(ree({}, u), {
+                            return lee(lee({}, u), {
                                 upsellComponent: hV.IntrusiveModal,
                                 bannerType: "ageCheckDesc",
                                 upsellImpressionId: BQ()
                             })
                         }), [u]),
                         p = (0, r.useCallback)((function() {
-                            if (!l) return GQ.sendEvent(jQ.AgeCheckClick(ree(ree({}, d), {
+                            if (!l) return GQ.sendEvent(jQ.AgeCheckClick(lee(lee({}, d), {
                                 clickTargetType: "ageAssuranceUpsellAccountSettings"
                             }))), void window.open(FV.urls.accountSettings, "_blank");
                             var t = {
@@ -76572,7 +76648,7 @@
                                     context: u.context
                                 }
                             };
-                            GQ.sendEvent(jQ.AgeCheckClick(ree(ree({}, d), {
+                            GQ.sendEvent(jQ.AgeCheckClick(lee(lee({}, d), {
                                 clickTargetType: "ageAssuranceUpsellFaeModal"
                             }))), e.AccessManagementUpsellV2Service.startAccessManagementUpsell(t).catch((function() {
                                 return c.warning(n("NetworkError"))
@@ -76581,7 +76657,7 @@
                             }))
                         }), [l, u.context, d, c, n, a]),
                         f = (0, r.useCallback)((function() {
-                            GQ.sendEvent(jQ.AgeCheckClick(ree(ree({}, d), {
+                            GQ.sendEvent(jQ.AgeCheckClick(lee(lee({}, d), {
                                 clickTargetType: "ageAssuranceUpsellDismiss"
                             }))), a()
                         }), [d, a]);
@@ -76613,7 +76689,7 @@
                         onClick: p
                     }, n("Action.Continue"))))))
                 }), aH),
-                iee = function(e) {
+                dee = function(e) {
                     var t, n = e.children,
                         i = e.trigger,
                         a = e.messageId,
@@ -76651,14 +76727,14 @@
                         onKeyDown: function(e) {
                             "Enter" !== e.key && " " !== e.key || y(e)
                         }
-                    }, n), o().createElement(oee, {
+                    }, n), o().createElement(cee, {
                         open: v,
                         shouldTriggerFae: "Eligible" === g,
                         metricContext: w,
                         onClose: b
                     })) : null
                 },
-                aee = function(e, t, n, r) {
+                pee = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -76685,7 +76761,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                uee = function(e, t) {
+                fee = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -76757,7 +76833,7 @@
                         }
                     }
                 },
-                see = (0, u.withTranslations)((function(e) {
+                vee = (0, u.withTranslations)((function(e) {
                     var t = e.groupId,
                         n = e.categoryId,
                         i = e.onClose,
@@ -76765,8 +76841,8 @@
                         u = (0, l.useQuery)({
                             queryKey: eK(t, n),
                             queryFn: function() {
-                                return aee(void 0, void 0, void 0, (function() {
-                                    return uee(this, (function(e) {
+                                return pee(void 0, void 0, void 0, (function() {
+                                    return fee(this, (function(e) {
                                         switch (e.label) {
                                             case 0:
                                                 return [4, J_(t, n)];
@@ -76819,14 +76895,14 @@
                         }, e.name))
                     }))))))
                 }), Gj),
-                lee = function() {
-                    return lee = Object.assign || function(e) {
+                mee = function() {
+                    return mee = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, lee.apply(this, arguments)
+                    }, mee.apply(this, arguments)
                 },
-                cee = (0, u.withTranslations)((function(t) {
+                hee = (0, u.withTranslations)((function(t) {
                     var n, i = t.translate,
                         a = uW("group-details-ui"),
                         u = a.isLoading,
@@ -76847,7 +76923,7 @@
                             }
                         }), [p]),
                         m = (0, r.useMemo)((function() {
-                            return jQ.AgeCheckClick(lee(lee({}, v), {
+                            return jQ.AgeCheckClick(mee(mee({}, v), {
                                 clickTargetType: "ageRestrictedCategoryUpsellFaeModal"
                             }))
                         }), [v]),
@@ -76894,30 +76970,30 @@
                         onClick: h
                     }, i("Action.Continue"))))
                 }), Gj),
-                dee = function() {
-                    return dee = Object.assign || function(e) {
+                gee = function() {
+                    return gee = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, dee.apply(this, arguments)
+                    }, gee.apply(this, arguments)
                 },
-                pee = function(e, t, n) {
+                yee = function(e, t, n) {
                     if (n || 2 === arguments.length)
                         for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                     return e.concat(r || Array.prototype.slice.call(t))
                 },
-                fee = function() {
+                bee = function() {
                     var e = (0, u.useTranslation)().translate,
                         t = MQ.use.categoryName(),
-                        n = l7(),
+                        n = m7(),
                         i = n.mode,
                         a = n.urlState,
                         s = n.categories,
                         l = (0, r.useMemo)((function() {
                             var n, r;
-                            if (i !== M9.Search) return t;
+                            if (i !== q9.Search) return t;
                             var o = a.categoryId;
-                            return H9(o) ? e("Label.AllCategories") : null !== (r = null === (n = s.find((function(e) {
+                            return X9(o) ? e("Label.AllCategories") : null !== (r = null === (n = s.find((function(e) {
                                 return e.id === o
                             }))) || void 0 === n ? void 0 : n.name) && void 0 !== r ? r : t
                         }), [i, a, s, t, e]);
@@ -76925,30 +77001,30 @@
                         className: "group-posts-section-heading"
                     }, l)
                 },
-                vee = function(e) {
+                wee = function(e) {
                     var t = e.isTierGated,
                         n = e.isTierGateResolving,
                         r = e.onCreatePost,
                         i = (0, u.useTranslation)().translate,
-                        a = l7().isSearchActive,
+                        a = m7().isSearchActive,
                         s = EY().canCreatePost,
                         l = VK().forumsWrite,
                         c = MQ.use.isCategoryArchived();
-                    return a ? o().createElement(m7, null) : o().createElement(o().Fragment, null, o().createElement(V9, null), o().createElement(E7, {
+                    return a ? o().createElement(E7, null) : o().createElement(o().Fragment, null, o().createElement($9, null), o().createElement(S7, {
                         fixed: !0
                     }, o().createElement("div", {
                         className: "groups-native-footer-container"
-                    }, t ? o().createElement(nee, {
+                    }, t ? o().createElement(see, {
                         testId: "forum-post-tier-gate"
-                    }) : o().createElement(iee, {
+                    }) : o().createElement(dee, {
                         trigger: gV.CreatePost
-                    }, o().createElement(y7, {
+                    }, o().createElement(C7, {
                         disabled: !s || c || l.isDisabled || n,
                         label: i("Action.CreatePost"),
                         onClick: r
                     })))))
                 },
-                mee = (0, u.withTranslations)((function(e) {
+                Eee = (0, u.withTranslations)((function(e) {
                     var t = e.translate,
                         n = e.navigationComponent,
                         i = MQ.use.groupId(),
@@ -76962,17 +77038,17 @@
                         v = GV().features,
                         m = (0, r.useMemo)((function() {
                             var e, t;
-                            return v.ForumsRestrictedCategories && null !== (t = null === (e = pee(pee([], l, !0), c, !0).find((function(e) {
+                            return v.ForumsRestrictedCategories && null !== (t = null === (e = yee(yee([], l, !0), c, !0).find((function(e) {
                                 return e.shortId === u
                             }))) || void 0 === e ? void 0 : e.isRestricted) && void 0 !== t && t
                         }), [v.ForumsRestrictedCategories, l, c, u]),
                         h = uW("group-details-ui").data,
                         g = m && "Eligible" !== (null == h ? void 0 : h.eligibleForRestrictedCommunications),
-                        y = h7(),
+                        y = I7(),
                         b = y.isTierGated,
                         w = y.isResolving,
                         E = MQ.use.loadCategories();
-                    eee(d);
+                    aee(d);
                     var I = (0, kY.useRouteMatch)(),
                         D = (0, kY.useHistory)(),
                         C = EY().canCreatePost,
@@ -76981,7 +77057,7 @@
                         S = (0, r.useState)(!1),
                         P = S[0],
                         k = S[1],
-                        R = l7(),
+                        R = m7(),
                         O = R.isEnabled,
                         F = R.mode,
                         T = R.urlState,
@@ -76993,7 +77069,7 @@
                         }), []),
                         B = (0, r.useCallback)((function(e, t) {
                             var n = eG.router.getCategoryRoute(e, t),
-                                r = O && F === M9.FilteredBrowse ? X9(dee(dee({}, T), {
+                                r = O && F === q9.FilteredBrowse ? o7(gee(gee({}, T), {
                                     categoryId: void 0
                                 })) : "";
                             D[u === e ? "replace" : "push"]({
@@ -77024,13 +77100,13 @@
                         className: "group-posts-destinations-container"
                     }, n ? o().createElement(n, {
                         onSetActiveCategory: B
-                    }) : o().createElement(y9, {
+                    }) : o().createElement(C9, {
                         onSetActiveCategory: B
-                    }), O && o().createElement(X7, null)), o().createElement("div", {
+                    }), O && o().createElement(oee, null)), o().createElement("div", {
                         className: "group-posts-section-header"
                     }, o().createElement("div", {
                         className: "group-posts-section-header-title"
-                    }, o().createElement(fee, null), m && o().createElement(ad, {
+                    }, o().createElement(bee, null), m && o().createElement(ad, {
                         position: "bottom-center",
                         title: t("Description.RoleRestrictedCategory")
                     }, o().createElement(ud, {
@@ -77044,21 +77120,21 @@
                         size: "Small",
                         ariaLabel: t("Heading.RoleRestrictedCategory"),
                         onClick: N
-                    }))))), !g && o().createElement(iee, {
+                    }))))), !g && o().createElement(dee, {
                         trigger: gV.CreatePost
-                    }, o().createElement(y7, {
+                    }, o().createElement(C7, {
                         disabled: !C || f || x.isDisabled || b || w,
                         label: t("Action.CreatePost"),
                         onClick: G
-                    }))), g ? o().createElement(cee, null) : o().createElement(vee, {
+                    }))), g ? o().createElement(hee, null) : o().createElement(wee, {
                         isTierGated: b,
                         isTierGateResolving: w,
                         onCreatePost: G
-                    }), o().createElement(A, null), P && a && o().createElement(see, {
+                    }), o().createElement(A, null), P && a && o().createElement(vee, {
                         groupId: i,
                         categoryId: a,
                         onClose: M
-                    })) : o().createElement(x9, {
+                    })) : o().createElement(O9, {
                         iconClassName: "icon-status-alert",
                         heading: t("Error.LoadCategoryTitle"),
                         message: t("Error.ReloadingSubtitle"),
@@ -77066,16 +77142,16 @@
                         onClick: j
                     })
                 }), Gj),
-                hee = function(e) {
+                Iee = function(e) {
                     var t = e.navigationComponent;
-                    return o().createElement(c7, null, o().createElement(mee, {
+                    return o().createElement(h7, null, o().createElement(Eee, {
                         navigationComponent: t
                     }))
                 },
-                gee = function() {
+                Dee = function() {
                     return o().createElement("div", {
                         className: "group-forums-post-skeleton"
-                    }, o().createElement(b9, null), o().createElement("div", {
+                    }, o().createElement(x9, null), o().createElement("div", {
                         className: "group-forums-post-title-skeleton group-forums-skeleton"
                     }), o().createElement("div", {
                         className: "group-forums-post-content-skeleton group-forums-skeleton"
@@ -77103,13 +77179,13 @@
                         className: "groups-forums-post-reply-skeleton group-forums-skeleton"
                     }))))
                 },
-                yee = function(e, t, n) {
+                Cee = function(e, t, n) {
                     if (n || 2 === arguments.length)
                         for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                     return e.concat(r || Array.prototype.slice.call(t))
                 };
 
-            function bee(e) {
+            function xee(e) {
                 var t = e.groupId,
                     n = e.categoryId,
                     o = e.postId,
@@ -77147,7 +77223,7 @@
                                 u = o.filter((function(e) {
                                     return new Date(e.createdAt).getTime() > i
                                 }));
-                            u.length > 0 && (p.current = Math.max.apply(Math, yee([i], u.map((function(e) {
+                            u.length > 0 && (p.current = Math.max.apply(Math, Cee([i], u.map((function(e) {
                                 return new Date(e.createdAt).getTime()
                             })), !1))), l(new Set(u.map((function(e) {
                                 return e.id
@@ -77155,23 +77231,23 @@
                         }
                         d.current = n
                     }
-                }), [a, l]), k6((0, r.useMemo)((function() {
-                    return o && i ? b6.post(t, o) : null
+                }), [a, l]), M6((0, r.useMemo)((function() {
+                    return o && i ? x6.post(t, o) : null
                 }), [o, i, t]), (function(e) {
                     var r;
                     e.length > 1 ? u() : (null !== (r = e[0]) && void 0 !== r ? r : {}).forumCommentId && t && n && o && u()
-                })), k6((0, r.useMemo)((function() {
-                    return o && i ? b6.postReactions(t, o) : null
+                })), M6((0, r.useMemo)((function() {
+                    return o && i ? x6.postReactions(t, o) : null
                 }), [o, i, t]), (function(e) {
                     var r;
                     if (e.length > 1) return u(), void s();
                     (null !== (r = e[0]) && void 0 !== r ? r : {}).forumCommentId && t && n && o && (u(), s())
                 }))
             }
-            var wee = function() {
+            var Aee = function() {
                     return o().createElement("div", {
                         className: "group-forums-comment-skeleton"
-                    }, o().createElement(b9, null), o().createElement("div", {
+                    }, o().createElement(x9, null), o().createElement("div", {
                         className: "group-forums-comment-content-skeleton group-forums-skeleton"
                     }), o().createElement("div", {
                         className: "group-forums-comment-content-skeleton group-forums-skeleton"
@@ -77197,7 +77273,7 @@
                         className: "groups-forums-comment-reply-skeleton group-forums-skeleton"
                     }))))
                 },
-                Eee = function(e) {
+                See = function(e) {
                     var t = e.reaction,
                         n = e.containerClassName,
                         r = e.areReactionCountsVisible,
@@ -77227,14 +77303,14 @@
                         })
                     }))
                 },
-                Iee = function() {
-                    return Iee = Object.assign || function(e) {
+                Pee = function() {
+                    return Pee = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, Iee.apply(this, arguments)
+                    }, Pee.apply(this, arguments)
                 },
-                Dee = function(e, t, n, r) {
+                kee = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -77261,7 +77337,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Cee = function(e, t) {
+                Ree = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -77333,7 +77409,7 @@
                         }
                     }
                 },
-                xee = (0, u.withTranslations)((function(e) {
+                Oee = (0, u.withTranslations)((function(e) {
                     var t = e.initialReactions,
                         n = e.onToggleReaction,
                         i = e.maxReactionPerLine,
@@ -77360,16 +77436,16 @@
                             return f ? c.length : c.length <= a ? a : a - 1
                         }), [f, a, c.length]),
                         w = function(e) {
-                            return Dee(void 0, void 0, void 0, (function() {
+                            return kee(void 0, void 0, void 0, (function() {
                                 var t, r, o;
-                                return Cee(this, (function(i) {
+                                return Ree(this, (function(i) {
                                     switch (i.label) {
                                         case 0:
                                             return u ? [2] : (t = !1, r = !1, o = c.map((function(n) {
                                                 if (n.emoteId === e) {
                                                     t = !0, r = !n.hasUserAppliedReaction;
                                                     var o = n.hasUserAppliedReaction ? n.reactionCount - 1 : n.reactionCount + 1;
-                                                    return 0 === o ? null : Iee(Iee({}, n), {
+                                                    return 0 === o ? null : Pee(Pee({}, n), {
                                                         hasUserAppliedReaction: !n.hasUserAppliedReaction,
                                                         reactionCount: o
                                                     })
@@ -77397,7 +77473,7 @@
                         I = function(e, t) {
                             var n = h(e.emoteId),
                                 r = n ? n.url : "";
-                            return o().createElement(Eee, {
+                            return o().createElement(See, {
                                 key: "".concat(e.emoteId, "-").concat(t),
                                 reaction: e,
                                 containerClassName: t,
@@ -77441,14 +77517,14 @@
                         className: qj()(f ? "group-forums-comment-reactions-hide-icon" : "group-forums-comment-reactions-overflow-icon")
                     }))))
                 }), Gj),
-                Aee = function() {
-                    return Aee = Object.assign || function(e) {
+                Fee = function() {
+                    return Fee = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, Aee.apply(this, arguments)
+                    }, Fee.apply(this, arguments)
                 },
-                See = function(e, t, n, r) {
+                Tee = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -77475,7 +77551,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Pee = function(e, t) {
+                Nee = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -77547,19 +77623,19 @@
                         }
                     }
                 },
-                kee = function(e, t, n) {
+                Mee = function(e, t, n) {
                     if (n || 2 === arguments.length)
                         for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                     return e.concat(r || Array.prototype.slice.call(t))
                 },
-                Ree = (0, r.createContext)(void 0),
-                Oee = function() {
-                    var e = (0, r.useContext)(Ree);
+                Bee = (0, r.createContext)(void 0),
+                jee = function() {
+                    var e = (0, r.useContext)(Bee);
                     if (!e) throw new Error("usePost must be used within a PostProvider");
                     return e
                 };
 
-            function Fee(e) {
+            function Gee(e) {
                 var t, n = this,
                     i = e.children,
                     a = MQ.use.groupId(),
@@ -77572,8 +77648,8 @@
                     v = (0, l.useQuery)({
                         queryKey: XH(a, u, s),
                         queryFn: function() {
-                            return See(n, void 0, void 0, (function() {
-                                return Pee(this, (function(e) {
+                            return Tee(n, void 0, void 0, (function() {
+                                return Nee(this, (function(e) {
                                     switch (e.label) {
                                         case 0:
                                             return [4, k_(a, u, [c])];
@@ -77589,15 +77665,15 @@
                     h = v.error,
                     g = v.data,
                     y = v.refetch;
-                eee(!!g, null !== (t = null == g ? void 0 : g.name) && void 0 !== t ? t : "");
+                aee(!!g, null !== (t = null == g ? void 0 : g.name) && void 0 !== t ? t : "");
                 var b = (0, r.useCallback)((function(e) {
-                        return See(n, void 0, void 0, (function() {
+                        return Tee(n, void 0, void 0, (function() {
                             var t, n;
-                            return Pee(this, (function(r) {
+                            return Nee(this, (function(r) {
                                 switch (r.label) {
                                     case 0:
-                                        return (t = null === (n = e[e.length - 1]) || void 0 === n ? void 0 : n.id) ? [4, (o = a, i = u, l = s, c = t, See(void 0, void 0, void 0, (function() {
-                                            return Pee(this, (function(e) {
+                                        return (t = null === (n = e[e.length - 1]) || void 0 === n ? void 0 : n.id) ? [4, (o = a, i = u, l = s, c = t, Tee(void 0, void 0, void 0, (function() {
+                                            return Nee(this, (function(e) {
                                                 switch (e.label) {
                                                     case 0:
                                                         return e.trys.push([0, 2, , 3]), [4, V_(o, i, l, c)];
@@ -77673,23 +77749,23 @@
                                 }],
                                 pageParams: [null]
                             };
-                            var n = kee([], e.pages, !0),
+                            var n = Mee([], e.pages, !0),
                                 r = n.length - 1,
                                 o = n[r];
-                            return n[r] = Aee(Aee({}, o), {
-                                data: kee(kee([], o.data, !0), t, !0)
-                            }), Aee(Aee({}, e), {
+                            return n[r] = Fee(Fee({}, o), {
+                                data: Mee(Mee([], o.data, !0), t, !0)
+                            }), Fee(Fee({}, e), {
                                 pages: n
                             })
                         }))
                     }), [b, f, w]),
                     M = (0, r.useCallback)((function(e) {
                         f.setQueryData(w, (function(t) {
-                            return t ? Aee(Aee({}, t), {
+                            return t ? Fee(Fee({}, t), {
                                 pages: t.pages.map((function(t) {
-                                    return Aee(Aee({}, t), {
+                                    return Fee(Fee({}, t), {
                                         data: t.data.map((function(t) {
-                                            return D9(t, e) ? e : t
+                                            return k9(t, e) ? e : t
                                         }))
                                     })
                                 }))
@@ -77723,9 +77799,9 @@
                     }), [u, O, a, f]),
                     G = (0, r.useCallback)((function(e) {
                         f.setQueryData(w, (function(t) {
-                            return t ? Aee(Aee({}, t), {
+                            return t ? Fee(Fee({}, t), {
                                 pages: t.pages.map((function(t) {
-                                    return Aee(Aee({}, t), {
+                                    return Fee(Fee({}, t), {
                                         data: t.data.filter((function(t) {
                                             return t.id !== e
                                         }))
@@ -77744,11 +77820,11 @@
                         if (n) {
                             var r = KH(a, u, e.parentId);
                             f.setQueryData(r, (function(t) {
-                                return t ? Aee(Aee({}, t), {
+                                return t ? Fee(Fee({}, t), {
                                     pages: t.pages.map((function(t) {
-                                        return Aee(Aee({}, t), {
+                                        return Fee(Fee({}, t), {
                                             data: t.data.map((function(t) {
-                                                return D9(t, e) ? e : t
+                                                return k9(t, e) ? e : t
                                             }))
                                         })
                                     }))
@@ -77757,18 +77833,18 @@
                         }
                     }), [O, M]),
                     q = (0, r.useCallback)((function(e) {
-                        return See(n, [e], Promise, (function(e) {
+                        return Tee(n, [e], Promise, (function(e) {
                             var t, n, r, o, i, l, c, d, v, m = e.content,
                                 h = e.parentCommentId,
                                 y = e.mentioningReplyId,
                                 b = e.mediaAssetIds;
-                            return Pee(this, (function(e) {
+                            return Nee(this, (function(e) {
                                 switch (e.label) {
                                     case 0:
                                         return t = h, h === (null == g ? void 0 : g.firstComment.id) && (t = void 0), [4, q_(a, u, s, m, t, b)];
                                     case 1:
                                         return n = e.sent(), p(n.id), t ? (r = j(t), o = KH(a, u, (null == r ? void 0 : r.threadId) || ""), (i = f.getQueryData(o)) ? (l = !1, c = null !== (v = i.pages.map((function(e) {
-                                            return Aee(Aee({}, e), {
+                                            return Fee(Fee({}, e), {
                                                 data: e.data.reduce((function(e, t) {
                                                     return e.push(t), t.id === y && (l = !0, e.push(n)), e
                                                 }), [])
@@ -77778,7 +77854,7 @@
                                                 pages: c,
                                                 pageParams: null == e ? void 0 : e.pageParams
                                             }
-                                        }))) : r && ((d = Aee({}, r)).threadComments = {
+                                        }))) : r && ((d = Fee({}, r)).threadComments = {
                                             comments: [n],
                                             nextPageCursor: "",
                                             previousPageCursor: "",
@@ -77791,14 +77867,15 @@
                         }))
                     }), [g, a, u, s, j, N, f, M, p]),
                     z = (0, r.useCallback)((function(e) {
-                        return See(n, [e], Promise, (function(e) {
+                        return Tee(n, [e], Promise, (function(e) {
                             var t, n, r, o, i, l, c = e.content,
                                 d = e.commentId,
-                                p = e.parentCommentId;
-                            return Pee(this, (function(e) {
+                                p = e.parentCommentId,
+                                f = e.mediaAssetIds;
+                            return Nee(this, (function(e) {
                                 switch (e.label) {
                                     case 0:
-                                        return t = p ? null === (r = j(p)) || void 0 === r ? void 0 : r.threadId : void 0, [4, j_(a, u, null != t ? t : s, d, c)];
+                                        return t = p ? null === (r = j(p)) || void 0 === r ? void 0 : r.threadId : void 0, [4, j_(a, u, null != t ? t : s, d, c, f)];
                                     case 1:
                                         return n = e.sent(), p ? L(n, p) : ((null === (o = n.replies) || void 0 === o ? void 0 : o.length) || (n.replies = null !== (l = null === (i = j(d)) || void 0 === i ? void 0 : i.replies) && void 0 !== l ? l : []), U(n)), [2]
                                 }
@@ -77807,9 +77884,9 @@
                     }), [u, a, s, j, U, L]),
                     _ = (0, r.useCallback)((function(e, t) {
                         for (var r = [], o = 2; o < arguments.length; o++) r[o - 2] = arguments[o];
-                        return See(n, kee([e, t], r, !0), Promise, (function(e, t, n) {
+                        return Tee(n, Mee([e, t], r, !0), Promise, (function(e, t, n) {
                             var r, o;
-                            return void 0 === n && (n = !1), Pee(this, (function(i) {
+                            return void 0 === n && (n = !1), Nee(this, (function(i) {
                                 switch (i.label) {
                                     case 0:
                                         if (i.trys.push([0, 2, , 3]), r = s, t) {
@@ -77831,14 +77908,14 @@
                         }))
                     }), [s, a, u, O, G]),
                     V = (0, r.useCallback)((function() {
-                        return See(n, void 0, void 0, (function() {
+                        return Tee(n, void 0, void 0, (function() {
                             var e, t;
-                            return Pee(this, (function(n) {
+                            return Nee(this, (function(n) {
                                 switch (n.label) {
                                     case 0:
                                         return g ? [4, W_(a, u, s)] : [2];
                                     case 1:
-                                        return e = n.sent(), t = Aee(Aee({}, g), {
+                                        return e = n.sent(), t = Fee(Fee({}, g), {
                                             notificationPreference: e.preference
                                         }), f.setQueryData(XH(a, u, s), t), [2]
                                 }
@@ -77846,16 +77923,16 @@
                         }))
                     }), [u, a, s, g, f]),
                     W = (0, r.useCallback)((function(e) {
-                        return See(n, void 0, void 0, (function() {
+                        return Tee(n, void 0, void 0, (function() {
                             var t, n, r;
-                            return Pee(this, (function(o) {
+                            return Nee(this, (function(o) {
                                 switch (o.label) {
                                     case 0:
                                         return t = O.find((function(t) {
                                             return t.id === e
                                         })), t ? [4, H_(a, u, s, e)] : [2];
                                     case 1:
-                                        return n = o.sent(), r = Aee(Aee({}, t), {
+                                        return n = o.sent(), r = Fee(Fee({}, t), {
                                             notificationPreference: n.preference
                                         }), M(r), [2]
                                 }
@@ -77863,14 +77940,14 @@
                         }))
                     }), [u, O, a, s, M]),
                     H = (0, r.useCallback)((function() {
-                        return See(n, void 0, void 0, (function() {
+                        return Tee(n, void 0, void 0, (function() {
                             var e, t, n;
-                            return Pee(this, (function(r) {
+                            return Nee(this, (function(r) {
                                 switch (r.label) {
                                     case 0:
                                         return g ? (e = g.notificationPreference, t = !e || e === v_.None, [4, K_(a, u, s, t)]) : [2];
                                     case 1:
-                                        return r.sent(), n = Aee(Aee({}, g), {
+                                        return r.sent(), n = Fee(Fee({}, g), {
                                             notificationPreference: t ? v_.All : v_.None
                                         }), f.setQueryData(XH(a, u, s), n), [2]
                                 }
@@ -77878,16 +77955,16 @@
                         }))
                     }), [a, u, s, g, f]),
                     K = (0, r.useCallback)((function(e) {
-                        return See(n, void 0, void 0, (function() {
+                        return Tee(n, void 0, void 0, (function() {
                             var t, n, r, o;
-                            return Pee(this, (function(i) {
+                            return Nee(this, (function(i) {
                                 switch (i.label) {
                                     case 0:
                                         return t = O.find((function(t) {
                                             return t.id === e
                                         })), t ? (n = t.notificationPreference, r = n === v_.None, [4, Q_(a, u, s, e, r)]) : [2];
                                     case 1:
-                                        return i.sent(), o = Aee(Aee({}, t), {
+                                        return i.sent(), o = Fee(Fee({}, t), {
                                             notificationPreference: r ? v_.All : v_.None
                                         }), M(o), [2]
                                 }
@@ -77898,7 +77975,7 @@
                     u && c && y()
                 }), [y, u, c]), (0, r.useEffect)((function() {
                     !m && u && s && P()
-                }), [m, u]), o().createElement(Ree.Provider, {
+                }), [m, u]), o().createElement(Bee.Provider, {
                     value: {
                         isLoadingPost: m,
                         loadingPostError: !!h,
@@ -77928,14 +78005,14 @@
                     }
                 }, i)
             }
-            var Tee = (0, r.createContext)(void 0),
-                Nee = function() {
-                    var e = (0, r.useContext)(Tee);
+            var Uee = (0, r.createContext)(void 0),
+                Lee = function() {
+                    var e = (0, r.useContext)(Uee);
                     if (!e) throw new Error("useComposer must be used within a ComposerProvider");
                     return e
                 };
 
-            function Mee(e) {
+            function qee(e) {
                 var t = e.children,
                     n = (0, r.useState)(),
                     i = n[0],
@@ -77972,7 +78049,7 @@
                     D = (0, r.useMemo)((function() {
                         return d || (i || s)
                     }), [d, i, s]);
-                return o().createElement(Tee.Provider, {
+                return o().createElement(Uee.Provider, {
                     value: {
                         replyingToCommentId: s,
                         mentioningReplyId: i,
@@ -77988,7 +78065,7 @@
                     }
                 }, t)
             }
-            var Bee, jee = (0, u.withTranslations)((function(e) {
+            var zee, _ee = (0, u.withTranslations)((function(e) {
                     var t = e.replies,
                         n = e.onShowReplies,
                         i = e.onLoadPrevious,
@@ -78002,7 +78079,7 @@
                         f = e.revealRepliesByDefault,
                         v = void 0 !== f && f,
                         m = e.translate,
-                        h = Nee().highlightedCommentId,
+                        h = Lee().highlightedCommentId,
                         g = MQ.use.blockedUserList(),
                         y = GV().features,
                         b = MQ.use.activeCommentId(),
@@ -78033,7 +78110,7 @@
                     }), m("Action.ShowReplies")));
                     if (u) return o().createElement("div", {
                         className: "group-forums-comment-replies group-forums-comment-replies-loading"
-                    }, o().createElement(wee, null));
+                    }, o().createElement(Aee, null));
                     return o().createElement("div", {
                         className: "groups-forums-comment-replies group-forums-comment-replies-loaded"
                     }, c && !s && o().createElement("div", {
@@ -78045,7 +78122,7 @@
                         className: "groups-forums-comment-replies-show-more-btn"
                     }, o().createElement("div", {
                         className: "groups-forums-comment-replies-show-more-dash"
-                    }), m("Action.ShowMoreReplies"))), o().createElement(L9, {
+                    }), m("Action.ShowMoreReplies"))), o().createElement(H9, {
                         items: D,
                         isConcealmentEnabled: I,
                         forceRevealIds: C,
@@ -78055,7 +78132,7 @@
                             return o().createElement("div", {
                                 key: e.id,
                                 className: "groups-forums-comment-reply"
-                            }, o().createElement(Nne, {
+                            }, o().createElement(qne, {
                                 key: e.id,
                                 variant: Tj.Reply,
                                 isActive: h === e.id,
@@ -78065,6 +78142,7 @@
                                 createdAt: e.createdAt,
                                 updatedAt: e.updatedAt,
                                 content: e.content,
+                                mediaAttachments: e.mediaAttachments,
                                 threadId: null,
                                 channelId: e.parentId,
                                 parentCommentId: l,
@@ -78088,7 +78166,7 @@
                         className: "spinner spinner-default spinner-infinite-scroll"
                     }))
                 }), Gj),
-                Gee = function(e, t, n, r) {
+                Vee = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -78115,7 +78193,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Uee = function(e, t) {
+                Wee = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -78187,10 +78265,10 @@
                         }
                     }
                 },
-                Lee = function(e) {
-                    return Gee(void 0, void 0, Promise, (function() {
+                Hee = function(e) {
+                    return Vee(void 0, void 0, Promise, (function() {
                         var t, n, r;
-                        return Uee(this, (function(o) {
+                        return Wee(this, (function(o) {
                             switch (o.label) {
                                 case 0:
                                     return t = FV.urls.getUsersInfoURL, n = {
@@ -78205,7 +78283,7 @@
                         }))
                     }))
                 },
-                qee = function() {
+                Kee = function() {
                     return o().createElement("div", {
                         className: "group-forums-replying-to-skeleton"
                     }, o().createElement("div", {
@@ -78214,7 +78292,7 @@
                         className: "group-forums-replying-to-name-skeleton group-forums-skeleton"
                     }))
                 },
-                zee = function(e, t, n, r) {
+                Qee = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -78241,7 +78319,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                _ee = function(e, t) {
+                Yee = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -78313,7 +78391,7 @@
                         }
                     }
                 },
-                Vee = (0, u.withTranslations)((function(t) {
+                $ee = (0, u.withTranslations)((function(t) {
                     var n = t.userId,
                         i = t.translate,
                         a = (0, r.useState)(!0),
@@ -78323,14 +78401,14 @@
                         d = c[0],
                         p = c[1],
                         f = (0, r.useCallback)((function() {
-                            return zee(void 0, void 0, void 0, (function() {
+                            return Qee(void 0, void 0, void 0, (function() {
                                 var e;
-                                return _ee(this, (function(t) {
+                                return Yee(this, (function(t) {
                                     switch (t.label) {
                                         case 0:
                                             l(!0), t.label = 1;
                                         case 1:
-                                            return t.trys.push([1, 3, 4, 5]), [4, Lee(n)];
+                                            return t.trys.push([1, 3, 4, 5]), [4, Hee(n)];
                                         case 2:
                                             return (e = t.sent()).length && p(e[0]), [3, 5];
                                         case 3:
@@ -78345,7 +78423,7 @@
                         }), [n]);
                     return (0, r.useEffect)((function() {
                         f()
-                    }), [f]), u || !d ? o().createElement(qee, null) : o().createElement("div", {
+                    }), [f]), u || !d ? o().createElement(Kee, null) : o().createElement("div", {
                         className: "group-forums-replying-to-display"
                     }, o().createElement(s.Link, {
                         className: "group-forums-replying-to-username-link text-default",
@@ -78362,7 +78440,7 @@
                         className: "replying-to-user-name text-emphasis font-bold"
                     }, " ", d.displayName, " ")))
                 }), Gj),
-                Wee = function() {
+                Jee = function() {
                     var e = (0, r.useState)(!1),
                         t = e[0],
                         n = e[1],
@@ -78384,17 +78462,17 @@
                         isSmallViewport: t
                     }
                 },
-                Hee = function() {
-                    return Hee = Object.assign || function(e) {
+                Xee = function() {
+                    return Xee = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, Hee.apply(this, arguments)
+                    }, Xee.apply(this, arguments)
                 };
             ! function(e) {
                 e.Submit = "HotKey:Submit"
-            }(Bee || (Bee = {}));
-            var Kee = (0, r.forwardRef)((function(e, t) {
+            }(zee || (zee = {}));
+            var Zee = (0, r.forwardRef)((function(e, t) {
                 var n = (0, u.useTranslation)().translate,
                     i = e.className,
                     a = e.textAreaClassName,
@@ -78475,7 +78553,7 @@
                         null === (r = G.current) || void 0 === r || r.setSelectionRange(o, o)
                     }
                 }), [y]);
-                var z = Wee().isSmallViewport,
+                var z = Jee().isSmallViewport,
                     _ = (0, r.useMemo)((function() {
                         var e = h_(s || {});
                         if (e) return e
@@ -78494,7 +78572,7 @@
                     leadingControls: R,
                     footer: O,
                     translate: n
-                }) : o().createElement("textarea", Hee({
+                }) : o().createElement("textarea", Xee({
                     className: qj()("input-field", a),
                     name: p,
                     placeholder: l,
@@ -78510,7 +78588,7 @@
                         (function(e) {
                             var t, n = null !== (t = null === navigator || void 0 === navigator ? void 0 : navigator.platform) && void 0 !== t ? t : "";
                             return (/Mac|iPod|iPhone|iPad/.test(n) ? e.metaKey : e.ctrlKey) && "Enter" === e.key
-                        })(e) && (null == x || x(Bee.Submit))
+                        })(e) && (null == x || x(zee.Submit))
                     },
                     ref: G,
                     defaultValue: null == s ? void 0 : s.plainText
@@ -78522,17 +78600,17 @@
                     className: "form-control-label small text character-count"
                 }, q)))
             }));
-            Kee.displayName = "EditableContentFieldInputInner";
-            var Qee = (0, r.forwardRef)((function(e, t) {
+            Zee.displayName = "EditableContentFieldInputInner";
+            var ete = (0, r.forwardRef)((function(e, t) {
                 return o().createElement(u.TranslationProvider, {
                     config: aH
-                }, o().createElement(Kee, Hee({
+                }, o().createElement(Zee, Xee({
                     ref: t
                 }, e)))
             }));
-            Qee.displayName = "EditableContentFieldInput";
-            var Yee = Qee,
-                $ee = function(e, t) {
+            ete.displayName = "EditableContentFieldInput";
+            var tte = ete,
+                nte = function(e, t) {
                     var n = (0, r.useState)(Date.now()),
                         o = n[0],
                         i = n[1];
@@ -78563,65 +78641,65 @@
                         }
                     }
                 },
-                Jee = function(e) {
+                rte = function(e) {
                     var t, n, r = "post" === e,
                         o = r ? null !== (t = MQ.use.postRateLimitExpiresAt()) && void 0 !== t ? t : 0 : null !== (n = MQ.use.commentRateLimitExpiresAt()) && void 0 !== n ? n : 0,
                         i = r ? MQ.use.setPostRateLimitExpiresAt() : MQ.use.setCommentRateLimitExpiresAt();
-                    return $ee(o, i)
+                    return nte(o, i)
                 },
-                Xee = n(18264),
-                Zee = n.n(Xee),
-                ete = n(1419),
-                tte = n.n(ete),
-                nte = function() {
-                    return nte = Object.assign || function(e) {
+                ote = n(18264),
+                ite = n.n(ote),
+                ate = n(1419),
+                ute = n.n(ate),
+                ste = function() {
+                    return ste = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, nte.apply(this, arguments)
+                    }, ste.apply(this, arguments)
                 },
-                rte = Object.freeze({
+                lte = Object.freeze({
                     touched: !1,
                     identical: !0,
                     valid: !0
                 }),
-                ote = function(e, t) {
+                cte = function(e, t) {
                     return e.findIndex((function(e) {
                         return e.id === t
                     }))
                 },
-                ite = function(e) {
+                dte = function(e) {
                     return e.touched && !e.identical
                 },
-                ate = function(e) {
-                    return ite(e) && !e.valid
+                pte = function(e) {
+                    return dte(e) && !e.valid
                 },
-                ute = function(e) {
+                fte = function(e) {
                     return !e.touched && e.identical
                 },
-                ste = function(e) {
-                    return !ate(e) && ! function(e) {
+                vte = function(e) {
+                    return !pte(e) && ! function(e) {
                         return e.identical
                     }(e)
                 },
-                lte = function(e) {
-                    return e.fields.some(ite)
+                mte = function(e) {
+                    return e.fields.some(dte)
                 },
-                cte = function(e) {
-                    return e.fields.some(ate)
+                hte = function(e) {
+                    return e.fields.some(pte)
                 },
-                dte = function(e) {
-                    return e.fields.every(ute)
+                gte = function(e) {
+                    return e.fields.every(fte)
                 },
-                pte = function(e) {
-                    return e.fields.every(ste)
+                yte = function(e) {
+                    return e.fields.every(vte)
                 },
-                fte = function(e) {
-                    return nte(nte(nte({}, e), {
+                bte = function(e) {
+                    return ste(ste(ste({}, e), {
                         currentValue: e.initialValue
-                    }), rte)
+                    }), lte)
                 },
-                vte = function(e, t) {
+                wte = function(e, t) {
                     var n = {};
                     for (var r in e) Object.prototype.hasOwnProperty.call(e, r) && t.indexOf(r) < 0 && (n[r] = e[r]);
                     if (null != e && "function" == typeof Object.getOwnPropertySymbols) {
@@ -78630,39 +78708,39 @@
                     }
                     return n
                 },
-                mte = function(e) {
+                Ete = function(e) {
                     return {
                         form: e,
-                        isPristine: dte(e),
-                        isDirty: lte(e),
-                        isInvalid: cte(e),
-                        isValidAndUnsaved: pte(e)
+                        isPristine: gte(e),
+                        isDirty: mte(e),
+                        isInvalid: hte(e),
+                        isValidAndUnsaved: yte(e)
                     }
                 },
-                hte = function() {
+                Ite = function() {
                     return function(e) {
                         return function(e) {
-                            var t = tte()(e.fields);
+                            var t = ute()(e.fields);
                             return {
                                 id: e.id,
                                 fields: t.map((function(e) {
-                                    return fte(e)
+                                    return bte(e)
                                 }))
                             }
                         }(e)
                     }
                 },
-                gte = function(e, t) {
+                Dte = function(e, t) {
                     return function(n) {
                         return function(e, t, n) {
-                            var r = ote(n.fields, e);
+                            var r = cte(n.fields, e);
                             if (r > -1) {
-                                var o = tte()(n.fields);
-                                return o[r] = nte(nte({}, o[r]), {
+                                var o = ute()(n.fields);
+                                return o[r] = ste(ste({}, o[r]), {
                                     currentValue: t.currentValue,
                                     valid: t.valid,
                                     touched: !0,
-                                    identical: Zee()(t.currentValue, o[r].initialValue)
+                                    identical: ite()(t.currentValue, o[r].initialValue)
                                 }), {
                                     id: n.id,
                                     fields: o
@@ -78672,17 +78750,17 @@
                         }(e, t, n)
                     }
                 },
-                yte = function(e) {
+                Cte = function(e) {
                     e.form;
-                    return vte(e, ["form"])
+                    return wte(e, ["form"])
                 },
-                bte = function(e, t) {
+                xte = function(e, t) {
                     if (e) {
                         var n = t(e.form);
-                        return mte(n)
+                        return Ete(n)
                     }
                 },
-                wte = function(e) {
+                Ate = function(e) {
                     var t = (0, r.useState)(void 0),
                         n = t[0],
                         o = t[1];
@@ -78690,30 +78768,30 @@
                         if (void 0 === n) {
                             var t = function(e, t) {
                                 var n = t.map((function(e) {
-                                    return nte(nte(nte({}, e), {
+                                    return ste(ste(ste({}, e), {
                                         initialValue: e.initialValue,
                                         currentValue: e.initialValue
-                                    }), rte)
+                                    }), lte)
                                 }));
                                 return {
                                     id: e,
                                     fields: n
                                 }
                             }("statefulForm", e);
-                            o(mte(t))
+                            o(Ete(t))
                         }
                     }), []), {
                         resetForm: function() {
                             return o((function(e) {
-                                return bte(e, hte())
+                                return xte(e, Ite())
                             }))
                         },
                         updateFormItem: function(e, t) {
                             return o((function(n) {
-                                return bte(n, gte(e, t))
+                                return xte(n, Dte(e, t))
                             }))
                         },
-                        formStatus: n ? yte(n) : {
+                        formStatus: n ? Cte(n) : {
                             isPristine: !0,
                             isDirty: !1,
                             isInvalid: !1,
@@ -78722,10 +78800,10 @@
                     }
                 };
 
-            function Ete(e, t, n, o) {
+            function Ste(e, t, n, o) {
                 void 0 === o && (o = 300);
                 var i = (0, r.useRef)(e);
-                Zee()(e, i.current) || (i.current = e);
+                ite()(e, i.current) || (i.current = e);
                 var a = i.current,
                     u = (0, r.useState)(a),
                     s = u[0],
@@ -78738,13 +78816,13 @@
                         clearTimeout(e)
                     }
                 }), [a, o]), (0, r.useMemo)((function() {
-                    if (Zee()(a, s)) {
+                    if (ite()(a, s)) {
                         var e = (null == t ? void 0 : t(s)) || null;
                         return e ? n(e) : void 0
                     }
                 }), [a, s, n, t])
             }
-            var Ite = function(e, t, n, r) {
+            var Pte = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -78771,7 +78849,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Dte = function(e, t) {
+                kte = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -78843,7 +78921,7 @@
                         }
                     }
                 },
-                Cte = (0, u.withTranslations)((function(e) {
+                Rte = (0, u.withTranslations)((function(e) {
                     var t = e.className,
                         n = e.autoFocus,
                         i = e.defaultContent,
@@ -78853,99 +78931,102 @@
                         l = e.contentFooter,
                         c = e.disabled,
                         d = e.submitDisabled,
-                        p = e.onChange,
-                        f = e.onSubmit,
-                        v = e.onCancel,
-                        m = e.onClose,
-                        h = e.inputRef,
-                        g = e.editorRef,
-                        y = e.translate,
-                        b = e.isCollapsedInitially,
-                        w = (0, r.useState)(i),
-                        E = w[0],
-                        I = w[1],
-                        D = (0, r.useState)(!1),
-                        C = D[0],
-                        x = D[1],
-                        A = wte([{
+                        p = e.hasUnsavedAttachmentChanges,
+                        f = e.onChange,
+                        v = e.onSubmit,
+                        m = e.onCancel,
+                        h = e.onClose,
+                        g = e.inputRef,
+                        y = e.editorRef,
+                        b = e.translate,
+                        w = e.isCollapsedInitially,
+                        E = (0, r.useState)(i),
+                        I = E[0],
+                        D = E[1],
+                        C = (0, r.useState)(!1),
+                        x = C[0],
+                        A = C[1],
+                        S = Ate([{
                             id: "content",
-                            initialValue: E || {
+                            initialValue: I || {
                                 plainText: ""
                             }
                         }]),
-                        S = A.updateFormItem,
-                        P = A.resetForm,
-                        k = A.formStatus,
-                        R = (0, r.useRef)(null),
-                        O = h || R,
-                        F = Ete(E || {
+                        P = S.updateFormItem,
+                        k = S.resetForm,
+                        R = S.formStatus,
+                        O = (0, r.useRef)(null),
+                        F = g || O,
+                        T = Ste(I || {
                             plainText: ""
-                        }, IV, y, 500),
-                        T = Jee("comment"),
-                        N = T.isActive,
-                        M = T.remainingSeconds,
-                        B = (0, r.useMemo)((function() {
-                            return N && M > 0 && !c ? y("Error.RetryAfterSeconds", {
-                                seconds: M
-                            }) : F
-                        }), [N, M, c, F, y]),
-                        j = (0, r.useCallback)((function(e) {
-                            I(e), S("content", {
+                        }, IV, b, 500),
+                        N = rte("comment"),
+                        M = N.isActive,
+                        B = N.remainingSeconds,
+                        j = (0, r.useMemo)((function() {
+                            return M && B > 0 && !c ? b("Error.RetryAfterSeconds", {
+                                seconds: B
+                            }) : T
+                        }), [M, B, c, T, b]),
+                        G = (0, r.useCallback)((function(e) {
+                            D(e), P("content", {
                                 valid: !IV(e, !1),
                                 currentValue: e
-                            }), null == p || p(e)
-                        }), [p, S]),
-                        G = (0, r.useCallback)((function() {
-                            var e, t;
-                            null === (e = null == h ? void 0 : h.current) || void 0 === e || e.clearText(), null === (t = null == g ? void 0 : g.current) || void 0 === t || t.clear(), P(), I(void 0), null == v || v()
-                        }), [h, g, P, v]),
+                            }), null == f || f(e)
+                        }), [f, P]),
                         U = (0, r.useCallback)((function() {
-                            return Ite(void 0, void 0, void 0, (function() {
-                                return Dte(this, (function(e) {
-                                    switch (e.label) {
+                            var e, t;
+                            null === (e = null == g ? void 0 : g.current) || void 0 === e || e.clearText(), null === (t = null == y ? void 0 : y.current) || void 0 === t || t.clear(), k(), D(void 0), null == m || m()
+                        }), [g, y, k, m]),
+                        L = (0, r.useCallback)((function() {
+                            return Pte(void 0, void 0, void 0, (function() {
+                                var e;
+                                return kte(this, (function(t) {
+                                    switch (t.label) {
                                         case 0:
-                                            return E ? (x(!0), [4, f(E)]) : [2];
+                                            return (e = R.isDirty ? I : null != i ? i : I) ? (A(!0), [4, v(e)]) : [2];
                                         case 1:
-                                            return e.sent() && P(), x(!1), [2]
+                                            return t.sent() && k(), A(!1), [2]
                                     }
                                 }))
                             }))
-                        }), [E, f, P]),
-                        L = (0, r.useMemo)((function() {
-                            return c || d || !k.isValidAndUnsaved || N || C
-                        }), [k, c, d, N, C]);
+                        }), [I, i, R.isDirty, v, k]),
+                        z = (0, r.useMemo)((function() {
+                            var e = R.isValidAndUnsaved || !!p && !R.isInvalid;
+                            return c || d || !e || M || x
+                        }), [R, p, c, d, M, x]);
                     return o().createElement("div", {
                         className: qj()("content-composer", t)
                     }, u && o().createElement("div", {
                         className: "content-composer-header"
                     }, o().createElement("div", {
                         className: "content-composer-label"
-                    }, u), m && o().createElement(B9, {
-                        "aria-label": y("Action.Close"),
-                        onClick: m,
+                    }, u), h && o().createElement(z9, {
+                        "aria-label": b("Action.Close"),
+                        onClick: h,
                         className: "content-composer-close-button"
                     }, o().createElement("span", {
                         className: "content-composer-close-icon"
                     }))), o().createElement("div", {
                         className: "content-composer-body"
-                    }, o().createElement(Yee, {
-                        ref: O,
-                        editorRef: g,
+                    }, o().createElement(tte, {
+                        ref: F,
+                        editorRef: y,
                         className: "content-composer-textarea",
                         textAreaClassName: "content-composer-textarea-input",
-                        placeholder: y("Label.WriteComment"),
+                        placeholder: b("Label.WriteComment"),
                         defaultValue: i,
                         showCharacterCount: !1,
                         maxTextFieldHeight: 100,
                         locked: c,
-                        validationError: B,
-                        onChange: j,
+                        validationError: j,
+                        onChange: G,
                         onHotKey: function(e) {
-                            e !== Bee.Submit || L || U()
+                            e !== zee.Submit || z || L()
                         },
                         autoFocus: n,
                         isRichTextEnabled: !0,
-                        isCollapsedInitially: b,
+                        isCollapsedInitially: w,
                         leadingControl: s,
                         footer: l,
                         autoResize: !0
@@ -78953,20 +79034,20 @@
                         className: "content-composer-footer"
                     }, o().createElement("div", {
                         className: "content-composer-buttons"
-                    }, !!v && o().createElement(q, {
+                    }, !!m && o().createElement(q, {
                         variant: "Standard",
                         size: "Small",
-                        onClick: G,
+                        onClick: U,
                         isDisabled: c
-                    }, y("Action.Cancel")), o().createElement(q, {
+                    }, b("Action.Cancel")), o().createElement(q, {
                         variant: "Emphasis",
                         size: "Small",
-                        onClick: U,
-                        isDisabled: L,
-                        isLoading: C
-                    }, y("Action.Post"))), !!a && o().createElement("div", {
+                        onClick: L,
+                        isDisabled: z,
+                        isLoading: x
+                    }, b("Action.Post"))), !!a && o().createElement("div", {
                         className: qj()("content-composer-error", {
-                            "content-composer-validation-error": k.isInvalid
+                            "content-composer-validation-error": R.isInvalid
                         })
                     }, o().createElement("div", {
                         className: "content-composer-error-icon"
@@ -78974,11 +79055,11 @@
                         className: "icon-status-alert"
                     })), o().createElement("div", {
                         className: qj()("content-composer-error-message", {
-                            "content-composer-validation-error-message text-error": k.isInvalid
+                            "content-composer-validation-error-message text-error": R.isInvalid
                         })
                     }, a)))))
                 }), Gj),
-                xte = function(e, t, n, r) {
+                Ote = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -79005,7 +79086,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Ate = function(e, t) {
+                Fte = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -79077,12 +79158,12 @@
                         }
                     }
                 },
-                Ste = function(e) {
+                Tte = function(e) {
                     var t = e.editingCommentId,
                         n = e.parentCommentId,
                         o = e.mentioningReplyId,
                         i = e.translate,
-                        a = Oee(),
+                        a = jee(),
                         u = a.handleCreateComment,
                         l = a.handleEditComment,
                         c = (0, s.useSystemFeedback)().systemFeedbackService,
@@ -79105,15 +79186,16 @@
                             f("")
                         }), []),
                         g = (0, r.useCallback)((function(e, r) {
-                            return xte(void 0, void 0, void 0, (function() {
+                            return Ote(void 0, void 0, void 0, (function() {
                                 var i;
-                                return Ate(this, (function(a) {
+                                return Fte(this, (function(a) {
                                     switch (a.label) {
                                         case 0:
                                             return a.trys.push([0, 5, , 6]), t ? [4, l({
                                                 content: e,
                                                 commentId: t,
-                                                parentCommentId: n
+                                                parentCommentId: n,
+                                                mediaAssetIds: r
                                             })] : [3, 2];
                                         case 1:
                                             return a.sent(), [3, 4];
@@ -79142,7 +79224,7 @@
                         clearCommentSubmissionError: h
                     }
                 },
-                Pte = function(e) {
+                Nte = function(e) {
                     var t = e.items,
                         n = (0, u.useTranslation)().translate,
                         i = (0, r.useState)(!1),
@@ -79186,16 +79268,16 @@
                         })
                     }))))))
                 };
-            Pte.displayName = "PostComposerAttachmentMenu";
-            var kte = Pte,
-                Rte = function() {
-                    return Rte = Object.assign || function(e) {
+            Nte.displayName = "PostComposerAttachmentMenu";
+            var Mte = Nte,
+                Bte = function() {
+                    return Bte = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, Rte.apply(this, arguments)
+                    }, Bte.apply(this, arguments)
                 },
-                Ote = function(e, t) {
+                jte = function(e, t) {
                     var n = {};
                     for (var r in e) Object.prototype.hasOwnProperty.call(e, r) && t.indexOf(r) < 0 && (n[r] = e[r]);
                     if (null != e && "function" == typeof Object.getOwnPropertySymbols) {
@@ -79204,26 +79286,26 @@
                     }
                     return n
                 },
-                Fte = function(e, t, n) {
+                Gte = function(e, t, n) {
                     if (n || 2 === arguments.length)
                         for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                     return e.concat(r || Array.prototype.slice.call(t))
                 },
-                Tte = function(e) {
+                Ute = function(e) {
                     var t = e.textClassNames,
                         n = void 0 === t ? ["text-body-large"] : t,
                         r = e.className,
                         i = e.text,
-                        a = Ote(e, ["textClassNames", "className", "text"]);
+                        a = jte(e, ["textClassNames", "className", "text"]);
                     return o().createElement("div", {
                         className: qj()("inline-progress-loader-container", r)
-                    }, o().createElement(cg, Rte({}, a)), i && o().createElement("span", {
-                        className: qj().apply(void 0, Fte(["inline-progress-loader-text"], n, !1))
+                    }, o().createElement(cg, Bte({}, a)), i && o().createElement("span", {
+                        className: qj().apply(void 0, Gte(["inline-progress-loader-text"], n, !1))
                     }, i))
                 };
-            Tte.displayName = "InlineProgressLoader";
-            var Nte = Tte,
-                Mte = function(e) {
+            Ute.displayName = "InlineProgressLoader";
+            var Lte = Ute,
+                qte = function(e) {
                     var t = e.className,
                         n = e.testId,
                         r = e.removeTestId,
@@ -79251,7 +79333,7 @@
                         type: EA.ThumbnailTypes.assetThumbnail
                     }), s && o().createElement("span", {
                         className: "image-upload-preview-uploading-overlay"
-                    }, o().createElement(Nte, {
+                    }, o().createElement(Lte, {
                         variant: "Indeterminate",
                         size: "Small",
                         ariaLabel: null != d ? d : ""
@@ -79266,9 +79348,9 @@
                         onClick: f
                     }))
                 };
-            Mte.displayName = "ImageUploadPreviewTile";
-            var Bte = Mte,
-                jte = function(e) {
+            qte.displayName = "ImageUploadPreviewTile";
+            var zte = qte,
+                _te = function(e) {
                     var t = e.images,
                         n = e.errorKey,
                         r = e.errorMeta,
@@ -79283,11 +79365,12 @@
                     }, t.length > 0 && o().createElement("div", {
                         className: "forum-image-upload-preview-tiles"
                     }, t.map((function(e, t) {
-                        return o().createElement(Bte, {
+                        return o().createElement(zte, {
                             key: e.key,
                             className: "forum-image-upload-preview-tile",
                             testId: "forum-image-upload-preview-".concat(t),
                             previewUrl: e.previewUrl,
+                            assetId: e.assetId,
                             isUploading: "uploading" === e.status,
                             isFailed: "failed" === e.status,
                             uploadingLabel: s,
@@ -79301,17 +79384,17 @@
                         "data-testid": "forum-image-upload-error"
                     }, a(n, r)))
                 };
-            jte.displayName = "ForumImageUploadPreviews";
-            var Gte, Ute = (0, u.withTranslations)(jte, Gj);
+            _te.displayName = "ForumImageUploadPreviews";
+            var Vte, Wte = (0, u.withTranslations)(_te, Gj);
             ! function(e) {
                 e.FILE_TYPE = "FILE_TYPE", e.FILE_SIZE = "FILE_SIZE", e.CUSTOM = "CUSTOM"
-            }(Gte || (Gte = {}));
-            var Lte = "Message.InvalidFile",
-                qte = "Message.InvalidFileSize",
-                zte = function(e) {
+            }(Vte || (Vte = {}));
+            var Hte = "Message.InvalidFile",
+                Kte = "Message.InvalidFileSize",
+                Qte = function(e) {
                     return e.type.toLowerCase().startsWith("image/")
                 },
-                _te = function(e, t) {
+                Yte = function(e, t) {
                     void 0 === t && (t = {});
                     var n = [],
                         r = function(e, t) {
@@ -79334,16 +79417,16 @@
                                     return r === e
                                 }))
                             }(e, t) ? null : {
-                                type: Gte.FILE_TYPE,
-                                messageKey: Lte,
+                                type: Vte.FILE_TYPE,
+                                messageKey: Hte,
                                 file: e
                             } : null
                         }(e, t.accept);
                     r && n.push(r);
                     var o = function(e, t) {
                         return t && e.size > t ? {
-                            type: Gte.FILE_SIZE,
-                            messageKey: qte,
+                            type: Vte.FILE_SIZE,
+                            messageKey: Kte,
                             messageMeta: {
                                 maxSize: t
                             },
@@ -79358,7 +79441,7 @@
                                 i = o.messageKey,
                                 a = o.messageMeta;
                             if (i) return {
-                                type: Gte.CUSTOM,
+                                type: Vte.CUSTOM,
                                 messageKey: i,
                                 messageMeta: a,
                                 file: e
@@ -79368,15 +79451,15 @@
                     }(e, t.customValidators);
                     return i && n.push(i), n
                 },
-                Vte = function(e, t) {
+                $te = function(e, t) {
                     void 0 === t && (t = {});
                     var n = [];
                     return (e instanceof FileList ? Array.from(e) : e).forEach((function(e) {
-                        var r = _te(e, t);
+                        var r = Yte(e, t);
                         n.push.apply(n, r)
                     })), n
                 },
-                Wte = function(e, t, n) {
+                Jte = function(e, t, n) {
                     var r = new FileReader;
                     r.onload = function() {
                         "string" == typeof r.result ? t(r.result) : null == n || n()
@@ -79384,8 +79467,8 @@
                         return null == n ? void 0 : n()
                     }, r.readAsDataURL(e)
                 },
-                Hte = "Error.AssetUploadFailed",
-                Kte = function(e, t, n, r) {
+                Xte = "Error.AssetUploadFailed",
+                Zte = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -79412,7 +79495,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Qte = function(e, t) {
+                ene = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -79484,33 +79567,33 @@
                         }
                     }
                 },
-                Yte = function(e, t, n) {
+                tne = function(e, t, n) {
                     if (n || 2 === arguments.length)
                         for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                     return e.concat(r || Array.prototype.slice.call(t))
                 },
-                $te = "".concat(e.EnvironmentUrls.apiGatewayUrl, "/assets/user-auth/v1"),
-                Jte = "".concat($te, "/assets"),
-                Xte = JSON.stringify({
+                nne = "".concat(e.EnvironmentUrls.apiGatewayUrl, "/assets/user-auth/v1"),
+                rne = "".concat(nne, "/assets"),
+                one = JSON.stringify({
                     AssetPrivacy: "OpenUse"
                 }),
-                Zte = function(e) {
+                ine = function(e) {
                     if ("string" == typeof e.message && e.message.length > 0) return e.message;
                     var t = e.code;
                     return null != t && "" !== t ? String(t) : "Asset upload failed"
                 },
-                ene = function() {
+                ane = function() {
                     return new DOMException("aborted", "AbortError")
                 },
-                tne = function(e) {
-                    if (null == e ? void 0 : e.aborted) throw ene()
+                une = function(e) {
+                    if (null == e ? void 0 : e.aborted) throw ane()
                 },
-                nne = function(e, t) {
+                sne = function(e, t) {
                     return new Promise((function(n, r) {
                         var o;
-                        tne(t);
+                        une(t);
                         var i = function() {
-                            clearTimeout(o), r(ene())
+                            clearTimeout(o), r(ane())
                         };
                         o = setTimeout((function() {
                             null == t || t.removeEventListener("abort", i), n()
@@ -79519,11 +79602,11 @@
                         })
                     }))
                 },
-                rne = function(e, t, n) {
+                lne = function(e, t, n) {
                     for (var r = [], o = 3; o < arguments.length; o++) r[o - 3] = arguments[o];
-                    return Kte(void 0, Yte([e, t, n], r, !0), Promise, (function(e, t, n, r) {
+                    return Zte(void 0, tne([e, t, n], r, !0), Promise, (function(e, t, n, r) {
                         var o, i, a, u;
-                        return void 0 === r && (r = ""), Qte(this, (function(s) {
+                        return void 0 === r && (r = ""), ene(this, (function(s) {
                             switch (s.label) {
                                 case 0:
                                     return o = {
@@ -79551,8 +79634,8 @@
                                         }
                                     }(e), u = new Blob([e], {
                                         type: a
-                                    }), i.append("fileContent", u, e.name), i.append("additionalParameters", Xte), [4, _j.httpService.post({
-                                        url: Jte,
+                                    }), i.append("fileContent", u, e.name), i.append("additionalParameters", one), [4, _j.httpService.post({
+                                        url: rne,
                                         withCredentials: !0
                                     }, i)];
                                 case 1:
@@ -79561,13 +79644,13 @@
                         }))
                     }))
                 },
-                one = function(e) {
-                    return Kte(void 0, void 0, Promise, (function() {
-                        return Qte(this, (function(t) {
+                cne = function(e) {
+                    return Zte(void 0, void 0, Promise, (function() {
+                        return ene(this, (function(t) {
                             switch (t.label) {
                                 case 0:
                                     return [4, _j.httpService.get({
-                                        url: "".concat($te, "/operations/").concat(e),
+                                        url: "".concat(nne, "/operations/").concat(e),
                                         withCredentials: !0,
                                         retryable: !0
                                     })];
@@ -79577,19 +79660,19 @@
                         }))
                     }))
                 },
-                ine = function(e, t) {
-                    return Kte(void 0, void 0, Promise, (function() {
+                dne = function(e, t) {
+                    return Zte(void 0, void 0, Promise, (function() {
                         var n, r, o;
-                        return Qte(this, (function(i) {
+                        return ene(this, (function(i) {
                             switch (i.label) {
                                 case 0:
                                     n = 0, i.label = 1;
                                 case 1:
-                                    return n < 10 ? (tne(t), r = Math.min(1e3 * Math.pow(2, n), 5e3), [4, nne(r, t)]) : [3, 5];
+                                    return n < 10 ? (une(t), r = Math.min(1e3 * Math.pow(2, n), 5e3), [4, sne(r, t)]) : [3, 5];
                                 case 2:
-                                    return i.sent(), tne(t), [4, one(e)];
+                                    return i.sent(), une(t), [4, cne(e)];
                                 case 3:
-                                    if (o = i.sent(), tne(t), o.error) throw new Error(Zte(o.error));
+                                    if (o = i.sent(), une(t), o.error) throw new Error(ine(o.error));
                                     if (o.done) return [2, o];
                                     i.label = 4;
                                 case 4:
@@ -79600,43 +79683,43 @@
                         }))
                     }))
                 },
-                ane = function(e) {
+                pne = function(e) {
                     var t;
-                    if (e.error) throw new Error(Zte(e.error));
+                    if (e.error) throw new Error(ine(e.error));
                     var n = Number(null === (t = e.response) || void 0 === t ? void 0 : t.assetId);
                     if (!e.done || !Number.isSafeInteger(n) || n <= 0) throw new Error("Asset upload failed: no assetId in response");
                     return n
                 },
-                une = function(e, t) {
-                    return Kte(void 0, void 0, Promise, (function() {
+                fne = function(e, t) {
+                    return Zte(void 0, void 0, Promise, (function() {
                         var n;
-                        return Qte(this, (function(r) {
+                        return ene(this, (function(r) {
                             switch (r.label) {
                                 case 0:
-                                    if (tne(t), e.done || e.error) return [2, ane(e)];
+                                    if (une(t), e.done || e.error) return [2, pne(e)];
                                     if (!e.operationId) throw new Error("Asset upload failed: no operationId in response");
-                                    return [4, ine(e.operationId, t)];
+                                    return [4, dne(e.operationId, t)];
                                 case 1:
-                                    return n = r.sent(), [2, ane(n)]
+                                    return n = r.sent(), [2, pne(n)]
                             }
                         }))
                     }))
                 },
-                sne = une,
-                lne = function(e, t, n, r) {
-                    return Kte(void 0, void 0, Promise, (function() {
+                vne = fne,
+                mne = function(e, t, n, r) {
+                    return Zte(void 0, void 0, Promise, (function() {
                         var o;
-                        return Qte(this, (function(i) {
+                        return ene(this, (function(i) {
                             switch (i.label) {
                                 case 0:
-                                    return [4, rne(e, t, n)];
+                                    return [4, lne(e, t, n)];
                                 case 1:
-                                    return o = i.sent(), [2, une(o, r)]
+                                    return o = i.sent(), [2, fne(o, r)]
                             }
                         }))
                     }))
                 },
-                cne = function(e, t, n, r) {
+                hne = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -79663,7 +79746,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                dne = function(e, t) {
+                gne = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -79735,44 +79818,44 @@
                         }
                     }
                 },
-                pne = function(e, t, n, r) {
-                    return cne(void 0, void 0, Promise, (function() {
+                yne = function(e, t, n, r) {
+                    return hne(void 0, void 0, Promise, (function() {
                         var o;
-                        return dne(this, (function(i) {
+                        return gne(this, (function(i) {
                             switch (i.label) {
                                 case 0:
                                     return [4, B_(e, t, n, r)];
                                 case 1:
-                                    return o = i.sent(), [2, sne(o, r)]
+                                    return o = i.sent(), [2, vne(o, r)]
                             }
                         }))
                     }))
                 },
-                fne = function() {
-                    return fne = Object.assign || function(e) {
+                bne = function() {
+                    return bne = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, fne.apply(this, arguments)
+                    }, bne.apply(this, arguments)
                 },
-                vne = function(e, t, n) {
+                wne = function(e, t, n) {
                     if (n || 2 === arguments.length)
                         for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                     return e.concat(r || Array.prototype.slice.call(t))
                 },
-                mne = {
+                Ene = {
                     accept: "image/png, image/jpeg",
                     maxFileSize: 10485760
                 },
-                hne = function(e) {
+                Ine = function(e) {
                     switch (e.type) {
-                        case Gte.FILE_TYPE:
+                        case Vte.FILE_TYPE:
                             return {
                                 key: e.messageKey, meta: {
                                     fileTypes: "PNG, JPG"
                                 }
                             };
-                        case Gte.FILE_SIZE:
+                        case Vte.FILE_SIZE:
                             return {
                                 key: e.messageKey, meta: {
                                     fileSize: 10
@@ -79780,20 +79863,28 @@
                             };
                         default:
                             return {
-                                key: Hte
+                                key: Xte
                             }
                     }
                 },
-                gne = function(e) {
-                    var t = e.groupId,
-                        n = e.activeCategory,
-                        i = e.canCreateInActiveCategory,
-                        a = e.isEditing,
-                        s = (0, u.useTranslation)().translate,
-                        l = GV().features,
-                        c = (0, r.useRef)(null),
-                        d = !a && i && !0 === l.ForumsImages && !0 === (null == n ? void 0 : n.isRestricted) && n.moderationType === f_.Unrestricted,
-                        p = function(e) {
+                Dne = function(e, t, n) {
+                    if (n || 2 === arguments.length)
+                        for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
+                    return e.concat(r || Array.prototype.slice.call(t))
+                },
+                Cne = function(e) {
+                    var t, n = e.groupId,
+                        i = e.activeCategory,
+                        a = e.canCreateInActiveCategory,
+                        s = e.isEditing,
+                        l = e.editingComment,
+                        c = (0, u.useTranslation)().translate,
+                        d = GV().features,
+                        p = (0, r.useRef)(null),
+                        f = !0 === d.ForumsImages,
+                        v = !s && a && f && !0 === (null == i ? void 0 : i.isRestricted) && i.moderationType === f_.Unrestricted,
+                        m = s && f,
+                        h = function(e) {
                             var t, n = e.groupId,
                                 o = e.categoryId,
                                 i = e.enabled,
@@ -79854,8 +79945,8 @@
                                             for (var i = null, a = [], s = 0, l = o; s < l.length; s++) {
                                                 var c = l[s];
                                                 if (d.current.length + a.length >= 3) break;
-                                                var p = _te(c, mne)[0];
-                                                if (p) i = hne(p);
+                                                var p = Yte(c, Ene)[0];
+                                                if (p) i = Ine(p);
                                                 else {
                                                     var f = u(),
                                                         w = new AbortController;
@@ -79867,7 +79958,7 @@
                                                 }
                                             }
                                             v(i), 0 !== a.length && (g((function(e) {
-                                                return vne(vne([], e, !0), a.map((function(e) {
+                                                return wne(wne([], e, !0), a.map((function(e) {
                                                     return {
                                                         key: e.key,
                                                         status: "uploading"
@@ -79877,22 +79968,22 @@
                                                 var t = e.key,
                                                     o = e.file,
                                                     i = e.abortController;
-                                                Wte(o, (function(e) {
+                                                Jte(o, (function(e) {
                                                     i.signal.aborted || g((function(n) {
                                                         return n.map((function(n) {
-                                                            return n.key === t ? fne(fne({}, n), {
+                                                            return n.key === t ? bne(bne({}, n), {
                                                                 previewUrl: e
                                                             }) : n
                                                         }))
                                                     }))
                                                 }), (function() {
                                                     i.signal.aborted || (y(t), v({
-                                                        key: Hte
+                                                        key: Xte
                                                     }))
-                                                })), pne(n, r, o, i.signal).then((function(e) {
+                                                })), yne(n, r, o, i.signal).then((function(e) {
                                                     i.signal.aborted || g((function(n) {
                                                         return n.map((function(n) {
-                                                            return n.key === t ? fne(fne({}, n), {
+                                                            return n.key === t ? bne(bne({}, n), {
                                                                 assetId: e,
                                                                 status: "uploaded"
                                                             }) : n
@@ -79901,12 +79992,12 @@
                                                 })).catch((function(e) {
                                                     i.signal.aborted || e instanceof DOMException && "AbortError" === e.name || (g((function(e) {
                                                         return e.map((function(e) {
-                                                            return e.key === t ? fne(fne({}, e), {
+                                                            return e.key === t ? bne(bne({}, e), {
                                                                 status: "failed"
                                                             }) : e
                                                         }))
                                                     })), v({
-                                                        key: Hte
+                                                        key: Xte
                                                     }))
                                                 }))
                                             })))
@@ -79948,69 +80039,102 @@
                                 remainingSlots: Math.max(0, 3 - l.filter((function(e) {
                                     return "failed" !== e.status
                                 })).length),
-                                validation: mne,
+                                validation: Ene,
                                 addFiles: w,
                                 removeByKey: y,
                                 reset: E
                             }
                         }({
-                            groupId: t,
-                            categoryId: null == n ? void 0 : n.id,
-                            enabled: d
+                            groupId: n,
+                            categoryId: null == i ? void 0 : i.id,
+                            enabled: v
                         }),
-                        f = p.images,
-                        v = p.assetIds,
-                        m = p.isSubmitBlocked,
-                        h = p.errorKey,
-                        g = p.errorMeta,
-                        y = p.remainingSlots,
-                        b = p.validation,
-                        w = p.addFiles,
-                        E = p.removeByKey,
-                        I = p.reset,
-                        D = d ? {
+                        g = h.images,
+                        y = h.assetIds,
+                        b = h.isSubmitBlocked,
+                        w = h.errorKey,
+                        E = h.errorMeta,
+                        I = h.remainingSlots,
+                        D = h.validation,
+                        C = h.addFiles,
+                        x = h.removeByKey,
+                        A = h.reset,
+                        S = (0, r.useState)([]),
+                        P = S[0],
+                        k = S[1];
+                    (0, r.useEffect)((function() {
+                        k([])
+                    }), [null == l ? void 0 : l.id]);
+                    var R = m ? (null !== (t = null == l ? void 0 : l.mediaAttachments) && void 0 !== t ? t : []).map((function(e) {
+                            return e.assetId
+                        })) : [],
+                        O = R.filter((function(e) {
+                            return !P.includes(e)
+                        })),
+                        F = O.map((function(e) {
+                            return {
+                                key: e,
+                                assetId: e,
+                                status: "uploaded"
+                            }
+                        })),
+                        T = s && (O.length < R.length || y.length > 0),
+                        N = y;
+                    s && (N = T ? Dne(Dne([], O, !0), y, !0) : void 0);
+                    var M = (0, r.useCallback)((function() {
+                            A(), k([])
+                        }), [A]),
+                        B = v ? {
                             id: "image",
-                            label: s("Label.AddImage"),
+                            label: c("Label.AddImage"),
                             icon: "icon-regular-image",
-                            disabled: 0 === y,
+                            disabled: 0 === I,
                             onSelect: function() {
                                 var e;
-                                return null === (e = c.current) || void 0 === e ? void 0 : e.click()
+                                return null === (e = p.current) || void 0 === e ? void 0 : e.click()
                             }
-                        } : void 0;
+                        } : void 0,
+                        j = s ? F : g,
+                        G = s ? function(e) {
+                            return k((function(t) {
+                                return Dne(Dne([], t, !0), [e], !1)
+                            }))
+                        } : x,
+                        U = j.length > 0 || null !== w;
                     return {
-                        mediaAssetIds: v,
-                        isSubmitBlocked: m,
-                        menuItem: D,
-                        contentFooter: d ? o().createElement(Ute, {
-                            images: f,
-                            errorKey: h,
-                            errorMeta: g,
-                            onRemove: E
+                        mediaAssetIds: N,
+                        hasUnsavedImageChanges: T,
+                        isSubmitBlocked: b,
+                        menuItem: B,
+                        contentFooter: (v || m) && U ? o().createElement(Wte, {
+                            images: j,
+                            errorKey: w,
+                            errorMeta: E,
+                            onRemove: G
                         }) : null,
-                        input: d ? o().createElement("input", {
-                            ref: c,
+                        input: v ? o().createElement("input", {
+                            ref: p,
                             type: "file",
-                            accept: b.accept,
+                            accept: D.accept,
                             multiple: !0,
                             className: "hidden",
                             "data-testid": "forum-image-upload-input",
                             onChange: function(e) {
                                 var t = e.currentTarget;
-                                t.files && w(t.files), t.value = ""
+                                t.files && C(t.files), t.value = ""
                             }
                         }) : null,
-                        reset: I
+                        reset: M
                     }
                 },
-                yne = function() {
-                    return yne = Object.assign || function(e) {
+                xne = function() {
+                    return xne = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, yne.apply(this, arguments)
+                    }, xne.apply(this, arguments)
                 },
-                bne = function(e, t) {
+                Ane = function(e, t) {
                     var n = {};
                     for (var r in e) Object.prototype.hasOwnProperty.call(e, r) && t.indexOf(r) < 0 && (n[r] = e[r]);
                     if (null != e && "function" == typeof Object.getOwnPropertySymbols) {
@@ -80019,39 +80143,40 @@
                     }
                     return n
                 },
-                wne = function(e, t) {
+                Sne = function(e, t, n) {
                     void 0 === t && (t = !1);
-                    var n = MQ.use.groupId(),
-                        i = MQ.use.categoryId(),
-                        a = MQ.use.categories(),
-                        u = EY().canCreateComment,
-                        s = (0, r.useMemo)((function() {
-                            return a.find((function(e) {
-                                return e.id === i
+                    var i = MQ.use.groupId(),
+                        a = MQ.use.categoryId(),
+                        u = MQ.use.categories(),
+                        s = EY().canCreateComment,
+                        l = (0, r.useMemo)((function() {
+                            return u.find((function(e) {
+                                return e.id === a
                             }))
-                        }), [a, i]),
-                        l = gne({
-                            groupId: n,
-                            activeCategory: s,
-                            canCreateInActiveCategory: u && !t,
-                            isEditing: e
+                        }), [u, a]),
+                        c = Cne({
+                            groupId: i,
+                            activeCategory: l,
+                            canCreateInActiveCategory: s && !t,
+                            isEditing: e,
+                            editingComment: n
                         }),
-                        c = l.menuItem,
-                        d = bne(l, ["menuItem"]);
-                    return yne(yne({}, d), {
-                        leadingControl: c ? o().createElement(kte, {
-                            items: [c]
+                        d = c.menuItem,
+                        p = Ane(c, ["menuItem"]);
+                    return xne(xne({}, p), {
+                        leadingControl: d ? o().createElement(Mte, {
+                            items: [d]
                         }) : null
                     })
                 },
-                Ene = function() {
-                    return Ene = Object.assign || function(e) {
+                Pne = function() {
+                    return Pne = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, Ene.apply(this, arguments)
+                    }, Pne.apply(this, arguments)
                 },
-                Ine = function(e, t, n, r) {
+                kne = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -80078,7 +80203,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Dne = function(e, t) {
+                Rne = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -80150,27 +80275,27 @@
                         }
                     }
                 },
-                Cne = (0, u.withTranslations)((function(e) {
+                One = (0, u.withTranslations)((function(e) {
                     var t = e.autoFocus,
                         n = e.showCancelButton,
                         i = void 0 === n || n,
                         a = e.disabled,
                         u = void 0 !== a && a,
                         s = e.translate,
-                        l = Oee(),
+                        l = jee(),
                         c = l.post,
                         d = l.getComment,
                         p = MQ.use.groupId(),
                         f = MQ.use.postId(),
                         v = VK().forumsWrite,
-                        m = Nee(),
+                        m = Lee(),
                         h = m.replyingToCommentId,
                         g = m.parentCommentId,
                         y = m.mentioningReplyId,
                         b = m.editingCommentId,
                         w = m.resetComposerState,
                         E = m.commentComposerRef,
-                        I = Ste({
+                        I = Tte({
                             editingCommentId: b,
                             parentCommentId: g,
                             mentioningReplyId: y,
@@ -80179,23 +80304,28 @@
                         D = I.submitComment,
                         C = I.commentSubmissionError,
                         x = I.clearCommentSubmissionError,
-                        A = wne(!!b, u || v.isDisabled),
-                        S = A.mediaAssetIds,
-                        P = A.isSubmitBlocked,
-                        k = A.leadingControl,
-                        R = A.contentFooter,
-                        O = A.input,
-                        F = A.reset,
-                        T = (0, r.useCallback)((function() {
+                        A = (0, r.useMemo)((function() {
                             var e;
-                            null === (e = null == E ? void 0 : E.current) || void 0 === e || e.clearText(), w(), x(), F()
-                        }), [E, w, x, F]),
-                        N = (0, r.useCallback)((function(e) {
-                            return Ine(void 0, void 0, void 0, (function() {
-                                return Dne(this, (function(t) {
+                            return b && null !== (e = d(b, g)) && void 0 !== e ? e : void 0
+                        }), [b, g, d]),
+                        S = Sne(!!b, u || v.isDisabled, A),
+                        P = S.mediaAssetIds,
+                        k = S.hasUnsavedImageChanges,
+                        R = S.isSubmitBlocked,
+                        O = S.leadingControl,
+                        F = S.contentFooter,
+                        T = S.input,
+                        N = S.reset,
+                        M = (0, r.useCallback)((function() {
+                            var e;
+                            null === (e = null == E ? void 0 : E.current) || void 0 === e || e.clearText(), w(), x(), N()
+                        }), [E, w, x, N]),
+                        B = (0, r.useCallback)((function(e) {
+                            return kne(void 0, void 0, void 0, (function() {
+                                return Rne(this, (function(t) {
                                     switch (t.label) {
                                         case 0:
-                                            return OV(Ene(Ene({
+                                            return OV(Pne(Pne({
                                                 groupId: p
                                             }, b ? {
                                                 clickTargetType: "editComment",
@@ -80205,77 +80335,74 @@
                                                 clickTargetId: f
                                             }), {
                                                 hasRichText: g_(e)
-                                            })), [4, D(e, S)];
+                                            })), [4, D(e, P)];
                                         case 1:
-                                            return t.sent() ? (T(), [2, !0]) : [2, !1]
+                                            return t.sent() ? (M(), [2, !0]) : [2, !1]
                                     }
                                 }))
                             }))
-                        }), [p, f, b, D, S, T]),
-                        M = (0, r.useCallback)((function() {
+                        }), [p, f, b, D, P, M]),
+                        j = (0, r.useCallback)((function() {
                             C && x()
                         }), [C, x]),
-                        B = (0, r.useMemo)((function() {
+                        G = (0, r.useMemo)((function() {
                             if (y) {
                                 var e = d(y, g);
                                 if (e) return e.creatorInfo.displayName
                             }
                             return ""
                         }), [g, y, d]),
-                        j = (0, r.useMemo)((function() {
-                            if (b) {
-                                var e = d(b, g);
-                                return null == e ? void 0 : e.content
-                            }
-                            if (B) return t = "@".concat(B, " "), {
+                        U = (0, r.useMemo)((function() {
+                            return b ? null == A ? void 0 : A.content : G ? (e = "@".concat(G, " "), {
                                 slate: {
                                     type: "document",
                                     children: [{
                                         type: Jz,
                                         children: [{
-                                            text: t
+                                            text: e
                                         }]
                                     }]
                                 }
-                            };
-                            var t
-                        }), [b, g, B, d]),
-                        G = (0, r.useMemo)((function() {
+                            }) : void 0;
+                            var e
+                        }), [b, A, G]),
+                        L = (0, r.useMemo)((function() {
                             if (h && h !== (null == c ? void 0 : c.firstComment.id)) {
                                 var e = d(h);
                                 if (e) return e.createdBy
                             }
                         }), [c, h, d]),
-                        U = (0, r.useCallback)((function() {
-                            return b ? s(g ? "Label.EditReply" : "Label.EditComment") : G ? o().createElement(Vee, {
-                                userId: G
+                        q = (0, r.useCallback)((function() {
+                            return b ? s(g ? "Label.EditReply" : "Label.EditComment") : L ? o().createElement($ee, {
+                                userId: L
                             }) : null
-                        }), [g, b, G, s]);
-                    return o().createElement(o().Fragment, null, o().createElement(Cte, {
+                        }), [g, b, L, s]);
+                    return o().createElement(o().Fragment, null, o().createElement(Rte, {
                         autoFocus: t,
-                        defaultContent: j,
+                        defaultContent: U,
                         errorMessage: C,
-                        label: U(),
-                        contentLeadingControl: k,
-                        contentFooter: R,
+                        label: q(),
+                        contentLeadingControl: O,
+                        contentFooter: F,
                         disabled: u || v.isDisabled,
-                        submitDisabled: !!C || P,
-                        onChange: M,
-                        onSubmit: N,
-                        onCancel: i ? T : void 0,
-                        onClose: T,
+                        submitDisabled: !!C || R,
+                        hasUnsavedAttachmentChanges: k,
+                        onChange: j,
+                        onSubmit: B,
+                        onCancel: i ? M : void 0,
+                        onClose: M,
                         inputRef: E,
                         isCollapsedInitially: !1
-                    }), O)
+                    }), T)
                 }), Gj),
-                xne = function() {
-                    return xne = Object.assign || function(e) {
+                Fne = function() {
+                    return Fne = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, xne.apply(this, arguments)
+                    }, Fne.apply(this, arguments)
                 },
-                Ane = function(e, t, n, r) {
+                Tne = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -80302,7 +80429,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Sne = function(e, t) {
+                Nne = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -80374,12 +80501,12 @@
                         }
                     }
                 },
-                Pne = function(e, t, n) {
+                Mne = function(e, t, n) {
                     if (n || 2 === arguments.length)
                         for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                     return e.concat(r || Array.prototype.slice.call(t))
                 },
-                kne = (0, u.withTranslations)((function(t) {
+                Bne = (0, u.withTranslations)((function(t) {
                     var n = t.createdBy,
                         i = t.commentId,
                         a = t.button,
@@ -80424,12 +80551,12 @@
                         q = MQ.use.postId(),
                         z = MQ.use.isCategoryArchived(),
                         _ = MQ.use.postShortId(),
-                        V = Oee(),
+                        V = jee(),
                         W = V.comments,
                         H = V.handleDeleteComment,
                         K = V.post,
                         Q = V.removeComment,
-                        Y = Nee().setEditComment,
+                        Y = Lee().setEditComment,
                         $ = (0, s.useSystemFeedback)().systemFeedbackService,
                         J = (0, l.useQueryClient)(),
                         X = (0, r.useMemo)((function() {
@@ -80455,9 +80582,9 @@
                         }), [i, c, Y]),
                         ie = (0, r.useCallback)((function() {
                             for (var e = [], t = 0; t < arguments.length; t++) e[t] = arguments[t];
-                            return Ane(void 0, Pne([], e, !0), void 0, (function(e) {
+                            return Tne(void 0, Mne([], e, !0), void 0, (function(e) {
                                 var t, n, r, o, a;
-                                return void 0 === e && (e = !1), Sne(this, (function(s) {
+                                return void 0 === e && (e = !1), Nne(this, (function(s) {
                                     switch (s.label) {
                                         case 0:
                                             return [4, H(i, c, e)];
@@ -80465,7 +80592,7 @@
                                             return s.sent() || $.warning(f("NetworkError")), u && (t = W.find((function(e) {
                                                 return e.id === c
                                             })), n = KH(j, U, (null == t ? void 0 : t.threadId) || ""), (r = J.getQueryData(n)) && (o = null !== (a = r.pages.map((function(e) {
-                                                return xne(xne({}, e), {
+                                                return Fne(Fne({}, e), {
                                                     data: e.data.filter((function(e) {
                                                         return e.id !== i
                                                     }))
@@ -80490,9 +80617,9 @@
                             })
                         }), [F, u, ue, ie]),
                         le = (0, r.useCallback)((function() {
-                            return Ane(void 0, void 0, void 0, (function() {
+                            return Tne(void 0, void 0, void 0, (function() {
                                 var e;
-                                return Sne(this, (function(t) {
+                                return Nne(this, (function(t) {
                                     switch (t.label) {
                                         case 0:
                                             if (!navigator.clipboard) return [3, 4];
@@ -80510,9 +80637,9 @@
                             }))
                         }), [U, i, j, q, $, f, u, d]),
                         ce = (0, r.useCallback)((function() {
-                            return Ane(void 0, void 0, void 0, (function() {
+                            return Tne(void 0, void 0, void 0, (function() {
                                 var t, n;
-                                return Sne(this, (function(r) {
+                                return Nne(this, (function(r) {
                                     switch (r.label) {
                                         case 0:
                                             return [4, oW()];
@@ -80548,7 +80675,7 @@
                                             r = J.getQueryData(n);
                                         if (r) {
                                             var o = null !== (e = r.pages.map((function(e) {
-                                                return xne(xne({}, e), {
+                                                return Fne(Fne({}, e), {
                                                     data: e.data.filter((function(e) {
                                                         return e.id !== i
                                                     }))
@@ -80629,13 +80756,13 @@
                         action: ce
                     }))))))
                 }), Gj),
-                Rne = function(e) {
+                jne = function(e) {
                     var t = e.translate,
                         n = EY().canCreateComment,
-                        r = Oee().post,
+                        r = jee().post,
                         o = VK().forumsWrite,
                         i = MQ.use.isCategoryArchived(),
-                        a = h7(),
+                        a = I7(),
                         u = a.isTierGated,
                         s = a.isResolving;
                     return o.isDisabled ? {
@@ -80659,7 +80786,7 @@
                         disabledTooltip: t("Description.NoReplyPermission")
                     }
                 },
-                One = function(e, t, n, r) {
+                Gne = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -80686,7 +80813,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Fne = function(e, t) {
+                Une = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -80758,13 +80885,13 @@
                         }
                     }
                 },
-                Tne = function(e) {
+                Lne = function(e) {
                     var t = e.children;
                     return e.hasRail ? o().createElement("div", {
                         className: "group-forums-comment-rail"
                     }, t) : o().createElement(o().Fragment, null, t)
                 },
-                Nne = (0, u.withTranslations)((function(e) {
+                qne = (0, u.withTranslations)((function(e) {
                     var t = e.id,
                         n = e.threadId,
                         i = e.channelId,
@@ -80779,50 +80906,51 @@
                         h = e.reactions,
                         g = e.creatorInfo,
                         y = e.initialThreadComments,
-                        b = e.translate,
-                        w = e.onHidePost,
-                        E = e.isConcealedAndShown,
-                        I = (0, kY.useHistory)(),
-                        D = (0, s.useSystemFeedback)().systemFeedbackService,
-                        C = Oee(),
-                        x = C.post,
-                        A = C.togglePostNotifications,
-                        S = C.toggleCommentNotifications,
-                        P = Nee(),
-                        k = P.setReplyToCommentOrPost,
-                        R = P.setReplyToCommentReply,
-                        O = EY().canReact,
-                        F = MQ.use.threadCommentId(),
-                        T = (0, r.useState)(!!F),
-                        N = T[0],
-                        M = T[1],
-                        B = MQ.use.groupId(),
-                        j = MQ.use.categoryId(),
-                        G = MQ.use.categoryShortId(),
-                        U = MQ.use.categoryName(),
-                        L = MQ.use.postId(),
-                        q = MQ.use.activeCommentId(),
-                        z = MQ.use.newCommentIds(),
-                        _ = MQ.use.setNewCommentIds(),
-                        V = MQ.use.useInlineReply(),
-                        W = MQ.use.setActiveCommentId(),
-                        H = MQ.use.isCategoryArchived(),
-                        K = yY().fetchSubscriberExperimentValues,
-                        Q = VK().forumsWrite,
-                        Y = function() {
-                            I.push(eG.router.getCategoryRoute(j, U))
+                        b = e.mediaAttachments,
+                        w = e.translate,
+                        E = e.onHidePost,
+                        I = e.isConcealedAndShown,
+                        D = (0, kY.useHistory)(),
+                        C = (0, s.useSystemFeedback)().systemFeedbackService,
+                        x = jee(),
+                        A = x.post,
+                        S = x.togglePostNotifications,
+                        P = x.toggleCommentNotifications,
+                        k = Lee(),
+                        R = k.setReplyToCommentOrPost,
+                        O = k.setReplyToCommentReply,
+                        F = EY().canReact,
+                        T = MQ.use.threadCommentId(),
+                        N = (0, r.useState)(!!T),
+                        M = N[0],
+                        B = N[1],
+                        j = MQ.use.groupId(),
+                        G = MQ.use.categoryId(),
+                        U = MQ.use.categoryShortId(),
+                        L = MQ.use.categoryName(),
+                        q = MQ.use.postId(),
+                        z = MQ.use.activeCommentId(),
+                        _ = MQ.use.newCommentIds(),
+                        V = MQ.use.setNewCommentIds(),
+                        W = MQ.use.useInlineReply(),
+                        H = MQ.use.setActiveCommentId(),
+                        K = MQ.use.isCategoryArchived(),
+                        Q = yY().fetchSubscriberExperimentValues,
+                        Y = VK().forumsWrite,
+                        $ = function() {
+                            D.push(eG.router.getCategoryRoute(G, L))
                         },
-                        $ = (0, l.useInfiniteQuery)({
+                        J = (0, l.useInfiniteQuery)({
                             retry: 1,
-                            queryKey: KH(B, j, n || ""),
+                            queryKey: KH(j, G, n || ""),
                             queryFn: function(e) {
-                                return One(void 0, [e], void 0, (function(e) {
+                                return Gne(void 0, [e], void 0, (function(e) {
                                     var t, n, r, o = e.queryKey,
                                         i = e.pageParam;
-                                    return Fne(this, (function(e) {
+                                    return Une(this, (function(e) {
                                         switch (e.label) {
                                             case 0:
-                                                return t = o[1], n = o[2], r = o[3], [4, O_(t, n, r, eG.pageCounts.commentsPerPage, i, F)];
+                                                return t = o[1], n = o[2], r = o[3], [4, O_(t, n, r, eG.pageCounts.commentsPerPage, i, T)];
                                             case 1:
                                                 return [2, e.sent()]
                                         }
@@ -80843,220 +80971,222 @@
                             getNextPageParam: function(e) {
                                 return e.nextPageCursor || void 0
                             },
-                            enabled: !!(B && j && n) && N
+                            enabled: !!(j && G && n) && M
                         }),
-                        J = $.isLoading,
-                        X = $.isFetchingPreviousPage,
-                        Z = $.isFetchingNextPage,
-                        ee = $.data,
-                        te = $.fetchPreviousPage,
-                        ne = $.fetchNextPage,
-                        re = $.isError,
-                        oe = $.hasPreviousPage,
-                        ie = $.hasNextPage,
-                        ae = (0, r.useMemo)((function() {
-                            return (ee ? ee.pages : []).reduce((function(e, t) {
+                        X = J.isLoading,
+                        Z = J.isFetchingPreviousPage,
+                        ee = J.isFetchingNextPage,
+                        te = J.data,
+                        ne = J.fetchPreviousPage,
+                        re = J.fetchNextPage,
+                        oe = J.isError,
+                        ie = J.hasPreviousPage,
+                        ae = J.hasNextPage,
+                        ue = (0, r.useMemo)((function() {
+                            return (te ? te.pages : []).reduce((function(e, t) {
                                 return e.concat(t.data)
                             }), [])
-                        }), [ee]),
-                        ue = (0, r.useMemo)((function() {
-                            var e = !!y && (!!y.comments.length && !!ae.length && y.comments[0].id !== ae[0].id);
-                            return N && void 0 !== oe ? oe && e : e
-                        }), [oe, y, ae, N]),
+                        }), [te]),
                         se = (0, r.useMemo)((function() {
-                            return N && void 0 !== ie ? ie : !!(null == y ? void 0 : y.hasMore)
-                        }), [ie, y, N]),
+                            var e = !!y && (!!y.comments.length && !!ue.length && y.comments[0].id !== ue[0].id);
+                            return M && void 0 !== ie ? ie && e : e
+                        }), [ie, y, ue, M]),
                         le = (0, r.useMemo)((function() {
-                            return u === Tj.Comment && null !== n && ae.length > 0
-                        }), [n, u, ae]),
+                            return M && void 0 !== ae ? ae : !!(null == y ? void 0 : y.hasMore)
+                        }), [ae, y, M]),
                         ce = (0, r.useMemo)((function() {
-                            return !O || H || Q.isDisabled
-                        }), [O, H, Q.isDisabled]),
-                        de = (0, r.useCallback)((function() {
-                            M(!0), OV({
-                                groupId: B,
+                            return u === Tj.Comment && null !== n && ue.length > 0
+                        }), [n, u, ue]),
+                        de = (0, r.useMemo)((function() {
+                            return !F || K || Y.isDisabled
+                        }), [F, K, Y.isDisabled]),
+                        pe = (0, r.useCallback)((function() {
+                            B(!0), OV({
+                                groupId: j,
                                 clickTargetType: "showCommentReplies",
                                 clickTargetId: t
                             })
-                        }), [B, t]),
-                        pe = (0, r.useCallback)((function() {
-                            N ? ne() : M(!0)
-                        }), [ne, N, M]),
+                        }), [j, t]),
                         fe = (0, r.useCallback)((function() {
-                            te()
-                        }), [te]),
+                            M ? re() : B(!0)
+                        }), [re, M, B]),
                         ve = (0, r.useCallback)((function() {
-                            u === Tj.Reply && m ? R(m, t) : u !== Tj.Reply && k(t), OV({
-                                groupId: B,
+                            ne()
+                        }), [ne]),
+                        me = (0, r.useCallback)((function() {
+                            u === Tj.Reply && m ? O(m, t) : u !== Tj.Reply && R(t), OV({
+                                groupId: j,
                                 clickTargetType: u === Tj.Reply ? "replyToReply" : "replyToComment",
                                 clickTargetId: t,
                                 hasRichText: g_(v)
                             })
-                        }), [B, t, m, v, k, R, u]),
-                        me = (0, r.useCallback)((function() {
+                        }), [j, t, m, v, R, O, u]),
+                        he = (0, r.useCallback)((function() {
                             var e = u === Tj.Post;
                             OV({
-                                groupId: B,
+                                groupId: j,
                                 clickTargetType: e ? "openPostMenuFromComment" : "openCommentMenu",
                                 clickTargetId: t
-                            }), e && K()
-                        }), [t, u, B]);
+                            }), e && Q()
+                        }), [t, u, j]);
                     (0, r.useEffect)((function() {
-                        re && D.warning(b("NetworkError"))
-                    }), [D, b, re]);
-                    var he = function() {
+                        oe && C.warning(w("NetworkError"))
+                    }), [C, w, oe]);
+                    var ge = function() {
                             return o().createElement(sg, {
                                 as: "button",
                                 icon: "icon-filled-three-dots-horizontal",
                                 variant: "Utility",
                                 size: "Medium",
-                                ariaLabel: b("Action.More"),
-                                onClick: me
+                                ariaLabel: w("Action.More"),
+                                onClick: he
                             })
                         },
-                        ge = (0, r.useCallback)((function() {
-                            try {
-                                u === Tj.Post ? A() : S(t), D.success(b("Message.NotificationPreferenceUpdated"))
-                            } catch (e) {
-                                D.warning(b("NetworkError"))
-                            }
-                        }), [t, u, D, A, S, b]),
                         ye = (0, r.useCallback)((function() {
-                            W(), _(new Set(Array.from(z).filter((function(e) {
+                            try {
+                                u === Tj.Post ? S() : P(t), C.success(w("Message.NotificationPreferenceUpdated"))
+                            } catch (e) {
+                                C.warning(w("NetworkError"))
+                            }
+                        }), [t, u, C, S, P, w]),
+                        be = (0, r.useCallback)((function() {
+                            H(), V(new Set(Array.from(_).filter((function(e) {
                                 return e !== t
                             }))))
-                        }), [W, _, z, t]),
-                        be = Rne({
-                            translate: b
+                        }), [H, V, _, t]),
+                        we = jne({
+                            translate: w
                         }),
-                        we = be.disabled,
-                        Ee = be.disabledTooltip,
-                        Ie = V && c,
-                        De = g.displayName,
-                        Ce = g.hasVerifiedBadge,
-                        xe = g.groupRoleName,
-                        Ae = p !== f ? new Date(f) : void 0;
+                        Ee = we.disabled,
+                        Ie = we.disabledTooltip,
+                        De = W && c,
+                        Ce = g.displayName,
+                        xe = g.hasVerifiedBadge,
+                        Ae = g.groupRoleName,
+                        Se = p !== f ? new Date(f) : void 0;
                     return o().createElement("div", {
-                        className: qj()("group-forums-comment", u && "group-forums-comment-variant-".concat(u), c && "group-forums-comment-active", E && "group-forums-comment-concealed-shown"),
+                        className: qj()("group-forums-comment", u && "group-forums-comment-variant-".concat(u), c && "group-forums-comment-active", I && "group-forums-comment-concealed-shown"),
                         "data-id": t
                     }, o().createElement("div", {
                         className: "group-forums-comment-header"
                     }, o().createElement(YY, {
                         userId: d,
-                        groupId: B,
+                        groupId: j,
                         createdTime: p,
-                        userDisplayName: De,
-                        hasVerifiedBadge: Ce,
-                        groupRoleName: null != xe ? xe : b("Label.FormerMember"),
-                        metaTrailing: u === Tj.Post && x ? M$(x.supportTicket, x.groupId, G, x.shortId, x.createdBy) : void 0
+                        userDisplayName: Ce,
+                        hasVerifiedBadge: xe,
+                        groupRoleName: null != Ae ? Ae : w("Label.FormerMember"),
+                        metaTrailing: u === Tj.Post && A ? M$(A.supportTicket, A.groupId, U, A.shortId, A.createdBy) : void 0
                     }), o().createElement("div", {
                         className: "group-forums-comment-menu"
                     }, function() {
                         var e;
-                        return u === Tj.Post ? x ? o().createElement(D$, {
-                            post: x,
-                            button: he(),
-                            onDelete: Y,
-                            onSubscribe: ge,
-                            onHidePost: w
-                        }) : null : o().createElement(kne, {
-                            button: he(),
+                        return u === Tj.Post ? A ? o().createElement(D$, {
+                            post: A,
+                            button: ge(),
+                            onDelete: $,
+                            onSubscribe: ye,
+                            onHidePost: E
+                        }) : null : o().createElement(Bne, {
+                            button: ge(),
                             isReply: u === Tj.Reply,
                             createdBy: d,
                             commentId: t,
                             parentCommentId: m,
                             threadId: n,
                             channelId: i,
-                            isPostLocked: null !== (e = null == x ? void 0 : x.isLocked) && void 0 !== e && e,
-                            onSubscribe: ge
+                            isPostLocked: null !== (e = null == A ? void 0 : A.isLocked) && void 0 !== e && e,
+                            onSubscribe: ye
                         })
                     }())), a && o().createElement("h2", {
                         className: "group-forums-comment-title"
-                    }, a.trim()), o().createElement(Tne, {
-                        hasRail: le
+                    }, a.trim()), o().createElement(Lne, {
+                        hasRail: ce
                     }, o().createElement("div", {
                         className: "group-forums-comment-content richtext-base"
                     }, o().createElement(W5, {
                         content: v
-                    }), Ae && o().createElement("span", {
+                    }), Se && o().createElement("span", {
                         className: "group-forums-comment-content-edited-marker",
-                        title: Ae.toLocaleString()
-                    }, " ", b("Label.EditedMarker"))), o().createElement("div", {
+                        title: Se.toLocaleString()
+                    }, " ", w("Label.EditedMarker"))), o().createElement(i6, {
+                        attachments: b
+                    }), o().createElement("div", {
                         className: "groups-forums-comment-metadata-section"
                     }, o().createElement("div", {
                         className: "groups-forums-comment-metadata-reaction-section"
-                    }, o().createElement(xee, {
+                    }, o().createElement(Oee, {
                         initialReactions: h,
                         onToggleReaction: function(e, n) {
-                            return One(void 0, void 0, void 0, (function() {
+                            return Gne(void 0, void 0, void 0, (function() {
                                 var r;
-                                return Fne(this, (function(o) {
+                                return Une(this, (function(o) {
                                     switch (o.label) {
                                         case 0:
                                             return o.trys.push([0, 2, , 3]), r = {
-                                                categoryId: j,
-                                                postId: L,
+                                                categoryId: G,
+                                                postId: q,
                                                 isPostComment: u === Tj.Post
-                                            }, [4, __(B, u === Tj.Reply ? i : L, t, e, n, r)];
+                                            }, [4, __(j, u === Tj.Reply ? i : q, t, e, n, r)];
                                         case 1:
                                             return o.sent(), OV({
-                                                groupId: B,
+                                                groupId: j,
                                                 clickTargetType: "toggleCommentReaction".concat(n ? "On" : "Off"),
                                                 clickTargetId: e,
                                                 hasRichText: g_(v)
                                             }), [2, !0];
                                         case 2:
-                                            return o.sent(), D.warning(b("NetworkError")), [3, 3];
+                                            return o.sent(), C.warning(w("NetworkError")), [3, 3];
                                         case 3:
                                             return [2, !1]
                                     }
                                 }))
                             }))
                         },
-                        viewOnly: ce
+                        viewOnly: de
                     })), u !== Tj.Post && o().createElement(VH, {
                         id: "reply-tooltip-".concat(t),
                         position: "left-center",
-                        content: Ee,
-                        enabled: we
-                    }, o().createElement(iee, {
+                        content: Ie,
+                        enabled: Ee
+                    }, o().createElement(dee, {
                         messageId: t,
                         trigger: gV.InteractComment
-                    }, o().createElement(B9, {
-                        onClick: we ? void 0 : ve,
+                    }, o().createElement(z9, {
+                        onClick: Ee ? void 0 : me,
                         className: qj()({
                             "groups-forums-comment-metadata-reply-section": !0,
-                            disabled: we
+                            disabled: Ee
                         })
                     }, o().createElement("span", {
                         className: "group-forums-comment-reply-icon"
-                    }), b("Action.Reply"))))), Ie && o().createElement("div", {
+                    }), w("Action.Reply"))))), De && o().createElement("div", {
                         className: qj()("group-forums-inline-comment-composer-container", u === Tj.Reply && "group-forums-inline-comment-composer-reply-container", u === Tj.Comment && "group-forums-inline-comment-composer-comment-container")
                     }, o().createElement("div", {
                         className: "group-forums-inline-comment-composer"
-                    }, o().createElement(Cne, {
+                    }, o().createElement(One, {
                         autoFocus: !0,
                         showCancelButton: !0
-                    }))), le && o().createElement(jee, {
-                        replies: ae,
-                        onShowReplies: de,
-                        onLoadPrevious: fe,
-                        onLoadNext: pe,
-                        isLoading: J,
-                        isFetchingMore: Z || X,
-                        hasPrevious: ue,
-                        hasNext: se,
-                        loadingError: re,
+                    }))), ce && o().createElement(_ee, {
+                        replies: ue,
+                        onShowReplies: pe,
+                        onLoadPrevious: ve,
+                        onLoadNext: fe,
+                        isLoading: X,
+                        isFetchingMore: ee || Z,
+                        hasPrevious: se,
+                        hasNext: le,
+                        loadingError: oe,
                         parentId: t,
-                        revealRepliesByDefault: E
-                    }), q === t && o().createElement(H5, {
-                        onComplete: ye
-                    }), z.has(t) && o().createElement(H5, {
-                        onComplete: ye,
+                        revealRepliesByDefault: I
+                    }), z === t && o().createElement(H5, {
+                        onComplete: be
+                    }), _.has(t) && o().createElement(H5, {
+                        onComplete: be,
                         enableScrollIntoView: !1
                     })))
                 }), Gj),
-                Mne = (0, u.withTranslations)((function(e) {
+                zne = (0, u.withTranslations)((function(e) {
                     var t = e.translate,
                         n = MQ.use.groupId(),
                         i = MQ.use.postId(),
@@ -81067,7 +81197,7 @@
                         c = (0, r.useState)(!1),
                         d = c[0],
                         p = c[1],
-                        f = Oee(),
+                        f = jee(),
                         v = f.refetchComments,
                         m = f.fetchPost,
                         h = f.commentsInfiniteData,
@@ -81081,12 +81211,12 @@
                         C = f.errorLoadingComments,
                         x = f.hasNextComments,
                         A = f.hasPreviousComments,
-                        S = Nee().highlightedCommentId,
+                        S = Lee().highlightedCommentId,
                         P = MQ.use.blockedUserList(),
                         k = MQ.use.activeCommentId(),
                         R = MQ.use.commentId(),
                         O = GV().features;
-                    bee({
+                    xee({
                         groupId: n,
                         categoryId: a,
                         postId: i,
@@ -81143,7 +81273,7 @@
                             var e = new Set(u);
                             return k && e.add(k), R && e.add(R), e
                         }), [u, k, R]);
-                    if (C) return o().createElement(x9, {
+                    if (C) return o().createElement(O9, {
                         iconClassName: "icon-status-alert",
                         heading: t("Error.LoadCommentsTitle"),
                         message: t("Error.ReloadingSubtitle"),
@@ -81152,12 +81282,12 @@
                     });
                     if (I || !D) return o().createElement("div", {
                         className: "group-forums-comments-section group-forums-comments-section-loading"
-                    }, o().createElement(wee, null), o().createElement(wee, null), o().createElement(wee, null));
+                    }, o().createElement(Aee, null), o().createElement(Aee, null), o().createElement(Aee, null));
                     if (g.length <= 1) {
                         var j = (null == D ? void 0 : D.isLocked) ? "locked-status-icon" : "chat-side-icon",
                             G = (null == D ? void 0 : D.isLocked) ? t("Label.LockedForumPost") : t("Label.NoCommentsFoundHeader"),
                             U = (null == D ? void 0 : D.isLocked) ? t("Message.LockedForumPostComment") : t("Label.NoCommentsFoundText");
-                        return o().createElement(x9, {
+                        return o().createElement(O9, {
                             iconClassName: j,
                             heading: G,
                             message: U
@@ -81180,17 +81310,17 @@
                         variant: "Utility"
                     })), L && o().createElement("div", {
                         className: "group-forums-comments-section-loader-top"
-                    }, !k && o().createElement(E9, {
+                    }, !k && o().createElement(S9, {
                         onLoadMore: b,
                         viewingThreshold: 1
                     })), E && o().createElement("div", {
                         className: "group-forums-comments-section-spinner spinner spinner-default spinner-infinite-scroll"
-                    }), o().createElement(L9, {
+                    }), o().createElement(H9, {
                         items: M,
                         isConcealmentEnabled: N,
                         forceRevealIds: B,
                         renderItem: function(e, t) {
-                            return o().createElement(Nne, {
+                            return o().createElement(qne, {
                                 key: e.id,
                                 id: e.id,
                                 createdBy: e.createdBy,
@@ -81198,6 +81328,7 @@
                                 createdAt: e.createdAt,
                                 updatedAt: e.updatedAt,
                                 content: e.content,
+                                mediaAttachments: e.mediaAttachments,
                                 threadId: e.threadId,
                                 channelId: e.parentId,
                                 variant: Tj.Comment,
@@ -81209,14 +81340,14 @@
                         }
                     }), q && o().createElement("div", {
                         className: "group-forums-comments-section-loader-bottom"
-                    }, o().createElement(E9, {
+                    }, o().createElement(S9, {
                         onLoadMore: y,
                         viewingThreshold: 1
                     })), w && o().createElement("div", {
                         className: "group-forums-comments-section-spinner spinner spinner-default spinner-infinite-scroll"
                     }))
                 }), Gj),
-                Bne = (0, u.withTranslations)((function(e) {
+                _ne = (0, u.withTranslations)((function(e) {
                     var t = e.headerText,
                         n = e.containerClassName,
                         r = e.onBack,
@@ -81234,7 +81365,7 @@
                         className: "groups-section-header-spacer"
                     }))
                 }), aH),
-                jne = function(e) {
+                Vne = function(e) {
                     var t = e.categoryName,
                         n = e.backRoute,
                         r = e.postTitle,
@@ -81248,14 +81379,14 @@
                         className: "group-forums-post-navigation-post-title text-default"
                     }, " > ", r))
                 },
-                Gne = function() {
-                    return Gne = Object.assign || function(e) {
+                Wne = function() {
+                    return Wne = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, Gne.apply(this, arguments)
+                    }, Wne.apply(this, arguments)
                 },
-                Une = function(e, t, n, r) {
+                Hne = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -81282,7 +81413,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Lne = function(e, t) {
+                Kne = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -81354,25 +81485,25 @@
                         }
                     }
                 },
-                qne = (0, u.withTranslations)((function(e) {
+                Qne = (0, u.withTranslations)((function(e) {
                     var t = e.translate,
                         n = MQ.use.groupId(),
                         i = MQ.use.postId(),
                         a = (0, r.useRef)(null),
                         u = (0, r.useRef)(null),
-                        s = Rne({
+                        s = jne({
                             translate: t
                         }),
                         l = s.disabled,
                         c = s.disabledTooltip,
                         d = s.showTierGate,
-                        p = Ste({
+                        p = Tte({
                             translate: t
                         }),
                         f = p.submitComment,
                         v = p.commentSubmissionError,
                         m = p.clearCommentSubmissionError,
-                        h = wne(!1, l),
+                        h = Sne(!1, l),
                         g = h.mediaAssetIds,
                         y = h.isSubmitBlocked,
                         b = h.leadingControl,
@@ -81380,16 +81511,16 @@
                         E = h.input,
                         I = h.reset,
                         D = (0, r.useCallback)((function(e) {
-                            return Une(void 0, void 0, void 0, (function() {
+                            return Hne(void 0, void 0, void 0, (function() {
                                 var t, r, o;
-                                return Lne(this, (function(s) {
+                                return Kne(this, (function(s) {
                                     switch (s.label) {
                                         case 0:
                                             return t = {
                                                 clickTargetType: "createComment",
                                                 clickTargetId: i,
                                                 hasRichText: g_(e)
-                                            }, OV(Gne({
+                                            }, OV(Wne({
                                                 groupId: n
                                             }, t)), [4, f(e, g)];
                                         case 1:
@@ -81403,7 +81534,7 @@
                         }), [v, m]);
                     return d ? o().createElement("div", {
                         className: "desktop-persistent-composer-container"
-                    }, o().createElement(nee, {
+                    }, o().createElement(see, {
                         testId: "forum-composer-tier-gate"
                     })) : o().createElement(o().Fragment, null, o().createElement(VH, {
                         containerClassName: "desktop-persistent-composer-container",
@@ -81413,7 +81544,7 @@
                         enabled: l
                     }, o().createElement("div", {
                         className: qj()("desktop-persistent-composer", l && "disabled")
-                    }, o().createElement(Cte, {
+                    }, o().createElement(Rte, {
                         autoFocus: !1,
                         errorMessage: v,
                         contentLeadingControl: b,
@@ -81426,10 +81557,10 @@
                         editorRef: u
                     }))), E)
                 }), Gj),
-                zne = function(e) {
+                Yne = function(e) {
                     var t = e.postScrollContainerRef,
-                        n = Oee().isFetchingPreviousCommentsPage,
-                        o = Wee().isSmallViewport,
+                        n = jee().isFetchingPreviousCommentsPage,
+                        o = Jee().isSmallViewport,
                         i = (0, r.useState)(0),
                         a = i[0],
                         u = i[1];
@@ -81448,41 +81579,41 @@
                             }
                     }), [])
                 },
-                _ne = function() {
-                    return _ne = Object.assign || function(e) {
+                $ne = function() {
+                    return $ne = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, _ne.apply(this, arguments)
+                    }, $ne.apply(this, arguments)
                 };
 
-            function Vne(e) {
+            function Jne(e) {
                 var t = e.translate,
-                    n = Rne({
+                    n = jne({
                         translate: t
                     }),
                     r = n.disabled;
                 return n.showTierGate ? o().createElement("div", {
                     className: "group-forums-native-comment-composer"
-                }, o().createElement(nee, {
+                }, o().createElement(see, {
                     testId: "forum-composer-tier-gate"
                 })) : o().createElement("div", {
                     className: "group-forums-native-comment-composer"
-                }, o().createElement(Cne, {
+                }, o().createElement(One, {
                     showCancelButton: !1,
                     disabled: r
                 }))
             }
-            var Wne = function(e) {
+            var Xne = function(e) {
                     var t = e.translate,
                         n = (0, kY.useHistory)(),
                         i = (0, kY.useRouteMatch)(),
-                        a = Oee(),
+                        a = jee(),
                         u = a.isLoadingPost,
                         s = a.post,
                         l = a.loadingPostError,
                         c = a.fetchPost,
-                        d = Nee().highlightedCommentId,
+                        d = Lee().highlightedCommentId,
                         p = MQ.use.blockedUserList(),
                         f = MQ.use.categoryShortId(),
                         v = MQ.use.categoryName(),
@@ -81491,7 +81622,7 @@
                         g = MQ.use.isPostInaccessible(),
                         y = EY().canCreateComment,
                         b = (0, r.useRef)(null);
-                    zne({
+                    Yne({
                         postScrollContainerRef: b
                     });
                     var w = (0, r.useMemo)((function() {
@@ -81524,15 +81655,15 @@
                         className: "group-forums-post"
                     }, g ? o().createElement("div", {
                         className: "group-posts-destinations-container"
-                    }, o().createElement(y9, {
+                    }, o().createElement(C9, {
                         activeCategoryId: null,
                         onSetActiveCategory: D
-                    })) : o().createElement(o().Fragment, null, o().createElement(jne, {
+                    })) : o().createElement(o().Fragment, null, o().createElement(Vne, {
                         categoryName: v,
                         backRoute: eG.router.getCategoryRoute(f, v),
                         postTitle: null == s ? void 0 : s.name,
                         containerClassName: "hide-on-native"
-                    }), o().createElement(Bne, {
+                    }), o().createElement(_ne, {
                         headerText: v,
                         onBack: E,
                         containerClassName: "show-on-native"
@@ -81541,17 +81672,17 @@
                         ref: b
                     }, o().createElement("div", {
                         className: "group-forums-post-content"
-                    }, l ? o().createElement(x9, {
+                    }, l ? o().createElement(O9, {
                         iconClassName: "icon-status-alert",
                         heading: t("Error.LoadPostTitle"),
                         message: t("Error.ReloadingSubtitle"),
                         buttonText: t("Action.RetryLoadingPost"),
                         onClick: c
-                    }) : g ? o().createElement(x9, {
+                    }) : g ? o().createElement(O9, {
                         iconClassName: "icon-status-alert",
                         heading: t("Heading.PostUnavailable"),
                         message: t("Description.PostUnavailable")
-                    }) : u || !s ? o().createElement(gee, null) : o().createElement(Nne, {
+                    }) : u || !s ? o().createElement(Dee, null) : o().createElement(qne, {
                         title: s.name,
                         variant: Tj.Post,
                         isActive: d === s.firstComment.id,
@@ -81561,6 +81692,7 @@
                         updatedAt: s.firstComment.updatedAt,
                         creatorInfo: s.firstComment.creatorInfo,
                         content: s.firstComment.content,
+                        mediaAttachments: s.firstComment.mediaAttachments,
                         threadId: null,
                         channelId: s.firstComment.parentId,
                         reactions: s.firstComment.reactions,
@@ -81568,20 +81700,20 @@
                         onHidePost: I
                     })), !u && m && o().createElement("div", {
                         className: "group-forums-post-comment-composer"
-                    }, o().createElement(iee, {
+                    }, o().createElement(dee, {
                         trigger: gV.WriteComment
-                    }, o().createElement(qne, null))), !g && o().createElement(o().Fragment, null, o().createElement("div", {
+                    }, o().createElement(Qne, null))), !g && o().createElement(o().Fragment, null, o().createElement("div", {
                         className: "group-forums-post-divider"
                     }), o().createElement("div", {
                         className: "group-forums-post-comments-section"
-                    }, o().createElement(Mne, null)))), w && o().createElement(Vne, {
+                    }, o().createElement(zne, null)))), w && o().createElement(Jne, {
                         translate: t
                     }))
                 },
-                Hne = (0, u.withTranslations)((function(e) {
-                    return o().createElement(Fee, _ne({}, e), o().createElement(Mee, null, o().createElement(Wne, _ne({}, e))))
+                Zne = (0, u.withTranslations)((function(e) {
+                    return o().createElement(Gee, $ne({}, e), o().createElement(qee, null, o().createElement(Xne, $ne({}, e))))
                 }), Gj),
-                Kne = function(e) {
+                ere = function(e) {
                     var t = e.label,
                         n = e.disabled,
                         r = e.onClick,
@@ -81608,9 +81740,9 @@
                         tabIndex: n ? -1 : 0
                     }, t))
                 };
-            Kne.displayName = "CreateContentButton";
-            var Qne = Kne,
-                Yne = function(e) {
+            ere.displayName = "CreateContentButton";
+            var tre = ere,
+                nre = function(e) {
                     var t = e.message;
                     return o().createElement("div", {
                         className: "text-content-editor-error"
@@ -81620,22 +81752,22 @@
                         className: "text-content-editor-error-message"
                     }, t))
                 };
-            Yne.displayName = "TextContentEditorError";
-            var $ne = Yne,
-                Jne = (0, r.createContext)(null),
-                Xne = function() {
-                    var e = (0, r.useContext)(Jne);
+            nre.displayName = "TextContentEditorError";
+            var rre = nre,
+                ore = (0, r.createContext)(null),
+                ire = function() {
+                    var e = (0, r.useContext)(ore);
                     if (!e) throw new Error("useTextContentEditorContext must be used within TextContentEditorContext.Provider");
                     return e
                 },
-                Zne = Jne,
-                ere = function(e) {
+                are = ore,
+                ure = function(e) {
                     var t = e.submitDisabled,
                         n = e.SubmitButton,
-                        i = void 0 === n ? Qne : n,
+                        i = void 0 === n ? tre : n,
                         a = e.getIsSubmitDisabled,
                         u = e.translate,
-                        s = Xne(),
+                        s = ire(),
                         l = s.formStatus,
                         c = s.isSubmitting,
                         d = s.isLoading,
@@ -81650,9 +81782,9 @@
                             var e = a ? a(l) : !l.isValidAndUnsaved;
                             return t || c || d || e || p
                         }), [t, c, d, l, p, a]);
-                    return o().createElement(o().Fragment, null, o().createElement(E7, null, h ? o().createElement($ne, {
+                    return o().createElement(o().Fragment, null, o().createElement(S7, null, h ? o().createElement(rre, {
                         message: u(h)
-                    }) : null, g && o().createElement(Nte, {
+                    }) : null, g && o().createElement(Lte, {
                         variant: "Indeterminate",
                         size: "Small",
                         text: y,
@@ -81678,19 +81810,26 @@
                         variant: "Standard",
                         size: "Medium",
                         onClick: v
-                    }, u("Action.Cancel")), g && o().createElement(Nte, {
+                    }, u("Action.Cancel")), g && o().createElement(Lte, {
                         variant: "Indeterminate",
                         size: "Medium",
                         text: y,
                         textClassNames: ["text-body-large"],
                         ariaLabel: u("Label.Loading")
-                    })), h ? o().createElement($ne, {
+                    })), h ? o().createElement(rre, {
                         message: u(h)
                     }) : null))
                 };
-            ere.displayName = "DefaultTextContentEditorControls";
-            var tre = (0, u.withTranslations)(ere, aH),
-                nre = function(e, t, n, r) {
+            ure.displayName = "DefaultTextContentEditorControls";
+            var sre = (0, u.withTranslations)(ure, aH),
+                lre = function() {
+                    return lre = Object.assign || function(e) {
+                        for (var t, n = 1, r = arguments.length; n < r; n++)
+                            for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
+                        return e
+                    }, lre.apply(this, arguments)
+                },
+                cre = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -81717,7 +81856,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                rre = function(e, t) {
+                dre = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -81789,189 +81928,196 @@
                         }
                     }
                 },
-                ore = function(e) {
+                pre = function(e) {
                     var t, n = e.hasTitle,
                         i = e.headerText,
                         a = e.contentPlaceholder,
                         u = e.submitText,
                         l = e.submitDisabled,
-                        c = e.customControls,
-                        d = e.titleMaxLength,
-                        p = e.contentMaxLength,
-                        f = e.defaultTitle,
-                        v = e.defaultContent,
-                        m = e.titleLocked,
-                        h = e.errorKey,
-                        g = e.onSubmit,
-                        y = e.onBack,
-                        b = e.onChange,
-                        w = e.isRichTextEnabled,
-                        E = e.isLoading,
-                        I = e.SubmitButton,
-                        D = void 0 === I ? Qne : I,
-                        C = e.titleLabel,
-                        x = e.contentLabel,
-                        A = e.childLabel,
-                        S = e.getContentValidationErrorKey,
-                        P = e.getTitleValidationErrorKey,
-                        k = e.children,
-                        R = e.useInlineProgressIndicator,
-                        O = void 0 !== R && R,
-                        F = e.inlineProgressVisible,
-                        T = void 0 !== F && F,
-                        N = e.inlineProgressText,
-                        M = void 0 === N ? "" : N,
-                        B = e.countdown,
-                        j = e.footerControls,
-                        G = e.contentLeadingControl,
-                        U = e.contentFooter,
-                        L = e.translate,
-                        q = (0, r.useState)(f ? {
-                            plainText: f
+                        c = e.hasUnsavedAttachmentChanges,
+                        d = e.customControls,
+                        p = e.titleMaxLength,
+                        f = e.contentMaxLength,
+                        v = e.defaultTitle,
+                        m = e.defaultContent,
+                        h = e.titleLocked,
+                        g = e.errorKey,
+                        y = e.onSubmit,
+                        b = e.onBack,
+                        w = e.onChange,
+                        E = e.isRichTextEnabled,
+                        I = e.isLoading,
+                        D = e.SubmitButton,
+                        C = void 0 === D ? tre : D,
+                        x = e.titleLabel,
+                        A = e.contentLabel,
+                        S = e.childLabel,
+                        P = e.getContentValidationErrorKey,
+                        k = e.getTitleValidationErrorKey,
+                        R = e.children,
+                        O = e.useInlineProgressIndicator,
+                        F = void 0 !== O && O,
+                        T = e.inlineProgressVisible,
+                        N = void 0 !== T && T,
+                        M = e.inlineProgressText,
+                        B = void 0 === M ? "" : M,
+                        j = e.countdown,
+                        G = e.footerControls,
+                        U = e.contentLeadingControl,
+                        L = e.contentFooter,
+                        q = e.translate,
+                        z = (0, r.useState)(v ? {
+                            plainText: v
                         } : {
                             plainText: ""
                         }),
-                        z = q[0],
-                        _ = q[1],
-                        V = (0, r.useState)(null != v ? v : {
+                        _ = z[0],
+                        V = z[1],
+                        W = (0, r.useState)(null != m ? m : {
                             plainText: ""
                         }),
-                        W = V[0],
-                        H = V[1],
-                        K = (0, r.useState)(!1),
-                        Q = K[0],
-                        Y = K[1],
-                        $ = [{
+                        H = W[0],
+                        K = W[1],
+                        Q = (0, r.useState)(!1),
+                        Y = Q[0],
+                        $ = Q[1],
+                        J = [{
                             id: "content",
-                            initialValue: W
+                            initialValue: H
                         }];
-                    m || $.push({
+                    h || J.push({
                         id: "title",
-                        initialValue: z
+                        initialValue: _
                     });
-                    var J = wte($),
-                        X = J.resetForm,
-                        Z = J.updateFormItem,
-                        ee = J.formStatus,
-                        te = Ete(W, S, L, 500),
-                        ne = Ete(z, P, L, 500),
-                        re = (0, r.useCallback)((function() {
-                            return nre(void 0, void 0, void 0, (function() {
-                                return rre(this, (function(e) {
-                                    switch (e.label) {
+                    var X = Ate(J),
+                        Z = X.resetForm,
+                        ee = X.updateFormItem,
+                        te = X.formStatus,
+                        ne = (0, r.useMemo)((function() {
+                            return lre(lre({}, te), {
+                                isValidAndUnsaved: te.isValidAndUnsaved || !!c && !te.isInvalid
+                            })
+                        }), [te, c]),
+                        re = Ste(H, P, q, 500),
+                        oe = Ste(_, k, q, 500),
+                        ie = (0, r.useCallback)((function() {
+                            return cre(void 0, void 0, void 0, (function() {
+                                var e;
+                                return dre(this, (function(t) {
+                                    switch (t.label) {
                                         case 0:
-                                            return Y(!0), [4, g({
-                                                title: z.plainText || "",
-                                                content: W
+                                            return e = te.isDirty ? H : null != m ? m : H, $(!0), [4, y({
+                                                title: _.plainText || "",
+                                                content: e
                                             })];
                                         case 1:
-                                            return e.sent() && X(), Y(!1), [2]
+                                            return t.sent() && Z(), $(!1), [2]
                                     }
                                 }))
                             }))
-                        }), [z, W, g, X]),
-                        oe = (0, r.useCallback)((function(e) {
-                            _(e), Z("title", {
+                        }), [_, H, m, te.isDirty, y, Z]),
+                        ae = (0, r.useCallback)((function(e) {
+                            V(e), ee("title", {
+                                valid: !(null == k ? void 0 : k(e)),
+                                currentValue: e
+                            }), null == w || w({
+                                title: e.plainText || "",
+                                content: H
+                            })
+                        }), [ee, k, w, H]),
+                        ue = (0, r.useCallback)((function(e) {
+                            K(e), ee("content", {
                                 valid: !(null == P ? void 0 : P(e)),
                                 currentValue: e
-                            }), null == b || b({
-                                title: e.plainText || "",
-                                content: W
-                            })
-                        }), [Z, P, b, W]),
-                        ie = (0, r.useCallback)((function(e) {
-                            H(e), Z("content", {
-                                valid: !(null == S ? void 0 : S(e)),
-                                currentValue: e
-                            }), null == b || b({
-                                title: z.plainText || "",
+                            }), null == w || w({
+                                title: _.plainText || "",
                                 content: e
                             })
-                        }), [Z, S, b, z.plainText]),
-                        ae = (0, r.useMemo)((function() {
-                            return Boolean(O) && Boolean(T || Q)
-                        }), [T, O, Q]),
-                        ue = (0, r.useMemo)((function() {
-                            return l || Q || E || !ee.isValidAndUnsaved || !!B && B.isActive
-                        }), [l, Q, E, ee, B]),
+                        }), [ee, P, w, _.plainText]),
                         se = (0, r.useMemo)((function() {
-                            return {
-                                plainText: f
-                            }
-                        }), [f]),
+                            return Boolean(F) && Boolean(N || Y)
+                        }), [N, F, Y]),
                         le = (0, r.useMemo)((function() {
+                            return l || Y || I || !ne.isValidAndUnsaved || !!j && j.isActive
+                        }), [l, Y, I, ne, j]),
+                        ce = (0, r.useMemo)((function() {
                             return {
-                                formStatus: ee,
-                                isSubmitting: Q,
-                                isLoading: E,
-                                isCountdownActive: !!B && B.isActive,
-                                onSubmitClicked: re,
-                                onBack: y,
-                                submitText: u,
-                                errorKey: h,
-                                showInlineProgress: ae,
-                                inlineProgressText: M
+                                plainText: v
                             }
-                        }), [ee, Q, E, B, re, y, u, h, ae, M]);
-                    return o().createElement(Zne.Provider, {
-                        value: le
+                        }), [v]),
+                        de = (0, r.useMemo)((function() {
+                            return {
+                                formStatus: ne,
+                                isSubmitting: Y,
+                                isLoading: I,
+                                isCountdownActive: !!j && j.isActive,
+                                onSubmitClicked: ie,
+                                onBack: b,
+                                submitText: u,
+                                errorKey: g,
+                                showInlineProgress: se,
+                                inlineProgressText: B
+                            }
+                        }), [ne, Y, I, j, ie, b, u, g, se, B]);
+                    return o().createElement(are.Provider, {
+                        value: de
                     }, o().createElement("div", {
                         className: "text-content-editor"
-                    }, o().createElement(Bne, {
+                    }, o().createElement(_ne, {
                         headerText: i,
-                        onBack: y
-                    }), !!c && o().createElement("div", {
+                        onBack: b
+                    }), !!d && o().createElement("div", {
                         className: "text-content-editor-controls"
-                    }, c, o().createElement("hr", {
+                    }, d, o().createElement("hr", {
                         className: "text-content-editor-divider"
                     })), o().createElement("div", {
                         className: "text-content-editor-body"
-                    }, E ? o().createElement(s.Loading, null) : o().createElement(o().Fragment, null, n && o().createElement(o().Fragment, null, C && o().createElement("h5", {
+                    }, I ? o().createElement(s.Loading, null) : o().createElement(o().Fragment, null, n && o().createElement(o().Fragment, null, x && o().createElement("h5", {
                         className: "text-content-editor-label"
-                    }, C), o().createElement(Yee, {
-                        textAreaClassName: qj()("text-content-editor-title", m && "text-content-editor-title-locked", "radius-medium stroke-standard content-emphasis placeholder:content-muted stroke-contrast-alpha"),
+                    }, x), o().createElement(tte, {
+                        textAreaClassName: qj()("text-content-editor-title", h && "text-content-editor-title-locked", "radius-medium stroke-standard content-emphasis placeholder:content-muted stroke-contrast-alpha"),
                         fieldName: "title",
-                        defaultValue: se,
-                        placeholder: L("Label.Title"),
-                        maxLength: d,
-                        onChange: oe,
-                        locked: m || Q,
+                        defaultValue: ce,
+                        placeholder: q("Label.Title"),
+                        maxLength: p,
+                        onChange: ae,
+                        locked: h || Y,
                         autoResize: !0,
-                        validationError: ne,
+                        validationError: oe,
                         isRichTextEnabled: !1
-                    })), x && o().createElement("h5", {
+                    })), A && o().createElement("h5", {
                         className: "text-content-editor-label"
-                    }, x), o().createElement(Yee, {
+                    }, A), o().createElement(tte, {
                         className: "text-content-editor-content-container",
                         textAreaClassName: "text-content-editor-content radius-medium stroke-standard content-emphasis placeholder:content-muted stroke-contrast-alpha",
                         fieldName: "content",
-                        defaultValue: v,
-                        placeholder: null != a ? a : L("Label.WriteSomething"),
-                        maxLength: p,
-                        onChange: ie,
+                        defaultValue: m,
+                        placeholder: null != a ? a : q("Label.WriteSomething"),
+                        maxLength: f,
+                        onChange: ue,
                         onHotKey: function(e) {
-                            e !== Bee.Submit || ue || re()
+                            e !== zee.Submit || le || ie()
                         },
                         autoResize: !0,
-                        isRichTextEnabled: w,
+                        isRichTextEnabled: E,
                         isCollapsedInitially: !n && void 0,
                         minHeight: n ? "Medium" : void 0,
-                        leadingControl: G,
-                        footer: U,
-                        validationError: (null == B ? void 0 : B.isActive) ? L("Error.RetryAfterSeconds", {
-                            seconds: null !== (t = null == B ? void 0 : B.remainingSeconds) && void 0 !== t ? t : 0
-                        }) : te,
-                        locked: Q
-                    }), A && o().createElement("h5", {
+                        leadingControl: U,
+                        footer: L,
+                        validationError: (null == j ? void 0 : j.isActive) ? q("Error.RetryAfterSeconds", {
+                            seconds: null !== (t = null == j ? void 0 : j.remainingSeconds) && void 0 !== t ? t : 0
+                        }) : re,
+                        locked: Y
+                    }), S && o().createElement("h5", {
                         className: "text-content-editor-label"
-                    }, A), k)), null != j ? j : o().createElement(tre, {
-                        submitDisabled: ue,
-                        SubmitButton: D
+                    }, S), R)), null != G ? G : o().createElement(sre, {
+                        submitDisabled: le,
+                        SubmitButton: C
                     })))
                 };
-            ore.displayName = "TextContentEditor";
-            var ire = (0, u.withTranslations)(ore, aH),
-                are = function(e) {
+            pre.displayName = "TextContentEditor";
+            var fre = (0, u.withTranslations)(pre, aH),
+                vre = function(e) {
                     var t = e.onEdit,
                         n = e.onRemove,
                         r = (0, u.useTranslation)().translate;
@@ -81999,33 +82145,33 @@
                         }
                     }))))
                 };
-            are.displayName = "SupportTicketAttachmentPill";
-            var ure = are,
-                sre = function() {
-                    return sre = Object.assign || function(e) {
+            vre.displayName = "SupportTicketAttachmentPill";
+            var mre = vre,
+                hre = function() {
+                    return hre = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, sre.apply(this, arguments)
+                    }, hre.apply(this, arguments)
                 },
-                lre = function(e, t, n) {
+                gre = function(e, t, n) {
                     if (n || 2 === arguments.length)
                         for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                     return e.concat(r || Array.prototype.slice.call(t))
                 },
-                cre = {
+                yre = {
                     accept: "image/png, image/jpeg",
                     maxFileSize: 10485760
                 },
-                dre = function(e) {
+                bre = function(e) {
                     switch (e.type) {
-                        case Gte.FILE_TYPE:
+                        case Vte.FILE_TYPE:
                             return {
                                 key: e.messageKey, meta: {
                                     fileTypes: "PNG, JPG"
                                 }
                             };
-                        case Gte.FILE_SIZE:
+                        case Vte.FILE_SIZE:
                             return {
                                 key: e.messageKey, meta: {
                                     fileSize: 10
@@ -82033,11 +82179,11 @@
                             };
                         default:
                             return {
-                                key: Hte
+                                key: Xte
                             }
                     }
                 },
-                pre = function(e) {
+                wre = function(e) {
                     var t = e.label,
                         n = e.labelTestId,
                         r = e.children;
@@ -82048,9 +82194,9 @@
                         "data-testid": n
                     }, t), r)
                 };
-            pre.displayName = "SupportTicketField";
-            var fre = pre,
-                vre = function(e) {
+            wre.displayName = "SupportTicketField";
+            var Ere = wre,
+                Ire = function(e) {
                     var t = e.accept,
                         n = e.addLabel,
                         i = e.isTile,
@@ -82087,12 +82233,12 @@
                         onChange: l
                     }))
                 },
-                mre = function(e) {
+                Dre = function(e) {
                     var t = e.previewUrl,
                         n = e.index,
                         r = e.removeLabel,
                         i = e.onRemove;
-                    return o().createElement(Bte, {
+                    return o().createElement(zte, {
                         className: "support-ticket-screenshot-tile",
                         testId: "support-ticket-screenshot-".concat(n),
                         removeTestId: "support-ticket-screenshot-remove-".concat(n),
@@ -82101,13 +82247,13 @@
                         onRemove: i
                     })
                 };
-            mre.displayName = "SupportTicketScreenshotPreviewTile";
-            var hre = mre,
-                gre = function(e) {
+            Dre.displayName = "SupportTicketScreenshotPreviewTile";
+            var Cre = Dre,
+                xre = function(e) {
                     var t = e.index,
                         n = e.previewUrl,
                         r = e.uploadingLabel;
-                    return o().createElement(Bte, {
+                    return o().createElement(zte, {
                         className: "support-ticket-screenshot-tile",
                         testId: "support-ticket-screenshot-uploading-".concat(t),
                         previewUrl: n,
@@ -82115,9 +82261,9 @@
                         uploadingLabel: r
                     })
                 };
-            gre.displayName = "SupportTicketScreenshotUploadingTile";
-            var yre = gre,
-                bre = function(e) {
+            xre.displayName = "SupportTicketScreenshotUploadingTile";
+            var Are = xre,
+                Sre = function(e) {
                     var t = e.screenshots,
                         n = e.uploadedCount,
                         r = e.errorKey,
@@ -82131,13 +82277,13 @@
                         f = d("Message.Uploading"),
                         v = d("Label.SupportTicketScreenshotsHint"),
                         m = 0 === t.length,
-                        h = a > 0 ? o().createElement(vre, {
+                        h = a > 0 ? o().createElement(Ire, {
                             accept: s,
                             addLabel: d("Action.Add"),
                             isTile: !m,
                             onAddFiles: l
                         }) : null;
-                    return o().createElement(fre, {
+                    return o().createElement(Ere, {
                         label: d("Heading.SupportTicketScreenshots", {
                             uploadedCount: n,
                             maxCount: 3
@@ -82151,12 +82297,12 @@
                     }, v)) : o().createElement(o().Fragment, null, o().createElement("div", {
                         className: "support-ticket-screenshots-tiles"
                     }, t.map((function(e, t) {
-                        return null === e.assetId || !0 === e.isPreviewLoading ? o().createElement(yre, {
+                        return null === e.assetId || !0 === e.isPreviewLoading ? o().createElement(Are, {
                             key: e.key,
                             index: t,
                             previewUrl: e.previewUrl,
                             uploadingLabel: f
-                        }) : o().createElement(hre, {
+                        }) : o().createElement(Cre, {
                             key: e.key,
                             index: t,
                             previewUrl: e.previewUrl,
@@ -82172,9 +82318,9 @@
                         "data-testid": "support-ticket-screenshots-error"
                     }, d(r, i)))
                 };
-            bre.displayName = "SupportTicketScreenshotsField";
-            var wre = bre,
-                Ere = function(t) {
+            Sre.displayName = "SupportTicketScreenshotsField";
+            var Pre = Sre,
+                kre = function(t) {
                     var n, i, a, s, l, c, d, p, f, v = t.isOpen,
                         m = t.universes,
                         h = t.initialDraft,
@@ -82238,8 +82384,8 @@
                                             for (var i = h.current.signal, u = null, s = [], l = 0, c = o; l < c.length; l++) {
                                                 var p = c[l];
                                                 if (d.current.length + s.length >= 3) break;
-                                                var f = _te(p, cre)[0];
-                                                f ? u = dre(f) : s.push({
+                                                var f = Yte(p, yre)[0];
+                                                f ? u = bre(f) : s.push({
                                                     screenshot: {
                                                         key: a(),
                                                         assetId: null,
@@ -82249,16 +82395,16 @@
                                                 })
                                             }
                                             v(u), 0 !== s.length && (m((function(e) {
-                                                return lre(lre([], e, !0), s.map((function(e) {
+                                                return gre(gre([], e, !0), s.map((function(e) {
                                                     return e.screenshot
                                                 })), !0)
                                             })), s.forEach((function(e) {
                                                 var t = e.screenshot,
                                                     n = e.file;
-                                                Wte(n, (function(e) {
+                                                Jte(n, (function(e) {
                                                     i.aborted || m((function(n) {
                                                         return n.map((function(n) {
-                                                            return n.key === t.key ? sre(sre({}, n), {
+                                                            return n.key === t.key ? hre(hre({}, n), {
                                                                 previewUrl: e,
                                                                 isPreviewLoading: !1
                                                             }) : n
@@ -82270,12 +82416,12 @@
                                                             return e.key !== t.key
                                                         }))
                                                     })), v({
-                                                        key: Hte
+                                                        key: Xte
                                                     }))
-                                                })), lne(n, r, "Bug Report Screenshot", i).then((function(e) {
+                                                })), mne(n, r, "Bug Report Screenshot", i).then((function(e) {
                                                     i.aborted || m((function(n) {
                                                         return n.map((function(n) {
-                                                            return n.key === t.key ? sre(sre({}, n), {
+                                                            return n.key === t.key ? hre(hre({}, n), {
                                                                 assetId: e
                                                             }) : n
                                                         }))
@@ -82286,7 +82432,7 @@
                                                             return e.key !== t.key
                                                         }))
                                                     })), v({
-                                                        key: Hte
+                                                        key: Xte
                                                     }))
                                                 }))
                                             })))
@@ -82324,7 +82470,7 @@
                                 addFiles: g,
                                 removeByKey: y,
                                 reset: b,
-                                validation: cre
+                                validation: yre
                             }
                         }(null !== (d = null == h ? void 0 : h.screenshotAssetIds) && void 0 !== d ? d : [], null !== (p = null == h ? void 0 : h.screenshotPreviewUrls) && void 0 !== p ? p : []),
                         B = M.screenshots,
@@ -82363,12 +82509,12 @@
                                 }))
                             })
                         }), [Q, T, S, b, B, K, R, j]);
-                    return o().createElement(z7, {
+                    return o().createElement(Q7, {
                         open: v,
                         onOpenChange: function(e) {
                             return !e && y()
                         }
-                    }, o().createElement(_7, {
+                    }, o().createElement(Y7, {
                         className: "support-ticket-sheet-content",
                         centerSheetSize: "Medium",
                         largeScreenVariant: "center",
@@ -82376,18 +82522,18 @@
                             e.preventDefault(), X()
                         },
                         closeLabel: w("Action.Close")
-                    }, o().createElement(W7, null, o().createElement("span", {
+                    }, o().createElement(J7, null, o().createElement("span", {
                         className: "flex items-center gap-small"
                     }, w("Heading.SupportTicketDetails"), o().createElement(MD, {
                         variant: "Neutral",
                         label: w("Label.Private"),
                         className: "support-ticket-private-badge",
                         "data-testid": "support-ticket-private-badge"
-                    }))), o().createElement(V7, {
+                    }))), o().createElement($7, {
                         className: "flex flex-col gap-large"
-                    }, o().createElement(K7, null, o().createElement("p", {
+                    }, o().createElement(Z7, null, o().createElement("p", {
                         className: "text-body-medium content-muted margin-none"
-                    }, w("Label.SupportTicketDetailsSubtitle"))), o().createElement(fre, {
+                    }, w("Label.SupportTicketDetailsSubtitle"))), o().createElement(Ere, {
                         label: Y
                     }, I && K ? o().createElement("p", {
                         className: "text-body-medium content-emphasis",
@@ -82406,7 +82552,7 @@
                             value: e.id.toString(),
                             title: e.name
                         })
-                    })))))), o().createElement(fre, {
+                    })))))), o().createElement(Ere, {
                         label: $
                     }, o().createElement(Zw, {
                         "data-testid": "support-ticket-device-dropdown",
@@ -82430,7 +82576,7 @@
                                 title: R$(e, w)
                             })
                         }))))
-                    }))))), o().createElement(fre, {
+                    }))))), o().createElement(Ere, {
                         label: J
                     }, o().createElement(LD, {
                         "data-testid": "support-ticket-details-input",
@@ -82441,7 +82587,7 @@
                         },
                         placeholder: w("Label.SupportTicketDetailsPlaceholder"),
                         rows: 2
-                    })), o().createElement(wre, {
+                    })), o().createElement(Pre, {
                         screenshots: B,
                         uploadedCount: j.length,
                         errorKey: U,
@@ -82461,7 +82607,7 @@
                         hint: w("Label.SupportTicketShareUserInfoHint"),
                         placement: "Start",
                         size: "Small"
-                    })), o().createElement(H7, {
+                    })), o().createElement(X7, {
                         className: "support-ticket-sheet-actions"
                     }, o().createElement("div", {
                         className: "support-ticket-footer-buttons"
@@ -82477,12 +82623,12 @@
                         onClick: y
                     }, w("Action.Cancel"))))))
                 };
-            Ere.displayName = "SupportTicketModal";
-            var Ire = Ere,
-                Dre = function(e) {
+            kre.displayName = "SupportTicketModal";
+            var Rre = kre,
+                Ore = function(e) {
                     e.preventDefault()
                 },
-                Cre = function(e) {
+                Fre = function(e) {
                     var t = e.children,
                         n = e.title,
                         i = e.description,
@@ -82513,7 +82659,7 @@
                         align: "start",
                         sideOffset: 8,
                         ariaLabel: n,
-                        onOpenAutoFocus: Dre,
+                        onOpenAutoFocus: Ore,
                         className: "educational-tooltip-content bg-inverse-surface-0 radius-medium padding-medium"
                     }, o().createElement("svg", {
                         xmlns: "http://www.w3.org/2000/svg",
@@ -82549,7 +82695,7 @@
                         onClick: f
                     }))))
                 },
-                xre = {
+                Tre = {
                     urls: {
                         gamesEndpoint: "".concat(e.EnvironmentUrls.gamesApi, "/v1/games"),
                         gameVotesEndpoint: "".concat(e.EnvironmentUrls.gamesApi, "/v1/games/votes"),
@@ -82571,7 +82717,7 @@
                         publicServersFetchSize: 25
                     }
                 },
-                Are = function(e, t, n, r) {
+                Nre = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -82598,7 +82744,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Sre = function(e, t) {
+                Mre = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -82670,23 +82816,23 @@
                         }
                     }
                 },
-                Pre = function(e, t, n) {
+                Bre = function(e, t, n) {
                     if (n || 2 === arguments.length)
                         for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                     return e.concat(r || Array.prototype.slice.call(t))
                 },
-                kre = function(e) {
+                jre = function(e) {
                     for (var t = [], n = 1; n < arguments.length; n++) t[n - 1] = arguments[n];
-                    return Are(void 0, Pre([e], t, !0), Promise, (function(e, t) {
+                    return Nre(void 0, Bre([e], t, !0), Promise, (function(e, t) {
                         var n, r = void 0 === t ? {} : t,
                             o = r.limit,
                             i = r.cursor,
                             a = r.sortOrder;
-                        return Sre(this, (function(t) {
+                        return Mre(this, (function(t) {
                             switch (t.label) {
                                 case 0:
                                     return n = {
-                                        url: xre.urls.getGroupGamesV2Endpoint(e, {
+                                        url: Tre.urls.getGroupGamesV2Endpoint(e, {
                                             limit: o,
                                             cursor: i,
                                             sortOrder: a
@@ -82698,8 +82844,8 @@
                         }))
                     }))
                 },
-                Rre = kre,
-                Ore = function(e, t, n, r) {
+                Gre = jre,
+                Ure = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -82726,7 +82872,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Fre = function(e, t) {
+                Lre = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -82799,7 +82945,7 @@
                     }
                 };
 
-            function Tre(e) {
+            function qre(e) {
                 var t = MQ.use.groupId(),
                     n = MQ.use.categories(),
                     o = GV().features,
@@ -82815,11 +82961,11 @@
                             r = (0, l.useQuery)({
                                 queryKey: ["groupLinkedUniverses", e],
                                 queryFn: function() {
-                                    return Ore(n, void 0, void 0, (function() {
-                                        return Fre(this, (function(t) {
+                                    return Ure(n, void 0, void 0, (function() {
+                                        return Lre(this, (function(t) {
                                             switch (t.label) {
                                                 case 0:
-                                                    return [4, Rre(e, {
+                                                    return [4, Gre(e, {
                                                         limit: 100
                                                     })];
                                                 case 1:
@@ -82849,101 +82995,105 @@
                     universes: c
                 }
             }
-            var Nre, Mre = function(e) {
+            var zre, _re = function(e) {
                     var t, n = e.groupId,
                         i = e.activeCategory,
                         a = e.canCreatePostInActiveCategory,
                         s = e.isEditing,
-                        l = e.getPrefillDetails,
-                        c = (0, u.useTranslation)().translate,
-                        d = (0, r.useState)(null),
-                        p = d[0],
-                        f = d[1],
-                        v = (0, r.useState)(!1),
-                        m = v[0],
-                        h = v[1],
-                        g = (0, r.useState)(""),
-                        y = g[0],
-                        b = g[1],
-                        w = Tre(null !== (t = null == i ? void 0 : i.shortId) && void 0 !== t ? t : ""),
-                        E = w.isAttachmentsFeatureEnabled,
-                        I = w.isSupportTicketOptionDisabled,
-                        D = w.hasLinkedUniverse,
-                        C = w.universes,
-                        x = gne({
+                        l = e.editingComment,
+                        c = e.getPrefillDetails,
+                        d = (0, u.useTranslation)().translate,
+                        p = (0, r.useState)(null),
+                        f = p[0],
+                        v = p[1],
+                        m = (0, r.useState)(!1),
+                        h = m[0],
+                        g = m[1],
+                        y = (0, r.useState)(""),
+                        b = y[0],
+                        w = y[1],
+                        E = qre(null !== (t = null == i ? void 0 : i.shortId) && void 0 !== t ? t : ""),
+                        I = E.isAttachmentsFeatureEnabled,
+                        D = E.isSupportTicketOptionDisabled,
+                        C = E.hasLinkedUniverse,
+                        x = E.universes,
+                        A = Cne({
                             groupId: n,
                             activeCategory: i,
                             canCreateInActiveCategory: a,
-                            isEditing: s
+                            isEditing: s,
+                            editingComment: l
                         }),
-                        A = x.mediaAssetIds,
-                        S = x.isSubmitBlocked,
-                        P = x.menuItem,
-                        k = x.contentFooter,
-                        R = x.input,
-                        O = function() {
+                        S = A.mediaAssetIds,
+                        P = A.hasUnsavedImageChanges,
+                        k = A.isSubmitBlocked,
+                        R = A.menuItem,
+                        O = A.contentFooter,
+                        F = A.input,
+                        T = function() {
                             var e;
-                            p || b(null !== (e = null == l ? void 0 : l()) && void 0 !== e ? e : ""), h(!0)
+                            f || w(null !== (e = null == c ? void 0 : c()) && void 0 !== e ? e : ""), g(!0)
                         },
-                        F = !s && E && D,
-                        T = [];
-                    F && T.push({
+                        N = !s && I && C,
+                        M = [];
+                    N && M.push({
                         id: "support-ticket",
-                        label: c("Label.SupportTicketMenuOption"),
+                        label: d("Label.SupportTicketMenuOption"),
                         icon: "icon-regular-bug",
-                        disabled: I,
-                        onSelect: O
-                    }), P && T.push(P);
-                    var N = T.length > 0 ? o().createElement(kte, {
-                            items: T
+                        disabled: D,
+                        onSelect: T
+                    }), R && M.push(R);
+                    var B = M.length > 0 ? o().createElement(Mte, {
+                            items: M
                         }) : null,
-                        M = N && F && !I ? o().createElement(Cre, {
-                            title: c("Heading.SupportTicketEducationTitle"),
-                            description: c("Label.SupportTicketEducationDescription"),
+                        j = B && N && !D ? o().createElement(Fre, {
+                            title: d("Heading.SupportTicketEducationTitle"),
+                            description: d("Label.SupportTicketEducationDescription"),
                             localStorageKey: "Roblox.Groups.ForumsSupportTicketEducationalTooltipDismissed",
                             beakLeftOffset: 16
-                        }, N) : N,
-                        B = F && p ? o().createElement(ure, {
-                            onEdit: O,
+                        }, B) : B,
+                        G = N && f ? o().createElement(mre, {
+                            onEdit: T,
                             onRemove: function() {
-                                return f(null)
+                                return v(null)
                             }
                         }) : null,
-                        j = k || B ? o().createElement(o().Fragment, null, k, B) : null,
-                        G = F ? o().createElement(Ire, {
-                            isOpen: m,
-                            universes: C,
-                            initialDraft: p,
-                            prefillDetails: y,
+                        U = O || G ? o().createElement(o().Fragment, null, O, G) : null,
+                        L = N ? o().createElement(Rre, {
+                            isOpen: h,
+                            universes: x,
+                            initialDraft: f,
+                            prefillDetails: b,
                             onClose: function() {
-                                return h(!1)
+                                return g(!1)
                             },
                             onAdd: function(e) {
-                                f(e), h(!1)
+                                v(e), g(!1)
                             }
                         }) : null;
                     return {
-                        supportTicketAttachment: p,
-                        mediaAssetIds: A,
-                        isImageUploadBlockingSubmit: S,
-                        leadingControl: M,
-                        contentFooter: j,
-                        modal: G,
-                        input: R
+                        supportTicketAttachment: f,
+                        mediaAssetIds: S,
+                        hasUnsavedImageChanges: P,
+                        isImageUploadBlockingSubmit: k,
+                        leadingControl: j,
+                        contentFooter: U,
+                        modal: L,
+                        input: F
                     }
                 },
-                Bre = "Error.ForumPostModerated",
-                jre = "NetworkError",
-                Gre = eG.errorCodes,
-                Ure = ((Nre = {})[Gre.contentModerated] = Bre, Nre[Gre.supportTicketDetailsTooLong] = "Message.SupportTicketDetailsTooLong", Nre[Gre.supportTicketAgeIneligible] = "Message.AgeIneligible", Nre[Gre.supportTicketOpenLimitReached] = "Error.SupportTicketOpenLimitReached", Nre[Gre.supportTicketIneligible] = "Error.SupportTicketIneligible", Nre),
-                Lre = function() {
-                    return Lre = Object.assign || function(e) {
+                Vre = "Error.ForumPostModerated",
+                Wre = "NetworkError",
+                Hre = eG.errorCodes,
+                Kre = ((zre = {})[Hre.contentModerated] = Vre, zre[Hre.supportTicketDetailsTooLong] = "Message.SupportTicketDetailsTooLong", zre[Hre.supportTicketAgeIneligible] = "Message.AgeIneligible", zre[Hre.supportTicketOpenLimitReached] = "Error.SupportTicketOpenLimitReached", zre[Hre.supportTicketIneligible] = "Error.SupportTicketIneligible", zre),
+                Qre = function() {
+                    return Qre = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, Lre.apply(this, arguments)
+                    }, Qre.apply(this, arguments)
                 },
-                qre = function(e, t, n, r) {
+                Yre = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -82970,7 +83120,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                zre = function(e, t) {
+                $re = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -83042,11 +83192,11 @@
                         }
                     }
                 },
-                _re = function(e) {
+                Jre = function(e) {
                     var t, n = e.defaultCategoryId,
                         i = e.editingPostId,
                         a = e.translate,
-                        u = Jee("post"),
+                        u = rte("post"),
                         c = (0, kY.useHistory)(),
                         d = MQ.use.groupId(),
                         p = MQ.use.categoryId(),
@@ -83083,8 +83233,8 @@
                             retry: 1,
                             queryKey: XH(d, p, null != i ? i : ""),
                             queryFn: function() {
-                                return qre(void 0, void 0, void 0, (function() {
-                                    return zre(this, (function(e) {
+                                return Yre(void 0, void 0, void 0, (function() {
+                                    return $re(this, (function(e) {
                                         switch (e.label) {
                                             case 0:
                                                 return i && (d && 0 !== d) ? [4, k_(d, p, [i])] : [2, void 0];
@@ -83095,39 +83245,41 @@
                                 }))
                             },
                             onError: function() {
-                                return A.warning(a(jre))
+                                return A.warning(a(Wre))
                             },
                             enabled: P
                         }),
                         T = F.isLoading,
                         N = F.data,
-                        M = Mre({
+                        M = _re({
                             groupId: d,
                             activeCategory: k,
                             canCreatePostInActiveCategory: !!k && x(k.id),
                             isEditing: P,
+                            editingComment: null == N ? void 0 : N.firstComment,
                             getPrefillDetails: O
                         }),
                         B = M.supportTicketAttachment,
                         j = M.mediaAssetIds,
-                        G = M.isImageUploadBlockingSubmit,
-                        U = M.leadingControl,
-                        L = M.contentFooter,
-                        q = M.modal,
-                        z = M.input,
-                        _ = (0, r.useCallback)((function(e) {
-                            return qre(void 0, [e], void 0, (function(e) {
+                        G = M.hasUnsavedImageChanges,
+                        U = M.isImageUploadBlockingSubmit,
+                        L = M.leadingControl,
+                        q = M.contentFooter,
+                        z = M.modal,
+                        _ = M.input,
+                        V = (0, r.useCallback)((function(e) {
+                            return Yre(void 0, [e], void 0, (function(e) {
                                 var t, n, r, o, a, u, s, l = e.title,
                                     p = e.content;
-                                return zre(this, (function(e) {
+                                return $re(this, (function(e) {
                                     switch (e.label) {
                                         case 0:
                                             if (t = m.find((function(e) {
                                                     return e.shortId === g
-                                                })), !t) return E(jre), [2, !1];
+                                                })), !t) return E(Wre), [2, !1];
                                             n = t.id, e.label = 1;
                                         case 1:
-                                            return e.trys.push([1, 6, , 7]), i ? N ? [4, j_(d, n, i, N.firstComment.id, p)] : [2, !1] : [3, 3];
+                                            return e.trys.push([1, 6, , 7]), i ? N ? [4, j_(d, n, i, N.firstComment.id, p, j)] : [2, !1] : [3, 3];
                                         case 2:
                                             return e.sent(), c.push(eG.router.getPostRoute(g, v, N.shortId, N.name)), [3, 5];
                                         case 3:
@@ -83142,7 +83294,7 @@
                                         case 4:
                                             o = e.sent().shortId, c.push(eG.router.getPostRoute(g, v, o, l)), e.label = 5;
                                         case 5:
-                                            return OV(Lre(Lre({
+                                            return OV(Qre(Qre({
                                                 groupId: d
                                             }, i ? {
                                                 clickTargetType: "editPost",
@@ -83156,7 +83308,7 @@
                                         case 6:
                                             return a = e.sent(), (u = a).status === _j.httpResponseCodes.tooManyAttempts && u.retryAfterSeconds ? S(Date.now() + 1e3 * u.retryAfterSeconds) : E(function(e) {
                                                 var t, n, r, o, i = null === (r = null === (n = null === (t = e.data) || void 0 === t ? void 0 : t.errors) || void 0 === n ? void 0 : n[0]) || void 0 === r ? void 0 : r.code;
-                                                return void 0 === i ? jre : null !== (o = Ure[i]) && void 0 !== o ? o : jre
+                                                return void 0 === i ? Wre : null !== (o = Kre[i]) && void 0 !== o ? o : Wre
                                             }(a)), [3, 7];
                                         case 7:
                                             return [2, !1]
@@ -83164,10 +83316,10 @@
                                 }))
                             }))
                         }), [i, g, d, N, c, m, v, S, B, j]),
-                        V = (0, r.useCallback)((function() {
+                        W = (0, r.useCallback)((function() {
                             i ? c.push(eG.router.getPostRoute(f, v, (null == N ? void 0 : N.shortId) || i, (null == N ? void 0 : N.name) || "post")) : c.push(eG.router.getCategoryRoute(f, v))
                         }), [c, i, f, v, N]),
-                        W = (0, r.useCallback)((function(e) {
+                        H = (0, r.useCallback)((function(e) {
                             var t = e.title,
                                 n = e.content;
                             R.current = {
@@ -83176,32 +83328,33 @@
                             }, w && E(null)
                         }), [w]);
                     (0, r.useEffect)((function() {
-                        (!D || i && N && (!C(N.createdBy) || N.isLocked)) && V()
-                    }), [D, C, i, N, V]);
-                    var H = null == N ? void 0 : N.name,
-                        K = null === (t = null == N ? void 0 : N.firstComment) || void 0 === t ? void 0 : t.content,
-                        Q = h7(),
-                        Y = Q.isTierGated,
-                        $ = Q.isResolving;
-                    return Y ? o().createElement("div", {
+                        (!D || i && N && (!C(N.createdBy) || N.isLocked)) && W()
+                    }), [D, C, i, N, W]);
+                    var K = null == N ? void 0 : N.name,
+                        Q = null === (t = null == N ? void 0 : N.firstComment) || void 0 === t ? void 0 : t.content,
+                        Y = I7(),
+                        $ = Y.isTierGated,
+                        J = Y.isResolving;
+                    return $ ? o().createElement("div", {
                         className: "post-composer"
-                    }, o().createElement(nee, {
+                    }, o().createElement(see, {
                         testId: "forum-post-tier-gate"
                     })) : o().createElement("div", {
                         className: "post-composer"
-                    }, o().createElement(ire, {
+                    }, o().createElement(fre, {
                         hasTitle: !0,
                         headerText: a(i ? "Action.EditPost" : "Action.CreatePost"),
                         contentPlaceholder: a("Label.WriteSomething"),
                         submitText: a("Action.Post"),
-                        submitDisabled: w === Bre || G,
+                        submitDisabled: w === Vre || U,
+                        hasUnsavedAttachmentChanges: G,
                         customControls: o().createElement("div", {
                             className: "post-composer-categories-control"
                         }, o().createElement("h5", {
                             className: "post-composer-categories-label"
                         }, a("Heading.Categories")), o().createElement("div", {
                             className: "post-composer-categories-list"
-                        }, o().createElement(y9, {
+                        }, o().createElement(C9, {
                             activeCategoryId: g,
                             onSetActiveCategory: y,
                             locked: P,
@@ -83211,28 +83364,28 @@
                         }))),
                         titleMaxLength: eG.limits.postTitleMaxLength,
                         contentMaxLength: eG.limits.postContentMaxLength,
-                        defaultTitle: H,
-                        defaultContent: K,
+                        defaultTitle: K,
+                        defaultContent: Q,
                         titleLocked: P,
                         errorKey: w,
-                        onSubmit: _,
-                        onBack: V,
-                        onChange: W,
-                        isLoading: $ || P && (T || !N),
-                        SubmitButton: y7,
+                        onSubmit: V,
+                        onBack: W,
+                        onChange: H,
+                        isLoading: J || P && (T || !N),
+                        SubmitButton: C7,
                         titleLabel: a("Label.PostTitle"),
                         contentLabel: a("Label.PostContent"),
                         getTitleValidationErrorKey: wV,
                         getContentValidationErrorKey: EV,
                         countdown: u,
                         isRichTextEnabled: !0,
-                        contentLeadingControl: U,
-                        contentFooter: L
-                    }), q, z)
+                        contentLeadingControl: L,
+                        contentFooter: q
+                    }), z, _)
                 };
-            _re.displayName = "PostComposer";
-            var Vre = (0, u.withTranslations)(_re, Gj),
-                Wre = function(e) {
+            Jre.displayName = "PostComposer";
+            var Xre = (0, u.withTranslations)(Jre, Gj),
+                Zre = function(e) {
                     var t = e.group,
                         n = e.userId,
                         i = e.isOwner,
@@ -83244,13 +83397,13 @@
                             exposureType: uV.GroupForumsExposureEvent,
                             context: sV.GroupForums
                         }))
-                    }), [t.id]), o().createElement(m9, {
+                    }), [t.id]), o().createElement(E9, {
                         userId: n,
                         group: t
-                    }, i && o().createElement(f9, null), o().createElement(VQ, null), o().createElement(kY.Switch, null, o().createElement(kY.Route, {
+                    }, i && o().createElement(b9, null), o().createElement(VQ, null), o().createElement(kY.Switch, null, o().createElement(kY.Route, {
                         path: eG.router.postEditRoute,
                         render: function(e) {
-                            return o().createElement(Vre, {
+                            return o().createElement(Xre, {
                                 defaultCategoryId: e.match.params.categoryId,
                                 editingPostId: e.match.params.postId
                             })
@@ -83258,7 +83411,7 @@
                     }), o().createElement(kY.Route, {
                         path: eG.router.postCreateRoute,
                         render: function(e) {
-                            return o().createElement(Vre, {
+                            return o().createElement(Xre, {
                                 defaultCategoryId: e.match.params.categoryId
                             })
                         }
@@ -83266,13 +83419,13 @@
                         path: [eG.router.postCommentRoute, eG.router.postRoute]
                     }, o().createElement("div", {
                         className: "group-forums-post-wrapper"
-                    }, o().createElement(Hne, null))), o().createElement(kY.Route, {
+                    }, o().createElement(Zne, null))), o().createElement(kY.Route, {
                         path: [eG.router.categoryRoute, eG.router.defaultRoute]
-                    }, o().createElement(hee, {
+                    }, o().createElement(Iee, {
                         navigationComponent: a
                     }))))
                 },
-                Hre = function(e) {
+                eoe = function(e) {
                     var t = e.group,
                         n = e.permissions,
                         r = e.channelsPermissions,
@@ -83281,21 +83434,21 @@
                         u = e.canViewForums,
                         s = e.isOwner,
                         l = e.categoriesNavigation;
-                    return u ? o().createElement(c9, {
+                    return u ? o().createElement(h9, {
                         permissions: n,
                         channelsPermissions: r,
                         groupId: t.id,
                         isOwner: s,
                         isGroupMember: a
-                    }, o().createElement(Wre, {
+                    }, o().createElement(Zre, {
                         group: t,
                         userId: i,
                         isOwner: s,
                         categoriesNavigation: l
-                    }), o().createElement(U6, null), o().createElement(H6, null), o().createElement(n9, null), o().createElement(Z6, null), o().createElement($6, null)) : null
+                    }), o().createElement(W6, null), o().createElement(X6, null), o().createElement(s9, null), o().createElement(i9, null), o().createElement(n9, null)) : null
                 },
-                Kre = function(e, t, n) {
-                    var o = Wee().isSmallViewport,
+                toe = function(e, t, n) {
+                    var o = Jee().isSmallViewport,
                         i = MQ.use.hydrate();
                     (0, r.useEffect)((function() {
                         n && i({
@@ -83305,82 +83458,82 @@
                         })
                     }), [n, e, i, o, t])
                 },
-                Qre = "/announcements",
-                Yre = {
-                    announcementsRoute: Qre,
-                    announcementCreateRoute: "".concat(Qre, "/create"),
-                    announcementRoute: "".concat(Qre, "/:announcementId"),
-                    announcementEditRoute: "".concat(Qre, "/:announcementId/edit"),
+                noe = "/announcements",
+                roe = {
+                    announcementsRoute: noe,
+                    announcementCreateRoute: "".concat(noe, "/create"),
+                    announcementRoute: "".concat(noe, "/:announcementId"),
+                    announcementEditRoute: "".concat(noe, "/:announcementId/edit"),
                     getAnnouncementRoute: function(e) {
-                        return "".concat(Qre, "/").concat(e)
+                        return "".concat(noe, "/").concat(e)
                     },
                     getAnnouncementUrl: function(t, n) {
-                        return "".concat(e.EnvironmentUrls.websiteUrl, "/communities/").concat(t, "#!").concat(Qre, "/").concat(n)
+                        return "".concat(e.EnvironmentUrls.websiteUrl, "/communities/").concat(t, "#!").concat(noe, "/").concat(n)
                     },
                     getAnnouncementEditRoute: function(e) {
-                        return "".concat(Qre, "/").concat(e, "/edit")
+                        return "".concat(noe, "/").concat(e, "/edit")
                     }
                 },
-                $re = function(e) {
+                ooe = function(e) {
                     return e.AnnouncementArchive && e.AnnouncementsUsingCommsPlat
                 },
-                Jre = e.EnvironmentUrls.apiGatewayUrl,
-                Xre = e.EnvironmentUrls.groupsApi,
-                Zre = e.EnvironmentUrls.catalogApi,
-                eoe = "".concat(Jre, "/community-links/v1/groups"),
-                toe = "".concat(Jre, "/community-links/v1/guilded"),
-                noe = "".concat(Xre, "/v1/groups"),
-                roe = "rgp",
-                ooe = {
+                ioe = e.EnvironmentUrls.apiGatewayUrl,
+                aoe = e.EnvironmentUrls.groupsApi,
+                uoe = e.EnvironmentUrls.catalogApi,
+                soe = "".concat(ioe, "/community-links/v1/groups"),
+                loe = "".concat(ioe, "/community-links/v1/guilded"),
+                coe = "".concat(aoe, "/v1/groups"),
+                doe = "rgp",
+                poe = {
                     urls: {
                         getGroupCommunityInfoUrl: function(e) {
-                            return "".concat(eoe, "/").concat(e, "/community")
+                            return "".concat(soe, "/").concat(e, "/community")
                         },
                         getGroupCommunityLinkUrl: function(e) {
-                            return "".concat(eoe, "/").concat(e, "/community/link")
+                            return "".concat(soe, "/").concat(e, "/community/link")
                         },
                         getUserCommunityChannelsUrl: function(e) {
-                            return "".concat(toe, "/user/community/").concat(e, "/channels/announcements")
+                            return "".concat(loe, "/user/community/").concat(e, "/channels/announcements")
                         },
                         getGroupMembershipUrl: function(e) {
-                            return "".concat(Xre, "/v1/groups/").concat(e, "/membership")
+                            return "".concat(aoe, "/v1/groups/").concat(e, "/membership")
                         },
                         getGroupNotificationPreferenceUrl: function(e) {
-                            return "".concat(Xre, "/v1/groups/").concat(e, "/notification-preference")
+                            return "".concat(aoe, "/v1/groups/").concat(e, "/notification-preference")
                         },
                         getCatalogItemDetailsUrl: function(e, t) {
-                            return "".concat(Zre, "/v1/catalog/items/").concat(t, "/details?itemType=").concat(e)
+                            return "".concat(uoe, "/v1/catalog/items/").concat(t, "/details?itemType=").concat(e)
                         },
                         getViewCommunityUrl: function(t, n) {
-                            return "".concat(e.EnvironmentUrls.guildedBaseUrl, "/teams/").concat(t, "?a=").concat(roe).concat(n ? "&token=".concat(n) : "")
+                            return "".concat(e.EnvironmentUrls.guildedBaseUrl, "/teams/").concat(t, "?a=").concat(doe).concat(n ? "&token=".concat(n) : "")
                         },
                         getJoinCommunityUrl: function(e) {
-                            return "".concat(toe, "/").concat(e, "/join?a=").concat(roe)
+                            return "".concat(loe, "/").concat(e, "/join?a=").concat(doe)
                         },
                         getViewAnnouncementChannelUrl: function(t, n, r) {
-                            return "".concat(e.EnvironmentUrls.guildedBaseUrl, "/teams/").concat(t, "/channels/").concat(n, "/announcements?a=").concat(roe).concat(r ? "&token=".concat(r) : "")
+                            return "".concat(e.EnvironmentUrls.guildedBaseUrl, "/teams/").concat(t, "/channels/").concat(n, "/announcements?a=").concat(doe).concat(r ? "&token=".concat(r) : "")
                         },
                         getGroupCommunityValidateUrl: function(e) {
-                            return "".concat(eoe, "/").concat(e, "/community/validate")
+                            return "".concat(soe, "/").concat(e, "/community/validate")
                         },
-                        getUserDraftsUrl: "".concat(noe, "/announcements/drafts"),
+                        getUserDraftsUrl: "".concat(coe, "/announcements/drafts"),
                         getAnnouncementsUrl: function(e) {
-                            return "".concat(noe, "/").concat(e, "/announcements")
+                            return "".concat(coe, "/").concat(e, "/announcements")
                         },
                         getLatestAnnouncementUrl: function(e) {
-                            return "".concat(noe, "/").concat(e, "/announcements/latest")
+                            return "".concat(coe, "/").concat(e, "/announcements/latest")
                         },
                         getAnnouncementUrl: function(e, t) {
-                            return "".concat(noe, "/").concat(e, "/announcements/").concat(t)
+                            return "".concat(coe, "/").concat(e, "/announcements/").concat(t)
                         },
                         getCreateDraftUrl: function(e) {
-                            return "".concat(noe, "/").concat(e, "/announcements/drafts")
+                            return "".concat(coe, "/").concat(e, "/announcements/drafts")
                         },
                         getPublishDraftUrl: function(e, t) {
-                            return "".concat(noe, "/").concat(e, "/announcements/drafts/").concat(t, "/publish")
+                            return "".concat(coe, "/").concat(e, "/announcements/drafts/").concat(t, "/publish")
                         },
                         getAnnouncementReactionUrl: function(e, t, n, r) {
-                            return "".concat(noe, "/").concat(e, "/announcements/").concat(t, "/messages/").concat(n, "/reactions/").concat(r)
+                            return "".concat(coe, "/").concat(e, "/announcements/").concat(t, "/messages/").concat(n, "/reactions/").concat(r)
                         },
                         reportAbuseRevamp: function(e) {
                             var t = e.targetId,
@@ -83395,8 +83548,8 @@
                                 });
                             return "/report-abuse/?".concat(i.toString())
                         },
-                        guildedUserUrl: "".concat(toe, "/user"),
-                        guildedUserServersUrl: "".concat(toe, "/user/servers"),
+                        guildedUserUrl: "".concat(loe, "/user"),
+                        guildedUserServersUrl: "".concat(loe, "/user/servers"),
                         guildedTermsUrl: "https://support.guilded.gg/hc/en-us/articles/360039728313-Terms-of-use",
                         guildedPrivacyPolicyUrl: "https://support.guilded.gg/hc/en-us/articles/360039235054-Privacy"
                     },
@@ -83420,14 +83573,14 @@
                     },
                     customFormsVertical: "fe02680f247961a1369a66f681f990ec1e4a8708a2e84871019a93a7287ae7dd"
                 },
-                ioe = function() {
-                    return ioe = Object.assign || function(e) {
+                foe = function() {
+                    return foe = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, ioe.apply(this, arguments)
+                    }, foe.apply(this, arguments)
                 },
-                aoe = function(e, t, n, r) {
+                voe = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -83454,7 +83607,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                uoe = function(e, t) {
+                moe = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -83526,27 +83679,27 @@
                         }
                     }
                 },
-                soe = function(e, t, n) {
+                hoe = function(e, t, n) {
                     if (n || 2 === arguments.length)
                         for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                     return e.concat(r || Array.prototype.slice.call(t))
                 },
-                loe = function(e) {
+                goe = function(e) {
                     if (e) try {
                         return JSON.parse(e)
                     } catch (e) {
                         return
                     }
                 },
-                coe = function(e) {
+                yoe = function(e) {
                     var t, n, r, o, i, a, u, s, l, c, d = null !== (t = e.message.reactions) && void 0 !== t ? t : [],
                         p = {
                             plainText: null !== (n = e.message.content.plainText) && void 0 !== n ? n : "",
-                            slate: loe(e.message.content.slate)
+                            slate: goe(e.message.content.slate)
                         };
                     c = null != (null === (r = e.message.contentToDisplay) || void 0 === r ? void 0 : r.plainText) ? {
                         plainText: e.message.contentToDisplay.plainText,
-                        slate: loe(e.message.contentToDisplay.slate)
+                        slate: goe(e.message.contentToDisplay.slate)
                     } : p;
                     var f = null !== (o = e.nameToDisplay) && void 0 !== o ? o : e.name;
                     return {
@@ -83567,77 +83720,77 @@
                         reactions: d
                     }
                 },
-                doe = function(e) {
-                    return ioe(ioe({}, e), {
-                        data: e.data.map(coe)
+                boe = function(e) {
+                    return foe(foe({}, e), {
+                        data: e.data.map(yoe)
                     })
                 },
-                poe = function(e) {
+                woe = function(e) {
                     for (var t = [], n = 1; n < arguments.length; n++) t[n - 1] = arguments[n];
-                    return aoe(void 0, soe([e], t, !0), Promise, (function(e, t) {
+                    return voe(void 0, hoe([e], t, !0), Promise, (function(e, t) {
                         var n, r, o, i, a, u = void 0 === t ? {} : t,
                             s = u.announcementIds,
                             l = u.cursor,
                             c = u.limit;
-                        return uoe(this, (function(t) {
+                        return moe(this, (function(t) {
                             switch (t.label) {
                                 case 0:
                                     return n = {
-                                        url: ooe.urls.getAnnouncementsUrl(e),
+                                        url: poe.urls.getAnnouncementsUrl(e),
                                         retryable: !0,
                                         withCredentials: !0
                                     }, (null == s ? void 0 : s.length) ? (o = new URLSearchParams, s.forEach((function(e) {
                                         return o.append("announcementIds", e)
                                     })), r = o) : (l || c) && (i = new URLSearchParams, l && i.append("cursor", l), c && i.append("limit", c.toString()), r = i), [4, _j.httpService.get(n, r)];
                                 case 1:
-                                    return a = t.sent().data, [2, doe(a)]
+                                    return a = t.sent().data, [2, boe(a)]
                             }
                         }))
                     }))
                 },
-                foe = function(e) {
+                Eoe = function(e) {
                     var t, n, r;
                     return {
                         id: e.id,
                         title: e.name,
                         content: {
                             plainText: null !== (t = e.message.content.plainText) && void 0 !== t ? t : "",
-                            slate: loe(e.message.content.slate)
+                            slate: goe(e.message.content.slate)
                         },
                         assetId: null === (n = e.message.media) || void 0 === n ? void 0 : n.assetId,
                         formId: null === (r = e.message.form) || void 0 === r ? void 0 : r.formId,
                         moderationState: e.draftMetadata.state
                     }
                 },
-                voe = function(e) {
-                    return aoe(void 0, void 0, Promise, (function() {
+                Ioe = function(e) {
+                    return voe(void 0, void 0, Promise, (function() {
                         var t, n, r, o;
-                        return uoe(this, (function(i) {
+                        return moe(this, (function(i) {
                             switch (i.label) {
                                 case 0:
                                     return t = {
-                                        url: ooe.urls.getUserDraftsUrl,
+                                        url: poe.urls.getUserDraftsUrl,
                                         retryable: !0,
                                         withCredentials: !0
                                     }, n = e ? {
                                         groupId: e
                                     } : void 0, [4, _j.httpService.get(t, n)];
                                 case 1:
-                                    return r = i.sent().data, [2, ioe(ioe({}, o = r), {
-                                        data: o.data.map(foe)
+                                    return r = i.sent().data, [2, foe(foe({}, o = r), {
+                                        data: o.data.map(Eoe)
                                     })]
                             }
                         }))
                     }))
                 },
-                moe = poe,
-                hoe = function(e, t) {
-                    return aoe(void 0, void 0, Promise, (function() {
+                Doe = woe,
+                Coe = function(e, t) {
+                    return voe(void 0, void 0, Promise, (function() {
                         var n, r;
-                        return uoe(this, (function(o) {
+                        return moe(this, (function(o) {
                             switch (o.label) {
                                 case 0:
-                                    return [4, poe(e, {
+                                    return [4, woe(e, {
                                         announcementIds: [t]
                                     })];
                                 case 1:
@@ -83648,30 +83801,30 @@
                         }))
                     }))
                 },
-                goe = voe,
-                yoe = function(e, t) {
-                    return aoe(void 0, void 0, Promise, (function() {
+                xoe = Ioe,
+                Aoe = function(e, t) {
+                    return voe(void 0, void 0, Promise, (function() {
                         var n, r;
-                        return uoe(this, (function(o) {
+                        return moe(this, (function(o) {
                             switch (o.label) {
                                 case 0:
                                     return n = {
-                                        url: ooe.urls.getCreateDraftUrl(e),
+                                        url: poe.urls.getCreateDraftUrl(e),
                                         withCredentials: !0
                                     }, [4, _j.httpService.post(n, t)];
                                 case 1:
-                                    return r = o.sent().data, [2, foe(r)]
+                                    return r = o.sent().data, [2, Eoe(r)]
                             }
                         }))
                     }))
                 },
-                boe = function(e, t) {
-                    return aoe(void 0, void 0, Promise, (function() {
+                Soe = function(e, t) {
+                    return voe(void 0, void 0, Promise, (function() {
                         var n, r;
-                        return uoe(this, (function(o) {
+                        return moe(this, (function(o) {
                             switch (o.label) {
                                 case 0:
-                                    return [4, voe(e)];
+                                    return [4, Ioe(e)];
                                 case 1:
                                     return n = o.sent(), [2, null !== (r = n.data.find((function(e) {
                                         return e.id === t
@@ -83680,14 +83833,14 @@
                         }))
                     }))
                 },
-                woe = function(e, t, n) {
-                    return aoe(void 0, void 0, Promise, (function() {
+                Poe = function(e, t, n) {
+                    return voe(void 0, void 0, Promise, (function() {
                         var r;
-                        return uoe(this, (function(o) {
+                        return moe(this, (function(o) {
                             switch (o.label) {
                                 case 0:
                                     return r = {
-                                        url: ooe.urls.getAnnouncementUrl(e, t),
+                                        url: poe.urls.getAnnouncementUrl(e, t),
                                         withCredentials: !0
                                     }, [4, _j.httpService.patch(r, n)];
                                 case 1:
@@ -83696,14 +83849,14 @@
                         }))
                     }))
                 },
-                Eoe = function(e, t, n) {
-                    return aoe(void 0, void 0, Promise, (function() {
+                koe = function(e, t, n) {
+                    return voe(void 0, void 0, Promise, (function() {
                         var r, o;
-                        return uoe(this, (function(i) {
+                        return moe(this, (function(i) {
                             switch (i.label) {
                                 case 0:
-                                    return r = ioe({
-                                        url: ooe.urls.getPublishDraftUrl(e, t),
+                                    return r = foe({
+                                        url: poe.urls.getPublishDraftUrl(e, t),
                                         withCredentials: !0
                                     }, void 0 !== n && {
                                         params: {
@@ -83711,19 +83864,19 @@
                                         }
                                     }), [4, _j.httpService.post(r)];
                                 case 1:
-                                    return o = i.sent().data, [2, coe(o)]
+                                    return o = i.sent().data, [2, yoe(o)]
                             }
                         }))
                     }))
                 },
-                Ioe = function(e, t) {
-                    return aoe(void 0, void 0, Promise, (function() {
+                Roe = function(e, t) {
+                    return voe(void 0, void 0, Promise, (function() {
                         var n;
-                        return uoe(this, (function(r) {
+                        return moe(this, (function(r) {
                             switch (r.label) {
                                 case 0:
                                     return n = {
-                                        url: ooe.urls.getAnnouncementUrl(e, t),
+                                        url: poe.urls.getAnnouncementUrl(e, t),
                                         withCredentials: !0
                                     }, [4, _j.httpService.delete(n)];
                                 case 1:
@@ -83732,14 +83885,14 @@
                         }))
                     }))
                 },
-                Doe = function(e, t, n, r) {
-                    return aoe(void 0, void 0, Promise, (function() {
+                Ooe = function(e, t, n, r) {
+                    return voe(void 0, void 0, Promise, (function() {
                         var o;
-                        return uoe(this, (function(i) {
+                        return moe(this, (function(i) {
                             switch (i.label) {
                                 case 0:
                                     return o = {
-                                        url: ooe.urls.getAnnouncementReactionUrl(e, t, n, r),
+                                        url: poe.urls.getAnnouncementReactionUrl(e, t, n, r),
                                         withCredentials: !0
                                     }, [4, _j.httpService.post(o)];
                                 case 1:
@@ -83748,14 +83901,14 @@
                         }))
                     }))
                 },
-                Coe = function(e, t, n, r) {
-                    return aoe(void 0, void 0, Promise, (function() {
+                Foe = function(e, t, n, r) {
+                    return voe(void 0, void 0, Promise, (function() {
                         var o;
-                        return uoe(this, (function(i) {
+                        return moe(this, (function(i) {
                             switch (i.label) {
                                 case 0:
                                     return o = {
-                                        url: ooe.urls.getAnnouncementReactionUrl(e, t, n, r),
+                                        url: poe.urls.getAnnouncementReactionUrl(e, t, n, r),
                                         withCredentials: !0
                                     }, [4, _j.httpService.delete(o)];
                                 case 1:
@@ -83764,23 +83917,23 @@
                         }))
                     }))
                 },
-                xoe = function() {
-                    return xoe = Object.assign || function(e) {
+                Toe = function() {
+                    return Toe = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, xoe.apply(this, arguments)
+                    }, Toe.apply(this, arguments)
                 },
-                Aoe = function(e, t, n) {
+                Noe = function(e, t, n) {
                     if (n || 2 === arguments.length)
                         for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
                     return e.concat(r || Array.prototype.slice.call(t))
                 },
-                Soe = function(e, t, n) {
+                Moe = function(e, t, n) {
                     var r = e.find((function(e) {
                         return e.emoteId === t
                     }));
-                    if (!r) return n ? Aoe(Aoe([], e, !0), [{
+                    if (!r) return n ? Noe(Noe([], e, !0), [{
                         emoteId: t,
                         reactionCount: 1,
                         hasUserAppliedReaction: !0,
@@ -83792,13 +83945,13 @@
                     return o <= 0 ? e.filter((function(e) {
                         return e.emoteId !== t
                     })) : e.map((function(e) {
-                        return e.emoteId === t ? xoe(xoe({}, e), {
+                        return e.emoteId === t ? Toe(Toe({}, e), {
                             reactionCount: o,
                             hasUserAppliedReaction: n
                         }) : e
                     }))
                 },
-                Poe = function(e, t, n, r) {
+                Boe = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -83825,7 +83978,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                koe = function(e, t) {
+                joe = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -83897,7 +84050,7 @@
                         }
                     }
                 },
-                Roe = function(e) {
+                Goe = function(e) {
                     var t = e.initialReactions,
                         n = e.onToggleReaction,
                         i = e.maxReactionPerLine,
@@ -83924,14 +84077,14 @@
                             return f ? c.length : c.length <= a ? a : a - 1
                         }), [f, a, c.length]),
                         w = function(e) {
-                            return Poe(void 0, void 0, void 0, (function() {
+                            return Boe(void 0, void 0, void 0, (function() {
                                 var t, r, o, i;
-                                return koe(this, (function(a) {
+                                return joe(this, (function(a) {
                                     switch (a.label) {
                                         case 0:
                                             return u ? [2] : (t = c.find((function(t) {
                                                 return t.emoteId === e
-                                            })), r = !(null == t ? void 0 : t.hasUserAppliedReaction), o = Soe(c, e, r), i = c, d(o), [4, n(e, r)]);
+                                            })), r = !(null == t ? void 0 : t.hasUserAppliedReaction), o = Moe(c, e, r), i = c, d(o), [4, n(e, r)]);
                                         case 1:
                                             return a.sent() || d(i), [2]
                                     }
@@ -84007,20 +84160,20 @@
                         className: qj()(f ? "groups-content-reactions-hide-icon" : "groups-content-reactions-overflow-icon")
                     }))))
                 },
-                Ooe = function() {
+                Uoe = function() {
                     var e = GV(),
                         t = e.isLoading,
                         n = e.features;
                     return !t && !0 === n.AnnouncementPolls
                 },
-                Foe = function() {
-                    return Foe = Object.assign || function(e) {
+                Loe = function() {
+                    return Loe = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, Foe.apply(this, arguments)
+                    }, Loe.apply(this, arguments)
                 },
-                Toe = function(e) {
+                qoe = function(e) {
                     var t = e.groupId,
                         n = e.locationTab,
                         o = void 0 === n ? "announcements" : n,
@@ -84035,14 +84188,14 @@
                         }), [i, o, t]),
                         u = (0, r.useCallback)((function(e) {
                             var t = e.draftId;
-                            GQ.sendEvent(jQ.AnnouncementCreatePageShown(Foe(Foe({}, a), {
+                            GQ.sendEvent(jQ.AnnouncementCreatePageShown(Loe(Loe({}, a), {
                                 draftId: null != t ? t : ""
                             })))
                         }), [a]),
                         s = (0, r.useCallback)((function(e) {
                             var t = e.buttonClicked,
                                 n = e.isImageAttached;
-                            GQ.sendEvent(jQ.AnnouncementCreatePageButtonClick(Foe(Foe({}, a), {
+                            GQ.sendEvent(jQ.AnnouncementCreatePageButtonClick(Loe(Loe({}, a), {
                                 buttonClicked: t,
                                 isImageAttached: n ? 1 : 0,
                                 isFormAttached: 0
@@ -84050,20 +84203,20 @@
                         }), [a]),
                         l = (0, r.useCallback)((function(e) {
                             var t = e.bannerMessageShown;
-                            GQ.sendEvent(jQ.AnnouncementCreatePageBannerMessageShown(Foe(Foe({}, a), {
+                            GQ.sendEvent(jQ.AnnouncementCreatePageBannerMessageShown(Loe(Loe({}, a), {
                                 bannerMessageShown: t
                             })))
                         }), [a]),
                         c = (0, r.useCallback)((function(e) {
                             var t = e.bannerMessageShown;
-                            GQ.sendEvent(jQ.AnnouncementDeleteBannerMessageShown(Foe(Foe({}, a), {
+                            GQ.sendEvent(jQ.AnnouncementDeleteBannerMessageShown(Loe(Loe({}, a), {
                                 bannerMessageShown: t
                             })))
                         }), [a]),
                         d = (0, r.useCallback)((function(e) {
                             var t = e.announcementId,
                                 n = e.buttonClicked;
-                            GQ.sendEvent(jQ.AnnouncementOverflowMenuButtonClick(Foe(Foe({}, a), {
+                            GQ.sendEvent(jQ.AnnouncementOverflowMenuButtonClick(Loe(Loe({}, a), {
                                 announcementId: t,
                                 buttonClicked: n
                             })))
@@ -84072,7 +84225,7 @@
                             var t = e.announcementId,
                                 n = e.emoteId,
                                 r = e.isReactionAdded;
-                            GQ.sendEvent(jQ.AnnouncementReactionToggled(Foe(Foe({}, a), {
+                            GQ.sendEvent(jQ.AnnouncementReactionToggled(Loe(Loe({}, a), {
                                 announcementId: t,
                                 reactionEmoteId: n,
                                 isReactionAdded: r ? 1 : 0
@@ -84080,31 +84233,31 @@
                         }), [a]),
                         f = (0, r.useCallback)((function(e) {
                             var t = e.announcementId;
-                            GQ.sendEvent(jQ.AnnouncementViewed(Foe(Foe({}, a), {
+                            GQ.sendEvent(jQ.AnnouncementViewed(Loe(Loe({}, a), {
                                 announcementId: t
                             })))
                         }), [a]),
                         v = (0, r.useCallback)((function(e) {
                             var t = e.announcementId;
-                            GQ.sendEvent(jQ.AnnouncementClicked(Foe(Foe({}, a), {
+                            GQ.sendEvent(jQ.AnnouncementClicked(Loe(Loe({}, a), {
                                 announcementId: t
                             })))
                         }), [a]),
                         m = (0, r.useCallback)((function(e) {
                             var t = e.announcementId;
-                            GQ.sendEvent(jQ.AnnouncementArchiveAnnouncementViewed(Foe(Foe({}, a), {
+                            GQ.sendEvent(jQ.AnnouncementArchiveAnnouncementViewed(Loe(Loe({}, a), {
                                 announcementId: t
                             })))
                         }), [a]),
                         h = (0, r.useCallback)((function(e) {
                             var t = e.announcementId;
-                            GQ.sendEvent(jQ.AnnouncementSeeMoreButtonShown(Foe(Foe({}, a), {
+                            GQ.sendEvent(jQ.AnnouncementSeeMoreButtonShown(Loe(Loe({}, a), {
                                 announcementId: t
                             })))
                         }), [a]),
                         g = (0, r.useCallback)((function(e) {
                             var t = e.announcementId;
-                            GQ.sendEvent(jQ.AnnouncementSeeMoreButtonClick(Foe(Foe({}, a), {
+                            GQ.sendEvent(jQ.AnnouncementSeeMoreButtonClick(Loe(Loe({}, a), {
                                 announcementId: t
                             })))
                         }), [a]);
@@ -84122,7 +84275,7 @@
                         trackAnnouncementSeeMoreButtonClick: g
                     }
                 },
-                Noe = function(e, t, n) {
+                zoe = function(e, t, n) {
                     var o = (0, r.useState)(null),
                         i = o[0],
                         a = o[1],
@@ -84136,9 +84289,9 @@
                         }))
                     }), [i, e, t, n]), a
                 },
-                Moe = function(e, t, n, o) {
+                _oe = function(e, t, n, o) {
                     void 0 === n && (n = "home"), void 0 === o && (o = "announcement");
-                    var i = Toe({
+                    var i = qoe({
                             groupId: e,
                             locationTab: n
                         }),
@@ -84151,13 +84304,13 @@
                                 announcementId: t
                             })
                         }), [t, u, a, o]);
-                    return Noe(!0, t, s)
+                    return zoe(!0, t, s)
                 },
-                Boe = {
+                Voe = {
                     common: ["Feature.CustomForms"],
                     feature: "Feature.Groups"
                 },
-                joe = function(e, t, n, r) {
+                Woe = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -84184,7 +84337,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Goe = function(e, t) {
+                Hoe = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -84256,8 +84409,8 @@
                         }
                     }
                 },
-                Uoe = "announcement-menu",
-                Loe = (0, u.withTranslations)((function(e) {
+                Koe = "announcement-menu",
+                Qoe = (0, u.withTranslations)((function(e) {
                     var t = e.announcementId,
                         n = e.groupId,
                         i = e.onDelete,
@@ -84267,7 +84420,7 @@
                         c = e.canCreateAnnouncements,
                         d = e.canEditAnnouncement,
                         p = e.translate,
-                        f = Toe({
+                        f = qoe({
                             groupId: n
                         }).trackOverflowMenuButtonClick,
                         v = (0, r.useState)(!1),
@@ -84301,14 +84454,14 @@
                             }), window.location.href = u
                         }), [u, f, t]),
                         D = (0, r.useCallback)((function() {
-                            return joe(void 0, void 0, void 0, (function() {
-                                return Goe(this, (function(e) {
+                            return Woe(void 0, void 0, void 0, (function() {
+                                return Hoe(this, (function(e) {
                                     switch (e.label) {
                                         case 0:
                                             if (!navigator.clipboard) return [3, 4];
                                             e.label = 1;
                                         case 1:
-                                            return e.trys.push([1, 3, , 4]), [4, navigator.clipboard.writeText(Yre.getAnnouncementUrl(n, t))];
+                                            return e.trys.push([1, 3, , 4]), [4, navigator.clipboard.writeText(roe.getAnnouncementUrl(n, t))];
                                         case 2:
                                             return e.sent(), g.success(p("Label.LinkCopied")), [3, 4];
                                         case 3:
@@ -84332,7 +84485,7 @@
                     }, o().createElement(f$.Provider, {
                         value: y
                     }, o().createElement(aI, {
-                        className: Uoe,
+                        className: Koe,
                         size: "Medium"
                     }, o().createElement(uI, null, d && o().createElement(v$, {
                         translateKey: "Action.EditAnnouncement",
@@ -84348,8 +84501,8 @@
                         translateKey: "Label.ReportAbuse",
                         action: I
                     }))))))
-                }), Boe),
-                qoe = function(t) {
+                }), Voe),
+                Yoe = function(t) {
                     var n = t.announcement,
                         i = t.groupId,
                         a = t.canCreateAnnouncements,
@@ -84362,7 +84515,7 @@
                         v = (0, u.useTranslation)().translate,
                         m = a && Number(e.CurrentUser.userId) === n.createdBy,
                         h = (0, r.useMemo)((function() {
-                            return ooe.urls.reportAbuseRevamp({
+                            return poe.urls.reportAbuseRevamp({
                                 targetId: n.id,
                                 submitterId: e.CurrentUser.userId,
                                 abuseVector: "group_announcement",
@@ -84382,7 +84535,7 @@
                         groupRoleName: n.creatorInfo.groupRoleName || v("Label.FormerMember")
                     }), o().createElement("div", {
                         className: l
-                    }, o().createElement(Loe, {
+                    }, o().createElement(Qoe, {
                         announcementId: n.id,
                         groupId: i,
                         onDelete: d,
@@ -84401,12 +84554,12 @@
                         })
                     })))
                 };
-            qoe.defaultProps = {
+            Yoe.defaultProps = {
                 onMenuButtonClick: void 0
             };
-            var zoe = qoe,
-                _oe = [".group-posts-preview-menu", ".".concat(Uoe), ".".concat(QY), ".groups-content-reactions", ".reaction-picker"].join(", "),
-                Voe = function(t) {
+            var $oe = Yoe,
+                Joe = [".group-posts-preview-menu", ".".concat(Koe), ".".concat(QY), ".groups-content-reactions", ".reaction-picker"].join(", "),
+                Xoe = function(t) {
                     var n = t.announcement,
                         r = t.groupId,
                         i = t.canCreateAnnouncements,
@@ -84415,7 +84568,7 @@
                         l = t.onModifiedOpen,
                         c = t.onOpen,
                         d = t.onToggleReaction,
-                        p = Ooe(),
+                        p = Uoe(),
                         f = (0, u.useTranslation)().translate,
                         v = GV().features,
                         m = n.customFormDefinition,
@@ -84424,11 +84577,11 @@
                         y = null == h ? void 0 : h.totalResponses,
                         b = void 0 === y ? void 0 : "".concat(y.toLocaleString(), " ").concat(f(1 === y ? "Label.ResponseCountSingular" : "Label.ResponseCountPlural")),
                         w = v.AnnouncementsRichTextRead && !!n.content.slate,
-                        E = Moe(r, n.id, "posts", "archiveAnnouncement");
-                    return o().createElement(Z5, {
+                        E = _oe(r, n.id, "posts", "archiveAnnouncement");
+                    return o().createElement(e6, {
                         ref: E,
-                        href: Yre.getAnnouncementUrl(r, n.id),
-                        blockedSelector: _oe,
+                        href: roe.getAnnouncementUrl(r, n.id),
+                        blockedSelector: Joe,
                         onNavigate: function() {
                             return c(n.id)
                         },
@@ -84436,7 +84589,7 @@
                             return l(n.id)
                         },
                         className: "group-announcement-archive-card group-posts-preview"
-                    }, o().createElement(zoe, {
+                    }, o().createElement($oe, {
                         announcement: n,
                         groupId: r,
                         canCreateAnnouncements: i,
@@ -84484,7 +84637,7 @@
                         label: f("Label.Voted")
                     }), void 0 !== y && o().createElement("span", {
                         className: "group-announcement-archive-poll-votes"
-                    }, b))))), o().createElement(Roe, {
+                    }, b))))), o().createElement(Goe, {
                         initialReactions: n.reactions,
                         onToggleReaction: function(e, t) {
                             return d(n, e, t)
@@ -84492,14 +84645,14 @@
                         viewOnly: !(null === e.CurrentUser || void 0 === e.CurrentUser ? void 0 : e.CurrentUser.isAuthenticated)
                     }))
                 },
-                Woe = function() {
-                    return Woe = Object.assign || function(e) {
+                Zoe = function() {
+                    return Zoe = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, Woe.apply(this, arguments)
+                    }, Zoe.apply(this, arguments)
                 },
-                Hoe = function(e, t, n, r) {
+                eie = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -84526,7 +84679,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Koe = function(e, t) {
+                tie = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -84598,7 +84751,7 @@
                         }
                     }
                 },
-                Qoe = function(e) {
+                nie = function(e) {
                     var t, n = e.groupId,
                         i = e.canCreateAnnouncements,
                         a = e.navigation,
@@ -84606,7 +84759,7 @@
                         d = (0, l.useQueryClient)(),
                         p = (0, u.useTranslation)().translate,
                         f = (0, s.useSystemFeedback)().systemFeedbackService,
-                        v = Toe({
+                        v = qoe({
                             groupId: n,
                             locationTab: "posts"
                         }),
@@ -84616,7 +84769,7 @@
                             queryKey: ["announcement-archive", n],
                             queryFn: function(e) {
                                 var t = e.pageParam;
-                                return moe(n, {
+                                return Doe(n, {
                                     cursor: t,
                                     limit: 10
                                 })
@@ -84637,7 +84790,7 @@
                         }), []),
                         A = Boolean(b && y && E),
                         S = (0, r.useCallback)((function() {
-                            c.push(Yre.announcementCreateRoute)
+                            c.push(roe.announcementCreateRoute)
                         }), [c]),
                         P = (0, r.useCallback)((function(e) {
                             m({
@@ -84649,19 +84802,19 @@
                             })
                         }), [n, m]),
                         k = (0, r.useCallback)((function(e) {
-                            P(e), c.push(Yre.getAnnouncementRoute(e))
+                            P(e), c.push(roe.getAnnouncementRoute(e))
                         }), [c, P]),
                         R = (0, r.useCallback)((function(e) {
-                            c.push(Yre.getAnnouncementEditRoute(e.id), {
+                            c.push(roe.getAnnouncementEditRoute(e.id), {
                                 announcement: e
                             })
                         }), [c]),
                         O = (0, r.useCallback)((function(e) {
-                            return Hoe(void 0, void 0, void 0, (function() {
-                                return Koe(this, (function(t) {
+                            return eie(void 0, void 0, void 0, (function() {
+                                return tie(this, (function(t) {
                                     switch (t.label) {
                                         case 0:
-                                            return t.trys.push([0, 3, , 4]), [4, Ioe(n, e.id)];
+                                            return t.trys.push([0, 3, , 4]), [4, Roe(n, e.id)];
                                         case 1:
                                             return t.sent(), f.success(p("Message.AnnouncementDeleteSuccess")), [4, C()];
                                         case 2:
@@ -84675,15 +84828,15 @@
                             }))
                         }), [n, C, f, p]),
                         F = (0, r.useCallback)((function(e, t, r) {
-                            return Hoe(void 0, void 0, Promise, (function() {
-                                return Koe(this, (function(o) {
+                            return eie(void 0, void 0, Promise, (function() {
+                                return tie(this, (function(o) {
                                     switch (o.label) {
                                         case 0:
-                                            return o.trys.push([0, 5, , 6]), r ? [4, Doe(n, e.id, e.messageId, t)] : [3, 2];
+                                            return o.trys.push([0, 5, , 6]), r ? [4, Ooe(n, e.id, e.messageId, t)] : [3, 2];
                                         case 1:
                                             return o.sent(), [3, 4];
                                         case 2:
-                                            return [4, Coe(n, e.id, e.messageId, t)];
+                                            return [4, Foe(n, e.id, e.messageId, t)];
                                         case 3:
                                             o.sent(), o.label = 4;
                                         case 4:
@@ -84696,12 +84849,12 @@
                                                 emoteId: t,
                                                 isReactionAdded: r
                                             }), d.setQueryData(["announcement-archive", n], (function(n) {
-                                                return n ? Woe(Woe({}, n), {
+                                                return n ? Zoe(Zoe({}, n), {
                                                     pages: n.pages.map((function(n) {
-                                                        return Woe(Woe({}, n), {
+                                                        return Zoe(Zoe({}, n), {
                                                             data: n.data.map((function(n) {
-                                                                return n.id !== e.id ? n : Woe(Woe({}, n), {
-                                                                    reactions: Soe(n.reactions, t, r)
+                                                                return n.id !== e.id ? n : Zoe(Zoe({}, n), {
+                                                                    reactions: Moe(n.reactions, t, r)
                                                                 })
                                                             }))
                                                         })
@@ -84719,7 +84872,7 @@
                         T = (0, r.useCallback)((function() {
                             E && !I && w()
                         }), [w, E, I]);
-                    return b && !y ? o().createElement(x9, {
+                    return b && !y ? o().createElement(O9, {
                         iconClassName: "icon-status-alert",
                         heading: p("NetworkError"),
                         message: p("Error.ReloadingSubtitle"),
@@ -84743,15 +84896,15 @@
                         size: "Medium",
                         className: "group-posts-create-button",
                         onClick: S
-                    }, p("Action.CreatePost"))), !D && 0 === x.length && o().createElement(x9, {
+                    }, p("Action.CreatePost"))), !D && 0 === x.length && o().createElement(O9, {
                         iconClassName: "chat-side-icon",
                         message: p("Label.NoAnnouncements")
                     }), D ? o().createElement("div", {
                         className: "group-posts-list group-posts-list-skeleton"
-                    }, o().createElement(w9, null), o().createElement(w9, null), o().createElement(w9, null)) : o().createElement("div", {
+                    }, o().createElement(A9, null), o().createElement(A9, null), o().createElement(A9, null)) : o().createElement("div", {
                         className: "group-announcement-archive-list group-posts-list"
                     }, x.map((function(e) {
-                        return o().createElement(Voe, {
+                        return o().createElement(Xoe, {
                             key: e.id,
                             announcement: e,
                             groupId: n,
@@ -84762,7 +84915,7 @@
                             onOpen: k,
                             onToggleReaction: F
                         })
-                    }))), i && o().createElement(E7, {
+                    }))), i && o().createElement(S7, {
                         fixed: !0
                     }, o().createElement("div", {
                         className: "groups-native-footer-container"
@@ -84779,14 +84932,14 @@
                         variant: "Standard",
                         size: "Small",
                         onClick: T
-                    }, p("Action.Retry"))), E && !A && o().createElement(E9, {
+                    }, p("Action.Retry"))), E && !A && o().createElement(S9, {
                         onLoadMore: T,
                         viewingThreshold: .5
                     }))
                 },
-                Yoe = ReactDOMServer,
-                $oe = RobloxItemPurchase,
-                Joe = function(e, t, n, r) {
+                rie = ReactDOMServer,
+                oie = RobloxItemPurchase,
+                iie = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -84813,7 +84966,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Xoe = function(e, t) {
+                aie = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -84885,14 +85038,14 @@
                         }
                     }
                 },
-                Zoe = function(e, t) {
-                    return Joe(void 0, void 0, Promise, (function() {
+                uie = function(e, t) {
+                    return iie(void 0, void 0, Promise, (function() {
                         var n;
-                        return Xoe(this, (function(r) {
+                        return aie(this, (function(r) {
                             switch (r.label) {
                                 case 0:
                                     return n = {
-                                        url: ooe.urls.getCatalogItemDetailsUrl(e, t),
+                                        url: poe.urls.getCatalogItemDetailsUrl(e, t),
                                         withCredentials: !0
                                     }, [4, _j.httpService.get(n)];
                                 case 1:
@@ -84901,14 +85054,14 @@
                         }))
                     }))
                 },
-                eie = function() {
-                    return eie = Object.assign || function(e) {
+                sie = function() {
+                    return sie = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, eie.apply(this, arguments)
+                    }, sie.apply(this, arguments)
                 },
-                tie = function(e, t, n, r) {
+                lie = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -84935,7 +85088,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                nie = function(e, t) {
+                cie = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -85007,10 +85160,10 @@
                         }
                     }
                 },
-                rie = (0, $oe.createItemPurchase)(),
-                oie = rie[0],
-                iie = rie[1],
-                aie = (0, u.withTranslations)((function(t) {
+                die = (0, oie.createItemPurchase)(),
+                pie = die[0],
+                fie = die[1],
+                vie = (0, u.withTranslations)((function(t) {
                     var n, i, a, u, l, c, d, p = t.id,
                         f = t.groupId,
                         v = t.translate,
@@ -85021,9 +85174,9 @@
                         b = y[0],
                         w = y[1],
                         E = (0, r.useCallback)((function() {
-                            return tie(void 0, void 0, void 0, (function() {
+                            return lie(void 0, void 0, void 0, (function() {
                                 var t, n;
-                                return nie(this, (function(r) {
+                                return cie(this, (function(r) {
                                     switch (r.label) {
                                         case 0:
                                             return r.trys.push([0, 3, , 4]), [4, e.ItemDetailsHydrationService.getItemDetails([{
@@ -85031,7 +85184,7 @@
                                                 itemType: "asset"
                                             }], !1, !0)];
                                         case 1:
-                                            return t = r.sent(), w(t[0]), [4, Zoe("asset", p)];
+                                            return t = r.sent(), w(t[0]), [4, uie("asset", p)];
                                         case 2:
                                             return n = r.sent(), g(n.owned), [3, 4];
                                         case 3:
@@ -85083,7 +85236,7 @@
                                 clickTargetType: x ? "marketplaceEmbedOpenModal" : "marketplaceEmbedLink",
                                 clickTargetId: b.id.toString(),
                                 context: sV.GroupHomepage
-                            }), x && (e.preventDefault(), iie.start())
+                            }), x && (e.preventDefault(), fie.start())
                         },
                         role: "button",
                         tabIndex: 0
@@ -85102,64 +85255,64 @@
                         premiumPricing: null === (d = b.premiumPricing) || void 0 === d ? void 0 : d.premiumPriceInRobux,
                         itemRestrictions: b.itemRestrictions,
                         thumbnail2d: I
-                    })), o().createElement(oie, eie({}, C)))
-                }), Boe);
-            var uie = function(e) {
+                    })), o().createElement(pie, sie({}, C)))
+                }), Voe);
+            var mie = function(e) {
                     var t = e.content,
                         n = e.groupId,
                         r = function(e) {
-                            var t = new RegExp(ooe.embedUrlRegexes.catalogItem).exec(e);
+                            var t = new RegExp(poe.embedUrlRegexes.catalogItem).exec(e);
                             if (t) return parseInt(t[2], 10)
                         }(t);
                     return r ? o().createElement("div", {
                         className: "announcement-display-embed-row"
-                    }, o().createElement(aie, {
+                    }, o().createElement(vie, {
                         id: r,
                         groupId: n
                     })) : null
                 },
-                sie = n(4364),
-                lie = {
+                hie = n(4364),
+                gie = {
                     XSmall: "size-400",
                     Small: "size-500",
                     Medium: "size-600"
                 },
-                cie = {
+                yie = {
                     XSmall: "size-150",
                     Small: "size-200",
                     Medium: "size-250"
                 },
-                die = {
+                bie = {
                     XSmall: "size-1200",
                     Small: "size-1400",
                     Medium: "size-1600"
                 },
-                pie = {
+                wie = {
                     XSmall: "text-title-small",
                     Small: "text-title-small",
                     Medium: "text-title-medium"
                 },
-                fie = {
+                Eie = {
                     XSmall: void 0,
                     Small: "padding-top-xxsmall",
                     Medium: "padding-y-xxsmall"
                 },
-                vie = {
+                Iie = {
                     XSmall: "text-body-small",
                     Small: "text-body-small",
                     Medium: "text-body-medium"
                 },
-                mie = {
+                Die = {
                     XSmall: "padding-medium",
                     Small: "padding-large",
                     Medium: "padding-xlarge"
                 },
-                hie = {
+                Cie = {
                     XSmall: "Small",
                     Small: "Medium",
                     Medium: "Large"
                 },
-                gie = (0, r.forwardRef)((function(e, t) {
+                xie = (0, r.forwardRef)((function(e, t) {
                     var n = e.layout,
                         i = e.size,
                         a = e.type,
@@ -85175,7 +85328,7 @@
                         g = void 0 !== h && h,
                         y = (0, r.useMemo)((function() {
                             return s && o().createElement("div", {
-                                className: v(pie[i], fie[i], "content-emphasis text-align-x-start", "clip [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]")
+                                className: v(wie[i], Eie[i], "content-emphasis text-align-x-start", "clip [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]")
                             }, s)
                         }), [s, i]),
                         b = (0, r.useMemo)((function() {
@@ -85185,13 +85338,13 @@
                         }), [p]),
                         w = (0, r.useMemo)((function() {
                             return l && o().createElement("div", {
-                                className: v(vie[i], "content-default text-align-x-start")
+                                className: v(Iie[i], "content-default text-align-x-start")
                             }, l)
                         }), [l, i]),
                         E = (0, r.useMemo)((function() {
                             return d && o().createElement(B, {
                                 name: d,
-                                size: hie[i]
+                                size: Cie[i]
                             })
                         }), [d, i]),
                         I = (0, r.useMemo)((function() {
@@ -85199,33 +85352,33 @@
                                 case "Checkmark":
                                     return f && o().createElement(B, {
                                         name: "icon-filled-check",
-                                        size: hie[i]
+                                        size: Cie[i]
                                     });
                                 case "Checkbox":
                                     return o().createElement("div", {
-                                        className: v(lie[i], "flex items-center justify-center radius-small padding-none content-default", f ? "stroke-none" : "stroke-standard stroke-emphasis", f ? "bg-system-contrast" : "bg-none")
+                                        className: v(gie[i], "flex items-center justify-center radius-small padding-none content-default", f ? "stroke-none" : "stroke-standard stroke-emphasis", f ? "bg-system-contrast" : "bg-none")
                                     }, f && o().createElement("div", {
-                                        className: v(lie[i], "content-inverse-emphasis icon icon-filled-check")
+                                        className: v(gie[i], "content-inverse-emphasis icon icon-filled-check")
                                     }));
                                 case "Radio":
                                     return o().createElement("div", {
-                                        className: v(lie[i], "radius-circle flex items-center justify-center stroke-emphasis stroke-standard", f ? "bg-system-contrast" : "bg-none")
+                                        className: v(gie[i], "radius-circle flex items-center justify-center stroke-emphasis stroke-standard", f ? "bg-system-contrast" : "bg-none")
                                     }, f && o().createElement("div", {
-                                        className: v("radius-circle bg-inverse-action-sub-emphasis", cie[i])
+                                        className: v("radius-circle bg-inverse-action-sub-emphasis", yie[i])
                                     }));
                                 default:
                                     var e = a;
-                                    return sie.error("Invalid OptionSelector type ".concat(e)), null
+                                    return hie.error("Invalid OptionSelector type ".concat(e)), null
                             }
                         }), [a, i, f]),
                         D = (0, r.useMemo)((function() {
                             return c && o().createElement("div", {
-                                className: v(die[i], "flex items-center justify-center clip shrink-0")
+                                className: v(bie[i], "flex items-center justify-center clip shrink-0")
                             }, c)
                         }), [c, i]),
                         C = (0, r.useMemo)((function() {
                             var e = !g && o().createElement("div", {
-                                className: lie[i]
+                                className: gie[i]
                             }, I);
                             switch (n) {
                                 case "Horizontal":
@@ -85252,12 +85405,12 @@
                                     }, E, y, b)), e), w);
                                 default:
                                     var t = n;
-                                    return sie.error("Invalid OptionSelector layout ".concat(t)), null
+                                    return hie.error("Invalid OptionSelector layout ".concat(t)), null
                             }
                         }), [n, D, E, y, w, I, i, b, g]);
                     return o().createElement("button", {
                         type: "button",
-                        className: v(R, "focus:outline-focus bg-none width-full radius-medium stroke-standard", f ? "stroke-system-contrast" : "stroke-contrast-alpha", mie[i], u && F, !u && "cursor-pointer"),
+                        className: v(R, "focus:outline-focus bg-none width-full radius-medium stroke-standard", f ? "stroke-system-contrast" : "stroke-contrast-alpha", Die[i], u && F, !u && "cursor-pointer"),
                         disabled: u,
                         ref: t,
                         onClick: function() {
@@ -85265,38 +85418,38 @@
                         }
                     }, !u && o().createElement(O, null), C)
                 }));
-            gie.displayName = "OptionSelector";
-            var yie = {
+            xie.displayName = "OptionSelector";
+            var Aie = {
                     Info: "rgb(from var(--color-system-emphasis) r g b / 0.05)",
                     Warning: "rgb(from var(--color-system-warning) r g b / 0.05)",
                     Success: "rgb(from var(--color-system-success) r g b / 0.05)",
                     Error: "rgb(from var(--color-system-alert) r g b / 0.05)"
                 },
-                bie = {
+                Sie = {
                     Info: "stroke-system-emphasis",
                     Warning: "stroke-system-warning",
                     Success: "stroke-system-success",
                     Error: "stroke-system-alert"
                 },
-                wie = {
+                Pie = {
                     Info: "icon-filled-circle-i",
                     Warning: "icon-filled-triangle-exclamation",
                     Success: "icon-filled-circle-check",
                     Error: "icon-filled-circle-x"
                 },
-                Eie = {
+                kie = {
                     Info: "var(--inverse-system-emphasis)",
                     Warning: "var(--inverse-system-warning)",
                     Success: "var(--inverse-system-success)",
                     Error: "var(--inverse-system-alert)"
                 },
-                Iie = {
+                Rie = {
                     Info: "bg-action-standard",
                     Warning: "bg-inverse-action-standard",
                     Success: "bg-inverse-action-standard",
                     Error: "bg-action-standard"
                 },
-                Die = (0, r.forwardRef)((function(e, t) {
+                Oie = (0, r.forwardRef)((function(e, t) {
                     var n = e.title,
                         r = e.description,
                         i = e.linkLabel,
@@ -85322,10 +85475,10 @@
                         S = e.className,
                         P = e.style,
                         k = d(e, ["title", "description", "linkLabel", "linkHref", "onLinkClick", "showIcon", "infoIconOverride", "layout", "variant", "severity", "primaryActionLabel", "onPrimaryAction", "secondaryActionLabel", "onSecondaryAction", "actions", "onDismiss", "dismissIconAriaLabel", "className", "style"]),
-                        R = yie[y],
-                        O = "Emphasis" === h ? Iie[y] : "",
+                        R = Aie[y],
+                        O = "Emphasis" === h ? Rie[y] : "",
                         F = "Warning" === y || "Error" === y ? "alert" : "status",
-                        T = "Info" === y && c ? c : wie[y],
+                        T = "Info" === y && c ? c : Pie[y],
                         N = "Stacked" === f,
                         M = Boolean(D) || Boolean(b && w) || Boolean(E && I),
                         j = i && o().createElement("span", {
@@ -85360,7 +85513,7 @@
                     return o().createElement("div", Object.assign({
                         ref: t,
                         role: F,
-                        className: v("foundation-web-feedback-banner flex flex-col gap-small radius-medium padding-large stroke-standard", "Standard" === h ? "bg-shift-100" : void 0, "Standard" === h ? "stroke-default" : bie[y], S),
+                        className: v("foundation-web-feedback-banner flex flex-col gap-small radius-medium padding-large stroke-standard", "Standard" === h ? "bg-shift-100" : void 0, "Standard" === h ? "stroke-default" : Sie[y], S),
                         style: Object.assign({
                             backgroundColor: "Emphasis" === h ? R : void 0
                         }, P)
@@ -85379,7 +85532,7 @@
                         size: "Large",
                         className: "shrink-0",
                         style: {
-                            color: Eie[y]
+                            color: kie[y]
                         }
                     }), o().createElement("span", {
                         className: v("text-label-medium content-emphasis", N ? "" : "block padding-y-xsmall text-truncate-end text-no-wrap min-width-0 grow-1 basis-0")
@@ -85398,33 +85551,33 @@
                     }, L)))
                 }));
 
-            function Cie(e) {
-                return Cie = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
+            function Fie(e) {
+                return Fie = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
                     return typeof e
                 } : function(e) {
                     return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e
-                }, Cie(e)
+                }, Fie(e)
             }
 
-            function xie(e, t) {
+            function Tie(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function Aie(e, t, n) {
+            function Nie(e, t, n) {
                 return (t = function(e) {
                     var t = function(e, t) {
-                        if ("object" != Cie(e) || !e) return e;
+                        if ("object" != Fie(e) || !e) return e;
                         var n = e[Symbol.toPrimitive];
                         if (void 0 !== n) {
                             var r = n.call(e, t || "default");
-                            if ("object" != Cie(r)) return r;
+                            if ("object" != Fie(r)) return r;
                             throw new TypeError("@@toPrimitive must return a primitive value.")
                         }
                         return ("string" === t ? String : Number)(e)
                     }(e, "string");
-                    return "symbol" == Cie(t) ? t : t + ""
+                    return "symbol" == Fie(t) ? t : t + ""
                 }(t)) in e ? Object.defineProperty(e, t, {
                     value: n,
                     enumerable: !0,
@@ -85433,7 +85586,7 @@
                 }) : e[t] = n, e
             }
 
-            function Sie(e, t) {
+            function Mie(e, t) {
                 var n = Object.keys(e);
                 if (Object.getOwnPropertySymbols) {
                     var r = Object.getOwnPropertySymbols(e);
@@ -85444,19 +85597,19 @@
                 return n
             }
 
-            function Pie(e) {
+            function Bie(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var n = null != arguments[t] ? arguments[t] : {};
-                    t % 2 ? Sie(Object(n), !0).forEach((function(t) {
-                        Aie(e, t, n[t])
-                    })) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n)) : Sie(Object(n)).forEach((function(t) {
+                    t % 2 ? Mie(Object(n), !0).forEach((function(t) {
+                        Nie(e, t, n[t])
+                    })) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n)) : Mie(Object(n)).forEach((function(t) {
                         Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(n, t))
                     }))
                 }
                 return e
             }
 
-            function kie(e, t) {
+            function jie(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -85482,47 +85635,47 @@
                         }
                         return u
                     }
-                }(e, t) || Oie(e, t) || function() {
+                }(e, t) || Uie(e, t) || function() {
                     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function Rie(e) {
+            function Gie(e) {
                 return function(e) {
-                    if (Array.isArray(e)) return xie(e)
+                    if (Array.isArray(e)) return Tie(e)
                 }(e) || function(e) {
                     if ("undefined" != typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                }(e) || Oie(e) || function() {
+                }(e) || Uie(e) || function() {
                     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function Oie(e, t) {
+            function Uie(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return xie(e, t);
+                    if ("string" == typeof e) return Tie(e, t);
                     var n = {}.toString.call(e).slice(8, -1);
-                    return "Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n ? Array.from(e) : "Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n) ? xie(e, t) : void 0
+                    return "Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n ? Array.from(e) : "Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n) ? Tie(e, t) : void 0
                 }
             }
-            var Fie = "Radio",
-                Tie = "Checkbox",
-                Nie = "Text",
-                Mie = "Invalid",
-                Bie = "Required",
-                jie = "MaxLengthExceeded",
-                Gie = "MinLengthRequired",
-                Uie = "InvalidEnumValue",
-                Lie = "MinOptionsRequired",
-                qie = "MaxOptionsExceeded",
-                zie = "MaxSectionsExceeded",
-                _ie = "MaxFieldsExceeded",
-                Vie = "ContentRejected",
-                Wie = {
+            var Lie = "Radio",
+                qie = "Checkbox",
+                zie = "Text",
+                _ie = "Invalid",
+                Vie = "Required",
+                Wie = "MaxLengthExceeded",
+                Hie = "MinLengthRequired",
+                Kie = "InvalidEnumValue",
+                Qie = "MinOptionsRequired",
+                Yie = "MaxOptionsExceeded",
+                $ie = "MaxSectionsExceeded",
+                Jie = "MaxFieldsExceeded",
+                Xie = "ContentRejected",
+                Zie = {
                     overflowWrap: "anywhere"
                 },
-                Hie = 0;
+                eae = 0;
 
-            function Kie(e) {
+            function tae(e) {
                 var t = e.label,
                     n = e.value,
                     o = e.onChange,
@@ -85539,7 +85692,7 @@
                     m = e.isDisabled,
                     h = function(e) {
                         var t = (0, r.useRef)(null);
-                        return null == t.current && (Hie += 1, t.current = "".concat(e, "-").concat(Hie)), t.current
+                        return null == t.current && (eae += 1, t.current = "".concat(e, "-").concat(eae)), t.current
                     }("text-field-footer"),
                     g = u ? n.length / u : 0,
                     y = !!u,
@@ -85548,7 +85701,7 @@
                     E = !!l || b,
                     I = !!l || !!c,
                     D = (null != s ? s : 1) > 1,
-                    C = Pie(Pie({}, Wie), f),
+                    C = Bie(Bie({}, Zie), f),
                     x = D ? r.createElement(LD, {
                         label: t,
                         value: n,
@@ -85598,7 +85751,7 @@
                 }, n.length, "/", u) : r.createElement("span", null)))
             }
 
-            function Qie(e) {
+            function nae(e) {
                 var t = e.options,
                     n = e.onOptionsChange,
                     o = e.maxOptions,
@@ -85606,7 +85759,7 @@
                     a = void 0 === i ? 2 : i;
                 return {
                     addOption: (0, r.useCallback)((function() {
-                        null == n || n([].concat(Rie(t), [{
+                        null == n || n([].concat(Gie(t), [{
                             label: ""
                         }]))
                     }), [t, n]),
@@ -85617,7 +85770,7 @@
                     }), [t, n]),
                     updateOption: (0, r.useCallback)((function(e, r) {
                         null == n || n(t.map((function(t, n) {
-                            return n === e ? Pie(Pie({}, t), {}, {
+                            return n === e ? Bie(Bie({}, t), {}, {
                                 label: r
                             }) : t
                         })))
@@ -85626,12 +85779,12 @@
                     canRemove: t.length > a
                 }
             }
-            var Yie = {
+            var rae = {
                 count: 0,
                 pct: 0
             };
 
-            function $ie(e, t) {
+            function oae(e, t) {
                 return new Map(e.map((function(e) {
                     return [e.optionId, {
                         count: e.voteCount,
@@ -85640,12 +85793,12 @@
                 })))
             }
 
-            function Jie(e, t) {
+            function iae(e, t) {
                 var n;
-                return null !== (n = e.get(t)) && void 0 !== n ? n : Yie
+                return null !== (n = e.get(t)) && void 0 !== n ? n : rae
             }
 
-            function Xie(e) {
+            function aae(e) {
                 var t = e.label,
                     n = e.percentage,
                     o = e.isSelected,
@@ -85671,9 +85824,9 @@
                     }
                 }), r.createElement("span", {
                     className: "text-body-medium content-emphasis fill clip text-align-x-start padding-large",
-                    style: Pie({
+                    style: Bie({
                         position: "relative"
-                    }, Wie)
+                    }, Zie)
                 }, t), r.createElement("span", {
                     className: "flex items-center shrink-0 gap-x-xsmall padding-right-large",
                     style: {
@@ -85691,7 +85844,7 @@
                     className: "text-body-medium content-default"
                 }, n, "%")))
             }
-            var Zie = Aie(Aie(Aie({}, Fie, {
+            var uae = Nie(Nie(Nie({}, Lie, {
                 BuilderInput: function(e) {
                     var t = e.options,
                         n = e.onOptionsChange,
@@ -85701,7 +85854,7 @@
                         u = e.optionMaxLength,
                         s = e.translate,
                         l = e.optionErrors,
-                        c = Qie({
+                        c = nae({
                             options: t,
                             onOptionsChange: n,
                             maxOptions: o,
@@ -85716,7 +85869,7 @@
                         className: "flex flex-col gap-y-medium"
                     }, t.map((function(e, t) {
                         var n;
-                        return r.createElement(Kie, {
+                        return r.createElement(tae, {
                             key: null !== (n = e.id) && void 0 !== n ? n : t,
                             value: e.label,
                             placeholder: s("Label.Option", {
@@ -85764,13 +85917,13 @@
                         "aria-label": t || void 0
                     }, s.map((function(e, t) {
                         var i;
-                        return r.createElement(gie, {
+                        return r.createElement(xie, {
                             key: null !== (i = e.id) && void 0 !== i ? i : t,
                             layout: "Horizontal",
                             size: "Small",
                             type: "Radio",
                             label: r.createElement("span", {
-                                style: Wie
+                                style: Zie
                             }, e.label),
                             isSelected: e.id === n,
                             onSelect: function() {
@@ -85790,13 +85943,13 @@
                         s = e.value,
                         l = e.voterThumbnailUrl,
                         c = s,
-                        d = $ie(i, u);
+                        d = oae(i, u);
                     return r.createElement("div", {
                         className: "flex flex-col gap-y-medium"
                     }, n.map((function(e) {
-                        var t = Jie(d, e.optionId).pct,
+                        var t = iae(d, e.optionId).pct,
                             n = e.optionId === c;
-                        return r.createElement(Xie, {
+                        return r.createElement(aae, {
                             key: e.optionId,
                             "data-testid": "result-option-".concat(e.optionId),
                             label: e.label,
@@ -85808,8 +85961,8 @@
                 },
                 icon: "icon-regular-circle-dot",
                 label: "Label.SingleChoice",
-                type: Fie
-            }), Tie, {
+                type: Lie
+            }), qie, {
                 BuilderInput: function(e) {
                     var t = e.options,
                         n = e.onOptionsChange,
@@ -85819,7 +85972,7 @@
                         u = e.optionMaxLength,
                         s = e.translate,
                         l = e.optionErrors,
-                        c = Qie({
+                        c = nae({
                             options: t,
                             onOptionsChange: n,
                             maxOptions: o,
@@ -85834,7 +85987,7 @@
                         className: "flex flex-col gap-y-medium"
                     }, t.map((function(e, t) {
                         var n;
-                        return r.createElement(Kie, {
+                        return r.createElement(tae, {
                             key: null !== (n = e.id) && void 0 !== n ? n : t,
                             value: e.label,
                             placeholder: s("Label.Option", {
@@ -85883,19 +86036,19 @@
                         "aria-label": t || void 0
                     }, l.map((function(e, t) {
                         var n, i = s.includes(e.id);
-                        return r.createElement(gie, {
+                        return r.createElement(xie, {
                             key: null !== (n = e.id) && void 0 !== n ? n : t,
                             layout: "Horizontal",
                             size: "Small",
                             type: "Checkbox",
                             label: r.createElement("span", {
-                                style: Wie
+                                style: Zie
                             }, e.label),
                             isSelected: i,
                             onSelect: function() {
                                 o(i ? s.filter((function(t) {
                                     return t !== e.id
-                                })) : [].concat(Rie(s), [e.id]))
+                                })) : [].concat(Gie(s), [e.id]))
                             },
                             isDisabled: u
                         })
@@ -85911,13 +86064,13 @@
                         s = e.value,
                         l = e.voterThumbnailUrl,
                         c = null != s ? s : [],
-                        d = $ie(i, u);
+                        d = oae(i, u);
                     return r.createElement("div", {
                         className: "flex flex-col gap-y-medium"
                     }, n.map((function(e) {
-                        var t = Jie(d, e.optionId).pct,
+                        var t = iae(d, e.optionId).pct,
                             n = c.includes(e.optionId);
-                        return r.createElement(Xie, {
+                        return r.createElement(aae, {
                             key: e.optionId,
                             "data-testid": "result-option-".concat(e.optionId),
                             label: e.label,
@@ -85929,8 +86082,8 @@
                 },
                 icon: "icon-regular-square-check",
                 label: "Label.MultipleChoice",
-                type: Tie
-            }), Nie, {
+                type: qie
+            }), zie, {
                 Input: function(e) {
                     var t = e.value,
                         n = e.onChange,
@@ -85939,7 +86092,7 @@
                         a = e.maxLength,
                         u = e.error,
                         s = null != a && a > 100;
-                    return r.createElement(Kie, {
+                    return r.createElement(tae, {
                         value: t,
                         placeholder: i,
                         maxLength: a,
@@ -85965,14 +86118,14 @@
                 },
                 icon: "icon-regular-font",
                 label: "Label.Text",
-                type: Nie
+                type: zie
             });
 
-            function eae(e) {
-                return Zie[e]
+            function sae(e) {
+                return uae[e]
             }
 
-            function tae(e) {
+            function lae(e) {
                 var t = e.fieldId,
                     n = e.label,
                     o = e.required,
@@ -85987,18 +86140,18 @@
                 }, r.createElement("span", {
                     id: s,
                     className: "text-title-small content-emphasis",
-                    style: Wie
+                    style: Zie
                 }, n), o && r.createElement("span", {
                     className: "text-caption-small content-alert"
                 }, "*")), a && r.createElement("span", {
                     className: "text-caption-small content-tertiary",
-                    style: Wie
+                    style: Zie
                 }, a), u, i && r.createElement("span", {
                     className: "text-caption-small content-alert"
                 }, i))
             }
 
-            function nae(e) {
+            function cae(e) {
                 var t, n, o = e.fieldId,
                     i = e.field,
                     a = e.onHeaderChange,
@@ -86010,7 +86163,7 @@
                             o = e.maxLength,
                             i = e.required,
                             a = e.translate,
-                            u = kie((0, r.useState)(!1), 2),
+                            u = jie((0, r.useState)(!1), 2),
                             s = u[0],
                             l = u[1],
                             c = (0, r.useCallback)((function() {
@@ -86029,7 +86182,7 @@
                     }),
                     d = c.errorMsg,
                     p = c.onBlur;
-                return r.createElement(Kie, {
+                return r.createElement(tae, {
                     label: i.label ? u(i.label) : void 0,
                     value: null !== (n = i.header) && void 0 !== n ? n : "",
                     onChange: function(e) {
@@ -86047,7 +86200,7 @@
                 })
             }
 
-            function rae(e) {
+            function dae(e) {
                 var t = e.fieldId,
                     n = e.currentType,
                     o = e.allowedTypes,
@@ -86061,7 +86214,7 @@
                         return i(t, e)
                     }
                 }, r.createElement(aI, null, r.createElement(uI, null, o.map((function(e) {
-                    var t = eae(e);
+                    var t = sae(e);
                     return t ? r.createElement(cI, {
                         key: e,
                         value: e,
@@ -86070,7 +86223,7 @@
                 })))))
             }
 
-            function oae(e) {
+            function pae(e) {
                 var t = e.field,
                     n = e.effectiveFieldId,
                     o = e.sectionFieldTypeOptions,
@@ -86089,7 +86242,7 @@
                     g = e.disabled,
                     y = e.voterThumbnailUrl,
                     b = e.translate,
-                    w = eae(t.type),
+                    w = sae(t.type),
                     E = function(e, t, n) {
                         return (0, r.useMemo)((function() {
                             var r, o, i, a = null == t ? void 0 : t.fieldResults.find((function(t) {
@@ -86105,7 +86258,7 @@
                 if (!w) return r.createElement("div", {
                     className: "text-caption-small content-alert"
                 }, "Unknown field type: ", t.type);
-                if ("display" === u) return r.createElement(tae, {
+                if ("display" === u) return r.createElement(lae, {
                     fieldId: n,
                     label: t.label ? b(t.label) : void 0
                 }, r.createElement(w.Display, {
@@ -86121,13 +86274,13 @@
                     D = I && null != t.header,
                     C = I && o && o.length > 1 && p,
                     x = I && (i || a),
-                    A = D ? r.createElement(nae, {
+                    A = D ? r.createElement(cae, {
                         fieldId: n,
                         field: t,
                         onHeaderChange: c,
                         translate: b
                     }) : null,
-                    S = C ? r.createElement(rae, {
+                    S = C ? r.createElement(dae, {
                         fieldId: n,
                         currentType: t.type,
                         allowedTypes: o,
@@ -86168,7 +86321,7 @@
                     className: "text-title-medium content-emphasis"
                 }, b(a)), P, m && r.createElement("span", {
                     className: "text-caption-small content-alert"
-                }, m))) : r.createElement(tae, {
+                }, m))) : r.createElement(lae, {
                     fieldId: n,
                     label: I ? "" : t.label && b(t.label),
                     required: t.required,
@@ -86176,7 +86329,7 @@
                 }, A, S, P)
             }
 
-            function iae(e) {
+            function fae(e) {
                 var t, n = e.section,
                     o = e.sectionIdx,
                     i = e.mode,
@@ -86194,7 +86347,7 @@
                     g = e.translate,
                     y = n.fields.map((function(e, t) {
                         var a, y = null !== (a = e.id) && void 0 !== a ? a : "__f".concat(o, "_").concat(t);
-                        return r.createElement(oae, {
+                        return r.createElement(pae, {
                             key: y,
                             field: e,
                             effectiveFieldId: y,
@@ -86221,18 +86374,18 @@
                     "data-testid": "section-wrapper-".concat(null !== (t = n.id) && void 0 !== t ? t : o)
                 }, n.header && r.createElement("div", {
                     className: "text-heading-small content-emphasis",
-                    style: Wie
+                    style: Zie
                 }, n.header), y) : r.createElement(r.Fragment, {
                     key: n.id
                 }, y)
             }
 
-            function aae(e) {
+            function vae(e) {
                 var t = e.messages;
                 return t && 0 !== t.length ? r.createElement("div", {
                     className: "flex flex-col gap-y-small"
                 }, t.map((function(e) {
-                    return r.createElement(Die, {
+                    return r.createElement(Oie, {
                         key: e,
                         severity: "Error",
                         layout: "Stacked",
@@ -86241,82 +86394,82 @@
                     })
                 }))) : null
             }
-            var uae = function() {
+            var mae = function() {
                 return Math.random().toString(36).substring(2, 9)
             };
 
-            function sae(e) {
-                return Pie(Pie({}, e), {}, {
+            function hae(e) {
+                return Bie(Bie({}, e), {}, {
                     sections: e.sections.map((function(e) {
                         var t;
-                        return Pie(Pie({}, e), {}, {
-                            id: null !== (t = e.id) && void 0 !== t ? t : uae(),
+                        return Bie(Bie({}, e), {}, {
+                            id: null !== (t = e.id) && void 0 !== t ? t : mae(),
                             fields: e.fields.map((function(e) {
                                 var t;
-                                return Pie(Pie({}, e), {}, {
-                                    id: null !== (t = e.id) && void 0 !== t ? t : uae()
+                                return Bie(Bie({}, e), {}, {
+                                    id: null !== (t = e.id) && void 0 !== t ? t : mae()
                                 })
                             }))
                         })
                     }))
                 })
             }
-            var lae = "REMOVE_SECTION",
-                cae = "UPDATE_SECTION_HEADER",
-                dae = "UPDATE_FIELD_HEADER",
-                pae = "UPDATE_FIELD_OPTIONS",
-                fae = "UPDATE_FIELD_TYPE";
+            var gae = "REMOVE_SECTION",
+                yae = "UPDATE_SECTION_HEADER",
+                bae = "UPDATE_FIELD_HEADER",
+                wae = "UPDATE_FIELD_OPTIONS",
+                Eae = "UPDATE_FIELD_TYPE";
 
-            function vae(e, t) {
+            function Iae(e, t) {
                 switch (t.type) {
-                    case lae:
-                        return Pie(Pie({}, e), {}, {
+                    case gae:
+                        return Bie(Bie({}, e), {}, {
                             sections: e.sections.filter((function(e) {
                                 return e.id !== t.sectionId
                             }))
                         });
-                    case cae:
-                        return Pie(Pie({}, e), {}, {
+                    case yae:
+                        return Bie(Bie({}, e), {}, {
                             sections: e.sections.map((function(e) {
-                                return e.id === t.sectionId ? Pie(Pie({}, e), {}, {
+                                return e.id === t.sectionId ? Bie(Bie({}, e), {}, {
                                     header: t.header
                                 }) : e
                             }))
                         });
-                    case dae:
-                        return Pie(Pie({}, e), {}, {
+                    case bae:
+                        return Bie(Bie({}, e), {}, {
                             sections: e.sections.map((function(e) {
-                                return Pie(Pie({}, e), {}, {
+                                return Bie(Bie({}, e), {}, {
                                     fields: e.fields.map((function(e) {
-                                        return e.id === t.fieldId ? Pie(Pie({}, e), {}, {
+                                        return e.id === t.fieldId ? Bie(Bie({}, e), {}, {
                                             header: t.header
                                         }) : e
                                     }))
                                 })
                             }))
                         });
-                    case pae:
-                        return Pie(Pie({}, e), {}, {
+                    case wae:
+                        return Bie(Bie({}, e), {}, {
                             sections: e.sections.map((function(e) {
-                                return Pie(Pie({}, e), {}, {
+                                return Bie(Bie({}, e), {}, {
                                     fields: e.fields.map((function(e) {
                                         var n;
                                         if (e.id !== t.fieldId) return e;
                                         var r = null !== (n = e.maxOptions) && void 0 !== n ? n : 10,
                                             o = t.options.length <= r ? t.options : t.options.slice(0, r);
-                                        return Pie(Pie({}, e), {}, {
+                                        return Bie(Bie({}, e), {}, {
                                             options: o
                                         })
                                     }))
                                 })
                             }))
                         });
-                    case fae:
-                        return Pie(Pie({}, e), {}, {
+                    case Eae:
+                        return Bie(Bie({}, e), {}, {
                             sections: e.sections.map((function(e) {
-                                return Pie(Pie({}, e), {}, {
+                                return Bie(Bie({}, e), {}, {
                                     fields: e.fields.map((function(e) {
-                                        return e.id === t.fieldId ? Pie(Pie({}, e), {}, {
+                                        return e.id === t.fieldId ? Bie(Bie({}, e), {}, {
                                             type: t.newType
                                         }) : e
                                     }))
@@ -86328,8 +86481,8 @@
                 }
             }
 
-            function mae(e, t) {
-                var n = kie((0, r.useReducer)(vae, e, sae), 2),
+            function Dae(e, t) {
+                var n = jie((0, r.useReducer)(Iae, e, hae), 2),
                     o = n[0],
                     i = n[1],
                     a = (0, r.useRef)(t);
@@ -86342,7 +86495,7 @@
                                     if (e.headerMaxLength && e.header.length > e.headerMaxLength) return !1
                                 }
                                 var t;
-                                return e.type !== Fie && e.type !== Tie || e.options.filter((function(e) {
+                                return e.type !== Lie && e.type !== qie || e.options.filter((function(e) {
                                     return "" !== e.label.trim()
                                 })).length >= (null !== (t = e.minOptions) && void 0 !== t ? t : 2)
                             }))
@@ -86353,30 +86506,30 @@
                     dispatch: i
                 }
             }
-            var hae = function(e, t) {
+            var Cae = function(e, t) {
                     return t ? Object.entries(t).reduce((function(e, t) {
-                        var n = kie(t, 2),
+                        var n = jie(t, 2),
                             r = n[0],
                             o = n[1];
                         return e.replace("{".concat(r, "}"), String(o))
                     }), e) : e
                 },
-                gae = Aie(Aie(Aie(Aie(Aie(Aie(Aie(Aie(Aie(Aie({}, Mie, "Validation.Error.Invalid"), Bie, "Validation.Error.Required"), jie, "Validation.Error.MaxLengthExceeded"), Gie, "Validation.Error.MinLengthRequired"), Uie, "Validation.Error.InvalidEnumValue"), Lie, "Validation.Error.MinOptionsRequired"), qie, "Validation.Error.MaxOptionsExceeded"), zie, "Validation.Error.MaxSectionsExceeded"), _ie, "Validation.Error.MaxFieldsExceeded"), Vie, "Validation.Error.ContentRejected");
+                xae = Nie(Nie(Nie(Nie(Nie(Nie(Nie(Nie(Nie(Nie({}, _ie, "Validation.Error.Invalid"), Vie, "Validation.Error.Required"), Wie, "Validation.Error.MaxLengthExceeded"), Hie, "Validation.Error.MinLengthRequired"), Kie, "Validation.Error.InvalidEnumValue"), Qie, "Validation.Error.MinOptionsRequired"), Yie, "Validation.Error.MaxOptionsExceeded"), $ie, "Validation.Error.MaxSectionsExceeded"), Jie, "Validation.Error.MaxFieldsExceeded"), Xie, "Validation.Error.ContentRejected");
 
-            function yae(e) {
-                var t = (arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : hae)(function(e) {
+            function Aae(e) {
+                var t = (arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : Cae)(function(e) {
                     var t;
-                    return e.errorCode === Vie && "concatenated_text" === e.property ? "Validation.Error.ContentRejectedConcatenated" : null !== (t = gae[e.errorCode]) && void 0 !== t ? t : gae[Mie]
+                    return e.errorCode === Xie && "concatenated_text" === e.property ? "Validation.Error.ContentRejectedConcatenated" : null !== (t = xae[e.errorCode]) && void 0 !== t ? t : xae[_ie]
                 }(e));
                 return e.metadata ? Object.entries(e.metadata).reduce((function(e, t) {
-                    var n = kie(t, 2),
+                    var n = jie(t, 2),
                         r = n[0],
                         o = n[1];
                     return e.replace("{".concat(r, "}"), o)
                 }), t) : t
             }
 
-            function bae(e) {
+            function Sae(e) {
                 return e.errors.map((function(e) {
                     return e.fieldData
                 })).filter((function(e) {
@@ -86384,18 +86537,18 @@
                 }))
             }
 
-            function wae(e, t) {
-                var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : hae,
-                    r = (Array.isArray(e) ? e : bae(e)).find((function(e) {
+            function Pae(e, t) {
+                var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : Cae,
+                    r = (Array.isArray(e) ? e : Sae(e)).find((function(e) {
                         return null == e.sectionIndex && null == e.fieldIndex && e.property === t
                     }));
-                return r ? yae(r, n) : void 0
+                return r ? Aae(r, n) : void 0
             }
 
-            function Eae(e, t) {
-                var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : hae,
+            function kae(e, t) {
+                var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : Cae,
                     r = Array.isArray(e),
-                    o = r ? e : bae(e),
+                    o = r ? e : Sae(e),
                     i = !r && e.errors.some((function(e) {
                         return null == e.fieldData
                     })),
@@ -86421,7 +86574,7 @@
                                 if (null != r && r.id) return r.id
                             }
                         }(e, t),
-                        o = yae(e, n);
+                        o = Aae(e, n);
                     r && null != e.optionIndex ? (u[r] || (u[r] = {}), void 0 === u[r][e.optionIndex] && (u[r][e.optionIndex] = o)) : r ? void 0 === a[r] && (a[r] = o) : e.property && c.has(e.property) ? void 0 === a[e.property] && (a[e.property] = o) : d(o)
                 })), i && d(n("Validation.Error.Generic")), {
                     fieldErrors: a,
@@ -86430,37 +86583,37 @@
                 }
             }
 
-            function Iae(e) {
+            function Rae(e) {
                 var t = e.initialSpecs,
                     n = e.onChange,
                     o = e.serverErrors,
                     i = e.className,
                     a = e.translate,
-                    u = void 0 === a ? hae : a,
-                    s = mae(t, n),
+                    u = void 0 === a ? Cae : a,
+                    s = Dae(t, n),
                     l = s.specs,
                     c = s.dispatch,
                     d = (0, r.useMemo)((function() {
-                        return o ? Eae(o, l.sections, u) : void 0
+                        return o ? kae(o, l.sections, u) : void 0
                     }), [o, l.sections, u]),
                     p = l.sections.length > 1,
                     f = (0, r.useCallback)((function(e, t) {
                         c({
-                            type: dae,
+                            type: bae,
                             fieldId: e,
                             header: t
                         })
                     }), [c]),
                     v = (0, r.useCallback)((function(e, t) {
                         c({
-                            type: pae,
+                            type: wae,
                             fieldId: e,
                             options: t
                         })
                     }), [c]),
                     m = (0, r.useCallback)((function(e, t) {
                         c({
-                            type: fae,
+                            type: Eae,
                             fieldId: e,
                             newType: t
                         })
@@ -86472,7 +86625,7 @@
                     return (l.sections.length > 1 || e.header) && !l.hideAddSection ? r.createElement("div", {
                         key: i,
                         className: "flex flex-col gap-y-small"
-                    }, r.createElement(Kie, {
+                    }, r.createElement(tae, {
                         value: null !== (o = e.header) && void 0 !== o ? o : "",
                         placeholder: e.headerPlaceholder ? u(e.headerPlaceholder) : u("Label.Section", {
                             index: t + 1
@@ -86488,19 +86641,19 @@
                             size: "Small",
                             onClick: function() {
                                 return c({
-                                    type: lae,
+                                    type: gae,
                                     sectionId: e.id
                                 })
                             }
                         }) : void 0,
                         onChange: function(t) {
                             return c({
-                                type: cae,
+                                type: yae,
                                 sectionId: e.id,
                                 header: t
                             })
                         }
-                    }), r.createElement(iae, {
+                    }), r.createElement(fae, {
                         sectionIdx: t,
                         section: e,
                         mode: "builder",
@@ -86509,7 +86662,7 @@
                         onFieldTypeChange: m,
                         errors: d,
                         translate: u
-                    })) : r.createElement(iae, {
+                    })) : r.createElement(fae, {
                         key: i,
                         sectionIdx: t,
                         section: e,
@@ -86520,11 +86673,11 @@
                         errors: d,
                         translate: u
                     })
-                })), r.createElement(aae, {
+                })), r.createElement(vae, {
                     messages: null == d ? void 0 : d.formErrors
                 }))
             }
-            var Dae = {
+            var Oae = {
                 formType: "Poll",
                 hideAddSection: !0,
                 title: "",
@@ -86541,11 +86694,11 @@
                 sections: [{
                     header: "",
                     hideFieldTypePicker: !1,
-                    fieldTypeOptions: [Fie, Tie],
+                    fieldTypeOptions: [Lie, qie],
                     fieldTypeLabel: "Label.FieldType",
                     fieldOptionsLabel: "Label.PollOptions",
                     fields: [{
-                        type: Fie,
+                        type: Lie,
                         options: [{
                             label: ""
                         }, {
@@ -86559,43 +86712,43 @@
                 }]
             };
 
-            function Cae(e) {
+            function Fae(e) {
                 var t, n, o, i, a = e.onSave,
                     u = e.onCancel,
                     s = e.initialSpecs,
-                    l = void 0 === s ? Dae : s,
+                    l = void 0 === s ? Oae : s,
                     c = e.hideDescription,
                     d = e.hideAddSection,
                     p = e.serverErrors,
                     f = e.renderBody,
                     v = e.renderActions,
                     m = e.translate,
-                    h = void 0 === m ? hae : m,
+                    h = void 0 === m ? Cae : m,
                     g = (0, r.useMemo)((function() {
-                        return Pie(Pie(Pie({}, l), null != c && {
+                        return Bie(Bie(Bie({}, l), null != c && {
                             hideDescription: c
                         }), null != d && {
                             hideAddSection: d
                         })
                     }), [l, c, d]),
                     y = (0, r.useRef)(g),
-                    b = kie((0, r.useState)(!1), 2),
+                    b = jie((0, r.useState)(!1), 2),
                     w = b[0],
                     E = b[1],
-                    I = kie((0, r.useState)(null !== (t = g.title) && void 0 !== t ? t : ""), 2),
+                    I = jie((0, r.useState)(null !== (t = g.title) && void 0 !== t ? t : ""), 2),
                     D = I[0],
                     C = I[1],
-                    x = kie((0, r.useState)(null !== (n = g.description) && void 0 !== n ? n : ""), 2),
+                    x = jie((0, r.useState)(null !== (n = g.description) && void 0 !== n ? n : ""), 2),
                     A = x[0],
                     S = x[1],
                     P = (0, r.useCallback)((function(e, t) {
                         y.current = e, E(t)
                     }), []),
                     k = (0, r.useMemo)((function() {
-                        return p ? wae(p, "title", h) : void 0
+                        return p ? Pae(p, "title", h) : void 0
                     }), [p, h]),
                     R = (0, r.useMemo)((function() {
-                        return p ? wae(p, "description", h) : void 0
+                        return p ? Pae(p, "description", h) : void 0
                     }), [p, h]),
                     O = (0, r.useMemo)((function() {
                         if (p) {
@@ -86604,7 +86757,7 @@
                             };
                             return Array.isArray(p) ? p.filter((function(t) {
                                 return !e(t)
-                            })) : Pie(Pie({}, p), {}, {
+                            })) : Bie(Bie({}, p), {}, {
                                 errors: p.errors.filter((function(t) {
                                     return !e(t.fieldData)
                                 }))
@@ -86624,12 +86777,12 @@
                                 formType: e.formType,
                                 formSpecs: {
                                     sections: e.sections.map((function(e) {
-                                        return Pie(Pie({}, e.header ? {
+                                        return Bie(Bie({}, e.header ? {
                                             header: e.header
                                         } : {}), {}, {
                                             fieldSpecs: e.fields.map((function(e) {
-                                                var t = e.type === Fie || e.type === Tie;
-                                                return Pie(Pie(Pie({
+                                                var t = e.type === Lie || e.type === qie;
+                                                return Bie(Bie(Bie({
                                                     type: e.type
                                                 }, e.label ? {
                                                     label: e.label
@@ -86649,7 +86802,7 @@
                                     }))
                                 }
                             }
-                        }(Pie(Pie({}, y.current), {}, {
+                        }(Bie(Bie({}, y.current), {}, {
                             title: D,
                             description: A
                         })))
@@ -86659,7 +86812,7 @@
                     U = !g.hideDescription,
                     L = null !== (i = g.descriptionRows) && void 0 !== i ? i : 1,
                     z = g.descriptionMaxLength,
-                    _ = j ? r.createElement(Kie, {
+                    _ = j ? r.createElement(tae, {
                         label: h("Label.Question"),
                         value: D,
                         onChange: C,
@@ -86672,7 +86825,7 @@
                             resize: "none"
                         }
                     }) : null,
-                    V = U ? r.createElement(Kie, {
+                    V = U ? r.createElement(tae, {
                         label: h("Label.Description"),
                         value: A,
                         onChange: S,
@@ -86691,7 +86844,7 @@
                         className: "text-heading-medium content-emphasis"
                     }, h("Heading.CreatePoll")), r.createElement("div", {
                         className: "flex flex-col gap-y-small"
-                    }, _, V), r.createElement(Iae, {
+                    }, _, V), r.createElement(Rae, {
                         initialSpecs: g,
                         onChange: P,
                         serverErrors: O,
@@ -86715,7 +86868,7 @@
                 return r.createElement(r.Fragment, null, f ? f(W) : W, v ? v(H) : H)
             }
 
-            function xae(e) {
+            function Tae(e) {
                 var t = e.sections,
                     n = e.mode,
                     o = e.values,
@@ -86735,7 +86888,7 @@
                     className: null != m ? m : "flex flex-col gap-y-medium"
                 }, t.map((function(e, t) {
                     var o;
-                    return r.createElement(iae, {
+                    return r.createElement(fae, {
                         key: null !== (o = e.id) && void 0 !== o ? o : "__s".concat(t),
                         sectionIdx: t,
                         section: e,
@@ -86755,7 +86908,7 @@
                 })))
             }
 
-            function Aae(e, t) {
+            function Nae(e, t) {
                 return t.flatMap((function(e) {
                     return e.fields
                 })).every((function(t) {
@@ -86764,7 +86917,7 @@
                 }))
             }
 
-            function Sae(e) {
+            function Mae(e) {
                 var t = e.form,
                     n = e.onSubmit,
                     o = e.userResponse,
@@ -86781,7 +86934,7 @@
                     m = e.serverErrors,
                     h = e.className,
                     g = e.translate,
-                    y = void 0 === g ? hae : g,
+                    y = void 0 === g ? Cae : g,
                     b = !!o || a,
                     w = (0, r.useMemo)((function() {
                         return function(e) {
@@ -86818,7 +86971,7 @@
                     }), [t]),
                     I = (0, r.useMemo)((function() {
                         return o ? (e = o, t = {}, Object.entries(e.responseSpecs.values).forEach((function(e) {
-                            var n = kie(e, 2),
+                            var n = jie(e, 2),
                                 r = n[0],
                                 o = n[1];
                             "choiceValue" in o ? t[r] = o.choiceValue.optionId : "multiValue" in o ? t[r] = o.multiValue.optionIds : "textValue" in o && (t[r] = o.textValue)
@@ -86826,9 +86979,9 @@
                         var e, t
                     }), [o]),
                     D = (0, r.useMemo)((function() {
-                        return m ? Eae(m, w, y) : void 0
+                        return m ? kae(m, w, y) : void 0
                     }), [m, w, y]),
-                    C = kie((0, r.useState)({}), 2),
+                    C = jie((0, r.useState)({}), 2),
                     x = C[0],
                     A = C[1],
                     S = (0, r.useRef)(t.formId);
@@ -86837,7 +86990,7 @@
                 }), [t.formId]);
                 var P = (0, r.useCallback)((function(e, t) {
                         A((function(n) {
-                            return Pie(Pie({}, n), {}, Aie({}, e, t))
+                            return Bie(Bie({}, n), {}, Nie({}, e, t))
                         }))
                     }), []),
                     k = (0, r.useCallback)((function() {
@@ -86848,11 +87001,11 @@
                                     var n = e.id;
                                     if (n) {
                                         var o = t[n];
-                                        null != o && (e.type === Tie ? r[n] = {
+                                        null != o && (e.type === qie ? r[n] = {
                                             multiValue: {
                                                 optionIds: o
                                             }
-                                        } : e.type === Fie ? r[n] = {
+                                        } : e.type === Lie ? r[n] = {
                                             choiceValue: {
                                                 optionId: o
                                             }
@@ -86869,8 +87022,8 @@
                             }
                         }(t.formId, x, w))
                     }), [n, t.formId, x, w]),
-                    R = Aae(x, w),
-                    O = r.createElement(xae, {
+                    R = Nae(x, w),
+                    O = r.createElement(Tae, {
                         sections: w,
                         mode: b ? "display" : "response",
                         values: b ? I : x,
@@ -86901,18 +87054,18 @@
                     className: "flex flex-col gap-y-small"
                 }, t.title && r.createElement("div", {
                     className: "text-heading-small content-emphasis",
-                    style: Wie
+                    style: Zie
                 }, t.title), !p && t.description && r.createElement("div", {
                     className: "text-body-medium content-tertiary",
-                    style: Wie
-                }, t.description)), F, r.createElement(aae, {
+                    style: Zie
+                }, t.description)), F, r.createElement(vae, {
                     messages: null == D ? void 0 : D.formErrors
                 }), N || M ? r.createElement("div", {
                     className: "flex items-center justify-between"
                 }, null != N ? N : r.createElement("div", null), M) : null, c)
             }
 
-            function Pae(e) {
+            function Bae(e) {
                 var t = e.form,
                     n = e.onVote,
                     o = e.userResponse,
@@ -86927,7 +87080,7 @@
                     f = e.responseCount,
                     v = e.renderVoteAction,
                     m = e.translate,
-                    h = void 0 === m ? hae : m,
+                    h = void 0 === m ? Cae : m,
                     g = (0, r.useCallback)((function(e) {
                         var n, r;
                         if (!s || !i) return e;
@@ -86941,7 +87094,7 @@
                             totalResponses: i.totalResponses
                         })
                     }), [s, i, t]);
-                return r.createElement(Sae, {
+                return r.createElement(Mae, {
                     form: t,
                     onSubmit: n,
                     userResponse: o,
@@ -86958,20 +87111,20 @@
                     translate: h
                 })
             }
-            var kae = e.EnvironmentUrls.groupsApi,
-                Rae = {
+            var jae = e.EnvironmentUrls.groupsApi,
+                Gae = {
                     getCreateFormUrl: function(e) {
-                        return "".concat(kae, "/v1/groups/").concat(e, "/forms")
+                        return "".concat(jae, "/v1/groups/").concat(e, "/forms")
                     },
                     getSubmitFormResponseUrl: function(e, t) {
-                        return "".concat(kae, "/v1/groups/").concat(e, "/forms/").concat(t, "/responses")
+                        return "".concat(jae, "/v1/groups/").concat(e, "/forms/").concat(t, "/responses")
                     },
                     getFormResultsUrl: function(e, t) {
-                        return "".concat(kae, "/v1/groups/").concat(e, "/forms/").concat(t, "/results")
+                        return "".concat(jae, "/v1/groups/").concat(e, "/forms/").concat(t, "/results")
                     }
                 },
-                Oae = n(4364),
-                Fae = function(e, t, n, r) {
+                Uae = n(4364),
+                Lae = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -86998,7 +87151,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Tae = function(e, t) {
+                qae = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -87070,7 +87223,7 @@
                         }
                     }
                 },
-                Nae = function(e) {
+                zae = function(e) {
                     if (e) return {
                         totalResponses: e.totalResponses,
                         fieldResults: e.fieldResults.map((function(e) {
@@ -87085,7 +87238,7 @@
                         }))
                     }
                 },
-                Mae = function(e) {
+                _ae = function(e) {
                     if (null == e ? void 0 : e.values) {
                         for (var t = {}, n = 0, r = Object.entries(e.values); n < r.length; n++) {
                             var o = r[n],
@@ -87111,7 +87264,7 @@
                         }
                     }
                 },
-                Bae = function(e) {
+                Vae = function(e) {
                     for (var t = {}, n = 0, r = Object.entries(e.values); n < r.length; n++) {
                         var o = r[n],
                             i = o[0],
@@ -87120,7 +87273,7 @@
                             choiceOptionId: a.choiceValue.optionId
                         } : "multiValue" in a ? t[i] = {
                             multiChoiceOptionIds: a.multiValue.optionIds
-                        } : Oae.warn("mapResponseSpecsToApi: dropping unknown response value", {
+                        } : Uae.warn("mapResponseSpecsToApi: dropping unknown response value", {
                             fieldId: i,
                             val: a
                         })
@@ -87129,14 +87282,14 @@
                         values: t
                     }
                 },
-                jae = function(e, t, n) {
-                    return Fae(void 0, void 0, Promise, (function() {
+                Wae = function(e, t, n) {
+                    return Lae(void 0, void 0, Promise, (function() {
                         var r, o;
-                        return Tae(this, (function(i) {
+                        return qae(this, (function(i) {
                             switch (i.label) {
                                 case 0:
                                     return r = {
-                                        url: Rae.getCreateFormUrl(e),
+                                        url: Gae.getCreateFormUrl(e),
                                         withCredentials: !0
                                     }, o = {
                                         title: n.title,
@@ -87151,14 +87304,14 @@
                         }))
                     }))
                 },
-                Gae = function(e, t, n) {
-                    return Fae(void 0, void 0, Promise, (function() {
+                Hae = function(e, t, n) {
+                    return Lae(void 0, void 0, Promise, (function() {
                         var r, o;
-                        return Tae(this, (function(i) {
+                        return qae(this, (function(i) {
                             switch (i.label) {
                                 case 0:
                                     return r = {
-                                        url: Rae.getFormResultsUrl(e, n),
+                                        url: Gae.getFormResultsUrl(e, n),
                                         retryable: !0,
                                         withCredentials: !0
                                     }, [4, _j.httpService.get(r, {
@@ -87167,24 +87320,24 @@
                                 case 1:
                                     return [2, {
                                         form: (o = i.sent().data).form,
-                                        results: Nae(o.results),
-                                        response: Mae(o.userResponse)
+                                        results: zae(o.results),
+                                        response: _ae(o.userResponse)
                                     }]
                             }
                         }))
                     }))
                 },
-                Uae = function(e, t, n, r) {
-                    return Fae(void 0, void 0, Promise, (function() {
+                Kae = function(e, t, n, r) {
+                    return Lae(void 0, void 0, Promise, (function() {
                         var o;
-                        return Tae(this, (function(i) {
+                        return qae(this, (function(i) {
                             switch (i.label) {
                                 case 0:
                                     return o = {
-                                        url: Rae.getSubmitFormResponseUrl(e, n),
+                                        url: Gae.getSubmitFormResponseUrl(e, n),
                                         withCredentials: !0
                                     }, [4, _j.httpService.post(o, {
-                                        responseSpecs: Bae(r),
+                                        responseSpecs: Vae(r),
                                         cfVertical: t
                                     })];
                                 case 1:
@@ -87194,31 +87347,31 @@
                     }))
                 };
 
-            function Lae(e) {
+            function Qae(e) {
                 var t = e,
                     n = null == t ? void 0 : t.data;
                 if (n && "object" == typeof n && "errors" in n && Array.isArray(n.errors)) return n
             }
-            var qae = function(e, t) {
+            var Yae = function(e, t) {
                     return ["customForms.formResults", e, t]
                 },
-                zae = function(e) {
+                $ae = function(e) {
                     return ["customForms.pollVoterAvatar", e]
                 };
-            var _ae = function(e, t) {
+            var Jae = function(e, t) {
                     return SV().getCommonParams(e, t)
                 },
-                Vae = function() {
+                Xae = function() {
                     return {
                         hash: window.location.hash,
                         pathname: window.location.pathname
                     }
                 },
-                Wae = function() {
-                    var e = Vae(),
+                Zae = function() {
+                    var e = Xae(),
                         t = e.hash,
                         n = e.pathname,
-                        r = _ae(t, n),
+                        r = Jae(t, n),
                         o = r.pageRoute,
                         i = r.locationTab,
                         a = r.groupId;
@@ -87229,11 +87382,11 @@
                         sessionId: BQ()
                     })
                 },
-                Hae = function(e) {
-                    var t = Vae(),
+                eue = function(e) {
+                    var t = Xae(),
                         n = t.hash,
                         r = t.pathname,
-                        o = _ae(n, r),
+                        o = Jae(n, r),
                         i = o.pageRoute,
                         a = o.locationTab,
                         u = o.groupId;
@@ -87245,7 +87398,7 @@
                         buttonClicked: e
                     })
                 },
-                Kae = function(e, t, n, r) {
+                tue = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -87272,7 +87425,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Qae = function(e, t) {
+                nue = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -87344,7 +87497,7 @@
                         }
                     }
                 },
-                Yae = function(t) {
+                rue = function(t) {
                     var n, i = t.groupId,
                         a = t.vertical,
                         u = t.formId,
@@ -87353,7 +87506,7 @@
                         p = t.isMemberOfGroup,
                         f = t.translate,
                         v = (0, l.useQueryClient)(),
-                        m = qae(i, u),
+                        m = Yae(i, u),
                         h = !!(null === e.CurrentUser || void 0 === e.CurrentUser ? void 0 : e.CurrentUser.isAuthenticated),
                         g = function(e) {
                             var t = e.groupId,
@@ -87362,10 +87515,10 @@
                                 i = !!GV().features.RealtimeMessaging,
                                 a = (0, r.useRef)(null),
                                 u = (0, r.useMemo)((function() {
-                                    return i && t && n ? b6.community(t) : null
+                                    return i && t && n ? x6.community(t) : null
                                 }), [i, t, n]),
                                 s = (0, r.useCallback)((function() {
-                                    var e = qae(t, n);
+                                    var e = Yae(t, n);
                                     o.invalidateQueries({
                                         queryKey: e
                                     }).catch((function() {})), a.current && clearTimeout(a.current), a.current = setTimeout((function() {
@@ -87378,9 +87531,9 @@
                                 return function() {
                                     a.current && (clearTimeout(a.current), a.current = null)
                                 }
-                            }), [n, t, i]), k6(u, (function(e) {
+                            }), [n, t, i]), M6(u, (function(e) {
                                 e.some((function(e) {
-                                    return e.signalType === C6
+                                    return e.signalType === R6
                                 })) && s()
                             })), {
                                 realtimeEnabled: i
@@ -87392,7 +87545,7 @@
                         y = (0, l.useQuery)({
                             queryKey: m,
                             queryFn: function() {
-                                return Gae(i, a, u)
+                                return Hae(i, a, u)
                             },
                             enabled: !!i && !!u && h,
                             keepPreviousData: !0,
@@ -87407,11 +87560,11 @@
                         w = y.isLoading,
                         E = (null === e.CurrentUser || void 0 === e.CurrentUser ? void 0 : e.CurrentUser.isAuthenticated) ? Number(e.CurrentUser.userId) : 0,
                         I = (0, l.useQuery)({
-                            queryKey: zae(E),
+                            queryKey: $ae(E),
                             queryFn: function() {
-                                return Kae(void 0, void 0, void 0, (function() {
+                                return tue(void 0, void 0, void 0, (function() {
                                     var e, t;
-                                    return Qae(this, (function(n) {
+                                    return nue(this, (function(n) {
                                         switch (n.label) {
                                             case 0:
                                                 return [4, EA.thumbnailService.getThumbnailImage(EA.ThumbnailTypes.avatarHeadshot, EA.ThumbnailAvatarHeadshotSize.size48, void 0, E)];
@@ -87427,7 +87580,7 @@
                         }).data,
                         D = (0, l.useMutation)({
                             mutationFn: function(e) {
-                                return Uae(i, a, u, e.responseSpecs)
+                                return Kae(i, a, u, e.responseSpecs)
                             },
                             onSuccess: function() {
                                 return v.invalidateQueries({
@@ -87437,20 +87590,20 @@
                         }),
                         C = (0, r.useMemo)((function() {
                             if (D.error) {
-                                var e = Lae(D.error);
+                                var e = Qae(D.error);
                                 if (e) {
-                                    var t = bae(e);
-                                    if (t.length > 0) return yae(t[0])
+                                    var t = Sae(e);
+                                    if (t.length > 0) return Aae(t[0])
                                 }
                                 return f("Validation.Error.Invalid")
                             }
                         }), [D.error, f]),
                         x = (0, r.useCallback)((function(e) {
                             GQ.sendEvent(function(e, t, n, r) {
-                                var o = Vae(),
+                                var o = Xae(),
                                     i = o.hash,
                                     a = o.pathname,
-                                    u = _ae(i, a),
+                                    u = Jae(i, a),
                                     s = u.pageRoute,
                                     l = u.locationTab,
                                     c = u.groupId;
@@ -87481,7 +87634,7 @@
                         }), [p, u, f]);
                     return !h && d ? o().createElement("div", {
                         className: "poll-voter"
-                    }, o().createElement(Pae, {
+                    }, o().createElement(Bae, {
                         form: d,
                         disabled: !0,
                         hideDescription: !0,
@@ -87490,7 +87643,7 @@
                         className: "poll-voter"
                     }, o().createElement(s.Loading, null)) : (null == b ? void 0 : b.form) ? o().createElement("div", {
                         className: "poll-voter"
-                    }, o().createElement(Pae, {
+                    }, o().createElement(Bae, {
                         form: b.form,
                         results: b.results,
                         userResponse: b.response,
@@ -87505,9 +87658,9 @@
                         className: "text-caption content-alert margin-top-xsmall"
                     }, C)) : null
                 };
-            Yae.displayName = "PollVoter";
-            var $ae = Yae;
-            var Jae = function(e, t, n, r) {
+            rue.displayName = "PollVoter";
+            var oue = rue;
+            var iue = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -87534,7 +87687,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                Xae = function(e, t) {
+                aue = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -87606,7 +87759,7 @@
                         }
                     }
                 },
-                Zae = (0, u.withTranslations)((function(t) {
+                uue = (0, u.withTranslations)((function(t) {
                     var n = t.announcement,
                         i = t.groupId,
                         a = t.policies,
@@ -87627,17 +87780,17 @@
                         I = n.reactions,
                         D = n.imageAssetId,
                         C = n.formId,
-                        x = Ooe(),
+                        x = Uoe(),
                         A = GV().features;
                     ! function(e) {
                         var t = e.groupId,
                             n = e.realtimeEnabled,
                             o = e.refetchAnnouncement;
-                        k6((0, r.useMemo)((function() {
-                            return n ? b6.community(t) : null
+                        M6((0, r.useMemo)((function() {
+                            return n ? x6.community(t) : null
                         }), [n, t]), (function(e) {
                             e.some((function(e) {
-                                return e.signalType === D6
+                                return e.signalType === k6
                             })) && o()
                         }))
                     }({
@@ -87651,12 +87804,12 @@
                         R = (0, r.useRef)(null),
                         O = (0, kY.useHistory)(),
                         F = (0, s.useSystemFeedback)().systemFeedbackService,
-                        T = Toe({
+                        T = qoe({
                             groupId: i
                         }),
                         N = T.trackReactionToggled,
                         M = T.trackDeleteBannerShown,
-                        B = Moe(i, n.id, g);
+                        B = _oe(i, n.id, g);
                     (0, r.useEffect)((function() {
                         p && R.current && R.current.offsetHeight > 400 && k(!0)
                     }), [p]);
@@ -87671,11 +87824,11 @@
                             })
                         }), [i]),
                         U = (0, r.useCallback)((function() {
-                            return Jae(void 0, void 0, void 0, (function() {
-                                return Xae(this, (function(e) {
+                            return iue(void 0, void 0, void 0, (function() {
+                                return aue(this, (function(e) {
                                     switch (e.label) {
                                         case 0:
-                                            return e.trys.push([0, 2, , 3]), [4, Ioe(i, n.id)];
+                                            return e.trys.push([0, 2, , 3]), [4, Roe(i, n.id)];
                                         case 1:
                                             return e.sent(), F.success(m("Message.AnnouncementDeleteSuccess")), M({
                                                 bannerMessageShown: "Message.AnnouncementDeleteSuccess"
@@ -87691,20 +87844,20 @@
                             }))
                         }), [i, n, l, F, m, M]),
                         L = (0, r.useCallback)((function() {
-                            v ? v(n) : O.push(ooe.routes.editAnnouncement, {
+                            v ? v(n) : O.push(poe.routes.editAnnouncement, {
                                 announcement: n
                             })
                         }), [n, O, v]),
                         q = (0, r.useCallback)((function(e, t) {
-                            return Jae(void 0, void 0, Promise, (function() {
-                                return Xae(this, (function(n) {
+                            return iue(void 0, void 0, Promise, (function() {
+                                return aue(this, (function(n) {
                                     switch (n.label) {
                                         case 0:
-                                            return n.trys.push([0, 5, , 6]), t ? [4, Doe(i, y, b, e)] : [3, 2];
+                                            return n.trys.push([0, 5, , 6]), t ? [4, Ooe(i, y, b, e)] : [3, 2];
                                         case 1:
                                             return n.sent(), [3, 4];
                                         case 2:
-                                            return [4, Coe(i, y, b, e)];
+                                            return [4, Foe(i, y, b, e)];
                                         case 3:
                                             n.sent(), n.label = 4;
                                         case 4:
@@ -87730,7 +87883,7 @@
                         _ = A.AnnouncementsRichTextRead && !!E.slate,
                         V = (0, r.useMemo)((function() {
                             if (_) {
-                                var t = (0, Yoe.renderToStaticMarkup)(o().createElement(W5, {
+                                var t = (0, rie.renderToStaticMarkup)(o().createElement(W5, {
                                     content: E
                                 }));
                                 return void 0 !== e.Linkify ? e.Linkify.String(t) : t
@@ -87747,7 +87900,7 @@
                         className: "announcement-display gap-large",
                         "data-testid": "announcement-display",
                         ref: B
-                    }, o().createElement(zoe, {
+                    }, o().createElement($oe, {
                         announcement: n,
                         groupId: i,
                         canCreateAnnouncements: !!c,
@@ -87789,12 +87942,12 @@
                         className: "announcement-display-show-more",
                         type: "button",
                         onClick: j
-                    }, m("Action.ShowMore")))), a.displayMarketplaceEmbed && o().createElement(uie, {
+                    }, m("Action.ShowMore")))), a.displayMarketplaceEmbed && o().createElement(mie, {
                         content: n.originalContent.plainText || "",
                         groupId: i
-                    }), C && x && o().createElement($ae, {
+                    }), C && x && o().createElement(oue, {
                         groupId: i,
-                        vertical: ooe.customFormsVertical,
+                        vertical: poe.customFormsVertical,
                         formId: C,
                         announcementId: y,
                         formDefinition: n.customFormDefinition,
@@ -87802,22 +87955,22 @@
                         translate: m
                     }), o().createElement("div", {
                         className: "announcement-display-reaction-row"
-                    }, o().createElement(Roe, {
+                    }, o().createElement(Goe, {
                         initialReactions: I,
                         onToggleReaction: q,
                         viewOnly: z
                     })))
-                }), Boe),
-                eue = function(e) {
+                }), Voe),
+                sue = function(e) {
                     return ["getLatestAnnouncement", e]
                 },
-                tue = function(e, t) {
+                lue = function(e, t) {
                     return ["announcement", e, t]
                 },
-                nue = function(e) {
+                cue = function(e) {
                     return ["getUserDrafts", e]
                 },
-                rue = function(e) {
+                due = function(e) {
                     var t, n = e.groupId,
                         r = e.policies,
                         i = e.isGroupMember,
@@ -87827,9 +87980,9 @@
                         d = (0, l.useQueryClient)(),
                         p = (0, u.useTranslation)().translate,
                         f = (0, l.useQuery)({
-                            queryKey: tue(n, s),
+                            queryKey: lue(n, s),
                             queryFn: function() {
-                                return hoe(n, s)
+                                return Coe(n, s)
                             }
                         }),
                         v = f.data,
@@ -87838,9 +87991,9 @@
                         g = f.refetch,
                         y = p("Heading.Announcements"),
                         b = function() {
-                            return c.push(Yre.announcementsRoute)
+                            return c.push(roe.announcementsRoute)
                         };
-                    return t = m ? o().createElement(x9, {
+                    return t = m ? o().createElement(O9, {
                         iconClassName: "icon-status-alert",
                         heading: p("NetworkError"),
                         message: p("Error.ReloadingSubtitle"),
@@ -87848,7 +88001,7 @@
                         onClick: function() {
                             return g()
                         }
-                    }) : h ? o().createElement(gee, null) : v ? o().createElement(Zae, {
+                    }) : h ? o().createElement(Dee, null) : v ? o().createElement(uue, {
                         announcement: v,
                         groupId: n,
                         policies: r,
@@ -87860,16 +88013,16 @@
                         },
                         onDeleted: function() {
                             d.removeQueries({
-                                queryKey: tue(n, s)
+                                queryKey: lue(n, s)
                             }), b()
                         },
                         onEditAnnouncement: function(e) {
-                            return c.push(Yre.getAnnouncementEditRoute(e.id), {
+                            return c.push(roe.getAnnouncementEditRoute(e.id), {
                                 announcement: e
                             })
                         },
                         locationTab: "posts"
-                    }) : o().createElement(x9, {
+                    }) : o().createElement(O9, {
                         iconClassName: "icon-status-alert",
                         heading: p("Heading.PostUnavailable"),
                         message: p("Description.PostUnavailable"),
@@ -87877,12 +88030,12 @@
                         onClick: b
                     }), o().createElement("div", {
                         className: "group-announcement-detail"
-                    }, o().createElement(jne, {
+                    }, o().createElement(Vne, {
                         categoryName: y,
-                        backRoute: Yre.announcementsRoute,
+                        backRoute: roe.announcementsRoute,
                         postTitle: null == v ? void 0 : v.title,
                         containerClassName: "hide-on-native"
-                    }), o().createElement(Bne, {
+                    }), o().createElement(_ne, {
                         headerText: y,
                         onBack: b,
                         containerClassName: "show-on-native"
@@ -87890,15 +88043,15 @@
                         className: "group-section-content"
                     }, t))
                 },
-                oue = "copy",
-                iue = function() {
-                    return iue = Object.assign || function(e) {
+                pue = "copy",
+                fue = function() {
+                    return fue = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, iue.apply(this, arguments)
+                    }, fue.apply(this, arguments)
                 },
-                aue = function(e, t) {
+                vue = function(e, t) {
                     var n = {};
                     for (var r in e) Object.prototype.hasOwnProperty.call(e, r) && t.indexOf(r) < 0 && (n[r] = e[r]);
                     if (null != e && "function" == typeof Object.getOwnPropertySymbols) {
@@ -87907,7 +88060,7 @@
                     }
                     return n
                 },
-                uue = function(e) {
+                mue = function(e) {
                     var t = e.className,
                         n = e.onChange,
                         i = e.children,
@@ -87915,7 +88068,7 @@
                         u = e.onValidationError,
                         s = e.blockOnValidationError,
                         l = void 0 !== s && s,
-                        c = aue(e, ["className", "onChange", "children", "validation", "onValidationError", "blockOnValidationError"]),
+                        c = vue(e, ["className", "onChange", "children", "validation", "onValidationError", "blockOnValidationError"]),
                         d = (0, r.useRef)(null),
                         p = function() {
                             d.current && d.current.click()
@@ -87935,7 +88088,7 @@
                         v = function(e) {
                             var t = !0;
                             if (a) {
-                                var r = Vte(e, a);
+                                var r = $te(e, a);
                                 r.length > 0 && (u && u(r), l && (t = !1))
                             }
                             t && n && n(e)
@@ -87946,11 +88099,11 @@
                             var t = e.dataTransfer.files;
                             v(t)
                         }), (function(e) {
-                            e.preventDefault(), e.dataTransfer.effectAllowed = oue
+                            e.preventDefault(), e.dataTransfer.effectAllowed = pue
                         })) : null;
                     return o().createElement("div", {
                         className: m
-                    }, h, o().createElement("input", iue({}, c, {
+                    }, h, o().createElement("input", fue({}, c, {
                         ref: d,
                         type: "file",
                         className: "file-upload-input hidden",
@@ -87961,9 +88114,9 @@
                         accept: (null == a ? void 0 : a.accept) || void 0
                     })))
                 };
-            uue.displayName = "FileUpload";
-            var sue = uue,
-                lue = function() {
+            mue.displayName = "FileUpload";
+            var hue = mue,
+                gue = function() {
                     var t = (0, r.useState)(!1),
                         n = t[0],
                         o = t[1];
@@ -87973,7 +88126,7 @@
                         isPhone: n
                     }
                 },
-                cue = function(e) {
+                yue = function(e) {
                     var t = e.onChange,
                         n = e.validation,
                         i = e.onValidationError,
@@ -88008,7 +88161,7 @@
                         N = (0, r.useState)(w),
                         M = N[0],
                         B = N[1],
-                        j = lue().isPhone;
+                        j = gue().isPhone;
                     (0, r.useEffect)((function() {
                         T(h)
                     }), [h]), (0, r.useEffect)((function() {
@@ -88023,11 +88176,11 @@
                         _ = function(e) {
                             e.stopPropagation(), T(null), B(null), null == S || S()
                         };
-                    return o().createElement(sue, {
+                    return o().createElement(hue, {
                         onChange: function(e) {
                             if (e && e.length > 0) {
                                 var n = e[0];
-                                if (zte(n)) {
+                                if (Qte(n)) {
                                     var r = new FileReader;
                                     r.onload = function(e) {
                                         var t;
@@ -88061,7 +88214,7 @@
                         })), A && o().createElement("div", {
                             className: "file-upload-progress-overlay",
                             "aria-live": "polite"
-                        }, o().createElement(Nte, {
+                        }, o().createElement(Lte, {
                             variant: "Indeterminate",
                             size: "Medium",
                             ariaLabel: R("Message.Uploading")
@@ -88107,45 +88260,45 @@
                         }, R(j ? v : p))))
                     }))
                 };
-            cue.displayName = "FileUpload";
-            var due, pue = (0, u.withTranslations)(cue, uH),
-                fue = function(e) {
-                    return yV(e.plainText || "", "Error.AnnouncementTitleValidationMinLength", ooe.validation.titleMinLength)
+            yue.displayName = "FileUpload";
+            var bue, wue = (0, u.withTranslations)(yue, uH),
+                Eue = function(e) {
+                    return yV(e.plainText || "", "Error.AnnouncementTitleValidationMinLength", poe.validation.titleMinLength)
                 },
-                vue = function(e) {
-                    return e.slate ? bV(e.slate, "Error.AnnouncementContentValidationMinLength", "Error.AnnouncementContentValidationMaxLength", ooe.validation.contentMinLength, ooe.validation.contentMaxLength) : yV(e.plainText || "", "Error.AnnouncementContentValidationMinLength", ooe.validation.contentMinLength)
+                Iue = function(e) {
+                    return e.slate ? bV(e.slate, "Error.AnnouncementContentValidationMinLength", "Error.AnnouncementContentValidationMaxLength", poe.validation.contentMinLength, poe.validation.contentMaxLength) : yV(e.plainText || "", "Error.AnnouncementContentValidationMinLength", poe.validation.contentMinLength)
                 };
             ! function(e) {
                 e.Unknown = "Unknown", e.Approved = "Approved", e.Pending = "PendingReview", e.Rejected = "AssetRejected"
-            }(due || (due = {}));
-            var mue = new Set(Object.values(due)),
-                hue = function(e) {
-                    return e && mue.has(e) ? e : due.Unknown
-                },
-                gue = function(e) {
-                    return e === due.Pending
-                },
-                yue = function(e, t) {
-                    return !! function(e) {
-                        return e === due.Approved
-                    }(t) || null == (null == e ? void 0 : e.assetId) && t === due.Unknown
-                },
-                bue = "Error.AnnouncementModerated",
-                wue = "Error.AnnouncementAssetNotApproved",
-                Eue = "NetworkError",
-                Iue = new Set([13, 14, 15]),
-                Due = function(e) {
-                    var t, n, r, o = null === (r = null === (n = null === (t = e.data) || void 0 === t ? void 0 : t.errors) || void 0 === n ? void 0 : n[0]) || void 0 === r ? void 0 : r.code;
-                    return void 0 !== o && Iue.has(o) ? bue : e.status === _j.httpResponseCodes.serviceUnavailable || 408 === e.status ? "Description.CommunityDialogError" : Eue
-                },
+            }(bue || (bue = {}));
+            var Due = new Set(Object.values(bue)),
                 Cue = function(e) {
+                    return e && Due.has(e) ? e : bue.Unknown
+                },
+                xue = function(e) {
+                    return e === bue.Pending
+                },
+                Aue = function(e, t) {
+                    return !! function(e) {
+                        return e === bue.Approved
+                    }(t) || null == (null == e ? void 0 : e.assetId) && t === bue.Unknown
+                },
+                Sue = "Error.AnnouncementModerated",
+                Pue = "Error.AnnouncementAssetNotApproved",
+                kue = "NetworkError",
+                Rue = new Set([13, 14, 15]),
+                Oue = function(e) {
+                    var t, n, r, o = null === (r = null === (n = null === (t = e.data) || void 0 === t ? void 0 : t.errors) || void 0 === n ? void 0 : n[0]) || void 0 === r ? void 0 : r.code;
+                    return void 0 !== o && Rue.has(o) ? Sue : e.status === _j.httpResponseCodes.serviceUnavailable || 408 === e.status ? "Description.CommunityDialogError" : kue
+                },
+                Fue = function(e) {
                     var t = e.draftForModeration,
                         n = e.draftModerationState,
                         r = e.hasAssetModerationError,
                         o = e.isModerationPolling;
-                    return !r && (!o && yue(null != t ? t : null, n))
+                    return !r && (!o && Aue(null != t ? t : null, n))
                 },
-                xue = function(e) {
+                Tue = function(e) {
                     var t = e.isSaveDisabled,
                         n = e.isSaveLoading,
                         r = e.isPublishDisabled,
@@ -88153,7 +88306,7 @@
                         a = e.isEditingPublished,
                         u = void 0 !== a && a,
                         s = e.translate,
-                        l = Xne(),
+                        l = ire(),
                         c = l.isLoading,
                         d = l.onSubmitClicked,
                         p = l.onBack,
@@ -88161,9 +88314,9 @@
                         v = l.errorKey,
                         m = l.showInlineProgress,
                         h = l.inlineProgressText;
-                    return o().createElement(o().Fragment, null, o().createElement(E7, null, v ? o().createElement($ne, {
+                    return o().createElement(o().Fragment, null, o().createElement(S7, null, v ? o().createElement(rre, {
                         message: s(v)
-                    }) : null, m && o().createElement(Nte, {
+                    }) : null, m && o().createElement(Lte, {
                         variant: "Indeterminate",
                         size: "Small",
                         text: h,
@@ -88216,373 +88369,18 @@
                         style: {
                             minHeight: "48px"
                         }
-                    }, m && o().createElement(Nte, {
+                    }, m && o().createElement(Lte, {
                         variant: "Indeterminate",
                         size: "Medium",
                         text: h,
                         textClassNames: ["text-body-large"],
                         ariaLabel: s("Label.Loading")
-                    }), v ? o().createElement($ne, {
+                    }), v ? o().createElement(rre, {
                         message: s(v)
                     }) : null)))
                 };
-            xue.displayName = "AnnouncementFooterControls";
-            var Aue = (0, u.withTranslations)(xue, Boe),
-                Sue = function(e, t, n, r) {
-                    return new(n || (n = Promise))((function(o, i) {
-                        function a(e) {
-                            try {
-                                s(r.next(e))
-                            } catch (e) {
-                                i(e)
-                            }
-                        }
-
-                        function u(e) {
-                            try {
-                                s(r.throw(e))
-                            } catch (e) {
-                                i(e)
-                            }
-                        }
-
-                        function s(e) {
-                            var t;
-                            e.done ? o(e.value) : (t = e.value, t instanceof n ? t : new n((function(e) {
-                                e(t)
-                            }))).then(a, u)
-                        }
-                        s((r = r.apply(e, t || [])).next())
-                    }))
-                },
-                Pue = function(e, t) {
-                    var n, r, o, i = {
-                            label: 0,
-                            sent: function() {
-                                if (1 & o[0]) throw o[1];
-                                return o[1]
-                            },
-                            trys: [],
-                            ops: []
-                        },
-                        a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
-                    return a.next = u(0), a.throw = u(1), a.return = u(2), "function" == typeof Symbol && (a[Symbol.iterator] = function() {
-                        return this
-                    }), a;
-
-                    function u(u) {
-                        return function(s) {
-                            return function(u) {
-                                if (n) throw new TypeError("Generator is already executing.");
-                                for (; a && (a = 0, u[0] && (i = 0)), i;) try {
-                                    if (n = 1, r && (o = 2 & u[0] ? r.return : u[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, u[1])).done) return o;
-                                    switch (r = 0, o && (u = [2 & u[0], o.value]), u[0]) {
-                                        case 0:
-                                        case 1:
-                                            o = u;
-                                            break;
-                                        case 4:
-                                            return i.label++, {
-                                                value: u[1],
-                                                done: !1
-                                            };
-                                        case 5:
-                                            i.label++, r = u[1], u = [0];
-                                            continue;
-                                        case 7:
-                                            u = i.ops.pop(), i.trys.pop();
-                                            continue;
-                                        default:
-                                            if (!(o = i.trys, (o = o.length > 0 && o[o.length - 1]) || 6 !== u[0] && 2 !== u[0])) {
-                                                i = 0;
-                                                continue
-                                            }
-                                            if (3 === u[0] && (!o || u[1] > o[0] && u[1] < o[3])) {
-                                                i.label = u[1];
-                                                break
-                                            }
-                                            if (6 === u[0] && i.label < o[1]) {
-                                                i.label = o[1], o = u;
-                                                break
-                                            }
-                                            if (o && i.label < o[2]) {
-                                                i.label = o[2], i.ops.push(u);
-                                                break
-                                            }
-                                            o[2] && i.ops.pop(), i.trys.pop();
-                                            continue
-                                    }
-                                    u = t.call(e, i)
-                                } catch (e) {
-                                    u = [6, e], r = 0
-                                } finally {
-                                    n = o = 0
-                                }
-                                if (5 & u[0]) throw u[1];
-                                return {
-                                    value: u[0] ? u[1] : void 0,
-                                    done: !0
-                                }
-                            }([u, s])
-                        }
-                    }
-                },
-                kue = function(e, t) {
-                    var n, o = (0, kY.useLocation)(),
-                        i = null != t ? t : null === (n = o.state) || void 0 === n ? void 0 : n.announcement,
-                        a = (0, r.useRef)(null),
-                        u = (0, r.useState)(!1),
-                        s = u[0],
-                        c = u[1],
-                        d = (0, l.useQuery)({
-                            queryKey: nue(e),
-                            queryFn: function() {
-                                return Sue(void 0, void 0, Promise, (function() {
-                                    var t, n, r;
-                                    return Pue(this, (function(o) {
-                                        switch (o.label) {
-                                            case 0:
-                                                return [4, goe(e)];
-                                            case 1:
-                                                return t = o.sent(), [2, null !== (r = null === (n = t.data) || void 0 === n ? void 0 : n[0]) && void 0 !== r ? r : null]
-                                        }
-                                    }))
-                                }))
-                            },
-                            enabled: !i,
-                            refetchOnMount: "always",
-                            refetchInterval: function(e) {
-                                return !s && function(e) {
-                                    var t = hue(null == e ? void 0 : e.moderationState);
-                                    return !!gue(t) && 2500
-                                }(e)
-                            },
-                            refetchIntervalInBackground: !1,
-                            retry: !1
-                        }),
-                        p = d.data,
-                        f = d.isFetchedAfterMount,
-                        v = gue(hue(null == p ? void 0 : p.moderationState));
-                    (0, r.useEffect)((function() {
-                        if (!v) return a.current = null, void c(!1);
-                        null == a.current && (a.current = Date.now() + 3e5);
-                        var e = a.current - Date.now();
-                        if (!(e <= 0)) {
-                            var t = window.setTimeout((function() {
-                                return c(!0)
-                            }), e);
-                            return function() {
-                                return window.clearTimeout(t)
-                            }
-                        }
-                        c(!0)
-                    }), [v]);
-                    var m = (0, r.useMemo)((function() {
-                        return i ? {
-                            kind: "editPublished",
-                            announcement: i
-                        } : f ? p ? {
-                            kind: "editDraft",
-                            draft: p
-                        } : {
-                            kind: "newDraft"
-                        } : {
-                            kind: "loading"
-                        }
-                    }), [i, f, p]);
-                    return {
-                        mode: m,
-                        isDraftsLoading: "loading" === m.kind,
-                        isModerationTimedOut: s
-                    }
-                },
-                Rue = function(e) {
-                    void 0 === e && (e = {});
-                    var t = (0, r.useCallback)((function(t) {
-                            return Vte(t, e)
-                        }), [e]),
-                        n = (0, r.useCallback)((function(t) {
-                            return _te(t, e)
-                        }), [e]),
-                        o = (0, r.useCallback)((function(t) {
-                            return function(e, t) {
-                                return void 0 === t && (t = {}), 0 === Vte(e, t).length
-                            }(t, e)
-                        }), [e]);
-                    return (0, r.useMemo)((function() {
-                        return {
-                            validate: t,
-                            validateSingle: n,
-                            isValid: o,
-                            options: e
-                        }
-                    }), [t, n, o, e])
-                },
-                Oue = function() {
-                    return Oue = Object.assign || function(e) {
-                        for (var t, n = 1, r = arguments.length; n < r; n++)
-                            for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
-                        return e
-                    }, Oue.apply(this, arguments)
-                },
-                Fue = function() {
-                    return Fue = Object.assign || function(e) {
-                        for (var t, n = 1, r = arguments.length; n < r; n++)
-                            for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
-                        return e
-                    }, Fue.apply(this, arguments)
-                },
-                Tue = {
-                    files: [],
-                    errors: []
-                },
-                Nue = function(e) {
-                    void 0 === e && (e = {});
-                    var t = e.validation,
-                        n = void 0 === t ? {} : t,
-                        o = e.preview,
-                        i = void 0 === o ? {} : o,
-                        a = e.autoValidate,
-                        u = void 0 === a || a,
-                        s = e.autoPreview,
-                        l = void 0 === s || s,
-                        c = e.onFilesSelected,
-                        d = e.onValidationComplete,
-                        p = (0, r.useState)(Tue),
-                        f = p[0],
-                        v = p[1],
-                        m = Rue(n),
-                        h = m.validate,
-                        g = m.isValid,
-                        y = function(e) {
-                            void 0 === e && (e = {});
-                            var t = e.enableImagePreview,
-                                n = void 0 === t || t,
-                                o = (0, r.useState)([]),
-                                i = o[0],
-                                a = o[1],
-                                u = (0, r.useCallback)((function(e) {
-                                    var t = e.map((function(e) {
-                                        return {
-                                            id: _j.uuidService.generateRandomUuid(),
-                                            file: e,
-                                            previewUrl: null,
-                                            isLoading: !0,
-                                            error: null
-                                        }
-                                    }));
-                                    a(t), n && t.forEach((function(e) {
-                                        if (zte(e.file)) {
-                                            var t = new FileReader;
-                                            t.onload = function(t) {
-                                                var n, r = null === (n = t.target) || void 0 === n ? void 0 : n.result;
-                                                "string" == typeof r && a((function(t) {
-                                                    return t.map((function(t) {
-                                                        return t.id === e.id ? Oue(Oue({}, t), {
-                                                            previewUrl: r,
-                                                            isLoading: !1
-                                                        }) : t
-                                                    }))
-                                                }))
-                                            }, t.onerror = function() {
-                                                a((function(t) {
-                                                    return t.map((function(t) {
-                                                        return t.id === e.id ? Oue(Oue({}, t), {
-                                                            error: "Failed to load preview",
-                                                            isLoading: !1
-                                                        }) : t
-                                                    }))
-                                                }))
-                                            }, t.readAsDataURL(e.file)
-                                        } else a((function(t) {
-                                            return t.map((function(t) {
-                                                return t.id === e.id ? Oue(Oue({}, t), {
-                                                    isLoading: !1
-                                                }) : t
-                                            }))
-                                        }))
-                                    }))
-                                }), [n]),
-                                s = (0, r.useCallback)((function() {
-                                    i.forEach((function(e) {
-                                        e.previewUrl && e.previewUrl.startsWith("blob:") && URL.revokeObjectURL(e.previewUrl)
-                                    })), a([])
-                                }), [i]),
-                                l = (0, r.useCallback)((function(e) {
-                                    a((function(t) {
-                                        var n = t.find((function(t) {
-                                            return t.id === e
-                                        }));
-                                        return (null == n ? void 0 : n.previewUrl) && n.previewUrl.startsWith("blob:") && URL.revokeObjectURL(n.previewUrl), t.filter((function(t) {
-                                            return t.id !== e
-                                        }))
-                                    }))
-                                }), []);
-                            return (0, r.useEffect)((function() {
-                                return function() {
-                                    i.forEach((function(e) {
-                                        e.previewUrl && e.previewUrl.startsWith("blob:") && URL.revokeObjectURL(e.previewUrl)
-                                    }))
-                                }
-                            }), [i]), {
-                                previews: i,
-                                generatePreviews: u,
-                                clearPreviews: s,
-                                removePreview: l
-                            }
-                        }(i),
-                        b = y.previews,
-                        w = y.generatePreviews,
-                        E = y.clearPreviews,
-                        I = (0, r.useCallback)((function(e) {
-                            var t = e instanceof FileList ? Array.from(e) : e;
-                            if (v((function(e) {
-                                    return Fue(Fue({}, e), {
-                                        files: t,
-                                        errors: []
-                                    })
-                                })), c && c(t), u) {
-                                var n = h(t);
-                                v((function(e) {
-                                    return Fue(Fue({}, e), {
-                                        errors: n
-                                    })
-                                })), d && d(n)
-                            }
-                            l && w(t)
-                        }), [h, u, l, c, d, w]),
-                        D = (0, r.useCallback)((function() {
-                            var e = f.files,
-                                t = h(e);
-                            return v((function(e) {
-                                return Fue(Fue({}, e), {
-                                    errors: t
-                                })
-                            })), d && d(t), t
-                        }), [f.files, h, d]),
-                        C = (0, r.useCallback)((function() {
-                            v(Tue), E()
-                        }), [E]),
-                        x = (0, r.useCallback)((function() {
-                            C(), v(Tue)
-                        }), [C]),
-                        A = (0, r.useMemo)((function() {
-                            return f.files.length > 0
-                        }), [f.files.length]),
-                        S = (0, r.useMemo)((function() {
-                            return 0 !== f.files.length && g(f.files)
-                        }), [f.files, g]);
-                    return {
-                        state: f,
-                        selectFiles: I,
-                        validateFiles: D,
-                        clearFiles: C,
-                        reset: x,
-                        hasFiles: A,
-                        isValid: S,
-                        previews: b
-                    }
-                },
+            Tue.displayName = "AnnouncementFooterControls";
+            var Nue = (0, u.withTranslations)(Tue, Voe),
                 Mue = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
@@ -88682,49 +88480,263 @@
                         }
                     }
                 },
-                jue = {
-                    accept: "image/png, image/jpeg",
-                    maxFileSize: 10485760,
-                    maxFiles: 1
-                },
-                Gue = function(e, t) {
-                    if (Object.is(e, t)) return !0;
-                    if ("object" != typeof e || null === e || "object" != typeof t || null === t) return !1;
-                    var n = Object.keys(e),
-                        r = Object.keys(t);
-                    return n.length === r.length && n.every((function(n) {
-                        return Object.is(e[n], t[n])
-                    }))
-                },
-                Uue = function(e) {
-                    var t = e.mode,
-                        n = e.isModerationTimedOut,
-                        o = void 0 !== n && n,
-                        i = (0, r.useState)(null),
-                        a = i[0],
-                        u = i[1],
-                        s = (0, r.useCallback)((function() {
-                            u(null)
-                        }), []),
-                        l = "editDraft" === t.kind ? t.draft : null;
-                    return (0, r.useEffect)((function() {
-                        o ? u(Eue) : l ? ! function(e) {
-                            return e === due.Rejected
-                        }(hue(l.moderationState)) ? u(null) : u(wue) : u(null)
-                    }), [l, o]), {
-                        errorKey: a,
-                        clearErrorKey: s
+                jue = function(e, t) {
+                    var n, o = (0, kY.useLocation)(),
+                        i = null != t ? t : null === (n = o.state) || void 0 === n ? void 0 : n.announcement,
+                        a = (0, r.useRef)(null),
+                        u = (0, r.useState)(!1),
+                        s = u[0],
+                        c = u[1],
+                        d = (0, l.useQuery)({
+                            queryKey: cue(e),
+                            queryFn: function() {
+                                return Mue(void 0, void 0, Promise, (function() {
+                                    var t, n, r;
+                                    return Bue(this, (function(o) {
+                                        switch (o.label) {
+                                            case 0:
+                                                return [4, xoe(e)];
+                                            case 1:
+                                                return t = o.sent(), [2, null !== (r = null === (n = t.data) || void 0 === n ? void 0 : n[0]) && void 0 !== r ? r : null]
+                                        }
+                                    }))
+                                }))
+                            },
+                            enabled: !i,
+                            refetchOnMount: "always",
+                            refetchInterval: function(e) {
+                                return !s && function(e) {
+                                    var t = Cue(null == e ? void 0 : e.moderationState);
+                                    return !!xue(t) && 2500
+                                }(e)
+                            },
+                            refetchIntervalInBackground: !1,
+                            retry: !1
+                        }),
+                        p = d.data,
+                        f = d.isFetchedAfterMount,
+                        v = xue(Cue(null == p ? void 0 : p.moderationState));
+                    (0, r.useEffect)((function() {
+                        if (!v) return a.current = null, void c(!1);
+                        null == a.current && (a.current = Date.now() + 3e5);
+                        var e = a.current - Date.now();
+                        if (!(e <= 0)) {
+                            var t = window.setTimeout((function() {
+                                return c(!0)
+                            }), e);
+                            return function() {
+                                return window.clearTimeout(t)
+                            }
+                        }
+                        c(!0)
+                    }), [v]);
+                    var m = (0, r.useMemo)((function() {
+                        return i ? {
+                            kind: "editPublished",
+                            announcement: i
+                        } : f ? p ? {
+                            kind: "editDraft",
+                            draft: p
+                        } : {
+                            kind: "newDraft"
+                        } : {
+                            kind: "loading"
+                        }
+                    }), [i, f, p]);
+                    return {
+                        mode: m,
+                        isDraftsLoading: "loading" === m.kind,
+                        isModerationTimedOut: s
                     }
                 },
-                Lue = Roblox.PromptsOrchestrator,
-                que = function() {
-                    return que = Object.assign || function(e) {
+                Gue = function(e) {
+                    void 0 === e && (e = {});
+                    var t = (0, r.useCallback)((function(t) {
+                            return $te(t, e)
+                        }), [e]),
+                        n = (0, r.useCallback)((function(t) {
+                            return Yte(t, e)
+                        }), [e]),
+                        o = (0, r.useCallback)((function(t) {
+                            return function(e, t) {
+                                return void 0 === t && (t = {}), 0 === $te(e, t).length
+                            }(t, e)
+                        }), [e]);
+                    return (0, r.useMemo)((function() {
+                        return {
+                            validate: t,
+                            validateSingle: n,
+                            isValid: o,
+                            options: e
+                        }
+                    }), [t, n, o, e])
+                },
+                Uue = function() {
+                    return Uue = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, que.apply(this, arguments)
+                    }, Uue.apply(this, arguments)
                 },
-                zue = function(e, t, n, r) {
+                Lue = function() {
+                    return Lue = Object.assign || function(e) {
+                        for (var t, n = 1, r = arguments.length; n < r; n++)
+                            for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
+                        return e
+                    }, Lue.apply(this, arguments)
+                },
+                que = {
+                    files: [],
+                    errors: []
+                },
+                zue = function(e) {
+                    void 0 === e && (e = {});
+                    var t = e.validation,
+                        n = void 0 === t ? {} : t,
+                        o = e.preview,
+                        i = void 0 === o ? {} : o,
+                        a = e.autoValidate,
+                        u = void 0 === a || a,
+                        s = e.autoPreview,
+                        l = void 0 === s || s,
+                        c = e.onFilesSelected,
+                        d = e.onValidationComplete,
+                        p = (0, r.useState)(que),
+                        f = p[0],
+                        v = p[1],
+                        m = Gue(n),
+                        h = m.validate,
+                        g = m.isValid,
+                        y = function(e) {
+                            void 0 === e && (e = {});
+                            var t = e.enableImagePreview,
+                                n = void 0 === t || t,
+                                o = (0, r.useState)([]),
+                                i = o[0],
+                                a = o[1],
+                                u = (0, r.useCallback)((function(e) {
+                                    var t = e.map((function(e) {
+                                        return {
+                                            id: _j.uuidService.generateRandomUuid(),
+                                            file: e,
+                                            previewUrl: null,
+                                            isLoading: !0,
+                                            error: null
+                                        }
+                                    }));
+                                    a(t), n && t.forEach((function(e) {
+                                        if (Qte(e.file)) {
+                                            var t = new FileReader;
+                                            t.onload = function(t) {
+                                                var n, r = null === (n = t.target) || void 0 === n ? void 0 : n.result;
+                                                "string" == typeof r && a((function(t) {
+                                                    return t.map((function(t) {
+                                                        return t.id === e.id ? Uue(Uue({}, t), {
+                                                            previewUrl: r,
+                                                            isLoading: !1
+                                                        }) : t
+                                                    }))
+                                                }))
+                                            }, t.onerror = function() {
+                                                a((function(t) {
+                                                    return t.map((function(t) {
+                                                        return t.id === e.id ? Uue(Uue({}, t), {
+                                                            error: "Failed to load preview",
+                                                            isLoading: !1
+                                                        }) : t
+                                                    }))
+                                                }))
+                                            }, t.readAsDataURL(e.file)
+                                        } else a((function(t) {
+                                            return t.map((function(t) {
+                                                return t.id === e.id ? Uue(Uue({}, t), {
+                                                    isLoading: !1
+                                                }) : t
+                                            }))
+                                        }))
+                                    }))
+                                }), [n]),
+                                s = (0, r.useCallback)((function() {
+                                    i.forEach((function(e) {
+                                        e.previewUrl && e.previewUrl.startsWith("blob:") && URL.revokeObjectURL(e.previewUrl)
+                                    })), a([])
+                                }), [i]),
+                                l = (0, r.useCallback)((function(e) {
+                                    a((function(t) {
+                                        var n = t.find((function(t) {
+                                            return t.id === e
+                                        }));
+                                        return (null == n ? void 0 : n.previewUrl) && n.previewUrl.startsWith("blob:") && URL.revokeObjectURL(n.previewUrl), t.filter((function(t) {
+                                            return t.id !== e
+                                        }))
+                                    }))
+                                }), []);
+                            return (0, r.useEffect)((function() {
+                                return function() {
+                                    i.forEach((function(e) {
+                                        e.previewUrl && e.previewUrl.startsWith("blob:") && URL.revokeObjectURL(e.previewUrl)
+                                    }))
+                                }
+                            }), [i]), {
+                                previews: i,
+                                generatePreviews: u,
+                                clearPreviews: s,
+                                removePreview: l
+                            }
+                        }(i),
+                        b = y.previews,
+                        w = y.generatePreviews,
+                        E = y.clearPreviews,
+                        I = (0, r.useCallback)((function(e) {
+                            var t = e instanceof FileList ? Array.from(e) : e;
+                            if (v((function(e) {
+                                    return Lue(Lue({}, e), {
+                                        files: t,
+                                        errors: []
+                                    })
+                                })), c && c(t), u) {
+                                var n = h(t);
+                                v((function(e) {
+                                    return Lue(Lue({}, e), {
+                                        errors: n
+                                    })
+                                })), d && d(n)
+                            }
+                            l && w(t)
+                        }), [h, u, l, c, d, w]),
+                        D = (0, r.useCallback)((function() {
+                            var e = f.files,
+                                t = h(e);
+                            return v((function(e) {
+                                return Lue(Lue({}, e), {
+                                    errors: t
+                                })
+                            })), d && d(t), t
+                        }), [f.files, h, d]),
+                        C = (0, r.useCallback)((function() {
+                            v(que), E()
+                        }), [E]),
+                        x = (0, r.useCallback)((function() {
+                            C(), v(que)
+                        }), [C]),
+                        A = (0, r.useMemo)((function() {
+                            return f.files.length > 0
+                        }), [f.files.length]),
+                        S = (0, r.useMemo)((function() {
+                            return 0 !== f.files.length && g(f.files)
+                        }), [f.files, g]);
+                    return {
+                        state: f,
+                        selectFiles: I,
+                        validateFiles: D,
+                        clearFiles: C,
+                        reset: x,
+                        hasFiles: A,
+                        isValid: S,
+                        previews: b
+                    }
+                },
+                _ue = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
                             try {
@@ -88751,7 +88763,7 @@
                         s((r = r.apply(e, t || [])).next())
                     }))
                 },
-                _ue = function(e, t) {
+                Vue = function(e, t) {
                     var n, r, o, i = {
                             label: 0,
                             sent: function() {
@@ -88822,152 +88834,49 @@
                             }([u, s])
                         }
                     }
-                };
-            var Vue = function() {
-                    return Vue = Object.assign || function(e) {
+                },
+                Wue = {
+                    accept: "image/png, image/jpeg",
+                    maxFileSize: 10485760,
+                    maxFiles: 1
+                },
+                Hue = function(e, t) {
+                    if (Object.is(e, t)) return !0;
+                    if ("object" != typeof e || null === e || "object" != typeof t || null === t) return !1;
+                    var n = Object.keys(e),
+                        r = Object.keys(t);
+                    return n.length === r.length && n.every((function(n) {
+                        return Object.is(e[n], t[n])
+                    }))
+                },
+                Kue = function(e) {
+                    var t = e.mode,
+                        n = e.isModerationTimedOut,
+                        o = void 0 !== n && n,
+                        i = (0, r.useState)(null),
+                        a = i[0],
+                        u = i[1],
+                        s = (0, r.useCallback)((function() {
+                            u(null)
+                        }), []),
+                        l = "editDraft" === t.kind ? t.draft : null;
+                    return (0, r.useEffect)((function() {
+                        o ? u(kue) : l ? ! function(e) {
+                            return e === bue.Rejected
+                        }(Cue(l.moderationState)) ? u(null) : u(Pue) : u(null)
+                    }), [l, o]), {
+                        errorKey: a,
+                        clearErrorKey: s
+                    }
+                },
+                Que = Roblox.PromptsOrchestrator,
+                Yue = function() {
+                    return Yue = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, Vue.apply(this, arguments)
+                    }, Yue.apply(this, arguments)
                 },
-                Wue = function(e) {
-                    return o().createElement(rh, {
-                        className: "flex flex-col gap-y-small"
-                    }, e)
-                },
-                Hue = function(e) {
-                    return o().createElement(ih, null, e)
-                },
-                Kue = function(e) {
-                    return e.preventDefault()
-                },
-                Que = function(e) {
-                    var t, n = e.groupId,
-                        i = e.vertical,
-                        a = e.onPollCreated,
-                        u = e.onPollRemoved,
-                        s = e.translate,
-                        c = e.existingFormId,
-                        d = e.isReadOnly,
-                        p = void 0 !== d && d,
-                        f = (0, r.useState)(!1),
-                        v = f[0],
-                        m = f[1],
-                        h = (0, r.useState)(null),
-                        g = h[0],
-                        y = h[1],
-                        b = (0, r.useState)(!1),
-                        w = b[0],
-                        E = b[1],
-                        I = (0, l.useQuery)({
-                            queryKey: qae(n, null != c ? c : 0),
-                            queryFn: function() {
-                                return Gae(n, i, c)
-                            },
-                            enabled: !!c,
-                            select: function(e) {
-                                return e.form
-                            }
-                        }).data,
-                        D = w ? null : null !== (t = null != g ? g : I) && void 0 !== t ? t : null,
-                        C = function(e) {
-                            var t = e.groupId,
-                                n = e.vertical,
-                                r = e.onSuccess,
-                                o = e.onError;
-                            return (0, l.useMutation)({
-                                mutationFn: function(e) {
-                                    return jae(t, n, e)
-                                },
-                                onSuccess: r,
-                                onError: o
-                            })
-                        }({
-                            groupId: n,
-                            vertical: i,
-                            onSuccess: function(e) {
-                                E(!1), y(e), m(!1), a(e.formId)
-                            }
-                        }),
-                        x = C.mutate,
-                        A = C.reset,
-                        S = C.error,
-                        P = C.isLoading,
-                        k = (0, r.useMemo)((function() {
-                            return Lae(S)
-                        }), [S]),
-                        R = (0, r.useCallback)((function(e) {
-                            GQ.sendEvent(Hae("save")), x(e)
-                        }), [x]),
-                        O = (0, r.useCallback)((function() {
-                            E(!0), y(null), u()
-                        }), [u]),
-                        F = (0, r.useCallback)((function(e) {
-                            e || A(), m(e)
-                        }), [A]),
-                        T = !!D && !p,
-                        N = !p && !D;
-                    return o().createElement("div", {
-                        className: "poll-section"
-                    }, N && o().createElement(qQ, {
-                        metric: Wae(),
-                        isOneTimeEvent: !0
-                    }), o().createElement("div", {
-                        className: "poll-section-header"
-                    }, o().createElement("h5", {
-                        className: "text-content-editor-label"
-                    }, s("Heading.Poll")), T && o().createElement(qQ, {
-                        metric: Hae("remove")
-                    }, o().createElement("button", {
-                        type: "button",
-                        className: "poll-section-remove-btn text-link",
-                        onClick: O
-                    }, s("Action.RemovePoll")))), o().createElement("div", {
-                        className: "poll-section-body radius-medium stroke-standard stroke-contrast-alpha"
-                    }, D ? o().createElement(Pae, {
-                        form: D,
-                        hideDescription: !0,
-                        disabled: !0,
-                        translate: s
-                    }) : !p && o().createElement("div", {
-                        className: "poll-section-placeholder"
-                    }, o().createElement(qQ, {
-                        metric: Hae("create")
-                    }, o().createElement(q, {
-                        variant: "Standard",
-                        size: "Medium",
-                        onClick: function() {
-                            return m(!0)
-                        },
-                        isDisabled: P
-                    }, s("Action.Create"))))), !p && o().createElement(eh, {
-                        open: v,
-                        onOpenChange: F,
-                        size: "Medium",
-                        isModal: !0,
-                        hasCloseAffordance: !0,
-                        closeLabel: "Close"
-                    }, o().createElement(th, Vue({
-                        className: "poll-section-dialog-content"
-                    }, {
-                        onPointerDownOutside: Kue,
-                        onInteractOutside: Kue
-                    }), o().createElement(oh, {
-                        hidden: !0
-                    }, s("Heading.CreatePoll")), o().createElement(Cae, {
-                        onSave: R,
-                        onCancel: function() {
-                            return F(!1)
-                        },
-                        serverErrors: k,
-                        hideDescription: !0,
-                        renderBody: Wue,
-                        renderActions: Hue,
-                        translate: s
-                    }))))
-                };
-            Que.displayName = "PollSection";
-            var Yue = Que,
                 $ue = function(e, t, n, r) {
                     return new(n || (n = Promise))((function(o, i) {
                         function a(e) {
@@ -89066,8 +88975,252 @@
                             }([u, s])
                         }
                     }
+                };
+            var Xue = function() {
+                    return Xue = Object.assign || function(e) {
+                        for (var t, n = 1, r = arguments.length; n < r; n++)
+                            for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
+                        return e
+                    }, Xue.apply(this, arguments)
                 },
-                Xue = function(t) {
+                Zue = function(e) {
+                    return o().createElement(rh, {
+                        className: "flex flex-col gap-y-small"
+                    }, e)
+                },
+                ese = function(e) {
+                    return o().createElement(ih, null, e)
+                },
+                tse = function(e) {
+                    return e.preventDefault()
+                },
+                nse = function(e) {
+                    var t, n = e.groupId,
+                        i = e.vertical,
+                        a = e.onPollCreated,
+                        u = e.onPollRemoved,
+                        s = e.translate,
+                        c = e.existingFormId,
+                        d = e.isReadOnly,
+                        p = void 0 !== d && d,
+                        f = (0, r.useState)(!1),
+                        v = f[0],
+                        m = f[1],
+                        h = (0, r.useState)(null),
+                        g = h[0],
+                        y = h[1],
+                        b = (0, r.useState)(!1),
+                        w = b[0],
+                        E = b[1],
+                        I = (0, l.useQuery)({
+                            queryKey: Yae(n, null != c ? c : 0),
+                            queryFn: function() {
+                                return Hae(n, i, c)
+                            },
+                            enabled: !!c,
+                            select: function(e) {
+                                return e.form
+                            }
+                        }).data,
+                        D = w ? null : null !== (t = null != g ? g : I) && void 0 !== t ? t : null,
+                        C = function(e) {
+                            var t = e.groupId,
+                                n = e.vertical,
+                                r = e.onSuccess,
+                                o = e.onError;
+                            return (0, l.useMutation)({
+                                mutationFn: function(e) {
+                                    return Wae(t, n, e)
+                                },
+                                onSuccess: r,
+                                onError: o
+                            })
+                        }({
+                            groupId: n,
+                            vertical: i,
+                            onSuccess: function(e) {
+                                E(!1), y(e), m(!1), a(e.formId)
+                            }
+                        }),
+                        x = C.mutate,
+                        A = C.reset,
+                        S = C.error,
+                        P = C.isLoading,
+                        k = (0, r.useMemo)((function() {
+                            return Qae(S)
+                        }), [S]),
+                        R = (0, r.useCallback)((function(e) {
+                            GQ.sendEvent(eue("save")), x(e)
+                        }), [x]),
+                        O = (0, r.useCallback)((function() {
+                            E(!0), y(null), u()
+                        }), [u]),
+                        F = (0, r.useCallback)((function(e) {
+                            e || A(), m(e)
+                        }), [A]),
+                        T = !!D && !p,
+                        N = !p && !D;
+                    return o().createElement("div", {
+                        className: "poll-section"
+                    }, N && o().createElement(qQ, {
+                        metric: Zae(),
+                        isOneTimeEvent: !0
+                    }), o().createElement("div", {
+                        className: "poll-section-header"
+                    }, o().createElement("h5", {
+                        className: "text-content-editor-label"
+                    }, s("Heading.Poll")), T && o().createElement(qQ, {
+                        metric: eue("remove")
+                    }, o().createElement("button", {
+                        type: "button",
+                        className: "poll-section-remove-btn text-link",
+                        onClick: O
+                    }, s("Action.RemovePoll")))), o().createElement("div", {
+                        className: "poll-section-body radius-medium stroke-standard stroke-contrast-alpha"
+                    }, D ? o().createElement(Bae, {
+                        form: D,
+                        hideDescription: !0,
+                        disabled: !0,
+                        translate: s
+                    }) : !p && o().createElement("div", {
+                        className: "poll-section-placeholder"
+                    }, o().createElement(qQ, {
+                        metric: eue("create")
+                    }, o().createElement(q, {
+                        variant: "Standard",
+                        size: "Medium",
+                        onClick: function() {
+                            return m(!0)
+                        },
+                        isDisabled: P
+                    }, s("Action.Create"))))), !p && o().createElement(eh, {
+                        open: v,
+                        onOpenChange: F,
+                        size: "Medium",
+                        isModal: !0,
+                        hasCloseAffordance: !0,
+                        closeLabel: "Close"
+                    }, o().createElement(th, Xue({
+                        className: "poll-section-dialog-content"
+                    }, {
+                        onPointerDownOutside: tse,
+                        onInteractOutside: tse
+                    }), o().createElement(oh, {
+                        hidden: !0
+                    }, s("Heading.CreatePoll")), o().createElement(Fae, {
+                        onSave: R,
+                        onCancel: function() {
+                            return F(!1)
+                        },
+                        serverErrors: k,
+                        hideDescription: !0,
+                        renderBody: Zue,
+                        renderActions: ese,
+                        translate: s
+                    }))))
+                };
+            nse.displayName = "PollSection";
+            var rse = nse,
+                ose = function(e, t, n, r) {
+                    return new(n || (n = Promise))((function(o, i) {
+                        function a(e) {
+                            try {
+                                s(r.next(e))
+                            } catch (e) {
+                                i(e)
+                            }
+                        }
+
+                        function u(e) {
+                            try {
+                                s(r.throw(e))
+                            } catch (e) {
+                                i(e)
+                            }
+                        }
+
+                        function s(e) {
+                            var t;
+                            e.done ? o(e.value) : (t = e.value, t instanceof n ? t : new n((function(e) {
+                                e(t)
+                            }))).then(a, u)
+                        }
+                        s((r = r.apply(e, t || [])).next())
+                    }))
+                },
+                ise = function(e, t) {
+                    var n, r, o, i = {
+                            label: 0,
+                            sent: function() {
+                                if (1 & o[0]) throw o[1];
+                                return o[1]
+                            },
+                            trys: [],
+                            ops: []
+                        },
+                        a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
+                    return a.next = u(0), a.throw = u(1), a.return = u(2), "function" == typeof Symbol && (a[Symbol.iterator] = function() {
+                        return this
+                    }), a;
+
+                    function u(u) {
+                        return function(s) {
+                            return function(u) {
+                                if (n) throw new TypeError("Generator is already executing.");
+                                for (; a && (a = 0, u[0] && (i = 0)), i;) try {
+                                    if (n = 1, r && (o = 2 & u[0] ? r.return : u[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, u[1])).done) return o;
+                                    switch (r = 0, o && (u = [2 & u[0], o.value]), u[0]) {
+                                        case 0:
+                                        case 1:
+                                            o = u;
+                                            break;
+                                        case 4:
+                                            return i.label++, {
+                                                value: u[1],
+                                                done: !1
+                                            };
+                                        case 5:
+                                            i.label++, r = u[1], u = [0];
+                                            continue;
+                                        case 7:
+                                            u = i.ops.pop(), i.trys.pop();
+                                            continue;
+                                        default:
+                                            if (!(o = i.trys, (o = o.length > 0 && o[o.length - 1]) || 6 !== u[0] && 2 !== u[0])) {
+                                                i = 0;
+                                                continue
+                                            }
+                                            if (3 === u[0] && (!o || u[1] > o[0] && u[1] < o[3])) {
+                                                i.label = u[1];
+                                                break
+                                            }
+                                            if (6 === u[0] && i.label < o[1]) {
+                                                i.label = o[1], o = u;
+                                                break
+                                            }
+                                            if (o && i.label < o[2]) {
+                                                i.label = o[2], i.ops.push(u);
+                                                break
+                                            }
+                                            o[2] && i.ops.pop(), i.trys.pop();
+                                            continue
+                                    }
+                                    u = t.call(e, i)
+                                } catch (e) {
+                                    u = [6, e], r = 0
+                                } finally {
+                                    n = o = 0
+                                }
+                                if (5 & u[0]) throw u[1];
+                                return {
+                                    value: u[0] ? u[1] : void 0,
+                                    done: !0
+                                }
+                            }([u, s])
+                        }
+                    }
+                },
+                ase = function(t) {
                     var n = t.groupId,
                         i = t.publishedAnnouncement,
                         a = t.onPublished,
@@ -89077,10 +89230,10 @@
                         p = uW("group-details-ui"),
                         f = p.isLoading,
                         v = p.data,
-                        m = Toe({
+                        m = qoe({
                             groupId: n
                         }),
-                        h = kue(n, i),
+                        h = jue(n, i),
                         g = h.mode,
                         y = h.isDraftsLoading,
                         b = h.isModerationTimedOut,
@@ -89106,7 +89259,7 @@
                             }(g)
                         }), [g]),
                         E = "editPublished" === g.kind,
-                        I = Ooe(),
+                        I = Uoe(),
                         D = GV().features,
                         C = function(e) {
                             switch (e.kind) {
@@ -89173,20 +89326,20 @@
                                 }
                             }), []);
                             var b = (0, r.useCallback)((function(t) {
-                                    return Mue(void 0, void 0, void 0, (function() {
+                                    return _ue(void 0, void 0, void 0, (function() {
                                         var n, r, o, i, u, s, c;
-                                        return Bue(this, (function(d) {
+                                        return Vue(this, (function(d) {
                                             switch (d.label) {
                                                 case 0:
                                                     if (0 === t.length) return [2];
                                                     if (n = t[0], !(r = null === (s = null === e.CurrentUser || void 0 === e.CurrentUser ? void 0 : e.CurrentUser.userId) || void 0 === s ? void 0 : s.toString())) return [2];
                                                     null === (c = y.current) || void 0 === c || c.abort(), o = new AbortController, y.current = o, l(!0), p(null), d.label = 1;
                                                 case 1:
-                                                    return d.trys.push([1, 3, , 4]), [4, lne(n, r, "Announcement Image", o.signal)];
+                                                    return d.trys.push([1, 3, , 4]), [4, mne(n, r, "Announcement Image", o.signal)];
                                                 case 2:
                                                     return i = d.sent(), a(i), h.current = !0, l(!1), [3, 4];
                                                 case 3:
-                                                    return (u = d.sent()) instanceof DOMException && "AbortError" === u.name ? [2] : (p(Hte), g.current(), m((function(e) {
+                                                    return (u = d.sent()) instanceof DOMException && "AbortError" === u.name ? [2] : (p(Xte), g.current(), m((function(e) {
                                                         return e + 1
                                                     })), l(!1), [3, 4]);
                                                 case 4:
@@ -89195,8 +89348,8 @@
                                         }))
                                     }))
                                 }), []),
-                                w = Nue({
-                                    validation: jue,
+                                w = zue({
+                                    validation: Wue,
                                     preview: {
                                         enableImagePreview: !0,
                                         maxPreviewWidth: 300,
@@ -89220,7 +89373,7 @@
                                         return e + 1
                                     })), h.current = !0
                                 }), []),
-                                validation: jue
+                                validation: Wue
                             }
                         }({
                             initialAssetId: w.imageAssetId
@@ -89231,7 +89384,7 @@
                             var t = e.current,
                                 n = e.initial,
                                 o = e.isEqual,
-                                i = void 0 === o ? Gue : o,
+                                i = void 0 === o ? Hue : o,
                                 a = (0, r.useState)(n),
                                 u = a[0],
                                 s = a[1],
@@ -89279,11 +89432,11 @@
                                 draftId: "editDraft" === g.kind ? g.draft.id : ""
                             })
                         }), [J, n, g]),
-                        Z = Uue({
+                        Z = Kue({
                             mode: g,
                             isModerationTimedOut: b
                         }),
-                        ee = "editDraft" === g.kind && gue(hue(g.draft.moderationState)),
+                        ee = "editDraft" === g.kind && xue(Cue(g.draft.moderationState)),
                         te = (0, r.useCallback)((function(e) {
                             var t = e.submittedTitle,
                                 n = e.submittedContent,
@@ -89320,10 +89473,10 @@
                                 },
                                 y = (0, l.useMutation)({
                                     mutationFn: function(e) {
-                                        return zue(void 0, [e], void 0, (function(e) {
+                                        return $ue(void 0, [e], void 0, (function(e) {
                                             var r, o = e.content,
                                                 i = e.assetId;
-                                            return _ue(this, (function(e) {
+                                            return Jue(this, (function(e) {
                                                 switch (e.label) {
                                                     case 0:
                                                         if (RV({
@@ -89331,7 +89484,7 @@
                                                                 clickTargetType: "submitEditAnnouncement",
                                                                 context: sV.GroupHomepage
                                                             }), "editPublished" !== n.kind) throw new Error("saveEdit requires editPublished mode");
-                                                        return r = m_(o), [4, woe(t, n.announcement.id, que(que({}, r), {
+                                                        return r = m_(o), [4, Poe(t, n.announcement.id, Yue(Yue({}, r), {
                                                             assetId: g(i)
                                                         }))];
                                                     case 1:
@@ -89343,28 +89496,28 @@
                                 }),
                                 b = (0, l.useMutation)({
                                     mutationFn: function(e) {
-                                        return zue(void 0, [e], Promise, (function(e) {
+                                        return $ue(void 0, [e], Promise, (function(e) {
                                             var r, o, i = e.title,
                                                 a = e.content,
                                                 u = e.assetId,
                                                 s = e.formId;
-                                            return _ue(this, (function(e) {
+                                            return Jue(this, (function(e) {
                                                 switch (e.label) {
                                                     case 0:
                                                         return RV({
                                                             groupId: t,
                                                             clickTargetType: "saveDraftAnnouncement",
                                                             context: sV.GroupHomepage
-                                                        }), r = m_(a), "editDraft" !== n.kind ? [3, 2] : (o = n.draft.id, [4, woe(t, o, que(que({
+                                                        }), r = m_(a), "editDraft" !== n.kind ? [3, 2] : (o = n.draft.id, [4, Poe(t, o, Yue(Yue({
                                                             title: i
                                                         }, r), {
                                                             assetId: g(u),
                                                             formId: (l = s, null != l ? l : 0)
                                                         }))]);
                                                     case 1:
-                                                        return e.sent(), [2, boe(t, o)];
+                                                        return e.sent(), [2, Soe(t, o)];
                                                     case 2:
-                                                        return [2, yoe(t, {
+                                                        return [2, Aoe(t, {
                                                             title: i,
                                                             content: a.plainText || "",
                                                             slate: r.slate,
@@ -89379,23 +89532,23 @@
                                 }),
                                 w = (0, l.useMutation)({
                                     mutationFn: function(e) {
-                                        return zue(void 0, [e], void 0, (function(e) {
+                                        return $ue(void 0, [e], void 0, (function(e) {
                                             var n = e.draftId;
-                                            return _ue(this, (function(e) {
+                                            return Jue(this, (function(e) {
                                                 return RV({
                                                     groupId: t,
                                                     clickTargetType: "publishAnnouncement",
                                                     context: sV.GroupHomepage
-                                                }), [2, Eoe(t, n, u ? a : void 0)]
+                                                }), [2, koe(t, n, u ? a : void 0)]
                                             }))
                                         }))
                                     }
                                 }),
                                 E = (0, r.useCallback)((function(e) {
-                                    return zue(void 0, [e], Promise, (function(e) {
+                                    return $ue(void 0, [e], Promise, (function(e) {
                                         var r, a, u, l, c, f = e.title,
                                             v = e.content;
-                                        return _ue(this, (function(e) {
+                                        return Jue(this, (function(e) {
                                             switch (e.label) {
                                                 case 0:
                                                     r = f, a = o, u = i, e.label = 1;
@@ -89405,9 +89558,9 @@
                                                         assetId: a
                                                     })];
                                                 case 2:
-                                                    return e.sent(), [4, p.invalidateQueries(tue(t, n.announcement.id))];
+                                                    return e.sent(), [4, p.invalidateQueries(lue(t, n.announcement.id))];
                                                 case 3:
-                                                    return e.sent(), p.invalidateQueries(eue(t)), d.goBack(), [2, !0];
+                                                    return e.sent(), p.invalidateQueries(sue(t)), d.goBack(), [2, !0];
                                                 case 4:
                                                     return [4, b.mutateAsync({
                                                         title: r,
@@ -89416,15 +89569,15 @@
                                                         formId: u
                                                     })];
                                                 case 5:
-                                                    return (l = e.sent()) && (p.setQueryData(nue(t), l), null == s || s({
+                                                    return (l = e.sent()) && (p.setQueryData(cue(t), l), null == s || s({
                                                         submittedTitle: r,
                                                         submittedContent: v.plainText || "",
                                                         submittedSlate: v.slate ? JSON.stringify(v.slate) : "",
                                                         submittedAssetId: a,
                                                         submittedFormId: u
-                                                    })), p.invalidateQueries(nue(t)), [2, !1];
+                                                    })), p.invalidateQueries(cue(t)), [2, !1];
                                                 case 6:
-                                                    return c = e.sent(), m(Due(c)), [3, 7];
+                                                    return c = e.sent(), m(Oue(c)), [3, 7];
                                                 case 7:
                                                     return [2, !1]
                                             }
@@ -89433,9 +89586,9 @@
                                 }), [n, o, i, y, b, p, t, d, s]),
                                 I = "editDraft" === n.kind ? n.draft.id : null,
                                 D = (0, r.useCallback)((function() {
-                                    return zue(void 0, void 0, Promise, (function() {
+                                    return $ue(void 0, void 0, Promise, (function() {
                                         var e, n;
-                                        return _ue(this, (function(r) {
+                                        return Jue(this, (function(r) {
                                             switch (r.label) {
                                                 case 0:
                                                     if (!I) return [2];
@@ -89445,11 +89598,11 @@
                                                         draftId: I
                                                     })];
                                                 case 2:
-                                                    return e = r.sent(), null == c || c(e.id), p.invalidateQueries(eue(t)), (0, Lue.refreshInlinePrompt)("CommunityPageOpen", {
+                                                    return e = r.sent(), null == c || c(e.id), p.invalidateQueries(sue(t)), (0, Que.refreshInlinePrompt)("CommunityPageOpen", {
                                                         groupId: String(t)
                                                     }), d.goBack(), [3, 4];
                                                 case 3:
-                                                    return n = r.sent(), m(Due(n)), [3, 4];
+                                                    return n = r.sent(), m(Oue(n)), [3, 4];
                                                 case 4:
                                                     return [2]
                                             }
@@ -89510,17 +89663,17 @@
                         }), [se, pe, le, fe]),
                         me = (0, r.useCallback)((function(e) {
                             var t, n = (null !== (t = e.plainText) && void 0 !== t ? t : "").trim();
-                            return q && 0 === n.length ? "Error.AnnouncementTitleValidationMinLength" : fue(e)
+                            return q && 0 === n.length ? "Error.AnnouncementTitleValidationMinLength" : Eue(e)
                         }), [q]),
                         he = (0, r.useCallback)((function(e) {
                             var t;
-                            return V && !e.slate && 0 === (null !== (t = e.plainText) && void 0 !== t ? t : "").trim().length ? "Error.AnnouncementContentValidationMinLength" : vue(e)
+                            return V && !e.slate && 0 === (null !== (t = e.plainText) && void 0 !== t ? t : "").trim().length ? "Error.AnnouncementContentValidationMinLength" : Iue(e)
                         }), [V]),
                         ge = (0, r.useMemo)((function() {
                             var e = {
                                 plainText: M
                             };
-                            return 0 === (null != M ? M : "").trim().length || (!G.slate && 0 === (G.plainText || "").trim().length || (!!fue(e) || !!vue(G)))
+                            return 0 === (null != M ? M : "").trim().length || (!G.slate && 0 === (G.plainText || "").trim().length || (!!Eue(e) || !!Iue(G)))
                         }), [M, G]),
                         ye = (0, r.useCallback)((function() {
                             m.trackCreatePageButtonClick({
@@ -89539,11 +89692,11 @@
                             }) : null
                         }), [be, J, n]),
                         Ee = "editDraft" === g.kind ? g.draft : null,
-                        Ie = hue(null == Ee ? void 0 : Ee.moderationState),
-                        De = (de = ne.errorKey) === bue || de === wue || Z.errorKey === wue,
+                        Ie = Cue(null == Ee ? void 0 : Ee.moderationState),
+                        De = (de = ne.errorKey) === Sue || de === Pue || Z.errorKey === Pue,
                         Ce = (0, r.useCallback)((function() {
-                            return $ue(void 0, void 0, Promise, (function() {
-                                return Jue(this, (function(e) {
+                            return ose(void 0, void 0, Promise, (function() {
+                                return ise(this, (function(e) {
                                     switch (e.label) {
                                         case 0:
                                             return m.trackCreatePageButtonClick({
@@ -89564,7 +89717,7 @@
                         }), [m, H.assetId, g.kind, Y.hasChanges, ne, M, G, le]),
                         xe = ne.onPublish;
                     (0, r.useEffect)((function() {
-                        if (ie) return ne.errorKey || Z.errorKey ? (ue.current = !1, void ae(!1)) : void(Y.hasChanges || "editDraft" === g.kind && (ee || ne.isPublishing || Cue({
+                        if (ie) return ne.errorKey || Z.errorKey ? (ue.current = !1, void ae(!1)) : void(Y.hasChanges || "editDraft" === g.kind && (ee || ne.isPublishing || Fue({
                             draftForModeration: Ee,
                             draftModerationState: Ie,
                             hasAssetModerationError: !1,
@@ -89627,7 +89780,7 @@
                         Re = (0, r.useMemo)((function() {
                             return w.content
                         }), [w.content]),
-                        Oe = !E && "editDraft" === g.kind && !Y.hasChanges && !ee && !ne.errorKey && Cue({
+                        Oe = !E && "editDraft" === g.kind && !Y.hasChanges && !ee && !ne.errorKey && Fue({
                             draftForModeration: Ee,
                             draftModerationState: Ie,
                             hasAssetModerationError: !1,
@@ -89637,7 +89790,7 @@
                             return E ? "Action.Save" : Oe ? "Message.Saved" : "Action.SaveDraft"
                         }), [E, Oe]),
                         Te = (0, r.useMemo)((function() {
-                            return o().createElement(Aue, {
+                            return o().createElement(Nue, {
                                 isSaveDisabled: Se,
                                 isSaveLoading: ne.isSaving,
                                 isPublishDisabled: Pe,
@@ -89656,7 +89809,7 @@
                         key: be,
                         metric: we,
                         isOneTimeEvent: !0
-                    }), o().createElement(ire, {
+                    }), o().createElement(fre, {
                         key: ke,
                         hasTitle: !0,
                         headerText: u(E ? "Action.EditAnnouncement" : "Action.CreateAnnouncement"),
@@ -89666,9 +89819,9 @@
                         contentLabel: u("Label.Content"),
                         childLabel: u("Label.Image"),
                         defaultTitle: w.title,
-                        titleMaxLength: ooe.validation.titleMaxLength,
+                        titleMaxLength: poe.validation.titleMaxLength,
                         defaultContent: Re,
-                        contentMaxLength: ooe.validation.contentMaxLength,
+                        contentMaxLength: poe.validation.contentMaxLength,
                         titleLocked: E,
                         errorKey: ne.errorKey || H.errorKey || Z.errorKey,
                         onSubmit: Ae,
@@ -89684,7 +89837,7 @@
                         footerControls: Te
                     }, o().createElement("div", {
                         className: "announcement-composer-file-upload"
-                    }, o().createElement(pue, {
+                    }, o().createElement(wue, {
                         key: H.resetKey,
                         dragFileTextKey: "Label.DragImage",
                         onChange: H.selectFiles,
@@ -89694,9 +89847,9 @@
                         displayDimensions: EA.ThumbnailAssetsSize.width930,
                         blockOnValidationError: !0,
                         isUploading: H.isUploading
-                    })), I && o().createElement(Yue, {
+                    })), I && o().createElement(rse, {
                         groupId: n,
-                        vertical: ooe.customFormsVertical,
+                        vertical: poe.customFormsVertical,
                         existingFormId: C,
                         isReadOnly: "editPublished" === g.kind,
                         onPollCreated: P,
@@ -89715,23 +89868,23 @@
                         size: "XSmall"
                     })), o().createElement(d, null))
                 };
-            Xue.displayName = "AnnouncementComposer";
-            var Zue = (0, u.withTranslations)(Xue, Boe),
-                ese = function(t) {
+            ase.displayName = "AnnouncementComposer";
+            var use = (0, u.withTranslations)(ase, Voe),
+                sse = function(t) {
                     var n = t.groupId,
                         r = (0, kY.useParams)().announcementId,
                         i = (0, u.useTranslation)().translate,
                         a = (0, l.useQuery)({
-                            queryKey: tue(n, r),
+                            queryKey: lue(n, r),
                             queryFn: function() {
-                                return hoe(n, r)
+                                return Coe(n, r)
                             }
                         }),
                         s = a.data,
                         c = a.error,
                         d = a.isLoading,
                         p = a.refetch;
-                    return c ? o().createElement(x9, {
+                    return c ? o().createElement(O9, {
                         iconClassName: "icon-status-alert",
                         heading: i("NetworkError"),
                         message: i("Error.ReloadingSubtitle"),
@@ -89739,18 +89892,18 @@
                         onClick: function() {
                             return p()
                         }
-                    }) : d ? o().createElement(gee, null) : s ? Number(e.CurrentUser.userId) !== s.createdBy ? o().createElement(kY.Redirect, {
-                        to: Yre.announcementsRoute
-                    }) : o().createElement(Zue, {
+                    }) : d ? o().createElement(Dee, null) : s ? Number(e.CurrentUser.userId) !== s.createdBy ? o().createElement(kY.Redirect, {
+                        to: roe.announcementsRoute
+                    }) : o().createElement(use, {
                         groupId: n,
                         publishedAnnouncement: s
-                    }) : o().createElement(x9, {
+                    }) : o().createElement(O9, {
                         iconClassName: "icon-status-alert",
                         heading: i("Heading.PostUnavailable"),
                         message: i("Description.PostUnavailable")
                     })
                 },
-                tse = function(e) {
+                lse = function(e) {
                     var t = e.group,
                         n = e.permissions,
                         r = e.isGroupMember,
@@ -89759,37 +89912,37 @@
                         s = e.navigation,
                         l = (0, u.useTranslation)().translate,
                         c = i.displayGroupAnnouncementPublishing && n.groupPostsPermissions.postToStatus;
-                    return void 0 === a ? o().createElement(gee, null) : a ? o().createElement(kY.Switch, null, o().createElement(kY.Route, {
-                        path: Yre.announcementCreateRoute
-                    }, c ? o().createElement(Zue, {
+                    return void 0 === a ? o().createElement(Dee, null) : a ? o().createElement(kY.Switch, null, o().createElement(kY.Route, {
+                        path: roe.announcementCreateRoute
+                    }, c ? o().createElement(use, {
                         groupId: t.id
                     }) : o().createElement(kY.Redirect, {
-                        to: Yre.announcementsRoute
+                        to: roe.announcementsRoute
                     })), o().createElement(kY.Route, {
-                        path: Yre.announcementEditRoute
-                    }, c ? o().createElement(ese, {
+                        path: roe.announcementEditRoute
+                    }, c ? o().createElement(sse, {
                         groupId: t.id
                     }) : o().createElement(kY.Redirect, {
-                        to: Yre.announcementsRoute
+                        to: roe.announcementsRoute
                     })), o().createElement(kY.Route, {
-                        path: Yre.announcementRoute
-                    }, o().createElement(rue, {
+                        path: roe.announcementRoute
+                    }, o().createElement(due, {
                         groupId: t.id,
                         policies: i,
                         isGroupMember: r,
                         canCreateAnnouncements: c
                     })), o().createElement(kY.Route, {
-                        path: Yre.announcementsRoute
-                    }, o().createElement(Qoe, {
+                        path: roe.announcementsRoute
+                    }, o().createElement(nie, {
                         groupId: t.id,
                         canCreateAnnouncements: c,
                         navigation: s
-                    }))) : o().createElement(x9, {
+                    }))) : o().createElement(O9, {
                         iconClassName: "icon-status-alert",
                         message: l("Heading.ForumsNotAvailable")
                     })
                 };
-            var nse = function(t) {
+            var cse = function(t) {
                     var n = (0, r.useState)(),
                         o = n[0],
                         i = n[1];
@@ -89801,7 +89954,7 @@
                         }))
                     }), [t]), !(!t || !e.CurrentUser.isAuthenticated) && o
                 },
-                rse = function(e) {
+                dse = function(e) {
                     var t = e.isAnnouncementsArchiveEnabled,
                         n = e.children,
                         r = (0, u.useTranslation)().translate;
@@ -89810,33 +89963,33 @@
                     }, o().createElement(kY.Link, {
                         className: qj()("content-action-forum-category group-posts-destination-pill group-posts-announcements-pill", t && "active", "clickable"),
                         "aria-current": t ? "page" : void 0,
-                        to: Yre.announcementsRoute
+                        to: roe.announcementsRoute
                     }, r("Heading.Announcements")), n && o().createElement("span", {
                         className: "group-posts-destinations-divider",
                         "aria-hidden": "true"
                     }), n)
                 },
-                ose = function(e) {
+                pse = function(e) {
                     var t = e.showForumCategories,
                         n = (0, kY.useHistory)();
-                    return o().createElement(rse, {
+                    return o().createElement(dse, {
                         isAnnouncementsArchiveEnabled: !0
-                    }, t && o().createElement(y9, {
+                    }, t && o().createElement(C9, {
                         activeCategoryId: null,
                         onSetActiveCategory: function(e, t) {
                             return n.push(eG.router.getCategoryRoute(e, t))
                         }
                     }))
                 },
-                ise = function(e) {
+                fse = function(e) {
                     var t = e.onSetActiveCategory;
-                    return o().createElement(rse, {
+                    return o().createElement(dse, {
                         isAnnouncementsArchiveEnabled: !1
-                    }, o().createElement(y9, {
+                    }, o().createElement(C9, {
                         onSetActiveCategory: t
                     }))
                 },
-                ase = function(e) {
+                vse = function(e) {
                     var t = e.group,
                         n = e.permissions,
                         r = e.channelsPermissions,
@@ -89849,29 +90002,29 @@
                         p = GV(),
                         f = p.features,
                         v = p.isLoading,
-                        m = nse(!v && $re(f)),
+                        m = cse(!v && ooe(f)),
                         h = VK(),
                         g = h.isLoading,
                         y = h.forumsRead,
                         b = v ? void 0 : function(e, t, n, r) {
-                            return r && $re(e) && !t.isGracefulDegradationEnabled && t.displayGroupAnnouncements && n.groupPostsPermissions.viewStatus
+                            return r && ooe(e) && !t.isGracefulDegradationEnabled && t.displayGroupAnnouncements && n.groupPostsPermissions.viewStatus
                         }(f, l, n, m),
                         w = !l.isGracefulDegradationEnabled && u && l.displayGroupForums,
                         E = w && !g && (!y.isDisabled || c);
-                    return Kre(t.id, i, E), o().createElement("div", {
+                    return toe(t.id, i, E), o().createElement("div", {
                         className: "section"
                     }, o().createElement(kY.Switch, null, o().createElement(kY.Route, {
-                        path: Yre.announcementsRoute
-                    }, o().createElement(tse, {
+                        path: roe.announcementsRoute
+                    }, o().createElement(lse, {
                         group: t,
                         permissions: n,
                         isGroupMember: a,
                         policies: l,
                         canViewAnnouncements: b,
-                        navigation: o().createElement(ose, {
+                        navigation: o().createElement(pse, {
                             showForumCategories: E
                         })
-                    })), o().createElement(kY.Route, null, o().createElement(Hre, {
+                    })), o().createElement(kY.Route, null, o().createElement(eoe, {
                         group: t,
                         permissions: n,
                         channelsPermissions: r,
@@ -89879,53 +90032,53 @@
                         isGroupMember: a,
                         canViewForums: w,
                         isOwner: c,
-                        categoriesNavigation: b ? ise : void 0
+                        categoriesNavigation: b ? fse : void 0
                     }))), o().createElement(d, null))
                 },
-                use = function() {
-                    return use = Object.assign || function(e) {
+                mse = function() {
+                    return mse = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, use.apply(this, arguments)
+                    }, mse.apply(this, arguments)
                 },
-                sse = function(e) {
+                hse = function(e) {
                     var t, n = e.group,
                         r = e.permissions,
                         i = e.userId;
                     if (!(null == n ? void 0 : n.id)) return null;
                     var a = (null === (t = n.owner) || void 0 === t ? void 0 : t.userId) === i;
-                    return o().createElement(O6, {
+                    return o().createElement(j6, {
                         permissions: r,
                         groupId: n.id,
                         isOwner: a
-                    }, o().createElement(ase, use({}, e, {
+                    }, o().createElement(vse, mse({}, e, {
                         isOwner: a
                     })))
                 },
-                lse = {
+                gse = {
                     common: ["Feature.FileUploadComponent", "Feature.CustomForms"],
                     feature: "Feature.Groups"
                 },
-                cse = function() {
-                    return cse = Object.assign || function(e) {
+                yse = function() {
+                    return yse = Object.assign || function(e) {
                         for (var t, n = 1, r = arguments.length; n < r; n++)
                             for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                         return e
-                    }, cse.apply(this, arguments)
+                    }, yse.apply(this, arguments)
                 },
-                dse = function(e) {
+                bse = function(e) {
                     (0, i.unmountComponentAtNode)(e)
                 },
-                pse = {
+                wse = {
                     renderGroupPosts: function(e, t) {
                         (0, i.unmountComponentAtNode)(e), (0, i.render)(o().createElement(u.TranslationProvider, {
-                            config: lse
-                        }, o().createElement(sse, cse({}, t))), e)
+                            config: gse
+                        }, o().createElement(hse, yse({}, t))), e)
                     },
-                    unmountGroupPosts: dse
+                    unmountGroupPosts: bse
                 },
-                fse = {
+                Ese = {
                     renderGroupForumsConfigSection: function(e, t) {
                         (0, i.unmountComponentAtNode)(e), (0, i.render)(o().createElement(u.TranslationProvider, {
                             config: Gj
@@ -89933,22 +90086,22 @@
                             client: u.queryClient
                         }, o().createElement(UV, {
                             groupId: t.group.id
-                        }, o().createElement(XQ, cse({}, t)))))), e)
+                        }, o().createElement(XQ, yse({}, t)))))), e)
                     },
                     renderGroupForumsDiscovery: function(e, t) {
                         (0, i.unmountComponentAtNode)(e), (0, i.render)(o().createElement(u.TranslationProvider, {
                             config: Gj
-                        }, o().createElement(f6, cse({}, t))), e)
+                        }, o().createElement(b6, yse({}, t))), e)
                     },
-                    unmountGroupForums: dse
+                    unmountGroupForums: bse
                 };
             Object.assign(t(), {
-                GroupPostsService: pse,
-                GroupForumsService: fse
+                GroupPostsService: wse,
+                GroupForumsService: Ese
             })
         }()
 }();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/3b4dab1f881a74d0aab23273c0591f58-groupPosts.bundle.min.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/7e9cc64adc035cf4d6381d8a61d5d25b-groupPosts.bundle.min.js.map
 
 /* Bundle detector */
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("GroupForums");

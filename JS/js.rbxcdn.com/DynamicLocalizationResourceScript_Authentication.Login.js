@@ -196,6 +196,8 @@ Roblox.LangDynamic["Authentication.Login"] = {
     "Label.VerificationCode": "Verification code",
     "Description.SwitchAccountEmailPreferences": "To manage your email preferences, switch to your Roblox account with parent privileges.",
     "Description.SwitchAccountViewActivity": "To view more of your child’s activity, switch to your Roblox account with parent privileges.",
-    "Description.SwitchAccountContinue": "To continue, switch to your Roblox account with parent privileges."
+    "Description.SwitchAccountContinue": "To continue, switch to your Roblox account with parent privileges.",
+    "Action.QrCode": "QR code",
+    "Label.OR": "OR"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Authentication.Login");

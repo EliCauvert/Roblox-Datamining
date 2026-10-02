@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "c91b1bfd-09bc-bc3a-90ae-c250f25c2a56")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "f514cbad-8eb2-2e1d-1828-4791bd0337f3")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 523426, e => {
@@ -46,8 +46,13 @@
             namespace: "avatar-marketplace",
             name: "showTaxonomyOnAvatarItemAnalyticsTab",
             defaultValue: !1
+        }),
+        l = (0, t.defineFlag)({
+            namespace: "avatar-marketplace",
+            name: "enableCoreContentGatedBanner",
+            defaultValue: !1
         });
-    e.s(["enableAvatarCreationTokenCategories", 0, i, "enableBulkMakeupTokenCreation", 0, r, "enableCreatorShowcases", 0, n, "enableTaxonomyBasedCreatorDashboard", 0, a, "isAutoPublishPreferencesEnabled", 0, o, "showTaxonomyOnAvatarItemAnalyticsTab", 0, s])
+    e.s(["enableAvatarCreationTokenCategories", 0, i, "enableBulkMakeupTokenCreation", 0, r, "enableCoreContentGatedBanner", 0, l, "enableCreatorShowcases", 0, n, "enableTaxonomyBasedCreatorDashboard", 0, a, "isAutoPublishPreferencesEnabled", 0, o, "showTaxonomyOnAvatarItemAnalyticsTab", 0, s])
 }, 954119, e => {
     "use strict";
     let t = (0, e.i(157700).defineFlag)({
@@ -2995,5 +3000,5 @@
     }])
 }]);
 
-//# debugId=c91b1bfd-09bc-bc3a-90ae-c250f25c2a56
-//# sourceMappingURL=416igw-x-4hx0.js.map
+//# debugId=f514cbad-8eb2-2e1d-1828-4791bd0337f3
+//# sourceMappingURL=2pxp_g6dyxk1h.js.map

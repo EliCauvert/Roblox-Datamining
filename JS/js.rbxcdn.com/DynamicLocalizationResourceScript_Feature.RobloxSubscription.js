@@ -253,6 +253,9 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Label.PlusBundleName": "Plus {robuxAmount}",
     "Label.IncludesAllPlusBenefits": "Includes all Plus benefits",
     "Label.RobuxEveryMonth": "{robuxAmount} Robux every month",
-    "Label.TotalValue": "{price} total value"
+    "Label.TotalValue": "{price} total value",
+    "Description.ReferralRecipientInvite": "{username} invited you to join Plus. You'll both get {amount} Robux when you purchase Plus.",
+    "Description.BillingInfoWithFreeTrialOfferV2": "{boldTagStart}{trialPeriodType, select,\n    Week {{trialPeriod, plural, one {{trialPeriod} week} other {{trialPeriod} weeks}}}\n    Month {{trialPeriod, plural, one {{trialPeriod} month} other {{trialPeriod} months}}}\n    Year {{trialPeriod, plural, one {{trialPeriod} year} other {{trialPeriod} years}}}\n    other {{trialPeriod} {trialPeriodType}}\n  } free{boldTagEnd}, then {price}/{periodType, select,\n    Week {week}\n    Month {month}\n    Year {year}\n    other {periodType}\n  }",
+    "Action.Review": "Review"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.RobloxSubscription");

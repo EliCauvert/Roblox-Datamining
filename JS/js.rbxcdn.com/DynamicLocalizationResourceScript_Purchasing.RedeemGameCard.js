@@ -180,6 +180,8 @@ Roblox.LangDynamic["Purchasing.RedeemGameCard"] = {
     "Message.UseBalanceToSubscribeToPlus": "Use your available balance to subscribe to Plus. Choose a longer plan to save more.",
     "Heading.FreeItemReceived": "Free item received",
     "Description.FreeItemReceived": "Your code has been successfully redeemed and you've received a free item.",
-    "Action.Equip": "Equip"
+    "Action.Equip": "Equip",
+    "Heading.RedemptionTakingLonger": "Redemptions are taking longer than usual right now",
+    "Message.RedemptionTakingLonger": "We are processing your redemption. Your balance will update soon!"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Purchasing.RedeemGameCard");

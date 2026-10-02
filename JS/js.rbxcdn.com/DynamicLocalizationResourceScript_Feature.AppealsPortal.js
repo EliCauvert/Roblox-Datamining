@@ -247,6 +247,9 @@ Roblox.LangDynamic["Feature.AppealsPortal"] = {
     "Label.DisplayName": "Display name",
     "Label.ProfileDescription": "Profile description",
     "Label.Type.Post": "Post",
-    "Label.TypeLower.Post": "post"
+    "Label.TypeLower.Post": "post",
+    "Action.AskForReview": "Ask for review",
+    "Description.AskForReview": "You're confirming that you've fixed this issue. We'll review this {contentType} again.",
+    "Description.FixByDate": "Fix the issue in Studio by {date}, then come back and ask for review."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AppealsPortal");
