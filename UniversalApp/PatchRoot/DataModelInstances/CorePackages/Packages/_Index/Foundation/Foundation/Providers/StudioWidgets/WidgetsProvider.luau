@@ -43,7 +43,7 @@ return function(p1)
 	end, { var2 })
 	
 	return reactModule.createElement(widgetsContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+		value = reactModule.useMemo(function()
 			-- upvalues: var3 (ref), var4 (ref), flagsModule (copy), var5 (ref), var6 (ref)
 			return {
 				register = var3,
@@ -51,11 +51,6 @@ return function(p1)
 				refreshAsync = if flagsModule.FoundationPopoverPluginAnchorRefresh then var5 else nil,
 				nextId = var6
 			}
-		end, { var3, var4, var5, var6 }) else {
-			register = var3,
-			deregister = var4,
-			refreshAsync = if flagsModule.FoundationPopoverPluginAnchorRefresh then var5 else nil,
-			nextId = var6
-		}
+		end, { var3, var4, var5, var6 })
 	}, p1.children)
 end

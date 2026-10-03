@@ -1,6 +1,5 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local reactModule = require(foundation.Parent.React)
-local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
@@ -15,7 +14,7 @@ local t = {
 }
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), tileContextModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), tileContextModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	
 	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
@@ -34,18 +33,14 @@ return reactModule.forwardRef(function(p1, p2)
 		ref = p2
 	}), {
 		TileContext = if var1.children then reactModule.createElement(tileContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+			value = reactModule.useMemo(function()
 				-- upvalues: var1 (ref)
 				return {
 					isContained = var1.isContained,
 					fillDirection = var1.FillDirection,
 					testId = var1.testId
 				}
-			end, { var1.isContained, var1.FillDirection, var1.testId }) else nil else {
-				isContained = var1.isContained,
-				fillDirection = var1.FillDirection,
-				testId = var1.testId
-			}
+			end, { var1.isContained, var1.FillDirection, var1.testId })
 		}, var1.children) else nil
 	})
 end)

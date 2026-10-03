@@ -2332,11 +2332,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,방문 수
 Feature.Build.Content.NewGame,새 게임
 Feature.Build.Description.ActivateDeveloperProduct,개발자 상품 {PRODUCT_ID}을(를) 판매하세요.
-Feature.Build.Description.AdActive,광고가 게재 중입니다. 얼마나 많은 플레이어에게 도달했는지 확인해 보세요.
 Feature.Build.Description.AdCampaignModerationReview,모든 광고 캠페인은 Roblox 규정 준수 팀에서 검토합니다. 이 절차에는 최대 24시간이 소요될 수 있습니다.
 Feature.Build.Description.AdCampaignSheetRunDates,{startDate}~{endDate} 실행
 Feature.Build.Description.AdComplete,광고가 종료되었습니다. 결과를 확인하세요.
-Feature.Build.Description.AdInReview,현재 광고 검토 중이며 {startDate}~{endDate}에 게재될 예정입니다.
 Feature.Build.Description.AdModerationReview,"모든 광고는 Roblox 규정 준수 팀에서 검토하며, 최대 24시간이 소요될 수 있습니다."
 Feature.Build.Description.AdvertisingAgreement,'만들기'를 선택하면 {advertisingTermsStart}Roblox 광고 약관{advertisingTermsEnd}과 {advertisingStandardsStart}광고 규정{advertisingStandardsEnd}에 동의하는 것으로 간주됩니다.
 Feature.Build.Description.ArchiveRemoval,이 게임을 보관하면 해당 게임이 Build에서 삭제됩니다. 크리에이터 허브 또는 Roblox Studio에서 계속 액세스하고 복원할 수 있습니다.
@@ -2665,7 +2663,6 @@ Feature.Build.Title.AdActive,광고 캠페인이 활성화되었습니다
 Feature.Build.Title.AdCampaignDuration,{durationDays}일 광고 캠페인
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}일
 Feature.Build.Title.AdComplete,광고 종료
-Feature.Build.Title.AdCreated,광고 생성됨
 Feature.Build.Title.AdCreatedPeriod,광고가 생성되었습니다.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,이미지 추가
@@ -3894,6 +3891,7 @@ Feature.Groups.Notification.FailedToFollow,프로필을 팔로우하지 못했�
 Feature.Groups.Notification.FailedToJoin,커뮤니티에 하지 못했습니다. 나중에 다시 시도하세요.
 Feature.Groups.Notification.FailedToLoad,커뮤니티를 불러오지 못했습니다. 나중에 다시 시도하세요.
 Feature.Groups.Notification.Following,{groupName} 팔로잉 중.
+Feature.Groups.Notification.GroupDeactivated,이 커뮤니티가 비활성화되었습니다.
 Feature.Groups.Notification.GroupDoesNotExist,커뮤니티가 존재하지 않습니다.
 Feature.Groups.Notification.GroupModerated,이 커뮤니티는 현재 규정 준수 확인 중입니다.
 Feature.Groups.Notification.JoinRequestPending,{groupName}에 참가 요청했습니다.
@@ -4109,6 +4107,7 @@ Feature.Moments.Disclaimer.EveryoneMoments,모멘트에 참여하는 모든 사�
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,{placeName}에 참가하려고 시도 중입니다. 몇 초 정도 걸릴 수 있습니다.
 Feature.Moments.Label.CaptureLibrary,
+Feature.Moments.Label.ChooseVoice,음성 선택
 Feature.Moments.Label.DeleteMomentBody,모멘트가 삭제되면 복구할 수 없습니다.
 Feature.Moments.Label.DeleteMomentTitle,모멘트를 삭제할까요?
 Feature.Moments.Label.DeleteVoiceoverBody,계속하면 텍스트와 보이스오버가 지워집니다. 언제든지 다시 시작할 수 있습니다.
@@ -4891,12 +4890,14 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"아이템 및 아바�
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"아이템 및 아바타 첫 {trialUnlockDays}일 동안 10% 할인, 이후 20% 할인"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Roblox Plus 구독을 통해 적은 Robux로 더 큰 즐거움을 누리세요.
 Feature.RobloxSubscription.Description.JoinEarly,Plus로 일찍 참여하기
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} 님이 나를 Plus에 초대했습니다. Plus를 구매하면 두 사람 모두 {amount} Robux를 받습니다.
 Feature.RobloxSubscription.Description.ReferralRecipientReward,새로운 Plus 구독자에게만 제공되는 혜택입니다.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,누군가 회원님의 링크를 통해 Plus를 구매하는 경우.
 Feature.RobloxSubscription.Description.ReferralShare,"다른 사람을 Plus에 초대한 경우, 초대 받은 사람이 Plus를 구매하면 두 사람 모두 {amount} Robux를 받습니다."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}를 클릭하면 <a href=""{termsUrl}"">Roblox 구독 약관</a>에 동의하는 것으로 간주됩니다. 구독을 취소하기 전까지 매월 자동으로 요금이 청구됩니다."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus를 공유하고 {amount} Robux  받기
 Feature.RobloxSubscription.Heading.ReferralHistory,추천 내역
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,Plus에 가입하고  받기
 Feature.RobloxSubscription.Heading.ReferralShare,Plus를 공유하고  받기
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,무료 비공개 서버
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}

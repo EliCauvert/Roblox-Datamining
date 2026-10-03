@@ -2313,11 +2313,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,Totale speeltijd
 Feature.Build.Analytics.Visits,Bezoeken
 Feature.Build.Content.NewGame,Nieuw spel
 Feature.Build.Description.ActivateDeveloperProduct,Zet ontwikkelaarsproduct {PRODUCT_ID} in de uitverkoop.
-Feature.Build.Description.AdActive,Je advertentie wordt weergegeven. Bekijk hoeveel spelers deze bereikt.
 Feature.Build.Description.AdCampaignModerationReview,Alle advertentiecampagnes worden beoordeeld door de moderatie van Roblox. Dit proces kan tot 24 uur duren.
 Feature.Build.Description.AdCampaignSheetRunDates,Loopt {startDate} – {endDate}
 Feature.Build.Description.AdComplete,Je advertentie is gestopt. Controleer je resultaten.
-Feature.Build.Description.AdInReview,Je advertentie wordt beoordeeld en staat gepland voor {startDate} tot {endDate}.
 Feature.Build.Description.AdModerationReview,Alle advertenties worden beoordeeld door de moderatie van Roblox en dit kan tot 24 uur duren.
 Feature.Build.Description.AdvertisingAgreement,"Door Aanmaken te selecteren, ga je akkoord met de Roblox-{advertisingTermsStart}advertentievoorwaarden{advertisingTermsEnd} en -{advertisingStandardsStart}reclamerichtlijnen{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Als je dit spel archiveert, wordt het verwijderd uit Build. Je hebt nog steeds toegang en je kunt het herstellen vanuit Creator Hub of Roblox Studio."
@@ -2646,7 +2644,6 @@ Feature.Build.Title.AdActive,Advertentiecampagne is actief
 Feature.Build.Title.AdCampaignDuration,Advertentiecampagne van {durationDays} dagen
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} dagen
 Feature.Build.Title.AdComplete,Advertentie voltooid
-Feature.Build.Title.AdCreated,Advertentie gemaakt
 Feature.Build.Title.AdCreatedPeriod,Advertentie gemaakt.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Afbeeldingen toevoegen
@@ -3867,6 +3864,7 @@ Feature.Groups.Notification.FailedToFollow,Kan profiel niet volgen. Probeer het 
 Feature.Groups.Notification.FailedToJoin,Lid worden van community mislukt. Probeer het later opnieuw.
 Feature.Groups.Notification.FailedToLoad,Kan community niet laden. Probeer het later opnieuw.
 Feature.Groups.Notification.Following,Volgt {groupName}.
+Feature.Groups.Notification.GroupDeactivated,Deze community is gedeactiveerd.
 Feature.Groups.Notification.GroupDoesNotExist,De community bestaat niet.
 Feature.Groups.Notification.GroupModerated,Deze community is momenteel gemodereerd.
 Feature.Groups.Notification.JoinRequestPending,Aanvraag ingediend om lid te worden van {groupName}.
@@ -4081,6 +4079,7 @@ Feature.Moments.Disclaimer.EveryoneMoments,Iedereen in Momenten kan zien wat er 
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,Je probeert deel te nemen aan {placeName}. Dit kan een paar seconden duren.
 Feature.Moments.Label.CaptureLibrary,Jouw opnamebibliotheek
+Feature.Moments.Label.ChooseVoice,Stem kiezen
 Feature.Moments.Label.DeleteMomentBody,Je kunt een moment dat is verwijderd niet meer terughalen.
 Feature.Moments.Label.DeleteMomentTitle,Moment verwijderen?
 Feature.Moments.Label.DeleteVoiceoverBody,Hierdoor worden je tekst en je voice-over gewist. Je kunt op elk moment opnieuw beginnen.
@@ -4863,11 +4862,14 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% korting op de eer
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10% korting op de eerste {trialUnlockDays} dagen, daarna 20% korting op items en avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Meer plezier voor minder Robux. Abonneer je op Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Doe eerder mee met Plus
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} heeft je uitgenodigd voor Plus. Jullie krijgen allebei {amount} Robux wanneer je Plus afsluit.
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Aanbieding alleen geldig voor nieuwe Plus-abonnees.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Wanneer iemand Plus afsluit via jouw link.
+Feature.RobloxSubscription.Description.ReferralShare,Nodig iemand uit voor Plus en jullie krijgen allebei {amount} Robux wanneer die persoon Plus afsluit.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Door op {201C}{ctaText} te klikken{201D}, ga je akkoord met de <a href=""{termsUrl}"">Abonnementsvoorwaarden van Roblox</a>. Er worden elke maand automatisch kosten in rekening gebracht totdat je opzegt."
 Feature.RobloxSubscription.Heading.ReferralEntry,Deel Plus om {amount} Robux te krijgen
 Feature.RobloxSubscription.Heading.ReferralHistory,Doorverwijzingsgeschiedenis
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,"Word lid van Plus, krijg"
 Feature.RobloxSubscription.Heading.ReferralShare,"Deel Plus, krijg"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Gratis privéservers
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}

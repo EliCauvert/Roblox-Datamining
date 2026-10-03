@@ -2331,11 +2331,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,Toplam oynama süresi
 Feature.Build.Analytics.Visits,Ziyaretler
 Feature.Build.Content.NewGame,Yeni oyun
 Feature.Build.Description.ActivateDeveloperProduct,Geliştirici ürününü ({PRODUCT_ID}) satışa çıkar.
-Feature.Build.Description.AdActive,Reklamın yayınlanıyor. Kaç oyuncuya ulaştığını gör.
 Feature.Build.Description.AdCampaignModerationReview,Tüm reklam kampanyaları Roblox moderasyonu tarafından incelenir. Bu işlem 24 saate kadar sürebilir.
 Feature.Build.Description.AdCampaignSheetRunDates,{startDate}-{endDate} arasında yayınlanır
 Feature.Build.Description.AdComplete,Reklamın sona erdi. Sonuçlarını kontrol et.
-Feature.Build.Description.AdInReview,Reklamın inceleniyor ve {startDate}-{endDate} arasında yayınlanması planlanıyor.
 Feature.Build.Description.AdModerationReview,Tüm reklamlar Roblox moderasyonu tarafından incelenir ve bu işlem 24 saate kadar sürebilir.
 Feature.Build.Description.AdvertisingAgreement,Oluştur'u seçerek {advertisingTermsStart}Roblox Reklam Şartları{advertisingTermsEnd} ve {advertisingStandardsStart}Reklam Standartları{advertisingStandardsEnd}'nı kabul etmiş olursun.
 Feature.Build.Description.ArchiveRemoval,Bu oyunu arşivlersen oyun İnşa Et'ten kaldırılır. Yaratıcı Merkezi'nde veya Roblox Studio'da oyuna erişmeye ve oyunu geri yüklemeye devam edebilirsin.
@@ -2664,7 +2662,6 @@ Feature.Build.Title.AdActive,Reklam kampanyası aktif
 Feature.Build.Title.AdCampaignDuration,{durationDays} günlük reklam kampanyası
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} gün
 Feature.Build.Title.AdComplete,Reklam tamamlandı
-Feature.Build.Title.AdCreated,Reklam oluşturuldu
 Feature.Build.Title.AdCreatedPeriod,Reklam oluşturuldu.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Görsel ekle
@@ -3892,6 +3889,7 @@ Feature.Groups.Notification.FailedToFollow,Profil takip edilemedi. Lütfen daha 
 Feature.Groups.Notification.FailedToJoin,Topluluğa katılım başarısız oldu. Lütfen daha sonra tekrar dene.
 Feature.Groups.Notification.FailedToLoad,Topluluk yüklenemedi. Lütfen daha sonra tekrar dene.
 Feature.Groups.Notification.Following,{groupName} takip ediliyor.
+Feature.Groups.Notification.GroupDeactivated,Bu topluluk devre dışı bırakıldı.
 Feature.Groups.Notification.GroupDoesNotExist,Topluluk mevcut değil.
 Feature.Groups.Notification.GroupModerated,Bu topluluk şu anda denetleniyor.
 Feature.Groups.Notification.JoinRequestPending,{groupName} grubuna katılma isteği gönderildi.
@@ -4889,12 +4887,14 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"İlk 60 gün %10 indi
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"İlk {trialUnlockDays} gün %10 indirim, ardından öğe ve avatarlarda %20 indirim"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Daha az Robux karşılığında daha fazla eğlence. Roblox Plus'a abone ol.
 Feature.RobloxSubscription.Description.JoinEarly,Plus ile erken katıl
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} seni Plus'a katılmaya davet etti. Plus satın aldığında ikiniz de {amount} Robux kazanacaksınız.
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Teklif yalnızca yeni Plus aboneleri için geçerlidir.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Herhangi biri senin bağlantınla Plus satın aldığında.
 Feature.RobloxSubscription.Description.ReferralShare,Birini Plus'a davet et; o Plus'ı satın aldığında ikiniz de {amount} Robux kazanın.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} düğmesine tıklayarak <a href=""{termsUrl}"">Roblox Abonelik Koşulları</a>'nı kabul etmiş olursun. Sen iptal edene kadar her ay otomatik tahsilat yapılır."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus'ı paylaşarak {amount} Robux kazan
 Feature.RobloxSubscription.Heading.ReferralHistory,Yönlendirme geçmişi
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,Plus'a katıl ve kazan
 Feature.RobloxSubscription.Heading.ReferralShare,Plus'ı paylaş ve kazan
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Ücretsiz özel sunucular
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}

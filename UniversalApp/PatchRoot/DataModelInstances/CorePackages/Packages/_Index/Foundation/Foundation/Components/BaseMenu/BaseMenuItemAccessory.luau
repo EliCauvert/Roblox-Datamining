@@ -9,16 +9,14 @@ local viewModule = require(foundation.Components.View)
 local presentationContextModule = require(foundation.Providers.Style.PresentationContext)
 local _ = require(foundation.Providers.Style.Tokens)
 local accessoryTypeModule = require(foundation.Enums.AccessoryType)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Enums.InputSize)
 local t = {
 	isIconSize = true,
-	colorNamespace = colorNamespaceModule.Color
+	colorNamespace = require(foundation.Enums.ColorNamespace).Color
 }
 
 return function(p1)
-	-- upvalues: accessoryTypeModule (ref), reactModule (ref), viewModule (ref), presentationContextModule (ref), flagsModule (ref), t (ref), colorNamespaceModule (ref), avatarModule (ref), textModule (ref), badgeModule (ref), iconModule (ref)
+	-- upvalues: accessoryTypeModule (ref), reactModule (ref), viewModule (ref), presentationContextModule (ref), t (ref), avatarModule (ref), textModule (ref), badgeModule (ref), iconModule (ref)
 	local accessory = p1.accessory
 	
 	if accessory == nil then
@@ -31,12 +29,7 @@ return function(p1)
 		tag = tag,
 		testId = p1.testId
 	}, {
-		Avatar = reactModule.createElement(presentationContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then t else {
-				isIconSize = true,
-				colorNamespace = colorNamespaceModule.Color
-			}
-		}, {
+		Avatar = reactModule.createElement(presentationContextModule.Provider, { value = t }, {
 			Avatar = reactModule.createElement(avatarModule, {
 				userId = accessory.userId,
 				backplateStyle = p1.tokens.Color.Shift.Shift_200,

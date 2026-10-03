@@ -5,7 +5,6 @@ local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local internalInputGroupModule = require(foundation.Components.InternalInputGroup)
 local radioGroupContextModule = require(script.Parent.RadioGroupContext)
-local flagsModule = require(foundation.Utility.Flags)
 local t = {
 	Selectable = true,
 	testId = "--foundation-radio-group",
@@ -14,7 +13,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), flagsModule (ref), internalInputGroupModule (ref), withCommonPropsModule (ref), radioGroupContextModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), internalInputGroupModule (ref), withCommonPropsModule (ref), radioGroupContextModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2, var3 = reactModule.useState(var1.value)
 	reactModule.useEffect(function()
@@ -36,7 +35,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		ref = p2
 	}), {
 		RadioGroupContext = reactModule.createElement(radioGroupContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+			value = reactModule.useMemo(function()
 				-- upvalues: var2 (ref), var4 (ref), var1 (ref)
 				return {
 					value = var2,
@@ -44,12 +43,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					Selectable = var1.Selectable,
 					testId = var1.testId
 				}
-			end, { var2, var4, var1.Selectable, var1.testId }) else nil else {
-				value = var2,
-				onValueChanged = var4,
-				Selectable = var1.Selectable,
-				testId = var1.testId
-			}
+			end, { var2, var4, var1.Selectable, var1.testId })
 		}, var1.children)
 	})
 end))

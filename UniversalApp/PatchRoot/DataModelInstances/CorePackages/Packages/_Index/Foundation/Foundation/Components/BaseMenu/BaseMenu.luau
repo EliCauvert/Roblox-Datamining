@@ -79,7 +79,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	end
 	local var15 = if var3.radius ~= nil then "" else t_1[var3.radius]
 	local var16 = reactModule.createElement(baseMenuContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+		value = reactModule.useMemo(function()
 			-- upvalues: var3 (ref), var8 (ref), var11 (ref), var10 (ref)
 			return {
 				depth = 1,
@@ -98,19 +98,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			var3.onActivated, var3.onNestedLeafActivated, var3.size, var8,
 			var10.openPath, var10.openAtDepth, var10.closeAtDepth, var10.reset,
 			var3.maxHeight
-		}) else nil else {
-			depth = 1,
-			onActivated = var3.onActivated,
-			onNestedLeafActivated = var3.onNestedLeafActivated,
-			size = var3.size,
-			hasLeading = var8,
-			setHasLeading = var11,
-			hoverOpenPath = var10.openPath,
-			hoverOpenAtDepth = var10.openAtDepth,
-			hoverCloseAtDepth = var10.closeAtDepth,
-			hoverReset = var10.reset,
-			maxHeight = var3.maxHeight
-		}
+		})
 	}, children)
 	
 	return if var3.maxHeight then reactModule.createElement(baseMenuScrollContainerModule, {

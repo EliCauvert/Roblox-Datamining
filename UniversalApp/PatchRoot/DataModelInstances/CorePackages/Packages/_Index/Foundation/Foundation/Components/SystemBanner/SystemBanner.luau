@@ -11,7 +11,6 @@ local builderIconsModule = require(parent.BuilderIcons)
 local _ = require(foundation.Enums.ButtonVariant)
 local closeAffordanceModule = require(foundation.Components.CloseAffordance)
 local closeAffordanceVariantModule = require(foundation.Enums.CloseAffordanceVariant)
-local flagsModule = require(foundation.Utility.Flags)
 local iconModule = require(foundation.Components.Icon)
 local iconSizeModule = require(foundation.Enums.IconSize)
 local iconVariant = builderIconsModule.IconVariant
@@ -36,7 +35,7 @@ local t_1 = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), t_1 (ref), useSystemBannerVariantsModule (ref), reactModule (ref), reactUtilsModule (ref), useBreakpointModule (ref), breakpointModule (ref), alertActionsModule (ref), flagsModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), iconModule (ref), SEVERITY_TO_ICON (ref), iconSizeModule (ref), iconVariant (ref), textModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), t_1 (ref), useSystemBannerVariantsModule (ref), reactModule (ref), reactUtilsModule (ref), useBreakpointModule (ref), breakpointModule (ref), alertActionsModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), iconModule (ref), SEVERITY_TO_ICON (ref), iconSizeModule (ref), iconVariant (ref), textModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useTokensModule()
 	local var3 = useSystemBannerVariantsModule(var2, t_1[var1.variant] or var1.variant, var1.severity)
@@ -66,10 +65,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		},
 		ref = var6
 	}), reactModule.createElement(presentationContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+		value = reactModule.useMemo(function()
 			-- upvalues: var3 (ref)
 			return { colorNamespace = var3.container.colorNamespace }
-		end, { var3.container.colorNamespace }) else nil else { colorNamespace = var3.container.colorNamespace }
+		end, { var3.container.colorNamespace })
 	}, {
 		Icon = reactModule.createElement(iconModule, {
 			LayoutOrder = 1,

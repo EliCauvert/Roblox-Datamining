@@ -2311,11 +2311,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,الزيارات
 Feature.Build.Content.NewGame,لعبة جديدة
 Feature.Build.Description.ActivateDeveloperProduct,طرح منتج المطوّر {PRODUCT_ID} للبيع.
-Feature.Build.Description.AdActive,إعلانك قيد التشغيل. اطّلع على عدد اللاعبين الذين يصل إليهم.
 Feature.Build.Description.AdCampaignModerationReview,تتم مراجعة جميع الحملات الإعلانية من قِبل فريق الإشراف لدى منصّة Roblox. قد تستغرق هذه العملية ما يصل إلى 24 ساعة.
 Feature.Build.Description.AdCampaignSheetRunDates,سيتم تشغيل حملتك من {startDate} إلى {endDate}
 Feature.Build.Description.AdComplete,انتهى إعلانك. تحقَّق من نتائجك.
-Feature.Build.Description.AdInReview,إعلانك قيد المراجعة ومجدول للتشغيل من {startDate} إلى {endDate}.
 Feature.Build.Description.AdModerationReview,تتم مراجعة جميع الإعلانات من قِبل فريق الإشراف لدى منصّة Roblox وقد تستغرق العملية ما يصل إلى 24 ساعة.
 Feature.Build.Description.AdvertisingAgreement,"من خلال تحديد ""إنشاء""، فإنك توافق على {advertisingTermsStart}شروط الإعلان{advertisingTermsEnd} و{advertisingStandardsStart}معايير الإعلان{advertisingStandardsEnd} لدى منصّة Roblox."
 Feature.Build.Description.ArchiveRemoval,إذا قمت بأرشفة هذه اللعبة، فستتم إزالتها من ميزة Build. سيظل بإمكانك الوصول إليها واستعادتها من مركز المصمم أو من Roblox Studio.
@@ -2644,7 +2642,6 @@ Feature.Build.Title.AdActive,الحملة الإعلانية نشطة
 Feature.Build.Title.AdCampaignDuration,حملة إعلانية لمدة {durationDays} من الأيام
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} من الأيام
 Feature.Build.Title.AdComplete,اكتمل الإعلان
-Feature.Build.Title.AdCreated,تم إنشاء الإعلان
 Feature.Build.Title.AdCreatedPeriod,تم إنشاء الإعلان.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,إضافة صور
@@ -3872,6 +3869,7 @@ Feature.Groups.Notification.FailedToFollow,تعذّرت متابعة الملف 
 Feature.Groups.Notification.FailedToJoin,تعذّر الانضمام إلى المجتمع. يُرجى المحاولة مرة أخرى لاحقًا.
 Feature.Groups.Notification.FailedToLoad,تعذّر تحميل المجتمع. يُرجى المحاولة مرة أخرى لاحقًا.
 Feature.Groups.Notification.Following,بدأت متابعة مجموعة {groupName}.
+Feature.Groups.Notification.GroupDeactivated,تم إلغاء تنشيط هذا المجتمع.
 Feature.Groups.Notification.GroupDoesNotExist,المجتمع غير موجود.
 Feature.Groups.Notification.GroupModerated,يخضع هذا المجتمع للإشراف حاليًا.
 Feature.Groups.Notification.JoinRequestPending,تم طلب الانضمام إلى {groupName}.
@@ -4086,6 +4084,7 @@ Feature.Moments.Disclaimer.EveryoneMoments,يمكن للجميع في اللحظ
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,جارٍ محاولة الانضمام إلى {placeName}. قد تستغرق هذه العملية بضع ثوانٍ.
 Feature.Moments.Label.CaptureLibrary,مكتبة لقطاتك
+Feature.Moments.Label.ChooseVoice,اختر الصوت
 Feature.Moments.Label.DeleteMomentBody,لا يمكنك استعادة اللحظة بعد حذفها.
 Feature.Moments.Label.DeleteMomentTitle,هل تريد حذف اللحظة؟
 Feature.Moments.Label.DeleteVoiceoverBody,سيؤدي هذا إلى مسح النص والتعليق الصوتي. يمكنك البدء من جديد في أي وقت.
@@ -4868,12 +4867,14 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,خصم بنسبة 10% 
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,خصم بنسبة 10% في أول {trialUnlockDays} من الأيام، ثم خصم بنسبة 20% على العناصر والأفاتارات
 Feature.RobloxSubscription.Description.ExclusiveBenefits,متعة أكثر مقابل عدد أقل من عملات Robux. اشترِك في Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,انضم مبكرًا مع اشتراك Plus
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,تمت دعوتك من قِبَل {username} للانضمام إلى Plus. سيحصل كلاكما على {amount} من عملات Robux عندما تشترك Plus.
 Feature.RobloxSubscription.Description.ReferralRecipientReward,العرض صالح لمشتركي Plus الجدد فقط.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,عندما يشتري أي شخص اشتراك Plus باستخدام رابطك.
 Feature.RobloxSubscription.Description.ReferralShare,ادعُ شخصًا إلى اشتراك Plus وسيحصل كلاكما على {amount} من عملات Robux عند شرائه اشتراك Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"بالضغط على \u{201C}{ctaText}\u{201D}، فإنك توافق على <a href=""{termsUrl}"">شروط الاشتراك في منصّة Roblox</a>. سيتم تحصيل الرسوم منك تلقائيًا كل شهر حتى تقوم بالإلغاء."
 Feature.RobloxSubscription.Heading.ReferralEntry,شارك Plus للحصول على {amount} من عملات Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,سجل الإحالات
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,انضم إلى اشتراك Plus، واحصل على
 Feature.RobloxSubscription.Heading.ReferralShare,شارك Plus، واحصل على
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,خوادم خاصة مجانية
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}

@@ -1455,6 +1455,7 @@ Feature.AgeVerificationUpsell.Modal.ContentText,"このバーチャル空間に�
 "
 Feature.AgeVerificationUpsell.Modal.Title,
 Feature.AgeVerificationUpsell.Title.AgeSettingsRedirect,設定で年齢確認を受ける
+Feature.AppealsPortal.Action.AskForReview,審査を依頼
 Feature.AppealsPortal.Action.FinalAppeal,最後の異議申し立てを送る
 Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Action.Send,
@@ -1481,7 +1482,9 @@ Feature.AppealsPortal.Description.AppealSubmittedDecisionTime.Singular,1営業�
 Feature.AppealsPortal.Description.AppealSubmittedUpdate,当社が何らかの措置を取った場合、ご指定のメールアドレスに当社の決定についてのアップデートをお送りします。
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,この異議申し立てについて連絡を受け取りたくないことをお伝えいただいていない限り、当社の決定とご提供いただいたメールアドレスへの対応に関するアップデートを送信いたします。
 Feature.AppealsPortal.Description.AppealsPortal,過去の違反を表示し、あなたの異議申し立てを管理します。すべてのコンテンツと言動は、 {link}Robloxコミュニティ基準{linkEnd} を守る必要があります
+Feature.AppealsPortal.Description.AskForReview,この問題が解決済みであることを確定しています。なお、この{contentType}はRobloxが再度審査します。
 Feature.AppealsPortal.Description.DetailsUnavailable,
+Feature.AppealsPortal.Description.FixByDate,{date}までにStudioで問題を解決してから、再度審査をリクエストしてください。
 Feature.AppealsPortal.Description.IssueClosed,当社の規則の1つを学ぶことで、一時停止を回避するという選択がされたため、この問題は終了しました。
 Feature.AppealsPortal.Description.MatchEmail,メールアドレスは一致しなければなりません。
 Feature.AppealsPortal.Description.MiscAppeal,判断ミスがあったと思われる場合はお知らせください。
@@ -1856,6 +1859,7 @@ Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,名前に使用できるのは、文字、半角英数字、およびスペースだけです。
 Feature.Avatar.Label.CountSelected,{itemCount} 点を選択済み
 Feature.Avatar.Label.Creations,作品
+Feature.Avatar.Label.Current,現在装備中
 Feature.Avatar.Label.CurrentlyWearing,装備中
 Feature.Avatar.Label.DefaultBody,デフォルトのボディ
 Feature.Avatar.Label.DeleteSetBody,このセットを削除しても、その中の服装は削除されません。
@@ -2331,11 +2335,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,訪問数
 Feature.Build.Content.NewGame,新規のゲーム
 Feature.Build.Description.ActivateDeveloperProduct,開発者製品{PRODUCT_ID}の販売を開始してください。
-Feature.Build.Description.AdActive,広告は掲載中です。どれだけのプレイヤーにリーチしているかを確認しましょう。
 Feature.Build.Description.AdCampaignModerationReview,すべての広告キャンペーンはRobloxによる審査の対象となります。審査には最大24時間かかる場合があります。
 Feature.Build.Description.AdCampaignSheetRunDates,実施期間：{startDate}～{endDate}
 Feature.Build.Description.AdComplete,広告が終了しました。結果をご覧ください。
-Feature.Build.Description.AdInReview,広告は審査中で、{startDate}～{endDate}に実施予定です。
 Feature.Build.Description.AdModerationReview,すべての広告はRobloxによる審査の対象となり、審査には最大24時間かかる場合があります。
 Feature.Build.Description.AdvertisingAgreement,[作成]を選択すると、{advertisingTermsStart}Roblox広告基準{advertisingTermsEnd}および{advertisingStandardsStart}広告基準{advertisingStandardsEnd}に同意したものとみなされます。
 Feature.Build.Description.ArchiveRemoval,このゲームをアーカイブすると、[ビルド]から削除されます。これは、クリエーターハブまたはRoblox Studioから引き続きアクセスして復元できます。
@@ -2664,7 +2666,6 @@ Feature.Build.Title.AdActive,広告キャンペーンは有効になっていま
 Feature.Build.Title.AdCampaignDuration,{durationDays}日間の広告キャンペーン
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}日
 Feature.Build.Title.AdComplete,広告が完了しました
-Feature.Build.Title.AdCreated,広告が作成されました
 Feature.Build.Title.AdCreatedPeriod,広告が作成されました。
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,画像を追加
@@ -3084,6 +3085,7 @@ Feature.Catalog.Title.Checkout.UnavailableItems,
 Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle,アバターを装備しますか？
 Feature.Catalog.Title.CheckoutPlural,{count} 点のアイテムをチェックアウト
 Feature.Catalog.Title.CheckoutSingular,
+Feature.Catalog.Title.Explore,詳細を表示
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,一番下のレイヤーを置き換えますか？
 Feature.Catalog.Title.RentalFtuxText,アイテムをレンタルして3日間試す
 Feature.Catalog.Toast.AddedToFavorites,お気に入りに追加しました
@@ -3120,7 +3122,7 @@ Feature.Chat.Action.StartChatWithFriends,
 Feature.Chat.Action.Stay,そのまま
 Feature.Chat.Action.Translate,翻訳する
 Feature.Chat.Action.UnmuteVoice,音声のミュート解除
-Feature.Chat.Action.ViewAssetDetails,詳細を表示
+Feature.Chat.Action.ViewAssetDetails,
 Feature.Chat.Description.ConversationInviteGroupCreatedOn,グループ作成日：{creation_date}
 Feature.Chat.Description.CreateUnfilteredChatCell,このグループのメンバー全員が招待されますが参加資格のない人もいます。
 Feature.Chat.Description.CreateUnfilteredChatDialog,"チャット拡張機能を使うと伏字フィルタ処理なしでチャットできます。
@@ -3892,6 +3894,7 @@ Feature.Groups.Notification.FailedToFollow,プロフィールをフォローで�
 Feature.Groups.Notification.FailedToJoin,コミュニティに参加できませんでした。後でもう一度お試しください。
 Feature.Groups.Notification.FailedToLoad,コミュニティを読み込めませんでした。後でもう一度お試しください。
 Feature.Groups.Notification.Following,{groupName}をフォローしています。
+Feature.Groups.Notification.GroupDeactivated,このコミュニティは無効化されました。
 Feature.Groups.Notification.GroupDoesNotExist,コミュニティが存在しません。
 Feature.Groups.Notification.GroupModerated,このコミュニティは現在、内容審査中です。
 Feature.Groups.Notification.JoinRequestPending,{groupName}への参加をリクエストしました。
@@ -4062,12 +4065,16 @@ Feature.Moments.Action.AddSticker,ステッカーを追加
 Feature.Moments.Action.AddText,テキストを追加
 Feature.Moments.Action.AddVoice,ボイスを追加
 Feature.Moments.Action.Back,
+Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentShowLess,折りたたむ
+Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
 Feature.Moments.Action.CreateVoiceover,ボイスオーバーを作成
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.DiscardChange,
 Feature.Moments.Action.Done,
+Feature.Moments.Action.Edit,
 Feature.Moments.Action.Expand,展開
 Feature.Moments.Action.GenerateText,テキストを生成
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,役に立たなかった
@@ -4083,6 +4090,7 @@ Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
+Feature.Moments.Action.RetryLoadingComments,コメントの読み込みを再試行
 Feature.Moments.Action.Return,ギャラリーに戻る
 Feature.Moments.Action.ReturnToEditing,編集に戻る
 Feature.Moments.Action.SaveVoiceover,
@@ -4104,8 +4112,35 @@ Feature.Moments.Description.PublishMoment,モーメントの説明をしてく�
 Feature.Moments.Description.TooManyUploads,本日アップロードしたビデオの数が多すぎます。明日もう一度お試しください。
 Feature.Moments.Disclaimer.EveryoneMoments,モーメント内の全員が、公開されているものを閲覧できます
 Feature.Moments.Label.All,
+Feature.Moments.Label.AllowComments,コメントを許可
 Feature.Moments.Label.AttemptingJoinExperience,{placeName}に参加しようとしています。これには数秒かかる場合があります。
 Feature.Moments.Label.CaptureLibrary,
+Feature.Moments.Label.ChooseVoice,ボイスを選択
+Feature.Moments.Label.CommentAuthorFallback,ユーザー（{userId}）
+Feature.Moments.Label.CommentAuthorUnknown,不明なユーザー
+Feature.Moments.Label.CommentDeleteFailed,コメントを削除できませんでした
+Feature.Moments.Label.CommentNotAllowed,このモーメントにコメントすることはできません。
+Feature.Moments.Label.CommentPostFailed,コメントを投稿できませんでした。もう一度お試しください。
+Feature.Moments.Label.CommentPostOutcomeUnknown,最後に投稿されたコメントを確認できませんでした。コメント状況をチェックしてから、もう一度送信してください。
+Feature.Moments.Label.CommentRateLimited,頻繁にコメントしすぎています。後でもう一度お試しください。
+Feature.Moments.Label.CommentRejectedByFilter,コメントが投稿されませんでした。修正してからもう一度お試しください。
+Feature.Moments.Label.CommentSendStatusUnknown,送信状況が不明です
+Feature.Moments.Label.CommentSending,送信中...
+Feature.Moments.Label.CommentSignInRequired,コメントするにはもう一度ログインしてください。
+Feature.Moments.Label.CommentTimestampDays,{count}日
+Feature.Moments.Label.CommentTimestampHours,{count}時間
+Feature.Moments.Label.CommentTimestampMinutes,{count}分
+Feature.Moments.Label.CommentTimestampMonths,{count}か月
+Feature.Moments.Label.CommentTimestampNow,
+Feature.Moments.Label.CommentTimestampWeeks,{count}週間
+Feature.Moments.Label.CommentTimestampYears,{count}年
+Feature.Moments.Label.CommentingUnavailable,コメントは現在ご利用いただけません。後でもう一度お試しください。
+Feature.Moments.Label.CommentsDisabled,コメントが無効化されています
+Feature.Moments.Label.CommentsReadOnly,コメントは読み取り専用です
+Feature.Moments.Label.CommentsTurnedOff,このモーメントへのコメントはオフになっています。
+Feature.Moments.Label.CommentsUnavailable,コメントは利用できません
+Feature.Moments.Label.DeleteCommentBody,このコメントは完全に削除されます。
+Feature.Moments.Label.DeleteCommentTitle,コメントを削除しますか？
 Feature.Moments.Label.DeleteMomentBody,削除したモーメントは復元できません。
 Feature.Moments.Label.DeleteMomentTitle,モーメントを削除しますか？
 Feature.Moments.Label.DeleteVoiceoverBody,これにより、テキストとボイスオーバーが消去されます。この操作はいつでもやり直せます。
@@ -4117,6 +4152,7 @@ Feature.Moments.Label.FeedEndTitle,新着のモーメントはありません
 Feature.Moments.Label.FeedFailedToLoad,ロードできませんでした
 Feature.Moments.Label.FeedMyMoments,マイモーメント
 Feature.Moments.Label.FeedTrending,トレンド
+Feature.Moments.Label.FirstCommentInvite,まだコメントはありません。最初にコメントしましょう！
 Feature.Moments.Label.HowToUseCaptureTitle,切り抜きの使い方
 Feature.Moments.Label.LinkCopied,リンクをコピーしました
 Feature.Moments.Label.LinkCopyFailed,リンクをコピーできませんでした。
@@ -4125,12 +4161,14 @@ Feature.Moments.Label.MomentDeletedBody,
 Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,問題が発生しました。
 Feature.Moments.Label.MomentFailedToPostTitle,モーメントを投稿できませんでした
+Feature.Moments.Label.MomentNoLongerAvailable,このモーメントはもう利用できません。
 Feature.Moments.Label.MomentPublishedBody,モーメントが正常に公開されました。
 Feature.Moments.Label.MomentPublishedTitle,モーメントが公開されました
 Feature.Moments.Label.MomentUnavailable,モーメントは使用できません
 Feature.Moments.Label.MomentUnavailableDefault,このモーメントは使用できません。
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NoCommentsYet,コメントはまだありません
 Feature.Moments.Label.NonInfiniteScrollEndTitle,現在、新着のモーメントはありません
 Feature.Moments.Label.Photos,写真
 Feature.Moments.Label.PostDeleted,モーメントが削除されました
@@ -4171,6 +4209,10 @@ Feature.Moments.Label.VoiceLimitReachedBody,しばらくしてから、もう一
 Feature.Moments.Label.VoiceModerationError,スクリプトは安全に関するルールに従う必要があります
 Feature.Moments.Label.VoicePlaceholder,ボイスオーバーのスクリプトを入力してください。文字数制限は{maxCount}文字です
 Feature.Moments.Label.VoiceTimeoutBody,ボイスオーバーの生成がタイムアウトしました。
+Feature.Moments.Label.WriteComment,コメントを書く
+Feature.Moments.Title.Comments,コメント
+Feature.Moments.Title.CommentsWithCappedCount,コメント（{count}件以上）
+Feature.Moments.Title.CommentsWithCount,コメント（{count}件）
 Feature.Moments.Title.GenerateTextFeedbackReason,何が問題でしたか？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
@@ -4886,12 +4928,14 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,最初の60日間は10
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,最初の{trialUnlockDays}日間は10%オフ、その後はアイテムとアバターが20%オフ
 Feature.RobloxSubscription.Description.ExclusiveBenefits,少ないRobuxでもっと楽しく。Roblox Plusを定期購入しましょう。
 Feature.RobloxSubscription.Description.JoinEarly,Plusで先行参加
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username}さんからPlusへの招待状が届いています。Plusを購入すると、お互いに{amount}Robuxを獲得できます。
 Feature.RobloxSubscription.Description.ReferralRecipientReward,このオファーは、新規のPlus会員のみが対象です。
 Feature.RobloxSubscription.Description.ReferralReferrerReward,相手があなたのリンクからPlusを定期購入した場合。
 Feature.RobloxSubscription.Description.ReferralShare,Plusに招待した相手がPlusを定期購入すると、お互いに{amount} Robuxを獲得できます。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}をクリックすると、<a href=""{termsUrl}"">Roblox定期購入規約</a>に同意したとみなされます。キャンセルするまで、毎月自動的に料金が課金されます。"
 Feature.RobloxSubscription.Heading.ReferralEntry,Plusをシェアして、{amount} Robuxを獲得
 Feature.RobloxSubscription.Heading.ReferralHistory,紹介履歴
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,Plusに参加して、次を獲得：
 Feature.RobloxSubscription.Heading.ReferralShare,Plusをシェアして、次を獲得：
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,無料プライベートサーバー
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}

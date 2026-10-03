@@ -1437,6 +1437,7 @@ Feature.AgeVerificationUpsell.Modal.ContentText,"Verifica la tua età per accede
 "
 Feature.AgeVerificationUpsell.Modal.Title,
 Feature.AgeVerificationUpsell.Title.AgeSettingsRedirect,Effettua la verifica dell'età nelle impostazioni
+Feature.AppealsPortal.Action.AskForReview,Richiedi la revisione
 Feature.AppealsPortal.Action.FinalAppeal,Invia la richiesta di appello finale
 Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Action.Send,
@@ -1463,7 +1464,9 @@ Feature.AppealsPortal.Description.AppealSubmittedDecisionTime.Singular,Prenderem
 Feature.AppealsPortal.Description.AppealSubmittedUpdate,Invieremo un aggiornamento riguardo la nostra decisione all'indirizzo email che hai fornito.
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,"Invieremo un aggiornamento per comunicare l'esito ed eventuali azioni intraprese all'indirizzo email che hai fornito, a meno che tu non ci abbia comunicato che non desideri ricevere ulteriori comunicazioni su questo ricorso."
 Feature.AppealsPortal.Description.AppealsPortal,Visualizza le violazioni passate e gestisci i tuoi ricorsi. Tutti i contenuti e i comportamenti devono aderire alle {link}Norme comunitarie di Roblox{linkEnd}.
+Feature.AppealsPortal.Description.AskForReview,Stai confermando di aver risolto questo problema. Esamineremo {contentType} di nuovo.
 Feature.AppealsPortal.Description.DetailsUnavailable,
+Feature.AppealsPortal.Description.FixByDate,"Risolvi il problema in Studio entro il giorno {date}, quindi torna e chiedi una revisione."
 Feature.AppealsPortal.Description.IssueClosed,Abbiamo chiuso questo problema perché hai scelto di apprendere una delle nostre regole per evitare una sospensione.
 Feature.AppealsPortal.Description.MatchEmail,Gli indirizzi email devono corrispondere.
 Feature.AppealsPortal.Description.MiscAppeal,Facci sapere se pensi che abbiamo commesso un errore.
@@ -1838,6 +1841,7 @@ Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"I nomi possono contenere solo lettere, numeri e spazi."
 Feature.Avatar.Label.CountSelected,{itemCount} Selezionato
 Feature.Avatar.Label.Creations,Creazioni
+Feature.Avatar.Label.Current,Attuale
 Feature.Avatar.Label.CurrentlyWearing,Indossato attualmente
 Feature.Avatar.Label.DefaultBody,Corpo predefinito
 Feature.Avatar.Label.DeleteSetBody,L'eliminazione di questo set non eliminerà gli outfit al suo interno.
@@ -2313,11 +2317,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,Tempo di gioco totale
 Feature.Build.Analytics.Visits,Visite
 Feature.Build.Content.NewGame,Nuovo gioco
 Feature.Build.Description.ActivateDeveloperProduct,Metti in vendita il Developer Product {PRODUCT_ID}.
-Feature.Build.Description.AdActive,Il tuo annuncio è attivo. Scopri quanti giocatori sta raggiungendo.
 Feature.Build.Description.AdCampaignModerationReview,Tutte le campagne pubblicitarie vengono esaminate dalla moderazione di Roblox. Questo processo può richiedere fino a 24 ore.
 Feature.Build.Description.AdCampaignSheetRunDates,In esecuzione dal {startDate} al {endDate}
 Feature.Build.Description.AdComplete,Il tuo annuncio è terminato. Controlla i tuoi risultati.
-Feature.Build.Description.AdInReview,Il tuo annuncio è in fase di revisione. La pubblicazione è prevista per il periodo {startDate} – {endDate}.
 Feature.Build.Description.AdModerationReview,Tutti gli annunci vengono esaminati dalla moderazione di Roblox e l'operazione può richiedere fino a 24 ore.
 Feature.Build.Description.AdvertisingAgreement,"Se selezioni Crea, accetti i {advertisingTermsStart}Termini pubblicitari{advertisingTermsEnd} e gli {advertisingStandardsStart}Standard pubblicitari di Roblox{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Se archivi questo gioco, verrà rimosso da Costruisci. Puoi ancora accedervi e ripristinarlo dall'Hub Creatore o da Roblox Studio."
@@ -2646,7 +2648,6 @@ Feature.Build.Title.AdActive,La campagna pubblicitaria è attiva
 Feature.Build.Title.AdCampaignDuration,Campagna pubblicitaria di {durationDays} giorni
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} giorni
 Feature.Build.Title.AdComplete,Annuncio completato
-Feature.Build.Title.AdCreated,Annuncio creato
 Feature.Build.Title.AdCreatedPeriod,Annuncio creato.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Aggiungi immagini
@@ -3066,6 +3067,7 @@ Feature.Catalog.Title.Checkout.UnavailableItems,
 Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle,Vuoi indossare l'avatar?
 Feature.Catalog.Title.CheckoutPlural,Pagamento di {count} articoli
 Feature.Catalog.Title.CheckoutSingular,
+Feature.Catalog.Title.Explore,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,Sostituire il livello in basso?
 Feature.Catalog.Title.RentalFtuxText,Noleggia un articolo per provarlo per 3 giorni
 Feature.Catalog.Toast.AddedToFavorites,Aggiunto ai preferiti
@@ -3874,6 +3876,7 @@ Feature.Groups.Notification.FailedToFollow,Impossibile seguire il profilo. Ripro
 Feature.Groups.Notification.FailedToJoin,Impossibile unirsi alla community. Riprova più tardi.
 Feature.Groups.Notification.FailedToLoad,Impossibile caricare la community. Riprova più tardi.
 Feature.Groups.Notification.Following,Segui {groupName}.
+Feature.Groups.Notification.GroupDeactivated,Questa comunità è stata disattivata.
 Feature.Groups.Notification.GroupDoesNotExist,La community non esiste.
 Feature.Groups.Notification.GroupModerated,Questa community è attualmente moderata.
 Feature.Groups.Notification.JoinRequestPending,Richiesta di partecipazione inviata a {groupName}.
@@ -4044,12 +4047,16 @@ Feature.Moments.Action.AddSticker,Aggiungi adesivo
 Feature.Moments.Action.AddText,Aggiungi testo
 Feature.Moments.Action.AddVoice,Aggiungi Voce
 Feature.Moments.Action.Back,
+Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentShowLess,Mostra di meno
+Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
 Feature.Moments.Action.CreateVoiceover,Crea voce fuori campo
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.DiscardChange,Elimina modifica
 Feature.Moments.Action.Done,
+Feature.Moments.Action.Edit,
 Feature.Moments.Action.Expand,Espandi
 Feature.Moments.Action.GenerateText,Genera testo
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Non utile
@@ -4065,6 +4072,7 @@ Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
+Feature.Moments.Action.RetryLoadingComments,Riprova a caricare i commenti
 Feature.Moments.Action.Return,Ritorna alla Galleria
 Feature.Moments.Action.ReturnToEditing,Ritorna alla fase di modifica
 Feature.Moments.Action.SaveVoiceover,
@@ -4086,8 +4094,35 @@ Feature.Moments.Description.PublishMoment,Descrivi il tuo Momento
 Feature.Moments.Description.TooManyUploads,Hai caricato troppi video oggi. Riprova domani.
 Feature.Moments.Disclaimer.EveryoneMoments,Tutti i partecipanti ai Momenti possono visualizzare ciò che viene pubblicato
 Feature.Moments.Label.All,
+Feature.Moments.Label.AllowComments,Permetti commenti
 Feature.Moments.Label.AttemptingJoinExperience,Tentativo di partecipazione all'esperienza {placeName} in corso. L'operazione potrebbe richiedere alcuni secondi.
 Feature.Moments.Label.CaptureLibrary,La tua libreria delle acquisizioni
+Feature.Moments.Label.ChooseVoice,Scegli la voce
+Feature.Moments.Label.CommentAuthorFallback,Utente {userId}
+Feature.Moments.Label.CommentAuthorUnknown,Utente sconosciuto
+Feature.Moments.Label.CommentDeleteFailed,Impossibile eliminare il commento
+Feature.Moments.Label.CommentNotAllowed,Non puoi commentare questo Momento.
+Feature.Moments.Label.CommentPostFailed,Non è stato possibile pubblicare il tuo commento. Riprova.
+Feature.Moments.Label.CommentPostOutcomeUnknown,Non è stato possibile confermare la pubblicazione del tuo ultimo commento. Controlla i commenti prima di inviarli di nuovo.
+Feature.Moments.Label.CommentRateLimited,Stai scrivendo commenti troppo velocemente. Riprova più tardi.
+Feature.Moments.Label.CommentRejectedByFilter,Il tuo commento non è stato pubblicato. Modificalo e riprova.
+Feature.Moments.Label.CommentSendStatusUnknown,Stato dell'invio sconosciuto
+Feature.Moments.Label.CommentSending,Invio in corso...
+Feature.Moments.Label.CommentSignInRequired,Accedi di nuovo per commentare.
+Feature.Moments.Label.CommentTimestampDays,{count} gg
+Feature.Moments.Label.CommentTimestampHours,{count} ore
+Feature.Moments.Label.CommentTimestampMinutes,{count} min
+Feature.Moments.Label.CommentTimestampMonths,{count} m
+Feature.Moments.Label.CommentTimestampNow,
+Feature.Moments.Label.CommentTimestampWeeks,{count} sett.
+Feature.Moments.Label.CommentTimestampYears,{count} a
+Feature.Moments.Label.CommentingUnavailable,Al momento non è possibile commentare. Riprova più tardi.
+Feature.Moments.Label.CommentsDisabled,I commenti sono disabilitati
+Feature.Moments.Label.CommentsReadOnly,I commenti sono di sola lettura
+Feature.Moments.Label.CommentsTurnedOff,I commenti sono disattivati per questo Momento.
+Feature.Moments.Label.CommentsUnavailable,I commenti non sono disponibili
+Feature.Moments.Label.DeleteCommentBody,Questo commento sarà eliminato definitivamente.
+Feature.Moments.Label.DeleteCommentTitle,Eliminare il commento?
 Feature.Moments.Label.DeleteMomentBody,"Una volta confermato, non sarà possibile recuperarlo."
 Feature.Moments.Label.DeleteMomentTitle,Eliminare il Momento?
 Feature.Moments.Label.DeleteVoiceoverBody,Questa operazione cancella il testo e la voce fuori campo. Puoi ricominciare in qualsiasi momento.
@@ -4099,6 +4134,7 @@ Feature.Moments.Label.FeedEndTitle,È tutto aggiornato
 Feature.Moments.Label.FeedFailedToLoad,Impossibile caricare il feed
 Feature.Moments.Label.FeedMyMoments,I miei Momenti
 Feature.Moments.Label.FeedTrending,
+Feature.Moments.Label.FirstCommentInvite,Ancora nessun commento. Scrivi il primo commento!
 Feature.Moments.Label.HowToUseCaptureTitle,Come usare lo strumento Acquisisci
 Feature.Moments.Label.LinkCopied,Link copiato
 Feature.Moments.Label.LinkCopyFailed,Impossibile copiare il link.
@@ -4107,12 +4143,14 @@ Feature.Moments.Label.MomentDeletedBody,
 Feature.Moments.Label.MomentDeletedTitle,Vuoi eliminare il Momento?
 Feature.Moments.Label.MomentFailedToPostBody,Si è verificato un errore.
 Feature.Moments.Label.MomentFailedToPostTitle,Impossibile pubblicare il Momento
+Feature.Moments.Label.MomentNoLongerAvailable,Questo Momento non è più disponibile.
 Feature.Moments.Label.MomentPublishedBody,Il tuo Momento è stato pubblicato con successo.
 Feature.Moments.Label.MomentPublishedTitle,Momento pubblicato
 Feature.Moments.Label.MomentUnavailable,Momento non disponibile
 Feature.Moments.Label.MomentUnavailableDefault,Questo Momento non è disponibile.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NoCommentsYet,Ancora nessun commento
 Feature.Moments.Label.NonInfiniteScrollEndTitle,È tutto aggiornato per ora
 Feature.Moments.Label.Photos,Foto
 Feature.Moments.Label.PostDeleted,Momento eliminato
@@ -4153,6 +4191,10 @@ Feature.Moments.Label.VoiceLimitReachedBody,"Attendi un minuto, quindi riprova"
 Feature.Moments.Label.VoiceModerationError,Il tuo script deve seguire le regole di sicurezza
 Feature.Moments.Label.VoicePlaceholder,Inserisci il testo della tua voce fuori campo. Limite di {maxCount} caratteri
 Feature.Moments.Label.VoiceTimeoutBody,Tempo di generazione della voce fuori campo scaduto.
+Feature.Moments.Label.WriteComment,Scrivi un commento
+Feature.Moments.Title.Comments,Commenti
+Feature.Moments.Title.CommentsWithCappedCount,Commenti ({count}+)
+Feature.Moments.Title.CommentsWithCount,Commenti ({count})
 Feature.Moments.Title.GenerateTextFeedbackReason,Cosa è andato storto?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Vuoi interrompere la creazione del Momento?
@@ -4870,12 +4912,14 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% di sconto nei pri
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10% di sconto per i primi {trialUnlockDays} giorni, poi 20% di sconto su articoli e avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Più divertimento con meno Robux. Abbonati a Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Unisciti in anticipo con il piano Plus
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} ti ha invitato a unirti a Plus. Entrambi riceverete {amount} Robux se deciderai di acquistarlo.
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Offerta valida solo per i nuovi abbonati a Plus.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Quando qualcuno sottoscrive un abbonamento a Plus con il tuo link.
 Feature.RobloxSubscription.Description.ReferralShare,"Invita qualcuno a Plus e, se si abbona, entrambi riceverete {amount} Robux."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Cliccando su \u{201C}{ctaText}\u{201D}, accetti le <a href=""{termsUrl}"">Condizioni di abbonamento di Roblox</a>. Ti verrà addebitato automaticamente un importo a cadenza mensile fino all'eventuale disdetta."
 Feature.RobloxSubscription.Heading.ReferralEntry,Condividi il piano Plus per ottenere {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,Cronologia degli inviti
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,"Iscriviti al piano Plus, ottieni"
 Feature.RobloxSubscription.Heading.ReferralShare,"Condividi il piano Plus, ottieni"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Server privati gratuiti
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -5672,7 +5716,7 @@ Notifications.DesktopPushNotificationPrompts.Description.SystemTrayPrompt,Roblox
 Notifications.DesktopPushNotificationPrompts.Heading.EnablePrompt,Mantieni la connessione quando l'app non è in uso
 Notifications.DesktopPushNotificationPrompts.Heading.SystemTrayPrompt,Roblox è sempre a portata di clic
 Notifications.DesktopPushNotificationPrompts.Label.GetNotifications,Ricevi notifiche
-Notifications.NotificationStream.Bundle.ShowLess,Mostra di meno
+Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} altro
 Notifications.NotificationStream.Label.AllCaughtUp,Fatto tutto!
 Notifications.NotificationStream.Label.Notifications,

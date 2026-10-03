@@ -2332,11 +2332,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,Tiempo de reproducción total
 Feature.Build.Analytics.Visits,Visitas
 Feature.Build.Content.NewGame,Juego nuevo
 Feature.Build.Description.ActivateDeveloperProduct,Poner el producto {PRODUCT_ID} del desarrollador a la venta.
-Feature.Build.Description.AdActive,Tu anuncio está activo. Consulta a cuántos jugadores está llegando.
 Feature.Build.Description.AdCampaignModerationReview,Todas las campañas publicitarias son revisadas por la moderación de Roblox. Este proceso puede tardar hasta 24 horas.
 Feature.Build.Description.AdCampaignSheetRunDates,Se publica del {startDate} al {endDate}
 Feature.Build.Description.AdComplete,Tu anuncio finalizó. Consulta tus resultados.
-Feature.Build.Description.AdInReview,Tu anuncio está en revisión y está programado para ejecutarse del {startDate} al {endDate}.
 Feature.Build.Description.AdModerationReview,El equipo de moderación de Roblox revisa todos los anuncios. Este proceso puede tardar hasta 24 horas.
 Feature.Build.Description.AdvertisingAgreement,"Al seleccionar Crear, aceptas los {advertisingTermsStart}Términos publicitarios{advertisingTermsEnd} y las {advertisingStandardsStart}Normas publicitarias de Roblox{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Si archivas este juego, se eliminará de la compilación. Aún podrás acceder a él y restaurarlo desde Creator Hub o Roblox Studio."
@@ -2665,7 +2663,6 @@ Feature.Build.Title.AdActive,La campaña de anuncios está activa
 Feature.Build.Title.AdCampaignDuration,Campaña publicitaria de {durationDays} días
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} días
 Feature.Build.Title.AdComplete,Anuncio completado
-Feature.Build.Title.AdCreated,Anuncio creado
 Feature.Build.Title.AdCreatedPeriod,Anuncio creado.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Añadir imágenes
@@ -3893,6 +3890,7 @@ Feature.Groups.Notification.FailedToFollow,Error al seguir el perfil. Inténtalo
 Feature.Groups.Notification.FailedToJoin,Error al unirte a la comunidad. Inténtalo de nuevo más tarde.
 Feature.Groups.Notification.FailedToLoad,Error al cargar la comunidad. Inténtalo de nuevo más tarde.
 Feature.Groups.Notification.Following,Sigues a {groupName}.
+Feature.Groups.Notification.GroupDeactivated,Esta comunidad se desactivó.
 Feature.Groups.Notification.GroupDoesNotExist,La comunidad no existe.
 Feature.Groups.Notification.GroupModerated,Esta comunidad está siendo moderada actualmente.
 Feature.Groups.Notification.JoinRequestPending,Solicitaste unirte a {groupName}.
@@ -4107,6 +4105,7 @@ Feature.Moments.Disclaimer.EveryoneMoments,Todas las personas que participan en 
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,Intentando unirte a {placeName}. Esto puede tardar unos segundos.
 Feature.Moments.Label.CaptureLibrary,Tu biblioteca de Capturas
+Feature.Moments.Label.ChooseVoice,Elegir voz
 Feature.Moments.Label.DeleteMomentBody,No puedes recuperar un Momento una vez que se elimina.
 Feature.Moments.Label.DeleteMomentTitle,¿Eliminar Momento?
 Feature.Moments.Label.DeleteVoiceoverBody,Esto borrará el texto y la voz en off. Puedes empezar de nuevo cuando quieras.
@@ -4889,12 +4888,14 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,10% de descuento los p
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,10% de descuento los primeros {trialUnlockDays} días y luego 20% de descuento en objetos y avatares
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Más diversión por menos Robux. Suscríbete a Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Únete antes con Plus
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} te invitó a unirte a Plus. Tanto tú como esa persona recibirán {amount} Robux cuando compres Plus.
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Oferta válida solo para nuevos suscriptores Plus.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Cuando alguien compra Plus con tu enlace.
 Feature.RobloxSubscription.Description.ReferralShare,Invita a alguien a Plus y tanto tú como esa persona recibirán {amount} Robux cuando compre Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Al hacer clic en \u{201C}{ctaText}\u{201D}, aceptas los <a href=""{termsUrl}"">Términos de suscripción de Roblox</a>. Se te te hará el cargo automáticamente cada mes hasta que canceles la suscripción."
 Feature.RobloxSubscription.Heading.ReferralEntry,Comparte Plus y obtén {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,Historial de invitaciones
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,Únete a Plus y obtén
 Feature.RobloxSubscription.Heading.ReferralShare,Comparte Plus y obtén
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Servidores privados gratis
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}

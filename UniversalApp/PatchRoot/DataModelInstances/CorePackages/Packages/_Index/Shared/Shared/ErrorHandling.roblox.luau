@@ -11,7 +11,9 @@ local var1 = nil
 
 local function getReactPackagePrefixes()
 	-- upvalues: var1 (write), list (ref), parent (ref)
-	if var1 then
+	if _G.ENVIRONMENT == "PRODUCTION" then
+		return {}
+	elseif var1 then
 		return var1
 	end
 	local t = {}

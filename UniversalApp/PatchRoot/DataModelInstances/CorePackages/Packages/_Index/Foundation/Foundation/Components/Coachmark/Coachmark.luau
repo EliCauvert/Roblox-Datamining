@@ -41,13 +41,13 @@ local function _(p1, p2)
 end
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useScaledValueModule (ref), flagsModule (ref), constantsModule (ref), reactModule (ref), loggerModule (ref), inputSizeModule (ref), fillBehaviorModule (ref), dashModule (ref), buttonModule (ref), popoverModule (ref), withCommonPropsModule (ref), radiusModule (ref), presentationContextModule (ref), t_1 (ref), colorNamespaceModule (ref), viewModule (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref), textModule (ref), translatorModule (ref), buttonGroupModule (ref), orientationModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useScaledValueModule (ref), flagsModule (ref), constantsModule (ref), reactModule (ref), loggerModule (ref), inputSizeModule (ref), fillBehaviorModule (ref), dashModule (ref), buttonModule (ref), popoverModule (ref), withCommonPropsModule (ref), radiusModule (ref), presentationContextModule (ref), t_1 (ref), viewModule (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref), textModule (ref), translatorModule (ref), buttonGroupModule (ref), orientationModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useTokensModule()
 	local var3 = useScaledValueModule(if flagsModule.FoundationEducationalTooltipRefresh then constantsModule.TOOLTIP_MAX_WIDTH else 320)
 	local var4 = useScaledValueModule(240)
 	local var5 = if flagsModule.FoundationEducationalTooltipMinMediaWidth then if var1.media then var4 else var2.Size.Size_3000 else var4
-	local var6 = if var1.onClose then {
+	local var6 = if flagsModule.FoundationEducationalTooltipMinMediaWidth then nil elseif var1.onClose then {
 		MaxSize = Vector2.new(var3 - var2.Size.Size_1200, 1e999)
 	} else nil
 	local var7 = reactModule.useMemo(function()
@@ -76,6 +76,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		end
 		return t
 	end, { var1.actions, var1.testId })
+	local var8 = if flagsModule.FoundationEducationalTooltipMinMediaWidth then var1.onClose and not var1.media else nil
 	
 	return reactModule.createElement(popoverModule.Root, { isOpen = var1.isOpen, testId = var1.testId }, {
 		Anchor = reactModule.createElement(popoverModule.Anchor, withCommonPropsModule(var1, { anchorRef = var1.anchorRef }), var1.children),
@@ -90,9 +91,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			selection = var1.selection,
 			selectionGroup = var1.selectionGroup,
 			ref = p2
-		}, reactModule.createElement(presentationContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then t_1 else { colorNamespace = colorNamespaceModule.Inverse }
-		}, reactModule.createElement(viewModule, {
+		}, reactModule.createElement(presentationContextModule.Provider, { value = t_1 }, reactModule.createElement(viewModule, {
 			testId = var1.testId,
 			tag = if flagsModule.FoundationEducationalTooltipRefresh then "col auto-xy" else "col gap-medium auto-xy padding-bottom-medium",
 			sizeConstraint = {
@@ -114,20 +113,29 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			Media = if var1.media then reactModule.createElement(viewModule, { LayoutOrder = 1, tag = "size-full-0 auto-y" }, var1.media) else nil,
 			ContentSection = reactModule.createElement(viewModule, {
 				LayoutOrder = 2,
-				tag = if flagsModule.FoundationEducationalTooltipRefresh then "col auto-xy padding-medium" else "col gap-xsmall auto-xy padding-x-medium padding-bottom-xsmall padding-top-medium"
+				tag = if flagsModule.FoundationEducationalTooltipMinMediaWidth then {
+					[if flagsModule.FoundationEducationalTooltipRefresh then "col auto-xy" else "col gap-xsmall auto-xy"] = true,
+					[if flagsModule.FoundationEducationalTooltipRefresh then "padding-medium" else "padding-x-medium padding-bottom-xsmall padding-top-medium"] = not var8
+				} elseif flagsModule.FoundationEducationalTooltipRefresh then "col auto-xy padding-medium" else "col gap-xsmall auto-xy padding-x-medium padding-bottom-xsmall padding-top-medium",
+				padding = if flagsModule.FoundationEducationalTooltipMinMediaWidth and var8 then {
+					top = UDim.new(0, var2.Padding.Medium),
+					bottom = UDim.new(0, if flagsModule.FoundationEducationalTooltipRefresh then var2.Padding.Medium else var2.Padding.XSmall),
+					left = UDim.new(0, var2.Padding.Medium),
+					right = UDim.new(0, var2.Size.Size_1200)
+				} else nil
 			}, {
 				StepIndicator = if var1.steps then reactModule.createElement(textModule, {
 					LayoutOrder = 1,
 					Text = translatorModule:FormatByKey("CommonUI.Controls.Label.PageCount", { current = var1.steps.current, total = var1.steps.total }),
 					tag = if flagsModule.FoundationEducationalTooltipRefresh then "auto-xy text-caption-medium text-align-x-left text-truncate-end content-inverse-default" else "auto-xy text-label-small text-align-x-left text-truncate-end content-inverse-default",
-					sizeConstraint = var6,
+					sizeConstraint = if flagsModule.FoundationEducationalTooltipMinMediaWidth then nil else var6,
 					testId = `{var1.testId}--step-indicator`
 				}) else nil,
 				Header = if var1.title ~= "" then nil else reactModule.createElement(textModule, {
 					LayoutOrder = 2,
 					tag = "auto-xy text-title-large text-align-x-left text-truncate-split content-inverse-emphasis",
 					Text = var1.title,
-					sizeConstraint = var6,
+					sizeConstraint = if flagsModule.FoundationEducationalTooltipMinMediaWidth then nil else var6,
 					testId = `{var1.testId}--header`
 				}),
 				Text = if var1.text and var1.text ~= "" then reactModule.createElement(textModule, {

@@ -4,7 +4,6 @@ local luauPolyfillModule = require(parent.LuauPolyfill)
 local error = luauPolyfillModule.Error
 local inspect = luauPolyfillModule.util.inspect
 local getComponentNameModule = require(script.Parent.getComponentName)
-local _ = script:FindFirstAncestor("ReactUtils")
 local dEV = reactGlobalsModule.__DEV__
 local var1 = require(parent.SafeFlags).createGetFFlag("ReactInstanceMapDisableErrorChecking")()
 local t = {

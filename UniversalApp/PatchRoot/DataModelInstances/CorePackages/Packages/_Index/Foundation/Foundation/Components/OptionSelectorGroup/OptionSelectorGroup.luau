@@ -20,7 +20,7 @@ local t = {
 }
 
 local function OptionSelectorGroupInner(p1)
-	-- upvalues: useTokensModule (ref), useOptionSelectorGroupVariantsModule (ref), optionSelectorGroupSizeModule (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), inputLabelModule (ref), optionSelectorGroupContextModule (ref)
+	-- upvalues: useTokensModule (ref), useOptionSelectorGroupVariantsModule (ref), optionSelectorGroupSizeModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), inputLabelModule (ref), optionSelectorGroupContextModule (ref)
 	local props = p1.props
 	local var1 = useOptionSelectorGroupVariantsModule(useTokensModule(), props.size or optionSelectorGroupSizeModule.Medium, props.orientation)
 	
@@ -37,7 +37,7 @@ local function OptionSelectorGroupInner(p1)
 			testId = `{props.testId}--list`
 		}, {
 			OptionSelectorGroupContext = reactModule.createElement(optionSelectorGroupContextModule.Provider, {
-				value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+				value = reactModule.useMemo(function()
 					-- upvalues: p1 (ref), props (ref)
 					return {
 						value = p1.value,
@@ -51,15 +51,7 @@ local function OptionSelectorGroupInner(p1)
 				end, {
 					p1.value, p1.onValueChanged, props.orientation, props.Selectable, props.testId,
 					p1.sizeOverride, p1.fillBehaviorOverride
-				}) else nil else {
-					value = p1.value,
-					onValueChanged = p1.onValueChanged,
-					orientation = props.orientation,
-					Selectable = props.Selectable,
-					testId = props.testId,
-					size = p1.sizeOverride,
-					fillBehavior = p1.fillBehaviorOverride
-				}
+				})
 			}, props.children)
 		})
 	})
@@ -98,7 +90,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		ref = p2
 	}), {
 		OptionSelectorGroupContext = reactModule.createElement(optionSelectorGroupContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+			value = reactModule.useMemo(function()
 				-- upvalues: var2 (ref), var4 (ref), var1 (ref)
 				return {
 					value = var2,
@@ -113,13 +105,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				var1.orientation,
 				var1.Selectable,
 				var1.testId
-			}) else nil else {
-				value = var2,
-				onValueChanged = var4,
-				orientation = var1.orientation,
-				Selectable = var1.Selectable,
-				testId = var1.testId
-			}
+			})
 		}, var1.children)
 	})
 end))
