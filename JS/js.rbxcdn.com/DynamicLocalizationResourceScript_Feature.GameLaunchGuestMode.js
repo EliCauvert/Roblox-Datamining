@@ -13,7 +13,7 @@ Roblox.LangDynamic["Feature.GameLaunchGuestMode"] = {
     "Action.Dialog.SignUpNow": "Sign up now!",
     "Action.Dialog.Ok": "OK",
     "Action.Dialog.Close": "Close",
-    "Heading.Dialog.SignUpOrLogin": "Sign up for a free account or log in!",
+    "Heading.Dialog.SignUpOrLogin": "Sign in or create a free account",
     "Heading.ChooseAvatar": "Choose Your Avatar",
     "Label.HaveAccount": "I have an account",
     "Heading.LogInToRsvp": "Log in to RSVP!",

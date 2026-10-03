@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "576d921e-501c-4975-1e59-d8829df376c5")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "44795cb6-f7a3-0194-384c-8af7c227107b")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 665869, 729904, e => {
@@ -200,12 +200,12 @@
             pathPattern: /\/analytics\/journeys\/create/,
             title: (0, t.translationKey)("Heading.JourneyEventsConfigCreate", a.TranslationNamespace.Navigation)
         },
-        G = {
+        j = {
             path: "/analytics/journeys/edit",
             pathPattern: /\/analytics\/journeys\/edit/,
             title: (0, t.translationKey)("Heading.JourneyEventsConfigCreate", a.TranslationNamespace.Navigation)
         },
-        j = {
+        G = {
             path: "/analytics/journeys/view",
             pathPattern: /\/analytics\/journeys\/view/,
             title: (0, t.translationKey)("Heading.Journeys", a.TranslationNamespace.Navigation)
@@ -323,8 +323,8 @@
             titleOverrideForIAM2: (0, t.translationKey)("Heading.AvatarCreationTokens", a.TranslationNamespace.Navigation),
             group: n
         },
-        ei = [R, H, E, S, n, o, s, l, c, d, u, p, m, y, g, h, b, f, en, v, k, N, C, T, I, P, x, M, L, G, j, A, w, D, X, W, J, B, _, z, U, q, V, $, Z, r, i, Q, Y, ee, et, ea, O, K, F, er];
-    e.s(["analyticsAgentNavigationItem", 0, W, "analyticsAiChatNavigationItem", 0, J, "analyticsAlertConfifurationNavigationItem", 0, K, "analyticsAlertCreationNavigationItem", 0, O, "analyticsAlertsNavigationItem", 0, F, "analyticsAnalyticsHomeNavigationItem", 0, r, "analyticsAssistantNavigationItem", 0, X, "analyticsAudienceNavigationItem", 0, I, "analyticsAvatarCreationTokensNavigationItem", 0, er, "analyticsBountyPayoutsNavigationItem", 0, k, "analyticsCommerceNavigationItem", 0, V, "analyticsConfigsHistoryNavigationItem", 0, _, "analyticsConfigsNavigationItem", 0, z, "analyticsCrashesNavigationItem", 0, C, "analyticsCreationOverviewNavigationItem", 0, Z, "analyticsCustomDashboardsManageNavigationItem", 0, w, "analyticsCustomEventsNavigationItem", 0, D, "analyticsDataStoresNavigationItem", 0, m, "analyticsEngagementNavigationItem", 0, E, "analyticsErrorReportNavigationItem", 0, T, "analyticsExperienceCreatorRewardsNavigationItem", 0, v, "analyticsExperienceSubscriptionsNavigationItem", 0, ea, "analyticsExperimentsCreateNavigationItem", 0, Q, "analyticsExperimentsNavigationItem", 0, i, "analyticsExploreNavigationItem", 0, A, "analyticsFeedbackNavigationItem", 0, B, "analyticsGenerativeAINavigationItem", 0, en, "analyticsHttpServiceNavigationItem", 0, y, "analyticsImmersiveAdsNavigationItem", 0, d, "analyticsItemMonetizationAvatarItemsNavigationItem", 0, l, "analyticsItemMonetizationDeveloperProductsNavigationItem", 0, o, "analyticsItemMonetizationPassesNavigationItem", 0, s, "analyticsMatchmakingNavigationItem", 0, q, "analyticsMemoryStoresNavigationItem", 0, p, "analyticsMessagingServiceNavigationItem", 0, g, "analyticsMonetizationNavigationItem", 0, n, "analyticsNotificationsNavigationItem", 0, et, "analyticsPerformanceNavigationItem", 0, N, "analyticsRecommendationServiceNavigationItem", 0, Y, "analyticsRecommendedEventsEconomyNavigationItem", 0, P, "analyticsRecommendedEventsFunnelsNavigationItem", 0, x, "analyticsRecommendedEventsJourneyCreateNavigationItem", 0, L, "analyticsRecommendedEventsJourneyEditNavigationItem", 0, G, "analyticsRecommendedEventsJourneyNavigationItem", 0, M, "analyticsRecommendedEventsJourneyViewNavigationItem", 0, j, "analyticsRetentionNavigationItem", 0, S, "analyticsSafetyNavigationItem", 0, $, "analyticsSpeechToTextNavigationItem", 0, h, "analyticsSubscriptionsNavigationItem", 0, u, "analyticsTextToSpeechNavigationItem", 0, b, "analyticsUserAcquisitionNavigationItem", 0, H, "analyticsUserAcquisitionRFYNavigationItem", 0, R, "analyticsVideoServiceNavigationItem", 0, f, "getAnalyticsNavigationItemFromPath", 0, function(e) {
+        ei = [R, H, E, S, n, o, s, l, c, d, u, p, m, y, g, h, b, f, en, v, k, N, C, T, I, P, x, M, L, j, G, A, w, D, X, W, J, B, _, z, U, q, V, $, Z, r, i, Q, Y, ee, et, ea, O, K, F, er];
+    e.s(["analyticsAgentNavigationItem", 0, W, "analyticsAiChatNavigationItem", 0, J, "analyticsAlertConfifurationNavigationItem", 0, K, "analyticsAlertCreationNavigationItem", 0, O, "analyticsAlertsNavigationItem", 0, F, "analyticsAnalyticsHomeNavigationItem", 0, r, "analyticsAssistantNavigationItem", 0, X, "analyticsAudienceNavigationItem", 0, I, "analyticsAvatarCreationTokensNavigationItem", 0, er, "analyticsBountyPayoutsNavigationItem", 0, k, "analyticsCommerceNavigationItem", 0, V, "analyticsConfigsHistoryNavigationItem", 0, _, "analyticsConfigsNavigationItem", 0, z, "analyticsCrashesNavigationItem", 0, C, "analyticsCreationOverviewNavigationItem", 0, Z, "analyticsCustomDashboardsManageNavigationItem", 0, w, "analyticsCustomEventsNavigationItem", 0, D, "analyticsDataStoresNavigationItem", 0, m, "analyticsEngagementNavigationItem", 0, E, "analyticsErrorReportNavigationItem", 0, T, "analyticsExperienceCreatorRewardsNavigationItem", 0, v, "analyticsExperienceSubscriptionsNavigationItem", 0, ea, "analyticsExperimentsCreateNavigationItem", 0, Q, "analyticsExperimentsNavigationItem", 0, i, "analyticsExploreNavigationItem", 0, A, "analyticsFeedbackNavigationItem", 0, B, "analyticsGenerativeAINavigationItem", 0, en, "analyticsHttpServiceNavigationItem", 0, y, "analyticsImmersiveAdsNavigationItem", 0, d, "analyticsItemMonetizationAvatarItemsNavigationItem", 0, l, "analyticsItemMonetizationDeveloperProductsNavigationItem", 0, o, "analyticsItemMonetizationPassesNavigationItem", 0, s, "analyticsMatchmakingNavigationItem", 0, q, "analyticsMemoryStoresNavigationItem", 0, p, "analyticsMessagingServiceNavigationItem", 0, g, "analyticsMonetizationNavigationItem", 0, n, "analyticsNotificationsNavigationItem", 0, et, "analyticsPerformanceNavigationItem", 0, N, "analyticsRecommendationServiceNavigationItem", 0, Y, "analyticsRecommendedEventsEconomyNavigationItem", 0, P, "analyticsRecommendedEventsFunnelsNavigationItem", 0, x, "analyticsRecommendedEventsJourneyCreateNavigationItem", 0, L, "analyticsRecommendedEventsJourneyEditNavigationItem", 0, j, "analyticsRecommendedEventsJourneyNavigationItem", 0, M, "analyticsRecommendedEventsJourneyViewNavigationItem", 0, G, "analyticsRetentionNavigationItem", 0, S, "analyticsSafetyNavigationItem", 0, $, "analyticsSpeechToTextNavigationItem", 0, h, "analyticsSubscriptionsNavigationItem", 0, u, "analyticsTextToSpeechNavigationItem", 0, b, "analyticsUserAcquisitionNavigationItem", 0, H, "analyticsUserAcquisitionRFYNavigationItem", 0, R, "analyticsVideoServiceNavigationItem", 0, f, "getAnalyticsNavigationItemFromPath", 0, function(e) {
         return ei.find(t => t.pathPattern.test(e))
     }])
 }, 533968, e => {
@@ -417,12 +417,12 @@
                 })
             })
         }),
-        G = (0, x.s)(D)({
+        j = (0, x.s)(D)({
             width: 24,
             height: 16
         });
 
-    function j(e) {
+    function G(e) {
         let {
             slots: a = {},
             slotProps: n = {}
@@ -432,7 +432,7 @@
                 focusRipple: !0
             }, r, {
                 ownerState: e,
-                children: (0, t.jsx)(G, (0, I._)({
+                children: (0, t.jsx)(j, (0, I._)({
                     as: a.CollapsedIcon,
                     ownerState: e
                 }, n.collapsedIcon))
@@ -535,7 +535,7 @@
                     className: N.ol,
                     ref: T,
                     ownerState: k,
-                    children: (r = f || g && A.length <= g || y + m >= A.length ? A : [...A.slice(0, y), (0, t.jsx)(j, {
+                    children: (r = f || g && A.length <= g || y + m >= A.length ? A : [...A.slice(0, y), (0, t.jsx)(G, {
                         "aria-label": p,
                         slots: {
                             CollapsedIcon: d.CollapsedIcon
@@ -1491,7 +1491,7 @@
                         enableQuestionnaireV2: a,
                         isUpdatedPublishingFlowEnabled: n
                     } = e, r = "Heading.ExperienceQuestionnaire";
-                    return (a || n) && (r = "Heading.ContentRatings"), ea({
+                    return n ? r = "Heading.ContentRating" : a && (r = "Heading.ContentRatings"), ea({
                         key: r
                     }, t)
                 },
@@ -1698,7 +1698,7 @@
                         pathname: r
                     } = e, i = null != (t = null == r ? void 0 : r.split("/").includes("places")) && t;
                     return ea({
-                        key: n && !i ? "Heading.GameAccess" : "Heading.AccessSettings"
+                        key: n && !i ? "Heading.AdvancedSettings" : "Heading.AccessSettings"
                     }, a)
                 },
                 breadcrumbType: et.default.Access
@@ -2091,10 +2091,11 @@
             "content-rating": {
                 displayName: e => {
                     let {
-                        translate: t
+                        translate: t,
+                        isUpdatedPublishingFlowEnabled: a
                     } = e;
                     return ea({
-                        key: "Heading.ContentRatings"
+                        key: a ? "Heading.ContentRating" : "Heading.ContentRatings"
                     }, t)
                 },
                 breadcrumbType: et.default.ContentRating
@@ -2102,21 +2103,23 @@
             "game-join": {
                 displayName: e => {
                     let {
-                        translate: t
+                        translate: t,
+                        isUpdatedPublishingFlowEnabled: a
                     } = e;
                     return ea({
-                        key: "Heading.GameAccess"
+                        key: a ? "Heading.AdvancedSettings" : "Heading.GameAccess"
                     }, t)
                 },
                 breadcrumbType: et.default.GameJoin
             },
-            publishing: {
+            "manage-audience": {
                 displayName: e => {
                     let {
-                        translate: t
+                        translate: t,
+                        isUpdatedPublishingFlowEnabled: a
                     } = e;
                     return ea({
-                        key: "Heading.Publishing"
+                        key: a ? "Heading.ManageAudience" : "Heading.Publishing"
                     }, t)
                 },
                 breadcrumbType: et.default.Publishing
@@ -2369,7 +2372,7 @@
                     breadcrumbsContents: r,
                     breadcrumbNames: s
                 }
-            }, [f, i, h, T, N, C, c, A, x, w, o]), M = (0, a.useMemo)(() => D[D.length - 1], [D]), L = (0, a.useMemo)(() => (0, n.buildBreadcrumb)(...D), [D]), G = E && (0, t.jsx)(n.HubMeta, {
+            }, [f, i, h, T, N, C, c, A, x, w, o]), M = (0, a.useMemo)(() => D[D.length - 1], [D]), L = (0, a.useMemo)(() => (0, n.buildBreadcrumb)(...D), [D]), j = E && (0, t.jsx)(n.HubMeta, {
                 title: M,
                 breadcrumb: L,
                 seoTitle: E,
@@ -2377,14 +2380,14 @@
             });
             return h ? (0, t.jsxs)(y.Grid, {
                 className: i ? void 0 : p,
-                children: [G, (0, t.jsx)(V, {
+                children: [j, (0, t.jsx)(V, {
                     id: "navigation-breadcrumbs",
                     maxItems: 3,
                     "aria-label": "breadcrumb",
                     children: (i || R.length > 1) && R
                 })]
             }) : g ? (0, t.jsxs)(y.Grid, {
-                children: [G, (0, t.jsxs)(V, {
+                children: [j, (0, t.jsxs)(V, {
                     maxItems: 3,
                     "aria-label": "breadcrumb",
                     children: [(0, t.jsx)(m.Typography, {
@@ -2395,14 +2398,14 @@
                 })]
             }) : (0, t.jsxs)(y.Grid, {
                 className: "".concat(d, " ").concat(R.length > 1 && !i ? u : ""),
-                children: [G, (0, t.jsx)(V, {
+                children: [j, (0, t.jsx)(V, {
                     id: "navigation-breadcrumbs",
                     maxItems: 8,
                     "aria-label": "breadcrumb",
                     children: R.length > 1 && R
                 }), " "]
             })
-        }, [b.TranslationNamespace.Creations, b.TranslationNamespace.Features, b.TranslationNamespace.AssetTypes, b.TranslationNamespace.SendrNotificationPreferences, b.TranslationNamespace.Advanced, b.TranslationNamespace.OpenCloud, b.TranslationNamespace.Error, b.TranslationNamespace.DataCollectionSettings, b.TranslationNamespace.UnifiedNavigation, b.TranslationNamespace.Payouts, b.TranslationNamespace.Matchmaking, b.TranslationNamespace.Environments, b.TranslationNamespace.Navigation, b.TranslationNamespace.MarketplaceOnboarding, b.TranslationNamespace.PublicPublish, b.TranslationNamespace.ExperienceAlerts, b.TranslationNamespace.PlayerFeedback, b.TranslationNamespace.DevEx, b.TranslationNamespace.Publishing]),
+        }, [b.TranslationNamespace.Creations, b.TranslationNamespace.AudienceReach, b.TranslationNamespace.Features, b.TranslationNamespace.AssetTypes, b.TranslationNamespace.SendrNotificationPreferences, b.TranslationNamespace.Advanced, b.TranslationNamespace.OpenCloud, b.TranslationNamespace.Error, b.TranslationNamespace.DataCollectionSettings, b.TranslationNamespace.UnifiedNavigation, b.TranslationNamespace.Payouts, b.TranslationNamespace.Matchmaking, b.TranslationNamespace.Environments, b.TranslationNamespace.Navigation, b.TranslationNamespace.MarketplaceOnboarding, b.TranslationNamespace.PublicPublish, b.TranslationNamespace.ExperienceAlerts, b.TranslationNamespace.PlayerFeedback, b.TranslationNamespace.DevEx, b.TranslationNamespace.Publishing]),
         eu = () => {
             let {
                 currentItemType: e,
@@ -3250,7 +3253,7 @@
         D = "Body.GpcDetectedSettingDisabledEligible",
         M = "Body.GpcDetectedSettingEnabledIneligible",
         L = "Body.GpcMissingSettingIneligible",
-        G = (0, w.makeStyles)()(() => ({
+        j = (0, w.makeStyles)()(() => ({
             modalLink: {
                 color: "inherit",
                 textDecoration: "none",
@@ -3272,7 +3275,7 @@
                 verticalAlign: "middle"
             }
         })),
-        j = e => {
+        G = e => {
             var n, r;
             let {
                 gpcState: s,
@@ -3399,7 +3402,7 @@
                 }
             } = E(), {
                 classes: b
-            } = G(), f = (0, a.useCallback)(() => {
+            } = j(), f = (0, a.useCallback)(() => {
                 if ("u" < typeof document) return {};
                 let e = document.cookie.split("; ").find(e => e.startsWith("RBXcb="));
                 if (!e) return {};
@@ -3547,7 +3550,7 @@
                     color: "secondary",
                     component: "span",
                     children: [z, (0, t.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/4ea788136d868e187df8cd40d75b4aa590316f76/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/265af8e6c3890a2bee3fed8c8ea1b021c1b0d4a8/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -3583,7 +3586,7 @@
                                 className: "text-body-medium",
                                 children: o("Description.Loading") || ""
                             })]
-                        }) : (0, t.jsx)(j, {
+                        }) : (0, t.jsx)(G, {
                             gpcState: N,
                             modalData: R,
                             translate: o,
@@ -4498,12 +4501,12 @@
             GoogleAnalytics: !0
         },
         L = (0, a.createContext)(null),
-        G = () => {
+        j = () => {
             let e = (0, a.useContext)(L);
             if (!e) throw Error("useCookieConsentContext must be used within a CookieConsentProvider");
             return e
         },
-        j = e => {
+        G = e => {
             let t, a = Object.entries(e).map(e => {
                 let [t, a] = e;
                 return "".concat(t, "=").concat(a)
@@ -4558,7 +4561,7 @@
                 translate: n
             } = (0, t.useTranslation)(), {
                 cookiePolicy: r
-            } = G(), {
+            } = j(), {
                 classes: i
             } = _();
             return r && (null == (e = r.EssentialCookieList) ? void 0 : e.length) ? a.default.createElement(p.Accordion, {
@@ -4765,7 +4768,7 @@
                 classes: p
             } = X(), {
                 cookiePolicy: m
-            } = G();
+            } = j();
             return m ? a.default.createElement(v.Dialog, {
                 open: r,
                 onClose: i
@@ -4827,7 +4830,7 @@
                 acceptAll: o,
                 declineAll: s,
                 hasAcceptedAnalyticsCookie: l
-            } = G(), [c, d] = (0, a.useState)(l), u = (0, a.useCallback)(() => {
+            } = j(), [c, d] = (0, a.useState)(l), u = (0, a.useCallback)(() => {
                 c ? o() : s(), r()
             }, [o, s, c, r]);
             return i ? a.default.createElement(W, {
@@ -4843,7 +4846,7 @@
                 acceptAll: e,
                 declineAll: t,
                 shouldShowBanner: n
-            } = G(), [r, i] = (0, a.useState)(!1), [o, s] = (0, a.useState)(!1);
+            } = j(), [r, i] = (0, a.useState)(!1), [o, s] = (0, a.useState)(!1);
             (0, a.useEffect)(() => {
                 n && s(!0)
             }, [n]);
@@ -4911,7 +4914,7 @@
                         ...a,
                         [e]: t
                     };
-                    return j(n), n
+                    return G(n), n
                 })
             }, []),
             b = (0, a.useCallback)(() => {
@@ -4920,7 +4923,7 @@
                     ...e,
                     [t]: !0
                 }), M);
-                j(e), d(e)
+                G(e), d(e)
             }, [s]),
             f = (0, a.useCallback)(() => {
                 if (!s) return;
@@ -4928,7 +4931,7 @@
                     ...e,
                     [t]: !1
                 }), M);
-                j(e), d(e)
+                G(e), d(e)
             }, [s]),
             v = (0, a.useMemo)(() => Object.values(c).some(e => !0 === e), [c]),
             k = (0, a.useMemo)(() => ({
@@ -4945,8 +4948,8 @@
         return a.default.createElement(L.Provider, {
             value: k
         }, t)
-    }, "useCookieConsentContext", 0, G], 260241)
+    }, "useCookieConsentContext", 0, j], 260241)
 }]);
 
-//# debugId=576d921e-501c-4975-1e59-d8829df376c5
-//# sourceMappingURL=171-2vtzcrkzf.js.map
+//# debugId=44795cb6-f7a3-0194-384c-8af7c227107b
+//# sourceMappingURL=2e799w5fyfg9y.js.map

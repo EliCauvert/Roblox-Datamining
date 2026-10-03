@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "9744b332-ef84-276d-f66c-4325e7268a35")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "36f8ed5b-8f40-96f0-def1-5d208e7eaf46")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 656350, t => {
@@ -75,7 +75,7 @@
         writable: !0,
         configurable: !0
     });
-    var S, E, q, k, A, C, I, L, j, O, D, N, _, M, B, V, U, F, G, K, W, H, z, J, Q, X, $, Z, Y, ee, et, en, er, ei, ea, eo, es, eu, el, ec, ed, ef, eh, ep, ev, em, ey, eg, eb, ew, ex, eP, eR, eT, eS, eE, eq, ek, eA, eC, eI, eL, ej, eO, eD, eN, e_, eM, eB, eV, eU, eF, eG, eK, eW, eH, ez, eJ, eQ, eX, e$, eZ, eY, e0, e1, e2, e4, e6, e3, e8, e5, e9, e7, te, tt, tn, tr, ti, ta, to, ts, tu, tl, tc, td, tf, th, tp, tv, tm, ty, tg, tb, tw, tx, tP, tR, tT, tS, tE, tq, tk, tA, tC, tI, tL, tj, tO, tD, tN, t_, tM, tB, tV, tU, tF, tG, tK, tW, tH, tz, tJ, tQ, tX, t$, tZ, tY, t0, t1, t2, t4, t6, t3, t8, t5, t9, t7, ne, nt, nn, nr, ni, na, no, ns, nu, nl, nc, nd, nf, nh, np, nv, nm, ny, ng, nb, nw, nx, nP, nR, nT, nS, nE, nq, nk, nA, nC, nI, nL, nj, nO, nD, nN, n_, nM, nB, nV, nU, nF, nG, nK, nW, nH, nz, nJ, nQ, nX, n$, nZ, nY, n0, n1, n2, n4, n6, n3, n8, n5, n9, n7, re, rt, rn, rr, ri, ra, ro, rs, ru, rl, rc, rd, rf, rh, rp, rv, rm, ry, rg, rb, rw, rx, rP, rR, rT, rS, rE, rq, rk, rA, rC, rI, rL, rj, rO, rD, rN, r_, rM, rB, rV, rU, rF, rG, rK, rW, rH, rz, rJ, rQ, rX, r$, rZ, rY, r0, r1, r2, r4, r6, r3, r8, r5, r9, r7, ie, it, ir, ii, ia, io, is, iu, il, ic, id, ih, ip, iv, im, iy = t.i(929036),
+    var S, E, q, k, A, C, I, L, j, O, D, N, _, M, B, V, U, F, G, K, W, H, z, J, Q, X, $, Z, Y, ee, et, en, er, ei, ea, eo, es, eu, el, ec, ed, ef, eh, ep, ev, em, ey, eg, eb, ew, ex, eP, eR, eT, eS, eE, eq, ek, eA, eC, eI, eL, ej, eO, eD, eN, e_, eM, eB, eV, eU, eF, eG, eK, eW, eH, ez, eJ, eQ, eX, e$, eZ, eY, e0, e1, e2, e4, e3, e6, e8, e5, e9, e7, te, tt, tn, tr, ti, ta, to, ts, tu, tl, tc, td, tf, th, tp, tv, tm, ty, tg, tb, tw, tx, tP, tR, tT, tS, tE, tq, tk, tA, tC, tI, tL, tj, tO, tD, tN, t_, tM, tB, tV, tU, tF, tG, tK, tW, tH, tz, tJ, tQ, tX, t$, tZ, tY, t0, t1, t2, t4, t3, t6, t8, t5, t9, t7, ne, nt, nn, nr, ni, na, no, ns, nu, nl, nc, nd, nf, nh, np, nv, nm, ny, ng, nb, nw, nx, nP, nR, nT, nS, nE, nq, nk, nA, nC, nI, nL, nj, nO, nD, nN, n_, nM, nB, nV, nU, nF, nG, nK, nW, nH, nz, nJ, nQ, nX, n$, nZ, nY, n0, n1, n2, n4, n3, n6, n8, n5, n9, n7, re, rt, rn, rr, ri, ra, ro, rs, ru, rl, rc, rd, rf, rh, rp, rv, rm, ry, rg, rb, rw, rx, rP, rR, rT, rS, rE, rq, rk, rA, rC, rI, rL, rj, rO, rD, rN, r_, rM, rB, rV, rU, rF, rG, rK, rW, rH, rz, rJ, rQ, rX, r$, rZ, rY, r0, r1, r2, r4, r3, r6, r8, r5, r9, r7, ie, it, ir, ii, ia, io, is, iu, il, ic, id, ih, ip, iv, im, iy = t.i(929036),
         ig = {};
 
     function ib() {
@@ -531,9 +531,9 @@
             if (s(t, c)) return i(!n(r.f, t, c), t[c])
         }, iw
     }
-    var i6 = {};
+    var i3 = {};
 
-    function i3() {
+    function i6() {
         if (ez) return eH;
         ez = 1;
         var t = iP(),
@@ -559,11 +559,11 @@
     }
 
     function i5() {
-        if (eX) return i6;
+        if (eX) return i3;
         eX = 1;
         var t = iP(),
             n = i2(),
-            r = i3(),
+            r = i6(),
             i = i8(),
             a = i0(),
             o = TypeError,
@@ -572,7 +572,7 @@
             l = "enumerable",
             c = "configurable",
             d = "writable";
-        return i6.f = t ? r ? function(t, n, r) {
+        return i3.f = t ? r ? function(t, n, r) {
             if (i(t), n = a(n), i(r), "function" == typeof t && "prototype" === n && "value" in r && d in r && !r[d]) {
                 var o = u(t, n);
                 o && o[d] && (t[n] = r.value, r = {
@@ -588,7 +588,7 @@
             } catch (t) {}
             if ("get" in u || "set" in u) throw new o("Accessors not supported");
             return "value" in u && (t[r] = u.value), t
-        }, i6
+        }, i3
     }
 
     function i9() {
@@ -636,12 +636,12 @@
     }
 
     function an() {
-        if (e8) return e3;
+        if (e8) return e6;
         e8 = 1;
         var t = iQ(),
             n = iZ(),
             r = t("keys");
-        return e3 = function(t) {
+        return e6 = function(t) {
             return r[t] || (r[t] = n(t))
         }
     }
@@ -654,8 +654,8 @@
         if (te) return e7;
         te = 1;
         var t, n, r, i = function() {
-                if (e6) return e4;
-                e6 = 1;
+                if (e3) return e4;
+                e3 = 1;
                 var t = ib(),
                     n = ij(),
                     r = t.WeakMap;
@@ -1030,7 +1030,7 @@
                 if (tF) return ax;
                 tF = 1;
                 var t = iP(),
-                    n = i3(),
+                    n = i6(),
                     r = i5(),
                     i = i8(),
                     a = iL(),
@@ -1547,8 +1547,8 @@
     }
 
     function aV() {
-        if (n6) return n4;
-        n6 = 1;
+        if (n3) return n4;
+        n3 = 1;
         var t, n, r, i = ix(),
             a = ij(),
             o = iO(),
@@ -1571,12 +1571,12 @@
     }
 
     function aU() {
-        if (n8) return n3;
+        if (n8) return n6;
         n8 = 1;
         var t = i5().f,
             n = i$(),
             r = iY()("toStringTag");
-        return n3 = function(i, a, o) {
+        return n6 = function(i, a, o) {
             i && !o && (i = i.prototype), i && !n(i, r) && t(i, r, {
                 configurable: !0,
                 value: a
@@ -1808,8 +1808,8 @@
                     if (t5) return t8;
                     t5 = 1;
                     var t = function() {
-                        if (t3) return t6;
-                        t3 = 1;
+                        if (t6) return t3;
+                        t6 = 1;
                         var t = iq(),
                             n = au(),
                             r = ab(),
@@ -1825,7 +1825,7 @@
                                     return h < 0 || h >= p ? t ? "" : void 0 : (c = o(f, h)) < 55296 || c > 56319 || h + 1 === p || (d = o(f, h + 1)) < 56320 || d > 57343 ? t ? a(f, h) : c : t ? s(f, h, h + 2) : (c - 55296 << 10) + (d - 56320) + 65536
                                 }
                             };
-                        return t6 = {
+                        return t3 = {
                             codeAt: u(!1),
                             charAt: u(!0)
                         }
@@ -2668,7 +2668,7 @@
         }
     }
 
-    function a6() {
+    function a3() {
         if (il) return iu;
         il = 1;
         var t = ib(),
@@ -2686,7 +2686,7 @@
         })
     }
 
-    function a3(t) {
+    function a6(t) {
         var n = this.constructor;
         return this.then(function(r) {
             return n.resolve(t()).then(function() {
@@ -2990,8 +2990,8 @@
             }
         }
     }(), function() {
-        if (!r6) {
-            r6 = 1;
+        if (!r3) {
+            r3 = 1;
             var t = iD(),
                 n = aU(),
                 r = "DOMException";
@@ -3009,7 +3009,7 @@
                 s = iZ(),
                 u = ij(),
                 l = function() {
-                    if (r8) return r3;
+                    if (r8) return r6;
                     r8 = 1;
                     var t = iq(),
                         n = ix(),
@@ -3044,7 +3044,7 @@
                                 return !0
                             }
                         };
-                    return h.sham = !0, r3 = !u || n(function() {
+                    return h.sham = !0, r6 = !u || n(function() {
                         var t;
                         return f(f.call) || !f(Object) || !f(function() {
                             t = !0
@@ -3117,7 +3117,7 @@
                     id = 1;
                     var t, n, r, i, a = ib(),
                         o = a0(),
-                        s = a6(),
+                        s = a3(),
                         u = a.structuredClone,
                         l = a.ArrayBuffer,
                         c = a.MessageChannel,
@@ -3144,7 +3144,7 @@
                         return !("stack" in t) || (Object.defineProperty(t, "stack", n(1, 7)), 7 !== t.stack)
                     })
                 }(),
-                q = a6(),
+                q = a3(),
                 k = r.Object,
                 A = r.Array,
                 C = r.Date,
@@ -3588,7 +3588,7 @@
     }, on.prototype.then = function(t, n) {
         var r = new this.constructor(ot);
         return or(this, new os(t, n, r)), r
-    }, on.prototype.finally = a3, on.all = function(t) {
+    }, on.prototype.finally = a6, on.all = function(t) {
         return new on(function(n, r) {
             if (!oe(t)) return r(TypeError("Promise.all accepts an array"));
             var i = Array.prototype.slice.call(t);
@@ -3628,7 +3628,7 @@
         "u" > typeof console && console && console.warn("Possible Unhandled Promise Rejection:", t)
     };
     var ol = "u" > typeof self ? self : window;
-    "function" != typeof ol.Promise ? ol.Promise = on : (ol.Promise.prototype.finally || (ol.Promise.prototype.finally = a3), ol.Promise.allSettled || (ol.Promise.allSettled = a8), ol.Promise.any || (ol.Promise.any = a9));
+    "function" != typeof ol.Promise ? ol.Promise = on : (ol.Promise.prototype.finally || (ol.Promise.prototype.finally = a6), ol.Promise.allSettled || (ol.Promise.allSettled = a8), ol.Promise.any || (ol.Promise.any = a9));
     var oc = t.i(416340),
         od = t.i(589624),
         of = t.i(87758),
@@ -3886,7 +3886,7 @@
         }, o$
     }
     var oY = ok.default.Buffer;
-    o6.ReadableState = o4;
+    o3.ReadableState = o4;
     var o0 = oA.default.EventEmitter;
     o0.listenerCount || (o0.listenerCount = function(t, n) {
         return t.listeners(n).length
@@ -3898,12 +3898,12 @@
         this.highWaterMark = r || 0 === r ? r : 16384, this.highWaterMark = ~~this.highWaterMark, this.buffer = [], this.length = 0, this.pipes = null, this.pipesCount = 0, this.flowing = !1, this.ended = !1, this.endEmitted = !1, this.reading = !1, this.calledRead = !1, this.sync = !0, this.needReadable = !1, this.emittedReadable = !1, this.readableListening = !1, this.objectMode = !!t.objectMode, this.defaultEncoding = t.defaultEncoding || "utf8", this.ranOut = !1, this.awaitDrain = 0, this.readingMore = !1, this.decoder = null, this.encoding = null, t.encoding && (o1 || (o1 = oZ().StringDecoder), this.decoder = new o1(t.encoding), this.encoding = t.encoding)
     }
 
-    function o6(t) {
-        if (!(this instanceof o6)) return new o6(t);
+    function o3(t) {
+        if (!(this instanceof o3)) return new o3(t);
         this._readableState = new o4(t), this.readable = !0, o2.call(this)
     }
 
-    function o3(t, n, r, i, a) {
+    function o6(t, n, r, i, a) {
         var o, s, u = (o = r, s = null, oY.isBuffer(o) || "string" == typeof o || null == o || n.objectMode || (s = TypeError("Invalid non-string/buffer chunk")), s);
         if (u) t.emit("error", u);
         else if (null == r) n.reading = !1, n.ended || function(t, n) {
@@ -4027,13 +4027,13 @@
 
         function r(t) {
             if (!(this instanceof r)) return new r(t);
-            o6.call(this, t), n.call(this, t), t && !1 === t.readable && (this.readable = !1), t && !1 === t.writable && (this.writable = !1), this.allowHalfOpen = !0, t && !1 === t.allowHalfOpen && (this.allowHalfOpen = !1), this.once("end", i)
+            o3.call(this, t), n.call(this, t), t && !1 === t.readable && (this.readable = !1), t && !1 === t.writable && (this.writable = !1), this.allowHalfOpen = !0, t && !1 === t.allowHalfOpen && (this.allowHalfOpen = !1), this.once("end", i)
         }
 
         function i() {
             this.allowHalfOpen || this._writableState.ended || v.default.nextTick(this.end.bind(this))
         }
-        return oF.inherits(r, o6),
+        return oF.inherits(r, o3),
             function(t, n) {
                 for (var r = 0, i = t.length; r < i; r++) n(t[r], r)
             }(t(n.prototype), function(t) {
@@ -4133,14 +4133,14 @@
             "function" == typeof t ? (r = t, t = null, n = null) : "function" == typeof n && (r = n, n = null), null != t && this.write(t, n), a.ending || a.finished || (i = r, a.ending = !0, l(this, a), i && (a.finished ? v.default.nextTick(i) : this.once("finish", i)), a.ended = !0)
         }, sx
     }
-    oF.inherits = oW, oF.inherits(o6, o2), o6.prototype.push = function(t, n) {
+    oF.inherits = oW, oF.inherits(o3, o2), o3.prototype.push = function(t, n) {
         var r = this._readableState;
-        return "string" != typeof t || r.objectMode || (n = n || r.defaultEncoding) !== r.encoding && (t = new oY(t, n), n = ""), o3(this, r, t, n, !1)
-    }, o6.prototype.unshift = function(t) {
-        return o3(this, this._readableState, t, "", !0)
-    }, o6.prototype.setEncoding = function(t) {
+        return "string" != typeof t || r.objectMode || (n = n || r.defaultEncoding) !== r.encoding && (t = new oY(t, n), n = ""), o6(this, r, t, n, !1)
+    }, o3.prototype.unshift = function(t) {
+        return o6(this, this._readableState, t, "", !0)
+    }, o3.prototype.setEncoding = function(t) {
         o1 || (o1 = oZ().StringDecoder), this._readableState.decoder = new o1(t), this._readableState.encoding = t
-    }, o6.prototype.read = function(t) {
+    }, o3.prototype.read = function(t) {
         var n = this._readableState;
         n.calledRead = !0;
         var r, i = t;
@@ -4148,9 +4148,9 @@
         if (0 === (t = o8(t, n)) && n.ended) return r = null, n.length > 0 && n.decoder && (r = sn(t, n), n.length -= r.length), 0 === n.length && sr(this), r;
         var a = n.needReadable;
         return n.length - t <= n.highWaterMark && (a = !0), (n.ended || n.reading) && (a = !1), a && (n.reading = !0, n.sync = !0, 0 === n.length && (n.needReadable = !0), this._read(n.highWaterMark), n.sync = !1), a && !n.reading && (t = o8(i, n)), null === (r = t > 0 ? sn(t, n) : null) && (n.needReadable = !0, t = 0), n.length -= t, 0 !== n.length || n.ended || (n.needReadable = !0), n.ended && !n.endEmitted && 0 === n.length && sr(this), r
-    }, o6.prototype._read = function(t) {
+    }, o3.prototype._read = function(t) {
         this.emit("error", Error("not implemented"))
-    }, o6.prototype.pipe = function(t, n) {
+    }, o3.prototype.pipe = function(t, n) {
         var r = this,
             i = this._readableState;
         switch (i.pipesCount) {
@@ -4201,7 +4201,7 @@
         return t.on("drain", u), t._events && t._events.error ? oU(t._events.error) ? t._events.error.unshift(c) : t._events.error = [c, t._events.error] : t.on("error", c), t.once("close", d), t.once("finish", f), t.emit("pipe", r), i.flowing || (this.on("readable", se), i.flowing = !0, v.default.nextTick(function() {
             o7(r)
         })), t
-    }, o6.prototype.unpipe = function(t) {
+    }, o3.prototype.unpipe = function(t) {
         var n = this._readableState;
         if (0 === n.pipesCount) return this;
         if (1 === n.pipesCount) return t && t !== n.pipes || (t || (t = n.pipes), n.pipes = null, n.pipesCount = 0, this.removeListener("readable", se), n.flowing = !1, t && t.emit("unpipe", this)), this;
@@ -4217,18 +4217,18 @@
                 if (t[r] === n) return r;
             return -1
         }(n.pipes, t)) || (n.pipes.splice(a, 1), n.pipesCount -= 1, 1 === n.pipesCount && (n.pipes = n.pipes[0]), t.emit("unpipe", this)), this
-    }, o6.prototype.on = function(t, n) {
+    }, o3.prototype.on = function(t, n) {
         var r = o2.prototype.on.call(this, t, n);
         if ("data" !== t || this._readableState.flowing || st(this), "readable" === t && this.readable) {
             var i = this._readableState;
             i.readableListening || (i.readableListening = !0, i.emittedReadable = !1, i.needReadable = !0, i.reading ? i.length && o5(this) : this.read(0))
         }
         return r
-    }, o6.prototype.addListener = o6.prototype.on, o6.prototype.resume = function() {
+    }, o3.prototype.addListener = o3.prototype.on, o3.prototype.resume = function() {
         st(this), this.read(0), this.emit("resume")
-    }, o6.prototype.pause = function() {
+    }, o3.prototype.pause = function() {
         st(this, !0), this.emit("pause")
-    }, o6.prototype.wrap = function(t) {
+    }, o3.prototype.wrap = function(t) {
         var n = this._readableState,
             r = !1,
             i = this;
@@ -4250,7 +4250,7 @@
         }), i._read = function(n) {
             r && (r = !1, t.resume())
         }, i
-    }, o6._fromList = sn;
+    }, o3._fromList = sn;
     var ss = sa();
 
     function su(t, n) {
@@ -4312,7 +4312,7 @@
         set exports(e) {
             oV = e
         }
-    }).exports = o6).Stream = sT, sR.Readable = sR, sR.Writable = so(), sR.Duplex = sa(), sR.Transform = sl, sR.PassThrough = sd;
+    }).exports = o3).Stream = sT, sR.Readable = sR, sR.Writable = so(), sR.Duplex = sa(), sR.Transform = sl, sR.PassThrough = sd;
     var sf = function(t, n, r) {
             if ("number" == typeof t) throw TypeError('"value" argument must not be a number');
             return "ArrayBuffer" === oM.call(t).slice(8, -1) ? function(t, n, r) {
@@ -4765,7 +4765,7 @@
             this.push(null), this.end(), t.nextTick(r, n)
         }, sJ
     }
-    var s1, s2, s4, s6, s3, s8, s5, s9 = {};
+    var s1, s2, s4, s3, s6, s8, s5, s9 = {};
 
     function s7() {
         if (s1) return s9;
@@ -5241,8 +5241,8 @@
     }
 
     function ut() {
-        if (s3) return s6;
-        s3 = 1, s6 = i;
+        if (s6) return s3;
+        s6 = 1, s3 = i;
         var t = s0(),
             n = Object.create(oF);
 
@@ -5299,7 +5299,7 @@
             t.prototype._destroy.call(this, n, function(t) {
                 r(t), i.emit("close")
             })
-        }, s6
+        }, s3
     }
     ui = {
         get exports() {
@@ -5839,7 +5839,7 @@
         }
     }
 
-    function u6(t) {
+    function u3(t) {
         if (void 0 !== t) return null === t ? null : {
             displayName: t.displayName,
             agreementIds: t.agreementIds,
@@ -5851,7 +5851,7 @@
         }
     }
 
-    function u3(t) {
+    function u6(t) {
         if (void 0 !== t) return null === t ? null : {
             code: t.code,
             state: t.state,
@@ -7738,7 +7738,7 @@
                                 method: "POST",
                                 headers: i,
                                 query: r,
-                                body: u3(t.request)
+                                body: u6(t.request)
                             }, n)];
                         case 1:
                             return a = o.sent(), [2, new uL.JSONApiResponse(a, function(t) {
@@ -7841,7 +7841,7 @@
                                 method: "POST",
                                 headers: i,
                                 query: r,
-                                body: u6(t.request)
+                                body: u3(t.request)
                             }, n)];
                         case 1:
                             return a = o.sent(), [2, new uL.JSONApiResponse(a, function(t) {
@@ -9017,7 +9017,7 @@
                                 method: "POST",
                                 headers: i,
                                 query: r,
-                                body: u3(t.request)
+                                body: u6(t.request)
                             }, n)];
                         case 1:
                             return a = o.sent(), [2, new uL.JSONApiResponse(a, function(t) {
@@ -9212,7 +9212,7 @@
                                 method: "POST",
                                 headers: i,
                                 query: r,
-                                body: u6(t.request)
+                                body: u3(t.request)
                             }, n)];
                         case 1:
                             return a = o.sent(), [2, new uL.JSONApiResponse(a, function(t) {
@@ -10921,8 +10921,8 @@
     var l1 = t.i(893949),
         l2 = t.i(413019),
         l4 = t.i(758835),
-        l6 = t.i(823062);
-    let l3 = t => {
+        l3 = t.i(823062);
+    let l6 = t => {
         let {
             children: n,
             unifiedLogger: r,
@@ -10932,7 +10932,7 @@
         } = (0, od.useRouter)(), s = (0, oc.useMemo)(() => {
             if (o) return "".concat(window.location.origin).concat(o)
         }, [o]);
-        return (0, m.jsx)(l6.UnifiedLoggerProvider, {
+        return (0, m.jsx)(l3.UnifiedLoggerProvider, {
             unifiedLogger: a,
             pageLoggerConfig: i,
             path: s,
@@ -10986,7 +10986,7 @@
     var cn = t.i(37819),
         cr = t.i(532045),
         ci = t.i(881670);
-    let ca = "".concat("".concat("https://assets.create.roblox.com/4ea788136d868e187df8cd40d75b4aa590316f76/assets", "/opengraph"), "/global_og_image.png"),
+    let ca = "".concat("".concat("https://assets.create.roblox.com/265af8e6c3890a2bee3fed8c8ea1b021c1b0d4a8/assets", "/opengraph"), "/global_og_image.png"),
         co = (0, oR.withTranslation)(t => {
             let {
                 openGraphMetadata: {
@@ -11320,7 +11320,7 @@
             }
         },
         c4 = (0, oc.createContext)(void 0),
-        c6 = t => {
+        c3 = t => {
             let {
                 enableIxp: n = !1,
                 children: r
@@ -11430,7 +11430,7 @@
                 children: r
             })
         },
-        c3 = () => {
+        c6 = () => {
             let t = (0, oc.useContext)(c4);
             if (!t) throw Error("useNotApprovedPagePunishment must be used within a NotApprovedPagePunishmentProvider");
             return t
@@ -11444,7 +11444,7 @@
         } = cW(), {
             isKidsTreatment: i,
             ixpData: a
-        } = c3(), o = (null == a ? void 0 : a.FFlagKidsNotApprovedPageTreatment2) === !0;
+        } = c6(), o = (null == a ? void 0 : a.FFlagKidsNotApprovedPageTreatment2) === !0;
         return (0, oc.useCallback)((a, s) => {
             var u, l;
             u = null != r && r, l = {
@@ -12019,7 +12019,7 @@
                     hasEducationalPages: i
                 } = di(), {
                     isKidsTreatment: a
-                } = c3(), o = c8(), {
+                } = c6(), o = c8(), {
                     showUGCAvatarGuidelinesLink: s,
                     context: u
                 } = n, l = null == u ? void 0 : u.IS_ALT_INFORMED;
@@ -12095,7 +12095,7 @@
                 } = t, o = cW().translate, {
                     violationReasons: s,
                     isKidsTreatment: u
-                } = c3(), {
+                } = c6(), {
                     violation: l,
                     punishmentTypeDescription: c,
                     endDate: d
@@ -12118,7 +12118,7 @@
                 onAppealsRedirect: a
             } = cW(), {
                 punishmentData: o
-            } = c3(), s = c8(), u = n ? null == o || null == (t = o.violation) ? void 0 : t.uid : void 0;
+            } = c6(), s = c8(), u = n ? null == o || null == (t = o.violation) ? void 0 : t.uid : void 0;
             return {
                 handleAppealsClick: (0, oc.useCallback)(() => {
                     let t;
@@ -12146,7 +12146,7 @@
                     preferViolationDetail: !0
                 }), {
                     isKidsTreatment: a
-                } = c3();
+                } = c6();
                 return (0, m.jsxs)("div", {
                     className: "flex flex-col gap-medium",
                     "data-testid": "report-mistake",
@@ -12404,7 +12404,7 @@
                     punishmentData: n
                 } = t, r = cW().translate, {
                     isKidsTreatment: i
-                } = c3(), a = [dK, dH, dz].map(t => t.getIsVisible(n) ? (0, m.jsx)("div", {
+                } = c6(), a = [dK, dH, dz].map(t => t.getIsVisible(n) ? (0, m.jsx)("div", {
                     children: t.renderComponent({
                         punishmentData: n
                     })
@@ -12472,7 +12472,7 @@
                         violationReasons: r,
                         isKidsTreatment: i,
                         moderatorNote: a
-                    } = c3(),
+                    } = c6(),
                     o = (null != (t = null == r ? void 0 : r.translatedReasons) ? t : []).join(", ") || n("Label.AbuseType.Other");
                 return (0, m.jsxs)("div", {
                     className: "flex flex-col gap-medium",
@@ -12607,7 +12607,7 @@
                 })]
             })
         },
-        d6 = t => {
+        d3 = t => {
             let n, {
                     proceedAction: r,
                     setIsDialogOpen: i,
@@ -12699,7 +12699,7 @@
                 })]
             })
         },
-        d3 = function(t) {
+        d6 = function(t) {
             let {
                 punishmentTypeDescription: n,
                 endDate: r,
@@ -12757,7 +12757,7 @@
             } = t, i = cW().translate, a = c8(), {
                 endDate: o,
                 punishmentTypeDescription: s
-            } = n, u = d3(n), [l, c] = (0, oc.useState)(!1), [d, f] = (0, oc.useState)(!1);
+            } = n, u = d6(n), [l, c] = (0, oc.useState)(!1), [d, f] = (0, oc.useState)(!1);
             return (0, oc.useEffect)(() => {
                 let t;
                 return Object.values(c5).includes(s) && s.startsWith("Ban") && (t = setTimeout(() => {
@@ -12769,7 +12769,7 @@
                 className: "flex flex-col gap-large medium:flex-row",
                 children: [(0, m.jsx)(d8, {
                     endDate: o
-                }), (0, m.jsx)(d6, {
+                }), (0, m.jsx)(d3, {
                     proceedAction: u,
                     setIsDialogOpen: r,
                     isAgreed: l,
@@ -12786,7 +12786,7 @@
                     },
                     className: "self-start",
                     "data-testid": "rule-confirmation-checkbox"
-                }), (0, m.jsx)(d6, {
+                }), (0, m.jsx)(d3, {
                     proceedAction: u,
                     setIsDialogOpen: r,
                     isAgreed: l,
@@ -12978,7 +12978,7 @@
                 error: u,
                 commutationEligibility: l,
                 isKidsTreatment: c
-            } = c3(), d = null == o ? void 0 : o.untranslatedReasons, f = (0, oc.useMemo)(() => (null != d ? d : []).some(t => dE(t, c)), [d, c]), {
+            } = c6(), d = null == o ? void 0 : o.untranslatedReasons, f = (0, oc.useMemo)(() => (null != d ? d : []).some(t => dE(t, c)), [d, c]), {
                 pages: h,
                 unmappedViolationKeys: p
             } = (0, oc.useMemo)(() => a ? fr(a, null != d ? d : [], l, i, c) : {
@@ -13094,7 +13094,7 @@
                 punishmentData: h,
                 isLoading: p,
                 error: v
-            } = c3(), y = c8(), g = !p && !v && void 0 !== h, b = !p && !v && !h;
+            } = c6(), y = c8(), g = !p && !v && void 0 !== h, b = !p && !v && !h;
             if ((0, oc.useEffect)(() => {
                     if (g) {
                         var t;
@@ -13182,7 +13182,7 @@
             } = t;
             return (0, m.jsx)(ov.QueryClientProvider, {
                 client: fs,
-                children: (0, m.jsx)(c6, {
+                children: (0, m.jsx)(c3, {
                     enableIxp: !0,
                     children: (0, m.jsx)(fo, {
                         open: n,
@@ -13612,7 +13612,7 @@
                             client: fY
                         }), (0, m.jsx)(ox.C, {
                             client: lr.default
-                        }), (0, m.jsx)(lg.CustomDashboardServiceProvider, {}), (0, m.jsx)(lg.UniverseFlaggedCustomDashboardProvider, {}), (0, m.jsx)(fz, {}), (0, m.jsx)(l3, {
+                        }), (0, m.jsx)(lg.CustomDashboardServiceProvider, {}), (0, m.jsx)(lg.UniverseFlaggedCustomDashboardProvider, {}), (0, m.jsx)(fz, {}), (0, m.jsx)(l6, {
                             pageLoggerConfig: r.loggerConfig
                         }), (0, m.jsx)(lv.EventTrackerProvider, {
                             trackerClient: lm.default
@@ -14051,5 +14051,5 @@
     n.exports = t.r(816657)
 }]);
 
-//# debugId=9744b332-ef84-276d-f66c-4325e7268a35
-//# sourceMappingURL=14ba7z4vn9jj6.js.map
+//# debugId=36f8ed5b-8f40-96f0-def1-5d208e7eaf46
+//# sourceMappingURL=0vb7q5be7aqhr.js.map

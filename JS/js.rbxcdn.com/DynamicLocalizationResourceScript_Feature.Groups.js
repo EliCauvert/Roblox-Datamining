@@ -905,9 +905,9 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Label.DeleteForumCategory": "Delete Forum Category",
     "Label.DeleteForumPost": "Delete Forum Post",
     "Label.DeleteForumComment": "Delete Forum Comment",
-    "Modal.ContentTextMedium": "Verify your account to join this community.\n\n1. Go to Account Info\n2. Choose one verification option:\n    - Add Phone AND Add Email\n    - Verify My Age\n3. Complete the verification process",
-    "Modal.ContentTextHigh": "Verify your account to join this community.\n\n1. Go to Account Info > Verify My Age\n2. Complete the verification process",
-    "Modal.ContentTextLow": "Verify your account to join this community.\n\n1. Go to Account Info\n2. Choose one verification option:\n    - Add Phone\n    - Add Email\n    - Verify My Age\n3. Complete the verification process",
+    "Modal.ContentTextMedium": "Verify your account to join this community.\n\n1. Go to Account Info\n2. Choose one verification option:\n    - Add Phone AND Add Email\n    - ID Verify\n3. Complete the verification process",
+    "Modal.ContentTextHigh": "Verify your account to join this community.\n\n1. Go to Account Info > ID Verify\n2. Complete the verification process",
+    "Modal.ContentTextLow": "Verify your account to join this community.\n\n1. Go to Account Info\n2. Choose one verification option:\n    - Add Phone\n    - Add Email\n    - ID Verify\n3. Complete the verification process",
     "Message.DeleteForumPost": "{actor} deleted forum post by user {user}",
     "Message.DeleteForumComment": "{actor} deleted forum comment by user {user}",
     "Description.CategoryArchived": "This category is archived",
@@ -1353,6 +1353,8 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Label.ResponseCountSingular": "response",
     "Label.ResponseCountPlural": "responses",
     "Action.React": "React",
+    "Heading.LegacyAutoAssignRoleBanner": "Your lowest non-base role will no longer be automatically assigned to new members after {cutOffDate}.",
+    "Description.LegacyAutoAssignRoleBanner": "We recommend using the Base Member role as your default role for new\n members. You can customize the Base Member role to fit your Community by changing its name and permissions.",
     "Action.RemoveAffiliate": "Remove"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Groups");
