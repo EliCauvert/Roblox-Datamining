@@ -6,9 +6,10 @@ local surfaceContextModule = require(robloxSubscriptionPurchaseApp.Enums.Surface
 local surfaceNameModule = require(robloxSubscriptionPurchaseApp.Enums.SurfaceName)
 local _ = require(robloxSubscriptionPurchaseApp.types)
 local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
+local fFlagEnablePlusReferralLandingSheet = require(robloxSubscriptionPurchaseApp.Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), surfaceContextModule (ref), surfaceNameModule (ref), initiateRobloxSubscriptionPurchaseInternalModule (ref), robloxSubscriptionOverlayControllerModule (ref)
+return function(p1, p2, p3, p4, p5, p6, p7, p8)
+	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), fFlagEnablePlusReferralLandingSheet (ref), surfaceContextModule (ref), surfaceNameModule (ref), initiateRobloxSubscriptionPurchaseInternalModule (ref), robloxSubscriptionOverlayControllerModule (ref)
 	local var1 = robloxSubscriptionStoreModule.get()
 	
 	if p2 then
@@ -27,6 +28,9 @@ return function(p1, p2, p3, p4, p5, p6, p7)
 	end
 	if p6 then
 		var1.setPurchaseFlowOptions(p6)
+	end
+	if fFlagEnablePlusReferralLandingSheet then
+		var1.setReferrerId(p8)
 	end
 	local t = {}
 	

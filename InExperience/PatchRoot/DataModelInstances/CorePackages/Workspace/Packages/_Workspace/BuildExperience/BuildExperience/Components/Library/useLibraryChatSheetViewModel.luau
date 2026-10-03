@@ -73,6 +73,7 @@ return function(p1)
 		isPlaytestLoading = var6.isPlaytestLoading,
 		isHistoryLoading = var5.isHistoryLoading,
 		scrollingFrameRef = var5.setScrollingFrame,
+		anchorScrollToInstance = var5.anchorScrollToInstance,
 		composerText = var5.composerText,
 		composerErrorText = var5.composerErrorText,
 		onComposerChanged = var5.setComposerText,

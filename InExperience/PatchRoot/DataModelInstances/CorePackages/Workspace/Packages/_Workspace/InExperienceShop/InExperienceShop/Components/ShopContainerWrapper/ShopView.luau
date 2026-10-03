@@ -11,6 +11,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableUserOffers = sharedFlagsModule.FFlagEnableUserOffers
 local isSubjectToDesktopPolicies = sharedFlagsModule.isSubjectToDesktopPolicies
+local fFlagHideHeaderForBuyRobuxInExperienceShop = sharedFlagsModule.FFlagHideHeaderForBuyRobuxInExperienceShop
 local topBarModule = require(inExperienceShop.Components.TopBar)
 local var1 = if sharedFlagsModule.FFlagEnableReportingFlowForExperienceShop then require(inExperienceShop.Components.ShopAbuseReportOverlay) else nil
 local searchInputContainerModule = require(inExperienceShop.Components.SearchInput.SearchInputContainer)
@@ -33,9 +34,13 @@ local fFlagShowLargerOfferBannerOnDesktop2Module = require(inExperienceShop.Flag
 local _ = require(inExperienceShop.Hooks.useShopReportOverflow)
 
 return function(p1)
-	-- upvalues: findSectionModule (ref), fFlagEnableUserOffers (ref), fFlagShowLargerOfferBannerOnDesktop2Module (ref), isSubjectToDesktopPolicies (ref), reactModule (ref), view (ref), searchInputContainerModule (ref), topBarModule (ref), desktopOfferBannerModule (ref), fFlagRemoveBottomPaddingInExperienceShopModule (ref), fFlagShopBlockClickPassThroughModule (ref), useTokens (ref), fFlagEnableCreatorEarlyAccessBannerInShopModule (ref), creatorEarlyAccessBannerModule (ref), tabs (ref), fillBehavior (ref), searchResultsContainerModule (ref), shopHomePageContainerModule (ref), categoryPageContainerModule (ref), itemDetailsContainerModule (ref), fFlagShopRobuxPurchaseCompletionModalModule (ref), unifiedPurchaseCompletionModal (ref), var1 (ref), offerDialogStateModule (ref), offerDetailsDialogModule (ref), offerTermsDialogModule (ref)
+	-- upvalues: fFlagHideHeaderForBuyRobuxInExperienceShop (ref), findSectionModule (ref), fFlagEnableUserOffers (ref), fFlagShowLargerOfferBannerOnDesktop2Module (ref), isSubjectToDesktopPolicies (ref), reactModule (ref), view (ref), searchInputContainerModule (ref), topBarModule (ref), desktopOfferBannerModule (ref), fFlagRemoveBottomPaddingInExperienceShopModule (ref), fFlagShopBlockClickPassThroughModule (ref), useTokens (ref), fFlagEnableCreatorEarlyAccessBannerInShopModule (ref), creatorEarlyAccessBannerModule (ref), tabs (ref), fillBehavior (ref), searchResultsContainerModule (ref), shopHomePageContainerModule (ref), categoryPageContainerModule (ref), itemDetailsContainerModule (ref), fFlagShopRobuxPurchaseCompletionModalModule (ref), unifiedPurchaseCompletionModal (ref), var1 (ref), offerDialogStateModule (ref), offerDetailsDialogModule (ref), offerTermsDialogModule (ref)
 	local isSearchOpen = p1.isSearchOpen
 	local var2 = not isSearchOpen and #p1.tabs > 0
+	
+	if fFlagHideHeaderForBuyRobuxInExperienceShop then
+		var2 = var2 and not p1.hideTabs
+	end
 	local selectedItem = p1.selectedItem
 	local var3 = if p1.selectedCategoryId ~= "home" then findSectionModule(p1.sections, p1.selectedCategoryId) == nil else true
 	local var4 = if fFlagEnableUserOffers then p1.offer.offerModal else nil

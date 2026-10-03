@@ -2,5 +2,6 @@
 
 return {
 	createUserSettingsStore = require(script.createUserSettingsStore),
-	getUserSettingsStore = require(script.getUserSettingsStore)
+	getUserSettingsStore = require(script.getUserSettingsStore),
+	fetchSettingsAndOptions = require(script.userSettingsRequests).fetchSettingsAndOptions
 }

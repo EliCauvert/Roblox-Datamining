@@ -27,6 +27,16 @@ return {
 		-- upvalues: experienceService (ref)
 		return experienceService:RegisterForExperienceLeave(p1)
 	end,
+	LeaveExperienceWithReason = function(_, p1)
+		-- upvalues: experienceService (ref)
+		if game:GetEngineFeature("ExperienceLeaveReasonEnabled") then
+			experienceService:LeaveExperienceWithReason(p1)
+		end
+	end,
+	ConsumePendingExperienceLeaveWithReason = function(_)
+		-- upvalues: experienceService (ref)
+		return if game:GetEngineFeature("ExperienceLeaveReasonEnabled") then experienceService:ConsumePendingExperienceLeaveWithReason() else nil
+	end,
 	GetPendingJoinAttempt = function(_)
 		-- upvalues: experienceService (ref)
 		return experienceService:GetPendingJoinAttempt()

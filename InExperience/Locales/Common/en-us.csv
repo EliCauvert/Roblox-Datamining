@@ -117,6 +117,7 @@ Authentication.SignUp.Description.Try,Try
 Authentication.SignUp.Description.UsernameChanged,"All set! Your account is ready and linked to {platform}. Respawn now to see your updated username in the game, or it'll apply next time."
 Authentication.SignUp.Description.UsernameUnchanged,You're in! Your account is ready and linked to {platform}. Chat with friends and play millions of Roblox games.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Your Roblox account will be linked to your account on {platform}. You can unlink from the Settings screen at any time. There may be a cool down before being able to link to another account on {platform}. By clicking {ctaButton}, you are agreeing to the Terms of Use including the arbitration clause and you are acknowledging the Privacy Policy."
+Authentication.SignUp.Header.CloseWithoutFinishing,Close without finishing?
 Authentication.SignUp.Header.OneLastThing,One last thing
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Set up your Roblox account
 Authentication.SignUp.Heading.CountryCodeSelector,Select country
@@ -160,6 +161,7 @@ Authentication.SignUp.Response.PasswordComplexity,Please create a more complex p
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Username must be set first.
 Authentication.SignUp.Subtitle.AddYourBirthday,Add your birthday to create your Roblox account.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Your progress carries over when you complete setup.
+Authentication.SignUp.Subtitle.YoureAlmostThere,"You're almost there. If you close now, your account won't be fully created and you won't be able to play Roblox."
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,2-Step Verification is required to make further transactions. Go to Settings > Security to complete 2-Step Verification.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Too many attempts. Please try again later.
@@ -2029,11 +2031,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,Total playtime
 Feature.Build.Analytics.Visits,Visits
 Feature.Build.Content.NewGame,New game
 Feature.Build.Description.ActivateDeveloperProduct,Put developer product {PRODUCT_ID} on sale.
-Feature.Build.Description.AdActive,Your ad is running. See how many players it's reaching.
 Feature.Build.Description.AdCampaignModerationReview,All ad campaigns are reviewed by Roblox moderation. This process may take up to 24 hours.
 Feature.Build.Description.AdCampaignSheetRunDates,Runs {startDate} – {endDate}
 Feature.Build.Description.AdComplete,Your ad has ended. Check your results.
-Feature.Build.Description.AdInReview,Your ad is in review and is scheduled to run {startDate} – {endDate}.
 Feature.Build.Description.AdModerationReview,All ads are reviewed by Roblox moderation and may take up to 24 hours.
 Feature.Build.Description.AdvertisingAgreement,"By selecting Create, you agree to the {advertisingTermsStart}Roblox Advertising Terms{advertisingTermsEnd} and {advertisingStandardsStart}Advertising Standards{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"If you archive this game, it will be removed from Build. You can still access and restore it from Creator Hub or Roblox Studio."
@@ -2083,6 +2083,7 @@ Feature.Build.Description.ShopButton,Add a shopping entry point
 Feature.Build.Description.ShortAdCampaign,A quick way to see what players think of your game.
 Feature.Build.Description.StopBuild,"This request is still in progress. If you stop now, it won't finish and you'll need to send it again."
 Feature.Build.Description.UpdateDeveloperProduct,Update developer product {PRODUCT_ID}.
+Feature.Build.Description.UseAdCreditsInAdsManager,You'll need to go to Ads Manager to use them.
 Feature.Build.Error.AdForbidden,Your account or game can't run an ad right now. Contact support if you think this is a mistake.
 Feature.Build.Error.AdInsufficientFunds,You don't have enough Robux to create this ad. Add more and try again.
 Feature.Build.Error.AdInternalError,Something went wrong. Try again later.
@@ -2362,7 +2363,6 @@ Feature.Build.Title.AdActive,Ad campaign is active
 Feature.Build.Title.AdCampaignDuration,{durationDays}-day ad campaign
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}-days
 Feature.Build.Title.AdComplete,Ad complete
-Feature.Build.Title.AdCreated,Ad created
 Feature.Build.Title.AdCreatedPeriod,Ad created.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Add images
@@ -2407,6 +2407,7 @@ Feature.Build.Title.RevertLastChange,Revert last change?
 Feature.Build.Title.StopBuild,Stop building?
 Feature.Build.Title.Tasks,Tasks
 Feature.Build.Title.TurnActivity,Turn activity
+Feature.Build.Title.UseYourAdCredits,Use your ad credits
 Feature.Build.Title.VersionHistory,Version history
 Feature.Build.Title.VersionInfo,Version information
 Feature.Build.Title.VersionNumber,Version {VERSION}
@@ -3468,7 +3469,7 @@ Feature.Groups.Message.NotInAnyGroups,You are not a member of any communities.
 Feature.Groups.Message.PinLocked,You cannot perform this action with a locked pin. Unlock your pin in the Account Settings page.
 Feature.Groups.Modal.ContentTextHigh,"Verify your account to join this community.
 
-1. Go to Account Info > Verify My Age
+1. Go to Account Info > ID Verify
 2. Complete the verification process"
 Feature.Groups.Modal.ContentTextLow,"Verify your account to join this community.
 
@@ -3476,19 +3477,20 @@ Feature.Groups.Modal.ContentTextLow,"Verify your account to join this community.
 2. Choose one verification option:
     - Add Phone
     - Add Email
-    - Verify My Age
+    - ID Verify
 3. Complete the verification process"
 Feature.Groups.Modal.ContentTextMedium,"Verify your account to join this community.
 
 1. Go to Account Info
 2. Choose one verification option:
     - Add Phone AND Add Email
-    - Verify My Age
+    - ID Verify
 3. Complete the verification process"
 Feature.Groups.Notification.FailedToFollow,Failed to follow profile. Please try again later.
 Feature.Groups.Notification.FailedToJoin,Failed to join community. Please try again later.
 Feature.Groups.Notification.FailedToLoad,Failed to load community. Please try again later.
 Feature.Groups.Notification.Following,Following {groupName}.
+Feature.Groups.Notification.GroupDeactivated,This community has been deactivated.
 Feature.Groups.Notification.GroupDoesNotExist,The community does not exist.
 Feature.Groups.Notification.GroupModerated,This community is currently moderated.
 Feature.Groups.Notification.JoinRequestPending,Requested to join {groupName}.
@@ -4089,8 +4091,10 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% off first 60 days
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10% off first {trialUnlockDays} days, then 20% off items and avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,More fun for less Robux. Subscribe to Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Join early with Plus
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} invited you to join Plus. You'll both get {amount} Robux when you purchase Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Heading.ReferralEntry,Share Plus to get {amount} Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,"Join Plus, get"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Free private servers
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,Send Robux for free

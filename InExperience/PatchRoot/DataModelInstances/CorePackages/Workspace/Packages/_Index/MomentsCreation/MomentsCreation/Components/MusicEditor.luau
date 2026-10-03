@@ -22,53 +22,59 @@ local useMusicEditorControllerModule = require(momentsCreation.Hooks.useMusicEdi
 local useMusicInfoModule = require(momentsCreation.Hooks.useMusicInfo)
 local constantsModule = require(momentsCreation.Constants)
 local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
+local fFlagMomentsCreationStartAudioOnLoadModule = require(momentsCreation.Flags.FFlagMomentsCreationStartAudioOnLoad)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
 local segmentSelectorWidth = constantsModule.AudioWaveform.SegmentSelectorWidth
 local uDim2 = UDim2.new(0, 48, 1, 0)
 
 return function(p1)
-	-- upvalues: useTokens (ref), useDeviceInsets (ref), useCreationFlowStringsModule (ref), useToggleState (ref), useMusicInfoModule (ref), reactModule (ref), useEffect (ref), signalsModule (ref), useCallback (ref), useMusicEditorControllerModule (ref), useMemo (ref), useSignalBinding (ref), view (ref), button (ref), foundationModule (ref), gradientBackdrop (ref), uDim2 (ref), segmentSelectorWidth (ref), waveformModule (ref), loading (ref), musicPreviewItemModule (ref)
+	-- upvalues: useTokens (ref), useDeviceInsets (ref), useCreationFlowStringsModule (ref), useToggleState (ref), reactModule (ref), useMusicInfoModule (ref), useEffect (ref), signalsModule (ref), useCallback (ref), fFlagMomentsCreationStartAudioOnLoadModule (ref), useMusicEditorControllerModule (ref), useMemo (ref), useSignalBinding (ref), view (ref), button (ref), foundationModule (ref), gradientBackdrop (ref), uDim2 (ref), segmentSelectorWidth (ref), waveformModule (ref), loading (ref), musicPreviewItemModule (ref)
 	local playback = p1.controller.preview.playback
 	local var1 = useTokens()
 	local var2 = useDeviceInsets()
 	local var3 = useCreationFlowStringsModule()
 	local var4 = useToggleState(false)
 	local var5 = useToggleState(false)
-	local var6 = useMusicInfoModule(p1.musicEdit.assetId)
-	local var7 = if var6 == nil or var6.Duration == nil then 0 else var6.Duration
-	local var8, var9 = reactModule.useState(playback.getDuration(false))
+	local var6 = reactModule.useRef(nil)
+	local var7 = useMusicInfoModule(p1.musicEdit.assetId)
+	local var8 = if var7 == nil or var7.Duration == nil then 0 else var7.Duration
+	local var9, var10 = reactModule.useState(playback.getDuration(false))
 	useEffect(function()
-		-- upvalues: signalsModule (copy), var9 (ref), playback (ref)
+		-- upvalues: signalsModule (copy), var10 (ref), playback (ref)
 		return signalsModule.createEffect(function(p2)
-			-- upvalues: var9 (copy), playback (copy)
-			var9(playback.getDuration(p2))
+			-- upvalues: var10 (copy), playback (copy)
+			var10(playback.getDuration(p2))
 		end)
 	end, { playback })
-	local var10 = useCallback(function()
+	local var11 = useCallback(function()
 		-- upvalues: playback (ref), var5 (ref)
 		playback.setMuted(true)
 		playback.seek(0)
 		playback.pause()
 		var5.enable()
 	end, { playback, var5.enable })
-	local var11 = useCallback(function()
+	local var12 = useCallback(function()
 		-- upvalues: playback (ref), var5 (ref)
 		playback.setMuted(false)
 		playback.play()
 		var5.disable()
 	end, { playback, var5.disable })
-	local var12 = useCallback(function()
-		-- upvalues: playback (ref), var4 (ref)
+	local var13 = useCallback(function()
+		-- upvalues: fFlagMomentsCreationStartAudioOnLoadModule (copy), var6 (ref), p1 (ref), playback (ref), var4 (ref)
+		if fFlagMomentsCreationStartAudioOnLoadModule and var6.current ~= p1.musicEdit.assetId then
+			var6.current = p1.musicEdit.assetId
+			playback.seek(0)
+		end
 		playback.setMuted(false)
 		playback.play()
 		var4.enable()
-	end, { playback, var4.enable })
+	end, { playback, p1.musicEdit.assetId, var4.enable })
 	useEffect(function()
 		-- upvalues: var4 (ref)
 		var4.disable()
 	end, { p1.musicEdit.assetId, var4.disable })
-	local var13 = useMusicEditorControllerModule(var4.enabled, var11, var10, p1.onStartTimeChanged, p1.musicEdit, var7)
+	local var14 = useMusicEditorControllerModule(var4.enabled, var12, var11, p1.onStartTimeChanged, p1.musicEdit, var8)
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center align-y-top gap-large position-bottom-center anchor-bottom-center size-full-0 auto-y radius-medium bg-surface-100",
@@ -108,7 +114,7 @@ return function(p1)
 				DragDetector = reactModule.createElement("UIDragDetector", {
 					CursorIcon = "",
 					DragStyle = Enum.UIDragDetectorDragStyle.TranslateLine,
-					ref = var13.waveformRef,
+					ref = var14.waveformRef,
 					ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomOffset
 				}),
 				LeftGradientBackdrop = reactModule.createElement(gradientBackdrop, {
@@ -134,12 +140,12 @@ return function(p1)
 					WaveformDisplay = reactModule.createElement(waveformModule, {
 						zIndex = 1,
 						audioAssetId = p1.musicEdit.assetId,
-						position = var13.waveformPosition:map(function(p2)
+						position = var14.waveformPosition:map(function(p2)
 							return UDim2.fromScale(p2, 0.5)
 						end),
-						onWaveformReady = var12,
-						ref = var13.waveformDisplayRef,
-						videoDuration = var8
+						onWaveformReady = var13,
+						ref = var14.waveformDisplayRef,
+						videoDuration = var9
 					})
 				})
 			}),

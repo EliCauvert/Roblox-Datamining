@@ -6,10 +6,16 @@ local constantsModule = require(chrome.ChromeShared.Unibar.Constants)
 local chromeModule = require(corePackagesService.Workspace.Packages.Chrome)
 local inExperienceShopModule = require(corePackagesService.Workspace.Packages.InExperienceShop)
 local inExperienceSideSheetModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheet)
+local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local fFlagEnableSideSheetRobuxWidgetModule = require(chrome.Flags.FFlagEnableSideSheetRobuxWidget)
+local fFlagHideHeaderForBuyRobuxInExperienceShop = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagHideHeaderForBuyRobuxInExperienceShop
 
 local function openShop()
-	-- upvalues: serviceModule (ref), constantsModule (ref), inExperienceShopModule (ref)
-	if serviceModule:isIntegrationValid(constantsModule.IN_EXPERIENCE_SHOP_ID) then
+	-- upvalues: serviceModule (ref), constantsModule (ref), fFlagHideHeaderForBuyRobuxInExperienceShop (ref), inExperienceShopModule (ref)
+	if serviceModule:isIntegrationValid(constantsModule.IN_EXPERIENCE_SHOP_ID) or fFlagHideHeaderForBuyRobuxInExperienceShop then
+		if fFlagHideHeaderForBuyRobuxInExperienceShop then
+			inExperienceShopModule.setOpenedFromBuyRobux(true)
+		end
 		if not serviceModule:isWindowOpen(constantsModule.IN_EXPERIENCE_SHOP_ID) then
 			inExperienceShopModule.requestOpenToRobuxTab()
 		end
@@ -17,7 +23,7 @@ local function openShop()
 	end
 end
 
-return (if require(chrome.Flags.FFlagEnableSideSheetRobuxWidget) and require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled) then serviceModule:register({
+return (if fFlagEnableSideSheetRobuxWidgetModule and isSideSheetEnabledModule then serviceModule:register({
 	id = "RobuxWidget",
 	label = "Feature.Catalog.Label.BuyRobux",
 	activated = function() end,

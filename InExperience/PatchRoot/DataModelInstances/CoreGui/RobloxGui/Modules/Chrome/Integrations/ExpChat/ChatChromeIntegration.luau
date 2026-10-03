@@ -48,7 +48,6 @@ local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFla
 local shouldRenderTextChannelInDefaultWindow = expChatSharedModule.shouldRenderTextChannelInDefaultWindow
 local getTextChannelDisplayMode = expChatSharedModule.getTextChannelDisplayMode
 local expChatSuppressWelcomeMessageUnibarUnread = game:DefineFastFlag("ExpChatSuppressWelcomeMessageUnibarUnread", false)
-local expChatUnibarThumbstickNavigate = game:DefineFastFlag("ExpChatUnibarThumbstickNavigate", false)
 local expChatUnibarAvailabilityRefactor = game:DefineFastFlag("ExpChatUnibarAvailabilityRefactor", false)
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local inExperienceUIVRIXP = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).InExperienceUIVRIXP
@@ -270,44 +269,29 @@ end
 
 t.isActivated = var3
 t.selected = if fFlagEnableConsoleExpControls then function(p1)
-	-- upvalues: expChatUnibarThumbstickNavigate (ref), serviceModule (ref), userInputService (ref), gamepadUtils (ref), focusSelectExpChatModule (ref), var2 (write)
-	local inputEndedConnection
-	if expChatUnibarThumbstickNavigate then
-		inputEndedConnection = nil
-		local inputChangedConnection = nil
-		local inputBeganConnection = nil
-		inputEndedConnection = serviceModule:selectedItem():connect(function(p2)
-			-- upvalues: p1 (ref), inputEndedConnection (write), inputChangedConnection (write), inputBeganConnection (write)
-			assert(p2 ~= p1.id, "Expected selectedId to not be self.id on selection")
-			inputEndedConnection:disconnect()
-			inputChangedConnection:Disconnect()
-			inputBeganConnection:Disconnect()
-		end)
-		inputChangedConnection = userInputService.InputChanged:Connect(function(p2)
-			-- upvalues: gamepadUtils (copy), focusSelectExpChatModule (copy), var2 (copy)
-			if p2.KeyCode == Enum.KeyCode.Thumbstick1 and gamepadUtils.mapPositionToDirection(Vector2.new(p2.Position.X, p2.Position.Y)) == Enum.KeyCode.Down then
-				focusSelectExpChatModule(var2.id)
-			end
-		end)
-		inputBeganConnection = userInputService.InputBegan:Connect(function(p2)
-			-- upvalues: focusSelectExpChatModule (copy), var2 (copy)
-			local keyCode = p2.KeyCode
-			
-			if keyCode == Enum.KeyCode.DPadDown or keyCode == Enum.KeyCode.Down then
-				focusSelectExpChatModule(var2.id)
-			end
-		end)
-		
-		return
-	end
-	inputEndedConnection = nil
-	inputEndedConnection = userInputService.InputEnded:Connect(function(p2)
-		-- upvalues: focusSelectExpChatModule (copy), var2 (copy), inputEndedConnection (write), serviceModule (copy), p1 (ref)
-		if p2.KeyCode == Enum.KeyCode.DPadDown then
+	-- upvalues: serviceModule (ref), userInputService (ref), gamepadUtils (ref), focusSelectExpChatModule (ref), var2 (write)
+	local var4 = nil
+	local inputChangedConnection = nil
+	local inputBeganConnection = nil
+	var4 = serviceModule:selectedItem():connect(function(p2)
+		-- upvalues: p1 (ref), var4 (write), inputChangedConnection (write), inputBeganConnection (write)
+		assert(p2 ~= p1.id, "Expected selectedId to not be self.id on selection")
+		var4:disconnect()
+		inputChangedConnection:Disconnect()
+		inputBeganConnection:Disconnect()
+	end)
+	inputChangedConnection = userInputService.InputChanged:Connect(function(p2)
+		-- upvalues: gamepadUtils (copy), focusSelectExpChatModule (copy), var2 (copy)
+		if p2.KeyCode == Enum.KeyCode.Thumbstick1 and gamepadUtils.mapPositionToDirection(Vector2.new(p2.Position.X, p2.Position.Y)) == Enum.KeyCode.Down then
 			focusSelectExpChatModule(var2.id)
 		end
-		if inputEndedConnection and serviceModule:selectedItem():get() ~= p1.id then
-			inputEndedConnection:Disconnect()
+	end)
+	inputBeganConnection = userInputService.InputBegan:Connect(function(p2)
+		-- upvalues: focusSelectExpChatModule (copy), var2 (copy)
+		local keyCode = p2.KeyCode
+		
+		if keyCode == Enum.KeyCode.DPadDown or keyCode == Enum.KeyCode.Down then
+			focusSelectExpChatModule(var2.id)
 		end
 	end)
 end else nil

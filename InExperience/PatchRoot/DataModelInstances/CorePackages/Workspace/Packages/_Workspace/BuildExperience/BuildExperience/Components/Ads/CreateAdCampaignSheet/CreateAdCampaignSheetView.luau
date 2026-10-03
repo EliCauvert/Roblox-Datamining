@@ -254,7 +254,9 @@ return function(p7)
 				}),
 				Balance = reactModule.createElement(view, {
 					LayoutOrder = 2,
-					tag = "row align-y-center gap-small auto-xy padding-right-small"
+					tag = "row align-y-center gap-small auto-xy padding-right-small",
+					onActivated = if isTwoOptions and not p7.isCreatePending then p7.onOpenBuyRobux else nil,
+					testId = if isTwoOptions then "two-options-ad-campaign-balance" else nil
 				}, {
 					Icon = reactModule.createElement(icon, {
 						LayoutOrder = 1,
@@ -410,11 +412,45 @@ return function(p7)
 					LayoutOrder = 0,
 					Text = p7.createErrorText,
 					Size = if isTwoOptions then UDim2.new(1, 0, 0, math.ceil(var5.Typography.CaptionMedium.FontSize * var5.Typography.CaptionMedium.LineHeight * 2)) else nil,
-					tag = if isTwoOptions then "auto-y text-caption-medium text-wrap text-align-x-left text-align-y-bottom content-system-alert" else "size-full-0 auto-y text-caption-medium text-wrap text-align-x-left content-system-alert",
+					tag = {
+						["auto-y text-caption-medium text-wrap text-align-x-left text-align-y-bottom content-system-alert"] = isTwoOptions,
+						["size-full-0 auto-y text-caption-medium text-wrap text-align-x-left content-system-alert"] = not isTwoOptions
+					},
 					testId = `{var6}-create-error`
 				}) else nil,
-				Create = reactModule.createElement(button, {
+				AdCredits = if isTwoOptions and p7.showAdCreditsCallout then reactModule.createElement(view, {
 					LayoutOrder = 1,
+					tag = "size-full-0 auto-y padding-bottom-small",
+					testId = "two-options-ad-campaign-ad-credits"
+				}, {
+					Link = reactModule.createElement(view, {
+						tag = "row align-y-center size-full-0 auto-y padding-medium stroke-standard stroke-default radius-medium",
+						testId = "two-options-ad-campaign-ad-credits-link",
+						onActivated = p7.onOpenAdsManager
+					}, {
+						Copy = reactModule.createElement(view, { LayoutOrder = 1, tag = "col fill gap-xxsmall auto-y" }, {
+							Title = reactModule.createElement(text, {
+								LayoutOrder = 1,
+								tag = "size-full-0 auto-y text-title-small text-wrap text-align-x-left content-emphasis",
+								Text = p7.adCreditsTitle
+							}),
+							Description = reactModule.createElement(text, {
+								LayoutOrder = 2,
+								tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-default",
+								Text = p7.adCreditsAction
+							})
+						}),
+						ExternalLink = reactModule.createElement(icon, {
+							LayoutOrder = 2,
+							tag = "auto-xy content-emphasis",
+							testId = "two-options-ad-campaign-ad-credits-icon",
+							name = foundationModule.Enums.IconName.ArrowUpRightFromSquare,
+							size = iconSize.Small
+						})
+					})
+				}) else nil,
+				Create = reactModule.createElement(button, {
+					LayoutOrder = 2,
 					text = p7.createText,
 					size = inputSize.Medium,
 					variant = buttonVariant.Emphasis,
@@ -425,7 +461,7 @@ return function(p7)
 					testId = `{var6}-create-button`
 				}),
 				Moderation = reactModule.createElement(text, {
-					LayoutOrder = 2,
+					LayoutOrder = 3,
 					tag = "auto-y text-caption-small text-wrap text-align-x-left content-default",
 					Text = p7.moderationNotice,
 					Size = UDim2.new(1, 0, 0, math.ceil(var5.Typography.CaptionSmall.FontSize * var5.Typography.CaptionSmall.LineHeight * 2)),

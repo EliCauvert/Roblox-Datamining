@@ -2009,11 +2009,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,विज़िट
 Feature.Build.Content.NewGame,नया गेम
 Feature.Build.Description.ActivateDeveloperProduct,डेवलपर प्रॉडक्ट {PRODUCT_ID} को बिक्री के लिए रखें.
-Feature.Build.Description.AdActive,आपका ऐड चल रहा है. देखें कि यह कितने प्लेयर्स तक पहुँच रहा है.
 Feature.Build.Description.AdCampaignModerationReview,सभी ऐड कैंपेन को Roblox मॉडरेशन द्वारा रिव्यू किया जाता है. इस काम में 24 घंटे तक लग सकते हैं.
 Feature.Build.Description.AdCampaignSheetRunDates,{startDate} – {endDate} तक चलता है
 Feature.Build.Description.AdComplete,आपका ऐड खत्म हो गया है. अपने रिज़ल्ट देखें.
-Feature.Build.Description.AdInReview,आपके ऐड का रिव्यू किया जा रहा है और इसे {startDate} – {endDate} तक चलाने के लिए शेड्यूल किया गया है.
 Feature.Build.Description.AdModerationReview,Roblox मॉडरेशन सभी ऐड्स का रिव्यू करता है और इसमें 24 घंटे तक लग सकते हैं.
 Feature.Build.Description.AdvertisingAgreement,'क्रिएट करें' चुनने का मतलब है कि आप {advertisingTermsStart}Roblox विज्ञापन की शर्तों{advertisingTermsEnd} और {advertisingStandardsStart}ऐडवरटाइज़िंग स्टैंडर्ड{advertisingStandardsEnd} से सहमत हैं.
 Feature.Build.Description.ArchiveRemoval,"अगर इस गेम को आर्काइव किया जाता है, तो इसे 'बिल्ड' से हटा दिया जाएगा. आपके पास अभी भी Creator Hub या Roblox Studio से इसे ऐक्सेस और रीस्टोर करने की सुविधा रहेगी."
@@ -2342,7 +2340,6 @@ Feature.Build.Title.AdActive,ऐड कैंपेन ऐक्टिव है
 Feature.Build.Title.AdCampaignDuration,{durationDays}-दिन का ऐड कैंपेन
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}-दिन
 Feature.Build.Title.AdComplete,ऐड पूरा हुआ
-Feature.Build.Title.AdCreated,ऐड क्रिएट किया गया
 Feature.Build.Title.AdCreatedPeriod,ऐड क्रिएट हो गया.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,इमेज जोड़ें
@@ -3467,6 +3464,7 @@ Feature.Groups.Notification.FailedToFollow,प्रोफ़ाइल फ़ॉ
 Feature.Groups.Notification.FailedToJoin,कम्यूनिटी जॉइन नहीं की जा सकी. बाद में कोशिश करें.
 Feature.Groups.Notification.FailedToLoad,कम्यूनिटी लोड नहीं की जा सकी. बाद में कोशिश करें.
 Feature.Groups.Notification.Following,{groupName} को फ़ॉलो किया जा रहा है.
+Feature.Groups.Notification.GroupDeactivated,इस कम्यूनिटी को डीऐक्टिवेट कर दिया गया है.
 Feature.Groups.Notification.GroupDoesNotExist,कम्यूनिटी मौजूद नहीं है.
 Feature.Groups.Notification.GroupModerated,यह कम्यूनिटी फ़िलहाल मॉडरेट की जा रही है.
 Feature.Groups.Notification.JoinRequestPending,{groupName} जॉइन करने की रिक्वेस्ट की गई.
@@ -3604,6 +3602,7 @@ Feature.Moments.Disclaimer.EveryoneMoments,Moments में मौजूद ह
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,{placeName} को जॉइन करने की कोशिश की जा रही है. इसमें कुछ सेकंड लग सकते हैं.
 Feature.Moments.Label.CaptureLibrary,आपकी 'कैप्चर' लाइब्रेरी
+Feature.Moments.Label.ChooseVoice,वॉइस चुनें
 Feature.Moments.Label.DeleteMomentBody,"कोई Moment मिट जाने पर, उसे रिकवर नहीं किया जा सकता."
 Feature.Moments.Label.DeleteMomentTitle,Moment डिलीट करना है?
 Feature.Moments.Label.DeleteVoiceoverBody,इससे आपका टेक्स्ट और वॉइसओवर मिट जाएगा. कभी भी फिर से शुरू करें.
@@ -4024,8 +4023,10 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"अलग-अलग �
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"आइटम और अवतार पर, पहले {trialUnlockDays} दिनों में 10% और उसके बाद 20% की छूट"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,कम Robux में ज़्यादा मज़ा. Roblox Plus को सब्सक्राइब करें.
 Feature.RobloxSubscription.Description.JoinEarly,Plus के साथ जल्दी जॉइन करें
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} ने आपको Plus जॉइन करने के लिए इन्वाइट किया है. आपके Plus खरीदने पर आप दोनों को {amount} Robux मिलेंगे.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} पर क्लिक करने का मतलब है कि आप <a href=""{termsUrl}"">Roblox के सब्सक्रिप्शन की शर्तों</a> से सहमत हैं. आपके कैंसिल करने तक आपसे हर महीने अपने आप शुल्क ले लिया जाएगा."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus शेयर करें और {amount} Robux पाएँ
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,Plus में शामिल हों और पाएँ
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,फ़्री प्राइवेट सर्वर्स
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,मुफ़्त में Robux भेजें

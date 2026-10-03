@@ -23,7 +23,8 @@ return {
 		SessionSaveAndPublish = "_roblox/session/save_and_publish",
 		AdCampaignEligibility = "_roblox/ad_campaign/eligibility",
 		AdCampaignCheckFunds = "_roblox/ad_campaign/check_funds",
-		AdCampaignCreate = "_roblox/ad_campaign/create"
+		AdCampaignCreate = "_roblox/ad_campaign/create",
+		AdCampaignToolCallStatus = "_roblox/ad_campaign/tool_call_status"
 	},
 	Notifications = { SessionUpdate = "session/update" },
 	ErrorCodes = {

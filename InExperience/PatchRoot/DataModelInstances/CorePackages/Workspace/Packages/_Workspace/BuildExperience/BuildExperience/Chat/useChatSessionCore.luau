@@ -18,6 +18,7 @@ local signalsReactModule = require(parent.SignalsReact)
 local localizationRoactContext = require(parent.Localization).LocalizationRoactContext
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildExperienceClientDataModelTools = sharedFlagsModule.FFlagBuildExperienceClientDataModelTools
+local fFlagBuildExperienceChatAccordionScrollAnchorModule = require(buildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
 local fFlagBuildExperienceChatHistoryPrefetchModule = require(buildExperience.Flags.FFlagBuildExperienceChatHistoryPrefetch)
 local fFlagBuildExperienceFixChatBottomLockModule = require(buildExperience.Flags.FFlagBuildExperienceFixChatBottomLock)
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
@@ -176,7 +177,7 @@ local _ = function(p4, p5, p6, p7, p8)
 end
 
 return function(p4)
-	-- upvalues: reactModule (ref), localizationRoactContext (ref), localizationStringsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperiencePersistPlaytestLogsModule (ref), fFlagBuildExperienceClientDataModelTools (ref), fFlagBuildExperienceLibrary (ref), fFlagBuildAdUpsellModule (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), creatorAgentChatModule (ref), getAgentRollbackRequestStoreModule (ref), var8 (ref), signalsModule (ref), signalsReactModule (ref), noopSetAgentSpecVersion (ref), var1 (ref), var5 (ref), var6 (ref), var7 (ref), fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule (ref), parseSessionStreamModule (ref), fFlagBuildAgentRollbackModule (ref), sessionPromptMessageFilterModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), var4 (ref), hasPendingLocalToolResponse (ref), noteLiveAdUpsellTurns (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (ref), placeVersionHistoryModule (ref), frozen (ref), reactUtilsModule (ref), useChatScrollModule (ref), getPlaytestLoadingStoreModule (ref), fFlagBuildExperienceChatHistoryPrefetchModule (ref), fFlagBuildExperiencePinForBuild (ref), messageBusService (ref), gameMessageId (ref), fFlagBuildExperienceRefreshChatDraftOnGameLeaveModule (ref), fFlagBuildExperiencePersistChatDraftModule (ref), var2 (ref), appLifecycleObserverService (ref), fFlagBuildExperienceFixChatBottomLockModule (ref), chatTypesModule (ref), var3 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), creatorAgentChatModule_1 (ref), buildAgentRollbackPromptModule (ref), useAgentRollbackRequestModule (ref), universeCreateModule (ref), getDefaultTemplatePlaceIdModule (ref), debug (ref), universeConfigurationModule (ref), launchPlaytestWithLoadingStateModule (ref)
+	-- upvalues: reactModule (ref), localizationRoactContext (ref), localizationStringsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperiencePersistPlaytestLogsModule (ref), fFlagBuildExperienceClientDataModelTools (ref), fFlagBuildExperienceLibrary (ref), fFlagBuildAdUpsellModule (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), creatorAgentChatModule (ref), getAgentRollbackRequestStoreModule (ref), var8 (ref), signalsModule (ref), signalsReactModule (ref), noopSetAgentSpecVersion (ref), var1 (ref), var5 (ref), var6 (ref), var7 (ref), fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule (ref), parseSessionStreamModule (ref), fFlagBuildAgentRollbackModule (ref), sessionPromptMessageFilterModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), var4 (ref), hasPendingLocalToolResponse (ref), noteLiveAdUpsellTurns (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (ref), placeVersionHistoryModule (ref), frozen (ref), reactUtilsModule (ref), useChatScrollModule (ref), getPlaytestLoadingStoreModule (ref), fFlagBuildExperienceChatHistoryPrefetchModule (ref), fFlagBuildExperiencePinForBuild (ref), messageBusService (ref), gameMessageId (ref), fFlagBuildExperienceRefreshChatDraftOnGameLeaveModule (ref), fFlagBuildExperiencePersistChatDraftModule (ref), var2 (ref), appLifecycleObserverService (ref), fFlagBuildExperienceFixChatBottomLockModule (ref), chatTypesModule (ref), var3 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), creatorAgentChatModule_1 (ref), buildAgentRollbackPromptModule (ref), useAgentRollbackRequestModule (ref), universeCreateModule (ref), getDefaultTemplatePlaceIdModule (ref), debug (ref), universeConfigurationModule (ref), launchPlaytestWithLoadingStateModule (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref)
 	local var10 = reactModule.useContext(localizationRoactContext)
 	local chat_create_universe_error = var10:Format(localizationStringsModule.CHAT_CREATE_UNIVERSE_ERROR)
 	local var11 = if fFlagBuildExperienceChatImageAttachmentsModule then var10:Format(localizationStringsModule.CHAT_CAPTURE_UPLOAD_ERROR) else nil
@@ -330,7 +331,7 @@ return function(p4)
 	end, { var23, sessionId })
 	local var46 = sessionId
 	local var47 = if if var44 == nil or var44.session ~= var23 then false else var46 == nil or var46 == "" or (if var44.sessionId ~= var46 then var44.sessionId == nil and var44.session.getCasSessionId() == var46 else true) then var44 else nil
-	var95, var93 = reactModule.useState(nil)
+	var96, var94 = reactModule.useState(nil)
 	local var48 = reactModule.useRef(nil)
 	local var49 = reactModule.useRef(nil)
 	local var50 = reactModule.useRef(0)
@@ -344,7 +345,7 @@ return function(p4)
 	end, { var46 })
 	local current = var49.current
 	local var53 = sessionId
-	local var54 = if if current == nil or current.session ~= var23 then false else var53 == nil or var53 == "" or (if current.sessionId ~= var53 then current.sessionId == nil and current.session.getCasSessionId() == var53 else true) then var95 else nil
+	local var54 = if if current == nil or current.session ~= var23 then false else var53 == nil or var53 == "" or (if current.sessionId ~= var53 then current.sessionId == nil and current.session.getCasSessionId() == var53 else true) then var96 else nil
 	local var55 = if var54 ~= nil then var5 else var54.getOptimisticLocalTools
 	current = if var54 ~= nil then var6 else var54.getLocalToolActions
 	var53 = if var54 ~= nil then var7 else var54.getSetupErrorText
@@ -1548,8 +1549,8 @@ return function(p4)
 		})
 	end
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var95 (ref), var49 (ref), var23 (ref), sessionId (write), var50 (ref), var51 (ref), fFlagBuildAgentRollbackModule (copy), v (write), var98 (ref), var52 (ref), var43 (ref), var45 (ref)
-		if var95 ~= nil then
+		-- upvalues: var96 (ref), var49 (ref), var23 (ref), sessionId (write), var50 (ref), var51 (ref), fFlagBuildAgentRollbackModule (copy), v (write), var98 (ref), var52 (ref), var43 (ref), var45 (ref)
+		if var96 ~= nil then
 			local current = var49.current
 			local var124 = sessionId
 			
@@ -1558,8 +1559,8 @@ return function(p4)
 			var50.current += 1
 			var51.current = nil
 			
-			if not fFlagBuildAgentRollbackModule or not v.stopRequestBeforeReceipt(var95) then
-				var95.detach()
+			if not fFlagBuildAgentRollbackModule or not v.stopRequestBeforeReceipt(var96) then
+				var96.detach()
 			elseif current ~= nil and current.session.placeId ~= nil then
 				var98(current.session.placeId, "Idle")
 			end
@@ -1570,7 +1571,7 @@ return function(p4)
 			return
 		end
 	end, {
-		var23, sessionId, var95, var52,
+		var23, sessionId, var96, var52,
 		if fFlagBuildAgentRollbackModule then v else nil,
 		if fFlagBuildAgentRollbackModule then var98 else nil
 	})
@@ -1834,9 +1835,9 @@ return function(p4)
 					
 					return
 				end
-				var51 -= 1
+				var135 -= 1
 				
-				if var51 > 0 then
+				if var135 > 0 then
 					task.delay(0, tryFocus)
 				end
 			end
@@ -1868,11 +1869,12 @@ return function(p4)
 		clearComposerResourceAttachments = clearComposerResourceAttachments,
 		isComposerSendBlocked = fFlagBuildExperienceChatImageAttachmentsModule and var118,
 		isAssistantResponding = var70,
-		canStopAssistantResponse = u2037,
+		canStopAssistantResponse = u2044,
 		canSendWhileResponding = var71,
 		sendMessage = var125,
 		stopAssistantResponse = var130,
 		setScrollingFrame = var97.setScrollingFrame,
+		anchorScrollToInstance = if fFlagBuildExperienceChatAccordionScrollAnchorModule then var97.anchorToInstance else nil,
 		textBoxRef = var95,
 		clockBinding = var96,
 		playtestPlaceId = placeId,

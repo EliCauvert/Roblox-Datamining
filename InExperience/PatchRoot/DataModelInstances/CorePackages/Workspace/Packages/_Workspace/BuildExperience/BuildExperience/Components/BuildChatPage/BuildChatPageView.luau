@@ -8,6 +8,7 @@ local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildAdUpsellModule = require(buildExperience.Flags.FFlagBuildAdUpsell)
 local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local chatConstantsModule = require(buildExperience.Chat.chatConstants)
+local chatScrollAnchorContextModule = require(buildExperience.Chat.ChatScrollAnchorContext)
 local _ = require(buildExperience.Chat.chatTypes)
 local buildEmptyStateModule = require(buildExperience.Components.BuildEmptyState.BuildEmptyState)
 local var1 = creatorAgentChatModule.experimentOverride.isEnabled()
@@ -31,6 +32,7 @@ local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuil
 local fFlagBuildExperienceRemoveAgentTaskUiModule = require(buildExperience.Flags.FFlagBuildExperienceRemoveAgentTaskUi)
 local fFlagEnableBuildOverflowMenuForNewGamesModule = require(buildExperience.Flags.FFlagEnableBuildOverflowMenuForNewGames)
 local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
+local fFlagBuildExperienceChatAccordionScrollAnchorModule = require(buildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
 local fFlagBuildExperienceChatImageAttachmentsModule = require(buildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local fFlagBuildExperienceChatResourceAttachments = require(parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
 local useScrollPerformanceTrackerModule = require(buildExperience.Telemetry.useScrollPerformanceTracker)
@@ -81,7 +83,7 @@ local function toTodoItems(p3)
 end
 
 return function(p4)
-	-- upvalues: var1 (ref), reactModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAdUpsellModule (ref), useTokens (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), chatConstantsModule (ref), pushNotificationsUpsellCardModule (ref), var3 (ref), view (ref), subagentTaskStatus (ref), subagentStatusModule (ref), fFlagBuildDesktopReadinessModule (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), fFlagBuildExperienceLibrary (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), playButtonModule (ref), agentDetailMenuModule (ref), iconVariant (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), fFlagEnableBuildAdPromotionModule (ref), scrollView (ref), foundationModule (ref), divider (ref), var2 (ref), toTodoItems (ref), var4 (ref), var5 (ref)
+	-- upvalues: var1 (ref), reactModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAdUpsellModule (ref), useTokens (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), chatConstantsModule (ref), pushNotificationsUpsellCardModule (ref), var3 (ref), view (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), chatScrollAnchorContextModule (ref), subagentTaskStatus (ref), subagentStatusModule (ref), fFlagBuildDesktopReadinessModule (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), fFlagBuildExperienceLibrary (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), playButtonModule (ref), agentDetailMenuModule (ref), iconVariant (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), fFlagEnableBuildAdPromotionModule (ref), scrollView (ref), foundationModule (ref), divider (ref), var2 (ref), toTodoItems (ref), var4 (ref), var5 (ref)
 	local var6 = false
 	local var7 = nil
 	
@@ -123,6 +125,9 @@ return function(p4)
 	end
 	taskState = not fFlagBuildExperienceRemoveAgentTaskUiModule
 	selectedChipGroupName = chatMessageListModule({
+		isPageVisible = p4.isAdUpsellVisible,
+		scrollingFrameRef = var13,
+		isAgentAdCampaignCreateDisabled = p4.isAgentAdCampaignCreateDisabled,
 		messages = p4.messages,
 		clockBinding = p4.clockBinding,
 		localToolActions = p4.localToolActions,
@@ -188,6 +193,11 @@ return function(p4)
 				testId = `AdUpsellGroup.{i_2}`
 			}, t_1)
 		end
+	end
+	if fFlagBuildExperienceChatAccordionScrollAnchorModule then
+		selectedChipGroupName = {
+			ScrollAnchor = reactModule.createElement(chatScrollAnchorContextModule.Provider, { value = p4.anchorScrollToInstance }, selectedChipGroupName)
+		}
 	end
 	local t = {}
 	
@@ -419,18 +429,18 @@ return function(p4)
 			runStartTimeMs = p4.adCampaignRunStartTimeMs,
 			runEndTimeMs = p4.adCampaignRunEndTimeMs
 		}) else nil,
-		AgentAdCampaignSheet = if fFlagBuildAgentAdCampaignCardModule and p4.isAgentAdCampaignSheetOpen then reactModule.createElement(var4, {
-			isOpen = true,
+		AgentAdCampaignSheet = if fFlagBuildAgentAdCampaignCardModule then reactModule.createElement(var4, {
 			waitForCreateResult = true,
 			useLocalRunDates = true,
+			isOpen = p4.isAgentAdCampaignSheetOpen,
 			onClose = p4.onAgentAdCampaignSheetClose,
 			onCreate = p4.onAgentAdCampaignSheetCreate,
 			isCreatePending = p4.isAgentAdCampaignCreatePending,
 			hasCreateError = p4.hasAgentAdCampaignCreateError,
-			campaignDurationDays = p4.agentAdCampaignDurationDays,
-			estimatedPriceRobux = p4.agentAdCampaignEstimatedPriceRobux,
-			runStartTimeMs = p4.agentAdCampaignRunStartTimeMs,
-			runEndTimeMs = p4.agentAdCampaignRunEndTimeMs
+			createErrorKind = p4.agentAdCampaignCreateErrorKind,
+			campaignOffers = p4.agentAdCampaignOffers,
+			attemptedOption = p4.agentAdCampaignAttemptedOption,
+			runStartTimeMs = p4.agentAdCampaignRunStartTimeMs
 		}) else nil,
 		AdCampaignCreatedToast = if fFlagBuildAdUpsellModule and p4.isAdCampaignCreatedToastVisible and p4.isAdUpsellVisible then reactModule.createElement(var5, {
 			testId = "AdCampaignCreatedToast",

@@ -1961,11 +1961,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,Besuche
 Feature.Build.Content.NewGame,Neues Spiel
 Feature.Build.Description.ActivateDeveloperProduct,Entwicklerprodukt {PRODUCT_ID} zum Verkauf anbieten.
-Feature.Build.Description.AdActive,"Deine Werbeanzeige wird geschaltet. Sieh dir an, wie viele Spieler sie erreicht."
 Feature.Build.Description.AdCampaignModerationReview,Alle Werbekampagnen werden vom Roblox-Moderationsteam überprüft. Dieser Vorgang kann bis zu 24 Stunden dauern.
 Feature.Build.Description.AdCampaignSheetRunDates,Läuft vom {startDate} bis zum {endDate}
 Feature.Build.Description.AdComplete,Deine Werbeanzeige ist beendet. Sieh dir deine Ergebnisse an.
-Feature.Build.Description.AdInReview,Deine Werbeanzeige wird überprüft und soll von {startDate}–{endDate} geschaltet werden.
 Feature.Build.Description.AdModerationReview,Werbung wird vom Roblox-Moderationsteam überprüft. Dies kann bis zu 24 Stunden dauern.
 Feature.Build.Description.AdvertisingAgreement,"Indem du ""Erstellen"" auswählst, stimmst du den {advertisingTermsStart}Werbebedingungen{advertisingTermsEnd} und {advertisingStandardsStart}Werberichtlinien{advertisingStandardsEnd} von Roblox zu."
 Feature.Build.Description.ArchiveRemoval,"Wenn du dieses Spiel archivierst, wird es aus Build entfernt. Du kannst weiterhin im Creator Hub oder in Roblox Studio darauf zugreifen und es wiederherstellen."
@@ -2294,7 +2292,6 @@ Feature.Build.Title.AdActive,Werbekampagne ist aktiv
 Feature.Build.Title.AdCampaignDuration,{durationDays}-tägige Werbekampagne
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} Tage
 Feature.Build.Title.AdComplete,Werbeanzeige abgeschlossen
-Feature.Build.Title.AdCreated,Werbeanzeige erstellt
 Feature.Build.Title.AdCreatedPeriod,Werbeanzeige erstellt.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Bilder hinzufügen
@@ -3419,6 +3416,7 @@ Feature.Groups.Notification.FailedToFollow,Du kannst dem Profil im Moment nicht 
 Feature.Groups.Notification.FailedToJoin,Beitritt zur Community fehlgeschlagen. Bitte versuche es später erneut.
 Feature.Groups.Notification.FailedToLoad,Community konnte nicht geladen werden. Bitte versuche es später erneut.
 Feature.Groups.Notification.Following,Du folgst jetzt {groupName}.
+Feature.Groups.Notification.GroupDeactivated,Diese Community wurde deaktiviert.
 Feature.Groups.Notification.GroupDoesNotExist,Die Community existiert nicht.
 Feature.Groups.Notification.GroupModerated,Diese Community wird derzeit moderiert.
 Feature.Groups.Notification.JoinRequestPending,Beitritt zu {groupName} angefordert.
@@ -3974,8 +3972,10 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10 % Rabatt in den e
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10 % Rabatt in den ersten {trialUnlockDays} Tagen, dann 20 % Rabatt auf Artikel und Avatare"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Mehr Spaß für weniger Robux. Abonniere Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Mit Plus frühzeitig mitmachen
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,"{username} hat dich eingeladen, Plus beizutreten. Wenn du Plus kaufst, erhaltet ihr beide {amount} Robux."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Indem du auf \u{201C}{ctaText}\u{201D} klickst, stimmst du den <a href=""{termsUrl}"">Abonnementbedingungen von Roblox</a> zu. Dir wird jeden Monat automatisch eine Gebühr berechnet, bis du das Abo kündigst."
 Feature.RobloxSubscription.Heading.ReferralEntry,"Lade jemanden zu Plus ein, um {amount} Robux zu erhalten"
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,Tritt Plus bei und erhalte
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Kostenlose private Server
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,Robux kostenlos senden

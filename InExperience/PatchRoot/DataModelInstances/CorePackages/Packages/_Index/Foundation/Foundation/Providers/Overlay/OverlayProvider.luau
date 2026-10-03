@@ -33,10 +33,10 @@ return function(p1)
 	local var14 = if var2.gui ~= nil then var7 else var2.gui
 	
 	return reactModule.createElement(overlayContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+		value = reactModule.useMemo(function()
 			-- upvalues: var10 (ref), var13 (ref), var14 (ref)
 			return { requestOverlay = var10, instance = var13, screen = var14 }
-		end, { var10, var13, var14 }) else nil else { requestOverlay = var10, instance = var13, screen = var14 }
+		end, { var10, var13, var14 })
 	}, {
 		FoundationOverlay = if var12 then reactRobloxModule.createPortal(reactModule.createElement("ScreenGui", {
 			Enabled = true,

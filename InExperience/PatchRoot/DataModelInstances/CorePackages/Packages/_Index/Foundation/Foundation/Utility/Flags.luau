@@ -27,14 +27,12 @@ return {
 	FoundationPopoverPluginAnchorRefresh = safeFlagsModule.createGetFFlag("FoundationPopoverPluginAnchorRefresh")(),
 	FoundationSkeletonCommonShimmerToken = safeFlagsModule.createGetFFlag("FoundationSkeletonCommonShimmerToken")(),
 	FoundationDateTimePickerBetaUpdate = safeFlagsModule.createGetFFlag("FoundationDateTimePickerBetaUpdate")(),
-	FoundationDialogBetaUpdate = safeFlagsModule.createGetFFlag("FoundationDialogBetaUpdate")(),
 	FoundationListItemTypographySpacing = safeFlagsModule.createGetFFlag("FoundationListItemTypographySpacing")(),
 	FoundationOptionSelectorGroupBeta = safeFlagsModule.createGetFFlag("FoundationOptionSelectorGroupBeta")(),
 	FoundationPopoverClickOutsideInGuiShadow = safeFlagsModule.createGetFFlag("FoundationPopoverClickOutsideInGuiShadow")(),
 	FoundationPopoverContentAnchorFix = safeFlagsModule.createGetFFlag("FoundationPopoverContentAnchorFix")(),
 	FoundationPopoverRecomputeContentSize = safeFlagsModule.createGetFFlag("FoundationPopoverRecomputeContentSize")(),
 	FoundationProgressCircleRoundCaps = safeFlagsModule.createGetFFlag("FoundationProgressCircleRoundCaps")(),
-	FoundationStableContextValues = safeFlagsModule.createGetFFlag("FoundationStableContextValues")(),
 	FoundationUnifiedScrimScrolling = safeFlagsModule.createGetFFlag("FoundationUnifiedScrimScrolling")(),
 	FoundationAnimatedHighlightSettling = safeFlagsModule.createGetFFlag("FoundationAnimatedHighlightSettling")(),
 	FoundationNumberInputScrubCallbackProps = safeFlagsModule.createGetFFlag("FoundationNumberInputScrubCallbackProps2")(),
@@ -59,6 +57,7 @@ return {
 	FoundationAlertLinkWrap = safeFlagsModule.createGetFFlag("FoundationAlertLinkWrap")(),
 	FoundationAlertStackTrailingOnOverflow = safeFlagsModule.createGetFFlag("FoundationAlertLinkWrap")() and safeFlagsModule.createGetFFlag("FoundationAlertStackTrailingOnOverflow")(),
 	FoundationEducationalTooltipRefresh = safeFlagsModule.createGetFFlag("FoundationEducationalTooltipRefresh2")(),
-	FoundationEducationalTooltipMinMediaWidth = safeFlagsModule.createGetFFlag("FoundationEducationalTooltipMinMediaWidth2")(),
-	FoundationFontFaceMigration = safeFlagsModule.createGetFFlag("FoundationFontFaceMigration2")()
+	FoundationFontFaceMigration = safeFlagsModule.createGetFFlag("FoundationFontFaceMigration2")(),
+	FoundationEducationalTooltipMinMediaWidth = safeFlagsModule.createGetFFlag("FoundationEducationalTooltipMinMediaWidth3")(),
+	FoundationStudioFontFaceMigration = safeFlagsModule.createGetFFlag("FoundationStudioFontFaceMigration")()
 }

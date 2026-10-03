@@ -2,7 +2,6 @@
 local foundation = script:FindFirstAncestor("Foundation")
 local reactModule = require(foundation.Parent.React)
 local preferencesContextModule = require(parent.PreferencesContext)
-local flagsModule = require(foundation.Utility.Flags)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local t = {
 	preferredTransparency = 1,
@@ -12,9 +11,9 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: flagsModule (ref), reactModule (ref), withDefaultsModule (ref), t (ref), preferencesContextModule (ref)
+	-- upvalues: reactModule (ref), withDefaultsModule (ref), t (ref), preferencesContextModule (ref)
 	return reactModule.createElement(preferencesContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+		value = reactModule.useMemo(function()
 			-- upvalues: withDefaultsModule (copy), p1 (ref), t (copy)
 			return withDefaultsModule({
 				preferredTextSize = p1.preferredTextSize,
@@ -25,10 +24,6 @@ return function(p1)
 			p1.preferredTextSize,
 			p1.preferredTransparency,
 			p1.reducedMotion
-		}) else withDefaultsModule({
-			preferredTextSize = p1.preferredTextSize,
-			preferredTransparency = p1.preferredTransparency,
-			reducedMotion = p1.reducedMotion
-		}, t)
+		})
 	}, p1.children)
 end

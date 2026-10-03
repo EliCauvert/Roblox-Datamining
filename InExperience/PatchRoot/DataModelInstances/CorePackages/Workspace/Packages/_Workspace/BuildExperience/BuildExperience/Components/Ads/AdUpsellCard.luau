@@ -38,7 +38,10 @@ return function(p1)
 	local description = var2.description
 	
 	if fFlagBuildAgentAdCampaignCardModule then
-		if p1.freePromotionsRemaining == 1 then
+		if p1.fundingType == "paid" then
+			title = var2.noFreeTitle
+			description = var2.noFreeDescription
+		elseif p1.freePromotionsRemaining == 1 then
 			title = var2.freeTitle
 			description = var2.freeDescription
 		elseif p1.freePromotionsRemaining > 0 then

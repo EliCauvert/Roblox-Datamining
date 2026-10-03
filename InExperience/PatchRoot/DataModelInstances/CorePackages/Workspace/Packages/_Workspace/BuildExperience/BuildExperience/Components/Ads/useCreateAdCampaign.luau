@@ -7,6 +7,8 @@ local _ = require(parent.DataHydration.AdCampaignEligibility)
 local _ = require(parent.DataHydration.AdCampaigns)
 local _ = require(parent.DataHydration.CampaignStats)
 local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
+local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local fFlagBuildAgentAdCampaignToolCallStatusFallbackModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignToolCallStatusFallback)
 local useRefreshAdsDataModule = require(script.Parent.useRefreshAdsData)
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local fFlagEnablePaidAdsModule = require(buildExperience.Flags.FFlagEnablePaidAds)
@@ -14,7 +16,7 @@ local asPromise = httpClientModule.asPromise
 local classifyAdCampaignFailure = creatorAgentChatModule.classifyAdCampaignFailure
 
 return function(p1, p2, p3)
-	-- upvalues: sendBuildExperienceEventModule (ref), reactModule (ref), fFlagEnablePaidAdsModule (ref), useRefreshAdsDataModule (ref), httpService (ref), asPromise (ref), creatorAgentChatModule (ref), classifyAdCampaignFailure (ref)
+	-- upvalues: sendBuildExperienceEventModule (ref), reactModule (ref), fFlagEnablePaidAdsModule (ref), useRefreshAdsDataModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), httpService (ref), fFlagBuildAgentAdCampaignToolCallStatusFallbackModule (ref), asPromise (ref), creatorAgentChatModule (ref), classifyAdCampaignFailure (ref)
 	p3 = p3 or {}
 	local sendEvent = p3.sendEvent or sendBuildExperienceEventModule
 	local var1, var2 = reactModule.useState(false)
@@ -69,10 +71,14 @@ return function(p1, p2, p3)
 	})
 	
 	return {
-		createCampaign = reactModule.useCallback(function(p4)
-			-- upvalues: p1 (ref), var12 (ref), fFlagEnablePaidAdsModule (copy), var8 (ref), var9 (ref), var5 (ref), p3 (ref), httpService (copy), var2 (ref), var4 (ref), asPromise (copy), creatorAgentChatModule (copy), sendEvent (ref), p2 (ref), var15 (ref), var13 (ref), classifyAdCampaignFailure (copy), var7 (ref)
+		createCampaign = reactModule.useCallback(function(p4, p5, p6, p7)
+			-- upvalues: p1 (ref), var12 (ref), fFlagEnablePaidAdsModule (copy), fFlagBuildAgentAdCampaignCardModule (copy), var5 (ref), var8 (ref), var9 (ref), p3 (ref), httpService (copy), var2 (ref), var4 (ref), fFlagBuildAgentAdCampaignToolCallStatusFallbackModule (copy), asPromise (copy), creatorAgentChatModule (copy), sendEvent (ref), p2 (ref), var15 (ref), var13 (ref), classifyAdCampaignFailure (copy), var7 (ref)
 			if p1 == nil or p1 == 0 or var12.current then return end
 			if fFlagEnablePaidAdsModule and p4 == nil then return end
+			if fFlagBuildAgentAdCampaignCardModule and p7 ~= nil then
+				var5.current = p7.idempotencyKey
+				var8.current = p4
+			end
 			local var16 = if fFlagEnablePaidAdsModule then var8.current else nil
 			
 			if (var16 ~= nil and (if var16.paymentType == p4.paymentType then var16.campaignOption ~= p4.campaignOption else true)) and not (fFlagEnablePaidAdsModule and var9.current) then
@@ -90,15 +96,21 @@ return function(p1, p2, p3)
 			var4(false)
 			local t = { universeId = p1, idempotencyKey = var5.current }
 			
-			if fFlagEnablePaidAdsModule then
+			if fFlagEnablePaidAdsModule and p4 ~= nil then
 				t.selectedOption = p4
-			end;
-			(p3.createCampaignAsync or function(p5)
+			end
+			if fFlagBuildAgentAdCampaignToolCallStatusFallbackModule and p6 ~= nil and p6 ~= "" then
+				t.toolCallId = p6
+			end
+			local createCampaignAsync = p3.createCampaignAsync or function(p8)
 				-- upvalues: asPromise (copy), creatorAgentChatModule (copy)
-				return asPromise(creatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignCreate(p5))
-			end)(t):andThen(function(p5)
-				-- upvalues: sendEvent (copy), p1 (copy), p2 (copy), var5 (copy), fFlagEnablePaidAdsModule (copy), var8 (copy), var9 (copy), var15 (copy), var12 (copy), var13 (copy), var2 (copy)
-				sendEvent("AD_CAMPAIGN_CREATE_SUCCESS", { universeId = p1, conversationId = p2 }, { campaignId = p5.campaignId })
+				return asPromise(creatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignCreate(p8))
+			end
+			local idempotencyKey = t.idempotencyKey
+			local var17 = if fFlagBuildAgentAdCampaignCardModule and t.selectedOption ~= nil then table.clone(t.selectedOption) else nil
+			createCampaignAsync(t):andThen(function(p8)
+				-- upvalues: sendEvent (copy), p1 (copy), p2 (copy), var5 (copy), fFlagEnablePaidAdsModule (copy), var8 (copy), var9 (copy), var15 (copy), var12 (copy), var13 (copy), var2 (copy), fFlagBuildAgentAdCampaignCardModule (copy), p5 (ref), idempotencyKey (ref), var17 (ref)
+				sendEvent("AD_CAMPAIGN_CREATE_SUCCESS", { universeId = p1, conversationId = p2 }, { campaignId = p8.campaignId })
 				var5.current = nil
 				
 				if fFlagEnablePaidAdsModule then
@@ -111,22 +123,28 @@ return function(p1, p2, p3)
 				if var13.current then
 					var2(false)
 				end
-			end):catch(function(p5)
-				-- upvalues: sendEvent (copy), p1 (copy), p2 (copy), var12 (copy), fFlagEnablePaidAdsModule (copy), classifyAdCampaignFailure (copy), var9 (copy), var13 (copy), var4 (copy), var7 (copy), var2 (copy)
-				sendEvent("AD_CAMPAIGN_CREATE_FAILURE", { universeId = p1, conversationId = p2 }, { error = tostring(p5) })
+				if fFlagBuildAgentAdCampaignCardModule and p5 ~= nil then
+					pcall(p5, p8.campaignId, idempotencyKey, var17)
+				end
+			end):catch(function(p8)
+				-- upvalues: sendEvent (copy), p1 (copy), p2 (copy), var12 (copy), fFlagEnablePaidAdsModule (copy), classifyAdCampaignFailure (copy), var9 (copy), var13 (copy), var4 (copy), var7 (copy), var2 (copy), fFlagBuildAgentAdCampaignCardModule (copy), p7 (ref)
+				sendEvent("AD_CAMPAIGN_CREATE_FAILURE", { universeId = p1, conversationId = p2 }, { error = tostring(p8) })
 				var12.current = false
-				local var17 = if fFlagEnablePaidAdsModule then classifyAdCampaignFailure(p5).kind else nil
+				local var18 = if fFlagEnablePaidAdsModule then classifyAdCampaignFailure(p8).kind else nil
 				
-				if fFlagEnablePaidAdsModule and var17 == "unknown" then
+				if fFlagEnablePaidAdsModule and var18 == "unknown" then
 					var9.current = true
 				end
 				if var13.current then
 					var4(true)
 					
 					if fFlagEnablePaidAdsModule then
-						var7(var17)
+						var7(var18)
 					end
 					var2(false)
+				end
+				if fFlagBuildAgentAdCampaignCardModule and p7 ~= nil then
+					pcall(p7.onFailed, var18)
 				end
 			end)
 		end, {

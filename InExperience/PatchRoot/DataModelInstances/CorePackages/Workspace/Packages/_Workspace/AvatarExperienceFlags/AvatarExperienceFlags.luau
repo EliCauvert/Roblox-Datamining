@@ -23,6 +23,7 @@
 	FFlagAXFavoritesManagerNavEntry = require(script.FFlagAXFavoritesManagerNavEntry),
 	FFlagAXItemCardComponentsMemo = require(script.FFlagAXItemCardComponentsMemo),
 	FFlagAXTestSkeletonInCatalog = require(script.FFlagAXTestSkeletonInCatalog),
+	FFlagAXUpdateOffersEndsUIWithBadge = require(script.FFlagAXUpdateOffersEndsUIWithBadge),
 	FFlagAXMISEnableMultiShopping = require(script.FFlagAXMISEnableMultiShopping),
 	FFlagAXMISWithOffers = require(script.FFlagAXMISWithOffers),
 	FFlagAXMISSaveWearFix = require(script.FFlagAXMISSaveWearFix),

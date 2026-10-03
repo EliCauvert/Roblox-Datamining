@@ -1,4 +1,6 @@
-﻿local normalize = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AvatarExperienceCommon).Utils.normalize
+﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local normalize = require(parent.AvatarExperienceCommon).Utils.normalize
 local normalizeBoolean = normalize.normalizeBoolean
 local normalizeNumber = normalize.normalizeNumber
 local normalizeNotEmptyString = normalize.normalizeNotEmptyString
@@ -26,7 +28,12 @@ local var1 = makeNormalizeTableFn({
 	priceInRobux = { fn = normalizeNumber },
 	regularPriceInRobux = { fn = normalizeNumber }
 })
-local var2 = makeNormalizeTableFn({
+local var2 = if avatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge then makeNormalizeTableFn({
+	expirationTimeUtc = { fn = normalizeNotEmptyString },
+	localizedDescription = { fn = normalizeNotEmptyString },
+	offerId = makeRequired(normalizeNotEmptyString),
+	selected = { fn = normalizeBoolean }
+}) else makeNormalizeTableFn({
 	localizedDescription = { fn = normalizeNotEmptyString },
 	offerId = makeRequired(normalizeNotEmptyString),
 	selected = { fn = normalizeBoolean }

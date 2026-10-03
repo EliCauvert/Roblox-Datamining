@@ -5,9 +5,11 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationRoactContext = require(parent.Localization).LocalizationRoactContext
+local chatScrollAnchorContextModule = require(buildExperience.Chat.ChatScrollAnchorContext)
 local _ = require(buildExperience.Chat.chatTypes)
 local chatConstantsModule = require(buildExperience.Chat.chatConstants)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildExperienceChatAccordionScrollAnchorModule = require(buildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
 local icon = foundationModule.Icon
 local scrollView = foundationModule.ScrollView
 local text = foundationModule.Text
@@ -105,7 +107,7 @@ local function localizeActivityLabel(p1, p2, p3, p4, p5)
 end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationRoactContext (ref), useReactiveValue (ref), t (ref), localizeActivityLabel (ref), createActivityText (ref), foundationModule (ref), chatConstantsModule (ref), view (ref), createActivitySummaryActionText (ref), text (ref), stateLayerAffordance (ref), icon (ref), iconName (ref), iconSize (ref), scrollView (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationRoactContext (ref), useReactiveValue (ref), t (ref), localizeActivityLabel (ref), createActivityText (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), chatScrollAnchorContextModule (ref), foundationModule (ref), chatConstantsModule (ref), view (ref), createActivitySummaryActionText (ref), text (ref), stateLayerAffordance (ref), icon (ref), iconName (ref), iconSize (ref), scrollView (ref)
 	local segment = p1.segment
 	local actionCount = segment.actionCount
 	local var1 = useLocalization({
@@ -148,22 +150,32 @@ return function(p1)
 	local var8, var9 = reactModule.useState(false)
 	local var10, var11 = reactModule.useBinding(0)
 	local var12 = reactModule.useRef(nil)
-	local var13 = reactModule.useRef({ isThinking = false, startedAt = nil })
-	local var14 = foundationModule.Hooks.useTokens()
-	local var15 = var3 == chatConstantsModule.ASSISTANT_LOADING_TEXT
-	local current = var13.current
+	local var13 = nil
+	local var14 = nil
 	
-	if current.isThinking ~= var15 then
-		current.isThinking = var15
+	if fFlagBuildExperienceChatAccordionScrollAnchorModule then
+		var13 = reactModule.useRef(nil)
+		var14 = reactModule.useContext(chatScrollAnchorContextModule)
+	end
+	local var15 = reactModule.useRef({ isThinking = false, startedAt = nil })
+	local var16 = foundationModule.Hooks.useTokens()
+	local var17 = var3 == chatConstantsModule.ASSISTANT_LOADING_TEXT
+	local current = var15.current
+	
+	if current.isThinking ~= var17 then
+		current.isThinking = var17
 		current.startedAt = nil
 	end
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: var9 (ref)
+	local var18 = reactModule.useCallback(function()
+		-- upvalues: fFlagBuildExperienceChatAccordionScrollAnchorModule (copy), var14 (write), var13 (write), var9 (ref)
+		if fFlagBuildExperienceChatAccordionScrollAnchorModule and var14 ~= nil and var13 ~= nil then
+			var14(var13.current)
+		end
 		var9(function(p2)
 			return not p2
 		end)
-	end, {})
-	local var17 = reactModule.useCallback(function(p2)
+	end, { var14 })
+	local var19 = reactModule.useCallback(function(p2)
 		-- upvalues: var12 (ref)
 		if p2 == nil then
 			return
@@ -177,41 +189,41 @@ return function(p1)
 			end
 		end)
 	end, {})
-	local var18 = reactModule.useCallback(function(p2)
-		-- upvalues: var12 (ref), var17 (ref)
+	local var20 = reactModule.useCallback(function(p2)
+		-- upvalues: var12 (ref), var19 (ref)
 		var12.current = p2
 		
 		if p2 then
-			var17(p2)
+			var19(p2)
 		end
-	end, { var17 })
-	local var19 = reactModule.useCallback(function(p2)
-		-- upvalues: var11 (ref), var17 (ref)
+	end, { var19 })
+	local var21 = reactModule.useCallback(function(p2)
+		-- upvalues: var11 (ref), var19 (ref)
 		var11(p2.AbsoluteCanvasSize.Y)
-		var17(p2)
-	end, { var11, var17 })
-	local var20 = reactModule.useCallback(function(p2)
-		-- upvalues: var17 (ref)
-		var17(p2)
-	end, { var17 })
+		var19(p2)
+	end, { var11, var19 })
+	local var22 = reactModule.useCallback(function(p2)
+		-- upvalues: var19 (ref)
+		var19(p2)
+	end, { var19 })
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), var12 (ref)
-		var17(var12.current)
+		-- upvalues: var19 (ref), var12 (ref)
+		var19(var12.current)
 		
 		return function() end
-	end, { var17, var4 })
+	end, { var19, var4 })
 	local t_2 = {}
-	local var21 = 0
+	local var23 = 0
 	
 	for i, v in var4 do
-		local var22 = var6(v, i)
+		local var24 = var6(v, i)
 		
-		if var22 ~= nil then
-			t_2[`Tool{i}`] = var22
-			var21 += 1
+		if var24 ~= nil then
+			t_2[`Tool{i}`] = var24
+			var23 += 1
 		end
 	end
-	local var23 = var21 > 1
+	local var25 = var23 > 1
 	
 	return reactModule.createElement(view, {
 		tag = "col gap-xsmall size-full-0 auto-y",
@@ -222,18 +234,19 @@ return function(p1)
 			LayoutOrder = 1,
 			tag = "row align-y-center gap-xsmall size-full-0 auto-y padding-y-xxsmall",
 			testId = "TurnActivitySummary.Summary",
-			onActivated = if var23 then var16 else nil,
+			ref = var13,
+			onActivated = if var25 then var18 else nil,
 			stateLayer = { affordance = stateLayerAffordance.None }
 		}, {
-			Chevron = if var23 then reactModule.createElement(icon, {
+			Chevron = if var25 then reactModule.createElement(icon, {
 				LayoutOrder = 1,
 				testId = "TurnActivitySummary.Chevron",
 				name = if var8 then iconName.ChevronLargeDown else iconName.ChevronLargeRight,
 				size = iconSize.XSmall,
-				style = var14.Color.Content.Muted
+				style = var16.Color.Content.Muted
 			}) else nil,
 			Label = if var7 then reactModule.createElement(view, { LayoutOrder = 2, tag = "col fill gap-xxsmall auto-y" }, {
-				CurrentAction = createActivitySummaryActionText(if not var15 then var5 else p1.clockBinding:map(function(p2)
+				CurrentAction = createActivitySummaryActionText(if not var17 then var5 else p1.clockBinding:map(function(p2)
 					-- upvalues: current (ref), assistantLoading (ref), chatConstantsModule (copy), var2 (ref), localizationStringsModule (copy), assistantStillWorking (ref)
 					if not current.isThinking then
 						return assistantLoading
@@ -250,16 +263,16 @@ return function(p1)
 				Text = var5
 			})
 		}),
-		ActivityHistory = if var8 and next(t_2) ~= nil and var23 then reactModule.createElement(scrollView, {
+		ActivityHistory = if var8 and next(t_2) ~= nil and var25 then reactModule.createElement(scrollView, {
 			LayoutOrder = 2,
 			tag = "size-full-0 clip",
 			testId = "TurnActivitySummary.ActivityHistory",
 			Size = var10:map(function(p2)
 				return UDim2.new(1, 0, 0, math.clamp(p2, 24, 220))
 			end),
-			scrollingFrameRef = var18,
-			onAbsoluteCanvasSizeChanged = var19,
-			onAbsoluteWindowSizeChanged = var20,
+			scrollingFrameRef = var20,
+			onAbsoluteCanvasSizeChanged = var21,
+			onAbsoluteWindowSizeChanged = var22,
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 0, 0),

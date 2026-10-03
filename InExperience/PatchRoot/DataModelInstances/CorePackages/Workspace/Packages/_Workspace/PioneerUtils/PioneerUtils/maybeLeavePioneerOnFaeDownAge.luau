@@ -5,7 +5,7 @@ local fetch = fetchModule.fetch
 local response = fetchModule.Response
 local promiseModule = require(parent.Promise)
 local url = require(parent.Http).Url
-local pioneerJoinBlockedStorageModule = require(pioneerUtils.PioneerJoinBlockedStorage)
+local pioneerLeaveReasonModule = require(pioneerUtils.PioneerLeaveReason)
 local isPioneerLaunchModule = require(pioneerUtils.isPioneerLaunch)
 local leaveExperienceModule = require(pioneerUtils.leaveExperience)
 local formattedText = string.format("%s/users/authenticated/app-launch-info", url.USERS_URL)
@@ -32,7 +32,7 @@ local function _()
 end
 
 return function(p1, p2)
-	-- upvalues: isPioneerLaunchModule (ref), promiseModule (ref), fetch (ref), formattedText (ref), response (ref), pioneerJoinBlockedStorageModule (ref), leaveExperienceModule (ref)
+	-- upvalues: isPioneerLaunchModule (ref), promiseModule (ref), fetch (ref), formattedText (ref), response (ref), leaveExperienceModule (ref), pioneerLeaveReasonModule (ref)
 	local function _()
 		-- upvalues: p2 (ref)
 		if p2 then
@@ -59,10 +59,9 @@ return function(p1, p2)
 				end
 				p3(false)
 			end):andThen(function(p3)
-				-- upvalues: p2 (ref), pioneerJoinBlockedStorageModule (copy), leaveExperienceModule (copy)
+				-- upvalues: p2 (ref), leaveExperienceModule (copy), pioneerLeaveReasonModule (copy)
 				if not p3 then
-					pioneerJoinBlockedStorageModule.set(pioneerJoinBlockedStorageModule.Reason.AccountUnder13)
-					leaveExperienceModule()
+					leaveExperienceModule(pioneerLeaveReasonModule.AccountUnder13)
 				elseif p2 then
 					p2()
 				end

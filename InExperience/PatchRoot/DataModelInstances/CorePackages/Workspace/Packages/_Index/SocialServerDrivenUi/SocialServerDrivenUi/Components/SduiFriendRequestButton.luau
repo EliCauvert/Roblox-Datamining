@@ -9,6 +9,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local firePlayerFriendAddTelemetryModule = require(socialServerDrivenUi.Analytics.firePlayerFriendAddTelemetry)
 local sduiRequestFriendshipActionModule = require(socialServerDrivenUi.Actions.SduiRequestFriendshipAction)
+local getCurrentUserIdModule = require(socialServerDrivenUi.Common.getCurrentUserId)
 local friendsStore = require(parent.DataHydration).Friends.FriendsStore
 local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
 local enums = require(parent.FriendsNetworking).Enums
@@ -17,11 +18,12 @@ local iconButton = foundationModule.IconButton
 local enums_1 = foundationModule.Enums
 local fFlagSduiSearchPeoplePlayerTileTelemetry = sharedFlagsModule.FFlagSduiSearchPeoplePlayerTileTelemetry
 local fFlagSduiRequestFriendshipActionHandler = sharedFlagsModule.FFlagSduiRequestFriendshipActionHandler
+local fFlagSduiFriendRequestButtonHideForSelfModule = require(socialServerDrivenUi.Flags.FFlagSduiFriendRequestButtonHideForSelf)
 local small = enums_1.InputSize.Small
 local var1 = enums.FriendshipOriginSourceType.PlayerSearch.rawValue()
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), signalsReactModule (ref), friendsStore (ref), reactModule (ref), fFlagSduiRequestFriendshipActionHandler (ref), sduiRequestFriendshipActionModule (ref), sduiActionType (ref), var1 (ref), setCurrentToastMessage (ref), fFlagSduiSearchPeoplePlayerTileTelemetry (ref), firePlayerFriendAddTelemetryModule (ref), iconButton (ref), enums_1 (ref), small (ref)
+	-- upvalues: useDispatch (ref), signalsReactModule (ref), friendsStore (ref), reactModule (ref), fFlagSduiRequestFriendshipActionHandler (ref), sduiRequestFriendshipActionModule (ref), sduiActionType (ref), var1 (ref), setCurrentToastMessage (ref), fFlagSduiSearchPeoplePlayerTileTelemetry (ref), firePlayerFriendAddTelemetryModule (ref), fFlagSduiFriendRequestButtonHideForSelfModule (ref), getCurrentUserIdModule (ref), iconButton (ref), enums_1 (ref), small (ref)
 	local userId = p1.userId
 	local var2 = useDispatch()
 	local var3 = signalsReactModule.useSignalState(friendsStore.get().GetFriendshipStatus(userId or "").data)
@@ -61,7 +63,7 @@ return reactModule.memo(function(p1)
 		if fFlagSduiSearchPeoplePlayerTileTelemetry or fFlagSduiRequestFriendshipActionHandler then p1.sduiContext else nil
 	})
 	
-	return if var3 == nil or var3 == Enum.FriendStatus.Friend then nil else reactModule.createElement("TextButton", {
+	return if var3 == nil or var3 == Enum.FriendStatus.Friend then nil elseif fFlagSduiFriendRequestButtonHideForSelfModule and userId ~= nil and userId == getCurrentUserIdModule() then nil else reactModule.createElement("TextButton", {
 		BackgroundTransparency = 1,
 		Text = "",
 		AutomaticSize = Enum.AutomaticSize.XY,

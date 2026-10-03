@@ -2028,11 +2028,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,Total waktu main
 Feature.Build.Analytics.Visits,Kunjungan
 Feature.Build.Content.NewGame,Game baru
 Feature.Build.Description.ActivateDeveloperProduct,Jual produk developer {PRODUCT_ID}.
-Feature.Build.Description.AdActive,Iklanmu sedang tayang. Lihat berapa banyak pemain yang dijangkau iklanmu.
 Feature.Build.Description.AdCampaignModerationReview,Semua kampanye iklan di-review oleh moderasi Roblox. Proses ini bisa membutuhkan waktu hingga 24 jam.
 Feature.Build.Description.AdCampaignSheetRunDates,Berlangsung {startDate}—{endDate}
 Feature.Build.Description.AdComplete,Iklanmu sudah berakhir. Lihat hasilnya.
-Feature.Build.Description.AdInReview,Iklanmu sedang di-review dan dijadwalkan untuk tayang {startDate}—{endDate}.
 Feature.Build.Description.AdModerationReview,Semua iklan di-review oleh moderasi Roblox dan bisa membutuhkan waktu hingga 24 jam.
 Feature.Build.Description.AdvertisingAgreement,"Dengan memilih Buat, kamu menyetujui {advertisingTermsStart}Ketentuan Periklanan Roblox{advertisingTermsEnd} dan {advertisingStandardsStart}Standar Periklanan{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Jika kamu mengarsipkan game ini, game ini akan dihapus dari Build. Kamu masih dapat mengakses dan memulihkannya dari Pusat Kreator atau Roblox Studio."
@@ -2361,7 +2359,6 @@ Feature.Build.Title.AdActive,Kampanye iklan aktif
 Feature.Build.Title.AdCampaignDuration,Kampanye iklan {durationDays} hari
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} hari
 Feature.Build.Title.AdComplete,Iklan selesai
-Feature.Build.Title.AdCreated,Iklan dibuat
 Feature.Build.Title.AdCreatedPeriod,Iklan dibuat.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Tambahkan gambar
@@ -3484,6 +3481,7 @@ Feature.Groups.Notification.FailedToFollow,Gagal mengikuti profil. Coba lagi nan
 Feature.Groups.Notification.FailedToJoin,Gagal bergabung ke komunitas. Coba lagi nanti.
 Feature.Groups.Notification.FailedToLoad,Gagal me-load komunitas. Coba lagi nanti.
 Feature.Groups.Notification.Following,Mengikuti {groupName}.
+Feature.Groups.Notification.GroupDeactivated,Komunitas ini telah dinonaktifkan.
 Feature.Groups.Notification.GroupDoesNotExist,Komunitas ini tidak ada.
 Feature.Groups.Notification.GroupModerated,Komunitas ini saat ini sedang dimoderasi.
 Feature.Groups.Notification.JoinRequestPending,Meminta untuk bergabung ke {groupName}.
@@ -3621,6 +3619,7 @@ Feature.Moments.Disclaimer.EveryoneMoments,Semua orang di Moment dapat melihat a
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,Mencoba bergabung ke {placeName}. Ini mungkin membutuhkan waktu beberapa detik.
 Feature.Moments.Label.CaptureLibrary,Perpustakaan Mediamu
+Feature.Moments.Label.ChooseVoice,Pilih suara
 Feature.Moments.Label.DeleteMomentBody,Kamu tidak bisa memulihkan Moment setelah Moment dihapus.
 Feature.Moments.Label.DeleteMomentTitle,Hapus Moment?
 Feature.Moments.Label.DeleteVoiceoverBody,Ini akan menghapus teks dan voiceover-mu. Kamu dapat memulai dari awal kapan saja.
@@ -4041,8 +4040,10 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Diskon 10% selama 60 
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"Diskon 10% selama {trialUnlockDays} hari pertama, lalu diskon 20% untuk item dan avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Lebih seru, lebih hemat Robux. Subscribe Roblox Plus."
 Feature.RobloxSubscription.Description.JoinEarly,Bergabung lebih awal dengan Plus
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} mengundangmu untuk bergabung dengan Plus. Kamu berdua akan mendapatkan {amount} Robux saat kamu membeli Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Dengan mengklik \u{201C}{ctaText}\u{201D}, kamu menyetujui <a href=""{termsUrl}"">Ketentuan Subscription Roblox</a>. Biaya akan otomatis dibebankan setiap bulan hingga kamu membatalkan."
 Feature.RobloxSubscription.Heading.ReferralEntry,Bagikan Plus untuk mendapatkan {amount} Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,"Bergabunglah dengan Plus, dapatkan"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Server privat gratis
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,Kirim Robux secara gratis

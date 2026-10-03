@@ -7,7 +7,6 @@ local useChipVariantsModule = require(foundation.Components.Chip.useChipVariants
 local chipSizeModule = require(foundation.Enums.ChipSize)
 local chipVariantModule = require(foundation.Enums.ChipVariant)
 local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local flagsModule = require(foundation.Utility.Flags)
 local paginationSizeModule = require(foundation.Enums.PaginationSize)
 local presentationContextModule = require(foundation.Providers.Style.PresentationContext)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
@@ -36,7 +35,7 @@ local t_1 = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokensModule (ref), paginationUtilsModule (ref), paginationSizeModule (ref), chipSizeModule (ref), useChipVariantsModule (ref), chipVariantModule (ref), t_1 (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), flagsModule (ref), t (ref), colorNamespaceModule (ref), PageNumberText (ref)
+	-- upvalues: useTokensModule (ref), paginationUtilsModule (ref), paginationSizeModule (ref), chipSizeModule (ref), useChipVariantsModule (ref), chipVariantModule (ref), t_1 (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), t (ref), PageNumberText (ref)
 	local var1 = useTokensModule()
 	local var2 = not p1.isChecked
 	local var3 = paginationUtilsModule.needsWidePageSlot(p1.page)
@@ -65,12 +64,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		selection = t_2,
 		tag = slotSize
 	}), {
-		Label = reactModule.createElement(presentationContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then t else {
-				isIconSize = true,
-				colorNamespace = colorNamespaceModule.Color
-			}
-		}, {
+		Label = reactModule.createElement(presentationContextModule.Provider, { value = t }, {
 			Text = reactModule.createElement(PageNumberText, {
 				page = p1.page,
 				textStyle = var6.text.contentStyle,

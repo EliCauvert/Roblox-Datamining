@@ -14,5 +14,6 @@
 	ProfileFramesUpsell = "ProfileFramesUpsell",
 	AiBackgroundUpsell = "AiBackgroundUpsell",
 	AvatarBackgrounds = "AvatarBackgrounds",
-	GameJoinEarlyAccessUpsell = "GameJoinEarlyAccessUpsell"
+	GameJoinEarlyAccessUpsell = "GameJoinEarlyAccessUpsell",
+	PlusReferralLandingSheet = "PlusReferralLandingSheet"
 }

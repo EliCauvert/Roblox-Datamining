@@ -18,8 +18,6 @@ local impressionEnums = require(parent.AvatarExperienceAnalytics).Enums.Impressi
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagAXTryOnScreenImprovements = sharedFlagsModule.FFlagAXTryOnScreenImprovements
 local fFlagAXEnableHomeTryOnComplexView = sharedFlagsModule.FFlagAXEnableHomeTryOnComplexView
-local fFlagAXFixPurchaseSurfaceLogging = sharedFlagsModule.FFlagAXFixPurchaseSurfaceLogging
-local fFlagAXAvatarSortInDiscoveryUnifiedPurchase = sharedFlagsModule.FFlagAXAvatarSortInDiscoveryUnifiedPurchase
 local fFlagAXFixHomeAvatarsUnifiedPurchase = sharedFlagsModule.FFlagAXFixHomeAvatarsUnifiedPurchase
 local fFlagAXDiscoveryItemPurchaseAttribution = sharedFlagsModule.FFlagAXDiscoveryItemPurchaseAttribution
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
@@ -29,10 +27,10 @@ local var2 = if fFlagAXTryOnScreenImprovements then {
 	[appPage.Home] = impressionEnums.MarketplaceSurfaceType.DISCOVERY_HOMEPAGE,
 	[appPage.SearchPage] = impressionEnums.MarketplaceSurfaceType.DISCOVERY_SEARCH_RESULTS
 } else nil
-local var3 = if fFlagAXDiscoveryItemPurchaseAttribution or fFlagAXAvatarSortInDiscoveryUnifiedPurchase then {
+local t = {
 	[appPage.Home] = unifiedLoggingSurface.DISCOVERY_HOMEPAGE,
 	[appPage.SearchPage] = unifiedLoggingSurface.DISCOVERY_SEARCH_RESULTS
-} else nil
+}
 
 local function _(p1, p2, p3)
 	-- upvalues: sduiActionType (ref), sduiErrorType (ref)
@@ -45,10 +43,10 @@ local function _(p1, p2, p3)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: sduiActionType (ref), sduiErrorType (ref), unifiedEventLogEnums (ref), fFlagAXDiscoveryItemPurchaseAttribution (ref), fFlagAXAvatarSortInDiscoveryUnifiedPurchase (ref), var3 (ref), fFlagAXFixHomeAvatarsUnifiedPurchase (ref), findAnalyticsFieldInAncestors (ref), fFlagAXTryOnScreenImprovements (ref), var2 (ref), impressionEnums (ref), AXFixHomepageTryOnScreenAnalytics (ref), appPage (ref), analyticsService (ref), unifiedLoggingSurface (ref), sendUnifiedEventLog (ref), fFlagAXUnifiedEventCounters (ref), unifiedEventCounterAggregator (ref), AXUnifiedEventFilter (ref), unifiedEventLogConstants (ref), avatarScreen (ref), fFlagAXFixPurchaseSurfaceLogging (ref), fFlagAXEnableHomeTryOnComplexView (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
-	local var4 = if p1 then p1.actionParams else nil
+	-- upvalues: sduiActionType (ref), sduiErrorType (ref), unifiedEventLogEnums (ref), fFlagAXUnifiedEventCounters (ref), t (ref), fFlagAXFixHomeAvatarsUnifiedPurchase (ref), findAnalyticsFieldInAncestors (ref), fFlagAXTryOnScreenImprovements (ref), var2 (ref), impressionEnums (ref), AXFixHomepageTryOnScreenAnalytics (ref), appPage (ref), analyticsService (ref), unifiedLoggingSurface (ref), fFlagAXDiscoveryItemPurchaseAttribution (ref), sendUnifiedEventLog (ref), unifiedEventCounterAggregator (ref), AXUnifiedEventFilter (ref), unifiedEventLogConstants (ref), avatarScreen (ref), fFlagAXEnableHomeTryOnComplexView (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
+	local var3 = if p1 then p1.actionParams else nil
 	
-	if var4 == nil then
+	if var3 == nil then
 		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.OpenMarketplaceTryOn
@@ -56,34 +54,34 @@ return function(p1, p2, p3)
 		
 		return
 	end
-	assert(var4, "actionParams must exist")
-	local itemId = var4.itemId
-	local var5 = tostring(itemId)
+	assert(var3, "actionParams must exist")
+	local itemId = var3.itemId
+	local var4 = tostring(itemId)
 	
 	if itemId == nil then
 		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = sduiActionType.OpenMarketplaceTryOn,
-			message = `Missing itemId: {var5}`,
+			message = `Missing itemId: {var4}`,
 			propName = "itemId"
 		}, p3.appPage)
 		
 		return
 	end
-	local var6 = tostring(var4.itemType)
+	local var5 = tostring(var3.itemType)
 	
-	if var6 ~= "Asset" and var6 ~= "Bundle" and var6 ~= "Look" then
+	if var5 ~= "Asset" and var5 ~= "Bundle" and var5 ~= "Look" then
 		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = sduiActionType.OpenMarketplaceTryOn,
-			message = `Invalid itemType: {var6}`,
+			message = `Invalid itemType: {var5}`,
 			propName = "itemType"
 		}, p3.appPage)
 		
 		return
 	end
-	local var7 = if var6 == "Asset" then unifiedEventLogEnums.MarketplaceUnifiedItemType.ASSET elseif var6 == "Bundle" then unifiedEventLogEnums.MarketplaceUnifiedItemType.BUNDLE elseif var6 == "Look" then unifiedEventLogEnums.MarketplaceUnifiedItemType.LOOK else unifiedEventLogEnums.MarketplaceUnifiedItemType.UNDEFINED_ITEM_TYPE
-	local itemSubTypeName = var4.itemSubTypeName
+	local var6 = if var5 == "Asset" then unifiedEventLogEnums.MarketplaceUnifiedItemType.ASSET elseif var5 == "Bundle" then unifiedEventLogEnums.MarketplaceUnifiedItemType.BUNDLE elseif var5 == "Look" then unifiedEventLogEnums.MarketplaceUnifiedItemType.LOOK else unifiedEventLogEnums.MarketplaceUnifiedItemType.UNDEFINED_ITEM_TYPE
+	local itemSubTypeName = var3.itemSubTypeName
 	
-	if (var6 == "Asset" or var6 == "Bundle") and itemSubTypeName == nil then
+	if (var5 == "Asset" or var5 == "Bundle") and itemSubTypeName == nil then
 		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = sduiActionType.OpenMarketplaceTryOn,
 			message = `Missing itemSubTypeName: {itemSubTypeName}`,
@@ -92,19 +90,19 @@ return function(p1, p2, p3)
 		
 		return
 	end
-	local itemPrice = var4.itemPrice
+	local var7 = if fFlagAXUnifiedEventCounters then tonumber(var3.itemPrice) else var3.itemPrice
 	
-	if itemPrice == nil then
+	if var7 == nil then
 		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = sduiActionType.OpenMarketplaceTryOn,
-			message = `Missing itemPrice: {itemPrice}`,
+			message = `Missing itemPrice: {var7}`,
 			propName = "itemPrice"
 		}, p3.appPage)
 	end
-	local text = var6 .. var8
-	local appPage_1 = nil
-	local var8 = if fFlagAXDiscoveryItemPurchaseAttribution or fFlagAXAvatarSortInDiscoveryUnifiedPurchase then var3[p3.appPage] else nil
-	local var9 = if fFlagAXFixHomeAvatarsUnifiedPurchase then {
+	local text = var5 .. var8
+	local _ = nil
+	local appPage_1 = t[p3.appPage]
+	local var8 = if fFlagAXFixHomeAvatarsUnifiedPurchase then {
 		widgetId = findAnalyticsFieldInAncestors("widgetId", p2),
 		widgetType = findAnalyticsFieldInAncestors("widgetType", p2),
 		widgetItemIds = findAnalyticsFieldInAncestors("widgetItemIds", p2),
@@ -113,78 +111,78 @@ return function(p1, p2, p3)
 	} else nil
 	
 	if fFlagAXTryOnScreenImprovements then
-		local var10 = "TryOnScreen"
-		appPage_1 = var2[p3.appPage]
+		local var9 = "TryOnScreen"
+		local appPage_2 = var2[p3.appPage]
 		
-		if appPage_1 == nil then
+		if appPage_2 == nil then
 			p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 				name = sduiActionType.OpenMarketplaceTryOn,
 				message = `Unsupported appPage for OpenMarketplaceTryOn action: {p3.appPage}`
 			}, p3.appPage)
 		else
-			local t = {
+			local t_1 = {
 				group = "AvatarItemWidgetClick",
 				actionType = impressionEnums.ActionType.UI_BUTTON_CLICK,
-				surface = appPage_1,
+				surface = appPage_2,
 				item_id = itemId,
-				item_type = var6
+				item_type = var5
 			}
 			
 			if not AXFixHomepageTryOnScreenAnalytics and p3.appPage == appPage.Home then
-				var10 = "HomeTryOnScreen"
-				t = {
+				var9 = "HomeTryOnScreen"
+				t_1 = {
 					group = "HomePageAvatarWidgetClick",
 					actionType = impressionEnums.ActionType.UI_BUTTON_CLICK,
 					surface = impressionEnums.MarketplaceSurfaceType.HOMEPAGE,
 					item_id = itemId,
-					item_type = var6
+					item_type = var5
 				}
 			end
-			local t_1
-			t.event_sender_api = impressionEnums.MarketplaceEventSenderAPI.SEND_ROBLOX_TELEMETRY_EVENT
-			analyticsService.EventStream:sendTelemetryEvent(var10, "marketplaceOrganicFELog", t)
+			local t_2
+			t_1.event_sender_api = impressionEnums.MarketplaceEventSenderAPI.SEND_ROBLOX_TELEMETRY_EVENT
+			analyticsService.EventStream:sendTelemetryEvent(var9, "marketplaceOrganicFELog", t_1)
 			local _ = nil
 			
 			if fFlagAXFixHomeAvatarsUnifiedPurchase then
-				local var11 = var9
-				t_1 = {
+				local var10 = var8
+				t_2 = {
 					action = unifiedEventLogEnums.MarketplaceUnifiedAction.ITEM_SELECTED,
-					surface = var8,
+					surface = appPage_1,
 					itemId = itemId,
-					itemType = var7
+					itemType = var6
 				}
 				
-				if var11.widgetId ~= nil and (var11.widgetType ~= nil and (var11.widgetItemIds ~= nil and var11.requestId ~= nil)) then
-					t_1.widgetId = var11.widgetId
-					t_1.widgetType = var11.widgetType
-					t_1.widgetItemIds = var11.widgetItemIds
-					t_1.requestId = var11.requestId
-					t_1.uiTreatmentType = unifiedEventLogEnums.WidgetUiTreatment.ITEM_GROUP
-					t_1.widgetItemPrice = itemPrice
+				if var10.widgetId ~= nil and (var10.widgetType ~= nil and (var10.widgetItemIds ~= nil and var10.requestId ~= nil)) then
+					t_2.widgetId = var10.widgetId
+					t_2.widgetType = var10.widgetType
+					t_2.widgetItemIds = var10.widgetItemIds
+					t_2.requestId = var10.requestId
+					t_2.uiTreatmentType = unifiedEventLogEnums.WidgetUiTreatment.ITEM_GROUP
+					t_2.widgetItemPrice = var7
 				else
-					t_1.organicItemPrice = itemPrice
+					t_2.organicItemPrice = var7
 				end
 			else
-				t_1 = {
+				t_2 = {
 					widgetId = "DiscoveryHomepageAvatarWidget:1234",
 					widgetType = "DiscoveryHomepageAvatarWidget",
 					action = unifiedEventLogEnums.MarketplaceUnifiedAction.ITEM_SELECTED,
 					surface = unifiedLoggingSurface.DISCOVERY_HOMEPAGE,
 					itemId = itemId,
-					itemType = var7,
+					itemType = var6,
 					uiTreatmentType = unifiedEventLogEnums.WidgetUiTreatment.ITEM_GROUP,
-					widgetItemPrice = itemPrice
+					widgetItemPrice = var7
 				}
 			end
 			if fFlagAXDiscoveryItemPurchaseAttribution then
-				sendUnifiedEventLog(t_1)
+				sendUnifiedEventLog(t_2)
 			elseif fFlagAXUnifiedEventCounters then
-				unifiedEventCounterAggregator.record(t_1, AXUnifiedEventFilter.filter(t_1, { skipReporting = true }))
+				unifiedEventCounterAggregator.record(t_2, AXUnifiedEventFilter.filter(t_2, { skipReporting = true }))
 			end
-			analyticsService.EventStream:sendTelemetryEvent(unifiedEventLogConstants.EVENT_NAME, unifiedEventLogConstants.EVENT_NAME, t_1)
+			analyticsService.EventStream:sendTelemetryEvent(unifiedEventLogConstants.EVENT_NAME, unifiedEventLogConstants.EVENT_NAME, t_2)
 		end
 	end
-	local t = {
+	local t_1 = {
 		name = appPage.AvatarExperienceWrapper,
 		detail = text,
 		extraProps = {
@@ -194,24 +192,24 @@ return function(p1, p2, p3)
 				mountAnimation = true,
 				showRobuxBalance = true,
 				showDropDownTopBar = true,
-				itemId = var5,
-				itemType = var6,
-				itemSubTypeName = if var6 == "Look" then nil else itemSubTypeName,
+				itemId = var4,
+				itemType = var5,
+				itemSubTypeName = if var5 == "Look" then nil else itemSubTypeName,
 				fromHome = if fFlagAXTryOnScreenImprovements then nil else true,
-				fromSurface = if fFlagAXAvatarSortInDiscoveryUnifiedPurchase then var8 elseif fFlagAXFixPurchaseSurfaceLogging then appPage_1 else nil,
+				fromSurface = appPage_1,
 				detail = text,
 				hideTab = if fFlagAXTryOnScreenImprovements then true else nil,
 				simpleView = if fFlagAXTryOnScreenImprovements then p3.appPage == appPage.Home and not fFlagAXEnableHomeTryOnComplexView else nil,
 				shouldNavigateDown = if fFlagAXTryOnScreenImprovements then true else nil,
-				avatarUnifiedAttribution = if fFlagAXFixHomeAvatarsUnifiedPurchase then var9 else nil
+				avatarUnifiedAttribution = if fFlagAXFixHomeAvatarsUnifiedPurchase then var8 else nil
 			}
 		}
 	}
 	
 	if fFlagSignalsNavP3Dispatch then
-		var1.down(var1.fromLegacyPage(t))
+		var1.down(var1.fromLegacyPage(t_1))
 		
 		return
 	end
-	p3.dependencies.dispatch(navigateDown(t))
+	p3.dependencies.dispatch(navigateDown(t_1))
 end

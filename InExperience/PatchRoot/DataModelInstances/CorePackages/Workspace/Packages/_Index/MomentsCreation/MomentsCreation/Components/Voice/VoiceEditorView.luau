@@ -19,12 +19,13 @@ local videoTimelineModule = require(momentsCreation.Components.VideoTimeline)
 local voiceActionBarModule = require(momentsCreation.Components.Voice.VoiceActionBar)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local getFFlagMomentsTTSStartTimePositioningModule = require(momentsCreation.Flags.GetFFlagMomentsTTSStartTimePositioning)
+local var1 = if require(momentsCreation.Flags.FFlagMomentsTTSCompactActionBar) then inputSize.Medium else inputSize.Large
 
 return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), view (ref), videoTimelineModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), audioWaveformOverlayModule (ref), textArea (ref), inputSize (ref), inputVariant (ref), stateLayerAffordance (ref), text (ref), icon (ref), builderIconsModule (ref), foundationModule (ref), voiceActionBarModule (ref), button (ref)
-	local var1
-	local var2 = useDeviceInsets()
-	local var3 = useTokens()
+	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), view (ref), videoTimelineModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), audioWaveformOverlayModule (ref), textArea (ref), inputSize (ref), inputVariant (ref), stateLayerAffordance (ref), text (ref), icon (ref), builderIconsModule (ref), foundationModule (ref), voiceActionBarModule (ref), button (ref), var1 (ref)
+	local var2
+	local var3 = useDeviceInsets()
+	local var4 = useTokens()
 	local isGenerating = p1.isGenerating
 	local isInputInvalid = p1.isInputInvalid
 	local createElement = reactModule.createElement
@@ -32,10 +33,10 @@ return function(p1)
 		tag = "col align-x-center align-y-top gap-xlarge size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
 		padding = {
-			top = UDim.new(0, var3.Padding.XLarge),
-			bottom = UDim.new(0, math.max(var2.bottom, var3.Padding.XLarge)),
-			left = UDim.new(0, math.max(var2.left, var3.Padding.XLarge)),
-			right = UDim.new(0, math.max(var2.right, var3.Padding.XLarge))
+			top = UDim.new(0, var4.Padding.XLarge),
+			bottom = UDim.new(0, math.max(var3.bottom, var4.Padding.XLarge)),
+			left = UDim.new(0, math.max(var3.left, var4.Padding.XLarge)),
+			right = UDim.new(0, math.max(var3.right, var4.Padding.XLarge))
 		}
 	}
 	local t_1 = {
@@ -45,7 +46,8 @@ return function(p1)
 			playback = p1.playback,
 			capture = p1.capture,
 			dragOnly = getFFlagMomentsTTSStartTimePositioningModule,
-			onSeek = p1.onTimelineSeek
+			onSeek = p1.onTimelineSeek,
+			playheadPosition = p1.playheadPosition
 		}, {
 			AudioWaveform = if p1.showAudioWaveform then reactModule.createElement(audioWaveformOverlayModule, {
 				audioDuration = p1.audioDuration,
@@ -64,11 +66,11 @@ return function(p1)
 					["size-full-0 auto-y"] = not p1.showVoiceSelector
 				},
 				stroke = {
-					Color = if isInputInvalid then var3.Color.System.Alert.Color3 else var3.Color.Stroke.Emphasis.Color3,
-					Transparency = if isInputInvalid then 0 else var3.Color.Stroke.Emphasis.Transparency,
-					Thickness = var3.Stroke.Standard
+					Color = if isInputInvalid then var4.Color.System.Alert.Color3 else var4.Color.Stroke.Emphasis.Color3,
+					Transparency = if isInputInvalid then 0 else var4.Color.Stroke.Emphasis.Transparency,
+					Thickness = var4.Stroke.Standard
 				},
-				cornerRadius = UDim.new(0, var3.Radius.Medium),
+				cornerRadius = UDim.new(0, var4.Radius.Medium),
 				onAbsoluteSizeChanged = p1.onComposerResize,
 				ref = p1.composerContainerRef
 			}, {
@@ -90,10 +92,10 @@ return function(p1)
 					LayoutOrder = 2,
 					tag = "auto-xy",
 					padding = {
-						top = UDim.new(0, var3.Padding.Small),
-						bottom = UDim.new(0, var3.Padding.Small),
-						left = UDim.new(0, var3.Padding.Small),
-						right = UDim.new(0, var3.Padding.Small)
+						top = UDim.new(0, var4.Padding.Small),
+						bottom = UDim.new(0, var4.Padding.Small),
+						left = UDim.new(0, var4.Padding.Small),
+						right = UDim.new(0, var4.Padding.Small)
 					}
 				}, {
 					Pill = reactModule.createElement(view, {
@@ -102,10 +104,10 @@ return function(p1)
 						onActivated = p1.onOpenVoiceSelector,
 						stateLayer = { affordance = stateLayerAffordance.Background },
 						padding = {
-							top = UDim.new(0, var3.Padding.Small),
-							bottom = UDim.new(0, var3.Padding.Small),
-							left = UDim.new(0, var3.Padding.Medium),
-							right = UDim.new(0, var3.Padding.Medium)
+							top = UDim.new(0, var4.Padding.Small),
+							bottom = UDim.new(0, var4.Padding.Small),
+							left = UDim.new(0, var4.Padding.Medium),
+							right = UDim.new(0, var4.Padding.Medium)
 						}
 					}, {
 						Label = reactModule.createElement(text, {
@@ -117,7 +119,7 @@ return function(p1)
 							LayoutOrder = 2,
 							name = builderIconsModule.Icon.ChevronSmallDown,
 							size = foundationModule.Enums.IconSize.Small,
-							style = var3.Color.Content.Default
+							style = var4.Color.Content.Default
 						})
 					})
 				}) else nil
@@ -125,7 +127,7 @@ return function(p1)
 			HelperRow = reactModule.createElement(view, {
 				LayoutOrder = 2,
 				tag = "row flex-x-between align-y-center size-full-0 auto-y",
-				padding = { top = UDim.new(0, var3.Gap.Small) }
+				padding = { top = UDim.new(0, var4.Gap.Small) }
 			}, {
 				HelperText = reactModule.createElement(text, {
 					LayoutOrder = 1,
@@ -148,8 +150,8 @@ return function(p1)
 	}
 	
 	if p1.showDelete then
-		var1 = reactModule.createElement
-		var1 = var1(voiceActionBarModule, {
+		var2 = reactModule.createElement
+		var2 = var2(voiceActionBarModule, {
 			layoutOrder = 3,
 			onDelete = p1.onDelete,
 			primaryRef = p1.createButtonRef,
@@ -161,18 +163,18 @@ return function(p1)
 			primaryVariant = if p1.showSave or p1.canGenerate or isGenerating then foundationModule.Enums.ButtonVariant.Emphasis else foundationModule.Enums.ButtonVariant.Standard
 		})
 	elseif p1.showSave then
-		var1 = reactModule.createElement(button, {
+		var2 = reactModule.createElement(button, {
 			LayoutOrder = 3,
 			fillBehavior = foundationModule.Enums.FillBehavior.Fill,
 			onActivated = p1.onSave,
-			size = foundationModule.Enums.InputSize.Large,
+			size = var1,
 			text = p1.saveText,
 			variant = foundationModule.Enums.ButtonVariant.Emphasis,
 			width = UDim.new(1, 0)
 		})
 	else
-		var1 = reactModule.createElement
-		var1 = var1("Frame", {
+		var2 = reactModule.createElement
+		var2 = var2("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 3,
 			AutomaticSize = Enum.AutomaticSize.Y,
@@ -184,14 +186,14 @@ return function(p1)
 				isDisabled = not p1.canGenerate and not isGenerating,
 				isLoading = isGenerating,
 				onActivated = p1.onCreateVoiceover,
-				size = foundationModule.Enums.InputSize.Large,
+				size = var1,
 				text = if isGenerating then "" else p1.createText,
 				variant = if p1.canGenerate or isGenerating then foundationModule.Enums.ButtonVariant.Emphasis else foundationModule.Enums.ButtonVariant.Standard,
 				width = UDim.new(1, 0)
 			})
 		})
 	end
-	t_1.ActionButton = var1
+	t_1.ActionButton = var2
 	
 	return createElement(view, t, t_1)
 end

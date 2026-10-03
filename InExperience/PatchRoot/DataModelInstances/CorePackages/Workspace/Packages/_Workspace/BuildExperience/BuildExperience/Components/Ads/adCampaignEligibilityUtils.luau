@@ -1,6 +1,12 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local _ = require(buildExperience.Parent.DataHydration.AdCampaignEligibility)
+local parent = buildExperience.Parent
+local _ = require(parent.DataHydration.AdCampaignEligibility)
+local _ = require(parent.DataHydration.CreatorAgentChat)
 local fFlagEnablePaidAdsModule = require(buildExperience.Flags.FFlagEnablePaidAds)
+
+local function getDefaultOffer(p1)
+	return if not (p1.feedback ~= nil and p1.feedback.fundingType == "free") then if p1.plays == nil or p1.plays.fundingType ~= "free" then p1.feedback or p1.plays else p1.plays else p1.feedback
+end
 
 local function isUsableOffer(p1)
 	local var1 = false
@@ -44,6 +50,7 @@ local function getSelectableOffers(p1)
 end
 
 return {
+	getDefaultOffer = getDefaultOffer,
 	isEligibleForFreePromotion = function(p2)
 		-- upvalues: fFlagEnablePaidAdsModule (ref), isUsableOffer (ref)
 		if p2 == nil or p2.userEligible ~= true or p2.universeEligible ~= true then

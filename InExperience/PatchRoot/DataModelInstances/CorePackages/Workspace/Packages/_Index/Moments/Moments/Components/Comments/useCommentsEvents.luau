@@ -9,13 +9,15 @@ local useRoactService = require(parent.RobloxAppHooks).useRoactService
 local appAppLifecycleObserverService = require(parent.RoactServiceTags).AppAppLifecycleObserverService
 local useFeedOptional = require(moments.Components.Feed.FeedContext).useFeedOptional
 local makeRecommendationAttributionModule = require(moments.Analytics.makeRecommendationAttribution)
+local makeCommentCountFieldsModule = require(moments.Analytics.makeCommentCountFields)
+local fFlagMomentsCommentsCountAnalyticsModule = require(moments.Flags.FFlagMomentsCommentsCountAnalytics)
 local getCommentsSheetStoreModule = require(script.Parent.Sheet.getCommentsSheetStore)
 local createCommentsRecommendationSessionModule = require(script.Parent.createCommentsRecommendationSession)
 local createCommentsAnalyticsSessionModule = require(script.Parent.createCommentsAnalyticsSession)
 local useCommentCapabilitiesModule = require(script.Parent.useCommentCapabilities)
 
 return function(p1, p2)
-	-- upvalues: useFeedOptional (ref), useRoactService (ref), appAppLifecycleObserverService (ref), getCommentsSheetStoreModule (ref), reactModule (ref), signalsModule (ref), useCommentCapabilitiesModule (ref), makeRecommendationAttributionModule (ref), createCommentsRecommendationSessionModule (ref), momentsGetMomentsCommentsStoreModule (ref), momentsCommonModule (ref), createCommentsAnalyticsSessionModule (ref)
+	-- upvalues: useFeedOptional (ref), useRoactService (ref), appAppLifecycleObserverService (ref), getCommentsSheetStoreModule (ref), reactModule (ref), signalsModule (ref), useCommentCapabilitiesModule (ref), makeRecommendationAttributionModule (ref), createCommentsRecommendationSessionModule (ref), momentsGetMomentsCommentsStoreModule (ref), momentsCommonModule (ref), fFlagMomentsCommentsCountAnalyticsModule (ref), makeCommentCountFieldsModule (ref), createCommentsAnalyticsSessionModule (ref)
 	local var1 = useFeedOptional()
 	local var2 = useRoactService(appAppLifecycleObserverService)
 	local var3 = getCommentsSheetStoreModule(false)
@@ -97,7 +99,7 @@ return function(p1, p2)
 	local canRead = useCommentCapabilitiesModule().canRead
 	
 	return reactModule.useCallback(function()
-		-- upvalues: p1 (ref), canRead (ref), makeRecommendationAttributionModule (copy), var1 (ref), createCommentsRecommendationSessionModule (copy), p2 (ref), momentsGetMomentsCommentsStoreModule (copy), momentsCommonModule (copy), createCommentsAnalyticsSessionModule (copy), var4 (ref), var5 (ref), var3 (ref)
+		-- upvalues: p1 (ref), canRead (ref), makeRecommendationAttributionModule (copy), var1 (ref), createCommentsRecommendationSessionModule (copy), p2 (ref), momentsGetMomentsCommentsStoreModule (copy), momentsCommonModule (copy), fFlagMomentsCommentsCountAnalyticsModule (copy), makeCommentCountFieldsModule (copy), createCommentsAnalyticsSessionModule (copy), var4 (ref), var5 (ref), var3 (ref)
 		local var8 = if p1 ~= nil then nil else p1.feedItemId
 		
 		if var8 == nil or var8 == "" or not canRead then return end
@@ -112,7 +114,10 @@ return function(p1, p2)
 		local var12 = createCommentsAnalyticsSessionModule(var8, if var1 ~= nil and (if var1.recommendationSource ~= momentsCommonModule.Analytics.RecommendationSource.Profile then var1.recommendationSource == momentsCommonModule.Analytics.RecommendationSource.MyMoments else true) then "profile" else "watch_tab", function()
 			-- upvalues: var11 (ref), ownerGeneration (ref)
 			return var11.getOwnerGeneration(false) == ownerGeneration
-		end)
+		end, nil, nil, nil, if fFlagMomentsCommentsCountAnalyticsModule then function()
+			-- upvalues: makeCommentCountFieldsModule (copy), var11 (ref), var8 (ref)
+			return makeCommentCountFieldsModule(var11.getCachedMomentComments(var8).data(false))
+		end else nil)
 		var4.current = var9
 		var5.current = var12
 		var3.open(var8, var9, var12)

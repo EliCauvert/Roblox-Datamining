@@ -17,7 +17,8 @@ return function()
 	local var13, var14 = signalsModule.createSignal({})
 	local var15, var16 = signalsModule.createSignal(constantsModule.MIN_COLUMNS)
 	local var17, var18 = signalsModule.createSignal(false)
-	local var19, var20 = signalsModule.createSignal(nil)
+	local var19, var20 = signalsModule.createSignal(false)
+	local var21, var22 = signalsModule.createSignal(nil)
 	
 	return {
 		store = {
@@ -30,10 +31,11 @@ return function()
 			getBonusPromotionEligibility = var13,
 			getItemsPerRow = var15,
 			getShouldOpenToRobuxTab = var17,
-			getPurchasedRobuxAmount = var19,
+			getOpenedFromBuyRobux = var19,
+			getPurchasedRobuxAmount = var21,
 			dismissRobuxPurchaseSuccess = function()
-				-- upvalues: var20 (ref)
-				var20(nil)
+				-- upvalues: var22 (ref)
+				var22(nil)
 			end,
 			onShopOpened = jest.fn(),
 			fetchAllShopData = jest.fn(),
@@ -44,7 +46,8 @@ return function()
 			pollGamePassOwnership = jest.fn(),
 			bonusGamePassIdForNativePurchase = jest.fn(),
 			setItemsPerRow = var16,
-			setShouldOpenToRobuxTab = var18
+			setShouldOpenToRobuxTab = var18,
+			setOpenedFromBuyRobux = var20
 		},
 		setCategories = var2,
 		setSections = var4,
@@ -54,6 +57,6 @@ return function()
 		setTrialAvailabilities = var12,
 		setBonusPromotionEligibility = var14,
 		setItemsPerRow = var16,
-		setPurchasedRobuxAmount = var20
+		setPurchasedRobuxAmount = var22
 	}
 end

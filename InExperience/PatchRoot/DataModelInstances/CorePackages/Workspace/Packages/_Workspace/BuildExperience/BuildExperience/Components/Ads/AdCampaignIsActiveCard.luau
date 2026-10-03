@@ -14,9 +14,9 @@ return function(p1)
 	-- upvalues: localizationStringsModule (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref)
 	local variant = p1.variant or "active"
 	local var1 = useLocalization({
-		title = if variant == "inReview" then localizationStringsModule.AD_CAMPAIGN_CARD_TITLE_CREATED elseif variant == "complete" then localizationStringsModule.AD_CAMPAIGN_CARD_TITLE_COMPLETE else localizationStringsModule.AD_CAMPAIGN_CARD_TITLE_ACTIVE,
+		title = if variant == "complete" then localizationStringsModule.AD_CAMPAIGN_CARD_TITLE_COMPLETE else localizationStringsModule.AD_CAMPAIGN_CARD_TITLE_ACTIVE,
 		description = {
-			if variant == "inReview" then localizationStringsModule.AD_CAMPAIGN_CARD_DESC_IN_REVIEW elseif variant == "complete" then localizationStringsModule.AD_CAMPAIGN_CARD_DESC_COMPLETE else localizationStringsModule.AD_CAMPAIGN_CARD_DESC_ACTIVE,
+			if variant == "complete" then localizationStringsModule.AD_CAMPAIGN_CARD_DESC_COMPLETE else localizationStringsModule.AD_CAMPAIGN_CARD_ACTIVE_DESC,
 			startDate = p1.campaignStartDate or "",
 			endDate = p1.campaignEndDate or ""
 		},
@@ -37,12 +37,12 @@ return function(p1)
 				tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
 				Text = var1.title
 			}),
-			Description = if variant == "inReview" and not (p1.campaignStartDate ~= nil and (p1.campaignStartDate ~= "" and (p1.campaignEndDate ~= nil and p1.campaignEndDate ~= ""))) then nil else reactModule.createElement(text, {
+			Description = if variant == "complete" or (p1.campaignStartDate ~= nil and (p1.campaignStartDate ~= "" and (p1.campaignEndDate ~= nil and p1.campaignEndDate ~= ""))) then reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
 				testId = "AdCampaignIsActiveCard.Schedule",
 				Text = var1.description
-			})
+			}) else nil
 		}),
 		Action = reactModule.createElement(button, {
 			LayoutOrder = 2,
@@ -51,7 +51,6 @@ return function(p1)
 			size = inputSize.Small,
 			variant = buttonVariant.Standard,
 			width = UDim.new(1, 0),
-			isLoading = p1.isLoading == true,
 			isDisabled = p1.isDisabled == true,
 			onActivated = p1.onActivated
 		})

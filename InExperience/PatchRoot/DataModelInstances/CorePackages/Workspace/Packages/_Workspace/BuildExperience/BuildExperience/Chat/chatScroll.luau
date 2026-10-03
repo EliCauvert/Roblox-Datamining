@@ -8,6 +8,9 @@ return {
 	getDistanceFromBottom = function(p1)
 		return math.max(0, math.max(0, p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y) - p1.CanvasPosition.Y)
 	end,
+	getOffsetInViewport = function(value, p1)
+		return p1.AbsolutePosition.Y - value.AbsolutePosition.Y
+	end,
 	isScrolledToBottom = function(p1)
 		-- upvalues: chatConstantsModule (ref)
 		return math.max(0, math.max(0, p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y) - p1.CanvasPosition.Y) <= chatConstantsModule.BOTTOM_SCROLL_THRESHOLD

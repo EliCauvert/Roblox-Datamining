@@ -13,6 +13,7 @@ local signalsExperimentalModule = require(parent.SignalsExperimental)
 local _ = require(moments.Components.Comments.GetCommentCollectionStore.createCommentCollectionStore)
 local _ = require(moments.Components.Comments.GetCommentSessionFiltersStore.createCommentSessionFiltersStore)
 local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
+local fFlagMomentsCommentsCountAnalyticsModule = require(moments.Flags.FFlagMomentsCommentsCountAnalytics)
 local _ = require(moments.Stores.GetCommentReactionsStore.createCommentReactionsStore)
 local loadStatus = require(moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes).LoadStatus
 local list = { 250, 500 }
@@ -191,7 +192,7 @@ end
 local function noOp() end
 
 return function(p1)
-	-- upvalues: momentsCommentsModule (ref), defaultSchedule (ref), defaultReadStatusCode (ref), defaultReadRetryAfter (ref), signalsModule (ref), parseHttpDateMs (ref), loadStatus (ref), signalsExperimentalModule (ref), t (ref), t_2 (ref), observeRequest (ref), list (ref), fFlagMomentsComments (ref), eventNames (ref), getCommentsFailureReasonModule (ref), t_1 (ref), rejectReactionMutation (ref), noOp (ref)
+	-- upvalues: momentsCommentsModule (ref), defaultSchedule (ref), defaultReadStatusCode (ref), defaultReadRetryAfter (ref), signalsModule (ref), parseHttpDateMs (ref), loadStatus (ref), signalsExperimentalModule (ref), t (ref), t_2 (ref), observeRequest (ref), list (ref), fFlagMomentsComments (ref), eventNames (ref), fFlagMomentsCommentsCountAnalyticsModule (ref), getCommentsFailureReasonModule (ref), t_1 (ref), rejectReactionMutation (ref), noOp (ref)
 	local collectionStore = p1.collectionStore
 	local commentsStore = p1.commentsStore
 	local reactionStore = p1.reactionStore
@@ -996,7 +997,7 @@ return function(p1)
 	end
 	
 	var13 = function(p6, p7, p8, p9)
-		-- upvalues: var1 (write), var7 (write), commentsStore (ref), fFlagMomentsComments (copy), reactionStore (ref), failInvalidContinuation (ref), collectionStore (ref), p1 (ref), eventNames (copy), fetchPage (ref), observeRequest (copy), getCommentsFailureReasonModule (copy), momentsCommentsModule (copy), readStatusCode (ref), commentsForUpsert (ref), cancelReactionRequest (ref), t_5 (ref), t_6 (ref), continueAfterMerge (ref), clearReactionsForFeed (ref), var13 (write)
+		-- upvalues: var1 (write), var7 (write), commentsStore (ref), fFlagMomentsComments (copy), reactionStore (ref), failInvalidContinuation (ref), collectionStore (ref), p1 (ref), eventNames (copy), fetchPage (ref), observeRequest (copy), fFlagMomentsCommentsCountAnalyticsModule (copy), getCommentsFailureReasonModule (copy), momentsCommentsModule (copy), readStatusCode (ref), commentsForUpsert (ref), cancelReactionRequest (ref), t_5 (ref), t_6 (ref), continueAfterMerge (ref), clearReactionsForFeed (ref), var13 (write)
 		local var17 = var1
 		local var18 = if var7 or var17 == nil or (var17.feedItemId ~= p6 or var17.sessionId ~= p7) or (var17.ownerGeneration ~= commentsStore.getOwnerGeneration(false) or var17.refCount == 0) then nil else var17
 		
@@ -1033,7 +1034,7 @@ return function(p1)
 		local t = { cancel = function() end }
 		var18.activePageRequest = t
 		t.cancel = observeRequest(var21, function(p10)
-			-- upvalues: var18 (ref), p6 (ref), p7 (ref), var17 (ref), var7 (copy), var1 (copy), commentsStore (copy), t (ref), fFlagMomentsComments (copy), analyticsSession (write), eventNames (copy), var20 (ref), getCommentsFailureReasonModule (copy), momentsCommentsModule (copy), readStatusCode (copy), commentsForUpsert (copy), var19 (ref), reactionStore (copy), cancelReactionRequest (copy), t_5 (copy), t_6 (copy), p8 (ref), collectionStore (copy), continueAfterMerge (copy), clearReactionsForFeed (copy), var13 (copy), p9 (ref)
+			-- upvalues: var18 (ref), p6 (ref), p7 (ref), var17 (ref), var7 (copy), var1 (copy), commentsStore (copy), t (ref), fFlagMomentsComments (copy), analyticsSession (write), var20 (ref), fFlagMomentsCommentsCountAnalyticsModule (copy), eventNames (copy), getCommentsFailureReasonModule (copy), momentsCommentsModule (copy), readStatusCode (copy), commentsForUpsert (copy), var19 (ref), reactionStore (copy), cancelReactionRequest (copy), t_5 (copy), t_6 (copy), p8 (ref), collectionStore (copy), continueAfterMerge (copy), clearReactionsForFeed (copy), var13 (copy), p9 (ref)
 			local var22 = var18
 			local var23 = var17
 			
@@ -1042,7 +1043,12 @@ return function(p1)
 			
 			if fFlagMomentsComments and analyticsSession ~= nil then
 				if p10.status == "succeeded" and p10.result ~= nil then
-					analyticsSession.logEvent(eventNames.MomentCommentsListLoadSucceeded, { loadType = var20 })
+					local t_1 = { loadType = var20 }
+					
+					if fFlagMomentsCommentsCountAnalyticsModule then
+						t_1.loadedCommentCount = tostring(#p10.result.comments)
+					end
+					analyticsSession.logEvent(eventNames.MomentCommentsListLoadSucceeded, t_1)
 				else
 					local logEvent = analyticsSession.logEvent
 					var22 = eventNames.MomentCommentsListLoadFailed

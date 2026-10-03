@@ -1,6 +1,5 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local parent = foundation.Parent
-local flagsModule = require(foundation.Utility.Flags)
 local dashModule = require(parent.Dash)
 local otterModule = require(parent.Otter)
 local reactModule = require(parent.React)
@@ -38,7 +37,7 @@ local SHADOW_IMAGE = constantsModule.SHADOW_IMAGE
 local SHADOW_SIZE = constantsModule.SHADOW_SIZE
 
 local function Dialog(p1)
-	-- upvalues: dashModule (ref), useDialogVariants (ref), useScaledValueModule (ref), reactModule (ref), useOverlayModule (ref), useElevationModule (ref), elevationLayerModule (ref), useDialogModule (ref), useDialogResponsiveSizeModule (ref), useTokensModule (ref), usePreferencesModule (ref), useAnimatedBinding (ref), otterModule (ref), viewModule (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), typesModule (ref), closeAffordanceModule (ref), elevationOwnerScope (ref), flagsModule (ref), onCloseCallbackReasonModule (ref), reactRobloxModule (ref)
+	-- upvalues: dashModule (ref), useDialogVariants (ref), useScaledValueModule (ref), reactModule (ref), useOverlayModule (ref), useElevationModule (ref), elevationLayerModule (ref), useDialogModule (ref), useDialogResponsiveSizeModule (ref), useTokensModule (ref), usePreferencesModule (ref), useAnimatedBinding (ref), otterModule (ref), viewModule (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), typesModule (ref), closeAffordanceModule (ref), elevationOwnerScope (ref), onCloseCallbackReasonModule (ref), reactRobloxModule (ref)
 	local createElement_2
 	local var1 = dashModule.assign({}, p1, { LayoutOrder = 1 })
 	local var2 = useDialogVariants()
@@ -167,7 +166,7 @@ local function Dialog(p1)
 	else
 		createElement_2 = nil
 	end
-	local var25
+	local createElement_4
 	t_2.CloseAffordance = createElement_2
 	t_2.DialogBody = reactModule.createElement(viewModule, {
 		tag = var2.body.tag,
@@ -184,17 +183,17 @@ local function Dialog(p1)
 	t_1.DialogInner = createElement_1(viewModule, var24, t_2)
 	createElement = createElement(viewModule, t, t_1)
 	local createElement_3 = reactModule.createElement
-	local var26 = viewModule
+	local var25 = viewModule
 	local t_3 = {
+		tag = "size-full padding-y-xlarge",
 		ZIndex = var7.zIndex,
-		tag = if flagsModule.FoundationDialogBetaUpdate then "size-full padding-y-xlarge" else "size-full",
 		testId = `{var1.testId}--container`
 	}
 	local t_4 = {}
 	
 	if var1.hasBackdrop then
-		var25 = reactModule.createElement
-		var25 = var25(viewModule, {
+		createElement_4 = reactModule.createElement
+		createElement_4 = createElement_4(viewModule, {
 			tag = "position-center-center anchor-center-center",
 			ZIndex = 2,
 			Size = UDim2.fromScale(2, 2),
@@ -220,9 +219,9 @@ local function Dialog(p1)
 			testId = `{var1.testId}--backdrop`
 		})
 	else
-		var25 = nil
+		createElement_4 = nil
 	end
-	t_4.Backdrop = var25
+	t_4.Backdrop = createElement_4
 	t_4.DialogContentWrapper = reactModule.createElement(viewModule, {
 		ZIndex = 2,
 		ref = if not reducedMotion then var22 else nil,
@@ -239,7 +238,7 @@ local function Dialog(p1)
 			return p2 / size800
 		end)
 	}, if reducedMotion then { DialogShadowWrapper = var23, Dialog = createElement } else nil)
-	createElement_3 = createElement_3(var26, t_3, t_4)
+	createElement_3 = createElement_3(var25, t_3, t_4)
 	
 	return if reducedMotion then if var1.disablePortal or var6 == nil then createElement_3 else reactRobloxModule.createPortal(createElement_3, var6) else reactModule.createElement(reactModule.Fragment, nil, {
 		Main = if var1.disablePortal or var6 == nil then createElement_3 else reactRobloxModule.createPortal(createElement_3, var6),

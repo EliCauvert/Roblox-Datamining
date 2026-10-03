@@ -113,8 +113,14 @@ function t.hasValidFilter(p1)
 	return var2 and (var1 and ((if filterPriceMin and filterPriceMin ~= "" or filterPriceMax and filterPriceMax ~= "" then filterPrice == unifiedEventLogEnumsModule.FiltersPrice.PRICE_RANGE else true) and (if filterCreatorsName and filterCreatorsName ~= "" then filterCreators == unifiedEventLogEnumsModule.FiltersCreators.CREATORS_BY_USERNAME else true)))
 end
 
+local function _(p1)
+	local var1 = tonumber(p1)
+	
+	return var1 ~= nil and var1 >= 0
+end
+
 function t.hasValidEntityData(p1)
-	-- upvalues: unifiedLoggingSurface (ref), AXSendPurchaseAttempt (ref), marketplaceUnifiedAction (ref), t (ref), marketplaceUnifiedItemType (ref), t_1 (ref), widgetUiTreatment (ref)
+	-- upvalues: unifiedLoggingSurface (ref), AXSendPurchaseAttempt (ref), marketplaceUnifiedAction (ref), t (ref), fFlagAXUnifiedEventCounters (ref), marketplaceUnifiedItemType (ref), t_1 (ref), widgetUiTreatment (ref)
 	if p1.surface == unifiedLoggingSurface.CUSTOMIZE then
 		return true
 	elseif AXSendPurchaseAttempt and p1.action == marketplaceUnifiedAction.PURCHASE_ATTEMPT then
@@ -137,50 +143,71 @@ function t.hasValidEntityData(p1)
 	if var1 ~= 1 then
 		return false
 	elseif var2 then
-		if not (p1.organicItemPrice ~= nil and p1.organicItemPrice >= 0) then
+		local var5
+		if fFlagAXUnifiedEventCounters then
+			local var6 = tonumber(p1.organicItemPrice)
+			var5 = false
+			
+			if var6 ~= nil then
+				local _ = var6 >= 0
+			end
+		else
+			var5 = p1.organicItemPrice ~= nil and p1.organicItemPrice >= 0
+		end
+		if not var5 then
 			return false
 		elseif p1.itemType == marketplaceUnifiedItemType.LOOK then
-			local var5, var6
+			local var7, var8
 			if p1.action == marketplaceUnifiedAction.PURCHASE_ATTEMPT then
 				return true
 			elseif p1.organicAssetIds then
-				var5 = p1.organicAssetIds ~= ""
+				var7 = p1.organicAssetIds ~= ""
 			end
 			if p1.organicBundleIds then
-				var6 = p1.organicBundleIds ~= ""
+				var8 = p1.organicBundleIds ~= ""
 			end
-			return var5 or var6
+			return var7 or var8
 		else
 			return p1.assetType and t_1.AssetTypeIdStringToName[tostring(p1.assetType)] ~= nil or p1.bundleType and t_1.BundleTypeIdStringToName[tostring(p1.bundleType)] ~= nil
 		end
 	elseif var3 then
-		local var7, var8, var9
-		local var10 = p1.widgetId ~= nil and p1.widgetId ~= ""
-		local var11 = p1.widgetType ~= nil and p1.widgetType ~= ""
+		local var9, var10, var11
+		local var12 = p1.widgetId ~= nil and p1.widgetId ~= ""
+		local var13 = p1.widgetType ~= nil and p1.widgetType ~= ""
 		
 		if p1.widgetItemIds then
-			var7 = p1.widgetItemIds ~= ""
+			var9 = p1.widgetItemIds ~= ""
 		end
 		if p1.assetIds then
-			var8 = p1.assetIds ~= ""
+			var10 = p1.assetIds ~= ""
 		end
 		if p1.bundleIds then
-			var9 = p1.bundleIds ~= ""
+			var11 = p1.bundleIds ~= ""
 		end
-		local var12
+		local var14
 		local _ = nil
-		local var13 = if p1.itemType == marketplaceUnifiedItemType.LOOK and p1.action ~= marketplaceUnifiedAction.PURCHASE_ATTEMPT then var8 or var9 else true
+		local var15 = if p1.itemType == marketplaceUnifiedItemType.LOOK and p1.action ~= marketplaceUnifiedAction.PURCHASE_ATTEMPT then var10 or var11 else true
 		
 		if p1.uiTreatmentType then
-			var12 = p1.uiTreatmentType ~= widgetUiTreatment.UNKNOWN_WIDGET_UI
+			var14 = p1.uiTreatmentType ~= widgetUiTreatment.UNKNOWN_WIDGET_UI
 		end
-		local var14 = if p1.widgetType == "ThemedAvatarItemsWidget" then p1.themeId ~= nil and p1.themeId ~= "" else true
-		local var15 = p1.widgetItemPrice ~= nil and p1.widgetItemPrice >= 0
+		local var16
+		local var17 = if p1.widgetType == "ThemedAvatarItemsWidget" then p1.themeId ~= nil and p1.themeId ~= "" else true
 		
-		if p1.action == marketplaceUnifiedAction.WIDGET_IMPRESSION then
-			var15 = true
+		if fFlagAXUnifiedEventCounters then
+			local var18 = tonumber(p1.widgetItemPrice)
+			var16 = false
+			
+			if var18 ~= nil then
+				local _ = var18 >= 0
+			end
+		else
+			var16 = p1.widgetItemPrice ~= nil and p1.widgetItemPrice >= 0
 		end
-		return var10 and (var11 and (var7 and (var13 and (var12 and (var14 and var15)))))
+		if p1.action == marketplaceUnifiedAction.WIDGET_IMPRESSION then
+			var16 = true
+		end
+		return var12 and (var13 and (var9 and (var15 and (var14 and (var17 and var16)))))
 	else
 		return if var4 then p1.elementName ~= nil and p1.elementName ~= "" else false
 	end
@@ -228,13 +255,13 @@ function t.filter(p1, p2)
 			var10 ..= "hasValidEntityData "
 		end
 		if p1.action == marketplaceUnifiedAction.ITEM_IMPRESSION then
-			warn("Failed to send unified impression event. Failing Check(s): " .. var33)
+			warn("Failed to send unified impression event. Failing Check(s): " .. var37)
 		elseif p1.action == marketplaceUnifiedAction.ITEM_SELECTED then
-			warn("Failed to send unified click event. Failing Check(s): " .. var33)
+			warn("Failed to send unified click event. Failing Check(s): " .. var37)
 		elseif p1.action == marketplaceUnifiedAction.PURCHASE_SUCCESS then
-			warn("Failed to send unified purchase event. Failing Check(s): " .. var33)
+			warn("Failed to send unified purchase event. Failing Check(s): " .. var37)
 		else
-			warn("Failed to send unified event. Failing Check(s): " .. var33)
+			warn("Failed to send unified event. Failing Check(s): " .. var37)
 		end
 	end
 	sendAXCounterV2Module("AXUnifiedFilter", {

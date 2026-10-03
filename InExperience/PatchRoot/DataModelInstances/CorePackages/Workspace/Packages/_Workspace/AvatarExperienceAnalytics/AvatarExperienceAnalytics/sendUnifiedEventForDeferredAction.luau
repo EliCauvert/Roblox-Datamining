@@ -11,13 +11,12 @@ local mapAnalyticsMetadataFieldsModule = require(avatarExperienceAnalytics.Utils
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local unifiedSelectionListStoreModule = require(script.Parent.Store.UnifiedSelectionListStore)
 local lastDeferredSingleItemStoreModule = require(script.Parent.Store.LastDeferredSingleItemStore)
-local fFlagAXAvatarSortInDiscoveryUnifiedPurchase = require(parent.SharedFlags).FFlagAXAvatarSortInDiscoveryUnifiedPurchase
 local fFlagAXMISEnableMultiShoppingUnifiedEvents = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
 local fFlagAXFixSingleItemPurchaseWidgetLogging = avatarExperienceFlagsModule.FFlagAXFixSingleItemPurchaseWidgetLogging
 local fFlagAXFixUnifiedPurchaseFieldLanding = avatarExperienceFlagsModule.FFlagAXFixUnifiedPurchaseFieldLanding
 
 return function(p1)
-	-- upvalues: fFlagAXFixUnifiedPurchaseFieldLanding (ref), mapAnalyticsMetadataFieldsModule (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedSelectionListStoreModule (ref), unifiedEventLogConstantsModule (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), lastDeferredSingleItemStoreModule (ref), unifiedEventLoggingUtilsModule (ref), sendUnifiedEventLogModule (ref), cryoModule (ref), collectionService (ref), fFlagAXAvatarSortInDiscoveryUnifiedPurchase (ref), sendUnifiedEventLogForInstanceModule (ref)
+	-- upvalues: fFlagAXFixUnifiedPurchaseFieldLanding (ref), mapAnalyticsMetadataFieldsModule (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedSelectionListStoreModule (ref), unifiedEventLogConstantsModule (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), lastDeferredSingleItemStoreModule (ref), unifiedEventLoggingUtilsModule (ref), sendUnifiedEventLogModule (ref), cryoModule (ref), collectionService (ref), sendUnifiedEventLogForInstanceModule (ref)
 	if fFlagAXFixUnifiedPurchaseFieldLanding then
 		p1 = mapAnalyticsMetadataFieldsModule(p1)
 	end
@@ -55,27 +54,16 @@ return function(p1)
 	else
 		local last_activated_tag_nameTagged = collectionService:GetTagged(unifiedEventLogConstantsModule.LAST_ACTIVATED_TAG_NAME)
 		
-		if fFlagAXAvatarSortInDiscoveryUnifiedPurchase then
-			if #last_activated_tag_nameTagged > 0 then
-				for i, v in last_activated_tag_nameTagged do
-					sendUnifiedEventLogForInstanceModule(v, p1, {
-						includeScreenSize = true,
-						includeElementSizeAndPosition = true
-					})
-				end
-				return
-			else
-				sendUnifiedEventLogModule(p1)
-				
-				return
-			end
-		else
-			for i, v in last_activated_tag_nameTagged do
-				sendUnifiedEventLogForInstanceModule(v, p1, {
-					includeScreenSize = true,
-					includeElementSizeAndPosition = true
-				})
-			end
+		if #last_activated_tag_nameTagged <= 0 then
+			sendUnifiedEventLogModule(p1)
+			
+			return
+		end
+		for i, v in last_activated_tag_nameTagged do
+			sendUnifiedEventLogForInstanceModule(v, p1, {
+				includeScreenSize = true,
+				includeElementSizeAndPosition = true
+			})
 		end
 	end
 end

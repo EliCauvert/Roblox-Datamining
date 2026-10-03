@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnablePioneerPostAuthGameJoin5", false)
+﻿return game:DefineFastFlag("EnablePioneerPostAuthGameJoin6", false)

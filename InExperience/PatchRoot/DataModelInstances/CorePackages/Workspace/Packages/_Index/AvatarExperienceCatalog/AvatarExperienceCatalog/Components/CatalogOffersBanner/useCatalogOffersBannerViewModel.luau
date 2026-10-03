@@ -30,9 +30,16 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXCatalogOffersAutoOpenFTUXSheet = avatarExperienceFlagsModule.FFlagAXCatalogOffersAutoOpenFTUXSheet
 local AXSendImpressionsForCatalogOffersBanner = game:DefineFastFlag("AXSendImpressionsForCatalogOffersBanner", false)
 local fFlagAXOfferBannerImpressionOnlyOnStartup = avatarExperienceFlagsModule.FFlagAXOfferBannerImpressionOnlyOnStartup
+local fFlagAXUpdateOffersEndsUIWithBadge = avatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge
+
+local function blendShiftFillForOpaqueGuiObject(p1, p2)
+	local var1 = 1 - math.clamp(p1.Transparency, 0, 1)
+	
+	return Color3.new(p1.Color3.R * var1 + p2.R * (1 - var1), p1.Color3.G * var1 + p2.G * (1 - var1), p1.Color3.B * var1 + p2.B * (1 - var1))
+end
 
 return function(p1)
-	-- upvalues: useAXCatalogStoreContextModule (ref), useNetworking (ref), useTokens (ref), reactModule (ref), useLocalization (ref), catalogOffersBannerAppStorageModule (ref), getMarketplaceOffersBannerOfferDisplayId (ref), useSignalState (ref), fFlagAXCatalogOffersAutoOpenFTUXSheet (ref), useCatalogOffersBannerDismissHydrationModule (ref), useCatalogOffersBannerOffersFetchModule (ref), getMarketplaceOffersBannerOfferDisplayTitle (ref), AXSendImpressionsForCatalogOffersBanner (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (ref), catalogOffersBannerImpressionsStoreModule (ref), sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), unifiedLoggingElementNameEnums (ref), httpService (ref), catalogOffersBannerOfferModalsModule (ref)
+	-- upvalues: useAXCatalogStoreContextModule (ref), useNetworking (ref), useTokens (ref), reactModule (ref), useLocalization (ref), catalogOffersBannerAppStorageModule (ref), getMarketplaceOffersBannerOfferDisplayId (ref), useSignalState (ref), fFlagAXCatalogOffersAutoOpenFTUXSheet (ref), useCatalogOffersBannerDismissHydrationModule (ref), useCatalogOffersBannerOffersFetchModule (ref), getMarketplaceOffersBannerOfferDisplayTitle (ref), AXSendImpressionsForCatalogOffersBanner (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (ref), catalogOffersBannerImpressionsStoreModule (ref), sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), unifiedLoggingElementNameEnums (ref), httpService (ref), catalogOffersBannerOfferModalsModule (ref), fFlagAXUpdateOffersEndsUIWithBadge (ref), blendShiftFillForOpaqueGuiObject (ref)
 	local catalogOffersBannerStore = useAXCatalogStoreContextModule().catalogOffersBannerStore
 	local var1 = useNetworking()
 	local var2 = useTokens()
@@ -119,10 +126,15 @@ return function(p1)
 	return {
 		status = "visible",
 		viewProps = {
-			rootTags = "col auto-y size-full-0 bg-shift-200",
+			rootTags = if fFlagAXUpdateOffersEndsUIWithBadge then "col auto-y size-full-0" else "col auto-y size-full-0 bg-shift-200",
+			backgroundStyle = if fFlagAXUpdateOffersEndsUIWithBadge then if fFlagAXUpdateOffersEndsUIWithBadge then {
+				Transparency = 0,
+				Color3 = blendShiftFillForOpaqueGuiObject(var2.Color.Shift.Shift_200, var2.Color.Surface.Surface_0.Color3)
+			} else nil else nil,
 			Size = p1.Size,
 			Position = p1.Position,
 			iconName = var3.icon,
+			expirationTimeInUTC = if fFlagAXUpdateOffersEndsUIWithBadge then var3.expirationTimeInUTC else nil,
 			iconEmphasisStyle = var2.Color.System.Emphasis,
 			titleContentEmphasisStyle = var2.Color.Content.Emphasis,
 			titleText = var18,

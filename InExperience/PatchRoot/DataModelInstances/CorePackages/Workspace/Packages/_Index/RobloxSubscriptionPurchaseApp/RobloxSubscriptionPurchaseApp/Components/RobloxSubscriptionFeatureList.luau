@@ -15,6 +15,7 @@ local robloxPlusUpdateDiscountIcons = game:DefineFastFlag("RobloxPlusUpdateDisco
 local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
 local fFlagRobloxPlusEnableNewFeatureListModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusEnableNewFeatureList)
 local fFlagRobloxPlusTrialDiscountTimingModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusTrialDiscountTiming)
+local fFlagEnablePlusReferralLandingSheet = require(parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
 local array = luauPolyfillModule.Array
 local view = foundationModule.View
 local text = foundationModule.Text
@@ -63,7 +64,7 @@ local function _(p2)
 end
 
 return function(p2)
-	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), getPeriodTypeDisplayLabelModule (ref), fFlagRobloxPlusTrialDiscountTimingModule (ref), getFreeTrialOfferModule (ref), isSupportedTrialPeriodTypeModule (ref), useLocalization (ref), getVirtualTransactionDiscounts (ref), array (ref), getTrialUnlockDaysModule (ref), FeatureRow (ref), fFlagRobloxPlusEnableNewFeatureListModule (ref), iconName (ref), robloxPlusUpdateDiscountIcons (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), reactModule (ref), view (ref)
+	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), getPeriodTypeDisplayLabelModule (ref), fFlagRobloxPlusTrialDiscountTimingModule (ref), getFreeTrialOfferModule (ref), isSupportedTrialPeriodTypeModule (ref), useLocalization (ref), getVirtualTransactionDiscounts (ref), array (ref), getTrialUnlockDaysModule (ref), FeatureRow (ref), fFlagRobloxPlusEnableNewFeatureListModule (ref), iconName (ref), robloxPlusUpdateDiscountIcons (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), reactModule (ref), view (ref), fFlagEnablePlusReferralLandingSheet (ref)
 	local var3 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getRobloxSubscriptionProduct)
 	local periodType = var3 and (var3.PeriodType and (tostring(var3.PeriodType) or ""))
 	local var4 = getPeriodTypeDisplayLabelModule(periodType, true)
@@ -158,7 +159,7 @@ return function(p2)
 		}))
 	end
 	return reactModule.createElement(view, {
-		tag = "col auto-y size-full-0 align-x-left gap-medium padding-top-large",
+		tag = if fFlagEnablePlusReferralLandingSheet and p2.compact then "col auto-y size-full-0 align-x-left gap-small padding-top-small" else "col auto-y size-full-0 align-x-left gap-medium padding-top-large",
 		LayoutOrder = p2.layoutOrder
 	}, t)
 end

@@ -19,6 +19,7 @@ local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFon
 local clearSmall = images["icons/actions/edit/clear_small"]
 local fFlagDisableAutocorrectSocialUserSearch = require(parent.SharedFlags).FFlagDisableAutocorrectSocialUserSearch
 local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
+local fFlagLuaAppLogSocialUserSearchUXExposure = require(parent.SharedFlags).FFlagLuaAppLogSocialUserSearchUXExposure
 local disableAutocorrectExperimentLayer = game:DefineFastString("DisableAutocorrectExperimentLayer", "Social.UserSearchUX")
 local t = {
 	cancelText = "Cancel",
@@ -33,12 +34,12 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: fFlagDisableAutocorrectSocialUserSearch (ref), roactAppExperimentModule (ref), disableAutocorrectExperimentLayer (ref), dashModule (ref), t (ref), useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), textButton (ref), imageSetLabel (ref), icon (ref), enums (ref), normalizeFontFace (ref), callbackInputBox (ref), clearSmall (ref), iconSize (ref), fFlagEnableLeftNavOnConsole (ref)
+	-- upvalues: fFlagDisableAutocorrectSocialUserSearch (ref), roactAppExperimentModule (ref), disableAutocorrectExperimentLayer (ref), fFlagLuaAppLogSocialUserSearchUXExposure (ref), dashModule (ref), t (ref), useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), textButton (ref), imageSetLabel (ref), icon (ref), enums (ref), normalizeFontFace (ref), callbackInputBox (ref), clearSmall (ref), iconSize (ref), fFlagEnableLeftNavOnConsole (ref)
 	local createElement_3
 	local var1 = if fFlagDisableAutocorrectSocialUserSearch then roactAppExperimentModule.useUserExperiment({ disableAutocorrectExperimentLayer }, function(p2)
 		-- upvalues: disableAutocorrectExperimentLayer (copy)
 		return (p2[disableAutocorrectExperimentLayer] or {}).disableAutocorrectSocialUserSearch
-	end) else nil
+	end, not fFlagLuaAppLogSocialUserSearchUXExposure) else nil
 	local var2 = dashModule.join(t, p1 or {})
 	local var3 = useStyle()
 	local var4 = reactModule.useRef(nil)

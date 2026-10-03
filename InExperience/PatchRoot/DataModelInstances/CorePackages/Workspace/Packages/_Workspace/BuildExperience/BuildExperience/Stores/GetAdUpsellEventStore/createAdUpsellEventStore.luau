@@ -60,12 +60,13 @@ return function(p1)
 	-- upvalues: defaultDependencies (ref), signalsModule (ref), fIntBuildAdUpsellCompletedTurnGapModule (ref), fIntBuildAdUpsellPublishIntervalModule (ref), chatTypesModule (ref), creatorAgentChatModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
 	p1 = p1 or defaultDependencies()
 	local var2, var3 = signalsModule.createSignal(0)
+	local var4, var5 = signalsModule.createSignal(0)
 	local t = {}
 	local t_1 = {}
-	local var4 = nil
-	local t_2 = {}
-	local var5 = 0
 	local var6 = nil
+	local t_2 = {}
+	local var7 = 0
+	local var8 = nil
 	local _ = nil
 	
 	local function _()
@@ -80,9 +81,22 @@ return function(p1)
 		return if p1 == nil then nil else p1.getAdCampaignCardStorage()
 	end
 	
+	local _ = function()
+		-- upvalues: var5 (ref), var3 (ref)
+		var5(function(p2)
+			return p2 + 1
+		end)
+		var3(function(p2)
+			return p2 + 1
+		end)
+	end
+	
 	local function recordCardMutation(p2, p3, p4)
-		-- upvalues: var3 (ref)
+		-- upvalues: var5 (ref), var3 (ref)
 		if p3 or p2 and p4 then
+			var5(function(p5)
+				return p5 + 1
+			end)
 			var3(function(p5)
 				return p5 + 1
 			end)
@@ -92,23 +106,23 @@ return function(p1)
 	
 	local _ = function(p2)
 		-- upvalues: t_2 (ref)
-		local var7 = t_2[p2]
+		local var9 = t_2[p2]
 		
-		if var7 == nil then
+		if var9 == nil then
 			return
 		end
 		t_2[p2] = nil
-		var7()
+		var9()
 	end
 	
 	local _ = function(p2)
 		-- upvalues: t (ref), t_2 (ref), t_1 (ref)
 		if t[p2] == nil then return end
-		local var7 = t_2[p2]
+		local var9 = t_2[p2]
 		
-		if var7 ~= nil then
+		if var9 ~= nil then
 			t_2[p2] = nil
-			var7()
+			var9()
 		end
 		t[p2] = nil
 		local index = table.find(t_1, p2)
@@ -131,11 +145,11 @@ return function(p1)
 			local removed = table.remove(t_1, 1)
 			
 			if removed == nil then continue end
-			local var7 = t_2[removed]
+			local var9 = t_2[removed]
 			
-			if var7 ~= nil then
+			if var9 ~= nil then
 				t_2[removed] = nil
-				var7()
+				var9()
 			end
 			t[removed] = nil
 		end
@@ -149,23 +163,23 @@ return function(p1)
 	local _ = function()
 		-- upvalues: t_1 (ref), t (ref)
 		for i, v in t_1 do
-			local var8 = t[v]
+			local var10 = t[v]
 			
-			if var8 ~= nil then
-				local var9
-				if var8.isAwaitingEligibility then
-					var9 = false
-				elseif var8.requiresAudienceVerification and var8.isEligiblePublish == nil then
-					var9 = not var8.isVerifyingAudience
+			if var10 ~= nil then
+				local var11
+				if var10.isAwaitingEligibility then
+					var11 = false
+				elseif var10.requiresAudienceVerification and var10.isEligiblePublish == nil then
+					var11 = not var10.isVerifyingAudience
 					
-					if var9 then
-						var9 = var8.audienceVerificationAttempts < 3
-						var9 = nil
+					if var11 then
+						var11 = var10.audienceVerificationAttempts < 3
+						var11 = nil
 					end
 				else
-					var9 = var8.storagePersistenceAttempts < 3
+					var11 = var10.storagePersistenceAttempts < 3
 				end
-				if var9 then
+				if var11 then
 					return true
 				end
 			end
@@ -173,86 +187,86 @@ return function(p1)
 		return false
 	end
 	
-	local var10 = function()
-		-- upvalues: p1 (ref), var4 (write), t_1 (ref), t (ref), var5 (write), var6 (write), var10 (write)
-		if p1 ~= nil and var4 == nil then
-			local var11
+	local var12 = function()
+		-- upvalues: p1 (ref), var6 (write), t_1 (ref), t (ref), var7 (write), var8 (write), var12 (write)
+		if p1 ~= nil and var6 == nil then
+			local var13
 			for i, v in t_1 do
-				local var12 = t[v]
+				local var14 = t[v]
 				
-				if var12 ~= nil then
-					local var13
-					if var12.isAwaitingEligibility then
-						var13 = false
-					elseif var12.requiresAudienceVerification and var12.isEligiblePublish == nil then
-						var13 = not var12.isVerifyingAudience
+				if var14 ~= nil then
+					local var15
+					if var14.isAwaitingEligibility then
+						var15 = false
+					elseif var14.requiresAudienceVerification and var14.isEligiblePublish == nil then
+						var15 = not var14.isVerifyingAudience
 						
-						if var13 then
-							var13 = var12.audienceVerificationAttempts < 3
-							var13 = nil
+						if var15 then
+							var15 = var14.audienceVerificationAttempts < 3
+							var15 = nil
 						end
 					else
-						var13 = var12.storagePersistenceAttempts < 3
+						var15 = var14.storagePersistenceAttempts < 3
 					end
-					if var13 then
-						var11 = true
-						if var11 then
-							var4 = p1.scheduleRetry(1, function()
-								-- upvalues: var4 (copy), var5 (copy), var5 (ref), t_1 (copy), t (copy), var6 (copy), var10 (copy)
-								var4 = nil
+					if var15 then
+						var13 = true
+						if var13 then
+							var6 = p1.scheduleRetry(1, function()
+								-- upvalues: var6 (copy), var7 (copy), var7 (ref), t_1 (copy), t (copy), var8 (copy), var12 (copy)
+								var6 = nil
 								
-								if var5 ~= var5 then return end
+								if var7 ~= var7 then return end
 								local v_1
 								for i, v in table.clone(t_1) do
 									v_1 = t[v]
 									
 									if v_1 ~= nil then
-										local var14
+										local var16
 										if v_1.isAwaitingEligibility then
-											var14 = false
+											var16 = false
 										elseif v_1.requiresAudienceVerification and v_1.isEligiblePublish == nil then
-											var14 = not v_1.isVerifyingAudience
+											var16 = not v_1.isVerifyingAudience
 											
-											if var14 then
-												var14 = v_1.audienceVerificationAttempts < 3
-												var14 = nil
+											if var16 then
+												var16 = v_1.audienceVerificationAttempts < 3
+												var16 = nil
 											end
 										else
-											var14 = v_1.storagePersistenceAttempts < 3
+											var16 = v_1.storagePersistenceAttempts < 3
 										end
-										if var14 then
-											var6(v_1)
+										if var16 then
+											var8(v_1)
 										end
 									end
 								end
-								local var15
+								local var17
 								for i_1, v_1 in t_1 do
-									local var16 = t[v_1]
+									local var18 = t[v_1]
 									
-									if var16 ~= nil then
-										local var17
-										if var16.isAwaitingEligibility then
-											var17 = false
-										elseif var16.requiresAudienceVerification and var16.isEligiblePublish == nil then
-											var17 = not var16.isVerifyingAudience
+									if var18 ~= nil then
+										local var19
+										if var18.isAwaitingEligibility then
+											var19 = false
+										elseif var18.requiresAudienceVerification and var18.isEligiblePublish == nil then
+											var19 = not var18.isVerifyingAudience
 											
-											if var17 then
-												var17 = var16.audienceVerificationAttempts < 3
-												var17 = nil
+											if var19 then
+												var19 = var18.audienceVerificationAttempts < 3
+												var19 = nil
 											end
 										else
-											var17 = var16.storagePersistenceAttempts < 3
+											var19 = var18.storagePersistenceAttempts < 3
 										end
-										if var17 then
-											var15 = true
-											if var15 then
-												var10()
+										if var19 then
+											var17 = true
+											if var17 then
+												var12()
 											end
 											return
 										end
 									end
 								end
-								var15 = false
+								var17 = false
 							end)
 							
 							return
@@ -260,14 +274,14 @@ return function(p1)
 					end
 				end
 			end
-			var11 = false
+			var13 = false
 		end
 	end
 	
 	local function persistEvent(p3)
-		-- upvalues: p1 (ref), fIntBuildAdUpsellCompletedTurnGapModule (copy), fIntBuildAdUpsellPublishIntervalModule (copy), var3 (ref), t (ref), t_2 (ref), t_1 (ref), var10 (write)
+		-- upvalues: p1 (ref), fIntBuildAdUpsellCompletedTurnGapModule (copy), fIntBuildAdUpsellPublishIntervalModule (copy), var3 (ref), t (ref), t_2 (ref), t_1 (ref), var12 (write)
 		if p1 == nil then return end
-		local var14, var15
+		local var16, var17
 		local t_3 = {
 			universeId = p3.universeId,
 			sessionId = p3.sessionId,
@@ -281,28 +295,28 @@ return function(p1)
 		local _ = nil
 		
 		if p3.isCompletedTurn then
-			local var16, var17 = p1.recordCompletedTurn(t_3)
-			var14 = var16
-			var15 = var17
+			local var18, var19 = p1.recordCompletedTurn(t_3)
+			var16 = var18
+			var17 = var19
 		else
-			local var18, var19 = p1.recordPublish(t_3)
-			var14 = var18
-			var15 = var19
+			local var20, var21 = p1.recordPublish(t_3)
+			var16 = var20
+			var17 = var21
 		end
-		if var15 then
+		if var17 then
 			var3(function(p4)
 				return p4 + 1
 			end)
 		end
-		if var14 or var15 then
+		if var16 or var17 then
 			local id = p3.id
 			
 			if t[id] == nil then return end
-			local var20 = t_2[id]
+			local var22 = t_2[id]
 			
-			if var20 ~= nil then
+			if var22 ~= nil then
 				t_2[id] = nil
-				var20()
+				var22()
 			end
 			t[id] = nil
 			local index = table.find(t_1, id)
@@ -318,58 +332,58 @@ return function(p1)
 			p3.storagePersistenceAttempts += 1
 			
 			if p3.storagePersistenceAttempts < 3 then
-				var10()
+				var12()
 			end
 		end
 	end
 	
 	local _ = function(p3)
-		-- upvalues: var10 (write)
+		-- upvalues: var12 (write)
 		p3.isVerifyingAudience = false
 		p3.audienceVerificationAttempts += 1
 		
 		if p3.audienceVerificationAttempts < 3 then
-			var10()
+			var12()
 		end
 	end
 	
 	local function awaitEligibility(p3, p4)
-		-- upvalues: p1 (ref), var5 (write), t (ref), t_2 (ref), persistEvent (ref)
+		-- upvalues: p1 (ref), var7 (write), t (ref), t_2 (ref), persistEvent (ref)
 		if p1 == nil then return end
 		p3.isVerifyingAudience = false
 		
 		if p3.isAwaitingEligibility then return end
 		p3.isAwaitingEligibility = true
-		local var14 = nil
-		local var15 = false
-		local var16 = p1.observeEligibility(p3.universeId, function()
-			-- upvalues: var5 (copy), var5 (ref), t (copy), p3 (ref), p1 (copy), var14 (write), t_2 (copy), var15 (write), p4 (ref), persistEvent (copy)
-			if var5 ~= var5 or t[p3.id] ~= p3 then return end
+		local var16 = nil
+		local var17 = false
+		local var18 = p1.observeEligibility(p3.universeId, function()
+			-- upvalues: var7 (copy), var7 (ref), t (copy), p3 (ref), p1 (copy), var16 (write), t_2 (copy), var17 (write), p4 (ref), persistEvent (copy)
+			if var7 ~= var7 or t[p3.id] ~= p3 then return end
 			local eligibility = p1.getEligibility(p3.universeId)
 			
 			if not eligibility.isResolved then return end
 			p3.isAwaitingEligibility = false
 			
-			if var14 == nil then
-				var15 = true
+			if var16 == nil then
+				var17 = true
 			else
 				local id = p3.id
-				local var17 = t_2[id]
+				local var19 = t_2[id]
 				
-				if var17 ~= nil then
+				if var19 ~= nil then
 					t_2[id] = nil
-					var17()
+					var19()
 				end
 			end
 			p3.isEligiblePublish = p1.getAudience(p4) == p1.publicAudience and (eligibility.isEligible and eligibility.freePromotionsRemaining > 0)
 			persistEvent(p3)
 		end)
-		var14 = var16
-		t_2[p3.id] = var16
+		var16 = var18
+		t_2[p3.id] = var18
 	end
 	
-	var6 = function(p3)
-		-- upvalues: p1 (ref), t (ref), persistEvent (ref), var10 (write), var5 (write), awaitEligibility (ref)
+	var8 = function(p3)
+		-- upvalues: p1 (ref), t (ref), persistEvent (ref), var12 (write), var7 (write), awaitEligibility (ref)
 		if p1 == nil or t[p3.id] ~= p3 then return end
 		if not p3.requiresAudienceVerification or p3.isEligiblePublish ~= nil then
 			persistEvent(p3)
@@ -381,8 +395,8 @@ return function(p1)
 		
 		if ok and status ~= nil then
 			status:andThen(function(p4)
-				-- upvalues: var5 (copy), var5 (ref), t (copy), p3 (ref), p1 (copy), awaitEligibility (copy), persistEvent (copy)
-				if var5 ~= var5 or t[p3.id] ~= p3 then return end
+				-- upvalues: var7 (copy), var7 (ref), t (copy), p3 (ref), p1 (copy), awaitEligibility (copy), persistEvent (copy)
+				if var7 ~= var7 or t[p3.id] ~= p3 then return end
 				local eligibility = p1.getEligibility(p3.universeId)
 				
 				if eligibility.isResolved then
@@ -394,13 +408,13 @@ return function(p1)
 				end
 				awaitEligibility(p3, p4)
 			end, function()
-				-- upvalues: var5 (copy), var5 (ref), t (copy), p3 (ref), var10 (copy)
-				if var5 ~= var5 or t[p3.id] ~= p3 then return end
+				-- upvalues: var7 (copy), var7 (ref), t (copy), p3 (ref), var12 (copy)
+				if var7 ~= var7 or t[p3.id] ~= p3 then return end
 				p3.isVerifyingAudience = false
 				p3.audienceVerificationAttempts += 1
 				
 				if p3.audienceVerificationAttempts < 3 then
-					var10()
+					var12()
 				end
 			end)
 			
@@ -410,7 +424,7 @@ return function(p1)
 		p3.audienceVerificationAttempts += 1
 		
 		if p3.audienceVerificationAttempts < 3 then
-			var10()
+			var12()
 		end
 	end
 	
@@ -422,11 +436,11 @@ return function(p1)
 			table.insert(t, i)
 		end
 		for i_1, v in t do
-			local var14 = t_2[v]
+			local var16 = t_2[v]
 			
-			if var14 ~= nil then
+			if var16 ~= nil then
 				t_2[v] = nil
-				var14()
+				var16()
 			end
 		end
 	end
@@ -434,76 +448,43 @@ return function(p1)
 	return {
 		getAdCampaignCard = if fFlagBuildAgentAdCampaignCardModule then function(p3, p4)
 			-- upvalues: p1 (ref)
-			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
+			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
 			
-			return if var15 == nil then { isAvailable = false, isPersisted = false } else var15.get(p3, p4)
+			return if var17 == nil then { isAvailable = false, isPersisted = false } else var17.get(p3, p4)
 		end else nil,
 		listAdCampaignCards = if fFlagBuildAgentAdCampaignCardModule then function(p3)
 			-- upvalues: p1 (ref)
-			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
+			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
 			
-			return if var15 == nil then { isAvailable = false, records = {} } else var15.list(p3)
+			return if var17 == nil then { isAvailable = false, records = {} } else var17.list(p3)
 		end else nil,
-		recordAdCampaignCreateStarted = if fFlagBuildAgentAdCampaignCardModule then function(p3)
+		recordAdCampaignCreatedReceipt = if fFlagBuildAgentAdCampaignCardModule then function(p3)
 			-- upvalues: p1 (ref), recordCardMutation (ref)
-			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
+			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
 			
-			if var15 == nil then
+			if var17 == nil then
 				return false, false
 			end
-			local var16 = var15.hasPendingWrites()
-			local var17, var18 = var15.start(p3)
+			local var18 = var17.hasPendingWrites()
+			local var19, var20 = var17.confirm(p3)
 			
-			return recordCardMutation(var17, var18, var16)
-		end else nil,
-		recordAdCampaignCreateProcessing = if fFlagBuildAgentAdCampaignCardModule then function(p3, p4, p5)
-			-- upvalues: p1 (ref), recordCardMutation (ref)
-			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
-			
-			if var15 == nil then
-				return false, false
-			end
-			local var16 = var15.hasPendingWrites()
-			local var17, var18 = var15.processing(p3, p4, p5)
-			
-			return recordCardMutation(var17, var18, var16)
-		end else nil,
-		recordAdCampaignCreated = if fFlagBuildAgentAdCampaignCardModule then function(p3, p4, p5, p6, p7)
-			-- upvalues: p1 (ref), recordCardMutation (ref)
-			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
-			
-			if var15 == nil then
-				return false, false
-			end
-			local var16 = var15.hasPendingWrites()
-			local var17, var18 = var15.created(p3, p4, p5, p6, p7)
-			
-			return recordCardMutation(var17, var18, var16)
-		end else nil,
-		recordAdCampaignCreateFailure = if fFlagBuildAgentAdCampaignCardModule then function(p3, p4, p5, p6, p7, p8)
-			-- upvalues: p1 (ref), recordCardMutation (ref)
-			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
-			
-			if var15 == nil then
-				return false, false
-			end
-			local var16 = var15.hasPendingWrites()
-			local var17, var18 = var15.fail(p3, p4, p5, p6, p7, p8)
-			
-			return recordCardMutation(var17, var18, var16)
+			return recordCardMutation(var19, var20, var18)
 		end else nil,
 		retryAdCampaignCardWrites = if fFlagBuildAgentAdCampaignCardModule then function()
-			-- upvalues: p1 (ref), var3 (ref)
-			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
+			-- upvalues: p1 (ref), var5 (ref), var3 (ref)
+			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
 			
-			if var15 == nil then
+			if var17 == nil then
 				return false
 			end
-			local var16 = var15.hasPendingWrites()
+			local var18 = var17.hasPendingWrites()
 			
-			if not var15.retryWrites() then
+			if not var17.retryWrites() then
 				return false
-			elseif var16 then
+			elseif var18 then
+				var5(function(p3)
+					return p3 + 1
+				end)
 				var3(function(p3)
 					return p3 + 1
 				end)
@@ -511,53 +492,57 @@ return function(p1)
 			return true
 		end else nil,
 		pruneAdCampaignCards = if fFlagBuildAgentAdCampaignCardModule then function(p3)
-			-- upvalues: p1 (ref), var3 (ref)
-			local var15 = if p1 == nil then nil else p1.getAdCampaignCardStorage()
+			-- upvalues: p1 (ref), var5 (ref), var3 (ref)
+			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
 			
-			if var15 == nil then
+			if var17 == nil then
 				return false, false
 			end
-			local var16, var17 = var15.prune(p3)
+			local var18, var19 = var17.prune(p3)
 			
-			if var17 then
+			if var19 then
+				var5(function(p4)
+					return p4 + 1
+				end)
 				var3(function(p4)
 					return p4 + 1
 				end)
 			end
-			return var16, var17
+			return var18, var19
 		end else nil,
 		getRevision = var2,
+		getAdCampaignRevision = var4,
 		reportAssistantTurnCompleted = function(p3)
-			-- upvalues: p1 (ref), chatTypesModule (copy), creatorAgentChatModule (copy), retainPending (ref), var6 (write)
+			-- upvalues: p1 (ref), chatTypesModule (copy), creatorAgentChatModule (copy), retainPending (ref), var8 (write)
 			if p1 == nil or p3.universeId == 0 or p1.isDismissedPermanently(p3.universeId) then return end
-			local var15 = chatTypesModule.makeAssistantTurnAnchorKey(p3.sessionId, p3.latestSequenceId)
+			local var17 = chatTypesModule.makeAssistantTurnAnchorKey(p3.sessionId, p3.latestSequenceId)
 			
-			if var15 == nil then
+			if var17 == nil then
 				return
 			end
-			local var16 = creatorAgentChatModule.PublishToolUtils.getLatestSuccessfulResult(p3.turnState, { parseDirectText = true }) ~= nil
-			var6(retainPending({
+			local var18 = creatorAgentChatModule.PublishToolUtils.getLatestSuccessfulResult(p3.turnState, { parseDirectText = true }) ~= nil
+			var8(retainPending({
 				isCompletedTurn = true,
 				isVerifyingAudience = false,
 				isAwaitingEligibility = false,
 				audienceVerificationAttempts = 0,
 				storagePersistenceAttempts = 0,
-				id = `chat:{p3.universeId}:{var15}`,
+				id = `chat:{p3.universeId}:{var17}`,
 				universeId = p3.universeId,
 				sessionId = if p3.sessionId == "" then nil else p3.sessionId,
-				afterMessageKey = var15,
-				isEligiblePublish = if var16 then nil else false,
-				requiresAudienceVerification = var16
+				afterMessageKey = var17,
+				isEligiblePublish = if var18 then nil else false,
+				requiresAudienceVerification = var18
 			}))
 		end,
 		reportMenuPublish = function(p3, p4, p5, p6)
-			-- upvalues: p1 (ref), retainPending (ref), var6 (write)
+			-- upvalues: p1 (ref), retainPending (ref), var8 (write)
 			if p1 == nil or p3 == 0 or (p5 == "" or p1.isDismissedPermanently(p3)) then
 				return
 			end
 			local eligibility = p1.getEligibility(p3)
-			local var15 = p6 and not eligibility.isResolved
-			var6(retainPending({
+			local var17 = p6 and not eligibility.isResolved
+			var8(retainPending({
 				afterMessageKey = nil,
 				isCompletedTurn = false,
 				isVerifyingAudience = false,
@@ -567,23 +552,43 @@ return function(p1)
 				id = `menu:{p3}:{p5}`,
 				universeId = p3,
 				sessionId = if p4 == "" then nil else p4,
-				isEligiblePublish = if var15 then nil else p6 and (eligibility.isEligible and eligibility.freePromotionsRemaining > 0),
-				requiresAudienceVerification = var15
+				isEligiblePublish = if var17 then nil else p6 and (eligibility.isEligible and eligibility.freePromotionsRemaining > 0),
+				requiresAudienceVerification = var17
 			}))
 		end,
 		retryStorageRead = function()
-			-- upvalues: p1 (ref), var3 (ref), t_1 (ref), t (ref), var6 (write)
-			if p1 ~= nil and p1.retryStorageRead() then
-				var3(function(p3)
-					return p3 + 1
-				end)
+			-- upvalues: fFlagBuildAgentAdCampaignCardModule (copy), p1 (ref), var5 (ref), var3 (ref), t_1 (ref), t (ref), var8 (write)
+			if fFlagBuildAgentAdCampaignCardModule then
+				local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
 				
+				if var17 ~= nil and var17.hasPendingWrites() and var17.retryWrites() then
+					var5(function(p3)
+						return p3 + 1
+					end)
+					var3(function(p3)
+						return p3 + 1
+					end)
+				end
+			end
+			if p1 ~= nil and p1.retryStorageRead() then
+				if fFlagBuildAgentAdCampaignCardModule then
+					var5(function(p3)
+						return p3 + 1
+					end)
+					var3(function(p3)
+						return p3 + 1
+					end)
+				else
+					var3(function(p3)
+						return p3 + 1
+					end)
+				end
 				for i, v in table.clone(t_1) do
-					local var15 = t[v]
+					local var18 = t[v]
 					
-					if var15 ~= nil then
-						var15.storagePersistenceAttempts = 0
-						var6(var15)
+					if var18 ~= nil then
+						var18.storagePersistenceAttempts = 0
+						var8(var18)
 					end
 				end
 			end
@@ -602,37 +607,37 @@ return function(p1)
 			if p1 == nil then
 				return false
 			end
-			local var16, var17 = p1.pruneAnchors(p3, p4, p5)
+			local var19, var20 = p1.pruneAnchors(p3, p4, p5)
 			
-			if var17 then
+			if var20 then
 				var3(function(p6)
 					return p6 + 1
 				end)
 			end
-			return var16
+			return var19
 		end,
 		markAnchorImpressed = function(p3, p4, p5)
 			-- upvalues: p1 (ref), var3 (ref)
 			if p1 == nil then
 				return false
 			end
-			local var16 = p1.markAnchorImpressed(p3, p4, p5)
+			local var19 = p1.markAnchorImpressed(p3, p4, p5)
 			
-			if var16 then
+			if var19 then
 				var3(function(p6)
 					return p6 + 1
 				end)
 			end
-			return var16
+			return var19
 		end,
 		dismissPermanently = function()
-			-- upvalues: p1 (ref), var5 (write), var4 (write), disposeAllEligibilitySubscriptions (ref), t (ref), t_1 (ref), var3 (ref)
+			-- upvalues: p1 (ref), var7 (write), var6 (write), disposeAllEligibilitySubscriptions (ref), t (ref), t_1 (ref), var3 (ref)
 			if p1 ~= nil then
-				var5 += 1
+				var7 += 1
 				
-				if var4 ~= nil then
-					p1.cancelRetry(var4)
-					var4 = nil
+				if var6 ~= nil then
+					p1.cancelRetry(var6)
+					var6 = nil
 				end
 				disposeAllEligibilitySubscriptions()
 				table.clear(t)
@@ -644,17 +649,18 @@ return function(p1)
 			end
 		end,
 		reset = function()
-			-- upvalues: var5 (write), p1 (ref), var4 (write), disposeAllEligibilitySubscriptions (ref), t (ref), t_1 (ref), var3 (ref)
-			var5 += 1
+			-- upvalues: var7 (write), p1 (ref), var6 (write), disposeAllEligibilitySubscriptions (ref), t (ref), t_1 (ref), var3 (ref), var5 (ref)
+			var7 += 1
 			
-			if p1 ~= nil and var4 ~= nil then
-				p1.cancelRetry(var4)
+			if p1 ~= nil and var6 ~= nil then
+				p1.cancelRetry(var6)
 			end
-			var4 = nil
+			var6 = nil
 			disposeAllEligibilitySubscriptions()
 			table.clear(t)
 			table.clear(t_1)
 			var3(0)
+			var5(0)
 		end
 	}
 end

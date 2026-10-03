@@ -23,16 +23,17 @@ local fFlagBuildExperienceLibrary = require(parent.SharedFlags).FFlagBuildExperi
 local fFlagBuildExperienceAnalytics = require(parent.SharedFlags).FFlagBuildExperienceAnalytics
 local fFlagBuildAdUpsellModule = require(buildExperience.Flags.FFlagBuildAdUpsell)
 local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local var1 = if fFlagBuildAgentAdCampaignCardModule then require(script.Parent.useAgentAdCampaignChatViewModel) else nil
 local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
-local var1 = if fFlagBuildAdUpsellModule then require(buildExperience.Stores.GetAdUpsellEventStore) else nil
-local var2 = if fFlagBuildAdUpsellModule or fFlagEnableBuildAdPromotionModule then require(buildExperience.utils.GameConfigurationLabels) else nil
-local var3 = if fFlagBuildAdUpsellModule then require(script.Parent.useAdUpsellChatViewModel) else nil
+local var2 = if fFlagBuildAdUpsellModule then require(buildExperience.Stores.GetAdUpsellEventStore) else nil
+local var3 = if fFlagBuildAdUpsellModule or fFlagEnableBuildAdPromotionModule then require(buildExperience.utils.GameConfigurationLabels) else nil
+local var4 = if fFlagBuildAdUpsellModule then require(script.Parent.useAdUpsellChatViewModel) else nil
 local fFlagBuildExperienceFocusNewGameComposerModule = require(buildExperience.Flags.FFlagBuildExperienceFocusNewGameComposer)
 local fFlagBuildEventsUpdate1Module = require(buildExperience.Flags.FFlagBuildEventsUpdate1)
 local fFlagBuildExperienceDontAskAgainPushUpsellModule = require(buildExperience.Flags.FFlagBuildExperienceDontAskAgainPushUpsell)
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local buildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKey")
-local var4 = if buildAppStorageKeyEngineFeature then require(buildExperience.Storage.BuildAppStorage) else nil
+local var5 = if buildAppStorageKeyEngineFeature then require(buildExperience.Storage.BuildAppStorage) else nil
 local default = require(parent.LinkingProtocol).LinkingProtocol.default
 local permissionsProtocol = require(parent.PermissionsProtocol).PermissionsProtocol
 local useTokens = foundationModule.Hooks.useTokens
@@ -57,6 +58,23 @@ local t_1 = {
 	onAdUpsellImpression = function() end,
 	onAdCampaignSheetClose = function() end,
 	onAdCampaignSheetCreate = function() end
+}
+local t_2 = {
+	isSheetOpen = false,
+	isCreatePending = false,
+	hasCreateError = false,
+	createErrorKind = nil,
+	campaignOffers = nil,
+	runStartTimeMs = nil,
+	onOfferSelected = function() end,
+	isCreateDisabled = function()
+		return true
+	end,
+	getCardState = function()
+		return nil
+	end,
+	onSheetClose = function() end,
+	onSheetCreate = function() end
 }
 
 local function _()
@@ -91,26 +109,26 @@ local function getResolvedSessionId(p1, p2, p3)
 		return p2
 	end
 	for i = #p1, 1, -1 do
-		local var5 = p1[i]
+		local var6 = p1[i]
 		
-		if var5.kind ~= "assistant_turn" or var5.sessionId == nil or p3 ~= nil and var5.universeId ~= p3 then
+		if var6.kind ~= "assistant_turn" or var6.sessionId == nil or p3 ~= nil and var6.universeId ~= p3 then
 			continue
 		end
-		return var5.sessionId
+		return var6.sessionId
 	end
 	return nil
 end
 
 local _ = function(p4, p5)
-	local var6 = if p5 ~= nil then nil else p5.name
+	local var7 = if p5 ~= nil then nil else p5.name
 	
-	return if typeof(var6) == "string" and var6 ~= "" then var6 else p4
+	return if typeof(var7) == "string" and var7 ~= "" then var7 else p4
 end
 
 return function(_)
-	-- upvalues: useTokens (ref), useUniverseSummary (ref), getBuildOverflowMenuStoreModule (ref), getCreatorAgentResumeStoreModule (ref), reactModule (ref), fFlagBuildExperienceDontAskAgainPushUpsellModule (ref), buildAppStorageKeyEngineFeature (ref), var4 (ref), userInputService (ref), guiService (ref), permissionsProtocol (ref), messageBusService (ref), realtimeMessageId (ref), default (ref), creatorAgentChatModule (ref), fFlagBuildAdUpsellModule (ref), var1 (ref), useChatSessionCoreModule (ref), fFlagBuildExperienceFocusNewGameComposerModule (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), useBuildPromptDraftModule (ref), fFlagBuildExperienceManageDevProductModule (ref), useChatPlaytestFooterModule (ref), universeConfigurationModule (ref), fFlagEnableBuildAdPromotionModule (ref), useCreatorCreditChatUpsellViewModelModule (ref), var2 (ref), fFlagBuildExperienceLibrary (ref), getResolvedSessionId (ref), var3 (ref), t_1 (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), t (ref), fFlagBuildAgentAdCampaignCardModule (ref)
+	-- upvalues: useTokens (ref), useUniverseSummary (ref), getBuildOverflowMenuStoreModule (ref), getCreatorAgentResumeStoreModule (ref), reactModule (ref), fFlagBuildExperienceDontAskAgainPushUpsellModule (ref), buildAppStorageKeyEngineFeature (ref), var5 (ref), userInputService (ref), guiService (ref), permissionsProtocol (ref), messageBusService (ref), realtimeMessageId (ref), default (ref), creatorAgentChatModule (ref), fFlagBuildAdUpsellModule (ref), var2 (ref), useChatSessionCoreModule (ref), fFlagBuildExperienceFocusNewGameComposerModule (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), useBuildPromptDraftModule (ref), fFlagBuildExperienceManageDevProductModule (ref), useChatPlaytestFooterModule (ref), universeConfigurationModule (ref), fFlagEnableBuildAdPromotionModule (ref), useCreatorCreditChatUpsellViewModelModule (ref), var3 (ref), fFlagBuildExperienceLibrary (ref), getResolvedSessionId (ref), var4 (ref), t_1 (ref), fFlagBuildAgentAdCampaignCardModule (ref), var1 (ref), t_2 (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), t (ref)
 -- FATAL: Failed to generate AST for `useBuildChatPageViewModel` function:
-runtime : [KeyError] :11990: 281
+runtime : [KeyError] :11990: 282
 Traceback:
 	runtime : [lunaux]:11990 function decompile_function
 	runtime : [lunaux]:1933 function normalize_cfg

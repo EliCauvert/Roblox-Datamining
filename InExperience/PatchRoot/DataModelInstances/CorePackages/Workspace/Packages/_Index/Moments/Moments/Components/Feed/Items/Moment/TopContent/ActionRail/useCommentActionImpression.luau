@@ -5,15 +5,18 @@ local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local momentsCommonModule = require(parent.MomentsCommon)
 local sharedFlagsModule = require(parent.SharedFlags)
+local momentsGetMomentsCommentsStoreModule = require(parent.DataHydration.MomentsGetMomentsCommentsStore)
 local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
 local fFlagMomentsCommentsIxpEnabled = sharedFlagsModule.FFlagMomentsCommentsIxpEnabled
 local useVerticalPager = require(moments.Components.VerticalPager).useVerticalPager
 local usePagerItem = require(moments.Components.VerticalPager).usePagerItem
 local useFeedOptional = require(moments.Components.Feed.FeedContext).useFeedOptional
 local fStringMomentsCommentsIxpLayerModule = require(moments.Flags.FStringMomentsCommentsIxpLayer)
+local fFlagMomentsCommentsCountAnalyticsModule = require(moments.Flags.FFlagMomentsCommentsCountAnalytics)
+local makeCommentCountFieldsModule = require(moments.Analytics.makeCommentCountFields)
 
 return function(p1)
-	-- upvalues: useVerticalPager (ref), usePagerItem (ref), useFeedOptional (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), fFlagMomentsComments (ref), momentsCommonModule (ref), fFlagMomentsCommentsIxpEnabled (ref), fStringMomentsCommentsIxpLayerModule (ref)
+	-- upvalues: useVerticalPager (ref), usePagerItem (ref), useFeedOptional (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), fFlagMomentsComments (ref), fFlagMomentsCommentsCountAnalyticsModule (ref), makeCommentCountFieldsModule (ref), momentsGetMomentsCommentsStoreModule (ref), momentsCommonModule (ref), fFlagMomentsCommentsIxpEnabled (ref), fStringMomentsCommentsIxpLayerModule (ref)
 	local var1 = useVerticalPager()
 	local var2 = useFeedOptional()
 	local item = usePagerItem().item
@@ -27,7 +30,7 @@ return function(p1)
 	local var4 = p1 and (var3 and (var2 ~= nil and var2.isActiveFeed))
 	local var5 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var4 (ref), item (ref), fFlagMomentsComments (copy), momentsCommonModule (copy), fFlagMomentsCommentsIxpEnabled (copy), fStringMomentsCommentsIxpLayerModule (copy)
+		-- upvalues: var5 (ref), var4 (ref), item (ref), fFlagMomentsComments (copy), fFlagMomentsCommentsCountAnalyticsModule (copy), makeCommentCountFieldsModule (copy), momentsGetMomentsCommentsStoreModule (copy), momentsCommonModule (copy), fFlagMomentsCommentsIxpEnabled (copy), fStringMomentsCommentsIxpLayerModule (copy)
 		local current = var5.current
 		var5.current = var4
 		
@@ -36,7 +39,9 @@ return function(p1)
 		local var6 = if recommendationMetadata ~= nil then nil else recommendationMetadata.feedItemId
 		
 		if fFlagMomentsComments and var6 ~= nil and var6 ~= "" then
-			momentsCommonModule.Analytics.fireAnalyticsEvent(momentsCommonModule.Analytics.EventNames.MomentCommentActionButtonImpression, { feedItemId = var6 })
+			local var7 = if fFlagMomentsCommentsCountAnalyticsModule then makeCommentCountFieldsModule(momentsGetMomentsCommentsStoreModule(false).getCachedMomentComments(var6).data(false)) else {}
+			var7.feedItemId = var6
+			momentsCommonModule.Analytics.fireAnalyticsEvent(momentsCommonModule.Analytics.EventNames.MomentCommentActionButtonImpression, var7)
 		end
 		if fFlagMomentsCommentsIxpEnabled then
 			momentsCommonModule.Utils.logMomentsLayerExposure(fStringMomentsCommentsIxpLayerModule)

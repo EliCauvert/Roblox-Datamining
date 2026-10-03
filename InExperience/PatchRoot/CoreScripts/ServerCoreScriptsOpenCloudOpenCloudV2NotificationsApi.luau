@@ -1,4 +1,5 @@
-﻿local contentProviderService = game:GetService("ContentProvider")
+﻿local openCloudNotificationScheduledTimeEnabled = game:DefineFastFlag("OpenCloudNotificationScheduledTimeEnabled", false)
+local contentProviderService = game:GetService("ContentProvider")
 local httpService = game:GetService("HttpService")
 local openCloudService = game:GetService("OpenCloudService")
 local runService = game:GetService("RunService")
@@ -46,6 +47,7 @@ function verifySource(p1)
 end
 
 function verifyPayload(p1)
+	-- upvalues: openCloudNotificationScheduledTimeEnabled (ref)
 	if p1.type ~= nil then
 		local var1 = verifyString(p1.type)
 		
@@ -69,7 +71,13 @@ function verifyPayload(p1)
 					elseif p1.parameters ~= nil then
 						local var5 = verifyParameters(p1.parameters)
 						
-						return if var5 == nil then nil else var5
+						if var5 ~= nil then
+							return var5
+						elseif openCloudNotificationScheduledTimeEnabled and p1.scheduleTime ~= nil then
+							local var6 = verifyString(p1.scheduleTime)
+							
+							return if var6 == nil then nil else var6
+						end
 					end
 				end
 			end

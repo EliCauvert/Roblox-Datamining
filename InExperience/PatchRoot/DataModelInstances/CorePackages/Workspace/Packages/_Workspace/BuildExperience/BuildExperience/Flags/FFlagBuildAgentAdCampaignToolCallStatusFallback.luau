@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags).FFlagBuildAgentAdCampaignToolCallStatusFallback and require(script.Parent.FFlagBuildAgentAdCampaignCard)

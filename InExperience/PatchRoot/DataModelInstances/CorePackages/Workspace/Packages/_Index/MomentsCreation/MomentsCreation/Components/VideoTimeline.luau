@@ -47,7 +47,7 @@ return function(p1)
 			sampleVideoFramesModule(var8, var3, var7, if var4 ~= nil then 0 else var4.startTime)
 		end
 	end, { p1.capture, var3, var4 })
-	local var8 = useSignalBinding(useMemo(function()
+	local var8 = if p1.playheadPosition ~= nil then useSignalBinding(useMemo(function()
 		-- upvalues: signalsModule (copy), fFlagMomentsScrubberSeekOnReleaseModule (copy), var5 (ref), playback (ref)
 		return signalsModule.createComputed(function(p2)
 			-- upvalues: fFlagMomentsScrubberSeekOnReleaseModule (copy), var5 (copy), playback (copy)
@@ -62,7 +62,9 @@ return function(p1)
 			
 			return if duration <= 0 then 0 else math.clamp(playback.getPosition(p2) / duration, 0, 1)
 		end)
-	end, { playback, var5.getDragFraction }))
+	end, { playback, var5.getDragFraction })):map(function(p2)
+		return UDim2.fromScale(p2, 0.5)
+	end) else UDim2.fromScale(if var3 > 0 then math.clamp(p1.playheadPosition / var3, 0, 1) else 0, 0.5)
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -113,9 +115,7 @@ return function(p1)
 		Playhead = reactModule.createElement(view, {
 			ZIndex = 3,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = var8:map(function(p2)
-				return UDim2.fromScale(p2, 0.5)
-			end),
+			Position = var8,
 			Size = UDim2.new(0, 4, 1, 20),
 			cornerRadius = UDim.new(0, 2),
 			backgroundStyle = var1.Color.System.Contrast
@@ -124,9 +124,7 @@ return function(p1)
 			BackgroundTransparency = 1,
 			ZIndex = 3,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = var8:map(function(p2)
-				return UDim2.fromScale(p2, 0.5)
-			end),
+			Position = var8,
 			Size = UDim2.new(0, 24, 1, 20)
 		}, {
 			DragDetector = reactModule.createElement("UIDragDetector", {

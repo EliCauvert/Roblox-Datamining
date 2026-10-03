@@ -108,6 +108,7 @@ Authentication.SignUp.Description.Try,试一试
 Authentication.SignUp.Description.UsernameChanged,一切就绪！你的帐户已准备就绪并已连接至 {platform}。立即重生即可在游戏中看到更新后的用户名，否则更新将在下次重生时应用。
 Authentication.SignUp.Description.UsernameUnchanged,大功告成！你的帐户已准备就绪并已连接至 {platform}。与朋友聊天，畅玩数百万款 Roblox 游戏。
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"您的 Roblox 帐户将链接到您的访问{platform}的账号。你可以随时在“设置”页面取消关联。在能够链接到另一个帐户之前,可能会有一个访问{platform}的账号。点按 {ctaButton} 即表示你同意《使用条款》（包括其中的仲裁条款），并确认已阅读《隐私政策》。"
+Authentication.SignUp.Header.CloseWithoutFinishing,
 Authentication.SignUp.Header.OneLastThing,最后一步
 Authentication.SignUp.Header.SetUpYourRobloxAccount,设置你的 Roblox 帐户
 Authentication.SignUp.Heading.CountryCodeSelector,选择国家/地区
@@ -151,6 +152,7 @@ Authentication.SignUp.Response.PasswordComplexity,请创建一个更复杂的密
 Authentication.SignUp.Response.UsernameMustBeSetFirst,必须先设定用户名。
 Authentication.SignUp.Subtitle.AddYourBirthday,添加你的生日，以创建 Roblox 帐户。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,完成设置后，你的进度会保留。
+Authentication.SignUp.Subtitle.YoureAlmostThere,
 Authentication.TwoStepVerification.Action.GoToSecurity,设置
 Authentication.TwoStepVerification.Label.TwoStepRequired,若要继续交易需要进行两步验证。请前往设置 > 安全来完成两步验证。
 Authentication.TwoStepVerification.Response.TooManyAttempts,尝试次数过多。请稍后重试。
@@ -2021,11 +2023,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,访问次数
 Feature.Build.Content.NewGame,新游戏
 Feature.Build.Description.ActivateDeveloperProduct,将开发者产品 {PRODUCT_ID} 上架销售。
-Feature.Build.Description.AdActive,你的广告正在投放。查看它触达的玩家数量。
 Feature.Build.Description.AdCampaignModerationReview,所有广告活动均由 Roblox 审核团队进行审核。此过程最多可能需要 24 小时。
 Feature.Build.Description.AdCampaignSheetRunDates,投放时间 {startDate} – {endDate}
 Feature.Build.Description.AdComplete,你的广告已投放完毕。请查看结果。
-Feature.Build.Description.AdInReview,你的广告正在审核中，定于 {startDate}至 {endDate}投放。
 Feature.Build.Description.AdModerationReview,所有广告均由 Roblox 审核团队审核，最长可能需要 24 小时。
 Feature.Build.Description.AdvertisingAgreement,选择“创建”，即表示你同意 {advertisingTermsStart}Roblox 广告条款{advertisingTermsEnd}和{advertisingStandardsStart}广告准则{advertisingStandardsEnd}。
 Feature.Build.Description.ArchiveRemoval,如果你将此游戏存档，它将从 Build 中移除。你仍可在创作者中心或 Roblox Studio 中访问和恢复此游戏。
@@ -2075,6 +2075,7 @@ Feature.Build.Description.ShopButton,添加购物入口
 Feature.Build.Description.ShortAdCampaign,快速了解玩家对你游戏的看法。
 Feature.Build.Description.StopBuild,此请求仍在进行中。如果现在停止，请求将无法完成，你需要再次发送。
 Feature.Build.Description.UpdateDeveloperProduct,更新开发者产品 {PRODUCT_ID}。
+Feature.Build.Description.UseAdCreditsInAdsManager,
 Feature.Build.Error.AdForbidden,你的帐户或游戏当前无法投放广告。如果你认为这是个错误，请联系技术支持。
 Feature.Build.Error.AdInsufficientFunds,你的 Robux 不足，无法创建此广告。请充值并重试。
 Feature.Build.Error.AdInternalError,
@@ -2354,7 +2355,6 @@ Feature.Build.Title.AdActive,广告活动已启动
 Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告活动
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
 Feature.Build.Title.AdComplete,广告已完成
-Feature.Build.Title.AdCreated,广告已创建
 Feature.Build.Title.AdCreatedPeriod,广告已创建。
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,添加图片
@@ -2399,6 +2399,7 @@ Feature.Build.Title.RevertLastChange,是否还原上次更改？
 Feature.Build.Title.StopBuild,停止构建？
 Feature.Build.Title.Tasks,任务
 Feature.Build.Title.TurnActivity,轮次活动
+Feature.Build.Title.UseYourAdCredits,
 Feature.Build.Title.VersionHistory,版本历史记录
 Feature.Build.Title.VersionInfo,版本信息
 Feature.Build.Title.VersionNumber,版本 {VERSION}
@@ -3478,6 +3479,7 @@ Feature.Groups.Notification.FailedToFollow,关注个人资料失败。请稍后�
 Feature.Groups.Notification.FailedToJoin,加入社区失败。请稍后重试。
 Feature.Groups.Notification.FailedToLoad,加载社区失败。请稍后重试。
 Feature.Groups.Notification.Following,正在关注“{groupName}”。
+Feature.Groups.Notification.GroupDeactivated,此社区已被停用。
 Feature.Groups.Notification.GroupDoesNotExist,社区不存在。
 Feature.Groups.Notification.GroupModerated,此社区目前处于审核状态。
 Feature.Groups.Notification.JoinRequestPending,已请求加入“{groupName}”。
@@ -3621,7 +3623,7 @@ Feature.Moments.Label.All,
 Feature.Moments.Label.AllowComments,
 Feature.Moments.Label.AttemptingJoinExperience,正在尝试加入“{placeName}”。可能需要几秒钟时间。
 Feature.Moments.Label.CaptureLibrary,你的截图库
-Feature.Moments.Label.ChooseVoice,
+Feature.Moments.Label.ChooseVoice,选择语音
 Feature.Moments.Label.CommentAuthorFallback,
 Feature.Moments.Label.CommentAuthorUnknown,
 Feature.Moments.Label.CommentDeleteFailed,
@@ -4078,8 +4080,10 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具与
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,前 {trialUnlockDays} 天享道具与虚拟形象九折优惠，之后享八折优惠
 Feature.RobloxSubscription.Description.ExclusiveBenefits,以更少的 Robux 享受更多乐趣。订阅 Roblox Plus。
 Feature.RobloxSubscription.Description.JoinEarly,Plus 订阅用户提前加入
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username}邀请你加入 Plus。购买 Plus 后，你们双方都将获得 {amount} Robux。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"点按\u{201C}{ctaText}\u{201D}，即表示你同意 <a href=""{termsUrl}"">Roblox 订阅条款</a>。系统将每月自动向你收取费用，直至你取消订阅。"
 Feature.RobloxSubscription.Heading.ReferralEntry,分享 Plus，获得 {amount} Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,加入 Plus，获得
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免费私人服务器
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,免费发送 Robux

@@ -2,7 +2,6 @@
 local _ = require(foundation.Components.Types)
 local dialogSizeModule = require(foundation.Enums.DialogSize)
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Providers.Style.Tokens)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
@@ -14,7 +13,7 @@ local t = {
 }
 
 local function variantsFactory(p1)
-	-- upvalues: flagsModule (ref), dialogSizeModule (ref), t (ref)
+	-- upvalues: dialogSizeModule (ref), t (ref)
 	return {
 		common = {
 			backdrop = { backgroundStyle = p1.Color.Common.Backdrop },
@@ -24,12 +23,10 @@ local function variantsFactory(p1)
 			},
 			container = { tag = "col align-x-center align-y-center size-full-full" },
 			inner = {
-				tag = if flagsModule.FoundationDialogBetaUpdate then "shrink-1 size-full-0 auto-y clip bg-surface-100 stroke-default" else "shrink-1 size-full-0 auto-y clip bg-surface-100"
+				tag = "shrink-1 size-full-0 auto-y clip bg-surface-100 stroke-default"
 			},
 			body = { tag = "col size-full auto-y padding-bottom-xlarge" },
-			heroMediaWrapper = {
-				tag = if flagsModule.FoundationDialogBetaUpdate then "position-top-center size-full-full auto-y" else "shrink position-top-center size-full-full auto-y"
-			},
+			heroMediaWrapper = { tag = "position-top-center size-full-full auto-y" },
 			title = { tag = "size-full-0 auto-y" },
 			titleText = {
 				tag = "size-full-0 auto-y text-wrap text-align-x-left content-emphasis"
@@ -46,15 +43,12 @@ local function variantsFactory(p1)
 			[dialogSizeModule.Small] = {
 				shadow = { tag = "padding-large" },
 				inner = {
-					maxWidth = t[dialogSizeModule.Small],
-					tag = if flagsModule.FoundationDialogBetaUpdate then "radius-large" else "radius-medium"
+					tag = "radius-large",
+					maxWidth = t[dialogSizeModule.Small]
 				},
 				body = { tag = "gap-large padding-x-large" },
 				closeAffordance = { offset = p1.Size.Size_300 },
-				heroMedia = {
-					tag = if flagsModule.FoundationDialogBetaUpdate then "radius-top-large" else "radius-top-medium",
-					offsetX = p1.Padding.Large
-				},
+				heroMedia = { tag = "radius-top-large", offsetX = p1.Padding.Large },
 				titleText = { tag = "text-heading-small" },
 				contentText = { tag = "text-body-medium" },
 				actionsLabel = { tag = "padding-top-large" }

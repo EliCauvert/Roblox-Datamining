@@ -1,9 +1,12 @@
-﻿local normalize = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AvatarExperienceCommon).Utils.normalize
+﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local normalize = require(parent.AvatarExperienceCommon).Utils.normalize
 local normalizeNotEmptyString = normalize.normalizeNotEmptyString
 local makeNormalizeTableFn = normalize.makeNormalizeTableFn
 local makeRequired = normalize.makeRequired
 local _ = require(script.Parent.MarketplaceOffersBannerTypes)
 local decodeLuauUnicodeEscapesModule = require(script.Parent.decodeLuauUnicodeEscapes)
+local fFlagAXUpdateOffersEndsUIWithBadge = avatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge
 
 local function normalizeDisplayString(p1)
 	-- upvalues: normalizeNotEmptyString (ref), decodeLuauUnicodeEscapesModule (ref)
@@ -41,7 +44,7 @@ local function _(p1)
 end
 
 local function normalizeOfferRow(p1)
-	-- upvalues: normalizeNotEmptyString (ref), decodeLuauUnicodeEscapesModule (ref), var1 (ref)
+	-- upvalues: normalizeNotEmptyString (ref), decodeLuauUnicodeEscapesModule (ref), fFlagAXUpdateOffersEndsUIWithBadge (ref), var1 (ref)
 	if type(p1) ~= "table" then
 		return nil, `expected offer row to be a table, got {type(p1)}`
 	end
@@ -49,6 +52,7 @@ local function normalizeOfferRow(p1)
 	local var3, _ = normalizeNotEmptyString(p1.localizedText)
 	local var4 = if var3 == nil then nil else decodeLuauUnicodeEscapesModule(var3)
 	local var5 = normalizeNotEmptyString(p1.offerId)
+	local var6 = if fFlagAXUpdateOffersEndsUIWithBadge then normalizeNotEmptyString(p1.expirationTimeInUTC) else nil
 	
 	if not var2 and not var4 and not var5 then
 		return nil, "offer row has no recognized identity fields (icon, localizedText, offerId)"
@@ -64,21 +68,24 @@ local function normalizeOfferRow(p1)
 	if var5 then
 		t.offerId = var5
 	end
-	local var6
-	local var7 = nil
+	if fFlagAXUpdateOffersEndsUIWithBadge and var6 then
+		t.expirationTimeInUTC = var6
+	end
+	local var7
+	local var8 = nil
 	
 	if type(p1.modal) == "table" then
-		var7 = p1.modal
+		var8 = p1.modal
 	elseif normalizeNotEmptyString(p1.modalTitle) ~= nil then
-		var7 = p1
+		var8 = p1
 	end
-	if var7 then
-		local var8 = var1(var7)
-		var6 = if var8 and var8.modalTitle and var8.offerBodyLinkText then var8 else nil
+	if var8 then
+		local var9 = var1(var8)
+		var7 = if var9 and var9.modalTitle and var9.offerBodyLinkText then var9 else nil
 	else
-		var6 = nil
+		var7 = nil
 	end
-	t.modal = var6
+	t.modal = var7
 	
 	return t, nil
 end

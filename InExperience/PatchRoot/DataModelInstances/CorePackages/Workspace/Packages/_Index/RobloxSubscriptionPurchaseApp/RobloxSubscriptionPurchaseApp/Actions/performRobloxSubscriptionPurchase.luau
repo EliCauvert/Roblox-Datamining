@@ -16,14 +16,16 @@ local logRobloxSubscriptionUpsellCounterModule = require(robloxSubscriptionPurch
 local logSubscriptionPurchaseFlowEventModule = require(robloxSubscriptionPurchaseApp.Utils.logSubscriptionPurchaseFlowEvent)
 local fFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagEnableSubscriptionPurchaseFlowEventIngest)
 local fFlagEnableStudioMockPurchaseRobloxSubscriptionModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagEnableStudioMockPurchaseRobloxSubscription)
+local fFlagEnablePlusReferralLandingSheet = require(robloxSubscriptionPurchaseApp.Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
 local fStringBlackbirdWebviewHeaderName = game:DefineFastString("FStringBlackbirdWebviewHeaderName", "Black bird")
+local enableSubscriptionPurchaseReferrerIdEngineFeature = game:GetEngineFeature("EnableSubscriptionPurchaseReferrerId")
 
 local function _(p1)
 	return if p1 == Enum.Platform.IOS then "AppleAppStore" elseif p1 == Enum.Platform.Android then "GooglePlayStore" else "Unknown"
 end
 
 function performRobloxSubscriptionPurchase()
-	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagEnableStudioMockPurchaseRobloxSubscriptionModule (ref), runService (ref), marketplaceService (ref), completeRobloxSubscriptionUpsellFlowModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), userInputService (ref), promptStateModule (ref), webViewServiceWrapperModule (ref), getSubscriptionPurchaseUrlModule (ref), fStringBlackbirdWebviewHeaderName (ref), constantsModule (ref), transitionToErrorModule (ref), errorReasonModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref)
+	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagEnableStudioMockPurchaseRobloxSubscriptionModule (ref), runService (ref), marketplaceService (ref), completeRobloxSubscriptionUpsellFlowModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), userInputService (ref), promptStateModule (ref), webViewServiceWrapperModule (ref), getSubscriptionPurchaseUrlModule (ref), fStringBlackbirdWebviewHeaderName (ref), fFlagEnablePlusReferralLandingSheet (ref), enableSubscriptionPurchaseReferrerIdEngineFeature (ref), constantsModule (ref), transitionToErrorModule (ref), errorReasonModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref)
 	local var1 = robloxSubscriptionStoreModule.get()
 	local robloxSubscriptionProductId = var1.getRobloxSubscriptionProductId()
 	local paymentSessionId = var1.getPaymentSessionId()
@@ -62,8 +64,14 @@ function performRobloxSubscriptionPurchase()
 	var1.setPromptState(promptStateModule.SubscriptionPurchaseInProgress)
 	local var2 = if platform == Enum.Platform.IOS then "AppleAppStore" elseif platform == Enum.Platform.Android then "GooglePlayStore" else "Unknown"
 	var1.setIsNativePurchase(true)
+	local var3 = if fFlagEnablePlusReferralLandingSheet then var1.getReferrerId() else nil
 	local ok, _ = pcall(function()
-		-- upvalues: marketplaceService (copy), constantsModule (copy), robloxSubscriptionProductId (ref), var2 (ref), paymentSessionId (ref)
+		-- upvalues: fFlagEnablePlusReferralLandingSheet (copy), enableSubscriptionPurchaseReferrerIdEngineFeature (copy), var3 (ref), marketplaceService (copy), constantsModule (copy), robloxSubscriptionProductId (ref), var2 (ref), paymentSessionId (ref)
+		if fFlagEnablePlusReferralLandingSheet and enableSubscriptionPurchaseReferrerIdEngineFeature and var3 then
+			marketplaceService:PerformSubscriptionPurchaseV3Async(constantsModule.ROBLOX_SUBSCRIPTION_PRODUCT_TYPE, robloxSubscriptionProductId, var2, paymentSessionId, var3)
+			
+			return
+		end
 		marketplaceService:PerformSubscriptionPurchaseV3Async(constantsModule.ROBLOX_SUBSCRIPTION_PRODUCT_TYPE, robloxSubscriptionProductId, var2, paymentSessionId)
 	end)
 	

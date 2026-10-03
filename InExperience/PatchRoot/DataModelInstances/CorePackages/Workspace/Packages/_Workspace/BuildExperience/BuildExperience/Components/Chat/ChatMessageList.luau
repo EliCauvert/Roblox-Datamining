@@ -4,13 +4,14 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local chatConstantsModule = require(buildExperience.Chat.chatConstants)
 local _ = require(buildExperience.Chat.chatTypes)
+local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local fFlagBuildExperienceChatHistoryLoadingSkeletonModule = require(buildExperience.Flags.FFlagBuildExperienceChatHistoryLoadingSkeleton)
 local view = foundationModule.View
 local chatHistoryLoadingStateModule = require(script.Parent.ChatHistoryLoadingState)
 local chatMessageItemModule = require(script.Parent.ChatMessageItem)
 
 return function(p1)
-	-- upvalues: fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), reactModule (ref), chatHistoryLoadingStateModule (ref), view (ref), chatMessageItemModule (ref), chatConstantsModule (ref)
+	-- upvalues: fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), reactModule (ref), chatHistoryLoadingStateModule (ref), view (ref), chatMessageItemModule (ref), chatConstantsModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
 	local t = {}
 	
 	if #p1.messages == 0 then
@@ -32,7 +33,13 @@ return function(p1)
 				clockBinding = p1.clockBinding,
 				localToolActions = p1.localToolActions,
 				onPlaytest = p1.onPlaytest,
-				isPlaytestLoading = p1.isPlaytestLoading
+				isPlaytestLoading = p1.isPlaytestLoading,
+				onAgentAdCampaignOfferSelected = if fFlagBuildAgentAdCampaignCardModule then p1.onAgentAdCampaignOfferSelected else nil,
+				isPageVisible = p1.isPageVisible,
+				scrollingFrameRef = p1.scrollingFrameRef,
+				isAgentAdCampaignCreateDisabled = p1.isAgentAdCampaignCreateDisabled,
+				getAgentAdCampaignCardState = if fFlagBuildAgentAdCampaignCardModule then p1.getAgentAdCampaignCardState else nil,
+				onAgentAdCampaignActive = if fFlagBuildAgentAdCampaignCardModule then p1.onAgentAdCampaignActive else nil
 			})
 		end
 		return t

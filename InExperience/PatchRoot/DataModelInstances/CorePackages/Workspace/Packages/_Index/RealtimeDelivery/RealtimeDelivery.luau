@@ -7,5 +7,6 @@ return {
 	useRealtimeConnectionState = require(script.useRealtimeConnectionState),
 	useRealtimeConnectionStateChanged = require(script.useRealtimeConnectionStateChanged),
 	useRealtimeEvent = require(script.useRealtimeEvent),
-	useRealtimeNamespace = require(script.useRealtimeNamespace)
+	useRealtimeNamespace = require(script.useRealtimeNamespace),
+	useTopicNotification = require(script.useTopicNotification)
 }

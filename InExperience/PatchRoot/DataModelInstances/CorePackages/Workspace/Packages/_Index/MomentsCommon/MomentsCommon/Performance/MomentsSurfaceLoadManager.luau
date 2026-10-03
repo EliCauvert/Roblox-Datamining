@@ -7,34 +7,32 @@ local analyticsModule = require(momentsCommon.Analytics)
 local _ = require(momentsCommon.Enums.CaptureKind)
 local eventNames = analyticsModule.EventNames
 local fireAnalyticsEvent = analyticsModule.fireAnalyticsEvent
-local fFlagMomentsRealtimeObservabilityModule = require(momentsCommon.Flags.FFlagMomentsRealtimeObservability)
 local fIntMomentsSurfaceLoadTTISamplingRate = sharedFlagsModule.FIntMomentsSurfaceLoadTTISamplingRate
 local var1 = 0
 local var2 = nil
 
 local function _(p1)
-	-- upvalues: sharedFlagsModule (ref), var1 (write), timeToInteractiveTracker (ref), fFlagMomentsRealtimeObservabilityModule (ref), analyticsModule (ref), var2 (write)
+	-- upvalues: sharedFlagsModule (ref), var1 (write), timeToInteractiveTracker (ref), analyticsModule (ref), var2 (write)
 	local fIntMomentsSurfaceLoadTTIMaxMs = sharedFlagsModule.FIntMomentsSurfaceLoadTTIMaxMs
 	
 	if fIntMomentsSurfaceLoadTTIMaxMs <= 0 then
 		return
 	end
 	task.delay(fIntMomentsSurfaceLoadTTIMaxMs / 1000, function()
-		-- upvalues: p1 (ref), var1 (copy), timeToInteractiveTracker (copy), fFlagMomentsRealtimeObservabilityModule (copy), analyticsModule (copy), var2 (copy)
+		-- upvalues: p1 (ref), var1 (copy), timeToInteractiveTracker (copy), analyticsModule (copy), var2 (copy)
 		if p1 == var1 then
 			local events = timeToInteractiveTracker.getEvents()
 			
 			if not (events ~= nil and events.Watch_MomentsFeed ~= nil) then return end
-			local var3 = if fFlagMomentsRealtimeObservabilityModule then "capped" else nil
 			local events = timeToInteractiveTracker.getEvents()
 			
-			if not (events ~= nil and events.Watch_MomentsFeed ~= nil) then return end
-			if var3 ~= nil then
-				analyticsModule.reportMomentsSurfaceLoadAbort(var3)
+			if events ~= nil and events.Watch_MomentsFeed ~= nil then
+				analyticsModule.reportMomentsSurfaceLoadAbort("capped")
+				timeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
+				var2 = nil
+				
+				return
 			end
-			timeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
-			var2 = nil
-			
 			return
 		end
 	end)
@@ -43,7 +41,7 @@ end
 return {
 	EVENT_NAME = "Watch_MomentsFeed",
 	start = function()
-		-- upvalues: var1 (write), var2 (write), timeToInteractiveTracker (ref), sharedFlagsModule (ref), fFlagMomentsRealtimeObservabilityModule (ref), analyticsModule (ref)
+		-- upvalues: var1 (write), var2 (write), timeToInteractiveTracker (ref), sharedFlagsModule (ref), analyticsModule (ref)
 		var1 += 1
 		var2 = os.clock()
 		timeToInteractiveTracker.trackStart("Watch_MomentsFeed", true)
@@ -54,21 +52,20 @@ return {
 			return
 		end
 		task.delay(fIntMomentsSurfaceLoadTTIMaxMs / 1000, function()
-			-- upvalues: var3 (ref), var1 (copy), timeToInteractiveTracker (copy), fFlagMomentsRealtimeObservabilityModule (copy), analyticsModule (copy), var2 (copy)
+			-- upvalues: var3 (ref), var1 (copy), timeToInteractiveTracker (copy), analyticsModule (copy), var2 (copy)
 			if var3 == var1 then
 				local events = timeToInteractiveTracker.getEvents()
 				
 				if not (events ~= nil and events.Watch_MomentsFeed ~= nil) then return end
-				local var4 = if fFlagMomentsRealtimeObservabilityModule then "capped" else nil
 				local events = timeToInteractiveTracker.getEvents()
 				
-				if not (events ~= nil and events.Watch_MomentsFeed ~= nil) then return end
-				if var4 ~= nil then
-					analyticsModule.reportMomentsSurfaceLoadAbort(var4)
+				if events ~= nil and events.Watch_MomentsFeed ~= nil then
+					analyticsModule.reportMomentsSurfaceLoadAbort("capped")
+					timeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
+					var2 = nil
+					
+					return
 				end
-				timeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
-				var2 = nil
-				
 				return
 			end
 		end)
@@ -148,7 +145,7 @@ return {
 		end
 	end,
 	markSurfaceReady = function(p1)
-		-- upvalues: timeToInteractiveTracker (ref), var2 (write), sharedFlagsModule (ref), fFlagMomentsRealtimeObservabilityModule (ref), analyticsModule (ref), milestone (ref), fIntMomentsSurfaceLoadTTISamplingRate (ref), fireAnalyticsEvent (ref), eventNames (ref)
+		-- upvalues: timeToInteractiveTracker (ref), var2 (write), sharedFlagsModule (ref), analyticsModule (ref), milestone (ref), fIntMomentsSurfaceLoadTTISamplingRate (ref), fireAnalyticsEvent (ref), eventNames (ref)
 		local events = timeToInteractiveTracker.getEvents()
 		
 		if not (events ~= nil and events.Watch_MomentsFeed ~= nil) then return end
@@ -156,16 +153,15 @@ return {
 		local fIntMomentsSurfaceLoadTTIMaxMs = sharedFlagsModule.FIntMomentsSurfaceLoadTTIMaxMs
 		
 		if fIntMomentsSurfaceLoadTTIMaxMs > 0 and fIntMomentsSurfaceLoadTTIMaxMs < var3 then
-			local var4 = if fFlagMomentsRealtimeObservabilityModule then "capped" else nil
 			local events_1 = timeToInteractiveTracker.getEvents()
 			
-			if not (events_1 ~= nil and events_1.Watch_MomentsFeed ~= nil) then return end
-			if var4 ~= nil then
-				analyticsModule.reportMomentsSurfaceLoadAbort(var4)
+			if events_1 ~= nil and events_1.Watch_MomentsFeed ~= nil then
+				analyticsModule.reportMomentsSurfaceLoadAbort("capped")
+				timeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
+				var2 = nil
+				
+				return
 			end
-			timeToInteractiveTracker.destroyEvent("Watch_MomentsFeed")
-			var2 = nil
-			
 			return
 		elseif p1 ~= nil then
 			timeToInteractiveTracker.updateMetadata("Watch_MomentsFeed", { subcategory = p1 })

@@ -2011,11 +2011,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,การเยี่ยมชม
 Feature.Build.Content.NewGame,เกมใหม่
 Feature.Build.Description.ActivateDeveloperProduct,ลงขายผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
-Feature.Build.Description.AdActive,โฆษณาของคุณกำลังแสดงอยู่ ดูว่าเข้าถึงผู้เล่นกี่คนแล้ว
 Feature.Build.Description.AdCampaignModerationReview,ทีมกลั่นกรองของ Roblox จะตรวจสอบแคมเปญโฆษณาทั้งหมด โดยกระบวนการนี้อาจใช้เวลาถึง 24 ชั่วโมง
 Feature.Build.Description.AdCampaignSheetRunDates,ใช้ {startDate} – {endDate}
 Feature.Build.Description.AdComplete,โฆษณาของคุณสิ้นสุดลงแล้ว ตรวจสอบผลลัพธ์เลย
-Feature.Build.Description.AdInReview,โฆษณาของคุณอยู่ระหว่างการตรวจสอบและมีกำหนดแสดงตั้งแต่วันที่ {startDate} – {endDate}
 Feature.Build.Description.AdModerationReview,ทีมกลั่นกรองของ Roblox จะตรวจสอบโฆษณาทั้งหมด ซึ่งอาจใช้เวลาถึง 24 ชั่วโมง
 Feature.Build.Description.AdvertisingAgreement,"การเลือก ""สร้าง"" ถือว่าคุณยอมรับ{advertisingTermsStart}ข้อกำหนดการโฆษณา{advertisingTermsEnd}และ{advertisingStandardsStart}มาตรฐานการโฆษณา{advertisingStandardsEnd}ของ Roblox"
 Feature.Build.Description.ArchiveRemoval,หากเก็บเกมนี้ถาวร เกมจะถูกลบออกจาก Build แต่คุณยังสามารถเข้าถึงและกู้คืนเกมได้จากศูนย์กลางครีเอเตอร์หรือ Roblox Studio
@@ -2344,8 +2342,7 @@ Feature.Build.Title.AdActive,แคมเปญโฆษณาเปิดใช
 Feature.Build.Title.AdCampaignDuration,แคมเปญโฆษณา {durationDays} วัน
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} วัน
 Feature.Build.Title.AdComplete,โฆษณาเสร็จแล้ว
-Feature.Build.Title.AdCreated,สร้างโฆษณาแล้ว
-Feature.Build.Title.AdCreatedPeriod,
+Feature.Build.Title.AdCreatedPeriod,สร้างโฆษณาแล้ว
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,เพิ่มภาพ
 Feature.Build.Title.AdsStatsEmpty,เริ่มใช้แคมเปญ
@@ -3469,6 +3466,7 @@ Feature.Groups.Notification.FailedToFollow,ติดตามโปรไฟล�
 Feature.Groups.Notification.FailedToJoin,เข้าร่วมชุมชนไม่สำเร็จ โปรดลองอีกครั้งในภายหลัง
 Feature.Groups.Notification.FailedToLoad,โหลดชุมชนไม่สำเร็จ โปรดลองอีกครั้งในภายหลัง
 Feature.Groups.Notification.Following,กำลังติดตาม {groupName}
+Feature.Groups.Notification.GroupDeactivated,ชุมชนนี้ปิดใช้งานแล้ว
 Feature.Groups.Notification.GroupDoesNotExist,ไม่มีชุมชนนี้อยู่
 Feature.Groups.Notification.GroupModerated,ชุมชนนี้อยู่ระหว่างการกลั่นกรอง
 Feature.Groups.Notification.JoinRequestPending,ขอเข้าร่วม {groupName} แล้ว
@@ -3606,6 +3604,7 @@ Feature.Moments.Disclaimer.EveryoneMoments,ทุกคนในโมเมน�
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,กำลังพยายามเข้าร่วม {placeName} อาจใช้เวลาสักครู่
 Feature.Moments.Label.CaptureLibrary,คลังภาพที่จับไว้ของคุณ
+Feature.Moments.Label.ChooseVoice,เลือกเสียง
 Feature.Moments.Label.DeleteMomentBody,คุณไม่สามารถกู้คืนโมเมนต์ได้เมื่อลบไปแล้ว
 Feature.Moments.Label.DeleteMomentTitle,ลบโมเมนต์ใช่ไหม?
 Feature.Moments.Label.DeleteVoiceoverBody,การดำเนินการนี้จะล้างข้อความและเสียงบรรยายของคุณ คุณสามารถเริ่มต้นใหม่ได้ทุกเมื่อ
@@ -4026,8 +4025,10 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,ส่วนลด 10%
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,ส่วนลด 10% ใน {trialUnlockDays} วันแรก จากนั้นลด 20% สำหรับไอเท็มและอวาตาร์
 Feature.RobloxSubscription.Description.ExclusiveBenefits,สนุกมากขึ้น แต่ใช้ Robux น้อยลง สมัครสมาชิก Roblox Plus เลย
 Feature.RobloxSubscription.Description.JoinEarly,เข้าร่วมได้ก่อนใครเมื่อสมัคร Plus
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} ชวนคุณมาใช้ Plus แล้วรับ {amount} Robux ไปเลยทั้งคู่เมื่อคุณซื้อ Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"การคลิก \u{201C}{ctaText}\u{201D} จะถือว่าคุณยอมรับ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
 Feature.RobloxSubscription.Heading.ReferralEntry,แชร์ Plus แล้วรับ {amount} Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,เข้าร่วม Plus แล้วรับ
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,เซิร์ฟเวอร์ส่วนตัวฟรี
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,ส่ง Robux ฟรี

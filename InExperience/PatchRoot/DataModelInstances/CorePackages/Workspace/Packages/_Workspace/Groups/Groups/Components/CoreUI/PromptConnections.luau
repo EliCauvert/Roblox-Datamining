@@ -8,6 +8,7 @@ local userLibModule = require(parent.UserLib)
 local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 local constants = userLibModule.Utils.Constants
 local useLocalization = require(parent.Localization).Hooks.useLocalization
+local fFlagAddCommunityDeactivatedToJoinPrompt = require(parent.SharedFlags).FFlagAddCommunityDeactivatedToJoinPrompt
 local useContext = reactModule.useContext
 local useEventConnection = reactUtilsModule.useEventConnection
 local enumsModule = require(parent.ProfilePlatform.Enums)
@@ -61,7 +62,7 @@ local function buildGroupJoinPromptData(p1)
 end
 
 return function(p1)
-	-- upvalues: useRoactService (ref), roactNetworking (ref), useContext (ref), serviceOverrideContextModule (ref), useLocalization (ref), reactModule (ref), postJoinGroupModule (ref), fetchGroupActionsModule (ref), parseMembershipStatusFromActions (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), THUMBNAIL_SIZE (ref), fetchGroupDetailsModule (ref), buildGroupJoinPromptData (ref), useEventConnection (ref)
+	-- upvalues: useRoactService (ref), roactNetworking (ref), useContext (ref), serviceOverrideContextModule (ref), useLocalization (ref), fFlagAddCommunityDeactivatedToJoinPrompt (ref), reactModule (ref), postJoinGroupModule (ref), fetchGroupActionsModule (ref), parseMembershipStatusFromActions (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), THUMBNAIL_SIZE (ref), fetchGroupDetailsModule (ref), buildGroupJoinPromptData (ref), useEventConnection (ref)
 	local var1 = useRoactService(roactNetworking)
 	local var2 = useContext(serviceOverrideContextModule)
 	local groupService = var2.groupService
@@ -74,7 +75,8 @@ return function(p1)
 		notificationFailedToJoin = "Feature.Groups.Notification.FailedToJoin",
 		notificationFailedToFollow = "Feature.Groups.Notification.FailedToFollow",
 		notificationGroupDoesNotExist = "Feature.Groups.Notification.GroupDoesNotExist",
-		notificationGroupModerated = "Feature.Groups.Notification.GroupModerated"
+		notificationGroupModerated = "Feature.Groups.Notification.GroupModerated",
+		notificationGroupDeactivated = if fFlagAddCommunityDeactivatedToJoinPrompt then "Feature.Groups.Notification.GroupDeactivated" else nil
 	})
 	local var4 = reactModule.useRef(nil)
 	
@@ -157,29 +159,37 @@ return function(p1)
 		end
 	end, { groupService, p1.closePrompt })
 	useEventConnection(groupService.ShowJoinPrompt, reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), var7 (ref), var8 (ref), p1 (ref), fetchGroupDetailsModule (copy), var1 (ref), var6 (ref), var5 (ref), var3 (ref), buildGroupJoinPromptData (copy)
+		-- upvalues: var4 (ref), var7 (ref), var8 (ref), p1 (ref), fetchGroupDetailsModule (copy), var1 (ref), fFlagAddCommunityDeactivatedToJoinPrompt (copy), var6 (ref), var5 (ref), var3 (ref), buildGroupJoinPromptData (copy)
 		local t = {}
 		var4.current = t
 		p1.openGroupJoinPrompt(p2, nil, { onJoin = var7(p2, nil), onClose = var8(p2, nil) })
 		fetchGroupDetailsModule(var1, p2):andThen(function(p3)
-			-- upvalues: var4 (copy), t (ref), var6 (copy), p2 (ref), var5 (copy), var3 (copy), buildGroupJoinPromptData (copy), var7 (copy), var8 (copy), p1 (copy)
+			-- upvalues: var4 (copy), t (ref), fFlagAddCommunityDeactivatedToJoinPrompt (copy), var6 (copy), p2 (ref), var5 (copy), var3 (copy), buildGroupJoinPromptData (copy), var7 (copy), var8 (copy), p1 (copy)
 			if var4.current ~= t then return end
 			local components = p3.components or {}
 			local var9 = next(components) ~= nil
 			local var10 = components.CommunityLocked ~= nil
 			local var11 = p3.errors ~= nil
+			local var12 = fFlagAddCommunityDeactivatedToJoinPrompt and components.CommunityDeactivated ~= nil
 			local communityProfileHeader = components.CommunityProfileHeader or {}
-			local var12 = communityProfileHeader.hasSocialModules ~= nil or communityProfileHeader.hasSocialModules
+			local var13 = communityProfileHeader.hasSocialModules ~= nil or communityProfileHeader.hasSocialModules
 			
 			if var11 then
 				if var4.current == t then
-					var6(p2, var12, "Network error on join prompt: Some group components failed to load", true)
+					var6(p2, var13, "Network error on join prompt: Some group components failed to load", true)
 					
 					return
 				end
 				return
 			elseif var9 then
-				if var10 then
+				if var12 then
+					if var4.current == t then
+						var5(p2, "Group is deactivated", var3.notificationGroupDeactivated)
+						
+						return
+					end
+					return
+				elseif var10 then
 					if var4.current == t then
 						var5(p2, "Group is currently moderated", var3.notificationGroupModerated)
 						
@@ -187,8 +197,8 @@ return function(p1)
 					end
 					return
 				elseif var4.current == t then
-					local var13 = buildGroupJoinPromptData(p3)
-					p1.openGroupJoinPrompt(p2, var13, { onJoin = var7(p2, var13), onClose = var8(p2, var13) })
+					local var14 = buildGroupJoinPromptData(p3)
+					p1.openGroupJoinPrompt(p2, var14, { onJoin = var7(p2, var14), onClose = var8(p2, var14) })
 					
 					return
 				end

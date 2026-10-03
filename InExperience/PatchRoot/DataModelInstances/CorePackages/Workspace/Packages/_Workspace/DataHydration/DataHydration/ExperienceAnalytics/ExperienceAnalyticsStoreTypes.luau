@@ -17,5 +17,16 @@
 		OneMonth = "OneMonth",
 		None = "None"
 	},
+	FilterOperation = {
+		Contains = "Contains",
+		NotContains = "NotContains",
+		GreaterThan = "GreaterThan",
+		GreaterThanOrEqual = "GreaterThanOrEqual",
+		LessThan = "LessThan",
+		LessThanOrEqual = "LessThanOrEqual",
+		Match = "Match",
+		Equals = "Equals",
+		NotEqual = "NotEqual"
+	},
 	DataStatus = require(script:FindFirstAncestor("DataHydration").DataHydrationTypes).DataStatus
 }

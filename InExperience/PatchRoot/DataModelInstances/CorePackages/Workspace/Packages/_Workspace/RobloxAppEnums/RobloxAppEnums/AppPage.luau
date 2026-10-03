@@ -128,6 +128,7 @@
 	AddAuthMethodPage = "AddAuthMethodPage",
 	PasskeyUpsellScreen = "PasskeyUpsellScreen",
 	PlatformLockedPage = "PlatformLockedPage",
+	BirthdayCompliancePage = "BirthdayCompliancePage",
 	TutorialUpsellScreen = "TutorialUpsellScreen",
 	SponsoredTooltipPeekView = "SponsoredTooltipPeekView",
 	InfoPeekView = "InfoPeekView",

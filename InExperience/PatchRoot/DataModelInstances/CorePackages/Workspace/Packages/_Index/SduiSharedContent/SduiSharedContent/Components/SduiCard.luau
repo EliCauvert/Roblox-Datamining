@@ -17,11 +17,12 @@ local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagFixSduiCardFocusNavScroll = sharedFlagsModule.FFlagFixSduiCardFocusNavScroll
 local fFlagLuaAppConfigureSduiCardImageScaleType = sharedFlagsModule.FFlagLuaAppConfigureSduiCardImageScaleType
+local fFlagSduiCardBackgroundClickable = sharedFlagsModule.FFlagSduiCardBackgroundClickable
 
 local var1 = function() end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), fFlagFixSduiCardFocusNavScroll (ref), useCursor (ref), cursorType (ref), signalsReactModule (ref), textSizeModule (ref), reactModule (ref), view (ref), var1 (ref), stateLayerAffordance (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref), loadableImage (ref), fFlagLuaAppConfigureSduiCardImageScaleType (ref)
+	-- upvalues: useTokens (ref), fFlagFixSduiCardFocusNavScroll (ref), useCursor (ref), cursorType (ref), signalsReactModule (ref), textSizeModule (ref), reactModule (ref), view (ref), var1 (ref), fFlagSduiCardBackgroundClickable (ref), stateLayerAffordance (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref), loadableImage (ref), fFlagLuaAppConfigureSduiCardImageScaleType (ref)
 	local var2 = useTokens()
 	local var3 = if fFlagFixSduiCardFocusNavScroll then useCursor(cursorType.RoundedRect) else nil
 	local size2500 = var2.Size.Size_2500
@@ -35,9 +36,14 @@ return reactModule.memo(function(p1)
 		local bodyMedium = var2.Typography.BodyMedium
 		ceiled = math.ceil(p1.descriptionMaxLines * (bodyMedium.FontSize + var4) * bodyMedium.LineHeight)
 	end
-	local var5, var6 = reactModule.useState(0)
-	
-	return reactModule.createElement(view, {
+	local var5
+	local var6, var7 = reactModule.useState(0)
+	local var8 = reactModule.useCallback(function(p2)
+		-- upvalues: var7 (ref)
+		var7(p2.AbsoluteSize.Y)
+	end, {})
+	local createElement = reactModule.createElement
+	local t = {
 		tag = "size-full-0 row auto-y stroke-default",
 		backgroundStyle = p1.backgroundStyle or var2.Color.Surface.Surface_100,
 		cornerRadius = p1.cornerRadius or UDim.new(0, var2.Radius.Medium),
@@ -49,23 +55,34 @@ return reactModule.memo(function(p1)
 				SelectionOrder = p1.selectionOrder
 			}
 		end, { var3, p1.selectionOrder }) else nil,
-		onStateChanged = if fFlagFixSduiCardFocusNavScroll then var1 else nil,
-		stateLayer = if fFlagFixSduiCardFocusNavScroll then { affordance = stateLayerAffordance.None } else nil,
-		AnchorPoint = p1.anchorPoint,
-		LayoutOrder = p1.layoutOrder,
-		Position = p1.position,
-		Size = p1.size,
-		ZIndex = p1.zIndex,
-		testId = p1.testId
-	}, {
+		onStateChanged = if fFlagFixSduiCardFocusNavScroll then var1 else nil
+	}
+	
+	if fFlagFixSduiCardFocusNavScroll then
+		local var9
+		if fFlagSduiCardBackgroundClickable then
+			var9 = p1.backgroundOnActivated == nil
+			var9 = nil
+		else
+			var9 = true
+		end
+		var5 = if var9 then { affordance = stateLayerAffordance.None } else nil
+	end
+	t.stateLayer = var5
+	t.onActivated = if fFlagSduiCardBackgroundClickable then p1.backgroundOnActivated else nil
+	t.AnchorPoint = p1.anchorPoint
+	t.LayoutOrder = p1.layoutOrder
+	t.Position = p1.position
+	t.Size = p1.size
+	t.ZIndex = p1.zIndex
+	t.testId = p1.testId
+	
+	return createElement(view, t, {
 		ContentSection = reactModule.createElement(view, {
 			tag = "flex-between size-full-0 auto-y col gap-xsmall padding-top-large padding-bottom-large padding-left-large padding-right-small",
 			LayoutOrder = 1,
 			Size = UDim2.new(UDim.new(1, -size2500), if p1.size then p1.size.Height else UDim.new(0, 0)),
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-				-- upvalues: var6 (ref)
-				var6(p2.AbsoluteSize.Y)
-			end, {})
+			onAbsoluteSizeChanged = var8
 		}, {
 			TopContent = reactModule.createElement(view, {
 				tag = "col size-full-0 auto-y gap-xsmall",
@@ -103,7 +120,7 @@ return reactModule.memo(function(p1)
 			showFailedStateWhenLoadingFailed = false,
 			useShimmerAnimationWhileLoading = true,
 			Image = p1.image,
-			Size = UDim2.new(0, size2500, 0, var5),
+			Size = UDim2.new(0, size2500, 0, var6),
 			ImageColor3 = if p1.imageStyle then p1.imageStyle.Color3 else var2.Color.Content.Emphasis.Color3,
 			ImageTransparency = if p1.imageStyle then p1.imageStyle.Transparency else 0,
 			ScaleType = if fFlagLuaAppConfigureSduiCardImageScaleType then p1.imageScaleType else Enum.ScaleType.Crop,

@@ -948,6 +948,10 @@ return function(p1)
 			-- upvalues: p1 (ref)
 			return p1.ExcludeExternalIdentityLogin ~= false
 		end,
+		getExternalIdentityAppleUsesBrowserSignIn = function()
+			-- upvalues: p1 (ref)
+			return p1.ExternalIdentityAppleUsesBrowserSignIn or false
+		end,
 		getExcludeUsernamePasswordSignIn = function()
 			-- upvalues: p1 (ref)
 			return p1.ExcludeUsernamePasswordSignIn or false

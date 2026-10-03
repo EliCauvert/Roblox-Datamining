@@ -17,12 +17,13 @@ local robloxSubscriptionUpsellTelemetryModule = require(robloxSubscriptionPurcha
 local transitionToErrorModule = require(robloxSubscriptionPurchaseApp.Actions.transitionToError)
 local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
 local fFlagRobloxPlusAmpSubscriptionCheckModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusAmpSubscriptionCheck)
+local fFlagEnablePlusReferralLandingSheet = require(parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
 local errorReasonModule = require(robloxSubscriptionPurchaseApp.Enums.ErrorReason)
 local ampAccessResponseModule = require(robloxSubscriptionPurchaseApp.Enums.AmpAccessResponse)
 local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
 
 function initiateRobloxSubscriptionPurchaseInternal(p1)
-	-- upvalues: logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), getAppFeaturePolicies (ref), transitionToErrorModule (ref), errorReasonModule (ref), promptStateModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), createPaymentSessionModule (ref), fFlagRobloxSubscriptionProductsDirectFetchModule (ref), getRobloxSubscriptionProductsDirectModule (ref), getRobloxSubscriptionProductsModule (ref), fFlagRobloxPlusAmpSubscriptionCheckModule (ref), getAmpFeatureAccessModule (ref), promiseModule (ref), ampAccessResponseModule (ref)
+	-- upvalues: logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), getAppFeaturePolicies (ref), transitionToErrorModule (ref), errorReasonModule (ref), promptStateModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), createPaymentSessionModule (ref), fFlagEnablePlusReferralLandingSheet (ref), fFlagRobloxSubscriptionProductsDirectFetchModule (ref), getRobloxSubscriptionProductsDirectModule (ref), getRobloxSubscriptionProductsModule (ref), fFlagRobloxPlusAmpSubscriptionCheckModule (ref), getAmpFeatureAccessModule (ref), promiseModule (ref), ampAccessResponseModule (ref)
 	logRobloxSubscriptionUpsellCounterModule(robloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalInitiatedCounter)
 	local var1 = robloxSubscriptionStoreModule.get()
 	local var2 = if fFlagRobloxPlusFAEFreeTrialModule then var1.getPurchaseUIOptions() else nil
@@ -39,7 +40,7 @@ function initiateRobloxSubscriptionPurchaseInternal(p1)
 	end
 	local list = {
 		createPaymentSessionModule(p1),
-		if fFlagRobloxSubscriptionProductsDirectFetchModule then getRobloxSubscriptionProductsDirectModule() else getRobloxSubscriptionProductsModule()
+		if fFlagRobloxSubscriptionProductsDirectFetchModule then getRobloxSubscriptionProductsDirectModule(if fFlagEnablePlusReferralLandingSheet then var1.getReferrerId() else nil) else getRobloxSubscriptionProductsModule()
 	}
 	
 	if fFlagRobloxPlusAmpSubscriptionCheckModule then

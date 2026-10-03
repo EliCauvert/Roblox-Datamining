@@ -15,6 +15,7 @@ local blackbirdUpsellBanner = robloxSubscriptionPurchaseAppModule.Components.Bla
 local surfaceName = robloxSubscriptionPurchaseAppModule.SurfaceName
 local surfaceContext = robloxSubscriptionPurchaseAppModule.SurfaceContext
 local constants = avatarExperienceCommonModule.Constants
+local offerExpiryBadge = avatarExperienceCommonModule.Components.OfferExpiryBadge
 local checkoutPageHeaderModule = require(avatarExperienceCatalog.Components.Checkout.CheckoutPageHeader)
 local checkoutPageBodyModule = require(avatarExperienceCatalog.Components.Checkout.CheckoutPageBody)
 local checkoutBuyButtonModule = require(avatarExperienceCatalog.Components.Checkout.CheckoutBuyButton)
@@ -27,6 +28,7 @@ local fFlagAXEnableExpiredUserLookCheckout = avatarExperienceFlagsModule.FFlagAX
 local fFlagAXMISSmallUIChanges = avatarExperienceFlagsModule.FFlagAXMISSmallUIChanges
 local fFlagAXMISWithOffers = avatarExperienceFlagsModule.FFlagAXMISWithOffers
 local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
+local fFlagAXUpdateOffersEndsUIWithBadge = avatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge
 local var1 = if fFlagEnableSplitPane then require(parent.SplitPane).SplitPaneStore else nil
 local var2 = if fFlagEnableSplitPane then require(parent.SignalsReact).useSignalState else nil
 
@@ -44,7 +46,7 @@ local var3 = function()
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: parent (ref), foundationModule (ref), fFlagEnableSplitPane (ref), var2 (ref), var1 (ref), useSelector (ref), selectDeviceOrientation (ref), responsiveModule (ref), selectStatusBarHeight (ref), useLocalization (ref), fFlagAXMISWithOffers (ref), reactModule (ref), constants (ref), fFlagAXMISWithBlackbird (ref), checkoutPageHeaderModule (ref), checkoutPageBodyModule (ref), fFlagAXEnableExpiredUserLookCheckout (ref), fFlagAXDurables2Option (ref), cryoModule (ref), checkoutTotalLinesModule (ref), tutilsModule (ref), fFlagAXMISSmallUIChanges (ref), checkoutBuyButtonModule (ref), checkoutUnavailableButtonModule (ref), blackbirdUpsellBanner (ref), var3 (ref)
+	-- upvalues: parent (ref), foundationModule (ref), fFlagEnableSplitPane (ref), var2 (ref), var1 (ref), useSelector (ref), selectDeviceOrientation (ref), responsiveModule (ref), selectStatusBarHeight (ref), useLocalization (ref), fFlagAXMISWithOffers (ref), reactModule (ref), constants (ref), fFlagAXUpdateOffersEndsUIWithBadge (ref), offerExpiryBadge (ref), fFlagAXMISWithBlackbird (ref), checkoutPageHeaderModule (ref), checkoutPageBodyModule (ref), fFlagAXEnableExpiredUserLookCheckout (ref), fFlagAXDurables2Option (ref), cryoModule (ref), checkoutTotalLinesModule (ref), tutilsModule (ref), fFlagAXMISSmallUIChanges (ref), checkoutBuyButtonModule (ref), checkoutUnavailableButtonModule (ref), blackbirdUpsellBanner (ref), var3 (ref)
 	local IAPExperienceModule = require(parent.IAPExperience)
 	local purchasePromptModule = require(parent.PurchasePrompt)
 	local var4 = foundationModule.Hooks.useTokens()
@@ -71,7 +73,7 @@ return reactModule.memo(function(p1)
 	local var11 = if var7 then UDim2.fromScale(1, 1) else UDim2.fromScale(if fFlagEnableSplitPane and var5 then var6 else constants.LANDSCAPE_SCENE_WIDTH_PERCENTAGE, 1)
 	local var12 = if var7 then UDim2.fromScale(0, 0) else UDim2.fromScale(if fFlagEnableSplitPane and var5 then 1 - var6 else constants.LANDSCAPE_UI_WIDTH_PERCENTAGE, 0)
 	local var13 = reactModule.useMemo(function()
-		-- upvalues: fFlagAXMISWithOffers (copy), p1 (ref), reactModule (copy), foundationModule (copy), var4 (ref)
+		-- upvalues: fFlagAXMISWithOffers (copy), p1 (ref), reactModule (copy), fFlagAXUpdateOffersEndsUIWithBadge (copy), foundationModule (copy), var4 (ref), offerExpiryBadge (copy)
 		if not fFlagAXMISWithOffers then
 			return nil
 		end
@@ -93,7 +95,27 @@ return reactModule.memo(function(p1)
 						end
 					end
 				}, {
-					Content = reactModule.createElement(foundationModule.View, {
+					Content = if fFlagAXUpdateOffersEndsUIWithBadge then reactModule.createElement(foundationModule.View, {
+						tag = "row gap-medium auto-xy align-y-center",
+						Position = UDim2.fromOffset(var4.Stroke.Standard, 0)
+					}, {
+						Checkbox = reactModule.createElement(foundationModule.Checkbox, {
+							LayoutOrder = 1,
+							label = v.localizedDescription,
+							isChecked = v.selected,
+							onActivated = function()
+								-- upvalues: p1 (copy), i (ref)
+								if p1.handleDeselectOfferId then
+									p1.handleDeselectOfferId(i)
+								end
+							end,
+							size = foundationModule.Enums.InputSize.Small
+						}),
+						ExpiryBadge = if v.expirationTimeUtc then reactModule.createElement(offerExpiryBadge, {
+							layoutOrder = 2,
+							expirationTimeInUTC = v.expirationTimeUtc
+						}) else nil
+					}) else reactModule.createElement(foundationModule.View, {
 						tag = "row gap-medium auto-xy align-y-center",
 						Position = UDim2.fromOffset(var4.Stroke.Standard, 0)
 					}, {

@@ -19,16 +19,17 @@ local var2 = function()
 	local var15, var16 = signalsModule.createSignal({})
 	local var17, var18 = signalsModule.createSignal({})
 	local var19, var20 = signalsModule.createSignal(nil)
-	local var21 = signalsModule.createComputed(function(p1)
+	local var21, var22 = signalsModule.createSignal(nil)
+	local var23 = signalsModule.createComputed(function(p1)
 		-- upvalues: var5 (ref)
-		local var22 = var5(p1)
+		local var24 = var5(p1)
 		
-		return var22 and (var22.ProductKey and (var22.ProductKey.Id or ""))
+		return var24 and (var24.ProductKey and (var24.ProductKey.Id or ""))
 	end)
-	local var22 = nil
-	local var23 = nil
 	local var24 = nil
 	local var25 = nil
+	local var26 = nil
+	local var27 = nil
 	
 	return {
 		getPromptState = var3,
@@ -45,53 +46,55 @@ local var2 = function()
 		setEntryContext = var16,
 		getErrorReason = var19,
 		setErrorReason = var20,
+		getReferrerId = var21,
+		setReferrerId = var22,
 		setOnFlowComplete = function(value)
-			-- upvalues: var22 (write)
-			var22 = value
+			-- upvalues: var24 (write)
+			var24 = value
 		end,
 		triggerOnFlowComplete = function(p1)
-			-- upvalues: var22 (write)
-			if var22 then
-				var22(p1)
+			-- upvalues: var24 (write)
+			if var24 then
+				var24(p1)
 			end
 		end,
 		getPurchaseUIOptions = var9,
 		setPurchaseUIOptions = var10,
 		getIsNativePurchase = var13,
 		setIsNativePurchase = var14,
-		getRobloxSubscriptionProductId = var21,
+		getRobloxSubscriptionProductId = var23,
 		setOnUnmountUI = function(value)
-			-- upvalues: var23 (write)
-			var23 = value
+			-- upvalues: var25 (write)
+			var25 = value
 		end,
 		triggerUnmountUI = function()
-			-- upvalues: var23 (write)
-			if var23 then
-				var23()
-				var23 = nil
+			-- upvalues: var25 (write)
+			if var25 then
+				var25()
+				var25 = nil
 			end
 		end,
 		setOnBackButtonActivated = function(value)
-			-- upvalues: var24 (write)
-			var24 = value
+			-- upvalues: var26 (write)
+			var26 = value
 		end,
 		triggerOnBackButtonActivated = function()
-			-- upvalues: var24 (write)
-			if var24 then
-				var24()
+			-- upvalues: var26 (write)
+			if var26 then
+				var26()
 			end
 		end,
 		setOnCtaOverride = function(value)
-			-- upvalues: fFlagRobloxPlusFAEFreeTrialModule (copy), var25 (write)
+			-- upvalues: fFlagRobloxPlusFAEFreeTrialModule (copy), var27 (write)
 			if fFlagRobloxPlusFAEFreeTrialModule then
-				var25 = value
+				var27 = value
 				
 				return
 			end
 		end,
 		getOnCtaOverride = function()
-			-- upvalues: fFlagRobloxPlusFAEFreeTrialModule (copy), var25 (write)
-			return if fFlagRobloxPlusFAEFreeTrialModule then var25 else nil
+			-- upvalues: fFlagRobloxPlusFAEFreeTrialModule (copy), var27 (write)
+			return if fFlagRobloxPlusFAEFreeTrialModule then var27 else nil
 		end
 	}
 end

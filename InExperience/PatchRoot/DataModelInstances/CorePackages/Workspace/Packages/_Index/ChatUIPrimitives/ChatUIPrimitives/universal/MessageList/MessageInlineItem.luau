@@ -8,7 +8,7 @@ local _ = require(script.Parent.groupMessages)
 local identityInlineModule = require(script.Parent.Parent.Identity.IdentityInline)
 local useMessageInlineViewModelModule = require(script.Parent.useMessageInlineViewModel)
 local t = {
-	text = require(script.Parent.Parent.ContentKinds.PlainText.PlainTextInline)
+	plainText = require(script.Parent.Parent.ContentKinds.PlainText.PlainTextInline)
 }
 
 return function(p1)

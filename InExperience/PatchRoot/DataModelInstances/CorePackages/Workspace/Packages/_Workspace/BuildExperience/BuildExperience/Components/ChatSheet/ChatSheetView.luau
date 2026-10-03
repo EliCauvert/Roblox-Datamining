@@ -14,6 +14,7 @@ local buildPillMenuPortalModule = require(buildExperience.Components.BuildPillMe
 local chatActionsModule = require(buildExperience.Components.Chat.ChatActions)
 local chatCardEmphasisProviderModule = require(buildExperience.Components.Chat.ChatCardEmphasis.ChatCardEmphasisProvider)
 local chatMessageListModule = require(buildExperience.Components.Chat.ChatMessageList)
+local chatScrollAnchorContextModule = require(buildExperience.Chat.ChatScrollAnchorContext)
 local _ = require(buildExperience.Chat.chatTypes)
 local _ = require(buildExperience.Chat.useChatSessionCore)
 local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
@@ -21,6 +22,7 @@ local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.F
 local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 local fFlagBuildExperienceInGameShell = require(parent.SharedFlags).FFlagBuildExperienceInGameShell
 local fFlagBuildExperienceUseFoundationSheetModule = require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet)
+local fFlagBuildExperienceChatAccordionScrollAnchorModule = require(buildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
 local fFlagBuildExperienceChatImageAttachmentsModule = require(buildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local fFlagBuildExperienceChatResourceAttachments = require(parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
 local var1 = if fFlagBuildExperienceUseFoundationSheetModule then foundationModule.Sheet else require(buildExperience.FoundationFork.Sheet)
@@ -72,7 +74,7 @@ local function ChatSheetContent(p1)
 end
 
 return function(p1)
-	-- upvalues: var1 (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), fFlagBuildDesktopReadinessModule (ref), fFlagBuildExperienceLibrary (ref), reactModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), reactUtilsModule (ref), noopSheetRef (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), view (ref), dialogSize (ref), ChatSheetContent (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), fFlagBuildExperienceInGameShell (ref), buildPillMenuPortalModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), chatCardEmphasisProviderModule (ref)
+	-- upvalues: var1 (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), fFlagBuildDesktopReadinessModule (ref), fFlagBuildExperienceLibrary (ref), reactModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), reactUtilsModule (ref), noopSheetRef (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), chatScrollAnchorContextModule (ref), view (ref), dialogSize (ref), ChatSheetContent (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), fFlagBuildExperienceInGameShell (ref), buildPillMenuPortalModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), chatCardEmphasisProviderModule (ref)
 	local sheetComponent = p1.sheetComponent or var1
 	local var2 = useLocalization({
 		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER
@@ -109,6 +111,21 @@ return function(p1)
 			isFocusable = p1.isOpen
 		}))
 	end
+	local var9 = chatMessageListModule({
+		messages = p1.messages,
+		clockBinding = p1.clockBinding,
+		localToolActions = p1.localToolActions,
+		emptyState = reactModule.createElement(buildEmptyStateModule),
+		isHistoryLoading = p1.isHistoryLoading,
+		onPlaytest = p1.onPlaytest,
+		isPlaytestLoading = p1.isPlaytestLoading
+	})
+	
+	if fFlagBuildExperienceChatAccordionScrollAnchorModule then
+		var9 = {
+			ScrollAnchor = reactModule.createElement(chatScrollAnchorContextModule.Provider, { value = p1.anchorScrollToInstance }, var9)
+		}
+	end
 	local createElement = reactModule.createElement
 	createElement = createElement(view, {
 		testId = "ChatSheet.MessageList",
@@ -121,15 +138,7 @@ return function(p1)
 			["size-full"] = #p1.messages == 0,
 			["size-full-0 auto-y"] = #p1.messages > 0
 		}
-	}, chatMessageListModule({
-		messages = p1.messages,
-		clockBinding = p1.clockBinding,
-		localToolActions = p1.localToolActions,
-		emptyState = reactModule.createElement(buildEmptyStateModule),
-		isHistoryLoading = p1.isHistoryLoading,
-		onPlaytest = p1.onPlaytest,
-		isPlaytestLoading = p1.isPlaytestLoading
-	}))
+	}, var9)
 	local createElement_1 = reactModule.createElement
 	createElement_1 = createElement_1(sheetComponent.Root, {
 		ref = var8,

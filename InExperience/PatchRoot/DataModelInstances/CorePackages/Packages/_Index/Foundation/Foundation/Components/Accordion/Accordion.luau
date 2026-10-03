@@ -1,6 +1,5 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local reactModule = require(foundation.Parent.React)
-local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
@@ -16,7 +15,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), accordionContextModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), accordionContextModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	
 	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
@@ -25,7 +24,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		ref = p2
 	}), {
 		AccordionContext = reactModule.createElement(accordionContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+			value = reactModule.useMemo(function()
 				-- upvalues: var1 (ref)
 				return {
 					onAccordionItemActivated = var1.onActivated,
@@ -40,13 +39,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				var1.isContained,
 				var1.chevronPosition,
 				var1.testId
-			}) else nil else {
-				onAccordionItemActivated = var1.onActivated,
-				itemSize = var1.size,
-				isContained = var1.isContained,
-				chevronPosition = var1.chevronPosition,
-				testId = var1.testId
-			}
+			})
 		}, var1.children)
 	})
 end))

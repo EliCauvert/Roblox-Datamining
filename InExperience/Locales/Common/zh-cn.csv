@@ -2009,11 +2009,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,访问次数
 Feature.Build.Content.NewGame,新游戏
 Feature.Build.Description.ActivateDeveloperProduct,将开发者产品 {PRODUCT_ID} 上架销售。
-Feature.Build.Description.AdActive,你的广告正在投放。查看它触达的玩家数量。
 Feature.Build.Description.AdCampaignModerationReview,所有广告活动均由 Roblox 审核团队进行审核。此过程最多可能需要 24 小时。
 Feature.Build.Description.AdCampaignSheetRunDates,投放时间 {startDate} – {endDate}
 Feature.Build.Description.AdComplete,你的广告已投放完毕。请查看结果。
-Feature.Build.Description.AdInReview,你的广告正在审核中，定于 {startDate}至 {endDate}投放。
 Feature.Build.Description.AdModerationReview,所有广告均由 Roblox 审核团队审核，最长可能需要 24 小时。
 Feature.Build.Description.AdvertisingAgreement,选择“创建”，即表示你同意 {advertisingTermsStart}Roblox 广告条款{advertisingTermsEnd}和{advertisingStandardsStart}广告准则{advertisingStandardsEnd}。
 Feature.Build.Description.ArchiveRemoval,如果你将此游戏存档，它将从 Build 中移除。你仍可在创作者中心或 Roblox Studio 中访问和恢复此游戏。
@@ -2342,7 +2340,6 @@ Feature.Build.Title.AdActive,广告活动已启动
 Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告活动
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
 Feature.Build.Title.AdComplete,广告已完成
-Feature.Build.Title.AdCreated,广告已创建
 Feature.Build.Title.AdCreatedPeriod,广告已创建。
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,添加图片
@@ -3464,6 +3461,7 @@ Feature.Groups.Notification.FailedToFollow,关注个人资料失败。请稍后�
 Feature.Groups.Notification.FailedToJoin,加入社区失败。请稍后重试。
 Feature.Groups.Notification.FailedToLoad,加载社区失败。请稍后重试。
 Feature.Groups.Notification.Following,正在关注“{groupName}”。
+Feature.Groups.Notification.GroupDeactivated,此社区已被停用。
 Feature.Groups.Notification.GroupDoesNotExist,社区不存在。
 Feature.Groups.Notification.GroupModerated,此社区目前处于审核状态。
 Feature.Groups.Notification.JoinRequestPending,已请求加入“{groupName}”。
@@ -3601,6 +3599,7 @@ Feature.Moments.Disclaimer.EveryoneMoments,“精彩瞬间”中的每个人都�
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,正在尝试加入“{placeName}”。可能需要几秒钟时间。
 Feature.Moments.Label.CaptureLibrary,你的截图库
+Feature.Moments.Label.ChooseVoice,选择语音
 Feature.Moments.Label.DeleteMomentBody,精彩瞬间一旦删除，便无法恢复。
 Feature.Moments.Label.DeleteMomentTitle,是否删除精彩瞬间？
 Feature.Moments.Label.DeleteVoiceoverBody,此操作将清除你的文本和旁白。你可以随时重新开始。
@@ -4020,8 +4019,10 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具与
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,前 {trialUnlockDays} 天享道具与虚拟形象九折优惠，之后享八折优惠
 Feature.RobloxSubscription.Description.ExclusiveBenefits,以更少的 Robux 享受更多乐趣。订阅 Roblox Plus。
 Feature.RobloxSubscription.Description.JoinEarly,Plus 订阅用户提前加入
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username}邀请你加入 Plus。购买 Plus 后，你们双方都将获得 {amount} Robux。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"点按\u{201C}{ctaText}\u{201D}，即表示你同意 <a href=""{termsUrl}"">Roblox 订阅条款</a>。系统将每月自动向你收取费用，直至你取消订阅。"
 Feature.RobloxSubscription.Heading.ReferralEntry,分享 Plus，获得 {amount} Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,加入 Plus，获得
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免费私人服务器
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,免费发送 Robux

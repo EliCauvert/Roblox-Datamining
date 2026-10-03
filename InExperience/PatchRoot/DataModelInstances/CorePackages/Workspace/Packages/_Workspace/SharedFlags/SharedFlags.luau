@@ -89,7 +89,7 @@ local momentsCommentsIxpEnabled = game:DefineFastFlag("MomentsCommentsIxpEnabled
 local momentsCommentsUseMockNetwork = game:DefineFastFlag("MomentsCommentsUseMockNetwork", false)
 local fixMomentsTabReactiveIXPRace = game:DefineFastFlag("FixMomentsTabReactiveIXPRace", false)
 local guacMomentsFeatureList = game:DefineFastFlag("GuacMomentsFeatureList", false)
-local guacMomentsFeatureList_1 = game:DefineFastFlag("MomentsAutoplayAmpPolicy2", false) and guacMomentsFeatureList
+local guacMomentsFeatureList_1 = game:DefineFastFlag("MomentsAutoplayAmpPolicy3", false) and guacMomentsFeatureList
 local enableSplitPaneDev = game:DefineFastFlag("EnableSplitPaneDev", false)
 local enableSplitPaneEDPFix = enableSplitPaneDev and game:DefineFastFlag("EnableSplitPaneEDPFix", false)
 local enableSplitPaneDev_1 = game:DefineFastFlag("EnableSplitPaneSessionL3", false) and enableSplitPaneDev
@@ -433,6 +433,7 @@ return {
 	getFStringSelfProfileView = require(script.getFStringSelfProfileView),
 	FIntFriendsCarouselFetchPageDistance = require(script.FIntFriendsCarouselFetchPageDistance),
 	FFlagDisableAutocorrectSocialUserSearch = require(script.FFlagDisableAutocorrectSocialUserSearch),
+	FFlagLuaAppLogSocialUserSearchUXExposure = require(script.FFlagLuaAppLogSocialUserSearchUXExposure),
 	FStringCapturesIXPLayer = require(script.FStringCapturesIXPLayer),
 	FStringSocialCaptureIXPLayer = require(script.FStringSocialCaptureIXPLayer),
 	FStringSocialCaptureTakenIXPLayer = require(script.FStringSocialCaptureTakenIXPLayer),
@@ -527,6 +528,7 @@ return {
 	FFlagCIDeeplinkEnabledForAll = require(script.FFlagCIDeeplinkEnabledForAll),
 	FFlagAddSocialLinksToCommunityProfile = require(script.FFlagAddSocialLinksToCommunityProfile),
 	FFlagAddCommunityLockedToCommunityProfile = require(script.FFlagAddCommunityLockedToCommunityProfile),
+	FFlagAddCommunityDeactivatedToJoinPrompt = game:DefineFastFlag("AddCommunityDeactivatedToJoinPrompt", false),
 	FFlagUseMediaPlayerInCarousel = require(script.FFlagUseMediaPlayerInCarousel),
 	FStringSocialCarouselTreatment = require(script.FStringSocialCarouselTreatment),
 	FFlagEnableSocialProofUserList = require(script.FFlagEnableSocialProofUserList),
@@ -719,7 +721,6 @@ return {
 	FStringReportMenuIXPLayer = require(script.FStringReportMenuIXPLayer),
 	FStringSelectInSceneIXPField = require(script.FStringSelectInSceneIXPField),
 	FStringReportingIXPLayer = require(script.FStringReportingIXPLayer),
-	FStringEARReportMenuIXPLayer = require(script.FStringEARReportMenuIXPLayer),
 	GetFStringLuaAppExperienceMenuLayer = require(script.GetFStringLuaAppExperienceMenuLayer),
 	FStringRMLayer = require(script.FStringRMLayer),
 	FStringRMDefinition = require(script.FStringRMDefinition),
@@ -845,6 +846,7 @@ return {
 	FFlagSduiCatalogItemGrid = game:DefineFastFlag("SduiCatalogItemGrid", false),
 	FFlagSduiItemMediaHeader = game:DefineFastFlag("SduiItemMediaHeader", false),
 	FFlagSduiCatalogItemCard = game:DefineFastFlag("SduiCatalogItemCard", false),
+	FFlagSduiCardBackgroundClickable = game:DefineFastFlag("SduiCardBackgroundClickable", false),
 	FFlagAXFavoritesManagerSdui = game:DefineFastFlag("AXFavoritesManagerSdui", false),
 	FFlagSduiMarketplaceCatalogActions = game:DefineFastFlag("SduiMarketplaceCatalogActions4", false),
 	FFlagSduiAddMarketplaceEntityDataHydration = game:DefineFastFlag("SduiAddMarketplaceEntityDataHydration", false),
@@ -1377,7 +1379,6 @@ return {
 	GetFFlagEnableAuthsecImageUpdate = require(script.GetFFlagEnableAuthsecImageUpdate),
 	FFlagLuafiedWechatQQLogin = require(script.FFlagLuafiedWechatQQLogin),
 	FFlagAXMigrateSaveOutfitPromptFromRoactGamepad = require(script.FFlagAXMigrateSaveOutfitPromptFromRoactGamepad),
-	FFlagAXMigratePurchasePromptInteractiveToFocusNavigation = require(script.FFlagAXMigratePurchasePromptInteractiveToFocusNavigation),
 	FFlagAXMigrateAdjustAccessoryViewToFocusNavigation = require(script.FFlagAXMigrateAdjustAccessoryViewToFocusNavigation),
 	FFlagAXMigrateProfilePictureEditorEmotesPageToFocusNavigation = require(script.FFlagAXMigrateProfilePictureEditorEmotesPageToFocusNavigation),
 	FFlagAXMigrateLookDetailsPeekViewToFocusNavigation = require(script.FFlagAXMigrateLookDetailsPeekViewToFocusNavigation),
@@ -1640,8 +1641,10 @@ return {
 	FFlagPassShopPurchaseSurfaceToBuyModal = game:DefineFastFlag("PassShopPurchaseSurfaceToBuyModal", false),
 	FFlagEnableRobuxInExperienceShop = require(script.FFlagEnableRobuxInExperienceShop),
 	FFlagEnableBonusJwtInShop = require(script.FFlagEnableBonusJwtInShop),
+	FFlagUseGetGamePassOwnershipApi = require(script.FFlagUseGetGamePassOwnershipApi),
 	FFlagEnableUserOffers = require(script.FFlagEnableUserOffers),
 	FFlagSkipBuyDelayForExperienceShop = game:DefineFastFlag("SkipBuyDelayForExperienceShop", false),
+	FFlagHideHeaderForBuyRobuxInExperienceShop = game:DefineFastFlag("HideHeaderForBuyRobuxInExperienceShop", false),
 	UpsellSuggestionsAPIMaxPackages = game:DefineFastInt("UpsellSuggestionsAPIMaxPackagesV3", 1),
 	FFlagEnableUpsellSuggestionsAnalyticsId = game:DefineFastFlag("EnableUpsellSuggestionsAnalyticsId", false),
 	FFlagEnablePlayWithRewardComponent = require(script.FFlagEnablePlayWithRewardComponent),
@@ -1689,7 +1692,6 @@ return {
 	GetFFlagDiscountInfoForSubscriptionPurchaseModalLua = require(script.GetFFlagDiscountInfoForSubscriptionPurchaseModalLua),
 	FFlagRemoveCentralOverlayScrimForUnifiedPurchaseModal = require(script.FFlagRemoveCentralOverlayScrimForUnifiedPurchaseModal),
 	FFlagEnableAvatarExperienceSdui = require(script.FFlagEnableAvatarExperienceSdui),
-	FFlagAXAvatarSortInDiscoveryUnifiedPurchase = require(script.FFlagAXAvatarSortInDiscoveryUnifiedPurchase),
 	FFlagAXFixHomeAvatarsUnifiedPurchase = require(script.FFlagAXFixHomeAvatarsUnifiedPurchase),
 	FFlagAXDiscoveryItemPurchaseAttribution = require(script.FFlagAXDiscoveryItemPurchaseAttribution),
 	FFlagAndroidPasswordSuggestionExperimentEnrollmentBypass = require(script.FFlagAndroidPasswordSuggestionExperimentEnrollmentBypass),
@@ -1806,7 +1808,8 @@ return {
 	FFlagAppNavMyStatsTab = game:DefineFastFlag("AppNavMyStatsTab3", false),
 	FFlagReplaceNavbarIconsWithFoundation = game:DefineFastFlag("ReplaceNavbarIconsWithFoundation2", false),
 	FFlagEnableBuildTabOverride = game:DefineFastFlag("EnableBuildTabOverride", false),
-	FFlagBuildAgentAdCampaignCard = game:DefineFastFlag("BuildAgentAdCampaignCard2", false),
+	FFlagBuildAgentAdCampaignCard = game:DefineFastFlag("BuildAgentAdCampaignCard3", false),
+	FFlagBuildAgentAdCampaignToolCallStatusFallback = game:DefineFastFlag("BuildAgentAdCampaignToolCallStatusFallback", false),
 	FFlagBuildExperienceChatResourceAttachments = buildExperienceChatResourceAttachments,
 	FFlagBuildExperienceLibrary = game:DefineFastFlag("BuildExperienceLibrary", false) and (buildExperienceChatResourceAttachments and game:GetEngineFeature("IsTeamCreateViewerEnabled")),
 	FFlagBuildExperienceSessionization = game:DefineFastFlag("BuildExperienceSessionization1", false),
@@ -1881,5 +1884,7 @@ return {
 	FFlagEnablePlusReferralDashboard = require(script.FFlagEnablePlusReferralDashboard),
 	FFlagEnablePlusReferralFlyoutEntry = require(script.FFlagEnablePlusReferralFlyoutEntry),
 	FFlagEnablePlusReferralDashboardDeepLink = require(script.FFlagEnablePlusReferralDashboardDeepLink),
+	FFlagEnablePlusReferralLandingSheet = require(script.FFlagEnablePlusReferralLandingSheet),
+	FIntPlusReferralRewardRobux = require(script.FIntPlusReferralRewardRobux),
 	FFlagEnableCommunitiesHttpDeepLink = game:DefineFastFlag("EnableCommunitiesHttpDeepLink", false)
 }

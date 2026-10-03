@@ -94,7 +94,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		hoverOpenAtDepth = var3.hoverOpenAtDepth,
 		hoverCloseAtDepth = var3.hoverCloseAtDepth
 	})
-	local _ = reactModule.useCallback(function()
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref), var2 (ref), var3 (ref), var8 (ref), depth (ref), loggerModule (copy)
 		if var7 then
 			if var2.isDisabled then return end
@@ -106,10 +106,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		elseif var3.hoverReset then
 			var3.hoverReset()
 		end
-		local var19 = if var2.onActivated then var2.onActivated else var3.onActivated
+		local var20 = if var2.onActivated then var2.onActivated else var3.onActivated
 		
-		if var19 then
-			var19(var2.id)
+		if var20 then
+			var20(var2.id)
 		else
 			loggerModule:warning("Menu should have either onActivated on itself or on all of its children")
 		end
@@ -121,14 +121,14 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		var3.onActivated, var3.onNestedLeafActivated, var3.hoverOpenAtDepth,
 		var3.hoverReset
 	})
-	local var19 = reactModule.useCallback(function()
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: var3 (ref)
 		if var3.hoverReset then
 			var3.hoverReset()
 		end
 	end, { var3.hoverReset })
-	local var20 = useBindableModule(var3.maxHeight)
-	local _ = reactModule.useMemo(function()
+	local var21 = useBindableModule(var3.maxHeight)
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: var6 (ref)
 		return {
 			radius = UDim.new(0, var6.Radius.Small),
@@ -136,17 +136,17 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			borderWidth = var6.Stroke.Thicker
 		}
 	end, { var6 })
-	local _ = useComposedRef(var13, p2)
+	local var23 = useComposedRef(var13, p2)
 	local _ = nil
-	local _ = getContainerPadding(var12.container, var5)
-	local _ = {
+	local var24 = getContainerPadding(var12.container, var5)
+	local t_1 = {
 		FillDirection = Enum.FillDirection.Horizontal,
 		VerticalAlignment = Enum.VerticalAlignment.Center,
 		Padding = UDim.new(0, 0),
 		SortOrder = Enum.SortOrder.LayoutOrder
 	}
-	local _ = if var12.wrapper then var12.wrapper.gap else 0
-	local _ = if var5 then reactModule.createElement(viewModule, {
+	local var25 = if var12.wrapper then var12.wrapper.gap else 0
+	local var26 = if var5 then reactModule.createElement(viewModule, {
 		LayoutOrder = 1,
 		tag = `{var12.slotAlign.tag} {var12.check.tag}`,
 		testId = `{var2.testId}--check-column`
@@ -158,10 +158,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			testId = `{var2.testId}--checkmark`
 		}) else nil
 	}) else nil
-	local var21 = nil
+	local var27 = nil
 	
 	if var9 ~= nil then
-		var21 = reactModule.createElement(baseMenuItemAccessoryModule, {
+		var27 = reactModule.createElement(baseMenuItemAccessoryModule, {
 			LayoutOrder = 1,
 			accessory = var9,
 			iconVariant = var12.icon,
@@ -170,16 +170,16 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			testId = `{var2.testId}--leading`
 		})
 	elseif var4 then
-		var21 = reactModule.createElement(viewModule, {
+		var27 = reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
 			tag = `{var12.slotAlign.tag} {var12.icon.tag}`
 		})
 	end
-	local _ = reactModule.createElement(textModule, { LayoutOrder = 2, Text = var2.text, tag = var12.text.tag })
-	local var22 = nil
+	local var28 = reactModule.createElement(textModule, { LayoutOrder = 2, Text = var2.text, tag = var12.text.tag })
+	local var29 = nil
 	
 	if var7 then
-		var22 = reactModule.createElement(iconModule, {
+		var29 = reactModule.createElement(iconModule, {
 			LayoutOrder = 3,
 			name = builderIconsModule.Icon.ChevronSmallRight,
 			style = var12.check.style,
@@ -187,7 +187,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			testId = `{var2.testId}--chevron`
 		})
 	elseif var10 ~= nil then
-		var22 = reactModule.createElement(baseMenuItemAccessoryModule, {
+		var29 = reactModule.createElement(baseMenuItemAccessoryModule, {
 			LayoutOrder = 3,
 			accessory = var10,
 			iconVariant = var12.icon,
@@ -196,7 +196,32 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			testId = `{var2.testId}--trailing`
 		})
 	end
-	local var23 = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+	local var30 = reactModule.createElement(viewModule, withCommonPropsModule(var2, {
+		GroupTransparency = if var2.isDisabled then constantsModule.DISABLED_TRANSPARENCY else nil,
+		isDisabled = var2.isDisabled,
+		onActivated = var19,
+		selection = { Selectable = not var2.isDisabled },
+		cursor = var22,
+		tag = var12.container.tag,
+		padding = var24,
+		layout = t_1,
+		ref = var23
+	}), {
+		Check = var26,
+		Wrapper = reactModule.createElement(viewModule, {
+			LayoutOrder = 2,
+			tag = "auto-xy",
+			flexItem = { FlexMode = Enum.UIFlexMode.Fill },
+			layout = {
+				FillDirection = Enum.FillDirection.Horizontal,
+				HorizontalFlex = Enum.UIFlexAlignment.SpaceBetween,
+				VerticalAlignment = Enum.VerticalAlignment.Center,
+				Padding = UDim.new(0, var25),
+				SortOrder = Enum.SortOrder.LayoutOrder
+			}
+		}, { Leading = var27, Title = var28, Trailing = var29 })
+	})
+	local var31 = reactModule.useMemo(function()
 		-- upvalues: var3 (ref), size (ref), var15 (ref), var17 (ref), depth (ref)
 		return {
 			onActivated = var3.onActivated,
@@ -215,29 +240,15 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		var3.onActivated, var3.onNestedLeafActivated, size, var15,
 		var3.hoverOpenPath, var3.hoverOpenAtDepth, var3.hoverCloseAtDepth,
 		var3.hoverReset, depth, var3.maxHeight
-	}) else nil
+	})
 	
 	if var7 then
 		local standard = var6.Stroke.Standard
 		local size_1 = var12.groupPadding.size
-		local var24 = reactModule.createElement(baseMenuContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then var23 else {
-				onActivated = var3.onActivated,
-				onNestedLeafActivated = var3.onNestedLeafActivated,
-				size = size,
-				hasLeading = var15,
-				setHasLeading = var17,
-				hoverOpenPath = var3.hoverOpenPath,
-				hoverOpenAtDepth = var3.hoverOpenAtDepth,
-				hoverCloseAtDepth = var3.hoverCloseAtDepth,
-				hoverReset = var3.hoverReset,
-				depth = depth + 1,
-				maxHeight = var3.maxHeight
-			}
-		}, var2.children)
+		local var32 = reactModule.createElement(baseMenuContextModule.Provider, { value = var31 }, var2.children)
 		
 		return reactModule.createElement(reactModule.Fragment, nil, {
-			Item = u655,
+			Item = var30,
 			Submenu = reactModule.createElement(popoverModule.Root, { isOpen = var8, testId = `{var2.testId}--submenu` }, {
 				Anchor = reactModule.createElement(popoverModule.Anchor, { anchorRef = var13 }),
 				Content = reactModule.createElement(popoverModule.Content, {
@@ -247,15 +258,15 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 						offset = size_1 / 2 + standard
 					},
 					align = { position = popoverAlignModule.Start, offset = -size_1 },
-					onPressedOutside = var19,
+					onPressedOutside = var20,
 					backgroundStyle = var6.Color.Surface.Surface_200,
 					radius = radiusModule.Medium
 				}, if var11 then reactModule.createElement(baseMenuScrollContainerModule, {
-					maxHeight = var20,
+					maxHeight = var21,
 					scrollViewProps = { tag = var12.submenuContent.tag, InputSink = var1 }
-				}, var24) else reactModule.createElement(viewModule, { tag = var12.submenuContent.tag, InputSink = var1 }, var24))
+				}, var32) else reactModule.createElement(viewModule, { tag = var12.submenuContent.tag, InputSink = var1 }, var32))
 			})
 		})
 	end
-	return u655
+	return var30
 end))

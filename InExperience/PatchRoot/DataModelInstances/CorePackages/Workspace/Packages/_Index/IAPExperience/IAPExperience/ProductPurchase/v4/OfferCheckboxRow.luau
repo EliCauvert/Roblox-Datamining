@@ -5,6 +5,7 @@ local view = foundationModule.View
 local checkbox = foundationModule.Checkbox
 local badge = foundationModule.Badge
 local badgeVariant = foundationModule.Enums.BadgeVariant
+local badgeShape = foundationModule.Enums.BadgeShape
 local iconVariant = foundationModule.Enums.IconVariant
 local iconPosition = foundationModule.Enums.IconPosition
 local useTokens = foundationModule.Hooks.useTokens
@@ -12,9 +13,10 @@ local builderIconsModule = require(parent.BuilderIcons)
 local useRemainingTimeText = require(parent.InExperienceOffers).Hooks.useRemainingTimeText
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local fFlagEnableInExperienceOfferExpiryBadge = require(parent.SharedFlags).FFlagEnableInExperienceOfferExpiryBadge
+local updateOfferExpiryBadgeBoxShape = game:DefineFastFlag("UpdateOfferExpiryBadgeBoxShape", false)
 
 return function(p1)
-	-- upvalues: useTokens (ref), useRemainingTimeText (ref), useLocalization (ref), reactModule (ref), view (ref), checkbox (ref), foundationModule (ref), fFlagEnableInExperienceOfferExpiryBadge (ref), badge (ref), builderIconsModule (ref), iconVariant (ref), iconPosition (ref), badgeVariant (ref)
+	-- upvalues: useTokens (ref), useRemainingTimeText (ref), useLocalization (ref), reactModule (ref), view (ref), checkbox (ref), foundationModule (ref), fFlagEnableInExperienceOfferExpiryBadge (ref), badge (ref), builderIconsModule (ref), iconVariant (ref), iconPosition (ref), badgeVariant (ref), updateOfferExpiryBadgeBoxShape (ref), badgeShape (ref)
 	local var1 = useTokens()
 	local var2 = useRemainingTimeText(p1.expirationTimeUtc)
 	local layoutOrder = p1.LayoutOrder or 0
@@ -47,7 +49,8 @@ return function(p1)
 					timeRemaining = var2 or ""
 				}
 			}).endTime,
-			variant = badgeVariant.Standard
+			variant = badgeVariant.Standard,
+			shape = if updateOfferExpiryBadgeBoxShape then badgeShape.Box else nil
 		}) else nil
 	})
 end

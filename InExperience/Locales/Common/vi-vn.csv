@@ -2028,11 +2028,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,Tổng thời gian chơi
 Feature.Build.Analytics.Visits,Lượt truy cập
 Feature.Build.Content.NewGame,Trò chơi mới
 Feature.Build.Description.ActivateDeveloperProduct,Đăng bán sản phẩm {PRODUCT_ID} của nhà phát triển.
-Feature.Build.Description.AdActive,Quảng cáo của bạn đang chạy. Hãy xem quảng cáo đang tiếp cận bao nhiêu người chơi.
 Feature.Build.Description.AdCampaignModerationReview,Mọi chiến dịch quảng cáo đều được đội ngũ kiểm duyệt của Roblox xem xét. Quá trình này có thể mất đến 24 giờ.
 Feature.Build.Description.AdCampaignSheetRunDates,Chạy từ {startDate} – {endDate}
 Feature.Build.Description.AdComplete,Quảng cáo của bạn đã kết thúc. Hãy kiểm tra kết quả.
-Feature.Build.Description.AdInReview,Quảng cáo của bạn đang được xét duyệt và dự kiến sẽ chạy từ {startDate} – {endDate}.
 Feature.Build.Description.AdModerationReview,Mọi quảng cáo đều được đội ngũ kiểm duyệt của Roblox xem xét và có thể mất đến 24 giờ.
 Feature.Build.Description.AdvertisingAgreement,"Khi chọn ""Tạo"", bạn đồng ý với {advertisingTermsStart}Điều khoản quảng cáo{advertisingTermsEnd} và {advertisingStandardsStart}Tiêu chuẩn quảng cáo của Roblox{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Nếu bạn lưu trữ trò chơi này, trò chơi sẽ bị gỡ khỏi Build. Bạn vẫn có thể truy cập và khôi phục trò chơi từ Trung tâm nhà sáng tạo hoặc Roblox Studio."
@@ -2361,7 +2359,6 @@ Feature.Build.Title.AdActive,Chiến dịch quảng cáo đang hoạt động
 Feature.Build.Title.AdCampaignDuration,Chiến dịch quảng cáo dài {durationDays} ngày
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} ngày
 Feature.Build.Title.AdComplete,Đã hoàn tất quảng cáo
-Feature.Build.Title.AdCreated,Đã tạo quảng cáo
 Feature.Build.Title.AdCreatedPeriod,Đã tạo quảng cáo.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Thêm hình ảnh
@@ -3486,6 +3483,7 @@ Feature.Groups.Notification.FailedToFollow,Không thể theo dõi hồ sơ. Vui 
 Feature.Groups.Notification.FailedToJoin,Không thể tham gia cộng đồng. Vui lòng thử lại sau.
 Feature.Groups.Notification.FailedToLoad,Không thể tải cộng đồng. Vui lòng thử lại sau.
 Feature.Groups.Notification.Following,Đang theo dõi {groupName}.
+Feature.Groups.Notification.GroupDeactivated,Cộng đồng này đã bị vô hiệu hóa.
 Feature.Groups.Notification.GroupDoesNotExist,Cộng đồng không tồn tại.
 Feature.Groups.Notification.GroupModerated,Cộng đồng này hiện đang được kiểm duyệt.
 Feature.Groups.Notification.JoinRequestPending,Đã yêu cầu tham gia {groupName}.
@@ -3623,6 +3621,7 @@ Feature.Moments.Disclaimer.EveryoneMoments,Ai trong Khoảnh khắc cũng có th
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,Đang thử tham gia {placeName}. Vui lòng chờ trong giây lát.
 Feature.Moments.Label.CaptureLibrary,Thư viện Ảnh chụp/video quay màn hình của bạn
+Feature.Moments.Label.ChooseVoice,Chọn giọng nói
 Feature.Moments.Label.DeleteMomentBody,Bạn không thể khôi phục một Khoảnh khắc sau khi đã xóa.
 Feature.Moments.Label.DeleteMomentTitle,Xóa Khoảnh khắc?
 Feature.Moments.Label.DeleteVoiceoverBody,Thao tác này sẽ xóa văn bản và phần thuyết minh hiện tại. Bạn có thể làm lại từ đầu bất cứ lúc nào.
@@ -4043,8 +4042,10 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Giảm 10% trong 60 n
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"Giảm 10% trong {trialUnlockDays} ngày đầu tiên, sau đó giảm 20% cho vật phẩm và avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Vui hơn, tốn ít Robux hơn. Đăng ký Roblox Plus ngay."
 Feature.RobloxSubscription.Description.JoinEarly,Mua gói Plus để được tham gia sớm
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} đã mời bạn tham gia Plus. Cả hai sẽ nhận được {amount} Robux khi bạn mua gói Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Khi nhấp chuột vào \u{201C}{ctaText}\u{201D}, bạn đồng ý với <a href=""{termsUrl}"">Điều khoản gói đăng ký của Roblox</a>. Hệ thống sẽ tự động thu phí hằng tháng cho đến khi bạn hủy."
 Feature.RobloxSubscription.Heading.ReferralEntry,Chia sẻ Plus để nhận {amount} Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,"Tham gia Plus, nhận"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Máy chủ riêng miễn phí
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,Gửi Robux miễn phí

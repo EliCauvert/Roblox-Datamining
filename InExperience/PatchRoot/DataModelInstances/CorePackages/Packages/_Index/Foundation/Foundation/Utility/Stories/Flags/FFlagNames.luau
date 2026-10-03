@@ -8,6 +8,6 @@
 	FoundationSliderBeta = "FoundationSliderBeta3",
 	FoundationSliderOffloadDraggingMath = "FoundationSliderOffloadDraggingMath2",
 	FoundationTooltipBeta = "FoundationTooltipBeta3",
-	FoundationEducationalTooltipMinMediaWidth = "FoundationEducationalTooltipMinMediaWidth2",
+	FoundationEducationalTooltipMinMediaWidth = "FoundationEducationalTooltipMinMediaWidth3",
 	FoundationEducationalTooltipRefresh = "FoundationEducationalTooltipRefresh2"
 }

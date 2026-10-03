@@ -32,6 +32,7 @@ local getFIntMomentsTTSComposerMinLinesModule = require(momentsCreation.Flags.Ge
 local getFIntMomentsTTSDefaultVoiceIdModule = require(momentsCreation.Flags.GetFIntMomentsTTSDefaultVoiceId)
 local getFIntMomentsTTSMaxCharactersModule = require(momentsCreation.Flags.GetFIntMomentsTTSMaxCharacters)
 local getFFlagMomentsTTSStartTimePositioningModule = require(momentsCreation.Flags.GetFFlagMomentsTTSStartTimePositioning)
+local fFlagMomentsTTSStartTimeScrubberFollowModule = require(momentsCreation.Flags.FFlagMomentsTTSStartTimeScrubberFollow)
 local fFlagMomentsTTSComposerCaretAlignmentModule = require(momentsCreation.Flags.FFlagMomentsTTSComposerCaretAlignment)
 local fFlagMomentsTTSVoiceSelectorModule = require(momentsCreation.Flags.FFlagMomentsTTSVoiceSelector)
 local fFlagMomentsTTSComposerUncontrolledInputModule = require(momentsCreation.Flags.FFlagMomentsTTSComposerUncontrolledInput)
@@ -65,7 +66,7 @@ local _ = function(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: getFIntMomentsTTSMaxCharactersModule (ref), useLocalization (ref), useOnScreenKeyboardHeightModule (ref), useState (ref), userInputService (ref), useEffect (ref), useComposerParentTextPaddingModule (ref), fFlagMomentsTTSComposerCaretAlignmentModule (ref), useTokens (ref), var1 (ref), fFlagMomentsTTSVoiceSelectorModule (ref), useSignalState (ref), voiceCatalogModule (ref), fFlagMomentsTTSComposerUncontrolledInputModule (ref), reactModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), signalsModule (ref), clampTtsStartTimeModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), dialogTypeModule (ref), useCallback (ref), t (ref), useLayoutEffect (ref), useMemo (ref), measureTextLineCountModule (ref), builderSans (ref), var3 (ref), var2 (ref), computeVoiceButtonStateModule (ref), useVoiceSelectorModule (ref), useTtsStartTimeDragModule (ref)
+	-- upvalues: getFIntMomentsTTSMaxCharactersModule (ref), useLocalization (ref), useOnScreenKeyboardHeightModule (ref), useState (ref), userInputService (ref), useEffect (ref), useComposerParentTextPaddingModule (ref), fFlagMomentsTTSComposerCaretAlignmentModule (ref), useTokens (ref), var1 (ref), fFlagMomentsTTSVoiceSelectorModule (ref), useSignalState (ref), voiceCatalogModule (ref), fFlagMomentsTTSComposerUncontrolledInputModule (ref), reactModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), signalsModule (ref), clampTtsStartTimeModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), dialogTypeModule (ref), useCallback (ref), t (ref), useLayoutEffect (ref), useMemo (ref), measureTextLineCountModule (ref), builderSans (ref), var3 (ref), var2 (ref), computeVoiceButtonStateModule (ref), useVoiceSelectorModule (ref), fFlagMomentsTTSStartTimeScrubberFollowModule (ref), useTtsStartTimeDragModule (ref)
 	local controller = p1.controller
 	local var4 = getFIntMomentsTTSMaxCharactersModule()
 	local playback = controller.preview.playback
@@ -643,9 +644,14 @@ return function(p1)
 	if var51 ~= "ready" then
 		var45 = var51 == "playing" and (var53 > 0 and var78 > 0)
 	end
-	local var81 = useCallback(function(p3)
-		-- upvalues: var38 (ref), controller (ref)
+	local var81 = reactModule.useRef(var46)
+	local var82 = useCallback(function(p3)
+		-- upvalues: var38 (ref), fFlagMomentsTTSStartTimeScrubberFollowModule (copy), var81 (ref), controller (ref)
 		var38(p3)
+		
+		if fFlagMomentsTTSStartTimeScrubberFollowModule then
+			var81.current = p3
+		end
 		local activeSession = controller.getActiveSession(false)
 		
 		if activeSession == nil then return end
@@ -659,30 +665,29 @@ return function(p1)
 			})
 		end
 	end, { controller })
-	local var82 = reactModule.useRef(false)
-	local var83 = reactModule.useRef(0)
-	local var84 = reactModule.useRef(var46)
+	local var83 = reactModule.useRef(false)
+	local var84 = reactModule.useRef(0)
 	local var85 = reactModule.useRef(var53)
 	useEffect(function()
-		-- upvalues: var84 (ref), var46 (ref), var85 (ref), var53 (ref)
-		var84.current = var46
+		-- upvalues: var81 (ref), var46 (ref), var85 (ref), var53 (ref)
+		var81.current = var46
 		var85.current = var53
 	end, { var46, var53 })
-	local var86 = useTtsStartTimeDragModule(getFFlagMomentsTTSStartTimePositioningModule and var45, var78, var37, var81, useCallback(function()
-		-- upvalues: var83 (ref), var84 (ref), playback (ref), var82 (ref)
-		var83.current = var84.current
+	local var86 = useTtsStartTimeDragModule(getFFlagMomentsTTSStartTimePositioningModule and var45, var78, var37, var82, useCallback(function()
+		-- upvalues: var84 (ref), var81 (ref), playback (ref), var83 (ref)
+		var84.current = var81.current
 		
 		if playback.getIsPlaying(false) then
-			var82.current = true
+			var83.current = true
 			playback.pause()
 		end
-	end, { playback }), useCallback(function()
-		-- upvalues: var82 (ref), var84 (ref), getFFlagMomentsTTSStartTimePositioningModule (copy), var83 (ref), playback (ref), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), var85 (ref), ttsAudio (ref)
-		local current = var82.current
-		var82.current = false
-		local current_1 = var84.current
+	end, { playback }), useCallback(function(p3)
+		-- upvalues: var83 (ref), var81 (ref), getFFlagMomentsTTSStartTimePositioningModule (copy), var84 (ref), playback (ref), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), fFlagMomentsTTSStartTimeScrubberFollowModule (copy), ttsAudio (ref), var85 (ref)
+		local current = var83.current
+		var83.current = false
+		local current_1 = var81.current
 		
-		if getFFlagMomentsTTSStartTimePositioningModule and current_1 ~= var83.current then
+		if getFFlagMomentsTTSStartTimePositioningModule and current_1 ~= var84.current then
 			local duration = playback.getDuration(false)
 			fireAnalyticsEventModule(eventNames.EditingFlowVoiceoverStartTimeAdjusted, makeCreationEventFieldsModule.makeVoiceEventFields({
 				source = "drag",
@@ -690,6 +695,14 @@ return function(p1)
 				video_duration_seconds = tostring(duration),
 				start_time_fraction = tostring(if duration > 0 then current_1 / duration else 0)
 			}))
+		end
+		if fFlagMomentsTTSStartTimeScrubberFollowModule and not p3 and current_1 ~= var84.current then
+			playback.seek(current_1)
+			ttsAudio.seek(0)
+			playback.play()
+			ttsAudio.play()
+			
+			return
 		end
 		local position = playback.getPosition(false)
 		
@@ -708,6 +721,7 @@ return function(p1)
 		playback = playback,
 		capture = var76,
 		onTimelineSeek = var60,
+		playheadPosition = if fFlagMomentsTTSStartTimeScrubberFollowModule and var86.isSelected then var37 else nil,
 		showAudioWaveform = var45,
 		audioDuration = var53,
 		videoDuration = var78,

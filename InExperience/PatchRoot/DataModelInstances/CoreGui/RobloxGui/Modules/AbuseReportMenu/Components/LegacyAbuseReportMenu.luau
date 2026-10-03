@@ -44,11 +44,8 @@ local focusRoot = focusNavigationUtilsModule.FocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local isAbuseReportMenuOpenCloseSignalEnabledModule = require(abuseReportMenu.Flags.isAbuseReportMenuOpenCloseSignalEnabled)
 local fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule = require(abuseReportMenu.Flags.FIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelay)
-local getFFlagWHAM1707ExperimentForceEnabledModule = require(abuseReportMenu.Flags.GetFFlagWHAM1707ExperimentForceEnabled)
-local fStringWHAM1707IXPFieldModule = require(abuseReportMenu.Flags.FStringWHAM1707IXPField)
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local fStringReportMenuIXPLayer = sharedFlagsModule.FStringReportMenuIXPLayer
-local fStringEARReportMenuIXPLayer = sharedFlagsModule.FStringEARReportMenuIXPLayer
 local fStringSelectInSceneIXPField = sharedFlagsModule.FStringSelectInSceneIXPField
 local fFlagHighlightModePreciseSelectionEnabled = sharedFlagsModule.FFlagHighlightModePreciseSelectionEnabled
 local fFlagHideShortcutsOnReportDropdownModule = require(abuseReportMenu.Flags.FFlagHideShortcutsOnReportDropdown)
@@ -79,26 +76,8 @@ local function _()
 	return false
 end
 
-local function isInWHAM1707Experiment()
-	-- upvalues: getFFlagWHAM1707ExperimentForceEnabledModule (ref), IXPService (ref), fStringEARReportMenuIXPLayer (ref), fStringWHAM1707IXPFieldModule (ref)
-	if getFFlagWHAM1707ExperimentForceEnabledModule() then
-		return true
-	end
-	local ok, status = pcall(function()
-		-- upvalues: IXPService (copy), fStringEARReportMenuIXPLayer (copy)
-		return IXPService:GetUserLayerVariables(fStringEARReportMenuIXPLayer)
-	end)
-	
-	if ok and status and status[fStringWHAM1707IXPFieldModule] ~= nil then
-		IXPService:LogUserLayerExposure(fStringEARReportMenuIXPLayer)
-		
-		return status[fStringWHAM1707IXPFieldModule]
-	end
-	return false
-end
-
 local var1 = function(p1)
-	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), list (ref), list_1 (ref), createCleanupModule (ref), useReportAnythingWithScreenshotModule (ref), getMenuItemSizingsModule (ref), useTokens (ref), useLocalization (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (ref), isInWHAM1707Experiment (ref), safetyService (ref), annotationModalModule (ref), modalBasedSelectorDialogControllerModule (ref), abuseReportTabClearCapturedScreenshotOnCloseFix (ref), setTimeout (ref), reportAbuseAnalyticsModule (ref), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (ref), playersService (ref), isShowSelectInSceneReportMenuModule (ref), IXPService (ref), fStringReportMenuIXPLayer (ref), fStringSelectInSceneIXPField (ref), fFlagReportFocusNavIEMButtonsModule (ref), guiService (ref), fFlagIEMTabFocusNav (ref), fFlagHideShortcutsOnReportDropdownModule (ref), reportAnythingAnalyticsModule (ref), reportTypes (ref), reportPersonMenuItemsContainerModule (ref), reportExperienceMenuItemsContainerModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), IEMReportScrollingFix (ref), segmentedControl (ref), reportModes (ref), selectInSceneReportMenuModule (ref), fFlagHighlightModePreciseSelectionEnabled (ref), getHighlightModeVariant (ref), reportTypeSelectorModule (ref), view (ref), text (ref), isShowUKOSAIllegalContentReportingLink (ref), fFlagMigrateAllOsaMessagingToCentralService (ref), isShowEUDSAIllegalContentReportingLink (ref), DSAReportLink (ref), OSAReportLink (ref), isShowGenericIllegalContentReportingLink (ref), genericReportLink (ref), fFlagAddTakeItDownReportLinkToSurfaces (ref), getTakeItDownReportLinkVisibility (ref), takeItDownReportLink (ref)
+	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), list (ref), list_1 (ref), createCleanupModule (ref), useReportAnythingWithScreenshotModule (ref), getMenuItemSizingsModule (ref), useTokens (ref), useLocalization (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (ref), safetyService (ref), annotationModalModule (ref), modalBasedSelectorDialogControllerModule (ref), abuseReportTabClearCapturedScreenshotOnCloseFix (ref), setTimeout (ref), reportAbuseAnalyticsModule (ref), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (ref), playersService (ref), isShowSelectInSceneReportMenuModule (ref), IXPService (ref), fStringReportMenuIXPLayer (ref), fStringSelectInSceneIXPField (ref), fFlagReportFocusNavIEMButtonsModule (ref), guiService (ref), fFlagIEMTabFocusNav (ref), fFlagHideShortcutsOnReportDropdownModule (ref), reportAnythingAnalyticsModule (ref), reportTypes (ref), reportPersonMenuItemsContainerModule (ref), reportExperienceMenuItemsContainerModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), IEMReportScrollingFix (ref), segmentedControl (ref), reportModes (ref), selectInSceneReportMenuModule (ref), fFlagHighlightModePreciseSelectionEnabled (ref), getHighlightModeVariant (ref), reportTypeSelectorModule (ref), view (ref), text (ref), isShowUKOSAIllegalContentReportingLink (ref), fFlagMigrateAllOsaMessagingToCentralService (ref), isShowEUDSAIllegalContentReportingLink (ref), DSAReportLink (ref), OSAReportLink (ref), isShowGenericIllegalContentReportingLink (ref), genericReportLink (ref), fFlagAddTakeItDownReportLinkToSurfaces (ref), getTakeItDownReportLinkVisibility (ref), takeItDownReportLink (ref)
 	local var2, var3 = reactModule.useState(false)
 	local var4, var5 = reactModule.useState(1)
 	local var6, var7 = reactModule.useState(1)
@@ -119,22 +98,22 @@ local var1 = function(p1)
 	local var30 = useTokens()
 	local var31 = useLocalization(constantsModule.localizationKeys)
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707Experiment (copy), var27 (ref), safetyService (copy), annotationModalModule (copy), modalBasedSelectorDialogControllerModule (copy), var9 (ref), var11 (ref), abuseReportTabClearCapturedScreenshotOnCloseFix (copy), setTimeout (copy), reportAbuseAnalyticsModule (copy), var28 (ref), constantsModule (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
+		-- upvalues: p1 (ref), var3 (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), var27 (ref), safetyService (copy), annotationModalModule (copy), modalBasedSelectorDialogControllerModule (copy), var9 (ref), var11 (ref), abuseReportTabClearCapturedScreenshotOnCloseFix (copy), setTimeout (copy), reportAbuseAnalyticsModule (copy), var28 (ref), constantsModule (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
 		p1.registerOnReportTabDisplayed(function()
-			-- upvalues: var3 (copy), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707Experiment (copy), var27 (copy), safetyService (copy)
+			-- upvalues: var3 (copy), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), var27 (copy), safetyService (copy)
 			var3(true)
 			
-			if isAbuseReportMenuOpenCloseSignalEnabledModule() and isInWHAM1707Experiment() and var27.screenshotContentId ~= "" then
+			if isAbuseReportMenuOpenCloseSignalEnabledModule() and var27.screenshotContentId ~= "" then
 				safetyService:ReportMenuTabOpen()
 			end
 		end)
 		p1.registerOnReportTabHidden(function()
-			-- upvalues: var3 (copy), annotationModalModule (copy), modalBasedSelectorDialogControllerModule (copy), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707Experiment (copy), safetyService (copy)
+			-- upvalues: var3 (copy), annotationModalModule (copy), modalBasedSelectorDialogControllerModule (copy), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), safetyService (copy)
 			var3(false)
 			annotationModalModule.unmountAnnotationPage()
 			modalBasedSelectorDialogControllerModule.unmountModalSelector()
 			
-			if isAbuseReportMenuOpenCloseSignalEnabledModule() and isInWHAM1707Experiment() then
+			if isAbuseReportMenuOpenCloseSignalEnabledModule() then
 				safetyService:ReportMenuTabClose()
 			end
 		end)

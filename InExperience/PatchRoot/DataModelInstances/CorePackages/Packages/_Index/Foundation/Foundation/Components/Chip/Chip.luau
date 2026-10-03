@@ -3,7 +3,6 @@ local parent = foundation.Parent
 local reactModule = require(parent.React)
 local iconVariant = require(parent.BuilderIcons).IconVariant
 local constantsModule = require(foundation.Constants)
-local flagsModule = require(foundation.Utility.Flags)
 local presentationContextModule = require(foundation.Providers.Style.PresentationContext)
 local textModule = require(foundation.Components.Text)
 local _ = require(foundation.Components.Types)
@@ -27,7 +26,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), iconPositionModule (ref), iconVariant (ref), useChipVariantsModule (ref), flagsModule (ref), colorNamespaceModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerModeModule (ref), constantsModule (ref), presentationContextModule (ref), accessoryModule (ref), textModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), iconPositionModule (ref), iconVariant (ref), useChipVariantsModule (ref), colorNamespaceModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerModeModule (ref), constantsModule (ref), presentationContextModule (ref), accessoryModule (ref), textModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useTokensModule()
 	local var3, var4 = reactModule.useMemo(function()
@@ -81,16 +80,13 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		ref = p2,
 		GroupTransparency = if var1.isDisabled then constantsModule.DISABLED_TRANSPARENCY else 0
 	}), reactModule.createElement(presentationContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+		value = reactModule.useMemo(function()
 			-- upvalues: var1 (ref), colorNamespaceModule (copy)
 			return {
 				isIconSize = true,
 				colorNamespace = if var1.isChecked then colorNamespaceModule.Inverse else colorNamespaceModule.Color
 			}
-		end, { var1.isChecked }) else nil else {
-			isIconSize = true,
-			colorNamespace = if var1.isChecked then colorNamespaceModule.Inverse else colorNamespaceModule.Color
-		}
+		end, { var1.isChecked })
 	}, {
 		Leading = if var3 then reactModule.createElement(accessoryModule, {
 			isLeading = true,

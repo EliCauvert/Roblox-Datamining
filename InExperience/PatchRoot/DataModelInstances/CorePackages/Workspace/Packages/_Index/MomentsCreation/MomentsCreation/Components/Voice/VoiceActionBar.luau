@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("MomentsCreation").Parent
+﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
+local parent = momentsCreation.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local button = foundationModule.Button
@@ -8,9 +9,10 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local fillBehavior = foundationModule.Enums.FillBehavior
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
+local var1 = if require(momentsCreation.Flags.FFlagMomentsTTSCompactActionBar) then inputSize.Medium else inputSize.Large
 
 return function(p1)
-	-- upvalues: reactModule (ref), view (ref), button (ref), fillBehavior (ref), inputSize (ref), iconButton (ref), iconName (ref), buttonVariant (ref)
+	-- upvalues: reactModule (ref), view (ref), button (ref), fillBehavior (ref), var1 (ref), iconButton (ref), iconName (ref), buttonVariant (ref)
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-small size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder
@@ -27,7 +29,7 @@ return function(p1)
 					isDisabled = p1.primaryIsDisabled,
 					isLoading = p1.primaryIsLoading,
 					onActivated = p1.primaryOnActivated,
-					size = inputSize.Large,
+					size = var1,
 					text = p1.primaryText,
 					variant = p1.primaryVariant,
 					width = UDim.new(1, 0)
@@ -43,7 +45,7 @@ return function(p1)
 			IconButton = reactModule.createElement(iconButton, {
 				icon = iconName.TrashCan,
 				onActivated = p1.onDelete,
-				size = inputSize.Large,
+				size = var1,
 				variant = buttonVariant.Standard
 			})
 		})

@@ -5,5 +5,6 @@ return {
 	getExperienceAnalyticsStore = require(script.getExperienceAnalyticsStore),
 	MetricId = experienceAnalyticsStoreTypesModule.MetricId,
 	MetricGranularity = experienceAnalyticsStoreTypesModule.MetricGranularity,
+	FilterOperation = experienceAnalyticsStoreTypesModule.FilterOperation,
 	DataStatus = experienceAnalyticsStoreTypesModule.DataStatus
 }

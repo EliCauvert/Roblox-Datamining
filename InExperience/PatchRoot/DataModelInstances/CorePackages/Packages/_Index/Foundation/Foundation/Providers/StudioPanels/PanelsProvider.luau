@@ -54,9 +54,9 @@ return function(p1)
 	end, { var3, var2 })
 	
 	return reactModule.createElement(panelsContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+		value = reactModule.useMemo(function()
 			-- upvalues: var4 (ref)
 			return { registerPopoverAsync = var4 }
-		end, { var4 }) else { registerPopoverAsync = var4 }
+		end, { var4 })
 	}, p1.children)
 end

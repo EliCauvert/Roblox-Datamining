@@ -2027,11 +2027,9 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,造訪次數
 Feature.Build.Content.NewGame,新遊戲
 Feature.Build.Description.ActivateDeveloperProduct,販售開發者產品 {PRODUCT_ID}。
-Feature.Build.Description.AdActive,你的廣告正在投放中。看看它觸及了多少玩家。
 Feature.Build.Description.AdCampaignModerationReview,所有廣告活動都會由 Roblox 審核。此流程最多可能需要 24 小時。
 Feature.Build.Description.AdCampaignSheetRunDates,投放時間 {startDate} – {endDate}
 Feature.Build.Description.AdComplete,廣告已結束。請查看結果。
-Feature.Build.Description.AdInReview,你的廣告正受到審核，預計於 {startDate}至 {endDate}期間投放。
 Feature.Build.Description.AdModerationReview,所有廣告都會經由 Roblox 審核，最多可能需要 24 小時。
 Feature.Build.Description.AdvertisingAgreement,選擇「建立」，即表示您同意 {advertisingTermsStart}Roblox 廣告條款{advertisingTermsEnd}和{advertisingStandardsStart}廣告標準{advertisingStandardsEnd}。
 Feature.Build.Description.ArchiveRemoval,若封存此遊戲，遊戲會從「組建」中移除。你仍可在創作者中心或 Roblox Studio 中，存取並還原遊戲。
@@ -2360,7 +2358,6 @@ Feature.Build.Title.AdActive,廣告活動已生效
 Feature.Build.Title.AdCampaignDuration,為期 {durationDays} 天的廣告活動
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
 Feature.Build.Title.AdComplete,廣告已完成
-Feature.Build.Title.AdCreated,已建立廣告
 Feature.Build.Title.AdCreatedPeriod,已建立廣告。
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,新增圖片
@@ -3485,6 +3482,7 @@ Feature.Groups.Notification.FailedToFollow,無法追蹤個人檔案，請稍後�
 Feature.Groups.Notification.FailedToJoin,無法加入社群，請稍後再試。
 Feature.Groups.Notification.FailedToLoad,無法載入社群，請稍後再試。
 Feature.Groups.Notification.Following,正在追蹤 {groupName}。
+Feature.Groups.Notification.GroupDeactivated,此社群已停用。
 Feature.Groups.Notification.GroupDoesNotExist,此社群不存在。
 Feature.Groups.Notification.GroupModerated,此社群目前正在審核中。
 Feature.Groups.Notification.JoinRequestPending,已請求加入 {groupName}。
@@ -3622,6 +3620,7 @@ Feature.Moments.Disclaimer.EveryoneMoments,參與「美好時光」的所有人�
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,正在嘗試加入 {placeName}。這可能需要幾秒鐘。
 Feature.Moments.Label.CaptureLibrary,你的截圖資料庫
+Feature.Moments.Label.ChooseVoice,選擇語音
 Feature.Moments.Label.DeleteMomentBody,美好時光一經刪除即無法復原。
 Feature.Moments.Label.DeleteMomentTitle,要刪除美好時光嗎？
 Feature.Moments.Label.DeleteVoiceoverBody,此操作會清除你的文字和旁白。你可以隨時重新開始。
@@ -4042,8 +4041,10 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具和
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,前 {trialUnlockDays} 天享道具和虛擬人偶 10% 優惠，之後可享 20% 優惠
 Feature.RobloxSubscription.Description.ExclusiveBenefits,用更少的 Robux 享受更多樂趣。訂閱 Roblox Plus。
 Feature.RobloxSubscription.Description.JoinEarly,透過 Plus 搶先加入
+Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} 邀請你加入 Plus。購買 Plus 時，雙方皆可獲得 {amount} Robux。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"按一下\u{201C}{ctaText}\u{201D}，即表示您同意 <a href=""{termsUrl}"">Roblox 訂閱條款</a>。系統將每月自動向您收取費用，直到取消訂閱為止。"
 Feature.RobloxSubscription.Heading.ReferralEntry,分享 Plus 即可獲得 {amount} Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientJoin,加入 Plus，獲得
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免費私人伺服器
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,免費傳送 Robux

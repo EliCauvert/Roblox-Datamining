@@ -15,6 +15,7 @@ local fFlagAXEnableInspectAndBuyBulkPurchase = require(corePackagesService.Works
 local fFlagPlatformLeaderboardRccEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagPlatformLeaderboardRccEnabled
 local debugServerPlatformLeaderboardDevMock = game:DefineFastFlag("DebugServerPlatformLeaderboardDevMock", false)
 local emoteSkinningDisableEnabled = game:DefineFastFlag("EmoteSkinningDisableEnabled", false)
+local expChatRemoveServerTenFootCheck = game:DefineFastFlag("ExpChatRemoveServerTenFootCheck", false)
 local robloxGui = coreGuiService:WaitForChild("RobloxGui", 1e999)
 assert(robloxGui ~= nil, "RobloxGui should exist")
 local serverUtilModule = require(robloxGui.Modules.Server.ServerUtil)
@@ -75,7 +76,8 @@ if getFFlagDisplayServerChannel() then
 	getServerChannel.OnServerInvoke = getServerChannel_1
 end
 if (function()
-	return game:GetService("Chat").LoadDefaultChat and (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService and not game:GetService("GuiService"):IsTenFootInterface())
+	-- upvalues: expChatRemoveServerTenFootCheck (ref)
+	return if expChatRemoveServerTenFootCheck then game:GetService("Chat").LoadDefaultChat and game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService else game:GetService("Chat").LoadDefaultChat and (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService and not game:GetService("GuiService"):IsTenFootInterface())
 end)() then
 	require(game:GetService("CoreGui").RobloxGui.Modules.Server.ClientChat.ChatWindowInstaller)()
 	require(game:GetService("CoreGui").RobloxGui.Modules.Server.ServerChat.ChatServiceInstaller)()

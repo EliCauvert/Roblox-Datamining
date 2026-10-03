@@ -8,7 +8,6 @@ local createPendingFeedOverlayModule = require(script.Parent.createPendingFeedOv
 local getDeletedMomentsStoreModule = require(moments.Stores.GetDeletedMomentsStore)
 local analytics = momentsCommonModule.Analytics
 local momentsSurfaceLoadManager = momentsCommonModule.Performance.MomentsSurfaceLoadManager
-local fFlagMomentsRealtimeObservability = momentsCommonModule.Flags.FFlagMomentsRealtimeObservability
 local fFlagMomentsContentStatsTelemetry = momentsCommonModule.Flags.FFlagMomentsContentStatsTelemetry
 local _ = require(script.Parent.FeedTypes)
 local createPagerStoreModule = require(moments.Components.VerticalPager.createPagerStore)
@@ -18,7 +17,7 @@ local t = { kind = "skeleton" }
 local t_1 = { kind = "endState" }
 
 return function(p1, p2, p3, p4)
-	-- upvalues: createPagerStoreModule (ref), fFlagMomentsOptimisticProfilePending (ref), createPendingFeedOverlayModule (ref), createSignal (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), fFlagMomentsContentStatsTelemetry (ref), analytics (ref), t_1 (ref), signalsExperimentalModule (ref), fFlagMomentsRealtimeObservability (ref), t (ref), momentsSurfaceLoadManager (ref), signalsModule (ref), getDeletedMomentsStoreModule (ref)
+	-- upvalues: createPagerStoreModule (ref), fFlagMomentsOptimisticProfilePending (ref), createPendingFeedOverlayModule (ref), createSignal (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), fFlagMomentsContentStatsTelemetry (ref), analytics (ref), t_1 (ref), signalsExperimentalModule (ref), t (ref), momentsSurfaceLoadManager (ref), signalsModule (ref), getDeletedMomentsStoreModule (ref)
 	local var1 = createPagerStoreModule()
 	local var2 = if fFlagMomentsOptimisticProfilePending and p1.getPendingItems ~= nil then createPendingFeedOverlayModule() else nil
 	local var3 = nil
@@ -255,7 +254,7 @@ return function(p1, p2, p3, p4)
 	end
 	
 	local function runFetch(p9)
-		-- upvalues: var17 (write), var11 (ref), var19 (write), var16 (write), var14 (ref), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (ref), var10 (ref), commitItems (ref), t (copy), var2 (ref), findMomentIndex (ref), p1 (ref), var5 (ref), var8 (write), var1 (ref), var7 (ref), var20 (write), p4 (ref), var22 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var24 (write), t_3 (ref), p3 (ref), momentsSurfaceLoadManager (copy), var15 (write), t_2 (write), dedupeAndTrack (ref), var18 (write), var12 (ref), maybeAppendEndState (ref)
+		-- upvalues: var17 (write), var11 (ref), var19 (write), var16 (write), var14 (ref), analytics (copy), recommendationSource (ref), var10 (ref), commitItems (ref), t (copy), var2 (ref), findMomentIndex (ref), p1 (ref), var5 (ref), var8 (write), var1 (ref), var7 (ref), var20 (write), p4 (ref), var22 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var24 (write), t_3 (ref), p3 (ref), momentsSurfaceLoadManager (copy), var15 (write), t_2 (write), dedupeAndTrack (ref), var18 (write), var12 (ref), maybeAppendEndState (ref)
 		if var17 then return end
 		if not p9 and not var11(false) then return end
 		var19 += 1
@@ -265,9 +264,7 @@ return function(p1, p2, p3, p4)
 		local sessionGeneration = nil
 		
 		if p9 then
-			if fFlagMomentsRealtimeObservability then
-				analytics.reportMomentsFeedLoadAttempt(recommendationSource)
-			end
+			analytics.reportMomentsFeedLoadAttempt(recommendationSource)
 			var10(nil)
 			commitItems({ t })
 			
@@ -310,31 +307,31 @@ return function(p1, p2, p3, p4)
 				momentsSurfaceLoadManager.primaryDataNetworkFetch()
 				sessionGeneration = momentsSurfaceLoadManager.getSessionGeneration()
 			end
-		elseif fFlagMomentsRealtimeObservability then
+		else
 			analytics.reportMomentsFeedLoadMore("attempted", recommendationSource)
-		end
-		var1.addItems({ t })
-		var8 = "LoadingMore"
-		local var42 = var8
-		
-		if var2 ~= nil then
-			local var43 = 0
+			var1.addItems({ t })
+			var8 = "LoadingMore"
+			local var42 = var8
 			
-			for i, v in var1.getItems(false) do
-				if v.kind ~= "skeleton" and v.kind ~= "endState" then
-					var43 += 1
+			if var2 ~= nil then
+				local var43 = 0
+				
+				for i, v in var1.getItems(false) do
+					if v.kind ~= "skeleton" and v.kind ~= "endState" then
+						var43 += 1
+					end
+				end
+				if var43 > 0 then
+					var42 = if var8 == "LoadingMore" then "LoadingMore" else "Loaded"
+				elseif var8 == "Loaded" then
+					var42 = "Empty"
 				end
 			end
-			if var43 > 0 then
-				var42 = if var8 == "LoadingMore" then "LoadingMore" else "Loaded"
-			elseif var8 == "Loaded" then
-				var42 = "Empty"
-			end
+			var7(var42)
 		end
-		var7(var42)
 		local var44 = if p9 then nil else var15
 		task.spawn(function()
-			-- upvalues: p1 (copy), var44 (ref), var17 (copy), var38 (ref), var19 (copy), var16 (copy), p3 (copy), p9 (ref), sessionGeneration (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), commitItems (copy), var2 (copy), findMomentIndex (copy), var5 (copy), var1 (copy), var15 (copy), var18 (copy), var12 (copy), var8 (copy), var7 (copy), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var10 (copy), var14 (copy)
+			-- upvalues: p1 (copy), var44 (ref), var17 (copy), var38 (ref), var19 (copy), var16 (copy), p3 (copy), p9 (ref), sessionGeneration (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), commitItems (copy), var2 (copy), findMomentIndex (copy), var5 (copy), var1 (copy), var15 (copy), var18 (copy), var12 (copy), var8 (copy), var7 (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var10 (copy), var14 (copy)
 			local ok, status = pcall(p1.fetchAsync, var44)
 			
 			if var17 or var38 ~= var19 then return end
@@ -399,14 +396,14 @@ return function(p1, p2, p3, p4)
 				end
 				var7(var51)
 				
-				if fFlagMomentsRealtimeObservability and p9 then
+				if p9 then
 					analytics.reportMomentsFeedState(if var50 == "Loaded" then "loaded" else "empty", recommendationSource, nil)
 				end
 				if var45 then
 					if var50 == "Loaded" then
 						momentsSurfaceLoadManager.primaryDataReady()
 					else
-						momentsSurfaceLoadManager.abort(if fFlagMomentsRealtimeObservability then "empty" else nil)
+						momentsSurfaceLoadManager.abort("empty")
 					end
 				end
 				if var46.onAccepted ~= nil then
@@ -451,12 +448,10 @@ return function(p1, p2, p3, p4)
 					end
 				end
 				var7(var53)
+				analytics.reportMomentsFeedState("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
 				
-				if fFlagMomentsRealtimeObservability then
-					analytics.reportMomentsFeedState("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
-				end
 				if var45 then
-					momentsSurfaceLoadManager.abort(if fFlagMomentsRealtimeObservability then "failed" else nil)
+					momentsSurfaceLoadManager.abort("failed")
 					
 					return
 				end
@@ -486,10 +481,7 @@ return function(p1, p2, p3, p4)
 					end
 				end
 				var7(var56)
-				
-				if fFlagMomentsRealtimeObservability then
-					analytics.reportMomentsFeedLoadMore("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
-				end
+				analytics.reportMomentsFeedLoadMore("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
 			end
 		end)
 	end
@@ -500,7 +492,7 @@ return function(p1, p2, p3, p4)
 	end
 	
 	local function loadMore()
-		-- upvalues: var2 (ref), var19 (write), var9 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (ref), var21 (ref), var16 (write), var13 (ref), var17 (write), var11 (ref), var14 (ref), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (ref), var1 (ref), t (copy), var8 (write), var7 (ref), var15 (write), p1 (ref), p3 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), commitItems (ref), findMomentIndex (ref), var5 (ref), var18 (write), var12 (ref), maybeAppendEndState (ref), var10 (ref)
+		-- upvalues: var2 (ref), var19 (write), var9 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (ref), var21 (ref), var16 (write), var13 (ref), var17 (write), var11 (ref), var14 (ref), analytics (copy), recommendationSource (ref), var1 (ref), t (copy), var8 (write), var7 (ref), var15 (write), p1 (ref), p3 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), commitItems (ref), findMomentIndex (ref), var5 (ref), var18 (write), var12 (ref), maybeAppendEndState (ref), var10 (ref)
 		if var2 ~= nil and (var19 == 0 or var9(false) ~= nil) then return end
 		if fFlagMomentsNonInfiniteScrollEndStateFixesModule then
 			if p4 ~= nil and var21(false) then return end
@@ -513,10 +505,7 @@ return function(p1, p2, p3, p4)
 		var16 = true
 		var14(false)
 		local var59 = nil
-		
-		if fFlagMomentsRealtimeObservability then
-			analytics.reportMomentsFeedLoadMore("attempted", recommendationSource)
-		end
+		analytics.reportMomentsFeedLoadMore("attempted", recommendationSource)
 		var1.addItems({ t })
 		var8 = "LoadingMore"
 		local var60 = var8
@@ -538,7 +527,7 @@ return function(p1, p2, p3, p4)
 		var7(var60)
 		local var62 = false
 		task.spawn(function()
-			-- upvalues: p1 (copy), var15 (ref), var17 (copy), var58 (ref), var19 (copy), var16 (copy), p3 (copy), var62 (ref), var59 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), commitItems (copy), var2 (copy), findMomentIndex (copy), var5 (copy), var1 (copy), var15 (copy), var18 (copy), var12 (copy), var8 (copy), var7 (copy), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var10 (copy), var14 (copy)
+			-- upvalues: p1 (copy), var15 (ref), var17 (copy), var58 (ref), var19 (copy), var16 (copy), p3 (copy), var62 (ref), var59 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), commitItems (copy), var2 (copy), findMomentIndex (copy), var5 (copy), var1 (copy), var15 (copy), var18 (copy), var12 (copy), var8 (copy), var7 (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var10 (copy), var14 (copy)
 			local ok, status = pcall(p1.fetchAsync, var15)
 			
 			if var17 or var58 ~= var19 then return end
@@ -603,14 +592,14 @@ return function(p1, p2, p3, p4)
 				end
 				var7(var69)
 				
-				if fFlagMomentsRealtimeObservability and var62 then
+				if var62 then
 					analytics.reportMomentsFeedState(if var68 == "Loaded" then "loaded" else "empty", recommendationSource, nil)
 				end
 				if var63 then
 					if var68 == "Loaded" then
 						momentsSurfaceLoadManager.primaryDataReady()
 					else
-						momentsSurfaceLoadManager.abort(if fFlagMomentsRealtimeObservability then "empty" else nil)
+						momentsSurfaceLoadManager.abort("empty")
 					end
 				end
 				if var64.onAccepted ~= nil then
@@ -655,12 +644,10 @@ return function(p1, p2, p3, p4)
 					end
 				end
 				var7(var71)
+				analytics.reportMomentsFeedState("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
 				
-				if fFlagMomentsRealtimeObservability then
-					analytics.reportMomentsFeedState("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
-				end
 				if var63 then
-					momentsSurfaceLoadManager.abort(if fFlagMomentsRealtimeObservability then "failed" else nil)
+					momentsSurfaceLoadManager.abort("failed")
 					
 					return
 				end
@@ -690,16 +677,13 @@ return function(p1, p2, p3, p4)
 					end
 				end
 				var7(var74)
-				
-				if fFlagMomentsRealtimeObservability then
-					analytics.reportMomentsFeedLoadMore("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
-				end
+				analytics.reportMomentsFeedLoadMore("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
 			end
 		end)
 	end
 	
 	local function loadBeyondLimit()
-		-- upvalues: var17 (write), p4 (ref), var21 (ref), var11 (ref), t_3 (ref), var1 (ref), var20 (write), var22 (ref), maybeAppendEndState (ref), var19 (write), var16 (write), var14 (ref), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (ref), t (copy), var8 (write), var2 (ref), var7 (ref), var15 (write), p1 (ref), p3 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), commitItems (ref), findMomentIndex (ref), var5 (ref), var18 (write), var12 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var10 (ref)
+		-- upvalues: var17 (write), p4 (ref), var21 (ref), var11 (ref), t_3 (ref), var1 (ref), var20 (write), var22 (ref), maybeAppendEndState (ref), var19 (write), var16 (write), var14 (ref), analytics (copy), recommendationSource (ref), t (copy), var8 (write), var2 (ref), var7 (ref), var15 (write), p1 (ref), p3 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), commitItems (ref), findMomentIndex (ref), var5 (ref), var18 (write), var12 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var10 (ref)
 		if var17 or p4 == nil or not var21(false) then return end
 		if not var11(false) and #t_3 == 0 then return end
 		local items = var1.getItems(false)
@@ -737,10 +721,7 @@ return function(p1, p2, p3, p4)
 		var16 = true
 		var14(false)
 		local var79 = nil
-		
-		if fFlagMomentsRealtimeObservability then
-			analytics.reportMomentsFeedLoadMore("attempted", recommendationSource)
-		end
+		analytics.reportMomentsFeedLoadMore("attempted", recommendationSource)
 		var1.addItems({ t })
 		var8 = "LoadingMore"
 		local var80 = var8
@@ -762,7 +743,7 @@ return function(p1, p2, p3, p4)
 		var7(var80)
 		local var82 = false
 		task.spawn(function()
-			-- upvalues: p1 (copy), var15 (ref), var17 (copy), var78 (ref), var19 (copy), var16 (copy), p3 (copy), var82 (ref), var79 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), commitItems (copy), var2 (copy), findMomentIndex (copy), var5 (copy), var1 (copy), var15 (copy), var18 (copy), var12 (copy), var8 (copy), var7 (copy), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var10 (copy), var14 (copy)
+			-- upvalues: p1 (copy), var15 (ref), var17 (copy), var78 (ref), var19 (copy), var16 (copy), p3 (copy), var82 (ref), var79 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), commitItems (copy), var2 (copy), findMomentIndex (copy), var5 (copy), var1 (copy), var15 (copy), var18 (copy), var12 (copy), var8 (copy), var7 (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var10 (copy), var14 (copy)
 			local ok, status = pcall(p1.fetchAsync, var15)
 			
 			if var17 or var78 ~= var19 then return end
@@ -827,14 +808,14 @@ return function(p1, p2, p3, p4)
 				end
 				var7(var89)
 				
-				if fFlagMomentsRealtimeObservability and var82 then
+				if var82 then
 					analytics.reportMomentsFeedState(if var88 == "Loaded" then "loaded" else "empty", recommendationSource, nil)
 				end
 				if var83 then
 					if var88 == "Loaded" then
 						momentsSurfaceLoadManager.primaryDataReady()
 					else
-						momentsSurfaceLoadManager.abort(if fFlagMomentsRealtimeObservability then "empty" else nil)
+						momentsSurfaceLoadManager.abort("empty")
 					end
 				end
 				if var84.onAccepted ~= nil then
@@ -879,12 +860,10 @@ return function(p1, p2, p3, p4)
 					end
 				end
 				var7(var91)
+				analytics.reportMomentsFeedState("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
 				
-				if fFlagMomentsRealtimeObservability then
-					analytics.reportMomentsFeedState("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
-				end
 				if var83 then
-					momentsSurfaceLoadManager.abort(if fFlagMomentsRealtimeObservability then "failed" else nil)
+					momentsSurfaceLoadManager.abort("failed")
 					
 					return
 				end
@@ -914,10 +893,7 @@ return function(p1, p2, p3, p4)
 					end
 				end
 				var7(var94)
-				
-				if fFlagMomentsRealtimeObservability then
-					analytics.reportMomentsFeedLoadMore("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
-				end
+				analytics.reportMomentsFeedLoadMore("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
 			end
 		end)
 	end

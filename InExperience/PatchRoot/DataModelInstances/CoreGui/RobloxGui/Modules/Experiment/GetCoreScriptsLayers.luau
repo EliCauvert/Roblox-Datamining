@@ -23,15 +23,13 @@ local getFFlagEnableAppChatInExperience = require(corePackagesService.Workspace.
 local getFStringAppChatInExperienceIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).getFStringAppChatInExperienceIXPLayer
 local fStringReportMenuIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).FStringReportMenuIXPLayer
 local fStringReportingIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).FStringReportingIXPLayer
-local fStringEARReportMenuIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).FStringEARReportMenuIXPLayer
 
 return function()
-	-- upvalues: getFStringDesktopToastNotificationLayer (ref), fStringReportMenuIXPLayer (ref), fStringReportingIXPLayer (ref), fStringEARReportMenuIXPLayer (ref), fStringSocialCaptureIXPLayer (ref), fStringSocialCaptureTakenIXPLayer (ref), getFStringLuaAppExperienceMenuLayer (ref), getFStringLuaAppConsoleExperienceMenuLayerModule (ref), getFStringLargerRobuxUpsellIxpLayer (ref), getFFlagReportAnythingAnnotationIXP (ref), getFStringReportAnythingAnnotationIXPLayerName (ref), getFFlagChatTranslationSettingEnabledModule (ref), getFStringChatTranslationLayerNameModule (ref), getFFlagVoiceUserAgencyEnableIXPModule (ref), getFStringVoiceUserAgencyIXPLayerNameModule (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), getFStringGameInviteMenuLayer (ref), getFFlagUXForCameraPerformanceIXPEnabledModule (ref), getFStringUXForCameraPerformanceIXPLayerNameModule (ref), getFStringVoiceExposureIXPLayerNameModule (ref), getFStringAndroidPhoneVerificationLayer (ref), getFStringIOSPhoneVerificationLayer (ref), getFFlagEnableAppChatInExperience (ref), getFStringAppChatInExperienceIXPLayer (ref)
+	-- upvalues: getFStringDesktopToastNotificationLayer (ref), fStringReportMenuIXPLayer (ref), fStringReportingIXPLayer (ref), fStringSocialCaptureIXPLayer (ref), fStringSocialCaptureTakenIXPLayer (ref), getFStringLuaAppExperienceMenuLayer (ref), getFStringLuaAppConsoleExperienceMenuLayerModule (ref), getFStringLargerRobuxUpsellIxpLayer (ref), getFFlagReportAnythingAnnotationIXP (ref), getFStringReportAnythingAnnotationIXPLayerName (ref), getFFlagChatTranslationSettingEnabledModule (ref), getFStringChatTranslationLayerNameModule (ref), getFFlagVoiceUserAgencyEnableIXPModule (ref), getFStringVoiceUserAgencyIXPLayerNameModule (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), getFStringGameInviteMenuLayer (ref), getFFlagUXForCameraPerformanceIXPEnabledModule (ref), getFStringUXForCameraPerformanceIXPLayerNameModule (ref), getFStringVoiceExposureIXPLayerNameModule (ref), getFStringAndroidPhoneVerificationLayer (ref), getFStringIOSPhoneVerificationLayer (ref), getFFlagEnableAppChatInExperience (ref), getFStringAppChatInExperienceIXPLayer (ref)
 	local list = {
 		"AbuseReports", getFStringDesktopToastNotificationLayer(),
 		fStringReportMenuIXPLayer, fStringReportingIXPLayer,
-		fStringEARReportMenuIXPLayer, fStringSocialCaptureIXPLayer,
-		fStringSocialCaptureTakenIXPLayer
+		fStringSocialCaptureIXPLayer, fStringSocialCaptureTakenIXPLayer
 	}
 	table.insert(list, getFStringLuaAppExperienceMenuLayer())
 	table.insert(list, getFStringLuaAppConsoleExperienceMenuLayerModule())

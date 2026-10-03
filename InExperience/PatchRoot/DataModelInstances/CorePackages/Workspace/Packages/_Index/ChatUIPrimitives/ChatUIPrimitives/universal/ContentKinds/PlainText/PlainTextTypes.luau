@@ -6,7 +6,6 @@ local var1 = tModule.interface({
 
 return {
 	isValid = tModule.interface({
-		kind = tModule.literal("text"),
 		fallbackText = tModule.string,
 		displayText = var1,
 		translatedText = tModule.optional(var1),

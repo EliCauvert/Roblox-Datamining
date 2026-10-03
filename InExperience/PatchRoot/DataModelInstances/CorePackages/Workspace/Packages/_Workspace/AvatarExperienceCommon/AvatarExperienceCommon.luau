@@ -101,6 +101,7 @@ return {
 		},
 		ContextualActionButton = contextualActionButtonModule,
 		LicensingBadge = licensingBadgeModule,
+		OfferExpiryBadge = require(script.Components.OfferExpiryBadge.OfferExpiryBadge),
 		AnimatedScrollingFrame = {
 			useAXAnimateScrollFrame = require(script.Components.AnimatedScrollingFrame.useAXAnimateScrollFrame),
 			AnimatedScrollingFrame = require(script.Components.AnimatedScrollingFrame.AnimatedScrollingFrame)
