@@ -17,10 +17,11 @@ local momentLayoutModule = require(script.Parent.momentLayout)
 local momentOverlayInsetContextModule = require(script.Parent.MomentOverlayInsetContext)
 local momentPushedFeedSafeAreaContextModule = require(script.Parent.MomentPushedFeedSafeAreaContext)
 local momentsFixSkeletonNavBarInset = game:DefineFastFlag("MomentsFixSkeletonNavBarInset", false)
+local fFlagMomentsFeedAboveNavBarModule = require(moments.Flags.FFlagMomentsFeedAboveNavBar)
 local fFlagMomentsUseCompositionLibraryModule = require(moments.Flags.FFlagMomentsUseCompositionLibrary)
 
 return function(p1)
-	-- upvalues: useTokens (ref), useFormFactor (ref), fFlagMomentsUseCompositionLibraryModule (ref), useCompositionLayout (ref), useDeviceInsets (ref), formFactor (ref), reactModule (ref), momentPushedFeedSafeAreaContextModule (ref), momentOverlayInsetContextModule (ref), momentsFixSkeletonNavBarInset (ref), view (ref), skeleton (ref), radius (ref), momentLayoutModule (ref), gradientBackdrop (ref)
+	-- upvalues: useTokens (ref), useFormFactor (ref), fFlagMomentsUseCompositionLibraryModule (ref), useCompositionLayout (ref), useDeviceInsets (ref), formFactor (ref), reactModule (ref), momentPushedFeedSafeAreaContextModule (ref), momentOverlayInsetContextModule (ref), momentsFixSkeletonNavBarInset (ref), fFlagMomentsFeedAboveNavBarModule (ref), view (ref), skeleton (ref), radius (ref), momentLayoutModule (ref), gradientBackdrop (ref)
 	local var1 = useTokens()
 	local var2 = useFormFactor()
 	local var3 = nil
@@ -40,9 +41,16 @@ return function(p1)
 	end, { var9 })
 	local var11 = momentPushedFeedSafeAreaContextModule.useMomentPushedFeedSafeArea()
 	local var12 = if var11 ~= nil then var4 else var11
-	local var13 = if momentsFixSkeletonNavBarInset then momentOverlayInsetContextModule.useMomentOverlayInset() else 0
+	local var13 = momentOverlayInsetContextModule.useMomentOverlayInset()
+	local var14 = if momentsFixSkeletonNavBarInset then var13 else 0
+	local var15 = var14 > 0
+	
+	if fFlagMomentsFeedAboveNavBarModule then
+		var14 = 0
+		var15 = var13 > 0
+	end
 	local maxValue = math.max(var1.Padding.XLarge, if var12 ~= nil then 0 else var12.bottom)
-	maxValue = if fFlagMomentsUseCompositionLibraryModule and var13 > 0 then var1.Padding.Medium + var13 else maxValue + var13
+	maxValue = if fFlagMomentsUseCompositionLibraryModule and var15 then var1.Padding.Medium + var14 else maxValue + var14
 	local t = {
 		CreatorRow = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -70,7 +78,7 @@ return function(p1)
 			Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000)
 		})
 	}
-	local var14 = if fFlagMomentsUseCompositionLibraryModule then momentLayoutModule.BOTTOM_UI_MAX_SIZE elseif var5 then momentLayoutModule.BOTTOM_UI_MAX_SIZE else nil
+	local var16 = if fFlagMomentsUseCompositionLibraryModule then momentLayoutModule.BOTTOM_UI_MAX_SIZE elseif var5 then momentLayoutModule.BOTTOM_UI_MAX_SIZE else nil
 	
 	return reactModule.createElement(view, {
 		tag = "size-full clip bg-surface-0",
@@ -98,7 +106,7 @@ return function(p1)
 					right = UDim.new(0, var6),
 					bottom = UDim.new(0, maxValue)
 				},
-				sizeConstraint = { MaxSize = var14 },
+				sizeConstraint = { MaxSize = var16 },
 				onAbsoluteSizeChanged = var10
 			}, t) else reactModule.createElement(view, {
 				tag = "col align-x-left align-y-bottom gap-medium position-bottom-center anchor-bottom-center size-full-0 auto-y",
@@ -110,7 +118,7 @@ return function(p1)
 					right = UDim.new(0, math.max(var6, var12.right)),
 					bottom = UDim.new(0, maxValue)
 				},
-				sizeConstraint = { MaxSize = var14 },
+				sizeConstraint = { MaxSize = var16 },
 				onAbsoluteSizeChanged = var10
 			}, t)
 		})

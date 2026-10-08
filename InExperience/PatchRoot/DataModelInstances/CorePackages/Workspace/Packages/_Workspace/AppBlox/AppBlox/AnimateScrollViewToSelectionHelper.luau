@@ -1,12 +1,14 @@
 ﻿local userGameSettingsService = UserSettings():GetService("UserGameSettings")
 local gamepadService = game:GetService("GamepadService")
+local guiService = game:GetService("GuiService")
 local tweenService = game:GetService("TweenService")
 local appBlox = script:FindFirstAncestor("AppBlox")
 local centerOnFocusScrollModule = require(appBlox.CenterOnFocusScroll)
 local fFlagLuaAppMediaGalleryGamepadSupport = require(appBlox.Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
+local animateScrollViewIgnoreStaleSelection = game:DefineFastFlag("AnimateScrollViewIgnoreStaleSelection", false)
 
 function AnimateScrollViewToSelectionHelper(p1, p2, p3, p4)
-	-- upvalues: gamepadService (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), centerOnFocusScrollModule (ref), userGameSettingsService (ref), tweenService (ref)
+	-- upvalues: gamepadService (ref), animateScrollViewIgnoreStaleSelection (ref), guiService (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), centerOnFocusScrollModule (ref), userGameSettingsService (ref), tweenService (ref)
 	local t = {}
 	local var1 = nil
 	
@@ -22,8 +24,9 @@ function AnimateScrollViewToSelectionHelper(p1, p2, p3, p4)
 			y_1 = p1.AbsoluteWindowSize.Y
 		end))
 		table.insert(t, p1.SelectionChanged:Connect(function(_, _, p5)
-			-- upvalues: p1 (ref), gamepadService (copy), var1 (write), fFlagLuaAppMediaGalleryGamepadSupport (copy), p4 (ref), centerOnFocusScrollModule (copy), y (write), y_1 (write), userGameSettingsService (copy), p3 (ref), tweenService (copy), p2 (ref)
+			-- upvalues: p1 (ref), gamepadService (copy), animateScrollViewIgnoreStaleSelection (copy), guiService (copy), var1 (write), fFlagLuaAppMediaGalleryGamepadSupport (copy), p4 (ref), centerOnFocusScrollModule (copy), y (write), y_1 (write), userGameSettingsService (copy), p3 (ref), tweenService (copy), p2 (ref)
 			if not p5 or not p5:IsDescendantOf(p1) or gamepadService.GamepadCursorEnabled then return end
+			if animateScrollViewIgnoreStaleSelection and p5 ~= guiService.SelectedCoreObject and p5 ~= guiService.SelectedObject then return end
 			if var1 then
 				var1:Cancel()
 				var1 = nil

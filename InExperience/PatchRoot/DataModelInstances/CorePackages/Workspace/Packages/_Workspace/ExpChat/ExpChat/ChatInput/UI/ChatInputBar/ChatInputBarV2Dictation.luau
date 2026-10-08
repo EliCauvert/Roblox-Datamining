@@ -7,7 +7,6 @@ local configModule = require(expChat.Config)
 local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local fFlagExpChatFixBackspaceNilTargetChannel = expChatSharedModule.Flags.FFlagExpChatFixBackspaceNilTargetChannel
 local fFlagExpChatDictationFTUXModule = require(expChat.Flags.FFlagExpChatDictationFTUX)
-local expChatFocusablePlaceholderText = game:DefineFastFlag("ExpChatFocusablePlaceholderText", false)
 local fFlagExpChatInputBarV2CornerAndTruncationFixModule = require(expChat.Flags.FFlagExpChatInputBarV2CornerAndTruncationFix)
 local fFlagExpChatComposerInputBarFigmaParityModule = require(expChat.Flags.FFlagExpChatComposerInputBarFigmaParity)
 local fFlagExpChatDictationStopReplacesSendModule = require(expChat.Flags.FFlagExpChatDictationStopReplacesSend)
@@ -25,7 +24,7 @@ local function _(startValue, endValue, alpha)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), useDictationInputBarModule (ref), dictationAffordancesModule (ref), reactModule (ref), useDictationTextAreaModule (ref), fFlagExpChatDictationStopReplacesSendModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), stopCountdownModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatComposerInputBarFigmaParityModule (ref), dictationWaveformModule (ref), fFlagExpChatDictationFTUXModule (ref), dictationFTUXModule (ref)
+	-- upvalues: foundationModule (ref), useDictationInputBarModule (ref), dictationAffordancesModule (ref), reactModule (ref), useDictationTextAreaModule (ref), fFlagExpChatDictationStopReplacesSendModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), stopCountdownModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), configModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatComposerInputBarFigmaParityModule (ref), dictationWaveformModule (ref), fFlagExpChatDictationFTUXModule (ref), dictationFTUXModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local setTransparency = p1.setTransparency
 	local chatInputBarSettings = p1.chatInputBarSettings
@@ -158,6 +157,7 @@ return reactModule.memo(function(p1)
 		var13 = reactModule.createElement
 		var13 = var13("TextLabel", {
 			BackgroundTransparency = 1,
+			Selectable = true,
 			AnchorPoint = Vector2.new(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Font = configModule.ChatInputBarFont,
@@ -169,13 +169,12 @@ return reactModule.memo(function(p1)
 			TextColor3 = if showPlaceholderText then chatInputBarSettings.PlaceholderColor3 else chatInputBarSettings.TextColor3,
 			TextSize = if isSpatialUIEnabled then chatInputBarSettings.SpatialPanelTextSize else chatInputBarSettings.TextSize,
 			TextTransparency = setTransparency(if showPlaceholderText then 0.5 else 0, p1.transparencyValue),
-			Selectable = if expChatFocusablePlaceholderText then true else nil,
-			SelectionImageObject = if expChatFocusablePlaceholderText then cursor else nil,
+			SelectionImageObject = cursor,
 			TextWrapped = if fFlagExpChatInputBarV2CornerAndTruncationFixModule then not showPlaceholderText else not (fFlagExpChatPresetChatEnabled and (showPlaceholderText and p1.shouldTruncatePlaceholder)),
 			TextTruncate = if fFlagExpChatInputBarV2CornerAndTruncationFixModule and showPlaceholderText then Enum.TextTruncate.AtEnd elseif fFlagExpChatPresetChatEnabled and showPlaceholderText then Enum.TextTruncate.AtEnd else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
-			ref = if expChatFocusablePlaceholderText then p1.placeholderRef else nil
+			ref = p1.placeholderRef
 		})
 	end
 	t_7.DisabledPlaceholderLabel = var13

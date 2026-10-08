@@ -17,7 +17,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local useRoactService = require(parent.RobloxAppHooks).useRoactService
 local menuDirection = require(parent.UIBlox).App.Menu.MenuDirection
 local legacyPlayButtonModule = require(script.Parent.LegacyPlayButton)
-local fFlagLuaAppEnablePlaySquadButton = require(parent.SharedFlags).FFlagLuaAppEnablePlaySquadButton
+local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local fFlagLuaAppPlayButtonLoadingDurationTelemetry = require(parent.SharedFlags).FFlagLuaAppPlayButtonLoadingDurationTelemetry
 local fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP = require(parent.SharedFlags).FFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP
 local fIntLuaAppPlayButtonSecondaryButtonGap = require(parent.SharedFlags).FIntLuaAppPlayButtonSecondaryButtonGap
@@ -69,14 +69,14 @@ playButtonContainer.validateProps = tModule.strictInterface({
 	testId = tModule.optional(tModule.string),
 	shouldUseUnifiedPlayButtonView = if fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP then tModule.optional(tModule.boolean) else nil,
 	onPlayButtonCallback = tModule.callback,
-	onPlaySquadButtonCallback = if fFlagLuaAppEnablePlaySquadButton then tModule.callback else nil,
+	onPlaySquadButtonCallback = if getFFlagIsSquadEnabled() then tModule.callback else nil,
 	playButtonState = tModule.string,
 	secondaryPlayButtonState = tModule.optional(tModule.string),
 	gameProductInfo = tModule.optional(tModule.table)
 })
 
 function playButtonContainer.init(p1)
-	-- upvalues: fFlagLuaAppEnablePlaySquadButton (ref)
+	-- upvalues: getFFlagIsSquadEnabled (ref)
 	p1.isMounted = false
 	
 	function p1.onPlayButtonActivated()
@@ -97,7 +97,7 @@ function playButtonContainer.init(p1)
 		end
 	end
 	
-	p1.onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then function(p2)
+	p1.onPlaySquadButtonActivated = if getFFlagIsSquadEnabled() then function(p2)
 		-- upvalues: p1 (ref)
 		if p1.isMounted then
 			p1.props.onPlaySquadButtonCallback(p2)
@@ -116,7 +116,7 @@ function playButtonContainer.willUnmount(p1)
 end
 
 function playButtonContainer.render(p1)
-	-- upvalues: fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP (ref), fIntLuaAppPlayButtonSecondaryButtonGap (ref), roactModule (ref), var1 (ref), legacyPlayButtonModule (ref), fFlagLuaAppEnablePlaySquadButton (ref)
+	-- upvalues: fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP (ref), fIntLuaAppPlayButtonSecondaryButtonGap (ref), roactModule (ref), var1 (ref), legacyPlayButtonModule (ref), getFFlagIsSquadEnabled (ref)
 	local size = p1.props.Size
 	local layoutOrder = p1.props.LayoutOrder
 	local playButtonState = p1.props.playButtonState
@@ -175,7 +175,7 @@ function playButtonContainer.render(p1)
 			price = var2,
 			localizedFiatPrice = if gameProductInfo then gameProductInfo.localizedFiatPrice else "",
 			onPlayButtonActivated = p1.onPlayButtonActivated,
-			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then p1.onPlaySquadButtonActivated else nil,
+			onPlaySquadButtonActivated = if getFFlagIsSquadEnabled() then p1.onPlaySquadButtonActivated else nil,
 			testId = p1.props.testId
 		})
 	end
@@ -199,7 +199,7 @@ function playButtonContainer.render(p1)
 			price = var2,
 			localizedFiatPrice = if gameProductInfo then gameProductInfo.localizedFiatPrice else "",
 			onPlayButtonActivated = p1.onPlayButtonActivated,
-			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then p1.onPlaySquadButtonActivated else nil,
+			onPlaySquadButtonActivated = if getFFlagIsSquadEnabled() then p1.onPlaySquadButtonActivated else nil,
 			testId = p1.props.testId
 		}),
 		SecondaryPlayButton = roactModule.createElement(legacyPlayButtonModule, {
@@ -209,7 +209,7 @@ function playButtonContainer.render(p1)
 			price = var2,
 			localizedFiatPrice = if gameProductInfo then gameProductInfo.localizedFiatPrice else "",
 			onPlayButtonActivated = p1.onSecondaryPlayButtonActivated,
-			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then p1.onPlaySquadButtonActivated else nil,
+			onPlaySquadButtonActivated = if getFFlagIsSquadEnabled() then p1.onPlaySquadButtonActivated else nil,
 			testId = if p1.props.testId then p1.props.testId .. "--secondary" else nil
 		})
 	})
@@ -221,10 +221,10 @@ return roactRoduxModule.connect(function(p1, p2)
 		gameProductInfo = p1[gamesProductInfoReducer.key][p2.universeId]
 	}
 end)(function(p1)
-	-- upvalues: useRoactService (ref), roactNetworking (ref), usePlayButtonStateModule (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), useOnPlayButtonCallbackModule (ref), fFlagLuaAppEnablePlaySquadButton (ref), useOnPlaySquadButtonCallbackModule (ref), menuDirection (ref), playButtonStatesModule (ref), cryoModule (ref), roactModule (ref), playButtonContainer (ref)
+	-- upvalues: useRoactService (ref), roactNetworking (ref), usePlayButtonStateModule (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), useOnPlayButtonCallbackModule (ref), getFFlagIsSquadEnabled (ref), useOnPlaySquadButtonCallbackModule (ref), menuDirection (ref), playButtonStatesModule (ref), cryoModule (ref), roactModule (ref), playButtonContainer (ref)
 	local var2 = usePlayButtonStateModule(useRoactService(roactNetworking), p1.universeId, nil, nil, if fFlagLuaAppPlayButtonLoadingDurationTelemetry then true else nil, if fFlagLuaAppPlayButtonLoadingDurationTelemetry then "PlayButton" else nil)
 	local var3 = useOnPlayButtonCallbackModule(p1.universeId, p1.referralSource, "PlayButton", nil, "LuaGameCard", p1.experienceJoinData, p1.placeId)
-	local var4 = if fFlagLuaAppEnablePlaySquadButton then useOnPlaySquadButtonCallbackModule(menuDirection.Up, var2.playButtonState, p1.referralSource, p1.universeId) else nil
+	local var4 = if getFFlagIsSquadEnabled() then useOnPlaySquadButtonCallbackModule(menuDirection.Up, var2.playButtonState, p1.referralSource, p1.universeId) else nil
 	local playButtonState = var2.playButtonState
 	local secondaryPlayButtonState = var2.secondaryPlayButtonState
 	

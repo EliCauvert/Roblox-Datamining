@@ -25,7 +25,10 @@ local var7 = if fFlagBuildExperienceChatResourceAttachments then require(buildEx
 local useCaptureToChatModule = require(buildExperience.Components.ChatSheet.useCaptureToChat)
 local var8 = if fFlagBuildExperienceInGameShell then require(buildExperience.Stores.GetAssistantBuildStore) else nil
 local getPlayButtonStoreModule = require(buildExperience.Stores.GetPlayButtonStore)
+local libraryThemeProviderModule = require(buildExperience.Components.Library.LibraryThemeProvider)
 local teamCreateUtilsModule = require(parent.BuildExperiencePlaytestLaunch.teamCreateUtils)
+local trackBuildOpenSafetyServiceModule = require(buildExperience.utils.trackBuildOpenSafetyService)
+local fFlagReportBuildUIVisibilityModule = require(buildExperience.Flags.FFlagReportBuildUIVisibility)
 local clientLogsCollectorModule = require(buildExperience.Chat.clientLogsCollector)
 local fFlagBuildExperienceUserMessageHapticFeedbackModule = require(buildExperience.Flags.FFlagBuildExperienceUserMessageHapticFeedback)
 local localizationProvider = localizationModule.LocalizationProvider
@@ -60,7 +63,7 @@ local function beginInstanceSelection()
 end
 
 local function ConnectedChatSheet(p1)
-	-- upvalues: getPlayButtonStoreModule (ref), var1 (ref), useCaptureToChatModule (ref), teamCreateUtilsModule (ref), buildModeLaunchModule (ref), reactModule (ref), buildExperience (ref), chatSheetModule (ref), list (ref), fIntInGameBuildChatSheetSnapPoint (ref), fFlagBuildExperienceInGameShell (ref), var8 (ref), var2 (ref), var3 (ref), var4 (ref), fFlagBuildExperienceChatResourceAttachments (ref), beginInstanceSelection (ref)
+	-- upvalues: getPlayButtonStoreModule (ref), var1 (ref), useCaptureToChatModule (ref), teamCreateUtilsModule (ref), buildModeLaunchModule (ref), fFlagReportBuildUIVisibilityModule (ref), trackBuildOpenSafetyServiceModule (ref), reactModule (ref), buildExperience (ref), chatSheetModule (ref), list (ref), fIntInGameBuildChatSheetSnapPoint (ref), fFlagBuildExperienceInGameShell (ref), var8 (ref), var2 (ref), var3 (ref), var4 (ref), fFlagBuildExperienceChatResourceAttachments (ref), beginInstanceSelection (ref)
 	local var10 = getPlayButtonStoreModule()
 	local var11 = var10.useIsActive()
 	local var12 = if var1 then useCaptureToChatModule(function()
@@ -74,6 +77,11 @@ local function ConnectedChatSheet(p1)
 		placeId = game.PlaceId
 	}
 	local var14 = var10.useResumeTarget()
+	local var15 = if var13 and var14 == nil then buildModeLaunchModule:getChatSessionId(game.PlaceId) elseif var14 then var14.sessionId else nil
+	
+	if fFlagReportBuildUIVisibilityModule then
+		trackBuildOpenSafetyServiceModule(var11)
+	end
 	local createElement = reactModule.createElement
 	createElement = createElement(if var13 then require(buildExperience.Components.Library.LibraryChatSheet) else chatSheetModule, {
 		defaultSnapPointIndex = 1,
@@ -86,7 +94,7 @@ local function ConnectedChatSheet(p1)
 		topBarPillMenuTarget = if var11 and not var13 then t else nil,
 		universeId = if var14 then var14.universeId else nil,
 		placeId = if var14 then var14.placeId else nil,
-		sessionId = if var13 and var14 == nil then buildModeLaunchModule:getChatSessionId(game.PlaceId) elseif var14 then var14.sessionId else nil,
+		sessionId = var15,
 		captureToAttach = if var12 ~= nil then nil else var12.captureToAttach,
 		onCaptureAttached = if var12 ~= nil then nil else var12.onCaptureAttached
 	})
@@ -100,6 +108,7 @@ local function ConnectedChatSheet(p1)
 		ChatSheet = createElement,
 		Shell = reactModule.createElement(var4, {
 			isVisible = var3.useSignalState(var8().getIsOverlayVisible),
+			isLibraryMode = var13,
 			onActivated = function()
 				-- upvalues: var10 (ref)
 				var10.setIsActive(true)
@@ -123,7 +132,7 @@ local var10 = roactUtilsModule.Components.createLazyComponent(function()
 end)
 
 return function(p1)
-	-- upvalues: clientLogsCollectorModule (ref), fFlagBuildExperienceInGameShell (ref), coreGuiService (ref), reactRobloxModule (ref), localizationService (ref), parent (ref), reactModule (ref), foundationModule (ref), buildExperienceCompositionStyleSheetModule (ref), var10 (ref), fFlagBuildExperienceUserMessageHapticFeedbackModule (ref), var9 (ref), localizationProvider (ref)
+	-- upvalues: clientLogsCollectorModule (ref), fFlagBuildExperienceInGameShell (ref), coreGuiService (ref), reactRobloxModule (ref), localizationService (ref), parent (ref), reactModule (ref), buildExperienceCompositionStyleSheetModule (ref), var10 (ref), teamCreateUtilsModule (ref), libraryThemeProviderModule (ref), foundationModule (ref), fFlagBuildExperienceUserMessageHapticFeedbackModule (ref), var9 (ref), localizationProvider (ref)
 	clientLogsCollectorModule.startServerLogCollection()
 	local buildExperienceChatSheet = Instance.new("ScreenGui")
 	buildExperienceChatSheet.Name = "BuildExperienceChatSheet"
@@ -140,13 +149,14 @@ return function(p1)
 	buildExperienceChatSheet.DisplayOrder = 9
 	local var11 = reactRobloxModule.createRoot(buildExperienceChatSheet)
 	local var12 = require(parent.InExperienceLocales).Localization.new(localizationService.RobloxLocaleId)
-	local var13 = reactModule.createElement(foundationModule.FoundationProvider, {
-		colorMode = foundationModule.Enums.ColorMode.Dark,
-		overlayGui = { DisplayOrder = 9 }
-	}, {
+	local t = {
 		CompositionStyleSheet = reactModule.createElement(buildExperienceCompositionStyleSheetModule),
 		Sheet = reactModule.createElement(var10, p1)
-	})
+	}
+	local var13 = if teamCreateUtilsModule.isViewer() then reactModule.createElement(libraryThemeProviderModule, { displayOrder = 9 }, t) else reactModule.createElement(foundationModule.FoundationProvider, {
+		colorMode = foundationModule.Enums.ColorMode.Dark,
+		overlayGui = { DisplayOrder = 9 }
+	}, t)
 	
 	if fFlagBuildExperienceUserMessageHapticFeedbackModule then
 		var13 = reactModule.createElement(var9, nil, { FoundationProvider = var13 })

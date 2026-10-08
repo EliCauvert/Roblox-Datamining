@@ -19,7 +19,6 @@ local sduiDefaultTileImageModule = require(script.Parent.SduiDefaultTileImage)
 local useTileHoldActionModule = require(script.Parent.useTileHoldAction)
 local fFlagSduiTileDisableLegacyHover = require(serverDrivenUi.Flags).FFlagSduiTileDisableLegacyHover
 local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
-local fFlagSduiGameIconSupport = require(parent.SharedFlags).FFlagSduiGameIconSupport
 local fFlagSduiTileThumbnailPadding = require(parent.SharedFlags).FFlagSduiTileThumbnailPadding
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local fFlagLuaAppSduiGameTileFeedback = require(parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
@@ -66,7 +65,7 @@ local function maybeLayoutForButton(p1, p2, p3, p4, p5)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), fFlagSduiGameIconSupport (ref), contentProviderService (ref), textSizeModule (ref), useTokens (ref), getInputModeStore (ref), responsiveModule (ref), useTileHoldActionModule (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiTileDisableLegacyHover (ref), sduiTileInsetImageModule (ref), fFlagSduiTileThumbnailPadding (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), imageSetLabel (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiDefaultTileImageModule (ref), loadableImage (ref), maybeLayoutForButton (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), cryoModule (ref), t (ref), holdDetector (ref)
+	-- upvalues: reactModule (ref), contentProviderService (ref), textSizeModule (ref), useTokens (ref), getInputModeStore (ref), responsiveModule (ref), useTileHoldActionModule (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiTileDisableLegacyHover (ref), sduiTileInsetImageModule (ref), fFlagSduiTileThumbnailPadding (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), imageSetLabel (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiDefaultTileImageModule (ref), loadableImage (ref), maybeLayoutForButton (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), cryoModule (ref), t (ref), holdDetector (ref)
 	local backgroundStyle, color3
 	local layoutOrder = p1.layoutOrder
 	local anchorPoint = p1.anchorPoint
@@ -77,10 +76,10 @@ return reactModule.memo(function(p1)
 	local backgroundColor3 = p1.backgroundColor3
 	local selectionOrder = p1.selectionOrder
 	reactModule.useLayoutEffect(function()
-		-- upvalues: p1 (ref), fFlagSduiGameIconSupport (copy), contentProviderService (copy)
+		-- upvalues: p1 (ref), contentProviderService (copy)
 		local image = p1.image
 		
-		if image and (not fFlagSduiGameIconSupport or (if string.match(image, "^rbxthumb://") == nil then string.match(image, "^rbxasset") ~= nil else true)) then
+		if image and (if string.match(image, "^rbxthumb://") == nil then string.match(image, "^rbxasset") ~= nil else true) then
 			task.spawn(function()
 				-- upvalues: contentProviderService (copy), image (ref)
 				contentProviderService:PreloadAsync({ image })

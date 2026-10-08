@@ -1,1 +1,1 @@
-﻿return require(script.Parent.FFlagAXRootSlotBasedEditorFlag) and game:DefineFastFlag("AXEnableManualSaving4", false)
+﻿return game:DefineFastFlag("AXEnableManualSaving4", false)

@@ -18,7 +18,6 @@ local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local clearSmall = images["icons/actions/edit/clear_small"]
 local fFlagDisableAutocorrectSocialUserSearch = require(parent.SharedFlags).FFlagDisableAutocorrectSocialUserSearch
-local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
 local fFlagLuaAppLogSocialUserSearchUXExposure = require(parent.SharedFlags).FFlagLuaAppLogSocialUserSearchUXExposure
 local disableAutocorrectExperimentLayer = game:DefineFastString("DisableAutocorrectExperimentLayer", "Social.UserSearchUX")
 local t = {
@@ -34,7 +33,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: fFlagDisableAutocorrectSocialUserSearch (ref), roactAppExperimentModule (ref), disableAutocorrectExperimentLayer (ref), fFlagLuaAppLogSocialUserSearchUXExposure (ref), dashModule (ref), t (ref), useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), textButton (ref), imageSetLabel (ref), icon (ref), enums (ref), normalizeFontFace (ref), callbackInputBox (ref), clearSmall (ref), iconSize (ref), fFlagEnableLeftNavOnConsole (ref)
+	-- upvalues: fFlagDisableAutocorrectSocialUserSearch (ref), roactAppExperimentModule (ref), disableAutocorrectExperimentLayer (ref), fFlagLuaAppLogSocialUserSearchUXExposure (ref), dashModule (ref), t (ref), useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), textButton (ref), imageSetLabel (ref), icon (ref), enums (ref), normalizeFontFace (ref), callbackInputBox (ref), clearSmall (ref), iconSize (ref)
 	local createElement_3
 	local var1 = if fFlagDisableAutocorrectSocialUserSearch then roactAppExperimentModule.useUserExperiment({ disableAutocorrectExperimentLayer }, function(p2)
 		-- upvalues: disableAutocorrectExperimentLayer (copy)
@@ -179,7 +178,7 @@ return function(p1)
 			textChangedCallback = var2.textChangedCallback,
 			onSelectCallback = var2.onSelectCallback,
 			focusChangedCallback = var12,
-			returnPressedFromOnScreenKeyboardCallback = if fFlagEnableLeftNavOnConsole then var2.returnPressedFromOnScreenKeyboardCallback elseif fFlagDisableAutocorrectSocialUserSearch and var1 then var2.returnPressedFromOnScreenKeyboardCallback else nil,
+			returnPressedFromOnScreenKeyboardCallback = var2.returnPressedFromOnScreenKeyboardCallback,
 			inputBoxRef = var4
 		})
 	end

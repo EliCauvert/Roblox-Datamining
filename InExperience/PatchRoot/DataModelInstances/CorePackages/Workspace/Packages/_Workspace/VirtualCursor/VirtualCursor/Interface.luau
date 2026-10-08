@@ -1,11 +1,10 @@
 ﻿local virtualCursor = script:FindFirstAncestor("VirtualCursor")
-local parent = virtualCursor.Parent
+local _ = virtualCursor.Parent
 local coreGuiService = game:GetService("CoreGui")
 local tweenService = game:GetService("TweenService")
 local VRService = game:GetService("VRService")
 local _ = coreGuiService.RobloxGui
 local propertiesModule = require(virtualCursor.Properties)
-local getFFlagVirtualCursorDisplayOrder = require(parent.SharedFlags).getFFlagVirtualCursorDisplayOrder
 local t = {}
 local t_1 = {
 	Default = "rbxasset://textures/ui/VirtualCursor/cursorDefault.png",
@@ -45,16 +44,13 @@ local _ = function(value)
 end
 
 local function getOrCreateVirtualCursorContainer()
-	-- upvalues: var1 (write), getFFlagVirtualCursorDisplayOrder (ref), var2 (write), t_2 (ref), propertiesModule (ref), coreGuiService (ref), var3 (write), tweenService (ref), var4 (write)
+	-- upvalues: var1 (write), var2 (write), t_2 (ref), propertiesModule (ref), coreGuiService (ref), var3 (write), tweenService (ref), var4 (write)
 	if var1 == nil then
 		var1 = Instance.new("ScreenGui")
 		var1.Enabled = false
 		var1.IgnoreGuiInset = true
-		var1.DisplayOrder = if getFFlagVirtualCursorDisplayOrder() then 1e999 else 100
-		
-		if getFFlagVirtualCursorDisplayOrder() then
-			var1.OnTopOfCoreBlur = true
-		end
+		var1.DisplayOrder = 1e999
+		var1.OnTopOfCoreBlur = true
 		var1.Name = "VirtualCursorGui"
 		var2 = Instance.new("ImageLabel")
 		var2.Active = false

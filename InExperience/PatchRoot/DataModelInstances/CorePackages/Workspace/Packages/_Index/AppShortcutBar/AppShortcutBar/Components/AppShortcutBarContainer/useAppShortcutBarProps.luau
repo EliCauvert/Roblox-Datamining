@@ -7,12 +7,10 @@ local focusNavigationEventNameEnum = require(parent.FocusNavigationUtils).FocusN
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local _ = require(appShortcutBar.Components.AppShortcutBar)
 local localizationRoactContext = require(parent.Localization).LocalizationRoactContext
-local uiMode = require(parent.RobloxAppEnums).UiMode
 local responsiveModule = require(parent.Responsive)
 local useHeldProgressByEvent = require(appShortcutBar.Hooks.AppShortcutBarContext).useHeldProgressByEvent
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local useLastInputMethod = require(parent.FocusNavigationUtils).useLastInputMethod
-local useUiModeInfo = require(parent.RobloxAppHooks).useUiModeInfo
 local useDesignTokens = require(parent.Style).useDesignTokens
 local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
 local useSignalState = require(parent.SignalsReact).useSignalState
@@ -27,10 +25,10 @@ local fFlagAXMigrateManageOutfitPageInputBindingsToFocusNavigation = sharedFlags
 local fFlagAXMigrateCatalogPageInputBindings = sharedFlagsModule.FFlagAXMigrateCatalogPageInputBindings
 local fFlagAXMigrateLookDetailsPeekViewToFocusNavigation = sharedFlagsModule.FFlagAXMigrateLookDetailsPeekViewToFocusNavigation
 local fFlagLuaAppResponsiveEnginePreferredInput = sharedFlagsModule.FFlagLuaAppResponsiveEnginePreferredInput
-local fFlagEnableLeftNavOnConsole = sharedFlagsModule.FFlagEnableLeftNavOnConsole
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
 local fFlagSocialCarouselPressXToViewProfile = sharedFlagsModule.FFlagSocialCarouselPressXToViewProfile
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
+local fFlagEnableStickyShortcutBarOnAllPlatforms = sharedFlagsModule.FFlagEnableStickyShortcutBarOnAllPlatforms
 local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
 local t = {
 	[Enum.KeyCode.Thumbstick1] = {
@@ -429,18 +427,17 @@ local function getKeyboardItems(p6, p7, p8, p9)
 end
 
 local function useShortcutBarFrameProps()
-	-- upvalues: useUiModeInfo (ref), useDesignTokens (ref), uiMode (ref), fFlagEnableLeftNavOnConsole (ref), useSignalState (ref), displayModule (ref)
-	local var18 = useUiModeInfo()
-	local var19 = useDesignTokens()
+	-- upvalues: useDesignTokens (ref), useSignalState (ref), displayModule (ref)
+	local var18 = useDesignTokens()
 	
-	return if (if var18 then var18.uiMode else nil) == uiMode.TenFoot and not fFlagEnableLeftNavOnConsole then {} else {
-		Position = UDim2.new(0.5, 0, 1, if var19 then -var19.Size.Size_200 + (if fFlagEnableLeftNavOnConsole then (if fFlagEnableLeftNavOnConsole then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil).bottom else 0) else 0),
+	return {
+		Position = UDim2.new(0.5, 0, 1, if var18 then -var18.Size.Size_200 + useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding).bottom else 0),
 		AnchorPoint = Vector2.new(0.5, 1)
 	}
 end
 
 local function useShortcutBarItems()
-	-- upvalues: reactFocusNavigationModule (ref), reactModule (ref), localizationRoactContext (ref), useHeldProgressByEvent (ref), useLastInputMethod (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), responsiveModule (ref), noShortcutBarWithTvRemote (ref), useIsTvRemoteDevice (ref), useSelector (ref), selectRoactGamepadBindings (ref), useAppPolicy (ref), getGamepadItems (ref), getKeyboardItems (ref)
+	-- upvalues: reactFocusNavigationModule (ref), reactModule (ref), localizationRoactContext (ref), useHeldProgressByEvent (ref), useLastInputMethod (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), responsiveModule (ref), noShortcutBarWithTvRemote (ref), useIsTvRemoteDevice (ref), useSelector (ref), selectRoactGamepadBindings (ref), useAppPolicy (ref), fFlagEnableStickyShortcutBarOnAllPlatforms (ref), getGamepadItems (ref), getKeyboardItems (ref)
 	local isGamepad
 	local var18 = reactFocusNavigationModule.useActiveEventMap()
 	local var19 = reactModule.useContext(localizationRoactContext)
@@ -452,7 +449,7 @@ local function useShortcutBarItems()
 	local var24 = useSelector(selectRoactGamepadBindings)
 	local var25 = useAppPolicy(function(p10)
 		return p10.getStickyShortcutBarEnabled()
-	end)
+	end) or fFlagEnableStickyShortcutBarOnAllPlatforms
 	
 	if fFlagLuaAppResponsiveEnginePreferredInput then
 		isGamepad = var22 == responsiveModule.Input.Directional

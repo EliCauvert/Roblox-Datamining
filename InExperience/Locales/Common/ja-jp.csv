@@ -106,6 +106,8 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,メールアド�
 Authentication.Login.WeChat.AntiAddictionText,不適切なバーチャル空間には参加しないように心掛け、海賊版は拒否しましょう。自衛意識を高め、騙されないようにしましょう。バーチャル空間を訪問することは脳の働きを高めてくれますが、度がすぎると健康を害する恐れがあります。時間管理をきちんと行い、健康的なライフスタイルをお楽しみください。
 Authentication.SignUp.Action.ApplyOnNextRespawn,次のリスポーンで適用
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.Create,作成
+Authentication.SignUp.Action.CreateAccountSentenceCase,アカウントを作成
 Authentication.SignUp.Action.ExitModalLeave,退出
 Authentication.SignUp.Action.RespawnNow,今すぐリスポーン
 Authentication.SignUp.Action.StartPlay,プレイ開始
@@ -113,15 +115,18 @@ Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,ログインをやり直す
 Authentication.SignUp.Description.AccountAlreadyLinked,あなたのプロフィール（{platformAccountName}）は、すでにRobloxアカウントにリンク済みです。もう一度ログインしてみてください。
 Authentication.SignUp.Description.BirthdayHint,日付を入力
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,アカウントを作成することで、あなたは仲裁条項を含む当社の{startTermsTag}利用規約{endTermsTag}に同意し、当社の{startPrivacyTag}プライバシーポリシー{endPrivacyTag}を承認したものとみなされます。18歳未満の場合は、親または保護者がアカウントの作成を許可し、当社の利用規約に同意する必要があります。
 Authentication.SignUp.Description.Try,こちらをお試しください
 Authentication.SignUp.Description.UsernameChanged,完了しました！お使いのアカウントの準備が整い、{platform}に紐づけられました。更新したユーザー名を今すぐゲーム内に反映させるには、リスポーンしてください。何もしなくても、次回から適用されます。
 Authentication.SignUp.Description.UsernameUnchanged,完了しました！お使いのアカウントの準備が整い、{platform}に紐づけられました。友達とチャットしたり、何百万ものRobloxゲームをプレイしたりしましょう。
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,お持ちのRoblox（ロブロックス）アカウントは {platform} 上のアカウントに紐づけられます。設定画面からいつでも紐づけを解除できます。また {platform} 上の他のアカウントとの紐づけができるようになるまでには、クールダウン期間があるかもしれません。{ctaButton} をクリックすると、仲裁条項を含む利用規約に同意し、プライバシーポリシーを承認したことになります。
+Authentication.SignUp.Header.CloseWithoutFinishing,完了せずに閉じますか？
 Authentication.SignUp.Header.OneLastThing,最後のステップ
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Robloxアカウントを設定
 Authentication.SignUp.Heading.CountryCodeSelector,国を選択
 Authentication.SignUp.Heading.RetryLogIn,
 Authentication.SignUp.Label.Birthday,生年月日
+Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date}（{yearsOld}歳）
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,日
 Authentication.SignUp.Label.EnterYourEmail,メールアドレスを入力
@@ -160,6 +165,7 @@ Authentication.SignUp.Response.PasswordComplexity,もっと複雑なパスワー
 Authentication.SignUp.Response.UsernameMustBeSetFirst,最初にユーザーネームを設定する必要があります。
 Authentication.SignUp.Subtitle.AddYourBirthday,Robloxアカウントを作成するには、生年月日を入力してください。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,設定を完了すると、進行状況が引き継がれます。
+Authentication.SignUp.Subtitle.YoureAlmostThere,もう少しで完了です。今閉じるとアカウントが完全に作成されず、Robloxをプレイできません。
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,取引を進めるには、2段階認証が必要です。 設定 > セキュリティ に行って、2段階認証を完了してください。
 Authentication.TwoStepVerification.Response.TooManyAttempts,試行回数が多すぎます。後でもう一度お試しください。
@@ -1326,7 +1332,7 @@ Feature.Avatar.Action.CancelSelection,選択をキャンセル
 Feature.Avatar.Action.Clear,消す
 Feature.Avatar.Action.ComposerPost,投稿する
 Feature.Avatar.Action.ComposerPreviewAndPost,プレビューと投稿
-Feature.Avatar.Action.CreateSet,作成
+Feature.Avatar.Action.CreateSet,
 Feature.Avatar.Action.CreateSetFirstRun,セットを作成
 Feature.Avatar.Action.Default,デフォルト
 Feature.Avatar.Action.DefaultView,デフォルト表示
@@ -1991,6 +1997,10 @@ Feature.Build.Analytics.Description.PayerConversion,有料ユーザーコンバ�
 Feature.Build.Analytics.Description.PlaythroughRate,プレイスルー率は、最後まで完了したプレイセッションの割合です。この割合が高いほど、プレイヤーがバーチャル空間を始めやすく、最後までプレイする価値があると感じていることを示します。
 Feature.Build.Analytics.Description.TotalPlaytime,合計プレイ時間は、その期間にすべてのプレイヤーがバーチャル空間で過ごした時間の合計です。プレイ時間の増加は通常、プレイセッションの魅力が高まっていることを示します。
 Feature.Build.Analytics.DurationHours,{number}時間
+Feature.Build.Analytics.Goal.EarnRobux,Robuxを獲得する
+Feature.Build.Analytics.Goal.FirstImpression,良い第一印象を与える
+Feature.Build.Analytics.Goal.GetMorePlayers,より多くのプレイヤーを獲得
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,プレイヤーにリピートしてもらう
 Feature.Build.Analytics.KeyStats,主な指標
 Feature.Build.Analytics.LastMonth,先月
 Feature.Build.Analytics.LastWeek,
@@ -2022,9 +2032,12 @@ Feature.Build.Analytics.Summary.TotalPlaytime,プレイヤーがあなたのバ�
 Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,合計プレイヤー数
 Feature.Build.Analytics.Title.D1Retention,D1リテンション
+Feature.Build.Analytics.Title.D7Retention,D7のリテンション
 Feature.Build.Analytics.Title.DailyActiveUsers,
+Feature.Build.Analytics.Title.NewUserSessionTime,新規ユーザーのセッション時間
 Feature.Build.Analytics.Title.PayerConversion,有料ユーザーコンバージョン
 Feature.Build.Analytics.Title.PlaythroughRate,
+Feature.Build.Analytics.Title.RobuxSpent,
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,訪問数
 Feature.Build.Content.NewGame,新規のゲーム
@@ -2081,6 +2094,7 @@ Feature.Build.Description.ShopButton,ショップボタンを追加
 Feature.Build.Description.ShortAdCampaign,ゲームに対するプレイヤーの反応を簡単に確認する方法です。
 Feature.Build.Description.StopBuild,このリクエストはまだ進行中です。今停止すると作業が完了せず、再度送信する必要があります。
 Feature.Build.Description.UpdateDeveloperProduct,開発者製品{PRODUCT_ID}を更新してください。
+Feature.Build.Description.UseAdCreditsInAdsManager,広告クレジットを使用するには、[広告管理]にアクセスする必要があります。
 Feature.Build.Error.AdForbidden,現在、ご利用のアカウントまたはゲームで広告を掲載できません。これが誤りであると思われる場合は、サポートまでご連絡ください。
 Feature.Build.Error.AdInsufficientFunds,この広告を作成するのに必要なRobuxが足りません。Robuxを追加してもう一度お試しください。
 Feature.Build.Error.AdInternalError,
@@ -2404,6 +2418,7 @@ Feature.Build.Title.RevertLastChange,最後の変更を元に戻しますか？
 Feature.Build.Title.StopBuild,作成を停止しますか？
 Feature.Build.Title.Tasks,タスク
 Feature.Build.Title.TurnActivity,ターン内のアクティビティ
+Feature.Build.Title.UseYourAdCredits,広告クレジットを使用
 Feature.Build.Title.VersionHistory,バージョン履歴
 Feature.Build.Title.VersionInfo,バージョン情報
 Feature.Build.Title.VersionNumber,バージョン{VERSION}
@@ -3462,10 +3477,10 @@ Feature.Groups.Message.LoadGroupListError,コミュニティリストを読み�
 Feature.Groups.Message.NoGroupsFound,コミュニティが見つかりません。
 Feature.Groups.Message.NotInAnyGroups,まだコミュニティのメンバーになっていません。
 Feature.Groups.Message.PinLocked,この動作は、ロック済みの暗証番号では実行できません。アカウント設定ページでPINをアンロックしてください。
-Feature.Groups.Modal.ContentTextHigh,"このコミュニティに参加するには、アカウント認証をしてください。
+Feature.Groups.Modal.ContentTextHigh,"このコミュニティに参加するには、アカウントを認証してください。
 
-1. [アカウント情報] に移動 > [年齢を確認]
-2. 認証（確認）プロセスを完了してください"
+1. [アカウント情報]  > [本人確認書類の認証]に移動
+2. 認証プロセスを完了"
 Feature.Groups.Modal.ContentTextLow,"このコミュニティに参加するには、アカウント認証をしてください。
 
 1. [アカウント情報] に移動
@@ -3554,6 +3569,7 @@ Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,Robuxを購入
 Feature.InExperienceShop.Label.BonusItem,ボーナスアイテム
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,あと{timeRemaining}で終了
+Feature.InExperienceShop.Label.FreeTrial,無料トライアル
 Feature.InExperienceShop.Label.NoDescription,詳細なし
 Feature.InExperienceShop.Label.OfferEndTime,{offer}はあと{timeRemaining}で終了します
 Feature.InExperienceShop.Label.PreviewBanner,これはRoblox Studioでのショップのプレビューです。プレイヤーにはこのプレビューは表示されません。
@@ -3565,6 +3581,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number}分
 Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number}秒
 Feature.InExperienceShop.Label.Timer.Second.Singular,1秒
+Feature.InExperienceShop.Label.Trial,トライアル
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,{ROBUX_AMOUNT} Robuxを購入できました
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,このアイテムを持ち物から永久に削除しますか？もし気が変わった場合は、バーチャル空間で再び獲得する必要があります。
 Feature.Item.Label.DeleteItemUndercase,アイテムを削除
@@ -3828,10 +3845,17 @@ Feature.Parents.Title.EnterParentEmailV2,保護者のメールアドレスを入
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,サーチから
+Feature.PlayerSearchResults.Label.NewUsername,新しいユーザーネーム
 Feature.PlayerSearchResults.Label.Previously,前の名前は
 Feature.PlayerSearchResults.Label.ThisIsYou,これがあなたです
+Feature.PlayerSearchResults.Label.You,あなた
+Feature.PlayerSearchResults.Label.YouAreConnections,つながっています
 Feature.PlayerSearchResults.Label.YouAreFollowing,フォローしています
+Feature.PlayerSearchResults.Label.YouAreFriends,友達になりました
+Feature.PrivateServers.Action.CreatePrivateServer,プライベートサーバーを作成
+Feature.PrivateServers.Action.FreeWithBlackbird,Plusで無料
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studioは、プライベートサーバーの購入には対応していません。
+Feature.PrivateServers.Description.VipServersNotSupported,このゲームはプライベートサーバーに対応していません。
 Feature.Profile.Action.AboutThisProfile,このプロフィールについて
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,友達を承認する
@@ -4084,6 +4108,7 @@ Feature.RobloxSubscription.Description.JoinEarly,Plusで先行参加
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username}さんからPlusへの招待状が届いています。Plusを購入すると、お互いに{amount}Robuxを獲得できます。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}をクリックすると、<a href=""{termsUrl}"">Roblox定期購入規約</a>に同意したとみなされます。キャンセルするまで、毎月自動的に料金が課金されます。"
 Feature.RobloxSubscription.Heading.ReferralEntry,Plusをシェアして、{amount} Robuxを獲得
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Plusに参加して、{amount} Robuxを獲得
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,Plusに参加して、次を獲得：
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,無料プライベートサーバー
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4100,6 +4125,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}1か月無料�
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration}{trialPeriodLabel}無料、{boldEnd}その後{price}/{periodType}
 Feature.RobloxSubscription.Label.month,か月
 Feature.RobloxSubscription.Label.months,
+Feature.RobloxSubscription.Message.AlreadySubscribed,すでにPlusをご利用中です。このリンクは新規メンバー向けです。ご自身のリンクを共有してお友達を招待し、特典を獲得しましょう。
 Feature.RobloxSubscription.Title.AgeCheckTrial,Plusを1週間無料で利用
 Feature.RobloxSubscription.Title.AlreadySubscribed,うれしいお知らせです
 Feature.RobloxSubscription.Title.GenericError,
@@ -4344,8 +4370,19 @@ Feature.SongDetails.Action.ReportAudio,音声を報告
 Feature.SongDetails.Label.InappropriateAudio,不適切な音声
 Feature.SongDetails.Label.InappropriateThumbnail,不適切なサムネイル画像
 Feature.SongDetails.Label.SongPreview,曲のプレビュー
+Feature.SplitPane.EditAvatarButtonText,
 Feature.SplitPane.Label.CollapseAvatar,アバターを折りたたむ
 Feature.SplitPane.Label.ExpandAvatar,アバターを展開
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,ツアーを終了
+Feature.SplitPane.Tour.Button.SkipTour,ツアーをスキップ
+Feature.SplitPane.Tour.Step1.Description.Collapsed,保存したアバターがホームに表示されるようになりました。このスペースを展開して確認してください。
+Feature.SplitPane.Tour.Step1.Description.Expanded,保存したアバターがホームに表示されるようになりました。回転させたりズームインしたりして、細部まで確認できます。
+Feature.SplitPane.Tour.Step1.Title,ホームで自分のアバターを確認
+Feature.SplitPane.Tour.Step2.Description,お好きなルックを選びましょう。ゲームに参加する直前でも、保存済みのアバターに切り替えられます。
+Feature.SplitPane.Tour.Step2.Title,いつでもルックを変更
+Feature.SplitPane.Tour.Step3.Description,このスペースはいつでも非表示にして、新しいゲームの探索に集中できます。保存したアバターはここに残ります。
+Feature.SplitPane.Tour.Step3.Title,表示内容を選択
 Feature.Squads.Action.Add,追加する
 Feature.Squads.Action.AddOthers,他の人を追加
 Feature.Squads.Action.ConnectToVoice,ボイスに接続

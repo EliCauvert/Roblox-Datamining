@@ -1,7 +1,9 @@
-﻿local addSystemInfoToArgs = require(script:FindFirstAncestor("Charts").Parent.DiscoveryUtils).AddSystemInfoToArgs
+﻿local charts = script:FindFirstAncestor("Charts")
+local addSystemInfoToArgs = require(charts.Parent.DiscoveryUtils).AddSystemInfoToArgs
+local fFlagSduiChartsAudienceFilterModule = require(charts.Flags.FFlagSduiChartsAudienceFilter)
 
 return function(p1, p2)
-	-- upvalues: addSystemInfoToArgs (ref)
+	-- upvalues: addSystemInfoToArgs (ref), fFlagSduiChartsAudienceFilterModule (ref)
 	local t = { sort_id = p2.sortId }
 	local t_1 = {}
 	addSystemInfoToArgs(t_1, { "maxMemory" })
@@ -29,6 +31,9 @@ return function(p1, p2)
 		end
 		if filterSelections.selectedGenre and filterSelections.selectedGenre ~= "" then
 			t.selected_genre = filterSelections.selectedGenre
+		end
+		if fFlagSduiChartsAudienceFilterModule and filterSelections.audience and filterSelections.audience ~= "" then
+			t.audience = filterSelections.audience
 		end
 	end
 	if p2.cachedRobloxComponentToTemplateId then

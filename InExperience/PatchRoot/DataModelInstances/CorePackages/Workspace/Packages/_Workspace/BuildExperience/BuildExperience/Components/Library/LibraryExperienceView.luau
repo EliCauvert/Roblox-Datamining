@@ -15,11 +15,25 @@ local libraryWorldBackdropViewModule = require(script.Parent.LibraryWorldCutout.
 local _ = require(script.Parent.LibraryWorldCutout.useLibraryWorldCutoutViewModel)
 local releaseFocusWithinModule = require(buildExperience.utils.releaseFocusWithin)
 local useTypedQueryBindingModule = require(script.Parent.useTypedQueryBinding)
+local useHardwareInsetsModule = require(buildExperience.Components.ChatSheet.useHardwareInsets)
+local t = {
+	Top = {
+		UDim2.fromOffset(-10000, -10000),
+		UDim2.new(1, 20000, 0, 10000)
+	},
+	Bottom = {
+		UDim2.new(0, -10000, 1, 0),
+		UDim2.new(1, 20000, 0, 10000)
+	},
+	Left = { UDim2.fromOffset(-10000, 0), UDim2.new(0, 10000, 1, 0) },
+	Right = { UDim2.fromScale(1, 0), UDim2.new(0, 10000, 1, 0) }
+}
 
 return function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), motionModule (ref), releaseFocusWithinModule (ref), useTypedQueryBindingModule (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), searchBarContainerModule (ref), segmentedControl (ref), libraryWorldBackdropViewModule (ref)
+	-- upvalues: foundationModule (ref), useHardwareInsetsModule (ref), reactModule (ref), motionModule (ref), releaseFocusWithinModule (ref), useTypedQueryBindingModule (ref), t (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), searchBarContainerModule (ref), segmentedControl (ref), libraryWorldBackdropViewModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local reducedMotion = foundationModule.Hooks.usePreferences().reducedMotion
+	local bottom = useHardwareInsetsModule().bottom
 	local var2, var3 = reactModule.useState(p1.isOpen)
 	local var4, var5 = motionModule.useMotion({ transparency = if p1.isOpen then 0 else 1 })
 	reactModule.useEffect(function()
@@ -104,19 +118,56 @@ return function(p1)
 		var11(nil)
 	end, { p1.title, p1.isOpen })
 	local var15 = reactModule.useRef(nil)
+	local var16 = reactModule.useRef(nil)
+	
+	local var17 = function(p2)
+		-- upvalues: var16 (ref)
+		local current = var16.current
+		
+		if p2 == nil or current == nil then
+			return false
+		end
+		local var18 = Vector2.new(p2.Position.X, p2.Position.Y) - current.AbsolutePosition
+		
+		return var18.X >= 0 and (var18.Y >= 0 and (var18.X <= current.AbsoluteSize.X and var18.Y <= current.AbsoluteSize.Y))
+	end
 	
 	local _ = function()
 		-- upvalues: releaseFocusWithinModule (copy), var15 (ref)
 		releaseFocusWithinModule(var15.current)
 	end
 	
-	local var16, var17 = useTypedQueryBindingModule(p1.query)
+	local var18, var19 = useTypedQueryBindingModule(p1.query)
 	
+	local _ = function()
+		-- upvalues: var19 (ref), p1 (ref)
+		var19("")
+		
+		if p1.onSearchReset == nil then
+			p1.onQueryChanged("")
+			
+			return
+		end
+		p1.onSearchReset()
+	end
+	
+	local t_1 = {}
+	
+	for i, v in t do
+		t_1[i] = reactModule.createElement(view, {
+			Position = v[1],
+			Size = v[2],
+			backgroundStyle = var9,
+			testId = `Library.Experience.SafeAreaFill.{i}`
+		})
+	end
 	return reactModule.createElement(view, {
-		tag = "col size-full",
+		tag = "col",
 		testId = "Library.Experience",
+		Size = UDim2.new(1, 0, 1, bottom),
 		backgroundStyle = { Transparency = 1 }
 	}, {
+		SafeAreaFill = reactModule.createElement("Folder", nil, t_1),
 		Header = reactModule.createElement(view, {
 			LayoutOrder = 1,
 			testId = "Library.Experience.Header",
@@ -137,12 +188,26 @@ return function(p1)
 				LayoutOrder = 1,
 				isCircular = true,
 				icon = if onBack ~= nil then iconName.X else iconName.ChevronLargeLeft,
+				ref = var16,
 				onActivated = function()
-					-- upvalues: onBack (ref), p1 (ref), releaseFocusWithinModule (copy), var15 (ref), var11 (ref)
+					-- upvalues: onBack (ref), p1 (ref), releaseFocusWithinModule (copy), var15 (ref), var11 (ref), var14 (ref), var19 (ref)
 					local onBack_1 = onBack or p1.onLeave
 					releaseFocusWithinModule(var15.current)
 					var11(nil)
-					onBack_1()
+					
+					if not var14 or onBack ~= nil then
+						onBack_1()
+						
+						return
+					end
+					var19("")
+					
+					if p1.onSearchReset == nil then
+						p1.onQueryChanged("")
+						
+						return
+					end
+					p1.onSearchReset()
 				end,
 				size = inputSize.Large,
 				variant = buttonVariant.Utility,
@@ -160,17 +225,17 @@ return function(p1)
 			}, {
 				Input = reactModule.createElement(searchBarContainerModule, {
 					key = title,
-					query = var16,
+					query = var18,
 					placeholder = p1.searchPlaceholder,
 					setQuery = function(value)
-						-- upvalues: var17 (ref), p1 (ref)
-						var17(value)
+						-- upvalues: var19 (ref), p1 (ref)
+						var19(value)
 						p1.onQueryChanged(value)
 					end,
 					clear = function()
-						-- upvalues: releaseFocusWithinModule (copy), var15 (ref), var17 (ref), p1 (ref)
+						-- upvalues: releaseFocusWithinModule (copy), var15 (ref), var19 (ref), p1 (ref)
 						releaseFocusWithinModule(var15.current)
-						var17("")
+						var19("")
 						
 						if p1.onSearchReset == nil then
 							p1.onQueryChanged("")
@@ -183,6 +248,12 @@ return function(p1)
 						-- upvalues: releaseFocusWithinModule (copy), var15 (ref), var11 (ref)
 						releaseFocusWithinModule(var15.current)
 						var11(nil)
+					end,
+					onFocusLost = function(p2)
+						-- upvalues: var18 (ref), var17 (ref), var11 (ref)
+						if var18:getValue() == "" and not var17(p2) then
+							var11(nil)
+						end
 					end,
 					shouldFocus = var13
 				})

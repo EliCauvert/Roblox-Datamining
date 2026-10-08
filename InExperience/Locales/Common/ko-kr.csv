@@ -106,6 +106,8 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,인증되지 않�
 Authentication.Login.WeChat.AntiAddictionText,"건전하지 않은 체험과 저작권 문제가 있는 체험은 방문하지 마시고, 사기 행위에 연루되지 않도록 스스로를 보호하세요. 이곳에서의 체험은 두뇌 발달에 도움이 되지만, 지나치게 오래 방문하는 것은 건강에 좋지 않습니다. 방문 시간을 잘 조절해서 건강한 생활을 유지하세요."
 Authentication.SignUp.Action.ApplyOnNextRespawn,다음 리스폰 시 적용
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.Create,만들기
+Authentication.SignUp.Action.CreateAccountSentenceCase,계정 생성
 Authentication.SignUp.Action.ExitModalLeave,나가기
 Authentication.SignUp.Action.RespawnNow,지금 리스폰
 Authentication.SignUp.Action.StartPlay,플레이 시작
@@ -113,15 +115,18 @@ Authentication.SignUp.Button.OKCaptialized,확인
 Authentication.SignUp.Button.RetryLogIn,로그인 재시도
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} 계정은 이미 Roblox계정에 연결되어 있습니다. 로그인을 다시 시도하세요.
 Authentication.SignUp.Description.BirthdayHint,날짜를 입력하세요.
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"계정을 생성하면 중재를 포함한 당사의 {startTermsTag}약관{endTermsTag}에 동의하고 {startPrivacyTag}개인정보 처리방침{endPrivacyTag}의 내용을 인정하는 것으로 간주됩니다. 만 18세 미만인 경우, 부모나 보호자가 계정 생성 및 당사의 약관에 동의해야 합니다."
 Authentication.SignUp.Description.Try,사용해 보기
 Authentication.SignUp.Description.UsernameChanged,모두 완료되었습니다! 계정이 준비되었으며 {platform}에 연결되었습니다. 지금 리스폰하여 게임에서 업데이트된 사용자 이름을 확인하세요. 그렇지 않으면 다음에 적용됩니다.
 Authentication.SignUp.Description.UsernameUnchanged,가입을 완료하셨습니다! 계정이 준비되었으며 {platform}에 연결되었습니다. 친구들과 채팅하고 수백만 개의 Roblox 게임을 플레이하세요.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Roblox 계정이 {platform}상의 계정에 연결됩니다. 언제든지 설정 화면에서 연결을 해제할 수 있습니다. {platform}상의 다른 계정에 연결하기 전에 잠시 지연이 발생할 수 있습니다. '{ctaButton}'을(를) 클릭하면, 중재 조항을 포함한 이용 약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다."
+Authentication.SignUp.Header.CloseWithoutFinishing,완료하지 않고 닫으시겠습니까?
 Authentication.SignUp.Header.OneLastThing,마지막으로 하나 더
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Roblox 계정 설정
 Authentication.SignUp.Heading.CountryCodeSelector,국가 선택
 Authentication.SignUp.Heading.RetryLogIn,
 Authentication.SignUp.Label.Birthday,생년월일
+Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date}(만 {yearsOld}세)
 Authentication.SignUp.Label.Continue,계속
 Authentication.SignUp.Label.Day,일
 Authentication.SignUp.Label.EnterYourEmail,이메일 입력
@@ -160,6 +165,7 @@ Authentication.SignUp.Response.PasswordComplexity,좀 더 복잡한 비밀번호
 Authentication.SignUp.Response.UsernameMustBeSetFirst,먼저 사용자 이름을 설정해야 합니다.
 Authentication.SignUp.Subtitle.AddYourBirthday,Roblox 계정을 만들려면 생년월일을 입력하세요.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,설정을 완료하면 진행 상황이 이전됩니다.
+Authentication.SignUp.Subtitle.YoureAlmostThere,이제 거의 다 되었습니다. 지금 닫으면 계정이 완전히 생성되지 않아 Roblox를 플레이할 수 없습니다.
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,거래를 진행하려면 2단계 인증이 되어 있어야 합니다. 설정> 보안으로 이동해 2단계 인증을 완료하세요.
 Authentication.TwoStepVerification.Response.TooManyAttempts,시도 가능 횟수를 초과했습니다. 나중에 다시 시도하세요.
@@ -427,7 +433,7 @@ CommonUI.Features.Label.Connections,
 CommonUI.Features.Label.ControllerBar.HoldPrefix,길게 누르기:
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,플레이
-CommonUI.Features.Label.CreateGames,만들기
+CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,체험
 CommonUI.Features.Label.GiftCards,기프트 카드 구매
@@ -1543,6 +1549,7 @@ Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"이름에는 알파벳과 숫자, 빈 칸만 사용할 수 있어요"
 Feature.Avatar.Label.CountSelected,{itemCount}개 선택됨
 Feature.Avatar.Label.Creations,작품
+Feature.Avatar.Label.Current,현재
 Feature.Avatar.Label.CurrentlyWearing,현재 장착 중
 Feature.Avatar.Label.DefaultBody,기본 신체
 Feature.Avatar.Label.DeleteSetBody,이 세트를 삭제해도 세트 내의 의상은 삭제되지 않습니다.
@@ -1989,6 +1996,10 @@ Feature.Build.Analytics.Description.PayerConversion,유료 사용자 전환은 �
 Feature.Build.Analytics.Description.PlaythroughRate,플레이스루 비율은 전체 플레이 세션을 완료한 방문자의 비율입니다. 비율이 높다는 것은 플레이어가 체험을 쉽게 시작하고 끝까지 플레이할 가치가 있다고 생각하는 것을 의미합니다.
 Feature.Build.Analytics.Description.TotalPlaytime,총 플레이타임은 해당 기간 동안 모든 플레이어가 체험에 소요한 시간을 합산한 것입니다. 플레이타임이 증가하면 일반적으로 더 많은 참여 세션이 있다는 신호입니다.
 Feature.Build.Analytics.DurationHours,{number}시간
+Feature.Build.Analytics.Goal.EarnRobux,
+Feature.Build.Analytics.Goal.FirstImpression,좋은 첫인상을 남기세요
+Feature.Build.Analytics.Goal.GetMorePlayers,플레이어를 더 많이 유치하세요
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,플레이어의 재방문을 유도하세요
 Feature.Build.Analytics.KeyStats,주요 통계
 Feature.Build.Analytics.LastMonth,지난달
 Feature.Build.Analytics.LastWeek,
@@ -2020,9 +2031,12 @@ Feature.Build.Analytics.Summary.TotalPlaytime,플레이어가 내 체험에서 �
 Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,총 플레이어
 Feature.Build.Analytics.Title.D1Retention,
+Feature.Build.Analytics.Title.D7Retention,7일 차 유지율
 Feature.Build.Analytics.Title.DailyActiveUsers,
+Feature.Build.Analytics.Title.NewUserSessionTime,신규 사용자 세션 시간
 Feature.Build.Analytics.Title.PayerConversion,유료 사용자 전환
 Feature.Build.Analytics.Title.PlaythroughRate,
+Feature.Build.Analytics.Title.RobuxSpent,
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,방문 수
 Feature.Build.Content.NewGame,새 게임
@@ -2079,6 +2093,7 @@ Feature.Build.Description.ShopButton,쇼핑 진입점 추가
 Feature.Build.Description.ShortAdCampaign,플레이어들이 내 게임에 대해 어떻게 생각하는지 빠르게 확인할 수 있는 방법입니다.
 Feature.Build.Description.StopBuild,"이 요청은 아직 진행 중입니다. 지금 중지하면 요청이 완료되지 않으며, 다시 요청하셔야 합니다."
 Feature.Build.Description.UpdateDeveloperProduct,개발자 상품 {PRODUCT_ID}을(를) 업데이트하세요.
+Feature.Build.Description.UseAdCreditsInAdsManager,광고 크레딧을 사용하려면 광고 관리자로 이동해야 합니다.
 Feature.Build.Error.AdForbidden,지금은 계정이나 게임에서 광고를 게재할 수 없습니다. 오류라고 생각되면 지원 센터로 문의하세요.
 Feature.Build.Error.AdInsufficientFunds,Robux가 부족해 이 광고를 만들 수 없습니다. Robux를 추가하고 다시 시도하세요.
 Feature.Build.Error.AdInternalError,
@@ -2402,6 +2417,7 @@ Feature.Build.Title.RevertLastChange,마지막 변경 사항을 되돌리시겠�
 Feature.Build.Title.StopBuild,빌드를 중지하시겠습니까?
 Feature.Build.Title.Tasks,작업
 Feature.Build.Title.TurnActivity,턴 활동
+Feature.Build.Title.UseYourAdCredits,광고 크레딧 사용
 Feature.Build.Title.VersionHistory,버전 기록
 Feature.Build.Title.VersionInfo,버전 정보
 Feature.Build.Title.VersionNumber,{VERSION} 버전
@@ -2834,6 +2850,7 @@ Feature.Catalog.Title.Checkout.UnavailableItems,이용할 수 없는 아이템
 Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle,아바타에 장착할까요?
 Feature.Catalog.Title.CheckoutPlural,{count}개 아이템 결제
 Feature.Catalog.Title.CheckoutSingular,
+Feature.Catalog.Title.Explore,둘러보기
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,맨 아래 레이어를 바꾸시겠어요?
 Feature.Catalog.Title.RentalFtuxText,아이템을 대여해서 3일 동안 이용해보세요
 Feature.Catalog.Toast.AddedToFavorites,즐겨찾기에 추가됨
@@ -3470,14 +3487,14 @@ Feature.Groups.Modal.ContentTextLow,"계정을 인증하고 커뮤니티에 가�
 2. 인증 수단을 선택하세요.
     - 휴대폰 번호 추가
     - 이메일 주소 추가
-    - 나이 인증
+    - 신분증 인증
 3. 인증 절차를 완료하세요."
 Feature.Groups.Modal.ContentTextMedium,"계정을 인증하고 커뮤니티에 가입하세요.
 
 1. '계정 정보'로 이동하세요.
 2. 인증 수단을 선택하세요.
     - 휴대폰 번호 추가 및 이메일 주소 추가
-    - 나이 인증
+    - 신분증 인증
 3. 인증 절차를 완료하세요."
 Feature.Groups.Notification.FailedToFollow,프로필을 팔로우하지 못했습니다. 나중에 다시 시도해 주세요.
 Feature.Groups.Notification.FailedToJoin,커뮤니티에 하지 못했습니다. 나중에 다시 시도하세요.
@@ -3553,6 +3570,7 @@ Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,Robux를 구�
 Feature.InExperienceShop.Label.BonusItem,보너스 아이템
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} 후 종료
+Feature.InExperienceShop.Label.FreeTrial,무료 체험
 Feature.InExperienceShop.Label.NoDescription,설명 없음
 Feature.InExperienceShop.Label.OfferEndTime,{offer} {timeRemaining} 후 종료
 Feature.InExperienceShop.Label.PreviewBanner,Roblox Studio 내 회원님의 상점 미리 보기입니다. 플레이어에게는 이 미리 보기가 표시되지 않습니다.
@@ -3564,6 +3582,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number}분
 Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number}초
 Feature.InExperienceShop.Label.Timer.Second.Singular,1초
+Feature.InExperienceShop.Label.Trial,
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,{ROBUX_AMOUNT} Robux를 구매하셨습니다.
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,이 아이템을 인벤토리에서 영구적으로 삭제할까요? 마음이 바뀐다면 해당 아이템을 체험에서 다시 획득해야 합니다.
 Feature.Item.Label.DeleteItemUndercase,아이템 삭제
@@ -3577,12 +3596,16 @@ Feature.Moments.Action.AddSticker,스티커 추가
 Feature.Moments.Action.AddText,텍스트 추가
 Feature.Moments.Action.AddVoice,음성 추가
 Feature.Moments.Action.Back,
+Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentShowLess,
+Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
 Feature.Moments.Action.CreateVoiceover,보이스오버 만들기
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.DiscardChange,변경 사항 삭제
 Feature.Moments.Action.Done,
+Feature.Moments.Action.Edit,
 Feature.Moments.Action.Expand,펼치기
 Feature.Moments.Action.GenerateText,텍스트 생성
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,도움이 되지 않음
@@ -3598,6 +3621,7 @@ Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
+Feature.Moments.Action.RetryLoadingComments,코멘트 다시 불러오기
 Feature.Moments.Action.Return,갤러리로 돌아가기
 Feature.Moments.Action.ReturnToEditing,편집으로 돌아가기
 Feature.Moments.Action.SaveVoiceover,
@@ -3620,9 +3644,35 @@ Feature.Moments.Description.StayFriendly,친근한 분위기를 유지해 보세
 Feature.Moments.Description.TooManyUploads,오늘 업로드한 동영상이 너무 많습니다. 내일 다시 시도하세요.
 Feature.Moments.Disclaimer.EveryoneMoments,모멘트에 참여하는 모든 사람이 게시된 내용을 볼 수 있습니다
 Feature.Moments.Label.All,
+Feature.Moments.Label.AllowComments,코멘트 허용
 Feature.Moments.Label.AttemptingJoinExperience,{placeName}에 참가하려고 시도 중입니다. 몇 초 정도 걸릴 수 있습니다.
 Feature.Moments.Label.CaptureLibrary,
 Feature.Moments.Label.ChooseVoice,음성 선택
+Feature.Moments.Label.CommentAuthorFallback,사용자 {userId}
+Feature.Moments.Label.CommentAuthorUnknown,
+Feature.Moments.Label.CommentDeleteFailed,코멘트를 삭제하지 못했습니다.
+Feature.Moments.Label.CommentNotAllowed,이 모멘트에는 코멘트를 남길 수 없습니다.
+Feature.Moments.Label.CommentPostFailed,코멘트를 게시하지 못했습니다. 다시 시도해 주세요.
+Feature.Moments.Label.CommentPostOutcomeUnknown,마지막으로 게시하신 코멘트를 확인할 수 없습니다. 코멘트를 확인한 후 다시 보내세요.
+Feature.Moments.Label.CommentRateLimited,코멘트를 너무 빠르게 남기고 있습니다. 나중에 다시 시도하세요.
+Feature.Moments.Label.CommentRejectedByFilter,코멘트가 게시되지 않았습니다. 수정 후 다시 시도해 주세요.
+Feature.Moments.Label.CommentSendStatusUnknown,전송 상태를 알 수 없음
+Feature.Moments.Label.CommentSending,전송 중...
+Feature.Moments.Label.CommentSignInRequired,코멘트를 남기려면 다시 로그인하세요.
+Feature.Moments.Label.CommentTimestampDays,{count}일
+Feature.Moments.Label.CommentTimestampHours,{count}시간
+Feature.Moments.Label.CommentTimestampMinutes,{count}분
+Feature.Moments.Label.CommentTimestampMonths,{count}개월
+Feature.Moments.Label.CommentTimestampNow,
+Feature.Moments.Label.CommentTimestampWeeks,{count}주
+Feature.Moments.Label.CommentTimestampYears,{count}년
+Feature.Moments.Label.CommentingUnavailable,현재 코멘트를 남길 수 없습니다. 나중에 다시 시도해 보세요.
+Feature.Moments.Label.CommentsDisabled,코멘트를 사용하지 않음
+Feature.Moments.Label.CommentsReadOnly,코멘트는 읽기 전용입니다.
+Feature.Moments.Label.CommentsTurnedOff,이 모멘트에는 코멘트 기능이 꺼져 있습니다.
+Feature.Moments.Label.CommentsUnavailable,코멘트를 이용할 수 없습니다
+Feature.Moments.Label.DeleteCommentBody,이 코멘트는 영구적으로 삭제됩니다.
+Feature.Moments.Label.DeleteCommentTitle,코멘트를 삭제하시겠습니까?
 Feature.Moments.Label.DeleteMomentBody,모멘트가 삭제되면 복구할 수 없습니다.
 Feature.Moments.Label.DeleteMomentTitle,모멘트를 삭제할까요?
 Feature.Moments.Label.DeleteVoiceoverBody,계속하면 텍스트와 보이스오버가 지워집니다. 언제든지 다시 시작할 수 있습니다.
@@ -3634,6 +3684,7 @@ Feature.Moments.Label.FeedEndTitle,모두 확인했습니다
 Feature.Moments.Label.FeedFailedToLoad,피드를 불러오지 못했습니다.
 Feature.Moments.Label.FeedMyMoments,내 모멘트
 Feature.Moments.Label.FeedTrending,
+Feature.Moments.Label.FirstCommentInvite,아직 코멘트가 없습니다. 가장 먼저 코멘트를 남겨 보세요!
 Feature.Moments.Label.HowToUseCaptureTitle,캡처 사용 방법
 Feature.Moments.Label.LinkCopied,링크 복사됨
 Feature.Moments.Label.LinkCopyFailed,링크를 복사하지 못했습니다.
@@ -3642,12 +3693,14 @@ Feature.Moments.Label.MomentDeletedBody,
 Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,문제가 발생했습니다.
 Feature.Moments.Label.MomentFailedToPostTitle,모멘트를 게시하지 못했습니다
+Feature.Moments.Label.MomentNoLongerAvailable,이 모멘트는 더 이상 이용할 수 없습니다.
 Feature.Moments.Label.MomentPublishedBody,모멘트 게시가 완료되었습니다.
 Feature.Moments.Label.MomentPublishedTitle,모멘트 게시됨
 Feature.Moments.Label.MomentUnavailable,모멘트 이용 불가
 Feature.Moments.Label.MomentUnavailableDefault,이 모멘트는 이용할 수 없습니다.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NoCommentsYet,코멘트 아직 없음
 Feature.Moments.Label.NonInfiniteScrollEndTitle,지금은 모두 확인했습니다
 Feature.Moments.Label.Photos,사진
 Feature.Moments.Label.PostDeleted,모멘트 삭제됨
@@ -3688,6 +3741,10 @@ Feature.Moments.Label.VoiceLimitReachedBody,잠시 기다린 후 다시 시도�
 Feature.Moments.Label.VoiceModerationError,스크립트는 안전 규칙을 준수해야 합니다
 Feature.Moments.Label.VoicePlaceholder,보이스오버 스크립트를 입력하세요. 글자 수 한도 {maxCount}자
 Feature.Moments.Label.VoiceTimeoutBody,보이스오버 생성 시간이 초과되었습니다.
+Feature.Moments.Label.WriteComment,코멘트를 남기세요
+Feature.Moments.Title.Comments,코멘트
+Feature.Moments.Title.CommentsWithCappedCount,코멘트({count}개 이상)
+Feature.Moments.Title.CommentsWithCount,코멘트({count}개)
 Feature.Moments.Title.GenerateTextFeedbackReason,어떤 문제가 생겼나요?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
@@ -3790,10 +3847,17 @@ Feature.Parents.Title.EnterParentEmailV2,보호자 이메일 입력
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,검색에서
+Feature.PlayerSearchResults.Label.NewUsername,새로운 사용자 이름
 Feature.PlayerSearchResults.Label.Previously,
 Feature.PlayerSearchResults.Label.ThisIsYou,회원님이네요
+Feature.PlayerSearchResults.Label.You,나
+Feature.PlayerSearchResults.Label.YouAreConnections,서로 인맥
 Feature.PlayerSearchResults.Label.YouAreFollowing,내가 현재 팔로잉
+Feature.PlayerSearchResults.Label.YouAreFriends,여러분은 친구예요
+Feature.PrivateServers.Action.CreatePrivateServer,비공개 서버 만들기
+Feature.PrivateServers.Action.FreeWithBlackbird,Plus로 무료 이용
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio에서는 비공개 서버 구매가 지원되지 않습니다.
+Feature.PrivateServers.Description.VipServersNotSupported,이 게임은 비공개 서버를 지원하지 않습니다.
 Feature.Profile.Action.AboutThisProfile,프로필 정보
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4046,6 +4110,7 @@ Feature.RobloxSubscription.Description.JoinEarly,Plus로 일찍 참여하기
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} 님이 나를 Plus에 초대했습니다. Plus를 구매하면 두 사람 모두 {amount} Robux를 받습니다.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}를 클릭하면 <a href=""{termsUrl}"">Roblox 구독 약관</a>에 동의하는 것으로 간주됩니다. 구독을 취소하기 전까지 매월 자동으로 요금이 청구됩니다."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus를 공유하고 {amount} Robux  받기
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Plus에 가입하고 {amount} Robux 받기
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,Plus에 가입하고  받기
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,무료 비공개 서버
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4062,6 +4127,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}1개월 무료 
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration}{trialPeriodLabel} 무료 이용{boldEnd} 후 {price}/{periodType}
 Feature.RobloxSubscription.Label.month,개월
 Feature.RobloxSubscription.Label.months,
+Feature.RobloxSubscription.Message.AlreadySubscribed,이미 Plus를 이용하고 있습니다. 이 링크는 신규 회원을 위한 것입니다. 내 링크를 공유하여 친구를 초대하고 보상을 받으세요.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Plus 1주일 무료 구독하기
 Feature.RobloxSubscription.Title.AlreadySubscribed,좋은 소식
 Feature.RobloxSubscription.Title.GenericError,오류가 발생했습니다
@@ -4306,8 +4372,19 @@ Feature.SongDetails.Action.ReportAudio,오디오 신고
 Feature.SongDetails.Label.InappropriateAudio,부적절한 오디오
 Feature.SongDetails.Label.InappropriateThumbnail,부적절한 섬네일
 Feature.SongDetails.Label.SongPreview,노래 미리 보기
+Feature.SplitPane.EditAvatarButtonText,
 Feature.SplitPane.Label.CollapseAvatar,아바타 접기
 Feature.SplitPane.Label.ExpandAvatar,아바타 펼치기
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,투어 마치기
+Feature.SplitPane.Tour.Button.SkipTour,투어 건너뛰기
+Feature.SplitPane.Tour.Step1.Description.Collapsed,이제 저장된 아바타를 홈에서 볼 수 있습니다. 이 공간을 펼쳐서 아바타를 확인하세요.
+Feature.SplitPane.Tour.Step1.Description.Expanded,이제 저장된 아바타를 홈에서 볼 수 있습니다. 아바타를 돌리거나 확대해서 모든 디테일을 확인하세요.
+Feature.SplitPane.Tour.Step1.Title,홈 화면에서 내 아바타 보기
+Feature.SplitPane.Tour.Step2.Description,원하는 룩을 선택하세요. 게임에 참가하기 전에 저장된 아바타를 전환할 수 있습니다.
+Feature.SplitPane.Tour.Step2.Title,언제든지 룩을 변경하세요
+Feature.SplitPane.Tour.Step3.Description,언제든지 이 공간을 숨기고 새로운 게임을 찾는 데 집중할 수 있습니다. 저장된 아바타는 바로 여기에 그대로 있습니다.
+Feature.SplitPane.Tour.Step3.Title,표시할 항목을 선택하세요
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,다른 사용자 추가
 Feature.Squads.Action.ConnectToVoice,음성에 연결

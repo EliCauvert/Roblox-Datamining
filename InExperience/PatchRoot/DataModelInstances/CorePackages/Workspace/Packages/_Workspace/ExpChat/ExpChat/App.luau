@@ -17,7 +17,7 @@ local expChatReconcileOnAgeVerifiedChange = game:DefineFastFlag("ExpChatReconcil
 local var1 = if expChatReconcileOnAgeVerifiedChange then require(script.Parent.ExpChatEventReceiver) else nil
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local var2 = if fFlagExpChatEnableFriendsTab then require(script.Parent.FriendsChatEventReceiverConnector) else nil
-local focusHotKeyReceiverModule = require(script.Parent.FocusHotKey.FocusHotKeyReceiver)
+local shortcutNavReceiverModule = require(script.Parent.ShortcutNav.ShortcutNavReceiver)
 local getFFlagExpChatTelemetryEventTriggerModule = require(expChat.Flags.getFFlagExpChatTelemetryEventTrigger)
 
 local function computePresetBitmap(value)
@@ -61,13 +61,13 @@ app.defaultProps = {
 }
 
 function app.render(p1)
-	-- upvalues: roactModule (ref), roactRoduxModule (ref), localizationModule (ref), gameLocalizationModule (ref), expChatReconcileOnAgeVerifiedChange (ref), var1 (ref), fFlagExpChatEnableFriendsTab (ref), var2 (ref), focusHotKeyReceiverModule (ref), appContainerModule (ref)
+	-- upvalues: roactModule (ref), roactRoduxModule (ref), localizationModule (ref), gameLocalizationModule (ref), expChatReconcileOnAgeVerifiedChange (ref), var1 (ref), fFlagExpChatEnableFriendsTab (ref), var2 (ref), shortcutNavReceiverModule (ref), appContainerModule (ref)
 	return p1.props.isDefaultChatEnabled and roactModule.createElement(roactRoduxModule.StoreProvider, { store = p1.props.store }, {
 		localization = roactModule.createElement(localizationModule.Provider, { value = p1.props.translator }, {
 			gameLocalization = roactModule.createElement(gameLocalizationModule.Provider, { value = p1.props.gameTranslator }, {
 				eventReceiver = if expChatReconcileOnAgeVerifiedChange then roactModule.createElement(var1) else nil,
 				friendsChatEventReceiver = if fFlagExpChatEnableFriendsTab then roactModule.createElement(var2) else nil,
-				focusHotKeyReceiver = if fFlagExpChatEnableFriendsTab then roactModule.createElement(focusHotKeyReceiverModule) else nil,
+				shortcutNavReceiver = if fFlagExpChatEnableFriendsTab then roactModule.createElement(shortcutNavReceiverModule) else nil,
 				container = roactModule.createElement(appContainerModule, {
 					isChatInputBarVisible = p1.props.isChatInputBarVisible,
 					isChatWindowVisible = p1.props.isChatWindowVisible,

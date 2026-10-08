@@ -4,5 +4,6 @@
 	IconWithHoldAnimation = require(script.Components.AppShortcut).IconWithHoldAnimation,
 	AppShortcutBarContext = require(script.Hooks.AppShortcutBarContext),
 	Hooks = require(script.Hooks),
+	GetShortcutBarStatusStore = require(script.Stores.GetShortcutBarStatusStore),
 	["jest.config"] = script["jest.config"]
 }

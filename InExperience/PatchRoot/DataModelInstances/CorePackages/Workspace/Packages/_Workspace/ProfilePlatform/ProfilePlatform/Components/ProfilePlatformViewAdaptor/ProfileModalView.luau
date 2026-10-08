@@ -10,7 +10,6 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local enumsModule = require(profilePlatform.Common.Enums)
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 local inputHandlersModule = require(parent.InputHandlers)
-local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
 local displayModule = require(parent.Display)
 local useSignalState = require(parent.SignalsReact).useSignalState
 local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
@@ -19,9 +18,9 @@ local fFlagFixCommunityProfileWideCoverLayoutModule = require(profilePlatform.Fl
 local view = require(parent.Foundation).View
 
 return function(p1)
-	-- upvalues: useStyle (ref), fFlagEnableLeftNavOnConsole (ref), useSignalState (ref), displayModule (ref), fFlagProfileModalViewStatusBarOffsetModule (ref), useStatusBarHeight (ref), fFlagFixCommunityProfileWideCoverLayoutModule (ref), useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), inputHandlersModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), view (ref)
+	-- upvalues: useStyle (ref), useSignalState (ref), displayModule (ref), fFlagProfileModalViewStatusBarOffsetModule (ref), useStatusBarHeight (ref), fFlagFixCommunityProfileWideCoverLayoutModule (ref), useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), inputHandlersModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), view (ref)
 	local var1 = useStyle()
-	local var2 = if fFlagEnableLeftNavOnConsole then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
+	local var2 = useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding)
 	local t = {
 		BorderSizePixel = 0,
 		AnchorPoint = Vector2.new(1, 0),
@@ -38,8 +37,8 @@ return function(p1)
 	local var8 = if fFlagFixCommunityProfileWideCoverLayoutModule and var6 ~= nil and (var6.profileType == enumsModule.ProfileTypes.Community and var7 ~= nil) and var7.coverPhotoId == nil then 56 else 0
 	
 	return reactModule.createElement("ImageButton", {
-		Position = if fFlagEnableLeftNavOnConsole then UDim2.fromOffset(0, -var2.top) else nil,
-		Size = if fFlagEnableLeftNavOnConsole then UDim2.new(1, var2.right, 1, var2.top + var2.bottom) else UDim2.new(1, 0, 1, 0),
+		Position = UDim2.fromOffset(0, -var2.top),
+		Size = UDim2.new(1, var2.right, 1, var2.top + var2.bottom),
 		BackgroundTransparency = var1.Theme.Overlay.Transparency,
 		BackgroundColor3 = var1.Theme.Overlay.Color,
 		Active = true,

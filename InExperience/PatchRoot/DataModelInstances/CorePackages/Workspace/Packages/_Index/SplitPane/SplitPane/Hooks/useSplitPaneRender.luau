@@ -144,6 +144,7 @@ return function(p1, p2, p3, p4)
 			supportPaneResizable = var4.supportPaneResizable == true,
 			supportResizerAbovePane = not var16,
 			isBreakpointEnabled = var3,
+			isRootAppStack = var10,
 			renderSupportContent = var4.renderSupportContent,
 			onContentRegionRectChanged = var4.onContentRegionRectChanged
 		}

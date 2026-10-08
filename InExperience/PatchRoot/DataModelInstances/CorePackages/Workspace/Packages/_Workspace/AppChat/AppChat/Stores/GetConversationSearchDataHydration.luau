@@ -68,12 +68,15 @@ local function getOrderedMatchedIds(p5)
 end
 
 return signalsModule.createComputed(function()
-	-- upvalues: createDataCache (ref), getConversationStoreModule (ref), createDataResolver (ref), name (ref), appChatNetworkingModule (ref), getResponseBodyModule (ref), collectSearchOnlyIds (ref), signalsExperimentalModule (ref), ingestConversationListPageModule (ref), searchIntroducedConversationIdsModule (ref), getOrderedMatchedIds (ref)
+	-- upvalues: createDataCache (ref), getConversationStoreModule (ref), signalsModule (ref), createDataResolver (ref), name (ref), appChatNetworkingModule (ref), getResponseBodyModule (ref), collectSearchOnlyIds (ref), signalsExperimentalModule (ref), ingestConversationListPageModule (ref), searchIntroducedConversationIdsModule (ref), getOrderedMatchedIds (ref)
 	local var1 = createDataCache(30)
 	local var2 = getConversationStoreModule(false)
 	local t = {}
 	local var3 = 0
-	local var4 = createDataResolver({
+	local var4, var5 = signalsModule.createSignal(0)
+	local t_1 = {}
+	local fetchPage = nil
+	local var6 = createDataResolver({
 		supportsMultiGet = false,
 		queueProcessDelaySec = 0,
 		replaceItems = true,
@@ -83,52 +86,77 @@ return signalsModule.createComputed(function()
 			name:warning(`Failed to fetch AppChat conversation search page: {tostring(p6)}`)
 		end,
 		fetchFn = function(p6)
-			-- upvalues: t (write), var3 (write), appChatNetworkingModule (copy), getResponseBodyModule (copy), collectSearchOnlyIds (copy), var2 (ref), signalsExperimentalModule (copy), ingestConversationListPageModule (copy), searchIntroducedConversationIdsModule (copy), getOrderedMatchedIds (copy)
-			local var5 = t[p6]
+			-- upvalues: t (write), var3 (write), t_1 (write), var4 (ref), appChatNetworkingModule (copy), getResponseBodyModule (copy), collectSearchOnlyIds (copy), var2 (ref), signalsExperimentalModule (copy), ingestConversationListPageModule (copy), searchIntroducedConversationIdsModule (copy), getOrderedMatchedIds (copy), fetchPage (write)
+			local var7 = t[p6]
+			local var8 = if var7 ~= nil then "" else var7.query
+			local var9 = if var7 ~= nil then nil else var7.cursor
+			t_1[p6] = var4(false)
 			
-			return appChatNetworkingModule.http.SearchConversations(nil, if var5 ~= nil then "" else var5.query, if var5 ~= nil then nil else var5.cursor):andThen(function(p7)
-				-- upvalues: var3 (ref), var3 (copy), getResponseBodyModule (copy), collectSearchOnlyIds (copy), var2 (copy), signalsExperimentalModule (copy), ingestConversationListPageModule (copy), searchIntroducedConversationIdsModule (copy), getOrderedMatchedIds (copy)
+			return appChatNetworkingModule.http.SearchConversations(nil, var8, var9):andThen(function(p7)
+				-- upvalues: var3 (ref), var3 (copy), getResponseBodyModule (copy), collectSearchOnlyIds (copy), var2 (copy), signalsExperimentalModule (copy), ingestConversationListPageModule (copy), searchIntroducedConversationIdsModule (copy), getOrderedMatchedIds (copy), t_1 (copy), p6 (ref), var4 (copy), fetchPage (copy), var8 (ref), var9 (ref)
 				if var3 ~= var3 then
 					return { nextCursor = nil, matchedConversationIds = {} }
 				end
-				local var6 = getResponseBodyModule(p7)
-				local var7 = collectSearchOnlyIds(var2, var6)
+				local var10 = getResponseBodyModule(p7)
+				local var11 = collectSearchOnlyIds(var2, var10)
 				signalsExperimentalModule.batch(function()
-					-- upvalues: ingestConversationListPageModule (copy), var2 (copy), var6 (ref), var7 (ref), searchIntroducedConversationIdsModule (copy)
-					ingestConversationListPageModule.ingestConversationResponses(var2, var6)
+					-- upvalues: ingestConversationListPageModule (copy), var2 (copy), var10 (ref), var11 (ref), searchIntroducedConversationIdsModule (copy)
+					ingestConversationListPageModule.ingestConversationResponses(var2, var10)
 					
-					for i, v in var7 do
+					for i, v in var11 do
 						searchIntroducedConversationIdsModule.add(v)
 					end
 				end)
-				local var8 = if var6 ~= nil then nil else var6.next_cursor
+				local var12 = getOrderedMatchedIds(var10)
+				local var13 = if var10 ~= nil then nil else var10.next_cursor
 				
+				if t_1[p6] ~= var4(false) then
+					task.defer(function()
+						-- upvalues: var3 (copy), var3 (copy), fetchPage (copy), var8 (copy), var9 (copy)
+						if var3 == var3 then
+							fetchPage(var8, var9)
+						end
+					end)
+				end
 				return {
-					matchedConversationIds = getOrderedMatchedIds(var6),
-					nextCursor = if var8 == nil or var8 == "" then nil else var8
+					matchedConversationIds = var12,
+					nextCursor = if var13 == nil or var13 == "" then nil else var13
 				}
 			end)
 		end
 	})
 	
-	local function fetchPage(p7, p8)
-		-- upvalues: t (write), var4 (ref)
+	fetchPage = function(p7, p8)
+		-- upvalues: t (write), var6 (ref), t_1 (write), var4 (ref)
 		if if p7 ~= nil then p7 == "" else true then
 			return nil
 		end
-		local var6 = `{p7}\0{if p8 == nil or p8 == "" then "__initial__" else p8}`
-		t[var6] = { query = p7, cursor = p8 }
+		local var10 = `{p7}\0{if p8 == nil or p8 == "" then "__initial__" else p8}`
+		t[var10] = { query = p7, cursor = p8 }
 		
-		return var4.getAndFetchItem(var6)
+		return var6.getAndFetchItem(var10, function()
+			-- upvalues: t_1 (copy), var10 (ref), var4 (copy)
+			return t_1[var10] ~= var4(false)
+		end)
+	end
+	
+	local function invalidate()
+		-- upvalues: var5 (ref), var4 (ref)
+		var5(var4(false) + 1)
 	end
 	
 	var2.addClearListener(function()
-		-- upvalues: var3 (write), t (write), searchIntroducedConversationIdsModule (copy), var4 (ref)
+		-- upvalues: var3 (write), t (write), t_1 (write), searchIntroducedConversationIdsModule (copy), var6 (ref)
 		var3 += 1
 		t = {}
+		t_1 = {}
 		searchIntroducedConversationIdsModule.clear()
-		var4.clear()
+		var6.clear()
 	end)
 	
-	return { fetchPage = fetchPage }
+	return {
+		fetchPage = fetchPage,
+		getInvalidationGeneration = var4,
+		invalidate = invalidate
+	}
 end)

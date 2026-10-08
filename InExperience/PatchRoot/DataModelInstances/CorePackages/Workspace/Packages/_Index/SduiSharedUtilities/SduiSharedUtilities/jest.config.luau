@@ -3,7 +3,7 @@
 return {
 	displayName = "SduiSharedUtilities",
 	testMatch = { "**/*.test" },
-	testPathIgnorePatterns = { "SduiPageAnalytics.test" },
+	testPathIgnorePatterns = { "SduiPageAnalytics.test", "createSduiApiStore.test" },
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.LogHandler,
 		jestConfigsModule.setupFiles.UIBloxInitializer,

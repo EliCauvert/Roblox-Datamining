@@ -49,7 +49,7 @@ local socialJoinPassPlaceIdToLaunch = game:DefineFastFlag("SocialJoinPassPlaceId
 local t = { skipFetch = true }
 
 return function(p1, p2)
-	-- upvalues: useDispatch (ref), useRoactService (ref), appSessionService (ref), appGame (ref), reactModule (ref), initializeSocialExperienceJoinAnalyticsModule (ref), useLocalUserId (ref), fFlagSocialExperienceJoinPresenceStoreMigrationModule (ref), var2 (ref), t (ref), useSelector (ref), getDeepValue (ref), constantsModule (ref), networkingGamesModule (ref), networkStatus (ref), useAgeCheckUpsellStateModule (ref), setGamePlaySession (ref), sessionType (ref), eventNamesModule (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (ref), joinExperienceStatusModule (ref), promiseModule (ref), socialJoinUseUnifiedPurchaseFlow (ref), setCentralOverlay (ref), centralOverlayType (ref), closeCentralOverlay (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), playabilityStatus (ref), gameJoinCardOnBeforeJoinCallback (ref), launchGame (ref), fFlagJoinabilityCTARefactor (ref), socialJoinPassPlaceIdToLaunch (ref), fFlagGameJoinCardSourceAttribution (ref)
+	-- upvalues: useDispatch (ref), useRoactService (ref), appSessionService (ref), appGame (ref), reactModule (ref), initializeSocialExperienceJoinAnalyticsModule (ref), useLocalUserId (ref), fFlagSocialExperienceJoinPresenceStoreMigrationModule (ref), var2 (ref), t (ref), useSelector (ref), getDeepValue (ref), constantsModule (ref), networkingGamesModule (ref), networkStatus (ref), useAgeCheckUpsellStateModule (ref), setGamePlaySession (ref), sessionType (ref), eventNamesModule (ref), fFlagJoinabilityCTARefactor (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (ref), joinExperienceStatusModule (ref), promiseModule (ref), socialJoinUseUnifiedPurchaseFlow (ref), setCentralOverlay (ref), centralOverlayType (ref), closeCentralOverlay (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), playabilityStatus (ref), gameJoinCardOnBeforeJoinCallback (ref), launchGame (ref), socialJoinPassPlaceIdToLaunch (ref), fFlagGameJoinCardSourceAttribution (ref)
 	local var3
 	local var4 = useDispatch()
 	local var5 = useRoactService(appSessionService)
@@ -81,7 +81,7 @@ return function(p1, p2)
 	end)
 	local var11 = useAgeCheckUpsellStateModule(var10.universeId, p2.onAgeCheckCompletion)
 	local var12 = reactModule.useCallback(function(p3)
-		-- upvalues: var4 (ref), networkingGamesModule (copy), setGamePlaySession (copy), var5 (ref), sessionType (copy), var7 (ref), eventNamesModule (copy), var10 (ref), p1 (ref), var8 (ref), p2 (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), joinExperienceStatusModule (copy), promiseModule (copy), socialJoinUseUnifiedPurchaseFlow (copy), setCentralOverlay (copy), centralOverlayType (copy), closeCentralOverlay (copy), var11 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy), playabilityStatus (copy), gameJoinCardOnBeforeJoinCallback (copy), launchGame (copy), fFlagJoinabilityCTARefactor (copy), socialJoinPassPlaceIdToLaunch (copy), var6 (ref), fFlagGameJoinCardSourceAttribution (copy), constantsModule (copy)
+		-- upvalues: var4 (ref), networkingGamesModule (copy), setGamePlaySession (copy), var5 (ref), sessionType (copy), var7 (ref), eventNamesModule (copy), var10 (ref), p1 (ref), var8 (ref), fFlagJoinabilityCTARefactor (copy), p2 (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), joinExperienceStatusModule (copy), promiseModule (copy), socialJoinUseUnifiedPurchaseFlow (copy), setCentralOverlay (copy), centralOverlayType (copy), closeCentralOverlay (copy), var11 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy), playabilityStatus (copy), gameJoinCardOnBeforeJoinCallback (copy), launchGame (copy), socialJoinPassPlaceIdToLaunch (copy), var6 (ref), fFlagGameJoinCardSourceAttribution (copy), constantsModule (copy)
 		local _ = function(p4)
 			-- upvalues: var4 (copy), networkingGamesModule (copy)
 			return var4(networkingGamesModule.GetExperiencesDetails.API({ p4 }))
@@ -93,9 +93,9 @@ return function(p1, p2)
 		end
 		
 		local _ = function(p4)
-			-- upvalues: setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
+			-- upvalues: setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), fFlagJoinabilityCTARefactor (copy), p3 (ref), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
 			return function(p5)
-				-- upvalues: setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), p4 (ref), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
+				-- upvalues: setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), p4 (ref), fFlagJoinabilityCTARefactor (copy), p3 (copy), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
 				setGamePlaySession(var5, sessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 				var7.fireAnalyticsEvent(eventNamesModule.JoinExperience, {
 					placeId = var10.placeId,
@@ -105,6 +105,7 @@ return function(p1, p2)
 					uid = var8,
 					joinAttemptId = p5,
 					status = p4,
+					followUser = if fFlagJoinabilityCTARefactor then tostring(p3) else nil,
 					isHomePageCarousel = p2.isHomePageCarousel or false,
 					absolutePosition = p2.homepageCarouselAbsolutePosition,
 					friendId = if fFlagProfilePlatformImproveGameDetailsAnalytics then p1 else nil
@@ -113,10 +114,10 @@ return function(p1, p2)
 		end
 		
 		local var14 = function()
-			-- upvalues: joinExperienceStatusModule (copy), setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), promiseModule (copy), var4 (copy), networkingGamesModule (copy), var13 (ref), socialJoinUseUnifiedPurchaseFlow (copy), setCentralOverlay (copy), centralOverlayType (copy), closeCentralOverlay (copy), var11 (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
+			-- upvalues: joinExperienceStatusModule (copy), setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), fFlagJoinabilityCTARefactor (copy), p3 (ref), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), promiseModule (copy), var4 (copy), networkingGamesModule (copy), var13 (ref), socialJoinUseUnifiedPurchaseFlow (copy), setCentralOverlay (copy), centralOverlayType (copy), closeCentralOverlay (copy), var11 (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
 			local purchaseRequired = joinExperienceStatusModule.PurchaseRequired;
 			(function(p4)
-				-- upvalues: setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), purchaseRequired (ref), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
+				-- upvalues: setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), purchaseRequired (ref), fFlagJoinabilityCTARefactor (copy), p3 (copy), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
 				setGamePlaySession(var5, sessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 				var7.fireAnalyticsEvent(eventNamesModule.JoinExperience, {
 					placeId = var10.placeId,
@@ -126,6 +127,7 @@ return function(p1, p2)
 					uid = var8,
 					joinAttemptId = p4,
 					status = purchaseRequired,
+					followUser = if fFlagJoinabilityCTARefactor then tostring(p3) else nil,
 					isHomePageCarousel = p2.isHomePageCarousel or false,
 					absolutePosition = p2.homepageCarouselAbsolutePosition,
 					friendId = if fFlagProfilePlatformImproveGameDetailsAnalytics then p1 else nil
@@ -174,10 +176,10 @@ return function(p1, p2)
 		end
 		
 		local var15 = function()
-			-- upvalues: socialJoinUseUnifiedPurchaseFlow (copy), joinExperienceStatusModule (copy), setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var4 (copy), navigateDown (copy)
+			-- upvalues: socialJoinUseUnifiedPurchaseFlow (copy), joinExperienceStatusModule (copy), setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), fFlagJoinabilityCTARefactor (copy), p3 (ref), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var4 (copy), navigateDown (copy)
 			local var16 = if socialJoinUseUnifiedPurchaseFlow then joinExperienceStatusModule.Unable else joinExperienceStatusModule.PurchaseRequired;
 			(function(p4)
-				-- upvalues: setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), var16 (ref), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
+				-- upvalues: setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), var16 (ref), fFlagJoinabilityCTARefactor (copy), p3 (copy), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
 				setGamePlaySession(var5, sessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 				var7.fireAnalyticsEvent(eventNamesModule.JoinExperience, {
 					placeId = var10.placeId,
@@ -187,6 +189,7 @@ return function(p1, p2)
 					uid = var8,
 					joinAttemptId = p4,
 					status = var16,
+					followUser = if fFlagJoinabilityCTARefactor then tostring(p3) else nil,
 					isHomePageCarousel = p2.isHomePageCarousel or false,
 					absolutePosition = p2.homepageCarouselAbsolutePosition,
 					friendId = if fFlagProfilePlatformImproveGameDetailsAnalytics then p1 else nil
@@ -216,7 +219,7 @@ return function(p1, p2)
 				return p5.responseBody[1].playabilityStatus
 			end)
 		end)(var10.universeId):andThen(function(p4)
-			-- upvalues: playabilityStatus (copy), var14 (ref), gameJoinCardOnBeforeJoinCallback (copy), p2 (copy), joinExperienceStatusModule (copy), setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), launchGame (copy), fFlagJoinabilityCTARefactor (copy), p3 (ref), socialJoinPassPlaceIdToLaunch (copy), var6 (copy), fFlagGameJoinCardSourceAttribution (copy), constantsModule (copy), var11 (copy), var15 (ref)
+			-- upvalues: playabilityStatus (copy), var14 (ref), gameJoinCardOnBeforeJoinCallback (copy), p2 (copy), joinExperienceStatusModule (copy), setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), fFlagJoinabilityCTARefactor (copy), p3 (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), launchGame (copy), socialJoinPassPlaceIdToLaunch (copy), var6 (copy), fFlagGameJoinCardSourceAttribution (copy), constantsModule (copy), var11 (copy), var15 (ref)
 			if p4 == playabilityStatus.PurchaseRequired.rawValue() then
 				var14()
 				
@@ -227,7 +230,7 @@ return function(p1, p2)
 				end
 				local success = joinExperienceStatusModule.Success
 				launchGame(if fFlagJoinabilityCTARefactor and not p3 then var10.rootPlaceId elseif socialJoinPassPlaceIdToLaunch and var10.placeId ~= "" then var10.placeId else nil, nil, if p3 then { userId = p1 } else nil, var6, if fFlagGameJoinCardSourceAttribution then p2.joinAttemptOrigin or constantsModule.AnalyticsContext.PeopleListInHomePage else constantsModule.AnalyticsContext.PeopleListInHomePage, function(p5)
-					-- upvalues: setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), success (ref), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
+					-- upvalues: setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), success (ref), fFlagJoinabilityCTARefactor (copy), p3 (copy), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
 					setGamePlaySession(var5, sessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 					var7.fireAnalyticsEvent(eventNamesModule.JoinExperience, {
 						placeId = var10.placeId,
@@ -237,6 +240,7 @@ return function(p1, p2)
 						uid = var8,
 						joinAttemptId = p5,
 						status = success,
+						followUser = if fFlagJoinabilityCTARefactor then tostring(p3) else nil,
 						isHomePageCarousel = p2.isHomePageCarousel or false,
 						absolutePosition = p2.homepageCarouselAbsolutePosition,
 						friendId = if fFlagProfilePlatformImproveGameDetailsAnalytics then p1 else nil
@@ -251,10 +255,10 @@ return function(p1, p2)
 			end
 			var15()
 		end):catch(function()
-			-- upvalues: joinExperienceStatusModule (copy), setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
+			-- upvalues: joinExperienceStatusModule (copy), setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), fFlagJoinabilityCTARefactor (copy), p3 (ref), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
 			local failure = joinExperienceStatusModule.Failure;
 			(function(p4)
-				-- upvalues: setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), failure (ref), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
+				-- upvalues: setGamePlaySession (copy), var5 (copy), sessionType (copy), var7 (copy), eventNamesModule (copy), var10 (copy), p1 (copy), var8 (copy), failure (ref), fFlagJoinabilityCTARefactor (copy), p3 (copy), p2 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
 				setGamePlaySession(var5, sessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 				var7.fireAnalyticsEvent(eventNamesModule.JoinExperience, {
 					placeId = var10.placeId,
@@ -264,6 +268,7 @@ return function(p1, p2)
 					uid = var8,
 					joinAttemptId = p4,
 					status = failure,
+					followUser = if fFlagJoinabilityCTARefactor then tostring(p3) else nil,
 					isHomePageCarousel = p2.isHomePageCarousel or false,
 					absolutePosition = p2.homepageCarouselAbsolutePosition,
 					friendId = if fFlagProfilePlatformImproveGameDetailsAnalytics then p1 else nil

@@ -18,8 +18,8 @@ local systemMessageModule = require(script.Parent.SystemMessage)
 local systemMessageContainerModule = require(script.Parent.SystemMessageContainer)
 local customMessageEntryContainerModule = require(script.Parent.CustomMessageEntryContainer)
 local getFFlagEnableSocialCards = require(parent.SharedFlags).GetFFlagEnableSocialCards
-local appChatMessageInitialFetchMinMessages = game:DefineFastInt("AppChatMessageInitialFetchMinMessages", 20)
-local appChatInitialMessageFetchLimit = game:DefineFastInt("AppChatInitialMessageFetchLimit", 10)
+local fIntAppChatMessageInitialFetchMinMessagesModule = require(appChat.Flags.FIntAppChatMessageInitialFetchMinMessages)
+local fIntAppChatInitialMessageFetchLimitModule = require(appChat.Flags.FIntAppChatInitialMessageFetchLimit)
 local appChatOsaAutoScrollDelayMs = game:DefineFastInt("AppChatOsaAutoScrollDelayMs", 100)
 local fFlagAppChatConversationLoadingSkeletonModule = require(appChat.Flags.FFlagAppChatConversationLoadingSkeleton)
 local var1 = if fFlagAppChatConversationLoadingSkeletonModule then require(script.Parent.ConversationMessageSkeletonList) else nil
@@ -265,14 +265,14 @@ function messageList.getDerivedStateFromProps(p1, p2)
 end
 
 function messageList.didUpdate(p3, p4, _)
-	-- upvalues: fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), appChatInitialMessageFetchLimit (ref), appChatMessageInitialFetchMinMessages (ref), appChatOsaAutoScrollDelayMs (ref), getLastMessageWithFilterModule (ref), isIncomingChatMessage (ref)
+	-- upvalues: fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), fIntAppChatInitialMessageFetchLimitModule (ref), fIntAppChatMessageInitialFetchMinMessagesModule (ref), appChatOsaAutoScrollDelayMs (ref), getLastMessageWithFilterModule (ref), isIncomingChatMessage (ref)
 	if fFlagAppChatPerfTrackingModule and #p4.itemList < #p3.props.itemList then
 		appChatPerfTrackerModule.finish(appChatPerfTrackerModule.Events.PaginationMessageList, { conversationId = p3.props.conversationId })
 	end
 	if p3.props.itemList and #p3.props.itemList == 0 and (p4.itemList and #p4.itemList > 0) then
 		p3.initialFetchesAttempted = 0
 	end
-	if p3.props.itemList and p3.props.itemList ~= p4.itemList and (p3.initialFetchesAttempted < appChatInitialMessageFetchLimit and #p3.props.itemList < appChatMessageInitialFetchMinMessages) and p3.props.loadNext then
+	if p3.props.itemList and p3.props.itemList ~= p4.itemList and (p3.initialFetchesAttempted < fIntAppChatInitialMessageFetchLimitModule and #p3.props.itemList < fIntAppChatMessageInitialFetchMinMessagesModule) and p3.props.loadNext then
 		p3.initialFetchesAttempted += 1
 		p3.props.loadNext()
 	end
@@ -307,8 +307,8 @@ function messageList.didUpdate(p3, p4, _)
 end
 
 function messageList.didMount(p3)
-	-- upvalues: appChatMessageInitialFetchMinMessages (ref)
-	if #p3.props.itemList < appChatMessageInitialFetchMinMessages and p3.props.loadNext then
+	-- upvalues: fIntAppChatMessageInitialFetchMinMessagesModule (ref)
+	if #p3.props.itemList < fIntAppChatMessageInitialFetchMinMessagesModule and p3.props.loadNext then
 		p3.props.loadNext()
 	end
 	p3.isNearBottom = true

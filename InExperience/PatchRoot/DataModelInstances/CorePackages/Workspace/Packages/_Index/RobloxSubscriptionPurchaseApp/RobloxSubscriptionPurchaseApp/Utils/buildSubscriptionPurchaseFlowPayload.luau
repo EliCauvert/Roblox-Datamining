@@ -1,10 +1,11 @@
 ﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
 local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
+local fFlagEnablePlusReferralTelemetryModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagEnablePlusReferralTelemetry)
 local isRobloxSubscriptionProductFreeTrialModule = require(robloxSubscriptionPurchaseApp.Utils.isRobloxSubscriptionProductFreeTrial)
 local _ = require(robloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
 
 return function(p1)
-	-- upvalues: robloxSubscriptionStoreModule (ref), isRobloxSubscriptionProductFreeTrialModule (ref)
+	-- upvalues: robloxSubscriptionStoreModule (ref), isRobloxSubscriptionProductFreeTrialModule (ref), fFlagEnablePlusReferralTelemetryModule (ref)
 	local var1 = robloxSubscriptionStoreModule.get()
 	local entryContext = var1.getEntryContext()
 	local robloxSubscriptionProduct = var1.getRobloxSubscriptionProduct()
@@ -50,6 +51,13 @@ return function(p1)
 	end
 	if universeId ~= nil then
 		t.universe_id = universeId
+	end
+	if fFlagEnablePlusReferralTelemetryModule then
+		local referrerId = var1.getReferrerId()
+		
+		if referrerId and referrerId > 0 then
+			t.referrer_id = tostring(referrerId)
+		end
 	end
 	return t
 end

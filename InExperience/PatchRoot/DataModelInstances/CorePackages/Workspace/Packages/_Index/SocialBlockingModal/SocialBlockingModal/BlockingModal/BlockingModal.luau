@@ -1,6 +1,12 @@
 ﻿local socialBlockingModal = script:FindFirstAncestor("SocialBlockingModal")
 local parent = socialBlockingModal.Parent
 local reactModule = require(parent.React)
+local reactRobloxModule = require(parent.ReactRoblox)
+local foundationModule = require(parent.Foundation)
+local view = foundationModule.View
+local useOverlay = foundationModule.Hooks.useOverlay
+local useTokens = foundationModule.Hooks.useTokens
+local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local robloxAppHooksModule = require(parent.RobloxAppHooks)
 local useScreenSize = robloxAppHooksModule.useScreenSize
 local useLocalUserId = robloxAppHooksModule.useLocalUserId
@@ -32,9 +38,10 @@ local fFlagEnableAbuseReportRevampFlow = require(parent.SharedFlags).FFlagEnable
 local fFlagDisableBlockAndReport = require(parent.SharedFlags).FFlagDisableBlockAndReport
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 local fFlagEnableMomentsCommentBlocking = require(parent.SharedFlags).FFlagEnableMomentsCommentBlocking
+local fFlagMomentsBlockingModalInOverlay = require(parent.SharedFlags).FFlagMomentsBlockingModalInOverlay
 
 return function()
-	-- upvalues: useNavigation (ref), fFlagDisableBlockAndReport (ref), useLocalUserId (ref), useDispatch (ref), useScreenSize (ref), useLayerCollector (ref), reactModule (ref), useSocialBlockingModalAnalytics (ref), eventNames (ref), useShowToastOnErrorModule (ref), fFlagEnableMomentsCommentBlocking (ref), myUserBlockingNetworkingModule (ref), fFlagEnableAbuseReportRevampFlow (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), userProfilesModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), buttonType (ref), interactiveAlert (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
+	-- upvalues: useNavigation (ref), fFlagDisableBlockAndReport (ref), useLocalUserId (ref), useDispatch (ref), useScreenSize (ref), useLayerCollector (ref), reactModule (ref), useSocialBlockingModalAnalytics (ref), eventNames (ref), useShowToastOnErrorModule (ref), fFlagEnableMomentsCommentBlocking (ref), myUserBlockingNetworkingModule (ref), fFlagEnableAbuseReportRevampFlow (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), userProfilesModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), buttonType (ref), interactiveAlert (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), fFlagMomentsBlockingModalInOverlay (ref), useOverlay (ref), useTokens (ref), reactRobloxModule (ref), view (ref), stateLayerAffordance (ref)
 	local var2 = useNavigation()
 	local navProps = var2.getParam("navProps")
 	local userId = navProps.userId
@@ -145,8 +152,7 @@ return function()
 		},
 		bodyText = if fFlagConnectionsToFriendsRename then "Feature.BlockingModal.Message.BlockConfirmation.FriendsRename" else "Feature.BlockingModal.Message.BlockConfirmation"
 	})
-	
-	return reactModule.createElement(focusRoot, {
+	local var16 = reactModule.createElement(focusRoot, {
 		isIsolated = true,
 		isAutoFocusRoot = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
@@ -188,4 +194,16 @@ return function()
 			}
 		})
 	})
+	
+	if fFlagMomentsBlockingModalInOverlay and navProps.presentInOverlay then
+		local var17 = useOverlay()
+		
+		return if var17 == nil then var16 else reactRobloxModule.createPortal(reactModule.createElement(view, {
+			tag = "size-full",
+			ZIndex = 300,
+			backgroundStyle = useTokens().Color.Common.Backdrop,
+			stateLayer = { affordance = stateLayerAffordance.None },
+			onActivated = function() end
+		}, { BlockingModal = var16 }), var17)
+	end
 end

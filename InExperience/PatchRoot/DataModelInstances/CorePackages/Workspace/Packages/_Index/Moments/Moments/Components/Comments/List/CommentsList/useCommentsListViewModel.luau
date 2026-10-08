@@ -6,8 +6,10 @@ local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local viewRecyclerModule = require(parent.ViewRecycler)
+local momentsCommonModule = require(parent.MomentsCommon)
 local fFlagMomentsComments = require(parent.SharedFlags).FFlagMomentsComments
-local eventNames = require(parent.MomentsCommon).Analytics.EventNames
+local fFlagMomentsCommentActionsRealtimeModule = require(moments.Flags.FFlagMomentsCommentActionsRealtime)
+local eventNames = momentsCommonModule.Analytics.EventNames
 local momentsGetMomentsCommentsStoreModule = require(parent.DataHydration.MomentsGetMomentsCommentsStore)
 local momentsGetMomentsReactionsStoreModule = require(parent.DataHydration.MomentsGetMomentsReactionsStore)
 local momentsResolveEmoteIdModule = require(parent.DataHydration.MomentsResolveEmoteId)
@@ -62,7 +64,7 @@ local _ = function(p1)
 end
 
 return function(p2)
-	-- upvalues: useLocalization (ref), t (ref), playersService (ref), getCommentCollectionStoreModule (ref), reactModule (ref), signalsReactModule (ref), createExpandedCommentsStoreModule (ref), signalsModule (ref), buildCommentRowsModule (ref), momentsGetMomentsCommentsStoreModule (ref), momentsGetMomentsReactionsStoreModule (ref), momentsResolveEmoteIdModule (ref), reactionTypeModule (ref), useCommentCapabilitiesModule (ref), foundationModule (ref), viewRecyclerModule (ref), loadStatus (ref), commentsListItemsModule (ref), getCommentsListCoordinatorModule (ref), fFlagMomentsComments (ref), getCommentsSheetStoreModule (ref), eventNames (ref), useMomentsHost (ref), getToastStoreModule (ref)
+	-- upvalues: useLocalization (ref), t (ref), playersService (ref), getCommentCollectionStoreModule (ref), reactModule (ref), signalsReactModule (ref), createExpandedCommentsStoreModule (ref), signalsModule (ref), buildCommentRowsModule (ref), momentsGetMomentsCommentsStoreModule (ref), momentsGetMomentsReactionsStoreModule (ref), momentsResolveEmoteIdModule (ref), reactionTypeModule (ref), useCommentCapabilitiesModule (ref), foundationModule (ref), viewRecyclerModule (ref), loadStatus (ref), commentsListItemsModule (ref), getCommentsListCoordinatorModule (ref), fFlagMomentsComments (ref), getCommentsSheetStoreModule (ref), eventNames (ref), useMomentsHost (ref), fFlagMomentsCommentActionsRealtimeModule (ref), getToastStoreModule (ref)
 	local deleteFailed = useLocalization(t).deleteFailed
 	local localPlayer = playersService.LocalPlayer
 	local var1 = if localPlayer ~= nil then "" else localPlayer.Name
@@ -226,11 +228,14 @@ return function(p2)
 	local openMomentCommentReport = var31.openMomentCommentReport
 	local channelId = var4.channelId
 	local var32 = reactModule.useMemo(function()
-		-- upvalues: openMomentCommentReport (ref), channelId (ref), fFlagMomentsComments (copy), var28 (ref), eventNames (copy)
+		-- upvalues: openMomentCommentReport (ref), channelId (ref), fFlagMomentsComments (copy), var28 (ref), eventNames (copy), fFlagMomentsCommentActionsRealtimeModule (copy)
 		return if openMomentCommentReport == nil or channelId == nil then nil else function(p3, p4)
-			-- upvalues: fFlagMomentsComments (copy), var28 (copy), eventNames (copy), openMomentCommentReport (copy), channelId (copy)
+			-- upvalues: fFlagMomentsComments (copy), var28 (copy), eventNames (copy), fFlagMomentsCommentActionsRealtimeModule (copy), openMomentCommentReport (copy), channelId (copy)
 			if fFlagMomentsComments and var28 ~= nil then
 				var28.logEvent(eventNames.MomentCommentReportClicked, { commentId = p3 })
+			end
+			if fFlagMomentsCommentActionsRealtimeModule and var28 ~= nil then
+				var28.logRealtimeEvent("MomentsCommentReport", { status = "clicked" })
 			end
 			openMomentCommentReport({
 				commentId = p3,
@@ -241,26 +246,42 @@ return function(p2)
 	end, { openMomentCommentReport, channelId, var28 })
 	local openBlockUser = var31.openBlockUser
 	local var33 = reactModule.useMemo(function()
-		-- upvalues: openBlockUser (ref), var17 (ref), p2 (ref), var32 (ref)
+		-- upvalues: openBlockUser (ref), fFlagMomentsCommentActionsRealtimeModule (copy), var28 (ref), var17 (ref), p2 (ref), var32 (ref)
 		return if openBlockUser == nil then nil else function(p3, p4)
-			-- upvalues: openBlockUser (copy), var17 (copy), p2 (copy), var32 (copy)
+			-- upvalues: openBlockUser (copy), fFlagMomentsCommentActionsRealtimeModule (copy), var28 (copy), var17 (copy), p2 (copy), var32 (copy)
 			openBlockUser({
 				userId = p4,
 				onBlockConfirmed = function()
-					-- upvalues: var17 (copy), p2 (copy), p4 (ref)
+					-- upvalues: fFlagMomentsCommentActionsRealtimeModule (copy), var28 (copy), var17 (copy), p2 (copy), p4 (ref)
+					if fFlagMomentsCommentActionsRealtimeModule and var28 ~= nil then
+						var28.logRealtimeEvent("MomentsCommentAuthorBlock", { status = "attempted" })
+					end
 					var17.hideCommentsByAuthor(p2.feedItemId, p4)
 				end,
 				onBlockFailed = function()
-					-- upvalues: var17 (copy), p2 (copy), p4 (ref)
+					-- upvalues: fFlagMomentsCommentActionsRealtimeModule (copy), var28 (copy), var17 (copy), p2 (copy), p4 (ref)
+					if fFlagMomentsCommentActionsRealtimeModule and var28 ~= nil then
+						var28.logRealtimeEvent("MomentsCommentAuthorBlock", { status = "failed" })
+					end
 					var17.restoreCommentsByAuthor(p2.feedItemId, p4)
 				end,
+				onBlockSucceeded = if fFlagMomentsCommentActionsRealtimeModule and var28 ~= nil then function()
+					-- upvalues: var28 (copy)
+					var28.logRealtimeEvent("MomentsCommentAuthorBlock", { status = "succeeded" })
+				end else nil,
 				openReportUser = if var32 ~= nil then nil else function()
 					-- upvalues: var32 (copy), p3 (ref), p4 (ref)
 					var32(p3, p4)
 				end
 			})
 		end
-	end, { openBlockUser, var32, var17, p2.feedItemId })
+	end, {
+		openBlockUser,
+		var32,
+		var17,
+		p2.feedItemId,
+		var28
+	})
 	local var34 = reactModule.useCallback(function(p3)
 		-- upvalues: fFlagMomentsComments (copy), var28 (ref), eventNames (copy), deleteFailed (ref), getToastStoreModule (copy), var17 (ref), p2 (ref)
 		return var17.deleteComment(p2.feedItemId, p3, function()

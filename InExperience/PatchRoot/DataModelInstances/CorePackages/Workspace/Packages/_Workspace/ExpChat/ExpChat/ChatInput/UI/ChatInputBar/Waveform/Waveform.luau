@@ -1,4 +1,5 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
+local expChatWaveformStaleWidthFix = game:DefineFastFlag("ExpChatWaveformStaleWidthFix", false)
 local waveformAudioModule = require(script.Parent.WaveformAudio)
 local useTickClock = require(script.Parent.useTickClock).useTickClock
 local BAR_WIDTH = waveformAudioModule.BAR_WIDTH
@@ -7,7 +8,7 @@ local RENDER_INTERVAL = waveformAudioModule.RENDER_INTERVAL
 local t = { itemIdx = 0, height = 0.2, age = nil }
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), ITEM_WIDTH (ref), waveformAudioModule (ref), useTickClock (ref), RENDER_INTERVAL (ref), t (ref), BAR_WIDTH (ref)
+	-- upvalues: reactModule (ref), ITEM_WIDTH (ref), waveformAudioModule (ref), useTickClock (ref), RENDER_INTERVAL (ref), t (ref), BAR_WIDTH (ref), expChatWaveformStaleWidthFix (ref)
 	local var1 = p1.normalize == nil or p1.normalize
 	local bindBarStyle = p1.bindBarStyle
 	local onSample = p1.onSample
@@ -53,10 +54,14 @@ return reactModule.memo(function(p1)
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
 		[reactModule.Change.AbsoluteSize] = function(p2)
-			-- upvalues: var2 (ref), var3 (ref)
+			-- upvalues: expChatWaveformStaleWidthFix (copy), var3 (ref), var2 (ref)
 			local x = p2.AbsoluteSize.X
 			
-			if x ~= var2 then
+			if expChatWaveformStaleWidthFix then
+				var3(x)
+				
+				return
+			elseif x ~= var2 then
 				var3(x)
 			end
 		end

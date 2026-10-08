@@ -12,10 +12,12 @@ local useComponentBreakpointSizeModule = require(script.Parent.Hooks.useComponen
 local getCatalogConfigKeyModule = require(script.Parent.Utils.getCatalogConfigKey)
 local catalogSduiPageContextModule = require(script.Parent.CatalogSduiPageContext)
 local getCatalogPageRequestIdStoreModule = require(avatarExperienceCatalog.Stores.GetCatalogPageRequestIdStore)
-local fFlagAXSduiCatalogScrollImpressions = require(parent.AvatarExperienceFlags).FFlagAXSduiCatalogScrollImpressions
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local fFlagAXSduiCatalogScrollImpressions = avatarExperienceFlagsModule.FFlagAXSduiCatalogScrollImpressions
+local fFlagAXSduiFeedMaintainScrollOnSeeAll = avatarExperienceFlagsModule.FFlagAXSduiFeedMaintainScrollOnSeeAll
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useComponentBreakpointSizeModule (ref), reactModule (ref), sduiLoadTimer (ref), avatarScreen (ref), getCatalogPageRequestIdStoreModule (ref), useSignalState (ref), fFlagAXSduiCatalogScrollImpressions (ref), fetchCatalogPageModule (ref), catalogSduiPageContextModule (ref), sduiFeatureEntryPoint (ref), getCatalogConfigKeyModule (ref)
+	-- upvalues: useComponentBreakpointSizeModule (ref), reactModule (ref), sduiLoadTimer (ref), avatarScreen (ref), getCatalogPageRequestIdStoreModule (ref), useSignalState (ref), fFlagAXSduiCatalogScrollImpressions (ref), fFlagAXSduiFeedMaintainScrollOnSeeAll (ref), fetchCatalogPageModule (ref), catalogSduiPageContextModule (ref), sduiFeatureEntryPoint (ref), getCatalogConfigKeyModule (ref)
 	local var1, var2 = useComponentBreakpointSizeModule()
 	local var3 = if p1.loadTimer then p1.loadTimer else reactModule.useMemo(function()
 		-- upvalues: sduiLoadTimer (copy), avatarScreen (copy)
@@ -24,13 +26,29 @@ return reactModule.forwardRef(function(p1, p2)
 	local var4 = if p1.appPage then p1.appPage else avatarScreen.Catalog
 	local var5 = getCatalogPageRequestIdStoreModule(false)
 	local var6 = reactModule.useMemo(function()
-		-- upvalues: fFlagAXSduiCatalogScrollImpressions (copy), p1 (ref)
+		-- upvalues: fFlagAXSduiCatalogScrollImpressions (copy), p1 (ref), fFlagAXSduiFeedMaintainScrollOnSeeAll (copy)
 		return if fFlagAXSduiCatalogScrollImpressions then {
 			identifier = p1.identifier,
 			onScroll = p1.onScroll,
-			requestImpressionsSignal = p1.requestImpressionsSignal
-		} else { identifier = p1.identifier }
-	end, if fFlagAXSduiCatalogScrollImpressions then { p1.identifier, p1.onScroll, p1.requestImpressionsSignal } else { p1.identifier })
+			requestImpressionsSignal = p1.requestImpressionsSignal,
+			scrollPositionRef = if fFlagAXSduiFeedMaintainScrollOnSeeAll then p1.scrollPositionRef else nil,
+			scrollRestoreRef = if fFlagAXSduiFeedMaintainScrollOnSeeAll then p1.scrollRestoreRef else nil
+		} else {
+			identifier = p1.identifier,
+			scrollPositionRef = if fFlagAXSduiFeedMaintainScrollOnSeeAll then p1.scrollPositionRef else nil,
+			scrollRestoreRef = if fFlagAXSduiFeedMaintainScrollOnSeeAll then p1.scrollRestoreRef else nil
+		}
+	end, if fFlagAXSduiCatalogScrollImpressions then {
+		p1.identifier,
+		p1.onScroll,
+		p1.requestImpressionsSignal,
+		if fFlagAXSduiFeedMaintainScrollOnSeeAll then p1.scrollPositionRef else nil,
+		if fFlagAXSduiFeedMaintainScrollOnSeeAll then p1.scrollRestoreRef else nil
+	} else {
+		p1.identifier,
+		if fFlagAXSduiFeedMaintainScrollOnSeeAll then p1.scrollPositionRef else nil,
+		if fFlagAXSduiFeedMaintainScrollOnSeeAll then p1.scrollRestoreRef else nil
+	})
 	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), p1 (ref), fetchCatalogPageModule (copy), var1 (ref), var3 (ref)
 		fetchCatalogPageModule({

@@ -12,8 +12,10 @@ friendsCalling.Parent = coreGuiService
 reactRobloxModule.createRoot(friendsCalling):render(reactModule.createElement(reactModule.Fragment, nil, {
 	CallPip = if fFlagFriendsCallingCallPipModule then reactModule.createElement(callPipModule, {
 		host = {
+			exposesTopSafeArea = true,
 			followsAppColorMode = false,
-			displayOrder = callPipDisplayOrderModule.InExperience
+			displayOrder = callPipDisplayOrderModule.InExperience,
+			screenInsets = Enum.ScreenInsets.None
 		}
 	}) else nil,
 	VoiceCallReceivedEventReceiver = reactModule.createElement(voiceCallReceivedEventReceiverModule)

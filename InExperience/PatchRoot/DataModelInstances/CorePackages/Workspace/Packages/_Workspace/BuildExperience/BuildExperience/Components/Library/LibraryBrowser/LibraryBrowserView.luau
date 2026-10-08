@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
+﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
+local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local appCompositionModule = require(parent.AppComposition)
@@ -7,6 +8,7 @@ local signalsReactModule = require(parent.SignalsReact)
 local libraryTileModule = require(script.Parent.Parent.LibraryTile)
 local _ = require(script.Parent.Parent.LibraryTypes)
 local libraryWorldCutoutViewModule = require(script.Parent.Parent.LibraryWorldCutout.LibraryWorldCutoutView)
+local useHardwareInsetsModule = require(buildExperience.Components.ChatSheet.useHardwareInsets)
 local icon = foundationModule.Icon
 local scrollView = foundationModule.ScrollView
 local skeleton = foundationModule.Skeleton
@@ -142,8 +144,9 @@ local function renderCategory(p5, p6, p7, p8, p9)
 end
 
 return function(p10)
-	-- upvalues: appCompositionModule (ref), foundationModule (ref), signalsReactModule (ref), displayModule (ref), renderCategory (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), renderLoadingTiles (ref), text (ref), libraryWorldCutoutViewModule (ref), scrollView (ref)
+	-- upvalues: appCompositionModule (ref), useHardwareInsetsModule (ref), foundationModule (ref), signalsReactModule (ref), displayModule (ref), renderCategory (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), renderLoadingTiles (ref), text (ref), libraryWorldCutoutViewModule (ref), scrollView (ref)
 	local margin = appCompositionModule.useCompositionLayout().margin
+	local bottom = useHardwareInsetsModule().bottom
 	local var3 = foundationModule.Hooks.useTokens()
 	local var4 = if signalsReactModule.useSignalState(displayModule.GetDisplayStore(false).getDisplaySize) == Enum.DisplaySize.Small then var3.Size.Size_2400 else foundationModule.Hooks.useScaledValue(160)
 	local t = {}
@@ -203,8 +206,9 @@ return function(p10)
 			}
 		}, {
 			Content = reactModule.createElement(view, {
-				tag = "col size-full-0 auto-y padding-bottom-small padding-top-medium",
-				testId = "Library.Browser.Content"
+				tag = "col size-full-0 auto-y padding-top-medium",
+				testId = "Library.Browser.Content",
+				padding = { bottom = UDim.new(0, var3.Padding.Small + bottom) }
 			}, {
 				Categories = reactModule.createElement(view, {
 					LayoutOrder = 1,

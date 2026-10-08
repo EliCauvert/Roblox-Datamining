@@ -7,6 +7,7 @@ local calculateRelativeColumnGapModule = require(collectionViews.Grid.calculateR
 local calculateSpacePerItemModule = require(collectionViews.calculateSpacePerItem)
 local fFlagCollectionViewMathChanges = require(parent.SharedFlags).FFlagCollectionViewMathChanges
 local luaAppFixCollectionGridWindowAbsoluteCanvasSize = game:DefineFastFlag("LuaAppFixCollectionGridWindowAbsoluteCanvasSize", false)
+local luaAppGridReuseUnchangedTileElements = game:DefineFastFlag("LuaAppGridReuseUnchangedTileElements", false)
 local t = {
 	maxNumRows = 1e999,
 	numColumns = 1,
@@ -19,7 +20,7 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), luaAppFixCollectionGridWindowAbsoluteCanvasSize (ref), argCheckModule (ref), fFlagCollectionViewMathChanges (ref), calculateSpacePerItemModule (ref), calculateRelativeColumnGapModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), luaAppFixCollectionGridWindowAbsoluteCanvasSize (ref), luaAppGridReuseUnchangedTileElements (ref), argCheckModule (ref), fFlagCollectionViewMathChanges (ref), calculateSpacePerItemModule (ref), calculateRelativeColumnGapModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2 = reactModule.useRef(nil)
 	local minValue = math.min(math.ceil(#var1.items / var1.numColumns), var1.maxNumRows)
@@ -130,6 +131,7 @@ return reactModule.memo(function(p1)
 		var1.onReachedThresholdFromEnd,
 		var1.items
 	})
+	local var13 = if luaAppGridReuseUnchangedTileElements then reactModule.useRef({}) else nil
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -140,7 +142,7 @@ return reactModule.memo(function(p1)
 		LayoutOrder = var1.LayoutOrder,
 		Position = var1.Position
 	}, reactModule.useMemo(function()
-		-- upvalues: var4 (ref), var6 (write), maxValue (ref), maxValue_1 (ref), var1 (ref), minValue (ref), argCheckModule (copy), reactModule (copy), fFlagCollectionViewMathChanges (copy), calculateSpacePerItemModule (copy), calculateRelativeColumnGapModule (copy), var8 (ref)
+		-- upvalues: var4 (ref), var6 (write), maxValue (ref), maxValue_1 (ref), var1 (ref), minValue (ref), argCheckModule (copy), reactModule (copy), fFlagCollectionViewMathChanges (copy), calculateSpacePerItemModule (copy), calculateRelativeColumnGapModule (copy), luaAppGridReuseUnchangedTileElements (copy), var13 (ref), var8 (ref)
 		local t = {}
 		
 		if var4 <= 0 or var6 < var4 then
@@ -154,37 +156,38 @@ return reactModule.memo(function(p1)
 		argCheckModule.assert(var4 <= var6 and var6 <= minValue)
 		
 		if var4 > 1 then
-			local var13 = var4 - 1
+			local var14 = var4 - 1
 			t.Padding = reactModule.createElement("UIPadding", {
 				PaddingTop = var1.itemSizeBinding:map(function(p2)
-					-- upvalues: var13 (ref), var1 (copy)
-					return UDim.new(0, var13 * (p2.Y + var1.verticalPadding))
+					-- upvalues: var14 (ref), var1 (copy)
+					return UDim.new(0, var14 * (p2.Y + var1.verticalPadding))
 				end)
 			})
 		end
-		local uDim2, var14
-		local var15 = minValue - var4 + 1
-		argCheckModule.assert(var15 >= 1)
+		local uDim2, var15
+		local var16 = minValue - var4 + 1
+		argCheckModule.assert(var16 >= 1)
 		argCheckModule.assert(var1.numColumns >= 1)
 		local _ = nil
 		local _ = nil
 		
 		if fFlagCollectionViewMathChanges then
-			local var16 = calculateSpacePerItemModule(var1.numColumns, var1.columnGap)
-			local var17 = calculateSpacePerItemModule(var15, var1.verticalPadding)
-			uDim2 = UDim2.new(1 / var1.numColumns, -var16.gapOffsetPerItem, 1 / var15, -var17.gapOffsetPerItem)
-			var14 = UDim2.new(0, var16.adjustedGap, 0, var17.adjustedGap)
+			local var17 = calculateSpacePerItemModule(var1.numColumns, var1.columnGap)
+			local var18 = calculateSpacePerItemModule(var16, var1.verticalPadding)
+			uDim2 = UDim2.new(1 / var1.numColumns, -var17.gapOffsetPerItem, 1 / var16, -var18.gapOffsetPerItem)
+			var15 = UDim2.new(0, var17.adjustedGap, 0, var18.adjustedGap)
 		else
-			local var18 = var1.numColumns - 1
-			uDim2 = UDim2.new(1 / var1.numColumns, math.floor(-(var18 / var1.numColumns) * var1.columnGap), 1 / var15, math.floor(-((var15 - 1) / var15) * var1.verticalPadding))
-			var14 = if var1.disableRelativeGap then UDim2.new(0, var1.columnGap + (math.floor(var18 / var1.numColumns * var1.columnGap) * var1.numColumns - var1.columnGap * var18) / var18, 0, var1.verticalPadding) else var1.itemSizeBinding:map(function(p2)
+			local var19 = var1.numColumns - 1
+			uDim2 = UDim2.new(1 / var1.numColumns, math.floor(-(var19 / var1.numColumns) * var1.columnGap), 1 / var16, math.floor(-((var16 - 1) / var16) * var1.verticalPadding))
+			var15 = if var1.disableRelativeGap then UDim2.new(0, var1.columnGap + (math.floor(var19 / var1.numColumns * var1.columnGap) * var1.numColumns - var1.columnGap * var19) / var19, 0, var1.verticalPadding) else var1.itemSizeBinding:map(function(p2)
 				-- upvalues: calculateRelativeColumnGapModule (copy), var1 (copy)
 				return UDim2.new(calculateRelativeColumnGapModule(var1.numColumns, var1.columnGap, p2.X, var1.sideMargin), 0, 0, var1.verticalPadding)
 			end)
 		end
+		local var20
 		t.Layout = reactModule.createElement("UIGridLayout", {
 			FillDirectionMaxCells = var1.numColumns,
-			CellPadding = var14,
+			CellPadding = var15,
 			CellSize = uDim2,
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
@@ -194,13 +197,50 @@ return reactModule.memo(function(p1)
 		argCheckModule.assert(maxValue >= 1)
 		argCheckModule.assert(maxValue <= maxValue_1 and maxValue_1 <= #var1.items)
 		
-		for i = maxValue, maxValue_1 do
-			if i <= #var1.items then
-				local var19, var20 = var1.renderItem(var1.items[i], i, UDim2.fromScale(1, 1), math.ceil(i / var1.numColumns))
-				t[`{var20}{i % (var8 * var1.numColumns)}`] = var19
+		if luaAppGridReuseUnchangedTileElements then
+			local current = var13.current
+			local t_1 = {}
+			
+			for i = maxValue, maxValue_1 do
+				if i > #var1.items then
+					continue
+				end
+				local var21, var22
+				local ceiled = math.ceil(i / var1.numColumns)
+				var20 = var1.items[i]
+				local var23 = current[i]
+				local _ = nil
+				local _ = nil
+				
+				if var23 and var23.entry == var20 and (var23.renderItem == var1.renderItem and var23.rowNum == ceiled) then
+					var21 = var23.element
+					var22 = var23.keyPrefix
+				else
+					local var24, var25 = var1.renderItem(var20, i, UDim2.fromScale(1, 1), ceiled)
+					var21 = var24
+					var22 = var25
+				end
+				t_1[i] = {
+					entry = var20,
+					renderItem = var1.renderItem,
+					rowNum = ceiled,
+					element = var21,
+					keyPrefix = var22
+				}
+				t[`{var22}{i % (var8 * var1.numColumns)}`] = var21
 			end
+			var13.current = t_1
+			
+			return t
+		else
+			for i_1 = maxValue, maxValue_1 do
+				if i_1 <= #var1.items then
+					var54, var48 = var1.renderItem(var1.items[i_1], i_1, UDim2.fromScale(1, 1), math.ceil(i_1 / var1.numColumns))
+					t[`{var20}{i_1 % (var8 * var1.numColumns)}`] = var54
+				end
+			end
+			return t
 		end
-		return t
 	end, {
 		var1.columnGap, var1.numColumns, var1.itemSizeBinding, var4, var6,
 		var1.items, var1.renderItem, var1.verticalPadding, var8, minValue,

@@ -17,7 +17,6 @@ local pruneConsecutiveNewLines = require(appChat.SocialLibraries).Utils.pruneCon
 local getModeratedMaskTextModule = require(appChat.Utils.getModeratedMaskText)
 local fFlagAppChatEnableAutotranslationModule = require(appChat.Flags.FFlagAppChatEnableAutotranslation)
 local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
-local fFlagChatModeratedMaskRandomLength = require(parent.SharedFlags).FFlagChatModeratedMaskRandomLength
 local foundationFontFaceMigration = require(parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local messageModelModule = require(appChat.Models.MessageModel)
 local chatMessageContainerConstantsModule = require(script.Parent.ChatMessageContainerConstants)
@@ -93,10 +92,10 @@ chatMessage.defaultProps = {
 }
 
 function chatMessage.init(p1)
-	-- upvalues: fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), TEXT_BUBBLE_X_PADDING (ref), BUBBLE_PADDING (ref), TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING (ref), fFlagAppChatEnableAutotranslationModule (ref), memoize (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref)
+	-- upvalues: getModeratedMaskTextModule (ref), TEXT_BUBBLE_X_PADDING (ref), BUBBLE_PADDING (ref), TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING (ref), fFlagAppChatEnableAutotranslationModule (ref), memoize (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref)
 	function p1.getModeratedText(p2)
-		-- upvalues: fFlagChatModeratedMaskRandomLength (copy), getModeratedMaskTextModule (copy), p1 (ref)
-		return if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(p1.props.messageId or p2) else string.gsub(p2, "[^%s]", "#")
+		-- upvalues: getModeratedMaskTextModule (copy), p1 (ref)
+		return getModeratedMaskTextModule(p1.props.messageId or p2)
 	end
 	
 	function p1.messageMaxWidth(p2, p3)

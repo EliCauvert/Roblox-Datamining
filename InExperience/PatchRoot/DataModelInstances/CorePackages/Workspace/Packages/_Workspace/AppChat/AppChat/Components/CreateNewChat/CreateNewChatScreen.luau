@@ -10,7 +10,6 @@ local loggerModule = require(script.Parent.Logger)
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local fFlagAppChatIxpScreenExposureModule = require(appChat.Flags.FFlagAppChatIxpScreenExposure)
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
-local fFlagAppChatNewChatFixEnabled = require(parent.SharedFlags).FFlagAppChatNewChatFixEnabled
 local argoPartyExperimentation = require(parent.SocialExperiments).ArgoPartyExperimentation
 local IXPNavigationUtilsModule = require(appChat.Utils.IXPNavigationUtils)
 local createNewChatScreen = roactModule.PureComponent:extend("CreateNewChatScreen")
@@ -76,13 +75,13 @@ function createNewChatScreen.render(p1)
 end
 
 function createNewChatScreen.didMount(p1)
-	-- upvalues: loggerModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref), getFFlagIsSquadEnabled (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), fFlagAppChatNewChatFixEnabled (ref), fFlagConnectionsToFriendsRename (ref)
+	-- upvalues: loggerModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref), getFFlagIsSquadEnabled (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), fFlagConnectionsToFriendsRename (ref)
 	loggerModule:info("{screen} mounted")
 	getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.CreateNewChat, {
 		backButtonEnabled = true,
 		headerText = {
 			shouldLocalize = true,
-			raw = if getFFlagIsSquadEnabled() then if argoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then if fFlagAppChatNewChatFixEnabled then "Feature.Chat.Title.NewChat" else "Feature.Chat.Heading.ChatWithFriends" else "Feature.Chat.Heading.PartyWithFriends" elseif fFlagConnectionsToFriendsRename then "Feature.Chat.Heading.PartyWithFriends" else "Feature.Chat.Heading.PartyWithConnections" else "Feature.Chat.Heading.ChatWithConnections"
+			raw = if getFFlagIsSquadEnabled() then if argoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Title.NewChat" else "Feature.Chat.Heading.PartyWithFriends" elseif fFlagConnectionsToFriendsRename then "Feature.Chat.Heading.PartyWithFriends" else "Feature.Chat.Heading.PartyWithConnections" else "Feature.Chat.Heading.ChatWithConnections"
 		},
 		systemButtonText = if getFFlagIsSquadEnabled() then "Feature.Chat.Action.Create" else "Feature.Chat.Action.StartChatWithFriends"
 	})

@@ -68,6 +68,9 @@ return {
 	getSduiServiceDependenciesStore = function()
 		return require(script.ClientBinding.getSduiServiceDependenciesStore)()
 	end,
+	getOneByTwoTileFlowIdsFromPools = function(p1)
+		return require(script.ClientBinding.PropBuilder.SduiPoolEntryHelpers).getOneByTwoTileFlowIdsFromPools(p1)
+	end,
 	getSduiTokensStore = function()
 		return require(script.ClientBinding.getSduiTokensStore)()
 	end,

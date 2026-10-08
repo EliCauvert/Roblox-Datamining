@@ -23,7 +23,6 @@ local fFlagSduiChartsRequestPlaceholders = sharedFlagsModule.FFlagSduiChartsRequ
 local fFlagSduiChartsPlaceholderMergeStrategySupport = sharedFlagsModule.FFlagSduiChartsPlaceholderMergeStrategySupport
 local fFlagChartsHydrationStreaming = sharedFlagsModule.FFlagChartsHydrationStreaming
 local fFlagSduiChartsPostBody = sharedFlagsModule.FFlagSduiChartsPostBody
-local fFlagSduiClientTemplateCache = sharedFlagsModule.FFlagSduiClientTemplateCache
 local fFlagSduiAdvertiseRuntimeSupportSets = sharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets
 
 local function _()
@@ -60,9 +59,9 @@ local function extractNextFeedPageToken(p1)
 end
 
 return function(_, _)
-	-- upvalues: chartsConstantsModule (ref), getSduiApiStore (ref), chartsPageSessionModule (ref), fFlagChartsHydrationStreaming (ref), fFlagSduiChartsPostBody (ref), getChartsPageStreamUrlModule (ref), getChartsPagePostUrlModule (ref), parent (ref), fFlagSduiAdvertiseRuntimeSupportSets (ref), sduiCapabilities (ref), buildChartsPageRequestModule (ref), getSduiClientPageScope (ref), chartsPageScopeFieldsModule (ref), fFlagEnableTopSongsSort (ref), getFStringTopSongsSortExploreApiPageType (ref), fFlagSduiChartsRequestPlaceholders (ref), getSduiTemplateStore (ref), appPage (ref), sduiResponseType (ref), fFlagSduiChartsPlaceholderMergeStrategySupport (ref), chartsMergeStrategyModule (ref), sduiApiStorePostConfigContentType (ref), fFlagSduiClientTemplateCache (ref), extractNextFeedPageToken (ref), getChartsPageUrlModule (ref)
+	-- upvalues: chartsConstantsModule (ref), getSduiApiStore (ref), chartsPageSessionModule (ref), fFlagChartsHydrationStreaming (ref), fFlagSduiChartsPostBody (ref), getChartsPageStreamUrlModule (ref), getChartsPagePostUrlModule (ref), parent (ref), fFlagSduiAdvertiseRuntimeSupportSets (ref), sduiCapabilities (ref), buildChartsPageRequestModule (ref), getSduiClientPageScope (ref), chartsPageScopeFieldsModule (ref), fFlagEnableTopSongsSort (ref), getFStringTopSongsSortExploreApiPageType (ref), fFlagSduiChartsRequestPlaceholders (ref), getSduiTemplateStore (ref), appPage (ref), sduiResponseType (ref), fFlagSduiChartsPlaceholderMergeStrategySupport (ref), chartsMergeStrategyModule (ref), sduiApiStorePostConfigContentType (ref), extractNextFeedPageToken (ref), getChartsPageUrlModule (ref)
 -- FATAL: Failed to generate AST for `fetchChartsPage` function:
-runtime : [KeyError] :11990: 116
+runtime : [KeyError] :11990: 115
 Traceback:
 	runtime : [lunaux]:11990 function decompile_function
 	runtime : [lunaux]:1933 function normalize_cfg

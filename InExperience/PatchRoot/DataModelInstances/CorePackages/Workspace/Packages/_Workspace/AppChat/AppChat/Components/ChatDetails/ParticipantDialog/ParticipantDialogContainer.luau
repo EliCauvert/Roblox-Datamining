@@ -27,7 +27,6 @@ local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSu
 local appFocusRoot = focusNavigationUtilsModule.AppFocusRoot
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 local fFlagDisableBlockAndReport = sharedFlagsModule.FFlagDisableBlockAndReport
-local fFlagFriendsChatPlaceholderRenameFix = sharedFlagsModule.FFlagFriendsChatPlaceholderRenameFix
 local fFlagAppChatParticipantDialogGamepadFocusModule = require(appChat.Flags.FFlagAppChatParticipantDialogGamepadFocus)
 local fFlagEnableChatDetailsOpenChatModule = require(appChat.Flags.FFlagEnableChatDetailsOpenChat)
 local fFlagAppChatEnableTrustedFriendEntryPointModule = require(appChat.Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
@@ -67,7 +66,7 @@ local t_1 = {
 }
 
 function ParticipantDialogContainer(p1)
-	-- upvalues: cryoModule (ref), t_1 (ref), reactModule (ref), backHandlerContextModule (ref), fFlagAppChatParticipantDialogGamepadFocusModule (ref), fFlagAppChatTrustedFriendEntryPointAnalyticsModule (ref), useTelemetryModule (ref), chatDialogTelemetryLayerModule (ref), useNavigation (ref), useDispatch (ref), useAppPolicyModule (ref), fFlagEnableChatDetailsOpenChatModule (ref), useSelector (ref), conversationModule (ref), fFlagAppChatMigrateFriendshipStatusesModule (ref), useGetFriendshipStatus (ref), t (ref), networkingFriendsModule (ref), useLocalization (ref), fFlagFriendsChatPlaceholderRenameFix (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), fFlagAppChatEnableTrustedFriendEntryPointModule (ref), useTrustedFriendActionModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), loggerModule (ref), genericDialogTypeModule (ref), roactChatAnalyticsModule (ref), chatDetailsTelemetryEventsModule (ref), notificationModalsManagerModule (ref), sources (ref), fFlagAppChatConsolidateTrustedFriendsModalModule (ref), enteredChatFromEntryPoint (ref), chatEntryPointNames (ref), createConversationModule (ref), parseCreateConversationErrorsModule (ref), fFlagDisableBlockAndReport (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), playerContextualMenuWrapperModule (ref), focusNavigableSurfaceWrapper (ref), participantDialogModule (ref)
+	-- upvalues: cryoModule (ref), t_1 (ref), reactModule (ref), backHandlerContextModule (ref), fFlagAppChatParticipantDialogGamepadFocusModule (ref), fFlagAppChatTrustedFriendEntryPointAnalyticsModule (ref), useTelemetryModule (ref), chatDialogTelemetryLayerModule (ref), useNavigation (ref), useDispatch (ref), useAppPolicyModule (ref), fFlagEnableChatDetailsOpenChatModule (ref), useSelector (ref), conversationModule (ref), fFlagAppChatMigrateFriendshipStatusesModule (ref), useGetFriendshipStatus (ref), t (ref), networkingFriendsModule (ref), useLocalization (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), fFlagAppChatEnableTrustedFriendEntryPointModule (ref), useTrustedFriendActionModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), loggerModule (ref), genericDialogTypeModule (ref), roactChatAnalyticsModule (ref), chatDetailsTelemetryEventsModule (ref), notificationModalsManagerModule (ref), sources (ref), fFlagAppChatConsolidateTrustedFriendsModalModule (ref), enteredChatFromEntryPoint (ref), chatEntryPointNames (ref), createConversationModule (ref), parseCreateConversationErrorsModule (ref), fFlagDisableBlockAndReport (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), playerContextualMenuWrapperModule (ref), focusNavigableSurfaceWrapper (ref), participantDialogModule (ref)
 	local var1 = cryoModule.Dictionary.join(t_1, p1)
 	local var2 = reactModule.useContext(backHandlerContextModule)
 	local var3 = reactModule.useRef(var1.onDismiss)
@@ -122,12 +121,12 @@ function ParticipantDialogContainer(p1)
 		var8 = if var10 and var9 then true else false
 	end
 	local var11 = useLocalization({
+		chatUnavailableWithUser = "Feature.Chat.Message.ChatUnavailableWithUser",
+		networkErrorText = "Feature.Toast.NetworkingError.SomethingIsWrong",
 		viewProfileText = var1.viewProfileText,
 		chatText = if fFlagEnableChatDetailsOpenChatModule then var1.chatText else nil,
 		reportUserText = var1.reportUserText,
-		removeFromGroupText = var1.removeFromGroupText,
-		chatUnavailableWithUser = if fFlagFriendsChatPlaceholderRenameFix then "Feature.Chat.Message.ChatUnavailableWithUser" else nil,
-		networkErrorText = if fFlagFriendsChatPlaceholderRenameFix then "Feature.Toast.NetworkingError.SomethingIsWrong" else nil
+		removeFromGroupText = var1.removeFromGroupText
 	})
 	local viewUserProfile = useIsExternalNavigationAvailableModule({ enumScreensModule.ViewUserProfile })[enumScreensModule.ViewUserProfile]
 	local var12 = if fFlagAppChatEnableTrustedFriendEntryPointModule then useTrustedFriendActionModule(var1.participantId) else nil
@@ -259,7 +258,7 @@ function ParticipantDialogContainer(p1)
 				if fFlagAppChatTrustedFriendEntryPointAnalyticsModule then var4 else nil
 			}),
 			openChat = if fFlagEnableChatDetailsOpenChatModule then reactModule.useCallback(function(p2)
-				-- upvalues: loggerModule (copy), var6 (ref), enteredChatFromEntryPoint (copy), chatEntryPointNames (copy), var1 (ref), createConversationModule (copy), var5 (ref), enumScreensModule (copy), parseCreateConversationErrorsModule (copy), fFlagFriendsChatPlaceholderRenameFix (copy), var11 (ref)
+				-- upvalues: loggerModule (copy), var6 (ref), enteredChatFromEntryPoint (copy), chatEntryPointNames (copy), var1 (ref), createConversationModule (copy), var5 (ref), enumScreensModule (copy), parseCreateConversationErrorsModule (copy), var11 (ref)
 				loggerModule:info("User activated openChat | userId: {}", p2)
 				var6(enteredChatFromEntryPoint(chatEntryPointNames.ChatDetailsParticipantDialog))
 				var1.onDismiss()
@@ -267,22 +266,17 @@ function ParticipantDialogContainer(p1)
 					-- upvalues: var5 (copy), enumScreensModule (copy)
 					var5.navigate(enumScreensModule.ChatConversation, { conversationId = p3.id })
 				end):catch(function(p3)
-					-- upvalues: loggerModule (copy), p2 (ref), parseCreateConversationErrorsModule (copy), fFlagFriendsChatPlaceholderRenameFix (copy), var11 (copy), var5 (copy), enumScreensModule (copy)
+					-- upvalues: loggerModule (copy), p2 (ref), parseCreateConversationErrorsModule (copy), var11 (copy), var5 (copy), enumScreensModule (copy)
 					loggerModule:warning("Error creating 1:1 conversation for userId {}: {}", p2, tostring(p3))
 					var5.navigate(enumScreensModule.RoactChatToast, {
 						toastProps = {
 							toastContent = {
-								toastTitle = if parseCreateConversationErrorsModule(p3) == "participant_chat_disabled" then if fFlagFriendsChatPlaceholderRenameFix then var11.chatUnavailableWithUser else "Feature.Chat.Message.PartyUnavailableWithUser" elseif fFlagFriendsChatPlaceholderRenameFix then var11.networkErrorText else "Feature.Toast.NetworkingError.SomethingIsWrong"
+								toastTitle = if parseCreateConversationErrorsModule(p3) == "participant_chat_disabled" then var11.chatUnavailableWithUser else var11.networkErrorText
 							}
 						}
 					})
 				end)
-			end, {
-				var6,
-				var5,
-				var1.onDismiss,
-				if fFlagFriendsChatPlaceholderRenameFix then var11 else nil
-			}) else nil,
+			end, { var6, var5, var1.onDismiss, var11 }) else nil,
 			openReportUser = var20,
 			openRemoveUserDialog = var19
 		}))

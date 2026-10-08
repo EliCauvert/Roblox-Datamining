@@ -32,7 +32,6 @@ local useAnalyticsDispatchModule = require(genericAbuseReporting.Analytics.useAn
 local onFormCommentUpdatedModule = require(genericAbuseReporting.Analytics.Actions.OnFormCommentUpdated)
 local onFormReasonSelectedModule = require(genericAbuseReporting.Analytics.Actions.OnFormReasonSelected)
 local createNextOrder = require(parent.ReactUtils).createNextOrder
-local fFlagChatLineReportingFocusFixesEnabled = sharedFlagsModule.FFlagChatLineReportingFocusFixesEnabled
 local fFlagAddAbuseReportOffsetForLandscape = sharedFlagsModule.FFlagAddAbuseReportOffsetForLandscape
 local fFlagAddTakeItDownReportLinkToSurfaces = sharedFlagsModule.FFlagAddTakeItDownReportLinkToSurfaces
 
@@ -46,7 +45,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: useAnalyticsDispatchModule (ref), reactFocusNavigationModule (ref), focusNavigationUtilsModule (ref), useTokens (ref), reactModule (ref), useLayerCollector (ref), fFlagChatLineReportingFocusFixesEnabled (ref), onFormReasonSelectedModule (ref), onFormCommentUpdatedModule (ref), useLocalization (ref), useLocalizedStringsModule (ref), createNextOrder (ref), reasonDropdownModule (ref), UIListLayoutModule (ref), view (ref), text (ref), var1 (ref), genericReportLink (ref), fFlagAddTakeItDownReportLinkToSurfaces (ref), getTakeItDownReportLinkVisibility (ref), takeItDownReportLink (ref), partialPageModal (ref), MODAL_POSITION_OFFSETModule (ref), buttonType (ref), closeButtonIcon (ref), scrollView (ref), fFlagAddAbuseReportOffsetForLandscape (ref), scrollBarVisibility (ref), frameModule (ref), styledTextLabel (ref), commentTextFieldModule (ref)
+	-- upvalues: useAnalyticsDispatchModule (ref), reactFocusNavigationModule (ref), focusNavigationUtilsModule (ref), useTokens (ref), reactModule (ref), useLayerCollector (ref), onFormReasonSelectedModule (ref), onFormCommentUpdatedModule (ref), useLocalization (ref), useLocalizedStringsModule (ref), createNextOrder (ref), reasonDropdownModule (ref), UIListLayoutModule (ref), view (ref), text (ref), var1 (ref), genericReportLink (ref), fFlagAddTakeItDownReportLinkToSurfaces (ref), getTakeItDownReportLinkVisibility (ref), takeItDownReportLink (ref), partialPageModal (ref), MODAL_POSITION_OFFSETModule (ref), buttonType (ref), closeButtonIcon (ref), scrollView (ref), fFlagAddAbuseReportOffsetForLandscape (ref), scrollBarVisibility (ref), frameModule (ref), styledTextLabel (ref), commentTextFieldModule (ref)
 	local var2 = useAnalyticsDispatchModule()
 	local var3 = reactFocusNavigationModule.useFocusGuiObject()
 	local var4 = focusNavigationUtilsModule.useLastInputMode()
@@ -79,7 +78,7 @@ return function(p1)
 		end
 	end, { var23.current, absoluteSize })
 	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), var18 (ref), var16 (ref), fFlagChatLineReportingFocusFixesEnabled (copy), var22 (ref)
+		-- upvalues: var14 (ref), var18 (ref), var16 (ref), var22 (ref)
 		if not var14.current then
 			var16(Vector2.zero)
 			
@@ -93,10 +92,7 @@ return function(p1)
 				var18(scrollingFrame.AbsoluteWindowSize)
 				var16(scrollingFrame.AbsoluteCanvasSize)
 			end)
-			
-			if fFlagChatLineReportingFocusFixesEnabled then
-				scrollingFrame.Selectable = false
-			end
+			scrollingFrame.Selectable = false
 		end
 		var22(var14.current.AbsolutePosition.Y)
 	end, { var14.current, absoluteSize })
@@ -120,18 +116,18 @@ return function(p1)
 		p1.onSubmit(p1.reportCategoryDefaultKey, var12)
 	end, { p1.onSubmit, var8, var12, var7 })
 	local var33 = reactModule.useCallback(function(p2)
-		-- upvalues: var9 (ref), var2 (ref), onFormReasonSelectedModule (copy), fFlagChatLineReportingFocusFixesEnabled (copy), var4 (ref), var23 (ref), var3 (ref)
+		-- upvalues: var9 (ref), var2 (ref), onFormReasonSelectedModule (copy), var4 (ref), var23 (ref), var3 (ref)
 		var9(p2)
 		var2(onFormReasonSelectedModule({ reason_selection = p2 }))
 		
-		if fFlagChatLineReportingFocusFixesEnabled and var4 == "Focus" and var23.current then
+		if var4 == "Focus" and var23.current then
 			local spawnButton = var23.current:FindFirstChild("SpawnButton", true)
 			
 			if spawnButton and spawnButton:IsA("GuiObject") then
 				var3(spawnButton)
 			end
 		end
-	end, if fFlagChatLineReportingFocusFixesEnabled then { var2, var3, var4 } else { var2 })
+	end, { var2, var3, var4 })
 	local var34 = reactModule.useCallback(function(p2)
 		-- upvalues: var13 (ref), var2 (ref), onFormCommentUpdatedModule (copy)
 		var13(p2)

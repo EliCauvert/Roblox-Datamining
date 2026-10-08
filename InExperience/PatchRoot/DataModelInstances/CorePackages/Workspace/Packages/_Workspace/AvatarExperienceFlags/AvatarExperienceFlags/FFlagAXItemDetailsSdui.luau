@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXItemDetailsSdui2", false)
+﻿return game:DefineFastFlag("AXItemDetailsSdui3", false) and require(script.Parent.FFlagAXItemDetailsSduiActions)

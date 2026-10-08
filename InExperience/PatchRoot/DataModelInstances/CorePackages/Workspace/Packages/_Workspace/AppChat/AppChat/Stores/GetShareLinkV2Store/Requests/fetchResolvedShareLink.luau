@@ -1,11 +1,24 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
+﻿local appChat = script:FindFirstAncestor("AppChat")
+local parent = appChat.Parent
 local httpModule = require(parent.Http)
 local httpClientModule = require(parent.HttpClient)
 local _ = require(parent.ShareLinksNetworking)
+local fFlagAppChatPlusReferralAssetCardModule = require(appChat.Flags.FFlagAppChatPlusReferralAssetCard)
 local text = httpModule.Url.APIS_URL .. "deeplinks/v2/resolve"
 
 local function decodeResolvedShareLink(p1)
-	if type(p1) ~= "table" or type(p1.linkType) ~= "string" or (type(p1.targetId) ~= "string" or type(p1.customData) ~= "string") or type(p1.status) ~= "string" then
+	-- upvalues: fFlagAppChatPlusReferralAssetCardModule (ref)
+	if type(p1) ~= "table" or type(p1.linkType) ~= "string" or (type(p1.targetId) ~= "string" or type(p1.status) ~= "string") then
+		error("Malformed deeplinks/v2/resolve response")
+	end
+	if fFlagAppChatPlusReferralAssetCardModule then
+		if p1.customData ~= nil and type(p1.customData) ~= "string" then
+			error("Malformed deeplinks/v2/resolve response")
+		end
+		p1.customData = p1.customData or ""
+		
+		return p1
+	elseif type(p1.customData) ~= "string" then
 		error("Malformed deeplinks/v2/resolve response")
 	end
 	return p1

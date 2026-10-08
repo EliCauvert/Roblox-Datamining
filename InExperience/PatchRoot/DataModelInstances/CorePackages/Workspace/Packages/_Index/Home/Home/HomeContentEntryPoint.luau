@@ -20,13 +20,14 @@ local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLu
 local fFlagSduiDismissPromptPageScope = require(parent.SharedFlags).FFlagSduiDismissPromptPageScope
 local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
 local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
+local fFlagHomePageRefetchOnDataHydrationAccountReset = require(parent.SharedFlags).FFlagHomePageRefetchOnDataHydrationAccountReset
 
 local function _(p1, p2)
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: homeConstantsModule (ref), fFlagLuaAppAddHomeExtraTopPadding (ref), useEntrySurfacing (ref), fFlagSduiDismissPromptPageScope (ref), usePageScopeRef (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref), home (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), responsiveModule (ref), videoUtilsModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiPageWrapperEntryPoint (ref), refreshHomePageModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagAppPageShellScrollToTopFocus (ref), fFlagLuaAppsDefaultSelection (ref)
+	-- upvalues: homeConstantsModule (ref), fFlagLuaAppAddHomeExtraTopPadding (ref), useEntrySurfacing (ref), fFlagSduiDismissPromptPageScope (ref), usePageScopeRef (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fFlagHomePageRefetchOnDataHydrationAccountReset (ref), fetchHomePageModule (ref), home (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), responsiveModule (ref), videoUtilsModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiPageWrapperEntryPoint (ref), refreshHomePageModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagAppPageShellScrollToTopFocus (ref), fFlagLuaAppsDefaultSelection (ref)
 	local configKey = homeConstantsModule.ConfigKey
 	local var1 = nil
 	
@@ -45,7 +46,11 @@ return reactModule.memo(function(p1)
 	reactModule.useEffect(function()
 		-- upvalues: fetchHomePageModule (copy), var3 (ref)
 		fetchHomePageModule(var3)
-	end, { configKey, var3 })
+	end, {
+		configKey,
+		var3,
+		if fFlagHomePageRefetchOnDataHydrationAccountReset then if fFlagHomePageRefetchOnDataHydrationAccountReset then sduiSharedUtilitiesModule.useDataHydrationAccountGeneration() else nil else nil
+	})
 	reactModule.useEffect(function()
 		-- upvalues: home (copy)
 		return require(home.getHomePageAutoRefreshStore)(false).start()

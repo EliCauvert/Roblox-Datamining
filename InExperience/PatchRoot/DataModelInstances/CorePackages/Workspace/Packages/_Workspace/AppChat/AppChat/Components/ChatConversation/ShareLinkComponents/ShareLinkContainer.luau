@@ -9,6 +9,10 @@ local useSignalState = require(parent.SignalsReact).useSignalState
 local gameCardContainerModule = require(script.Parent.GameCardComponents.GameCardContainer)
 local gameCardGroupableModule = require(script.Parent.GameCardComponents.GameCardGroupable)
 local momentShareCardContainerModule = require(script.Parent.MomentShareCard.MomentShareCardContainer)
+local momentAssetCardModule = require(script.Parent.MomentShareCard.MomentAssetCard)
+local plusReferralAssetCardModule = require(script.Parent.PlusReferralAssetCard.PlusReferralAssetCard)
+local isAssetCardClassificationModule = require(script.Parent.isAssetCardClassification)
+local messageGroupShapeModule = require(appChat.Components.ChatConversation.Grouping.MessageGroupShape)
 local shareLinkClassificationModule = require(appChat.Components.ChatConversation.Utils.RobloxUrlUtils.ShareLinkClassification)
 local constantsModule = require(appChat.Constants)
 local shareLinkV2PresentationModule = require(script.Parent.ShareLinkV2Presentation)
@@ -23,6 +27,10 @@ local fFlagAppChatResolveShareLinkV2Module = require(appChat.Flags.FFlagAppChatR
 local fFlagAppChatMomentShareCardModule = require(appChat.Flags.FFlagAppChatMomentShareCard)
 local fFlagAppChatIntrinsicAssetCardHeightModule = require(appChat.Flags.FFlagAppChatIntrinsicAssetCardHeight)
 local fFlagAppChatShareLinkV2FallbacksModule = require(appChat.Flags.FFlagAppChatShareLinkV2Fallbacks)
+local frozen = table.freeze({
+	direction = messageGroupShapeModule.Direction.Incoming,
+	position = messageGroupShapeModule.Position.Only
+})
 
 local function ShareLinkV1Container(p1)
 	-- upvalues: getShareLinkStoreModule (ref), useSignalState (ref), useDispatch (ref), useEffect (ref), name (ref), reactModule (ref), gameCardContainerModule (ref)
@@ -56,12 +64,14 @@ local function ShareLinkV1Container(p1)
 		isIncoming = p1.isIncoming,
 		isUnfiltered = p1.isUnfiltered,
 		isPending = p1.isPending,
-		isRepliedTo = p1.isRepliedTo
+		isRepliedTo = p1.isRepliedTo,
+		groupShape = p1.groupShape,
+		mediaRef = p1.mediaRef
 	})
 end
 
 local function ShareLinkV2Container(p1)
-	-- upvalues: getShareLinkV2StoreModule (ref), reactModule (ref), useSignalState (ref), fFlagAppChatIntrinsicAssetCardHeightModule (ref), fFlagAppChatMomentShareCardModule (ref), useScaledValue (ref), constantsModule (ref), fFlagAppChatShareLinkV2FallbacksModule (ref), shareLinkClassificationModule (ref), momentShareCardContainerModule (ref), getShareLinkV2PresentationModule (ref), shareLinkV2PresentationModule (ref), gameCardGroupableModule (ref), dataHydrationModule (ref), foundationModule (ref)
+	-- upvalues: getShareLinkV2StoreModule (ref), reactModule (ref), useSignalState (ref), fFlagAppChatIntrinsicAssetCardHeightModule (ref), fFlagAppChatMomentShareCardModule (ref), useScaledValue (ref), constantsModule (ref), fFlagAppChatShareLinkV2FallbacksModule (ref), isAssetCardClassificationModule (ref), frozen (ref), shareLinkClassificationModule (ref), plusReferralAssetCardModule (ref), momentAssetCardModule (ref), momentShareCardContainerModule (ref), getShareLinkV2PresentationModule (ref), shareLinkV2PresentationModule (ref), gameCardGroupableModule (ref), dataHydrationModule (ref), foundationModule (ref)
 	local linkId = p1.shareLink.linkId
 	local var1 = getShareLinkV2StoreModule(false)
 	local var2 = reactModule.useMemo(function()
@@ -69,19 +79,36 @@ local function ShareLinkV2Container(p1)
 		return var1.getAndFetchClassification(linkId)
 	end, { var1, linkId })
 	local var3 = useSignalState(var2.data)
+	local var4 = if fFlagAppChatIntrinsicAssetCardHeightModule and fFlagAppChatMomentShareCardModule then useSignalState(var2.status) else nil
+	local var5 = if fFlagAppChatIntrinsicAssetCardHeightModule and fFlagAppChatMomentShareCardModule then useScaledValue(constantsModule.GameCard.THUMBNAIL_HEIGHT + constantsModule.GameCard.FOOTER_HEIGHT) else nil
+	local var6 = if fFlagAppChatShareLinkV2FallbacksModule then useSignalState(var2.status) else nil
 	
-	return if fFlagAppChatMomentShareCardModule and var3 and var3.type == shareLinkClassificationModule.Moment then reactModule.createElement(momentShareCardContainerModule, {
-		momentId = var3.momentId,
-		targetIdType = var3.targetIdType,
-		openMomentsDeepLink = p1.openMomentsDeepLink,
-		isStartOfGroup = p1.isStartOfGroup,
-		isIncoming = p1.isIncoming,
-		LayoutOrder = p1.LayoutOrder
-	}) elseif fFlagAppChatShareLinkV2FallbacksModule and getShareLinkV2PresentationModule(var3, if fFlagAppChatShareLinkV2FallbacksModule then useSignalState(var2.status) else nil) == shareLinkV2PresentationModule.Loading then reactModule.createElement(gameCardGroupableModule, { isLoading = true, gameName = "", gameThumbnail = "" }) elseif fFlagAppChatIntrinsicAssetCardHeightModule and fFlagAppChatMomentShareCardModule and (if fFlagAppChatIntrinsicAssetCardHeightModule and fFlagAppChatMomentShareCardModule then useSignalState(var2.status) else nil) == dataHydrationModule.DataStatus.NotReady then reactModule.createElement(foundationModule.View, {
-		testId = "ShareLinkPendingCard",
-		Size = UDim2.fromOffset(0, if fFlagAppChatIntrinsicAssetCardHeightModule and fFlagAppChatMomentShareCardModule then useScaledValue(constantsModule.GameCard.THUMBNAIL_HEIGHT + constantsModule.GameCard.FOOTER_HEIGHT) else nil),
-		LayoutOrder = p1.LayoutOrder
-	}) else nil
+	if isAssetCardClassificationModule(var3) then
+		local groupShape = p1.groupShape or frozen
+		
+		return if var3 and var3.type == shareLinkClassificationModule.PlusReferral then reactModule.createElement(plusReferralAssetCardModule, {
+			referrerId = var3.referrerId,
+			groupShape = groupShape,
+			mediaRef = p1.mediaRef
+		}) elseif var3 and var3.type == shareLinkClassificationModule.Moment then reactModule.createElement(momentAssetCardModule, {
+			momentId = var3.momentId,
+			targetIdType = var3.targetIdType,
+			openMomentsDeepLink = p1.openMomentsDeepLink,
+			groupShape = groupShape,
+			mediaRef = p1.mediaRef
+		}) elseif fFlagAppChatMomentShareCardModule and var3 and var3.type == shareLinkClassificationModule.Moment then reactModule.createElement(momentShareCardContainerModule, {
+			momentId = var3.momentId,
+			targetIdType = var3.targetIdType,
+			openMomentsDeepLink = p1.openMomentsDeepLink,
+			isStartOfGroup = p1.isStartOfGroup,
+			isIncoming = p1.isIncoming,
+			LayoutOrder = p1.LayoutOrder
+		}) elseif fFlagAppChatShareLinkV2FallbacksModule and getShareLinkV2PresentationModule(var3, var6) == shareLinkV2PresentationModule.Loading then reactModule.createElement(gameCardGroupableModule, { isLoading = true, gameName = "", gameThumbnail = "" }) elseif fFlagAppChatIntrinsicAssetCardHeightModule and fFlagAppChatMomentShareCardModule and var4 == dataHydrationModule.DataStatus.NotReady then reactModule.createElement(foundationModule.View, {
+			testId = "ShareLinkPendingCard",
+			Size = UDim2.fromOffset(0, var5),
+			LayoutOrder = p1.LayoutOrder
+		}) else nil
+	end
 end
 
 return function(p1)

@@ -95,6 +95,7 @@
 	TextPill = "TextPill",
 	Tile = "Tile",
 	TileFooter = "TileFooter",
+	UserSearchTile = "UserSearchTile",
 	Tooltip = "Tooltip",
 	Skeleton = "Skeleton",
 	Unknown = "Unknown",

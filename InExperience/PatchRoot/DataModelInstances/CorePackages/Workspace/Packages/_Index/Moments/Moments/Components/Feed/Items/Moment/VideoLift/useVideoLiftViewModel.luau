@@ -1,7 +1,7 @@
 ﻿local moments = script:FindFirstAncestor("Moments")
 local parent = moments.Parent
 local foundationModule = require(parent.Foundation)
-local _ = require(parent.MomentsCommon)
+local momentsCommonModule = require(parent.MomentsCommon)
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local getCommentsSheetStoreModule = require(moments.Components.Comments.Sheet.getCommentsSheetStore)
@@ -12,6 +12,8 @@ local runService = game:GetService("RunService")
 local tweenService = game:GetService("TweenService")
 local usePreferences = foundationModule.Hooks.usePreferences
 local useTokens = foundationModule.Hooks.useTokens
+local getSmartFillScaleType = momentsCommonModule.Utils.getSmartFillScaleType
+local fFlagMomentsSmartVideoFill = momentsCommonModule.Flags.FFlagMomentsSmartVideoFill
 local uDim2 = UDim2.fromScale(1, 1)
 local uDim2_1 = UDim2.fromScale(0.5, 0.5)
 
@@ -100,7 +102,7 @@ local function useSettlingLayout(value, p1)
 end
 
 return function(p1)
-	-- upvalues: useTokens (ref), usePreferences (ref), momentContextModule (ref), reactModule (ref), signalsModule (ref), getCommentsSheetStoreModule (ref), computeVideoLiftLayoutModule (ref), getMomentsPreferencesStoreModule (ref), useSettlingLayout (ref), uDim2 (ref), uDim2_1 (ref)
+	-- upvalues: useTokens (ref), usePreferences (ref), momentContextModule (ref), reactModule (ref), signalsModule (ref), getCommentsSheetStoreModule (ref), computeVideoLiftLayoutModule (ref), fFlagMomentsSmartVideoFill (ref), getSmartFillScaleType (ref), getMomentsPreferencesStoreModule (ref), useSettlingLayout (ref), uDim2 (ref), uDim2_1 (ref)
 	local var1 = useTokens()
 	local small = var1.Padding.Small
 	local medium = var1.Radius.Medium
@@ -122,9 +124,9 @@ return function(p1)
 		}
 	end, {})
 	local var4 = useSettlingLayout(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), getCommentsSheetStoreModule (copy), p1 (ref), computeVideoLiftLayoutModule (copy), var3 (ref), controller (ref), getMomentsPreferencesStoreModule (copy), small (ref), medium (ref)
+		-- upvalues: signalsModule (copy), getCommentsSheetStoreModule (copy), p1 (ref), computeVideoLiftLayoutModule (copy), var3 (ref), controller (ref), fFlagMomentsSmartVideoFill (copy), getSmartFillScaleType (copy), getMomentsPreferencesStoreModule (copy), small (ref), medium (ref)
 		return signalsModule.createComputed(function(p2)
-			-- upvalues: getCommentsSheetStoreModule (copy), p1 (copy), computeVideoLiftLayoutModule (copy), var3 (copy), controller (copy), getMomentsPreferencesStoreModule (copy), small (copy), medium (copy)
+			-- upvalues: getCommentsSheetStoreModule (copy), p1 (copy), computeVideoLiftLayoutModule (copy), var3 (copy), controller (copy), fFlagMomentsSmartVideoFill (copy), getSmartFillScaleType (copy), getMomentsPreferencesStoreModule (copy), small (copy), medium (copy)
 			local var5 = getCommentsSheetStoreModule(false)
 			
 			if p1 == nil or var5.getFeedItemId(p2) ~= p1 then
@@ -137,7 +139,7 @@ return function(p1)
 				itemTop = var3.getTop(p2),
 				itemSize = var3.getSize(p2),
 				resolution = if controller ~= nil then nil else controller.getState(p2).resolution,
-				scaleType = getMomentsPreferencesStoreModule(false).getMediaScaleType(p2),
+				scaleType = if fFlagMomentsSmartVideoFill then getSmartFillScaleType(getMomentsPreferencesStoreModule(false).getMediaScaleType(p2), var3.getSize(p2), if controller ~= nil then nil else controller.getState(p2).resolution) else getMomentsPreferencesStoreModule(false).getMediaScaleType(p2),
 				padding = small,
 				cornerRadius = medium
 			})

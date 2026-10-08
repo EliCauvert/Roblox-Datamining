@@ -11,6 +11,11 @@ local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
 local failureReasonModule = require(momentsCreation.Enums.FailureReason)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local fFlagMomentsCommentsCreatorControlModule = require(momentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
+local fFlagMomentsTTSDraftRestoreModule = require(momentsCreation.Flags.FFlagMomentsTTSDraftRestore)
+local fFlagMomentsTTSVoiceSelectorModule = require(momentsCreation.Flags.FFlagMomentsTTSVoiceSelector)
+local defaultCreationToolsModule = require(momentsCreation.Tools.defaultCreationTools)
+local voiceToolModule = require(momentsCreation.Tools.voiceTool)
+local voiceCatalogModule = require(momentsCreation.Components.Voice.voiceCatalog)
 local eventNames = momentsCommonModule.Analytics.EventNames
 local sessionManager = momentsCommonModule.Analytics.SessionManager
 local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
@@ -20,11 +25,23 @@ local function withCreationSession(p1)
 	return cryoModule.Dictionary.join(p1, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
 end
 
-return function(p1)
-	-- upvalues: getCreationFlowStoreModule (ref), reactModule (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), failureReasonModule (ref), fFlagMomentsCommentsCreatorControlModule (ref), creationFlowStateModule (ref), withCreationSession (ref)
+local function _(p1)
+	-- upvalues: fFlagMomentsTTSVoiceSelectorModule (ref), voiceCatalogModule (ref)
+	if fFlagMomentsTTSVoiceSelectorModule and voiceCatalogModule.getVoiceById(p1.voiceId) ~= nil then
+		return p1
+	end
+	local cloned = table.clone(p1)
+	cloned.voiceId = voiceCatalogModule.getDefaultVoiceId()
+	
+	return cloned
+end
+
+return function(p1, p2)
+	-- upvalues: getCreationFlowStoreModule (ref), reactModule (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), failureReasonModule (ref), fFlagMomentsCommentsCreatorControlModule (ref), fFlagMomentsTTSDraftRestoreModule (ref), defaultCreationToolsModule (ref), voiceToolModule (ref), fFlagMomentsTTSVoiceSelectorModule (ref), voiceCatalogModule (ref), creationFlowStateModule (ref), withCreationSession (ref)
 	local var1 = getCreationFlowStoreModule(false)
 	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref), momentsDraftStorageModule (copy), fireAnalyticsEventModule (copy), eventNames (copy), failureReasonModule (copy), fFlagMomentsCommentsCreatorControlModule (copy), creationFlowStateModule (copy), withCreationSession (copy)
+		-- upvalues: p2 (ref), var1 (ref), p1 (ref), momentsDraftStorageModule (copy), fireAnalyticsEventModule (copy), eventNames (copy), failureReasonModule (copy), fFlagMomentsCommentsCreatorControlModule (copy), fFlagMomentsTTSDraftRestoreModule (copy), defaultCreationToolsModule (copy), voiceToolModule (copy), fFlagMomentsTTSVoiceSelectorModule (copy), voiceCatalogModule (copy), creationFlowStateModule (copy), withCreationSession (copy)
+		if p2 then return end
 		if var1.getSelectedCapture(false) ~= nil or next(var1.getEditsMap(false)) ~= nil then return end
 		if p1 == nil then return end
 		local var2, var3 = momentsDraftStorageModule.load()
@@ -55,9 +72,25 @@ return function(p1)
 			var1.updateCommentsEnabled(var2.commentsEnabled ~= false)
 		end
 		for i_1, v in pairs(var2.edits) do
-			var1.setCommittedEdit(i_1, v)
+			if not fFlagMomentsTTSDraftRestoreModule or i_1 ~= "voice" then
+				var1.setCommittedEdit(i_1, v)
+			end
+		end
+		if fFlagMomentsTTSDraftRestoreModule and var2.edits.voice ~= nil and table.find(defaultCreationToolsModule, voiceToolModule) ~= nil then
+			local var5
+			local voice = var2.edits.voice
+			
+			if fFlagMomentsTTSVoiceSelectorModule and voiceCatalogModule.getVoiceById(voice.voiceId) ~= nil then
+				var5 = voice
+			else
+				local cloned = table.clone(voice)
+				cloned.voiceId = voiceCatalogModule.getDefaultVoiceId()
+				var5 = cloned
+			end
+			var1.setCommittedEdit("voice", var5)
+			var1.setPendingRestoredVoice(var5)
 		end
 		var1.updateCurrentState(creationFlowStateModule.Preview)
 		fireAnalyticsEventModule(eventNames.DraftRestoreSucceededEvent, withCreationSession({}))
-	end, { var1, p1 })
+	end, { var1, p1, p2 })
 end

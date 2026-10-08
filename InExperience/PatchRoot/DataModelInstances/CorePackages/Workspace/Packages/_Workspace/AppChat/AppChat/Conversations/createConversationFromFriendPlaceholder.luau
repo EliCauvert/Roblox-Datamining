@@ -5,16 +5,18 @@ local conversationChannelsModule = require(appChat.Models.ConversationChannels)
 local signalsExperimentalModule = require(parent.SignalsExperimental)
 local getOtherParticipantsModule = require(script.Parent.getOtherParticipants)
 local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
+local getConversationSearchDataHydrationModule = require(appChat.Stores.GetConversationSearchDataHydration)
+local fFlagAppChatServerSideConversationSearchModule = require(appChat.Flags.FFlagAppChatServerSideConversationSearch)
 
 return function(p1, p2)
-	-- upvalues: getOtherParticipantsModule (ref), getConversationStoreModule (ref), appChatNetworkingModule (ref), conversationChannelsModule (ref), signalsExperimentalModule (ref)
+	-- upvalues: getOtherParticipantsModule (ref), getConversationStoreModule (ref), appChatNetworkingModule (ref), conversationChannelsModule (ref), signalsExperimentalModule (ref), fFlagAppChatServerSideConversationSearchModule (ref), getConversationSearchDataHydrationModule (ref)
 	local var1 = getOtherParticipantsModule(p1, p2)
 	
 	if #var1 == 1 then
 		local var2 = getConversationStoreModule(false)
 		
 		return appChatNetworkingModule.http.CreateConversation(nil, "one_to_one", { var1[1] }):andThen(function(p3)
-			-- upvalues: conversationChannelsModule (copy), signalsExperimentalModule (copy), var2 (ref), p1 (ref)
+			-- upvalues: conversationChannelsModule (copy), signalsExperimentalModule (copy), var2 (ref), p1 (ref), fFlagAppChatServerSideConversationSearchModule (copy), getConversationSearchDataHydrationModule (copy)
 			local responseBody = p3 and p3.responseBody
 			local var3 = responseBody and (responseBody.conversations and responseBody.conversations[1])
 			
@@ -28,6 +30,9 @@ return function(p1, p2)
 				var2.removeConversation(p1.id)
 			end)
 			
+			if fFlagAppChatServerSideConversationSearchModule then
+				getConversationSearchDataHydrationModule(false).invalidate()
+			end
 			return var4
 		end)
 	end

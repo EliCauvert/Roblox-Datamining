@@ -2,6 +2,7 @@
 
 return {
 	Moment = "moment",
+	PlusReferral = "plusReferral",
 	Unhandled = "unhandled",
 	Invalid = "invalid"
 }

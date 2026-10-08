@@ -1,4 +1,6 @@
-﻿return {
+﻿local _ = require(script.Components.useAccountUpgradeViewModel)
+
+return {
 	AccountUpgradeAppShellFlow = require(script.AppShell.AccountUpgradeAppShellFlow),
 	AccountUpgradeField = require(script.AccountUpgradeField),
 	AccountUpgradeError = require(script.AccountUpgradeError),

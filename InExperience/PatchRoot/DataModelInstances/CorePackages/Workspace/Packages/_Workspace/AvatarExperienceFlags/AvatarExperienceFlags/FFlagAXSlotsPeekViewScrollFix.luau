@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXSlotsPeekViewScrollFix", false) and require(script.Parent.FFlagAXRootSlotBasedEditorFlag)
+﻿return game:DefineFastFlag("AXSlotsPeekViewScrollFix", false)

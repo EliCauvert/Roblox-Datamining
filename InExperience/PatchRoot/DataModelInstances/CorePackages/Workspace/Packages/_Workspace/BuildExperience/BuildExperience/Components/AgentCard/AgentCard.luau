@@ -5,14 +5,9 @@ local text = foundationModule.Text
 local view = foundationModule.View
 
 return function(p1)
-	-- upvalues: reactModule (ref), view (ref), text (ref)
+	-- upvalues: reactModule (ref), text (ref), view (ref)
 	local testId = p1.testId or "agent-card"
-	
-	return reactModule.createElement(view, {
-		tag = "col gap-xxsmall size-full-0 auto-y padding-large stroke-standard stroke-default radius-large",
-		LayoutOrder = p1.layoutOrder,
-		testId = testId
-	}, {
+	local t = {
 		Header = reactModule.createElement(text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-title-medium text-align-x-left text-truncate-end content-emphasis",
@@ -26,5 +21,21 @@ return function(p1)
 			testId = `{testId}-text-content`
 		}),
 		Children = reactModule.createElement(reactModule.Fragment, nil, p1.children)
+	}
+	
+	return reactModule.createElement(view, {
+		LayoutOrder = p1.layoutOrder,
+		tag = {
+			["col size-full-0 auto-y padding-large stroke-standard stroke-default radius-large"] = true,
+			["gap-large"] = p1.footer ~= nil,
+			["gap-xxsmall"] = p1.footer == nil
+		},
+		testId = testId
+	}, {
+		Body = if p1.footer ~= nil then reactModule.createElement(reactModule.Fragment, nil, t) else reactModule.createElement(view, {
+			LayoutOrder = 1,
+			tag = "col gap-xxsmall size-full-0 auto-y"
+		}, t),
+		Footer = if p1.footer ~= nil then nil else reactModule.createElement(view, { LayoutOrder = 2, tag = "col size-full-0 auto-y" }, { Content = p1.footer })
 	})
 end

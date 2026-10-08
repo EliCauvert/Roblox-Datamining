@@ -34,6 +34,7 @@ local fFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(parent.SharedF
 local fFlagAddPerformanceMetricsToUnifiedPurchaseModal = require(parent.SharedFlags).FFlagAddPerformanceMetricsToUnifiedPurchaseModal
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local fFlagSkipBuyDelayForExperienceShopModule = require(purchasePrompt.Flags.FFlagSkipBuyDelayForExperienceShop)
+local fFlagLuaAppsEnablePromptVIPServerPurchase = require(parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local _ = require(parent.IAPExperience)
 
 function name.init(p1)
@@ -200,7 +201,7 @@ function name.emitUnifiedPurchaseTelemetry(value, p1)
 end
 
 function name.render(p1)
-	-- upvalues: externalSettingsModule (ref), roact (ref), robuxUpsellFlow (ref), getUnifiedPurchaseModalTypeModule (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), getFFlagDisablePurchasePromptFunctionForMaquettesModule (ref), getPaymentPlatformModule (ref), paymentPlatformModule (ref)
+	-- upvalues: externalSettingsModule (ref), roact (ref), robuxUpsellFlow (ref), getUnifiedPurchaseModalTypeModule (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref), getFFlagDisablePurchasePromptFunctionForMaquettesModule (ref), getPaymentPlatformModule (ref), paymentPlatformModule (ref)
 	local purchaseAnalyticsMetadata
 	local props = p1.props
 	local var1 = externalSettingsModule.new()
@@ -248,6 +249,7 @@ function name.render(p1)
 	t.setPostPurchaseActions = if fFlagPurchasePromptCartPricingEnabledModule then props.setPostPurchaseActions else nil
 	t.onRobloxPlusButtonActivated = props.onRobloxPlusButtonActivated
 	t.robloxPlusDiscountPercentage = props.robloxPlusDiscountPercentage
+	t.isMonthlyPrice = if fFlagLuaAppsEnablePromptVIPServerPurchase then props.isMonthlyPrice else nil
 	t.purchaseState = p1:getFlowState()
 	t.errorType = p1:getErrorType()
 	t.economicRestrictionError = props.economicRestrictionError

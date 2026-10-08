@@ -6,8 +6,9 @@ local isMultiItemPurchaseModule = require(purchasePrompt.Utils.isMultiItemPurcha
 local requestTypeModule = require(purchasePrompt.Enums.RequestType)
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(purchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
+local fFlagLuaAppsEnablePromptVIPServerPurchase = sharedFlagsModule.FFlagLuaAppsEnablePromptVIPServerPurchase
 
 return function(p1)
-	-- upvalues: requestTypeModule (ref), unifiedPurchaseModalTypeEnum (ref), fFlagAXMISWithBlackbird (ref), isMultiItemPurchaseModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref)
-	return if p1 == requestTypeModule.Experience then unifiedPurchaseModalTypeEnum.Experience elseif fFlagAXMISWithBlackbird and p1 == requestTypeModule.RobuxUpsell then unifiedPurchaseModalTypeEnum.MultiItem elseif isMultiItemPurchaseModule(p1) then unifiedPurchaseModalTypeEnum.MultiItem elseif fFlagEnableUnifiedPurchaseFlowForDevSubs and p1 == requestTypeModule.DeveloperSubscription then unifiedPurchaseModalTypeEnum.DeveloperSubscription else unifiedPurchaseModalTypeEnum.SingleItem
+	-- upvalues: requestTypeModule (ref), unifiedPurchaseModalTypeEnum (ref), fFlagAXMISWithBlackbird (ref), isMultiItemPurchaseModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref)
+	return if p1 == requestTypeModule.Experience then unifiedPurchaseModalTypeEnum.Experience elseif fFlagAXMISWithBlackbird and p1 == requestTypeModule.RobuxUpsell then unifiedPurchaseModalTypeEnum.MultiItem elseif isMultiItemPurchaseModule(p1) then unifiedPurchaseModalTypeEnum.MultiItem elseif fFlagEnableUnifiedPurchaseFlowForDevSubs and p1 == requestTypeModule.DeveloperSubscription then unifiedPurchaseModalTypeEnum.DeveloperSubscription elseif fFlagLuaAppsEnablePromptVIPServerPurchase and p1 == requestTypeModule.VIPServer then unifiedPurchaseModalTypeEnum.VIPServer else unifiedPurchaseModalTypeEnum.SingleItem
 end

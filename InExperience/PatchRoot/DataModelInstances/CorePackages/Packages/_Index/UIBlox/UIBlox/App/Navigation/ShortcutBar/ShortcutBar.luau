@@ -96,7 +96,7 @@ return function(p1)
 		})
 	end
 	if #var9 > 0 then
-		local var11 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var2.Tokens.Color.OverMedia.OverMedia_0 else var2.Tokens.Semantic.Color.BackgroundUi.Contrast
+		local overMedia0 = var2.Tokens.Color.OverMedia.OverMedia_0
 		
 		return reactModule.createElement("CanvasGroup", {
 			BackgroundTransparency = 1,
@@ -108,8 +108,8 @@ return function(p1)
 			ShortcutBarComponent = reactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.fromOffset(0, 0),
-				BackgroundColor3 = var11.Color3,
-				BackgroundTransparency = var11.Transparency,
+				BackgroundColor3 = overMedia0.Color3,
+				BackgroundTransparency = overMedia0.Transparency,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}, t_2)
 		})

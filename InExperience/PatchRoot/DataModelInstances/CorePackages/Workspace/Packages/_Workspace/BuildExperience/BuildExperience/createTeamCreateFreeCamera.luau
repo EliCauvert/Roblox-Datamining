@@ -99,14 +99,37 @@ return function(p12, p13, p14, p15, p16)
 	
 	local function _()
 		-- upvalues: p14 (ref), p13 (ref)
-		return p14.getIsOpen() or (p14.getIsChatOpen() or p13:GetFocusedTextBox() ~= nil)
+		return p14.getIsOpen() or p13:GetFocusedTextBox() ~= nil
+	end
+	
+	local function isChatUsingInput()
+		-- upvalues: p14 (ref), p15 (ref), p13 (ref)
+		if not p14.getIsChatOpen() then
+			return false
+		elseif p15.SelectedObject ~= nil then
+			return true
+		end
+		local var25
+		local worldChatTop = p14.getWorldChatTop()
+		local worldChatLeft = p14.getWorldChatLeft()
+		local guiInset = p15:GetGuiInset()
+		local mouseLocation = p13:GetMouseLocation()
+		
+		if worldChatTop ~= nil then
+			var25 = true
+			
+			if worldChatTop + guiInset.Y > mouseLocation.Y then
+				var25 = worldChatLeft ~= nil and worldChatLeft + guiInset.X <= mouseLocation.X
+			end
+			return var25
+		end
 	end
 	
 	local teamCreateFreeCamera = Instance.new("InputContext")
 	teamCreateFreeCamera.Name = "TeamCreateFreeCamera"
 	teamCreateFreeCamera.Priority = 1000
 	teamCreateFreeCamera.Sink = true
-	teamCreateFreeCamera.Enabled = not (p14.getIsOpen() or (p14.getIsChatOpen() or p13:GetFocusedTextBox() ~= nil))
+	teamCreateFreeCamera.Enabled = not (p14.getIsOpen() or p13:GetFocusedTextBox() ~= nil)
 	teamCreateFreeCamera.Parent = game:GetService("CoreGui")
 	local var25 = p16(teamCreateFreeCamera, "Move", Enum.InputActionType.Direction2D, {
 		{
@@ -114,6 +137,12 @@ return function(p12, p13, p14, p15, p16)
 			Down = Enum.KeyCode.S,
 			Left = Enum.KeyCode.A,
 			Right = Enum.KeyCode.D
+		},
+		{
+			Up = Enum.KeyCode.Up,
+			Down = Enum.KeyCode.Down,
+			Left = Enum.KeyCode.Left,
+			Right = Enum.KeyCode.Right
 		},
 		{ KeyCode = Enum.KeyCode.Thumbstick1 }
 	})
@@ -155,7 +184,7 @@ return function(p12, p13, p14, p15, p16)
 	local touchStartedConnection = p13.TouchStarted:Connect(function(p18, p19)
 		-- upvalues: var24 (write), t (ref), p14 (ref), p13 (ref), var23 (write), var22 (write)
 		if var24 then return end
-		t[p18] = p19 or (p14.getIsOpen() or (p14.getIsChatOpen() or p13:GetFocusedTextBox() ~= nil))
+		t[p18] = p19 or (p14.getIsOpen() or p13:GetFocusedTextBox() ~= nil)
 		
 		if t[p18] then
 			var23 = nil
@@ -173,7 +202,7 @@ return function(p12, p13, p14, p15, p16)
 			for i, v in t do
 				if v then
 					var30 = true
-					if var30 or (p14.getIsOpen() or (p14.getIsChatOpen() or p13:GetFocusedTextBox() ~= nil)) or (#p18 ~= 1 or var22 ~= nil) or (p20 == Enum.UserInputState.End or p20 == Enum.UserInputState.Cancel) then
+					if var30 or (p14.getIsOpen() or p13:GetFocusedTextBox() ~= nil) or (#p18 ~= 1 or var22 ~= nil) or (p20 == Enum.UserInputState.End or p20 == Enum.UserInputState.Cancel) then
 						var23 = nil
 						
 						return
@@ -207,7 +236,7 @@ return function(p12, p13, p14, p15, p16)
 			for i, v in t do
 				if v then
 					var31 = true
-					if var31 or (p14.getIsOpen() or (p14.getIsChatOpen() or p13:GetFocusedTextBox() ~= nil)) or (p23 == Enum.UserInputState.End or p23 == Enum.UserInputState.Cancel) then
+					if var31 or (p14.getIsOpen() or p13:GetFocusedTextBox() ~= nil) or (p23 == Enum.UserInputState.End or p23 == Enum.UserInputState.Cancel) then
 						var22 = nil
 						
 						return
@@ -238,7 +267,7 @@ return function(p12, p13, p14, p15, p16)
 	
 	return {
 		step = function(p25)
-			-- upvalues: var24 (write), p14 (ref), p12 (ref), p15 (ref), p13 (ref), var19 (write), viewportSize (write), fieldOfView (write), var20 (write), var21 (write), var13 (write), var15 (write), var16 (write), var18 (write), var10 (write), var14 (write), var17 (write), var22 (write), var23 (write), getRecenteredCFrame (copy), getFocusCFrame (copy), var11 (write), var12 (write), teamCreateFreeCamera (ref), var28 (ref), var29 (ref), var27 (ref), var25 (ref), var26 (ref)
+			-- upvalues: var24 (write), p14 (ref), p12 (ref), p15 (ref), p13 (ref), var19 (write), viewportSize (write), fieldOfView (write), var20 (write), var21 (write), var13 (write), var15 (write), var16 (write), var18 (write), var10 (write), var14 (write), var17 (write), var22 (write), var23 (write), getRecenteredCFrame (copy), getFocusCFrame (copy), var11 (write), var12 (write), teamCreateFreeCamera (ref), isChatUsingInput (ref), var28 (ref), var29 (ref), var27 (ref), var25 (ref), var26 (ref)
 			if var24 then return end
 			local worldViewportRect = p14.getWorldViewportRect()
 			local worldChatTop = p14.getWorldChatTop()
@@ -315,33 +344,35 @@ return function(p12, p13, p14, p15, p16)
 					var18 = nil
 				end
 			end
-			teamCreateFreeCamera.Enabled = not (p14.getIsOpen() or (p14.getIsChatOpen() or p13:GetFocusedTextBox() ~= nil))
+			local var35 = p14.getIsOpen() or p13:GetFocusedTextBox() ~= nil
+			teamCreateFreeCamera.Enabled = not var35 and not isChatUsingInput()
 			
-			if not teamCreateFreeCamera.Enabled then
-				var22 = nil
-				var23 = nil
-				p13.MouseBehavior = Enum.MouseBehavior.Default
+			if teamCreateFreeCamera.Enabled then
+				p13.MouseBehavior = if var28:GetState() then Enum.MouseBehavior.LockCurrentPosition else Enum.MouseBehavior.Default
+				local var36 = var29:GetState() * p25
+				
+				if var36.Magnitude > 0 then
+					var16 = false
+					var18 = nil
+				end
+				var12 += var36.X
+				var11 = math.clamp(var11 + var36.Y, -1.567654734141, 1.567654734141)
+				local cFrame = CFrame.fromEulerAnglesYXZ(var11, var12, 0)
+				local state = var25:GetState()
+				local var37 = p12.CFrame.Position + (cFrame.RightVector * state.X + cFrame.LookVector * state.Y + Vector3.new(0, 1, 0) * var26:GetState()) * (p25 * 50 * (if var27:GetState() then 5 else 1))
+				
+				if var37 ~= p12.CFrame.Position then
+					var16 = false
+					var18 = nil
+				end
+				p12.CFrame = CFrame.new(var37) * cFrame
 				
 				return
+			elseif var35 then
+				var22 = nil
+				var23 = nil
 			end
-			p13.MouseBehavior = if var28:GetState() then Enum.MouseBehavior.LockCurrentPosition else Enum.MouseBehavior.Default
-			local var35 = var29:GetState() * p25
-			
-			if var35.Magnitude > 0 then
-				var16 = false
-				var18 = nil
-			end
-			var12 += var35.X
-			var11 = math.clamp(var11 + var35.Y, -1.567654734141, 1.567654734141)
-			local cFrame = CFrame.fromEulerAnglesYXZ(var11, var12, 0)
-			local state = var25:GetState()
-			local var36 = p12.CFrame.Position + (cFrame.RightVector * state.X + cFrame.LookVector * state.Y + Vector3.new(0, 1, 0) * var26:GetState()) * (p25 * 50 * (if var27:GetState() then 5 else 1))
-			
-			if var36 ~= p12.CFrame.Position then
-				var16 = false
-				var18 = nil
-			end
-			p12.CFrame = CFrame.new(var36) * cFrame
+			p13.MouseBehavior = Enum.MouseBehavior.Default
 		end,
 		destroy = function()
 			-- upvalues: var24 (write), teamCreateFreeCamera (ref), var18 (write), var22 (write), var23 (write), t (ref), touchStartedConnection (ref), touchEndedConnection (ref), touchPanConnection (ref), touchPinchConnection (ref), p13 (ref)

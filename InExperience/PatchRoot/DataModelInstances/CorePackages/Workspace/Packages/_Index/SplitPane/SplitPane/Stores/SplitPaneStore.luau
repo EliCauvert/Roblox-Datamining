@@ -144,6 +144,7 @@ local function createSplitPaneStore()
 		getIsSplitEligible = var25,
 		setIsSplitEligible = var26,
 		getSupportPaneMode = getSupportPaneMode,
+		getTemporarySupportPaneMode = var13,
 		getShouldDefaultToCollapsed = var15,
 		setSupportPaneMode = function(value)
 			-- upvalues: var12 (ref)

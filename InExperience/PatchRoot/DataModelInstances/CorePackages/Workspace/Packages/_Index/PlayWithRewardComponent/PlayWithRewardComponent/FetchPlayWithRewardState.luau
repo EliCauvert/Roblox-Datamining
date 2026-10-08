@@ -9,12 +9,13 @@ local mutedError = require(parent.Loggers).mutedError
 local tModule = require(parent.t)
 local IXPServiceWrapper = require(parent.IXPServiceWrapper).IXPServiceWrapper
 local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
+local sharedFlagsModule = require(parent.SharedFlags)
 local playWithRewardStateModule = require(parent.PlayWithRewardState)
 local playWithRewardAdData = playWithRewardStateModule.PlayWithRewardAdData
 local setPlayWithRewardState = playWithRewardStateModule.SetPlayWithRewardState
-local luaAppPlayWithRewardBetaIxpVariantKey = game:DefineFastString("LuaAppPlayWithRewardBetaIxpVariantKey", "Variant")
-local luaAppPlayWithRewardBetaIxpTreatmentValue = game:DefineFastString("LuaAppPlayWithRewardBetaIxpTreatmentValue", "Treatment")
-local luaAppPlayWithRewardSkipIxpForShimmer = game:DefineFastFlag("LuaAppPlayWithRewardSkipIxpForShimmer", false)
+local fStringLuaAppPlayWithRewardBetaIxpVariantKey = sharedFlagsModule.FStringLuaAppPlayWithRewardBetaIxpVariantKey
+local fStringLuaAppPlayWithRewardBetaIxpTreatmentValue = sharedFlagsModule.FStringLuaAppPlayWithRewardBetaIxpTreatmentValue
+local fFlagLuaAppPlayWithRewardSkipIxpForShimmer = sharedFlagsModule.FFlagLuaAppPlayWithRewardSkipIxpForShimmer
 local var1 = tModule.interface({
 	AdAvailabilityResult = tModule.userdata,
 	ProductId = tModule.optional(tModule.string),
@@ -71,7 +72,7 @@ local function fetchPlayWithRewardStateAsync(p1, p2, _, p3)
 end
 
 local function shouldShowShimmer(p4, p5)
-	-- upvalues: logger (ref), var2 (ref), luaAppPlayWithRewardSkipIxpForShimmer (ref), userInputService (ref), IXPServiceWrapper (ref), appUserLayers (ref), luaAppPlayWithRewardBetaIxpVariantKey (ref), luaAppPlayWithRewardBetaIxpTreatmentValue (ref)
+	-- upvalues: logger (ref), var2 (ref), fFlagLuaAppPlayWithRewardSkipIxpForShimmer (ref), userInputService (ref), IXPServiceWrapper (ref), appUserLayers (ref), fStringLuaAppPlayWithRewardBetaIxpVariantKey (ref), fStringLuaAppPlayWithRewardBetaIxpTreatmentValue (ref)
 	if not p4 then
 		logger:warning(`AdService is not available. Cannot determine whether to show shimmer for universe ID {p5}.`)
 		
@@ -88,14 +89,14 @@ local function shouldShowShimmer(p4, p5)
 	local var6, _ = var2(status)
 	
 	if var6 and status.IsEligible then
-		if luaAppPlayWithRewardSkipIxpForShimmer then
+		if fFlagLuaAppPlayWithRewardSkipIxpForShimmer then
 			return true
 		end
 		local var7
 		local var8 = if userInputService:GetPlatform() == Enum.Platform.Android then IXPServiceWrapper:GetLayerData(appUserLayers.AdsPlayWithRewardBetaAndroidLayer) else IXPServiceWrapper:GetLayerData(appUserLayers.AdsPlayWithRewardBetaLayer)
 		
-		if var8 and var8[luaAppPlayWithRewardBetaIxpVariantKey] then
-			var7 = var8[luaAppPlayWithRewardBetaIxpVariantKey] == luaAppPlayWithRewardBetaIxpTreatmentValue
+		if var8 and var8[fStringLuaAppPlayWithRewardBetaIxpVariantKey] then
+			var7 = var8[fStringLuaAppPlayWithRewardBetaIxpVariantKey] == fStringLuaAppPlayWithRewardBetaIxpTreatmentValue
 			var7 = nil
 		else
 			var7 = false

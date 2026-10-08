@@ -1,10 +1,12 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
+﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
+local parent = buildExperience.Parent
 local httpService = game:GetService("HttpService")
 local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local placeVersionHistoryModule = require(parent.DataHydration.PlaceVersionHistory)
 local promiseModule = require(parent.Promise)
 local buildExperienceRollbackPlaceMaxRetries = game:DefineFastInt("BuildExperienceRollbackPlaceMaxRetries", 2)
 local buildExperienceRollbackPlaceRetryDelayMs = game:DefineFastInt("BuildExperienceRollbackPlaceRetryDelayMs", 1000)
+local fFlagBuildExperiencePlaytestCardPublishCtaModule = require(buildExperience.Flags.FFlagBuildExperiencePlaytestCardPublishCta)
 local debug = creatorAgentChatModule.debug
 
 local function _(p1)
@@ -98,7 +100,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: buildExperienceRollbackPlaceMaxRetries (ref), buildExperienceRollbackPlaceRetryDelayMs (ref), placeVersionHistoryModule (ref), promiseModule (ref), copyVersionNoteAfterRollback (ref)
+	-- upvalues: buildExperienceRollbackPlaceMaxRetries (ref), buildExperienceRollbackPlaceRetryDelayMs (ref), placeVersionHistoryModule (ref), promiseModule (ref), fFlagBuildExperiencePlaytestCardPublishCtaModule (ref), copyVersionNoteAfterRollback (ref)
 	p3 = p3 or {}
 	local var1 = if p3.retries ~= nil then buildExperienceRollbackPlaceMaxRetries else p3.retries
 	local var2 = if p3.retryDelayMs ~= nil then buildExperienceRollbackPlaceRetryDelayMs else p3.retryDelayMs
@@ -142,7 +144,10 @@ return function(p1, p2, p3)
 			return rollbackWithRetry(var5, note)
 		end)
 	end):andThen(function(p4)
-		-- upvalues: copyVersionNoteAfterRollback (copy), placeVersionHistoryStore (ref), p1 (ref), p2 (ref), p3 (ref), note (ref)
+		-- upvalues: fFlagBuildExperiencePlaytestCardPublishCtaModule (copy), var3 (ref), placeVersionHistoryStore (ref), p1 (ref), copyVersionNoteAfterRollback (copy), p2 (ref), p3 (ref), note (ref)
+		if fFlagBuildExperiencePlaytestCardPublishCtaModule and var3 then
+			placeVersionHistoryStore.fetchLiveVersion(p1)
+		end
 		return copyVersionNoteAfterRollback(placeVersionHistoryStore, p1, p2, p4, p3, note):andThen(function()
 			-- upvalues: p4 (ref)
 			return p4

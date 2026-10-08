@@ -12,14 +12,6 @@ local t = {
 	Classic_dark = {
 		centerImage = "rbxasset://textures/ui/LuaApp/graphic/starburst_center_classic_dark.png",
 		gradientColor = Color3.fromHex("#042349")
-	},
-	KidsClassic_light = {
-		centerImage = "rbxasset://textures/ui/LuaApp/graphic/starburst_center_classic_kids_light.png",
-		gradientColor = Color3.fromHex("#BBD1FB")
-	},
-	KidsClassic_dark = {
-		centerImage = "rbxasset://textures/ui/LuaApp/graphic/starburst_center_classic_kids_dark.png",
-		gradientColor = Color3.fromHex("#10278E")
 	}
 }
 

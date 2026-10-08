@@ -48,8 +48,7 @@ return {
 		PurchaseErrorType = require(script.Enums.PurchaseErrorType),
 		U13ConfirmType = require(script.Generic.U13ConfirmType),
 		SubscriptionPurchaseFlow = require(script.PurchaseFlow.Subscription.SubscriptionPurchaseFlow),
-		SubscriptionPurchaseFlowState = require(script.PurchaseFlow.Subscription.SubscriptionPurchaseFlowState),
-		PurchaseVIPServerFlow = require(script.PurchaseFlow.VIPServer.PurchaseVIPServerFlow)
+		SubscriptionPurchaseFlowState = require(script.PurchaseFlow.Subscription.SubscriptionPurchaseFlowState)
 	},
 	Enums = {
 		EconomicRestrictionsViolationType = require(script.Enums.EconomicRestrictionsViolationType),

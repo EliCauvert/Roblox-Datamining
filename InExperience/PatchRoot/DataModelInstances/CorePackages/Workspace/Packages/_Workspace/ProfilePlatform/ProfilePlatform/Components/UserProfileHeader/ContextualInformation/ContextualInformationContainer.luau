@@ -11,17 +11,14 @@ local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfi
 local enumsModule = require(profilePlatform.Common.Enums)
 local horizontalPageMargin = require(parent.UIBlox).App.Container.HorizontalPageMargin
 local networkingGamesModule = require(profilePlatform.Networking.NetworkingGames)
-local IXPService = game:GetService("IXPService")
 local contextualGenericModule = require(script.Parent.ContextualGeneric)
 local contextualPresenceModule = require(script.Parent.ContextualPresence)
 local contextualMutualFriendsModule = require(script.Parent.ContextualMutualFriends)
 local contextualPlayedTogetherModule = require(script.Parent.ContextualPlayedTogether)
 local fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule = require(profilePlatform.Flags.FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceName)
-local fStringSocialProfileCurrentlyPlayingLayerModule = require(profilePlatform.Flags.FStringSocialProfileCurrentlyPlayingLayer)
-local fFlagProfileCurrentlyPlayingIXPEnabledModule = require(profilePlatform.Flags.FFlagProfileCurrentlyPlayingIXPEnabled)
 
 return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule (ref), useDispatch (ref), useEffectOnMount (ref), networkingGamesModule (ref), reactModule (ref), fFlagProfileCurrentlyPlayingIXPEnabledModule (ref), IXPService (ref), fStringSocialProfileCurrentlyPlayingLayerModule (ref), useSelector (ref), getDeepValue (ref), contextualPresenceModule (ref), contextualMutualFriendsModule (ref), contextualPlayedTogetherModule (ref), contextualGenericModule (ref), horizontalPageMargin (ref)
+	-- upvalues: useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule (ref), useDispatch (ref), useEffectOnMount (ref), networkingGamesModule (ref), useSelector (ref), getDeepValue (ref), reactModule (ref), contextualPresenceModule (ref), contextualMutualFriendsModule (ref), contextualPlayedTogetherModule (ref), contextualGenericModule (ref), horizontalPageMargin (ref)
 	local var1
 	local sourceInfo = useProfileWrapperContextModule().sourceInfo
 	local contextualInformation = (useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader) or {}).contextualInformation
@@ -35,12 +32,6 @@ return function(p1)
 			var3(networkingGamesModule.GetExperiencesDetails.API({ var2 })):catch(function(_) end)
 		end
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: fFlagProfileCurrentlyPlayingIXPEnabledModule (copy), context (ref), enumsModule (copy), IXPService (copy), fStringSocialProfileCurrentlyPlayingLayerModule (copy)
-		if fFlagProfileCurrentlyPlayingIXPEnabledModule and context == enumsModule.ContextualTypes.Presence then
-			IXPService:LogFlagLinkedUserLayerExposure(fStringSocialProfileCurrentlyPlayingLayerModule)
-		end
-	end, { context })
 	local var4 = useSelector(function(p2)
 		-- upvalues: getDeepValue (copy), var2 (ref)
 		return getDeepValue(p2, `ProfilePlatform.Games.byGameId.{tostring(var2)}.name`) or ""

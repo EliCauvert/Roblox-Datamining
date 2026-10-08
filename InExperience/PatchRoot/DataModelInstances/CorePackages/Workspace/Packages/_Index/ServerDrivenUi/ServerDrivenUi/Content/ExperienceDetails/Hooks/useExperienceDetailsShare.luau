@@ -27,6 +27,7 @@ local gameCopyExperienceLink = discoveryAnalyticsModule.Events.gameCopyExperienc
 local gameShareExperienceLink = discoveryAnalyticsModule.Events.gameShareExperienceLink
 local logResponseError = discoveryUtilsModule.logResponseError
 local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
+local fFlagLuaAppAddUniverseIdToEngagementEvents = require(parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents
 
 local function fetchShareLinkId(p1)
 	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref), httpRequestModule (ref), discoveryEventErrorLogger (ref), logResponseError (ref)
@@ -87,15 +88,16 @@ local function generateExperienceDetailsShareLinkUrl(p1, p2, p3)
 end
 
 local function handleCopyLink(p1, p2, p3, p4)
-	-- upvalues: fetchShareLinkId (ref), generateExperienceDetailsShareLinkUrl (ref), playersService (ref), gameCopyExperienceLink (ref), default (ref), setCurrentToastMessage (ref), toastType (ref)
+	-- upvalues: fetchShareLinkId (ref), generateExperienceDetailsShareLinkUrl (ref), playersService (ref), gameCopyExperienceLink (ref), fFlagLuaAppAddUniverseIdToEngagementEvents (ref), default (ref), setCurrentToastMessage (ref), toastType (ref)
 	fetchShareLinkId(p1):andThen(function(p5)
-		-- upvalues: generateExperienceDetailsShareLinkUrl (copy), p1 (ref), p2 (ref), playersService (copy), gameCopyExperienceLink (copy), p3 (ref), default (copy), p4 (ref), setCurrentToastMessage (copy), toastType (copy)
+		-- upvalues: generateExperienceDetailsShareLinkUrl (copy), p1 (ref), p2 (ref), playersService (copy), gameCopyExperienceLink (copy), p3 (ref), fFlagLuaAppAddUniverseIdToEngagementEvents (copy), default (copy), p4 (ref), setCurrentToastMessage (copy), toastType (copy)
 		local var2, var3 = generateExperienceDetailsShareLinkUrl(p5, p1, p2)
 		gameCopyExperienceLink({
 			ctx = p3,
 			uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
 			placeId = p2,
-			stamp = var3
+			stamp = var3,
+			universeId = if fFlagLuaAppAddUniverseIdToEngagementEvents then p1 else nil
 		}, p3)
 		default:shareUrl({ context = "GameDetailsMoreWebURL", url = var2 })
 		p4(setCurrentToastMessage({
@@ -112,14 +114,14 @@ local function handleCopyLink(p1, p2, p3, p4)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: useDispatch (ref), useAppPolicy (ref), reactModule (ref), handleCopyLink (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), fetchShareLinkId (ref), generateExperienceDetailsShareLinkUrl (ref), playersService (ref), gameShareExperienceLink (ref), default (ref), urlBuilder (ref)
+	-- upvalues: useDispatch (ref), useAppPolicy (ref), reactModule (ref), handleCopyLink (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), fetchShareLinkId (ref), generateExperienceDetailsShareLinkUrl (ref), playersService (ref), gameShareExperienceLink (ref), fFlagLuaAppAddUniverseIdToEngagementEvents (ref), default (ref), urlBuilder (ref)
 	local var2 = useDispatch()
 	local var3 = useAppPolicy(function(p4)
 		return p4.shouldShareToAccountProvider()
 	end)
 	
 	return reactModule.useCallback(function()
-		-- upvalues: p2 (ref), var3 (ref), handleCopyLink (copy), p1 (ref), p3 (ref), var2 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy), fetchShareLinkId (copy), generateExperienceDetailsShareLinkUrl (copy), playersService (copy), gameShareExperienceLink (copy), default (copy), urlBuilder (copy)
+		-- upvalues: p2 (ref), var3 (ref), handleCopyLink (copy), p1 (ref), p3 (ref), var2 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy), fetchShareLinkId (copy), generateExperienceDetailsShareLinkUrl (copy), playersService (copy), gameShareExperienceLink (copy), fFlagLuaAppAddUniverseIdToEngagementEvents (copy), default (copy), urlBuilder (copy)
 		if not p2 then return end
 		if not var3 then
 			handleCopyLink(p1, p2, p3, var2)
@@ -127,7 +129,7 @@ return function(p1, p2, p3)
 			return
 		elseif not var3 then
 			fetchShareLinkId(p1):andThen(function(p4)
-				-- upvalues: generateExperienceDetailsShareLinkUrl (copy), p1 (copy), p2 (copy), playersService (copy), gameShareExperienceLink (copy), p3 (copy), default (copy)
+				-- upvalues: generateExperienceDetailsShareLinkUrl (copy), p1 (copy), p2 (copy), playersService (copy), gameShareExperienceLink (copy), p3 (copy), fFlagLuaAppAddUniverseIdToEngagementEvents (copy), default (copy)
 				local var4, var5 = generateExperienceDetailsShareLinkUrl(p4, p1, p2)
 				gameShareExperienceLink({
 					shareToAppsflyer = true,
@@ -136,11 +138,12 @@ return function(p1, p2, p3)
 					placeId = p2,
 					shortShareLinkFailed = not p4,
 					stamp = var5,
-					linkId = p4
+					linkId = p4,
+					universeId = if fFlagLuaAppAddUniverseIdToEngagementEvents then p1 else nil
 				}, p3)
 				default:shareUrl({ context = "GameDetailsMoreWebURL", url = var4 })
 			end):catch(function(_)
-				-- upvalues: p1 (copy), p2 (copy), urlBuilder (copy), playersService (copy), gameShareExperienceLink (copy), p3 (copy), default (copy)
+				-- upvalues: p1 (copy), p2 (copy), urlBuilder (copy), playersService (copy), gameShareExperienceLink (copy), p3 (copy), fFlagLuaAppAddUniverseIdToEngagementEvents (copy), default (copy)
 				local _ = nil
 				local var4 = urlBuilder.game.info.appsflyer({ universeId = p1, placeId = p2 })
 				gameShareExperienceLink({
@@ -150,7 +153,8 @@ return function(p1, p2, p3)
 					ctx = p3,
 					uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
 					placeId = p2,
-					stamp = nil
+					stamp = nil,
+					universeId = if fFlagLuaAppAddUniverseIdToEngagementEvents then p1 else nil
 				}, p3)
 				default:shareUrl({ context = "GameDetailsMoreWebURL", url = var4 })
 			end)

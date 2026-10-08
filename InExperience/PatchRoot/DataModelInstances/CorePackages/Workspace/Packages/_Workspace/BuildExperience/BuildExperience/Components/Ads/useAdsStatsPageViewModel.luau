@@ -99,10 +99,9 @@ return function(p1, p2, p3, p4, p5, p6)
 		var16 = var18
 		var17 = var19
 	end
-	local var20
-	local var21, var22 = reactModule.useState(false)
-	local var23 = reactModule.useRef(nil)
-	local var24 = reactModule.useCallback(function()
+	local var20, var21 = reactModule.useState(false)
+	local var22 = reactModule.useRef(nil)
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: var13 (ref), fFlagEnablePaidAdsModule (copy), var11 (ref)
 		var13(false)
 		
@@ -110,44 +109,44 @@ return function(p1, p2, p3, p4, p5, p6)
 			var11.clearCreateError()
 		end
 	end, { var11.clearCreateError })
-	local var25, var26 = reactModule.useState(false)
-	local var27 = reactModule.useCallback(function()
-		-- upvalues: var26 (ref)
-		var26(false)
+	local var24, var25 = reactModule.useState(false)
+	local var26 = reactModule.useCallback(function()
+		-- upvalues: var25 (ref)
+		var25(false)
 	end, {})
-	local var28 = reactModule.useRef(false)
+	local var27 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var28 (ref), var11 (ref), var13 (ref), var26 (ref), var22 (ref), var23 (ref)
-		local current = var28.current
-		var28.current = var11.isCreatePending
+		-- upvalues: var27 (ref), var11 (ref), var13 (ref), var25 (ref), var21 (ref), var22 (ref)
+		local current = var27.current
+		var27.current = var11.isCreatePending
 		
 		if current and not var11.isCreatePending and not var11.hasCreateError then
 			var13(false)
-			var26(true)
-			var22(var23.current ~= nil)
+			var25(true)
+			var21(var22.current ~= nil)
 		end
 	end, { var11.isCreatePending, var11.hasCreateError })
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var9 (ref), var23 (ref), var21 (ref), var22 (ref)
-		if var21 and ((var10 == "Ready" and (var9 ~= nil and var9 ~= var23.current)) or var10 == "Failed") then
-			var23.current = nil
-			var22(false)
+		-- upvalues: var10 (ref), var9 (ref), var22 (ref), var20 (ref), var21 (ref)
+		if var20 and ((var10 == "Ready" and (var9 ~= nil and var9 ~= var22.current)) or var10 == "Failed") then
+			var22.current = nil
+			var21(false)
 		end
-	end, { var21, var10, var9 })
+	end, { var20, var10, var9 })
 	reactModule.useEffect(function()
-		-- upvalues: var23 (ref), var22 (ref), fFlagEnablePaidAdsModule (copy), var17 (write)
-		var23.current = nil
-		var22(false)
+		-- upvalues: var22 (ref), var21 (ref), fFlagEnablePaidAdsModule (copy), var17 (write)
+		var22.current = nil
+		var21(false)
 		
 		if fFlagEnablePaidAdsModule then
 			var17(nil)
 		end
 	end, { p1 })
-	local var29 = reactModule.useMemo(function()
+	local var28 = reactModule.useMemo(function()
 		-- upvalues: p4 (ref)
 		return if p4 == nil then DateTime.now().UnixTimestampMillis else p4
 	end, { p4 })
-	local var30 = useLocalization({
+	local var29 = useLocalization({
 		gamePlays = localizationStringsModule.ADS_STATS_GAME_PLAYS,
 		adClicks = localizationStringsModule.ADS_STATS_AD_CLICKS,
 		adViews = localizationStringsModule.ADS_STATS_AD_VIEWS,
@@ -163,32 +162,32 @@ return function(p1, p2, p3, p4, p5, p6)
 		adsManager = localizationStringsModule.ADS_STATS_ADS_MANAGER,
 		createSuccess = localizationStringsModule.ADS_STATS_CREATE_SUCCESS
 	})
-	local gamePlays = var30.gamePlays
-	local adClicks = var30.adClicks
-	local adViews = var30.adViews
-	local playTime = var30.playTime
-	local pastCampaigns = var30.pastCampaigns
-	local error = var30.error
-	local dateRange = var30.dateRange
-	local var31 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), var6 (ref), var29 (ref), WINDOW_DAYS (copy), mSPERDAY (copy), p1 (ref), t (copy), toStartMs (copy), campaignEndMs (copy), campaignEndExclusiveMs (copy), gamePlays (ref), iconName (copy), var8 (ref), analyticsUnitModule (copy), statsCardValueFormatModule (copy), iconPosition (copy), adClicks (ref), adViews (ref), playTime (ref), formatDateRange (copy), dateRange (ref)
-		local var32 = var2 or {}
-		local var33 = var6 or {}
-		local var34 = var29 - WINDOW_DAYS * mSPERDAY
-		local var35 = if p1 ~= nil then nil else tostring(p1)
+	local gamePlays = var29.gamePlays
+	local adClicks = var29.adClicks
+	local adViews = var29.adViews
+	local playTime = var29.playTime
+	local pastCampaigns = var29.pastCampaigns
+	local error = var29.error
+	local dateRange = var29.dateRange
+	local var30 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref), var6 (ref), var28 (ref), WINDOW_DAYS (copy), mSPERDAY (copy), p1 (ref), t (copy), toStartMs (copy), campaignEndMs (copy), campaignEndExclusiveMs (copy), gamePlays (ref), iconName (copy), var8 (ref), analyticsUnitModule (copy), statsCardValueFormatModule (copy), iconPosition (copy), adClicks (ref), adViews (ref), playTime (ref), formatDateRange (copy), dateRange (ref)
+		local var31 = var2 or {}
+		local var32 = var6 or {}
+		local var33 = var28 - WINDOW_DAYS * mSPERDAY
+		local var34 = if p1 ~= nil then nil else tostring(p1)
 		local t_1 = {}
 		local t_2 = {}
 		
-		for i, v in var32 do
-			if var35 ~= nil and v.targetUniverseId == var35 then
-				local id = var33[v.id] or t
-				local var36 = toStartMs(v.schedule.startTime)
-				local var37 = campaignEndMs(var36, v.schedule.durationInDays)
+		for i, v in var31 do
+			if var34 ~= nil and v.targetUniverseId == var34 then
+				local id = var32[v.id] or t
+				local var35 = toStartMs(v.schedule.startTime)
+				local var36 = campaignEndMs(var35, v.schedule.durationInDays)
 				
-				if not (v.status == "CANCELLED") and var29 < campaignEndExclusiveMs(var36, v.schedule.durationInDays) then
-					table.insert(t_1, { id = v.id, stats = id, startMs = var36, endMs = var37 })
-				elseif var34 <= var36 then
-					table.insert(t_2, { stats = id, startMs = var36, endMs = var37 })
+				if not (v.status == "CANCELLED") and var28 < campaignEndExclusiveMs(var35, v.schedule.durationInDays) then
+					table.insert(t_1, { id = v.id, stats = id, startMs = var35, endMs = var36 })
+				elseif var33 <= var35 then
+					table.insert(t_2, { stats = id, startMs = var35, endMs = var36 })
 				end
 			end
 		end
@@ -274,71 +273,54 @@ return function(p1, p2, p3, p4, p5, p6)
 		end
 		return { activeCampaigns = t_3, pastCampaigns = t_4 }
 	end, {
-		p1, var2, var6, var8, var29, gamePlays, adClicks, adViews, playTime,
-		dateRange, var30[localizationModule.RobloxLocaleIdKey]
+		p1, var2, var6, var8, var28, gamePlays, adClicks, adViews, playTime,
+		dateRange, var29[localizationModule.RobloxLocaleIdKey]
 	})
-	local var38 = if #var31.activeCampaigns <= 0 then #var31.pastCampaigns > 0 else true
-	local var39 = if var3 ~= "Failed" then var4 and var7 == "Failed" else true
-	local var40 = not var39 and (if var3 ~= "NotReady" then if var4 then true else not var38 and (p1 ~= nil and var10 == "NotReady") else true)
-	local var41 = var25 and (not var40 and not var39)
-	local var42 = if var9 ~= nil then nil else var9.offer
-	local var43 = if fFlagEnablePaidAdsModule then adCampaignEligibilityUtilsModule.getSelectableOffers(var9) else nil
-	local var44 = if var42 ~= nil then nil else var42.durationDays
-	local var45 = if var14 == nil or var44 == nil then nil else var14 + math.max(0, var44 - 1) * mSPERDAY
-	local var46 = adCampaignEligibilityUtilsModule.isEligibleForFreePromotion(var9) and adCampaignEligibilityUtilsModule.hasFreeCredit(var9)
-	
-	if fFlagEnablePaidAdsModule then
-		var20 = false
-		
-		if var9 ~= nil then
-			var20 = false
-			
-			if var9.userEligible == true then
-				var20 = false
-				
-				if var9.universeEligible == true then
-					local _ = var43 ~= nil
-				end
-			end
-		end
-	else
-		var20 = var46 and adCampaignEligibilityUtilsModule.hasUsableOffer(var9)
-	end
-	local var47 = useOpenWebViewWithResumeRefreshModule(var1(), var30.adsManager, var11.refresh)
+	local var37 = if #var30.activeCampaigns <= 0 then #var30.pastCampaigns > 0 else true
+	local var38 = if var3 ~= "Failed" then var4 and var7 == "Failed" else true
+	local var39 = not var38 and (if var3 ~= "NotReady" then if var4 then true else not var37 and (p1 ~= nil and var10 == "NotReady") else true)
+	local var40 = var24 and (not var39 and not var38)
+	local var41 = if var9 ~= nil then nil else var9.offer
+	local var42 = if fFlagEnablePaidAdsModule then adCampaignEligibilityUtilsModule.getSelectableOffers(var9) else nil
+	local var43 = if var41 ~= nil then nil else var41.durationDays
+	local var44 = if var14 == nil or var43 == nil then nil else var14 + math.max(0, var43 - 1) * mSPERDAY
+	local var45 = adCampaignEligibilityUtilsModule.isEligibleForFreePromotion(var9) and adCampaignEligibilityUtilsModule.hasFreeCredit(var9)
+	local var46 = adCampaignEligibilityUtilsModule.canCreateCampaign(var9)
+	local var47 = useOpenWebViewWithResumeRefreshModule(var1(), var29.adsManager, var11.refresh)
 	
 	return {
-		activeCampaigns = var31.activeCampaigns,
+		activeCampaigns = var30.activeCampaigns,
 		pastCampaignsTitle = pastCampaigns,
-		pastCampaigns = var31.pastCampaigns,
+		pastCampaigns = var30.pastCampaigns,
 		errorText = error,
-		isLoading = var40,
-		isFailed = var39,
-		hasCampaigns = var38,
-		emptyTitle = if var46 then var30.emptyTitleFree else var30.emptyTitle,
-		emptySubtitle = if var46 then var30.emptySubtitleFree else var30.emptySubtitle,
-		createButtonText = var30.create,
-		createButtonIsExternal = not var20,
-		isPromotionCreatePending = var11.isCreatePending or var21,
+		isLoading = var39,
+		isFailed = var38,
+		hasCampaigns = var37,
+		emptyTitle = if var45 then var29.emptyTitleFree else var29.emptyTitle,
+		emptySubtitle = if var45 then var29.emptySubtitleFree else var29.emptySubtitle,
+		createButtonText = var29.create,
+		createButtonIsExternal = not var46,
+		isPromotionCreatePending = var11.isCreatePending or var20,
 		hasPromotionCreateError = var11.hasCreateError,
 		promotionCreateErrorKind = var11.createErrorKind,
-		showCreateSuccessToast = var41,
-		createSuccessToastText = var30.createSuccess,
-		onDismissCreateSuccessToast = var27,
+		showCreateSuccessToast = var40,
+		createSuccessToastText = var29.createSuccess,
+		onDismissCreateSuccessToast = var26,
 		isPromotionSheetOpen = var12,
-		adCampaignDurationDays = var44,
-		adCampaignEstimatedPriceRobux = if var42 ~= nil then nil else var42.displayAmountRobux,
+		adCampaignDurationDays = var43,
+		adCampaignEstimatedPriceRobux = if var41 ~= nil then nil else var41.displayAmountRobux,
 		adCampaignOffers = var16,
 		adCampaignRunStartTimeMs = var14,
-		adCampaignRunEndTimeMs = var45,
+		adCampaignRunEndTimeMs = var44,
 		onCreatePrimary = reactModule.useCallback(function()
-			-- upvalues: var21 (ref), var20 (ref), var26 (ref), fFlagEnablePaidAdsModule (copy), var11 (ref), var15 (ref), var17 (write), var43 (ref), var13 (ref), var47 (ref)
-			if var21 then return end
-			if not var20 then
+			-- upvalues: var20 (ref), var46 (ref), var25 (ref), fFlagEnablePaidAdsModule (copy), var11 (ref), var15 (ref), var17 (write), var42 (ref), var13 (ref), var47 (ref)
+			if var20 then return end
+			if not var46 then
 				var47()
 				
 				return
 			end
-			var26(false)
+			var25(false)
 			
 			if not fFlagEnablePaidAdsModule then
 				var11.clearCreateError()
@@ -347,18 +329,18 @@ return function(p1, p2, p3, p4, p5, p6)
 			
 			if fFlagEnablePaidAdsModule then
 				var17(function(p7)
-					-- upvalues: var11 (copy), var43 (copy)
-					return if var11.hasCreateError and p7 ~= nil then p7 else var43
+					-- upvalues: var11 (copy), var42 (copy)
+					return if var11.hasCreateError and p7 ~= nil then p7 else var42
 				end)
 			end
 			var13(true)
 		end, {
-			var21, var20, var47, var11.clearCreateError, var11.hasCreateError, var43
+			var20, var46, var47, var11.clearCreateError, var11.hasCreateError, var42
 		}),
-		onClosePromotionSheet = var24,
+		onClosePromotionSheet = var23,
 		onCreateCampaign = reactModule.useCallback(function(p7)
-			-- upvalues: var23 (ref), var9 (ref), var11 (ref), fFlagEnablePaidAdsModule (copy)
-			var23.current = var9
+			-- upvalues: var22 (ref), var9 (ref), var11 (ref), fFlagEnablePaidAdsModule (copy)
+			var22.current = var9
 			var11.createCampaign(if fFlagEnablePaidAdsModule then p7 else nil)
 		end, { var9, var11.createCampaign })
 	}

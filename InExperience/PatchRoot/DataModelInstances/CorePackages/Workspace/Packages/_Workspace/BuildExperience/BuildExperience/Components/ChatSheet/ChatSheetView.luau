@@ -145,6 +145,7 @@ return function(p1)
 		isOpen = p1.isOpen,
 		snapPoints = p1.snapPoints,
 		defaultSnapPointIndex = p1.defaultSnapPointIndex,
+		onSnapPointChanged = p1.onSnapPointChanged,
 		size = if fFlagBuildDesktopReadinessModule then dialogSize.Large else nil,
 		onClose = p1.onClose
 	}, {

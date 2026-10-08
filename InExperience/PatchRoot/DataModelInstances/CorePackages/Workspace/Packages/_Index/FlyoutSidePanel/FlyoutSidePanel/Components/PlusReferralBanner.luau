@@ -4,7 +4,9 @@ local reactModule = require(parent.React)
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local appPage = require(parent.RobloxAppEnums).AppPage
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
+local fIntPlusReferralRewardRobux = sharedFlagsModule.FIntPlusReferralRewardRobux
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
@@ -17,14 +19,14 @@ local flyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnaly
 local usePlusReferralFlyoutNewBadgeModule = require(flyoutSidePanel.Hooks.usePlusReferralFlyoutNewBadge)
 
 return function(p1)
-	-- upvalues: useTokens (ref), useDispatch (ref), useLocalization (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), flyoutAnalyticsModule (ref), usePlusReferralFlyoutNewBadgeModule (ref), foundationModule (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
+	-- upvalues: useTokens (ref), useDispatch (ref), useLocalization (ref), fIntPlusReferralRewardRobux (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), flyoutAnalyticsModule (ref), usePlusReferralFlyoutNewBadgeModule (ref), foundationModule (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
 	local var2 = useTokens()
 	local var3 = useDispatch()
 	local var4 = useLocalization({
 		newBadgeText = "Feature.RobloxSubscription.Label.New",
 		bannerText = {
 			"Feature.RobloxSubscription.Heading.ReferralEntry",
-			robuxAmount = 100
+			amount = fIntPlusReferralRewardRobux
 		}
 	})
 	local var5 = usePlusReferralFlyoutNewBadgeModule(reactModule.useCallback(function()

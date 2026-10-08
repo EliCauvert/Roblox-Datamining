@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
+﻿local appBlox = script:FindFirstAncestor("AppBlox")
+local parent = appBlox.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local reactUtilsModule = require(parent.ReactUtils)
@@ -9,12 +10,13 @@ local scrollView = foundationModule.ScrollView
 local view = foundationModule.View
 local detailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
 local detailsPageLayoutUtilsModule = require(script.Parent.DetailsPageLayoutUtils)
+local fFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule = require(appBlox.Flags.FFlagDetailsPageLayoutUseMeasuredSizeForInitialScroll)
 local t = { Selectable = false }
 local var1 = reactModule.createBinding(0)
 local _ = nil
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), reactUtilsModule (ref), var1 (ref), detailsPageLayoutUtilsModule (ref), view (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), scrollView (ref), t (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref)
+	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), fFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule (ref), reactUtilsModule (ref), var1 (ref), detailsPageLayoutUtilsModule (ref), view (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), scrollView (ref), t (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref)
 	local var2 = reactModule.useContext(detailsPageLayoutContextModule)
 	local contentTopOffset = var2.contentTopOffset
 	local hasFullBleed = var2.hasFullBleed
@@ -35,11 +37,14 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local gradientMidTransparency = var2.gradientMidTransparency
 	assert(testId, "DetailsPageLayout.Content must be used within DetailsPageLayout.Root")
 	local var3 = reactUtilsModule.useComposedRef(p1.scrollingFrameRef, reactModule.useCallback(function(p3)
-		-- upvalues: initialScrollY (ref)
-		if p3 and initialScrollY > 0 then
+		-- upvalues: fFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule (copy), hasFullBleed (ref), initialScrollY (ref)
+		if p3 and (fFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule and hasFullBleed or initialScrollY > 0) then
 			p3.CanvasPosition = Vector2.new(0, initialScrollY)
 		end
-	end, { initialScrollY }))
+	end, {
+		initialScrollY,
+		if fFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule then hasFullBleed else nil
+	}))
 	local var4, var5 = reactModule.useBinding(initialScrollY)
 	local var6, var7 = reactModule.useBinding(0)
 	local var8 = reactModule.useCallback(function(p3)

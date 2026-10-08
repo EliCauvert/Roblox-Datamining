@@ -9,6 +9,7 @@
 	Recommendations = "Feature.Catalog.Label.Recommendations",
 	ProfileFramesUnlockBanner = "Feature.Avatar.Label.ProfileFramesUnlockBanner",
 	Subscribe = "Feature.RobloxSubscription.Action.Subscribe",
+	TryItForFree = "Feature.RobloxSubscription.Action.TryItForFree",
 	Save = "Feature.Profile.Action.Save",
 	EditProfilePicture = "Feature.Avatar.Action.EditProfilePicture",
 	SwitchToR15 = "Feature.Avatar.Label.SwitchToR15",

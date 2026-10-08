@@ -27,6 +27,7 @@ local conversationListViewRecyclerItemsModule = require(script.Parent.Conversati
 local appChatChatLandingInitialFetchLimit = game:DefineFastInt("AppChatChatLandingInitialFetchLimit", 5)
 local fFlagAppIaScrollAway = sharedFlagsModule.FFlagAppIaScrollAway
 local fFlagFriendsChatConversationListShowScrollBar = sharedFlagsModule.FFlagFriendsChatConversationListShowScrollBar
+local fFlagViewRecyclerReact06 = sharedFlagsModule.FFlagViewRecyclerReact06
 local appChatChatLandingInitialFetchMinimumConversations = game:DefineFastInt("AppChatChatLandingInitialFetchMinimumConversations", 30)
 local fFlagAppChatRemoveConversationListDividerIxpEnabledModule = require(appChat.Flags.FFlagAppChatRemoveConversationListDividerIxpEnabled)
 local fStringAppChatRemoveConversationListDividerIxpLayerModule = require(appChat.Flags.FStringAppChatRemoveConversationListDividerIxpLayer)
@@ -329,7 +330,7 @@ local function useListData(p6, p7)
 end
 
 return reactModule.memo(function(p6)
-	-- upvalues: cryoModule (ref), t_1 (ref), useTokens (ref), usePagination (ref), useUnderfillPagination (ref), useConversationListScrollbar (ref), useScrollTracking (ref), reactModule (ref), appChatPerfExperimentation (ref), partyPageCarouselExperimentation (ref), squadQuickStartExperimentation (ref), fFlagAppChatRemoveConversationListDividerIxpEnabledModule (ref), IXPService (ref), fStringAppChatRemoveConversationListDividerIxpLayerModule (ref), focusNavigationService (ref), coreGui (ref), appPage (ref), constants (ref), enums (ref), usePresentationSignal (ref), fFlagAppIaScrollAway (ref), conversationListViewRecyclerItemsModule (ref), buildConversationItems (ref), useListData (ref), useMeasuredLayout (ref), viewRecyclerModule (ref), view (ref), appChatPerfChatLandingPaginationOnStartReachedUnits (ref), appChatPerfChatLandingPaginationOnEndReachedUnits (ref)
+	-- upvalues: cryoModule (ref), t_1 (ref), useTokens (ref), usePagination (ref), useUnderfillPagination (ref), useConversationListScrollbar (ref), useScrollTracking (ref), reactModule (ref), appChatPerfExperimentation (ref), partyPageCarouselExperimentation (ref), squadQuickStartExperimentation (ref), fFlagAppChatRemoveConversationListDividerIxpEnabledModule (ref), IXPService (ref), fStringAppChatRemoveConversationListDividerIxpLayerModule (ref), focusNavigationService (ref), coreGui (ref), appPage (ref), constants (ref), enums (ref), usePresentationSignal (ref), fFlagAppIaScrollAway (ref), conversationListViewRecyclerItemsModule (ref), buildConversationItems (ref), useListData (ref), useMeasuredLayout (ref), viewRecyclerModule (ref), view (ref), appChatPerfChatLandingPaginationOnStartReachedUnits (ref), appChatPerfChatLandingPaginationOnEndReachedUnits (ref), fFlagViewRecyclerReact06 (ref)
 	local var2 = cryoModule.Dictionary.join(t_1, p6)
 	local entryHeight = var2.entryHeight
 	local itemList = var2.itemList
@@ -484,7 +485,7 @@ return reactModule.memo(function(p6)
 			onEndReached = if var4 then var7 else nil,
 			startReachedThreshold = entryHeight * appChatPerfChatLandingPaginationOnStartReachedUnits,
 			endReachedThreshold = entryHeight * appChatPerfChatLandingPaginationOnEndReachedUnits,
-			autoScrollOnChange = reactModule.useMemo(function()
+			autoScrollOnChange = if fFlagViewRecyclerReact06 then viewRecyclerModule.AutoScrollPolicy.WhenAtStart else reactModule.useMemo(function()
 				-- upvalues: var25 (ref), var28 (ref), var29 (ref), viewRecyclerModule (copy)
 				return function(p7, p8)
 					-- upvalues: var29 (ref), var28 (ref), viewRecyclerModule (copy), var25 (ref)
@@ -506,6 +507,7 @@ return reactModule.memo(function(p6)
 					return false
 				end
 			end, { var25 }),
+			autoScrollThreshold = if fFlagViewRecyclerReact06 then 33 else nil,
 			scrollingFrameProps = {
 				Name = "RCTScrollView",
 				BackgroundTransparency = 1,

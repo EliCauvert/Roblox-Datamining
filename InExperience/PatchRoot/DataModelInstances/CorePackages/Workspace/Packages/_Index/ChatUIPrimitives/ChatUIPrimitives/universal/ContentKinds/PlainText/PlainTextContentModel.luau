@@ -15,4 +15,8 @@ function t.fromText(p1)
 	return { plainText = t.detailFromText(p1) }
 end
 
+function t.draftFromText(p1)
+	return { plainText = { text = p1 } }
+end
+
 return t

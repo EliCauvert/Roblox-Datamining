@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnablePlusReferralLegalDisclosure", false) and require(script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet

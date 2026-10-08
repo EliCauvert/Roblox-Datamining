@@ -22,6 +22,8 @@
 	WindowedListFrame = require(script.WindowedListFrame),
 	TitleAndParagraph = require(script.TitleAndParagraph),
 	DisclaimerLinks = require(script.DisclaimerLinks),
+	DisclaimerTextWithLinks = require(script.DisclaimerTextWithLinks),
+	LegalTextWithLinks = require(script.LegalTextWithLinks),
 	DisclaimerLinkButtons = require(script.DisclaimerLinkButtons),
 	RegisterAuditContent = require(script.RegisterAuditContent),
 	RegisterAdditionalAuditContent = require(script.RegisterAdditionalAuditContent),

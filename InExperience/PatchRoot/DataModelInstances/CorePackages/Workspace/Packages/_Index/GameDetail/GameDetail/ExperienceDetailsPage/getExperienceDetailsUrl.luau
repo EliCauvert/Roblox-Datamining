@@ -5,9 +5,10 @@ local sduiCapabilities = require(parent.SduiSharedUtilities).SduiCapabilities
 local fFlagSduiCapabilityBindings = require(parent.SharedFlags).FFlagSduiCapabilityBindings
 local fFlagSduiEdpClientTemplateCache = require(parent.SharedFlags).FFlagSduiEdpClientTemplateCache
 local fFlagInfoTableStableItemKeys = require(parent.SharedFlags).FFlagInfoTableStableItemKeys
+local fFlagLuaAppEdpMomentVideo = require(parent.SharedFlags).FFlagLuaAppEdpMomentVideo
 
 return function(p1)
-	-- upvalues: urlBuilder (ref), url (ref), fFlagSduiCapabilityBindings (ref), fFlagSduiEdpClientTemplateCache (ref), parent (ref), fFlagInfoTableStableItemKeys (ref), sduiCapabilities (ref)
+	-- upvalues: urlBuilder (ref), url (ref), fFlagSduiCapabilityBindings (ref), fFlagSduiEdpClientTemplateCache (ref), parent (ref), fFlagLuaAppEdpMomentVideo (ref), fFlagInfoTableStableItemKeys (ref), sduiCapabilities (ref)
 	local var1 = urlBuilder.new({
 		path = "experience-details-api/v2/universes/{universeId}/experience-details",
 		base = url.APIS_URL
@@ -23,7 +24,8 @@ return function(p1)
 			"CAPABILITY_SUPPORTS_PIN_SHORTCUT_ACTION",
 			"CAPABILITY_SUPPORTS_SCALED_PLAY_BUTTON_AND_IMAGE_SIZES",
 			"CAPABILITY_SUPPORTS_CONTAINER_QUERIES",
-			"CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL"
+			"CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL",
+			if fFlagLuaAppEdpMomentVideo then "CAPABILITY_SUPPORTS_EDP_MEDIA_GALLERY_MOMENT_VIDEO" else nil
 		}
 		
 		if fFlagInfoTableStableItemKeys then

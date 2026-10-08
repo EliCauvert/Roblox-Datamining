@@ -114,6 +114,9 @@ end
 if game:DefineFastFlag("AppBuildReloadRemote", false) then
 	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/ServerBuildExperiencePlaytestTeleport", script.Parent)
 end
+if game:DefineFastFlag("RoCaptchaServerHandlerEnabled", false) and require(robloxGui.Modules.Common.Flags.FStringRoCaptchaUniverseIds) ~= "" then
+	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/ServerRoCaptchaHandler", script.Parent)
+end
 scriptContextService:AddCoreScriptLocal("ServerCoreScripts/PlayerViewCapability", script.Parent)
 
 if require(robloxGui.Modules.Common.Flags.GetFFlagEnableVoiceDefaultServerScript)() then

@@ -1,10 +1,9 @@
 ﻿local virtualCursorModular = script:FindFirstAncestor("VirtualCursorModular")
-local parent = virtualCursorModular.Parent
+local _ = virtualCursorModular.Parent
 local tweenService = game:GetService("TweenService")
 local VRService = game:GetService("VRService")
 local coreGuiService = game:GetService("CoreGui")
 local propertiesModule = require(virtualCursorModular.Properties)
-local getFFlagVirtualCursorDisplayOrder = require(parent.SharedFlags).getFFlagVirtualCursorDisplayOrder
 local t = {}
 t.__index = t
 local _ = {
@@ -16,15 +15,12 @@ local _ = {
 local t_1 = { Default = 2, Hover = 2, Pressed = 1.7, Arrow = 2 }
 
 function t.new()
-	-- upvalues: getFFlagVirtualCursorDisplayOrder (ref), propertiesModule (ref), coreGuiService (ref), tweenService (ref), t (ref)
+	-- upvalues: propertiesModule (ref), coreGuiService (ref), tweenService (ref), t (ref)
 	local cursorContainer = Instance.new("ScreenGui")
 	cursorContainer.Enabled = false
 	cursorContainer.IgnoreGuiInset = true
-	cursorContainer.DisplayOrder = if getFFlagVirtualCursorDisplayOrder() then 1e999 else 100
-	
-	if getFFlagVirtualCursorDisplayOrder() then
-		cursorContainer.OnTopOfCoreBlur = true
-	end
+	cursorContainer.DisplayOrder = 1e999
+	cursorContainer.OnTopOfCoreBlur = true
 	cursorContainer.Name = "CursorContainer"
 	local imageLabel = Instance.new("ImageLabel")
 	imageLabel.Active = false

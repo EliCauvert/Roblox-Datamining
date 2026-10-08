@@ -43,6 +43,7 @@ return function(p1)
 	-- upvalues: reactModule (ref), robloxAppLocalesModule (ref), localizationService (ref), localizationModule (ref), libraryThemeProviderModule (ref), buildExperienceCompositionStyleSheetModule (ref), LibraryPregameContent (ref)
 	return reactModule.createElement("ScreenGui", {
 		ResetOnSpawn = false,
+		ClipToDeviceSafeArea = false,
 		DisplayOrder = p1.displayOrder,
 		ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling

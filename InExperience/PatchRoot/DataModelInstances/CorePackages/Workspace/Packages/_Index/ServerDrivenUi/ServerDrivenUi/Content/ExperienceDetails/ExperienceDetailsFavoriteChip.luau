@@ -12,12 +12,13 @@ local toastRoduxModule = require(parent.ToastRodux)
 local toastType = toastRoduxModule.Enums.ToastType
 local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
 local gameFavorite = require(parent.DiscoveryAnalytics).Events.gameFavorite
+local fFlagLuaAppAddUniverseIdToEngagementEvents = require(parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useLocalization = localizationModule.Hooks.useLocalization
 local useOptimisticUpdateStatusModule = require(serverDrivenUi.Content.ExperienceDetails.Hooks.useOptimisticUpdateStatus)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), game (ref), signalsReactModule (ref), useLocalization (ref), reactModule (ref), playersService (ref), gameFavorite (ref), setCurrentToastMessage (ref), toastType (ref), useOptimisticUpdateStatusModule (ref), sduiChip (ref), foundationModule (ref)
+	-- upvalues: useDispatch (ref), game (ref), signalsReactModule (ref), useLocalization (ref), reactModule (ref), playersService (ref), gameFavorite (ref), fFlagLuaAppAddUniverseIdToEngagementEvents (ref), setCurrentToastMessage (ref), toastType (ref), useOptimisticUpdateStatusModule (ref), sduiChip (ref), foundationModule (ref)
 	local layoutOrder = p1.layoutOrder
 	local universeId = p1.universeId
 	local var1 = useDispatch()
@@ -36,7 +37,7 @@ return reactModule.memo(function(p1)
 		leadingIconName = foundationModule.Enums.IconName.Star,
 		leadingIconVariant = if var2 then foundationModule.Enums.IconVariant.Filled else nil,
 		onActivated = useOptimisticUpdateStatusModule(reactModule.useCallback(function()
-			-- upvalues: var2 (ref), var4 (ref), playersService (copy), gameFavorite (copy), game (copy), universeId (ref)
+			-- upvalues: var2 (ref), var4 (ref), playersService (copy), gameFavorite (copy), fFlagLuaAppAddUniverseIdToEngagementEvents (copy), universeId (ref), game (copy)
 			local var5 = not var2
 			
 			if var4 then
@@ -44,7 +45,8 @@ return reactModule.memo(function(p1)
 					ctx = "ExperienceDetailsFavoriteChip",
 					uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
 					placeId = var4,
-					state = if var5 then "on" else "off"
+					state = if var5 then "on" else "off",
+					universeId = if fFlagLuaAppAddUniverseIdToEngagementEvents then universeId else nil
 				}, "ExperienceDetailsFavoriteChip")
 			end
 			return game.getFavoritesStore(false).updateFavorite(universeId, var5)

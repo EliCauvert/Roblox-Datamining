@@ -1,1 +1,1 @@
-﻿return require(script.Parent.GetFFlagIsSquadEnabled)() and game:DefineFastFlag("LuaAppEnablePlayableStateWhenLoading", false)
+﻿return require(script.Parent.GetFFlagIsSquadEnabled)()

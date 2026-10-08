@@ -11,5 +11,6 @@ return {
 		translatedText = tModule.optional(var1),
 		originalText = tModule.optional(var1),
 		wasRewritten = tModule.boolean
-	})
+	}),
+	isValidDraft = tModule.strictInterface({ text = tModule.string })
 }

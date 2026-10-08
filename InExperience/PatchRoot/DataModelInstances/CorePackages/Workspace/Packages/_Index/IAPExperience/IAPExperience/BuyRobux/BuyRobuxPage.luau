@@ -28,7 +28,6 @@ local animatorModule = require(parent_1.Generic.Animator)
 local getEnableCompensatingScrollingFrameModule = require(parent_1.Flags.getEnableCompensatingScrollingFrame)
 local getUserInputEventDataModule = require(parent_1.Utility.getUserInputEventData)
 local robuxPackageModule = require(parent.RobuxPackage)
-local fFlagEnableLeftNavOnConsole = require(parent_2.SharedFlags).FFlagEnableLeftNavOnConsole
 local name = roactModule.Component:extend(script.Name)
 local goldrobux = images["icons/common/goldrobux"]
 local block = images["icons/logo/block"]
@@ -157,11 +156,11 @@ function name.reportScrollingFrameCompensationHappened(p1)
 end
 
 function name.renderWithLocale(p1, p2, p3)
-	-- upvalues: withStyle (ref), roactModule (ref), robuxPackageModule (ref), list (ref), fFlagEnableLeftNavOnConsole (ref), fullscreenFrame (ref), roactGamepadModule (ref), colorMode (ref), imageSetButton (ref), close (ref), cursorKind (ref), animatorModule (ref), imageSetLabel (ref), block (ref), fitTextLabel (ref), fitFrameHorizontal (ref), goldrobux (ref), formatNumberModule (ref), localizationService (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
+	-- upvalues: withStyle (ref), roactModule (ref), robuxPackageModule (ref), list (ref), fullscreenFrame (ref), colorMode (ref), imageSetButton (ref), close (ref), cursorKind (ref), animatorModule (ref), imageSetLabel (ref), block (ref), fitTextLabel (ref), fitFrameHorizontal (ref), goldrobux (ref), formatNumberModule (ref), localizationService (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local props = p1.props
 	
 	return withStyle(function(p4)
-		-- upvalues: props (ref), p1 (ref), roactModule (copy), robuxPackageModule (copy), list (copy), fFlagEnableLeftNavOnConsole (copy), fullscreenFrame (copy), roactGamepadModule (copy), colorMode (copy), imageSetButton (copy), close (copy), p3 (ref), cursorKind (copy), animatorModule (copy), imageSetLabel (copy), block (copy), fitTextLabel (copy), p2 (ref), fitFrameHorizontal (copy), goldrobux (copy), formatNumberModule (copy), localizationService (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
+		-- upvalues: props (ref), p1 (ref), roactModule (copy), robuxPackageModule (copy), list (copy), fullscreenFrame (copy), colorMode (copy), imageSetButton (copy), close (copy), p3 (ref), cursorKind (copy), animatorModule (copy), imageSetLabel (copy), block (copy), fitTextLabel (copy), p2 (ref), fitFrameHorizontal (copy), goldrobux (copy), formatNumberModule (copy), localizationService (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		local theme = p4.Theme
 		local font = p4.Font
 		local var1 = props.robuxPackages ~= nil
@@ -226,10 +225,9 @@ function name.renderWithLocale(p1, p2, p3)
 				end
 			})
 		end
-		return roactModule.createElement(if fFlagEnableLeftNavOnConsole then fullscreenFrame else roactGamepadModule.Focusable.Frame, {
-			BackgroundColor3 = theme.BackgroundDefault.Color,
-			BackgroundTransparency = if fFlagEnableLeftNavOnConsole then 0 else 0.8,
-			Size = if fFlagEnableLeftNavOnConsole then nil else UDim2.new(1, 0, 1, 0)
+		return roactModule.createElement(fullscreenFrame, {
+			BackgroundTransparency = 0,
+			BackgroundColor3 = theme.BackgroundDefault.Color
 		}, {
 			BuyRobuxPageBackground = roactModule.createElement("Frame", {
 				BackgroundTransparency = 0,

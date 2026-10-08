@@ -26,7 +26,6 @@ local fFlagSduiMarketplaceCatalogCategorySupport = sharedFlagsModule.FFlagSduiMa
 local fFlagSduiMarketplaceCatalogSortSupport = sharedFlagsModule.FFlagSduiMarketplaceCatalogSortSupport
 local fFlagSduiAddMarketplaceEntityDataHydration = sharedFlagsModule.FFlagSduiAddMarketplaceEntityDataHydration
 local fFlagSduiAddCollectibleItemDataHydration = sharedFlagsModule.FFlagSduiAddCollectibleItemDataHydration
-local fFlagSduiGameIconSupport = sharedFlagsModule.FFlagSduiGameIconSupport
 local fFlagSduiDevStoreSeeAllSupport = sharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
 local fFlagSduiCapabilityBindings = sharedFlagsModule.FFlagSduiCapabilityBindings
 local fFlagMigrateGameInfoToStore = sharedFlagsModule.FFlagMigrateGameInfoToStore
@@ -429,10 +428,10 @@ local _ = function(p8, p9, p10, p11)
 end
 
 local function getDataHydrationField(p8, p9, p10, p11, p12)
-	-- upvalues: fFlagMigrateGameInfoToStore (ref), fFlagSduiGameIconSupport (ref), getUniverseIcon (ref), dataHydrationModule (ref), getDataObjectSignal (ref), tryGetPathFromDataModule (ref), calculateDerivedFieldValue (ref)
+	-- upvalues: fFlagMigrateGameInfoToStore (ref), getUniverseIcon (ref), dataHydrationModule (ref), getDataObjectSignal (ref), tryGetPathFromDataModule (ref), calculateDerivedFieldValue (ref)
 	if #p9 < 2 then
 		return nil, nil
-	elseif not fFlagMigrateGameInfoToStore and fFlagSduiGameIconSupport and (p8 == "universe" and #p9 == 2) then
+	elseif not fFlagMigrateGameInfoToStore and p8 == "universe" and #p9 == 2 then
 		if p9[2] == "icon" then
 			return getUniverseIcon(p10, p11)
 		elseif p9[2] == "largeIcon" then
@@ -464,53 +463,51 @@ local t_1 = {
 	badge = getDataHydrationField,
 	creator = getDataHydrationField,
 	universe = if fFlagMigrateGameInfoToStore then function(p13, p14, p15, p16, p17)
-		-- upvalues: fFlagSduiGameIconSupport (ref), getUniverseIcon (ref), dataHydrationModule (ref), getUniverseVoteRatingText (ref), fFlagSduiSupportRatingNoPercent (ref), getDataHydrationField (ref), tryGetPathFromDataModule (ref), calculateDerivedFieldValue (ref), dataStatus (ref)
+		-- upvalues: getUniverseIcon (ref), dataHydrationModule (ref), getUniverseVoteRatingText (ref), fFlagSduiSupportRatingNoPercent (ref), getDataHydrationField (ref), tryGetPathFromDataModule (ref), calculateDerivedFieldValue (ref), dataStatus (ref)
 		if #p14 == 2 then
-			if fFlagSduiGameIconSupport then
-				if p14[2] == "icon" then
-					return getUniverseIcon(p15, p16)
-				elseif p14[2] == "largeIcon" then
-					return getUniverseIcon(p15, p16, dataHydrationModule.Game.GameIconSize.Large)
-				elseif p14[2] == "rating_text_formatted_brief" then
-					return getUniverseVoteRatingText(p15, p16)
-				elseif fFlagSduiSupportRatingNoPercent and p14[2] == "rating_text_no_percent" then
-					return getUniverseVoteRatingText(p15, p16, true)
-				elseif not p17 then
-					return getDataHydrationField(p13, p14, p15, p16, p17)
-				end
-				local var14, var15
-				local gameInfoStore = dataHydrationModule.Game.getGameInfoStore(false)
-				local gameInfo, gameInfo_1 = gameInfoStore.getGameInfo(p15)
-				local var16 = gameInfo.data(p16)
-				local var17 = gameInfo.status(p16)
+			if p14[2] == "icon" then
+				return getUniverseIcon(p15, p16)
+			elseif p14[2] == "largeIcon" then
+				return getUniverseIcon(p15, p16, dataHydrationModule.Game.GameIconSize.Large)
+			elseif p14[2] == "rating_text_formatted_brief" then
+				return getUniverseVoteRatingText(p15, p16)
+			elseif fFlagSduiSupportRatingNoPercent and p14[2] == "rating_text_no_percent" then
+				return getUniverseVoteRatingText(p15, p16, true)
+			elseif not p17 then
+				return getDataHydrationField(p13, p14, p15, p16, p17)
+			end
+			local var14, var15
+			local gameInfoStore = dataHydrationModule.Game.getGameInfoStore(false)
+			local gameInfo, gameInfo_1 = gameInfoStore.getGameInfo(p15)
+			local var16 = gameInfo.data(p16)
+			local var17 = gameInfo.status(p16)
+			
+			if var16 == nil then
+				var14 = false
+				var15 = nil
+			else
+				local var18, var19 = tryGetPathFromDataModule(var16, p14, 2)
 				
-				if var16 == nil then
+				if var18 then
+					var14 = true
+					var15 = var19
+				elseif #p14 == 2 then
+					local var20 = calculateDerivedFieldValue(p13, p14[2], var16, p16)
+					var14 = var20 ~= nil
+					var15 = var20
+				else
 					var14 = false
 					var15 = nil
-				else
-					local var18, var19 = tryGetPathFromDataModule(var16, p14, 2)
-					
-					if var18 then
-						var14 = true
-						var15 = var19
-					elseif #p14 == 2 then
-						local var20 = calculateDerivedFieldValue(p13, p14[2], var16, p16)
-						var14 = var20 ~= nil
-						var15 = var20
-					else
-						var14 = false
-						var15 = nil
-					end
 				end
-				if var14 then
-					return var15, var17
-				elseif gameInfo_1 then
-					gameInfoStore.getAndFetchGameInfo(p15)
-					
-					return nil, dataStatus.NotReady
-				end
-				return nil, var17
 			end
+			if var14 then
+				return var15, var17
+			elseif gameInfo_1 then
+				gameInfoStore.getAndFetchGameInfo(p15)
+				
+				return nil, dataStatus.NotReady
+			end
+			return nil, var17
 		end
 	end else getDataHydrationField,
 	ageRecommendation = getDataHydrationField,

@@ -5,11 +5,10 @@ local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Stor
 local surfaceContextModule = require(robloxSubscriptionPurchaseApp.Enums.SurfaceContext)
 local surfaceNameModule = require(robloxSubscriptionPurchaseApp.Enums.SurfaceName)
 local _ = require(robloxSubscriptionPurchaseApp.types)
-local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
 local fFlagEnablePlusReferralLandingSheet = require(robloxSubscriptionPurchaseApp.Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
 
 return function(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), fFlagEnablePlusReferralLandingSheet (ref), surfaceContextModule (ref), surfaceNameModule (ref), initiateRobloxSubscriptionPurchaseInternalModule (ref), robloxSubscriptionOverlayControllerModule (ref)
+	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagEnablePlusReferralLandingSheet (ref), surfaceContextModule (ref), surfaceNameModule (ref), initiateRobloxSubscriptionPurchaseInternalModule (ref), robloxSubscriptionOverlayControllerModule (ref)
 	local var1 = robloxSubscriptionStoreModule.get()
 	
 	if p2 then
@@ -19,7 +18,7 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8)
 		if p2.onBackButtonActivated then
 			var1.setOnBackButtonActivated(p2.onBackButtonActivated)
 		end
-		if fFlagRobloxPlusFAEFreeTrialModule and p2.onCtaOverride then
+		if p2.onCtaOverride then
 			var1.setOnCtaOverride(p2.onCtaOverride)
 		end
 	end

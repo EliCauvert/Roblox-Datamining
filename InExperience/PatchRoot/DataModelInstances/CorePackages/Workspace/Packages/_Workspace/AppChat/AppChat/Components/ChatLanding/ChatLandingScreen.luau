@@ -18,7 +18,6 @@ local getFFlagEnablePushNotificationsUpsellModalChat = require(parent.SharedFlag
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableHeaderBarButtonsUpdate = sharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
-local fFlagAppChatChatLandingScreenRenameFixEnabled = sharedFlagsModule.FFlagAppChatChatLandingScreenRenameFixEnabled
 local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
 local argoPartyExperimentation = require(parent.SocialExperiments).ArgoPartyExperimentation
 local fFlagAppChatIxpScreenExposureModule = require(appChat.Flags.FFlagAppChatIxpScreenExposure)
@@ -200,7 +199,7 @@ function chatLandingScreen.render(p1)
 end
 
 function chatLandingScreen.didMount(p1)
-	-- upvalues: loggerModule (ref), getFFlagEnableAppChatInExperience (ref), sharedFlagsModule (ref), fFlagAppChatChatLandingScreenRenameFixEnabled (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), getFFlagIsSquadEnabled (ref)
+	-- upvalues: loggerModule (ref), getFFlagEnableAppChatInExperience (ref), sharedFlagsModule (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), getFFlagIsSquadEnabled (ref)
 	loggerModule:info("{screen} mounted")
 	local navigation = p1.props.navigation
 	local var1 = if navigation.getScreenProps("navigateToRootStack", nil) then true else false
@@ -210,7 +209,6 @@ function chatLandingScreen.didMount(p1)
 	if sharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate then
 		var2 -= navigation.getScreenProps("topBarUtilityIconSideMargin", 0)
 	end
-	local _ = nil
 	p1.setScreenTopBar({
 		shouldRenderCenter = false,
 		filterText = "",
@@ -218,7 +216,7 @@ function chatLandingScreen.didMount(p1)
 		isRoot = true,
 		isTitleLeftAligned = true,
 		shouldBoldHeader = true,
-		headerText = if fFlagAppChatChatLandingScreenRenameFixEnabled then if argoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then {
+		headerText = if argoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then {
 			raw = "CommonUI.Features.Label.Chat",
 			shouldLocalize = true
 		} else {
@@ -229,12 +227,6 @@ function chatLandingScreen.didMount(p1)
 			shouldLocalize = true
 		} else {
 			raw = "CommonUI.Features.Label.Chat",
-			shouldLocalize = true
-		} elseif argoPartyExperimentation.getIsRenameEnabled() or not getFFlagIsSquadEnabled() then {
-			raw = "CommonUI.Features.Label.Chat",
-			shouldLocalize = true
-		} else {
-			raw = "Feature.Squads.Label.Party",
 			shouldLocalize = true
 		},
 		closeButtonEnabled = isInExperience and var1,

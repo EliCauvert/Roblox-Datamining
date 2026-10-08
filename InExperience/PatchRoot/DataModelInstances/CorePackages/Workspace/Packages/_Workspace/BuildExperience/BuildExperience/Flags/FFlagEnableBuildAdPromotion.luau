@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnableBuildAdPromotion6", false)
+﻿return require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags).FFlagEnableBuildAdPromotion

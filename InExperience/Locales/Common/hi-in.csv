@@ -89,6 +89,8 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,आपके ई�
 Authentication.Login.WeChat.AntiAddictionText,"बुरे एक्सपीरिएंस से बचें. पायरेटेड का इस्तेमाल न करें. खुद को सुरक्षित रखने और धोखाधड़ी से बचने के लिए सतर्क रहें. नए एक्सपीरिएंस की खोज करना, आपके दिमाग के लिए अच्छा है, लेकिन बहुत ज़्यादा आपके स्वास्थ्य को नुकसान पहुँचा सकता है. अपना समय अच्छी तरह से मैनेज करें और स्वस्थ रहें."
 Authentication.SignUp.Action.ApplyOnNextRespawn,अगली बार रीस्पॉन करने पर लागू करें
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.Create,क्रिएट करें
+Authentication.SignUp.Action.CreateAccountSentenceCase,अकाउंट बनाएँ
 Authentication.SignUp.Action.ExitModalLeave,छोड़ें
 Authentication.SignUp.Action.RespawnNow,अभी रीस्पॉन करें
 Authentication.SignUp.Action.StartPlay,खेलना शुरू करें
@@ -96,15 +98,18 @@ Authentication.SignUp.Button.OKCaptialized,ठीक है
 Authentication.SignUp.Button.RetryLogIn,फिर से लॉग इन करने की कोशिश करें
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} पर मौजूद आपका अकाउंट पहले से ही Roblox अकाउंट से लिंक किया हुआ है. दोबारा लॉग इन करने की कोशिश करें.
 Authentication.SignUp.Description.BirthdayHint,तारीख डालें
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"अकाउंट बनाने का मतलब है कि आप आर्बिट्रेशन सहित हमारी {startTermsTag}शर्तों{endTermsTag} से सहमत हैं और आपको हमारी {startPrivacyTag}प्राइवेसी पॉलिसी{endPrivacyTag} स्वीकार है. अगर आपकी उम्र 18 साल से कम है, तो आपके पेरेंट या गार्जियन को आपके अकाउंट के लिए अनुमति देनी होगी और हमारी शर्तों से सहमत होना होगा."
 Authentication.SignUp.Description.Try,आज़माएँ
 Authentication.SignUp.Description.UsernameChanged,सब हो गया! आपका अकाउंट तैयार है और {platform} से लिंक किया हआ है. गेम में अपना अपडेट किया हुआ यूज़रनेम देखने के लिए अभी रीस्पॉन करें या यह अगली बार लागू होगा.
 Authentication.SignUp.Description.UsernameUnchanged,आप शामिल हो गए हैं! आपका अकाउंट तैयार है और {platform} से लिंक किया हुआ है. फ़्रेंड्स के साथ चैट करें और लाखों Roblox गेम्स खेलें.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"आपका Roblox अकाउंट, {platform} पर आपके अकाउंट से लिंक हो जाएगा. कभी भी सेटिंग स्क्रीन से अनलिंक किया जा सकता है. {platform} पर किसी दूसरे अकाउंट से लिंक करने से पहले कुछ इंतज़ार करना पड़ सकता है. {ctaButton} पर क्लिक करने का मतलब है कि आप आर्बिट्रेशन क्लॉज़ सहित उपयोग की शर्तों से सहमत हैं और आपने प्राइवेसी पॉलिसी को स्वीकार किया है."
+Authentication.SignUp.Header.CloseWithoutFinishing,पूरा किए बिना बंद करना है?
 Authentication.SignUp.Header.OneLastThing,बस एक और काम बाकी है
 Authentication.SignUp.Header.SetUpYourRobloxAccount,अपना Roblox अकाउंट सेट अप करें
 Authentication.SignUp.Heading.CountryCodeSelector,देश चुनें
 Authentication.SignUp.Heading.RetryLogIn,
 Authentication.SignUp.Label.Birthday,जन्मदिन
+Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} (उम्र {yearsOld} साल)
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,दिन
 Authentication.SignUp.Label.EnterYourEmail,अपना ईमेल पता डालें
@@ -143,6 +148,7 @@ Authentication.SignUp.Response.PasswordComplexity,ज़्यादा मु�
 Authentication.SignUp.Response.UsernameMustBeSetFirst,यूज़रनेम पहले सेट किया जाना चाहिए.
 Authentication.SignUp.Subtitle.AddYourBirthday,अपना Roblox अकाउंट बनाने के लिए अपना जन्मदिन जोड़ें.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,"सेटअप पूरा करने पर, आपकी प्रोग्रेस आगे के लिए सेव हो जाती है."
+Authentication.SignUp.Subtitle.YoureAlmostThere,"आपका अकाउंट लगभग तैयार हो चुका है. अगर आपने अभी बंद किया, तो आपका अकाउंट पूरी तरह से क्रिएट नहीं होगा और बिना अकाउंट के Roblox नहीं खेला जा सकेगा."
 Authentication.TwoStepVerification.Action.GoToSecurity,सेटिंग्स
 Authentication.TwoStepVerification.Label.TwoStepRequired,"आगे के ट्रांज़ैक्शन के लिए, 2-स्टेप वेरिफ़िकेशन ज़रूरी है. 2-स्टेप वेरिफ़िकेशन के लिए सेटिंग्स > सिक्योरिटी पर जाएँ."
 Authentication.TwoStepVerification.Response.TooManyAttempts,"बहुत कोशिशें हो चुकी हैं. बाद में, फिर से कोशिश करें."
@@ -409,7 +415,7 @@ CommonUI.Features.Label.Connections,कनेक्शंस
 CommonUI.Features.Label.ControllerBar.HoldPrefix,होल्ड करें
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,खेलने के लिए
-CommonUI.Features.Label.CreateGames,क्रिएट करें
+CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,एक्सपीरिएंस
 CommonUI.Features.Label.GiftCards,गिफ़्ट कार्ड्स खरीदें
@@ -1525,6 +1531,7 @@ Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"नाम में सिर्फ़ अक्षर, नंबर और स्पेस हो सकते हैं"
 Feature.Avatar.Label.CountSelected,{itemCount} चुना गया
 Feature.Avatar.Label.Creations,क्रिएशन
+Feature.Avatar.Label.Current,मौजूदा
 Feature.Avatar.Label.CurrentlyWearing,फ़िलहाल पहन रखा है
 Feature.Avatar.Label.DefaultBody,डिफ़ॉल्ट बॉडी
 Feature.Avatar.Label.DeleteSetBody,"इस सेट को डिलीट करने से, इसमें मौजूद आउटफ़िट डिलीट नहीं होंगे."
@@ -1971,6 +1978,10 @@ Feature.Build.Analytics.Description.PayerConversion,"पेमेंट कर�
 Feature.Build.Analytics.Description.PlaythroughRate,"प्ले-थ्रू रेट उन विज़िट का प्रतिशत है, जिनमें पूरा प्ले सेशन पूरा किया गया. ज़्यादा रेट से पता चलता है कि प्लेयर्स को आपके एक्सपीरिएंस में शामिल होना आसान और उन्हें पूरा करना फ़ायदेमंद लगता है."
 Feature.Build.Analytics.Description.TotalPlaytime,"कुल प्लेटाइम वह कुल समय है, जिसे सभी खिलाड़ियों ने उस अवधि में आपके एक्सपीरिएंस में बिताया. आम तौर पर, प्लेटाइम बढ़ने का मतलब है कि सेशन ज़्यादा इंगेजिंग हैं."
 Feature.Build.Analytics.DurationHours,{number} घंटे
+Feature.Build.Analytics.Goal.EarnRobux,
+Feature.Build.Analytics.Goal.FirstImpression,पहला इंप्रेशन अच्छा बनाएँ
+Feature.Build.Analytics.Goal.GetMorePlayers,और ज़्यादा प्लेयर्स पाएँ
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,प्लेयर्स को बार-बार वापस आने के लिए प्रेरित करें
 Feature.Build.Analytics.KeyStats,मुख्य आँकड़े
 Feature.Build.Analytics.LastMonth,पिछले महीने
 Feature.Build.Analytics.LastWeek,
@@ -2002,9 +2013,12 @@ Feature.Build.Analytics.Summary.TotalPlaytime,प्लेयर्स द्व
 Feature.Build.Analytics.Title.Arppu,ARPPU (ऐवरेज रेवेन्यू/पेइंग यूज़र)
 Feature.Build.Analytics.Title.ConcurrentUsers,कुल प्लेयर्स
 Feature.Build.Analytics.Title.D1Retention,D1 रिटेंशन
+Feature.Build.Analytics.Title.D7Retention,D7 रिटेंशन
 Feature.Build.Analytics.Title.DailyActiveUsers,रोज़ के ऐक्टिव यूज़र्स
+Feature.Build.Analytics.Title.NewUserSessionTime,नए यूज़र का सेशन टाइम
 Feature.Build.Analytics.Title.PayerConversion,पेमेंट करने वाले यूज़र का कन्वर्ज़न
 Feature.Build.Analytics.Title.PlaythroughRate,
+Feature.Build.Analytics.Title.RobuxSpent,खर्च किए गए Robux
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,विज़िट
 Feature.Build.Content.NewGame,नया गेम
@@ -2061,6 +2075,7 @@ Feature.Build.Description.ShopButton,शॉपिंग एंट्री प�
 Feature.Build.Description.ShortAdCampaign,यह देखने का एक तेज़ तरीका कि प्लेयर्स आपके गेम के बारे में क्या सोचते हैं.
 Feature.Build.Description.StopBuild,"इस रिक्वेस्ट पर अभी भी काम चल रहा है. अगर आपने इसे अभी रोका, तो यह पूरा नहीं होगा और आपको इसे फिर से भेजना होगा."
 Feature.Build.Description.UpdateDeveloperProduct,डेवलपर प्रॉडक्ट {PRODUCT_ID} को अपडेट करें.
+Feature.Build.Description.UseAdCreditsInAdsManager,"उनका इस्तेमाल करने के लिए, आपको Ads Manager पर जाना होगा."
 Feature.Build.Error.AdForbidden,"आपके अकाउंट या गेम में इस समय कोई ऐड नहीं चल सकता. अगर आपको यह कोई गड़बड़ी लगती है, तो सपोर्ट टीम से संपर्क करें."
 Feature.Build.Error.AdInsufficientFunds,"आपके पास यह ऐड क्रिएट करने के लिए, पर्याप्त Robux नहीं हैं. और Robux जोड़कर फिर से कोशिश करें."
 Feature.Build.Error.AdInternalError,कोई गड़बड़ी हुई है. बाद में फिर से कोशिश करें.
@@ -2384,6 +2399,7 @@ Feature.Build.Title.RevertLastChange,पिछला बदलाव रिव�
 Feature.Build.Title.StopBuild,बिल्ड करने से रोकना है?
 Feature.Build.Title.Tasks,टास्क
 Feature.Build.Title.TurnActivity,टर्न ऐक्टिविटी
+Feature.Build.Title.UseYourAdCredits,अपने ऐड क्रेडिट इस्तेमाल करें
 Feature.Build.Title.VersionHistory,वर्ज़न हिस्ट्री
 Feature.Build.Title.VersionInfo,वर्ज़न की जानकारी
 Feature.Build.Title.VersionNumber,वर्ज़न {VERSION}
@@ -2815,6 +2831,7 @@ Feature.Catalog.Title.Checkout.UnavailableItems,
 Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle,अवतार पहनना है?
 Feature.Catalog.Title.CheckoutPlural,{count} आइटम चेकआउट करें
 Feature.Catalog.Title.CheckoutSingular,
+Feature.Catalog.Title.Explore,एक्सप्लोर करें
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,सबसे नीचे वाली लेयर को बदलना है?
 Feature.Catalog.Title.RentalFtuxText,किसी आइटम को आज़माने के लिए 3 दिनों के लिए किराए पर लें
 Feature.Catalog.Toast.AddedToFavorites,पसंदीदा में जोड़ा गया
@@ -3443,22 +3460,22 @@ Feature.Groups.Message.NotInAnyGroups,आप किसी कम्यूनि�
 Feature.Groups.Message.PinLocked,लॉक किए गए PIN के साथ यह ऐक्शन नहीं किया जा सकता है. अकाउंट सेटिंग पेज में अपना PIN अनलॉक करें.
 Feature.Groups.Modal.ContentTextHigh,"इस कम्यूनिटी में शामिल होने के लिए अपना अकाउंट वेरिफ़ाई करें.
 
-1. अकाउंट की जानकारी > 'मेरी उम्र वेरिफ़ाई करें' पर जाएँ
-2. वेरिफ़िकेशन प्रॉसेस पूरा करें"
+1. अकाउंट की जानकारी > 'ID वेरिफ़ाई करें' पर जाएँ
+2. वेरिफ़िकेशन प्रोसेस पूरा करें"
 Feature.Groups.Modal.ContentTextLow,"इस कम्यूनिटी में शामिल होने के लिए अपना अकाउंट वेरिफ़ाई करें.
 
 1. अकाउंट की जानकारी पर जाएँ
-2. वेरिफ़िकेशन का एक विकल्प चुनें:
-    - फ़ोन नंबर जोड़ें
-    - ईमेल जोड़ें
-    - मेरी उम्र वेरिफ़ाई करें
+2. वेरिफ़िकेशन का एक विकल्प चुनें :
+    - फ़ोन नंबर जोड़ें 
+     - ईमेल जोड़ें
+    - ID वेरिफ़ाई करें
 3. वेरिफ़िकेशन प्रोसेस पूरा करें"
 Feature.Groups.Modal.ContentTextMedium,"इस कम्यूनिटी में शामिल होने के लिए अपना अकाउंट वेरिफ़ाई करें.
 
 1. अकाउंट की जानकारी पर जाएँ
-2. वेरिफ़िकेशन का एक विकल्प चुनें:
+2. वेरिफ़िकेशन का एक विकल्प चुनें :
     - फ़ोन नंबर जोड़ें और ईमेल जोड़ें
-    - मेरी उम्र वेरिफ़ाई करें
+    - ID वेरिफ़ाई करें
 3. वेरिफ़िकेशन प्रोसेस पूरा करें"
 Feature.Groups.Notification.FailedToFollow,प्रोफ़ाइल फ़ॉलो नहीं की जा सकी. बाद में कोशिश करें.
 Feature.Groups.Notification.FailedToJoin,कम्यूनिटी जॉइन नहीं की जा सकी. बाद में कोशिश करें.
@@ -3533,6 +3550,7 @@ Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Robux खर�
 Feature.InExperienceShop.Label.BonusItem,बोनस आइटम
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} में खत्म हो जाएगा
+Feature.InExperienceShop.Label.FreeTrial,फ़्री ट्रायल
 Feature.InExperienceShop.Label.NoDescription,कोई विवरण नहीं है
 Feature.InExperienceShop.Label.OfferEndTime,"{offer}, {timeRemaining} में खत्म हो जाएगा"
 Feature.InExperienceShop.Label.PreviewBanner,यह Roblox Studio में आपकी शॉप का प्रीव्यू है. प्लेयर्स को यह प्रीव्यू नहीं दिखता है.
@@ -3544,6 +3562,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} मिनट
 Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} सेकंड
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 सेकंड
+Feature.InExperienceShop.Label.Trial,ट्रायल
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,आपने {ROBUX_AMOUNT} Robux खरीद लिए हैं
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"क्या आपको वाकई अपनी इन्वेंट्री से इस आइटम को हमेशा के लिए डिलीट करना है? अपना फ़ैसला बदलने पर, आपको इसे किसी एक्सपीरिएंस में फिर से हासिल करना होगा."
 Feature.Item.Label.DeleteItemUndercase,आइटम डिलीट करें
@@ -3557,12 +3576,16 @@ Feature.Moments.Action.AddSticker,स्टिकर जोड़ें
 Feature.Moments.Action.AddText,टेक्स्ट जोड़ें
 Feature.Moments.Action.AddVoice,वॉइस जोड़ें
 Feature.Moments.Action.Back,
+Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentShowLess,कम दिखाएँ
+Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
 Feature.Moments.Action.CreateVoiceover,वॉइसओवर क्रिएट करें
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.DiscardChange,बदलाव डिलीट करें
 Feature.Moments.Action.Done,
+Feature.Moments.Action.Edit,
 Feature.Moments.Action.Expand,बड़ा करें
 Feature.Moments.Action.GenerateText,टेक्स्ट जेनरेट करें
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,उपयोगी नहीं
@@ -3578,6 +3601,7 @@ Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
+Feature.Moments.Action.RetryLoadingComments,कमेंट्स फिर से लोड करने की कोशिश करें
 Feature.Moments.Action.Return,गैलरी पर वापस जाएँ
 Feature.Moments.Action.ReturnToEditing,एडिटिंग पर वापस जाएँ
 Feature.Moments.Action.SaveVoiceover,
@@ -3600,9 +3624,35 @@ Feature.Moments.Description.StayFriendly,चलो दोस्ताना म�
 Feature.Moments.Description.TooManyUploads,आपने आज बहुत सारे वीडियो अपलोड कर दिए हैं. कल फिर से कोशिश करें.
 Feature.Moments.Disclaimer.EveryoneMoments,Moments में मौजूद हर कोई पब्लिश की गई चीज़ें देख सकता है
 Feature.Moments.Label.All,
+Feature.Moments.Label.AllowComments,कमेंट करने की परमिशन दें
 Feature.Moments.Label.AttemptingJoinExperience,{placeName} को जॉइन करने की कोशिश की जा रही है. इसमें कुछ सेकंड लग सकते हैं.
 Feature.Moments.Label.CaptureLibrary,आपकी 'कैप्चर' लाइब्रेरी
 Feature.Moments.Label.ChooseVoice,वॉइस चुनें
+Feature.Moments.Label.CommentAuthorFallback,यूज़र {userId}
+Feature.Moments.Label.CommentAuthorUnknown,अज्ञात यूज़र
+Feature.Moments.Label.CommentDeleteFailed,कमेंट डिलीट नहीं किया जा सका
+Feature.Moments.Label.CommentNotAllowed,इस Moment पर कमेंट नहीं किया जा सकता.
+Feature.Moments.Label.CommentPostFailed,आपका कमेंट पोस्ट नहीं किया जा सका. फिर से कोशिश करें.
+Feature.Moments.Label.CommentPostOutcomeUnknown,हम आपका पोस्ट किया गया आखिरी कमेंट कन्फ़र्म नहीं कर सके. फिर से भेजने से पहले कमेंट्स देखें.
+Feature.Moments.Label.CommentRateLimited,आपके द्वारा बहुत जल्दी-जल्दी कमेंट किया जा रहा है. बाद में फिर से कोशिश करें.
+Feature.Moments.Label.CommentRejectedByFilter,आपका कमेंट पोस्ट नहीं किया गया. इसमें सुधार करके फिर से कोशिश करें.
+Feature.Moments.Label.CommentSendStatusUnknown,पक्का नहीं है कि भेजा गया है या नहीं
+Feature.Moments.Label.CommentSending,भेजा जा रहा है...
+Feature.Moments.Label.CommentSignInRequired,कमेंट करने के लिए फिर से साइन-इन करें.
+Feature.Moments.Label.CommentTimestampDays,{count} दिन
+Feature.Moments.Label.CommentTimestampHours,{count} घंटे
+Feature.Moments.Label.CommentTimestampMinutes,{count} मिनट
+Feature.Moments.Label.CommentTimestampMonths,{count} महीने
+Feature.Moments.Label.CommentTimestampNow,
+Feature.Moments.Label.CommentTimestampWeeks,{count} हफ़्ते
+Feature.Moments.Label.CommentTimestampYears,{count} साल
+Feature.Moments.Label.CommentingUnavailable,कमेंट करने की सुविधा अभी उपलब्ध नहीं है. बाद में फिर से कोशिश करें.
+Feature.Moments.Label.CommentsDisabled,कमेंट करने की सुविधा बंद है
+Feature.Moments.Label.CommentsReadOnly,कमेंट सिर्फ़ पढ़े जा सकते हैं
+Feature.Moments.Label.CommentsTurnedOff,इस Moment के लिए कमेंट करने की सुविधा बंद है.
+Feature.Moments.Label.CommentsUnavailable,कमेंट करने की सुविधा उपलब्ध नहीं है
+Feature.Moments.Label.DeleteCommentBody,यह कमेंट हमेशा के लिए डिलीट कर दिया जाएगा.
+Feature.Moments.Label.DeleteCommentTitle,कमेंट डिलीट करना है?
 Feature.Moments.Label.DeleteMomentBody,"कोई Moment मिट जाने पर, उसे रिकवर नहीं किया जा सकता."
 Feature.Moments.Label.DeleteMomentTitle,Moment डिलीट करना है?
 Feature.Moments.Label.DeleteVoiceoverBody,इससे आपका टेक्स्ट और वॉइसओवर मिट जाएगा. कभी भी फिर से शुरू करें.
@@ -3614,6 +3664,7 @@ Feature.Moments.Label.FeedEndTitle,कोई नया Moment नहीं ह�
 Feature.Moments.Label.FeedFailedToLoad,फ़ीड लोड नहीं हो सकी
 Feature.Moments.Label.FeedMyMoments,मेरे Moments
 Feature.Moments.Label.FeedTrending,
+Feature.Moments.Label.FirstCommentInvite,अभी तक कोई कमेंट नहीं है. सबसे पहले कमेंट करें!
 Feature.Moments.Label.HowToUseCaptureTitle,कैप्चर का इस्तेमाल कैसे करें
 Feature.Moments.Label.LinkCopied,लिंक कॉपी किया गया
 Feature.Moments.Label.LinkCopyFailed,लिंक कॉपी नहीं हो सका.
@@ -3622,12 +3673,14 @@ Feature.Moments.Label.MomentDeletedBody,"किसी Moment के डिली
 Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,कोई गड़बड़ी हुई.
 Feature.Moments.Label.MomentFailedToPostTitle,Moment पोस्ट नहीं किया जा सका
+Feature.Moments.Label.MomentNoLongerAvailable,यह Moment अब उपलब्ध नहीं है.
 Feature.Moments.Label.MomentPublishedBody,आपका Moment पब्लिश हो गया है.
 Feature.Moments.Label.MomentPublishedTitle,Moment पब्लिश हो गया
 Feature.Moments.Label.MomentUnavailable,Moment उपलब्ध नहीं है
 Feature.Moments.Label.MomentUnavailableDefault,यह Moment उपलब्ध नहीं है.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NoCommentsYet,अभी तक कोई कमेंट नहीं है
 Feature.Moments.Label.NonInfiniteScrollEndTitle,अभी कुछ नया नहीं है
 Feature.Moments.Label.Photos,फ़ोटो
 Feature.Moments.Label.PostDeleted,Moment डिलीट किया गया
@@ -3668,6 +3721,10 @@ Feature.Moments.Label.VoiceLimitReachedBody,"थोड़ी देर इंत
 Feature.Moments.Label.VoiceModerationError,आपकी स्क्रिप्ट में सुरक्षा संबंधी नियमों का पालन किया जाना चाहिए
 Feature.Moments.Label.VoicePlaceholder,अपनी वॉइसओवर स्क्रिप्ट टाइप करें. ज़्यादा-से-ज़्यादा {maxCount} कैरेक्टर होने चाहिए
 Feature.Moments.Label.VoiceTimeoutBody,वॉइसओवर जेनरेशन टाइम आउट हो गया.
+Feature.Moments.Label.WriteComment,कमेंट लिखें
+Feature.Moments.Title.Comments,कमेंट्स
+Feature.Moments.Title.CommentsWithCappedCount,कमेंट ({count}+)
+Feature.Moments.Title.CommentsWithCount,कमेंट ({count})
 Feature.Moments.Title.GenerateTextFeedbackReason,क्या गड़बड़ी हुई?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?
@@ -3770,10 +3827,17 @@ Feature.Parents.Title.EnterParentEmailV2,पेरेंट का ईमेल 
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,सर्च से
+Feature.PlayerSearchResults.Label.NewUsername,नया यूज़रनेम
 Feature.PlayerSearchResults.Label.Previously,पहले
 Feature.PlayerSearchResults.Label.ThisIsYou,यह आप हैं
+Feature.PlayerSearchResults.Label.You,आप
+Feature.PlayerSearchResults.Label.YouAreConnections,आप दोनों एक-दूसरे के कनेक्शन में हैं
 Feature.PlayerSearchResults.Label.YouAreFollowing,आप इन्हें फ़ॉलो कर रहे/रही हैं
+Feature.PlayerSearchResults.Label.YouAreFriends,आप फ़्रेंड्स हैं
+Feature.PrivateServers.Action.CreatePrivateServer,प्राइवेट सर्वर क्रिएट करें
+Feature.PrivateServers.Action.FreeWithBlackbird,Plus सब्सक्रिप्शन के साथ फ़्री
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio में प्राइवेट सर्वर नहीं खरीदे जा सकते.
+Feature.PrivateServers.Description.VipServersNotSupported,इस गेम के लिए प्राइवेट सर्वर इस्तेमाल नहीं किए जा सकते.
 Feature.Profile.Action.AboutThisProfile,इस प्रोफ़ाइल के बारे में जानकारी
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4026,6 +4090,7 @@ Feature.RobloxSubscription.Description.JoinEarly,Plus के साथ जल्
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} ने आपको Plus जॉइन करने के लिए इन्वाइट किया है. आपके Plus खरीदने पर आप दोनों को {amount} Robux मिलेंगे.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} पर क्लिक करने का मतलब है कि आप <a href=""{termsUrl}"">Roblox के सब्सक्रिप्शन की शर्तों</a> से सहमत हैं. आपके कैंसिल करने तक आपसे हर महीने अपने आप शुल्क ले लिया जाएगा."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus शेयर करें और {amount} Robux पाएँ
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Plus जॉइन करें और {amount} Robux पाएँ
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,Plus में शामिल हों और पाएँ
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,फ़्री प्राइवेट सर्वर्स
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4042,6 +4107,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 महीन
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} फ़्री,{boldEnd} फिर {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,
 Feature.RobloxSubscription.Label.months,महीने
+Feature.RobloxSubscription.Message.AlreadySubscribed,आपके पास पहले से ही Plus का सब्सक्रिप्शन है. यह लिंक नए मेंबर्स के लिए है. फ़्रेंड्स को इनवाइट करने और रिवॉर्ड पाने के लिए अपना लिंक शेयर करें.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Plus का 1 हफ़्ते का फ़्री ट्रायल पाएँ
 Feature.RobloxSubscription.Title.AlreadySubscribed,अच्छी खबर
 Feature.RobloxSubscription.Title.GenericError,
@@ -4287,8 +4353,19 @@ Feature.SongDetails.Action.ReportAudio,ऑडियो रिपोर्ट क
 Feature.SongDetails.Label.InappropriateAudio,अनुचित ऑडियो
 Feature.SongDetails.Label.InappropriateThumbnail,अनुचित थंबनेल
 Feature.SongDetails.Label.SongPreview,गाने का प्रीव्यू
+Feature.SplitPane.EditAvatarButtonText,
 Feature.SplitPane.Label.CollapseAvatar,अवतार छोटा करें
 Feature.SplitPane.Label.ExpandAvatar,अवतार बड़ा करें
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,टूर पूरा करें
+Feature.SplitPane.Tour.Button.SkipTour,टूर छोड़ें
+Feature.SplitPane.Tour.Step1.Description.Collapsed,सेव किए गए अवतार अब होम पेज पर दिखते हैं. उन्हें देखने के लिए इस स्पेस को बड़ा करें.
+Feature.SplitPane.Tour.Step1.Description.Expanded,"सेव किए गए अवतार अब होम पेज पर दिखते हैं. हर छोटी-से-छोटी जानकारी देखने के लिए, उन्हें घुमाएँ या ज़ूम इन करें."
+Feature.SplitPane.Tour.Step1.Title,खुद को होम पेज पर देखें
+Feature.SplitPane.Tour.Step2.Description,"चुनें कि आपको कैसा दिखना है. कोई गेम जॉइन करने से ठीक पहले, अपने सेव किए गए अवतारों के बीच स्विच करें."
+Feature.SplitPane.Tour.Step2.Title,अपना लुक कभी भी बदलें
+Feature.SplitPane.Tour.Step3.Description,"नए गेम्स खोजने पर फ़ोकस करने के लिए, इस स्पेस को कभी भी छिपाएँ. आपका सेव किया गया अवतार ठीक यहीं रहेगा."
+Feature.SplitPane.Tour.Step3.Title,चुनें कि आपको क्या देखना है
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,दूसरों को जोड़ें
 Feature.Squads.Action.ConnectToVoice,वॉइस से कनेक्ट करें
@@ -5022,7 +5099,7 @@ InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,{experience_name} �
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name} को होम स्क्रीन में जोड़ दिया गया है
 InstantApps.Shortcuts.Label.TryAgain,
 InstantApps.Shortcuts.Label.ViewShortcut,शॉर्टकट देखें
-Notifications.NotificationStream.Bundle.ShowLess,कम दिखाएँ
+Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} ज़्यादा
 Notifications.NotificationStream.Label.AllCaughtUp,सारी रिक्वेस्ट पूरी हो गईं!
 Notifications.NotificationStream.Label.Notifications,

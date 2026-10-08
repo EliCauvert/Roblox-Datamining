@@ -31,7 +31,6 @@ return {
 	SocialFriendsLandingLayer = "Social.FriendsLanding",
 	SocialConnectTabLayer = "Social.ConnectTab",
 	SocialDisplayNameLayer = "Social.DisplayNameSetting",
-	SocialMomentsMigration = "Social.MomentsMigration",
 	SocialExperienceDetails = "Social.ExperienceDetails",
 	SocialExperienceDetailsContextualMenu = "Social.ExperienceDetailsContextualMenu",
 	SocialProfilePeekViewLayer = "Social.ProfilePeekView",

@@ -20,6 +20,7 @@ local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local constantsModule = require(squads.Common.Constants)
 local dependenciesModule = require(squads.dependencies)
 local squadPartySheetActionEnumModule = require(squads.Enums.SquadPartySheetActionEnum)
+local fFlagSquadLobbyActionBarFixMicLevelRerenderModule = require(squads.Flags.FFlagSquadLobbyActionBarFixMicLevelRerender)
 local sharedFlags = dependenciesModule.SharedFlags
 local squadCoordinationExperienceJoinExperimentation = dependenciesModule.SocialExperiments.SquadCoordinationExperienceJoinExperimentation
 local squadLobbySessionProvider = require(parent.SquadsCore.SquadSessionProvider).SquadLobbySessionProvider
@@ -272,7 +273,7 @@ local function renderToggleAudioFocusButton(p1, p2, p3, p4, p5)
 end
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useLocalization (ref), squadCoordinationExperienceJoinExperimentation (ref), useTokens (ref), useCurrentSquadParentChannelId (ref), useCurrentSquadSelector (ref), useVoiceStatus (ref), reactModule (ref), useAppPolicy (ref), httpService (ref), squadLobbySessionProvider (ref), squadExternalContractContext (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), sessionType (ref), leaveSquad (ref), squadState (ref), var3 (ref), badge (ref), badgeVariant (ref), renderStandardImage (ref), var2 (ref), var1 (ref), getFFlagEnableCrossExpVoice (ref), useLocalUserId (ref), useBackgroundExperience (ref), useParticipant (ref), useIsVoiceConnected (ref), useIsVoiceDisconnected (ref), useIsVoiceFocused (ref), useParticipants (ref), useIsActiveParticipant (ref), audioFocusManagementEngineFeature (ref), crossExperienceVoiceManager (ref), runService (ref), renderToggleAudioFocusButton (ref), enableCrossExpVoiceDebug (ref), getLoadingIndicatorIcon (ref), foundationModule (ref), constantsModule (ref)
+	-- upvalues: useDispatch (ref), useLocalization (ref), squadCoordinationExperienceJoinExperimentation (ref), useTokens (ref), useCurrentSquadParentChannelId (ref), useCurrentSquadSelector (ref), useVoiceStatus (ref), reactModule (ref), useAppPolicy (ref), httpService (ref), squadLobbySessionProvider (ref), squadExternalContractContext (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), sessionType (ref), leaveSquad (ref), squadState (ref), var3 (ref), badge (ref), badgeVariant (ref), renderStandardImage (ref), var2 (ref), var1 (ref), getFFlagEnableCrossExpVoice (ref), useLocalUserId (ref), useBackgroundExperience (ref), useParticipant (ref), useIsVoiceConnected (ref), useIsVoiceDisconnected (ref), useIsVoiceFocused (ref), useParticipants (ref), useIsActiveParticipant (ref), audioFocusManagementEngineFeature (ref), crossExperienceVoiceManager (ref), fFlagSquadLobbyActionBarFixMicLevelRerenderModule (ref), runService (ref), renderToggleAudioFocusButton (ref), enableCrossExpVoiceDebug (ref), getLoadingIndicatorIcon (ref), foundationModule (ref), constantsModule (ref)
 	local var4 = useDispatch()
 	local var5 = useLocalization({
 		audioText = "Feature.Squads.Label.Audio",
@@ -486,9 +487,14 @@ return function(p1)
 				crossExperienceVoiceManager.default:muteVoiceParticipant(var32.userId)
 			end
 		end, { var32 })
+		local var43 = not var22 and (var33 and (var32 ~= nil and (not var32.isMuted and var37 == true)))
 		reactModule.useEffect(function()
-			-- upvalues: runService (copy), var15 (ref), var30 (ref), var39 (ref)
-			runService:BindToRenderStep(var15, 1, function()
+			-- upvalues: fFlagSquadLobbyActionBarFixMicLevelRerenderModule (copy), var43 (ref), p1 (ref), runService (copy), var15 (ref), var30 (ref), var39 (ref)
+			if fFlagSquadLobbyActionBarFixMicLevelRerenderModule and not var43 then
+				return nil
+			end
+			local renderStepService = p1.renderStepService or runService
+			renderStepService:BindToRenderStep(var15, 1, function()
 				-- upvalues: var30 (copy), var39 (copy)
 				if var30.current > 3 then
 					var39(math.random())
@@ -500,10 +506,10 @@ return function(p1)
 			end)
 			
 			return function()
-				-- upvalues: runService (copy), var15 (copy)
-				runService:UnbindFromRenderStep(var15)
+				-- upvalues: renderStepService (ref), var15 (copy)
+				renderStepService:UnbindFromRenderStep(var15)
 			end
-		end, {})
+		end, if fFlagSquadLobbyActionBarFixMicLevelRerenderModule then { var43, p1.renderStepService } else { p1.renderStepService })
 		var26 = reactModule.useMemo(function()
 			-- upvalues: var22 (ref), var40 (ref), var33 (ref), renderToggleAudioFocusButton (copy), var6 (ref), var5 (ref), p1 (ref), var10 (ref), var12 (ref)
 			return if var22 or not var40 or not var33 then nil else renderToggleAudioFocusButton(var6, var5.audioText, p1.toggleVoiceChatMenu, var10, var12)
@@ -535,20 +541,20 @@ return function(p1)
 				if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil
 			})
 		end
-		local var43 = reactModule.useMemo(function()
+		local var44 = reactModule.useMemo(function()
 			-- upvalues: getLoadingIndicatorIcon (copy), var6 (ref), var32 (ref), var33 (ref), var22 (ref), var37 (ref), var38 (ref)
 			return getLoadingIndicatorIcon(var6, var32, var33, not var22 and var37, var38)
 		end, {
 			var37, var22, var33, var38, var32, var6
 		})
 		var28 = reactModule.useMemo(function()
-			-- upvalues: var34 (ref), var22 (ref), audioFocusManagementEngineFeature (copy), var35 (ref), var33 (ref), var32 (ref), reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var42 (ref), var12 (ref), var5 (ref), renderStandardImage (copy), var43 (ref), var6 (ref)
+			-- upvalues: var34 (ref), var22 (ref), audioFocusManagementEngineFeature (copy), var35 (ref), var33 (ref), var32 (ref), reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var42 (ref), var12 (ref), var5 (ref), renderStandardImage (copy), var44 (ref), var6 (ref)
 			if var34 then
 				return nil
 			elseif not var22 and audioFocusManagementEngineFeature and not var35 then
 				return nil
 			end
-			local var44 = if var33 then if var32 ~= nil then var22 else true else not var33
+			local var45 = if var33 then if var32 ~= nil then var22 else true else not var33
 			
 			return reactModule.createElement(var3, {
 				layoutOrder = 1,
@@ -556,15 +562,15 @@ return function(p1)
 				currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
 				enableFirstTimeTooltip = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
 				ftuxAppStorageKey = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then "" else nil,
-				isDisabled = var44,
+				isDisabled = var45,
 				onActivated = var42,
 				onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil,
 				showFtuxCustomConditionsMet = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
 				tooltipText = if not var33 or (not var32 or var32.isMuted) then var5.unmuteMicText else var5.muteMicText
-			}, renderStandardImage(var44, var43, "size-800-800", var6))
+			}, renderStandardImage(var45, var44, "size-800-800", var6))
 		end, {
 			if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
-			var6, var43, var22, var35, var33, var5.muteMicText, var5.unmuteMicText,
+			var6, var44, var22, var35, var33, var5.muteMicText, var5.unmuteMicText,
 			if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil,
 			var42, var32, var34
 		})

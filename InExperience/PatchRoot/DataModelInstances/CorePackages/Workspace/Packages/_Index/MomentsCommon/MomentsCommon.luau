@@ -6,7 +6,6 @@ return {
 		return p1.isTabEnabled or p1.isFlyoutEntryEnabled and p1.platformIntegrationEnabled
 	end,
 	Flags = {
-		ArgusExperiment = require(script.Flags.ArgusExperiment),
 		GetFFlagEnableMomentTextGeneration = require(script.Flags.GetFFlagEnableMomentTextGeneration),
 		GetFFlagMomentsCreationSaveDraft = require(script.Flags.GetFFlagMomentsCreationSaveDraft),
 		GetFFlagMomentsNonInfiniteScroll = require(script.Flags.GetFFlagMomentsNonInfiniteScroll),
@@ -24,6 +23,9 @@ return {
 		FFlagMomentTextGenerationFilteredSignal = require(script.Flags.FFlagMomentTextGenerationFilteredSignal),
 		FFlagMomentsCreationBackCta = require(script.Flags.FFlagMomentsCreationBackCta),
 		FFlagMomentsTextOverlayV2Redesign = require(script.Flags.FFlagMomentsTextOverlayV2Redesign),
+		FFlagMomentsSmartVideoFill = require(script.Flags.FFlagMomentsSmartVideoFill),
+		FFlagMomentsTextOverlayChipGrowAboveKeyboard = require(script.Flags.FFlagMomentsTextOverlayChipGrowAboveKeyboard),
+		FFlagMomentsTextOverlayEdgeClipFix = require(script.Flags.FFlagMomentsTextOverlayEdgeClipFix),
 		GetFFlagMomentsUseUploadPostAsync = require(script.Flags.GetFFlagMomentsUseUploadPostAsync),
 		GetFFlagMomentsUseMomentsServiceForUpload = require(script.Flags.GetFFlagMomentsUseMomentsServiceForUpload),
 		GetFFlagMomentsCoachmarkPersistence = require(script.Flags.GetFFlagMomentsCoachmarkPersistence),
@@ -86,6 +88,7 @@ return {
 		getEasingNumberSequence = require(script.Utils.getEasingNumberSequence),
 		getFitSize = require(script.Utils.getFitSize),
 		getScale = require(script.Utils.getScale),
+		getSmartFillScaleType = require(script.Utils.getSmartFillScaleType),
 		isStudio = require(script.Utils.isStudio),
 		logMomentsLayerExposure = require(script.Utils.logMomentsLayerExposure),
 		Oklab = require(script.Utils.Oklab)

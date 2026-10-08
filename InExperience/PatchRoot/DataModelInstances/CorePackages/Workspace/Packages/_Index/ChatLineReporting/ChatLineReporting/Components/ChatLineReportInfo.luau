@@ -7,7 +7,6 @@ local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useTokens = foundationModule.Hooks.useTokens
 local view = foundationModule.View
-local fFlagChatLineReportingFocusFixesEnabled = require(parent.SharedFlags).FFlagChatLineReportingFocusFixesEnabled
 local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local constantsModule = require(chatLineReporting.Common.Constants)
 local t = {
@@ -19,7 +18,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), constantsModule (ref), reactOtterModule (ref), t (ref), fFlagChatLineReportingFocusFixesEnabled (ref), view (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), constantsModule (ref), reactOtterModule (ref), t (ref), view (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState(false)
 	local var4 = useLocalization(constantsModule.ChatLineLocalizationKeys)
@@ -44,7 +43,7 @@ return function(p1)
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		Selectable = if fFlagChatLineReportingFocusFixesEnabled then false else nil,
+		Selectable = false,
 		Size = UDim2.new(1, 0, 1, 0),
 		Text = "",
 		[reactModule.Event.Activated] = function()

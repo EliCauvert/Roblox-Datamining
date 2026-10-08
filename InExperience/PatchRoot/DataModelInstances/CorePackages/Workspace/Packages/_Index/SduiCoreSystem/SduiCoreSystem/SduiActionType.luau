@@ -65,6 +65,8 @@
 	SelectMarketplaceFavoritesCategory = "SelectMarketplaceFavoritesCategory",
 	SelectMarketplaceFavoritesSubcategory = "SelectMarketplaceFavoritesSubcategory",
 	OpenMarketplaceCatalogSeeAll = "OpenMarketplaceCatalogSeeAll",
+	OpenCatalogItemDetails = "OpenCatalogItemDetails",
+	OpenItemInfoRowPrompt = "OpenItemInfoRowPrompt",
 	RsvpToEvent = "RsvpToEvent",
 	OpenEventDetails = "OpenEventDetails",
 	OpenPurchasePrompt = "OpenPurchasePrompt",
@@ -75,6 +77,7 @@
 	OpenFaeTrialUpsell = "OpenFaeTrialUpsell",
 	OpenIncomingTransferUpsell = "OpenIncomingTransferUpsell",
 	PinExperienceShortcut = "PinExperienceShortcut",
+	PlayWithRewardAd = "PlayWithRewardAd",
 	ShowToast = "ShowToast",
 	JoinCommunity = "JoinCommunity",
 	ActionSequence = "ActionSequence"

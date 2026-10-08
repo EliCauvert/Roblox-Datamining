@@ -25,7 +25,6 @@ local productPurchaseContainerModule = require(script.Parent.ProductPurchase.Pro
 local robuxUpsellContainerModule = require(script.Parent.RobuxUpsell.RobuxUpsellContainer)
 local premiumUpsellContainerModule = require(script.Parent.PremiumUpsell.PremiumUpsellContainer)
 local subscriptionPurchaseContainerModule = require(script.Parent.SubscriptionPurchase.SubscriptionPurchaseContainer)
-local VIPServerPurchaseContainerModule = require(script.Parent.VIPServerPurchase.VIPServerPurchaseContainer)
 local renderWithCoreScriptsStyleProviderModule = require(script.Parent.Connection.renderWithCoreScriptsStyleProvider)
 local focusNavigationOptimizationTelemetryModule = require(purchasePrompt.Events.FocusNavigationOptimizationTelemetry)
 local selectionCursorProvider = require(parent.UIBlox).App.SelectionImage.SelectionCursorProvider
@@ -40,7 +39,6 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagAddCursorProviderToPurchasePromptApp = sharedFlagsModule.FFlagAddCursorProviderToPurchasePromptApp
 local fFlagPurchasePromptSubtitleForTimedOptions = sharedFlagsModule.FFlagPurchasePromptSubtitleForTimedOptions
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
-local fFlagLuaAppsEnablePromptVIPServerPurchaseModule = require(purchasePrompt.Flags.FFlagLuaAppsEnablePromptVIPServerPurchase)
 local requestTypeModule = require(purchasePrompt.Enums.RequestType)
 local promptStateModule = require(purchasePrompt.Enums.PromptState)
 local purchasePromptAppConditionalFocusNavigation = game:DefineFastFlag("PurchasePromptAppConditionalFocusNavigation", false)
@@ -90,9 +88,9 @@ function purchasePromptApp.renderWithStyle(_, p1)
 end
 
 function purchasePromptApp.render(p1)
-	-- upvalues: provideRobloxLocaleModule (ref), roact (ref), localeProvider (ref), localizationService (ref), productPurchaseContainerModule (ref), fFlagPurchasePromptSubtitleForTimedOptions (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), robuxUpsellContainerModule (ref), premiumUpsellContainerModule (ref), subscriptionPurchaseContainerModule (ref), fFlagLuaAppsEnablePromptVIPServerPurchaseModule (ref), VIPServerPurchaseContainerModule (ref), eventConnectionsModule (ref), getFFlagEnableToastLiteRenderModule (ref), toast (ref), fFlagAddCursorProviderToPurchasePromptApp (ref), purchasePromptAppFixStyleLink (ref), selectionCursorProvider (ref), reactFocusNavigationModule (ref), var1 (ref), provider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), roactRodux (ref), layoutValuesProviderModule (ref), purchasePromptPolicyModule (ref)
+	-- upvalues: provideRobloxLocaleModule (ref), roact (ref), localeProvider (ref), localizationService (ref), productPurchaseContainerModule (ref), fFlagPurchasePromptSubtitleForTimedOptions (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), robuxUpsellContainerModule (ref), premiumUpsellContainerModule (ref), subscriptionPurchaseContainerModule (ref), eventConnectionsModule (ref), getFFlagEnableToastLiteRenderModule (ref), toast (ref), fFlagAddCursorProviderToPurchasePromptApp (ref), purchasePromptAppFixStyleLink (ref), selectionCursorProvider (ref), reactFocusNavigationModule (ref), var1 (ref), provider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), roactRodux (ref), layoutValuesProviderModule (ref), purchasePromptPolicyModule (ref)
 	return provideRobloxLocaleModule(function()
-		-- upvalues: roact (copy), localeProvider (copy), localizationService (copy), productPurchaseContainerModule (copy), fFlagPurchasePromptSubtitleForTimedOptions (copy), p1 (ref), fFlagPurchasePromptCartPricingEnabledModule (copy), robuxUpsellContainerModule (copy), premiumUpsellContainerModule (copy), subscriptionPurchaseContainerModule (copy), fFlagLuaAppsEnablePromptVIPServerPurchaseModule (copy), VIPServerPurchaseContainerModule (copy), eventConnectionsModule (copy), getFFlagEnableToastLiteRenderModule (copy), toast (copy), fFlagAddCursorProviderToPurchasePromptApp (copy), purchasePromptAppFixStyleLink (copy), selectionCursorProvider (copy), reactFocusNavigationModule (copy), var1 (copy), provider (copy), focusRoot (copy), focusNavigableSurfaceIdentifierEnum (copy), roactRodux (copy), layoutValuesProviderModule (copy), purchasePromptPolicyModule (copy)
+		-- upvalues: roact (copy), localeProvider (copy), localizationService (copy), productPurchaseContainerModule (copy), fFlagPurchasePromptSubtitleForTimedOptions (copy), p1 (ref), fFlagPurchasePromptCartPricingEnabledModule (copy), robuxUpsellContainerModule (copy), premiumUpsellContainerModule (copy), subscriptionPurchaseContainerModule (copy), eventConnectionsModule (copy), getFFlagEnableToastLiteRenderModule (copy), toast (copy), fFlagAddCursorProviderToPurchasePromptApp (copy), purchasePromptAppFixStyleLink (copy), selectionCursorProvider (copy), reactFocusNavigationModule (copy), var1 (copy), provider (copy), focusRoot (copy), focusNavigableSurfaceIdentifierEnum (copy), roactRodux (copy), layoutValuesProviderModule (copy), purchasePromptPolicyModule (copy)
 		local t = {
 			LocaleProvider = roact.createElement(localeProvider, { locale = localizationService.RobloxLocaleId }, {
 				ProductPurchaseContainer = roact.createElement(productPurchaseContainerModule, {
@@ -103,8 +101,7 @@ function purchasePromptApp.render(p1)
 					network = if fFlagPurchasePromptCartPricingEnabledModule then p1.props.network else nil
 				}),
 				PremiumUpsellContainer = roact.createElement(premiumUpsellContainerModule),
-				SubscriptionPurchaseContainer = roact.createElement(subscriptionPurchaseContainerModule),
-				VIPServerPurchaseContainer = if fFlagLuaAppsEnablePromptVIPServerPurchaseModule then roact.createElement(VIPServerPurchaseContainerModule) else nil
+				SubscriptionPurchaseContainer = roact.createElement(subscriptionPurchaseContainerModule)
 			}),
 			EventConnections = roact.createElement(eventConnectionsModule),
 			Toast = if getFFlagEnableToastLiteRenderModule() then roact.createElement(toast) else nil

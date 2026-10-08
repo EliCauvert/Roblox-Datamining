@@ -41,6 +41,7 @@ local fFlagEnableArgus = sharedFlagsModule.FFlagEnableArgus
 local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
+local fFlagMomentsAvatarLookTryOn = sharedFlagsModule.FFlagMomentsAvatarLookTryOn
 local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
 local fFlagMomentsSessionHeartbeat = momentsCommonModule.Flags.FFlagMomentsSessionHeartbeat
 local analytics = momentsCommonModule.Analytics
@@ -59,7 +60,7 @@ local function PushedFeedSafeAreaProvider(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), fFlagEnableArgus (ref), createSignalTracker (ref), fFlagMomentsOptimisticProfilePending (ref), fFlagMomentsFlyoutCreateButtonModule (ref), useCreationEntryModule (ref), useUploadHostModule (ref), logCreateIntentModule (ref), funnelEventNames (ref), immersiveFeedKind (ref), getDeepLinkStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), createUserMomentsFeedSourceModule (ref), isStudioModule (ref), getFFlagArgusStudioMockFeedModule (ref), createMockFeedSource (ref), createMomentsFeedSourceModule (ref), createRecommendationTelemetry (ref), logMomentsLayerExposure (ref), fStringMomentsExperienceJoinActionTextIxpLayerModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), analytics (ref), fFlagMomentsSessionHeartbeat (ref), useNavigationFocus (ref), useSignalState (ref), feedPlaybackSuspension (ref), getMomentsPreferencesStoreModule (ref), reportModalCovering (ref), fFlagEnableReportingFlowForMomentsFeed (ref), fFlagMomentsFlushDwellBeforeNavigationModule (ref), useNavigation (ref), roactNavigationModule (ref), momentsImmersiveNavigationMenu (ref), momentsBackHeaderModule (ref), momentsFeedSurfaceModule (ref), PushedFeedSafeAreaProvider (ref), view (ref), constantsModule (ref), creationFlowScreen (ref), FTUXEducationScreenModule (ref), momentsHostShellModule (ref)
+	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), fFlagEnableArgus (ref), createSignalTracker (ref), fFlagMomentsOptimisticProfilePending (ref), fFlagMomentsFlyoutCreateButtonModule (ref), useCreationEntryModule (ref), useUploadHostModule (ref), logCreateIntentModule (ref), funnelEventNames (ref), immersiveFeedKind (ref), getDeepLinkStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), createUserMomentsFeedSourceModule (ref), isStudioModule (ref), getFFlagArgusStudioMockFeedModule (ref), createMockFeedSource (ref), createMomentsFeedSourceModule (ref), createRecommendationTelemetry (ref), logMomentsLayerExposure (ref), fStringMomentsExperienceJoinActionTextIxpLayerModule (ref), moments (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), analytics (ref), fFlagMomentsSessionHeartbeat (ref), useNavigationFocus (ref), useSignalState (ref), feedPlaybackSuspension (ref), getMomentsPreferencesStoreModule (ref), reportModalCovering (ref), fFlagEnableReportingFlowForMomentsFeed (ref), fFlagMomentsFlushDwellBeforeNavigationModule (ref), useNavigation (ref), roactNavigationModule (ref), momentsImmersiveNavigationMenu (ref), momentsBackHeaderModule (ref), momentsFeedSurfaceModule (ref), PushedFeedSafeAreaProvider (ref), view (ref), constantsModule (ref), creationFlowScreen (ref), FTUXEducationScreenModule (ref), momentsHostShellModule (ref), fFlagMomentsAvatarLookTryOn (ref)
 	local var1 = reactModule.useRef(nil)
 	local var2 = reactModule.useRef(nil)
 	
@@ -131,9 +132,13 @@ return reactModule.memo(function(p1)
 	end, { feedKind, current, current_1 })
 	local sessionSource = p1.sessionSource
 	reactModule.useEffect(function()
-		-- upvalues: current (ref), sessionSource (ref), logMomentsLayerExposure (copy), fStringMomentsExperienceJoinActionTextIxpLayerModule (copy), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsRealtimeSessionTelemetry (copy), analytics (copy), fFlagMomentsSessionHeartbeat (copy)
+		-- upvalues: current (ref), sessionSource (ref), logMomentsLayerExposure (copy), fStringMomentsExperienceJoinActionTextIxpLayerModule (copy), moments (copy), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsRealtimeSessionTelemetry (copy), analytics (copy), fFlagMomentsSessionHeartbeat (copy)
 		current.setSessionSource(sessionSource)
 		logMomentsLayerExposure(fStringMomentsExperienceJoinActionTextIxpLayerModule)
+		
+		if require(moments.Flags.FFlagMomentsFeedIxpEnabled) then
+			logMomentsLayerExposure(require(moments.Flags.FStringMomentsFeedIxpLayer))
+		end
 		fireAnalyticsEvent(eventNames.TapMomentsTab, {
 			moments_session_id = current.getMomentsSessionId(false),
 			source = sessionSource
@@ -249,6 +254,7 @@ return reactModule.memo(function(p1)
 		openProfile = p1.openProfile,
 		openOwnMoments = p1.openOwnMoments,
 		openMomentsFeedReport = p1.openMomentsFeedReport,
+		openAvatarLookTryOn = if fFlagMomentsAvatarLookTryOn then p1.openAvatarLookTryOn else nil,
 		openMomentCommentReport = p1.openMomentCommentReport,
 		openBlockUser = p1.openBlockUser
 	}, if var9 then reactModule.createElement(view, { tag = "size-full bg-surface-0" }, {

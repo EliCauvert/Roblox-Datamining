@@ -10,5 +10,5 @@
 	"RestrictedUser", "SubscriptionPurchasePlatformNotSupported",
 	"SubscriptionInvalidSaleLocation", "SubscriptionNotForSale", "VpcRequired",
 	"ExceedParentalSpendLimit", "EconomicRestriction",
-	"PendingProductsLimitExceeded", "UnsupportedInStudio"
+	"PendingProductsLimitExceeded", "UnsupportedInStudio", "VIPServerUnavailable"
 })

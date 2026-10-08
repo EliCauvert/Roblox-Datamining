@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BuildAdUpsell3", false) and (require(script.Parent.FFlagEnableBuildAdPromotion) and game:GetEngineFeature("BuildAppStorageKey"))
+﻿return require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags).FFlagBuildAdUpsell

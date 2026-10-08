@@ -8,6 +8,7 @@ local videoEventInterfaceKeyModule = require(script.Parent.VideoEventInterfaceKe
 local discoveryVideoEndEventHundredthsPercent = game:DefineFastInt("DiscoveryVideoEndEventHundredthsPercent", 0)
 local fFlagLuaAppBroadenVideoAnalytics = require(parent.SharedFlags).FFlagLuaAppBroadenVideoAnalytics
 local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
+local fFlagLuaAppDiscoveryMomentVideoTelemetry = require(parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
 local var1 = if fFlagLuaAppBroadenVideoAnalytics then nil else tModule.strictInterface({
 	videoAssetId = tModule.string,
 	videoPlaybackSessionId = tModule.string,
@@ -17,7 +18,8 @@ local var1 = if fFlagLuaAppBroadenVideoAnalytics then nil else tModule.strictInt
 	rootPlaceId = tModule.string,
 	gameSetTypeId = tModule.optional(tModule.string),
 	sortPos = tModule.optional(tModule.number),
-	targetUniverseId = tModule.optional(tModule.string)
+	targetUniverseId = tModule.optional(tModule.string),
+	isMoment = if fFlagLuaAppDiscoveryMomentVideoTelemetry then tModule.optional(tModule.boolean) else nil
 })
 local var2 = if fFlagLuaAppBroadenVideoAnalytics then {
 	[videoEventInterfaceKeyModule.DefaultGameTile] = if fFlagLuaAppBroadenVideoAnalytics then tModule.strictInterface({
@@ -32,7 +34,8 @@ local var2 = if fFlagLuaAppBroadenVideoAnalytics then {
 		targetUniverseId = tModule.optional(tModule.string),
 		nativeAdData = tModule.optional(tModule.string),
 		tileType = tModule.optional(tModule.string),
-		contentType = tModule.optional(tModule.string)
+		contentType = tModule.optional(tModule.string),
+		isMoment = if fFlagLuaAppDiscoveryMomentVideoTelemetry then tModule.optional(tModule.boolean) else nil
 	}) else nil,
 	[videoEventInterfaceKeyModule.OneByTwoTileAdLink] = if fFlagLuaAppEnableHomepageOneByTwoTile then if fFlagLuaAppEnableHomepageOneByTwoTile then tModule.strictInterface({
 		videoAssetId = tModule.string,

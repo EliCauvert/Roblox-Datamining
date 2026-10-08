@@ -2,7 +2,9 @@
 local playersService = game:GetService("Players")
 local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 local finishDictationInputModule = require(script.Parent.finishDictationInput)
+local setDictationUsageTypeModule = require(script.Parent.setDictationUsageType)
 local engineAudioSTTIsDictationEnabled = game:DefineFastFlag("EngineAudioSTTIsDictationEnabled", false)
+local expChatDictationSendUsageType = game:DefineFastFlag("ExpChatDictationSendUsageType", false)
 
 local function _(p1)
 	if p1.current then
@@ -58,7 +60,7 @@ local _ = function(p1)
 end
 
 return function()
-	-- upvalues: reactModule (ref), playersService (ref), coreGuiService (ref), engineAudioSTTIsDictationEnabled (ref), finishDictationInputModule (ref)
+	-- upvalues: reactModule (ref), playersService (ref), coreGuiService (ref), engineAudioSTTIsDictationEnabled (ref), expChatDictationSendUsageType (ref), setDictationUsageTypeModule (ref), finishDictationInputModule (ref)
 	local var1, var2 = reactModule.useState(nil)
 	local var3 = reactModule.useRef(nil)
 	local var4 = reactModule.useRef(nil)
@@ -118,7 +120,7 @@ return function()
 		var2(nil)
 	end, { var9 })
 	local var11 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: playersService (copy), var9 (ref), coreGuiService (copy), engineAudioSTTIsDictationEnabled (copy), var2 (ref)
+		-- upvalues: playersService (copy), var9 (ref), coreGuiService (copy), engineAudioSTTIsDictationEnabled (copy), expChatDictationSendUsageType (copy), setDictationUsageTypeModule (copy), var2 (ref)
 		local localPlayer = playersService.LocalPlayer
 		
 		if not localPlayer then
@@ -175,6 +177,9 @@ return function()
 		
 		if engineAudioSTTIsDictationEnabled then
 			audioSpeechToText.DictationEnabled = true
+		end
+		if expChatDictationSendUsageType then
+			setDictationUsageTypeModule(audioSpeechToText, var12)
 		end
 		audioSpeechToText.Enabled = true
 		audioSpeechToText.Parent = expChatDictation

@@ -6,7 +6,6 @@ local _ = require(sduiSharedUtilities.SduiIntegrationTypes)
 local fFlagSduiHydrationDataCamelCasePropertyKeys = require(parent.SharedFlags).FFlagSduiHydrationDataCamelCasePropertyKeys
 local fFlagEnableHomepagePromptsForModalsAndBanners = require(parent.SharedFlags).FFlagEnableHomepagePromptsForModalsAndBanners
 local fFlagPromptsHandlerEnabled = require(parent.SharedFlags).FFlagPromptsHandlerEnabled
-local fFlagSduiClientTemplateCache = require(parent.SharedFlags).FFlagSduiClientTemplateCache
 
 local function decodeProto(p1, p2)
 	return p1.decode(if typeof(p2) == "string" then buffer.fromstring(p2) else p2)
@@ -113,7 +112,6 @@ return {
 		return if p3.localized_literals then p3.localized_literals else nil
 	end,
 	parseTemplateEntriesFromResponse = function(value, p3)
-		-- upvalues: fFlagSduiClientTemplateCache (ref)
 		local t = {}
 		local t_1 = {}
 		local t_2 = {}
@@ -122,7 +120,7 @@ return {
 			for i, v in value.templates do
 				t_1[v.roblox_component] = v.template
 				
-				if fFlagSduiClientTemplateCache and p3 then
+				if p3 then
 					t_2[v.roblox_component] = i
 				end
 				t[i] = v.template

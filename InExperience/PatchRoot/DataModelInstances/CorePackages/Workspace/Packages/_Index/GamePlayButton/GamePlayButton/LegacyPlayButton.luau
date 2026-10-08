@@ -10,7 +10,6 @@ local comboButton = UIBloxModule.App.Button.ComboButton
 local withLocalization = require(parent.Localization).withLocalization
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local fFlagLuaAppPlayButtonLoadingPrimary = require(parent.SharedFlags).FFlagLuaAppPlayButtonLoadingPrimary
-local fFlagLuaAppEnablePlaySquadButton = require(parent.SharedFlags).FFlagLuaAppEnablePlaySquadButton
 local getFFlagUIBloxUseFoundationButton = require(parent.SharedFlags).UIBlox.GetFFlagUIBloxUseFoundationButton
 local fFlagLuaAppPlayButtonOptOutFoundationButton = require(parent.SharedFlags).FFlagLuaAppPlayButtonOptOutFoundationButton
 local fFlagLuaAppPlayLoadingClickTelemetryMobile = require(parent.SharedFlags).FFlagLuaAppPlayLoadingClickTelemetryMobile
@@ -30,14 +29,14 @@ playButton.validateProps = tModule.strictInterface({
 	localizedFiatPrice = tModule.string,
 	playButtonState = tModule.string,
 	onPlayButtonActivated = tModule.callback,
-	onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then tModule.callback else nil,
+	onPlaySquadButtonActivated = if getFFlagIsSquadEnabled() then tModule.callback else nil,
 	Size = tModule.optional(tModule.UDim2),
 	LayoutOrder = tModule.optional(tModule.number),
 	testId = tModule.optional(tModule.string)
 })
 
 function playButton.renderWithLocalization(p1, p2)
-	-- upvalues: fFlagLuaAppEnablePlaySquadButton (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingPrimary (ref), buttonType (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), play (ref), getFFlagIsSquadEnabled (ref), robux (ref), fFlagLuaAppPlayButtonPrivatePT (ref), unavailable (ref), fFlagEnableGameJoinEarlyAccess (ref), roactModule (ref), comboButton (ref), truncationCollapse (ref), button (ref), fFlagLuaAppPlayLoadingClickTelemetryMobile (ref), reactModule (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref)
+	-- upvalues: getFFlagIsSquadEnabled (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingPrimary (ref), buttonType (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), play (ref), robux (ref), fFlagLuaAppPlayButtonPrivatePT (ref), unavailable (ref), fFlagEnableGameJoinEarlyAccess (ref), roactModule (ref), comboButton (ref), truncationCollapse (ref), button (ref), fFlagLuaAppPlayLoadingClickTelemetryMobile (ref), reactModule (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref)
 	local size = p1.props.Size
 	local layoutOrder = p1.props.LayoutOrder
 	local price = p1.props.price
@@ -46,8 +45,8 @@ function playButton.renderWithLocalization(p1, p2)
 	local onPlaySquadButtonActivated = p1.props.onPlaySquadButtonActivated
 	local var1 = false
 	local var2 = false
-	local var3 = if fFlagLuaAppEnablePlaySquadButton then false else nil
-	local var4 = if fFlagLuaAppEnablePlaySquadButton then false else nil
+	local var3 = if getFFlagIsSquadEnabled() then false else nil
+	local var4 = if getFFlagIsSquadEnabled() then false else nil
 	local secondary = nil
 	local var5 = nil
 	local unavailable_1 = nil
@@ -102,7 +101,7 @@ function playButton.renderWithLocalization(p1, p2)
 	else
 		error("invalid play button state!")
 	end
-	if fFlagLuaAppEnablePlaySquadButton and var3 then
+	if getFFlagIsSquadEnabled() and var3 then
 		return roactModule.createElement(comboButton, {
 			layoutOrder = layoutOrder,
 			size = size,

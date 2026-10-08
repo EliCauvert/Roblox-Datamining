@@ -15,7 +15,6 @@ local fFlagEnableRMOnMorePageGUAC = sharedFlagsModule.FFlagEnableRMOnMorePageGUA
 local fFlagEnableRMOnMorePageForAll = sharedFlagsModule.FFlagEnableRMOnMorePageForAll
 local fFlagLuaAppFixNotificationBadgeCountsSync = sharedFlagsModule.FFlagLuaAppFixNotificationBadgeCountsSync
 local fFlagFixMomentsExperienceFallback = sharedFlagsModule.FFlagFixMomentsExperienceFallback
-local fFlagGuacMomentsFeatureList = sharedFlagsModule.FFlagGuacMomentsFeatureList
 local fFlagFlyoutRemoveMomentsForArgoEnabled = sharedFlagsModule.FFlagFlyoutRemoveMomentsForArgoEnabled
 local fFlagEnableArgus = sharedFlagsModule.FFlagEnableArgus
 local fFlagArgoEnableMoments = sharedFlagsModule.FFlagArgoEnableMoments
@@ -73,7 +72,7 @@ local function shouldSkipLibraryItem(p1, p2, p3)
 end
 
 return function()
-	-- upvalues: constantsModule (ref), useSelector (ref), fFlagLuaAppFixNotificationBadgeCountsSync (ref), fFlagLuaAppEnableSduiHomePage (ref), useHomeSortDropDownOptionsModule (ref), reactModule (ref), useAppPolicy (ref), fFlagFlyoutGateLearnPlace (ref), fFlagFlyoutFilterWebViewsAndBrowserLinks (ref), fFlagFlyoutSidePanelTradesEntryModule (ref), fFlagEnableBlackbirdCheck (ref), flyoutGateMomentsTile (ref), fFlagFixMomentsExperienceFallback (ref), fFlagFlyoutRemoveMomentsForArgoEnabled (ref), useMomentsGating (ref), fFlagGuacMomentsFeatureList (ref), fFlagEnableRMOnMorePageGUAC (ref), flyoutContentSettingsModule (ref), shouldSkipLibraryItem (ref), updateNotifications (ref), getFFlagPlatformEventEnabled (ref), getFStringPlatformEventUrl (ref), fFlagEnableArgus (ref), fFlagArgoEnableMoments (ref), fFlagEnableRMOnMorePageForAll (ref), canRenderNativeMoments (ref), appPage (ref)
+	-- upvalues: constantsModule (ref), useSelector (ref), fFlagLuaAppFixNotificationBadgeCountsSync (ref), fFlagLuaAppEnableSduiHomePage (ref), useHomeSortDropDownOptionsModule (ref), reactModule (ref), useAppPolicy (ref), fFlagFlyoutGateLearnPlace (ref), fFlagFlyoutFilterWebViewsAndBrowserLinks (ref), fFlagFlyoutSidePanelTradesEntryModule (ref), fFlagEnableBlackbirdCheck (ref), flyoutGateMomentsTile (ref), fFlagFixMomentsExperienceFallback (ref), fFlagFlyoutRemoveMomentsForArgoEnabled (ref), useMomentsGating (ref), fFlagEnableRMOnMorePageGUAC (ref), flyoutContentSettingsModule (ref), shouldSkipLibraryItem (ref), updateNotifications (ref), getFFlagPlatformEventEnabled (ref), getFStringPlatformEventUrl (ref), fFlagEnableArgus (ref), fFlagArgoEnableMoments (ref), fFlagEnableRMOnMorePageForAll (ref), canRenderNativeMoments (ref), appPage (ref)
 	local var1, var2
 	local FLYOUT_DEFAULT_POLICY = constantsModule.FLYOUT_DEFAULT_POLICY
 	local var3 = useSelector(function(p1)
@@ -164,9 +163,7 @@ return function()
 		return if localUserId then localUserId.membership == Enum.MembershipType.Premium or fFlagEnableBlackbirdCheck and localUserId.hasRobloxSubscription == true else false
 	end) else false
 	local var23 = if flyoutGateMomentsTile or fFlagFixMomentsExperienceFallback or fFlagFlyoutRemoveMomentsForArgoEnabled then useMomentsGating() else nil
-	local var24 = if flyoutGateMomentsTile and fFlagEnableRMOnMorePageGUAC then if flyoutGateMomentsTile then if fFlagGuacMomentsFeatureList then var23.isAmpPolicyEnabled else useAppPolicy(function(p1)
-		return p1.getDisplayMomentsMoreTabTile()
-	end) else false else true
+	local var24 = if flyoutGateMomentsTile and fFlagEnableRMOnMorePageGUAC then if flyoutGateMomentsTile then var23.isAmpPolicyEnabled else false else true
 	local var25 = not var17 or var17 == ""
 	
 	return reactModule.useMemo(function()

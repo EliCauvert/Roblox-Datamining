@@ -7,6 +7,7 @@ local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 local discountSummary = require(parent.IAPExperience).DiscountSummary
 local blackbirdUpsellBanner = require(parent.RobloxSubscriptionPurchaseApp).Components.BlackbirdUpsellBanner
+local offerExpiryBadge = require(parent.AvatarExperienceCommon).Components.OfferExpiryBadge
 local useDiscountSummaryPropsModule = require(bulkPurchaseApp.Hooks.useDiscountSummaryProps)
 local priceBoxLineModule = require(script.Parent.PriceBoxLine)
 local priceBoxLineVariantEnumModule = require(bulkPurchaseApp.Enums.PriceBoxLineVariantEnum)
@@ -14,6 +15,7 @@ local fFlagAddTimerToBulkPurchaseBuyButtonModule = require(bulkPurchaseApp.Flags
 local fIntBulkPurchaseEnabledCountdownMSModule = require(bulkPurchaseApp.Flags.FIntBulkPurchaseEnabledCountdownMS)
 local fFlagAXAddPlusUpsellToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
 local fFlagAXAddOffersToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
+local fFlagAXUpdateBulkPurchaseOfferExpiryBadgeModule = require(bulkPurchaseApp.Flags.FFlagAXUpdateBulkPurchaseOfferExpiryBadge)
 local t = {
 	heading = "CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.TotalCost",
 	currentBalanceLine = "CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.CurrentBalance",
@@ -25,7 +27,7 @@ local t = {
 local _ = require(bulkPurchaseApp.Store.Types)
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useDiscountSummaryPropsModule (ref), fFlagAXAddOffersToBulkPurchaseModule (ref), useTokens (ref), reactModule (ref), foundationModule (ref), view (ref), priceBoxLineModule (ref), priceBoxLineVariantEnumModule (ref), discountSummary (ref), fFlagAddTimerToBulkPurchaseBuyButtonModule (ref), fIntBulkPurchaseEnabledCountdownMSModule (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref), blackbirdUpsellBanner (ref)
+	-- upvalues: useLocalization (ref), t (ref), useDiscountSummaryPropsModule (ref), fFlagAXAddOffersToBulkPurchaseModule (ref), useTokens (ref), reactModule (ref), foundationModule (ref), fFlagAXUpdateBulkPurchaseOfferExpiryBadgeModule (ref), offerExpiryBadge (ref), view (ref), priceBoxLineModule (ref), priceBoxLineVariantEnumModule (ref), discountSummary (ref), fFlagAddTimerToBulkPurchaseBuyButtonModule (ref), fIntBulkPurchaseEnabledCountdownMSModule (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref), blackbirdUpsellBanner (ref)
 	local var1 = useLocalization(t)
 	local var2 = useDiscountSummaryPropsModule(p1.discountInformation, p1.totalCost, if fFlagAXAddOffersToBulkPurchaseModule and p1.offerData then p1.offerData.savingsSummary else nil)
 	local var3 = nil
@@ -33,7 +35,7 @@ return function(p1)
 	if fFlagAXAddOffersToBulkPurchaseModule then
 		local var4 = useTokens()
 		var3 = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), reactModule (copy), foundationModule (copy), var4 (ref)
+			-- upvalues: p1 (ref), reactModule (copy), foundationModule (copy), var4 (ref), fFlagAXUpdateBulkPurchaseOfferExpiryBadgeModule (copy), offerExpiryBadge (copy)
 			local t = {}
 			local var5 = if p1.offerData then p1.offerData.offersAvailable else nil
 			local toggleOfferSelected = p1.toggleOfferSelected
@@ -57,8 +59,8 @@ return function(p1)
 							Position = UDim2.fromOffset(var4.Stroke.Standard, 0)
 						}, {
 							Checkbox = reactModule.createElement(foundationModule.Checkbox, {
-								label = "",
 								LayoutOrder = 1,
+								label = if fFlagAXUpdateBulkPurchaseOfferExpiryBadgeModule then v.localizedDescription else "",
 								isChecked = v.selected,
 								onActivated = function()
 									-- upvalues: toggleOfferSelected (ref), i (ref)
@@ -66,12 +68,16 @@ return function(p1)
 								end,
 								size = foundationModule.Enums.InputSize.Small
 							}),
-							Label = reactModule.createElement(foundationModule.Text, {
+							Label = if not fFlagAXUpdateBulkPurchaseOfferExpiryBadgeModule then reactModule.createElement(foundationModule.Text, {
 								RichText = true,
 								tag = "text-body-small content-default auto-xy",
 								LayoutOrder = 2,
 								Text = "<b>" .. v.localizedDescription .. "</b>"
-							})
+							}) else nil,
+							ExpiryBadge = if fFlagAXUpdateBulkPurchaseOfferExpiryBadgeModule and v.expirationTimeUtc then reactModule.createElement(offerExpiryBadge, {
+								layoutOrder = 2,
+								expirationTimeInUTC = v.expirationTimeUtc
+							}) else nil
 						})
 					})
 				end

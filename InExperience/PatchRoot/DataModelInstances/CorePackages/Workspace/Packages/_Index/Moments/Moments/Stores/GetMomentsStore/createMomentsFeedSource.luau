@@ -3,7 +3,7 @@ local parent = moments.Parent
 local _ = require(parent.Signals)
 local promiseModule = require(parent.Promise)
 local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.MomentsTypes)
+local momentsTypesModule = require(parent.MomentsTypes)
 local sharedFlagsModule = require(parent.SharedFlags)
 local _ = require(moments.Components.Feed)
 local analytics = momentsCommonModule.Analytics
@@ -24,9 +24,11 @@ local getReactionsStoreModule = require(moments.Stores.GetReactionsStore)
 local getShareCountsStoreModule = require(moments.Stores.GetShareCountsStore)
 local getFFlagMomentsShareDeeplinkReliableOpenModule = require(moments.Flags.GetFFlagMomentsShareDeeplinkReliableOpen)
 local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
+local fFlagMomentsModeratedMomentPageModule = require(moments.Flags.FFlagMomentsModeratedMomentPage)
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
 local var1 = if fFlagMomentsComments then require(parent.DataHydration.MomentsGetMomentsCommentsStore) else nil
+local momentStatus = momentsTypesModule.Enums.MomentStatus
 
 local function _(p1, p2, p3, p4)
 	return if p2 == nil or p3 == nil or p4 == nil then p1 else function()
@@ -67,278 +69,345 @@ local _ = function(p3, p4)
 	return recommendationMetadata ~= nil and recommendationMetadata.feedItemId == p4
 end
 
-local function loadDeepLinkedMomentsForUnavailableDialog(p3, p4, p5, p6)
+local _ = function(p3, p4)
+	for i, v in p3 do
+		local var2
+		if v.momentId == p4 then
+			var2 = true
+		else
+			local recommendationMetadata = v.recommendationMetadata
+			var2 = recommendationMetadata ~= nil and recommendationMetadata.feedItemId == p4
+		end
+		if var2 then
+			return v
+		end
+	end
+	return nil
+end
+
+local function makeUnavailableMomentItem(p5, p6, p7)
+	-- upvalues: momentStatus (ref)
+	local var3
+	for i, v in p6 do
+		local var4
+		if v.momentId == p5 then
+			var4 = true
+		else
+			local recommendationMetadata = v.recommendationMetadata
+			var4 = recommendationMetadata ~= nil and recommendationMetadata.feedItemId == p5
+		end
+		if var4 then
+			var3 = v
+			if not var3 then
+				for i, v_1 in p7 do
+					local var5
+					if v_1.momentId == p5 then
+						var5 = true
+					else
+						local recommendationMetadata = v_1.recommendationMetadata
+						var5 = recommendationMetadata ~= nil and recommendationMetadata.feedItemId == p5
+					end
+					if var5 then
+						var3 = v_1
+					end
+				end
+				var3 = nil
+			end
+			return {
+				kind = "unavailableMoment",
+				targetId = p5,
+				isModerated = var3 ~= nil and (var3.status ~= momentStatus.Deleted and var3.isModerated == true)
+			}
+		end
+	end
+	var3 = nil
+end
+
+local function loadDeepLinkedMomentsForUnavailableDialog(p8, p9, p10, p11)
 	-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (ref), promiseModule (ref)
-	local var2, var3 = promiseModule.race({
-		(if fFlagMomentsPassFeedItemIdToBackendApis then p3(p4, p5) else p3(p4)):catch(function()
+	local var6, var7 = promiseModule.race({
+		(if fFlagMomentsPassFeedItemIdToBackendApis then p8(p9, p10) else p8(p9)):catch(function()
 			return nil
 		end),
-		promiseModule.delay(p6):andThen(function()
+		promiseModule.delay(p11):andThen(function()
 			return nil
 		end)
 	}):await()
 	
-	return if var2 and type(var3) == "table" then var3 else nil
+	return if var6 and type(var7) == "table" then var7 else nil
 end
 
-return function(p3, p4)
-	-- upvalues: momentsGetMomentsTrendingStoreModule (ref), fFlagMomentsComments (ref), var1 (ref), getDeepLinkStoreModule (ref), defaultFetchDeepLinkedMoments (ref), fFlagMomentsOptimisticProfilePending (ref), getLocalUserIdModule (ref), createPendingFeedGetterModule (ref), momentsGetMomentsUserStoreModule (ref), recommendationSource (ref), getReactionsStoreModule (ref), getShareCountsStoreModule (ref), getFFlagMomentsShareDeeplinkReliableOpenModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), shouldShowMomentInFeedModule (ref), loadDeepLinkedMomentsForUnavailableDialog (ref), fFlagMomentsContentStatsTelemetry (ref), analytics (ref), reportUnavailableFeedItemModule (ref)
-	p4 = p4 or {}
-	local var2 = if p4.trendingStore ~= nil then momentsGetMomentsTrendingStoreModule(false) else p4.trendingStore
-	local var3 = nil
+return function(p8, p9)
+	-- upvalues: momentsGetMomentsTrendingStoreModule (ref), fFlagMomentsComments (ref), var1 (ref), getDeepLinkStoreModule (ref), defaultFetchDeepLinkedMoments (ref), fFlagMomentsOptimisticProfilePending (ref), getLocalUserIdModule (ref), createPendingFeedGetterModule (ref), momentsGetMomentsUserStoreModule (ref), recommendationSource (ref), getReactionsStoreModule (ref), getShareCountsStoreModule (ref), getFFlagMomentsShareDeeplinkReliableOpenModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), shouldShowMomentInFeedModule (ref), loadDeepLinkedMomentsForUnavailableDialog (ref), fFlagMomentsModeratedMomentPageModule (ref), makeUnavailableMomentItem (ref), fFlagMomentsContentStatsTelemetry (ref), analytics (ref), reportUnavailableFeedItemModule (ref)
+	p9 = p9 or {}
+	local var6 = if p9.trendingStore ~= nil then momentsGetMomentsTrendingStoreModule(false) else p9.trendingStore
+	local var7 = nil
 	
 	if fFlagMomentsComments then
-		var3 = p4.commentsStore
+		var7 = p9.commentsStore
 		
-		if var3 == nil and var1 ~= nil then
-			var3 = var1(false)
+		if var7 == nil and var1 ~= nil then
+			var7 = var1(false)
 		end
 	end
-	local deepLinkStore = p4.deepLinkStore or getDeepLinkStoreModule()
-	local fetchDeepLinkedMoments = p4.fetchDeepLinkedMoments or defaultFetchDeepLinkedMoments
-	local deepLinkFetchTimeoutSeconds = p4.deepLinkFetchTimeoutSeconds or 20
-	local var4 = nil
-	local var5 = nil
+	local deepLinkStore = p9.deepLinkStore or getDeepLinkStoreModule()
+	local fetchDeepLinkedMoments = p9.fetchDeepLinkedMoments or defaultFetchDeepLinkedMoments
+	local deepLinkFetchTimeoutSeconds = p9.deepLinkFetchTimeoutSeconds or 20
+	local var8 = nil
+	local var9 = nil
 	
 	if fFlagMomentsOptimisticProfilePending then
-		local localUserId = p4.localUserId or getLocalUserIdModule()
+		local localUserId = p9.localUserId or getLocalUserIdModule()
 		
 		if localUserId ~= nil then
-			var5 = createPendingFeedGetterModule(localUserId, p4.userStore or momentsGetMomentsUserStoreModule(false))
+			var9 = createPendingFeedGetterModule(localUserId, p9.userStore or momentsGetMomentsUserStoreModule(false))
 		end
 	end
 	return {
 		id = "trending",
-		getPendingItems = var5,
+		getPendingItems = var9,
 		recommendationSource = recommendationSource.Trending,
-		fetchAsync = function(p5)
-			-- upvalues: var3 (write), var4 (write), p4 (ref), var2 (ref), p3 (ref), getReactionsStoreModule (copy), getShareCountsStoreModule (copy), getFFlagMomentsShareDeeplinkReliableOpenModule (copy), deepLinkStore (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), shouldShowMomentInFeedModule (copy), loadDeepLinkedMomentsForUnavailableDialog (copy), fetchDeepLinkedMoments (ref), deepLinkFetchTimeoutSeconds (ref), fFlagMomentsComments (copy), fFlagMomentsOptimisticProfilePending (copy), fFlagMomentsContentStatsTelemetry (copy), analytics (copy), recommendationSource (copy), reportUnavailableFeedItemModule (copy)
-			local var6 = if var3 ~= nil then nil else var3.getOwnerGeneration(false)
-			local signalTracker = p4.signalTracker
-			local var7, var8 = var2.getTrending(p3(false), p5 or var4, if signalTracker then signalTracker:getSignalsPayload() else nil):await()
+		fetchAsync = function(p10)
+			-- upvalues: var7 (write), var8 (write), p9 (ref), var6 (ref), p8 (ref), getReactionsStoreModule (copy), getShareCountsStoreModule (copy), getFFlagMomentsShareDeeplinkReliableOpenModule (copy), deepLinkStore (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), shouldShowMomentInFeedModule (copy), loadDeepLinkedMomentsForUnavailableDialog (copy), fetchDeepLinkedMoments (ref), deepLinkFetchTimeoutSeconds (ref), fFlagMomentsModeratedMomentPageModule (copy), makeUnavailableMomentItem (copy), fFlagMomentsComments (copy), fFlagMomentsOptimisticProfilePending (copy), fFlagMomentsContentStatsTelemetry (copy), analytics (copy), recommendationSource (copy), reportUnavailableFeedItemModule (copy)
+			local var10 = if var7 ~= nil then nil else var7.getOwnerGeneration(false)
+			local signalTracker = p9.signalTracker
+			local var11, var12 = var6.getTrending(p8(false), p10 or var8, if signalTracker then signalTracker:getSignalsPayload() else nil):await()
 			
-			if not var7 then
-				error(var8)
+			if not var11 then
+				error(var12)
 			end
-			local var9
-			local commentsByFeedItemId = var8.commentsByFeedItemId
+			local var13
+			local commentsByFeedItemId = var12.commentsByFeedItemId
 			
 			if commentsByFeedItemId == nil then
-				var9 = nil
+				var13 = nil
 			else
 				local t = {}
 				
 				for i, v in commentsByFeedItemId do
 					t[i] = v
 				end
-				var9 = t
+				var13 = t
 			end
-			var4 = var8.nextCursor or var4
+			var8 = var12.nextCursor or var8
 			
-			if p5 == nil then
+			if p10 == nil then
 				getReactionsStoreModule(false).clear()
 				getShareCountsStoreModule(false).clear()
 			end
-			local var10
-			getReactionsStoreModule(false).setBatchReactionCounts(var8.reactionsByMomentId or {})
-			getShareCountsStoreModule(false).setBatchShareCounts(var8.shareInfoByMomentId or {})
+			getReactionsStoreModule(false).setBatchReactionCounts(var12.reactionsByMomentId or {})
+			getShareCountsStoreModule(false).setBatchShareCounts(var12.shareInfoByMomentId or {})
 			local t = {}
-			local var11 = nil
+			local var14 = nil
 			local momentId = nil
-			local momentId_1 = nil
+			local targetId = nil
 			
-			if p5 == nil then
+			if p10 == nil then
 				if getFFlagMomentsShareDeeplinkReliableOpenModule() then
 					local deepLinkedMomentId = deepLinkStore.getDeepLinkedMomentId(false)
-					local var12 = if fFlagMomentsPassFeedItemIdToBackendApis then deepLinkStore.getDeepLinkedMomentTargetIdType(false) else nil
+					local var15 = if fFlagMomentsPassFeedItemIdToBackendApis then deepLinkStore.getDeepLinkedMomentTargetIdType(false) else nil
 					
 					if deepLinkedMomentId ~= nil then
 						local t_1 = {}
-						local var13 = nil
+						local var16 = nil
 						
-						for i, v in var8.moments do
+						for i, v in var12.moments do
 							t_1[v.momentId] = true
 							
-							if var13 == nil then
-								local var14
+							if var16 == nil then
+								local var17
 								if v.momentId == deepLinkedMomentId then
-									var14 = true
+									var17 = true
 								else
 									local recommendationMetadata = v.recommendationMetadata
-									var14 = recommendationMetadata ~= nil and recommendationMetadata.feedItemId == deepLinkedMomentId
+									var17 = recommendationMetadata ~= nil and recommendationMetadata.feedItemId == deepLinkedMomentId
 								end
-								if var14 then
-									var13 = v
+								if var17 then
+									var16 = v
 								end
 							end
 						end
-						var10 = false
-						local var15 = false
+						local var18 = false
+						local var19 = false
 						
-						if var13 ~= nil and shouldShowMomentInFeedModule(var13) then
-							table.insert(t, { kind = "moment", moment = var13 })
-							momentId = var13.momentId
-							var10 = true
+						if var16 ~= nil and shouldShowMomentInFeedModule(var16) then
+							table.insert(t, { kind = "moment", moment = var16 })
+							momentId = var16.momentId
+							var18 = true
 						else
-							local var16 = loadDeepLinkedMomentsForUnavailableDialog(fetchDeepLinkedMoments, deepLinkedMomentId, var12, deepLinkFetchTimeoutSeconds)
+							local var20 = loadDeepLinkedMomentsForUnavailableDialog(fetchDeepLinkedMoments, deepLinkedMomentId, var15, deepLinkFetchTimeoutSeconds)
 							
-							if var16 ~= nil then
-								local commentsByFeedItemId_1 = var16.commentsByFeedItemId
+							if var20 ~= nil then
+								local commentsByFeedItemId_1 = var20.commentsByFeedItemId
 								
 								if commentsByFeedItemId_1 == nil then
-									var9 = var9
+									var13 = var13
 								else
-									local var17 = var9 or {}
+									local var21 = var13 or {}
 									
 									for i_1, v_1 in commentsByFeedItemId_1 do
-										var17[i_1] = v_1
+										var21[i_1] = v_1
 									end
-									var9 = var17
+									var13 = var21
 								end
-								if var16.reactionsByMomentId then
-									getReactionsStoreModule(false).setBatchReactionCounts(var16.reactionsByMomentId)
+								if var20.reactionsByMomentId then
+									getReactionsStoreModule(false).setBatchReactionCounts(var20.reactionsByMomentId)
 								end
-								if var16.shareInfoByMomentId then
-									getShareCountsStoreModule(false).setBatchShareCounts(var16.shareInfoByMomentId)
+								if var20.shareInfoByMomentId then
+									getShareCountsStoreModule(false).setBatchShareCounts(var20.shareInfoByMomentId)
 								end
-								for i_1, v_1 in var16.moments do
-									local var18
+								for i_1, v_1 in var20.moments do
+									local var22
 									if v_1.momentId == deepLinkedMomentId then
-										var18 = true
+										var22 = true
 									else
 										local recommendationMetadata = v_1.recommendationMetadata
-										var18 = recommendationMetadata ~= nil and recommendationMetadata.feedItemId == deepLinkedMomentId
+										var22 = recommendationMetadata ~= nil and recommendationMetadata.feedItemId == deepLinkedMomentId
 									end
-									if shouldShowMomentInFeedModule(v_1) and var18 then
+									if shouldShowMomentInFeedModule(v_1) and var22 then
 										table.insert(t, { kind = "moment", moment = v_1 })
-										var10 = true
+										var18 = true
 									end
 								end
-								var15 = not var10
+								var19 = not var18
+								
+								if fFlagMomentsModeratedMomentPageModule and var19 then
+									table.insert(t, makeUnavailableMomentItem(deepLinkedMomentId, var20.moments, var12.moments))
+								end
 							end
 						end
-						if var10 or var15 then
-							local var19 = var15
+						if var18 or var19 then
+							local var23 = var19 and not fFlagMomentsModeratedMomentPageModule
 							
-							var11 = function()
-								-- upvalues: deepLinkStore (copy), deepLinkedMomentId (ref), var19 (ref), p4 (copy)
+							var14 = function()
+								-- upvalues: deepLinkStore (copy), deepLinkedMomentId (ref), var23 (ref), p9 (copy)
 								if deepLinkStore.getDeepLinkedMomentId(false) == deepLinkedMomentId then
 									deepLinkStore.setDeepLinkedMomentId(nil)
 									
-									if var19 and p4.onDeepLinkedMomentUnavailable ~= nil then
-										p4.onDeepLinkedMomentUnavailable()
+									if var23 and p9.onDeepLinkedMomentUnavailable ~= nil then
+										p9.onDeepLinkedMomentUnavailable()
 									end
 								end
 							end
 						end
 					end
 				else
-					local var20 = if fFlagMomentsPassFeedItemIdToBackendApis then deepLinkStore.consumeDeepLinkedMoment() else nil
+					local var24 = if fFlagMomentsPassFeedItemIdToBackendApis then deepLinkStore.consumeDeepLinkedMoment() else nil
 					
 					if not fFlagMomentsPassFeedItemIdToBackendApis then
-						local var21 = deepLinkStore.consumeDeepLinkedMomentId()
+						local var25 = deepLinkStore.consumeDeepLinkedMomentId()
 						
-						if var21 ~= nil then
-							var20 = { targetIdType = nil, targetId = var21 }
+						if var25 ~= nil then
+							var24 = { targetIdType = nil, targetId = var25 }
 						end
 					end
-					if var20 ~= nil then
-						local targetId = var20.targetId
-						local targetIdType = var20.targetIdType
+					if var24 ~= nil then
+						local targetId_1 = var24.targetId
+						local targetIdType = var24.targetIdType
 						local t_1 = {}
-						local var22 = false
+						local var26 = false
 						
-						for i, v in var8.moments do
-							local var23
+						for i, v in var12.moments do
+							local var27
 							t_1[v.momentId] = true
 							
-							if v.momentId == targetId then
-								var23 = true
+							if v.momentId == targetId_1 then
+								var27 = true
 							else
 								local recommendationMetadata = v.recommendationMetadata
-								var23 = recommendationMetadata ~= nil and recommendationMetadata.feedItemId == targetId
+								var27 = recommendationMetadata ~= nil and recommendationMetadata.feedItemId == targetId_1
 							end
-							if var23 and shouldShowMomentInFeedModule(v) then
-								var22 = true
+							if var27 and shouldShowMomentInFeedModule(v) then
+								var26 = true
 							end
 						end
-						local var24 = loadDeepLinkedMomentsForUnavailableDialog(fetchDeepLinkedMoments, targetId, targetIdType, deepLinkFetchTimeoutSeconds)
+						local var28 = loadDeepLinkedMomentsForUnavailableDialog(fetchDeepLinkedMoments, targetId_1, targetIdType, deepLinkFetchTimeoutSeconds)
 						
-						if var24 ~= nil then
-							local commentsByFeedItemId_1 = var24.commentsByFeedItemId
+						if var28 ~= nil then
+							local commentsByFeedItemId_1 = var28.commentsByFeedItemId
 							
 							if commentsByFeedItemId_1 == nil then
-								var9 = var9
+								var13 = var13
 							else
-								local var17 = var9 or {}
+								local var21 = var13 or {}
 								
 								for i_1, v_1 in commentsByFeedItemId_1 do
-									var17[i_1] = v_1
+									var21[i_1] = v_1
 								end
-								var9 = var17
+								var13 = var21
 							end
-							if var24.reactionsByMomentId then
-								getReactionsStoreModule(false).setBatchReactionCounts(var24.reactionsByMomentId)
+							if var28.reactionsByMomentId then
+								getReactionsStoreModule(false).setBatchReactionCounts(var28.reactionsByMomentId)
 							end
-							if var24.shareInfoByMomentId then
-								getShareCountsStoreModule(false).setBatchShareCounts(var24.shareInfoByMomentId)
+							if var28.shareInfoByMomentId then
+								getShareCountsStoreModule(false).setBatchShareCounts(var28.shareInfoByMomentId)
 							end
-							for i_1, v_1 in var24.moments do
-								local var25
-								local var26 = shouldShowMomentInFeedModule(v_1)
+							for i_1, v_1 in var28.moments do
+								local var29
+								local var30 = shouldShowMomentInFeedModule(v_1)
 								
-								if v_1.momentId == targetId then
-									var25 = true
+								if v_1.momentId == targetId_1 then
+									var29 = true
 								else
 									local recommendationMetadata = v_1.recommendationMetadata
-									var25 = recommendationMetadata ~= nil and recommendationMetadata.feedItemId == targetId
+									var29 = recommendationMetadata ~= nil and recommendationMetadata.feedItemId == targetId_1
 								end
-								if var25 and var26 then
-									var22 = true
+								if var29 and var30 then
+									var26 = true
 								end
-								if var26 and var25 and not t_1[v_1.momentId] then
+								if var30 and var29 and not t_1[v_1.momentId] then
 									table.insert(t, { kind = "moment", moment = v_1 })
 								end
 							end
-							if not var22 and p4.onDeepLinkedMomentUnavailable ~= nil then
-								p4.onDeepLinkedMomentUnavailable()
+							if fFlagMomentsModeratedMomentPageModule then
+								if not var26 then
+									table.insert(t, 1, makeUnavailableMomentItem(targetId_1, var28.moments, var12.moments))
+								end
+							elseif not var26 and p9.onDeepLinkedMomentUnavailable ~= nil then
+								p9.onDeepLinkedMomentUnavailable()
 							end
 						end
 					end
 				end
 			end
 			if fFlagMomentsComments then
-				local var27 = var11
-				local var28 = var3
-				local var29 = var9
-				var11 = if var28 == nil or var6 == nil or var29 == nil then var27 else function()
-					-- upvalues: var27 (ref), var28 (ref), var29 (ref), var6 (ref)
-					if var27 ~= nil then
-						var27()
+				local var31 = var14
+				local var32 = var7
+				local var33 = var13
+				var14 = if var32 == nil or var10 == nil or var33 == nil then var31 else function()
+					-- upvalues: var31 (ref), var32 (ref), var33 (ref), var10 (ref)
+					if var31 ~= nil then
+						var31()
 					end
-					var28.upsertMomentComments(var29, var6)
+					var32.upsertMomentComments(var33, var10)
 				end
 			end
-			if fFlagMomentsOptimisticProfilePending and p5 == nil and t[1] ~= nil then
-				momentId_1 = t[1].moment.momentId
+			local var34 = t[1]
+			
+			if fFlagMomentsOptimisticProfilePending and p10 == nil and var34 ~= nil then
+				if var34.kind == "moment" then
+					targetId = var34.moment.momentId
+				elseif var34.kind == "unavailableMoment" then
+					targetId = var34.targetId
+				end
 			end
-			for var13, var10 in var8.moments do
+			for var18, v in var12.moments do
 				if fFlagMomentsContentStatsTelemetry then
 					analytics.reportMomentsFeedItemsReceived(recommendationSource.Trending)
 				end
-				if not (getFFlagMomentsShareDeeplinkReliableOpenModule() and (momentId ~= nil and var10.momentId == momentId)) then
-					if shouldShowMomentInFeedModule(var10) then
-						table.insert(t, { kind = "moment", moment = var10 })
+				if not (getFFlagMomentsShareDeeplinkReliableOpenModule() and (momentId ~= nil and v.momentId == momentId)) then
+					if shouldShowMomentInFeedModule(v) then
+						table.insert(t, { kind = "moment", moment = v })
 					elseif fFlagMomentsContentStatsTelemetry then
-						reportUnavailableFeedItemModule(var10, recommendationSource.Trending)
+						reportUnavailableFeedItemModule(v, recommendationSource.Trending)
 					end
 				end
 			end
 			return {
 				items = t,
-				initialMomentId = momentId_1,
-				nextCursor = var8.nextCursor,
-				onAccepted = var11
+				initialMomentId = targetId,
+				nextCursor = var12.nextCursor,
+				onAccepted = var14
 			}
 		end
 	}

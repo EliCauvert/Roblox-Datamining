@@ -1,5 +1,9 @@
 ﻿local appChat = script:FindFirstAncestor("AppChat")
 local parent = appChat.Parent
+
+if require(parent.SharedFlags).FFlagAppChatMigrateChatEventReceiver then
+	return require(script.Parent.ChatEventReceiver2)
+end
 local localizationModule = require(parent.Localization)
 local reactModule = require(parent.React)
 local roactNavigationModule = require(parent.RoactNavigation)

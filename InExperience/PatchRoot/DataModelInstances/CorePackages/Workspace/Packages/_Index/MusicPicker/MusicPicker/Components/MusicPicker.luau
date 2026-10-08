@@ -12,7 +12,8 @@ local function MusicPickerBase(p1)
 	local var1 = useMusicPickerViewModelModule({
 		tabs = p1.tabs,
 		onQueryChanged = p1.onQueryChanged,
-		onTabChanged = p1.onTabChanged
+		onTabChanged = p1.onTabChanged,
+		initialQuery = p1.initialQuery
 	})
 	
 	return reactModule.createElement(musicPickerViewModule, {

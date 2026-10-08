@@ -34,6 +34,7 @@ return {
 		ProfileBackground = "ProfileBackground",
 		Events = "Events",
 		CurrentlyPlaying = "CurrentlyPlaying",
+		Announcements = "Announcements",
 		ProfileCompletion = if fFlagEnableProfileCompletion then "ProfileCompletion" else "",
 		Moments = if fFlagProfilePlatformEnableMomentsModule then "UserMoments" else ""
 	},

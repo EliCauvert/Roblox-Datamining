@@ -12,7 +12,6 @@ local getTrialUnlockDaysModule = require(robloxSubscriptionPurchaseApp.Utils.get
 local isSupportedTrialPeriodTypeModule = require(robloxSubscriptionPurchaseApp.Utils.isSupportedTrialPeriodType)
 local signalsReactModule = require(parent.SignalsReact)
 local robloxPlusUpdateDiscountIcons = game:DefineFastFlag("RobloxPlusUpdateDiscountIcons", false)
-local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
 local fFlagRobloxPlusEnableNewFeatureListModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusEnableNewFeatureList)
 local fFlagRobloxPlusTrialDiscountTimingModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusTrialDiscountTiming)
 local fFlagEnablePlusReferralLandingSheet = require(parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
@@ -64,7 +63,7 @@ local function _(p2)
 end
 
 return function(p2)
-	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), getPeriodTypeDisplayLabelModule (ref), fFlagRobloxPlusTrialDiscountTimingModule (ref), getFreeTrialOfferModule (ref), isSupportedTrialPeriodTypeModule (ref), useLocalization (ref), getVirtualTransactionDiscounts (ref), array (ref), getTrialUnlockDaysModule (ref), FeatureRow (ref), fFlagRobloxPlusEnableNewFeatureListModule (ref), iconName (ref), robloxPlusUpdateDiscountIcons (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), reactModule (ref), view (ref), fFlagEnablePlusReferralLandingSheet (ref)
+	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), getPeriodTypeDisplayLabelModule (ref), fFlagRobloxPlusTrialDiscountTimingModule (ref), getFreeTrialOfferModule (ref), isSupportedTrialPeriodTypeModule (ref), useLocalization (ref), getVirtualTransactionDiscounts (ref), array (ref), getTrialUnlockDaysModule (ref), FeatureRow (ref), fFlagRobloxPlusEnableNewFeatureListModule (ref), iconName (ref), robloxPlusUpdateDiscountIcons (ref), reactModule (ref), view (ref), fFlagEnablePlusReferralLandingSheet (ref)
 	local var3 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getRobloxSubscriptionProduct)
 	local periodType = var3 and (var3.PeriodType and (tostring(var3.PeriodType) or ""))
 	local var4 = getPeriodTypeDisplayLabelModule(periodType, true)
@@ -111,7 +110,7 @@ return function(p2)
 				text = var11.baseVirtualTransactionDiscountText
 			}))
 		end
-		if var9 and typeof(var9.DiscountPercent) == "number" and (not fFlagRobloxPlusFAEFreeTrialModule or not p2.noPurchaseMethodRequired) then
+		if var9 and typeof(var9.DiscountPercent) == "number" and not p2.noPurchaseMethodRequired then
 			table.insert(t, FeatureRow({
 				layoutOrder = #t + 1,
 				iconName = if robloxPlusUpdateDiscountIcons then iconName.TagArrowUp else iconName.TagSparkleArrowUp,

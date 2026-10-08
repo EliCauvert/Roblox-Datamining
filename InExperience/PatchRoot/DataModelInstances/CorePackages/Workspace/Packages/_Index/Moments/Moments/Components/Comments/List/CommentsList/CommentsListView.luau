@@ -1,13 +1,15 @@
 ﻿local parent = script:FindFirstAncestor("Moments").Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local viewRecyclerModule = require(parent.ViewRecycler)
 local commentsListItemsModule = require(script.Parent.CommentsListItems)
 local commentsListRowContextModule = require(script.Parent.CommentsListRowContext)
 local _ = require(script.Parent.Parent.Rows.CommentRowTypes)
+local fFlagViewRecyclerReact06 = sharedFlagsModule.FFlagViewRecyclerReact06
 
 return function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), commentsListRowContextModule (ref), viewRecyclerModule (ref), commentsListItemsModule (ref)
+	-- upvalues: reactModule (ref), foundationModule (ref), commentsListRowContextModule (ref), viewRecyclerModule (ref), commentsListItemsModule (ref), fFlagViewRecyclerReact06 (ref)
 	local uDim = UDim.new(0, p1.rowBleed * -2)
 	
 	return reactModule.createElement(foundationModule.View, {
@@ -26,7 +28,8 @@ return function(p1)
 				onEndReached = p1.onEndReached,
 				onViewportChanged = p1.onViewportChanged,
 				onContentLengthChanged = p1.onContentLengthChanged,
-				autoScrollOnChange = p1.autoScrollOnChange,
+				autoScrollOnChange = if fFlagViewRecyclerReact06 then viewRecyclerModule.AutoScrollPolicy.WhenAtStart else p1.autoScrollOnChange,
+				autoScrollThreshold = if fFlagViewRecyclerReact06 then 33 else nil,
 				scrollingFrameRef = p1.listScrollingFrameRef,
 				scrollingFrameProps = {
 					Name = "MomentsCommentsListScrollingFrame",

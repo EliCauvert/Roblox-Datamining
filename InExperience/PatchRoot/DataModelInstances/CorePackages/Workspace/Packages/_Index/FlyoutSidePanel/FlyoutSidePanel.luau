@@ -14,11 +14,9 @@ return {
 		FlyoutStatusListener = if sharedFlagsModule.FFlagEnableHomeRobloxLogo then nil else require(script.Components.FlyoutStatusListener),
 		FlyoutHamburgerButton = if sharedFlagsModule.FFlagEnableFlyoutOnNavRail then require(script.Components.FlyoutHamburgerButton) else nil
 	},
-	Flags = {
-		FFlagLuaAppsEnableMarkButtonSeq = require(script.Flags.FFlagLuaAppsEnableMarkButtonSeq)
-	},
 	Utils = {
 		shouldShowLeftHeader = require(script.Utils.shouldShowLeftHeader),
+		sendMoreLegacyAndFlyoutItemClickEvent = if sharedFlagsModule.FFlagSendLogOutClickTelemetry then require(script.Analytics.FlyoutAnalytics).sendMoreLegacyAndFlyoutItemClickEvent else nil,
 		logCTAChangeMorePageFlyoutButtonTextExposure = if sharedFlagsModule.FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled then require(script.Utils.logCTAChangeMorePageFlyoutButtonTextExposure) else nil
 	},
 	Hooks = {

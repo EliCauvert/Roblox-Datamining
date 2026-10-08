@@ -1,5 +1,6 @@
 ﻿local httpService = game:GetService("HttpService")
 local parent = script:FindFirstAncestor("TopicContentsRodux").Parent
+local parseBooleanString = require(parent.DiscoveryUtils).parseBooleanString
 local omniRecommendationsContentType = require(parent.DiscoveryTypes).OmniRecommendationsContentType
 local resultModule = require(parent.Result)
 local fFlagSearchOmniAutocompletePage = require(parent.SharedFlags).FFlagSearchOmniAutocompletePage
@@ -148,13 +149,12 @@ if fFlagEnableTopSongsSort then
 	end
 end
 function t.fromOmniRecommendations(p1, p2)
-	-- upvalues: t (ref), fFlagLuaAppSponsoredGamePreviewVideo (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), fFlagLuaAppEnableOneByTwoTileFunnelTelemetry (ref), var1 (ref), httpService (ref), resultModule (ref)
+	-- upvalues: t (ref), fFlagLuaAppSponsoredGamePreviewVideo (ref), parseBooleanString (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), fFlagLuaAppEnableOneByTwoTileFunnelTelemetry (ref), var1 (ref), httpService (ref), resultModule (ref)
 	local var2 = t.new()
 	var2.contentType = p1.contentType
 	var2.contentId = tostring(p1.contentId)
 	
 	if p1.contentMetadata then
-		local var3
 		var2.adId = p1.contentMetadata.EncryptedAdTrackingData or nil
 		var2.isSponsored = var2.adId ~= nil and var2.adId ~= ""
 		var2.isShowSponsoredLabel = nil
@@ -181,12 +181,17 @@ function t.fromOmniRecommendations(p1, p2)
 		var2.primaryWideVideoAssetId = p1.contentMetadata.PrimaryWideVideoAssetId
 		
 		if fFlagLuaAppSponsoredGamePreviewVideo then
-			var3 = p1.contentMetadata.SponsoredGamePreviewVideoEligible == true
-			var3 = nil
-		else
-			var3 = nil
+			local var3
+			local sponsoredGamePreviewVideoEligible = p1.contentMetadata.SponsoredGamePreviewVideoEligible
+			
+			if sponsoredGamePreviewVideoEligible then
+				var3 = parseBooleanString(sponsoredGamePreviewVideoEligible) == true
+				var3 = nil
+			else
+				var3 = false
+			end
+			var2.sponsoredGamePreviewVideoEligible = var3
 		end
-		var2.sponsoredGamePreviewVideoEligible = var3
 		var2.primaryImageAssetId = if fFlagLuaAppEnableHomepageOneByTwoTile then p1.contentMetadata.PrimaryImageAssetId else nil
 		var2.primaryVideoAssetId = if fFlagLuaAppEnableHomepageOneByTwoTile then p1.contentMetadata.PrimaryVideoAssetId else nil
 		var2.attributionThumbnailAssetId = if fFlagLuaAppEnableHomepageOneByTwoTile then p1.contentMetadata.AttributionThumbnailAssetId else nil

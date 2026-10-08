@@ -2,6 +2,7 @@
 local purchaseErrorModule = require(parent.Enums.PurchaseError)
 local promiseModule = require(parent.Promise)
 local _ = require(parent.Parent.LuauPolyfill)
+local IAPExperienceModule = require(parent.Parent.IAPExperience)
 local getAssetInfoModule = require(parent.Network.getAssetInfo)
 local getCreatorStoreProductInfoModule = require(parent.Network.getCreatorStoreProductInfo)
 local _ = require(parent.Misc.Constants)
@@ -17,10 +18,12 @@ local fFlagEnableFetchCartPricingDuringInExperience = require(parent.Parent.Shar
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule = require(parent.Flags.FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsell)
 local getFFlagDiscountInfoForSubscriptionPurchaseModalLua = require(parent.Parent.SharedFlags).GetFFlagDiscountInfoForSubscriptionPurchaseModalLua
+local fFlagLuaAppsEnablePromptVIPServerPurchase = require(parent.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local fFlagRefreshPriceOnRetryAfterUpsellModule = require(parent.Flags.FFlagRefreshPriceOnRetryAfterUpsell)
 local fFlagRefreshLookPriceOnRetryAfterUpsellModule = require(parent.Flags.FFlagRefreshLookPriceOnRetryAfterUpsell)
 local getCatalogItemDetailsModule = require(parent.Network.getCatalogItemDetails)
 local getResellersModule = require(parent.Network.getResellers)
+local getUniversePrivateServerSettingsModule = require(parent.Network.getUniversePrivateServerSettings)
 local resolveRefreshedExpectedPriceModule = require(parent.Utils.resolveRefreshedExpectedPrice)
 local fFlagFixTimedOptionRefreshModule = require(parent.Flags.FFlagFixTimedOptionRefresh)
 local resolveRefreshedProductInfoModule = require(parent.Utils.resolveRefreshedProductInfo)
@@ -44,7 +47,7 @@ local function fetchRefreshedPrice(p1, p2, p3, p4)
 end
 
 return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: getAssetInfoModule (ref), getAssetInfoUtilModule (ref), promiseModule (ref), purchaseErrorModule (ref), isCreatorStoreAssetTypeModule (ref), getCreatorStoreProductInfoModule (ref), getCreatorStoreProductInfoUtilModule (ref), fFlagEnableFetchCartPricingDuringInExperience (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), fetchRefreshedPrice (ref), fFlagFixTimedOptionRefreshModule (ref), productTypeEnum (ref), fFlagExperiencePurchaseFallbackToGameIconModule (ref), getExperienceProductInfoUtilModule (ref), getExperienceProductImageUrlModule (ref), fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (ref), handleLooksProductInfoResultModule (ref), fFlagRefreshLookPriceOnRetryAfterUpsellModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), getFFlagDiscountInfoForSubscriptionPurchaseModalLua (ref)
+	-- upvalues: getAssetInfoModule (ref), getAssetInfoUtilModule (ref), promiseModule (ref), purchaseErrorModule (ref), isCreatorStoreAssetTypeModule (ref), getCreatorStoreProductInfoModule (ref), getCreatorStoreProductInfoUtilModule (ref), fFlagEnableFetchCartPricingDuringInExperience (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), fetchRefreshedPrice (ref), fFlagFixTimedOptionRefreshModule (ref), productTypeEnum (ref), fFlagExperiencePurchaseFallbackToGameIconModule (ref), getExperienceProductInfoUtilModule (ref), getExperienceProductImageUrlModule (ref), fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (ref), handleLooksProductInfoResultModule (ref), fFlagRefreshLookPriceOnRetryAfterUpsellModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), getFFlagDiscountInfoForSubscriptionPurchaseModalLua (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref), getUniversePrivateServerSettingsModule (ref), IAPExperienceModule (ref)
 	if p3 == Enum.InfoType.Asset then
 		local var1 = getAssetInfoModule(p1, p2):andThen(function(p7)
 			-- upvalues: getAssetInfoUtilModule (copy), promiseModule (copy), purchaseErrorModule (copy), isCreatorStoreAssetTypeModule (copy), getCreatorStoreProductInfoModule (copy), p1 (ref), p2 (ref), getCreatorStoreProductInfoUtilModule (copy), fFlagEnableFetchCartPricingDuringInExperience (copy), p3 (ref), p6 (ref)
@@ -179,6 +182,53 @@ return function(p1, p2, p3, p4, p5, p6)
 	end):catch(function(_)
 		-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
 		return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)
+	end) elseif fFlagLuaAppsEnablePromptVIPServerPurchase and p3 == productTypeEnum.VIPServer then getUniversePrivateServerSettingsModule(p1, p2):andThen(function(p7)
+		-- upvalues: IAPExperienceModule (copy), p1 (ref), getExperienceProductImageUrlModule (copy), p2 (ref), promiseModule (copy), purchaseErrorModule (copy)
+		local privateServerData = p7.privateServerData
+		local var2 = 0
+		
+		for i, v in privateServerData.discounts or {} do
+			if v.source == "RobloxSubscription" and v.robux > 0 then
+				var2 += v.robux
+			end
+		end
+		local price = privateServerData.price or 0
+		local var3 = price == 0 and var2 > 0
+		local var4 = nil
+		local list = nil
+		
+		if var2 > 0 then
+			local var5 = price + var2
+			var4 = var5
+			list = {
+				{
+					Type = IAPExperienceModule.DiscountType.RobloxPlusSubscription,
+					AmountInRobux = var2,
+					Percent = math.floor(var2 * 100 / var5)
+				}
+			}
+		end
+		return p1.getProductInfo(p7.rootPlaceId, Enum.InfoType.Asset):andThen(function(p8)
+			-- upvalues: privateServerData (ref), var4 (write), list (write), getExperienceProductImageUrlModule (copy), p2 (copy), var3 (ref)
+			return {
+				IsForSale = true,
+				IsMonthlyPrice = true,
+				PriceInRobux = privateServerData.price,
+				UserBasePriceInRobux = var4,
+				PriceDiscountDetails = list,
+				ProductId = privateServerData.privateServerProductId,
+				Name = p8.Name,
+				ImageUrl = getExperienceProductImageUrlModule(nil, p2),
+				IsFreeWithRobloxPlus = var3,
+				Creator = {
+					CreatorType = if game.CreatorType == Enum.CreatorType.Group then "Group" else "User",
+					CreatorTargetId = game.CreatorId
+				}
+			}
+		end):catch(function()
+			-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
+			return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)
+		end)
 	end) else p1.getProductInfo(p2, p3):catch(function(_)
 		-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
 		return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)

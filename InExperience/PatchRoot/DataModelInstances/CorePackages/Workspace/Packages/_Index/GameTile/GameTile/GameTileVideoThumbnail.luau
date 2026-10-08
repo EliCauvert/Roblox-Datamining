@@ -8,12 +8,14 @@ local _ = require(gameTile.GameTileTypes)
 local fFlagLuaAppEdpMediaGalleryFullScreen = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
 local fFlagLuaAppVideoTileDisableActivation = require(parent.SharedFlags).FFlagLuaAppVideoTileDisableActivation
 local fFlagLuaAppVideoTileHideCenterPlayButton = require(parent.SharedFlags).FFlagLuaAppVideoTileHideCenterPlayButton
+local fFlagLuaAppHomeMomentVideoFallback = require(parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 
 return function(p1)
-	-- upvalues: reactModule (ref), videoPlaybackCoordinator (ref), videoPlayer (ref), fFlagLuaAppVideoTileHideCenterPlayButton (ref), fFlagLuaAppVideoTileDisableActivation (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref)
+	-- upvalues: reactModule (ref), videoPlaybackCoordinator (ref), videoPlayer (ref), fFlagLuaAppHomeMomentVideoFallback (ref), fFlagLuaAppVideoTileHideCenterPlayButton (ref), fFlagLuaAppVideoTileDisableActivation (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref)
 	return reactModule.createElement(videoPlayer, {
 		muted = true,
 		video = p1.video,
+		accessContext = if fFlagLuaAppHomeMomentVideoFallback then p1.accessContext else nil,
 		thumbnail = p1.image,
 		shouldStartPlayback = p1.playing,
 		looped = p1.looped,

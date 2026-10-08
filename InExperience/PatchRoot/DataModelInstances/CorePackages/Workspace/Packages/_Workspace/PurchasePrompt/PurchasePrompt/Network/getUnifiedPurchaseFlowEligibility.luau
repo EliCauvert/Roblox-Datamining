@@ -30,6 +30,8 @@ return function(p1, p2)
 	-- upvalues: productTypeEnum (ref), promiseModule (ref), fFlagShipUnifiedPurchaseInExperience (ref), appStorageService (ref)
 	if p2 == productTypeEnum.DeveloperSubscription then
 		return promiseModule.resolve(true)
+	elseif p2 == productTypeEnum.VIPServer then
+		return promiseModule.resolve(true)
 	elseif fFlagShipUnifiedPurchaseInExperience then
 		return promiseModule.resolve(true)
 	end

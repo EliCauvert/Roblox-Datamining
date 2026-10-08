@@ -21,7 +21,7 @@ local playButtonGroupViewModule = require(script.Parent.PlayButtonGroupView)
 local playButtonStatesModule = require(script.Parent.PlayButtonStates)
 local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
 local useUserExperiment = require(parent.RoactAppExperiment).useUserExperiment
-local fFlagLuaAppEnablePlaySquadButton = require(parent.SharedFlags).FFlagLuaAppEnablePlaySquadButton
+local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local fFlagLuaAppUnifyPlayButtonAllSurfacesIxp = require(parent.SharedFlags).FFlagLuaAppUnifyPlayButtonAllSurfacesIxp
 local luaAppFixPlayButtonDefaultLaunchSource = game:DefineFastFlag("LuaAppFixPlayButtonDefaultLaunchSource", false)
 local luaAppHidePlayButtonOptionalTextForDualButtons = game:DefineFastFlag("LuaAppHidePlayButtonOptionalTextForDualButtons", false)
@@ -42,7 +42,7 @@ local usePlayOnReleaseAfterUnmountModule = require(script.Parent.usePlayOnReleas
 local var1 = function() end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), gamesProductInfoReducer (ref), tutilsModule (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), usePlayButtonStateModule (ref), fFlagEnableGameJoinEarlyAccess (ref), playButtonStatesModule (ref), useEarlyAccessCaptionModule (ref), fFlagLuaAppLaunchWhenLoadingForce (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), useOnPlayButtonCallbackModule (ref), luaAppFixPlayButtonDefaultLaunchSource (ref), fFlagLuaAppUnifiedPlayButtonSquadMenuDirection (ref), menuDirection (ref), useOnPlaySquadButtonCallbackModule (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce (ref), usePlayOnReleaseAfterUnmountModule (ref), useLocalization (ref), fFlagLuaAppUpdatePlayButtonText (ref), fFlagLuaAppPlayButtonPrivatePT (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), useUserExperiment (ref), appUserLayers (ref), fFlagLuaAppLogExposurePlayButtonUX (ref), IXPService (ref), useTokens (ref), fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP (ref), fIntLuaAppPlayButtonSecondaryButtonGap (ref), legacyPlayButtonModule (ref), fFlagLuaAppEnablePlaySquadButton (ref), var1 (ref), fStringR20UniverseIdModule (ref), luaAppHidePlayButtonOptionalTextForDualButtons (ref), playButtonGroupViewModule (ref)
+	-- upvalues: reactModule (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), gamesProductInfoReducer (ref), tutilsModule (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), usePlayButtonStateModule (ref), fFlagEnableGameJoinEarlyAccess (ref), playButtonStatesModule (ref), useEarlyAccessCaptionModule (ref), fFlagLuaAppLaunchWhenLoadingForce (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), useOnPlayButtonCallbackModule (ref), luaAppFixPlayButtonDefaultLaunchSource (ref), fFlagLuaAppUnifiedPlayButtonSquadMenuDirection (ref), menuDirection (ref), useOnPlaySquadButtonCallbackModule (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce (ref), usePlayOnReleaseAfterUnmountModule (ref), useLocalization (ref), fFlagLuaAppUpdatePlayButtonText (ref), fFlagLuaAppPlayButtonPrivatePT (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), useUserExperiment (ref), appUserLayers (ref), fFlagLuaAppLogExposurePlayButtonUX (ref), IXPService (ref), useTokens (ref), fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP (ref), fIntLuaAppPlayButtonSecondaryButtonGap (ref), legacyPlayButtonModule (ref), getFFlagIsSquadEnabled (ref), var1 (ref), fStringR20UniverseIdModule (ref), luaAppHidePlayButtonOptionalTextForDualButtons (ref), playButtonGroupViewModule (ref)
 	local var2 = reactModule.useRef(false)
 	reactModule.useEffect(function()
 		-- upvalues: var2 (ref)
@@ -190,7 +190,7 @@ return reactModule.memo(function(p1)
 				price = var29,
 				localizedFiatPrice = var30,
 				onPlayButtonActivated = var19,
-				onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then var20 else nil,
+				onPlaySquadButtonActivated = if getFFlagIsSquadEnabled() then var20 else nil,
 				testId = p1.testId
 			})
 		end
@@ -215,7 +215,7 @@ return reactModule.memo(function(p1)
 				price = var29,
 				localizedFiatPrice = var30,
 				onPlayButtonActivated = var19,
-				onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then var20 else nil,
+				onPlaySquadButtonActivated = if getFFlagIsSquadEnabled() then var20 else nil,
 				testId = p1.testId
 			}),
 			SecondaryPlayButton = reactModule.createElement(legacyPlayButtonModule, {
@@ -225,7 +225,7 @@ return reactModule.memo(function(p1)
 				price = var29,
 				localizedFiatPrice = var30,
 				onPlayButtonActivated = var16 or var1,
-				onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then var20 else nil,
+				onPlaySquadButtonActivated = if getFFlagIsSquadEnabled() then var20 else nil,
 				testId = if p1.testId then `{p1.testId}--secondary` else nil
 			})
 		})

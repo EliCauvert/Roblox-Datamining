@@ -43,11 +43,37 @@ local t = {
 	[disclaimerLinksVariantModule.Default] = "TextDefault",
 	[disclaimerLinksVariantModule.Link] = nil
 }
+local t_1 = {
+	affordance = foundationModule.Enums.StateLayerAffordance.None
+}
+
+local function createFoundationLink(p1, p2, p3, p4, p5)
+	-- upvalues: roactModule (ref), foundationModule (ref), t_1 (ref)
+	return if p4 then roactModule.createElement(foundationModule.View, {
+		tag = "auto-xy padding-small",
+		onActivated = p2,
+		stateLayer = t_1,
+		LayoutOrder = p3
+	}, {
+		Label = roactModule.createElement(foundationModule.Text, {
+			RichText = true,
+			Text = `<u>{p1}</u>`,
+			tag = `auto-xy content-emphasis {p5 or "text-caption-small"}`
+		})
+	}) else roactModule.createElement(foundationModule.Button, {
+		text = p1,
+		variant = foundationModule.Enums.ButtonVariant.Utility,
+		size = foundationModule.Enums.ButtonSize.Small,
+		onActivated = p2,
+		LayoutOrder = p3
+	})
+end
+
 local disclaimerLinks = roactModule.PureComponent:extend("DisclaimerLinks")
 
 function disclaimerLinks.init(p1)
 	-- upvalues: openExternalBrowserModule (ref), appPage (ref), transitionAnimationModule (ref), urlBuilder (ref), authFormInteraction (ref), eventStreamConstants (ref)
-	function p0.openDisclaimerLink(p2)
+	function p5.openDisclaimerLink(p2)
 		-- upvalues: p1 (ref), openExternalBrowserModule (copy), appPage (copy), transitionAnimationModule (copy)
 		if p1.props.useExternalBrowserForDisclaimerLinks then
 			openExternalBrowserModule(p1.props.linking, p2)
@@ -64,7 +90,7 @@ function disclaimerLinks.init(p1)
 		})
 	end
 	
-	function p0.openTermsLink()
+	function p5.openTermsLink()
 		-- upvalues: urlBuilder (copy), p1 (ref), authFormInteraction (copy), eventStreamConstants (copy)
 		local var2 = urlBuilder.static.about.terms()
 		
@@ -74,7 +100,7 @@ function disclaimerLinks.init(p1)
 		p1.openDisclaimerLink(var2)
 	end
 	
-	function p0.openPrivacyLink()
+	function p5.openPrivacyLink()
 		-- upvalues: urlBuilder (copy), p1 (ref), authFormInteraction (copy), eventStreamConstants (copy)
 		local var2 = urlBuilder.static.about.privacy()
 		
@@ -86,7 +112,7 @@ function disclaimerLinks.init(p1)
 end
 
 function disclaimerLinks.render(p1)
-	-- upvalues: withLocalization (ref), withStyle (ref), uiMode (ref), fFlagFoundationStylingOnSignUp (ref), t (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), fitChildrenModule (ref), roactModule (ref), imageSetLabel (ref), getFFlagEnableAuditForSinglePageSignUp (ref), registerAuditContentModule (ref), registerAdditionalAuditContentModule (ref), urlBuilder (ref), contextualMenu (ref), menuDirection (ref), linkButton (ref), normalizeFontFace (ref), disclaimerLinksVariantModule (ref), cryoModule (ref), foundationModule (ref), disclaimerLinkButtonsModule (ref)
+	-- upvalues: withLocalization (ref), withStyle (ref), uiMode (ref), fFlagFoundationStylingOnSignUp (ref), t (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), fitChildrenModule (ref), roactModule (ref), imageSetLabel (ref), getFFlagEnableAuditForSinglePageSignUp (ref), registerAuditContentModule (ref), registerAdditionalAuditContentModule (ref), urlBuilder (ref), contextualMenu (ref), menuDirection (ref), linkButton (ref), normalizeFontFace (ref), disclaimerLinksVariantModule (ref), cryoModule (ref), createFoundationLink (ref), disclaimerLinkButtonsModule (ref)
 	local isDualLayout = p1.props.isDualLayout
 	local loginView = p1.props.tokens.LuaApps.LoginView
 	local var2 = if loginView then loginView.boxPadding else 4
@@ -97,9 +123,9 @@ function disclaimerLinks.render(p1)
 		privacyPolicyText = "CommonUI.Features.Label.Privacy",
 		privacyPolicyTextLong = "CommonUI.Features.Label.PrivacyPolicy"
 	})(function(p2)
-		-- upvalues: withStyle (copy), p1 (ref), uiMode (copy), fFlagFoundationStylingOnSignUp (copy), t (copy), isDualLayout (ref), foundationFontFaceMigration (copy), getTextSize (copy), text (copy), var2 (ref), fitChildrenModule (copy), roactModule (copy), imageSetLabel (copy), loginView (ref), getFFlagEnableAuditForSinglePageSignUp (copy), registerAuditContentModule (copy), registerAdditionalAuditContentModule (copy), urlBuilder (copy), contextualMenu (copy), menuDirection (copy), linkButton (copy), normalizeFontFace (copy), disclaimerLinksVariantModule (copy), cryoModule (copy), foundationModule (copy), disclaimerLinkButtonsModule (copy)
+		-- upvalues: withStyle (copy), p1 (ref), uiMode (copy), fFlagFoundationStylingOnSignUp (copy), t (copy), isDualLayout (ref), foundationFontFaceMigration (copy), getTextSize (copy), text (copy), var2 (ref), fitChildrenModule (copy), roactModule (copy), imageSetLabel (copy), loginView (ref), getFFlagEnableAuditForSinglePageSignUp (copy), registerAuditContentModule (copy), registerAdditionalAuditContentModule (copy), urlBuilder (copy), contextualMenu (copy), menuDirection (copy), linkButton (copy), normalizeFontFace (copy), disclaimerLinksVariantModule (copy), cryoModule (copy), createFoundationLink (copy), disclaimerLinkButtonsModule (copy)
 		return withStyle(function(p3)
-			-- upvalues: p1 (copy), uiMode (copy), fFlagFoundationStylingOnSignUp (copy), t (copy), isDualLayout (copy), p2 (ref), foundationFontFaceMigration (copy), getTextSize (copy), text (copy), var2 (copy), fitChildrenModule (copy), roactModule (copy), imageSetLabel (copy), loginView (copy), getFFlagEnableAuditForSinglePageSignUp (copy), registerAuditContentModule (copy), registerAdditionalAuditContentModule (copy), urlBuilder (copy), contextualMenu (copy), menuDirection (copy), linkButton (copy), normalizeFontFace (copy), disclaimerLinksVariantModule (copy), cryoModule (copy), foundationModule (copy), disclaimerLinkButtonsModule (copy)
+			-- upvalues: p1 (copy), uiMode (copy), fFlagFoundationStylingOnSignUp (copy), t (copy), isDualLayout (copy), p2 (ref), foundationFontFaceMigration (copy), getTextSize (copy), text (copy), var2 (copy), fitChildrenModule (copy), roactModule (copy), imageSetLabel (copy), loginView (copy), getFFlagEnableAuditForSinglePageSignUp (copy), registerAuditContentModule (copy), registerAdditionalAuditContentModule (copy), urlBuilder (copy), contextualMenu (copy), menuDirection (copy), linkButton (copy), normalizeFontFace (copy), disclaimerLinksVariantModule (copy), cryoModule (copy), createFoundationLink (copy), disclaimerLinkButtonsModule (copy)
 			local var3 = p1.props.uiModeInfo.uiMode == uiMode.TenFoot
 			local layoutOrder = p1.props.LayoutOrder
 			local var4 = if fFlagFoundationStylingOnSignUp then t[p1.props.variant] else nil
@@ -107,7 +133,7 @@ function disclaimerLinks.render(p1)
 			local var5 = if isDualLayout then "CommonUI.Features.Label.TermsOfUse" else "CommonUI.Features.Label.Terms"
 			local var6 = if isDualLayout then "CommonUI.Features.Label.PrivacyPolicy" else "CommonUI.Features.Label.Privacy"
 			local var7 = if isDualLayout then p2.termsOfUseTextLong else p2.termsOfUseText
-			local var8 = if isDualLayout then p2.privacyPolicyTextLong else "<b>" .. p3.privacyPolicyText .. "</b>"
+			local var8 = if isDualLayout then p2.privacyPolicyTextLong else "<b>" .. p8.privacyPolicyText .. "</b>"
 			local font = p3.Font.Header2.Font
 			local var9 = if foundationFontFaceMigration then getTextSize(" ", baseSize, p3.Tokens.Typography.TitleLarge.Font, Vector2.new(10000, 10000)).X / 2 else text.GetTextWidth(" ", font, baseSize) / 2
 			local var10 = if foundationFontFaceMigration then getTextSize("-", baseSize, p3.Tokens.Typography.TitleLarge.Font, Vector2.new(10000, 10000)).X else text.GetTextWidth("-", font, baseSize)
@@ -238,20 +264,8 @@ function disclaimerLinks.render(p1)
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}),
-					TermsOfUse = roactModule.createElement(foundationModule.Button, {
-						LayoutOrder = 1,
-						text = p2.termsOfUseText,
-						variant = foundationModule.Enums.ButtonVariant.Utility,
-						size = foundationModule.Enums.ButtonSize.Small,
-						onActivated = p1.openTermsLink
-					}),
-					PrivacyPolicy = roactModule.createElement(foundationModule.Button, {
-						LayoutOrder = 2,
-						text = p2.privacyPolicyText,
-						variant = foundationModule.Enums.ButtonVariant.Utility,
-						size = foundationModule.Enums.ButtonSize.Small,
-						onActivated = p1.openPrivacyLink
-					})
+					TermsOfUse = createFoundationLink(p2.termsOfUseText, p1.openTermsLink, 1, p1.props.underlineLinks, p1.props.underlinedLinkTextTag),
+					PrivacyPolicy = createFoundationLink(p2.privacyPolicyText, p1.openPrivacyLink, 2, p1.props.underlineLinks, p1.props.underlinedLinkTextTag)
 				}, var15()))
 			elseif var3 then
 				return if getFFlagEnableAuditForSinglePageSignUp() then roactModule.createFragment(cryoModule.Dictionary.join({
@@ -286,4 +300,4 @@ function disclaimerLinks.render(p1)
 	end)
 end
 
--- [0.027s] <RUNTIME-ERROR> : Error block 0 analysis at pc 45 ('luna.Call' object has no attribute 'name')
+-- [0.037s] <RUNTIME-ERROR> : Error block 0 analysis at pc 47 ('luna.Call' object has no attribute 'name')

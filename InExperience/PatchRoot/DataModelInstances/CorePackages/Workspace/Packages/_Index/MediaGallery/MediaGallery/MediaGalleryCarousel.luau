@@ -9,6 +9,7 @@ local cursorType = foundationModule.Enums.CursorType
 local appCommonLibModule = require(parent.AppCommonLib)
 local signal = appCommonLibModule.Signal
 local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
+local fFlagLuaAppEdpMomentVideo = require(parent.SharedFlags).FFlagLuaAppEdpMomentVideo
 local responsiveModule = require(parent.Responsive)
 local useBreakpointXOrSmaller = responsiveModule.useBreakpointXOrSmaller
 local useLastInput = responsiveModule.useLastInput
@@ -50,7 +51,7 @@ local function getVisibleIndices(p1, p2)
 end
 
 return reactModule.memo(function(p3)
-	-- upvalues: useTokens (ref), mediaGalleryConstantsModule (ref), reactModule (ref), isValidIdentifierModule (ref), isYouTubeVideoModule (ref), isAudioPlaybackAllowedForDeviceModule (ref), enableAudioPlaybackInApp (ref), useSnapScrollModule (ref), getVisibleIndices (ref), signal (ref), videoPlaybackCoordinator (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), useAutoAdvanceModule (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), useLastInput (ref), appCommonLibModule (ref), luaAppMediaGalleryGamepadSupportsPagingIcons (ref), useGamepadSupports (ref), var1 (ref), list (ref), useCursor (ref), cursorType (ref), useCarouselGamepadInputModule (ref), useTouchDragScrollModule (ref), mediaGalleryVideoItemModule (ref), mediaGalleryImageItemModule (ref), userInputService (ref), mediaGalleryPageIndicatorsModule (ref), carouselScrollButtons (ref), roundIconButton (ref)
+	-- upvalues: useTokens (ref), mediaGalleryConstantsModule (ref), reactModule (ref), isValidIdentifierModule (ref), isYouTubeVideoModule (ref), isAudioPlaybackAllowedForDeviceModule (ref), enableAudioPlaybackInApp (ref), useSnapScrollModule (ref), getVisibleIndices (ref), signal (ref), videoPlaybackCoordinator (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), useAutoAdvanceModule (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), useLastInput (ref), appCommonLibModule (ref), luaAppMediaGalleryGamepadSupportsPagingIcons (ref), useGamepadSupports (ref), var1 (ref), list (ref), useCursor (ref), cursorType (ref), useCarouselGamepadInputModule (ref), useTouchDragScrollModule (ref), fFlagLuaAppEdpMomentVideo (ref), mediaGalleryVideoItemModule (ref), mediaGalleryImageItemModule (ref), userInputService (ref), mediaGalleryPageIndicatorsModule (ref), carouselScrollButtons (ref), roundIconButton (ref)
 	local var3 = useTokens()
 	local itemPadding = p3.itemPadding or var3.Padding.Medium
 	local aspectRatio = p3.aspectRatio or mediaGalleryConstantsModule.ITEM_ASPECT_RATIO
@@ -223,6 +224,8 @@ return reactModule.memo(function(p3)
 			if isValidIdentifierModule(t_2.videoId) and not isYouTubeVideoModule(t_2.assetTypeId) then
 				local t_1 = {
 					videoId = t_2.videoId,
+					videoAccessContext = if fFlagLuaAppEdpMomentVideo then t_2.videoAccessContext else nil,
+					attributionComponent = if fFlagLuaAppEdpMomentVideo then t_2.attributionComponent else nil,
 					thumbnail = t_2.imageId,
 					Size = UDim2.fromScale(1, 1),
 					itemIndex = v,

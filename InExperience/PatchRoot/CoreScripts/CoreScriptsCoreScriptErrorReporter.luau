@@ -24,6 +24,7 @@ game:DefineFastInt("CoreScriptBacktraceRepeatedErrorRateLimitCount", 5)
 game:DefineFastInt("CoreScriptBacktraceRepeatedErrorRateLimitPeriod", 60)
 game:DefineFastInt("CoreScriptBacktraceRepeatedErrorRateLimitProcessIntervalTenths", 10)
 game:DefineFastInt("CoreScriptBacktraceErrorReportPercentage", 100)
+local coreScriptErrorReporterIncludeScriptContext = game:DefineFastFlag("CoreScriptErrorReporterIncludeScriptContext", false)
 
 local function _()
 	return math.random(1, 100) <= math.clamp(game:GetFastInt("CoreScriptBacktraceErrorReportPercentage"), 0, 100)
@@ -62,8 +63,8 @@ if not game:GetFastFlag("DisableCorescriptBacktraceReporting") and game:GetFastS
 	})
 	
 	local function handleErrorDetailed(p1, p2, p3, p4)
-		-- upvalues: coreGuiService (ref), corePackagesService (ref), reactModule (ref), var1 (ref), coreScriptBacktraceRepeatedErrorRateLimitingFastFlag (ref), var2 (write), var4 (ref), default (ref), luaCoreScriptsErrorV2CounterConfigModule (ref), var3 (ref)
-		if p3 ~= nil and (p3:IsDescendantOf(coreGuiService) or p3:IsDescendantOf(corePackagesService)) then
+		-- upvalues: coreGuiService (ref), corePackagesService (ref), coreScriptErrorReporterIncludeScriptContext (ref), scriptContextService (ref), reactModule (ref), var1 (ref), coreScriptBacktraceRepeatedErrorRateLimitingFastFlag (ref), var2 (write), var4 (ref), default (ref), luaCoreScriptsErrorV2CounterConfigModule (ref), var3 (ref)
+		if p3 ~= nil and (p3:IsDescendantOf(coreGuiService) or p3:IsDescendantOf(corePackagesService) or coreScriptErrorReporterIncludeScriptContext and p3:IsA("CoreScript") and p3:IsDescendantOf(scriptContextService)) then
 			local var5, var6 = reactModule.unstable_parseReactError(p1)
 			message = var5.message
 			p2 = var5.stack or p2
@@ -75,7 +76,7 @@ if not game:GetFastFlag("DisableCorescriptBacktraceReporting") and game:GetFastS
 				p4 = var1:cleanPii(p4)
 			end
 			if coreScriptBacktraceRepeatedErrorRateLimitingFastFlag then
-				local text = var7 .. var24
+				local text = var7 .. var25
 				
 				if var2:isRateLimited(text) then return end
 				var2:increment(text)

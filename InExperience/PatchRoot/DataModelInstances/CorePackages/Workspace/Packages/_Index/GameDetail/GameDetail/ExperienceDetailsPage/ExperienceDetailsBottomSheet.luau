@@ -2,6 +2,7 @@
 local parent = gameDetail.Parent
 local experienceDetailsPageUtilsModule = require(script.Parent.ExperienceDetailsPageUtils)
 local experienceDetailsPageConstantsModule = require(script.Parent.ExperienceDetailsPageConstants)
+local experienceDetailsPageScopeFieldsModule = require(script.Parent.ExperienceDetailsPageScopeFields)
 local experienceDetailsBottomSheetTopBarModule = require(script.Parent.ExperienceDetailsBottomSheetTopBar)
 local fetchExperienceDetailsPageModule = require(script.Parent.fetchExperienceDetailsPage)
 local getExperienceDetailsPageKeyModule = require(script.Parent.getExperienceDetailsPageKey)
@@ -48,6 +49,7 @@ local sduiPageEntryPoint = sduiSharedUtilitiesModule.SduiPageEntryPoint
 local uiStatus = sduiSharedUtilitiesModule.UiStatus
 local useUiStatus = sduiSharedUtilitiesModule.useUiStatus
 local useEntrySurfacing = sduiSharedUtilitiesModule.useEntrySurfacing
+local filterPlayWithReward = experienceDetailsPageScopeFieldsModule.FilterPlayWithReward
 local compositionTags = require(parent.AppComposition).CompositionTags
 local experienceDetailsPersistentActionBarModule = require(script.Parent.ExperienceDetailsPersistentActionBar)
 local sharedFlagsModule = require(parent.SharedFlags)
@@ -56,13 +58,14 @@ local fFlagEnableExperienceDetailsBottomSheetTopBar = sharedFlagsModule.FFlagEna
 local fFlagEnableMotionJitterMetric = sharedFlagsModule.FFlagEnableMotionJitterMetric
 local fFlagSduiEdpPersistentActionBarPlayButton = sharedFlagsModule.FFlagSduiEdpPersistentActionBarPlayButton
 local fFlagLuaAppEdpBottomSheetPeekViewEvents = sharedFlagsModule.FFlagLuaAppEdpBottomSheetPeekViewEvents
+local fFlagSduiPlayWithRewardRefactor = sharedFlagsModule.FFlagSduiPlayWithRewardRefactor
 
 local function _(p1)
 	return if p1 then 2 else 1
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), usePageScopeRef (ref), reactModule (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useTokens (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useDispatch (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), appEventIngestService (ref), useGetCurrentLegacyRoute (ref), setTabBarVisible (ref), fFlagEnableExperienceDetailsBottomSheetTopBar (ref), useTopBarHeight (ref), useScreenSize (ref), useDeviceInsets (ref), getSafeAreaSize (ref), discoveryTypesModule (ref), useEntrySurfacing (ref), experienceDetailsPageConstantsModule (ref), useStore (ref), peekViewState (ref), gameDetailsPeekViewEvents (ref), setGameDetailsPeekViewStateModule (ref), hasPageInCurrentRoute (ref), appPage (ref), fFlagEnableMotionJitterMetric (ref), useMotionJitterMetricModule (ref), removeGameDetailSessionIfDepartedModule (ref), sessionType (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), overlayProvider (ref), experienceDetailsBottomSheetTopBarModule (ref), sheet (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), experienceDetailsPersistentActionBarModule (ref), sduiFeatureEntryPoint (ref), experienceDetailsFallbackActionBarModule (ref)
+	-- upvalues: experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), usePageScopeRef (ref), reactModule (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useTokens (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useDispatch (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), appEventIngestService (ref), useGetCurrentLegacyRoute (ref), setTabBarVisible (ref), fFlagSduiPlayWithRewardRefactor (ref), filterPlayWithReward (ref), fFlagEnableExperienceDetailsBottomSheetTopBar (ref), useTopBarHeight (ref), useScreenSize (ref), useDeviceInsets (ref), getSafeAreaSize (ref), discoveryTypesModule (ref), useEntrySurfacing (ref), experienceDetailsPageConstantsModule (ref), useStore (ref), peekViewState (ref), gameDetailsPeekViewEvents (ref), setGameDetailsPeekViewStateModule (ref), hasPageInCurrentRoute (ref), appPage (ref), fFlagEnableMotionJitterMetric (ref), useMotionJitterMetricModule (ref), removeGameDetailSessionIfDepartedModule (ref), sessionType (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), overlayProvider (ref), experienceDetailsBottomSheetTopBarModule (ref), sheet (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), experienceDetailsPersistentActionBarModule (ref), sduiFeatureEntryPoint (ref), experienceDetailsFallbackActionBarModule (ref)
 	local universeId = experienceDetailsPageUtilsModule.getUniverseId(p1)
 	local onPeekViewClosed = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "onPeekViewClosed")
 	local var1 = getExperienceDetailsPageKeyModule(universeId)
@@ -96,12 +99,16 @@ return reactModule.memo(function(p1)
 	local experienceJoinData = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "experienceJoinData")
 	local placeIdOverride = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "placeIdOverride")
 	reactModule.useEffect(function()
-		-- upvalues: getSduiClientPageScope (copy), var1 (ref), referralSource (ref), experienceJoinData (ref), placeIdOverride (ref)
+		-- upvalues: getSduiClientPageScope (copy), var1 (ref), referralSource (ref), experienceJoinData (ref), placeIdOverride (ref), fFlagSduiPlayWithRewardRefactor (copy), filterPlayWithReward (copy)
 		local var9 = getSduiClientPageScope(var1)
 		var9.set("referralSource", referralSource)
 		var9.set("experienceJoinData", experienceJoinData)
 		var9.set("placeId", placeIdOverride)
 		var9.set("launchSource", "LuaGameCard")
+		
+		if fFlagSduiPlayWithRewardRefactor then
+			var9.set(filterPlayWithReward, nil)
+		end
 	end, {
 		var1,
 		referralSource,

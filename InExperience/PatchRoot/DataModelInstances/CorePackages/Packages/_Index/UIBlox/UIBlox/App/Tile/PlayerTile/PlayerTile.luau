@@ -2,7 +2,6 @@
 local parent = app.Parent
 local core = parent.Core
 local parent_1 = parent.Parent
-local UIBloxConfigModule = require(parent.UIBloxConfig)
 local tModule = require(parent_1.t)
 local roactModule = require(parent_1.Roact)
 local object = require(parent_1.LuauPolyfill).Object
@@ -71,9 +70,9 @@ local t_1 = { [controlStateModule.Default] = "SystemPrimaryContent" }
 local vignette246 = imagesModule["component_assets/vignette_246"]
 
 local function _(p1)
-	-- upvalues: withStyleModule (ref), object (ref), UIBloxConfigModule (ref), roactModule (ref), playerContextModule (ref)
+	-- upvalues: withStyleModule (ref), object (ref), roactModule (ref), playerContextModule (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: object (copy), p1 (ref), UIBloxConfigModule (copy), roactModule (copy), playerContextModule (copy)
+		-- upvalues: object (copy), p1 (ref), roactModule (copy), playerContextModule (copy)
 		local tokens = p2.Tokens
 		
 		return roactModule.createElement("Frame", {
@@ -83,10 +82,10 @@ local function _(p1)
 		}, {
 			PlayerContext = roactModule.createElement(playerContextModule, object.assign({}, {
 				iconPadding = 0,
-				fontStyle = if p1.playerContext.onActivated then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.CaptionMedium else tokens.Semantic.Typography.CaptionHeader elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.BodySmall else tokens.Semantic.Typography.CaptionBody,
-				iconTextSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Space_50,
-				iconSize = UDim2.fromOffset(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Size_150, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Size_150),
-				textHeight = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_700 else tokens.Global.Size_350,
+				fontStyle = if p1.playerContext.onActivated then tokens.Typography.CaptionMedium else tokens.Typography.BodySmall,
+				iconTextSpacing = tokens.Size.Size_100,
+				iconSize = UDim2.fromOffset(tokens.Size.Size_300, tokens.Size.Size_300),
+				textHeight = tokens.Size.Size_700,
 				horizontalAlignment = p1.horizontalAlignment,
 				textXAlignment = p1.textXAlignment
 			}, p1.playerContext))
@@ -95,17 +94,17 @@ local function _(p1)
 end
 
 local _ = function(p1)
-	-- upvalues: withStyleModule (ref), UIBloxConfigModule (ref), getContentStyleModule (ref), t_1 (ref), roactModule (ref), cryoModule (ref), springAnimatedItemModule (ref), t (ref), vignette246 (ref), list (ref), playerTileButtonModule (ref)
+	-- upvalues: withStyleModule (ref), getContentStyleModule (ref), t_1 (ref), roactModule (ref), cryoModule (ref), springAnimatedItemModule (ref), t (ref), vignette246 (ref), list (ref), playerTileButtonModule (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: UIBloxConfigModule (copy), getContentStyleModule (copy), t_1 (copy), p1 (ref), roactModule (copy), cryoModule (copy), springAnimatedItemModule (copy), t (copy), vignette246 (copy), list (copy), playerTileButtonModule (copy)
+		-- upvalues: getContentStyleModule (copy), t_1 (copy), p1 (ref), roactModule (copy), cryoModule (copy), springAnimatedItemModule (copy), t (copy), vignette246 (copy), list (copy), playerTileButtonModule (copy)
 		local tokens = p2.Tokens
-		local var1 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100
-		local var2 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_900 else tokens.Global.Size_450
+		local size200 = tokens.Size.Size_200
+		local size900 = tokens.Size.Size_900
 		
 		return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 			ButtonBackgroundGradient = not p1.isCircular and (not cryoModule.isEmpty(p1.buttons) and roactModule.createElement("Frame", {
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, var2 + var1 * 2),
+				Size = UDim2.new(1, 0, 0, size900 + size200 * 2),
 				AnchorPoint = Vector2.new(0, 1),
 				Position = UDim2.new(0, 0, 1, 0)
 			}, {
@@ -155,13 +154,13 @@ local _ = function(p1)
 					LayoutOrder = 3,
 					ZIndex = 2,
 					Position = UDim2.new(1, 0, 1, 0),
-					Size = UDim2.new(0, p1.tileSize.X.Offset - var1 * 2, 0, var2),
+					Size = UDim2.new(0, p1.tileSize.X.Offset - size200 * 2, 0, size900),
 					AnchorPoint = Vector2.new(1, 1)
 				}, list.join(list.map(p1.buttons, function(p3)
-					-- upvalues: roactModule (copy), playerTileButtonModule (copy), var2 (ref), var1 (ref), p1 (copy)
+					-- upvalues: roactModule (copy), playerTileButtonModule (copy), size900 (ref), size200 (ref), p1 (copy)
 					return roactModule.createElement(playerTileButtonModule, {
-						buttonHeight = var2,
-						outerButtonPadding = var1,
+						buttonHeight = size900,
+						outerButtonPadding = size200,
 						tileSize = p1.tileSize,
 						icon = p3.icon,
 						isSecondary = p3.isSecondary,
@@ -174,13 +173,13 @@ local _ = function(p1)
 				end), {
 					roactModule.createElement("UIListLayout", {
 						HorizontalAlignment = Enum.HorizontalAlignment.Right,
-						Padding = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100),
+						Padding = UDim.new(0, tokens.Size.Size_200),
 						FillDirection = Enum.FillDirection.Horizontal
 					})
 				})),
 				UIPadding = roactModule.createElement("UIPadding", {
-					PaddingBottom = UDim.new(0, var1),
-					PaddingRight = UDim.new(0, var1)
+					PaddingBottom = UDim.new(0, size200),
+					PaddingRight = UDim.new(0, size200)
 				})
 			})
 		})
@@ -218,17 +217,17 @@ function playerTile.init(p1)
 end
 
 function playerTile.render(p1)
-	-- upvalues: withStyleModule (ref), UIBloxConfigModule (ref), roactModule (ref), tileModule (ref), dictionary (ref), object (ref), playerContextModule (ref), imagesModule (ref), getContentStyleModule (ref), t_1 (ref), cryoModule (ref), springAnimatedItemModule (ref), t (ref), vignette246 (ref), list (ref), playerTileButtonModule (ref)
+	-- upvalues: withStyleModule (ref), roactModule (ref), tileModule (ref), dictionary (ref), object (ref), playerContextModule (ref), imagesModule (ref), getContentStyleModule (ref), t_1 (ref), cryoModule (ref), springAnimatedItemModule (ref), t (ref), vignette246 (ref), list (ref), playerTileButtonModule (ref)
 	local tileSize = p1.props.tileSize
 	local title = p1.props.title
 	local onActivated = p1.props.onActivated
 	local thumbnail = p1.props.thumbnail
 	
 	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), UIBloxConfigModule (copy), roactModule (copy), tileSize (ref), tileModule (copy), dictionary (copy), withStyleModule (copy), object (copy), playerContextModule (copy), title (ref), onActivated (ref), thumbnail (ref), imagesModule (copy), getContentStyleModule (copy), t_1 (copy), cryoModule (copy), springAnimatedItemModule (copy), t (copy), vignette246 (copy), list (copy), playerTileButtonModule (copy)
+		-- upvalues: p1 (ref), roactModule (copy), tileSize (ref), tileModule (copy), dictionary (copy), withStyleModule (copy), object (copy), playerContextModule (copy), title (ref), onActivated (ref), thumbnail (ref), imagesModule (copy), getContentStyleModule (copy), t_1 (copy), cryoModule (copy), springAnimatedItemModule (copy), t (copy), vignette246 (copy), list (copy), playerTileButtonModule (copy)
 		local tokens = p2.Tokens
-		local subtitleFontStyle = p1.props.subtitleFontStyle or (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.CaptionMedium else tokens.Semantic.Typography.CaptionHeader)
-		local footerTopPadding = p1.props.footerTopPadding or (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Space_50)
+		local subtitleFontStyle = p1.props.subtitleFontStyle or tokens.Typography.CaptionMedium
+		local footerTopPadding = p1.props.footerTopPadding or tokens.Size.Size_100
 		local createElement = roactModule.createElement
 		local var1 = "Frame"
 		local t_2 = {
@@ -251,7 +250,7 @@ function playerTile.render(p1)
 			controlState = p1.state.controlState
 		}
 		t_4.footer = withStyleModule(function(p3)
-			-- upvalues: object (copy), t_5 (ref), UIBloxConfigModule (copy), roactModule (copy), playerContextModule (copy)
+			-- upvalues: object (copy), t_5 (ref), roactModule (copy), playerContextModule (copy)
 			local tokens = p3.Tokens
 			
 			return roactModule.createElement("Frame", {
@@ -261,22 +260,22 @@ function playerTile.render(p1)
 			}, {
 				PlayerContext = roactModule.createElement(playerContextModule, object.assign({}, {
 					iconPadding = 0,
-					fontStyle = if t_5.playerContext.onActivated then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.CaptionMedium else tokens.Semantic.Typography.CaptionHeader elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.BodySmall else tokens.Semantic.Typography.CaptionBody,
-					iconTextSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Space_50,
-					iconSize = UDim2.fromOffset(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Size_150, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Size_150),
-					textHeight = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_700 else tokens.Global.Size_350,
+					fontStyle = if t_5.playerContext.onActivated then tokens.Typography.CaptionMedium else tokens.Typography.BodySmall,
+					iconTextSpacing = tokens.Size.Size_100,
+					iconSize = UDim2.fromOffset(tokens.Size.Size_300, tokens.Size.Size_300),
+					textHeight = tokens.Size.Size_700,
 					horizontalAlignment = t_5.horizontalAlignment,
 					textXAlignment = t_5.textXAlignment
 				}, t_5.playerContext))
 			})
 		end)
 		t_4.Selectable = p1.props.Selectable
-		t_4.titleTopPadding = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100
-		t_4.subtitleTopPadding = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_50 else tokens.Global.Space_25
+		t_4.titleTopPadding = tokens.Size.Size_200
+		t_4.subtitleTopPadding = tokens.Size.Size_50
 		t_4.footerTopPadding = footerTopPadding
 		t_4.name = title
-		t_4.nameTextColor = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Emphasis.Color3 else tokens.Semantic.Color.Text.Emphasis.Color3
-		t_4.titleFontStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.TitleLarge else tokens.Semantic.Typography.Subheader
+		t_4.nameTextColor = tokens.Color.Content.Emphasis.Color3
+		t_4.titleFontStyle = tokens.Typography.TitleLarge
 		t_4.hasVerifiedBadge = p1.props.hasVerifiedBadge
 		t_4.subtitle = p1.props.subtitle
 		t_4.subtitleFontStyle = subtitleFontStyle
@@ -289,15 +288,15 @@ function playerTile.render(p1)
 			mouseEntered = p1.state.mouseEntered
 		})
 		t_4.thumbnailOverlayComponents = withStyleModule(function(p3)
-			-- upvalues: UIBloxConfigModule (copy), getContentStyleModule (copy), t_1 (copy), var2 (ref), roactModule (copy), cryoModule (copy), springAnimatedItemModule (copy), t (copy), vignette246 (copy), list (copy), playerTileButtonModule (copy)
+			-- upvalues: getContentStyleModule (copy), t_1 (copy), var2 (ref), roactModule (copy), cryoModule (copy), springAnimatedItemModule (copy), t (copy), vignette246 (copy), list (copy), playerTileButtonModule (copy)
 			local tokens = p3.Tokens
-			local var3 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100
-			local var4 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_900 else tokens.Global.Size_450
+			local size200 = tokens.Size.Size_200
+			local size900 = tokens.Size.Size_900
 			
 			return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 				ButtonBackgroundGradient = not var2.isCircular and (not cryoModule.isEmpty(var2.buttons) and roactModule.createElement("Frame", {
 					LayoutOrder = 1,
-					Size = UDim2.new(1, 0, 0, var4 + var3 * 2),
+					Size = UDim2.new(1, 0, 0, size900 + size200 * 2),
 					AnchorPoint = Vector2.new(0, 1),
 					Position = UDim2.new(0, 0, 1, 0)
 				}, {
@@ -349,13 +348,13 @@ function playerTile.render(p1)
 						LayoutOrder = 3,
 						ZIndex = 2,
 						Position = UDim2.new(1, 0, 1, 0),
-						Size = UDim2.new(0, var2.tileSize.X.Offset - var3 * 2, 0, var4),
+						Size = UDim2.new(0, var2.tileSize.X.Offset - size200 * 2, 0, size900),
 						AnchorPoint = Vector2.new(1, 1)
 					}, list.join(list.map(var2.buttons, function(p4)
-						-- upvalues: roactModule (copy), playerTileButtonModule (copy), var4 (ref), var3 (ref), var2 (copy)
+						-- upvalues: roactModule (copy), playerTileButtonModule (copy), size900 (ref), size200 (ref), var2 (copy)
 						return roactModule.createElement(playerTileButtonModule, {
-							buttonHeight = var4,
-							outerButtonPadding = var3,
+							buttonHeight = size900,
+							outerButtonPadding = size200,
 							tileSize = var2.tileSize,
 							icon = p4.icon,
 							isSecondary = p4.isSecondary,
@@ -368,13 +367,13 @@ function playerTile.render(p1)
 					end), {
 						roactModule.createElement("UIListLayout", {
 							HorizontalAlignment = Enum.HorizontalAlignment.Right,
-							Padding = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100),
+							Padding = UDim.new(0, tokens.Size.Size_200),
 							FillDirection = Enum.FillDirection.Horizontal
 						})
 					})),
 					UIPadding = roactModule.createElement("UIPadding", {
-						PaddingBottom = UDim.new(0, var3),
-						PaddingRight = UDim.new(0, var3)
+						PaddingBottom = UDim.new(0, size200),
+						PaddingRight = UDim.new(0, size200)
 					})
 				})
 			})

@@ -22,7 +22,9 @@ local function mapErrorReasonToCopy(p1, p2)
 	local var1 = ({
 		[errorReasonModule.GenericError] = { p2.GenericErrorTitle, p2.GenericErrorBody },
 		[errorReasonModule.AlreadySubscribed] = { p2.AlreadySubscribedTitle, p2.AlreadySubscribedBody },
-		[errorReasonModule.UnsupportedPlatform] = { p2.UnsupportedPlatformTitle, p2.UnsupportedPlatformBody }
+		[errorReasonModule.UnsupportedPlatform] = { p2.UnsupportedPlatformTitle, p2.UnsupportedPlatformBody },
+		[errorReasonModule.ReferralIneligible] = { p2.GenericErrorTitle, p2.ReferralIneligibleBody },
+		[errorReasonModule.ReferralSelfReferral] = { p2.GenericErrorTitle, p2.ReferralSelfReferralBody }
 	})[p1]
 	
 	return if var1 then { title = var1[1], body = var1[2] } else { title = p2.GenericErrorTitle, body = p2.GenericErrorBody }
@@ -39,7 +41,9 @@ return function()
 		AlreadySubscribedTitle = "Feature.RobloxSubscription.Title.AlreadySubscribed",
 		AlreadySubscribedBody = "Feature.RobloxSubscription.Body.AlreadySubscribed",
 		UnsupportedPlatformTitle = "Feature.RobloxSubscription.Title.UnsupportedPlatform",
-		UnsupportedPlatformBody = "Feature.RobloxSubscription.Body.UnsupportedPlatform"
+		UnsupportedPlatformBody = "Feature.RobloxSubscription.Body.UnsupportedPlatform",
+		ReferralIneligibleBody = "Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError",
+		ReferralSelfReferralBody = "Feature.RobloxSubscription.Message.AlreadySubscribed"
 	})
 	local var4 = reactModule.useMemo(function()
 		-- upvalues: mapErrorReasonToCopy (copy), var1 (ref), var3 (ref)

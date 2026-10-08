@@ -11,11 +11,10 @@ local settingsSduiConstantsModule = require(settingsSdui.SettingsSduiConstants)
 local settingsPageSessionModule = require(settingsSdui.SettingsPageSession)
 local getSettingsPageUrlModule = require(settingsSdui.getSettingsPageUrl)
 local buildSettingsPageRequestModule = require(settingsSdui.buildSettingsPageRequest)
-local fFlagSduiClientTemplateCache = require(parent.SharedFlags).FFlagSduiClientTemplateCache
 local fFlagSduiAdvertiseRuntimeSupportSets = require(parent.SharedFlags).FFlagSduiAdvertiseRuntimeSupportSets
 
 local function fetchSettingsPage(value, p1)
-	-- upvalues: settingsSduiConstantsModule (ref), getSduiApiStore (ref), settingsPageSessionModule (ref), parent (ref), fFlagSduiAdvertiseRuntimeSupportSets (ref), sduiCapabilities (ref), fFlagSduiClientTemplateCache (ref), getSduiTemplateStore (ref), appPage (ref), getSettingsPageUrlModule (ref), buildSettingsPageRequestModule (ref), sduiResponseType (ref), sduiApiStorePostConfigContentType (ref), fetchSettingsPage (ref)
+	-- upvalues: settingsSduiConstantsModule (ref), getSduiApiStore (ref), settingsPageSessionModule (ref), parent (ref), fFlagSduiAdvertiseRuntimeSupportSets (ref), sduiCapabilities (ref), getSduiTemplateStore (ref), appPage (ref), getSettingsPageUrlModule (ref), buildSettingsPageRequestModule (ref), sduiResponseType (ref), sduiApiStorePostConfigContentType (ref), fetchSettingsPage (ref)
 	local configKey = settingsSduiConstantsModule.ConfigKey
 	local var1 = getSduiApiStore()
 	local _, data = var1.getData(configKey)
@@ -27,6 +26,7 @@ local function fetchSettingsPage(value, p1)
 	local settingsPage = serviceContractsProtoModule.apppageplatform.settings.settings_page
 	
 	return var1.fetchIfNeeded({
+		enableTemplateCache = true,
 		responseType = sduiResponseType.Protobuf,
 		url = getSettingsPageUrlModule(),
 		surfaceKey = appPage.Settings,
@@ -37,13 +37,12 @@ local function fetchSettingsPage(value, p1)
 			contentType = sduiApiStorePostConfigContentType.Json,
 			body = buildSettingsPageRequestModule(settingsPage, {
 				sessionId = settingsPageSessionModule:Get(),
-				cachedRobloxComponentToTemplateId = if fFlagSduiClientTemplateCache then getSduiTemplateStore().getCachedRobloxComponentToTemplateId(appPage.Settings) else nil,
+				cachedRobloxComponentToTemplateId = getSduiTemplateStore().getCachedRobloxComponentToTemplateId(appPage.Settings),
 				clientCapabilities = serviceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
 					enabled_capabilities = if fFlagSduiAdvertiseRuntimeSupportSets then sduiCapabilities.getEnabledCapabilityNumbersWithoutExtendedMarker() else sduiCapabilities.getEnabledCapabilityNumbers(sduiCapabilities.getEnabledCapabilities())
 				})
 			})
 		},
-		enableTemplateCache = if fFlagSduiClientTemplateCache then true else nil,
 		refresh = function(p2)
 			-- upvalues: fetchSettingsPage (copy)
 			return fetchSettingsPage(p2, true)

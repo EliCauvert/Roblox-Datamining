@@ -49,24 +49,26 @@ local function getSelectableOffers(p1)
 	return if var1 == nil and var2 == nil then nil else { feedback = var1, plays = var2 }
 end
 
+local function isEligibleForFreePromotion(p2)
+	-- upvalues: fFlagEnablePaidAdsModule (ref), isUsableOffer (ref)
+	if p2 == nil or p2.userEligible ~= true or p2.universeEligible ~= true then
+		return false
+	elseif not fFlagEnablePaidAdsModule then
+		return p2.cardType == "promote_free"
+	elseif typeof(p2.offers) ~= "table" then
+		return false
+	end
+	for i, v in p2.offers do
+		if isUsableOffer(v) and v.fundingType == "free" then
+			return true
+		end
+	end
+	return false
+end
+
 return {
 	getDefaultOffer = getDefaultOffer,
-	isEligibleForFreePromotion = function(p2)
-		-- upvalues: fFlagEnablePaidAdsModule (ref), isUsableOffer (ref)
-		if p2 == nil or p2.userEligible ~= true or p2.universeEligible ~= true then
-			return false
-		elseif not fFlagEnablePaidAdsModule then
-			return p2.cardType == "promote_free"
-		elseif typeof(p2.offers) ~= "table" then
-			return false
-		end
-		for i, v in p2.offers do
-			if isUsableOffer(v) and v.fundingType == "free" then
-				return true
-			end
-		end
-		return false
-	end,
+	isEligibleForFreePromotion = isEligibleForFreePromotion,
 	freeCreditsRemaining = function(p3)
 		return if p3 == nil then 0 else p3.freeCreditsRemaining
 	end,
@@ -82,5 +84,38 @@ return {
 		
 		return var4 ~= nil and var4.durationDays > 0
 	end,
-	getSelectableOffers = getSelectableOffers
+	getSelectableOffers = getSelectableOffers,
+	canCreateCampaign = function(p3)
+		-- upvalues: fFlagEnablePaidAdsModule (ref), getSelectableOffers (ref), isEligibleForFreePromotion (ref)
+		if p3 == nil or p3.userEligible ~= true or p3.universeEligible ~= true then
+			return false
+		elseif fFlagEnablePaidAdsModule then
+			return getSelectableOffers(p3) ~= nil
+		end
+		local var4 = isEligibleForFreePromotion(p3)
+		
+		if var4 then
+			var4 = (if p3 ~= nil then 0 else p3.freeCreditsRemaining) > 0
+			
+			if var4 then
+				if fFlagEnablePaidAdsModule then
+					return getSelectableOffers(p3) ~= nil
+				end
+				local var5 = if p3 ~= nil then nil else p3.offer
+				var4 = var5 ~= nil and var5.durationDays > 0
+			end
+		end
+		return var4
+	end,
+	campaignSheetTerms = function(p3, p4)
+		-- upvalues: fFlagEnablePaidAdsModule (ref), getSelectableOffers (ref)
+		local var4 = if p3 ~= nil then nil else p3.offer
+		
+		return {
+			runStartMs = p4,
+			durationDays = if var4 ~= nil then nil else var4.durationDays,
+			estimatedPriceRobux = if var4 ~= nil then nil else var4.displayAmountRobux,
+			campaignOffers = if fFlagEnablePaidAdsModule then getSelectableOffers(p3) else nil
+		}
+	end
 }

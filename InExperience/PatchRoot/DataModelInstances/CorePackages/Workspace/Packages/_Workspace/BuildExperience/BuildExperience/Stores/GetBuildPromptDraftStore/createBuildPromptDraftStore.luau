@@ -1,4 +1,6 @@
-﻿local signalsModule = require(script:FindFirstAncestor("BuildExperience").Parent.Signals)
+﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
+local signalsModule = require(buildExperience.Parent.Signals)
+local _ = require(buildExperience.Chat.chatTypes)
 
 local function _(p1, p2, p3)
 	return p1.universeId == p2 and (if p1.sessionId ~= nil then p1.sessionId == p3 else true)

@@ -35,6 +35,7 @@ local fFlagBuildPublishNavigationSheetModule = require(buildExperience.Flags.FFl
 local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
 local fFlagBuildAdUpsellModule = require(buildExperience.Flags.FFlagBuildAdUpsell)
 local fFlagBuildExperienceForceRefreshVersionHistoryModule = require(buildExperience.Flags.FFlagBuildExperienceForceRefreshVersionHistory)
+local fFlagBuildExperiencePlaytestCardPublishCtaModule = require(buildExperience.Flags.FFlagBuildExperiencePlaytestCardPublishCta)
 local var2 = if fFlagBuildAdUpsellModule then require(buildExperience.Stores.GetAdUpsellEventStore) else nil
 local useStore = require(parent.RoactUtils).Hooks.RoactRodux.useStore
 local getRootNavigation = navigationModule.getRootNavigation
@@ -124,7 +125,7 @@ local function PreviewButton(p2)
 end
 
 return function(p2)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), useSharePublishedExperience (ref), signalsReactModule (ref), placeVersionHistoryModule (ref), reactModule (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (ref), signalsModule (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), useOpenWebView (ref), fFlagBuildShareDisabledOnPrivateModule (ref), privacyType (ref), fFlagEnableShareSheet (ref), sharePublishedExperience (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), getVersionInformationStoreModule (ref), sendBuildExperienceEventModule (ref), var2 (ref), fFlagBuildAdUpsellModule (ref), buildPublicAudiences (ref), experienceGuidelinesModule (ref), t (ref), debug (ref), snackbar (ref), view (ref), fFlagBuildPublishNavigationSheetModule (ref), var1 (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), PreviewButton (ref), friendsOnlyShareDialogModule (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), useSharePublishedExperience (ref), signalsReactModule (ref), placeVersionHistoryModule (ref), reactModule (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (ref), signalsModule (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), useOpenWebView (ref), fFlagBuildShareDisabledOnPrivateModule (ref), privacyType (ref), fFlagEnableShareSheet (ref), sharePublishedExperience (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), getVersionInformationStoreModule (ref), sendBuildExperienceEventModule (ref), var2 (ref), fFlagBuildAdUpsellModule (ref), buildPublicAudiences (ref), experienceGuidelinesModule (ref), t (ref), debug (ref), fFlagBuildExperiencePlaytestCardPublishCtaModule (ref), snackbar (ref), view (ref), fFlagBuildPublishNavigationSheetModule (ref), var1 (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), PreviewButton (ref), friendsOnlyShareDialogModule (ref)
 	local var3 = useLocalization({
 		accountTooNewError = localizationStringsModule.GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR,
 		creatorHub = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
@@ -224,7 +225,7 @@ return function(p2)
 		end)
 	end, { creatorHub, var12, p2.target.universeId })
 	local var25 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref), p2 (ref), getVersionInformationStoreModule (copy), sendBuildExperienceEventModule (copy), var14 (ref), var20 (ref), var2 (copy), var8 (ref), fFlagBuildAdUpsellModule (copy), gameConfigurationActionsModule (copy), buildPublicAudiences (copy), var10 (write), contentMaturityUtilsModule (copy), experienceGuidelinesModule (copy), t (copy), debug (copy), var7 (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (copy), var5 (ref), var6 (ref), var16 (ref), publishSuccess (ref), publishAudienceError (ref), publishError (ref), accountTooNewError (ref)
+		-- upvalues: var13 (ref), p2 (ref), getVersionInformationStoreModule (copy), sendBuildExperienceEventModule (copy), var14 (ref), var20 (ref), var2 (copy), var8 (ref), fFlagBuildAdUpsellModule (copy), gameConfigurationActionsModule (copy), buildPublicAudiences (copy), var10 (write), contentMaturityUtilsModule (copy), experienceGuidelinesModule (copy), t (copy), debug (copy), var7 (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (copy), var5 (ref), var6 (ref), fFlagBuildExperiencePlaytestCardPublishCtaModule (copy), var16 (ref), publishSuccess (ref), publishAudienceError (ref), publishError (ref), accountTooNewError (ref)
 		if var13 then return end
 		local placeId = p2.target.placeId
 		
@@ -403,7 +404,7 @@ return function(p2)
 			end
 		end
 		var26:andThen(function(p3)
-			-- upvalues: t (copy), fFlagBuildAdUpsellModule (copy), var2 (copy), p2 (copy), var30 (write), getVersionInformationStoreModule (copy), placeId (ref), var5 (copy), var16 (copy), publishSuccess (copy)
+			-- upvalues: t (copy), fFlagBuildAdUpsellModule (copy), var2 (copy), p2 (copy), var30 (write), getVersionInformationStoreModule (copy), placeId (ref), var5 (copy), fFlagBuildExperiencePlaytestCardPublishCtaModule (copy), var16 (copy), publishSuccess (copy)
 			if p3 == t then return end
 			if not (typeof(p3) ~= "table" and (p3.status == "success" and (typeof(p3.version) == "string" and p3.version ~= ""))) then
 				error({
@@ -415,9 +416,13 @@ return function(p2)
 			end
 			getVersionInformationStoreModule().clearDraft(placeId)
 			var5.fetchHistory(placeId)
+			
+			if fFlagBuildExperiencePlaytestCardPublishCtaModule then
+				var5.fetchLiveVersion(placeId)
+			end
 			var16(publishSuccess)
 		end):catch(function(p3)
-			-- upvalues: gameConfigurationActionsModule (copy), publishAudienceError (copy), publishError (copy), accountTooNewError (copy), getVersionInformationStoreModule (copy), placeId (ref), var5 (copy), debug (copy), var29 (write), p2 (copy), var16 (copy)
+			-- upvalues: gameConfigurationActionsModule (copy), publishAudienceError (copy), publishError (copy), accountTooNewError (copy), getVersionInformationStoreModule (copy), placeId (ref), var5 (copy), fFlagBuildExperiencePlaytestCardPublishCtaModule (copy), debug (copy), var29 (write), p2 (copy), var16 (copy)
 			local isTable = typeof(p3) == "table"
 			local var31 = isTable and p3.stage == gameConfigurationActionsModule.PublishFailureStage.SetAudience
 			local var32 = var31
@@ -431,6 +436,10 @@ return function(p2)
 			if var32 then
 				getVersionInformationStoreModule().clearDraft(placeId)
 				var5.fetchHistory(placeId)
+				
+				if fFlagBuildExperiencePlaytestCardPublishCtaModule then
+					var5.fetchLiveVersion(placeId)
+				end
 			end
 			debug.log("warn", "build_experience publish failed", {
 				errorMessage = if isTable and p3.errorMessage ~= nil then tostring(p3.errorMessage) else tostring(p3),

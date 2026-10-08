@@ -1,4 +1,9 @@
-﻿local function _(p1)
+﻿local expChat = script:FindFirstAncestor("ExpChat")
+local fFlagExpChatUseChannelTabsStore = require(expChat.Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
+local var1 = if fFlagExpChatUseChannelTabsStore then require(expChat.Stores.GetChannelTabsStore) else nil
+
+local function getOpenChannelName(p1)
+	-- upvalues: fFlagExpChatUseChannelTabsStore (ref), var1 (ref)
 	local textChannels = p1.TextChannels
 	
 	if textChannels == nil then
@@ -10,60 +15,46 @@
 		return targetTextChannel.Name
 	end
 	local selectedChannelName = textChannels.selectedChannelName
-	local channelTabs = p1.ChannelTabs
+	local var2 = if fFlagExpChatUseChannelTabsStore then var1(false).getChannelTabsState(false) else p1.ChannelTabs
 	
-	return if not (selectedChannelName ~= nil and channelTabs ~= nil and channelTabs.allChannelTabs[selectedChannelName] ~= nil) then if channelTabs == nil then selectedChannelName else channelTabs.selectedTabName or "RBXGeneral" else selectedChannelName
+	return if not (selectedChannelName ~= nil and var2 ~= nil and var2.allChannelTabs[selectedChannelName] ~= nil) then if var2 == nil then selectedChannelName else var2.selectedTabName or "RBXGeneral" else selectedChannelName
 end
 
-local _ = function(p1, p2)
-	local var1 = nil
+local function _(p1, p2)
+	local var2 = nil
 	
 	if p2 == nil then
 		if p1.TextChannel == nil then
 			return nil
 		end
-		var1 = p1.TextChannel.Name
+		var2 = p1.TextChannel.Name
 	else
-		var1 = p2
+		var2 = p2
 	end
-	if var1 == "RBXSystem" then
-		var1 = "RBXGeneral"
+	if var2 == "RBXSystem" then
+		var2 = "RBXGeneral"
 	end
-	return var1
+	return var2
 end
 
 return function(p1, p2, p3)
-	local var1, targetTextChannel
-	local textChannels = p1.TextChannels
-	
-	if textChannels == nil then
-		var1 = nil
-	else
-		targetTextChannel = textChannels.targetTextChannel
-		
-		if targetTextChannel == nil or targetTextChannel.Name == nil then
-			local selectedChannelName = textChannels.selectedChannelName
-			local channelTabs = p1.ChannelTabs
-			var1 = if selectedChannelName == nil or channelTabs == nil or channelTabs.allChannelTabs[selectedChannelName] == nil then channelTabs == nil and ((if channelTabs == nil then channelTabs.selectedTabName else nil) or "RBXGeneral") else selectedChannelName
-		else
-			var1 = targetTextChannel.Name
-		end
-	end
-	local var2
-	targetTextChannel = nil
+	-- upvalues: getOpenChannelName (ref)
+	local var2, var3
+	local var4 = getOpenChannelName(p1)
+	local _ = nil
 	
 	if p3 == nil then
 		if p2.TextChannel == nil then
-			var2 = nil
+			var3 = nil
 		else
-			targetTextChannel = p2.TextChannel.Name
+			var2 = p2.TextChannel.Name
 		end
-		return var1 == nil or var2 == nil or var2 == var1
+		return var4 == nil or var3 == nil or var3 == var4
 	else
-		targetTextChannel = p3
+		var2 = p3
 	end
-	if targetTextChannel == "RBXSystem" then
-		targetTextChannel = "RBXGeneral"
+	if var2 == "RBXSystem" then
+		var2 = "RBXGeneral"
 	end
-	var2 = targetTextChannel
+	var3 = var2
 end

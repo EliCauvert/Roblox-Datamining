@@ -7,8 +7,6 @@ local chatTypesModule = require(buildExperience.Chat.chatTypes)
 local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local getAdUpsellEligibilityModule = require(buildExperience.Components.Ads.getAdUpsellEligibility)
 local observeAdUpsellEligibilityModule = require(buildExperience.Components.Ads.observeAdUpsellEligibility)
-local fIntBuildAdUpsellCompletedTurnGapModule = require(buildExperience.Flags.FIntBuildAdUpsellCompletedTurnGap)
-local fIntBuildAdUpsellPublishIntervalModule = require(buildExperience.Flags.FIntBuildAdUpsellPublishInterval)
 local gameConfigurationLabelsModule = require(buildExperience.utils.GameConfigurationLabels)
 local buildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKey")
 local var1 = if buildAppStorageKeyEngineFeature then require(buildExperience.Storage.BuildAppStorage) else nil
@@ -57,7 +55,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: defaultDependencies (ref), signalsModule (ref), fIntBuildAdUpsellCompletedTurnGapModule (ref), fIntBuildAdUpsellPublishIntervalModule (ref), chatTypesModule (ref), creatorAgentChatModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
+	-- upvalues: defaultDependencies (ref), signalsModule (ref), chatTypesModule (ref), creatorAgentChatModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
 	p1 = p1 or defaultDependencies()
 	local var2, var3 = signalsModule.createSignal(0)
 	local var4, var5 = signalsModule.createSignal(0)
@@ -279,7 +277,7 @@ return function(p1)
 	end
 	
 	local function persistEvent(p3)
-		-- upvalues: p1 (ref), fIntBuildAdUpsellCompletedTurnGapModule (copy), fIntBuildAdUpsellPublishIntervalModule (copy), var3 (ref), t (ref), t_2 (ref), t_1 (ref), var12 (write)
+		-- upvalues: p1 (ref), var3 (ref), t (ref), t_2 (ref), t_1 (ref), var12 (write)
 		if p1 == nil then return end
 		local var16, var17
 		local t_3 = {
@@ -287,9 +285,7 @@ return function(p1)
 			sessionId = p3.sessionId,
 			eventId = p3.id,
 			afterMessageKey = p3.afterMessageKey,
-			isEligiblePublish = p3.isEligiblePublish == true,
-			completedTurnGap = fIntBuildAdUpsellCompletedTurnGapModule,
-			publishInterval = fIntBuildAdUpsellPublishIntervalModule
+			isEligiblePublish = p3.isEligiblePublish == true
 		}
 		local _ = nil
 		local _ = nil
@@ -446,6 +442,22 @@ return function(p1)
 	end
 	
 	return {
+		recordAdCampaignAttempt = if fFlagBuildAgentAdCampaignCardModule then function(p3, p4)
+			-- upvalues: p1 (ref), var5 (ref), var3 (ref)
+			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
+			
+			if var17 == nil or not var17.saveAttempt(p3, p4) then
+				return false
+			end
+			var5(function(p5)
+				return p5 + 1
+			end)
+			var3(function(p5)
+				return p5 + 1
+			end)
+			
+			return true
+		end else nil,
 		getAdCampaignCard = if fFlagBuildAgentAdCampaignCardModule then function(p3, p4)
 			-- upvalues: p1 (ref)
 			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
@@ -630,21 +642,30 @@ return function(p1)
 			end
 			return var19
 		end,
-		dismissPermanently = function()
-			-- upvalues: p1 (ref), var7 (write), var6 (write), disposeAllEligibilitySubscriptions (ref), t (ref), t_1 (ref), var3 (ref)
+		dismissPermanently = function(p3)
+			-- upvalues: p1 (ref), t_1 (ref), t (ref), t_2 (ref), var3 (ref)
 			if p1 ~= nil then
-				var7 += 1
-				
-				if var6 ~= nil then
-					p1.cancelRetry(var6)
-					var6 = nil
+				for i, v in table.clone(t_1) do
+					local var19 = t[v]
+					
+					if var19 ~= nil and var19.universeId == p3 and t[v] ~= nil then
+						local var20 = t_2[v]
+						
+						if var20 ~= nil then
+							t_2[v] = nil
+							var20()
+						end
+						t[v] = nil
+						local index = table.find(t_1, v)
+						
+						if index ~= nil then
+							table.remove(t_1, index)
+						end
+					end
 				end
-				disposeAllEligibilitySubscriptions()
-				table.clear(t)
-				table.clear(t_1)
-				p1.dismissPermanently()
-				var3(function(p3)
-					return p3 + 1
+				p1.dismissPermanently(p3)
+				var3(function(p4)
+					return p4 + 1
 				end)
 			end
 		end,

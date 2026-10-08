@@ -509,6 +509,22 @@ local function getExperienceProductInfo(p1)
 	end)
 end
 
+local function getUniversePrivateServerSettings(value)
+	-- upvalues: replaced_1 (ref), promiseModule (ref), request (ref)
+	local t = {
+		Method = "GET",
+		Url = ("%sprivate-servers-api/universe-private-server-settings?universeId=%d"):format(replaced_1, value)
+	}
+	
+	return promiseModule.new(function(p1, p2)
+		-- upvalues: request (copy), t (ref)
+		spawn(function()
+			-- upvalues: request (copy), t (copy), p1 (ref), p2 (ref)
+			request(t, p1, p2)
+		end)
+	end)
+end
+
 local function performExperiencePurchase(p1, p2)
 	-- upvalues: replaced_5 (ref), httpService (ref), promiseModule (ref), request (ref)
 	local t = {
@@ -631,7 +647,7 @@ end
 
 return {
 	new = function()
-		-- upvalues: promiseModule (ref), getABTestGroup (ref), getProductInfo (ref), getPlayerOwns (ref), performPurchase (ref), performPurchaseV2 (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), performCreatorStorePurchase (ref), loadAssetForEquip (ref), getAccountInfo (ref), getAssetInfo (ref), getBalanceInfo (ref), getBundleDetails (ref), getProductPurchasableDetails (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getCatalogItemDetails (ref), getResellers (ref), getCreatorStoreProductInfo (ref), getPremiumProductInfo (ref), postPremiumImpression (ref), getPremiumUpsellPrecheck (ref), getSubscriptionPurchaseInfo (ref), performSubscriptionPurchase (ref), getPurchaseWarning (ref), postPurchaseWarningAcknowledge (ref), checkUserPurchaseSettings (ref), getVngShopUrl (ref), performDevProductEdpPurchase (ref), getExperienceProductInfo (ref), performExperiencePurchase (ref), performLookPurchase (ref), getUnifiedPurchaseFlowUserEligibility (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), performLookPurchaseBulkPurchase (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), performDeveloperSubscriptionRobuxPurchase (ref), getSubscriptionProductInfo (ref), fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (ref), GetLookDetailsV2ProductInfo (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), postCartPricing (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), postInGameItemCartPricing (ref)
+		-- upvalues: promiseModule (ref), getABTestGroup (ref), getProductInfo (ref), getPlayerOwns (ref), performPurchase (ref), performPurchaseV2 (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), performCreatorStorePurchase (ref), loadAssetForEquip (ref), getAccountInfo (ref), getAssetInfo (ref), getBalanceInfo (ref), getBundleDetails (ref), getProductPurchasableDetails (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getCatalogItemDetails (ref), getResellers (ref), getCreatorStoreProductInfo (ref), getPremiumProductInfo (ref), postPremiumImpression (ref), getPremiumUpsellPrecheck (ref), getSubscriptionPurchaseInfo (ref), performSubscriptionPurchase (ref), getPurchaseWarning (ref), postPurchaseWarningAcknowledge (ref), checkUserPurchaseSettings (ref), getVngShopUrl (ref), performDevProductEdpPurchase (ref), getExperienceProductInfo (ref), performExperiencePurchase (ref), getUniversePrivateServerSettings (ref), performLookPurchase (ref), getUnifiedPurchaseFlowUserEligibility (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), performLookPurchaseBulkPurchase (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), performDeveloperSubscriptionRobuxPurchase (ref), getSubscriptionProductInfo (ref), fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (ref), GetLookDetailsV2ProductInfo (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), postCartPricing (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), postInGameItemCartPricing (ref)
 		local t = {
 			getABTestGroup = promiseModule.promisify(getABTestGroup),
 			getProductInfo = promiseModule.promisify(getProductInfo),
@@ -660,6 +676,7 @@ return {
 			performDevProductEdpPurchase = promiseModule.promisify(performDevProductEdpPurchase),
 			getExperienceProductInfo = promiseModule.promisify(getExperienceProductInfo),
 			performExperiencePurchase = promiseModule.promisify(performExperiencePurchase),
+			getUniversePrivateServerSettings = promiseModule.promisify(getUniversePrivateServerSettings),
 			performLookPurchase = promiseModule.promisify(performLookPurchase),
 			getUnifiedPurchaseFlowUserEligibility = promiseModule.promisify(getUnifiedPurchaseFlowUserEligibility),
 			performLookPurchaseBulkPurchase = if fFlagPurchasePromptFetchCartPricingForLooks then promiseModule.promisify(performLookPurchaseBulkPurchase) else nil,

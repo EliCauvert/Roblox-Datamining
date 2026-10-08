@@ -1,9 +1,11 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
+﻿local appChat = script:FindFirstAncestor("AppChat")
+local parent = appChat.Parent
 local httpService = game:GetService("HttpService")
 local momentsTypesModule = require(parent.MomentsTypes)
 local _ = require(parent.ShareLinksNetworking)
 local shareLinkClassificationModule = require(script.Parent.ShareLinkClassification)
 local fFlagMomentsPassFeedItemIdToBackendApis = require(parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
+local fFlagAppChatPlusReferralAssetCardModule = require(appChat.Flags.FFlagAppChatPlusReferralAssetCard)
 local shareLinkTargetIdType = momentsTypesModule.Enums.ShareLinkTargetIdType
 
 local function _(p1)
@@ -17,26 +19,30 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: shareLinkClassificationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), httpService (ref), shareLinkTargetIdType (ref)
+	-- upvalues: shareLinkClassificationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), httpService (ref), shareLinkTargetIdType (ref), fFlagAppChatPlusReferralAssetCardModule (ref)
 	if p1.status ~= "Valid" then
 		return { type = shareLinkClassificationModule.Invalid }
-	elseif p1.linkType ~= "Moments" then
-		return { type = shareLinkClassificationModule.Unhandled }
-	end
-	local var1
-	local t = {
-		type = shareLinkClassificationModule.Moment,
-		momentId = p1.targetId
-	}
-	local customData = p1.customData
-	
-	if fFlagMomentsPassFeedItemIdToBackendApis and customData ~= "" then
-		local ok, status = pcall(httpService.JSONDecode, httpService, customData)
-		var1 = if ok and type(status) == "table" and status.targetIdType == shareLinkTargetIdType.FeedItemId then shareLinkTargetIdType.FeedItemId else nil
+	elseif p1.linkType == "Moments" then
+		local var1
+		local t = {
+			type = shareLinkClassificationModule.Moment,
+			momentId = p1.targetId
+		}
+		local customData = p1.customData
+		
+		if fFlagMomentsPassFeedItemIdToBackendApis and customData ~= "" then
+			local ok, status = pcall(httpService.JSONDecode, httpService, customData)
+			var1 = if ok and type(status) == "table" and status.targetIdType == shareLinkTargetIdType.FeedItemId then shareLinkTargetIdType.FeedItemId else nil
+		else
+			var1 = nil
+		end
+		t.targetIdType = var1
+		
+		return t
 	else
-		var1 = nil
+		return if fFlagAppChatPlusReferralAssetCardModule and p1.linkType == "Referral" then {
+			type = shareLinkClassificationModule.PlusReferral,
+			referrerId = p1.targetId
+		} else { type = shareLinkClassificationModule.Unhandled }
 	end
-	t.targetIdType = var1
-	
-	return t
 end

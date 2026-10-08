@@ -11,6 +11,7 @@ local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
 local parsePageEntriesFromResponse = sduiSharedUtilitiesModule.SduiProtobufResponseHelpers.parsePageEntriesFromResponse
 local fFlagSduiAllowNoConfigsBuilt = require(parent.SharedFlags).FFlagSduiAllowNoConfigsBuilt
 local fFlagEdpGameLeavePromptsHandlerEnabled = require(parent.SharedFlags).FFlagEdpGameLeavePromptsHandlerEnabled
+local fFlagEdpOpenPromptsHandlerEnabled = require(parent.SharedFlags).FFlagEdpOpenPromptsHandlerEnabled
 local fFlagHomepagePromptsHandlerPassClientAttributes = require(parent.SharedFlags).FFlagHomepagePromptsHandlerPassClientAttributes
 local fFlagPushNotificationsUpsellHomePromptsExperiment = require(parent.SharedFlags).FFlagPushNotificationsUpsellHomePromptsExperiment
 local fFlagSplitPaneEducationalTour = require(parent.SharedFlags).FFlagSplitPaneEducationalTour
@@ -28,10 +29,10 @@ local function getPromptsUrl(p1, p2)
 end
 
 return function(p1, p2)
-	-- upvalues: parent (ref), getSduiApiStore (ref), sduiResponseType (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), fFlagHomepagePromptsHandlerPassClientAttributes (ref), getPromptsUrl (ref), urlBuilder (ref), urlBase (ref), fFlagSduiAllowNoConfigsBuilt (ref), promptsEntryPointModule (ref), fFlagPushNotificationsUpsellHomePromptsExperiment (ref), nativePushNotificationPermissionPrompt (ref), fFlagSplitPaneEducationalTour (ref), var1 (ref), parsePageEntriesFromResponse (ref)
+	-- upvalues: parent (ref), getSduiApiStore (ref), sduiResponseType (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), fFlagEdpOpenPromptsHandlerEnabled (ref), fFlagHomepagePromptsHandlerPassClientAttributes (ref), getPromptsUrl (ref), urlBuilder (ref), urlBase (ref), fFlagSduiAllowNoConfigsBuilt (ref), promptsEntryPointModule (ref), fFlagPushNotificationsUpsellHomePromptsExperiment (ref), nativePushNotificationPermissionPrompt (ref), fFlagSplitPaneEducationalTour (ref), var1 (ref), parsePageEntriesFromResponse (ref)
 	getSduiApiStore().fetchIfNeeded({
 		responseType = sduiResponseType.ProtobufJson,
-		url = if fFlagEdpGameLeavePromptsHandlerEnabled or fFlagHomepagePromptsHandlerPassClientAttributes then getPromptsUrl(p1.entryPoint, p1.clientAttributes) else urlBuilder.new({
+		url = if fFlagEdpGameLeavePromptsHandlerEnabled or fFlagEdpOpenPromptsHandlerEnabled or fFlagHomepagePromptsHandlerPassClientAttributes then getPromptsUrl(p1.entryPoint, p1.clientAttributes) else urlBuilder.new({
 			path = "modals-api/v1/prompts",
 			base = urlBase.APIS,
 			query = { entryPoint = p1.entryPoint }

@@ -2,9 +2,6 @@
 local userInputService = game:GetService("UserInputService")
 local playersService = game:GetService("Players")
 local guiService = game:GetService("GuiService")
-local fixCASGetButtonYieldedEngineFeature = game:GetEngineFeature("FixCASGetButtonYielded")
-local fixCASMaxTouchButtons = game:DefineFastFlag("FixCASMaxTouchButtons", false)
-local _ = userInputService.TouchEnabled
 local t = {}
 local t_1 = {}
 local var1 = nil
@@ -186,31 +183,29 @@ function createNewButton(p1, p2)
 end
 
 function createButton(p1, p2)
-	-- upvalues: fixCASMaxTouchButtons (ref), t_1 (ref), t_2Count (ref), t (ref), t_2 (ref), var2 (write), var1 (write), playerGui (ref)
-	local var3 = if not fixCASMaxTouchButtons then createNewButton(p1, p2) else nil
-	local var4 = nil
+	-- upvalues: t_1 (ref), t_2Count (ref), t (ref), t_2 (ref), var2 (write), var1 (write), playerGui (ref)
+	local _ = nil
+	local var3 = nil
 	
 	for i = 1, #t_1 do
 		if t_1[i] ~= "empty" then
 			continue
 		end
-		var4 = i
+		var3 = i
 		break
 	end
-	var4 = var4 or #t_1 + 1
+	var3 = var3 or #t_1 + 1
 	
-	if t_2Count < var4 then
-		if fixCASMaxTouchButtons then
-			warn("Maximum of 7 allowed touch buttons, new touch button not created for " .. p18 .. ".")
-		end
+	if t_2Count < var3 then
+		warn("Maximum of 7 allowed touch buttons, new touch button not created for " .. p18 .. ".")
+		
 		return
-	elseif fixCASMaxTouchButtons then
-		var3 = createNewButton(p1, p2)
 	end
-	t_1[var4] = var3
-	t[p1].button = var3
-	var3.Position = t_2[var4]
-	var3.Parent = var2
+	local var4 = createNewButton(p1, p2)
+	t_1[var3] = var4
+	t[p1].button = var4
+	var4.Position = t_2[var3]
+	var4.Parent = var2
 	
 	if var1 and var1.Parent == nil then
 		var1.Parent = playerGui
@@ -295,7 +290,7 @@ end)
 for i, v in pairs(contextActionService:GetAllBoundActionInfo()) do
 	addAction(i, v.createTouchButton, v)
 	
-	if fixCASGetButtonYieldedEngineFeature and t[i] and t[i].button then
+	if t[i] and t[i].button then
 		contextActionService:FireActionButtonFoundSignal(i, t[i].button)
 	end
 end

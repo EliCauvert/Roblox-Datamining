@@ -14,17 +14,19 @@ local fFlagSduiCollectionGridRevealRows = sharedFlagsModule.FFlagSduiCollectionG
 local fFlagAppPageShellScrollToTopFocus = sharedFlagsModule.FFlagAppPageShellScrollToTopFocus
 local fFlagLuaAppsDefaultSelection = sharedFlagsModule.FFlagLuaAppsDefaultSelection
 local fFlagSduiIndividualFeedItemSpacing = sharedFlagsModule.FFlagSduiIndividualFeedItemSpacing
+local fFlagSduiSamePoolFeedItemSpacing = sharedFlagsModule.FFlagSduiSamePoolFeedItemSpacing
 local sduiFeedIndexInExtraLocalProps = game:DefineFastFlag("SduiFeedIndexInExtraLocalProps", false)
 local sduiFeedDebugNameWithImpressionsTag = game:DefineFastFlag("SduiFeedDebugNameWithImpressionsTag", false)
 local SORT_INDEX_SELECTION_ORDER_MULTIPLIER = discoveryTypesModule.Constants.SORT_INDEX_SELECTION_ORDER_MULTIPLIER
 local t = {}
 
-local function _(p1, p2, p3)
-	return if p1 == nil then nil elseif p2 == 1 and p3 ~= nil and p3 >= 0 then p3 else p1
+local function _(p1, p2, p3, p4, p5)
+	-- upvalues: fFlagSduiSamePoolFeedItemSpacing (ref)
+	return if p1 == nil then nil elseif fFlagSduiSamePoolFeedItemSpacing and p4 ~= nil and (p5 ~= nil and p5.continuesPreviousSection == true) then p4 elseif p2 == 1 and p3 ~= nil and p3 >= 0 then p3 else p1
 end
 
 return function(p1)
-	-- upvalues: fFlagSduiIndividualFeedItemSpacing (ref), findAnalyticsField (ref), t (ref), sduiBuilder (ref), sduiErrors (ref), getSduiComponentWrapper (ref), cryoModule (ref), fFlagSduiCollectionGridRevealRows (ref), sduiFeedIndexInExtraLocalProps (ref), fFlagAppPageShellScrollToTopFocus (ref), SORT_INDEX_SELECTION_ORDER_MULTIPLIER (ref), reactModule (ref), sduiFeedDebugNameWithImpressionsTag (ref), sduiFeedItemModule (ref), fFlagLuaAppsDefaultSelection (ref)
+	-- upvalues: fFlagSduiIndividualFeedItemSpacing (ref), findAnalyticsField (ref), t (ref), sduiBuilder (ref), sduiErrors (ref), getSduiComponentWrapper (ref), cryoModule (ref), fFlagSduiCollectionGridRevealRows (ref), sduiFeedIndexInExtraLocalProps (ref), fFlagAppPageShellScrollToTopFocus (ref), SORT_INDEX_SELECTION_ORDER_MULTIPLIER (ref), reactModule (ref), sduiFeedDebugNameWithImpressionsTag (ref), fFlagSduiSamePoolFeedItemSpacing (ref), sduiFeedItemModule (ref), fFlagLuaAppsDefaultSelection (ref)
 	local t_1 = {}
 	local sduiContext = p1.sduiContext
 	local startRow = p1.extraLocalProps and p1.extraLocalProps.startRow
@@ -70,6 +72,7 @@ return function(p1)
 				selectionOrderBase = p1.selectionOrderBase + i * SORT_INDEX_SELECTION_ORDER_MULTIPLIER
 			})
 		end
+		local var7, var8
 		local createElement = reactModule.createElement
 		createElement = createElement(var4, {
 			debugName = if sduiFeedDebugNameWithImpressionsTag and p1.impressionsTag ~= nil and p1.impressionsTag ~= "" then `{componentType_1}_{p1.impressionsTag}` else componentType_1,
@@ -79,33 +82,38 @@ return function(p1)
 			extraLocalProps = var6,
 			extraLocalPropSignals = var5
 		})
-		local var7 = if v.props and v.props.layoutOrder ~= nil then v.props.layoutOrder else i
-		local var8 = if v.props and v.props.zIndex ~= nil then v.props.zIndex else -i
-		local var9 = if p1.negateImpressionIndex then -i else i
-		local var10 = nil
+		local var9 = if v.props and v.props.layoutOrder ~= nil then v.props.layoutOrder else i
+		local var10 = if v.props and v.props.zIndex ~= nil then v.props.zIndex else -i
+		local var11 = if p1.negateImpressionIndex then -i else i
+		local var12 = nil
 		
 		if fFlagSduiIndividualFeedItemSpacing then
-			var10 = var7 * 2
-			local var11 = if var2 == nil then nil elseif i == 1 and var3 ~= nil and var3 >= 0 then var3 else var2
+			var12 = var9 * 2
+			var7 = if fFlagSduiSamePoolFeedItemSpacing then p1.samePoolFeedItemGap else nil
+			var8 = if fFlagSduiSamePoolFeedItemSpacing then p1.configs[i + 1] else nil
+			local var13 = if var2 == nil then nil elseif fFlagSduiSamePoolFeedItemSpacing and var7 ~= nil and (var8 ~= nil and var8.continuesPreviousSection == true) then var7 elseif i == 1 and var3 ~= nil and var3 >= 0 then var3 else var2
 			
-			if var11 ~= nil and var11 > 0 then
+			if var13 ~= nil and var13 > 0 then
 				t_1[`{componentType_1}_GapAfter`] = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
-					Size = UDim2.new(1, 0, 0, var11),
-					LayoutOrder = var10 + 1
+					Size = UDim2.new(1, 0, 0, var13),
+					LayoutOrder = var12 + 1
 				})
 			end
 		end
-		t_1[componentType_1] = reactModule.createElement(sduiFeedItemModule, {
-			layoutOrder = if fFlagSduiIndividualFeedItemSpacing then var10 else var7,
-			zIndex = var8,
-			index = var9,
+		local createElement_1 = reactModule.createElement
+		var7 = sduiFeedItemModule
+		var8 = {
+			layoutOrder = if fFlagSduiIndividualFeedItemSpacing then var12 else var9,
+			zIndex = var10,
+			index = var11,
 			impressionsTag = p1.impressionsTag,
 			selectionBehaviorLeft = p1.selectionBehaviorLeft,
 			selectionBehaviorRight = p1.selectionBehaviorRight,
 			defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection and i == 1 then p1.defaultFocusRef else nil
-		}, { Item = createElement })
+		}
+		t_1[componentType_1] = createElement_1(var7, var8, { Item = createElement })
 	end
 	return t_1
 end

@@ -5,6 +5,7 @@ local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
 local foundationModule = require(parent.Foundation)
 local game = dataHydrationModule.Game
 local signalsModule = require(parent.Signals)
+local fFlagLuaAppAddUniverseIdToEngagementEvents = require(parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
@@ -12,7 +13,7 @@ local gameFavorite = discoveryAnalyticsModule.Events.gameFavorite
 local getSduiPageEntrySnackbarStore = require(parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
 
 return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), playersService (ref), gameFavorite (ref), signalsModule (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref)
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), playersService (ref), gameFavorite (ref), fFlagLuaAppAddUniverseIdToEngagementEvents (ref), signalsModule (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref)
 	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
@@ -42,7 +43,8 @@ return function(p1, _, p2, _)
 		uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
 		ctx = ctx,
 		placeId = tostring(placeId),
-		state = if var3 then "on" else "off"
+		state = if var3 then "on" else "off",
+		universeId = if fFlagLuaAppAddUniverseIdToEngagementEvents then universeId else nil
 	}, ctx)
 	local var4 = favoritesStore.updateFavorite(universeId, var3)
 	local t = {}

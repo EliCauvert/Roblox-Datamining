@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXPhotoboothMomentsCurrentAvatarTile", false) and require(script.Parent.FFlagAXPhotoboothMomentsPage)
+﻿return game:DefineFastFlag("AXPhotoboothMomentsCurrentAvatarTile2", false) and require(script.Parent.FFlagAXPhotoboothMomentsPage)

@@ -1,8 +1,6 @@
 ﻿local coreGuiService = game:GetService("CoreGui")
 local userInputService = game:GetService("UserInputService")
-local parent = script.Parent.Parent
-local signal = require(parent.AppCommonLib).Signal
-local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
+local signal = require(script.Parent.Parent.AppCommonLib).Signal
 local t = {
 	[Enum.Platform.XBoxOne] = true,
 	[Enum.Platform.XBox360] = true,
@@ -102,8 +100,7 @@ return {
 	end,
 	diffInsets = diffInsets,
 	hasExtraPlatformInset = function()
-		-- upvalues: fFlagEnableLeftNavOnConsole (ref), t (ref), userInputService (ref)
-		return if fFlagEnableLeftNavOnConsole then false else t[userInputService:GetPlatform()]
+		return false
 	end,
 	fullscreenGui = function()
 		-- upvalues: var3 (write)

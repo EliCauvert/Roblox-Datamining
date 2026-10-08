@@ -1,4 +1,5 @@
 ﻿local telemetryService = game:GetService("TelemetryService")
+local fFlagSduiPlayWithRewardRefactor = require(script:FindFirstAncestor("PlayWithRewardComponent").Parent.SharedFlags).FFlagSduiPlayWithRewardRefactor
 local list = { "addOSInfo", "addSessionInfo", "addSessionId" }
 local list_1 = { "addOSInfo" }
 local t = {
@@ -6,14 +7,14 @@ local t = {
 	description = "        This is fired when a Play with Reward ad is requested.\n    ",
 	backends = { "EventIngest", "Points" },
 	throttlingPercentage = game:DefineFastInt("PlayWithRewardAdRequestedTelemetryThrottleHundredthsPercent", 0),
-	lastUpdated = { 25, 9, 24 }
+	lastUpdated = { 26, 9, 28 }
 }
 local t_1 = {
 	eventName = "PlayWithRewardAdReceived",
 	description = "        This is fired when a Play with Reward ad is received.\n    ",
 	backends = { "EventIngest", "Points" },
 	throttlingPercentage = game:DefineFastInt("PlayWithRewardAdReceivedTelemetryThrottleHundredthsPercent", 0),
-	lastUpdated = { 25, 9, 24 }
+	lastUpdated = { 26, 9, 30 }
 }
 local t_2 = {
 	eventName = "PlayWithRewardBannerShown",
@@ -136,16 +137,20 @@ local function _(p1, p2, p3, p4)
 end
 
 return {
-	logPlayWithRewardAdRequested = function(p1, p2)
-		-- upvalues: telemetryService (ref), t (ref), list (ref), t_10 (ref), list_1 (ref)
+	logPlayWithRewardAdRequested = function(p1, p2, p3)
+		-- upvalues: fFlagSduiPlayWithRewardRefactor (ref), telemetryService (ref), t (ref), list (ref), t_10 (ref), list_1 (ref)
 		telemetryService:LogEvent(t, {
 			standardizedFields = list,
-			customFields = { playWithRewardFlowId = p1, universeId = p2 }
+			customFields = {
+				playWithRewardFlowId = p1,
+				universeId = p2,
+				experimentUiVariant = if fFlagSduiPlayWithRewardRefactor then p3 else nil
+			}
 		})
 		telemetryService:LogCounter(t_10, { standardizedFields = list_1, customFields = {} }, 1)
 	end,
-	logPlayWithRewardAdReceived = function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: telemetryService (ref), t_1 (ref), list (ref), t_11 (ref), list_1 (ref), t_18 (ref)
+	logPlayWithRewardAdReceived = function(p1, p2, p3, p4, p5, p6, p7)
+		-- upvalues: fFlagSduiPlayWithRewardRefactor (ref), telemetryService (ref), t_1 (ref), list (ref), t_11 (ref), list_1 (ref), t_18 (ref)
 		telemetryService:LogEvent(t_1, {
 			standardizedFields = list,
 			customFields = {
@@ -154,7 +159,8 @@ return {
 				isSuccessful = p3,
 				adAvailabilityResult = p4,
 				fetchLatencyMs = p5,
-				productId = p6
+				productId = p6,
+				experimentUiVariant = if fFlagSduiPlayWithRewardRefactor then p7 else nil
 			}
 		})
 		telemetryService:LogCounter(t_11, {

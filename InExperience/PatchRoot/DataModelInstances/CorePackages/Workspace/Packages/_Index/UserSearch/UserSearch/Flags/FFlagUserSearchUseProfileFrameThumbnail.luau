@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("UserSearchUseProfileFrameThumbnail", false) and require(script:FindFirstAncestor("UserSearch").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()

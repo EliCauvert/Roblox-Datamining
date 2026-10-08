@@ -10,7 +10,6 @@ local initiatePurchaseModule = require(purchasePrompt.Thunks.initiatePurchase)
 local initiateBundlePurchaseModule = require(purchasePrompt.Thunks.initiateBundlePurchase)
 local initiatePremiumPurchaseModule = require(purchasePrompt.Thunks.initiatePremiumPurchase)
 local initiateSubscriptionPurchaseModule = require(purchasePrompt.Thunks.initiateSubscriptionPurchase)
-local initiateVIPServerPurchaseModule = require(purchasePrompt.Thunks.initiateVIPServerPurchase)
 local connectToStoreModule = require(purchasePrompt.connectToStore)
 local externalEventConnectionModule = require(script.Parent.ExternalEventConnection)
 local getFFlagEnablePromptPurchaseRequestedV2Module = require(purchasePrompt.Flags.GetFFlagEnablePromptPurchaseRequestedV2)
@@ -18,14 +17,14 @@ local getFFlagEnablePromptPurchaseRequestedV2Take2Module = require(purchasePromp
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local productTypeEnum = require(purchasePrompt.types).ProductTypeEnum
 local fFlagEnablePromptRobloxSubscriptionPurchaseBindingModule = require(purchasePrompt.Flags.FFlagEnablePromptRobloxSubscriptionPurchaseBinding)
-local fFlagLuaAppsEnablePromptVIPServerPurchaseModule = require(purchasePrompt.Flags.FFlagLuaAppsEnablePromptVIPServerPurchase)
+local fFlagLuaAppsEnablePromptVIPServerPurchase = require(purchasePrompt.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local routePremiumToBlackbirdUpsell = game:DefineFastFlag("RoutePremiumToBlackbirdUpsell", false)
 local robloxSubscriptionPurchaseAppModule = require(parent.RobloxSubscriptionPurchaseApp)
 local surfaceContext = robloxSubscriptionPurchaseAppModule.SurfaceContext
 local surfaceName = robloxSubscriptionPurchaseAppModule.SurfaceName
 
 return connectToStoreModule(nil, function(p1)
-	-- upvalues: playersService (ref), initiatePurchaseModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), completePurchaseModule (ref), initiateBundlePurchaseModule (ref), routePremiumToBlackbirdUpsell (ref), robloxSubscriptionPurchaseAppModule (ref), surfaceName (ref), surfaceContext (ref), initiatePremiumPurchaseModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref), initiateSubscriptionPurchaseModule (ref), fFlagEnablePromptRobloxSubscriptionPurchaseBindingModule (ref), initiateVIPServerPurchaseModule (ref)
+	-- upvalues: playersService (ref), initiatePurchaseModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), completePurchaseModule (ref), initiateBundlePurchaseModule (ref), routePremiumToBlackbirdUpsell (ref), robloxSubscriptionPurchaseAppModule (ref), surfaceName (ref), surfaceContext (ref), initiatePremiumPurchaseModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref), initiateSubscriptionPurchaseModule (ref), fFlagEnablePromptRobloxSubscriptionPurchaseBindingModule (ref)
 	return {
 		onPurchaseRequest = function(p2, p3, p4, _)
 			-- upvalues: playersService (copy), p1 (ref), initiatePurchaseModule (copy)
@@ -116,12 +115,12 @@ return connectToStoreModule(nil, function(p1)
 			end
 		end,
 		onVIPServerPurchaseRequest = function(_)
-			-- upvalues: p1 (ref), initiateVIPServerPurchaseModule (copy)
-			p1(initiateVIPServerPurchaseModule())
+			-- upvalues: p1 (ref), initiatePurchaseModule (copy), productTypeEnum (copy)
+			p1(initiatePurchaseModule(game.GameId, productTypeEnum.VIPServer))
 		end
 	}
 end)(function(p1)
-	-- upvalues: marketplaceService (ref), getFFlagEnablePromptPurchaseRequestedV2Module (ref), getFFlagEnablePromptPurchaseRequestedV2Take2Module (ref), roact (ref), externalEventConnectionModule (ref), fFlagLuaAppsEnablePromptVIPServerPurchaseModule (ref), fFlagEnablePromptRobloxSubscriptionPurchaseBindingModule (ref)
+	-- upvalues: marketplaceService (ref), getFFlagEnablePromptPurchaseRequestedV2Module (ref), getFFlagEnablePromptPurchaseRequestedV2Take2Module (ref), roact (ref), externalEventConnectionModule (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref), fFlagEnablePromptRobloxSubscriptionPurchaseBindingModule (ref)
 	local _ = nil
 	
 	return roact.createFragment({
@@ -149,7 +148,7 @@ end)(function(p1)
 			event = marketplaceService.PromptCollectibleBundlePurchaseRequested,
 			callback = p1.onCollectibleBundlePurchaseRequest
 		}) else nil,
-		if fFlagLuaAppsEnablePromptVIPServerPurchaseModule then roact.createElement(externalEventConnectionModule, {
+		if fFlagLuaAppsEnablePromptVIPServerPurchase then roact.createElement(externalEventConnectionModule, {
 			event = marketplaceService.PromptVIPServerPurchaseRequested,
 			callback = p1.onVIPServerPurchaseRequest
 		}) else nil,

@@ -17,6 +17,7 @@ local urlBase = urlBuilderModule.UrlBase
 local urlBuilder = urlBuilderModule.UrlBuilder
 local gameCopyExperienceLink = discoveryAnalyticsModule.Events.gameCopyExperienceLink
 local gameShareExperienceLink = discoveryAnalyticsModule.Events.gameShareExperienceLink
+local fFlagLuaAppAddUniverseIdToEngagementEvents = require(parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents
 
 local function _()
 	-- upvalues: userInputService (ref)
@@ -25,8 +26,8 @@ local function _()
 	return if platform ~= Enum.Platform.Windows then if platform ~= Enum.Platform.OSX then platform == Enum.Platform.UWP else true else true
 end
 
-local function logExperienceDetailsShareAnalytics(p1, p2, p3, p4)
-	-- upvalues: playersService (ref), userInputService (ref), gameCopyExperienceLink (ref), gameShareExperienceLink (ref)
+local function logExperienceDetailsShareAnalytics(p1, p2, p3, p4, p5)
+	-- upvalues: playersService (ref), userInputService (ref), gameCopyExperienceLink (ref), fFlagLuaAppAddUniverseIdToEngagementEvents (ref), gameShareExperienceLink (ref)
 	local localPlayer = playersService.LocalPlayer
 	
 	if not localPlayer then return end
@@ -34,7 +35,13 @@ local function logExperienceDetailsShareAnalytics(p1, p2, p3, p4)
 	local platform = userInputService:GetPlatform()
 	
 	if if platform ~= Enum.Platform.Windows then if platform ~= Enum.Platform.OSX then platform == Enum.Platform.UWP else true else true then
-		gameCopyExperienceLink({ ctx = p2, uid = var1, placeId = p1, stamp = p4 }, p2)
+		gameCopyExperienceLink({
+			ctx = p2,
+			uid = var1,
+			placeId = p1,
+			stamp = p4,
+			universeId = if fFlagLuaAppAddUniverseIdToEngagementEvents then p5 else nil
+		}, p2)
 		
 		return
 	end
@@ -45,7 +52,8 @@ local function logExperienceDetailsShareAnalytics(p1, p2, p3, p4)
 		placeId = p1,
 		shortShareLinkFailed = p3 == nil,
 		stamp = p4,
-		linkId = p3
+		linkId = p3,
+		universeId = if fFlagLuaAppAddUniverseIdToEngagementEvents then p5 else nil
 	}, p2)
 end
 
@@ -72,7 +80,7 @@ local function fetchShareLinkId(p1, p2)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), promiseModule (ref), fetchShareLinkId (ref), urlBuilder (ref), default (ref), userInputService (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref), getActionTelemetryFieldValue (ref), logExperienceDetailsShareAnalytics (ref)
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), promiseModule (ref), fetchShareLinkId (ref), urlBuilder (ref), default (ref), userInputService (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref), getActionTelemetryFieldValue (ref), fFlagLuaAppAddUniverseIdToEngagementEvents (ref), logExperienceDetailsShareAnalytics (ref)
 	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
@@ -107,7 +115,7 @@ return function(p1, p2, p3)
 		var2 = if url == nil then promiseModule.reject("Missing url in shareLinkData") else promiseModule.resolve(url)
 	end
 	var2:andThen(function(p4)
-		-- upvalues: default (copy), shareUrlContext (ref), userInputService (copy), entryPointKey (ref), p3 (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy), shareLinkData (ref), getActionTelemetryFieldValue (copy), p1 (ref), p2 (ref), logExperienceDetailsShareAnalytics (copy), var4 (write), var5 (write)
+		-- upvalues: default (copy), shareUrlContext (ref), userInputService (copy), entryPointKey (ref), p3 (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy), shareLinkData (ref), getActionTelemetryFieldValue (copy), p1 (ref), p2 (ref), fFlagLuaAppAddUniverseIdToEngagementEvents (copy), logExperienceDetailsShareAnalytics (copy), var4 (write), var5 (write)
 		default:shareUrl({ context = shareUrlContext, url = p4 })
 		local platform = userInputService:GetPlatform()
 		
@@ -121,7 +129,20 @@ return function(p1, p2, p3)
 			local var6 = getActionTelemetryFieldValue(p1, p2, "rootPlaceId") or getActionTelemetryFieldValue(p1, p2, "placeId")
 			
 			if var6 ~= nil then
-				logExperienceDetailsShareAnalytics(tostring(var6), getActionTelemetryFieldValue(p1, p2, "ctx") or "ExperienceDetailsShare", var4, var5)
+				local var7 = getActionTelemetryFieldValue(p1, p2, "ctx") or "ExperienceDetailsShare"
+				
+				if fFlagLuaAppAddUniverseIdToEngagementEvents then
+					local var8 = getActionTelemetryFieldValue(p1, p2, "universeId")
+					
+					if var8 == nil and type(shareLinkData.linkData) == "table" then
+						var8 = shareLinkData.linkData.universeId
+					end
+					logExperienceDetailsShareAnalytics(tostring(var6), var7, var4, var5, if var8 ~= nil then nil else tostring(var8))
+					
+					return
+				else
+					logExperienceDetailsShareAnalytics(tostring(var6), var7, var4, var5)
+				end
 			end
 		end
 	end):catch(function(p4)

@@ -457,7 +457,7 @@ return function(p1)
 	end, { var17, var43 })
 	local var45 = reactModule.createElement(feedContext.Provider, {
 		value = reactModule.useMemo(function()
-			-- upvalues: var17 (ref), var4 (ref), var5 (ref), source (ref), telemetry (ref), var27 (ref), var12 (ref), var40 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), getFFlagMomentsNonInfiniteScroll (copy)
+			-- upvalues: var17 (ref), var4 (ref), var5 (ref), source (ref), telemetry (ref), var27 (ref), var12 (ref), var40 (ref), var29 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), getFFlagMomentsNonInfiniteScroll (copy)
 			return {
 				getStatus = var17.getStatus,
 				isActiveFeed = var4,
@@ -471,11 +471,12 @@ return function(p1)
 				getChromeVisible = var12.getChromeVisible,
 				revealChrome = var12.revealChrome,
 				removeCurrentItem = var40,
+				scrollToNext = var29,
 				loadMoreBeyondLimit = if fFlagMomentsNonInfiniteScrollEndStateFixesModule then if getFFlagMomentsNonInfiniteScroll() then var17.loadBeyondLimit else nil else var17.loadBeyondLimit,
 				getCanLoadMoreBeyondLimit = if fFlagMomentsNonInfiniteScrollEndStateFixesModule then var17.getCanLoadMoreBeyondLimit else nil
 			}
 		end, {
-			var17, var4, var5, source, telemetry, var27.flushView, var12, var40
+			var17, var4, var5, source, telemetry, var27.flushView, var12, var40, var29
 		})
 	}, {
 		Root = reactModule.createElement("Frame", {

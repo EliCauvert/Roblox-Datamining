@@ -4,7 +4,7 @@ local _ = require(script.Parent.Types.acpSession)
 local var1, var2 = signalsModule.createSignal({})
 local var3, var4 = signalsModule.createSignal({})
 
-local function _(p1)
+local function normalize(p1)
 	return if p1 == nil or p1 == "" or p1 == "latest" then "" else p1
 end
 
@@ -23,7 +23,7 @@ local function isPending(p1)
 	return p1 ~= nil and var3(false)[p1] == true
 end
 
-local _ = function(p1, p2)
+local function _(p1, p2)
 	-- upvalues: var1 (ref), var2 (ref)
 	local cloned = table.clone(var1(false))
 	cloned[p1] = if p2 == nil or p2 == "" or p2 == "latest" then "" else p2
@@ -62,6 +62,7 @@ return {
 		return debugMyStatsExperienceAgentSpec
 	end,
 	getKey = getKey,
+	normalize = normalize,
 	createPendingKey = function()
 		-- upvalues: var5 (write)
 		var5 += 1

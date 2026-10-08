@@ -2,7 +2,6 @@
 local parent = sduiSharedUtilities.Parent
 local sduiPageAnalyticsModule = require(sduiSharedUtilities.SduiPageAnalytics)
 local _ = require(sduiSharedUtilities.SduiIntegrationTypes)
-local fFlagSduiGameIconSupport = require(parent.SharedFlags).FFlagSduiGameIconSupport
 local fFlagLuaAppSduiStreamingFirstDataTiming = require(parent.SharedFlags).FFlagLuaAppSduiStreamingFirstDataTiming
 local _ = {
 	UiRequestSent = "UiRequestSent",
@@ -24,7 +23,7 @@ local _ = {
 
 return {
 	createLoadTimer = function(p1, p2)
-		-- upvalues: fFlagLuaAppSduiStreamingFirstDataTiming (ref), fFlagSduiGameIconSupport (ref), sduiPageAnalyticsModule (ref)
+		-- upvalues: fFlagLuaAppSduiStreamingFirstDataTiming (ref), sduiPageAnalyticsModule (ref)
 		local var1 = nil
 		local var2 = nil
 		local t = {}
@@ -49,7 +48,7 @@ return {
 		end
 		
 		local function finish()
-			-- upvalues: var4 (write), var1 (write), var2 (write), fFlagLuaAppSduiStreamingFirstDataTiming (copy), t (ref), var3 (write), var5 (write), p1 (ref), var6 (write), fFlagSduiGameIconSupport (copy), p2 (ref), sduiPageAnalyticsModule (copy)
+			-- upvalues: var4 (write), var1 (write), var2 (write), fFlagLuaAppSduiStreamingFirstDataTiming (copy), t (ref), var3 (write), var5 (write), p1 (ref), var6 (write), p2 (ref), sduiPageAnalyticsModule (copy)
 			if var4 ~= "Running" or var1 == nil then return end
 			local uiRequestQueued, var7, uiRequestQueued_1, var8
 			var4 = "Finished"
@@ -91,12 +90,10 @@ return {
 				pageKey = p1,
 				startSource = var6 or "unknown"
 			}
+			local sduiClientHintsBegin = t.SduiClientHintsBegin
+			local sduiClientHintsEnd = t.SduiClientHintsEnd
+			t_1.clientHintsDurationMs = if sduiClientHintsBegin and sduiClientHintsEnd then (sduiClientHintsEnd - sduiClientHintsBegin) * 1000 else nil
 			
-			if fFlagSduiGameIconSupport then
-				local sduiClientHintsBegin = t.SduiClientHintsBegin
-				local sduiClientHintsEnd = t.SduiClientHintsEnd
-				t_1.clientHintsDurationMs = if sduiClientHintsBegin and sduiClientHintsEnd then (sduiClientHintsEnd - sduiClientHintsBegin) * 1000 else nil
-			end
 			if p2 then
 				p2(t_1)
 				

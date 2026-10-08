@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
+﻿local appBlox = script:FindFirstAncestor("AppBlox")
+local parent = appBlox.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local responsiveModule = require(parent.Responsive)
@@ -15,6 +16,7 @@ local useNavBarPlacement = appNavBarModule.useNavBarPlacement
 local compositionTags = require(parent.AppComposition).CompositionTags
 local detailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
 local detailsPageLayoutUtilsModule = require(script.Parent.DetailsPageLayoutUtils)
+local fFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule = require(appBlox.Flags.FFlagDetailsPageLayoutUseMeasuredSizeForInitialScroll)
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
 local fFlagLuaAppEdpDirectionalGradientMidTransparency = sharedFlagsModule.FFlagLuaAppEdpDirectionalGradientMidTransparency
 local t = {
@@ -25,7 +27,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), withDefaults (ref), t (ref), compositionTags (ref), reactModule (ref), responsiveModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), useNavBarSize (ref), useNavBarPlacement (ref), displayModule (ref), appNavBarModule (ref), detailsPageLayoutUtilsModule (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), detailsPageLayoutContextModule (ref), view (ref), stateLayerAffordance (ref)
+	-- upvalues: useDeviceInsets (ref), useTokens (ref), withDefaults (ref), t (ref), compositionTags (ref), reactModule (ref), responsiveModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), useNavBarSize (ref), useNavBarPlacement (ref), displayModule (ref), appNavBarModule (ref), detailsPageLayoutUtilsModule (ref), fFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), detailsPageLayoutContextModule (ref), view (ref), stateLayerAffordance (ref)
 	local var1 = useDeviceInsets()
 	local var2 = useTokens()
 	local var3 = withDefaults(p1, t)
@@ -74,7 +76,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var32, var33 = reactModule.useBinding(0)
 	local var34, var35 = reactModule.useState(initialScrollY)
 	local var36, var37 = reactModule.useState(true)
-	local var38 = reactModule.useRef(var5)
+	local var38 = reactModule.useRef(var5 and not fFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule)
 	local var39 = var28:map(function(p3)
 		return p3.Y
 	end)

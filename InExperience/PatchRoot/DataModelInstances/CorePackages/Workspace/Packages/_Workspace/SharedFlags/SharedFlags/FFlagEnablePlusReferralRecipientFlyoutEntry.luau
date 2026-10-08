@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnablePlusReferralRecipientFlyoutEntry", false) and require(script.Parent.FFlagEnablePlusReferralLandingSheet)

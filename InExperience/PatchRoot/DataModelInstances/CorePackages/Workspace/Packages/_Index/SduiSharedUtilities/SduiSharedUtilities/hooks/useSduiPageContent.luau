@@ -12,6 +12,8 @@ local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDef
 local fFlagSduiPageCanvasCollectionLayout = require(parent.SharedFlags).FFlagSduiPageCanvasCollectionLayout
 local useComponentConfigModule = require(sduiSharedUtilities.hooks.useComponentConfig)
 local useComponentLifecycleTimingModule = require(sduiSharedUtilities.hooks.useComponentLifecycleTiming)
+local useMissingRootWarningModule = require(sduiSharedUtilities.hooks.useMissingRootWarning)
+local fFlagDataHydrationAccountReset = require(parent.SharedFlags).FFlagDataHydrationAccountReset
 local _ = require(sduiSharedUtilities.SduiLoadTimer)
 
 local function SduiPageWholeContent(p1)
@@ -59,8 +61,12 @@ local function buildWholePageContent(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: useComponentConfigModule (ref), useComponentLifecycleTimingModule (ref), pageContentMode (ref), reactModule (ref), buildWholePageContent (ref)
+	-- upvalues: useComponentConfigModule (ref), fFlagDataHydrationAccountReset (ref), useMissingRootWarningModule (ref), useComponentLifecycleTimingModule (ref), pageContentMode (ref), reactModule (ref), buildWholePageContent (ref)
 	local var1 = useComponentConfigModule(p1.configKey, p1.contentIdentifier)
+	
+	if fFlagDataHydrationAccountReset then
+		useMissingRootWarningModule(p1.configKey, var1)
+	end
 	useComponentLifecycleTimingModule(p1.pageTimer, var1 ~= nil)
 	local contentMode = p1.contentMode or pageContentMode.Scroll
 	

@@ -12,6 +12,7 @@ local userProfilesModule = require(parent.UserProfiles)
 local socialCommonModule = require(parent.SocialCommon)
 local enums = require(parent.FriendsNetworking).Enums
 local fFlagSocialCarouselUseProfileStore = require(parent.SharedFlags).FFlagSocialCarouselUseProfileStore
+local fFlagUserProfilePlatformProfile = require(parent.SharedFlags).FFlagUserProfilePlatformProfile
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local var1 = userProfilesModule.Stores.UserProfileStore.get()
@@ -58,7 +59,7 @@ local _ = function(p1)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), useDispatch (ref), useNavigation (ref), fFlagMobileGameJoinCardGamepadSupport (ref), useDeviceType (ref), usePreferredInput (ref), fFlagSocialCarouselFixConsoleCtaForInGameModule (ref), fFlagPPVEnabledOnConsole (ref), fFlagEnableConsoleGameJoinCard (ref), responsiveModule (ref), fFlagSocialCarouselUseConsolePolicyForCtaModule (ref), useAppPolicy (ref), fFlagSocialCarouselPressXToViewProfile (ref), robloxAppEnumsModule (ref), fFlagEnableMobileGameJoinCard (ref), useSocialCarouselContextModule (ref), useSocialCarouselAnalyticsModule (ref), useLocalization (ref), fFlagSocialCarouselUseProfileStore (ref), var1 (ref), signalsModule (ref), signalsReactModule (ref), userProfilesModule (ref), presenceTypes (ref), playerContextualMenuModule (ref), tile (ref), enums (ref), enableFriendCarouselInGameFriendExposureLoggingV2 (ref), IXPService (ref), socialViewFriendSortInGameFriendsLayer (ref), fFlagMobileGameJoinCardTTITracking (ref), gameJoinCardTTI (ref), appPage (ref), fFlagEnableSplitPane (ref), enums_1 (ref), focusNavigationEventNameEnum (ref), constantsModule (ref), fFlagSocialCarouselEnableUserSeenEventsModule (ref), fFlagSocialCarouselFixGameJoinCardDismissModule (ref), useGameJoinCardNavigation (ref), userTileModule (ref), cryoModule (ref), socialCarouselVendorImagePath (ref), view (ref), foundationModule (ref), desktopGameJoinCardContainer (ref), userTileEventHandlers (ref)
+	-- upvalues: reactModule (ref), useDispatch (ref), useNavigation (ref), fFlagMobileGameJoinCardGamepadSupport (ref), useDeviceType (ref), usePreferredInput (ref), fFlagSocialCarouselFixConsoleCtaForInGameModule (ref), fFlagPPVEnabledOnConsole (ref), fFlagEnableConsoleGameJoinCard (ref), responsiveModule (ref), fFlagSocialCarouselUseConsolePolicyForCtaModule (ref), useAppPolicy (ref), fFlagSocialCarouselPressXToViewProfile (ref), robloxAppEnumsModule (ref), fFlagEnableMobileGameJoinCard (ref), useSocialCarouselContextModule (ref), useSocialCarouselAnalyticsModule (ref), useLocalization (ref), fFlagSocialCarouselUseProfileStore (ref), var1 (ref), fFlagUserProfilePlatformProfile (ref), signalsModule (ref), signalsReactModule (ref), userProfilesModule (ref), presenceTypes (ref), playerContextualMenuModule (ref), tile (ref), enums (ref), enableFriendCarouselInGameFriendExposureLoggingV2 (ref), IXPService (ref), socialViewFriendSortInGameFriendsLayer (ref), fFlagMobileGameJoinCardTTITracking (ref), gameJoinCardTTI (ref), appPage (ref), fFlagEnableSplitPane (ref), enums_1 (ref), focusNavigationEventNameEnum (ref), constantsModule (ref), fFlagSocialCarouselEnableUserSeenEventsModule (ref), fFlagSocialCarouselFixGameJoinCardDismissModule (ref), useGameJoinCardNavigation (ref), userTileModule (ref), cryoModule (ref), socialCarouselVendorImagePath (ref), view (ref), foundationModule (ref), desktopGameJoinCardContainer (ref), userTileEventHandlers (ref)
 	local var2
 	local var3 = reactModule.useRef(nil)
 	local var4 = useDispatch()
@@ -108,8 +109,8 @@ return function(p1)
 	
 	if fFlagSocialCarouselUseProfileStore then
 		local var19 = reactModule.useMemo(function()
-			-- upvalues: var1 (copy), p1 (ref)
-			return var1.fetchNamesByUserIds({ p1.item.id })
+			-- upvalues: var1 (copy), p1 (ref), fFlagUserProfilePlatformProfile (copy)
+			return var1.fetchNamesByUserIds({ p1.item.id }, nil, fFlagUserProfilePlatformProfile)
 		end, { p1.item.id })
 		var12 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 			-- upvalues: signalsModule (copy), var19 (ref)

@@ -1,13 +1,28 @@
 ﻿local captureService = game:GetService("CaptureService")
 local parent = script.Parent.Parent
 local parent_1 = parent.Parent
+local toastTriggeredModule = require(parent.Actions.ToastTriggered)
+local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
+
+if require(parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
+	local _ = require(parent_1.MomentsTypes)
+	local publishMomentWithTags = require(parent_1.MomentsCreation).publishMomentWithTags
+	
+	return function(p1, p2, p3, p4, p5, p6)
+		-- upvalues: publishMomentWithTags (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref)
+		return function(p7)
+			-- upvalues: publishMomentWithTags (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy)
+			if publishMomentWithTags(p1, p2, p3, p4, p5, p6) then
+				p7:dispatch(toastTriggeredModule(capturesToastTypeModule.MomentProcessing))
+			end
+		end
+	end
+end
 local _ = require(parent_1.MomentsCreationFlow)
 local momentsCreationModule = require(parent_1.MomentsCreation)
 local momentsCommonModule = require(parent_1.MomentsCommon)
 local _ = require(parent_1.MomentsTypes)
 local normalizeMomentMetadataModule = require(parent.Utils.normalizeMomentMetadata)
-local toastTriggeredModule = require(parent.Actions.ToastTriggered)
-local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
 local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
 local getFFlagMomentsUseMomentsServiceForUpload = momentsCommonModule.Flags.GetFFlagMomentsUseMomentsServiceForUpload
 local makePostMetadata = momentsCreationModule.makePostMetadata

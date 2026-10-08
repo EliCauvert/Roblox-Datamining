@@ -29,15 +29,11 @@ return function(p1)
 			itemCount = if look ~= nil then 0 else look.itemCount
 		}
 	})
-	
-	if var1.status == "Unavailable" then
-		return nil
-	end
 	local var4 = if look ~= nil then nil else look.lookId
 	
 	return {
 		LayoutOrder = p1.LayoutOrder,
-		isLoading = var1.status == "Loading",
+		isLoading = var1.status ~= "Ready",
 		thumbnailImage = if var4 ~= nil then nil else `rbxthumb://type=Look&id={var4}&w={150}&h={150}`,
 		priceText = if look == nil or look.totalPrice == nil then nil else localizationModule.NumberLocalization.localize(look.totalPrice, localizationService.RobloxLocaleId),
 		itemCountText = var3.itemCount,

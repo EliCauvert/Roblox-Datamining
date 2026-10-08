@@ -14,7 +14,10 @@ local iconVariant = foundationModule.Enums.IconVariant
 local makeOtterSpringValueModule = require(avatarExperienceUIKit.Utils.makeOtterSpringValue)
 local shouldShowScrollArrowsForInputTypeModule = require(avatarExperienceUIKit.Utils.shouldShowScrollArrowsForInputType)
 local getFixedTabHeightModule = require(avatarExperienceUIKit.Utils.getFixedTabHeight)
-local fFlagAXCategoryMenuVisualFixes = require(parent.AvatarExperienceFlags).FFlagAXCategoryMenuVisualFixes
+local gradientTransparencyModule = require(script.Parent.gradientTransparency)
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local fFlagAXCategoryMenuVisualFixes = avatarExperienceFlagsModule.FFlagAXCategoryMenuVisualFixes
+local fFlagAXFixScrollingFrameGradientOverlap = avatarExperienceFlagsModule.FFlagAXFixScrollingFrameGradientOverlap
 local t = { dampingRatio = 1, frequency = 5 }
 local t_1 = {
 	name = iconName.ChevronLargeLeft,
@@ -67,10 +70,10 @@ local function gradientTransparency(p1, p2, p3)
 end
 
 local _ = function(p1, p2)
-	-- upvalues: gradientTransparency (ref)
+	-- upvalues: fFlagAXFixScrollingFrameGradientOverlap (ref), gradientTransparencyModule (ref), gradientTransparency (ref)
 	return function(p3)
-		-- upvalues: gradientTransparency (copy), p1 (ref), p2 (ref)
-		return gradientTransparency(p3, p1, p2)
+		-- upvalues: fFlagAXFixScrollingFrameGradientOverlap (copy), gradientTransparencyModule (copy), p1 (ref), p2 (ref), gradientTransparency (copy)
+		return if fFlagAXFixScrollingFrameGradientOverlap then gradientTransparencyModule.fittedGradientTransparency(p3, p1, p2) else gradientTransparency(p3, p1, p2)
 	end
 end
 
@@ -83,7 +86,7 @@ local function isVisibleFromTransparency(p1)
 end
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), fFlagAXCategoryMenuVisualFixes (ref), useAnimatedBinding (ref), reactModule (ref), responsiveModule (ref), shouldShowScrollArrowsForInputTypeModule (ref), getCanvasPosition (ref), gradientTransparency (ref), makeButtonTransparency (ref), isVisibleFromTransparency (ref), reactOtterModule (ref), makeOtterSpringValueModule (ref), t (ref), getFixedTabHeightModule (ref), view (ref), iconButton (ref), inputSize (ref), t_1 (ref), t_2 (ref)
+	-- upvalues: useTokens (ref), fFlagAXCategoryMenuVisualFixes (ref), useAnimatedBinding (ref), reactModule (ref), responsiveModule (ref), shouldShowScrollArrowsForInputTypeModule (ref), getCanvasPosition (ref), fFlagAXFixScrollingFrameGradientOverlap (ref), gradientTransparencyModule (ref), gradientTransparency (ref), makeButtonTransparency (ref), isVisibleFromTransparency (ref), reactOtterModule (ref), makeOtterSpringValueModule (ref), t (ref), getFixedTabHeightModule (ref), view (ref), iconButton (ref), inputSize (ref), t_1 (ref), t_2 (ref)
 	local var1 = useTokens()
 	local backgroundTransparency = p1.BackgroundTransparency or var1.Color.Common.NavigationBar.Transparency
 	local backgroundColor3 = p1.BackgroundColor3 or var1.Color.Common.NavigationBar.Color3
@@ -102,12 +105,12 @@ return reactModule.forwardRef(function(p1, p2)
 		return var15:map(getCanvasPosition)
 	end, {})
 	local var19 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var4 (ref), var6 (ref), var8 (ref), var1 (ref), backgroundTransparency (ref), gradientTransparency (copy)
+		-- upvalues: reactModule (copy), var4 (ref), var6 (ref), var8 (ref), var1 (ref), backgroundTransparency (ref), fFlagAXFixScrollingFrameGradientOverlap (copy), gradientTransparencyModule (copy), gradientTransparency (copy)
 		local var20 = var1.Size.Size_300 * 2
 		
 		return reactModule.joinBindings({ var4, var6, var8 }):map(function(p3)
-			-- upvalues: gradientTransparency (copy), var20 (ref), backgroundTransparency (ref)
-			return gradientTransparency(p3, var20, backgroundTransparency)
+			-- upvalues: fFlagAXFixScrollingFrameGradientOverlap (copy), gradientTransparencyModule (copy), var20 (ref), backgroundTransparency (ref), gradientTransparency (copy)
+			return if fFlagAXFixScrollingFrameGradientOverlap then gradientTransparencyModule.fittedGradientTransparency(p3, var20, backgroundTransparency) else gradientTransparency(p3, var20, backgroundTransparency)
 		end)
 	end, { var1, backgroundTransparency })
 	local var20 = reactModule.useMemo(function()

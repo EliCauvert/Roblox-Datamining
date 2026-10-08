@@ -1,7 +1,9 @@
 ﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
 local _ = require(parent.AvatarExperienceCommon)
 local _ = require(parent.DataHydration)
-local fFlagAXM41AllCategoriesToTaxonomy = require(parent.AvatarExperienceFlags).FFlagAXM41AllCategoriesToTaxonomy
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local fFlagAXM41AllCategoriesToTaxonomy = avatarExperienceFlagsModule.FFlagAXM41AllCategoriesToTaxonomy
+local fFlagAXSduiCatalogSearchShowWidgets = avatarExperienceFlagsModule.FFlagAXSduiCatalogSearchShowWidgets
 local httpService = game:GetService("HttpService")
 local t = {
 	AllAnimations = "AllAnimation",
@@ -9,7 +11,13 @@ local t = {
 	Emotes = "Emotes"
 }
 local t_1 = {
-	Recommended = { Name = "All", CategoryFilter = "Recommended" },
+	Recommended = {
+		Name = "All",
+		CategoryFilter = "Recommended",
+		ShowWidgets = if fFlagAXSduiCatalogSearchShowWidgets then true else nil,
+		ShowSponsored = if fFlagAXSduiCatalogSearchShowWidgets then true else nil,
+		ShowTopics = if fFlagAXSduiCatalogSearchShowWidgets then true else nil
+	},
 	HighDefinition = { CategoryFilter = "HighDefinition" }
 }
 
@@ -18,7 +26,7 @@ local function _(p1)
 end
 
 return function()
-	-- upvalues: httpService (ref), t_1 (ref), fFlagAXM41AllCategoriesToTaxonomy (ref), t (ref)
+	-- upvalues: httpService (ref), t_1 (ref), fFlagAXSduiCatalogSearchShowWidgets (ref), fFlagAXM41AllCategoriesToTaxonomy (ref), t (ref)
 	local t_2 = {}
 	
 	local function _(p1)
@@ -37,7 +45,7 @@ return function()
 	local _ = nil
 	
 	local function mapInternal(p1, p2, p3, p4)
-		-- upvalues: mapInternal (write), t_1 (copy), t_2 (ref), httpService (copy), fFlagAXM41AllCategoriesToTaxonomy (copy), t (copy)
+		-- upvalues: mapInternal (write), t_1 (copy), fFlagAXSduiCatalogSearchShowWidgets (copy), t_2 (ref), httpService (copy), fFlagAXM41AllCategoriesToTaxonomy (copy), t (copy)
 		p4[p1.id] = true
 		local t_3 = nil
 		
@@ -64,6 +72,9 @@ return function()
 			Id = p1.id,
 			Name = if id and id.Name then id.Name else p1.name,
 			CategoryFilter = if id then id.CategoryFilter else nil,
+			ShowWidgets = if fFlagAXSduiCatalogSearchShowWidgets and id then id.ShowWidgets else nil,
+			ShowSponsored = if fFlagAXSduiCatalogSearchShowWidgets and id then id.ShowSponsored else nil,
+			ShowTopics = if fFlagAXSduiCatalogSearchShowWidgets and id then id.ShowTopics else nil,
 			Title = p1.title,
 			LocalizedTitle = p1.title,
 			WidgetContext = `catalog-tab:{string.lower(p1.name:gsub(" ", "-"):gsub("%.", "-"))}`

@@ -5,9 +5,7 @@ local parent = chatUIPrimitives.Parent
 local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
 local internalProvidersModule = require(script.Parent.internalProviders)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagExpChatEmojiInputParity = sharedFlagsModule.FFlagExpChatEmojiInputParity
-local fFlagExpChatAutocompleteOptimization = sharedFlagsModule.FFlagExpChatAutocompleteOptimization
+local fFlagExpChatAutocompleteOptimization = require(parent.SharedFlags).FFlagExpChatAutocompleteOptimization
 local fFlagExpChatAutocompleteLazyBuildModule = require(chatUIPrimitives.Flags.FFlagExpChatAutocompleteLazyBuild)
 local t = {
 	activated = false,
@@ -24,7 +22,7 @@ local function _(p1, p2, p3, p4)
 end
 
 return function(p1, p2)
-	-- upvalues: reactModule (ref), fFlagExpChatAutocompleteOptimization (ref), fFlagExpChatAutocompleteLazyBuildModule (ref), internalProvidersModule (ref), t (ref), userInputService (ref), contextActionService (ref), fFlagExpChatEmojiInputParity (ref), cryoModule (ref)
+	-- upvalues: reactModule (ref), fFlagExpChatAutocompleteOptimization (ref), fFlagExpChatAutocompleteLazyBuildModule (ref), internalProvidersModule (ref), t (ref), userInputService (ref), contextActionService (ref), cryoModule (ref)
 	local var1 = if p2 then p2.commands else nil
 	local var2 = if p2 and p2.emojis then true else false
 	local var3 = reactModule.useMemo(function()
@@ -77,7 +75,7 @@ return function(p1, p2)
 			local replaceFinish = currentMatch.replaceFinish
 			local var12 = internalProvidersModule.formatReplacement(var11)
 			local text = current_1.Text
-			current_1.Text = string.sub(text, 1, replaceStart - 1) .. var23 .. string.sub(text, replaceFinish + 1)
+			current_1.Text = string.sub(text, 1, replaceStart - 1) .. var22 .. string.sub(text, replaceFinish + 1)
 			current_1.CursorPosition = replaceStart + #var12
 			var5(t)
 			
@@ -98,7 +96,7 @@ return function(p1, p2)
 			local replaceFinish = currentMatch.replaceFinish
 			local var12 = internalProvidersModule.formatReplacement(var11)
 			local text = current_1.Text
-			current_1.Text = string.sub(text, 1, replaceStart - 1) .. var25 .. string.sub(text, replaceFinish + 1)
+			current_1.Text = string.sub(text, 1, replaceStart - 1) .. var24 .. string.sub(text, replaceFinish + 1)
 			current_1.CursorPosition = replaceStart + #var12
 			var5(t)
 		end
@@ -192,7 +190,7 @@ return function(p1, p2)
 		keyboardIndex = var4.keyboardIndex,
 		renderEntry = internalProvidersModule.renderEntry,
 		onTextChanged = reactModule.useCallback(function(p3)
-			-- upvalues: var7 (ref), var9 (ref), p1 (ref), var6 (ref), fFlagExpChatEmojiInputParity (copy), var10 (ref), internalProvidersModule (copy), var8 (ref), var5 (ref), t (copy), fFlagExpChatAutocompleteOptimization (copy), fFlagExpChatAutocompleteLazyBuildModule (copy), cryoModule (copy)
+			-- upvalues: var7 (ref), var9 (ref), p1 (ref), var6 (ref), var10 (ref), internalProvidersModule (copy), var8 (ref), var5 (ref), t (copy), fFlagExpChatAutocompleteOptimization (copy), fFlagExpChatAutocompleteLazyBuildModule (copy), cryoModule (copy)
 			if var7.current then return end
 			local current = var9.current
 			
@@ -200,7 +198,7 @@ return function(p1, p2)
 			local current_1 = p1.current
 			local var11 = if current_1 and current_1.CursorPosition >= 0 then current_1.CursorPosition else var6.current
 			
-			if fFlagExpChatEmojiInputParity and var10.current and current_1 then
+			if var10.current and current_1 then
 				local var12 = internalProvidersModule.matchColonCompletion(p3, var11)
 				
 				if var12 then
@@ -289,7 +287,7 @@ return function(p1, p2)
 				local replaceFinish = currentMatch.replaceFinish
 				local var11 = internalProvidersModule.formatReplacement(selectedIndex)
 				local text = current_2.Text
-				current_2.Text = string.sub(text, 1, replaceStart - 1) .. var33 .. string.sub(text, replaceFinish + 1)
+				current_2.Text = string.sub(text, 1, replaceStart - 1) .. var32 .. string.sub(text, replaceFinish + 1)
 				current_2.CursorPosition = replaceStart + #var11
 				var5(t)
 			end

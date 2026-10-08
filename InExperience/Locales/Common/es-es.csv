@@ -106,6 +106,8 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Tu correo electr�
 Authentication.Login.WeChat.AntiAddictionText,"Boicotea experiencias con contenido inapropiado y di no a la piratería. Protégete y no dejes que te engañen. Visitar experiencias es bueno, pero visitarlas por demasiado tiempo puede perjudicar tu salud. Gestiona bien tu tiempo libre para poder vivir una vida saludable."
 Authentication.SignUp.Action.ApplyOnNextRespawn,Aplicar en la próxima regeneración
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.Create,Crear
+Authentication.SignUp.Action.CreateAccountSentenceCase,Crear cuenta
 Authentication.SignUp.Action.ExitModalLeave,Salir
 Authentication.SignUp.Action.RespawnNow,Reaparecer ahora
 Authentication.SignUp.Action.StartPlay,Comenzar a jugar
@@ -113,15 +115,18 @@ Authentication.SignUp.Button.OKCaptialized,Aceptar
 Authentication.SignUp.Button.RetryLogIn,Volver a iniciar sesión
 Authentication.SignUp.Description.AccountAlreadyLinked,Tu cuenta {platformAccountName} ya está vinculada a una cuenta de Roblox. Intenta iniciar sesión de nuevo.
 Authentication.SignUp.Description.BirthdayHint,Ingresa la fecha
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"Al crear una cuenta, aceptas nuestros {startTermsTag}Términos{endTermsTag}, incluido el arbitraje, y reconoces nuestra {startPrivacyTag}Política de privacidad{endPrivacyTag}. Si eres menor de 18 años, tu padre, madre o tutor debe aprobar tu cuenta y aceptar nuestros Términos."
 Authentication.SignUp.Description.Try,Probar
 Authentication.SignUp.Description.UsernameChanged,"¡Todo listo! Tu cuenta está lista y vinculada a {platform}. Reaparece ahora para ver tu nombre de usuario actualizado en el juego, o se aplicará la próxima vez."
 Authentication.SignUp.Description.UsernameUnchanged,¡Ya estás dentro! Tu cuenta está lista y vinculada a {platform}. Chatea con amistades y juega millones de juegos de Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Tu cuenta Roblox se vinculará a tu cuenta en {platform}. Puedes desvincularla en cualquier momento desde la pantalla de Configuración. Puede haber un tiempo de enfriamiento antes de poder vincularla a otra cuenta en {platform}. Al hacer clic en {ctaButton}, aceptas los Términos de uso, incluida la cláusula de arbitraje, y la Política de privacidad."
+Authentication.SignUp.Header.CloseWithoutFinishing,¿Cerrar sin terminar?
 Authentication.SignUp.Header.OneLastThing,Una última cosa
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Configura tu cuenta de Roblox
 Authentication.SignUp.Heading.CountryCodeSelector,Selecciona el país
 Authentication.SignUp.Heading.RetryLogIn,
 Authentication.SignUp.Label.Birthday,Fecha de nacimiento
+Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} años)
 Authentication.SignUp.Label.Continue,Continuar
 Authentication.SignUp.Label.Day,Día
 Authentication.SignUp.Label.EnterYourEmail,Ingresa tu correo electrónico
@@ -160,6 +165,7 @@ Authentication.SignUp.Response.PasswordComplexity,Crea una contraseña más comp
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Antes debes determinar el nombre de usuario.
 Authentication.SignUp.Subtitle.AddYourBirthday,Agrega tu fecha de nacimiento para crear tu cuenta de Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Tu progreso se transfiere cuando completas la configuración.
+Authentication.SignUp.Subtitle.YoureAlmostThere,"Ya casi terminas. Si cierras ahora, tu cuenta no se creará por completo y no podrás jugar Roblox."
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,"Para realizar transacciones adicionales, se requiere activar la verificación en dos pasos. Ve a Configuración > Seguridad para completar la verificación en dos pasos."
 Authentication.TwoStepVerification.Response.TooManyAttempts,Demasiados intentos. Inténtalo de nuevo más tarde.
@@ -428,7 +434,7 @@ CommonUI.Features.Label.Connections,Conexiones
 CommonUI.Features.Label.ControllerBar.HoldPrefix,Presiona
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,para jugar
-CommonUI.Features.Label.CreateGames,Crear
+CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.Friends,Amigos
 CommonUI.Features.Label.Game,Experiencias
 CommonUI.Features.Label.GiftCards,Comprar tarjetas regalo
@@ -1545,6 +1551,7 @@ Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Los nombres solo pueden contener letras, números y espacios"
 Feature.Avatar.Label.CountSelected,{itemCount} seleccionado(s)
 Feature.Avatar.Label.Creations,Creaciones
+Feature.Avatar.Label.Current,Actual
 Feature.Avatar.Label.CurrentlyWearing,Ropa actual
 Feature.Avatar.Label.DefaultBody,Cuerpo por defecto
 Feature.Avatar.Label.DeleteSetBody,Eliminar este conjunto no eliminará los atuendos que contiene.
@@ -1991,6 +1998,10 @@ Feature.Build.Analytics.Description.PayerConversion,La conversión de usuario de
 Feature.Build.Analytics.Description.PlaythroughRate,La tasa de juego completo es el porcentaje de visitas que completaron una sesión de juego completa. Las tasas más altas sugieren que los jugadores encuentran que tu experiencia es fácil de iniciar y que vale la pena terminarla.
 Feature.Build.Analytics.Description.TotalPlaytime,El tiempo de juego total suma el tiempo que todos los jugadores pasaron en tu experiencia durante el periodo. El aumento del tiempo de juego suele indicar sesiones más atractivas.
 Feature.Build.Analytics.DurationHours,{number} horas
+Feature.Build.Analytics.Goal.EarnRobux,
+Feature.Build.Analytics.Goal.FirstImpression,Da una buena primera impresión
+Feature.Build.Analytics.Goal.GetMorePlayers,Consigue más jugadores
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,Logra que los jugadores regresen
 Feature.Build.Analytics.KeyStats,Estadísticas clave
 Feature.Build.Analytics.LastMonth,Último mes
 Feature.Build.Analytics.LastWeek,
@@ -2022,9 +2033,12 @@ Feature.Build.Analytics.Summary.TotalPlaytime,Total de horas que los jugadores p
 Feature.Build.Analytics.Title.Arppu,Ingresos promedio por usuario de pago
 Feature.Build.Analytics.Title.ConcurrentUsers,Total de jugadores
 Feature.Build.Analytics.Title.D1Retention,Retención del D1
+Feature.Build.Analytics.Title.D7Retention,Retención del D7
 Feature.Build.Analytics.Title.DailyActiveUsers,Usuarios activos diarios
+Feature.Build.Analytics.Title.NewUserSessionTime,Tiempo de sesión de nuevo usuario
 Feature.Build.Analytics.Title.PayerConversion,Conversión de usuario de pago
 Feature.Build.Analytics.Title.PlaythroughRate,Tasa de finalización
+Feature.Build.Analytics.Title.RobuxSpent,
 Feature.Build.Analytics.Title.TotalPlaytime,Tiempo de reproducción total
 Feature.Build.Analytics.Visits,Visitas
 Feature.Build.Content.NewGame,Juego nuevo
@@ -2081,6 +2095,7 @@ Feature.Build.Description.ShopButton,Agregar un punto de entrada de compras
 Feature.Build.Description.ShortAdCampaign,Una forma rápida de ver qué opinan los jugadores de tu juego.
 Feature.Build.Description.StopBuild,"Esta solicitud aún está en curso. Si la detienes ahora, no se completará y tendrás que volver a enviarla."
 Feature.Build.Description.UpdateDeveloperProduct,Actualizar producto del desarrollador {PRODUCT_ID}.
+Feature.Build.Description.UseAdCreditsInAdsManager,Deberás ir al Gestor de anuncios para usarlos.
 Feature.Build.Error.AdForbidden,Tu cuenta o juego no puede publicar un anuncio en este momento. Ponte en contacto con el equipo de asistencia si crees que se trata de un error.
 Feature.Build.Error.AdInsufficientFunds,No tienes suficientes Robux para crear este anuncio. Agrega más e inténtalo de nuevo.
 Feature.Build.Error.AdInternalError,Algo salió mal. Inténtalo de nuevo más tarde
@@ -2404,6 +2419,7 @@ Feature.Build.Title.RevertLastChange,¿Revertir el último cambio?
 Feature.Build.Title.StopBuild,¿Deseas detener la construcción?
 Feature.Build.Title.Tasks,Tareas
 Feature.Build.Title.TurnActivity,Actividad de giro
+Feature.Build.Title.UseYourAdCredits,Usa tus créditos publicitarios
 Feature.Build.Title.VersionHistory,Historial de la versión
 Feature.Build.Title.VersionInfo,Información de la versión
 Feature.Build.Title.VersionNumber,Versión {VERSION}
@@ -2835,6 +2851,7 @@ Feature.Catalog.Title.Checkout.UnavailableItems,
 Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle,¿Usar avatar?
 Feature.Catalog.Title.CheckoutPlural,Pagar {count} objetos
 Feature.Catalog.Title.CheckoutSingular,
+Feature.Catalog.Title.Explore,Explorar
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,¿Reemplazar la capa inferior?
 Feature.Catalog.Title.RentalFtuxText,Renta un objeto para probarlo durante 3 días
 Feature.Catalog.Toast.AddedToFavorites,Agregado a favoritos
@@ -3475,11 +3492,11 @@ Feature.Groups.Modal.ContentTextLow,"Verifica tu cuenta para unirte a esta comun
 3. Completa el proceso de verificación"
 Feature.Groups.Modal.ContentTextMedium,"Verifica tu cuenta para unirte a esta comunidad.
 
-1. Ve a Información de la cuenta 
+1. Ve a Información de la cuenta. 
 2. Elige una opción de verificación:
- - Añade un número de teléfono Y un correo electrónico
- - Verifica mi edad
-3. Completa el proceso de verificación"
+  - Añade un número de teléfono y un correo electrónico
+  - Verifica mi identidad
+3. Completa el proceso de verificación."
 Feature.Groups.Notification.FailedToFollow,Error al seguir el perfil. Inténtalo de nuevo más tarde.
 Feature.Groups.Notification.FailedToJoin,Error al unirte a la comunidad. Inténtalo de nuevo más tarde.
 Feature.Groups.Notification.FailedToLoad,Error al cargar la comunidad. Inténtalo de nuevo más tarde.
@@ -3553,6 +3570,7 @@ Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Al comprar Ro
 Feature.InExperienceShop.Label.BonusItem,Artículo extra
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Termina en {timeRemaining}
+Feature.InExperienceShop.Label.FreeTrial,Prueba gratuita
 Feature.InExperienceShop.Label.NoDescription,Sin descripción
 Feature.InExperienceShop.Label.OfferEndTime,{offer} termina en {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Esta es la vista previa de tu tienda en Roblox Studio. Los jugadores no pueden verla.
@@ -3564,6 +3582,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,
 Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minuto
 Feature.InExperienceShop.Label.Timer.Second.Plural,
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 segundo
+Feature.InExperienceShop.Label.Trial,Prueba
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Compraste {ROBUX_AMOUNT} Robux correctamente
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"¿Confirmas que quieres eliminar este objeto de tu inventario para siempre? Si cambias de opinión, tendrás que volver a obtenerlo en una experiencia."
 Feature.Item.Label.DeleteItemUndercase,Eliminar objeto
@@ -3577,12 +3596,16 @@ Feature.Moments.Action.AddSticker,Añadir calcomanía
 Feature.Moments.Action.AddText,Agregar texto
 Feature.Moments.Action.AddVoice,Agregar voz
 Feature.Moments.Action.Back,
+Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentShowLess,Mostrar menos
+Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
 Feature.Moments.Action.CreateVoiceover,Generar voz en off
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.DiscardChange,Eliminar cambio
 Feature.Moments.Action.Done,
+Feature.Moments.Action.Edit,
 Feature.Moments.Action.Expand,Ampliar
 Feature.Moments.Action.GenerateText,Generar texto
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,No es útil
@@ -3598,6 +3621,7 @@ Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
+Feature.Moments.Action.RetryLoadingComments,Vuelve a cargar los comentarios
 Feature.Moments.Action.Return,Regresar a Galería
 Feature.Moments.Action.ReturnToEditing,Volver a Editar
 Feature.Moments.Action.SaveVoiceover,
@@ -3620,9 +3644,35 @@ Feature.Moments.Description.StayFriendly,Mantengamos un ambiente amigable
 Feature.Moments.Description.TooManyUploads,Hoy subiste demasiados videos. Inténtalo de nuevo mañana.
 Feature.Moments.Disclaimer.EveryoneMoments,Todas las personas que participan en Momentos pueden ver lo que se publica
 Feature.Moments.Label.All,
+Feature.Moments.Label.AllowComments,Permitir comentarios
 Feature.Moments.Label.AttemptingJoinExperience,Intentando unirte a {placeName}. Esto puede tardar unos segundos.
 Feature.Moments.Label.CaptureLibrary,Tu biblioteca de Capturas
 Feature.Moments.Label.ChooseVoice,Elegir voz
+Feature.Moments.Label.CommentAuthorFallback,Usuario {userId}
+Feature.Moments.Label.CommentAuthorUnknown,Persona desconocida
+Feature.Moments.Label.CommentDeleteFailed,No se pudo eliminar el comentario
+Feature.Moments.Label.CommentNotAllowed,No puedes comentar en este Momento.
+Feature.Moments.Label.CommentPostFailed,No pudimos publicar tu comentario. Inténtalo de nuevo.
+Feature.Moments.Label.CommentPostOutcomeUnknown,No pudimos confirmar tu último comentario publicado. Revisa los comentarios antes de volver a enviarlos.
+Feature.Moments.Label.CommentRateLimited,Estás comentando demasiado rápido. Inténtalo de nuevo más tarde.
+Feature.Moments.Label.CommentRejectedByFilter,Tu comentario no se publicó. Revísalo e inténtalo de nuevo.
+Feature.Moments.Label.CommentSendStatusUnknown,Estado del envío desconocido
+Feature.Moments.Label.CommentSending,
+Feature.Moments.Label.CommentSignInRequired,Inicia sesión de nuevo para comentar.
+Feature.Moments.Label.CommentTimestampDays,{count} d
+Feature.Moments.Label.CommentTimestampHours,{count} h
+Feature.Moments.Label.CommentTimestampMinutes,{count} min
+Feature.Moments.Label.CommentTimestampMonths,{count} mes
+Feature.Moments.Label.CommentTimestampNow,ahora
+Feature.Moments.Label.CommentTimestampWeeks,{count} sem
+Feature.Moments.Label.CommentTimestampYears,{count} a
+Feature.Moments.Label.CommentingUnavailable,"Por el momento, no se pueden hacer comentarios. Inténtalo de nuevo más tarde."
+Feature.Moments.Label.CommentsDisabled,Los comentarios están desactivados
+Feature.Moments.Label.CommentsReadOnly,Los comentarios son de solo lectura
+Feature.Moments.Label.CommentsTurnedOff,Los comentarios están desactivados para este Momento.
+Feature.Moments.Label.CommentsUnavailable,Los comentarios no están disponibles
+Feature.Moments.Label.DeleteCommentBody,Este comentario se eliminará de forma permanente.
+Feature.Moments.Label.DeleteCommentTitle,Eliminar comentario
 Feature.Moments.Label.DeleteMomentBody,No puedes recuperar un Momento una vez que se elimina.
 Feature.Moments.Label.DeleteMomentTitle,¿Eliminar Momento?
 Feature.Moments.Label.DeleteVoiceoverBody,Esto borrará el texto y la voz en off. Puedes empezar de nuevo cuando quieras.
@@ -3634,6 +3684,7 @@ Feature.Moments.Label.FeedEndTitle,Estás al día
 Feature.Moments.Label.FeedFailedToLoad,No se pudo cargar el feed
 Feature.Moments.Label.FeedMyMoments,Mis Momentos
 Feature.Moments.Label.FeedTrending,
+Feature.Moments.Label.FirstCommentInvite,Aún no hay comentarios. ¡Escribe tú el primero!
 Feature.Moments.Label.HowToUseCaptureTitle,Cómo usar las Capturas
 Feature.Moments.Label.LinkCopied,Enlace copiado
 Feature.Moments.Label.LinkCopyFailed,Error al copiar el enlace.
@@ -3642,12 +3693,14 @@ Feature.Moments.Label.MomentDeletedBody,
 Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,
 Feature.Moments.Label.MomentFailedToPostTitle,No se pudo publicar el Momento
+Feature.Moments.Label.MomentNoLongerAvailable,Este Momento ya no está disponible.
 Feature.Moments.Label.MomentPublishedBody,Tu momento se publicó correctamente.
 Feature.Moments.Label.MomentPublishedTitle,Momento publicado
 Feature.Moments.Label.MomentUnavailable,Momento no disponible
 Feature.Moments.Label.MomentUnavailableDefault,Este Momento no está disponible.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NoCommentsYet,Aún no hay comentarios
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Estás al día por ahora
 Feature.Moments.Label.Photos,Fotos
 Feature.Moments.Label.PostDeleted,Momento eliminado
@@ -3688,6 +3741,10 @@ Feature.Moments.Label.VoiceLimitReachedBody,Espera un minuto y vuelve a intentar
 Feature.Moments.Label.VoiceModerationError,Tu script debe seguir las normas de seguridad
 Feature.Moments.Label.VoicePlaceholder,Escribe el guion de tu voz en off. Límite de caracteres: {maxCount}
 Feature.Moments.Label.VoiceTimeoutBody,Se agotó el tiempo de espera para la generación de la voz en off.
+Feature.Moments.Label.WriteComment,Escribe un comentario
+Feature.Moments.Title.Comments,Comentarios
+Feature.Moments.Title.CommentsWithCappedCount,Comentarios ({count}+)
+Feature.Moments.Title.CommentsWithCount,Comentarios ({count})
 Feature.Moments.Title.GenerateTextFeedbackReason,¿Qué salió mal?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,¿Salir de la creación de Momento?
@@ -3790,10 +3847,17 @@ Feature.Parents.Title.EnterParentEmailV2,Ingresar correo electrónico parental
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,Desde Búsqueda
+Feature.PlayerSearchResults.Label.NewUsername,Nuevo nombre de usuario
 Feature.PlayerSearchResults.Label.Previously,Anteriormente
 Feature.PlayerSearchResults.Label.ThisIsYou,Este eres tú
+Feature.PlayerSearchResults.Label.You,Tú
+Feature.PlayerSearchResults.Label.YouAreConnections,Están conectados
 Feature.PlayerSearchResults.Label.YouAreFollowing,Lo sigues
+Feature.PlayerSearchResults.Label.YouAreFriends,Son amigos
+Feature.PrivateServers.Action.CreatePrivateServer,Crear servidor privado
+Feature.PrivateServers.Action.FreeWithBlackbird,Gratis con Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Las compras de servidores privados no son compatibles en Studio.
+Feature.PrivateServers.Description.VipServersNotSupported,Este juego no es compatible con servidores privados.
 Feature.Profile.Action.AboutThisProfile,Acerca de este perfil
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4046,6 +4110,7 @@ Feature.RobloxSubscription.Description.JoinEarly,Únete antes con Plus
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} te invitó a unirte a Plus. Tanto tú como esa persona recibirán {amount} Robux cuando compres Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Al hacer clic en \u{201C}{ctaText}\u{201D}, aceptas los <a href=""{termsUrl}"">Términos de suscripción de Roblox</a>. Se te te hará el cargo automáticamente cada mes hasta que canceles la suscripción."
 Feature.RobloxSubscription.Heading.ReferralEntry,Comparte Plus y obtén {amount} Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Únete a Plus y obtén {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,Únete a Plus y obtén
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Servidores privados gratis
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4062,6 +4127,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}1 mes gratis{b
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration} {trialPeriodLabel} gratis{boldEnd} y luego {price} cada {periodType}
 Feature.RobloxSubscription.Label.month,mes
 Feature.RobloxSubscription.Label.months,meses
+Feature.RobloxSubscription.Message.AlreadySubscribed,Ya tienes Plus. Este enlace es para miembros nuevos. Comparte el tuyo para invitar a amigos y obtener recompensas.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Obtén 1 semana gratuita de Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,Buenas noticias
 Feature.RobloxSubscription.Title.GenericError,
@@ -4306,8 +4372,19 @@ Feature.SongDetails.Action.ReportAudio,Denunciar audio
 Feature.SongDetails.Label.InappropriateAudio,Audio inapropiado
 Feature.SongDetails.Label.InappropriateThumbnail,Miniatura inapropiada
 Feature.SongDetails.Label.SongPreview,Vista previa de la canción
+Feature.SplitPane.EditAvatarButtonText,
 Feature.SplitPane.Label.CollapseAvatar,Contraer avatar
 Feature.SplitPane.Label.ExpandAvatar,Ampliar avatar
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,Terminar el recorrido
+Feature.SplitPane.Tour.Button.SkipTour,Omitir el recorrido
+Feature.SplitPane.Tour.Step1.Description.Collapsed,Los avatares guardados ahora son visibles en la página de inicio. Expande este espacio para verlos.
+Feature.SplitPane.Tour.Step1.Description.Expanded,Los avatares guardados ahora son visibles en la página de inicio. Gíralos o acerca el zoom para ver cada detalle.
+Feature.SplitPane.Tour.Step1.Title,Mírate en Inicio
+Feature.SplitPane.Tour.Step2.Description,Elige cómo quieres verte. Cambia entre tus avatares guardados justo antes de unirte a un juego.
+Feature.SplitPane.Tour.Step2.Title,Cambia tu look en cualquier momento
+Feature.SplitPane.Tour.Step3.Description,Oculta este espacio en cualquier momento para centrarte en descubrir juegos nuevos. Tu avatar guardado permanece aquí mismo.
+Feature.SplitPane.Tour.Step3.Title,Elige lo que ves
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Añadir a otros
 Feature.Squads.Action.ConnectToVoice,Conectar a la voz
@@ -5041,7 +5118,7 @@ InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Se añadió {experi
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name} se añadió correctamente a la pantalla de inicio
 InstantApps.Shortcuts.Label.TryAgain,Intentar de nuevo
 InstantApps.Shortcuts.Label.ViewShortcut,Ver atajo
-Notifications.NotificationStream.Bundle.ShowLess,Mostrar menos
+Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} más
 Notifications.NotificationStream.Label.AllCaughtUp,¡Ya estás al tanto de todo!
 Notifications.NotificationStream.Label.Notifications,

@@ -20,13 +20,14 @@ local useAppPolicy = universalAppPolicyModule.useAppPolicy
 local gameVote = discoveryAnalyticsModule.Events.gameVote
 local useOptimisticUpdateStatusModule = require(script.Parent.Hooks.useOptimisticUpdateStatus)
 local getFFlagEdpPlayerFeedbackEnabled = sharedFlagsModule.GetFFlagEdpPlayerFeedbackEnabled
+local fFlagLuaAppAddUniverseIdToEngagementEvents = sharedFlagsModule.FFlagLuaAppAddUniverseIdToEngagementEvents
 
 local function _(p1)
 	return if p1 == true then "UpVoted" elseif p1 == false then "DownVoted" else "NotVoted"
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), signalsReactModule (ref), game (ref), reactModule (ref), setCurrentToastMessage (ref), toastType (ref), getFFlagEdpPlayerFeedbackEnabled (ref), useOptimisticUpdateStatusModule (ref), playersService (ref), gameVote (ref), votesUtils (ref), iconVariant (ref), useAppPolicy (ref), sduiDualActionChip (ref), foundationModule (ref)
+	-- upvalues: useDispatch (ref), signalsReactModule (ref), game (ref), reactModule (ref), setCurrentToastMessage (ref), toastType (ref), getFFlagEdpPlayerFeedbackEnabled (ref), useOptimisticUpdateStatusModule (ref), playersService (ref), gameVote (ref), fFlagLuaAppAddUniverseIdToEngagementEvents (ref), votesUtils (ref), iconVariant (ref), useAppPolicy (ref), sduiDualActionChip (ref), foundationModule (ref)
 	local layoutOrder = p1.layoutOrder
 	local universeId = p1.universeId
 	local var1 = useDispatch()
@@ -64,20 +65,18 @@ return reactModule.memo(function(p1)
 		end
 	end, { rootPlaceId, var1 }))
 	local var6 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), rootPlaceId (ref), playersService (copy), gameVote (copy), getFFlagEdpPlayerFeedbackEnabled (copy), game (copy), var5 (ref)
+		-- upvalues: var3 (ref), rootPlaceId (ref), playersService (copy), gameVote (copy), fFlagLuaAppAddUniverseIdToEngagementEvents (copy), universeId (ref), getFFlagEdpPlayerFeedbackEnabled (copy), game (copy), var5 (ref)
 		local userVote = var3 and var3.userVote
 		local var7 = if userVote == p2 then nil else p2
 		
 		if rootPlaceId then
-			local var8 = gameVote
-			local t = {
+			gameVote({
 				uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
-				placeId = rootPlaceId
-			}
-			local var9 = var7
-			t.vote = if var9 == true then "UpVoted" elseif var9 == false then "DownVoted" else "NotVoted"
-			t.prevVote = if userVote == true then "UpVoted" elseif userVote == false then "DownVoted" else "NotVoted"
-			var8(t, "ExperienceDetailsVoteChip")
+				placeId = rootPlaceId,
+				vote = if var7 == true then "UpVoted" elseif var7 == false then "DownVoted" else "NotVoted",
+				prevVote = if userVote == true then "UpVoted" elseif userVote == false then "DownVoted" else "NotVoted",
+				universeId = if fFlagLuaAppAddUniverseIdToEngagementEvents then universeId else nil
+			}, "ExperienceDetailsVoteChip")
 		end
 		if getFFlagEdpPlayerFeedbackEnabled() and rootPlaceId then
 			game.getUserVoteFeedbackMetadataStore(false).clearItem(rootPlaceId)

@@ -5,6 +5,7 @@ local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
 local foundationModule = require(parent.Foundation)
 local game = dataHydrationModule.Game
 local signalsModule = require(parent.Signals)
+local fFlagLuaAppAddUniverseIdToEngagementEvents = require(parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents
 local localizeStrings = require(parent.Localization).localizeStrings
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
@@ -13,7 +14,7 @@ local gameFollow = discoveryAnalyticsModule.Events.gameFollow
 local getSduiPageEntrySnackbarStore = require(parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
 
 return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), playersService (ref), gameFollow (ref), signalsModule (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref), localizeStrings (ref)
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), playersService (ref), gameFollow (ref), fFlagLuaAppAddUniverseIdToEngagementEvents (ref), signalsModule (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref), localizeStrings (ref)
 	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
@@ -44,7 +45,8 @@ return function(p1, _, p2, _)
 		uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
 		placeId = tostring(placeId),
 		state = if var3 then "on" else "off",
-		ctx = ctx
+		ctx = ctx,
+		universeId = if fFlagLuaAppAddUniverseIdToEngagementEvents then universeId else nil
 	}, ctx)
 	local var4 = followingsStore.updateFollowing(universeId, var3)
 	local localization = p2.dependencies.localization

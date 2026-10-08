@@ -49,6 +49,7 @@ local getFFlagIAPExperienceEnableMultiDisplayUpsellModule = require(parent.Flags
 local getFFlagIAPExperienceUseUpsellBadgeHelperModule = require(parent.Flags.GetFFlagIAPExperienceUseUpsellBadgeHelper)
 local fFlagFixUpsellModalUnevenLayoutModule = require(parent.Flags.FFlagFixUpsellModalUnevenLayout)
 local fFlagEnableOffersOnInExperienceSurface = require(parent.Parent.SharedFlags).FFlagEnableOffersOnInExperienceSurface
+local fFlagLuaAppsEnablePromptVIPServerPurchase = require(parent.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local _ = require(parent.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
 local badgeTypeModule = require(parent.Enums.BadgeType)
 local _ = require(parent.Enums.VirtualItemBadgeType)
@@ -242,7 +243,7 @@ local function _(p1)
 end
 
 local function UnifiedRobuxUpsellModal(p1)
-	-- upvalues: fFlagEnableRobuxUpsellPlusButtonExperimentModule (ref), fFlagEnableOffersOnInExperienceSurface (ref), useCartPricingModule (ref), reactModule (ref), useLocalization (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), fFlagAXMISWithBlackbird (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), unifiedPurchaseModalTypeEnumModule (ref), compactUpsellModalBreakpoint (ref), useInitialButtonDisableDelayModule (ref), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_DEFAULT (ref), getFFlagIAPExperienceEnableMultiDisplayUpsellModule (ref), fFlagFixUpsellModalUnevenLayoutModule (ref), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES (ref), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_SINGLE_PACKAGE (ref), useScaledValue (ref), fFlagShouldFixDevSubsFlashingTitleModule (ref), useFocusNavigationRefsModule (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), fFlagShouldApplyDevSubsUpsellFixModule (ref), image (ref), text (ref), productDetailsContainerModule (ref), fillBehavior (ref), buttonVariant (ref), sheet (ref), unifiedPurchaseModalHeaderModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), cartPricingLoadingModule (ref), UpsellProductDetails (ref), buttonGroup (ref), orientation (ref), enums (ref), foundationModule (ref)
+	-- upvalues: fFlagEnableRobuxUpsellPlusButtonExperimentModule (ref), fFlagEnableOffersOnInExperienceSurface (ref), useCartPricingModule (ref), reactModule (ref), useLocalization (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), fFlagAXMISWithBlackbird (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref), unifiedPurchaseModalTypeEnumModule (ref), compactUpsellModalBreakpoint (ref), useInitialButtonDisableDelayModule (ref), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_DEFAULT (ref), getFFlagIAPExperienceEnableMultiDisplayUpsellModule (ref), fFlagFixUpsellModalUnevenLayoutModule (ref), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES (ref), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_SINGLE_PACKAGE (ref), useScaledValue (ref), fFlagShouldFixDevSubsFlashingTitleModule (ref), useFocusNavigationRefsModule (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), fFlagShouldApplyDevSubsUpsellFixModule (ref), image (ref), text (ref), productDetailsContainerModule (ref), fillBehavior (ref), buttonVariant (ref), sheet (ref), unifiedPurchaseModalHeaderModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), cartPricingLoadingModule (ref), UpsellProductDetails (ref), buttonGroup (ref), orientation (ref), enums (ref), foundationModule (ref)
 	local var1 = nil
 	local var2 = nil
 	
@@ -295,7 +296,7 @@ local function UnifiedRobuxUpsellModal(p1)
 		BuyRobuxOnly = if fFlagAXMISWithBlackbird then "IAPExperience.PurchasePrompt.Title.BuyRobuxOnly" else nil,
 		BuyRobuxAndAvatar = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then "IAPExperience.PurchasePrompt.Header.BuyRobuxAndAvatar" else nil,
 		BuyRobuxAndSubscription = if fFlagEnableUnifiedPurchaseFlowForDevSubs then "IAPExperience.PurchasePrompt.BuyRobuxAndSubscription" else nil,
-		PerMonth = if fFlagEnableUnifiedPurchaseFlowForDevSubs then "Feature.Subscription.Text.PerMonth" else nil
+		PerMonth = if fFlagEnableUnifiedPurchaseFlowForDevSubs or fFlagLuaAppsEnablePromptVIPServerPurchase then "Feature.Subscription.Text.PerMonth" else nil
 	})
 	local _ = nil
 	local var7 = if fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then p1.screenSize.Y > 0 and p1.screenSize.Y < compactUpsellModalBreakpoint else p1.screenSize.Y < compactUpsellModalBreakpoint
@@ -385,7 +386,7 @@ local function UnifiedRobuxUpsellModal(p1)
 		termsOfUse = "<u>" .. termsOfUse .. "</u>"
 	end
 	local var16 = fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription
-	local var17 = if var16 then var6.PerMonth else nil
+	local var17 = if var16 then var6.PerMonth elseif fFlagLuaAppsEnablePromptVIPServerPurchase and p1.isMonthlyPrice then var6.PerMonth else nil
 	local var18 = if var16 then var6.Subscribe else var6.Buy
 	local var19 = nil
 	
@@ -436,6 +437,7 @@ local function UnifiedRobuxUpsellModal(p1)
 		isCompact = var7,
 		model = if fFlagEnableOffersOnInExperienceSurface then var5.model else p1.product.model,
 		priceSuffix = var17,
+		includePriceSuffixOnOriginal = if fFlagLuaAppsEnablePromptVIPServerPurchase then p1.isMonthlyPrice else nil,
 		hideDiscountSummary = if fFlagEnableOffersOnInExperienceSurface then p1.isCartPricingLoading else nil,
 		savingsSummary = if fFlagEnableOffersOnInExperienceSurface then var4.cartPricingSavingsSummary else nil
 	})
@@ -492,7 +494,8 @@ local function UnifiedRobuxUpsellModal(p1)
 				itemName = if fFlagEnableOffersOnInExperienceSurface then var5.itemName else p1.product.itemName,
 				itemRobuxCost = if fFlagEnableOffersOnInExperienceSurface then var5.itemRobuxCost else p1.product.itemRobuxCost,
 				model = if fFlagEnableOffersOnInExperienceSurface then var5.model else p1.product.model,
-				priceSuffix = var17
+				priceSuffix = var17,
+				includePriceSuffixOnOriginal = if fFlagLuaAppsEnablePromptVIPServerPurchase then p1.isMonthlyPrice else nil
 			})
 		}),
 		CartPricingLoading = if fFlagEnableOffersOnInExperienceSurface then reactModule.createElement(cartPricingLoadingModule, { LayoutOrder = 1, isLoading = p1.isCartPricingLoading }) else nil,

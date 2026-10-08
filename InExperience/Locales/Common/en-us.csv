@@ -106,6 +106,8 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Your email is not
 Authentication.Login.WeChat.AntiAddictionText,"Boycott bad experiences, refuse pirated experiences. Be aware of self-defense and being deceived. Visiting experiences is good for your brain, but too much experience visit can harm your health. Manage your time well and enjoy a healthy lifestyle."
 Authentication.SignUp.Action.ApplyOnNextRespawn,Apply on next respawn
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.Create,Create
+Authentication.SignUp.Action.CreateAccountSentenceCase,Create account
 Authentication.SignUp.Action.ExitModalLeave,Leave
 Authentication.SignUp.Action.RespawnNow,Respawn now
 Authentication.SignUp.Action.StartPlay,Start play
@@ -113,6 +115,7 @@ Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Retry log in
 Authentication.SignUp.Description.AccountAlreadyLinked,Your account on {platformAccountName} is already linked to a Roblox account. Please try to log in again.
 Authentication.SignUp.Description.BirthdayHint,Enter date
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"By creating an account, you agree to our {startTermsTag}Terms{endTermsTag}, including arbitration, and acknowledge our {startPrivacyTag}Privacy Policy{endPrivacyTag}. If you’re under 18, your parent or guardian must permit your account and agree to our Terms."
 Authentication.SignUp.Description.Try,Try
 Authentication.SignUp.Description.UsernameChanged,"All set! Your account is ready and linked to {platform}. Respawn now to see your updated username in the game, or it'll apply next time."
 Authentication.SignUp.Description.UsernameUnchanged,You're in! Your account is ready and linked to {platform}. Chat with friends and play millions of Roblox games.
@@ -123,6 +126,7 @@ Authentication.SignUp.Header.SetUpYourRobloxAccount,Set up your Roblox account
 Authentication.SignUp.Heading.CountryCodeSelector,Select country
 Authentication.SignUp.Heading.RetryLogIn,Retry Log In
 Authentication.SignUp.Label.Birthday,Birthday
+Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} years old)
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,Day
 Authentication.SignUp.Label.EnterYourEmail,Enter your email
@@ -430,7 +434,7 @@ CommonUI.Features.Label.Connections,Connections
 CommonUI.Features.Label.ControllerBar.HoldPrefix,Hold
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,to play
-CommonUI.Features.Label.CreateGames,Create
+CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,Experiences
 CommonUI.Features.Label.GiftCards,Buy Gift Cards
@@ -673,15 +677,18 @@ CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
 CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,Original Text ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,What is the problem with this translation?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,Accuracy Issue
+CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.ImageQuality,Image Quality
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,Inappropriate or Derogatory
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,Spelling or Grammar Issue
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.Untranslated,Untranslated
 CoreScripts.Feedback.FeedbackReportDialog.SubmitFeedback,
 CoreScripts.Feedback.FeedbackReportDialog.TextSelectionHeader,Selected Text
 CoreScripts.Feedback.Help.Instructions,Select any text to give feedback on incorrect or missing translations.
+CoreScripts.Feedback.Help.InstructionsWithImage,Select any text or image to give feedback on incorrect or missing translations.
 CoreScripts.Feedback.Help.MainHeader,
 CoreScripts.Feedback.Onboarding.Cancel,
 CoreScripts.Feedback.Onboarding.Instructions,
+CoreScripts.Feedback.Onboarding.InstructionsWithImage,
 CoreScripts.Feedback.Onboarding.MainHeader,Tell Us What's Wrong
 CoreScripts.Feedback.Onboarding.Start,Start
 CoreScripts.Feedback.SubmissionToastBody,Roblox will use this information to help improve the translation quality of this experience
@@ -1993,6 +2000,10 @@ Feature.Build.Analytics.Description.PayerConversion,Payer conversion is the perc
 Feature.Build.Analytics.Description.PlaythroughRate,Playthrough rate is the percentage of visits that completed a full play session. Higher rates suggest players find your experience easy to get into and worth finishing.
 Feature.Build.Analytics.Description.TotalPlaytime,Total playtime sums the time all players spent in your experience over the period. Rising playtime usually signals more engaging sessions.
 Feature.Build.Analytics.DurationHours,{number} hrs
+Feature.Build.Analytics.Goal.EarnRobux,
+Feature.Build.Analytics.Goal.FirstImpression,Make a good first impression
+Feature.Build.Analytics.Goal.GetMorePlayers,Get more players
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,Keep players coming back
 Feature.Build.Analytics.KeyStats,Key stats
 Feature.Build.Analytics.LastMonth,Last month
 Feature.Build.Analytics.LastWeek,
@@ -2024,9 +2035,12 @@ Feature.Build.Analytics.Summary.TotalPlaytime,Total hours players spent in your 
 Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,Total players
 Feature.Build.Analytics.Title.D1Retention,D1 retention
+Feature.Build.Analytics.Title.D7Retention,D7 retention
 Feature.Build.Analytics.Title.DailyActiveUsers,Daily active users
+Feature.Build.Analytics.Title.NewUserSessionTime,New user session time
 Feature.Build.Analytics.Title.PayerConversion,Payer conversion
 Feature.Build.Analytics.Title.PlaythroughRate,Playthrough rate
+Feature.Build.Analytics.Title.RobuxSpent,
 Feature.Build.Analytics.Title.TotalPlaytime,Total playtime
 Feature.Build.Analytics.Visits,Visits
 Feature.Build.Content.NewGame,New game
@@ -2196,6 +2210,15 @@ Feature.Build.Label.Thinking,Thinking
 Feature.Build.Label.Title,Title
 Feature.Build.Label.TitleDescription,Title & description
 Feature.Build.Label.Tool,tool
+Feature.Build.Label.ToolAdEligibilityDone,Checked ad eligibility
+Feature.Build.Label.ToolAdEligibilityFailed,Couldn't check ad eligibility
+Feature.Build.Label.ToolAdEligibilityRunning,Checking ad eligibility
+Feature.Build.Label.ToolAnalyticsDone,Analyzed the stats
+Feature.Build.Label.ToolAnalyticsFailed,Couldn't analyze the stats
+Feature.Build.Label.ToolAnalyticsRunning,Analyzing the stats
+Feature.Build.Label.ToolApiDocsDone,Looked up API docs
+Feature.Build.Label.ToolApiDocsFailed,Couldn't look up API docs
+Feature.Build.Label.ToolApiDocsRunning,Looking up API docs
 Feature.Build.Label.ToolAssetDone,Inserted asset
 Feature.Build.Label.ToolAssetFailed,Couldn't insert asset
 Feature.Build.Label.ToolAssetRunning,Inserting asset
@@ -2205,6 +2228,9 @@ Feature.Build.Label.ToolAssetSearchRunning,Searching asset library
 Feature.Build.Label.ToolClientDMDone,Searched client DataModel
 Feature.Build.Label.ToolClientDMFailed,Couldn't search client DataModel
 Feature.Build.Label.ToolClientDMRunning,Searching client DataModel
+Feature.Build.Label.ToolCompileDone,Compiled the code
+Feature.Build.Label.ToolCompileFailed,Couldn't compile the code
+Feature.Build.Label.ToolCompileRunning,Compiling the code
 Feature.Build.Label.ToolGameInfoDone,Updated game info
 Feature.Build.Label.ToolGameInfoFailed,Couldn't update game info
 Feature.Build.Label.ToolGameInfoRunning,Updating game info
@@ -2241,6 +2267,9 @@ Feature.Build.Label.ToolQuestionRunning,Asking a question
 Feature.Build.Label.ToolReqUpdateDone,Updated requirements
 Feature.Build.Label.ToolReqUpdateFailed,Couldn't update requirements
 Feature.Build.Label.ToolReqUpdateRunning,Updating requirements
+Feature.Build.Label.ToolRestoreVersionDone,Restored version
+Feature.Build.Label.ToolRestoreVersionFailed,Couldn't restore   version
+Feature.Build.Label.ToolRestoreVersionRunning,Restoring version
 Feature.Build.Label.ToolScriptDone,Ran script
 Feature.Build.Label.ToolScriptFailed,Couldn't run script
 Feature.Build.Label.ToolScriptRunning,Running script
@@ -2256,6 +2285,9 @@ Feature.Build.Label.ToolTasksPlanRunning,Planning your tasks
 Feature.Build.Label.ToolThumbnailDone,Set game thumbnail
 Feature.Build.Label.ToolThumbnailFailed,Couldn't set game thumbnail
 Feature.Build.Label.ToolThumbnailRunning,Setting game thumbnail
+Feature.Build.Label.ToolVerifyDone,Checked for errors
+Feature.Build.Label.ToolVerifyFailed,Couldn't check for errors
+Feature.Build.Label.ToolVerifyRunning,Checking for errors
 Feature.Build.Label.UniverseNumber,Universe {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Unknown
 Feature.Build.Label.UnlimitedUsed,{USED} used • No limit
@@ -3559,6 +3591,7 @@ Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"By purchasing
 Feature.InExperienceShop.Label.BonusItem,Bonus item
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Ends in {timeRemaining}
+Feature.InExperienceShop.Label.FreeTrial,Free trial
 Feature.InExperienceShop.Label.NoDescription,No Description
 Feature.InExperienceShop.Label.OfferEndTime,{offer} ending in {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,This is a preview of your Shop in Roblox Studio. Players do not see this preview.
@@ -3570,6 +3603,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} minutes
 Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minute
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconds
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 second
+Feature.InExperienceShop.Label.Trial,Trial
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,You have successfully purchased {ROBUX_AMOUNT} Robux
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Are you sure you want to permanently delete this item from your inventory? If you change your mind, you'll need to earn it again in an experience."
 Feature.Item.Label.DeleteItemUndercase,Delete item
@@ -3683,6 +3717,8 @@ Feature.Moments.Label.MomentFailedToPostTitle,Moment failed to post
 Feature.Moments.Label.MomentNoLongerAvailable,This Moment is no longer available.
 Feature.Moments.Label.MomentPublishedBody,Your Moment has been published successfully.
 Feature.Moments.Label.MomentPublishedTitle,Moment published
+Feature.Moments.Label.MomentRemovedBody,It broke our safety rules so it's no longer available.
+Feature.Moments.Label.MomentRemovedTitle,We removed this Moment
 Feature.Moments.Label.MomentUnavailable,Moment unavailable
 Feature.Moments.Label.MomentUnavailableDefault,This Moment isn't available.
 Feature.Moments.Label.MomentsExperienceName,
@@ -3834,10 +3870,17 @@ Feature.Parents.Title.EnterParentEmailV2,Enter parent's email
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,Add friend
 Feature.PlayerSearchResults.Label.FromSearch,From Search
+Feature.PlayerSearchResults.Label.NewUsername,New username
 Feature.PlayerSearchResults.Label.Previously,Previously
 Feature.PlayerSearchResults.Label.ThisIsYou,This is you
+Feature.PlayerSearchResults.Label.You,You
+Feature.PlayerSearchResults.Label.YouAreConnections,You are Connections
 Feature.PlayerSearchResults.Label.YouAreFollowing,You are following
+Feature.PlayerSearchResults.Label.YouAreFriends,You are friends
+Feature.PrivateServers.Action.CreatePrivateServer,Create Private Server
+Feature.PrivateServers.Action.FreeWithBlackbird,Free with Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Private server purchases are not supported in Studio.
+Feature.PrivateServers.Description.VipServersNotSupported,This game doesn't support private servers.
 Feature.Profile.Action.AboutThisProfile,About this profile
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4091,9 +4134,12 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% off first 60 days
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10% off first {trialUnlockDays} days, then 20% off items and avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,More fun for less Robux. Subscribe to Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Join early with Plus
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,This referral link is no longer valid.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} invited you to join Plus. You'll both get {amount} Robux when you purchase Plus.
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{referralTermsUrl}"">Referral Program Terms</a> and the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Heading.ReferralEntry,Share Plus to get {amount} Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Join Plus to get {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,"Join Plus, get"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Free private servers
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4110,6 +4156,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 month free,{
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} free,{boldEnd} then {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,month
 Feature.RobloxSubscription.Label.months,months
+Feature.RobloxSubscription.Message.AlreadySubscribed,You already have Plus. This link is for new members. Share your own to invite friends and get rewards.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Get 1 free week of Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,Good news
 Feature.RobloxSubscription.Title.GenericError,
@@ -4354,8 +4401,19 @@ Feature.SongDetails.Action.ReportAudio,Report Audio
 Feature.SongDetails.Label.InappropriateAudio,Inappropriate Audio
 Feature.SongDetails.Label.InappropriateThumbnail,Inappropriate Thumbnail
 Feature.SongDetails.Label.SongPreview,Song Preview
+Feature.SplitPane.EditAvatarButtonText,Edit Avatar
 Feature.SplitPane.Label.CollapseAvatar,Collapse avatar
 Feature.SplitPane.Label.ExpandAvatar,Expand avatar
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,Finish tour
+Feature.SplitPane.Tour.Button.SkipTour,Skip tour
+Feature.SplitPane.Tour.Step1.Description.Collapsed,Saved avatars are now visible on home. Expand this space to see them.
+Feature.SplitPane.Tour.Step1.Description.Expanded,Saved avatars are now visible on home. Spin them around or zoom in to see every detail.
+Feature.SplitPane.Tour.Step1.Title,See yourself on Home
+Feature.SplitPane.Tour.Step2.Description,Choose how you want to look. Switch between your saved avatars right before you join a game.
+Feature.SplitPane.Tour.Step2.Title,Change your look anytime
+Feature.SplitPane.Tour.Step3.Description,Hide this space anytime to focus on discovering new games. Your saved avatar stays right here.
+Feature.SplitPane.Tour.Step3.Title,Choose what you see
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Add others
 Feature.Squads.Action.ConnectToVoice,Connect to voice

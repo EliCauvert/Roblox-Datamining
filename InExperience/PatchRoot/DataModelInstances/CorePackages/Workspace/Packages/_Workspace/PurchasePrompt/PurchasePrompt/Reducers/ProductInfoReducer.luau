@@ -15,10 +15,11 @@ local getFFlagEnableCreatorStorePurchasingCutoverModule = require(purchasePrompt
 local productTypeEnum = require(purchasePrompt.types).ProductTypeEnum
 local normalizePriceDiscountDetailsModule = require(purchasePrompt.Utils.normalizePriceDiscountDetails)
 local fFlagPurchasePromptFetchCartPricingForLooks = require(purchasePrompt.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks
+local fFlagLuaAppsEnablePromptVIPServerPurchase = require(purchasePrompt.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 
 return rodux.createReducer({}, {
 	[productInfoReceivedModule.name] = function(_, p1)
-		-- upvalues: fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), constantsModule (ref), getFFlagTranslateDevProductsModule (ref), normalizePriceDiscountDetailsModule (ref), fFlagAXFixMISUpsellDiscountSummary (ref), getPreviewImageUrlModule (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref)
+		-- upvalues: fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), constantsModule (ref), getFFlagTranslateDevProductsModule (ref), normalizePriceDiscountDetailsModule (ref), fFlagAXFixMISUpsellDiscountSummary (ref), getPreviewImageUrlModule (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref)
 		local productInfo = p1.productInfo
 		local var1 = ""
 		local var2 = ""
@@ -51,7 +52,9 @@ return rodux.createReducer({}, {
 			cartPricingRequestedItems = if fFlagPurchasePromptFetchCartPricingForLooks then productInfo.CartPricingRequestedItems else nil,
 			collectibleProductId = var2,
 			productTargetId = if productInfo.TargetId then productInfo.TargetId else nil,
-			displayPrice = if fFlagEnableUnifiedPurchaseFlowForDevSubs and productInfo.ProductType == productTypeEnum.DeveloperSubscription then productInfo.DisplayPrice else nil
+			displayPrice = if fFlagEnableUnifiedPurchaseFlowForDevSubs and productInfo.ProductType == productTypeEnum.DeveloperSubscription then productInfo.DisplayPrice else nil,
+			isFreeWithRobloxPlus = if fFlagLuaAppsEnablePromptVIPServerPurchase then productInfo.IsFreeWithRobloxPlus else nil,
+			isMonthlyPrice = if fFlagLuaAppsEnablePromptVIPServerPurchase then productInfo.IsMonthlyPrice else nil
 		}
 	end,
 	[bundleProductInfoReceivedModule.name] = function(_, p1)

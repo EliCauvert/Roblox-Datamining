@@ -32,7 +32,6 @@ local useIsLocalPlayerPartyVoiceEligible = hooksModule.useIsLocalPlayerPartyVoic
 local useIsUserPartyVoiceEligible = hooksModule.useIsUserPartyVoiceEligible
 local useIsCurrentSquadPartyVoiceEligible = hooksModule.useIsCurrentSquadPartyVoiceEligible
 local getFFlagEnableCrossExpVoice = sharedFlags.GetFFlagEnableCrossExpVoice
-local fFlagEnableSquadUserCardHoverFix = sharedFlags.FFlagEnableSquadUserCardHoverFix
 local iconSize = foundation.Enums.IconSize
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local _ = require(squads.Common.ModelTypes)
@@ -44,7 +43,7 @@ local fFlagEnableBlackbirdCheck = sharedFlags.FFlagEnableBlackbirdCheck
 local useIsRobloxSubscriber = userProfilesModule.Hooks.useIsRobloxSubscriber
 
 return function(p1)
-	-- upvalues: useLocalization (ref), useTokens (ref), useAnimatedTransparency (ref), partyVoiceActivityIndicatorAnimationMs (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), userProfilesModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), react (ref), fFlagSquadsPresenceStoreMigration (ref), var1 (ref), useSelector (ref), var2 (ref), presenceType (ref), useLocalUserId (ref), getFFlagEnableCrossExpVoice (ref), useIsVoiceConnected (ref), useIsMicPermissionsError (ref), useParticipant (ref), useIsVoiceConnecting (ref), useIsActiveParticipant (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsUserPartyVoiceEligible (ref), useIsCurrentSquadPartyVoiceEligible (ref), useIsParticipantMutedLocally (ref), useIsParticipantMuted (ref), useIsParticipantInOtherAudioContext (ref), fFlagEnablePartyVoiceChangersInLua (ref), crossExperienceVoiceModule (ref), partyVoiceActivityIndicatorDebounceMs (ref), squadUserPartyStatusModule (ref), foundation (ref), iconSize (ref), builderIconsModule (ref), fFlagEnableSquadUserCardHoverFix (ref), useSquadUserDropdownMenuButtonsModule (ref), imageSetLabel (ref)
+	-- upvalues: useLocalization (ref), useTokens (ref), useAnimatedTransparency (ref), partyVoiceActivityIndicatorAnimationMs (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), userProfilesModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), react (ref), fFlagSquadsPresenceStoreMigration (ref), var1 (ref), useSelector (ref), var2 (ref), presenceType (ref), useLocalUserId (ref), getFFlagEnableCrossExpVoice (ref), useIsVoiceConnected (ref), useIsMicPermissionsError (ref), useParticipant (ref), useIsVoiceConnecting (ref), useIsActiveParticipant (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsUserPartyVoiceEligible (ref), useIsCurrentSquadPartyVoiceEligible (ref), useIsParticipantMutedLocally (ref), useIsParticipantMuted (ref), useIsParticipantInOtherAudioContext (ref), fFlagEnablePartyVoiceChangersInLua (ref), crossExperienceVoiceModule (ref), partyVoiceActivityIndicatorDebounceMs (ref), squadUserPartyStatusModule (ref), foundation (ref), iconSize (ref), builderIconsModule (ref), useSquadUserDropdownMenuButtonsModule (ref), imageSetLabel (ref)
 	local var3, onlinePresenceText
 	local var4 = useLocalization({
 		connectingText = "Feature.Squads.Label.Connecting",
@@ -155,7 +154,6 @@ return function(p1)
 			style = var5.Color.Content.Emphasis
 		}) else nil
 	end, { p1.user and p1.user.partyStatus, var3, var20, var13 })
-	local _ = nil
 	
 	return react.createElement(foundation.View, {
 		LayoutOrder = p1.layoutOrder,
@@ -163,7 +161,7 @@ return function(p1)
 		backgroundStyle = var5.Color.Surface.Surface_200,
 		cornerRadius = UDim.new(0, var5.Radius.Medium),
 		isDisabled = var3 or (var20 or (if p1.user.partyStatus ~= squadUserPartyStatusModule.Invited then p1.user.partyStatus == squadUserPartyStatusModule.NoResponse else true)),
-		onActivated = if p1.onActivated and (if fFlagEnableSquadUserCardHoverFix then not var15 and not (#useSquadUserDropdownMenuButtonsModule(p1.user.userId, p1.isInExperience) < 1) else not var15) then react.useCallback(function()
+		onActivated = if p1.onActivated and (not var15 and not (#useSquadUserDropdownMenuButtonsModule(p1.user.userId, p1.isInExperience) < 1)) then react.useCallback(function()
 			-- upvalues: p1 (ref)
 			if p1.onActivated then
 				p1.onActivated(tostring(p1.user.userId))

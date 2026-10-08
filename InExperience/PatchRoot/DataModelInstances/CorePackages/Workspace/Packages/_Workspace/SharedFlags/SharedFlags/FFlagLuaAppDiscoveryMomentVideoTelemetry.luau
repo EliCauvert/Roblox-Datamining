@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppDiscoveryMomentVideoTelemetry", false) and require(script.Parent.FFlagLuaAppEdpMomentVideo)

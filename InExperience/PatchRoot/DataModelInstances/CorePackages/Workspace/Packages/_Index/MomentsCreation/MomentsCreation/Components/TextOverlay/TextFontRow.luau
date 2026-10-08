@@ -10,6 +10,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local constantsModule = require(momentsCreation.Constants)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local useTextFontRowStateModule = require(momentsCreation.Components.TextOverlay.useTextFontRowState)
+local fFlagMomentsTextOverlayColorPickerIconModule = require(momentsCreation.Flags.FFlagMomentsTextOverlayColorPickerIcon)
 local list = {
 	{ label = "Builder", font = Enum.Font.BuilderSansMedium },
 	{ label = "Source Sans", font = Enum.Font.SourceSans },
@@ -29,7 +30,7 @@ local list = {
 local t = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 
 return function(p1)
-	-- upvalues: useTokens (ref), useTextFontRowStateModule (ref), list (ref), reactModule (ref), view (ref), text (ref), t (ref), constantsModule (ref), foundationModule (ref), iconButton (ref), builderIconsModule (ref)
+	-- upvalues: useTokens (ref), useTextFontRowStateModule (ref), list (ref), reactModule (ref), view (ref), fFlagMomentsTextOverlayColorPickerIconModule (ref), text (ref), t (ref), constantsModule (ref), foundationModule (ref), iconButton (ref), builderIconsModule (ref)
 	local var1 = useTokens()
 	local var2 = useTextFontRowStateModule(p1.controller)
 	local t_1 = {}
@@ -41,7 +42,8 @@ return function(p1)
 			LayoutOrder = i,
 			padding = {
 				left = UDim.new(0, var1.Padding.Medium),
-				right = UDim.new(0, var1.Padding.Medium)
+				right = UDim.new(0, var1.Padding.Medium),
+				top = if fFlagMomentsTextOverlayColorPickerIconModule and v.font == Enum.Font.LuckiestGuy then UDim.new(0, var1.Size.Size_100) else nil
 			},
 			backgroundStyle = if var3 then var1.Inverse.Surface.Surface_0 else var1.Color.ActionStandard.Background,
 			onActivated = function()

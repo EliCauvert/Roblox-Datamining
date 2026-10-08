@@ -1,8 +1,11 @@
 ﻿return {
 	AreaTest = require(script.AreaTest),
 	debounce = require(script.debounce),
+	createLegalLinkRenderer = require(script.createLegalLinkRenderer),
+	formatBoldRichText = require(script.formatBoldRichText),
 	isStringPhone = require(script.isStringPhone),
 	isStringEmail = require(script.isStringEmail),
+	getLinkedPlatformAccountName = require(script.getLinkedPlatformAccountName),
 	getSingleSignOnUrls = require(script.getSingleSignOnUrls),
 	AppStorageUtilities = require(script.AppStorageUtilities),
 	scheduleAccountSwitchRelaunchFallback = require(script.scheduleAccountSwitchRelaunchFallback),
@@ -24,5 +27,6 @@
 	isIosAuthServiceEnabled = require(script.isIosAuthServiceEnabled),
 	shouldSkipLegacyPasswordSaveEvent = require(script.shouldSkipLegacyPasswordSaveEvent),
 	coarseLoginErrorBucket = require(script.coarseLoginErrorBucket),
-	isNonTerminalLoginError = require(script.isNonTerminalLoginError)
+	isNonTerminalLoginError = require(script.isNonTerminalLoginError),
+	isLoggedOutUserId = require(script.isLoggedOutUserId)
 }

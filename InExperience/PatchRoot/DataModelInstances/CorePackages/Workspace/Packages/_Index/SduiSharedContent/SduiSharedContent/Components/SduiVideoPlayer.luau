@@ -3,6 +3,7 @@ local reactModule = require(parent.React)
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local findAnalyticsFieldInAncestors = sduiCoreSystemModule.findAnalyticsFieldInAncestors
 local videoUtilsModule = require(parent.VideoUtils)
+local fFlagLuaAppHomeMomentVideoFallback = require(parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 local t = { PlayWhenReady = "PlayWhenReady" }
 
 local function _(p1, p2)
@@ -23,7 +24,7 @@ local _ = function(value)
 end
 
 return function(p1)
-	-- upvalues: t (ref), findAnalyticsFieldInAncestors (ref), reactModule (ref), sduiCoreSystemModule (ref), videoUtilsModule (ref)
+	-- upvalues: t (ref), findAnalyticsFieldInAncestors (ref), reactModule (ref), sduiCoreSystemModule (ref), videoUtilsModule (ref), fFlagLuaAppHomeMomentVideoFallback (ref)
 	local var1, var2
 	local videoAssetId = p1.videoAssetId
 	local var3 = if videoAssetId == nil or videoAssetId == "" then nil elseif string.find(videoAssetId, "://", 1, true) then videoAssetId else `rbxassetid://{videoAssetId}`
@@ -92,6 +93,7 @@ return function(p1)
 	
 	return if var3 then reactModule.createElement(videoUtilsModule.VideoPlayer, {
 		video = var3,
+		accessContext = if fFlagLuaAppHomeMomentVideoFallback then p1.accessContext else nil,
 		thumbnail = p1.loadingImage,
 		thumbnailComponentOverride = var11,
 		shouldStartPlayback = var1,

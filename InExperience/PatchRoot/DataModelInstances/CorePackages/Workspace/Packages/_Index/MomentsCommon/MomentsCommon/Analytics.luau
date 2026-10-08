@@ -3,17 +3,22 @@ local funnelEventNamesModule = require(script.FunnelEventNames)
 local recommendationSourceModule = require(script.RecommendationSource)
 local sessionManagerModule = require(script.SessionManager)
 local _ = require(script.Types)
+local fireAnalyticsEventModule = require(script.fireAnalyticsEvent)
+local fireFunnelAnalyticsEventModule = require(script.fireFunnelAnalyticsEvent)
+local reportMomentSkipModule = require(script.reportMomentSkip)
+local reportMusicSearchCountsModule = require(script.reportMusicSearchCounts)
 local reportMomentsRealtimeEventModule = require(script.reportMomentsRealtimeEvent)
+local reportMomentsCommentsRealtimeModule = require(script.reportMomentsCommentsRealtime)
 
 return {
 	EventNames = eventNamesModule,
 	FunnelEventNames = funnelEventNamesModule,
 	RecommendationSource = recommendationSourceModule,
 	SessionManager = sessionManagerModule,
-	fireAnalyticsEvent = require(script.fireAnalyticsEvent),
-	fireFunnelAnalyticsEvent = require(script.fireFunnelAnalyticsEvent),
-	reportMomentSkip = require(script.reportMomentSkip),
-	reportMusicSearchCounts = require(script.reportMusicSearchCounts),
+	fireAnalyticsEvent = fireAnalyticsEventModule,
+	fireFunnelAnalyticsEvent = fireFunnelAnalyticsEventModule,
+	reportMomentSkip = reportMomentSkipModule,
+	reportMusicSearchCounts = reportMusicSearchCountsModule,
 	reportMomentsFeedLoadAttempt = reportMomentsRealtimeEventModule.reportMomentsFeedLoadAttempt,
 	reportMomentsFeedLoadMore = reportMomentsRealtimeEventModule.reportMomentsFeedLoadMore,
 	reportMomentsFeedMediaLoad = reportMomentsRealtimeEventModule.reportMomentsFeedMediaLoad,
@@ -34,5 +39,6 @@ return {
 	reportMomentsEditToolOpened = reportMomentsRealtimeEventModule.reportMomentsEditToolOpened,
 	reportMomentsEditToolAbandoned = reportMomentsRealtimeEventModule.reportMomentsEditToolAbandoned,
 	reportMomentsGenerateText = reportMomentsRealtimeEventModule.reportMomentsGenerateText,
-	reportMomentsComments = reportMomentsRealtimeEventModule.reportMomentsComments
+	reportMomentsComments = reportMomentsCommentsRealtimeModule.reportMomentsComments,
+	reportMomentsCommentAction = reportMomentsCommentsRealtimeModule.reportMomentsCommentAction
 }

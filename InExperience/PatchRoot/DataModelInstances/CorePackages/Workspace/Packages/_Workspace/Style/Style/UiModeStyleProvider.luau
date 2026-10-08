@@ -72,23 +72,14 @@ local function UiModeStyleProvider(p1)
 			settings = if enableDisplaySize then cryoModule.Dictionary.join(var4, { scale = var3 }) else var4
 		})
 	end, { style, var2, var4, var3 })
-	local var7 = var6.foundationThemeName ~= nil
-	local var8 = nil
 	
-	if appClassicThemeGreenButtonColors then
-		local foundationThemeName = var6.foundationThemeName
-		
-		if if foundationThemeName ~= themeName.Classic then foundationThemeName == themeName.KidsClassic else true then
-			var8 = if t_2[var6.themeName:lower()] == colorMode.Light then t_1 else t
-		end
-	end
 	return reactModule.createElement(foundationProvider, {
 		device = var6.deviceType,
 		colorMode = t_2[var6.themeName:lower()],
 		themeName = var6.foundationThemeName,
 		preferences = var6.settings,
-		tokenOverrides = var8
-	}, reactModule.createElement(sceneOverridesRegistryModule, { isActive = var7 }, reactModule.createElement(appStyleProvider, { style = var6 }, p1.children)))
+		tokenOverrides = if appClassicThemeGreenButtonColors and var6.foundationThemeName == themeName.Classic then if t_2[var6.themeName:lower()] == colorMode.Light then t_1 else t else nil
+	}, reactModule.createElement(sceneOverridesRegistryModule, { isActive = var6.foundationThemeName ~= nil }, reactModule.createElement(appStyleProvider, { style = var6 }, p1.children)))
 end
 
 return function(p1)

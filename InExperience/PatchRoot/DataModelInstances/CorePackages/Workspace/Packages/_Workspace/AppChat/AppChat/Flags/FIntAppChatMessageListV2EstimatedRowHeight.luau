@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("AppChatMessageListV2EstimatedRowHeight", 84)

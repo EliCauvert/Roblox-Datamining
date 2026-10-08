@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXUpdateBulkPurchaseOfferExpiryBadge", false) and require(script:FindFirstAncestor("BulkPurchaseApp").Flags.FFlagAXAddOffersToBulkPurchase)

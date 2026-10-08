@@ -51,6 +51,7 @@ local layoutMode = require(parent.UserTile).LayoutMode
 local userPresence = require(parent.Foundation).Enums.UserPresence
 local fFlagAppChatEnableMessageContextMenuModule = require(appChat.Flags.FFlagAppChatEnableMessageContextMenu)
 local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
+local fFlagAppChatAlignAvatarToMessageGroupBottomModule = require(appChat.Flags.FFlagAppChatAlignAvatarToMessageGroupBottom)
 local useDescendantSelected = require(script.Parent.Hooks.useDescendantSelected).useDescendantSelected
 local appChatEnableRepliesUIIxpEnabled2 = game:DefineFastFlag("AppChatEnableRepliesUIIxpEnabled2", false)
 local appChatEnableRepliesUIIxpLayer1 = game:DefineFastString("AppChatEnableRepliesUIIxpLayer1", "Party.ConversationPage")
@@ -99,7 +100,7 @@ local t = {
 local var2 = if getFFlagDebugAppChatModule() then "TextButton" else "Frame"
 
 function ChatMessageContainer(p1)
-	-- upvalues: cryoModule (ref), t (ref), messageModelModule (ref), reactModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), useStyle (ref), useChatPagePaddingModule (ref), foundationModule (ref), appChatUseSymmetricSwipe (ref), swipeDirectionModule (ref), uDim2 (ref), uDim2_1 (ref), appChatReplyIconSwipeOffset (ref), vector2 (ref), vector2_1 (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useTriggerFeedback (ref), useDescendantSelected (ref), reactFocusNavigationModule (ref), globalLongPressSignalModule (ref), messageFtuxTooltipDismissSignal (ref), messageFtuxTooltipVariant (ref), chatConversationTelemetryEventsModule (ref), useNavigation (ref), useGetConversationFromIdModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), getReplyingToStoreModule (ref), shouldReadMessageListFromSignalsStore (ref), var1 (ref), useReplyingToMessageDispatchModule (ref), useLocalUserId (ref), hapticFeedbackContext (ref), hapticFeedbackType (ref), useSwipeGestureModule (ref), enumScreensModule (ref), setTimeout (ref), appChatMessageLongPressDistanceThreshold (ref), userInputService (ref), fFlagAppChatEnableMessageContextMenuModule (ref), chatMessageContainerConstantsModule (ref), optionsEnumModule (ref), conversationModule (ref), getReplyLabelDescriptorModule (ref), userProfilesModule (ref), useLocalization (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), getFFlagDebugAppChatModule (ref), optionsModule (ref), userTile (ref), layoutMode (ref), userPresence (ref), normalizeFontFace (ref), skeleton (ref), messageFtuxTooltip (ref), appChatEnableRepliesUIIxpEnabled2 (ref), IXPService (ref), appChatEnableRepliesUIIxpLayer1 (ref), var2 (ref), systemMessageModule (ref), noticeTextModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), messageModelModule (ref), reactModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), useStyle (ref), useChatPagePaddingModule (ref), foundationModule (ref), appChatUseSymmetricSwipe (ref), swipeDirectionModule (ref), uDim2 (ref), uDim2_1 (ref), appChatReplyIconSwipeOffset (ref), vector2 (ref), vector2_1 (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useTriggerFeedback (ref), useDescendantSelected (ref), reactFocusNavigationModule (ref), globalLongPressSignalModule (ref), messageFtuxTooltipDismissSignal (ref), messageFtuxTooltipVariant (ref), chatConversationTelemetryEventsModule (ref), useNavigation (ref), useGetConversationFromIdModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), getReplyingToStoreModule (ref), shouldReadMessageListFromSignalsStore (ref), var1 (ref), useReplyingToMessageDispatchModule (ref), useLocalUserId (ref), hapticFeedbackContext (ref), hapticFeedbackType (ref), useSwipeGestureModule (ref), enumScreensModule (ref), setTimeout (ref), appChatMessageLongPressDistanceThreshold (ref), userInputService (ref), fFlagAppChatEnableMessageContextMenuModule (ref), chatMessageContainerConstantsModule (ref), optionsEnumModule (ref), conversationModule (ref), getReplyLabelDescriptorModule (ref), userProfilesModule (ref), useLocalization (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), getFFlagDebugAppChatModule (ref), optionsModule (ref), fFlagAppChatAlignAvatarToMessageGroupBottomModule (ref), userTile (ref), layoutMode (ref), userPresence (ref), normalizeFontFace (ref), skeleton (ref), messageFtuxTooltip (ref), appChatEnableRepliesUIIxpEnabled2 (ref), IXPService (ref), appChatEnableRepliesUIIxpLayer1 (ref), var2 (ref), systemMessageModule (ref), noticeTextModule (ref)
 	local var3
 	local var4 = cryoModule.Dictionary.join(t, p1)
 	
@@ -497,7 +498,7 @@ function ChatMessageContainer(p1)
 	end) else nil
 	
 	local function renderMessage()
-		-- upvalues: reactModule (copy), var60 (ref), var42 (write), var43 (write), var50 (write), var4 (ref), left (ref), var51 (ref), var7 (ref), var52 (ref), foundationModule (copy), userTile (copy), layoutMode (copy), userPresence (copy), var5 (ref), var8 (ref), shouldShowName (ref), chatMessageContainerConstantsModule (copy), isIncoming (ref), senderTargetId (ref), var46 (write), foundationFontFaceMigration (copy), var6 (ref), normalizeFontFace (copy), var49 (ref), displayName (write), skeleton (copy), fFlagAppChatConsoleFocusFixesModule (copy), var3 (ref), var24 (write), var27 (write), var40 (write), var41 (write), var44 (write), var45 (write), var18 (write), var58 (write), var12 (ref), var11 (ref), messageFtuxTooltip (copy), messageFtuxTooltipVariant (copy), var9 (ref), var61 (ref), var59 (ref)
+		-- upvalues: reactModule (copy), var60 (ref), var42 (write), var43 (write), var50 (write), var4 (ref), left (ref), var51 (ref), var7 (ref), var52 (ref), foundationModule (copy), fFlagAppChatAlignAvatarToMessageGroupBottomModule (copy), userTile (copy), layoutMode (copy), userPresence (copy), var5 (ref), var8 (ref), shouldShowName (ref), chatMessageContainerConstantsModule (copy), isIncoming (ref), senderTargetId (ref), var46 (write), foundationFontFaceMigration (copy), var6 (ref), normalizeFontFace (copy), var49 (ref), displayName (write), skeleton (copy), fFlagAppChatConsoleFocusFixesModule (copy), var3 (ref), var24 (write), var27 (write), var40 (write), var41 (write), var44 (write), var45 (write), var18 (write), var58 (write), var12 (ref), var11 (ref), messageFtuxTooltip (copy), messageFtuxTooltipVariant (copy), var9 (ref), var61 (ref), var59 (ref)
 		local createElement = reactModule.createElement
 		createElement = createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -522,7 +523,8 @@ function ChatMessageContainer(p1)
 				LayoutOrder = 1,
 				tag = {
 					["col auto-x size-0-full"] = true,
-					["align-y-top"] = false
+					["align-y-top"] = false,
+					["align-y-bottom"] = fFlagAppChatAlignAvatarToMessageGroupBottomModule
 				}
 			}, {
 				Avatar = reactModule.createElement(foundationModule.View, { tag = "size-700-700" }, {

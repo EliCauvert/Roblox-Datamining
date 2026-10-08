@@ -16,7 +16,6 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 	local pruneConsecutiveNewLines = require(appChat.SocialLibraries).Utils.pruneConsecutiveNewLines
 	local getModeratedMaskTextModule = require(appChat.Utils.getModeratedMaskText)
 	local fFlagAppChatEnableAutotranslationModule = require(appChat.Flags.FFlagAppChatEnableAutotranslation)
-	local fFlagChatModeratedMaskRandomLength = require(parent.SharedFlags).FFlagChatModeratedMaskRandomLength
 	local messageModelModule = require(appChat.Models.MessageModel)
 	local foundationModule = require(parent.Foundation)
 	local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
@@ -95,12 +94,12 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 	}
 	
 	return function(p1)
-		-- upvalues: cryoModule (ref), t_2 (ref), fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), TEXT_BUBBLE_X_PADDING (ref), BUBBLE_PADDING (ref), TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING (ref), useTokens (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), messageModelModule (ref), t_1 (ref), t (ref), pruneConsecutiveNewLines (ref), loggerModule (ref), view (ref), chatMessageContainerModule (ref), image (ref)
+		-- upvalues: cryoModule (ref), t_2 (ref), getModeratedMaskTextModule (ref), TEXT_BUBBLE_X_PADDING (ref), BUBBLE_PADDING (ref), TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING (ref), useTokens (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), messageModelModule (ref), t_1 (ref), t (ref), pruneConsecutiveNewLines (ref), loggerModule (ref), view (ref), chatMessageContainerModule (ref), image (ref)
 		local var1 = cryoModule.Dictionary.union(t_2, p1)
 		
 		local function _(p2)
-			-- upvalues: fFlagChatModeratedMaskRandomLength (copy), getModeratedMaskTextModule (copy), var1 (ref)
-			return if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(var1.messageId or p2) else string.gsub(p2, "[^%s]", "#")
+			-- upvalues: getModeratedMaskTextModule (copy), var1 (ref)
+			return getModeratedMaskTextModule(var1.messageId or p2)
 		end
 		
 		local function messageMaxWidth(a, b)
@@ -134,8 +133,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 			return parentWidth - var6
 		end, { messageMaxWidth, var1.wideMode, var1.parentWidth })
 		local var6 = pruneConsecutiveNewLines(var1.content)
-		local var7 = if var1.moderated then var6 else nil
-		var6 = var1.moderated and ((if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(var1.messageId or var7) else string.gsub(var7, "[^%s]", "#")) or var6)
+		var6 = if var1.moderated then getModeratedMaskTextModule(var1.messageId or var6) else var6
 		local content = var1.repliesTo and (var1.repliesTo.messageType and var1.repliesTo.content)
 		local bodyLarge = var2.Typography.BodyLarge
 		local fontSize = bodyLarge.FontSize
@@ -150,9 +148,9 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 				visibility = var1.visibility,
 				renderMessage = function(p2, p3)
 					-- upvalues: reactModule (copy), image (copy), cryoModule (copy), var1 (ref), content (ref), messageModelModule (copy), t_1 (copy), t (copy), bodyLarge (ref), BUBBLE_PADDING (copy), var5 (ref), fontSize_1 (ref), view (copy), var4 (ref), fFlagAppChatEnableAutotranslationModule (copy), var3 (write), var6 (ref), fontSize (ref)
-					local var8
+					local var7
 					local createElement = reactModule.createElement
-					local var9 = cryoModule.Dictionary.union({
+					local var8 = cryoModule.Dictionary.union({
 						tag = {
 							["auto-xy gui-object-defaults col align-y-center"] = true,
 							["align-x-left"] = var1.isIncoming,
@@ -166,9 +164,9 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 					local t_2 = {}
 					
 					if content then
-						var8 = reactModule.createElement
+						var7 = reactModule.createElement
 						local repliesTo = var1.repliesTo
-						var8 = var8((if repliesTo and repliesTo.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[repliesTo.messageType]).component, {
+						var7 = var7((if repliesTo and repliesTo.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[repliesTo.messageType]).component, {
 							hasTail = false,
 							isPending = false,
 							isRepliedTo = true,
@@ -188,9 +186,9 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 							wideMode = var1.wideMode
 						})
 					else
-						var8 = nil
+						var7 = nil
 					end
-					t_2.repliesTo = var8
+					t_2.repliesTo = var7
 					t_2.mainMessage = reactModule.createElement(view, {
 						tag = "row auto-xy align-y-center gap-xxsmall",
 						LayoutOrder = 2,
@@ -221,7 +219,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 						})
 					})
 					
-					return createElement(image, var9, t_2)
+					return createElement(image, var8, t_2)
 				end
 			}))
 		end

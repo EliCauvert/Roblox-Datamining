@@ -6,12 +6,11 @@ local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 local useCursor = UIBloxModule.App.SelectionCursor.useCursor
 local useStyle = UIBloxModule.Core.Style.useStyle
-local fFlagChatLineReportingFocusFixesEnabled = require(parent.SharedFlags).FFlagChatLineReportingFocusFixesEnabled
 
 return function(p1)
-	-- upvalues: reactModule (ref), fFlagChatLineReportingFocusFixesEnabled (ref), useCursor (ref), useStyle (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
+	-- upvalues: reactModule (ref), useCursor (ref), useStyle (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	local var1, var2 = reactModule.useState("")
-	local var3 = if fFlagChatLineReportingFocusFixesEnabled then useCursor() else nil
+	local var3 = useCursor()
 	local var4 = useStyle()
 	local theme = var4.Theme
 	

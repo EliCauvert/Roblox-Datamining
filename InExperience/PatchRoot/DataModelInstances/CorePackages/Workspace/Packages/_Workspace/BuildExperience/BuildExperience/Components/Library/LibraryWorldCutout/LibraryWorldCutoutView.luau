@@ -12,11 +12,38 @@ local t = {
 	DominantAxis = Enum.DominantAxis.Width
 }
 
+local function useScreenHeight(p1)
+	-- upvalues: reactModule (ref)
+	local var1, var2 = reactModule.useState(0)
+	reactModule.useEffect(function()
+		-- upvalues: p1 (ref), var2 (ref)
+		local var3 = if p1 ~= nil then nil else p1:FindFirstAncestorWhichIsA("LayerCollector")
+		
+		if var3 == nil then
+			return nil
+		end
+		var2(var3.AbsoluteSize.Y)
+		local var4 = var3:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+			-- upvalues: var2 (copy), var3 (ref)
+			var2(var3.AbsoluteSize.Y)
+		end)
+		
+		return function()
+			-- upvalues: var4 (ref)
+			var4:Disconnect()
+		end
+	end, { p1 })
+	
+	return var1
+end
+
 return function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), isTapReleaseModule (ref), view (ref), skeleton (ref), radius (ref), text (ref), uDim2 (ref), t (ref)
+	-- upvalues: foundationModule (ref), reactModule (ref), useScreenHeight (ref), isTapReleaseModule (ref), view (ref), skeleton (ref), radius (ref), text (ref), uDim2 (ref), t (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local uDim = UDim.new(0, p1.inset)
 	local var2 = reactModule.useRef(nil)
+	local var3, var4 = reactModule.useState(nil)
+	local var5 = useScreenHeight(var3)
 	local onActivated = p1.onActivated
 	
 	return reactModule.createElement(view, {
@@ -43,7 +70,11 @@ return function(p1)
 		Cell = reactModule.createElement(view, {
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y",
-			padding = { left = uDim, right = uDim }
+			padding = { left = uDim, right = uDim },
+			ref = var4,
+			sizeConstraint = {
+				MaxSize = Vector2.new((if var5 > 0 then math.min(800, math.floor(var5 * 0.5 * 16 / 9)) else 800) + 2 * p1.inset, 1e999)
+			}
 		}, {
 			Window = if p1.isLoading then reactModule.createElement(view, {
 				testId = "Library.WorldCutout.Skeleton",

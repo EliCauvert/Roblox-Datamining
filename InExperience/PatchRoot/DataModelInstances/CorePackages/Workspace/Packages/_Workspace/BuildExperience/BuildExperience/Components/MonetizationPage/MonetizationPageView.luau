@@ -6,7 +6,9 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local overflowMenuPageShellModule = require(buildExperience.Components.BuildPillMenu.OverflowMenuPageShell)
+local chatActionsModule = require(buildExperience.Components.Chat.ChatActions)
 local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
+local fFlagBuildExperienceDeveloperProductContextModule = require(buildExperience.Flags.FFlagBuildExperienceDeveloperProductContext)
 local badge = foundationModule.Badge
 local button = foundationModule.Button
 local dialog = foundationModule.Dialog
@@ -695,7 +697,7 @@ local function EditContent(p3)
 end
 
 return function(p3)
-	-- upvalues: fFlagBuildExperienceMonetizationNativeUIModule (ref), reactModule (ref), ProductActionsMenu (ref), button (ref), inputSize (ref), buttonVariant (ref), iconButton (ref), iconName (ref), DetailContent (ref), CatalogStatusContent (ref), EditContent (ref), OptionsContent (ref), EmptyContent (ref), CatalogContent (ref), view (ref), CatalogRefreshWarning (ref), fillBehavior (ref), overflowMenuPageShellModule (ref)
+	-- upvalues: fFlagBuildExperienceMonetizationNativeUIModule (ref), reactModule (ref), ProductActionsMenu (ref), button (ref), inputSize (ref), buttonVariant (ref), iconButton (ref), iconName (ref), DetailContent (ref), CatalogStatusContent (ref), EditContent (ref), OptionsContent (ref), EmptyContent (ref), CatalogContent (ref), view (ref), CatalogRefreshWarning (ref), fillBehavior (ref), fFlagBuildExperienceDeveloperProductContextModule (ref), chatActionsModule (ref), overflowMenuPageShellModule (ref)
 	local isDetail = p3.mode == "detail"
 	local isEdit = p3.mode == "edit"
 	local isOptions = p3.mode == "options"
@@ -736,57 +738,72 @@ return function(p3)
 			Content = var9
 		})
 	end
-	return reactModule.createElement(overflowMenuPageShellModule, {
+	local var10 = if isEdit then reactModule.createElement(view, {
+		tag = {
+			["row gap-medium size-full-0 auto-y"] = true,
+			["padding-y-medium"] = fFlagBuildExperienceMonetizationNativeUIModule
+		}
+	}, {
+		Cancel = reactModule.createElement(button, {
+			LayoutOrder = 1,
+			testId = "monetization-cancel-product-edit",
+			fillBehavior = fillBehavior.Fill,
+			isDisabled = p3.isProductEditPending,
+			onActivated = p3.onCancelProductEdit,
+			size = inputSize.Large,
+			text = p3.labels.cancel,
+			variant = buttonVariant.Standard,
+			width = UDim.new(0.5, -6)
+		}),
+		Save = reactModule.createElement(button, {
+			LayoutOrder = 2,
+			testId = "monetization-save-product-edit",
+			fillBehavior = fillBehavior.Fill,
+			isLoading = p3.isProductEditPending,
+			onActivated = p3.onSaveProductEdit,
+			size = inputSize.Large,
+			text = p3.labels.save,
+			variant = buttonVariant.Emphasis,
+			width = UDim.new(0.5, -6)
+		})
+	}) elseif var5 or p3.mode ~= "empty" and p3.mode ~= "catalog" then nil else reactModule.createElement(view, {
+		tag = {
+			["row align-x-center size-full-0 auto-y"] = true,
+			["padding-y-medium"] = fFlagBuildExperienceMonetizationNativeUIModule
+		}
+	}, {
+		Create = reactModule.createElement(button, {
+			testId = "monetization-create",
+			onActivated = p3.onOpenCreate,
+			size = if fFlagBuildExperienceMonetizationNativeUIModule then inputSize.Large else inputSize.Medium,
+			text = p3.labels.emptyCreateProduct,
+			variant = buttonVariant.Emphasis,
+			width = if fFlagBuildExperienceMonetizationNativeUIModule then UDim.new(1, 0) else UDim.new(0, 240)
+		})
+	})
+	
+	if fFlagBuildExperienceDeveloperProductContextModule and isDetail and p3.chatActions ~= nil then
+		var10 = reactModule.createElement(view, {
+			tag = "size-full-0 auto-y padding-y-medium",
+			testId = "monetization-detail-composer"
+		}, {
+			Composer = reactModule.createElement(chatActionsModule, p3.chatActions)
+		})
+	end
+	local var11 = reactModule.createElement(overflowMenuPageShellModule, {
 		footerDivider = false,
 		testId = "MonetizationPage",
 		closeIcon = iconName.ChevronLargeLeft,
 		content = var9,
-		footer = if isEdit then reactModule.createElement(view, {
-			tag = {
-				["row gap-medium size-full-0 auto-y"] = true,
-				["padding-y-medium"] = fFlagBuildExperienceMonetizationNativeUIModule
-			}
-		}, {
-			Cancel = reactModule.createElement(button, {
-				LayoutOrder = 1,
-				testId = "monetization-cancel-product-edit",
-				fillBehavior = fillBehavior.Fill,
-				isDisabled = p3.isProductEditPending,
-				onActivated = p3.onCancelProductEdit,
-				size = inputSize.Large,
-				text = p3.labels.cancel,
-				variant = buttonVariant.Standard,
-				width = UDim.new(0.5, -6)
-			}),
-			Save = reactModule.createElement(button, {
-				LayoutOrder = 2,
-				testId = "monetization-save-product-edit",
-				fillBehavior = fillBehavior.Fill,
-				isLoading = p3.isProductEditPending,
-				onActivated = p3.onSaveProductEdit,
-				size = inputSize.Large,
-				text = p3.labels.save,
-				variant = buttonVariant.Emphasis,
-				width = UDim.new(0.5, -6)
-			})
-		}) elseif var5 or p3.mode ~= "empty" and p3.mode ~= "catalog" then nil else reactModule.createElement(view, {
-			tag = {
-				["row align-x-center size-full-0 auto-y"] = true,
-				["padding-y-medium"] = fFlagBuildExperienceMonetizationNativeUIModule
-			}
-		}, {
-			Create = reactModule.createElement(button, {
-				testId = "monetization-create",
-				onActivated = p3.onOpenCreate,
-				size = if fFlagBuildExperienceMonetizationNativeUIModule then inputSize.Large else inputSize.Medium,
-				text = p3.labels.emptyCreateProduct,
-				variant = buttonVariant.Emphasis,
-				width = if fFlagBuildExperienceMonetizationNativeUIModule then UDim.new(1, 0) else UDim.new(0, 240)
-			})
-		}),
+		footer = var10,
 		disableScrolling = fFlagBuildExperienceMonetizationNativeUIModule and var6,
 		headerTrailing = var8,
 		onClose = p3.onClose,
 		title = if isDetail then if p3.selectedProduct ~= nil then p3.labels.title else p3.selectedProduct.name elseif isEdit then p3.labels.editProduct elseif isOptions then p3.labels.options else p3.labels.title
 	})
+	
+	return if fFlagBuildExperienceDeveloperProductContextModule then reactModule.createElement(view, {
+		tag = "size-full",
+		padding = { bottom = UDim.new(0, p3.keyboardHeight or 0) }
+	}, { Page = var11 }) else var11
 end

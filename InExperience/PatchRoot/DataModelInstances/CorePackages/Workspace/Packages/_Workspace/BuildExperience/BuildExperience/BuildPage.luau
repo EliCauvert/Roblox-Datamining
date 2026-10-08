@@ -58,9 +58,12 @@ local useBuildPageLayoutModule = require(script.Parent.utils.useBuildPageLayout)
 local useOnScreenKeyboardVisibleModule = require(script.Parent.utils.useOnScreenKeyboardVisible)
 local fFlagBuildPublishNavigationSheetModule = require(script.Parent.Flags.FFlagBuildPublishNavigationSheet)
 local fFlagBuildExperiencePrivateInvitesModule = require(script.Parent.Flags.FFlagBuildExperiencePrivateInvites)
+local fFlagBuildExperienceMyCreationsLongPressMenuModule = require(script.Parent.Flags.FFlagBuildExperienceMyCreationsLongPressMenu)
 local fFlagEnableBuildTabOverride = sharedFlagsModule.FFlagEnableBuildTabOverride
 local fFlagBuildExperienceAnalytics = sharedFlagsModule.FFlagBuildExperienceAnalytics
 local fFlagBuildExperienceSessionization = sharedFlagsModule.FFlagBuildExperienceSessionization
+local getAdsCampaignDeepLinkStoreModule = require(buildExperience.Stores.GetAdsCampaignDeepLinkStore)
+local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local fFlagBuildAdUpsellModule_1 = fFlagBuildAdUpsellModule or fFlagBuildExperienceMonetizationNativeUIModule
 local var1 = not fFlagEnableBuildTabOverride
 local buildEligibilityDialogModule = require(script.Parent.Components.BuildEligibilityDialog)
@@ -118,6 +121,40 @@ local _ = function(p3)
 	end, { p3 })
 end
 
+local function useHomeConfigurationPages(p3)
+	-- upvalues: reactModule (ref), fFlagBuildPublishNavigationSheetModule (ref), buildOverflowMenuScreensModule (ref)
+	local var4, var5 = reactModule.useState(nil)
+	local var6, var7 = reactModule.useState(false)
+	
+	return {
+		onOpenConfigurationPage = reactModule.useCallback(function(p4, p5)
+			-- upvalues: fFlagBuildPublishNavigationSheetModule (copy), var5 (ref), var7 (ref), buildOverflowMenuScreensModule (copy), p3 (ref)
+			if fFlagBuildPublishNavigationSheetModule and p4 == "publish" then
+				var5(p5)
+				var7(true)
+				
+				return
+			end
+			local var8 = buildOverflowMenuScreensModule.SCREEN_BY_PAGE[p4]
+			
+			if var8 == nil then
+				return
+			end
+			p3.navigate(var8, { target = p5 })
+		end, { p3 }),
+		publishSheetTarget = var4,
+		isPublishSheetOpen = var6,
+		onClosePublishSheet = reactModule.useCallback(function()
+			-- upvalues: var7 (ref)
+			var7(false)
+		end, {}),
+		navigateToPublishSubPage = reactModule.useCallback(function(p4, p5)
+			-- upvalues: p3 (ref)
+			p3.navigate(p4, { target = p5 })
+		end, { p3 })
+	}
+end
+
 local function BuildMonetizationScreen(p3)
 	-- upvalues: buildNavigationParamsModule (ref), reactModule (ref), roactNavigationModule (ref), buildOverflowMenuScreensModule (ref), chatSheetModule (ref)
 	local navigation = p3.navigation
@@ -162,7 +199,7 @@ local function BuildMonetizationScreen(p3)
 end
 
 local function BuildHomeScreen(p3)
-	-- upvalues: useBuildPageLayoutModule (ref), useNavigationFocus (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), t (ref), resumeBuildChatModule (ref), getSearchQueryStoreModule (ref), fullscreenPageWithSafeArea (ref), view (ref), buildPageHeaderModule (ref), myCreationsTabModule (ref)
+	-- upvalues: useBuildPageLayoutModule (ref), useNavigationFocus (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), t (ref), fFlagBuildExperienceMyCreationsLongPressMenuModule (ref), useHomeConfigurationPages (ref), fFlagBuildAdUpsellModule (ref), getAdsCampaignDeepLinkStoreModule (ref), sendBuildExperienceEventModule (ref), resumeBuildChatModule (ref), getSearchQueryStoreModule (ref), fullscreenPageWithSafeArea (ref), view (ref), buildPageHeaderModule (ref), myCreationsTabModule (ref), fFlagBuildPublishNavigationSheetModule (ref), var2 (ref)
 	local screenProps = p3.screenProps or {}
 	local navigation = p3.navigation
 	local var4 = useBuildPageLayoutModule()
@@ -175,8 +212,27 @@ local function BuildHomeScreen(p3)
 		-- upvalues: navigation (ref), t (copy)
 		navigation.navigate(t.BuildChat, { target = p4 })
 	end, { navigation })
+	local var7 = if fFlagBuildExperienceMyCreationsLongPressMenuModule then useHomeConfigurationPages(navigation) else nil
+	local var8 = if var7 ~= nil then nil else var7.publishSheetTarget
 	reactModule.useEffect(function()
-		-- upvalues: resumeBuildChatModule (copy), screenProps (ref), fallbackExperienceName (ref), var6 (ref)
+		-- upvalues: fFlagBuildAdUpsellModule (copy), getAdsCampaignDeepLinkStoreModule (copy), screenProps (ref), sendBuildExperienceEventModule (copy), resumeBuildChatModule (copy), fallbackExperienceName (ref), var6 (ref)
+		if fFlagBuildAdUpsellModule then
+			local var9 = getAdsCampaignDeepLinkStoreModule(false)
+			
+			if screenProps.resumeRequestId then
+				local var10 = if screenProps.adsCampaignIntent then screenProps.universeId else nil
+				
+				if var9.begin(screenProps.resumeRequestId, var10) and var10 ~= nil then
+					sendBuildExperienceEventModule("AD_CAMPAIGN_DEEP_LINK_RECEIVED", { universeId = screenProps.universeId }, { requestId = screenProps.resumeRequestId })
+				end
+			else
+				local request = var9.getRequest(false)
+				
+				if request ~= nil then
+					var9.finish(request.id)
+				end
+			end
+		end
 		return resumeBuildChatModule({
 			universeId = screenProps.universeId,
 			sessionId = screenProps.sessionId,
@@ -187,8 +243,10 @@ local function BuildHomeScreen(p3)
 		})
 	end, {
 		var6, screenProps.universeId, screenProps.sessionId,
-		screenProps.resumeRequestId, screenProps.creatorAgentChatStore,
-		screenProps.configurationStore, fallbackExperienceName
+		screenProps.resumeRequestId,
+		if fFlagBuildAdUpsellModule then screenProps.adsCampaignIntent else nil,
+		screenProps.creatorAgentChatStore, screenProps.configurationStore,
+		fallbackExperienceName
 	})
 	local searchQueryStore = screenProps.searchQueryStore or getSearchQueryStoreModule()
 	
@@ -223,10 +281,17 @@ local function BuildHomeScreen(p3)
 					searchQueryStore = screenProps.searchQueryStore,
 					isFocused = var5,
 					autoOpenNewGame = screenProps.universeId == nil and screenProps.sessionId == nil,
-					onOpenChat = var6
+					onOpenChat = var6,
+					onOpenConfigurationPage = if fFlagBuildExperienceMyCreationsLongPressMenuModule and var7 ~= nil then var7.onOpenConfigurationPage else nil
 				})
 			})
-		})
+		}),
+		PublishSheet = if fFlagBuildExperienceMyCreationsLongPressMenuModule and fFlagBuildPublishNavigationSheetModule and (var7 ~= nil and var8 ~= nil) and var8.universeId ~= nil then reactModule.createElement(var2, {
+			isOpen = var7.isPublishSheetOpen,
+			target = var8,
+			onClose = var7.onClosePublishSheet,
+			navigateToSubPage = var7.navigateToPublishSubPage
+		}) else nil
 	})
 end
 
@@ -701,7 +766,7 @@ local var8 = roactNavigationModule.createAppContainer(var7)
 local function BuildPage(p4)
 	-- upvalues: fFlagBuildExperienceSessionization (ref), var3 (ref), useBuildPageEligibilityModule (ref), var1 (ref), reactModule (ref), var7 (ref), var8 (ref), buildEligibilityDialogModule (ref), view (ref), loading (ref), iconSize (ref)
 	if fFlagBuildExperienceSessionization then
-		var3("NavigateTo_" .. p25.navigation.state.routeName)
+		var3("NavigateTo_" .. p30.navigation.state.routeName)
 	end
 	local var9 = if fFlagBuildExperienceSessionization then p4.navigation.getParam("extraProps", {}) else p4
 	local var10 = useBuildPageEligibilityModule.useBuildPageEligibility(var1)

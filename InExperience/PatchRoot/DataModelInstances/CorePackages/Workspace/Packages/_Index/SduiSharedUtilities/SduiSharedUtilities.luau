@@ -38,6 +38,7 @@ return {
 	end,
 	createSduiApiStore = require(script.createSduiApiStore),
 	getSduiApiStore = require(script.getSduiApiStore),
+	useDataHydrationAccountGeneration = if require(parent.SharedFlags).FFlagHomePageRefetchOnDataHydrationAccountReset then require(script.hooks.useDataHydrationAccountGeneration) else nil,
 	fetchSduiTemplates = if fFlagSduiClientDrivenTemplates then function(p1, p2)
 		return require(script.fetchSduiTemplates)(p1, p2)
 	end else nil,

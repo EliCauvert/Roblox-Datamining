@@ -1,6 +1,5 @@
 ﻿local parent = script.Parent.Parent.Parent.Parent
 local parent_1 = parent.Parent
-local UIBloxConfigModule = require(parent.UIBloxConfig)
 local roactModule = require(parent_1.Roact)
 local tModule = require(parent_1.t)
 local withStyleModule = require(parent.Core.Style.withStyle)
@@ -14,14 +13,14 @@ tileSelectionOverlay.validateProps = tModule.strictInterface({
 tileSelectionOverlay.defaultProps = { cornerRadius = UDim.new(0, 0) }
 
 function tileSelectionOverlay.render(p1)
-	-- upvalues: imagesModule (ref), withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref)
+	-- upvalues: imagesModule (ref), withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref)
 	local zIndex = p1.props.ZIndex
 	local cornerRadius = p1.props.cornerRadius
 	local selectOn = imagesModule["icons/actions/selectOn"]
 	local var1 = selectOn.ImageRectSize / imagesModule.ImagesResolutionScale
 	
 	return withStyleModule(function(p2)
-		-- upvalues: roactModule (copy), zIndex (ref), imageSetComponentModule (copy), selectOn (ref), UIBloxConfigModule (copy), var1 (ref), cornerRadius (ref)
+		-- upvalues: roactModule (copy), zIndex (ref), imageSetComponentModule (copy), selectOn (ref), var1 (ref), cornerRadius (ref)
 		local theme = p2.Theme
 		local tokens = p2.Tokens
 		
@@ -36,7 +35,7 @@ function tileSelectionOverlay.render(p1)
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(1, 0),
 				Image = selectOn,
-				Position = UDim2.new(1, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then -tokens.Size.Size_50 else -tokens.Global.Size_25, 0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_50 else tokens.Global.Size_25),
+				Position = UDim2.new(1, -tokens.Size.Size_50, 0, tokens.Size.Size_50),
 				Size = UDim2.new(0, var1.X, 0, var1.Y)
 			}),
 			UICorner = cornerRadius ~= UDim.new(0, 0) and roactModule.createElement("UICorner", { CornerRadius = cornerRadius }) or nil

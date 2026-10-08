@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Parent
+﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local parent = robloxSubscriptionPurchaseApp.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local view = foundationModule.View
@@ -6,13 +7,14 @@ local text = foundationModule.Text
 local badge = foundationModule.Badge
 local badgeVariant = foundationModule.Enums.BadgeVariant
 local useLocalization = require(parent.Localization).Hooks.useLocalization
+local fFlagRobloxPlusUpsellBannerUseTryItForFreeModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusUpsellBannerUseTryItForFree)
 
 return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), badge (ref), badgeVariant (ref), text (ref)
+	-- upvalues: useLocalization (ref), fFlagRobloxPlusUpsellBannerUseTryItForFreeModule (ref), reactModule (ref), view (ref), badge (ref), badgeVariant (ref), text (ref)
 	local var1 = useLocalization({
-		getFreeTrialText = "Feature.RobloxSubscription.Label.FreeTrialText",
 		subscribe = "Feature.RobloxSubscription.Action.Subscribe",
-		newBadge = "Feature.Catalog.Label.New"
+		newBadge = "Feature.Catalog.Label.New",
+		getFreeTrialText = if fFlagRobloxPlusUpsellBannerUseTryItForFreeModule then "Feature.RobloxSubscription.Action.TryItForFree" else "Feature.RobloxSubscription.Label.FreeTrialText"
 	})
 	
 	return if p1.shouldShowNewBadge then reactModule.createElement(view, {

@@ -1,15 +1,8 @@
-﻿local parent = script:FindFirstAncestor("MomentsCommon").Parent
-local appCommonLibModule = require(parent.AppCommonLib)
+﻿local appCommonLibModule = require(script:FindFirstAncestor("MomentsCommon").Parent.AppCommonLib)
 local isVRAppBuild = appCommonLibModule.IsVRAppBuild
 local isTenFootInterface = appCommonLibModule.isTenFootInterface
-local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
 
 return function()
-	-- upvalues: isVRAppBuild (ref), fFlagEnableLeftNavOnConsole (ref), isTenFootInterface (ref)
-	local var1 = not isVRAppBuild()
-	
-	if var1 then
-		var1 = not (fFlagEnableLeftNavOnConsole and isTenFootInterface())
-	end
-	return var1
+	-- upvalues: isVRAppBuild (ref), isTenFootInterface (ref)
+	return not isVRAppBuild() and not isTenFootInterface()
 end

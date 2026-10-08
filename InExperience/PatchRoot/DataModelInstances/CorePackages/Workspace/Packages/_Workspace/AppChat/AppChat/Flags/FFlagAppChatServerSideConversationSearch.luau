@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AppChatServerSideConversationSearch2", false)
+﻿return game:DefineFastFlag("AppChatServerSideConversationSearch3", false)

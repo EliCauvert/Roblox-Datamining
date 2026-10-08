@@ -42,6 +42,10 @@ return function(p4)
 		
 		if var1 ~= nil then
 			p4.onPick(var1)
+			
+			return
+		elseif p4.onMiss ~= nil then
+			p4.onMiss()
 		end
 	end
 	
@@ -52,10 +56,14 @@ return function(p4)
 				if not p6 and not p4.isBlocked() then
 					local var1 = raycast(p4.camera, p4.world, toScreenPoint(p5))
 					
-					if var1 == nil then
+					if var1 ~= nil then
+						p4.onPick(var1)
+						
+						return
+					elseif p4.onMiss == nil then
 						return
 					else
-						p4.onPick(var1)
+						p4.onMiss()
 						
 						return
 					end
@@ -92,6 +100,10 @@ return function(p4)
 			
 			if var3 ~= nil then
 				p4.onPick(var3)
+				
+				return
+			elseif p4.onMiss ~= nil then
+				p4.onMiss()
 			end
 		end)
 	}

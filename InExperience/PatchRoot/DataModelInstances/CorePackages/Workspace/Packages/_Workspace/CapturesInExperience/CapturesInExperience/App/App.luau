@@ -1,5 +1,6 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent
+local fFlagCapturesInExpUseMomentsCreationModule = require(parent.Flags.FFlagCapturesInExpUseMomentsCreation)
 local appStorageService = game:GetService("AppStorageService")
 local captureService = game:GetService("CaptureService")
 local localizationService = game:GetService("LocalizationService")
@@ -11,8 +12,9 @@ local starterGuiService = game:GetService("StarterGui")
 local appCommonLibModule = require(parent_1.AppCommonLib)
 local capturesCommonModule = require(parent_1.CapturesCommon)
 local dashModule = require(parent_1.Dash)
-local momentsCreationFlowModule = require(parent_1.MomentsCreationFlow)
+local var1 = if not fFlagCapturesInExpUseMomentsCreationModule then require(parent_1.MomentsCreationFlow) else nil
 local reactModule = require(parent_1.React)
+local roactModule = require(parent_1.Roact)
 local roduxModule = require(parent_1.Rodux)
 local signal = appCommonLibModule.Signal
 local analyticsServiceModule = require(parent.Analytics.AnalyticsService)
@@ -38,6 +40,7 @@ local makeVideoCaptureInProgressHandlerModule = require(parent.Utils.makeVideoCa
 local makeWrapWithProvidersModule = require(parent.Utils.makeWrapWithProviders)
 local menuClosedModule = require(parent.Actions.MenuClosed)
 local menuOpenedModule = require(parent.Actions.MenuOpened)
+local momentsCreationFlowClosedModule = require(parent.Actions.MomentsCreationFlowClosed)
 local networkingModule = require(parent.App.Networking)
 local onToggleActivationModule = require(parent.Utils.onToggleActivation)
 local onViewportSizeChanged = capturesCommonModule.Utils.onViewportSizeChanged
@@ -57,18 +60,12 @@ local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
 
 return {
 	createApp = function(p1)
-		-- upvalues: dashModule (ref), analyticsServiceModule (ref), appStorageService (ref), captureService (ref), localizationService (ref), notificationService (ref), playersService (ref), rbxAnalyticsService (ref), robloxReplicatedStorageService (ref), starterGuiService (ref), setupFireEventModule (ref), constantsModule (ref), getLocalUserIdModule (ref), roduxModule (ref), installReducerModule (ref), momentsCreationFlowModule (ref), networkingModule (ref), screenSizeModule (ref), serverTypeModule (ref), retrieveCapturesModule (ref), fFlagCreateMomentsToastModule (ref), checkMomentsEligibilityModule (ref), makeCaptureSavedHandlerModule (ref), fFlagCapturesVideoCaptureTriggerHandlerEnabledModule (ref), makeVideoCaptureInProgressHandlerModule (ref), getUserIdsFromStringModule (ref), capturesActivatedModule (ref), capturesDeactivatedModule (ref), serverTypeDetectedModule (ref), menuClosedModule (ref), menuOpenedModule (ref), takeCaptureModule (ref), fIntCapturesCoreGuiEventsPerMyriadModule (ref), eventNamesModule (ref), capturesCoreGuiEnabledModule (ref), capturesCoreGuiDisabledModule (ref), signal (ref), SSUIMetaLuaEngineFeature (ref), onViewportSizeChanged (ref), screenSizeChangedModule (ref), onToggleActivationModule (ref), makeWrapWithProvidersModule (ref), capturesPolicyModule (ref), reactModule (ref), captureManagerScreenModule (ref), captureOverlayModule (ref), carouselScreenModule (ref), captureServicePromptsModule (ref), capturesCoreUIModule (ref), capturesPageModule (ref), momentsCreationFlowScreenModule (ref)
+		-- upvalues: dashModule (ref), analyticsServiceModule (ref), appStorageService (ref), captureService (ref), localizationService (ref), notificationService (ref), playersService (ref), rbxAnalyticsService (ref), robloxReplicatedStorageService (ref), starterGuiService (ref), setupFireEventModule (ref), constantsModule (ref), getLocalUserIdModule (ref), installReducerModule (ref), networkingModule (ref), screenSizeModule (ref), serverTypeModule (ref), var1 (ref), roduxModule (ref), retrieveCapturesModule (ref), fFlagCreateMomentsToastModule (ref), checkMomentsEligibilityModule (ref), makeCaptureSavedHandlerModule (ref), fFlagCapturesVideoCaptureTriggerHandlerEnabledModule (ref), makeVideoCaptureInProgressHandlerModule (ref), getUserIdsFromStringModule (ref), capturesActivatedModule (ref), capturesDeactivatedModule (ref), serverTypeDetectedModule (ref), menuClosedModule (ref), menuOpenedModule (ref), takeCaptureModule (ref), fIntCapturesCoreGuiEventsPerMyriadModule (ref), eventNamesModule (ref), capturesCoreGuiEnabledModule (ref), capturesCoreGuiDisabledModule (ref), signal (ref), SSUIMetaLuaEngineFeature (ref), onViewportSizeChanged (ref), screenSizeChangedModule (ref), onToggleActivationModule (ref), makeWrapWithProvidersModule (ref), capturesPolicyModule (ref), roactModule (ref), fFlagCapturesInExpUseMomentsCreationModule (ref), parent_1 (ref), momentsCreationFlowClosedModule (ref), reactModule (ref), captureManagerScreenModule (ref), captureOverlayModule (ref), carouselScreenModule (ref), captureServicePromptsModule (ref), capturesCoreUIModule (ref), capturesPageModule (ref), momentsCreationFlowScreenModule (ref)
 		local t = {
-			_store = roduxModule.Store.new(roduxModule.combineReducers({
-				[constantsModule.RoduxKey] = installReducerModule(),
-				[momentsCreationFlowModule.Constants.RoduxKey] = momentsCreationFlowModule.installReducer(),
-				NetworkStatus = networkingModule.RoduxNetworking.installReducer(),
-				ScreenSize = screenSizeModule,
-				ServerType = serverTypeModule,
-				ShareLinks = networkingModule.ShareLinksRodux.installReducer()
-			}), {}, { roduxModule.thunkMiddleware })
+			_momentsCreationFlowDestroyingConnection = nil,
+			_momentsCreationFlowHandle = nil
 		}
-		local var1 = dashModule.join({
+		local var2 = dashModule.join({
 			AnalyticsService = analyticsServiceModule,
 			AppStorageService = appStorageService,
 			CaptureService = captureService,
@@ -79,35 +76,47 @@ return {
 			RobloxReplicatedStorage = robloxReplicatedStorageService,
 			StarterGui = starterGuiService
 		}, p1)
-		local var2 = setupFireEventModule({
-			analytics = var1.AnalyticsService,
+		local var3 = setupFireEventModule({
+			analytics = var2.AnalyticsService,
 			infoForAllEvents = {
-				isUnder13 = if var1.Players.LocalPlayer then var1.Players.LocalPlayer:GetUnder13() else nil,
+				isUnder13 = if var2.Players.LocalPlayer then var2.Players.LocalPlayer:GetUnder13() else nil,
 				pid = tostring(game.PlaceId),
 				source = constantsModule.AnalyticsSource,
-				uid = getLocalUserIdModule(var1.Players),
+				uid = getLocalUserIdModule(var2.Players),
 				universeId = tostring(game.GameId)
 			}
 		})
+		local t_1 = {
+			[constantsModule.RoduxKey] = installReducerModule(),
+			NetworkStatus = networkingModule.RoduxNetworking.installReducer(),
+			ScreenSize = screenSizeModule,
+			ServerType = serverTypeModule,
+			ShareLinks = networkingModule.ShareLinksRodux.installReducer()
+		}
+		
+		if var1 then
+			t_1[var1.Constants.RoduxKey] = var1.installReducer()
+		end
+		t._store = roduxModule.Store.new(roduxModule.combineReducers(t_1), {}, { roduxModule.thunkMiddleware })
 		t._store:dispatch(retrieveCapturesModule())
 		
 		if fFlagCreateMomentsToastModule then
 			t._store:dispatch(checkMomentsEligibilityModule(game.GameId))
 		end
-		var1.CaptureService.CaptureSavedInternal:Connect(makeCaptureSavedHandlerModule(t._store, var1, var2))
+		var2.CaptureService.CaptureSavedInternal:Connect(makeCaptureSavedHandlerModule(t._store, var2, var3))
 		
 		if fFlagCapturesVideoCaptureTriggerHandlerEnabledModule then
-			var1.CaptureService.VideoCaptureInProgress:Connect(makeVideoCaptureInProgressHandlerModule(t._store, var1, var2))
+			var2.CaptureService.VideoCaptureInProgress:Connect(makeVideoCaptureInProgressHandlerModule(t._store, var2, var3))
 		end
-		var1.AppStorageService:WhenLoaded(function()
-			-- upvalues: var1 (ref), constantsModule (copy), getUserIdsFromStringModule (copy), getLocalUserIdModule (copy), t (ref), capturesActivatedModule (copy), capturesDeactivatedModule (copy)
+		var2.AppStorageService:WhenLoaded(function()
+			-- upvalues: var2 (ref), constantsModule (copy), getUserIdsFromStringModule (copy), getLocalUserIdModule (copy), t (ref), capturesActivatedModule (copy), capturesDeactivatedModule (copy)
 			local ok, status = pcall(function()
-				-- upvalues: var1 (copy), constantsModule (copy)
-				return var1.AppStorageService:GetItem(constantsModule.CapturesActiveLocalStorageKey)
+				-- upvalues: var2 (copy), constantsModule (copy)
+				return var2.AppStorageService:GetItem(constantsModule.CapturesActiveLocalStorageKey)
 			end)
 			
 			if ok and status ~= "" then
-				if getUserIdsFromStringModule(status)[getLocalUserIdModule(var1.Players) or ""] then
+				if getUserIdsFromStringModule(status)[getLocalUserIdModule(var2.Players) or ""] then
 					t._store:dispatch(capturesActivatedModule())
 					
 					return
@@ -116,10 +125,10 @@ return {
 			end
 		end)
 		task.spawn(function()
-			-- upvalues: var1 (ref), t (ref), serverTypeDetectedModule (copy)
+			-- upvalues: var2 (ref), t (ref), serverTypeDetectedModule (copy)
 			local ok, status = pcall(function()
-				-- upvalues: var1 (copy)
-				return var1.RobloxReplicatedStorage:WaitForChild("GetServerType", 1e999):InvokeServer()
+				-- upvalues: var2 (copy)
+				return var2.RobloxReplicatedStorage:WaitForChild("GetServerType", 1e999):InvokeServer()
 			end)
 			
 			if ok then
@@ -143,18 +152,18 @@ return {
 		end
 		
 		local function maybeSendCoreGuiEvent(p2, p3)
-			-- upvalues: fIntCapturesCoreGuiEventsPerMyriadModule (copy), var2 (ref), eventNamesModule (copy)
+			-- upvalues: fIntCapturesCoreGuiEventsPerMyriadModule (copy), var3 (ref), eventNamesModule (copy)
 			if fIntCapturesCoreGuiEventsPerMyriadModule == 0 then return end
 			if fIntCapturesCoreGuiEventsPerMyriadModule <= Random.new():NextInteger(1, 10000) then return end
 			if p3 then
-				var2(eventNamesModule.CapturesCoreGuiEnabled, { allTypeChanged = p2 })
+				var3(eventNamesModule.CapturesCoreGuiEnabled, { allTypeChanged = p2 })
 				
 				return
 			end
-			var2(eventNamesModule.CapturesCoreGuiDisabled, { allTypeChanged = p2 })
+			var3(eventNamesModule.CapturesCoreGuiDisabled, { allTypeChanged = p2 })
 		end
 		
-		var1.StarterGui.CoreGuiChangedSignal:Connect(function(p2, p3)
+		var2.StarterGui.CoreGuiChangedSignal:Connect(function(p2, p3)
 			-- upvalues: maybeSendCoreGuiEvent (ref), t (ref), capturesCoreGuiEnabledModule (copy), capturesCoreGuiDisabledModule (copy)
 			if not (if p2 ~= Enum.CoreGuiType.All then p2 == Enum.CoreGuiType.Captures else true) then return end
 			maybeSendCoreGuiEvent(p2 == Enum.CoreGuiType.All, p3)
@@ -167,7 +176,7 @@ return {
 			t._store:dispatch(capturesCoreGuiDisabledModule())
 		end)
 		
-		if var1.StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Captures) then
+		if var2.StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Captures) then
 			t._store:dispatch(capturesCoreGuiEnabledModule())
 		else
 			t._store:dispatch(capturesCoreGuiDisabledModule())
@@ -180,22 +189,22 @@ return {
 		end
 		
 		t._store.changed:connect(function(p2, p3)
-			-- upvalues: constantsModule (copy), var1 (ref), getUserIdsFromStringModule (copy), getLocalUserIdModule (copy), dashModule (copy), t (ref)
+			-- upvalues: constantsModule (copy), var2 (ref), getUserIdsFromStringModule (copy), getLocalUserIdModule (copy), dashModule (copy), t (ref)
 			local isActive = p2[constantsModule.RoduxKey].IsActive
 			
 			if isActive ~= p3[constantsModule.RoduxKey].IsActive then
 				pcall(function()
-					-- upvalues: var1 (copy), constantsModule (copy), getUserIdsFromStringModule (copy), getLocalUserIdModule (copy), isActive (ref), dashModule (copy)
-					local var3 = getUserIdsFromStringModule(var1.AppStorageService:GetItem(constantsModule.CapturesActiveLocalStorageKey))
-					local players = getLocalUserIdModule(var1.Players) or ""
+					-- upvalues: var2 (copy), constantsModule (copy), getUserIdsFromStringModule (copy), getLocalUserIdModule (copy), isActive (ref), dashModule (copy)
+					local var4 = getUserIdsFromStringModule(var2.AppStorageService:GetItem(constantsModule.CapturesActiveLocalStorageKey))
+					local players = getLocalUserIdModule(var2.Players) or ""
 					
 					if isActive then
-						var3[players] = true
+						var4[players] = true
 					else
-						var3[players] = nil
+						var4[players] = nil
 					end
-					var1.AppStorageService:SetItem(constantsModule.CapturesActiveLocalStorageKey, table.concat(dashModule.keys(var3), ","))
-					var1.AppStorageService:Flush()
+					var2.AppStorageService:SetItem(constantsModule.CapturesActiveLocalStorageKey, table.concat(dashModule.keys(var4), ","))
+					var2.AppStorageService:Flush()
 				end)
 				t.onIsActiveChanged:fire(isActive)
 			end
@@ -234,24 +243,45 @@ return {
 		end)
 		
 		function t.onToggleActivationFromChrome(...)
-			-- upvalues: t (ref), onToggleActivationModule (copy), var2 (ref), eventNamesModule (copy)
-			onToggleActivationModule(t.getIsActive(), nil, var2, function(...)
+			-- upvalues: t (ref), onToggleActivationModule (copy), var3 (ref), eventNamesModule (copy)
+			onToggleActivationModule(t.getIsActive(), nil, var3, function(...)
 				-- upvalues: t (copy)
 				t._store:dispatch(...)
 			end, eventNamesModule.CapturesActivatedChrome, eventNamesModule.CapturesDeactivatedChrome)
 		end
 		
-		local var3 = makeWrapWithProvidersModule(t._store, var1)
-		local var4 = capturesPolicyModule.PolicyImplementation.read()
-		local var5 = if var4 then capturesPolicyModule.Mapper(var4).eligibleForCapturesFeature() else false
-		local var6 = if var4 then capturesPolicyModule.Mapper(var4).enableCapturesBulkManagement() else false
-		local t_1 = { fireAnalyticsEvent = var2 }
+		local var4 = makeWrapWithProvidersModule(t._store, var2)
+		local var5 = capturesPolicyModule.PolicyImplementation.read()
+		local var6 = if var5 then capturesPolicyModule.Mapper(var5).eligibleForCapturesFeature() else false
+		local var7 = if var5 then capturesPolicyModule.Mapper(var5).enableCapturesBulkManagement() else false
+		local t_2 = { fireAnalyticsEvent = var3 }
+		
+		local function unmountMomentsCreationFlow()
+			-- upvalues: t (ref), roactModule (copy), fFlagCapturesInExpUseMomentsCreationModule (copy), constantsModule (copy), parent_1 (copy), momentsCreationFlowClosedModule (copy)
+			local momentsCreationFlowDestroyingConnection = t._momentsCreationFlowDestroyingConnection
+			t._momentsCreationFlowDestroyingConnection = nil
+			
+			if momentsCreationFlowDestroyingConnection then
+				momentsCreationFlowDestroyingConnection:Disconnect()
+			end
+			local momentsCreationFlowHandle = t._momentsCreationFlowHandle
+			t._momentsCreationFlowHandle = nil
+			
+			if momentsCreationFlowHandle then
+				roactModule.unmount(momentsCreationFlowHandle)
+			end
+			if fFlagCapturesInExpUseMomentsCreationModule and t._store:getState()[constantsModule.RoduxKey].MomentsCreationFlow.IsOpen then
+				local momentsCreationModule = require(parent_1.MomentsCreation)
+				momentsCreationModule.resetCreationFlow(momentsCreationModule.Enums.CreationFlowState.Preview)
+				t._store:dispatch(momentsCreationFlowClosedModule())
+			end
+		end
 		
 		function t.mountCaptureManager(p2)
-			-- upvalues: var6 (ref), var5 (ref), t (ref), var3 (ref), t_1 (ref), reactModule (copy), captureManagerScreenModule (copy)
-			if not var6 then return end
-			if var5 then
-				t._captureManagerHandle = var3(p2, t_1, {
+			-- upvalues: var7 (ref), var6 (ref), t (ref), var4 (ref), t_2 (ref), reactModule (copy), captureManagerScreenModule (copy)
+			if not var7 then return end
+			if var6 then
+				t._captureManagerHandle = var4(p2, t_2, {
 					CaptureManager = reactModule.createElement(captureManagerScreenModule)
 				})
 				
@@ -260,9 +290,9 @@ return {
 		end
 		
 		function t.mountCaptureOverlay(p2)
-			-- upvalues: var5 (ref), reactModule (copy), captureOverlayModule (copy), t (ref), var3 (ref), t_1 (ref)
-			if var5 then
-				t._captureOverlayHandle = var3(p2, t_1, {
+			-- upvalues: var6 (ref), reactModule (copy), captureOverlayModule (copy), t (ref), var4 (ref), t_2 (ref)
+			if var6 then
+				t._captureOverlayHandle = var4(p2, t_2, {
 					CaptureOverlay = reactModule.createElement(captureOverlayModule)
 				})
 				
@@ -271,9 +301,9 @@ return {
 		end
 		
 		function t.mountCarousel(p2)
-			-- upvalues: var5 (ref), reactModule (copy), carouselScreenModule (copy), t (ref), var3 (ref), t_1 (ref)
-			if var5 then
-				t._carouselHandle = var3(p2, t_1, {
+			-- upvalues: var6 (ref), reactModule (copy), carouselScreenModule (copy), t (ref), var4 (ref), t_2 (ref)
+			if var6 then
+				t._carouselHandle = var4(p2, t_2, {
 					CarouselScreen = reactModule.createElement(carouselScreenModule)
 				})
 				
@@ -282,9 +312,9 @@ return {
 		end
 		
 		function t.mountCoreUI(p2, p3)
-			-- upvalues: var5 (ref), var2 (ref), t (ref), var3 (ref), reactModule (copy), captureServicePromptsModule (copy), capturesCoreUIModule (copy)
-			if var5 then
-				t._coreUiHandle = var3(p2, { chromeEnabled = p3, fireAnalyticsEvent = var2 }, {
+			-- upvalues: var6 (ref), var3 (ref), t (ref), var4 (ref), reactModule (copy), captureServicePromptsModule (copy), capturesCoreUIModule (copy)
+			if var6 then
+				t._coreUiHandle = var4(p2, { chromeEnabled = p3, fireAnalyticsEvent = var3 }, {
 					CaptureServicePrompts = reactModule.createElement(captureServicePromptsModule),
 					CapturesCoreUI = reactModule.createElement(capturesCoreUIModule)
 				}, "CapturesCoreUI")
@@ -294,9 +324,9 @@ return {
 		end
 		
 		function t.mountMenuPage(p2, p3, p4)
-			-- upvalues: var5 (ref), var2 (ref), t (ref), var3 (ref), reactModule (copy), capturesPageModule (copy)
-			if var5 then
-				t._menuPageHandle = var3(p2, { chromeEnabled = p4, fireAnalyticsEvent = var2 }, {
+			-- upvalues: var6 (ref), var3 (ref), t (ref), var4 (ref), reactModule (copy), capturesPageModule (copy)
+			if var6 then
+				t._menuPageHandle = var4(p2, { chromeEnabled = p4, fireAnalyticsEvent = var3 }, {
 					CapturesPage = reactModule.createElement(capturesPageModule, { closeSettingsMenu = p3 })
 				})
 				
@@ -305,14 +335,20 @@ return {
 		end
 		
 		function t.mountMomentsCreationFlow(p2)
-			-- upvalues: fFlagCreateMomentsToastModule (copy), var5 (ref), t (ref), var3 (ref), t_1 (ref), reactModule (copy), momentsCreationFlowScreenModule (copy)
+			-- upvalues: fFlagCreateMomentsToastModule (copy), var6 (ref), fFlagCapturesInExpUseMomentsCreationModule (copy), t (ref), unmountMomentsCreationFlow (ref), var4 (ref), t_2 (ref), reactModule (copy), momentsCreationFlowScreenModule (copy)
 			if not fFlagCreateMomentsToastModule then return end
-			if var5 then
-				t._momentsCreationFlowHandle = var3(p2, t_1, {
-					MomentsCreationFlowScreen = reactModule.createElement(momentsCreationFlowScreenModule)
-				})
-				
-				return
+			if not var6 then return end
+			if fFlagCapturesInExpUseMomentsCreationModule and t._momentsCreationFlowHandle then
+				unmountMomentsCreationFlow()
+			end
+			t._momentsCreationFlowHandle = var4(p2, t_2, {
+				MomentsCreationFlowScreen = reactModule.createElement(momentsCreationFlowScreenModule)
+			}, nil, {
+				withFoundationProvider = not fFlagCapturesInExpUseMomentsCreationModule
+			})
+			
+			if fFlagCapturesInExpUseMomentsCreationModule then
+				t._momentsCreationFlowDestroyingConnection = p2.Destroying:Connect(unmountMomentsCreationFlow)
 			end
 		end
 		

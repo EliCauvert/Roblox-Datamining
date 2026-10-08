@@ -6,7 +6,6 @@ local formatInlineIcon = chatUIPrimitivesModule.Utils.formatInlineIcon
 local escapeRichText = chatUIPrimitivesModule.Utils.escapeRichText
 local getReplyLabelDescriptorModule = require(parent.AppChat.getReplyLabelDescriptor)
 local getModeratedMaskTextModule = require(parent.AppChat.getModeratedMaskText)
-local fFlagChatModeratedMaskRandomLength = require(parent.SharedFlags).FFlagChatModeratedMaskRandomLength
 local _ = require(script.Parent.classifyMessage)
 local iconName = foundationModule.Enums.IconName
 local color = Color3.fromRGB(255, 255, 255)
@@ -33,8 +32,8 @@ local function getSystemIconAttributes(p1)
 end
 
 local _ = function(p1)
-	-- upvalues: fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref)
-	return if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(p1.messageId or p1.body) else string.gsub(p1.body, "[^%s]", "#")
+	-- upvalues: getModeratedMaskTextModule (ref)
+	return getModeratedMaskTextModule(p1.messageId or p1.body)
 end
 
 local _ = function(p1)
@@ -105,8 +104,8 @@ local function buildHiddenUser(p1, p2)
 end
 
 local function buildUserText(p1, p2)
-	-- upvalues: fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), escapeRichText (ref), computeNameColor (ref), color (ref)
-	local var1 = if not p1.moderated then if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(p1.messageId or p1.body) else string.gsub(p1.body, "[^%s]", "#") else escapeRichText(p1.body)
+	-- upvalues: getModeratedMaskTextModule (ref), escapeRichText (ref), computeNameColor (ref), color (ref)
+	local var1 = if p1.moderated then getModeratedMaskTextModule(p1.messageId or p1.body) else escapeRichText(p1.body)
 	local name = p2.name
 	
 	if name == nil or name == "" then

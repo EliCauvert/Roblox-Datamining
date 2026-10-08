@@ -5,11 +5,10 @@ local _ = require(robloxSubscriptionPurchaseApp.Enums.RobloxSubscriptionFlowComp
 local _ = require(robloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
 local _ = require(robloxSubscriptionPurchaseApp.Enums.ErrorReason)
 local _ = require(robloxSubscriptionPurchaseApp.types)
-local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
 local var1 = nil
 
 local var2 = function()
-	-- upvalues: signalsModule (ref), promptStateModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref)
+	-- upvalues: signalsModule (ref), promptStateModule (ref)
 	local var3, var4 = signalsModule.createSignal(promptStateModule.Unspecified)
 	local var5, var6 = signalsModule.createSignal(nil)
 	local var7, var8 = signalsModule.createSignal(false)
@@ -85,16 +84,12 @@ local var2 = function()
 			end
 		end,
 		setOnCtaOverride = function(value)
-			-- upvalues: fFlagRobloxPlusFAEFreeTrialModule (copy), var27 (write)
-			if fFlagRobloxPlusFAEFreeTrialModule then
-				var27 = value
-				
-				return
-			end
+			-- upvalues: var27 (write)
+			var27 = value
 		end,
 		getOnCtaOverride = function()
-			-- upvalues: fFlagRobloxPlusFAEFreeTrialModule (copy), var27 (write)
-			return if fFlagRobloxPlusFAEFreeTrialModule then var27 else nil
+			-- upvalues: var27 (write)
+			return var27
 		end
 	}
 end

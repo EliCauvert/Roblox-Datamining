@@ -5,7 +5,6 @@ local cryoModule = require(parent.Cryo)
 local UIBloxModule = require(parent.UIBlox)
 local useLayerCollector = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
 local useLocalization = require(parent.Localization).Hooks.useLocalization
-local fFlagChatLineReportingFocusFixesEnabled = require(parent.SharedFlags).FFlagChatLineReportingFocusFixesEnabled
 local constantsModule = require(chatLineReporting.Common.Constants)
 local chatLineReportInfoModule = require(chatLineReporting.Components.ChatLineReportInfo)
 local chatLineReportModalWindowModule = require(chatLineReporting.Components.ChatLineReportModalWindow)
@@ -38,7 +37,7 @@ local function createChildren(p1, _, p2, p3)
 end
 
 return function(p4)
-	-- upvalues: reactModule (ref), useLocalization (ref), constantsModule (ref), createChildren (ref), cryoModule (ref), useLayerCollector (ref), fFlagChatLineReportingFocusFixesEnabled (ref), chatLineReportModalWindowModule (ref), buttonType (ref), chatLineReportInfoModule (ref), empty (ref), scrollView (ref), scrollBarVisibility (ref), radioGroup (ref)
+	-- upvalues: reactModule (ref), useLocalization (ref), constantsModule (ref), createChildren (ref), cryoModule (ref), useLayerCollector (ref), chatLineReportModalWindowModule (ref), buttonType (ref), chatLineReportInfoModule (ref), empty (ref), scrollView (ref), scrollBarVisibility (ref), radioGroup (ref)
 	local var2, var3 = reactModule.useState(false)
 	local var4 = reactModule.useRef(nil)
 	local var5, var6 = reactModule.useState(0)
@@ -69,17 +68,14 @@ return function(p4)
 		end
 	end, { var7.current, absoluteSize })
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var10 (ref), constantsModule (copy), fFlagChatLineReportingFocusFixesEnabled (copy)
+		-- upvalues: var7 (ref), var10 (ref), constantsModule (copy)
 		if var7.current then
 			local scrollingFrame = var7.current:FindFirstChildWhichIsA("ScrollingFrame", true)
 			
 			if scrollingFrame then
 				var10.current = scrollingFrame
 				var10.current.CanvasPosition = Vector2.new(0, constantsModule.SelectionModalCanvasPositionTopPadding)
-				
-				if fFlagChatLineReportingFocusFixesEnabled then
-					var10.current.Selectable = false
-				end
+				var10.current.Selectable = false
 			end
 		end
 	end, { var7.current })

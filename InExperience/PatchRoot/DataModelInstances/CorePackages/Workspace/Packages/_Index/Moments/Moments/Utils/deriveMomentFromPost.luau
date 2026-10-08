@@ -1,4 +1,6 @@
-﻿local _ = require(script:FindFirstAncestor("Moments").Parent.MomentsTypes)
+﻿local parent = script:FindFirstAncestor("Moments").Parent
+local _ = require(parent.MomentsTypes)
+local fFlagMomentsAvatarLookTryOn = require(parent.SharedFlags).FFlagMomentsAvatarLookTryOn
 local t = {
 	TEXT_X_ALIGNMENT_LEFT = Enum.TextXAlignment.Left,
 	TEXT_X_ALIGNMENT_CENTER = Enum.TextXAlignment.Center,
@@ -78,7 +80,7 @@ local _ = function(value, p2)
 end
 
 return function(p3, p4)
-	-- upvalues: toTextOverlay (ref)
+	-- upvalues: toTextOverlay (ref), fFlagMomentsAvatarLookTryOn (ref)
 	local cloned = table.clone(p3.metadata)
 	local edits = cloned.edits
 	local t = {
@@ -175,6 +177,8 @@ return function(p3, p4)
 					if content.value.place_id > 0 then
 						cloned.placeId = content.value.place_id
 					end
+				elseif fFlagMomentsAvatarLookTryOn and content.type == "avatar_annotation" and content.value.outfit_id > 0 then
+					cloned.outfitId = content.value.outfit_id
 				end
 			end
 		end

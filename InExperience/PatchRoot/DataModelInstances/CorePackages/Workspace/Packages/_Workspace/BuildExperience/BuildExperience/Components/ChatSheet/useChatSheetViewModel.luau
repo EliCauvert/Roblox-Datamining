@@ -6,6 +6,7 @@ local chatTypesModule = require(buildExperience.Chat.chatTypes)
 local useChatPlaytestFooterModule = require(buildExperience.Chat.useChatPlaytestFooter)
 local useBuildPromptDraftModule = require(buildExperience.Chat.useBuildPromptDraft)
 local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
+local fFlagBuildExperienceDeveloperProductContextModule = require(buildExperience.Flags.FFlagBuildExperienceDeveloperProductContext)
 local useChatSessionCoreModule = require(buildExperience.Chat.useChatSessionCore)
 local _ = require(buildExperience.Components.BuildPillMenu.BuildPillMenuPortal)
 local getAssistantBuildStoreModule = require(buildExperience.Stores.GetAssistantBuildStore)
@@ -21,7 +22,7 @@ local fFlagBuildExperienceChatImageAttachments = sharedFlagsModule.FFlagBuildExp
 local function noop() end
 
 return function(p1)
-	-- upvalues: noop (ref), getAssistantBuildStoreModule (ref), signalsReactModule (ref), getCreatorAgentResumeStoreModule (ref), getCurrentExperienceProjectModule (ref), useChatSessionCoreModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), useBuildPromptDraftModule (ref), useChatPlaytestFooterModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), getPlayButtonStoreModule (ref), reactModule (ref), chatTypesModule (ref), fFlagBuildExperienceChatImageAttachments (ref), fFlagBuildExperienceAnalytics (ref)
+	-- upvalues: noop (ref), getAssistantBuildStoreModule (ref), signalsReactModule (ref), getCreatorAgentResumeStoreModule (ref), getCurrentExperienceProjectModule (ref), useChatSessionCoreModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), useBuildPromptDraftModule (ref), fFlagBuildExperienceDeveloperProductContextModule (ref), useChatPlaytestFooterModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), getPlayButtonStoreModule (ref), reactModule (ref), chatTypesModule (ref), fFlagBuildExperienceChatImageAttachments (ref), fFlagBuildExperienceAnalytics (ref)
 	local onClose = p1.onClose or noop
 	local var1 = p1.isOpen == nil or p1.isOpen
 	local var2 = signalsReactModule.useSignalState(getAssistantBuildStoreModule().getIsDisabled)
@@ -38,7 +39,7 @@ return function(p1)
 	})
 	
 	if fFlagBuildExperienceMonetizationNativeUIModule then
-		useBuildPromptDraftModule(universeId, p1.sessionId, var5.setComposerText, var5.sendMessage, var1 and not var2)
+		useBuildPromptDraftModule(universeId, p1.sessionId, var5.setComposerText, var5.sendMessage, var1 and not var2, if fFlagBuildExperienceDeveloperProductContextModule then var5 else nil)
 	end
 	local var6 = useChatPlaytestFooterModule(var5, "ChatSheetPlaytestCta")
 	

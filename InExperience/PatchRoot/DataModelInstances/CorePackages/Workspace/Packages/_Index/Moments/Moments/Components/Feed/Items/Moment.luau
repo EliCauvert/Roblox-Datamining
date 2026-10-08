@@ -11,6 +11,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
 local getFFlagMomentsRenderPostAssetsModule = require(parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
+local fFlagMomentsAvatarLookTryOn = sharedFlagsModule.FFlagMomentsAvatarLookTryOn
 local makeRecommendationAttributionModule = require(moments.Analytics.makeRecommendationAttribution)
 local toMediaItemModule = require(moments.Components.Feed.Media.toMediaItem)
 local commentsModule = require(moments.Components.Comments)
@@ -48,7 +49,7 @@ return {
 			return momentAttribution(p1.moment)
 		end,
 		render = function(p1, _)
-			-- upvalues: getFFlagMomentsRenderPostAssetsModule (ref), toMediaItemModule (ref), reactModule (ref), momentMediaView (ref), getMomentsPreferencesStoreModule (ref), fFlagMomentsOptimisticProfilePending (ref), momentsTypesModule (ref), sharedFlagsModule (ref), commentsModule (ref), momentItemModule (ref), createMediaSurface (ref)
+			-- upvalues: getFFlagMomentsRenderPostAssetsModule (ref), toMediaItemModule (ref), reactModule (ref), momentMediaView (ref), getMomentsPreferencesStoreModule (ref), fFlagMomentsAvatarLookTryOn (ref), fFlagMomentsOptimisticProfilePending (ref), momentsTypesModule (ref), sharedFlagsModule (ref), commentsModule (ref), momentItemModule (ref), createMediaSurface (ref)
 			local moment = p1.moment
 			
 			if moment == nil then
@@ -79,6 +80,7 @@ return {
 					creatorId = moment.creatorId,
 					placeId = moment.metadata.placeId or 0,
 					universeId = moment.metadata.universeId or 0,
+					outfitId = if fFlagMomentsAvatarLookTryOn then moment.metadata.outfitId else nil,
 					isSponsored = moment.metadata.partnerUploadType == "influencer",
 					description = moment.metadata.description,
 					isModerated = moment.isModerated == true,

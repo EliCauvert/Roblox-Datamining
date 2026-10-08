@@ -20,7 +20,6 @@ local getDeepValueModule = require(profilePlatform.Utils.getDeepValue)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
 local networkingGamesModule = require(profilePlatform.Networking.NetworkingGames)
-local IXPService = game:GetService("IXPService")
 local roactUtilsModule = require(parent.RoactUtils)
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
@@ -30,15 +29,13 @@ local roactAnalyticsCommonGameEvents = require(parent.RoactServiceTags).RoactAna
 local useRoactService = require(parent.RobloxAppHooks).useRoactService
 local appPage = require(parent.RobloxAppEnums).AppPage
 local contentProviderService = game:GetService("ContentProvider")
-local fStringSocialProfileCurrentlyPlayingLayerModule = require(profilePlatform.Flags.FStringSocialProfileCurrentlyPlayingLayer)
-local fFlagProfileCurrentlyPlayingIXPEnabledModule = require(profilePlatform.Flags.FFlagProfileCurrentlyPlayingIXPEnabled)
 local fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule = require(profilePlatform.Flags.FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnail)
 local fFlagProfileCurrentlyPlayingEDPFromCardModule = require(profilePlatform.Flags.FFlagProfileCurrentlyPlayingEDPFromCard)
 local fFlagProfilePlatformImproveGameDetailsAnalytics = require(parent.SharedFlags).FFlagProfilePlatformImproveGameDetailsAnalytics
 local fFlagJoinabilityCTARefactor = require(parent.SharedFlags).FFlagJoinabilityCTARefactor
 
 return function(p1)
-	-- upvalues: useTokens (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useDispatch (ref), fFlagProfileCurrentlyPlayingEDPFromCardModule (ref), fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule (ref), useNavigation (ref), useProfileWrapperContextModule (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), fFlagJoinabilityCTARefactor (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), networkingGamesModule (ref), useSelector (ref), getDeepValueModule (ref), appPage (ref), openGameDetails (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), contentProviderService (ref), fFlagProfileCurrentlyPlayingIXPEnabledModule (ref), IXPService (ref), fStringSocialProfileCurrentlyPlayingLayerModule (ref), horizontalPageMargin (ref), view (ref), stateLayerAffordance (ref), image (ref), skeleton (ref), radius (ref), text (ref)
+	-- upvalues: useTokens (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useDispatch (ref), fFlagProfileCurrentlyPlayingEDPFromCardModule (ref), fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule (ref), useNavigation (ref), useProfileWrapperContextModule (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), fFlagJoinabilityCTARefactor (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), networkingGamesModule (ref), useSelector (ref), getDeepValueModule (ref), appPage (ref), openGameDetails (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), contentProviderService (ref), horizontalPageMargin (ref), view (ref), stateLayerAffordance (ref), image (ref), skeleton (ref), radius (ref), text (ref)
 	local var1 = useTokens()
 	local var2 = useProfileJsonComponentModule(enumsModule.Components.CurrentlyPlaying)
 	local var3 = useDispatch()
@@ -106,12 +103,6 @@ return function(p1)
 	local var17 = getDeepValueModule(var2, "ageRecommendation.ageRecommendationSummary.ageRecommendation.displayNameWithHeaderShort")
 	local var18 = if var9 ~= "" then var15 == Enum.AssetFetchStatus.Loading else true
 	local var19 = if fFlagJoinabilityCTARefactor and not var18 then if var2.joinability == "Joinable" then var7.playTogether elseif var2.joinability == "NotJoinable" then var7.playTogetherSoon else nil else nil
-	reactModule.useEffect(function()
-		-- upvalues: fFlagProfileCurrentlyPlayingIXPEnabledModule (copy), universeId (ref), IXPService (copy), fStringSocialProfileCurrentlyPlayingLayerModule (copy)
-		if fFlagProfileCurrentlyPlayingIXPEnabledModule and universeId then
-			IXPService:LogFlagLinkedUserLayerExposure(fStringSocialProfileCurrentlyPlayingLayerModule)
-		end
-	end, { universeId })
 	
 	return if universeId then reactModule.createElement(horizontalPageMargin, {
 		backgroundTransparency = 1,

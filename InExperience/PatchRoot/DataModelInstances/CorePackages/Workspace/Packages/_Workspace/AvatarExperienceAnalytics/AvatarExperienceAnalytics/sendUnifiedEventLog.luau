@@ -3,6 +3,7 @@ local parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
 local cryoModule = require(parent.Cryo)
 local isRunningInStudio = require(parent.AppCommonLib).isRunningInStudio
 local debugPanelModule = require(parent.DebugPanel)
+local deviceTier = require(parent.Devices).DeviceTier
 local analyticsServiceModule = require(script.Parent.AnalyticsService)
 local unifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
 local unifiedEventPageStoreModule = require(script.Parent.Store.UnifiedEventPageStore)
@@ -13,10 +14,12 @@ local fFlagAXSendUnifiedEventLogWithInstance = avatarExperienceFlagsModule.FFlag
 local fFlagAXDebugPanelImpressed = avatarExperienceFlagsModule.FFlagAXDebugPanelImpressed
 local fFlagAXUnifiedEventPageContext = avatarExperienceFlagsModule.FFlagAXUnifiedEventPageContext
 local fFlagAXUnifiedEventCounters = avatarExperienceFlagsModule.FFlagAXUnifiedEventCounters
+local fFlagAXUnifiedEventDeviceTier = avatarExperienceFlagsModule.FFlagAXUnifiedEventDeviceTier
 local AXSendUnifiedEventsInStudio = game:DefineFastFlag("AXSendUnifiedEventsInStudio", false)
+local var1 = if fFlagAXUnifiedEventDeviceTier then deviceTier.GetDeviceMemoryTier() else nil
 
 return function(p1, p2, p3)
-	-- upvalues: fFlagAXUnifiedEventPageContext (ref), sessionService (ref), unifiedEventPageStoreModule (ref), cryoModule (ref), fFlagAXDebugPanelImpressed (ref), debugPanelModule (ref), fFlagAXSendUnifiedEventLogWithInstance (ref), unifiedEventLogConstantsModule (ref), isRunningInStudio (ref), AXSendUnifiedEventsInStudio (ref), fFlagAXUnifiedEventCounters (ref), AXUnifiedEventFilterModule (ref), unifiedEventCounterAggregatorModule (ref), analyticsServiceModule (ref)
+	-- upvalues: fFlagAXUnifiedEventPageContext (ref), sessionService (ref), unifiedEventPageStoreModule (ref), cryoModule (ref), fFlagAXUnifiedEventDeviceTier (ref), var1 (ref), fFlagAXDebugPanelImpressed (ref), debugPanelModule (ref), fFlagAXSendUnifiedEventLogWithInstance (ref), unifiedEventLogConstantsModule (ref), isRunningInStudio (ref), AXSendUnifiedEventsInStudio (ref), fFlagAXUnifiedEventCounters (ref), AXUnifiedEventFilterModule (ref), unifiedEventCounterAggregatorModule (ref), analyticsServiceModule (ref)
 	local level2aSessionTag
 	if fFlagAXUnifiedEventPageContext then
 		level2aSessionTag = sessionService:GetSessionTag("level2a")
@@ -26,6 +29,9 @@ return function(p1, p2, p3)
 			navigationOpaquePage = pageFields.navigationOpaquePage,
 			sessionTag = if level2aSessionTag == nil or level2aSessionTag == "" then unifiedEventPageStoreModule.UNKNOWN else level2aSessionTag
 		}, p1)
+	end
+	if fFlagAXUnifiedEventDeviceTier then
+		p1 = cryoModule.Dictionary.join({ deviceTier = var1 or "Unknown" }, p1)
 	end
 	if fFlagAXDebugPanelImpressed then
 		debugPanelModule.AnalyticsFeed.notify({

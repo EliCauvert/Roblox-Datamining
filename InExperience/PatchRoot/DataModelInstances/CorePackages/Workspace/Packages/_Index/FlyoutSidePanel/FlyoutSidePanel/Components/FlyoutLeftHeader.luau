@@ -80,10 +80,7 @@ return function(p1)
 				titleText = p1.titleText,
 				isAlternateEntryPointEnabled = p1.isAlternateEntryPointEnabled
 			}) else nil,
-			TitleOrRobloxLogoFrame = if (fFlagEnableHomeRobloxLogo or fFlagEnableConsoleRobloxLogo or p1.isRobloxLogoEnabled) and var5 then if p1.useHeaderLogo then reactModule.createElement(require(script.Parent.HeaderLogo), {
-				onWordmarkActivated = p1.onWordmarkActivated,
-				isSystemThemeEnabled = p1.isSystemThemeEnabled
-			}) else reactModule.createElement(foundationModule.Image, {
+			TitleOrRobloxLogoFrame = if (fFlagEnableHomeRobloxLogo or fFlagEnableConsoleRobloxLogo or p1.isRobloxLogoEnabled) and var5 then if p1.useHeaderLogo then reactModule.createElement(require(script.Parent.HeaderLogo)) else reactModule.createElement(foundationModule.Image, {
 				LayoutOrder = 2,
 				tag = "size-full-full",
 				Image = "icons/logo/letterform",

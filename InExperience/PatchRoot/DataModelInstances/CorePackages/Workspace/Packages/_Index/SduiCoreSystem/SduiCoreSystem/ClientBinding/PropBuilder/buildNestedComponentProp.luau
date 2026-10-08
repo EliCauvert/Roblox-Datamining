@@ -11,10 +11,9 @@ local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
 local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
 local sduiParseHelpersModule = require(sduiCoreSystem.SduiParseHelpers)
 local _ = require(sduiCoreSystem.SduiComponentType)
-local fFlagSduiLazyNestedComponentProp = require(parent.SharedFlags).FFlagSduiLazyNestedComponentProp
 
 local function buildNestedComponentProp(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: sduiPropUtilsModule (ref), buildConfigForComponent (ref), signalsModule (ref), buildInputsForNestedComponentModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), fFlagSduiLazyNestedComponentProp (ref), propResultCategory (ref), buildNestedComponentProp (ref)
+	-- upvalues: sduiPropUtilsModule (ref), buildConfigForComponent (ref), signalsModule (ref), buildInputsForNestedComponentModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), propResultCategory (ref), buildNestedComponentProp (ref)
 	local currentComponentType = p5.currentComponentType
 	local currentParserName = p5.currentParserName
 	
@@ -39,12 +38,12 @@ local function buildNestedComponentProp(p1, p2, p3, p4, p5, p6, p7)
 			return t
 		end), p5, p6) else buildConfigForComponent(var1, p4, p5, p6, nil, p3)
 		
-		if fFlagSduiLazyNestedComponentProp and p7 then
+		if p7 then
 			return var2, propResultCategory.Literal
 		end
 		return var2, propResultCategory.NestedComponentConfig
 	elseif p1 == "conditional" then
-		return sduiPropUtilsModule.generateConditionalPropValue(p2, p3, p5, p6, p4, buildNestedComponentProp, nil, if fFlagSduiLazyNestedComponentProp then not p7 else true), propResultCategory.PropSignal
+		return sduiPropUtilsModule.generateConditionalPropValue(p2, p3, p5, p6, p4, buildNestedComponentProp, nil, not p7), propResultCategory.PropSignal
 	end
 	error(`Could not build prop. Unknown propDefinitionType: {p1}`)
 end

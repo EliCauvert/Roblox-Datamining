@@ -1,22 +1,18 @@
 ﻿local appComposition = script:FindFirstAncestor("AppComposition")
 local parent = appComposition.Parent
 local breakpoint = require(parent.Foundation).Enums.Breakpoint
-local hardwareSafeAreaInsets = require(parent.Responsive).HardwareSafeAreaInsets
 local _ = require(appComposition.AppCompositionTypes)
-local appCompositionEnumsModule = require(appComposition.AppCompositionEnums)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableLeftNavOnConsole = sharedFlagsModule.FFlagEnableLeftNavOnConsole
-local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
-local regionName = appCompositionEnumsModule.RegionName
+local fFlagEnableSplitPane = require(parent.SharedFlags).FFlagEnableSplitPane
+local regionName = require(appComposition.AppCompositionEnums).RegionName
 
 local function getBaseConfig(p1, p2)
-	-- upvalues: breakpoint (ref), fFlagEnableLeftNavOnConsole (ref), hardwareSafeAreaInsets (ref)
-	local t
+	-- upvalues: breakpoint (ref)
 	local _ = nil
 	
 	if p1 == breakpoint.XSmall then
 		local size300 = p2.Size.Size_300
-		t = {
+		
+		return {
 			columns = 3,
 			margin = size300,
 			gutter = p2.Gutter.Small,
@@ -24,39 +20,35 @@ local function getBaseConfig(p1, p2)
 		}
 	elseif p1 == breakpoint.Small then
 		local small = p2.Margin.Small
-		t = {
+		
+		return {
 			columns = 6,
 			margin = small,
 			gutter = p2.Gutter.Medium,
 			carouselPeek = 2 * small
 		}
-	else
-		t = if p1 == breakpoint.Medium then {
-			columns = 12,
-			carouselPeek = 0,
-			margin = p2.Size.Size_800,
-			gutter = p2.Gutter.Large
-		} elseif p1 == breakpoint.Large then {
-			columns = 12,
-			carouselPeek = 0,
-			margin = p2.Size.Size_800,
-			gutter = p2.Gutter.Large
-		} elseif p1 == breakpoint.XLarge then {
-			columns = 12,
-			carouselPeek = 0,
-			margin = p2.Size.Size_1600,
-			gutter = p2.Gutter.XLarge
-		} else {
-			columns = 12,
-			carouselPeek = 0,
-			margin = p2.Size.Size_1600,
-			gutter = p2.Gutter.XLarge
-		}
 	end
-	if not fFlagEnableLeftNavOnConsole and hardwareSafeAreaInsets.hasExtraPlatformInset() then
-		t.margin = hardwareSafeAreaInsets.deviceInsets().left
-	end
-	return t
+	return if p1 == breakpoint.Medium then {
+		columns = 12,
+		carouselPeek = 0,
+		margin = p2.Size.Size_800,
+		gutter = p2.Gutter.Large
+	} elseif p1 == breakpoint.Large then {
+		columns = 12,
+		carouselPeek = 0,
+		margin = p2.Size.Size_800,
+		gutter = p2.Gutter.Large
+	} elseif p1 == breakpoint.XLarge then {
+		columns = 12,
+		carouselPeek = 0,
+		margin = p2.Size.Size_1600,
+		gutter = p2.Gutter.XLarge
+	} else {
+		columns = 12,
+		carouselPeek = 0,
+		margin = p2.Size.Size_1600,
+		gutter = p2.Gutter.XLarge
+	}
 end
 
 return {

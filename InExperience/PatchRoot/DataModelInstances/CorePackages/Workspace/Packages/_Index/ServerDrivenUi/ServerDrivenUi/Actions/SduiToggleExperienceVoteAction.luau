@@ -13,13 +13,14 @@ local getSduiClientPageScope = sduiCoreSystemModule.getSduiClientPageScope
 local gameVote = discoveryAnalyticsModule.Events.gameVote
 local getSduiPageEntrySnackbarStore = require(parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
 local getFFlagEdpPlayerFeedbackEnabled = sharedFlagsModule.GetFFlagEdpPlayerFeedbackEnabled
+local fFlagLuaAppAddUniverseIdToEngagementEvents = sharedFlagsModule.FFlagLuaAppAddUniverseIdToEngagementEvents
 
 local function _(p1)
 	return if p1 == true then "UpVoted" elseif p1 == false then "DownVoted" else "NotVoted"
 end
 
 return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), playersService (ref), gameVote (ref), getFFlagEdpPlayerFeedbackEnabled (ref), getSduiClientPageScope (ref), signalsModule (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref)
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), playersService (ref), gameVote (ref), fFlagLuaAppAddUniverseIdToEngagementEvents (ref), getFFlagEdpPlayerFeedbackEnabled (ref), getSduiClientPageScope (ref), signalsModule (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref)
 	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
@@ -47,14 +48,13 @@ return function(p1, _, p2, _)
 	local var2 = votesStore.getUserVote(universeId).data(false)
 	local var3 = if var2 then var2.userVote else nil
 	local var4 = if var3 == voteDirection then nil else voteDirection
-	local t = {
+	gameVote({
 		uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
-		placeId = tostring(placeId)
-	}
-	local var5 = var4
-	t.vote = if var5 == true then "UpVoted" elseif var5 == false then "DownVoted" else "NotVoted"
-	t.prevVote = if var3 == true then "UpVoted" elseif var3 == false then "DownVoted" else "NotVoted"
-	gameVote(t, ctx)
+		placeId = tostring(placeId),
+		vote = if var4 == true then "UpVoted" elseif var4 == false then "DownVoted" else "NotVoted",
+		prevVote = if var3 == true then "UpVoted" elseif var3 == false then "DownVoted" else "NotVoted",
+		universeId = if fFlagLuaAppAddUniverseIdToEngagementEvents then universeId else nil
+	}, ctx)
 	
 	if getFFlagEdpPlayerFeedbackEnabled() and placeId then
 		game.getUserVoteFeedbackMetadataStore(false).clearItem(placeId)
@@ -63,34 +63,34 @@ return function(p1, _, p2, _)
 			getSduiClientPageScope(p2.configKey).set("showPlayerFeedback", false)
 		end
 	end
-	local var6 = votesStore.updateUserVote(universeId, var4)
-	local t_1 = {}
-	t_1.dispose = signalsModule.createEffect(function(p3)
-		-- upvalues: var6 (ref), p2 (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy), getFFlagEdpPlayerFeedbackEnabled (copy), placeId (ref), game (copy), getSduiClientPageScope (copy), t_1 (ref)
-		local var7 = var6(p3)
+	local var5 = votesStore.updateUserVote(universeId, var4)
+	local t = {}
+	t.dispose = signalsModule.createEffect(function(p3)
+		-- upvalues: var5 (ref), p2 (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy), getFFlagEdpPlayerFeedbackEnabled (copy), placeId (ref), game (copy), getSduiClientPageScope (copy), t (ref)
+		local var6 = var5(p3)
 		
-		if var7 == nil then return end
-		if var7.type == "error" then
+		if var6 == nil then return end
+		if var6.type == "error" then
 			local configKey = p2.configKey
 			
 			if configKey then
-				local var8 = "Feature.Toast.VoteError.Default"
-				local reasonForNotVoteable = var7.reasonForNotVoteable
+				local var7 = "Feature.Toast.VoteError.Default"
+				local reasonForNotVoteable = var6.reasonForNotVoteable
 				
 				if reasonForNotVoteable == "PlayGame" then
-					var8 = "Feature.Toast.VoteError.PlayGame"
+					var7 = "Feature.Toast.VoteError.PlayGame"
 				elseif reasonForNotVoteable == "FloodCheckThresholdMet" then
-					var8 = "Feature.Toast.VoteError.FloodCheckThresholdMet"
+					var7 = "Feature.Toast.VoteError.FloodCheckThresholdMet"
 				elseif reasonForNotVoteable == "AssetNotVoteable" then
-					var8 = "Feature.Toast.VoteError.AssetNotVoteable"
+					var7 = "Feature.Toast.VoteError.AssetNotVoteable"
 				end
 				getSduiPageEntrySnackbarStore().show(configKey, {
-					title = p2.dependencies.localization:Format(var8),
+					title = p2.dependencies.localization:Format(var7),
 					icon = foundationModule.Enums.IconName.TriangleExclamation
 				})
 			end
-		elseif var7.type == "success" then
-			if getFFlagEdpPlayerFeedbackEnabled() and var7.userVote ~= nil and placeId then
+		elseif var6.type == "success" then
+			if getFFlagEdpPlayerFeedbackEnabled() and var6.userVote ~= nil and placeId then
 				game.getUserVoteFeedbackMetadataStore(false).getAndFetchUserVoteFeedbackMetadata(placeId)
 				
 				if p2.configKey then
@@ -98,11 +98,11 @@ return function(p1, _, p2, _)
 				end
 			end
 		end
-		local dispose = t_1.dispose
+		local dispose = t.dispose
 		
 		if dispose then
 			dispose()
-			t_1.dispose = nil
+			t.dispose = nil
 		end
 	end)
 end

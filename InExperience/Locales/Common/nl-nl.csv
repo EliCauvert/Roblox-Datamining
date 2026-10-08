@@ -89,6 +89,8 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Je e-mailadres is
 Authentication.Login.WeChat.AntiAddictionText,"Boycot slechte ervaringen, weiger illegale ervaringen. Wees voorzichtig en zorg dat je niet bedrogen wordt. Ervaringen bezoeken is goed voor je hersenen, maar te veel ervaringen bezoeken kan je gezondheid schaden. Let op de tijd die je aan ervaringen besteed en zorg voor een gezonde levensstijl."
 Authentication.SignUp.Action.ApplyOnNextRespawn,Toepassen bij de volgende respawn
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.Create,Maken
+Authentication.SignUp.Action.CreateAccountSentenceCase,Account aanmaken
 Authentication.SignUp.Action.ExitModalLeave,Afsluiten
 Authentication.SignUp.Action.RespawnNow,Nu respawnen
 Authentication.SignUp.Action.StartPlay,Beginnen met spelen
@@ -96,15 +98,18 @@ Authentication.SignUp.Button.OKCaptialized,Oké
 Authentication.SignUp.Button.RetryLogIn,Opnieuw proberen inloggen
 Authentication.SignUp.Description.AccountAlreadyLinked,Je account op {platformAccountName} is al gekoppeld aan een Roblox-account. Probeer opnieuw in te loggen.
 Authentication.SignUp.Description.BirthdayHint,Datum invoeren
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"Door een account aan te maken, ga je akkoord met onze {startTermsTag}Gebruiksvoorwaarden{endTermsTag}, inclusief arbitrage, en erken je ons {startPrivacyTag}Privacybeleid{endPrivacyTag}. Als je jonger bent dan 18, moet je ouder of voogd toestemming geven voor je account en akkoord gaan met onze Gebruiksvoorwaarden."
 Authentication.SignUp.Description.Try,Proberen
 Authentication.SignUp.Description.UsernameChanged,"Alles is geregeld! Je account is klaar en gekoppeld aan {platform}. Respawn nu om je bijgewerkte gebruikersnaam in het spel te zien, anders wordt deze de volgende keer toegepast."
 Authentication.SignUp.Description.UsernameUnchanged,Gelukt! Je account is klaar en gekoppeld aan{platform}. Chat met vrienden en speel miljoenen Roblox-spellen.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Je Roblox-account wordt gekoppeld aan je account op {platform}. Je kunt de koppeling op elk moment ongedaan maken via het scherm Instellingen. Er kan een afkoelperiode zijn voordat je kunt koppelen aan een ander account op {platform}. Door op {ctaButton} te klikken, ga je akkoord met de Gebruiksvoorwaarden, inclusief de arbitrageclausule, en erken je het Privacybeleid."
+Authentication.SignUp.Header.CloseWithoutFinishing,Afsluiten zonder af te ronden?
 Authentication.SignUp.Header.OneLastThing,Nog één ding
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Je Roblox-account instellen
 Authentication.SignUp.Heading.CountryCodeSelector,Land selecteren
 Authentication.SignUp.Heading.RetryLogIn,
 Authentication.SignUp.Label.Birthday,Verjaardag
+Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} jaar)
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,Dag
 Authentication.SignUp.Label.EnterYourEmail,Voer je e-mailadres in
@@ -143,6 +148,7 @@ Authentication.SignUp.Response.PasswordComplexity,Maak een complexer wachtwoord 
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Gebruikersnaam moet eerst worden ingesteld.
 Authentication.SignUp.Subtitle.AddYourBirthday,Voeg je verjaardag toe om je Roblox-account te maken.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Je voortgang wordt overgenomen wanneer je de instelling voltooit.
+Authentication.SignUp.Subtitle.YoureAlmostThere,"Je bent er bijna. Als je nu afsluit, wordt je account niet volledig aangemaakt en kun je Roblox niet spelen."
 Authentication.TwoStepVerification.Action.GoToSecurity,Instellingen
 Authentication.TwoStepVerification.Label.TwoStepRequired,Voor deze transactie is tweestapsverificatie vereist. Ga naar Instellingen > Beveiliging om de transactie met tweestapsverificatie uit te voeren.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Te veel pogingen. Probeer het later opnieuw.
@@ -411,7 +417,7 @@ CommonUI.Features.Label.Connections,Connecties
 CommonUI.Features.Label.ControllerBar.HoldPrefix,Ingedrukt houden
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,om te spelen
-CommonUI.Features.Label.CreateGames,Maken
+CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,Ervaringen
 CommonUI.Features.Label.GiftCards,Cadeaubonnen kopen
@@ -1526,6 +1532,7 @@ Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Naam mag alleen letters, cijfers en spaties bevatten"
 Feature.Avatar.Label.CountSelected,{itemCount} geselecteerd
 Feature.Avatar.Label.Creations,Creaties
+Feature.Avatar.Label.Current,Huidig
 Feature.Avatar.Label.CurrentlyWearing,Momenteel gedragen
 Feature.Avatar.Label.DefaultBody,Standaardlichaam
 Feature.Avatar.Label.DeleteSetBody,"Als je deze set verwijdert, worden de outfits erin niet verwijderd."
@@ -1972,6 +1979,10 @@ Feature.Build.Analytics.Description.PayerConversion,De conversie van betalende g
 Feature.Build.Analytics.Description.PlaythroughRate,Het playthrough-percentage is het percentage bezoeken waarbij een volledige speelsessie is voltooid. Hogere percentages wijzen erop dat spelers je ervaring gemakkelijk toegankelijk vinden en het de moeite waard vinden om te voltooien.
 Feature.Build.Analytics.Description.TotalPlaytime,De totale speeltijd is de som van de tijd die alle spelers gedurende de periode in je ervaring hebben doorgebracht. Een toenemende speeltijd duidt meestal op boeiendere sessies.
 Feature.Build.Analytics.DurationHours,{number} uur
+Feature.Build.Analytics.Goal.EarnRobux,
+Feature.Build.Analytics.Goal.FirstImpression,Een goede eerste indruk maken
+Feature.Build.Analytics.Goal.GetMorePlayers,Bereik meer spelers
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,Zorg dat spelers terugkomen
 Feature.Build.Analytics.KeyStats,Belangrijkste statistieken
 Feature.Build.Analytics.LastMonth,Afgelopen maand
 Feature.Build.Analytics.LastWeek,
@@ -2003,9 +2014,12 @@ Feature.Build.Analytics.Summary.TotalPlaytime,Totaal aantal uren dat spelers in 
 Feature.Build.Analytics.Title.Arppu,ARPPU (Gemiddelde omzet per betalende gebruiker)
 Feature.Build.Analytics.Title.ConcurrentUsers,Totaal aantal spelers
 Feature.Build.Analytics.Title.D1Retention,Retentie (dag 1)
+Feature.Build.Analytics.Title.D7Retention,Retentie (7 dagen)
 Feature.Build.Analytics.Title.DailyActiveUsers,Dagelijks actieve gebruikers
+Feature.Build.Analytics.Title.NewUserSessionTime,Sessietijd van nieuwe gebruiker
 Feature.Build.Analytics.Title.PayerConversion,Conversie betalende gebruikers/spelers
 Feature.Build.Analytics.Title.PlaythroughRate,Playthrough-percentage
+Feature.Build.Analytics.Title.RobuxSpent,
 Feature.Build.Analytics.Title.TotalPlaytime,Totale speeltijd
 Feature.Build.Analytics.Visits,Bezoeken
 Feature.Build.Content.NewGame,Nieuw spel
@@ -2062,6 +2076,7 @@ Feature.Build.Description.ShopButton,Een winkeltoegangspunt toevoegen
 Feature.Build.Description.ShortAdCampaign,Een snelle manier om te zien wat spelers van je spel vinden.
 Feature.Build.Description.StopBuild,"Dit verzoek is nog in uitvoering. Als je nu stopt, wordt het niet voltooid en moet je het opnieuw verzenden."
 Feature.Build.Description.UpdateDeveloperProduct,Ontwikkelaarsproduct {PRODUCT_ID} bijwerken.
+Feature.Build.Description.UseAdCreditsInAdsManager,Je moet naar Ads Manager gaan om ze te gebruiken.
 Feature.Build.Error.AdForbidden,Je account of spel kan nu geen advertentie weergeven. Neem contact op met ondersteuning als je denkt dat dit een fout is.
 Feature.Build.Error.AdInsufficientFunds,Je hebt niet genoeg Robux om deze advertentie te maken. Koop meer Robux en probeer het opnieuw.
 Feature.Build.Error.AdInternalError,
@@ -2385,6 +2400,7 @@ Feature.Build.Title.RevertLastChange,Laatste wijziging terugzetten?
 Feature.Build.Title.StopBuild,Bouwen stoppen?
 Feature.Build.Title.Tasks,Taken
 Feature.Build.Title.TurnActivity,Activiteit in chatgesprek
+Feature.Build.Title.UseYourAdCredits,Gebruik je advertentietegoed
 Feature.Build.Title.VersionHistory,Versiegeschiedenis
 Feature.Build.Title.VersionInfo,Versie-informatie
 Feature.Build.Title.VersionNumber,Versie {VERSION}
@@ -2816,6 +2832,7 @@ Feature.Catalog.Title.Checkout.UnavailableItems,
 Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle,Avatar dragen?
 Feature.Catalog.Title.CheckoutPlural, {count} items afrekenen
 Feature.Catalog.Title.CheckoutSingular,
+Feature.Catalog.Title.Explore,Ontdekken
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,Onderste laag vervangen?
 Feature.Catalog.Title.RentalFtuxText,Huur om een item 3 dagen uit te proberen
 Feature.Catalog.Toast.AddedToFavorites,Toegevoegd aan favorieten
@@ -3444,16 +3461,23 @@ Feature.Groups.Message.NotInAnyGroups,Je bent van geen enkele community lid.
 Feature.Groups.Message.PinLocked,Je kunt deze actie niet uitvoeren met een vergrendelde PIN. Ontgrendel je PIN op de pagina Accountinstellingen.
 Feature.Groups.Modal.ContentTextHigh,"Verifieer je account om lid te worden van deze community.
 
-1. Ga naar Accountinformatie > Mijn leeftijd verifiëren
+1. Ga naar Accountinformatie > Identiteitsverificatie
 2. Voltooi het verificatieproces"
 Feature.Groups.Modal.ContentTextLow,"Verifieer je account om lid te worden van deze community.
 
 1. Ga naar Accountinformatie
 2. Kies een verificatieoptie:
-    - Telefoon toevoegen EN E-mail toevoegen
-    - Mijn leeftijd verifiëren
+    - Telefoon toevoegen
+    - E-mail toevoegen
+    - Identiteitsverificatie
 3. Voltooi het verificatieproces"
-Feature.Groups.Modal.ContentTextMedium,
+Feature.Groups.Modal.ContentTextMedium,"Verifieer je account om lid te worden van deze community.
+
+1. Ga naar Accountinformatie
+2. Kies een verificatieoptie:
+    - Telefoon toevoegen EN e-mail toevoegen
+    - Identiteitsverificatie
+3. Voltooi het verificatieproces"
 Feature.Groups.Notification.FailedToFollow,Kan profiel niet volgen. Probeer het later opnieuw.
 Feature.Groups.Notification.FailedToJoin,Lid worden van community mislukt. Probeer het later opnieuw.
 Feature.Groups.Notification.FailedToLoad,Kan community niet laden. Probeer het later opnieuw.
@@ -3527,6 +3551,7 @@ Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Door Robux te
 Feature.InExperienceShop.Label.BonusItem,Bonusitem
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Eindigt over {timeRemaining}
+Feature.InExperienceShop.Label.FreeTrial,Gratis proefperiode
 Feature.InExperienceShop.Label.NoDescription,Geen beschrijving
 Feature.InExperienceShop.Label.OfferEndTime,{offer} eindigt over {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Dit is een voorbeeld van je winkel in Roblox Studio. Spelers zien dit voorbeeld niet.
@@ -3538,6 +3563,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} minuten
 Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minuut
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconden
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 seconde
+Feature.InExperienceShop.Label.Trial,Proefperiode
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Je hebt met {ROBUX_AMOUNT} Robux gekocht
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Weet je zeker dat je dit item permanent uit je inventaris wilt verwijderen? Als je van gedachten verandert, moet je het opnieuw verdienen in een ervaring."
 Feature.Item.Label.DeleteItemUndercase,Item verwijderen
@@ -3551,12 +3577,16 @@ Feature.Moments.Action.AddSticker,Sticker toevoegen
 Feature.Moments.Action.AddText,Tekst toevoegen
 Feature.Moments.Action.AddVoice,Stem toevoegen
 Feature.Moments.Action.Back,
+Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentShowLess,Minder weergeven
+Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
 Feature.Moments.Action.CreateVoiceover,Voice-over maken
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.DiscardChange,Wijziging verwijderen
 Feature.Moments.Action.Done,
+Feature.Moments.Action.Edit,
 Feature.Moments.Action.Expand,Uitvouwen
 Feature.Moments.Action.GenerateText,Tekst genereren
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Niet nuttig
@@ -3572,6 +3602,7 @@ Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
+Feature.Moments.Action.RetryLoadingComments,Opnieuw proberen reacties te laden
 Feature.Moments.Action.Return,Terug naar galerij
 Feature.Moments.Action.ReturnToEditing,Terug naar bewerken
 Feature.Moments.Action.SaveVoiceover,
@@ -3594,9 +3625,35 @@ Feature.Moments.Description.StayFriendly,Laten we het vriendelijk houden
 Feature.Moments.Description.TooManyUploads,Je hebt vandaag al te veel video's geüpload. Probeer het morgen nog een keer.
 Feature.Moments.Disclaimer.EveryoneMoments,Iedereen in Momenten kan zien wat er is gepubliceerd
 Feature.Moments.Label.All,
+Feature.Moments.Label.AllowComments,Reacties toestaan
 Feature.Moments.Label.AttemptingJoinExperience,Je probeert deel te nemen aan {placeName}. Dit kan een paar seconden duren.
 Feature.Moments.Label.CaptureLibrary,Jouw opnamebibliotheek
 Feature.Moments.Label.ChooseVoice,Stem kiezen
+Feature.Moments.Label.CommentAuthorFallback,Gebruiker {userId}
+Feature.Moments.Label.CommentAuthorUnknown,Onbekende gebruiker
+Feature.Moments.Label.CommentDeleteFailed,Kan reactie niet verwijderen
+Feature.Moments.Label.CommentNotAllowed,Je kunt niet reageren op dit moment.
+Feature.Moments.Label.CommentPostFailed,Je reactie kon niet worden geplaatst. Probeer het opnieuw.
+Feature.Moments.Label.CommentPostOutcomeUnknown,We kunnen niet bevestigen of je laatste reactie is geplaatst. Controleer de reacties voordat je opnieuw verzendt.
+Feature.Moments.Label.CommentRateLimited,Je reageert te snel. Probeer het later opnieuw.
+Feature.Moments.Label.CommentRejectedByFilter,Je reactie is niet geplaatst. Pas deze aan en probeer het opnieuw.
+Feature.Moments.Label.CommentSendStatusUnknown,Verzendstatus onbekend
+Feature.Moments.Label.CommentSending,Sturen...
+Feature.Moments.Label.CommentSignInRequired,Meld je opnieuw aan om een reactie te plaatsen.
+Feature.Moments.Label.CommentTimestampDays,{count} d
+Feature.Moments.Label.CommentTimestampHours,{count} u
+Feature.Moments.Label.CommentTimestampMinutes,{count} m
+Feature.Moments.Label.CommentTimestampMonths,{count} mnd
+Feature.Moments.Label.CommentTimestampNow,nu
+Feature.Moments.Label.CommentTimestampWeeks,{count} w
+Feature.Moments.Label.CommentTimestampYears,{count} j
+Feature.Moments.Label.CommentingUnavailable,Reageren is nu niet mogelijk. Probeer het later opnieuw.
+Feature.Moments.Label.CommentsDisabled,Reacties zijn uitgeschakeld
+Feature.Moments.Label.CommentsReadOnly,Reacties zijn alleen-lezen
+Feature.Moments.Label.CommentsTurnedOff,Reacties zijn uitgeschakeld voor dit moment.
+Feature.Moments.Label.CommentsUnavailable,Reacties zijn niet beschikbaar
+Feature.Moments.Label.DeleteCommentBody,Deze reactie wordt permanent verwijderd.
+Feature.Moments.Label.DeleteCommentTitle,Reactie verwijderen?
 Feature.Moments.Label.DeleteMomentBody,Je kunt een moment dat is verwijderd niet meer terughalen.
 Feature.Moments.Label.DeleteMomentTitle,Moment verwijderen?
 Feature.Moments.Label.DeleteVoiceoverBody,Hierdoor worden je tekst en je voice-over gewist. Je kunt op elk moment opnieuw beginnen.
@@ -3608,6 +3665,7 @@ Feature.Moments.Label.FeedEndTitle,Je bent weer helemaal bij
 Feature.Moments.Label.FeedFailedToLoad,Feed kon niet worden geladen
 Feature.Moments.Label.FeedMyMoments,Mijn momenten
 Feature.Moments.Label.FeedTrending,
+Feature.Moments.Label.FirstCommentInvite,Nog geen reacties. Reageer als eerste!
 Feature.Moments.Label.HowToUseCaptureTitle,Zo gebruik je een opname
 Feature.Moments.Label.LinkCopied,Link gekopieerd
 Feature.Moments.Label.LinkCopyFailed,Link kon niet worden gekopieerd.
@@ -3616,12 +3674,14 @@ Feature.Moments.Label.MomentDeletedBody,
 Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,Er is iets misgegaan.
 Feature.Moments.Label.MomentFailedToPostTitle,Moment kon niet worden gepost
+Feature.Moments.Label.MomentNoLongerAvailable,Dit moment is niet meer beschikbaar.
 Feature.Moments.Label.MomentPublishedBody,Het publiceren van je moment is geslaagd.
 Feature.Moments.Label.MomentPublishedTitle,Moment gepubliceerd
 Feature.Moments.Label.MomentUnavailable,Moment niet beschikbaar
 Feature.Moments.Label.MomentUnavailableDefault,Dit moment is niet beschikbaar.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NoCommentsYet,Nog geen reacties
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Je bent voorlopig weer helemaal bij
 Feature.Moments.Label.Photos,Foto's
 Feature.Moments.Label.PostDeleted,Moment verwijderd
@@ -3662,6 +3722,10 @@ Feature.Moments.Label.VoiceLimitReachedBody,Wacht even en probeer het nog een ke
 Feature.Moments.Label.VoiceModerationError,Je script moet voldoen aan de veiligheidsregels
 Feature.Moments.Label.VoicePlaceholder,Voer het script van je voice-over in. De tekenlimiet is {maxCount} tekens
 Feature.Moments.Label.VoiceTimeoutBody,De tijdslimiet voor het genereren van de voice-over is bereikt.
+Feature.Moments.Label.WriteComment,Schrijf een reactie
+Feature.Moments.Title.Comments,
+Feature.Moments.Title.CommentsWithCappedCount,Reacties ({count}+)
+Feature.Moments.Title.CommentsWithCount,Reacties ({count})
 Feature.Moments.Title.GenerateTextFeedbackReason,Wat is er misgegaan?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment maken afsluiten?
@@ -3764,10 +3828,17 @@ Feature.Parents.Title.EnterParentEmailV2,Voer het e-mailadres van je ouder in
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,Van zoekopdrachten
+Feature.PlayerSearchResults.Label.NewUsername,Nieuwe gebruikersnaam
 Feature.PlayerSearchResults.Label.Previously,Eerder
 Feature.PlayerSearchResults.Label.ThisIsYou,Dit ben jij
+Feature.PlayerSearchResults.Label.You,Jij
+Feature.PlayerSearchResults.Label.YouAreConnections,Jullie zijn connecties
 Feature.PlayerSearchResults.Label.YouAreFollowing,Je volgt
+Feature.PlayerSearchResults.Label.YouAreFriends,Jullie zijn vrienden
+Feature.PrivateServers.Action.CreatePrivateServer,Privéserver maken
+Feature.PrivateServers.Action.FreeWithBlackbird,Gratis met Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Aankopen van privéservers worden niet ondersteund in Studio.
+Feature.PrivateServers.Description.VipServersNotSupported,Deze game ondersteunt geen privéservers.
 Feature.Profile.Action.AboutThisProfile,Over dit profiel
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4020,6 +4091,7 @@ Feature.RobloxSubscription.Description.JoinEarly,Doe eerder mee met Plus
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} heeft je uitgenodigd voor Plus. Jullie krijgen allebei {amount} Robux wanneer je Plus afsluit.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Door op {201C}{ctaText} te klikken{201D}, ga je akkoord met de <a href=""{termsUrl}"">Abonnementsvoorwaarden van Roblox</a>. Er worden elke maand automatisch kosten in rekening gebracht totdat je opzegt."
 Feature.RobloxSubscription.Heading.ReferralEntry,Deel Plus om {amount} Robux te krijgen
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Word lid van Plus om {amount} Robux te krijgen
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,"Word lid van Plus, krijg"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Gratis privéservers
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4036,6 +4108,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 maand gratis
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} gratis,{boldEnd} daarna {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,maand
 Feature.RobloxSubscription.Label.months,maanden
+Feature.RobloxSubscription.Message.AlreadySubscribed,Je hebt al Plus. Deze link is voor nieuwe leden. Deel je eigen link om vrienden uit te nodigen en beloningen te ontvangen.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Ontvang 1 gratis week Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,Goed nieuws
 Feature.RobloxSubscription.Title.GenericError,
@@ -4280,8 +4353,19 @@ Feature.SongDetails.Action.ReportAudio,Audio melden
 Feature.SongDetails.Label.InappropriateAudio,Ongepaste audio
 Feature.SongDetails.Label.InappropriateThumbnail,Ongepaste miniatuur
 Feature.SongDetails.Label.SongPreview,Voorbeeld nummer
+Feature.SplitPane.EditAvatarButtonText,
 Feature.SplitPane.Label.CollapseAvatar,Avatar inklappen
 Feature.SplitPane.Label.ExpandAvatar,Avatar uitklappen
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,Rondleiding voltooien
+Feature.SplitPane.Tour.Button.SkipTour,Rondleiding overslaan
+Feature.SplitPane.Tour.Step1.Description.Collapsed,Opgeslagen avatars zijn nu zichtbaar op de startpagina. Vouw deze ruimte uit om ze te bekijken.
+Feature.SplitPane.Tour.Step1.Description.Expanded,Opgeslagen avatars zijn nu zichtbaar op de startpagina. Draai ze rond of zoom in om elk detail te zien.
+Feature.SplitPane.Tour.Step1.Title,Jezelf bekijken op de startpagina
+Feature.SplitPane.Tour.Step2.Description,Kies hoe je eruit wilt zien. Wissel tussen je opgeslagen avatars vlak voordat je aan een spel begint.
+Feature.SplitPane.Tour.Step2.Title,Wijzig je look op elk gewenst moment
+Feature.SplitPane.Tour.Step3.Description,Verberg deze ruimte wanneer je wilt om je te concentreren op het ontdekken van nieuwe spellen. Je opgeslagen avatar blijft hier.
+Feature.SplitPane.Tour.Step3.Title,Kies wat je ziet
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Anderen toevoegen
 Feature.Squads.Action.ConnectToVoice,Verbinding maken met spraak
@@ -5015,7 +5099,7 @@ InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,{experience_name} i
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name} is toegevoegd aan het startscherm
 InstantApps.Shortcuts.Label.TryAgain,
 InstantApps.Shortcuts.Label.ViewShortcut,Snelkoppeling bekijken
-Notifications.NotificationStream.Bundle.ShowLess,Minder weergeven
+Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} meer
 Notifications.NotificationStream.Label.AllCaughtUp,Je bent weer helemaal bij!
 Notifications.NotificationStream.Label.Notifications,

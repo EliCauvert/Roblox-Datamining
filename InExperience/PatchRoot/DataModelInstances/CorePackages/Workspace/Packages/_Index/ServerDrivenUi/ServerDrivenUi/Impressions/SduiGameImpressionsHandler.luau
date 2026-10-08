@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local parent = serverDrivenUi.Parent
 local cryoModule = require(parent.Cryo)
 local sendGameImpressions = require(parent.GameCollections).SendGameImpressions
 local appPage = require(parent.RobloxAppEnums).AppPage
@@ -6,14 +7,12 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrors = sduiCoreSystemModule.SduiErrors
 local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
 local sduiParsers = sduiCoreSystemModule.SduiParsers
-local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
 local fFlagSduiSearchResultsPageEnabled = require(parent.SharedFlags).FFlagSduiSearchResultsPageEnabled
 local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local fFlagLuaAppSponsoredGamePreviewVideo = require(parent.SharedFlags).FFlagLuaAppSponsoredGamePreviewVideo
 local fFlagLuaAppSduiPassSortSubId = require(parent.SharedFlags).FFlagLuaAppSduiPassSortSubId
 local t = {}
-
-local var1 = function(p1)
+local var1 = if require(parent.SharedFlags).FFlagSduiForwardAnalyticsDataToGameClick then require(serverDrivenUi.Analytics.filterAndStringifyAnalyticsData) else function(p1)
 	if not p1 or type(p1) ~= "table" then
 		return nil
 	end
@@ -28,7 +27,7 @@ local var1 = function(p1)
 end
 
 return function(p2, p3, p4, p5, p6)
-	-- upvalues: sduiErrors (ref), fFlagSduiFixSearchTelemetry (ref), t (ref), cryoModule (ref), var1 (ref), sduiParsers (ref), fFlagLuaAppSponsoredGamePreviewVideo (ref), appPage (ref), fFlagSduiSearchResultsPageEnabled (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), sduiParseHelpers (ref), fFlagLuaAppSduiPassSortSubId (ref)
+	-- upvalues: sduiErrors (ref), fFlagSduiFixSearchTelemetry (ref), t (ref), cryoModule (ref), var1 (write), sduiParsers (ref), fFlagLuaAppSponsoredGamePreviewVideo (ref), appPage (ref), fFlagSduiSearchResultsPageEnabled (ref), sendGameImpressions (ref), sduiParseHelpers (ref), fFlagLuaAppSduiPassSortSubId (ref)
 	if not p5 then
 		p2.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogGameImpressions, {
 			name = "SduiGameImpressionsHandler",
@@ -81,7 +80,7 @@ return function(p2, p3, p4, p5, p6)
 				seeAllFlag = if fFlagSduiSearchResultsPageEnabled then tonumber(p5.seeAllFlag) or 0 else 0,
 				sortPos = p5.collectionPosition,
 				gameSetTypeId = tostring(p5.collectionId)
-			}, p5.itemsPerRow, p6, if fFlagLuaAppAddComponentTypeToSearchImpressions then p5.isWideTiles or false else nil, if fFlagLuaAppAddComponentTypeToSearchImpressions then var6 else nil)
+			}, p5.itemsPerRow, p6, p5.isWideTiles or false, var6)
 			
 			return
 		elseif p2.appPage == appPage.ExperienceDetail or p2.appPage == appPage.GameDetail then

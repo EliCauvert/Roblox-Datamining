@@ -6,6 +6,7 @@
 	leaveExperience = require(script.leaveExperience),
 	launchPlaytestWithLoadingState = require(script.launchPlaytestWithLoadingState),
 	playtestExperience = require(script.playtestExperience),
+	PlaytestRejoin = require(script.PlaytestRejoin),
 	releaseAnyFocus = require(script.releaseAnyFocus),
 	useUpdatePlaytestSettingsUpsell = require(script.useUpdatePlaytestSettingsUpsell),
 	useTrustedFriendsPlaytestUpsell = require(script.useTrustedFriendsPlaytestUpsell),

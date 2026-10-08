@@ -19,10 +19,11 @@ local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlag
 local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
+local fFlagLuaAppHomeMomentVideoFallback = require(parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 local var1 = game:DefineFastInt("VideoPlayerPlaybackEndThresholdInMs", 100) / 1000
 
 return function(p1)
-	-- upvalues: fFlagLuaAppEdpMediaGalleryFullScreen (ref), reactModule (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), runService (ref), reportWarning (ref), loggingProtocolModule (ref), videoLoggerModule (ref), var1 (ref), responsiveModule (ref), videoActions (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), fFlagLuaAppVideoTileDisableActivation (ref), loadableVideoFrameModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppVideoTileHideCenterPlayButton (ref), roundIconButtonModule (ref), videoPlayerBottomOverlayModule (ref)
+	-- upvalues: fFlagLuaAppEdpMediaGalleryFullScreen (ref), reactModule (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), runService (ref), reportWarning (ref), loggingProtocolModule (ref), videoLoggerModule (ref), var1 (ref), responsiveModule (ref), videoActions (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), fFlagLuaAppVideoTileDisableActivation (ref), loadableVideoFrameModule (ref), fFlagLuaAppHomeMomentVideoFallback (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppVideoTileHideCenterPlayButton (ref), roundIconButtonModule (ref), videoPlayerBottomOverlayModule (ref)
 	local showMuteButton = p1.showMuteButton or fFlagLuaAppEdpMediaGalleryFullScreen and (p1.showPlayButton or p1.showProgressBar)
 	local var2, var3 = reactModule.useState(false)
 	local var4, var5 = reactModule.useState(p1.muted)
@@ -302,6 +303,7 @@ return function(p1)
 		Corner = if p1.cornerRadius then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) }) else nil,
 		Video = reactModule.createElement(loadableVideoFrameModule, {
 			video = p1.video,
+			accessContext = if fFlagLuaAppHomeMomentVideoFallback then p1.accessContext else nil,
 			thumbnail = p1.thumbnail,
 			thumbnailComponentOverride = if fFlagLuaAppSduiVideoThumbnail then p1.thumbnailComponentOverride else nil,
 			shouldStartPlayback = p1.shouldStartPlayback,

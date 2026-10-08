@@ -106,6 +106,8 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Địa chỉ emai
 Authentication.Login.WeChat.AntiAddictionText,"Tẩy chay trò chơi xấu, không chơi trò chơi bị bẻ khóa. Chú ý để tự bảo vệ mình và không bị lừa. Chơi trò chơi có tác động tốt tới não bộ của bạn nhưng chơi quá nhiều trò chơi có thể ảnh hướng xấu tới sức khỏe của bạn. Hãy quản lý thời gian của bạn hiệu quả và tận hưởng lối sống lành mạnh."
 Authentication.SignUp.Action.ApplyOnNextRespawn,Áp dụng cho lần hồi sinh tiếp theo
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.Create,Tạo
+Authentication.SignUp.Action.CreateAccountSentenceCase,Tạo tài khoản
 Authentication.SignUp.Action.ExitModalLeave,Thoát
 Authentication.SignUp.Action.RespawnNow,Hồi sinh ngay
 Authentication.SignUp.Action.StartPlay,Bắt đầu chơi
@@ -113,15 +115,18 @@ Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Thử đăng nhập lại
 Authentication.SignUp.Description.AccountAlreadyLinked,Tài khoản dùng cho {platformAccountName} đã được liên kết với một tài khoản Roblox. Vui lòng thử đăng nhập lại.
 Authentication.SignUp.Description.BirthdayHint,Nhập ngày
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"Khi tạo tài khoản, bạn đồng ý với {startTermsTag}Điều khoản{endTermsTag} của chúng tôi (bao gồm điều khoản trọng tài) và xác nhận {startPrivacyTag}Chính sách quyền riêng tư{endPrivacyTag} của chúng tôi. Nếu bạn dưới 18 tuổi, cha mẹ hoặc người giám hộ của bạn phải cho phép bạn tạo tài khoản và đồng ý với Điều khoản của chúng tôi."
 Authentication.SignUp.Description.Try,Thử
 Authentication.SignUp.Description.UsernameChanged,"Mọi thứ đã sẵn sàng! Tài khoản của bạn đã sẵn sàng và được liên kết với {platform}. Hãy hồi sinh ngay để xem tên tài khoản mới của bạn trong trò chơi, nếu không thay đổi sẽ áp dụng cho lần tới."
 Authentication.SignUp.Description.UsernameUnchanged,Thành công rồi! Tài khoản của bạn đã sẵn sàng và được liên kết với {platform}. Hãy thỏa sức trò chuyện cùng bạn bè và khám phá hàng triệu trò chơi trên Roblox nhé.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Tài khoản Roblox của bạn sẽ được liên kết với tài khoản dùng cho {platform}. Bạn có thể hủy liên kết từ màn hình Cài đặt bất kỳ lúc nào. Bạn có thể phải chờ một lúc trước khi có thể liên kết với một tài khoản dùng cho {platform}. Bằng việc nhấp chuột vào {ctaButton}, bạn đồng ý với Điều khoản sử dụng, bao gồm điều khoản trọng tài, và bạn cũng xác nhận Chính sách quyền riêng tư."
+Authentication.SignUp.Header.CloseWithoutFinishing,Đóng khi chưa nâng cấp xong?
 Authentication.SignUp.Header.OneLastThing,Một bước cuối cùng
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Thiết lập tài khoản Roblox của bạn
 Authentication.SignUp.Heading.CountryCodeSelector,Chọn quốc gia
 Authentication.SignUp.Heading.RetryLogIn,
 Authentication.SignUp.Label.Birthday,Ngày sinh
+Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} tuổi)
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,Ngày
 Authentication.SignUp.Label.EnterYourEmail,Nhập email của bạn
@@ -160,6 +165,7 @@ Authentication.SignUp.Response.PasswordComplexity,Vui lòng tạo mật khẩu k
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Phải đặt tên người dùng trước.
 Authentication.SignUp.Subtitle.AddYourBirthday,Hãy bổ sung ngày sinh của bạn để tạo tài khoản Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Tiến trình của bạn sẽ được giữ nguyên khi bạn thiết lập xong.
+Authentication.SignUp.Subtitle.YoureAlmostThere,"Bạn sắp nâng cấp xong rồi. Nếu đóng vào lúc này, quy trình tạo tài khoản sẽ chưa kịp hoàn tất và bạn sẽ chưa thể chơi Roblox."
 Authentication.TwoStepVerification.Action.GoToSecurity,Cài đặt
 Authentication.TwoStepVerification.Label.TwoStepRequired,Yêu cầu Xác minh 2 bước để thực hiện các giao dịch tiếp theo. Đến Cài đặt > Bảo mật để hoàn thành Xác minh 2 bước.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Quá nhiều lần thử. Vui lòng thử lại sau.
@@ -427,7 +433,7 @@ CommonUI.Features.Label.Connections,Người quen
 CommonUI.Features.Label.ControllerBar.HoldPrefix,Giữ
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,để chơi
-CommonUI.Features.Label.CreateGames,Tạo
+CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,Trải nghiệm
 CommonUI.Features.Label.GiftCards,Mua thẻ quà tặng
@@ -1544,6 +1550,7 @@ Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Tên chỉ được chứa chữ cái, số và dấu cách"
 Feature.Avatar.Label.CountSelected,Đã Chọn {itemCount}
 Feature.Avatar.Label.Creations,Sản phẩm sáng tạo
+Feature.Avatar.Label.Current,Hiện tại
 Feature.Avatar.Label.CurrentlyWearing,Hiện Đang Mặc
 Feature.Avatar.Label.DefaultBody,Thân hình mặc định
 Feature.Avatar.Label.DeleteSetBody,"Dù bộ bị xóa, trang phục trong bộ không bị xóa."
@@ -1990,6 +1997,10 @@ Feature.Build.Analytics.Description.PayerConversion,Tỷ lệ chuyển đổi th
 Feature.Build.Analytics.Description.PlaythroughRate,Tỷ lệ hoàn thành lượt chơi là tỷ lệ phần trăm số lượt truy cập đã hoàn thành trọn vẹn một phiên chơi. Tỷ lệ này càng cao càng chứng tỏ người chơi cảm thấy trải nghiệm của bạn hấp dẫn và đáng để chơi tới cùng.
 Feature.Build.Analytics.Description.TotalPlaytime,"Tổng thời gian chơi là tổng thời gian mà tất cả các người chơi đã dành cho trải nghiệm của bạn trong một khoảng thời gian. Thông thường, thời gian chơi càng cao chứng tỏ phiên chơi càng hấp dẫn."
 Feature.Build.Analytics.DurationHours,{number} giờ
+Feature.Build.Analytics.Goal.EarnRobux,
+Feature.Build.Analytics.Goal.FirstImpression,Tạo ấn tượng tốt ngay từ lần đầu
+Feature.Build.Analytics.Goal.GetMorePlayers,Thu hút thêm người chơi
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,Thu hút người chơi quay trở lại
 Feature.Build.Analytics.KeyStats,Số liệu chính
 Feature.Build.Analytics.LastMonth,Tháng trước
 Feature.Build.Analytics.LastWeek,
@@ -2021,9 +2032,12 @@ Feature.Build.Analytics.Summary.TotalPlaytime,Tổng số giờ người chơi �
 Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,Tổng số người chơi
 Feature.Build.Analytics.Title.D1Retention,Tỷ lệ giữ chân đến ngày 1
+Feature.Build.Analytics.Title.D7Retention,Tỷ lệ giữ chân đến ngày 7
 Feature.Build.Analytics.Title.DailyActiveUsers,Người dùng hoạt động hằng ngày
+Feature.Build.Analytics.Title.NewUserSessionTime,Thời gian phiên của người dùng mới
 Feature.Build.Analytics.Title.PayerConversion,Tỷ lệ chuyển đổi thành người dùng trả phí
 Feature.Build.Analytics.Title.PlaythroughRate,Tỷ lệ hoàn thành lượt chơi
+Feature.Build.Analytics.Title.RobuxSpent,
 Feature.Build.Analytics.Title.TotalPlaytime,Tổng thời gian chơi
 Feature.Build.Analytics.Visits,Lượt truy cập
 Feature.Build.Content.NewGame,Trò chơi mới
@@ -2080,6 +2094,7 @@ Feature.Build.Description.ShopButton,Thêm điểm truy cập cửa hàng
 Feature.Build.Description.ShortAdCampaign,Cách nhanh chóng để biết người chơi nghĩ gì về trò chơi của bạn.
 Feature.Build.Description.StopBuild,"Yêu cầu này vẫn đang được xử lý. Nếu dừng lúc này, yêu cầu sẽ không được hoàn tất và bạn cần phải gửi lại."
 Feature.Build.Description.UpdateDeveloperProduct,Cập nhật sản phẩm của nhà phát triển {PRODUCT_ID}.
+Feature.Build.Description.UseAdCreditsInAdsManager,Bạn sẽ cần vào Trình quản lý quảng cáo để sử dụng.
 Feature.Build.Error.AdForbidden,Tài khoản hoặc trò chơi của bạn hiện không thể chạy quảng cáo. Hãy liên hệ với bộ phận hỗ trợ nếu bạn cho rằng đây là sự nhầm lẫn.
 Feature.Build.Error.AdInsufficientFunds,Bạn không có đủ Robux để tạo quảng cáo này. Hãy nạp thêm rồi thử lại.
 Feature.Build.Error.AdInternalError,
@@ -2403,6 +2418,7 @@ Feature.Build.Title.RevertLastChange,Trả về bản thay đổi gần nhất?
 Feature.Build.Title.StopBuild,Dừng tạo dựng?
 Feature.Build.Title.Tasks,Nhiệm vụ
 Feature.Build.Title.TurnActivity,Hoạt động trong lượt
+Feature.Build.Title.UseYourAdCredits,Dùng tín dụng quảng cáo của bạn
 Feature.Build.Title.VersionHistory,Lịch sử phiên bản
 Feature.Build.Title.VersionInfo,Thông tin phiên bản
 Feature.Build.Title.VersionNumber,Phiên bản {VERSION}
@@ -2834,6 +2850,7 @@ Feature.Catalog.Title.Checkout.UnavailableItems,
 Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle,Sử dụng avatar?
 Feature.Catalog.Title.CheckoutPlural,Thanh toán {count} vật phẩm
 Feature.Catalog.Title.CheckoutSingular,
+Feature.Catalog.Title.Explore,Khám phá
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,Thay thế lớp dưới cùng?
 Feature.Catalog.Title.RentalFtuxText,Thuê để dùng thử vật phẩm trong 3 ngày
 Feature.Catalog.Toast.AddedToFavorites,Đã thêm vào mục yêu thích
@@ -3460,25 +3477,25 @@ Feature.Groups.Message.LoadGroupListError,Không thể tải danh sách cộng �
 Feature.Groups.Message.NoGroupsFound,Không tìm thấy cộng đồng nào.
 Feature.Groups.Message.NotInAnyGroups,Bạn chưa tham gia cộng đồng nào.
 Feature.Groups.Message.PinLocked,Bạn không thể thực hiện hành động này khi mã pin còn hoạt động. Mở khóa mã pin ở trang Cài Đặt Tài Khoản.
-Feature.Groups.Modal.ContentTextHigh,"Xác thực tài khoản của bạn để tham gia cộng đồng này.
+Feature.Groups.Modal.ContentTextHigh,"Xác minh tài khoản của bạn để tham gia cộng đồng này.
 
-1. Vào Thông tin tài khoản > Xác thực tuổi của tôi
-2. Hoàn thành quy trình xác thực"
-Feature.Groups.Modal.ContentTextLow,"Xác thực tài khoản của bạn để tham gia cộng đồng này.
+1. Vào Thông tin tài khoản > Xác minh danh tính
+2. Hoàn thành quy trình xác minh"
+Feature.Groups.Modal.ContentTextLow,"Xác minh tài khoản của bạn để tham gia cộng đồng này.
 
-1. Chuyển đến phần Thông tin tài khoản 
-2. Chọn một cách xác thực:
+1. Vào Thông tin tài khoản 
+2. Chọn một cách xác minh:
     - Thêm số điện thoại
     - Thêm email
-    - Xác thực tuổi của tôi
-3. Hoàn thành quy trình xác thực"
-Feature.Groups.Modal.ContentTextMedium,"Xác thực tài khoản của bạn để tham gia cộng đồng này.
+    - Xác minh danh tính
+3. Hoàn thành quy trình xác minh"
+Feature.Groups.Modal.ContentTextMedium,"Xác minh tài khoản của bạn để tham gia cộng đồng này.
 
-1. Chuyển đến phần Thông tin tài khoản 
-2. Chọn một cách xác thực:
+1. Vào Thông tin tài khoản 
+2. Chọn một cách xác minh:
     - Thêm số điện thoại VÀ thêm email
-    - Xác thực tuổi của tôi
-3. Hoàn thành quy trình xác thực"
+    - Xác minh danh tính
+3. Hoàn thành quy trình xác minh"
 Feature.Groups.Notification.FailedToFollow,Không thể theo dõi hồ sơ. Vui lòng thử lại sau.
 Feature.Groups.Notification.FailedToJoin,Không thể tham gia cộng đồng. Vui lòng thử lại sau.
 Feature.Groups.Notification.FailedToLoad,Không thể tải cộng đồng. Vui lòng thử lại sau.
@@ -3552,6 +3569,7 @@ Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Khi mua Robux
 Feature.InExperienceShop.Label.BonusItem,Vật phẩm thưởng
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Kết thúc sau {timeRemaining}
+Feature.InExperienceShop.Label.FreeTrial,Dùng thử miễn phí
 Feature.InExperienceShop.Label.NoDescription,Không có mô tả
 Feature.InExperienceShop.Label.OfferEndTime,{offer} sẽ kết thúc sau {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Đây là bản xem trước Cửa hàng của bạn trong Roblox Studio. Người chơi sẽ không thấy bản xem trước này.
@@ -3563,6 +3581,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} phút
 Feature.InExperienceShop.Label.Timer.Minute.Singular,1 phút
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} giây
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 giây
+Feature.InExperienceShop.Label.Trial,
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Bạn đã mua thành công {ROBUX_AMOUNT} Robux
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Bạn có chắc chắn muốn xóa vĩnh viễn vật phẩm này khỏi kho? Nếu thay đổi ý định, bạn sẽ phải tự kiếm lại vật phẩm này trong một trải nghiệm."
 Feature.Item.Label.DeleteItemUndercase,Xóa vật phẩm
@@ -3576,12 +3595,16 @@ Feature.Moments.Action.AddSticker,Thêm nhãn dán
 Feature.Moments.Action.AddText,Thêm văn bản
 Feature.Moments.Action.AddVoice,Thêm giọng nói
 Feature.Moments.Action.Back,
+Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentShowLess,Ẩn bớt
+Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
 Feature.Moments.Action.CreateVoiceover,Tạo phần thuyết minh
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.DiscardChange,Xóa thay đổi
 Feature.Moments.Action.Done,
+Feature.Moments.Action.Edit,
 Feature.Moments.Action.Expand,Mở rộng
 Feature.Moments.Action.GenerateText,Tạo văn bản
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Không hữu ích
@@ -3597,6 +3620,7 @@ Feature.Moments.Action.Play,Phát
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,Báo cáo
 Feature.Moments.Action.Retry,
+Feature.Moments.Action.RetryLoadingComments,Thử tải lại bình luận
 Feature.Moments.Action.Return,Quay lại Thư viện
 Feature.Moments.Action.ReturnToEditing,Quay lại Bản chỉnh sửa
 Feature.Moments.Action.SaveVoiceover,
@@ -3619,9 +3643,35 @@ Feature.Moments.Description.StayFriendly,Hãy giữ môi trường thân thiện
 Feature.Moments.Description.TooManyUploads,Bạn đã tải lên quá nhiều video cho hôm nay. Hãy thử lại vào ngày mai.
 Feature.Moments.Disclaimer.EveryoneMoments,Ai trong Khoảnh khắc cũng có thể xem nội dung được đăng
 Feature.Moments.Label.All,
+Feature.Moments.Label.AllowComments,Cho phép bình luận
 Feature.Moments.Label.AttemptingJoinExperience,Đang thử tham gia {placeName}. Vui lòng chờ trong giây lát.
 Feature.Moments.Label.CaptureLibrary,Thư viện Ảnh chụp/video quay màn hình của bạn
 Feature.Moments.Label.ChooseVoice,Chọn giọng nói
+Feature.Moments.Label.CommentAuthorFallback,Người dùng {userId}
+Feature.Moments.Label.CommentAuthorUnknown,Người dùng không xác định
+Feature.Moments.Label.CommentDeleteFailed,Không thể xóa bình luận
+Feature.Moments.Label.CommentNotAllowed,Bạn không thể bình luận về Khoảnh khắc này.
+Feature.Moments.Label.CommentPostFailed,Không thể đăng bình luận của bạn. Vui lòng thử lại.
+Feature.Moments.Label.CommentPostOutcomeUnknown,Chúng tôi không thể xác nhận bình luận gần nhất mà bạn đã đăng. Hãy kiểm tra các bình luận trước khi gửi lại.
+Feature.Moments.Label.CommentRateLimited,Bạn đang bình luận quá nhanh. Vui lòng thử lại sau.
+Feature.Moments.Label.CommentRejectedByFilter,Bình luận của bạn chưa được đăng. Vui lòng sửa đổi rồi thử lại.
+Feature.Moments.Label.CommentSendStatusUnknown,Trạng thái gửi không xác định
+Feature.Moments.Label.CommentSending,
+Feature.Moments.Label.CommentSignInRequired,Vui lòng đăng nhập lại để bình luận.
+Feature.Moments.Label.CommentTimestampDays,{count}ng
+Feature.Moments.Label.CommentTimestampHours,{count}g
+Feature.Moments.Label.CommentTimestampMinutes,{count}ph
+Feature.Moments.Label.CommentTimestampMonths,{count}th
+Feature.Moments.Label.CommentTimestampNow,bây giờ
+Feature.Moments.Label.CommentTimestampWeeks,{count}t
+Feature.Moments.Label.CommentTimestampYears,{count}n
+Feature.Moments.Label.CommentingUnavailable,Tính năng bình luận hiện không hoạt động. Vui lòng thử lại sau.
+Feature.Moments.Label.CommentsDisabled,Tính năng bình luận đã bị vô hiệu hóa
+Feature.Moments.Label.CommentsReadOnly,Bình luận hiển thị ở chế độ chỉ đọc
+Feature.Moments.Label.CommentsTurnedOff,Đã tắt tính năng bình luận cho Khoảnh khắc này.
+Feature.Moments.Label.CommentsUnavailable,Không thể hiển thị bình luận
+Feature.Moments.Label.DeleteCommentBody,Bình luận này sẽ bị xóa vĩnh viễn.
+Feature.Moments.Label.DeleteCommentTitle,Xóa bình luận?
 Feature.Moments.Label.DeleteMomentBody,Bạn không thể khôi phục một Khoảnh khắc sau khi đã xóa.
 Feature.Moments.Label.DeleteMomentTitle,Xóa Khoảnh khắc?
 Feature.Moments.Label.DeleteVoiceoverBody,Thao tác này sẽ xóa văn bản và phần thuyết minh hiện tại. Bạn có thể làm lại từ đầu bất cứ lúc nào.
@@ -3633,6 +3683,7 @@ Feature.Moments.Label.FeedEndTitle,Bạn đã giải quyết hết các yêu c�
 Feature.Moments.Label.FeedFailedToLoad,Không tải được bản tin
 Feature.Moments.Label.FeedMyMoments,Khoảnh khắc của tôi
 Feature.Moments.Label.FeedTrending,Thịnh hành
+Feature.Moments.Label.FirstCommentInvite,Chưa có bình luận nào. Hãy là người đầu tiên bình luận!
 Feature.Moments.Label.HowToUseCaptureTitle,Cách dùng Ảnh chụp/video quay màn hình
 Feature.Moments.Label.LinkCopied,Đã sao chép đường liên kết
 Feature.Moments.Label.LinkCopyFailed,Không thể sao chép đường liên kết.
@@ -3641,12 +3692,14 @@ Feature.Moments.Label.MomentDeletedBody,
 Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,Đã xảy ra sự cố.
 Feature.Moments.Label.MomentFailedToPostTitle,Không đăng được Khoảnh khắc
+Feature.Moments.Label.MomentNoLongerAvailable,Khoảnh khắc này không còn nữa.
 Feature.Moments.Label.MomentPublishedBody,Khoảnh khắc của bạn đã được đăng.
 Feature.Moments.Label.MomentPublishedTitle,Khoảnh khắc đã được đăng
 Feature.Moments.Label.MomentUnavailable,Khoảnh khắc không tồn tại
 Feature.Moments.Label.MomentUnavailableDefault,Khoảnh khắc này không tồn tại.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,Âm nhạc
+Feature.Moments.Label.NoCommentsYet,Chưa có bình luận nào
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Bạn hiện đã xem hết toàn bộ nội dung
 Feature.Moments.Label.Photos,Ảnh
 Feature.Moments.Label.PostDeleted,Khoảnh khắc đã bị xóa
@@ -3687,6 +3740,10 @@ Feature.Moments.Label.VoiceLimitReachedBody,Vui lòng đợi một lát rồi th
 Feature.Moments.Label.VoiceModerationError,Kịch bản của bạn phải tuân thủ quy tắc an toàn
 Feature.Moments.Label.VoicePlaceholder,Nhập kịch bản thuyết minh. Tối đa {maxCount} ký tự
 Feature.Moments.Label.VoiceTimeoutBody,Đã hết thời gian chờ tạo phần thuyết minh.
+Feature.Moments.Label.WriteComment,Viết bình luận
+Feature.Moments.Title.Comments,Bình luận
+Feature.Moments.Title.CommentsWithCappedCount,Bình luận ({count}+)
+Feature.Moments.Title.CommentsWithCount,Bình luận ({count})
 Feature.Moments.Title.GenerateTextFeedbackReason,Đã xảy ra vấn đề gì?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoảnh khắc?
@@ -3789,10 +3846,17 @@ Feature.Parents.Title.EnterParentEmailV2,Nhập email của phụ huynh
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,Từ phần Tìm kiếm
+Feature.PlayerSearchResults.Label.NewUsername,Tên tài khoản mới
 Feature.PlayerSearchResults.Label.Previously,Tên Cũ
 Feature.PlayerSearchResults.Label.ThisIsYou,Đây là bạn
+Feature.PlayerSearchResults.Label.You,Bạn
+Feature.PlayerSearchResults.Label.YouAreConnections,Các bạn đã kết nối
 Feature.PlayerSearchResults.Label.YouAreFollowing,Bạn đang theo dõi
+Feature.PlayerSearchResults.Label.YouAreFriends,Đã trở thành bạn bè
+Feature.PrivateServers.Action.CreatePrivateServer,Tạo Máy Chủ Riêng Tư
+Feature.PrivateServers.Action.FreeWithBlackbird,Miễn phí khi có gói Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Không hỗ trợ giao dịch mua máy chủ riêng tư trong Studio.
+Feature.PrivateServers.Description.VipServersNotSupported,Trò chơi này không hỗ trợ máy chủ riêng.
 Feature.Profile.Action.AboutThisProfile,Về hồ sơ này
 Feature.Profile.Action.Accept,Chấp Nhận
 Feature.Profile.Action.AcceptFriends,Chấp Nhận Làm Bạn
@@ -4032,7 +4096,7 @@ Feature.ReportAbuse.Title.SelectInSceneIpReport,Cảm ơn bạn đã khởi tạ
 Feature.ReportAbuse.Title.SelectInSceneThankYou,Cảm ơn bạn đã báo cáo
 Feature.RobloxSubscription.Action.JoinIn,Tham gia sau {time}
 Feature.RobloxSubscription.Action.Subscribe,Đăng ký
-Feature.RobloxSubscription.Action.TryItForFree,Dùng thử miễn phí
+Feature.RobloxSubscription.Action.TryItForFree,
 Feature.RobloxSubscription.Body.AlreadySubscribed,Gói đăng ký Plus của bạn đã có sẵn các lợi ích trong trò chơi.
 Feature.RobloxSubscription.Body.GenericError,Chúng tôi hiện không thể hoàn tất việc này. Vui lòng thử lại.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Không hỗ trợ mua gói đăng ký này trên thiết bị này.
@@ -4045,6 +4109,7 @@ Feature.RobloxSubscription.Description.JoinEarly,Mua gói Plus để được th
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} đã mời bạn tham gia Plus. Cả hai sẽ nhận được {amount} Robux khi bạn mua gói Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Khi nhấp chuột vào \u{201C}{ctaText}\u{201D}, bạn đồng ý với <a href=""{termsUrl}"">Điều khoản gói đăng ký của Roblox</a>. Hệ thống sẽ tự động thu phí hằng tháng cho đến khi bạn hủy."
 Feature.RobloxSubscription.Heading.ReferralEntry,Chia sẻ Plus để nhận {amount} Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Tham gia Plus để nhận {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,"Tham gia Plus, nhận"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Máy chủ riêng miễn phí
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4061,6 +4126,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 tháng miễ
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}Miễn phí {trialDuration} {trialPeriodLabel},{boldEnd} sau đó là {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,tháng
 Feature.RobloxSubscription.Label.months,
+Feature.RobloxSubscription.Message.AlreadySubscribed,Bạn đã có Plus rồi. Đường liên kết này chỉ dành cho thành viên mới. Hãy chia sẻ đường liên kết của chính bạn để mời bạn bè và nhận thưởng.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Nhận ưu đãi 1 tuần sử dụng gói Plus miễn phí
 Feature.RobloxSubscription.Title.AlreadySubscribed,Tin vui cho bạn
 Feature.RobloxSubscription.Title.GenericError,Đã gặp lỗi
@@ -4305,8 +4371,19 @@ Feature.SongDetails.Action.ReportAudio,Báo cáo nội dung âm thanh
 Feature.SongDetails.Label.InappropriateAudio,Nội dung âm thanh không phù hợp
 Feature.SongDetails.Label.InappropriateThumbnail,Hình nhỏ không phù hợp
 Feature.SongDetails.Label.SongPreview,Xem trước bài hát
+Feature.SplitPane.EditAvatarButtonText,
 Feature.SplitPane.Label.CollapseAvatar,Thu gọn avatar
 Feature.SplitPane.Label.ExpandAvatar,Mở rộng avatar
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,Kết thúc hướng dẫn
+Feature.SplitPane.Tour.Button.SkipTour,Bỏ qua hướng dẫn
+Feature.SplitPane.Tour.Step1.Description.Collapsed,Avatar được lưu hiện đã hiển thị trên trang chủ. Hãy mở rộng không gian này để xem các avatar đó.
+Feature.SplitPane.Tour.Step1.Description.Expanded,Avatar được lưu hiện đã hiển thị trên trang chủ. Hãy xoay hoặc phóng to để xem từng chi tiết.
+Feature.SplitPane.Tour.Step1.Title,Xem hình ảnh của bạn trên Trang chủ
+Feature.SplitPane.Tour.Step2.Description,Chọn diện mạo bạn muốn. Chuyển đổi giữa các avatar bạn đã lưu ngay trước khi tham gia trò chơi.
+Feature.SplitPane.Tour.Step2.Title,Thay đổi diện mạo bất cứ lúc nào
+Feature.SplitPane.Tour.Step3.Description,Ẩn không gian này bất cứ lúc nào để tập trung khám phá các trò chơi mới. Avatar bạn đã lưu vẫn ở ngay đây.
+Feature.SplitPane.Tour.Step3.Title,Chọn nội dung bạn muốn xem
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Thêm người khác
 Feature.Squads.Action.ConnectToVoice,Kết nối với tin nhắn thoại
@@ -5040,7 +5117,7 @@ InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Đã thêm {experie
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,Đã thêm {experience_name} vào màn hình chính thành công
 InstantApps.Shortcuts.Label.TryAgain,
 InstantApps.Shortcuts.Label.ViewShortcut,Xem lối tắt
-Notifications.NotificationStream.Bundle.ShowLess,Ẩn bớt
+Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} thông báo khác
 Notifications.NotificationStream.Label.AllCaughtUp,Không có thông báo mới nào!
 Notifications.NotificationStream.Label.Notifications,

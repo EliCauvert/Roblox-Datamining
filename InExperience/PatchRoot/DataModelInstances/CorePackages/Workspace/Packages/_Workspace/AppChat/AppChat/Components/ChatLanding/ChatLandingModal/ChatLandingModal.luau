@@ -14,6 +14,7 @@ local appChatNetworkingModule = require(parent.AppChatNetworking)
 local foundationModule = require(parent.Foundation)
 local normalizeFontFace = foundationModule.Utility.normalizeFontFace
 local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+local fFlagAppChatLandingModalThemedBackgroundModule = require(appChat.Flags.FFlagAppChatLandingModalThemedBackground)
 local favoriteOn = UIBloxModule.App.ImageSet.Images["icons/actions/favoriteOn"]
 local x = foundationModule.Enums.IconName.X
 local t = {
@@ -71,7 +72,7 @@ local t_1 = {
 }
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: cryoModule (ref), t_1 (ref), useStyle (ref), useChatPagePaddingModule (ref), foundationModule (ref), reactModule (ref), t (ref), name (ref), labelModule (ref), favoriteOn (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), x (ref), buttonStack (ref)
+	-- upvalues: cryoModule (ref), t_1 (ref), useStyle (ref), useChatPagePaddingModule (ref), foundationModule (ref), reactModule (ref), t (ref), name (ref), fFlagAppChatLandingModalThemedBackgroundModule (ref), labelModule (ref), favoriteOn (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), x (ref), buttonStack (ref)
 	local var1 = cryoModule.Dictionary.join(t_1, p1)
 	local style = var1.style or useStyle()
 	local var2 = useChatPagePaddingModule()
@@ -111,8 +112,8 @@ return reactModule.forwardRef(function(p1, p2)
 			PaddingRight = UDim.new(0, var2.right)
 		}),
 		Content = reactModule.createElement("Frame", {
-			BackgroundTransparency = style.Theme.SystemPrimaryContent.Transparency,
-			BackgroundColor3 = style.Theme.SystemPrimaryContent.Color,
+			BackgroundTransparency = if fFlagAppChatLandingModalThemedBackgroundModule then style.Theme.BackgroundUIDefault.Transparency else style.Theme.SystemPrimaryContent.Transparency,
+			BackgroundColor3 = if fFlagAppChatLandingModalThemedBackgroundModule then style.Theme.BackgroundUIDefault.Color else style.Theme.SystemPrimaryContent.Color,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {

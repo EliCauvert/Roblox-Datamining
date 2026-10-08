@@ -14,7 +14,7 @@ local t_1 = {
 	MyMomentsScreenView = "MyMomentsScreenView",
 	UserProfileScreenView = "UserProfileScreenView"
 }
-local t_2 = { TopBar = "TopBar" }
+local t_2 = { Captures = "Captures", TopBar = "TopBar" }
 local t_3 = {
 	CreateIntent = "CreateIntent",
 	GalleryItemSelected = "GalleryItemSelected",

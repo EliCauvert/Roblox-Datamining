@@ -20,6 +20,7 @@ local useToggleState = momentsCommonModule.Hooks.useToggleState
 local checkDebugAccessModule = require(moments.Utils.checkDebugAccess)
 local getPostFeedItemIdModule = require(moments.Utils.getPostFeedItemId)
 local fireAnalyticsEvent = momentsCommonModule.Analytics.fireAnalyticsEvent
+local reportMomentsEngagement = momentsCommonModule.Analytics.reportMomentsEngagement
 local eventNames = momentsCommonModule.Analytics.EventNames
 local reportModalCovering = momentsCommonModule.Media.reportModalCovering
 local makeFeedActionFieldsModule = require(moments.Analytics.makeFeedActionFields)
@@ -35,6 +36,7 @@ local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptim
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
 local momentsUseSmallOverflowMenu = game:DefineFastFlag("MomentsUseSmallOverflowMenu", false)
+local momentsReportButtonAnalytics = game:DefineFastFlag("MomentsReportButtonAnalytics", false)
 local reportMomentDialogModule = require(moments.Components.Feed.ReportMomentDialog)
 local ipReportConfirmationDialogModule = require(moments.Components.Feed.IpReportConfirmationDialog)
 local useMomentsHost = require(moments.MomentsHostContext).useMomentsHost
@@ -51,7 +53,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useFeed (ref), useMomentsHost (ref), useToggleState (ref), reactModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), getModeratedItemsStoreModule (ref), getToastStoreModule (ref), signalsReactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), checkDebugAccessModule (ref), reportMomentModule (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), makeFeedActionFieldsModule (ref), getPostFeedItemIdModule (ref), reportModalCovering (ref), localPlayer (ref), foundationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), fFlagMomentsOptimisticProfilePending (ref), menu (ref), momentsUseSmallOverflowMenu (ref), iconButton (ref), threeDotsVertical (ref), reportMomentDialogModule (ref), ipReportConfirmationDialogModule (ref), view (ref), speakerSlash (ref), speaker (ref)
+	-- upvalues: useLocalization (ref), t (ref), useFeed (ref), useMomentsHost (ref), useToggleState (ref), reactModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), getModeratedItemsStoreModule (ref), getToastStoreModule (ref), signalsReactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), checkDebugAccessModule (ref), reportMomentModule (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), makeFeedActionFieldsModule (ref), momentsReportButtonAnalytics (ref), reportMomentsEngagement (ref), getPostFeedItemIdModule (ref), reportModalCovering (ref), localPlayer (ref), foundationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), fFlagMomentsOptimisticProfilePending (ref), menu (ref), momentsUseSmallOverflowMenu (ref), iconButton (ref), threeDotsVertical (ref), reportMomentDialogModule (ref), ipReportConfirmationDialogModule (ref), view (ref), speakerSlash (ref), speaker (ref)
 	local var1 = useLocalization(t)
 	local var2 = useFeed()
 	local openMomentsFeedReport = useMomentsHost().openMomentsFeedReport
@@ -158,8 +160,12 @@ return function(p1)
 		var18.triggerToast, var1
 	})
 	local var25 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), getPostFeedItemIdModule (copy), p1 (ref), fFlagEnableReportingFlowForMomentsFeed (copy), openMomentsFeedReport (ref), reportModalCovering (copy), var24 (ref), var9 (write), var7 (write), var5 (ref)
+		-- upvalues: var3 (ref), momentsReportButtonAnalytics (copy), reportMomentsEngagement (copy), getPostFeedItemIdModule (copy), p1 (ref), fFlagEnableReportingFlowForMomentsFeed (copy), openMomentsFeedReport (ref), reportModalCovering (copy), var24 (ref), var9 (write), var7 (write), var5 (ref)
 		var3.disable()
+		
+		if momentsReportButtonAnalytics then
+			reportMomentsEngagement("report_click")
+		end
 		local var26 = getPostFeedItemIdModule(p1.moment)
 		
 		if fFlagEnableReportingFlowForMomentsFeed and var26 and openMomentsFeedReport then

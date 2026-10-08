@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppSponsoredGamePreviewVideo", false)
+﻿return game:DefineFastFlag("LuaAppSponsoredGamePreviewVideoV2", false)

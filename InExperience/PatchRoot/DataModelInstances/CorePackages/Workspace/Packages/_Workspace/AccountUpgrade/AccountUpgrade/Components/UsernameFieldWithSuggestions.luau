@@ -79,6 +79,7 @@ return function(p2)
 			validatorAdditionalProps = p2.validatorAdditionalProps,
 			onInputTextChanged = p2.onTextChanged,
 			onInputTextValidated = p2.onTextValidated,
+			textBoxFocusedCallback = p2.onFocused,
 			updateIssueCondition = p2.onIssueConditionChanged,
 			textBoxRef = var1,
 			pillClicked = p2.pillClicked,
@@ -86,6 +87,7 @@ return function(p2)
 			useFoundationTextInput = p2.useFoundationTextInput,
 			foundationInputSize = inputSize.Medium,
 			foundationTitleSize = inputLabelSize.Medium,
+			foundationTitleIsBold = p2.isTitleBold,
 			contentGapOverride = p2.contentGap,
 			colorContentOverride = p2.colorContentOverride
 		}),

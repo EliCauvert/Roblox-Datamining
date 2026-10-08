@@ -33,6 +33,7 @@ return function(p1)
 				clockBinding = p1.clockBinding,
 				localToolActions = p1.localToolActions,
 				onPlaytest = p1.onPlaytest,
+				onPublish = p1.onPublish,
 				isPlaytestLoading = p1.isPlaytestLoading,
 				onAgentAdCampaignOfferSelected = if fFlagBuildAgentAdCampaignCardModule then p1.onAgentAdCampaignOfferSelected else nil,
 				isPageVisible = p1.isPageVisible,

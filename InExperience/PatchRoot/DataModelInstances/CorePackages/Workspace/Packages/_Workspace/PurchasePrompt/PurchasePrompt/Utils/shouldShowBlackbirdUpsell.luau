@@ -3,6 +3,7 @@ local parent = purchasePrompt.Parent
 local IAPExperienceModule = require(parent.IAPExperience)
 local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
 local discountType = IAPExperienceModule.DiscountType
+local requestTypeModule = require(purchasePrompt.Enums.RequestType)
 local isRequestTypeHiddenFromBlackbirdUpsell = require(script.Parent.Parent.Utils.BlackbirdUpsellRequestTypeGating).isRequestTypeHiddenFromBlackbirdUpsell
 local blackbirdUpsellImpressionTrackerModule = require(script.Parent.BlackbirdUpsellImpressionTracker)
 local sharedFlagsModule = require(parent.SharedFlags)
@@ -16,8 +17,10 @@ local fIntBlackbirdUpsellMinPriceForDiscountInclusive = sharedFlagsModule.FIntBl
 local fIntBlackbirdUpsellMaxPriceForDiscountInclusive = sharedFlagsModule.FIntBlackbirdUpsellMaxPriceForDiscountInclusive
 
 return function(p1, p2, p3, p4, p5)
-	-- upvalues: fFlagBlackbirdUpsellGateTimedOptionModule (ref), fFlagBlackbirdUpsellGateResalePurchaseType (ref), fFlagBlackbirdUpsellGateResaleModule (ref), getAppFeaturePolicies (ref), isRequestTypeHiddenFromBlackbirdUpsell (ref), fIntBlackbirdUpsellMaxPriceForDiscountInclusive (ref), fIntBlackbirdUpsellMinPriceForDiscountInclusive (ref), discountType (ref), fFlagEnableRobuxUpsellPlusButtonExperiment (ref), fFlagEnableBlackbirdUpsellImpressionGating (ref), blackbirdUpsellImpressionTrackerModule (ref)
+	-- upvalues: requestTypeModule (ref), fFlagBlackbirdUpsellGateTimedOptionModule (ref), fFlagBlackbirdUpsellGateResalePurchaseType (ref), fFlagBlackbirdUpsellGateResaleModule (ref), getAppFeaturePolicies (ref), isRequestTypeHiddenFromBlackbirdUpsell (ref), fIntBlackbirdUpsellMaxPriceForDiscountInclusive (ref), fIntBlackbirdUpsellMinPriceForDiscountInclusive (ref), discountType (ref), fFlagEnableRobuxUpsellPlusButtonExperiment (ref), fFlagEnableBlackbirdUpsellImpressionGating (ref), blackbirdUpsellImpressionTrackerModule (ref)
 	if p3 then
+		return false
+	elseif p2 == requestTypeModule.VIPServer then
 		return false
 	elseif fFlagBlackbirdUpsellGateTimedOptionModule and p4 then
 		local timedOptionDays = p4.timedOptionDays

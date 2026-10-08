@@ -30,6 +30,8 @@ local sessionType = require(parent.RobloxAppSessionization).SessionType
 local roactServices = require(parent.RoactServices).RoactServices
 local roactAnalyticsCommonGameEvents = require(parent.RoactServiceTags).RoactAnalyticsCommonGameEvents
 local gameCardGroupableModule = require(script.Parent.GameCardGroupable)
+local gameAssetCardModule = require(script.Parent.GameAssetCard)
+local _ = require(appChat.Components.ChatConversation.Grouping.MessageGroupShape)
 local dataHydrationModule = require(parent.DataHydration)
 local roundedVariantModule = require(appChat.Enums.RoundedVariant)
 local useTelemetryModule = require(appChat.Telemetry.useTelemetry)
@@ -105,7 +107,7 @@ local _ = function(p1, p2)
 end
 
 function GameCardContainer(p1)
-	-- upvalues: cryoModule (ref), t (ref), useSelector (ref), useCallback (ref), constructGameThumbnailUrlModule (ref), constantsModule (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), useDispatch (ref), apiFetchGameDetails (ref), apiFetchPlayabilityStatus (ref), dataHydrationModule (ref), signalsModule (ref), useMemo (ref), useSignalState (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useEffect (ref), chatConversationTelemetryEventsModule (ref), roundedVariantModule (ref), reactModule (ref), gameCardGroupableModule (ref), withLocalization (ref)
+	-- upvalues: cryoModule (ref), t (ref), useSelector (ref), useCallback (ref), constructGameThumbnailUrlModule (ref), constantsModule (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), useDispatch (ref), apiFetchGameDetails (ref), apiFetchPlayabilityStatus (ref), dataHydrationModule (ref), signalsModule (ref), useMemo (ref), useSignalState (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useEffect (ref), chatConversationTelemetryEventsModule (ref), reactModule (ref), gameAssetCardModule (ref), roundedVariantModule (ref), gameCardGroupableModule (ref), withLocalization (ref)
 	local var2 = cryoModule.Dictionary.join(t, p1)
 	
 	if not var2.universeId then
@@ -184,8 +186,25 @@ function GameCardContainer(p1)
 	end, { var14, var2.openDetails, var2.universeId, placeId })
 	
 	local function renderCard(p2)
-		-- upvalues: roundedVariantModule (copy), var15 (ref), var16 (ref), var17 (ref), reactModule (copy), gameCardGroupableModule (copy)
-		return reactModule.createElement(gameCardGroupableModule, {
+		-- upvalues: var15 (ref), var16 (ref), var17 (ref), reactModule (copy), gameAssetCardModule (copy), roundedVariantModule (copy), gameCardGroupableModule (copy)
+		local var18 = if p2.universeId then if p2.gameName then if p2.gameThumbnail then if p2.votesStatus ~= "NotReady" then not p2.gamePlayerCount else true else not p2.gameThumbnail else not p2.gameName else not p2.universeId
+		local var19 = if p2.openDetails then var15 else nil
+		local var20 = if p2.onPlayButtonActivated then var16 else nil
+		local var21 = if p2.openDetails then var17 else nil
+		
+		return if p2.groupShape then reactModule.createElement(gameAssetCardModule, {
+			gameName = p2.gameName,
+			gameThumbnail = p2.gameThumbnail,
+			gameRating = p2.gameRating,
+			gamePlayerCount = p2.gamePlayerCount,
+			isLoading = var18,
+			onPlayButtonActivated = var20,
+			onThumbnailActivated = var19,
+			onMetadataActivated = var21,
+			groupShape = p2.groupShape,
+			mediaRef = p2.mediaRef,
+			LayoutOrder = p2.layoutOrder
+		}) else reactModule.createElement(gameCardGroupableModule, {
 			thumbnailAspectRatio = 1.777777777778,
 			gameName = p2.gameName,
 			gameDescription = p2.gameDescription,
@@ -194,13 +213,13 @@ function GameCardContainer(p1)
 			gamePlayerCount = p2.gamePlayerCount,
 			thumbnailRoundedVariant = if p2.isStartOfGroup then roundedVariantModule.Top elseif p2.isIncoming then roundedVariantModule.TopRight else roundedVariantModule.TopLeft,
 			shouldShowPlayButton = if p2.isPlayButtonEnabled and p2.playabilityStatus then p2.playabilityStatus.isPlayable == true else false,
-			onPlayButtonActivated = if p2.onPlayButtonActivated then var16 else nil,
-			onThumbnailActivated = if p2.openDetails then var15 else nil,
-			onMetadataActivated = if p2.openDetails then var17 else nil,
+			onPlayButtonActivated = var20,
+			onThumbnailActivated = var19,
+			onMetadataActivated = var21,
 			isRepliedTo = p2.isRepliedTo,
 			isIncoming = p2.isIncoming,
 			isPending = p2.isPending,
-			isLoading = if p2.universeId then if p2.gameName then if p2.gameThumbnail then if p2.votesStatus ~= "NotReady" then not p2.gamePlayerCount else true else not p2.gameThumbnail else not p2.gameName else not p2.universeId,
+			isLoading = var18,
 			LayoutOrder = p2.layoutOrder
 		})
 	end

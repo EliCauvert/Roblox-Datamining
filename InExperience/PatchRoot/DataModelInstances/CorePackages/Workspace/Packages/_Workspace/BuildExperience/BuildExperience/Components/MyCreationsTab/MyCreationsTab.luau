@@ -2,7 +2,9 @@
 local parent = buildExperience.Parent
 local _ = game:GetService("AppLifecycleObserverService")
 local playersService = game:GetService("Players")
+local fFlagBuildExperienceMyCreationsLongPressMenuModule = require(buildExperience.Flags.FFlagBuildExperienceMyCreationsLongPressMenu)
 local fFlagBuildExperienceMyCreationsUseUniverseListModule = require(buildExperience.Flags.FFlagBuildExperienceMyCreationsUseUniverseList)
+local fFlagBuildExperienceStableMyCreationsListItemsModule = require(buildExperience.Flags.FFlagBuildExperienceStableMyCreationsListItems)
 local foundationModule = require(parent.Foundation)
 local localizationModule = require(parent.Localization)
 local luaSocialLibrariesDepsModule = require(parent.LuaSocialLibrariesDeps)
@@ -17,6 +19,8 @@ local view = foundationModule.View
 local refreshScrollingFrame = luaSocialLibrariesDepsModule.SocialLibraries.config({}).Components.RefreshScrollingFrame
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
+local listItemInputType = foundationModule.Enums.ListItemInputType
+local var1 = if fFlagBuildExperienceMyCreationsLongPressMenuModule then "MyCreationsTab.NewGameRow" else nil
 local searchEmptyStateModule = require(buildExperience.Components.SearchEmptyState.SearchEmptyState)
 local buildEmptyStateModule = require(script.Parent.Parent.BuildEmptyState.BuildEmptyState)
 local chatConstantsModule = require(script.Parent.Parent.Parent.Chat.chatConstants)
@@ -30,9 +34,9 @@ local experienceResultsLoadingSkeletonModule = require(script.Parent.ExperienceR
 local useMyCreationsResultsModule = require(script.Parent.useMyCreationsResults)
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getSearchQueryStoreModule (ref), reactModule (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceMyCreationsUseUniverseListModule (ref), useMyCreationsResultsModule (ref), chatConstantsModule (ref), playersService (ref), experienceResultsLoadingSkeletonModule (ref), list (ref), iconName (ref), searchEmptyStateModule (ref), view (ref), inputSize (ref), buildEmptyStateModule (ref), experienceResultsListModule (ref), refreshScrollingFrame (ref), fFlagBuildDesktopReadinessModule (ref)
-	local var1
-	local var2 = useLocalization({
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getSearchQueryStoreModule (ref), reactModule (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceMyCreationsUseUniverseListModule (ref), useMyCreationsResultsModule (ref), chatConstantsModule (ref), playersService (ref), fFlagBuildExperienceMyCreationsLongPressMenuModule (ref), fFlagBuildExperienceStableMyCreationsListItemsModule (ref), listItemInputType (ref), experienceResultsLoadingSkeletonModule (ref), list (ref), iconName (ref), var1 (ref), searchEmptyStateModule (ref), view (ref), inputSize (ref), buildEmptyStateModule (ref), experienceResultsListModule (ref), refreshScrollingFrame (ref), fFlagBuildDesktopReadinessModule (ref)
+	local var2
+	local var3 = useLocalization({
 		building = localizationStringsModule.MY_CREATIONS_BUILDING,
 		buildWithAI = localizationStringsModule.MY_CREATIONS_BUILD_WITH_AI,
 		inputNeeded = localizationStringsModule.MY_CREATIONS_INPUT_NEEDED,
@@ -44,39 +48,39 @@ return function(p1)
 		ready = localizationStringsModule.MY_CREATIONS_READY,
 		restricted = localizationStringsModule.MY_CREATIONS_RESTRICTED
 	})
-	local buildWithAI = var2.buildWithAI
-	local loadError = var2.loadError
-	local newGame = var2.newGame
+	local buildWithAI = var3.buildWithAI
+	local loadError = var3.loadError
+	local newGame = var3.newGame
 	local searchQueryStore = p1.searchQueryStore or getSearchQueryStoreModule()
-	local var3 = p1.isFocused ~= false
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(false)
-	useScrollPerformanceTrackerModule("LuaApp_Build_Home_Scroll", var4)
-	local var6 = searchQueryStore.useShowEmptyState()
-	local var7 = if fFlagBuildExperienceMyCreationsUseUniverseListModule then searchQueryStore.useDraftQuery() else nil
-	local var8 = useMyCreationsResultsModule({
+	local var4 = p1.isFocused ~= false
+	local var5 = reactModule.useRef(nil)
+	local var6 = reactModule.useRef(false)
+	useScrollPerformanceTrackerModule("LuaApp_Build_Home_Scroll", var5)
+	local var7 = searchQueryStore.useShowEmptyState()
+	local var8 = if fFlagBuildExperienceMyCreationsUseUniverseListModule then searchQueryStore.useDraftQuery() else nil
+	local var9 = useMyCreationsResultsModule({
 		creatorAgentChatStore = p1.creatorAgentChatStore,
 		configurationStore = p1.configurationStore,
 		searchStore = p1.searchStore,
 		searchQueryStore = searchQueryStore,
 		appLifecycleObserverService = p1.appLifecycleObserverService,
-		isFocused = var3,
+		isFocused = var4,
 		pollingIntervalSeconds = p1.pollingIntervalSeconds,
 		userId = p1.userId
 	})
-	local displayedItems = var8.displayedItems
-	local items = var8.items
-	local hasPendingSummary = var8.hasPendingSummary
-	local listStatus = var8.listStatus
-	local sourceItemCount = var8.sourceItemCount
-	local hasDisplayedResult = var8.hasDisplayedResult
-	local failedLoadMore = var8.failedLoadMore
-	local retryLoadMore = var8.retryLoadMore
-	local refresh = var8.refresh
-	local loadMoreIfNeeded = var8.loadMoreIfNeeded
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), p1 (ref), chatConstantsModule (copy), playersService (copy)
-		var5.current = true
+	local displayedItems = var9.displayedItems
+	local items = var9.items
+	local hasPendingSummary = var9.hasPendingSummary
+	local listStatus = var9.listStatus
+	local sourceItemCount = var9.sourceItemCount
+	local hasDisplayedResult = var9.hasDisplayedResult
+	local failedLoadMore = var9.failedLoadMore
+	local retryLoadMore = var9.retryLoadMore
+	local refresh = var9.refresh
+	local loadMoreIfNeeded = var9.loadMoreIfNeeded
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var6 (ref), p1 (ref), chatConstantsModule (copy), playersService (copy)
+		var6.current = true
 		p1.onOpenChat({
 			isNewGameTarget = true,
 			experienceName = chatConstantsModule.BUILD_CHAT_PAGE_TITLE,
@@ -85,42 +89,43 @@ return function(p1)
 	end, { p1.onOpenChat })
 	
 	if fFlagBuildExperienceMyCreationsUseUniverseListModule then
-		var1 = var8.hasCompletedFocusedRefresh
+		var2 = var9.hasCompletedFocusedRefresh
 		
-		if var1 then
-			var1 = false
+		if var2 then
+			var2 = false
 			
-			if var8.sessionListStatus == "Ready" then
-				var1 = false
+			if var9.sessionListStatus == "Ready" then
+				var2 = false
 				
-				if var8.sessionCount == 0 then
-					var1 = var7 == ""
-					var1 = nil
+				if var9.sessionCount == 0 then
+					var2 = var8 == ""
+					var2 = nil
 				end
 			end
 		end
 	else
-		var1 = var8.hasCompletedFocusedRefresh and (listStatus == "Ready" and sourceItemCount == 0)
+		var2 = var9.hasCompletedFocusedRefresh and (listStatus == "Ready" and sourceItemCount == 0)
 	end
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref), var1 (ref), var5 (ref), var9 (ref)
-		if p1.autoOpenNewGame ~= false and var3 and (var1 and not var5.current) then
-			var9()
+		-- upvalues: p1 (ref), var4 (ref), var2 (ref), var6 (ref), var10 (ref)
+		if p1.autoOpenNewGame ~= false and var4 and (var2 and not var6.current) then
+			var10()
 		end
-	end, { var1, var9, var3, p1.autoOpenNewGame })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref), reactModule (copy), experienceResultsLoadingSkeletonModule (copy)
-		return if var8.isLoadingMore then reactModule.createElement(experienceResultsLoadingSkeletonModule, {
+	end, { var2, var10, var4, p1.autoOpenNewGame })
+	local var11 = if fFlagBuildExperienceMyCreationsLongPressMenuModule and fFlagBuildExperienceStableMyCreationsListItemsModule and p1.onOpenConfigurationPage ~= nil then listItemInputType.None else nil
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: var9 (ref), reactModule (copy), experienceResultsLoadingSkeletonModule (copy)
+		return if var9.isLoadingMore then reactModule.createElement(experienceResultsLoadingSkeletonModule, {
 			LayoutOrder = 1,
 			index = 1,
 			testIdPrefix = "MyCreationsTab"
 		}) else nil
-	end, { var8.isLoadingMore })
+	end, { var9.isLoadingMore })
 	local _ = nil
-	local var11 = reactModule.createElement(view, {
+	local var13 = reactModule.createElement(view, {
 		tag = "composition-content-body col size-full-0 auto-y",
 		testId = "MyCreationsTab.ContentBody"
-	}, if var6 then {
+	}, if var7 then {
 		SearchEmptyState = reactModule.createElement(searchEmptyStateModule, { testId = "MyCreationsTab.SearchEmptyState" })
 	} elseif hasDisplayedResult and not hasPendingSummary and #displayedItems == 0 then {
 		EmptyContent = reactModule.createElement(view, { tag = "col size-full" }, {
@@ -135,7 +140,9 @@ return function(p1)
 					leading = iconName.PlusLarge,
 					title = newGame,
 					description = buildWithAI,
-					onActivated = var9
+					testId = var1,
+					onActivated = var10,
+					input = var11
 				})
 			}),
 			EmptyState = reactModule.createElement(view, {
@@ -159,28 +166,31 @@ return function(p1)
 			retryLoadMore = retryLoadMore,
 			loadError = loadError,
 			onOpenChat = p1.onOpenChat,
+			onOpenConfigurationPage = p1.onOpenConfigurationPage,
 			leadingItems = reactModule.useMemo(function()
-				-- upvalues: reactModule (copy), list (copy), iconName (copy), newGame (ref), buildWithAI (ref), var9 (ref)
+				-- upvalues: reactModule (copy), list (copy), iconName (copy), newGame (ref), buildWithAI (ref), var1 (copy), var10 (ref), var11 (ref)
 				return {
 					CreateRow = reactModule.createElement(list.Item, {
 						LayoutOrder = 1,
 						leading = iconName.PlusLarge,
 						title = newGame,
 						description = buildWithAI,
-						onActivated = var9
+						testId = var1,
+						onActivated = var10,
+						input = var11
 					})
 				}
-			end, { buildWithAI, var9, newGame })
+			end, { buildWithAI, var10, newGame, var11 })
 		})
 	})
 	
 	return reactModule.createElement(refreshScrollingFrame, {
 		usesBuilderIcon = true,
 		refresh = refresh,
-		ref = var4,
+		ref = var5,
 		onCanvasPositionChangedCallback = loadMoreIfNeeded,
 		onCanvasSizeChangedCallback = loadMoreIfNeeded,
-		createFooter = var10,
+		createFooter = var12,
 		scrollingElementProps = {
 			LayoutOrder = p1.LayoutOrder,
 			ZIndex = 1,
@@ -199,6 +209,6 @@ return function(p1)
 				["composition-layout-detail"] = true,
 				["size-full-0 auto-y"] = true
 			}
-		}, { ContentBody = var11 })
-	} else { ContentBody = var11 })
+		}, { ContentBody = var13 })
+	} else { ContentBody = var13 })
 end

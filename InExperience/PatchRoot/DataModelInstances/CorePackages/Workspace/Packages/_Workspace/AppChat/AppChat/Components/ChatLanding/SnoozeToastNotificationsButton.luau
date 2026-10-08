@@ -15,19 +15,18 @@ local images = UIBloxModule.App.ImageSet.Images
 local useTelemetryModule = require(appChat.Telemetry.useTelemetry)
 local chatLandingTelemetryEventsModule = require(script:FindFirstAncestor("ChatLanding").ChatLandingTelemetryEvents)
 local chatLandingTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatLandingTelemetryLayer)
-local chatSnoozeMenuDescriptionFixEnabled = game:DefineFastFlag("ChatSnoozeMenuDescriptionFixEnabled", false)
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local fFlagAppChatToastChatTerminologyFixEnabled = require(parent.SharedFlags).FFlagAppChatToastChatTerminologyFixEnabled
 local argoPartyExperimentation = require(parent.SocialExperiments).ArgoPartyExperimentation
 
 return function(p1)
-	-- upvalues: useLocalization (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), chatSnoozeMenuDescriptionFixEnabled (ref), fFlagAppChatToastChatTerminologyFixEnabled (ref), fFlagExpChatEnableFriendsTab (ref), getFFlagIsSquadEnabled (ref), reactModule (ref), default (ref), toastNotificationTypeModule (ref), notificationSnoozedSignal (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), iconButton (ref), images (ref), notificationGroups (ref), showNotificationSnoozeMenuSignal (ref), chatLandingTelemetryEventsModule (ref)
+	-- upvalues: useLocalization (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), fFlagAppChatToastChatTerminologyFixEnabled (ref), fFlagExpChatEnableFriendsTab (ref), getFFlagIsSquadEnabled (ref), reactModule (ref), default (ref), toastNotificationTypeModule (ref), notificationSnoozedSignal (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), iconButton (ref), images (ref), notificationGroups (ref), showNotificationSnoozeMenuSignal (ref), chatLandingTelemetryEventsModule (ref)
 	local var1 = useLocalization({
 		party = "Feature.Squads.Label.Party",
+		snoozeDescription = "Feature.Chat.Description.SnoozeDescription",
 		unmuteFeedback = "Feature.Notifications.Heading.RemoveSnoozeFeedback",
 		chat = if argoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "CommonUI.Features.Label.Chat" else "Feature.Squads.Label.Party" else "Feature.Chat.Heading.ChatWithConnections",
-		snoozeDescription = if chatSnoozeMenuDescriptionFixEnabled then "Feature.Chat.Description.SnoozeDescription" else nil,
 		snoozeTitle = if fFlagAppChatToastChatTerminologyFixEnabled and fFlagExpChatEnableFriendsTab then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Label.MuteInGameChatToastNotifications" else "Feature.Chat.Label.MuteInGamePartyToastNotifications" elseif fFlagExpChatEnableFriendsTab then "Feature.Chat.Label.MuteInGameChatToastNotifications" elseif argoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Title.MuteChatNotifications" else "Feature.Chat.Label.SnoozePartyNotifications" elseif getFFlagIsSquadEnabled() then "Feature.Chat.Label.SnoozePartyNotifications" else "Feature.Chat.Label.SnoozeChatNotifications"
 	})
 	local var2, var3 = reactModule.useState(default:isSnoozedNotificationType(toastNotificationTypeModule.NotificationTypeEnum.ChatNewMessage))
@@ -52,7 +51,7 @@ return function(p1)
 		icon = if var2 then images["icons/common/snoozeNotificationsOn"] else images["icons/common/snoozeNotificationsOff"],
 		layoutOrder = p1.layoutOrder,
 		onActivated = function()
-			-- upvalues: var2 (ref), var1 (ref), argoPartyExperimentation (copy), getFFlagIsSquadEnabled (copy), default (copy), notificationGroups (copy), showNotificationSnoozeMenuSignal (copy), chatSnoozeMenuDescriptionFixEnabled (copy), var4 (ref), chatLandingTelemetryEventsModule (copy)
+			-- upvalues: var2 (ref), var1 (ref), argoPartyExperimentation (copy), getFFlagIsSquadEnabled (copy), default (copy), notificationGroups (copy), showNotificationSnoozeMenuSignal (copy), var4 (ref), chatLandingTelemetryEventsModule (copy)
 			if var2 then
 				default:unmuteNotification({
 					context = "ChatLandingSnoozeToastNotificationsButton",
@@ -64,7 +63,7 @@ return function(p1)
 					context = "ChatLandingSnoozeToastNotificationsButton",
 					notificationType = notificationGroups.ChatLandingNotificationsGroup,
 					title = var1.snoozeTitle,
-					description = if chatSnoozeMenuDescriptionFixEnabled then var1.snoozeDescription else nil
+					description = var1.snoozeDescription
 				})
 			end
 			var4.emit(chatLandingTelemetryEventsModule.ChatLandingSnoozeBtnClicked, { isChatNotificationsMuted = var2 })

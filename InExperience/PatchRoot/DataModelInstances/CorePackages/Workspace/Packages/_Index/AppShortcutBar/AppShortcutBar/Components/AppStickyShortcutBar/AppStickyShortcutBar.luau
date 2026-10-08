@@ -4,6 +4,7 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local responsiveModule = require(parent.Responsive)
+local displayModule = require(parent.Display)
 local useTokens = foundationModule.Hooks.useTokens
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 local useFocusedTextBox = focusNavigationUtilsModule.useFocusedTextBox
@@ -11,7 +12,9 @@ local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local useSignalState = require(parent.SignalsReact).useSignalState
 local loginStatus = require(parent.RobloxAppEnums).LoginStatus
 local disallowStickyShortcutBarOnNotLoggedIn = game:DefineFastFlag("DisallowStickyShortcutBarOnNotLoggedIn", false)
-local fFlagUseSignalsForAuthenticationStatus = require(parent.SharedFlags).FFlagUseSignalsForAuthenticationStatus
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagUseSignalsForAuthenticationStatus = sharedFlagsModule.FFlagUseSignalsForAuthenticationStatus
+local fFlagEnableStickyShortcutBarOnAllPlatforms = sharedFlagsModule.FFlagEnableStickyShortcutBarOnAllPlatforms
 local var1 = if fFlagUseSignalsForAuthenticationStatus then require(parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
 
 local function selectUserLoggedIn(p1)
@@ -20,36 +23,79 @@ local function selectUserLoggedIn(p1)
 end
 
 local useAppShortcutBarHeight = require(appShortcutBar.Hooks).useAppShortcutBarHeight
+local useIsStickyShortcutBarEnabled = require(appShortcutBar.Hooks).useIsStickyShortcutBarEnabled
 local getShortcutBarStatusStoreModule = require(appShortcutBar.Stores.GetShortcutBarStatusStore)
 local appShortcut = require(appShortcutBar.Components.AppShortcut).AppShortcut
 
 function AppStickyShortcutBar(p1)
-	-- upvalues: getShortcutBarStatusStoreModule (ref), useTokens (ref), useAppShortcutBarHeight (ref), responsiveModule (ref), useFocusedTextBox (ref), disallowStickyShortcutBarOnNotLoggedIn (ref), fFlagUseSignalsForAuthenticationStatus (ref), useSignalState (ref), var1 (ref), loginStatus (ref), useSelector (ref), selectUserLoggedIn (ref), focusNavigationEventNameEnum (ref), reactModule (ref), appShortcut (ref)
+	-- upvalues: getShortcutBarStatusStoreModule (ref), useTokens (ref), useAppShortcutBarHeight (ref), responsiveModule (ref), useFocusedTextBox (ref), fFlagEnableStickyShortcutBarOnAllPlatforms (ref), useIsStickyShortcutBarEnabled (ref), useSignalState (ref), displayModule (ref), disallowStickyShortcutBarOnNotLoggedIn (ref), fFlagUseSignalsForAuthenticationStatus (ref), var1 (ref), loginStatus (ref), useSelector (ref), selectUserLoggedIn (ref), focusNavigationEventNameEnum (ref), reactModule (ref), appShortcut (ref)
 	local var2 = getShortcutBarStatusStoreModule(false)
 	local var3 = useTokens()
 	local var4 = useAppShortcutBarHeight()
 	local var5 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
 	local var6 = useFocusedTextBox()
-	local var7 = nil
+	local var7 = if fFlagEnableStickyShortcutBarOnAllPlatforms then useIsStickyShortcutBarEnabled(p1.currentPage) else nil
+	local var8 = if fFlagEnableStickyShortcutBarOnAllPlatforms then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
+	
+	if fFlagEnableStickyShortcutBarOnAllPlatforms then
+		var8 = {
+			left = math.ceil(var8.left),
+			top = math.ceil(var8.top),
+			right = math.ceil(var8.right),
+			bottom = math.ceil(var8.bottom)
+		}
+	end
+	local var9 = nil
 	
 	if disallowStickyShortcutBarOnNotLoggedIn then
 		if fFlagUseSignalsForAuthenticationStatus then
-			var7 = useSignalState(var1(false).getStatus) == loginStatus.LOGGED_IN
-			var7 = nil
+			var9 = useSignalState(var1(false).getStatus) == loginStatus.LOGGED_IN
+			var9 = nil
 		else
-			var7 = useSelector(selectUserLoggedIn)
+			var9 = useSelector(selectUserLoggedIn)
 		end
 	end
-	local var8 = if p1.items then if #p1.items ~= 0 then #p1.items == 1 or (var6 or disallowStickyShortcutBarOnNotLoggedIn and not var7) else true else not p1.items
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var8 (ref)
-		var2.setShortcutBarVisible(not var8)
-	end, { var8 })
+	local var10 = not p1.items
 	
-	if var8 then
+	if not var10 then
+		var10 = true
+		
+		if #p1.items ~= 0 then
+			if #p1.items == 1 then
+				var10 = true
+				
+				if p1.items[1].eventName ~= focusNavigationEventNameEnum.NavigateBack then
+					var10 = var6 or disallowStickyShortcutBarOnNotLoggedIn and not var9
+				end
+			end
+		end
+	end
+	if fFlagEnableStickyShortcutBarOnAllPlatforms then
+		var10 = not var7
+	end
+	reactModule.useEffect(function()
+		-- upvalues: var2 (ref), var10 (write)
+		var2.setShortcutBarVisible(not var10)
+	end, { var10 })
+	
+	if fFlagEnableStickyShortcutBarOnAllPlatforms then
+		local maxValue = math.max(var4 - var8.bottom, 0)
+		reactModule.useEffect(function()
+			-- upvalues: var2 (ref), var10 (write), maxValue (ref)
+			var2.setShortcutBarReservedHeight(if var10 then 0 else maxValue)
+		end, { var10, maxValue, var2.setShortcutBarReservedHeight })
+		reactModule.useEffect(function()
+			-- upvalues: var2 (ref)
+			return function()
+				-- upvalues: var2 (copy)
+				var2.setShortcutBarReservedHeight(0)
+			end
+		end, { var2.setShortcutBarReservedHeight })
+	end
+	if var10 then
 		return nil
 	end
-	local var9 = nil
+	local var11 = nil
 	local t = {
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -58,28 +104,31 @@ function AppStickyShortcutBar(p1)
 			Padding = UDim.new(0, var3.Gap.Large)
 		})
 	}
-	local var10 = if var5 then math.min(#p1.items, 4) else #p1.items
-	local var11 = 0
+	local var12 = if fFlagEnableStickyShortcutBarOnAllPlatforms then p1.items or {} else p1.items
+	local var13 = if var5 then math.min(#var12, 4) else #var12
+	local var14 = 0
 	
-	for i, v in p1.items do
-		if var11 < var10 and v.eventName ~= focusNavigationEventNameEnum.NavigateBack then
-			var11 += 1
-			local var12 = if var5 then var10 - var11 + 1 else var11
-			t["Item_" .. tostring(var12)] = reactModule.createElement(appShortcut, { layoutOrder = var12, item = v })
+	for i, v in var12 do
+		if var14 < var13 and v.eventName ~= focusNavigationEventNameEnum.NavigateBack then
+			var14 += 1
+			local var15 = if var5 then var13 - var14 + 1 else var14
+			t["Item_" .. tostring(var15)] = reactModule.createElement(appShortcut, { layoutOrder = var15, item = v })
 		end
 		if v.eventName == focusNavigationEventNameEnum.NavigateBack then
-			var9 = reactModule.createElement(appShortcut, { item = v })
+			var11 = reactModule.createElement(appShortcut, { item = v })
 		end
 	end
+	local var16 = fFlagEnableStickyShortcutBarOnAllPlatforms and not p1.isLeftNavVisible
+	
 	return reactModule.createElement("ImageButton", {
 		BorderSizePixel = 0,
 		Selectable = false,
 		AutoButtonColor = false,
 		BackgroundColor3 = var3.Color.Surface.Surface_0.Color3,
 		BackgroundTransparency = var3.Color.Surface.Surface_0.Transparency,
-		Size = UDim2.new(1, 0, 0, var4),
+		Size = if fFlagEnableStickyShortcutBarOnAllPlatforms then UDim2.new(1, var8.right + (if var16 then var8.left else 0), 0, var4) else UDim2.new(1, 0, 0, var4),
 		AnchorPoint = Vector2.new(0, 1),
-		Position = UDim2.fromScale(0, 1)
+		Position = if fFlagEnableStickyShortcutBarOnAllPlatforms then UDim2.new(0, if var16 then -var8.left else 0, 1, var8.bottom) else UDim2.fromScale(0, 1)
 	}, {
 		Divider = reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
@@ -106,7 +155,7 @@ function AppStickyShortcutBar(p1)
 				AnchorPoint = Vector2.new(0, 0.5),
 				Position = UDim2.fromScale(0, 0.5),
 				AutomaticSize = Enum.AutomaticSize.XY
-			}, { BackShortcut = var9 }),
+			}, { BackShortcut = var11 }),
 			RightShortcutsFrame = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(0, 1),

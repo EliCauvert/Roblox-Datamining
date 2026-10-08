@@ -16,7 +16,7 @@ return function(p1)
 		showPlusIcon = true,
 		testId = "FramesPlusUpsellBar",
 		message = var1.unlockBanner,
-		actionText = var1.subscribe,
+		actionText = p1.actionText or var1.subscribe,
 		onActivated = p1.onSubscribeActivated,
 		LayoutOrder = p1.layoutOrder
 	})

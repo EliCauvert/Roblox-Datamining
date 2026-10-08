@@ -1,6 +1,7 @@
 ﻿local videoUtils = script:FindFirstAncestor("VideoUtils")
 local parent = videoUtils.Parent
 local videoFrameWrapperModule = require(videoUtils.VideoFrameWrapper)
+local getAuthorizedVideoUriModule = require(videoUtils.getAuthorizedVideoUri)
 local argCheckModule = require(parent.ArgCheck)
 local loadableImage = require(parent.UIBlox).App.Loading.LoadableImage
 local reactModule = require(parent.React)
@@ -13,9 +14,10 @@ local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlag
 local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
 local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
+local fFlagLuaAppHomeMomentVideoFallback = require(parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 
 local function LoadableVideoFrame(p1, p2)
-	-- upvalues: reactModule (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), argCheckModule (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), videoFrameWrapperModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), loadableImage (ref), skeleton (ref), radius (ref)
+	-- upvalues: reactModule (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), argCheckModule (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), videoFrameWrapperModule (ref), fFlagLuaAppHomeMomentVideoFallback (ref), getAuthorizedVideoUriModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), loadableImage (ref), skeleton (ref), radius (ref)
 	local var1, var2 = reactModule.useState(false)
 	local var3 = if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen or (fFlagLuaAppEdpConsoleMediaGalleryVideo or fFlagLuaAppEnableHomepageOneByTwoTile) then nil else reactModule.useRef(nil)
 	local var4 = reactModule.useRef(nil)
@@ -79,7 +81,7 @@ local function LoadableVideoFrame(p1, p2)
 		VideoFrame = reactModule.createElement(videoFrameWrapperModule, {
 			zIndex = 4,
 			videoFrameRef = if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen or (fFlagLuaAppEdpConsoleMediaGalleryVideo or fFlagLuaAppEnableHomepageOneByTwoTile) then p2 else var3,
-			video = p1.video,
+			video = if fFlagLuaAppHomeMomentVideoFallback then getAuthorizedVideoUriModule(p1.video, p1.accessContext) else p1.video,
 			isPlaying = p1.shouldStartPlayback,
 			looped = p1.looped,
 			volume = if p1.muted then 0 else nil,

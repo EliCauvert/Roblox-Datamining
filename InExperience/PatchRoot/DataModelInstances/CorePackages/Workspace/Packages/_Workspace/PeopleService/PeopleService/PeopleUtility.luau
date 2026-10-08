@@ -5,6 +5,7 @@ local userProfilesModule = require(parent_1.UserProfiles)
 local sortTableByValue = require(parent_1.CoreScriptsRoactCommon).Utilities.sortTableByValue
 local _ = require(parent.createPersonStore)
 local getFFlagPeoplePageEnablePersonSignalStore = require(parent.Flags).GetFFlagPeoplePageEnablePersonSignalStore
+local fFlagUserProfilePlatformProfile = require(parent_1.SharedFlags).FFlagUserProfilePlatformProfile
 local _, status = pcall(function()
 	return game:GetService("PlatformFriendsService")
 end)
@@ -36,10 +37,10 @@ return {
 		return t
 	end,
 	getPlatformData = function(p2)
-		-- upvalues: userProfileStore (ref)
+		-- upvalues: userProfileStore (ref), fFlagUserProfilePlatformProfile (ref)
 		local t = {}
 		
-		for i, v in userProfileStore.get().fetchNamesByUserIds(p2)(false).data do
+		for i, v in userProfileStore.get().fetchNamesByUserIds(p2, nil, fFlagUserProfilePlatformProfile)(false).data do
 			t[p2[i]] = {
 				platformName = v.names.getPlatformName,
 				platformProfileId = v.getPlatformProfileId

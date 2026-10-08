@@ -10,7 +10,8 @@ local var1 = tModule.strictInterface({
 	shortShareLinkFailed = tModule.optional(tModule.boolean),
 	shareToAppsflyer = tModule.optional(tModule.boolean),
 	stamp = tModule.optional(tModule.string),
-	linkId = tModule.optional(tModule.string)
+	linkId = tModule.optional(tModule.string),
+	universeId = if require(parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents then tModule.optional(tModule.string) else nil
 })
 
 return function(p1, p2)

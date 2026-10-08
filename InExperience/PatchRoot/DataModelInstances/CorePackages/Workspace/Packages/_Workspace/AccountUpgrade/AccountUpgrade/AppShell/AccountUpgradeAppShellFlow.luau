@@ -14,6 +14,7 @@ return function(p1)
 		currentUsername = p1.currentUsername,
 		hasBackdrop = p1.hasBackdrop,
 		onClose = p1.onDismiss,
+		onSignOut = p1.onSignOut,
 		onSignUpComplete = reactModule.useCallback(function(p2)
 			-- upvalues: onComplete (ref)
 			if p2.isSuccess then

@@ -11,15 +11,44 @@ local skeleton = foundationModule.Skeleton
 local text = foundationModule.Text
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
+local fFlagMomentsCreationMusicPickerPaginationModule = require(musicPicker.Flags.FFlagMomentsCreationMusicPickerPagination)
 local musicPickerRowModule = require(musicPicker.Components.MusicPickerRow)
 local _ = require(musicPicker.Types.MusicPickerTypes)
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), text (ref), skeleton (ref), radius (ref), button (ref), foundationModule (ref), musicPickerRowModule (ref), scrollView (ref), scrollBarVisibility (ref)
+	-- upvalues: useTokens (ref), fFlagMomentsCreationMusicPickerPaginationModule (ref), reactModule (ref), view (ref), icon (ref), text (ref), skeleton (ref), radius (ref), button (ref), foundationModule (ref), musicPickerRowModule (ref), scrollView (ref), scrollBarVisibility (ref)
 	local var1 = useTokens()
 	local content = p1.content
 	local emptyState = content.emptyState
+	local onLoadMore = content.onLoadMore
+	local var2 = content.isLoadingMore == true
+	local var3 = nil
+	local var4 = nil
 	
+	if fFlagMomentsCreationMusicPickerPaginationModule then
+		local var5 = reactModule.useRef(nil)
+		local var6 = reactModule.useCallback(function(p2)
+			-- upvalues: onLoadMore (ref), var2 (ref)
+			if onLoadMore == nil or var2 then return end
+			local y = p2.AbsoluteCanvasSize.Y
+			local y_1 = p2.AbsoluteWindowSize.Y
+			
+			if y <= 0 or y_1 <= 0 then return end
+			if y - 128 <= p2.CanvasPosition.Y + y_1 then
+				onLoadMore()
+			end
+		end, { onLoadMore, var2 })
+		reactModule.useEffect(function()
+			-- upvalues: var5 (ref), var6 (ref)
+			local current = var5.current
+			
+			if current ~= nil then
+				var6(current)
+			end
+		end, { var6, #content.items })
+		var3 = var5
+		var4 = var6
+	end
 	if content.status == "success" and #content.items == 0 and emptyState ~= nil then
 		return reactModule.createElement(view, {
 			testId = "saved-empty-state",
@@ -59,7 +88,7 @@ return function(p1)
 			})
 		})
 	end
-	local var2
+	local var7
 	local _ = nil
 	
 	if content.status == "loading" then
@@ -72,9 +101,9 @@ return function(p1)
 				Size = UDim2.new(1, 0, 0, 64)
 			})
 		end
-		var2 = t
+		var7 = t
 	elseif content.status == "error" then
-		var2 = {
+		var7 = {
 			Error = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y padding-top-large text-body-medium text-align-x-center content-default",
@@ -89,7 +118,7 @@ return function(p1)
 			})
 		}
 	elseif content.status == "success" and #content.items == 0 then
-		var2 = {
+		var7 = {
 			Empty = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y padding-top-large text-body-medium text-align-x-center content-default",
@@ -102,9 +131,16 @@ return function(p1)
 		for i_1, v in content.items do
 			t[tostring(v.id)] = reactModule.createElement(musicPickerRowModule, { item = v, layoutOrder = i_1, onSelect = p1.onSelect })
 		end
-		var2 = t
+		if var2 then
+			t.LoadingMore = reactModule.createElement(skeleton, {
+				LayoutOrder = #content.items + 1,
+				radius = radius.Medium,
+				Size = UDim2.new(1, 0, 0, 64)
+			})
+		end
+		var7 = t
 	else
-		var2 = nil
+		var7 = nil
 	end
 	return reactModule.createElement(scrollView, {
 		tag = "col align-x-left align-y-top size-full",
@@ -119,8 +155,13 @@ return function(p1)
 		},
 		scroll = {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
+			CanvasSize = if onLoadMore ~= nil then nil else UDim2.new(),
 			ScrollingDirection = Enum.ScrollingDirection.Y,
 			scrollBarVisibility = scrollBarVisibility.None
-		}
-	}, var2)
+		},
+		scrollingFrameRef = var3,
+		onCanvasPositionChanged = if onLoadMore ~= nil then nil else var4,
+		onAbsoluteCanvasSizeChanged = if onLoadMore ~= nil then nil else var4,
+		onAbsoluteWindowSizeChanged = if onLoadMore ~= nil then nil else var4
+	}, var7)
 end

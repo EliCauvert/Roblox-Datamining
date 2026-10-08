@@ -1,7 +1,9 @@
 ﻿local assetService = game:GetService("AssetService")
+local httpService = game:GetService("HttpService")
 local playersService = game:GetService("Players")
 local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
 local teleportService = game:GetService("TeleportService")
+local buildPlaytestReservedServerId = game:DefineFastFlag("BuildPlaytestReservedServerId", false)
 local var1 = nil
 local t = {}
 local buildExperiencePlaytestTeleport = Instance.new("RemoteEvent")
@@ -32,7 +34,7 @@ local function getCurrentExperiencePlaceIds()
 end
 
 buildExperiencePlaytestTeleport.OnServerEvent:Connect(function(p1, p2)
-	-- upvalues: t (ref), getCurrentExperiencePlaceIds (ref), teleportService (ref)
+	-- upvalues: t (ref), getCurrentExperiencePlaceIds (ref), buildPlaytestReservedServerId (ref), httpService (ref), teleportService (ref)
 	local userId = t[p1.UserId]
 	
 	if userId ~= nil and userId > 5 then return end
@@ -43,11 +45,13 @@ buildExperiencePlaytestTeleport.OnServerEvent:Connect(function(p1, p2)
 	end
 	if not p1:GetCanManageAsync() then return end
 	if typeof(p2) ~= "number" or p2 <= 0 then return end
-	if game.PlaceId == p2 or getCurrentExperiencePlaceIds()[p2] then
-		local teleportOptions = Instance.new("TeleportOptions")
+	if game.PlaceId ~= p2 and not getCurrentExperiencePlaceIds()[p2] then return end
+	local teleportOptions = Instance.new("TeleportOptions")
+	
+	if buildPlaytestReservedServerId then
+		teleportOptions.ReservedServerId = httpService:GenerateGUID(false)
+	else
 		teleportOptions.ShouldReserveServer = true
-		teleportService:TeleportAsync(p2, { p1 }, teleportOptions)
-		
-		return
 	end
+	teleportService:TeleportAsync(p2, { p1 }, teleportOptions)
 end)

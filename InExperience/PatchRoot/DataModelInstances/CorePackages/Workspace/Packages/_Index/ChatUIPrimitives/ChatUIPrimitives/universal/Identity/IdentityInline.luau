@@ -16,7 +16,7 @@ return function(p1)
 		LayoutOrder = p1.LayoutOrder
 	}, {
 		avatar = reactModule.createElement(foundationModule.Image, {
-			tag = "size-400-400",
+			tag = "size-400-400 stroke-standard stroke-default radius-circle",
 			Image = var2:map(function(p2)
 				return if p2 and p2.avatarContent then p2.avatarContent else ""
 			end),

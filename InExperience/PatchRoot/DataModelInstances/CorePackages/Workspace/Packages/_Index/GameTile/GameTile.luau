@@ -19,6 +19,7 @@ return {
 	OpenSponsoredTooltip = require(script.OpenSponsoredTooltip),
 	usePlayerCountText = require(script.Footer.usePlayerCountText),
 	getGameTileLayoutData = require(script.getGameTileLayoutData),
+	getLayoutDataVideo = require(script.getLayoutDataVideo),
 	getGameTileCollectionItemSize = require(script.getGameTileCollectionItemSize),
 	UserIconList = require(script.Footer.UserIconList),
 	WideGameTileViewConfig = require(script.WideGameTileViewConfig),

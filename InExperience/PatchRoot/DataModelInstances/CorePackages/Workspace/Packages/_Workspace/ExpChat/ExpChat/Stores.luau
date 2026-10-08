@@ -16,5 +16,6 @@
 	GetChatTooltipStore = require(script.GetChatTooltipStore),
 	GetRewriteDropdownStore = require(script.GetRewriteDropdownStore),
 	GetGlobalMutedUsersStore = require(script.GetGlobalMutedUsersStore),
-	GetPresetChatStore = require(script.GetPresetChatStore)
+	GetPresetChatStore = require(script.GetPresetChatStore),
+	GetDictationModeSettingStore = require(script.GetDictationModeSettingStore)
 }

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("MigrateFriendshipStatusesUserSearch", false) and require(script:FindFirstAncestor("UserSearch").Parent.SharedFlags).FFlagEnableGetFriendshipStatus

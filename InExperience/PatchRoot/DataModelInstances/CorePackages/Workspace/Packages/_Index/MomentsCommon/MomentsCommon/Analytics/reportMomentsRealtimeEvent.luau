@@ -1,5 +1,4 @@
-﻿local eventNamesModule = require(script.Parent.EventNames)
-local realtimeEventNamesModule = require(script.Parent.RealtimeEventNames)
+﻿local realtimeEventNamesModule = require(script.Parent.RealtimeEventNames)
 local realtimeTelemetryActionListModule = require(script.Parent.RealtimeTelemetryActionList)
 local realtimeTelemetryEmitterModule = require(script.Parent.realtimeTelemetryEmitter)
 
@@ -86,65 +85,5 @@ return {
 	reportMomentsGenerateText = function(p1, p2)
 		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
 		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsGenerateText], { status = p1 })
-	end,
-	reportMomentsCommentsListLoad = function(p1, p2, p3, p4, p5)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p5 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsCommentsListLoad], {
-			status = p1,
-			loadType = p2,
-			surface = p3,
-			failureReason = p4
-		})
-	end,
-	reportMomentsCommentPost = function(p1, p2, p3, p4)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p4 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsCommentPost], { status = p1, surface = p2, failureReason = p3 })
-	end,
-	reportMomentsComments = function(p1, p2, p3)
-		-- upvalues: eventNamesModule (ref), realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		local surface = p2.surface or ""
-		
-		if p1 == eventNamesModule.MomentCommentsListLoadAttempted then
-			(p3 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsCommentsListLoad], {
-				status = "attempted",
-				failureReason = nil,
-				loadType = p2.loadType or "",
-				surface = surface
-			})
-			
-			return
-		elseif p1 == eventNamesModule.MomentCommentsListLoadSucceeded then
-			(p3 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsCommentsListLoad], {
-				status = "succeeded",
-				failureReason = nil,
-				loadType = p2.loadType or "",
-				surface = surface
-			})
-			
-			return
-		elseif p1 == eventNamesModule.MomentCommentsListLoadFailed then
-			(p3 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsCommentsListLoad], {
-				status = "failed",
-				loadType = p2.loadType or "",
-				surface = surface,
-				failureReason = p2.failureReason
-			})
-			
-			return
-		elseif p1 == eventNamesModule.MomentCommentPostAttempted then
-			(p3 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsCommentPost], {
-				status = "attempted",
-				failureReason = nil,
-				surface = surface
-			})
-			
-			return
-		elseif p1 == eventNamesModule.MomentCommentPostResult then
-			(p3 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsCommentPost], {
-				status = p2.outcome or "",
-				surface = surface,
-				failureReason = p2.failureReason
-			})
-		end
 	end
 }

@@ -1,8 +1,10 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
+﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
+local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local libraryTileModule = require(script.Parent.Parent.LibraryTile)
 local _ = require(script.Parent.Parent.LibraryTypes)
+local useHardwareInsetsModule = require(buildExperience.Components.ChatSheet.useHardwareInsets)
 local scrollView = foundationModule.ScrollView
 local skeleton = foundationModule.Skeleton
 local view = foundationModule.View
@@ -10,8 +12,9 @@ local radius = foundationModule.Enums.Radius
 local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
 
 return function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), libraryTileModule (ref), scrollView (ref), scrollBarVisibility (ref)
+	-- upvalues: foundationModule (ref), useHardwareInsetsModule (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), libraryTileModule (ref), scrollView (ref), scrollBarVisibility (ref)
 	local var1 = foundationModule.Hooks.useTokens()
+	local bottom = useHardwareInsetsModule().bottom
 	local medium = var1.Gap.Medium
 	local var2 = foundationModule.Hooks.useScaledValue(180)
 	local size1200 = var1.Size.Size_1200
@@ -104,14 +107,20 @@ return function(p1)
 				scrollBarVisibility = scrollBarVisibility.None
 			}
 		}, {
-			Layout = reactModule.createElement("UIGridLayout", {
-				CellPadding = UDim2.fromOffset(medium, medium),
-				CellSize = UDim2.fromOffset(floored, var5),
-				FillDirection = Enum.FillDirection.Horizontal,
-				HorizontalAlignment = Enum.HorizontalAlignment.Left,
-				SortOrder = Enum.SortOrder.LayoutOrder
-			}),
-			Items = reactModule.createElement(reactModule.Fragment, nil, t)
+			Content = reactModule.createElement(view, {
+				tag = "size-full-0 auto-y",
+				testId = "Library.Category.Grid.Content",
+				padding = { bottom = UDim.new(0, bottom) }
+			}, {
+				Layout = reactModule.createElement("UIGridLayout", {
+					CellPadding = UDim2.fromOffset(medium, medium),
+					CellSize = UDim2.fromOffset(floored, var5),
+					FillDirection = Enum.FillDirection.Horizontal,
+					HorizontalAlignment = Enum.HorizontalAlignment.Left,
+					SortOrder = Enum.SortOrder.LayoutOrder
+				}),
+				Items = reactModule.createElement(reactModule.Fragment, nil, t)
+			})
 		})
 	})
 end

@@ -1,4 +1,8 @@
 ﻿local appChat = script:FindFirstAncestor("AppChat")
+
+if require(appChat.Flags.FFlagAppChatMigrateChatExternalEventReceiver) then
+	return require(script.Parent.ChatExternalEventReceiver2)
+end
 local parent = appChat.Parent
 local cryoModule = require(parent.Cryo)
 local dataHydrationModule = require(parent.DataHydration)

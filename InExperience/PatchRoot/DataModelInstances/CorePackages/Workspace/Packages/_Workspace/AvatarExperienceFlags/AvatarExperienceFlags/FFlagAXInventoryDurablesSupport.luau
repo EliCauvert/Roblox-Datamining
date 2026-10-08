@@ -1,4 +1,3 @@
-﻿local fFlagAXRootSlotBasedEditorFlagModule = require(script.Parent.FFlagAXRootSlotBasedEditorFlag)
-local fFlagAXEditorSubcategoryFiltersModule = require(script.Parent.FFlagAXEditorSubcategoryFilters)
+﻿local fFlagAXEditorSubcategoryFiltersModule = require(script.Parent.FFlagAXEditorSubcategoryFilters)
 
-return game:DefineFastFlag("AXInventoryDurablesSupport5", false) and (fFlagAXRootSlotBasedEditorFlagModule and fFlagAXEditorSubcategoryFiltersModule) or game:DefineFastFlag("AXStandaloneInventoryDurablesSupport", false) and (fFlagAXRootSlotBasedEditorFlagModule and fFlagAXEditorSubcategoryFiltersModule)
+return game:DefineFastFlag("AXInventoryDurablesSupport5", false) and fFlagAXEditorSubcategoryFiltersModule or game:DefineFastFlag("AXStandaloneInventoryDurablesSupport", false) and fFlagAXEditorSubcategoryFiltersModule

@@ -10,42 +10,60 @@ local dialogSize = foundationModule.Enums.DialogSize
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
 return function(p1)
-	-- upvalues: useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), useLocalization (ref), buttonVariant (ref), reactModule (ref), dialog (ref), dialogSize (ref)
-	local var1 = useLocalization({
+	-- upvalues: useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), useLocalization (ref), reactModule (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
+	local var1 = useFocusRoot({
+		isAutoFocusRoot = true,
+		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp
+	})
+	local var2 = useLocalization({
 		titleText = "Authentication.SignUp.Header.CloseWithoutFinishing",
 		bodyText = "Authentication.SignUp.Subtitle.YoureAlmostThere",
 		backText = "CommonUI.Controls.Action.Back",
 		closeText = "CommonUI.Features.Action.Close"
 	})
+	local var3, var4 = reactModule.useState(false)
+	local var5 = reactModule.useRef(false)
+	local onSignOut = p1.onSignOut
+	local onBack = p1.onBack
 	
 	return reactModule.createElement(dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
 		testId = "account-upgrade-close-dialog",
-		ref = useFocusRoot({
-			isAutoFocusRoot = true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp
-		}),
+		ref = var1,
 		size = dialogSize.Small
 	}, {
-		Title = reactModule.createElement(dialog.Title, { text = var1.titleText }),
+		Title = reactModule.createElement(dialog.Title, { text = var2.titleText }),
 		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			Body = reactModule.createElement(dialog.Text, { Text = var1.bodyText })
+			Body = reactModule.createElement(dialog.Text, { Text = var2.bodyText })
 		}),
 		Actions = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var1.backText,
+					text = var2.backText,
 					variant = buttonVariant.Emphasis,
-					onActivated = p1.onBack,
-					isDisabled = p1.isClosing
+					onActivated = reactModule.useCallback(function()
+						-- upvalues: var5 (ref), onBack (ref)
+						if not var5.current then
+							onBack()
+						end
+					end, { onBack }),
+					isDisabled = var3
 				},
 				{
-					text = var1.closeText,
+					text = var2.closeText,
 					variant = buttonVariant.Standard,
-					onActivated = p1.onConfirm,
-					isLoading = p1.isClosing
+					onActivated = reactModule.useCallback(function()
+						-- upvalues: var5 (ref), var4 (ref), onSignOut (ref)
+						if var5.current then
+							return
+						end
+						var5.current = true
+						var4(true)
+						onSignOut()
+					end, { onSignOut }),
+					isLoading = var3
 				}
 			}
 		})

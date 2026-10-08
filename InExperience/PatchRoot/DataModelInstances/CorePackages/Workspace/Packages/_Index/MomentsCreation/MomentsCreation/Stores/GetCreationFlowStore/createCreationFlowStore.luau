@@ -8,13 +8,14 @@ local createNavigationMachineModule = require(momentsCreation.Stores.createNavig
 local createSelectionStoreModule = require(momentsCreation.Stores.createSelectionStore)
 local createDescriptionStoreModule = require(momentsCreation.Stores.createDescriptionStore)
 local createEditsStoreModule = require(momentsCreation.Stores.createEditsStore)
+local fFlagMomentsTTSDraftRestoreModule = require(momentsCreation.Flags.FFlagMomentsTTSDraftRestore)
 local createComputed = signalsModule.createComputed
 local createSignal = signalsModule.createSignal
 local fFlagMomentTextGenerationFilteredSignal = momentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
 local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
 
 return function()
-	-- upvalues: createNavigationMachineModule (ref), creationFlowStateModule (ref), createSelectionStoreModule (ref), createDescriptionStoreModule (ref), createEditsStoreModule (ref), createSignal (ref), createComputed (ref), fFlagMomentTextGenerationFilteredSignal (ref), getFFlagEnableMomentTextGeneration (ref)
+	-- upvalues: createNavigationMachineModule (ref), creationFlowStateModule (ref), createSelectionStoreModule (ref), createDescriptionStoreModule (ref), createEditsStoreModule (ref), createSignal (ref), createComputed (ref), fFlagMomentTextGenerationFilteredSignal (ref), getFFlagEnableMomentTextGeneration (ref), fFlagMomentsTTSDraftRestoreModule (ref)
 	local var1 = createNavigationMachineModule(creationFlowStateModule.Gallery)
 	local var2 = createSelectionStoreModule()
 	local var3 = createDescriptionStoreModule()
@@ -25,6 +26,7 @@ return function()
 	local var11, var12 = createSignal(false)
 	local var13, var14 = createSignal(nil)
 	local var15, var16 = createSignal(nil)
+	local var17, var18 = createSignal(nil)
 	
 	return {
 		getStep = var1.getStep,
@@ -57,6 +59,7 @@ return function()
 		getIsGenerating = var11,
 		getActiveGeneration = var13,
 		getTTSAudio = var15,
+		getPendingRestoredVoice = var17,
 		updateCurrentState = function(p1)
 			-- upvalues: var1 (ref)
 			var1.reset(p1)
@@ -106,12 +109,16 @@ return function()
 		setIsGenerating = var12,
 		setActiveGeneration = var14,
 		setTTSAudio = var16,
+		setPendingRestoredVoice = function(value)
+			-- upvalues: var18 (ref)
+			var18(value)
+		end,
 		onMusicSearchRetrieved = function(p1)
 			-- upvalues: var8 (ref)
 			var8(p1)
 		end,
 		clearEdits = function(p1)
-			-- upvalues: var6 (ref), var2 (ref), var1 (ref), var3 (ref), fFlagMomentTextGenerationFilteredSignal (copy), getFFlagEnableMomentTextGeneration (copy), var8 (ref), var4 (ref), var10 (ref)
+			-- upvalues: var6 (ref), var2 (ref), var1 (ref), var3 (ref), fFlagMomentTextGenerationFilteredSignal (copy), getFFlagEnableMomentTextGeneration (copy), var8 (ref), var4 (ref), var10 (ref), fFlagMomentsTTSDraftRestoreModule (copy), var18 (ref)
 			var6(true)
 			var2.setSelectedCapture(nil)
 			var1.reset(p1)
@@ -127,6 +134,10 @@ return function()
 			var8({})
 			var4.clear()
 			var10(nil)
+			
+			if fFlagMomentsTTSDraftRestoreModule then
+				var18(nil)
+			end
 		end
 	}
 end

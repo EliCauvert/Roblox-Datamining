@@ -16,5 +16,6 @@ return {
 	SupportPaneMode = appSplitViewModule.Enums.SupportPaneMode,
 	["jest.config"] = script["jest.config"],
 	getSplitPaneEducationalTourStore = require(script.Stores.getSplitPaneEducationalTourStore),
+	SplitPaneEducationalTourCollapsedControl = require(script.Components.SplitPaneEducationalTourCollapsedControl),
 	isSplitPaneTourSupported = require(script.Utils.isSplitPaneTourSupported)
 }

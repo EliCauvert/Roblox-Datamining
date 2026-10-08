@@ -7,7 +7,7 @@ local _ = {
 	Sticker = "Sticker"
 }
 
-return function(p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: getFFlagMomentsStickerButton (ref)
 	local assetTotalDuration
 	local edits = p2.edits
@@ -50,7 +50,7 @@ return function(p1, p2)
 	return {
 		attributes = t,
 		contentType = if p1.CaptureType == Enum.CaptureType.Screenshot then Enum.RecommendationItemContentType.Static else Enum.RecommendationItemContentType.Dynamic,
-		customTags = {},
+		customTags = p3 or {},
 		duration = assetTotalDuration
 	}
 end

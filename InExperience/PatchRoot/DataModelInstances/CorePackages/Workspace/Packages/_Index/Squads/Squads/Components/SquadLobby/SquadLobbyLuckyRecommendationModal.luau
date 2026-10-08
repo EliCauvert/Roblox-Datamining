@@ -35,11 +35,13 @@ local hooksModule = require(parent.SquadsCore.Hooks)
 local useLuckyRecommendation = hooksModule.useLuckyRecommendation
 local useLuckyRecommendationAnalytics = hooksModule.useLuckyRecommendationAnalytics
 local useIsExperienceInviteRetryBlocked = hooksModule.useIsExperienceInviteRetryBlocked
-local fFlagSquadExperienceInviteRetryAfter = require(parent.SquadsCore.Flags).FFlagSquadExperienceInviteRetryAfter
+local fFlagUseSignalsForSquadExperienceInvite = dependenciesModule.SharedFlags.FFlagUseSignalsForSquadExperienceInvite
+local getSquadExperienceInviteStore = require(parent.SquadsCore.Stores).GetSquadExperienceInviteStore
+local useSignalState = require(parent.SignalsReact).useSignalState
 local eventNamesModule = require(parent.SquadsCore.EventNames)
 
 return function(p1)
-	-- upvalues: useTokens (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), useLuckyRecommendation (ref), useLuckyRecommendationAnalytics (ref), useLocalization (ref), squadLuckyRecommendationPhase (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), useSelector (ref), fFlagSquadExperienceInviteRetryAfter (ref), useIsExperienceInviteRetryBlocked (ref), eventNamesModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), setTimeout (ref), clearTimeout (ref), reactOtterModule (ref), text (ref), view (ref), image (ref), progress (ref), progressShape (ref), progressSize (ref), overlayProvider (ref), dialog (ref), dialogSize (ref), button (ref), buttonVariant (ref), icon (ref), iconSize (ref)
+	-- upvalues: useTokens (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), useLuckyRecommendation (ref), useLuckyRecommendationAnalytics (ref), useLocalization (ref), squadLuckyRecommendationPhase (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), useSelector (ref), fFlagUseSignalsForSquadExperienceInvite (ref), useSignalState (ref), getSquadExperienceInviteStore (ref), useIsExperienceInviteRetryBlocked (ref), eventNamesModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), setTimeout (ref), clearTimeout (ref), reactOtterModule (ref), text (ref), view (ref), image (ref), progress (ref), progressShape (ref), progressSize (ref), overlayProvider (ref), dialog (ref), dialogSize (ref), button (ref), buttonVariant (ref), icon (ref), iconSize (ref)
 	local var1 = useTokens()
 	local var2 = useDispatch()
 	local size300 = var1.Size.Size_300
@@ -69,10 +71,10 @@ return function(p1)
 	local var12 = useSelector(react.useCallback(function(p2)
 		return p2.Squad and (p2.Squad.Squad and (p2.Squad.Squad.currentSquad and p2.Squad.Squad.currentSquad.squadId))
 	end, {}))
-	local var13 = useSelector(react.useCallback(function(p2)
+	local var13 = if fFlagUseSignalsForSquadExperienceInvite then useSignalState(getSquadExperienceInviteStore(false).getHasCurrentExperienceInvite) else useSelector(react.useCallback(function(p2)
 		return p2.Squad and (p2.Squad.Squad and p2.Squad.Squad.currentExperienceInvite)
-	end, {}))
-	local var14 = if fFlagSquadExperienceInviteRetryAfter then useIsExperienceInviteRetryBlocked(var12) else false
+	end, {})) ~= nil
+	local var14 = useIsExperienceInviteRetryBlocked(var12)
 	local var15 = react.useCallback(function()
 		-- upvalues: var5 (ref), eventNamesModule (copy), phase (ref), p1 (ref)
 		var5.fire(eventNamesModule.LuckyRecommendationDismissed, { phaseAtDismiss = phase })
@@ -155,7 +157,7 @@ return function(p1)
 		subtitle = var6.revealedSubtitle,
 		actionText = var6.joinText,
 		onAction = var17,
-		isActionDisabled = if var13 == nil then var14 else true
+		isActionDisabled = var13 or var14
 	} elseif not var9 then {
 		title = var6.rollingTitle,
 		subtitle = var6.rollingSubtitle,

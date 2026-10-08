@@ -1,12 +1,16 @@
 ﻿local playersService = game:GetService("Players")
 local teleportService = game:GetService("TeleportService")
+local parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
+local sharedFlagsModule = require(parent.SharedFlags)
 local teamCreateUtilsModule = require(script.Parent.teamCreateUtils)
-local creatorAgentChatModule = require(script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent.DataHydration.CreatorAgentChat)
+local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local buildModeLaunchModule = require(script.Parent.BuildModeLaunch)
+local playtestRejoinModule = require(script.Parent.PlaytestRejoin)
 local launchExperienceModule = require(script.Parent.launchExperience)
 local leaveExperienceModule = require(script.Parent.leaveExperience)
 local teleportToPlaceModule = require(script.Parent.teleportToPlace)
 local debug = creatorAgentChatModule.debug
+local fFlagBuildExperienceLibrary = sharedFlagsModule.FFlagBuildExperienceLibrary
 
 local function _(p1, p2)
 	return p2 ~= 0 and p2 == p1
@@ -29,7 +33,7 @@ local _ = function(p1)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: debug (ref), teamCreateUtilsModule (ref), playersService (ref), teleportService (ref), buildModeLaunchModule (ref), teleportToPlaceModule (ref), leaveExperienceModule (ref), launchExperienceModule (ref)
+	-- upvalues: debug (ref), teamCreateUtilsModule (ref), playersService (ref), teleportService (ref), buildModeLaunchModule (ref), teleportToPlaceModule (ref), fFlagBuildExperienceLibrary (ref), playtestRejoinModule (ref), leaveExperienceModule (ref), launchExperienceModule (ref)
 	local var1 = if p3 and p3.currentPlaceId ~= nil then p3.currentPlaceId else game.PlaceId
 	local var2 = if p3 then p3.isTeamTest else nil
 	debug.log("info", "playtestExperience", {
@@ -73,6 +77,9 @@ return function(p1, p2, p3)
 		teleportToPlaceModule(p1)
 		
 		return "teleport_pending"
+	elseif var3 and fFlagBuildExperienceLibrary then
+		playtestRejoinModule.request(p1, p2, var2)
+		leaveExperienceModule()
 	elseif var3 then
 		leaveExperienceModule(function()
 			-- upvalues: launchExperienceModule (copy), p1 (ref), p2 (ref), var2 (ref)

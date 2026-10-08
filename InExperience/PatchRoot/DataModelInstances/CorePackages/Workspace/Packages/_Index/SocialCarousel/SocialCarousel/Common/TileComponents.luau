@@ -8,28 +8,28 @@ local friendsHintTileModule = require(socialCarousel.Components.Tiles.FriendsHin
 local startSquadTileModule = require(socialCarousel.Components.Tiles.StartSquadTile)
 local shareQRTileModule = require(socialCarousel.Components.Tiles.ShareQRTile)
 local tileModule = require(socialCarousel.BaseComponents.Tile)
+local fFlagSocialCarouselShareQREnabled = require(parent.SharedFlags).FFlagSocialCarouselShareQREnabled
+local fFlagSocialCarouselInGameTitleMarquee = require(parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
+
+local function renderUserTile(p1, p2, p3, p4, p5, p6)
+	-- upvalues: fFlagSocialCarouselInGameTitleMarquee (ref), reactModule (ref), userTileModule (ref)
+	local t = {
+		item = p1,
+		index = p2,
+		itemSize = p3,
+		selectionOrder = p4,
+		onTileContentChanged = p5
+	}
+	
+	if fFlagSocialCarouselInGameTitleMarquee then
+		t.playStatus = p6
+	end
+	return reactModule.createElement(userTileModule, t)
+end
 
 return {
-	[tile.Friend] = function(p1, p2, p3, p4, p5)
-		-- upvalues: reactModule (ref), userTileModule (ref)
-		return reactModule.createElement(userTileModule, {
-			item = p1,
-			index = p2,
-			itemSize = p3,
-			selectionOrder = p4,
-			onTileContentChanged = p5
-		})
-	end,
-	[tile.Recommendation] = function(p1, p2, p3, p4, p5)
-		-- upvalues: reactModule (ref), userTileModule (ref)
-		return reactModule.createElement(userTileModule, {
-			item = p1,
-			index = p2,
-			itemSize = p3,
-			selectionOrder = p4,
-			onTileContentChanged = p5
-		})
-	end,
+	[tile.Friend] = renderUserTile,
+	[tile.Recommendation] = renderUserTile,
 	[tile.AddFriends] = function(_, p1, p2, p3, _)
 		-- upvalues: reactModule (ref), addFriendsTileModule (ref)
 		return reactModule.createElement(addFriendsTileModule, { index = p1, itemSize = p2, selectionOrder = p3 })
@@ -47,7 +47,7 @@ return {
 			selectionOrder = p4
 		})
 	end,
-	[tile.ShareQR] = if require(parent.SharedFlags).FFlagSocialCarouselShareQREnabled then function(_, p1, p2, p3, _)
+	[tile.ShareQR] = if fFlagSocialCarouselShareQREnabled then function(_, p1, p2, p3, _)
 		-- upvalues: reactModule (ref), shareQRTileModule (ref)
 		return reactModule.createElement(shareQRTileModule, { index = p1, itemSize = p2, selectionOrder = p3 })
 	end else nil,

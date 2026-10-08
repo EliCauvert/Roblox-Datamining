@@ -2,6 +2,8 @@
 local modules = game:GetService("CoreGui").RobloxGui.Modules
 local reactModule = require(corePackagesService.Packages.React)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local normalizeFontFace = require(corePackagesService.Packages.Foundation).Utility.normalizeFontFace
+local fontFaceConsoleOverscan = game:DefineFastFlag("FontFaceConsoleOverscan", false)
 local buttonStack = UIBloxModule.App.Button.ButtonStack
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local useDesignTokens = require(corePackagesService.Workspace.Packages.Style).useDesignTokens
@@ -14,7 +16,7 @@ local controllerHintModule = require(modules.Shell.Components.Overscan.Controlle
 local edgesModule = require(script.Parent.Edges)
 
 return function(p1)
-	-- upvalues: useNavigation (ref), useLocalization (ref), useDesignTokens (ref), useStyle (ref), reactModule (ref), globalSettingsModule (ref), localizedStringsModule (ref), controllerHintModule (ref), buttonStack (ref), buttonType (ref), edgesModule (ref)
+	-- upvalues: useNavigation (ref), useLocalization (ref), useDesignTokens (ref), useStyle (ref), reactModule (ref), fontFaceConsoleOverscan (ref), globalSettingsModule (ref), normalizeFontFace (ref), localizedStringsModule (ref), controllerHintModule (ref), buttonStack (ref), buttonType (ref), edgesModule (ref)
 	local onUnmount = p1.onUnmount or useNavigation().goBack
 	local var1 = useLocalization({
 		accept = "CommonUI.Controls.Action.Accept",
@@ -46,7 +48,8 @@ return function(p1)
 		Title = reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			Position = UDim2.new(0, 230, 0, 205),
-			Font = globalSettingsModule.LightFont,
+			Font = if fontFaceConsoleOverscan then nil else globalSettingsModule.LightFont,
+			FontFace = if fontFaceConsoleOverscan then normalizeFontFace(globalSettingsModule.LightFont) else nil,
 			FontSize = globalSettingsModule.HeaderSize,
 			TextColor3 = globalSettingsModule.WhiteTextColor,
 			TextXAlignment = Enum.TextXAlignment.Left,
@@ -55,7 +58,8 @@ return function(p1)
 		Prompt = reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			Position = UDim2.new(0, 230, 0, 243),
-			Font = globalSettingsModule.RegularFont,
+			Font = if fontFaceConsoleOverscan then nil else globalSettingsModule.RegularFont,
+			FontFace = if fontFaceConsoleOverscan then normalizeFontFace(globalSettingsModule.RegularFont) else nil,
 			FontSize = globalSettingsModule.ButtonSize,
 			TextColor3 = globalSettingsModule.WhiteTextColor,
 			TextXAlignment = Enum.TextXAlignment.Left,

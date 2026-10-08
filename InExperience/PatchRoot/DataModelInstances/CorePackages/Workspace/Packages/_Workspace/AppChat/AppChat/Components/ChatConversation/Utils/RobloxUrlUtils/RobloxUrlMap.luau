@@ -1,7 +1,24 @@
 ﻿local appChat = script:FindFirstAncestor("AppChat")
 local regex = require(appChat.Parent.UrlMatching).Regex
 local fFlagAppChatResolveShareLinkV2Module = require(appChat.Flags.FFlagAppChatResolveShareLinkV2)
+local fFlagAppChatPlusReferralAssetCardModule = require(appChat.Flags.FFlagAppChatPlusReferralAssetCard)
 local list = { "ExperienceDetails" }
+local var1 = if fFlagAppChatResolveShareLinkV2Module then {
+	{ name = "code", pattern = "[a-fA-F0-9-]+" },
+	{
+		name = "type",
+		optional = true,
+		pattern = regex.oneOf(list)
+	},
+	{
+		name = "v",
+		optional = true,
+		pattern = regex.oneOf({ "v2" })
+	}
+} else {
+	{ name = "code", pattern = "[a-fA-F0-9]+" },
+	{ name = "type", pattern = regex.oneOf(list) }
+}
 
 return {
 	["/games"] = {
@@ -19,27 +36,20 @@ return {
 		end
 	},
 	["/share"] = {
-		queryParams = if fFlagAppChatResolveShareLinkV2Module then {
-			{ name = "code", pattern = "[a-fA-F0-9-]+" },
-			{
-				name = "type",
-				optional = true,
-				pattern = regex.oneOf(list)
-			},
-			{
-				name = "v",
-				optional = true,
-				pattern = regex.oneOf({ "v2" })
-			}
-		} else {
-			{ name = "code", pattern = "[a-fA-F0-9]+" },
-			{ name = "type", pattern = regex.oneOf(list) }
-		},
+		queryParams = var1,
 		paramCallback = function(p1)
 			-- upvalues: fFlagAppChatResolveShareLinkV2Module (ref)
 			return if fFlagAppChatResolveShareLinkV2Module then if p1.v == "v2" then { shareLink = { version = 2, linkId = p1.code } } elseif p1.type then {
 				shareLink = { version = 1, linkId = p1.code, linkType = p1.type }
 			} else nil else { shareLink = { linkId = p1.code, linkType = p1.type } }
 		end
-	}
+	},
+	["/plus-referral"] = if fFlagAppChatPlusReferralAssetCardModule then {
+		queryParams = var1,
+		paramCallback = function(p1)
+			return if p1.code and p1.code ~= "" then {
+				shareLink = { linkType = "PlusReferral", version = 2, linkId = p1.code }
+			} else nil
+		end
+	} else nil
 }

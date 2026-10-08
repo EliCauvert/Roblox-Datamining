@@ -11,6 +11,7 @@ local fFlagAXMarketplaceLicensingItemCards = avatarExperienceFlagsModule.FFlagAX
 local itemLicenseType = require(parent.AvatarExperienceModel).Enums.ItemLicenseType
 local badgeVariant = foundationModule.Enums.BadgeVariant
 local badgeSize = foundationModule.Enums.BadgeSize
+local badgeShape = foundationModule.Enums.BadgeShape
 local t = {
 	[itemLicenseType.FirstParty] = {
 		label = "Feature.Catalog.Label.LicensingOfficial",
@@ -37,7 +38,7 @@ local function PassiveLicensingBadge(p1)
 end
 
 local function InteractiveLicensingBadge(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), fFlagAXMarketplaceLicensingItemDetails (ref), useEarlyIsFocused (ref), foundationModule (ref), badgeVariant (ref), badgeSize (ref), AXTooltip (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), fFlagAXMarketplaceLicensingItemDetails (ref), useEarlyIsFocused (ref), foundationModule (ref), badgeVariant (ref), badgeSize (ref), badgeShape (ref), AXTooltip (ref)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState(false)
 	local var4 = useLocalization({ label = p1.config.label, info = p1.config.info })
@@ -75,7 +76,8 @@ local function InteractiveLicensingBadge(p1)
 		Badge = reactModule.createElement(foundationModule.Badge, {
 			text = var4.label,
 			variant = badgeVariant.Standard,
-			size = badgeSize.Small
+			size = badgeSize.Small,
+			shape = badgeShape.Box
 		}),
 		Tooltip = reactModule.createElement(AXTooltip, {
 			isOpen = var2,

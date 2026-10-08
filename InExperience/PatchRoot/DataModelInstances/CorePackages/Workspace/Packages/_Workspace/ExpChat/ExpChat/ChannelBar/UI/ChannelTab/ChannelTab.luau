@@ -12,7 +12,6 @@ local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local interactable = UIBloxModule.Core.Control.Interactable
 local useSelectionCursor = UIBloxModule.App.SelectionImage.useSelectionCursor
 local fFlagExpChatChannelTabSizingUpdateModule = require(expChat.Flags.FFlagExpChatChannelTabSizingUpdate)
-local fFlagExpChatEnableTabsImpressionAnalyticsModule = require(expChat.Flags.FFlagExpChatEnableTabsImpressionAnalytics)
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
 local fFlagExpChatUseSharedChannelTabDisplayLabel = sharedFlagsModule.FFlagExpChatUseSharedChannelTabDisplayLabel
 local var1 = if fFlagExpChatChannelTabSizingUpdateModule then game:GetService("TextService") else nil
@@ -30,11 +29,11 @@ local t = {
 	isDividerVisible = false,
 	isTabCollapsed = false,
 	isTabSelected = false,
+	tabIndex = 1,
+	isTabVisibleToUser = true,
+	isLayoutReady = true,
 	onTabSelected = nil,
-	setTransparency = nil,
-	tabIndex = if fFlagExpChatEnableTabsImpressionAnalyticsModule then 1 else nil,
-	isTabVisibleToUser = if fFlagExpChatEnableTabsImpressionAnalyticsModule then true else nil,
-	isLayoutReady = if fFlagExpChatEnableTabsImpressionAnalyticsModule then true else nil
+	setTransparency = nil
 }
 
 local function createUnreadDot(vectorA, vectorB)
@@ -52,21 +51,18 @@ local function createUnreadDot(vectorA, vectorB)
 end
 
 return function(p1)
-	-- upvalues: dictionary (ref), t (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), useTabImpressionModule (ref), fFlagExpChatGlobalTabDefaultModule (ref), localizationModule (ref), fFlagExpChatUseSharedChannelTabDisplayLabel (ref), channelTabDisplayLabel (ref), fFlagExpChatEnableFriendsTab (ref), unreachable (ref), playersService (ref), getOtherDisplayNameInWhisperChannelModule (ref), reactModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatChannelTabSizingUpdateModule (ref), var1 (ref), getUnreadIndicatorLayoutModule (ref), var2 (ref), interactable (ref), createUnreadDot (ref), color (ref), configModule (ref)
+	-- upvalues: dictionary (ref), t (ref), useTabImpressionModule (ref), fFlagExpChatGlobalTabDefaultModule (ref), localizationModule (ref), fFlagExpChatUseSharedChannelTabDisplayLabel (ref), channelTabDisplayLabel (ref), fFlagExpChatEnableFriendsTab (ref), unreachable (ref), playersService (ref), getOtherDisplayNameInWhisperChannelModule (ref), reactModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatChannelTabSizingUpdateModule (ref), var1 (ref), getUnreadIndicatorLayoutModule (ref), var2 (ref), interactable (ref), createUnreadDot (ref), color (ref), configModule (ref)
 	local var3 = dictionary.join(t, p1)
-	
-	if fFlagExpChatEnableTabsImpressionAnalyticsModule then
-		useTabImpressionModule({
-			enabled = var3.isLayoutReady,
-			name = var3.channelName,
-			tabType = var3.tabType,
-			index = var3.tabIndex,
-			inOverflow = var3.isTabCollapsed,
-			visible = var3.isTabVisibleToUser,
-			hasUnreadMessages = var3.hasUnreadMessages,
-			isSelected = if fFlagExpChatGlobalTabDefaultModule then var3.isTabSelected else nil
-		})
-	end
+	useTabImpressionModule({
+		enabled = var3.isLayoutReady,
+		name = var3.channelName,
+		tabType = var3.tabType,
+		index = var3.tabIndex,
+		inOverflow = var3.isTabCollapsed,
+		visible = var3.isTabVisibleToUser,
+		hasUnreadMessages = var3.hasUnreadMessages,
+		isSelected = if fFlagExpChatGlobalTabDefaultModule then var3.isTabSelected else nil
+	})
 	local var4 = localizationModule.useLocalization(if fFlagExpChatUseSharedChannelTabDisplayLabel then channelTabDisplayLabel.LocalizationKeys else {
 		yourServer = "CoreScripts.TextChat.ChannelTabs.Here",
 		moreServers = "CoreScripts.TextChat.ChannelTabs.Global2",
@@ -179,6 +175,7 @@ return function(p1)
 		BackgroundTransparency = var3.isTabCollapsed and var3.setTransparency(var3.channelTabsSettings.BackgroundTransparency) or 1,
 		BackgroundColor3 = if var3.isTabCollapsed then var6 else var3.channelTabsSettings.BackgroundColor3,
 		BorderSizePixel = 0,
+		ref = var3.tabRef,
 		SelectionImageObject = var8,
 		onStateChanged = function() end,
 		[reactModule.Change.AbsoluteSize] = var10,

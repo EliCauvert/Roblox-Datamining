@@ -577,8 +577,8 @@ local function ConnectedLibrary(p1)
 		end
 	end, { var63, var3 })
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var56 (ref), var34 (ref), p1 (ref), createViewerWorldPickerModule (copy), var3 (ref), getPlayButtonStoreModule (copy), library (ref), var36 (ref), var40 (ref), var62 (ref)
-		if var10 or var56 or not var34 then
+		-- upvalues: var10 (ref), var34 (ref), p1 (ref), createViewerWorldPickerModule (copy), var3 (ref), library (ref), var36 (ref), var40 (ref), var62 (ref), getPlayButtonStoreModule (copy), var8 (ref), var7 (ref), var14 (ref), var1 (copy)
+		if var10 or not var34 then
 			return nil
 		end
 		local workspaceService = p1.dataModel:GetService("Workspace")
@@ -593,11 +593,11 @@ local function ConnectedLibrary(p1)
 			userInputService = p1.dataModel:GetService("UserInputService"),
 			world = workspaceService,
 			isBlocked = function()
-				-- upvalues: var64 (write), var3 (copy), getPlayButtonStoreModule (copy)
-				return not var64 or (var3.getIsOpen(false) or getPlayButtonStoreModule().getIsActive(false))
+				-- upvalues: var64 (write), var3 (copy)
+				return not var64 or var3.getIsOpen(false)
 			end,
 			onPick = function(p2)
-				-- upvalues: library (copy), var36 (copy), var40 (copy), var62 (copy)
+				-- upvalues: library (copy), var36 (copy), var40 (copy), var62 (copy), getPlayButtonStoreModule (copy)
 				local var66 = library.resolveWorldItem(p2)
 				
 				if var66 == nil then
@@ -606,7 +606,21 @@ local function ConnectedLibrary(p1)
 				end
 				if var66 ~= nil then
 					var40(var66.id, var66.kind)
-					var62(var66, true)
+					var62(var66, not getPlayButtonStoreModule().getIsActive(false))
+				end
+			end,
+			onMiss = function()
+				-- upvalues: var8 (copy), var7 (copy), var14 (copy), var1 (copy)
+				local current = var8.current
+				
+				if current == nil then return end
+				var7.current = nil
+				var8.current = nil
+				var14.onRemoveResource(current)
+				
+				if var1 ~= nil then
+					var1:Destroy()
+					var1 = nil
 				end
 			end
 		})
@@ -617,7 +631,7 @@ local function ConnectedLibrary(p1)
 			var65()
 		end
 	end, {
-		var10, var56, var34, var3, library, var36, var62, var40, p1.dataModel
+		var10, var34, var3, library, var36, var62, var40, var14, p1.dataModel
 	})
 	
 	local var64 = function()
@@ -852,6 +866,7 @@ return function(p2, p3)
 		local buildExperienceLibrary = Instance.new("ScreenGui")
 		buildExperienceLibrary.Name = "BuildExperienceLibrary"
 		buildExperienceLibrary.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
+		buildExperienceLibrary.ClipToDeviceSafeArea = false
 		buildExperienceLibrary.ResetOnSpawn = false
 		buildExperienceLibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		buildExperienceLibrary.DisplayOrder = 10

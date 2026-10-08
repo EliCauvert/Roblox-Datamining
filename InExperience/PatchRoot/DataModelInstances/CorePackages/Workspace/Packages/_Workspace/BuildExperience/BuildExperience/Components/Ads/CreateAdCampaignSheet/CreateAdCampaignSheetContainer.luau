@@ -1,6 +1,7 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local reactModule = require(buildExperience.Parent.React)
 local fFlagEnablePaidAdsModule = require(buildExperience.Flags.FFlagEnablePaidAds)
+local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local createAdCampaignSheetViewModule = require(script.Parent.CreateAdCampaignSheetView)
 local useCreateAdCampaignSheetViewModelModule = require(script.Parent.useCreateAdCampaignSheetViewModel)
 
@@ -14,7 +15,7 @@ local function MountedCreateAdCampaignSheet(p1)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), fFlagEnablePaidAdsModule (ref), MountedCreateAdCampaignSheet (ref)
+	-- upvalues: reactModule (ref), fFlagEnablePaidAdsModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), MountedCreateAdCampaignSheet (ref)
 	local var1, var2 = reactModule.useState(p1.isOpen)
 	local isOpen = fFlagEnablePaidAdsModule and p1.isOpen
 	local var3, var4 = reactModule.useState({
@@ -22,8 +23,14 @@ return function(p1)
 		terms = if isOpen then if p1.runStartTimeMs == nil then nil else { runStartTimeMs = p1.runStartTimeMs } else nil
 	})
 	local var5 = var3
+	local var6 = var3.wasOpen ~= isOpen
+	local var7 = false
 	
-	if var3.wasOpen ~= isOpen then
+	if fFlagBuildAgentAdCampaignCardModule and isOpen and p1.runStartTimeMs ~= nil then
+		local terms = var3.terms
+		var7 = if terms ~= nil then terms.runStartTimeMs ~= p1.runStartTimeMs else true
+	end
+	if var6 or fFlagBuildAgentAdCampaignCardModule and var7 then
 		local t = {
 			wasOpen = isOpen,
 			terms = if isOpen then if p1.runStartTimeMs == nil then nil else { runStartTimeMs = p1.runStartTimeMs } else var3.terms
@@ -41,7 +48,7 @@ return function(p1)
 	if not var1 or fFlagEnablePaidAdsModule and p1.campaignOffers == nil then
 		return nil
 	end
-	local var6 = p1
+	local var8 = p1
 	
 	if fFlagEnablePaidAdsModule then
 		local terms = var5.terms
@@ -49,8 +56,8 @@ return function(p1)
 		if terms == nil then
 			return nil
 		end
-		var6 = table.clone(p1)
-		var6.runStartTimeMs = terms.runStartTimeMs
+		var8 = table.clone(p1)
+		var8.runStartTimeMs = terms.runStartTimeMs
 	end
-	return reactModule.createElement(MountedCreateAdCampaignSheet, var6)
+	return reactModule.createElement(MountedCreateAdCampaignSheet, var8)
 end

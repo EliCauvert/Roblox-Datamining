@@ -27,8 +27,6 @@ local profileSettingsRateLimitSeconds = game:DefineFastInt("ProfileSettingsRateL
 local profileSettingsMaxRequestsPerWindow = game:DefineFastInt("ProfileSettingsMaxRequestsPerWindow", 3)
 local profileSettingsRateLimitWindowSeconds = game:DefineFastInt("ProfileSettingsRateLimitWindowSeconds", 60)
 local disableRCCAntiHarrasmentAllowList = game:DefineFastFlag("DisableRCCAntiHarrasmentAllowList", false)
-local luaGetCanManageAsync = game:DefineFastFlag("UseGetCanManageAsync", false) and game:GetEngineFeature("LuaGetCanManageAsync")
-local fFlagUserPresenceTokenRccCheckPermissionsLuaModule = require(robloxGui.Modules.Common.Flags.FFlagUserPresenceTokenRccCheckPermissionsLua)
 local shouldShowFriendJoinedPlayerToastModule = require(robloxGui.Modules.Server.shouldShowFriendJoinedPlayerToast)
 local gatePrivateServerNudge = game:DefineFastFlag("GatePrivateServerNudge", false)
 local globalUserBlockingLuaReadsFromSCMCache = game:DefineFastFlag("GlobalUserBlockingLuaReadsFromSCMCache", false)
@@ -201,54 +199,17 @@ local function sendPlayerAllCanManage(p4)
 end
 
 local function getPlayerCanManage(p5)
-	-- upvalues: luaGetCanManageAsync (ref), t_3 (ref), newPlayerCanManageDetails (ref), url (ref), httpService (ref), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (ref), httpRbxApiService (ref)
-	if luaGetCanManageAsync then
-		if p5.UserId <= 0 or not p5.Parent then return end
-		local var2 = false
-		local ok, status = pcall(p5.GetCanManageAsync, p5)
-		
-		if ok and status then
-			var2 = true
-		end
-		local var3 = tostring(p5.UserId)
-		t_3[var3] = var2
-		newPlayerCanManageDetails:FireAllClients(var3, var2)
-		
-		return
-	else
-		local var4 = false
-		
-		if p5.UserId > 0 then
-			local ok, status = pcall(function()
-				-- upvalues: url (copy), httpService (copy), p5 (ref), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (copy), httpRbxApiService (copy)
-				local formattedText = string.format(url.APIS_URL .. "asset-permissions-api/v1/rcc/assets/check-permissions")
-				local var5 = httpService:JSONEncode({
-					requests = {
-						{
-							action = "Edit",
-							subject = { subjectType = "User", subjectId = p5.UserId },
-							assetId = game.PlaceId
-						}
-					}
-				})
-				
-				return httpService:JSONDecode(if fFlagUserPresenceTokenRccCheckPermissionsLuaModule then httpRbxApiService:PostAsyncFullUrlForPlayer(formattedText, var5, p5) else httpRbxApiService:PostAsyncFullUrl(formattedText, var5))
-			end)
-			
-			if ok then
-				status = status.results[1]
-				
-				if status.value and status.value.status == "HasPermission" then
-					var4 = true
-				end
-			end
-		end
-		if p5.Parent then
-			local var5 = tostring(p5.UserId)
-			t_3[var5] = var4
-			newPlayerCanManageDetails:FireAllClients(var5, var4)
-		end
+	-- upvalues: t_3 (ref), newPlayerCanManageDetails (ref)
+	if p5.UserId <= 0 or not p5.Parent then return end
+	local var2 = false
+	local ok, status = pcall(p5.GetCanManageAsync, p5)
+	
+	if ok and status then
+		var2 = true
 	end
+	local var3 = tostring(p5.UserId)
+	t_3[var3] = var2
+	newPlayerCanManageDetails:FireAllClients(var3, var2)
 end
 
 local _ = function(p5, p6)

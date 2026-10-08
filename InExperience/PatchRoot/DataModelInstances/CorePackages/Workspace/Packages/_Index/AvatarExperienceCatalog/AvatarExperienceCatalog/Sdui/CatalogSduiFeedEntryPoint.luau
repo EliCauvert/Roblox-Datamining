@@ -8,9 +8,10 @@ local marketplaceFeedSkeletonModule = require(avatarExperienceCatalog.Components
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXMarketplaceLoadingSkeleton = avatarExperienceFlagsModule.FFlagAXMarketplaceLoadingSkeleton
 local fFlagAXSduiCatalogScrollImpressions = avatarExperienceFlagsModule.FFlagAXSduiCatalogScrollImpressions
+local fFlagAXSduiFeedMaintainScrollOnSeeAll = avatarExperienceFlagsModule.FFlagAXSduiFeedMaintainScrollOnSeeAll
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: fFlagAXMarketplaceLoadingSkeleton (ref), reactModule (ref), marketplaceFeedSkeletonModule (ref), catalogSduiEntryPointModule (ref), getCatalogPageIdentifierModule (ref), fFlagAXSduiCatalogScrollImpressions (ref)
+	-- upvalues: fFlagAXMarketplaceLoadingSkeleton (ref), reactModule (ref), marketplaceFeedSkeletonModule (ref), catalogSduiEntryPointModule (ref), getCatalogPageIdentifierModule (ref), fFlagAXSduiCatalogScrollImpressions (ref), fFlagAXSduiFeedMaintainScrollOnSeeAll (ref)
 	return reactModule.createElement(catalogSduiEntryPointModule, {
 		context = p1.context,
 		identifier = getCatalogPageIdentifierModule(p1.context),
@@ -20,6 +21,8 @@ return reactModule.forwardRef(function(p1, p2)
 		loadingSlot = if fFlagAXMarketplaceLoadingSkeleton then reactModule.createElement(marketplaceFeedSkeletonModule) else nil,
 		onScroll = if fFlagAXSduiCatalogScrollImpressions then p1.onScroll else nil,
 		requestImpressionsSignal = if fFlagAXSduiCatalogScrollImpressions then p1.requestImpressionsSignal else nil,
+		scrollPositionRef = if fFlagAXSduiFeedMaintainScrollOnSeeAll then p1.scrollPositionRef else nil,
+		scrollRestoreRef = if fFlagAXSduiFeedMaintainScrollOnSeeAll then p1.scrollRestoreRef else nil,
 		ref = p2
 	})
 end)

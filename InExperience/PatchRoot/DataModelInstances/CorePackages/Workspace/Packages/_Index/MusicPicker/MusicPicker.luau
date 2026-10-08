@@ -3,5 +3,6 @@
 return {
 	MusicPicker = require(script.Components.MusicPicker),
 	MusicPickerContext = require(script.Context.MusicPickerContext),
+	FFlagMomentsCreationMusicPickerPagination = require(script.Flags.FFlagMomentsCreationMusicPickerPagination),
 	["jest.config"] = script["jest.config"]
 }

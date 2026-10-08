@@ -2,9 +2,10 @@
 local momentsCommonModule = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon)
 local eventNames = momentsCommonModule.Analytics.EventNames
 local reportMomentsComments = momentsCommonModule.Analytics.reportMomentsComments
+local reportMomentsCommentAction = momentsCommonModule.Analytics.reportMomentsCommentAction
 
 return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: momentsCommonModule (ref), httpService (ref), reportMomentsComments (ref), eventNames (ref)
+	-- upvalues: momentsCommonModule (ref), httpService (ref), reportMomentsComments (ref), reportMomentsCommentAction (ref), eventNames (ref)
 	p4 = p4 or momentsCommonModule.Analytics.fireAnalyticsEvent
 	p5 = p5 or httpService:GenerateGUID(false)
 	local var1 = false
@@ -50,6 +51,15 @@ return function(p1, p2, p3, p4, p5, p6, p7)
 			var3 = true
 			var1 = false
 		end,
-		logEvent = logEvent
+		logEvent = logEvent,
+		logRealtimeEvent = function(p8, p9)
+			-- upvalues: var3 (write), p3 (ref), p2 (ref), reportMomentsCommentAction (copy), p6 (ref)
+			if var3 or not p3() then
+				return
+			end
+			local cloned = table.clone(p9)
+			cloned.surface = p2
+			reportMomentsCommentAction(p8, cloned, p6)
+		end
 	}
 end

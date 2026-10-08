@@ -1,5 +1,4 @@
 ﻿local httpService = game:GetService("HttpService")
-local fFlagSduiClientTemplateCache = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.SharedFlags).FFlagSduiClientTemplateCache
 local t = { Json = "Json", Proto = "Proto" }
 local t_1 = {
 	[t.Json] = "application/json",
@@ -9,9 +8,9 @@ local t_1 = {
 return {
 	SduiApiStorePostConfigContentType = t,
 	getBodyFromPostConfig = function(p1)
-		-- upvalues: t (ref), httpService (ref), fFlagSduiClientTemplateCache (ref)
+		-- upvalues: t (ref), httpService (ref)
 		if p1.body then
-			return if p1.contentType == t.Json then httpService:JSONEncode(p1.body) elseif fFlagSduiClientTemplateCache and p1.contentType == t.Proto then buffer.tostring(p1.protoMessage.encode(p1.body)) else nil
+			return if p1.contentType == t.Json then httpService:JSONEncode(p1.body) elseif p1.contentType == t.Proto then buffer.tostring(p1.protoMessage.encode(p1.body)) else nil
 		end
 	end,
 	getContentTypeHeaderFromPostConfig = function(p1)

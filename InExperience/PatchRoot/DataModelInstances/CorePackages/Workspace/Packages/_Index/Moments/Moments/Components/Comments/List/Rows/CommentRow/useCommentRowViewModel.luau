@@ -6,7 +6,6 @@ local localizationModule = require(parent.Localization)
 local momentsCommonModule = require(parent.MomentsCommon)
 local _ = require(parent.MomentsTypes)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local UIBloxModule = require(parent.UIBlox)
@@ -23,7 +22,6 @@ local useCommentBodyPressFeedbackModule = require(script.Parent.useCommentBodyPr
 local useCommentBodyToggleModule = require(script.Parent.useCommentBodyToggle)
 local useCommentTimestampModule = require(script.Parent.useCommentTimestamp)
 local fFlagMomentsEngagementMetricsFeature = momentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
-local fFlagGuacMomentsFeatureList = sharedFlagsModule.FFlagGuacMomentsFeatureList
 local getMomentsCapabilities = momentsCommonModule.Stores.GetMomentsCapabilities
 local feedbackManagerInjectionContext = UIBloxModule.Core.Control.FeedbackManagerInjectionContext
 local useLocalization = localizationModule.Hooks.useLocalization
@@ -53,7 +51,7 @@ local _ = function(p1, p2)
 end
 
 return function(p3)
-	-- upvalues: reactModule (ref), momentsGetMomentsCommentsStoreModule (ref), signalsReactModule (ref), userProfileModule (ref), t (ref), useLocalization (ref), useCommentTimestampModule (ref), getCommentReactionsStoreModule (ref), signalsModule (ref), localizationModule (ref), localizationService (ref), fFlagMomentsEngagementMetricsFeature (ref), fFlagGuacMomentsFeatureList (ref), getMomentsCapabilities (ref), usePreferredInputModule (ref), feedbackManagerInjectionContext (ref), useCommentActionsMenuModule (ref), useCommentBodyClampModule (ref), useCommentBodyToggleModule (ref), useCommentBodyPressFeedbackModule (ref), useMomentGesturesModule (ref), commentLongPressTimingModule (ref)
+	-- upvalues: reactModule (ref), momentsGetMomentsCommentsStoreModule (ref), signalsReactModule (ref), userProfileModule (ref), t (ref), useLocalization (ref), useCommentTimestampModule (ref), getCommentReactionsStoreModule (ref), signalsModule (ref), localizationModule (ref), localizationService (ref), fFlagMomentsEngagementMetricsFeature (ref), getMomentsCapabilities (ref), usePreferredInputModule (ref), feedbackManagerInjectionContext (ref), useCommentActionsMenuModule (ref), useCommentBodyClampModule (ref), useCommentBodyToggleModule (ref), useCommentBodyPressFeedbackModule (ref), useMomentGesturesModule (ref), commentLongPressTimingModule (ref)
 	local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: momentsGetMomentsCommentsStoreModule (copy), p3 (ref)
 		return momentsGetMomentsCommentsStoreModule(false).getCachedComment(p3.commentId)
@@ -138,7 +136,7 @@ return function(p3)
 		var8 = 0
 	end
 	local var19 = localizationModule.abbreviateCount(var8, localizationService.RobloxLocaleId) or tostring(var8)
-	local var20 = if fFlagMomentsEngagementMetricsFeature and fFlagGuacMomentsFeatureList then not signalsReactModule.useSignalState(getMomentsCapabilities(false).getIsEngagementMetricsEnabled) else nil
+	local var20 = if fFlagMomentsEngagementMetricsFeature then not signalsReactModule.useSignalState(getMomentsCapabilities(false).getIsEngagementMetricsEnabled) else nil
 	local var21 = var15 and (not var18 and not var17)
 	local var22 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref), var18 (ref), var11 (ref), thumbsUpEmoteId (ref), p3 (ref), var17 (ref)

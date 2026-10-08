@@ -1,7 +1,7 @@
 ﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
 local reactModule = require(parent.React)
 local videoPlaybackCoordinator = require(parent.VideoUtils).VideoPlaybackCoordinator
-local _ = require(parent.SduiCoreSystem)
+local getSduiComponentWrapper = require(parent.SduiCoreSystem).getSduiComponentWrapper
 local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
 local sendMediaGalleryMediaChanged = discoveryAnalyticsModule.Events.sendMediaGalleryMediaChanged
 local openYouTubeVideoEvent = discoveryAnalyticsModule.Events.openYouTubeVideoEvent
@@ -13,9 +13,10 @@ local openYouTubeVideoWithAgeCheck = mediaGalleryModule.openYouTubeVideoWithAgeC
 local useFilteredMediaItems = mediaGalleryModule.useFilteredMediaItems
 local useMediaGalleryVideoAnalytics = mediaGalleryModule.useMediaGalleryVideoAnalytics
 local useMediaGalleryFullscreenModule = require(script.Parent.useMediaGalleryFullscreen)
+local fFlagLuaAppEdpMomentVideo = require(parent.SharedFlags).FFlagLuaAppEdpMomentVideo
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), videoPlaybackCoordinator (ref), useFilteredMediaItems (ref), useMediaGalleryVideoAnalytics (ref), openYouTubeVideoWithAgeCheck (ref), openYouTubeVideoEvent (ref), sendMediaGalleryMediaChanged (ref), isYouTubeVideo (ref), useMediaGalleryFullscreenModule (ref), isValidIdentifier (ref), mediaGalleryCarousel (ref)
+	-- upvalues: reactModule (ref), videoPlaybackCoordinator (ref), fFlagLuaAppEdpMomentVideo (ref), getSduiComponentWrapper (ref), useFilteredMediaItems (ref), useMediaGalleryVideoAnalytics (ref), openYouTubeVideoWithAgeCheck (ref), openYouTubeVideoEvent (ref), sendMediaGalleryMediaChanged (ref), isYouTubeVideo (ref), useMediaGalleryFullscreenModule (ref), isValidIdentifier (ref), mediaGalleryCarousel (ref)
 	local eventIngest = p1.sduiContext.dependencies.eventIngest
 	local appPage = p1.sduiContext.appPage
 	local universeId = p1.universeId or ""
@@ -25,7 +26,27 @@ return reactModule.memo(function(p1)
 		-- upvalues: videoPlaybackCoordinator (copy)
 		return videoPlaybackCoordinator.new()
 	end, {})
-	local var2 = useFilteredMediaItems(p1.items, universeId, appPage)
+	local var2 = useFilteredMediaItems(if fFlagLuaAppEdpMomentVideo then if fFlagLuaAppEdpMomentVideo then reactModule.useMemo(function()
+		-- upvalues: p1 (ref), reactModule (copy), getSduiComponentWrapper (copy)
+		local list = table.create(#p1.items)
+		
+		for i, v in p1.items do
+			local attributionComponentConfig = v.attributionComponentConfig
+			
+			if attributionComponentConfig == nil then
+				list[i] = v
+			else
+				local cloned = table.clone(v)
+				cloned.attributionComponent = reactModule.createElement(getSduiComponentWrapper(attributionComponentConfig), {
+					debugName = "SduiMediaGallery.AttributionComponent",
+					componentConfig = attributionComponentConfig,
+					sduiContext = p1.sduiContext
+				})
+				list[i] = cloned
+			end
+		end
+		return list
+	end, { p1.items, p1.sduiContext }) else nil else p1.items, universeId, appPage)
 	local var3 = useMediaGalleryVideoAnalytics(universeId, placeId or "", var2)
 	local dispatch = p1.sduiContext.dependencies.dispatch
 	local var4 = reactModule.useCallback(function(p2)

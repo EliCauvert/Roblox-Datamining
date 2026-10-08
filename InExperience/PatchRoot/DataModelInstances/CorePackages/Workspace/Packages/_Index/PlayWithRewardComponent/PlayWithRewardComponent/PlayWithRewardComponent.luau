@@ -32,14 +32,14 @@ local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useRoactService = robloxAppHooksModule.useRoactService
 local handleUpdate = robloxAppUpdateModule.HandleUpdate
 local canPerformBinaryUpdateEnabledEngineFeature = game:GetEngineFeature("CanPerformBinaryUpdateEnabled")
-local playWithRewardFallbackBannerProductImageAssetId = game:DefineFastInt("PlayWithRewardFallbackBannerProductImageAssetId", 0)
+local fIntPlayWithRewardFallbackBannerProductImageAssetId = sharedFlagsModule.FIntPlayWithRewardFallbackBannerProductImageAssetId
 local luaAppPlayWithRewardMobileEdpLayoutOrder = game:DefineFastInt("LuaAppPlayWithRewardMobileEdpLayoutOrder", 120)
 local fFlagEnablePlayWithRewardNonPeekviewEdp = sharedFlagsModule.FFlagEnablePlayWithRewardNonPeekviewEdp
 local fFlagSduiPlayWithReward = sharedFlagsModule.FFlagSduiPlayWithReward
 local fFlagLuaAppEnableContainedRewardUi = playWithRewardStateModule.FFlagLuaAppEnableContainedRewardUi
 
 function PlayWithRewardComponent(p1)
-	-- upvalues: useTokens (ref), useRoactService (ref), roactAnalytics (ref), appUpdateService (ref), useDispatch (ref), playersService (ref), reactModule (ref), fFlagEnablePlayWithRewardNonPeekviewEdp (ref), shouldRenderPlayWithRewardBannerModule (ref), usePlayButtonLaunchGame (ref), playButtonReferralSource (ref), playWithRewardTelemetryModule (ref), playWithRewardBlackoutCurtainModule (ref), setPlayWithRewardState (ref), adService (ref), playWithRewardFallbackBannerProductImageAssetId (ref), handleUpdate (ref), canPerformBinaryUpdateEnabledEngineFeature (ref), fFlagLuaAppEnableContainedRewardUi (ref), fFlagSduiPlayWithReward (ref), luaAppPlayWithRewardMobileEdpLayoutOrder (ref), skeleton (ref), icon (ref), enums (ref), image (ref), view (ref), text (ref), button (ref), playWithRewardCoachmarkModule (ref)
+	-- upvalues: useTokens (ref), useRoactService (ref), roactAnalytics (ref), appUpdateService (ref), useDispatch (ref), playersService (ref), reactModule (ref), fFlagEnablePlayWithRewardNonPeekviewEdp (ref), shouldRenderPlayWithRewardBannerModule (ref), usePlayButtonLaunchGame (ref), playButtonReferralSource (ref), playWithRewardTelemetryModule (ref), playWithRewardBlackoutCurtainModule (ref), setPlayWithRewardState (ref), adService (ref), fIntPlayWithRewardFallbackBannerProductImageAssetId (ref), handleUpdate (ref), canPerformBinaryUpdateEnabledEngineFeature (ref), fFlagLuaAppEnableContainedRewardUi (ref), fFlagSduiPlayWithReward (ref), luaAppPlayWithRewardMobileEdpLayoutOrder (ref), skeleton (ref), icon (ref), enums (ref), image (ref), view (ref), text (ref), button (ref), playWithRewardCoachmarkModule (ref)
 	local variantId
 	local var1 = useTokens()
 	local var2 = useRoactService(roactAnalytics)
@@ -82,9 +82,9 @@ function PlayWithRewardComponent(p1)
 	local var12 = if playWithRewardAdData then playWithRewardAdData.productImageAssetId else ""
 	local var13 = var12 == ""
 	local var14 = reactModule.useCallback(function()
-		-- upvalues: playWithRewardTelemetryModule (copy), p1 (ref), var7 (ref), playWithRewardBlackoutCurtainModule (copy), var4 (ref), setPlayWithRewardState (copy), adService (copy), var11 (ref), var13 (ref), playWithRewardFallbackBannerProductImageAssetId (copy), var12 (ref), var10 (ref), handleUpdate (copy), var3 (ref), canPerformBinaryUpdateEnabledEngineFeature (copy), var2 (ref)
+		-- upvalues: playWithRewardTelemetryModule (copy), p1 (ref), var7 (ref), playWithRewardBlackoutCurtainModule (copy), var4 (ref), setPlayWithRewardState (copy), adService (copy), var11 (ref), var13 (ref), fIntPlayWithRewardFallbackBannerProductImageAssetId (copy), var12 (ref), var10 (ref), handleUpdate (copy), var3 (ref), canPerformBinaryUpdateEnabledEngineFeature (copy), var2 (ref)
 		handleUpdate(var4, var3, canPerformBinaryUpdateEnabledEngineFeature, var2, "PlayWithRewardGameDetails", function()
-			-- upvalues: playWithRewardTelemetryModule (copy), p1 (copy), var7 (copy), playWithRewardBlackoutCurtainModule (copy), var4 (copy), setPlayWithRewardState (copy), adService (copy), var11 (copy), var13 (copy), playWithRewardFallbackBannerProductImageAssetId (copy), var12 (copy), var10 (copy)
+			-- upvalues: playWithRewardTelemetryModule (copy), p1 (copy), var7 (copy), playWithRewardBlackoutCurtainModule (copy), var4 (copy), setPlayWithRewardState (copy), adService (copy), var11 (copy), var13 (copy), fIntPlayWithRewardFallbackBannerProductImageAssetId (copy), var12 (copy), var10 (copy)
 			playWithRewardTelemetryModule.logPlayWithRewardBlackoutCurtainAction(p1.flowId, p1.universeId, "shown", var7)
 			playWithRewardBlackoutCurtainModule.show()
 			playWithRewardTelemetryModule.logPlayWithRewardButtonClicked(p1.flowId, p1.universeId, var7)
@@ -96,9 +96,9 @@ function PlayWithRewardComponent(p1)
 				return adService:ShowRewardedVideoAdAtClientAsync(p1.universeId)
 			end)
 			pcall(function()
-				-- upvalues: playWithRewardTelemetryModule (copy), p1 (copy), status (ref), var7 (copy), adService (copy), ok (ref), var11 (copy), var13 (copy), playWithRewardFallbackBannerProductImageAssetId (copy), var12 (copy)
+				-- upvalues: playWithRewardTelemetryModule (copy), p1 (copy), status (ref), var7 (copy), adService (copy), ok (ref), var11 (copy), var13 (copy), fIntPlayWithRewardFallbackBannerProductImageAssetId (copy), var12 (copy)
 				playWithRewardTelemetryModule.logPlayWithRewardAdPlaybackStopped(p1.flowId, p1.universeId, tostring(status), var7)
-				adService:SubmitAdNotification(tonumber(p1.universeId) or 0, ok and status ~= nil, status == Enum.ShowAdResult.ShowCompleted, var11, if var13 then playWithRewardFallbackBannerProductImageAssetId else tonumber(var12) or playWithRewardFallbackBannerProductImageAssetId)
+				adService:SubmitAdNotification(tonumber(p1.universeId) or 0, ok and status ~= nil, status == Enum.ShowAdResult.ShowCompleted, var11, if var13 then fIntPlayWithRewardFallbackBannerProductImageAssetId else tonumber(var12) or fIntPlayWithRewardFallbackBannerProductImageAssetId)
 			end)
 			playWithRewardTelemetryModule.logPlayWithRewardBlackoutCurtainAction(p1.flowId, p1.universeId, "hidden", var7)
 			playWithRewardBlackoutCurtainModule.hide()
@@ -218,7 +218,7 @@ function PlayWithRewardComponent(p1)
 		ZIndex = 2,
 		Size = UDim2.fromOffset(var15, var15),
 		Position = if keepRewardContained then nil else UDim2.fromOffset(small, -medium),
-		Image = "rbxassetid://" .. var31
+		Image = "rbxassetid://" .. var30
 	})
 	
 	return reactModule.createElement(view, {

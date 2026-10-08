@@ -13,9 +13,10 @@ local fFlagSduiEdpClientTemplateCache = sharedFlagsModule.FFlagSduiEdpClientTemp
 local fFlagSduiEdpTemplatePrewarm = sharedFlagsModule.FFlagSduiEdpTemplatePrewarm
 local fFlagSduiAdvertiseRuntimeSupportSets = sharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets
 local fFlagInfoTableStableItemKeys = sharedFlagsModule.FFlagInfoTableStableItemKeys
+local fFlagLuaAppEdpMomentVideo = sharedFlagsModule.FFlagLuaAppEdpMomentVideo
 
 return function(p1, p2, p3)
-	-- upvalues: getExperienceDetailsUrlModule (ref), parent (ref), fFlagSduiEdpClientTemplateCache (ref), fFlagSduiAdvertiseRuntimeSupportSets (ref), sduiCapabilities (ref), fFlagSduiEdpTemplatePrewarm (ref), fFlagInfoTableStableItemKeys (ref), getSduiTemplateStore (ref), appPage (ref), sduiApiStorePostConfigContentType (ref), getSduiApiStore (ref), sduiResponseType (ref), getExperienceDetailsPageKeyModule (ref)
+	-- upvalues: getExperienceDetailsUrlModule (ref), parent (ref), fFlagSduiEdpClientTemplateCache (ref), fFlagSduiAdvertiseRuntimeSupportSets (ref), sduiCapabilities (ref), fFlagSduiEdpTemplatePrewarm (ref), fFlagLuaAppEdpMomentVideo (ref), fFlagInfoTableStableItemKeys (ref), getSduiTemplateStore (ref), appPage (ref), sduiApiStorePostConfigContentType (ref), getSduiApiStore (ref), sduiResponseType (ref), getExperienceDetailsPageKeyModule (ref)
 	local var1 = getExperienceDetailsUrlModule(p1)
 	local serviceContractsProtoModule = require(parent.ServiceContractsProto)
 	local experienceDetailsPage = serviceContractsProtoModule.apppageplatform.experiencedetails.experience_details_page
@@ -43,7 +44,8 @@ return function(p1, p2, p3)
 					"CAPABILITY_SUPPORTS_PIN_SHORTCUT_ACTION",
 					"CAPABILITY_SUPPORTS_SCALED_PLAY_BUTTON_AND_IMAGE_SIZES",
 					"CAPABILITY_SUPPORTS_CONTAINER_QUERIES",
-					"CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL"
+					"CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL",
+					if fFlagLuaAppEdpMomentVideo then "CAPABILITY_SUPPORTS_EDP_MEDIA_GALLERY_MOMENT_VIDEO" else nil
 				}
 				
 				if fFlagInfoTableStableItemKeys then

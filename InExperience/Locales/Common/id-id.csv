@@ -106,6 +106,8 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Email kamu belum 
 Authentication.Login.WeChat.AntiAddictionText,"Boikot pengalaman virtual yang tidak baik, tolak pengalaman virtual bajakan. Pahami cara membela diri dan jangan sampai tertipu. Menghabiskan waktu di pengalaman virtual baik untuk otak, tetapi terlalu banyak dapat mengganggu kesehatan. Atur waktumu dengan baik dan nikmati gaya hidup sehat."
 Authentication.SignUp.Action.ApplyOnNextRespawn,Terapkan pada respawn berikutnya
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.Create,Buat
+Authentication.SignUp.Action.CreateAccountSentenceCase,Buat akun
 Authentication.SignUp.Action.ExitModalLeave,Keluar
 Authentication.SignUp.Action.RespawnNow,Respawn sekarang
 Authentication.SignUp.Action.StartPlay,Mulai bermain
@@ -113,15 +115,18 @@ Authentication.SignUp.Button.OKCaptialized,OKE
 Authentication.SignUp.Button.RetryLogIn,Coba log in lagi
 Authentication.SignUp.Description.AccountAlreadyLinked,Akunmu di {platformAccountName} sudah terhubung dengan akun Roblox. Coba log in lagi.
 Authentication.SignUp.Description.BirthdayHint,Masukkan tanggal
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"Dengan membuat akun, kamu menyetujui {startTermsTag}Ketentuan{endTermsTag} kami, termasuk arbitrase, dan memahami {startPrivacyTag}Kebijakan Privasi{endPrivacyTag} kami. Jika kamu berusia di bawah 18 tahun, orang tua atau wali sahmu harus mengizinkan akunmu dan menyetujui Ketentuan kami."
 Authentication.SignUp.Description.Try,Coba
 Authentication.SignUp.Description.UsernameChanged,"Semua siap. Akunmu sudah siap dan terhubung ke {platform}. Respawn sekarang untuk melihat nama pengguna terbarumu dalam game, atau nama pengguna akan diterapkan pada lain waktu."
 Authentication.SignUp.Description.UsernameUnchanged,Kamu sudah masuk. Akunmu sudah siap dan terhubung ke {platform}. Chat dengan teman dan mainkan jutaan game Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Akun Roblox-mu akan dihubungkan ke akunmu di {platform}. Kamu dapat memutus hubungan dari layar Pengaturan kapan saja. Kamu mungkin harus menunggu beberapa saat sebelum dapat terhubung ke akun lain di {platform}. Dengan mengklik {ctaButton}, kamu menyetujui Ketentuan Penggunaan termasuk klausa arbitrase dan menerima Kebijakan Privasi."
+Authentication.SignUp.Header.CloseWithoutFinishing,Tutup tanpa menyelesaikan?
 Authentication.SignUp.Header.OneLastThing,Satu hal terakhir
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Siapkan akun Roblox-mu
 Authentication.SignUp.Heading.CountryCodeSelector,Pilih negara
 Authentication.SignUp.Heading.RetryLogIn,
 Authentication.SignUp.Label.Birthday,Tanggal lahir
+Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} tahun)
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,Hari
 Authentication.SignUp.Label.EnterYourEmail,Masukkan emailmu
@@ -160,6 +165,7 @@ Authentication.SignUp.Response.PasswordComplexity,Buat password yang lebih kompl
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Nama pengguna harus diatur terlebih dahulu.
 Authentication.SignUp.Subtitle.AddYourBirthday,Tambahkan tanggal lahirmu untuk membuat akun Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Progresmu akan tetap tersimpan setelah kamu menyelesaikan penyiapan.
+Authentication.SignUp.Subtitle.YoureAlmostThere,"Sedikit lagi selesai. Jika kamu menutupnya sekarang, akunmu belum selesai dibuat dan kamu tidak akan bisa bermain Roblox."
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,Verifikasi 2 Langkah diperlukan untuk melakukan transaksi lebih lanjut. Buka Pengaturan > Keamanan untuk menyelesaikan Verifikasi 2 Langkah.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Terlalu banyak percobaan. Coba lagi nanti.
@@ -427,7 +433,7 @@ CommonUI.Features.Label.Connections,
 CommonUI.Features.Label.ControllerBar.HoldPrefix,Tahan
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,untuk bermain
-CommonUI.Features.Label.CreateGames,Buat
+CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.Friends,Teman
 CommonUI.Features.Label.Game,Pengalaman Virtual
 CommonUI.Features.Label.GiftCards,Beli Gift Card
@@ -1544,6 +1550,7 @@ Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Nama hanya dapat terdiri dari huruf, angka, dan spasi"
 Feature.Avatar.Label.CountSelected,{itemCount} Terpilih
 Feature.Avatar.Label.Creations,Kreasi
+Feature.Avatar.Label.Current,Saat ini
 Feature.Avatar.Label.CurrentlyWearing,Saat ini Memakai
 Feature.Avatar.Label.DefaultBody,Tubuh Default
 Feature.Avatar.Label.DeleteSetBody,Menghapus set ini tidak akan menghapus pakaian yang menjadi bagiannya.
@@ -1990,6 +1997,10 @@ Feature.Build.Analytics.Description.PayerConversion,Konversi pengguna nongratis 
 Feature.Build.Analytics.Description.PlaythroughRate,Tingkat penyelesaian adalah persentase kunjungan yang menyelesaikan seluruh sesi bermain. Tingkat yang lebih tinggi menunjukkan bahwa pemain merasa pengalaman virtualmu mudah dimainkan dan layak diselesaikan.
 Feature.Build.Analytics.Description.TotalPlaytime,Total waktu main adalah jumlah waktu yang dihabiskan semua pemain di pengalaman virtualmu selama periode tersebut. Peningkatan waktu main biasanya menandakan sesi yang lebih menarik.
 Feature.Build.Analytics.DurationHours,{number} j
+Feature.Build.Analytics.Goal.EarnRobux,Perolehan Robux
+Feature.Build.Analytics.Goal.FirstImpression,Buat impresi pertama yang baik
+Feature.Build.Analytics.Goal.GetMorePlayers,Dapatkan lebih banyak pemain
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,Buat pemain terus kembali bermain
 Feature.Build.Analytics.KeyStats,Statistik utama
 Feature.Build.Analytics.LastMonth,Bulan lalu
 Feature.Build.Analytics.LastWeek,
@@ -2021,9 +2032,12 @@ Feature.Build.Analytics.Summary.TotalPlaytime,Total jam yang dihabiskan pemain d
 Feature.Build.Analytics.Title.Arppu,Pendapatan Rata-rata per Pengguna Berbayar
 Feature.Build.Analytics.Title.ConcurrentUsers,Total pemain
 Feature.Build.Analytics.Title.D1Retention,Retensi hari ke-1
+Feature.Build.Analytics.Title.D7Retention,Retensi H7
 Feature.Build.Analytics.Title.DailyActiveUsers,Pengguna aktif harian
+Feature.Build.Analytics.Title.NewUserSessionTime,Waktu sesi pengguna baru
 Feature.Build.Analytics.Title.PayerConversion,Konversi pengguna nongratis
 Feature.Build.Analytics.Title.PlaythroughRate,Tingkat penyelesaian
+Feature.Build.Analytics.Title.RobuxSpent,
 Feature.Build.Analytics.Title.TotalPlaytime,Total waktu main
 Feature.Build.Analytics.Visits,Kunjungan
 Feature.Build.Content.NewGame,Game baru
@@ -2080,6 +2094,7 @@ Feature.Build.Description.ShopButton,Tambahkan entry point belanja
 Feature.Build.Description.ShortAdCampaign,Cara cepat untuk melihat pendapat pemain tentang game-mu.
 Feature.Build.Description.StopBuild,"Permintaan ini masih dalam proses. Jika kamu berhenti sekarang, permintaan ini tidak akan selesai dan kamu harus mengirimkannya lagi."
 Feature.Build.Description.UpdateDeveloperProduct,Perbarui produk developer {PRODUCT_ID}.
+Feature.Build.Description.UseAdCreditsInAdsManager,Kamu harus membuka Manajer Iklan untuk menggunakannya.
 Feature.Build.Error.AdForbidden,Akun atau game-mu tidak dapat menayangkan iklan saat ini. Hubungi dukungan pelanggan jika menurutmu ini kesalahan.
 Feature.Build.Error.AdInsufficientFunds,Kamu tidak memiliki cukup Robux untuk membuat iklan ini. Tambahkan lebih banyak lalu coba lagi.
 Feature.Build.Error.AdInternalError,
@@ -2403,6 +2418,7 @@ Feature.Build.Title.RevertLastChange,Batalkan perubahan terakhir?
 Feature.Build.Title.StopBuild,Hentikan proses?
 Feature.Build.Title.Tasks,Tugas
 Feature.Build.Title.TurnActivity,Aktivitas chat saat ini
+Feature.Build.Title.UseYourAdCredits,Gunakan kredit iklanmu
 Feature.Build.Title.VersionHistory,Riwayat versi
 Feature.Build.Title.VersionInfo,Informasi versi
 Feature.Build.Title.VersionNumber,Versi {VERSION}
@@ -2834,6 +2850,7 @@ Feature.Catalog.Title.Checkout.UnavailableItems,Item yang Tidak Tersedia
 Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle,Pakai Avatar?
 Feature.Catalog.Title.CheckoutPlural,Checkout {count} item
 Feature.Catalog.Title.CheckoutSingular,
+Feature.Catalog.Title.Explore,Jelajahi
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,Ganti lapisan bawah?
 Feature.Catalog.Title.RentalFtuxText,Sewa untuk mencoba item selama 3 hari
 Feature.Catalog.Toast.AddedToFavorites,Ditambahkan ke favorit
@@ -3460,7 +3477,7 @@ Feature.Groups.Message.NotInAnyGroups,Kamu bukan anggota komunitas mana pun.
 Feature.Groups.Message.PinLocked,Kamu tidak dapat melakukan tindakan ini dengan PIN terkunci. Buka kunci PIN di halaman Pengaturan Akun.
 Feature.Groups.Modal.ContentTextHigh,"Verifikasi akunmu untuk bergabung di komunitas ini.
 
-1. Buka Info Akun > Verifikasi Usia Saya
+1. Buka Info Akun > Verifikasi Identitas
 2. Selesaikan proses verifikasi"
 Feature.Groups.Modal.ContentTextLow,"Verifikasi akunmu untuk bergabung di komunitas ini.
 
@@ -3468,14 +3485,14 @@ Feature.Groups.Modal.ContentTextLow,"Verifikasi akunmu untuk bergabung di komuni
 2. Pilih satu opsi verifikasi:
 - Tambahkan Nomor Ponsel
 - Tambahkan Email
-- Verifikasi Usia Saya
+- Verifikasi Identitas
 3. Selesaikan proses verifikasi"
 Feature.Groups.Modal.ContentTextMedium,"Verifikasi akunmu untuk bergabung di komunitas ini.
 
 1. Buka Info Akun
 2. Pilih satu opsi verifikasi:
 - Tambahkan Nomor Ponsel DAN Tambahkan Email
-- Verifikasi Usia Saya
+- Verifikasi Identitas
 3. Selesaikan proses verifikasi"
 Feature.Groups.Notification.FailedToFollow,Gagal mengikuti profil. Coba lagi nanti.
 Feature.Groups.Notification.FailedToJoin,Gagal bergabung ke komunitas. Coba lagi nanti.
@@ -3550,6 +3567,7 @@ Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Dengan membel
 Feature.InExperienceShop.Label.BonusItem,Item bonus
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Berakhir dalam {timeRemaining}
+Feature.InExperienceShop.Label.FreeTrial,Uji coba gratis
 Feature.InExperienceShop.Label.NoDescription,Tidak Ada Deskripsi
 Feature.InExperienceShop.Label.OfferEndTime,{offer} berakhir dalam {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Ini preview Toko-mu di Roblox Studio. Pemain tidak bisa melihat preview ini.
@@ -3561,6 +3579,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} menit
 Feature.InExperienceShop.Label.Timer.Minute.Singular,1 menit
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} detik
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 detik
+Feature.InExperienceShop.Label.Trial,Uji Coba
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Kamu telah berhasil membeli {ROBUX_AMOUNT} Robux
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Kamu yakin ingin menghapus item ini dari inventarismu secara permanen? Jika kamu berubah pikiran, kamu harus mendapatkannya lagi di pengalaman virtual."
 Feature.Item.Label.DeleteItemUndercase,Hapus item
@@ -3574,12 +3593,16 @@ Feature.Moments.Action.AddSticker,Tambahkan Stiker
 Feature.Moments.Action.AddText,Tambahkan Teks
 Feature.Moments.Action.AddVoice,Tambahkan Suara
 Feature.Moments.Action.Back,
+Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentShowLess,Tampilkan lebih sedikit
+Feature.Moments.Action.CommentShowMore,Tampilkan lebih banyak
 Feature.Moments.Action.Continue,
 Feature.Moments.Action.CreateVoiceover,Buat voiceover
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.DiscardChange,Hapus perubahan
 Feature.Moments.Action.Done,
+Feature.Moments.Action.Edit,
 Feature.Moments.Action.Expand,Perluas
 Feature.Moments.Action.GenerateText,Buat Teks
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Tidak membantu
@@ -3595,6 +3618,7 @@ Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
+Feature.Moments.Action.RetryLoadingComments,Coba load komentar lagi
 Feature.Moments.Action.Return,Kembali ke Galeri
 Feature.Moments.Action.ReturnToEditing,Kembali ke Pengeditan
 Feature.Moments.Action.SaveVoiceover,
@@ -3617,9 +3641,35 @@ Feature.Moments.Description.StayFriendly,Mari kita tetap bersikap ramah
 Feature.Moments.Description.TooManyUploads,Kamu telah meng-upload terlalu banyak video hari ini. Coba lagi besok.
 Feature.Moments.Disclaimer.EveryoneMoments,Semua orang di Moment dapat melihat apa yang dipublikasikan
 Feature.Moments.Label.All,
+Feature.Moments.Label.AllowComments,Izinkan komentar
 Feature.Moments.Label.AttemptingJoinExperience,Mencoba bergabung ke {placeName}. Ini mungkin membutuhkan waktu beberapa detik.
 Feature.Moments.Label.CaptureLibrary,Perpustakaan Mediamu
 Feature.Moments.Label.ChooseVoice,Pilih suara
+Feature.Moments.Label.CommentAuthorFallback,Pengguna {userId}
+Feature.Moments.Label.CommentAuthorUnknown,Pengguna tidak diketahui
+Feature.Moments.Label.CommentDeleteFailed,Tidak dapat menghapus komentar
+Feature.Moments.Label.CommentNotAllowed,Kamu tidak dapat komen di Moment ini.
+Feature.Moments.Label.CommentPostFailed,Komentarmu tidak dapat diposting. Coba lagi.
+Feature.Moments.Label.CommentPostOutcomeUnknown,Kami tidak dapat mengonfirmasi komentar terakhir yang kamu posting. Periksa komentar sebelum mengirim lagi.
+Feature.Moments.Label.CommentRateLimited,Kamu komen terlalu cepat. Coba lagi nanti.
+Feature.Moments.Label.CommentRejectedByFilter,"Komentarmu tidak diposting. Revisi komentar, lalu coba lagi."
+Feature.Moments.Label.CommentSendStatusUnknown,Status pengiriman tidak diketahui
+Feature.Moments.Label.CommentSending,Mengirim...
+Feature.Moments.Label.CommentSignInRequired,Log in lagi untuk komen.
+Feature.Moments.Label.CommentTimestampDays,{count} hr
+Feature.Moments.Label.CommentTimestampHours,{count} jm
+Feature.Moments.Label.CommentTimestampMinutes,{count} mnt
+Feature.Moments.Label.CommentTimestampMonths,{count} bln
+Feature.Moments.Label.CommentTimestampNow,sekarang
+Feature.Moments.Label.CommentTimestampWeeks,{count} mg
+Feature.Moments.Label.CommentTimestampYears,{count} thn
+Feature.Moments.Label.CommentingUnavailable,Fitur komentar saat ini tidak tersedia. Coba lagi nanti.
+Feature.Moments.Label.CommentsDisabled,Komentar dinonaktifkan
+Feature.Moments.Label.CommentsReadOnly,Komentar berstatus hanya baca
+Feature.Moments.Label.CommentsTurnedOff,Komentar dinonaktifkan untuk Moment ini.
+Feature.Moments.Label.CommentsUnavailable,Komentar tidak tersedia
+Feature.Moments.Label.DeleteCommentBody,Komentar ini akan dihapus secara permanen.
+Feature.Moments.Label.DeleteCommentTitle,Hapus komentar?
 Feature.Moments.Label.DeleteMomentBody,Kamu tidak bisa memulihkan Moment setelah Moment dihapus.
 Feature.Moments.Label.DeleteMomentTitle,Hapus Moment?
 Feature.Moments.Label.DeleteVoiceoverBody,Ini akan menghapus teks dan voiceover-mu. Kamu dapat memulai dari awal kapan saja.
@@ -3631,6 +3681,7 @@ Feature.Moments.Label.FeedEndTitle,Tidak ada permintaan pending
 Feature.Moments.Label.FeedFailedToLoad,Feed gagal di-load
 Feature.Moments.Label.FeedMyMoments,Moment Saya
 Feature.Moments.Label.FeedTrending,
+Feature.Moments.Label.FirstCommentInvite,Belum ada komentar. Jadilah yang pertama berkomentar.
 Feature.Moments.Label.HowToUseCaptureTitle,Cara menggunakan Media
 Feature.Moments.Label.LinkCopied,Link disalin
 Feature.Moments.Label.LinkCopyFailed,Gagal menyalin link.
@@ -3639,12 +3690,14 @@ Feature.Moments.Label.MomentDeletedBody,
 Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,Terjadi masalah.
 Feature.Moments.Label.MomentFailedToPostTitle,Moment gagal diposting
+Feature.Moments.Label.MomentNoLongerAvailable,Moment ini tidak lagi tersedia.
 Feature.Moments.Label.MomentPublishedBody,Momen-mu berhasil dipublikasikan.
 Feature.Moments.Label.MomentPublishedTitle,Momen dipublikasikan
 Feature.Moments.Label.MomentUnavailable,Moment tidak tersedia
 Feature.Moments.Label.MomentUnavailableDefault,Moment ini tidak tersedia.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NoCommentsYet,Belum ada komentar
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Kamu sudah melihat semuanya
 Feature.Moments.Label.Photos,Foto
 Feature.Moments.Label.PostDeleted,Moment dihapus
@@ -3685,6 +3738,10 @@ Feature.Moments.Label.VoiceLimitReachedBody,"Tunggu sebentar, lalu coba lagi"
 Feature.Moments.Label.VoiceModerationError,Skripmu harus mematuhi peraturan keamanan
 Feature.Moments.Label.VoicePlaceholder,Ketik skrip voiceover-mu. Batas {maxCount} karakter
 Feature.Moments.Label.VoiceTimeoutBody,Waktu pembuatan voiceover habis.
+Feature.Moments.Label.WriteComment,Tulis komentar
+Feature.Moments.Title.Comments,Komentar
+Feature.Moments.Title.CommentsWithCappedCount,Komentar ({count}+)
+Feature.Moments.Title.CommentsWithCount,Komentar ({count})
 Feature.Moments.Title.GenerateTextFeedbackReason,Apa masalahnya?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
@@ -3787,10 +3844,17 @@ Feature.Parents.Title.EnterParentEmailV2,Masukkan alamat email orang tua
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,Dari Pencarian
+Feature.PlayerSearchResults.Label.NewUsername,Nama pengguna baru
 Feature.PlayerSearchResults.Label.Previously,Sebelumnya
 Feature.PlayerSearchResults.Label.ThisIsYou,Ini adalah kamu
+Feature.PlayerSearchResults.Label.You,Kamu
+Feature.PlayerSearchResults.Label.YouAreConnections,Kamu adalah Koneksi
 Feature.PlayerSearchResults.Label.YouAreFollowing,Kamu mengikuti
+Feature.PlayerSearchResults.Label.YouAreFriends,Kalian berteman
+Feature.PrivateServers.Action.CreatePrivateServer,Buat Server Pribadi
+Feature.PrivateServers.Action.FreeWithBlackbird,Gratis dengan Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Pembelian server privat tidak didukung di Studio.
+Feature.PrivateServers.Description.VipServersNotSupported,Game ini tidak mendukung server privat.
 Feature.Profile.Action.AboutThisProfile,Tentang profil ini
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Menerima Teman
@@ -4043,6 +4107,7 @@ Feature.RobloxSubscription.Description.JoinEarly,Bergabung lebih awal dengan Plu
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} mengundangmu untuk bergabung dengan Plus. Kamu berdua akan mendapatkan {amount} Robux saat kamu membeli Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Dengan mengklik \u{201C}{ctaText}\u{201D}, kamu menyetujui <a href=""{termsUrl}"">Ketentuan Subscription Roblox</a>. Biaya akan otomatis dibebankan setiap bulan hingga kamu membatalkan."
 Feature.RobloxSubscription.Heading.ReferralEntry,Bagikan Plus untuk mendapatkan {amount} Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Bergabunglah dengan Plus untuk mendapatkan {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,"Bergabunglah dengan Plus, dapatkan"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Server privat gratis
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4059,6 +4124,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}Gratis 1 bulan
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} gratis,{boldEnd} lalu {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,bulan
 Feature.RobloxSubscription.Label.months,
+Feature.RobloxSubscription.Message.AlreadySubscribed,Kamu sudah memiliki Plus. Link ini untuk anggota baru. Bagikan link-mu sendiri untuk mengundang teman dan mendapatkan reward.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Dapatkan uji coba Plus gratis selama 1 minggu
 Feature.RobloxSubscription.Title.AlreadySubscribed,Kabar baik
 Feature.RobloxSubscription.Title.GenericError,
@@ -4303,8 +4369,19 @@ Feature.SongDetails.Action.ReportAudio,Laporkan Audio
 Feature.SongDetails.Label.InappropriateAudio,Audio Tidak Pantas
 Feature.SongDetails.Label.InappropriateThumbnail,Thumbnail Tidak Pantas
 Feature.SongDetails.Label.SongPreview,Preview Lagu
+Feature.SplitPane.EditAvatarButtonText,Edit Avatar
 Feature.SplitPane.Label.CollapseAvatar,Ciutkan avatar
 Feature.SplitPane.Label.ExpandAvatar,Perluas avatar
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,Selesaikan tur
+Feature.SplitPane.Tour.Button.SkipTour,Lewati tur
+Feature.SplitPane.Tour.Step1.Description.Collapsed,Avatar yang disimpan sekarang terlihat di beranda. Perbesar ruang ini untuk melihatnya.
+Feature.SplitPane.Tour.Step1.Description.Expanded,Avatar yang disimpan sekarang terlihat di beranda. Putar atau perbesar untuk melihat setiap detailnya.
+Feature.SplitPane.Tour.Step1.Title,Lihat dirimu di Beranda
+Feature.SplitPane.Tour.Step2.Description,Pilih penampilan yang kamu inginkan. Beralih di antara avatar tersimpan tepat sebelum kamu bergabung dalam game.
+Feature.SplitPane.Tour.Step2.Title,Ubah tampilanmu kapan saja
+Feature.SplitPane.Tour.Step3.Description,Sembunyikan ruang ini kapan saja untuk fokus menjelajahi game baru. Avatar yang kamu simpan tetap ada di sini.
+Feature.SplitPane.Tour.Step3.Title,Pilih yang ingin kamu lihat
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Tambahkan lainnya
 Feature.Squads.Action.ConnectToVoice,Aktifkan suara

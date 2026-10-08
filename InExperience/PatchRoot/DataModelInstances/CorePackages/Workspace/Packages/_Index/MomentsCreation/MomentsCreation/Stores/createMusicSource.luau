@@ -6,6 +6,7 @@ local constantsModule = require(momentsCreation.Constants)
 local _ = require(momentsCreation.Types.Music)
 local fFlagMomentsCreationSkipRecordingCodeFilterModule = require(momentsCreation.Flags.FFlagMomentsCreationSkipRecordingCodeFilter)
 local fFlagMomentsCreationMusicSkipMetadataFetchModule = require(momentsCreation.Flags.FFlagMomentsCreationMusicSkipMetadataFetch)
+local fFlagMomentsCreationAudioSearchV2SortTypeModule = require(momentsCreation.Flags.FFlagMomentsCreationAudioSearchV2SortType)
 local reportMusicSearchCounts = momentsCommonModule.Analytics.reportMusicSearchCounts
 
 local function formatMusic(p1)
@@ -55,44 +56,65 @@ local function formatSearchResults(p2)
 end
 
 return function(p3)
-	-- upvalues: fFlagMomentsCreationMusicSkipMetadataFetchModule (ref), fFlagMomentsCreationSkipRecordingCodeFilterModule (ref), formatSearchResults (ref), reportMusicSearchCounts (ref), dashModule (ref), constantsModule (ref), formatMusic (ref)
+	-- upvalues: fFlagMomentsCreationMusicSkipMetadataFetchModule (ref), fFlagMomentsCreationSkipRecordingCodeFilterModule (ref), formatSearchResults (ref), dashModule (ref), constantsModule (ref), formatMusic (ref), fFlagMomentsCreationAudioSearchV2SortTypeModule (ref), reportMusicSearchCounts (ref)
 	local function _()
 		-- upvalues: p3 (ref)
 		return p3 or game:GetService("AssetService")
 	end
 	
+	local function formatPage(p4, p5)
+		-- upvalues: fFlagMomentsCreationMusicSkipMetadataFetchModule (copy), fFlagMomentsCreationSkipRecordingCodeFilterModule (copy), formatSearchResults (copy), dashModule (copy), constantsModule (copy), formatMusic (copy)
+		if fFlagMomentsCreationMusicSkipMetadataFetchModule and fFlagMomentsCreationSkipRecordingCodeFilterModule then
+			return formatSearchResults(p5)
+		end
+		local t = {}
+		
+		for i, v in p5 do
+			if not dashModule.includes(constantsModule.SearchMusicCreatorDenylist, v.Creator.Id) then
+				table.insert(t, v.Id)
+			end
+		end
+		local var3 = if #t == 0 then {} else p4:GetAudioMetadataAsync(t)
+		
+		return formatMusic(var3), #var3
+	end
+	
 	return {
-		searchMusic = function(p4, p5)
-			-- upvalues: p3 (ref), fFlagMomentsCreationMusicSkipMetadataFetchModule (copy), fFlagMomentsCreationSkipRecordingCodeFilterModule (copy), formatSearchResults (copy), reportMusicSearchCounts (copy), dashModule (copy), constantsModule (copy), formatMusic (copy)
-			local p6 = p3 or game:GetService("AssetService")
+		searchMusic = function(p6, p7)
+			-- upvalues: p3 (ref), fFlagMomentsCreationAudioSearchV2SortTypeModule (copy), formatPage (ref), reportMusicSearchCounts (copy)
+			local p8 = p3 or game:GetService("AssetService")
 			local audioSearchParams = Instance.new("AudioSearchParams")
-			audioSearchParams.SearchKeyword = p4
+			audioSearchParams.SearchKeyword = p6
 			audioSearchParams.AudioSubType = Enum.AudioSubType.Music
-			audioSearchParams.MinDuration = p5
-			local currentPage = p6:SearchAudio(audioSearchParams):GetCurrentPage()
+			audioSearchParams.MinDuration = p7
 			
-			if fFlagMomentsCreationMusicSkipMetadataFetchModule and fFlagMomentsCreationSkipRecordingCodeFilterModule then
-				local var3, var4 = formatSearchResults(currentPage)
-				reportMusicSearchCounts(var4, #var3, { queryPresent = p4 ~= "" })
-				
-				return var3
+			if fFlagMomentsCreationAudioSearchV2SortTypeModule then
+				pcall(function()
+					-- upvalues: audioSearchParams (ref), p6 (ref)
+					local audioSortType = Enum.AudioSortType
+					audioSearchParams.SortType = if p6 == "" then audioSortType.Top else audioSortType.Relevance
+				end)
 			end
-			local t = {}
+			local var4 = p8:SearchAudio(audioSearchParams)
+			local var5, var6 = formatPage(p8, var4:GetCurrentPage())
+			reportMusicSearchCounts(var6, #var5, { queryPresent = p6 ~= "" })
 			
-			for i, v in currentPage do
-				if not dashModule.includes(constantsModule.SearchMusicCreatorDenylist, v.Creator.Id) then
-					table.insert(t, v.Id)
+			return var5, {
+				isFinished = function()
+					-- upvalues: var4 (ref)
+					return var4.IsFinished == true
+				end,
+				nextPage = function()
+					-- upvalues: var4 (ref), formatPage (copy), p8 (ref)
+					var4:AdvanceToNextPageAsync()
+					
+					return formatPage(p8, var4:GetCurrentPage())
 				end
-			end
-			local var5 = if #t == 0 then {} else p6:GetAudioMetadataAsync(t)
-			local var6 = formatMusic(var5)
-			reportMusicSearchCounts(#var5, #var6, { queryPresent = p4 ~= "" })
-			
-			return var6
+			}
 		end,
-		getMetadata = function(p7)
+		getMetadata = function(p6)
 			-- upvalues: formatMusic (copy), p3 (ref)
-			return formatMusic((p3 or game:GetService("AssetService")):GetAudioMetadataAsync(p7))
+			return formatMusic((p3 or game:GetService("AssetService")):GetAudioMetadataAsync(p6))
 		end
 	}
 end

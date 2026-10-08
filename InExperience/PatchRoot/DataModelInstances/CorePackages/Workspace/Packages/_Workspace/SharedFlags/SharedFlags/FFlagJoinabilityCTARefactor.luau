@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("JoinabilityCTARefactor", false)
+﻿return game:DefineFastFlag("JoinabilityCTARefactor_v3", false)

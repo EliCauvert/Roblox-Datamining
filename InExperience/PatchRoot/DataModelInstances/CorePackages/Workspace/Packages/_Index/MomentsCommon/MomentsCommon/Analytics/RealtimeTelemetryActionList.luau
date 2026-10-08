@@ -27,7 +27,8 @@ local t_1 = {
 	reaction_remove = "reaction_remove",
 	share = "share",
 	join = "join",
-	report = "report"
+	report = "report",
+	report_click = "report_click"
 }
 
 local _ = function(p1)
@@ -160,6 +161,29 @@ local _ = function(p1)
 end
 
 local t_10 = { rejected = true, failed = true, unknown = true }
+local t_11 = {
+	attempted = "attempted",
+	succeeded = "succeeded",
+	failed = "failed"
+}
+
+local _ = function(p1)
+	-- upvalues: t_11 (ref)
+	return t_11[p1] or "unknown"
+end
+
+local _ = function(p1)
+	return if p1 == "add" or p1 == "remove" then p1 else "unknown"
+end
+
+local _ = function(p1)
+	-- upvalues: t_11 (ref)
+	return if p1 == "already_deleted" then p1 else t_11[p1] or "unknown"
+end
+
+local _ = function(p1)
+	return if p1 == "clicked" then p1 else "unknown"
+end
 
 local _ = function(p1, p2)
 	local t = { status = p1.status, feedType = p1.feedType }
@@ -330,10 +354,10 @@ return {
 		}
 	}),
 	[realtimeEventNamesModule.MomentsEngagement] = telemetry.new({
-		description = "Counts Moments engagement actions (reactions, shares, joins, reports, experience-detail opens) in real time, dimensioned by a bounded action.",
+		description = "Counts Moments engagement actions (reactions, shares, joins, report submissions, report clicks, experience-detail opens) in real time, dimensioned by a bounded action.",
 		throttlingThousandths = 10000,
 		name = realtimeEventNamesModule.MomentsEngagement,
-		lastUpdated = { 2026, 8, 1 },
+		lastUpdated = { 2026, 10, 2 },
 		backendsList = {
 			{
 				incrementValue = 1,
@@ -553,6 +577,100 @@ return {
 						surface = p1.failureReason
 						t.failureReason = if surface == nil or string.find(surface, "^unknown_") ~= nil then "unknown" else surface
 					end
+					return t
+				end
+			}
+		}
+	}),
+	[realtimeEventNamesModule.MomentsCommentReaction] = telemetry.new({
+		description = "Counts Moments comment reaction requests in real time, one attempt per network request including retries, by bounded status, action (add/remove), surface and (failed only) failure reason.",
+		throttlingThousandths = 10000,
+		name = realtimeEventNamesModule.MomentsCommentReaction,
+		lastUpdated = { 2026, 10, 1 },
+		backendsList = {
+			{
+				incrementValue = 1,
+				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1)
+					-- upvalues: t_11 (ref)
+					local status = t_11[p1.status] or "unknown"
+					local t = { status = status }
+					local action = p1.action
+					t.action = if action == "add" or action == "remove" then action else "unknown"
+					action = p1.surface
+					t.surface = if action == "watch_tab" or action == "profile" then action else "unknown"
+					
+					if status == "failed" then
+						action = p1.failureReason
+						t.failureReason = if action == nil or string.find(action, "^unknown_") ~= nil then "unknown" else action
+					end
+					return t
+				end
+			}
+		}
+	}),
+	[realtimeEventNamesModule.MomentsCommentDelete] = telemetry.new({
+		description = "Counts Moments comment delete requests and outcomes in real time by bounded status (already_deleted = the server reported the comment gone), surface and (failed only) failure reason.",
+		throttlingThousandths = 10000,
+		name = realtimeEventNamesModule.MomentsCommentDelete,
+		lastUpdated = { 2026, 10, 1 },
+		backendsList = {
+			{
+				incrementValue = 1,
+				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1)
+					-- upvalues: t_11 (ref)
+					local status = p1.status
+					local var1 = if status == "already_deleted" then status else t_11[status] or "unknown"
+					local t = { status = var1 }
+					local surface = p1.surface
+					t.surface = if surface == "watch_tab" or surface == "profile" then surface else "unknown"
+					
+					if var1 == "failed" then
+						surface = p1.failureReason
+						t.failureReason = if surface == nil or string.find(surface, "^unknown_") ~= nil then "unknown" else surface
+					end
+					return t
+				end
+			}
+		}
+	}),
+	[realtimeEventNamesModule.MomentsCommentReport] = telemetry.new({
+		description = "Counts Moments comment report flow opens in real time by surface, including Block and Report. Counted at the same point as the product report-click event; submission happens in the host abuse-report flow.",
+		throttlingThousandths = 10000,
+		name = realtimeEventNamesModule.MomentsCommentReport,
+		lastUpdated = { 2026, 10, 1 },
+		backendsList = {
+			{
+				incrementValue = 1,
+				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1)
+					local t = {}
+					local status = p1.status
+					t.status = if status == "clicked" then status else "unknown"
+					local surface = p1.surface
+					t.surface = if surface == "watch_tab" or surface == "profile" then surface else "unknown"
+					
+					return t
+				end
+			}
+		}
+	}),
+	[realtimeEventNamesModule.MomentsCommentAuthorBlock] = telemetry.new({
+		description = "Counts blocks of a comment author started from a Moments comment in real time by bounded status (attempted on confirm, then succeeded/failed) and surface.",
+		throttlingThousandths = 10000,
+		name = realtimeEventNamesModule.MomentsCommentAuthorBlock,
+		lastUpdated = { 2026, 10, 1 },
+		backendsList = {
+			{
+				incrementValue = 1,
+				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1)
+					-- upvalues: t_11 (ref)
+					local t = { status = t_11[p1.status] or "unknown" }
+					local surface = p1.surface
+					t.surface = if surface == "watch_tab" or surface == "profile" then surface else "unknown"
+					
 					return t
 				end
 			}

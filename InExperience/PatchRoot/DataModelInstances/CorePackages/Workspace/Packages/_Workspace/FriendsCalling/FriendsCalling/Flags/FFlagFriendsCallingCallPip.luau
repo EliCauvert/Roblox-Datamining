@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("FriendsCallingCallPip", false)
+﻿return game:DefineFastFlag("FriendsCallingCallPip_DEV", false)

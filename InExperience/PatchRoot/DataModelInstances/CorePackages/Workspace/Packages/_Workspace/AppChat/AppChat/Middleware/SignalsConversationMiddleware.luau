@@ -12,6 +12,7 @@ local messageModelModule = require(appChat.Models.MessageModel)
 local getConversationMessageViewModelStoreModule = require(appChat.Stores.GetConversationMessageViewModelStore)
 local getConversationListStoreModule = require(appChat.Stores.GetConversationListStore)
 local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
+local getConversationSearchDataHydrationModule = require(appChat.Stores.GetConversationSearchDataHydration)
 local searchIntroducedConversationIdsModule = require(appChat.Stores.searchIntroducedConversationIds)
 local networkingBlockingModule = require(appChat.Http.NetworkingBlocking)
 local networkingChatModule = require(appChat.Http.NetworkingChat)
@@ -420,15 +421,23 @@ local function updateConversationLastUpdatedFromMessages(p7, p8, p9, p10)
 end
 
 local function handleCreateConversationSucceeded(p11, p12)
-	-- upvalues: upsertConversationResponse (ref)
+	-- upvalues: upsertConversationResponse (ref), fFlagAppChatServerSideConversationSearchModule (ref), getConversationSearchDataHydrationModule (ref)
 	local responseBody = p11.responseBody
 	upsertConversationResponse(p12, responseBody and (responseBody.conversations and responseBody.conversations[1]))
+	
+	if fFlagAppChatServerSideConversationSearchModule then
+		getConversationSearchDataHydrationModule(false).invalidate()
+	end
 end
 
 local function handleDuplicateConversationSucceeded(p11, p12)
-	-- upvalues: upsertConversationResponse (ref)
+	-- upvalues: upsertConversationResponse (ref), fFlagAppChatServerSideConversationSearchModule (ref), getConversationSearchDataHydrationModule (ref)
 	local responseBody = p11.responseBody
 	upsertConversationResponse(p12, responseBody and (responseBody.conversations and responseBody.conversations[1]))
+	
+	if fFlagAppChatServerSideConversationSearchModule then
+		getConversationSearchDataHydrationModule(false).invalidate()
+	end
 end
 
 local function handleGetUserConversationsSucceeded(p11, p12)
@@ -710,8 +719,12 @@ local t_1 = {
 		p22.upsertConversation(cryoModule.Dictionary.join(conversation, t), false)
 	end,
 	[friendConversationCreatedModule.name] = function(p21, p22)
+		-- upvalues: fFlagAppChatServerSideConversationSearchModule (ref), getConversationSearchDataHydrationModule (ref)
 		if p21.oldFriendConversationId then
 			p22.removeConversation(p21.oldFriendConversationId)
+		end
+		if fFlagAppChatServerSideConversationSearchModule then
+			getConversationSearchDataHydrationModule(false).invalidate()
 		end
 	end,
 	[friendshipDestroyedModule.name] = function(p21, p22)

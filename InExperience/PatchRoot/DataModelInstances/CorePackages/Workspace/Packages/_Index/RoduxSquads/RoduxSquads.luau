@@ -11,11 +11,12 @@ local cryoModule = require(parent.Cryo)
 local roduxNetworkingModule = require(parent.RoduxNetworking)
 local networkingSquadsModule = require(parent.NetworkingSquads)
 local fFlagUseSignalsForSquadExperienceInviteStatus = require(parent.SharedFlags).FFlagUseSignalsForSquadExperienceInviteStatus
+local fFlagUseSignalsForSquadExperienceInvite = require(parent.SharedFlags).FFlagUseSignalsForSquadExperienceInvite
 
 return {
 	["jest.config"] = script["jest.config"],
 	config = function(p1)
-		-- upvalues: cryoModule (ref), networkingSquadsModule (ref), roduxNetworkingModule (ref), reducersModule (ref), roduxModule (ref), fFlagUseSignalsForSquadExperienceInviteStatus (ref), actionsModule (ref), modelsModule (ref), enumsModule (ref)
+		-- upvalues: cryoModule (ref), networkingSquadsModule (ref), roduxNetworkingModule (ref), reducersModule (ref), roduxModule (ref), fFlagUseSignalsForSquadExperienceInvite (ref), fFlagUseSignalsForSquadExperienceInviteStatus (ref), actionsModule (ref), modelsModule (ref), enumsModule (ref)
 		p1 = cryoModule.Dictionary.join(p1, {
 			NetworkingSquads = networkingSquadsModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
 		})
@@ -23,11 +24,11 @@ return {
 		
 		return {
 			installReducer = function()
-				-- upvalues: roduxModule (copy), var1 (ref), var2 (ref), reducersModule (copy), p1 (write), fFlagUseSignalsForSquadExperienceInviteStatus (copy)
+				-- upvalues: roduxModule (copy), var1 (ref), var2 (ref), fFlagUseSignalsForSquadExperienceInvite (copy), reducersModule (copy), p1 (write), fFlagUseSignalsForSquadExperienceInviteStatus (copy)
 				return roduxModule.combineReducers({
 					currentSquad = var1,
 					currentSquadPersist = var2,
-					currentExperienceInvite = reducersModule.currentExperienceInvite(p1),
+					currentExperienceInvite = if fFlagUseSignalsForSquadExperienceInvite then nil else reducersModule.currentExperienceInvite(p1),
 					currentExperienceInviteStatus = if fFlagUseSignalsForSquadExperienceInviteStatus then nil else reducersModule.currentExperienceInviteStatus()
 				})
 			end,

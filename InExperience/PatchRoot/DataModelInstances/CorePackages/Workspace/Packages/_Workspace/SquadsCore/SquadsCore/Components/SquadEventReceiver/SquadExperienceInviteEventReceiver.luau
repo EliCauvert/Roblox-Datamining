@@ -11,6 +11,7 @@ local networkingSquadsModule = require(squadsCore.Http.NetworkingSquads)
 local roduxSquadsModule = require(squadsCore.RoduxSquads)
 local serializeTableModule = require(squadsCore.Utils.serializeTable)
 local useCurrentSquadParentChannelIdModule = require(squadsCore.Hooks.useCurrentSquadParentChannelId)
+local getSquadExperienceInviteStoreModule = require(squadsCore.Stores.GetSquadExperienceInviteStore)
 local cryoModule = require(parent.Cryo)
 local experienceServiceModule = require(parent.ExperienceService)
 local localStorageKey = require(parent.LocalStorage).Enums.LocalStorageKey
@@ -25,6 +26,7 @@ local luauPolyfillModule = require(parent.LuauPolyfill)
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
+local useSignalState = require(parent.SignalsReact).useSignalState
 local gameParams = experienceServiceModule.GameParams
 local experienceService = experienceServiceModule.ExperienceService
 local clearInterval = luauPolyfillModule.clearInterval
@@ -43,6 +45,7 @@ local squadExperienceInviteTimeoutSeconds = game:DefineFastInt("SquadExperienceI
 local fFlagDebugSquadLogsEnabled = sharedFlagsModule.FFlagDebugSquadLogsEnabled
 local fFlagSquadLaunchExperienceMobileFix = sharedFlagsModule.FFlagSquadLaunchExperienceMobileFix
 local fFlagEnablePrivatePartyAcceptInvite = sharedFlagsModule.FFlagEnablePrivatePartyAcceptInvite
+local fFlagUseSignalsForSquadExperienceInvite = sharedFlagsModule.FFlagUseSignalsForSquadExperienceInvite
 local toastNotificationsMessageId = messageBusService:GetMessageId("ToastNotifications", "userActionOnToastNotification")
 
 local _ = function(p1)
@@ -51,7 +54,7 @@ local _ = function(p1)
 end
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), squadExternalContractContextModule (ref), appStorageService (ref), localStorageKey (ref), toastNotificationsProtocolModule (ref), useSelector (ref), useCurrentSquadParentChannelIdModule (ref), experienceInviteVoteType (ref), roduxSquadsModule (ref), networkingSquadsModule (ref), loggerModule (ref), fFlagDebugSquadLogsEnabled (ref), httpService (ref), eventNamesModule (ref), cryoModule (ref), squadCoordinationExperienceJoinExperimentation (ref), squadExperienceInviteTimeoutSeconds (ref), experienceInviteState (ref), fFlagEnablePrivatePartyAcceptInvite (ref), experienceInviteType (ref), squadLocationEnumModule (ref), fFlagSquadLaunchExperienceMobileFix (ref), gameParams (ref), experienceService (ref), squadExperienceInvitePollingIntervalSeconds (ref), setInterval (ref), clearInterval (ref), serializeTableModule (ref), squadToastActionsAndStatesModule (ref), squadToastTypeModule (ref), realtimeDeliveryModule (ref), notificationTypeEnum (ref), messageBusService (ref), toastNotificationsMessageId (ref), lifecycleEvents (ref), soundManager (ref), sounds (ref)
+	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), squadExternalContractContextModule (ref), appStorageService (ref), localStorageKey (ref), toastNotificationsProtocolModule (ref), fFlagUseSignalsForSquadExperienceInvite (ref), useSignalState (ref), getSquadExperienceInviteStoreModule (ref), useSelector (ref), useCurrentSquadParentChannelIdModule (ref), experienceInviteVoteType (ref), roduxSquadsModule (ref), networkingSquadsModule (ref), loggerModule (ref), fFlagDebugSquadLogsEnabled (ref), httpService (ref), eventNamesModule (ref), cryoModule (ref), squadCoordinationExperienceJoinExperimentation (ref), squadExperienceInviteTimeoutSeconds (ref), experienceInviteState (ref), fFlagEnablePrivatePartyAcceptInvite (ref), experienceInviteType (ref), squadLocationEnumModule (ref), fFlagSquadLaunchExperienceMobileFix (ref), gameParams (ref), experienceService (ref), squadExperienceInvitePollingIntervalSeconds (ref), setInterval (ref), clearInterval (ref), serializeTableModule (ref), squadToastActionsAndStatesModule (ref), squadToastTypeModule (ref), realtimeDeliveryModule (ref), notificationTypeEnum (ref), messageBusService (ref), toastNotificationsMessageId (ref), lifecycleEvents (ref), soundManager (ref), sounds (ref)
 	local var1 = useDispatch()
 	local var2 = tonumber(useLocalUserId()) or 0
 	local var3 = reactModule.useContext(squadExternalContractContextModule)
@@ -80,7 +83,7 @@ return function(p1)
 	end, { var5 })
 	local default = toastNotificationsProtocolModule.ToastNotificationProtocol.default
 	local var6 = reactModule.useRef(false)
-	local var7 = useSelector(reactModule.useCallback(function(p2)
+	local var7 = if fFlagUseSignalsForSquadExperienceInvite then useSignalState(getSquadExperienceInviteStoreModule(false).getCurrentExperienceInvite) else useSelector(reactModule.useCallback(function(p2)
 		return if p2.Squad and p2.Squad.Squad then p2.Squad.Squad.currentExperienceInvite else nil
 	end, {}))
 	local var8 = useCurrentSquadParentChannelIdModule()
@@ -105,11 +108,15 @@ return function(p1)
 		return experienceInviteVoteType.Invalid, false
 	end, { var7, var2, var4 })
 	local var16 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: default (ref), var1 (ref), roduxSquadsModule (copy), var6 (ref)
+		-- upvalues: default (ref), fFlagUseSignalsForSquadExperienceInvite (copy), getSquadExperienceInviteStoreModule (copy), var1 (ref), roduxSquadsModule (copy), var6 (ref)
 		if p3 then
 			default:dismissNotification(p2)
 		end
-		var1(roduxSquadsModule.Actions.CurrentExperienceInviteDismissed(p2))
+		if fFlagUseSignalsForSquadExperienceInvite then
+			getSquadExperienceInviteStoreModule(false).currentExperienceInviteDismissed(p2)
+		else
+			var1(roduxSquadsModule.Actions.CurrentExperienceInviteDismissed(p2))
+		end
 		var6.current = false
 	end, { var1 })
 	local var17 = reactModule.useCallback(function(p2, p3)
@@ -356,8 +363,14 @@ return function(p1)
 		var7, var8, var16, var2, var3.fireSquadAnalytics, var14
 	})
 	realtimeDeliveryModule.useRealtimeNamespace("ExperienceInviteUpdate", function(p2)
-		-- upvalues: loggerModule (copy), serializeTableModule (copy), var1 (ref), roduxSquadsModule (copy)
+		-- upvalues: loggerModule (copy), serializeTableModule (copy), fFlagUseSignalsForSquadExperienceInvite (copy), getSquadExperienceInviteStoreModule (copy), var1 (ref), roduxSquadsModule (copy)
 		loggerModule:debug("Experience invite RTN received. Detail: {}", serializeTableModule(p2))
+		
+		if fFlagUseSignalsForSquadExperienceInvite then
+			getSquadExperienceInviteStoreModule(false).currentExperienceInviteUpdated(p2)
+			
+			return
+		end
 		var1(roduxSquadsModule.Actions.CurrentExperienceInviteUpdated(p2))
 	end, { var1 })
 	reactModule.useEffect(function()
@@ -390,13 +403,19 @@ return function(p1)
 		var7, var8, var16, var1, var3.fireSquadAnalytics, var14, var18
 	})
 	reactModule.useEffect(function()
-		-- upvalues: default (ref), var2 (ref), notificationTypeEnum (copy), httpService (copy), var1 (ref), roduxSquadsModule (copy)
+		-- upvalues: default (ref), var2 (ref), notificationTypeEnum (copy), httpService (copy), fFlagUseSignalsForSquadExperienceInvite (copy), getSquadExperienceInviteStoreModule (copy), var1 (ref), roduxSquadsModule (copy)
 		local var20 = default:listenToDisplayNotification(function(p2)
-			-- upvalues: var2 (copy), notificationTypeEnum (copy), httpService (copy), var1 (copy), roduxSquadsModule (copy)
+			-- upvalues: var2 (copy), notificationTypeEnum (copy), httpService (copy), fFlagUseSignalsForSquadExperienceInvite (copy), getSquadExperienceInviteStoreModule (copy), var1 (copy), roduxSquadsModule (copy)
 			if not p2 then return end
 			if var2 <= 0 then return end
 			if p2.notificationType == notificationTypeEnum.SquadExperienceInvitation then
 				local lifecycleData = httpService:JSONDecode(p2.lifecycleData)
+				
+				if fFlagUseSignalsForSquadExperienceInvite then
+					getSquadExperienceInviteStoreModule(false).currentExperienceInviteReceived(lifecycleData.experienceInviteId, lifecycleData.membershipEntityId, p2.notificationId, lifecycleData.isInviter)
+					
+					return
+				end
 				var1(roduxSquadsModule.Actions.CurrentExperienceInviteReceived(lifecycleData.experienceInviteId, lifecycleData.membershipEntityId, p2.notificationId, lifecycleData.isInviter))
 			end
 		end)
@@ -409,24 +428,30 @@ return function(p1)
 		end
 	end, { var2 })
 	reactModule.useEffect(function()
-		-- upvalues: messageBusService (copy), toastNotificationsMessageId (copy), notificationTypeEnum (copy), var7 (ref), httpService (copy), var1 (ref), roduxSquadsModule (copy), default (ref), experienceInviteState (copy), var14 (ref), experienceInviteVoteType (copy)
+		-- upvalues: messageBusService (copy), toastNotificationsMessageId (copy), notificationTypeEnum (copy), var7 (ref), httpService (copy), fFlagUseSignalsForSquadExperienceInvite (copy), getSquadExperienceInviteStoreModule (copy), var1 (ref), roduxSquadsModule (copy), default (ref), experienceInviteState (copy), var14 (ref), experienceInviteVoteType (copy)
 		local var20 = messageBusService:Subscribe(toastNotificationsMessageId, function(p2)
-			-- upvalues: notificationTypeEnum (copy), var7 (copy), httpService (copy), var1 (copy), roduxSquadsModule (copy), default (copy), experienceInviteState (copy), var14 (copy), experienceInviteVoteType (copy)
+			-- upvalues: notificationTypeEnum (copy), var7 (copy), httpService (copy), fFlagUseSignalsForSquadExperienceInvite (copy), getSquadExperienceInviteStoreModule (copy), var1 (copy), roduxSquadsModule (copy), default (copy), experienceInviteState (copy), var14 (copy), experienceInviteVoteType (copy)
 			if p2.notificationType == notificationTypeEnum.SquadExperienceInvitation and p2.userActionType == "timerElapsed" then
-				if not var7 then
+				if var7 then
+					assert(var7, "Experience invite must exist to perform actions.")
+					
+					if (not var7.model or var7.model.state == experienceInviteState.Active) and (var14 == experienceInviteVoteType.Invalid or var14 == experienceInviteVoteType.NoVote) then
+						default:updateNotification(p2.notificationId, "expired")
+					end
+				else
 					local parameters = httpService:JSONDecode(p2.parameters)
-					var1(roduxSquadsModule.Actions.CurrentExperienceInviteReceived(parameters.experienceInviteId, parameters.membershipEntityId, p2.notificationId, parameters.isInviter))
+					
+					if fFlagUseSignalsForSquadExperienceInvite then
+						getSquadExperienceInviteStoreModule(false).currentExperienceInviteReceived(parameters.experienceInviteId, parameters.membershipEntityId, p2.notificationId, parameters.isInviter)
+					else
+						var1(roduxSquadsModule.Actions.CurrentExperienceInviteReceived(parameters.experienceInviteId, parameters.membershipEntityId, p2.notificationId, parameters.isInviter))
+					end
 					var1(function()
 						-- upvalues: default (copy), p2 (ref)
 						default:updateNotification(p2.notificationId, "expired")
 					end)
 					
 					return
-				end
-				assert(var7, "Experience invite must exist to perform actions.")
-				
-				if (not var7.model or var7.model.state == experienceInviteState.Active) and (var14 == experienceInviteVoteType.Invalid or var14 == experienceInviteVoteType.NoVote) then
-					default:updateNotification(p2.notificationId, "expired")
 				end
 			end
 		end, false, true)
@@ -439,9 +464,9 @@ return function(p1)
 		end
 	end, { var7, var14, var18 })
 	reactModule.useEffect(function()
-		-- upvalues: lifecycleEvents (copy), notificationTypeEnum (copy), httpService (copy), var8 (ref), squadToastTypeModule (copy), var7 (ref), var1 (ref), roduxSquadsModule (copy), var3 (ref), eventNamesModule (copy), cryoModule (copy), squadToastActionsAndStatesModule (copy), var18 (ref), experienceInviteVoteType (copy)
+		-- upvalues: lifecycleEvents (copy), notificationTypeEnum (copy), httpService (copy), var8 (ref), squadToastTypeModule (copy), var7 (ref), fFlagUseSignalsForSquadExperienceInvite (copy), getSquadExperienceInviteStoreModule (copy), var1 (ref), roduxSquadsModule (copy), var3 (ref), eventNamesModule (copy), cryoModule (copy), squadToastActionsAndStatesModule (copy), var18 (ref), experienceInviteVoteType (copy)
 		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.SquadExperienceInvitation, function(p2)
-			-- upvalues: httpService (copy), var8 (copy), squadToastTypeModule (copy), var7 (copy), var1 (copy), roduxSquadsModule (copy), var3 (copy), eventNamesModule (copy), cryoModule (copy), squadToastActionsAndStatesModule (copy), var18 (copy), experienceInviteVoteType (copy)
+			-- upvalues: httpService (copy), var8 (copy), squadToastTypeModule (copy), var7 (copy), fFlagUseSignalsForSquadExperienceInvite (copy), getSquadExperienceInviteStoreModule (copy), var1 (copy), roduxSquadsModule (copy), var3 (copy), eventNamesModule (copy), cryoModule (copy), squadToastActionsAndStatesModule (copy), var18 (copy), experienceInviteVoteType (copy)
 			if p2 and p2.userActionType == "click" and (p2.visualItem and p2.visualItem.actionEventParams) then
 				local actionEventParams = httpService:JSONDecode(p2.visualItem.actionEventParams)
 				local t = {
@@ -451,7 +476,11 @@ return function(p1)
 				}
 				
 				if not var7 then
-					var1(roduxSquadsModule.Actions.CurrentExperienceInviteReceived(actionEventParams.experienceInviteId, actionEventParams.membershipEntityId, p2.notificationData.id, actionEventParams.isInviter))
+					if fFlagUseSignalsForSquadExperienceInvite then
+						getSquadExperienceInviteStoreModule(false).currentExperienceInviteReceived(actionEventParams.experienceInviteId, actionEventParams.membershipEntityId, p2.notificationData.id, actionEventParams.isInviter)
+					else
+						var1(roduxSquadsModule.Actions.CurrentExperienceInviteReceived(actionEventParams.experienceInviteId, actionEventParams.membershipEntityId, p2.notificationData.id, actionEventParams.isInviter))
+					end
 				end
 				if p2.visualItem.eventName == "GroupUpSquadExperience" then
 					var3.fireSquadAnalytics(eventNamesModule.SquadToastActions, cryoModule.Dictionary.union(t, {

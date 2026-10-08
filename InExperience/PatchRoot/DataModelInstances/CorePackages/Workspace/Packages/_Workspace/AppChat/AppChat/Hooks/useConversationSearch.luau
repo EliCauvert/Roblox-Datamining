@@ -31,7 +31,7 @@ local function normalizeQuery(p1, p2)
 end
 
 return function(p1, p2)
-	-- upvalues: getConversationSearchDataHydrationModule (ref), getConversationStoreModule (ref), normalizeQuery (ref), reactModule (ref), t_1 (ref), signalsModule (ref), t (ref), signalsReactModule (ref)
+	-- upvalues: getConversationSearchDataHydrationModule (ref), getConversationStoreModule (ref), normalizeQuery (ref), reactModule (ref), t_1 (ref), signalsReactModule (ref), signalsModule (ref), t (ref)
 	local var1 = p2 ~= false
 	local var2 = getConversationSearchDataHydrationModule(false)
 	local var3 = getConversationStoreModule(false)
@@ -55,6 +55,7 @@ return function(p1, p2)
 		end
 	end, { var4 })
 	local var7, var8 = reactModule.useState(t_1)
+	local var9 = signalsReactModule.useSignalState(var2.getInvalidationGeneration)
 	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), var8 (ref), t_1 (copy), var2 (ref)
 		if var5 == "" then
@@ -62,16 +63,26 @@ return function(p1, p2)
 			
 			return
 		end
-		local var9 = var2.fetchPage(var5)
+		local var10 = var2.fetchPage(var5)
 		
-		if var9 == nil then
+		if var10 == nil then
 			var8({ query = var5, pages = {} })
 			
 			return
 		end
-		var8({ query = var5, pages = { { result = var9 } } })
+		var8({ query = var5, pages = { { result = var10 } } })
 	end, { var5, var2 })
-	local var9 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+	local var10 = reactModule.useRef(var9)
+	reactModule.useEffect(function()
+		-- upvalues: var10 (ref), var9 (ref), var7 (ref), var2 (ref)
+		if var10.current == var9 then return end
+		var10.current = var9
+		
+		for i, v in var7.pages do
+			var2.fetchPage(var7.query, v.cursor)
+		end
+	end, { var7, var2, var9 })
+	local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var3 (ref), var7 (ref), t (copy)
 		return signalsModule.createComputed(function(p3)
 			-- upvalues: var3 (copy), var7 (copy), t (copy)
@@ -81,10 +92,10 @@ return function(p1, p2)
 				local t_1 = {}
 				
 				for i, v in p4 do
-					local var10 = v.result.data(p3)
+					local var12 = v.result.data(p3)
 					
-					if var10 ~= nil and var10.matchedConversationIds ~= nil then
-						for i_1, v_1 in var10.matchedConversationIds do
+					if var12 ~= nil and var12.matchedConversationIds ~= nil then
+						for i_1, v_1 in var12.matchedConversationIds do
 							if not t_1[v_1] then
 								t_1[v_1] = true
 								table.insert(t, v_1)
@@ -109,49 +120,49 @@ return function(p1, p2)
 			if var7.query == "" or #pages == 0 then
 				return t
 			end
-			local var11 = pages[#pages]
-			local var12 = var11.result.data(p3)
+			local var13 = pages[#pages]
+			local var14 = var13.result.data(p3)
 			
 			return {
 				query = var7.query,
 				items = collectItems(pages),
-				status = var11.result.status(p3),
-				nextCursor = if var12 ~= nil then nil else var12.nextCursor
+				status = var13.result.status(p3),
+				nextCursor = if var14 ~= nil then nil else var14.nextCursor
 			}
 		end)
 	end, { var7, var3 }))
 	
 	return {
-		items = var9.items,
-		status = var9.status,
+		items = var11.items,
+		status = var11.status,
 		isActive = var4 ~= "",
 		debouncedQuery = var5,
-		isFetching = var9.status == "NotReady",
-		isAwaitingResults = var4 ~= "" and (if var9.query == var4 then if var9.status ~= "NotReady" then var9.status == "Idle" else true else true),
-		hasError = var9.status == "Failed",
-		hasSearched = var9.query ~= "",
-		nextCursor = var9.nextCursor,
+		isFetching = var11.status == "NotReady",
+		isAwaitingResults = var4 ~= "" and (if var11.query == var4 then if var11.status ~= "NotReady" then var11.status == "Idle" else true else true),
+		hasError = var11.status == "Failed",
+		hasSearched = var11.query ~= "",
+		nextCursor = var11.nextCursor,
 		loadNext = reactModule.useCallback(function()
 			-- upvalues: var7 (ref), var2 (ref), var8 (ref)
 			local pages = var7.pages
-			local var13 = pages[#pages]
-			
-			if var13 == nil then return end
-			if var13.result.status(false) ~= "Ready" then return end
-			local var14 = var13.result.data(false)
-			local var15 = if var14 ~= nil then nil else var14.nextCursor
+			local var15 = pages[#pages]
 			
 			if var15 == nil then return end
-			local var16 = var2.fetchPage(var7.query, var15)
+			if var15.result.status(false) ~= "Ready" then return end
+			local var16 = var15.result.data(false)
+			local var17 = if var16 ~= nil then nil else var16.nextCursor
 			
-			if var16 == nil then
+			if var17 == nil then return end
+			local var18 = var2.fetchPage(var7.query, var17)
+			
+			if var18 == nil then
 				return
 			end
 			var8(function(p5)
-				-- upvalues: var7 (copy), var16 (ref)
+				-- upvalues: var7 (copy), var18 (ref), var17 (ref)
 				if p5.query == var7.query then
 					local cloned = table.clone(p5.pages)
-					table.insert(cloned, { result = var16 })
+					table.insert(cloned, { result = var18, cursor = var17 })
 					
 					return { query = p5.query, pages = cloned }
 				end

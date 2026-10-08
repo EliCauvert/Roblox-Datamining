@@ -13,7 +13,6 @@ local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventE
 local apportioningDiagnosticTelemetry = require(parent.DiscoveryUtils).ApportioningDiagnosticTelemetry
 local gameCollectionItemTypes = discoveryTypesModule.GameCollectionItemTypes
 local sendGameImpressionsModule = require(script.Parent.SendGameImpressions)
-local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
 local fFlagLuaAppFixSearchImpressions = require(parent.SharedFlags).FFlagLuaAppFixSearchImpressions
 local fFlagLuaAppEnableNxMRoduxApportioning = require(parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local fFlagLuaAppEnableNxMApportioningExtraLogging = require(parent.SharedFlags).FFlagLuaAppEnableNxMApportioningExtraLogging
@@ -31,14 +30,14 @@ local _ = function(p1, p2)
 end
 
 return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13)
-	-- upvalues: useRoactService (ref), appEventIngestService (ref), roactAnalytics (ref), appPage (ref), gameSortLoadSource (ref), reactModule (ref), discoveryEventErrorLogger (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (ref), gameCollectionItemTypes (ref), apportioningDiagnosticTelemetry (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), reportWarning (ref), loggingProtocolModule (ref), sendGameImpressionsModule (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), fFlagLuaAppFixSearchImpressions (ref), signal (ref)
+	-- upvalues: useRoactService (ref), appEventIngestService (ref), roactAnalytics (ref), appPage (ref), gameSortLoadSource (ref), reactModule (ref), discoveryEventErrorLogger (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (ref), gameCollectionItemTypes (ref), apportioningDiagnosticTelemetry (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), reportWarning (ref), loggingProtocolModule (ref), sendGameImpressionsModule (ref), fFlagLuaAppFixSearchImpressions (ref), signal (ref)
 	local var1 = useRoactService(appEventIngestService)
 	local var2 = useRoactService(roactAnalytics)
 	local var3 = if p4 == appPage.Home and p1 and p1.topicId then gameSortLoadSource.getSortLoadSource(p1.topicId) else nil
 	local var4 = if p1 then p1.sortSubId else nil
 	local var5 = if p1 then p1.analyticsData else nil
 	local var6 = reactModule.useCallback(function(p14)
-		-- upvalues: p12 (ref), discoveryEventErrorLogger (copy), p4 (ref), p8 (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (copy), gameCollectionItemTypes (copy), apportioningDiagnosticTelemetry (copy), p3 (ref), p1 (ref), fFlagLuaAppEnableNxMRoduxApportioning (copy), appPage (copy), p13 (ref), reportWarning (copy), loggingProtocolModule (copy), sendGameImpressionsModule (copy), var1 (ref), var2 (ref), p10 (ref), p11 (ref), p5 (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (copy), p6 (ref), p2 (ref), p7 (ref), var3 (ref), var4 (ref), var5 (ref)
+		-- upvalues: p12 (ref), discoveryEventErrorLogger (copy), p4 (ref), p8 (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (copy), gameCollectionItemTypes (copy), apportioningDiagnosticTelemetry (copy), p3 (ref), p1 (ref), fFlagLuaAppEnableNxMRoduxApportioning (copy), appPage (copy), p13 (ref), reportWarning (copy), loggingProtocolModule (copy), sendGameImpressionsModule (copy), var1 (ref), var2 (ref), p10 (ref), p11 (ref), p5 (ref), p6 (ref), p2 (ref), p7 (ref), var3 (ref), var4 (ref), var5 (ref)
 		if p12 == nil or #p12 == 0 then
 			discoveryEventErrorLogger.reportError("useGameSortImpressionsParams_MissingEntries", "useGameSortImpressionsParams: entries is nil or empty for game sort impressions", { pageContext = p4, gameSortId = p8 })
 			
@@ -92,7 +91,7 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13)
 				emphasisFlag = if p13 and p13.hasEmphasizedTile then 1 else 0,
 				sortPos = p3,
 				gameSetTypeId = p1 and p1.topicId
-			}, p10, p11, p5, if fFlagLuaAppAddComponentTypeToSearchImpressions then p6 else nil)
+			}, p10, p11, p5, p6)
 			
 			return
 		else

@@ -7,9 +7,10 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiRequestFriendshipAction = sharedFlagsModule.FFlagSduiRequestFriendshipAction
 local fFlagLuaAppSduiHomeFriendCarousel = sharedFlagsModule.FFlagLuaAppSduiHomeFriendCarousel
 local fFlagLuaAppSduiHomePageSupport = sharedFlagsModule.FFlagLuaAppSduiHomePageSupport
+local fFlagSduiUserSearchTile = sharedFlagsModule.FFlagSduiUserSearchTile
 
 return function()
-	-- upvalues: sduiComponentType (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), socialServerDrivenUi (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagSduiRequestFriendshipAction (ref), getSduiComponentRegistry (ref)
+	-- upvalues: sduiComponentType (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), socialServerDrivenUi (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagSduiRequestFriendshipAction (ref), fFlagSduiUserSearchTile (ref), getSduiComponentRegistry (ref)
 	getSduiComponentRegistry().registerComponentDefinitions({
 		[sduiComponentType.FriendCarousel] = if fFlagLuaAppSduiHomeFriendCarousel then {
 			getLazyComponent = function()
@@ -27,6 +28,12 @@ return function()
 			getLazyComponent = function()
 				-- upvalues: socialServerDrivenUi (copy)
 				return require(socialServerDrivenUi.Components.SduiFriendRequestButton)
+			end
+		} else nil,
+		[sduiComponentType.UserSearchTile] = if fFlagSduiUserSearchTile then {
+			getLazyComponent = function()
+				-- upvalues: socialServerDrivenUi (copy)
+				return require(socialServerDrivenUi.Components.SduiUserSearchTile)
 			end
 		} else nil
 	})

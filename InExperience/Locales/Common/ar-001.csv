@@ -89,6 +89,8 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,لم يتم ال�
 Authentication.Login.WeChat.AntiAddictionText,ابتعد عن التجارب السيئة وارفض المشاركة في التجارب المقرصنة. ابقَ متيقظًا واحذر الخداع. إن المشاركة في بعض التجارب مفيدة لعقلك، لكن الإفراط فيها يمكن أن يضر بصحتك. لذلك نوصيك بإدارة وقتك بالمفيد النافع واتباع نمط حياة سليم.
 Authentication.SignUp.Action.ApplyOnNextRespawn,تطبيق عند إعادة الظهور التالي
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.Create,إنشاء
+Authentication.SignUp.Action.CreateAccountSentenceCase,إنشاء حساب
 Authentication.SignUp.Action.ExitModalLeave,الخروج
 Authentication.SignUp.Action.RespawnNow,إعادة الظهور الآن
 Authentication.SignUp.Action.StartPlay,بدء اللعب
@@ -96,15 +98,18 @@ Authentication.SignUp.Button.OKCaptialized,موافق
 Authentication.SignUp.Button.RetryLogIn,إعادة محاولة تسجيل الدخول
 Authentication.SignUp.Description.AccountAlreadyLinked,حساب على منصة {platformAccountName} مرتبط بالفعل بحساب على منصة Roblox. يُرجى محاولة تسجيل الدخول مرة أخرى.
 Authentication.SignUp.Description.BirthdayHint,أدخِل التاريخ
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,من خلال إنشاء حساب، فإنك توافق على {startTermsTag}شروطنا{endTermsTag}، بما في ذلك بند التحكيم، وتقر {startPrivacyTag}بسياسة الخصوصية{endPrivacyTag} السارية لدينا. إذا كان عمرك أقل من 18 عامًا، يجب على أحد والديك أو الوصي عليك السماح بحسابك والموافقة على شروطنا.
 Authentication.SignUp.Description.Try,جرب
 Authentication.SignUp.Description.UsernameChanged,كل شيء جاهز! حسابك جاهز ومرتبط بمنصّة {platform}. أعد الظهور الآن لرؤية اسم المستخدم المحدث في اللعبة، أو سيُطبق التغيير في المرة القادمة.
 Authentication.SignUp.Description.UsernameUnchanged,لقد انضممت! حسابك جاهز ومرتبط بمنصّة {platform}. يمكنك الدردشة مع الأصدقاء وتشغيل الملايين من ألعاب منصّة Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,سيتم ربط حسابك في منصة Roblox بحسابك على حساب {platform}. يمكنك إلغاء الربط من شاشة الإعدادات في أي وقت. قد تكون هناك فترة انتظار قبل أن تتمكن من ربط الحساب بحساب آخر على حساب {platform}. من خلال النقر على {ctaButton}، أنت توافق على شروط الاستخدام بما في ذلك شرط التحكيم وأنت تُقِر بسياسة الخصوصية.
+Authentication.SignUp.Header.CloseWithoutFinishing,هل تريد الإغلاق دون الانتهاء؟
 Authentication.SignUp.Header.OneLastThing,شيء أخير
 Authentication.SignUp.Header.SetUpYourRobloxAccount,إعداد حسابك على منصّة Roblox
 Authentication.SignUp.Heading.CountryCodeSelector,حدد البلد
 Authentication.SignUp.Heading.RetryLogIn,
 Authentication.SignUp.Label.Birthday,تاريخ الميلاد
+Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} (العمر: {yearsOld})
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,يوم
 Authentication.SignUp.Label.EnterYourEmail,أدخل بريدك الإلكتروني
@@ -143,6 +148,7 @@ Authentication.SignUp.Response.PasswordComplexity,الرجاء إنشاء كلم
 Authentication.SignUp.Response.UsernameMustBeSetFirst,لا بد من تعيين اسم المستخدم أولاً.
 Authentication.SignUp.Subtitle.AddYourBirthday,أضِف تاريخ ميلادك لإنشاء حسابك على منصّة Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,سيتم حفظ تقدمك عند إكمال الإعداد.
+Authentication.SignUp.Subtitle.YoureAlmostThere,أنت على وشك الانتهاء. إذا أغلقت هذه النافذة الآن، فلن يتم إنشاء حسابك بالكامل ولن تتمكن من تشغيل منصّة Roblox.
 Authentication.TwoStepVerification.Action.GoToSecurity,الإعدادات
 Authentication.TwoStepVerification.Label.TwoStepRequired,عملية التحقق بخطوتين مطلوبة لإجراء المزيد من المعاملات. اذهب إلى الإعدادات> الأمان لإتمام عملية التحقق بخطوتين.
 Authentication.TwoStepVerification.Response.TooManyAttempts,محاولات كثيرة جدًا. الرجاء المحاولة لاحقاً.
@@ -410,7 +416,7 @@ CommonUI.Features.Label.Connections,جهات الاتصال
 CommonUI.Features.Label.ControllerBar.HoldPrefix,أوقف
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,للعب
-CommonUI.Features.Label.CreateGames,إنشاء
+CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,الخبرات
 CommonUI.Features.Label.GiftCards,شراء بطاقات الهدايا
@@ -1524,6 +1530,7 @@ Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,يمكن أن يحتوي الاسم على حرف وأرقام ومسافات فقط
 Feature.Avatar.Label.CountSelected,{itemCount} محددة
 Feature.Avatar.Label.Creations,التصاميم
+Feature.Avatar.Label.Current,الحالي
 Feature.Avatar.Label.CurrentlyWearing,يرتدي حاليًا
 Feature.Avatar.Label.DefaultBody,الجسم الافتراضي
 Feature.Avatar.Label.DeleteSetBody,لن يؤدي حذف هذه المجموعة إلى حذف الأزياء الموجودة بداخلها.
@@ -1970,6 +1977,10 @@ Feature.Build.Analytics.Description.PayerConversion,"""التحويل إلى د�
 Feature.Build.Analytics.Description.PlaythroughRate,"""معدل إكمال جلسة اللعب"" هو النسبة المئوية لعدد الزيارات التي أكملت جلسة لعب كاملة. وتشير المعدلات الأعلى إلى أن اللاعبين يجدون تجربتك سهلة الاندماج وتستحق الإنهاء."
 Feature.Build.Analytics.Description.TotalPlaytime,"""إجمالي مدة اللعب"" هو مجموع الوقت الذي قضاه جميع اللاعبين في تجربتك خلال الفترة. وعادةً ما يشير ارتفاع مدة اللعب إلى جلسات أكثر تفاعلًا."
 Feature.Build.Analytics.DurationHours,{number} من الساعات
+Feature.Build.Analytics.Goal.EarnRobux,
+Feature.Build.Analytics.Goal.FirstImpression,كوّن انطباعًا أوليًا جيدًا
+Feature.Build.Analytics.Goal.GetMorePlayers,اجذب المزيد من اللاعبين
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,اجعل اللاعبين متحمسين للعودة
 Feature.Build.Analytics.KeyStats,الإحصاءات الرئيسية
 Feature.Build.Analytics.LastMonth,الشهر الماضي
 Feature.Build.Analytics.LastWeek,
@@ -2001,9 +2012,12 @@ Feature.Build.Analytics.Summary.TotalPlaytime,إجمالي الساعات الت
 Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,إجمالي اللاعبين
 Feature.Build.Analytics.Title.D1Retention,احتفاظ يوم 1
+Feature.Build.Analytics.Title.D7Retention,الاحتفاظ في اليوم السابع
 Feature.Build.Analytics.Title.DailyActiveUsers,
+Feature.Build.Analytics.Title.NewUserSessionTime,مدة جلسة المستخدم الجديد
 Feature.Build.Analytics.Title.PayerConversion,تحويل إلى دافعين
 Feature.Build.Analytics.Title.PlaythroughRate,
+Feature.Build.Analytics.Title.RobuxSpent,عملات Robux التي تم إنفاقها
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,الزيارات
 Feature.Build.Content.NewGame,لعبة جديدة
@@ -2060,6 +2074,7 @@ Feature.Build.Description.ShopButton,إضافة نقطة إدخال للتسوق
 Feature.Build.Description.ShortAdCampaign,طريقة سريعة لمعرفة رأي اللاعبين في لعبتك.
 Feature.Build.Description.StopBuild,لا يزال هذا الطلب قيد المعالجة. إذا قمت بالإيقاف الآن، فلن يكتمل وستحتاج إلى إرساله مرة أخرى.
 Feature.Build.Description.UpdateDeveloperProduct,تحديث منتج المطوّر {PRODUCT_ID}.
+Feature.Build.Description.UseAdCreditsInAdsManager,ستحتاج إلى الانتقال إلى إدارة الإعلانات لاستخدامها.
 Feature.Build.Error.AdForbidden,لا يمكن لحسابك أو لعبتك تشغيل إعلان في الوقت الحالي. اتصل بالدعم إذا كنت تعتقد أن هذا خطأ.
 Feature.Build.Error.AdInsufficientFunds,ليس لديك ما يكفي من عملات Robux لإنشاء هذا الإعلان. أضِف المزيد وحاول مرة أخرى.
 Feature.Build.Error.AdInternalError,حدث خطأ ما. حاول مرة أخرى لاحقًا.
@@ -2383,6 +2398,7 @@ Feature.Build.Title.RevertLastChange,هل تريد التراجع عن التغ�
 Feature.Build.Title.StopBuild,هل تريد إيقاف عمل ميزة Build؟
 Feature.Build.Title.Tasks,المهام
 Feature.Build.Title.TurnActivity,نشاط الدور
+Feature.Build.Title.UseYourAdCredits,استخدِم أرصدتك الإعلانية
 Feature.Build.Title.VersionHistory,سجل الإصدارات
 Feature.Build.Title.VersionInfo,معلومات الإصدار
 Feature.Build.Title.VersionNumber,الإصدار {VERSION}
@@ -2814,6 +2830,7 @@ Feature.Catalog.Title.Checkout.UnavailableItems,العناصر غير المتو
 Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle,هل تريد ارتداء الأفاتار؟
 Feature.Catalog.Title.CheckoutPlural,إتمام الدفع وإنهاء التسوق لعدد {count} من العناصر
 Feature.Catalog.Title.CheckoutSingular,
+Feature.Catalog.Title.Explore,استكشاف
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,هل تريد استبدال الطبقة السفلية؟
 Feature.Catalog.Title.RentalFtuxText,يمكنك استئجار عنصر لتجربته لمدة 3 أيام
 Feature.Catalog.Toast.AddedToFavorites,تمت الإضافة إلى المفضلة
@@ -3442,23 +3459,23 @@ Feature.Groups.Message.NotInAnyGroups,أنت لست عضوًا في أي مجت�
 Feature.Groups.Message.PinLocked,لا يمكنك تنفيذ هذا الإجراء باستخدام رمز شخصي مقفل. افتح قفل الرمز في صفحة إعدادات الحساب.
 Feature.Groups.Modal.ContentTextHigh,"تحقَّق من حسابك للانضمام إلى هذا المجتمع.
 
-1. انتقِل إلى معلومات الحساب > تحقَّق من عمري
+1. انتقِل إلى معلومات الحساب > التحقُّق من الهوية
 2. أكمِل عملية التحقُّق"
 Feature.Groups.Modal.ContentTextLow,"تحقَّق من حسابك للانضمام إلى هذا المجتمع.
 
 1. انتقِل إلى معلومات الحساب
-2. اختَر خيار تحقُّق واحد:
-    - إضافة هاتف 
-    - إضافة بريد إلكتروني 
-    - تحقَّق من عمري 
+2. حدّد خيار تحقُّق واحد:
+    - إضافة هاتف
+    - إضافة بريد إلكتروني
+    - التحقُّق من الهوية
 3. أكمِل عملية التحقُّق"
 Feature.Groups.Modal.ContentTextMedium,"تحقَّق من حسابك للانضمام إلى هذا المجتمع.
 
 1. انتقِل إلى معلومات الحساب
-2. اختَر خيار تحقُّق واحد:
-    - إضافة هاتف وإضافة بريد إلكتروني 
-    - تحقَّق من عمري 
-3. أكمِل عملية التحقُّق"
+2. حدّد خيار تحقُّق واحد:
+    - إضافة هاتف وإضافة بريد إلكتروني
+    - التحقّق من الهوية
+3. أكمِل عملية التحقُّق"
 Feature.Groups.Notification.FailedToFollow,تعذّرت متابعة الملف الشخصي. يُرجى المحاولة مرة أخرى لاحقًا.
 Feature.Groups.Notification.FailedToJoin,تعذّر الانضمام إلى المجتمع. يُرجى المحاولة مرة أخرى لاحقًا.
 Feature.Groups.Notification.FailedToLoad,تعذّر تحميل المجتمع. يُرجى المحاولة مرة أخرى لاحقًا.
@@ -3532,6 +3549,7 @@ Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,بشراء ع�
 Feature.InExperienceShop.Label.BonusItem,عنصر مكافأة
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,ينتهي خلال {timeRemaining}
+Feature.InExperienceShop.Label.FreeTrial,فترة تجريبية مجانية
 Feature.InExperienceShop.Label.NoDescription,لا يوجد وصف
 Feature.InExperienceShop.Label.OfferEndTime,ينتهي {offer} خلال {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,هذه معاينة لمتجرك في Roblox Studio. لا يرى اللاعبون هذه المعاينة.
@@ -3543,6 +3561,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} من الدقائق
 Feature.InExperienceShop.Label.Timer.Minute.Singular,دقيقة واحدة
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} من الثواني
 Feature.InExperienceShop.Label.Timer.Second.Singular,ثانية واحدة
+Feature.InExperienceShop.Label.Trial,فترة تجريبية
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,لقد اشتريتَ {ROBUX_AMOUNT} من عملات Robux بنجاح
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,هل أنت متأكد من أنك تريد حذف هذا العنصر نهائيًا من المقتنيات؟ إذا غيرت رأيك، فستحتاج إلى أن تربحه مرة أخرى في التجارب.
 Feature.Item.Label.DeleteItemUndercase,حذف العنصر
@@ -3556,12 +3575,16 @@ Feature.Moments.Action.AddSticker,إضافة ملصق
 Feature.Moments.Action.AddText,أضِف نص
 Feature.Moments.Action.AddVoice,إضافة صوت
 Feature.Moments.Action.Back,
+Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentShowLess,عرض أقل
+Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
 Feature.Moments.Action.CreateVoiceover,إنشاء تعليق صوتي
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.DiscardChange,حذف التغيير
 Feature.Moments.Action.Done,
+Feature.Moments.Action.Edit,
 Feature.Moments.Action.Expand,توسيع
 Feature.Moments.Action.GenerateText,إنشاء نص
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,غير مفيد
@@ -3577,6 +3600,7 @@ Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
+Feature.Moments.Action.RetryLoadingComments,إعادة محاولة تحميل التعليقات
 Feature.Moments.Action.Return,الرجوع إلى المعرض
 Feature.Moments.Action.ReturnToEditing,الرجوع إلى التحرير
 Feature.Moments.Action.SaveVoiceover,
@@ -3599,9 +3623,35 @@ Feature.Moments.Description.StayFriendly,لنحافظ على أجواء ودّي
 Feature.Moments.Description.TooManyUploads,لقد رفعت عددًا كبيرًا من مقاطع الفيديو اليوم. حاول مرة أخرى غدًا.
 Feature.Moments.Disclaimer.EveryoneMoments,يمكن للجميع في اللحظات عرض ما يتم نشره
 Feature.Moments.Label.All,
+Feature.Moments.Label.AllowComments,السماح بالتعليقات
 Feature.Moments.Label.AttemptingJoinExperience,جارٍ محاولة الانضمام إلى {placeName}. قد تستغرق هذه العملية بضع ثوانٍ.
 Feature.Moments.Label.CaptureLibrary,مكتبة لقطاتك
 Feature.Moments.Label.ChooseVoice,اختر الصوت
+Feature.Moments.Label.CommentAuthorFallback,المستخدم {userId}
+Feature.Moments.Label.CommentAuthorUnknown,
+Feature.Moments.Label.CommentDeleteFailed,تعذَّر حذف التعليق
+Feature.Moments.Label.CommentNotAllowed,لا يمكنك التعليق على هذه اللحظة.
+Feature.Moments.Label.CommentPostFailed,تعذَّر نشر تعليقك. يُرجى المحاولة مرة أخرى.
+Feature.Moments.Label.CommentPostOutcomeUnknown,لم نتمكن من تأكيد نشر تعليقك الأخير. تحقَّق من التعليقات قبل الإرسال مرة أخرى.
+Feature.Moments.Label.CommentRateLimited,أنت تكتب تعليقات بسرعة كبيرة. يُرجى المحاولة مرة أخرى لاحقًا.
+Feature.Moments.Label.CommentRejectedByFilter,لم يتم نشر تعليقك. يُرجى مراجعته والمحاولة مرة أخرى.
+Feature.Moments.Label.CommentSendStatusUnknown,حالة الإرسال غير معروفة
+Feature.Moments.Label.CommentSending,
+Feature.Moments.Label.CommentSignInRequired,يُرجى تسجيل الدخول مرة أخرى للتعليق.
+Feature.Moments.Label.CommentTimestampDays,{count} ي
+Feature.Moments.Label.CommentTimestampHours,{count} س
+Feature.Moments.Label.CommentTimestampMinutes,{count} د
+Feature.Moments.Label.CommentTimestampMonths,{count} ش
+Feature.Moments.Label.CommentTimestampNow,
+Feature.Moments.Label.CommentTimestampWeeks,{count} أ
+Feature.Moments.Label.CommentTimestampYears,{count} ع
+Feature.Moments.Label.CommentingUnavailable,التعليقات غير متاحة في الوقت الحالي. يُرجى المحاولة مرة أخرى لاحقًا.
+Feature.Moments.Label.CommentsDisabled,تم تعطيل التعليقات
+Feature.Moments.Label.CommentsReadOnly,التعليقات متاحة للقراءة فقط
+Feature.Moments.Label.CommentsTurnedOff,تم إيقاف التعليقات لهذه اللحظة.
+Feature.Moments.Label.CommentsUnavailable,التعليقات غير متاحة
+Feature.Moments.Label.DeleteCommentBody,سيتم حذف هذا التعليق نهائيًا.
+Feature.Moments.Label.DeleteCommentTitle,هل تريد حذف التعليق؟
 Feature.Moments.Label.DeleteMomentBody,لا يمكنك استعادة اللحظة بعد حذفها.
 Feature.Moments.Label.DeleteMomentTitle,هل تريد حذف اللحظة؟
 Feature.Moments.Label.DeleteVoiceoverBody,سيؤدي هذا إلى مسح النص والتعليق الصوتي. يمكنك البدء من جديد في أي وقت.
@@ -3613,6 +3663,7 @@ Feature.Moments.Label.FeedEndTitle,لقد اطّلعت على جميع اللح�
 Feature.Moments.Label.FeedFailedToLoad,تعذَّر تحميل الموجز
 Feature.Moments.Label.FeedMyMoments,لحظاتي
 Feature.Moments.Label.FeedTrending,
+Feature.Moments.Label.FirstCommentInvite,لا توجد أي تعليقات حتى الآن. كن أول من يكتب تعليقًا!
 Feature.Moments.Label.HowToUseCaptureTitle,كيفية استخدام اللقطات
 Feature.Moments.Label.LinkCopied,تم نسخ الرابط
 Feature.Moments.Label.LinkCopyFailed,تعذّر نسخ الرابط.
@@ -3621,12 +3672,14 @@ Feature.Moments.Label.MomentDeletedBody,
 Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,حدث خطأ ما.
 Feature.Moments.Label.MomentFailedToPostTitle,تعذَّر نشر اللحظة
+Feature.Moments.Label.MomentNoLongerAvailable,لم تعد هذه اللحظة متاحة.
 Feature.Moments.Label.MomentPublishedBody,تم نشر لحظتك بنجاح.
 Feature.Moments.Label.MomentPublishedTitle,تم نشر اللحظة
 Feature.Moments.Label.MomentUnavailable,اللحظة غير متاحة
 Feature.Moments.Label.MomentUnavailableDefault,هذه اللحظة غير متاحة.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NoCommentsYet,لا توجد أي تعليقات حتى الآن
 Feature.Moments.Label.NonInfiniteScrollEndTitle,أنت على اطلاع بكل جديد حاليًا
 Feature.Moments.Label.Photos,الصور
 Feature.Moments.Label.PostDeleted,تم حذف اللحظة
@@ -3667,6 +3720,10 @@ Feature.Moments.Label.VoiceLimitReachedBody,انتظر دقيقة، ثم حاو�
 Feature.Moments.Label.VoiceModerationError,يجب أن يتبع النص البرمجي لديك قواعد السلامة
 Feature.Moments.Label.VoicePlaceholder,اكتب نص التعليق الصوتي. الحد الأقصى هو {maxCount} من الأحرف
 Feature.Moments.Label.VoiceTimeoutBody,انتهت المدة لإنشاء التعليق الصوتي.
+Feature.Moments.Label.WriteComment,اكتب تعليقًا
+Feature.Moments.Title.Comments,التعليقات
+Feature.Moments.Title.CommentsWithCappedCount,التعليقات ({count} فأكثر)
+Feature.Moments.Title.CommentsWithCount,التعليقات ({count})
 Feature.Moments.Title.GenerateTextFeedbackReason,ما الخطأ الذي حدث؟
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,هل تريد الخروج من إنشاء اللحظة؟
@@ -3769,10 +3826,17 @@ Feature.Parents.Title.EnterParentEmailV2,إدخال البريد الإلكتر�
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,من البحث
+Feature.PlayerSearchResults.Label.NewUsername,اسم مستخدم جديد
 Feature.PlayerSearchResults.Label.Previously,سابقًا
 Feature.PlayerSearchResults.Label.ThisIsYou,هذا أنت
+Feature.PlayerSearchResults.Label.You,أنت
+Feature.PlayerSearchResults.Label.YouAreConnections,أنتم جهات اتصال
 Feature.PlayerSearchResults.Label.YouAreFollowing,أنت تتابع
+Feature.PlayerSearchResults.Label.YouAreFriends,صرت صديقًا
+Feature.PrivateServers.Action.CreatePrivateServer,إنشاء خادم خاص
+Feature.PrivateServers.Action.FreeWithBlackbird,مجانًا مع Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,عمليات شراء الخوادم الخاصة غير مدعومة في Studio.
+Feature.PrivateServers.Description.VipServersNotSupported,لا تدعم هذه اللعبة الخوادم الخاصة.
 Feature.Profile.Action.AboutThisProfile,حول هذا الملف الشخصي
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4025,6 +4089,7 @@ Feature.RobloxSubscription.Description.JoinEarly,انضم مبكرًا مع اش
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,تمت دعوتك من قِبَل {username} للانضمام إلى Plus. سيحصل كلاكما على {amount} من عملات Robux عندما تشترك Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"بالضغط على \u{201C}{ctaText}\u{201D}، فإنك توافق على <a href=""{termsUrl}"">شروط الاشتراك في منصّة Roblox</a>. سيتم تحصيل الرسوم منك تلقائيًا كل شهر حتى تقوم بالإلغاء."
 Feature.RobloxSubscription.Heading.ReferralEntry,شارك Plus للحصول على {amount} من عملات Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,انضم إلى اشتراك Plus للحصول على {amount} من عملات Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,انضم إلى اشتراك Plus، واحصل على
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,خوادم خاصة مجانية
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4041,6 +4106,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}شهر واحد
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration} {trialPeriodLabel} مجانًا،{boldEnd} ثم {price}/{periodType}
 Feature.RobloxSubscription.Label.month,
 Feature.RobloxSubscription.Label.months,أشهر
+Feature.RobloxSubscription.Message.AlreadySubscribed,أنت مشترك بالفعل في Plus. هذا الرابط مخصص للأعضاء الجدد. شارك رابطك الخاص لدعوة أصدقائك والحصول على المكافآت.
 Feature.RobloxSubscription.Title.AgeCheckTrial,احصل على أسبوع مجاني من Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,خبر سار
 Feature.RobloxSubscription.Title.GenericError,
@@ -4285,8 +4351,19 @@ Feature.SongDetails.Action.ReportAudio,الإبلاغ عن مقطع صوتي
 Feature.SongDetails.Label.InappropriateAudio,مقطع صوتي غير لائق
 Feature.SongDetails.Label.InappropriateThumbnail,صورة مصغّرة غير لائقة
 Feature.SongDetails.Label.SongPreview,معاينة الأغنية
+Feature.SplitPane.EditAvatarButtonText,
 Feature.SplitPane.Label.CollapseAvatar,طيّ الأفاتار
 Feature.SplitPane.Label.ExpandAvatar,توسيع الأفاتار
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,إنهاء الجولة
+Feature.SplitPane.Tour.Button.SkipTour,تخطي الجولة
+Feature.SplitPane.Tour.Step1.Description.Collapsed,أصبحت أفاتاراتك المحفوظة ظاهرة على الصفحة الرئيسية. قُم بتوسيع هذه المساحة لرؤيتها.
+Feature.SplitPane.Tour.Step1.Description.Expanded,أصبحت أفاتاراتك المحفوظة ظاهرة على الصفحة الرئيسية. قُم بتدويرها أو تقريبها لرؤية كل التفاصيل.
+Feature.SplitPane.Tour.Step1.Title,شاهد نفسك على الصفحة الرئيسية
+Feature.SplitPane.Tour.Step2.Description,اختر كيف تريد أن تكون إطلالتك. بدِّل بين أفاتاراتك المحفوظة قبل انضمامك إلى اللعبة مباشرةً.
+Feature.SplitPane.Tour.Step2.Title,غيّر إطلالتك في أي وقت
+Feature.SplitPane.Tour.Step3.Description,يمكنك إخفاء هذه المساحة في أي وقت للتركيز على اكتشاف ألعاب جديدة. سيظل الأفاتار المحفوظ لديك هنا.
+Feature.SplitPane.Tour.Step3.Title,اختر ما تريد رؤيته
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,إضافة آخرين
 Feature.Squads.Action.ConnectToVoice,الاتصال بالمحادثة الصوتية
@@ -5020,7 +5097,7 @@ InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,تمت إضافة {
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,تمت إضافة {experience_name} إلى الشاشة الرئيسية بنجاح
 InstantApps.Shortcuts.Label.TryAgain,
 InstantApps.Shortcuts.Label.ViewShortcut,عرض الاختصار
-Notifications.NotificationStream.Bundle.ShowLess,عرض أقل
+Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} إضافية
 Notifications.NotificationStream.Label.AllCaughtUp,لقد أتممت كل المهام!
 Notifications.NotificationStream.Label.Notifications,

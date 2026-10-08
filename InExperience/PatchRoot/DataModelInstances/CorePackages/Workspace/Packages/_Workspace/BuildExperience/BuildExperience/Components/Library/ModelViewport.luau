@@ -4,13 +4,19 @@ local reactModule = require(parent.React)
 local motionModule = require(parent.Motion)
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
+local t = {
+	[Enum.KeyCode.Left] = Vector2.new(-1, 0),
+	[Enum.KeyCode.Right] = Vector2.new(1, 0),
+	[Enum.KeyCode.Up] = Vector2.new(0, -1),
+	[Enum.KeyCode.Down] = Vector2.new(0, 1)
+}
 
 local function _(p1, p2, p3)
 	return math.max(p2.Magnitude / 2, 0.01) / math.sin(math.atan(math.tan(math.rad(p1) / 2) * math.min(1, if p3.X > 0 and p3.Y > 0 then p3.X / p3.Y else 1)))
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), foundationModule (ref), reactModule (ref), motionModule (ref), view (ref)
+	-- upvalues: useTokens (ref), foundationModule (ref), reactModule (ref), motionModule (ref), t (ref), view (ref)
 	local var1 = useTokens()
 	local reducedMotion = foundationModule.Hooks.usePreferences().reducedMotion
 	local var2 = reactModule.useRef(nil)
@@ -239,7 +245,7 @@ return reactModule.memo(function(p1)
 		end
 	end, { var10 })
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var11 (ref), var12 (ref)
+		-- upvalues: var10 (ref), var11 (ref), var12 (ref), t (copy)
 		if var10 then
 			local userInputService = game:GetService("UserInputService")
 			local inputChangedConnection = userInputService.InputChanged:Connect(function(p2)
@@ -270,9 +276,22 @@ return reactModule.memo(function(p1)
 				var11.current.dragInput = nil
 				var11.current.lastDragPosition = nil
 			end)
+			local inputBeganConnection = userInputService.InputBegan:Connect(function(p2, p3)
+				-- upvalues: t (copy), var11 (copy), var12 (copy)
+				local keyCode = t[p2.KeyCode]
+				
+				if p3 or keyCode == nil then
+					return
+				end
+				local current = var11.current
+				current.yaw -= keyCode.X * 0.261799387799
+				current.pitch = math.clamp(current.pitch - keyCode.Y * 0.261799387799, -1.483529864195, 1.483529864195)
+				var12()
+			end)
 			
 			return function()
-				-- upvalues: inputChangedConnection (ref), inputEndedConnection (ref), windowFocusReleasedConnection (ref), var11 (copy)
+				-- upvalues: inputBeganConnection (ref), inputChangedConnection (ref), inputEndedConnection (ref), windowFocusReleasedConnection (ref), var11 (copy)
+				inputBeganConnection:Disconnect()
 				inputChangedConnection:Disconnect()
 				inputEndedConnection:Disconnect()
 				windowFocusReleasedConnection:Disconnect()

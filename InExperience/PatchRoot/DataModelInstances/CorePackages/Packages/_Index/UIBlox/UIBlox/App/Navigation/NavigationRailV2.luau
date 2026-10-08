@@ -1,7 +1,6 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent
 local parent_2 = parent_1.Parent
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local cryoModule = require(parent_2.Cryo)
 local reactModule = require(parent_2.React)
 local reactOtterModule = require(parent_2.ReactOtter)
@@ -17,14 +16,14 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), UIBloxConfigModule (ref), navigationRailAlignmentModule (ref), reactModule (ref), reactOtterModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), navigationRailAlignmentModule (ref), reactModule (ref), reactOtterModule (ref)
 	assert(#p1.items > 0, "At least one item should be present!")
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2 = useStyleModule()
-	local var3 = if var1.paddings and var1.paddings.Top then var1.paddings.Top elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var2.Tokens.Size.Size_150 else var2.Tokens.Global.Space_75
-	local var4 = if var1.paddings and var1.paddings.Bottom then var1.paddings.Bottom elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var2.Tokens.Size.Size_150 else var2.Tokens.Global.Space_75
-	local var5 = if var1.paddings and var1.paddings.Left then var1.paddings.Left elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var2.Tokens.Size.Size_150 else var2.Tokens.Global.Space_75
-	local var6 = if var1.paddings and var1.paddings.Right then var1.paddings.Right elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var2.Tokens.Size.Size_150 else var2.Tokens.Global.Space_75
+	local var3 = if var1.paddings and var1.paddings.Top then var1.paddings.Top else var2.Tokens.Size.Size_150
+	local var4 = if var1.paddings and var1.paddings.Bottom then var1.paddings.Bottom else var2.Tokens.Size.Size_150
+	local var5 = if var1.paddings and var1.paddings.Left then var1.paddings.Left else var2.Tokens.Size.Size_150
+	local var6 = if var1.paddings and var1.paddings.Right then var1.paddings.Right else var2.Tokens.Size.Size_150
 	local center = nil
 	
 	if var1.alignment == navigationRailAlignmentModule.Justified then
@@ -43,7 +42,7 @@ return function(p1)
 	end, { var1.animated })
 	local useAnimatedBinding = reactOtterModule.useAnimatedBinding
 	local var10 = if var1.animated and not var1.isVisible then -var7 else 0
-	useAnimatedBinding, var16 = useAnimatedBinding(var10)
+	useAnimatedBinding, var15 = useAnimatedBinding(var10)
 	reactModule.useEffect(function()
 		-- upvalues: var1 (ref), var10 (ref), reactOtterModule (copy), var7 (ref)
 		if var1.animated then
@@ -127,7 +126,7 @@ return function(p1)
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = center,
-					Padding = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var2.Tokens.Size.Size_400 else var2.Tokens.Global.Space_200)
+					Padding = UDim.new(0, var2.Tokens.Size.Size_400)
 				}),
 				PrimaryItems = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,

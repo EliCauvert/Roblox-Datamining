@@ -1,0 +1,3 @@
+﻿local sharedFlagsModule = require(script:FindFirstAncestor("FriendsLanding").Parent.SharedFlags)
+
+return game:DefineFastFlag("FriendsPageUserListCtaEnabled", false) and (sharedFlagsModule.FFlagFriendsPageUserListEnabled and (sharedFlagsModule.FFlagUserListCtaIntegrationEnabled and (sharedFlagsModule.FFlagUserListComposeRenderRowWithCta and (sharedFlagsModule.FFlagUserListSurfacePresenceWins and sharedFlagsModule.FFlagUserListDefaultCtaWidths))))

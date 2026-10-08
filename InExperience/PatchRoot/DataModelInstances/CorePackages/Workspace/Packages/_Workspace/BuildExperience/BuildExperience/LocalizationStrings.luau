@@ -1,7 +1,9 @@
 ﻿local localizationService = game:GetService("LocalizationService")
 local buildExperience = script:FindFirstAncestor("BuildExperience")
+local parent = buildExperience.Parent
 local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
-local sharedFlagsModule = require(buildExperience.Parent.SharedFlags)
+local fFlagBuildExperienceToolLocalizationModule = require(buildExperience.Flags.FFlagBuildExperienceToolLocalization)
+local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
 local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
 local fFlagBuildExperienceClientDataModelTools = sharedFlagsModule.FFlagBuildExperienceClientDataModelTools
@@ -154,6 +156,38 @@ if fFlagBuildExperienceClientDataModelTools then
 		completed = "Feature.Build.Label.ToolClientDMDone",
 		failed = "Feature.Build.Label.ToolClientDMFailed",
 		running = "Feature.Build.Label.ToolClientDMRunning"
+	}
+end
+if fFlagBuildExperienceToolLocalizationModule then
+	t.ask_analytics_agent = {
+		completed = "Feature.Build.Label.ToolAnalyticsDone",
+		failed = "Feature.Build.Label.ToolAnalyticsFailed",
+		running = "Feature.Build.Label.ToolAnalyticsRunning"
+	}
+	t.check_ad_campaign_eligibility = {
+		completed = "Feature.Build.Label.ToolAdEligibilityDone",
+		failed = "Feature.Build.Label.ToolAdEligibilityFailed",
+		running = "Feature.Build.Label.ToolAdEligibilityRunning"
+	}
+	t.compile_luau = {
+		completed = "Feature.Build.Label.ToolCompileDone",
+		failed = "Feature.Build.Label.ToolCompileFailed",
+		running = "Feature.Build.Label.ToolCompileRunning"
+	}
+	t.verify_luau = {
+		completed = "Feature.Build.Label.ToolVerifyDone",
+		failed = "Feature.Build.Label.ToolVerifyFailed",
+		running = "Feature.Build.Label.ToolVerifyRunning"
+	}
+	t.lookup_engine_api_docs = {
+		completed = "Feature.Build.Label.ToolApiDocsDone",
+		failed = "Feature.Build.Label.ToolApiDocsFailed",
+		running = "Feature.Build.Label.ToolApiDocsRunning"
+	}
+	t.restore_version = {
+		completed = "Feature.Build.Label.ToolRestoreVersionDone",
+		failed = "Feature.Build.Label.ToolRestoreVersionFailed",
+		running = "Feature.Build.Label.ToolRestoreVersionRunning"
 	}
 end
 return {

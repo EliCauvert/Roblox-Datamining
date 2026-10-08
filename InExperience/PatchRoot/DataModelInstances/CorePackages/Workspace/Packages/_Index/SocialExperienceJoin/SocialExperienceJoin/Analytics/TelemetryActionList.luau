@@ -1,4 +1,5 @@
-﻿local supportedTelemetryBackends = require(script:FindFirstAncestor("SocialExperienceJoin").Parent.SocialLuaAnalytics).Analytics.Enums.SupportedTelemetryBackends
+﻿local parent = script:FindFirstAncestor("SocialExperienceJoin").Parent
+local supportedTelemetryBackends = require(parent.SocialLuaAnalytics).Analytics.Enums.SupportedTelemetryBackends
 local eventNamesModule = require(script.Parent.EventNames)
 
 return {
@@ -7,15 +8,18 @@ return {
 		throttlingThousandths = game:DefineFastInt("SocialExperienceJoinAnalyticsThrottlingThousandths", 1000)
 	},
 	[eventNamesModule.JoinExperience] = {
-		description = "Join Experience Attempt from other user",
-		lastUpdated = { 24, 7, 17 },
+		description = "Experience launch attempt from another user's presence; followUser differentiates Join from Play.",
+		lastUpdated = { 26, 10, 5 },
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
 					status = function(p1)
 						return p1
-					end
+					end,
+					followUser = if require(parent.SharedFlags).FFlagJoinabilityCTARefactor then function(p1)
+						return p1
+					end else nil
 				}
 			}
 		}

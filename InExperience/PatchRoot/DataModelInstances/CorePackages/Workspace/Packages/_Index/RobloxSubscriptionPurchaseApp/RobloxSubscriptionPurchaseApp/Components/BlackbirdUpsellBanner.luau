@@ -12,18 +12,19 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local fFlagSupportNewBadgeRobloxPlusModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagSupportNewBadgeRobloxPlus)
 local useRobloxPlusUpsellBannerNewBadgeInteractionModule = require(robloxSubscriptionPurchaseApp.Hooks.useRobloxPlusUpsellBannerNewBadgeInteraction)
 local robloxPlusUpsellBannerCTAModule = require(script.Parent.RobloxPlusUpsellBannerCTA)
+local fFlagRobloxPlusUpsellBannerUseTryItForFreeModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusUpsellBannerUseTryItForFree)
 local boldBlackbirdUpsellBannerStroke = game:DefineFastFlag("BoldBlackbirdUpsellBannerStroke", false)
 
 return function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), fFlagSupportNewBadgeRobloxPlusModule (ref), useRobloxPlusUpsellBannerNewBadgeInteractionModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref), robloxPlusUpsellBannerCTAModule (ref), boldBlackbirdUpsellBannerStroke (ref)
+	-- upvalues: useTokens (ref), useLocalization (ref), fFlagRobloxPlusUpsellBannerUseTryItForFreeModule (ref), reactModule (ref), fFlagSupportNewBadgeRobloxPlusModule (ref), useRobloxPlusUpsellBannerNewBadgeInteractionModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref), robloxPlusUpsellBannerCTAModule (ref), boldBlackbirdUpsellBannerStroke (ref)
 	local var1 = useTokens()
 	local var2 = useLocalization({
-		getFreeTrialText = "Feature.RobloxSubscription.Label.FreeTrialText",
 		subscribe = "Feature.RobloxSubscription.Action.Subscribe",
 		bannerText = {
 			"Feature.RobloxSubscription.Label.BlackbirdUpsellBanner",
 			discountPercentage = p1.productInfo.initialDiscountPercentage or 10
-		}
+		},
+		getFreeTrialText = if fFlagRobloxPlusUpsellBannerUseTryItForFreeModule then "Feature.RobloxSubscription.Action.TryItForFree" else "Feature.RobloxSubscription.Label.FreeTrialText"
 	})
 	local var3 = if fFlagSupportNewBadgeRobloxPlusModule then useRobloxPlusUpsellBannerNewBadgeInteractionModule(p1.onActivated) else nil
 	

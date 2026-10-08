@@ -134,6 +134,7 @@ return function(p4)
 		emptyState = reactModule.createElement(buildEmptyStateModule),
 		isHistoryLoading = p4.isHistoryLoading,
 		onPlaytest = p4.onPlaytest,
+		onPublish = p4.onPublish,
 		isPlaytestLoading = p4.isPlaytestLoading,
 		onAgentAdCampaignOfferSelected = if fFlagBuildAgentAdCampaignCardModule then p4.onAgentAdCampaignOfferSelected else nil,
 		getAgentAdCampaignCardState = if fFlagBuildAgentAdCampaignCardModule then p4.getAgentAdCampaignCardState else nil,

@@ -15,6 +15,7 @@ local fFlagAppChatConversationStoreModule = require(appChat.Flags.FFlagAppChatCo
 local fFlagAppChatFriendsTabIxpEnabledModule = require(appChat.Flags.FFlagAppChatFriendsTabIxpEnabled)
 local fFlagAppChatUnreadMessageCountStoreModule = require(appChat.Flags.FFlagAppChatUnreadMessageCountStore)
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local fFlagUseSignalsForSquadExperienceInvite = require(parent.SharedFlags).FFlagUseSignalsForSquadExperienceInvite
 local chatModerationStatusHydrationMiddlewareModule = require(appChat.Middleware.ChatModerationStatusHydrationMiddleware)
 local signalsConversationMiddlewareModule = require(appChat.Middleware.SignalsConversationMiddleware)
 local signalsMessageIngestionMiddlewareModule = require(appChat.Middleware.SignalsMessageIngestionMiddleware)
@@ -23,7 +24,7 @@ local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 local chatPlacementContextModule = require(appChat.Contexts.ChatPlacementContext)
 
 return function(p1, p2, p3)
-	-- upvalues: coreGuiService (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), chatPlacementContextModule (ref), reactRobloxModule (ref), roduxModule (ref), fFlagAppChatSignalsMessageStoreModule (ref), signalsMessageIngestionMiddlewareModule (ref), fFlagAppChatConversationStoreModule (ref), signalsConversationMiddlewareModule (ref), fFlagAppChatFriendsTabIxpEnabledModule (ref), fFlagExpChatEnableFriendsTab (ref), appChat (ref), chatModerationStatusHydrationMiddlewareModule (ref), fFlagAppChatUnreadMessageCountStoreModule (ref), appChatReducerModule (ref), reactFocusNavigationModule (ref), reactModule (ref), provider (ref), inExperienceAppChatProvidersModule (ref), inExperienceAppChatModule (ref)
+	-- upvalues: coreGuiService (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), chatPlacementContextModule (ref), reactRobloxModule (ref), roduxModule (ref), fFlagAppChatSignalsMessageStoreModule (ref), signalsMessageIngestionMiddlewareModule (ref), fFlagAppChatConversationStoreModule (ref), signalsConversationMiddlewareModule (ref), fFlagAppChatFriendsTabIxpEnabledModule (ref), fFlagExpChatEnableFriendsTab (ref), appChat (ref), chatModerationStatusHydrationMiddlewareModule (ref), fFlagAppChatUnreadMessageCountStoreModule (ref), fFlagUseSignalsForSquadExperienceInvite (ref), parent (ref), appChatReducerModule (ref), reactFocusNavigationModule (ref), reactModule (ref), provider (ref), inExperienceAppChatProvidersModule (ref), inExperienceAppChatModule (ref)
 	local appChat_1 = Instance.new("Folder")
 	appChat_1.Name = "AppChat"
 	appChat_1.Parent = coreGuiService
@@ -50,6 +51,9 @@ return function(p1, p2, p3)
 	end
 	if fFlagAppChatUnreadMessageCountStoreModule then
 		table.insert(list, require(appChat.Middleware.SignalsUnreadMessageCountMiddleware))
+	end
+	if fFlagUseSignalsForSquadExperienceInvite then
+		table.insert(list, require(parent.SquadsCore.Middleware).SignalsSquadMiddleware)
 	end
 	local var2 = roduxModule.Store.new(appChatReducerModule, nil, list)
 	local var3 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)

@@ -11,9 +11,7 @@ local images = UIBloxModule.App.ImageSet.Images
 local contextualMenu = UIBloxModule.App.Menu.ContextualMenu
 local menuDirection = UIBloxModule.App.Menu.MenuDirection
 local chatLineReportRootModule = require(chatLineReporting.Components.ChatLineReportRoot)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagChatLineReportingFocusFixesEnabled = sharedFlagsModule.FFlagChatLineReportingFocusFixesEnabled
-local getFFlagMemoizeChatReportingMenu = sharedFlagsModule.GetFFlagMemoizeChatReportingMenu
+local getFFlagMemoizeChatReportingMenu = require(parent.SharedFlags).GetFFlagMemoizeChatReportingMenu
 local t = {
 	motorCallback = otterModule.instant,
 	open = { targetValue = 1 },
@@ -24,7 +22,7 @@ local t_1 = {
 }
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t_1 (ref), currentCamera (ref), constantsModule (ref), reactModule (ref), contextualMenu (ref), images (ref), fFlagChatLineReportingFocusFixesEnabled (ref), guiService (ref), chatLineReportRootModule (ref), getFFlagMemoizeChatReportingMenu (ref), menuDirection (ref), t (ref)
+	-- upvalues: useLocalization (ref), t_1 (ref), currentCamera (ref), constantsModule (ref), reactModule (ref), contextualMenu (ref), images (ref), guiService (ref), chatLineReportRootModule (ref), getFFlagMemoizeChatReportingMenu (ref), menuDirection (ref), t (ref)
 	local var1 = useLocalization(t_1)
 	local var2 = if currentCamera then currentCamera.ViewportSize else Vector2.new(constantsModule.ViewportSize, constantsModule.ViewportSize)
 	local var3 = reactModule.useRef(nil)
@@ -50,8 +48,8 @@ return function(p1)
 					icon = images["icons/actions/feedback"],
 					text = var1.reportAbuse,
 					onActivated = function()
-						-- upvalues: fFlagChatLineReportingFocusFixesEnabled (copy), guiService (copy), chatLineReportRootModule (copy), getFFlagMemoizeChatReportingMenu (copy), p1 (ref)
-						if fFlagChatLineReportingFocusFixesEnabled and guiService.MenuIsOpen then
+						-- upvalues: guiService (copy), chatLineReportRootModule (copy), getFFlagMemoizeChatReportingMenu (copy), p1 (ref)
+						if guiService.MenuIsOpen then
 							local menuClosedConnection = nil
 							menuClosedConnection = guiService.MenuClosed:Connect(function()
 								-- upvalues: chatLineReportRootModule (copy), getFFlagMemoizeChatReportingMenu (copy), p1 (copy), menuClosedConnection (write)

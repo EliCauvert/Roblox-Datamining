@@ -10,18 +10,18 @@ return function(p1)
 	
 	if store == nil then
 		return false
-	end
-	local channelTabs = store:getState().ChannelTabs
-	
-	if channelTabs == nil or channelTabs.allChannelTabs[p1] == nil then
-		return false
-	end
-	local var1 = if fFlagExpChatUseChannelTabsStore then getChannelTabsStoreModule(false) else nil
-	
-	if var1 and var1.getChannelTabsState(false).allChannelTabs[p1] == nil then
-		return false
-	elseif var1 then
+	elseif fFlagExpChatUseChannelTabsStore then
+		local var1 = getChannelTabsStoreModule(false)
+		
+		if var1.getChannelTabsState(false).allChannelTabs[p1] == nil then
+			return false
+		end
 		var1.setTargetChannel(p1, false)
+		
+		return true
+	else
+		local channelTabs = store:getState().ChannelTabs
+		
+		return channelTabs == nil or channelTabs.allChannelTabs[p1] == nil
 	end
-	return true
 end

@@ -1,4 +1,5 @@
 ﻿local httpService = game:GetService("HttpService")
+local fFlagBuildExperienceRemoveDevProductPriceCap = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagBuildExperienceRemoveDevProductPriceCap
 local _ = require(script.Parent.types)
 local t = {
 	create = true,
@@ -26,7 +27,11 @@ local t_1 = {
 			},
 			name = { type = "string" },
 			description = { type = "string" },
-			priceInRobux = { type = "integer", minimum = 1, maximum = 100 },
+			priceInRobux = {
+				type = "integer",
+				minimum = 1,
+				maximum = if fFlagBuildExperienceRemoveDevProductPriceCap then nil else 100
+			},
 			productId = { type = "integer" },
 			imageAssetId = { type = "integer", minimum = 1 }
 		}
@@ -145,7 +150,7 @@ return {
 		return nil, nil, nil, nil
 	end,
 	parseManageDevProductInput = function(p4)
-		-- upvalues: t (ref)
+		-- upvalues: t (ref), fFlagBuildExperienceRemoveDevProductPriceCap (ref)
 		if typeof(p4) ~= "table" then
 			return nil
 		end
@@ -172,7 +177,7 @@ return {
 			var3 = tonumber(p4.priceInRobux)
 			var4 = if var3 == nil or var3 % 1 ~= 0 then nil else var3
 			
-			if var4 == nil or var4 < 1 or var4 > 100 then
+			if var4 == nil or var4 < 1 or not fFlagBuildExperienceRemoveDevProductPriceCap and var4 > 100 then
 				return nil
 			end
 			t_1.priceInRobux = var4

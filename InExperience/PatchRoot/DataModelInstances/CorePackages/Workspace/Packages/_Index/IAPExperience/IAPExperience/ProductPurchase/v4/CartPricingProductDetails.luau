@@ -7,9 +7,10 @@ local cartPricingLoadingModule = require(script.Parent.CartPricingLoading)
 local _ = require(script.Parent.useCartPricing)
 local _ = require(parent.Enums.UnifiedPurchaseModalTypeEnum)
 local fFlagUnifiedPurchaseAddSkeleton = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseAddSkeleton
+local fFlagLuaAppsEnablePromptVIPServerPurchase = require(parent.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 
 return function(p1)
-	-- upvalues: reactModule (ref), cartPricingLoadingModule (ref), view (ref), productDetailsContainerModule (ref), fFlagUnifiedPurchaseAddSkeleton (ref)
+	-- upvalues: reactModule (ref), cartPricingLoadingModule (ref), view (ref), productDetailsContainerModule (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref), fFlagUnifiedPurchaseAddSkeleton (ref)
 	local cartPricing = p1.cartPricing
 	
 	return reactModule.createElement(view, {
@@ -21,6 +22,8 @@ return function(p1)
 			product = cartPricing.mergedProductForDetails,
 			subtitleView = p1.subtitleView,
 			priceSuffix = p1.priceSuffix,
+			includePriceSuffixOnOriginal = if fFlagLuaAppsEnablePromptVIPServerPurchase then p1.includePriceSuffixOnOriginal else nil,
+			priceText = if fFlagLuaAppsEnablePromptVIPServerPurchase then p1.priceText else nil,
 			isLoading = if fFlagUnifiedPurchaseAddSkeleton then p1.isLoading else nil,
 			subtotalItemCount = if cartPricing.showCartOfferUi and cartPricing.cartAggregate then cartPricing.cartAggregate.itemCount else nil,
 			hideProductDetails = cartPricing.shouldHideLookProductDetails,

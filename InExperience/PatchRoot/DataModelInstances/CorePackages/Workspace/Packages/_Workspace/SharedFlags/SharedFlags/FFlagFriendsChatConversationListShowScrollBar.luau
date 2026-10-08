@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("FriendsChatConversationListShowScrollBar", false) and require(script.Parent.FFlagExpChatEnableFriendsTab)
+﻿return require(script.Parent.FFlagExpChatEnableFriendsTab)

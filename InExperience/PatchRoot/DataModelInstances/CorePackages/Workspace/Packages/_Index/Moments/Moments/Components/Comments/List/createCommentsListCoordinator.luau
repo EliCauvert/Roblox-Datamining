@@ -13,6 +13,7 @@ local signalsExperimentalModule = require(parent.SignalsExperimental)
 local _ = require(moments.Components.Comments.GetCommentCollectionStore.createCommentCollectionStore)
 local _ = require(moments.Components.Comments.GetCommentSessionFiltersStore.createCommentSessionFiltersStore)
 local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
+local fFlagMomentsCommentActionsRealtimeModule = require(moments.Flags.FFlagMomentsCommentActionsRealtime)
 local fFlagMomentsCommentsCountAnalyticsModule = require(moments.Flags.FFlagMomentsCommentsCountAnalytics)
 local _ = require(moments.Stores.GetCommentReactionsStore.createCommentReactionsStore)
 local loadStatus = require(moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes).LoadStatus
@@ -192,7 +193,7 @@ end
 local function noOp() end
 
 return function(p1)
-	-- upvalues: momentsCommentsModule (ref), defaultSchedule (ref), defaultReadStatusCode (ref), defaultReadRetryAfter (ref), signalsModule (ref), parseHttpDateMs (ref), loadStatus (ref), signalsExperimentalModule (ref), t (ref), t_2 (ref), observeRequest (ref), list (ref), fFlagMomentsComments (ref), eventNames (ref), fFlagMomentsCommentsCountAnalyticsModule (ref), getCommentsFailureReasonModule (ref), t_1 (ref), rejectReactionMutation (ref), noOp (ref)
+	-- upvalues: momentsCommentsModule (ref), defaultSchedule (ref), defaultReadStatusCode (ref), defaultReadRetryAfter (ref), signalsModule (ref), parseHttpDateMs (ref), loadStatus (ref), signalsExperimentalModule (ref), t (ref), t_2 (ref), fFlagMomentsCommentActionsRealtimeModule (ref), observeRequest (ref), getCommentsFailureReasonModule (ref), list (ref), fFlagMomentsComments (ref), eventNames (ref), fFlagMomentsCommentsCountAnalyticsModule (ref), t_1 (ref), rejectReactionMutation (ref), noOp (ref)
 	local collectionStore = p1.collectionStore
 	local commentsStore = p1.commentsStore
 	local reactionStore = p1.reactionStore
@@ -468,6 +469,26 @@ return function(p1)
 		collectionStore.failLoad(p4, if collectionStore.getState(p4)(false).initialLoadStatus == loadStatus.Success then "more" else "initial", p5)
 	end
 	
+	local _ = function(p4)
+		-- upvalues: var1 (write), p1 (ref)
+		return if p1.getAnalyticsSession == nil or var1 == nil or var1.feedItemId ~= p4 then nil else p1.getAnalyticsSession(p4, var1.sessionId)
+	end
+	
+	local _ = function(p4, p5, p6, p7)
+		local analyticsSession = p4.analyticsSession
+		
+		if analyticsSession == nil then return end
+		local t = {
+			status = p6,
+			action = if p5 == "PUT" then "add" else "remove"
+		}
+		
+		if p7 ~= nil then
+			t.failureReason = p7
+		end
+		analyticsSession.logRealtimeEvent("MomentsCommentReaction", t)
+	end
+	
 	local function commitProjectedReaction(p4)
 		-- upvalues: reactionStore (ref), commentsStore (ref), signalsExperimentalModule (copy)
 		local intent = reactionStore.getIntent(p4.commentId, false)
@@ -601,7 +622,7 @@ return function(p1)
 	local _ = nil
 	
 	local var12 = function(p4)
-		-- upvalues: var7 (write), t_3 (ref), commentsStore (ref), reactionStore (ref), rollbackReaction (ref), nowMs (ref), schedule (ref), var12 (write), t_5 (ref), t_6 (ref), readRetryAfter (ref), putReaction (ref), deleteReaction (ref), p1 (ref), observeRequest (copy), commitProjectedReaction (ref), readStatusCode (ref), momentsCommentsModule (copy), setReactionCooldown (ref), list (copy), applyTerminalFailure (ref)
+		-- upvalues: var7 (write), t_3 (ref), commentsStore (ref), reactionStore (ref), rollbackReaction (ref), nowMs (ref), schedule (ref), var12 (write), t_5 (ref), t_6 (ref), readRetryAfter (ref), putReaction (ref), deleteReaction (ref), p1 (ref), fFlagMomentsCommentActionsRealtimeModule (copy), observeRequest (copy), commitProjectedReaction (ref), readStatusCode (ref), momentsCommentsModule (copy), getCommentsFailureReasonModule (copy), setReactionCooldown (ref), list (copy), applyTerminalFailure (ref)
 		if var7 or t_3[p4.commentId] ~= p4 or (commentsStore.getOwnerGeneration(false) ~= p4.ownerGeneration or reactionStore.getIntent(p4.commentId, false) == nil) then return end
 		if not p4.syncIsUncertain and p4.desiredEmoteId == p4.syncedEmoteId then
 			t_3[p4.commentId] = nil
@@ -679,126 +700,90 @@ return function(p1)
 		else
 			p4.attempt += 1
 			
-			if reactionStore.markPending(p4.commentId, p4.generation) then
-				p4.readyToCommit = false
-				local generation = p4.generation
-				local desiredEmoteId = p4.desiredEmoteId
-				local verb = p4.verb
-				local var17 = nil
-				local var18 = nil
-				p4.cancelRequest = observeRequest((if verb == "PUT" then putReaction else deleteReaction)(p4.feedItemId, p4.commentId, p4.emoteId, p1.network, {
-					[429] = {
-						function(p5)
-							-- upvalues: var17 (write), var18 (write), readRetryAfter (copy)
-							var17 = p5.statusCode
-							var18 = readRetryAfter(p5)
-						end
-					}
-				}), function(p5)
-					-- upvalues: var7 (copy), t_3 (copy), p4 (ref), commentsStore (copy), desiredEmoteId (ref), generation (ref), commitProjectedReaction (copy), t_5 (copy), schedule (copy), reactionStore (copy), t_6 (copy), var12 (copy), readStatusCode (copy), var17 (write), momentsCommentsModule (copy), rollbackReaction (copy), setReactionCooldown (copy), var18 (write), list (copy), nowMs (copy), applyTerminalFailure (copy)
-					if var7 or t_3[p4.commentId] ~= p4 or commentsStore.getOwnerGeneration(false) ~= p4.ownerGeneration then return end
-					p4.cancelRequest = nil
+			if not reactionStore.markPending(p4.commentId, p4.generation) then
+				t_3[p4.commentId] = nil
+				
+				return
+			end
+			p4.readyToCommit = false
+			local generation = p4.generation
+			local desiredEmoteId = p4.desiredEmoteId
+			local verb = p4.verb
+			local var17 = nil
+			local var18 = nil
+			local var19 = (if verb == "PUT" then putReaction else deleteReaction)(p4.feedItemId, p4.commentId, p4.emoteId, p1.network, {
+				[429] = {
+					function(p5)
+						-- upvalues: var17 (write), var18 (write), readRetryAfter (copy)
+						var17 = p5.statusCode
+						var18 = readRetryAfter(p5)
+					end
+				}
+			})
+			
+			if fFlagMomentsCommentActionsRealtimeModule then
+				local analyticsSession = p4.analyticsSession
+				
+				if analyticsSession ~= nil then
+					analyticsSession.logRealtimeEvent("MomentsCommentReaction", {
+						status = "attempted",
+						action = if verb == "PUT" then "add" else "remove"
+					})
+				end
+			end
+			p4.cancelRequest = observeRequest(var19, function(p5)
+				-- upvalues: var7 (copy), t_3 (copy), p4 (ref), commentsStore (copy), fFlagMomentsCommentActionsRealtimeModule (copy), verb (ref), desiredEmoteId (ref), generation (ref), commitProjectedReaction (copy), t_5 (copy), schedule (copy), reactionStore (copy), t_6 (copy), var12 (copy), readStatusCode (copy), var17 (write), momentsCommentsModule (copy), getCommentsFailureReasonModule (copy), rollbackReaction (copy), setReactionCooldown (copy), var18 (write), list (copy), nowMs (copy), applyTerminalFailure (copy)
+				if var7 or t_3[p4.commentId] ~= p4 or commentsStore.getOwnerGeneration(false) ~= p4.ownerGeneration then return end
+				p4.cancelRequest = nil
+				
+				if fFlagMomentsCommentActionsRealtimeModule and p5.status == "succeeded" then
+					local var20 = verb
+					local analyticsSession = p4.analyticsSession
 					
-					if p5.status == "succeeded" then
-						p4.syncedEmoteId = desiredEmoteId
-						p4.syncIsUncertain = false
+					if analyticsSession ~= nil then
+						analyticsSession.logRealtimeEvent("MomentsCommentReaction", {
+							status = "succeeded",
+							action = if var20 == "PUT" then "add" else "remove"
+						})
+					end
+				end
+				if p5.status == "succeeded" then
+					p4.syncedEmoteId = desiredEmoteId
+					p4.syncIsUncertain = false
+					
+					if p4.generation == generation then
+						t_3[p4.commentId] = nil
 						
-						if p4.generation == generation then
-							t_3[p4.commentId] = nil
-							
-							if commitProjectedReaction(p4) then
-								local commentId = p4.commentId
-								local var19 = generation
-								local var20 = t_5[commentId]
-								t_5[commentId] = nil
-								
-								if var20 ~= nil then
-									var20()
-								end
-								t_5[commentId] = schedule(10000, function()
-									-- upvalues: t_5 (copy), commentId (ref), reactionStore (copy), var19 (ref), t_6 (copy)
-									t_5[commentId] = nil
-									
-									if reactionStore.expireIntent(commentId, var19) then
-										t_6[commentId] = nil
-									end
-								end)
-							end
-							return
-						elseif p4.desiredEmoteId == p4.syncedEmoteId then
-							t_3[p4.commentId] = nil
-							
-							if commitProjectedReaction(p4) then
-								local commentId = p4.commentId
-								local generation_1 = p4.generation
-								local var21 = t_5[commentId]
-								t_5[commentId] = nil
-								
-								if var21 ~= nil then
-									var21()
-								end
-								t_5[commentId] = schedule(10000, function()
-									-- upvalues: t_5 (copy), commentId (ref), reactionStore (copy), generation_1 (ref), t_6 (copy)
-									t_5[commentId] = nil
-									
-									if reactionStore.expireIntent(commentId, generation_1) then
-										t_6[commentId] = nil
-									end
-								end)
-								
-								return
-							else
-								return
-							end
-						elseif p4.readyToCommit then
-							var12(p4)
-						end
-					else
-						local var22 = readStatusCode(p5, var17)
-						local var23 = momentsCommentsModule.parseCommentsError(p5.error)
-						local var24 = if var23 ~= nil then "CommentsUnavailable" else var23.errorCode
-						
-						if var22 == 429 then
-							t_3[p4.commentId] = nil
-							rollbackReaction(p4, nil)
-							setReactionCooldown(var18)
-							
-							return
-						elseif not (if var22 ~= nil then if var22 ~= 408 then var22 ~= nil and (var22 >= 500 and var22 <= 599) else true else true) then
-							t_3[p4.commentId] = nil
-							applyTerminalFailure(p4, var22, var24)
-							
-							return
-						end
-						p4.syncIsUncertain = true
-						
-						if p4.generation == generation then
-							reactionStore.markUncertain(p4.commentId, generation)
-							local attempt = list[p4.attempt]
-							
-							if p4.attempt <= 2 and attempt ~= nil and nowMs() - p4.startedAtMs + attempt <= 2000 then
-								p4.cancelRetry = schedule(attempt, function()
-									-- upvalues: p4 (copy), t_3 (copy), commentsStore (copy), var12 (copy)
-									p4.cancelRetry = nil
-									
-									if t_3[p4.commentId] == p4 and commentsStore.getOwnerGeneration(false) == p4.ownerGeneration then
-										var12(p4)
-									end
-								end)
-								
-								return
-							end
-							local var25 = p4
-							t_3[var25.commentId] = nil
-							var25.cancelRetry = nil
-							reactionStore.markUncertain(var25.commentId, var25.generation)
-							local commentId = var25.commentId
-							local generation_1 = var25.generation
-							local var26 = t_5[commentId]
+						if commitProjectedReaction(p4) then
+							local commentId = p4.commentId
+							local var21 = generation
+							local var22 = t_5[commentId]
 							t_5[commentId] = nil
 							
-							if var26 ~= nil then
-								var26()
+							if var22 ~= nil then
+								var22()
+							end
+							t_5[commentId] = schedule(10000, function()
+								-- upvalues: t_5 (copy), commentId (ref), reactionStore (copy), var21 (ref), t_6 (copy)
+								t_5[commentId] = nil
+								
+								if reactionStore.expireIntent(commentId, var21) then
+									t_6[commentId] = nil
+								end
+							end)
+						end
+						return
+					elseif p4.desiredEmoteId == p4.syncedEmoteId then
+						t_3[p4.commentId] = nil
+						
+						if commitProjectedReaction(p4) then
+							local commentId = p4.commentId
+							local generation_1 = p4.generation
+							local var23 = t_5[commentId]
+							t_5[commentId] = nil
+							
+							if var23 ~= nil then
+								var23()
 							end
 							t_5[commentId] = schedule(10000, function()
 								-- upvalues: t_5 (copy), commentId (ref), reactionStore (copy), generation_1 (ref), t_6 (copy)
@@ -810,15 +795,92 @@ return function(p1)
 							end)
 							
 							return
-						elseif p4.readyToCommit then
-							var12(p4)
+						else
+							return
+						end
+					elseif p4.readyToCommit then
+						var12(p4)
+					end
+				else
+					local var24 = readStatusCode(p5, var17)
+					local var25 = momentsCommentsModule.parseCommentsError(p5.error)
+					local var26 = if var25 ~= nil then "CommentsUnavailable" else var25.errorCode
+					
+					if fFlagMomentsCommentActionsRealtimeModule then
+						local var27 = p4
+						local var28 = verb
+						local var29 = getCommentsFailureReasonModule(var26, var24)
+						local analyticsSession = var27.analyticsSession
+						
+						if analyticsSession ~= nil then
+							local t = {
+								status = "failed",
+								action = if var28 == "PUT" then "add" else "remove"
+							}
+							
+							if var29 ~= nil then
+								t.failureReason = var29
+							end
+							analyticsSession.logRealtimeEvent("MomentsCommentReaction", t)
 						end
 					end
-				end)
-				
-				return
-			end
-			t_3[p4.commentId] = nil
+					if var24 == 429 then
+						t_3[p4.commentId] = nil
+						rollbackReaction(p4, nil)
+						setReactionCooldown(var18)
+						
+						return
+					elseif not (if var24 ~= nil then if var24 ~= 408 then var24 ~= nil and (var24 >= 500 and var24 <= 599) else true else true) then
+						t_3[p4.commentId] = nil
+						applyTerminalFailure(p4, var24, var26)
+						
+						return
+					end
+					p4.syncIsUncertain = true
+					
+					if p4.generation == generation then
+						reactionStore.markUncertain(p4.commentId, generation)
+						local attempt = list[p4.attempt]
+						
+						if p4.attempt <= 2 and attempt ~= nil and nowMs() - p4.startedAtMs + attempt <= 2000 then
+							p4.cancelRetry = schedule(attempt, function()
+								-- upvalues: p4 (copy), t_3 (copy), commentsStore (copy), var12 (copy)
+								p4.cancelRetry = nil
+								
+								if t_3[p4.commentId] == p4 and commentsStore.getOwnerGeneration(false) == p4.ownerGeneration then
+									var12(p4)
+								end
+							end)
+							
+							return
+						end
+						local var30 = p4
+						t_3[var30.commentId] = nil
+						var30.cancelRetry = nil
+						reactionStore.markUncertain(var30.commentId, var30.generation)
+						local commentId = var30.commentId
+						local generation_1 = var30.generation
+						local var31 = t_5[commentId]
+						t_5[commentId] = nil
+						
+						if var31 ~= nil then
+							var31()
+						end
+						t_5[commentId] = schedule(10000, function()
+							-- upvalues: t_5 (copy), commentId (ref), reactionStore (copy), generation_1 (ref), t_6 (copy)
+							t_5[commentId] = nil
+							
+							if reactionStore.expireIntent(commentId, generation_1) then
+								t_6[commentId] = nil
+							end
+						end)
+						
+						return
+					elseif p4.readyToCommit then
+						var12(p4)
+					end
+				end
+			end)
 		end
 	end
 	
@@ -853,7 +915,7 @@ return function(p1)
 	end
 	
 	local function beginReactionMutation(p4, p5, p6, p7, p8, p9, p10)
-		-- upvalues: var7 (write), reactionStore (ref), nowMs (ref), t_5 (ref), t_3 (ref), commentsStore (ref), t_6 (ref), scheduleReactionCommit (ref)
+		-- upvalues: var7 (write), reactionStore (ref), nowMs (ref), t_5 (ref), t_3 (ref), commentsStore (ref), fFlagMomentsCommentActionsRealtimeModule (copy), var1 (write), p1 (ref), t_6 (ref), scheduleReactionCommit (ref)
 		if var7 or reactionStore.getRestriction(p4, p5, false) ~= nil then
 			return false
 		end
@@ -904,6 +966,10 @@ return function(p1)
 				var16.cancelRetry = nil
 				var16.syncIsUncertain = true
 			end
+		end
+		if fFlagMomentsCommentActionsRealtimeModule then
+			local var17 = var1
+			var16.analyticsSession = if p1.getAnalyticsSession == nil or var17 == nil or var17.feedItemId ~= p4 then nil else p1.getAnalyticsSession(p4, var17.sessionId)
 		end
 		t_6[p5] = p4
 		scheduleReactionCommit(var16)
@@ -1391,7 +1457,7 @@ return function(p1)
 	end
 	
 	local function deleteComment_1(p10, p11, p12, p13)
-		-- upvalues: var7 (write), t_4 (write), commentsStore (ref), fFlagMomentsComments (copy), p1 (ref), var1 (write), deleteComment (ref), observeRequest (copy), momentsCommentsModule (copy), readStatusCode (ref), removeDeletedComment (ref)
+		-- upvalues: var7 (write), t_4 (write), commentsStore (ref), fFlagMomentsComments (copy), p1 (ref), var1 (write), fFlagMomentsCommentActionsRealtimeModule (copy), deleteComment (ref), observeRequest (copy), momentsCommentsModule (copy), readStatusCode (ref), getCommentsFailureReasonModule (copy), removeDeletedComment (ref)
 		if var7 or t_4[p11] ~= nil then
 			return false
 		end
@@ -1405,18 +1471,44 @@ return function(p1)
 				commentDeletedCallback = p1.getCommentDeletedCallback(p10, var22.sessionId)
 			end
 		end
-		local var23 = deleteComment(p10, p11, p1.network)
+		local var23
+		local var24 = nil
+		
+		if fFlagMomentsCommentActionsRealtimeModule then
+			var23 = var1
+			var24 = if p1.getAnalyticsSession == nil or var23 == nil or var23.feedItemId ~= p10 then nil else p1.getAnalyticsSession(p10, var23.sessionId)
+		end
+		var23 = deleteComment(p10, p11, p1.network)
+		
+		if fFlagMomentsCommentActionsRealtimeModule and var24 ~= nil then
+			var24.logRealtimeEvent("MomentsCommentDelete", { status = "attempted" })
+		end
 		local t = { cancel = function() end }
 		t_4[p11] = t
 		t.cancel = observeRequest(var23, function(p14)
-			-- upvalues: t_4 (copy), p11 (ref), t (ref), var7 (copy), commentsStore (copy), ownerGeneration (ref), momentsCommentsModule (copy), readStatusCode (copy), removeDeletedComment (copy), p10 (ref), fFlagMomentsComments (copy), p13 (ref), p12 (ref), commentDeletedCallback (write)
+			-- upvalues: t_4 (copy), p11 (ref), t (ref), var7 (copy), commentsStore (copy), ownerGeneration (ref), momentsCommentsModule (copy), readStatusCode (copy), fFlagMomentsCommentActionsRealtimeModule (copy), var24 (write), getCommentsFailureReasonModule (copy), removeDeletedComment (copy), p10 (ref), fFlagMomentsComments (copy), p13 (ref), p12 (ref), commentDeletedCallback (write)
 			if t_4[p11] ~= t then return end
 			t_4[p11] = nil
 			
 			if var7 or commentsStore.getOwnerGeneration(false) ~= ownerGeneration then return end
-			local var24 = momentsCommentsModule.parseCommentsError(p14.error)
+			local var25 = momentsCommentsModule.parseCommentsError(p14.error)
+			local var26 = if readStatusCode(p14, nil) ~= 404 then var25 ~= nil and var25.errorCode == "CommentNotFound" else true
 			
-			if p14.status == "succeeded" or (if readStatusCode(p14, nil) ~= 404 then var24 ~= nil and var24.errorCode == "CommentNotFound" else true) then
+			if fFlagMomentsCommentActionsRealtimeModule and var24 ~= nil then
+				if p14.status == "succeeded" then
+					var24.logRealtimeEvent("MomentsCommentDelete", { status = "succeeded" })
+				elseif var26 then
+					var24.logRealtimeEvent("MomentsCommentDelete", { status = "already_deleted" })
+				else
+					local logRealtimeEvent = var24.logRealtimeEvent
+					local var27 = "MomentsCommentDelete"
+					local t_1 = { status = "failed" }
+					local var28 = momentsCommentsModule.parseCommentsError(p14.error)
+					t_1.failureReason = getCommentsFailureReasonModule(if var28 ~= nil then "CommentsUnavailable" else var28.errorCode, readStatusCode(p14, nil))
+					logRealtimeEvent(var27, t_1)
+				end
+			end
+			if p14.status == "succeeded" or var26 then
 				removeDeletedComment(p10, p11, ownerGeneration)
 				
 				if fFlagMomentsComments and p14.status == "succeeded" and p13 ~= nil then

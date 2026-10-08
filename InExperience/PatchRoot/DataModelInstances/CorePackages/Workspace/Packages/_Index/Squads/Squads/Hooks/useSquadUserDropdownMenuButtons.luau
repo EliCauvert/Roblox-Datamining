@@ -19,10 +19,9 @@ local useBackgroundExperience = crossExperienceVoiceModule.Hooks.useBackgroundEx
 local useCurrentSquadParentChannelId = hooksModule.useCurrentSquadParentChannelId
 local useSelector = dependenciesModule.Hooks.useSelector
 local getFFlagEnableCrossExpVoice = sharedFlags.GetFFlagEnableCrossExpVoice
-local getFFlagEnableCrossExpVoiceAbuseReport = sharedFlags.getFFlagEnableCrossExpVoiceAbuseReport
 
 return function(p1, p2)
-	-- upvalues: useLocalUserId (ref), getFFlagEnableCrossExpVoice (ref), useBackgroundExperience (ref), react (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsUserPartyVoiceEligible (ref), useIsCurrentSquadPartyVoiceEligible (ref), squadExternalContractContext (ref), useCurrentSquadParentChannelId (ref), fFlagSquadsPresenceStoreMigration (ref), var1 (ref), useSelector (ref), var2 (ref), presenceType (ref), constantsModule (ref), getFFlagEnableCrossExpVoiceAbuseReport (ref)
+	-- upvalues: useLocalUserId (ref), getFFlagEnableCrossExpVoice (ref), useBackgroundExperience (ref), react (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsUserPartyVoiceEligible (ref), useIsCurrentSquadPartyVoiceEligible (ref), squadExternalContractContext (ref), useCurrentSquadParentChannelId (ref), fFlagSquadsPresenceStoreMigration (ref), var1 (ref), useSelector (ref), var2 (ref), presenceType (ref), constantsModule (ref)
 	local var3 = useLocalUserId()
 	local var4 = tostring(var3) == tostring(p1)
 	local _ = nil
@@ -53,7 +52,7 @@ return function(p1, p2)
 	end, { p1 }))
 	
 	return react.useMemo(function()
-		-- upvalues: var6 (write), var14 (ref), fFlagSquadsPresenceStoreMigration (copy), var2 (copy), presenceType (copy), var13 (ref), constantsModule (copy), var3 (ref), p2 (ref), getFFlagEnableCrossExpVoiceAbuseReport (copy), var5 (write), var4 (ref), var7 (write)
+		-- upvalues: var6 (write), var14 (ref), fFlagSquadsPresenceStoreMigration (copy), var2 (copy), presenceType (copy), var13 (ref), constantsModule (copy), var3 (ref), p2 (ref), var5 (write), var4 (ref), var7 (write)
 		local t = { VoiceIneligibleButton = var6 }
 		local var15 = var14
 		
@@ -73,7 +72,7 @@ return function(p1, p2)
 		t.JoinButton = var15
 		t.RemoveUserButton = var13 and (var13.type == constantsModule.CONVERSATION_CHANNEL_GROUP_TYPE and var13.initiator == var3)
 		t.ViewProfileButton = not p2
-		t.ReportButton = getFFlagEnableCrossExpVoiceAbuseReport() and (var5 and not var4)
+		t.ReportButton = var5 and not var4
 		t.MuteVoiceButton = var7
 		local t_1 = {}
 		

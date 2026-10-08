@@ -52,11 +52,12 @@ return function(p1)
 			isOpen = var5.isOpen,
 			snapPoints = var5.snapPoints,
 			onBoundsChanged = onBoundsChanged,
-			renderSheet = function(p2, p3)
+			renderSheet = function(p2, p3, p4)
 				-- upvalues: var5 (ref), reactModule (copy), chatSheetViewModule (copy)
 				local cloned = table.clone(var5)
 				cloned.snapPoints = p2
 				cloned.onFramesChanged = p3
+				cloned.onSnapPointChanged = p4
 				
 				return reactModule.createElement(chatSheetViewModule, cloned)
 			end

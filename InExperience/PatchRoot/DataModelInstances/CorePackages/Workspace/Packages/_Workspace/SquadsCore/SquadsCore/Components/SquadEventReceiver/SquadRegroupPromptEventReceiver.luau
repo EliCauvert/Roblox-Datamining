@@ -25,10 +25,12 @@ local regroupPromptNotificationStateModule = require(squadsCore.Utils.RegroupPro
 local loggerModule = require(squadsCore.Logger)
 local serializeTableModule = require(squadsCore.Utils.serializeTable)
 local setRegroupPromptShownModule = require(squadsCore.Thunks.setRegroupPromptShown)
+local getSquadExperienceInviteStoreModule = require(squadsCore.Stores.GetSquadExperienceInviteStore)
 local guiService = game:GetService("GuiService")
 local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local squadRegroupPromptDebounceTimeMs = game:DefineFastInt("SquadRegroupPromptDebounceTimeMs", 20000)
 local fFlagSquadsPresenceStoreMigrationModule = require(squadsCore.Flags.FFlagSquadsPresenceStoreMigration)
+local fFlagUseSignalsForSquadExperienceInvite = require(parent.SharedFlags).FFlagUseSignalsForSquadExperienceInvite
 local var1 = if fFlagSquadsPresenceStoreMigrationModule then require(parent.DataHydration) else nil
 local var2 = if fFlagSquadsPresenceStoreMigrationModule then require(parent.Signals) else nil
 local var3 = if fFlagSquadsPresenceStoreMigrationModule then require(parent.SignalsReact) else nil
@@ -38,7 +40,7 @@ local var6 = if fFlagSquadsPresenceStoreMigrationModule then var1.Presence.Prese
 local var7 = if fFlagSquadsPresenceStoreMigrationModule then var3.useSignalState else nil
 
 return function(p1)
-	-- upvalues: reactModule (ref), squadExternalContractContextModule (ref), useLocalization (ref), useDispatch (ref), useLocalUserId (ref), cryoModule (ref), fFlagSquadsPresenceStoreMigrationModule (ref), var2 (ref), var4 (ref), var7 (ref), networkingPresenceModule (ref), presenceType (ref), loggerModule (ref), serializeTableModule (ref), useSelector (ref), squadRegroupPromptDebounceTimeMs (ref), dashModule (ref), var6 (ref), squadRegroupExperimentation (ref), guiService (ref), eventNamesModule (ref), rbxAnalyticsService (ref), squadToastActionsAndStatesModule (ref), squadRegroupEntryPointModule (ref), regroupPromptNotificationStateModule (ref), squadExperienceInviteSourceModule (ref), setRegroupPromptShownModule (ref), realtimeDeliveryModule (ref), constantsModule (ref), var5 (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref)
+	-- upvalues: reactModule (ref), squadExternalContractContextModule (ref), useLocalization (ref), useDispatch (ref), useLocalUserId (ref), cryoModule (ref), fFlagSquadsPresenceStoreMigrationModule (ref), var2 (ref), var4 (ref), var7 (ref), networkingPresenceModule (ref), presenceType (ref), loggerModule (ref), serializeTableModule (ref), fFlagUseSignalsForSquadExperienceInvite (ref), useSelector (ref), squadRegroupPromptDebounceTimeMs (ref), dashModule (ref), getSquadExperienceInviteStoreModule (ref), var6 (ref), squadRegroupExperimentation (ref), guiService (ref), eventNamesModule (ref), rbxAnalyticsService (ref), squadToastActionsAndStatesModule (ref), squadRegroupEntryPointModule (ref), regroupPromptNotificationStateModule (ref), squadExperienceInviteSourceModule (ref), setRegroupPromptShownModule (ref), realtimeDeliveryModule (ref), constantsModule (ref), var5 (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref)
 	local var8
 	local var9 = reactModule.useContext(squadExternalContractContextModule)
 	local var10 = useLocalization({
@@ -133,7 +135,7 @@ return function(p1)
 		end
 	end, {})
 	local var22 = reactModule.useRef(nil)
-	var22.current = useSelector(reactModule.useCallback(function(p2)
+	var22.current = if fFlagUseSignalsForSquadExperienceInvite then nil else useSelector(reactModule.useCallback(function(p2)
 		return if p2.Squad and p2.Squad.Squad then p2.Squad.Squad.currentExperienceInvite else nil
 	end, {}))
 	local var23 = squadRegroupPromptDebounceTimeMs / 1000
@@ -141,8 +143,8 @@ return function(p1)
 	
 	if var24.current == nil then
 		var24.current = dashModule.debounce(function(p2, p3, p4, p5)
-			-- upvalues: var21 (ref), var13 (ref), var22 (ref), fFlagSquadsPresenceStoreMigrationModule (copy), var6 (copy), presenceType (copy), squadRegroupExperimentation (copy), guiService (copy), var10 (ref), var9 (ref), eventNamesModule (copy), rbxAnalyticsService (copy), squadToastActionsAndStatesModule (copy), squadRegroupEntryPointModule (copy), regroupPromptNotificationStateModule (copy), loggerModule (copy), serializeTableModule (copy), var11 (ref), squadExperienceInviteSourceModule (copy), setRegroupPromptShownModule (copy)
-			if not var21.current or var13.current or var22.current ~= nil then return end
+			-- upvalues: var21 (ref), var13 (ref), fFlagUseSignalsForSquadExperienceInvite (copy), getSquadExperienceInviteStoreModule (copy), var22 (ref), fFlagSquadsPresenceStoreMigrationModule (copy), var6 (copy), presenceType (copy), squadRegroupExperimentation (copy), guiService (copy), var10 (ref), var9 (ref), eventNamesModule (copy), rbxAnalyticsService (copy), squadToastActionsAndStatesModule (copy), squadRegroupEntryPointModule (copy), regroupPromptNotificationStateModule (copy), loggerModule (copy), serializeTableModule (copy), var11 (ref), squadExperienceInviteSourceModule (copy), setRegroupPromptShownModule (copy)
+			if not var21.current or var13.current or (if fFlagUseSignalsForSquadExperienceInvite then getSquadExperienceInviteStoreModule(false).getHasCurrentExperienceInvite(false) else var22.current ~= nil) then return end
 			local var25 = p2[tostring(p3)]
 			
 			if var25 == nil then return end

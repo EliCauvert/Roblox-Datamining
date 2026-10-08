@@ -10,6 +10,7 @@ local iosAuthServiceHealthCounterThrottlingHundredthsPercent = game:DefineFastIn
 local luaLogoutThrottlingHundredthsPercent = game:DefineFastInt("LuaLogoutThrottlingHundredthsPercent", 0)
 local keystoreTelemetryThrottlingHundredthsPercent = game:DefineFastInt("KeystoreTelemetryThrottlingHundredthsPercent", 0)
 local timeToLoginThrottlingHundredthsPercent = game:DefineFastInt("TimeToLoginThrottlingHundredthsPercent", 0)
+local accountUpgradeTelemetryThrottlingHundredthsPercent = game:DefineFastInt("AccountUpgradeTelemetryThrottlingHundredthsPercent", 0)
 local var1 = if game:DefineFastFlag("FixIosAuthServiceCredentialSheetBackends", false) then { loggingProtocolModule.TelemetryBackends.Counter } else {
 	loggingProtocolModule.TelemetryBackends.Counter,
 	loggingProtocolModule.TelemetryBackends.EventIngest
@@ -464,5 +465,53 @@ return {
 		backends = { loggingProtocolModule.TelemetryBackends.Counter },
 		throttlingPercentage = timeToLoginThrottlingHundredthsPercent,
 		lastUpdated = { 26, 9, 15 }
+	},
+	AccountUpgradePageMountConfig = {
+		eventName = "luaAccountUpgradePageMount",
+		description = "Report when the account upgrade form opens.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = accountUpgradeTelemetryThrottlingHundredthsPercent,
+		lastUpdated = { 26, 10, 6 }
+	},
+	AccountUpgradeCloseButtonClickedConfig = {
+		eventName = "luaAccountUpgradeCloseButtonClicked",
+		description = "Report when the user presses the X on the account upgrade form.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = accountUpgradeTelemetryThrottlingHundredthsPercent,
+		lastUpdated = { 26, 10, 6 }
+	},
+	AccountUpgradeCloseWarningBackButtonClickedConfig = {
+		eventName = "luaAccountUpgradeCloseWarningBackButtonClicked",
+		description = "Report when the user presses Back in the account upgrade close warning.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = accountUpgradeTelemetryThrottlingHundredthsPercent,
+		lastUpdated = { 26, 10, 6 }
+	},
+	AccountUpgradeCloseWarningCloseButtonClickedConfig = {
+		eventName = "luaAccountUpgradeCloseWarningCloseButtonClicked",
+		description = "Report when the user presses Close in the account upgrade close warning, which signs them out.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = accountUpgradeTelemetryThrottlingHundredthsPercent,
+		lastUpdated = { 26, 10, 6 }
+	},
+	AccountUpgradeSuccessConfig = {
+		eventName = "luaAccountUpgradeSuccess",
+		description = "Report when an account upgrade request succeeds.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = accountUpgradeTelemetryThrottlingHundredthsPercent,
+		lastUpdated = { 26, 10, 6 }
+	},
+	AccountUpgradeFailureConfig = {
+		eventName = "luaAccountUpgradeFailure",
+		description = "Report the first failed account upgrade request in each opening of the form. Also tagged with errorCode.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = accountUpgradeTelemetryThrottlingHundredthsPercent,
+		lastUpdated = { 26, 10, 6 }
 	}
 }

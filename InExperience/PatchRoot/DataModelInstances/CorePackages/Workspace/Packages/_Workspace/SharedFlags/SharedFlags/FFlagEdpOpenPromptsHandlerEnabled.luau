@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EdpOpenPromptsHandlerEnabled", false) and require(script.Parent.FFlagPromptsHandlerEnabled)

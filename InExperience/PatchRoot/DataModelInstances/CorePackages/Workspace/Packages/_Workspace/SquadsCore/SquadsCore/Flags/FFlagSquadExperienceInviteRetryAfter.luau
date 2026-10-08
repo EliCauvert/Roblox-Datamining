@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("SquadExperienceInviteRetryAfter2", false)

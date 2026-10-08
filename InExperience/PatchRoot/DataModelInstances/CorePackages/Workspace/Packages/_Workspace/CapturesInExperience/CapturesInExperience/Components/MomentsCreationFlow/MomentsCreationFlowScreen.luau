@@ -1,5 +1,115 @@
 ﻿local parent = script.Parent.Parent.Parent
 local parent_1 = parent.Parent
+
+if require(parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
+	local momentsCommonModule = require(parent_1.MomentsCommon)
+	local _ = require(parent_1.MomentsTypes)
+	local reactModule = require(parent_1.React)
+	local roactUtilsModule = require(parent_1.RoactUtils)
+	local signalsModule = require(parent_1.Signals)
+	local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
+	local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
+	local constantsModule = require(parent.Constants)
+	local momentsCreationFlowClosedModule = require(parent.Actions.MomentsCreationFlowClosed)
+	local useAnalyticsModule = require(parent.Analytics.useAnalytics)
+	local eventNames = momentsCommonModule.Analytics.EventNames
+	local t = {
+		[eventNames.EditingFlowNextButtonPressed] = true,
+		[eventNames.EditingFlowReturnButtonPressed] = true
+	}
+	
+	local function isTextFiltered(_)
+		return false
+	end
+	
+	local list = { "trim", "music", "text" }
+	
+	local function MomentsCreationScreen(p1)
+		-- upvalues: parent_1 (ref), parent (ref), reactModule (ref), signalsModule (ref), useDispatch (ref), useAnalyticsModule (ref), useSelector (ref), constantsModule (ref), t (ref), momentsCreationFlowClosedModule (ref), isTextFiltered (ref), list (ref)
+		local momentsCreationModule = require(parent_1.MomentsCreation)
+		local createMomentModule = require(parent.Thunks.CreateMoment)
+		local creationFlowScreen = momentsCreationModule.CreationFlowScreen
+		local getCreationFlowStore = momentsCreationModule.Stores.GetCreationFlowStore
+		local var1, var2 = reactModule.useState(function()
+			-- upvalues: getCreationFlowStore (ref)
+			return getCreationFlowStore(false).getSelectedCapture(false)
+		end)
+		reactModule.useEffect(function()
+			-- upvalues: signalsModule (copy), var2 (ref), getCreationFlowStore (ref)
+			return signalsModule.createEffect(function(p2)
+				-- upvalues: var2 (copy), getCreationFlowStore (copy)
+				var2(getCreationFlowStore(p2).getSelectedCapture(p2))
+			end)
+		end, { getCreationFlowStore })
+		local var3 = var1 == p1.expectedCapture
+		local var4 = useDispatch()
+		local fireEvent = useAnalyticsModule().fireEvent
+		local var5 = useSelector(function(p2)
+			-- upvalues: constantsModule (copy)
+			return p2[constantsModule.RoduxKey].MomentsCreationFlow.SessionId
+		end)
+		local registerAnalyticsListener = momentsCreationModule.registerAnalyticsListener
+		reactModule.useLayoutEffect(function()
+			-- upvalues: registerAnalyticsListener (ref), var5 (ref), t (copy), getCreationFlowStore (ref), fireEvent (ref)
+			return registerAnalyticsListener(function(p2, p3)
+				-- upvalues: var5 (copy), t (copy), getCreationFlowStore (copy), fireEvent (copy)
+				local cloned = table.clone(p3 or {})
+				cloned.creationSessionId = var5
+				
+				if t[p2] then
+					cloned.editFlowState = getCreationFlowStore(false).getStep(false)
+				end
+				fireEvent("XExp" .. p3, cloned)
+			end)
+		end, {
+			getCreationFlowStore,
+			fireEvent,
+			registerAnalyticsListener,
+			var5
+		})
+		local var6 = reactModule.useCallback(function()
+			-- upvalues: var4 (ref), momentsCreationFlowClosedModule (copy)
+			var4(momentsCreationFlowClosedModule())
+		end, { var4 })
+		local var7 = reactModule.useCallback(function(p2, p3, p4, p5, _, p6)
+			-- upvalues: var4 (ref), createMomentModule (ref)
+			var4(createMomentModule(p2, p3, p4, p5, nil, p6))
+		end, { var4, createMomentModule })
+		local var8 = reactModule.useMemo(function()
+			-- upvalues: var7 (ref), var6 (ref), isTextFiltered (copy), list (copy)
+			return {
+				disableDrafts = true,
+				disableExperimentExposure = true,
+				publishDebounceSeconds = 0.5,
+				createMoment = var7,
+				exitCreationFlow = var6,
+				isTextFiltered = isTextFiltered,
+				toolKinds = list
+			}
+		end, { var7, var6 })
+		reactModule.useEffect(function()
+			-- upvalues: var3 (ref), var4 (ref), momentsCreationFlowClosedModule (copy)
+			if not var3 then
+				var4(momentsCreationFlowClosedModule())
+			end
+		end, { var3, var4 })
+		
+		return if var3 then reactModule.createElement(creationFlowScreen, { excludeGallery = true, host = var8 }) else nil
+	end
+	
+	return function()
+		-- upvalues: useSelector (ref), constantsModule (ref), reactModule (ref), MomentsCreationScreen (ref)
+		local var1 = useSelector(function(p1)
+			-- upvalues: constantsModule (copy)
+			return p1[constantsModule.RoduxKey].MomentsCreationFlow.Capture
+		end)
+		
+		return if useSelector(function(p1)
+			-- upvalues: constantsModule (copy)
+			return p1[constantsModule.RoduxKey].MomentsCreationFlow.IsOpen
+		end) and var1 ~= nil then reactModule.createElement(MomentsCreationScreen, { expectedCapture = var1 }) else nil
+	end
+end
 local cryoModule = require(parent_1.Cryo)
 local dashModule = require(parent_1.Dash)
 local localizationModule = require(parent_1.Localization)
@@ -84,7 +194,7 @@ return function()
 			fetchInitialCaptures = dashModule.noop,
 			fireEvent = function(p1, p2)
 				-- upvalues: var1 (ref), cryoModule (copy), var6 (ref)
-				var1.fireEvent("XExp" .. p6, cryoModule.Dictionary.join(p2 or {}, { creationSessionId = var6 }))
+				var1.fireEvent("XExp" .. p18, cryoModule.Dictionary.join(p2 or {}, { creationSessionId = var6 }))
 			end,
 			getLocalization = reactModule.useCallback(function(p1)
 				-- upvalues: var3 (ref)

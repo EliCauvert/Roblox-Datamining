@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("FriendsChatServerSideConversationSearch2", false) and require(script:FindFirstAncestor("FriendsChat").Parent.AppChat.FFlagAppChatServerSideConversationSearch)
+﻿return game:DefineFastFlag("FriendsChatServerSideConversationSearch3", false) and require(script:FindFirstAncestor("FriendsChat").Parent.AppChat.FFlagAppChatServerSideConversationSearch)

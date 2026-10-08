@@ -13,6 +13,8 @@ local apiFetchPlaceInfos = require(parent.PlaceInfoRodux).Thunks.ApiFetchPlaceIn
 local gameCardGroupableModule = require(script.Parent.GameCardGroupable)
 local gameCardContainerModule = require(script.Parent.GameCardContainer)
 local gameCardErrorModule = require(script.Parent.GameCardError)
+local gameAssetCardModule = require(script.Parent.GameAssetCard)
+local _ = require(appChat.Components.ChatConversation.Grouping.MessageGroupShape)
 local fFlagAppChatInvalidGameLinkCardModule = require(appChat.Flags.FFlagAppChatInvalidGameLinkCard)
 local httpRequestModule = require(parent.HttpRequest)
 local t = {
@@ -32,7 +34,7 @@ local function _(p1, p2)
 end
 
 function PlaceIdContainer(p1)
-	-- upvalues: cryoModule (ref), t (ref), useDispatch (ref), useCallback (ref), apiFetchPlaceInfos (ref), useSelector (ref), fFlagAppChatInvalidGameLinkCardModule (ref), reactModule (ref), useEffect (ref), gameCardErrorModule (ref), gameCardGroupableModule (ref), gameCardContainerModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useDispatch (ref), useCallback (ref), apiFetchPlaceInfos (ref), useSelector (ref), fFlagAppChatInvalidGameLinkCardModule (ref), reactModule (ref), useEffect (ref), gameAssetCardModule (ref), gameCardErrorModule (ref), gameCardGroupableModule (ref), gameCardContainerModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2 = useDispatch()
 	local var3 = useCallback(function(p2, p3)
@@ -95,7 +97,12 @@ function PlaceIdContainer(p1)
 			end
 		end, { var4 })
 	end
-	return if var4 then reactModule.createElement(gameCardContainerModule, cryoModule.Dictionary.join(var1, { universeId = var4 })) elseif fFlagAppChatInvalidGameLinkCardModule and var6 then reactModule.createElement(gameCardErrorModule, {}) else reactModule.createElement(gameCardGroupableModule, { isLoading = true, gameName = "", gameThumbnail = "" })
+	return if not (not var4 and var1.groupShape) then if var4 then reactModule.createElement(gameCardContainerModule, cryoModule.Dictionary.join(var1, { universeId = var4 })) elseif fFlagAppChatInvalidGameLinkCardModule and var6 then reactModule.createElement(gameCardErrorModule, {}) else reactModule.createElement(gameCardGroupableModule, { isLoading = true, gameName = "", gameThumbnail = "" }) else reactModule.createElement(gameAssetCardModule, {
+		isLoading = true,
+		isError = fFlagAppChatInvalidGameLinkCardModule and var6,
+		groupShape = var1.groupShape,
+		mediaRef = var1.mediaRef
+	})
 end
 
 return memo(PlaceIdContainer)

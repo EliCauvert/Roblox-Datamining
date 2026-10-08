@@ -12,12 +12,14 @@ local fFlagMomentsContentStatsTelemetry = momentsCommonModule.Flags.FFlagMoments
 local _ = require(script.Parent.FeedTypes)
 local createPagerStoreModule = require(moments.Components.VerticalPager.createPagerStore)
 local fFlagMomentsNonInfiniteScrollEndStateFixesModule = require(moments.Flags.FFlagMomentsNonInfiniteScrollEndStateFixes)
+local fFlagMomentsLoadMoreKeepsPositionModule = require(moments.Flags.FFlagMomentsLoadMoreKeepsPosition)
+local fFlagMomentsModeratedMomentPageModule = require(moments.Flags.FFlagMomentsModeratedMomentPage)
 local createSignal = signalsModule.createSignal
 local t = { kind = "skeleton" }
 local t_1 = { kind = "endState" }
 
 return function(p1, p2, p3, p4)
-	-- upvalues: createPagerStoreModule (ref), fFlagMomentsOptimisticProfilePending (ref), createPendingFeedOverlayModule (ref), createSignal (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), fFlagMomentsContentStatsTelemetry (ref), analytics (ref), t_1 (ref), signalsExperimentalModule (ref), t (ref), momentsSurfaceLoadManager (ref), signalsModule (ref), getDeletedMomentsStoreModule (ref)
+	-- upvalues: createPagerStoreModule (ref), fFlagMomentsOptimisticProfilePending (ref), createPendingFeedOverlayModule (ref), createSignal (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), fFlagMomentsContentStatsTelemetry (ref), analytics (ref), t_1 (ref), signalsExperimentalModule (ref), t (ref), momentsSurfaceLoadManager (ref), fFlagMomentsLoadMoreKeepsPositionModule (ref), fFlagMomentsModeratedMomentPageModule (ref), signalsModule (ref), getDeletedMomentsStoreModule (ref)
 	local var1 = createPagerStoreModule()
 	local var2 = if fFlagMomentsOptimisticProfilePending and p1.getPendingItems ~= nil then createPendingFeedOverlayModule() else nil
 	local var3 = nil
@@ -237,9 +239,12 @@ return function(p1, p2, p3, p4)
 		local var37 = assert(var2, "initial identity resolution requires the pending overlay")
 		
 		for i, v in var1.getItems(false) do
-			if v.kind == "moment" and (var37.identity(v) == p8 or v.moment.momentId == p8) then
-				return i
+			if v.kind ~= "moment" or var37.identity(v) ~= p8 and v.moment.momentId ~= p8 then
+				if v.kind == "unavailableMoment" and v.targetId == p8 then
+					return i
+				end
 			end
+			return i
 		end
 		return nil
 	end
@@ -253,8 +258,8 @@ return function(p1, p2, p3, p4)
 		end
 	end
 	
-	local function runFetch(p9)
-		-- upvalues: var17 (write), var11 (ref), var19 (write), var16 (write), var14 (ref), analytics (copy), recommendationSource (ref), var10 (ref), commitItems (ref), t (copy), var2 (ref), findMomentIndex (ref), p1 (ref), var5 (ref), var8 (write), var1 (ref), var7 (ref), var20 (write), p4 (ref), var22 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var24 (write), t_3 (ref), p3 (ref), momentsSurfaceLoadManager (copy), var15 (write), t_2 (write), dedupeAndTrack (ref), var18 (write), var12 (ref), maybeAppendEndState (ref)
+	local function runFetch(p9, p10)
+		-- upvalues: var17 (write), var11 (ref), var19 (write), var16 (write), var14 (ref), analytics (copy), recommendationSource (ref), var10 (ref), commitItems (ref), t (copy), var2 (ref), findMomentIndex (ref), p1 (ref), var5 (ref), var8 (write), var1 (ref), var7 (ref), var20 (write), p4 (ref), var22 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var24 (write), t_3 (ref), p3 (ref), momentsSurfaceLoadManager (copy), fFlagMomentsLoadMoreKeepsPositionModule (copy), var15 (write), t_2 (write), dedupeAndTrack (ref), var18 (write), var12 (ref), fFlagMomentsModeratedMomentPageModule (copy), maybeAppendEndState (ref)
 		if var17 then return end
 		if not p9 and not var11(false) then return end
 		var19 += 1
@@ -309,7 +314,10 @@ return function(p1, p2, p3, p4)
 			end
 		else
 			analytics.reportMomentsFeedLoadMore("attempted", recommendationSource)
-			var1.addItems({ t })
+			
+			if not fFlagMomentsLoadMoreKeepsPositionModule or not p10 then
+				var1.addItems({ t })
+			end
 			var8 = "LoadingMore"
 			local var42 = var8
 			
@@ -331,7 +339,7 @@ return function(p1, p2, p3, p4)
 		end
 		local var44 = if p9 then nil else var15
 		task.spawn(function()
-			-- upvalues: p1 (copy), var44 (ref), var17 (copy), var38 (ref), var19 (copy), var16 (copy), p3 (copy), p9 (ref), sessionGeneration (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), commitItems (copy), var2 (copy), findMomentIndex (copy), var5 (copy), var1 (copy), var15 (copy), var18 (copy), var12 (copy), var8 (copy), var7 (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var10 (copy), var14 (copy)
+			-- upvalues: p1 (copy), var44 (ref), var17 (copy), var38 (ref), var19 (copy), var16 (copy), p3 (copy), p9 (ref), sessionGeneration (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), commitItems (copy), var2 (copy), findMomentIndex (copy), var5 (copy), var1 (copy), var15 (copy), var18 (copy), var12 (copy), var8 (copy), var7 (copy), analytics (copy), recommendationSource (copy), fFlagMomentsModeratedMomentPageModule (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var10 (copy), var14 (copy)
 			local ok, status = pcall(p1.fetchAsync, var44)
 			
 			if var17 or var38 ~= var19 then return end
@@ -400,7 +408,11 @@ return function(p1, p2, p3, p4)
 					analytics.reportMomentsFeedState(if var50 == "Loaded" then "loaded" else "empty", recommendationSource, nil)
 				end
 				if var45 then
-					if var50 == "Loaded" then
+					local currentItem = var1.getCurrentItem(false)
+					
+					if fFlagMomentsModeratedMomentPageModule and currentItem ~= nil and currentItem.kind == "unavailableMoment" then
+						momentsSurfaceLoadManager.abort("unavailable")
+					elseif var50 == "Loaded" then
 						momentsSurfaceLoadManager.primaryDataReady()
 					else
 						momentsSurfaceLoadManager.abort("empty")
@@ -492,7 +504,7 @@ return function(p1, p2, p3, p4)
 	end
 	
 	local function loadMore()
-		-- upvalues: var2 (ref), var19 (write), var9 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (ref), var21 (ref), var16 (write), var13 (ref), var17 (write), var11 (ref), var14 (ref), analytics (copy), recommendationSource (ref), var1 (ref), t (copy), var8 (write), var7 (ref), var15 (write), p1 (ref), p3 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), commitItems (ref), findMomentIndex (ref), var5 (ref), var18 (write), var12 (ref), maybeAppendEndState (ref), var10 (ref)
+		-- upvalues: var2 (ref), var19 (write), var9 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (ref), var21 (ref), var16 (write), var13 (ref), var17 (write), var11 (ref), var14 (ref), analytics (copy), recommendationSource (ref), fFlagMomentsLoadMoreKeepsPositionModule (copy), var1 (ref), t (copy), var8 (write), var7 (ref), var15 (write), p1 (ref), p3 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), commitItems (ref), findMomentIndex (ref), var5 (ref), var18 (write), var12 (ref), fFlagMomentsModeratedMomentPageModule (copy), maybeAppendEndState (ref), var10 (ref)
 		if var2 ~= nil and (var19 == 0 or var9(false) ~= nil) then return end
 		if fFlagMomentsNonInfiniteScrollEndStateFixesModule then
 			if p4 ~= nil and var21(false) then return end
@@ -527,7 +539,7 @@ return function(p1, p2, p3, p4)
 		var7(var60)
 		local var62 = false
 		task.spawn(function()
-			-- upvalues: p1 (copy), var15 (ref), var17 (copy), var58 (ref), var19 (copy), var16 (copy), p3 (copy), var62 (ref), var59 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), commitItems (copy), var2 (copy), findMomentIndex (copy), var5 (copy), var1 (copy), var15 (copy), var18 (copy), var12 (copy), var8 (copy), var7 (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var10 (copy), var14 (copy)
+			-- upvalues: p1 (copy), var15 (ref), var17 (copy), var58 (ref), var19 (copy), var16 (copy), p3 (copy), var62 (ref), var59 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), commitItems (copy), var2 (copy), findMomentIndex (copy), var5 (copy), var1 (copy), var15 (copy), var18 (copy), var12 (copy), var8 (copy), var7 (copy), analytics (copy), recommendationSource (copy), fFlagMomentsModeratedMomentPageModule (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var10 (copy), var14 (copy)
 			local ok, status = pcall(p1.fetchAsync, var15)
 			
 			if var17 or var58 ~= var19 then return end
@@ -596,7 +608,11 @@ return function(p1, p2, p3, p4)
 					analytics.reportMomentsFeedState(if var68 == "Loaded" then "loaded" else "empty", recommendationSource, nil)
 				end
 				if var63 then
-					if var68 == "Loaded" then
+					local currentItem = var1.getCurrentItem(false)
+					
+					if fFlagMomentsModeratedMomentPageModule and currentItem ~= nil and currentItem.kind == "unavailableMoment" then
+						momentsSurfaceLoadManager.abort("unavailable")
+					elseif var68 == "Loaded" then
 						momentsSurfaceLoadManager.primaryDataReady()
 					else
 						momentsSurfaceLoadManager.abort("empty")
@@ -683,199 +699,145 @@ return function(p1, p2, p3, p4)
 	end
 	
 	local function loadBeyondLimit()
-		-- upvalues: var17 (write), p4 (ref), var21 (ref), var11 (ref), t_3 (ref), var1 (ref), var20 (write), var22 (ref), maybeAppendEndState (ref), var19 (write), var16 (write), var14 (ref), analytics (copy), recommendationSource (ref), t (copy), var8 (write), var2 (ref), var7 (ref), var15 (write), p1 (ref), p3 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), commitItems (ref), findMomentIndex (ref), var5 (ref), var18 (write), var12 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var10 (ref)
+		-- upvalues: var17 (write), p4 (ref), var21 (ref), var11 (ref), t_3 (ref), var1 (ref), fFlagMomentsLoadMoreKeepsPositionModule (copy), var20 (write), var22 (ref), maybeAppendEndState (ref), t (copy), var19 (write), var16 (write), var14 (ref), analytics (copy), recommendationSource (ref), var8 (write), var2 (ref), var7 (ref), var15 (write), p1 (ref), p3 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), commitItems (ref), findMomentIndex (ref), var5 (ref), var18 (write), var12 (ref), fFlagMomentsModeratedMomentPageModule (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var10 (ref)
 		if var17 or p4 == nil or not var21(false) then return end
 		if not var11(false) and #t_3 == 0 then return end
+		local var76
 		local items = var1.getItems(false)
-		local var76 = items[#items]
+		local cloned = table.clone(items)
+		local var77 = cloned[#cloned]
+		local var78 = var77 ~= nil and var77.kind == "endState"
 		
-		if var76 ~= nil and var76.kind == "endState" then
+		if var78 then
+			table.remove(cloned)
+		end
+		if fFlagMomentsLoadMoreKeepsPositionModule and var78 then
+			var1.goToItem(#items)
+		end
+		if not fFlagMomentsLoadMoreKeepsPositionModule and var78 then
 			var1.removeItem(#items)
 		end
-		local var77 = 0
-		
-		for i, v in var1.getItems(false) do
-			if v.kind ~= "skeleton" and v.kind ~= "endState" then
-				var77 += 1
+		if fFlagMomentsLoadMoreKeepsPositionModule then
+			local var79 = 0
+			
+			for i, v in cloned do
+				if v.kind ~= "skeleton" and v.kind ~= "endState" then
+					var79 += 1
+				end
 			end
+			var76 = var79 + p4
+		else
+			local var80 = 0
+			
+			for i, v in var1.getItems(false) do
+				if v.kind ~= "skeleton" and v.kind ~= "endState" then
+					var80 += 1
+				end
+			end
+			var76 = var80 + p4
 		end
-		var20 = var77 + p4
+		var20 = var76
 		var22(false)
+		local var81 = false
 		
 		if #t_3 > 0 then
-			local cloned = table.clone(var1.getItems(false))
-			
-			for i_1, v_1 in t_3 do
-				table.insert(cloned, v_1)
+			if not fFlagMomentsLoadMoreKeepsPositionModule then
+				cloned = table.clone(var1.getItems(false))
+			end
+			for i, v in t_3 do
+				table.insert(cloned, v)
 			end
 			table.clear(t_3)
 			var1.setItems(cloned)
 			maybeAppendEndState()
 			
 			if var21(false) then return end
+		elseif fFlagMomentsLoadMoreKeepsPositionModule then
+			table.insert(cloned, t)
+			var1.setItems(cloned)
+			var81 = true
 		end
+		local var82 = if fFlagMomentsLoadMoreKeepsPositionModule then var81 else nil
+		
 		if var17 then return end
 		if not var11(false) then return end
 		var19 += 1
-		local var78 = var19
+		local var83 = var19
 		var16 = true
 		var14(false)
-		local var79 = nil
+		local var84 = nil
 		analytics.reportMomentsFeedLoadMore("attempted", recommendationSource)
-		var1.addItems({ t })
+		
+		if not fFlagMomentsLoadMoreKeepsPositionModule or not var82 then
+			var1.addItems({ t })
+		end
 		var8 = "LoadingMore"
-		local var80 = var8
+		local var85 = var8
 		
 		if var2 ~= nil then
-			local var81 = 0
+			local var86 = 0
 			
-			for i_1, v_1 in var1.getItems(false) do
-				if v_1.kind ~= "skeleton" and v_1.kind ~= "endState" then
-					var81 += 1
+			for i, v in var1.getItems(false) do
+				if v.kind ~= "skeleton" and v.kind ~= "endState" then
+					var86 += 1
 				end
 			end
-			if var81 > 0 then
-				var80 = if var8 == "LoadingMore" then "LoadingMore" else "Loaded"
+			if var86 > 0 then
+				var85 = if var8 == "LoadingMore" then "LoadingMore" else "Loaded"
 			elseif var8 == "Loaded" then
-				var80 = "Empty"
+				var85 = "Empty"
 			end
 		end
-		var7(var80)
-		local var82 = false
+		var7(var85)
+		local var87 = false
 		task.spawn(function()
-			-- upvalues: p1 (copy), var15 (ref), var17 (copy), var78 (ref), var19 (copy), var16 (copy), p3 (copy), var82 (ref), var79 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), commitItems (copy), var2 (copy), findMomentIndex (copy), var5 (copy), var1 (copy), var15 (copy), var18 (copy), var12 (copy), var8 (copy), var7 (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var10 (copy), var14 (copy)
+			-- upvalues: p1 (copy), var15 (ref), var17 (copy), var83 (ref), var19 (copy), var16 (copy), p3 (copy), var87 (ref), var84 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), commitItems (copy), var2 (copy), findMomentIndex (copy), var5 (copy), var1 (copy), var15 (copy), var18 (copy), var12 (copy), var8 (copy), var7 (copy), analytics (copy), recommendationSource (copy), fFlagMomentsModeratedMomentPageModule (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var10 (copy), var14 (copy)
 			local ok, status = pcall(p1.fetchAsync, var15)
 			
-			if var17 or var78 ~= var19 then return end
+			if var17 or var83 ~= var19 then return end
 			var16 = false
-			local var83 = p3 and (var82 and (var79 ~= nil and momentsSurfaceLoadManager.getSessionGeneration() == var79))
+			local var88 = p3 and (var87 and (var84 ~= nil and momentsSurfaceLoadManager.getSessionGeneration() == var84))
 			
-			if var83 then
+			if var88 then
 				momentsSurfaceLoadManager.primaryDataResponseReceived()
 			end
-			local var84 = if ok and type(status) == "table" and type(status.items) == "table" then status else nil
+			local var89 = if ok and type(status) == "table" and type(status.items) == "table" then status else nil
 			
-			if var84 ~= nil then
-				local var85
+			if var89 ~= nil then
+				local var90
 				local _ = nil
 				
-				if var82 then
+				if var87 then
 					t_2 = {}
-					var85 = dedupeAndTrack(var84.items)
-					commitItems(var85)
+					var90 = dedupeAndTrack(var89.items)
+					commitItems(var90)
 					
 					if var2 ~= nil then
 						var5(findMomentIndex(p1.initialMomentId))
-						local var86 = findMomentIndex(var84.initialMomentId)
+						local var91 = findMomentIndex(var89.initialMomentId)
 						
-						if var86 ~= nil then
-							var1.goToItem(var86)
+						if var91 ~= nil then
+							var1.goToItem(var91)
 						end
 					end
 				else
-					var85 = dedupeAndTrack(var84.items)
+					var90 = dedupeAndTrack(var89.items)
 					local cloned = table.clone(var1.getItems(false))
-					local var87 = cloned[#cloned]
+					local var92 = cloned[#cloned]
 					
-					if var87 ~= nil and var87.kind == "skeleton" then
+					if var92 ~= nil and var92.kind == "skeleton" then
 						table.remove(cloned)
 					end
-					for i, v in var85 do
+					for i, v in var90 do
 						table.insert(cloned, v)
 					end
 					commitItems(cloned)
 				end
-				var15 = var84.nextCursor
-				var18 = if var82 or #var85 ~= 0 then 0 else var18 + 1
-				var12(var84.nextCursor ~= nil and var18 < 3)
-				local var88 = if var1.getCount(false) == 0 then "Empty" else "Loaded"
-				var8 = var88
-				local var89 = var8
-				
-				if var2 ~= nil then
-					local var90 = 0
-					
-					for i, v in var1.getItems(false) do
-						if v.kind ~= "skeleton" and v.kind ~= "endState" then
-							var90 += 1
-						end
-					end
-					if var90 > 0 then
-						var89 = if var8 == "LoadingMore" then "LoadingMore" else "Loaded"
-					elseif var8 == "Loaded" then
-						var89 = "Empty"
-					end
-				end
-				var7(var89)
-				
-				if var82 then
-					analytics.reportMomentsFeedState(if var88 == "Loaded" then "loaded" else "empty", recommendationSource, nil)
-				end
-				if var83 then
-					if var88 == "Loaded" then
-						momentsSurfaceLoadManager.primaryDataReady()
-					else
-						momentsSurfaceLoadManager.abort("empty")
-					end
-				end
-				if var84.onAccepted ~= nil then
-					var84.onAccepted()
-				end
-				if fFlagMomentsNonInfiniteScrollEndStateFixesModule then
-					if p4 == nil then
-						return
-					else
-						maybeAppendEndState()
-						
-						return
-					end
-				else
-					maybeAppendEndState()
-					
-					return
-				end
-			elseif var82 then
-				if var2 == nil then
-					var1.reset()
-				else
-					commitItems({})
-					var5(findMomentIndex(p1.initialMomentId))
-				end
-				var10(if ok then "Malformed feed batch" else tostring(status))
-				var8 = "Failed"
-				local var91 = var8
-				
-				if var2 ~= nil then
-					local var92 = 0
-					
-					for i, v in var1.getItems(false) do
-						if v.kind ~= "skeleton" and v.kind ~= "endState" then
-							var92 += 1
-						end
-					end
-					if var92 > 0 then
-						var91 = if var8 == "LoadingMore" then "LoadingMore" else "Loaded"
-					elseif var8 == "Loaded" then
-						var91 = "Empty"
-					end
-				end
-				var7(var91)
-				analytics.reportMomentsFeedState("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
-				
-				if var83 then
-					momentsSurfaceLoadManager.abort("failed")
-					
-					return
-				end
-			else
-				local items = var1.getItems(false)
-				local var93 = items[#items]
-				
-				if var93 ~= nil and var93.kind == "skeleton" then
-					var1.removeItem(#items)
-				end
-				var14(true)
-				var8 = if var1.getCount(false) == 0 then "Empty" else "Loaded"
+				var15 = var89.nextCursor
+				var18 = if var87 or #var90 ~= 0 then 0 else var18 + 1
+				var12(var89.nextCursor ~= nil and var18 < 3)
+				local var93 = if var1.getCount(false) == 0 then "Empty" else "Loaded"
+				var8 = var93
 				local var94 = var8
 				
 				if var2 ~= nil then
@@ -893,37 +855,127 @@ return function(p1, p2, p3, p4)
 					end
 				end
 				var7(var94)
+				
+				if var87 then
+					analytics.reportMomentsFeedState(if var93 == "Loaded" then "loaded" else "empty", recommendationSource, nil)
+				end
+				if var88 then
+					local currentItem = var1.getCurrentItem(false)
+					
+					if fFlagMomentsModeratedMomentPageModule and currentItem ~= nil and currentItem.kind == "unavailableMoment" then
+						momentsSurfaceLoadManager.abort("unavailable")
+					elseif var93 == "Loaded" then
+						momentsSurfaceLoadManager.primaryDataReady()
+					else
+						momentsSurfaceLoadManager.abort("empty")
+					end
+				end
+				if var89.onAccepted ~= nil then
+					var89.onAccepted()
+				end
+				if fFlagMomentsNonInfiniteScrollEndStateFixesModule then
+					if p4 == nil then
+						return
+					else
+						maybeAppendEndState()
+						
+						return
+					end
+				else
+					maybeAppendEndState()
+					
+					return
+				end
+			elseif var87 then
+				if var2 == nil then
+					var1.reset()
+				else
+					commitItems({})
+					var5(findMomentIndex(p1.initialMomentId))
+				end
+				var10(if ok then "Malformed feed batch" else tostring(status))
+				var8 = "Failed"
+				local var96 = var8
+				
+				if var2 ~= nil then
+					local var97 = 0
+					
+					for i, v in var1.getItems(false) do
+						if v.kind ~= "skeleton" and v.kind ~= "endState" then
+							var97 += 1
+						end
+					end
+					if var97 > 0 then
+						var96 = if var8 == "LoadingMore" then "LoadingMore" else "Loaded"
+					elseif var8 == "Loaded" then
+						var96 = "Empty"
+					end
+				end
+				var7(var96)
+				analytics.reportMomentsFeedState("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
+				
+				if var88 then
+					momentsSurfaceLoadManager.abort("failed")
+					
+					return
+				end
+			else
+				local items = var1.getItems(false)
+				local var98 = items[#items]
+				
+				if var98 ~= nil and var98.kind == "skeleton" then
+					var1.removeItem(#items)
+				end
+				var14(true)
+				var8 = if var1.getCount(false) == 0 then "Empty" else "Loaded"
+				local var99 = var8
+				
+				if var2 ~= nil then
+					local var100 = 0
+					
+					for i, v in var1.getItems(false) do
+						if v.kind ~= "skeleton" and v.kind ~= "endState" then
+							var100 += 1
+						end
+					end
+					if var100 > 0 then
+						var99 = if var8 == "LoadingMore" then "LoadingMore" else "Loaded"
+					elseif var8 == "Loaded" then
+						var99 = "Empty"
+					end
+				end
+				var7(var99)
 				analytics.reportMomentsFeedLoadMore("failed", recommendationSource, if ok then "malformedResponse" else "requestFailed")
 			end
 		end)
 	end
 	
-	local function prependItem(p10)
+	local function prependItem(p11)
 		-- upvalues: dedupeAndTrack (ref), var1 (ref), var6 (ref), var8 (write), var2 (ref), var7 (ref)
-		local var96 = dedupeAndTrack({ p10 })
+		local var101 = dedupeAndTrack({ p11 })
 		
-		if #var96 == 0 then return end
-		var1.addItemAt(1, var96[1])
+		if #var101 == 0 then return end
+		var1.addItemAt(1, var101[1])
 		
 		if var6(false) == "Empty" then
 			var8 = "Loaded"
-			local var97 = var8
+			local var102 = var8
 			
 			if var2 ~= nil then
-				local var98 = 0
+				local var103 = 0
 				
 				for i, v in var1.getItems(false) do
 					if v.kind ~= "skeleton" and v.kind ~= "endState" then
-						var98 += 1
+						var103 += 1
 					end
 				end
-				if var98 > 0 then
-					var97 = if var8 == "LoadingMore" then "LoadingMore" else "Loaded"
+				if var103 > 0 then
+					var102 = if var8 == "LoadingMore" then "LoadingMore" else "Loaded"
 				elseif var8 == "Loaded" then
-					var97 = "Empty"
+					var102 = "Empty"
 				end
 			end
-			var7(var97)
+			var7(var102)
 		end
 	end
 	
@@ -955,9 +1007,9 @@ return function(p1, p2, p3, p4)
 			var5(1e999)
 		end
 		local getPendingItems = p1.getPendingItems
-		var3 = signalsModule.createEffect(function(p11)
+		var3 = signalsModule.createEffect(function(p12)
 			-- upvalues: var2 (ref), getPendingItems (ref), getDeletedMomentsStoreModule (copy), var1 (ref), t_3 (ref), signalsExperimentalModule (copy), commitItems (ref), findMomentIndex (ref), p1 (ref), var5 (ref), var22 (ref), maybeAppendEndState (ref), var8 (write), var2 (ref), var7 (ref)
-			local var99 = var2.update(getPendingItems(p11), getDeletedMomentsStoreModule(false).getDeletedIds(p11))
+			local var104 = var2.update(getPendingItems(p12), getDeletedMomentsStoreModule(false).getDeletedIds(p12))
 			local cloned = table.clone(var1.getItems(false))
 			
 			for i, v in t_3 do
@@ -969,35 +1021,35 @@ return function(p1, p2, p3, p4)
 				end
 			end
 			signalsExperimentalModule.batch(function()
-				-- upvalues: commitItems (copy), cloned (ref), t_3 (copy), findMomentIndex (copy), p1 (copy), var5 (copy), var22 (copy), maybeAppendEndState (copy), var8 (copy), var2 (copy), var1 (copy), var7 (copy), var99 (ref)
+				-- upvalues: commitItems (copy), cloned (ref), t_3 (copy), findMomentIndex (copy), p1 (copy), var5 (copy), var22 (copy), maybeAppendEndState (copy), var8 (copy), var2 (copy), var1 (copy), var7 (copy), var104 (ref)
 				commitItems(cloned)
 				table.clear(t_3)
-				local var100 = findMomentIndex(p1.initialMomentId)
+				local var105 = findMomentIndex(p1.initialMomentId)
 				
-				if var100 ~= nil then
-					var5(var100)
+				if var105 ~= nil then
+					var5(var105)
 				end
 				var22(false)
 				maybeAppendEndState()
-				local var101 = var8
+				local var106 = var8
 				
 				if var2 ~= nil then
-					local var102 = 0
+					local var107 = 0
 					
 					for i, v in var1.getItems(false) do
 						if v.kind ~= "skeleton" and v.kind ~= "endState" then
-							var102 += 1
+							var107 += 1
 						end
 					end
-					if var102 > 0 then
-						var101 = if var8 == "LoadingMore" then "LoadingMore" else "Loaded"
+					if var107 > 0 then
+						var106 = if var8 == "LoadingMore" then "LoadingMore" else "Loaded"
 					elseif var8 == "Loaded" then
-						var101 = "Empty"
+						var106 = "Empty"
 					end
 				end
-				var7(var101)
+				var7(var106)
 				
-				if var99 and p1.recommendationSource == "Trending" then
+				if var104 and p1.recommendationSource == "Trending" then
 					var1.goToItem(1)
 				end
 			end)

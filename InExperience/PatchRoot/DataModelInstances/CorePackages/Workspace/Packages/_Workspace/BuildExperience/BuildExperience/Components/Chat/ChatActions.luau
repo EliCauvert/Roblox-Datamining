@@ -31,7 +31,7 @@ return function(p1)
 		var10 = reactModule.useRef(nil)
 		var11 = reactModule.useRef(false)
 	end
-	local var12 = fFlagBuildExperienceChatImageAttachmentsModule and var1()
+	local var12 = fFlagBuildExperienceChatImageAttachmentsModule and (p1.allowImageAttachments ~= false and var1())
 	
 	local function setCapturedImages(value)
 		-- upvalues: p1 (ref), images (ref)

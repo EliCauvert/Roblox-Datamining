@@ -46,6 +46,7 @@ local robuxUpsellOverlayModule = require(script.Parent.RobuxUpsellOverlay)
 local appPage = require(parent.RobloxAppEnums).AppPage
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableInExperienceOffersPurchaseFlow = sharedFlagsModule.FFlagEnableInExperienceOffersPurchaseFlow
+local fFlagLuaAppsEnablePromptVIPServerPurchase = sharedFlagsModule.FFlagLuaAppsEnablePromptVIPServerPurchase
 local fFlagEnableRobuxUpsellPlusButtonExperiment = IAPExperienceModule.Flags.FFlagEnableRobuxUpsellPlusButtonExperiment
 local fFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal = sharedFlagsModule.FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
@@ -132,7 +133,7 @@ function name.isRobuxUpsellModalVisible(p1)
 end
 
 function name.createElement(p1)
-	-- upvalues: getUpsellSuggestionsTypes (ref), getBlackbirdUpsellBannerProductInfoModule (ref), purchaseFlowModule (ref), fFlagEnableRobuxUpsellPlusButtonExperiment (ref), promptStateModule (ref), isLinksAllowedModule (ref), roact (ref), robuxUpsellOverlayModule (ref), upsellSuggestionsAPIMaxPackages (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), getPlayerPriceModule (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), externalEventConnectionModule (ref), guiService (ref), fFlagSetMenuOnPurchasePromptModule (ref)
+	-- upvalues: getUpsellSuggestionsTypes (ref), getBlackbirdUpsellBannerProductInfoModule (ref), purchaseFlowModule (ref), fFlagEnableRobuxUpsellPlusButtonExperiment (ref), promptStateModule (ref), isLinksAllowedModule (ref), roact (ref), robuxUpsellOverlayModule (ref), upsellSuggestionsAPIMaxPackages (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref), getPlayerPriceModule (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), externalEventConnectionModule (ref), guiService (ref), fFlagSetMenuOnPurchasePromptModule (ref)
 	local props = p1.props
 	local state = p1.state
 	local var1 = (if p1:isRobuxUpsellModalVisible() then p1:getRobloxPlusPromptKey() else nil) ~= nil and (props.isUserEligibleForUnifiedPurchaseFlow and props.experimentVariant == getUpsellSuggestionsTypes.ExperimentVariant.PlusPromotion)
@@ -178,6 +179,7 @@ function name.createElement(p1)
 			setPostPurchaseActions = if fFlagPurchasePromptCartPricingEnabledModule then props.setPostPurchaseActions else nil,
 			onRobloxPlusButtonActivated = if var1 then p1.openRobloxPlusUpsell else nil,
 			robloxPlusDiscountPercentage = var4,
+			isMonthlyPrice = if fFlagLuaAppsEnablePromptVIPServerPurchase then props.productInfo.isMonthlyPrice else nil,
 			robuxProviderId = props.robuxProductId,
 			robuxProductId = props.productId,
 			itemIcon = if string.find(props.productInfo.imageUrl, "assetid=0") then nil else props.productInfo.imageUrl,

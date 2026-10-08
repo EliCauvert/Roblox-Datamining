@@ -33,13 +33,13 @@ local arrowThickToRight = builderIconsModule.Icon.ArrowThickToRight
 local speechBubbleAlignLeft = builderIconsModule.Icon.SpeechBubbleAlignLeft
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactUtilsModule (ref), momentContextModule (ref), fFlagMomentsEngagementMetricsFeature (ref), sharedFlagsModule (ref), useSignalState (ref), getMomentsCapabilities (ref), useShareMomentModule (ref), useSignalBinding (ref), fFlagMomentsComments (ref), fFlagMomentsOptimisticProfilePending (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), useConfigurationModule (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), useCommentCapabilitiesModule (ref), fFlagMomentsCommentsIxpEnabled (ref), useCommentActionImpressionModule (ref), reactModule (ref), reactionButtonModule (ref), railItemModule (ref), speechBubbleAlignLeft (ref), arrowThickToRight (ref), contextualMenuModule (ref), fFlagMomentsActionRailSpacingModule (ref), fFlagMomentsActionRailNarrowWidthModule (ref), view (ref)
+	-- upvalues: reactUtilsModule (ref), momentContextModule (ref), fFlagMomentsEngagementMetricsFeature (ref), useSignalState (ref), getMomentsCapabilities (ref), useShareMomentModule (ref), useSignalBinding (ref), fFlagMomentsComments (ref), fFlagMomentsOptimisticProfilePending (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), useConfigurationModule (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), useCommentCapabilitiesModule (ref), fFlagMomentsCommentsIxpEnabled (ref), useCommentActionImpressionModule (ref), reactModule (ref), reactionButtonModule (ref), railItemModule (ref), speechBubbleAlignLeft (ref), arrowThickToRight (ref), contextualMenuModule (ref), fFlagMomentsActionRailSpacingModule (ref), fFlagMomentsActionRailNarrowWidthModule (ref), view (ref)
 	local var1 = reactUtilsModule.createNextOrder()
 	local var2 = momentContextModule.useMoment()
 	local store = var2.store
 	local data = store.getData(false)
 	local isAd = data.kind == "ad"
-	local var3 = if fFlagMomentsEngagementMetricsFeature and sharedFlagsModule.FFlagGuacMomentsFeatureList then useSignalState(getMomentsCapabilities(false).getIsEngagementMetricsEnabled) else nil
+	local var3 = if fFlagMomentsEngagementMetricsFeature then useSignalState(getMomentsCapabilities(false).getIsEngagementMetricsEnabled) else nil
 	local var4 = useShareMomentModule(p1.moment)
 	local animationRatio = var2.animationRatio
 	local var5 = useSignalBinding(store.getShareCount)
@@ -77,7 +77,7 @@ return reactModule.memo(function(p1)
 			testId = "moments-comment-button",
 			LayoutOrder = var1(),
 			slot = speechBubbleAlignLeft,
-			count = if fFlagMomentsEngagementMetricsFeature and sharedFlagsModule.FFlagGuacMomentsFeatureList and not var3 then nil else var6,
+			count = if fFlagMomentsEngagementMetricsFeature and not var3 then nil else var6,
 			countIsCapped = var15 ~= nil and var15.countIsCapped == true,
 			animationRatio = animationRatio,
 			isDisabled = var8,
@@ -93,7 +93,7 @@ return reactModule.memo(function(p1)
 		t.Share = reactModule.createElement(railItemModule, {
 			LayoutOrder = var1(),
 			slot = arrowThickToRight,
-			count = if fFlagMomentsEngagementMetricsFeature and sharedFlagsModule.FFlagGuacMomentsFeatureList and not var3 then nil else var5,
+			count = if fFlagMomentsEngagementMetricsFeature and not var3 then nil else var5,
 			animationRatio = animationRatio,
 			isDisabled = var10,
 			onActivated = var4.onShareActivated

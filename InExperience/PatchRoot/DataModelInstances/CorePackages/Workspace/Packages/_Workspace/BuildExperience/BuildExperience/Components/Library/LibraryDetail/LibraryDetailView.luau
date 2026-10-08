@@ -7,6 +7,7 @@ local _ = require(buildExperience.Components.Chat.ChatComposer)
 local _ = require(buildExperience.Components.Library.LibraryTypes)
 local modelViewportModule = require(buildExperience.Components.Library.ModelViewport)
 local libraryAudioPlayerContainerModule = require(buildExperience.Components.Library.LibraryAudioPlayer.LibraryAudioPlayerContainer)
+local useHardwareInsetsModule = require(buildExperience.Components.ChatSheet.useHardwareInsets)
 local image = foundationModule.Image
 local skeleton = foundationModule.Skeleton
 local scrollView = foundationModule.ScrollView
@@ -15,7 +16,8 @@ local view = foundationModule.View
 local radius = foundationModule.Enums.Radius
 
 return function(p1)
-	-- upvalues: reactModule (ref), view (ref), modelViewportModule (ref), text (ref), image (ref), scrollView (ref), libraryAudioPlayerContainerModule (ref), skeleton (ref), radius (ref), chatActionsModule (ref)
+	-- upvalues: useHardwareInsetsModule (ref), reactModule (ref), view (ref), modelViewportModule (ref), text (ref), image (ref), scrollView (ref), libraryAudioPlayerContainerModule (ref), skeleton (ref), radius (ref), chatActionsModule (ref)
+	local bottom = useHardwareInsetsModule().bottom
 	local var1, var2 = reactModule.useState(false)
 	local var3 = reactModule.useCallback(function(p2)
 		-- upvalues: var2 (ref)
@@ -29,7 +31,7 @@ return function(p1)
 		var5.allowsTypingWhileResponding = true
 		local onSend = var5.onSend
 		
-		function var10.onSend()
+		function var11.onSend()
 			-- upvalues: onSend (ref), var4 (ref)
 			local var6 = onSend()
 			
@@ -47,7 +49,9 @@ return function(p1)
 		testId = "Library.Preview",
 		onAbsolutePositionChanged = p1.onPageMetricsChanged,
 		onAbsoluteSizeChanged = p1.onPageMetricsChanged,
-		padding = { bottom = UDim.new(0, p1.keyboardOverlap or 0) }
+		padding = {
+			bottom = UDim.new(0, math.max(p1.keyboardOverlap or 0, bottom))
+		}
 	}, {
 		Content = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill size-full-0" }, {
 			Body = if p1.status == "Ready" and liveModel ~= nil then reactModule.createElement(view, {

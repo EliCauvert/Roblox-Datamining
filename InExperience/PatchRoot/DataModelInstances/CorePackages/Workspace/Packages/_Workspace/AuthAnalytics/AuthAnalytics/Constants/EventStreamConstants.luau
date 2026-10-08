@@ -72,6 +72,7 @@
 		PlayNow = "playNow",
 		GoogleSso = "googleSso",
 		AppleSso = "appleSso",
+		OtherSignInOptions = "otherSignInOptions",
 		AccountPickerSignInAnotherAccount = "accountPickerSignInAnotherAccount",
 		AccountPickerCreateAccount = "accountPickerCreateAccount",
 		AccountPickerMoreOptions = "accountPickerMoreOptions",
@@ -121,7 +122,9 @@
 		BirthdayPicker = "birthdayPicker",
 		BirthdayPickerAgeCalculatorShown = "birthdayPickerAgeCalculatorShown",
 		LoginV2Modal = "loginV2Modal",
-		LoginV2QuickLoginModal = "loginV2QuickLoginModal"
+		LoginV2QuickLoginModal = "loginV2QuickLoginModal",
+		LoginV2OtherSignInOptionsModal = "loginV2OtherSignInOptionsModal",
+		LoginOtherSignInOptionsModal = "loginOtherSignInOptionsModal"
 	},
 	Context = {
 		AccountPickerLandingScreen = "accountPickerLandingScreen",
@@ -158,6 +161,7 @@
 		AccountSwitcherMismatch = "accountSwitcherMismatch",
 		AccountLinking = "accountLinking",
 		AccountUpgrade = "accountUpgrade",
+		AccountUpgradeCloseWarning = "accountUpgradeCloseWarning",
 		PasskeyLogin = "passkeyLogin",
 		PasskeySignup = "passkeySignup",
 		SignupPasskeyCreated = "signupPasskeyCreated",
@@ -211,7 +215,8 @@
 		SignupEmailOnAddAuthMethod = "signupEmailOnAddAuthMethod",
 		AddAuthMethodPage = "addAuthMethodPage",
 		PlatformRestrictedPage = "platformRestrictedPage",
-		KISAU14Signup = "kisaU14Signup"
+		KISAU14Signup = "kisaU14Signup",
+		BirthdayComplianceUnblockWait = "birthdayComplianceUnblockWait"
 	},
 	ActionType = {
 		Submit = "submit",
@@ -226,7 +231,10 @@
 		MoreMenu = "moreMenu",
 		FlyoutSidePanel = "flyoutSidePanel",
 		LoginV2Fullscreen = "loginV2Fullscreen",
-		LoginV2Modalized = "loginV2Modalized"
+		LoginV2Modalized = "loginV2Modalized",
+		DesktopSignupDialog = "desktopSignupDialog",
+		AccountUpgradeOAuthDialog = "accountUpgradeOAuthDialog",
+		AccountUpgradeOAuthFullPage = "accountUpgradeOAuthFullPage"
 	},
 	AuthEventName = {
 		AuthButtonShown = "authButtonShown",
@@ -290,7 +298,11 @@
 		Diagnostic401WebviewClosedExpired = "diagnostic401_webviewClosedExpired",
 		Diagnostic401WebviewNeverOpened = "diagnostic401_webviewNeverOpened",
 		SkipVPC = "skipVPC",
-		LaunchParentSignUpOtp = "launchParentSignUpOtp"
+		LaunchParentSignUpOtp = "launchParentSignUpOtp",
+		GatewayUnblocked = "gatewayUnblocked",
+		GatewayRetriesExhausted = "gatewayRetriesExhausted",
+		GatewayProbeFailed = "gatewayProbeFailed",
+		FetchAccessStatusError = "fetchAccessStatusError"
 	},
 	EventTimingKeys = { OsClock = "os_clock", OsTime = "os_time" }
 }

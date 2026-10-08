@@ -2,7 +2,6 @@
 local _ = require(_script.types)
 
 return {
-	FFlagRobloxPlusFAEFreeTrial = require(_script.Flags.FFlagRobloxPlusFAEFreeTrial),
 	initiateRobloxSubscriptionPurchase = require(script.Flows.initiateRobloxSubscriptionPurchase),
 	startRobloxSubscriptionPurchaseFromUpsell = require(script.Flows.startRobloxSubscriptionPurchaseFromUpsell),
 	SurfaceContext = require(_script.Enums.SurfaceContext),
@@ -11,7 +10,8 @@ return {
 	RobloxSubscriptionFlowCompleteReason = require(_script.Enums.RobloxSubscriptionFlowCompleteReason),
 	SubscriptionGrantType = require(_script.Enums.SubscriptionGrantType),
 	Components = {
-		BlackbirdUpsellBanner = require(_script.Components.BlackbirdUpsellBanner)
+		BlackbirdUpsellBanner = require(_script.Components.BlackbirdUpsellBanner),
+		RobloxPlusUpsellBanner = require(_script.Components.RobloxPlusUpsellBanner)
 	},
 	Network = {
 		getRobloxSubscriptionProducts = require(_script.Network.getRobloxSubscriptionProducts),

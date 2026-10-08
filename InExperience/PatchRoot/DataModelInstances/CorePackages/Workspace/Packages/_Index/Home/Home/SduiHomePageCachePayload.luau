@@ -2,7 +2,6 @@
 local appPage = require(parent.RobloxAppEnums).AppPage
 local homeOmniFeedCache = require(parent.DiscoveryUtils).HomeOmniFeedCache
 local getSduiTemplateStore = require(parent.SduiSharedUtilities).getSduiTemplateStore
-local fFlagSduiClientTemplateCache = require(parent.SharedFlags).FFlagSduiClientTemplateCache
 local t = { universe = { "player_count" } }
 
 local function _(p1)
@@ -274,8 +273,7 @@ local function pruneHydration(p12, p13)
 end
 
 local function fillMissingTemplatesFromStore(p14)
-	-- upvalues: fFlagSduiClientTemplateCache (ref), getSduiTemplateStore (ref), appPage (ref), parent (ref)
-	if not fFlagSduiClientTemplateCache then return end
+	-- upvalues: getSduiTemplateStore (ref), appPage (ref), parent (ref)
 	local var12 = getSduiTemplateStore()
 	local cachedRobloxComponentToTemplateId = var12.getCachedRobloxComponentToTemplateId(appPage.Home)
 	

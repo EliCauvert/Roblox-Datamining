@@ -31,11 +31,12 @@ local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.Parent.SharedFla
 local fFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local fFlagEnableOffersOnInExperienceSurface = require(parent.Parent.SharedFlags).FFlagEnableOffersOnInExperienceSurface
 local fFlagOffersOnlyAffordableLock = require(parent.Parent.SharedFlags).FFlagOffersOnlyAffordableLock
+local fFlagLuaAppsEnablePromptVIPServerPurchase = require(parent.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local _ = require(parent.ProductPurchase.PricingTypes)
 local blackbirdUpsellBanner = require(parent_1.RobloxSubscriptionPurchaseApp).Components.BlackbirdUpsellBanner
 
 local function UnifiedProductPurchaseModal(p1)
-	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), urlBuilder (ref), unifiedPurchaseModalTypeEnumModule (ref), reactModule (ref), useInitialButtonDisableDelayModule (ref), fFlagEnableOffersOnInExperienceSurface (ref), useCartPricingModule (ref), fFlagOffersOnlyAffordableLock (ref), useFocusNavigationRefsModule (ref), checkbox (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), text (ref), cartPricingProductDetailsModule (ref), productDetailsContainerModule (ref), sheet (ref), unifiedPurchaseModalHeaderModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), blackbirdUpsellBanner (ref)
+	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref), urlBuilder (ref), unifiedPurchaseModalTypeEnumModule (ref), reactModule (ref), useInitialButtonDisableDelayModule (ref), fFlagEnableOffersOnInExperienceSurface (ref), useCartPricingModule (ref), fFlagOffersOnlyAffordableLock (ref), useFocusNavigationRefsModule (ref), checkbox (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), text (ref), cartPricingProductDetailsModule (ref), productDetailsContainerModule (ref), sheet (ref), unifiedPurchaseModalHeaderModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), blackbirdUpsellBanner (ref)
 	local var1 = useLocalization({
 		Buy = "IAPExperience.PurchasePrompt.Action.Buy",
 		Subscribe = "Feature.Subscription.Action.Subscribe",
@@ -46,14 +47,17 @@ local function UnifiedProductPurchaseModal(p1)
 		TestPurchaseDisclaimer = "IAPExperience.PurchasePrompt.Text.TestPurchase",
 		BuyItemV2 = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then "IAPExperience.PurchasePrompt.Title.BuyItemV2" else nil,
 		BuyAvatar = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then "IAPExperience.PurchasePrompt.Header.BuyAvatar" else nil,
-		PerMonth = if fFlagEnableUnifiedPurchaseFlowForDevSubs then "Feature.Subscription.Text.PerMonth" else nil,
+		PerMonth = if fFlagEnableUnifiedPurchaseFlowForDevSubs or fFlagLuaAppsEnablePromptVIPServerPurchase then "Feature.Subscription.Text.PerMonth" else nil,
+		Free = if fFlagLuaAppsEnablePromptVIPServerPurchase then "Feature.Catalog.LabelFree" else nil,
+		FreeWithPlus = if fFlagLuaAppsEnablePromptVIPServerPurchase then "Feature.PrivateServers.Action.FreeWithBlackbird" else nil,
+		CreatePrivateServer = if fFlagLuaAppsEnablePromptVIPServerPurchase then "Feature.PrivateServers.Action.CreatePrivateServer" else nil,
 		SubscribeTermsAgreement = if fFlagEnableUnifiedPurchaseFlowForDevSubs then {
 			"Feature.Subscription.Footer.PurchasePromptLegalText",
 			SubscribeButtonTitle = "\"Subscribe\"",
 			tosUrl = urlBuilder.static.about.terms()
 		} else nil
 	})
-	local var2 = if fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then var1.PerMonth else nil
+	local var2 = if fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then var1.PerMonth elseif fFlagLuaAppsEnablePromptVIPServerPurchase and p1.isMonthlyPrice then var1.PerMonth else nil
 	local var3, var4 = reactModule.useState(p1.postPurchaseActions or {})
 	local var5, var6 = reactModule.useState(var1.BuyItem)
 	local var7 = useInitialButtonDisableDelayModule(p1.buttons.isDisabled)
@@ -78,7 +82,7 @@ local function UnifiedProductPurchaseModal(p1)
 		var9 = if var8.showCartOfferUi then #var8.cartPricingOffers else 0
 	end
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), unifiedPurchaseModalTypeEnumModule (copy), var6 (ref), var1 (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy)
+		-- upvalues: p1 (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), unifiedPurchaseModalTypeEnumModule (copy), var6 (ref), var1 (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), fFlagLuaAppsEnablePromptVIPServerPurchase (copy)
 		local purchaseModalType = p1.purchaseModalType
 		
 		if fFlagEnableUnifiedPurchaseFlowForDevSubs and purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then
@@ -96,6 +100,10 @@ local function UnifiedProductPurchaseModal(p1)
 			return
 		elseif purchaseModalType == unifiedPurchaseModalTypeEnumModule.Experience then
 			var6(var1.BuyExperience)
+			
+			return
+		elseif fFlagLuaAppsEnablePromptVIPServerPurchase and purchaseModalType == unifiedPurchaseModalTypeEnumModule.VIPServer then
+			var6(var1.CreatePrivateServer)
 			
 			return
 		elseif fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then
@@ -191,15 +199,20 @@ local function UnifiedProductPurchaseModal(p1)
 	end
 	local itemPrice = p1.product.itemPrice
 	local var19 = if itemPrice then itemPrice.priceInRobux else p1.product.itemRobuxCost
-	local var20 = if fFlagEnableOffersOnInExperienceSurface then reactModule.createElement(cartPricingProductDetailsModule, {
+	local var20 = if fFlagLuaAppsEnablePromptVIPServerPurchase then if var19 ~= 0 then if p1.isFreeWithRobloxPlus then var1.FreeWithPlus elseif p1.isMonthlyPrice then var1.Free else nil else nil else nil
+	local var21 = if fFlagEnableOffersOnInExperienceSurface then reactModule.createElement(cartPricingProductDetailsModule, {
 		cartPricing = var8,
 		purchaseModalType = p1.purchaseModalType,
 		priceSuffix = var2,
+		priceText = if fFlagLuaAppsEnablePromptVIPServerPurchase then var20 else nil,
+		includePriceSuffixOnOriginal = if fFlagLuaAppsEnablePromptVIPServerPurchase then p1.isMonthlyPrice else nil,
 		isCartPricingLoading = p1.isCartPricingLoading
 	}) else reactModule.createElement(productDetailsContainerModule, {
 		purchaseModalType = p1.purchaseModalType,
 		product = p1.product,
-		priceSuffix = var2
+		priceSuffix = var2,
+		priceText = if fFlagLuaAppsEnablePromptVIPServerPurchase then var20 else nil,
+		includePriceSuffixOnOriginal = if fFlagLuaAppsEnablePromptVIPServerPurchase then p1.isMonthlyPrice else nil
 	})
 	
 	return reactModule.createElement(sheet.Root, {
@@ -220,7 +233,7 @@ local function UnifiedProductPurchaseModal(p1)
 			SheetContentContainer = reactModule.createElement(view, {
 				tag = "col gap-medium auto-y size-full-0 align-x-center align-y-center"
 			}, {
-				ProductDetailsContainer = var20 or reactModule.createElement(view, {
+				ProductDetailsContainer = var21 or reactModule.createElement(view, {
 					tag = "col gap-medium auto-y size-full-0 align-x-center align-y-center",
 					LayoutOrder = 1
 				}, {

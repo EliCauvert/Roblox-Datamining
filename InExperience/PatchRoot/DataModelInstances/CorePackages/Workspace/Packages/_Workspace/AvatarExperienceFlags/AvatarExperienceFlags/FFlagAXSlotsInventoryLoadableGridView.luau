@@ -1,1 +1,1 @@
-﻿return require(script.Parent.FFlagAXRootSlotBasedEditorFlag) and game:DefineFastFlag("AXSlotsInventoryLoadableGridView", false)
+﻿return game:DefineFastFlag("AXSlotsInventoryLoadableGridView", false)

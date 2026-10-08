@@ -19,5 +19,9 @@
 	MomentsEditToolAbandoned = "MomentsEditToolAbandoned",
 	MomentsGenerateText = "MomentsGenerateText",
 	MomentsCommentsListLoad = "MomentsCommentsListLoad",
-	MomentsCommentPost = "MomentsCommentPost"
+	MomentsCommentPost = "MomentsCommentPost",
+	MomentsCommentReaction = "MomentsCommentReaction",
+	MomentsCommentDelete = "MomentsCommentDelete",
+	MomentsCommentReport = "MomentsCommentReport",
+	MomentsCommentAuthorBlock = "MomentsCommentAuthorBlock"
 }

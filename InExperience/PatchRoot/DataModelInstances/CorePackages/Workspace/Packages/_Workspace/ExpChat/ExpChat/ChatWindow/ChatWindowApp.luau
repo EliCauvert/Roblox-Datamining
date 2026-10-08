@@ -10,7 +10,6 @@ local expChatSharedModule = require(parent.ExpChatShared)
 local memoizeModule = require(expChat.memoize)
 local createEffect = require(parent.Signals).createEffect
 local fFlagExpChatEnableV2ChatWindowModule = require(expChat.Flags.FFlagExpChatEnableV2ChatWindow)
-local fFlagExpChatTransparentFocusSupportModule = require(expChat.Flags.FFlagExpChatTransparentFocusSupport)
 local fFlagEnableVerifiedBadgeStore = require(parent.SharedFlags).FFlagEnableVerifiedBadgeStore
 local chatWindowMessageSourceModule = require(script.Parent.UI.ChatWindow.ChatWindowMessageSource)
 local expChatMoveMessagesStoreToInit = game:DefineFastFlag("ExpChatMoveMessagesStoreToInit", false)
@@ -177,15 +176,15 @@ return roactRoduxModule.connect(function(p3)
 		selectedChannelName = if selectedChannelName and p3.ChannelTabs and p3.ChannelTabs.allChannelTabs[selectedChannelName] then selectedChannelName elseif p3.ChannelTabs then p3.ChannelTabs.selectedTabName or "RBXGeneral" else "RBXGeneral"
 	}
 end, function(_)
-	-- upvalues: fFlagExpChatTransparentFocusSupportModule (ref), getTransparencyStoreModule (ref)
+	-- upvalues: getTransparencyStoreModule (ref)
 	return {
 		onFocus = function()
-			-- upvalues: fFlagExpChatTransparentFocusSupportModule (copy), getTransparencyStoreModule (copy)
-			return if fFlagExpChatTransparentFocusSupportModule then getTransparencyStoreModule(false).setContextMenuOpen() else getTransparencyStoreModule(false).setTextboxFocus()
+			-- upvalues: getTransparencyStoreModule (copy)
+			return getTransparencyStoreModule(false).setContextMenuOpen()
 		end,
 		onUnfocus = function()
-			-- upvalues: fFlagExpChatTransparentFocusSupportModule (copy), getTransparencyStoreModule (copy)
-			return if fFlagExpChatTransparentFocusSupportModule then getTransparencyStoreModule(false).clearContextMenuOpen() else getTransparencyStoreModule(false).clearTextboxFocus()
+			-- upvalues: getTransparencyStoreModule (copy)
+			return getTransparencyStoreModule(false).clearContextMenuOpen()
 		end
 	}
 end)(chatWindowApp)

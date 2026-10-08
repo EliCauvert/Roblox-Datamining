@@ -4,7 +4,6 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local momentsCommonModule = require(parent.MomentsCommon)
 local signalsReactModule = require(parent.SignalsReact)
-local sharedFlagsModule = require(parent.SharedFlags)
 local momentContextModule = require(script.Parent.Parent.Parent.MomentContext)
 local fFlagMomentsEngagementMetricsFeature = momentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
 local creatorAttributionModule = require(script.Parent.CreatorAttribution)
@@ -18,16 +17,16 @@ local getMomentsCapabilities = momentsCommonModule.Stores.GetMomentsCapabilities
 local useSignalState = signalsReactModule.useSignalState
 
 return reactModule.memo(function(p1)
-	-- upvalues: momentContextModule (ref), useSignalState (ref), fFlagMomentsEngagementMetricsFeature (ref), sharedFlagsModule (ref), getMomentsCapabilities (ref), useMomentsSession (ref), reactModule (ref), debugInfoModule (ref), creatorAttributionModule (ref), descriptionModule (ref), reactionsModule (ref), statusChipModule (ref), view (ref)
+	-- upvalues: momentContextModule (ref), useSignalState (ref), fFlagMomentsEngagementMetricsFeature (ref), getMomentsCapabilities (ref), useMomentsSession (ref), reactModule (ref), debugInfoModule (ref), creatorAttributionModule (ref), descriptionModule (ref), reactionsModule (ref), statusChipModule (ref), view (ref)
 	local isExperience = useSignalState(momentContextModule.useMoment().store.getData).kind == "experience"
-	local var1 = if fFlagMomentsEngagementMetricsFeature and sharedFlagsModule.FFlagGuacMomentsFeatureList then useSignalState(getMomentsCapabilities(false).getIsEngagementMetricsEnabled) else nil
+	local var1 = if fFlagMomentsEngagementMetricsFeature then useSignalState(getMomentsCapabilities(false).getIsEngagementMetricsEnabled) else nil
 	local t = {}
 	
 	if not useSignalState(useMomentsSession().getHideDetails) then
 		t.DebugInfo = reactModule.createElement(debugInfoModule, { LayoutOrder = 0 })
 		t.CreatorAttribution = if isExperience then reactModule.createElement(creatorAttributionModule, { LayoutOrder = 1 }) else nil
 		t.Description = reactModule.createElement(descriptionModule, { LayoutOrder = 2 })
-		t.Reactions = if isExperience and (not fFlagMomentsEngagementMetricsFeature or not sharedFlagsModule.FFlagGuacMomentsFeatureList or var1) then reactModule.createElement(reactionsModule, { LayoutOrder = 3 }) else nil
+		t.Reactions = if isExperience and (not fFlagMomentsEngagementMetricsFeature or var1) then reactModule.createElement(reactionsModule, { LayoutOrder = 3 }) else nil
 		t.StatusChip = reactModule.createElement(statusChipModule, { LayoutOrder = 4 })
 	end
 	return reactModule.createElement(view, {

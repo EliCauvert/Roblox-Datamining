@@ -13,19 +13,18 @@ local fFlagAppChatContextCardNameLoadingShimmerModule = require(appChat.Flags.FF
 local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
-local fFlagAppChatDisclosureUpdateEnabled = sharedFlagsModule.FFlagAppChatDisclosureUpdateEnabled
 local fFlagAppChatDiscloseUpdateSecondVersion = sharedFlagsModule.FFlagAppChatDiscloseUpdateSecondVersion
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), useFoundationPresenceModule (ref), useLocalization (ref), fFlagAppChatDisclosureUpdateEnabled (ref), fFlagAppChatDiscloseUpdateSecondVersion (ref), universalAppPolicyModule (ref), fFlagAppChatContextCardNameLoadingShimmerModule (ref), reactModule (ref), foundationModule (ref), skeleton (ref), userTile (ref), layoutMode (ref), fFlagEnableBlackbirdCheck (ref), fFlagAppChatConsoleFocusFixesModule (ref)
+	-- upvalues: useTokens (ref), useFoundationPresenceModule (ref), useLocalization (ref), fFlagAppChatDiscloseUpdateSecondVersion (ref), universalAppPolicyModule (ref), fFlagAppChatContextCardNameLoadingShimmerModule (ref), reactModule (ref), foundationModule (ref), skeleton (ref), userTile (ref), layoutMode (ref), fFlagEnableBlackbirdCheck (ref), fFlagAppChatConsoleFocusFixesModule (ref)
 	local var1 = useTokens()
 	local size = var1.Size
 	local var2 = useFoundationPresenceModule(p1.userId)
 	local var3 = useLocalization({
 		firstInteractionWithThisPersonHeadingText = "Feature.Chat.Heading.FirstInteractionWithThisPerson",
 		user = "Feature.Chat.Label.User",
-		firstConversationWithThisUserHeadingText = if fFlagAppChatDisclosureUpdateEnabled and not fFlagAppChatDiscloseUpdateSecondVersion then "Feature.Chat.Heading.SafeChattingWithThisUser" else "Feature.Chat.Heading.FirstConversationWithThisUser",
-		firstConversationWithHeadingText = if fFlagAppChatDisclosureUpdateEnabled and not fFlagAppChatDiscloseUpdateSecondVersion then {
+		firstConversationWithThisUserHeadingText = if not fFlagAppChatDiscloseUpdateSecondVersion then "Feature.Chat.Heading.SafeChattingWithThisUser" else "Feature.Chat.Heading.FirstConversationWithThisUser",
+		firstConversationWithHeadingText = if not fFlagAppChatDiscloseUpdateSecondVersion then {
 			"Feature.Chat.Heading.SafeChattingWithUsername",
 			displayName = p1.displayName
 		} else {
@@ -36,11 +35,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			"Feature.Chat.Heading.FirstInteractionWith",
 			displayName = p1.displayName
 		},
-		osaContextCardDescriptionText = if fFlagAppChatDisclosureUpdateEnabled and universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Description.InlineContextCardDescription" else "Feature.Chat.Description.OSAContextCardDescription"
+		osaContextCardDescriptionText = if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Description.InlineContextCardDescription" else "Feature.Chat.Description.OSAContextCardDescription"
 	})
-	local isChatUserMessagesEnabled = p1.isChatUserMessagesEnabled
-	local var4 = if fFlagAppChatDisclosureUpdateEnabled then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then var3.firstConversationWithHeadingText else var3.firstInteractionWithHeadingText elseif isChatUserMessagesEnabled then var3.firstConversationWithHeadingText else var3.firstInteractionWithHeadingText
-	local var5 = if fFlagAppChatDisclosureUpdateEnabled then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then var3.firstConversationWithThisUserHeadingText else var3.firstInteractionWithThisPersonHeadingText elseif isChatUserMessagesEnabled then var3.firstConversationWithThisUserHeadingText else var3.firstInteractionWithThisPersonHeadingText
+	local var4 = if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then var3.firstConversationWithHeadingText else var3.firstInteractionWithHeadingText
+	local var5 = if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then var3.firstConversationWithThisUserHeadingText else var3.firstInteractionWithThisPersonHeadingText
 	
 	if fFlagAppChatContextCardNameLoadingShimmerModule then
 		local var6 = not p1.displayName and not p1.hasError

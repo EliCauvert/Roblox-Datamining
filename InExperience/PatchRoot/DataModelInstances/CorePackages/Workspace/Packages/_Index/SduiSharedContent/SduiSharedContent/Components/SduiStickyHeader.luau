@@ -9,8 +9,6 @@ local _ = require(parent.SduiCompat)
 local _ = require(parent.SduiCoreSystem)
 local useScrollAwayHeaderPosition = require(parent.SduiSharedUtilities).useScrollAwayHeaderPosition
 local buildSduiFeedChildrenModule = require(sduiSharedContent.Components.buildSduiFeedChildren)
-local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
-local sduiStickyHeaderDividerLayoutOrderConstant = game:DefineFastFlag("SduiStickyHeaderDividerLayoutOrderConstant", false)
 
 local function buildWrappedItems(p1)
 	-- upvalues: buildSduiFeedChildrenModule (ref)
@@ -27,7 +25,7 @@ local function buildWrappedItems(p1)
 	})
 end
 
-return reactModule.memo(if fFlagLuaAppSduiStickyHeaderScrollAway then function(p1)
+return reactModule.memo(if require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway then function(p1)
 	-- upvalues: buildWrappedItems (ref), reactModule (ref), useScrollAwayHeaderPosition (ref), view (ref), divider (ref), orientation (ref)
 	local var1 = buildWrappedItems(p1)
 	local var2, var3 = reactModule.useBinding(UDim2.new(1, 0, 0, 0))
@@ -114,11 +112,11 @@ return reactModule.memo(if fFlagLuaAppSduiStickyHeaderScrollAway then function(p
 		})
 	})
 end else function(p1)
-	-- upvalues: buildWrappedItems (ref), reactModule (ref), divider (ref), orientation (ref), sduiStickyHeaderDividerLayoutOrderConstant (ref), view (ref)
+	-- upvalues: buildWrappedItems (ref), reactModule (ref), divider (ref), orientation (ref), view (ref)
 	local var1 = buildWrappedItems(p1)
 	var1.StickyDivider = reactModule.createElement(divider, {
-		orientation = orientation.Horizontal,
-		LayoutOrder = if sduiStickyHeaderDividerLayoutOrderConstant then 1000000 else 1e999
+		LayoutOrder = 1000000,
+		orientation = orientation.Horizontal
 	})
 	
 	return reactModule.createElement(view, {

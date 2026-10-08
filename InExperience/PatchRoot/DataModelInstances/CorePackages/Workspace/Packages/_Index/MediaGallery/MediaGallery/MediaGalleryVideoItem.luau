@@ -11,11 +11,12 @@ local videoPlayer = videoUtilsModule.VideoPlayer
 local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 local fFlagLuaAppGameTileSelectionVideoPlayback = require(parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
 local fFlagMediaGalleryVideoVisiblePercent = require(parent.SharedFlags).FFlagMediaGalleryVideoVisiblePercent
+local fFlagLuaAppEdpMomentVideo = require(parent.SharedFlags).FFlagLuaAppEdpMomentVideo
 local getImageUriModule = require(mediaGallery.getImageUri)
 local mediaGalleryConstantsModule = require(mediaGallery.MediaGalleryConstants)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), getImageUriModule (ref), videoPlaybackCoordinator (ref), mediaGalleryConstantsModule (ref), fFlagMediaGalleryVideoVisiblePercent (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), reactModule (ref), videoPlayer (ref), videoPlaybackDetector (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), videoPlaybackDetectionMethod (ref)
+	-- upvalues: useTokens (ref), getImageUriModule (ref), videoPlaybackCoordinator (ref), mediaGalleryConstantsModule (ref), fFlagMediaGalleryVideoVisiblePercent (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), reactModule (ref), videoPlayer (ref), fFlagLuaAppEdpMomentVideo (ref), videoPlaybackDetector (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), videoPlaybackDetectionMethod (ref)
 	local var1 = useTokens()
 	local videoId = `rbxassetid://{p1.videoId}`
 	local var2 = getImageUriModule(p1.thumbnail or "")
@@ -60,6 +61,7 @@ return reactModule.memo(function(p1)
 		VideoPlayer = reactModule.createElement(videoPlayer, {
 			showMuteButton = true,
 			video = videoId,
+			accessContext = if fFlagLuaAppEdpMomentVideo then p1.videoAccessContext else nil,
 			thumbnail = var2,
 			shouldStartPlayback = var13,
 			muted = p1.muted ~= nil or p1.muted,
@@ -119,6 +121,11 @@ return reactModule.memo(function(p1)
 			BackgroundTransparency = 1,
 			ZIndex = 5,
 			Size = UDim2.fromScale(1, 1)
-		}, { Overlay = p1.overlay }) else nil
+		}, { Overlay = p1.overlay }) else nil,
+		Attribution = if fFlagLuaAppEdpMomentVideo and p1.attributionComponent then reactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			ZIndex = 6,
+			Size = UDim2.fromScale(1, 1)
+		}, { AttributionContent = p1.attributionComponent }) else nil
 	})
 end)

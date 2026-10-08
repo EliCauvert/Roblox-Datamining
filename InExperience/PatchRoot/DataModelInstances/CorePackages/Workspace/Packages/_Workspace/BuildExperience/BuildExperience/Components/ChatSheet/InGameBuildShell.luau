@@ -25,24 +25,27 @@ local function noop() end
 
 local function createToolbarButtons(p1, p2, p3)
 	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), noop (ref), inputSize (ref), buttonVariant (ref)
-	return if p1.isSelecting then {
-		Cancel = reactModule.createElement(iconButton, {
-			LayoutOrder = 1,
-			icon = iconName.X,
-			onActivated = p1.onSelectionCancelled or noop,
-			size = inputSize.Medium,
-			testId = `{p3}-cancel-selection`,
-			variant = buttonVariant.Utility
-		}),
-		Confirm = if p1.onSelectionConfirmed ~= nil then nil else reactModule.createElement(iconButton, {
-			LayoutOrder = 2,
-			icon = iconName.CheckLarge,
-			onActivated = p1.onSelectionConfirmed,
-			size = inputSize.Medium,
-			testId = `{p3}-confirm-selection`,
-			variant = buttonVariant.Utility
-		})
-	} else {
+	if p1.isSelecting then
+		return {
+			Cancel = reactModule.createElement(iconButton, {
+				LayoutOrder = 1,
+				icon = iconName.X,
+				onActivated = p1.onSelectionCancelled or noop,
+				size = inputSize.Medium,
+				testId = `{p3}-cancel-selection`,
+				variant = buttonVariant.Utility
+			}),
+			Confirm = if p1.onSelectionConfirmed ~= nil then nil else reactModule.createElement(iconButton, {
+				LayoutOrder = 2,
+				icon = iconName.CheckLarge,
+				onActivated = p1.onSelectionConfirmed,
+				size = inputSize.Medium,
+				testId = `{p3}-confirm-selection`,
+				variant = buttonVariant.Utility
+			})
+		}
+	end
+	local t = {
 		Chat = reactModule.createElement(iconButton, {
 			LayoutOrder = 1,
 			icon = iconName.Nebula,
@@ -76,10 +79,16 @@ local function createToolbarButtons(p1, p2, p3)
 			variant = buttonVariant.Utility
 		})
 	}
+	
+	if p1.isLibraryMode then
+		t.Select = nil
+		t.Capture = nil
+	end
+	return t
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), getCurrentExperienceProjectModule (ref), useTokens (ref), usePreferences (ref), useOverlay (ref), useHardwareInsetsModule (ref), displayModule (ref), coreGuiCommonModule (ref), signalsReactModule (ref), motionModule (ref), view (ref), noop (ref), stateLayerAffordance (ref), createToolbarButtons (ref), image (ref), publishSheetControllerModule (ref), buildPillMenuPageHostModule (ref)
+	-- upvalues: reactModule (ref), getCurrentExperienceProjectModule (ref), useTokens (ref), usePreferences (ref), useOverlay (ref), useHardwareInsetsModule (ref), displayModule (ref), coreGuiCommonModule (ref), signalsReactModule (ref), motionModule (ref), view (ref), noop (ref), stateLayerAffordance (ref), createToolbarButtons (ref), image (ref), foundationModule (ref), publishSheetControllerModule (ref), buildPillMenuPageHostModule (ref)
 	local var1, var2 = reactModule.useState(false)
 	local var3, var4 = reactModule.useState(nil)
 	local var5, var6 = reactModule.useState(nil)
@@ -124,18 +133,20 @@ return function(p1)
 	local var12 = useHardwareInsetsModule(useOverlay())
 	local displayStore = displayModule.GetDisplayStore(false)
 	local keepOutAreasStore = coreGuiCommonModule.Stores.GetKeepOutAreasStore(false)
-	local var13 = signalsReactModule.useSignalState(displayStore.getViewportSize)
-	local var14 = signalsReactModule.useSignalState(displayStore.getDisplaySize)
-	local var15 = var13.Y < var13.X
-	local var16 = var14 ~= nil and var14 ~= Enum.DisplaySize.Small
-	local var17 = var16 or p1.isVisible ~= false
-	local var18, var19 = reactModule.useState(nil)
-	local var20 = reactModule.useCallback(function(p2)
-		-- upvalues: var19 (ref)
-		var19(p2)
+	local var13 = signalsReactModule.useSignalState(displayStore.getGuiInset)
+	local var14, var15 = reactModule.useState(nil)
+	local var16 = signalsReactModule.useSignalState(displayStore.getViewportSize)
+	local var17 = signalsReactModule.useSignalState(displayStore.getDisplaySize)
+	local var18 = var16.Y < var16.X
+	local var19 = var17 ~= nil and var17 ~= Enum.DisplaySize.Small
+	local var20 = var19 or p1.isVisible ~= false
+	local var21, var22 = reactModule.useState(nil)
+	local var23 = reactModule.useCallback(function(p2)
+		-- upvalues: var22 (ref)
+		var22(p2)
 	end, {})
 	local size1200 = var11.Size.Size_1200
-	local var21 = reactModule.useMemo(function()
+	local var24 = reactModule.useMemo(function()
 		-- upvalues: motionModule (copy), reducedMotion (ref), var11 (ref)
 		return {
 			visible = motionModule.createState({ progress = 1 }, {
@@ -152,62 +163,62 @@ return function(p1)
 			})
 		}
 	end, { reducedMotion, var11 })
-	local var22, var23 = motionModule.useMotion(if var17 then var21.visible else var21.hidden)
-	local var24, var25 = reactModule.useState(var17)
+	local var25, var26 = motionModule.useMotion(if var20 then var24.visible else var24.hidden)
+	local var27, var28 = reactModule.useState(var20)
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), var23 (ref), var21 (ref), p1 (ref), var25 (ref)
-		local var26 = false
+		-- upvalues: var20 (ref), var26 (ref), var24 (ref), p1 (ref), var28 (ref)
+		local var29 = false
 		
-		if var17 then
-			var25(true)
-			var23(var21.visible)
+		if var20 then
+			var28(true)
+			var26(var24.visible)
 		else
-			var23(var21.hidden, {
+			var26(var24.hidden, {
 				onAnimationComplete = function(p2)
-					-- upvalues: var26 (write), p1 (copy), var25 (copy)
-					if not var26 and p2 == true then
+					-- upvalues: var29 (write), p1 (copy), var28 (copy)
+					if not var29 and p2 == true then
 						if p1.onInsetsChanged ~= nil then
 							p1.onInsetsChanged(0, 0, 0)
 						end
-						var25(false)
+						var28(false)
 					end
 				end
 			})
 		end
 		return function()
-			-- upvalues: var26 (write)
-			var26 = true
+			-- upvalues: var29 (write)
+			var29 = true
 		end
-	end, { var23, var21, var17, p1.onInsetsChanged })
-	local var26, var27 = reactModule.useState(0)
-	local var28, var29 = reactModule.useState(0)
-	local var30 = reactModule.useCallback(function(p2)
-		-- upvalues: var27 (ref)
-		var27(p2.AbsoluteSize.Y)
+	end, { var26, var24, var20, p1.onInsetsChanged })
+	local var29, var30 = reactModule.useState(0)
+	local var31, var32 = reactModule.useState(0)
+	local var33 = reactModule.useCallback(function(p2)
+		-- upvalues: var30 (ref)
+		var30(p2.AbsoluteSize.Y)
 	end, {})
-	local var31 = reactModule.useCallback(function(p2)
-		-- upvalues: var29 (ref), keepOutAreasStore (ref)
-		var29(p2.AbsoluteSize.X)
+	local var34 = reactModule.useCallback(function(p2)
+		-- upvalues: var32 (ref), keepOutAreasStore (ref)
+		var32(p2.AbsoluteSize.X)
 		keepOutAreasStore.setKeepOutArea("build-shell-right-inset", p2.AbsolutePosition, p2.AbsoluteSize)
 	end, { keepOutAreasStore })
-	local var32 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), var15 (ref), var16 (ref)
+	local var35 = reactModule.useCallback(function(p2)
+		-- upvalues: p1 (ref), var18 (ref), var19 (ref)
 		if p1.onInsetsChanged ~= nil then
-			p1.onInsetsChanged(0, if var15 and not var16 then p2.AbsoluteSize.X else 0, if var15 or var16 then 0 else p2.AbsoluteSize.Y)
+			p1.onInsetsChanged(0, if var18 and not var19 then p2.AbsoluteSize.X else 0, if var18 or var19 then 0 else p2.AbsoluteSize.Y)
 		end
-	end, { var15, p1.onInsetsChanged, var16 })
+	end, { var18, p1.onInsetsChanged, var19 })
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), p1 (ref)
-		if var16 and p1.onInsetsChanged ~= nil then
+		-- upvalues: var19 (ref), p1 (ref)
+		if var19 and p1.onInsetsChanged ~= nil then
 			p1.onInsetsChanged(0, 0, 0)
 		end
-	end, { p1.onInsetsChanged, var16 })
+	end, { p1.onInsetsChanged, var19 })
 	reactModule.useEffect(function()
-		-- upvalues: var24 (ref), var15 (ref), var16 (ref), keepOutAreasStore (ref)
-		if not var24 or not var15 or var16 then
+		-- upvalues: var27 (ref), var18 (ref), var19 (ref), keepOutAreasStore (ref)
+		if not var27 or not var18 or var19 then
 			keepOutAreasStore.removeKeepOutArea("build-shell-right-inset")
 		end
-	end, { var15, var24, keepOutAreasStore, var16 })
+	end, { var18, var27, keepOutAreasStore, var19 })
 	reactModule.useEffect(function()
 		-- upvalues: keepOutAreasStore (ref)
 		return function()
@@ -215,164 +226,176 @@ return function(p1)
 			keepOutAreasStore.removeKeepOutArea("build-shell-right-inset")
 		end
 	end, { keepOutAreasStore })
-	local progress = var22.progress
-	local var33 = progress:map(function(p2)
-		-- upvalues: var28 (ref)
-		return UDim2.new(1, var28 * (1 - p2), 0, 0)
-	end)
-	local var34 = progress:map(function(p2)
-		-- upvalues: var28 (ref)
-		return UDim2.new(1, -var28 * p2 + 1, 0, 0)
-	end)
-	local var35 = progress:map(function(p2)
-		-- upvalues: var26 (ref)
-		return UDim2.new(0, 0, 1, var26 * (1 - p2))
-	end)
+	local progress = var25.progress
 	local var36 = progress:map(function(p2)
-		-- upvalues: var26 (ref)
-		return UDim2.new(0, -1, 1, -var26 * p2 + 1)
+		-- upvalues: var31 (ref)
+		return UDim2.new(1, var31 * (1 - p2), 0, 0)
 	end)
 	local var37 = progress:map(function(p2)
-		-- upvalues: var15 (ref), var28 (ref), var26 (ref)
-		return UDim2.new(1, -(if var15 then var28 else 0) * p2 + 1, 1, -(if var15 then 0 else var26) * p2 + 1)
+		-- upvalues: var31 (ref)
+		return UDim2.new(1, -var31 * p2 + 1, 0, 0)
 	end)
 	local var38 = progress:map(function(p2)
-		-- upvalues: var16 (ref), var15 (ref), var28 (ref), var26 (ref)
-		return if var16 then UDim2.fromOffset(0, 0) else UDim2.fromOffset((if var15 then var28 else 0) * p2, (if var15 then 0 else var26) * p2)
+		-- upvalues: var29 (ref)
+		return UDim2.new(0, 0, 1, var29 * (1 - p2))
+	end)
+	local var39 = progress:map(function(p2)
+		-- upvalues: var29 (ref)
+		return UDim2.new(0, -1, 1, -var29 * p2 + 1)
+	end)
+	local var40 = progress:map(function(p2)
+		-- upvalues: var18 (ref), var31 (ref), var29 (ref)
+		return UDim2.new(1, -(if var18 then var31 else 0) * p2 + 1, 1, -(if var18 then 0 else var29) * p2 + 1)
+	end)
+	local var41 = progress:map(function(p2)
+		-- upvalues: var19 (ref), var18 (ref), var31 (ref), var29 (ref)
+		return if var19 then UDim2.fromOffset(0, 0) else UDim2.fromOffset((if var18 then var31 else 0) * p2, (if var18 then 0 else var29) * p2)
 	end)
 	local surface100 = var11.Color.Surface.Surface_100
-	local var39 = progress:map(function(p2)
+	local var42 = progress:map(function(p2)
 		-- upvalues: surface100 (ref)
 		return {
 			Color3 = surface100.Color3,
 			Transparency = 1 - (1 - surface100.Transparency) * p2
 		}
 	end)
-	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Shell = reactModule.createElement(view, {
-			tag = "size-full",
-			Visible = var24,
-			testId = p1.testId or "in-game-build-shell"
+	local createElement = reactModule.createElement
+	createElement = createElement(view, {
+		tag = "size-full",
+		Visible = var27,
+		testId = p1.testId or "in-game-build-shell"
+	}, {
+		FloatingToolbarBounds = if var19 then reactModule.createElement(view, {
+			testId = "in-game-build-shell-floating-toolbar-bounds",
+			Position = UDim2.fromOffset(var12.left + var11.Padding.Large, var12.top + var11.Padding.Large),
+			Size = UDim2.new(1, -(var12.left + var12.right + var11.Padding.Large * 2), 1, -(var12.top + var12.bottom + var11.Padding.Large * 2)),
+			ref = var23
 		}, {
-			FloatingToolbarBounds = if var16 then reactModule.createElement(view, {
-				testId = "in-game-build-shell-floating-toolbar-bounds",
-				Position = UDim2.fromOffset(var12.left + var11.Padding.Large, var12.top + var11.Padding.Large),
-				Size = UDim2.new(1, -(var12.left + var12.right + var11.Padding.Large * 2), 1, -(var12.top + var12.bottom + var11.Padding.Large * 2)),
-				ref = var20
+			Toolbar = reactModule.createElement(view, {
+				ZIndex = 1000,
+				tag = "col align-x-center gap-xsmall position-center-right anchor-center-right auto-xy padding-xsmall radius-medium bg-surface-100",
+				testId = "in-game-build-shell-floating-toolbar",
+				Visible = var20,
+				onActivated = noop,
+				stateLayer = { affordance = stateLayerAffordance.None }
 			}, {
-				Toolbar = reactModule.createElement(view, {
-					ZIndex = 1000,
-					tag = "col align-x-center gap-xsmall position-center-right anchor-center-right auto-xy padding-xsmall radius-medium bg-surface-100",
-					testId = "in-game-build-shell-floating-toolbar",
-					Visible = var17,
-					onActivated = noop,
-					stateLayer = { affordance = stateLayerAffordance.None }
+				DragDetector = reactModule.createElement("UIDragDetector", {
+					BoundingBehavior = Enum.UIDragDetectorBoundingBehavior.EntireObject,
+					BoundingUI = var21,
+					DragStyle = Enum.UIDragDetectorDragStyle.TranslatePlane,
+					ReferenceUIInstance = var21,
+					ResponseStyle = Enum.UIDragDetectorResponseStyle.Scale
+				}),
+				Buttons = reactModule.createElement(reactModule.Fragment, nil, createToolbarButtons(p1, var7, "in-game-build-shell-floating")),
+				DragAffordance = reactModule.createElement(view, {
+					LayoutOrder = 6,
+					tag = "position-center-center anchor-center-center auto-xy padding-xxsmall"
 				}, {
-					DragDetector = reactModule.createElement("UIDragDetector", {
-						BoundingBehavior = Enum.UIDragDetectorBoundingBehavior.EntireObject,
-						BoundingUI = var18,
-						DragStyle = Enum.UIDragDetectorDragStyle.TranslatePlane,
-						ReferenceUIInstance = var18,
-						ResponseStyle = Enum.UIDragDetectorResponseStyle.Scale
-					}),
-					Buttons = reactModule.createElement(reactModule.Fragment, nil, createToolbarButtons(p1, var7, "in-game-build-shell-floating")),
-					DragAffordance = reactModule.createElement(view, {
-						LayoutOrder = 6,
-						tag = "position-center-center anchor-center-center auto-xy padding-xxsmall"
-					}, {
-						Icon = reactModule.createElement(image, {
-							Image = "component_assets/dragger_small",
-							tag = "position-center-center anchor-center-center size-600-400 content-muted"
-						})
+					Icon = reactModule.createElement(image, {
+						Image = "component_assets/dragger_small",
+						tag = "position-center-center anchor-center-center size-600-400 content-muted"
 					})
 				})
-			}) else nil,
-			InsetReporter = reactModule.createElement(view, {
-				testId = "in-game-build-shell-inset-reporter",
-				Size = var38,
-				onAbsoluteSizeChanged = var32
-			}),
-			RightInset = if var15 and not var16 then reactModule.createElement(view, {
-				ZIndex = 1000,
-				tag = "col align-x-center align-y-center gap-xsmall anchor-top-right size-0-full auto-x bg-surface-100",
-				testId = "in-game-build-shell-right-toolbar",
-				Position = var33,
-				padding = {
-					left = UDim.new(0, var11.Padding.Small),
-					right = UDim.new(0, math.max(var12.right, var11.Padding.Small))
-				},
-				onAbsolutePositionChanged = var31,
-				onAbsoluteSizeChanged = var31
-			}, createToolbarButtons(p1, var7, "in-game-build-shell-landscape")) else nil,
-			TopRightInnerCorner = if var15 and not var16 then reactModule.createElement(view, {
-				ZIndex = 1000,
-				tag = "anchor-top-right clip",
-				testId = "in-game-build-shell-top-right-inner-corner",
-				Position = var34,
-				Size = UDim2.fromOffset(size1200, size1200)
-			}, {
-				Image = reactModule.createElement(image, {
-					Image = "rbxasset://textures/ui/AvatarExperience/CircleCutoutLargeNoBorder.png",
-					ZIndex = 1000,
-					testId = "in-game-build-shell-top-right-inner-corner-image",
-					Position = UDim2.fromOffset(-size1200, 0),
-					Size = UDim2.fromOffset(size1200 * 2, size1200 * 2),
-					imageStyle = var39
-				})
-			}) else nil,
-			BottomLeftInnerCorner = if var16 or var15 or var26 == 0 then nil else reactModule.createElement(view, {
-				ZIndex = 1000,
-				tag = "anchor-bottom-left clip",
-				testId = "in-game-build-shell-bottom-left-inner-corner",
-				Position = var36,
-				Size = UDim2.fromOffset(size1200, size1200)
-			}, {
-				Image = reactModule.createElement(image, {
-					Image = "rbxasset://textures/ui/AvatarExperience/CircleCutoutLargeNoBorder.png",
-					ZIndex = 1000,
-					testId = "in-game-build-shell-bottom-left-inner-corner-image",
-					Position = UDim2.fromOffset(0, -size1200),
-					Size = UDim2.fromOffset(size1200 * 2, size1200 * 2),
-					imageStyle = var39
-				})
-			}),
-			BottomRightInnerCorner = if var16 or not var15 and var26 == 0 then nil else reactModule.createElement(view, {
-				ZIndex = 1000,
-				tag = "anchor-bottom-right clip",
-				testId = "in-game-build-shell-bottom-right-inner-corner",
-				Position = var37,
-				Size = UDim2.fromOffset(size1200, size1200)
-			}, {
-				Image = reactModule.createElement(image, {
-					Image = "rbxasset://textures/ui/AvatarExperience/CircleCutoutLargeNoBorder.png",
-					ZIndex = 1000,
-					testId = "in-game-build-shell-bottom-right-inner-corner-image",
-					Position = UDim2.fromOffset(-size1200, -size1200),
-					Size = UDim2.fromOffset(size1200 * 2, size1200 * 2),
-					imageStyle = var39
-				})
-			}),
-			BottomBar = reactModule.createElement(view, {
-				tag = "row align-x-center align-y-center gap-xsmall anchor-bottom-left size-full-0 auto-y bg-surface-100",
-				testId = "in-game-build-shell-bottom-inset",
-				Position = var35,
-				Visible = not var15 and not var16,
-				onAbsoluteSizeChanged = var30,
-				padding = {
-					top = UDim.new(0, var11.Padding.Small),
-					left = UDim.new(0, var11.Padding.Large),
-					right = UDim.new(0, var11.Padding.Large),
-					bottom = UDim.new(0, var11.Margin.Small + var12.bottom)
-				}
-			}, createToolbarButtons(p1, var7, "in-game-build-shell"))
+			})
+		}) else nil,
+		InsetReporter = reactModule.createElement(view, {
+			testId = "in-game-build-shell-inset-reporter",
+			Size = var41,
+			onAbsoluteSizeChanged = var35
 		}),
-		PublishSheet = if var5 ~= nil then nil else reactModule.createElement(publishSheetControllerModule, {
-			showPreviewButton = false,
-			isOpen = var1,
-			target = var5,
-			onClose = var8,
-			navigateToSubPage = var10
+		RightInset = if var18 and not var19 then reactModule.createElement(view, {
+			ZIndex = 1000,
+			tag = "col align-x-center align-y-center gap-xsmall anchor-top-right size-0-full auto-x bg-surface-100",
+			testId = "in-game-build-shell-right-toolbar",
+			Position = var36,
+			padding = {
+				left = UDim.new(0, var11.Padding.Small),
+				right = UDim.new(0, math.max(var12.right, var11.Padding.Small))
+			},
+			onAbsolutePositionChanged = var34,
+			onAbsoluteSizeChanged = var34
+		}, createToolbarButtons(p1, var7, "in-game-build-shell-landscape")) else nil,
+		TopRightInnerCorner = if var18 and not var19 then reactModule.createElement(view, {
+			ZIndex = 1000,
+			tag = "anchor-top-right clip",
+			testId = "in-game-build-shell-top-right-inner-corner",
+			Position = var37,
+			Size = UDim2.fromOffset(size1200, size1200)
+		}, {
+			Image = reactModule.createElement(image, {
+				Image = "rbxasset://textures/ui/AvatarExperience/CircleCutoutLargeNoBorder.png",
+				ZIndex = 1000,
+				testId = "in-game-build-shell-top-right-inner-corner-image",
+				Position = UDim2.fromOffset(-size1200, 0),
+				Size = UDim2.fromOffset(size1200 * 2, size1200 * 2),
+				imageStyle = var42
+			})
+		}) else nil,
+		BottomLeftInnerCorner = if var19 or var18 or var29 == 0 then nil else reactModule.createElement(view, {
+			ZIndex = 1000,
+			tag = "anchor-bottom-left clip",
+			testId = "in-game-build-shell-bottom-left-inner-corner",
+			Position = var39,
+			Size = UDim2.fromOffset(size1200, size1200)
+		}, {
+			Image = reactModule.createElement(image, {
+				Image = "rbxasset://textures/ui/AvatarExperience/CircleCutoutLargeNoBorder.png",
+				ZIndex = 1000,
+				testId = "in-game-build-shell-bottom-left-inner-corner-image",
+				Position = UDim2.fromOffset(0, -size1200),
+				Size = UDim2.fromOffset(size1200 * 2, size1200 * 2),
+				imageStyle = var42
+			})
+		}),
+		BottomRightInnerCorner = if var19 or not var18 and var29 == 0 then nil else reactModule.createElement(view, {
+			ZIndex = 1000,
+			tag = "anchor-bottom-right clip",
+			testId = "in-game-build-shell-bottom-right-inner-corner",
+			Position = var40,
+			Size = UDim2.fromOffset(size1200, size1200)
+		}, {
+			Image = reactModule.createElement(image, {
+				Image = "rbxasset://textures/ui/AvatarExperience/CircleCutoutLargeNoBorder.png",
+				ZIndex = 1000,
+				testId = "in-game-build-shell-bottom-right-inner-corner-image",
+				Position = UDim2.fromOffset(-size1200, -size1200),
+				Size = UDim2.fromOffset(size1200 * 2, size1200 * 2),
+				imageStyle = var42
+			})
+		}),
+		BottomBar = reactModule.createElement(view, {
+			tag = "row align-x-center align-y-center gap-xsmall anchor-bottom-left size-full-0 auto-y bg-surface-100",
+			testId = "in-game-build-shell-bottom-inset",
+			Position = var38,
+			Visible = not var18 and not var19,
+			onAbsoluteSizeChanged = var33,
+			padding = {
+				top = UDim.new(0, var11.Padding.Small),
+				left = UDim.new(0, var11.Padding.Large),
+				right = UDim.new(0, var11.Padding.Large),
+				bottom = UDim.new(0, var11.Margin.Small + var12.bottom)
+			}
+		}, createToolbarButtons(p1, var7, "in-game-build-shell"))
+	})
+	local var43 = var12.top + var13.top
+	
+	return reactModule.createElement(reactModule.Fragment, nil, {
+		Shell = createElement,
+		PublishOverlay = if var5 == nil or p1.isLibraryMode then nil else reactModule.createElement(view, {
+			ZIndex = 2,
+			testId = "in-game-build-shell-publish-overlay",
+			Position = UDim2.fromOffset(0, var43),
+			Size = UDim2.new(1, 0, 1, -var43),
+			ref = var15
+		}),
+		PublishSheet = if var5 == nil or not p1.isLibraryMode and var14 == nil then nil else reactModule.createElement(foundationModule.OverlayProvider, { gui = if p1.isLibraryMode then nil else var14 }, {
+			Controller = reactModule.createElement(publishSheetControllerModule, {
+				showPreviewButton = false,
+				isOpen = var1,
+				target = var5,
+				onClose = var8,
+				navigateToSubPage = var10
+			})
 		}),
 		PublishPage = if var5 ~= nil then nil else reactModule.createElement(buildPillMenuPageHostModule, { activePage = var3, target = var5, onClose = var9 })
 	})

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.FFlagAXRootSlotBasedEditorFlag) and game:DefineFastFlag("AXCharacterToAvatarStrings", false)
+﻿return game:DefineFastFlag("AXCharacterToAvatarStrings", false)

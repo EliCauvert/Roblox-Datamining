@@ -5,7 +5,7 @@ local function _()
 end
 
 return {
-	CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS = sharedFlagsModule.FFlagSduiHydrationClientHints,
+	CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS = true,
 	CAPABILITY_SUPPORTS_MULTI_SIZE_POOL = sharedFlagsModule.FFlagSduiPerSectionPoolSizing,
 	CAPABILITY_SUPPORTS_EDP_PERSISTENT_ACTION_BAR_PLAY_BUTTON = sharedFlagsModule.FFlagSduiEdpPersistentActionBarPlayButton,
 	CAPABILITY_SUPPORTS_EDP_COMMUNITY_SECTION = sharedFlagsModule.FFlagSduiCommunitySectionSupport,
@@ -40,5 +40,8 @@ return {
 	CAPABILITY_SUPPORTS_PREFERRED_TEXT_SIZE_LINE_BUDGETS = sharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets,
 	CAPABILITY_SUPPORTS_CONTAINER_QUERIES = sharedFlagsModule.FFlagSduiContainerQueries,
 	CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL = sharedFlagsModule.FFlagEnableGameJoinEarlyAccess,
-	CAPABILITY_SUPPORTS_EDP_INFO_TABLE_STABLE_ITEM_KEYS = sharedFlagsModule.FFlagInfoTableStableItemKeys
+	CAPABILITY_SUPPORTS_EDP_INFO_TABLE_STABLE_ITEM_KEYS = sharedFlagsModule.FFlagInfoTableStableItemKeys,
+	CAPABILITY_SUPPORTS_VIDEO_PLAYER_ACCESS_CONTEXT = sharedFlagsModule.FFlagLuaAppHomeMomentVideoFallback,
+	CAPABILITY_SUPPORTS_GROUP_ANNOUNCEMENTS = sharedFlagsModule.FFlagGroupAnnouncementsSdui,
+	CAPABILITY_SUPPORTS_EDP_MEDIA_GALLERY_MOMENT_VIDEO = sharedFlagsModule.FFlagLuaAppEdpMomentVideo
 }

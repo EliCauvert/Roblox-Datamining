@@ -6,15 +6,18 @@ local dependenciesModule = require(squads.dependencies)
 local react = dependenciesModule.React
 local roduxSquads = dependenciesModule.RoduxSquads
 local squadEventReceiverModule = require(parent.SquadsCore.SquadEventReceiver)
+local getSquadExperienceInviteStore = require(parent.SquadsCore.Stores).GetSquadExperienceInviteStore
+local useSignalState = require(parent.SignalsReact).useSignalState
 local useDispatch = dependenciesModule.Hooks.useDispatch
 local useSelector = dependenciesModule.Hooks.useSelector
 local useCanAccessPartyModule = require(squads.Hooks.useCanAccessParty)
 local currentSquadUpdated = roduxSquads.Actions.CurrentSquadUpdated
+local fFlagUseSignalsForSquadExperienceInvite = dependenciesModule.SharedFlags.FFlagUseSignalsForSquadExperienceInvite
 
 return function(_)
-	-- upvalues: useDispatch (ref), react (ref), useSelector (ref), experienceService (ref), roduxSquads (ref), useCanAccessPartyModule (ref), currentSquadUpdated (ref), appSquadTopBannerEventReceiverModule (ref), squadEventReceiverModule (ref)
+	-- upvalues: useDispatch (ref), react (ref), fFlagUseSignalsForSquadExperienceInvite (ref), useSignalState (ref), getSquadExperienceInviteStore (ref), useSelector (ref), experienceService (ref), roduxSquads (ref), useCanAccessPartyModule (ref), currentSquadUpdated (ref), appSquadTopBannerEventReceiverModule (ref), squadEventReceiverModule (ref)
 	local var1 = useDispatch()
-	local var2 = useSelector(react.useCallback(function(p1)
+	local var2 = if fFlagUseSignalsForSquadExperienceInvite then useSignalState(getSquadExperienceInviteStore(false).getCurrentExperienceInvite) else useSelector(react.useCallback(function(p1)
 		return if p1.Squad and p1.Squad.Squad then p1.Squad.Squad.currentExperienceInvite else nil
 	end, {}))
 	local var3 = useSelector(react.useCallback(function(p1)
@@ -32,8 +35,13 @@ return function(_)
 		end)
 	end, { var1 })
 	react.useEffect(function()
-		-- upvalues: var2 (ref), var3 (ref), var1 (ref), roduxSquads (copy)
+		-- upvalues: var2 (ref), var3 (ref), fFlagUseSignalsForSquadExperienceInvite (copy), getSquadExperienceInviteStore (copy), var1 (ref), roduxSquads (copy)
 		if var2 and var3 then
+			if fFlagUseSignalsForSquadExperienceInvite then
+				getSquadExperienceInviteStore(false).currentExperienceInviteDismissed(var2.notification.notificationId)
+				
+				return
+			end
 			var1(roduxSquads.Actions.CurrentExperienceInviteDismissed(var2.notification.notificationId))
 		end
 	end, { var2, var3 })

@@ -9,9 +9,10 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local getPeriodTypeDisplayLabelModule = require(robloxSubscriptionPurchaseApp.Utils.getPeriodTypeDisplayLabel)
 local isSupportedTrialPeriodTypeModule = require(robloxSubscriptionPurchaseApp.Utils.isSupportedTrialPeriodType)
 local fFlagSupportFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagSupportFreeTrial)
-local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
 local fFlagRobloxPlusDynamicFreeTrialLengthModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusDynamicFreeTrialLength)
+local fFlagEnablePlusReferralLegalDisclosureModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagEnablePlusReferralLegalDisclosure)
 local robloxSubscriptionTermsOfUseLink = game:DefineFastString("RobloxSubscriptionTermsOfUseLink", "https://en.help.roblox.com/hc/articles/46804865425300")
+local plusReferralProgramTermsURL2 = game:DefineFastString("PlusReferralProgramTermsURL2", "https://en.help.roblox.com/hc/en-us/articles/52737229124628")
 
 local function _(p1)
 	return p1:gsub("\\u{(%x+)}", function(p2)
@@ -66,7 +67,7 @@ local _ = function(p2)
 end
 
 return function(p2)
-	-- upvalues: foundationModule (ref), fFlagSupportFreeTrialModule (ref), fFlagRobloxPlusDynamicFreeTrialLengthModule (ref), isSupportedTrialPeriodTypeModule (ref), getPeriodTypeDisplayLabelModule (ref), useLocalization (ref), robloxSubscriptionTermsOfUseLink (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), reactModule (ref), linkBehavior (ref), renderer (ref), replaceQuotesOutsideTags (ref), decodeInlineRichTextEntities (ref)
+	-- upvalues: foundationModule (ref), fFlagSupportFreeTrialModule (ref), fFlagRobloxPlusDynamicFreeTrialLengthModule (ref), isSupportedTrialPeriodTypeModule (ref), getPeriodTypeDisplayLabelModule (ref), useLocalization (ref), robloxSubscriptionTermsOfUseLink (ref), fFlagEnablePlusReferralLegalDisclosureModule (ref), plusReferralProgramTermsURL2 (ref), reactModule (ref), linkBehavior (ref), renderer (ref), replaceQuotesOutsideTags (ref), decodeInlineRichTextEntities (ref)
 	local var4 = foundationModule.Hooks.useTokens()
 	local trialDuration = p2.trialDuration or 1
 	local var5 = fFlagSupportFreeTrialModule and (fFlagRobloxPlusDynamicFreeTrialLengthModule and (p2.isFreeTrial == true and (p2.trialDuration ~= nil and isSupportedTrialPeriodTypeModule(p2.trialPeriodType))))
@@ -98,13 +99,19 @@ return function(p2)
 			trialPeriodLabel = var6.trialPeriodLabel,
 			billingPeriodLabel = var6.billingPeriodLabel
 		} else nil,
-		shortFreeTrialTermsAgreement = if fFlagRobloxPlusFAEFreeTrialModule then {
+		shortFreeTrialTermsAgreement = {
 			"Feature.RobloxSubscription.Label.FreeTrialDisclosureShort",
 			linkStart = "<a href=\"" .. robloxSubscriptionTermsOfUseLink .. "\">",
 			linkEnd = "</a>"
+		},
+		referralTermsAgreement = if fFlagEnablePlusReferralLegalDisclosureModule then {
+			"Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase",
+			referralTermsUrl = plusReferralProgramTermsURL2,
+			termsUrl = robloxSubscriptionTermsOfUseLink,
+			ctaText = if p2.ctaText and p2.ctaText ~= "" then p2.ctaText else var6.subscribe
 		} else nil
 	})
-	local var8 = if fFlagRobloxPlusFAEFreeTrialModule and p2.shortenFreeTrialTerms then var7.shortFreeTrialTermsAgreement elseif var5 then var7.freeTrialTermsAgreementV3 elseif fFlagSupportFreeTrialModule and p2.isFreeTrial then var7.freeTrialTermsAgreement else var7.termsAgreement
+	local var8 = if fFlagEnablePlusReferralLegalDisclosureModule and p2.isReferral then var7.referralTermsAgreement elseif p2.shortenFreeTrialTerms then var7.shortFreeTrialTermsAgreement elseif var5 then var7.freeTrialTermsAgreementV3 elseif fFlagSupportFreeTrialModule and p2.isFreeTrial then var7.freeTrialTermsAgreement else var7.termsAgreement
 	
 	return reactModule.createElement(renderer, {
 		text = if fFlagSupportFreeTrialModule then replaceQuotesOutsideTags(decodeInlineRichTextEntities(var8:gsub("\\u{(%x+)}", function(p3)

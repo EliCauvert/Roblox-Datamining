@@ -89,6 +89,8 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Il tuo indirizzo 
 Authentication.Login.WeChat.AntiAddictionText,"Boicotta le brutte esperienze, rifiuta le esperienze piratate. Sii consapevole dell'autodifesa e dell'essere ingannati. Le esperienze di visita fanno bene al cervello, ma troppe visite di esperienza possono danneggiare la tua salute. Gestisci bene il tuo tempo e goditi uno stile di vita sano."
 Authentication.SignUp.Action.ApplyOnNextRespawn,Applica alla prossima rigenerazione
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.Create,Crea
+Authentication.SignUp.Action.CreateAccountSentenceCase,Crea un account
 Authentication.SignUp.Action.ExitModalLeave,Esci
 Authentication.SignUp.Action.RespawnNow,Rigenera ora
 Authentication.SignUp.Action.StartPlay,Inizia a giocare
@@ -96,15 +98,18 @@ Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Riprova ad accedere
 Authentication.SignUp.Description.AccountAlreadyLinked,Il tuo account per {platformAccountName} è già collegato a un account Roblox. Prova ad accedere di nuovo.
 Authentication.SignUp.Description.BirthdayHint,Inserisci la data
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"Creando un account, accetti le nostre {startTermsTag}Condizioni{endTermsTag}, incluso l'arbitrato, e dichiari di accettare la nostra {startPrivacyTag}Politica sulla riservatezza{endPrivacyTag}. Se hai meno di 18 anni, il tuo genitore o tutore deve autorizzare il tuo account e accettare le nostre Condizioni."
 Authentication.SignUp.Description.Try,Prova
 Authentication.SignUp.Description.UsernameChanged,"Tutto in ordine! Il tuo account è pronto e collegato alla piattaforma {platform}. Ricarica per visualizzare il tuo nome utente aggiornato nel gioco. In caso contrario, la modifica verrà applicata alla prossima sessione."
 Authentication.SignUp.Description.UsernameUnchanged,Ci sei! Il tuo account è pronto e collegato alla piattaforma {platform}. Chatta con gli amici e gioca a milioni di giochi Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Il tuo account Roblox sarà collegato al tuo account per {platform}. Puoi scollegarli dalla schermata Impostazioni in qualsiasi momento. Ci potrebbe essere una pausa prima di essere in grado di collegare a un altro account per {platform}. Facendo clic su {ctaButton}, accetti i Termini di Utilizzo, compresa la clausola di arbitrato e stai riconoscendo l'Informativa sulla privacy."
+Authentication.SignUp.Header.CloseWithoutFinishing,Vuoi chiudere senza completare?
 Authentication.SignUp.Header.OneLastThing,Un'ultima cosa
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Configura il tuo account Roblox
 Authentication.SignUp.Heading.CountryCodeSelector,Seleziona paese
 Authentication.SignUp.Heading.RetryLogIn,
 Authentication.SignUp.Label.Birthday,Data di nascita
+Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} anni)
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,Giorno
 Authentication.SignUp.Label.EnterYourEmail,Inserisci la tua email
@@ -143,6 +148,7 @@ Authentication.SignUp.Response.PasswordComplexity,Crea una password più comples
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Occorre prima impostare il nome utente.
 Authentication.SignUp.Subtitle.AddYourBirthday,Aggiungi la tua data di nascita per creare il tuo account Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,I tuoi progressi verranno trasferiti quando completerai la configurazione.
+Authentication.SignUp.Subtitle.YoureAlmostThere,"Ci sei quasi. Se chiudi ora, la creazione del tuo account resterà incompleta e non potrai giocare a Roblox."
 Authentication.TwoStepVerification.Action.GoToSecurity,Impostazioni
 Authentication.TwoStepVerification.Label.TwoStepRequired,La verifica in due passaggi è necessaria per effettuare ulteriori transazioni. Vai su Impostazioni> Sicurezza per completare la verifica in due passaggi.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Troppi tentativi. Riprova più tardi.
@@ -410,7 +416,7 @@ CommonUI.Features.Label.Connections,Contatti
 CommonUI.Features.Label.ControllerBar.HoldPrefix,Premi
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,per giocare
-CommonUI.Features.Label.CreateGames,Crea
+CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,Esperienze
 CommonUI.Features.Label.GiftCards,Compra Carte regalo
@@ -1972,6 +1978,10 @@ Feature.Build.Analytics.Description.PayerConversion,La conversione pagante è la
 Feature.Build.Analytics.Description.PlaythroughRate,Il tasso di completamento (playthrough) è la percentuale di visite che hanno completato una sessione di gioco completa. Tassi più alti indicano che i giocatori trovano la tua esperienza facile da iniziare e che vale la pena portarla a termine.
 Feature.Build.Analytics.Description.TotalPlaytime,Il tempo di gioco totale somma il tempo che tutti i giocatori hanno trascorso nella tua esperienza nel periodo. L'aumento del tempo di gioco di solito indica sessioni più coinvolgenti.
 Feature.Build.Analytics.DurationHours,{number} ore
+Feature.Build.Analytics.Goal.EarnRobux,
+Feature.Build.Analytics.Goal.FirstImpression,Fai una buona prima impressione
+Feature.Build.Analytics.Goal.GetMorePlayers,Ottieni più giocatori
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,Fai in modo che le persone vogliano tornare a giocare
 Feature.Build.Analytics.KeyStats,Statistiche chiave
 Feature.Build.Analytics.LastMonth,Ultimo mese
 Feature.Build.Analytics.LastWeek,Ultima settimana
@@ -2003,9 +2013,12 @@ Feature.Build.Analytics.Summary.TotalPlaytime,Ore totali trascorse dai giocatori
 Feature.Build.Analytics.Title.Arppu,Entrate medie per utente a pagamento
 Feature.Build.Analytics.Title.ConcurrentUsers,Giocatori totali
 Feature.Build.Analytics.Title.D1Retention,Ritenzione G1
+Feature.Build.Analytics.Title.D7Retention,Ritenzione G7
 Feature.Build.Analytics.Title.DailyActiveUsers,Utenti giornalieri attivi
+Feature.Build.Analytics.Title.NewUserSessionTime,Durata sessione nuovi utenti
 Feature.Build.Analytics.Title.PayerConversion,Conversione pagante
 Feature.Build.Analytics.Title.PlaythroughRate,Tasso di completamento (playthrough)
+Feature.Build.Analytics.Title.RobuxSpent,
 Feature.Build.Analytics.Title.TotalPlaytime,Tempo di gioco totale
 Feature.Build.Analytics.Visits,Visite
 Feature.Build.Content.NewGame,Nuovo gioco
@@ -2062,6 +2075,7 @@ Feature.Build.Description.ShopButton,Aggiungi un punto di accesso per gli acquis
 Feature.Build.Description.ShortAdCampaign,Un modo rapido per scoprire cosa pensano i giocatori del tuo gioco.
 Feature.Build.Description.StopBuild,"Questa richiesta è ancora in corso. Se ti fermi ora, non verrà completata e dovrai inviarla di nuovo."
 Feature.Build.Description.UpdateDeveloperProduct,Aggiorna il Developer Product {PRODUCT_ID}.
+Feature.Build.Description.UseAdCreditsInAdsManager,Dovrai accedere al Gestore degli annunci per farlo.
 Feature.Build.Error.AdForbidden,"Non puoi pubblicare annunci dal tuo account o nel tuo gioco, in questo momento. Contatta l'assistenza se ritieni che si tratti di un errore."
 Feature.Build.Error.AdInsufficientFunds,Non hai abbastanza Robux per creare questo annuncio. Aggiungine altri e riprova.
 Feature.Build.Error.AdInternalError,Si è verificato un errore. Riprova più tardi.
@@ -2385,6 +2399,7 @@ Feature.Build.Title.RevertLastChange,Ripristinare l'ultima modifica?
 Feature.Build.Title.StopBuild,Vuoi interrompere la creazione?
 Feature.Build.Title.Tasks,Attività
 Feature.Build.Title.TurnActivity,Gira attività
+Feature.Build.Title.UseYourAdCredits,Usa i tuoi crediti pubblicitari
 Feature.Build.Title.VersionHistory,Cronologia versioni
 Feature.Build.Title.VersionInfo,Informazioni versione
 Feature.Build.Title.VersionNumber,Versione {VERSION}
@@ -3445,7 +3460,7 @@ Feature.Groups.Message.NotInAnyGroups,Non sei parte di nessuna community.
 Feature.Groups.Message.PinLocked,Non è possibile eseguire questa azione con un pin bloccato. Sblocca il tuo Pin nella pagina Impostazioni account.
 Feature.Groups.Modal.ContentTextHigh,"Verifica il tuo account per unirti a questa community.
 
-1. Vai in Informazioni dell'account > Verifica la mia età
+1. Vai in Informazioni dell'account > Verifica la tua età tramite documento
 2. Completa il processo di verifica"
 Feature.Groups.Modal.ContentTextLow,"Verifica il tuo account per unirti a questa community.
 
@@ -3453,14 +3468,14 @@ Feature.Groups.Modal.ContentTextLow,"Verifica il tuo account per unirti a questa
 2. Scegli un'opzione di verifica:
 - Aggiungi numero di telefono
 - Aggiungi email
-- Verifica la mia età
+- Verifica la tua età tramite documento
 3. Completa il processo di verifica"
 Feature.Groups.Modal.ContentTextMedium,"Verifica il tuo account per unirti a questa community.
 
 1. Vai su Informazioni dell'account
 2. Scegli un'opzione di verifica:
-- Aggiungi numero di telefono E Aggiungi email
-- Verifica la mia età
+- Aggiungi numero di telefono E email
+- Verifica la tua età tramite documento
 3. Completa il processo di verifica"
 Feature.Groups.Notification.FailedToFollow,Impossibile seguire il profilo. Riprova più tardi.
 Feature.Groups.Notification.FailedToJoin,Impossibile unirsi alla community. Riprova più tardi.
@@ -3535,6 +3550,7 @@ Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Acquistando R
 Feature.InExperienceShop.Label.BonusItem,Articolo bonus
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Termina tra {timeRemaining}
+Feature.InExperienceShop.Label.FreeTrial,Prova gratuita
 Feature.InExperienceShop.Label.NoDescription,Nessuna descrizione
 Feature.InExperienceShop.Label.OfferEndTime,{offer} che termina tra {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Questa è un'anteprima del tuo Negozio in Roblox Studio non visibile ai giocatori.
@@ -3546,6 +3562,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} minuti
 Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minuto
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} secondi
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 secondo
+Feature.InExperienceShop.Label.Trial,Periodo di prova
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Hai acquistato {ROBUX_AMOUNT} Robux con successo
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Confermi di voler eliminare definitivamente questo articolo dal tuo inventario? Se cambi idea, dovrai guadagnarlo di nuovo in un'esperienza."
 Feature.Item.Label.DeleteItemUndercase,Elimina articolo
@@ -3810,10 +3827,17 @@ Feature.Parents.Title.EnterParentEmailV2,Inserisci l'email del genitore
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,Aggiungi agli amici
 Feature.PlayerSearchResults.Label.FromSearch,Dallo strumento di ricerca
+Feature.PlayerSearchResults.Label.NewUsername,Nuovo nome utente
 Feature.PlayerSearchResults.Label.Previously,Precedentemente
 Feature.PlayerSearchResults.Label.ThisIsYou,Questo sei tu
+Feature.PlayerSearchResults.Label.You,Tu
+Feature.PlayerSearchResults.Label.YouAreConnections,Siete contatti
 Feature.PlayerSearchResults.Label.YouAreFollowing,Stai seguendo
+Feature.PlayerSearchResults.Label.YouAreFriends,Sei amico
+Feature.PrivateServers.Action.CreatePrivateServer,Crea server privato
+Feature.PrivateServers.Action.FreeWithBlackbird,Gratis con il piano Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Gli acquisti di server privati non sono supportati in Studio.
+Feature.PrivateServers.Description.VipServersNotSupported,Questo gioco non supporta i server privati.
 Feature.Profile.Action.AboutThisProfile,Informazioni su questo profilo
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Accetta amico/a
@@ -4066,6 +4090,7 @@ Feature.RobloxSubscription.Description.JoinEarly,Unisciti in anticipo con il pia
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} ti ha invitato a unirti a Plus. Entrambi riceverete {amount} Robux se deciderai di acquistarlo.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Cliccando su \u{201C}{ctaText}\u{201D}, accetti le <a href=""{termsUrl}"">Condizioni di abbonamento di Roblox</a>. Ti verrà addebitato automaticamente un importo a cadenza mensile fino all'eventuale disdetta."
 Feature.RobloxSubscription.Heading.ReferralEntry,Condividi il piano Plus per ottenere {amount} Robux
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Iscriviti al piano Plus per ottenere {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,"Iscriviti al piano Plus, ottieni"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Server privati gratuiti
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4082,6 +4107,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 mese gratis,
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} gratis,{boldEnd} poi {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,mese
 Feature.RobloxSubscription.Label.months,mesi
+Feature.RobloxSubscription.Message.AlreadySubscribed,Hai già Plus. Questo link è per i nuovi membri. Condividi il tuo per invitare gli amici e ottenere ricompense.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Ottieni 1 settimana gratuita di Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,Buone notizie
 Feature.RobloxSubscription.Title.GenericError,
@@ -4326,8 +4352,19 @@ Feature.SongDetails.Action.ReportAudio,Segnala audio
 Feature.SongDetails.Label.InappropriateAudio,Audio inappropriato
 Feature.SongDetails.Label.InappropriateThumbnail,Miniatura inappropriata
 Feature.SongDetails.Label.SongPreview,Anteprima canzone
+Feature.SplitPane.EditAvatarButtonText,
 Feature.SplitPane.Label.CollapseAvatar,Riduci avatar
 Feature.SplitPane.Label.ExpandAvatar,Espandi avatar
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,Termina il tour
+Feature.SplitPane.Tour.Button.SkipTour,Salta il tour
+Feature.SplitPane.Tour.Step1.Description.Collapsed,Gli avatar salvati sono ora visibili nella home. Espandi questo spazio per vederli.
+Feature.SplitPane.Tour.Step1.Description.Expanded,Gli avatar salvati sono ora visibili nella home. Ruotali o ingrandiscili per vedere ogni dettaglio.
+Feature.SplitPane.Tour.Step1.Title,Visualizzati su Inizio
+Feature.SplitPane.Tour.Step2.Description,Scegli come vuoi apparire. Passa da un avatar salvato all'altro subito prima di partecipare a una partita.
+Feature.SplitPane.Tour.Step2.Title,Cambia il tuo look in qualsiasi momento
+Feature.SplitPane.Tour.Step3.Description,Nascondi questo spazio in qualsiasi momento per concentrarti sulla scoperta di nuovi giochi. Il tuo avatar salvato rimane proprio qui.
+Feature.SplitPane.Tour.Step3.Title,Scegli cosa vuoi vedere
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Aggiungi altri
 Feature.Squads.Action.ConnectToVoice,Connettiti alla chat vocale

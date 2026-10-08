@@ -37,6 +37,11 @@ return function(p1, p2)
 			end
 		end
 	end
+	local localTts = p1.localTts
+	
+	if localTts ~= nil then
+		var3 = true
+	end
 	local var4 = mediaRootModule(p1.momentId, p2.parent)
 	local folder = var4.folder
 	local var5 = createAudioGraphModule(folder, p2.audioDeviceOutput, { masterVolume = p2.masterVolume, enableDucking = var3 })
@@ -113,6 +118,19 @@ return function(p1, p2)
 				t_1[tts.id] = tts
 			end
 		end
+	end
+	if localTts ~= nil then
+		local tts = registry.create("tts", {
+			kind = "tts",
+			id = `tts:{#t_2}`,
+			text = localTts.text,
+			voiceId = localTts.voiceId,
+			startTime = localTts.startTime,
+			parent = folder
+		}, services)
+		table.insert(t_2, tts)
+		table.insert(t, tts)
+		t_1[tts.id] = tts
 	end
 	if edits ~= nil and edits.textOverlays ~= nil then
 		for i, v in edits.textOverlays do

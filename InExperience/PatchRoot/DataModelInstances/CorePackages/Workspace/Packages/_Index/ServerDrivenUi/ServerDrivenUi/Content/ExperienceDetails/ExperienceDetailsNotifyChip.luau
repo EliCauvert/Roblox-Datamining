@@ -13,13 +13,14 @@ local toastType = toastRoduxModule.Enums.ToastType
 local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
 local universalAppPolicyModule = require(parent.UniversalAppPolicy)
 local gameFollow = require(parent.DiscoveryAnalytics).Events.gameFollow
+local fFlagLuaAppAddUniverseIdToEngagementEvents = require(parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useLocalization = localizationModule.Hooks.useLocalization
 local useAppPolicy = universalAppPolicyModule.useAppPolicy
 local useOptimisticUpdateStatusModule = require(serverDrivenUi.Content.ExperienceDetails.Hooks.useOptimisticUpdateStatus)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), signalsReactModule (ref), game (ref), useLocalization (ref), reactModule (ref), playersService (ref), gameFollow (ref), setCurrentToastMessage (ref), toastType (ref), useOptimisticUpdateStatusModule (ref), useAppPolicy (ref), sduiChip (ref), foundationModule (ref)
+	-- upvalues: useDispatch (ref), signalsReactModule (ref), game (ref), useLocalization (ref), reactModule (ref), playersService (ref), gameFollow (ref), fFlagLuaAppAddUniverseIdToEngagementEvents (ref), setCurrentToastMessage (ref), toastType (ref), useOptimisticUpdateStatusModule (ref), useAppPolicy (ref), sduiChip (ref), foundationModule (ref)
 	local layoutOrder = p1.layoutOrder
 	local universeId = p1.universeId
 	local var1 = useDispatch()
@@ -47,7 +48,7 @@ return reactModule.memo(function(p1)
 		leadingIconName = foundationModule.Enums.IconName.Bell,
 		leadingIconVariant = if var3 then foundationModule.Enums.IconVariant.Filled else nil,
 		onActivated = useOptimisticUpdateStatusModule(reactModule.useCallback(function()
-			-- upvalues: var3 (ref), var7 (ref), playersService (copy), gameFollow (copy), game (copy), universeId (ref)
+			-- upvalues: var3 (ref), var7 (ref), playersService (copy), gameFollow (copy), fFlagLuaAppAddUniverseIdToEngagementEvents (copy), universeId (ref), game (copy)
 			local var8 = not var3
 			
 			if var7 then
@@ -55,7 +56,8 @@ return reactModule.memo(function(p1)
 					ctx = "ExperienceDetailsNotifyChip",
 					uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
 					placeId = var7,
-					state = if var8 then "on" else "off"
+					state = if var8 then "on" else "off",
+					universeId = if fFlagLuaAppAddUniverseIdToEngagementEvents then universeId else nil
 				}, "ExperienceDetailsNotifyChip")
 			end
 			return game.getFollowingsStore(false).updateFollowing(universeId, var8)

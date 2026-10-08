@@ -1,27 +1,17 @@
 ﻿local chatBubbleEnumModule = require(script.Parent.ChatBubbleEnum)
+local messageGroupShapeModule = require(script.Parent.Parent.Grouping.MessageGroupShape)
+local getGroupCornerRadiiModule = require(script.Parent.Parent.Grouping.getGroupCornerRadii)
+local t = {
+	[chatBubbleEnumModule.BUBBLE_VARIANTS.SINGLE] = messageGroupShapeModule.Position.Only,
+	[chatBubbleEnumModule.BUBBLE_VARIANTS.TOP] = messageGroupShapeModule.Position.First,
+	[chatBubbleEnumModule.BUBBLE_VARIANTS.MIDDLE] = messageGroupShapeModule.Position.Middle,
+	[chatBubbleEnumModule.BUBBLE_VARIANTS.BOTTOM] = messageGroupShapeModule.Position.Last
+}
 
 return function(p1, p2, p3)
-	-- upvalues: chatBubbleEnumModule (ref)
-	if p1 == chatBubbleEnumModule.BUBBLE_VARIANTS.SINGLE then
-		return {
-			topLeft = p3,
-			topRight = p3,
-			bottomLeft = p3,
-			bottomRight = p3
-		}
-	end
-	local var1 = if p1 == chatBubbleEnumModule.BUBBLE_VARIANTS.TOP then p3 else 0
-	local var2 = if p1 == chatBubbleEnumModule.BUBBLE_VARIANTS.BOTTOM then p3 else 0
-	
-	return if p2 then {
-		topLeft = var1,
-		topRight = p3,
-		bottomLeft = var2,
-		bottomRight = p3
-	} else {
-		topLeft = p3,
-		topRight = var1,
-		bottomLeft = p3,
-		bottomRight = var2
-	}
+	-- upvalues: getGroupCornerRadiiModule (ref), messageGroupShapeModule (ref), t (ref)
+	return getGroupCornerRadiiModule({
+		direction = if p2 then messageGroupShapeModule.Direction.Incoming else messageGroupShapeModule.Direction.Outgoing,
+		position = t[p1]
+	}, p3)
 end

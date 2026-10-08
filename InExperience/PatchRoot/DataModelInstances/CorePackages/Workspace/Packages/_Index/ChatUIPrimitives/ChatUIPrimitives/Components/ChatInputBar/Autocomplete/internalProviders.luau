@@ -3,7 +3,6 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local cryoModule = require(parent.Cryo)
 local emojiListModule = require(parent.EmojiList)
-local fFlagExpChatEmojiInputParity = require(parent.SharedFlags).FFlagExpChatEmojiInputParity
 local trieModule = require(script.Parent.Trie)
 
 local function buildUnifiedTrie(p1, p2)
@@ -56,7 +55,6 @@ local function getEmojiStructure()
 end
 
 local function matchTrigger(p4, p5)
-	-- upvalues: fFlagExpChatEmojiInputParity (ref)
 	if p5 < 2 then
 		return nil
 	end
@@ -84,8 +82,6 @@ local function matchTrigger(p4, p5)
 			replaceStart = var4,
 			replaceFinish = p5 - 1
 		}
-	elseif not fFlagExpChatEmojiInputParity then
-		return nil
 	end
 	local var5 = nil
 	
@@ -103,10 +99,8 @@ local function matchTrigger(p4, p5)
 end
 
 local function matchColonCompletion(p6, p7)
-	-- upvalues: fFlagExpChatEmojiInputParity (ref), emojiListModule (ref)
-	if not fFlagExpChatEmojiInputParity then
-		return nil
-	elseif p7 - 1 < 3 then
+	-- upvalues: emojiListModule (ref)
+	if p7 - 1 < 3 then
 		return nil
 	elseif string.sub(p6, p7 - 1, p7 - 1) ~= ":" then
 		return nil

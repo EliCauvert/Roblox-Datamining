@@ -10,14 +10,13 @@ local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
 local findAnalyticsFieldInAncestors = sduiCoreSystemModule.findAnalyticsFieldInAncestors
 local appPage = require(parent.RobloxAppEnums).AppPage
 local _ = require(parent.DiscoveryTypes)
-local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
 local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local fFlagLuaAppSponsoredGamePreviewVideo = require(parent.SharedFlags).FFlagLuaAppSponsoredGamePreviewVideo
 local fFlagLuaAppSduiPassSortSubId = require(parent.SharedFlags).FFlagLuaAppSduiPassSortSubId
 local t = {}
 
 return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: fFlagSduiFixSearchTelemetry (ref), t (ref), cryoModule (ref), sduiParsers (ref), fFlagLuaAppSponsoredGamePreviewVideo (ref), sduiBuilder (ref), fFlagLuaAppSduiPassSortSubId (ref), findAnalyticsFieldInAncestors (ref), appPage (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), sduiParseHelpers (ref), sduiErrors (ref)
+	-- upvalues: fFlagSduiFixSearchTelemetry (ref), t (ref), cryoModule (ref), sduiParsers (ref), fFlagLuaAppSponsoredGamePreviewVideo (ref), sduiBuilder (ref), fFlagLuaAppSduiPassSortSubId (ref), findAnalyticsFieldInAncestors (ref), appPage (ref), sendGameImpressions (ref), sduiParseHelpers (ref), sduiErrors (ref)
 	local t_1 = {}
 	local var1 = if fFlagSduiFixSearchTelemetry then 0 else nil
 	
@@ -57,7 +56,7 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 				searchUuid = findAnalyticsFieldInAncestors("searchUuid", p4),
 				sortPos = p5.collectionPosition,
 				gameSetTypeId = tostring(p5.collectionId)
-			}, p9, p6, if fFlagLuaAppAddComponentTypeToSearchImpressions then var4 or false else nil, if fFlagLuaAppAddComponentTypeToSearchImpressions then var3 else nil)
+			}, p9, p6, var4 or false, var3)
 			
 			return
 		elseif p7.appPage == appPage.ExperienceDetail or p7.appPage == appPage.GameDetail then

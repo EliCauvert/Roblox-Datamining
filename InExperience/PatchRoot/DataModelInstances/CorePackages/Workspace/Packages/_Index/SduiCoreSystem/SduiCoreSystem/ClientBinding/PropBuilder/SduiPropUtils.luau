@@ -22,7 +22,6 @@ local propResultCategory = sduiClientBindingTypesModule.PropResultCategory
 local applyFormatArgFormatter = require(sduiCoreSystem.ClientBinding.PropBuilder.applyFormatArgFormatter).applyFormatArgFormatter
 local dataStatus = dataHydrationModule.DataHydrationTypes.DataStatus
 local fFlagSduiDismissPromptPageScope = require(parent.SharedFlags).FFlagSduiDismissPromptPageScope
-local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
 local fFlagSduiFormatStringPercentSafeGsubModule = require(sduiCoreSystem.FFlagSduiFormatStringPercentSafeGsub)
 local frozen = table.freeze({ status = dataStatus.Failed })
 local frozen_1 = table.freeze({})
@@ -111,13 +110,13 @@ local function generateDynamicBindingPropValue(p5, p6, p7, p8, p9, p10)
 end
 
 local function generateTokenBindingPropValue(p5, p6, p7)
-	-- upvalues: splitDottedPathModule (ref), signalsModule (ref), getSduiTokensStoreModule (ref), tryGetPathFromDataModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), frozen (ref), fFlagLuaAppSduiColorPropMigration (ref), dataStatus (ref), tutilsModule (ref)
+	-- upvalues: splitDottedPathModule (ref), signalsModule (ref), getSduiTokensStoreModule (ref), tryGetPathFromDataModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), frozen (ref), dataStatus (ref), tutilsModule (ref)
 	local currentComponentType = p6.currentComponentType
 	local currentParserName = p6.currentParserName
 	local var3 = splitDottedPathModule(p5)
 	
 	return signalsModule.createComputed(function(p8)
-		-- upvalues: getSduiTokensStoreModule (copy), p6 (ref), tryGetPathFromDataModule (copy), var3 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), currentComponentType (ref), currentParserName (ref), frozen (copy), fFlagLuaAppSduiColorPropMigration (copy), p7 (ref), dataStatus (copy)
+		-- upvalues: getSduiTokensStoreModule (copy), p6 (ref), tryGetPathFromDataModule (copy), var3 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), currentComponentType (ref), currentParserName (ref), frozen (copy), p7 (ref), dataStatus (copy)
 		local var4, var5 = tryGetPathFromDataModule(getSduiTokensStoreModule().getTokens(p8, p6.appPage), var3)
 		
 		if not var4 then
@@ -129,7 +128,7 @@ local function generateTokenBindingPropValue(p5, p6, p7)
 			}, p6.appPage)
 			
 			return frozen
-		elseif fFlagLuaAppSduiColorPropMigration and p7 then
+		elseif p7 then
 			var5 = p7(var5)
 		end
 		return { data = var5, status = dataStatus.Ready }

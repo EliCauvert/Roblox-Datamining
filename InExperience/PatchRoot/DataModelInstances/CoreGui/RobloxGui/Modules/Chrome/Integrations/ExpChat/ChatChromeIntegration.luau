@@ -12,7 +12,6 @@ local chromeIntegrationUtilsModule = require(chrome.Integrations.ChromeIntegrati
 local serviceModule = require(chrome.Service)
 local chromeUtilsModule = require(chrome.ChromeShared.Service.ChromeUtils)
 local commonIconModule = require(chrome.Integrations.CommonIcon)
-local fFlagChatIntegrationFixShortcutModule = require(chrome.Flags.FFlagChatIntegrationFixShortcut)
 local focusSelectExpChatModule = require(chrome.ChromeShared.Utility.FocusSelectExpChat)
 local viewportUtilModule = require(chrome.ChromeShared.Service.ViewportUtil)
 local mappedSignal = chromeUtilsModule.MappedSignal
@@ -326,7 +325,7 @@ if expChatUnibarAvailabilityRefactor then
 		default.setCoreGuiEnabled(p1)
 	end)
 end
-if fFlagChatIntegrationFixShortcutModule and fFlagEnableConsoleExpControls then
+if fFlagEnableConsoleExpControls then
 	signalsUtilsModule.createDetachedEffect(function(p1)
 		-- upvalues: focusNavigationStore (ref), serviceModule (ref), constantsModule (ref)
 		if focusNavigationStore.getChatInputBarFocused(p1) then

@@ -23,6 +23,8 @@ local useGuiInset = require(avatarExperienceProfilePictureEditor.Hooks.useGuiIns
 local useEditProfileImageLayout = require(avatarExperienceProfilePictureEditor.Hooks.useEditProfileImageLayout).useEditProfileImageLayout
 local useEditProfileImageViewModelModule = require(avatarExperienceProfilePictureEditor.Hooks.useEditProfileImageViewModel)
 local framesPlusUpsellBarModule = require(script.Parent.FramesPlusUpsellBar)
+local robloxPlusUpsellBanner = require(parent.RobloxSubscriptionPurchaseApp).Components.RobloxPlusUpsellBanner
+local fFlagProfileFramesUpsellFreeTrialModule = require(avatarExperienceProfilePictureEditor.Flags.FFlagProfileFramesUpsellFreeTrial)
 local rotatableAvatarPreviewModule = require(script.Parent.RotatableAvatarPreview)
 local enumsModule = require(avatarExperienceProfilePictureEditor.Common.Enums)
 local constantsModule = require(avatarExperienceProfilePictureEditor.Constants)
@@ -31,6 +33,15 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagAXEnableProfileTab = sharedFlagsModule.FFlagAXEnableProfileTab
 local fFlagEditProfileImageR15UpgradePrompt = sharedFlagsModule.FFlagEditProfileImageR15UpgradePrompt
 local editProfileImageAnalyticsModule = require(avatarExperienceProfilePictureEditor.Analytics.EditProfileImageAnalytics)
+
+local function renderFramesPlusUpsellBanner(p1)
+	-- upvalues: reactModule (ref), framesPlusUpsellBarModule (ref)
+	return reactModule.createElement(framesPlusUpsellBarModule, {
+		layoutOrder = p1.LayoutOrder,
+		actionText = p1.actionText,
+		onSubscribeActivated = p1.onActivated
+	})
+end
 
 local function createSplitLayout(p1, p2)
 	-- upvalues: reactModule (ref), view (ref), constantsModule (ref)
@@ -100,10 +111,17 @@ local function createStackedLayout(p1, p2, p3)
 end
 
 local function EditProfileImageBody(p1)
-	-- upvalues: useTokens (ref), useGuiInset (ref), useLocalization (ref), textKeysModule (ref), useEditProfileImageLayout (ref), useEditProfileImageViewModelModule (ref), fFlagEditProfileImageR15UpgradePrompt (ref), reactModule (ref), editProfileImageAnalyticsModule (ref), enumsModule (ref), framesPlusUpsellBarModule (ref), constantsModule (ref), assetGridScrollSectionModule (ref), iconName (ref), view (ref), expandedEmotesGridContentModule (ref), combinedCarouselsContentModule (ref), editProfileImageFooterModule (ref), rotatableAvatarPreviewModule (ref), iconButton (ref), iconSize (ref), buttonVariant (ref), foundationModule (ref), text (ref), createSplitLayout (ref), createStackedLayout (ref), focusNavigatorWrapperModule (ref), roactNavigationModule (ref), fFlagAXEnableProfileTab (ref)
+	-- upvalues: useTokens (ref), useGuiInset (ref), textKeysModule (ref), fFlagProfileFramesUpsellFreeTrialModule (ref), useLocalization (ref), useEditProfileImageLayout (ref), useEditProfileImageViewModelModule (ref), fFlagEditProfileImageR15UpgradePrompt (ref), reactModule (ref), editProfileImageAnalyticsModule (ref), enumsModule (ref), robloxPlusUpsellBanner (ref), renderFramesPlusUpsellBanner (ref), framesPlusUpsellBarModule (ref), constantsModule (ref), assetGridScrollSectionModule (ref), iconName (ref), view (ref), expandedEmotesGridContentModule (ref), combinedCarouselsContentModule (ref), editProfileImageFooterModule (ref), rotatableAvatarPreviewModule (ref), iconButton (ref), iconSize (ref), buttonVariant (ref), foundationModule (ref), text (ref), createSplitLayout (ref), createStackedLayout (ref), focusNavigatorWrapperModule (ref), roactNavigationModule (ref), fFlagAXEnableProfileTab (ref)
 	local var1 = useTokens()
 	local var2 = useGuiInset()
-	local var3 = useLocalization({ editProfilePicture = textKeysModule.EditProfilePicture })
+	local t = { editProfilePicture = textKeysModule.EditProfilePicture }
+	
+	if fFlagProfileFramesUpsellFreeTrialModule then
+		t.profileFramesUnlockBanner = textKeysModule.ProfileFramesUnlockBanner
+		t.subscribe = textKeysModule.Subscribe
+		t.tryItForFree = textKeysModule.TryItForFree
+	end
+	local var3 = useLocalization(t)
 	local var4 = p1.showCloseButton ~= false
 	local var5 = useEditProfileImageLayout({ guiInset = var2 })
 	local cutoutFieldOfViewDeg = var5.cutoutFieldOfViewDeg
@@ -155,7 +173,18 @@ local function EditProfileImageBody(p1)
 		navigation.onLeaveScreen()
 	end, { p1.mode, activeView, navigation.onLeaveScreen })
 	local var8 = p1.mode == enumsModule.EditProfileImageMode.FramesOnly
-	local var9 = if frames.shouldShowUpsell then reactModule.createElement(framesPlusUpsellBarModule, {
+	local var9 = if frames.shouldShowUpsell then if fFlagProfileFramesUpsellFreeTrialModule then reactModule.createElement(robloxPlusUpsellBanner, {
+		showPlusIcon = true,
+		testId = "FramesPlusUpsellBar",
+		message = var3.profileFramesUnlockBanner,
+		subscribeText = var3.subscribe,
+		freeTrialText = var3.tryItForFree,
+		onActivated = function()
+			-- upvalues: frames (ref)
+			frames.onOpenSubscriptionUpsell("banner")
+		end,
+		renderBanner = renderFramesPlusUpsellBanner
+	}) else reactModule.createElement(framesPlusUpsellBarModule, {
 		onSubscribeActivated = function()
 			-- upvalues: frames (ref)
 			frames.onOpenSubscriptionUpsell("banner")
@@ -256,7 +285,7 @@ local function EditProfileImageBody(p1)
 	})
 	local var15 = not var8 and not navigation.onTitleBack
 	local headerBar = foundationModule.HeaderBar
-	local t = {
+	local t_1 = {
 		activeView = activeView,
 		avatarPreview = var14,
 		closeButton = if var4 and (not isSplit and (var15 or var8)) then reactModule.createElement(view, {
@@ -305,7 +334,7 @@ local function EditProfileImageBody(p1)
 				["bg-surface-0"] = not isSplit,
 				["size-full-full"] = true
 			} elseif isSplit then "size-full-full" else "size-full-full bg-surface-0"
-		}, if isSplit then createSplitLayout(t, previewHeight) else createStackedLayout(t, previewWidth, visiblePreviewHeight))
+		}, if isSplit then createSplitLayout(t_1, previewHeight) else createStackedLayout(t_1, previewWidth, visiblePreviewHeight))
 	})
 end
 

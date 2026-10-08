@@ -1,1 +1,1 @@
-﻿return require(script.Parent.FFlagAXTryOnScreenImprovements) and game:DefineFastFlag("AXFixPurchaseSurfaceLogging", false)
+﻿return game:DefineFastFlag("AXFixPurchaseSurfaceLogging", false)

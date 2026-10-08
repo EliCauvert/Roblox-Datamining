@@ -10,9 +10,10 @@ local useCtaForRowModule = require(userList.Hooks.useCtaForRow)
 local useProfileCtaModule = require(userList.Hooks.useProfileCta)
 local fFlagUserListCanonicalCtaAnalyticsModule = require(userList.Flags.FFlagUserListCanonicalCtaAnalytics)
 local fFlagUserListComposeRenderRowWithCta = require(parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
+local fFlagUserListSurfacePresenceWins = require(parent.SharedFlags).FFlagUserListSurfacePresenceWins
 
 return reactModule.memo(function(p1)
-	-- upvalues: useProfileCtaModule (ref), useGetPresenceByUserId (ref), useJoinUserInExperience (ref), useCtaForRowModule (ref), fFlagUserListCanonicalCtaAnalyticsModule (ref), fFlagUserListComposeRenderRowWithCta (ref)
+	-- upvalues: useProfileCtaModule (ref), useGetPresenceByUserId (ref), useJoinUserInExperience (ref), useCtaForRowModule (ref), fFlagUserListCanonicalCtaAnalyticsModule (ref), fFlagUserListComposeRenderRowWithCta (ref), fFlagUserListSurfacePresenceWins (ref)
 	local id = p1.entity.id
 	local var1, var2 = useProfileCtaModule(id)
 	local var3 = useGetPresenceByUserId(id)
@@ -28,9 +29,13 @@ return reactModule.memo(function(p1)
 		local createRow = p1.createRow
 		
 		return renderRow(function(p2)
-			-- upvalues: var3 (ref), var4 (ref), var5 (ref), createRow (ref)
+			-- upvalues: var3 (ref), fFlagUserListSurfacePresenceWins (copy), var4 (ref), var5 (ref), createRow (ref)
 			local cloned = table.clone(p2)
 			cloned.presence = if var3 then var3.userPresenceType else nil
+			
+			if fFlagUserListSurfacePresenceWins and p2.presence ~= nil then
+				cloned.presence = p2.presence
+			end
 			cloned.primaryCta = var4.primaryCta
 			cloned.secondaryCta = var4.secondaryCta
 			cloned.ctaLoading = var5

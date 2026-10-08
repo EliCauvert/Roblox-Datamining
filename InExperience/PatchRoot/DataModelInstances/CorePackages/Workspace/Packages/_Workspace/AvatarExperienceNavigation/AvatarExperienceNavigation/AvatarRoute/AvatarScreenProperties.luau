@@ -12,6 +12,7 @@ local fFlagAXOutfitPageRevamp = avatarExperienceFlagsModule.FFlagAXOutfitPageRev
 local fFlagAXAvatarFoldersEnabled = avatarExperienceFlagsModule.FFlagAXAvatarFoldersEnabled
 local fFlagAXBackgroundGenerationAnalytics = avatarExperienceFlagsModule.FFlagAXBackgroundGenerationAnalytics
 local fFlagAXPhotoboothMomentsPage = avatarExperienceFlagsModule.FFlagAXPhotoboothMomentsPage
+local fFlagAXPhotoboothMomentsLogging = avatarExperienceFlagsModule.FFlagAXPhotoboothMomentsLogging
 local AXKeepTryOnsInAvatarEditor = game:DefineFastFlag("AXKeepTryOnsInAvatarEditor", false)
 local fFlagAXFixAvatarScreenVR = avatarExperienceFlagsModule.FFlagAXFixAvatarScreenVR
 local fFlagAXMakeupReleaseFTUX = avatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX
@@ -386,7 +387,12 @@ if fFlagEditProfileImageV2Enabled then
 	t_1[avatarScreenModule.AppCatalogContextMenuHost] = { isTransparent = true }
 end
 if fFlagAXPhotoboothMomentsPage then
-	t_1[avatarScreenModule.PhotoboothMomentsPage] = { isTryOnOutfitResetPage = true }
+	t_1[avatarScreenModule.PhotoboothMomentsPage] = {
+		isTryOnOutfitResetPage = true,
+		analyticsData = if fFlagAXPhotoboothMomentsLogging then {
+			unifiedLoggingSurface = unifiedLoggingSurfaceModule.PHOTOBOOTH_MOMENTS
+		} else nil
+	}
 end
 local t_2 = {}
 

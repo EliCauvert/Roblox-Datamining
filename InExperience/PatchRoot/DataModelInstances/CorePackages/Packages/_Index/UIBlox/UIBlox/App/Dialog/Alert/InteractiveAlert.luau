@@ -15,7 +15,6 @@ local imageSetComponentModule = require(parent_2.Core.ImageSet.ImageSetComponent
 local getTextHeightModule = require(parent_2.Core.Text.GetTextHeight)
 local getFontFromFontStyleModule = require(parent_2.Core.Text.GetFontFromFontStyle)
 local withStyleModule = require(parent_2.Core.Style.withStyle)
-local UIBloxConfigModule = require(parent_2.UIBloxConfig)
 local interactiveAlert = roactModule.PureComponent:extend("InteractiveAlert")
 interactiveAlert.validateProps = tModule.strictInterface({
 	anchorPoint = tModule.optional(tModule.Vector2),
@@ -42,11 +41,11 @@ interactiveAlert.validateProps = tModule.strictInterface({
 interactiveAlert.defaultProps = { bottomMargin = 24 }
 
 function interactiveAlert.render(p1)
-	-- upvalues: withStyleModule (ref), var1 (write), UIBloxConfigModule (ref), var2 (write), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), roactModule (ref), fitFrameOnAxis (ref), imageSetComponentModule (ref), getTextHeightModule (ref), genericTextLabelModule (ref), alertModule (ref), alertTypeModule (ref)
+	-- upvalues: withStyleModule (ref), var1 (write), var2 (write), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), roactModule (ref), fitFrameOnAxis (ref), imageSetComponentModule (ref), getTextHeightModule (ref), genericTextLabelModule (ref), alertModule (ref), alertTypeModule (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: var1 (copy), UIBloxConfigModule (copy), var2 (copy), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), p1 (ref), roactModule (copy), fitFrameOnAxis (copy), imageSetComponentModule (copy), getTextHeightModule (copy), genericTextLabelModule (copy), alertModule (copy), alertTypeModule (copy)
-		var1 = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_400 else p2.Tokens.Global.Size_200) * 17
-		var2 = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_1000 else p2.Tokens.Global.Size_500) * 10
+		-- upvalues: var1 (copy), var2 (copy), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), p1 (ref), roactModule (copy), fitFrameOnAxis (copy), imageSetComponentModule (copy), getTextHeightModule (copy), genericTextLabelModule (copy), alertModule (copy), alertTypeModule (copy)
+		var1 = p2.Tokens.Size.Size_400 * 17
+		var2 = p2.Tokens.Size.Size_1000 * 10
 		local theme = p2.Theme
 		local font = p2.Font
 		local var3 = if foundationFontFaceMigration then getFontFromFontStyleModule(font.Body) else font.Body.Font

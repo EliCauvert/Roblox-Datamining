@@ -1,13 +1,15 @@
-﻿local parent = script:FindFirstAncestor("Charts").Parent
+﻿local charts = script:FindFirstAncestor("Charts")
+local parent = charts.Parent
 local addSystemInfoToArgs = require(parent.DiscoveryUtils).AddSystemInfoToArgs
 local buildSduiCollectionInfo = require(parent.SduiSharedUtilities).buildSduiCollectionInfo
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiChartsRequestPlaceholders = sharedFlagsModule.FFlagSduiChartsRequestPlaceholders
 local fFlagSduiPreferredTextSizeLineBudgets = sharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets
+local fFlagSduiChartsAudienceFilterModule = require(charts.Flags.FFlagSduiChartsAudienceFilter)
 local uDim = UDim.new(1, 72)
 
 return function(p1, p2)
-	-- upvalues: addSystemInfoToArgs (ref), fFlagSduiChartsRequestPlaceholders (ref), buildSduiCollectionInfo (ref), uDim (ref), fFlagSduiPreferredTextSizeLineBudgets (ref)
+	-- upvalues: addSystemInfoToArgs (ref), fFlagSduiChartsAudienceFilterModule (ref), fFlagSduiChartsRequestPlaceholders (ref), buildSduiCollectionInfo (ref), uDim (ref), fFlagSduiPreferredTextSizeLineBudgets (ref)
 	local t = {}
 	local t_1 = {}
 	addSystemInfoToArgs(t_1, { "maxMemory" })
@@ -42,6 +44,9 @@ return function(p1, p2)
 			end
 			if filterSelections.ageGroup and filterSelections.ageGroup ~= "" then
 				t.age_group = filterSelections.ageGroup
+			end
+			if fFlagSduiChartsAudienceFilterModule and filterSelections.audience and filterSelections.audience ~= "" then
+				t.audience = filterSelections.audience
 			end
 		end
 		if fFlagSduiChartsRequestPlaceholders and p2.includePlaceholders then

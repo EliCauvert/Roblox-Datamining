@@ -10,7 +10,7 @@ local useCurrentSquadId = hooksModule.useCurrentSquadId
 local useIsExperienceInviteRetryBlocked = hooksModule.useIsExperienceInviteRetryBlocked
 local getSquadExperienceInviteStore = require(parent.SquadsCore.Stores).GetSquadExperienceInviteStore
 local fFlagUseSignalsForSquadExperienceInviteStatus = dependenciesModule.SharedFlags.FFlagUseSignalsForSquadExperienceInviteStatus
-local fFlagSquadExperienceInviteRetryAfter = require(parent.SquadsCore.Flags).FFlagSquadExperienceInviteRetryAfter
+local fFlagUseSignalsForSquadExperienceInvite = dependenciesModule.SharedFlags.FFlagUseSignalsForSquadExperienceInvite
 
 local function _(p1)
 	local squad = p1.Squad and p1.Squad.Squad
@@ -24,6 +24,14 @@ local function selectHasCurrentSquadId(p1)
 	return (squad and (squad.currentSquad and squad.currentSquad.squadId)) ~= nil
 end
 
+local function selectIsCreateExperienceInviteFetching(p1)
+	-- upvalues: networkingSquads (ref), networkStatus (ref)
+	local squad = p1.Squad and p1.Squad.Squad
+	local squadId = squad and (squad.currentSquad and squad.currentSquad.squadId)
+	
+	return squadId ~= nil and networkingSquads.CreateExperienceInvite.getStatus(p1, squadId) == networkStatus.Fetching
+end
+
 local function selectHasInFlightOrExistingInvite(p1)
 	-- upvalues: networkingSquads (ref), networkStatus (ref)
 	local squad = p1.Squad and p1.Squad.Squad
@@ -33,10 +41,10 @@ local function selectHasInFlightOrExistingInvite(p1)
 end
 
 return function()
-	-- upvalues: fFlagSquadExperienceInviteRetryAfter (ref), useCurrentSquadId (ref), useIsExperienceInviteRetryBlocked (ref), fFlagUseSignalsForSquadExperienceInviteStatus (ref), useSelector (ref), selectHasCurrentSquadId (ref), selectHasInFlightOrExistingInvite (ref), useSignalState (ref), getSquadExperienceInviteStore (ref), networkingSquads (ref), networkStatus (ref)
-	local var1 = if fFlagSquadExperienceInviteRetryAfter then useIsExperienceInviteRetryBlocked(if fFlagSquadExperienceInviteRetryAfter then useCurrentSquadId() else nil) else false
+	-- upvalues: useCurrentSquadId (ref), useIsExperienceInviteRetryBlocked (ref), fFlagUseSignalsForSquadExperienceInviteStatus (ref), useSelector (ref), selectHasCurrentSquadId (ref), fFlagUseSignalsForSquadExperienceInvite (ref), selectIsCreateExperienceInviteFetching (ref), useSignalState (ref), getSquadExperienceInviteStore (ref), selectHasInFlightOrExistingInvite (ref), networkingSquads (ref), networkStatus (ref)
+	local var1 = useIsExperienceInviteRetryBlocked(useCurrentSquadId())
 	
-	return if fFlagUseSignalsForSquadExperienceInviteStatus then useSelector(selectHasCurrentSquadId) and (useSignalState(getSquadExperienceInviteStore(false).getIsExperienceInvitePending) or (useSelector(selectHasInFlightOrExistingInvite) or var1)) else useSelector(function(p1)
+	return if fFlagUseSignalsForSquadExperienceInviteStatus then useSelector(selectHasCurrentSquadId) and (useSignalState(getSquadExperienceInviteStore(false).getIsExperienceInvitePending) or ((if fFlagUseSignalsForSquadExperienceInvite then useSelector(selectIsCreateExperienceInviteFetching) or useSignalState(getSquadExperienceInviteStore(false).getHasCurrentExperienceInvite) else useSelector(selectHasInFlightOrExistingInvite)) or var1)) else useSelector(function(p1)
 		-- upvalues: networkingSquads (copy), networkStatus (copy)
 		local squad = p1.Squad and p1.Squad.Squad
 		local squadId = squad and (squad.currentSquad and squad.currentSquad.squadId)

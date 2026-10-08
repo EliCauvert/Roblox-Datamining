@@ -10,6 +10,7 @@ local _ = require(parent.AppCommonLib)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXCatalogItemInformationPopover = avatarExperienceFlagsModule.FFlagAXCatalogItemInformationPopover
 local fFlagAXCatalogUseFixedWidgetPadding = avatarExperienceFlagsModule.FFlagAXCatalogUseFixedWidgetPadding
+local fFlagAXSduiSeeAllClickLogging = avatarExperienceFlagsModule.FFlagAXSduiSeeAllClickLogging
 local widgetConstantsModule = require(avatarExperienceCatalog.WidgetConstants)
 local resolveWidgetListItemBottomPaddingPxModule = require(avatarExperienceCatalog.Utils.resolveWidgetListItemBottomPaddingPx)
 local widgetHeader = avatarExperienceUIKitModule.WidgetComponents.WidgetHeader
@@ -18,7 +19,7 @@ local widgetListItem = avatarExperienceUIKitModule.WidgetComponents.WidgetListIt
 local grid = avatarExperienceUIKitModule.GridComponents.Grid
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useImpressionsTagger (ref), widgetConstantsModule (ref), useTokens (ref), reactModule (ref), widgetListItem (ref), fFlagAXCatalogUseFixedWidgetPadding (ref), resolveWidgetListItemBottomPaddingPxModule (ref), widgetLayout (ref), widgetHeader (ref), fFlagAXCatalogItemInformationPopover (ref), grid (ref), screenSizeImpressionsDetector (ref)
+	-- upvalues: useImpressionsTagger (ref), widgetConstantsModule (ref), useTokens (ref), reactModule (ref), widgetListItem (ref), fFlagAXCatalogUseFixedWidgetPadding (ref), resolveWidgetListItemBottomPaddingPxModule (ref), widgetLayout (ref), widgetHeader (ref), fFlagAXCatalogItemInformationPopover (ref), fFlagAXSduiSeeAllClickLogging (ref), grid (ref), screenSizeImpressionsDetector (ref)
 	local var1
 	useImpressionsTagger(p1.containerRef, widgetConstantsModule.WidgetExposureMetadata.TagName, p1.widgetRow)
 	local var2 = useTokens()
@@ -45,7 +46,8 @@ return reactModule.forwardRef(function(p1, p2)
 					descriptionText = p1.headerDescription,
 					informationPopoverText = if fFlagAXCatalogItemInformationPopover then p1.informationPopoverText else nil,
 					onInformationIconActivated = if fFlagAXCatalogItemInformationPopover then p1.onInformationIconActivated else nil,
-					seeAllCallback = p1.seeAllCallback
+					seeAllCallback = p1.seeAllCallback,
+					seeAllRef = if fFlagAXSduiSeeAllClickLogging then p1.seeAllRef else nil
 				}) else nil,
 				contentSlot = reactModule.createElement(reactModule.Fragment, nil, {
 					["Widget_" .. p0.widgetId] = reactModule.createElement(grid, {

@@ -7,7 +7,8 @@ local var1 = tModule.strictInterface({
 	placeId = tModule.string,
 	vote = tModule.union(tModule.literal("UpVoted"), tModule.literal("DownVoted"), tModule.literal("NotVoted")),
 	prevVote = tModule.union(tModule.literal("UpVoted"), tModule.literal("DownVoted"), tModule.literal("NotVoted")),
-	uid = tModule.string
+	uid = tModule.string,
+	universeId = if require(parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents then tModule.optional(tModule.string) else nil
 })
 
 return function(p1, p2)
