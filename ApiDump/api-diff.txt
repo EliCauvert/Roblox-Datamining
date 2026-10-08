@@ -1,163 +1,231 @@
-Version version-76e1a02649ad4f35 (2026-09-30 18:37:40 UTC)
+Version version-9b554450a0fc4e65 (2026-10-08 18:36:04 UTC)
 ============================================================
 
-Added Class BackendReplicatedStorage : Instance [NotCreatable] [Service]
-Added Class BackendServerScriptService : Instance [NotCreatable] [Service] [NotReplicated]
-Added Class BackendServerStorage : Instance [NotCreatable] [Service] [NotReplicated]
+Added Class TestExecutionContext : Object [NotCreatable] [NotReplicated]
 
-Added Class TextDocument : Instance [NotBrowsable]
-	Added Property TextDocument.TextContent: Content {🔒Plugin}
+Added Class TestFailure : Object [NotCreatable] [NotReplicated]
+	Added Property TestFailure.Line: number [ReadOnly]
+	Added Property TestFailure.Matcher: string [ReadOnly]
+	Added Property TestFailure.Message: string [ReadOnly]
+	Added Property TestFailure.StackTrace: string [ReadOnly]
+	Added Function TestFailure:GetActual() -> any
+	Added Function TestFailure:GetContext() -> { [string]: any }
+	Added Function TestFailure:GetExpected() -> any
+	Added Function TestFailure:GetSource() -> Instance?
 
-Added Class FriendsCallingInstance : Instance {🔒RobloxEngine} [NotCreatable] [NotReplicated]
-	Added Property FriendsCallingInstance.CallId: string [ReadOnly] {🔒RobloxEngine}
-	Added Property FriendsCallingInstance.ConversationId: number [ReadOnly] {🔒RobloxEngine}
-	Added Property FriendsCallingInstance.EndReason: Enum.FriendsCallingEndReason [ReadOnly] {🔒RobloxEngine}
-	Added Property FriendsCallingInstance.InitiatorUserId: number [ReadOnly] {🔒RobloxEngine}
-	Added Property FriendsCallingInstance.IsDeafened: boolean [ReadOnly] {🔒RobloxEngine}
-	Added Property FriendsCallingInstance.Phase: Enum.FriendsCallingPhase [ReadOnly] {🔒RobloxEngine}
-	Added Property FriendsCallingInstance.Volume: number [ReadOnly] {🔒RobloxEngine}
+Added Class TestResult : Object [NotCreatable] [NotReplicated]
+	Added Property TestResult.Duration: number [ReadOnly]
+	Added Property TestResult.FailedChecks: number [ReadOnly]
+	Added Property TestResult.PassedChecks: number [ReadOnly]
+	Added Property TestResult.Status: Enum.TestCaseStatus [ReadOnly]
+	Added Property TestResult.SuiteName: string [ReadOnly]
+	Added Property TestResult.TestId: string [ReadOnly]
+	Added Property TestResult.TestName: string [ReadOnly]
+	Added Property TestResult.UncaughtError: string [ReadOnly]
+	Added Function TestResult:GetFailures() -> { any }
+	Added Function TestResult:GetTestTags() -> { any }
 
-Added Class FriendsCallingParticipant : Instance {🔒RobloxEngine} [NotCreatable] [NotReplicated]
-	Added Property FriendsCallingParticipant.Error: Enum.FriendsCallingParticipantErrors [ReadOnly] {🔒RobloxEngine}
-	Added Property FriendsCallingParticipant.IsLocalMuted: boolean [ReadOnly] {🔒RobloxEngine}
-	Added Property FriendsCallingParticipant.IsSpeaking: boolean [ReadOnly] {🔒RobloxEngine}
-	Added Property FriendsCallingParticipant.LeaveReason: Enum.FriendsCallingParticipantLeaveReason [ReadOnly] {🔒RobloxEngine}
-	Added Property FriendsCallingParticipant.Status: Enum.FriendsCallingParticipantStatus [ReadOnly] {🔒RobloxEngine}
-	Added Property FriendsCallingParticipant.UserId: number [ReadOnly] {🔒RobloxEngine}
-	Added Property FriendsCallingParticipant.Volume: number [ReadOnly] {🔒RobloxEngine}
+Added Class TestRunResult : Object [NotCreatable] [NotReplicated]
+	Added Property TestRunResult.Duration: number [ReadOnly]
+	Added Property TestRunResult.Failed: number [ReadOnly]
+	Added Property TestRunResult.Passed: number [ReadOnly]
+	Added Property TestRunResult.Skipped: number [ReadOnly]
+	Added Property TestRunResult.Status: Enum.TestRunStatus [ReadOnly]
+	Added Property TestRunResult.Summary: string [ReadOnly]
+	Added Property TestRunResult.Total: number [ReadOnly]
+	Added Function TestRunResult:GetTests() -> { any }
 
-Added Class ProjectService : Instance {🔒RobloxEngine} [NotCreatable] [Service]
-	Added Property ProjectService.ContentMap: NetAssetRef [Hidden] [NotScriptable] {🔒RobloxEngine}
-	Added Function ProjectService:CreateFolder(path: string) -> () {🔒RobloxScript}
-	Added Function ProjectService:Exists(path: string) -> boolean {🔒RobloxScript}
-	Added Function ProjectService:GetContentMapMemoryBytes() -> number {🔒RobloxScript}
-	Added Function ProjectService:GetMetaDataAsync(path: string?) -> { any } [Yields] {🔒RobloxScript}
-	Added Function ProjectService:GetOrphanPathSubscribers() -> { any } {🔒RobloxScript}
-	Added Function ProjectService:GetPathSubscribers(path: string) -> { any } {🔒RobloxScript}
-	Added Function ProjectService:GetPaths(folderPath: string?) -> { any } {🔒RobloxScript}
-	Added Function ProjectService:Move(fromPath: string, toPath: string) -> () {🔒RobloxScript}
-	Added Function ProjectService:RemovePath(path: string) -> () {🔒RobloxScript}
-	Added Function ProjectService:RemovePathSubscribers(path: string) -> () {🔒RobloxScript}
-	Added Function ProjectService:ResolveContent(path: string) -> Content {🔒RobloxScript}
-	Added Function ProjectService:SetContent(path: string, value: Content) -> () {🔒RobloxScript}
-	Added Event ProjectService.ContentMapCreateFolderRequested(operationId: number, path: string, dependencyOperationIds: { any }) [Hidden] {🔒RobloxEngine}
-	Added Event ProjectService.ContentMapMoveRequested(operationId: number, fromPath: string, toPath: string, dependencyOperationIds: { any }) [Hidden] {🔒RobloxEngine}
-	Added Event ProjectService.ContentMapMutationResult(operationId: number, result: Enum.ProjectServiceOperationResult, authoritativeRevision: number) [Hidden] {🔒RobloxEngine}
-	Added Event ProjectService.ContentMapRemovePathRequested(operationId: number, path: string, dependencyOperationIds: { any }) [Hidden] {🔒RobloxEngine}
-	Added Event ProjectService.ContentMapSetContentRequested(operationId: number, path: string, content: Content, dependencyOperationIds: { any }) [Hidden] {🔒RobloxEngine}
-	Added Event ProjectService.EffectivePathsChanged() {🔒RobloxScript}
-	Added Event ProjectService.PathAdded(path: string) {🔒RobloxScript}
-	Added Event ProjectService.PathChanged(path: string) {🔒RobloxScript}
-	Added Event ProjectService.PathMoved(fromPath: string, toPath: string) {🔒RobloxScript}
-	Added Event ProjectService.PathRemoved(path: string) {🔒RobloxScript}
+Added Class TestSuite : Object [NotCreatable] [NotReplicated]
+	Added Property TestSuite.SuiteName: string [ReadOnly]
+	Added Property TestSuite.TimeoutSec: number [ReadOnly]
+	Added Function TestSuite:GetTestTags() -> { any }
+	Added Function TestSuite:RegisterTest(testName: string, options: { [string]: any }? = nil, callback: ((...any) -> ...any)?) -> TestCase
 
-Added Property TestService.Enabled: boolean [ReadOnly] {🧬Unsafe}
-Added Property AudioSpeechToText.Locale: string [Hidden] {🚧Audio} {🔒RobloxScript}
-Added Property TextChatMessage.IsHistorical: boolean [Hidden] {🚧Chat} {🔒RobloxScript}
+Added Class AnimationPlayer : Instance {🔒RobloxScript} [NotCreatable]
+	Added Property AnimationPlayer.AnimationContent: Content [Hidden] [NotReplicated] {🔒RobloxScript}
+	Added Property AnimationPlayer.AutoPlay: boolean [Hidden] [NotReplicated] {🔒RobloxScript}
+	Added Property AnimationPlayer.CurrentFrame: number [Hidden] [NotReplicated] {🔒RobloxScript}
+	Added Property AnimationPlayer.Enabled: boolean [Hidden] [NotReplicated] {🔒RobloxScript}
+	Added Property AnimationPlayer.IsPlaying: boolean [Hidden] [ReadOnly] {🔒RobloxScript}
+	Added Property AnimationPlayer.Loop: boolean [Hidden] [NotReplicated] {🔒RobloxScript}
+	Added Property AnimationPlayer.Speed: number [Hidden] [NotReplicated] {🔒RobloxScript}
+	Added Property AnimationPlayer.TimePosition: number [Hidden] [NotReplicated] {🔒RobloxScript}
+	Added Property AnimationPlayer.Track: string [NotReplicated] {🔒RobloxScript} [📁LoadOnly]
+	Added Function AnimationPlayer:Pause() -> () {🔒RobloxScript}
+	Added Function AnimationPlayer:Play() -> () {🔒RobloxScript}
+	Added Function AnimationPlayer:Stop() -> () {🔒RobloxScript}
 
-Added Function AnimationClipProvider:GetAnimationValueNodeDefinition(type: Enum.AnimationValueNodeType) -> { [string]: any } {🚧Animation} {🔒RobloxScript}
-Added Function AnimationClipProvider:GetAnimationValueNodeTypes() -> { any } {🚧Animation} {🔒RobloxScript}
-Added Function AssetService:CreateTextContentAsync(text: string) -> Content [Yields] {🔒RobloxScript}
-Added Function AssetService:ReadTextContentAsync(content: Content) -> string [Yields] {🔒RobloxScript}
-Added Function NotificationService:SubscribeToTopic(token: string, replaceToken: string? = "") -> () {🚧Players} {🔒RobloxScript}
-Added Function NotificationService:UnsubscribeFromTopic(token: string) -> () {🚧Players} {🔒RobloxScript}
-Added Function Player:GetFriendsInServerAsync() -> { any } [Yields] {🚧Players + Social}
-Added Function RunService:GetRobloxClientIxpEnrolledExperiments() -> string {🚧Basic} {🔒RobloxScript}
-Added Function ScriptEditorService:OpenStringValueDocumentAsync(stringValue: StringValue, options: { [string]: any }? = nil) -> ...any [Yields] {🔒RobloxScript}
-Added Function StudioCaptureService:CapturePluginGuiByPluginGuiIdAsync(pluginGuiId: string) -> StudioScreenshotCapture [Yields] {🔒RobloxScript}
-Added Function Terrain:IsMaterialSlotInvalid(slotIndex: number) -> boolean {🚧Environment} {🔒RobloxScript}
-Added Function VoiceChatService:lastVoiceChatConnectivity() -> { [string]: any } {🚧Audio + Chat} {🔒RobloxScript}
-Added Function AvatarClothingRules:WillLimitLayeredAccessoryAsync(humanoid: Humanoid, accessory: Accoutrement) -> boolean [Yields] {🔒RobloxScript}
-Added Function ExperienceService:ConsumePendingExperienceLeaveWithReason() -> { [string]: any } {🔒RobloxScript}
-Added Function ExperienceService:LeaveExperienceWithReason(reason: string) -> () {🔒RobloxScript}
-Added Function HeightmapImporterService:ImportHeightmapWithMaterialSlotsAsync(region: Region3, heightmapAssetId: string, colormapAssetId: string, defaultMaterialIndex: number) -> () [Yields] {🔒RobloxScript}
-Added Function StudioAssetService:UploadAndInsertAssetForJobAsync(jobId: string) -> Instance? [Yields] {🔒RobloxScript}
+Added Class FriendsCallingService : Instance {🔒RobloxScript} [NotCreatable] [Service] [NotReplicated]
+	Added Function FriendsCallingService:EndCall() -> () {🔒RobloxScript}
+	Added Function FriendsCallingService:SetMuted(muted: boolean) -> () {🔒RobloxScript}
+	Added Function FriendsCallingService:SetVolume(volume: number) -> () {🔒RobloxScript}
+	Added Function FriendsCallingService:StartCall() -> () {🔒RobloxScript}
 
-Added Event MarketplaceService.PromptBulkPurchaseRequestedV3(player: Instance, status: Enum.MarketplaceBulkPurchasePromptStatus, response: { [string]: any }) {🔒RobloxScript}
-Added Event NotificationService.TopicNotificationReceived(eventData: { [any]: any }) {🚧Players} {🔒RobloxScript}
+Added Class HiddenPlayerService : Instance {🔒RobloxEngine} [NotCreatable] [Service]
+	Added Property HiddenPlayerService.LocalHiddenPlayer: Player? [Hidden] [ReadOnly] [NotScriptable] {🔒RobloxEngine}
 
-Added Enum FriendsCallingEndReason
-	Added EnumItem FriendsCallingEndReason.None : 0
-	Added EnumItem FriendsCallingEndReason.LocalHangup : 1
-	Added EnumItem FriendsCallingEndReason.RemoteHangup : 2
-	Added EnumItem FriendsCallingEndReason.Missed : 3
-	Added EnumItem FriendsCallingEndReason.Declined : 4
-	Added EnumItem FriendsCallingEndReason.Failed : 5
-	Added EnumItem FriendsCallingEndReason.Canceled : 6
+Added Class InstanceRegistryService : Instance {🔒RobloxScript} [NotCreatable] [Service] [NotReplicated]
+	Added Function InstanceRegistryService:GetIdentity(scopeRoot: Instance, instance: Instance) -> ScopedInstanceIdentity? {🔒RobloxScript}
 
-Added Enum FriendsCallingParticipantErrors
-	Added EnumItem FriendsCallingParticipantErrors.None : 0
-	Added EnumItem FriendsCallingParticipantErrors.Unknown : 1
-	Added EnumItem FriendsCallingParticipantErrors.ConnectionFailed : 2
-	Added EnumItem FriendsCallingParticipantErrors.PublishFailed : 3
-	Added EnumItem FriendsCallingParticipantErrors.PermissionDenied : 4
+Added Class UIBlur : UIComponent
+	Added Property UIBlur.Color: Color3 {🚧UI}
+	Added Property UIBlur.Strength: Enum.UIBlurStrength {🚧UI}
+	Added Property UIBlur.Transparency: number {🚧UI}
+	Added Property UIBlur.Enabled: boolean {🚧UI}
 
-Added Enum FriendsCallingParticipantLeaveReason
-	Added EnumItem FriendsCallingParticipantLeaveReason.None : 0
-	Added EnumItem FriendsCallingParticipantLeaveReason.Hangup : 1
-	Added EnumItem FriendsCallingParticipantLeaveReason.Declined : 2
-	Added EnumItem FriendsCallingParticipantLeaveReason.Missed : 3
-	Added EnumItem FriendsCallingParticipantLeaveReason.Removed : 4
-	Added EnumItem FriendsCallingParticipantLeaveReason.Failed : 5
-	Added EnumItem FriendsCallingParticipantLeaveReason.TimedOut : 6
+Added Property Camera.OrthographicMode: Enum.OrthographicMode {🚧Basic}
+Added Property Camera.OrthographicSize: number {🚧Basic}
+Added Property Camera.ProjectionType: Enum.ProjectionType {🚧Basic}
+Added Property Camera.ViewStretch: number {🚧Basic}
+Added Property Decal.ResampleMode: Enum.ResamplerMode {🚧Basic}
+Added Property SurfaceAppearance.SurfaceSlot: number {🚧Basic}
+Added Property TestCase.SuiteName: string [ReadOnly]
+Added Property TestCase.TestId: string [ReadOnly]
+Added Property TestCase.TestName: string [ReadOnly]
+Added Property TestCase.TimeoutSec: number [ReadOnly]
+Added Property Workspace.ReplicationFrequency: Enum.ReplicationMode {🚧PluginOrOpenCloud}
+Added Property Workspace.ReplicationThroughput: Enum.ReplicationMode {🚧PluginOrOpenCloud}
+Added Property VRService.PresentationMode: Enum.VRPresentationMode [Hidden] [ReadOnly] {🚧Input} {🔒RobloxScript}
+Added Property AnimatedImageService.UserCreatedTracks: BinaryString {🔒RobloxScript}
 
-Added Enum FriendsCallingParticipantStatus
-	Added EnumItem FriendsCallingParticipantStatus.Invited : 0
-	Added EnumItem FriendsCallingParticipantStatus.Ringing : 1
-	Added EnumItem FriendsCallingParticipantStatus.Joined : 2
-	Added EnumItem FriendsCallingParticipantStatus.Declined : 3
-	Added EnumItem FriendsCallingParticipantStatus.Left : 4
-	Added EnumItem FriendsCallingParticipantStatus.Removed : 5
-	Added EnumItem FriendsCallingParticipantStatus.Ineligible : 6
-	Added EnumItem FriendsCallingParticipantStatus.TimedOut : 7
-	Added EnumItem FriendsCallingParticipantStatus.Muted : 8
+Added Function AnimationTrack:UpdateGraphNodeDefinition(nodeId: string, nodeDefinition: Instance) -> boolean {🚧Animation} {🔒RobloxScript}
+Added Function AudioEmitter:GetWorldCFrame() -> CFrame? {🚧Audio} {🔒RobloxScript}
+Added Function AudioListener:GetWorldCFrame() -> CFrame? {🚧Audio} {🔒RobloxScript}
+Added Function AudioPlayer:GetPlaybackState() -> string {🚧Audio} {🔒RobloxScript}
+Added Function MarketplaceService:CanUsersTransferRobuxAsync(sender: Player, receiverUser: User) -> Enum.RobuxTransferEligibility [Yields] {🚧PromptExternalPurchase}
+Added Function MarketplaceService:PromptVIPServerPurchase(player: Player) -> () {🚧PromptExternalPurchase}
+Added Function MeshPart:GetSurfaceSlotsAsync() -> { any } [Yields] {🚧Basic}
+Added Function ModerationService:BindViolationProcessor(priority: number, callback: (...any) -> ...any) -> RBXScriptConnection {🚧Consequences}
+Added Function ModerationService:MockViolationCallbackAsync(report: { [string]: any }) -> () {🚧Consequences}
+Added Function Sound:GetPlaybackState() -> string {🚧LegacySound} {🔒RobloxScript}
+Added Function Sound:GetWorldCFrame() -> CFrame? {🚧LegacySound} {🔒RobloxScript}
+Added Function SoundService:GetListenerWorldCFrame() -> CFrame? {🚧Audio} {🔒RobloxScript}
+Added Function Stats:GetMemoryUsageMbAllCategoriesFiltered(dmId: number, vmClass: number) -> { any } {🚧InternalTest}
+Added Function Stats:GetMemoryUsageMbFiltered(dmId: number, vmClass: number) -> number {🚧InternalTest}
+Added Function TestCase:GetTestTags() -> { any }
+Added Function TestService:ListTests() -> { any }
+Added Function TestService:RegisterSuite(suiteName: string, options: { [string]: any }? = nil) -> TestSuite
+Added Function TestService:ResetTestRegistry() -> ()
+Added Function TestService:RunTestsAsync(filter: { [string]: any }? = nil) -> TestRunResult [Yields]
+Added Function TestService:StartAudioCaptureAsync(artifactName: string? = "", options: { [string]: any }? = nil) -> ...any [Yields] {🚧InternalTest}
+Added Function TestService:StopAudioCaptureAsync() -> ...any [Yields] {🚧InternalTest}
+Added Function AnimatedImageService:CreateTrack(sourceContent: Content, trackName: string, frameDefinitions: { any }) -> AnimatedImageTrack {🔒RobloxScript}
+Added Function AnimatedImageService:DestroyTrack(sourceContent: Content, trackName: string) -> () {🔒RobloxScript}
+Added Function DataModelDiff:GetAttributeNames(identity: ScopedInstanceIdentity) -> { any } {🚧PluginOrOpenCloud} {🔒RobloxScript}
+Added Function PackageService:RevertAttributeOverridesAsync(scopeRoot: Instance, identities: { any }, attributeNames: { any }) -> () [Yields] {🔒RobloxScript}
+Added Function PackageService:RevertInstanceOverridesAsync(scopeRoot: Instance, identities: { any }) -> () [Yields] {🔒RobloxScript}
+Added Function PackageService:RevertPropertyOverridesAsync(scopeRoot: Instance, identities: { any }, propertyNames: { any }) -> () [Yields] {🔒RobloxScript}
+Added Function PopLatencyService:GetForcedPop() -> string {🔒RobloxScript}
+Added Function PopLatencyService:SetForcedPop(popCode: string) -> () {🔒RobloxScript}
 
-Added Enum FriendsCallingPhase
-	Added EnumItem FriendsCallingPhase.Idle : 0
-	Added EnumItem FriendsCallingPhase.Ringing : 1
-	Added EnumItem FriendsCallingPhase.Active : 2
-	Added EnumItem FriendsCallingPhase.Ended : 3
+Added Event MarketplaceService.PromptVIPServerPurchaseRequested() {🔒RobloxScript}
+Added Event TestService.TestRegistryChanged()
 
-Added Enum ProjectServiceOperationResult
+Added Enum OrthographicMode
+	Added EnumItem OrthographicMode.Vertical : 0
+	Added EnumItem OrthographicMode.Horizontal : 1
+	Added EnumItem OrthographicMode.Diagonal : 2
+	Added EnumItem OrthographicMode.MaxAxis : 3
 
-Added EnumItem GradientType.Elliptical : 3
+Added Enum ProjectionType
+	Added EnumItem ProjectionType.Perspective : 0
+	Added EnumItem ProjectionType.Orthographic : 1
 
-Added Tag [NotReplicated] to Property Decal.LocalizedTextureContent
-Added Tag [NotReplicated] to Property ImageButton.LocalizedImageContent
-Added Tag [NotReplicated] to Property ImageLabel.LocalizedImageContent
+Added Enum ReplicationMode
+	Added EnumItem ReplicationMode.Automatic : 0
+	Added EnumItem ReplicationMode.Low : 1
+	Added EnumItem ReplicationMode.Medium : 2
+	Added EnumItem ReplicationMode.High : 3
 
-Changed the read permissions and write permissions of Property Decal.LocalizedTextureContent 
-	from: {🔒RobloxScript} {✏️RobloxScript}
-	  to: {🔍RobloxScript} {✏️NotAccessible}
+Added Enum RobuxTransferEligibility
+	Added EnumItem RobuxTransferEligibility.Unknown : 0
+	Added EnumItem RobuxTransferEligibility.Eligible : 1
+	Added EnumItem RobuxTransferEligibility.SenderNotEligible : 2
+	Added EnumItem RobuxTransferEligibility.ReceiverNotEligible : 3
 
-Changed the read permissions, write permissions and serialization of Property ImageButton.LocalizedImageContent 
-	from: {🔒RobloxScript} {✏️RobloxScript} [🚫None]
-	  to: {🔍RobloxScript} {✏️NotAccessible} [📁LoadOnly]
+Added Enum TestCaseStatus
+	Added EnumItem TestCaseStatus.Pass : 0
+	Added EnumItem TestCaseStatus.Fail : 1
+	Added EnumItem TestCaseStatus.TimedOut : 2
+	Added EnumItem TestCaseStatus.Skipped : 3
 
-Changed the read permissions, write permissions and serialization of Property ImageLabel.LocalizedImageContent 
-	from: {🔒RobloxScript} {✏️RobloxScript} [🚫None]
-	  to: {🔍RobloxScript} {✏️NotAccessible} [📁LoadOnly]
+Added Enum TestRunStatus
+	Added EnumItem TestRunStatus.Pass : 0
+	Added EnumItem TestRunStatus.Fail : 1
+	Added EnumItem TestRunStatus.NoTests : 2
+	Added EnumItem TestRunStatus.Skipped : 3
 
-Changed the parameters of Function AssetImportService:UploadAssetFromPathAsync 
-	from: (filepath: string, createAssetRequest: { [string]: any })
-	  to: (filepath: string, createAssetRequest: { [string]: any }, progressCallback: ((...any) -> ...any)?)
+Added Enum UIBlurStrength
+	Added EnumItem UIBlurStrength.Light : 0
+	Added EnumItem UIBlurStrength.Medium : 1
+	Added EnumItem UIBlurStrength.Heavy : 2
 
-Removed Property StarterPlayer.GameSettingsAssetIDFace
-Removed Property StarterPlayer.GameSettingsAssetIDHead
-Removed Property StarterPlayer.GameSettingsAssetIDLeftArm
-Removed Property StarterPlayer.GameSettingsAssetIDLeftLeg
-Removed Property StarterPlayer.GameSettingsAssetIDPants
-Removed Property StarterPlayer.GameSettingsAssetIDRightArm
-Removed Property StarterPlayer.GameSettingsAssetIDRightLeg
-Removed Property StarterPlayer.GameSettingsAssetIDShirt
-Removed Property StarterPlayer.GameSettingsAssetIDTeeShirt
-Removed Property StarterPlayer.GameSettingsAssetIDTorso
-Removed Property StarterPlayer.GameSettingsScaleRangeBodyType
-Removed Property StarterPlayer.GameSettingsScaleRangeHead
-Removed Property StarterPlayer.GameSettingsScaleRangeHeight
-Removed Property StarterPlayer.GameSettingsScaleRangeProportion
-Removed Property StarterPlayer.GameSettingsScaleRangeWidth
+Added Enum VRPresentationMode
+	Added EnumItem VRPresentationMode.Stereo : 0
+	Added EnumItem VRPresentationMode.Flat : 1
 
-Removed Tag [ReadOnly] from Property Decal.LocalizedTextureContent
-Removed Tag [ReadOnly] from Property ImageButton.LocalizedImageContent
-Removed Tag [ReadOnly] from Property ImageLabel.LocalizedImageContent
+Added EnumItem PioneerSource.RobloxPioneerTest : 3
+
+Added Tag [Deprecated] to Function TestService:RegisterTestLegacy
+Added Tag [NotReplicated] to Class AnimatedImageService
+Added Tag [NotReplicated] to Class TestCase
+
+Changed the superclass of Class TestCase 
+	from: "Instance"
+	  to: "Object"
+
+Changed the capabilities and security of Property Model.LevelOfDetail 
+	from:  {🔒Plugin}
+	  to: {🚧PluginOrOpenCloud} 
+
+Changed the capabilities and security of Property Workspace.LuauTypeCheckMode 
+	from:  {🔒Plugin}
+	  to: {🚧PluginOrOpenCloud} 
+
+Changed the capabilities and write permissions of Property MeshPart.RenderFidelity 
+	from: {🚧Basic} {✏️Plugin}
+	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
+
+Changed the capabilities and write permissions of Property Workspace.FallHeightEnabled 
+	from: {🚧Basic} {✏️Plugin}
+	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
+
+Changed the capabilities and write permissions of Property Workspace.FallenPartsDestroyHeight 
+	from: {🚧Basic} {✏️Plugin}
+	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
+
+Changed the capabilities and write permissions of Property Workspace.StreamingEnabled 
+	from:  {✏️Plugin}
+	  to: {🚧✏️PluginOrOpenCloud} 
+
+Changed the security of Property HumanoidRigDescription.OriginOffset 
+	from: {🔒RobloxScript}
+	  to: 
+
+Changed the capabilities and parameters of Function TestService:RegisterTest 
+	from: {🚧InternalTest} (testOptions: { [string]: any })
+	  to:  (testName: string, options: { [string]: any }? = nil, callback: ((...any) -> ...any)?)
+
+Changed the parameters of Function MarketplaceService:PerformSubscriptionPurchaseV3Async 
+	from: (productType: string, productId: string, paymentProvider: string, paymentSessionId: string)
+	  to: (productType: string, productId: string, paymentProvider: string, paymentSessionId: string, referrerId: number?)
+
+Changed the parameters of Function TeleportService:TeleportSwitchServer 
+	from: ()
+	  to: (gameIdsToExclude: { any }? = {})
+
+Removed Class AnimatedImage
+	Removed Property AnimatedImage.Content
+	Removed Property AnimatedImage.PlaybackSpeed
+	Removed Function AnimatedImage:GetBoundTracks
+	Removed Function AnimatedImage:Pause
+	Removed Function AnimatedImage:Resume
+
+Removed Function PackageLink:getOverrides
+
+Removed Enum AnimatedImagePlaybackState
+	Removed EnumItem AnimatedImagePlaybackState.Begin
+	Removed EnumItem AnimatedImagePlaybackState.Playing
+	Removed EnumItem AnimatedImagePlaybackState.Paused
+	Removed EnumItem AnimatedImagePlaybackState.Completed
+	Removed EnumItem AnimatedImagePlaybackState.Canceled
