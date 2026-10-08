@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "ea8a8186-55b2-f7d1-5417-03ecf1a94da4")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "b4661a32-8b00-1a74-149e-e905655827a3")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 199475, e => {
@@ -1110,26 +1110,21 @@
         s = e.i(639102),
         n = e.i(199475);
     let i = {
-            enableActivityFeedLocation: !1,
             enableEnvironments: !1,
             enableImageTranslationEnrollment: !1,
             enableImageTranslationListingTab: !1,
             enableSharedTranslationListComponents: !1,
             enableIpPlatformMatchesTableEsIndexImprovements: !1
         },
-        o = Object.keys(i).reduce((e, t) => ({
-            ...e,
-            [t]: i[t]
-        }), {}),
-        u = {
+        o = {
             isUserEligibleForDevEx: !1
         },
-        a = {
+        u = {
+            ...i,
             ...o,
-            ...u,
             isExperienceCreatedByCurrentUserOrGroup: !1
         },
-        d = async () => {
+        a = async () => {
             try {
                 let {
                     applicationSettings: e = {}
@@ -1137,26 +1132,26 @@
                 return Object.entries(e).forEach(e => {
                     let [r, s] = e;
                     try {
-                        let e = typeof o[r];
+                        let e = typeof i[r];
                         t[r] = "boolean" === e || "number" === e ? JSON.parse(s) : s
                     } catch (e) {
                         console.error(e)
                     }
                 }), t
             } catch (e) {
-                return o
+                return i
             }
-        }, c = async () => {
+        }, d = async () => {
             try {
                 return await n.default.getDeveloperExchangeInfo(), {
                     isUserEligibleForDevEx: !0
                 }
             } catch (e) {
-                return u
+                return o
             }
-        }, l = (0, r.createContext)({
+        }, c = (0, r.createContext)({
             settings: {
-                ...a
+                ...u
             },
             status: "initial",
             isFetched: !1
@@ -1166,24 +1161,24 @@
             children: s
         } = e, [n, i] = (0, r.useState)(() => ({
             settings: {
-                ...a
+                ...u
             },
             status: "initial",
             isFetched: !1
         }));
         return (0, r.useEffect)(() => {
             (async () => {
-                let e = await Promise.allSettled([d(), c()]);
+                let e = await Promise.allSettled([a(), d()]);
                 i({
                     settings: e.reduce((e, t) => ({
                         ...e,
                         ..."fulfilled" === t.status ? t.value : {}
-                    }), a),
+                    }), u),
                     isFetched: !0,
                     status: e.find(e => "rejected" === e.status) ? "error" : "success"
                 })
             })()
-        }, []), (0, t.jsx)(l.Provider, {
+        }, []), (0, t.jsx)(c.Provider, {
             value: n,
             children: s
         })
@@ -1192,7 +1187,7 @@
             settings: e,
             status: t,
             isFetched: s
-        } = (0, r.useContext)(l), n = (0, r.useRef)(e);
+        } = (0, r.useContext)(c), n = (0, r.useRef)(e);
         return {
             settings: (0, r.useMemo)(() => {
                 let t = n.current;
@@ -1204,5 +1199,5 @@
     }], 486736)
 }]);
 
-//# debugId=ea8a8186-55b2-f7d1-5417-03ecf1a94da4
-//# sourceMappingURL=2ktd004jll4fl.js.map
+//# debugId=b4661a32-8b00-1a74-149e-e905655827a3
+//# sourceMappingURL=1mz2kg125j5za.js.map

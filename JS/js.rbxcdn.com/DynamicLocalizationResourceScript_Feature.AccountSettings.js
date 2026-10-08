@@ -1944,6 +1944,8 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Description.CreateParentAccount": "Get email updates about your child and manage their settings whenever you like",
     "Disclaimer.PrivatePlaytestOnContentMaturitySetting": "You may still be able to test a limited set of early access games created by friends before these games are available in our catalog for kids and young teens.",
     "Response.PasswordLowComplexity": "Password must contain at least one letter and at least one number or symbol.",
-    "Response.PasswordTooSimilarToUsername": "Password shouldn't be too similar to your username."
+    "Response.PasswordTooSimilarToUsername": "Password shouldn't be too similar to your username.",
+    "Heading.IdentityVerificationSetting": "Identity verification setting",
+    "Label.IdentityVerification": "Identity verification setting"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");

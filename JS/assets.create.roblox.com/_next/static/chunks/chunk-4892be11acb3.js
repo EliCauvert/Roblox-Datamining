@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "e46eac96-71f4-831f-57a0-9b533ec148d0")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "40a372e4-beb7-a9ec-3df1-501613c623e7")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 736570, t => {
@@ -6595,7 +6595,7 @@
                 transform: "translate(-50%, ".concat("idle" === b ? "0" : "120%", ")"),
                 zIndex: "var(--foundation-portal-zindex, 9999)"
             },
-            L = v.style ? {
+            F = v.style ? {
                 ...R,
                 ...v.style
             } : R;
@@ -6605,7 +6605,7 @@
             "aria-live": "polite",
             className: (0, a.default)("flex items-center gap-xxlarge radius-medium shadow-transient-low bg-inverse-surface-0 padding-x-medium padding-y-medium stroke-standard shrink-0", "max-width-[480px] min-height-[48px]", "min-width-[min(100%-max(2_*_var(--margin-small),env(safe-area-inset-left)+env(safe-area-inset-right)),393px)]", "foundation-web-portal-zindex pointer-events-auto", "exit" === b ? "ease-standard-in" : "ease-standard-out", y),
             style: {
-                ...L,
+                ...F,
                 transitionDuration: "".concat("exit" === b ? 150 : 200, "ms"),
                 transitionProperty: "transform"
             },
@@ -6891,8 +6891,8 @@
                     max: j = 99,
                     badgeContent: _,
                     slots: R,
-                    slotProps: L,
-                    showZero: F = !1,
+                    slotProps: F,
+                    showZero: L = !1,
                     variant: N = "standard"
                 } = C,
                 M = (0, s._)(C, g),
@@ -6926,7 +6926,7 @@
                     max: j,
                     invisible: D,
                     badgeContent: _,
-                    showZero: F
+                    showZero: L
                 }),
                 U = (0, u.u)({
                     anchorOrigin: E,
@@ -6948,7 +6948,7 @@
                     invisible: V,
                     max: O,
                     displayValue: K,
-                    showZero: F,
+                    showZero: L,
                     anchorOrigin: W,
                     color: z,
                     overlap: q,
@@ -6970,8 +6970,8 @@
                 })(J),
                 Y = null != (r = null != (o = null == R ? void 0 : R.root) ? o : S.Root) ? r : y,
                 X = null != (a = null != (c = null == R ? void 0 : R.badge) ? c : S.Badge) ? a : v,
-                Q = null != (f = null == L ? void 0 : L.root) ? f : x.root,
-                $ = null != (b = null == L ? void 0 : L.badge) ? b : x.badge,
+                Q = null != (f = null == F ? void 0 : F.root) ? f : x.root,
+                $ = null != (b = null == F ? void 0 : F.badge) ? b : x.badge,
                 ee = (0, m.u)({
                     elementType: Y,
                     externalSlotProps: Q,
@@ -7132,7 +7132,7 @@
                     };
                     return (0, a.a)(s, m, r)
                 })(_),
-                [L, F] = o.useState(() => {
+                [F, L] = o.useState(() => {
                     let t = !1;
                     return y && o.Children.forEach(y, n => {
                         if (!(0, d.i)(n, ["Input", "Select"])) return;
@@ -7150,8 +7150,8 @@
             E && P && B(!1);
             let O = void 0 === I || E ? P : I,
                 H = o.useMemo(() => ({
-                    adornedStart: L,
-                    setAdornedStart: F,
+                    adornedStart: F,
+                    setAdornedStart: L,
                     color: b,
                     disabled: E,
                     error: w,
@@ -7175,7 +7175,7 @@
                     registerEffect: p,
                     required: T,
                     variant: D
-                }), [L, b, E, w, N, O, S, x, p, T, k, D]);
+                }), [F, b, E, w, N, O, S, x, p, T, k, D]);
             return (0, u.jsx)(s.F.Provider, {
                 value: H,
                 children: (0, u.jsx)(f, (0, r._)({
@@ -7786,8 +7786,8 @@
                         className: _
                     } = {},
                     dense: R = !1,
-                    disabled: L = !1,
-                    disableGutters: F = !1,
+                    disabled: F = !1,
+                    disableGutters: L = !1,
                     disablePadding: N = !1,
                     divider: M = !1,
                     focusVisibleClassName: P,
@@ -7802,8 +7802,8 @@
                 W = o.useMemo(() => ({
                     dense: R || q.dense || !1,
                     alignItems: w,
-                    disableGutters: F
-                }), [w, q.dense, R, F]),
+                    disableGutters: L
+                }), [w, q.dense, R, L]),
                 G = o.useRef(null);
             (0, d.u)(() => {
                 I && G.current && G.current.focus()
@@ -7815,8 +7815,8 @@
                     autoFocus: I,
                     button: S,
                     dense: W.dense,
-                    disabled: L,
-                    disableGutters: F,
+                    disabled: F,
+                    disableGutters: L,
                     disablePadding: N,
                     divider: M,
                     hasSecondaryAction: J,
@@ -7845,7 +7845,7 @@
                 $ = H.root || D.root || {},
                 ee = (0, r._)({
                     className: (0, a.c)(Y.root, $.className, A),
-                    disabled: L
+                    disabled: F
                 }, z),
                 et = T || "li";
             return S && (ee.component = T || "div", ee.focusVisibleClassName = (0, a.c)(s.l.focusVisible, P), et = g.B), J ? (et = ee.component || T ? et : "div", "li" === j && ("li" === et ? et = "div" : "li" === ee.component && (ee.component = "div")), (0, l.jsx)(i.L.Provider, {
@@ -8210,7 +8210,7 @@
                 ref: o
             }, d))
         });
-    t.s(["C", 0, f, "a", 0, b], 526489), t.s(["CardActionArea", 0, f], 148713)
+    t.s(["C", 0, f, "a", 0, b, "c", 0, d], 526489), t.s(["CardActionArea", 0, f], 148713)
 }, 683852, t => {
     "use strict";
     var n = t.i(690569),
@@ -8516,8 +8516,8 @@
     var j = (0, m.g)("MuiTabs", ["root", "vertical", "flexContainer", "flexContainerVertical", "centered", "scroller", "fixed", "scrollableX", "scrollableY", "hideScrollbar", "scrollButtons", "scrollButtonsHideMobile", "indicator"]);
     let _ = ["aria-label", "aria-labelledby", "action", "centered", "children", "className", "component", "allowScrollButtonsMobile", "indicatorColor", "onChange", "orientation", "ScrollButtonComponent", "scrollButtons", "selectionFollowsFocus", "slots", "slotProps", "TabIndicatorProps", "TabScrollButtonProps", "textColor", "value", "variant", "visibleScrollbar"],
         R = (t, n) => t === n ? t.firstChild : n && n.nextElementSibling ? n.nextElementSibling : t.firstChild,
-        L = (t, n) => t === n ? t.lastChild : n && n.previousElementSibling ? n.previousElementSibling : t.lastChild,
-        F = (t, n, r) => {
+        F = (t, n) => t === n ? t.lastChild : n && n.previousElementSibling ? n.previousElementSibling : t.lastChild,
+        L = (t, n, r) => {
             let o = !1,
                 a = r(t, n);
             for (; a;) {
@@ -8858,11 +8858,11 @@
                         duration: v.transitions.duration.standard
                     }) : ek.current[ei] = t
                 },
-                eL = t => {
+                eF = t => {
                     let n = ek.current[ei];
                     ea ? n += t : (n += t * (w ? -1 : 1), n *= w && "reverse" === C() ? -1 : 1), eR(n)
                 },
-                eF = () => {
+                eL = () => {
                     let t = ek.current[eu],
                         n = 0,
                         r = Array.from(eD.current.children);
@@ -8986,7 +8986,7 @@
                     orientation: W,
                     direction: w ? "right" : "left",
                     onClick: () => {
-                        eL(-1 * eF())
+                        eF(-1 * eL())
                     },
                     disabled: !eb
                 }, Q, {
@@ -9001,7 +9001,7 @@
                     orientation: W,
                     direction: w ? "left" : "right",
                     onClick: () => {
-                        eL(eF())
+                        eF(eL())
                     },
                     disabled: !eE
                 }, Q, {
@@ -9035,16 +9035,16 @@
                                 a = "horizontal" === W ? "ArrowRight" : "ArrowDown";
                             switch ("horizontal" === W && w && (o = "ArrowRight", a = "ArrowLeft"), t.key) {
                                 case o:
-                                    t.preventDefault(), F(n, r, L);
+                                    t.preventDefault(), L(n, r, F);
                                     break;
                                 case a:
-                                    t.preventDefault(), F(n, r, R);
+                                    t.preventDefault(), L(n, r, R);
                                     break;
                                 case "Home":
-                                    t.preventDefault(), F(n, null, R);
+                                    t.preventDefault(), L(n, null, R);
                                     break;
                                 case "End":
-                                    t.preventDefault(), F(n, null, L)
+                                    t.preventDefault(), L(n, null, F)
                             }
                         },
                         ref: eD,
@@ -9109,8 +9109,8 @@
                     inputProps: j,
                     InputProps: _,
                     inputRef: R,
-                    label: L,
-                    maxRows: F,
+                    label: F,
+                    maxRows: L,
                     minRows: N,
                     multiline: M = !1,
                     name: P,
@@ -9147,10 +9147,10 @@
                     }, g, n)
                 })(Y),
                 Q = {};
-            "outlined" === J && (D && void 0 !== D.shrink && (Q.notched = D.shrink), Q.label = L), q && (W && W.native || (Q.id = void 0), Q["aria-describedby"] = void 0);
+            "outlined" === J && (D && void 0 !== D.shrink && (Q.notched = D.shrink), Q.label = F), q && (W && W.native || (Q.id = void 0), Q["aria-describedby"] = void 0);
             let $ = (0, c.u)(k),
                 ee = T && $ ? "".concat($, "-helper-text") : void 0,
-                et = L && $ ? "".concat($, "-label") : void 0,
+                et = F && $ ? "".concat($, "-label") : void 0,
                 en = (0, s.jsx)(v[J], (0, n._)({
                     "aria-describedby": ee,
                     autoComplete: m,
@@ -9160,7 +9160,7 @@
                     multiline: M,
                     name: P,
                     rows: z,
-                    maxRows: F,
+                    maxRows: L,
                     minRows: N,
                     type: G,
                     value: K,
@@ -9183,11 +9183,11 @@
                 variant: J,
                 ownerState: Y
             }, Z, {
-                children: [null != L && "" !== L && (0, s.jsx)(d.I, (0, n._)({
+                children: [null != F && "" !== F && (0, s.jsx)(d.I, (0, n._)({
                     htmlFor: $,
                     id: et
                 }, D, {
-                    children: L
+                    children: F
                 })), q ? (0, s.jsx)(p.S, (0, n._)({
                     "aria-describedby": ee,
                     id: $,
@@ -9265,14 +9265,14 @@
         j = "left",
         _ = "auto",
         R = ["top", k, D, j],
-        L = "start",
-        F = "viewport",
+        F = "start",
+        L = "viewport",
         N = "popper",
         M = R.reduce(function(t, n) {
-            return t.concat([n + "-" + L, n + "-end"])
+            return t.concat([n + "-" + F, n + "-end"])
         }, []),
         P = [].concat(R, [_]).reduce(function(t, n) {
-            return t.concat([n, n + "-" + L, n + "-end"])
+            return t.concat([n, n + "-" + F, n + "-end"])
         }, []),
         B = ["beforeRead", "read", "afterRead", "beforeMain", "main", "afterMain", "beforeWrite", "write", "afterWrite"];
 
@@ -9466,20 +9466,20 @@
                 x = "clientWidth";
             I === H(r) && "static" !== $(I = ee(r)).position && "absolute" === l && (S = "scrollHeight", x = "scrollWidth"), ("top" === a || (a === j || a === D) && "end" === i) && (E = k, g -= (p && I === w && w.visualViewport ? w.visualViewport.height : I[S]) - o.height, g *= u ? 1 : -1), (a === j || ("top" === a || a === k) && "end" === i) && (C = D, h -= (p && I === w && w.visualViewport ? w.visualViewport.width : I[x]) - o.width, h *= u ? 1 : -1)
         }
-        var A, T, _, R, L, F, N = Object.assign({
+        var A, T, _, R, F, L, N = Object.assign({
                 position: l
             }, c && eu),
             M = !0 === d ? (A = {
                 x: h,
                 y: g
             }, T = H(r), _ = A.x, R = A.y, {
-                x: K(_ * (L = T.devicePixelRatio || 1)) / L || 0,
-                y: K(R * L) / L || 0
+                x: K(_ * (F = T.devicePixelRatio || 1)) / F || 0,
+                y: K(R * F) / F || 0
             }) : {
                 x: h,
                 y: g
             };
-        return h = M.x, g = M.y, u ? Object.assign({}, N, ((F = {})[E] = b ? "0" : "", F[C] = v ? "0" : "", F.transform = 1 >= (w.devicePixelRatio || 1) ? "translate(" + h + "px, " + g + "px)" : "translate3d(" + h + "px, " + g + "px, 0)", F)) : Object.assign({}, N, ((n = {})[E] = b ? g + "px" : "", n[C] = v ? h + "px" : "", n.transform = "", n))
+        return h = M.x, g = M.y, u ? Object.assign({}, N, ((L = {})[E] = b ? "0" : "", L[C] = v ? "0" : "", L.transform = 1 >= (w.devicePixelRatio || 1) ? "translate(" + h + "px, " + g + "px)" : "translate3d(" + h + "px, " + g + "px, 0)", L)) : Object.assign({}, N, ((n = {})[E] = b ? g + "px" : "", n[C] = v ? h + "px" : "", n.transform = "", n))
     }
     var ed = {
             passive: !0
@@ -9550,7 +9550,7 @@
 
     function eE(t, n, r) {
         var o, a, i, s, l, u, c, d, p, m;
-        return n === F ? eC(function(t, n) {
+        return n === L ? eC(function(t, n) {
             var r = H(t),
                 o = ee(t),
                 a = r.visualViewport,
@@ -9620,7 +9620,7 @@
         if (null != c) {
             var d = "y" === c ? "height" : "width";
             switch (s) {
-                case L:
+                case F:
                     n[c] = n[c] - (r[d] / 2 - o[d] / 2);
                     break;
                 case "end":
@@ -9647,7 +9647,7 @@
             I = ei("number" != typeof w ? w : es(w, R)),
             S = t.rects.popper,
             x = t.elements[void 0 !== C && C ? b === N ? "reference" : N : b],
-            A = (r = U(x) ? x : x.contextElement || ee(t.elements.popper), o = void 0 === g ? "clippingParents" : g, a = void 0 === y ? F : y, u = (l = [].concat("clippingParents" === o ? (i = eb(et(r)), U(s = ["absolute", "fixed"].indexOf($(r).position) >= 0 && V(r) ? er(r) : r) ? i.filter(function(t) {
+            A = (r = U(x) ? x : x.contextElement || ee(t.elements.popper), o = void 0 === g ? "clippingParents" : g, a = void 0 === y ? L : y, u = (l = [].concat("clippingParents" === o ? (i = eb(et(r)), U(s = ["absolute", "fixed"].indexOf($(r).position) >= 0 && V(r) ? er(r) : r) ? i.filter(function(t) {
                 return U(t) && Q(t, s) && "body" !== O(t)
             }) : []) : [].concat(o), [a]))[0], (c = l.reduce(function(t, n) {
                 var o = eE(r, n, f);
@@ -9661,12 +9661,12 @@
                 placement: m
             }),
             _ = eC(Object.assign({}, S, j)),
-            L = b === N ? _ : T,
+            F = b === N ? _ : T,
             M = {
-                top: A.top - L.top + I.top,
-                bottom: L.bottom - A.bottom + I.bottom,
-                left: A.left - L.left + I.left,
-                right: L.right - A.right + I.right
+                top: A.top - F.top + I.top,
+                bottom: F.bottom - A.bottom + I.bottom,
+                left: A.left - F.left + I.left,
+                right: F.right - A.right + I.right
             },
             P = t.modifiersData.offset;
         if (b === N && P) {
@@ -9895,9 +9895,9 @@
                             })) : r)
                         }, []), E = n.rects.reference, w = n.rects.popper, I = new Map, S = !0, x = C[0], A = 0; A < C.length; A++) {
                         var T = C[A],
-                            F = q(T),
-                            N = el(T) === L,
-                            B = ["top", k].indexOf(F) >= 0,
+                            L = q(T),
+                            N = el(T) === F,
+                            B = ["top", k].indexOf(L) >= 0,
                             O = B ? "width" : "height",
                             H = eI(n, {
                                 placement: T,
@@ -9910,7 +9910,7 @@
                         E[O] > w[O] && (U = em(U));
                         var V = em(U),
                             z = [];
-                        if (i && z.push(H[F] <= 0), l && z.push(H[U] <= 0, H[V] <= 0), z.every(function(t) {
+                        if (i && z.push(H[L] <= 0), l && z.push(H[U] <= 0, H[V] <= 0), z.every(function(t) {
                                 return t
                             })) {
                             x = T, S = !1;
@@ -9985,14 +9985,14 @@
                 if (E) {
                     if (void 0 === a || a) {
                         var _, R = "y" === b ? "top" : j,
-                            F = "y" === b ? k : D,
+                            L = "y" === b ? k : D,
                             N = "y" === b ? "height" : "width",
                             M = E[b],
                             P = M + f[R],
-                            B = M - f[F],
+                            B = M - f[L],
                             O = p ? -I[N] / 2 : 0,
-                            H = y === L ? w[N] : I[N],
-                            U = y === L ? -I[N] : -w[N],
+                            H = y === F ? w[N] : I[N],
+                            U = y === F ? -I[N] : -w[N],
                             V = n.elements.arrow,
                             z = p && V ? X(V) : {
                                 width: 0,
@@ -10005,7 +10005,7 @@
                                 left: 0
                             },
                             J = K[R],
-                            Z = K[F],
+                            Z = K[L],
                             Y = ea(0, w[N], z[N]),
                             Q = v ? w[N] / 2 - O - Y - J - x.mainAxis : H - Y - J - x.mainAxis,
                             $ = v ? -w[N] / 2 + O + Y + Z + x.mainAxis : U + Y + Z + x.mainAxis,
@@ -10248,8 +10248,8 @@
     function eR(t) {
         return "function" == typeof t ? t() : t
     }
-    let eL = {},
-        eF = l.forwardRef(function(t, n) {
+    let eF = {},
+        eL = l.forwardRef(function(t, n) {
             var r;
             let {
                 anchorEl: o,
@@ -10284,13 +10284,13 @@
                     }
                 }(h, i),
                 [_, R] = l.useState(j),
-                [L, F] = l.useState(eR(o));
+                [F, L] = l.useState(eR(o));
             l.useEffect(() => {
                 T.current && T.current.forceUpdate()
             }), l.useEffect(() => {
-                o && F(eR(o))
+                o && L(eR(o))
             }, [o]), (0, C.u)(() => {
-                if (!L || !c) return;
+                if (!F || !c) return;
                 let t = [{
                     name: "preventOverflow",
                     options: {
@@ -10313,7 +10313,7 @@
                     }
                 }];
                 null != u && (t = t.concat(u)), f && null != f.modifiers && (t = t.concat(f.modifiers));
-                let n = ek(L, x.current, (0, p._)({
+                let n = ek(F, x.current, (0, p._)({
                     placement: j
                 }, f, {
                     modifiers: t
@@ -10321,7 +10321,7 @@
                 return D.current(n), () => {
                     n.destroy(), D.current(null)
                 }
-            }, [L, s, u, c, f, j]);
+            }, [F, s, u, c, f, j]);
             let N = {
                 placement: _
             };
@@ -10361,7 +10361,7 @@
                     modifiers: m,
                     open: h,
                     placement: f = "bottom",
-                    popperOptions: b = eL,
+                    popperOptions: b = eF,
                     popperRef: C,
                     style: E,
                     transition: w = !1,
@@ -10388,7 +10388,7 @@
             return (0, g.jsx)(v.P, {
                 disablePortal: u,
                 container: r,
-                children: (0, g.jsx)(eF, (0, p._)({
+                children: (0, g.jsx)(eL, (0, p._)({
                     anchorEl: o,
                     direction: s,
                     disablePortal: u,
@@ -10667,8 +10667,8 @@
             {
                 arrow: _ = !1,
                 children: R,
-                components: L = {},
-                componentsProps: F = {},
+                components: F = {},
+                componentsProps: L = {},
                 describeChild: N = !1,
                 disableFocusListener: M = !1,
                 disableHoverListener: P = !1,
@@ -10747,10 +10747,10 @@
                 ref: e_
             } = (0, eq.u)(),
             [, eR] = l.useState(!1),
-            eL = t => {
+            eF = t => {
                 eD(t), !1 === ek.current && (eR(!1), eT(t))
             },
-            eF = t => {
+            eL = t => {
                 el || eu(t.currentTarget), ej(t), !0 === ek.current && (eR(!0), eA(t))
             },
             eN = t => {
@@ -10795,7 +10795,7 @@
             ea.props.onTouchEnd && ea.props.onTouchEnd(t), eI(), eg.start(G, () => {
                 ex(t)
             })
-        }), P || (e5.onMouseOver = e4(eA, e5.onMouseOver), e5.onMouseLeave = e4(eT, e5.onMouseLeave), em || (e6.onMouseOver = eA, e6.onMouseLeave = eT)), M || (e5.onFocus = e4(eF, e5.onFocus), e5.onBlur = e4(eL, e5.onBlur), em || (e6.onFocus = eF, e6.onBlur = eL));
+        }), P || (e5.onMouseOver = e4(eA, e5.onMouseOver), e5.onMouseLeave = e4(eT, e5.onMouseLeave), em || (e6.onMouseOver = eA, e6.onMouseLeave = eT)), M || (e5.onFocus = e4(eL, e5.onFocus), e5.onBlur = e4(eF, e5.onBlur), em || (e6.onFocus = eL, e6.onBlur = eF));
         let e8 = l.useMemo(() => {
                 var t;
                 let n = [{
@@ -10832,19 +10832,19 @@
                 };
                 return (0, m.a)(s, eJ, n)
             })(e9),
-            te = null != (r = null != (o = ee.popper) ? o : L.Popper) ? r : eX,
-            tt = null != (a = null != (i = null != (s = ee.transition) ? s : L.Transition) ? i : en) ? a : eG.G,
-            tn = null != (u = null != (c = ee.tooltip) ? c : L.Tooltip) ? u : eQ,
-            tr = null != (f = null != (y = ee.arrow) ? y : L.Arrow) ? f : e$,
-            to = (0, eK.a)(te, (0, p._)({}, Q, null != (v = $.popper) ? v : F.popper, {
-                className: (0, m.c)(e7.popper, null == Q ? void 0 : Q.className, null == (C = null != (E = $.popper) ? E : F.popper) ? void 0 : C.className)
+            te = null != (r = null != (o = ee.popper) ? o : F.Popper) ? r : eX,
+            tt = null != (a = null != (i = null != (s = ee.transition) ? s : F.Transition) ? i : en) ? a : eG.G,
+            tn = null != (u = null != (c = ee.tooltip) ? c : F.Tooltip) ? u : eQ,
+            tr = null != (f = null != (y = ee.arrow) ? y : F.Arrow) ? f : e$,
+            to = (0, eK.a)(te, (0, p._)({}, Q, null != (v = $.popper) ? v : L.popper, {
+                className: (0, m.c)(e7.popper, null == Q ? void 0 : Q.className, null == (C = null != (E = $.popper) ? E : L.popper) ? void 0 : C.className)
             }), e9),
-            ta = (0, eK.a)(tt, (0, p._)({}, er, null != (I = $.transition) ? I : F.transition), e9),
-            ti = (0, eK.a)(tn, (0, p._)({}, null != (S = $.tooltip) ? S : F.tooltip, {
-                className: (0, m.c)(e7.tooltip, null == (x = null != (A = $.tooltip) ? A : F.tooltip) ? void 0 : x.className)
+            ta = (0, eK.a)(tt, (0, p._)({}, er, null != (I = $.transition) ? I : L.transition), e9),
+            ti = (0, eK.a)(tn, (0, p._)({}, null != (S = $.tooltip) ? S : L.tooltip, {
+                className: (0, m.c)(e7.tooltip, null == (x = null != (A = $.tooltip) ? A : L.tooltip) ? void 0 : x.className)
             }), e9),
-            ts = (0, eK.a)(tr, (0, p._)({}, null != (T = $.arrow) ? T : F.arrow, {
-                className: (0, m.c)(e7.arrow, null == (k = null != (D = $.arrow) ? D : F.arrow) ? void 0 : k.className)
+            ts = (0, eK.a)(tr, (0, p._)({}, null != (T = $.arrow) ? T : L.arrow, {
+                className: (0, m.c)(e7.arrow, null == (k = null != (D = $.arrow) ? D : L.arrow) ? void 0 : k.className)
             }), e9);
         return (0, g.jsxs)(l.Fragment, {
             children: [l.cloneElement(ea, e5), (0, g.jsx)(te, (0, p._)({
@@ -11432,7 +11432,7 @@
         }
     }
 
-    function L(t) {
+    function F(t) {
         var n, r, o, a, i, s;
         return {
             disabledItemsFocusable: null != (n = t.disabledItemsFocusable) && n,
@@ -11456,7 +11456,7 @@
         }
     }
 
-    function F(t, n, r) {
+    function L(t, n, r) {
         return void 0 !== t ? t : void 0 !== n ? n : r
     }
     let N = 0;
@@ -11700,7 +11700,7 @@
             let n = (n, r, o) => {
                     void 0 !== t[r] && (n[r] = t[r])
                 },
-                r = L(t);
+                r = F(t);
             n(r, "expandedItems", "defaultExpandedItems"), n(r, "selectedItems", "defaultSelectedItems"), this.state.providedTreeId === t.id && void 0 !== this.state.treeId || (N += 1, r.treeId = "mui-tree-view-".concat(N)), !this.mapper.shouldIgnoreItemsStateUpdate(t) && w.shouldRebuildItemsState(t, this.parameters) && Object.assign(r, w.buildItemsStateIfNeeded(t));
             let o = this.mapper.updateStateFromParameters(r, t, n);
             this.update(o), this.parameters = t
@@ -11710,9 +11710,9 @@
                 return (0, l._)({
                     treeId: void 0,
                     focusedItemId: null
-                }, L(t), w.buildItemsStateIfNeeded(t), {
-                    expandedItems: F(t.expandedItems, t.defaultExpandedItems, []),
-                    selectedItems: F(t.selectedItems, t.defaultSelectedItems, t.multiSelect ? y : null)
+                }, F(t), w.buildItemsStateIfNeeded(t), {
+                    expandedItems: L(t.expandedItems, t.defaultExpandedItems, []),
+                    selectedItems: L(t.selectedItems, t.defaultSelectedItems, t.multiSelect ? y : null)
                 })
             }(t);
             super(o.getInitialState(a, t)), (0, n._)(this, "initialParameters", null), (0, n._)(this, "eventManager", new R), (0, n._)(this, "timeoutManager", new M), (0, n._)(this, "itemPluginManager", new U), (0, n._)(this, "disposeEffect", () => this.timeoutManager.clearAll), (0, n._)(this, "shouldIgnoreItemsStateUpdate", () => this.mapper.shouldIgnoreItemsStateUpdate(this.parameters)), (0, n._)(this, "registerStoreEffect", (t, n) => {
@@ -11951,9 +11951,9 @@
                         itemCheckbox: ["itemCheckbox"]
                     }, g, n), [n])
                 })(v),
-                L = null != (r = null == E ? void 0 : E.root) ? r : Z,
-                F = (0, c.k)({
-                    elementType: L,
+                F = null != (r = null == E ? void 0 : E.root) ? r : Z,
+                L = (0, c.k)({
+                    elementType: F,
                     externalSlotProps: null == w ? void 0 : w.root,
                     className: R.root,
                     getSlotProps: k,
@@ -11971,7 +11971,7 @@
                     idAttribute: null,
                     children: (0, d.jsx)(c.T.Provider, {
                         value: 0,
-                        children: (0, d.jsx)(L, (0, l._)({}, F))
+                        children: (0, d.jsx)(F, (0, l._)({}, L))
                     })
                 })
             })
@@ -12312,8 +12312,8 @@
                     getContextProviderProps: j,
                     getRootProps: _,
                     getContentProps: R,
-                    getIconContainerProps: L,
-                    getCheckboxProps: F,
+                    getIconContainerProps: F,
+                    getCheckboxProps: L,
                     getLabelProps: N,
                     getGroupTransitionProps: M,
                     getLabelInputProps: P,
@@ -12562,7 +12562,7 @@
                 K = null != (i = A.iconContainer) ? i : eC,
                 J = (0, c.k)({
                     elementType: K,
-                    getSlotProps: L,
+                    getSlotProps: F,
                     externalSlotProps: T.iconContainer,
                     ownerState: {},
                     className: V.iconContainer
@@ -12578,7 +12578,7 @@
                 X = null != (p = A.checkbox) ? p : eS,
                 Q = (0, c.k)({
                     elementType: X,
-                    getSlotProps: F,
+                    getSlotProps: L,
                     externalSlotProps: T.checkbox,
                     ownerState: {},
                     className: V.checkbox
@@ -12845,7 +12845,7 @@
                     component: h,
                     variant: A
                 }),
-                L = (t => {
+                F = (t => {
                     let {
                         classes: n,
                         variant: r,
@@ -12857,8 +12857,8 @@
                         fallback: ["fallback"]
                     }, f, n)
                 })(R),
-                [F, N] = (0, p.u)("img", {
-                    className: L.img,
+                [L, N] = (0, p.u)("img", {
+                    className: F.img,
                     elementType: b,
                     externalForwardedProps: {
                         slots: g,
@@ -12874,13 +12874,13 @@
                     },
                     ownerState: R
                 });
-            return k = _ ? (0, c.jsx)(F, (0, s._)({}, N)) : u || 0 === u ? u : j && a ? a[0] : (0, c.jsx)(C, {
+            return k = _ ? (0, c.jsx)(L, (0, s._)({}, N)) : u || 0 === u ? u : j && a ? a[0] : (0, c.jsx)(C, {
                 ownerState: R,
-                className: L.fallback
+                className: F.fallback
             }), (0, c.jsx)(v, (0, s._)({
                 as: h,
                 ownerState: R,
-                className: (0, l.c)(L.root, d),
+                className: (0, l.c)(F.root, d),
                 ref: n
             }, T, {
                 children: k
@@ -14359,18 +14359,18 @@
                 }
             }
         };
-    var R, L, F = {},
+    var R, F, L = {},
         N = {};
     ({
         get exports() {
-            return F
+            return L
         },
         set exports(e) {
-            F = e
+            L = e
         }
     }).exports = function() {
-        if (L) return N;
-        L = 1;
+        if (F) return N;
+        F = 1;
         var t = r.default,
             n = "function" == typeof Object.is ? Object.is : function(t, n) {
                 return t === n && (0 !== t || 1 / t == 1 / n) || t != t && n != n
@@ -14434,7 +14434,7 @@
             n = "function" == typeof Object.is ? Object.is : function(t, n) {
                 return t === n && (0 !== t || 1 / t == 1 / n) || t != t && n != n
             },
-            o = F.useSyncExternalStore,
+            o = L.useSyncExternalStore,
             a = t.useRef,
             i = t.useEffect,
             s = t.useMemo,
@@ -14476,7 +14476,7 @@
     }();
     let O = parseInt(r.version, 10) >= 19 ? function(t, n, o, a, i) {
         let s = r.useCallback(() => n(t.getSnapshot(), o, a, i), [t, n, o, a, i]);
-        return F.useSyncExternalStore(t.subscribe, s, s)
+        return L.useSyncExternalStore(t.subscribe, s, s)
     } : function(t, n, r, o, a) {
         return P.useSyncExternalStoreWithSelector(t.subscribe, t.getSnapshot, t.getSnapshot, t => n(t, r, o, a))
     };
@@ -15229,8 +15229,8 @@
         j = t.i(343023),
         _ = t.i(481458),
         R = t.i(986155),
-        L = t.i(670474),
-        F = t.i(257256),
+        F = t.i(670474),
+        L = t.i(257256),
         N = t.i(669045),
         M = t.i(513498),
         P = t.i(338724),
@@ -15283,8 +15283,8 @@
         ej = t.i(862559),
         e_ = t.i(254071),
         eR = t.i(857869),
-        eL = t.i(847016),
-        eF = t.i(699848),
+        eF = t.i(847016),
+        eL = t.i(699848),
         eN = t.i(145842),
         eM = t.i(943402),
         eP = t.i(40262),
@@ -15347,7 +15347,6 @@
         creatorEventsVariant: null,
         drawerVariant: "fullScreen",
         navigationDropdownTabs: null,
-        enableCourses: !1,
         enableNotificationsM2: !1,
         enableTalentHubV2M2: !1,
         creatorHubSearchIxpParams: a.DEFAULT_CREATOR_HUB_SEARCH_VERSION,
@@ -15405,10 +15404,10 @@
         return "production" === n ? "luobu" === t ? "roblox.qq.com" : "roblox.com" : "staging" === n ? "luobu" === t ? "robloxlabs.cn" : "sitetest1.robloxlabs.com" : "luobu" === t ? "luobutest.robloxlabs.cn" : "sitetest3.robloxlabs.com"
     }
 
-    function tL(t, n, r) {
+    function tF(t, n, r) {
         return "production" === r ? "luobu" === n ? "https://apis.api.robloxdev.cn/".concat(t) : "https://apis.roblox.com/".concat(t) : "staging" === r ? "luobu" === n ? "https://apis.robloxlabs.cn/".concat(t) : "https://apis.sitetest1.robloxlabs.com/".concat(t) : "luobu" === n ? "https://apis.luobutest.robloxlabs.cn/".concat(t) : "https://apis.sitetest3.robloxlabs.com/".concat(t)
     }
-    let tF = "https://create.roblox.com",
+    let tL = "https://create.roblox.com",
         tN = "https://create.sitetest1.robloxlabs.com",
         tM = "https://create.sitetest3.robloxlabs.com",
         tP = "https://create.robloxdev.cn",
@@ -16428,11 +16427,11 @@
             eventType: "settingsEntryPointClicked",
             context: "click"
         },
-        nL = {
+        nF = {
             eventType: "ClickCopyUserId",
             context: "click"
         },
-        nF = {
+        nL = {
             eventType: "ClickNavSwitchAccounts",
             context: "click"
         },
@@ -17200,8 +17199,8 @@
                     menuList: E,
                     menuItem: w,
                     sortMenu: I,
-                    sortMenuList: L,
-                    listItem: F,
+                    sortMenuList: F,
+                    listItem: L,
                     currentWorkplaceList: N,
                     link: M,
                     current: P
@@ -17290,7 +17289,7 @@
                     }
                 }, r.default.createElement(A.ListItem, {
                     classes: {
-                        root: F
+                        root: L
                     }
                 }, r.default.createElement(e9.default, {
                     href: G.groupProfile,
@@ -17299,7 +17298,7 @@
                     variant: "smallLabel2"
                 }, f("Label.Settings")))), r.default.createElement(A.ListItem, {
                     classes: {
-                        root: F
+                        root: L
                     }
                 }, r.default.createElement(e9.default, {
                     href: G.groupMembers,
@@ -17308,7 +17307,7 @@
                     variant: "smallLabel2"
                 }, f("Label.Members")))), r.default.createElement(A.ListItem, {
                     classes: {
-                        root: F
+                        root: L
                     }
                 }, r.default.createElement(e9.default, {
                     href: G.groupRoles,
@@ -17317,7 +17316,7 @@
                     variant: "smallLabel2"
                 }, f("Label.Roles")))), K && r.default.createElement(A.ListItem, {
                     classes: {
-                        root: F
+                        root: L
                     }
                 }, r.default.createElement(e9.default, {
                     href: G.groupModeration,
@@ -17326,7 +17325,7 @@
                     variant: "smallLabel2"
                 }, f("Label.Moderation")))), r.default.createElement(A.ListItem, {
                     classes: {
-                        root: F
+                        root: L
                     }
                 }, r.default.createElement(e9.default, {
                     href: G.groupActivityHistory,
@@ -17360,7 +17359,7 @@
                 fullWidth: !0
             }, r.default.createElement(D.Menu, {
                 classes: {
-                    list: L,
+                    list: F,
                     paper: g(y, I)
                 },
                 open: et,
@@ -17450,7 +17449,7 @@
             }, [a]);
             return null === l || c ? r.default.createElement("div", {
                 className: o
-            }, r.default.createElement(L.CircularProgress, {
+            }, r.default.createElement(F.CircularProgress, {
                 color: "secondary"
             })) : r.default.createElement(n6, {
                 collapsed: n,
@@ -17740,7 +17739,7 @@
                     railItemWrapper: j,
                     railItemNoHover: _,
                     railItemIconOnly: R,
-                    startIcon: L,
+                    startIcon: F,
                     startIconCompact: M,
                     startIconTransition: P,
                     verticalLabel: B,
@@ -17764,7 +17763,7 @@
                         "radius-medium hover:bg-shift-200 active:bg-shift-300": f && !i,
                         "radius-medium bg-shift-200 hover:bg-shift-300 active:bg-shift-300": f && i
                     }),
-                    startIcon: A(L, {
+                    startIcon: A(F, {
                         [M]: p && !S,
                         [P]: v && !S,
                         "hover:bg-shift-200 active:bg-shift-300": p && !S && !i,
@@ -17804,7 +17803,7 @@
                     "bg-shift-200 hover:bg-shift-300 active:bg-shift-300": i && (!p || S),
                     "content-emphasis": !p || S
                 })
-            }, r.default.createElement(F.Tooltip, {
+            }, r.default.createElement(L.Tooltip, {
                 title: x ? u : "",
                 disableHoverListener: !x,
                 placement: "right",
@@ -17890,7 +17889,7 @@
             }, y)))
         },
         rd = ["/dashboard/devex", "/dashboard/transactions", "/dashboard/account-information", "/dashboard/billing", "/dashboard/payments", "/dashboard/revenue-share-agreements", "/dashboard/group/payouts", "/dashboard/group/revenue-share-agreements"],
-        rp = ["/dashboard/finance/overview", "/dashboard/roblox-cash"],
+        rp = ["/dashboard/finance/analytics", "/dashboard/finance/overview", "/dashboard/roblox-cash"],
         rm = t => {
             let {
                 pathname: n,
@@ -17933,8 +17932,8 @@
                     creatorType: R
                 }
             } = t9(), {
-                translate: L
-            } = (0, e$.useTranslation)(), F = (0, m.useMediaQuery)(t => t.breakpoints.down("Medium")), {
+                translate: F
+            } = (0, e$.useTranslation)(), L = (0, m.useMediaQuery)(t => t.breakpoints.down("Medium")), {
                 Dashboard: N,
                 Store: V,
                 Forum: z,
@@ -17978,7 +17977,7 @@
             }, r.default.createElement(ra, {
                 compact: b,
                 icon: r.default.createElement(M.RobloxIcon, null),
-                label: L("Label.Creator"),
+                label: F("Label.Creator"),
                 onClick: () => Y("Header"),
                 href: N.home
             })) : r.default.createElement(l.Grid, {
@@ -17994,7 +17993,7 @@
                 compact: b,
                 enableAnimation: I,
                 icon: r.default.createElement(M.RobloxIcon, null),
-                label: L("Label.Creator"),
+                label: F("Label.Creator"),
                 onClick: () => Y("Header"),
                 href: N.home
             }), o && r.default.createElement(n9, {
@@ -18005,7 +18004,7 @@
                 icon: r.default.createElement(B.BuilderHomeIcon, null),
                 active: "Home" === Q,
                 activeIcon: r.default.createElement(P.BuilderHomeFillIcon, null),
-                label: L("Heading.Home"),
+                label: F("Heading.Home"),
                 onClick: () => Y("Home", "Home"),
                 href: N.home
             }), o && r.default.createElement(rs, {
@@ -18020,7 +18019,7 @@
                     size: "Medium"
                 }),
                 active: "Creations" === Q,
-                label: L("Heading.Creations"),
+                label: F("Heading.Creations"),
                 onClick: () => Y("Creations", "Creations"),
                 href: N.creations
             }), r.default.createElement(rs, {
@@ -18035,7 +18034,7 @@
                     size: "Medium"
                 }),
                 active: "Documentation" === Q,
-                label: L("Heading.Learn"),
+                label: F("Heading.Learn"),
                 onClick: () => Y("Learn", "Documentation"),
                 href: G.home
             }), !(null == _ ? void 0 : _.includes(tK)) && r.default.createElement(rs, {
@@ -18050,7 +18049,7 @@
                     size: "Medium"
                 }),
                 active: "Store" === Q,
-                label: L("Heading.Store"),
+                label: F("Heading.Store"),
                 onClick: () => Y("Store", "Store"),
                 href: V.home
             }), r.default.createElement(rs, {
@@ -18059,7 +18058,7 @@
                 icon: r.default.createElement(H.BuilderChatSideIcon, null),
                 activeIcon: r.default.createElement(O.BuilderChatSideFillIcon, null),
                 active: "Forum" === Q,
-                label: L("Heading.Forums"),
+                label: F("Heading.Forums"),
                 onClick: () => Y("Forum", "Forum"),
                 href: z.home
             }), r.default.createElement(rs, {
@@ -18074,7 +18073,7 @@
                     size: "Medium"
                 }),
                 active: Q === tJ,
-                label: L("Heading.Updates"),
+                label: F("Heading.Updates"),
                 onClick: () => Y(tJ, tJ),
                 href: N.updates
             }), o && r.default.createElement(r.default.Fragment, null, (!b || v) && r.default.createElement("div", {
@@ -18085,7 +18084,7 @@
                 icon: r.default.createElement(rn, null),
                 activeIcon: r.default.createElement(rr, null),
                 active: "Finances" === Q,
-                label: L("Heading.Finances"),
+                label: F("Heading.Finances"),
                 onClick: () => Y("Finances", "Finances"),
                 href: N.finances
             }), r.default.createElement(rs, {
@@ -18100,7 +18099,7 @@
                     size: "Medium"
                 }),
                 active: "Analytics" === Q,
-                label: L("Title.Analytics"),
+                label: F("Title.Analytics"),
                 onClick: () => Y("Analytics", "Analytics"),
                 href: N.analytics
             }), R === t0 && r.default.createElement(rs, {
@@ -18115,7 +18114,7 @@
                     size: "Medium"
                 }),
                 active: "Collaboration" === Q,
-                label: L("Heading.Collaboration"),
+                label: F("Heading.Collaboration"),
                 onClick: () => Y("Collaboration", "Collaboration"),
                 href: N.groupProfile
             }), r.default.createElement(rs, {
@@ -18130,7 +18129,7 @@
                     name: "icon-filled-circle-line-target-cursor",
                     size: "Medium"
                 }),
-                label: L("Heading.Ads"),
+                label: F("Heading.Ads"),
                 onClick: () => Y("Ads", tZ),
                 href: q.home
             }), (!b || v) && r.default.createElement("div", {
@@ -18142,7 +18141,7 @@
                     name: "icon-regular-three-dots-horizontal",
                     size: "Medium"
                 }),
-                label: L("Heading.AllTools"),
+                label: F("Heading.AllTools"),
                 onClick: () => {
                     s(nT("AllTools")), T(!E)
                 }
@@ -18153,7 +18152,7 @@
                     name: "icon-regular-arrow-right-to-portrait-rectangle",
                     size: "Medium"
                 }),
-                label: L("Action.LogIn"),
+                label: F("Action.LogIn"),
                 onClick: () => {
                     s(nT("AllToolsLogin")), u()
                 }
@@ -18167,14 +18166,14 @@
                 bottom: !0,
                 compact: b,
                 icon: r.default.createElement(M.RobloxIcon, null),
-                label: L("Label.RobloxWebsite"),
+                label: F("Label.RobloxWebsite"),
                 onClick: () => Y("RobloxWebsite"),
                 href: W.home
-            }), !F && r.default.createElement(rs, {
+            }), !L && r.default.createElement(rs, {
                 enableAnimation: I && S,
                 compact: b,
                 icon: r.default.createElement(U.StudioIcon, null),
-                label: L("Heading.Studio"),
+                label: F("Heading.Studio"),
                 onClick: () => {
                     Y("studio"), i()
                 }
@@ -18185,7 +18184,7 @@
                     name: v ? "icon-regular-sidebar" : "icon-filled-sidebar",
                     size: "Medium"
                 }),
-                label: L(v && !S ? "Label.ShowSidebar" : "Label.HideSidebar"),
+                label: F(v && !S ? "Label.ShowSidebar" : "Label.HideSidebar"),
                 onClick: () => {
                     let t = !v;
                     s({
@@ -18296,11 +18295,11 @@
                     secondaryRail: j,
                     experienceSecondaryRail: _,
                     mediumSecondaryRail: R,
-                    largeSecondaryRail: L
+                    largeSecondaryRail: F
                 }
             } = rh(), {
                 classes: {
-                    scroll: F
+                    scroll: L
                 }
             } = tx(), N = (0, r.useCallback)(() => {
                 f(!1), "temporary" === p && h(!1)
@@ -18346,10 +18345,10 @@
                 sendEvent: i
             })), s && r.default.createElement(l.Grid, {
                 classes: {
-                    root: I(j, F, {
+                    root: I(j, L, {
                         [_]: "experience" === o,
                         [R]: "medium" === o,
-                        [L]: "large" === o
+                        [F]: "large" === o
                     })
                 }
             }, s)), r.default.createElement(g.Drawer, {
@@ -18382,7 +18381,7 @@
                 environment: o,
                 target: a
             } = tS(), i = (0, r.useMemo)(() => {
-                let t = tL("creator-notifications", a, o);
+                let t = tF("creator-notifications", a, o);
                 return new tf.CreatorStreamNotificationsApi(new e6.Configuration({
                     robloxSiteDomain: tR(a, o),
                     basePath: t,
@@ -18643,18 +18642,18 @@
             })
         };
     var rR = ((nh = {}).Dropdown = "Dropdown", nh.Basic = "Basic", nh);
-    let rL = {
+    let rF = {
             key: "CreatorHub",
             title: "Heading.Creator",
-            href: tF,
+            href: tL,
             path: ""
         },
-        rF = {
+        rL = {
             icon: r.default.createElement(Q.HomeOutlinedIcon, null),
             activeIcon: r.default.createElement(X.HomeIcon, null),
             key: "Home",
             title: "Heading.Home",
-            href: tF,
+            href: tL,
             path: "/"
         },
         rN = {
@@ -18678,13 +18677,13 @@
             activeIcon: r.default.createElement($.BookIcon, null),
             key: "Documentation",
             title: "Heading.Learn",
-            href: "".concat(tF, "/docs"),
+            href: "".concat(tL, "/docs"),
             path: "/docs"
         },
         rB = {
             key: "Assistant",
             title: "Heading.Assistant",
-            href: "".concat(tF, "/docs/assistant"),
+            href: "".concat(tL, "/docs/assistant"),
             path: "/docs/assistant"
         },
         rO = {
@@ -18708,7 +18707,7 @@
             activeIcon: r.default.createElement(et.LanguageIcon, null),
             key: "Explore",
             title: "Heading.Explore",
-            href: tF,
+            href: tL,
             dropdownContentComponent: r_,
             path: "/",
             tabPath: "/explore/licenses"
@@ -18826,26 +18825,26 @@
             },
             subTabs: [rq, rJ]
         },
-        rY = [rF, {
+        rY = [rL, {
             icon: r.default.createElement(G.DashboardOutlinedIcon, null),
             activeIcon: r.default.createElement(W.DashboardIcon, null),
             key: "CreatorDashboard",
             title: "Heading.Dashboard",
-            href: "".concat(tF, "/dashboard/creations"),
+            href: "".concat(tL, "/dashboard/creations"),
             path: "/dashboard/creations"
         }, rP, rU, {
             icon: r.default.createElement(J.ShoppingCartOutlinedIcon, null),
             activeIcon: r.default.createElement(K.ShoppingCartIcon, null),
             key: "Store",
             title: "Heading.Store",
-            href: "".concat(tF, "/store"),
+            href: "".concat(tL, "/store"),
             path: "/store"
         }, {
             icon: r.default.createElement(Y.PeopleOutlineOutlinedIcon, null),
             activeIcon: r.default.createElement(Z.PeopleIcon, null),
             key: "CommunityEvents",
             title: "Heading.CommunityEvents",
-            href: "".concat(tF, "/events"),
+            href: "".concat(tL, "/events"),
             path: "/events"
         }, rq],
         rX = [rN, {
@@ -18913,16 +18912,16 @@
             title: "Heading.Dashboard",
             href: "".concat(tP, "/creations")
         }, rW],
-        r2 = [rL, ...rY, rB].reduce((t, n) => (t.set(n.key, n.title), t), new Map),
-        r4 = [rL, {
+        r2 = [rF, ...rY, rB].reduce((t, n) => (t.set(n.key, n.title), t), new Map),
+        r4 = [rF, {
             key: "Advertise",
             title: "Heading.AdsManager",
-            href: tF,
+            href: tL,
             path: "/advertise"
         }, {
             key: "Talent",
             title: "Heading.Talent",
-            href: tF,
+            href: tL,
             path: "/talent"
         }, ...rY].reduce((t, n) => (t.set(n.key, n), t), new Map),
         r3 = "Small",
@@ -19913,8 +19912,8 @@
                 enableNotificationsM2: T = !1,
                 unseenNotifFrontierIndex: k,
                 isListOverflowing: j
-            } = t, _, R, L, {
-                translate: F
+            } = t, _, R, F, {
+                translate: L
             } = (0, e$.useTranslation)(), {
                 sendEvent: N
             } = tS(), {
@@ -20003,7 +20002,7 @@
                     }
                 }, [t, l, i]), i
             }((null != (o = I.createdUtcTimeInMs) ? o : 0) / 1e3, "Label.ElapsedTimeShort");
-            _ = (0, r.useRef)({}), R = (0, r.useRef)(null), L = (0, r.useMemo)(() => {
+            _ = (0, r.useRef)({}), R = (0, r.useRef)(null), F = (0, r.useMemo)(() => {
                 let t = () => {
                     var t, n, r, o, a, i, s, l;
                     I && N({
@@ -20038,7 +20037,7 @@
                                 var n;
                                 let t = null != (n = I.notificationId) ? n : "",
                                     r = _.current[t];
-                                (!r || Date.now() - r >= 6e4) && L.debounced(), _.current[t] = Date.now()
+                                (!r || Date.now() - r >= 6e4) && F.debounced(), _.current[t] = Date.now()
                             }
                         })
                     }, {
@@ -20060,9 +20059,9 @@
                         threshold: .8
                     });
                 return n.observe(t), r.observe(t), () => {
-                    n.unobserve(t), n.disconnect(), r.unobserve(t), r.disconnect(), L.cancel()
+                    n.unobserve(t), n.disconnect(), r.unobserve(t), r.disconnect(), F.cancel()
                 }
-            }, [K, I, L, A, S, T, k]);
+            }, [K, I, F, A, S, T, k]);
             let ee = (0, r.useCallback)(t => {
                     t && !V && N({
                         eventType: "openNotificationOverflowMenu",
@@ -20187,7 +20186,7 @@
                         side: "bottom",
                         align: "end",
                         className: M.overflowMenuPortal,
-                        ariaLabel: F("Label.Menu")
+                        ariaLabel: L("Label.Menu")
                     }, r.default.createElement("div", {
                         role: "none",
                         tabIndex: -1,
@@ -20199,15 +20198,15 @@
                         }
                     }, r.default.createElement(ti.Menu, {
                         size: "Medium",
-                        "aria-label": F("Label.ActionsForContent", {
-                            content: F(eo ? "Label.MarkAsRead" : "Label.MarkAsUnread")
+                        "aria-label": L("Label.ActionsForContent", {
+                            content: L(eo ? "Label.MarkAsRead" : "Label.MarkAsUnread")
                         }),
                         className: P("bg-surface-200 radius-medium", M.overflowMenu)
                     }, r.default.createElement(ti.MenuItem, {
                         className: "radius-medium",
                         value: eo ? "mark-as-read" : "mark-as-unread",
-                        title: F(eo ? "Label.MarkAsRead" : "Label.MarkAsUnread"),
-                        "aria-label": F(eo ? "Label.MarkAsRead" : "Label.MarkAsUnread"),
+                        title: L(eo ? "Label.MarkAsRead" : "Label.MarkAsUnread"),
+                        "aria-label": L(eo ? "Label.MarkAsRead" : "Label.MarkAsUnread"),
                         tabIndex: 0,
                         onSelect: ea,
                         onKeyDown: t => {
@@ -20315,7 +20314,7 @@
                     horizontal: "right"
                 },
                 MenuListProps: {
-                    "aria-labelledby": F("Label.NotificationMenuAria")
+                    "aria-labelledby": L("Label.NotificationMenuAria")
                 }
             }, r.default.createElement(h.MenuItem, {
                 variant: "standardMenu",
@@ -20323,7 +20322,7 @@
             }, r.default.createElement(s.Typography, {
                 variant: "body1",
                 color: "primary"
-            }, F("Action.TurnOffNotifications")))))
+            }, L("Action.TurnOffNotifications")))))
         });
     oC.displayName = "Notification";
     let oE = t => {
@@ -20550,7 +20549,7 @@
                 cx: w
             } = oS(), I = (0, r.useCallback)(() => {
                 var t, r;
-                c ? c() : window.open("".concat("luobu" === b ? "production" === v ? tP : "staging" === v ? tB : tO : (null == (r = window) || null == (t = r.location) ? void 0 : t.origin) ? window.location.host.startsWith("devforum") || window.location.host.startsWith("music") ? window.location.origin.replace(/(devforum|music)/, "create") : window.location.origin : "production" === v ? tF : "staging" === v ? tN : tM, "/settings/notifications"), "_self"), u(!1), g({
+                c ? c() : window.open("".concat("luobu" === b ? "production" === v ? tP : "staging" === v ? tB : tO : (null == (r = window) || null == (t = r.location) ? void 0 : t.origin) ? window.location.host.startsWith("devforum") || window.location.host.startsWith("music") ? window.location.origin.replace(/(devforum|music)/, "create") : window.location.origin : "production" === v ? tL : "staging" === v ? tN : tM, "/settings/notifications"), "_self"), u(!1), g({
                     eventType: "ClickNotificationSettingsButton",
                     context: "click",
                     parameters: {
@@ -20683,8 +20682,8 @@
                 translate: D
             } = (0, e$.useTranslation)(), [j, _] = (0, r.useState)(!1), {
                 classes: R,
-                cx: L
-            } = oh(), [F, N] = (0, r.useState)(!1), M = (0, r.useCallback)(t => {
+                cx: F
+            } = oh(), [L, N] = (0, r.useState)(!1), M = (0, r.useCallback)(t => {
                 h.current = t, _(!!t)
             }, [h]), P = (0, r.useCallback)(() => {
                 let t = h.current;
@@ -20697,7 +20696,7 @@
                 let n = new ResizeObserver(P);
                 return n.observe(t), () => n.disconnect()
             }, [h, P, s.length, a]);
-            let B = L("flex flex-col items-center justify-center", R.listContainerM2),
+            let B = F("flex flex-col items-center justify-center", R.listContainerM2),
                 O = (0, r.useCallback)(() => {
                     h.current && (h.current.scrollTo({
                         top: 0,
@@ -20727,7 +20726,7 @@
                 V = !1;
             s && 0 !== s.length ? U = r.default.createElement("div", {
                 ref: M,
-                className: L(R.scrollableY, R.scrollableYM2)
+                className: F(R.scrollableY, R.scrollableYM2)
             }, r.default.createElement(oA, {
                 handler: H
             }), s.map((t, n) => {
@@ -20736,7 +20735,7 @@
                     notificationGroupIndex: n,
                     markReadStatus: m,
                     enableNotificationsM2: !0,
-                    isListOverflowing: F,
+                    isListOverflowing: L,
                     reportNewUnseenNotifFrontier: C,
                     unseenNotifFrontierIndex: w
                 };
@@ -20770,9 +20769,9 @@
                 enableNotificationsM2: !0,
                 size: 72
             }), r.default.createElement("h4", {
-                className: L(R.emptyStateHeader, R.errorStateHeader, "text-heading-small content-emphasis")
+                className: F(R.emptyStateHeader, R.errorStateHeader, "text-heading-small content-emphasis")
             }, D("Label.SomethingWentWrong") || "Something went wrong"), r.default.createElement("p", {
-                className: L(R.emptyStateDescription, "text-body-medium content-default")
+                className: F(R.emptyStateDescription, "text-body-medium content-default")
             }, D("Description.NotificationsFailed") || "Notifications failed to load")), r.default.createElement(tn.Button, {
                 className: R.retryButton,
                 variant: "Standard",
@@ -20786,9 +20785,9 @@
                 enableNotificationsM2: !0,
                 size: 128
             }), r.default.createElement("h2", {
-                className: L(R.emptyStateHeader, "text-heading-small content-emphasis")
+                className: F(R.emptyStateHeader, "text-heading-small content-emphasis")
             }, D("Label.NoNotificationsAvailable")), r.default.createElement("p", {
-                className: L(R.emptyStateDescription, "text-body-medium content-default")
+                className: F(R.emptyStateDescription, "text-body-medium content-default")
             }, D("Description.NoNotificationsAvailable")));
             let z = !V && (o || g),
                 q = (0, r.useMemo)(() => 0 === x ? "" : D(1 === x ? "Label.OneNewNotification" : "Message.NewNotificationsWithCount", {
@@ -20798,7 +20797,7 @@
                 G = r.default.createElement("div", {
                     ref: n,
                     "aria-label": D("Label.NotificationTray") || "Notification Tray",
-                    className: L("shadow-transient-high radius-large stroke-standard stroke-muted bg-surface-100 border-color-standard border border-radius-large relative flex flex-col", R.notificationsM2)
+                    className: F("shadow-transient-high radius-large stroke-standard stroke-muted bg-surface-100 border-color-standard border border-radius-large relative flex flex-col", R.notificationsM2)
                 }, z && r.default.createElement(to.Snackbar, {
                     onClose: () => y(!1),
                     shouldAutoDismiss: !0,
@@ -20835,7 +20834,7 @@
                 title: D("Message.NotificationsHasNewLookTitle"),
                 description: D("Message.NotificationsHasNewLookDescription"),
                 position: "left-start",
-                contentClassName: L("padding-top-[var(--size-150)] padding-bottom-small", R.tooltipContent)
+                contentClassName: F("padding-top-[var(--size-150)] padding-bottom-small", R.tooltipContent)
             }, r.default.createElement(tt.TooltipTrigger, {
                 asChild: !0
             }, G))
@@ -20873,7 +20872,7 @@
             cx: _
         } = oh(), {
             notificationClient: R
-        } = rv(), [F, N] = (0, r.useState)(!1), M = o && 0 === p.length, P = !M && !d && (!p || 0 === p.length), B = !M && !P, O = (0, r.useCallback)(() => {
+        } = rv(), [L, N] = (0, r.useState)(!1), M = o && 0 === p.length, P = !M && !d && (!p || 0 === p.length), B = !M && !P, O = (0, r.useCallback)(() => {
             m(!1), h([]), g(ok.ReloadAll)
         }, [g, m, h]), H = (0, r.useCallback)(() => {
             h(t => t.map(t => {
@@ -20944,7 +20943,7 @@
             setExpanded: v,
             onSettingsClick: b,
             markReadStatus: V,
-            failedMarkingNotification: F,
+            failedMarkingNotification: L,
             setFailedMarkingNotification: N,
             retryNotifications: O,
             listRef: a,
@@ -21021,7 +21020,7 @@
             justifyContent: "center",
             alignItems: "center",
             className: j.fullCenter
-        }, r.default.createElement(L.CircularProgress, null)), B && p.length > 0 && r.default.createElement(l.Grid, {
+        }, r.default.createElement(F.CircularProgress, null)), B && p.length > 0 && r.default.createElement(l.Grid, {
             ref: a,
             className: _(j.listContainer, j.scrollableY)
         }, p.map((t, n) => r.default.createElement(l.Grid, {
@@ -21042,7 +21041,7 @@
             justifyContent: "center",
             alignItems: "center",
             className: j.bottomLoader
-        }, r.default.createElement(L.CircularProgress, null))), B && 0 === p.length && r.default.createElement(l.Grid, {
+        }, r.default.createElement(F.CircularProgress, null))), B && 0 === p.length && r.default.createElement(l.Grid, {
             container: !0,
             justifyContent: "center",
             alignItems: "center",
@@ -21092,7 +21091,7 @@
                 translate: p
             } = (0, e$.useTranslation)(), {
                 notificationClient: h
-            } = rv(), [f, g] = (0, e0.useLocalStorage)("NotificationTrayNewLookSeen.".concat(n), "false"), [y, v] = (0, r.useState)(!1), [b, C] = (0, r.useState)(!1), [E, w] = (0, r.useState)([]), [I, S] = (0, r.useState)(""), [x, A] = (0, r.useState)(!1), [T, k] = (0, r.useState)(!1), [D, j] = (0, r.useState)(!1), [_, R] = (0, r.useState)(0), [L, F] = (0, r.useState)(0), [N, M] = (0, r.useState)(!1), [P, B] = (0, r.useState)(void 0), [O, H] = (0, r.useState)(!1), U = (0, r.useRef)({
+            } = rv(), [f, g] = (0, e0.useLocalStorage)("NotificationTrayNewLookSeen.".concat(n), "false"), [y, v] = (0, r.useState)(!1), [b, C] = (0, r.useState)(!1), [E, w] = (0, r.useState)([]), [I, S] = (0, r.useState)(""), [x, A] = (0, r.useState)(!1), [T, k] = (0, r.useState)(!1), [D, j] = (0, r.useState)(!1), [_, R] = (0, r.useState)(0), [F, L] = (0, r.useState)(0), [N, M] = (0, r.useState)(!1), [P, B] = (0, r.useState)(void 0), [O, H] = (0, r.useState)(!1), U = (0, r.useRef)({
                 scrollTop: 0,
                 scrollHeight: 0
             }), V = (0, r.useRef)(!0), z = (0, r.useRef)(!1), q = (0, r.useRef)(null), W = (0, r.useRef)(null), G = (0, r.useRef)(null), K = (0, r.useRef)(null), J = (0, r.useRef)(0), Z = (0, r.useRef)(""), Y = (0, r.useRef)(!0), X = (0, r.useRef)(!1), Q = (0, r.useRef)({}), $ = (0, r.useRef)({}), ee = (0, r.useRef)(!1), et = (0, r.useRef)(!1), en = (0, r.useRef)(!1), er = (0, r.useRef)(y), eo = (0, r.useRef)(null), ea = (0, r.useRef)(null), {
@@ -21173,10 +21172,10 @@
                         };
                     switch (t) {
                         case ok.Paginate:
-                            w(t => ((f = [...t, ...m]).length > 150 + L && j(!0), f)), m && 0 !== m.length && (null == p ? void 0 : p.nextCursor) || j(!0), Z.current = null != (a = null == p ? void 0 : p.nextCursor) ? a : "";
+                            w(t => ((f = [...t, ...m]).length > 150 + F && j(!0), f)), m && 0 !== m.length && (null == p ? void 0 : p.nextCursor) || j(!0), Z.current = null != (a = null == p ? void 0 : p.nextCursor) ? a : "";
                             break;
                         case ok.ReloadAll:
-                            w(m), er.current && m.length > 0 && el(m[0].titleNotification.notificationId), F(0), j(!(null == p ? void 0 : p.nextCursor) || m.length >= 150), Z.current = null != (l = null == p ? void 0 : p.nextCursor) ? l : "", requestAnimationFrame(() => {
+                            w(m), er.current && m.length > 0 && el(m[0].titleNotification.notificationId), L(0), j(!(null == p ? void 0 : p.nextCursor) || m.length >= 150), Z.current = null != (l = null == p ? void 0 : p.nextCursor) ? l : "", requestAnimationFrame(() => {
                                 G.current && (G.current.scrollTop = 0)
                             });
                             break;
@@ -21185,7 +21184,7 @@
                             (null == p ? void 0 : p.nextCursor) || j(!0), y = new Set(E.map(t => t.titleNotification.notificationId)), f = (g = {
                                 merged: [...v = m.filter(t => !y.has(t.titleNotification.notificationId)), ...E],
                                 freshNotifications: v
-                            }).merged, F(t => t + g.freshNotifications.length), w(f), g.freshNotifications.length > 0 && (R(t => N ? t + g.freshNotifications.length : g.freshNotifications.length), er.current && M(!0));
+                            }).merged, L(t => t + g.freshNotifications.length), w(f), g.freshNotifications.length > 0 && (R(t => N ? t + g.freshNotifications.length : g.freshNotifications.length), er.current && M(!0));
                             break;
                         default:
                             throw Error("Invalid loadNotificationsType: ".concat(String(t)))
@@ -21195,7 +21194,7 @@
                 } finally {
                     Q.current[t] = !1, A(!1), H(!0), en.current = er.current && t === ok.Refresh
                 }
-            }, [s, el, x, L, D, h, E, i, N, n]), ey = (0, r.useCallback)(t => {
+            }, [s, el, x, F, D, h, E, i, N, n]), ey = (0, r.useCallback)(t => {
                 let n = $.current[t];
                 n && clearTimeout(n), $.current[t] = setTimeout(async () => {
                     delete $.current[t], await eg(t)
@@ -21447,7 +21446,7 @@
                 }
             }), r.default.createElement(r.default.Fragment, null, n)
         },
-        oL = t => {
+        oF = t => {
             let {
                 user: n,
                 ...o
@@ -21462,7 +21461,7 @@
                 ...o
             }))) : null
         },
-        oF = t => {
+        oL = t => {
             let {
                 user: n
             } = t, {
@@ -21537,8 +21536,8 @@
 
     function oP(t, n) {
         var r;
-        let o = rL;
-        return t && (o = null != (r = r4.get(t)) ? r : rL), oM(o, n).href
+        let o = rF;
+        return t && (o = null != (r = r4.get(t)) ? r : rF), oM(o, n).href
     }
     let oB = "creatorHubSwitchedAccounts",
         oO = "RBXASBlob",
@@ -21918,7 +21917,7 @@
                     size: "Small",
                     "data-testid": "loading-switch-accounts"
                 })) : void 0, [A, null == C ? void 0 : C.activeUserId, null == b ? void 0 : b.switchedToUserId]),
-                L = (0, r.useMemo)(() => {
+                F = (0, r.useMemo)(() => {
                     var t;
                     let n = null != (t = null == C ? void 0 : C.loggedInUsersMetadata) ? t : [],
                         r = null == C ? void 0 : C.activeUserId;
@@ -21927,9 +21926,9 @@
                         return t.userId === r ? -1 : n.userId === r ? 1 : (null != (o = t.username) ? o : "").localeCompare(null != (a = n.username) ? a : "")
                     })
                 }, [null == C ? void 0 : C.loggedInUsersMetadata, null == C ? void 0 : C.activeUserId]),
-                F = !w || !s,
+                L = !w || !s,
                 N = (null != (o = null == C || null == (i = C.loggedInUsersMetadata) ? void 0 : i.length) ? o : 0) >= 5,
-                M = A || N || F || S;
+                M = A || N || L || S;
             return r.default.createElement(tu.Dialog, {
                 isModal: !0,
                 open: l,
@@ -21943,13 +21942,13 @@
                 className: "flex items-center text-heading-large padding-x-xlarge margin-none padding-top-medium min-height-1800"
             }, d("Heading.SwitchAccounts")), r.default.createElement(tu.DialogBody, {
                 className: "!padding-x-none flex flex-col medium:min-width-[480px]"
-            }, F ? r.default.createElement("div", {
+            }, L ? r.default.createElement("div", {
                 className: "fill flex justify-center items-center min-height-2000"
             }, r.default.createElement(tl.ProgressCircle, {
                 ariaLabel: "Loading Account Switcher",
                 variant: "Indeterminate",
                 size: "Medium"
-            })) : r.default.createElement(tc.List, null, L.map(t => {
+            })) : r.default.createElement(tc.List, null, F.map(t => {
                 var n, o, a, i;
                 let s = null != (n = null == (i = t.displayName) ? void 0 : i.trim()) ? n : "",
                     l = "" === s ? d("Label.Avatar") : s;
@@ -22033,12 +22032,12 @@
             } = (0, eQ.useRobloxAuthentication)(), w = (m = tH(y, v), h = tY(g) ? "/" : m, "".concat(h, "settings/preferences")), I = (0, r.useCallback)(() => {
                 b(nR)
             }, [b]), S = (0, r.useCallback)(() => {
-                (null == E ? void 0 : E.id) && (b(nL), navigator.clipboard.writeText(E.id.toString())), p({
+                (null == E ? void 0 : E.id) && (b(nF), navigator.clipboard.writeText(E.id.toString())), p({
                     title: f("Message.UserIdCopied"),
                     isError: !1
                 }), d(!1)
             }, [b, d, p, f, E]), x = (0, r.useCallback)(() => {
-                b(nF), u(!0)
+                b(nL), u(!0)
             }, [b, u]), A = (0, r.useCallback)(async () => {
                 b(nN), c(!0), localStorage.removeItem(t_);
                 try {
@@ -22259,7 +22258,7 @@
                 R = (0, r.useCallback)(t => {
                     "Tab" === t.key && y(!1)
                 }, []),
-                L = (0, r.useCallback)(t => {
+                F = (0, r.useCallback)(t => {
                     t && (u(n_), b(!0)), y(t)
                 }, [u]);
             return j ? r.default.createElement("div", {
@@ -22290,7 +22289,7 @@
                 className: o6
             }, r.default.createElement(ta.Popover, {
                 open: g,
-                onOpenChange: L
+                onOpenChange: F
             }, r.default.createElement(ta.PopoverTrigger, {
                 asChild: !0
             }, r.default.createElement(tn.Button, {
@@ -22405,7 +22404,7 @@
         an = {
             path: "https://www.youtube.com/Roblox",
             title: "YouTube",
-            icon: eL.YouTubeIcon
+            icon: eF.YouTubeIcon
         },
         ar = [{
             path: "https://x.com/Roblox",
@@ -22576,7 +22575,7 @@
             href: m,
             target: "_blank",
             color: "inherit"
-        }, r.default.createElement(eF.Chip, {
+        }, r.default.createElement(eL.Chip, {
             size: "large",
             color: "secondary",
             variant: "outlined",
@@ -23000,7 +22999,7 @@
 
     function av(t) {
         var n;
-        return t ? "Forum" === t ? "Heading.DeveloperForum" : null != (n = r2.get(t)) ? n : rL.title : rL.title
+        return t ? "Forum" === t ? "Heading.DeveloperForum" : null != (n = r2.get(t)) ? n : rF.title : rF.title
     }
     ay.Header = t => {
         let {
@@ -23049,11 +23048,11 @@
             classes: {
                 root: p
             }
-        }, r.default.createElement(oF, {
+        }, r.default.createElement(oL, {
             user: b
         }), r.default.createElement(a.HubSearchIcon, {
             enableNotificationsM2: C
-        }), r.default.createElement(oL, {
+        }), r.default.createElement(oF, {
             user: b,
             size: "medium"
         }), r.default.createElement(o9, {
@@ -23165,15 +23164,15 @@
                 g(!1), h(!0), T()
             }, [T]), R = (0, r.useCallback)(() => {
                 h(!1), d || k()
-            }, [d, k]), L = (0, r.useCallback)(() => {
+            }, [d, k]), F = (0, r.useCallback)(() => {
                 f ? T() : A()
-            }, [f, A, T]), F = t => "Escape" === t.key || "Tab" === t.key, N = (0, r.useCallback)(t => {
-                g(!0), F(t) && k()
+            }, [f, A, T]), L = t => "Escape" === t.key || "Tab" === t.key, N = (0, r.useCallback)(t => {
+                g(!0), L(t) && k()
             }, [k]), M = (0, r.useCallback)(t => {
-                g(!0), F(t) && k()
+                g(!0), L(t) && k()
             }, [k]);
             return r.default.createElement(r.default.Fragment, null, l && r.default.createElement(y.Button, {
-                onClick: L,
+                onClick: F,
                 onMouseEnter: D,
                 onMouseLeave: j,
                 onKeyDown: N,
@@ -23415,7 +23414,7 @@
                 padding: t.spacing(0, 3)
             }
         })),
-        aL = t => {
+        aF = t => {
             let {
                 open: n,
                 onClickClose: o,
@@ -23460,7 +23459,7 @@
                 className: d
             }, i))
         },
-        aF = (0, i.makeStyles)()(t => ({
+        aL = (0, i.makeStyles)()(t => ({
             drawerContent: {
                 padding: t.spacing(2, 3)
             }
@@ -23475,7 +23474,7 @@
                 classes: {
                     drawerContent: s
                 }
-            } = aF(), l = av(i);
+            } = aL(), l = av(i);
             return r.default.createElement(aT, {
                 open: n,
                 onClose: o
@@ -23592,7 +23591,7 @@
                     variant: "largeLabel1"
                 }, r.default.createElement(rC, {
                     content: t.title
-                })))), t.type === rR.Dropdown && t.dropdownContentComponent && r.default.createElement(aL, {
+                })))), t.type === rR.Dropdown && t.dropdownContentComponent && r.default.createElement(aF, {
                     open: n && (v.get(t.key) || !1),
                     onClickBack: () => E(t.key),
                     onClickClose: w,
@@ -23739,7 +23738,7 @@
             return !0
         }
     }
-    var az = ((nb = az || {}).disableProducts = "disableProducts", nb.enableLuobu = "enableLuobu", nb.creatorEventsVariant = "creatorEventsVariant", nb.enableAssistant = "enableAssistant", nb.enableCourses = "enableCourses", nb.enableNotificationsM2 = "enableNotificationsM2", nb),
+    var az = ((nb = az || {}).disableProducts = "disableProducts", nb.enableLuobu = "enableLuobu", nb.creatorEventsVariant = "creatorEventsVariant", nb.enableAssistant = "enableAssistant", nb.enableNotificationsM2 = "enableNotificationsM2", nb),
         aq = ((nC = aq || {}).enableTalentHubV2M2 = "enableTalentHubV2M2", nC);
     let aW = tw.z.object({
             enableNotificationsM2: tw.z.boolean().nullable().default(!1),
@@ -23747,7 +23746,6 @@
             disableProducts: tw.z.array(tw.z.string()).nullable().default(null),
             enableLuobu: tw.z.boolean().nullable().default(null),
             creatorEventsVariant: tw.z.string().nullable().default(null),
-            enableCourses: tw.z.boolean().nullable().default(!1),
             enableTalentHubV2M2: tw.z.union([tw.z.boolean(), tw.z.number()]).nullable().default(!1),
             creatorHubSearchIxpParams: tw.z.number().nullable().default(a.DEFAULT_CREATOR_HUB_SEARCH_VERSION)
         }),
@@ -23758,7 +23756,6 @@
             enableAssistant: tw.z.boolean().default(!1),
             creatorEventsVariant: tw.z.string().nullable().default(null),
             layoutVariant: tw.z.string().nullable().default(null),
-            enableCourses: tw.z.boolean().default(!1),
             enableTalentHubV2M2: tw.z.union([tw.z.boolean(), tw.z.number()]).default(!1),
             creatorHubSearchIxpParams: tw.z.number().nullable().default(a.DEFAULT_CREATOR_HUB_SEARCH_VERSION)
         }),
@@ -23774,18 +23771,15 @@
             layoutVariant: aZ
         }).catch({}),
         aX = tw.z.object({
-            enableCourses: aK
-        }).catch({}),
-        aQ = tw.z.object({
             searchVersion: aJ
         }).catch({}),
-        a$ = tw.z.object({
+        aQ = tw.z.object({
             enableTalentHubV2M2: tw.z.preprocess(t => null != t ? t : void 0, tw.z.union([tw.z.boolean(), tw.z.number()]).optional()).catch(void 0)
         }).catch({}),
-        a0 = "_navigation",
-        a1 = aW.parse({});
-    async function a2(t, n, r, o) {
-        let a = tL("product-experimentation-platform", n, r),
+        a$ = "_navigation_v2",
+        a0 = aW.parse({});
+    async function a1(t, n, r, o) {
+        let a = tF("product-experimentation-platform", n, r),
             i = Object.values(o).join(","),
             s = "".concat(a, "/v1/projects/1/layers/").concat(t, "/values?parameters=").concat(i),
             l = await fetch(s, {
@@ -23793,30 +23787,26 @@
             });
         return await l.json()
     }
-    async function a4(t, n, r) {
-        let [o, a, i, s, l] = await Promise.allSettled([a2("CreatorHub.Navigation", t, n, r), a2("CreatorHub.Navigation.User", t, n, r), a2("CreatorHub.CreatorDocumentation.UserId", t, n, {
-            enableCourses: "enableCourses"
-        }), a2("CreatorHub.CreatorDocumentation.Search.UserId", t, n, {
+    async function a2(t, n, r) {
+        let [o, a, i, s] = await Promise.allSettled([a1("CreatorHub.Navigation", t, n, r), a1("CreatorHub.Navigation.User", t, n, r), a1("CreatorHub.CreatorDocumentation.Search.UserId", t, n, {
             searchVersion: "searchVersion"
-        }), a2("CreatorHub.TalentHub.UserId", t, n, aq)]);
-        return "fulfilled" === o.status && "fulfilled" === a.status && "fulfilled" === i.status && "fulfilled" === s.status && "fulfilled" === l.status ? {
+        }), a1("CreatorHub.TalentHub.UserId", t, n, aq)]);
+        return "fulfilled" === o.status && "fulfilled" === a.status && "fulfilled" === i.status && "fulfilled" === s.status ? {
             ixpParamsValue: aY.parse(o.value),
             ixpParamsByUserValue: aY.parse(a.value),
-            ixpParamsByUserIdValue: aX.parse(i.value),
-            ixpParamsCreatorHubSearchValue: aQ.parse(s.value),
-            ixpParamsTalentHubValue: a$.parse(l.value)
+            ixpParamsCreatorHubSearchValue: aX.parse(i.value),
+            ixpParamsTalentHubValue: aQ.parse(s.value)
         } : null
     }
-    async function a3(t, n) {
-        let r = await a4(t, n, az);
+    async function a4(t, n) {
+        let r = await a2(t, n, az);
         if (r) {
             var o, a, i;
             let {
                 ixpParamsValue: t,
                 ixpParamsByUserValue: n,
-                ixpParamsByUserIdValue: s,
-                ixpParamsCreatorHubSearchValue: l,
-                ixpParamsTalentHubValue: u
+                ixpParamsCreatorHubSearchValue: s,
+                ixpParamsTalentHubValue: l
             } = r;
             return aG.parse({
                 disableProducts: null != (o = t.disableProducts) ? o : n.disableProducts,
@@ -23825,19 +23815,18 @@
                 enableAssistant: t.enableAssistant || n.enableAssistant,
                 creatorEventsVariant: null != (a = t.creatorEventsVariant) ? a : n.creatorEventsVariant,
                 layoutVariant: null != (i = t.layoutVariant) ? i : n.layoutVariant,
-                enableCourses: s.enableCourses,
-                enableTalentHubV2M2: u.enableTalentHubV2M2,
-                creatorHubSearchIxpParams: l.searchVersion
+                enableTalentHubV2M2: l.enableTalentHubV2M2,
+                creatorHubSearchIxpParams: s.searchVersion
             })
         }
         return null
     }
-    let a5 = r.useLayoutEffect,
-        a6 = {
+    let a3 = r.useLayoutEffect,
+        a5 = {
             enabled: !1,
             isFetched: !1
         },
-        a8 = ((0, i.makeStyles)()(t => ({
+        a6 = ((0, i.makeStyles)()(t => ({
             column: {
                 padding: "16px 24px"
             },
@@ -23864,9 +23853,9 @@
                 color: t.palette.text.primary
             }
         })), "navTreeLabel"),
-        a9 = "navTreeContentWithTrailing",
-        a7 = "navTreeExpandOnly",
-        ie = (0, i.makeStyles)()(t => ({
+        a8 = "navTreeContentWithTrailing",
+        a9 = "navTreeExpandOnly",
+        a7 = (0, i.makeStyles)()(t => ({
             root: {
                 display: "flex",
                 flexDirection: "column",
@@ -23875,19 +23864,19 @@
                     paddingTop: 8,
                     marginLeft: 0
                 },
-                ["& .".concat(a8)]: {
+                ["& .".concat(a6)]: {
                     paddingLeft: 12
                 },
-                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(a8)]: {
+                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(a6)]: {
                     paddingLeft: 24
                 },
-                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a8)]: {
+                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a6)]: {
                     paddingLeft: 36
                 },
-                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a8)]: {
+                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a6)]: {
                     paddingLeft: 48
                 },
-                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a8)]: {
+                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a6)]: {
                     paddingLeft: 60
                 },
                 ["& .".concat(eK.treeItemClasses.content)]: {
@@ -23943,7 +23932,7 @@
                         color: "inherit"
                     }
                 },
-                ["& .".concat(eK.treeItemClasses.content, ".").concat(a9, " .").concat(eK.treeItemClasses.iconContainer, ":not(:empty)")]: {
+                ["& .".concat(eK.treeItemClasses.content, ".").concat(a8, " .").concat(eK.treeItemClasses.iconContainer, ":not(:empty)")]: {
                     paddingLeft: 4
                 },
                 ["& .".concat(eK.treeItemClasses.iconContainer, ":empty")]: {
@@ -23952,13 +23941,13 @@
                     margin: 0,
                     padding: 0
                 },
-                ["&& .".concat(eK.treeItemClasses.content, ".").concat(a7, "[data-focused]:not([data-selected])")]: {
+                ["&& .".concat(eK.treeItemClasses.content, ".").concat(a9, "[data-focused]:not([data-selected])")]: {
                     backgroundColor: "transparent"
                 },
-                ["&& .".concat(eK.treeItemClasses.content, ":hover, && .").concat(eK.treeItemClasses.content, ".").concat(a7, "[data-focused]:not([data-selected]):hover, && .").concat(eK.treeItemClasses.content, "[data-selected], && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused], && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a7, ")")]: {
+                ["&& .".concat(eK.treeItemClasses.content, ":hover, && .").concat(eK.treeItemClasses.content, ".").concat(a9, "[data-focused]:not([data-selected]):hover, && .").concat(eK.treeItemClasses.content, "[data-selected], && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused], && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a9, ")")]: {
                     backgroundColor: "var(--color-shift-200)"
                 },
-                ["&& .".concat(eK.treeItemClasses.content, ":active:hover, && .").concat(eK.treeItemClasses.content, ".").concat(a7, "[data-focused]:not([data-selected]):active:hover, && .").concat(eK.treeItemClasses.content, "[data-selected]:hover, && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused]:hover, && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a7, "):hover")]: {
+                ["&& .".concat(eK.treeItemClasses.content, ":active:hover, && .").concat(eK.treeItemClasses.content, ".").concat(a9, "[data-focused]:not([data-selected]):active:hover, && .").concat(eK.treeItemClasses.content, "[data-selected]:hover, && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused]:hover, && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a9, "):hover")]: {
                     backgroundColor: "var(--color-shift-300)"
                 },
                 ["& .".concat(eK.treeItemClasses.label)]: {
@@ -23987,7 +23976,7 @@
                 color: "inherit"
             }
         })),
-        it = (0, i.makeStyles)()(() => ({
+        ie = (0, i.makeStyles)()(() => ({
             link: {
                 fontWeight: "inherit",
                 color: "inherit",
@@ -24093,10 +24082,10 @@
                 }
             }
         })),
-        ir = t => {
+        it = t => {
             ne(t.nativeEvent) && t.stopPropagation()
         },
-        io = {
+        ir = {
             timeout: 100,
             easing: {
                 enter: "ease-out",
@@ -24156,7 +24145,7 @@
             compactBreakpoint: l,
             drawerVariant: u = "fullScreen",
             children: c,
-            signalRCrossTab: d = a6,
+            signalRCrossTab: d = a5,
             useStaticTranslations: p = !1,
             enableGroupModeration: h = !1,
             analyticsAssistantChatHref: f,
@@ -24167,7 +24156,6 @@
             disableProducts: ["CommunityEvents"],
             enableLuobu: !1,
             creatorEventsVariant: null,
-            enableCourses: !1,
             enableNotificationsM2: !1,
             enableTalentHubV2M2: !1,
             creatorHubSearchIxpParams: a.DEFAULT_CREATOR_HUB_SEARCH_VERSION
@@ -24180,17 +24168,16 @@
             }), () => {
                 t = !0
             }
-        }, [C, i]), a5(() => {
+        }, [C, i]), a3(() => {
             let {
                 creatorEventsVariant: t,
                 enableAssistant: r,
-                enableCourses: o,
-                enableNotificationsM2: a,
-                enableTalentHubV2M2: s,
-                creatorHubSearchIxpParams: l
+                enableNotificationsM2: o,
+                enableTalentHubV2M2: a,
+                creatorHubSearchIxpParams: s
             } = function(t, n) {
                 var r;
-                let o = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : a1,
+                let o = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : a0,
                     a = null != (r = function(t) {
                         try {
                             let n = window.localStorage.getItem(t);
@@ -24198,23 +24185,22 @@
                         } catch (n) {
                             return console.warn("Error reading localStorage key “".concat(t, "”:"), n), null
                         }
-                    }(a0)) ? r : o;
-                return a3(t, n).then(t => (function(t, n) {
+                    }(a$)) ? r : o;
+                return a4(t, n).then(t => (function(t, n) {
                     try {
                         window.localStorage.setItem(t, JSON.stringify(n))
                     } catch (n) {
                         console.warn("Error setting localStorage key “".concat(t, "”:"), n)
                     }
-                })(a0, null != t ? t : o)), a
+                })(a$, null != t ? t : o)), a
             }(i, n);
             I({
                 ...w,
                 creatorEventsVariant: t,
                 enableAssistant: r,
-                enableCourses: o,
-                enableNotificationsM2: a,
-                enableTalentHubV2M2: s,
-                creatorHubSearchIxpParams: l
+                enableNotificationsM2: o,
+                enableTalentHubV2M2: a,
+                creatorHubSearchIxpParams: s
             }), "dropdown" === t && x(t => [...t, "Community"])
         }, []);
         let D = (0, r.useMemo)(() => {
@@ -24246,8 +24232,8 @@
                 let n = null != (t = w.disableProducts) ? t : [];
                 return k && !n.includes(tK) ? [...n, tK] : w.disableProducts
             }, [k, w.disableProducts]),
-            L = (0, r.useMemo)(() => {
-                var t, r;
+            F = (0, r.useMemo)(() => {
+                var t;
                 return {
                     environment: n,
                     robloxEnvironment: C,
@@ -24255,12 +24241,11 @@
                     currentProduct: s,
                     ...w,
                     disableProducts: R,
-                    enableCourses: null != (t = w.enableCourses) && t,
                     enableTalentHubV2M2: !0 === w.enableTalentHubV2M2 || 1 === w.enableTalentHubV2M2,
                     useStaticTranslations: p,
                     drawerVariant: u,
                     navigationDropdownTabs: S,
-                    enableNotificationsM2: null != (r = w.enableNotificationsM2) && r,
+                    enableNotificationsM2: null != (t = w.enableNotificationsM2) && t,
                     isCompact: b,
                     signalRCrossTab: d,
                     enableGroupModeration: h,
@@ -24272,7 +24257,7 @@
                 }
             }, [n, C, i, s, w, R, u, S, b, d, h, f, g, E, _, j, p]);
         return r.default.createElement(tI.Provider, {
-            value: L
+            value: F
         }, r.default.createElement(nW, null, c))
     }, "NavigationTree", 0, t => {
         let {
@@ -24289,7 +24274,7 @@
                 expandIcon: d,
                 collapseIcon: p
             }
-        } = ie(), [m, h] = (0, r.useState)(null != i ? i : []), f = (0, r.useCallback)((t, n) => {
+        } = a7(), [m, h] = (0, r.useState)(null != i ? i : []), f = (0, r.useCallback)((t, n) => {
             o && n.filter(t => !m.includes(t)).forEach(o), a && m.filter(t => !n.includes(t)).forEach(a), h(n)
         }, [m, a, o]), g = (0, r.useCallback)((t, n) => {
             u && t && n && u(t, n)
@@ -24341,14 +24326,14 @@
                 category: I,
                 subheading: S
             }
-        } = it(), x = "smallLabel2" === u, A = l ? ri(l) : void 0, T = null != p ? p : null == o, k = r.default.Children.count(i) > 0, D = (0, r.useCallback)(t => {
+        } = ie(), x = "smallLabel2" === u, A = l ? ri(l) : void 0, T = null != p ? p : null == o, k = r.default.Children.count(i) > 0, D = (0, r.useCallback)(t => {
             let n = t.target instanceof Element ? t.target : null;
             k && (null == n ? void 0 : n.closest(".".concat(eK.treeItemClasses.iconContainer))) || null == m || m(t)
         }, [k, m]), j = r.default.createElement("div", {
             className: f(v, o ? b : void 0, k ? C : void 0)
         }, r.default.createElement(s.Typography, {
             classes: {
-                root: f(a8, E, x ? I : S)
+                root: f(a6, E, x ? I : S)
             },
             variant: u
         }, a), A ? r.default.createElement("span", {
@@ -24357,23 +24342,23 @@
         return o && (j = r.default.createElement(e9.default, {
             className: f(g, k ? y : void 0),
             href: o,
-            onClick: ir
+            onClick: it
         }, j)), r.default.createElement(eY.TreeItem, {
             nodeId: n,
             label: j,
             classes: {
                 ...c,
-                content: f(null == c ? void 0 : c.content, l ? a9 : void 0, T ? a7 : void 0)
+                content: f(null == c ? void 0 : c.content, l ? a8 : void 0, T ? a9 : void 0)
             },
             slotProps: {
                 ...d,
-                groupTransition: io
+                groupTransition: ir
             },
             ...h,
             onClick: D,
             disableSelection: T
         }, i)
-    }, "NotificationBellV2", 0, oL, "PrivateFooter", 0, ai, "PublicFooter", 0, au, "REQUIRED_TRANSLATION_NAMESPACES", 0, ["CreatorDashboard.Navigation", "CreatorDocumentation.Navigation", "CreatorDashboard.Controls", "CreatorDashboard.AssetTypes", "CreatorDocumentation.Search"], "TopNavigation", 0, t => {
+    }, "NotificationBellV2", 0, oF, "PrivateFooter", 0, ai, "PublicFooter", 0, au, "REQUIRED_TRANSLATION_NAMESPACES", 0, ["CreatorDashboard.Navigation", "CreatorDocumentation.Navigation", "CreatorDashboard.Controls", "CreatorDashboard.AssetTypes", "CreatorDocumentation.Search"], "TopNavigation", 0, t => {
         let {
             rightContent: n,
             bottomContent: o,
@@ -24401,7 +24386,7 @@
             sendEvent: x,
             toggleHomeDrawerOpen: A,
             toggleProductNavigationDrawer: T
-        } = tS(), k = (0, r.useMemo)(() => "production" === v ? rF.href : "staging" === v ? rN.href : rM.href, [v]), D = ab({
+        } = tS(), k = (0, r.useMemo)(() => "production" === v ? rL.href : "staging" === v ? rN.href : rM.href, [v]), D = ab({
             target: b,
             environment: v,
             position: "topNav",
@@ -24417,7 +24402,7 @@
                     window.open(t.href, "_self")
                 }, 100)
             }, [x]),
-            L = (0, r.useMemo)(() => D.filter(t => S || "Home" !== t.key).map(t => {
+            F = (0, r.useMemo)(() => D.filter(t => S || "Home" !== t.key).map(t => {
                 let n = t.title,
                     o = r.default.createElement(eq.Tab, {
                         className: c,
@@ -24493,7 +24478,7 @@
                 A(!1)
             }
         })));
-        let F = (null == D ? void 0 : D.find(t => t.key === _ && t.type === rR.Dropdown)) !== void 0;
+        let L = (null == D ? void 0 : D.find(t => t.key === _ && t.type === rR.Dropdown)) !== void 0;
         return r.default.createElement("header", {
             className: p
         }, r.default.createElement(l.Grid, {
@@ -24527,11 +24512,11 @@
             item: !0,
             XSmall: "auto"
         }, r.default.createElement(eW.Tabs, {
-            value: !F && _,
+            value: !L && _,
             TabIndicatorProps: {
                 hidden: !0
             }
-        }, L)))), r.default.createElement(l.Grid, {
+        }, F)))), r.default.createElement(l.Grid, {
             XSmall: "auto",
             item: !0
         }, n)), o)
@@ -24569,8 +24554,8 @@
         j = t.i(345886),
         _ = t.i(589418),
         R = t.i(226519),
-        L = t.i(668539),
-        F = t.i(155495),
+        F = t.i(668539),
+        L = t.i(155495),
         N = t.i(363343),
         M = t.i(260782),
         P = t.i(83265),
@@ -25242,8 +25227,8 @@
         ej = eV(String.prototype.match),
         e_ = eV(String.prototype.replace),
         eR = eV(String.prototype.indexOf),
-        eL = eV(String.prototype.trim),
-        eF = eV(Number.prototype.toString),
+        eF = eV(String.prototype.trim),
+        eL = eV(Number.prototype.toString),
         eN = eV(Boolean.prototype.toString),
         eM = "u" < typeof BigInt ? null : eV(BigInt.prototype.toString),
         eP = "u" < typeof Symbol ? null : eV(Symbol.prototype.toString),
@@ -25421,8 +25406,8 @@
             _ = i.importNode,
             R = to();
         o.isSupported = "function" == typeof ed && "function" == typeof I && T && void 0 !== T.createHTMLDocument;
-        let L = e9,
-            F = null,
+        let F = e9,
+            L = null,
             N = ez({}, [...eG, ...eK, ...eJ, ...eY, ...eQ]),
             M = null,
             P = ez({}, [...e$, ...e0, ...e1, ...e2]),
@@ -25507,7 +25492,7 @@
             tm = function() {
                 let t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
                 if (tc && tc === t) return;
-                t && "object" == typeof t || (t = {}), t = eq(t), tu = "application/xhtml+xml" === (ts = -1 === tl.indexOf(t.PARSER_MEDIA_TYPE) ? "text/html" : t.PARSER_MEDIA_TYPE) ? eD : ek, F = eB(t, "ALLOWED_TAGS") && eT(t.ALLOWED_TAGS) ? ez({}, t.ALLOWED_TAGS, tu) : N, M = eB(t, "ALLOWED_ATTR") && eT(t.ALLOWED_ATTR) ? ez({}, t.ALLOWED_ATTR, tu) : P, eC = eB(t, "ALLOWED_NAMESPACES") && eT(t.ALLOWED_NAMESPACES) ? ez({}, t.ALLOWED_NAMESPACES, eD) : eE, ec = eB(t, "ADD_URI_SAFE_ATTR") && eT(t.ADD_URI_SAFE_ATTR) ? ez(eq(ep), t.ADD_URI_SAFE_ATTR, tu) : ep, el = eB(t, "ADD_DATA_URI_TAGS") && eT(t.ADD_DATA_URI_TAGS) ? ez(eq(eu), t.ADD_DATA_URI_TAGS, tu) : eu, ei = eB(t, "FORBID_CONTENTS") && eT(t.FORBID_CONTENTS) ? ez({}, t.FORBID_CONTENTS, tu) : es, O = eB(t, "FORBID_TAGS") && eT(t.FORBID_TAGS) ? ez({}, t.FORBID_TAGS, tu) : eq({}), H = eB(t, "FORBID_ATTR") && eT(t.FORBID_ATTR) ? ez({}, t.FORBID_ATTR, tu) : eq({}), ea = !!eB(t, "USE_PROFILES") && (t.USE_PROFILES && "object" == typeof t.USE_PROFILES ? eq(t.USE_PROFILES) : t.USE_PROFILES), V = !1 !== t.ALLOW_ARIA_ATTR, z = !1 !== t.ALLOW_DATA_ATTR, q = t.ALLOW_UNKNOWN_PROTOCOLS || !1, W = !1 !== t.ALLOW_SELF_CLOSE_IN_ATTR, G = t.SAFE_FOR_TEMPLATES || !1, K = !1 !== t.SAFE_FOR_XML, J = t.WHOLE_DOCUMENT || !1, X = t.RETURN_DOM || !1, Q = t.RETURN_DOM_FRAGMENT || !1, $ = t.RETURN_TRUSTED_TYPE || !1, Y = t.FORCE_BODY || !1, ee = !1 !== t.SANITIZE_DOM, et = t.SANITIZE_NAMED_PROPS || !1, er = !1 !== t.KEEP_CONTENT, eo = t.IN_PLACE || !1, L = ! function(t) {
+                t && "object" == typeof t || (t = {}), t = eq(t), tu = "application/xhtml+xml" === (ts = -1 === tl.indexOf(t.PARSER_MEDIA_TYPE) ? "text/html" : t.PARSER_MEDIA_TYPE) ? eD : ek, L = eB(t, "ALLOWED_TAGS") && eT(t.ALLOWED_TAGS) ? ez({}, t.ALLOWED_TAGS, tu) : N, M = eB(t, "ALLOWED_ATTR") && eT(t.ALLOWED_ATTR) ? ez({}, t.ALLOWED_ATTR, tu) : P, eC = eB(t, "ALLOWED_NAMESPACES") && eT(t.ALLOWED_NAMESPACES) ? ez({}, t.ALLOWED_NAMESPACES, eD) : eE, ec = eB(t, "ADD_URI_SAFE_ATTR") && eT(t.ADD_URI_SAFE_ATTR) ? ez(eq(ep), t.ADD_URI_SAFE_ATTR, tu) : ep, el = eB(t, "ADD_DATA_URI_TAGS") && eT(t.ADD_DATA_URI_TAGS) ? ez(eq(eu), t.ADD_DATA_URI_TAGS, tu) : eu, ei = eB(t, "FORBID_CONTENTS") && eT(t.FORBID_CONTENTS) ? ez({}, t.FORBID_CONTENTS, tu) : es, O = eB(t, "FORBID_TAGS") && eT(t.FORBID_TAGS) ? ez({}, t.FORBID_TAGS, tu) : eq({}), H = eB(t, "FORBID_ATTR") && eT(t.FORBID_ATTR) ? ez({}, t.FORBID_ATTR, tu) : eq({}), ea = !!eB(t, "USE_PROFILES") && (t.USE_PROFILES && "object" == typeof t.USE_PROFILES ? eq(t.USE_PROFILES) : t.USE_PROFILES), V = !1 !== t.ALLOW_ARIA_ATTR, z = !1 !== t.ALLOW_DATA_ATTR, q = t.ALLOW_UNKNOWN_PROTOCOLS || !1, W = !1 !== t.ALLOW_SELF_CLOSE_IN_ATTR, G = t.SAFE_FOR_TEMPLATES || !1, K = !1 !== t.SAFE_FOR_XML, J = t.WHOLE_DOCUMENT || !1, X = t.RETURN_DOM || !1, Q = t.RETURN_DOM_FRAGMENT || !1, $ = t.RETURN_TRUSTED_TYPE || !1, Y = t.FORCE_BODY || !1, ee = !1 !== t.SANITIZE_DOM, et = t.SANITIZE_NAMED_PROPS || !1, er = !1 !== t.KEEP_CONTENT, eo = t.IN_PLACE || !1, F = ! function(t) {
                     try {
                         return eH(t, ""), !0
                     } catch (t) {
@@ -25515,7 +25500,7 @@
                     }
                 }(t.ALLOWED_URI_REGEXP) ? e9 : t.ALLOWED_URI_REGEXP, ey = "string" == typeof t.NAMESPACE ? t.NAMESPACE : ef, eV = eB(t, "MATHML_TEXT_INTEGRATION_POINTS") && t.MATHML_TEXT_INTEGRATION_POINTS && "object" == typeof t.MATHML_TEXT_INTEGRATION_POINTS ? eq(t.MATHML_TEXT_INTEGRATION_POINTS) : ez({}, ["mi", "mo", "mn", "ms", "mtext"]), ta = eB(t, "HTML_INTEGRATION_POINTS") && t.HTML_INTEGRATION_POINTS && "object" == typeof t.HTML_INTEGRATION_POINTS ? eq(t.HTML_INTEGRATION_POINTS) : ez({}, ["annotation-xml"]);
                 let r = eB(t, "CUSTOM_ELEMENT_HANDLING") && t.CUSTOM_ELEMENT_HANDLING && "object" == typeof t.CUSTOM_ELEMENT_HANDLING ? eq(t.CUSTOM_ELEMENT_HANDLING) : ev(null);
-                if (B = ev(null), eB(r, "tagNameCheck") && tp(r.tagNameCheck) && (B.tagNameCheck = r.tagNameCheck), eB(r, "attributeNameCheck") && tp(r.attributeNameCheck) && (B.attributeNameCheck = r.attributeNameCheck), eB(r, "allowCustomizedBuiltInElements") && "boolean" == typeof r.allowCustomizedBuiltInElements && (B.allowCustomizedBuiltInElements = r.allowCustomizedBuiltInElements), G && (z = !1), Q && (X = !0), ea && (F = ez({}, eQ), M = ev(null), !0 === ea.html && (ez(F, eG), ez(M, e$)), !0 === ea.svg && (ez(F, eK), ez(M, e0), ez(M, e2)), !0 === ea.svgFilters && (ez(F, eJ), ez(M, e0), ez(M, e2)), !0 === ea.mathMl && (ez(F, eY), ez(M, e1), ez(M, e2))), U.tagCheck = null, U.attributeCheck = null, eB(t, "ADD_TAGS") && ("function" == typeof t.ADD_TAGS ? U.tagCheck = t.ADD_TAGS : eT(t.ADD_TAGS) && (F === N && (F = eq(F)), ez(F, t.ADD_TAGS, tu))), eB(t, "ADD_ATTR") && ("function" == typeof t.ADD_ATTR ? U.attributeCheck = t.ADD_ATTR : eT(t.ADD_ATTR) && (M === P && (M = eq(M)), ez(M, t.ADD_ATTR, tu))), eB(t, "ADD_URI_SAFE_ATTR") && eT(t.ADD_URI_SAFE_ATTR) && ez(ec, t.ADD_URI_SAFE_ATTR, tu), eB(t, "FORBID_CONTENTS") && eT(t.FORBID_CONTENTS) && (ei === es && (ei = eq(ei)), ez(ei, t.FORBID_CONTENTS, tu)), eB(t, "ADD_FORBID_CONTENTS") && eT(t.ADD_FORBID_CONTENTS) && (ei === es && (ei = eq(ei)), ez(ei, t.ADD_FORBID_CONTENTS, tu)), er && (F["#text"] = !0), J && ez(F, ["html", "head", "body"]), F.table && (ez(F, ["tbody"]), delete O.tbody), t.TRUSTED_TYPES_POLICY) {
+                if (B = ev(null), eB(r, "tagNameCheck") && tp(r.tagNameCheck) && (B.tagNameCheck = r.tagNameCheck), eB(r, "attributeNameCheck") && tp(r.attributeNameCheck) && (B.attributeNameCheck = r.attributeNameCheck), eB(r, "allowCustomizedBuiltInElements") && "boolean" == typeof r.allowCustomizedBuiltInElements && (B.allowCustomizedBuiltInElements = r.allowCustomizedBuiltInElements), G && (z = !1), Q && (X = !0), ea && (L = ez({}, eQ), M = ev(null), !0 === ea.html && (ez(L, eG), ez(M, e$)), !0 === ea.svg && (ez(L, eK), ez(M, e0), ez(M, e2)), !0 === ea.svgFilters && (ez(L, eJ), ez(M, e0), ez(M, e2)), !0 === ea.mathMl && (ez(L, eY), ez(M, e1), ez(M, e2))), U.tagCheck = null, U.attributeCheck = null, eB(t, "ADD_TAGS") && ("function" == typeof t.ADD_TAGS ? U.tagCheck = t.ADD_TAGS : eT(t.ADD_TAGS) && (L === N && (L = eq(L)), ez(L, t.ADD_TAGS, tu))), eB(t, "ADD_ATTR") && ("function" == typeof t.ADD_ATTR ? U.attributeCheck = t.ADD_ATTR : eT(t.ADD_ATTR) && (M === P && (M = eq(M)), ez(M, t.ADD_ATTR, tu))), eB(t, "ADD_URI_SAFE_ATTR") && eT(t.ADD_URI_SAFE_ATTR) && ez(ec, t.ADD_URI_SAFE_ATTR, tu), eB(t, "FORBID_CONTENTS") && eT(t.FORBID_CONTENTS) && (ei === es && (ei = eq(ei)), ez(ei, t.FORBID_CONTENTS, tu)), eB(t, "ADD_FORBID_CONTENTS") && eT(t.ADD_FORBID_CONTENTS) && (ei === es && (ei = eq(ei)), ez(ei, t.ADD_FORBID_CONTENTS, tu)), er && (L["#text"] = !0), J && ez(L, ["html", "head", "body"]), L.table && (ez(L, ["tbody"]), delete O.tbody), t.TRUSTED_TYPES_POLICY) {
                     if ("function" != typeof t.TRUSTED_TYPES_POLICY.createHTML) throw eU('TRUSTED_TYPES_POLICY configuration option must provide a "createHTML" hook.');
                     if ("function" != typeof t.TRUSTED_TYPES_POLICY.createScriptURL) throw eU('TRUSTED_TYPES_POLICY configuration option must provide a "createScriptURL" hook.');
                     x = (n = t.TRUSTED_TYPES_POLICY).createHTML("")
@@ -25622,9 +25607,9 @@
                 let r = tu(t.nodeName);
                 if (tS(R.uponSanitizeElement, t, {
                         tagName: r,
-                        allowedTags: F
+                        allowedTags: L
                     }), K && t.hasChildNodes() && !tI(t.firstElementChild) && eH(/<[/\w!]/g, t.innerHTML) && eH(/<[/\w!]/g, t.textContent) || K && t.namespaceURI === ef && "style" === r && tI(t.firstElementChild) || 7 === t.nodeType || K && 8 === t.nodeType && eH(/<[/\w]/g, t.data)) return ty(t), !0;
-                if (O[r] || !(U.tagCheck instanceof Function && U.tagCheck(r)) && !F[r]) {
+                if (O[r] || !(U.tagCheck instanceof Function && U.tagCheck(r)) && !L[r]) {
                     if (!O[r] && tk(r) && (B.tagNameCheck instanceof RegExp && eH(B.tagNameCheck, r) || B.tagNameCheck instanceof Function && B.tagNameCheck(r))) return !1;
                     if (er && !ei[r]) {
                         let n = I(t) || t.parentNode,
@@ -25653,7 +25638,7 @@
                 else if (!o || H[n]) {
                     if (!(tk(t) && (B.tagNameCheck instanceof RegExp && eH(B.tagNameCheck, t) || B.tagNameCheck instanceof Function && B.tagNameCheck(t)) && (B.attributeNameCheck instanceof RegExp && eH(B.attributeNameCheck, n) || B.attributeNameCheck instanceof Function && B.attributeNameCheck(n, t)) || "is" === n && B.allowCustomizedBuiltInElements && (B.tagNameCheck instanceof RegExp && eH(B.tagNameCheck, r) || B.tagNameCheck instanceof Function && B.tagNameCheck(r)))) return !1
                 } else if (ec[n]);
-                else if (eH(L, e_(r, te, "")));
+                else if (eH(F, e_(r, te, "")));
                 else if (("src" === n || "xlink:href" === n || "href" === n) && "script" !== t && 0 === eR(r, "data:") && el[t]);
                 else if (q && !eH(e7, e_(r, te, "")));
                 else if (r) return !1;
@@ -25681,7 +25666,7 @@
                         u = s.namespaceURI,
                         c = s.value,
                         d = tu(l),
-                        p = "value" === l ? c : eL(c);
+                        p = "value" === l ? c : eF(c);
                     if (a.attrName = d, a.attrValue = p, a.keepAttr = !0, a.forceKeepAttr = void 0, tS(R.uponSanitizeAttribute, t, a), p = a.attrValue, et && ("id" === d || "name" === d) && 0 !== eR(p, en) && (tv(l, t), p = en + p), K && eH(/((--!?|])>)|<\/(style|script|title|xmp|textarea|noscript|iframe|noembed|noframes)/i, p) || "attributename" === d && ej(p, "href")) {
                         tv(l, t);
                         continue
@@ -25745,7 +25730,7 @@
                         case "string":
                             return t;
                         case "number":
-                            return eF(t);
+                            return eL(t);
                         case "boolean":
                             return eN(t);
                         case "bigint":
@@ -25772,7 +25757,7 @@
                 let n = t.nodeName;
                 if ("string" == typeof n) {
                     let t = tu(n);
-                    if (!F[t] || O[t]) throw eU("root node is forbidden and cannot be sanitized in-place")
+                    if (!L[t] || O[t]) throw eU("root node is forbidden and cannot be sanitized in-place")
                 }
                 t_(t)
             } else if (tI(t)) 1 === (s = (a = tb("<!---->")).ownerDocument.importNode(t, !0)).nodeType && "BODY" === s.nodeName || "HTML" === s.nodeName ? a = s : a.appendChild(s), t_(s);
@@ -25791,7 +25776,7 @@
                 return (M.shadowroot || M.shadowrootmode) && (c = _.call(i, c, !0)), c
             }
             let p = J ? a.outerHTML : a.innerHTML;
-            return J && F["!doctype"] && a.ownerDocument && a.ownerDocument.doctype && a.ownerDocument.doctype.name && eH(tt, a.ownerDocument.doctype.name) && (p = "<!DOCTYPE " + a.ownerDocument.doctype.name + ">\n" + p), G && ew([e4, e3, e5], t => {
+            return J && L["!doctype"] && a.ownerDocument && a.ownerDocument.doctype && a.ownerDocument.doctype.name && eH(tt, a.ownerDocument.doctype.name) && (p = "<!DOCTYPE " + a.ownerDocument.doctype.name + ">\n" + p), G && ew([e4, e3, e5], t => {
                 p = e_(p, t, " ")
             }), n && $ ? n.createHTML(p) : p
         }, o.setConfig = function() {
@@ -25816,48 +25801,48 @@
         }, o
     }();
     t.s(["default", 0, ta], 319332);
-    var ti, ts, tl, tu, tc, td, tp, tm, th, tf, tg, ty, tv, tb = t.i(589624),
-        tC = t.i(328104),
-        tE = ((ts = tE || {}).Common = "CreatorDocumentation.Common", ts.APIReference = "CreatorDocumentation.APIReference", ts.Navigation = "CreatorDocumentation.Navigation", ts.Search = "CreatorDocumentation.Search", ts);
+    var ti, ts, tl, tu, tc, td, tp, tm, th, tf, tg, ty = t.i(589624),
+        tv = t.i(328104),
+        tb = ((ts = tb || {}).Common = "CreatorDocumentation.Common", ts.APIReference = "CreatorDocumentation.APIReference", ts.Navigation = "CreatorDocumentation.Navigation", ts.Search = "CreatorDocumentation.Search", ts);
 
-    function tw(t) {
+    function tC(t) {
         return new O.UnifiedLogger({
             eventBaseUrl: "https://ecsv2.".concat(t),
             product: "CreatorDashboard",
             sessionProductGroup: "CreatorHub"
         })
     }
-    let tI = "sitetest3.robloxlabs.com";
+    let tE = "sitetest3.robloxlabs.com";
 
-    function tS(t) {
+    function tw(t) {
         return "https://create.".concat(t)
     }
 
-    function tx(t, n) {
+    function tI(t, n) {
         return "".concat("roblox.qq.com" === n ? "https://apis.api.robloxdev.cn" : "https://apis.".concat(n), "/").concat(t)
     }
-    let tA = (0, a.createContext)({
-        robloxSiteDomain: tI,
-        eventLogger: tw(tI),
+    let tS = (0, a.createContext)({
+        robloxSiteDomain: tE,
+        eventLogger: tC(tE),
         currentProduct: "CreatorDashboard",
         creatorHubSearchIxpParams: 1
     });
 
-    function tT() {
-        return (0, a.useContext)(tA)
+    function tx() {
+        return (0, a.useContext)(tS)
     }
-    tA.displayName = "SearchConfigContext";
-    var tk = ((tl = {}).DialogClosed = "DocsSearch_DialogClosed", tl.DialogOpened = "DocsSearch_DialogOpened", tl.Performed = "DocsSearch_Performed", tl.ResultClicked = "DocsSearch_ResultClicked", tl.AskAssistantClicked = "DocsSearch_AskAssistant_Clicked", tl.AskAssistantImpression = "DocsSearch_AskAssistant_Impression", tl.CategoryClicked = "DocsSearch_Category_Clicked", tl.CategoryCleared = "DocsSearch_Category_Cleared", tl.QueryCleared = "DocsSearch_Query_Cleared", tl.RecentlyVisitedClicked = "DocsSearch_RecentlyVisited_Clicked", tl.RecentlyVisitedDeleted = "DocsSearch_RecentlyVisited_Deleted", tl.RecentlyVisitedImpression = "DocsSearch_RecentlyVisited_Impression", tl.RecommendationClicked = "DocsSearch_RecommendedSearch_Clicked", tl.RecommendationImpression = "DocsSearch_RecommendedSearch_Impression", tl.ResultItemImpression = "DocsSearch_ResultItem_Impression", tl.SearchInStoreClicked = "DocsSearch_SearchInStore_Clicked", tl.StoreCategoryTileClicked = "DocsSearch_StoreCategoryTile_Clicked", tl),
-        tD = ((tu = {}).Search = "search", tu.SearchResults = "searchResults", tu),
-        tj = ((tc = {}).ClearQueryButton = "clearQueryButton", tc.Click = "click", tc.ClickCategoryPill = "click:categoryPill", tc.ClickCategoryTitle = "click:categoryTitle", tc.ClickWithCtrl = "click:ctrl", tc.ClickWithCmd = "click:cmd", tc.Input = "input", tc.KeyboardBackspace = "kbBackspace", tc.KeyboardEnter = "kbEnter", tc.KeyboardEnterWithCtrl = "kbEnter:ctrl", tc.KeyboardEnterWithCmd = "kbEnter:cmd", tc.KeyboardEnterCategoryPill = "kbEnter:categoryPill", tc.KeyboardEnterCategoryTitle = "kbEnter:categoryTitle", tc.KeyboardEscape = "kbEscape", tc.ModalClickOut = "modalClickOut", tc.LandingSearchButton = "landingSearchButton", tc.SearchCompleted = "searchCompleted", tc.NavSearchIcon = "navSearchIcon", tc.Shortcut = "shortcut", tc),
-        t_ = ((td = {}).Search = "Search", td);
-    let tR = {
+    tS.displayName = "SearchConfigContext";
+    var tA = ((tl = {}).DialogClosed = "DocsSearch_DialogClosed", tl.DialogOpened = "DocsSearch_DialogOpened", tl.Performed = "DocsSearch_Performed", tl.ResultClicked = "DocsSearch_ResultClicked", tl.AskAssistantClicked = "DocsSearch_AskAssistant_Clicked", tl.AskAssistantImpression = "DocsSearch_AskAssistant_Impression", tl.CategoryClicked = "DocsSearch_Category_Clicked", tl.CategoryCleared = "DocsSearch_Category_Cleared", tl.QueryCleared = "DocsSearch_Query_Cleared", tl.RecentlyVisitedClicked = "DocsSearch_RecentlyVisited_Clicked", tl.RecentlyVisitedDeleted = "DocsSearch_RecentlyVisited_Deleted", tl.RecentlyVisitedImpression = "DocsSearch_RecentlyVisited_Impression", tl.RecommendationClicked = "DocsSearch_RecommendedSearch_Clicked", tl.RecommendationImpression = "DocsSearch_RecommendedSearch_Impression", tl.ResultItemImpression = "DocsSearch_ResultItem_Impression", tl.SearchInStoreClicked = "DocsSearch_SearchInStore_Clicked", tl.StoreCategoryTileClicked = "DocsSearch_StoreCategoryTile_Clicked", tl),
+        tT = ((tu = {}).Search = "search", tu.SearchResults = "searchResults", tu),
+        tk = ((tc = {}).ClearQueryButton = "clearQueryButton", tc.Click = "click", tc.ClickCategoryPill = "click:categoryPill", tc.ClickCategoryTitle = "click:categoryTitle", tc.ClickWithCtrl = "click:ctrl", tc.ClickWithCmd = "click:cmd", tc.Input = "input", tc.KeyboardBackspace = "kbBackspace", tc.KeyboardEnter = "kbEnter", tc.KeyboardEnterWithCtrl = "kbEnter:ctrl", tc.KeyboardEnterWithCmd = "kbEnter:cmd", tc.KeyboardEnterCategoryPill = "kbEnter:categoryPill", tc.KeyboardEnterCategoryTitle = "kbEnter:categoryTitle", tc.KeyboardEscape = "kbEscape", tc.ModalClickOut = "modalClickOut", tc.LandingSearchButton = "landingSearchButton", tc.SearchCompleted = "searchCompleted", tc.NavSearchIcon = "navSearchIcon", tc.Shortcut = "shortcut", tc),
+        tD = ((td = {}).Search = "Search", td);
+    let tj = {
             Search: {
                 code: ["KeyK"],
                 modifier: ["ctrlKey", "metaKey"]
             }
         },
-        tL = (0, a.createContext)({
+        t_ = (0, a.createContext)({
             searchSessionId: "uninitialized",
             searchDialogOpen: !1,
             setSearchDialogOpenWithEvent: () => {
@@ -25868,21 +25853,21 @@
             }
         });
 
-    function tF() {
-        return (0, a.useContext)(tL)
+    function tR() {
+        return (0, a.useContext)(t_)
     }
-    tL.displayName = "NavigationSearch";
-    let tN = t => {
+    t_.displayName = "NavigationSearch";
+    let tF = t => {
         var r, o, a;
         let i = Error(t);
         if ((null == (a = n.default) || null == (o = a.env) || null == (r = o.environment) ? void 0 : r.toLowerCase()) === "development") throw i;
         console.error(i), (0, et.captureException)(i)
     };
 
-    function tM(t, n) {
+    function tL(t, n) {
         return Object.values(t).includes(n)
     }
-    let tP = {
+    let tN = {
             All: "",
             LuaAPI: ee.DocumentationContentType.LuaAPI,
             Article: ee.DocumentationContentType.Article,
@@ -25892,21 +25877,21 @@
             CreatorHub: "CreatorHub",
             Store: "Store"
         },
-        tB = "Learn",
-        tO = "Store",
-        tH = t => t === tP.CreatorHub ? "Hub" : t === tP.Store ? tO : tB,
-        tU = {
+        tM = "Learn",
+        tP = "Store",
+        tB = t => t === tN.CreatorHub ? "Hub" : t === tN.Store ? tP : tM,
+        tO = {
             Guide: ee.DocumentationSubType.Guide,
             Education: ee.DocumentationSubType.Education
         },
-        tV = {
+        tH = {
             Class: ee.DocumentationSubType.Class,
             DataType: ee.DocumentationSubType.DataType,
             Enum: ee.DocumentationSubType.Enum,
             Global: ee.DocumentationSubType.Global,
             Library: ee.DocumentationSubType.Library
         },
-        tz = {
+        tU = {
             CloudApi: ee.DocumentationSubType.CloudAPI,
             Legacy: ee.DocumentationSubType.Legacy,
             V1: ee.DocumentationSubType.V1,
@@ -25914,18 +25899,18 @@
             Features: ee.DocumentationSubType.Features,
             Instruction: "Instruction"
         },
-        tq = {
+        tV = {
             Announcements: ee.DocumentationSubType.Announcements,
             RobloxStaff: ee.DocumentationSubType.RobloxStaff,
             CommunityResources: ee.DocumentationSubType.CommunityResources,
             CommunityTutorials: ee.DocumentationSubType.CommunityTutorials
         },
-        tW = {
+        tz = {
             Endpoint: ee.DocumentationThirdType.Endpoint,
             API: ee.DocumentationThirdType.API,
             Resource: ee.DocumentationThirdType.Resource
         },
-        tG = {
+        tq = {
             Property: ee.DocumentationThirdType.Property,
             Event: ee.DocumentationThirdType.Event,
             Method: ee.DocumentationThirdType.Method,
@@ -25938,39 +25923,39 @@
             CodeSample: ee.DocumentationThirdType.CodeSample
         };
 
-    function tK(t) {
+    function tW(t) {
         let {
             documentationContentType: n,
             documentationSubType: r,
             documentationThirdType: o
         } = t;
         if (null === n) return [];
-        if (n === tP.CreatorHub) return ["Label.CreatorHub"];
-        if (n === tP.CloudAPI) {
+        if (n === tN.CreatorHub) return ["Label.CreatorHub"];
+        if (n === tN.CloudAPI) {
             let t = ["Label.Cloud"],
                 n = {
-                    [tz.Legacy]: "Label.CloudAPIVersionLegacy",
-                    [tz.V1]: "Label.CloudAPIVersionV1",
-                    [tz.V2]: "Label.CloudAPIVersionV2",
-                    [tz.Features]: "Label.CloudAPIVersionFeatures"
+                    [tU.Legacy]: "Label.CloudAPIVersionLegacy",
+                    [tU.V1]: "Label.CloudAPIVersionV1",
+                    [tU.V2]: "Label.CloudAPIVersionV2",
+                    [tU.Features]: "Label.CloudAPIVersionFeatures"
                 };
             if (null === r || !n[r]) return t;
             t.push(n[r]);
             let a = {
-                [tW.Endpoint]: "Label.CloudAPITypeEndpoint",
-                [tW.API]: "Label.CloudAPITypeAPI",
-                [tW.Resource]: "Label.CloudAPITypeResource"
+                [tz.Endpoint]: "Label.CloudAPITypeEndpoint",
+                [tz.API]: "Label.CloudAPITypeAPI",
+                [tz.Resource]: "Label.CloudAPITypeResource"
             };
             return null !== o && a[o] && t.push(a[o]), t
         }
         return []
     }
 
-    function tJ(t) {
-        return Array.isArray ? Array.isArray(t) : "[object Array]" === t1(t)
+    function tG(t) {
+        return Array.isArray ? Array.isArray(t) : "[object Array]" === t$(t)
     }
 
-    function tZ(t) {
+    function tK(t) {
         return null == t ? "" : function(t) {
             if ("string" == typeof t) return t;
             if ("bigint" == typeof t) return t.toString();
@@ -25979,32 +25964,32 @@
         }(t)
     }
 
-    function tY(t) {
+    function tJ(t) {
         return "string" == typeof t
     }
 
-    function tX(t) {
+    function tZ(t) {
         return "number" == typeof t
     }
 
-    function tQ(t) {
+    function tY(t) {
         return "object" == typeof t
     }
 
-    function t$(t) {
+    function tX(t) {
         return null != t
     }
 
-    function t0(t) {
+    function tQ(t) {
         return !t.trim().length
     }
 
-    function t1(t) {
+    function t$(t) {
         return null == t ? void 0 === t ? "[object Undefined]" : "[object Null]" : Object.prototype.toString.call(t)
     }
-    let t2 = "Invalid doc index: must be a non-negative integer within the bounds of the docs array",
-        t4 = Object.prototype.hasOwnProperty;
-    class t3 {
+    let t0 = "Invalid doc index: must be a non-negative integer within the bounds of the docs array",
+        t1 = Object.prototype.hasOwnProperty;
+    class t2 {
         get(t) {
             return this._keyMap[t]
         }
@@ -26018,7 +26003,7 @@
             this._keys = [], this._keyMap = {};
             let n = 0;
             t.forEach(t => {
-                let r = t5(t);
+                let r = t4(t);
                 this._keys.push(r), this._keyMap[r.id] = r, n += r.weight
             }), this._keys.forEach(t => {
                 t.weight /= n
@@ -26026,22 +26011,22 @@
         }
     }
 
-    function t5(t) {
+    function t4(t) {
         let n = null,
             r = null,
             o = null,
             a = 1,
             i = null;
-        if (tY(t) || tJ(t)) o = t, n = t6(t), r = t8(t);
+        if (tJ(t) || tG(t)) o = t, n = t3(t), r = t5(t);
         else {
             var s;
-            if (!t4.call(t, "name")) throw Error("Missing name property in key");
+            if (!t1.call(t, "name")) throw Error("Missing name property in key");
             let l = t.name;
-            if (o = l, t4.call(t, "weight") && void 0 !== t.weight && (a = t.weight) <= 0) {
+            if (o = l, t1.call(t, "weight") && void 0 !== t.weight && (a = t.weight) <= 0) {
                 let t;
-                throw Error((t = t8(l), "Property 'weight' in key '".concat(t, "' must be a positive integer")))
+                throw Error((t = t5(l), "Property 'weight' in key '".concat(t, "' must be a positive integer")))
             }
-            n = t6(l), r = t8(l), i = null != (s = t.getFn) ? s : null
+            n = t3(l), r = t5(l), i = null != (s = t.getFn) ? s : null
         }
         return {
             path: n,
@@ -26052,14 +26037,14 @@
         }
     }
 
-    function t6(t) {
-        return tJ(t) ? t : t.split(".")
+    function t3(t) {
+        return tG(t) ? t : t.split(".")
     }
 
-    function t8(t) {
-        return tJ(t) ? t.join(".") : t
+    function t5(t) {
+        return tG(t) ? t.join(".") : t
     }
-    let t9 = Object.freeze({
+    let t6 = Object.freeze({
         isCaseSensitive: !1,
         ignoreDiacritics: !1,
         includeScore: !1,
@@ -26080,16 +26065,16 @@
             let r = [],
                 o = !1,
                 a = (t, n, i, s) => {
-                    if (t$(t))
+                    if (tX(t))
                         if (n[i]) {
                             var l, u;
                             let c = t[n[i]];
-                            if (!t$(c)) return;
-                            if (i === n.length - 1 && (tY(c) || tX(c) || !0 === (l = c) || !1 === l || tQ(u = l) && null !== u && "[object Boolean]" == t1(l) || "bigint" == typeof c)) r.push(void 0 !== s ? {
-                                v: tZ(c),
+                            if (!tX(c)) return;
+                            if (i === n.length - 1 && (tJ(c) || tZ(c) || !0 === (l = c) || !1 === l || tY(u = l) && null !== u && "[object Boolean]" == t$(l) || "bigint" == typeof c)) r.push(void 0 !== s ? {
+                                v: tK(c),
                                 i: s
-                            } : tZ(c));
-                            else if (tJ(c)) {
+                            } : tK(c));
+                            else if (tG(c)) {
                                 o = !0;
                                 for (let t = 0, r = c.length; t < r; t += 1) a(c[t], n, i + 1, t)
                             } else n.length && a(c, n, i + 1, s)
@@ -26098,13 +26083,13 @@
                             i: s
                         } : t)
                 };
-            return a(t, tY(n) ? n.split(".") : n, 0), o ? r : r[0]
+            return a(t, tJ(n) ? n.split(".") : n, 0), o ? r : r[0]
         },
         ignoreLocation: !1,
         ignoreFieldNorm: !1,
         fieldNormWeight: 1
     });
-    class t7 {
+    class t8 {
         setSources() {
             let t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [];
             this.docs = t
@@ -26125,7 +26110,7 @@
             let t = this.docs.length;
             this.records = Array(t);
             let n = 0;
-            if (tY(this.docs[0]))
+            if (tJ(this.docs[0]))
                 for (let r = 0; r < t; r++) {
                     let t = this._createStringRecord(this.docs[r], r);
                     t && (this.records[n++] = t)
@@ -26134,8 +26119,8 @@
             this.records.length = n, this.norm.clear()
         }
         add(t, n) {
-            if (!Number.isInteger(n) || n < 0) throw Error(t2);
-            if (tY(t)) {
+            if (!Number.isInteger(n) || n < 0) throw Error(t0);
+            if (tJ(t)) {
                 let r = this._createStringRecord(t, n);
                 return r && this.records.push(r), r
             }
@@ -26143,7 +26128,7 @@
             return this.records.push(r), r
         }
         removeAt(t) {
-            if (!Number.isInteger(t) || t < 0) throw Error(t2);
+            if (!Number.isInteger(t) || t < 0) throw Error(t0);
             for (let n = 0, r = this.records.length; n < r; n += 1)
                 if (this.records[n].i === t) {
                     this.records.splice(n, 1);
@@ -26173,7 +26158,7 @@
             return this.records.length
         }
         _createStringRecord(t, n) {
-            return !t$(t) || t0(t) ? null : {
+            return !tX(t) || tQ(t) ? null : {
                 v: t,
                 i: n,
                 n: this.norm.get(t)
@@ -26187,14 +26172,14 @@
             for (let n = 0, o = this.keys.length; n < o; n++) {
                 let o = this.keys[n],
                     a = o.getFn ? o.getFn(t) : this.getFn(t, o.path);
-                if (t$(a)) {
-                    if (tJ(a)) {
+                if (tX(a)) {
+                    if (tG(a)) {
                         let t = [];
                         for (let n = 0, r = a.length; n < r; n += 1) {
                             let r = a[n];
-                            if (t$(r)) {
-                                if (tY(r)) {
-                                    if (!t0(r)) {
+                            if (tX(r)) {
+                                if (tJ(r)) {
+                                    if (!tQ(r)) {
                                         let o = {
                                             v: r,
                                             i: n,
@@ -26202,9 +26187,9 @@
                                         };
                                         t.push(o)
                                     }
-                                } else if (t$(r.v)) {
-                                    let n = tY(r.v) ? r.v : tZ(r.v);
-                                    if (!t0(n)) {
+                                } else if (tX(r.v)) {
+                                    let n = tJ(r.v) ? r.v : tK(r.v);
+                                    if (!tQ(n)) {
                                         let o = {
                                             v: n,
                                             i: r.i,
@@ -26216,7 +26201,7 @@
                             }
                         }
                         r.$[n] = t
-                    } else if (tY(a) && !t0(a)) {
+                    } else if (tJ(a) && !tQ(a)) {
                         let t = {
                             v: a,
                             n: this.norm.get(a)
@@ -26240,8 +26225,8 @@
             }
         }
         constructor({
-            getFn: t = t9.getFn,
-            fieldNormWeight: n = t9.fieldNormWeight
+            getFn: t = t6.getFn,
+            fieldNormWeight: n = t6.fieldNormWeight
         } = {}) {
             this.norm = function() {
                 let t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 1,
@@ -26265,18 +26250,18 @@
         }
     }
 
-    function ne(t, n) {
+    function t9(t, n) {
         let {
-            getFn: r = t9.getFn,
-            fieldNormWeight: o = t9.fieldNormWeight
-        } = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}, a = new t7({
+            getFn: r = t6.getFn,
+            fieldNormWeight: o = t6.fieldNormWeight
+        } = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}, a = new t8({
             getFn: r,
             fieldNormWeight: o
         });
-        return a.setKeys(t.map(t5)), a.setSources(n), a.create(), a
+        return a.setKeys(t.map(t4)), a.setSources(n), a.create(), a
     }
 
-    function nt(t) {
+    function t7(t) {
         if (t.length <= 1) return t;
         t.sort((t, n) => t[0] - n[0] || t[1] - n[1]);
         let n = [t[0]];
@@ -26287,7 +26272,7 @@
         }
         return n
     }
-    let nn = {
+    let ne = {
             ł: "l",
             Ł: "L",
             đ: "d",
@@ -26301,16 +26286,16 @@
             ı: "i",
             ß: "ss"
         },
-        nr = RegExp("[" + Object.keys(nn).join("") + "]", "g"),
-        no = "function" == typeof String.prototype.normalize ? t => t.normalize("NFD").replace(/[\u0300-\u036F\u0483-\u0489\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED\u0711\u0730-\u074A\u07A6-\u07B0\u07EB-\u07F3\u07FD\u0816-\u0819\u081B-\u0823\u0825-\u0827\u0829-\u082D\u0859-\u085B\u08D3-\u08E1\u08E3-\u0903\u093A-\u093C\u093E-\u094F\u0951-\u0957\u0962\u0963\u0981-\u0983\u09BC\u09BE-\u09C4\u09C7\u09C8\u09CB-\u09CD\u09D7\u09E2\u09E3\u09FE\u0A01-\u0A03\u0A3C\u0A3E-\u0A42\u0A47\u0A48\u0A4B-\u0A4D\u0A51\u0A70\u0A71\u0A75\u0A81-\u0A83\u0ABC\u0ABE-\u0AC5\u0AC7-\u0AC9\u0ACB-\u0ACD\u0AE2\u0AE3\u0AFA-\u0AFF\u0B01-\u0B03\u0B3C\u0B3E-\u0B44\u0B47\u0B48\u0B4B-\u0B4D\u0B56\u0B57\u0B62\u0B63\u0B82\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCD\u0BD7\u0C00-\u0C04\u0C3E-\u0C44\u0C46-\u0C48\u0C4A-\u0C4D\u0C55\u0C56\u0C62\u0C63\u0C81-\u0C83\u0CBC\u0CBE-\u0CC4\u0CC6-\u0CC8\u0CCA-\u0CCD\u0CD5\u0CD6\u0CE2\u0CE3\u0D00-\u0D03\u0D3B\u0D3C\u0D3E-\u0D44\u0D46-\u0D48\u0D4A-\u0D4D\u0D57\u0D62\u0D63\u0D82\u0D83\u0DCA\u0DCF-\u0DD4\u0DD6\u0DD8-\u0DDF\u0DF2\u0DF3\u0E31\u0E34-\u0E3A\u0E47-\u0E4E\u0EB1\u0EB4-\u0EB9\u0EBB\u0EBC\u0EC8-\u0ECD\u0F18\u0F19\u0F35\u0F37\u0F39\u0F3E\u0F3F\u0F71-\u0F84\u0F86\u0F87\u0F8D-\u0F97\u0F99-\u0FBC\u0FC6\u102B-\u103E\u1056-\u1059\u105E-\u1060\u1062-\u1064\u1067-\u106D\u1071-\u1074\u1082-\u108D\u108F\u109A-\u109D\u135D-\u135F\u1712-\u1714\u1732-\u1734\u1752\u1753\u1772\u1773\u17B4-\u17D3\u17DD\u180B-\u180D\u1885\u1886\u18A9\u1920-\u192B\u1930-\u193B\u1A17-\u1A1B\u1A55-\u1A5E\u1A60-\u1A7C\u1A7F\u1AB0-\u1ABE\u1B00-\u1B04\u1B34-\u1B44\u1B6B-\u1B73\u1B80-\u1B82\u1BA1-\u1BAD\u1BE6-\u1BF3\u1C24-\u1C37\u1CD0-\u1CD2\u1CD4-\u1CE8\u1CED\u1CF2-\u1CF4\u1CF7-\u1CF9\u1DC0-\u1DF9\u1DFB-\u1DFF\u20D0-\u20F0\u2CEF-\u2CF1\u2D7F\u2DE0-\u2DFF\u302A-\u302F\u3099\u309A\uA66F-\uA672\uA674-\uA67D\uA69E\uA69F\uA6F0\uA6F1\uA802\uA806\uA80B\uA823-\uA827\uA880\uA881\uA8B4-\uA8C5\uA8E0-\uA8F1\uA8FF\uA926-\uA92D\uA947-\uA953\uA980-\uA983\uA9B3-\uA9C0\uA9E5\uAA29-\uAA36\uAA43\uAA4C\uAA4D\uAA7B-\uAA7D\uAAB0\uAAB2-\uAAB4\uAAB7\uAAB8\uAABE\uAABF\uAAC1\uAAEB-\uAAEF\uAAF5\uAAF6\uABE3-\uABEA\uABEC\uABED\uFB1E\uFE00-\uFE0F\uFE20-\uFE2F]/g, "").replace(nr, t => nn[t]) : t => t;
-    class na {
+        nt = RegExp("[" + Object.keys(ne).join("") + "]", "g"),
+        nn = "function" == typeof String.prototype.normalize ? t => t.normalize("NFD").replace(/[\u0300-\u036F\u0483-\u0489\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED\u0711\u0730-\u074A\u07A6-\u07B0\u07EB-\u07F3\u07FD\u0816-\u0819\u081B-\u0823\u0825-\u0827\u0829-\u082D\u0859-\u085B\u08D3-\u08E1\u08E3-\u0903\u093A-\u093C\u093E-\u094F\u0951-\u0957\u0962\u0963\u0981-\u0983\u09BC\u09BE-\u09C4\u09C7\u09C8\u09CB-\u09CD\u09D7\u09E2\u09E3\u09FE\u0A01-\u0A03\u0A3C\u0A3E-\u0A42\u0A47\u0A48\u0A4B-\u0A4D\u0A51\u0A70\u0A71\u0A75\u0A81-\u0A83\u0ABC\u0ABE-\u0AC5\u0AC7-\u0AC9\u0ACB-\u0ACD\u0AE2\u0AE3\u0AFA-\u0AFF\u0B01-\u0B03\u0B3C\u0B3E-\u0B44\u0B47\u0B48\u0B4B-\u0B4D\u0B56\u0B57\u0B62\u0B63\u0B82\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCD\u0BD7\u0C00-\u0C04\u0C3E-\u0C44\u0C46-\u0C48\u0C4A-\u0C4D\u0C55\u0C56\u0C62\u0C63\u0C81-\u0C83\u0CBC\u0CBE-\u0CC4\u0CC6-\u0CC8\u0CCA-\u0CCD\u0CD5\u0CD6\u0CE2\u0CE3\u0D00-\u0D03\u0D3B\u0D3C\u0D3E-\u0D44\u0D46-\u0D48\u0D4A-\u0D4D\u0D57\u0D62\u0D63\u0D82\u0D83\u0DCA\u0DCF-\u0DD4\u0DD6\u0DD8-\u0DDF\u0DF2\u0DF3\u0E31\u0E34-\u0E3A\u0E47-\u0E4E\u0EB1\u0EB4-\u0EB9\u0EBB\u0EBC\u0EC8-\u0ECD\u0F18\u0F19\u0F35\u0F37\u0F39\u0F3E\u0F3F\u0F71-\u0F84\u0F86\u0F87\u0F8D-\u0F97\u0F99-\u0FBC\u0FC6\u102B-\u103E\u1056-\u1059\u105E-\u1060\u1062-\u1064\u1067-\u106D\u1071-\u1074\u1082-\u108D\u108F\u109A-\u109D\u135D-\u135F\u1712-\u1714\u1732-\u1734\u1752\u1753\u1772\u1773\u17B4-\u17D3\u17DD\u180B-\u180D\u1885\u1886\u18A9\u1920-\u192B\u1930-\u193B\u1A17-\u1A1B\u1A55-\u1A5E\u1A60-\u1A7C\u1A7F\u1AB0-\u1ABE\u1B00-\u1B04\u1B34-\u1B44\u1B6B-\u1B73\u1B80-\u1B82\u1BA1-\u1BAD\u1BE6-\u1BF3\u1C24-\u1C37\u1CD0-\u1CD2\u1CD4-\u1CE8\u1CED\u1CF2-\u1CF4\u1CF7-\u1CF9\u1DC0-\u1DF9\u1DFB-\u1DFF\u20D0-\u20F0\u2CEF-\u2CF1\u2D7F\u2DE0-\u2DFF\u302A-\u302F\u3099\u309A\uA66F-\uA672\uA674-\uA67D\uA69E\uA69F\uA6F0\uA6F1\uA802\uA806\uA80B\uA823-\uA827\uA880\uA881\uA8B4-\uA8C5\uA8E0-\uA8F1\uA8FF\uA926-\uA92D\uA947-\uA953\uA980-\uA983\uA9B3-\uA9C0\uA9E5\uAA29-\uAA36\uAA43\uAA4C\uAA4D\uAA7B-\uAA7D\uAAB0\uAAB2-\uAAB4\uAAB7\uAAB8\uAABE\uAABF\uAAC1\uAAEB-\uAAEF\uAAF5\uAAF6\uABE3-\uABEA\uABEC\uABED\uFB1E\uFE00-\uFE0F\uFE20-\uFE2F]/g, "").replace(nt, t => ne[t]) : t => t;
+    class nr {
         searchIn(t) {
             let {
                 isCaseSensitive: n,
                 ignoreDiacritics: r,
                 includeMatches: o
             } = this.options;
-            if (t = n ? t : t.toLowerCase(), t = r ? no(t) : t, this.pattern === t) {
+            if (t = n ? t : t.toLowerCase(), t = r ? nn(t) : t, this.pattern === t) {
                 let n = {
                     isMatch: !0,
                     score: 0
@@ -26338,13 +26323,13 @@
                     indices: v
                 } = function(t, n, r) {
                     let o, {
-                        location: a = t9.location,
-                        distance: i = t9.distance,
-                        threshold: s = t9.threshold,
-                        findAllMatches: l = t9.findAllMatches,
-                        minMatchCharLength: u = t9.minMatchCharLength,
-                        includeMatches: c = t9.includeMatches,
-                        ignoreLocation: d = t9.ignoreLocation
+                        location: a = t6.location,
+                        distance: i = t6.distance,
+                        threshold: s = t6.threshold,
+                        findAllMatches: l = t6.findAllMatches,
+                        minMatchCharLength: u = t6.minMatchCharLength,
+                        includeMatches: c = t6.includeMatches,
+                        ignoreLocation: d = t6.ignoreLocation
                     } = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : {};
                     if (n.length > 32) throw Error("Pattern length exceeds max of 32.");
                     let p = n.length,
@@ -26402,7 +26387,7 @@
                     if (v) {
                         let t = function() {
                             let t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
-                                n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : t9.minMatchCharLength,
+                                n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : t6.minMatchCharLength,
                                 r = [],
                                 o = -1,
                                 a = -1,
@@ -26431,18 +26416,18 @@
                 isMatch: m,
                 score: m ? p / this.chunks.length : 1
             };
-            return m && o && (h.indices = nt(d)), h
+            return m && o && (h.indices = t7(d)), h
         }
         constructor(t, {
-            location: n = t9.location,
-            threshold: r = t9.threshold,
-            distance: o = t9.distance,
-            includeMatches: a = t9.includeMatches,
-            findAllMatches: i = t9.findAllMatches,
-            minMatchCharLength: s = t9.minMatchCharLength,
-            isCaseSensitive: l = t9.isCaseSensitive,
-            ignoreDiacritics: u = t9.ignoreDiacritics,
-            ignoreLocation: c = t9.ignoreLocation
+            location: n = t6.location,
+            threshold: r = t6.threshold,
+            distance: o = t6.distance,
+            includeMatches: a = t6.includeMatches,
+            findAllMatches: i = t6.findAllMatches,
+            minMatchCharLength: s = t6.minMatchCharLength,
+            isCaseSensitive: l = t6.isCaseSensitive,
+            ignoreDiacritics: u = t6.ignoreDiacritics,
+            ignoreLocation: c = t6.ignoreLocation
         } = {}) {
             if (this.options = {
                     location: n,
@@ -26454,7 +26439,7 @@
                     isCaseSensitive: l,
                     ignoreDiacritics: u,
                     ignoreLocation: c
-                }, t = l ? t : t.toLowerCase(), t = u ? no(t) : t, this.pattern = t, this.chunks = [], !this.pattern.length) return;
+                }, t = l ? t : t.toLowerCase(), t = u ? nn(t) : t, this.pattern = t, this.chunks = [], !this.pattern.length) return;
             let d = (t, n) => {
                     this.chunks.push({
                         pattern: t,
@@ -26482,8 +26467,8 @@
             } else d(this.pattern, 0)
         }
     }
-    let ni = new Set(["fuzzy", "include"]),
-        ns = [{
+    let no = new Set(["fuzzy", "include"]),
+        na = [{
             type: "exact",
             multiRegex: /^="(.*)"$/,
             singleRegex: /^=(.*)$/,
@@ -26600,16 +26585,16 @@
             create: function(t) {
                 var n, r, o, a, i, s, l, u, c;
                 let d = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
-                    p = new na(t, {
-                        location: null != (n = d.location) ? n : t9.location,
-                        threshold: null != (r = d.threshold) ? r : t9.threshold,
-                        distance: null != (o = d.distance) ? o : t9.distance,
-                        includeMatches: null != (a = d.includeMatches) ? a : t9.includeMatches,
-                        findAllMatches: null != (i = d.findAllMatches) ? i : t9.findAllMatches,
-                        minMatchCharLength: null != (s = d.minMatchCharLength) ? s : t9.minMatchCharLength,
-                        isCaseSensitive: null != (l = d.isCaseSensitive) ? l : t9.isCaseSensitive,
-                        ignoreDiacritics: null != (u = d.ignoreDiacritics) ? u : t9.ignoreDiacritics,
-                        ignoreLocation: null != (c = d.ignoreLocation) ? c : t9.ignoreLocation
+                    p = new nr(t, {
+                        location: null != (n = d.location) ? n : t6.location,
+                        threshold: null != (r = d.threshold) ? r : t6.threshold,
+                        distance: null != (o = d.distance) ? o : t6.distance,
+                        includeMatches: null != (a = d.includeMatches) ? a : t6.includeMatches,
+                        findAllMatches: null != (i = d.findAllMatches) ? i : t6.findAllMatches,
+                        minMatchCharLength: null != (s = d.minMatchCharLength) ? s : t6.minMatchCharLength,
+                        isCaseSensitive: null != (l = d.isCaseSensitive) ? l : t6.isCaseSensitive,
+                        ignoreDiacritics: null != (u = d.ignoreDiacritics) ? u : t6.ignoreDiacritics,
+                        ignoreLocation: null != (c = d.ignoreLocation) ? c : t6.ignoreLocation
                     });
                 return {
                     type: "fuzzy",
@@ -26617,58 +26602,58 @@
                 }
             }
         }],
-        nl = ns.length;
+        ni = na.length;
 
-    function nu(t, n) {
+    function ns(t, n) {
         let r = t.match(n);
         return r ? r[1] : null
     }
-    let nc = [];
+    let nl = [];
 
-    function nd() {
+    function nu() {
         for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
-        nc.push(...n)
+        nl.push(...n)
     }
 
-    function np(t, n) {
-        for (let r = 0, o = nc.length; r < o; r += 1) {
-            let o = nc[r];
+    function nc(t, n) {
+        for (let r = 0, o = nl.length; r < o; r += 1) {
+            let o = nl[r];
             if (o.condition(t, n)) return new o(t, n)
         }
-        return new na(t, n)
+        return new nr(t, n)
     }
-    let nm = "$and",
-        nh = "$path",
-        nf = t => !!(t[nm] || t.$or),
-        ng = t => ({
-            [nm]: Object.keys(t).map(n => ({
+    let nd = "$and",
+        np = "$path",
+        nm = t => !!(t[nd] || t.$or),
+        nh = t => ({
+            [nd]: Object.keys(t).map(n => ({
                 [n]: t[n]
             }))
         });
 
-    function ny(t, n) {
+    function nf(t, n) {
         let {
             auto: r = !0
         } = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}, o = t => {
-            if (tY(t)) {
+            if (tJ(t)) {
                 let o = {
                     keyId: null,
                     pattern: t
                 };
-                return r && (o.searcher = np(t, n)), o
+                return r && (o.searcher = nc(t, n)), o
             }
             let a = Object.keys(t),
-                i = !!t[nh];
-            if (!i && a.length > 1 && !nf(t)) return o(ng(t));
-            if (!tJ(t) && tQ(t) && !nf(t)) {
-                let o = i ? t[nh] : a[0],
+                i = !!t[np];
+            if (!i && a.length > 1 && !nm(t)) return o(nh(t));
+            if (!tG(t) && tY(t) && !nm(t)) {
+                let o = i ? t[np] : a[0],
                     s = i ? t.$val : t[o];
-                if (!tY(s)) throw Error("Invalid value for key ".concat(o));
+                if (!tJ(s)) throw Error("Invalid value for key ".concat(o));
                 let l = {
-                    keyId: t8(o),
+                    keyId: t5(o),
                     pattern: s
                 };
-                return r && (l.searcher = np(s, n)), l
+                return r && (l.searcher = nc(s, n)), l
             }
             let s = {
                 children: [],
@@ -26676,17 +26661,17 @@
             };
             return a.forEach(n => {
                 let r = t[n];
-                tJ(r) && r.forEach(t => {
+                tG(r) && r.forEach(t => {
                     s.children.push(o(t))
                 })
             }), s
         };
-        return nf(t) || (t = ng(t)), o(t)
+        return nm(t) || (t = nh(t)), o(t)
     }
 
-    function nv(t, n) {
+    function ng(t, n) {
         let {
-            ignoreFieldNorm: r = t9.ignoreFieldNorm
+            ignoreFieldNorm: r = t6.ignoreFieldNorm
         } = n, o = 1;
         return t.forEach(t => {
             let {
@@ -26697,7 +26682,7 @@
             o *= Math.pow(0 === i && s ? Number.EPSILON : i, (s || 1) * (r ? 1 : a))
         }), o
     }
-    class nb {
+    class ny {
         get size() {
             return this.heap.length
         }
@@ -26736,10 +26721,10 @@
             this.limit = t, this.heap = []
         }
     }
-    let nC = RegExp("[\\u0041-\\u005A\\u0061-\\u007A\\u00AA\\u00B5\\u00BA\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02C1\\u02C6-\\u02D1\\u02E0-\\u02E4\\u02EC\\u02EE\\u0370-\\u0374\\u0376-\\u0377\\u037A-\\u037D\\u037F\\u0386\\u0388-\\u038A\\u038C\\u038E-\\u03A1\\u03A3-\\u03F5\\u03F7-\\u0481\\u048A-\\u052F\\u0531-\\u0556\\u0559\\u0560-\\u0588\\u05D0-\\u05EA\\u05EF-\\u05F2\\u0620-\\u064A\\u066E-\\u066F\\u0671-\\u06D3\\u06D5\\u06E5-\\u06E6\\u06EE-\\u06EF\\u06FA-\\u06FC\\u06FF\\u0710\\u0712-\\u072F\\u074D-\\u07A5\\u07B1\\u07CA-\\u07EA\\u07F4-\\u07F5\\u07FA\\u0800-\\u0815\\u081A\\u0824\\u0828\\u0840-\\u0858\\u0860-\\u086A\\u0870-\\u0887\\u0889-\\u088F\\u08A0-\\u08C9\\u0904-\\u0939\\u093D\\u0950\\u0958-\\u0961\\u0971-\\u0980\\u0985-\\u098C\\u098F-\\u0990\\u0993-\\u09A8\\u09AA-\\u09B0\\u09B2\\u09B6-\\u09B9\\u09BD\\u09CE\\u09DC-\\u09DD\\u09DF-\\u09E1\\u09F0-\\u09F1\\u09FC\\u0A05-\\u0A0A\\u0A0F-\\u0A10\\u0A13-\\u0A28\\u0A2A-\\u0A30\\u0A32-\\u0A33\\u0A35-\\u0A36\\u0A38-\\u0A39\\u0A59-\\u0A5C\\u0A5E\\u0A72-\\u0A74\\u0A85-\\u0A8D\\u0A8F-\\u0A91\\u0A93-\\u0AA8\\u0AAA-\\u0AB0\\u0AB2-\\u0AB3\\u0AB5-\\u0AB9\\u0ABD\\u0AD0\\u0AE0-\\u0AE1\\u0AF9\\u0B05-\\u0B0C\\u0B0F-\\u0B10\\u0B13-\\u0B28\\u0B2A-\\u0B30\\u0B32-\\u0B33\\u0B35-\\u0B39\\u0B3D\\u0B5C-\\u0B5D\\u0B5F-\\u0B61\\u0B71\\u0B83\\u0B85-\\u0B8A\\u0B8E-\\u0B90\\u0B92-\\u0B95\\u0B99-\\u0B9A\\u0B9C\\u0B9E-\\u0B9F\\u0BA3-\\u0BA4\\u0BA8-\\u0BAA\\u0BAE-\\u0BB9\\u0BD0\\u0C05-\\u0C0C\\u0C0E-\\u0C10\\u0C12-\\u0C28\\u0C2A-\\u0C39\\u0C3D\\u0C58-\\u0C5A\\u0C5C-\\u0C5D\\u0C60-\\u0C61\\u0C80\\u0C85-\\u0C8C\\u0C8E-\\u0C90\\u0C92-\\u0CA8\\u0CAA-\\u0CB3\\u0CB5-\\u0CB9\\u0CBD\\u0CDC-\\u0CDE\\u0CE0-\\u0CE1\\u0CF1-\\u0CF2\\u0D04-\\u0D0C\\u0D0E-\\u0D10\\u0D12-\\u0D3A\\u0D3D\\u0D4E\\u0D54-\\u0D56\\u0D5F-\\u0D61\\u0D7A-\\u0D7F\\u0D85-\\u0D96\\u0D9A-\\u0DB1\\u0DB3-\\u0DBB\\u0DBD\\u0DC0-\\u0DC6\\u0E01-\\u0E30\\u0E32-\\u0E33\\u0E40-\\u0E46\\u0E81-\\u0E82\\u0E84\\u0E86-\\u0E8A\\u0E8C-\\u0EA3\\u0EA5\\u0EA7-\\u0EB0\\u0EB2-\\u0EB3\\u0EBD\\u0EC0-\\u0EC4\\u0EC6\\u0EDC-\\u0EDF\\u0F00\\u0F40-\\u0F47\\u0F49-\\u0F6C\\u0F88-\\u0F8C\\u1000-\\u102A\\u103F\\u1050-\\u1055\\u105A-\\u105D\\u1061\\u1065-\\u1066\\u106E-\\u1070\\u1075-\\u1081\\u108E\\u10A0-\\u10C5\\u10C7\\u10CD\\u10D0-\\u10FA\\u10FC-\\u1248\\u124A-\\u124D\\u1250-\\u1256\\u1258\\u125A-\\u125D\\u1260-\\u1288\\u128A-\\u128D\\u1290-\\u12B0\\u12B2-\\u12B5\\u12B8-\\u12BE\\u12C0\\u12C2-\\u12C5\\u12C8-\\u12D6\\u12D8-\\u1310\\u1312-\\u1315\\u1318-\\u135A\\u1380-\\u138F\\u13A0-\\u13F5\\u13F8-\\u13FD\\u1401-\\u166C\\u166F-\\u167F\\u1681-\\u169A\\u16A0-\\u16EA\\u16F1-\\u16F8\\u1700-\\u1711\\u171F-\\u1731\\u1740-\\u1751\\u1760-\\u176C\\u176E-\\u1770\\u1780-\\u17B3\\u17D7\\u17DC\\u1820-\\u1878\\u1880-\\u1884\\u1887-\\u18A8\\u18AA\\u18B0-\\u18F5\\u1900-\\u191E\\u1950-\\u196D\\u1970-\\u1974\\u1980-\\u19AB\\u19B0-\\u19C9\\u1A00-\\u1A16\\u1A20-\\u1A54\\u1AA7\\u1B05-\\u1B33\\u1B45-\\u1B4C\\u1B83-\\u1BA0\\u1BAE-\\u1BAF\\u1BBA-\\u1BE5\\u1C00-\\u1C23\\u1C4D-\\u1C4F\\u1C5A-\\u1C7D\\u1C80-\\u1C8A\\u1C90-\\u1CBA\\u1CBD-\\u1CBF\\u1CE9-\\u1CEC\\u1CEE-\\u1CF3\\u1CF5-\\u1CF6\\u1CFA\\u1D00-\\u1DBF\\u1E00-\\u1F15\\u1F18-\\u1F1D\\u1F20-\\u1F45\\u1F48-\\u1F4D\\u1F50-\\u1F57\\u1F59\\u1F5B\\u1F5D\\u1F5F-\\u1F7D\\u1F80-\\u1FB4\\u1FB6-\\u1FBC\\u1FBE\\u1FC2-\\u1FC4\\u1FC6-\\u1FCC\\u1FD0-\\u1FD3\\u1FD6-\\u1FDB\\u1FE0-\\u1FEC\\u1FF2-\\u1FF4\\u1FF6-\\u1FFC\\u2071\\u207F\\u2090-\\u209C\\u2102\\u2107\\u210A-\\u2113\\u2115\\u2119-\\u211D\\u2124\\u2126\\u2128\\u212A-\\u212D\\u212F-\\u2139\\u213C-\\u213F\\u2145-\\u2149\\u214E\\u2183-\\u2184\\u2C00-\\u2CE4\\u2CEB-\\u2CEE\\u2CF2-\\u2CF3\\u2D00-\\u2D25\\u2D27\\u2D2D\\u2D30-\\u2D67\\u2D6F\\u2D80-\\u2D96\\u2DA0-\\u2DA6\\u2DA8-\\u2DAE\\u2DB0-\\u2DB6\\u2DB8-\\u2DBE\\u2DC0-\\u2DC6\\u2DC8-\\u2DCE\\u2DD0-\\u2DD6\\u2DD8-\\u2DDE\\u2E2F\\u3005-\\u3006\\u3031-\\u3035\\u303B-\\u303C\\u3041-\\u3096\\u309D-\\u309F\\u30A1-\\u30FA\\u30FC-\\u30FF\\u3105-\\u312F\\u3131-\\u318E\\u31A0-\\u31BF\\u31F0-\\u31FF\\u3400-\\u4DBF\\u4E00-\\uA48C\\uA4D0-\\uA4FD\\uA500-\\uA60C\\uA610-\\uA61F\\uA62A-\\uA62B\\uA640-\\uA66E\\uA67F-\\uA69D\\uA6A0-\\uA6E5\\uA717-\\uA71F\\uA722-\\uA788\\uA78B-\\uA7DC\\uA7F1-\\uA801\\uA803-\\uA805\\uA807-\\uA80A\\uA80C-\\uA822\\uA840-\\uA873\\uA882-\\uA8B3\\uA8F2-\\uA8F7\\uA8FB\\uA8FD-\\uA8FE\\uA90A-\\uA925\\uA930-\\uA946\\uA960-\\uA97C\\uA984-\\uA9B2\\uA9CF\\uA9E0-\\uA9E4\\uA9E6-\\uA9EF\\uA9FA-\\uA9FE\\uAA00-\\uAA28\\uAA40-\\uAA42\\uAA44-\\uAA4B\\uAA60-\\uAA76\\uAA7A\\uAA7E-\\uAAAF\\uAAB1\\uAAB5-\\uAAB6\\uAAB9-\\uAABD\\uAAC0\\uAAC2\\uAADB-\\uAADD\\uAAE0-\\uAAEA\\uAAF2-\\uAAF4\\uAB01-\\uAB06\\uAB09-\\uAB0E\\uAB11-\\uAB16\\uAB20-\\uAB26\\uAB28-\\uAB2E\\uAB30-\\uAB5A\\uAB5C-\\uAB69\\uAB70-\\uABE2\\uAC00-\\uD7A3\\uD7B0-\\uD7C6\\uD7CB-\\uD7FB\\uF900-\\uFA6D\\uFA70-\\uFAD9\\uFB00-\\uFB06\\uFB13-\\uFB17\\uFB1D\\uFB1F-\\uFB28\\uFB2A-\\uFB36\\uFB38-\\uFB3C\\uFB3E\\uFB40-\\uFB41\\uFB43-\\uFB44\\uFB46-\\uFBB1\\uFBD3-\\uFD3D\\uFD50-\\uFD8F\\uFD92-\\uFDC7\\uFDF0-\\uFDFB\\uFE70-\\uFE74\\uFE76-\\uFEFC\\uFF21-\\uFF3A\\uFF41-\\uFF5A\\uFF66-\\uFFBE\\uFFC2-\\uFFC7\\uFFCA-\\uFFCF\\uFFD2-\\uFFD7\\uFFDA-\\uFFDC\\u{10000}-\\u{1000B}\\u{1000D}-\\u{10026}\\u{10028}-\\u{1003A}\\u{1003C}-\\u{1003D}\\u{1003F}-\\u{1004D}\\u{10050}-\\u{1005D}\\u{10080}-\\u{100FA}\\u{10280}-\\u{1029C}\\u{102A0}-\\u{102D0}\\u{10300}-\\u{1031F}\\u{1032D}-\\u{10340}\\u{10342}-\\u{10349}\\u{10350}-\\u{10375}\\u{10380}-\\u{1039D}\\u{103A0}-\\u{103C3}\\u{103C8}-\\u{103CF}\\u{10400}-\\u{1049D}\\u{104B0}-\\u{104D3}\\u{104D8}-\\u{104FB}\\u{10500}-\\u{10527}\\u{10530}-\\u{10563}\\u{10570}-\\u{1057A}\\u{1057C}-\\u{1058A}\\u{1058C}-\\u{10592}\\u{10594}-\\u{10595}\\u{10597}-\\u{105A1}\\u{105A3}-\\u{105B1}\\u{105B3}-\\u{105B9}\\u{105BB}-\\u{105BC}\\u{105C0}-\\u{105F3}\\u{10600}-\\u{10736}\\u{10740}-\\u{10755}\\u{10760}-\\u{10767}\\u{10780}-\\u{10785}\\u{10787}-\\u{107B0}\\u{107B2}-\\u{107BA}\\u{10800}-\\u{10805}\\u{10808}\\u{1080A}-\\u{10835}\\u{10837}-\\u{10838}\\u{1083C}\\u{1083F}-\\u{10855}\\u{10860}-\\u{10876}\\u{10880}-\\u{1089E}\\u{108E0}-\\u{108F2}\\u{108F4}-\\u{108F5}\\u{10900}-\\u{10915}\\u{10920}-\\u{10939}\\u{10940}-\\u{10959}\\u{10980}-\\u{109B7}\\u{109BE}-\\u{109BF}\\u{10A00}\\u{10A10}-\\u{10A13}\\u{10A15}-\\u{10A17}\\u{10A19}-\\u{10A35}\\u{10A60}-\\u{10A7C}\\u{10A80}-\\u{10A9C}\\u{10AC0}-\\u{10AC7}\\u{10AC9}-\\u{10AE4}\\u{10B00}-\\u{10B35}\\u{10B40}-\\u{10B55}\\u{10B60}-\\u{10B72}\\u{10B80}-\\u{10B91}\\u{10C00}-\\u{10C48}\\u{10C80}-\\u{10CB2}\\u{10CC0}-\\u{10CF2}\\u{10D00}-\\u{10D23}\\u{10D4A}-\\u{10D65}\\u{10D6F}-\\u{10D85}\\u{10E80}-\\u{10EA9}\\u{10EB0}-\\u{10EB1}\\u{10EC2}-\\u{10EC7}\\u{10F00}-\\u{10F1C}\\u{10F27}\\u{10F30}-\\u{10F45}\\u{10F70}-\\u{10F81}\\u{10FB0}-\\u{10FC4}\\u{10FE0}-\\u{10FF6}\\u{11003}-\\u{11037}\\u{11071}-\\u{11072}\\u{11075}\\u{11083}-\\u{110AF}\\u{110D0}-\\u{110E8}\\u{11103}-\\u{11126}\\u{11144}\\u{11147}\\u{11150}-\\u{11172}\\u{11176}\\u{11183}-\\u{111B2}\\u{111C1}-\\u{111C4}\\u{111DA}\\u{111DC}\\u{11200}-\\u{11211}\\u{11213}-\\u{1122B}\\u{1123F}-\\u{11240}\\u{11280}-\\u{11286}\\u{11288}\\u{1128A}-\\u{1128D}\\u{1128F}-\\u{1129D}\\u{1129F}-\\u{112A8}\\u{112B0}-\\u{112DE}\\u{11305}-\\u{1130C}\\u{1130F}-\\u{11310}\\u{11313}-\\u{11328}\\u{1132A}-\\u{11330}\\u{11332}-\\u{11333}\\u{11335}-\\u{11339}\\u{1133D}\\u{11350}\\u{1135D}-\\u{11361}\\u{11380}-\\u{11389}\\u{1138B}\\u{1138E}\\u{11390}-\\u{113B5}\\u{113B7}\\u{113D1}\\u{113D3}\\u{11400}-\\u{11434}\\u{11447}-\\u{1144A}\\u{1145F}-\\u{11461}\\u{11480}-\\u{114AF}\\u{114C4}-\\u{114C5}\\u{114C7}\\u{11580}-\\u{115AE}\\u{115D8}-\\u{115DB}\\u{11600}-\\u{1162F}\\u{11644}\\u{11680}-\\u{116AA}\\u{116B8}\\u{11700}-\\u{1171A}\\u{11740}-\\u{11746}\\u{11800}-\\u{1182B}\\u{118A0}-\\u{118DF}\\u{118FF}-\\u{11906}\\u{11909}\\u{1190C}-\\u{11913}\\u{11915}-\\u{11916}\\u{11918}-\\u{1192F}\\u{1193F}\\u{11941}\\u{119A0}-\\u{119A7}\\u{119AA}-\\u{119D0}\\u{119E1}\\u{119E3}\\u{11A00}\\u{11A0B}-\\u{11A32}\\u{11A3A}\\u{11A50}\\u{11A5C}-\\u{11A89}\\u{11A9D}\\u{11AB0}-\\u{11AF8}\\u{11BC0}-\\u{11BE0}\\u{11C00}-\\u{11C08}\\u{11C0A}-\\u{11C2E}\\u{11C40}\\u{11C72}-\\u{11C8F}\\u{11D00}-\\u{11D06}\\u{11D08}-\\u{11D09}\\u{11D0B}-\\u{11D30}\\u{11D46}\\u{11D60}-\\u{11D65}\\u{11D67}-\\u{11D68}\\u{11D6A}-\\u{11D89}\\u{11D98}\\u{11DB0}-\\u{11DDB}\\u{11EE0}-\\u{11EF2}\\u{11F02}\\u{11F04}-\\u{11F10}\\u{11F12}-\\u{11F33}\\u{11FB0}\\u{12000}-\\u{12399}\\u{12480}-\\u{12543}\\u{12F90}-\\u{12FF0}\\u{13000}-\\u{1342F}\\u{13441}-\\u{13446}\\u{13460}-\\u{143FA}\\u{14400}-\\u{14646}\\u{16100}-\\u{1611D}\\u{16800}-\\u{16A38}\\u{16A40}-\\u{16A5E}\\u{16A70}-\\u{16ABE}\\u{16AD0}-\\u{16AED}\\u{16B00}-\\u{16B2F}\\u{16B40}-\\u{16B43}\\u{16B63}-\\u{16B77}\\u{16B7D}-\\u{16B8F}\\u{16D40}-\\u{16D6C}\\u{16E40}-\\u{16E7F}\\u{16EA0}-\\u{16EB8}\\u{16EBB}-\\u{16ED3}\\u{16F00}-\\u{16F4A}\\u{16F50}\\u{16F93}-\\u{16F9F}\\u{16FE0}-\\u{16FE1}\\u{16FE3}\\u{16FF2}-\\u{16FF3}\\u{17000}-\\u{18CD5}\\u{18CFF}-\\u{18D1E}\\u{18D80}-\\u{18DF2}\\u{1AFF0}-\\u{1AFF3}\\u{1AFF5}-\\u{1AFFB}\\u{1AFFD}-\\u{1AFFE}\\u{1B000}-\\u{1B122}\\u{1B132}\\u{1B150}-\\u{1B152}\\u{1B155}\\u{1B164}-\\u{1B167}\\u{1B170}-\\u{1B2FB}\\u{1BC00}-\\u{1BC6A}\\u{1BC70}-\\u{1BC7C}\\u{1BC80}-\\u{1BC88}\\u{1BC90}-\\u{1BC99}\\u{1D400}-\\u{1D454}\\u{1D456}-\\u{1D49C}\\u{1D49E}-\\u{1D49F}\\u{1D4A2}\\u{1D4A5}-\\u{1D4A6}\\u{1D4A9}-\\u{1D4AC}\\u{1D4AE}-\\u{1D4B9}\\u{1D4BB}\\u{1D4BD}-\\u{1D4C3}\\u{1D4C5}-\\u{1D505}\\u{1D507}-\\u{1D50A}\\u{1D50D}-\\u{1D514}\\u{1D516}-\\u{1D51C}\\u{1D51E}-\\u{1D539}\\u{1D53B}-\\u{1D53E}\\u{1D540}-\\u{1D544}\\u{1D546}\\u{1D54A}-\\u{1D550}\\u{1D552}-\\u{1D6A5}\\u{1D6A8}-\\u{1D6C0}\\u{1D6C2}-\\u{1D6DA}\\u{1D6DC}-\\u{1D6FA}\\u{1D6FC}-\\u{1D714}\\u{1D716}-\\u{1D734}\\u{1D736}-\\u{1D74E}\\u{1D750}-\\u{1D76E}\\u{1D770}-\\u{1D788}\\u{1D78A}-\\u{1D7A8}\\u{1D7AA}-\\u{1D7C2}\\u{1D7C4}-\\u{1D7CB}\\u{1DF00}-\\u{1DF1E}\\u{1DF25}-\\u{1DF2A}\\u{1E030}-\\u{1E06D}\\u{1E100}-\\u{1E12C}\\u{1E137}-\\u{1E13D}\\u{1E14E}\\u{1E290}-\\u{1E2AD}\\u{1E2C0}-\\u{1E2EB}\\u{1E4D0}-\\u{1E4EB}\\u{1E5D0}-\\u{1E5ED}\\u{1E5F0}\\u{1E6C0}-\\u{1E6DE}\\u{1E6E0}-\\u{1E6E2}\\u{1E6E4}-\\u{1E6E5}\\u{1E6E7}-\\u{1E6ED}\\u{1E6F0}-\\u{1E6F4}\\u{1E6FE}-\\u{1E6FF}\\u{1E7E0}-\\u{1E7E6}\\u{1E7E8}-\\u{1E7EB}\\u{1E7ED}-\\u{1E7EE}\\u{1E7F0}-\\u{1E7FE}\\u{1E800}-\\u{1E8C4}\\u{1E900}-\\u{1E943}\\u{1E94B}\\u{1EE00}-\\u{1EE03}\\u{1EE05}-\\u{1EE1F}\\u{1EE21}-\\u{1EE22}\\u{1EE24}\\u{1EE27}\\u{1EE29}-\\u{1EE32}\\u{1EE34}-\\u{1EE37}\\u{1EE39}\\u{1EE3B}\\u{1EE42}\\u{1EE47}\\u{1EE49}\\u{1EE4B}\\u{1EE4D}-\\u{1EE4F}\\u{1EE51}-\\u{1EE52}\\u{1EE54}\\u{1EE57}\\u{1EE59}\\u{1EE5B}\\u{1EE5D}\\u{1EE5F}\\u{1EE61}-\\u{1EE62}\\u{1EE64}\\u{1EE67}-\\u{1EE6A}\\u{1EE6C}-\\u{1EE72}\\u{1EE74}-\\u{1EE77}\\u{1EE79}-\\u{1EE7C}\\u{1EE7E}\\u{1EE80}-\\u{1EE89}\\u{1EE8B}-\\u{1EE9B}\\u{1EEA1}-\\u{1EEA3}\\u{1EEA5}-\\u{1EEA9}\\u{1EEAB}-\\u{1EEBB}\\u{20000}-\\u{2A6DF}\\u{2A700}-\\u{2B81D}\\u{2B820}-\\u{2CEAD}\\u{2CEB0}-\\u{2EBE0}\\u{2EBF0}-\\u{2EE5D}\\u{2F800}-\\u{2FA1D}\\u{30000}-\\u{3134A}\\u{31350}-\\u{33479}\\u0300-\\u036F\\u0483-\\u0489\\u0591-\\u05BD\\u05BF\\u05C1-\\u05C2\\u05C4-\\u05C5\\u05C7\\u0610-\\u061A\\u064B-\\u065F\\u0670\\u06D6-\\u06DC\\u06DF-\\u06E4\\u06E7-\\u06E8\\u06EA-\\u06ED\\u0711\\u0730-\\u074A\\u07A6-\\u07B0\\u07EB-\\u07F3\\u07FD\\u0816-\\u0819\\u081B-\\u0823\\u0825-\\u0827\\u0829-\\u082D\\u0859-\\u085B\\u0897-\\u089F\\u08CA-\\u08E1\\u08E3-\\u0903\\u093A-\\u093C\\u093E-\\u094F\\u0951-\\u0957\\u0962-\\u0963\\u0981-\\u0983\\u09BC\\u09BE-\\u09C4\\u09C7-\\u09C8\\u09CB-\\u09CD\\u09D7\\u09E2-\\u09E3\\u09FE\\u0A01-\\u0A03\\u0A3C\\u0A3E-\\u0A42\\u0A47-\\u0A48\\u0A4B-\\u0A4D\\u0A51\\u0A70-\\u0A71\\u0A75\\u0A81-\\u0A83\\u0ABC\\u0ABE-\\u0AC5\\u0AC7-\\u0AC9\\u0ACB-\\u0ACD\\u0AE2-\\u0AE3\\u0AFA-\\u0AFF\\u0B01-\\u0B03\\u0B3C\\u0B3E-\\u0B44\\u0B47-\\u0B48\\u0B4B-\\u0B4D\\u0B55-\\u0B57\\u0B62-\\u0B63\\u0B82\\u0BBE-\\u0BC2\\u0BC6-\\u0BC8\\u0BCA-\\u0BCD\\u0BD7\\u0C00-\\u0C04\\u0C3C\\u0C3E-\\u0C44\\u0C46-\\u0C48\\u0C4A-\\u0C4D\\u0C55-\\u0C56\\u0C62-\\u0C63\\u0C81-\\u0C83\\u0CBC\\u0CBE-\\u0CC4\\u0CC6-\\u0CC8\\u0CCA-\\u0CCD\\u0CD5-\\u0CD6\\u0CE2-\\u0CE3\\u0CF3\\u0D00-\\u0D03\\u0D3B-\\u0D3C\\u0D3E-\\u0D44\\u0D46-\\u0D48\\u0D4A-\\u0D4D\\u0D57\\u0D62-\\u0D63\\u0D81-\\u0D83\\u0DCA\\u0DCF-\\u0DD4\\u0DD6\\u0DD8-\\u0DDF\\u0DF2-\\u0DF3\\u0E31\\u0E34-\\u0E3A\\u0E47-\\u0E4E\\u0EB1\\u0EB4-\\u0EBC\\u0EC8-\\u0ECE\\u0F18-\\u0F19\\u0F35\\u0F37\\u0F39\\u0F3E-\\u0F3F\\u0F71-\\u0F84\\u0F86-\\u0F87\\u0F8D-\\u0F97\\u0F99-\\u0FBC\\u0FC6\\u102B-\\u103E\\u1056-\\u1059\\u105E-\\u1060\\u1062-\\u1064\\u1067-\\u106D\\u1071-\\u1074\\u1082-\\u108D\\u108F\\u109A-\\u109D\\u135D-\\u135F\\u1712-\\u1715\\u1732-\\u1734\\u1752-\\u1753\\u1772-\\u1773\\u17B4-\\u17D3\\u17DD\\u180B-\\u180D\\u180F\\u1885-\\u1886\\u18A9\\u1920-\\u192B\\u1930-\\u193B\\u1A17-\\u1A1B\\u1A55-\\u1A5E\\u1A60-\\u1A7C\\u1A7F\\u1AB0-\\u1ADD\\u1AE0-\\u1AEB\\u1B00-\\u1B04\\u1B34-\\u1B44\\u1B6B-\\u1B73\\u1B80-\\u1B82\\u1BA1-\\u1BAD\\u1BE6-\\u1BF3\\u1C24-\\u1C37\\u1CD0-\\u1CD2\\u1CD4-\\u1CE8\\u1CED\\u1CF4\\u1CF7-\\u1CF9\\u1DC0-\\u1DFF\\u20D0-\\u20F0\\u2CEF-\\u2CF1\\u2D7F\\u2DE0-\\u2DFF\\u302A-\\u302F\\u3099-\\u309A\\uA66F-\\uA672\\uA674-\\uA67D\\uA69E-\\uA69F\\uA6F0-\\uA6F1\\uA802\\uA806\\uA80B\\uA823-\\uA827\\uA82C\\uA880-\\uA881\\uA8B4-\\uA8C5\\uA8E0-\\uA8F1\\uA8FF\\uA926-\\uA92D\\uA947-\\uA953\\uA980-\\uA983\\uA9B3-\\uA9C0\\uA9E5\\uAA29-\\uAA36\\uAA43\\uAA4C-\\uAA4D\\uAA7B-\\uAA7D\\uAAB0\\uAAB2-\\uAAB4\\uAAB7-\\uAAB8\\uAABE-\\uAABF\\uAAC1\\uAAEB-\\uAAEF\\uAAF5-\\uAAF6\\uABE3-\\uABEA\\uABEC-\\uABED\\uFB1E\\uFE00-\\uFE0F\\uFE20-\\uFE2F\\u{101FD}\\u{102E0}\\u{10376}-\\u{1037A}\\u{10A01}-\\u{10A03}\\u{10A05}-\\u{10A06}\\u{10A0C}-\\u{10A0F}\\u{10A38}-\\u{10A3A}\\u{10A3F}\\u{10AE5}-\\u{10AE6}\\u{10D24}-\\u{10D27}\\u{10D69}-\\u{10D6D}\\u{10EAB}-\\u{10EAC}\\u{10EFA}-\\u{10EFF}\\u{10F46}-\\u{10F50}\\u{10F82}-\\u{10F85}\\u{11000}-\\u{11002}\\u{11038}-\\u{11046}\\u{11070}\\u{11073}-\\u{11074}\\u{1107F}-\\u{11082}\\u{110B0}-\\u{110BA}\\u{110C2}\\u{11100}-\\u{11102}\\u{11127}-\\u{11134}\\u{11145}-\\u{11146}\\u{11173}\\u{11180}-\\u{11182}\\u{111B3}-\\u{111C0}\\u{111C9}-\\u{111CC}\\u{111CE}-\\u{111CF}\\u{1122C}-\\u{11237}\\u{1123E}\\u{11241}\\u{112DF}-\\u{112EA}\\u{11300}-\\u{11303}\\u{1133B}-\\u{1133C}\\u{1133E}-\\u{11344}\\u{11347}-\\u{11348}\\u{1134B}-\\u{1134D}\\u{11357}\\u{11362}-\\u{11363}\\u{11366}-\\u{1136C}\\u{11370}-\\u{11374}\\u{113B8}-\\u{113C0}\\u{113C2}\\u{113C5}\\u{113C7}-\\u{113CA}\\u{113CC}-\\u{113D0}\\u{113D2}\\u{113E1}-\\u{113E2}\\u{11435}-\\u{11446}\\u{1145E}\\u{114B0}-\\u{114C3}\\u{115AF}-\\u{115B5}\\u{115B8}-\\u{115C0}\\u{115DC}-\\u{115DD}\\u{11630}-\\u{11640}\\u{116AB}-\\u{116B7}\\u{1171D}-\\u{1172B}\\u{1182C}-\\u{1183A}\\u{11930}-\\u{11935}\\u{11937}-\\u{11938}\\u{1193B}-\\u{1193E}\\u{11940}\\u{11942}-\\u{11943}\\u{119D1}-\\u{119D7}\\u{119DA}-\\u{119E0}\\u{119E4}\\u{11A01}-\\u{11A0A}\\u{11A33}-\\u{11A39}\\u{11A3B}-\\u{11A3E}\\u{11A47}\\u{11A51}-\\u{11A5B}\\u{11A8A}-\\u{11A99}\\u{11B60}-\\u{11B67}\\u{11C2F}-\\u{11C36}\\u{11C38}-\\u{11C3F}\\u{11C92}-\\u{11CA7}\\u{11CA9}-\\u{11CB6}\\u{11D31}-\\u{11D36}\\u{11D3A}\\u{11D3C}-\\u{11D3D}\\u{11D3F}-\\u{11D45}\\u{11D47}\\u{11D8A}-\\u{11D8E}\\u{11D90}-\\u{11D91}\\u{11D93}-\\u{11D97}\\u{11EF3}-\\u{11EF6}\\u{11F00}-\\u{11F01}\\u{11F03}\\u{11F34}-\\u{11F3A}\\u{11F3E}-\\u{11F42}\\u{11F5A}\\u{13440}\\u{13447}-\\u{13455}\\u{1611E}-\\u{1612F}\\u{16AF0}-\\u{16AF4}\\u{16B30}-\\u{16B36}\\u{16F4F}\\u{16F51}-\\u{16F87}\\u{16F8F}-\\u{16F92}\\u{16FE4}\\u{16FF0}-\\u{16FF1}\\u{1BC9D}-\\u{1BC9E}\\u{1CF00}-\\u{1CF2D}\\u{1CF30}-\\u{1CF46}\\u{1D165}-\\u{1D169}\\u{1D16D}-\\u{1D172}\\u{1D17B}-\\u{1D182}\\u{1D185}-\\u{1D18B}\\u{1D1AA}-\\u{1D1AD}\\u{1D242}-\\u{1D244}\\u{1DA00}-\\u{1DA36}\\u{1DA3B}-\\u{1DA6C}\\u{1DA75}\\u{1DA84}\\u{1DA9B}-\\u{1DA9F}\\u{1DAA1}-\\u{1DAAF}\\u{1E000}-\\u{1E006}\\u{1E008}-\\u{1E018}\\u{1E01B}-\\u{1E021}\\u{1E023}-\\u{1E024}\\u{1E026}-\\u{1E02A}\\u{1E08F}\\u{1E130}-\\u{1E136}\\u{1E2AE}\\u{1E2EC}-\\u{1E2EF}\\u{1E4EC}-\\u{1E4EF}\\u{1E5EE}-\\u{1E5EF}\\u{1E6E3}\\u{1E6E6}\\u{1E6EE}-\\u{1E6EF}\\u{1E6F5}\\u{1E8D0}-\\u{1E8D6}\\u{1E944}-\\u{1E94A}\\u{E0100}-\\u{E01EF}\\u0030-\\u0039\\u00B2-\\u00B3\\u00B9\\u00BC-\\u00BE\\u0660-\\u0669\\u06F0-\\u06F9\\u07C0-\\u07C9\\u0966-\\u096F\\u09E6-\\u09EF\\u09F4-\\u09F9\\u0A66-\\u0A6F\\u0AE6-\\u0AEF\\u0B66-\\u0B6F\\u0B72-\\u0B77\\u0BE6-\\u0BF2\\u0C66-\\u0C6F\\u0C78-\\u0C7E\\u0CE6-\\u0CEF\\u0D58-\\u0D5E\\u0D66-\\u0D78\\u0DE6-\\u0DEF\\u0E50-\\u0E59\\u0ED0-\\u0ED9\\u0F20-\\u0F33\\u1040-\\u1049\\u1090-\\u1099\\u1369-\\u137C\\u16EE-\\u16F0\\u17E0-\\u17E9\\u17F0-\\u17F9\\u1810-\\u1819\\u1946-\\u194F\\u19D0-\\u19DA\\u1A80-\\u1A89\\u1A90-\\u1A99\\u1B50-\\u1B59\\u1BB0-\\u1BB9\\u1C40-\\u1C49\\u1C50-\\u1C59\\u2070\\u2074-\\u2079\\u2080-\\u2089\\u2150-\\u2182\\u2185-\\u2189\\u2460-\\u249B\\u24EA-\\u24FF\\u2776-\\u2793\\u2CFD\\u3007\\u3021-\\u3029\\u3038-\\u303A\\u3192-\\u3195\\u3220-\\u3229\\u3248-\\u324F\\u3251-\\u325F\\u3280-\\u3289\\u32B1-\\u32BF\\uA620-\\uA629\\uA6E6-\\uA6EF\\uA830-\\uA835\\uA8D0-\\uA8D9\\uA900-\\uA909\\uA9D0-\\uA9D9\\uA9F0-\\uA9F9\\uAA50-\\uAA59\\uABF0-\\uABF9\\uFF10-\\uFF19\\u{10107}-\\u{10133}\\u{10140}-\\u{10178}\\u{1018A}-\\u{1018B}\\u{102E1}-\\u{102FB}\\u{10320}-\\u{10323}\\u{10341}\\u{1034A}\\u{103D1}-\\u{103D5}\\u{104A0}-\\u{104A9}\\u{10858}-\\u{1085F}\\u{10879}-\\u{1087F}\\u{108A7}-\\u{108AF}\\u{108FB}-\\u{108FF}\\u{10916}-\\u{1091B}\\u{109BC}-\\u{109BD}\\u{109C0}-\\u{109CF}\\u{109D2}-\\u{109FF}\\u{10A40}-\\u{10A48}\\u{10A7D}-\\u{10A7E}\\u{10A9D}-\\u{10A9F}\\u{10AEB}-\\u{10AEF}\\u{10B58}-\\u{10B5F}\\u{10B78}-\\u{10B7F}\\u{10BA9}-\\u{10BAF}\\u{10CFA}-\\u{10CFF}\\u{10D30}-\\u{10D39}\\u{10D40}-\\u{10D49}\\u{10E60}-\\u{10E7E}\\u{10F1D}-\\u{10F26}\\u{10F51}-\\u{10F54}\\u{10FC5}-\\u{10FCB}\\u{11052}-\\u{1106F}\\u{110F0}-\\u{110F9}\\u{11136}-\\u{1113F}\\u{111D0}-\\u{111D9}\\u{111E1}-\\u{111F4}\\u{112F0}-\\u{112F9}\\u{11450}-\\u{11459}\\u{114D0}-\\u{114D9}\\u{11650}-\\u{11659}\\u{116C0}-\\u{116C9}\\u{116D0}-\\u{116E3}\\u{11730}-\\u{1173B}\\u{118E0}-\\u{118F2}\\u{11950}-\\u{11959}\\u{11BF0}-\\u{11BF9}\\u{11C50}-\\u{11C6C}\\u{11D50}-\\u{11D59}\\u{11DA0}-\\u{11DA9}\\u{11DE0}-\\u{11DE9}\\u{11F50}-\\u{11F59}\\u{11FC0}-\\u{11FD4}\\u{12400}-\\u{1246E}\\u{16130}-\\u{16139}\\u{16A60}-\\u{16A69}\\u{16AC0}-\\u{16AC9}\\u{16B50}-\\u{16B59}\\u{16B5B}-\\u{16B61}\\u{16D70}-\\u{16D79}\\u{16E80}-\\u{16E96}\\u{16FF4}-\\u{16FF6}\\u{1CCF0}-\\u{1CCF9}\\u{1D2C0}-\\u{1D2D3}\\u{1D2E0}-\\u{1D2F3}\\u{1D360}-\\u{1D378}\\u{1D7CE}-\\u{1D7FF}\\u{1E140}-\\u{1E149}\\u{1E2F0}-\\u{1E2F9}\\u{1E4F0}-\\u{1E4F9}\\u{1E5F1}-\\u{1E5FA}\\u{1E8C7}-\\u{1E8CF}\\u{1E950}-\\u{1E959}\\u{1EC71}-\\u{1ECAB}\\u{1ECAD}-\\u{1ECAF}\\u{1ECB1}-\\u{1ECB4}\\u{1ED01}-\\u{1ED2D}\\u{1ED2F}-\\u{1ED3D}\\u{1F100}-\\u{1F10C}\\u{1FBF0}-\\u{1FBF9}_]+", "gu"),
-        nE = new WeakSet;
+    let nv = RegExp("[\\u0041-\\u005A\\u0061-\\u007A\\u00AA\\u00B5\\u00BA\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02C1\\u02C6-\\u02D1\\u02E0-\\u02E4\\u02EC\\u02EE\\u0370-\\u0374\\u0376-\\u0377\\u037A-\\u037D\\u037F\\u0386\\u0388-\\u038A\\u038C\\u038E-\\u03A1\\u03A3-\\u03F5\\u03F7-\\u0481\\u048A-\\u052F\\u0531-\\u0556\\u0559\\u0560-\\u0588\\u05D0-\\u05EA\\u05EF-\\u05F2\\u0620-\\u064A\\u066E-\\u066F\\u0671-\\u06D3\\u06D5\\u06E5-\\u06E6\\u06EE-\\u06EF\\u06FA-\\u06FC\\u06FF\\u0710\\u0712-\\u072F\\u074D-\\u07A5\\u07B1\\u07CA-\\u07EA\\u07F4-\\u07F5\\u07FA\\u0800-\\u0815\\u081A\\u0824\\u0828\\u0840-\\u0858\\u0860-\\u086A\\u0870-\\u0887\\u0889-\\u088F\\u08A0-\\u08C9\\u0904-\\u0939\\u093D\\u0950\\u0958-\\u0961\\u0971-\\u0980\\u0985-\\u098C\\u098F-\\u0990\\u0993-\\u09A8\\u09AA-\\u09B0\\u09B2\\u09B6-\\u09B9\\u09BD\\u09CE\\u09DC-\\u09DD\\u09DF-\\u09E1\\u09F0-\\u09F1\\u09FC\\u0A05-\\u0A0A\\u0A0F-\\u0A10\\u0A13-\\u0A28\\u0A2A-\\u0A30\\u0A32-\\u0A33\\u0A35-\\u0A36\\u0A38-\\u0A39\\u0A59-\\u0A5C\\u0A5E\\u0A72-\\u0A74\\u0A85-\\u0A8D\\u0A8F-\\u0A91\\u0A93-\\u0AA8\\u0AAA-\\u0AB0\\u0AB2-\\u0AB3\\u0AB5-\\u0AB9\\u0ABD\\u0AD0\\u0AE0-\\u0AE1\\u0AF9\\u0B05-\\u0B0C\\u0B0F-\\u0B10\\u0B13-\\u0B28\\u0B2A-\\u0B30\\u0B32-\\u0B33\\u0B35-\\u0B39\\u0B3D\\u0B5C-\\u0B5D\\u0B5F-\\u0B61\\u0B71\\u0B83\\u0B85-\\u0B8A\\u0B8E-\\u0B90\\u0B92-\\u0B95\\u0B99-\\u0B9A\\u0B9C\\u0B9E-\\u0B9F\\u0BA3-\\u0BA4\\u0BA8-\\u0BAA\\u0BAE-\\u0BB9\\u0BD0\\u0C05-\\u0C0C\\u0C0E-\\u0C10\\u0C12-\\u0C28\\u0C2A-\\u0C39\\u0C3D\\u0C58-\\u0C5A\\u0C5C-\\u0C5D\\u0C60-\\u0C61\\u0C80\\u0C85-\\u0C8C\\u0C8E-\\u0C90\\u0C92-\\u0CA8\\u0CAA-\\u0CB3\\u0CB5-\\u0CB9\\u0CBD\\u0CDC-\\u0CDE\\u0CE0-\\u0CE1\\u0CF1-\\u0CF2\\u0D04-\\u0D0C\\u0D0E-\\u0D10\\u0D12-\\u0D3A\\u0D3D\\u0D4E\\u0D54-\\u0D56\\u0D5F-\\u0D61\\u0D7A-\\u0D7F\\u0D85-\\u0D96\\u0D9A-\\u0DB1\\u0DB3-\\u0DBB\\u0DBD\\u0DC0-\\u0DC6\\u0E01-\\u0E30\\u0E32-\\u0E33\\u0E40-\\u0E46\\u0E81-\\u0E82\\u0E84\\u0E86-\\u0E8A\\u0E8C-\\u0EA3\\u0EA5\\u0EA7-\\u0EB0\\u0EB2-\\u0EB3\\u0EBD\\u0EC0-\\u0EC4\\u0EC6\\u0EDC-\\u0EDF\\u0F00\\u0F40-\\u0F47\\u0F49-\\u0F6C\\u0F88-\\u0F8C\\u1000-\\u102A\\u103F\\u1050-\\u1055\\u105A-\\u105D\\u1061\\u1065-\\u1066\\u106E-\\u1070\\u1075-\\u1081\\u108E\\u10A0-\\u10C5\\u10C7\\u10CD\\u10D0-\\u10FA\\u10FC-\\u1248\\u124A-\\u124D\\u1250-\\u1256\\u1258\\u125A-\\u125D\\u1260-\\u1288\\u128A-\\u128D\\u1290-\\u12B0\\u12B2-\\u12B5\\u12B8-\\u12BE\\u12C0\\u12C2-\\u12C5\\u12C8-\\u12D6\\u12D8-\\u1310\\u1312-\\u1315\\u1318-\\u135A\\u1380-\\u138F\\u13A0-\\u13F5\\u13F8-\\u13FD\\u1401-\\u166C\\u166F-\\u167F\\u1681-\\u169A\\u16A0-\\u16EA\\u16F1-\\u16F8\\u1700-\\u1711\\u171F-\\u1731\\u1740-\\u1751\\u1760-\\u176C\\u176E-\\u1770\\u1780-\\u17B3\\u17D7\\u17DC\\u1820-\\u1878\\u1880-\\u1884\\u1887-\\u18A8\\u18AA\\u18B0-\\u18F5\\u1900-\\u191E\\u1950-\\u196D\\u1970-\\u1974\\u1980-\\u19AB\\u19B0-\\u19C9\\u1A00-\\u1A16\\u1A20-\\u1A54\\u1AA7\\u1B05-\\u1B33\\u1B45-\\u1B4C\\u1B83-\\u1BA0\\u1BAE-\\u1BAF\\u1BBA-\\u1BE5\\u1C00-\\u1C23\\u1C4D-\\u1C4F\\u1C5A-\\u1C7D\\u1C80-\\u1C8A\\u1C90-\\u1CBA\\u1CBD-\\u1CBF\\u1CE9-\\u1CEC\\u1CEE-\\u1CF3\\u1CF5-\\u1CF6\\u1CFA\\u1D00-\\u1DBF\\u1E00-\\u1F15\\u1F18-\\u1F1D\\u1F20-\\u1F45\\u1F48-\\u1F4D\\u1F50-\\u1F57\\u1F59\\u1F5B\\u1F5D\\u1F5F-\\u1F7D\\u1F80-\\u1FB4\\u1FB6-\\u1FBC\\u1FBE\\u1FC2-\\u1FC4\\u1FC6-\\u1FCC\\u1FD0-\\u1FD3\\u1FD6-\\u1FDB\\u1FE0-\\u1FEC\\u1FF2-\\u1FF4\\u1FF6-\\u1FFC\\u2071\\u207F\\u2090-\\u209C\\u2102\\u2107\\u210A-\\u2113\\u2115\\u2119-\\u211D\\u2124\\u2126\\u2128\\u212A-\\u212D\\u212F-\\u2139\\u213C-\\u213F\\u2145-\\u2149\\u214E\\u2183-\\u2184\\u2C00-\\u2CE4\\u2CEB-\\u2CEE\\u2CF2-\\u2CF3\\u2D00-\\u2D25\\u2D27\\u2D2D\\u2D30-\\u2D67\\u2D6F\\u2D80-\\u2D96\\u2DA0-\\u2DA6\\u2DA8-\\u2DAE\\u2DB0-\\u2DB6\\u2DB8-\\u2DBE\\u2DC0-\\u2DC6\\u2DC8-\\u2DCE\\u2DD0-\\u2DD6\\u2DD8-\\u2DDE\\u2E2F\\u3005-\\u3006\\u3031-\\u3035\\u303B-\\u303C\\u3041-\\u3096\\u309D-\\u309F\\u30A1-\\u30FA\\u30FC-\\u30FF\\u3105-\\u312F\\u3131-\\u318E\\u31A0-\\u31BF\\u31F0-\\u31FF\\u3400-\\u4DBF\\u4E00-\\uA48C\\uA4D0-\\uA4FD\\uA500-\\uA60C\\uA610-\\uA61F\\uA62A-\\uA62B\\uA640-\\uA66E\\uA67F-\\uA69D\\uA6A0-\\uA6E5\\uA717-\\uA71F\\uA722-\\uA788\\uA78B-\\uA7DC\\uA7F1-\\uA801\\uA803-\\uA805\\uA807-\\uA80A\\uA80C-\\uA822\\uA840-\\uA873\\uA882-\\uA8B3\\uA8F2-\\uA8F7\\uA8FB\\uA8FD-\\uA8FE\\uA90A-\\uA925\\uA930-\\uA946\\uA960-\\uA97C\\uA984-\\uA9B2\\uA9CF\\uA9E0-\\uA9E4\\uA9E6-\\uA9EF\\uA9FA-\\uA9FE\\uAA00-\\uAA28\\uAA40-\\uAA42\\uAA44-\\uAA4B\\uAA60-\\uAA76\\uAA7A\\uAA7E-\\uAAAF\\uAAB1\\uAAB5-\\uAAB6\\uAAB9-\\uAABD\\uAAC0\\uAAC2\\uAADB-\\uAADD\\uAAE0-\\uAAEA\\uAAF2-\\uAAF4\\uAB01-\\uAB06\\uAB09-\\uAB0E\\uAB11-\\uAB16\\uAB20-\\uAB26\\uAB28-\\uAB2E\\uAB30-\\uAB5A\\uAB5C-\\uAB69\\uAB70-\\uABE2\\uAC00-\\uD7A3\\uD7B0-\\uD7C6\\uD7CB-\\uD7FB\\uF900-\\uFA6D\\uFA70-\\uFAD9\\uFB00-\\uFB06\\uFB13-\\uFB17\\uFB1D\\uFB1F-\\uFB28\\uFB2A-\\uFB36\\uFB38-\\uFB3C\\uFB3E\\uFB40-\\uFB41\\uFB43-\\uFB44\\uFB46-\\uFBB1\\uFBD3-\\uFD3D\\uFD50-\\uFD8F\\uFD92-\\uFDC7\\uFDF0-\\uFDFB\\uFE70-\\uFE74\\uFE76-\\uFEFC\\uFF21-\\uFF3A\\uFF41-\\uFF5A\\uFF66-\\uFFBE\\uFFC2-\\uFFC7\\uFFCA-\\uFFCF\\uFFD2-\\uFFD7\\uFFDA-\\uFFDC\\u{10000}-\\u{1000B}\\u{1000D}-\\u{10026}\\u{10028}-\\u{1003A}\\u{1003C}-\\u{1003D}\\u{1003F}-\\u{1004D}\\u{10050}-\\u{1005D}\\u{10080}-\\u{100FA}\\u{10280}-\\u{1029C}\\u{102A0}-\\u{102D0}\\u{10300}-\\u{1031F}\\u{1032D}-\\u{10340}\\u{10342}-\\u{10349}\\u{10350}-\\u{10375}\\u{10380}-\\u{1039D}\\u{103A0}-\\u{103C3}\\u{103C8}-\\u{103CF}\\u{10400}-\\u{1049D}\\u{104B0}-\\u{104D3}\\u{104D8}-\\u{104FB}\\u{10500}-\\u{10527}\\u{10530}-\\u{10563}\\u{10570}-\\u{1057A}\\u{1057C}-\\u{1058A}\\u{1058C}-\\u{10592}\\u{10594}-\\u{10595}\\u{10597}-\\u{105A1}\\u{105A3}-\\u{105B1}\\u{105B3}-\\u{105B9}\\u{105BB}-\\u{105BC}\\u{105C0}-\\u{105F3}\\u{10600}-\\u{10736}\\u{10740}-\\u{10755}\\u{10760}-\\u{10767}\\u{10780}-\\u{10785}\\u{10787}-\\u{107B0}\\u{107B2}-\\u{107BA}\\u{10800}-\\u{10805}\\u{10808}\\u{1080A}-\\u{10835}\\u{10837}-\\u{10838}\\u{1083C}\\u{1083F}-\\u{10855}\\u{10860}-\\u{10876}\\u{10880}-\\u{1089E}\\u{108E0}-\\u{108F2}\\u{108F4}-\\u{108F5}\\u{10900}-\\u{10915}\\u{10920}-\\u{10939}\\u{10940}-\\u{10959}\\u{10980}-\\u{109B7}\\u{109BE}-\\u{109BF}\\u{10A00}\\u{10A10}-\\u{10A13}\\u{10A15}-\\u{10A17}\\u{10A19}-\\u{10A35}\\u{10A60}-\\u{10A7C}\\u{10A80}-\\u{10A9C}\\u{10AC0}-\\u{10AC7}\\u{10AC9}-\\u{10AE4}\\u{10B00}-\\u{10B35}\\u{10B40}-\\u{10B55}\\u{10B60}-\\u{10B72}\\u{10B80}-\\u{10B91}\\u{10C00}-\\u{10C48}\\u{10C80}-\\u{10CB2}\\u{10CC0}-\\u{10CF2}\\u{10D00}-\\u{10D23}\\u{10D4A}-\\u{10D65}\\u{10D6F}-\\u{10D85}\\u{10E80}-\\u{10EA9}\\u{10EB0}-\\u{10EB1}\\u{10EC2}-\\u{10EC7}\\u{10F00}-\\u{10F1C}\\u{10F27}\\u{10F30}-\\u{10F45}\\u{10F70}-\\u{10F81}\\u{10FB0}-\\u{10FC4}\\u{10FE0}-\\u{10FF6}\\u{11003}-\\u{11037}\\u{11071}-\\u{11072}\\u{11075}\\u{11083}-\\u{110AF}\\u{110D0}-\\u{110E8}\\u{11103}-\\u{11126}\\u{11144}\\u{11147}\\u{11150}-\\u{11172}\\u{11176}\\u{11183}-\\u{111B2}\\u{111C1}-\\u{111C4}\\u{111DA}\\u{111DC}\\u{11200}-\\u{11211}\\u{11213}-\\u{1122B}\\u{1123F}-\\u{11240}\\u{11280}-\\u{11286}\\u{11288}\\u{1128A}-\\u{1128D}\\u{1128F}-\\u{1129D}\\u{1129F}-\\u{112A8}\\u{112B0}-\\u{112DE}\\u{11305}-\\u{1130C}\\u{1130F}-\\u{11310}\\u{11313}-\\u{11328}\\u{1132A}-\\u{11330}\\u{11332}-\\u{11333}\\u{11335}-\\u{11339}\\u{1133D}\\u{11350}\\u{1135D}-\\u{11361}\\u{11380}-\\u{11389}\\u{1138B}\\u{1138E}\\u{11390}-\\u{113B5}\\u{113B7}\\u{113D1}\\u{113D3}\\u{11400}-\\u{11434}\\u{11447}-\\u{1144A}\\u{1145F}-\\u{11461}\\u{11480}-\\u{114AF}\\u{114C4}-\\u{114C5}\\u{114C7}\\u{11580}-\\u{115AE}\\u{115D8}-\\u{115DB}\\u{11600}-\\u{1162F}\\u{11644}\\u{11680}-\\u{116AA}\\u{116B8}\\u{11700}-\\u{1171A}\\u{11740}-\\u{11746}\\u{11800}-\\u{1182B}\\u{118A0}-\\u{118DF}\\u{118FF}-\\u{11906}\\u{11909}\\u{1190C}-\\u{11913}\\u{11915}-\\u{11916}\\u{11918}-\\u{1192F}\\u{1193F}\\u{11941}\\u{119A0}-\\u{119A7}\\u{119AA}-\\u{119D0}\\u{119E1}\\u{119E3}\\u{11A00}\\u{11A0B}-\\u{11A32}\\u{11A3A}\\u{11A50}\\u{11A5C}-\\u{11A89}\\u{11A9D}\\u{11AB0}-\\u{11AF8}\\u{11BC0}-\\u{11BE0}\\u{11C00}-\\u{11C08}\\u{11C0A}-\\u{11C2E}\\u{11C40}\\u{11C72}-\\u{11C8F}\\u{11D00}-\\u{11D06}\\u{11D08}-\\u{11D09}\\u{11D0B}-\\u{11D30}\\u{11D46}\\u{11D60}-\\u{11D65}\\u{11D67}-\\u{11D68}\\u{11D6A}-\\u{11D89}\\u{11D98}\\u{11DB0}-\\u{11DDB}\\u{11EE0}-\\u{11EF2}\\u{11F02}\\u{11F04}-\\u{11F10}\\u{11F12}-\\u{11F33}\\u{11FB0}\\u{12000}-\\u{12399}\\u{12480}-\\u{12543}\\u{12F90}-\\u{12FF0}\\u{13000}-\\u{1342F}\\u{13441}-\\u{13446}\\u{13460}-\\u{143FA}\\u{14400}-\\u{14646}\\u{16100}-\\u{1611D}\\u{16800}-\\u{16A38}\\u{16A40}-\\u{16A5E}\\u{16A70}-\\u{16ABE}\\u{16AD0}-\\u{16AED}\\u{16B00}-\\u{16B2F}\\u{16B40}-\\u{16B43}\\u{16B63}-\\u{16B77}\\u{16B7D}-\\u{16B8F}\\u{16D40}-\\u{16D6C}\\u{16E40}-\\u{16E7F}\\u{16EA0}-\\u{16EB8}\\u{16EBB}-\\u{16ED3}\\u{16F00}-\\u{16F4A}\\u{16F50}\\u{16F93}-\\u{16F9F}\\u{16FE0}-\\u{16FE1}\\u{16FE3}\\u{16FF2}-\\u{16FF3}\\u{17000}-\\u{18CD5}\\u{18CFF}-\\u{18D1E}\\u{18D80}-\\u{18DF2}\\u{1AFF0}-\\u{1AFF3}\\u{1AFF5}-\\u{1AFFB}\\u{1AFFD}-\\u{1AFFE}\\u{1B000}-\\u{1B122}\\u{1B132}\\u{1B150}-\\u{1B152}\\u{1B155}\\u{1B164}-\\u{1B167}\\u{1B170}-\\u{1B2FB}\\u{1BC00}-\\u{1BC6A}\\u{1BC70}-\\u{1BC7C}\\u{1BC80}-\\u{1BC88}\\u{1BC90}-\\u{1BC99}\\u{1D400}-\\u{1D454}\\u{1D456}-\\u{1D49C}\\u{1D49E}-\\u{1D49F}\\u{1D4A2}\\u{1D4A5}-\\u{1D4A6}\\u{1D4A9}-\\u{1D4AC}\\u{1D4AE}-\\u{1D4B9}\\u{1D4BB}\\u{1D4BD}-\\u{1D4C3}\\u{1D4C5}-\\u{1D505}\\u{1D507}-\\u{1D50A}\\u{1D50D}-\\u{1D514}\\u{1D516}-\\u{1D51C}\\u{1D51E}-\\u{1D539}\\u{1D53B}-\\u{1D53E}\\u{1D540}-\\u{1D544}\\u{1D546}\\u{1D54A}-\\u{1D550}\\u{1D552}-\\u{1D6A5}\\u{1D6A8}-\\u{1D6C0}\\u{1D6C2}-\\u{1D6DA}\\u{1D6DC}-\\u{1D6FA}\\u{1D6FC}-\\u{1D714}\\u{1D716}-\\u{1D734}\\u{1D736}-\\u{1D74E}\\u{1D750}-\\u{1D76E}\\u{1D770}-\\u{1D788}\\u{1D78A}-\\u{1D7A8}\\u{1D7AA}-\\u{1D7C2}\\u{1D7C4}-\\u{1D7CB}\\u{1DF00}-\\u{1DF1E}\\u{1DF25}-\\u{1DF2A}\\u{1E030}-\\u{1E06D}\\u{1E100}-\\u{1E12C}\\u{1E137}-\\u{1E13D}\\u{1E14E}\\u{1E290}-\\u{1E2AD}\\u{1E2C0}-\\u{1E2EB}\\u{1E4D0}-\\u{1E4EB}\\u{1E5D0}-\\u{1E5ED}\\u{1E5F0}\\u{1E6C0}-\\u{1E6DE}\\u{1E6E0}-\\u{1E6E2}\\u{1E6E4}-\\u{1E6E5}\\u{1E6E7}-\\u{1E6ED}\\u{1E6F0}-\\u{1E6F4}\\u{1E6FE}-\\u{1E6FF}\\u{1E7E0}-\\u{1E7E6}\\u{1E7E8}-\\u{1E7EB}\\u{1E7ED}-\\u{1E7EE}\\u{1E7F0}-\\u{1E7FE}\\u{1E800}-\\u{1E8C4}\\u{1E900}-\\u{1E943}\\u{1E94B}\\u{1EE00}-\\u{1EE03}\\u{1EE05}-\\u{1EE1F}\\u{1EE21}-\\u{1EE22}\\u{1EE24}\\u{1EE27}\\u{1EE29}-\\u{1EE32}\\u{1EE34}-\\u{1EE37}\\u{1EE39}\\u{1EE3B}\\u{1EE42}\\u{1EE47}\\u{1EE49}\\u{1EE4B}\\u{1EE4D}-\\u{1EE4F}\\u{1EE51}-\\u{1EE52}\\u{1EE54}\\u{1EE57}\\u{1EE59}\\u{1EE5B}\\u{1EE5D}\\u{1EE5F}\\u{1EE61}-\\u{1EE62}\\u{1EE64}\\u{1EE67}-\\u{1EE6A}\\u{1EE6C}-\\u{1EE72}\\u{1EE74}-\\u{1EE77}\\u{1EE79}-\\u{1EE7C}\\u{1EE7E}\\u{1EE80}-\\u{1EE89}\\u{1EE8B}-\\u{1EE9B}\\u{1EEA1}-\\u{1EEA3}\\u{1EEA5}-\\u{1EEA9}\\u{1EEAB}-\\u{1EEBB}\\u{20000}-\\u{2A6DF}\\u{2A700}-\\u{2B81D}\\u{2B820}-\\u{2CEAD}\\u{2CEB0}-\\u{2EBE0}\\u{2EBF0}-\\u{2EE5D}\\u{2F800}-\\u{2FA1D}\\u{30000}-\\u{3134A}\\u{31350}-\\u{33479}\\u0300-\\u036F\\u0483-\\u0489\\u0591-\\u05BD\\u05BF\\u05C1-\\u05C2\\u05C4-\\u05C5\\u05C7\\u0610-\\u061A\\u064B-\\u065F\\u0670\\u06D6-\\u06DC\\u06DF-\\u06E4\\u06E7-\\u06E8\\u06EA-\\u06ED\\u0711\\u0730-\\u074A\\u07A6-\\u07B0\\u07EB-\\u07F3\\u07FD\\u0816-\\u0819\\u081B-\\u0823\\u0825-\\u0827\\u0829-\\u082D\\u0859-\\u085B\\u0897-\\u089F\\u08CA-\\u08E1\\u08E3-\\u0903\\u093A-\\u093C\\u093E-\\u094F\\u0951-\\u0957\\u0962-\\u0963\\u0981-\\u0983\\u09BC\\u09BE-\\u09C4\\u09C7-\\u09C8\\u09CB-\\u09CD\\u09D7\\u09E2-\\u09E3\\u09FE\\u0A01-\\u0A03\\u0A3C\\u0A3E-\\u0A42\\u0A47-\\u0A48\\u0A4B-\\u0A4D\\u0A51\\u0A70-\\u0A71\\u0A75\\u0A81-\\u0A83\\u0ABC\\u0ABE-\\u0AC5\\u0AC7-\\u0AC9\\u0ACB-\\u0ACD\\u0AE2-\\u0AE3\\u0AFA-\\u0AFF\\u0B01-\\u0B03\\u0B3C\\u0B3E-\\u0B44\\u0B47-\\u0B48\\u0B4B-\\u0B4D\\u0B55-\\u0B57\\u0B62-\\u0B63\\u0B82\\u0BBE-\\u0BC2\\u0BC6-\\u0BC8\\u0BCA-\\u0BCD\\u0BD7\\u0C00-\\u0C04\\u0C3C\\u0C3E-\\u0C44\\u0C46-\\u0C48\\u0C4A-\\u0C4D\\u0C55-\\u0C56\\u0C62-\\u0C63\\u0C81-\\u0C83\\u0CBC\\u0CBE-\\u0CC4\\u0CC6-\\u0CC8\\u0CCA-\\u0CCD\\u0CD5-\\u0CD6\\u0CE2-\\u0CE3\\u0CF3\\u0D00-\\u0D03\\u0D3B-\\u0D3C\\u0D3E-\\u0D44\\u0D46-\\u0D48\\u0D4A-\\u0D4D\\u0D57\\u0D62-\\u0D63\\u0D81-\\u0D83\\u0DCA\\u0DCF-\\u0DD4\\u0DD6\\u0DD8-\\u0DDF\\u0DF2-\\u0DF3\\u0E31\\u0E34-\\u0E3A\\u0E47-\\u0E4E\\u0EB1\\u0EB4-\\u0EBC\\u0EC8-\\u0ECE\\u0F18-\\u0F19\\u0F35\\u0F37\\u0F39\\u0F3E-\\u0F3F\\u0F71-\\u0F84\\u0F86-\\u0F87\\u0F8D-\\u0F97\\u0F99-\\u0FBC\\u0FC6\\u102B-\\u103E\\u1056-\\u1059\\u105E-\\u1060\\u1062-\\u1064\\u1067-\\u106D\\u1071-\\u1074\\u1082-\\u108D\\u108F\\u109A-\\u109D\\u135D-\\u135F\\u1712-\\u1715\\u1732-\\u1734\\u1752-\\u1753\\u1772-\\u1773\\u17B4-\\u17D3\\u17DD\\u180B-\\u180D\\u180F\\u1885-\\u1886\\u18A9\\u1920-\\u192B\\u1930-\\u193B\\u1A17-\\u1A1B\\u1A55-\\u1A5E\\u1A60-\\u1A7C\\u1A7F\\u1AB0-\\u1ADD\\u1AE0-\\u1AEB\\u1B00-\\u1B04\\u1B34-\\u1B44\\u1B6B-\\u1B73\\u1B80-\\u1B82\\u1BA1-\\u1BAD\\u1BE6-\\u1BF3\\u1C24-\\u1C37\\u1CD0-\\u1CD2\\u1CD4-\\u1CE8\\u1CED\\u1CF4\\u1CF7-\\u1CF9\\u1DC0-\\u1DFF\\u20D0-\\u20F0\\u2CEF-\\u2CF1\\u2D7F\\u2DE0-\\u2DFF\\u302A-\\u302F\\u3099-\\u309A\\uA66F-\\uA672\\uA674-\\uA67D\\uA69E-\\uA69F\\uA6F0-\\uA6F1\\uA802\\uA806\\uA80B\\uA823-\\uA827\\uA82C\\uA880-\\uA881\\uA8B4-\\uA8C5\\uA8E0-\\uA8F1\\uA8FF\\uA926-\\uA92D\\uA947-\\uA953\\uA980-\\uA983\\uA9B3-\\uA9C0\\uA9E5\\uAA29-\\uAA36\\uAA43\\uAA4C-\\uAA4D\\uAA7B-\\uAA7D\\uAAB0\\uAAB2-\\uAAB4\\uAAB7-\\uAAB8\\uAABE-\\uAABF\\uAAC1\\uAAEB-\\uAAEF\\uAAF5-\\uAAF6\\uABE3-\\uABEA\\uABEC-\\uABED\\uFB1E\\uFE00-\\uFE0F\\uFE20-\\uFE2F\\u{101FD}\\u{102E0}\\u{10376}-\\u{1037A}\\u{10A01}-\\u{10A03}\\u{10A05}-\\u{10A06}\\u{10A0C}-\\u{10A0F}\\u{10A38}-\\u{10A3A}\\u{10A3F}\\u{10AE5}-\\u{10AE6}\\u{10D24}-\\u{10D27}\\u{10D69}-\\u{10D6D}\\u{10EAB}-\\u{10EAC}\\u{10EFA}-\\u{10EFF}\\u{10F46}-\\u{10F50}\\u{10F82}-\\u{10F85}\\u{11000}-\\u{11002}\\u{11038}-\\u{11046}\\u{11070}\\u{11073}-\\u{11074}\\u{1107F}-\\u{11082}\\u{110B0}-\\u{110BA}\\u{110C2}\\u{11100}-\\u{11102}\\u{11127}-\\u{11134}\\u{11145}-\\u{11146}\\u{11173}\\u{11180}-\\u{11182}\\u{111B3}-\\u{111C0}\\u{111C9}-\\u{111CC}\\u{111CE}-\\u{111CF}\\u{1122C}-\\u{11237}\\u{1123E}\\u{11241}\\u{112DF}-\\u{112EA}\\u{11300}-\\u{11303}\\u{1133B}-\\u{1133C}\\u{1133E}-\\u{11344}\\u{11347}-\\u{11348}\\u{1134B}-\\u{1134D}\\u{11357}\\u{11362}-\\u{11363}\\u{11366}-\\u{1136C}\\u{11370}-\\u{11374}\\u{113B8}-\\u{113C0}\\u{113C2}\\u{113C5}\\u{113C7}-\\u{113CA}\\u{113CC}-\\u{113D0}\\u{113D2}\\u{113E1}-\\u{113E2}\\u{11435}-\\u{11446}\\u{1145E}\\u{114B0}-\\u{114C3}\\u{115AF}-\\u{115B5}\\u{115B8}-\\u{115C0}\\u{115DC}-\\u{115DD}\\u{11630}-\\u{11640}\\u{116AB}-\\u{116B7}\\u{1171D}-\\u{1172B}\\u{1182C}-\\u{1183A}\\u{11930}-\\u{11935}\\u{11937}-\\u{11938}\\u{1193B}-\\u{1193E}\\u{11940}\\u{11942}-\\u{11943}\\u{119D1}-\\u{119D7}\\u{119DA}-\\u{119E0}\\u{119E4}\\u{11A01}-\\u{11A0A}\\u{11A33}-\\u{11A39}\\u{11A3B}-\\u{11A3E}\\u{11A47}\\u{11A51}-\\u{11A5B}\\u{11A8A}-\\u{11A99}\\u{11B60}-\\u{11B67}\\u{11C2F}-\\u{11C36}\\u{11C38}-\\u{11C3F}\\u{11C92}-\\u{11CA7}\\u{11CA9}-\\u{11CB6}\\u{11D31}-\\u{11D36}\\u{11D3A}\\u{11D3C}-\\u{11D3D}\\u{11D3F}-\\u{11D45}\\u{11D47}\\u{11D8A}-\\u{11D8E}\\u{11D90}-\\u{11D91}\\u{11D93}-\\u{11D97}\\u{11EF3}-\\u{11EF6}\\u{11F00}-\\u{11F01}\\u{11F03}\\u{11F34}-\\u{11F3A}\\u{11F3E}-\\u{11F42}\\u{11F5A}\\u{13440}\\u{13447}-\\u{13455}\\u{1611E}-\\u{1612F}\\u{16AF0}-\\u{16AF4}\\u{16B30}-\\u{16B36}\\u{16F4F}\\u{16F51}-\\u{16F87}\\u{16F8F}-\\u{16F92}\\u{16FE4}\\u{16FF0}-\\u{16FF1}\\u{1BC9D}-\\u{1BC9E}\\u{1CF00}-\\u{1CF2D}\\u{1CF30}-\\u{1CF46}\\u{1D165}-\\u{1D169}\\u{1D16D}-\\u{1D172}\\u{1D17B}-\\u{1D182}\\u{1D185}-\\u{1D18B}\\u{1D1AA}-\\u{1D1AD}\\u{1D242}-\\u{1D244}\\u{1DA00}-\\u{1DA36}\\u{1DA3B}-\\u{1DA6C}\\u{1DA75}\\u{1DA84}\\u{1DA9B}-\\u{1DA9F}\\u{1DAA1}-\\u{1DAAF}\\u{1E000}-\\u{1E006}\\u{1E008}-\\u{1E018}\\u{1E01B}-\\u{1E021}\\u{1E023}-\\u{1E024}\\u{1E026}-\\u{1E02A}\\u{1E08F}\\u{1E130}-\\u{1E136}\\u{1E2AE}\\u{1E2EC}-\\u{1E2EF}\\u{1E4EC}-\\u{1E4EF}\\u{1E5EE}-\\u{1E5EF}\\u{1E6E3}\\u{1E6E6}\\u{1E6EE}-\\u{1E6EF}\\u{1E6F5}\\u{1E8D0}-\\u{1E8D6}\\u{1E944}-\\u{1E94A}\\u{E0100}-\\u{E01EF}\\u0030-\\u0039\\u00B2-\\u00B3\\u00B9\\u00BC-\\u00BE\\u0660-\\u0669\\u06F0-\\u06F9\\u07C0-\\u07C9\\u0966-\\u096F\\u09E6-\\u09EF\\u09F4-\\u09F9\\u0A66-\\u0A6F\\u0AE6-\\u0AEF\\u0B66-\\u0B6F\\u0B72-\\u0B77\\u0BE6-\\u0BF2\\u0C66-\\u0C6F\\u0C78-\\u0C7E\\u0CE6-\\u0CEF\\u0D58-\\u0D5E\\u0D66-\\u0D78\\u0DE6-\\u0DEF\\u0E50-\\u0E59\\u0ED0-\\u0ED9\\u0F20-\\u0F33\\u1040-\\u1049\\u1090-\\u1099\\u1369-\\u137C\\u16EE-\\u16F0\\u17E0-\\u17E9\\u17F0-\\u17F9\\u1810-\\u1819\\u1946-\\u194F\\u19D0-\\u19DA\\u1A80-\\u1A89\\u1A90-\\u1A99\\u1B50-\\u1B59\\u1BB0-\\u1BB9\\u1C40-\\u1C49\\u1C50-\\u1C59\\u2070\\u2074-\\u2079\\u2080-\\u2089\\u2150-\\u2182\\u2185-\\u2189\\u2460-\\u249B\\u24EA-\\u24FF\\u2776-\\u2793\\u2CFD\\u3007\\u3021-\\u3029\\u3038-\\u303A\\u3192-\\u3195\\u3220-\\u3229\\u3248-\\u324F\\u3251-\\u325F\\u3280-\\u3289\\u32B1-\\u32BF\\uA620-\\uA629\\uA6E6-\\uA6EF\\uA830-\\uA835\\uA8D0-\\uA8D9\\uA900-\\uA909\\uA9D0-\\uA9D9\\uA9F0-\\uA9F9\\uAA50-\\uAA59\\uABF0-\\uABF9\\uFF10-\\uFF19\\u{10107}-\\u{10133}\\u{10140}-\\u{10178}\\u{1018A}-\\u{1018B}\\u{102E1}-\\u{102FB}\\u{10320}-\\u{10323}\\u{10341}\\u{1034A}\\u{103D1}-\\u{103D5}\\u{104A0}-\\u{104A9}\\u{10858}-\\u{1085F}\\u{10879}-\\u{1087F}\\u{108A7}-\\u{108AF}\\u{108FB}-\\u{108FF}\\u{10916}-\\u{1091B}\\u{109BC}-\\u{109BD}\\u{109C0}-\\u{109CF}\\u{109D2}-\\u{109FF}\\u{10A40}-\\u{10A48}\\u{10A7D}-\\u{10A7E}\\u{10A9D}-\\u{10A9F}\\u{10AEB}-\\u{10AEF}\\u{10B58}-\\u{10B5F}\\u{10B78}-\\u{10B7F}\\u{10BA9}-\\u{10BAF}\\u{10CFA}-\\u{10CFF}\\u{10D30}-\\u{10D39}\\u{10D40}-\\u{10D49}\\u{10E60}-\\u{10E7E}\\u{10F1D}-\\u{10F26}\\u{10F51}-\\u{10F54}\\u{10FC5}-\\u{10FCB}\\u{11052}-\\u{1106F}\\u{110F0}-\\u{110F9}\\u{11136}-\\u{1113F}\\u{111D0}-\\u{111D9}\\u{111E1}-\\u{111F4}\\u{112F0}-\\u{112F9}\\u{11450}-\\u{11459}\\u{114D0}-\\u{114D9}\\u{11650}-\\u{11659}\\u{116C0}-\\u{116C9}\\u{116D0}-\\u{116E3}\\u{11730}-\\u{1173B}\\u{118E0}-\\u{118F2}\\u{11950}-\\u{11959}\\u{11BF0}-\\u{11BF9}\\u{11C50}-\\u{11C6C}\\u{11D50}-\\u{11D59}\\u{11DA0}-\\u{11DA9}\\u{11DE0}-\\u{11DE9}\\u{11F50}-\\u{11F59}\\u{11FC0}-\\u{11FD4}\\u{12400}-\\u{1246E}\\u{16130}-\\u{16139}\\u{16A60}-\\u{16A69}\\u{16AC0}-\\u{16AC9}\\u{16B50}-\\u{16B59}\\u{16B5B}-\\u{16B61}\\u{16D70}-\\u{16D79}\\u{16E80}-\\u{16E96}\\u{16FF4}-\\u{16FF6}\\u{1CCF0}-\\u{1CCF9}\\u{1D2C0}-\\u{1D2D3}\\u{1D2E0}-\\u{1D2F3}\\u{1D360}-\\u{1D378}\\u{1D7CE}-\\u{1D7FF}\\u{1E140}-\\u{1E149}\\u{1E2F0}-\\u{1E2F9}\\u{1E4F0}-\\u{1E4F9}\\u{1E5F1}-\\u{1E5FA}\\u{1E8C7}-\\u{1E8CF}\\u{1E950}-\\u{1E959}\\u{1EC71}-\\u{1ECAB}\\u{1ECAD}-\\u{1ECAF}\\u{1ECB1}-\\u{1ECB4}\\u{1ED01}-\\u{1ED2D}\\u{1ED2F}-\\u{1ED3D}\\u{1F100}-\\u{1F10C}\\u{1FBF0}-\\u{1FBF9}_]+", "gu"),
+        nb = new WeakSet;
 
-    function nw() {
+    function nC() {
         let {
             isCaseSensitive: t = !1,
             ignoreDiacritics: n = !1,
@@ -26753,14 +26738,14 @@
                     return o
                 }
             }
-            return t instanceof RegExp ? (!t.global && (nE.has(t) || (nE.add(t), console.warn("[Fuse] tokenize regex ".concat(t, " lacks the global flag; only the first match per text will be returned. Add the 'g' flag.")))), n => n.match(t) || []) : t => t.match(nC) || []
+            return t instanceof RegExp ? (!t.global && (nb.has(t) || (nb.add(t), console.warn("[Fuse] tokenize regex ".concat(t, " lacks the global flag; only the first match per text will be returned. Add the 'g' flag.")))), n => n.match(t) || []) : t => t.match(nv) || []
         }(r);
         return {
-            tokenize: r => (t || (r = r.toLowerCase()), n && (r = no(r)), o(r))
+            tokenize: r => (t || (r = r.toLowerCase()), n && (r = nn(r)), o(r))
         }
     }
 
-    function nI(t, n, r, o) {
+    function nE(t, n, r, o) {
         let a = o.tokenize(n);
         if (!a.length) return;
         t.fieldCount++, t.docFieldCount.set(r, (t.docFieldCount.get(r) || 0) + 1);
@@ -26769,24 +26754,24 @@
         for (let n of (s || (s = new Map, t.docTermFieldHits.set(r, s)), i)) s.set(n, (s.get(n) || 0) + 1), t.df.set(n, (t.df.get(n) || 0) + 1)
     }
 
-    function nS(t, n, r, o) {
+    function nw(t, n, r, o) {
         let {
             i: a,
             v: i,
             $: s
         } = n;
-        if (void 0 !== i) return void nI(t, i, a, o);
+        if (void 0 !== i) return void nE(t, i, a, o);
         if (s)
             for (let n = 0; n < r; n++) {
                 let r = s[n];
                 if (r)
                     if (Array.isArray(r))
-                        for (let n of r) nI(t, n.v, a, o);
-                    else nI(t, r.v, a, o)
+                        for (let n of r) nE(t, n.v, a, o);
+                    else nE(t, r.v, a, o)
             }
     }
 
-    function nx(t, n) {
+    function nI(t, n) {
         if (0 === n.length) return;
         let r = Array.from(new Set(n)).sort((t, n) => t - n);
         for (let n of r) ! function(t, n) {
@@ -26819,22 +26804,22 @@
         for (let [n, r] of t.docTermFieldHits) s.set(n > a ? o(n) : n, r);
         t.docTermFieldHits = s
     }
-    class nA {
+    class nS {
         _getSearcher(t) {
             if (this._lastQuery === t) return this._lastSearcher;
-            let n = np(t, this._invertedIndex ? {
+            let n = nc(t, this._invertedIndex ? {
                 ...this.options,
                 _invertedIndex: this._invertedIndex
             } : this.options);
             return this._lastQuery = t, this._lastSearcher = n, n
         }
         setCollection(t, n) {
-            if (this._docs = t, n && !(n instanceof t7)) throw Error("Incorrect 'index' type");
-            if (this._myIndex = n || ne(this.options.keys, this._docs, {
+            if (this._docs = t, n && !(n instanceof t8)) throw Error("Incorrect 'index' type");
+            if (this._myIndex = n || t9(this.options.keys, this._docs, {
                     getFn: this.options.getFn,
                     fieldNormWeight: this.options.fieldNormWeight
                 }), this.options.useTokenSearch) {
-                let t = nw({
+                let t = nC({
                     isCaseSensitive: this.options.isCaseSensitive,
                     ignoreDiacritics: this.options.ignoreDiacritics,
                     tokenize: this.options.tokenize
@@ -26846,23 +26831,23 @@
                         docFieldCount: new Map,
                         docTermFieldHits: new Map
                     };
-                    for (let a of t) nS(o, a, n, r);
+                    for (let a of t) nw(o, a, n, r);
                     return o
                 }(this._myIndex.records, this._myIndex.keys.length, t)
             }
             this._invalidateSearcherCache()
         }
         add(t) {
-            if (!t$(t)) return;
+            if (!tX(t)) return;
             this._docs.push(t);
             let n = this._myIndex.add(t, this._docs.length - 1);
             if (this._invertedIndex && n) {
-                let t = nw({
+                let t = nC({
                     isCaseSensitive: this.options.isCaseSensitive,
                     ignoreDiacritics: this.options.ignoreDiacritics,
                     tokenize: this.options.tokenize
                 });
-                nS(this._invertedIndex, n, this._myIndex.keys.length, t)
+                nw(this._invertedIndex, n, this._myIndex.keys.length, t)
             }
             this._invalidateSearcherCache()
         }
@@ -26872,15 +26857,15 @@
                 r = [];
             for (let o = 0, a = this._docs.length; o < a; o += 1) t(this._docs[o], o) && (n.push(this._docs[o]), r.push(o));
             if (r.length) {
-                this._invertedIndex && nx(this._invertedIndex, r);
+                this._invertedIndex && nI(this._invertedIndex, r);
                 let t = new Set(r);
                 this._docs = this._docs.filter((n, r) => !t.has(r)), this._myIndex.removeAll(r), this._invalidateSearcherCache()
             }
             return n
         }
         removeAt(t) {
-            if (!Number.isInteger(t) || t < 0 || t >= this._docs.length) throw Error(t2);
-            this._invertedIndex && nx(this._invertedIndex, [t]);
+            if (!Number.isInteger(t) || t < 0 || t >= this._docs.length) throw Error(t0);
+            this._invertedIndex && nI(this._invertedIndex, [t]);
             let n = this._docs.splice(t, 1)[0];
             return this._myIndex.removeAt(t), this._invalidateSearcherCache(), n
         }
@@ -26901,16 +26886,16 @@
                     sortFn: l,
                     ignoreFieldNorm: u
                 } = this.options;
-            if (tY(t) && !t.trim()) {
+            if (tJ(t) && !t.trim()) {
                 let t = this._docs.map((t, n) => ({
                     item: t,
                     refIndex: n
                 }));
-                return tX(o) && o > -1 && (t = t.slice(0, o)), t
+                return tZ(o) && o > -1 && (t = t.slice(0, o)), t
             }
-            if (tX(o) && o > 0 && tY(t)) {
-                let n = new nb(o);
-                tY(this._docs[0]) ? this._searchStringList(t, {
+            if (tZ(o) && o > 0 && tJ(t)) {
+                let n = new ny(o);
+                tJ(this._docs[0]) ? this._searchStringList(t, {
                     heap: n,
                     ignoreFieldNorm: u
                 }) : this._searchObjectList(t, {
@@ -26919,20 +26904,20 @@
                 }), r = n.extractSorted(l)
             } else ! function(t, n) {
                 let {
-                    ignoreFieldNorm: r = t9.ignoreFieldNorm
+                    ignoreFieldNorm: r = t6.ignoreFieldNorm
                 } = n;
                 t.forEach(t => {
-                    t.score = nv(t.matches, {
+                    t.score = ng(t.matches, {
                         ignoreFieldNorm: r
                     })
                 })
-            }(r = tY(t) ? tY(this._docs[0]) ? this._searchStringList(t) : this._searchObjectList(t) : this._searchLogical(t), {
+            }(r = tJ(t) ? tJ(this._docs[0]) ? this._searchStringList(t) : this._searchObjectList(t) : this._searchLogical(t), {
                 ignoreFieldNorm: u
-            }), s && r.sort(l), tX(o) && o > -1 && (r = r.slice(0, o));
+            }), s && r.sort(l), tZ(o) && o > -1 && (r = r.slice(0, o));
             return function(t, n) {
                 let {
-                    includeMatches: r = t9.includeMatches,
-                    includeScore: o = t9.includeScore
+                    includeMatches: r = t6.includeMatches,
+                    includeScore: o = t6.includeScore
                 } = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {};
                 return t.map(t => {
                     let a, {
@@ -26943,7 +26928,7 @@
                             refIndex: i
                         };
                     return r && (a = [], t.matches.forEach(t => {
-                        if (!t$(t.indices) || !t.indices.length) return;
+                        if (!tX(t.indices) || !t.indices.length) return;
                         let n = {
                             indices: t.indices,
                             value: t.value
@@ -26969,7 +26954,7 @@
                     i: l,
                     n: u
                 } = t;
-                if (!t$(i)) return;
+                if (!tX(i)) return;
                 let c = o.searchIn(i);
                 if (c.isMatch) {
                     let t = {
@@ -26986,7 +26971,7 @@
                             idx: l,
                             matches: o
                         };
-                        n ? (t.score = nv(t.matches, {
+                        n ? (t.score = ng(t.matches, {
                             ignoreFieldNorm: r
                         }), n.shouldInsert(t.score) && n.insert(t)) : s.push(t)
                     }
@@ -26994,7 +26979,7 @@
             }), s
         }
         _searchLogical(t) {
-            let n = ny(t, this.options),
+            let n = nf(t, this.options),
                 r = (t, n, o) => {
                     if (!("children" in t)) {
                         let r, {
@@ -27024,7 +27009,7 @@
                     for (let t = 0, l = a.length; t < l; t += 1) {
                         let l = r(a[t], n, o);
                         if (l.length) s.push(...l);
-                        else if (i === nm) return []
+                        else if (i === nd) return []
                     }
                     return s
                 },
@@ -27036,7 +27021,7 @@
                     $: o,
                     i: s
                 } = t;
-                if (t$(o)) {
+                if (tX(o)) {
                     let t = r(n, o, s);
                     t.length && (a.has(s) || (a.set(s, {
                         idx: s,
@@ -27064,7 +27049,7 @@
                     $: s,
                     i: u
                 } = t;
-                if (!t$(s)) return;
+                if (!tX(s)) return;
                 let c = [],
                     d = !1,
                     p = !1;
@@ -27081,7 +27066,7 @@
                         item: s,
                         matches: c
                     };
-                    n ? (t.score = nv(t.matches, {
+                    n ? (t.score = ng(t.matches, {
                         ignoreFieldNorm: r
                     }), n.shouldInsert(t.score) && n.insert(t)) : l.push(t)
                 }
@@ -27093,15 +27078,15 @@
                 value: r,
                 searcher: o
             } = t;
-            if (!t$(r)) return [];
+            if (!tX(r)) return [];
             let a = [];
-            if (tJ(r)) r.forEach(t => {
+            if (tG(r)) r.forEach(t => {
                 let {
                     v: r,
                     i: i,
                     n: s
                 } = t;
-                if (!t$(r)) return;
+                if (!tX(r)) return;
                 let l = o.searchIn(r);
                 if (l.isMatch) {
                     let t = {
@@ -27153,30 +27138,30 @@
         }
         constructor(t, n, r) {
             this.options = {
-                ...t9,
+                ...t6,
                 ...n
-            }, this.options.useExtendedSearch, this.options.useTokenSearch, this._keyStore = new t3(this.options.keys), this._docs = t, this._myIndex = null, this._invertedIndex = null, this.setCollection(t, r), this._lastQuery = null, this._lastSearcher = null
+            }, this.options.useExtendedSearch, this.options.useTokenSearch, this._keyStore = new t2(this.options.keys), this._docs = t, this._myIndex = null, this._invertedIndex = null, this.setCollection(t, r), this._lastQuery = null, this._lastSearcher = null
         }
     }
-    nA.version = "7.4.0", nA.createIndex = ne, nA.parseIndex = function(t) {
+    nS.version = "7.4.0", nS.createIndex = t9, nS.parseIndex = function(t) {
         let {
-            getFn: n = t9.getFn,
-            fieldNormWeight: r = t9.fieldNormWeight
+            getFn: n = t6.getFn,
+            fieldNormWeight: r = t6.fieldNormWeight
         } = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {}, {
             keys: o,
             records: a
-        } = t, i = new t7({
+        } = t, i = new t8({
             getFn: n,
             fieldNormWeight: r
         });
         return i.setKeys(o), i.setIndexRecords(a), i
-    }, nA.config = t9, nA.match = function(t, n, r) {
+    }, nS.config = t6, nS.match = function(t, n, r) {
         if (r && r.useTokenSearch) throw Error("Fuse.match does not support useTokenSearch: token search requires corpus-level statistics (df, fieldCount) that a one-off string comparison does not have. Use new Fuse(...).search(...) instead.");
-        return np(t, {
-            ...t9,
+        return nc(t, {
+            ...t6,
             ...r
         }).searchIn(n)
-    }, nA.parseQuery = ny, nd(class {
+    }, nS.parseQuery = nf, nu(class {
         static condition(t, n) {
             return n.useExtendedSearch
         }
@@ -27191,7 +27176,7 @@
                 isCaseSensitive: o,
                 ignoreDiacritics: a
             } = this.options;
-            t = o ? t : t.toLowerCase(), t = a ? no(t) : t;
+            t = o ? t : t.toLowerCase(), t = a ? nn(t) : t;
             let i = 0,
                 s = [],
                 l = 0,
@@ -27206,7 +27191,7 @@
                             indices: d,
                             score: p
                         } = o.search(t);
-                    if (c) i += 1, l += p, o.type.startsWith("inverse") && (u = !0), r && (ni.has(o.type) ? s.push(...d) : s.push(d));
+                    if (c) i += 1, l += p, o.type.startsWith("inverse") && (u = !0), r && (no.has(o.type) ? s.push(...d) : s.push(d));
                     else {
                         l = 0, i = 0, s.length = 0, u = !1;
                         break
@@ -27217,7 +27202,7 @@
                         isMatch: !0,
                         score: l / i
                     };
-                    return u && (t.hasInverse = !0), r && (t.indices = nt(s)), t
+                    return u && (t.hasInverse = !0), r && (t.indices = t7(s)), t
                 }
             }
             return {
@@ -27226,15 +27211,15 @@
             }
         }
         constructor(t, {
-            isCaseSensitive: n = t9.isCaseSensitive,
-            ignoreDiacritics: r = t9.ignoreDiacritics,
-            includeMatches: o = t9.includeMatches,
-            minMatchCharLength: a = t9.minMatchCharLength,
-            ignoreLocation: i = t9.ignoreLocation,
-            findAllMatches: s = t9.findAllMatches,
-            location: l = t9.location,
-            threshold: u = t9.threshold,
-            distance: c = t9.distance
+            isCaseSensitive: n = t6.isCaseSensitive,
+            ignoreDiacritics: r = t6.ignoreDiacritics,
+            includeMatches: o = t6.includeMatches,
+            minMatchCharLength: a = t6.minMatchCharLength,
+            ignoreLocation: i = t6.ignoreLocation,
+            findAllMatches: s = t6.findAllMatches,
+            location: l = t6.location,
+            threshold: u = t6.threshold,
+            distance: c = t6.distance
         } = {}) {
             this.query = null, this.options = {
                 isCaseSensitive: n,
@@ -27246,7 +27231,7 @@
                 location: l,
                 threshold: u,
                 distance: c
-            }, t = n ? t : t.toLowerCase(), t = r ? no(t) : t, this.pattern = t, this.query = function(t) {
+            }, t = n ? t : t.toLowerCase(), t = r ? nn(t) : t, this.pattern = t, this.query = function(t) {
                 let n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
                 return t.replace(/\\\|/g, "\0").split("|").map(t => {
                     let r = (function(t) {
@@ -27286,15 +27271,15 @@
                         let a = r[t],
                             i = !1,
                             s = -1;
-                        for (; !i && ++s < nl;) {
-                            let t = ns[s],
-                                r = nu(a, t.multiRegex);
+                        for (; !i && ++s < ni;) {
+                            let t = na[s],
+                                r = ns(a, t.multiRegex);
                             r && (o.push(t.create(r, n)), i = !0)
                         }
                         if (!i)
-                            for (s = -1; ++s < nl;) {
-                                let t = ns[s],
-                                    r = nu(a, t.singleRegex);
+                            for (s = -1; ++s < ni;) {
+                                let t = na[s],
+                                    r = ns(a, t.singleRegex);
                                 if (r) {
                                     o.push(t.create(r, n));
                                     break
@@ -27305,7 +27290,7 @@
                 })
             }(this.pattern, this.options)
         }
-    }), nd(class {
+    }), nu(class {
         static condition(t, n) {
             return n.useTokenSearch
         }
@@ -27333,10 +27318,10 @@
                 isMatch: !0,
                 score: Math.max(.001, o > 0 ? 1 - r / o : 0)
             };
-            return this.options.includeMatches && n.length && (l.indices = nt(n)), this.combineAll && (this.useMask ? l.matchedMask = i : l.matchedTerms = s, l.termCount = this.numTerms), l
+            return this.options.includeMatches && n.length && (l.indices = t7(n)), this.combineAll && (this.useMask ? l.matchedMask = i : l.matchedTerms = s, l.termCount = this.numTerms), l
         }
         constructor(t, n) {
-            this.options = n, this.analyzer = nw({
+            this.options = n, this.analyzer = nC({
                 isCaseSensitive: n.isCaseSensitive,
                 ignoreDiacritics: n.ignoreDiacritics,
                 tokenize: n.tokenize
@@ -27347,7 +27332,7 @@
                     fieldCount: a
                 } = n._invertedIndex;
             for (let t of (this.termSearchers = [], this.idfWeights = [], r)) {
-                this.termSearchers.push(new na(t, {
+                this.termSearchers.push(new nr(t, {
                     location: n.location,
                     threshold: n.threshold,
                     distance: n.distance,
@@ -27364,38 +27349,38 @@
             }
             this.combineAll = "all" === n.tokenMatch, this.numTerms = this.termSearchers.length, this.useMask = this.numTerms <= 31
         }
-    }), nA.use = function() {
+    }), nS.use = function() {
         for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
-        n.forEach(t => nd(t))
+        n.forEach(t => nu(t))
     };
-    let nT = function() {
+    let nx = function() {
             for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
             return n.filter(t => t.length > 0).map((t, n) => 0 === n ? t.replace(/\/+$/, "") : t.replaceAll(/^\/+|\/+$/g, "")).join("/")
         },
-        nk = () => "titles" === n.default.env.recommendedSearchType || "scoredTitles" === n.default.env.recommendedSearchType || "m1ReleaseVariant1" === n.default.env.recommendedSearchType || "m1ReleaseVariant2" === n.default.env.recommendedSearchType,
-        nD = () => "scoredTitles" === n.default.env.recommendedSearchType || "m1ReleaseVariant1" === n.default.env.recommendedSearchType || "m1ReleaseVariant2" === n.default.env.recommendedSearchType,
-        nj = t => 1 / (12.5 + t),
-        n_ = t => t.replaceAll(RegExp("[^\\u0041-\\u005A\\u0061-\\u007A\\u00AA\\u00B5\\u00BA\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02C1\\u02C6-\\u02D1\\u02E0-\\u02E4\\u02EC\\u02EE\\u0370-\\u0374\\u0376-\\u0377\\u037A-\\u037D\\u037F\\u0386\\u0388-\\u038A\\u038C\\u038E-\\u03A1\\u03A3-\\u03F5\\u03F7-\\u0481\\u048A-\\u052F\\u0531-\\u0556\\u0559\\u0560-\\u0588\\u05D0-\\u05EA\\u05EF-\\u05F2\\u0620-\\u064A\\u066E-\\u066F\\u0671-\\u06D3\\u06D5\\u06E5-\\u06E6\\u06EE-\\u06EF\\u06FA-\\u06FC\\u06FF\\u0710\\u0712-\\u072F\\u074D-\\u07A5\\u07B1\\u07CA-\\u07EA\\u07F4-\\u07F5\\u07FA\\u0800-\\u0815\\u081A\\u0824\\u0828\\u0840-\\u0858\\u0860-\\u086A\\u0870-\\u0887\\u0889-\\u088F\\u08A0-\\u08C9\\u0904-\\u0939\\u093D\\u0950\\u0958-\\u0961\\u0971-\\u0980\\u0985-\\u098C\\u098F-\\u0990\\u0993-\\u09A8\\u09AA-\\u09B0\\u09B2\\u09B6-\\u09B9\\u09BD\\u09CE\\u09DC-\\u09DD\\u09DF-\\u09E1\\u09F0-\\u09F1\\u09FC\\u0A05-\\u0A0A\\u0A0F-\\u0A10\\u0A13-\\u0A28\\u0A2A-\\u0A30\\u0A32-\\u0A33\\u0A35-\\u0A36\\u0A38-\\u0A39\\u0A59-\\u0A5C\\u0A5E\\u0A72-\\u0A74\\u0A85-\\u0A8D\\u0A8F-\\u0A91\\u0A93-\\u0AA8\\u0AAA-\\u0AB0\\u0AB2-\\u0AB3\\u0AB5-\\u0AB9\\u0ABD\\u0AD0\\u0AE0-\\u0AE1\\u0AF9\\u0B05-\\u0B0C\\u0B0F-\\u0B10\\u0B13-\\u0B28\\u0B2A-\\u0B30\\u0B32-\\u0B33\\u0B35-\\u0B39\\u0B3D\\u0B5C-\\u0B5D\\u0B5F-\\u0B61\\u0B71\\u0B83\\u0B85-\\u0B8A\\u0B8E-\\u0B90\\u0B92-\\u0B95\\u0B99-\\u0B9A\\u0B9C\\u0B9E-\\u0B9F\\u0BA3-\\u0BA4\\u0BA8-\\u0BAA\\u0BAE-\\u0BB9\\u0BD0\\u0C05-\\u0C0C\\u0C0E-\\u0C10\\u0C12-\\u0C28\\u0C2A-\\u0C39\\u0C3D\\u0C58-\\u0C5A\\u0C5C-\\u0C5D\\u0C60-\\u0C61\\u0C80\\u0C85-\\u0C8C\\u0C8E-\\u0C90\\u0C92-\\u0CA8\\u0CAA-\\u0CB3\\u0CB5-\\u0CB9\\u0CBD\\u0CDC-\\u0CDE\\u0CE0-\\u0CE1\\u0CF1-\\u0CF2\\u0D04-\\u0D0C\\u0D0E-\\u0D10\\u0D12-\\u0D3A\\u0D3D\\u0D4E\\u0D54-\\u0D56\\u0D5F-\\u0D61\\u0D7A-\\u0D7F\\u0D85-\\u0D96\\u0D9A-\\u0DB1\\u0DB3-\\u0DBB\\u0DBD\\u0DC0-\\u0DC6\\u0E01-\\u0E30\\u0E32-\\u0E33\\u0E40-\\u0E46\\u0E81-\\u0E82\\u0E84\\u0E86-\\u0E8A\\u0E8C-\\u0EA3\\u0EA5\\u0EA7-\\u0EB0\\u0EB2-\\u0EB3\\u0EBD\\u0EC0-\\u0EC4\\u0EC6\\u0EDC-\\u0EDF\\u0F00\\u0F40-\\u0F47\\u0F49-\\u0F6C\\u0F88-\\u0F8C\\u1000-\\u102A\\u103F\\u1050-\\u1055\\u105A-\\u105D\\u1061\\u1065-\\u1066\\u106E-\\u1070\\u1075-\\u1081\\u108E\\u10A0-\\u10C5\\u10C7\\u10CD\\u10D0-\\u10FA\\u10FC-\\u1248\\u124A-\\u124D\\u1250-\\u1256\\u1258\\u125A-\\u125D\\u1260-\\u1288\\u128A-\\u128D\\u1290-\\u12B0\\u12B2-\\u12B5\\u12B8-\\u12BE\\u12C0\\u12C2-\\u12C5\\u12C8-\\u12D6\\u12D8-\\u1310\\u1312-\\u1315\\u1318-\\u135A\\u1380-\\u138F\\u13A0-\\u13F5\\u13F8-\\u13FD\\u1401-\\u166C\\u166F-\\u167F\\u1681-\\u169A\\u16A0-\\u16EA\\u16F1-\\u16F8\\u1700-\\u1711\\u171F-\\u1731\\u1740-\\u1751\\u1760-\\u176C\\u176E-\\u1770\\u1780-\\u17B3\\u17D7\\u17DC\\u1820-\\u1878\\u1880-\\u1884\\u1887-\\u18A8\\u18AA\\u18B0-\\u18F5\\u1900-\\u191E\\u1950-\\u196D\\u1970-\\u1974\\u1980-\\u19AB\\u19B0-\\u19C9\\u1A00-\\u1A16\\u1A20-\\u1A54\\u1AA7\\u1B05-\\u1B33\\u1B45-\\u1B4C\\u1B83-\\u1BA0\\u1BAE-\\u1BAF\\u1BBA-\\u1BE5\\u1C00-\\u1C23\\u1C4D-\\u1C4F\\u1C5A-\\u1C7D\\u1C80-\\u1C8A\\u1C90-\\u1CBA\\u1CBD-\\u1CBF\\u1CE9-\\u1CEC\\u1CEE-\\u1CF3\\u1CF5-\\u1CF6\\u1CFA\\u1D00-\\u1DBF\\u1E00-\\u1F15\\u1F18-\\u1F1D\\u1F20-\\u1F45\\u1F48-\\u1F4D\\u1F50-\\u1F57\\u1F59\\u1F5B\\u1F5D\\u1F5F-\\u1F7D\\u1F80-\\u1FB4\\u1FB6-\\u1FBC\\u1FBE\\u1FC2-\\u1FC4\\u1FC6-\\u1FCC\\u1FD0-\\u1FD3\\u1FD6-\\u1FDB\\u1FE0-\\u1FEC\\u1FF2-\\u1FF4\\u1FF6-\\u1FFC\\u2071\\u207F\\u2090-\\u209C\\u2102\\u2107\\u210A-\\u2113\\u2115\\u2119-\\u211D\\u2124\\u2126\\u2128\\u212A-\\u212D\\u212F-\\u2139\\u213C-\\u213F\\u2145-\\u2149\\u214E\\u2183-\\u2184\\u2C00-\\u2CE4\\u2CEB-\\u2CEE\\u2CF2-\\u2CF3\\u2D00-\\u2D25\\u2D27\\u2D2D\\u2D30-\\u2D67\\u2D6F\\u2D80-\\u2D96\\u2DA0-\\u2DA6\\u2DA8-\\u2DAE\\u2DB0-\\u2DB6\\u2DB8-\\u2DBE\\u2DC0-\\u2DC6\\u2DC8-\\u2DCE\\u2DD0-\\u2DD6\\u2DD8-\\u2DDE\\u2E2F\\u3005-\\u3006\\u3031-\\u3035\\u303B-\\u303C\\u3041-\\u3096\\u309D-\\u309F\\u30A1-\\u30FA\\u30FC-\\u30FF\\u3105-\\u312F\\u3131-\\u318E\\u31A0-\\u31BF\\u31F0-\\u31FF\\u3400-\\u4DBF\\u4E00-\\uA48C\\uA4D0-\\uA4FD\\uA500-\\uA60C\\uA610-\\uA61F\\uA62A-\\uA62B\\uA640-\\uA66E\\uA67F-\\uA69D\\uA6A0-\\uA6E5\\uA717-\\uA71F\\uA722-\\uA788\\uA78B-\\uA7DC\\uA7F1-\\uA801\\uA803-\\uA805\\uA807-\\uA80A\\uA80C-\\uA822\\uA840-\\uA873\\uA882-\\uA8B3\\uA8F2-\\uA8F7\\uA8FB\\uA8FD-\\uA8FE\\uA90A-\\uA925\\uA930-\\uA946\\uA960-\\uA97C\\uA984-\\uA9B2\\uA9CF\\uA9E0-\\uA9E4\\uA9E6-\\uA9EF\\uA9FA-\\uA9FE\\uAA00-\\uAA28\\uAA40-\\uAA42\\uAA44-\\uAA4B\\uAA60-\\uAA76\\uAA7A\\uAA7E-\\uAAAF\\uAAB1\\uAAB5-\\uAAB6\\uAAB9-\\uAABD\\uAAC0\\uAAC2\\uAADB-\\uAADD\\uAAE0-\\uAAEA\\uAAF2-\\uAAF4\\uAB01-\\uAB06\\uAB09-\\uAB0E\\uAB11-\\uAB16\\uAB20-\\uAB26\\uAB28-\\uAB2E\\uAB30-\\uAB5A\\uAB5C-\\uAB69\\uAB70-\\uABE2\\uAC00-\\uD7A3\\uD7B0-\\uD7C6\\uD7CB-\\uD7FB\\uF900-\\uFA6D\\uFA70-\\uFAD9\\uFB00-\\uFB06\\uFB13-\\uFB17\\uFB1D\\uFB1F-\\uFB28\\uFB2A-\\uFB36\\uFB38-\\uFB3C\\uFB3E\\uFB40-\\uFB41\\uFB43-\\uFB44\\uFB46-\\uFBB1\\uFBD3-\\uFD3D\\uFD50-\\uFD8F\\uFD92-\\uFDC7\\uFDF0-\\uFDFB\\uFE70-\\uFE74\\uFE76-\\uFEFC\\uFF21-\\uFF3A\\uFF41-\\uFF5A\\uFF66-\\uFFBE\\uFFC2-\\uFFC7\\uFFCA-\\uFFCF\\uFFD2-\\uFFD7\\uFFDA-\\uFFDC\\u{10000}-\\u{1000B}\\u{1000D}-\\u{10026}\\u{10028}-\\u{1003A}\\u{1003C}-\\u{1003D}\\u{1003F}-\\u{1004D}\\u{10050}-\\u{1005D}\\u{10080}-\\u{100FA}\\u{10280}-\\u{1029C}\\u{102A0}-\\u{102D0}\\u{10300}-\\u{1031F}\\u{1032D}-\\u{10340}\\u{10342}-\\u{10349}\\u{10350}-\\u{10375}\\u{10380}-\\u{1039D}\\u{103A0}-\\u{103C3}\\u{103C8}-\\u{103CF}\\u{10400}-\\u{1049D}\\u{104B0}-\\u{104D3}\\u{104D8}-\\u{104FB}\\u{10500}-\\u{10527}\\u{10530}-\\u{10563}\\u{10570}-\\u{1057A}\\u{1057C}-\\u{1058A}\\u{1058C}-\\u{10592}\\u{10594}-\\u{10595}\\u{10597}-\\u{105A1}\\u{105A3}-\\u{105B1}\\u{105B3}-\\u{105B9}\\u{105BB}-\\u{105BC}\\u{105C0}-\\u{105F3}\\u{10600}-\\u{10736}\\u{10740}-\\u{10755}\\u{10760}-\\u{10767}\\u{10780}-\\u{10785}\\u{10787}-\\u{107B0}\\u{107B2}-\\u{107BA}\\u{10800}-\\u{10805}\\u{10808}\\u{1080A}-\\u{10835}\\u{10837}-\\u{10838}\\u{1083C}\\u{1083F}-\\u{10855}\\u{10860}-\\u{10876}\\u{10880}-\\u{1089E}\\u{108E0}-\\u{108F2}\\u{108F4}-\\u{108F5}\\u{10900}-\\u{10915}\\u{10920}-\\u{10939}\\u{10940}-\\u{10959}\\u{10980}-\\u{109B7}\\u{109BE}-\\u{109BF}\\u{10A00}\\u{10A10}-\\u{10A13}\\u{10A15}-\\u{10A17}\\u{10A19}-\\u{10A35}\\u{10A60}-\\u{10A7C}\\u{10A80}-\\u{10A9C}\\u{10AC0}-\\u{10AC7}\\u{10AC9}-\\u{10AE4}\\u{10B00}-\\u{10B35}\\u{10B40}-\\u{10B55}\\u{10B60}-\\u{10B72}\\u{10B80}-\\u{10B91}\\u{10C00}-\\u{10C48}\\u{10C80}-\\u{10CB2}\\u{10CC0}-\\u{10CF2}\\u{10D00}-\\u{10D23}\\u{10D4A}-\\u{10D65}\\u{10D6F}-\\u{10D85}\\u{10E80}-\\u{10EA9}\\u{10EB0}-\\u{10EB1}\\u{10EC2}-\\u{10EC7}\\u{10F00}-\\u{10F1C}\\u{10F27}\\u{10F30}-\\u{10F45}\\u{10F70}-\\u{10F81}\\u{10FB0}-\\u{10FC4}\\u{10FE0}-\\u{10FF6}\\u{11003}-\\u{11037}\\u{11071}-\\u{11072}\\u{11075}\\u{11083}-\\u{110AF}\\u{110D0}-\\u{110E8}\\u{11103}-\\u{11126}\\u{11144}\\u{11147}\\u{11150}-\\u{11172}\\u{11176}\\u{11183}-\\u{111B2}\\u{111C1}-\\u{111C4}\\u{111DA}\\u{111DC}\\u{11200}-\\u{11211}\\u{11213}-\\u{1122B}\\u{1123F}-\\u{11240}\\u{11280}-\\u{11286}\\u{11288}\\u{1128A}-\\u{1128D}\\u{1128F}-\\u{1129D}\\u{1129F}-\\u{112A8}\\u{112B0}-\\u{112DE}\\u{11305}-\\u{1130C}\\u{1130F}-\\u{11310}\\u{11313}-\\u{11328}\\u{1132A}-\\u{11330}\\u{11332}-\\u{11333}\\u{11335}-\\u{11339}\\u{1133D}\\u{11350}\\u{1135D}-\\u{11361}\\u{11380}-\\u{11389}\\u{1138B}\\u{1138E}\\u{11390}-\\u{113B5}\\u{113B7}\\u{113D1}\\u{113D3}\\u{11400}-\\u{11434}\\u{11447}-\\u{1144A}\\u{1145F}-\\u{11461}\\u{11480}-\\u{114AF}\\u{114C4}-\\u{114C5}\\u{114C7}\\u{11580}-\\u{115AE}\\u{115D8}-\\u{115DB}\\u{11600}-\\u{1162F}\\u{11644}\\u{11680}-\\u{116AA}\\u{116B8}\\u{11700}-\\u{1171A}\\u{11740}-\\u{11746}\\u{11800}-\\u{1182B}\\u{118A0}-\\u{118DF}\\u{118FF}-\\u{11906}\\u{11909}\\u{1190C}-\\u{11913}\\u{11915}-\\u{11916}\\u{11918}-\\u{1192F}\\u{1193F}\\u{11941}\\u{119A0}-\\u{119A7}\\u{119AA}-\\u{119D0}\\u{119E1}\\u{119E3}\\u{11A00}\\u{11A0B}-\\u{11A32}\\u{11A3A}\\u{11A50}\\u{11A5C}-\\u{11A89}\\u{11A9D}\\u{11AB0}-\\u{11AF8}\\u{11BC0}-\\u{11BE0}\\u{11C00}-\\u{11C08}\\u{11C0A}-\\u{11C2E}\\u{11C40}\\u{11C72}-\\u{11C8F}\\u{11D00}-\\u{11D06}\\u{11D08}-\\u{11D09}\\u{11D0B}-\\u{11D30}\\u{11D46}\\u{11D60}-\\u{11D65}\\u{11D67}-\\u{11D68}\\u{11D6A}-\\u{11D89}\\u{11D98}\\u{11DB0}-\\u{11DDB}\\u{11EE0}-\\u{11EF2}\\u{11F02}\\u{11F04}-\\u{11F10}\\u{11F12}-\\u{11F33}\\u{11FB0}\\u{12000}-\\u{12399}\\u{12480}-\\u{12543}\\u{12F90}-\\u{12FF0}\\u{13000}-\\u{1342F}\\u{13441}-\\u{13446}\\u{13460}-\\u{143FA}\\u{14400}-\\u{14646}\\u{16100}-\\u{1611D}\\u{16800}-\\u{16A38}\\u{16A40}-\\u{16A5E}\\u{16A70}-\\u{16ABE}\\u{16AD0}-\\u{16AED}\\u{16B00}-\\u{16B2F}\\u{16B40}-\\u{16B43}\\u{16B63}-\\u{16B77}\\u{16B7D}-\\u{16B8F}\\u{16D40}-\\u{16D6C}\\u{16E40}-\\u{16E7F}\\u{16EA0}-\\u{16EB8}\\u{16EBB}-\\u{16ED3}\\u{16F00}-\\u{16F4A}\\u{16F50}\\u{16F93}-\\u{16F9F}\\u{16FE0}-\\u{16FE1}\\u{16FE3}\\u{16FF2}-\\u{16FF3}\\u{17000}-\\u{18CD5}\\u{18CFF}-\\u{18D1E}\\u{18D80}-\\u{18DF2}\\u{1AFF0}-\\u{1AFF3}\\u{1AFF5}-\\u{1AFFB}\\u{1AFFD}-\\u{1AFFE}\\u{1B000}-\\u{1B122}\\u{1B132}\\u{1B150}-\\u{1B152}\\u{1B155}\\u{1B164}-\\u{1B167}\\u{1B170}-\\u{1B2FB}\\u{1BC00}-\\u{1BC6A}\\u{1BC70}-\\u{1BC7C}\\u{1BC80}-\\u{1BC88}\\u{1BC90}-\\u{1BC99}\\u{1D400}-\\u{1D454}\\u{1D456}-\\u{1D49C}\\u{1D49E}-\\u{1D49F}\\u{1D4A2}\\u{1D4A5}-\\u{1D4A6}\\u{1D4A9}-\\u{1D4AC}\\u{1D4AE}-\\u{1D4B9}\\u{1D4BB}\\u{1D4BD}-\\u{1D4C3}\\u{1D4C5}-\\u{1D505}\\u{1D507}-\\u{1D50A}\\u{1D50D}-\\u{1D514}\\u{1D516}-\\u{1D51C}\\u{1D51E}-\\u{1D539}\\u{1D53B}-\\u{1D53E}\\u{1D540}-\\u{1D544}\\u{1D546}\\u{1D54A}-\\u{1D550}\\u{1D552}-\\u{1D6A5}\\u{1D6A8}-\\u{1D6C0}\\u{1D6C2}-\\u{1D6DA}\\u{1D6DC}-\\u{1D6FA}\\u{1D6FC}-\\u{1D714}\\u{1D716}-\\u{1D734}\\u{1D736}-\\u{1D74E}\\u{1D750}-\\u{1D76E}\\u{1D770}-\\u{1D788}\\u{1D78A}-\\u{1D7A8}\\u{1D7AA}-\\u{1D7C2}\\u{1D7C4}-\\u{1D7CB}\\u{1DF00}-\\u{1DF1E}\\u{1DF25}-\\u{1DF2A}\\u{1E030}-\\u{1E06D}\\u{1E100}-\\u{1E12C}\\u{1E137}-\\u{1E13D}\\u{1E14E}\\u{1E290}-\\u{1E2AD}\\u{1E2C0}-\\u{1E2EB}\\u{1E4D0}-\\u{1E4EB}\\u{1E5D0}-\\u{1E5ED}\\u{1E5F0}\\u{1E6C0}-\\u{1E6DE}\\u{1E6E0}-\\u{1E6E2}\\u{1E6E4}-\\u{1E6E5}\\u{1E6E7}-\\u{1E6ED}\\u{1E6F0}-\\u{1E6F4}\\u{1E6FE}-\\u{1E6FF}\\u{1E7E0}-\\u{1E7E6}\\u{1E7E8}-\\u{1E7EB}\\u{1E7ED}-\\u{1E7EE}\\u{1E7F0}-\\u{1E7FE}\\u{1E800}-\\u{1E8C4}\\u{1E900}-\\u{1E943}\\u{1E94B}\\u{1EE00}-\\u{1EE03}\\u{1EE05}-\\u{1EE1F}\\u{1EE21}-\\u{1EE22}\\u{1EE24}\\u{1EE27}\\u{1EE29}-\\u{1EE32}\\u{1EE34}-\\u{1EE37}\\u{1EE39}\\u{1EE3B}\\u{1EE42}\\u{1EE47}\\u{1EE49}\\u{1EE4B}\\u{1EE4D}-\\u{1EE4F}\\u{1EE51}-\\u{1EE52}\\u{1EE54}\\u{1EE57}\\u{1EE59}\\u{1EE5B}\\u{1EE5D}\\u{1EE5F}\\u{1EE61}-\\u{1EE62}\\u{1EE64}\\u{1EE67}-\\u{1EE6A}\\u{1EE6C}-\\u{1EE72}\\u{1EE74}-\\u{1EE77}\\u{1EE79}-\\u{1EE7C}\\u{1EE7E}\\u{1EE80}-\\u{1EE89}\\u{1EE8B}-\\u{1EE9B}\\u{1EEA1}-\\u{1EEA3}\\u{1EEA5}-\\u{1EEA9}\\u{1EEAB}-\\u{1EEBB}\\u{20000}-\\u{2A6DF}\\u{2A700}-\\u{2B81D}\\u{2B820}-\\u{2CEAD}\\u{2CEB0}-\\u{2EBE0}\\u{2EBF0}-\\u{2EE5D}\\u{2F800}-\\u{2FA1D}\\u{30000}-\\u{3134A}\\u{31350}-\\u{33479}\\u0030-\\u0039\\u00B2-\\u00B3\\u00B9\\u00BC-\\u00BE\\u0660-\\u0669\\u06F0-\\u06F9\\u07C0-\\u07C9\\u0966-\\u096F\\u09E6-\\u09EF\\u09F4-\\u09F9\\u0A66-\\u0A6F\\u0AE6-\\u0AEF\\u0B66-\\u0B6F\\u0B72-\\u0B77\\u0BE6-\\u0BF2\\u0C66-\\u0C6F\\u0C78-\\u0C7E\\u0CE6-\\u0CEF\\u0D58-\\u0D5E\\u0D66-\\u0D78\\u0DE6-\\u0DEF\\u0E50-\\u0E59\\u0ED0-\\u0ED9\\u0F20-\\u0F33\\u1040-\\u1049\\u1090-\\u1099\\u1369-\\u137C\\u16EE-\\u16F0\\u17E0-\\u17E9\\u17F0-\\u17F9\\u1810-\\u1819\\u1946-\\u194F\\u19D0-\\u19DA\\u1A80-\\u1A89\\u1A90-\\u1A99\\u1B50-\\u1B59\\u1BB0-\\u1BB9\\u1C40-\\u1C49\\u1C50-\\u1C59\\u2070\\u2074-\\u2079\\u2080-\\u2089\\u2150-\\u2182\\u2185-\\u2189\\u2460-\\u249B\\u24EA-\\u24FF\\u2776-\\u2793\\u2CFD\\u3007\\u3021-\\u3029\\u3038-\\u303A\\u3192-\\u3195\\u3220-\\u3229\\u3248-\\u324F\\u3251-\\u325F\\u3280-\\u3289\\u32B1-\\u32BF\\uA620-\\uA629\\uA6E6-\\uA6EF\\uA830-\\uA835\\uA8D0-\\uA8D9\\uA900-\\uA909\\uA9D0-\\uA9D9\\uA9F0-\\uA9F9\\uAA50-\\uAA59\\uABF0-\\uABF9\\uFF10-\\uFF19\\u{10107}-\\u{10133}\\u{10140}-\\u{10178}\\u{1018A}-\\u{1018B}\\u{102E1}-\\u{102FB}\\u{10320}-\\u{10323}\\u{10341}\\u{1034A}\\u{103D1}-\\u{103D5}\\u{104A0}-\\u{104A9}\\u{10858}-\\u{1085F}\\u{10879}-\\u{1087F}\\u{108A7}-\\u{108AF}\\u{108FB}-\\u{108FF}\\u{10916}-\\u{1091B}\\u{109BC}-\\u{109BD}\\u{109C0}-\\u{109CF}\\u{109D2}-\\u{109FF}\\u{10A40}-\\u{10A48}\\u{10A7D}-\\u{10A7E}\\u{10A9D}-\\u{10A9F}\\u{10AEB}-\\u{10AEF}\\u{10B58}-\\u{10B5F}\\u{10B78}-\\u{10B7F}\\u{10BA9}-\\u{10BAF}\\u{10CFA}-\\u{10CFF}\\u{10D30}-\\u{10D39}\\u{10D40}-\\u{10D49}\\u{10E60}-\\u{10E7E}\\u{10F1D}-\\u{10F26}\\u{10F51}-\\u{10F54}\\u{10FC5}-\\u{10FCB}\\u{11052}-\\u{1106F}\\u{110F0}-\\u{110F9}\\u{11136}-\\u{1113F}\\u{111D0}-\\u{111D9}\\u{111E1}-\\u{111F4}\\u{112F0}-\\u{112F9}\\u{11450}-\\u{11459}\\u{114D0}-\\u{114D9}\\u{11650}-\\u{11659}\\u{116C0}-\\u{116C9}\\u{116D0}-\\u{116E3}\\u{11730}-\\u{1173B}\\u{118E0}-\\u{118F2}\\u{11950}-\\u{11959}\\u{11BF0}-\\u{11BF9}\\u{11C50}-\\u{11C6C}\\u{11D50}-\\u{11D59}\\u{11DA0}-\\u{11DA9}\\u{11DE0}-\\u{11DE9}\\u{11F50}-\\u{11F59}\\u{11FC0}-\\u{11FD4}\\u{12400}-\\u{1246E}\\u{16130}-\\u{16139}\\u{16A60}-\\u{16A69}\\u{16AC0}-\\u{16AC9}\\u{16B50}-\\u{16B59}\\u{16B5B}-\\u{16B61}\\u{16D70}-\\u{16D79}\\u{16E80}-\\u{16E96}\\u{16FF4}-\\u{16FF6}\\u{1CCF0}-\\u{1CCF9}\\u{1D2C0}-\\u{1D2D3}\\u{1D2E0}-\\u{1D2F3}\\u{1D360}-\\u{1D378}\\u{1D7CE}-\\u{1D7FF}\\u{1E140}-\\u{1E149}\\u{1E2F0}-\\u{1E2F9}\\u{1E4F0}-\\u{1E4F9}\\u{1E5F1}-\\u{1E5FA}\\u{1E8C7}-\\u{1E8CF}\\u{1E950}-\\u{1E959}\\u{1EC71}-\\u{1ECAB}\\u{1ECAD}-\\u{1ECAF}\\u{1ECB1}-\\u{1ECB4}\\u{1ED01}-\\u{1ED2D}\\u{1ED2F}-\\u{1ED3D}\\u{1F100}-\\u{1F10C}\\u{1FBF0}-\\u{1FBF9}]", "gu"), " ").replaceAll(/\s+/g, " ").toLowerCase(),
-        nR = t => "rrf" in t ? t.rrf : 0,
-        nL = t => "object" == typeof t && null != t && "value" in t && "string" == typeof t.value && (void 0 === t.rrf || "number" == typeof t.rrf),
-        nF = t => "rrf" in t,
-        nN = t => new nA(t, {
+        nA = () => "titles" === n.default.env.recommendedSearchType || "scoredTitles" === n.default.env.recommendedSearchType || "m1ReleaseVariant1" === n.default.env.recommendedSearchType || "m1ReleaseVariant2" === n.default.env.recommendedSearchType,
+        nT = () => "scoredTitles" === n.default.env.recommendedSearchType || "m1ReleaseVariant1" === n.default.env.recommendedSearchType || "m1ReleaseVariant2" === n.default.env.recommendedSearchType,
+        nk = t => 1 / (12.5 + t),
+        nD = t => t.replaceAll(RegExp("[^\\u0041-\\u005A\\u0061-\\u007A\\u00AA\\u00B5\\u00BA\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02C1\\u02C6-\\u02D1\\u02E0-\\u02E4\\u02EC\\u02EE\\u0370-\\u0374\\u0376-\\u0377\\u037A-\\u037D\\u037F\\u0386\\u0388-\\u038A\\u038C\\u038E-\\u03A1\\u03A3-\\u03F5\\u03F7-\\u0481\\u048A-\\u052F\\u0531-\\u0556\\u0559\\u0560-\\u0588\\u05D0-\\u05EA\\u05EF-\\u05F2\\u0620-\\u064A\\u066E-\\u066F\\u0671-\\u06D3\\u06D5\\u06E5-\\u06E6\\u06EE-\\u06EF\\u06FA-\\u06FC\\u06FF\\u0710\\u0712-\\u072F\\u074D-\\u07A5\\u07B1\\u07CA-\\u07EA\\u07F4-\\u07F5\\u07FA\\u0800-\\u0815\\u081A\\u0824\\u0828\\u0840-\\u0858\\u0860-\\u086A\\u0870-\\u0887\\u0889-\\u088F\\u08A0-\\u08C9\\u0904-\\u0939\\u093D\\u0950\\u0958-\\u0961\\u0971-\\u0980\\u0985-\\u098C\\u098F-\\u0990\\u0993-\\u09A8\\u09AA-\\u09B0\\u09B2\\u09B6-\\u09B9\\u09BD\\u09CE\\u09DC-\\u09DD\\u09DF-\\u09E1\\u09F0-\\u09F1\\u09FC\\u0A05-\\u0A0A\\u0A0F-\\u0A10\\u0A13-\\u0A28\\u0A2A-\\u0A30\\u0A32-\\u0A33\\u0A35-\\u0A36\\u0A38-\\u0A39\\u0A59-\\u0A5C\\u0A5E\\u0A72-\\u0A74\\u0A85-\\u0A8D\\u0A8F-\\u0A91\\u0A93-\\u0AA8\\u0AAA-\\u0AB0\\u0AB2-\\u0AB3\\u0AB5-\\u0AB9\\u0ABD\\u0AD0\\u0AE0-\\u0AE1\\u0AF9\\u0B05-\\u0B0C\\u0B0F-\\u0B10\\u0B13-\\u0B28\\u0B2A-\\u0B30\\u0B32-\\u0B33\\u0B35-\\u0B39\\u0B3D\\u0B5C-\\u0B5D\\u0B5F-\\u0B61\\u0B71\\u0B83\\u0B85-\\u0B8A\\u0B8E-\\u0B90\\u0B92-\\u0B95\\u0B99-\\u0B9A\\u0B9C\\u0B9E-\\u0B9F\\u0BA3-\\u0BA4\\u0BA8-\\u0BAA\\u0BAE-\\u0BB9\\u0BD0\\u0C05-\\u0C0C\\u0C0E-\\u0C10\\u0C12-\\u0C28\\u0C2A-\\u0C39\\u0C3D\\u0C58-\\u0C5A\\u0C5C-\\u0C5D\\u0C60-\\u0C61\\u0C80\\u0C85-\\u0C8C\\u0C8E-\\u0C90\\u0C92-\\u0CA8\\u0CAA-\\u0CB3\\u0CB5-\\u0CB9\\u0CBD\\u0CDC-\\u0CDE\\u0CE0-\\u0CE1\\u0CF1-\\u0CF2\\u0D04-\\u0D0C\\u0D0E-\\u0D10\\u0D12-\\u0D3A\\u0D3D\\u0D4E\\u0D54-\\u0D56\\u0D5F-\\u0D61\\u0D7A-\\u0D7F\\u0D85-\\u0D96\\u0D9A-\\u0DB1\\u0DB3-\\u0DBB\\u0DBD\\u0DC0-\\u0DC6\\u0E01-\\u0E30\\u0E32-\\u0E33\\u0E40-\\u0E46\\u0E81-\\u0E82\\u0E84\\u0E86-\\u0E8A\\u0E8C-\\u0EA3\\u0EA5\\u0EA7-\\u0EB0\\u0EB2-\\u0EB3\\u0EBD\\u0EC0-\\u0EC4\\u0EC6\\u0EDC-\\u0EDF\\u0F00\\u0F40-\\u0F47\\u0F49-\\u0F6C\\u0F88-\\u0F8C\\u1000-\\u102A\\u103F\\u1050-\\u1055\\u105A-\\u105D\\u1061\\u1065-\\u1066\\u106E-\\u1070\\u1075-\\u1081\\u108E\\u10A0-\\u10C5\\u10C7\\u10CD\\u10D0-\\u10FA\\u10FC-\\u1248\\u124A-\\u124D\\u1250-\\u1256\\u1258\\u125A-\\u125D\\u1260-\\u1288\\u128A-\\u128D\\u1290-\\u12B0\\u12B2-\\u12B5\\u12B8-\\u12BE\\u12C0\\u12C2-\\u12C5\\u12C8-\\u12D6\\u12D8-\\u1310\\u1312-\\u1315\\u1318-\\u135A\\u1380-\\u138F\\u13A0-\\u13F5\\u13F8-\\u13FD\\u1401-\\u166C\\u166F-\\u167F\\u1681-\\u169A\\u16A0-\\u16EA\\u16F1-\\u16F8\\u1700-\\u1711\\u171F-\\u1731\\u1740-\\u1751\\u1760-\\u176C\\u176E-\\u1770\\u1780-\\u17B3\\u17D7\\u17DC\\u1820-\\u1878\\u1880-\\u1884\\u1887-\\u18A8\\u18AA\\u18B0-\\u18F5\\u1900-\\u191E\\u1950-\\u196D\\u1970-\\u1974\\u1980-\\u19AB\\u19B0-\\u19C9\\u1A00-\\u1A16\\u1A20-\\u1A54\\u1AA7\\u1B05-\\u1B33\\u1B45-\\u1B4C\\u1B83-\\u1BA0\\u1BAE-\\u1BAF\\u1BBA-\\u1BE5\\u1C00-\\u1C23\\u1C4D-\\u1C4F\\u1C5A-\\u1C7D\\u1C80-\\u1C8A\\u1C90-\\u1CBA\\u1CBD-\\u1CBF\\u1CE9-\\u1CEC\\u1CEE-\\u1CF3\\u1CF5-\\u1CF6\\u1CFA\\u1D00-\\u1DBF\\u1E00-\\u1F15\\u1F18-\\u1F1D\\u1F20-\\u1F45\\u1F48-\\u1F4D\\u1F50-\\u1F57\\u1F59\\u1F5B\\u1F5D\\u1F5F-\\u1F7D\\u1F80-\\u1FB4\\u1FB6-\\u1FBC\\u1FBE\\u1FC2-\\u1FC4\\u1FC6-\\u1FCC\\u1FD0-\\u1FD3\\u1FD6-\\u1FDB\\u1FE0-\\u1FEC\\u1FF2-\\u1FF4\\u1FF6-\\u1FFC\\u2071\\u207F\\u2090-\\u209C\\u2102\\u2107\\u210A-\\u2113\\u2115\\u2119-\\u211D\\u2124\\u2126\\u2128\\u212A-\\u212D\\u212F-\\u2139\\u213C-\\u213F\\u2145-\\u2149\\u214E\\u2183-\\u2184\\u2C00-\\u2CE4\\u2CEB-\\u2CEE\\u2CF2-\\u2CF3\\u2D00-\\u2D25\\u2D27\\u2D2D\\u2D30-\\u2D67\\u2D6F\\u2D80-\\u2D96\\u2DA0-\\u2DA6\\u2DA8-\\u2DAE\\u2DB0-\\u2DB6\\u2DB8-\\u2DBE\\u2DC0-\\u2DC6\\u2DC8-\\u2DCE\\u2DD0-\\u2DD6\\u2DD8-\\u2DDE\\u2E2F\\u3005-\\u3006\\u3031-\\u3035\\u303B-\\u303C\\u3041-\\u3096\\u309D-\\u309F\\u30A1-\\u30FA\\u30FC-\\u30FF\\u3105-\\u312F\\u3131-\\u318E\\u31A0-\\u31BF\\u31F0-\\u31FF\\u3400-\\u4DBF\\u4E00-\\uA48C\\uA4D0-\\uA4FD\\uA500-\\uA60C\\uA610-\\uA61F\\uA62A-\\uA62B\\uA640-\\uA66E\\uA67F-\\uA69D\\uA6A0-\\uA6E5\\uA717-\\uA71F\\uA722-\\uA788\\uA78B-\\uA7DC\\uA7F1-\\uA801\\uA803-\\uA805\\uA807-\\uA80A\\uA80C-\\uA822\\uA840-\\uA873\\uA882-\\uA8B3\\uA8F2-\\uA8F7\\uA8FB\\uA8FD-\\uA8FE\\uA90A-\\uA925\\uA930-\\uA946\\uA960-\\uA97C\\uA984-\\uA9B2\\uA9CF\\uA9E0-\\uA9E4\\uA9E6-\\uA9EF\\uA9FA-\\uA9FE\\uAA00-\\uAA28\\uAA40-\\uAA42\\uAA44-\\uAA4B\\uAA60-\\uAA76\\uAA7A\\uAA7E-\\uAAAF\\uAAB1\\uAAB5-\\uAAB6\\uAAB9-\\uAABD\\uAAC0\\uAAC2\\uAADB-\\uAADD\\uAAE0-\\uAAEA\\uAAF2-\\uAAF4\\uAB01-\\uAB06\\uAB09-\\uAB0E\\uAB11-\\uAB16\\uAB20-\\uAB26\\uAB28-\\uAB2E\\uAB30-\\uAB5A\\uAB5C-\\uAB69\\uAB70-\\uABE2\\uAC00-\\uD7A3\\uD7B0-\\uD7C6\\uD7CB-\\uD7FB\\uF900-\\uFA6D\\uFA70-\\uFAD9\\uFB00-\\uFB06\\uFB13-\\uFB17\\uFB1D\\uFB1F-\\uFB28\\uFB2A-\\uFB36\\uFB38-\\uFB3C\\uFB3E\\uFB40-\\uFB41\\uFB43-\\uFB44\\uFB46-\\uFBB1\\uFBD3-\\uFD3D\\uFD50-\\uFD8F\\uFD92-\\uFDC7\\uFDF0-\\uFDFB\\uFE70-\\uFE74\\uFE76-\\uFEFC\\uFF21-\\uFF3A\\uFF41-\\uFF5A\\uFF66-\\uFFBE\\uFFC2-\\uFFC7\\uFFCA-\\uFFCF\\uFFD2-\\uFFD7\\uFFDA-\\uFFDC\\u{10000}-\\u{1000B}\\u{1000D}-\\u{10026}\\u{10028}-\\u{1003A}\\u{1003C}-\\u{1003D}\\u{1003F}-\\u{1004D}\\u{10050}-\\u{1005D}\\u{10080}-\\u{100FA}\\u{10280}-\\u{1029C}\\u{102A0}-\\u{102D0}\\u{10300}-\\u{1031F}\\u{1032D}-\\u{10340}\\u{10342}-\\u{10349}\\u{10350}-\\u{10375}\\u{10380}-\\u{1039D}\\u{103A0}-\\u{103C3}\\u{103C8}-\\u{103CF}\\u{10400}-\\u{1049D}\\u{104B0}-\\u{104D3}\\u{104D8}-\\u{104FB}\\u{10500}-\\u{10527}\\u{10530}-\\u{10563}\\u{10570}-\\u{1057A}\\u{1057C}-\\u{1058A}\\u{1058C}-\\u{10592}\\u{10594}-\\u{10595}\\u{10597}-\\u{105A1}\\u{105A3}-\\u{105B1}\\u{105B3}-\\u{105B9}\\u{105BB}-\\u{105BC}\\u{105C0}-\\u{105F3}\\u{10600}-\\u{10736}\\u{10740}-\\u{10755}\\u{10760}-\\u{10767}\\u{10780}-\\u{10785}\\u{10787}-\\u{107B0}\\u{107B2}-\\u{107BA}\\u{10800}-\\u{10805}\\u{10808}\\u{1080A}-\\u{10835}\\u{10837}-\\u{10838}\\u{1083C}\\u{1083F}-\\u{10855}\\u{10860}-\\u{10876}\\u{10880}-\\u{1089E}\\u{108E0}-\\u{108F2}\\u{108F4}-\\u{108F5}\\u{10900}-\\u{10915}\\u{10920}-\\u{10939}\\u{10940}-\\u{10959}\\u{10980}-\\u{109B7}\\u{109BE}-\\u{109BF}\\u{10A00}\\u{10A10}-\\u{10A13}\\u{10A15}-\\u{10A17}\\u{10A19}-\\u{10A35}\\u{10A60}-\\u{10A7C}\\u{10A80}-\\u{10A9C}\\u{10AC0}-\\u{10AC7}\\u{10AC9}-\\u{10AE4}\\u{10B00}-\\u{10B35}\\u{10B40}-\\u{10B55}\\u{10B60}-\\u{10B72}\\u{10B80}-\\u{10B91}\\u{10C00}-\\u{10C48}\\u{10C80}-\\u{10CB2}\\u{10CC0}-\\u{10CF2}\\u{10D00}-\\u{10D23}\\u{10D4A}-\\u{10D65}\\u{10D6F}-\\u{10D85}\\u{10E80}-\\u{10EA9}\\u{10EB0}-\\u{10EB1}\\u{10EC2}-\\u{10EC7}\\u{10F00}-\\u{10F1C}\\u{10F27}\\u{10F30}-\\u{10F45}\\u{10F70}-\\u{10F81}\\u{10FB0}-\\u{10FC4}\\u{10FE0}-\\u{10FF6}\\u{11003}-\\u{11037}\\u{11071}-\\u{11072}\\u{11075}\\u{11083}-\\u{110AF}\\u{110D0}-\\u{110E8}\\u{11103}-\\u{11126}\\u{11144}\\u{11147}\\u{11150}-\\u{11172}\\u{11176}\\u{11183}-\\u{111B2}\\u{111C1}-\\u{111C4}\\u{111DA}\\u{111DC}\\u{11200}-\\u{11211}\\u{11213}-\\u{1122B}\\u{1123F}-\\u{11240}\\u{11280}-\\u{11286}\\u{11288}\\u{1128A}-\\u{1128D}\\u{1128F}-\\u{1129D}\\u{1129F}-\\u{112A8}\\u{112B0}-\\u{112DE}\\u{11305}-\\u{1130C}\\u{1130F}-\\u{11310}\\u{11313}-\\u{11328}\\u{1132A}-\\u{11330}\\u{11332}-\\u{11333}\\u{11335}-\\u{11339}\\u{1133D}\\u{11350}\\u{1135D}-\\u{11361}\\u{11380}-\\u{11389}\\u{1138B}\\u{1138E}\\u{11390}-\\u{113B5}\\u{113B7}\\u{113D1}\\u{113D3}\\u{11400}-\\u{11434}\\u{11447}-\\u{1144A}\\u{1145F}-\\u{11461}\\u{11480}-\\u{114AF}\\u{114C4}-\\u{114C5}\\u{114C7}\\u{11580}-\\u{115AE}\\u{115D8}-\\u{115DB}\\u{11600}-\\u{1162F}\\u{11644}\\u{11680}-\\u{116AA}\\u{116B8}\\u{11700}-\\u{1171A}\\u{11740}-\\u{11746}\\u{11800}-\\u{1182B}\\u{118A0}-\\u{118DF}\\u{118FF}-\\u{11906}\\u{11909}\\u{1190C}-\\u{11913}\\u{11915}-\\u{11916}\\u{11918}-\\u{1192F}\\u{1193F}\\u{11941}\\u{119A0}-\\u{119A7}\\u{119AA}-\\u{119D0}\\u{119E1}\\u{119E3}\\u{11A00}\\u{11A0B}-\\u{11A32}\\u{11A3A}\\u{11A50}\\u{11A5C}-\\u{11A89}\\u{11A9D}\\u{11AB0}-\\u{11AF8}\\u{11BC0}-\\u{11BE0}\\u{11C00}-\\u{11C08}\\u{11C0A}-\\u{11C2E}\\u{11C40}\\u{11C72}-\\u{11C8F}\\u{11D00}-\\u{11D06}\\u{11D08}-\\u{11D09}\\u{11D0B}-\\u{11D30}\\u{11D46}\\u{11D60}-\\u{11D65}\\u{11D67}-\\u{11D68}\\u{11D6A}-\\u{11D89}\\u{11D98}\\u{11DB0}-\\u{11DDB}\\u{11EE0}-\\u{11EF2}\\u{11F02}\\u{11F04}-\\u{11F10}\\u{11F12}-\\u{11F33}\\u{11FB0}\\u{12000}-\\u{12399}\\u{12480}-\\u{12543}\\u{12F90}-\\u{12FF0}\\u{13000}-\\u{1342F}\\u{13441}-\\u{13446}\\u{13460}-\\u{143FA}\\u{14400}-\\u{14646}\\u{16100}-\\u{1611D}\\u{16800}-\\u{16A38}\\u{16A40}-\\u{16A5E}\\u{16A70}-\\u{16ABE}\\u{16AD0}-\\u{16AED}\\u{16B00}-\\u{16B2F}\\u{16B40}-\\u{16B43}\\u{16B63}-\\u{16B77}\\u{16B7D}-\\u{16B8F}\\u{16D40}-\\u{16D6C}\\u{16E40}-\\u{16E7F}\\u{16EA0}-\\u{16EB8}\\u{16EBB}-\\u{16ED3}\\u{16F00}-\\u{16F4A}\\u{16F50}\\u{16F93}-\\u{16F9F}\\u{16FE0}-\\u{16FE1}\\u{16FE3}\\u{16FF2}-\\u{16FF3}\\u{17000}-\\u{18CD5}\\u{18CFF}-\\u{18D1E}\\u{18D80}-\\u{18DF2}\\u{1AFF0}-\\u{1AFF3}\\u{1AFF5}-\\u{1AFFB}\\u{1AFFD}-\\u{1AFFE}\\u{1B000}-\\u{1B122}\\u{1B132}\\u{1B150}-\\u{1B152}\\u{1B155}\\u{1B164}-\\u{1B167}\\u{1B170}-\\u{1B2FB}\\u{1BC00}-\\u{1BC6A}\\u{1BC70}-\\u{1BC7C}\\u{1BC80}-\\u{1BC88}\\u{1BC90}-\\u{1BC99}\\u{1D400}-\\u{1D454}\\u{1D456}-\\u{1D49C}\\u{1D49E}-\\u{1D49F}\\u{1D4A2}\\u{1D4A5}-\\u{1D4A6}\\u{1D4A9}-\\u{1D4AC}\\u{1D4AE}-\\u{1D4B9}\\u{1D4BB}\\u{1D4BD}-\\u{1D4C3}\\u{1D4C5}-\\u{1D505}\\u{1D507}-\\u{1D50A}\\u{1D50D}-\\u{1D514}\\u{1D516}-\\u{1D51C}\\u{1D51E}-\\u{1D539}\\u{1D53B}-\\u{1D53E}\\u{1D540}-\\u{1D544}\\u{1D546}\\u{1D54A}-\\u{1D550}\\u{1D552}-\\u{1D6A5}\\u{1D6A8}-\\u{1D6C0}\\u{1D6C2}-\\u{1D6DA}\\u{1D6DC}-\\u{1D6FA}\\u{1D6FC}-\\u{1D714}\\u{1D716}-\\u{1D734}\\u{1D736}-\\u{1D74E}\\u{1D750}-\\u{1D76E}\\u{1D770}-\\u{1D788}\\u{1D78A}-\\u{1D7A8}\\u{1D7AA}-\\u{1D7C2}\\u{1D7C4}-\\u{1D7CB}\\u{1DF00}-\\u{1DF1E}\\u{1DF25}-\\u{1DF2A}\\u{1E030}-\\u{1E06D}\\u{1E100}-\\u{1E12C}\\u{1E137}-\\u{1E13D}\\u{1E14E}\\u{1E290}-\\u{1E2AD}\\u{1E2C0}-\\u{1E2EB}\\u{1E4D0}-\\u{1E4EB}\\u{1E5D0}-\\u{1E5ED}\\u{1E5F0}\\u{1E6C0}-\\u{1E6DE}\\u{1E6E0}-\\u{1E6E2}\\u{1E6E4}-\\u{1E6E5}\\u{1E6E7}-\\u{1E6ED}\\u{1E6F0}-\\u{1E6F4}\\u{1E6FE}-\\u{1E6FF}\\u{1E7E0}-\\u{1E7E6}\\u{1E7E8}-\\u{1E7EB}\\u{1E7ED}-\\u{1E7EE}\\u{1E7F0}-\\u{1E7FE}\\u{1E800}-\\u{1E8C4}\\u{1E900}-\\u{1E943}\\u{1E94B}\\u{1EE00}-\\u{1EE03}\\u{1EE05}-\\u{1EE1F}\\u{1EE21}-\\u{1EE22}\\u{1EE24}\\u{1EE27}\\u{1EE29}-\\u{1EE32}\\u{1EE34}-\\u{1EE37}\\u{1EE39}\\u{1EE3B}\\u{1EE42}\\u{1EE47}\\u{1EE49}\\u{1EE4B}\\u{1EE4D}-\\u{1EE4F}\\u{1EE51}-\\u{1EE52}\\u{1EE54}\\u{1EE57}\\u{1EE59}\\u{1EE5B}\\u{1EE5D}\\u{1EE5F}\\u{1EE61}-\\u{1EE62}\\u{1EE64}\\u{1EE67}-\\u{1EE6A}\\u{1EE6C}-\\u{1EE72}\\u{1EE74}-\\u{1EE77}\\u{1EE79}-\\u{1EE7C}\\u{1EE7E}\\u{1EE80}-\\u{1EE89}\\u{1EE8B}-\\u{1EE9B}\\u{1EEA1}-\\u{1EEA3}\\u{1EEA5}-\\u{1EEA9}\\u{1EEAB}-\\u{1EEBB}\\u{20000}-\\u{2A6DF}\\u{2A700}-\\u{2B81D}\\u{2B820}-\\u{2CEAD}\\u{2CEB0}-\\u{2EBE0}\\u{2EBF0}-\\u{2EE5D}\\u{2F800}-\\u{2FA1D}\\u{30000}-\\u{3134A}\\u{31350}-\\u{33479}\\u0030-\\u0039\\u00B2-\\u00B3\\u00B9\\u00BC-\\u00BE\\u0660-\\u0669\\u06F0-\\u06F9\\u07C0-\\u07C9\\u0966-\\u096F\\u09E6-\\u09EF\\u09F4-\\u09F9\\u0A66-\\u0A6F\\u0AE6-\\u0AEF\\u0B66-\\u0B6F\\u0B72-\\u0B77\\u0BE6-\\u0BF2\\u0C66-\\u0C6F\\u0C78-\\u0C7E\\u0CE6-\\u0CEF\\u0D58-\\u0D5E\\u0D66-\\u0D78\\u0DE6-\\u0DEF\\u0E50-\\u0E59\\u0ED0-\\u0ED9\\u0F20-\\u0F33\\u1040-\\u1049\\u1090-\\u1099\\u1369-\\u137C\\u16EE-\\u16F0\\u17E0-\\u17E9\\u17F0-\\u17F9\\u1810-\\u1819\\u1946-\\u194F\\u19D0-\\u19DA\\u1A80-\\u1A89\\u1A90-\\u1A99\\u1B50-\\u1B59\\u1BB0-\\u1BB9\\u1C40-\\u1C49\\u1C50-\\u1C59\\u2070\\u2074-\\u2079\\u2080-\\u2089\\u2150-\\u2182\\u2185-\\u2189\\u2460-\\u249B\\u24EA-\\u24FF\\u2776-\\u2793\\u2CFD\\u3007\\u3021-\\u3029\\u3038-\\u303A\\u3192-\\u3195\\u3220-\\u3229\\u3248-\\u324F\\u3251-\\u325F\\u3280-\\u3289\\u32B1-\\u32BF\\uA620-\\uA629\\uA6E6-\\uA6EF\\uA830-\\uA835\\uA8D0-\\uA8D9\\uA900-\\uA909\\uA9D0-\\uA9D9\\uA9F0-\\uA9F9\\uAA50-\\uAA59\\uABF0-\\uABF9\\uFF10-\\uFF19\\u{10107}-\\u{10133}\\u{10140}-\\u{10178}\\u{1018A}-\\u{1018B}\\u{102E1}-\\u{102FB}\\u{10320}-\\u{10323}\\u{10341}\\u{1034A}\\u{103D1}-\\u{103D5}\\u{104A0}-\\u{104A9}\\u{10858}-\\u{1085F}\\u{10879}-\\u{1087F}\\u{108A7}-\\u{108AF}\\u{108FB}-\\u{108FF}\\u{10916}-\\u{1091B}\\u{109BC}-\\u{109BD}\\u{109C0}-\\u{109CF}\\u{109D2}-\\u{109FF}\\u{10A40}-\\u{10A48}\\u{10A7D}-\\u{10A7E}\\u{10A9D}-\\u{10A9F}\\u{10AEB}-\\u{10AEF}\\u{10B58}-\\u{10B5F}\\u{10B78}-\\u{10B7F}\\u{10BA9}-\\u{10BAF}\\u{10CFA}-\\u{10CFF}\\u{10D30}-\\u{10D39}\\u{10D40}-\\u{10D49}\\u{10E60}-\\u{10E7E}\\u{10F1D}-\\u{10F26}\\u{10F51}-\\u{10F54}\\u{10FC5}-\\u{10FCB}\\u{11052}-\\u{1106F}\\u{110F0}-\\u{110F9}\\u{11136}-\\u{1113F}\\u{111D0}-\\u{111D9}\\u{111E1}-\\u{111F4}\\u{112F0}-\\u{112F9}\\u{11450}-\\u{11459}\\u{114D0}-\\u{114D9}\\u{11650}-\\u{11659}\\u{116C0}-\\u{116C9}\\u{116D0}-\\u{116E3}\\u{11730}-\\u{1173B}\\u{118E0}-\\u{118F2}\\u{11950}-\\u{11959}\\u{11BF0}-\\u{11BF9}\\u{11C50}-\\u{11C6C}\\u{11D50}-\\u{11D59}\\u{11DA0}-\\u{11DA9}\\u{11DE0}-\\u{11DE9}\\u{11F50}-\\u{11F59}\\u{11FC0}-\\u{11FD4}\\u{12400}-\\u{1246E}\\u{16130}-\\u{16139}\\u{16A60}-\\u{16A69}\\u{16AC0}-\\u{16AC9}\\u{16B50}-\\u{16B59}\\u{16B5B}-\\u{16B61}\\u{16D70}-\\u{16D79}\\u{16E80}-\\u{16E96}\\u{16FF4}-\\u{16FF6}\\u{1CCF0}-\\u{1CCF9}\\u{1D2C0}-\\u{1D2D3}\\u{1D2E0}-\\u{1D2F3}\\u{1D360}-\\u{1D378}\\u{1D7CE}-\\u{1D7FF}\\u{1E140}-\\u{1E149}\\u{1E2F0}-\\u{1E2F9}\\u{1E4F0}-\\u{1E4F9}\\u{1E5F1}-\\u{1E5FA}\\u{1E8C7}-\\u{1E8CF}\\u{1E950}-\\u{1E959}\\u{1EC71}-\\u{1ECAB}\\u{1ECAD}-\\u{1ECAF}\\u{1ECB1}-\\u{1ECB4}\\u{1ED01}-\\u{1ED2D}\\u{1ED2F}-\\u{1ED3D}\\u{1F100}-\\u{1F10C}\\u{1FBF0}-\\u{1FBF9}]", "gu"), " ").replaceAll(/\s+/g, " ").toLowerCase(),
+        nj = t => "rrf" in t ? t.rrf : 0,
+        n_ = t => "object" == typeof t && null != t && "value" in t && "string" == typeof t.value && (void 0 === t.rrf || "number" == typeof t.rrf),
+        nR = t => "rrf" in t,
+        nF = t => new nS(t, {
             includeScore: !0,
             includeMatches: !0,
             threshold: .2,
             distance: 50,
             keys: ["searchValue"]
         });
-    class nM {
+    class nL {
         async prefixSearchRecommendations(t) {
             let {
                 query: n,
                 exclusions: r = [],
                 limit: o = 10
             } = t;
-            if (!nk()) return [];
-            let a = new Set([n_(n).trim(), ...r.map(t => n_(t).trim())]),
-                i = n_(n).trim();
+            if (!nA()) return [];
+            let a = new Set([nD(n).trim(), ...r.map(t => nD(t).trim())]),
+                i = nD(n).trim();
             if (!i) return [];
             let s = await this.datasetCommonSearches,
                 l = [];
@@ -27414,15 +27399,15 @@
                 query: r,
                 exclusions: o = []
             } = t;
-            if (!nk()) return [];
+            if (!nA()) return [];
             let a = [];
             switch (n.default.env.recommendedSearchType) {
                 case "scoredTitles":
                 case "titles":
-                    a = [...o.map(t => n_(t).trim()), n_(r).trim()];
+                    a = [...o.map(t => nD(t).trim()), nD(r).trim()];
                     break;
                 case "m1ReleaseVariant2":
-                    a = [n_(r).trim()];
+                    a = [nD(r).trim()];
                     break;
                 case void 0:
                     return [];
@@ -27430,18 +27415,18 @@
                     return console.error("recommendedSearchClient: Unknown recommendedSearchType", n.default.env.recommendedSearchType), []
             }
             let i = new Set(a),
-                s = n_(r).replace(/^\s+/, "").replace(/\s\s+$/, " ");
-            if (!s) return nD() ? (await this.dataset).filter(t => !i.has(t.searchValue)).map(t => t.value) : [];
+                s = nD(r).replace(/^\s+/, "").replace(/\s\s+$/, " ");
+            if (!s) return nT() ? (await this.dataset).filter(t => !i.has(t.searchValue)).map(t => t.value) : [];
             let l = (await this.fuse).search(s).filter(t => !i.has(t.item.searchValue));
             if (!l.length) return [];
-            if (!nD()) return l.map(t => t.item.value);
+            if (!nT()) return l.map(t => t.item.value);
             let u = l[0];
-            if (!nF(u.item)) return [];
+            if (!nR(u.item)) return [];
             let c = [{
                 ...u.item,
                 score: u.score,
                 rank: 1,
-                rrf: u.item.rrf + nj(1)
+                rrf: u.item.rrf + nk(1)
             }];
             for (let t = 1; t < l.length; t += 1) {
                 let {
@@ -27451,35 +27436,35 @@
                     score: o,
                     rank: a
                 } = c[t - 1], i = n === o ? a : a + 1;
-                nF(r) && c.push({
+                nR(r) && c.push({
                     ...r,
                     score: n,
                     rank: i,
-                    rrf: r.rrf + nj(i)
+                    rrf: r.rrf + nk(i)
                 })
             }
             return c.sort((t, n) => n.rrf - t.rrf), [...new Set(c.map(t => t.value))]
         }
         static async getDataset(t) {
             let r;
-            if ("titles" === n.default.env.recommendedSearchType) r = nT("https://assets.create.roblox.com/265af8e6c3890a2bee3fed8c8ea1b021c1b0d4a8", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
+            if ("titles" === n.default.env.recommendedSearchType) r = nx("https://assets.create.roblox.com/b5143cbf7654fcce8ee8e764e247e76cdd9dff12", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
             else {
-                if (!nD()) return [];
-                r = nT("https://assets.create.roblox.com/265af8e6c3890a2bee3fed8c8ea1b021c1b0d4a8", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
+                if (!nT()) return [];
+                r = nx("https://assets.create.roblox.com/b5143cbf7654fcce8ee8e764e247e76cdd9dff12", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
             }
             let o = await fetch(r),
                 a = await o.json();
-            return Array.isArray(a) ? a.filter(nL) : []
+            return Array.isArray(a) ? a.filter(n_) : []
         }
         async getSearchRecommendations(t) {
             return "m1ReleaseVariant1" === n.default.env.recommendedSearchType ? this.prefixSearchRecommendations(t) : this.fuzzySearchRecommendations(t)
         }
         constructor(t) {
             (0, r._)(this, "dataset", void 0), (0, r._)(this, "datasetCommonSearches", void 0), (0, r._)(this, "fuse", void 0);
-            let n = [nM.getDataset(o.Locale.English)];
-            t !== o.Locale.English && n.push(nM.getDataset(t)), this.dataset = Promise.all(n).then(t => t.flat().sort((t, n) => nR(n) - nR(t)).map(t => ({
+            let n = [nL.getDataset(o.Locale.English)];
+            t !== o.Locale.English && n.push(nL.getDataset(t)), this.dataset = Promise.all(n).then(t => t.flat().sort((t, n) => nj(n) - nj(t)).map(t => ({
                 ...t,
-                searchValue: n_(t.value).trim()
+                searchValue: nD(t.value).trim()
             }))), this.datasetCommonSearches = this.dataset.then(t => [{
                 searchValue: "pls donate",
                 value: "Game Passes",
@@ -27500,17 +27485,17 @@
                 searchValue: "shirt",
                 value: "Classic Clothing",
                 isPromoted: !0
-            }, ...t]), this.fuse = this.dataset.then(nN)
+            }, ...t]), this.fuse = this.dataset.then(nF)
         }
     }
-    let nP = RegExp("^[a-z]{2}-[a-z]{2}$");
+    let nN = RegExp("^[a-z]{2}-[a-z]{2}$");
 
-    function nB(t) {
-        return t.startsWith("//") || /https?:\/\//.test(t) || /roblox:\/\//.test(t)
+    function nM(t) {
+        return t.startsWith("//") || /https?:\/\//.test(t) || t.includes("roblox://")
     }
-    let nO = (0, a.createContext)({
+    let nP = (0, a.createContext)({
         displayFilter: "",
-        subFilter: tP.All,
+        subFilter: tN.All,
         isDocSiteContext: !1,
         setDisplayFilter: () => {},
         setSubFilter: () => {},
@@ -27521,19 +27506,19 @@
         isFilterDefault: !0,
         maxResultsPerCategory: 4
     });
-    nO.displayName = "SearchFilterContext";
-    let nH = t => {
+    nP.displayName = "SearchFilterContext";
+    let nB = t => {
             let {
                 children: n
-            } = t, r = window.location.pathname.startsWith("/docs"), o = r ? tB : "", [i, s] = (0, a.useState)(o), [l, u] = (0, a.useState)(tP.All), [c, d] = (0, a.useState)(r), p = (0, a.useCallback)(t => {
-                s(t), d(!0), u(tP.All)
+            } = t, r = window.location.pathname.startsWith("/docs"), o = r ? tM : "", [i, s] = (0, a.useState)(o), [l, u] = (0, a.useState)(tN.All), [c, d] = (0, a.useState)(r), p = (0, a.useCallback)(t => {
+                s(t), d(!0), u(tN.All)
             }, []), m = (0, a.useCallback)(t => {
                 u(t)
             }, []), h = (0, a.useCallback)(() => {
-                s(o), d(!1), u(tP.All)
+                s(o), d(!1), u(tN.All)
             }, [o]), f = (0, a.useCallback)(() => {
-                s(o), d(r), u(tP.All)
-            }, [o, r]), g = !c, y = r && i === tB, v = (0, a.useMemo)(() => !!g || "Hub" !== i && i === tB && !!r, [g, i, r]), b = (0, a.useMemo)(() => g ? 4 : i === tB && r ? 3 : void 0, [g, i, r]), C = (0, a.useMemo)(() => ({
+                s(o), d(r), u(tN.All)
+            }, [o, r]), g = !c, y = r && i === tM, v = (0, a.useMemo)(() => !!g || "Hub" !== i && i === tM && !!r, [g, i, r]), b = (0, a.useMemo)(() => g ? 4 : i === tM && r ? 3 : void 0, [g, i, r]), C = (0, a.useMemo)(() => ({
                 displayFilter: i,
                 subFilter: l,
                 isDocSiteContext: r,
@@ -27546,55 +27531,55 @@
                 isFilterDefault: g,
                 maxResultsPerCategory: b
             }), [i, l, r, p, m, h, f, y, v, g, b]);
-            return a.default.createElement(nO.Provider, {
+            return a.default.createElement(nP.Provider, {
                 value: C
             }, n)
         },
-        nU = t => {
+        nO = t => {
             let {
                 key: n
             } = t;
             return "Enter" === n || " " === n || "Spacebar" === n
         };
-    var nV = ((tp = {}).List = "data-list-container", tp.Chips = "data-filter-chips-container", tp),
-        nz = ((tm = {}).ListItem = "list-item", tm.Chip = "chip", tm);
-    let nq = "search-input",
-        nW = {
-            searchInput: "#".concat(nq),
+    var nH = ((tp = {}).List = "data-list-container", tp.Chips = "data-filter-chips-container", tp),
+        nU = ((tm = {}).ListItem = "list-item", tm.Chip = "chip", tm);
+    let nV = "search-input",
+        nz = {
+            searchInput: "#".concat(nV),
             listItems: '[data-list-container] [data-search-navigation-element="list-item"]',
             chips: '[data-filter-chips-container] [data-search-navigation-element="chip"]',
             allFocusable: '[data-list-container] [data-search-navigation-element="list-item"], [data-filter-chips-container] [data-search-navigation-element="chip"]'
         },
-        nG = () => Array.from(document.querySelectorAll(nW.listItems)),
-        nK = t => {
+        nq = () => Array.from(document.querySelectorAll(nz.listItems)),
+        nW = t => {
             let n = (0, a.useCallback)(n => {
                 let r, o = t.current;
                 if (!o) return;
-                let a = Array.from(document.querySelectorAll(nW.allFocusable)),
+                let a = Array.from(document.querySelectorAll(nz.allFocusable)),
                     i = a.findIndex(t => t === o || o.contains(t));
                 if (-1 !== i) {
                     var s;
                     if ("up" === n) {
-                        if (o.closest("[data-list-container]") && 0 === nG().findIndex(t => t === o || o.contains(t))) {
-                            let t = document.querySelector(nW.searchInput);
+                        if (o.closest("[data-list-container]") && 0 === nq().findIndex(t => t === o || o.contains(t))) {
+                            let t = document.querySelector(nz.searchInput);
                             if (t) return void t.focus()
                         }
                         r = i > 0 ? i - 1 : a.length - 1
                     } else {
                         if (o.closest("[data-list-container]")) {
-                            let t = nG();
+                            let t = nq();
                             if (t.findIndex(t => t === o || o.contains(t)) === t.length - 1) {
                                 let t = a.findIndex(t => t === o || o.contains(t)),
                                     n = a.slice(t + 1).find(t => t.closest("[data-filter-chips-container]"));
                                 if (n) return void n.focus();
-                                let r = document.querySelector(nW.searchInput);
+                                let r = document.querySelector(nz.searchInput);
                                 if (r) return void r.focus()
                             }
                         }
                         if (o.closest("[data-filter-chips-container]")) {
-                            let t = Array.from(document.querySelectorAll(nW.chips));
+                            let t = Array.from(document.querySelectorAll(nz.chips));
                             if (t.findIndex(t => t === o || o.contains(t)) === t.length - 1) {
-                                let t = document.querySelector(nW.searchInput);
+                                let t = document.querySelector(nz.searchInput);
                                 if (t) return void t.focus()
                             }
                         }
@@ -27609,7 +27594,7 @@
                 }, [n])
             }
         },
-        nJ = [{
+        nG = [{
             categoryType: en.SearchCategoryType.Model,
             categoryPath: null
         }, {
@@ -27631,49 +27616,49 @@
             categoryType: en.SearchCategoryType.Model,
             categoryPath: "visual-effect"
         }],
-        nZ = tP.All,
-        nY = [{
+        nK = tN.All,
+        nJ = [{
             value: "Hub",
             translationKey: "Label.Hub",
             fallbackLabel: "Hub"
         }, {
-            value: tB,
+            value: tM,
             translationKey: "Label.Learn",
             fallbackLabel: "Learn"
         }, {
-            value: tO,
+            value: tP,
             translationKey: "Label.Store",
             fallbackLabel: "Store"
         }],
-        nX = [{
-            value: tP.LuaAPI,
+        nZ = [{
+            value: tN.LuaAPI,
             translationKey: "Label.EngineAPI",
             fallbackLabel: "Engine API"
         }, {
-            value: tP.CloudAPI,
+            value: tN.CloudAPI,
             translationKey: "Label.CloudAPI",
             fallbackLabel: "Cloud API"
         }, {
-            value: tP.Article,
+            value: tN.Article,
             translationKey: "Label.Articles",
             fallbackLabel: "Articles"
         }, {
-            value: tP.Video,
+            value: tN.Video,
             translationKey: "Label.Videos",
             fallbackLabel: "Videos"
         }, {
-            value: tP.DevForum,
+            value: tN.DevForum,
             translationKey: "Label.DevForum",
             fallbackLabel: "Forum"
         }],
-        nQ = [{
-            value: tP.CreatorHub,
+        nY = [{
+            value: tN.CreatorHub,
             translationKey: "Label.Pages",
             fallbackLabel: "Pages"
-        }, ...nX],
-        n$ = (t, n) => nY.some(t => t.value === n) ? t.filter(t => tH(t.documentationContentType) === n) : t.filter(t => t.documentationContentType === n),
-        n0 = t => t.isTrusted && t.detail > 0,
-        n1 = t => {
+        }, ...nZ],
+        nX = (t, n) => nJ.some(t => t.value === n) ? t.filter(t => tB(t.documentationContentType) === n) : t.filter(t => t.documentationContentType === n),
+        nQ = t => t.isTrusted && t.detail > 0,
+        n$ = t => {
             let {
                 eventLogger: n,
                 category: r,
@@ -27688,7 +27673,7 @@
                 searchSessionId: p
             } = t;
             n.logClickEvent({
-                eventName: tk.Performed,
+                eventName: tA.Performed,
                 parameters: {
                     interaction: o,
                     isRecommended: a.toString(),
@@ -27709,18 +27694,18 @@
                     } : {},
                     currentProduct: c,
                     searchSessionId: p,
-                    source: tD.Search,
+                    source: tT.Search,
                     topicFilters: "",
                     typeFilter: r
                 }
             })
         },
-        n2 = function(t) {
+        n0 = function(t) {
             let n = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
-            return t.metaKey ? n ? tj.KeyboardEnterWithCmd : tj.ClickWithCmd : t.ctrlKey ? n ? tj.KeyboardEnterWithCtrl : tj.ClickWithCtrl : n ? tj.KeyboardEnter : tj.Click
+            return t.metaKey ? n ? tk.KeyboardEnterWithCmd : tk.ClickWithCmd : t.ctrlKey ? n ? tk.KeyboardEnterWithCtrl : tk.ClickWithCtrl : n ? tk.KeyboardEnter : tk.Click
         },
-        n4 = t => t === tj.ClickWithCtrl || t === tj.ClickWithCmd || t === tj.KeyboardEnterWithCtrl || t === tj.KeyboardEnterWithCmd,
-        n3 = t => {
+        n1 = t => t === tk.ClickWithCtrl || t === tk.ClickWithCmd || t === tk.KeyboardEnterWithCtrl || t === tk.KeyboardEnterWithCmd,
+        n2 = t => {
             let {
                 eventLogger: n,
                 category: r,
@@ -27731,9 +27716,9 @@
                 currentProduct: l,
                 searchResults: u,
                 searchSessionId: c
-            } = t, d = n$(u, r), p = Array.from(new Set(d.map(t => t.documentationContentType))), m = nY.findIndex(t => t.value === r), h = nX.findIndex(t => t.value === r);
+            } = t, d = nX(u, r), p = Array.from(new Set(d.map(t => t.documentationContentType))), m = nJ.findIndex(t => t.value === r), h = nZ.findIndex(t => t.value === r);
             n.logClickEvent({
-                eventName: tk.CategoryClicked,
+                eventName: tA.CategoryClicked,
                 parameters: {
                     interaction: o,
                     isRecommended: a.toString(),
@@ -27750,7 +27735,7 @@
                 }
             })
         },
-        n5 = t => {
+        n4 = t => {
             let {
                 eventLogger: n,
                 category: r,
@@ -27761,9 +27746,9 @@
                 currentProduct: l,
                 searchResults: u,
                 searchSessionId: c
-            } = t, d = n$(u, r).length;
+            } = t, d = nX(u, r).length;
             n.logClickEvent({
-                eventName: tk.CategoryCleared,
+                eventName: tA.CategoryCleared,
                 parameters: {
                     interaction: o,
                     isRecommended: a.toString(),
@@ -27777,8 +27762,8 @@
                 }
             })
         };
-    var n6 = ((th = {}).Markdown = "markdown", th.CloudAPI = "cloudapi", th.CloudAPI2 = "cloudapi2", th.CloudLegacy = "cloudlegacy", th.CloudFeature = "cloudfeature", th.CloudDomain = "clouddomain", th.EngineAPI = "engineapi", th.ReleaseNote = "releasenote", th.EngineAPIMember = "engineapimember", th.Custom = "custom", th.Assistant = "assistant", th.Courses = "courses", th.Videos = "videos", th.Forum = "forum", th.Lesson = "lesson", th);
-    let n8 = {
+    var n3 = ((th = {}).Markdown = "markdown", th.CloudAPI = "cloudapi", th.CloudAPI2 = "cloudapi2", th.CloudLegacy = "cloudlegacy", th.CloudFeature = "cloudfeature", th.CloudDomain = "clouddomain", th.EngineAPI = "engineapi", th.ReleaseNote = "releasenote", th.EngineAPIMember = "engineapimember", th.Custom = "custom", th.Assistant = "assistant", th.Videos = "videos", th.Forum = "forum", th);
+    let n5 = {
             markdown: "Label.Article",
             cloudapi: "Label.CloudAPI",
             cloudapi2: "Label.CloudAPI",
@@ -27790,30 +27775,28 @@
             engineapimember: "Label.EngineReference",
             custom: "Label.Article",
             assistant: "Button.Assistant",
-            courses: "Label.Courses",
             videos: "Label.Videos",
-            forum: "Label.DevForum",
-            lesson: "Label.Lesson"
+            forum: "Label.DevForum"
         },
-        n9 = /\/dashboard\/creations\/experiences\/(\d+)/,
-        n7 = " ▪ ",
-        re = {
+        n6 = /\/dashboard\/creations\/experiences\/(\d+)/,
+        n8 = " ▪ ",
+        n9 = {
             Icon: () => null
         },
-        rt = (t, n) => t.label ? "string" == typeof t.label ? t.label : "object" == typeof t.label && "translationKey" in t.label ? n(t.label.translationKey, t.label.translationKeyParams) : "" : "",
-        rn = (t, n) => {
+        n7 = (t, n) => t.label ? "string" == typeof t.label ? t.label : "object" == typeof t.label && "translationKey" in t.label ? n(t.label.translationKey, t.label.translationKeyParams) : "" : "",
+        re = (t, n) => {
             var r;
-            return n(t.type && null != (r = n8[t.type]) ? r : "Label.Article")
+            return n(t.type && null != (r = n5[t.type]) ? r : "Label.Article")
         },
-        rr = (t, n, r) => n ? r("Label.GoToPage", {
-            type: rn(t, r),
+        rt = (t, n, r) => n ? r("Label.GoToPage", {
+            type: re(t, r),
             label: n,
             title: t.title
         }) : r("Label.GoToPageNoLabel", {
-            type: rn(t, r),
+            type: re(t, r),
             title: t.title
         }),
-        ro = {
+        rn = {
             "3d": {
                 key: "3DAssets",
                 fallback: "3D Assets"
@@ -27831,7 +27814,7 @@
                 fallback: "Visual Effects"
             }
         },
-        ra = (0, l.makeStyles)()(() => ({
+        rr = (0, l.makeStyles)()(() => ({
             container: {
                 display: "inline-flex",
                 alignItems: "center",
@@ -27846,12 +27829,12 @@
                 }
             }
         })),
-        ri = t => {
+        ro = t => {
             let {
                 keys: n
             } = t, {
                 classes: r
-            } = ra();
+            } = rr();
             return 0 === n.length ? null : a.default.createElement("span", {
                 className: r.container
             }, n.map(t => a.default.createElement(er.Button, {
@@ -27863,15 +27846,15 @@
                 "aria-hidden": !0
             }, t)))
         },
-        rs = (0, a.createContext)({
+        ra = (0, a.createContext)({
             urlLocale: o.Locale.English,
             targetLocale: o.Locale.English,
             creatorHubLocale: o.Locale.English,
             subPath: "",
             isLocalePrefixed: !0
         });
-    rs.displayName = "CurrentLocale";
-    let rl = async () => [], ru = (0, a.createContext)({
+    ra.displayName = "CurrentLocale";
+    let ri = async () => [], rs = (0, a.createContext)({
         isEnabled: !1,
         setRecommendationQuery: () => {
             throw Error("setRecommendationQuery not implemented")
@@ -27881,15 +27864,15 @@
         },
         recommendations: []
     });
-    ru.displayName = "RecommendedSearch";
-    let rc = t => {
+    rs.displayName = "RecommendedSearch";
+    let rl = t => {
             let {
                 children: n
             } = t, {
                 targetLocale: r
-            } = (0, a.useContext)(rs), o = nk(), [i, s] = (0, a.useState)(""), [l, u] = (0, a.useState)([]), [c, d] = (0, a.useState)([]), p = (0, a.useMemo)(() => {
-                if (!o) return rl;
-                let t = new nM(r);
+            } = (0, a.useContext)(ra), o = nA(), [i, s] = (0, a.useState)(""), [l, u] = (0, a.useState)([]), [c, d] = (0, a.useState)([]), p = (0, a.useMemo)(() => {
+                if (!o) return ri;
+                let t = new nL(r);
                 return t.getSearchRecommendations.bind(t)
             }, [o, r]);
             return (0, a.useEffect)(() => {
@@ -27897,7 +27880,7 @@
                     query: i,
                     exclusions: i.trim().length ? l : []
                 }).then(d) : d([])
-            }, [i, l, p, o]), a.default.createElement(ru.Provider, {
+            }, [i, l, p, o]), a.default.createElement(rs.Provider, {
                 value: {
                     isEnabled: o,
                     setRecommendationQuery: s,
@@ -27906,7 +27889,7 @@
                 }
             }, n)
         },
-        rd = t => {
+        ru = t => {
             let {
                 impressionRef: n,
                 locale: r,
@@ -27917,11 +27900,11 @@
             } = t, {
                 currentProduct: u,
                 eventLogger: c
-            } = tT(), {
+            } = tx(), {
                 recommendations: d,
                 isEnabled: p,
                 setRecommendationQuery: m
-            } = (0, a.useContext)(ru);
+            } = (0, a.useContext)(rs);
             return (0, a.useEffect)(() => {
                 p && l && n.current !== l && (n.current = l, (t => {
                     let {
@@ -27933,7 +27916,7 @@
                         searchSessionId: s
                     } = t;
                     n.logImpressionEvent({
-                        eventName: tk.RecommendationImpression,
+                        eventName: tA.RecommendationImpression,
                         parameters: {
                             locale: r,
                             query: o,
@@ -27957,14 +27940,12 @@
                 recommendations: d.slice(0, o)
             }) : null
         },
-        rp = new Set(["/assistant", "/courses", "/release-notes"]),
-        rm = [o.Locale.English, o.Locale.Spanish, o.Locale.French, o.Locale.German, o.Locale.Italian, o.Locale.BrazilPortuguese, o.Locale.Korean, o.Locale.SimplifiedChinese, o.Locale.TraditionalChinese, o.Locale.Japanese];
-    o.Locale.English, o.Locale.English, o.Locale.Spanish, o.Locale.French, o.Locale.German, o.Locale.Italian, o.Locale.BrazilPortuguese, o.Locale.Korean, o.Locale.SimplifiedChinese, o.Locale.TraditionalChinese, o.Locale.Japanese;
-    let rh = ["/"].concat(rm.map(t => {
+        rc = new Set(["/assistant", "/release-notes"]),
+        rd = ["/"].concat([o.Locale.English, o.Locale.Spanish, o.Locale.French, o.Locale.German, o.Locale.Italian, o.Locale.BrazilPortuguese, o.Locale.Korean, o.Locale.SimplifiedChinese, o.Locale.TraditionalChinese, o.Locale.Japanese].map(t => {
             var n;
             return "/".concat(null != (n = null == t ? void 0 : t.toLowerCase()) ? n : "")
         })),
-        rf = function(t) {
+        rp = function(t) {
             let {
                 ref: r,
                 isDocSiteUrl: o,
@@ -27974,24 +27955,24 @@
             } = t, {
                 isLocalePrefixed: c,
                 urlLocale: d
-            } = (0, a.useContext)(rs);
+            } = (0, a.useContext)(ra);
             if (!o) return a.default.createElement(u.Link, {
                 ref: r,
                 href: s,
                 ...l
             });
-            if (!s) return n.default.env.isExport ? a.default.createElement(a.default.Fragment, null) : (tN("href is required for DynamicallyRouted components. Got '".concat(s, "'")), a.default.createElement(u.Link, {
+            if (!s) return n.default.env.isExport ? a.default.createElement(a.default.Fragment, null) : (tF("href is required for DynamicallyRouted components. Got '".concat(s, "'")), a.default.createElement(u.Link, {
                 ref: r,
                 ...l
             }));
-            if (s.startsWith("#") || nB(s)) return a.default.createElement(u.Link, {
+            if (s.startsWith("#") || nM(s)) return a.default.createElement(u.Link, {
                 ref: r,
                 ...t
             });
             let p = ((t, n, r) => {
                 var o, a;
-                if (t.startsWith("#") || nB(t)) throw Error("getNextUrlObject should only handle paths between in-app pages. Got path ".concat(t));
-                if (o = t.startsWith("/") ? t : "/" + t, rh.includes(o.endsWith("/") && o.length > 1 ? o.substring(0, o.length - 1) : o)) return n ? {
+                if (t.startsWith("#") || nM(t)) throw Error("getNextUrlObject should only handle paths between in-app pages. Got path ".concat(t));
+                if (o = t.startsWith("/") ? t : "/".concat(t), rd.includes(o.endsWith("/") && o.length > 1 ? o.slice(0, o.length - 1) : o)) return n ? {
                     pathname: "/[locale]",
                     query: {
                         locale: r.toLowerCase()
@@ -28000,9 +27981,9 @@
                     pathname: "/"
                 };
                 let [i, s = ""] = t.split("#"), l = i.split("/").filter(Boolean);
-                return rp.has(i) ? {
+                return rc.has(i) ? {
                     pathname: i
-                } : (n && (a = l[0], !nP.test(a)) && l.unshift(r.toLowerCase()), {
+                } : (n && (a = l[0], !nN.test(a)) && l.unshift(r.toLowerCase()), {
                     pathname: "/[[...slugs]]",
                     query: {
                         slugs: l
@@ -28019,7 +28000,7 @@
                 legacyBehavior: !0
             }, a.default.createElement(u.Link, l))
         },
-        rg = (0, l.makeStyles)()(() => ({
+        rm = (0, l.makeStyles)()(() => ({
             date: {
                 textTransform: "uppercase",
                 height: 17,
@@ -28030,7 +28011,7 @@
                 WebkitLineClamp: 2
             }
         })),
-        ry = t => {
+        rh = t => {
             var n;
             let {
                 utcTime: r,
@@ -28040,7 +28021,7 @@
                 classes: {
                     date: u
                 }
-            } = rg();
+            } = rm();
             return r ? a.default.createElement(c.Typography, {
                 classes: {
                     root: u
@@ -28053,7 +28034,7 @@
                 timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
             }))) : null != s ? s : null
         },
-        rv = () => a.default.createElement("svg", {
+        rf = () => a.default.createElement("svg", {
             width: "20",
             height: "20",
             viewBox: "0 0 20 20",
@@ -28070,7 +28051,7 @@
             d: "M15.3709 1.33827C15.3894 1.28566 15.439 1.25045 15.4948 1.25045H15.7551C15.8108 1.25045 15.8605 1.28566 15.8789 1.33827L16.4762 3.04155C16.5553 3.26736 16.7329 3.44492 16.9587 3.5241L18.662 4.12135C18.7146 4.1398 18.7498 4.18946 18.7498 4.24521V4.5055C18.7498 4.56125 18.7146 4.61091 18.662 4.62936L16.9587 5.22661C16.7329 5.30579 16.5553 5.48335 16.4762 5.70916L15.8789 7.41244C15.8605 7.46505 15.8108 7.50026 15.7551 7.50026H15.4948C15.439 7.50026 15.3894 7.46505 15.3709 7.41244L14.7736 5.70916C14.6945 5.48335 14.5169 5.30579 14.2911 5.22661L12.5878 4.62936C12.5352 4.61091 12.5 4.56125 12.5 4.5055V4.24521C12.5 4.18946 12.5352 4.1398 12.5878 4.12135L14.2911 3.5241C14.5169 3.44492 14.6945 3.26736 14.7736 3.04155L15.3709 1.33827Z",
             fill: "currentColor"
         })),
-        rb = () => a.default.createElement("svg", {
+        rg = () => a.default.createElement("svg", {
             width: "20",
             height: "20",
             viewBox: "0 0 20 20",
@@ -28107,7 +28088,7 @@
             height: "20",
             fill: "currentColor"
         }))),
-        rC = () => a.default.createElement("svg", {
+        ry = () => a.default.createElement("svg", {
             width: "20",
             height: "20",
             viewBox: "0 0 20 20",
@@ -28117,7 +28098,7 @@
             d: "M16.2502 5.83382V9.16715H5.27516L8.2585 6.17549L7.0835 5.00049L2.0835 10.0005L7.0835 15.0005L8.2585 13.8255L5.27516 10.8338H17.9168V5.83382H16.2502Z",
             fill: "currentColor"
         })),
-        rE = () => a.default.createElement("svg", {
+        rv = () => a.default.createElement("svg", {
             width: "20",
             height: "20",
             viewBox: "0 0 20 20",
@@ -28129,7 +28110,7 @@
             d: "M3.97625 5.32135C3.768 5.44159 3.76789 5.74213 3.97605 5.86251L9.68843 9.16608C9.88215 9.27812 10.121 9.27803 10.3146 9.16584L16.0195 5.86076C16.2274 5.74027 16.2272 5.4399 16.0191 5.31972L10.3116 2.0245C10.1182 1.91285 9.87994 1.91285 9.68657 2.0245L3.97625 5.32135ZM17.1158 7.21242C17.1158 6.97165 16.855 6.82133 16.6467 6.94202L10.9358 10.2506C10.7429 10.3624 10.6241 10.5684 10.6241 10.7914V17.3774C10.6241 17.6179 10.8845 17.7683 11.0929 17.648L16.8033 14.3511C16.9967 14.2394 17.1158 14.0331 17.1158 13.8098V7.21242ZM8.90535 17.648C9.11369 17.7683 9.3741 17.618 9.3741 17.3774V10.7888C9.3741 10.5657 9.25515 10.3595 9.062 10.2478L3.35127 6.94517C3.14294 6.82468 2.88232 6.97502 2.88232 7.21569V13.8098C2.88232 14.0331 3.00145 14.2394 3.19482 14.3511L8.90535 17.648ZM10.9366 0.941968C10.3564 0.607031 9.64169 0.607031 9.06157 0.941968L2.56982 4.68998C1.9897 5.02491 1.63232 5.6439 1.63232 6.31378V13.8098C1.63232 14.4797 1.9897 15.0987 2.56982 15.4336L9.06157 19.1816C9.64169 19.5165 10.3564 19.5165 10.9366 19.1816L17.4283 15.4336C18.0084 15.0987 18.3658 14.4797 18.3658 13.8098V6.31378C18.3658 5.6439 18.0084 5.02491 17.4283 4.68998L10.9366 0.941968Z",
             fill: "currentColor"
         })),
-        rw = () => a.default.createElement("svg", {
+        rb = () => a.default.createElement("svg", {
             width: "20",
             height: "20",
             viewBox: "0 0 20 20",
@@ -28176,7 +28157,7 @@
             height: "20",
             fill: "currentColor"
         }))),
-        rI = () => a.default.createElement("svg", {
+        rC = () => a.default.createElement("svg", {
             width: "20",
             height: "21",
             viewBox: "0 0 20 21",
@@ -28186,7 +28167,7 @@
             d: "M8.33342 14.25L13.3334 10.5L8.33342 6.75V14.25ZM10.0001 2.16666C5.40008 2.16666 1.66675 5.9 1.66675 10.5C1.66675 15.1 5.40008 18.8333 10.0001 18.8333C14.6001 18.8333 18.3334 15.1 18.3334 10.5C18.3334 5.9 14.6001 2.16666 10.0001 2.16666ZM10.0001 17.1667C6.32508 17.1667 3.33341 14.175 3.33341 10.5C3.33341 6.825 6.32508 3.83333 10.0001 3.83333C13.6751 3.83333 16.6667 6.825 16.6667 10.5C16.6667 14.175 13.6751 17.1667 10.0001 17.1667Z",
             fill: "currentColor"
         })),
-        rS = () => a.default.createElement("svg", {
+        rE = () => a.default.createElement("svg", {
             width: "20",
             height: "20",
             viewBox: "0 0 20 20",
@@ -28215,7 +28196,7 @@
             height: "19.9994",
             fill: "currentColor"
         }))),
-        rx = (0, l.makeStyles)()(t => ({
+        rw = (0, l.makeStyles)()(t => ({
             container: {
                 width: 28,
                 height: 28,
@@ -28229,13 +28210,13 @@
                 height: 28
             }
         })),
-        rA = t => {
+        rI = t => {
             let {
                 universeId: n,
                 name: r = ""
             } = t, {
                 classes: o
-            } = rx();
+            } = rw();
             return a.default.createElement("div", {
                 className: o.container
             }, a.default.createElement(eu.Thumbnail2d, {
@@ -28246,13 +28227,13 @@
                 returnPolicy: eu.ReturnPolicy.PlaceHolder
             }))
         },
-        rT = t => {
+        rS = t => {
             let {
                 assetId: n,
                 name: r = ""
             } = t, {
                 classes: o
-            } = rx();
+            } = rw();
             return a.default.createElement("div", {
                 className: o.container
             }, a.default.createElement(eu.Thumbnail2d, {
@@ -28263,20 +28244,20 @@
                 returnPolicy: eu.ReturnPolicy.PlaceHolder
             }))
         },
-        rk = {
+        rx = {
             "/dashboard/creations/experiences": t => {
-                let n = "experience" === t.hubType || t.path && n9.test(t.path) ? function(t) {
+                let n = "experience" === t.hubType || t.path && n6.test(t.path) ? function(t) {
                     if (t.entityId) {
                         let n = parseInt(t.entityId, 10);
                         if (!Number.isNaN(n)) return n
                     }
                     if (t.path) {
-                        let n = t.path.match(n9);
+                        let n = t.path.match(n6);
                         if (n) return parseInt(n[1], 10)
                     }
                     return null
                 }(t) : null;
-                return n ? a.default.createElement(rA, {
+                return n ? a.default.createElement(rI, {
                     universeId: n,
                     name: t.title
                 }) : a.default.createElement(v.BuilderExperiencesIcon, null)
@@ -28294,7 +28275,7 @@
                 size: "Medium"
             }),
             "/advertise": a.default.createElement(f.BuilderMegaphoneIcon, null),
-            "/store/asset": t => t.documentationContentType === tP.Store && t.storeThumbnailAssetId ? a.default.createElement(rT, {
+            "/store/asset": t => t.documentationContentType === tN.Store && t.storeThumbnailAssetId ? a.default.createElement(rS, {
                 assetId: t.storeThumbnailAssetId,
                 name: t.title
             }) : a.default.createElement(h.BuilderStoreIcon, null),
@@ -28302,8 +28283,8 @@
             "/docs": a.default.createElement(m.BuilderInternIcon, null),
             "/devforum": a.default.createElement(p.BuilderChatSideIcon, null)
         },
-        rD = a.default.createElement(d.BuilderHomeIcon, null),
-        rj = a.default.createElement(() => a.default.createElement("svg", {
+        rA = a.default.createElement(d.BuilderHomeIcon, null),
+        rT = a.default.createElement(() => a.default.createElement("svg", {
             width: "20",
             height: "21",
             viewBox: "0 0 20 21",
@@ -28332,32 +28313,31 @@
             height: "20",
             fill: "currentColor"
         }))), null),
-        r_ = t => {
+        rk = t => {
             let {
                 item: n
             } = t;
             switch (n.type) {
-                case n6.Assistant:
+                case n3.Assistant:
+                    return a.default.createElement(rf, null);
+                case n3.CloudAPI:
+                case n3.CloudAPI2:
+                case n3.CloudLegacy:
+                case n3.CloudFeature:
+                    return a.default.createElement(rg, null);
+                case n3.EngineAPI:
+                    if (n.documentationSubType === tH.Enum) return a.default.createElement(rb, null);
                     return a.default.createElement(rv, null);
-                case n6.CloudAPI:
-                case n6.CloudAPI2:
-                case n6.CloudLegacy:
-                case n6.CloudFeature:
-                    return a.default.createElement(rb, null);
-                case n6.EngineAPI:
-                    if (n.documentationSubType === tV.Enum) return a.default.createElement(rw, null);
-                    return a.default.createElement(rE, null);
-                case n6.EngineAPIMember:
-                    return a.default.createElement(rE, null);
-                case n6.Forum:
+                case n3.EngineAPIMember:
+                    return a.default.createElement(rv, null);
+                case n3.Forum:
                     return a.default.createElement(p.BuilderChatSideIcon, null);
-                case n6.Videos:
-                    return a.default.createElement(rI, null);
-                case n6.Markdown:
-                case n6.ReleaseNote:
-                case n6.Lesson:
+                case n3.Videos:
+                    return a.default.createElement(rC, null);
+                case n3.Markdown:
+                case n3.ReleaseNote:
                 default:
-                    if (!n.path) return rj;
+                    if (!n.path) return rT;
                     var r = (function(t) {
                         try {
                             return new URL(t).pathname
@@ -28365,17 +28345,17 @@
                             return t.split("?")[0]
                         }
                     })(n.path).replace(/\/$/, "") || "/";
-                    if ("/" === r) return rD;
+                    if ("/" === r) return rA;
                     let o = r.split("/");
                     for (; o.length > 1;) {
-                        let t = rk[o.join("/")];
+                        let t = rx[o.join("/")];
                         if (t) return "function" == typeof t ? t(n) : t;
                         o.pop()
                     }
-                    return rj
+                    return rT
             }
         },
-        rR = function() {
+        rD = function() {
             let t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 1;
             return 1 === t ? {
                 overflow: "hidden",
@@ -28391,7 +28371,7 @@
                 boxOrient: "vertical"
             }
         },
-        rL = (0, l.makeStyles)()((t, n) => ({
+        rj = (0, l.makeStyles)()((t, n) => ({
             listItem: {
                 fontSize: 14,
                 padding: "8px 16px",
@@ -28431,13 +28411,13 @@
                 margin: 0,
                 lineHeight: 1.4,
                 maxWidth: "calc(100% - 32px)",
-                ...rR(1)
+                ...rD(1)
             },
             listItemTitle: {
                 maxWidth: "calc(100% - 32px)",
                 display: "inline-block",
                 verticalAlign: "middle",
-                ...rR(1)
+                ...rD(1)
             },
             listItemTitleInline: {
                 display: "inline"
@@ -28447,7 +28427,7 @@
                 maxWidth: "calc(100% - 32px)",
                 display: "inline-block",
                 verticalAlign: "middle",
-                ...rR(1)
+                ...rD(1)
             },
             listItemLabel: {
                 fontSize: 12,
@@ -28456,7 +28436,7 @@
                 verticalAlign: "middle",
                 lineHeight: "20px",
                 maxWidth: "calc(100% - 32px)",
-                ...rR(1)
+                ...rD(1)
             },
             listItemLabelInline: {
                 fontSize: 12,
@@ -28485,7 +28465,7 @@
                 left: 0
             }
         })),
-        rF = (0, l.makeStyles)()(() => ({
+        r_ = (0, l.makeStyles)()(() => ({
             container: {
                 display: "inline-flex",
                 maxWidth: "100%",
@@ -28510,23 +28490,23 @@
                 fontWeight: 1e3
             }
         })),
-        rN = ["strong"],
-        rM = ["class"],
-        rP = t => t ? ta.sanitize(t, {
-            ALLOWED_TAGS: rN,
-            ALLOWED_ATTR: rM
+        rR = ["strong"],
+        rF = ["class"],
+        rL = t => t ? ta.sanitize(t, {
+            ALLOWED_TAGS: rR,
+            ALLOWED_ATTR: rF
         }) : "",
-        rB = t => {
+        rN = t => {
             var n;
             let {
                 item: r
             } = t, o, i, {
                 classes: l
-            } = rF(), {
+            } = r_(), {
                 breadcrumb: u,
                 detailText: c,
                 detailHtml: d
-            } = (o = null != (n = r.hubBreadcrumb) ? n : "", i = r.documentationContentType === tP.CreatorHub, r.authorName ? {
+            } = (o = null != (n = r.hubBreadcrumb) ? n : "", i = r.documentationContentType === tN.CreatorHub, r.authorName ? {
                 breadcrumb: o,
                 detailText: r.authorName,
                 detailHtml: ""
@@ -28538,7 +28518,7 @@
                 breadcrumb: o,
                 detailText: "",
                 detailHtml: ""
-            }), p = (0, a.useMemo)(() => rP(d), [d]), m = !!c || !!p, h = t => c ? a.default.createElement("span", {
+            }), p = (0, a.useMemo)(() => rL(d), [d]), m = !!c || !!p, h = t => c ? a.default.createElement("span", {
                 className: t
             }, c) : a.default.createElement("span", {
                 className: t,
@@ -28561,7 +28541,7 @@
                     className: l.fixed
                 }, "".concat(s.TITLE_SEPARATOR).concat(n)), a.default.createElement("span", {
                     className: l.boldSeparator
-                }, n7), h(l.fixed))
+                }, n8), h(l.fixed))
             }
             return a.default.createElement("span", {
                 className: l.container
@@ -28569,9 +28549,9 @@
                 className: l.shrinkable
             }, u), a.default.createElement("span", {
                 className: l.boldSeparator
-            }, n7), h(l.fixed))
+            }, n8), h(l.fixed))
         },
-        rO = a.default.memo(t => {
+        rM = a.default.memo(t => {
             var n, r, i;
             let {
                 item: s,
@@ -28581,35 +28561,35 @@
                 onKeyboardModifierDetected: p
             } = t, m = (0, a.useRef)(null), {
                 onKeyDownSearch: h
-            } = nK(m), [f, g] = (0, a.useState)(u), {
+            } = nW(m), [f, g] = (0, a.useState)(u), {
                 classes: y,
                 cx: v
-            } = rL({
+            } = rj({
                 isSecondaryActionNonInteractive: !(null == f ? void 0 : f.onClick)
             }), {
                 translate: x
             } = (0, o.useTranslation)(), {
                 robloxSiteDomain: A
-            } = tT(), T = "".concat(tS(A), "/docs"), k = (0, a.useMemo)(() => rt(s, x), [s, x]), D = (0, a.useMemo)(() => {
+            } = tx(), T = "".concat(tw(A), "/docs"), k = (0, a.useMemo)(() => n7(s, x), [s, x]), D = (0, a.useMemo)(() => {
                 var t;
                 return !!(null != (t = s.hubBreadcrumb) ? t : s.authorName)
-            }, [s]), j = (0, a.useMemo)(() => rP(s.title), [s.title]), _ = (0, a.useMemo)(() => rP(s.description), [s.description]), R = D ? a.default.createElement(c.Typography, {
+            }, [s]), j = (0, a.useMemo)(() => rL(s.title), [s.title]), _ = (0, a.useMemo)(() => rL(s.description), [s.description]), R = D ? a.default.createElement(c.Typography, {
                 variant: "body2",
                 color: "inherit",
                 className: y.listItemDescription
-            }, a.default.createElement(rB, {
+            }, a.default.createElement(rN, {
                 item: s
-            })) : s.documentationSubType === tq.RobloxStaff || s.documentationSubType === tq.CommunityResources || s.documentationSubType === tq.CommunityTutorials ? a.default.createElement(c.Typography, {
+            })) : s.documentationSubType === tV.RobloxStaff || s.documentationSubType === tV.CommunityResources || s.documentationSubType === tV.CommunityTutorials ? a.default.createElement(c.Typography, {
                 variant: "body2",
                 color: "inherit",
                 className: y.listItemDescription
             }, (null == (r = s.author) ? void 0 : r.name) ? x("Label.PostedBy", {
                 authorName: null == (i = s.author) ? void 0 : i.name
-            }) : "") : s.documentationSubType === tq.Announcements ? a.default.createElement(ry, {
+            }) : "") : s.documentationSubType === tV.Announcements ? a.default.createElement(rh, {
                 utcTime: s.updatedAtUtc,
                 locale: null != d ? d : o.Locale.English,
                 fallbackText: s.translatedCategoryDisplayText
-            }) : s.translatedCategoryDisplayText && s.documentationContentType !== tP.CreatorHub ? a.default.createElement(c.Typography, {
+            }) : s.translatedCategoryDisplayText && s.documentationContentType !== tN.CreatorHub ? a.default.createElement(c.Typography, {
                 variant: "body2",
                 color: "inherit",
                 className: y.listItemDescription
@@ -28629,20 +28609,20 @@
                 key: s.id,
                 ref: m,
                 tabIndex: 0,
-                "data-search-navigation-element": nz.ListItem,
+                "data-search-navigation-element": nU.ListItem,
                 onFocus: () => {
                     g({
-                        Icon: rC
+                        Icon: ry
                     })
                 },
                 onBlur: () => {
                     g(u)
                 },
                 onKeyDown: t => {
-                    let n = n2(t, !0);
-                    if (nU(t)) {
+                    let n = n0(t, !0);
+                    if (nO(t)) {
                         var r, o;
-                        if (t.preventDefault(), t.stopPropagation(), n4(n) && p && s.path) {
+                        if (t.preventDefault(), t.stopPropagation(), n1(n) && p && s.path) {
                             p(n);
                             let t = (null == (o = s.path) ? void 0 : o.startsWith("http")) ? s.path : "".concat(T).concat(s.path);
                             window.open(t, "_blank", "noopener,noreferrer");
@@ -28661,7 +28641,7 @@
                 "aria-hidden": "true"
             }, a.default.createElement("div", {
                 className: y.iconContainer
-            }, a.default.createElement(r_, {
+            }, a.default.createElement(rk, {
                 item: s
             }))), a.default.createElement(E.ListItemText, {
                 className: y.listItemText,
@@ -28707,8 +28687,8 @@
                 "aria-hidden": "true"
             })))
         });
-    rO.displayName = "SearchListItem";
-    let rH = a.default.memo(t => {
+    rM.displayName = "SearchListItem";
+    let rP = a.default.memo(t => {
         var n, r, i, s, l;
         let {
             item: u,
@@ -28721,10 +28701,10 @@
             translate: T
         } = (0, o.useTranslation)(), {
             targetLocale: k
-        } = (0, a.useContext)(rs), {
+        } = (0, a.useContext)(ra), {
             currentProduct: D,
             eventLogger: j
-        } = tT(), _ = (0, a.useRef)(null);
+        } = tx(), _ = (0, a.useRef)(null);
         l = h ? {
             currentProduct: D,
             locale: k,
@@ -28739,7 +28719,7 @@
                 if (null == y || null == v) return;
                 let t = "".concat(y, ":").concat(v);
                 f.current.has(t) || (f.current.add(t), j.logImpressionEvent({
-                    eventName: tk.ResultItemImpression,
+                    eventName: tA.ResultItemImpression,
                     parameters: {
                         currentProduct: null != b ? b : "",
                         locale: null != C ? C : "",
@@ -28777,29 +28757,29 @@
                 n.unobserve(t), n.disconnect(), A.cancel()
             }
         }, [_, y, v, A]);
-        let R = (0, a.useMemo)(() => rt(u, T), [u, T]),
-            L = u.documentationContentType !== tP.Store && (null == (s = u.path) ? void 0 : s.startsWith("http"));
+        let R = (0, a.useMemo)(() => n7(u, T), [u, T]),
+            F = u.documentationContentType !== tN.Store && (null == (s = u.path) ? void 0 : s.startsWith("http"));
         return a.default.createElement("div", {
             ref: _
-        }, a.default.createElement(rf, {
+        }, a.default.createElement(rp, {
             tabIndex: -1,
             href: null != (i = u.path) ? i : "",
             onClick: t => {
-                n0(t) ? c(u, n2(t, !1)) : c(u, tj.KeyboardEnter)
+                nQ(t) ? c(u, n0(t, !1)) : c(u, tk.KeyboardEnter)
             },
-            isDocSiteUrl: u.documentationContentType !== tP.CreatorHub,
+            isDocSiteUrl: u.documentationContentType !== tN.CreatorHub,
             skipLocalePrefix: !0,
-            target: L ? "_blank" : void 0,
-            rel: L ? "noopener noreferrer" : void 0,
-            "aria-label": null != p ? p : rr(u, R, T),
+            target: F ? "_blank" : void 0,
+            rel: F ? "noopener noreferrer" : void 0,
+            "aria-label": null != p ? p : rt(u, R, T),
             style: {
                 textDecoration: "none",
                 color: "inherit"
             }
-        }, a.default.createElement(rO, {
+        }, a.default.createElement(rM, {
             item: u,
             className: d,
-            endAdornment: L ? {
+            endAdornment: F ? {
                 Icon: x.OpenInNewIcon
             } : m,
             locale: k,
@@ -28808,8 +28788,8 @@
             }
         })))
     });
-    rH.displayName = "SearchListItemLink";
-    let rU = a.default.memo(t => {
+    rP.displayName = "SearchListItemLink";
+    let rB = a.default.memo(t => {
         let {
             item: n,
             className: r,
@@ -28827,28 +28807,28 @@
                 t.stopPropagation(), t.preventDefault(), s(n.id)
             },
             onKeyDown: t => {
-                nU(t) && s(n.id)
+                nO(t) && s(n.id)
             }
-        }), [n.id, n.title, s, u]), d = (0, a.useMemo)(() => rt(n, u), [n, u]), p = null != l ? l : rr(n, d, u);
+        }), [n.id, n.title, s, u]), d = (0, a.useMemo)(() => n7(n, u), [n, u]), p = null != l ? l : rt(n, d, u);
         return a.default.createElement("a", {
             tabIndex: -1,
             href: n.path,
             onClick: t => {
-                n0(t) ? i(n, n2(t, !1)) : i(n, tj.KeyboardEnter)
+                nQ(t) ? i(n, n0(t, !1)) : i(n, tk.KeyboardEnter)
             },
             "aria-label": p,
             style: {
                 textDecoration: "none",
                 color: "inherit"
             }
-        }, a.default.createElement(rO, {
+        }, a.default.createElement(rM, {
             item: n,
             className: r,
             endAdornment: c
         }))
     });
-    rU.displayName = "RecentlyVisitedItem";
-    let rV = (0, l.makeStyles)()(() => ({
+    rB.displayName = "RecentlyVisitedItem";
+    let rO = (0, l.makeStyles)()(() => ({
             sectionTitleContainer: {
                 alignItems: "center",
                 display: "flex",
@@ -28882,7 +28862,7 @@
                 padding: "4px"
             }
         })),
-        rz = t => {
+        rH = t => {
             let {
                 showAllResultsButton: n = !1,
                 isTitleClickable: r,
@@ -28897,7 +28877,7 @@
             } = t, {
                 classes: f,
                 cx: g
-            } = rV(), {
+            } = rO(), {
                 translate: y
             } = (0, o.useTranslation)(), {
                 visibleCount: v,
@@ -28940,12 +28920,12 @@
             }(s.length), E = (0, a.useMemo)(() => s.slice(0, v), [s, v]), w = (0, a.useCallback)((t, n) => {
                 d(t, n)
             }, [d]);
-            !r || n || l || tN("SearchList: onClickTitle is required when isTitleClickable is true");
+            !r || n || l || tF("SearchList: onClickTitle is required when isTitleClickable is true");
             let I = t => {
-                    n0(t) ? null == l || l(tj.ClickCategoryTitle) : null == l || l(tj.KeyboardEnterCategoryTitle)
+                    nQ(t) ? null == l || l(tk.ClickCategoryTitle) : null == l || l(tk.KeyboardEnterCategoryTitle)
                 },
                 x = t => {
-                    n0(t) ? null == u || u(tj.ClickCategoryTitle) : null == u || u(tj.KeyboardEnterCategoryTitle)
+                    nQ(t) ? null == u || u(tk.ClickCategoryTitle) : null == u || u(tk.KeyboardEnterCategoryTitle)
                 };
             return a.default.createElement(a.default.Fragment, null, !n && i && a.default.createElement("div", {
                 className: g(f.sectionTitleContainer, {
@@ -28981,22 +28961,22 @@
                 onClick: r ? x : void 0
             }, null != h ? h : y("Label.AllResults") || "All Results")), a.default.createElement(D.List, {
                 className: f.listContainer,
-                "data-list-container": nV.List,
+                "data-list-container": nH.List,
                 tabIndex: -1
-            }, E.map((t, n) => p ? a.default.createElement(rU, {
+            }, E.map((t, n) => p ? a.default.createElement(rB, {
                 key: t.id,
                 item: t,
                 onClickItem: w,
                 onRemove: p,
                 className: t.className,
                 ariaLabel: t.ariaLabel
-            }) : a.default.createElement(rH, {
+            }) : a.default.createElement(rP, {
                 key: t.id,
                 item: t,
                 onClickItem: w,
                 className: t.className,
                 ariaLabel: t.ariaLabel,
-                endAdornment: re,
+                endAdornment: n9,
                 impressionContext: m ? {
                     ...m,
                     rank: n
@@ -29009,7 +28989,7 @@
                 }
             })))
         },
-        rq = t => {
+        rU = t => {
             let {
                 isContentTypeFilterDefault: n,
                 searchListItems: r,
@@ -29023,33 +29003,33 @@
                 query: m
             } = t, {
                 setExclusions: h
-            } = (0, a.useContext)(ru), {
+            } = (0, a.useContext)(rs), {
                 translate: f
             } = (0, o.useTranslation)(), {
                 displayFilter: g,
                 isFilterDefault: y,
                 isDocSiteContext: v,
                 maxResultsPerCategory: b
-            } = (0, a.useContext)(nO);
+            } = (0, a.useContext)(nP);
             (0, a.useEffect)(() => {
                 h(Object.values(r).flat().map(t => t.title))
             }, [r, h]);
             let C = (0, a.useMemo)(() => Object.values(r).flat().reduce((t, n) => {
                     var r, o;
-                    let a = tH(null != (r = n.documentationContentType) ? r : null);
+                    let a = tB(null != (r = n.documentationContentType) ? r : null);
                     return t[a] = [...null != (o = t[a]) ? o : [], n], t
                 }, {}), [r]),
                 E = (0, a.useMemo)(() => Object.keys(r), [r]),
                 w = (0, a.useMemo)(() => E.reduce((t, n) => {
-                    let r = nX.find(t => t.value === n);
+                    let r = nZ.find(t => t.value === n);
                     return r && (t[n] = r), t
                 }, {}), [E]),
                 I = p && m ? {
                     searchSessionId: p,
                     query: m
                 } : void 0,
-                S = g === tB && v ? f("Label.AllLearnResults") || "All Learn Results" : void 0,
-                x = nY.find(t => t.value === tO),
+                S = g === tM && v ? f("Label.AllLearnResults") || "All Learn Results" : void 0,
+                x = nJ.find(t => t.value === tP),
                 A = !!i && i.length > 0,
                 T = (0, a.useMemo)(() => i ? function(t) {
                     let n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 2,
@@ -29067,12 +29047,12 @@
             return a.default.createElement(a.default.Fragment, null, (() => {
                 var t, o, p, m;
                 if (y) {
-                    let t = Object.keys(C).filter(t => "Hub" === t || t === tB).map(t => {
+                    let t = Object.keys(C).filter(t => "Hub" === t || t === tM).map(t => {
                         let n = C[t],
-                            r = nY.find(n => n.value === t);
+                            r = nJ.find(n => n.value === t);
                         if (!r || !n || 0 === n.length) return null;
                         let o = b ? n.slice(0, b) : n;
-                        return a.default.createElement(rz, {
+                        return a.default.createElement(rH, {
                             key: t,
                             isTitleClickable: !0,
                             items: o,
@@ -29086,7 +29066,7 @@
                     return a.default.createElement(a.default.Fragment, null, t, (t => {
                         if (!A || !x || !i) return null;
                         let n = b ? i.slice(0, b) : i;
-                        return a.default.createElement(rz, {
+                        return a.default.createElement(rH, {
                             key: t,
                             isTitleClickable: !0,
                             items: n,
@@ -29098,7 +29078,7 @@
                         })
                     })("store-default"))
                 }
-                if (g === tO) return A && x && i ? a.default.createElement(rz, {
+                if (g === tP) return A && x && i ? a.default.createElement(rH, {
                     key: "store",
                     isTitleClickable: !0,
                     items: T,
@@ -29110,8 +29090,8 @@
                 }) : null;
                 if ("Hub" === g) {
                     let n = null != (t = C.Hub) ? t : [],
-                        r = nY.find(t => "Hub" === t.value);
-                    return 0 === n.length ? null : a.default.createElement(rz, {
+                        r = nJ.find(t => "Hub" === t.value);
+                    return 0 === n.length ? null : a.default.createElement(rH, {
                         key: "hub",
                         isTitleClickable: !0,
                         items: n,
@@ -29122,11 +29102,11 @@
                         impressionContext: I
                     })
                 }
-                if (g === tB) {
+                if (g === tM) {
                     if (v) return E.map(t => {
                         let o = r[t],
                             i = w[t];
-                        return i && o ? a.default.createElement(rz, {
+                        return i && o ? a.default.createElement(rH, {
                             key: t,
                             isTitleClickable: !0,
                             items: o,
@@ -29139,9 +29119,9 @@
                             impressionContext: I
                         }) : null
                     });
-                    let t = null != (p = C[tB]) ? p : [],
-                        o = nY.find(t => t.value === tB);
-                    return 0 === t.length ? null : a.default.createElement(rz, {
+                    let t = null != (p = C[tM]) ? p : [],
+                        o = nJ.find(t => t.value === tM);
+                    return 0 === t.length ? null : a.default.createElement(rH, {
                         key: "learn",
                         isTitleClickable: !0,
                         items: t,
@@ -29155,7 +29135,7 @@
                 return E.map(t => {
                     let o = r[t],
                         i = w[t];
-                    return i && o ? a.default.createElement(rz, {
+                    return i && o ? a.default.createElement(rH, {
                         key: t,
                         isTitleClickable: !0,
                         items: o,
@@ -29169,7 +29149,7 @@
                 })
             })())
         },
-        rW = (0, l.makeStyles)()((t, n) => {
+        rV = (0, l.makeStyles)()((t, n) => {
             let {
                 isSearchContentNothing: r = !1
             } = n;
@@ -29238,7 +29218,7 @@
                 }
             }
         }),
-        rG = (0, l.makeStyles)()(() => ({
+        rz = (0, l.makeStyles)()(() => ({
             filterChipsSection: {
                 display: "flex",
                 flexDirection: "column"
@@ -29253,58 +29233,83 @@
                 padding: "8px 16px"
             }
         })),
+        rq = t => {
+            let {
+                filter: n,
+                onClickFilter: r,
+                translate: o
+            } = t, i = (0, a.useRef)(null), {
+                onKeyDownSearch: s
+            } = nW(i);
+            return a.default.createElement(w.Chip, {
+                ref: i,
+                label: o("".concat(n.translationKey)) || n.fallbackLabel,
+                size: "small",
+                color: "secondary",
+                tabIndex: 0,
+                "data-search-navigation-element": nU.Chip,
+                onClick: t => {
+                    nQ(t) && r(n, tk.ClickCategoryPill)
+                },
+                onKeyDown: t => {
+                    nO(t) ? (t.preventDefault(), t.stopPropagation(), r(n, tk.KeyboardEnterCategoryPill)) : s(t)
+                }
+            })
+        },
+        rW = t => {
+            let {
+                filter: n,
+                onClickFilter: r,
+                translate: o
+            } = t, i = (0, a.useRef)(null), {
+                onKeyDownSearch: s
+            } = nW(i);
+            return a.default.createElement(w.Chip, {
+                ref: i,
+                label: o("".concat(n.translationKey)) || n.fallbackLabel,
+                size: "small",
+                color: "secondary",
+                tabIndex: 0,
+                "data-search-navigation-element": nU.Chip,
+                onClick: t => {
+                    nQ(t) && r(n, tk.ClickCategoryPill)
+                },
+                onKeyDown: t => {
+                    nO(t) ? (t.preventDefault(), t.stopPropagation(), r(n, tk.KeyboardEnterCategoryPill)) : s(t)
+                }
+            })
+        },
+        rG = t => {
+            let {
+                onClickFilter: n
+            } = t, {
+                classes: r
+            } = rz(), {
+                translate: i
+            } = (0, o.useTranslation)();
+            return a.default.createElement("div", {
+                className: r.filterChipsSection
+            }, a.default.createElement(c.Typography, {
+                variant: "tableHead",
+                component: "h2",
+                color: "secondary",
+                className: r.filterChipsSectionTitle
+            }, i("Label.FilterByCategory") || "Filter by category"), a.default.createElement("div", {
+                className: r.filterChips,
+                "data-filter-chips-container": nH.Chips
+            }, nZ.map(t => a.default.createElement(rq, {
+                key: t.value,
+                filter: t,
+                onClickFilter: n,
+                translate: i
+            }))))
+        },
         rK = t => {
             let {
-                filter: n,
-                onClickFilter: r,
-                translate: o
-            } = t, i = (0, a.useRef)(null), {
-                onKeyDownSearch: s
-            } = nK(i);
-            return a.default.createElement(w.Chip, {
-                ref: i,
-                label: o("".concat(n.translationKey)) || n.fallbackLabel,
-                size: "small",
-                color: "secondary",
-                tabIndex: 0,
-                "data-search-navigation-element": nz.Chip,
-                onClick: t => {
-                    n0(t) && r(n, tj.ClickCategoryPill)
-                },
-                onKeyDown: t => {
-                    nU(t) ? (t.preventDefault(), t.stopPropagation(), r(n, tj.KeyboardEnterCategoryPill)) : s(t)
-                }
-            })
-        },
-        rJ = t => {
-            let {
-                filter: n,
-                onClickFilter: r,
-                translate: o
-            } = t, i = (0, a.useRef)(null), {
-                onKeyDownSearch: s
-            } = nK(i);
-            return a.default.createElement(w.Chip, {
-                ref: i,
-                label: o("".concat(n.translationKey)) || n.fallbackLabel,
-                size: "small",
-                color: "secondary",
-                tabIndex: 0,
-                "data-search-navigation-element": nz.Chip,
-                onClick: t => {
-                    n0(t) && r(n, tj.ClickCategoryPill)
-                },
-                onKeyDown: t => {
-                    nU(t) ? (t.preventDefault(), t.stopPropagation(), r(n, tj.KeyboardEnterCategoryPill)) : s(t)
-                }
-            })
-        },
-        rZ = t => {
-            let {
                 onClickFilter: n
             } = t, {
                 classes: r
-            } = rG(), {
+            } = rz(), {
                 translate: i
             } = (0, o.useTranslation)();
             return a.default.createElement("div", {
@@ -29316,40 +29321,15 @@
                 className: r.filterChipsSectionTitle
             }, i("Label.FilterByCategory") || "Filter by category"), a.default.createElement("div", {
                 className: r.filterChips,
-                "data-filter-chips-container": nV.Chips
-            }, nX.map(t => a.default.createElement(rK, {
+                "data-filter-chips-container": nH.Chips
+            }, nJ.map(t => a.default.createElement(rW, {
                 key: t.value,
                 filter: t,
                 onClickFilter: n,
                 translate: i
             }))))
         },
-        rY = t => {
-            let {
-                onClickFilter: n
-            } = t, {
-                classes: r
-            } = rG(), {
-                translate: i
-            } = (0, o.useTranslation)();
-            return a.default.createElement("div", {
-                className: r.filterChipsSection
-            }, a.default.createElement(c.Typography, {
-                variant: "tableHead",
-                component: "h2",
-                color: "secondary",
-                className: r.filterChipsSectionTitle
-            }, i("Label.FilterByCategory") || "Filter by category"), a.default.createElement("div", {
-                className: r.filterChips,
-                "data-filter-chips-container": nV.Chips
-            }, nY.map(t => a.default.createElement(rJ, {
-                key: t.value,
-                filter: t,
-                onClickFilter: n,
-                translate: i
-            }))))
-        },
-        rX = [{
+        rJ = [{
             id: "3d",
             translationKey: "Label.Store3DAssets",
             fallbackLabel: "3D Assets",
@@ -29484,11 +29464,11 @@
             }))
         }];
 
-    function rQ(t, n, r) {
+    function rZ(t, n, r) {
         let o = r.trim();
         return o ? "".concat(t).concat(n, "?keyword=").concat(encodeURIComponent(o)) : "".concat(t).concat(n)
     }
-    let r$ = (0, l.makeStyles)()(t => ({
+    let rY = (0, l.makeStyles)()(t => ({
             row: {
                 display: "flex",
                 alignItems: "center",
@@ -29541,19 +29521,19 @@
                 lineHeight: 0
             }
         })),
-        r0 = t => {
+        rX = t => {
             let {
                 query: n,
                 onClickItem: r
             } = t, {
                 robloxSiteDomain: i
-            } = tT(), {
+            } = tx(), {
                 translate: s
             } = (0, o.useTranslation)(), {
                 classes: l
-            } = r$(), u = (0, a.useRef)(null), {
+            } = rY(), u = (0, a.useRef)(null), {
                 onKeyDownSearch: d
-            } = nK(u), [p, m] = (0, a.useState)(!1), h = n.trim(), f = rQ(tS(i), "/store/models", n);
+            } = nW(u), [p, m] = (0, a.useState)(!1), h = n.trim(), f = rZ(tw(i), "/store/models", n);
             if (!h) return null;
             let g = s("Label.InStoreSuffix") || "in Store",
                 y = s("Label.SearchInStoreAriaLabel", {
@@ -29563,9 +29543,9 @@
                 ref: u,
                 href: f,
                 tabIndex: 0,
-                "data-search-navigation-element": nz.ListItem,
+                "data-search-navigation-element": nU.ListItem,
                 onClick: t => {
-                    r(f, n0(t) ? n2(t, !1) : tj.KeyboardEnter)
+                    r(f, nQ(t) ? n0(t, !1) : tk.KeyboardEnter)
                 },
                 onKeyDown: d,
                 onFocus: () => m(!0),
@@ -29577,7 +29557,7 @@
                 "aria-hidden": "true"
             }, a.default.createElement("span", {
                 className: l.iconInner
-            }, a.default.createElement(rS, null))), a.default.createElement(c.Typography, {
+            }, a.default.createElement(rE, null))), a.default.createElement(c.Typography, {
                 variant: "body2",
                 component: "span",
                 className: l.label
@@ -29588,10 +29568,10 @@
             }, g)), p && a.default.createElement("span", {
                 className: l.endAdornment,
                 "aria-hidden": "true"
-            }, a.default.createElement(rC, null)))
+            }, a.default.createElement(ry, null)))
         };
 
-    function r1(t) {
+    function rQ(t) {
         var n, r;
         let o, a, i, l = t.metadata,
             {
@@ -29629,8 +29609,8 @@
             hubBreadcrumb: c
         }
     }
-    let r2 = {
-            getRecentlyVisited: async t => (await s.historyClient.getRecentlyVisited(t)).map(r1),
+    let r$ = {
+            getRecentlyVisited: async t => (await s.historyClient.getRecentlyVisited(t)).map(rQ),
             async addToRecentlyVisited(t) {
                 if (!t.path) return;
                 let n = function(t) {
@@ -29684,13 +29664,13 @@
                 return await s.historyClient.removeFromRecentlyVisited(t), this.getRecentlyVisited()
             }
         },
-        r4 = (0, l.makeStyles)()(() => ({
+        r0 = (0, l.makeStyles)()(() => ({
             emptyDiv: {
                 marginTop: "-8px",
                 height: "0px"
             }
         }));
-    var r3 = a.default.memo(t => {
+    var r1 = a.default.memo(t => {
         let {
             impressionRef: n,
             locale: r,
@@ -29701,16 +29681,16 @@
         } = (0, o.useTranslation)(), {
             currentProduct: u,
             eventLogger: c
-        } = tT(), [d, p] = (0, a.useState)([]), {
+        } = tx(), [d, p] = (0, a.useState)([]), {
             classes: m
-        } = r4();
+        } = r0();
         (0, a.useEffect)(() => {
             (async () => {
-                p(await r2.getRecentlyVisited())
+                p(await r$.getRecentlyVisited())
             })()
         }, []);
         let h = async t => {
-            p(await r2.removeFromRecentlyVisited(t))
+            p(await r$.removeFromRecentlyVisited(t))
         };
         return (0, a.useEffect)(() => {
             s && 0 !== d.length && n.current !== s && (n.current = s, (t => {
@@ -29722,7 +29702,7 @@
                     searchSessionId: i
                 } = t;
                 n.logImpressionEvent({
-                    eventName: tk.RecentlyVisitedImpression,
+                    eventName: tA.RecentlyVisitedImpression,
                     parameters: {
                         locale: r,
                         numVisited: o.length.toString(),
@@ -29740,7 +29720,7 @@
                 currentProduct: u,
                 searchSessionId: s
             }))
-        }, [s, d, n, r, u, c]), d.length > 0 ? a.default.createElement(rz, {
+        }, [s, d, n, r, u, c]), d.length > 0 ? a.default.createElement(rH, {
             title: l("Label.RecentlyVisited"),
             isTitleClickable: !1,
             items: d,
@@ -29758,7 +29738,7 @@
                         searchSessionId: u
                     } = t;
                     r.logClickEvent({
-                        eventName: tk.RecentlyVisitedDeleted,
+                        eventName: tA.RecentlyVisitedDeleted,
                         parameters: {
                             interaction: o,
                             locale: i,
@@ -29773,7 +29753,7 @@
                     })
                 })({
                     eventLogger: c,
-                    interaction: tj.Click,
+                    interaction: tk.Click,
                     item: n,
                     locale: r,
                     recentlyVisited: d,
@@ -29794,7 +29774,7 @@
                         searchSessionId: u
                     } = t;
                     r.logClickEvent({
-                        eventName: tk.RecentlyVisitedClicked,
+                        eventName: tA.RecentlyVisitedClicked,
                         parameters: {
                             interaction: o,
                             locale: i,
@@ -29821,7 +29801,7 @@
             className: m.emptyDiv
         })
     });
-    let r5 = (0, l.makeStyles)()(t => ({
+    let r2 = (0, l.makeStyles)()(t => ({
             container: {
                 paddingBottom: "6px"
             },
@@ -29830,10 +29810,10 @@
                 margin: "6px 12px"
             }
         })),
-        r6 = () => {
+        r4 = () => {
             let {
                 classes: t
-            } = r5();
+            } = r2();
             return a.default.createElement(j.Grid, {
                 container: !0,
                 direction: "column",
@@ -29849,7 +29829,7 @@
                 className: t.skeleton
             }))))
         },
-        r8 = (0, l.makeStyles)()(t => ({
+        r3 = (0, l.makeStyles)()(t => ({
             section: {
                 display: "flex",
                 flexDirection: "column"
@@ -29896,7 +29876,7 @@
                 color: t.palette.content.standard
             }
         })),
-        r9 = t => {
+        r5 = t => {
             let {
                 id: n,
                 href: r,
@@ -29908,19 +29888,19 @@
                 onClickItem: d
             } = t, p = (0, a.useRef)(null), {
                 onKeyDownSearch: m
-            } = nK(p);
+            } = nW(p);
             return a.default.createElement("a", {
                 ref: p,
                 href: r,
                 tabIndex: 0,
-                "data-search-navigation-element": nz.ListItem,
+                "data-search-navigation-element": nU.ListItem,
                 onClick: t => {
                     d({
                         id: n,
                         label: o,
                         href: r,
                         index: s
-                    }, n0(t) ? n2(t, !1) : tj.KeyboardEnter)
+                    }, nQ(t) ? n0(t, !1) : tk.KeyboardEnter)
                 },
                 onKeyDown: m,
                 "aria-label": i,
@@ -29934,17 +29914,17 @@
                 className: u.tileLabel
             }, o))
         },
-        r7 = t => {
+        r6 = t => {
             let {
                 query: n,
                 onClickItem: r
             } = t, {
                 robloxSiteDomain: i
-            } = tT(), {
+            } = tx(), {
                 translate: s
             } = (0, o.useTranslation)(), {
                 classes: l
-            } = r8(), u = tS(i);
+            } = r3(), u = tw(i);
             return a.default.createElement("div", {
                 className: l.section
             }, a.default.createElement(c.Typography, {
@@ -29954,13 +29934,13 @@
                 className: l.sectionTitle
             }, s("Label.FilterByCategory") || "Filter by category"), a.default.createElement("div", {
                 className: l.tileGrid
-            }, rX.map((t, o) => {
+            }, rJ.map((t, o) => {
                 let i = s(t.translationKey) || t.fallbackLabel,
-                    c = rQ(u, t.storePath, n),
+                    c = rZ(u, t.storePath, n),
                     d = s("Label.StoreCategoryTileAriaLabel", {
                         category: i
                     }) || "".concat(i, " in the Creator Store");
-                return a.default.createElement(r9, {
+                return a.default.createElement(r5, {
                     key: t.id,
                     id: t.id,
                     href: c,
@@ -29973,47 +29953,16 @@
                 })
             })))
         };
-    var oe = ((tf = {}).ReadSafe = "ReadSafe", tf.Safe = "Safe", tf.Unsafe = "Unsafe", tf),
-        ot = ((tg = {}).Hidden = "Hidden", tg.NotReplicated = "NotReplicated", tg.ReadOnly = "ReadOnly", tg.NotScriptable = "NotScriptable", tg.NotBrowsable = "NotBrowsable", tg.NotCreatable = "NotCreatable", tg.CanYield = "CanYield", tg.Yields = "Yields", tg.NoYield = "NoYield", tg.Service = "Service", tg.PlayerReplicated = "PlayerReplicated", tg.OpenCloudSecurity = "OpenCloudSecurity", tg.PluginSecurity = "PluginSecurity", tg.CustomLuaState = "CustomLuaState", tg.Deprecated = "Deprecated", tg.Settings = "Settings", tg.UserSettings = "UserSettings", tg),
-        on = ((ty = {}).None = "None", ty.PluginSecurity = "PluginSecurity", ty.LocalUserSecurity = "LocalUserSecurity", ty.RobloxScriptSecurity = "RobloxScriptSecurity", ty.RobloxSecurity = "RobloxSecurity", ty.RobloxEngineSecurity = "RobloxEngineSecurity", ty.NotAccessibleSecurity = "NotAccessibleSecurity", ty),
-        or = ((tv = {}).OutputOnly = "OutputOnly", tv.InputOnly = "InputOnly", tv.Required = "Required", tv.Immutable = "Immutable", tv.Deprecated = "Deprecated", tv.Beta = "Beta", tv.Experimental = "Experimental", tv.Stable = "Stable", tv.RecommendedAlternatives = "RecommendedAlternatives", tv);
-    ot.Hidden, ot.NotReplicated, ot.ReadOnly, ot.NotScriptable, ot.NotBrowsable, ot.NotCreatable, ot.CanYield, ot.Yields, ot.NoYield, ot.Service, ot.PlayerReplicated, ot.OpenCloudSecurity, [...new Map([
-        [on.PluginSecurity, "PluginSecurity"],
-        [on.LocalUserSecurity, "LocalUserSecurity"],
-        [on.RobloxScriptSecurity, "RobloxScriptSecurity"],
-        [on.RobloxSecurity, "RobloxSecurity"],
-        [on.RobloxEngineSecurity, "RobloxSecurity"],
-        [on.NotAccessibleSecurity, "NotAccessibleSecurity"]
-    ]), ...new Map([
-        [oe.ReadSafe, "ReadParallel"],
-        [oe.Safe, "WriteParallel"]
-    ]), ...new Map([
-        [ot.CanYield, "CanYield"],
-        [ot.CustomLuaState, "CustomLuaState"],
-        [ot.Deprecated, "Deprecated"],
-        [ot.Hidden, "Hidden"],
-        [ot.NotBrowsable, "NotBrowsable"],
-        [ot.NotCreatable, "NotCreatable"],
-        [ot.NotReplicated, "NotReplicated"],
-        [ot.NotScriptable, "NotScriptable"],
-        [ot.NoYield, "NoYield"],
-        [ot.PlayerReplicated, "PlayerReplicated"],
-        [ot.ReadOnly, "ReadOnly"],
-        [ot.Service, "Service"],
-        [ot.Settings, "Settings"],
-        [ot.UserSettings, "UserSettings"],
-        [ot.Yields, "Yields"],
-        [ot.OpenCloudSecurity, "OpenCloudSecurity"],
-        [ot.PluginSecurity, "PluginSecurity"]
-    ])], oe.Unsafe, on.None, ot.CustomLuaState, ot.Settings, ot.UserSettings;
-    let oo = t => {
+    var r8 = ((tf = {}).Hidden = "Hidden", tf.NotReplicated = "NotReplicated", tf.ReadOnly = "ReadOnly", tf.NotScriptable = "NotScriptable", tf.NotBrowsable = "NotBrowsable", tf.NotCreatable = "NotCreatable", tf.CanYield = "CanYield", tf.Yields = "Yields", tf.NoYield = "NoYield", tf.Service = "Service", tf.PlayerReplicated = "PlayerReplicated", tf.OpenCloudSecurity = "OpenCloudSecurity", tf.PluginSecurity = "PluginSecurity", tf.CustomLuaState = "CustomLuaState", tf.Deprecated = "Deprecated", tf.Settings = "Settings", tf.UserSettings = "UserSettings", tf),
+        r9 = ((tg = {}).OutputOnly = "OutputOnly", tg.InputOnly = "InputOnly", tg.Required = "Required", tg.Immutable = "Immutable", tg.Deprecated = "Deprecated", tg.Beta = "Beta", tg.Experimental = "Experimental", tg.Stable = "Stable", tg.RecommendedAlternatives = "RecommendedAlternatives", tg);
+    let r7 = t => {
             let n = String(t).toLowerCase();
-            return n === String(ot.Deprecated).toLowerCase() || n === String(or.Deprecated).toLowerCase()
+            return n === r8.Deprecated.toLowerCase() || n === r9.Deprecated.toLowerCase()
         },
-        oa = (t, n) => {
+        oe = (t, n) => {
             let r = 0 === t.length ? {} : t.reduce((t, n) => {
                     var r;
-                    let o = null != (r = n.documentationContentType) ? r : tP.Article;
+                    let o = null != (r = n.documentationContentType) ? r : tN.Article;
                     return t[o] = [...t[o] || [], n], t
                 }, {}),
                 o = Object.keys(r).length,
@@ -30027,8 +29976,8 @@
                     return t[n] = r.map(t => {
                         var n;
                         let r, o, a, i, l = t.documentationContentType;
-                        l === tP.LuaAPI ? r = n6.EngineAPI : l === tP.CloudAPI ? r = n6.CloudAPI : l === tP.DevForum ? r = n6.Forum : l === tP.Video ? r = n6.Videos : (tP.Article, r = n6.Markdown);
-                        let u = l === tP.CreatorHub,
+                        l === tN.LuaAPI ? r = n3.EngineAPI : l === tN.CloudAPI ? r = n3.CloudAPI : l === tN.DevForum ? r = n3.Forum : l === tN.Video ? r = n3.Videos : (tN.Article, r = n3.Markdown);
+                        let u = l === tN.CreatorHub,
                             {
                                 displayTitle: c,
                                 hubBreadcrumb: d
@@ -30066,9 +30015,9 @@
                 numberOfItems: u
             }
         },
-        oi = a.useLayoutEffect,
-        os = {},
-        ol = a.default.memo(t => {
+        ot = a.useLayoutEffect,
+        on = {},
+        or = a.default.memo(t => {
             let {
                 recommendation: n,
                 onClickRecommendation: r,
@@ -30076,23 +30025,23 @@
                 translate: i
             } = t, s = (0, a.useRef)(null), {
                 onKeyDownSearch: l
-            } = nK(s), [u, d] = (0, a.useState)(re);
+            } = nW(s), [u, d] = (0, a.useState)(n9);
             return a.default.createElement(b.ListItem, {
                 key: n,
                 ref: s,
                 className: o.listItem,
                 tabIndex: 0,
-                "data-search-navigation-element": nz.ListItem,
+                "data-search-navigation-element": nU.ListItem,
                 onKeyDown: t => {
-                    nU(t) ? r(n) : l(t)
+                    nO(t) ? r(n) : l(t)
                 },
                 onFocus: () => {
                     d({
-                        Icon: rC
+                        Icon: ry
                     })
                 },
                 onBlur: () => {
-                    d(re)
+                    d(n9)
                 },
                 onClick: () => {
                     r(n)
@@ -30100,7 +30049,7 @@
             }, a.default.createElement(C.ListItemIcon, {
                 className: o.listItemIcon,
                 "aria-hidden": "true"
-            }, a.default.createElement(rS, null)), a.default.createElement(E.ListItemText, {
+            }, a.default.createElement(rE, null)), a.default.createElement(E.ListItemText, {
                 className: o.listItemText,
                 primaryTypographyProps: {
                     color: "inherit"
@@ -30119,8 +30068,8 @@
                 "aria-hidden": "true"
             })))
         });
-    ol.displayName = "RecommendationListItem";
-    let ou = t => {
+    or.displayName = "RecommendationListItem";
+    let oo = t => {
             let {
                 open: n,
                 searchSessionId: r
@@ -30130,20 +30079,20 @@
                 locale: u
             } = (0, o.useLocalization)(), c = null != u ? u : o.Locale.English, {
                 classes: d
-            } = rL({}), {
+            } = rj({}), {
                 setSearchDialogOpenWithEvent: p
-            } = tF(), {
+            } = tR(), {
                 currentProduct: m,
                 eventLogger: h
-            } = tT(), f = function() {
+            } = tx(), f = function() {
                 let {
                     robloxSiteDomain: t
-                } = tT();
+                } = tx();
                 return (0, a.useMemo)(() => {
                     var n;
                     return n = new $(new U.Configuration({
                         robloxSiteDomain: t,
-                        basePath: tx("creator-resources-search-api", t),
+                        basePath: tI("creator-resources-search-api", t),
                         credentials: "include",
                         enableMrRouter: !0
                     })), {
@@ -30189,9 +30138,9 @@
                                                 identifier: t.identifier,
                                                 title: t.title,
                                                 displayedSummary: t.displayedSummary,
-                                                documentationContentType: tM(tP, d = null != (n = t.contentType) ? n : "") ? d : null,
-                                                documentationSubType: tM(tU, p = null != (r = t.subType) ? r : "") || tM(tV, p) || tM(tz, p) || tM(tq, p) ? p : null,
-                                                documentationThirdType: tM(tW, m = null != (o = t.thirdType) ? o : "") || tM(tG, m) ? m : null,
+                                                documentationContentType: tL(tN, d = null != (n = t.contentType) ? n : "") ? d : null,
+                                                documentationSubType: tL(tO, p = null != (r = t.subType) ? r : "") || tL(tH, p) || tL(tU, p) || tL(tV, p) ? p : null,
+                                                documentationThirdType: tL(tz, m = null != (o = t.thirdType) ? o : "") || tL(tq, m) ? m : null,
                                                 resultTargetReference: t.resultTargetReference,
                                                 url: null != (a = t.resultTargetReference) ? a : null,
                                                 tags: t.tags,
@@ -30247,7 +30196,7 @@
                                             if (!n || !r) return t;
                                             let a = n.split(":"),
                                                 i = a[a.length - 1].toLowerCase();
-                                            return ("en-us" === i || !/^[a-z]{2}-[a-z]{2}$/.test(i) || o && [ee.DocumentationContentType.Video, ee.DocumentationContentType.DevForum].concat([tP.CreatorHub]).includes(o) || /^\/[a-z]{2}-[a-z]{2}\/.*$/.test(r)) && (i = ""), {
+                                            return ("en-us" === i || !/^[a-z]{2}-[a-z]{2}$/.test(i) || o && [ee.DocumentationContentType.Video, ee.DocumentationContentType.DevForum].concat([tN.CreatorHub]).includes(o) || /^\/[a-z]{2}-[a-z]{2}\/.*$/.test(r)) && (i = ""), {
                                                 ...t,
                                                 url: i ? "/".concat(i).concat(r) : r
                                             }
@@ -30271,7 +30220,7 @@
                                             setTimeout(t, o)
                                         })), h(t, n + 1, r)
                                     }
-                                    return tN("searchClient: failed to fetch search results ".concat(o instanceof Error ? o.message : String(o))), {
+                                    return tF("searchClient: failed to fetch search results ".concat(o instanceof Error ? o.message : String(o))), {
                                         isError: !0,
                                         results: []
                                     }
@@ -30301,12 +30250,12 @@
                 shouldShowSubcategoryChips: E,
                 isFilterDefault: I,
                 maxResultsPerCategory: x
-            } = (0, a.useContext)(nO), T = (0, a.useRef)(null), k = (0, a.useRef)(null), _ = (0, a.useMemo)(() => ({
+            } = (0, a.useContext)(nP), T = (0, a.useRef)(null), k = (0, a.useRef)(null), _ = (0, a.useMemo)(() => ({
                 onEntered: () => {
                     var t;
                     return null == (t = T.current) ? void 0 : t.focus()
                 }
-            }), []), [P, B] = (0, a.useState)(nZ), O = P !== nZ ? P : g, [V, z] = (0, a.useState)(""), q = (0, H.useDebounce)(V, 450), [W, G] = (0, a.useState)(null), [K, J] = (0, a.useState)(""), [Z, Y] = (0, a.useState)(!1), [X, Q] = (0, a.useState)(!1), [et, er] = (0, a.useState)(!1), [eo, ea] = (0, a.useState)([]), {
+            }), []), [P, B] = (0, a.useState)(nK), O = P !== nK ? P : g, [V, z] = (0, a.useState)(""), q = (0, H.useDebounce)(V, 450), [W, G] = (0, a.useState)(null), [K, J] = (0, a.useState)(""), [Z, Y] = (0, a.useState)(!1), [X, Q] = (0, a.useState)(!1), [et, er] = (0, a.useState)(!1), [eo, ea] = (0, a.useState)([]), {
                 storeResults: ei,
                 isStoreLoading: es
             } = function(t) {
@@ -30321,11 +30270,11 @@
                 } = t, c = function() {
                     let {
                         robloxSiteDomain: t
-                    } = tT();
+                    } = tx();
                     return (0, a.useMemo)(() => (function(t, n) {
                         let {
                             robloxSiteDomain: r
-                        } = n, o = tS(r), a = async (n, r, a, i, s) => {
+                        } = n, o = tw(r), a = async (n, r, a, i, s) => {
                             var l;
                             let u = {
                                     searchCategoryType: r,
@@ -30408,8 +30357,8 @@
                                     isError: !1,
                                     results: []
                                 };
-                                let u = Math.max(1, Math.ceil(i / nJ.length)),
-                                    c = await Promise.allSettled(nJ.map((t, n) => {
+                                let u = Math.max(1, Math.ceil(i / nG.length)),
+                                    c = await Promise.allSettled(nG.map((t, n) => {
                                         let {
                                             categoryType: r,
                                             categoryPath: o
@@ -30432,14 +30381,14 @@
                                             }
                                         }
                                         return r
-                                    }((n = c.map(t => "fulfilled" === t.status ? t.value : (d.push(t.reason instanceof Error ? t.reason.message : String(t.reason)), [])), r = nJ.map(t => null != t.categoryPath), s = new Map, n.forEach((t, n) => {
+                                    }((n = c.map(t => "fulfilled" === t.status ? t.value : (d.push(t.reason instanceof Error ? t.reason.message : String(t.reason)), [])), r = nG.map(t => null != t.categoryPath), s = new Map, n.forEach((t, n) => {
                                         t.forEach(t => {
                                             let o = s.get(t.id);
                                             void 0 === o ? s.set(t.id, n) : r[n] && !r[o] && s.set(t.id, n)
                                         })
                                     }), n.map((t, n) => t.filter(t => s.get(t.id) === n))), i),
                                     m = d.length > 0 && 0 === p.length;
-                                return m && tN("toolboxSearchClient: failed to fetch creator store assets: ".concat(d.join("; "))), {
+                                return m && tF("toolboxSearchClient: failed to fetch creator store assets: ".concat(d.join("; "))), {
                                     isError: m,
                                     results: p
                                 }
@@ -30447,7 +30396,7 @@
                         }
                     })(new en.ToolboxApi(new U.Configuration({
                         robloxSiteDomain: t,
-                        basePath: tx("toolbox-service", t),
+                        basePath: tI("toolbox-service", t),
                         credentials: "include",
                         enableMrRouter: !0
                     })), {
@@ -30456,9 +30405,9 @@
                 }(), {
                     eventLogger: d,
                     currentProduct: p
-                } = tT(), [m, h] = (0, a.useState)([]), [f, g] = (0, a.useState)(!1), y = (0, a.useRef)(new Map);
+                } = tx(), [m, h] = (0, a.useState)([]), [f, g] = (0, a.useState)(!1), y = (0, a.useRef)(new Map);
                 return (0, a.useEffect)(() => {
-                    if (0 === n.length || !(r && (o || i === tO))) {
+                    if (0 === n.length || !(r && (o || i === tP))) {
                         h([]), g(!1);
                         return
                     }
@@ -30478,7 +30427,7 @@
                             let r = t.results.map(t => {
                                 var n;
                                 let r = u("Label.".concat(t.categoryType)) || t.categoryType,
-                                    o = t.categoryPath ? ro[t.categoryPath] : null,
+                                    o = t.categoryPath ? rn[t.categoryPath] : null,
                                     a = o ? u("Label.StoreCategoryPath.".concat(o.key)) || o.fallback : null,
                                     i = [function(t, n, r) {
                                         if (t.isFree) return r("Label.Free") || "FREE";
@@ -30498,7 +30447,7 @@
                                         } catch (t) {
                                             return "".concat(a, " ").concat(o)
                                         }
-                                    }(t, l, u), r, a, t.creatorName].filter(t => !!t).join(n7),
+                                    }(t, l, u), r, a, t.creatorName].filter(t => !!t).join(n8),
                                     c = {
                                         title: t.name,
                                         description: t.description,
@@ -30517,7 +30466,7 @@
                                     ...c,
                                     id: t.url,
                                     path: t.url,
-                                    type: n6.Markdown,
+                                    type: n3.Markdown,
                                     documentationContentType: "Store",
                                     translatedCategoryDisplayText: i,
                                     resultRef: c,
@@ -30525,10 +30474,10 @@
                                     storeCategoryIndex: t.categoryIndex
                                 }
                             });
-                            h(r), g(!1), !t.isError && (y.current.set(n, r), r.length > 0 && n1({
+                            h(r), g(!1), !t.isError && (y.current.set(n, r), r.length > 0 && n$({
                                 eventLogger: d,
                                 category: "Store",
-                                interaction: tj.Input,
+                                interaction: tk.Input,
                                 isRecommended: !1,
                                 isSemantic: !1,
                                 locale: l,
@@ -30539,7 +30488,7 @@
                             }))
                         } catch (t) {
                             if (a) return;
-                            tN("useStoreSearch: failed to fetch Store search results ".concat(t instanceof Error ? t.message : String(t))), h([]), g(!1)
+                            tF("useStoreSearch: failed to fetch Store search results ".concat(t instanceof Error ? t.message : String(t))), h([]), g(!1)
                         }
                     })(), () => {
                         a = !0
@@ -30550,33 +30499,33 @@
                 }
             }({
                 query: (null != W ? W : q).trim(),
-                isContentTypeFilterDefault: P === nZ,
+                isContentTypeFilterDefault: P === nK,
                 isDisplayFilterDefault: I,
                 displayFilter: g,
                 searchSessionId: r,
                 locale: c,
                 translate: l
-            }), eu = (0, a.useRef)(null), ec = (0, a.useRef)(null), ed = (null != W ? W : q).trim(), ep = P === nZ, em = ep && I, eh = (0, a.useMemo)(() => P !== nZ ? P : I ? nZ : "Hub" === g ? tP.CreatorHub : g === tB ? tB : nZ, [P, g, I]), ef = ep ? x : void 0, {
+            }), eu = (0, a.useRef)(null), ec = (0, a.useRef)(null), ed = (null != W ? W : q).trim(), ep = P === nK, em = ep && I, eh = (0, a.useMemo)(() => P !== nK ? P : I ? nK : "Hub" === g ? tN.CreatorHub : g === tM ? tM : nK, [P, g, I]), ef = ep ? x : void 0, {
                 searchListItems: eg,
                 resultsByContentType: ey,
                 numberOfItems: ev
-            } = (0, a.useMemo)(() => oa(eo, ef), [eo, ef]), eb = 0 === V.length, eC = ev + ei.length;
+            } = (0, a.useMemo)(() => oe(eo, ef), [eo, ef]), eb = 0 === V.length, eC = ev + ei.length;
             i = eb || 0 === ed.length ? ep ? "null" : "nothing" : eC > 0 ? "items" : Z || es || "" === K ? "loading" : "empty";
-            let eE = em && "loading" !== i && nk(),
+            let eE = em && "loading" !== i && nA(),
                 ew = C && ep && ["null", "items"].includes(i),
                 {
                     classes: eI
-                } = rW({
+                } = rV({
                     isSearchContentNothing: "nothing" === i
                 }),
                 eS = (0, a.useMemo)(() => {
                     let t = Object.values(ey).flat(),
                         n = ei.map(t => t.resultRef).filter(t => !!t);
-                    return g === tO ? n : [...t, ...n]
+                    return g === tP ? n : [...t, ...n]
                 }, [ey, ei, g]);
             (0, a.useEffect)(() => {
                 n && b()
-            }, [n, b]), oi(() => {
+            }, [n, b]), ot(() => {
                 k.current && (k.current.scrollTop = 0)
             }, [g]), (0, a.useEffect)(() => {
                 0 === V.length && a.default.startTransition(() => {
@@ -30593,8 +30542,8 @@
                         ea([]), J(""), Y(!1)
                     });
                     let d = "".concat(ed, "-").concat(eh);
-                    if (d in os) {
-                        let t = null != (o = os[d]) ? o : [];
+                    if (d in on) {
+                        let t = null != (o = on[d]) ? o : [];
                         a.default.startTransition(() => {
                             ea(t), J(ed), Y(!1)
                         });
@@ -30612,52 +30561,52 @@
                                 searchSessionId: r
                             }), n) return;
                         u = (i = s).results ? i.results.map(t => {
-                            var n, r, o, a;
+                            var n, r, o, a, s, u, c, d, p;
                             return {
-                                searchSessionId: i.searchSessionId || "",
+                                searchSessionId: null != (n = i.searchSessionId) ? n : "",
                                 title: t.highlightedTitle || t.title || "",
                                 description: t.highlightedDisplayedSummary || t.displayedSummary || "",
-                                url: t.url || "",
-                                category: ((t, n) => {
+                                url: null != (r = t.url) ? r : "",
+                                category: null != (o = ((t, n) => {
                                     let {
                                         documentationContentType: r,
                                         documentationSubType: o,
                                         documentationThirdType: a
                                     } = t;
                                     if (null === r) return null;
-                                    if (r === tP.LuaAPI) return null === o ? n("Label.Engine") : null === a ? n("Label.".concat(o)) : "".concat(n("Label.".concat(o)), " ").concat(n("Label.".concat(a)));
-                                    if (r === tP.Article) return n("Label.".concat(o));
-                                    if (r === tP.CloudAPI) return tK(t).map(t => n(t)).join(" ");
-                                    if (r === tP.Video) return n("Label.Video");
-                                    if (r === tP.DevForum) {
+                                    if (r === tN.LuaAPI) return null === o ? n("Label.Engine") : null === a ? n("Label.".concat(o)) : "".concat(n("Label.".concat(o)), " ").concat(n("Label.".concat(a)));
+                                    if (r === tN.Article) return n("Label.".concat(o));
+                                    if (r === tN.CloudAPI) return tW(t).map(t => n(t)).join(" ");
+                                    if (r === tN.Video) return n("Label.Video");
+                                    if (r === tN.DevForum) {
                                         let t = n("Label.DevForum");
                                         return null === o ? t : null === a ? "".concat(t, " ").concat(n("Label.".concat(o))) : "".concat(t, " ").concat(n("Label.".concat(o)), " ").concat(n("Label.".concat(a)))
                                     }
                                     return "".concat(r, " ").concat(null != o ? o : "", " ").concat(null != a ? a : "")
-                                })(t, l) || "",
+                                })(t, l)) ? o : "",
                                 documentationContentType: t.documentationContentType,
                                 documentationSubType: t.documentationSubType,
                                 documentationThirdType: t.documentationThirdType,
-                                categoryTranslationLabels: tK(t),
-                                deprecated: null != (n = (t.documentationContentType === tP.LuaAPI || t.documentationContentType === tP.CloudAPI) && (null == (a = t.tags) ? void 0 : a.some(oo))) && n,
-                                isSemantic: null != (r = i.isSemantic) && r,
+                                categoryTranslationLabels: tW(t),
+                                deprecated: null != (a = (t.documentationContentType === tN.LuaAPI || t.documentationContentType === tN.CloudAPI) && (null == (p = t.tags) ? void 0 : p.some(r7))) && a,
+                                isSemantic: null != (s = i.isSemantic) && s,
                                 isQueryUnderstandApplied: i.isQueryUnderstandApplied,
-                                createdAtUtc: t.createdAtUtc || "",
-                                updatedAtUtc: t.updatedAtUtc || "",
+                                createdAtUtc: null != (u = t.createdAtUtc) ? u : "",
+                                updatedAtUtc: null != (c = t.updatedAtUtc) ? c : "",
                                 views: t.views,
                                 clicks: t.clicks,
                                 author: t.author,
                                 entityId: t.entityId,
-                                breadcrumb: null != (o = t.breadcrumb) ? o : "",
+                                breadcrumb: null != (d = t.breadcrumb) ? d : "",
                                 experienceName: t.experienceName,
                                 creatorName: t.creatorName
                             }
                         }) : [];
-                        let t = oa(u, ef);
-                        n1({
+                        let t = oe(u, ef);
+                        n$({
                             eventLogger: h,
                             category: O,
-                            interaction: tj.Input,
+                            interaction: tk.Input,
                             isRecommended: X,
                             isSemantic: !!s.isSemantic,
                             isQueryUnderstandApplied: s.isQueryUnderstandApplied,
@@ -30668,25 +30617,25 @@
                             searchSessionId: r
                         })
                     } catch (n) {
-                        tN("SearchDialogV2: failed to fetch search results ".concat(n instanceof Error ? n.message : String(n))), er(!0), clearTimeout(t), a.default.startTransition(() => {
+                        tF("SearchDialogV2: failed to fetch search results ".concat(n instanceof Error ? n.message : String(n))), er(!0), clearTimeout(t), a.default.startTransition(() => {
                             ea([]), J(ed), Y(!1)
                         });
                         return
                     }
                     clearTimeout(t), a.default.startTransition(() => {
                         er(s.isError), ea(u), J(ed), Y(!1)
-                    }), s.isError || (os[d] = u)
+                    }), s.isError || (on[d] = u)
                 })(), () => {
                     n = !0, t && clearTimeout(t)
                 }
             }, [ed, eh]), (0, a.useEffect)(() => {
                 W && G(null)
             }, [W]);
-            let ex = nQ.find(t => t.value === P),
-                eA = nY.find(t => t.value === g),
+            let ex = nY.find(t => t.value === P),
+                eA = nJ.find(t => t.value === g),
                 eT = (0, a.useCallback)((t, n) => {
                     var o;
-                    null == (o = T.current) || o.focus(), (t.value !== g || I) && (y(t.value), B(nZ), n3({
+                    null == (o = T.current) || o.focus(), (t.value !== g || I) && (y(t.value), B(nK), n2({
                         eventLogger: h,
                         category: t.value,
                         interaction: n,
@@ -30700,7 +30649,7 @@
                 }, [h, g, I, y, X, c, V, m, eS, r]),
                 ek = (0, a.useCallback)((t, n) => {
                     var o;
-                    null == (o = T.current) || o.focus(), "" !== t.value && (v(), B(nZ), n5({
+                    null == (o = T.current) || o.focus(), "" !== t.value && (v(), B(nK), n4({
                         eventLogger: h,
                         category: t.value,
                         interaction: n,
@@ -30714,7 +30663,7 @@
                 }, [h, v, X, c, V, m, eS, r]),
                 eD = (0, a.useCallback)(() => {
                     var t;
-                    z(""), B(nZ), v(), null == (t = T.current) || t.focus()
+                    z(""), B(nK), v(), null == (t = T.current) || t.focus()
                 }, [z, v]),
                 ej = (0, a.useCallback)(t => {
                     eD(), Q(!1), p({
@@ -30723,10 +30672,10 @@
                     })
                 }, [eD, p]),
                 e_ = (0, a.useCallback)(t => {
-                    if (eb && "Backspace" === t.key) eD(), n5({
+                    if (eb && "Backspace" === t.key) eD(), n4({
                         eventLogger: h,
                         category: O,
-                        interaction: tj.KeyboardBackspace,
+                        interaction: tk.KeyboardBackspace,
                         isRecommended: X,
                         locale: c,
                         query: V,
@@ -30736,13 +30685,13 @@
                     });
                     else if ("ArrowDown" === t.key) {
                         t.preventDefault();
-                        let n = nG()[0];
+                        let n = nq()[0];
                         n && n.focus()
                     }
                 }, [h, O, V, eb, X, c, eD, m, eo, r]),
                 eR = (0, a.useCallback)((t, n) => {
                     var o;
-                    null == (o = T.current) || o.focus(), t.value !== P && (B(t.value), n3({
+                    null == (o = T.current) || o.focus(), t.value !== P && (B(t.value), n2({
                         eventLogger: h,
                         category: t.value,
                         interaction: n,
@@ -30754,9 +30703,9 @@
                         searchSessionId: r
                     }))
                 }, [h, P, X, c, V, m, eo, r]),
-                eL = (0, a.useCallback)((t, n) => {
+                eF = (0, a.useCallback)((t, n) => {
                     var o;
-                    null == (o = T.current) || o.focus(), t.value !== nZ && (B(nZ), n5({
+                    null == (o = T.current) || o.focus(), t.value !== nK && (B(nK), n4({
                         eventLogger: h,
                         category: t.value,
                         interaction: n,
@@ -30768,11 +30717,11 @@
                         searchSessionId: r
                     }))
                 }, [h, X, c, V, m, eo, r]),
-                eF = (0, a.useCallback)(t => {
+                eL = (0, a.useCallback)(t => {
                     z(t.target.value), Q(!1)
                 }, []),
                 eN = (0, a.useCallback)((t, n) => {
-                    n4(n) || ej(tj.SearchCompleted)
+                    n1(n) || ej(tk.SearchCompleted)
                 }, [ej]),
                 eM = t => {
                     Q(!0), G(t), z(t), (t => {
@@ -30786,7 +30735,7 @@
                             searchSessionId: l
                         } = t;
                         n.logClickEvent({
-                            eventName: tk.RecommendationClicked,
+                            eventName: tA.RecommendationClicked,
                             parameters: {
                                 interaction: r,
                                 locale: o,
@@ -30799,7 +30748,7 @@
                         })
                     })({
                         eventLogger: h,
-                        interaction: tj.Click,
+                        interaction: tk.Click,
                         locale: c,
                         query: V,
                         recommendation: t,
@@ -30808,10 +30757,10 @@
                     })
                 },
                 eP = t => {
-                    n0(t) && ex && eL(ex, tj.ClickCategoryPill)
+                    nQ(t) && ex && eF(ex, tk.ClickCategoryPill)
                 },
                 eB = t => {
-                    n0(t) && eA && ek(eA, tj.ClickCategoryPill)
+                    nQ(t) && eA && ek(eA, tk.ClickCategoryPill)
                 },
                 eO = a.default.createElement(w.Chip, {
                     label: l("".concat(null == ex ? void 0 : ex.translationKey)) || (null == ex ? void 0 : ex.fallbackLabel),
@@ -30821,7 +30770,7 @@
                     tabIndex: 0,
                     onClick: eP,
                     onKeyDown: t => {
-                        nU(t) && ex && eL(ex, tj.KeyboardEnterCategoryPill)
+                        nO(t) && ex && eF(ex, tk.KeyboardEnterCategoryPill)
                     },
                     deleteIcon: a.default.createElement(A.CloseIcon, {
                         color: "secondary",
@@ -30837,7 +30786,7 @@
                     tabIndex: 0,
                     onClick: eB,
                     onKeyDown: t => {
-                        nU(t) && eA && ek(eA, tj.KeyboardEnterCategoryPill)
+                        nO(t) && eA && ek(eA, tk.KeyboardEnterCategoryPill)
                     },
                     deleteIcon: a.default.createElement(A.CloseIcon, {
                         color: "secondary",
@@ -30846,37 +30795,37 @@
                     onDelete: eB
                 }),
                 eU = !I,
-                eV = P !== nZ;
+                eV = P !== nK;
             return a.default.createElement(R.Dialog, {
                 "aria-label": l("Label.Search"),
                 open: n,
                 TransitionProps: _,
                 onClose: (t, n) => {
-                    "escapeKeyDown" === n ? ej(tj.KeyboardEscape) : ej(tj.ModalClickOut)
+                    "escapeKeyDown" === n ? ej(tk.KeyboardEscape) : ej(tk.ModalClickOut)
                 },
                 maxWidth: "XXLarge",
                 classes: {
                     paper: eI.dialogPaper
                 }
-            }, a.default.createElement(rc, null, a.default.createElement(L.DialogContent, {
+            }, a.default.createElement(rl, null, a.default.createElement(F.DialogContent, {
                 className: eI.dialogContent
             }, a.default.createElement("div", {
                 className: eI.searchContainer
-            }, a.default.createElement(F.TextField, {
+            }, a.default.createElement(L.TextField, {
                 label: null,
                 fullWidth: !0,
                 autoComplete: "off",
-                id: nq,
+                id: nV,
                 placeholder: l("Label.Search") || "Search",
                 value: V,
-                onChange: eF,
+                onChange: eL,
                 onKeyDown: e_,
                 inputRef: T,
                 InputProps: {
                     startAdornment: a.default.createElement(N.InputAdornment, {
                         position: "start",
                         className: eI.searchStartAdornment
-                    }, a.default.createElement(rS, null), eU && eH, eV && eO),
+                    }, a.default.createElement(rE, null), eU && eH, eV && eO),
                     endAdornment: eU || eV || !eb ? a.default.createElement(N.InputAdornment, {
                         position: "end"
                     }, a.default.createElement(S.IconButton, {
@@ -30896,7 +30845,7 @@
                                     searchSessionId: c
                                 } = t;
                                 n.logClickEvent({
-                                    eventName: tk.QueryCleared,
+                                    eventName: tA.QueryCleared,
                                     parameters: {
                                         interaction: o,
                                         isRecommended: a.toString(),
@@ -30912,7 +30861,7 @@
                             })({
                                 eventLogger: h,
                                 category: O,
-                                interaction: tj.Click,
+                                interaction: tk.Click,
                                 isRecommended: X,
                                 locale: c,
                                 query: V,
@@ -30926,7 +30875,7 @@
                         fontSize: "small"
                     }))) : a.default.createElement(N.InputAdornment, {
                         position: "end"
-                    }, a.default.createElement(ri, {
+                    }, a.default.createElement(ro, {
                         keys: (s = (0, el.getCurrentPlatform)()) === el.Platform.Windows || s === el.Platform.Linux || s === el.Platform.Unix ? ["Ctrl", "K"] : s === el.Platform.macOS ? ["⌘", "K"] : []
                     })),
                     inputProps: {
@@ -30940,12 +30889,12 @@
                 }
             }), "nothing" !== i && a.default.createElement(M.Divider, {
                 className: eI.searchDivider
-            })), "null" === i && a.default.createElement(r3, {
+            })), "null" === i && a.default.createElement(r1, {
                 impressionRef: eu,
                 onClickItem: eN,
                 locale: c,
                 searchSessionId: r
-            }), "loading" === i && a.default.createElement(r6, null), "empty" === i && a.default.createElement(j.Grid, {
+            }), "loading" === i && a.default.createElement(r4, null), "empty" === i && a.default.createElement(j.Grid, {
                 item: !0
             }, a.default.createElement("div", {
                 className: eI.emptyResults
@@ -30955,9 +30904,9 @@
                 container: !0,
                 direction: "column",
                 wrap: "nowrap",
-                "data-list-container": nV.List,
+                "data-list-container": nH.List,
                 className: eI.resultsContainer
-            }, "items" === i && a.default.createElement(rq, {
+            }, "items" === i && a.default.createElement(rU, {
                 searchListItems: eg,
                 storeItems: ei,
                 isContentTypeFilterDefault: ep,
@@ -30976,7 +30925,7 @@
                             searchSessionId: d
                         } = t;
                         n.logClickEvent({
-                            eventName: tk.ResultClicked,
+                            eventName: tA.ResultClicked,
                             parameters: {
                                 interaction: o,
                                 isRecommended: a.toString(),
@@ -30995,7 +30944,7 @@
                                 } : {},
                                 currentProduct: l,
                                 searchSessionId: d,
-                                source: tD.SearchResults,
+                                source: tT.SearchResults,
                                 topicFilters: "",
                                 typeFilter: r
                             }
@@ -31011,10 +30960,10 @@
                         searchResult: t.resultRef,
                         searchResults: eS,
                         searchSessionId: r
-                    }), n4(n) || ej(tj.SearchCompleted)
+                    }), n1(n) || ej(tk.SearchCompleted)
                 },
                 onClickFilter: eR,
-                onClearFilter: eL,
+                onClearFilter: eF,
                 onClickDisplayFilter: eT,
                 onClearDisplayFilter: ek,
                 searchSessionId: r,
@@ -31023,9 +30972,9 @@
                 className: eI.searchDivider
             }), a.default.createElement(D.List, {
                 className: eI.bottomSearchList,
-                "data-list-container": nV.List,
+                "data-list-container": nH.List,
                 tabIndex: -1
-            }, a.default.createElement(rd, {
+            }, a.default.createElement(ru, {
                 locale: c,
                 maxRecommendations: 1,
                 impressionRef: ec,
@@ -31035,7 +30984,7 @@
                     let {
                         recommendations: n
                     } = t;
-                    return a.default.createElement(a.default.Fragment, null, n.map(t => a.default.createElement(ol, {
+                    return a.default.createElement(a.default.Fragment, null, n.map(t => a.default.createElement(or, {
                         key: t,
                         recommendation: t,
                         onClickRecommendation: eM,
@@ -31045,11 +30994,11 @@
                 }
             }))), ew && a.default.createElement(a.default.Fragment, null, !eE && a.default.createElement(M.Divider, {
                 className: eI.searchDivider
-            }), I ? a.default.createElement(rY, {
+            }), I ? a.default.createElement(rK, {
                 onClickFilter: eT
-            }) : E ? a.default.createElement(rZ, {
+            }) : E ? a.default.createElement(rG, {
                 onClickFilter: eR
-            }) : null), g === tO && "items" === i && a.default.createElement(a.default.Fragment, null, V.trim().length > 0 && a.default.createElement(r0, {
+            }) : null), g === tP && "items" === i && a.default.createElement(a.default.Fragment, null, V.trim().length > 0 && a.default.createElement(rX, {
                 query: V,
                 onClickItem: (t, n) => {
                     (t => {
@@ -31063,7 +31012,7 @@
                             destinationUrl: l
                         } = t;
                         n.logClickEvent({
-                            eventName: tk.SearchInStoreClicked,
+                            eventName: tA.SearchInStoreClicked,
                             parameters: {
                                 interaction: r,
                                 locale: o,
@@ -31072,7 +31021,7 @@
                                 resultUrl: l,
                                 currentProduct: i,
                                 searchSessionId: s,
-                                source: tD.SearchResults
+                                source: tT.SearchResults
                             }
                         })
                     })({
@@ -31087,7 +31036,7 @@
                 }
             }), !eE && a.default.createElement(M.Divider, {
                 className: eI.searchDivider
-            }), a.default.createElement(r7, {
+            }), a.default.createElement(r6, {
                 query: V,
                 onClickItem: (t, n) => {
                     (t => {
@@ -31104,7 +31053,7 @@
                             destinationUrl: d
                         } = t;
                         n.logClickEvent({
-                            eventName: tk.StoreCategoryTileClicked,
+                            eventName: tA.StoreCategoryTileClicked,
                             parameters: {
                                 interaction: r,
                                 locale: o,
@@ -31116,7 +31065,7 @@
                                 storeSearchCategory: l,
                                 currentProduct: i,
                                 searchSessionId: s,
-                                source: tD.SearchResults
+                                source: tT.SearchResults
                             }
                         })
                     })({
@@ -31134,43 +31083,43 @@
                 }
             }))))))
         },
-        oc = t => a.default.createElement(nH, null, a.default.createElement(ou, t)),
-        od = ["/talent", "/store", "/advertise"];
+        oa = t => a.default.createElement(nB, null, a.default.createElement(oo, t)),
+        oi = ["/talent", "/store", "/advertise"];
 
-    function op() {
+    function os() {
         let {
             pathname: t
         } = window.location;
-        return od.some(n => t === n || t.startsWith("".concat(n, "/")))
+        return oi.some(n => t === n || t.startsWith("".concat(n, "/")))
     }
-    let om = () => {
+    let ol = () => {
         var t, n, r;
         let o = (0, P.useMediaQuery)(t => t.breakpoints.down("Medium")),
             {
                 searchSessionId: l,
                 searchDialogOpen: u,
                 toggleSearchDialogOpenWithEvent: c
-            } = tF(),
+            } = tR(),
             {
                 user: d
             } = (0, i.useRobloxAuthentication)(),
             {
                 eventLogger: p
-            } = tT(),
+            } = tx(),
             m = (0, a.useCallback)(() => c({
-                interaction: tj.Shortcut
+                interaction: tk.Shortcut
             }), [c]);
         return ((0, a.useEffect)(() => {
             let t;
-            if ("string" == typeof n && n in tR) {
+            if ("string" == typeof n && n in tj) {
                 let o;
                 if (!r) throw Error("shortcutCallback is required when shortcutName is provided");
                 o = r, t = t => {
-                    for (let r of Object.keys(tR)) {
+                    for (let r of Object.keys(tj)) {
                         let {
                             code: a,
                             modifier: i
-                        } = tR[r];
+                        } = tj[r];
                         if (n === r && a.some(n => t.code === n) && (null == i ? void 0 : i.some(n => t[n]))) {
                             t.preventDefault(), o();
                             break
@@ -31181,7 +31130,7 @@
             return window.addEventListener("keydown", t), () => {
                 window.removeEventListener("keydown", t)
             }
-        }, [n = t_.Search, r = m]), (0, a.useEffect)(() => {
+        }, [n = tD.Search, r = m]), (0, a.useEffect)(() => {
             if (!o || "u" < typeof document) return;
             let {
                 body: t
@@ -31189,24 +31138,24 @@
             return u ? t.style.overflow = "hidden" : t.style.overflow = n || "", () => {
                 t.style.overflow = n || ""
             }
-        }, [o, u]), op()) ? null : a.default.createElement(a.default.Fragment, null, a.default.createElement(s.HistoryProvider, {
+        }, [o, u]), os()) ? null : a.default.createElement(a.default.Fragment, null, a.default.createElement(s.HistoryProvider, {
             userId: null == d || null == (t = d.id) ? void 0 : t.toString(),
             eventLogger: p
-        }), a.default.createElement(oc, {
+        }), a.default.createElement(oa, {
             open: u,
             searchSessionId: l
         }))
     };
-    var oh = (0, o.withTranslation)(om, ["CreatorDocumentation.Common", "CreatorDocumentation.APIReference", "CreatorDocumentation.Navigation", "CreatorDocumentation.Search"]);
-    let of = "CreatorHubSearch.TooltipDismissed";
+    var ou = (0, o.withTranslation)(ol, ["CreatorDocumentation.Common", "CreatorDocumentation.APIReference", "CreatorDocumentation.Navigation", "CreatorDocumentation.Search"]);
+    let oc = "CreatorHubSearch.TooltipDismissed";
 
-    function og(t) {
-        return null != t ? "".concat(of, ".").concat(t) : of
+    function od(t) {
+        return null != t ? "".concat(oc, ".").concat(t) : oc
     }
-    let oy = "GENERIC_CREATOR_SETTING_TYPE_SEARCH_TOOLTIP_DISMISSED",
-        ov = new Date("2026-03-24");
+    let op = "GENERIC_CREATOR_SETTING_TYPE_SEARCH_TOOLTIP_DISMISSED",
+        om = new Date("2026-03-24");
 
-    function ob(t) {
+    function oh(t) {
         let n, r, {
                 open: i,
                 onDismiss: s,
@@ -31263,19 +31212,19 @@
             verticalAlign: "top"
         }
     }));
-    let oC = [];
-    for (let t = 0; t < 256; ++t) oC.push((t + 256).toString(16).slice(1));
-    let oE = new Uint8Array(16);
+    let of = [];
+    for (let t = 0; t < 256; ++t) of.push((t + 256).toString(16).slice(1));
+    let og = new Uint8Array(16);
 
-    function ow(t, n, r) {
+    function oy(t, n, r) {
         return crypto.randomUUID ? crypto.randomUUID() : function(t) {
             var n, r, o;
-            let a = null != (n = null != (r = (t = t || {}).random) ? r : null == (o = t.rng) ? void 0 : o.call(t)) ? n : crypto.getRandomValues(oE);
+            let a = null != (n = null != (r = (t = t || {}).random) ? r : null == (o = t.rng) ? void 0 : o.call(t)) ? n : crypto.getRandomValues(og);
             if (a.length < 16) throw Error("Random bytes length must be >= 16");
             return a[6] = 15 & a[6] | 64, a[8] = 63 & a[8] | 128,
                 function(t) {
                     let n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0;
-                    return (oC[t[n + 0]] + oC[t[n + 1]] + oC[t[n + 2]] + oC[t[n + 3]] + "-" + oC[t[n + 4]] + oC[t[n + 5]] + "-" + oC[t[n + 6]] + oC[t[n + 7]] + "-" + oC[t[n + 8]] + oC[t[n + 9]] + "-" + oC[t[n + 10]] + oC[t[n + 11]] + oC[t[n + 12]] + oC[t[n + 13]] + oC[t[n + 14]] + oC[t[n + 15]]).toLowerCase()
+                    return (of [t[n + 0]] + of [t[n + 1]] + of [t[n + 2]] + of [t[n + 3]] + "-" + of [t[n + 4]] + of [t[n + 5]] + "-" + of [t[n + 6]] + of [t[n + 7]] + "-" + of [t[n + 8]] + of [t[n + 9]] + "-" + of [t[n + 10]] + of [t[n + 11]] + of [t[n + 12]] + of [t[n + 13]] + of [t[n + 14]] + of [t[n + 15]]).toLowerCase()
                 }(a)
         }(t)
     }
@@ -31287,7 +31236,7 @@
         } = (0, o.useTranslation)(), {
             searchDialogOpen: s,
             setSearchDialogOpenWithEvent: l
-        } = tF(), {
+        } = tR(), {
             visible: u,
             dismiss: c
         } = function() {
@@ -31296,11 +31245,11 @@
                 isFetched: u
             } = (0, i.useRobloxAuthentication)(), c = null == l ? void 0 : l.id, {
                 robloxSiteDomain: d
-            } = tT(), p = (0, a.useMemo)(() => {
+            } = tx(), p = (0, a.useMemo)(() => {
                 let t;
-                return t = new tC.CreatorSettingsAPIApi(new U.Configuration({
+                return t = new tv.CreatorSettingsAPIApi(new U.Configuration({
                     robloxSiteDomain: d,
-                    basePath: tx("creator-settings", d),
+                    basePath: tI("creator-settings", d),
                     credentials: "include",
                     enableMrRouter: !0
                 })), {
@@ -31318,9 +31267,9 @@
                 }
             }, [d]);
             return (0, a.useEffect)(() => {
-                if (!u || s.current || Date.now() > ov.getTime() + 29376e5) return;
+                if (!u || s.current || Date.now() > om.getTime() + 29376e5) return;
                 let t = !1,
-                    r = og(c);
+                    r = od(c);
                 return async function() {
                     try {
                         let a = localStorage.getItem(r);
@@ -31331,7 +31280,7 @@
                         if (null != c) {
                             let {
                                 settingValue: o
-                            } = await p.getGenericCreatorSetting(c, oy);
+                            } = await p.getGenericCreatorSetting(c, op);
                             if (t) return;
                             "true" === o ? (s.current = !0, localStorage.setItem(r, "true"), n(!1)) : n(!0)
                         } else t || n(!0)
@@ -31346,8 +31295,8 @@
             }, [u, c, p]), {
                 visible: t && r,
                 dismiss: (0, a.useCallback)(async () => {
-                    if (!s.current && (s.current = !0, n(!1), localStorage.setItem(og(c), "true"), null != c)) try {
-                        await p.updateGenericCreatorSetting(c, oy, "true")
+                    if (!s.current && (s.current = !0, n(!1), localStorage.setItem(od(c), "true"), null != c)) try {
+                        await p.updateGenericCreatorSetting(c, op, "true")
                     } catch (t) {}
                 }, [c, p])
             }
@@ -31355,17 +31304,17 @@
         (0, a.useEffect)(() => {
             s && u && c()
         }, [s, u, c]), (0, a.useEffect)(() => {
-            if (u) return tb.default.events.on("routeChangeStart", c), () => {
-                tb.default.events.off("routeChangeStart", c)
+            if (u) return ty.default.events.on("routeChangeStart", c), () => {
+                ty.default.events.off("routeChangeStart", c)
             }
         }, [u, c]);
         let p = (0, a.useCallback)(() => {
             c(), l({
                 searchDialogOpen: !0,
-                interaction: tj.NavSearchIcon
+                interaction: tk.NavSearchIcon
             })
         }, [l, c]);
-        return op() ? null : a.default.createElement(ob, {
+        return os() ? null : a.default.createElement(oh, {
             open: u,
             onDismiss: c
         }, n ? a.default.createElement(ei.IconButton, {
@@ -31386,13 +31335,13 @@
         } = t, {
             currentProduct: i,
             eventLogger: s
-        } = tT(), [l, u] = (0, a.useState)(!1), [c, d] = (0, a.useState)(() => ow()), p = (0, a.useCallback)(t => {
+        } = tx(), [l, u] = (0, a.useState)(!1), [c, d] = (0, a.useState)(() => oy()), p = (0, a.useCallback)(t => {
             let {
                 searchDialogOpen: n,
                 interaction: o
             } = t;
             if (n && !l) {
-                let t = ow();
+                let t = oy();
                 d(t), (t => {
                     let {
                         eventLogger: n,
@@ -31402,7 +31351,7 @@
                         searchSessionId: i
                     } = t;
                     n.logClickEvent({
-                        eventName: tk.DialogOpened,
+                        eventName: tA.DialogOpened,
                         parameters: {
                             locale: o,
                             refPageUrl: window.location.pathname,
@@ -31429,7 +31378,7 @@
                     searchSessionId: i
                 } = t;
                 n.logClickEvent({
-                    eventName: tk.DialogClosed,
+                    eventName: tA.DialogClosed,
                     parameters: {
                         locale: o,
                         refPageUrl: window.location.pathname,
@@ -31462,7 +31411,7 @@
             setSearchDialogOpenWithEvent: p,
             toggleSearchDialogOpenWithEvent: m
         }), [c, l, p, m]);
-        return a.default.createElement(tL.Provider, {
+        return a.default.createElement(t_.Provider, {
             value: h
         }, n)
     }, "SearchConfigProvider", 0, function(t) {
@@ -31471,16 +31420,16 @@
             currentProduct: r = "CreatorDashboard",
             creatorHubSearchIxpParams: o = 1,
             children: i
-        } = t, s = (0, a.useMemo)(() => tw(n), [n]), l = (0, a.useMemo)(() => ({
+        } = t, s = (0, a.useMemo)(() => tC(n), [n]), l = (0, a.useMemo)(() => ({
             robloxSiteDomain: n,
             eventLogger: s,
             currentProduct: r,
             creatorHubSearchIxpParams: o
         }), [n, s, r, o]);
-        return a.default.createElement(tA.Provider, {
+        return a.default.createElement(tS.Provider, {
             value: l
         }, i)
-    }, "SearchContainer", 0, oh, "SearchContainerRaw", 0, om], 798731)
+    }, "SearchContainer", 0, ou, "SearchContainerRaw", 0, ol], 798731)
 }, 16782, t => {
     "use strict";
     let n;
@@ -31849,7 +31798,7 @@
                     o = () => {};
                 b(n) ? this._bufferedByteCount += n.byteLength : this._bufferedByteCount += n.length, this._bufferedByteCount >= this._bufferSize && (r = new Promise((n, r) => {
                     t = n, o = r
-                })), this._messages.push(new L(n, this._totalMessageCount, t, o))
+                })), this._messages.push(new F(n, this._totalMessageCount, t, o))
             }
             try {
                 this._reconnectInProgress || await this._connection.send(n)
@@ -31922,14 +31871,14 @@
             this._bufferSize = 1e5, this._messages = [], this._totalMessageCount = 0, this._waitForSequenceMessage = !1, this._nextReceivingSequenceId = 1, this._latestReceivedSequenceId = 0, this._bufferedByteCount = 0, this._reconnectInProgress = !1, this._protocol = t, this._connection = n, this._bufferSize = r
         }
     }
-    class L {
+    class F {
         constructor(t, n, r, o) {
             this._message = t, this._id = n, this._resolver = r, this._rejector = o
         }
     }(eG = eQ || (eQ = {})).Disconnected = "Disconnected", eG.Connecting = "Connecting", eG.Connected = "Connected", eG.Disconnecting = "Disconnecting", eG.Reconnecting = "Reconnecting";
-    class F {
+    class L {
         static create(t, n, r, o, a, i, s) {
-            return new F(t, n, r, o, a, i, s)
+            return new L(t, n, r, o, a, i, s)
         }
         get state() {
             return this._connectionState
@@ -32931,7 +32880,7 @@
             let t = this.httpConnectionOptions || {};
             if (void 0 === t.logger && (t.logger = this.logger), !this.url) throw Error("The 'HubConnectionBuilder.withUrl' method must be called before building the connection.");
             let n = new z(this.url, t);
-            return F.create(n, this.logger || f.instance, this.protocol || new G, this.reconnectPolicy, this._serverTimeoutInMilliseconds, this._keepAliveIntervalInMilliseconds, this._statefulReconnectBufferSize)
+            return L.create(n, this.logger || f.instance, this.protocol || new G, this.reconnectPolicy, this._serverTimeoutInMilliseconds, this._keepAliveIntervalInMilliseconds, this._statefulReconnectBufferSize)
         }
     }
     let Z = () => (() => {
@@ -33067,8 +33016,8 @@
         ej = new Map,
         e_ = new Map,
         eR = new Map,
-        eL = new Map,
-        eF = function(t) {
+        eF = new Map,
+        eL = function(t) {
             for (var n, r = arguments.length, o = Array(r > 1 ? r - 1 : 0), a = 1; a < r; a++) o[a - 1] = arguments[a];
             eY.Warning >= (null != (n = eR.get(t)) ? n : eY.None) && console.warn(...o)
         },
@@ -33093,11 +33042,11 @@
         },
         eP = t => t instanceof Error ? t : void 0,
         eB = (t, n) => {
-            let r = eL.get(t),
+            let r = eF.get(t),
                 o = r ? r.then(n, n) : n(),
                 a = Promise.resolve(o).then(() => void 0, () => void 0);
-            return eL.set(t, a), a.then(() => {
-                eL.get(t) === a && eL.delete(t)
+            return eF.set(t, a), a.then(() => {
+                eF.get(t) === a && eF.delete(t)
             }), o
         },
         eO = (t, n) => eB(n, async () => {
@@ -33222,7 +33171,7 @@
                         });
                         return
                     }
-                    a = JSON.parse(o), ("object" != typeof a || null === a || "ConnectionId" in a && "string" != typeof a.ConnectionId || "MillisecondsBeforeHandlingReconnect" in a && "number" != typeof a.MillisecondsBeforeHandlingReconnect || 0) && eF(r, "[useSignalR] Unexpected subscription status data shape", o)
+                    a = JSON.parse(o), ("object" != typeof a || null === a || "ConnectionId" in a && "string" != typeof a.ConnectionId || "MillisecondsBeforeHandlingReconnect" in a && "number" != typeof a.MillisecondsBeforeHandlingReconnect || 0) && eL(r, "[useSignalR] Unexpected subscription status data shape", o)
                 } catch (t) {
                     eN(r, "[useSignalR] Error parsing subscription status data", o)
                 }
@@ -33281,7 +33230,7 @@
                     let t = ej.get(r);
                     t && await eH(t, r)
                 } catch (t) {
-                    eF(r, "[useSignalR] Connection failed to stop on page hide", t)
+                    eL(r, "[useSignalR] Connection failed to stop on page hide", t)
                 }
             }, n = async () => {
                 eA(r, !1), ev();
@@ -33289,28 +33238,28 @@
                     let t = ej.get(r);
                     t && await eH(t, r)
                 } catch (t) {
-                    eF(r, "[useSignalR] Connection failed to stop on freeze", t)
+                    eL(r, "[useSignalR] Connection failed to stop on freeze", t)
                 }
             }, o = async () => {
                 try {
                     let t = ej.get(r);
                     t && await eH(t, r)
                 } catch (t) {
-                    eF(r, "[useSignalR] Connection failed to stop on unload", t)
+                    eL(r, "[useSignalR] Connection failed to stop on unload", t)
                 }
             }, a = async () => {
                 try {
                     let t = ej.get(r);
                     t && await eO(t, r)
                 } catch (t) {
-                    eF(r, "[useSignalR] Connection failed to start on page show", t)
+                    eL(r, "[useSignalR] Connection failed to start on page show", t)
                 }
             }, i = async () => {
                 try {
                     let t = ej.get(r);
                     t && await eO(t, r)
                 } catch (t) {
-                    eF(r, "[useSignalR] Connection failed to start on resume", t)
+                    eL(r, "[useSignalR] Connection failed to start on resume", t)
                 }
             };
             return window.addEventListener("pagehide", t), window.addEventListener("freeze", n), window.addEventListener("beforeunload", o), window.addEventListener("pageshow", a), window.addEventListener("resume", i), () => {
@@ -33320,5 +33269,5 @@
     }])
 }]);
 
-//# debugId=e46eac96-71f4-831f-57a0-9b533ec148d0
-//# sourceMappingURL=3dksdsxb7bj3i.js.map
+//# debugId=40a372e4-beb7-a9ec-3df1-501613c623e7
+//# sourceMappingURL=2hz0v5d1endxz.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "05288c45-bb90-3b09-1c62-c4ef3d563c6c")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "14d6985d-111b-69fa-e9ef-c8c200b4d9aa")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 730530, e => {
@@ -86,34 +86,30 @@
         t = e.i(307529),
         r = e.i(251622),
         o = e.i(260022);
-    (0, o.getProductionCreatorHubUrl)("global");
     let n = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/reference/engine/classes/Player#GetJoinData"),
         s = (0, o.resolveUrl)("developerArticleProductsInGamePurchasesUrl", "production", "global"),
         c = (0, o.resolveUrl)("developerArticleBadgesSpecialGameAwardsUrl", "production", "global"),
         i = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/game-passes"),
         l = (0, o.resolveUrl)("developerArticleCreateVipServerUrl", "production", "global"),
-        d = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/publish-experiences-and-places#release-to-the-public");
-    (0, o.getProductionCreatorHubUrl)("global");
-    let u = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/projects/assets/privacy"),
+        d = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/publish-experiences-and-places#release-to-the-public"),
+        u = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/projects/assets/privacy"),
         g = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/parts/models#distribute-models"),
-        p = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/publishing-to-marketplace#sale-location");
-    (0, o.getProductionCreatorHubUrl)("global");
-    let f = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/subscriptions#creating-subscriptions"),
+        p = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/publishing-to-marketplace#sale-location"),
+        f = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/subscriptions#creating-subscriptions"),
         m = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/game-design/subscription-design#bundles"),
         b = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/subscriptions#earning-with-subscriptions"),
         y = (0, o.resolveUrl)("robloxCommunityStandardsUrl", "production", "global"),
         A = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/marketplace-policy#ugc-program-guidelines"),
-        h = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/marketplace-fees-and-commissions#publishing-advance");
-    (0, o.getProductionCreatorHubUrl)("global"), (0, o.getProductionCreatorHubUrl)("global");
-    let v = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/account-verification");
+        h = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/marketplace-fees-and-commissions#publishing-advance"),
+        v = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/account-verification");
     (0, o.getProductionCreatorHubUrl)("global"), (0, o.getProductionCreatorHubUrl)("global");
     let U = (0, o.resolveUrl)("ugcSubscriptionTermsOfUseUrl", "production", "global"),
         P = (0, o.resolveUrl)("robloxTermsOfUseUrl", "production", "global"),
         L = (0, o.resolveUrl)("advertisingStandardsUrl", "production", "global"),
         E = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/account-verification"),
-        C = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/avatar-creation-token");
-    e.s(["ACCOUNT_VERIFICATION_URL", 0, E, "ASSET_ACCESS_PRIVACY", 0, u, "BADGE_LEARN_MORE_URL", 0, c, "CREATOR_STORE_VERIFICATION_URL", 0, v, "DEVELOPER_PRODUCT_LEARN_MORE_URL", 0, s, "DISTRIBUTE_MODELS", 0, g, "LAUNCH_DATA_LEARN_MORE_URL", 0, n, "MARKETPLACE_POLICY", 0, A, "MOMENTS_LEARN_MORE_URL", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "PASS_LEARN_MORE_URL", 0, i, "PRIVATE_SERVER_LEARN_MORE_URL", 0, l, "PUBLISHING_ADVANCE", 0, h, "RELEASE_EXPERIENCE_TO_PUBLIC_URL", 0, d, "ROBLOX_ADVERTISING_STANDARDS", 0, L, "ROBLOX_COMMUNITY_STANDARDS", 0, y, "ROBLOX_TERMS_OF_USE", 0, P, "SALE_LOCATION_LEARN_MORE_URL", 0, p, "SUBSCRIPTION_LEARN_MORE_PRICING_URL", 0, b, "SUBSCRIPTION_LEARN_MORE_PRODUCT_TYPES_URL", 0, m, "SUBSCRIPTION_LEARN_MORE_URL", 0, f, "SUBSCRIPTION_TERMS_OF_USE", 0, U, "TOKEN_LEARN_MORE_URL", 0, C], 253536);
-    let S = {
+        S = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/avatar-creation-token");
+    e.s(["ACCOUNT_VERIFICATION_URL", 0, E, "ASSET_ACCESS_PRIVACY", 0, u, "BADGE_LEARN_MORE_URL", 0, c, "CREATOR_STORE_VERIFICATION_URL", 0, v, "DEVELOPER_PRODUCT_LEARN_MORE_URL", 0, s, "DISTRIBUTE_MODELS", 0, g, "LAUNCH_DATA_LEARN_MORE_URL", 0, n, "MARKETPLACE_POLICY", 0, A, "MOMENTS_LEARN_MORE_URL", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "PASS_LEARN_MORE_URL", 0, i, "PRIVATE_SERVER_LEARN_MORE_URL", 0, l, "PUBLISHING_ADVANCE", 0, h, "RELEASE_EXPERIENCE_TO_PUBLIC_URL", 0, d, "ROBLOX_ADVERTISING_STANDARDS", 0, L, "ROBLOX_COMMUNITY_STANDARDS", 0, y, "ROBLOX_TERMS_OF_USE", 0, P, "SALE_LOCATION_LEARN_MORE_URL", 0, p, "SUBSCRIPTION_LEARN_MORE_PRICING_URL", 0, b, "SUBSCRIPTION_LEARN_MORE_PRODUCT_TYPES_URL", 0, m, "SUBSCRIPTION_LEARN_MORE_URL", 0, f, "SUBSCRIPTION_TERMS_OF_USE", 0, U, "TOKEN_LEARN_MORE_URL", 0, S], 253536);
+    let T = {
             [t.default.Place]: r.default.Game,
             [t.default.SharedExperiences]: r.default.Game,
             [t.default.MyExperiences]: r.default.Game,
@@ -166,7 +162,7 @@
             [t.default.TextDocument]: r.default.LibraryAsset,
             [t.default.AssetPermissionRequests]: r.default.Game
         },
-        T = {
+        C = {
             [r.default.Game]: "experiences",
             [r.default.CatalogAsset]: "catalog",
             [r.default.LibraryAsset]: "library",
@@ -210,7 +206,7 @@
             [r.default.Journey]: a.ThumbnailTypes.universeThumbnail,
             [r.default.Look]: a.ThumbnailTypes.assetThumbnail
         },
-        k = {
+        R = {
             [r.default.Game]: a.ReturnPolicy.AutoGenerated,
             [r.default.Bundle]: a.ReturnPolicy.AutoGenerated,
             [r.default.CatalogAsset]: a.ReturnPolicy.PlaceHolder,
@@ -232,7 +228,7 @@
             [r.default.Alert]: a.ReturnPolicy.AutoGenerated,
             [r.default.Journey]: a.ReturnPolicy.AutoGenerated
         },
-        R = {
+        k = {
             [t.default.Place]: "Label.Games",
             [t.default.MyExperiences]: "Label.Games",
             [t.default.SharedExperiences]: "Label.Games",
@@ -448,16 +444,16 @@
             [r.default.Alert]: null,
             [r.default.Journey]: null
         },
-        H = {
+        B = {
             [r.default.Badge]: c,
             [r.default.DeveloperProduct]: s,
             [r.default.GamePass]: i,
             [r.default.CatalogAsset]: p,
             [r.default.ExperienceSubscription]: f,
-            [r.default.AvatarCreationToken]: C,
+            [r.default.AvatarCreationToken]: S,
             [r.default.Look]: void 0
         };
-    e.s(["AllSettlePromiseFailed", 0, "rejected", "AllSettlePromiseSuccess", 0, "fulfilled", "assetFullNameKeys", 0, R, "assetTypeToItemType", 0, S, "assetTypeToSingularNameKeys", 0, M, "itemFullNameKeys", 0, D, "itemTypeToCreatePath", 0, w, "itemTypeToLearnMoreUrl", 0, H, "itemTypeToNameKeys", 0, G, "itemTypeToPath", 0, T, "itemTypeToReorderPath", 0, I, "itemTypeToReturnPolicyType", 0, k, "itemTypeToSingularNameKeys", 0, z, "itemTypeToThumbnailType", 0, x, "toastDurationTime", 0, 3e3, "uninitializedUniverseId", 0, -1], 759283)
+    e.s(["AllSettlePromiseFailed", 0, "rejected", "AllSettlePromiseSuccess", 0, "fulfilled", "assetFullNameKeys", 0, k, "assetTypeToItemType", 0, T, "assetTypeToSingularNameKeys", 0, M, "itemFullNameKeys", 0, D, "itemTypeToCreatePath", 0, w, "itemTypeToLearnMoreUrl", 0, B, "itemTypeToNameKeys", 0, G, "itemTypeToPath", 0, C, "itemTypeToReorderPath", 0, I, "itemTypeToReturnPolicyType", 0, R, "itemTypeToSingularNameKeys", 0, z, "itemTypeToThumbnailType", 0, x, "toastDurationTime", 0, 3e3, "uninitializedUniverseId", 0, -1], 759283)
 }, 307529, e => {
     "use strict";
     var a, t = ((a = t || {}).Place = "Place", a.MyExperiences = "MyExperiences", a.SharedExperiences = "SharedExperiences", a.TShirt = "TShirt", a.Shirt = "Shirt", a.Pants = "Pants", a.Hat = "Hat", a.HairAccessory = "HairAccessory", a.FaceAccessory = "FaceAccessory", a.NeckAccessory = "NeckAccessory", a.ShoulderAccessory = "ShoulderAccessory", a.FrontAccessory = "FrontAccessory", a.BackAccessory = "BackAccessory", a.WaistAccessory = "WaistAccessory", a.TShirtAccessory = "TShirtAccessory", a.ShirtAccessory = "ShirtAccessory", a.PantsAccessory = "PantsAccessory", a.JacketAccessory = "JacketAccessory", a.SweaterAccessory = "SweaterAccessory", a.ShortsAccessory = "ShortsAccessory", a.DressSkirtAccessory = "DressSkirtAccessory", a.EyebrowAccessory = "EyebrowAccessory", a.EyelashAccessory = "EyelashAccessory", a.FaceMakeup = "FaceMakeup", a.LipMakeup = "LipMakeup", a.EyeMakeup = "EyeMakeup", a.AvatarBackground = "AvatarBackground", a.AvatarLooks = "AvatarLooks", a.Showcase = "Showcase", a.Decal = "Decal", a.Image = "Image", a.Audio = "Audio", a.Model = "Model", a.Mesh = "Mesh", a.MeshPart = "MeshPart", a.Plugin = "Plugin", a.EmoteAnimation = "EmoteAnimation", a.Animation = "Animation", a.Video = "Video", a.TextDocument = "TextDocument", a.Event = "Event", a.UpcomingEvent = "UpcomingEvent", a.DraftEvent = "DraftEvent", a.PastEvent = "PastEvent", a.FontFamily = "FontFamily", a.ShareLink = "ShareLink", a.Moments = "Moments", a.StorePreviewVideo = "StorePreviewVideo", a.GamePreviewVideo = "GamePreviewVideo", a.AllCatalogAsset = "All", a.AssetPermissionRequests = "AssetPermissionRequests", a);
@@ -489,7 +485,8 @@
             [a.CategoryType.Package]: "",
             [a.CategoryType.SharedPackage]: ""
         },
-        c = {
+        c = (e, a) => "/dashboard/creations/experiences/".concat(e).concat(a ? "/observability" : "", "/server-management"),
+        i = {
             getUrl: (e, a, t) => {
                 let r = new URLSearchParams({
                     ...e ? {
@@ -507,11 +504,11 @@
             getConfigureItemUrl: (e, a) => {
                 switch (a) {
                     case r.default.Game:
-                        return c.getConfigureExperienceUrl(e);
+                        return i.getConfigureExperienceUrl(e);
                     case r.default.Bundle:
-                        return c.getConfigureBundlePath(e);
+                        return i.getConfigureBundlePath(e);
                     case r.default.CatalogAsset:
-                        return c.getConfigureAvatarItemsUrl(e);
+                        return i.getConfigureAvatarItemsUrl(e);
                     default:
                         throw Error("Unsupported item type ".concat(String(a)))
                 }
@@ -520,7 +517,7 @@
             getConfigureBundlePath: e => "/dashboard/creations/bundle/".concat(e, "/configure"),
             getConfigureExperienceUrl: e => "/dashboard/creations/experiences/".concat(e, "/configure"),
             configureCreatorStoreItemBasePath: "/dashboard/creations/store/",
-            getConfigureCreatorStoreItemUrl: e => "".concat(c.configureCreatorStoreItemBasePath).concat(e, "/configure"),
+            getConfigureCreatorStoreItemUrl: e => "".concat(i.configureCreatorStoreItemBasePath).concat(e, "/configure"),
             getConfigureAvatarItemsUrl: e => "/dashboard/creations/catalog/".concat(e, "/configure"),
             getConfigureDeveloperProductUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/developer-products/").concat(a, "/configure"),
             getCreateDeveloperProductUrl: e => "/dashboard/creations/experiences/".concat(e, "/developer-products/create"),
@@ -627,8 +624,18 @@
             getDataStoresManagerUrl: e => "/dashboard/creations/experiences/".concat(e, "/analytics/data-stores"),
             getExtendedServicesUnlock: e => "/dashboard/creations/experiences/".concat(e, "/extended-services"),
             getPaymentsUrl: () => "/dashboard/payments",
-            getServerManagementUrl: e => "/dashboard/creations/experiences/".concat(e, "/server-management"),
-            getServerManagementDetailsUrl: (e, a, t) => "/dashboard/creations/experiences/".concat(e, "/server-management/").concat(a, "/servers/").concat(t, "/details"),
+            getServerManagementUrl: function(e) {
+                let a = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
+                return c(e, a)
+            },
+            getServerManagementServersUrl: function(e, a) {
+                let t = arguments.length > 2 && void 0 !== arguments[2] && arguments[2];
+                return "".concat(c(e, t), "/").concat(a, "/servers")
+            },
+            getServerManagementDetailsUrl: function(e, a, t) {
+                let r = arguments.length > 3 && void 0 !== arguments[3] && arguments[3];
+                return "".concat(c(e, r), "/").concat(a, "/servers/").concat(t, "/details")
+            },
             getClientSessionsUrl: e => "/dashboard/creations/experiences/".concat(e, "/observability/client-sessions"),
             getClientSessionDetailsUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/observability/client-sessions/").concat(a),
             getPlayerSupportUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/player-support").concat(a ? "/".concat(a) : "")
@@ -640,7 +647,7 @@
             if ("" !== s[e]) return "".concat(o, "/").concat(s[e], "?keyword=").concat(encodeURIComponent(a));
             throw Error("Unsupported search asset type ".concat(e))
         }
-    }, "dashboard", 0, c, "developerForum", 0, {
+    }, "dashboard", 0, i, "developerForum", 0, {
         getBaseUrl: () => "https://devforum.roblox.com",
         getCdnBaseUrl: () => "https://doy2mn9upadnk.cloudfront.net",
         getMediaCdnBaseUrl: () => "//d3vcfwomg2mj2z.cloudfront.net",
@@ -750,12 +757,12 @@
                 } : {}
             }).toString();
         return "/settings/data-collection".concat(r.length > 0 ? "?" : "").concat(r)
-    }, "getDataCollectionUrl", 0, () => "/data-collection", "getGroupRoleUrl", 0, e => "/dashboard/group/roles/".concat(e), "getRoadmapUrl", 0, () => "/roadmap", "getShareLinksUrl", 0, () => "/affiliate", "getUrl", 0, () => "/"])
+    }, "getGroupRoleUrl", 0, e => "/dashboard/group/roles/".concat(e), "getRoadmapUrl", 0, () => "/roadmap", "getUrl", 0, () => "/"])
 }, 829425, e => {
     "use strict";
     var a = e.i(726474);
     e.s(["creatorHub", 0, a])
 }]);
 
-//# debugId=05288c45-bb90-3b09-1c62-c4ef3d563c6c
-//# sourceMappingURL=3kw02y6cx9nn7.js.map
+//# debugId=14d6985d-111b-69fa-e9ef-c8c200b4d9aa
+//# sourceMappingURL=09lg67oeubk-a.js.map

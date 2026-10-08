@@ -266,6 +266,12 @@ Roblox.LangDynamic["Authentication.SignUp"] = {
     "Subtitle.AddYourBirthday": "Add your birthday to create your Roblox account.",
     "Action.StartPlay": "Start play",
     "Response.PasswordLowComplexity": "Password must contain at least one letter and at least one number or symbol.",
-    "Response.PasswordTooSimilarToUsername": "Password shouldn't be too similar to your username."
+    "Response.PasswordTooSimilarToUsername": "Password shouldn't be too similar to your username.",
+    "Header.CloseWithoutFinishing": "Close without finishing?",
+    "Subtitle.YoureAlmostThere": "You're almost there. If you close now, your account won't be fully created and you won't be able to play Roblox.",
+    "Label.PasswordErrorTooSimilarTooUsername": "Isn't too similar to username",
+    "Description.VerificationLinkingTextWithLinks": "Your Roblox account will be linked to your account on {platform}. You can unlink from the Settings screen at any time. There may be a cool down before being able to link to another account on {platform}. By clicking Sign Up, you are agreeing to the {openTermsTag}Terms of Use{closeTermsTag} including the arbitration clause and you are acknowledging the {openPrivacyTag}Privacy Policy{closePrivacyTag}.",
+    "Label.PasswordErrorLowComplexity": "Has a letter and a number or symbol",
+    "Label.PasswordErrorTooSimilarToUsername": "Isn't too similar to username"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Authentication.SignUp");

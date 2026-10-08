@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "f9a7b529-2f56-3258-5dbc-e0f168c24d7f")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "e716cbe6-6f3e-a447-00c1-cab2db0ac3f5")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 913893, 155743, e => {
@@ -2741,6 +2741,12 @@
         NUMBER_2: 2,
         NUMBER_3: 3,
         NUMBER_4: 4
+    }, "RobloxItemConfigurationApiModelsMarketplaceItemSaleLocationSaleLocationTypeEnum", 0, {
+        NUMBER_0: 0,
+        NUMBER_1: 1,
+        NUMBER_2: 2,
+        NUMBER_3: 3,
+        NUMBER_4: 4
     }, "RobloxItemConfigurationApiModelsRequestCollectiblesSaleLocationConfigurationModelSaleLocationTypeEnum", 0, {
         NUMBER_0: 0,
         NUMBER_1: 1,
@@ -3411,5 +3417,5 @@
     e.s(["default", 0, ee], 913893)
 }]);
 
-//# debugId=f9a7b529-2f56-3258-5dbc-e0f168c24d7f
-//# sourceMappingURL=0gxujqzfj0z01.js.map
+//# debugId=e716cbe6-6f3e-a447-00c1-cab2db0ac3f5
+//# sourceMappingURL=2jd1dqe-asm-d.js.map

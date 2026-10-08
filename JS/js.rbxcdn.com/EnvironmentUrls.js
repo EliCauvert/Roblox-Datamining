@@ -1,11 +1,11 @@
 ! function() {
     try {
-        var t = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
+        var t = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         t.SENTRY_RELEASE = {
-            id: "5af98963c3044609bbba86bef8b8e32284e249cb"
+            id: "e43c94045db314a010295d6a96d80023207ebc61"
         };
         var o = (new t.Error).stack;
-        o && (t._sentryDebugIds = t._sentryDebugIds || {}, t._sentryDebugIds[o] = "394fdd5a-6400-4b17-9fb4-0d6942263914", t._sentryDebugIdIdentifier = "sentry-dbid-394fdd5a-6400-4b17-9fb4-0d6942263914")
+        o && (t._sentryDebugIds = t._sentryDebugIds || {}, t._sentryDebugIds[o] = "7f1a3e81-e8ed-408b-ae99-f04888738319", t._sentryDebugIdIdentifier = "sentry-dbid-7f1a3e81-e8ed-408b-ae99-f04888738319")
     } catch (t) {}
 }(),
 function() {
@@ -13,72 +13,72 @@ function() {
     var t = {},
         o = {};
 
-    function n(e) {
-        var a = o[e];
-        if (void 0 !== a) return a.exports;
+    function a(e) {
+        var n = o[e];
+        if (void 0 !== n) return n.exports;
         var i = o[e] = {
             exports: {}
         };
-        return t[e](i, i.exports, n), i.exports
+        return t[e](i, i.exports, a), i.exports
     }
-    n.d = function(t, o) {
-        for (var e in o) n.o(o, e) && !n.o(t, e) && Object.defineProperty(t, e, {
+    a.d = function(t, o) {
+        for (var e in o) a.o(o, e) && !a.o(t, e) && Object.defineProperty(t, e, {
             enumerable: !0,
             get: o[e]
         })
-    }, n.o = function(t, o) {
+    }, a.o = function(t, o) {
         return Object.prototype.hasOwnProperty.call(t, o)
-    }, n.r = function(t) {
-        "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(t, Symbol.toStringTag, {
+    }, a.r = function(t) {
+        "u" > typeof Symbol && Symbol.toStringTag && Object.defineProperty(t, Symbol.toStringTag, {
             value: "Module"
         }), Object.defineProperty(t, "__esModule", {
             value: !0
         })
-    }, n.rv = function() {
-        return "1.5.7"
-    }, n.ruid = "bundler=rspack@1.5.7";
+    }, a.rv = function() {
+        return "1.7.12"
+    }, a.ruid = "bundler=rspack@1.7.12";
     var e = {};
 
-    function a(t, o) {
+    function n(t, o) {
         (null == o || o > t.length) && (o = t.length);
-        for (var n = 0, e = Array(o); n < o; n++) e[n] = t[n];
+        for (var a = 0, e = Array(o); a < o; a++) e[a] = t[a];
         return e
     }
-    n.r(e), n.d(e, {
+    a.r(e), a.d(e, {
         EnvironmentUrls: function() {
-            return d
+            return m
         },
         default: function() {
             return h
         }
     });
     var i = function(t, o) {
-        var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : window;
-        if ("string" == typeof t) n[t] = o;
+        var a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : window;
+        if ("string" == typeof t) a[t] = o;
         else {
             var e = function(t) {
-                    if (Array.isArray(t)) return a(t)
+                    if (Array.isArray(t)) return n(t)
                 }(t) || function(t) {
-                    if ("undefined" != typeof Symbol && null != t[Symbol.iterator] || null != t["@@iterator"]) return Array.from(t)
-                }(t) || function(t, o) {
+                    if ("u" > typeof Symbol && null != t[Symbol.iterator] || null != t["@@iterator"]) return Array.from(t)
+                }(t) || function(t) {
                     if (t) {
-                        if ("string" == typeof t) return a(t, void 0);
-                        var n = Object.prototype.toString.call(t).slice(8, -1);
-                        if ("Object" === n && t.constructor && (n = t.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return a(t, o)
+                        if ("string" == typeof t) return n(t, void 0);
+                        var o = Object.prototype.toString.call(t).slice(8, -1);
+                        if ("Object" === o && t.constructor && (o = t.constructor.name), "Map" === o || "Set" === o) return Array.from(o);
+                        if ("Arguments" === o || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(o)) return n(t, void 0)
                     }
                 }(t) || function() {
                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }(),
                 i = e.pop(),
-                r = n,
+                r = a,
                 s = !0,
                 c = !1,
                 p = void 0;
             try {
                 for (var l, u = e[Symbol.iterator](); !(s = (l = u.next()).done); s = !0) {
-                    var h, d = l.value;
-                    null != (h = r)[d] || (h[d] = {}), r = r[d]
+                    var h, m = l.value;
+                    null != (h = r)[m] || (h[m] = {}), r = r[m]
                 }
             } catch (t) {
                 c = !0, p = t
@@ -95,52 +95,52 @@ function() {
 
     function r(t, o) {
         (null == o || o > t.length) && (o = t.length);
-        for (var n = 0, e = Array(o); n < o; n++) e[n] = t[n];
+        for (var a = 0, e = Array(o); a < o; a++) e[a] = t[a];
         return e
     }
     var s = function(t) {
-            var o, n = document.querySelector('meta[name="environment-meta"]');
-            if (null == n ? void 0 : n.dataset.domain) return {
-                production: "false" === n.dataset.isTestingSite,
-                domainName: n.dataset.domain.split(".")[0],
-                rootDomain: n.dataset.domain
+            var o, a = document.querySelector('meta[name="environment-meta"]');
+            if (null == a ? void 0 : a.dataset.domain) return {
+                production: "false" === a.dataset.isTestingSite,
+                domainName: a.dataset.domain.split(".")[0],
+                rootDomain: a.dataset.domain
             };
-            var e = (o = t.split(".").reverse(), function(t) {
+            var e = function(t) {
                     if (Array.isArray(t)) return t
-                }(o) || function(t, o) {
-                    var n, e, a = null == t ? null : "undefined" != typeof Symbol && t[Symbol.iterator] || t["@@iterator"];
-                    if (null != a) {
-                        var i = [],
-                            r = !0,
-                            s = !1;
+                }(o = t.split(".").reverse()) || function(t) {
+                    var o, a, e = null == t ? null : "u" > typeof Symbol && t[Symbol.iterator] || t["@@iterator"];
+                    if (null != e) {
+                        var n = [],
+                            i = !0,
+                            r = !1;
                         try {
-                            for (a = a.call(t); !(r = (n = a.next()).done) && (i.push(n.value), i.length !== o); r = !0);
+                            for (e = e.call(t); !(i = (o = e.next()).done) && (n.push(o.value), 3 !== n.length); i = !0);
                         } catch (t) {
-                            s = !0, e = t
+                            r = !0, a = t
                         } finally {
                             try {
-                                r || null == a.return || a.return()
+                                i || null == e.return || e.return()
                             } finally {
-                                if (s) throw e
+                                if (r) throw a
                             }
                         }
-                        return i
+                        return n
                     }
-                }(o, 3) || function(t, o) {
+                }(o) || function(t) {
                     if (t) {
                         if ("string" == typeof t) return r(t, 3);
-                        var n = Object.prototype.toString.call(t).slice(8, -1);
-                        if ("Object" === n && t.constructor && (n = t.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return r(t, o)
+                        var o = Object.prototype.toString.call(t).slice(8, -1);
+                        if ("Object" === o && t.constructor && (o = t.constructor.name), "Map" === o || "Set" === o) return Array.from(o);
+                        if ("Arguments" === o || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(o)) return r(t, 3)
                     }
-                }(o, 3) || function() {
+                }(o) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()),
-                a = e[0],
+                }(),
+                n = e[0],
                 i = e[1],
                 s = e[2];
-            if (null != a && null != i) {
-                var c = "".concat(i, ".").concat(a);
+            if (null != n && null != i) {
+                var c = "".concat(i, ".").concat(n);
                 if ("roblox.com" === c || "simulprod.com" === c || "rblx.org" === c) return {
                     production: !0,
                     domainName: "roblox",
@@ -167,6 +167,7 @@ function() {
             apiGatewayUrl: "https://apis.".concat(l),
             apiProxyUrl: "https://api.".concat(l),
             assetDeliveryApi: "https://assetdelivery.".concat(l),
+            assetPathPrefix: "https://assets.create.".concat(l),
             authApi: "https://auth.".concat(l),
             avatarApi: "https://avatar.".concat(l),
             badgesApi: "https://badges.".concat(l),
@@ -204,6 +205,7 @@ function() {
             modalsApi: "https://apis.".concat(l, "/modals-api"),
             notificationApi: "https://notifications.".concat(l),
             passProductPurchasingApi: "https://apis.".concat(l, "/pass-product-purchasing"),
+            playWebsite: "https://play.".concat(l),
             bundlesProductPurchasingApi: "https://apis.".concat(l, "/bundles-product-purchasing"),
             premiumFeaturesApi: "https://premiumfeatures.".concat(l),
             presenceApi: "https://presence.".concat(l),
@@ -242,7 +244,7 @@ function() {
             xboxStoreLink: "https://www.microsoft.com/en-us/p/roblox/bq1tn1t79v9k"
         },
         h = u,
-        d = u;
+        m = u;
     i(["Roblox", "core-scripts", "environmentUrls"], e), i(["Roblox", "EnvironmentUrls"], h)
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("EnvironmentUrls");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/environmentUrls-8f0a4182a25bc6dc.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/environmentUrls-3b8051f497e57981.js.map

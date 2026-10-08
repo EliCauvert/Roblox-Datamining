@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "5690ea7bf840f017788de8e800bea68dcf38055e"
+            id: "af947ccc401fe718a8c871e5c237dab8d591fec7"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "2fbdd88d-a693-44d6-948e-0ff3835206a0", e._sentryDebugIdIdentifier = "sentry-dbid-2fbdd88d-a693-44d6-948e-0ff3835206a0")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "5bcbb48e-9132-480e-83a3-b1809968b671", e._sentryDebugIdIdentifier = "sentry-dbid-5bcbb48e-9132-480e-83a3-b1809968b671")
     } catch (e) {}
 }(),
 function() {
@@ -9849,10 +9849,10 @@ function() {
                             })
                         }, [t.searchItemsError, n]),
                         y = (0, ef.useCallback)(function(e) {
-                            var t, r, n = e.price,
-                                a = e.lowestPrice,
-                                l = "".concat(e.itemType, "_").concat(e.id),
-                                c = {
+                            var t, r, n, a = e.price,
+                                l = e.lowestPrice,
+                                c = "".concat(e.itemType, "_").concat(e.id),
+                                u = {
                                     isItemInCart: s(e.id),
                                     addItemToCart: function(e, t) {
                                         return n1(n$.CatalogItemCard, {
@@ -9867,12 +9867,12 @@ function() {
                                         }), d(e, t, r)
                                     }
                                 },
-                                u = r0(e.timedOptions, null != (t = e.price) ? t : 0);
-                            if (u && u.length > 0) {
-                                var p = u.find(function(e) {
+                                p = r0(e.timedOptions, null != (t = e.price) ? t : 0);
+                            if (p && p.length > 0) {
+                                var m = p.find(function(e) {
                                     return e.selected
                                 });
-                                p && (n = p.price, a = p.price)
+                                m && (a = m.price, l = m.price)
                             }
                             return (0, es.jsx)("div", {
                                 style: {
@@ -9891,8 +9891,8 @@ function() {
                                     creatorName: e.creatorName,
                                     creatorType: e.creatorType,
                                     creatorTargetId: e.creatorTargetId,
-                                    price: n,
-                                    lowestPrice: a,
+                                    price: a,
+                                    lowestPrice: l,
                                     unitsAvailableForConsumption: e.unitsAvailableForConsumption,
                                     itemStatus: e.itemStatus,
                                     priceStatus: e.priceStatus,
@@ -9908,12 +9908,13 @@ function() {
                                         size: rr.BadgeSizes.TITLE,
                                         titleText: e.creatorTargetId.toString()
                                     }) : void 0,
-                                    shoppingCartProps: c,
+                                    shoppingCartProps: u,
                                     containerClassName: i ? "catalog-item-container" : void 0,
                                     enableThumbnailPrice: o,
-                                    timedOptions: u
-                                }, l)
-                            }, l)
+                                    timedOptions: p,
+                                    licenseType: null == (n = e.license) ? void 0 : n.licenseType
+                                }, c)
+                            }, c)
                         }, [f, i, o, s, d]),
                         v = (0, ef.useCallback)(function() {
                             return (0, es.jsx)(ed().Fragment, {
@@ -10818,10 +10819,12 @@ function() {
                         null == (c = e[o]) || null == (l = c.content) || l.forEach(function(e) {
                             if (!(r.length >= t) && e && Number.isFinite(e.id) && e.type && (e.type.toLowerCase() === i.toLowerCase() ? o = i : e.type.toLowerCase() === a.toLowerCase() && (o = a), o)) {
                                 var o, l = "".concat(o, ":").concat(e.id);
-                                n.has(l) || (n.add(l), r.push({
+                                n.has(l) || (n.add(l), r.push(oy({
                                     id: e.id,
                                     itemType: o
-                                }))
+                                }, e.license && {
+                                    license: e.license
+                                })))
                             }
                         })
                     }), r
@@ -10921,7 +10924,9 @@ function() {
                                     return o && o.data ? o.data.reduce(function(r, o) {
                                         var i = e[e6.getCatalogContentKey(o)];
                                         if (!i) return r;
-                                        var a = oy(ov(oy({}, o), {
+                                        var a = oy(ov(oy({}, i.license && {
+                                                license: i.license
+                                            }, o), {
                                                 key: i.key
                                             }), o.priceStatus === n.free && {
                                                 isFree: !0
@@ -32242,4 +32247,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("Catalog");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/catalog-edf39074f7576625.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/catalog-dbd01c0368d90837.js.map

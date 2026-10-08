@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "bf392109-4e2e-4783-5fa7-bcebe06f9f95")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "49bf32d6-c1ef-314b-0ea5-ad71b38dc22f")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 889311, e => {
@@ -63,7 +63,7 @@
             }
         };
     e.s(["default", 0, l, "eventStreamBaseUrl", 0, s], 512229);
-    let d = /experiences\/.+\/access\/*$/,
+    let d = /experiences\/.+\/(?:access|advanced-settings)\/*$/,
         g = /experiences\/.+\/(associated-items\?activeTab=Pass|passes)\/?/,
         u = /experiences\/.+\/permissions\/*$/,
         p = /store\/.+\/permissions\/*$/,
@@ -75,13 +75,14 @@
         b = /license-manager\/license-listings\/.+\/*$/,
         f = /license-manager\/creator-agreements\/.+\/*$/,
         S = /ip\/ip-library\/.+\/*$/,
-        T = new t.UnifiedLogger({
+        T = /experiences\/[^/]+\/chat\/*$/,
+        E = new t.UnifiedLogger({
             eventBaseUrl: s,
             product: "CreatorDashboard",
             sessionProductGroup: "CreatorHub"
         }),
-        E = /experiences\/\d+\/(analytics|monetization)\/([^/]+)\/*$/,
-        I = [{
+        I = /experiences\/\d+\/(analytics|monetization)\/([^/]+)\/*$/,
+        w = [{
             regex: /analytics\/*$/,
             matchGroups: [],
             tags: ["analytics", "analytics/home"]
@@ -90,71 +91,71 @@
             matchGroups: [],
             tags: ["analytics", "analytics/overview", "analytics/overview/experience-overview"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["analytics", "retention"],
             tags: ["analytics", "analytics/overview", "analytics/overview/retention"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["analytics", "engagement"],
             tags: ["analytics", "analytics/overview", "analytics/overview/engagement"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["analytics", "acquisition"],
             tags: ["analytics", "analytics/overview", "analytics/overview/acquisition"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["analytics", "audience"],
             tags: ["analytics", "analytics/overview", "analytics/overview/audience"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["analytics", "economy"],
             tags: ["analytics", "analytics/overview", "analytics/overview/economy"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["analytics", "funnels"],
             tags: ["analytics", "analytics/overview", "analytics/overview/funnels"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["monetization", "overview"],
             tags: ["analytics", "analytics/monetization", "analytics/monetization/overview"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["monetization", "developer-products"],
             tags: ["analytics", "analytics/monetization", "analytics/monetization/developer-products"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["monetization", "passes"],
             tags: ["analytics", "analytics/monetization", "analytics/monetization/passes"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["monetization", "avatar-items"],
             tags: ["analytics", "analytics/monetization", "analytics/monetization/avatar-items"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["monetization", "immersive-ads"],
             tags: ["analytics", "analytics/monetization", "analytics/monetization/immersive-ads"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["monetization", "subscriptions"],
             tags: ["analytics", "analytics/monetization", "analytics/monetization/subscriptions"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["monetization", "engagement-payouts"],
             tags: ["analytics", "analytics/monetization", "analytics/monetization/engagement-payouts"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["analytics", "performance"],
             tags: ["analytics", "analytics/monitoring", "analytics/monitoring/performance"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["analytics", "errors"],
             tags: ["analytics", "analytics/monitoring", "analytics/monitoring/errors"]
         }, {
-            regex: E,
+            regex: I,
             matchGroups: ["analytics", "memory-stores"],
             tags: ["analytics", "analytics/monitoring", "analytics/monitoring/memory-stores"]
         }],
-        w = [{
+        k = [{
             regex: /group\/members\/*$/,
             tags: ["collaboration", "collaboration/members"]
         }, {
@@ -170,28 +171,28 @@
             regex: /group\/activity-history\/*$/,
             tags: ["collaboration", "collaboration/activity-history"]
         }],
-        k = e => {
+        x = e => {
             let t = e.getURL(),
                 a = t ? new URL(t).pathname : "",
-                i = I.find(e => {
+                i = w.find(e => {
                     let t = a.match(e.regex);
                     return t && e.matchGroups.every((e, a) => e === t[a + 1])
                 });
             i && i.tags.forEach(t => e.addTag(t));
-            let n = w.find(e => a.match(e.regex));
-            n && n.tags.forEach(t => e.addTag(t)), a.endsWith("settings/webhooks") ? e.addTag("settings/webhooks") : a.endsWith("settings/preferences") ? e.addTag("settings/preferences") : a.endsWith("roadmap") ? e.addTag("roadmap") : a.endsWith("landing") ? e.addTag("landing") : "/" === a ? e.addTag("homepage") : a.endsWith("creator") ? e.addTag("developerLanding") : d.test(a) ? e.addTag("experiences/access") : (null == t ? void 0 : t.match(g)) ? e.addTag("gamepass") : a.endsWith("activity-history") && !n ? e.addTag("activity-feed") : u.test(a) ? e.addTag("experiences/permissions") : p.test(a) ? e.addTag("asset/permissions") : a.endsWith("events/create") ? e.addTag("events/create") : h.test(a) ? e.addTag("events/configure") : m.test(a) ? e.addTag("player-feedback") : a.endsWith("rights-manager") || a.endsWith("rights-manager/register") ? e.addTag("rights-manager/register") : a.endsWith("rights-manager/removal-requests") ? e.addTag("rights-manager/removal-requests") : a.endsWith("rights-manager/matches") ? e.addTag("rights-manager/matches") : a.endsWith("license-manager/licenses") ? e.addTag("license-manager/licenses") : a.endsWith("license-manager/matches") ? e.addTag("license-manager/matches") : a.endsWith("license-manager/ip-library") ? e.addTag("license-manager/ip-library") : a.endsWith("license-manager/creator-agreements") ? e.addTag("license-manager/creator-agreements") : b.test(a) ? e.addTag("license-manager/license-listings/view-listing") : C.test(a) ? e.addTag("license-manager/agreements/view-agreement") : f.test(a) ? e.addTag("license-manager/creator-agreements/view-agreement") : a.endsWith("license-manager/ip-library/create") ? e.addTag("license-manager/ip-library/create") : S.test(a) ? e.addTag("license-manager/ip-library/view-family") : a.endsWith("explore/licenses") ? e.addTag("explore/licenses") : v.test(a) ? e.addTag("explore/licenses/view-listing") : y.test(a) && e.addTag("explore/licenses/request")
+            let n = k.find(e => a.match(e.regex));
+            n && n.tags.forEach(t => e.addTag(t)), a.endsWith("settings/webhooks") ? e.addTag("settings/webhooks") : a.endsWith("settings/preferences") ? e.addTag("settings/preferences") : a.endsWith("roadmap") ? e.addTag("roadmap") : a.endsWith("landing") ? e.addTag("landing") : "/" === a ? e.addTag("homepage") : a.endsWith("creator") ? e.addTag("developerLanding") : d.test(a) ? e.addTag("experiences/access") : (null == t ? void 0 : t.match(g)) ? e.addTag("gamepass") : a.endsWith("activity-history") && !n ? e.addTag("activity-feed") : u.test(a) ? e.addTag("experiences/permissions") : p.test(a) ? e.addTag("asset/permissions") : a.endsWith("events/create") ? e.addTag("events/create") : h.test(a) ? e.addTag("events/configure") : m.test(a) ? e.addTag("player-feedback") : T.test(a) ? e.addTag("experiences/chat") : a.endsWith("rights-manager") || a.endsWith("rights-manager/register") ? e.addTag("rights-manager/register") : a.endsWith("rights-manager/removal-requests") ? e.addTag("rights-manager/removal-requests") : a.endsWith("rights-manager/matches") ? e.addTag("rights-manager/matches") : a.endsWith("license-manager/licenses") ? e.addTag("license-manager/licenses") : a.endsWith("license-manager/matches") ? e.addTag("license-manager/matches") : a.endsWith("license-manager/ip-library") ? e.addTag("license-manager/ip-library") : a.endsWith("license-manager/creator-agreements") ? e.addTag("license-manager/creator-agreements") : b.test(a) ? e.addTag("license-manager/license-listings/view-listing") : C.test(a) ? e.addTag("license-manager/agreements/view-agreement") : f.test(a) ? e.addTag("license-manager/creator-agreements/view-agreement") : a.endsWith("license-manager/ip-library/create") ? e.addTag("license-manager/ip-library/create") : S.test(a) ? e.addTag("license-manager/ip-library/view-family") : a.endsWith("explore/licenses") ? e.addTag("explore/licenses") : v.test(a) ? e.addTag("explore/licenses/view-listing") : y.test(a) && e.addTag("explore/licenses/request")
         };
-    T.events.on("pageload", e => {
-        k(e)
-    }), T.events.on("webvitals", e => {
-        k(e)
-    }), T.events.on("apivitals", e => {
-        k(e)
-    }), T.events.on("session", e => {
+    E.events.on("pageload", e => {
+        x(e)
+    }), E.events.on("webvitals", e => {
+        x(e)
+    }), E.events.on("apivitals", e => {
+        x(e)
+    }), E.events.on("session", e => {
         let t = e.getURL(),
             a = t ? new URL(t).pathname : "";
         a.endsWith("roadmap") ? e.addTag("roadmap") : a.endsWith("landing") ? e.addTag("landing") : "/" === a ? e.addTag("homepage") : a.endsWith("creator") && e.addTag("developerLanding")
-    }), e.s(["default", 0, T], 215955)
+    }), e.s(["default", 0, E], 215955)
 }, 577474, e => {
     "use strict";
     var t = e.i(945146),
@@ -728,7 +729,7 @@
                 currentUrl: String(t),
                 additionalProperties: {
                     ...r,
-                    loggerVersion: "1.7.0",
+                    loggerVersion: "1.9.0",
                     viewportWidth: i,
                     viewportHeight: n
                 }
@@ -1163,5 +1164,5 @@
     }])
 }]);
 
-//# debugId=bf392109-4e2e-4783-5fa7-bcebe06f9f95
-//# sourceMappingURL=384_wv_a8p63k.js.map
+//# debugId=49bf32d6-c1ef-314b-0ea5-ad71b38dc22f
+//# sourceMappingURL=0nin3og2hlf2u.js.map

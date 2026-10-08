@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "5690ea7bf840f017788de8e800bea68dcf38055e"
+            id: "af947ccc401fe718a8c871e5c237dab8d591fec7"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "14e3e628-ca0b-4550-b095-1c0aa5cfb105", e._sentryDebugIdIdentifier = "sentry-dbid-14e3e628-ca0b-4550-b095-1c0aa5cfb105")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "8dbb8558-1a65-4e54-a3dc-0d3e52cbe33a", e._sentryDebugIdIdentifier = "sentry-dbid-8dbb8558-1a65-4e54-a3dc-0d3e52cbe33a")
     } catch (e) {}
 }(),
 function() {
@@ -1151,4 +1151,4 @@ function() {
         }
     }
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("ItemDetailsHydrationService");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/itemDetailsHydrationService-9e4d20549495f4c5.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/itemDetailsHydrationService-cd56ebf1141f05e7.js.map

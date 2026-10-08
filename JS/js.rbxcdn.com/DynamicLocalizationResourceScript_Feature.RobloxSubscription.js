@@ -190,7 +190,7 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Action.ReferralJoinPlus": "Join Roblox Plus",
     "Description.ReferralIneligible": "This referral reward is not available on your account. You can still join Roblox Plus.",
     "Description.ReferralInvalid": "This referral link is no longer valid. You can still join Roblox Plus without the referral reward.",
-    "Description.ReferralRecipientInvitedBy": "{displayName} invited you to join Plus. You'll both get {amount} Robux when you join.",
+    "Description.ReferralRecipientInvitedBy": "{displayName} invited you to join Plus. You'll both get {amount} Robux when you buy Plus.",
     "Heading.ReferralRecipientJoin": "Join Plus, get",
     "Label.SuccessfulReferrals": "Successful referrals",
     "Label.RobuxEarned": "Robux earned",
@@ -256,6 +256,11 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Label.TotalValue": "{price} total value",
     "Description.ReferralRecipientInvite": "{username} invited you to join Plus. You'll both get {amount} Robux when you purchase Plus.",
     "Description.BillingInfoWithFreeTrialOfferV2": "{boldTagStart}{trialPeriodType, select,\n    Week {{trialPeriod, plural, one {{trialPeriod} week} other {{trialPeriod} weeks}}}\n    Month {{trialPeriod, plural, one {{trialPeriod} month} other {{trialPeriod} months}}}\n    Year {{trialPeriod, plural, one {{trialPeriod} year} other {{trialPeriod} years}}}\n    other {{trialPeriod} {trialPeriodType}}\n  } free{boldTagEnd}, then {price}/{periodType, select,\n    Week {week}\n    Month {month}\n    Year {year}\n    other {periodType}\n  }",
-    "Action.Review": "Review"
+    "Action.Review": "Review",
+    "Label.ReferralsLegalDisclosure": "By clicking \"Refer to Plus\", I agree to the {linkStart}Roblox Plus Referral Program Terms{linkEnd}.",
+    "Label.ReferralsLegalDisclosureV2": "By clicking \\u{201C}Refer to Plus\\u{201D}, I agree to the {linkStart}Roblox Plus Referral Program Terms{linkEnd}.",
+    "Description.ReferralRecipientLegalDisclosure": "By clicking \"Subscribe\", you agree to the {linkStartRef}Referral Program Terms{linkEndRef} and the {linkStart}Roblox Subscription Terms{linkEnd}. You will be automatically charged each month until you cancel.",
+    "Description.ReferralRecipientLegalDisclosurePurchase": "By clicking \\u{201C}{ctaText}\\u{201D}, you agree to the <a href=\"{referralTermsUrl}\">Referral Program Terms</a> and the <a href=\"{termsUrl}\">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel.",
+    "Description.NoLongerValidReferralGenericError": "This referral link is no longer valid."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.RobloxSubscription");

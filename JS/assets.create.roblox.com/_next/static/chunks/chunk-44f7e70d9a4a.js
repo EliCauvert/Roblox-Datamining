@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "29a1694e-07da-6a54-af5b-4413597b5565")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "bde6c428-60b8-3a71-770e-d6a607b35f34")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -119,10 +119,15 @@
         }),
         o = (0, t.defineFlag)({
             namespace: "creator-creations",
+            name: "isMomentsShareLinkEnabled",
+            defaultValue: !1
+        }),
+        u = (0, t.defineFlag)({
+            namespace: "creator-creations",
             name: "isMomentsPostCreationEnabled",
             defaultValue: !1
         });
-    e.s(["isBadgeDefaultIconEnabled", 0, a, "isMomentsFeedIdEnabled", 0, l, "isMomentsPostCreationEnabled", 0, o, "isMomentsSitetestUrlParsingEnabled", 0, r, "isMomentsUploadEnabled", 0, n, "isMomentsUploadLanguageSelectEnabled", 0, i, "isTextDocumentEnabled", 0, s])
+    e.s(["isBadgeDefaultIconEnabled", 0, a, "isMomentsFeedIdEnabled", 0, l, "isMomentsPostCreationEnabled", 0, u, "isMomentsShareLinkEnabled", 0, o, "isMomentsSitetestUrlParsingEnabled", 0, r, "isMomentsUploadEnabled", 0, n, "isMomentsUploadLanguageSelectEnabled", 0, i, "isTextDocumentEnabled", 0, s])
 }, 203450, e => {
     "use strict";
     var t = e.i(221628),
@@ -133,7 +138,7 @@
         i = e.i(156071),
         l = e.i(881670),
         o = e.i(745873),
-        u = e.i(361975);
+        u = e.i(338653);
     let d = (0, a.createContext)({
         isAffiliateProgramLoading: !1,
         requiresActionToJoinProgram: void 0,
@@ -231,10 +236,12 @@
                     credentials: "include"
                 }),
                 r = a.status % 100 * 100;
-            if (!a.ok && 500 === r && t < 2) return await new Promise(e => setTimeout(e, 2 ** (t + 1) * 500)), n(e, t + 1);
+            if (!a.ok && 500 === r && t < 2) return await new Promise(e => {
+                setTimeout(e, 2 ** (t + 1) * 500)
+            }), n(e, t + 1);
             if (500 === r && 2 === t) throw Error("Failed to get feature access after 3 attempts");
             let s = await a.json();
-            if (!("access" in s)) throw Error('"access" not found in response');
+            if ("object" != typeof s || null === s || !("access" in s)) throw Error('"access" not found in response');
             return s.access
         }, r = async () => await n("".concat(t, "/v1/upsell-feature-access?nameSpace=").concat(a, "&featureName=").concat("ShouldShowCreatorHubBanner")) === "Granted";
     e.s(["getAgeVerificationUpsellFeatureAccess", 0, r])
@@ -570,7 +577,8 @@
         [a.Asset.TShirt]: t.AssetType.Tshirt,
         [a.Asset.Shirt]: t.AssetType.Shirt,
         [a.Asset.Pants]: t.AssetType.Pants,
-        [a.Asset.AvatarBackground]: t.AssetType.AvatarBackground
+        [a.Asset.AvatarBackground]: t.AssetType.AvatarBackground,
+        [a.Asset.TextDocument]: t.AssetType.TextDocument
     }, s = {
         [a.Asset.Decal]: "Message.DecalResolutionLimits",
         [a.Asset.Audio]: "Message.AudioLimits",
@@ -588,6 +596,8 @@
                 return ["mp3", "ogg", "flac", "wav"];
             case a.Asset.Video:
                 return ["mp4", "mov"];
+            case a.Asset.TextDocument:
+                return ["md", "txt"];
             default:
                 return []
         }
@@ -605,6 +615,8 @@
                 return n.getAssetsUrl();
             case a.Asset.AvatarBackground:
                 return n.getAvatarItemsUrl();
+            case a.Asset.TextDocument:
+                return n.getAssetsUrl();
             default:
                 return ""
         }
@@ -617,7 +629,8 @@
             default:
                 return !1
         }
-    }, "isCreateAssetAvailable", 0, e => {
+    }, "isCreateAssetAvailable", 0, function(e) {
+        let t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
         switch (e) {
             case a.Asset.Audio:
             case a.Asset.Decal:
@@ -627,6 +640,8 @@
             case a.Asset.Pants:
             case a.Asset.AvatarBackground:
                 return !0;
+            case a.Asset.TextDocument:
+                return t;
             default:
                 return !1
         }
@@ -638,6 +653,7 @@
             case a.Asset.Pants:
             case a.Asset.Audio:
             case a.Asset.AvatarBackground:
+            case a.Asset.TextDocument:
                 return 20;
             case a.Asset.Video:
                 return 30;
@@ -672,7 +688,7 @@
         y = e.i(917852),
         v = e.i(576069),
         g = e.i(663563);
-    let A = "".concat("https://assets.create.roblox.com/265af8e6c3890a2bee3fed8c8ea1b021c1b0d4a8/assets", "/home/publish_eligibility_banner.webp"),
+    let A = "".concat("https://assets.create.roblox.com/b5143cbf7654fcce8ee8e764e247e76cdd9dff12/assets", "/home/publish_eligibility_banner.webp"),
         T = (0, l.withTranslation)(e => {
             var T;
             let {
@@ -1913,7 +1929,7 @@
                 }
             })()
         }, []), o
-    }, "getValueFromStorage", 0, n, "writeValueToStorage", 0, r])
+    }])
 }, 227700, e => {
     "use strict";
     var t = e.i(60373);
@@ -2310,16 +2326,19 @@
     e.s(["useCreatorEligibility", 0, function() {
         let {
             overrideUserId: e,
-            isReady: r = !0
+            isReady: r = !0,
+            refetchInterval: s = !1
         } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, {
-            user: s
-        } = (0, a.useAuthentication)(), i = null == s ? void 0 : s.id, l = null != e ? e : i;
+            user: i
+        } = (0, a.useAuthentication)(), l = null == i ? void 0 : i.id, o = null != e ? e : l;
         return (0, t.useQuery)({
-            queryKey: ["creatorEligibility", null != l ? l : null],
+            queryKey: ["creatorEligibility", null != o ? o : null],
             queryFn: async () => n.default.coreContentGetCreatorEligibility({
-                userId: l
+                userId: o
             }),
-            enabled: r && !!l
+            enabled: r && !!o,
+            refetchInterval: s,
+            refetchIntervalInBackground: !0
         })
     }])
 }, 845592, 448005, e => {
@@ -2948,5 +2967,5 @@
     d.displayName = "TextArea", e.s(["TextArea", 0, d])
 }]);
 
-//# debugId=29a1694e-07da-6a54-af5b-4413597b5565
-//# sourceMappingURL=2gvby--syz86k.js.map
+//# debugId=bde6c428-60b8-3a71-770e-d6a607b35f34
+//# sourceMappingURL=2-od9jlbh771w.js.map

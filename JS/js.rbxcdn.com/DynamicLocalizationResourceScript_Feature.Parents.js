@@ -570,6 +570,9 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "ODPChallenge.Prologue.Action.ManageFriend": "unblock this user",
     "ODPChallenge.Prologue.Action.AddTrustedConnection": "add this trusted friend",
     "ODPChallenge.Prologue.Action.SendTransfer": "send Robux",
-    "ODPChallenge.Prologue.Action.ReceiveTransfer": "receive Robux"
+    "ODPChallenge.Prologue.Action.ReceiveTransfer": "receive Robux",
+    "Heading.ConversationalRequest.LiftPlatformAccessRestriction": "Do you allow your child to use Roblox?",
+    "Description.LiftPlatformAccessRestrictionConsent": "With your permission, your child will be able to sign in to Roblox.",
+    "Response.ODPBirthdayNotAllowed": "This date can't be used for your child's account. Try another date."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Parents");

@@ -250,6 +250,10 @@ Roblox.LangDynamic["Feature.AppealsPortal"] = {
     "Label.TypeLower.Post": "post",
     "Action.AskForReview": "Ask for review",
     "Description.AskForReview": "You're confirming that you've fixed this issue. We'll review this {contentType} again.",
+    "Label.Type.InGameBehavior": "In-game behavior",
+    "Label.TypeLower.InGameBehavior": "in-game behavior",
+    "Label.InGameBehavior": "In-game behavior",
+    "Label.InGameBehavior.Notice": "Chat or gameplay",
     "Description.FixByDate": "Fix the issue in Studio by {date}, then come back and ask for review."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AppealsPortal");

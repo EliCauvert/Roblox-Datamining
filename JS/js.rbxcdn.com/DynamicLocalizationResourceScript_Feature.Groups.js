@@ -1355,6 +1355,8 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Action.React": "React",
     "Heading.LegacyAutoAssignRoleBanner": "Your lowest non-base role will no longer be automatically assigned to new members after {cutOffDate}.",
     "Description.LegacyAutoAssignRoleBanner": "We recommend using the Base Member role as your default role for new\n members. You can customize the Base Member role to fit your Community by changing its name and permissions.",
-    "Action.RemoveAffiliate": "Remove"
+    "Action.RemoveAffiliate": "Remove",
+    "Action.TransferGroup": "Transfer Group",
+    "Action.ReplyWithCount": "Reply ({replyCount})"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Groups");

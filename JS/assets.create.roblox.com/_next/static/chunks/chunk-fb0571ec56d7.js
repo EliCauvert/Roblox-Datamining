@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "5f629c32-6997-f504-a291-6b23bf4ee8e5")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "af3dc2e2-07c0-5811-7271-a4b17ad0302a")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 730530, e => {
@@ -86,26 +86,22 @@
         a = e.i(307529),
         s = e.i(251622),
         r = e.i(260022);
-    (0, r.getProductionCreatorHubUrl)("global");
     let o = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/reference/engine/classes/Player#GetJoinData"),
         n = (0, r.resolveUrl)("developerArticleProductsInGamePurchasesUrl", "production", "global"),
         i = (0, r.resolveUrl)("developerArticleBadgesSpecialGameAwardsUrl", "production", "global"),
         l = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/game-passes"),
         u = (0, r.resolveUrl)("developerArticleCreateVipServerUrl", "production", "global"),
-        d = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/publish-experiences-and-places#release-to-the-public");
-    (0, r.getProductionCreatorHubUrl)("global");
-    let c = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/projects/assets/privacy"),
+        d = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/publish-experiences-and-places#release-to-the-public"),
+        c = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/projects/assets/privacy"),
         p = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/parts/models#distribute-models"),
-        f = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/publishing-to-marketplace#sale-location");
-    (0, r.getProductionCreatorHubUrl)("global");
-    let h = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/subscriptions#creating-subscriptions"),
+        f = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/publishing-to-marketplace#sale-location"),
+        h = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/subscriptions#creating-subscriptions"),
         v = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/game-design/subscription-design#bundles"),
         A = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/subscriptions#earning-with-subscriptions"),
         m = (0, r.resolveUrl)("robloxCommunityStandardsUrl", "production", "global"),
         b = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/marketplace-policy#ugc-program-guidelines"),
-        y = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/marketplace-fees-and-commissions#publishing-advance");
-    (0, r.getProductionCreatorHubUrl)("global"), (0, r.getProductionCreatorHubUrl)("global");
-    let S = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/account-verification");
+        y = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/marketplace-fees-and-commissions#publishing-advance"),
+        S = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/account-verification");
     (0, r.getProductionCreatorHubUrl)("global"), (0, r.getProductionCreatorHubUrl)("global");
     let g = (0, r.resolveUrl)("ugcSubscriptionTermsOfUseUrl", "production", "global"),
         L = (0, r.resolveUrl)("robloxTermsOfUseUrl", "production", "global"),
@@ -1508,5 +1504,5 @@
     }, "UploadStatusApi", 0, T])
 }]);
 
-//# debugId=5f629c32-6997-f504-a291-6b23bf4ee8e5
-//# sourceMappingURL=2uqakybza43z_.js.map
+//# debugId=af3dc2e2-07c0-5811-7271-a4b17ad0302a
+//# sourceMappingURL=27h_2l_kk5k9_.js.map

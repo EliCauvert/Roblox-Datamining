@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "4d4e91a2-834c-8293-4146-80220323acc2")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "00449619-0858-d37a-98d2-3a2ffa329c75")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 15645, 172753, e => {
@@ -51,16 +51,16 @@
         }, e
     }
 
-    function x() {
+    function I() {
         let e = (0, p._)(["\n    animation: ", " 3s infinite linear;\n  "]);
-        return x = function() {
+        return I = function() {
             return e
         }, e
     }
 
-    function I() {
+    function x() {
         let e = (0, p._)(["\n      width: auto;\n      animation: ", " 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;\n    "]);
-        return I = function() {
+        return x = function() {
             return e
         }, e
     }
@@ -148,7 +148,7 @@
                 backgroundSize: "10px 10px",
                 backgroundPosition: "0 -23px"
             })
-        }, (0, b.css)(r || (r = x()), k)),
+        }, (0, b.css)(r || (r = I()), k)),
         E = (0, v.s)("span", {
             name: "MuiLinearProgress",
             slot: "Bar1",
@@ -182,7 +182,7 @@
             let {
                 ownerState: t
             } = e;
-            return ("indeterminate" === t.variant || "query" === t.variant) && (0, b.css)(o || (o = I()), C)
+            return ("indeterminate" === t.variant || "query" === t.variant) && (0, b.css)(o || (o = x()), C)
         }),
         L = (0, v.s)("span", {
             name: "MuiLinearProgress",
@@ -646,11 +646,11 @@
         return e
     }
 
-    function x(e) {
+    function I(e) {
         return e
     }
 
-    function I(e) {
+    function x(e) {
         return e
     }
 
@@ -806,11 +806,11 @@
         }
     }
 
-    function O(e) {
+    function M(e) {
         return e
     }
 
-    function M(e) {
+    function O(e) {
         return e
     }
 
@@ -828,13 +828,13 @@
         var t;
         return null == (t = e) ? t : {
             name: t.name,
-            environments: (0, d.exists)(t, "environments") ? null === t.environments ? null : t.environments.map(M) : void 0,
+            environments: (0, d.exists)(t, "environments") ? null === t.environments ? null : t.environments.map(O) : void 0,
             targetType: (0, d.exists)(t, "targetType") ? t.targetType : void 0,
             operations: t.operations,
             translationKey: (0, d.exists)(t, "translationKey") ? t.translationKey : void 0,
             product: (0, d.exists)(t, "product") ? t.product : void 0,
             operationOverrides: t.operationOverrides.map(F),
-            authenticationSystems: t.authenticationSystems.map(O),
+            authenticationSystems: t.authenticationSystems.map(M),
             groupAllowedOperations: (0, d.exists)(t, "groupAllowedOperations") ? t.groupAllowedOperations : void 0
         }
     }
@@ -1932,8 +1932,8 @@
                                 return r = o.sent(), [2, new d.JSONApiResponse(r, function(e) {
                                     return null == e ? e : {
                                         scopes: e.scopes.map(S),
-                                        responseTypes: e.responseTypes.map(I),
-                                        promptTypes: e.promptTypes.map(x),
+                                        responseTypes: e.responseTypes.map(x),
+                                        promptTypes: e.promptTypes.map(I),
                                         userAgreements: e.userAgreements.map(W),
                                         applicationId: e.applicationId,
                                         owner: y(e.owner),
@@ -2318,11 +2318,7 @@
         PublishLimitExceeded: "PublishLimitExceeded",
         ApplicationModerated: "ApplicationModerated",
         ReviewSubmissionRequired: "ReviewSubmissionRequired"
-    }, "AuthorizationApi", 0, Q, "DiscoveryApi", 0, ee, "PermissionRequestApi", 0, et, "RobloxOpenCloudScopeManagementModelsAuthenticationSystem", 0, {
-        CloudAuthentication: "CloudAuthentication",
-        OAuth2: "OAuth2",
-        ExperienceAuth: "ExperienceAuth"
-    }, "ScopeApi", 0, ei], 280162);
+    }, "AuthorizationApi", 0, Q, "DiscoveryApi", 0, ee, "PermissionRequestApi", 0, et, "ScopeApi", 0, ei], 280162);
     let en = (0, i.createContext)(null);
     en.displayName = "StudioResources";
     let er = (0, r.makeStyles)()(() => ({
@@ -2600,7 +2596,7 @@
             } catch (e) {}
             return
         }
-    }, ex = e => {
+    }, eI = e => {
         let t = ["".concat(e.protocolScheme, ":1"), "launchtime:".concat(Date.now()), "avatar", "browsertrackerid:".concat((() => {
             let e = (0, n.getCookieValueByKey)("RBXEventTrackerV2") || (0, n.getCookieValueByKey)("RBXEventTracker");
             if (e) {
@@ -2609,8 +2605,8 @@
             }
             return ""
         })()), "robloxLocale:".concat(e.locale), "gameLocale:".concat(e.locale), "channel:".concat(e.channel), "browser:".concat(n.device.getCurrentBrowser()), "userId:".concat(e.userId), "distributorType:".concat(e.distributorType)];
-        return void 0 !== e.authCode && "" !== e.authCode && t.push("authCode:".concat(e.authCode), "authCodeType:magic"), void 0 !== e.baseUrl && t.push("baseUrl:".concat(encodeURIComponent(e.baseUrl))), e.task === ev.ViewAsset ? (t.push("launchmode:asset"), t.push("assetid:".concat(e.assetId))) : (t.push("launchmode:edit"), e.task === ev.EditPlace && t.push("task:".concat(e.task), "placeId:".concat(e.placeId), "universeId:".concat(e.universeId)), e.task === ev.EditPlaceRevision && (t.push("task:".concat(e.task), "placeId:".concat(e.placeId), "universeId:".concat(e.universeId), "placeversion:".concat(e.placeVersion)), e.scriptUniqueId && t.push("openscriptfromid:".concat(e.scriptUniqueId)), e.scriptPath && t.push("openscriptpath:".concat(e.scriptPath)), null != e.startLine && null != e.endLine && t.push("startline:".concat(e.startLine), "endline:".concat(e.endLine)), null != e.startCharacter && null != e.endCharacter && t.push("startcharacter:".concat(e.startCharacter), "endcharacter:".concat(e.endCharacter))), (e.task === ev.Default || e.task === ev.ReturnFromLogin) && t.push("task:".concat(e.task))), t.join("+")
-    }, eI = (0, r.makeStyles)()(e => ({
+        return void 0 !== e.authCode && "" !== e.authCode && t.push("authCode:".concat(e.authCode), "authCodeType:magic"), void 0 !== e.baseUrl && t.push("baseUrl:".concat(encodeURIComponent(e.baseUrl))), e.task === ev.ViewAsset ? (t.push("launchmode:asset"), t.push("assetid:".concat(e.assetId))) : (t.push("launchmode:edit"), e.task === ev.EditPlace && (t.push("task:".concat(e.task), "placeId:".concat(e.placeId), "universeId:".concat(e.universeId)), e.adPlacementId && (t.push("adPlacementId:".concat(e.adPlacementId)), e.referrerId && t.push("referrerId:".concat(e.referrerId)))), e.task === ev.EditPlaceRevision && (t.push("task:".concat(e.task), "placeId:".concat(e.placeId), "universeId:".concat(e.universeId), "placeversion:".concat(e.placeVersion)), e.scriptUniqueId && t.push("openscriptfromid:".concat(e.scriptUniqueId)), e.scriptPath && t.push("openscriptpath:".concat(e.scriptPath)), null != e.startLine && null != e.endLine && t.push("startline:".concat(e.startLine), "endline:".concat(e.endLine)), null != e.startCharacter && null != e.endCharacter && t.push("startcharacter:".concat(e.startCharacter), "endcharacter:".concat(e.endCharacter))), (e.task === ev.Default || e.task === ev.ReturnFromLogin) && t.push("task:".concat(e.task))), t.join("+")
+    }, ex = (0, r.makeStyles)()(e => ({
         dialog: {
             backgroundColor: e.palette.background.media,
             padding: "40px 20px 30px 20px",
@@ -2675,7 +2671,7 @@
                 classes: {
                     dialog: a
                 }
-            } = eI(),
+            } = ex(),
             [s, l] = (0, i.useState)(),
             [c, u] = (0, i.useState)(),
             d = (0, i.useRef)(s),
@@ -2723,15 +2719,17 @@
                         A = "";
                     switch (e.task) {
                         case ev.EditPlace:
-                            A = ex({
+                            A = eI({
                                 ...g,
                                 task: e.task,
                                 universeId: e.universeId,
-                                placeId: e.placeId
+                                placeId: e.placeId,
+                                adPlacementId: e.adPlacementId,
+                                referrerId: e.referrerId
                             });
                             break;
                         case ev.EditPlaceRevision:
-                            A = ex({
+                            A = eI({
                                 ...g,
                                 task: e.task,
                                 universeId: e.universeId,
@@ -2746,7 +2744,7 @@
                             });
                             break;
                         case ev.ViewAsset:
-                            A = ex({
+                            A = eI({
                                 ...g,
                                 task: e.task,
                                 assetId: e.assetId
@@ -2754,17 +2752,17 @@
                             break;
                         case ev.Default:
                         case ev.ReturnFromLogin:
-                            A = ex({
+                            A = eI({
                                 ...g,
                                 task: e.task
                             })
                     }
                     h = A, (i = document.querySelector('[data-testid="studio-protocol-iframe"]')) && i.remove(), (v = document.createElement("iframe")).style.display = "none", v.src = h, v.setAttribute("data-testid", "studio-protocol-iframe"), document.body.appendChild(v);
                     let R = void 0 !== b && "" !== b,
-                        x = R ? await eq(b).catch(() => "hash_failed") : void 0;
+                        I = R ? await eq(b).catch(() => "hash_failed") : void 0;
                     null == t || null == (d = t.startSuccess) || d.call(t, e, {
                         hasAuthCode: R,
-                        authCodeHash: x
+                        authCodeHash: I
                     }), await new Promise(e => {
                         setTimeout(e, 3e3)
                     }), y("Download")
@@ -2810,5 +2808,5 @@
     }], 581577)
 }]);
 
-//# debugId=4d4e91a2-834c-8293-4146-80220323acc2
-//# sourceMappingURL=3qt-3gq1e6rc3.js.map
+//# debugId=00449619-0858-d37a-98d2-3a2ffa329c75
+//# sourceMappingURL=3wnv5uowwt_17.js.map

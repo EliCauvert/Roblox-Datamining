@@ -150,6 +150,8 @@ Roblox.LangDynamic["Feature.Chat"] = {
     "Message.ChatUnavailableWithUser": "At this time, chat is not available with this user.",
     "RobloxConnectUnavailableWithUser": "At this time, Roblox Connect is not available with this user.",
     "Toast.Error.InvalidUserSelected": "One or more people in this list can’t be added",
+    "Message.FailedToRenameConversation.V2": "The group {EXISTING_NAME} could not be renamed to {NEW_NAME}.",
+    "Response.ChatNameFullyModerated.V2": "Group name was moderated.",
     "Label.ChatDisabled": "Chat Disabled",
     "Heading.FirstConversationWith": "First conversation with {displayName}",
     "Description.OSAContextCardDescription": "Your safety matters. Not feeling comfortable? You can block or report this person anytime from their profile.",
@@ -161,6 +163,7 @@ Roblox.LangDynamic["Feature.Chat"] = {
     "Label.SearchConnections": "Search for Friends",
     "Heading.FirstInteractionWith": "First interaction with {displayName}",
     "Heading.FirstInteractionWithThisPerson": "First interaction with this person",
+    "Label.MessageNotAvailable": "This message is not available",
     "Description.OSAGroupDescription": "Your safety matters. You can block or report a person anytime from their profile.",
     "Description.OSAGroupViewDetail": "View details.",
     "Action.GroupOSAJoin": "Join",
@@ -190,6 +193,7 @@ Roblox.LangDynamic["Feature.Chat"] = {
     "Heading.SafeChattingWithUsername": "Be safe chatting with {displayName}",
     "Heading.SafeChattingWithThisUser": "Be safe chatting with this person",
     "Label.UnfilteredChat": "Unfiltered chat",
-    "Label.Trusted": "Trusted"
+    "Label.Trusted": "Trusted",
+    "Label.MinimizedChats": "Minimized chats"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Chat");

@@ -76,7 +76,7 @@ Roblox.LangDynamic["Feature.GroupManagement"] = {
     "Group.UniversePublisher.Label": "Publish experiences",
     "Label.AddMembers": "Add members",
     "Group.ShareLinksManager.Label": "Manage share links",
-    "Group.UniverseBansManager.Label": "Access read-only chat (must be 18+) and manage experience bans",
+    "Group.UniverseBansManager.Label": "Moderate experiences",
     "Group.UniverseEventsManager.Label": "Manage experience events",
     "Group.UniverseMonetizationManager.Label": "Manage monetization for experiences",
     "Group.UniverseSecretsManager.Label": "Manage secrets for experiences",
@@ -190,6 +190,7 @@ Roblox.LangDynamic["Feature.GroupManagement"] = {
     "Group.ManageGroupGames.Subtext": "Grants broad access to all group experiences and assets, including editing and publishing, managing assets and events, viewing and editing data stores, and more. Use more specific permissions instead whenever possible.",
     "Message.LowestRoleAutoGrantWarning": "This role is automatically granted upon joining this group. Permissions granted to this role apply to newly joining users. Review them carefully.",
     "Heading.ConfirmLowestRoleReorder": "Change the lowest role?",
-    "Message.ConfirmLowestRoleReorder": "The new lowest role will automatically be granted upon joining this group. Permissions granted to this role will apply to newly joining users. Are you sure you want to continue?"
+    "Message.ConfirmLowestRoleReorder": "The new lowest role will automatically be granted upon joining this group. Permissions granted to this role will apply to newly joining users. Are you sure you want to continue?",
+    "Group.UniverseBansManager.Subtext": "Access read-only chat (must be 18+) and manage experience bans."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.GroupManagement");

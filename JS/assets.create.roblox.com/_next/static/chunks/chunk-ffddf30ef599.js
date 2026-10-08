@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "fd8132aa-a2bc-3f85-6720-fd9ab8ee6dac")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "5f66d3d7-9c4a-f1e9-dbf6-1f62e433e723")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 639102, e => {
@@ -1716,7 +1716,7 @@
                     distributorType: "Global"
                 };
                 (async () => {
-                    if (e.task === o.EStudioTaskType.EditPlace) try {
+                    if (e.task === o.EStudioTaskType.EditPlace || e.task === o.EStudioTaskType.EditPlaceRevision) try {
                         if (!await h(e.universeId, e.placeId)) return void b(!0)
                     } catch (e) {}
                     C(e, t)
@@ -1956,8 +1956,8 @@
                     "aria-labelledby": v,
                     BackdropComponent: S,
                     BackdropProps: x,
-                    children: R,
-                    className: T,
+                    children: T,
+                    className: R,
                     disableEscapeKeyDown: k = !1,
                     fullScreen: P = !1,
                     fullWidth: I = !1,
@@ -2001,7 +2001,7 @@
                     titleId: J
                 }), [J]);
             return (0, p.jsx)(N, (0, o._)({
-                className: (0, s.c)(_.root, T),
+                className: (0, s.c)(_.root, R),
                 closeAfterTransition: !0,
                 components: {
                     Backdrop: b
@@ -2044,7 +2044,7 @@
                             ownerState: z,
                             children: (0, p.jsx)(c.D.Provider, {
                                 value: F,
-                                children: R
+                                children: T
                             })
                         }))
                     })
@@ -2052,7 +2052,7 @@
             }))
         });
     e.s(["M", 0, x, "d", 0, S], 39024), e.i(149285);
-    var R = (0, i.default)({
+    var T = (0, i.default)({
             name: "Dialog"
         })(function(e) {
             return {
@@ -2063,14 +2063,14 @@
                 xsmallBreakpointWidthOverride: {}
             }
         }),
-        T = (0, n.forwardRef)(function(e, i) {
+        R = (0, n.forwardRef)(function(e, i) {
             var r = e.classes,
                 o = e.children;
             e.fullScreen;
             var s = e.className,
                 l = e.maxWidth,
                 c = (0, t.a)(e, ["classes", "children", "fullScreen", "className", "maxWidth"]),
-                u = R(void 0, {
+                u = T(void 0, {
                     props: {
                         classes: (0, a.default)(r, s)
                     }
@@ -2082,7 +2082,7 @@
                 ref: i
             }), o)
         });
-    e.s(["default", 0, T], 871451)
+    e.s(["default", 0, R], 871451)
 }, 226519, e => {
     "use strict";
     var t = e.i(871451);
@@ -2318,5 +2318,5 @@
     e.s(["DialogTitle", () => t.default])
 }]);
 
-//# debugId=fd8132aa-a2bc-3f85-6720-fd9ab8ee6dac
-//# sourceMappingURL=1e2xesfzhoion.js.map
+//# debugId=5f66d3d7-9c4a-f1e9-dbf6-1f62e433e723
+//# sourceMappingURL=0-8x8z7tg8g4t.js.map
