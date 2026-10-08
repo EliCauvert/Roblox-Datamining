@@ -11,7 +11,6 @@ local withStyleModule = require(parent_1.Core.Style.withStyle)
 local imagesModule = require(parent.ImageSet.Images)
 local imageSetComponentModule = require(core.ImageSet.ImageSetComponent)
 local useCursorModule = require(parent_1.App.SelectionCursor.useCursor)
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local uDim = UDim.new(0, 8)
 local alertTitle = roactModule.PureComponent:extend("AlertTitle")
 alertTitle.validateProps = tModule.strictInterface({
@@ -34,14 +33,14 @@ alertTitle.defaultProps = {
 }
 
 function alertTitle.render(p1)
-	-- upvalues: withStyleModule (ref), UIBloxConfigModule (ref), roactModule (ref), fitFrameOnAxis (ref), imageSetComponentModule (ref), imagesModule (ref), genericTextLabelModule (ref)
+	-- upvalues: withStyleModule (ref), roactModule (ref), fitFrameOnAxis (ref), imageSetComponentModule (ref), imagesModule (ref), genericTextLabelModule (ref)
 	local var1 = math.clamp(p1.props.screenSize.X - p1.props.margin.left - p1.props.margin.right, p1.props.minWidth, p1.props.maxWidth) - p1.props.margin.left - p1.props.margin.right
 	
 	return withStyleModule(function(p2)
-		-- upvalues: UIBloxConfigModule (copy), roactModule (copy), fitFrameOnAxis (copy), p1 (ref), imageSetComponentModule (copy), imagesModule (copy), genericTextLabelModule (copy), var1 (ref)
+		-- upvalues: roactModule (copy), fitFrameOnAxis (copy), p1 (ref), imageSetComponentModule (copy), imagesModule (copy), genericTextLabelModule (copy), var1 (ref)
 		local theme = p2.Theme
-		local var2 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Typography.HeadingSmall else p2.Tokens.Semantic.Typography.Header
-		local fontSize = var2.FontSize
+		local headingSmall = p2.Tokens.Typography.HeadingSmall
+		local fontSize = headingSmall.FontSize
 		
 		return roactModule.createElement(fitFrameOnAxis, {
 			BackgroundTransparency = 1,
@@ -84,7 +83,7 @@ function alertTitle.render(p1)
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.new(0.5, 0, 0.5, 0),
 						colorStyle = theme.TextEmphasis,
-						fontStyle = var2,
+						fontStyle = headingSmall,
 						Size = UDim2.new(1, -(2 * (36 + p1.props.titlePadding)), 0, fontSize * 2),
 						Text = p1.props.title,
 						TextSize = fontSize,
@@ -93,7 +92,7 @@ function alertTitle.render(p1)
 				}) else roactModule.createElement(genericTextLabelModule, {
 					LayoutOrder = 1,
 					colorStyle = theme.TextEmphasis,
-					fontStyle = var2,
+					fontStyle = headingSmall,
 					maxSize = Vector2.new(var1, fontSize * 2),
 					Text = p1.props.title,
 					TextSize = fontSize,

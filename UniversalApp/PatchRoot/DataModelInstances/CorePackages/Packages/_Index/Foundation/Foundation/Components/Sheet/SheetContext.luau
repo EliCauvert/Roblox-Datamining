@@ -21,6 +21,8 @@ return require(script:FindFirstAncestor("Foundation").Parent.React).createContex
 	closeAffordanceRef = nil,
 	contentStartRef = nil,
 	isVerticalSheetGesture = nil,
+	contentRevealOffset = nil,
+	setIsContentReversed = nil,
 	setSheetHeightAvailable = function(_)
 		error("No SheetContext available")
 	end,

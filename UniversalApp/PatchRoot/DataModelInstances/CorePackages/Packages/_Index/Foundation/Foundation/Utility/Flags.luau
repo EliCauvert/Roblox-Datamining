@@ -4,12 +4,14 @@ local var2 = safeFlagsModule.createGetFFlag("FoundationSliderKnobSelection")()
 local var3 = safeFlagsModule.createGetFFlag("FoundationSliderOffloadDraggingMath2")()
 local var4 = safeFlagsModule.createGetFFlag("FoundationStyleRulePseudoName")()
 local var5 = safeFlagsModule.createGetFFlag("FoundationFixColorOnScrubbableNumberInput")()
+local var6 = safeFlagsModule.createGetFFlag("FoundationAlertLinkWrap")()
+local var7 = safeFlagsModule.createGetFFlag("FoundationEducationalTooltipRefresh2")()
+local var8 = safeFlagsModule.createGetFFlag("FoundationEducationalTooltipMinMediaWidth3")()
 
 return {
 	FoundationUsePath2DSpinner = safeFlagsModule.createGetFFlag("FoundationUsePath2DSpinner")(),
 	FoundationGuiObjectInputSinkProperty = safeFlagsModule.createGetFFlag("FoundationGuiObjectInputSinkProperty")(),
 	FoundationDisableTokenScaling = safeFlagsModule.createGetFFlag("FoundationDisableTokenScaling2")(),
-	FoundationActionEmphasisStatusIndicator = safeFlagsModule.createGetFFlag("FoundationActionEmphasisStatusIndicator")(),
 	FoundationBaseMenuContentSizing = safeFlagsModule.createGetFFlag("FoundationBaseMenuContentSizing")(),
 	FoundationNumberInputBeta = safeFlagsModule.createGetFFlag("FoundationNumberInputBeta")(),
 	FoundationPopoverPluginOverlayMeasurement = safeFlagsModule.createGetFFlag("FoundationPopoverPluginOverlayMeasurement2")(),
@@ -55,9 +57,12 @@ return {
 	FoundationNumberInputScrubbingUsesOffset = var5 and safeFlagsModule.createGetFFlag("FoundationNumberInputScrubbingUsesOffset")(),
 	FoundationSliderCapture = var1 and (var2 and safeFlagsModule.createGetFFlag("FoundationSliderCapture")()),
 	FoundationAlertLinkWrap = safeFlagsModule.createGetFFlag("FoundationAlertLinkWrap")(),
-	FoundationAlertStackTrailingOnOverflow = safeFlagsModule.createGetFFlag("FoundationAlertLinkWrap")() and safeFlagsModule.createGetFFlag("FoundationAlertStackTrailingOnOverflow")(),
-	FoundationEducationalTooltipRefresh = safeFlagsModule.createGetFFlag("FoundationEducationalTooltipRefresh2")(),
-	FoundationFontFaceMigration = safeFlagsModule.createGetFFlag("FoundationFontFaceMigration2")(),
-	FoundationEducationalTooltipMinMediaWidth = safeFlagsModule.createGetFFlag("FoundationEducationalTooltipMinMediaWidth3")(),
-	FoundationStudioFontFaceMigration = safeFlagsModule.createGetFFlag("FoundationStudioFontFaceMigration")()
+	FoundationAlertStackTrailingOnOverflow = var6 and safeFlagsModule.createGetFFlag("FoundationAlertStackTrailingOnOverflow")(),
+	FoundationEducationalTooltipRefresh = var7,
+	FoundationEducationalTooltipMinMediaWidth = var8,
+	FoundationStudioFontFaceMigration = safeFlagsModule.createGetFFlag("FoundationStudioFontFaceMigration")(),
+	FoundationDontParentToFoundationModule = safeFlagsModule.createGetFFlag("FoundationDontParentToFoundationModule")(),
+	FoundationFontFaceMigration = safeFlagsModule.createGetFFlag("FoundationFontFaceMigration3")(),
+	FoundationEducationalTooltipBodyOnlyContentLayout = var7 and (var8 and safeFlagsModule.createGetFFlag("FoundationEducationalTooltipBodyOnlyContentLayout")()),
+	FoundationSheetReversedContent = safeFlagsModule.createGetFFlag("FoundationSheetReversedContent")()
 }

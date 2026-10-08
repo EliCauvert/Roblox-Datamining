@@ -14,35 +14,32 @@ local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local openTypeSupportModule = require(parent_1.Utility.OpenTypeSupport)
 local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
 
-local function getStyleDefaults(p1)
-	-- upvalues: UIBloxConfigModule (ref)
+local function _(p1)
 	return {
-		iconLabelSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_50 else p1.Global.Space_25,
-		iconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_400 else p1.Semantic.Icon.Size.Small,
-		iconColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Default else p1.Semantic.Color.Icon.Default,
-		labelTypography = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Typography.CaptionMedium else p1.Semantic.Typography.CaptionHeader,
-		labelColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Default else p1.Semantic.Color.Text.Default
+		iconLabelSpacing = p1.Size.Size_50,
+		iconSize = p1.Size.Size_400,
+		iconColorStyle = p1.Color.Content.Default,
+		labelTypography = p1.Typography.CaptionMedium,
+		labelColorStyle = p1.Color.Content.Default
 	}
 end
 
-local function getDisplayNameStyleDefaults(p1)
-	-- upvalues: UIBloxConfigModule (ref)
+local _ = function(p1)
 	return {
-		iconLabelSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_50 else p1.Global.Space_25,
-		iconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_400 else p1.Semantic.Icon.Size.Small,
-		labelTypography = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Typography.TitleLarge else p1.Semantic.Typography.Subheader,
-		labelColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Emphasis else p1.Semantic.Color.Text.Emphasis
+		iconLabelSpacing = p1.Size.Size_50,
+		iconSize = p1.Size.Size_400,
+		labelTypography = p1.Typography.TitleLarge,
+		labelColorStyle = p1.Color.Content.Emphasis
 	}
 end
 
-local function getUserNameStyleDefaults(p1)
-	-- upvalues: UIBloxConfigModule (ref)
+local _ = function(p1)
 	return {
-		iconLabelSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_50 else p1.Global.Space_25,
-		iconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_300 else p1.Global.Size_150,
-		iconColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Default else p1.Semantic.Color.Icon.Default,
-		labelTypography = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Typography.CaptionMedium else p1.Semantic.Typography.CaptionHeader,
-		labelColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Default else p1.Semantic.Color.Text.Default
+		iconLabelSpacing = p1.Size.Size_50,
+		iconSize = p1.Size.Size_300,
+		iconColorStyle = p1.Color.Content.Default,
+		labelTypography = p1.Typography.CaptionMedium,
+		labelColorStyle = p1.Color.Content.Default
 	}
 end
 
@@ -140,20 +137,22 @@ local function NameItem(p1)
 end
 
 return function(p1)
-	-- upvalues: useStyleModule (ref), UIBloxConfigModule (ref), reactModule (ref), NameItem (ref), getDisplayNameStyleDefaults (ref), openTypeSupportModule (ref), getUserNameStyleDefaults (ref), getStyleDefaults (ref)
-	local var1 = useStyleModule()
+	-- upvalues: useStyleModule (ref), reactModule (ref), NameItem (ref), UIBloxConfigModule (ref), openTypeSupportModule (ref)
+	local var1
+	local var2 = useStyleModule()
 	local position = p1.position
 	local anchorPoint = p1.anchorPoint
 	local size = p1.size
 	local automaticSize = p1.automaticSize or Enum.AutomaticSize.Y
 	local layoutOrder = p1.layoutOrder
-	local namesSpacing = p1.namesSpacing or (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var1.Tokens.Size.Size_100 else var1.Tokens.Global.Space_50)
+	local namesSpacing = p1.namesSpacing or var2.Tokens.Size.Size_100
 	local displayNameItem = p1.displayNameItem
 	local userNameItem = p1.userNameItem
 	local vendorNameItem = p1.vendorNameItem
 	local aliasItem = p1.aliasItem
-	
-	return reactModule.createElement("Frame", {
+	local createElement = reactModule.createElement
+	local var3 = "Frame"
+	local t = {
 		BackgroundTransparency = 1,
 		Selectable = false,
 		Position = position,
@@ -161,35 +160,98 @@ return function(p1)
 		Size = size,
 		AutomaticSize = automaticSize,
 		LayoutOrder = layoutOrder
-	}, {
+	}
+	local t_1 = {
 		ListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			Padding = UDim.new(0, namesSpacing)
-		}),
-		DisplayName = if displayNameItem then reactModule.createElement(NameItem, {
+		})
+	}
+	
+	if displayNameItem then
+		var1 = reactModule.createElement
+		local var4 = NameItem
+		local t_2 = {
 			layoutOrder = 1,
 			isReversed = true,
-			itemProps = displayNameItem,
-			itemStyleDefaults = getDisplayNameStyleDefaults(var1.Tokens)
-		}) else nil,
-		UserName = if userNameItem then reactModule.createElement(NameItem, {
+			itemProps = displayNameItem
+		}
+		local tokens = var2.Tokens
+		t_2.itemStyleDefaults = {
+			iconLabelSpacing = tokens.Size.Size_50,
+			iconSize = tokens.Size.Size_400,
+			labelTypography = tokens.Typography.TitleLarge,
+			labelColorStyle = tokens.Color.Content.Emphasis
+		}
+		var1 = var1(var4, t_2)
+	else
+		var1 = nil
+	end
+	local createElement_1
+	t_1.DisplayName = var1
+	
+	if userNameItem then
+		createElement_1 = reactModule.createElement
+		local var5 = NameItem
+		local t_2 = {
 			layoutOrder = 2,
 			itemProps = userNameItem,
-			openTypeFeatures = if UIBloxConfigModule.enableOpenTypeSupport then openTypeSupportModule:getUserNameStylisticAlternative() else nil,
-			itemStyleDefaults = getUserNameStyleDefaults(var1.Tokens)
-		}) else nil,
-		VendorName = if vendorNameItem then reactModule.createElement(NameItem, {
-			layoutOrder = 3,
-			itemProps = vendorNameItem,
-			itemStyleDefaults = getStyleDefaults(var1.Tokens)
-		}) else nil,
-		Alias = if aliasItem then reactModule.createElement(NameItem, {
-			layoutOrder = 4,
-			itemProps = aliasItem,
-			itemStyleDefaults = getStyleDefaults(var1.Tokens)
-		}) else nil
-	})
+			openTypeFeatures = if UIBloxConfigModule.enableOpenTypeSupport then openTypeSupportModule:getUserNameStylisticAlternative() else nil
+		}
+		local tokens = var2.Tokens
+		t_2.itemStyleDefaults = {
+			iconLabelSpacing = tokens.Size.Size_50,
+			iconSize = tokens.Size.Size_300,
+			iconColorStyle = tokens.Color.Content.Default,
+			labelTypography = tokens.Typography.CaptionMedium,
+			labelColorStyle = tokens.Color.Content.Default
+		}
+		createElement_1 = createElement_1(var5, t_2)
+	else
+		createElement_1 = nil
+	end
+	local createElement_2
+	t_1.UserName = createElement_1
+	
+	if vendorNameItem then
+		createElement_2 = reactModule.createElement
+		local var6 = NameItem
+		local t_2 = { layoutOrder = 3, itemProps = vendorNameItem }
+		local tokens = var2.Tokens
+		t_2.itemStyleDefaults = {
+			iconLabelSpacing = tokens.Size.Size_50,
+			iconSize = tokens.Size.Size_400,
+			iconColorStyle = tokens.Color.Content.Default,
+			labelTypography = tokens.Typography.CaptionMedium,
+			labelColorStyle = tokens.Color.Content.Default
+		}
+		createElement_2 = createElement_2(var6, t_2)
+	else
+		createElement_2 = nil
+	end
+	local createElement_3
+	t_1.VendorName = createElement_2
+	
+	if aliasItem then
+		createElement_3 = reactModule.createElement
+		local var7 = NameItem
+		local t_2 = { layoutOrder = 4, itemProps = aliasItem }
+		local tokens = var2.Tokens
+		t_2.itemStyleDefaults = {
+			iconLabelSpacing = tokens.Size.Size_50,
+			iconSize = tokens.Size.Size_400,
+			iconColorStyle = tokens.Color.Content.Default,
+			labelTypography = tokens.Typography.CaptionMedium,
+			labelColorStyle = tokens.Color.Content.Default
+		}
+		createElement_3 = createElement_3(var7, t_2)
+	else
+		createElement_3 = nil
+	end
+	t_1.Alias = createElement_3
+	
+	return createElement(var3, t, t_1)
 end

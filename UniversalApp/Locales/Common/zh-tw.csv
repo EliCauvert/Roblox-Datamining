@@ -307,6 +307,7 @@ Authentication.Login.Action.LogInEmailOneTimeCode,透過電子郵件給我一次
 Authentication.Login.Action.NeedHelp,需要幫助嗎？
 Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ 登入
+Authentication.Login.Action.QrCode,QR 碼
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.Save,儲存
@@ -369,6 +370,7 @@ Authentication.Login.Label.ForgotYourPassword,
 Authentication.Login.Label.GetOneTimeCode,取得一次性驗證碼
 Authentication.Login.Label.LearnMore,了解更多
 Authentication.Login.Label.LinkAccountWarning,您的 Roblox 帳號會與您在 {platform} 的帳號連結，下次您就可以自動登入了！您可以隨時從「設定」畫面取消連結，但可能需要一段緩衝時間，才能連結新的帳號。
+Authentication.Login.Label.OtherSignInOptions,其他登入選項
 Authentication.Login.Label.PasskeyIncompatible,密碼金鑰不相容
 Authentication.Login.Label.Password,密碼
 Authentication.Login.Label.Phone,手機號碼
@@ -441,6 +443,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,若要繼續，請先
 Authentication.SignUp.Action.ApplyOnNextRespawn,在下次重生時套用
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
+Authentication.SignUp.Action.Create,建立
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,
 Authentication.SignUp.Action.CreateAccountSentenceCase,
@@ -476,6 +479,7 @@ Authentication.SignUp.Description.ParentEmailDisclaimer,我們會要求提供貴
 Authentication.SignUp.Description.PasskeyTryAgain,很抱歉，註冊您的密碼金鑰時發生錯誤。請使用其他使用者名稱，再嘗試註冊一次。
 Authentication.SignUp.Description.RobloxNotAvailableInRegion,Roblox 在您的地區暫時無法使用。
 Authentication.SignUp.Description.SecureAccountWithPasskeyText,使用密碼金鑰確保帳號安全，以便日後使用手機快速登入，或新增密碼以手動登入。
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,建立帳號，即表示您同意我們的{startTermsTag}《條款》{endTermsTag}（包括仲裁條款）並認可我們的{startPrivacyTag}《隱私權政策》{endPrivacyTag}。若未滿 18 歲，貴家長或監護人必須允許您建立帳號，並同意我們的《條款》。
 Authentication.SignUp.Description.SignUpAgreement.FullCopy.Continue,按一下「繼續」，即表示您同意我們的《使用條款》（包括仲裁條款）並認可我們的《隱私權政策》。若未滿 18 歲，您同意交由家長／監護人決定是否允許您建立此帳號，並同意我們的《使用條款》。
 Authentication.SignUp.Description.SignUpAgreement.FullCopy.CreateAccount,按一下「建立帳號」，即表示您同意我們的《使用條款》（包括仲裁條款）並認可我們的《隱私權政策》。若未滿 18 歲，您同意交由家長／監護人決定是否允許您建立此帳號，並同意我們的《使用條款》。
 Authentication.SignUp.Description.SignUpAgreement.ShortCopy,我同意 Roblox 的《使用條款》（包括仲裁條款），並認可其《隱私權政策》。
@@ -495,6 +499,7 @@ Authentication.SignUp.Description.VerificationPage,點擊「註冊」即表示�
 Authentication.SignUp.Description.VerificationPage.CreateAccount,點擊「建立帳號」即表示您同意使用條款（包括仲裁條款）和隱私權政策。
 Authentication.SignUp.Description.VerificationPageMultiStep,點擊「繼續」即表示您同意使用條款（包括仲裁條款）和隱私權政策。
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,您輸入驗證碼並點擊繼續即表示您同意小孩使用 Roblox。
+Authentication.SignUp.Header.CloseWithoutFinishing,要關閉而不完成嗎？
 Authentication.SignUp.Header.CreatePassword,嗨，{username}，建立一個密碼吧
 Authentication.SignUp.Header.CreatePasswordOrPasskey, {username} 您好，請建立密碼或密碼金鑰
 Authentication.SignUp.Header.CreatedAccountChooseSignin,已建立你的帳號。請選擇登入方式。
@@ -590,6 +595,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,已有帳號加入此手
 Authentication.SignUp.Response.UsernameMustBeSetFirst,請先設定使用者名稱。
 Authentication.SignUp.Subtitle.AddYourBirthday,請新增你的生日，以建立 Roblox 帳號。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,完成設定後，你的進度將會保留。
+Authentication.SignUp.Subtitle.YoureAlmostThere,快完成了。如果現在關閉，你的帳號將無法完全建立，你也將無法玩 Roblox。
 Authentication.SignUp.Title,{username}，您好，請建立密碼
 Authentication.TwoStepVerification.Action.Approve,批准
 Authentication.TwoStepVerification.Action.ChangePassword,變更密碼
@@ -883,15 +889,12 @@ CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,找不到結果
 CommonUI.Features.Action.ClassicThemeSunsetGetPlus,取得 Plus
 CommonUI.Features.Action.ClassicThemeSunsetManage,
-CommonUI.Features.Action.ClassicUnlockGetTheme,取得主題
-CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,開始
 CommonUI.Features.Action.LessLowercase,更少
 CommonUI.Features.Action.MoreLowercase,更多
 CommonUI.Features.Action.Send,傳送
 CommonUI.Features.Heading.ClassicThemeSunset,感謝您一同歡慶 Roblox 20 週年
-CommonUI.Features.Heading.ClassicUnlock,慶祝 Roblox 20 週年
 CommonUI.Features.Heading.GameDetails,體驗詳細資料
 CommonUI.Features.Label.About,關於
 CommonUI.Features.Label.AboutUs,關於我們
@@ -911,8 +914,6 @@ CommonUI.Features.Label.Charts,圖表
 CommonUI.Features.Label.Chat,聊天
 CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,Roblox Plus 會員可以保留經典主題。只有週年紀念 App 圖示會停用。
 CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,擁有 Roblox Plus 會員資格的使用者可以保留經典主題。只有週年紀念 App 圖示會停用。
-CommonUI.Features.Label.ClassicUnlockDescription,限時享受經典外觀
-CommonUI.Features.Label.ClassicUnlockManagementSnackbar,在「設定」中管理經典主題
 CommonUI.Features.Label.ClientCoreScriptVersion,用戶端核心指令碼版本：{clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,好友
 CommonUI.Features.Label.Connection,聯繫對象
@@ -1425,7 +1426,7 @@ Feature.AddFriends.Label.EmptyStatePrompt,您要和誰探索 Roblox 呢？尋找
 Feature.AddFriends.Label.FriendRequests,好友邀請
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,搜尋人員
 Feature.AddFriends.Label.MyQrCode,我的 QR 碼
-Feature.AddFriends.Label.QRCodeTitle,QR 碼
+Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,同學
 Feature.AddFriends.Label.SearchForFriendsPrompt,搜尋使用者名稱或顯示名稱，在 Roblox 找到其他人。
 Feature.AddFriends.Label.ShareQRCodeAddConnection,分享你的 QR 碼，即可新增認識的人
@@ -1454,6 +1455,7 @@ Feature.AgeVerificationUpsell.Modal.ContentText,"請驗證年齡，再存取此�
 "
 Feature.AgeVerificationUpsell.Modal.Title,
 Feature.AgeVerificationUpsell.Title.AgeSettingsRedirect,在設定中進行年齡驗證
+Feature.AppealsPortal.Action.AskForReview,請求審核
 Feature.AppealsPortal.Action.FinalAppeal,提出最後的上訴
 Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Action.Send,
@@ -1480,7 +1482,9 @@ Feature.AppealsPortal.Description.AppealSubmittedDecisionTime.Singular,我們預
 Feature.AppealsPortal.Description.AppealSubmittedUpdate,我們會將判定結果和所有處置傳送至你提供的電子郵件地址。
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,除非已告知不想收到更多關於此上訴的通知，否則我們會將判定結果和所有處置的最新情況，傳送至所提供的電子郵件地址。
 Feature.AppealsPortal.Description.AppealsPortal,檢視過去的違規行為並管理你的上訴。所有內容和行為都必須遵守 {link}Roblox 社群標準{linkEnd}。
+Feature.AppealsPortal.Description.AskForReview,提交即表示你確認已解決此問題。我們將再次審核此{contentType}。
 Feature.AppealsPortal.Description.DetailsUnavailable,
+Feature.AppealsPortal.Description.FixByDate,請在 {date}前於 Studio 中解決問題，然後再回來請求審核。
 Feature.AppealsPortal.Description.IssueClosed,由於你決定瞭解我們的規則以免遭到停權，我們已將此問題關閉。
 Feature.AppealsPortal.Description.MatchEmail,電子郵件地址必須匹配。
 Feature.AppealsPortal.Description.MiscAppeal,若認為我們判定有誤，請告訴我們。
@@ -1544,6 +1548,8 @@ Feature.AppealsPortal.Label.IDArg,ID：{id}
 Feature.AppealsPortal.Label.ImageOrOtherAsset,圖片或其他素材
 Feature.AppealsPortal.Label.ImmersiveBrandedAd,整合式廣告
 Feature.AppealsPortal.Label.ImmersiveBrandedAdPlacementId,整合式廣告刊登位置編號
+Feature.AppealsPortal.Label.InGameBehavior,遊戲內行為
+Feature.AppealsPortal.Label.InGameBehavior.Notice,聊天或遊戲遊玩
 Feature.AppealsPortal.Label.Location,發生於
 Feature.AppealsPortal.Label.LookDescription,已分享的虛擬人偶說明
 Feature.AppealsPortal.Label.LookId,已分享的虛擬人偶 ID
@@ -1567,6 +1573,7 @@ Feature.AppealsPortal.Label.Type.ContentMaturity,
 Feature.AppealsPortal.Label.Type.Experience,
 Feature.AppealsPortal.Label.Type.Game,
 Feature.AppealsPortal.Label.Type.Image,圖像
+Feature.AppealsPortal.Label.Type.InGameBehavior,
 Feature.AppealsPortal.Label.Type.Look,已分享的虛擬人偶
 Feature.AppealsPortal.Label.Type.LookText,已分享的虛擬人偶名稱與說明
 Feature.AppealsPortal.Label.Type.Mesh,網格
@@ -1596,6 +1603,7 @@ Feature.AppealsPortal.Label.TypeLower.Experience,
 Feature.AppealsPortal.Label.TypeLower.Game,
 Feature.AppealsPortal.Label.TypeLower.Image,
 Feature.AppealsPortal.Label.TypeLower.ImmersiveBrandedAd,
+Feature.AppealsPortal.Label.TypeLower.InGameBehavior,
 Feature.AppealsPortal.Label.TypeLower.Look,
 Feature.AppealsPortal.Label.TypeLower.LookText,
 Feature.AppealsPortal.Label.TypeLower.Mesh,
@@ -1637,7 +1645,7 @@ Feature.Avatar.Action.CancelSelection,清除選擇
 Feature.Avatar.Action.Clear,清除
 Feature.Avatar.Action.ComposerPost,張貼
 Feature.Avatar.Action.ComposerPreviewAndPost,預覽並張貼
-Feature.Avatar.Action.CreateSet,建立
+Feature.Avatar.Action.CreateSet,
 Feature.Avatar.Action.CreateSetFirstRun,建立組合
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,預設檢視模式
@@ -1855,6 +1863,7 @@ Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,名稱只能含有字母、數字及空格。
 Feature.Avatar.Label.CountSelected,已選擇 {itemCount} 個道具
 Feature.Avatar.Label.Creations,作品
+Feature.Avatar.Label.Current,目前
 Feature.Avatar.Label.CurrentlyWearing,目前穿戴
 Feature.Avatar.Label.DefaultBody,預設身體
 Feature.Avatar.Label.DeleteSetBody,刪除此組合不會刪除其中的服裝。
@@ -2292,6 +2301,10 @@ Feature.Build.Analytics.Description.PayerConversion,付費使用者轉換率是�
 Feature.Build.Analytics.Description.PlaythroughRate,遊玩完成率是指完成整個遊玩作業的造訪百分比。比例越高代表玩家認為你的體驗越容易上手，而且更有意願通關。
 Feature.Build.Analytics.Description.TotalPlaytime,總遊玩時間計算某段時間內，所有玩家在體驗中花費的總時數。遊玩時間增加通常表示作業更具吸引力。
 Feature.Build.Analytics.DurationHours,{number} 小時
+Feature.Build.Analytics.Goal.EarnRobux,
+Feature.Build.Analytics.Goal.FirstImpression,留下良好的第一印象
+Feature.Build.Analytics.Goal.GetMorePlayers,吸引更多玩家
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,吸引玩家持續回流
 Feature.Build.Analytics.KeyStats,關鍵統計資料
 Feature.Build.Analytics.LastMonth,上個月
 Feature.Build.Analytics.LastWeek,
@@ -2323,9 +2336,12 @@ Feature.Build.Analytics.Summary.TotalPlaytime,玩家在體驗中花費的總時�
 Feature.Build.Analytics.Title.Arppu,每位使用者平均每日支出
 Feature.Build.Analytics.Title.ConcurrentUsers,玩家總數
 Feature.Build.Analytics.Title.D1Retention,
+Feature.Build.Analytics.Title.D7Retention,第 7 天保留率
 Feature.Build.Analytics.Title.DailyActiveUsers,
+Feature.Build.Analytics.Title.NewUserSessionTime,新使用者作業時間
 Feature.Build.Analytics.Title.PayerConversion,
 Feature.Build.Analytics.Title.PlaythroughRate,
+Feature.Build.Analytics.Title.RobuxSpent,花費的 Robux
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,造訪次數
 Feature.Build.Content.NewGame,新遊戲
@@ -2382,6 +2398,7 @@ Feature.Build.Description.ShopButton,新增購物入口
 Feature.Build.Description.ShortAdCampaign,快速瞭解玩家對你遊戲的看法。
 Feature.Build.Description.StopBuild,這項請求仍在處理中。若現在停止，將無法完成請求，你必須再次傳送。
 Feature.Build.Description.UpdateDeveloperProduct,更新開發者產品 {PRODUCT_ID}。
+Feature.Build.Description.UseAdCreditsInAdsManager,你必須前往廣告管理工具才能使用。
 Feature.Build.Error.AdForbidden,你的帳號或遊戲目前無法投放廣告。若認為其中有誤，請聯絡客服團隊。
 Feature.Build.Error.AdInsufficientFunds,你的 Robux 不足，無法建立此廣告。請增加 Robux，然後再試一次。
 Feature.Build.Error.AdInternalError,
@@ -2705,6 +2722,7 @@ Feature.Build.Title.RevertLastChange,是否要還原上次的變更？
 Feature.Build.Title.StopBuild,要停止建立嗎？
 Feature.Build.Title.Tasks,任務
 Feature.Build.Title.TurnActivity,回合活動
+Feature.Build.Title.UseYourAdCredits,使用廣告點數
 Feature.Build.Title.VersionHistory,版本歷史紀錄
 Feature.Build.Title.VersionInfo,版本資訊
 Feature.Build.Title.VersionNumber,版本 {VERSION}
@@ -3080,6 +3098,7 @@ Feature.Catalog.Title.Checkout.UnavailableItems,無法取得的道具
 Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle,要穿戴虛擬人偶嗎？
 Feature.Catalog.Title.CheckoutPlural,結帳購買 {count} 個道具
 Feature.Catalog.Title.CheckoutSingular,
+Feature.Catalog.Title.Explore,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,要取代底層嗎？
 Feature.Catalog.Title.RentalFtuxText,租借以試用物品 3 天
 Feature.Catalog.Toast.AddedToFavorites,已新增至我的最愛
@@ -3867,22 +3886,22 @@ Feature.Groups.Message.NotInAnyGroups,您不是任何社群的成員。
 Feature.Groups.Message.PinLocked,PIN 碼鎖定時無法執行此操作，請在帳號設定頁面解鎖 PIN 碼。
 Feature.Groups.Modal.ContentTextHigh,"請驗證帳號以加入此社群。
 
-1. 前往「帳號資訊」>「驗證我的年齡」
+1. 前往「帳號資訊」>「身分驗證」
 2. 完成驗證程序"
-Feature.Groups.Modal.ContentTextLow,"若要加入此社群，請先驗證帳號你的帳號。
+Feature.Groups.Modal.ContentTextLow,"請驗證帳號以加入此社群。
 
 1. 前往「帳號資訊」
 2. 選擇一個驗證選項：
-    - 「新增電話號碼」
-    - 「新增電子郵件」
-    - 「驗證我的年齡」
+    -「新增電話號碼」
+    -「新增電子郵件」
+    - 「身分驗證」
 3. 完成驗證程序"
-Feature.Groups.Modal.ContentTextMedium,"若要加入此社群，請先驗證帳號你的帳號。
+Feature.Groups.Modal.ContentTextMedium,"請驗證帳號以加入此社群。
 
 1. 前往「帳號資訊」
 2. 選擇一個驗證選項：
     - 「新增電話號碼」和「新增電子郵件」
-    - 「驗證我的年齡」
+    - 「身分驗證」
 3. 完成驗證程序"
 Feature.Groups.Notification.FailedToFollow,無法追蹤個人檔案，請稍後再試。
 Feature.Groups.Notification.FailedToJoin,無法加入社群，請稍後再試。
@@ -4059,12 +4078,16 @@ Feature.Moments.Action.AddSticker,新增貼紙
 Feature.Moments.Action.AddText,新增文字
 Feature.Moments.Action.AddVoice,新增語音
 Feature.Moments.Action.Back,
+Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentShowLess,顯示較少
+Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
 Feature.Moments.Action.CreateVoiceover,建立旁白
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.DiscardChange,刪除變更
 Feature.Moments.Action.Done,
+Feature.Moments.Action.Edit,
 Feature.Moments.Action.Expand,展開
 Feature.Moments.Action.GenerateText,生成文字
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,沒有幫助
@@ -4080,6 +4103,7 @@ Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
+Feature.Moments.Action.RetryLoadingComments,重新嘗試載入留言
 Feature.Moments.Action.Return,返回圖庫
 Feature.Moments.Action.ReturnToEditing,返回編輯
 Feature.Moments.Action.SaveVoiceover,
@@ -4101,9 +4125,35 @@ Feature.Moments.Description.PublishMoment,描述你的「美好時光」
 Feature.Moments.Description.TooManyUploads,你今天上傳了太多的影片，請明天再試。
 Feature.Moments.Disclaimer.EveryoneMoments,參與「美好時光」的所有人皆可檢視已發佈的內容
 Feature.Moments.Label.All,
+Feature.Moments.Label.AllowComments,允許留言
 Feature.Moments.Label.AttemptingJoinExperience,正在嘗試加入 {placeName}。這可能需要幾秒鐘。
 Feature.Moments.Label.CaptureLibrary,你的截圖資料庫
 Feature.Moments.Label.ChooseVoice,選擇語音
+Feature.Moments.Label.CommentAuthorFallback,使用者 {userId}
+Feature.Moments.Label.CommentAuthorUnknown,
+Feature.Moments.Label.CommentDeleteFailed,無法刪除留言
+Feature.Moments.Label.CommentNotAllowed,你無法在此「美好時光」留言。
+Feature.Moments.Label.CommentPostFailed,無法張貼你的留言，請再試一次。
+Feature.Moments.Label.CommentPostOutcomeUnknown,我們無法確認你張貼的上一則留言。請檢查留言，然後再重新傳送。
+Feature.Moments.Label.CommentRateLimited,留言速度過快，請稍後再試。
+Feature.Moments.Label.CommentRejectedByFilter,留言未張貼，請修改後再試一次。
+Feature.Moments.Label.CommentSendStatusUnknown,傳送狀態未知
+Feature.Moments.Label.CommentSending,正在傳送...
+Feature.Moments.Label.CommentSignInRequired,如要留言，請重新登入。
+Feature.Moments.Label.CommentTimestampDays,{count} 天
+Feature.Moments.Label.CommentTimestampHours,{count} 小時
+Feature.Moments.Label.CommentTimestampMinutes,{count} 分鐘
+Feature.Moments.Label.CommentTimestampMonths,{count} 個月
+Feature.Moments.Label.CommentTimestampNow,
+Feature.Moments.Label.CommentTimestampWeeks,{count} 週
+Feature.Moments.Label.CommentTimestampYears,{count} 年
+Feature.Moments.Label.CommentingUnavailable,目前無法留言，請稍後再試。
+Feature.Moments.Label.CommentsDisabled,留言功能已停用
+Feature.Moments.Label.CommentsReadOnly,留言為唯讀
+Feature.Moments.Label.CommentsTurnedOff,此「美好時光」的留言功能已關閉。
+Feature.Moments.Label.CommentsUnavailable,留言功能無法使用
+Feature.Moments.Label.DeleteCommentBody,此留言將會永久刪除。
+Feature.Moments.Label.DeleteCommentTitle,要刪除留言嗎？
 Feature.Moments.Label.DeleteMomentBody,美好時光一經刪除即無法復原。
 Feature.Moments.Label.DeleteMomentTitle,要刪除美好時光嗎？
 Feature.Moments.Label.DeleteVoiceoverBody,此操作會清除你的文字和旁白。你可以隨時重新開始。
@@ -4115,6 +4165,7 @@ Feature.Moments.Label.FeedEndTitle,你已查看所有的通知
 Feature.Moments.Label.FeedFailedToLoad,無法載入饋送
 Feature.Moments.Label.FeedMyMoments,我的美好時光
 Feature.Moments.Label.FeedTrending,
+Feature.Moments.Label.FirstCommentInvite,尚無留言。成為第一個留言的人！
 Feature.Moments.Label.HowToUseCaptureTitle,如何使用截圖功能
 Feature.Moments.Label.LinkCopied,連結已複製
 Feature.Moments.Label.LinkCopyFailed,無法複製連結。
@@ -4123,12 +4174,14 @@ Feature.Moments.Label.MomentDeletedBody,
 Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,發生錯誤。
 Feature.Moments.Label.MomentFailedToPostTitle,無法張貼美好時光
+Feature.Moments.Label.MomentNoLongerAvailable,此美好時光已無法使用。
 Feature.Moments.Label.MomentPublishedBody,「美好時光」已成功發佈。
 Feature.Moments.Label.MomentPublishedTitle,「美好時光」已發佈
 Feature.Moments.Label.MomentUnavailable,無法載入美好時光
 Feature.Moments.Label.MomentUnavailableDefault,無法使用這個美好時光。
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NoCommentsYet,尚無留言
 Feature.Moments.Label.NonInfiniteScrollEndTitle,已查看所有目前的通知
 Feature.Moments.Label.Photos,相片
 Feature.Moments.Label.PostDeleted,美好時光已刪除
@@ -4169,6 +4222,10 @@ Feature.Moments.Label.VoiceLimitReachedBody,請稍候片刻，然後再試一次
 Feature.Moments.Label.VoiceModerationError,指令碼必須遵守安全規定
 Feature.Moments.Label.VoicePlaceholder,輸入你的旁白指令碼。{maxCount} 個字元上限
 Feature.Moments.Label.VoiceTimeoutBody,旁白生成逾時。
+Feature.Moments.Label.WriteComment,撰寫留言
+Feature.Moments.Title.Comments,留言
+Feature.Moments.Title.CommentsWithCappedCount,留言（{count} 則以上）
+Feature.Moments.Title.CommentsWithCount,留言（{count} 則）
 Feature.Moments.Title.GenerateTextFeedbackReason,發生什麼問題了嗎？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程序嗎？
@@ -4184,7 +4241,7 @@ Feature.NotApproved.Action.ReportMistake,回報錯誤
 Feature.NotApproved.Action.RuleConfirmation,我同意了解並遵守規定。
 Feature.NotApproved.Action.UserAgree,
 Feature.NotApproved.Action.ViewAppealGuidelines,檢視上訴指南和揭露資訊
-Feature.NotApproved.Action.ViewLess,顯示較少
+Feature.NotApproved.Action.ViewLess,
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,檢視規範
 Feature.NotApproved.Action.ViewRulesUGCAvatarGuidelines,檢視 UGC 虛擬人偶準則
@@ -4668,7 +4725,10 @@ Feature.PlayerSearchResults.Label.You,您自己
 Feature.PlayerSearchResults.Label.YouAreConnections,彼此是聯繫對象
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,您們是好友
+Feature.PrivateServers.Action.CreatePrivateServer,
+Feature.PrivateServers.Action.FreeWithBlackbird,透過 Plus 免費使用
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio 不支援購買私人伺服器。
+Feature.PrivateServers.Description.VipServersNotSupported,此遊戲不支援私人伺服器。
 Feature.Profile.Action.AboutThisProfile,關於此個人檔案
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4893,6 +4953,7 @@ Feature.RobloxSubscription.Description.ReferralShare,邀請他人加入 Plus，�
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"按一下\u{201C}{ctaText}\u{201D}，即表示您同意 <a href=""{termsUrl}"">Roblox 訂閱條款</a>。系統將每月自動向您收取費用，直到取消訂閱為止。"
 Feature.RobloxSubscription.Heading.ReferralEntry,分享 Plus 即可獲得 {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,推薦歷史紀錄
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,加入 Plus 即可獲得 {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,加入 Plus，獲得
 Feature.RobloxSubscription.Heading.ReferralShare,分享 Plus，獲得
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免費私人伺服器
@@ -4910,12 +4971,14 @@ Feature.RobloxSubscription.Label.PendingRobux,待處理的 Robux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,你的推薦對象將獲得
 Feature.RobloxSubscription.Label.ReferralYouGet,你將獲得
+Feature.RobloxSubscription.Label.ReferralsLegalDisclosureV2,若按一下\u{201C}推薦 Plus\u{201D}，代表我同意 {linkStart}Roblox Plus 推薦計畫條款{linkEnd}。
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}免費試用 1 個月{boldEnd}，之後 {price}／{periodType}
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}免費試用 {trialDuration} {trialPeriodLabel}，{boldEnd}之後 {price}／{periodType}
 Feature.RobloxSubscription.Label.RobuxEarned,已賺取的 Robux
 Feature.RobloxSubscription.Label.SuccessfulReferrals,成功推薦
 Feature.RobloxSubscription.Label.month,個月
 Feature.RobloxSubscription.Label.months,
+Feature.RobloxSubscription.Message.AlreadySubscribed,你已訂閱 Plus。此連結適用於新會員。分享個人連結，以邀請好友並獲得獎勵。
 Feature.RobloxSubscription.Title.AgeCheckTrial,取得 Plus 一週免費使用權
 Feature.RobloxSubscription.Title.AlreadySubscribed,好消息
 Feature.RobloxSubscription.Title.GenericError,
@@ -4926,6 +4989,7 @@ Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,透過 Plus 搶先體驗
 Feature.RobloxSubscription.label.week,週
 Feature.RobloxSubscription.label.weeks,
 Feature.SafetyDashboard.Heading.AccountStatus.V2,帳號狀態、違規和上訴
+Feature.SafetyDashboard.Heading.ReportHistory,檢舉紀錄
 Feature.Schools.Action.AlreadyGraduated,我已經畢業了
 Feature.Schools.Action.CantFindSchool,找不到學校嗎？
 Feature.Schools.Action.Continue,
@@ -5129,6 +5193,16 @@ Feature.SplitPane.Label.Rotate,
 Feature.SplitPane.NoAdditionalAvatarsDialogBody,建立另一個虛擬人偶，然後在此處切換。
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,建立虛擬人偶
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,以上是你已儲存的所有虛擬人偶
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,完成導覽
+Feature.SplitPane.Tour.Button.SkipTour,跳過導覽
+Feature.SplitPane.Tour.Step1.Description.Collapsed,已儲存的虛擬人偶現在會在首頁上顯示。展開此空間即可查看。
+Feature.SplitPane.Tour.Step1.Description.Expanded,已儲存的虛擬人偶現在會在首頁上顯示。旋轉或放大虛擬人偶，即可查看每個細節。
+Feature.SplitPane.Tour.Step1.Title,在首頁上看到自己
+Feature.SplitPane.Tour.Step2.Description,選擇你想要的造型。在加入遊戲前，你可以切換已儲存的虛擬人偶。
+Feature.SplitPane.Tour.Step2.Title,隨時變更你的造型
+Feature.SplitPane.Tour.Step3.Description,你可以隨時隱藏此空間，專注於探索新遊戲。已儲存的虛擬人偶會保留在這裡。
+Feature.SplitPane.Tour.Step3.Title,選擇你想看到的內容
 Feature.SplitPane.UnsavedChangesDialogBody,若現在切換，你的虛擬人偶變更可能會遺失。請儲存以保留變更。
 Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
 Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,不要儲存

@@ -1,7 +1,6 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent
 local parent_2 = parent_1.Parent
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local cryoModule = require(parent_2.Cryo)
 local reactModule = require(parent_2.React)
 local reactOtterModule = require(parent_2.ReactOtter)
@@ -17,15 +16,15 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), reactModule (ref), UIBloxConfigModule (ref), navigationBarAlignmentModule (ref), reactOtterModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), reactModule (ref), navigationBarAlignmentModule (ref), reactOtterModule (ref)
 	assert(#p1.items > 0, "At least one item should be present!")
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2 = useStyleModule()
 	local var3, var4 = reactModule.useState(if var1.size then var1.size.Y.Offset else 0)
-	local var5 = if var1.paddings and var1.paddings.Top then var1.paddings.Top elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var2.Tokens.Size.Size_150 else var2.Tokens.Global.Space_75
-	local var6 = if var1.paddings and var1.paddings.Bottom then var1.paddings.Bottom elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var2.Tokens.Size.Size_150 else var2.Tokens.Global.Space_75
-	local var7 = if var1.paddings and var1.paddings.Left then var1.paddings.Left elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var2.Tokens.Size.Size_150 else var2.Tokens.Global.Space_75
-	local var8 = if var1.paddings and var1.paddings.Right then var1.paddings.Right elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var2.Tokens.Size.Size_150 else var2.Tokens.Global.Space_75
+	local var5 = if var1.paddings and var1.paddings.Top then var1.paddings.Top else var2.Tokens.Size.Size_150
+	local var6 = if var1.paddings and var1.paddings.Bottom then var1.paddings.Bottom else var2.Tokens.Size.Size_150
+	local var7 = if var1.paddings and var1.paddings.Left then var1.paddings.Left else var2.Tokens.Size.Size_150
+	local var8 = if var1.paddings and var1.paddings.Right then var1.paddings.Right else var2.Tokens.Size.Size_150
 	local center = nil
 	local spaceAround = nil
 	

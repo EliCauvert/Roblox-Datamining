@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.ViewRecyclerReact.ViewRecyclerReact)
+﻿return require(script.Parent._Index["ViewRecyclerReact-31ab8d40-0.2.6"].ViewRecyclerReact)

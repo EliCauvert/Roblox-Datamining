@@ -1,5 +1,4 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local flagsModule = require(foundation.Utility.Flags)
 local statusIndicatorSizeModule = require(foundation.Enums.StatusIndicatorSize)
 local statusIndicatorVariantModule = require(foundation.Enums.StatusIndicatorVariant)
 local statusIndicatorShapeModule = require(foundation.Enums.StatusIndicatorShape)
@@ -12,7 +11,7 @@ local var1 = _G.__DEV__ == true
 local font = Font.new(require(foundation.Constants).BUILDER_SANS_FONT_ASSET, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
 
 function variantsFactory(p1)
-	-- upvalues: font (ref), statusIndicatorVariantModule (ref), flagsModule (ref), statusIndicatorShapeModule (ref), statusIndicatorSizeModule (ref)
+	-- upvalues: font (ref), statusIndicatorVariantModule (ref), statusIndicatorShapeModule (ref), statusIndicatorSizeModule (ref)
 	return {
 		common = {
 			content = { tag = "auto-xy text-align-x-left", font = font }
@@ -30,14 +29,7 @@ function variantsFactory(p1)
 				container = { tag = "bg-system-warning" },
 				content = { style = p1.LightMode.Content.Emphasis }
 			},
-			[statusIndicatorVariantModule.Emphasis] = if flagsModule.FoundationActionEmphasisStatusIndicator then {
-				container = {
-					tag = if flagsModule.FoundationSystemEmphasisNonActions then "bg-system-emphasis" else "bg-action-emphasis"
-				},
-				content = {
-					style = if flagsModule.FoundationSystemEmphasisNonActions then p1.DarkMode.Content.Emphasis else p1.Color.ActionEmphasis.Foreground
-				}
-			} else {
+			[statusIndicatorVariantModule.Emphasis] = {
 				container = { tag = "bg-system-emphasis" },
 				content = { style = p1.DarkMode.Content.Emphasis }
 			},

@@ -162,13 +162,13 @@ return reactModule.forwardRef(function(p1, p2)
 		value
 	})
 	local _ = nil
-	local uDim2 = UDim2.fromOffset(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_700 else tokens.Global.Size_350, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_700 else tokens.Global.Size_350)
+	local uDim2 = UDim2.fromOffset(tokens.Size.Size_700, tokens.Size.Size_700)
 	
 	if var1.renderIcon then
 		var16 = var1.renderIcon(var1.isChecked)
 	else
 		local var18 = if var1.isChecked and var1.iconCheckedImage then var1.iconCheckedImage else var1.iconImage
-		local var19 = if var1.isChecked then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Emphasis else tokens.Semantic.Color.Icon.Emphasis elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Default else tokens.Semantic.Color.Icon.Default
+		local var19 = if var1.isChecked then tokens.Color.Content.Emphasis else tokens.Color.Content.Default
 		local name = nil
 		local variant = nil
 		
@@ -217,7 +217,7 @@ return reactModule.forwardRef(function(p1, p2)
 	local textLabel = nil
 	
 	if var1.hasLabel and var1.labelText then
-		local var20 = if var1.isChecked then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Emphasis else tokens.Semantic.Color.Text.Emphasis elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Default else tokens.Semantic.Color.Text.Default
+		local var20 = if var1.isChecked then tokens.Color.Content.Emphasis else tokens.Color.Content.Default
 		textLabel = reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
@@ -241,51 +241,51 @@ return reactModule.forwardRef(function(p1, p2)
 	local uDim = nil
 	
 	if var1.layout == navigationTabLayoutModule.Stacked then
-		uDim = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Radius.Medium else tokens.Semantic.Radius.Medium)
-		local var21 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_1200 else tokens.Global.Space_600
+		uDim = UDim.new(0, tokens.Radius.Medium)
+		local size1200 = tokens.Size.Size_1200
 		frame = reactModule.createElement("Frame", {
 			AutomaticSize = if var2 then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
 			BackgroundTransparency = 1,
-			Size = if var2 then UDim2.new(1, 0, 0, var21) else UDim2.fromOffset(var21, var21),
+			Size = if var2 then UDim2.new(1, 0, 0, size1200) else UDim2.fromOffset(size1200, size1200),
 			ref = if UIBloxConfigModule.addNavigationTabTooltipAndTruncation then var9 else nil,
 			[reactModule.Change.AbsoluteSize] = var7
 		}, {
 			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100),
-				PaddingBottom = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100)
+				PaddingTop = UDim.new(0, tokens.Size.Size_200),
+				PaddingBottom = UDim.new(0, tokens.Size.Size_200)
 			}),
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = if UIBloxConfigModule.removeStackedNavigationTabIconLabelSpacing then nil else UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Space_50)
+				Padding = if UIBloxConfigModule.removeStackedNavigationTabIconLabelSpacing then nil else UDim.new(0, tokens.Size.Size_100)
 			}),
 			Icon = var16,
 			Label = textLabel
 		})
 	elseif var1.layout == navigationTabLayoutModule.Inline then
-		uDim = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Semantic.Radius.Large)
-		local var22 = if var1.isChecked then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.State.Press else tokens.Semantic.Color.State.Standard.Pressed else { Transparency = 1, Color3 = nil }
+		uDim = UDim.new(0, tokens.Size.Size_300)
+		local var21 = if var1.isChecked then tokens.Color.State.Press else { Transparency = 1, Color3 = nil }
 		frame = reactModule.createElement("Frame", {
 			AutomaticSize = Enum.AutomaticSize.XY,
-			BackgroundTransparency = var22.Transparency,
-			BackgroundColor3 = var22.Color3,
-			Size = UDim2.fromOffset(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_1200 else tokens.Global.Space_600, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_1000 else tokens.Global.Space_500),
+			BackgroundTransparency = var21.Transparency,
+			BackgroundColor3 = var21.Color3,
+			Size = UDim2.fromOffset(tokens.Size.Size_1200, tokens.Size.Size_1000),
 			[reactModule.Change.AbsoluteSize] = var7
 		}, {
 			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Space_50),
-				PaddingBottom = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Space_50),
-				PaddingLeft = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Space_150),
-				PaddingRight = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Space_150)
+				PaddingTop = UDim.new(0, tokens.Size.Size_100),
+				PaddingBottom = UDim.new(0, tokens.Size.Size_100),
+				PaddingLeft = UDim.new(0, tokens.Size.Size_300),
+				PaddingRight = UDim.new(0, tokens.Size.Size_300)
 			}),
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Space_150)
+				Padding = UDim.new(0, tokens.Size.Size_300)
 			}),
 			UICorner = reactModule.createElement("UICorner", { CornerRadius = uDim }),
 			Icon = var16,

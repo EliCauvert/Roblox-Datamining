@@ -1,7 +1,6 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent.Parent
 local parent_2 = parent_1.Parent
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local roactModule = require(parent_2.Roact)
 local tModule = require(parent_2.t)
 local foundationModule = require(parent_2.Foundation)
@@ -33,9 +32,9 @@ local function getStyle(p1, p2)
 end
 
 function itemTileStatus.render(p1)
-	-- upvalues: withStyleModule (ref), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), getTextSizeModule (ref), vector2 (ref), getStyle (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), UIBloxConfigModule (ref), vector2_1 (ref), normalizeFontFace (ref)
+	-- upvalues: withStyleModule (ref), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), getTextSizeModule (ref), vector2 (ref), getStyle (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), vector2_1 (ref), normalizeFontFace (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), getTextSizeModule (copy), vector2 (copy), getStyle (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), UIBloxConfigModule (copy), vector2_1 (copy), normalizeFontFace (copy)
+		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), getTextSizeModule (copy), vector2 (copy), getStyle (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), vector2_1 (copy), normalizeFontFace (copy)
 		local theme = p2.Theme
 		local font = p2.Font
 		local tokens = p2.Tokens
@@ -53,7 +52,7 @@ function itemTileStatus.render(p1)
 			ImageTransparency = var4.Background.Transparency,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(8, 8, 9, 9),
-			Position = UDim2.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100, 0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100),
+			Position = UDim2.new(0, tokens.Size.Size_200, 0, tokens.Size.Size_200),
 			Size = UDim2.new(0, var3.X + vector2_1.X, 0, var3.Y + vector2_1.Y)
 		}, {
 			Text = roactModule.createElement("TextLabel", {

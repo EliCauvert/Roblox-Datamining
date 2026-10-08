@@ -32,6 +32,10 @@ return function(p1)
 		help = p1.fromString(if string.find(p1.fromString("corp:")(), "qq.com") then "corp:faq" else "www:help"),
 		safetyDashboard = {
 			main = p1.fromString("www:safety-dashboard?t_source={source|app}"),
+			reportInbox = function(p2)
+				-- upvalues: p1 (ref)
+				return p1.fromString("www:safety-dashboard?t_source={source|app}")(p2) .. "#/report-inbox"
+			end,
 			violation = p1.fromString("www:safety-dashboard?vid={id}&t_source={source|app}"),
 			violations = function(p2)
 				-- upvalues: p1 (ref)

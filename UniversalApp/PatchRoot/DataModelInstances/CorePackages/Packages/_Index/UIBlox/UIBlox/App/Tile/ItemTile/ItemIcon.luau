@@ -1,7 +1,6 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent.Parent
 local parent_2 = parent_1.Parent
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local roactModule = require(parent_2.Roact)
 local tModule = require(parent_2.t)
 local withStyleModule = require(parent_1.Core.Style.withStyle)
@@ -25,12 +24,12 @@ itemIcon.validateProps = tModule.strictInterface({
 })
 
 function itemIcon.render(p1)
-	-- upvalues: t (ref), imagesModule (ref), withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref)
+	-- upvalues: t (ref), imagesModule (ref), withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref)
 	local itemIconType = t[p1.props.itemIconType]
 	local var1 = itemIconType.ImageRectSize / imagesModule.ImagesResolutionScale
 	
 	return withStyleModule(function(p2)
-		-- upvalues: roactModule (copy), imageSetComponentModule (copy), itemIconType (ref), UIBloxConfigModule (copy), var1 (ref)
+		-- upvalues: roactModule (copy), imageSetComponentModule (copy), itemIconType (ref), var1 (ref)
 		local theme = p2.Theme
 		local tokens = p2.Tokens
 		
@@ -40,7 +39,7 @@ function itemIcon.render(p1)
 			Image = itemIconType,
 			ImageColor3 = theme.IconEmphasis.Color,
 			ImageTransparency = theme.IconEmphasis.Transparency,
-			Position = UDim2.new(1, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then -tokens.Size.Size_200 else -tokens.Global.Size_100, 1, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then -tokens.Size.Size_200 else -tokens.Global.Size_100),
+			Position = UDim2.new(1, -tokens.Size.Size_200, 1, -tokens.Size.Size_200),
 			Size = UDim2.new(0, var1.X, 0, var1.Y)
 		})
 	end)

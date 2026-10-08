@@ -199,7 +199,10 @@ local function makeSheetChildren(p3)
 			height = p3.headerHeight
 		})
 	}) else nil
-	t_1.Content = if var3 then reactModule.createElement(sheetModule.Content, { isContentFullBleed = p3.isContentFullBleed }, t) else nil
+	t_1.Content = if var3 then reactModule.createElement(sheetModule.Content, {
+		isContentFullBleed = p3.isContentFullBleed,
+		isReversed = p3.isContentReversed
+	}, t) else nil
 	t_1.Actions = if var4 then reactModule.createElement(sheetModule.Actions, nil, {
 		Buttons = if p3.actionCount then reactModule.createElement(buttonGroupModule, {
 			buttons = makeActionButtons(p3.actionCount),

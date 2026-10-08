@@ -175,13 +175,14 @@ function t:_createPopoverAsync(p4, p5, p6)
 	if var2:IsA("PluginGui") then
 		var2:BindToClose(var4)
 	end
-	var2.InputBegan:Connect(function(p7)
-		-- upvalues: t (ref), self (ref)
-		if p7.UserInputType == Enum.UserInputType.MouseButton1 and t.open then
-			self:_closeChildPopovers(t)
-		end
-	end)
-	
+	if var2:IsA("PluginGui") then
+		var2.InputBegan:Connect(function(p7)
+			-- upvalues: t (ref), self (ref)
+			if p7.UserInputType == Enum.UserInputType.MouseButton1 and t.open then
+				self:_closeChildPopovers(t)
+			end
+		end)
+	end
 	return t
 end
 

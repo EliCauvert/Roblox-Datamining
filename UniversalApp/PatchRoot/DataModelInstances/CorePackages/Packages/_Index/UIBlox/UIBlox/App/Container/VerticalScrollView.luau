@@ -2,18 +2,16 @@
 local userInputService = game:GetService("UserInputService")
 local parent = script.Parent
 local parent_1 = script.Parent.Parent
-local parent_2 = parent_1.Parent
-local parent_3 = parent_2.Parent
-local UIBloxConfigModule = require(parent_2.UIBloxConfig)
-local cryoModule = require(parent_3.Cryo)
-local otterModule = require(parent_3.Otter)
-local roactModule = require(parent_3.Roact)
-local tModule = require(parent_3.t)
-local focusable = require(parent_3.RoactGamepad).Focusable
-local withStyleModule = require(parent_3.UIBlox.Core.Style.withStyle)
+local parent_2 = parent_1.Parent.Parent
+local cryoModule = require(parent_2.Cryo)
+local otterModule = require(parent_2.Otter)
+local roactModule = require(parent_2.Roact)
+local tModule = require(parent_2.t)
+local focusable = require(parent_2.RoactGamepad).Focusable
+local withStyleModule = require(parent_2.UIBlox.Core.Style.withStyle)
 local useCursorByTypeModule = require(parent_1.SelectionCursor.useCursorByType)
 local cursorTypeModule = require(parent_1.SelectionCursor.CursorType)
-local imagesModule = require(parent_3.UIBlox.App.ImageSet.Images)
+local imagesModule = require(parent_2.UIBlox.App.ImageSet.Images)
 local scrollBarTypeModule = require(parent.Enum.ScrollBarType)
 local scrollBarModule = require(script.Parent.ScrollBar)
 local t = { frequency = 3, dampingRatio = 1.5 }
@@ -181,38 +179,38 @@ function verticalScrollView.init(p1)
 end
 
 function verticalScrollView.getScrollBarStyleProps(_, p1, p2)
-	-- upvalues: scrollBarTypeModule (ref), UIBloxConfigModule (ref), imagesModule (ref)
+	-- upvalues: scrollBarTypeModule (ref), imagesModule (ref)
 	local tokens = p1.Tokens
 	
 	return if p2 == scrollBarTypeModule.Wide then {
 		userInteractionEnabled = true,
 		marginRight = 0,
-		width = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_400 else tokens.Global.Size_200,
-		handleWidth = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100,
-		paddingStartEnd = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Space_50
+		width = tokens.Size.Size_400,
+		handleWidth = tokens.Size.Size_200,
+		paddingStartEnd = tokens.Size.Size_100
 	} elseif p2 == scrollBarTypeModule.Gamepad then {
 		userInteractionEnabled = false,
-		width = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_400 else tokens.Global.Space_200,
-		handleWidth = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100,
+		width = tokens.Size.Size_400,
+		handleWidth = tokens.Size.Size_200,
 		handleIcon = imagesModule["icons/controls/keys/xboxRSVertical"],
-		handleIconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_900 else tokens.Semantic.Icon.Size.Medium,
+		handleIconSize = tokens.Size.Size_900,
 		handleIconColor = {
-			Color = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Emphasis.Color3 else tokens.Semantic.Color.Icon.Emphasis.Color3,
-			Transparency = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Emphasis.Transparency else tokens.Semantic.Color.Icon.Emphasis.Transparency
+			Color = tokens.Color.Content.Emphasis.Color3,
+			Transparency = tokens.Color.Content.Emphasis.Transparency
 		},
-		paddingStartEnd = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_600 else tokens.Global.Space_300,
-		marginRight = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_600 else tokens.Global.Space_300
+		paddingStartEnd = tokens.Size.Size_600,
+		marginRight = tokens.Size.Size_600
 	} else {
 		userInteractionEnabled = false,
 		marginRight = 0,
-		width = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Space_150,
-		handleWidth = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_50 else tokens.Global.Size_25,
-		paddingStartEnd = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Space_50
+		width = tokens.Size.Size_300,
+		handleWidth = tokens.Size.Size_50,
+		paddingStartEnd = tokens.Size.Size_100
 	}
 end
 
 function verticalScrollView.renderScrollBar(p1, p2)
-	-- upvalues: roactModule (ref), scrollBarModule (ref), UIBloxConfigModule (ref)
+	-- upvalues: roactModule (ref), scrollBarModule (ref)
 	local tokens = p2.Tokens
 	local var1 = p1:getScrollBarStyleProps(p2, p1.props.scrollBarType)
 	
@@ -227,10 +225,10 @@ function verticalScrollView.renderScrollBar(p1, p2)
 		paddingStartEnd = var1.paddingStartEnd,
 		handleWidth = var1.handleWidth,
 		handleColor = {
-			Color = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Shift.Shift_400.Color3 else tokens.Semantic.Color.Ui.Emphasis.Color3,
-			Transparency = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Shift.Shift_400.Transparency else tokens.Semantic.Color.Ui.Emphasis.Transparency
+			Color = tokens.Color.Shift.Shift_400.Color3,
+			Transparency = tokens.Color.Shift.Shift_400.Transparency
 		},
-		handleCornerRadius = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Radius.Circle else tokens.Semantic.Radius.Circle,
+		handleCornerRadius = tokens.Radius.Circle,
 		handleIcon = var1.handleIcon,
 		handleIconColor = var1.handleIconColor,
 		handleIconSize = var1.handleIconSize,

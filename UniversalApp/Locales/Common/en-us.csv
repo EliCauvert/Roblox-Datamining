@@ -309,6 +309,7 @@ Authentication.Login.Action.LogInEmailOneTimeCode,Email Me a One-Time Code
 Authentication.Login.Action.NeedHelp,Need help?
 Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ Login
+Authentication.Login.Action.QrCode,QR code
 Authentication.Login.Action.QuickSignIn,Quick sign-in
 Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.Save,Save
@@ -371,6 +372,7 @@ Authentication.Login.Label.ForgotYourPassword,Forgot your password?
 Authentication.Login.Label.GetOneTimeCode,Get One-Time Code
 Authentication.Login.Label.LearnMore,Learn more
 Authentication.Login.Label.LinkAccountWarning,"Your Roblox account will be linked to your account on {platform}, and the next time you join, you will be logged in automatically! You can unlink from the Settings screen at any time. There may be a cool down before being able to link to a new account."
+Authentication.Login.Label.OtherSignInOptions,Other sign-in options
 Authentication.Login.Label.PasskeyIncompatible,Passkey incompatible
 Authentication.Login.Label.Password,Password
 Authentication.Login.Label.Phone,
@@ -443,6 +445,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,You must reset your p
 Authentication.SignUp.Action.ApplyOnNextRespawn,Apply on next respawn
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
+Authentication.SignUp.Action.Create,Create
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,Create Account
 Authentication.SignUp.Action.CreateAccountSentenceCase,
@@ -478,6 +481,7 @@ Authentication.SignUp.Description.ParentEmailDisclaimer,"We ask for your parent'
 Authentication.SignUp.Description.PasskeyTryAgain,"Sorry, something went wrong with registering your passkey. Please try signing up again with a different username."
 Authentication.SignUp.Description.RobloxNotAvailableInRegion,Roblox is temporarily unavailable in your region.
 Authentication.SignUp.Description.SecureAccountWithPasskeyText,"Secure your account with a passkey to quickly sign-in with your phone in the future, or add a password for manual sign-in."
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"By creating an account, you agree to our {startTermsTag}Terms{endTermsTag}, including arbitration, and acknowledge our {startPrivacyTag}Privacy Policy{endPrivacyTag}. If you’re under 18, your parent or guardian must permit your account and agree to our Terms."
 Authentication.SignUp.Description.SignUpAgreement.FullCopy.Continue,"By clicking Continue, you are agreeing to our Terms of Use (including arbitration) and acknowledge our Privacy Policy. If you are under 18, you agree that your parent/guardian permits you to create this account and agrees to our Terms of Use."
 Authentication.SignUp.Description.SignUpAgreement.FullCopy.CreateAccount,"By clicking Create Account, you are agreeing to our Terms of Use (including arbitration) and acknowledge our Privacy Policy. If you are under 18, you agree that your parent/guardian permits you to create this account and agrees to our Terms of Use."
 Authentication.SignUp.Description.SignUpAgreement.ShortCopy,I agree to Roblox’s Terms of Use (including arbitration) and acknowledge its Privacy Policy.
@@ -890,15 +894,12 @@ CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,No results found
 CommonUI.Features.Action.ClassicThemeSunsetGetPlus,Get Plus
 CommonUI.Features.Action.ClassicThemeSunsetManage,
-CommonUI.Features.Action.ClassicUnlockGetTheme,Get theme
-CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,Go
 CommonUI.Features.Action.LessLowercase,less
 CommonUI.Features.Action.MoreLowercase,more
 CommonUI.Features.Action.Send,Send
 CommonUI.Features.Heading.ClassicThemeSunset,Thank you for celebrating 20 years of Roblox
-CommonUI.Features.Heading.ClassicUnlock,Celebrate 20 years of Roblox
 CommonUI.Features.Heading.GameDetails,Experience Details
 CommonUI.Features.Label.About,About
 CommonUI.Features.Label.AboutUs,About Us
@@ -918,8 +919,6 @@ CommonUI.Features.Label.Charts,Charts
 CommonUI.Features.Label.Chat,Chat
 CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,Roblox Plus members keep the Classic theme. Only the anniversary app icon is retiring.
 CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,Your Roblox Plus membership keeps the Classic theme. Only the anniversary app icon is retiring.
-CommonUI.Features.Label.ClassicUnlockDescription,Enjoy the classic look for a limited time
-CommonUI.Features.Label.ClassicUnlockManagementSnackbar,Manage classic theme in settings
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,Friends
 CommonUI.Features.Label.Connection,Connection
@@ -927,7 +926,7 @@ CommonUI.Features.Label.Connections,Connections
 CommonUI.Features.Label.ControllerBar.HoldPrefix,Hold
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,to play
-CommonUI.Features.Label.CreateGames,Create
+CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.CreationCenter,Creation Center
 CommonUI.Features.Label.DevSubs,Subscriptions
 CommonUI.Features.Label.Discover,Discover
@@ -1434,7 +1433,7 @@ Feature.AddFriends.Label.EmptyStatePrompt,"Who will you explore Roblox with? Sea
 Feature.AddFriends.Label.FriendRequests,Friend Requests
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Search for people
 Feature.AddFriends.Label.MyQrCode,My QR Code
-Feature.AddFriends.Label.QRCodeTitle,QR code
+Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,Classmates
 Feature.AddFriends.Label.SearchForFriendsPrompt,Find people on Roblox by searching for their username or display name.
 Feature.AddFriends.Label.ShareQRCodeAddConnection,Share your QR code to add people you know
@@ -1556,6 +1555,8 @@ Feature.AppealsPortal.Label.IDArg,ID: {id}
 Feature.AppealsPortal.Label.ImageOrOtherAsset,Image or other asset
 Feature.AppealsPortal.Label.ImmersiveBrandedAd,Integrated Ad
 Feature.AppealsPortal.Label.ImmersiveBrandedAdPlacementId,Integrated Ad Placement ID
+Feature.AppealsPortal.Label.InGameBehavior,In-game behavior
+Feature.AppealsPortal.Label.InGameBehavior.Notice,Chat or gameplay
 Feature.AppealsPortal.Label.Location,
 Feature.AppealsPortal.Label.LookDescription,Shared Avatar Description
 Feature.AppealsPortal.Label.LookId,Shared Avatar ID
@@ -1579,6 +1580,7 @@ Feature.AppealsPortal.Label.Type.ContentMaturity,Experience
 Feature.AppealsPortal.Label.Type.Experience,
 Feature.AppealsPortal.Label.Type.Game,Game
 Feature.AppealsPortal.Label.Type.Image,Image
+Feature.AppealsPortal.Label.Type.InGameBehavior,
 Feature.AppealsPortal.Label.Type.Look,Shared Avatar
 Feature.AppealsPortal.Label.Type.LookText,Shared Avatar Name and Description
 Feature.AppealsPortal.Label.Type.Mesh,Mesh
@@ -1608,6 +1610,7 @@ Feature.AppealsPortal.Label.TypeLower.Experience,
 Feature.AppealsPortal.Label.TypeLower.Game,game
 Feature.AppealsPortal.Label.TypeLower.Image,image
 Feature.AppealsPortal.Label.TypeLower.ImmersiveBrandedAd,integrated ad
+Feature.AppealsPortal.Label.TypeLower.InGameBehavior,in-game behavior
 Feature.AppealsPortal.Label.TypeLower.Look,shared avatar
 Feature.AppealsPortal.Label.TypeLower.LookText,shared avatar name and description
 Feature.AppealsPortal.Label.TypeLower.Mesh,mesh
@@ -2306,6 +2309,10 @@ Feature.Build.Analytics.Description.PayerConversion,Payer conversion is the perc
 Feature.Build.Analytics.Description.PlaythroughRate,Playthrough rate is the percentage of visits that completed a full play session. Higher rates suggest players find your experience easy to get into and worth finishing.
 Feature.Build.Analytics.Description.TotalPlaytime,Total playtime sums the time all players spent in your experience over the period. Rising playtime usually signals more engaging sessions.
 Feature.Build.Analytics.DurationHours,{number} hrs
+Feature.Build.Analytics.Goal.EarnRobux,
+Feature.Build.Analytics.Goal.FirstImpression,Make a good first impression
+Feature.Build.Analytics.Goal.GetMorePlayers,Get more players
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,Keep players coming back
 Feature.Build.Analytics.KeyStats,Key stats
 Feature.Build.Analytics.LastMonth,Last month
 Feature.Build.Analytics.LastWeek,
@@ -2337,9 +2344,12 @@ Feature.Build.Analytics.Summary.TotalPlaytime,Total hours players spent in your 
 Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,Total players
 Feature.Build.Analytics.Title.D1Retention,D1 retention
+Feature.Build.Analytics.Title.D7Retention,D7 retention
 Feature.Build.Analytics.Title.DailyActiveUsers,Daily active users
+Feature.Build.Analytics.Title.NewUserSessionTime,New user session time
 Feature.Build.Analytics.Title.PayerConversion,Payer conversion
 Feature.Build.Analytics.Title.PlaythroughRate,Playthrough rate
+Feature.Build.Analytics.Title.RobuxSpent,Robux spent
 Feature.Build.Analytics.Title.TotalPlaytime,Total playtime
 Feature.Build.Analytics.Visits,Visits
 Feature.Build.Content.NewGame,New game
@@ -2509,6 +2519,15 @@ Feature.Build.Label.Thinking,Thinking
 Feature.Build.Label.Title,Title
 Feature.Build.Label.TitleDescription,Title & description
 Feature.Build.Label.Tool,tool
+Feature.Build.Label.ToolAdEligibilityDone,Checked ad eligibility
+Feature.Build.Label.ToolAdEligibilityFailed,Couldn't check ad eligibility
+Feature.Build.Label.ToolAdEligibilityRunning,Checking ad eligibility
+Feature.Build.Label.ToolAnalyticsDone,Analyzed the stats
+Feature.Build.Label.ToolAnalyticsFailed,Couldn't analyze the stats
+Feature.Build.Label.ToolAnalyticsRunning,Analyzing the stats
+Feature.Build.Label.ToolApiDocsDone,Looked up API docs
+Feature.Build.Label.ToolApiDocsFailed,Couldn't look up API docs
+Feature.Build.Label.ToolApiDocsRunning,Looking up API docs
 Feature.Build.Label.ToolAssetDone,Inserted asset
 Feature.Build.Label.ToolAssetFailed,Couldn't insert asset
 Feature.Build.Label.ToolAssetRunning,Inserting asset
@@ -2518,6 +2537,9 @@ Feature.Build.Label.ToolAssetSearchRunning,Searching asset library
 Feature.Build.Label.ToolClientDMDone,Searched client DataModel
 Feature.Build.Label.ToolClientDMFailed,Couldn't search client DataModel
 Feature.Build.Label.ToolClientDMRunning,Searching client DataModel
+Feature.Build.Label.ToolCompileDone,Compiled the code
+Feature.Build.Label.ToolCompileFailed,Couldn't compile the code
+Feature.Build.Label.ToolCompileRunning,Compiling the code
 Feature.Build.Label.ToolGameInfoDone,Updated game info
 Feature.Build.Label.ToolGameInfoFailed,Couldn't update game info
 Feature.Build.Label.ToolGameInfoRunning,Updating game info
@@ -2554,6 +2576,9 @@ Feature.Build.Label.ToolQuestionRunning,Asking a question
 Feature.Build.Label.ToolReqUpdateDone,Updated requirements
 Feature.Build.Label.ToolReqUpdateFailed,Couldn't update requirements
 Feature.Build.Label.ToolReqUpdateRunning,Updating requirements
+Feature.Build.Label.ToolRestoreVersionDone,Restored version
+Feature.Build.Label.ToolRestoreVersionFailed,Couldn't restore   version
+Feature.Build.Label.ToolRestoreVersionRunning,Restoring version
 Feature.Build.Label.ToolScriptDone,Ran script
 Feature.Build.Label.ToolScriptFailed,Couldn't run script
 Feature.Build.Label.ToolScriptRunning,Running script
@@ -2569,6 +2594,9 @@ Feature.Build.Label.ToolTasksPlanRunning,Planning your tasks
 Feature.Build.Label.ToolThumbnailDone,Set game thumbnail
 Feature.Build.Label.ToolThumbnailFailed,Couldn't set game thumbnail
 Feature.Build.Label.ToolThumbnailRunning,Setting game thumbnail
+Feature.Build.Label.ToolVerifyDone,Checked for errors
+Feature.Build.Label.ToolVerifyFailed,Couldn't check for errors
+Feature.Build.Label.ToolVerifyRunning,Checking for errors
 Feature.Build.Label.UniverseNumber,Universe {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Unknown
 Feature.Build.Label.UnlimitedUsed,{USED} used • No limit
@@ -4175,6 +4203,8 @@ Feature.Moments.Label.MomentFailedToPostTitle,Moment failed to post
 Feature.Moments.Label.MomentNoLongerAvailable,This Moment is no longer available.
 Feature.Moments.Label.MomentPublishedBody,Your Moment has been published successfully.
 Feature.Moments.Label.MomentPublishedTitle,Moment published
+Feature.Moments.Label.MomentRemovedBody,It broke our safety rules so it's no longer available.
+Feature.Moments.Label.MomentRemovedTitle,We removed this Moment
 Feature.Moments.Label.MomentUnavailable,Moment unavailable
 Feature.Moments.Label.MomentUnavailableDefault,This Moment isn't available.
 Feature.Moments.Label.MomentsExperienceName,
@@ -4729,7 +4759,10 @@ Feature.PlayerSearchResults.Label.You,You
 Feature.PlayerSearchResults.Label.YouAreConnections,You are Connections
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,You are friends
+Feature.PrivateServers.Action.CreatePrivateServer,
+Feature.PrivateServers.Action.FreeWithBlackbird,Free with Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Private server purchases are not supported in Studio.
+Feature.PrivateServers.Description.VipServersNotSupported,This game doesn't support private servers.
 Feature.Profile.Action.AboutThisProfile,About this profile
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4947,13 +4980,16 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% off first 60 days
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10% off first {trialUnlockDays} days, then 20% off items and avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,More fun for less Robux. Subscribe to Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Join early with Plus
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,This referral link is no longer valid.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} invited you to join Plus. You'll both get {amount} Robux when you purchase Plus.
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{referralTermsUrl}"">Referral Program Terms</a> and the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Offer valid for new Plus subscribers only.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,When anyone buys Plus with your link.
 Feature.RobloxSubscription.Description.ReferralShare,Invite someone to Plus and you both get {amount} Robux when they buy Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Heading.ReferralEntry,Share Plus to get {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,Referral history
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Join Plus to get {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,"Join Plus, get"
 Feature.RobloxSubscription.Heading.ReferralShare,"Share Plus, get"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Free private servers
@@ -4971,12 +5007,14 @@ Feature.RobloxSubscription.Label.PendingRobux,Pending Robux
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Your referrals get
 Feature.RobloxSubscription.Label.ReferralYouGet,You get
+Feature.RobloxSubscription.Label.ReferralsLegalDisclosureV2,"By clicking \u{201C}Refer to Plus\u{201D}, I agree to the {linkStart}Roblox Plus Referral Program Terms{linkEnd}."
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 month free,{boldEnd} then {price}/{periodType}"
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} free,{boldEnd} then {price}/{periodType}"
 Feature.RobloxSubscription.Label.RobuxEarned,Robux earned
 Feature.RobloxSubscription.Label.SuccessfulReferrals,Successful referrals
 Feature.RobloxSubscription.Label.month,month
 Feature.RobloxSubscription.Label.months,months
+Feature.RobloxSubscription.Message.AlreadySubscribed,You already have Plus. This link is for new members. Share your own to invite friends and get rewards.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Get 1 free week of Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,Good news
 Feature.RobloxSubscription.Title.GenericError,
@@ -4987,6 +5025,7 @@ Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Early access with Plus
 Feature.RobloxSubscription.label.week,week
 Feature.RobloxSubscription.label.weeks,weeks
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Account status, violations, and appeals"
+Feature.SafetyDashboard.Heading.ReportHistory,Report history
 Feature.Schools.Action.AlreadyGraduated,I've already graduated
 Feature.Schools.Action.CantFindSchool,Can't find your school?
 Feature.Schools.Action.Continue,
@@ -5190,6 +5229,16 @@ Feature.SplitPane.Label.Rotate,
 Feature.SplitPane.NoAdditionalAvatarsDialogBody,"Create another avatar, then switch between them here."
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,Create Avatar
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,That's All Your Saved Avatars
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,Finish tour
+Feature.SplitPane.Tour.Button.SkipTour,Skip tour
+Feature.SplitPane.Tour.Step1.Description.Collapsed,Saved avatars are now visible on home. Expand this space to see them.
+Feature.SplitPane.Tour.Step1.Description.Expanded,Saved avatars are now visible on home. Spin them around or zoom in to see every detail.
+Feature.SplitPane.Tour.Step1.Title,See yourself on Home
+Feature.SplitPane.Tour.Step2.Description,Choose how you want to look. Switch between your saved avatars right before you join a game.
+Feature.SplitPane.Tour.Step2.Title,Change your look anytime
+Feature.SplitPane.Tour.Step3.Description,Hide this space anytime to focus on discovering new games. Your saved avatar stays right here.
+Feature.SplitPane.Tour.Step3.Title,Choose what you see
 Feature.SplitPane.UnsavedChangesDialogBody,"If you switch now, your avatar changes may be lost. Save to keep them."
 Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
 Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,Don't save

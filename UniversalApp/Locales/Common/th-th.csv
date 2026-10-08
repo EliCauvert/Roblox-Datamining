@@ -291,6 +291,7 @@ Authentication.Login.Action.LogInEmailOneTimeCode,ส่งรหัสแบบ
 Authentication.Login.Action.NeedHelp,ต้องการความช่วยเหลือใช่หรือไม่?
 Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,ลงชื่อเข้าใช้ด้วย QQ
+Authentication.Login.Action.QrCode,รหัส QR
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.Save,บันทึก
@@ -353,6 +354,7 @@ Authentication.Login.Label.ForgotYourPassword,ลืมรหัสผ่าน�
 Authentication.Login.Label.GetOneTimeCode,รับรหัสแบบใช้ครั้งเดียว
 Authentication.Login.Label.LearnMore,เรียนรู้เพิ่มเติม
 Authentication.Login.Label.LinkAccountWarning,บัญชี Roblox ของคุณจะเชื่อมต่อกับบัญชีสำหรับ {platform} ของคุณ เมื่อเข้าใช้ครั้งต่อไป คุณจะได้รับการลงชื่อเข้าใช้ให้โดยอัตโนมัติ! คุณสามารถเลิกเชื่อมต่อได้ตลอดเวลาที่หน้าจอการตั้งค่า อาจมีช่วงเวลาคูลดาวน์ก่อนที่จะสามารถเชื่อมต่อกับบัญชีใหม่ได้
+Authentication.Login.Label.OtherSignInOptions,ตัวเลือกการลงชื่อเข้าใช้อื่นๆ
 Authentication.Login.Label.PasskeyIncompatible,ไม่รองรับพาสคีย์
 Authentication.Login.Label.Password,รหัสผ่าน
 Authentication.Login.Label.Phone,
@@ -425,6 +427,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,คุณต้อง
 Authentication.SignUp.Action.ApplyOnNextRespawn,ใช้เมื่อเกิดใหม่ครั้งต่อไป
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
+Authentication.SignUp.Action.Create,สร้าง
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,
 Authentication.SignUp.Action.CreateAccountSentenceCase,
@@ -460,6 +463,7 @@ Authentication.SignUp.Description.ParentEmailDisclaimer,เราขออีเ
 Authentication.SignUp.Description.PasskeyTryAgain,ขออภัย มีปัญหาบางอย่างเกิดขึ้นขณะลงทะเบียนพาสคีย์ของคุณ กรุณาลองลงทะเบียนอีกครั้งด้วยชื่อผู้ใช้อื่น
 Authentication.SignUp.Description.RobloxNotAvailableInRegion,ใช้งาน Roblox ไม่ได้ชั่วคราวในภูมิภาคของคุณ
 Authentication.SignUp.Description.SecureAccountWithPasskeyText,รักษาบัญชีของคุณให้ปลอดภัยด้วยพาสคีย์เพื่อลงชื่อเข้าใช้ด้วยโทรศัพท์อย่างรวดเร็วในอนาคต หรือจะเพิ่มรหัสผ่านสำหรับการลงชื่อเข้าใช้ด้วยตนเองก็ได้
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,การสร้างบัญชีถือว่าคุณยอมรับ{startTermsTag}ข้อกำหนด{endTermsTag}ของเรา รวมถึงอนุญาโตตุลาการ และรับทราบ{startPrivacyTag}นโยบายความเป็นส่วนตัว{endPrivacyTag}ของเรา หากคุณมีอายุต่ำกว่า 18 ปี พ่อแม่หรือผู้ปกครองของคุณต้องอนุญาตให้คุณสร้างบัญชีและยอมรับข้อกำหนดของเรา
 Authentication.SignUp.Description.SignUpAgreement.FullCopy.Continue,การคลิกดำเนินการต่อถือว่าคุณยอมรับข้อกำหนดการใช้งาน (รวมถึงอนุญาโตตุลาการ) และรับทราบนโยบายความเป็นส่วนตัวของเรา หากคุณมีอายุต่ำกว่า 18 ปี คุณยอมรับว่าพ่อแม่/ผู้ปกครองอนุญาตให้คุณสร้างบัญชีนี้และยอมรับข้อกำหนดการใช้งานของเรา
 Authentication.SignUp.Description.SignUpAgreement.FullCopy.CreateAccount,การคลิกสร้างบัญชีถือว่าคุณยอมรับข้อกำหนดการใช้งาน (รวมถึงอนุญาโตตุลาการ) และรับทราบนโยบายความเป็นส่วนตัวของเรา หากคุณมีอายุต่ำกว่า 18 ปี คุณยอมรับว่าพ่อแม่/ผู้ปกครองอนุญาตให้คุณสร้างบัญชีนี้และยอมรับข้อกำหนดการใช้งานของเรา
 Authentication.SignUp.Description.SignUpAgreement.ShortCopy,ฉันยอมรับข้อกำหนดการใช้งาน (รวมถึงอนุญาโตตุลาการ) และรับทราบนโยบายความเป็นส่วนตัวของ Roblox
@@ -479,6 +483,7 @@ Authentication.SignUp.Description.VerificationPage,"การคลิกที�
 Authentication.SignUp.Description.VerificationPage.CreateAccount,"การคลิก ""สร้างบัญชี"" จะถือว่าคุณยอมรับข้อกำหนดการใช้งาน รวมถึงข้อกำหนดการใช้อนุญาโตตุลาการ และรับทราบถึงนโยบายความเป็นส่วนตัว"
 Authentication.SignUp.Description.VerificationPageMultiStep,"การคลิกที่ ""ดำเนินการต่อ"" จะถือว่าคุณยอมรับข้อกำหนดการใช้งานซึ่งรวมถึงข้อกำหนดการใช้อนุญาโตตุลาการและรับทราบถึงนโยบายความเป็นส่วนตัว"
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,การกรอกรหัสแล้วคลิกที่ดำเนินการต่อ จะถือว่าคุณยินยอมให้บุตรหลานของคุณเข้าถึง Roblox
+Authentication.SignUp.Header.CloseWithoutFinishing,ปิดโดยยังดำเนินการไม่เสร็จใช่ไหม?
 Authentication.SignUp.Header.CreatePassword,สวัสดี {username} โปรดตั้งรหัสผ่าน
 Authentication.SignUp.Header.CreatePasswordOrPasskey,สวัสดี {username} โปรดสร้างรหัสผ่านหรือพาสคีย์
 Authentication.SignUp.Header.CreatedAccountChooseSignin,เราสร้างบัญชีให้คุณแล้ว เลือกวิธีที่คุณต้องการลงชื่อเข้าใช้
@@ -574,6 +579,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,หมายเลขโ
 Authentication.SignUp.Response.UsernameMustBeSetFirst,ต้องระบุชื่อผู้ใช้ก่อน
 Authentication.SignUp.Subtitle.AddYourBirthday,เพิ่มวันเกิดของคุณเพื่อสร้างบัญชี Roblox
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,พอตั้งค่าเสร็จ ก็เล่นต่อจากเดิมได้เลย
+Authentication.SignUp.Subtitle.YoureAlmostThere,เกือบเสร็จแล้ว หากปิดตอนนี้ บัญชีของคุณจะไม่สมบูรณ์ และคุณจะไม่สามารถเล่น Roblox ได้
 Authentication.SignUp.Title,สวัสดี {username} โปรดสร้างรหัสผ่าน
 Authentication.TwoStepVerification.Action.Approve,อนุมัติ
 Authentication.TwoStepVerification.Action.ChangePassword,เปลี่ยนรหัสผ่าน
@@ -867,15 +873,12 @@ CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,ไม่พบผลการค้นหา
 CommonUI.Features.Action.ClassicThemeSunsetGetPlus,สมัคร Plus
 CommonUI.Features.Action.ClassicThemeSunsetManage,
-CommonUI.Features.Action.ClassicUnlockGetTheme,รับธีม
-CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,ไป
 CommonUI.Features.Action.LessLowercase,แสดงน้อยลง
 CommonUI.Features.Action.MoreLowercase,แสดงเพิ่ม
 CommonUI.Features.Action.Send,
 CommonUI.Features.Heading.ClassicThemeSunset,ขอบคุณที่ร่วมฉลองครบรอบ 20 ปีของ Roblox
-CommonUI.Features.Heading.ClassicUnlock,Roblox ฉลองครบรอบ 20 ปี
 CommonUI.Features.Heading.GameDetails,รายละเอียดประสบการณ์
 CommonUI.Features.Label.About,เกี่ยวกับ
 CommonUI.Features.Label.AboutUs,เกี่ยวกับเรา
@@ -895,8 +898,6 @@ CommonUI.Features.Label.Charts,อันดับ
 CommonUI.Features.Label.Chat,แชท
 CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,สมาชิก Roblox Plus จะยังคงใช้ธีมคลาสสิกต่อได้ เฉพาะไอคอนแอปฉลองครบรอบเท่านั้นที่จะยกเลิก
 CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,ผู้ใช้ที่เป็นสมาชิก Roblox Plus จะยังคงใช้ธีมคลาสสิกต่อได้ เฉพาะไอคอนแอปฉลองครบรอบเท่านั้นที่จะยกเลิก
-CommonUI.Features.Label.ClassicUnlockDescription,สนุกกับธีมคลาสสิกในเวลาจำกัด
-CommonUI.Features.Label.ClassicUnlockManagementSnackbar,จัดการธีมคลาสสิกในการตั้งค่า
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,เพื่อน
 CommonUI.Features.Label.Connection,คนรู้จัก
@@ -971,7 +972,7 @@ CommonUI.Features.Labels.OrYouCan,หรือคุณสามารถ
 CommonUI.Features.Labels.Retry,
 CommonUI.Features.Labels.ServerCommunicationError,เกิดข้อผิดพลาดขณะสื่อสารกับเซิร์ฟเวอร์ Roblox
 CommonUI.Features.Labels.With,ด้วย
-CommonUI.Features.NavBar.Build,สร้าง
+CommonUI.Features.NavBar.Build,
 CommonUI.Features.Prompt.ReportLogsQuestion,ส่งไฟล์บันทึกภายในเครื่องไปยัง Backtrace หรือไม่?
 CommonUI.Features.Prompt.ReportLogsResult,ส่งรายงานแล้ว
 CommonUI.Features.StudioCTA.Tooltip.Body,ดาวน์โหลด Studio ฟรี!
@@ -1409,7 +1410,7 @@ Feature.AddFriends.Label.EmptyStatePrompt,ใครที่คุณจะส�
 Feature.AddFriends.Label.FriendRequests,คำขอเป็นเพื่อน
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,ค้นหาผู้ใช้
 Feature.AddFriends.Label.MyQrCode,รหัส QR ของฉัน
-Feature.AddFriends.Label.QRCodeTitle,รหัส QR
+Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,เพื่อนร่วมชั้น
 Feature.AddFriends.Label.SearchForFriendsPrompt,ค้นหาผู้ใช้บน Roblox โดยใช้ชื่อผู้ใช้หรือชื่อที่แสดงในการค้นหา
 Feature.AddFriends.Label.ShareQRCodeAddConnection,แชร์รหัส QR เพื่อเพิ่มผู้ใช้ที่คุณรู้จัก
@@ -1438,6 +1439,7 @@ Feature.AgeVerificationUpsell.Modal.ContentText,"ตรวจสอบยืน�
 "
 Feature.AgeVerificationUpsell.Modal.Title,
 Feature.AgeVerificationUpsell.Title.AgeSettingsRedirect,ตรวจสอบอายุในการตั้งค่า
+Feature.AppealsPortal.Action.AskForReview,ขอให้ตรวจสอบ
 Feature.AppealsPortal.Action.FinalAppeal,ส่งคำอุทธรณ์ครั้งสุดท้าย
 Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Action.Send,
@@ -1464,7 +1466,9 @@ Feature.AppealsPortal.Description.AppealSubmittedDecisionTime.Singular,เรา
 Feature.AppealsPortal.Description.AppealSubmittedUpdate,เราจะส่งข้อมูลอัปเดตพร้อมการตัดสินใจและการดำเนินการใดๆ ที่เกิดขึ้นไปยังอีเมลที่คุณให้ไว้
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,เราจะส่งข้อมูลอัพเดทพร้อมคำตัดสินและการดำเนินการใดๆ ที่มีขึ้นไปยังอีเมลที่คุณให้ไว้ เว้นแต่คุณจะแจ้งให้เราทราบว่าไม่ต้องการรับข้อมูลเพิ่มเติมเกี่ยวกับการอุทธรณ์นี้
 Feature.AppealsPortal.Description.AppealsPortal,ดูการละเมิดที่ผ่านมาและจัดการการอุทธรณ์ของคุณ เนื้อหาและพฤติกรรมทั้งหมดต้องเป็นไปตาม{link}มาตรฐานชุมชนของ Roblox{linkEnd}
+Feature.AppealsPortal.Description.AskForReview,คุณกำลังยืนยันว่าได้แก้ปัญหานี้แล้ว เราจะตรวจสอบ{contentType}นี้อีกครั้ง
 Feature.AppealsPortal.Description.DetailsUnavailable,
+Feature.AppealsPortal.Description.FixByDate,แก้ปัญหานี้ใน Studio ภายในวันที่ {date} แล้วกลับมาขอให้ตรวจสอบอีกครั้ง
 Feature.AppealsPortal.Description.IssueClosed,เราปิดปัญหานี้แล้ว เพราะคุณตัดสินใจเรียนรู้กฎข้อหนึ่งของเราเพื่อหลีกเลี่ยงการถูกระงับ
 Feature.AppealsPortal.Description.MatchEmail,อีเมลต้องตรงกัน
 Feature.AppealsPortal.Description.MiscAppeal,โปรดแจ้งให้เราทราบหากคุณคิดว่าเราทำผิดพลาด
@@ -1528,6 +1532,8 @@ Feature.AppealsPortal.Label.IDArg,ID: {id}
 Feature.AppealsPortal.Label.ImageOrOtherAsset,ภาพหรือทรัพยากรอื่นๆ
 Feature.AppealsPortal.Label.ImmersiveBrandedAd,โฆษณาในตัว
 Feature.AppealsPortal.Label.ImmersiveBrandedAdPlacementId,ID ตำแหน่งโฆษณาในตัว
+Feature.AppealsPortal.Label.InGameBehavior,พฤติกรรมในเกม
+Feature.AppealsPortal.Label.InGameBehavior.Notice,การแชทหรือการเล่นเกม
 Feature.AppealsPortal.Label.Location,
 Feature.AppealsPortal.Label.LookDescription,คำอธิบายอวาตาร์ที่แชร์
 Feature.AppealsPortal.Label.LookId,ID อวาตาร์ที่แชร์
@@ -1551,6 +1557,7 @@ Feature.AppealsPortal.Label.Type.ContentMaturity,
 Feature.AppealsPortal.Label.Type.Experience,
 Feature.AppealsPortal.Label.Type.Game,
 Feature.AppealsPortal.Label.Type.Image,ภาพ
+Feature.AppealsPortal.Label.Type.InGameBehavior,
 Feature.AppealsPortal.Label.Type.Look,อวาตาร์ที่แชร์
 Feature.AppealsPortal.Label.Type.LookText,ชื่อและคำอธิบายของอวาตาร์ที่แชร์
 Feature.AppealsPortal.Label.Type.Mesh,เมช
@@ -1580,6 +1587,7 @@ Feature.AppealsPortal.Label.TypeLower.Experience,
 Feature.AppealsPortal.Label.TypeLower.Game,
 Feature.AppealsPortal.Label.TypeLower.Image,
 Feature.AppealsPortal.Label.TypeLower.ImmersiveBrandedAd,
+Feature.AppealsPortal.Label.TypeLower.InGameBehavior,
 Feature.AppealsPortal.Label.TypeLower.Look,
 Feature.AppealsPortal.Label.TypeLower.LookText,
 Feature.AppealsPortal.Label.TypeLower.Mesh,
@@ -1839,6 +1847,7 @@ Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,ชื่อจะต้องประกอบด้วยตัวหนังสือ ตัวเลข และช่องว่างเท่านั้น
 Feature.Avatar.Label.CountSelected,เลือกแล้ว {itemCount} ไอเท็ม
 Feature.Avatar.Label.Creations,ผลงานสร้างสรรค์
+Feature.Avatar.Label.Current,ปัจจุบัน
 Feature.Avatar.Label.CurrentlyWearing,สวมอยู่ตอนนี้
 Feature.Avatar.Label.DefaultBody,ร่างกายเริ่มต้น
 Feature.Avatar.Label.DeleteSetBody,การลบเซ็ตนี้จะไม่ลบเครื่องแต่งกายที่อยู่ภายใน
@@ -2276,6 +2285,10 @@ Feature.Build.Analytics.Description.PayerConversion,อัตราคอนเ�
 Feature.Build.Analytics.Description.PlaythroughRate,อัตราการเล่นจนจบคือ เปอร์เซ็นต์การเยี่ยมชมเซสชันเต็มรูปแบบที่มีการเล่นจนจบ อัตราที่สูงบ่งชี้ว่าผู้เล่นพบว่าประสบการณ์ของคุณเข้าถึงได้ง่ายและคุ้มค่าที่จะเล่นจนจบ
 Feature.Build.Analytics.Description.TotalPlaytime,เวลาเล่นรวมคือผลรวมเวลาที่ผู้เล่นทุกคนใช้ไปในประสบการณ์ของคุณตลอดช่วงเวลาดังกล่าว เวลาเล่นที่เพิ่มขึ้นมักบ่งบอกถึงเซสชันที่มีส่วนร่วมมากขึ้น
 Feature.Build.Analytics.DurationHours,{number} ชม.
+Feature.Build.Analytics.Goal.EarnRobux,สร้างรายได้เป็น Robux
+Feature.Build.Analytics.Goal.FirstImpression,สร้างความประทับใจแรกที่ดี
+Feature.Build.Analytics.Goal.GetMorePlayers,ดึงดูดผู้เล่นให้มากขึ้น
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,ทำให้ผู้เล่นกลับมาเล่นอีก
 Feature.Build.Analytics.KeyStats,สถิติสำคัญ
 Feature.Build.Analytics.LastMonth,เดือนที่ผ่านมา
 Feature.Build.Analytics.LastWeek,
@@ -2307,9 +2320,12 @@ Feature.Build.Analytics.Summary.TotalPlaytime,จำนวนชั่วโม�
 Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,ผู้เล่นทั้งหมด
 Feature.Build.Analytics.Title.D1Retention,ผู้ที่กลับมาใช้งานในวันที่ 1
+Feature.Build.Analytics.Title.D7Retention,จำนวนผู้ที่กลับมาใช้งานในวันที่ 7
 Feature.Build.Analytics.Title.DailyActiveUsers,
+Feature.Build.Analytics.Title.NewUserSessionTime,ระยะเวลาเซสชันของผู้ใช้ใหม่
 Feature.Build.Analytics.Title.PayerConversion,
 Feature.Build.Analytics.Title.PlaythroughRate,
+Feature.Build.Analytics.Title.RobuxSpent,Robux ที่ใช้จ่าย
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,การเยี่ยมชม
 Feature.Build.Content.NewGame,เกมใหม่
@@ -2366,6 +2382,7 @@ Feature.Build.Description.ShopButton,เพิ่มจุดเริ่มต�
 Feature.Build.Description.ShortAdCampaign,วิธีดูแบบเร็วๆ ว่าผู้เล่นคิดอย่างไรเกี่ยวกับเกมของคุณ
 Feature.Build.Description.StopBuild,คำขอนี้ยังอยู่ระหว่างดำเนินการ หากคุณหยุดตอนนี้ การดำเนินการจะไม่เสร็จสิ้น และคุณจะต้องส่งคำขออีกครั้ง
 Feature.Build.Description.UpdateDeveloperProduct,อัปเดตผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
+Feature.Build.Description.UseAdCreditsInAdsManager,คุณจะต้องไปที่เครื่องมือจัดการโฆษณาเพื่อใช้เครดิต
 Feature.Build.Error.AdForbidden,บัญชีหรือเกมของคุณไม่สามารถเผยแพร่โฆษณาได้ในตอนนี้ โปรดติดต่อฝ่ายบริการช่วยเหลือหากคุณคิดว่านี่เป็นข้อผิดพลาด
 Feature.Build.Error.AdInsufficientFunds,คุณมี Robux ไม่เพียงพอที่จะสร้างโฆษณานี้ โปรดเพิ่ม Robux แล้วลองอีกครั้ง
 Feature.Build.Error.AdInternalError,มีปัญหาบางอย่างเกิดขึ้น โปรดลองอีกครั้งภายหลัง
@@ -2689,6 +2706,7 @@ Feature.Build.Title.RevertLastChange,แปลงกลับการเปล�
 Feature.Build.Title.StopBuild,หยุดสร้างใช่ไหม?
 Feature.Build.Title.Tasks,งาน
 Feature.Build.Title.TurnActivity,เปลี่ยนกิจกรรม
+Feature.Build.Title.UseYourAdCredits,ใช้เครดิตโฆษณาของคุณ
 Feature.Build.Title.VersionHistory,ประวัติเวอร์ชัน
 Feature.Build.Title.VersionInfo,ข้อมูลเวอร์ชัน
 Feature.Build.Title.VersionNumber,เวอร์ชัน {VERSION}
@@ -3064,6 +3082,7 @@ Feature.Catalog.Title.Checkout.UnavailableItems,
 Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle,สวมใส่อวาตาร์นี้ไหม?
 Feature.Catalog.Title.CheckoutPlural,ชำระเงิน {count} รายการ
 Feature.Catalog.Title.CheckoutSingular,
+Feature.Catalog.Title.Explore,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,ต้องการแทนที่เลเยอร์ด้านล่างใช่ไหม?
 Feature.Catalog.Title.RentalFtuxText,เช่าเพื่อลองใช้ไอเท็ม 3 วัน
 Feature.Catalog.Toast.AddedToFavorites,เพิ่มไปยังรายการโปรดแล้ว
@@ -3849,9 +3868,9 @@ Feature.Groups.Message.LoadGroupListError,ไม่สามารถโหล�
 Feature.Groups.Message.NoGroupsFound,ไม่พบชุมชน
 Feature.Groups.Message.NotInAnyGroups,คุณไม่ได้เป็นสมาชิกของชุมชนใดเลย
 Feature.Groups.Message.PinLocked,คุณไม่สามารถดำเนินการนี้ได้หาก PIN ถูกล็อคอยู่ ปลดล็อค PIN ของคุณในหน้าการตั้งค่าบัญชี
-Feature.Groups.Modal.ContentTextHigh,"ตรวจสอบยืนยันบัญชีเพื่อเข้าร่วมชุมชนนี้
+Feature.Groups.Modal.ContentTextHigh,"ตรวจสอบยืนยันบัญชีของคุณเพื่อเข้าร่วมชุมชนนี้
 
-1. ไปที่ข้อมูลบัญชี > ตรวจสอบยืนยันอายุของฉัน
+1. ไปที่ข้อมูลบัญชี > ตรวจสอบยืนยันตัวตน
 2. ดำเนินการตามขั้นตอนการตรวจสอบยืนยันให้เสร็จสิ้น"
 Feature.Groups.Modal.ContentTextLow,"ตรวจสอบยืนยันบัญชีของคุณเพื่อเข้าร่วมชุมชนนี้
 
@@ -3859,14 +3878,14 @@ Feature.Groups.Modal.ContentTextLow,"ตรวจสอบยืนยันบ�
 2. เลือกวิธีตรวจสอบยืนยัน 1 ช่องทาง:
     - เพิ่มหมายเลขโทรศัพท์
     - เพิ่มอีเมล
-    - ตรวจสอบยืนยันอายุของฉัน
+    - ตรวจสอบยืนยันตัวตน
 3. ดำเนินการตามขั้นตอนตรวจสอบยืนยันให้เสร็จสิ้น"
 Feature.Groups.Modal.ContentTextMedium,"ตรวจสอบยืนยันบัญชีของคุณเพื่อเข้าร่วมชุมชนนี้
 
 1. ไปที่ข้อมูลบัญชี
 2. เลือกวิธีตรวจสอบยืนยัน 1 ช่องทาง:
     - เพิ่มหมายเลขโทรศัพท์และอีเมล
-    - ตรวจสอบยืนยันอายุของฉัน
+    - ตรวจสอบยืนยันตัวตน
 3. ดำเนินการตามขั้นตอนตรวจสอบยืนยันให้เสร็จสิ้น"
 Feature.Groups.Notification.FailedToFollow,ติดตามโปรไฟล์ไม่สำเร็จ โปรดลองอีกครั้งในภายหลัง
 Feature.Groups.Notification.FailedToJoin,เข้าร่วมชุมชนไม่สำเร็จ โปรดลองอีกครั้งในภายหลัง
@@ -4043,12 +4062,16 @@ Feature.Moments.Action.AddSticker,เพิ่มสติกเกอร์
 Feature.Moments.Action.AddText,เพิ่มข้อความ
 Feature.Moments.Action.AddVoice,เพิ่มเสียง
 Feature.Moments.Action.Back,
+Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentShowLess,
+Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
 Feature.Moments.Action.CreateVoiceover,สร้างเสียงบรรยาย
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.DiscardChange,
 Feature.Moments.Action.Done,
+Feature.Moments.Action.Edit,
 Feature.Moments.Action.Expand,ขยาย
 Feature.Moments.Action.GenerateText,สร้างข้อความ
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,ไม่มีประโยชน์
@@ -4064,6 +4087,7 @@ Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
+Feature.Moments.Action.RetryLoadingComments,ลองโหลดความคิดเห็นอีกครั้ง
 Feature.Moments.Action.Return,กลับไปยังแกลเลอรี
 Feature.Moments.Action.ReturnToEditing,กลับไปที่การแก้ไข
 Feature.Moments.Action.SaveVoiceover,
@@ -4085,9 +4109,35 @@ Feature.Moments.Description.PublishMoment,อธิบายเกี่ยว�
 Feature.Moments.Description.TooManyUploads,คุณอัปโหลดวิดีโอมากเกินไปในวันนี้ โปรดลองอีกครั้งในวันพรุ่งนี้
 Feature.Moments.Disclaimer.EveryoneMoments,ทุกคนในโมเมนต์สามารถดูสิ่งที่เผยแพร่ได้
 Feature.Moments.Label.All,
+Feature.Moments.Label.AllowComments,อนุญาตให้แสดงความคิดเห็น
 Feature.Moments.Label.AttemptingJoinExperience,กำลังพยายามเข้าร่วม {placeName} อาจใช้เวลาสักครู่
 Feature.Moments.Label.CaptureLibrary,คลังภาพที่จับไว้ของคุณ
 Feature.Moments.Label.ChooseVoice,เลือกเสียง
+Feature.Moments.Label.CommentAuthorFallback,ผู้ใช้ {userId}
+Feature.Moments.Label.CommentAuthorUnknown,
+Feature.Moments.Label.CommentDeleteFailed,ไม่สามารถลบความคิดเห็นได้
+Feature.Moments.Label.CommentNotAllowed,คุณไม่สามารถแสดงความคิดเห็นในโมเมนต์นี้ได้
+Feature.Moments.Label.CommentPostFailed,ไม่สามารถโพสต์ความคิดเห็นของคุณได้ โปรดลองอีกครั้ง
+Feature.Moments.Label.CommentPostOutcomeUnknown,เรายืนยันไม่ได้ว่ามีการโพสต์ความคิดเห็นล่าสุดของคุณไปแล้วหรือยัง โปรดตรวจสอบความคิดเห็นก่อนส่งอีกครั้ง
+Feature.Moments.Label.CommentRateLimited,คุณแสดงความคิดเห็นเร็วเกินไป โปรดลองอีกครั้งในภายหลัง
+Feature.Moments.Label.CommentRejectedByFilter,ไม่มีการโพสต์ความคิดเห็นของคุณ โปรดแก้ไขแล้วลองอีกครั้ง
+Feature.Moments.Label.CommentSendStatusUnknown,ไม่ทราบสถานะการส่ง
+Feature.Moments.Label.CommentSending,กำลังส่ง…
+Feature.Moments.Label.CommentSignInRequired,โปรดลงชื่อเข้าใช้อีกครั้งเพื่อแสดงความคิดเห็น
+Feature.Moments.Label.CommentTimestampDays,{count} วัน
+Feature.Moments.Label.CommentTimestampHours,{count} ชม.
+Feature.Moments.Label.CommentTimestampMinutes,{count} นาที
+Feature.Moments.Label.CommentTimestampMonths,{count} เดือน
+Feature.Moments.Label.CommentTimestampNow,
+Feature.Moments.Label.CommentTimestampWeeks,{count} สัปดาห์
+Feature.Moments.Label.CommentTimestampYears,{count} ปี
+Feature.Moments.Label.CommentingUnavailable,การแสดงความคิดเห็นไม่พร้อมใช้งานในขณะนี้ โปรดลองอีกครั้งในภายหลัง
+Feature.Moments.Label.CommentsDisabled,ปิดใช้งานความคิดเห็นอยู่
+Feature.Moments.Label.CommentsReadOnly,ความคิดเห็นเป็นแบบอ่านอย่างเดียว
+Feature.Moments.Label.CommentsTurnedOff,ความคิดเห็นสำหรับโมเมนต์นี้ปิดอยู่
+Feature.Moments.Label.CommentsUnavailable,ความคิดเห็นไม่พร้อมใช้งาน
+Feature.Moments.Label.DeleteCommentBody,ความคิดเห็นนี้จะถูกลบอย่างถาวร
+Feature.Moments.Label.DeleteCommentTitle,ลบความคิดเห็นใช่ไหม?
 Feature.Moments.Label.DeleteMomentBody,คุณไม่สามารถกู้คืนโมเมนต์ได้เมื่อลบไปแล้ว
 Feature.Moments.Label.DeleteMomentTitle,ลบโมเมนต์ใช่ไหม?
 Feature.Moments.Label.DeleteVoiceoverBody,การดำเนินการนี้จะล้างข้อความและเสียงบรรยายของคุณ คุณสามารถเริ่มต้นใหม่ได้ทุกเมื่อ
@@ -4099,6 +4149,7 @@ Feature.Moments.Label.FeedEndTitle,ดูหมดแล้ว
 Feature.Moments.Label.FeedFailedToLoad,โหลดฟีดไม่สำเร็จ
 Feature.Moments.Label.FeedMyMoments,โมเมนต์ของฉัน
 Feature.Moments.Label.FeedTrending,
+Feature.Moments.Label.FirstCommentInvite,ยังไม่มีความคิดเห็น มาเป็นคนที่แสดงความคิดเห็นกัน!
 Feature.Moments.Label.HowToUseCaptureTitle,วิธีใช้การจับภาพ
 Feature.Moments.Label.LinkCopied,คัดลอกลิงก์แล้ว
 Feature.Moments.Label.LinkCopyFailed,คัดลอกลิงก์ไม่สำเร็จ
@@ -4107,12 +4158,14 @@ Feature.Moments.Label.MomentDeletedBody,เมื่อลบไปแล้ว 
 Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,
 Feature.Moments.Label.MomentFailedToPostTitle,โพสต์โมเมนต์ไม่สำเร็จ
+Feature.Moments.Label.MomentNoLongerAvailable,ไม่สามารถใช้โมเมนต์นี้ได้อีกต่อไป
 Feature.Moments.Label.MomentPublishedBody,เผยแพร่ช่วงเวลาของคุณสำเร็จแล้ว
 Feature.Moments.Label.MomentPublishedTitle,เผยแพร่ช่วงเวลาแล้ว
 Feature.Moments.Label.MomentUnavailable,โมเมนต์ไม่พร้อมใช้งาน
 Feature.Moments.Label.MomentUnavailableDefault,โมเมนต์นี้ไม่สามารถใช้ได้
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NoCommentsYet,ยังไม่มีความคิดเห็น
 Feature.Moments.Label.NonInfiniteScrollEndTitle,ดูหมดแล้วในตอนนี้
 Feature.Moments.Label.Photos,รูปภาพ
 Feature.Moments.Label.PostDeleted,ลบโมเมนต์แล้ว
@@ -4153,6 +4206,10 @@ Feature.Moments.Label.VoiceLimitReachedBody,โปรดรอสักครู
 Feature.Moments.Label.VoiceModerationError,สคริปต์ของคุณต้องเป็นไปตามกฎความปลอดภัย
 Feature.Moments.Label.VoicePlaceholder,พิมพ์สคริปต์เสียงบรรยายของคุณ สูงสุด {maxCount} อักขระ
 Feature.Moments.Label.VoiceTimeoutBody,การสร้างเสียงบรรยายหมดเวลา
+Feature.Moments.Label.WriteComment,เขียนความคิดเห็น
+Feature.Moments.Title.Comments,ความคิดเห็น
+Feature.Moments.Title.CommentsWithCappedCount,ความคิดเห็น ({count}+)
+Feature.Moments.Title.CommentsWithCount,ความคิดเห็น ({count})
 Feature.Moments.Title.GenerateTextFeedbackReason,มีอะไรผิดพลาด?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจากการสร้างสรรค์โมเมนต์ใช่ไหม?
@@ -4652,7 +4709,10 @@ Feature.PlayerSearchResults.Label.You,คุณ
 Feature.PlayerSearchResults.Label.YouAreConnections,คุณเป็นคนรู้จักกัน
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,คุณเป็นเพื่อนกันแล้ว
+Feature.PrivateServers.Action.CreatePrivateServer,
+Feature.PrivateServers.Action.FreeWithBlackbird,ฟรีเมื่อสมัคร Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio ไม่รองรับการซื้อเซิร์ฟเวอร์ส่วนตัว
+Feature.PrivateServers.Description.VipServersNotSupported,เกมนี้ไม่รองรับเซิร์ฟเวอร์ส่วนตัว
 Feature.Profile.Action.AboutThisProfile,เกี่ยวกับโปรไฟล์นี้
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4877,6 +4937,7 @@ Feature.RobloxSubscription.Description.ReferralShare,ชวนเพื่อน
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"การคลิก \u{201C}{ctaText}\u{201D} จะถือว่าคุณยอมรับ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
 Feature.RobloxSubscription.Heading.ReferralEntry,แชร์ Plus แล้วรับ {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,ประวัติการแนะนำ
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,เข้าร่วม Plus แล้วรับ {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,เข้าร่วม Plus แล้วรับ
 Feature.RobloxSubscription.Heading.ReferralShare,แชร์ Plus แล้วรับ
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,เซิร์ฟเวอร์ส่วนตัวฟรี
@@ -4894,12 +4955,14 @@ Feature.RobloxSubscription.Label.PendingRobux,Robux ที่รอดำเน�
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,ผู้ที่คุณแนะนำจะได้รับ
 Feature.RobloxSubscription.Label.ReferralYouGet,คุณจะได้รับ
+Feature.RobloxSubscription.Label.ReferralsLegalDisclosureV2,การคลิก \u{201C}แนะนำ Plus\u{201D} ถือว่าฉันยอมรับ{linkStart}ข้อกำหนดของโปรแกรมการแนะนำ Roblox Plus{linkEnd}
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}ฟรี 1 เดือน{boldEnd} จากนั้น {price}/{periodType}
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration} {trialPeriodLabel}ฟรี {boldEnd}จากนั้น {price}/{periodType}
 Feature.RobloxSubscription.Label.RobuxEarned,Robux ที่ได้รับ
 Feature.RobloxSubscription.Label.SuccessfulReferrals,การแนะนำที่สำเร็จ
 Feature.RobloxSubscription.Label.month,
 Feature.RobloxSubscription.Label.months,
+Feature.RobloxSubscription.Message.AlreadySubscribed,คุณใช้ Plus อยู่แล้ว ลิงก์นี้มีไว้สำหรับสมาชิกใหม่ แชร์ลิงก์ของคุณเองเพื่อเชิญเพื่อนและรับรางวัล
 Feature.RobloxSubscription.Title.AgeCheckTrial,รับ Plus ฟรี 1 สัปดาห์
 Feature.RobloxSubscription.Title.AlreadySubscribed,ข่าวดี
 Feature.RobloxSubscription.Title.GenericError,
@@ -4910,6 +4973,7 @@ Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,รับสิทธิ์
 Feature.RobloxSubscription.label.week,สัปดาห์
 Feature.RobloxSubscription.label.weeks,
 Feature.SafetyDashboard.Heading.AccountStatus.V2,สถานะบัญชี การละเมิด และการอุทธรณ์
+Feature.SafetyDashboard.Heading.ReportHistory,ประวัติการรายงาน
 Feature.Schools.Action.AlreadyGraduated,ฉันสำเร็จการศึกษาแล้ว
 Feature.Schools.Action.CantFindSchool,ไม่พบโรงเรียนของคุณใช่ไหม?
 Feature.Schools.Action.Continue,
@@ -5113,6 +5177,16 @@ Feature.SplitPane.Label.Rotate,
 Feature.SplitPane.NoAdditionalAvatarsDialogBody,สร้างอวาตาร์อีก แล้วสลับธีมที่นี่
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,สร้างอวาตาร์
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,ดูอวาตาร์ทั้งหมดที่คุณบันทึกไว้ครบแล้ว
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,เสร็จสิ้นการทัวร์
+Feature.SplitPane.Tour.Button.SkipTour,ข้ามการทัวร์
+Feature.SplitPane.Tour.Step1.Description.Collapsed,ตอนนี้จะมองเห็นอวาตาร์ที่บันทึกไว้ได้บนหน้าหลัก ขยายพื้นที่นี้เพื่อดูอวาตาร์
+Feature.SplitPane.Tour.Step1.Description.Expanded,ตอนนี้จะมองเห็นอวาตาร์ที่บันทึกไว้ได้บนหน้าหลัก หมุนอวาตาร์หรือซูมเข้าเพื่อดูทุกรายละเอียด
+Feature.SplitPane.Tour.Step1.Title,ดูตัวเองในหน้าหลัก
+Feature.SplitPane.Tour.Step2.Description,ปรับเปลี่ยนลุคได้ตามใจชอบ โดยเลือกจากอวตารที่บันทึกไว้ก่อนกดเข้าเกม
+Feature.SplitPane.Tour.Step2.Title,เปลี่ยนลุคได้ทุกเมื่อ
+Feature.SplitPane.Tour.Step3.Description,ปิดพื้นที่นี้ได้ทุกเมื่อเพื่อโฟกัสกับการสำรวจเกมใหม่ๆ อวตารที่บันทึกไว้จะยังอยู่ตรงนี้
+Feature.SplitPane.Tour.Step3.Title,เลือกสิ่งที่อยากดู
 Feature.SplitPane.UnsavedChangesDialogBody,หากสลับตัวตอนนี้ การเปลี่ยนแปลงอวาตาร์อาจหายไป โปรดบันทึกเพื่อเก็บไว้ก่อน
 Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
 Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,ไม่บันทึก

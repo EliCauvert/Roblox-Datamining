@@ -1,7 +1,6 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent.Parent
 local parent_2 = parent_1.Parent
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local reactModule = require(parent_2.React)
 local object = require(parent_2.LuauPolyfill).Object
 local useStyleModule = require(parent_1.Core.Style.useStyle)
@@ -24,13 +23,13 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: object (ref), t (ref), controlStateModule (ref), useStyleModule (ref), UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), constantsModule (ref), horizontalContainerModule (ref), reactModule (ref), label (ref), placementModule (ref), genericTextLabelModule (ref)
+	-- upvalues: object (ref), t (ref), controlStateModule (ref), useStyleModule (ref), getIconSizeModule (ref), iconSizeModule (ref), constantsModule (ref), horizontalContainerModule (ref), reactModule (ref), label (ref), placementModule (ref), genericTextLabelModule (ref)
 	local var1 = object.assign({}, t, p1)
 	local item = var1.item
 	local var2 = var1.controlState == controlStateModule.SelectedPressed
 	local selected = var1.selected
 	local var3 = useStyleModule()
-	local var4 = if selected then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var3.Tokens.Color.Content.Emphasis else var3.Tokens.Semantic.Color.Icon.Emphasis elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var3.Tokens.Color.Content.Default else var3.Tokens.Semantic.Color.Icon.Default
+	local var4 = if selected then var3.Tokens.Color.Content.Emphasis else var3.Tokens.Color.Content.Default
 	local var5 = getIconSizeModule(iconSizeModule.Medium, var3)
 	local var6 = constantsModule.ICON_TAB_HEIGHT - constantsModule.ICON_TAB_PADDING * 2
 	assert(if item.icon ~= nil then item.iconComponent == nil else true, "icon or iconComponent cannot be assigned at same time")
@@ -78,7 +77,7 @@ return function(p1)
 				Transparency = 0,
 				Color = if selected then var3.Theme.TextEmphasis.Color else var3.Theme.TextDefault.Color
 			},
-			fontStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var3.Tokens.Typography.HeadingSmall else var3.Tokens.Semantic.Typography.Header,
+			fontStyle = var3.Tokens.Typography.HeadingSmall,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		})
 	})

@@ -1,7 +1,6 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent
 local parent_2 = parent_1.Parent
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local reactModule = require(parent_2.React)
 local cryoModule = require(parent_2.Cryo)
 local _ = require(parent.Style.StyleTypes)
@@ -20,7 +19,7 @@ local t = {
 }
 
 local function useHeaderBarStyle(p1, p2)
-	-- upvalues: reactModule (ref), UIBloxConfigModule (ref)
+	-- upvalues: reactModule (ref)
 	local tokens = p2.Tokens
 	local theme = p2.Theme
 	local backgroundStyle = p1.backgroundStyle
@@ -55,12 +54,12 @@ local function useHeaderBarStyle(p1, p2)
 	return {
 		BackgroundStyle = var1,
 		Padding = reactModule.useMemo(function()
-			-- upvalues: paddingTop (ref), UIBloxConfigModule (copy), tokens (ref), paddingRight (ref), paddingBottom (ref), paddingLeft (ref), margin (ref)
+			-- upvalues: paddingTop (ref), tokens (ref), paddingRight (ref), paddingBottom (ref), paddingLeft (ref), margin (ref)
 			local t = {
-				Top = paddingTop or UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100),
-				Right = paddingRight or UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_500 else tokens.Global.Space_250),
-				Bottom = paddingBottom or UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100),
-				Left = paddingLeft or UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_500 else tokens.Global.Space_250)
+				Top = paddingTop or UDim.new(0, tokens.Size.Size_200),
+				Right = paddingRight or UDim.new(0, tokens.Size.Size_500),
+				Bottom = paddingBottom or UDim.new(0, tokens.Size.Size_200),
+				Left = paddingLeft or UDim.new(0, tokens.Size.Size_500)
 			}
 			
 			if margin then
@@ -75,9 +74,9 @@ local function useHeaderBarStyle(p1, p2)
 end
 
 local function useRenderLeft(p1, p2)
-	-- upvalues: reactModule (ref), cryoModule (ref), UIBloxConfigModule (ref), genericTextLabelModule (ref)
+	-- upvalues: reactModule (ref), cryoModule (ref), genericTextLabelModule (ref)
 	return reactModule.useMemo(function()
-		-- upvalues: p1 (ref), reactModule (copy), p2 (ref), cryoModule (copy), UIBloxConfigModule (copy), genericTextLabelModule (copy)
+		-- upvalues: p1 (ref), reactModule (copy), p2 (ref), cryoModule (copy), genericTextLabelModule (copy)
 		local title = p1.title
 		local renderLeft = p1.renderLeft
 		local isTitleCentered = p1.isTitleCentered
@@ -89,18 +88,18 @@ local function useRenderLeft(p1, p2)
 		
 		if var1 and string.len(title) > 0 then
 			renderLeft_1 = function(p3)
-				-- upvalues: cryoModule (copy), reactModule (copy), UIBloxConfigModule (copy), tokens (ref), genericTextLabelModule (copy), title (ref)
+				-- upvalues: cryoModule (copy), reactModule (copy), tokens (ref), genericTextLabelModule (copy), title (ref)
 				return reactModule.createElement(reactModule.Fragment, nil, {
 					Text = reactModule.createElement(genericTextLabelModule, {
 						fluidSizing = true,
 						Text = title,
 						TextXAlignment = Enum.TextXAlignment.Left,
-						fontStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.HeadingLarge else tokens.Semantic.Typography.Title,
-						colorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Emphasis else tokens.Semantic.Color.Text.Emphasis
+						fontStyle = tokens.Typography.HeadingLarge,
+						colorStyle = tokens.Color.Content.Emphasis
 					}, cryoModule.Dictionary.join(p3.children, {
 						TextPadding = reactModule.createElement("UIPadding", {
-							PaddingTop = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_50 else tokens.Global.Space_25),
-							PaddingBottom = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_50 else tokens.Global.Space_25)
+							PaddingTop = UDim.new(0, tokens.Size.Size_50),
+							PaddingBottom = UDim.new(0, tokens.Size.Size_50)
 						})
 					}))
 				})
@@ -160,11 +159,11 @@ local function useRenderLeft(p1, p2)
 			
 			return renderLeft_1
 		elseif not isSecondary and not isTitleCentered then
-			local var3 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.HeadingSmall else tokens.Semantic.Typography.Header
-			local fontSize = var3.FontSize
+			local headingSmall = tokens.Typography.HeadingSmall
+			local fontSize = headingSmall.FontSize
 			
 			renderLeft_1 = function()
-				-- upvalues: reactModule (copy), fontSize (ref), UIBloxConfigModule (copy), tokens (ref), renderLeft (ref), genericTextLabelModule (copy), title (ref), var3 (ref)
+				-- upvalues: reactModule (copy), fontSize (ref), tokens (ref), renderLeft (ref), genericTextLabelModule (copy), title (ref), headingSmall (ref)
 				return reactModule.createElement(reactModule.Fragment, nil, {
 					LeftFrame = reactModule.createElement("Frame", {
 						Selectable = false,
@@ -176,7 +175,7 @@ local function useRenderLeft(p1, p2)
 							SortOrder = Enum.SortOrder.LayoutOrder,
 							FillDirection = Enum.FillDirection.Horizontal,
 							VerticalAlignment = Enum.VerticalAlignment.Center,
-							Padding = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Space_150)
+							Padding = UDim.new(0, tokens.Size.Size_300)
 						}),
 						Left = reactModule.createElement("Frame", {
 							LayoutOrder = 1,
@@ -194,12 +193,12 @@ local function useRenderLeft(p1, p2)
 							Text = title,
 							TextTruncate = Enum.TextTruncate.AtEnd,
 							TextXAlignment = Enum.TextXAlignment.Left,
-							fontStyle = var3,
-							colorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Emphasis else tokens.Semantic.Color.Text.Emphasis
+							fontStyle = headingSmall,
+							colorStyle = tokens.Color.Content.Emphasis
 						}, {
 							TextPadding = reactModule.createElement("UIPadding", {
-								PaddingTop = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_50 else tokens.Global.Space_25),
-								PaddingBottom = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_50 else tokens.Global.Space_25)
+								PaddingTop = UDim.new(0, tokens.Size.Size_50),
+								PaddingBottom = UDim.new(0, tokens.Size.Size_50)
 							})
 						})
 					})
@@ -214,7 +213,7 @@ local function useRenderLeft(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), reactModule (ref), useRenderLeft (ref), UIBloxConfigModule (ref), genericTextLabelModule (ref), getTextSizeModule (ref), useHeaderBarStyle (ref), threeSectionBarModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), reactModule (ref), useRenderLeft (ref), genericTextLabelModule (ref), getTextSizeModule (ref), useHeaderBarStyle (ref), threeSectionBarModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2 = useStyleModule()
 	local tokens = var2.Tokens
@@ -232,15 +231,15 @@ return function(p1)
 	local var3 = if var1.renderLeft ~= nil then var1.renderLeft == reactModule.None else true
 	local var4 = useRenderLeft(var1, var2)
 	local var5 = reactModule.useMemo(function()
-		-- upvalues: renderCenter (ref), var3 (ref), isSecondary (ref), isTitleCentered (ref), UIBloxConfigModule (copy), tokens (ref), reactModule (copy), genericTextLabelModule (copy), title (ref)
+		-- upvalues: renderCenter (ref), var3 (ref), isSecondary (ref), isTitleCentered (ref), tokens (ref), reactModule (copy), genericTextLabelModule (copy), title (ref)
 		local var6 = renderCenter
 		
 		if not var6 and not var3 and (not isSecondary and isTitleCentered) then
-			local var7 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.HeadingSmall else tokens.Semantic.Typography.Header
-			local fontSize = var7.FontSize
+			local headingSmall = tokens.Typography.HeadingSmall
+			local fontSize = headingSmall.FontSize
 			
 			var6 = function()
-				-- upvalues: reactModule (copy), genericTextLabelModule (copy), fontSize (ref), title (copy), var7 (ref), UIBloxConfigModule (copy), tokens (copy)
+				-- upvalues: reactModule (copy), genericTextLabelModule (copy), fontSize (ref), title (copy), headingSmall (ref), tokens (copy)
 				return reactModule.createElement(genericTextLabelModule, {
 					Selectable = false,
 					ClipsDescendants = true,
@@ -248,12 +247,12 @@ return function(p1)
 					Size = UDim2.new(1, 0, 0, fontSize),
 					Text = title,
 					TextTruncate = Enum.TextTruncate.AtEnd,
-					fontStyle = var7,
-					colorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Emphasis else tokens.Semantic.Color.Text.Emphasis
+					fontStyle = headingSmall,
+					colorStyle = tokens.Color.Content.Emphasis
 				}, {
 					TextPadding = reactModule.createElement("UIPadding", {
-						PaddingTop = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_50 else tokens.Global.Space_25),
-						PaddingBottom = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_50 else tokens.Global.Space_25)
+						PaddingTop = UDim.new(0, tokens.Size.Size_50),
+						PaddingBottom = UDim.new(0, tokens.Size.Size_50)
 					})
 				})
 			end
@@ -263,22 +262,22 @@ return function(p1)
 		renderCenter, var3, isSecondary, isTitleCentered, tokens, title
 	})
 	local var6 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), renderCenter (ref), renderRight (ref), var3 (ref), isSecondary (ref), isTitleCentered (ref), UIBloxConfigModule (copy), tokens (ref), getTextSizeModule (copy), title (ref)
+		-- upvalues: var4 (ref), renderCenter (ref), renderRight (ref), var3 (ref), isSecondary (ref), isTitleCentered (ref), tokens (ref), getTextSizeModule (copy), title (ref)
 		if var4 and renderCenter and renderRight then
 			return 0
 		elseif renderCenter or var3 or (isSecondary or not isTitleCentered) then
 			return 1e999
 		end
-		local var7 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.HeadingSmall else tokens.Semantic.Typography.Header
+		local headingSmall = tokens.Typography.HeadingSmall
 		
-		return getTextSizeModule(title, var7.FontSize, var7.Font, Vector2.new(1e999, 1e999)).X
+		return getTextSizeModule(title, headingSmall.FontSize, headingSmall.Font, Vector2.new(1e999, 1e999)).X
 	end, {
 		title, isTitleCentered, var3, var4, renderCenter, renderRight, isSecondary,
 		tokens
 	})
 	local var7 = reactModule.useMemo(function()
-		-- upvalues: contentPaddingRight (ref), var3 (ref), UIBloxConfigModule (copy), tokens (ref)
-		return contentPaddingRight or (if var3 then UDim.new(0, 0) else UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_600 else tokens.Global.Space_300))
+		-- upvalues: contentPaddingRight (ref), var3 (ref), tokens (ref)
+		return contentPaddingRight or (if var3 then UDim.new(0, 0) else UDim.new(0, tokens.Size.Size_600))
 	end, { contentPaddingRight, var3, tokens })
 	local var8 = useHeaderBarStyle(var1, var2)
 	local backgroundStyle = var8.BackgroundStyle
@@ -287,7 +286,7 @@ return function(p1)
 	return reactModule.createElement("Frame", {
 		Selectable = false,
 		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 0, if isOnMedia then var1.barHeight + (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_1000 else tokens.Global.Size_500) else var1.barHeight),
+		Size = UDim2.new(1, 0, 0, if isOnMedia then var1.barHeight + tokens.Size.Size_1000 else var1.barHeight),
 		BackgroundColor3 = backgroundStyle.Color3,
 		BackgroundTransparency = backgroundStyle.Transparency,
 		AutomaticSize = if automaticHeight then Enum.AutomaticSize.Y else nil,
@@ -304,9 +303,7 @@ return function(p1)
 				NumberSequenceKeypoint.new(1, 1)
 			})
 		}) else nil,
-		OnMediaExtendedHeight = if isOnMedia then reactModule.createElement("UIPadding", {
-			PaddingBottom = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_1000 else tokens.Global.Size_500)
-		}) else nil,
+		OnMediaExtendedHeight = if isOnMedia then reactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, tokens.Size.Size_1000) }) else nil,
 		Bar = reactModule.createElement("Frame", {
 			Selectable = false,
 			BorderSizePixel = 0,
@@ -328,7 +325,7 @@ return function(p1)
 				renderCenter = var5,
 				renderRight = renderRight,
 				estimatedCenterWidth = var6,
-				sectionSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Space_150,
+				sectionSpacing = tokens.Size.Size_300,
 				contentPaddingRight = var7
 			})
 		}),
@@ -346,10 +343,10 @@ return function(p1)
 			Selectable = false,
 			BorderSizePixel = 0,
 			ZIndex = 1,
-			Size = UDim2.new(1, 0, 0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Stroke.Standard else tokens.Global.Stroke_100),
-			Position = UDim2.new(0, 0, 1, -(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Stroke.Standard else tokens.Global.Stroke_100)),
-			BackgroundColor3 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Stroke.Emphasis.Color3 else tokens.Semantic.Color.Common.Divider.Color3,
-			BackgroundTransparency = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Stroke.Emphasis.Transparency else tokens.Semantic.Color.Common.Divider.Transparency
+			Size = UDim2.new(1, 0, 0, tokens.Stroke.Standard),
+			Position = UDim2.new(0, 0, 1, -tokens.Stroke.Standard),
+			BackgroundColor3 = tokens.Color.Stroke.Emphasis.Color3,
+			BackgroundTransparency = tokens.Color.Stroke.Emphasis.Transparency
 		}) else nil
 	})
 end
