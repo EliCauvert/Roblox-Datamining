@@ -1,6 +1,9 @@
-﻿local home = script:FindFirstAncestor("Home")
+﻿local appLifecycleObserverService = game:GetService("AppLifecycleObserverService")
+local home = script:FindFirstAncestor("Home")
 local parent = home.Parent
 local reactModule = require(parent.React)
+local signalsReactModule = require(parent.SignalsReact)
+local useSponsoredAdViewabilityDetector = require(parent.SponsoredAdViewability).useSponsoredAdViewabilityDetector
 local _ = require(parent.Navigation)
 local appPage = require(parent.RobloxAppEnums).AppPage
 local responsiveModule = require(parent.Responsive)
@@ -13,6 +16,7 @@ local refreshHomePageModule = require(home.refreshHomePage)
 local fetchHomePageModule = require(home.fetchHomePage)
 local useHomeCollectionLayoutSyncModule = require(home.useHomeCollectionLayoutSync)
 local homeConstantsModule = require(home.HomeConstants)
+local homePageSessionModule = require(home.HomePageSession)
 local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
 local fFlagLuaAppAddHomeExtraTopPadding = require(parent.SharedFlags).FFlagLuaAppAddHomeExtraTopPadding
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
@@ -21,13 +25,21 @@ local fFlagSduiDismissPromptPageScope = require(parent.SharedFlags).FFlagSduiDis
 local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
 local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
 local fFlagHomePageRefetchOnDataHydrationAccountReset = require(parent.SharedFlags).FFlagHomePageRefetchOnDataHydrationAccountReset
+local fFlagLuaAppSduiHomeSponsoredAdViewabilityModule = require(home.Flags.FFlagLuaAppSduiHomeSponsoredAdViewability)
 
 local function _(p1, p2)
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
+local function getCommittedHomeSessionId(p1)
+	-- upvalues: homePageSessionModule (ref)
+	local var1 = homePageSessionModule:GetCommittedSignal()(p1)
+	
+	return if var1 then var1.sessionId else nil
+end
+
 return reactModule.memo(function(p1)
-	-- upvalues: homeConstantsModule (ref), fFlagLuaAppAddHomeExtraTopPadding (ref), useEntrySurfacing (ref), fFlagSduiDismissPromptPageScope (ref), usePageScopeRef (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fFlagHomePageRefetchOnDataHydrationAccountReset (ref), fetchHomePageModule (ref), home (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), responsiveModule (ref), videoUtilsModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiPageWrapperEntryPoint (ref), refreshHomePageModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagAppPageShellScrollToTopFocus (ref), fFlagLuaAppsDefaultSelection (ref)
+	-- upvalues: homeConstantsModule (ref), fFlagLuaAppAddHomeExtraTopPadding (ref), useEntrySurfacing (ref), fFlagSduiDismissPromptPageScope (ref), usePageScopeRef (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fFlagHomePageRefetchOnDataHydrationAccountReset (ref), fetchHomePageModule (ref), home (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), responsiveModule (ref), videoUtilsModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppSduiHomeSponsoredAdViewabilityModule (ref), signalsReactModule (ref), getCommittedHomeSessionId (ref), useSponsoredAdViewabilityDetector (ref), appLifecycleObserverService (ref), sduiPageWrapperEntryPoint (ref), refreshHomePageModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagAppPageShellScrollToTopFocus (ref), fFlagLuaAppsDefaultSelection (ref)
 	local configKey = homeConstantsModule.ConfigKey
 	local var1 = nil
 	
@@ -68,7 +80,16 @@ return reactModule.memo(function(p1)
 			return videoUtilsModule.FeedVideoPlaybackContext.new(var6)
 		end, { var6 })
 	end
+	local _ = nil
+	local var7 = nil
+	
+	if fFlagLuaAppSduiHomeSponsoredAdViewabilityModule then
+		local var8, var9 = reactModule.useState(nil)
+		var7 = var9
+		useSponsoredAdViewabilityDetector(var8, signalsReactModule.useSignalState(getCommittedHomeSessionId), appLifecycleObserverService)
+	end
 	return reactModule.createElement(sduiPageWrapperEntryPoint, {
+		ref = if fFlagLuaAppSduiHomeSponsoredAdViewabilityModule then var7 else nil,
 		appPage = appPage.Home,
 		configKey = configKey,
 		contentIdentifier = homeConstantsModule.ContentIdentifier,

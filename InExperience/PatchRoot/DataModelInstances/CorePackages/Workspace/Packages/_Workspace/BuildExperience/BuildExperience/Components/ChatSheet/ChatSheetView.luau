@@ -23,6 +23,7 @@ local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags
 local fFlagBuildExperienceInGameShell = require(parent.SharedFlags).FFlagBuildExperienceInGameShell
 local fFlagBuildExperienceUseFoundationSheetModule = require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet)
 local fFlagBuildExperienceChatAccordionScrollAnchorModule = require(buildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
+local fFlagBuildExperienceChatSheetReversedContentModule = require(buildExperience.Flags.FFlagBuildExperienceChatSheetReversedContent)
 local fFlagBuildExperienceChatImageAttachmentsModule = require(buildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local fFlagBuildExperienceChatResourceAttachments = require(parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
 local var1 = if fFlagBuildExperienceUseFoundationSheetModule then foundationModule.Sheet else require(buildExperience.FoundationFork.Sheet)
@@ -41,7 +42,7 @@ local t = {
 local function noopSheetRef(_) end
 
 local function ChatSheetContent(p1)
-	-- upvalues: reactModule (ref), fFlagBuildExperienceLibrary (ref), useScrollPerformanceTrackerModule (ref)
+	-- upvalues: reactModule (ref), fFlagBuildExperienceLibrary (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceChatSheetReversedContentModule (ref)
 	local var2 = reactModule.useRef(nil)
 	local var3 = nil
 	local var4 = nil
@@ -70,7 +71,10 @@ local function ChatSheetContent(p1)
 			end
 		end, { p1.onFramesChanged, p1.sheet, var3 })
 	end
-	return reactModule.createElement(p1.sheetComponent.Content, { scrollingFrameRef = var7 }, p1.children)
+	return reactModule.createElement(p1.sheetComponent.Content, {
+		isReversed = if fFlagBuildExperienceChatSheetReversedContentModule then true else nil,
+		scrollingFrameRef = var7
+	}, p1.children)
 end
 
 return function(p1)

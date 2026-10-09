@@ -38,7 +38,6 @@ local sduiGameTileFooterModule = require(serverDrivenUi.Content.SduiGameTileFoot
 local sduiHoldToPlayModule = require(serverDrivenUi.FocusNavigation.SduiHoldToPlay)
 local sduiDefaultTileImageModule = require(serverDrivenUi.Content.SduiDefaultTileImage)
 local fFlagSduiTileDisableLegacyHover = require(serverDrivenUi.Flags).FFlagSduiTileDisableLegacyHover
-local fFlagLuaAppResetHoverOnSduiPlayButtonActivation = require(parent.SharedFlags).FFlagLuaAppResetHoverOnSduiPlayButtonActivation
 local fFlagEnableGameJoinEarlyAccess = require(parent.SharedFlags).FFlagEnableGameJoinEarlyAccess
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local fFlagLuaAppSduiGameTileFeedback = require(parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
@@ -50,7 +49,7 @@ local fFlagSduiGameTileUseFooterComponentAsDefault = require(parent.SharedFlags)
 local var1 = if fFlagLuaAppSduiGameTileFeedback then signalsModule.createSignal(false) else nil
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), usePreferences (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiVideoThumbnail (ref), reactModule (ref), useUidRefString (ref), fFlagLuaAppSduiGameTileFeedback (ref), var1 (write), getGameTileHiddenStore (ref), signalsModule (ref), signalsReactModule (ref), sduiErrors (ref), getInputModeStore (ref), sduiParseHelpers (ref), videoEndReason (ref), sduiParsers (ref), sduiActionType (ref), getOverflowMenuSignalStore (ref), default (ref), responsiveModule (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), sduiGameTileDisableDefaultPlayButtonOnHover (ref), sduiBuilder (ref), fFlagSduiFixSearchTelemetry (ref), findAnalyticsFieldInAncestors (ref), sduiPlayButton (ref), fFlagEnableGameJoinEarlyAccess (ref), localizeStrings (ref), discoveryAnalyticsModule (ref), sduiHoldToPlayModule (ref), sduiGameTileFooterModule (ref), fFlagSduiGameTileUseFooterComponentAsDefault (ref), fFlagLuaAppSduiGameTileMetadataFontStyle (ref), sduiTileOverflowMenu (ref), fFlagSduiGameTileDirectAction (ref), sduiDefaultTileImageModule (ref), sduiGameVideoThumbnailModule (ref), getSduiComponentWrapper (ref), sduiTileModule (ref), cryoModule (ref), zoomAnimatedFrame (ref), tileHoverShadowModule (ref)
+	-- upvalues: useTokens (ref), usePreferences (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiVideoThumbnail (ref), reactModule (ref), useUidRefString (ref), fFlagLuaAppSduiGameTileFeedback (ref), var1 (write), getGameTileHiddenStore (ref), signalsModule (ref), signalsReactModule (ref), sduiErrors (ref), getInputModeStore (ref), sduiParseHelpers (ref), videoEndReason (ref), sduiParsers (ref), sduiActionType (ref), getOverflowMenuSignalStore (ref), default (ref), responsiveModule (ref), gameTileOverflowMenuAction (ref), sduiGameTileDisableDefaultPlayButtonOnHover (ref), sduiBuilder (ref), fFlagSduiFixSearchTelemetry (ref), findAnalyticsFieldInAncestors (ref), sduiPlayButton (ref), fFlagEnableGameJoinEarlyAccess (ref), localizeStrings (ref), discoveryAnalyticsModule (ref), sduiHoldToPlayModule (ref), sduiGameTileFooterModule (ref), fFlagSduiGameTileUseFooterComponentAsDefault (ref), fFlagLuaAppSduiGameTileMetadataFontStyle (ref), sduiTileOverflowMenu (ref), fFlagSduiGameTileDirectAction (ref), sduiDefaultTileImageModule (ref), sduiGameVideoThumbnailModule (ref), getSduiComponentWrapper (ref), sduiTileModule (ref), cryoModule (ref), zoomAnimatedFrame (ref), tileHoverShadowModule (ref)
 	local var2 = useTokens()
 	local var3 = usePreferences()
 	local enableLegacyHoverState = not fFlagSduiTileDisableLegacyHover and p1.enableLegacyHoverState
@@ -244,14 +243,14 @@ return reactModule.memo(function(p1)
 			universeId
 		})
 	end
-	local var24 = if fFlagLuaAppResetHoverOnSduiPlayButtonActivation then reactModule.useCallback(function()
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref), default_1 (ref)
 		if var15 then
 			default_1:reset()
 		end
-	end, { var15 }) else nil
+	end, { var15 })
 	local var25 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), var15 (ref), sduiGameTileDisableDefaultPlayButtonOnHover (copy), sduiBuilder (copy), universeId (ref), placeId (ref), fFlagSduiFixSearchTelemetry (copy), findAnalyticsFieldInAncestors (copy), fFlagSduiTileDisableLegacyHover (copy), reactModule (copy), sduiPlayButton (copy), fFlagEnableGameJoinEarlyAccess (copy), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (copy), var24 (ref), localizeStrings (copy)
+		-- upvalues: p1 (ref), var15 (ref), sduiGameTileDisableDefaultPlayButtonOnHover (copy), sduiBuilder (copy), universeId (ref), placeId (ref), fFlagSduiFixSearchTelemetry (copy), findAnalyticsFieldInAncestors (copy), fFlagSduiTileDisableLegacyHover (copy), reactModule (copy), sduiPlayButton (copy), fFlagEnableGameJoinEarlyAccess (copy), var24 (ref), localizeStrings (copy)
 		if p1.ctaButtonComponent then
 			return p1.ctaButtonComponent
 		elseif not var15 or sduiGameTileDisableDefaultPlayButtonOnHover and p1.disableDefaultPlayButtonOnHover then
@@ -278,7 +277,7 @@ return reactModule.memo(function(p1)
 			width = UDim.new(0, 60),
 			analyticsContext = var26,
 			enableEarlyAccessState = if fFlagEnableGameJoinEarlyAccess then false else nil,
-			onActivatedEffect = if fFlagLuaAppResetHoverOnSduiPlayButtonActivation then var24 else nil,
+			onActivatedEffect = var24,
 			enableUiBloxButton = p1.enableUiBloxButton ~= nil or p1.enableUiBloxButton,
 			openGameDetailsOnPurchaseRequired = p1.openGameDetailsOnPurchaseRequired ~= nil or p1.openGameDetailsOnPurchaseRequired
 		}) else reactModule.createElement(sduiPlayButton, {
@@ -291,15 +290,14 @@ return reactModule.memo(function(p1)
 			sduiContext = p1.sduiContext,
 			analyticsContext = var26,
 			enableEarlyAccessState = if fFlagEnableGameJoinEarlyAccess then false else nil,
-			onActivatedEffect = if fFlagLuaAppResetHoverOnSduiPlayButtonActivation then var24 else nil,
+			onActivatedEffect = var24,
 			enableUiBloxButton = p1.enableUiBloxButton ~= nil or p1.enableUiBloxButton,
 			openGameDetailsOnPurchaseRequired = p1.openGameDetailsOnPurchaseRequired ~= nil or p1.openGameDetailsOnPurchaseRequired
 		})
 	end, {
 		var15, p1.enableLegacyHoverState, universeId, placeId, p1.ctaButtonComponent,
-		p1.analyticsContext, p1.sduiContext,
-		if fFlagLuaAppResetHoverOnSduiPlayButtonActivation then var24 else nil,
-		p1.enableUiBloxButton, p1.openGameDetailsOnPurchaseRequired,
+		p1.analyticsContext, p1.sduiContext, var24, p1.enableUiBloxButton,
+		p1.openGameDetailsOnPurchaseRequired,
 		if sduiGameTileDisableDefaultPlayButtonOnHover then p1.disableDefaultPlayButtonOnHover else nil
 	})
 	local var26 = if fFlagSduiTileDisableLegacyHover then nil else reactModule.useCallback(function(p2, p3, p4)

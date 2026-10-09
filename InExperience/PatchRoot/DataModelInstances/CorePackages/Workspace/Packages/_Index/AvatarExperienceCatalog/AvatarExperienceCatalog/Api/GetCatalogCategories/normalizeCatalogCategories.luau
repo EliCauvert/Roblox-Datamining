@@ -9,7 +9,7 @@ local normalizeNotEmptyString = normalize.normalizeNotEmptyString
 local httpService = game:GetService("HttpService")
 local _ = require(avatarExperienceCatalog.Models.CatalogCategories)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXCatalogCategoriesSDUITaxonomy = avatarExperienceFlagsModule.FFlagAXCatalogCategoriesSDUITaxonomy
+local fFlagAXCatalogCategoriesSDUI = avatarExperienceFlagsModule.FFlagAXCatalogCategoriesSDUI
 local fFlagAXCatalogCategoriesSDUIPillTitleNormalization = avatarExperienceFlagsModule.FFlagAXCatalogCategoriesSDUIPillTitleNormalization
 
 local function _()
@@ -325,7 +325,7 @@ local var2 = function(p4)
 end
 
 local function normalizeCategoryOrSubcategory(p5, p6)
-	-- upvalues: fFlagAXCatalogCategoriesSDUIPillTitleNormalization (ref), normalizeNotEmptyString (ref), normalizeString (ref), httpService (ref), extractShowCatalogContentActionRequestParams (ref), splitCommaSeparatedString (ref), fFlagAXCatalogCategoriesSDUITaxonomy (ref), extractWidgetContext (ref), normalizeNumber (ref), var2 (write), normalizeBoolean (ref)
+	-- upvalues: fFlagAXCatalogCategoriesSDUIPillTitleNormalization (ref), normalizeNotEmptyString (ref), normalizeString (ref), httpService (ref), extractShowCatalogContentActionRequestParams (ref), splitCommaSeparatedString (ref), fFlagAXCatalogCategoriesSDUI (ref), extractWidgetContext (ref), normalizeNumber (ref), var2 (write), normalizeBoolean (ref)
 	if type(p5) ~= "table" then
 		return nil, "Config must be a table"
 	end
@@ -445,7 +445,7 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 	local var40 = nil
 	bundleTypeIds = nil
 	
-	if fFlagAXCatalogCategoriesSDUITaxonomy then
+	if fFlagAXCatalogCategoriesSDUI then
 		local var41 = extractShowCatalogContentActionRequestParams(p5)
 		local var42, var43 = normalizeNotEmptyString(var41 and var41.taxonomyId)
 		var40 = var42
@@ -626,7 +626,7 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 		SearchUuid = var29,
 		AssetTypeIdStrings = var31,
 		BundleTypes = var36,
-		TaxonomyUuid = if fFlagAXCatalogCategoriesSDUITaxonomy then var40 else nil,
+		TaxonomyUuid = if fFlagAXCatalogCategoriesSDUI then var40 else nil,
 		WidgetContext = var44,
 		TimeToRefresh = var46,
 		CameraFocus = var50,

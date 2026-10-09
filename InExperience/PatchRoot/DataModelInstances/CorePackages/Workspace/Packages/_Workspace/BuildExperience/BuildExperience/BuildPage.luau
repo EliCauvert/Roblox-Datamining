@@ -46,6 +46,8 @@ local _ = require(script.Parent.Chat.chatTypes)
 local useSessionSummaryModule = require(script.Parent.Chat.useSessionSummary)
 local useScrollPerformanceTrackerModule = require(script.Parent.Telemetry.useScrollPerformanceTracker)
 local fFlagBuildBackButtonChevronModule = require(script.Parent.Flags.FFlagBuildBackButtonChevron)
+local fFlagBuildExperienceChatSheetReversedContentModule = require(script.Parent.Flags.FFlagBuildExperienceChatSheetReversedContent)
+local list = { 0.5, 1 }
 local fFlagBuildAdUpsellModule = require(script.Parent.Flags.FFlagBuildAdUpsell)
 local fFlagEnableBuildAdPromotionModule = require(script.Parent.Flags.FFlagEnableBuildAdPromotion)
 local _ = require(script.Parent.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
@@ -156,7 +158,7 @@ local function useHomeConfigurationPages(p3)
 end
 
 local function BuildMonetizationScreen(p3)
-	-- upvalues: buildNavigationParamsModule (ref), reactModule (ref), roactNavigationModule (ref), buildOverflowMenuScreensModule (ref), chatSheetModule (ref)
+	-- upvalues: buildNavigationParamsModule (ref), reactModule (ref), roactNavigationModule (ref), buildOverflowMenuScreensModule (ref), chatSheetModule (ref), fFlagBuildExperienceChatSheetReversedContentModule (ref), list (ref)
 	local navigation = p3.navigation
 	local target = buildNavigationParamsModule.getTarget(navigation)
 	local var4, var5 = reactModule.useState(false)
@@ -192,7 +194,7 @@ local function BuildMonetizationScreen(p3)
 			onClose = var8,
 			placeId = target.placeId,
 			sessionId = target.sessionId,
-			snapPoints = { 0.5 },
+			snapPoints = if fFlagBuildExperienceChatSheetReversedContentModule then list else { 0.5 },
 			universeId = target.universeId
 		}) else nil
 	})
@@ -476,7 +478,7 @@ local function BuildGetUsersScreen(p3)
 	})
 end
 
-local list = {
+local list_1 = {
 	{ [t.BuildHome] = { screen = BuildHomeScreen } },
 	{
 		[t.BuildChat] = {
@@ -747,20 +749,20 @@ local list = {
 }
 
 if fFlagBuildExperienceMonetizationNativeUIModule then
-	table.insert(list, {
+	table.insert(list_1, {
 		[buildOverflowMenuScreensModule.Screens.BuildMonetization] = { screen = BuildMonetizationScreen }
 	})
 end
 if fFlagBuildExperienceAnalytics then
-	table.insert(list, {
+	table.insert(list_1, {
 		[buildOverflowMenuScreensModule.Screens.BuildStats] = { screen = buildOverflowMenuScreensModule.BuildStatsScreen }
 	})
 end
 if fFlagEnableBuildAdPromotionModule then
-	table.insert(list, { [t.BuildGetUsers] = { screen = BuildGetUsersScreen } })
+	table.insert(list_1, { [t.BuildGetUsers] = { screen = BuildGetUsersScreen } })
 end
-table.insert(list, { [t.BuildSearch] = { screen = BuildSearchScreen } })
-local var7 = roactNavigationModule.createRobloxStackNavigator(list, { initialRouteName = t.BuildHome })
+table.insert(list_1, { [t.BuildSearch] = { screen = BuildSearchScreen } })
+local var7 = roactNavigationModule.createRobloxStackNavigator(list_1, { initialRouteName = t.BuildHome })
 local var8 = roactNavigationModule.createAppContainer(var7)
 
 local function BuildPage(p4)

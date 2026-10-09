@@ -1,9 +1,7 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
+﻿local parent = script:FindFirstAncestor("MomentsCommon").Parent
 local dashModule = require(parent.Dash)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local fFlagMomentsProfileGridInfiniteLoadModule = require(momentsCommon.Flags.FFlagMomentsProfileGridInfiniteLoad)
 local button = foundationModule.Button
 local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
 local scrollView = foundationModule.ScrollView
@@ -38,7 +36,7 @@ local function GridItems(p1)
 end
 
 return function(p2)
-	-- upvalues: reactModule (ref), useTokens (ref), dashModule (ref), fFlagMomentsProfileGridInfiniteLoadModule (ref), view (ref), scrollView (ref), scrollBarVisibility (ref), GridItems (ref), button (ref), foundationModule (ref)
+	-- upvalues: reactModule (ref), useTokens (ref), dashModule (ref), view (ref), scrollView (ref), scrollBarVisibility (ref), GridItems (ref), button (ref), foundationModule (ref)
 	local var1, var2 = reactModule.useState(Vector2.new(0, 0))
 	local var3, var4 = reactModule.useState(0)
 	local var5 = useTokens()
@@ -86,21 +84,19 @@ return function(p2)
 		-- upvalues: shouldShowShowMoreButton (ref), p2 (ref), var3 (ref), dashModule (copy)
 		return if shouldShowShowMoreButton then dashModule.slice(p2.items, 1, math.min(#p2.items, var3)) else p2.items
 	end, { p2.items, shouldShowShowMoreButton, var3 })
+	reactModule.useEffect(function()
+		-- upvalues: p2 (ref), shouldShowShowMoreButton (ref), var1 (ref), var8 (ref), var7 (ref), var3 (ref), var12 (ref), var11 (ref)
+		if not p2.enableInfiniteScroll or not shouldShowShowMoreButton then return end
+		if var1.Y <= 0 or var8.Y <= 0 or var7 <= 0 then return end
+		if #p2.items < var3 then return end
+		if math.ceil(#var12 / var7) * var8.Y <= var1.Y then
+			var11()
+		end
+	end, {
+		var1, var12, shouldShowShowMoreButton, p2.enableInfiniteScroll, p2.items,
+		var7, var8, var11
+	})
 	
-	if fFlagMomentsProfileGridInfiniteLoadModule then
-		reactModule.useEffect(function()
-			-- upvalues: p2 (ref), shouldShowShowMoreButton (ref), var1 (ref), var8 (ref), var7 (ref), var3 (ref), var12 (ref), var11 (ref)
-			if not p2.enableInfiniteScroll or not shouldShowShowMoreButton then return end
-			if var1.Y <= 0 or var8.Y <= 0 or var7 <= 0 then return end
-			if #p2.items < var3 then return end
-			if math.ceil(#var12 / var7) * var8.Y <= var1.Y then
-				var11()
-			end
-		end, {
-			var1, var12, shouldShowShowMoreButton, p2.enableInfiniteScroll, p2.items,
-			var7, var8, var11
-		})
-	end
 	return if p2.items == nil or #p2.items == 0 then reactModule.createElement(view, { tag = "shrink size-full", onAbsoluteSizeChanged = var6 }, { EmptyState = p2.renderEmptyState() }) else reactModule.createElement(view, { tag = "shrink size-full", onAbsoluteSizeChanged = var6 }, {
 		GridViewContainer = reactModule.createElement(view, { tag = "size-full" }, {
 			ScrollView = reactModule.createElement(scrollView, {
@@ -114,13 +110,13 @@ return function(p2)
 					Padding = UDim.new(0, var5.Padding.Large)
 				},
 				LayoutOrder = if p2.layoutOrder then p2.layoutOrder else 1,
-				onCanvasPositionChanged = if p2.enableInfiniteScroll then if fFlagMomentsProfileGridInfiniteLoadModule then reactModule.useCallback(function(p3)
+				onCanvasPositionChanged = if p2.enableInfiniteScroll then reactModule.useCallback(function(p3)
 					-- upvalues: shouldShowShowMoreButton (ref), var8 (ref), var11 (ref)
 					if not shouldShowShowMoreButton then return end
 					if p3.AbsoluteCanvasSize.Y - var8.Y <= p3.CanvasPosition.Y + p3.AbsoluteSize.Y then
 						var11()
 					end
-				end, { shouldShowShowMoreButton, var11, var8 }) else nil else nil,
+				end, { shouldShowShowMoreButton, var11, var8 }) else nil,
 				scroll = {
 					AutomaticCanvasSize = Enum.AutomaticSize.Y,
 					CanvasSize = UDim2.fromScale(1, 0),

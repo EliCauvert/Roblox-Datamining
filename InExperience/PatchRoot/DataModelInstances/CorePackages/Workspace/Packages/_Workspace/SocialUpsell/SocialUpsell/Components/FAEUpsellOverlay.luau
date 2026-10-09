@@ -12,7 +12,6 @@ local upsellEntrySurfaceTypeModule = require(socialUpsell.Analytics.Enum.UpsellE
 local socialUpsellTypeModule = require(socialUpsell.Enum.SocialUpsellType)
 local upsellComponentModule = require(socialUpsell.Analytics.Enum.UpsellComponent)
 local fFlagEnableCountdownBadgeModule = require(socialUpsell.Flag.FFlagEnableCountdownBadge)
-local fFlagSupportVPCModule = require(socialUpsell.Flag.FFlagSupportVPC)
 local assets = foundationCloudAssetsModule.Assets
 local preloadAsset = foundationCloudAssetsModule.preloadAsset
 local ampUpsellModule = require(parent.AmpUpsell)
@@ -41,7 +40,7 @@ local forceAegisPhase2Modal = game:DefineFastFlag("ForceAegisPhase2Modal", false
 local fFlagTFWithActionsCheck = require(parent.SharedFlags).FFlagTFWithActionsCheck
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useSocialUpsellOverlayControllerModule (ref), useLocalization (ref), fFlagAddFriendsPageFAEUpsell (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), fFlagTFWithActionsCheck (ref), reactModule (ref), forceAegisPhase2Modal (ref), upsellEntrySurfaceTypeModule (ref), upsellComponentModule (ref), fFlagSupportVPCModule (ref), fFlagMakeVPCFAECheckMoreGeneric (ref), fFlagAddFriendsPageUpdateAmpRules (ref), socialUpsellTypeModule (ref), openAmpWizardContainer (ref), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (ref), accessResponseEnum (ref), fStringCoreContentAmpNameSpace (ref), startFacialAgeEstimationModule (ref), fFlagEnableCountdownBadgeModule (ref), fIntCommsFAELockTimestampModule (ref), upsellOverlayModule (ref), createCommonOverlayPropsModule (ref), var2 (write), AEGISPhase2ShowImageOnFAEOverlay (ref), var1 (ref)
+	-- upvalues: useDispatch (ref), useSocialUpsellOverlayControllerModule (ref), useLocalization (ref), fFlagAddFriendsPageFAEUpsell (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), fFlagTFWithActionsCheck (ref), reactModule (ref), forceAegisPhase2Modal (ref), upsellEntrySurfaceTypeModule (ref), upsellComponentModule (ref), fFlagMakeVPCFAECheckMoreGeneric (ref), fFlagAddFriendsPageUpdateAmpRules (ref), socialUpsellTypeModule (ref), openAmpWizardContainer (ref), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (ref), accessResponseEnum (ref), fStringCoreContentAmpNameSpace (ref), startFacialAgeEstimationModule (ref), fFlagEnableCountdownBadgeModule (ref), fIntCommsFAELockTimestampModule (ref), upsellOverlayModule (ref), createCommonOverlayPropsModule (ref), var2 (write), AEGISPhase2ShowImageOnFAEOverlay (ref), var1 (ref)
 	p1 = p1 or {}
 	local var3 = useDispatch()
 	local var4 = useSocialUpsellOverlayControllerModule(p1.isInExperience)
@@ -81,81 +80,59 @@ return function(p1)
 		var5,
 		if fFlagAddFriendsPageFAEUpsell then p1.upsellEntryComponent else nil
 	})
-	local useCallback = reactModule.useCallback
-	useCallback = useCallback(function()
-		-- upvalues: var4 (ref), p1 (ref), fFlagSupportVPCModule (copy), fFlagMakeVPCFAECheckMoreGeneric (copy), fFlagAddFriendsPageUpdateAmpRules (copy), socialUpsellTypeModule (copy), var3 (ref), openAmpWizardContainer (copy), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (copy), accessResponseEnum (copy), fStringCoreContentAmpNameSpace (copy), upsellEntrySurfaceTypeModule (copy), fFlagEnableAEGIS2CommsFAEUpsell (copy), startFacialAgeEstimationModule (copy)
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref), p1 (ref), fFlagMakeVPCFAECheckMoreGeneric (copy), fFlagAddFriendsPageUpdateAmpRules (copy), upsellEntrySurfaceTypeModule (copy), socialUpsellTypeModule (copy), var3 (ref), openAmpWizardContainer (copy), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (copy), accessResponseEnum (copy), fStringCoreContentAmpNameSpace (copy), fFlagEnableAEGIS2CommsFAEUpsell (copy), startFacialAgeEstimationModule (copy)
 		var4.closeSocialOverlay()
 		
 		if p1.onAccept then
 			p1.onAccept()
 		end
-		if not fFlagSupportVPCModule then
-			if fFlagMakeVPCFAECheckMoreGeneric then
-				if fFlagAddFriendsPageUpdateAmpRules and p1.shouldIncludeVPC then
-					var3(openAmpWizardContainer(fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature, function(p2, _)
-						-- upvalues: accessResponseEnum (copy), p1 (copy)
-						if p2 == accessResponseEnum.Granted then
-							if p1.onSuccess then
-								p1.onSuccess()
-								
-								return
-							end
-						elseif p1.onFailure then
-							p1.onFailure()
-						end
-					end, nil, p1.entryPointEventCtx or socialUpsellTypeModule.FacialAgeEstimation .. (p1.upsellEntrySurface or ""), nil, fStringCoreContentAmpNameSpace))
-					
-					return
-				elseif game.JobId ~= "" and not fFlagEnableAEGIS2CommsFAEUpsell then return end
-				var3(startFacialAgeEstimationModule(if fFlagSupportVPCModule and p1.shouldIncludeVPC then p1.entryPointEventCtx or socialUpsellTypeModule.FacialAgeEstimation .. (p1.upsellEntrySurface or "") else p1.entryPointEventCtx, p1.onSuccess, p1.onFailure, p1.upsellEntrySurface, if fFlagEnableAEGIS2CommsFAEUpsell then p1.isInExperience else nil, if fFlagSupportVPCModule then p1.shouldIncludeVPC else nil))
-				
-				return
-			elseif fFlagAddFriendsPageUpdateAmpRules and p1.upsellEntrySurface == upsellEntrySurfaceTypeModule.AddFriendsPage then
-				var3(openAmpWizardContainer(fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature, function(p2, _)
-					-- upvalues: accessResponseEnum (copy), p1 (copy)
-					if p2 == accessResponseEnum.Granted then
-						if p1.onSuccess then
-							p1.onSuccess()
-							
-							return
-						end
-					elseif p1.onFailure then
-						p1.onFailure()
+		if not fFlagMakeVPCFAECheckMoreGeneric and fFlagAddFriendsPageUpdateAmpRules and p1.upsellEntrySurface == upsellEntrySurfaceTypeModule.AddFriendsPage then
+			var3(openAmpWizardContainer(fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature, function(p2, _)
+				-- upvalues: accessResponseEnum (copy), p1 (copy)
+				if p2 == accessResponseEnum.Granted then
+					if p1.onSuccess then
+						p1.onSuccess()
+						
+						return
 					end
-				end, nil, p1.entryPointEventCtx or socialUpsellTypeModule.FacialAgeEstimation .. upsellEntrySurfaceTypeModule.AddFriendsPage, nil, fStringCoreContentAmpNameSpace, nil, nil, nil, true))
-				
-				return
-			end
-		end
+				elseif p1.onFailure then
+					p1.onFailure()
+				end
+			end, nil, p1.entryPointEventCtx or socialUpsellTypeModule.FacialAgeEstimation .. upsellEntrySurfaceTypeModule.AddFriendsPage, nil, fStringCoreContentAmpNameSpace, nil, nil, nil, true))
+			
+			return
+		elseif game.JobId ~= "" and not fFlagEnableAEGIS2CommsFAEUpsell then return end
+		var3(startFacialAgeEstimationModule(if fFlagMakeVPCFAECheckMoreGeneric and p1.shouldIncludeVPC then p1.entryPointEventCtx or socialUpsellTypeModule.FacialAgeEstimation .. (p1.upsellEntrySurface or "") else p1.entryPointEventCtx, p1.onSuccess, p1.onFailure, p1.upsellEntrySurface, if fFlagEnableAEGIS2CommsFAEUpsell then p1.isInExperience else nil, if fFlagMakeVPCFAECheckMoreGeneric then p1.shouldIncludeVPC else nil))
 	end, {
 		var3, var4.closeSocialOverlay, p1.upsellEntrySurface, p1.entryPointEventCtx,
 		p1.onAccept, p1.onSuccess, p1.onFailure, p1.isInExperience,
-		if fFlagSupportVPCModule or fFlagMakeVPCFAECheckMoreGeneric then p1.shouldIncludeVPC else nil
+		if fFlagMakeVPCFAECheckMoreGeneric then p1.shouldIncludeVPC else nil
 	})
-	local var9 = reactModule.useCallback(function()
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
 		if p1.onDismiss then
 			p1.onDismiss()
 		end
 	end, { p1.onDismiss })
-	local var10 = reactModule.useMemo(function()
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: fFlagEnableCountdownBadgeModule (copy), p1 (ref), fIntCommsFAELockTimestampModule (copy)
 		return if fFlagEnableCountdownBadgeModule and p1.countDownBadgeText then {
 			text = p1.countDownBadgeText,
 			deadlineUtcTimestamp = fIntCommsFAELockTimestampModule
 		} else nil
 	end, { p1.countDownBadgeText })
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: fFlagAddFriendsPageFAEUpsell (copy), p1 (ref), upsellEntrySurfaceTypeModule (copy), var5 (ref), fFlagEnableAEGIS2CommsFAEUpsell (copy), forceAegisPhase2Modal (copy), useCallback (ref)
+	local var12 = reactModule.useMemo(function()
+		-- upvalues: fFlagAddFriendsPageFAEUpsell (copy), p1 (ref), upsellEntrySurfaceTypeModule (copy), var5 (ref), fFlagEnableAEGIS2CommsFAEUpsell (copy), forceAegisPhase2Modal (copy), var9 (ref)
 		return {
 			text = if fFlagAddFriendsPageFAEUpsell and p1.upsellEntrySurface == upsellEntrySurfaceTypeModule.AddFriendsPage then var5.Unlock elseif fFlagEnableAEGIS2CommsFAEUpsell and (forceAegisPhase2Modal or p1.isPhase2) and not p1.isInExperience then var5.UnlockChat else var5.Continue,
-			onActivated = useCallback
+			onActivated = var9
 		}
 	end, {
 		if fFlagEnableAEGIS2CommsFAEUpsell then p1.isPhase2 else nil,
 		p1.isInExperience,
 		var5,
-		useCallback,
+		var9,
 		if fFlagAddFriendsPageFAEUpsell then p1.upsellEntrySurface else nil
 	})
 	reactModule.useEffect(function()
@@ -167,12 +144,12 @@ return function(p1)
 	end, { p1.onMounted })
 	
 	return reactModule.createElement(upsellOverlayModule, createCommonOverlayPropsModule({
-		onClose = var9,
-		countDownBadge = var10,
+		onClose = var10,
+		countDownBadge = var11,
 		bodyText = var8,
 		title = var7,
 		imageId = if fFlagAddFriendsPageFAEUpsell and p1.upsellEntrySurface == upsellEntrySurfaceTypeModule.AddFriendsPage then var2 elseif fFlagEnableAEGIS2CommsFAEUpsell and (forceAegisPhase2Modal or p1.isPhase2) and (if AEGISPhase2ShowImageOnFAEOverlay then false else p1.isInExperience) then nil else var1,
-		primaryAction = var11,
+		primaryAction = var12,
 		impressionId = p1.impressionId,
 		upsellEntryComponent = p1.upsellEntryComponent,
 		upsellEntrySurface = p1.upsellEntrySurface,

@@ -31,6 +31,7 @@ local trackBuildOpenSafetyServiceModule = require(buildExperience.utils.trackBui
 local fFlagReportBuildUIVisibilityModule = require(buildExperience.Flags.FFlagReportBuildUIVisibility)
 local clientLogsCollectorModule = require(buildExperience.Chat.clientLogsCollector)
 local fFlagBuildExperienceUserMessageHapticFeedbackModule = require(buildExperience.Flags.FFlagBuildExperienceUserMessageHapticFeedback)
+local fFlagBuildExperienceChatSheetReversedContentModule = require(buildExperience.Flags.FFlagBuildExperienceChatSheetReversedContent)
 local localizationProvider = localizationModule.LocalizationProvider
 local var9 = if fFlagBuildExperienceUserMessageHapticFeedbackModule then require(parent.RobloxAppInteractionFeedbackConfig).AppInteractionFeedbackProvider else nil
 
@@ -41,6 +42,7 @@ end
 
 local fIntInGameBuildChatSheetSnapPoint = game:DefineFastInt("FIntInGameBuildChatSheetSnapPoint", 50)
 local list = { fIntInGameBuildChatSheetSnapPoint / 100 }
+local list_1 = { fIntInGameBuildChatSheetSnapPoint / 100, 1 }
 
 local function beginInstanceSelection()
 	-- upvalues: var5 (ref), var7 (ref), getPlayButtonStoreModule (ref), var6 (ref)
@@ -63,7 +65,7 @@ local function beginInstanceSelection()
 end
 
 local function ConnectedChatSheet(p1)
-	-- upvalues: getPlayButtonStoreModule (ref), var1 (ref), useCaptureToChatModule (ref), teamCreateUtilsModule (ref), buildModeLaunchModule (ref), fFlagReportBuildUIVisibilityModule (ref), trackBuildOpenSafetyServiceModule (ref), reactModule (ref), buildExperience (ref), chatSheetModule (ref), list (ref), fIntInGameBuildChatSheetSnapPoint (ref), fFlagBuildExperienceInGameShell (ref), var8 (ref), var2 (ref), var3 (ref), var4 (ref), fFlagBuildExperienceChatResourceAttachments (ref), beginInstanceSelection (ref)
+	-- upvalues: getPlayButtonStoreModule (ref), var1 (ref), useCaptureToChatModule (ref), teamCreateUtilsModule (ref), buildModeLaunchModule (ref), fFlagReportBuildUIVisibilityModule (ref), trackBuildOpenSafetyServiceModule (ref), reactModule (ref), buildExperience (ref), chatSheetModule (ref), list (ref), fFlagBuildExperienceChatSheetReversedContentModule (ref), list_1 (ref), fIntInGameBuildChatSheetSnapPoint (ref), fFlagBuildExperienceInGameShell (ref), var8 (ref), var2 (ref), var3 (ref), var4 (ref), fFlagBuildExperienceChatResourceAttachments (ref), beginInstanceSelection (ref)
 	local var10 = getPlayButtonStoreModule()
 	local var11 = var10.useIsActive()
 	local var12 = if var1 then useCaptureToChatModule(function()
@@ -90,7 +92,7 @@ local function ConnectedChatSheet(p1)
 			-- upvalues: var10 (ref)
 			var10.setIsActive(false)
 		end, { var10 }),
-		snapPoints = if var13 then list else { fIntInGameBuildChatSheetSnapPoint / 100 },
+		snapPoints = if var13 then list elseif fFlagBuildExperienceChatSheetReversedContentModule then list_1 else { fIntInGameBuildChatSheetSnapPoint / 100 },
 		topBarPillMenuTarget = if var11 and not var13 then t else nil,
 		universeId = if var14 then var14.universeId else nil,
 		placeId = if var14 then var14.placeId else nil,

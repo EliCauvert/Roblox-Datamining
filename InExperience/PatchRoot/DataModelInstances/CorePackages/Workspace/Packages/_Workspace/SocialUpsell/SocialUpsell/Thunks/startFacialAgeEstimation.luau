@@ -11,7 +11,7 @@ local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigatio
 local socialUpsellTypeModule = require(socialUpsell.Enum.SocialUpsellType)
 local fFlagEnableAEGIS2CommsFAEUpsell = require(parent.SharedFlags).FFlagEnableAEGIS2CommsFAEUpsell
 local manuallyInvokeAmpUpsell2 = game:DefineFastFlag("ManuallyInvokeAmpUpsell2", false)
-local fFlagSupportVPCModule = require(socialUpsell.Flag.FFlagSupportVPC)
+local fFlagMakeVPCFAECheckMoreGeneric = require(parent.SharedFlags).FFlagMakeVPCFAECheckMoreGeneric
 local manuallyInvokeAmpUpsellModule = require(socialUpsell.Utils.manuallyInvokeAmpUpsell)
 local fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature = require(parent.SharedFlags).FStringTriggerAgeCheckUpsellIncludingVPCAmpFeature
 local fStringCoreContentAmpNameSpace = require(parent.SharedFlags).FStringCoreContentAmpNameSpace
@@ -20,10 +20,10 @@ local var2 = if manuallyInvokeAmpUpsell2 then require(socialUpsell.Flag.FStringC
 local var3 = if manuallyInvokeAmpUpsell2 then require(socialUpsell.Flag.FStringCommsFAENamespace) else game:DefineFastString("CommsFAENamespace", "social/Upsells")
 
 return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: fFlagSupportVPCModule (ref), socialUpsellTypeModule (ref), accessResponseEnum (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), inExpAmpWizardController (ref), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (ref), fStringCoreContentAmpNameSpace (ref), openAmpWizardContainer (ref), manuallyInvokeAmpUpsell2 (ref), manuallyInvokeAmpUpsellModule (ref), var2 (ref), var3 (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), navigateDown (ref)
+	-- upvalues: fFlagMakeVPCFAECheckMoreGeneric (ref), socialUpsellTypeModule (ref), accessResponseEnum (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), inExpAmpWizardController (ref), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (ref), fStringCoreContentAmpNameSpace (ref), openAmpWizardContainer (ref), manuallyInvokeAmpUpsell2 (ref), manuallyInvokeAmpUpsellModule (ref), var2 (ref), var3 (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), navigateDown (ref)
 	return function(p7)
-		-- upvalues: fFlagSupportVPCModule (copy), p6 (ref), p1 (ref), socialUpsellTypeModule (copy), p4 (ref), accessResponseEnum (copy), p2 (ref), p3 (ref), fFlagEnableAEGIS2CommsFAEUpsell (copy), p5 (ref), inExpAmpWizardController (copy), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (copy), fStringCoreContentAmpNameSpace (copy), openAmpWizardContainer (copy), manuallyInvokeAmpUpsell2 (copy), manuallyInvokeAmpUpsellModule (copy), var2 (copy), var3 (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateBack (copy), navigateDown (copy)
-		if fFlagSupportVPCModule and p6 then
+		-- upvalues: fFlagMakeVPCFAECheckMoreGeneric (copy), p6 (ref), p1 (ref), socialUpsellTypeModule (copy), p4 (ref), accessResponseEnum (copy), p2 (ref), p3 (ref), fFlagEnableAEGIS2CommsFAEUpsell (copy), p5 (ref), inExpAmpWizardController (copy), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (copy), fStringCoreContentAmpNameSpace (copy), openAmpWizardContainer (copy), manuallyInvokeAmpUpsell2 (copy), manuallyInvokeAmpUpsellModule (copy), var2 (copy), var3 (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateBack (copy), navigateDown (copy)
+		if fFlagMakeVPCFAECheckMoreGeneric and p6 then
 			local p8 = p1 or socialUpsellTypeModule.FacialAgeEstimation .. (p4 or "")
 			
 			local function vpcCompletionCallback(p9, _)

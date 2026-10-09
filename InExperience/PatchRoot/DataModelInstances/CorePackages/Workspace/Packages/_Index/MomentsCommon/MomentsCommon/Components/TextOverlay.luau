@@ -142,6 +142,7 @@ return function(p1)
 		TextWrapped = true,
 		Selectable = p1.editable == true,
 		Size = size,
+		Visible = if p1.textVisible == false then false else nil,
 		ZIndex = var1.zIndex,
 		ref = p1.textBoxRef,
 		[reactModule.Change.Text] = p1.onTextChanged

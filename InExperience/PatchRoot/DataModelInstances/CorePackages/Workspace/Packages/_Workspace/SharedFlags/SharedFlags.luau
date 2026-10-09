@@ -112,6 +112,7 @@ local sduiClientDrivenTemplates = game:DefineFastFlag("SduiClientDrivenTemplates
 local sduiClientDrivenTemplates_1 = game:DefineFastFlag("SduiEdpTemplatePrewarm", false) and (sduiEdpClientTemplateCache and sduiClientDrivenTemplates)
 local sduiLaunchTemplatePrewarm2 = game:DefineFastFlag("SduiLaunchTemplatePrewarm2", false)
 local sduiAdvertiseRuntimeSupportSets_1 = game:DefineFastFlag("SduiExtendedCapabilitiesDiscovery", false) and sduiAdvertiseRuntimeSupportSets
+local sduiAdvertiseRuntimeSupportSets_1_1 = game:DefineFastFlag("SduiExtendedCapabilitiesPrompts", false) and sduiAdvertiseRuntimeSupportSets_1
 local fFlagLuaAppEnableSearchStreamingEndpointModule = require(script.FFlagLuaAppEnableSearchStreamingEndpoint)
 local fFlagLuaAppEnableSearchStreamingEndpointModule_1 = game:DefineFastFlag("SduiSearchClientTemplateCache", false) and (sduiPageEntryPointResolvedSlot_1 and (sduiAdvertiseRuntimeSupportSets_1 and fFlagLuaAppEnableSearchStreamingEndpointModule))
 local fFlagUserSearchPresenceStoreMigration = game:DefineFastFlag("SduiUserSearchTile", false) and (require(script.FFlagEnableGetFriendshipStatus) and require(script.FFlagUserSearchPresenceStoreMigration))
@@ -874,7 +875,6 @@ return {
 	FFlagLuaAppLogOmniRecommendationsMetadata = game:DefineFastFlag("LuaAppLogOmniRecommendationsMetadata2", false),
 	FFlagLuaAppUseEffectInSignalPreprocessing = game:DefineFastFlag("LuaAppUseEffectInSignalPreprocessing", false),
 	FFlagSduiExperimentalComponent = game:DefineFastFlag("SduiExperimentalComponent", false),
-	FFlagLuaAppResetHoverOnSduiPlayButtonActivation = game:DefineFastFlag("LuaAppResetHoverOnSduiPlayButtonActivation", false),
 	FFlagLuaAppSortHeaderAnchorTag = game:DefineFastFlag("LuaAppSortHeaderAnchorTag", false),
 	FFlagLuaAppRfyRevealRows = game:DefineFastFlag("LuaAppRfyRevealRows2", false),
 	FFlagLuaAppBadgesSeeAllEnabled = game:DefineFastFlag("LuaAppBadgesSeeAllEnabled4", false),
@@ -1867,6 +1867,7 @@ return {
 	FFlagSduiTemplateApiPostRequest = sduiTemplateApiPostRequest,
 	FFlagSduiAdvertiseRuntimeSupportSets = sduiAdvertiseRuntimeSupportSets,
 	FFlagSduiExtendedCapabilitiesDiscovery = sduiAdvertiseRuntimeSupportSets_1,
+	FFlagSduiExtendedCapabilitiesPrompts = sduiAdvertiseRuntimeSupportSets_1_1,
 	FFlagSduiUseInputData = sduiApiStoreExposeGetInputData_1,
 	FFlagSduiPageEntryPointResolvedSlot = sduiPageEntryPointResolvedSlot,
 	FFlagSduiSrpScrollAway = game:DefineFastFlag("SduiSrpScrollAway", false),

@@ -147,7 +147,6 @@
 	FIntAXLookImpressionDeferTimeoutMs = require(script.FIntAXLookImpressionDeferTimeoutMs),
 	FFlagAXCatalogCategoriesSDUI = require(script.FFlagAXCatalogCategoriesSDUI),
 	FFlagAXOutfitPageRevamp = require(script.FFlagAXOutfitPageRevamp),
-	FFlagAXCatalogCategoriesSDUITaxonomy = require(script.FFlagAXCatalogCategoriesSDUITaxonomy),
 	FFlagAXCatalogCategoriesSDUIPillTitleNormalization = require(script.FFlagAXCatalogCategoriesSDUIPillTitleNormalization),
 	FFlagAXCatalogCategoriesSDUIDebugDiff = require(script.FFlagAXCatalogCategoriesSDUIDebugDiff),
 	FFlagAXCatalogCategoriesSDUILinks = require(script.FFlagAXCatalogCategoriesSDUILinks),
