@@ -7,6 +7,7 @@ return {
 	FocusNavigationContext = require(script.FocusNavigationContext),
 	useActiveEventMap = require(script.useActiveEventMap),
 	useFocusedGuiObject = require(script.useFocusedGuiObject),
+	useEventDispatched = require(script.useEventDispatched),
 	useFocusGuiObject = require(script.useFocusGuiObject),
 	useEventMap = require(script.useEventMap),
 	useEventHandler = require(script.useEventHandler),
