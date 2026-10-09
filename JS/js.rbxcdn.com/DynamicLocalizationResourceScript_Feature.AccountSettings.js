@@ -1946,6 +1946,7 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Response.PasswordLowComplexity": "Password must contain at least one letter and at least one number or symbol.",
     "Response.PasswordTooSimilarToUsername": "Password shouldn't be too similar to your username.",
     "Heading.IdentityVerificationSetting": "Identity verification setting",
-    "Label.IdentityVerification": "Identity verification setting"
+    "Label.IdentityVerification": "Identity verification setting",
+    "Description.NoApprovedExperiencesChildSide": "No allowed games yet. Once your parent approves a game you requested, it'll show up here."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");

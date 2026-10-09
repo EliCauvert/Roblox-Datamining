@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "46c16e97-4f2a-f14d-695a-7834530c52f7")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "96fce3d1-978e-522c-1628-2ebc17964218")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 118413, e => {
@@ -3706,7 +3706,7 @@
                     color: "secondary",
                     component: "span",
                     children: [U, (0, a.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/b5143cbf7654fcce8ee8e764e247e76cdd9dff12/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/509481769d176d0b09fc72f8748a5c2c53774a17/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -3880,5 +3880,5 @@
     e.s(["HourglassEmptyIcon", () => a.HourglassEmpty])
 }]);
 
-//# debugId=46c16e97-4f2a-f14d-695a-7834530c52f7
-//# sourceMappingURL=3zt4z_egpes2y.js.map
+//# debugId=96fce3d1-978e-522c-1628-2ebc17964218
+//# sourceMappingURL=0pfimqzm-9ta0.js.map

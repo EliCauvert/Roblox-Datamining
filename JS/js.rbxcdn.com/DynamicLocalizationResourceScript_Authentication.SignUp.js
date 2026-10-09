@@ -272,6 +272,8 @@ Roblox.LangDynamic["Authentication.SignUp"] = {
     "Label.PasswordErrorTooSimilarTooUsername": "Isn't too similar to username",
     "Description.VerificationLinkingTextWithLinks": "Your Roblox account will be linked to your account on {platform}. You can unlink from the Settings screen at any time. There may be a cool down before being able to link to another account on {platform}. By clicking Sign Up, you are agreeing to the {openTermsTag}Terms of Use{closeTermsTag} including the arbitration clause and you are acknowledging the {openPrivacyTag}Privacy Policy{closePrivacyTag}.",
     "Label.PasswordErrorLowComplexity": "Has a letter and a number or symbol",
-    "Label.PasswordErrorTooSimilarToUsername": "Isn't too similar to username"
+    "Label.PasswordErrorTooSimilarToUsername": "Isn't too similar to username",
+    "Header.CancelAccountCreation": "Cancel account creation?",
+    "Action.ContinueSetup": "Continue setup"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Authentication.SignUp");
