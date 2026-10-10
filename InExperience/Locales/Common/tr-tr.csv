@@ -110,7 +110,6 @@ Authentication.SignUp.Action.Create,Oluştur
 Authentication.SignUp.Action.CreateAccountSentenceCase,Hesap oluştur
 Authentication.SignUp.Action.ExitModalLeave,Ayrıl
 Authentication.SignUp.Action.RespawnNow,Şimdi sıfırla
-Authentication.SignUp.Action.StartPlay,Oynamaya başla
 Authentication.SignUp.Button.OKCaptialized,Tamam
 Authentication.SignUp.Button.RetryLogIn,Giriş yapmayı tekrar dene
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} için hesap zaten bir Roblox hesabına bağlı. Lütfen tekrar giriş yapmayı dene.
@@ -724,6 +723,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Kategori *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,Diğer
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Bir kategori seç
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Satın alma sorunu
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,Öneri
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,En fazla {MAX} karakter
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Ayrıntılar *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Seçimi kaldır
@@ -731,6 +731,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,Oyun sürü
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,Neyin eksik olduğunu ve bunu en son ne zaman gördüğünü açıkla. Hesabın ele geçirildiyse lütfen Roblox Müşteri Desteği'ndeki destek talebi numaranı ve ilgili tüm ayrıntıları ekle.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,İsteğini veya sorununu burada açıkla. Durumu anlamamıza yardımcı olmak için mümkün olduğunca fazla ayrıntı ver.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Bize ne satın almaya çalıştığını, bunun ne zaman gerçekleştiğini ve toplam değerini (ör. 500 Robux/4,99 $) söyle. Gördüğün hata mesajlarını ekle."
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,Nelerin eklenmesini veya iyileştirilmesini istediğini ve bunun oyunu neden daha iyi hâle getireceğini paylaş.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Kötüye kullanım bildirmeye mi çalışıyorsun?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Bunun yerine bir rapor gönder.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Seç

@@ -7,6 +7,7 @@ local reactRobloxModule = require(parent.ReactRoblox)
 local reactUtilsModule = require(parent.ReactUtils)
 local otterModule = require(parent.Otter)
 local useDismissOnEscapeOrMenuModule = require(chatUIPrimitives.Hooks.useDismissOnEscapeOrMenu)
+local fFlagExpChatExpressionTrayReducedMotionModule = require(chatUIPrimitives.Flags.FFlagExpChatExpressionTrayReducedMotion)
 local useEventConnection = reactUtilsModule.useEventConnection
 local t = { dampingRatio = 1, frequency = 3.5 }
 
@@ -27,59 +28,69 @@ local function _(value, p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), getSafeInsets (ref), useEventConnection (ref), otterModule (ref), t (ref), useDismissOnEscapeOrMenuModule (ref), reactRobloxModule (ref)
+	-- upvalues: foundationModule (ref), fFlagExpChatExpressionTrayReducedMotionModule (ref), reactModule (ref), getSafeInsets (ref), useEventConnection (ref), otterModule (ref), t (ref), useDismissOnEscapeOrMenuModule (ref), reactRobloxModule (ref)
 	local var1 = foundationModule.Hooks.useOverlay()
+	local var2 = if fFlagExpChatExpressionTrayReducedMotionModule then foundationModule.Hooks.usePreferences().reducedMotion else false
 	local isOpen = p1.isOpen
 	local height = p1.height or 240
-	local var2, var3 = reactModule.useState(false)
-	local var4, var5 = reactModule.useBinding(1)
-	local var6 = reactModule.useRef(nil)
-	local var7, var8 = reactModule.useState(getSafeInsets)
+	local var3, var4 = reactModule.useState(false)
+	local var5, var6 = reactModule.useBinding(1)
+	local var7 = reactModule.useRef(nil)
+	local var8, var9 = reactModule.useState(getSafeInsets)
 	useEventConnection(if var1 ~= nil then nil else var1:GetPropertyChangedSignal("AbsoluteSize"), reactModule.useCallback(function()
-		-- upvalues: var8 (ref), getSafeInsets (copy)
-		var8(function(p2)
+		-- upvalues: var9 (ref), getSafeInsets (copy)
+		var9(function(p2)
 			-- upvalues: getSafeInsets (copy)
-			local var9 = getSafeInsets()
+			local var10 = getSafeInsets()
 			
-			return if p2.left == var9.left and (p2.right == var9.right and p2.bottom == var9.bottom) then p2 else var9
+			return if p2.left == var10.left and (p2.right == var10.right and p2.bottom == var10.bottom) then p2 else var10
 		end)
 	end, {}))
-	local var9 = height + var7.bottom
+	local var10 = height + var8.bottom
 	reactModule.useEffect(function()
-		-- upvalues: isOpen (ref), var3 (ref), var6 (ref), otterModule (copy), var4 (ref), var5 (ref), t (copy)
-		if isOpen then
-			var3(true)
-			
-			if var6.current then
-				var6.current:destroy()
+		-- upvalues: var2 (write), var7 (ref), var6 (ref), isOpen (ref), var4 (ref), otterModule (copy), var5 (ref), t (copy)
+		if var2 then
+			if var7.current then
+				var7.current:destroy()
+				var7.current = nil
 			end
-			local var10 = otterModule.createSingleMotor(var4:getValue())
-			var6.current = var10
-			var10:onStep(var5)
-			var10:setGoal(otterModule.spring(0, t))
+			var6(if isOpen then 0 else 1)
+			var4(isOpen)
 			
 			return
-		elseif var6.current then
-			var6.current:setGoal(otterModule.spring(1, t))
-			var6.current:onComplete(function()
-				-- upvalues: var3 (copy)
-				var3(false)
+		elseif isOpen then
+			var4(true)
+			
+			if var7.current then
+				var7.current:destroy()
+			end
+			local var11 = otterModule.createSingleMotor(var5:getValue())
+			var7.current = var11
+			var11:onStep(var6)
+			var11:setGoal(otterModule.spring(0, t))
+			
+			return
+		elseif var7.current then
+			var7.current:setGoal(otterModule.spring(1, t))
+			var7.current:onComplete(function()
+				-- upvalues: var4 (copy)
+				var4(false)
 			end)
 		end
-	end, { isOpen })
+	end, { isOpen, var2 })
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref)
+		-- upvalues: var7 (ref)
 		return function()
-			-- upvalues: var6 (copy)
-			if var6.current then
-				var6.current:destroy()
-				var6.current = nil
+			-- upvalues: var7 (copy)
+			if var7.current then
+				var7.current:destroy()
+				var7.current = nil
 			end
 		end
 	end, {})
 	useDismissOnEscapeOrMenuModule(isOpen, p1.onPressedOutside)
 	
-	return if var2 and var1 ~= nil then reactRobloxModule.createPortal(reactModule.createElement(foundationModule.View, { tag = "size-full" }, {
+	return if var3 and var1 ~= nil then reactRobloxModule.createPortal(reactModule.createElement(foundationModule.View, { tag = "size-full" }, {
 		Backdrop = if isOpen then reactModule.createElement("TextButton", {
 			Text = "",
 			AutoButtonColor = false,
@@ -91,15 +102,15 @@ return reactModule.memo(function(p1)
 		Tray = reactModule.createElement(foundationModule.View, {
 			ZIndex = 2,
 			tag = "anchor-bottom-center stroke-standard stroke-default clip bg-surface-200",
-			Position = var4:map(function(p2)
-				-- upvalues: var9 (ref)
-				return UDim2.new(0.5, 0, 1, math.round(p2 * var9))
+			Position = var5:map(function(p2)
+				-- upvalues: var10 (ref)
+				return UDim2.new(0.5, 0, 1, math.round(p2 * var10))
 			end),
-			Size = UDim2.new(1, 0, 0, var9),
+			Size = UDim2.new(1, 0, 0, var10),
 			padding = {
-				bottom = UDim.new(0, var7.bottom),
-				left = UDim.new(0, var7.left),
-				right = UDim.new(0, var7.right)
+				bottom = UDim.new(0, var8.bottom),
+				left = UDim.new(0, var8.left),
+				right = UDim.new(0, var8.right)
 			},
 			onActivated = function() end,
 			stateLayer = {

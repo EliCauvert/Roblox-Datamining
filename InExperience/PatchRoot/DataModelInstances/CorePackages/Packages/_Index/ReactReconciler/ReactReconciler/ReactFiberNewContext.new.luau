@@ -4,6 +4,7 @@ local luauPolyfillModule = require(parent.LuauPolyfill)
 local number = luauPolyfillModule.Number
 local error = luauPolyfillModule.Error
 local console = require(parent.Shared).console
+local enableAllocationTrims = require(parent.Shared).ReactFeatureFlags.enableAllocationTrims
 local _ = require(parent.Shared)
 local _ = require(script.Parent.ReactInternalTypes)
 local unknownModule = require(script.Parent["ReactFiberStack.new"])
@@ -218,7 +219,7 @@ function t.prepareToReadContext(p7, p8, p9)
 end
 
 function t.readContext(p7, p8)
-	-- upvalues: reactGlobalsModule (ref), var6 (write), console (ref), var5 (write), number (ref), var4 (write), var3 (write), error (ref), noLanes (ref), isPrimaryRenderer (ref)
+	-- upvalues: reactGlobalsModule (ref), var6 (write), console (ref), var5 (write), number (ref), enableAllocationTrims (ref), var4 (write), var3 (write), error (ref), noLanes (ref), isPrimaryRenderer (ref)
 	if reactGlobalsModule.__DEV__ and var6 then
 		console.error("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo().")
 	end
@@ -232,7 +233,7 @@ function t.readContext(p7, p8)
 			var5 = p7
 			MAX_SAFE_INTEGER = number.MAX_SAFE_INTEGER
 		end
-		local t = {
+		local var9 = if enableAllocationTrims then { context = p7, observedBits = MAX_SAFE_INTEGER } else {
 			next = nil,
 			context = p7,
 			observedBits = MAX_SAFE_INTEGER
@@ -242,11 +243,23 @@ function t.readContext(p7, p8)
 			if var3 == nil then
 				error(error.new("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo()."))
 			end
-			var4 = t
-			var3.dependencies = { responders = nil, lanes = noLanes, firstContext = t }
+			var4 = var9
+			
+			if enableAllocationTrims then
+				local dependencies = var3.dependencies
+				
+				if dependencies == nil then
+					var3.dependencies = { lanes = noLanes, firstContext = var9 }
+				else
+					dependencies.lanes = noLanes
+					dependencies.firstContext = var9
+				end
+			else
+				var3.dependencies = { responders = nil, lanes = noLanes, firstContext = var9 }
+			end
 		else
-			var4.next = t
-			var4 = t
+			var4.next = var9
+			var4 = var9
 		end
 	end
 	return if isPrimaryRenderer then p7._currentValue else p7._currentValue2

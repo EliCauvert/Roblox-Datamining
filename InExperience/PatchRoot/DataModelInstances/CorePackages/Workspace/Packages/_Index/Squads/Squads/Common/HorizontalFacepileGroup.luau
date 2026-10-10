@@ -38,7 +38,8 @@ function HorizontalFacepileGroup(p1)
 			end
 			return avatarSize
 		end, { #var2.images, var2.avatarSize }), var2.avatarSize),
-		LayoutOrder = if var2.layoutOrder then var2.layoutOrder else nil
+		LayoutOrder = if var2.layoutOrder then var2.layoutOrder else nil,
+		testId = var2.testId
 	}, {
 		react.useMemo(function()
 			-- upvalues: var2 (write), react (copy), image (copy), var1 (ref)
@@ -52,7 +53,8 @@ function HorizontalFacepileGroup(p1)
 					backgroundStyle = if var2.imageBackgroundStyle then var2.imageBackgroundStyle else nil,
 					Size = UDim2.fromOffset(var2.avatarSize, var2.avatarSize),
 					Position = UDim2.new(0, var2.avatarSize * (i - 1) - (if i == 1 then 0 else 4) * (i - 1), 0.5, 0),
-					ZIndex = imagesCount - i + 1
+					ZIndex = imagesCount - i + 1,
+					testId = if var2.testId then `{var2.testId}--image-{i}` else nil
 				}, {
 					UIStroke = react.createElement("UIStroke", {
 						Color = if var2.imageBorderStyle then var2.imageBorderStyle.Color else var1.Color.Extended.Green.Green_800.Color3,
@@ -66,7 +68,8 @@ function HorizontalFacepileGroup(p1)
 			var2.avatarSize,
 			var2.images,
 			var2.imageBackgroundStyle,
-			var2.imageBorderStyle
+			var2.imageBorderStyle,
+			var2.testId
 		})
 	})
 end

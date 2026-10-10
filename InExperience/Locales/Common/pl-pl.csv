@@ -110,7 +110,6 @@ Authentication.SignUp.Action.Create,Utwórz
 Authentication.SignUp.Action.CreateAccountSentenceCase,Utwórz konto
 Authentication.SignUp.Action.ExitModalLeave,Opuść
 Authentication.SignUp.Action.RespawnNow,Odrodź się teraz
-Authentication.SignUp.Action.StartPlay,Rozpocznij grę
 Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Spróbuj zalogować się ponownie
 Authentication.SignUp.Description.AccountAlreadyLinked,Twoje konto w {platformAccountName} jest już połączone z kontem Roblox. Spróbuj zalogować się ponownie.
@@ -721,6 +720,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Kategoria *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,Inne
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Wybierz kategorię
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Problem z zakupem
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,Sugestia
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Maksymalna liczba znaków: {MAX}
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Szczegóły *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Odznacz
@@ -728,6 +728,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Podaj wsze
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Opisz, czego brakuje i kiedy ostatnio to widziałeś(-aś). Jeżeli Twoje konto zostało zhakowane, podaj numer zgłoszenia do zespołu wsparcia klienta Robloxa i wszelkie istotne szczegóły."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,"W tym miejscu opisz swoją prośbę lub problem. Podaj jak najwięcej szczegółów, aby pomóc nam zrozumieć sytuację."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Powiedz nam, co próbowałeś(-aś) kupić, kiedy to się stało i podaj całkowitą wartość (np. 500 Robuxów / 4,99 USD). Dołącz wszelkie wyświetlone komunikaty o błędach."
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,"Podziel się tym, co Twoim zdaniem powinno zostać dodane lub ulepszone, i wyjaśnij, dlaczego dzięki temu gra byłaby lepsza."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Próbujesz zgłosić naruszenie?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Zamiast tego prześlij zgłoszenie.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Zaznacz
@@ -1253,6 +1254,19 @@ Corescripts.AvatarContextMenu.FriendRequestPending,Oczekująca prośba o dodanie
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,Zablokowano tę osobę
 Corescripts.AvatarContextMenu.Wave,Pomachaj
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,Wyróżnione
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Kontynuuj grę
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Teleportacje
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Polecane przez Robloxa
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Strona główna – inne
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Strona główna – polecane
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Reklamy na portalu
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,Wyszukiwarka
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Wyszukiwanie reklam
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Reklamy sponsorowane
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Przewiń w dół
 Feature.Accessibility.Action.ScrollUp,Przewiń w górę
@@ -3174,7 +3188,7 @@ Feature.FaceChat.Subtitle.UnsupportedDevice,Twój sprzęt nie spełnia wymogów 
 Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,Wyłączenie kamery może poprawić wydajność w projekcie.
 Feature.FaceChat.Subtitle.VideoUnsupported,Aplikacja Roblox nie może używać twojej kamery do animowania awatara.
 Feature.Favorites.Label.Favorite,
-Feature.FlyoutSidePanel.Action.ContinuePlaying,Kontynuuj grę
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,Twój profil oraz Twoje treści i ustawienia zostały przeniesione do nowej lokalizacji.
 Feature.FlyoutSidePanel.Label.TooltipTitle,Przeniesiono <b>{itemName}</b>
 Feature.Friends.Action.AcceptFriend,

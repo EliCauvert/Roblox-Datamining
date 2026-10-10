@@ -10,10 +10,9 @@ local usePlayButtonState = gamePlayButtonModule.usePlayButtonState
 local playButtonStates = gamePlayButtonModule.PlayButtonStates
 local useNavigationFocus = navigationModule.useNavigationFocus
 local getSduiClientPageScope = sduiCoreSystemModule.getSduiClientPageScope
-local fFlagSduiPlayWithRewardGapFix = require(parent.SharedFlags).FFlagSduiPlayWithRewardGapFix
 
 return reactModule.memo(function(p1)
-	-- upvalues: useNavigationFocus (ref), reactModule (ref), usePlayButtonState (ref), playButtonStates (ref), usePlayWithRewardData (ref), fFlagSduiPlayWithRewardGapFix (ref), getSduiClientPageScope (ref), playWithRewardComponent (ref)
+	-- upvalues: useNavigationFocus (ref), reactModule (ref), usePlayButtonState (ref), playButtonStates (ref), usePlayWithRewardData (ref), getSduiClientPageScope (ref), playWithRewardComponent (ref)
 	local var1 = useNavigationFocus()
 	local var2, var3 = reactModule.useState(false)
 	local var4 = usePlayButtonState(p1.sduiContext and (p1.sduiContext.dependencies and p1.sduiContext.dependencies.networking), p1.universeId)
@@ -33,23 +32,19 @@ return reactModule.memo(function(p1)
 		end
 	})
 	local playWithRewardData = var6.playWithRewardData
-	local showPlayWithReward = var6.showPlayWithReward
-	local playWithRewardData_1 = nil
+	local playWithRewardData_1 = var5 and (var6.showPlayWithReward and playWithRewardData)
+	local var7 = var4.playButtonState ~= playButtonStates.Loading and (playWithRewardData and not playWithRewardData_1)
+	local configKey = p1.sduiContext and p1.sduiContext.configKey
+	reactModule.useEffect(function()
+		-- upvalues: configKey (ref), var7 (ref), getSduiClientPageScope (copy)
+		if configKey and var7 then
+			getSduiClientPageScope(configKey).set("filterPlayWithReward", true)
+			
+			return
+		end
+	end, { configKey, var7 })
 	
-	if fFlagSduiPlayWithRewardGapFix then
-		playWithRewardData_1 = var5 and (showPlayWithReward and playWithRewardData)
-		local var7 = var4.playButtonState ~= playButtonStates.Loading and (playWithRewardData and not playWithRewardData_1)
-		local configKey = p1.sduiContext and p1.sduiContext.configKey
-		reactModule.useEffect(function()
-			-- upvalues: configKey (ref), var7 (ref), getSduiClientPageScope (copy)
-			if configKey and var7 then
-				getSduiClientPageScope(configKey).set("filterPlayWithReward", true)
-				
-				return
-			end
-		end, { configKey, var7 })
-	end
-	return if fFlagSduiPlayWithRewardGapFix and not playWithRewardData_1 or (not var5 or not showPlayWithReward) or not playWithRewardData then nil else reactModule.createElement(playWithRewardComponent, {
+	return if playWithRewardData_1 then reactModule.createElement(playWithRewardComponent, {
 		universeId = p1.universeId,
 		placeId = p1.placeId,
 		placeIdOverride = p1.placeIdOverride,
@@ -60,5 +55,5 @@ return reactModule.memo(function(p1)
 		playWithRewardAdData = playWithRewardData.adData,
 		useLargerStyles = p1.useLargerStyles,
 		layoutOrder = p1.layoutOrder
-	})
+	}) else nil
 end)

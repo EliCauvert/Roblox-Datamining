@@ -24,6 +24,7 @@ local useLocalization = dependenciesModule.Hooks.useLocalization
 local squadExternalContractContext = require(parent.SquadsCore.SquadExternalContractProvider).SquadExternalContractContext
 local useCurrentSquadParentChannelId = require(parent.SquadsCore.Hooks).useCurrentSquadParentChannelId
 local fFlagSquadVoiceMenuFoundationRefactorModule = require(flags.FFlagSquadVoiceMenuFoundationRefactor)
+local fFlagSquadsEnableFoundationTestIdsModule = require(flags.FFlagSquadsEnableFoundationTestIds)
 local fFlagEnablePartyVoiceChangersInLua = sharedFlagsModule.FFlagEnablePartyVoiceChangersInLua
 local fFlagSquadsPresenceStoreMigration = require(parent.SquadsCore.Flags).FFlagSquadsPresenceStoreMigration
 local var1 = if fFlagSquadsPresenceStoreMigration then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
@@ -37,12 +38,13 @@ local t = {
 }
 
 local var3 = function(p1)
-	-- upvalues: useTokens (ref), react (ref), foundation (ref), fFlagSquadVoiceMenuFoundationRefactorModule (ref), contextualSlider (ref)
+	-- upvalues: useTokens (ref), react (ref), foundation (ref), fFlagSquadVoiceMenuFoundationRefactorModule (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), contextualSlider (ref)
 	local var4 = useTokens()
 	
 	return react.createElement(foundation.View, if fFlagSquadVoiceMenuFoundationRefactorModule then {
 		tag = "size-full-0 auto-y padding-y-small col gap-small",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = p1.LayoutOrder,
+		testId = p1.testId
 	} else {
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
@@ -55,12 +57,14 @@ local var3 = function(p1)
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, var4.Gap.Small)
 		},
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = p1.LayoutOrder,
+		testId = p1.testId
 	}, {
 		Label = react.createElement(foundation.Text, if fFlagSquadVoiceMenuFoundationRefactorModule then {
 			tag = "auto-xy text-truncate-end text-no-wrap text-align-x-left text-label-medium content-emphasis",
 			LayoutOrder = 1,
-			Text = p1.labelText
+			Text = p1.labelText,
+			testId = if fFlagSquadsEnableFoundationTestIdsModule then `{p1.testId}--label` else nil
 		} else {
 			TextWrapped = false,
 			LayoutOrder = 1,
@@ -69,7 +73,8 @@ local var3 = function(p1)
 			textStyle = var4.Color.Content.Emphasis,
 			TextTruncate = Enum.TextTruncate.AtEnd,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			Text = p1.labelText
+			Text = p1.labelText,
+			testId = if fFlagSquadsEnableFoundationTestIdsModule then `{p1.testId}--label` else nil
 		}),
 		SliderWrapper = react.createElement(foundation.View, if fFlagSquadVoiceMenuFoundationRefactorModule then { tag = "size-full-0 auto-y", LayoutOrder = 2 } else {
 			LayoutOrder = 2,
@@ -89,7 +94,7 @@ local var3 = function(p1)
 end
 
 local var4 = function(p1)
-	-- upvalues: useTokens (ref), react (ref), foundation (ref), fFlagSquadVoiceMenuFoundationRefactorModule (ref), imageSetLabel (ref), circle24Stroke1 (ref), circle16 (ref)
+	-- upvalues: useTokens (ref), react (ref), foundation (ref), fFlagSquadVoiceMenuFoundationRefactorModule (ref), imageSetLabel (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), circle24Stroke1 (ref), circle16 (ref)
 	local var5 = useTokens()
 	local color3 = var5.Color.Content.Emphasis.Color3
 	local transparency = var5.Color.Content.Emphasis.Transparency
@@ -97,7 +102,8 @@ local var4 = function(p1)
 	return react.createElement(foundation.View, if fFlagSquadVoiceMenuFoundationRefactorModule then {
 		tag = "size-full-0 auto-y padding-x-large padding-y-xsmall row align-x-left align-y-center gap-large",
 		LayoutOrder = p1.LayoutOrder,
-		onActivated = p1.onActivated
+		onActivated = p1.onActivated,
+		testId = p1.testId
 	} else {
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
@@ -110,7 +116,8 @@ local var4 = function(p1)
 			Padding = UDim.new(0, var5.Gap.Large)
 		},
 		LayoutOrder = p1.LayoutOrder,
-		onActivated = p1.onActivated
+		onActivated = p1.onActivated,
+		testId = p1.testId
 	}, {
 		Icon = react.createElement(imageSetLabel, {
 			BackgroundTransparency = 1,
@@ -123,7 +130,8 @@ local var4 = function(p1)
 		Label = react.createElement(foundation.Text, if fFlagSquadVoiceMenuFoundationRefactorModule then {
 			tag = "auto-xy fill text-truncate-end text-no-wrap text-align-x-left text-label-medium content-emphasis",
 			LayoutOrder = 2,
-			Text = p1.labelText
+			Text = p1.labelText,
+			testId = if fFlagSquadsEnableFoundationTestIdsModule then `{p1.testId}--label` else nil
 		} else {
 			TextWrapped = false,
 			LayoutOrder = 2,
@@ -133,7 +141,8 @@ local var4 = function(p1)
 			textStyle = var5.Color.Content.Emphasis,
 			TextTruncate = Enum.TextTruncate.AtEnd,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			Text = p1.labelText
+			Text = p1.labelText,
+			testId = if fFlagSquadsEnableFoundationTestIdsModule then `{p1.testId}--label` else nil
 		}),
 		RadioButtonContainer = react.createElement(foundation.View, if fFlagSquadVoiceMenuFoundationRefactorModule then {
 			tag = "auto-x row align-x-right align-y-center",
@@ -173,7 +182,7 @@ local var4 = function(p1)
 end
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useLocalUserId (ref), useIsVoiceFocused (ref), useEnableAudioFocusToggle (ref), react (ref), squadExternalContractContext (ref), fFlagSquadsPresenceStoreMigration (ref), var1 (ref), useSelector (ref), var2 (ref), presenceType (ref), useCurrentSquadParentChannelId (ref), crossExperienceVoiceManager (ref), partyVoiceVolumeEngineFeature (ref), gameSettings (ref), useLocalization (ref), foundation (ref), fFlagSquadVoiceMenuFoundationRefactorModule (ref), var3 (ref), var4 (ref), images (ref), fFlagEnablePartyVoiceChangersInLua (ref)
+	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useLocalUserId (ref), useIsVoiceFocused (ref), useEnableAudioFocusToggle (ref), react (ref), squadExternalContractContext (ref), fFlagSquadsPresenceStoreMigration (ref), var1 (ref), useSelector (ref), var2 (ref), presenceType (ref), useCurrentSquadParentChannelId (ref), crossExperienceVoiceManager (ref), partyVoiceVolumeEngineFeature (ref), gameSettings (ref), useLocalization (ref), foundation (ref), fFlagSquadVoiceMenuFoundationRefactorModule (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), var3 (ref), var4 (ref), images (ref), fFlagEnablePartyVoiceChangersInLua (ref)
 	local var5 = cryoModule.Dictionary.join(t, p1)
 	local var6 = useTokens()
 	local var7 = useLocalUserId()
@@ -198,7 +207,7 @@ return function(p1)
 		crossExperienceVoiceManager.default:toggleAudioFocus()
 	end, {})
 	local var16 = var12 or not partyVoiceVolumeEngineFeature
-	local var22_1_1 = partyVoiceVolumeEngineFeature and var16
+	local var23_1_1 = partyVoiceVolumeEngineFeature and var16
 	local var17 = var12 and (var9 or var5.forceEnableAudioFocusToggle)
 	local var18, var19 = react.useState(if partyVoiceVolumeEngineFeature then gameSettings.PartyVoiceVolume else 0)
 	local var20, var21 = react.useState(gameSettings.MasterVolume)
@@ -212,7 +221,8 @@ return function(p1)
 	local _ = nil
 	
 	return react.createElement(foundation.View, if fFlagSquadVoiceMenuFoundationRefactorModule then {
-		tag = "size-full-0 auto-y padding-y-small radius-medium bg-surface-300 col"
+		tag = "size-full-0 auto-y padding-y-small radius-medium bg-surface-300 col",
+		testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu" else nil
 	} else {
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
@@ -222,7 +232,8 @@ return function(p1)
 		layout = {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder
-		}
+		},
+		testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu" else nil
 	}, {
 		VolumeSection = react.createElement(foundation.View, if fFlagSquadVoiceMenuFoundationRefactorModule then {
 			tag = "size-full-0 auto-y padding-x-large col",
@@ -237,10 +248,11 @@ return function(p1)
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}
 		}, {
-			VolumeLabel = var22_1_1 and react.createElement(foundation.Text, if fFlagSquadVoiceMenuFoundationRefactorModule then {
+			VolumeLabel = var23_1_1 and react.createElement(foundation.Text, if fFlagSquadVoiceMenuFoundationRefactorModule then {
 				tag = "auto-xy text-truncate-end text-no-wrap text-align-x-left padding-y-xsmall text-title-small content-muted",
 				LayoutOrder = 1,
-				Text = var22.volumeLabelText
+				Text = var22.volumeLabelText,
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu--volume-label" else nil
 			} else {
 				TextWrapped = false,
 				LayoutOrder = 1,
@@ -250,12 +262,14 @@ return function(p1)
 				TextTruncate = Enum.TextTruncate.AtEnd,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				padding = Vector2.new(0, var6.Padding.XSmall),
-				Text = var22.volumeLabelText
+				Text = var22.volumeLabelText,
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu--volume-label" else nil
 			}),
 			PartySliderGroup = partyVoiceVolumeEngineFeature and react.createElement(var3, {
 				LayoutOrder = 2,
-				labelText = if var22_1_1 then var22.partyLabelText else var22.partyVolumeLabelText,
+				labelText = if var23_1_1 then var22.partyLabelText else var22.partyVolumeLabelText,
 				sliderValue = var18,
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu--party-volume" else nil,
 				onValueChanged = function(p2)
 					-- upvalues: gameSettings (copy), var19 (ref)
 					gameSettings.PartyVoiceVolume = p2
@@ -266,6 +280,7 @@ return function(p1)
 				LayoutOrder = 3,
 				labelText = if partyVoiceVolumeEngineFeature then var22.experienceLabelText else var22.volumeLabelText,
 				sliderValue = var20,
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu--experience-volume" else nil,
 				onValueChanged = function(p2)
 					-- upvalues: gameSettings (copy), var21 (ref)
 					gameSettings.MasterVolume = p2
@@ -299,7 +314,8 @@ return function(p1)
 			VoiceChatLabel = react.createElement(foundation.Text, if fFlagSquadVoiceMenuFoundationRefactorModule then {
 				tag = "auto-xy text-truncate-end text-no-wrap text-align-x-left padding-x-large padding-y-xsmall text-title-small content-muted",
 				LayoutOrder = 1,
-				Text = var22.voiceChatsLabelText
+				Text = var22.voiceChatsLabelText,
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu--voice-chats-label" else nil
 			} else {
 				TextWrapped = false,
 				LayoutOrder = 1,
@@ -309,7 +325,8 @@ return function(p1)
 				TextTruncate = Enum.TextTruncate.AtEnd,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				padding = Vector2.new(var6.Padding.Large, var6.Padding.XSmall),
-				Text = var22.voiceChatsLabelText
+				Text = var22.voiceChatsLabelText,
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu--voice-chats-label" else nil
 			}),
 			PartySelector = react.createElement(var4, {
 				LayoutOrder = 2,
@@ -321,7 +338,8 @@ return function(p1)
 					if not var8 then
 						var15()
 					end
-				end, { var8, var15 })
+				end, { var8, var15 }),
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu--party-voice-selector" else nil
 			}),
 			ExperienceSelector = react.createElement(var4, {
 				LayoutOrder = 3,
@@ -333,14 +351,16 @@ return function(p1)
 					if var8 then
 						var15()
 					end
-				end, { var8, var15 })
+				end, { var8, var15 }),
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu--experience-voice-selector" else nil
 			})
 		}),
 		VoiceChangerSection = if fFlagEnablePartyVoiceChangersInLua or var5.forceShowVoiceChangerSection then react.createElement(foundation.View, { tag = "size-full-0 auto-y col", LayoutOrder = 4 }, {
 			VoiceChangerSectionLabel = react.createElement(foundation.Text, {
 				tag = "auto-xy text-truncate-end text-no-wrap text-align-x-left padding-x-large padding-y-xsmall text-title-small content-muted",
 				LayoutOrder = 1,
-				Text = "Voice changers"
+				Text = "Voice changers",
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu--voice-changers-label" else nil
 			}),
 			OpenVoiceChangerModal = react.createElement(foundation.View, {
 				tag = "size-full-0 auto-y row align-x-left align-y-center gap-large padding-x-large padding-y-xsmall",
@@ -350,13 +370,15 @@ return function(p1)
 					if var5.openSquadVoiceChangers then
 						var5.openSquadVoiceChangers()
 					end
-				end, { var5.openSquadVoiceChangers })
+				end, { var5.openSquadVoiceChangers }),
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu--choose-voice-pack-button" else nil
 			}, {
 				ChooseVoicePackLabel = react.createElement(foundation.Text, {
 					tag = "auto-xy text-truncate-end text-no-wrap text-align-x-left fill text-label-medium content-emphasis",
 					LayoutOrder = 1,
 					Text = "Choose voice pack",
-					Size = UDim2.new(1, 0, 0, 40)
+					Size = UDim2.new(1, 0, 0, 40),
+					testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu--choose-voice-pack-button--label" else nil
 				}),
 				OpenIcon = react.createElement(foundation.Icon, { LayoutOrder = 2, name = "chevron-large-right" })
 			})

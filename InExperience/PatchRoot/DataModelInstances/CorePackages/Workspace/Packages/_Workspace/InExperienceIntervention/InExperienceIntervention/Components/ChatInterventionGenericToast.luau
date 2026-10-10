@@ -23,7 +23,7 @@ function ChatNudgeToast(p1)
 				toastTitle = p1.toastTitle,
 				iconColorStyle = {
 					Transparency = 0,
-					Color = useTokens().Color.System.Warning.Color3
+					Color = p1.iconColor or useTokens().Color.System.Warning.Color3
 				},
 				iconImage = images["icons/status/error_large"],
 				iconSize = Vector2.new(36, 36),

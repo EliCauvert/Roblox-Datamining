@@ -7,9 +7,11 @@ local text = foundationModule.Text
 local _ = require(buildExperience.Analytics.AnalyticsMetric)
 local _ = require(buildExperience.Analytics.AnalyticsWindow)
 local _ = require(parent.DataHydration.ExperienceAnalytics)
+local fFlagBuildAnalyticsGoalsModule = require(buildExperience.Flags.FFlagBuildAnalyticsGoals)
 local metricDetailSheetModule = require(buildExperience.Components.Analytics.MetricDetailSheet.MetricDetailSheet)
 local _ = require(buildExperience.Components.Analytics.StatsCard.StatsCard)
 local statsCardContainerModule = require(buildExperience.Components.Analytics.StatsCardContainer)
+local goalsSectionModule = require(buildExperience.Components.Analytics.Goals.GoalsSection)
 local _ = require(script.Parent.InstantStatCard)
 local instantStatsRowModule = require(script.Parent.InstantStatsRow)
 local windowSegmentedControlModule = require(script.Parent.WindowSegmentedControl)
@@ -25,7 +27,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), view (ref), text (ref), instantStatsRowModule (ref), windowSegmentedControlModule (ref), statsCardContainerModule (ref), metricDetailSheetModule (ref)
+	-- upvalues: reactModule (ref), view (ref), text (ref), instantStatsRowModule (ref), fFlagBuildAnalyticsGoalsModule (ref), windowSegmentedControlModule (ref), statsCardContainerModule (ref), goalsSectionModule (ref), metricDetailSheetModule (ref)
 	local testId = p1.testId or "AnalyticsOverviewView"
 	local sheet = p1.sheet
 	
@@ -52,7 +54,7 @@ return function(p1)
 			tag = "col gap-large size-full-0 auto-y",
 			testId = `{testId}.KeyStats`
 		}, {
-			Heading = reactModule.createElement(text, {
+			Heading = if fFlagBuildAnalyticsGoalsModule then nil else reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-heading-small text-align-x-left content-emphasis",
 				Text = p1.keyStatsTitle,
@@ -64,7 +66,13 @@ return function(p1)
 				selectedWindowId = p1.selectedWindowId,
 				onWindowSelected = p1.onWindowSelected
 			}),
-			Cards = reactModule.createElement(statsCardContainerModule, { layoutOrder = 3, cards = p1.statsCards })
+			Cards = if fFlagBuildAnalyticsGoalsModule then nil else reactModule.createElement(statsCardContainerModule, { layoutOrder = 3, cards = p1.statsCards }),
+			Goals = if fFlagBuildAnalyticsGoalsModule then reactModule.createElement(goalsSectionModule, {
+				layoutOrder = 4,
+				universeId = p1.universeId,
+				window = p1.window,
+				testId = `{testId}.Goals`
+			}) else nil
 		}),
 		Sheet = if sheet ~= nil then nil else reactModule.createElement(metricDetailSheetModule, {
 			metricId = sheet.metricId,

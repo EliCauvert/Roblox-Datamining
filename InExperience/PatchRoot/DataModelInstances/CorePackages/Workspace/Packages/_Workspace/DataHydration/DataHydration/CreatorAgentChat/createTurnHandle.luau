@@ -1,10 +1,12 @@
-﻿local createSignal = require(script:FindFirstAncestor("DataHydration").Parent.Signals).createSignal
+﻿local parent = script:FindFirstAncestor("DataHydration").Parent
+local createSignal = require(parent.Signals).createSignal
 local acpProtocolModule = require(script.Parent.Acp.AcpProtocol)
 local turnStateModule = require(script.Parent.turnState)
 local _ = require(script.Parent.types)
+local fFlagBuildExperiencePromptFailureTelemetry = require(parent.SharedFlags).FFlagBuildExperiencePromptFailureTelemetry
 
 return function(p1, p2, p3, p4, p5)
-	-- upvalues: createSignal (ref), turnStateModule (ref), acpProtocolModule (ref)
+	-- upvalues: createSignal (ref), turnStateModule (ref), acpProtocolModule (ref), fFlagBuildExperiencePromptFailureTelemetry (ref)
 	local var1, var2 = createSignal(p4 or turnStateModule.createEmptyTurnState(p1, p2))
 	local var3 = nil
 	local t = {}
@@ -320,22 +322,26 @@ return function(p1, p2, p3, p4, p5)
 			end
 		end,
 		noteProcessedSequenceNumber = noteProcessedSequenceNumber,
-		fail = function(p7, p8)
-			-- upvalues: var2 (ref)
-			local var8 = function(p9)
-				-- upvalues: p7 (ref), p8 (ref)
-				p9.error = p7
-				p9.errorCode = p8
-				p9.status = "failed"
-				p9.isDone = true
+		fail = function(p7, p8, p9)
+			-- upvalues: fFlagBuildExperiencePromptFailureTelemetry (copy), var2 (ref)
+			local var8 = function(p10)
+				-- upvalues: p7 (ref), p8 (ref), fFlagBuildExperiencePromptFailureTelemetry (copy), p9 (ref)
+				p10.error = p7
+				p10.errorCode = p8
+				
+				if fFlagBuildExperiencePromptFailureTelemetry then
+					p10.requestFailure = p9
+				end
+				p10.status = "failed"
+				p10.isDone = true
 			end
 			
-			var2(function(p9)
+			var2(function(p10)
 				-- upvalues: var8 (ref)
-				if p9.isDone then
-					return p9
+				if p10.isDone then
+					return p10
 				end
-				local cloned = table.clone(p9)
+				local cloned = table.clone(p10)
 				var8(cloned)
 				
 				return cloned

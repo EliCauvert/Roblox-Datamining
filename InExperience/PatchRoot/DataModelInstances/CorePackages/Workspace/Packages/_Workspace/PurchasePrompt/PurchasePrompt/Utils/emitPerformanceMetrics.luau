@@ -8,7 +8,9 @@ local intervalPerformanceTracker = require(parent.IntervalPerformanceTracker).In
 local timeToInteractiveTracker = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker
 local constantsModule = require(purchasePrompt.Misc.Constants)
 local productPurchaseContainerFPSDuration = game:DefineFastInt("ProductPurchaseContainerFPSDuration", 2)
-local fIntTTIUnifiedPurchaseSamplingRate = require(parent.SharedFlags).FIntTTIUnifiedPurchaseSamplingRate
+local sharedFlagsModule = require(parent.SharedFlags)
+local fIntTTIUnifiedPurchaseSamplingRate = sharedFlagsModule.FIntTTIUnifiedPurchaseSamplingRate
+local fFlagEnableEdpPreviewPurchaseSurface = sharedFlagsModule.FFlagEnableEdpPreviewPurchaseSurface
 local t = {
 	[enums.ProductPurchaseSurface.Catalog] = true,
 	[enums.ProductPurchaseSurface.EDP] = true
@@ -16,6 +18,9 @@ local t = {
 
 if require(purchasePrompt.Flags.FFlagEnableInExperiencePurchaseModalMetrics) then
 	t[enums.ProductPurchaseSurface.InExperience] = true
+end
+if fFlagEnableEdpPreviewPurchaseSurface then
+	t[enums.ProductPurchaseSurface.EDPPreview] = true
 end
 function emitPerformanceMetrics(p1, p2)
 	-- upvalues: t (ref)

@@ -202,7 +202,7 @@ return function(p1)
 		var20 = store.getTTSAudio(false)
 		
 		if var20 == nil then
-			var20 = createTTSAudioManagerModule()
+			var20 = createTTSAudioManagerModule(nil, host.ttsAudioParent)
 			store.setTTSAudio(var20)
 		end
 	end
@@ -785,6 +785,7 @@ return function(p1)
 		end,
 		submitGeneratedTextFeedback = submitGeneratedTextFeedback,
 		preview = preview,
-		ttsAudio = var20
+		ttsAudio = var20,
+		ttsAudioParent = host.ttsAudioParent
 	}
 end

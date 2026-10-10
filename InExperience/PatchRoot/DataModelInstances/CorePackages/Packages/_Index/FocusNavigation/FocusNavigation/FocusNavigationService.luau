@@ -15,6 +15,7 @@ function t.new(p1, p2)
 	-- upvalues: createSignal (ref), eventPropagationModule (ref), t (ref)
 	local var1, var2 = createSignal({})
 	local var3, var4 = createSignal(p1.getSelection())
+	local var5, var6 = createSignal(nil)
 	local tbl = setmetatable({
 		_silentFocusTarget = nil,
 		_silentBlurTarget = nil,
@@ -26,8 +27,10 @@ function t.new(p1, p2)
 		_shouldSuppressContainerRefocus = if p2 then p2.shouldSuppressContainerRefocus else nil,
 		_fireActiveEventMapSignal = var2,
 		_fireFocusedGuiObjectSignal = var4,
+		_fireEventDispatchedSignal = var6,
 		activeEventMap = var1,
-		focusedGuiObject = var3
+		focusedGuiObject = var3,
+		eventDispatched = var5
 	}, t)
 	tbl:_connectToInputEvents()
 	
@@ -38,14 +41,21 @@ function t:_fireInputEvent(p1, p2, p3)
 	local keyCode = self.activeEventMap:getValue()[p2.KeyCode]
 	
 	if keyCode then
-		self._eventPropagationService:propagateEvent(p1, keyCode, {
+		local t = {
 			Delta = p2.Delta,
 			KeyCode = p2.KeyCode,
 			Position = p2.Position,
 			UserInputState = p2.UserInputState,
 			UserInputType = p2.UserInputType,
 			wasProcessed = p3
-		}, { synthetic = false, silent = false })
+		}
+		self._eventPropagationService:propagateEvent(p1, keyCode, t, { synthetic = false, silent = false })
+		self._fireEventDispatchedSignal({
+			synthetic = false,
+			eventName = keyCode,
+			target = p1,
+			eventData = t
+		})
 	end
 end
 
@@ -301,6 +311,12 @@ function t:dispatchSyntheticEvent(p12, p13, p14)
 	if p13 then
 		if self:canDispatchEvent(p12, p13) then
 			self._eventPropagationService:propagateEvent(p13, p12, p14, { synthetic = true, silent = false })
+			self._fireEventDispatchedSignal({
+				synthetic = true,
+				eventName = p12,
+				target = p13,
+				eventData = p14
+			})
 			
 			return true
 		elseif _G.__DEV__ then

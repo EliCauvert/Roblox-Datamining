@@ -1,4 +1,5 @@
 ﻿local userInputService = game:GetService("UserInputService")
+local fFlagDebugExpChatTextChannelWindowStaticExpressionsModule = require(script.Parent.FFlagDebugExpChatTextChannelWindowStaticExpressions)
 local expChatPresetChatVREnabled = game:DefineFastFlag("ExpChatPresetChatVREnabled", false)
 
 local function _()
@@ -9,13 +10,15 @@ end
 local expChatTextChannelWindowExpressionTray = game:DefineFastFlag("ExpChatTextChannelWindowExpressionTray", false)
 
 if expChatTextChannelWindowExpressionTray then
-	expChatTextChannelWindowExpressionTray = game:GetEngineFeature("TextChatPresetsEnabled")
-	
-	if expChatTextChannelWindowExpressionTray then
-		if userInputService.VREnabled then
-			return expChatPresetChatVREnabled
+	if not game:GetEngineFeature("TextChatPresetsEnabled") then
+		expChatTextChannelWindowExpressionTray = fFlagDebugExpChatTextChannelWindowStaticExpressionsModule
+		
+		if expChatTextChannelWindowExpressionTray then
+			if userInputService.VREnabled then
+				return expChatPresetChatVREnabled
+			end
+			expChatTextChannelWindowExpressionTray = true
 		end
-		expChatTextChannelWindowExpressionTray = true
 	end
 end
 return expChatTextChannelWindowExpressionTray

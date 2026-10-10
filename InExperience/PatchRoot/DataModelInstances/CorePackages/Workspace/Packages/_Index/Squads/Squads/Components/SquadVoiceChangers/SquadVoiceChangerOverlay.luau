@@ -1,5 +1,6 @@
 ﻿local squads = script:FindFirstAncestor("Squads")
 local parent = squads.Parent
+local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local dependenciesModule = require(squads.dependencies)
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
@@ -12,7 +13,7 @@ local t = {
 }
 
 function SquadVoiceChangerOverlay(p1)
-	-- upvalues: cryoModule (ref), t (ref), useNavigation (ref), reactModule (ref), foundationModule (ref), squadVoiceChangersModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useNavigation (ref), reactModule (ref), foundationModule (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), squadVoiceChangersModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2 = useNavigation()
 	local var3 = reactModule.useCallback(function()
@@ -36,7 +37,8 @@ function SquadVoiceChangerOverlay(p1)
 			stateLayer = {
 				affordance = foundationModule.Enums.StateLayerAffordance.None
 			},
-			onActivated = var3
+			onActivated = var3,
+			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changer-overlay--backdrop" else nil
 		}),
 		OverlayContainer = reactModule.createElement(foundationModule.View, {
 			BorderSizePixel = 0,
@@ -48,7 +50,8 @@ function SquadVoiceChangerOverlay(p1)
 				["anchor-bottom-center position-bottom-center"] = not wideMode
 			},
 			Size = if wideMode then UDim2.new(0.75, 0, 0.9, 0) else UDim2.new(1, 0, 0.9, 0),
-			onActivated = function() end
+			onActivated = function() end,
+			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changer-overlay" else nil
 		}, {
 			SquadVoiceChangers = reactModule.createElement(squadVoiceChangersModule, {
 				closeSquadVoiceChangers = var3,

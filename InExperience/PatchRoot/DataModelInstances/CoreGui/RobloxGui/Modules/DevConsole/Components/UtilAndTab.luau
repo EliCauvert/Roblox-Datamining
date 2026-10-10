@@ -15,6 +15,7 @@ local clientServerButtonModule = require(parent.ClientServerButton)
 local checkboxContainerModule = require(parent.CheckboxContainer)
 local tabRowContainerModule = require(parent.TabRowContainer)
 local searchBarModule = require(parent.SearchBar)
+local getFFlagVoiceDebugConsoleV2Module = require(parent.VoiceDebug.GetFFlagVoiceDebugConsoleV2)
 local utilAndTab = roactModule.Component:extend("UtilAndTab")
 
 function utilAndTab.init(p1)
@@ -74,7 +75,7 @@ function utilAndTab.init(p1)
 end
 
 function utilAndTab.render(p2)
-	-- upvalues: tabOverlapThreshold (ref), constantsModule (ref), smallFrameHeight (ref), frameHeight_1 (ref), roactModule (ref), clientServerButtonWidth (ref), mainRowPadding (ref), smallUtilPadding (ref), tabDropDownWidth (ref), clientServerDropDownWidth (ref), textService (ref), tabRowContainerModule (ref), clientServerButtonModule (ref), checkboxContainerModule (ref), searchBarModule (ref), frameHeight (ref)
+	-- upvalues: tabOverlapThreshold (ref), constantsModule (ref), smallFrameHeight (ref), frameHeight_1 (ref), roactModule (ref), clientServerButtonWidth (ref), mainRowPadding (ref), smallUtilPadding (ref), tabDropDownWidth (ref), clientServerDropDownWidth (ref), textService (ref), tabRowContainerModule (ref), clientServerButtonModule (ref), checkboxContainerModule (ref), getFFlagVoiceDebugConsoleV2Module (ref), searchBarModule (ref), frameHeight (ref)
 	local windowWidth = p2.props.windowWidth
 	local formFactor = p2.props.formFactor
 	local tabList = p2.props.tabList
@@ -173,7 +174,8 @@ function utilAndTab.render(p2)
 					Visible = not activeSearchTerm,
 					[roactModule.Event.Activated] = p2.showSearchBar
 				}),
-				Buttons = frame
+				Buttons = frame,
+				ExtraContent = if getFFlagVoiceDebugConsoleV2Module() then p2.props.extraContent else nil
 			}),
 			SearchBarFrame = roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
@@ -265,7 +267,8 @@ function utilAndTab.render(p2)
 					cancelInput = p2.cancelInput,
 					focusLost = p2.focusLost
 				}),
-				Buttons = frame
+				Buttons = frame,
+				ExtraContent = if getFFlagVoiceDebugConsoleV2Module() then p2.props.extraContent else nil
 			})
 		})
 	end

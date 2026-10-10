@@ -31,10 +31,11 @@ local fFlagLuaAppCompositionAlways = sharedFlagsModule.FFlagLuaAppCompositionAlw
 local fFlagLuaAppLayoutParamsInContext = sharedFlagsModule.FFlagLuaAppLayoutParamsInContext
 local fFlagLuaAppRespectClipAncestorImpressions = sharedFlagsModule.FFlagLuaAppRespectClipAncestorImpressions
 local fFlagLuaAppUseFrameBoundsImpressions = sharedFlagsModule.FFlagLuaAppUseFrameBoundsImpressions
+local fFlagSduiOptionSelectorHeaderComponent = sharedFlagsModule.FFlagSduiOptionSelectorHeaderComponent
 local t = {}
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagLuaAppCompositionAlways (ref), t (ref), useTokens (ref), reactModule (ref), fFlagLuaAppLayoutParamsInContext (ref), signalsReactModule (ref), useCollectionLayoutParams (ref), findAnalyticsField (ref), sduiBuilder (ref), sduiComponentType (ref), useCollectionAnalyticsContext (ref), useCollectionImpressionsSignal (ref), getImpressionsTagModule (ref), sduiParseHelpers (ref), sduiErrors (ref), reportUnifiedLoggingImpressions (ref), useScrollTelemetryCallbackModule (ref), sduiCollectionAnalyticsBuilder (ref), getSduiComponentWrapper (ref), sduiCollectionItemModule (ref), variableItemWidthCarousel (ref), waitForPropWrapper (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), scrollDetector (ref)
+	-- upvalues: fFlagLuaAppCompositionAlways (ref), t (ref), useTokens (ref), reactModule (ref), fFlagLuaAppLayoutParamsInContext (ref), signalsReactModule (ref), useCollectionLayoutParams (ref), findAnalyticsField (ref), sduiBuilder (ref), sduiComponentType (ref), useCollectionAnalyticsContext (ref), useCollectionImpressionsSignal (ref), getImpressionsTagModule (ref), sduiParseHelpers (ref), sduiErrors (ref), reportUnifiedLoggingImpressions (ref), useScrollTelemetryCallbackModule (ref), sduiCollectionAnalyticsBuilder (ref), getSduiComponentWrapper (ref), sduiCollectionItemModule (ref), variableItemWidthCarousel (ref), fFlagSduiOptionSelectorHeaderComponent (ref), waitForPropWrapper (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), scrollDetector (ref)
 	local sduiContext = p1.sduiContext
 	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or sduiContext.appCompositionEnabled)
 	local items = p1.items or t
@@ -79,6 +80,7 @@ return reactModule.memo(function(p1)
 			Position = p1.position,
 			title = p1.title or "",
 			subtitle = p1.subtitle,
+			headerComponent = if fFlagSduiOptionSelectorHeaderComponent then p1.headerComponent else nil,
 			calculateItemWidth = reactModule.useCallback(function(p2)
 				-- upvalues: var8 (ref)
 				return var8[p2] or 0

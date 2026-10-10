@@ -14,6 +14,7 @@ local _ = require(purchasePrompt.types)
 local debugLogModule = require(purchasePrompt.Utils.debugLog)
 local serializeTableModule = require(purchasePrompt.Utils.serializeTable)
 local isGenericChallengeResponseModule = require(purchasePrompt.Utils.isGenericChallengeResponse)
+local isGetPassOwnershipApiEnabledModule = require(purchasePrompt.Utils.isGetPassOwnershipApiEnabled)
 local enablePlayerOwnsBundleApiEngineFeature = game:GetEngineFeature("EnablePlayerOwnsBundleApi")
 local enableDevSubscriptionPurchaseWithRobuxEngineFeature = game:GetEngineFeature("EnableDevSubscriptionPurchaseWithRobux")
 local getFFlagEnablePromptPurchaseRequestedV2Module = require(purchasePrompt.Flags.GetFFlagEnablePromptPurchaseRequestedV2)
@@ -135,8 +136,28 @@ local function getPremiumProductInfo()
 end
 
 local function getPlayerOwns(p1, p2, p3)
-	-- upvalues: marketplaceService (ref), enablePlayerOwnsBundleApiEngineFeature (ref), fFlagUseGetGamePassOwnershipApi (ref)
-	return if p3 == Enum.InfoType.Asset then marketplaceService:PlayerOwnsAssetAsync(p1, p2) elseif enablePlayerOwnsBundleApiEngineFeature and p3 == Enum.InfoType.Bundle then marketplaceService:PlayerOwnsBundleAsync(p1, p2) elseif p3 == Enum.InfoType.GamePass then if fFlagUseGetGamePassOwnershipApi then false else marketplaceService:UserOwnsGamePassAsync(p1.UserId, p2) else p3 == Enum.InfoType.Subscription and marketplaceService:IsPlayerSubscribed(p1, p2)
+	-- upvalues: marketplaceService (ref), enablePlayerOwnsBundleApiEngineFeature (ref), fFlagUseGetGamePassOwnershipApi (ref), isGetPassOwnershipApiEnabledModule (ref)
+	if p3 == Enum.InfoType.Asset then
+		return marketplaceService:PlayerOwnsAssetAsync(p1, p2)
+	elseif enablePlayerOwnsBundleApiEngineFeature and p3 == Enum.InfoType.Bundle then
+		return marketplaceService:PlayerOwnsBundleAsync(p1, p2)
+	elseif p3 == Enum.InfoType.GamePass then
+		if fFlagUseGetGamePassOwnershipApi then
+			local ok, status = pcall(function()
+				-- upvalues: marketplaceService (copy), p1 (ref), p2 (ref)
+				return marketplaceService:GetPassOwnershipAsync(p1, p2)
+			end)
+			
+			if ok then
+				return typeof(status) == "table" and status.Owned == true
+			elseif isGetPassOwnershipApiEnabledModule() then
+				error(status, 0)
+			end
+		end
+		return marketplaceService:UserOwnsGamePassAsync(p1.UserId, p2)
+	else
+		return p3 == Enum.InfoType.Subscription and marketplaceService:IsPlayerSubscribed(p1, p2)
+	end
 end
 
 local function performPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12)

@@ -47,6 +47,7 @@ local useStore = dependenciesModule.Hooks.useStore
 local useSquadState = require(parent.SquadsCore.Hooks).useSquadState
 local presenceType = dependenciesModule.RoduxPresence.Enums.PresenceType
 local fFlagSquadsPresenceStoreMigration = require(parent.SquadsCore.Flags).FFlagSquadsPresenceStoreMigration
+local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local dataHydrationModule = require(parent.DataHydration)
 local signalsModule = require(parent.Signals)
 local useSignalState = require(parent.SignalsReact).useSignalState
@@ -74,7 +75,7 @@ local fFlagEnableSquadRegroupServerCapacityCheck = sharedFlags.FFlagEnableSquadR
 local fFlagAppChatShowOSAOnPageEntry = sharedFlags.FFlagAppChatShowOSAOnPageEntry
 
 return function(p1)
-	-- upvalues: useTokens (ref), useDispatch (ref), useLocalUserId (ref), useStyle (ref), useSquadState (ref), useNavigation (ref), react (ref), squadExternalContractContext (ref), useVoiceStatus (ref), fFlagEnableSquadTopBannerWideMode (ref), httpService (ref), roactNavigationModule (ref), squadViewFlags (ref), useCurrentSquadSelector (ref), useSelector (ref), useStore (ref), squadQuickStartExperimentation (ref), fFlagEnablePartyQuickStartButton (ref), squadPromptType (ref), fFlagMakeCreateOrJoinSquadAThunks (ref), createOrJoinSquad (ref), networkingSquads (ref), logInExpCoplayTelemetryModule (ref), squadCoplayJoin (ref), useEffectOnce (ref), fFlagAppChatShowOSAOnPageEntry (ref), loggerModule (ref), cryo (ref), squadUserPartyStatusModule (ref), partyUserInvitedDurationSeconds (ref), partyInviteeNoResponseDurationSeconds (ref), setInterval (ref), clearInterval (ref), usePrevious (ref), userBlockingNetworking (ref), fFlagSquadsPresenceStoreMigration (ref), networkingPresence (ref), constantsModule (ref), signalsModule (ref), var1 (ref), useSignalState (ref), fFlagEnableSquadRegroupServerCapacityCheck (ref), playersService (ref), squadRegroupExperimentation (ref), var2 (ref), presenceType (ref), luckyRecommendationExperimentation (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (ref), enableSquadLobbyBanners (ref), squadLobbyBannersModule (ref), foundation (ref), squadLobbyUserGridModule (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), squadLobbyRegroupRowModule (ref), squadLobbyActionBarModule (ref), squadLobbyLuckyRecommendationRowModule (ref), stateLayerAffordance (ref), squadLobbyVoiceChatMenuModule (ref), fFlagEnablePartyVoiceChangersInLua (ref), squadLobbyUserDropdownMenuModule (ref), squadCoordinationExperienceJoinExperimentation (ref), fFlagEnableSquadRegroupExperimentation (ref), roact (ref), squadLobbySessionProvider (ref)
+	-- upvalues: useTokens (ref), useDispatch (ref), useLocalUserId (ref), useStyle (ref), useSquadState (ref), useNavigation (ref), react (ref), squadExternalContractContext (ref), useVoiceStatus (ref), fFlagEnableSquadTopBannerWideMode (ref), httpService (ref), roactNavigationModule (ref), squadViewFlags (ref), useCurrentSquadSelector (ref), useSelector (ref), useStore (ref), squadQuickStartExperimentation (ref), fFlagEnablePartyQuickStartButton (ref), squadPromptType (ref), fFlagMakeCreateOrJoinSquadAThunks (ref), createOrJoinSquad (ref), networkingSquads (ref), logInExpCoplayTelemetryModule (ref), squadCoplayJoin (ref), useEffectOnce (ref), fFlagAppChatShowOSAOnPageEntry (ref), loggerModule (ref), cryo (ref), squadUserPartyStatusModule (ref), partyUserInvitedDurationSeconds (ref), partyInviteeNoResponseDurationSeconds (ref), setInterval (ref), clearInterval (ref), usePrevious (ref), userBlockingNetworking (ref), fFlagSquadsPresenceStoreMigration (ref), networkingPresence (ref), constantsModule (ref), signalsModule (ref), var1 (ref), useSignalState (ref), fFlagEnableSquadRegroupServerCapacityCheck (ref), playersService (ref), squadRegroupExperimentation (ref), var2 (ref), presenceType (ref), luckyRecommendationExperimentation (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (ref), enableSquadLobbyBanners (ref), squadLobbyBannersModule (ref), foundation (ref), squadLobbyUserGridModule (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), squadLobbyRegroupRowModule (ref), squadLobbyActionBarModule (ref), squadLobbyLuckyRecommendationRowModule (ref), stateLayerAffordance (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), squadLobbyVoiceChatMenuModule (ref), fFlagEnablePartyVoiceChangersInLua (ref), squadLobbyUserDropdownMenuModule (ref), squadCoordinationExperienceJoinExperimentation (ref), fFlagEnableSquadRegroupExperimentation (ref), roact (ref), squadLobbySessionProvider (ref)
 	local var3 = useTokens()
 	local var4 = useDispatch()
 	local var5 = tonumber(useLocalUserId()) or 0
@@ -615,14 +616,15 @@ return function(p1)
 		}) else nil
 	end, { var50, var3, var51 })
 	local var59 = react.useMemo(function()
-		-- upvalues: var14 (ref), react (copy), foundation (copy), stateLayerAffordance (copy), var15 (ref), var40 (ref), var3 (ref), squadLobbyVoiceChatMenuModule (copy), fFlagEnablePartyVoiceChangersInLua (copy), p1 (ref)
+		-- upvalues: var14 (ref), react (copy), foundation (copy), stateLayerAffordance (copy), var15 (ref), fFlagSquadsEnableFoundationTestIdsModule (copy), var40 (ref), var3 (ref), squadLobbyVoiceChatMenuModule (copy), fFlagEnablePartyVoiceChangersInLua (copy), p1 (ref)
 		return if var14 then react.createElement(foundation.View, {
 			Size = UDim2.new(1, 0, 1, 0),
 			stateLayer = { affordance = stateLayerAffordance.None },
 			onActivated = function()
 				-- upvalues: var15 (copy)
 				var15(false)
-			end
+			end,
+			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby--voice-chat-menu-backdrop" else nil
 		}, {
 			react.createElement(foundation.ScrollView, {
 				Size = UDim2.new(1, 0, 1, 0),

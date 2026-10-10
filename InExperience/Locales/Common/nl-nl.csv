@@ -93,7 +93,6 @@ Authentication.SignUp.Action.Create,Maken
 Authentication.SignUp.Action.CreateAccountSentenceCase,Account aanmaken
 Authentication.SignUp.Action.ExitModalLeave,Afsluiten
 Authentication.SignUp.Action.RespawnNow,Nu respawnen
-Authentication.SignUp.Action.StartPlay,Beginnen met spelen
 Authentication.SignUp.Button.OKCaptialized,Oké
 Authentication.SignUp.Button.RetryLogIn,Opnieuw proberen inloggen
 Authentication.SignUp.Description.AccountAlreadyLinked,Je account op {platformAccountName} is al gekoppeld aan een Roblox-account. Probeer opnieuw in te loggen.
@@ -705,6 +704,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Categorie *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,Overig
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Selecteer een categorie
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Probleem met aankoop
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,Suggestie
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Maximaal {MAX} tekens
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Details *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Deselecteren
@@ -712,6 +712,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Vermeld al
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Beschrijf wat er ontbreekt en wanneer je het voor het laatst hebt gezien. Als je account is gehackt, vermeld dan je ticketnummer bij de klantenservice van Roblox, en alle relevante gegevens."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Beschrijf hier je verzoek of probleem. Geef zoveel mogelijk details zodat wij de situatie kunnen begrijpen.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Laat ons weten wat je probeerde te kopen, wanneer het gebeurde en de totale waarde (bijv. 500 Robux/$ 4,99). Vermeld eventuele foutmeldingen die je te zien kreeg."
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,"Laat weten welke nieuwe functies of verbeteringen je graag zou zien, en waarom deze het spel beter zouden maken."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Probeer je misbruik te melden?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>In plaats hiervan een melding inzenden.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Selecteren
@@ -1235,6 +1236,19 @@ Corescripts.AvatarContextMenu.FriendRequestPending,Vriendschapsverzoek in behand
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,Persoon geblokkeerd
 Corescripts.AvatarContextMenu.Wave,Zwaaien
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,Grafieken
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Doorgaan met spelen
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Teleporteren
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Uitgelicht door Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Overige startpagina
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Aanbeveling voor startpagina
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Portaaladvertenties
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Zoekadvertenties
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Gesponsorde advertenties
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Omlaag scrollen
 Feature.Accessibility.Action.ScrollUp,Omhoog scrollen
@@ -3156,7 +3170,7 @@ Feature.FaceChat.Subtitle.UnsupportedDevice,Je hardware voldoet niet aan de vere
 Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,Je camera uitschakelen kan je ervaring verbeteren.
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox kan je avatar niet animeren met je camera.
 Feature.Favorites.Label.Favorite,Markeren als favoriet
-Feature.FlyoutSidePanel.Action.ContinuePlaying,Doorgaan met spelen
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,"Je profiel, content en instellingen zijn verplaatst."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> is verplaatst
 Feature.Friends.Action.AcceptFriend,Vriend accepteren

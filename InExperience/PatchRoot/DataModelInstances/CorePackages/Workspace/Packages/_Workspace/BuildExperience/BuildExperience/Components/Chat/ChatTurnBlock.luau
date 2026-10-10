@@ -9,6 +9,8 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local localizationRoactContext = localizationModule.LocalizationRoactContext
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local chatScrollAnchorContextModule = require(buildExperience.Chat.ChatScrollAnchorContext)
+local chatCardEmphasisPositionProviderModule = require(script.Parent.ChatCardEmphasis.ChatCardEmphasisPositionProvider)
+local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 local _ = require(buildExperience.Chat.chatTypes)
 local turnProjectionModule = require(buildExperience.Chat.turnProjection)
 local fFlagBuildExperienceChatAccordionScrollAnchorModule = require(buildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
@@ -287,7 +289,7 @@ local function renderWorkSegment(p1, p2, p3, p4, p5)
 end
 
 local function TurnWorkSegment(p1)
-	-- upvalues: useReactiveValue (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), chatScrollAnchorContextModule (ref), foundationModule (ref), renderWorkSegment (ref), view (ref), stateLayerAffordance (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
+	-- upvalues: useReactiveValue (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), chatScrollAnchorContextModule (ref), foundationModule (ref), renderWorkSegment (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), chatCardEmphasisPositionProviderModule (ref), view (ref), stateLayerAffordance (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
 	local _ = nil
 	local var6 = useReactiveValue(p1.segment.label or "")
 	local workedDurationSeconds = p1.segment.workedDurationSeconds
@@ -338,6 +340,9 @@ local function TurnWorkSegment(p1)
 			local var19 = renderWorkSegment(v, var18, p1.markdownTextStyle, p1.clockBinding, p1.localToolActions)
 			
 			if var19 ~= nil then
+				if fFlagBuildExperienceChatCardEmphasisModule then
+					var19 = reactModule.createElement(chatCardEmphasisPositionProviderModule, { childOrder = var18 }, var19)
+				end
 				t[v.key] = var19
 				var18 += 1
 			end
@@ -380,7 +385,7 @@ local function TurnWorkSegment(p1)
 end
 
 return reactModule.memo(function(p2)
-	-- upvalues: reactModule (ref), turnProjectionModule (ref), reportTurnActivityGapModule (ref), useReactiveValue (ref), t (ref), fFlagBuildAgentAdCampaignCardModule (ref), var5 (ref), t_1 (ref), foundationModule (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), renderWorkSegment (ref), TurnWorkSegment (ref), fFlagBuildExperiencePlaytestCardPublishCtaModule (ref), PlaytestCardSection (ref), playtestCompletedCardModule (ref), var4 (ref), var3 (ref), view (ref), agentTurnFeedbackModule (ref)
+	-- upvalues: reactModule (ref), turnProjectionModule (ref), reportTurnActivityGapModule (ref), useReactiveValue (ref), t (ref), fFlagBuildAgentAdCampaignCardModule (ref), var5 (ref), t_1 (ref), foundationModule (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), renderWorkSegment (ref), TurnWorkSegment (ref), fFlagBuildExperiencePlaytestCardPublishCtaModule (ref), PlaytestCardSection (ref), playtestCompletedCardModule (ref), var4 (ref), var3 (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), chatCardEmphasisPositionProviderModule (ref), view (ref), agentTurnFeedbackModule (ref)
 	local turn = p2.turn
 	local turnState = turn.turnState
 	local turnKey = turn.turnKey
@@ -531,6 +536,12 @@ return reactModule.memo(function(p2)
 			end
 		end
 		if var29 ~= nil then
+			if fFlagBuildExperienceChatCardEmphasisModule then
+				var29 = reactModule.createElement(chatCardEmphasisPositionProviderModule, {
+					messageOrder = p2.LayoutOrder or 0,
+					segmentOrder = var28
+				}, var29)
+			end
 			t_2[v.key] = var29
 			var28 += 1
 		end

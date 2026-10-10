@@ -106,7 +106,7 @@ function resolveLazyType(p1)
 end
 
 local function ChildReconciler(p1)
-	-- upvalues: deletion (ref), createWorkInProgress (ref), placement (ref), hostText (ref), createFiberFromText (ref), dEV (ref), isCompatibleFamilyForHotReloading (ref), enableBlocksAPI (ref), block (ref), REACT_LAZY_TYPE (ref), REACT_BLOCK_TYPE (ref), createFiberFromElement (ref), hostPortal (ref), createFiberFromPortal (ref), fragment (ref), createFiberFromFragment (ref), REACT_ELEMENT_TYPE (ref), REACT_PORTAL_TYPE (ref), enableLazyElements (ref), getComponentName (ref), t_1 (write), console (ref), REACT_FRAGMENT_TYPE (ref), var3 (write), var1 (ref), var2 (write), isArray (ref), getIteratorFn (ref)
+	-- upvalues: deletion (ref), createWorkInProgress (ref), reactFeatureFlags (ref), placement (ref), hostText (ref), createFiberFromText (ref), dEV (ref), isCompatibleFamilyForHotReloading (ref), enableBlocksAPI (ref), block (ref), REACT_LAZY_TYPE (ref), REACT_BLOCK_TYPE (ref), createFiberFromElement (ref), hostPortal (ref), createFiberFromPortal (ref), fragment (ref), createFiberFromFragment (ref), REACT_ELEMENT_TYPE (ref), REACT_PORTAL_TYPE (ref), enableLazyElements (ref), getComponentName (ref), t_1 (write), console (ref), REACT_FRAGMENT_TYPE (ref), var3 (write), var1 (ref), var2 (write), isArray (ref), getIteratorFn (ref)
 	local function _(p2, p3)
 		-- upvalues: p1 (ref), deletion (copy)
 		if not p1 then return end
@@ -160,12 +160,21 @@ local function ChildReconciler(p1)
 	end
 	
 	local _ = function(p5, p6)
-		-- upvalues: createWorkInProgress (copy)
+		-- upvalues: createWorkInProgress (copy), reactFeatureFlags (copy)
 		local var7 = createWorkInProgress(p5, p6)
 		var7.index = 1
-		var7.sibling = nil
 		
-		return var7
+		if reactFeatureFlags.enableWorkLoopTrims then
+			if var7.sibling == nil then
+				return var7
+			else
+				var7.sibling = nil
+				
+				return var7
+			end
+		else
+			var7.sibling = nil
+		end
 	end
 	
 	local _ = function(p5, p6, p7)
@@ -201,7 +210,7 @@ local function ChildReconciler(p1)
 	end
 	
 	local _ = function(p5, p6, p7, p8)
-		-- upvalues: hostText (copy), createFiberFromText (copy), createWorkInProgress (copy)
+		-- upvalues: hostText (copy), createFiberFromText (copy), createWorkInProgress (copy), reactFeatureFlags (copy)
 		if p6 == nil or p6.tag ~= hostText then
 			local var7 = createFiberFromText(p7, p5.mode, p8)
 			var7.return_ = p5
@@ -210,28 +219,48 @@ local function ChildReconciler(p1)
 		end
 		local var8 = createWorkInProgress(p6, p7)
 		var8.index = 1
-		var8.sibling = nil
+		
+		if not reactFeatureFlags.enableWorkLoopTrims then
+			var8.sibling = nil
+		elseif var8.sibling ~= nil then
+			var8.sibling = nil
+		end
 		var8.return_ = p5
 		
 		return var8
 	end
 	
 	local function updateElement(p5, p6, p7, p8)
-		-- upvalues: dEV (copy), isCompatibleFamilyForHotReloading (copy), createWorkInProgress (copy), enableBlocksAPI (copy), block (copy), REACT_LAZY_TYPE (copy), REACT_BLOCK_TYPE (copy), createFiberFromElement (copy)
+		-- upvalues: dEV (copy), isCompatibleFamilyForHotReloading (copy), createWorkInProgress (copy), reactFeatureFlags (copy), enableBlocksAPI (copy), block (copy), REACT_LAZY_TYPE (copy), REACT_BLOCK_TYPE (copy), createFiberFromElement (copy)
 		if p6 ~= nil then
+			local var7
 			if p6.elementType == p7.type or dEV and isCompatibleFamilyForHotReloading(p6, p7) then
-				local var7 = createWorkInProgress(p6, p7.props)
-				var7.index = 1
-				var7.sibling = nil
-				local var8 = var7
-				var8.ref = coerceRef(p5, p6, p7)
-				var8.return_ = p5
+				local var8 = createWorkInProgress(p6, p7.props)
+				var8.index = 1
+				
+				if not reactFeatureFlags.enableWorkLoopTrims then
+					var8.sibling = nil
+				elseif var8.sibling ~= nil then
+					var8.sibling = nil
+				end
+				local var9 = var8
+				
+				if reactFeatureFlags.enableWorkLoopTrims then
+					var7 = coerceRef(p5, p6, p7)
+					
+					if var7 ~= nil or var9.ref ~= nil then
+						var9.ref = var7
+					end
+				else
+					var9.ref = coerceRef(p5, p6, p7)
+				end
+				var9.return_ = p5
 				
 				if dEV then
-					var8._debugSource = p7._source
-					var8._debugOwner = p7._owner
+					var9._debugSource = p7._source
+					var9._debugOwner = p7._owner
 				end
-				return var8
+				return var9
 			elseif enableBlocksAPI and p6.tag == block then
 				local type = p7.type
 				
@@ -239,30 +268,35 @@ local function ChildReconciler(p1)
 					type = resolveLazyType(type)
 				end
 				if type["$$typeof"] ~= REACT_BLOCK_TYPE or type._render ~= p6.type._render then
-					local var9 = createFiberFromElement(p7, p5.mode, p8)
-					var9.ref = coerceRef(p5, p6, p7)
-					var9.return_ = p5
+					local var10 = createFiberFromElement(p7, p5.mode, p8)
+					var10.ref = coerceRef(p5, p6, p7)
+					var10.return_ = p5
 					
-					return var9
+					return var10
 				end
-				local var10 = createWorkInProgress(p6, p7.props)
-				var10.index = 1
-				var10.sibling = nil
-				local var11 = var10
-				var11.return_ = p5
-				var11.type = type
+				local var11 = createWorkInProgress(p6, p7.props)
+				var11.index = 1
+				
+				if not reactFeatureFlags.enableWorkLoopTrims then
+					var11.sibling = nil
+				elseif var11.sibling ~= nil then
+					var11.sibling = nil
+				end
+				var7 = var11
+				var7.return_ = p5
+				var7.type = type
 				
 				if dEV then
-					var11._debugSource = p7._source
-					var11._debugOwner = p7._owner
+					var7._debugSource = p7._source
+					var7._debugOwner = p7._owner
 				end
-				return var11
+				return var7
 			end
 		end
 	end
 	
 	local function updatePortal(p5, p6, p7, p8)
-		-- upvalues: hostPortal (copy), createFiberFromPortal (copy), createWorkInProgress (copy)
+		-- upvalues: hostPortal (copy), createFiberFromPortal (copy), createWorkInProgress (copy), reactFeatureFlags (copy)
 		if p6 == nil or p6.tag ~= hostPortal or (p6.stateNode.containerInfo ~= p7.containerInfo or p6.stateNode.implementation ~= p7.implementation) then
 			local var7 = createFiberFromPortal(p7, p5.mode, p8)
 			var7.return_ = p5
@@ -271,14 +305,19 @@ local function ChildReconciler(p1)
 		end
 		local var8 = createWorkInProgress(p6, p7.children or {})
 		var8.index = 1
-		var8.sibling = nil
+		
+		if not reactFeatureFlags.enableWorkLoopTrims then
+			var8.sibling = nil
+		elseif var8.sibling ~= nil then
+			var8.sibling = nil
+		end
 		var8.return_ = p5
 		
 		return var8
 	end
 	
 	local _ = function(p5, p6, p7, p8, p9)
-		-- upvalues: fragment (copy), createFiberFromFragment (copy), createWorkInProgress (copy)
+		-- upvalues: fragment (copy), createFiberFromFragment (copy), createWorkInProgress (copy), reactFeatureFlags (copy)
 		if p6 == nil or p6.tag ~= fragment then
 			local var7 = createFiberFromFragment(p7, p5.mode, p8, p9)
 			var7.return_ = p5
@@ -287,7 +326,12 @@ local function ChildReconciler(p1)
 		end
 		local var8 = createWorkInProgress(p6, p7)
 		var8.index = 1
-		var8.sibling = nil
+		
+		if not reactFeatureFlags.enableWorkLoopTrims then
+			var8.sibling = nil
+		elseif var8.sibling ~= nil then
+			var8.sibling = nil
+		end
 		var8.return_ = p5
 		
 		return var8
@@ -362,7 +406,7 @@ local function ChildReconciler(p1)
 	end
 	
 	local function updateSlot(p5, p6, p7, p8, p9)
-		-- upvalues: REACT_ELEMENT_TYPE (copy), REACT_FRAGMENT_TYPE (copy), fragment (copy), createFiberFromFragment (copy), createWorkInProgress (copy), updateElement (ref), REACT_PORTAL_TYPE (copy), updatePortal (ref), REACT_LAZY_TYPE (copy), enableLazyElements (copy), updateSlot (ref), hostText (copy), createFiberFromText (copy), dEV (copy), getComponentName (copy), t_1 (copy), console (copy)
+		-- upvalues: REACT_ELEMENT_TYPE (copy), REACT_FRAGMENT_TYPE (copy), fragment (copy), createFiberFromFragment (copy), createWorkInProgress (copy), reactFeatureFlags (copy), updateElement (ref), REACT_PORTAL_TYPE (copy), updatePortal (ref), REACT_LAZY_TYPE (copy), enableLazyElements (copy), updateSlot (ref), hostText (copy), createFiberFromText (copy), dEV (copy), getComponentName (copy), t_1 (copy), console (copy)
 		if p7 == nil then
 			return nil
 		end
@@ -395,7 +439,12 @@ local function ChildReconciler(p1)
 						end
 						local var11 = createWorkInProgress(p6, children)
 						var11.index = 1
-						var11.sibling = nil
+						
+						if not reactFeatureFlags.enableWorkLoopTrims then
+							var11.sibling = nil
+						elseif var11.sibling ~= nil then
+							var11.sibling = nil
+						end
 						local var12 = var11
 						var12.return_ = p5
 						
@@ -420,7 +469,12 @@ local function ChildReconciler(p1)
 			end
 			local var14 = createWorkInProgress(p6, p7)
 			var14.index = 1
-			var14.sibling = nil
+			
+			if not reactFeatureFlags.enableWorkLoopTrims then
+				var14.sibling = nil
+			elseif var14.sibling ~= nil then
+				var14.sibling = nil
+			end
 			local var15 = var14
 			var15.return_ = p5
 			
@@ -439,7 +493,12 @@ local function ChildReconciler(p1)
 			end
 			local var18 = createWorkInProgress(p6, var16)
 			var18.index = 1
-			var18.sibling = nil
+			
+			if not reactFeatureFlags.enableWorkLoopTrims then
+				var18.sibling = nil
+			elseif var18.sibling ~= nil then
+				var18.sibling = nil
+			end
 			local var19 = var18
 			var19.return_ = p5
 			
@@ -456,7 +515,7 @@ local function ChildReconciler(p1)
 	end
 	
 	local function updateFromMap(p5, p6, p7, p8, p9, p10)
-		-- upvalues: REACT_ELEMENT_TYPE (copy), REACT_FRAGMENT_TYPE (copy), fragment (copy), createFiberFromFragment (copy), createWorkInProgress (copy), updateElement (ref), REACT_PORTAL_TYPE (copy), updatePortal (ref), REACT_LAZY_TYPE (copy), enableLazyElements (copy), updateFromMap (ref), hostText (copy), createFiberFromText (copy), dEV (copy), getComponentName (copy), t_1 (copy), console (copy)
+		-- upvalues: REACT_ELEMENT_TYPE (copy), REACT_FRAGMENT_TYPE (copy), fragment (copy), createFiberFromFragment (copy), createWorkInProgress (copy), reactFeatureFlags (copy), updateElement (ref), REACT_PORTAL_TYPE (copy), updatePortal (ref), REACT_LAZY_TYPE (copy), enableLazyElements (copy), updateFromMap (ref), hostText (copy), createFiberFromText (copy), dEV (copy), getComponentName (copy), t_1 (copy), console (copy)
 		if p8 == nil then
 			return nil
 		end
@@ -491,7 +550,12 @@ local function ChildReconciler(p1)
 					end
 					local var12 = createWorkInProgress(var8, children)
 					var12.index = 1
-					var12.sibling = nil
+					
+					if not reactFeatureFlags.enableWorkLoopTrims then
+						var12.sibling = nil
+					elseif var12.sibling ~= nil then
+						var12.sibling = nil
+					end
 					local var13 = var12
 					var13.return_ = p6
 					
@@ -514,7 +578,12 @@ local function ChildReconciler(p1)
 			end
 			local var15 = createWorkInProgress(var8, p8)
 			var15.index = 1
-			var15.sibling = nil
+			
+			if not reactFeatureFlags.enableWorkLoopTrims then
+				var15.sibling = nil
+			elseif var15.sibling ~= nil then
+				var15.sibling = nil
+			end
 			local var16 = var15
 			var16.return_ = p6
 			
@@ -531,7 +600,12 @@ local function ChildReconciler(p1)
 			end
 			local var18 = createWorkInProgress(var7, var8)
 			var18.index = 1
-			var18.sibling = nil
+			
+			if not reactFeatureFlags.enableWorkLoopTrims then
+				var18.sibling = nil
+			elseif var18.sibling ~= nil then
+				var18.sibling = nil
+			end
 			local var19 = var18
 			var19.return_ = p6
 			
@@ -1009,7 +1083,7 @@ local function ChildReconciler(p1)
 	end
 	
 	local function reconcileSingleTextNode(p20, p21, p22, p23)
-		-- upvalues: hostText (copy), p1 (ref), deletion (copy), createWorkInProgress (copy), createFiberFromText (copy)
+		-- upvalues: hostText (copy), p1 (ref), deletion (copy), createWorkInProgress (copy), reactFeatureFlags (copy), createFiberFromText (copy)
 		if p21 == nil or p21.tag ~= hostText then
 			if p1 then
 				local var59 = p21
@@ -1056,7 +1130,12 @@ local function ChildReconciler(p1)
 			end
 			local var64 = createWorkInProgress(p21, p22)
 			var64.index = 1
-			var64.sibling = nil
+			
+			if not reactFeatureFlags.enableWorkLoopTrims then
+				var64.sibling = nil
+			elseif var64.sibling ~= nil then
+				var64.sibling = nil
+			end
 			local var65 = var64
 			var65.return_ = p20
 			
@@ -1065,21 +1144,22 @@ local function ChildReconciler(p1)
 	end
 	
 	local function reconcileSingleElement(p24, p25, p26, p27)
-		-- upvalues: fragment (copy), REACT_FRAGMENT_TYPE (copy), p1 (ref), deletion (copy), createWorkInProgress (copy), dEV (copy), isCompatibleFamilyForHotReloading (copy), createFiberFromFragment (copy), createFiberFromElement (copy)
+		-- upvalues: fragment (copy), REACT_FRAGMENT_TYPE (copy), p1 (ref), deletion (copy), createWorkInProgress (copy), reactFeatureFlags (copy), dEV (copy), isCompatibleFamilyForHotReloading (copy), createFiberFromFragment (copy), createFiberFromElement (copy)
 		local key = p26.key
 		local var66 = p25
 		while var66 ~= nil do
+			local var67
 			if var66.key ~= key then
-				local var67 = var66
+				local var68 = var66
 				
 				if p1 then
 					local deletions = p24.deletions
 					
 					if deletions == nil then
-						p24.deletions = { var67 }
+						p24.deletions = { var68 }
 						p24.flags = bit32.bor(p24.flags, deletion)
 					else
-						table.insert(deletions, var67)
+						table.insert(deletions, var68)
 					end
 				end
 				var66 = var66.sibling
@@ -1089,40 +1169,45 @@ local function ChildReconciler(p1)
 					local sibling = var66.sibling
 					
 					if p1 then
-						local var68 = sibling
-						while var68 ~= nil do
-							local var69 = var68
+						local var69 = sibling
+						while var69 ~= nil do
+							local var70 = var69
 							
 							if p1 then
 								local deletions = p24.deletions
 								
 								if deletions == nil then
-									p24.deletions = { var69 }
+									p24.deletions = { var70 }
 									p24.flags = bit32.bor(p24.flags, deletion)
 								else
-									table.insert(deletions, var69)
+									table.insert(deletions, var70)
 								end
 							end
-							var68 = var68.sibling
+							var69 = var69.sibling
 						end
 					end
-					local var70 = createWorkInProgress(var66, p26.props.children)
-					var70.index = 1
-					var70.sibling = nil
-					var70.return_ = p24
+					local var71 = createWorkInProgress(var66, p26.props.children)
+					var71.index = 1
+					
+					if not reactFeatureFlags.enableWorkLoopTrims then
+						var71.sibling = nil
+					elseif var71.sibling ~= nil then
+						var71.sibling = nil
+					end
+					var71.return_ = p24
 					
 					if dEV then
-						var70._debugSource = p26._source
-						var70._debugOwner = p26._owner
+						var71._debugSource = p26._source
+						var71._debugOwner = p26._owner
 					end
-					return var70
+					return var71
 				else
-					local var71 = var66
+					local var72 = var66
 					
 					if not p1 then break end
-					local var72 = var71
-					while var72 ~= nil do
-						local var73 = var72
+					var67 = var72
+					while var67 ~= nil do
+						local var73 = var67
 						
 						if p1 then
 							local deletions = p24.deletions
@@ -1134,7 +1219,7 @@ local function ChildReconciler(p1)
 								table.insert(deletions, var73)
 							end
 						end
-						var72 = var72.sibling
+						var67 = var67.sibling
 					end
 				end
 			elseif var66.elementType == p26.type or dEV and isCompatibleFamilyForHotReloading(var66, p26) then
@@ -1160,9 +1245,23 @@ local function ChildReconciler(p1)
 				end
 				local var76 = createWorkInProgress(var66, p26.props)
 				var76.index = 1
-				var76.sibling = nil
+				
+				if not reactFeatureFlags.enableWorkLoopTrims then
+					var76.sibling = nil
+				elseif var76.sibling ~= nil then
+					var76.sibling = nil
+				end
 				local var77 = var76
-				var77.ref = coerceRef(p24, var66, p26)
+				
+				if reactFeatureFlags.enableWorkLoopTrims then
+					var67 = coerceRef(p24, var66, p26)
+					
+					if var67 ~= nil or var77.ref ~= nil then
+						var77.ref = var67
+					end
+				else
+					var77.ref = coerceRef(p24, var66, p26)
+				end
 				var77.return_ = p24
 				
 				if dEV then
@@ -1186,7 +1285,7 @@ local function ChildReconciler(p1)
 	end
 	
 	local function reconcileSinglePortal(p28, p29, p30, p31)
-		-- upvalues: hostPortal (copy), p1 (ref), deletion (copy), createWorkInProgress (copy), createFiberFromPortal (copy)
+		-- upvalues: hostPortal (copy), p1 (ref), deletion (copy), createWorkInProgress (copy), reactFeatureFlags (copy), createFiberFromPortal (copy)
 		local key = p30.key
 		local var80 = p29
 		while var80 ~= nil do
@@ -1214,7 +1313,12 @@ local function ChildReconciler(p1)
 					end
 					local var83 = createWorkInProgress(var80, p30.children or {})
 					var83.index = 1
-					var83.sibling = nil
+					
+					if not reactFeatureFlags.enableWorkLoopTrims then
+						var83.sibling = nil
+					elseif var83.sibling ~= nil then
+						var83.sibling = nil
+					end
 					local var84 = var83
 					var84.return_ = p28
 					

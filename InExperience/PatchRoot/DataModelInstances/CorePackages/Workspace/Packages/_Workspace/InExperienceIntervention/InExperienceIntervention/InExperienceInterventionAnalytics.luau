@@ -9,7 +9,8 @@ local t = {
 		Nudge = "INTERVENTION_CHAT_NUDGE",
 		Timeout = "INTERVENTION_CHAT_TIMEOUT",
 		PartyChatNudge = "INTERVENTION_PARTY_CHAT_NUDGE",
-		PartyChatTimeout = "INTERVENTION_PARTY_CHAT_TIMEOUT"
+		PartyChatTimeout = "INTERVENTION_PARTY_CHAT_TIMEOUT",
+		DictationSafetyReminder = "INTERVENTION_DICTATION_SAFETY_REMINDER"
 	},
 	EventTypes = {
 		AppealClicked = "EVENT_APPEAL_CLICKED",
@@ -21,6 +22,8 @@ local t = {
 		NudgeToastDismissed = "EVENT_NUDGE_TOAST_DISMISSED",
 		ChatAttemptToastAppeared = "EVENT_CHAT_ATTEMPT_TOAST_APPEARED",
 		ChatAttemptToastDismissed = "EVENT_CHAT_ATTEMPT_TOAST_DISMISSED",
+		DictationSafetyReminderToastAppeared = "EVENT_DICTATION_SAFETY_REMINDER_TOAST_APPEARED",
+		DictationSafetyReminderToastDismissed = "EVENT_DICTATION_SAFETY_REMINDER_TOAST_DISMISSED",
 		GetModerationDetailFailed = "EVENT_GET_MODERATION_DETAIL_FAILED"
 	}
 }
@@ -40,7 +43,7 @@ local var3 = function(p1, p2, p3, p4, p5, p6, p7, p8)
 		acknowledgeable = p8
 	}
 	
-	if p1 == t.EventTypes.CtaClicked or p1 == t.EventTypes.AppealClicked or (p1 == t.EventTypes.NudgeToastDismissed or p1 == t.EventTypes.ChatAttemptToastDismissed) then
+	if p1 == t.EventTypes.CtaClicked or p1 == t.EventTypes.AppealClicked or (p1 == t.EventTypes.NudgeToastDismissed or p1 == t.EventTypes.ChatAttemptToastDismissed) or p1 == t.EventTypes.DictationSafetyReminderToastDismissed then
 		t_1 = cryoModule.Dictionary.join({
 			time_to_interact_seconds = (unixTimestampMillis - p3) / 1000
 		}, t_1)

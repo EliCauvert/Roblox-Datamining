@@ -7,9 +7,10 @@ local _ = require(appChat.Components.ChatConversation.Grouping.MessageGroupShape
 local loadFoundationCloudAssetModule = require(appChat.Utils.loadFoundationCloudAsset)
 local useIsInExperienceModule = require(appChat.Hooks.useIsInExperience)
 local fIntPlusReferralRewardRobux = require(parent.SharedFlags).FIntPlusReferralRewardRobux
+local fFlagEnablePlusReferralEntrypointTelemetry = require(parent.SharedFlags).FFlagEnablePlusReferralEntrypointTelemetry
 
 return function(value)
-	-- upvalues: reactModule (ref), loadFoundationCloudAssetModule (ref), useLocalization (ref), fIntPlusReferralRewardRobux (ref), useIsInExperienceModule (ref), parent (ref), assetCardTypesModule (ref)
+	-- upvalues: reactModule (ref), loadFoundationCloudAssetModule (ref), useLocalization (ref), fIntPlusReferralRewardRobux (ref), useIsInExperienceModule (ref), parent (ref), fFlagEnablePlusReferralEntrypointTelemetry (ref), assetCardTypesModule (ref)
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: loadFoundationCloudAssetModule (copy)
 		return Content.fromUri(loadFoundationCloudAssetModule("pictograms/plus_robux"))
@@ -24,9 +25,11 @@ return function(value)
 	local var3 = useIsInExperienceModule()
 	local referrerId = value.referrerId
 	local var4 = reactModule.useCallback(function()
-		-- upvalues: parent (copy), var3 (ref), referrerId (ref)
+		-- upvalues: parent (copy), var3 (ref), fFlagEnablePlusReferralEntrypointTelemetry (copy), referrerId (ref)
 		local robloxSubscriptionPurchaseAppModule = require(parent.RobloxSubscriptionPurchaseApp)
-		robloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase(nil, nil, nil, robloxSubscriptionPurchaseAppModule.SurfaceName.PlusReferralLandingSheet, if var3 then robloxSubscriptionPurchaseAppModule.SurfaceContext.InGame else robloxSubscriptionPurchaseAppModule.SurfaceContext.InApp, nil, nil, tonumber(referrerId))
+		robloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase(nil, nil, nil, robloxSubscriptionPurchaseAppModule.SurfaceName.PlusReferralLandingSheet, if var3 then robloxSubscriptionPurchaseAppModule.SurfaceContext.InGame else robloxSubscriptionPurchaseAppModule.SurfaceContext.InApp, nil, if fFlagEnablePlusReferralEntrypointTelemetry then {
+			entrypoint = robloxSubscriptionPurchaseAppModule.Entrypoint.AppChat
+		} else nil, tonumber(referrerId))
 	end, { referrerId, var3 })
 	
 	return reactModule.useMemo(function()

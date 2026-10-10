@@ -1,4 +1,5 @@
-﻿local userInputService = game:GetService("UserInputService")
+﻿local textChatService = game:GetService("TextChatService")
+local userInputService = game:GetService("UserInputService")
 local expChat = script:FindFirstAncestor("ExpChat")
 local parent = expChat.Parent
 local reactModule = require(parent.React)
@@ -113,7 +114,7 @@ channelBarApp = roactRoduxModule.connect(function(p1)
 		allTextChannels = p1.TextChannels.allTextChannels
 	}
 end, function(p1)
-	-- upvalues: selectTabByTypeModule (ref), fFlagDebugFriendsChatModule (ref), channelTabsConfigurationEnabledModule (ref), getChannelTabsStoreModule (ref), localTextChannelParticipantAddedModule (ref)
+	-- upvalues: selectTabByTypeModule (ref), fFlagDebugFriendsChatModule (ref), channelTabsConfigurationEnabledModule (ref), getChannelTabsStoreModule (ref), textChatService (ref), localTextChannelParticipantAddedModule (ref)
 	return {
 		onTabSelected = function(value, p2, p3, p4)
 			-- upvalues: selectTabByTypeModule (copy), p1 (ref)
@@ -125,7 +126,7 @@ end, function(p1)
 			})
 		end,
 		debugAddFakeTabs = if fFlagDebugFriendsChatModule then function(p2)
-			-- upvalues: p1 (ref), channelTabsConfigurationEnabledModule (copy), getChannelTabsStoreModule (copy), localTextChannelParticipantAddedModule (copy)
+			-- upvalues: p1 (ref), channelTabsConfigurationEnabledModule (copy), getChannelTabsStoreModule (copy), textChatService (copy), localTextChannelParticipantAddedModule (copy)
 			p1(channelTabsConfigurationEnabledModule(true))
 			local var1 = getChannelTabsStoreModule(false)
 			var1.setChannelTabsConfigurationEnabled(true)
@@ -134,6 +135,7 @@ end, function(p1)
 				local text = "D" .. tostring(i)
 				local textChannel = Instance.new("TextChannel")
 				textChannel.Name = text
+				textChannel.Parent = textChatService:FindFirstChild("TextChannels") or textChatService
 				p1(localTextChannelParticipantAddedModule(textChannel))
 				var1.addChannelTab({ type = "TextChat", name = text }, nil)
 			end

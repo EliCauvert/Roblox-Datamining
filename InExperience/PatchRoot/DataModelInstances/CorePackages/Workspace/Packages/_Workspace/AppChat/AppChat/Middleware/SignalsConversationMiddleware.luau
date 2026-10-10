@@ -37,6 +37,7 @@ local setPinnedGameForConversationModule = require(appChat.Conversations.Actions
 local setUserLeavingConversationModule = require(appChat.Conversations.Actions.SetUserLeavingConversation)
 local setUserTypingModule = require(appChat.Conversations.Actions.SetUserTyping)
 local fFlagAppChatConversationStoreModule = require(appChat.Flags.FFlagAppChatConversationStore)
+local fFlagAppChatConversationLoadRetryModule = require(appChat.Flags.FFlagAppChatConversationLoadRetry)
 local fFlagAppChatServerSideConversationSearchModule = require(appChat.Flags.FFlagAppChatServerSideConversationSearch)
 local appChatBatchConversationPageUpsert = game:DefineFastFlag("AppChatBatchConversationPageUpsert", false)
 local t = {
@@ -440,8 +441,63 @@ local function handleDuplicateConversationSucceeded(p11, p12)
 	end
 end
 
+local _ = function(p11)
+	local var13 = if p11 ~= nil then nil else p11.queryArgs
+	
+	if type(var13) ~= "table" then
+		return true
+	elseif var13.pageNumber ~= nil then
+		return var13.pageNumber == 1
+	end
+	local cursor = var13.cursor
+	
+	return if cursor ~= nil then cursor == "" else true
+end
+
+local _ = function(p11, p12)
+	-- upvalues: fFlagAppChatConversationLoadRetryModule (ref), cryoModule (ref)
+	if not fFlagAppChatConversationLoadRetryModule then return end
+	local var13
+	p12.error = cryoModule.None
+	p12.isFetchingNextPage = false
+	local var14 = if p11 ~= nil then nil else p11.queryArgs
+	
+	if type(var14) ~= "table" then
+		var13 = true
+	elseif var14.pageNumber == nil then
+		local cursor = var14.cursor
+		var13 = if cursor ~= nil then cursor == "" else true
+	else
+		local _ = var14.pageNumber == 1
+	end
+	if var13 then
+		p12.hasFetchedInitialPage = true
+	end
+end
+
+local _ = function(p11, p12)
+	-- upvalues: fFlagAppChatConversationLoadRetryModule (ref)
+	if not fFlagAppChatConversationLoadRetryModule then return end
+	local var13
+	p12.isFetchingNextPage = false
+	local var14 = if p11 ~= nil then nil else p11.queryArgs
+	
+	if type(var14) ~= "table" then
+		var13 = true
+	elseif var14.pageNumber == nil then
+		local cursor = var14.cursor
+		var13 = if cursor ~= nil then cursor == "" else true
+	else
+		local _ = var14.pageNumber == 1
+	end
+	if var13 then
+		var13 = p11 == nil or p11.error == nil or p11.error
+		p12.error = var13
+	end
+end
+
 local function handleGetUserConversationsSucceeded(p11, p12)
-	-- upvalues: upsertConversationResponses (ref)
+	-- upvalues: upsertConversationResponses (ref), fFlagAppChatConversationLoadRetryModule (ref), cryoModule (ref)
 	upsertConversationResponses(p12, p11.responseBody)
 	local nextCursor = p11.responseBody and p11.responseBody.next_cursor
 	local t = { isFetchingConversations = false }
@@ -449,11 +505,50 @@ local function handleGetUserConversationsSucceeded(p11, p12)
 	if nextCursor == nil or nextCursor == "" then
 		t.oldestConversationIsFetched = true
 	end
+	if fFlagAppChatConversationLoadRetryModule then
+		local var13
+		t.error = cryoModule.None
+		t.isFetchingNextPage = false
+		local var14 = if p11 ~= nil then nil else p11.queryArgs
+		
+		if type(var14) ~= "table" then
+			var13 = true
+		elseif var14.pageNumber == nil then
+			local cursor = var14.cursor
+			var13 = if cursor ~= nil then cursor == "" else true
+		else
+			local _ = var14.pageNumber == 1
+		end
+		if var13 then
+			t.hasFetchedInitialPage = true
+		end
+	end
 	p12.setListStatus(t)
 end
 
-local function handleGetUserConversationsFailed(_, p11)
-	p11.setListStatus({ isFetchingConversations = false })
+local function handleGetUserConversationsFailed(p11, p12)
+	-- upvalues: fFlagAppChatConversationLoadRetryModule (ref)
+	local t = { isFetchingConversations = false }
+	
+	if fFlagAppChatConversationLoadRetryModule then
+		local var13
+		t.isFetchingNextPage = false
+		local var14 = if p11 ~= nil then nil else p11.queryArgs
+		
+		if type(var14) ~= "table" then
+			var13 = true
+		elseif var14.pageNumber == nil then
+			local cursor = var14.cursor
+			var13 = if cursor ~= nil then cursor == "" else true
+		else
+			local _ = var14.pageNumber == 1
+		end
+		if var13 then
+			var13 = p11 == nil or p11.error == nil or p11.error
+			t.error = var13
+		end
+	end
+	p12.setListStatus(t)
 end
 
 local function handleGetConversationDetailsSucceeded(p11, p12)
@@ -462,14 +557,34 @@ local function handleGetConversationDetailsSucceeded(p11, p12)
 end
 
 local function handleLegacyGetUserConversationsSucceeded(p11, p12)
-	-- upvalues: conversationModule (ref)
+	-- upvalues: conversationModule (ref), fFlagAppChatConversationLoadRetryModule (ref), cryoModule (ref)
 	local responseBody = p11.responseBody
 	
 	if responseBody == nil then return end
 	for i, v in ipairs(responseBody) do
 		p12.upsertConversation(conversationModule.fromWeb(v))
 	end
-	p12.setListStatus({ isFetchingConversations = false })
+	local t = { isFetchingConversations = false }
+	
+	if fFlagAppChatConversationLoadRetryModule then
+		local var13
+		t.error = cryoModule.None
+		t.isFetchingNextPage = false
+		local var14 = if p11 ~= nil then nil else p11.queryArgs
+		
+		if type(var14) ~= "table" then
+			var13 = true
+		elseif var14.pageNumber == nil then
+			local cursor = var14.cursor
+			var13 = if cursor ~= nil then cursor == "" else true
+		else
+			local _ = var14.pageNumber == 1
+		end
+		if var13 then
+			t.hasFetchedInitialPage = true
+		end
+	end
+	p12.setListStatus(t)
 	local pageSize = p11.queryArgs and p11.queryArgs.pageSize
 	
 	if pageSize ~= nil and #responseBody < pageSize then
@@ -548,8 +663,8 @@ local t_1 = {
 		
 		if responseBody == nil then return end
 		for i, v in ipairs(responseBody) do
-			local var13 = tostring(v.conversationId)
-			updateConversationLastUpdatedFromMessages(p18, var13, messagesFromWebResponse(var13, v.chatMessages))
+			local var15 = tostring(v.conversationId)
+			updateConversationLastUpdatedFromMessages(p18, var15, messagesFromWebResponse(var15, v.chatMessages))
 		end
 	end,
 	[networkingChatModule.MarkAsRead.Succeeded.name] = function(p19, p20)
@@ -570,14 +685,14 @@ local t_1 = {
 		local users = p19.namedIds and p19.namedIds.users
 		
 		if users == nil then return end
-		local var14 = tostring(users)
+		local var16 = tostring(users)
 		
 		for i, v in p20.getConversations(false) do
-			if v.type == conversationChannelsModule.Type.OneToOne and table.find(v.participants or {}, var14) then
+			if v.type == conversationChannelsModule.Type.OneToOne and table.find(v.participants or {}, var16) then
 				p20.removeConversation(v.id)
 			end
 		end
-		p20.removeConversation(conversationChannelsModule.getFriendConversationId({ var14 }))
+		p20.removeConversation(conversationChannelsModule.getFriendConversationId({ var16 }))
 	end,
 	[receivedConversationModule.name] = function(p21, p22)
 		p22.upsertConversation(p21.conversation)
@@ -729,12 +844,12 @@ local t_1 = {
 	end,
 	[friendshipDestroyedModule.name] = function(p21, p22)
 		-- upvalues: conversationChannelsModule (ref)
-		local var15 = if p21.userId1 ~= "localUserId" then if p21.userId2 ~= "localUserId" then nil else p21.userId2 else p21.userId1
+		local var17 = if p21.userId1 ~= "localUserId" then if p21.userId2 ~= "localUserId" then nil else p21.userId2 else p21.userId1
 		
-		if var15 == nil then
+		if var17 == nil then
 			return
 		end
-		p22.removeConversation(conversationChannelsModule.getFriendConversationId({ var15 }))
+		p22.removeConversation(conversationChannelsModule.getFriendConversationId({ var17 }))
 	end,
 	[requestPageConversationsModule.name] = function(_, p21)
 		p21.setListStatus({ isFetchingConversations = true })
@@ -771,16 +886,16 @@ return function(value, _)
 	-- upvalues: fFlagAppChatConversationStoreModule (ref), t_1 (ref), getConversationStoreModule (ref)
 	return function(p21)
 		-- upvalues: value (ref), fFlagAppChatConversationStoreModule (copy), t_1 (copy), getConversationStoreModule (copy)
-		local var15 = value(p21)
+		local var17 = value(p21)
 		
 		if not fFlagAppChatConversationStoreModule then
-			return var15
+			return var17
 		end
 		local type = t_1[p21.type]
 		
 		if type then
 			type(p21, getConversationStoreModule(false))
 		end
-		return var15
+		return var17
 	end
 end

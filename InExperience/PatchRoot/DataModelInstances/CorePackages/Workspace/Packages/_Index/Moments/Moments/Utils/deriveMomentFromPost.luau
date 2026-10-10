@@ -133,10 +133,10 @@ return function(p3, p4)
 						local var5
 						content_1 = { assetId = value.asset_id }
 						
-						if value.trim == nil then
+						if v_1.time_range == nil then
 							var5 = 0
 						else
-							local offsetDuration = value.trim.offset_duration
+							local offsetDuration = v_1.time_range.offset_duration
 							var5 = if offsetDuration == nil then 0 else (offsetDuration.seconds or 0) + (offsetDuration.nanos or 0) / 1000000000
 						end
 						content_1.startTime = var5

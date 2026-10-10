@@ -25,11 +25,18 @@ return function(p1)
 		local var4 = if presence and presence.userPresenceType == presenceTypes.InGame then presence.lastLocation else nil
 		
 		if var4 ~= nil and var4 ~= "" and (p1.contextualText == var4 and var1) then
+			local onMarqueeFinished = p1.onMarqueeFinished
 			contextualText = reactModule.createElement(var1, {
 				LayoutOrder = 2,
 				text = var4,
 				playStatus = p1.playStatus or marqueePlayStatus.Idle,
-				fontStyle = var2.Typography.LabelSmall
+				fontStyle = var2.Typography.LabelSmall,
+				maxLoops = if onMarqueeFinished ~= nil then nil else 1,
+				runId = p1.marqueeRunId,
+				onFinished = if onMarqueeFinished ~= nil then nil else function()
+					-- upvalues: onMarqueeFinished (ref), p1 (ref)
+					onMarqueeFinished(p1.item.id)
+				end
 			})
 		end
 	end

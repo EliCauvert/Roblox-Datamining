@@ -28,6 +28,7 @@ return {
 	skipUnmountedBoundaries = true,
 	deletedTreeCleanUpLevel = safeFlagsModule.createGetFInt("ReactDeletedTreeCleanUpLevel", 1)(),
 	enableNewTreeCleanupPath = safeFlagsModule.createGetFFlag("ReactEnableNewTreeCleanupPath", false)(),
+	enableHookDoubleBuffering = safeFlagsModule.createGetFFlag("ReactEnableHookDoubleBuffering", false)(),
 	filterInternalStackFrames = reactGlobalsModule.__DEV__ and safeFlagsModule.createGetFFlag("ReactFilterInternalStackFrames")(),
 	warnAboutStringRefs = false,
 	disableLegacyContext = false,
@@ -36,5 +37,13 @@ return {
 	deferRenderPhaseUpdateToNextBatch = false,
 	decoupleUpdatePriorityFromScheduler = true,
 	enableEagerRootListeners = false,
-	enableDoubleInvokingEffects = false
+	enableDoubleInvokingEffects = false,
+	enableAllocationTrims = safeFlagsModule.createGetFFlag("ReactEnableAllocationTrims", false)(),
+	enableWorkLoopTrims = safeFlagsModule.createGetFFlag("ReactWorkLoopTrims", false)(),
+	enableCommitTraversalTrims = safeFlagsModule.createGetFFlag("ReactCommitTraversalTrims", false)(),
+	enableSkipHostSiblingLookup = safeFlagsModule.createGetFFlag("ReactSkipHostSiblingLookup", false)(),
+	enableReentrantSafeSignals = safeFlagsModule.createGetFFlag("ReactReentrantSafeSignals", false)(),
+	keepSyncQueueOnError = safeFlagsModule.createGetFFlag("ReactKeepSyncQueueOnError", false)(),
+	fixGetInstanceFromNode = safeFlagsModule.createGetFFlag("ReactFixGetInstanceFromNode", false)(),
+	fixEagerReducerError = safeFlagsModule.createGetFFlag("ReactFixEagerReducerError", false)()
 }

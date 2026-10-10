@@ -110,7 +110,6 @@ Authentication.SignUp.Action.Create,Buat
 Authentication.SignUp.Action.CreateAccountSentenceCase,Buat akun
 Authentication.SignUp.Action.ExitModalLeave,Keluar
 Authentication.SignUp.Action.RespawnNow,Respawn sekarang
-Authentication.SignUp.Action.StartPlay,Mulai bermain
 Authentication.SignUp.Button.OKCaptialized,OKE
 Authentication.SignUp.Button.RetryLogIn,Coba log in lagi
 Authentication.SignUp.Description.AccountAlreadyLinked,Akunmu di {platformAccountName} sudah terhubung dengan akun Roblox. Coba log in lagi.
@@ -721,6 +720,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Kategori *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Pilih kategori
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Masalah pembelian
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,Saran
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Maksimum {MAX} karakter
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Detail *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Batalkan Pilihan
@@ -728,6 +728,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Sertakan s
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Jelaskan apa yang hilang dan kapan terakhir kali kamu melihatnya. Jika akunmu diretas, sertakan nomor email Dukungan Pelanggan Roblox-mu dan detail relevan lainnya."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Jelaskan permintaan atau masalahmu di sini. Berikan detail sebanyak mungkin untuk membantu kami memahami situasinya.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Beri tahu kami apa yang kamu coba beli, kapan itu terjadi, dan nilai totalnya (misalnya 500 Robux/$4,99). Sertakan pesan kesalahan yang kamu lihat."
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,"Sampaikan hal yang sebaiknya ditambahkan atau ditingkatkan, dan alasan hal itu akan membuat game menjadi lebih baik."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Mencoba melaporkan penyalahgunaan?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Kirim laporan saja.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Pilih
@@ -1253,6 +1254,19 @@ Corescripts.AvatarContextMenu.FriendRequestPending,Permintaan Teman Pending
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,Pengguna Diblokir
 Corescripts.AvatarContextMenu.Wave,Lambaikan Tangan
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,Grafik
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Lanjutkan Bermain
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Berteleportasi
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Ditampilkan oleh Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Beranda Lainnya
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Rekomendasi Beranda
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Portal Iklan
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Iklan Pencarian
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Iklan Bersponsor
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Scroll ke Bawah
 Feature.Accessibility.Action.ScrollUp,Scroll ke Atas
@@ -3172,7 +3186,7 @@ Feature.FaceChat.Subtitle.UnsupportedDevice,Perangkat kamu tidak memenuhi syarat
 Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,Mematikan kamera dapat meningkatkan performa pengalaman virtual.
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox tidak dapat menggunakan kamera perangkat kamu untuk menganimasi Avatarmu.
 Feature.Favorites.Label.Favorite,
-Feature.FlyoutSidePanel.Action.ContinuePlaying,Lanjutkan Bermain
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,"Profil, konten, dan pengaturanmu telah dipindahkan ke lokasi baru."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> telah dipindahkan
 Feature.Friends.Action.AcceptFriend,Terima teman

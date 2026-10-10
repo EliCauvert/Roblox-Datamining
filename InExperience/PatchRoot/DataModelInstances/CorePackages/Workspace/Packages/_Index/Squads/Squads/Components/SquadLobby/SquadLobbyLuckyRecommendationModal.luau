@@ -1,5 +1,6 @@
 ﻿local squads = script:FindFirstAncestor("Squads")
 local parent = squads.Parent
+local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local dependenciesModule = require(squads.dependencies)
 local react = dependenciesModule.React
 local foundation = dependenciesModule.Foundation
@@ -41,7 +42,7 @@ local useSignalState = require(parent.SignalsReact).useSignalState
 local eventNamesModule = require(parent.SquadsCore.EventNames)
 
 return function(p1)
-	-- upvalues: useTokens (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), useLuckyRecommendation (ref), useLuckyRecommendationAnalytics (ref), useLocalization (ref), squadLuckyRecommendationPhase (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), useSelector (ref), fFlagUseSignalsForSquadExperienceInvite (ref), useSignalState (ref), getSquadExperienceInviteStore (ref), useIsExperienceInviteRetryBlocked (ref), eventNamesModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), setTimeout (ref), clearTimeout (ref), reactOtterModule (ref), text (ref), view (ref), image (ref), progress (ref), progressShape (ref), progressSize (ref), overlayProvider (ref), dialog (ref), dialogSize (ref), button (ref), buttonVariant (ref), icon (ref), iconSize (ref)
+	-- upvalues: useTokens (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), useLuckyRecommendation (ref), useLuckyRecommendationAnalytics (ref), useLocalization (ref), squadLuckyRecommendationPhase (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), useSelector (ref), fFlagUseSignalsForSquadExperienceInvite (ref), useSignalState (ref), getSquadExperienceInviteStore (ref), useIsExperienceInviteRetryBlocked (ref), eventNamesModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), setTimeout (ref), clearTimeout (ref), reactOtterModule (ref), text (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), view (ref), image (ref), progress (ref), progressShape (ref), progressSize (ref), overlayProvider (ref), dialog (ref), dialogSize (ref), button (ref), buttonVariant (ref), icon (ref), iconSize (ref)
 	local var1 = useTokens()
 	local var2 = useDispatch()
 	local size300 = var1.Size.Size_300
@@ -172,7 +173,8 @@ return function(p1)
 		Title = react.createElement(text, {
 			tag = "size-full-0 auto-y text-heading-small text-align-x-left content-emphasis",
 			LayoutOrder = 1,
-			Text = var20.title
+			Text = var20.title,
+			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--title" else nil
 		})
 	}
 	
@@ -180,7 +182,8 @@ return function(p1)
 		t.Subtitle = react.createElement(text, {
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 			LayoutOrder = 2,
-			Text = var20.subtitle
+			Text = var20.subtitle,
+			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--subtitle" else nil
 		})
 	end
 	local t_1 = {
@@ -199,7 +202,8 @@ return function(p1)
 				tag = "radius-small",
 				LayoutOrder = 1,
 				Image = var11,
-				Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000)
+				Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000),
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--game-thumbnail" else nil
 			}) else nil,
 			GameInfo = react.createElement(view, {
 				tag = "col align-y-center fill",
@@ -209,7 +213,8 @@ return function(p1)
 				GameName = react.createElement(text, {
 					tag = "size-full-0 auto-y text-title-medium text-no-wrap text-align-x-left text-truncate-end content-emphasis",
 					LayoutOrder = 1,
-					Text = var10.universeName
+					Text = var10.universeName,
+					testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--game-name" else nil
 				})
 			})
 		})
@@ -224,7 +229,8 @@ return function(p1)
 				shape = progressShape.Bar,
 				size = progressSize.Medium,
 				value = var18,
-				width = UDim.new(1, 0)
+				width = UDim.new(1, 0),
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--progress" else nil
 			})
 		})
 	end
@@ -233,7 +239,8 @@ return function(p1)
 			onClose = var15,
 			size = dialogSize.Small,
 			hasBackdrop = p1.hasBackdrop ~= nil or p1.hasBackdrop,
-			disablePortal = if p1.disablePortal ~= nil then false else p1.disablePortal
+			disablePortal = if p1.disablePortal ~= nil then false else p1.disablePortal,
+			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog" else nil
 		}, {
 			Content = react.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = 1 }, {
 				Main = react.createElement(view, {
@@ -250,7 +257,8 @@ return function(p1)
 						text = var20.actionText,
 						variant = buttonVariant.Standard,
 						width = UDim.new(1, 0),
-						isDisabled = var20.isActionDisabled
+						isDisabled = var20.isActionDisabled,
+						testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--action-button" else nil
 					})
 				}),
 				ResetButton = if var8 then react.createElement(view, {
@@ -259,7 +267,8 @@ return function(p1)
 					onActivated = var16,
 					Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000),
 					AnchorPoint = Vector2.new(1, 0),
-					Position = UDim2.new(1, -var1.Size.Size_1000, 0, size300)
+					Position = UDim2.new(1, -var1.Size.Size_1000, 0, size300),
+					testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--reroll-button" else nil
 				}, {
 					Icon = react.createElement(icon, {
 						name = "arrow-spin-clockwise",

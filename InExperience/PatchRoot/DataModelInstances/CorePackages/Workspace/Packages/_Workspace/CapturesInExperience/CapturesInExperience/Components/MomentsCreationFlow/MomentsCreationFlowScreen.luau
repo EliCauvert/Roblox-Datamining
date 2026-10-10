@@ -7,9 +7,11 @@ if require(parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
 	local reactModule = require(parent_1.React)
 	local roactUtilsModule = require(parent_1.RoactUtils)
 	local signalsModule = require(parent_1.Signals)
+	local coreGuiService = game:GetService("CoreGui")
 	local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 	local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 	local constantsModule = require(parent.Constants)
+	local fFlagCapturesInExpStickersAndVoiceModule = require(parent.Flags.FFlagCapturesInExpStickersAndVoice)
 	local momentsCreationFlowClosedModule = require(parent.Actions.MomentsCreationFlowClosed)
 	local useAnalyticsModule = require(parent.Analytics.useAnalytics)
 	local eventNames = momentsCommonModule.Analytics.EventNames
@@ -22,10 +24,8 @@ if require(parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
 		return false
 	end
 	
-	local list = { "trim", "music", "text" }
-	
 	local function MomentsCreationScreen(p1)
-		-- upvalues: parent_1 (ref), parent (ref), reactModule (ref), signalsModule (ref), useDispatch (ref), useAnalyticsModule (ref), useSelector (ref), constantsModule (ref), t (ref), momentsCreationFlowClosedModule (ref), isTextFiltered (ref), list (ref)
+		-- upvalues: parent_1 (ref), parent (ref), reactModule (ref), signalsModule (ref), useDispatch (ref), useAnalyticsModule (ref), useSelector (ref), constantsModule (ref), t (ref), momentsCreationFlowClosedModule (ref), fFlagCapturesInExpStickersAndVoiceModule (ref), isTextFiltered (ref), coreGuiService (ref)
 		local momentsCreationModule = require(parent_1.MomentsCreation)
 		local createMomentModule = require(parent.Thunks.CreateMoment)
 		local creationFlowScreen = momentsCreationModule.CreationFlowScreen
@@ -76,23 +76,27 @@ if require(parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
 			var4(createMomentModule(p2, p3, p4, p5, nil, p6))
 		end, { var4, createMomentModule })
 		local var8 = reactModule.useMemo(function()
-			-- upvalues: var7 (ref), var6 (ref), isTextFiltered (copy), list (copy)
+			-- upvalues: var7 (ref), fFlagCapturesInExpStickersAndVoiceModule (copy), var6 (ref), isTextFiltered (copy), coreGuiService (copy)
 			return {
 				disableDrafts = true,
-				disableExperimentExposure = true,
 				publishDebounceSeconds = 0.5,
 				createMoment = var7,
+				disableExperimentExposure = not fFlagCapturesInExpStickersAndVoiceModule,
 				exitCreationFlow = var6,
 				isTextFiltered = isTextFiltered,
-				toolKinds = list
+				toolKinds = if fFlagCapturesInExpStickersAndVoiceModule then nil else { "trim", "music", "text" },
+				ttsAudioParent = if fFlagCapturesInExpStickersAndVoiceModule then coreGuiService else nil
 			}
 		end, { var7, var6 })
 		reactModule.useEffect(function()
-			-- upvalues: var3 (ref), var4 (ref), momentsCreationFlowClosedModule (copy)
+			-- upvalues: var3 (ref), fFlagCapturesInExpStickersAndVoiceModule (copy), momentsCreationModule (ref), var4 (ref), momentsCreationFlowClosedModule (copy)
 			if not var3 then
+				if fFlagCapturesInExpStickersAndVoiceModule then
+					momentsCreationModule.resetCreationFlow(momentsCreationModule.Enums.CreationFlowState.Preview)
+				end
 				var4(momentsCreationFlowClosedModule())
 			end
-		end, { var3, var4 })
+		end, { var3, var4, momentsCreationModule })
 		
 		return if var3 then reactModule.createElement(creationFlowScreen, { excludeGallery = true, host = var8 }) else nil
 	end

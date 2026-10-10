@@ -57,6 +57,7 @@ local _ = require(script.Parent.Stores.GetSearchQueryStore.createSearchQueryStor
 local buildNavigationParamsModule = require(script.Parent.utils.BuildNavigationParams)
 local resumeBuildChatModule = require(script.Parent.utils.resumeBuildChat)
 local useBuildPageLayoutModule = require(script.Parent.utils.useBuildPageLayout)
+local useManageBuildNavBarVisibilityModule = require(script.Parent.utils.useManageBuildNavBarVisibility)
 local useOnScreenKeyboardVisibleModule = require(script.Parent.utils.useOnScreenKeyboardVisible)
 local fFlagBuildPublishNavigationSheetModule = require(script.Parent.Flags.FFlagBuildPublishNavigationSheet)
 local fFlagBuildExperiencePrivateInvitesModule = require(script.Parent.Flags.FFlagBuildExperiencePrivateInvites)
@@ -64,6 +65,7 @@ local fFlagBuildExperienceMyCreationsLongPressMenuModule = require(script.Parent
 local fFlagEnableBuildTabOverride = sharedFlagsModule.FFlagEnableBuildTabOverride
 local fFlagBuildExperienceAnalytics = sharedFlagsModule.FFlagBuildExperienceAnalytics
 local fFlagBuildExperienceSessionization = sharedFlagsModule.FFlagBuildExperienceSessionization
+local fFlagBuildExperienceHideNavBarOnSubPages = sharedFlagsModule.FFlagBuildExperienceHideNavBarOnSubPages
 local getAdsCampaignDeepLinkStoreModule = require(buildExperience.Stores.GetAdsCampaignDeepLinkStore)
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local fFlagBuildAdUpsellModule_1 = fFlagBuildAdUpsellModule or fFlagBuildExperienceMonetizationNativeUIModule
@@ -766,13 +768,16 @@ local var7 = roactNavigationModule.createRobloxStackNavigator(list_1, { initialR
 local var8 = roactNavigationModule.createAppContainer(var7)
 
 local function BuildPage(p4)
-	-- upvalues: fFlagBuildExperienceSessionization (ref), var3 (ref), useBuildPageEligibilityModule (ref), var1 (ref), reactModule (ref), var7 (ref), var8 (ref), buildEligibilityDialogModule (ref), view (ref), loading (ref), iconSize (ref)
+	-- upvalues: fFlagBuildExperienceSessionization (ref), var3 (ref), useBuildPageEligibilityModule (ref), var1 (ref), fFlagBuildExperienceHideNavBarOnSubPages (ref), useManageBuildNavBarVisibilityModule (ref), t (ref), reactModule (ref), var7 (ref), var8 (ref), buildEligibilityDialogModule (ref), view (ref), loading (ref), iconSize (ref)
 	if fFlagBuildExperienceSessionization then
 		var3("NavigateTo_" .. p30.navigation.state.routeName)
 	end
 	local var9 = if fFlagBuildExperienceSessionization then p4.navigation.getParam("extraProps", {}) else p4
 	local var10 = useBuildPageEligibilityModule.useBuildPageEligibility(var1)
 	
+	if fFlagBuildExperienceSessionization and fFlagBuildExperienceHideNavBarOnSubPages then
+		useManageBuildNavBarVisibilityModule(p4.navigation, t.BuildHome)
+	end
 	return if var10.canEnterBuild then if fFlagBuildExperienceSessionization then reactModule.createElement(var7, { navigation = p4.navigation, screenProps = var9 }) else reactModule.createElement(var8, { screenProps = var9 }) elseif var10.status == useBuildPageEligibilityModule.Status.Ineligible then reactModule.createElement(buildEligibilityDialogModule, {
 		variant = useBuildPageEligibilityModule.Status.Ineligible,
 		onDismiss = var10.onDialogDismiss

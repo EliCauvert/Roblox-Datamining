@@ -43,7 +43,7 @@ return function(p1)
 	local var2 = useStyle()
 	local font = var2.Font
 	local theme = var2.Theme
-	local global = useDesignTokens().Global
+	local size = useDesignTokens().Size
 	local var3 = useLocalization({
 		sponsoredText = "Feature.GamePage.Label.Sponsored",
 		notPlayableText = "Feature.ExperienceDetails.Label.NotPlayable",
@@ -147,14 +147,14 @@ return function(p1)
 				labelText = var3.friendsText,
 				styleProps = {
 					badgeBorderWidth = 3,
-					faceWidth = global.Size_250,
-					faceHeight = global.Size_250,
-					faceGroupGap = -global.Space_75,
-					containerGap = global.Space_50,
-					badgeHeight = global.Size_250,
+					faceWidth = size.Size_500,
+					faceHeight = size.Size_500,
+					faceGroupGap = -size.Size_150,
+					containerGap = size.Size_100,
+					badgeHeight = size.Size_500,
 					fontStyle = var2.Font.CaptionHeader,
-					badgeSpacingLeading = global.Space_50,
-					badgeSpacingTrailing = global.Space_50,
+					badgeSpacingLeading = size.Size_100,
+					badgeSpacingTrailing = size.Size_100,
 					badgeBackgroundColor = { Transparency = 0, Color = colors.Smoke },
 					badgeContentColor = { Transparency = 0, Color = colors.White }
 				}

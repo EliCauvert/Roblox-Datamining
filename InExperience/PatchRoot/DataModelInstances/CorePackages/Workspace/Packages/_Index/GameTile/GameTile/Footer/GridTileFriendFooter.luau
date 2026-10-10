@@ -40,22 +40,22 @@ return {
 	GridTileFriendFooter = function(p2)
 		-- upvalues: useStyle (ref), useDesignTokens (ref), useTextSizeOffset (ref), useLocalization (ref), fFlagLuaAppMigrateGameTileActiveFriendsHydrationFix (ref), useFetchSortedDisplayNames (ref), reactModule (ref), coPlayFooter (ref), array (ref), colors (ref)
 		local var2 = if p2.useLargerFont then useStyle().Font.Body else useStyle().Font.CaptionHeader
-		local global = useDesignTokens().Global
+		local size = useDesignTokens().Size
 		local var3 = useTextSizeOffset()
 		local var4 = useLocalization({
 			friendsSeparator = "Feature.GameDetails.Label.FriendsSeparator"
 		})
-		local space50 = global.Space_50
+		local size100 = size.Size_100
 		
 		if not p2.showOnlineBorder then
-			space50 -= 3
+			size100 -= 3
 		end
 		if fFlagLuaAppMigrateGameTileActiveFriendsHydrationFix then
 			local var5 = useFetchSortedDisplayNames(p2.friendUserIds or {})
 			local createElement = reactModule.createElement
 			local var6 = "TextButton"
 			local t = {
-				Size = UDim2.new(1, 0, 0, global.Space_250 + var3),
+				Size = UDim2.new(1, 0, 0, size.Size_500 + var3),
 				BackgroundTransparency = 1,
 				Text = "",
 				AutoButtonColor = false,
@@ -78,14 +78,14 @@ return {
 			t_2.showEmphasisBorder = p2.showOnlineBorder
 			t_2.styleProps = {
 				badgeBorderWidth = 3,
-				faceWidth = global.Size_250,
-				faceHeight = global.Size_250,
-				faceGroupGap = -global.Space_75,
-				containerGap = space50,
-				badgeHeight = global.Size_250,
+				faceWidth = size.Size_500,
+				faceHeight = size.Size_500,
+				faceGroupGap = -size.Size_150,
+				containerGap = size100,
+				badgeHeight = size.Size_500,
 				fontStyle = var2,
-				badgeSpacingLeading = global.Space_50,
-				badgeSpacingTrailing = global.Space_50,
+				badgeSpacingLeading = size.Size_100,
+				badgeSpacingTrailing = size.Size_100,
 				badgeBackgroundColor = { Transparency = 0, Color = colors.Smoke },
 				badgeContentColor = { Transparency = 0, Color = colors.White }
 			}
@@ -97,7 +97,7 @@ return {
 			local var8 = "Frame"
 			local t = {
 				BackgroundTransparency = 1,
-				Size = UDim2.new(1, 0, 0, global.Space_250 + var3)
+				Size = UDim2.new(1, 0, 0, size.Size_500 + var3)
 			}
 			local t_1 = {}
 			local createElement_1 = reactModule.createElement
@@ -115,14 +115,14 @@ return {
 			t_2.showEmphasisBorder = p2.showOnlineBorder
 			t_2.styleProps = {
 				badgeBorderWidth = 3,
-				faceWidth = global.Size_250,
-				faceHeight = global.Size_250,
-				faceGroupGap = -global.Space_75,
-				containerGap = space50,
-				badgeHeight = global.Size_250,
+				faceWidth = size.Size_500,
+				faceHeight = size.Size_500,
+				faceGroupGap = -size.Size_150,
+				containerGap = size100,
+				badgeHeight = size.Size_500,
 				fontStyle = var2,
-				badgeSpacingLeading = global.Space_50,
-				badgeSpacingTrailing = global.Space_50,
+				badgeSpacingLeading = size.Size_100,
+				badgeSpacingTrailing = size.Size_100,
 				badgeBackgroundColor = { Transparency = 0, Color = colors.Smoke },
 				badgeContentColor = { Transparency = 0, Color = colors.White }
 			}

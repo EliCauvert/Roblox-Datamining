@@ -209,6 +209,7 @@ return {
 		getMakeupDescriptionsFromHumanoidDescription = require(script.Utils.Humanoid.getMakeupDescriptionsFromHumanoidDescription),
 		createHumanoidDescriptionAccessoryInfo = require(script.Utils.Humanoid.createHumanoidDescriptionAccessoryInfo),
 		getGearAssetIdFromEquippedAssets = require(script.Utils.getGearAssetIdFromEquippedAssets),
+		getEquippedLayeredMakeupAssets = require(script.Utils.getEquippedLayeredMakeupAssets),
 		getRbxThumbType = require(script.Utils.getRbxThumbType),
 		isVRHiddenRobuxBalanceScreen = require(script.Utils.isVRHiddenRobuxBalanceScreen),
 		normalize = normalizeModule,

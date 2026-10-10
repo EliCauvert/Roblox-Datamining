@@ -201,6 +201,7 @@ return function(p1)
 			["content-action-emphasis"] = var20 and appChatSquadButtonColorVariantB
 		} else "auto-xy text-label-small content-action-standard text-truncate-end text-no-wrap",
 		Text = var16,
+		testId = if fFlagDebugAppChatEnableDomLocators then `{p1.testId}{var15}--text` else nil,
 		padding = { right = UDim.new(0, var5.Padding.XXSmall) },
 		sizeConstraint = if p1.isFullWidth then nil else {
 			MaxSize = Vector2.new(var5.Size.Size_2800, var5.Size.Size_800)

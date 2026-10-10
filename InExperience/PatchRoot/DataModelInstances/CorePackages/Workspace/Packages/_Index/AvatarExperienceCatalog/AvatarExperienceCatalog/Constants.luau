@@ -69,7 +69,9 @@ return {
 		TimeoutStatusPromptShown = "TimeoutStatusPromptShown",
 		ItemsUnavailablePromptShown = "ItemsUnavailablePromptShown",
 		FetchFaeFeatureAccessError = "FetchFaeFeatureAccessError",
+		MarketplaceBreakpointMeasured = "MarketplaceBreakpointMeasured",
 		LookImpressionMissingLookType = "LookImpressionMissingLookType",
+		CatalogPageSecondVariantFetched = "CatalogPageSecondVariantFetched",
 		CatalogOffersBanner = {
 			fetchSucceeded = "CatalogOffersBannerFetchSucceeded",
 			fetchFailed = "CatalogOffersBannerFetchFailed"

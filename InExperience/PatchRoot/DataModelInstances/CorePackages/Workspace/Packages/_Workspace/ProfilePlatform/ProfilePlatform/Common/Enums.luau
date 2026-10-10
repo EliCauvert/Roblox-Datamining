@@ -7,7 +7,6 @@ local fFlagEnableProfileCompletion = require(parent.SharedFlags).FFlagEnableProf
 local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
 local fFlagProfilePlatformEditBackgroundMenuItemModule = require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
-local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 local fFlagProfilePlatformEnableMomentsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableMoments)
 local fFlagFriendsCallingClientGateDEV = require(parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
 local fFlagUseUserCtaCommonEnums = require(parent.SharedFlags).FFlagUseUserCtaCommonEnums
@@ -39,7 +38,7 @@ return {
 		Moments = if fFlagProfilePlatformEnableMomentsModule then "UserMoments" else ""
 	},
 	ProfileActions = if fFlagUseUserCtaCommonEnums then (function()
-		-- upvalues: var1 (ref), fFlagFriendsCallingClientGateDEV (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), fFlagProfilePlatformEditBackgroundMenuItemModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), fFlagProfilePlatformEnableTradeItemsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), fFlagJoinabilityCTARefactor (ref)
+		-- upvalues: var1 (ref), fFlagFriendsCallingClientGateDEV (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), fFlagProfilePlatformEditBackgroundMenuItemModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), fFlagProfilePlatformEnableTradeItemsModule (ref), fFlagJoinabilityCTARefactor (ref)
 		local cloned = table.clone(var1)
 		cloned.Call = if fFlagFriendsCallingClientGateDEV then var1.Call else ""
 		cloned.EditAppearance = if fFlagProfilePlatformEnableEditAppearanceMenuModule then var1.EditAppearance else ""
@@ -48,7 +47,7 @@ return {
 		cloned.EditBackground = if fFlagProfilePlatformEnableEditAppearanceMenuModule and fFlagProfilePlatformEditBackgroundMenuItemModule then var1.EditBackground else ""
 		cloned.CurrencyTransfer = if fFlagProfilePlatformEnableCurrencyTransfer then var1.CurrencyTransfer else ""
 		cloned.TradeItems = if fFlagProfilePlatformEnableTradeItemsModule then var1.TradeItems else ""
-		cloned.ContextualOverflow = if fFlagProfilePlatformCTAsRefactorModule then var1.ContextualOverflow else ""
+		cloned.ContextualOverflow = var1.ContextualOverflow
 		cloned.PlayExperience = if fFlagJoinabilityCTARefactor then var1.PlayExperience else ""
 		cloned.ViewProfile = if fFlagJoinabilityCTARefactor then var1.ViewProfile else ""
 		cloned.UnlockExperience = if fFlagJoinabilityCTARefactor then var1.UnlockExperience else ""
@@ -100,7 +99,7 @@ return {
 		ViewAbout = "ViewAbout",
 		CurrencyTransfer = if fFlagProfilePlatformEnableCurrencyTransfer then "CurrencyTransfer" else "",
 		TradeItems = if fFlagProfilePlatformEnableTradeItemsModule then "TradeItems" else "",
-		ContextualOverflow = if fFlagProfilePlatformCTAsRefactorModule then "ContextualOverflow" else "",
+		ContextualOverflow = "ContextualOverflow",
 		UnlockChat = "UnlockChat",
 		PlayExperience = if fFlagJoinabilityCTARefactor then "PlayExperience" else "",
 		ViewProfile = "",

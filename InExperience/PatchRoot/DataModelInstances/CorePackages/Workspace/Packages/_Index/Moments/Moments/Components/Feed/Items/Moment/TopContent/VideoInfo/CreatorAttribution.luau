@@ -21,6 +21,8 @@ local useUsernameModule = require(moments.Hooks.useUsername)
 local useCreatorVerifiedModule = require(moments.Hooks.useCreatorVerified)
 local getFFlagMomentsCreatorVerifiedBadgeModule = require(moments.Flags.GetFFlagMomentsCreatorVerifiedBadge)
 local fFlagMomentsFlushDwellBeforeNavigationModule = require(moments.Flags.FFlagMomentsFlushDwellBeforeNavigation)
+local navigationDestinationTypeModule = require(moments.Enums.NavigationDestinationType)
+local fFlagMomentsNavigationEventModule = require(moments.Flags.FFlagMomentsNavigationEvent)
 local imageWithSkeletonModule = require(moments.Components.ImageWithSkeleton)
 local feedContextModule = require(moments.Components.Feed.FeedContext)
 local useMomentsHost = require(moments.MomentsHostContext).useMomentsHost
@@ -32,7 +34,7 @@ local t = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 local char = utf8.char(57344)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), momentContextModule (ref), reactModule (ref), reactOtterModule (ref), useUsernameModule (ref), getFFlagMomentsCreatorVerifiedBadgeModule (ref), useCreatorVerifiedModule (ref), useMomentsHost (ref), fFlagMomentsFlushDwellBeforeNavigationModule (ref), feedContextModule (ref), makeFeedActionFieldsModule (ref), fireAnalyticsEvent (ref), eventNames (ref), char (ref), view (ref), stateLayerAffordance (ref), controlState (ref), imageWithSkeletonModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), radius (ref), getColorStyleWithTransparencyModule (ref), t (ref), text (ref), skeleton (ref), vector2 (ref)
+	-- upvalues: useTokens (ref), momentContextModule (ref), reactModule (ref), reactOtterModule (ref), useUsernameModule (ref), getFFlagMomentsCreatorVerifiedBadgeModule (ref), useCreatorVerifiedModule (ref), useMomentsHost (ref), fFlagMomentsFlushDwellBeforeNavigationModule (ref), feedContextModule (ref), makeFeedActionFieldsModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsNavigationEventModule (ref), navigationDestinationTypeModule (ref), char (ref), view (ref), stateLayerAffordance (ref), controlState (ref), imageWithSkeletonModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), radius (ref), getColorStyleWithTransparencyModule (ref), t (ref), text (ref), skeleton (ref), vector2 (ref)
 	local var1 = useTokens()
 	local var2 = momentContextModule.useMoment()
 	local data = var2.store.getData(false)
@@ -53,7 +55,7 @@ return reactModule.memo(function(p1)
 	local openProfile = useMomentsHost().openProfile
 	local var10 = if fFlagMomentsFlushDwellBeforeNavigationModule then feedContextModule.useFeedOptional() else nil
 	local var11 = reactModule.useCallback(function()
-		-- upvalues: openProfile (ref), makeFeedActionFieldsModule (copy), data (ref), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsFlushDwellBeforeNavigationModule (copy), var10 (write)
+		-- upvalues: openProfile (ref), makeFeedActionFieldsModule (copy), data (ref), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsFlushDwellBeforeNavigationModule (copy), var10 (write), fFlagMomentsNavigationEventModule (copy), navigationDestinationTypeModule (copy)
 		if openProfile ~= nil then
 			local var12 = makeFeedActionFieldsModule(data.momentId, data.feedItemId, data.feedSessionId)
 			
@@ -61,7 +63,7 @@ return reactModule.memo(function(p1)
 				fireAnalyticsEvent(eventNames.ProfileCreatorInfoTapped, var12)
 			end
 			if fFlagMomentsFlushDwellBeforeNavigationModule and var10 ~= nil then
-				var10.flushView()
+				var10.flushView(if fFlagMomentsNavigationEventModule then navigationDestinationTypeModule.CreatorProfile else nil)
 			end
 			openProfile(data.creatorId)
 		end

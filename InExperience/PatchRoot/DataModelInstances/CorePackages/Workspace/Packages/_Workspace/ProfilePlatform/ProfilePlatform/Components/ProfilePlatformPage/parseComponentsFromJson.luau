@@ -6,7 +6,6 @@ local userProfileHeaderModule = require(profilePlatform.Components.UserProfileHe
 local meTabUserProfileHeaderModule = require(profilePlatform.Components.UserProfileHeader.MeTabUserProfileHeader)
 local aboutModule = require(profilePlatform.Components.About)
 local contactDescriptionModule = require(profilePlatform.Components.ContactDescription)
-local profileActionBarModule = require(profilePlatform.Components.ProfileActionBar)
 local communityProfileHeaderModule = require(profilePlatform.Components.CommunityProfileHeader)
 local coverPhotoModule = require(profilePlatform.Components.CoverPhoto)
 local currentlyWearingModule = require(profilePlatform.Components.CurrentlyWearing)
@@ -41,7 +40,6 @@ local fFlagAddEventsToCommunityProfileModule = require(profilePlatform.Flags.FFl
 local fFlagGroupAnnouncementsSdui = require(parent.SharedFlags).FFlagGroupAnnouncementsSdui
 local fFlagProfilePlatformAddCurrentlyPlayingModule = require(profilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
 local fFlagAboutBeforeActionClientModule = require(profilePlatform.Flags.FFlagAboutBeforeActionClient)
-local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 local fFlagProfilePlatformEnableMomentsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableMoments)
 
 local function orderWithAboutBeforeActions(p1)
@@ -115,7 +113,7 @@ end
 local t = {
 	[enumsModule.Components.UserProfileHeader] = userProfileHeaderModule,
 	[enumsModule.Components.CurrentlyWearing] = currentlyWearingModule,
-	[enumsModule.Components.Actions] = if fFlagProfilePlatformCTAsRefactorModule then CTARowModule else profileActionBarModule,
+	[enumsModule.Components.Actions] = CTARowModule,
 	[enumsModule.Components.Experiences] = if fFlagExperiencesOnProfile then experiencesWideCarouselModule else experiencesModule,
 	[enumsModule.Components.ViewFullProfile] = viewFullProfileModule,
 	[enumsModule.Components.About] = aboutModule.About,
@@ -130,7 +128,7 @@ local t_1 = {
 	[enumsModule.Components.CoverPhoto] = coverPhotoModule,
 	[enumsModule.Components.CommunityProfileHeader] = communityProfileHeaderModule,
 	[enumsModule.Components.About] = aboutModule.About,
-	[enumsModule.Components.Actions] = if fFlagProfilePlatformCTAsRefactorModule then CTARowModule else profileActionBarModule,
+	[enumsModule.Components.Actions] = CTARowModule,
 	[enumsModule.Components.Experiences] = experiencesModule,
 	[enumsModule.Components.Store] = storeModule,
 	[enumsModule.Components.SocialLinks] = if fFlagAddSocialLinksToCommunityProfile then socialLinksModule else nil,
@@ -142,7 +140,7 @@ local t_1 = {
 local t_2 = {
 	[enumsModule.Components.ContactProfileHeader] = contactProfileHeaderModule,
 	[enumsModule.Components.ContactDescription] = contactDescriptionModule,
-	[enumsModule.Components.Actions] = if fFlagProfilePlatformCTAsRefactorModule then CTARowModule else profileActionBarModule
+	[enumsModule.Components.Actions] = CTARowModule
 }
 local var12 = if fFlagAXEnableProfileTab then cryoModule.Dictionary.join(t, {
 	[enumsModule.Components.UserProfileHeader] = meTabUserProfileHeaderModule,

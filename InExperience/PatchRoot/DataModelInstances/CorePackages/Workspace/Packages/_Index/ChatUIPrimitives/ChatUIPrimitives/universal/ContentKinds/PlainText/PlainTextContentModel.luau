@@ -19,4 +19,9 @@ function t.draftFromText(p1)
 	return { plainText = { text = p1 } }
 end
 
+function t.fromDraft(p1)
+	-- upvalues: t (ref)
+	return if p1.plainText == nil then nil else t.fromText(p1.plainText.text)
+end
+
 return t

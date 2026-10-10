@@ -1,10 +1,12 @@
 ﻿local contextActionService = game:GetService("ContextActionService")
+local guiService = game:GetService("GuiService")
 local expChat = script:FindFirstAncestor("ExpChat")
 local parent = expChat.Parent
 local reactModule = require(parent.React)
 local roactUtilsModule = require(parent.RoactUtils)
 local sharedFlagsModule = require(parent.SharedFlags)
 local _ = require(parent.ExpChatShared)
+local chatTabNavigationSignal = require(parent.ChatUIPrimitives).chatTabNavigationSignal
 local configModule = require(expChat.Config)
 local focusChatHotKeyActivatedModule = require(expChat.Actions.FocusChatHotKeyActivated)
 local getTabShortcutBehaviorModule = require(script.Parent.getTabShortcutBehavior)
@@ -41,6 +43,10 @@ local function getActiveTabState(value)
 end
 
 local tab = Enum.KeyCode.Tab
+local t = {
+	[Enum.KeyCode.ButtonR1] = 1,
+	[Enum.KeyCode.ButtonL1] = -1
+}
 local value = Enum.ContextActionPriority.High.Value
 
 local function selectIsChatHotkeyEnabled(p1)
@@ -52,7 +58,7 @@ local function selectDevDefinedFocusKeyCode(p1)
 end
 
 return function(p1)
-	-- upvalues: contextActionService (ref), useSelector (ref), selectIsChatHotkeyEnabled (ref), useSelectedTabTypeModule (ref), selectDevDefinedFocusKeyCode (ref), useDispatch (ref), useStore (ref), reactModule (ref), configModule (ref), getTabShortcutBehaviorModule (ref), focusChatHotKeyActivatedModule (ref), fFlagExpChatTabShortcutNav (ref), getActiveTabState (ref), getFocusNavigationStoreModule (ref), shouldNavigateTabsModule (ref), getAdjacentTabNameModule (ref), selectTabByTypeModule (ref), tab (ref), value (ref)
+	-- upvalues: contextActionService (ref), useSelector (ref), selectIsChatHotkeyEnabled (ref), useSelectedTabTypeModule (ref), selectDevDefinedFocusKeyCode (ref), useDispatch (ref), useStore (ref), reactModule (ref), configModule (ref), getTabShortcutBehaviorModule (ref), focusChatHotKeyActivatedModule (ref), fFlagExpChatTabShortcutNav (ref), getActiveTabState (ref), getFocusNavigationStoreModule (ref), shouldNavigateTabsModule (ref), getAdjacentTabNameModule (ref), selectTabByTypeModule (ref), tab (ref), t (ref), value (ref), chatTabNavigationSignal (ref), guiService (ref)
 	local contextActionService_1 = p1.contextActionService or contextActionService
 	local var1 = useSelector(selectIsChatHotkeyEnabled)
 	local var2 = useSelectedTabTypeModule()
@@ -97,9 +103,9 @@ return function(p1)
 		var4
 	})
 	reactModule.useEffect(function()
-		-- upvalues: fFlagExpChatTabShortcutNav (copy), getActiveTabState (copy), var5 (ref), getFocusNavigationStoreModule (copy), shouldNavigateTabsModule (copy), getAdjacentTabNameModule (copy), selectTabByTypeModule (copy), var4 (ref), getTabShortcutBehaviorModule (copy), tab (copy), contextActionService_1 (ref), value (copy)
+		-- upvalues: fFlagExpChatTabShortcutNav (copy), getActiveTabState (copy), var5 (ref), getFocusNavigationStoreModule (copy), shouldNavigateTabsModule (copy), getAdjacentTabNameModule (copy), selectTabByTypeModule (copy), var4 (ref), getTabShortcutBehaviorModule (copy), tab (copy), t (copy), contextActionService_1 (ref), value (copy), chatTabNavigationSignal (copy)
 		if fFlagExpChatTabShortcutNav then
-			local function tryNavigateTabs(value)
+			local function tryNavigateTabs(value, p2)
 				-- upvalues: getActiveTabState (copy), var5 (copy), getFocusNavigationStoreModule (copy), shouldNavigateTabsModule (copy), getAdjacentTabNameModule (copy), selectTabByTypeModule (copy), var4 (copy), getTabShortcutBehaviorModule (copy), tab (copy)
 				local var6, var7 = getActiveTabState(var5)
 				
@@ -117,7 +123,7 @@ return function(p1)
 				if not shouldNavigateTabsModule({
 					isTabBarVisible = var8.getIsTabBarVisible(false),
 					tabCount = #t,
-					isChatFocused = var8.getIsChatFocused()
+					isChatFocused = if p2 ~= true then var8.getIsChatFocused() else true
 				}) then
 					return false
 				end
@@ -139,17 +145,48 @@ return function(p1)
 				return true
 			end
 			
-			contextActionService_1:BindCoreActionAtPriority("ExpChatTabShortcutNav", function(_, p2, p3)
-				-- upvalues: tab (copy), tryNavigateTabs (ref)
-				return if not (p2 ~= Enum.UserInputState.Begin or p3 == nil) then if p3.KeyCode == tab then if tryNavigateTabs(if p3:IsModifierKeyDown(Enum.ModifierKey.Shift) then -1 else 1) then Enum.ContextActionResult.Sink else Enum.ContextActionResult.Pass else Enum.ContextActionResult.Pass else Enum.ContextActionResult.Pass
-			end, false, value, tab)
+			contextActionService_1:BindCoreActionAtPriority("ExpChatTabShortcutNav", function(_, p3, p4)
+				-- upvalues: t (copy), tab (copy), tryNavigateTabs (ref)
+				if p3 ~= Enum.UserInputState.Begin or p4 == nil then
+					return Enum.ContextActionResult.Pass
+				end
+				local var11 = if p4.KeyCode == tab then if p4:IsModifierKeyDown(Enum.ModifierKey.Shift) then -1 else 1 else t[p4.KeyCode]
+				
+				return if var11 == nil then Enum.ContextActionResult.Pass elseif tryNavigateTabs(var11) then Enum.ContextActionResult.Sink else Enum.ContextActionResult.Pass
+			end, false, value, tab, Enum.KeyCode.ButtonR1, Enum.KeyCode.ButtonL1)
+			local var11 = chatTabNavigationSignal:connect(function(p3)
+				-- upvalues: tryNavigateTabs (ref)
+				tryNavigateTabs(p3, true)
+			end)
 			
 			return function()
-				-- upvalues: contextActionService_1 (copy)
+				-- upvalues: contextActionService_1 (copy), var11 (ref)
 				contextActionService_1:UnbindCoreAction("ExpChatTabShortcutNav")
+				var11.disconnect()
 			end
 		end
 	end, { contextActionService_1, var4, var5 })
+	reactModule.useEffect(function()
+		-- upvalues: fFlagExpChatTabShortcutNav (copy), getFocusNavigationStoreModule (copy), guiService (copy), contextActionService_1 (ref), value (copy)
+		if fFlagExpChatTabShortcutNav then
+			contextActionService_1:BindCoreActionAtPriority("ExpChatShortcutNavEscape", function(_, p2, _)
+				-- upvalues: getFocusNavigationStoreModule (copy), guiService (copy)
+				if p2 ~= Enum.UserInputState.Begin then
+					return Enum.ContextActionResult.Pass
+				elseif getFocusNavigationStoreModule(false).getIsChatFocused() then
+					guiService.SelectedCoreObject = nil
+					
+					return Enum.ContextActionResult.Sink
+				end
+				return Enum.ContextActionResult.Pass
+			end, false, value, Enum.KeyCode.Escape)
+			
+			return function()
+				-- upvalues: contextActionService_1 (copy)
+				contextActionService_1:UnbindCoreAction("ExpChatShortcutNavEscape")
+			end
+		end
+	end, { contextActionService_1 })
 	
 	return nil
 end

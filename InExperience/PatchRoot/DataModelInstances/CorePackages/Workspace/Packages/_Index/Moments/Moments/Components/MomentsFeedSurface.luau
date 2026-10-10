@@ -16,6 +16,7 @@ return function(p1)
 		active = p1.active,
 		playbackActive = p1.playbackActive,
 		telemetry = p1.telemetry,
+		inactiveDestination = p1.inactiveDestination,
 		controllerRef = p1.controllerRef,
 		initialIndex = p1.initialIndex,
 		trackSurfaceLoad = p1.trackSurfaceLoad

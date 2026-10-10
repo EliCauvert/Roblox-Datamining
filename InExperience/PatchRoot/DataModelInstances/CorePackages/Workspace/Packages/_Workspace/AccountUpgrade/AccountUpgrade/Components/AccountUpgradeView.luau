@@ -12,7 +12,6 @@ local accountUpgradeDialogModule = require(accountUpgrade.SuccessModal.AccountUp
 local accountUpgradeDialogActionsModule = require(accountUpgrade.SuccessModal.AccountUpgradeDialogActions)
 local accountUpgradeFieldModule = require(accountUpgrade.AccountUpgradeField)
 local view = foundationModule.View
-local text = foundationModule.Text
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
 local function createAuditContent(p1)
@@ -26,7 +25,7 @@ local function createAuditContent(p1)
 end
 
 return function(p2)
-	-- upvalues: accountUpgradeFieldModule (ref), reactModule (ref), view (ref), text (ref), accountUpgradeFieldsModule (ref), accountUpgradeDialogActionsModule (ref), buttonVariant (ref), accountUpgradeFieldErrorModule (ref), legalTextWithLinks (ref), createAuditContent (ref), accountUpgradeDialogModule (ref), birthdayPickerSheetModule (ref), closeConfirmationDialogModule (ref)
+	-- upvalues: accountUpgradeFieldModule (ref), reactModule (ref), view (ref), accountUpgradeFieldsModule (ref), accountUpgradeDialogActionsModule (ref), buttonVariant (ref), accountUpgradeFieldErrorModule (ref), legalTextWithLinks (ref), createAuditContent (ref), accountUpgradeDialogModule (ref), birthdayPickerSheetModule (ref), closeConfirmationDialogModule (ref)
 	local var1 = not p2.isSaveEnabled and not p2.isSubmitting
 	local var2 = p2.fieldStates[accountUpgradeFieldModule.Birthday] ~= nil
 	local onClose = p2.onClose
@@ -34,6 +33,7 @@ return function(p2)
 	
 	return reactModule.createElement(accountUpgradeDialogModule, {
 		title = p2.titleText,
+		subtitle = p2.subtitleText,
 		onClose = if onClose and not p2.confirmsClose then reactModule.useCallback(function(_)
 			-- upvalues: onClose (ref)
 			if onClose then
@@ -45,18 +45,15 @@ return function(p2)
 		isFocusable = not (p2.isBirthdayPickerOpen or p2.isCloseConfirmationOpen),
 		children = {
 			Content = reactModule.createElement(view, {
-				tag = "col gap-large size-full-0 auto-y",
-				testId = "AccountUpgradeContent"
+				testId = "AccountUpgradeContent",
+				tag = {
+					["col size-full-0 auto-y"] = true,
+					["padding-top-xsmall"] = p2.subtitleText ~= nil
+				}
 			}, {
-				Subtitle = if p2.subtitleText then reactModule.createElement(text, {
-					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
-					LayoutOrder = 1,
-					testId = "AccountUpgradeSubtitle",
-					Text = p2.subtitleText
-				}) else nil,
 				Body = reactModule.createElement(view, {
-					tag = "col gap-xxlarge size-full-0 auto-y",
-					LayoutOrder = 2,
+					tag = "col gap-xlarge size-full-0 auto-y",
+					LayoutOrder = 1,
 					testId = "AccountUpgradeBody"
 				}, {
 					Fields = reactModule.createElement(accountUpgradeFieldsModule, { LayoutOrder = 1, form = p2 }),

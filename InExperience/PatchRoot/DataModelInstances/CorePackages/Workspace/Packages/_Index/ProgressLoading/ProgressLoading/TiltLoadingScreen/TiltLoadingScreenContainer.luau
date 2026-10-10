@@ -24,8 +24,9 @@ local fFlagTiltLoadingScreenEnterExitHold = require(parent.SharedFlags).FFlagTil
 local isPioneerLaunch = require(parent.PioneerUtils).isPioneerLaunch
 local contextActionService = game:GetService("ContextActionService")
 local localizationService = game:GetService("LocalizationService")
-local playersService = game:GetService("Players")
+local players = require(parent.MockableProxyServices).Players
 local replicatedFirst = require(parent.MockableProxyServices).ReplicatedFirst
+local game = require(parent.MockableProxyServices).game
 local userGameSettingsService = UserSettings():GetService("UserGameSettings")
 local ANIMATION = constantsModule.ANIMATION
 local var1 = motionModule.createState({ reveal = 1 }, {
@@ -34,11 +35,14 @@ local var1 = motionModule.createState({ reveal = 1 }, {
 local var2 = motionModule.createState({ reveal = 0 }, {
 	default = motionModule.transition({ duration = ANIMATION.closeDur })
 })
-local abortReason = require(progressLoading.LoadingScreenMilestones.Constants).AbortReason
+local constantsModule_1 = require(progressLoading.LoadingScreenMilestones.Constants)
+local abortReason = constantsModule_1.AbortReason
+local milestone = constantsModule_1.Milestone
+local dismissSource = constantsModule_1.DismissSource
 local _ = require(script.Parent.Types)
 
 return function(p1)
-	-- upvalues: fFlagEnableTiltLoadingScreen (ref), fFlagLoadingScreenMilestones (ref), reactModule (ref), replicatedFirst (ref), userGameSettingsService (ref), motionModule (ref), var1 (ref), fFlagTiltLoadingScreenConsoleHints (ref), usePreferredInput (ref), responsiveModule (ref), getBuilderIconForKeycode (ref), useTiltLoadingScreenViewModelModule (ref), useScreenSizeModule (ref), useDeviceInsets (ref), useViewportSettledModule (ref), useLoadingScreenAnimationModule (ref), fFlagTiltLoadingScreenEnterExitHold (ref), inExperienceLocalesModule (ref), localizationService (ref), var2 (ref), ANIMATION (ref), shouldHoldForExitModule (ref), playersService (ref), abortReason (ref), isPioneerLaunch (ref), contextActionService (ref), fFlagIncreaseLoadingScreenOrder (ref), constantsModule (ref), foundationModule (ref), localizationModule (ref), tiltLoadingScreenViewModule (ref)
+	-- upvalues: fFlagEnableTiltLoadingScreen (ref), fFlagLoadingScreenMilestones (ref), reactModule (ref), replicatedFirst (ref), userGameSettingsService (ref), motionModule (ref), var1 (ref), fFlagTiltLoadingScreenConsoleHints (ref), usePreferredInput (ref), responsiveModule (ref), getBuilderIconForKeycode (ref), useTiltLoadingScreenViewModelModule (ref), useScreenSizeModule (ref), useDeviceInsets (ref), useViewportSettledModule (ref), useLoadingScreenAnimationModule (ref), fFlagTiltLoadingScreenEnterExitHold (ref), inExperienceLocalesModule (ref), localizationService (ref), milestone (ref), var2 (ref), ANIMATION (ref), shouldHoldForExitModule (ref), players (ref), dismissSource (ref), game (ref), abortReason (ref), isPioneerLaunch (ref), contextActionService (ref), fFlagIncreaseLoadingScreenOrder (ref), constantsModule (ref), foundationModule (ref), localizationModule (ref), tiltLoadingScreenViewModule (ref)
 	if not fFlagEnableTiltLoadingScreen then
 		return nil
 	end
@@ -78,25 +82,31 @@ return function(p1)
 		return inExperienceLocalesModule.Localization.new(localizationService.RobloxLocaleId)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var7 (ref), var10 (ref), var2 (copy), ANIMATION (copy), replicatedFirst (copy), var5 (ref), fFlagLoadingScreenMilestones (copy), var11 (ref), userGameSettingsService (copy), var18 (ref), shouldHoldForExitModule (copy), playersService (copy), abortReason (copy)
+		-- upvalues: var3 (ref), fFlagLoadingScreenMilestones (copy), milestone (copy), var7 (ref), var10 (ref), var2 (copy), replicatedFirst (copy), var5 (ref), var11 (ref), userGameSettingsService (copy), ANIMATION (copy), var18 (ref), shouldHoldForExitModule (copy), players (copy), dismissSource (copy), game (copy), abortReason (copy)
 		local var21 = if var3 then var3.current else nil
+		
+		if fFlagLoadingScreenMilestones and var21 then
+			var21.record(milestone.ScreenVisible)
+		end
 		local t = {}
 		local var22 = false
 		local var23 = false
 		local var24 = nil
+		local thread = nil
 		local var25 = nil
-		local var26 = nil
-		local var27 = nil
-		local var28 = false
-		local var29 = false
+		local var26 = false
+		local var27 = false
 		
 		local function doDismiss()
-			-- upvalues: var22 (write), var7 (copy), var24 (write), var23 (write), var10 (copy), var2 (copy), var25 (write), ANIMATION (copy), replicatedFirst (copy), var5 (copy), fFlagLoadingScreenMilestones (copy), var21 (ref), var11 (copy), userGameSettingsService (copy)
+			-- upvalues: fFlagLoadingScreenMilestones (copy), var21 (ref), milestone (copy), var22 (write), var7 (copy), var24 (write), var23 (write), var10 (copy), var2 (copy), replicatedFirst (copy), var5 (copy), var11 (copy), userGameSettingsService (copy), ANIMATION (copy)
+			if fFlagLoadingScreenMilestones and var21 then
+				var21.record(milestone.DismissStarted)
+			end
 			var22 = true
 			var7(true)
 			
 			local function fadeChrome()
-				-- upvalues: var24 (copy), var23 (copy), var10 (copy), var2 (copy), var25 (copy), ANIMATION (copy), replicatedFirst (copy), var5 (copy), fFlagLoadingScreenMilestones (copy), var21 (copy), var11 (copy)
+				-- upvalues: var24 (copy), var23 (copy), var10 (copy), var2 (copy), fFlagLoadingScreenMilestones (copy), var21 (copy), milestone (copy), replicatedFirst (copy), var5 (copy), var11 (copy)
 				var24 = nil
 				
 				if var23 then
@@ -104,25 +114,19 @@ return function(p1)
 				end
 				var10.current(var2, {
 					onAnimationComplete = function(p2)
-						-- upvalues: var23 (copy), var25 (copy), ANIMATION (copy), replicatedFirst (copy), var5 (copy), fFlagLoadingScreenMilestones (copy), var21 (copy), var11 (copy)
-						if p2 == true and not var23 then
-							var25 = task.delay(ANIMATION.endPause, function()
-								-- upvalues: var25 (copy), var23 (copy), replicatedFirst (copy), var5 (copy), fFlagLoadingScreenMilestones (copy), var21 (copy), var11 (copy)
-								var25 = nil
-								
-								if var23 then return end
-								replicatedFirst:SetDefaultLoadingGuiRemoved()
-								var5(false)
-								
-								if fFlagLoadingScreenMilestones and var21 then
-									var21.complete()
-								end
-								if var11.current then
-									var11.current()
-								end
-							end)
-							
-							return
+						-- upvalues: var23 (copy), fFlagLoadingScreenMilestones (copy), var21 (copy), milestone (copy), replicatedFirst (copy), var5 (copy), var11 (copy)
+						if p2 ~= true or var23 then return end
+						if fFlagLoadingScreenMilestones and var21 then
+							var21.record(milestone.ScreenHidden)
+						end
+						replicatedFirst:SetDefaultLoadingGuiRemoved()
+						var5(false)
+						
+						if fFlagLoadingScreenMilestones and var21 then
+							var21.complete()
+						end
+						if var11.current then
+							var11.current()
 						end
 					end
 				})
@@ -137,183 +141,272 @@ return function(p1)
 		end
 		
 		function var35.current()
-			-- upvalues: var23 (write), var22 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), var28 (write), var29 (write), doDismiss (ref), var27 (write), ANIMATION (copy)
+			-- upvalues: var23 (write), var22 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), var26 (write), var27 (write), doDismiss (ref), var25 (write), ANIMATION (copy), fFlagLoadingScreenMilestones (copy), var21 (ref), milestone (copy)
 			if var23 or var22 then return end
 			if shouldHoldForExitModule(userGameSettingsService.ReducedMotion) then
-				var27 = task.delay(ANIMATION.enterExitHold, function()
-					-- upvalues: var27 (copy), var23 (copy), var22 (copy), var28 (copy), var29 (copy), doDismiss (copy)
-					var27 = nil
+				var25 = task.delay(ANIMATION.enterExitHold, function()
+					-- upvalues: var25 (copy), var23 (copy), var22 (copy), var26 (copy), fFlagLoadingScreenMilestones (copy), var21 (copy), milestone (copy), var27 (copy), doDismiss (copy)
+					var25 = nil
 					
 					if var23 or var22 then return end
-					var28 = true
+					var26 = true
 					
-					if var29 then
+					if fFlagLoadingScreenMilestones and var21 then
+						var21.record(milestone.DismissGateReleased)
+					end
+					if var27 then
 						doDismiss()
 					end
 				end)
 				
 				return
 			end
-			var28 = true
+			var26 = true
 			
-			if var29 then
+			if var27 then
 				doDismiss()
 			end
 		end
 		
 		local function _()
-			-- upvalues: var22 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var28 (write), var29 (write)
+			-- upvalues: var22 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var26 (write), var27 (write)
 			if var22 then return end
 			if not shouldHoldForExitModule(userGameSettingsService.ReducedMotion) then
 				doDismiss()
 				
 				return
-			elseif var28 then
+			elseif var26 then
 				doDismiss()
 				
 				return
 			end
-			var29 = true
+			var27 = true
 		end
 		
 		local _ = function()
-			-- upvalues: var26 (write), playersService (copy), var23 (write), var22 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var28 (write), var29 (write)
-			if var26 then
+			-- upvalues: thread (write), players (copy), var23 (write), fFlagLoadingScreenMilestones (copy), var21 (ref), dismissSource (copy), var22 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var26 (write), var27 (write)
+			if thread then
 				return
 			end
-			var26 = task.spawn(function()
-				-- upvalues: playersService (copy), var26 (copy), var23 (copy), var22 (copy), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (copy), var28 (copy), var29 (copy)
-				if playersService.CharacterAutoLoads then
-					local localPlayer = playersService.LocalPlayer
+			thread = task.spawn(function()
+				-- upvalues: players (copy), thread (copy), var23 (copy), fFlagLoadingScreenMilestones (copy), var21 (copy), dismissSource (copy), var22 (copy), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (copy), var26 (copy), var27 (copy)
+				if players.CharacterAutoLoads then
+					local localPlayer = players.LocalPlayer
 					
 					if not localPlayer then
-						playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-						localPlayer = playersService.LocalPlayer
+						players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+						localPlayer = players.LocalPlayer
 					end
 					if not localPlayer.Character then
 						localPlayer.CharacterAdded:Wait()
 					end
 				end
-				var26 = nil
+				thread = nil
 				
 				if var23 then return end
+				if fFlagLoadingScreenMilestones and var21 then
+					var21.dismissRequested(dismissSource.NormalReady)
+				end
 				if var22 then return end
 				if not shouldHoldForExitModule(userGameSettingsService.ReducedMotion) then
 					doDismiss()
 					
 					return
-				elseif var28 then
+				elseif var26 then
 					doDismiss()
 					
 					return
 				end
-				var29 = true
+				var27 = true
 			end)
 		end
 		
-		local function handleFinishedReplicating()
-			-- upvalues: var26 (write), playersService (copy), var23 (write), var22 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var28 (write), var29 (write), t (ref)
+		table.insert(t, replicatedFirst.FinishedReplicating:Connect(function()
+			-- upvalues: game (copy), thread (write), players (copy), var23 (write), fFlagLoadingScreenMilestones (copy), var21 (ref), dismissSource (copy), var22 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var26 (write), var27 (write), t (ref)
 			if not game:IsLoaded() then
-				local var30 = nil
+				local var28 = nil
 				table.insert(t, game.Loaded:Connect(function()
-					-- upvalues: var30 (write), var26 (copy), playersService (copy), var23 (copy), var22 (copy), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (copy), var28 (copy), var29 (copy)
-					var30:Disconnect()
+					-- upvalues: var28 (write), thread (copy), players (copy), var23 (copy), fFlagLoadingScreenMilestones (copy), var21 (copy), dismissSource (copy), var22 (copy), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (copy), var26 (copy), var27 (copy)
+					var28:Disconnect()
 					
-					if var26 then
+					if thread then
 						return
 					end
-					var26 = task.spawn(function()
-						-- upvalues: playersService (copy), var26 (copy), var23 (copy), var22 (copy), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (copy), var28 (copy), var29 (copy)
-						if playersService.CharacterAutoLoads then
-							local localPlayer = playersService.LocalPlayer
+					thread = task.spawn(function()
+						-- upvalues: players (copy), thread (copy), var23 (copy), fFlagLoadingScreenMilestones (copy), var21 (copy), dismissSource (copy), var22 (copy), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (copy), var26 (copy), var27 (copy)
+						if players.CharacterAutoLoads then
+							local localPlayer = players.LocalPlayer
 							
 							if not localPlayer then
-								playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-								localPlayer = playersService.LocalPlayer
+								players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+								localPlayer = players.LocalPlayer
 							end
 							if not localPlayer.Character then
 								localPlayer.CharacterAdded:Wait()
 							end
 						end
-						var26 = nil
+						thread = nil
 						
 						if var23 then return end
+						if fFlagLoadingScreenMilestones and var21 then
+							var21.dismissRequested(dismissSource.NormalReady)
+						end
 						if var22 then return end
 						if not shouldHoldForExitModule(userGameSettingsService.ReducedMotion) then
 							doDismiss()
 							
 							return
-						elseif var28 then
+						elseif var26 then
 							doDismiss()
 							
 							return
 						end
-						var29 = true
+						var27 = true
 					end)
 				end))
 				
 				return
-			elseif var26 then
+			elseif thread then
 				return
 			end
-			var26 = task.spawn(function()
-				-- upvalues: playersService (copy), var26 (copy), var23 (copy), var22 (copy), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (copy), var28 (copy), var29 (copy)
-				if playersService.CharacterAutoLoads then
-					local localPlayer = playersService.LocalPlayer
+			thread = task.spawn(function()
+				-- upvalues: players (copy), thread (copy), var23 (copy), fFlagLoadingScreenMilestones (copy), var21 (copy), dismissSource (copy), var22 (copy), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (copy), var26 (copy), var27 (copy)
+				if players.CharacterAutoLoads then
+					local localPlayer = players.LocalPlayer
 					
 					if not localPlayer then
-						playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-						localPlayer = playersService.LocalPlayer
+						players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+						localPlayer = players.LocalPlayer
 					end
 					if not localPlayer.Character then
 						localPlayer.CharacterAdded:Wait()
 					end
 				end
-				var26 = nil
+				thread = nil
 				
 				if var23 then return end
+				if fFlagLoadingScreenMilestones and var21 then
+					var21.dismissRequested(dismissSource.NormalReady)
+				end
 				if var22 then return end
 				if not shouldHoldForExitModule(userGameSettingsService.ReducedMotion) then
 					doDismiss()
 					
 					return
-				elseif var28 then
+				elseif var26 then
 					doDismiss()
 					
 					return
 				end
-				var29 = true
+				var27 = true
 			end)
-		end
-		
-		table.insert(t, replicatedFirst.FinishedReplicating:Connect(handleFinishedReplicating))
+		end))
 		table.insert(t, replicatedFirst.RemoveDefaultLoadingGuiSignal:Connect(function()
-			-- upvalues: var22 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var28 (write), var29 (write)
+			-- upvalues: fFlagLoadingScreenMilestones (copy), var21 (ref), dismissSource (copy), var22 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var26 (write), var27 (write)
+			if fFlagLoadingScreenMilestones and var21 then
+				var21.dismissRequested(dismissSource.DeveloperOverride)
+			end
 			if var22 then return end
 			if not shouldHoldForExitModule(userGameSettingsService.ReducedMotion) then
 				doDismiss()
 				
 				return
-			elseif var28 then
+			elseif var26 then
 				doDismiss()
 				
 				return
 			end
-			var29 = true
+			var27 = true
 		end))
 		
 		if replicatedFirst:IsFinishedReplicating() then
-			handleFinishedReplicating()
+			if game:IsLoaded() then
+				thread = task.spawn(function()
+					-- upvalues: players (copy), thread (write), var23 (write), fFlagLoadingScreenMilestones (copy), var21 (ref), dismissSource (copy), var22 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var26 (write), var27 (write)
+					if players.CharacterAutoLoads then
+						local localPlayer = players.LocalPlayer
+						
+						if not localPlayer then
+							players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+							localPlayer = players.LocalPlayer
+						end
+						if not localPlayer.Character then
+							localPlayer.CharacterAdded:Wait()
+						end
+					end
+					thread = nil
+					
+					if var23 then return end
+					if fFlagLoadingScreenMilestones and var21 then
+						var21.dismissRequested(dismissSource.NormalReady)
+					end
+					if var22 then return end
+					if not shouldHoldForExitModule(userGameSettingsService.ReducedMotion) then
+						doDismiss()
+						
+						return
+					elseif var26 then
+						doDismiss()
+						
+						return
+					end
+					var27 = true
+				end)
+			else
+				local var28 = nil
+				table.insert(t, game.Loaded:Connect(function()
+					-- upvalues: var28 (write), thread (write), players (copy), var23 (write), fFlagLoadingScreenMilestones (copy), var21 (ref), dismissSource (copy), var22 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var26 (write), var27 (write)
+					var28:Disconnect()
+					
+					if thread then
+						return
+					end
+					thread = task.spawn(function()
+						-- upvalues: players (copy), thread (copy), var23 (copy), fFlagLoadingScreenMilestones (copy), var21 (copy), dismissSource (copy), var22 (copy), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (copy), var26 (copy), var27 (copy)
+						if players.CharacterAutoLoads then
+							local localPlayer = players.LocalPlayer
+							
+							if not localPlayer then
+								players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+								localPlayer = players.LocalPlayer
+							end
+							if not localPlayer.Character then
+								localPlayer.CharacterAdded:Wait()
+							end
+						end
+						thread = nil
+						
+						if var23 then return end
+						if fFlagLoadingScreenMilestones and var21 then
+							var21.dismissRequested(dismissSource.NormalReady)
+						end
+						if var22 then return end
+						if not shouldHoldForExitModule(userGameSettingsService.ReducedMotion) then
+							doDismiss()
+							
+							return
+						elseif var26 then
+							doDismiss()
+							
+							return
+						end
+						var27 = true
+					end)
+				end))
+			end
 		end
 		if replicatedFirst:IsDefaultLoadingGuiRemoved() then
+			if fFlagLoadingScreenMilestones and var21 then
+				var21.dismissRequested(dismissSource.DeveloperOverride)
+			end
 			if shouldHoldForExitModule(userGameSettingsService.ReducedMotion) then
-				var29 = true
+				var27 = true
 			else
 				doDismiss()
 			end
 		end
 		return function()
-			-- upvalues: var23 (write), fFlagLoadingScreenMilestones (copy), var21 (ref), abortReason (copy), var18 (copy), var27 (write), var24 (write), var25 (write), var26 (write), t (ref)
+			-- upvalues: var23 (write), fFlagLoadingScreenMilestones (copy), var21 (ref), abortReason (copy), var18 (copy), var25 (write), var24 (write), thread (write), t (ref)
 			var23 = true
 			
 			if fFlagLoadingScreenMilestones and var21 then
@@ -321,17 +414,14 @@ return function(p1)
 			end
 			var18.current = nil
 			
-			if var27 then
-				task.cancel(var27)
+			if var25 then
+				task.cancel(var25)
 			end
 			if var24 then
 				task.cancel(var24)
 			end
-			if var25 then
-				task.cancel(var25)
-			end
-			if var26 and coroutine.status(var26) ~= "dead" then
-				task.cancel(var26)
+			if thread and coroutine.status(thread) ~= "dead" then
+				task.cancel(thread)
 			end
 			for i, v in t do
 				v:Disconnect()
@@ -344,15 +434,15 @@ return function(p1)
 			return
 		end
 		local contextActionService_1 = p1.contextActionService or contextActionService
-		local var30 = false
+		local var29 = false
 		contextActionService_1:BindCoreAction("CancelGameLoad", function(_, p2)
-			-- upvalues: var30 (write), var12 (copy)
+			-- upvalues: var29 (write), var12 (copy)
 			if p2 == Enum.UserInputState.Begin then
-				var30 = true
+				var29 = true
 				
 				return
-			elseif p2 == Enum.UserInputState.End and var30 then
-				var30 = false
+			elseif p2 == Enum.UserInputState.End and var29 then
+				var29 = false
 				
 				if var12.current then
 					var12.current(false, true)

@@ -1,26 +1,45 @@
 ﻿return {
 	SETTLE_SECONDS = 0.15,
 	initialState = function()
-		return { canvasX = nil, idleSeconds = 0, interacting = false }
+		return {
+			canvasX = nil,
+			canvasY = nil,
+			idleSeconds = 0,
+			interacting = false
+		}
 	end,
-	advance = function(p1, p2, p3, p4)
+	advance = function(p1, p2, p3, p4, p5)
+		local var1 = if p5 ~= nil then p1.canvasY else p5
+		
 		if p1.canvasX == nil then
-			return { idleSeconds = 0.15, interacting = false, canvasX = p2 }
-		elseif p2 ~= p1.canvasX then
-			return { idleSeconds = 0, interacting = true, canvasX = p2 }
+			return {
+				idleSeconds = 0.15,
+				interacting = false,
+				canvasX = p2,
+				canvasY = var1
+			}
+		elseif p2 ~= p1.canvasX or (p5 ~= nil and p5 ~= p1.canvasY) then
+			return {
+				idleSeconds = 0,
+				interacting = true,
+				canvasX = p2,
+				canvasY = var1
+			}
 		elseif p4 == true then
 			return {
 				interacting = true,
 				canvasX = p2,
+				canvasY = var1,
 				idleSeconds = p1.idleSeconds + math.max(p3, 0)
 			}
 		elseif p1.interacting then
-			local var1 = p1.idleSeconds + math.max(p3, 0)
+			local var2 = p1.idleSeconds + math.max(p3, 0)
 			
 			return {
 				canvasX = p2,
-				idleSeconds = var1,
-				interacting = var1 < 0.15
+				canvasY = var1,
+				idleSeconds = var2,
+				interacting = var2 < 0.15
 			}
 		end
 		return p1

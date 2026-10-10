@@ -7,6 +7,7 @@ local chatTimeoutCustomDialogModule = require(inExperienceIntervention.Component
 local chatNudgeToastModule = require(inExperienceIntervention.Components.ChatNudgeToast)
 local chatTimeoutToastModule = require(inExperienceIntervention.Components.ChatTimeoutToast)
 local chatTimeoutCustomDialogV2Module = require(inExperienceIntervention.Components.ChatTimeoutCustomDialogV2)
+local dictationSafetyReminderToastModule = require(inExperienceIntervention.Components.DictationSafetyReminderToast)
 local partyChatNudgeCustomDialog = require(parent.InterventionShared).Components.PartyChatNudgeCustomDialog
 local partyChatTimeoutCustomDialog = require(parent.InterventionShared).Components.PartyChatTimeoutCustomDialog
 local temporaryAvatarKickWarningDialogModule = require(parent.InterventionShared.TemporaryAvatarKickWarningDialog)
@@ -17,9 +18,10 @@ local var1 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNav
 local provider = require(parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
 local constants = require(parent.InterventionShared).Utils.Constants
 local _ = require(inExperienceIntervention.Utils.Types)
+local reportChatSuspensionDialogVisibilityModule = require(inExperienceIntervention.Utils.reportChatSuspensionDialogVisibility)
 local getFFlagGameJoinTimeoutChatAttemptEnabled = require(parent.SharedFlags).GetFFlagGameJoinTimeoutChatAttemptEnabled
 local fFlagTemporaryAvatarKickWarningDialogModule = require(parent.InterventionShared.FFlagTemporaryAvatarKickWarningDialog)
-local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
+local fFlagExpChatDictationContinuousSafetyReminder = require(parent.SharedFlags).FFlagExpChatDictationContinuousSafetyReminder
 local var2 = reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), reactFocusNavigationModule (ref), var1 (ref), provider (ref), cursorProvider (ref)
 	return reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var1 }, {
@@ -30,7 +32,7 @@ local var2 = reactModule.memo(function(p1)
 end)
 
 function InExperienceInterventionDialogManager(p1)
-	-- upvalues: reactModule (ref), constants (ref), fFlagTemporaryAvatarKickWarningDialogModule (ref), SSUIMetaLuaEngineFeature (ref), chatNudgeCustomDialogModule (ref), chatTimeoutCustomDialogModule (ref), chatNudgeToastModule (ref), chatTimeoutToastModule (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (ref), var2 (ref), partyChatNudgeCustomDialog (ref), partyChatTimeoutCustomDialog (ref), chatTimeoutCustomDialogV2Module (ref), chatNudgeCustomDialogV2Module (ref), universalFeatureRestrictionDialog (ref), temporaryAvatarKickWarningDialogModule (ref)
+	-- upvalues: reactModule (ref), constants (ref), fFlagTemporaryAvatarKickWarningDialogModule (ref), fFlagExpChatDictationContinuousSafetyReminder (ref), reportChatSuspensionDialogVisibilityModule (ref), chatNudgeCustomDialogModule (ref), chatTimeoutCustomDialogModule (ref), chatNudgeToastModule (ref), chatTimeoutToastModule (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (ref), var2 (ref), partyChatNudgeCustomDialog (ref), partyChatTimeoutCustomDialog (ref), chatTimeoutCustomDialogV2Module (ref), chatNudgeCustomDialogV2Module (ref), universalFeatureRestrictionDialog (ref), dictationSafetyReminderToastModule (ref), temporaryAvatarKickWarningDialogModule (ref)
 	local var3 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), constants (copy)
 		p1.uiStateDispatch({
@@ -44,22 +46,11 @@ function InExperienceInterventionDialogManager(p1)
 	local detail = uiState.detail
 	local var4 = if detail then detail.options else nil
 	local var5 = if fFlagTemporaryAvatarKickWarningDialogModule and detail then detail.extras else nil
+	local var6 = if fFlagExpChatDictationContinuousSafetyReminder and treatmentType == constants.TreatmentType.DictationSafetyReminderToast then false else uiState.isShown
 	reactModule.useEffect(function()
-		-- upvalues: SSUIMetaLuaEngineFeature (copy), uiState (ref)
-		if SSUIMetaLuaEngineFeature then
-			pcall(function()
-				-- upvalues: uiState (copy)
-				local safetyService = game:GetService("SafetyService")
-				
-				if uiState.isShown then
-					safetyService:ReportChatSuspensionDialogOpen()
-					
-					return
-				end
-				safetyService:ReportChatSuspensionDialogClose()
-			end)
-		end
-	end, { uiState.isShown })
+		-- upvalues: reportChatSuspensionDialogVisibilityModule (copy), var6 (write)
+		reportChatSuspensionDialogVisibilityModule(var6)
+	end, { var6 })
 	
 	if uiState.isShown then
 		return if treatmentType == constants.TreatmentType.ChatNudgeDialog then reactModule.createElement(chatNudgeCustomDialogModule, {
@@ -119,7 +110,7 @@ function InExperienceInterventionDialogManager(p1)
 				onAcknowledgementSuccess = var4 and var4.onAcknowledgementSuccess,
 				analyticsEventId = var4 and var4.analyticsEventId
 			})
-		}) elseif fFlagTemporaryAvatarKickWarningDialogModule and treatmentType == constants.TreatmentType.TemporaryAvatarKickWarning then reactModule.createElement(var2, {}, {
+		}) elseif fFlagExpChatDictationContinuousSafetyReminder and treatmentType == constants.TreatmentType.DictationSafetyReminderToast then reactModule.createElement(dictationSafetyReminderToastModule) elseif fFlagTemporaryAvatarKickWarningDialogModule and treatmentType == constants.TreatmentType.TemporaryAvatarKickWarning then reactModule.createElement(var2, {}, {
 			reactModule.createElement(temporaryAvatarKickWarningDialogModule, {
 				avatarEntityId = var5 and var5.avatarEntityId,
 				violationType = var5 and var5.violationType,

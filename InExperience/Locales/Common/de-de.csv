@@ -109,7 +109,6 @@ Authentication.SignUp.Action.Create,Erstellen
 Authentication.SignUp.Action.CreateAccountSentenceCase,Konto erstellen
 Authentication.SignUp.Action.ExitModalLeave,Verlassen
 Authentication.SignUp.Action.RespawnNow,Jetzt respawnen
-Authentication.SignUp.Action.StartPlay,Jetzt spielen
 Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Erneut anmelden
 Authentication.SignUp.Description.AccountAlreadyLinked,"Dein {platformAccountName}-Konto ist bereits mit einem Roblox-Konto verlinkt. Bitte versuche erneut, dich anzumelden."
@@ -720,6 +719,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Kategorie *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,Sonstiges
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Wähle eine Kategorie aus
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Problem beim Kauf
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,Vorschlag
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Bis zu {MAX} Zeichen
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Details *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Auswahl aufheben
@@ -727,6 +727,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Gib alle r
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Beschreibe, was fehlt und wann du es zuletzt gesehen hast. Wenn dein Konto gehackt wurde, gib bitte deine Roblox-CS-Ticketnummer und alle relevanten Details an."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,"Beschreibe hier deine Anfrage oder dein Problem. Gib so viele Details wie möglich an, damit wir die Situation verstehen können."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Sag uns, was du kaufen wolltest, wann es passiert ist und wie hoch der Gesamtwert war (z. B. 500 Robux / 4,99 USD). Gib auch alle Fehlermeldungen an, die dir angezeigt wurden."
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,"Teile uns mit, was deiner Meinung nach hinzugefügt oder verbessert werden sollte und warum dies das Spiel besser machen würde."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Möchtest du einen Verstoß melden?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Reiche stattdessen eine Meldung ein.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Auswählen
@@ -1186,6 +1187,19 @@ Corescripts.AvatarContextMenu.FriendRequestPending,Freundschaftsanfrage ausstehe
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,Person blockiert
 Corescripts.AvatarContextMenu.Wave,Winken
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Weiter spielen
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Teleport
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Präsentiert von Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Nicht Home
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Empfehlung auf der Startseite
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,Sonstige
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Portalwerbung
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,Suche
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Suchanzeigen
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Gesponserte Werbung
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Nach unten scrollen
 Feature.Accessibility.Action.ScrollUp,Nach oben scrollen
@@ -4790,7 +4804,7 @@ InGame.Chat.Response.EmotesNotSupported,Du kannst hier keine Emotes verwenden.
 InGame.Chat.Response.EmotesTemporarilyUnavailable,Du kannst Emotes derzeit nicht verwenden.
 InGame.Chat.Response.EmotesWrongAvatarType,Nur R15 Avatars können Emotes verwenden.
 InGame.CommonUI.Badge.Popup.LearnMoreLink,
-InGame.CommonUI.Button.KeepPlaying,Weiter spielen
+InGame.CommonUI.Button.KeepPlaying,
 InGame.CommonUI.Button.Ok,
 InGame.CommonUI.Button.Retry,
 InGame.CommonUI.Label.Custom,Individualisiert

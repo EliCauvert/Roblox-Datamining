@@ -25,7 +25,6 @@ local roactUtilsModule = require(parent.RoactUtils)
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local gameInfosReducer = require(parent.GameInfosRodux).GameInfosReducer
-local bigGameIconReducer = require(parent.GameIconRodux).BigGameIcons.BigGameIconReducer
 local gameHydrationReactModule = require(parent.GameHydrationReact)
 local apiFetchGameDetails = require(parent.GameDetailRodux).GameDetails.ApiFetchGameDetails
 local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
@@ -43,7 +42,6 @@ local gameTileThumbnailBadgesModule = require(gameTile.Overlays.GameTileThumbnai
 local fFlagLuaAppTileVideoCandidateOnly = require(parent.SharedFlags).FFlagLuaAppTileVideoCandidateOnly
 local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 local fFlagLuaAppHomeThumbnailPrefetch = require(parent.SharedFlags).FFlagLuaAppHomeThumbnailPrefetch
-local fFlagMigrateGameIconsToStore = require(parent.SharedFlags).FFlagMigrateGameIconsToStore
 local fFlagLuaAppEdpMediaGalleryVideoPreview = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryVideoPreview
 local fFlagLuaAppEmphasisGameTileVideo = require(parent.SharedFlags).FFlagLuaAppEmphasisGameTileVideo
 local fIntLuaAppGameTileVideoDwellTimeInSec = require(parent.SharedFlags).FIntLuaAppGameTileVideoDwellTimeInSec
@@ -53,7 +51,7 @@ local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGame
 local var1 = if fFlagLuaAppHomeThumbnailPrefetch then require(gameTile.resolveGameTileThumbnailUri) else nil
 
 return function(p1)
-	-- upvalues: useDesignTokens (ref), useTokens (ref), useSelector (ref), gameInfosReducer (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useRoactService (ref), roactNetworking (ref), useDispatch (ref), reactModule (ref), apiFetchGameDetails (ref), getGameTileLayoutDataModule (ref), fFlagMigrateGameIconsToStore (ref), bigGameIconReducer (ref), fFlagLuaAppHomeThumbnailPrefetch (ref), var1 (ref), itemLayoutDataParsingUtilsModule (ref), formatExperienceThumbnailModule (ref), gameTileViewConfigModule (ref), isVRAppBuild (ref), useIsHoveredTileModule (ref), fFlagLuaAppEmphasisGameTileVideo (ref), videoPlaybackCoordinator (ref), hoverTileCoordinatorModule (ref), videoEndReason (ref), gameCollectionItemTypes (ref), sponsoredGamesRecordClick (ref), appExperienceActionRowModule (ref), gridTileTextFooterModule (ref), creatorNameMetadataModule (ref), gameStatsModule (ref), gameTileConstantsModule (ref), impressionsTagUtility (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref), usePreferredInput (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppTileVideoCandidateOnly (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), gameTileVideoThumbnailModule (ref), gameVideoPlaybackDetectorModule (ref), responsiveModule (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref), getTileBadgeByPositionConfigFromEntryModule (ref), gameTileThumbnailBadgesModule (ref), gameTileViewModule (ref), userGameSettingsService (ref)
+	-- upvalues: useDesignTokens (ref), useTokens (ref), useSelector (ref), gameInfosReducer (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useRoactService (ref), roactNetworking (ref), useDispatch (ref), reactModule (ref), apiFetchGameDetails (ref), getGameTileLayoutDataModule (ref), fFlagLuaAppHomeThumbnailPrefetch (ref), var1 (ref), itemLayoutDataParsingUtilsModule (ref), formatExperienceThumbnailModule (ref), gameTileViewConfigModule (ref), isVRAppBuild (ref), useIsHoveredTileModule (ref), fFlagLuaAppEmphasisGameTileVideo (ref), videoPlaybackCoordinator (ref), hoverTileCoordinatorModule (ref), videoEndReason (ref), gameCollectionItemTypes (ref), sponsoredGamesRecordClick (ref), appExperienceActionRowModule (ref), gridTileTextFooterModule (ref), creatorNameMetadataModule (ref), gameStatsModule (ref), gameTileConstantsModule (ref), impressionsTagUtility (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref), usePreferredInput (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppTileVideoCandidateOnly (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), gameTileVideoThumbnailModule (ref), gameVideoPlaybackDetectorModule (ref), responsiveModule (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref), getTileBadgeByPositionConfigFromEntryModule (ref), gameTileThumbnailBadgesModule (ref), gameTileViewModule (ref), userGameSettingsService (ref)
 	local var2 = useDesignTokens()
 	local var3 = useTokens()
 	local universeId = p1.entry.universeId
@@ -85,10 +83,7 @@ return function(p1)
 	local var11 = getGameTileLayoutDataModule(var4, p1.topicId)
 	local gameTileLayoutType = p1.gameTileLayoutType or "Narrow"
 	local var12 = if gameTileLayoutType ~= "Wide" then gameTileLayoutType == "Event" else true
-	local var13 = if fFlagMigrateGameIconsToStore then gameHydrationReactModule.useLargeGameIcon(universeId) or "" else useSelector(function(p2)
-		-- upvalues: bigGameIconReducer (copy), universeId (ref)
-		return if p2[bigGameIconReducer.key][universeId] then p2[bigGameIconReducer.key][universeId].url else ""
-	end)
+	local var13 = gameHydrationReactModule.useLargeGameIcon(universeId) or ""
 	local _ = nil
 	local var14 = if fFlagLuaAppHomeThumbnailPrefetch then var1({
 		isEmphasized = true,

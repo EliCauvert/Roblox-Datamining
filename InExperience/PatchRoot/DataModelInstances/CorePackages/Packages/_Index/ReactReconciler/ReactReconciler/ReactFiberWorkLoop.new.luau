@@ -193,7 +193,9 @@ local reactCurrentOwner = reactSharedInternals.ReactCurrentOwner
 local isSomeRendererActing = reactSharedInternals.IsSomeRendererActing
 local var4 = nil
 local _ = nil
-local t_2 = {}
+local t_2 = {
+	MutationWorkFlags = bit32.bor(reactFiberFlagsModule.Placement, reactFiberFlagsModule.Update, reactFiberFlagsModule.Ref, reactFiberFlagsModule.HostUpdate)
+}
 local _ = {
 	Incomplete = 0,
 	FatalErrored = 1,
@@ -1226,35 +1228,72 @@ function t_2.workLoopConcurrent()
 	end
 end
 
-function t_2.performUnitOfWork(p11)
-	-- upvalues: robloxReactProfilingModule (ref), setCurrentFiber (ref), reactFeatureFlags (ref), reactTypeOfModeModule (ref), unknownModule_6 (ref), t_2 (ref), t (ref), resetCurrentFiber (ref), var7 (write), reactCurrentOwner (ref)
-	local var41
-	local var42 = robloxReactProfilingModule.profileUnitOfWorkBefore(p11)
-	local alternate = p11.alternate
-	setCurrentFiber(p11)
-	local _ = nil
-	
-	if reactFeatureFlags.enableProfilerTimer and bit32.band(p11.mode, reactTypeOfModeModule.ProfileMode) ~= reactTypeOfModeModule.NoMode then
-		unknownModule_6.startProfilerTimer(p11)
-		var41 = t_2.beginWork(alternate, p11, t.subtreeRenderLanes)
-		unknownModule_6.stopProfilerTimerIfRunningAndRecordDelta(p11, true)
-	else
-		var41 = t_2.beginWork(alternate, p11, t.subtreeRenderLanes)
+if reactFeatureFlags.enableWorkLoopTrims then
+	function t_2.performUnitOfWork(p11)
+		-- upvalues: robloxReactProfilingModule (ref), dEV (ref), setCurrentFiber (ref), reactFeatureFlags (ref), reactTypeOfModeModule (ref), unknownModule_6 (ref), t_2 (ref), t (ref), resetCurrentFiber (ref), var7 (write), reactCurrentOwner (ref)
+		local enableUnitOfWorkProfiling = robloxReactProfilingModule.enableUnitOfWorkProfiling
+		local var41 = if enableUnitOfWorkProfiling then robloxReactProfilingModule.profileUnitOfWorkBefore(p11) else nil
+		local alternate = p11.alternate
+		
+		if dEV then
+			setCurrentFiber(p11)
+		end
+		local var42
+		local _ = nil
+		
+		if reactFeatureFlags.enableProfilerTimer and bit32.band(p11.mode, reactTypeOfModeModule.ProfileMode) ~= reactTypeOfModeModule.NoMode then
+			unknownModule_6.startProfilerTimer(p11)
+			var42 = t_2.beginWork(alternate, p11, t.subtreeRenderLanes)
+			unknownModule_6.stopProfilerTimerIfRunningAndRecordDelta(p11, true)
+		else
+			var42 = t_2.beginWork(alternate, p11, t.subtreeRenderLanes)
+		end
+		if dEV then
+			resetCurrentFiber()
+		end
+		p11.memoizedProps = p11.pendingProps
+		
+		if var42 == nil then
+			t_2.completeUnitOfWork(p11)
+		else
+			var7 = var42
+		end
+		reactCurrentOwner.current = nil
+		
+		if enableUnitOfWorkProfiling then
+			robloxReactProfilingModule.profileUnitOfWorkAfter(var41)
+		end
 	end
-	resetCurrentFiber()
-	p11.memoizedProps = p11.pendingProps
-	
-	if var41 == nil then
-		t_2.completeUnitOfWork(p11)
-	else
-		var7 = var41
+else
+	function t_2.performUnitOfWork(p11)
+		-- upvalues: robloxReactProfilingModule (ref), setCurrentFiber (ref), reactFeatureFlags (ref), reactTypeOfModeModule (ref), unknownModule_6 (ref), t_2 (ref), t (ref), resetCurrentFiber (ref), var7 (write), reactCurrentOwner (ref)
+		local var41
+		local var42 = robloxReactProfilingModule.profileUnitOfWorkBefore(p11)
+		local alternate = p11.alternate
+		setCurrentFiber(p11)
+		local _ = nil
+		
+		if reactFeatureFlags.enableProfilerTimer and bit32.band(p11.mode, reactTypeOfModeModule.ProfileMode) ~= reactTypeOfModeModule.NoMode then
+			unknownModule_6.startProfilerTimer(p11)
+			var41 = t_2.beginWork(alternate, p11, t.subtreeRenderLanes)
+			unknownModule_6.stopProfilerTimerIfRunningAndRecordDelta(p11, true)
+		else
+			var41 = t_2.beginWork(alternate, p11, t.subtreeRenderLanes)
+		end
+		resetCurrentFiber()
+		p11.memoizedProps = p11.pendingProps
+		
+		if var41 == nil then
+			t_2.completeUnitOfWork(p11)
+		else
+			var7 = var41
+		end
+		reactCurrentOwner.current = nil
+		robloxReactProfilingModule.profileUnitOfWorkAfter(var42)
 	end
-	reactCurrentOwner.current = nil
-	robloxReactProfilingModule.profileUnitOfWorkAfter(var42)
 end
-
 function t_2.completeUnitOfWork(p11)
-	-- upvalues: reactFiberFlagsModule (ref), setCurrentFiber (ref), reactFeatureFlags (ref), reactTypeOfModeModule (ref), t (ref), t_1 (ref), unknownModule_6 (ref), resetCurrentFiber (ref), var7 (write), unwindWork (ref), var9 (write)
+	-- upvalues: reactFiberFlagsModule (ref), reactFeatureFlags (ref), dEV (ref), setCurrentFiber (ref), reactTypeOfModeModule (ref), t (ref), t_1 (ref), unknownModule_6 (ref), resetCurrentFiber (ref), var7 (write), unwindWork (ref), var9 (write)
 	local sibling
 	local var41 = p11
 	repeat
@@ -1295,7 +1334,11 @@ function t_2.completeUnitOfWork(p11)
 			
 			return
 		end
-		setCurrentFiber(var41)
+		if not reactFeatureFlags.enableWorkLoopTrims then
+			setCurrentFiber(var41)
+		elseif dEV then
+			setCurrentFiber(var41)
+		end
 		sibling = nil
 		
 		if reactFeatureFlags.enableProfilerTimer and bit32.band(var41.mode, reactTypeOfModeModule.ProfileMode) ~= reactTypeOfModeModule.NoMode then
@@ -1316,8 +1359,11 @@ function t_2.completeUnitOfWork(p11)
 			end
 			sibling = t_1.completeWorkRef(alternate, var42, subtreeRenderLanes)
 		end
-		resetCurrentFiber()
-		
+		if not reactFeatureFlags.enableWorkLoopTrims then
+			resetCurrentFiber()
+		elseif dEV then
+			resetCurrentFiber()
+		end
 		if sibling == nil then
 		end
 		var7 = sibling
@@ -1345,7 +1391,7 @@ function t_2.commitRoot(p11)
 end
 
 function t_2.commitRootImpl(p11, p12)
-	-- upvalues: t (ref), var19 (write), invariant (ref), var5 (write), dEV (ref), enableDebugTracing (ref), debugTracingModule (ref), enableSchedulingProfiler (ref), schedulingProfilerModule (ref), reactFiberLaneModule (ref), mergeLanes (ref), markRootFinished (ref), var21 (write), hasDiscreteLanes (ref), var6 (write), var7 (write), noLanes (write), reactFiberFlagsModule (ref), reactFeatureFlags (ref), getCurrentUpdateLanePriority (ref), setCurrentUpdateLanePriority (ref), t_2 (ref), reactCurrentOwner (ref), var27 (write), reactFiberHostConfigModule (ref), var28 (write), unknownModule_6 (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), recursivelyCommitLayoutEffects (ref), hasCaughtError (ref), clearCaughtError (ref), var4 (write), resetCurrentFiber (ref), yOLO (ref), describeError (ref), var18 (write), scheduleCallback (ref), normalPriority (ref), requestPaint (ref), noLanes_4 (write), var20 (write), var25 (write), var17 (write), enableDoubleInvokingEffects (ref), syncLane (ref), var23 (write), var22 (write), onCommitRoot (ref), onCommitRoot_1 (ref), var1 (write), now (ref), var15 (write), var16 (write), flushSyncCallbackQueue (ref)
+	-- upvalues: t (ref), var19 (write), invariant (ref), var5 (write), dEV (ref), enableDebugTracing (ref), debugTracingModule (ref), enableSchedulingProfiler (ref), schedulingProfilerModule (ref), reactFiberLaneModule (ref), mergeLanes (ref), markRootFinished (ref), var21 (write), hasDiscreteLanes (ref), var6 (write), var7 (write), noLanes (write), reactFiberFlagsModule (ref), reactFeatureFlags (ref), getCurrentUpdateLanePriority (ref), setCurrentUpdateLanePriority (ref), t_2 (ref), reactCurrentOwner (ref), var18 (write), scheduleCallback (ref), normalPriority (ref), var27 (write), reactFiberHostConfigModule (ref), var28 (write), unknownModule_6 (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), recursivelyCommitLayoutEffects (ref), hasCaughtError (ref), clearCaughtError (ref), var4 (write), resetCurrentFiber (ref), yOLO (ref), describeError (ref), requestPaint (ref), noLanes_4 (write), var20 (write), var25 (write), var17 (write), enableDoubleInvokingEffects (ref), syncLane (ref), var23 (write), var22 (write), onCommitRoot (ref), onCommitRoot_1 (ref), var1 (write), now (ref), var15 (write), var16 (write), flushSyncCallbackQueue (ref)
 	repeat
 		t.flushPassiveEffects()
 	until var19 == nil
@@ -1395,6 +1441,16 @@ function t_2.commitRootImpl(p11, p12)
 			var5 = bit32.bor(var5, 32)
 			local var44 = t_2.pushInteractions(p11)
 			reactCurrentOwner.current = nil
+			
+			if reactFeatureFlags.enableCommitTraversalTrims and bit32.band(bit32.bor(finishedWork.subtreeFlags, finishedWork.flags), reactFiberFlagsModule.Passive) ~= reactFiberFlagsModule.NoFlags and not var18 then
+				var18 = true
+				scheduleCallback(normalPriority, function()
+					-- upvalues: t (copy)
+					t.flushPassiveEffects()
+					
+					return nil
+				end)
+			end
 			var27 = reactFiberHostConfigModule.prepareForCommit(p11.containerInfo)
 			var28 = false
 			t_2.commitBeforeMutationEffects(finishedWork)
@@ -1541,7 +1597,7 @@ function t_2.commitRootImpl(p11, p12)
 end
 
 function t_2.commitBeforeMutationEffects(p13)
-	-- upvalues: t_2 (ref), reactFiberFlagsModule (ref), dEV (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), hasCaughtError (ref), clearCaughtError (ref), t (ref), resetCurrentFiber (ref), yOLO (ref), describeError (ref)
+	-- upvalues: t_2 (ref), reactFiberFlagsModule (ref), reactFeatureFlags (ref), var27 (write), dEV (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), hasCaughtError (ref), clearCaughtError (ref), t (ref), resetCurrentFiber (ref), yOLO (ref), describeError (ref)
 	local var50 = p13
 	while var50 ~= nil do
 		if var50.deletions ~= nil then
@@ -1550,7 +1606,35 @@ function t_2.commitBeforeMutationEffects(p13)
 		if var50.child ~= nil and bit32.band(var50.subtreeFlags, reactFiberFlagsModule.BeforeMutationMask) ~= reactFiberFlagsModule.NoFlags then
 			t_2.commitBeforeMutationEffects(var50.child)
 		end
-		if dEV then
+		if reactFeatureFlags.enableCommitTraversalTrims then
+			if var27 ~= nil or bit32.band(var50.flags, reactFiberFlagsModule.Snapshot) ~= reactFiberFlagsModule.NoFlags then
+				if dEV then
+					setCurrentFiber(var50)
+					invokeGuardedCallback(nil, t_2.commitBeforeMutationEffectsImpl, nil, var50)
+					
+					if hasCaughtError() then
+						t.captureCommitPhaseError(var50, var50.return_, clearCaughtError())
+					end
+					resetCurrentFiber()
+				else
+					local var51
+					local _ = nil
+					local var52 = nil
+					
+					if yOLO then
+						var51 = true
+						t_2.commitBeforeMutationEffectsImpl(var50)
+					else
+						local ok, status = xpcall(t_2.commitBeforeMutationEffectsImpl, describeError, var50)
+						var51 = ok
+						var52 = status
+					end
+					if not var51 then
+						t.captureCommitPhaseError(var50, var50.return_, var52)
+					end
+				end
+			end
+		elseif dEV then
 			setCurrentFiber(var50)
 			invokeGuardedCallback(nil, t_2.commitBeforeMutationEffectsImpl, nil, var50)
 			
@@ -1559,20 +1643,20 @@ function t_2.commitBeforeMutationEffects(p13)
 			end
 			resetCurrentFiber()
 		else
-			local var51
+			local var53
 			local _ = nil
-			local var52 = nil
+			local var54 = nil
 			
 			if yOLO then
-				var51 = true
+				var53 = true
 				t_2.commitBeforeMutationEffectsImpl(var50)
 			else
 				local ok, status = xpcall(t_2.commitBeforeMutationEffectsImpl, describeError, var50)
-				var51 = ok
-				var52 = status
+				var53 = ok
+				var54 = status
 			end
-			if not var51 then
-				t.captureCommitPhaseError(var50, var50.return_, var52)
+			if not var53 then
+				t.captureCommitPhaseError(var50, var50.return_, var54)
 			end
 		end
 		var50 = var50.sibling
@@ -1580,7 +1664,7 @@ function t_2.commitBeforeMutationEffects(p13)
 end
 
 function t_2.commitBeforeMutationEffectsImpl(p14)
-	-- upvalues: var28 (write), var27 (write), reactWorkTagsModule (ref), unknownModule_5 (ref), doesFiberContain (ref), reactFiberHostConfigModule (ref), reactFiberFlagsModule (ref), setCurrentFiber (ref), commitBeforeMutationLifeCycles (ref), resetCurrentFiber (ref), var18 (write), scheduleCallback (ref), normalPriority (ref), t (ref)
+	-- upvalues: var28 (write), var27 (write), reactWorkTagsModule (ref), unknownModule_5 (ref), doesFiberContain (ref), reactFiberHostConfigModule (ref), reactFiberFlagsModule (ref), setCurrentFiber (ref), commitBeforeMutationLifeCycles (ref), resetCurrentFiber (ref), reactFeatureFlags (ref), var18 (write), scheduleCallback (ref), normalPriority (ref), t (ref)
 	local alternate = p14.alternate
 	local flags = p14.flags
 	
@@ -1593,7 +1677,7 @@ function t_2.commitBeforeMutationEffectsImpl(p14)
 		commitBeforeMutationLifeCycles(alternate, p14)
 		resetCurrentFiber()
 	end
-	if bit32.band(flags, reactFiberFlagsModule.Passive) ~= reactFiberFlagsModule.NoFlags and not var18 then
+	if not reactFeatureFlags.enableCommitTraversalTrims and bit32.band(flags, reactFiberFlagsModule.Passive) ~= reactFiberFlagsModule.NoFlags and not var18 then
 		var18 = true
 		scheduleCallback(normalPriority, function()
 			-- upvalues: t (copy)
@@ -1615,54 +1699,83 @@ function t_2.commitBeforeMutationEffectsDeletions(p14)
 end
 
 function t_2.commitMutationEffects(p15, p16, p17)
-	-- upvalues: commitDeletion (ref), describeError (ref), t (ref), reactFiberFlagsModule (ref), t_2 (ref), dEV (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), hasCaughtError (ref), clearCaughtError (ref), resetCurrentFiber (ref), yOLO (ref)
-	local var53 = p15
-	while var53 ~= nil do
-		local deletions = var53.deletions
+	-- upvalues: commitDeletion (ref), describeError (ref), t (ref), reactFiberFlagsModule (ref), t_2 (ref), reactFeatureFlags (ref), dEV (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), hasCaughtError (ref), clearCaughtError (ref), resetCurrentFiber (ref), yOLO (ref)
+	local var55 = p15
+	while var55 ~= nil do
+		local status
+		local deletions = var55.deletions
 		
 		if deletions ~= nil then
 			for status, v in deletions do
-				local ok, status = xpcall(commitDeletion, describeError, p16, v, var53, p17)
+				local ok, status = xpcall(commitDeletion, describeError, p16, v, var55, p17)
 				
 				if not ok then
-					t.captureCommitPhaseError(v, var53, status)
+					t.captureCommitPhaseError(v, var55, status)
 				end
 			end
 		end
-		if var53.child ~= nil and bit32.band(var53.subtreeFlags, reactFiberFlagsModule.MutationMask) ~= reactFiberFlagsModule.NoFlags then
-			t_2.commitMutationEffects(var53.child, p16, p17)
+		if var55.child ~= nil and bit32.band(var55.subtreeFlags, reactFiberFlagsModule.MutationMask) ~= reactFiberFlagsModule.NoFlags then
+			t_2.commitMutationEffects(var55.child, p16, p17)
 		end
-		if dEV then
-			setCurrentFiber(var53)
-			invokeGuardedCallback(nil, t_2.commitMutationEffectsImpl, nil, var53, p16, p17)
+		if reactFeatureFlags.enableCommitTraversalTrims then
+			if bit32.band(var55.flags, t_2.MutationWorkFlags) ~= reactFiberFlagsModule.NoFlags then
+				if dEV then
+					setCurrentFiber(var55)
+					invokeGuardedCallback(nil, t_2.commitMutationEffectsImpl, nil, var55, p16, p17)
+					
+					if hasCaughtError() then
+						t.captureCommitPhaseError(var55, var55.return_, clearCaughtError())
+					end
+					resetCurrentFiber()
+				else
+					local var56
+					local _ = nil
+					local var57 = nil
+					
+					if yOLO then
+						var56 = true
+						t_2.commitMutationEffectsImpl(var55, p16, p17)
+					else
+						ok, status = xpcall(t_2.commitMutationEffectsImpl, describeError, var55, p16, p17)
+						var56 = ok
+						var57 = status
+					end
+					if not var56 then
+						t.captureCommitPhaseError(var55, var55.return_, var57)
+					end
+				end
+			end
+		elseif dEV then
+			setCurrentFiber(var55)
+			invokeGuardedCallback(nil, t_2.commitMutationEffectsImpl, nil, var55, p16, p17)
 			
 			if hasCaughtError() then
-				t.captureCommitPhaseError(var53, var53.return_, clearCaughtError())
+				t.captureCommitPhaseError(var55, var55.return_, clearCaughtError())
 			end
 			resetCurrentFiber()
 		else
-			local var54
+			local var58
 			local _ = nil
-			local var55 = nil
+			local var59 = nil
 			
 			if yOLO then
-				var54 = true
-				t_2.commitMutationEffectsImpl(var53, p16, p17)
+				var58 = true
+				t_2.commitMutationEffectsImpl(var55, p16, p17)
 			else
-				local ok, status = xpcall(t_2.commitMutationEffectsImpl, describeError, var53, p16, p17)
-				var54 = ok
-				var55 = status
+				ok, status = xpcall(t_2.commitMutationEffectsImpl, describeError, var55, p16, p17)
+				var58 = ok
+				var59 = status
 			end
-			if not var54 then
-				t.captureCommitPhaseError(var53, var53.return_, var55)
+			if not var58 then
+				t.captureCommitPhaseError(var55, var55.return_, var59)
 			end
 		end
-		var53 = var53.sibling
+		var55 = var55.sibling
 	end
 end
 
 function t_2.commitMutationEffectsImpl(p18, _, _)
-	-- upvalues: reactFiberFlagsModule (ref), commitDetachRef (ref), commitPlacement (ref), commitWork (ref)
+	-- upvalues: reactFiberFlagsModule (ref), commitDetachRef (ref), reactFeatureFlags (ref), commitPlacement (ref), commitWork (ref)
 	local flags = p18.flags
 	
 	if bit32.band(flags, reactFiberFlagsModule.Ref) ~= 0 then
@@ -1674,6 +1787,9 @@ function t_2.commitMutationEffectsImpl(p18, _, _)
 	end
 	local bits = bit32.band(flags, bit32.bor(reactFiberFlagsModule.Placement, reactFiberFlagsModule.Update, reactFiberFlagsModule.Hydrating))
 	
+	if reactFeatureFlags.enableCommitTraversalTrims and bit32.band(flags, reactFiberFlagsModule.HostUpdate) ~= reactFiberFlagsModule.NoFlags then
+		bits = bit32.bor(bits, reactFiberFlagsModule.Update)
+	end
 	if bits == reactFiberFlagsModule.Placement then
 		commitPlacement(p18)
 		p18.flags = bit32.band(p18.flags, bit32.bnot(reactFiberFlagsModule.Placement))
@@ -1714,110 +1830,142 @@ function t.schedulePassiveEffectCallback()
 	end
 end
 
-local var56 = nil
+local var60 = nil
 
 function t.flushPassiveEffects()
-	-- upvalues: var20 (write), noPriority (ref), normalPriority (ref), reactFeatureFlags (ref), getCurrentUpdateLanePriority (ref), setCurrentUpdateLanePriority (ref), schedulerPriorityToLanePriority (ref), yOLO (ref), runWithPriority (ref), describeError (ref), var56 (write)
+	-- upvalues: var20 (write), noPriority (ref), normalPriority (ref), reactFeatureFlags (ref), getCurrentUpdateLanePriority (ref), setCurrentUpdateLanePriority (ref), schedulerPriorityToLanePriority (ref), yOLO (ref), runWithPriority (ref), describeError (ref), var60 (write)
 	if var20 == noPriority then
 		return false
 	end
-	local var57 = if normalPriority < var20 then normalPriority else var20
+	local var61 = if normalPriority < var20 then normalPriority else var20
 	var20 = noPriority
 	
 	if not reactFeatureFlags.decoupleUpdatePriorityFromScheduler then
-		return runWithPriority(var57, var56)
+		return runWithPriority(var61, var60)
 	end
-	local var58, var59
-	local var60 = getCurrentUpdateLanePriority()
-	setCurrentUpdateLanePriority(schedulerPriorityToLanePriority(var57))
+	local var62, var63
+	local var64 = getCurrentUpdateLanePriority()
+	setCurrentUpdateLanePriority(schedulerPriorityToLanePriority(var61))
 	local _ = nil
 	local _ = nil
 	
 	if yOLO then
-		var58 = true
-		setCurrentUpdateLanePriority(schedulerPriorityToLanePriority(var57))
-		var59 = runWithPriority(var57, var56)
+		var62 = true
+		setCurrentUpdateLanePriority(schedulerPriorityToLanePriority(var61))
+		var63 = runWithPriority(var61, var60)
 	else
-		local ok, status = xpcall(runWithPriority, describeError, var57, var56)
-		var58 = ok
-		var59 = status
+		local ok, status = xpcall(runWithPriority, describeError, var61, var60)
+		var62 = ok
+		var63 = status
 	end
-	setCurrentUpdateLanePriority(var60)
+	setCurrentUpdateLanePriority(var64)
 	
-	if not var58 then
-		error(var59)
+	if not var62 then
+		error(var63)
 	end
-	return var59
+	return var63
 end
 
-local var57 = function(p22, p23)
-	-- upvalues: reactFeatureFlags (ref), reactWorkTagsModule (ref), var14 (write), reactFiberFlagsModule (ref), var57 (write), dEV (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), commitPassiveMount (ref), hasCaughtError (ref), clearCaughtError (ref), t (ref), resetCurrentFiber (ref), yOLO (ref), describeError (ref)
-	local var58 = p23
-	while var58 ~= nil do
-		local var59 = nil
+local var61 = function(p22, p23)
+	-- upvalues: reactFeatureFlags (ref), reactWorkTagsModule (ref), var14 (write), reactFiberFlagsModule (ref), var61 (write), dEV (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), commitPassiveMount (ref), hasCaughtError (ref), clearCaughtError (ref), t (ref), resetCurrentFiber (ref), yOLO (ref), describeError (ref)
+	local var62 = p23
+	while var62 ~= nil do
+		local var63 = nil
 		
-		if reactFeatureFlags.enableProfilerTimer and reactFeatureFlags.enableProfilerCommitHooks and var58.tag == reactWorkTagsModule.Profiler then
-			var59 = var14
-			var14 = var58
+		if reactFeatureFlags.enableProfilerTimer and reactFeatureFlags.enableProfilerCommitHooks and var62.tag == reactWorkTagsModule.Profiler then
+			var63 = var14
+			var14 = var62
 		end
-		if var58.child ~= nil and bit32.band(var58.subtreeFlags, reactFiberFlagsModule.PassiveMask) ~= reactFiberFlagsModule.NoFlags then
-			var57(p22, var58.child)
+		if var62.child ~= nil and bit32.band(var62.subtreeFlags, reactFiberFlagsModule.PassiveMask) ~= reactFiberFlagsModule.NoFlags then
+			var61(p22, var62.child)
 		end
-		if bit32.band(var58.flags, reactFiberFlagsModule.Passive) ~= reactFiberFlagsModule.NoFlags then
+		if bit32.band(var62.flags, reactFiberFlagsModule.Passive) ~= reactFiberFlagsModule.NoFlags then
 			if dEV then
-				setCurrentFiber(var58)
-				invokeGuardedCallback(nil, commitPassiveMount, nil, p22, var58)
+				setCurrentFiber(var62)
+				invokeGuardedCallback(nil, commitPassiveMount, nil, p22, var62)
 				
 				if hasCaughtError() then
-					t.captureCommitPhaseError(var58, var58.return_, clearCaughtError())
+					t.captureCommitPhaseError(var62, var62.return_, clearCaughtError())
 				end
 				resetCurrentFiber()
 			else
-				local var60
+				local var64
 				local _ = nil
-				local var61 = nil
+				local var65 = nil
 				
 				if yOLO then
-					var60 = true
-					commitPassiveMount(p22, var58)
+					var64 = true
+					commitPassiveMount(p22, var62)
 				else
-					local ok, status = xpcall(commitPassiveMount, describeError, p22, var58)
-					var60 = ok
-					var61 = status
+					local ok, status = xpcall(commitPassiveMount, describeError, p22, var62)
+					var64 = ok
+					var65 = status
 				end
-				if not var60 then
-					t.captureCommitPhaseError(var58, var58.return_, var61)
+				if not var64 then
+					t.captureCommitPhaseError(var62, var62.return_, var65)
 				end
 			end
 		end
-		if reactFeatureFlags.enableProfilerTimer and reactFeatureFlags.enableProfilerCommitHooks and var58.tag == reactWorkTagsModule.Profiler then
-			if var59 ~= nil then
-				var59.stateNode.passiveEffectDuration += var58.stateNode.passiveEffectDuration
+		if reactFeatureFlags.enableProfilerTimer and reactFeatureFlags.enableProfilerCommitHooks and var62.tag == reactWorkTagsModule.Profiler then
+			if var63 ~= nil then
+				var63.stateNode.passiveEffectDuration += var62.stateNode.passiveEffectDuration
 			end
-			var14 = var59
+			var14 = var63
 		end
-		var58 = var58.sibling
+		var62 = var62.sibling
 	end
 end
 
-local function flushPassiveUnmountEffects(p24)
+function t_2.commitPassiveMountEffectsOnFibers(p24, p25)
+	-- upvalues: dEV (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), commitPassiveMount (ref), hasCaughtError (ref), clearCaughtError (ref), t (ref), resetCurrentFiber (ref), yOLO (ref), describeError (ref)
+	for i = 1, #p25 do
+		local var66 = p25[i]
+		
+		if dEV then
+			setCurrentFiber(var66)
+			invokeGuardedCallback(nil, commitPassiveMount, nil, p24, var66)
+			
+			if hasCaughtError() then
+				t.captureCommitPhaseError(var66, var66.return_, clearCaughtError())
+			end
+			resetCurrentFiber()
+		end
+		local var67
+		local _ = nil
+		local var68 = nil
+		
+		if yOLO then
+			var67 = true
+			commitPassiveMount(p24, var66)
+		else
+			local ok, status = xpcall(commitPassiveMount, describeError, p24, var66)
+			var67 = ok
+			var68 = status
+		end
+		if not var67 then
+			t.captureCommitPhaseError(var66, var66.return_, var68)
+		end
+	end
+end
+
+local function flushPassiveUnmountEffects(p26)
 	-- upvalues: t_2 (ref), enableNewTreeCleanupPath (ref), deletedTreeCleanUpLevel (ref), reactFiberFlagsModule (ref), flushPassiveUnmountEffects (ref), setCurrentFiber (ref), commitPassiveUnmount (ref), resetCurrentFiber (ref)
-	local var62 = p24
-	while var62 ~= nil do
-		local deletions = var62.deletions
+	local var69 = p26
+	while var69 ~= nil do
+		local deletions = var69.deletions
 		
 		if deletions ~= nil then
 			local i
 			for i = 1, #deletions do
-				local var63 = deletions[i]
-				t_2.flushPassiveUnmountEffectsInsideOfDeletedTree(var63, var62)
+				local var70 = deletions[i]
+				t_2.flushPassiveUnmountEffectsInsideOfDeletedTree(var70, var69)
 				
 				if not enableNewTreeCleanupPath or deletedTreeCleanUpLevel < 2 then
-					t_2.detachFiberAfterEffects(var63)
+					t_2.detachFiberAfterEffects(var70)
 				end
 			end
 			if enableNewTreeCleanupPath and deletedTreeCleanUpLevel >= 1 then
-				local alternate = var62.alternate
+				local alternate = var69.alternate
 				
 				if alternate ~= nil then
 					local child = alternate.child
@@ -1833,42 +1981,90 @@ local function flushPassiveUnmountEffects(p24)
 				end
 			end
 		end
-		local child = var62.child
+		local child = var69.child
 		
-		if child ~= nil and bit32.band(var62.subtreeFlags, reactFiberFlagsModule.PassiveMask) ~= reactFiberFlagsModule.NoFlags then
+		if child ~= nil and bit32.band(var69.subtreeFlags, reactFiberFlagsModule.PassiveMask) ~= reactFiberFlagsModule.NoFlags then
 			flushPassiveUnmountEffects(child)
 		end
-		if bit32.band(var62.flags, reactFiberFlagsModule.Passive) ~= reactFiberFlagsModule.NoFlags then
-			setCurrentFiber(var62)
-			commitPassiveUnmount(var62)
+		if bit32.band(var69.flags, reactFiberFlagsModule.Passive) ~= reactFiberFlagsModule.NoFlags then
+			setCurrentFiber(var69)
+			commitPassiveUnmount(var69)
 			resetCurrentFiber()
 		end
-		var62 = var62.sibling
+		var69 = var69.sibling
 	end
 end
 
-function t_2.flushPassiveUnmountEffectsInsideOfDeletedTree(p25, p26)
+function t_2.flushPassiveUnmountEffectsCollecting(p27, p28)
+	-- upvalues: t_2 (ref), enableNewTreeCleanupPath (ref), deletedTreeCleanUpLevel (ref), reactFiberFlagsModule (ref), setCurrentFiber (ref), commitPassiveUnmount (ref), resetCurrentFiber (ref)
+	local var71 = p27
+	while var71 ~= nil do
+		local deletions = var71.deletions
+		
+		if deletions ~= nil then
+			local i
+			for i = 1, #deletions do
+				local var72 = deletions[i]
+				t_2.flushPassiveUnmountEffectsInsideOfDeletedTree(var72, var71)
+				
+				if not enableNewTreeCleanupPath or deletedTreeCleanUpLevel < 2 then
+					t_2.detachFiberAfterEffects(var72)
+				end
+			end
+			if enableNewTreeCleanupPath and deletedTreeCleanUpLevel >= 1 then
+				local alternate = var71.alternate
+				
+				if alternate ~= nil then
+					local child = alternate.child
+					
+					if child ~= nil then
+						alternate.child = nil
+						repeat
+							i = child.sibling
+							child.sibling = nil
+							child = i
+						until child ~= nil
+					end
+				end
+			end
+		end
+		local child = var71.child
+		
+		if child ~= nil and bit32.band(var71.subtreeFlags, reactFiberFlagsModule.PassiveMask) ~= reactFiberFlagsModule.NoFlags then
+			t_2.flushPassiveUnmountEffectsCollecting(child, p28)
+		end
+		if bit32.band(var71.flags, reactFiberFlagsModule.Passive) ~= reactFiberFlagsModule.NoFlags then
+			table.insert(p28, var71)
+			setCurrentFiber(var71)
+			commitPassiveUnmount(var71)
+			resetCurrentFiber()
+		end
+		var71 = var71.sibling
+	end
+end
+
+function t_2.flushPassiveUnmountEffectsInsideOfDeletedTree(p29, p30)
 	-- upvalues: reactFiberFlagsModule (ref), enableNewTreeCleanupPath (ref), deletedTreeCleanUpLevel (ref), t_2 (ref), setCurrentFiber (ref), commitPassiveUnmountInsideDeletedTree (ref), resetCurrentFiber (ref)
-	if bit32.band(p25.subtreeFlags, reactFiberFlagsModule.PassiveStatic) ~= reactFiberFlagsModule.NoFlags or enableNewTreeCleanupPath and deletedTreeCleanUpLevel >= 2 then
-		local child = p25.child
+	if bit32.band(p29.subtreeFlags, reactFiberFlagsModule.PassiveStatic) ~= reactFiberFlagsModule.NoFlags or enableNewTreeCleanupPath and deletedTreeCleanUpLevel >= 2 then
+		local child = p29.child
 		while child ~= nil do
 			local sibling = child.sibling
-			t_2.flushPassiveUnmountEffectsInsideOfDeletedTree(child, p26)
+			t_2.flushPassiveUnmountEffectsInsideOfDeletedTree(child, p30)
 			child = sibling
 		end
 	end
-	if bit32.band(p25.flags, reactFiberFlagsModule.PassiveStatic) ~= reactFiberFlagsModule.NoFlags then
-		setCurrentFiber(p25)
-		commitPassiveUnmountInsideDeletedTree(p25, p26)
+	if bit32.band(p29.flags, reactFiberFlagsModule.PassiveStatic) ~= reactFiberFlagsModule.NoFlags then
+		setCurrentFiber(p29)
+		commitPassiveUnmountInsideDeletedTree(p29, p30)
 		resetCurrentFiber()
 	end
 	if enableNewTreeCleanupPath and deletedTreeCleanUpLevel >= 2 then
-		t_2.detachFiberAfterEffects(p25)
+		t_2.detachFiberAfterEffects(p29)
 	end
 end
 
-var56 = function()
-	-- upvalues: var19 (write), noLanes_4 (write), reactFiberLaneModule (ref), invariant (ref), var5 (write), dEV (ref), enableDebugTracing (ref), debugTracingModule (ref), enableSchedulingProfiler (ref), schedulingProfilerModule (ref), t_2 (ref), flushPassiveUnmountEffects (ref), var57 (write), enableDoubleInvokingEffects (ref), reactFeatureFlags (ref), flushSyncCallbackQueue (ref), var24 (write)
+var60 = function()
+	-- upvalues: var19 (write), noLanes_4 (write), reactFiberLaneModule (ref), invariant (ref), var5 (write), dEV (ref), enableDebugTracing (ref), debugTracingModule (ref), enableSchedulingProfiler (ref), schedulingProfilerModule (ref), t_2 (ref), reactFeatureFlags (ref), flushPassiveUnmountEffects (ref), var61 (write), enableDoubleInvokingEffects (ref), flushSyncCallbackQueue (ref), var24 (write)
 	if var19 == nil then
 		return false
 	end
@@ -1883,10 +2079,22 @@ var56 = function()
 		schedulingProfilerModule.markPassiveEffectsStarted(noLanes_4)
 	end
 	var5 = bit32.bor(var5, 32)
-	local var64 = t_2.pushInteractions(var19)
-	flushPassiveUnmountEffects(var19.current)
-	var57(var19, var19.current)
+	local var73 = t_2.pushInteractions(var19)
 	
+	if not reactFeatureFlags.enableCommitTraversalTrims then
+		flushPassiveUnmountEffects(var19.current)
+		var61(var19, var19.current)
+	elseif reactFeatureFlags.enableProfilerTimer and reactFeatureFlags.enableProfilerCommitHooks then
+		flushPassiveUnmountEffects(var19.current)
+		var61(var19, var19.current)
+	else
+		local passiveMountFibers = t_2.passiveMountFibers or {}
+		t_2.passiveMountFibers = nil
+		t_2.flushPassiveUnmountEffectsCollecting(var19.current, passiveMountFibers)
+		t_2.commitPassiveMountEffectsOnFibers(var19, passiveMountFibers)
+		table.clear(passiveMountFibers)
+		t_2.passiveMountFibers = passiveMountFibers
+	end
 	if dEV and enableDebugTracing then
 		debugTracingModule.logPassiveEffectsStopped()
 	end
@@ -1897,7 +2105,7 @@ var56 = function()
 		commitDoubleInvokeEffectsInDEV(var19.current, true)
 	end
 	if reactFeatureFlags.enableSchedulerTracing then
-		t_2.popInteractions(var64)
+		t_2.popInteractions(var73)
 		t_2.finishPendingInteractions(var19, noLanes_4)
 	end
 	var5 = var5
@@ -1907,128 +2115,128 @@ var56 = function()
 	return true
 end
 
-function t.isAlreadyFailedLegacyErrorBoundary(p27)
+function t.isAlreadyFailedLegacyErrorBoundary(p31)
 	-- upvalues: var17 (write)
-	return var17 ~= nil and var17:has(p27)
+	return var17 ~= nil and var17:has(p31)
 end
 
-function t.markLegacyErrorBoundaryAsFailed(p27)
+function t.markLegacyErrorBoundaryAsFailed(p31)
 	-- upvalues: var17 (write), set (ref)
 	if var17 == nil then
-		var17 = set.new({ p27 })
+		var17 = set.new({ p31 })
 		
 		return
 	end
-	var17:add(p27)
+	var17:add(p31)
 end
 
-function t.prepareToThrowUncaughtError(p27)
+function t.prepareToThrowUncaughtError(p31)
 	-- upvalues: var15 (write), var16 (write)
 	if not var15 then
 		var15 = true
-		var16 = p27
+		var16 = p31
 	end
 end
 
-var4 = function(p27, p28, p29)
+var4 = function(p31, p32, p33)
 	-- upvalues: createCapturedValue (ref), createRootErrorUpdate (ref), syncLane (ref), t (ref), enqueueUpdate (ref), t_2 (ref), markRootUpdated (ref), var1 (write)
-	enqueueUpdate(p27, createRootErrorUpdate(p27, createCapturedValue(p29, p28), syncLane, t.onUncaughtError))
-	local var64 = t.requestEventTime()
-	local var65 = t_2.markUpdateLaneFromFiberToRoot(p27, syncLane)
+	enqueueUpdate(p31, createRootErrorUpdate(p31, createCapturedValue(p33, p32), syncLane, t.onUncaughtError))
+	local var73 = t.requestEventTime()
+	local var74 = t_2.markUpdateLaneFromFiberToRoot(p31, syncLane)
 	
-	if var65 ~= nil then
-		markRootUpdated(var65, syncLane, var64)
-		var1(var65, var64)
-		t_2.schedulePendingInteractions(var65, syncLane)
+	if var74 ~= nil then
+		markRootUpdated(var74, syncLane, var73)
+		var1(var74, var73)
+		t_2.schedulePendingInteractions(var74, syncLane)
 	end
 end
 
-function t.captureCommitPhaseError(p27, p28, p29)
+function t.captureCommitPhaseError(p31, p32, p33)
 	-- upvalues: reactWorkTagsModule (ref), var4 (write), skipUnmountedBoundaries (ref), t (ref), createCapturedValue (ref), createClassErrorUpdate (ref), syncLane (ref), enqueueUpdate (ref), t_2 (ref), markRootUpdated (ref), var1 (write)
-	if p27.tag == reactWorkTagsModule.HostRoot then
-		var4(p27, p27, p29)
+	if p31.tag == reactWorkTagsModule.HostRoot then
+		var4(p31, p31, p33)
 		
 		return
 	end
 	local _ = nil
-	local var64 = if skipUnmountedBoundaries then p28 else p27.return_
-	while var64 ~= nil do
-		if var64.tag ~= reactWorkTagsModule.HostRoot then
-			if var64.tag == reactWorkTagsModule.ClassComponent then
-				local stateNode = var64.stateNode
+	local var73 = if skipUnmountedBoundaries then p32 else p31.return_
+	while var73 ~= nil do
+		if var73.tag ~= reactWorkTagsModule.HostRoot then
+			if var73.tag == reactWorkTagsModule.ClassComponent then
+				local stateNode = var73.stateNode
 				
-				if typeof(var64.type.getDerivedStateFromError) ~= "function" and (typeof(stateNode.componentDidCatch) ~= "function" or t.isAlreadyFailedLegacyErrorBoundary(stateNode)) then
-					var64 = var64.return_
+				if typeof(var73.type.getDerivedStateFromError) ~= "function" and (typeof(stateNode.componentDidCatch) ~= "function" or t.isAlreadyFailedLegacyErrorBoundary(stateNode)) then
+					var73 = var73.return_
 					continue
 				end
-				enqueueUpdate(var64, createClassErrorUpdate(var64, createCapturedValue(p29, p27), syncLane))
-				local var65 = t.requestEventTime()
-				local var66 = t_2.markUpdateLaneFromFiberToRoot(var64, syncLane)
+				enqueueUpdate(var73, createClassErrorUpdate(var73, createCapturedValue(p33, p31), syncLane))
+				local var74 = t.requestEventTime()
+				local var75 = t_2.markUpdateLaneFromFiberToRoot(var73, syncLane)
 				
-				if var66 ~= nil then
-					markRootUpdated(var66, syncLane, var65)
-					var1(var66, var65)
-					t_2.schedulePendingInteractions(var66, syncLane)
+				if var75 ~= nil then
+					markRootUpdated(var75, syncLane, var74)
+					var1(var75, var74)
+					t_2.schedulePendingInteractions(var75, syncLane)
 				end
 				return
 			end
 		end
-		var4(var64, p27, p29)
+		var4(var73, p31, p33)
 		
 		return
 	end
 end
 
-function t.pingSuspendedRoot(p30, p31, p32)
+function t.pingSuspendedRoot(p34, p35, p36)
 	-- upvalues: t (ref), markRootPinged (ref), var6 (write), isSubsetOfLanes (ref), noLanes (write), var9 (write), includesOnlyRetries (ref), now (ref), var12 (write), t_2 (ref), reactFiberLaneModule (ref), noLanes_3 (write), mergeLanes (ref), var1 (write)
-	local pingCache = p30.pingCache
+	local pingCache = p34.pingCache
 	
 	if pingCache ~= nil then
-		pingCache[p31] = nil
+		pingCache[p35] = nil
 	end
-	local var67 = t.requestEventTime()
-	markRootPinged(p30, p32, var67)
+	local var76 = t.requestEventTime()
+	markRootPinged(p34, p36, var76)
 	
-	if var6 == p30 and isSubsetOfLanes(noLanes, p32) then
+	if var6 == p34 and isSubsetOfLanes(noLanes, p36) then
 		if var9 == 4 or var9 == 3 and includesOnlyRetries(noLanes) and now() - var12 < 500 then
-			t_2.prepareFreshStack(p30, reactFiberLaneModule.NoLanes)
+			t_2.prepareFreshStack(p34, reactFiberLaneModule.NoLanes)
 		else
-			noLanes_3 = mergeLanes(noLanes_3, p32)
+			noLanes_3 = mergeLanes(noLanes_3, p36)
 		end
 	end
-	var1(p30, var67)
-	t_2.schedulePendingInteractions(p30, p32)
+	var1(p34, var76)
+	t_2.schedulePendingInteractions(p34, p36)
 end
 
-function retryTimedOutBoundary(p30, p31)
+function retryTimedOutBoundary(p34, p35)
 	-- upvalues: reactFiberLaneModule (ref), t (ref), t_2 (ref), markRootUpdated (ref), var1 (write)
-	if p31 == reactFiberLaneModule.NoLane then
-		p31 = requestRetryLane(p30)
+	if p35 == reactFiberLaneModule.NoLane then
+		p35 = requestRetryLane(p34)
 	end
-	local var67 = t.requestEventTime()
-	local var68 = t_2.markUpdateLaneFromFiberToRoot(p30, p31)
+	local var76 = t.requestEventTime()
+	local var77 = t_2.markUpdateLaneFromFiberToRoot(p34, p35)
 	
-	if var68 ~= nil then
-		markRootUpdated(var68, p31, var67)
-		var1(var68, var67)
-		t_2.schedulePendingInteractions(var68, p31)
+	if var77 ~= nil then
+		markRootUpdated(var77, p35, var76)
+		var1(var77, var76)
+		t_2.schedulePendingInteractions(var77, p35)
 	end
 end
 
-function t.resolveRetryWakeable(p30, p31)
+function t.resolveRetryWakeable(p34, p35)
 	-- upvalues: reactFiberLaneModule (ref)
 	local noLane = reactFiberLaneModule.NoLane
 	local _ = nil
-	local stateNode = p30.stateNode
+	local stateNode = p34.stateNode
 	
 	if stateNode ~= nil then
-		stateNode:delete(p31)
+		stateNode:delete(p35)
 	end
-	retryTimedOutBoundary(p30, noLane)
+	retryTimedOutBoundary(p34, noLane)
 end
 
-function jnd(p30)
-	return if p30 < 120 then 120 elseif p30 < 480 then 480 elseif p30 < 1080 then 1080 elseif p30 < 1920 then 1920 elseif p30 < 3000 then 3000 elseif p30 < 4320 then 4320 else math.ceil(p30 / 1960) * 1960
+function jnd(p34)
+	return if p34 < 120 then 120 elseif p34 < 480 then 480 elseif p34 < 1080 then 1080 elseif p34 < 1920 then 1920 elseif p34 < 3000 then 3000 elseif p34 < 4320 then 4320 else math.ceil(p34 / 1960) * 1960
 end
 
 function t_2.checkForNestedUpdates()
@@ -2055,65 +2263,65 @@ function flushRenderPhaseStrictModeWarningsInDEV()
 	end
 end
 
-function commitDoubleInvokeEffectsInDEV(p30, p31)
+function commitDoubleInvokeEffectsInDEV(p34, p35)
 	-- upvalues: dEV (ref), enableDoubleInvokingEffects (ref), setCurrentFiber (ref), reactFiberFlagsModule (ref), invokeLayoutEffectUnmountInDEV (ref), invokePassiveEffectUnmountInDEV (ref), invokeLayoutEffectMountInDEV (ref), invokePassiveEffectMountInDEV (ref), resetCurrentFiber (ref)
 	if dEV and enableDoubleInvokingEffects then
-		setCurrentFiber(p30)
-		invokeEffectsInDev(p30, reactFiberFlagsModule.MountLayoutDev, invokeLayoutEffectUnmountInDEV)
+		setCurrentFiber(p34)
+		invokeEffectsInDev(p34, reactFiberFlagsModule.MountLayoutDev, invokeLayoutEffectUnmountInDEV)
 		
-		if p31 then
-			invokeEffectsInDev(p30, reactFiberFlagsModule.MountPassiveDev, invokePassiveEffectUnmountInDEV)
+		if p35 then
+			invokeEffectsInDev(p34, reactFiberFlagsModule.MountPassiveDev, invokePassiveEffectUnmountInDEV)
 		end
-		invokeEffectsInDev(p30, reactFiberFlagsModule.MountLayoutDev, invokeLayoutEffectMountInDEV)
+		invokeEffectsInDev(p34, reactFiberFlagsModule.MountLayoutDev, invokeLayoutEffectMountInDEV)
 		
-		if p31 then
-			invokeEffectsInDev(p30, reactFiberFlagsModule.MountPassiveDev, invokePassiveEffectMountInDEV)
+		if p35 then
+			invokeEffectsInDev(p34, reactFiberFlagsModule.MountPassiveDev, invokePassiveEffectMountInDEV)
 		end
 		resetCurrentFiber()
 	end
 end
 
-function invokeEffectsInDev(p30, p31, p32)
+function invokeEffectsInDev(p34, p35, p36)
 	-- upvalues: dEV (ref), enableDoubleInvokingEffects (ref), reactFiberFlagsModule (ref)
 	if dEV and enableDoubleInvokingEffects then
-		local var67 = p30
-		while var67 ~= nil do
-			if var67.child ~= nil and bit32.band(var67.subtreeFlags, p31) ~= reactFiberFlagsModule.NoFlags then
-				invokeEffectsInDev(var67.child, p31, p32)
+		local var76 = p34
+		while var76 ~= nil do
+			if var76.child ~= nil and bit32.band(var76.subtreeFlags, p35) ~= reactFiberFlagsModule.NoFlags then
+				invokeEffectsInDev(var76.child, p35, p36)
 			end
-			if bit32.band(var67.flags, p31) ~= reactFiberFlagsModule.NoFlags then
-				p32(var67)
+			if bit32.band(var76.flags, p35) ~= reactFiberFlagsModule.NoFlags then
+				p36(var76)
 			end
-			var67 = var67.sibling
+			var76 = var76.sibling
 		end
 	end
 end
 
-local var68 = nil
+local var77 = nil
 
-function t_2.warnAboutUpdateOnNotYetMountedFiberInDEV(p33)
-	-- upvalues: dEV (ref), var5 (write), reactTypeOfModeModule (ref), reactWorkTagsModule (ref), getComponentName (ref), var68 (write), reactCurrentFiberModule (ref), setCurrentFiber (ref), console (ref), resetCurrentFiber (ref)
+function t_2.warnAboutUpdateOnNotYetMountedFiberInDEV(p37)
+	-- upvalues: dEV (ref), var5 (write), reactTypeOfModeModule (ref), reactWorkTagsModule (ref), getComponentName (ref), var77 (write), reactCurrentFiberModule (ref), setCurrentFiber (ref), console (ref), resetCurrentFiber (ref)
 	if dEV then
 		if bit32.band(var5, 16) ~= 0 then return end
-		if bit32.band(p33.mode, bit32.bor(reactTypeOfModeModule.BlockingMode, reactTypeOfModeModule.ConcurrentMode)) == 0 then return end
-		local tag = p33.tag
+		if bit32.band(p37.mode, bit32.bor(reactTypeOfModeModule.BlockingMode, reactTypeOfModeModule.ConcurrentMode)) == 0 then return end
+		local tag = p37.tag
 		
 		if tag ~= reactWorkTagsModule.IndeterminateComponent and tag ~= reactWorkTagsModule.HostRoot and (tag ~= reactWorkTagsModule.ClassComponent and tag ~= reactWorkTagsModule.FunctionComponent) and (tag ~= reactWorkTagsModule.ForwardRef and tag ~= reactWorkTagsModule.MemoComponent and (tag ~= reactWorkTagsModule.SimpleMemoComponent and tag ~= reactWorkTagsModule.Block)) then return end
-		local type = getComponentName(p33.type) or "ReactComponent"
+		local type = getComponentName(p37.type) or "ReactComponent"
 		
-		if var68 == nil then
-			var68 = { [type] = true }
-		elseif var68[type] then return end
-		var68[type] = true
+		if var77 == nil then
+			var77 = { [type] = true }
+		elseif var77[type] then return end
+		var77[type] = true
 		local current = reactCurrentFiberModule.current
 		local ok, status = pcall(function()
-			-- upvalues: setCurrentFiber (copy), p33 (ref), console (copy)
-			setCurrentFiber(p33)
+			-- upvalues: setCurrentFiber (copy), p37 (ref), console (copy)
+			setCurrentFiber(p37)
 			console.error("Can't perform a React state update on a component that hasn't mounted yet. This indicates that you have a side-effect in your render function that asynchronously later calls tries to update the component. Move this work to useEffect instead.")
 		end)
 		
 		if current then
-			setCurrentFiber(p33)
+			setCurrentFiber(p37)
 		else
 			resetCurrentFiber()
 		end
@@ -2124,10 +2332,10 @@ function t_2.warnAboutUpdateOnNotYetMountedFiberInDEV(p33)
 end
 
 if dEV and reactFeatureFlags.replayFailedUnitOfWorkWithInvokeGuardedCallback then
-	function t_2.beginWork(p33, p34, p35)
+	function t_2.beginWork(p37, p38, p39)
 		-- upvalues: unknownModule_2 (ref), var2 (ref), describeError (ref), resetContextDependencies (ref), t_1 (ref), var3 (write), unwindInterruptedWork (ref), reactFeatureFlags (ref), reactTypeOfModeModule (ref), unknownModule_6 (ref), invokeGuardedCallback (ref), hasCaughtError (ref), clearCaughtError (ref)
-		local var69 = unknownModule_2.assignFiberPropertiesInDEV(nil, p34)
-		local ok, status = xpcall(var2, describeError, p33, p34, p35)
+		local var78 = unknownModule_2.assignFiberPropertiesInDEV(nil, p38)
+		local ok, status = xpcall(var2, describeError, p37, p38, p39)
 		
 		if not ok then
 			if status ~= nil and typeof(status) == "table" and typeof(status.andThen) == "function" then
@@ -2142,13 +2350,13 @@ if dEV and reactFeatureFlags.replayFailedUnitOfWorkWithInvokeGuardedCallback the
 				t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = var3.getIsUpdatingOpaqueValueInRenderPhaseInDEV
 			end
 			local _ = t_1.resetHooksAfterThrowRef()
-			unwindInterruptedWork(p34)
-			unknownModule_2.assignFiberPropertiesInDEV(p34, var69)
+			unwindInterruptedWork(p38)
+			unknownModule_2.assignFiberPropertiesInDEV(p38, var78)
 			
-			if reactFeatureFlags.enableProfilerTimer and bit32.band(p34.mode, reactTypeOfModeModule.ProfileMode) ~= 0 then
-				unknownModule_6.startProfilerTimer(p34)
+			if reactFeatureFlags.enableProfilerTimer and bit32.band(p38.mode, reactTypeOfModeModule.ProfileMode) ~= 0 then
+				unknownModule_6.startProfilerTimer(p38)
 			end
-			invokeGuardedCallback(nil, var2, nil, p33, p34, p35)
+			invokeGuardedCallback(nil, var2, nil, p37, p38, p39)
 			
 			if hasCaughtError() then
 				error(clearCaughtError())
@@ -2162,11 +2370,11 @@ if dEV and reactFeatureFlags.replayFailedUnitOfWorkWithInvokeGuardedCallback the
 else
 	t_2.beginWork = var2
 end
-local var69 = false
-local var70 = if dEV then {} else nil
+local var78 = false
+local var79 = if dEV then {} else nil
 
-function t_2.warnAboutRenderPhaseUpdatesInDEV(p33)
-	-- upvalues: dEV (ref), reactCurrentFiberModule (ref), var5 (write), t_1 (ref), var3 (write), reactWorkTagsModule (ref), var7 (write), getComponentName (ref), var70 (write), console (ref), var69 (write)
+function t_2.warnAboutRenderPhaseUpdatesInDEV(p37)
+	-- upvalues: dEV (ref), reactCurrentFiberModule (ref), var5 (write), t_1 (ref), var3 (write), reactWorkTagsModule (ref), var7 (write), getComponentName (ref), var79 (write), console (ref), var78 (write)
 	if dEV and reactCurrentFiberModule.isRendering and bit32.band(var5, 16) ~= 0 then
 		if not t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef then
 			var3 = require(script.Parent["ReactFiberHooks.new"])
@@ -2175,18 +2383,18 @@ function t_2.warnAboutRenderPhaseUpdatesInDEV(p33)
 			t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = var3.getIsUpdatingOpaqueValueInRenderPhaseInDEV
 		end
 		if not t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef() then
-			if p33.tag == reactWorkTagsModule.FunctionComponent or p33.tag == reactWorkTagsModule.ForwardRef or p33.tag == reactWorkTagsModule.SimpleMemoComponent then
+			if p37.tag == reactWorkTagsModule.FunctionComponent or p37.tag == reactWorkTagsModule.ForwardRef or p37.tag == reactWorkTagsModule.SimpleMemoComponent then
 				local type = var7 and getComponentName(var7.type) or "Unknown"
 				
-				if var70[type] == nil then
-					var70[type] = true
-					console.error("Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render", getComponentName(p33.type) or "Unknown", type, type)
+				if var79[type] == nil then
+					var79[type] = true
+					console.error("Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render", getComponentName(p37.type) or "Unknown", type, type)
 					
 					return
 				end
-			elseif p33.tag == reactWorkTagsModule.ClassComponent and not var69 then
+			elseif p37.tag == reactWorkTagsModule.ClassComponent and not var78 then
 				console.error("Cannot update during an existing state transition (such as within `render`). Render methods should be a pure function of props and state.")
-				var69 = true
+				var78 = true
 			end
 		end
 	end
@@ -2194,18 +2402,18 @@ end
 
 t.IsThisRendererActing = { current = false }
 
-function t.warnIfNotScopedWithMatchingAct(p33)
+function t.warnIfNotScopedWithMatchingAct(p37)
 	-- upvalues: dEV (ref), reactFiberHostConfigModule (ref), isSomeRendererActing (ref), t (ref), reactCurrentFiberModule (ref), setCurrentFiber (ref), console (ref), resetCurrentFiber (ref)
 	if dEV and reactFiberHostConfigModule.warnsIfNotActing == true and (isSomeRendererActing.current == true and t.IsThisRendererActing.current ~= true) then
 		local current = reactCurrentFiberModule.current
 		local ok, status = pcall(function()
-			-- upvalues: setCurrentFiber (copy), p33 (ref), console (copy)
-			setCurrentFiber(p33)
+			-- upvalues: setCurrentFiber (copy), p37 (ref), console (copy)
+			setCurrentFiber(p37)
 			console.error("It looks like you're using the wrong act() around your test interactions.\nBe sure to use the matching version of act() corresponding to your renderer:\n\n-- for react-roblox:\nlocal React = require(Packages.React)\n-- ...\nReact.TestUtils.act(function() ... end)\n\n-- for react-test-renderer:\nlocal TestRenderer = require(Packages.ReactTestRenderer)\n-- ...\nTestRenderer.act(function() ... end)")
 		end)
 		
 		if current then
-			setCurrentFiber(p33)
+			setCurrentFiber(p37)
 		else
 			resetCurrentFiber()
 		end
@@ -2215,25 +2423,25 @@ function t.warnIfNotScopedWithMatchingAct(p33)
 	end
 end
 
-function t.warnIfNotCurrentlyActingEffectsInDEV(p33)
+function t.warnIfNotCurrentlyActingEffectsInDEV(p37)
 	-- upvalues: dEV (ref), reactFiberHostConfigModule (ref), reactTypeOfModeModule (ref), isSomeRendererActing (ref), t (ref), console (ref), getComponentName (ref)
-	if dEV and reactFiberHostConfigModule.warnsIfNotActing == true and (bit32.band(p33.mode, reactTypeOfModeModule.StrictMode) ~= reactTypeOfModeModule.NoMode and isSomeRendererActing.current == false) and t.IsThisRendererActing.current == false then
-		console.error("An update to %s ran an effect, but was not wrapped in act(...).\n\nWhen testing, code that causes React state updates should be wrapped into act(...):\n\nact(function()\n  --[[ fire events that update state ]]\nend)\n--[[ assert on the output ]]\n\nThis ensures that you're testing the behavior the user would see in the real client. Learn more at https://reactjs.org/link/wrap-tests-with-act", getComponentName(p33.type))
+	if dEV and reactFiberHostConfigModule.warnsIfNotActing == true and (bit32.band(p37.mode, reactTypeOfModeModule.StrictMode) ~= reactTypeOfModeModule.NoMode and isSomeRendererActing.current == false) and t.IsThisRendererActing.current == false then
+		console.error("An update to %s ran an effect, but was not wrapped in act(...).\n\nWhen testing, code that causes React state updates should be wrapped into act(...):\n\nact(function()\n  --[[ fire events that update state ]]\nend)\n--[[ assert on the output ]]\n\nThis ensures that you're testing the behavior the user would see in the real client. Learn more at https://reactjs.org/link/wrap-tests-with-act", getComponentName(p37.type))
 	end
 end
 
-function t.warnIfNotCurrentlyActingUpdatesInDEV(p33)
+function t.warnIfNotCurrentlyActingUpdatesInDEV(p37)
 	-- upvalues: dEV (ref), reactFiberHostConfigModule (ref), var5 (write), isSomeRendererActing (ref), t (ref), current (ref), setCurrentFiber (ref), console (ref), getComponentName (ref), resetCurrentFiber (ref)
 	if dEV and reactFiberHostConfigModule.warnsIfNotActing == true and (var5 == 0 and isSomeRendererActing.current == false) and t.IsThisRendererActing.current == false then
-		local var71 = current
+		local var80 = current
 		local ok, status = pcall(function()
-			-- upvalues: setCurrentFiber (copy), p33 (ref), console (copy), getComponentName (copy)
-			setCurrentFiber(p33)
-			console.error("An update to %s inside a test was not wrapped in act(...).\n\nWhen testing, code that causes React state updates should be wrapped into act(...):\n\nact(function()\n  --[[ fire events that update state ]]\nend)\n--[[ assert on the output ]]\n\nThis ensures that you're testing the behavior the user would see in the client application. Learn more at https://reactjs.org/link/wrap-tests-with-act", getComponentName(p33.type))
+			-- upvalues: setCurrentFiber (copy), p37 (ref), console (copy), getComponentName (copy)
+			setCurrentFiber(p37)
+			console.error("An update to %s inside a test was not wrapped in act(...).\n\nWhen testing, code that causes React state updates should be wrapped into act(...):\n\nact(function()\n  --[[ fire events that update state ]]\nend)\n--[[ assert on the output ]]\n\nThis ensures that you're testing the behavior the user would see in the client application. Learn more at https://reactjs.org/link/wrap-tests-with-act", getComponentName(p37.type))
 		end)
 		
-		if var71 then
-			setCurrentFiber(p33)
+		if var80 then
+			setCurrentFiber(p37)
 		else
 			resetCurrentFiber()
 		end
@@ -2243,97 +2451,97 @@ function t.warnIfNotCurrentlyActingUpdatesInDEV(p33)
 	end
 end
 
-local var71 = false
+local var80 = false
 
-function t.warnIfUnmockedScheduler(p33)
-	-- upvalues: dEV (ref), var71 (write), schedulerModule (ref), reactTypeOfModeModule (ref), console (ref), reactFeatureFlags (ref)
-	if dEV and var71 == false and schedulerModule.unstable_flushAllWithoutAsserting == nil then
-		if bit32.band(p33.mode, reactTypeOfModeModule.BlockingMode) ~= 0 or bit32.band(p33.mode, reactTypeOfModeModule.ConcurrentMode) ~= 0 then
-			var71 = true
+function t.warnIfUnmockedScheduler(p37)
+	-- upvalues: dEV (ref), var80 (write), schedulerModule (ref), reactTypeOfModeModule (ref), console (ref), reactFeatureFlags (ref)
+	if dEV and var80 == false and schedulerModule.unstable_flushAllWithoutAsserting == nil then
+		if bit32.band(p37.mode, reactTypeOfModeModule.BlockingMode) ~= 0 or bit32.band(p37.mode, reactTypeOfModeModule.ConcurrentMode) ~= 0 then
+			var80 = true
 			console.error("In Concurrent or Sync modes, the 'scheduler' module needs to be mocked to guarantee consistent behaviour across tests and client application. For example, with Jest: \njest.mock('scheduler', function() return require(Packages.Scheduler).unstable_mock end)\n\nFor more info, visit https://reactjs.org/link/mock-scheduler")
 			
 			return
 		elseif reactFeatureFlags.warnAboutUnmockedScheduler == true then
-			var71 = true
+			var80 = true
 			console.error("Starting from React v18, the 'scheduler' module will need to be mocked to guarantee consistent behaviour across tests and client applications. For example, with Jest: \njest.mock('scheduler', function() return require(Packages.Scheduler).unstable_mock end)\n\nFor more info, visit https://reactjs.org/link/mock-scheduler")
 		end
 	end
 end
 
-function computeThreadID(p33, p34)
-	return p34 * 1000 + p33.interactionThreadID
+function computeThreadID(p37, p38)
+	return p38 * 1000 + p37.interactionThreadID
 end
 
-function t.markSpawnedWork(p33)
+function t.markSpawnedWork(p37)
 	-- upvalues: reactFeatureFlags (ref), var25 (write)
 	if not reactFeatureFlags.enableSchedulerTracing then return end
 	if var25 == nil then
-		var25 = { p33 }
+		var25 = { p37 }
 		
 		return
 	end
-	table.insert(var25, p33)
+	table.insert(var25, p37)
 end
 
-function scheduleInteractions(p33, p34, p35)
+function scheduleInteractions(p37, p38, p39)
 	-- upvalues: reactFeatureFlags (ref), set (ref), subscriberRef (ref)
 	if not reactFeatureFlags.enableSchedulerTracing then return end
-	if p35.size > 0 then
-		local pendingInteractionMap = p33.pendingInteractionMap
-		local var72 = pendingInteractionMap:get(p34)
+	if p39.size > 0 then
+		local pendingInteractionMap = p37.pendingInteractionMap
+		local var81 = pendingInteractionMap:get(p38)
 		
-		if var72 == nil then
-			pendingInteractionMap:set(p34, set.new(p35))
+		if var81 == nil then
+			pendingInteractionMap:set(p38, set.new(p39))
 			
-			for i, v in p35 do
+			for i, v in p39 do
 				v.__count += 1
 			end
 		else
-			p35:forEach(function(p36)
-				-- upvalues: var72 (ref)
-				if not var72:has(p36) then
-					p36.__count += 1
+			p39:forEach(function(p40)
+				-- upvalues: var81 (ref)
+				if not var81:has(p40) then
+					p40.__count += 1
 				end
-				var72:add(p36)
+				var81:add(p40)
 			end)
 		end
 		local current = subscriberRef.current
 		
 		if current ~= nil then
-			current.onWorkScheduled(p35, computeThreadID(p33, p34))
+			current.onWorkScheduled(p39, computeThreadID(p37, p38))
 		end
 	end
 end
 
-function t_2.schedulePendingInteractions(p36, p37)
+function t_2.schedulePendingInteractions(p40, p41)
 	-- upvalues: reactFeatureFlags (ref), interactionsRef (ref)
 	if reactFeatureFlags.enableSchedulerTracing then
-		scheduleInteractions(p36, p37, interactionsRef.current)
+		scheduleInteractions(p40, p41, interactionsRef.current)
 		
 		return
 	end
 end
 
-function t_2.startWorkOnPendingInteractions(p36, p37)
+function t_2.startWorkOnPendingInteractions(p40, p41)
 	-- upvalues: reactFeatureFlags (ref), set (ref), includesSomeLane (ref), subscriberRef (ref), describeError (ref), scheduleCallback (ref), immediatePriority (ref)
 	if not reactFeatureFlags.enableSchedulerTracing then return end
-	local var73 = set.new()
-	p36.pendingInteractionMap:forEach(function(p38, p39)
-		-- upvalues: includesSomeLane (copy), p37 (ref), var73 (ref)
-		if includesSomeLane(p37, p39) then
-			p38:forEach(function(p40)
-				-- upvalues: var73 (copy)
-				var73:add(p40)
+	local var82 = set.new()
+	p40.pendingInteractionMap:forEach(function(p42, p43)
+		-- upvalues: includesSomeLane (copy), p41 (ref), var82 (ref)
+		if includesSomeLane(p41, p43) then
+			p42:forEach(function(p44)
+				-- upvalues: var82 (copy)
+				var82:add(p44)
 			end)
 		end
 	end)
-	p36.memoizedInteractions = var73
+	p40.memoizedInteractions = var82
 	
-	if var73.size > 0 then
+	if var82.size > 0 then
 		local current = subscriberRef.current
 		
 		if current ~= nil then
-			local ok, status = xpcall(current.onWorkStarted, describeError, var73, computeThreadID(p36, p37))
+			local ok, status = xpcall(current.onWorkStarted, describeError, var82, computeThreadID(p40, p41))
 			
 			if not ok then
 				scheduleCallback(immediatePriority, function()
@@ -2345,31 +2553,31 @@ function t_2.startWorkOnPendingInteractions(p36, p37)
 	end
 end
 
-function t_2.finishPendingInteractions(p36, p37)
+function t_2.finishPendingInteractions(p40, p41)
 	-- upvalues: reactFeatureFlags (ref), subscriberRef (ref), describeError (ref), includesSomeLane (ref), scheduleCallback (ref), immediatePriority (ref)
 	if not reactFeatureFlags.enableSchedulerTracing then return end
-	local pendingLanes = p36.pendingLanes
+	local pendingLanes = p40.pendingLanes
 	local current = nil
-	local var73 = true
-	local var74 = nil
+	local var82 = true
+	local var83 = nil
 	
-	if current ~= nil and p36.memoizedInteractions.size > 0 then
+	if current ~= nil and p40.memoizedInteractions.size > 0 then
 		current = subscriberRef.current
-		local ok, status = xpcall(current.onWorkStopped, describeError, p36.memoizedInteractions, computeThreadID(p36, p37))
-		var73 = ok
-		var74 = status
+		local ok, status = xpcall(current.onWorkStopped, describeError, p40.memoizedInteractions, computeThreadID(p40, p41))
+		var82 = ok
+		var83 = status
 	end
-	local pendingInteractionMap = p36.pendingInteractionMap
-	pendingInteractionMap:forEach(function(p38, p39)
+	local pendingInteractionMap = p40.pendingInteractionMap
+	pendingInteractionMap:forEach(function(p42, p43)
 		-- upvalues: includesSomeLane (copy), pendingLanes (ref), pendingInteractionMap (ref), current (write), describeError (copy), scheduleCallback (copy), immediatePriority (copy)
-		if not includesSomeLane(pendingLanes, p39) then
-			pendingInteractionMap:delete(p39)
-			p38:forEach(function(p40)
+		if not includesSomeLane(pendingLanes, p43) then
+			pendingInteractionMap:delete(p43)
+			p42:forEach(function(p44)
 				-- upvalues: current (copy), describeError (copy), scheduleCallback (copy), immediatePriority (copy)
-				p40.__count -= 1
+				p44.__count -= 1
 				
-				if current ~= nil and p40.__count == 0 then
-					local ok, status = xpcall(current.onInteractionScheduledWorkCompleted, describeError, p40)
+				if current ~= nil and p44.__count == 0 then
+					local ok, status = xpcall(current.onInteractionScheduledWorkCompleted, describeError, p44)
 					
 					if not ok then
 						scheduleCallback(immediatePriority, function()
@@ -2382,33 +2590,33 @@ function t_2.finishPendingInteractions(p36, p37)
 		end
 	end)
 	
-	if not var73 then
+	if not var82 then
 		scheduleCallback(immediatePriority, function()
-			-- upvalues: var74 (write)
-			error(var74)
+			-- upvalues: var83 (write)
+			error(var83)
 		end)
 	end
 end
 
-local var73 = false
-local var74 = false
+local var82 = false
+local var83 = false
 local unstableFlushAllWithoutAsserting = schedulerModule.unstable_flushAllWithoutAsserting
 local isFunction = typeof(unstableFlushAllWithoutAsserting) == "function"
 
 local function flushActWork()
-	-- upvalues: unstableFlushAllWithoutAsserting (ref), var73 (write), describeError (ref), t (ref)
+	-- upvalues: unstableFlushAllWithoutAsserting (ref), var82 (write), describeError (ref), t (ref)
 	if unstableFlushAllWithoutAsserting == nil then
-		local var75 = var73
-		var73 = true
+		local var84 = var82
+		var82 = true
 		local ok, status = xpcall(function()
 			-- upvalues: t (copy)
-			local var76 = false
+			local var85 = false
 			while t.flushPassiveEffects() do
-				var76 = true
+				var85 = true
 			end
-			return var76
+			return var85
 		end, describeError)
-		var73 = var75
+		var82 = var84
 		
 		if ok then
 			return status
@@ -2417,10 +2625,10 @@ local function flushActWork()
 		
 		return
 	else
-		local var77 = var73
-		var73 = true
+		local var86 = var82
+		var82 = true
 		local ok, status = xpcall(unstableFlushAllWithoutAsserting, describeError)
-		var73 = var77
+		var82 = var86
 		
 		if ok then
 			return status
@@ -2429,30 +2637,30 @@ local function flushActWork()
 	end
 end
 
-local function flushWorkAndMicroTasks(p36)
+local function flushWorkAndMicroTasks(p40)
 	-- upvalues: flushActWork (ref), describeError (ref), enqueueTask (ref), flushWorkAndMicroTasks (ref)
 	local ok, status = xpcall(flushActWork, describeError)
 	
 	if ok then
 		local ok_1, status_1 = xpcall(enqueueTask, describeError, function()
-			-- upvalues: flushActWork (copy), flushWorkAndMicroTasks (copy), p36 (ref)
+			-- upvalues: flushActWork (copy), flushWorkAndMicroTasks (copy), p40 (ref)
 			if flushActWork() then
-				flushWorkAndMicroTasks(p36)
+				flushWorkAndMicroTasks(p40)
 				
 				return
 			end
-			p36()
+			p40()
 		end)
 		ok = ok_1
 		status = status_1
 	end
 	if not ok then
-		p36(status)
+		p40(status)
 	end
 end
 
-function t.act(p36)
-	-- upvalues: dEV (ref), reactGlobalsModule (ref), var31 (write), console (ref), var30 (write), isSomeRendererActing (ref), t (ref), var74 (write), describeError (ref), promiseModule (ref), isFunction (ref), flushWorkAndMicroTasks (ref), flushActWork (ref)
+function t.act(p40)
+	-- upvalues: dEV (ref), reactGlobalsModule (ref), var31 (write), console (ref), var30 (write), isSomeRendererActing (ref), t (ref), var83 (write), describeError (ref), promiseModule (ref), isFunction (ref), flushWorkAndMicroTasks (ref), flushActWork (ref)
 	if not dEV and not reactGlobalsModule.__ROACT_17_MOCK_SCHEDULER__ and var31 == false then
 		var31 = true
 		console.error("act(...) is not supported in production builds of React, and might not behave as expected.")
@@ -2463,27 +2671,27 @@ function t.act(p36)
 	local current_1 = t.IsThisRendererActing.current
 	isSomeRendererActing.current = true
 	t.IsThisRendererActing.current = true
-	var74 = true
+	var83 = true
 	
 	local function _()
-		-- upvalues: var30 (copy), isSomeRendererActing (copy), current (ref), t (copy), current_1 (ref), var74 (copy), var74 (ref), dEV (copy), var30 (ref), console (copy)
+		-- upvalues: var30 (copy), isSomeRendererActing (copy), current (ref), t (copy), current_1 (ref), var83 (copy), var83 (ref), dEV (copy), var30 (ref), console (copy)
 		var30 -= 1
 		isSomeRendererActing.current = current
 		t.IsThisRendererActing.current = current_1
-		var74 = var74
+		var83 = var83
 		
 		if dEV and var30 < var30 then
 			console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
 		end
 	end
 	
-	local ok, status = xpcall(t.batchedUpdates, describeError, p36)
+	local ok, status = xpcall(t.batchedUpdates, describeError, p40)
 	
 	if not ok then
 		var30 -= 1
 		isSomeRendererActing.current = current
 		t.IsThisRendererActing.current = current_1
-		var74 = var74
+		var83 = var83
 		
 		if dEV and var30 < var30 then
 			console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
@@ -2495,14 +2703,14 @@ function t.act(p36)
 			console.error("The callback passed to act(...) function must return nil, or a Promise. You returned %s", tostring(status))
 		end
 		ok_1, status_1 = xpcall(function()
-			-- upvalues: var30 (copy), isFunction (copy), current (ref), flushActWork (copy), isSomeRendererActing (copy), t (copy), current_1 (ref), var74 (copy), var74 (ref), dEV (copy), var30 (ref), console (copy)
+			-- upvalues: var30 (copy), isFunction (copy), current (ref), flushActWork (copy), isSomeRendererActing (copy), t (copy), current_1 (ref), var83 (copy), var83 (ref), dEV (copy), var30 (ref), console (copy)
 			if var30 == 1 and (isFunction == false or current == false) then
 				flushActWork()
 			end
 			var30 -= 1
 			isSomeRendererActing.current = current
 			t.IsThisRendererActing.current = current_1
-			var74 = var74
+			var83 = var83
 			
 			if dEV and var30 < var30 then
 				console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
@@ -2513,7 +2721,7 @@ function t.act(p36)
 			var30 -= 1
 			isSomeRendererActing.current = current
 			t.IsThisRendererActing.current = current_1
-			var74 = var74
+			var83 = var83
 			
 			if dEV and var30 < var30 then
 				console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
@@ -2521,12 +2729,12 @@ function t.act(p36)
 			error(status_1)
 		end
 		return {
-			andThen = function(_, p37, _)
+			andThen = function(_, p41, _)
 				-- upvalues: dEV (copy), console (copy)
 				if dEV then
 					console.error("Do not await the result of calling act(...) with sync logic, it is not a Promise.")
 				end
-				p37()
+				p41()
 			end
 		}
 	else
@@ -2541,29 +2749,29 @@ function t.act(p36)
 			end)
 		end
 		return {
-			andThen = function(_, p37, p38)
-				-- upvalues: ok_1 (write), status (ref), var30 (copy), isFunction (copy), current (ref), isSomeRendererActing (copy), t (copy), current_1 (ref), var74 (copy), var74 (ref), dEV (copy), var30 (ref), console (copy), flushWorkAndMicroTasks (copy)
+			andThen = function(_, p41, p42)
+				-- upvalues: ok_1 (write), status (ref), var30 (copy), isFunction (copy), current (ref), isSomeRendererActing (copy), t (copy), current_1 (ref), var83 (copy), var83 (ref), dEV (copy), var30 (ref), console (copy), flushWorkAndMicroTasks (copy)
 				ok_1 = true
 				
 				return status:andThen(function()
-					-- upvalues: var30 (copy), isFunction (copy), current (copy), isSomeRendererActing (copy), t (copy), current_1 (copy), var74 (copy), var74 (copy), dEV (copy), var30 (copy), console (copy), p37 (ref), flushWorkAndMicroTasks (copy), p38 (ref)
+					-- upvalues: var30 (copy), isFunction (copy), current (copy), isSomeRendererActing (copy), t (copy), current_1 (copy), var83 (copy), var83 (copy), dEV (copy), var30 (copy), console (copy), p41 (ref), flushWorkAndMicroTasks (copy), p42 (ref)
 					if var30 <= 1 and (isFunction ~= true or current ~= true) then
-						flushWorkAndMicroTasks(function(p39)
-							-- upvalues: var30 (copy), isSomeRendererActing (copy), current (copy), t (copy), current_1 (copy), var74 (copy), var74 (copy), dEV (copy), var30 (copy), console (copy), p38 (copy), p37 (copy)
+						flushWorkAndMicroTasks(function(p43)
+							-- upvalues: var30 (copy), isSomeRendererActing (copy), current (copy), t (copy), current_1 (copy), var83 (copy), var83 (copy), dEV (copy), var30 (copy), console (copy), p42 (copy), p41 (copy)
 							var30 -= 1
 							isSomeRendererActing.current = current
 							t.IsThisRendererActing.current = current_1
-							var74 = var74
+							var83 = var83
 							
 							if dEV and var30 < var30 then
 								console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
 							end
-							if p39 then
-								p38(p39)
+							if p43 then
+								p42(p43)
 								
 								return
 							end
-							p37()
+							p41()
 						end)
 						
 						return
@@ -2571,69 +2779,69 @@ function t.act(p36)
 					var30 -= 1
 					isSomeRendererActing.current = current
 					t.IsThisRendererActing.current = current_1
-					var74 = var74
+					var83 = var83
 					
 					if dEV and var30 < var30 then
 						console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
 					end
-					p37()
-				end, function(p39)
-					-- upvalues: var30 (copy), isSomeRendererActing (copy), current (copy), t (copy), current_1 (copy), var74 (copy), var74 (copy), dEV (copy), var30 (copy), console (copy), p38 (ref)
+					p41()
+				end, function(p43)
+					-- upvalues: var30 (copy), isSomeRendererActing (copy), current (copy), t (copy), current_1 (copy), var83 (copy), var83 (copy), dEV (copy), var30 (copy), console (copy), p42 (ref)
 					var30 -= 1
 					isSomeRendererActing.current = current
 					t.IsThisRendererActing.current = current_1
-					var74 = var74
+					var83 = var83
 					
 					if dEV and var30 < var30 then
 						console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
 					end
-					p38(p39)
+					p42(p43)
 				end)
 			end
 		}
 	end
 end
 
-function t_2.detachFiberAfterEffects(p36)
+function t_2.detachFiberAfterEffects(p40)
 	-- upvalues: enableNewTreeCleanupPath (ref), t_2 (ref), deletedTreeCleanUpLevel (ref), dEV (ref)
 	if enableNewTreeCleanupPath then
-		local alternate = p36.alternate
+		local alternate = p40.alternate
 		
 		if alternate ~= nil then
-			p36.alternate = nil
+			p40.alternate = nil
 			t_2.detachFiberAfterEffects(alternate)
 		end
 	end
 	if enableNewTreeCleanupPath and deletedTreeCleanUpLevel >= 2 then
-		p36.child = nil
-		p36.deletions = nil
-		p36.sibling = nil
+		p40.child = nil
+		p40.deletions = nil
+		p40.sibling = nil
 		
 		if dEV then
-			p36._debugOwner = nil
+			p40._debugOwner = nil
 		end
 		if deletedTreeCleanUpLevel >= 3 then
-			p36.return_ = nil
-			p36.dependencies = nil
-			p36.memoizedProps = nil
-			p36.memoizedState = nil
-			p36.pendingProps = nil
-			p36.stateNode = nil
-			p36.updateQueue = nil
+			p40.return_ = nil
+			p40.dependencies = nil
+			p40.memoizedProps = nil
+			p40.memoizedState = nil
+			p40.pendingProps = nil
+			p40.stateNode = nil
+			p40.updateQueue = nil
 		end
 	else
-		p36.child = nil
-		p36.deletions = nil
-		p36.dependencies = nil
-		p36.memoizedProps = nil
-		p36.memoizedState = nil
-		p36.pendingProps = nil
-		p36.sibling = nil
-		p36.stateNode = nil
-		p36.updateQueue = nil
+		p40.child = nil
+		p40.deletions = nil
+		p40.dependencies = nil
+		p40.memoizedProps = nil
+		p40.memoizedState = nil
+		p40.pendingProps = nil
+		p40.sibling = nil
+		p40.stateNode = nil
+		p40.updateQueue = nil
 		
 		if dEV then
-			p36._debugOwner = nil
+			p40._debugOwner = nil
 			
 			return
 		end

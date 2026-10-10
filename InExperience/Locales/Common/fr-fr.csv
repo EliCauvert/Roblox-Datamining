@@ -110,7 +110,6 @@ Authentication.SignUp.Action.Create,Créer
 Authentication.SignUp.Action.CreateAccountSentenceCase,Créer un compte
 Authentication.SignUp.Action.ExitModalLeave,Quitter
 Authentication.SignUp.Action.RespawnNow,Réapparaître
-Authentication.SignUp.Action.StartPlay,Jouer
 Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Réessayer de te connecter
 Authentication.SignUp.Description.AccountAlreadyLinked,Ton compte sur {platformAccountName} est déjà lié à un compte Roblox. Essaie de te connecter à nouveau.
@@ -721,6 +720,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Catégorie*
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,Autre
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Choisir une catégorie
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Problème d'achat
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,Suggestion
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,{MAX} caractères max.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Détails*
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Désélectionner
@@ -728,6 +728,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Ajoute tou
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Décris ce qui manque et indique la dernière fois que tu l'as vu. Si ton compte a été piraté, merci d'inclure ton numéro de ticket Roblox CS ainsi que tout détail pertinent."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Décris ta demande ou ton problème ici. Sois le plus précis possible afin de nous aider à comprendre la situation.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Dis-nous ce que tu as essayé d'acheter, quand cela s'est produit et la valeur totale (par exemple 500 Robux / 4,99 $). Inclus tous les messages d'erreur que tu as pu voir."
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,"Indique ce que tu aimerais voir ajouté ou amélioré, et explique pourquoi cela améliorerait le jeu."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Tu essaies de signaler un abus ?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Soumettre un signalement à la place.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Sélectionner
@@ -1253,6 +1254,19 @@ Corescripts.AvatarContextMenu.FriendRequestPending,Demande d'ami en attente
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,Personne bloquée
 Corescripts.AvatarContextMenu.Wave,Saluer
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Continuer à jouer
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Téléportation
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Mis à la une par Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Accueil Autre
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Accueil Recommandation
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Annonces sur le portail
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,Chercher
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Rechercher dans les annonces
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Annonces sponsorisées
 Feature.AbuseReportDialog.Label.GeneralError,Une erreur est survenue. Réessaie plus tard.
 Feature.Accessibility.Action.ScrollDown,Défiler vers le bas
 Feature.Accessibility.Action.ScrollUp,Défiler vers le haut
@@ -2195,7 +2209,7 @@ Feature.Build.Label.ResetsWeekly,Réinitialisation hebdomadaire
 Feature.Build.Label.RestoredVersion,{VERSION} restaurée
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.SalesOptions,Options de vente
-Feature.Build.Label.Search,Chercher
+Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,Rechercher des jeux
 Feature.Build.Label.SearchTasks,Rechercher des tâches
 Feature.Build.Label.SelectOption,Sélectionner une option
@@ -3174,7 +3188,7 @@ Feature.FaceChat.Subtitle.UnsupportedDevice,Votre matériel ne répond pas aux e
 Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,Éteindre ta caméra peut améliorer les performances de l’expérience.
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox ne peut pas utiliser votre caméra pour animer votre avatar.
 Feature.Favorites.Label.Favorite,
-Feature.FlyoutSidePanel.Action.ContinuePlaying,Continuer à jouer
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,"Votre profil, votre contenu et vos paramètres ont été déplacés vers un nouvel emplacement."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> a été déplacé
 Feature.Friends.Action.AcceptFriend,Accepter la demande d'ami

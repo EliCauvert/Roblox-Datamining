@@ -40,7 +40,7 @@ local t = {
 		upgradeType = "OAuth",
 		titleTextKey = "Authentication.SignUp.Header.OneLastThing",
 		subtitleTextKey = "Authentication.SignUp.Subtitle.AddYourBirthday",
-		submitTextKey = "Authentication.SignUp.Action.StartPlay",
+		submitTextKey = "Authentication.SignUp.Action.CreateAccountSentenceCase",
 		requiredFields = {
 			accountUpgradeFieldModule.Birthday,
 			accountUpgradeFieldModule.Username

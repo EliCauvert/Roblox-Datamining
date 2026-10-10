@@ -36,6 +36,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
 local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
 local fFlagExpChatUseChatConfigStore = sharedFlagsModule.FFlagExpChatUseChatConfigStore
+local fFlagExpChatTabShortcutNav = sharedFlagsModule.FFlagExpChatTabShortcutNav
 local var1 = nil
 
 local function _(p1)
@@ -73,7 +74,7 @@ local function shouldReorderTabs(value, p1)
 end
 
 return function(p2, p3)
-	-- upvalues: analytics (ref), textChatService (ref), getTransparencyStoreModule (ref), chatInputBarConfigurationEnabledModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), shouldReorderTabs (ref), fFlagExpChatGlobalTabDefaultModule (ref), isGlobalTabFirstModule (ref), targetTextChannelPropertyChanged (ref), devTextBoxEnabledChangedModule (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (ref), userInputService (ref), isTenFootInterface (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), chatInputBarSettingsChangedModule (ref), chatWindowConfigurationEnabledModule (ref), chatLayoutHorizontalAlignmentChangedModule (ref), chatLayoutVerticalAlignmentChangedModule (ref), chatWindowSettingsChangedModule (ref), bubbleChatSettingsChangedModule (ref), setUpBubbleChatConfigurationChildrenModule (ref), playersService (ref), localTextChannelParticipantAddedModule (ref), fFlagExpChatEnableFriendsTab (ref), var1 (write), syncFriendsTabVisibilityModule (ref), channelTabsConfigurationEnabledModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), getMessagesStoreModule (ref), getFFlagExpChatFixChannelTabsMidExperienceToggleModule (ref), channelTabsSettingsChangedModule (ref), configurationObjectsLoadedModule (ref)
+	-- upvalues: analytics (ref), textChatService (ref), getTransparencyStoreModule (ref), chatInputBarConfigurationEnabledModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), shouldReorderTabs (ref), fFlagExpChatTabShortcutNav (ref), fFlagExpChatGlobalTabDefaultModule (ref), isGlobalTabFirstModule (ref), targetTextChannelPropertyChanged (ref), devTextBoxEnabledChangedModule (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (ref), userInputService (ref), isTenFootInterface (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), chatInputBarSettingsChangedModule (ref), chatWindowConfigurationEnabledModule (ref), chatLayoutHorizontalAlignmentChangedModule (ref), chatLayoutVerticalAlignmentChangedModule (ref), chatWindowSettingsChangedModule (ref), bubbleChatSettingsChangedModule (ref), setUpBubbleChatConfigurationChildrenModule (ref), playersService (ref), localTextChannelParticipantAddedModule (ref), fFlagExpChatEnableFriendsTab (ref), var1 (write), syncFriendsTabVisibilityModule (ref), channelTabsConfigurationEnabledModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), getMessagesStoreModule (ref), getFFlagExpChatFixChannelTabsMidExperienceToggleModule (ref), channelTabsSettingsChangedModule (ref), configurationObjectsLoadedModule (ref)
 	if p3.analytics then
 		analytics.with(p3.analytics)
 	end
@@ -97,7 +98,7 @@ return function(p2, p3)
 	local var5 = false
 	
 	local var6 = function()
-		-- upvalues: textChatService (copy), getTransparencyStoreModule (copy), p2 (ref), chatInputBarConfigurationEnabledModule (copy), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), shouldReorderTabs (copy), fFlagExpChatGlobalTabDefaultModule (copy), var5 (write), isGlobalTabFirstModule (copy), targetTextChannelPropertyChanged (copy), p3 (ref), devTextBoxEnabledChangedModule (copy), getEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), userInputService (copy), var4 (ref), isTenFootInterface (copy), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), chatInputBarSettingsChangedModule (copy)
+		-- upvalues: textChatService (copy), getTransparencyStoreModule (copy), p2 (ref), chatInputBarConfigurationEnabledModule (copy), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), shouldReorderTabs (copy), fFlagExpChatTabShortcutNav (copy), fFlagExpChatGlobalTabDefaultModule (copy), var5 (write), isGlobalTabFirstModule (copy), targetTextChannelPropertyChanged (copy), p3 (ref), devTextBoxEnabledChangedModule (copy), getEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), userInputService (copy), var4 (ref), isTenFootInterface (copy), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), chatInputBarSettingsChangedModule (copy)
 		local chatInputBarConfiguration = textChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
 		local t = {}
 		
@@ -119,10 +120,13 @@ return function(p2, p3)
 			end
 		end)
 		chatInputBarConfiguration:GetPropertyChangedSignal("TargetTextChannel"):Connect(function()
-			-- upvalues: chatInputBarConfiguration (ref), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), p2 (copy), shouldReorderTabs (copy), fFlagExpChatGlobalTabDefaultModule (copy), var5 (copy), isGlobalTabFirstModule (copy), targetTextChannelPropertyChanged (copy)
+			-- upvalues: chatInputBarConfiguration (ref), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), p2 (copy), shouldReorderTabs (copy), fFlagExpChatTabShortcutNav (copy), fFlagExpChatGlobalTabDefaultModule (copy), var5 (copy), isGlobalTabFirstModule (copy), targetTextChannelPropertyChanged (copy)
 			local targetTextChannel = chatInputBarConfiguration.TargetTextChannel
 			local var8 = shouldReorderTabs(if fFlagExpChatUseChannelTabsStore then getChannelTabsStoreModule(false).getChannelTabsState(false).allChannelTabs else p2:getState().ChannelTabs.allChannelTabs, targetTextChannel)
 			
+			if fFlagExpChatTabShortcutNav and var8 and (targetTextChannel ~= nil and (if fFlagExpChatUseChannelTabsStore then getChannelTabsStoreModule(false).getChannelTabsState(false).selectedTabName else p2:getState().ChannelTabs.selectedTabName) == targetTextChannel.Name) then
+				var8 = false
+			end
 			if fFlagExpChatGlobalTabDefaultModule and var5 and isGlobalTabFirstModule() then
 				local hasUserSelectedTab, selectedTabName
 				var5 = false

@@ -5,14 +5,13 @@ local reactModule = require(parent.React)
 local useAvatarRoute = require(parent.AvatarExperienceNavigation).AvatarRoute.Hooks.useAvatarRoute
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXCatalogOffersClearOnLogout = avatarExperienceFlagsModule.FFlagAXCatalogOffersClearOnLogout
-local AXCatalogOffersRefetchOnVisible = game:DefineFastFlag("AXCatalogOffersRefetchOnVisible", false)
 local fFlagAXOfferBannerImpressionOnlyOnStartup = avatarExperienceFlagsModule.FFlagAXOfferBannerImpressionOnlyOnStartup
 local _ = require(avatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
 local catalogOffersBannerImpressionsStoreModule = require(avatarExperienceCatalog.Stores.catalogOffersBannerImpressionsStore)
 local getLocalUserIdModule = require(avatarExperienceCatalog.Utils.getLocalUserId)
 
 return function(p1, p2)
-	-- upvalues: fFlagAXCatalogOffersClearOnLogout (ref), reactModule (ref), getLocalUserIdModule (ref), playersService (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (ref), catalogOffersBannerImpressionsStoreModule (ref), AXCatalogOffersRefetchOnVisible (ref), useAvatarRoute (ref)
+	-- upvalues: fFlagAXCatalogOffersClearOnLogout (ref), reactModule (ref), getLocalUserIdModule (ref), playersService (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (ref), catalogOffersBannerImpressionsStoreModule (ref), useAvatarRoute (ref)
 	if fFlagAXCatalogOffersClearOnLogout then
 		reactModule.useEffect(function()
 			-- upvalues: p1 (ref), p2 (ref), getLocalUserIdModule (copy), playersService (copy), fFlagAXOfferBannerImpressionOnlyOnStartup (copy), catalogOffersBannerImpressionsStoreModule (copy)
@@ -93,17 +92,15 @@ return function(p1, p2)
 			return if p1.getHasCompletedOffersFetch(false) or p1.getOffersFetchInProgress(false) then function() end else p1.fetchOffers(p2)
 		end, { p2, p1 })
 	end
-	if AXCatalogOffersRefetchOnVisible then
-		local var1 = reactModule.useRef(true)
-		local var2 = useAvatarRoute()
-		reactModule.useEffect(function()
-			-- upvalues: var2 (ref), var1 (ref), p1 (ref), p2 (ref)
-			local var3 = var2 ~= nil and var2.isVisible
-			
-			if var3 and not var1.current then
-				p1.fetchOffers(p2)
-			end
-			var1.current = var3
-		end, { p2, p1, var2 })
-	end
+	local var1 = reactModule.useRef(true)
+	local var2 = useAvatarRoute()
+	reactModule.useEffect(function()
+		-- upvalues: var2 (ref), var1 (ref), p1 (ref), p2 (ref)
+		local var3 = var2 ~= nil and var2.isVisible
+		
+		if var3 and not var1.current then
+			p1.fetchOffers(p2)
+		end
+		var1.current = var3
+	end, { p2, p1, var2 })
 end

@@ -6,6 +6,7 @@ local inlineElementTypeModule = require(parent.Utils.InlineElementType)
 local _ = require(parent.Components.InlineLayout.InlineLayoutElements.RenderableInlineElement)
 local hardBreakElementModule = require(parent.Components.InlineLayout.InlineLayoutElements.HardBreakElement)
 local isInlineElementModule = require(parent.Utils.isInlineElement)
+local renderInMeasuredFrameModule = require(parent.Utils.renderInMeasuredFrame)
 local t = {}
 t.__index = t
 t.__type = inlineElementTypeModule
@@ -132,11 +133,29 @@ function t:split(p7, p8)
 	return var16, nil
 end
 
+function t:trimStart()
+	-- upvalues: t (ref)
+	for i, v in self.Elements do
+		local var2 = if v.trimStart then v:trimStart() else v
+		
+		if var2 ~= v or i ~= 1 then
+			if var2 ~= nil then
+				local list = { var2 }
+				table.move(self.Elements, i + 1, #self.Elements, 2, list)
+				
+				return t.new(self.WrapperElement, self.wrapperElementProps, list, self.startingIndex + i - 1)
+			end
+		end
+		return self
+	end
+	return nil
+end
+
 function t:render(p7, p8)
-	-- upvalues: dashModule (ref), reactModule (ref)
+	-- upvalues: dashModule (ref), renderInMeasuredFrameModule (ref), reactModule (ref)
 	return reactModule.createElement(self.WrapperElement, dashModule.join(self.wrapperElementProps, { id = p7, LayoutOrder = p8 }), dashModule.map(self.Elements, function(p9, p10)
-		-- upvalues: p7 (ref), self (ref)
-		return p9:render(`{p7}-{self.startingIndex + p10 - 1}`, p10)
+		-- upvalues: renderInMeasuredFrameModule (copy), p7 (ref), self (ref)
+		return renderInMeasuredFrameModule(p9:render(`{p7}-{self.startingIndex + p10 - 1}`, p10), p9:getWidth(), p10)
 	end))
 end
 

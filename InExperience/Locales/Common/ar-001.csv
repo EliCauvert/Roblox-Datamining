@@ -93,7 +93,6 @@ Authentication.SignUp.Action.Create,إنشاء
 Authentication.SignUp.Action.CreateAccountSentenceCase,إنشاء حساب
 Authentication.SignUp.Action.ExitModalLeave,الخروج
 Authentication.SignUp.Action.RespawnNow,إعادة الظهور الآن
-Authentication.SignUp.Action.StartPlay,بدء اللعب
 Authentication.SignUp.Button.OKCaptialized,موافق
 Authentication.SignUp.Button.RetryLogIn,إعادة محاولة تسجيل الدخول
 Authentication.SignUp.Description.AccountAlreadyLinked,حساب على منصة {platformAccountName} مرتبط بالفعل بحساب على منصة Roblox. يُرجى محاولة تسجيل الدخول مرة أخرى.
@@ -704,6 +703,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,الفئة *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,أخرى
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,تحديد فئة
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,مشكلة في الشراء
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,اقتراح
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,بحد أقصى {MAX} من الأحرف
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,التفاصيل *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,إلغاء التحديد
@@ -711,6 +711,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,قم بتض
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,صِف ما هو مفقود ومتى رأيته آخر مرة. إذا تعرض حسابك للاختراق، يرجى تضمين رقم بطاقة دعم العملاء لدى منصّة Roblox وأي تفاصيل ذات صلة.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,صِف طلبك أو مشكلتك هنا. قدّم أكبر قدر ممكن من التفاصيل لمساعدتنا في فهم الموقف.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,أخبرنا بما حاولت شراؤه، ومتى حدث ذلك، والقيمة الإجمالية (على سبيل المثال 500 Robux / 4.99 دولار أمريكي). قم بتضمين أي رسائل خطأ رأيتها.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,شاركنا ما تود إضافته أو تحسينه، ولماذا سيجعل ذلك اللعبة أفضل.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,هل تحاول الإبلاغ عن إساءة؟
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>إرسال بلاغ بدلًا من ذلك.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,تحديد

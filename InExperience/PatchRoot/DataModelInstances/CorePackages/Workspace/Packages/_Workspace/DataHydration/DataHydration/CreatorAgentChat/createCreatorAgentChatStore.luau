@@ -2,10 +2,12 @@
 local parent = dataHydration.Parent
 local httpClientModule = require(parent.HttpClient)
 local signalsModule = require(parent.Signals)
+local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagBuildAgentAdCampaignCardModule = require(script.Parent.FFlagBuildAgentAdCampaignCard)
 local fFlagBuildAgentAdCampaignToolCallStatusFallback = require(parent.SharedFlags).FFlagBuildAgentAdCampaignToolCallStatusFallback
 local var1 = if fFlagBuildAgentAdCampaignToolCallStatusFallback then require(script.Parent.decodeAdCampaignToolCallStatusResult) else nil
 local acpProtocolModule = require(script.Parent.Acp.AcpProtocol)
+local classifyRequestFailureModule = require(script.Parent.classifyRequestFailure)
 local historyIngestModule = require(script.Parent.CasStore.historyIngest)
 local ingestFrameHandlerModule = require(script.Parent.CasStore.ingestFrameHandler)
 local sessionRegistryModule = require(script.Parent.CasStore.sessionRegistry)
@@ -16,6 +18,7 @@ local onTerminalModule = require(script.Parent.onTerminal)
 local rpcDecoderModule = require(script.Parent.rpcDecoder)
 local _ = require(script.Parent.types)
 local withCsrfRetryModule = require(dataHydration.withCsrfRetry)
+local fFlagBuildExperiencePromptFailureTelemetry = sharedFlagsModule.FFlagBuildExperiencePromptFailureTelemetry
 
 local function _(p1)
 	return if typeof(p1) == "string" and p1 ~= "" then p1 else nil
@@ -56,7 +59,7 @@ local t = {
 }
 
 return function(p3)
-	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref), acpProtocolModule (ref), t (ref), rpcDecoderModule (ref), signalsModule (ref), onTerminalModule (ref), appendSessionListEntries (ref), fFlagBuildAgentAdCampaignCardModule (ref), var1 (ref), createTurnHandleModule (ref), experimentOverrideModule (ref), historyIngestModule (ref), sessionRegistryModule (ref), constantsModule (ref), ingestFrameHandlerModule (ref), fFlagBuildAgentAdCampaignToolCallStatusFallback (ref)
+	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref), acpProtocolModule (ref), t (ref), rpcDecoderModule (ref), signalsModule (ref), onTerminalModule (ref), appendSessionListEntries (ref), fFlagBuildAgentAdCampaignCardModule (ref), var1 (ref), createTurnHandleModule (ref), experimentOverrideModule (ref), fFlagBuildExperiencePromptFailureTelemetry (ref), classifyRequestFailureModule (ref), historyIngestModule (ref), sessionRegistryModule (ref), constantsModule (ref), ingestFrameHandlerModule (ref), fFlagBuildAgentAdCampaignToolCallStatusFallback (ref)
 	p3 = p3 or {}
 	local network = p3.network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
 	local baseUrl = p3.baseUrl or acpProtocolModule.acpUrl()
@@ -532,7 +535,7 @@ return function(p3)
 	end
 	
 	local function sessionPrompt(p11)
-		-- upvalues: p3 (ref), var2 (write), createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref), experimentOverrideModule (copy)
+		-- upvalues: p3 (ref), var2 (write), createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref), experimentOverrideModule (copy), fFlagBuildExperiencePromptFailureTelemetry (copy), classifyRequestFailureModule (copy)
 		local var19
 		assert(p11 and (typeof(p11.sessionId) == "string" and p11.sessionId ~= ""), "sessionId is required")
 		assert(p11.prompt, "prompt is required")
@@ -593,12 +596,14 @@ return function(p3)
 		t.prompt = if typeof(prompt) == "string" then { { type = "text", text = prompt } } else prompt
 		t.meta = p11._meta
 		t.experiment = if experimentOverrideModule.isEnabled() then p11.experiment else nil
-		onTerminalModule(rpcCall(var19, acpProtocolModule.Methods.SessionPrompt, buildSessionPromptWireParams(t)).state, nil, function(p12, p13)
-			-- upvalues: var23 (ref), t_1 (copy), t_3 (copy), t_2 (copy)
+		t = rpcCall(var19, acpProtocolModule.Methods.SessionPrompt, buildSessionPromptWireParams(t))
+		onTerminalModule(t.state, nil, function(p12, p13)
+			-- upvalues: fFlagBuildExperiencePromptFailureTelemetry (copy), classifyRequestFailureModule (copy), t (ref), var23 (ref), t_1 (copy), t_3 (copy), t_2 (copy)
+			local var24 = if fFlagBuildExperiencePromptFailureTelemetry then classifyRequestFailureModule(t.state(false)) else nil
 			task.defer(function()
-				-- upvalues: var23 (copy), p12 (ref), p13 (ref), t_1 (copy), t_3 (copy), t_2 (copy)
+				-- upvalues: var23 (copy), p12 (ref), p13 (ref), var24 (ref), t_1 (copy), t_3 (copy), t_2 (copy)
 				if var23.isDone() then return end
-				var23.fail(p12, p13)
+				var23.fail(p12, p13, var24)
 				
 				for i, v in t_1 do
 					if v == var23 then
@@ -608,10 +613,10 @@ return function(p3)
 					end
 				end
 				local requestId = var23.requestId
-				local var24 = if requestId == nil then nil else tostring(requestId)
+				local var25 = if requestId == nil then nil else tostring(requestId)
 				
-				if var24 and t_2[var24] == var23 then
-					t_2[var24] = nil
+				if var25 and t_2[var25] == var23 then
+					t_2[var25] = nil
 				end
 			end)
 		end)

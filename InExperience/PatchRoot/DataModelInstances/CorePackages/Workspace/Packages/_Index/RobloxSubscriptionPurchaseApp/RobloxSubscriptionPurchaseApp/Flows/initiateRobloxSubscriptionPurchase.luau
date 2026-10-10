@@ -5,10 +5,12 @@ local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Stor
 local surfaceContextModule = require(robloxSubscriptionPurchaseApp.Enums.SurfaceContext)
 local surfaceNameModule = require(robloxSubscriptionPurchaseApp.Enums.SurfaceName)
 local _ = require(robloxSubscriptionPurchaseApp.types)
-local fFlagEnablePlusReferralLandingSheet = require(robloxSubscriptionPurchaseApp.Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
+local parent = robloxSubscriptionPurchaseApp.Parent
+local fFlagEnablePlusReferralLandingSheet = require(parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
+local fFlagEnablePlusReferralEntrypointTelemetry = require(parent.SharedFlags).FFlagEnablePlusReferralEntrypointTelemetry
 
 return function(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagEnablePlusReferralLandingSheet (ref), surfaceContextModule (ref), surfaceNameModule (ref), initiateRobloxSubscriptionPurchaseInternalModule (ref), robloxSubscriptionOverlayControllerModule (ref)
+	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagEnablePlusReferralLandingSheet (ref), fFlagEnablePlusReferralEntrypointTelemetry (ref), surfaceContextModule (ref), surfaceNameModule (ref), initiateRobloxSubscriptionPurchaseInternalModule (ref), robloxSubscriptionOverlayControllerModule (ref)
 	local var1 = robloxSubscriptionStoreModule.get()
 	
 	if p2 then
@@ -40,7 +42,8 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8)
 		context = p5 or surfaceContextModule.Unspecified,
 		surfaceName = p4 or surfaceNameModule.Unspecified,
 		metadata = t,
-		clientSessionId = if p7 then p7.clientSessionId else nil
+		clientSessionId = if p7 then p7.clientSessionId else nil,
+		entrypoint = if fFlagEnablePlusReferralEntrypointTelemetry and p7 then p7.entrypoint else nil
 	}
 	var1.setEntryContext(t_1)
 	initiateRobloxSubscriptionPurchaseInternalModule(t_1)

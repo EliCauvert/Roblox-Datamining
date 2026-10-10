@@ -92,7 +92,8 @@ return {
 		useHydrateCatalogSortOnDemandEffect = require(script.Components.Hooks.useHydrateCatalogSortOnDemandEffect),
 		useHydrateCatalogItemGridOnDemandEffect = require(script.Components.Hooks.useHydrateCatalogItemGridOnDemandEffect),
 		useShouldFetchCartPricingForPurchasePrompt = require(script.Hooks.useShouldFetchCartPricingForPurchasePrompt),
-		useShouldFetchCartPricingForLookPurchasePrompt = require(script.Hooks.useShouldFetchCartPricingForLookPurchasePrompt)
+		useShouldFetchCartPricingForLookPurchasePrompt = require(script.Hooks.useShouldFetchCartPricingForLookPurchasePrompt),
+		useOnRequestImpressionsSignal = require(script.Components.Hooks.useOnRequestImpressionsSignal)
 	},
 	Utils = {
 		WidgetIxpLayerMap = widgetIxpLayerMapModule,

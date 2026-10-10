@@ -110,7 +110,6 @@ Authentication.SignUp.Action.Create,만들기
 Authentication.SignUp.Action.CreateAccountSentenceCase,계정 생성
 Authentication.SignUp.Action.ExitModalLeave,나가기
 Authentication.SignUp.Action.RespawnNow,지금 리스폰
-Authentication.SignUp.Action.StartPlay,플레이 시작
 Authentication.SignUp.Button.OKCaptialized,확인
 Authentication.SignUp.Button.RetryLogIn,로그인 재시도
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} 계정은 이미 Roblox계정에 연결되어 있습니다. 로그인을 다시 시도하세요.
@@ -720,6 +719,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,카테고리*
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,기타
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,카테고리 선택
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,구매 문제
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,제안
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,최대 {MAX}자
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,세부 정보*
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,선택 취소
@@ -727,6 +727,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,게임 버�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"누락된 항목과 마지막으로 본 시기를 설명해 주세요. 계정이 해킹된 경우, Roblox CS 문의 양식 번호와 관련 세부 정보를 포함해 주세요."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,요청 사항이나 문제를 여기에 설명해 주세요. 상황을 이해하는 데 도움이 되도록 가능한 한 많은 정보를 제공해 주세요.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"구매하려던 아이템, 구매 시도 시기, 총 금액(예: 500 Robux/4.99달러)을 알려주세요. 표시된 오류 메시지가 있다면 포함해주세요."
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,추가되거나 개선되었으면 하는 사항과 그 사항이 게임을 어떻게 개선할 수 있는지 알려주세요.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,신고하기를 진행하시겠어요?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>대신 신고를 제출하세요.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,선택
@@ -1252,6 +1253,19 @@ Corescripts.AvatarContextMenu.FriendRequestPending,친구 요청 대기 중
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,회원 차단됨
 Corescripts.AvatarContextMenu.Wave,손 흔들기
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,계속 플레이
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,텔레포트
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Roblox 추천 게임
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,홈 이외
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,홈 화면 추천
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,포털 광고
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,검색 광고
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,스폰서 광고
 Feature.AbuseReportDialog.Label.GeneralError,오류가 발생했습니다. 나중에 다시 시도하세요.
 Feature.Accessibility.Action.ScrollDown,아래로 스크롤
 Feature.Accessibility.Action.ScrollUp,위로 스크롤
@@ -3174,7 +3188,7 @@ Feature.FaceChat.Subtitle.UnsupportedDevice,하드웨어가 카메라로 아바�
 Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,카메라를 끄면 체험의 성능이 개선될 수 있습니다.
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox에서 카메라로 아바타를 애니메이션화할 수 없습니다.
 Feature.Favorites.Label.Favorite,
-Feature.FlyoutSidePanel.Action.ContinuePlaying,계속 플레이
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,"프로필, 콘텐츠 및 설정이 새 위치로 옮겨졌습니다."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> 옮겨짐
 Feature.Friends.Action.AcceptFriend,

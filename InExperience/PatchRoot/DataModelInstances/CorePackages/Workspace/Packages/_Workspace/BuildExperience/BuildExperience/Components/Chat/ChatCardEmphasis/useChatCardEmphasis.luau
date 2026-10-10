@@ -3,25 +3,33 @@ local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local chatCardEmphasisContextModule = require(script.Parent.ChatCardEmphasisContext)
+local chatCardEmphasisPositionContextModule = require(script.Parent.ChatCardEmphasisPositionContext)
 
 return function(p1, p2)
-	-- upvalues: reactModule (ref), chatCardEmphasisContextModule (ref), signalsModule (ref), signalsReactModule (ref)
+	-- upvalues: reactModule (ref), chatCardEmphasisContextModule (ref), chatCardEmphasisPositionContextModule (ref), signalsModule (ref), signalsReactModule (ref)
 	local var1 = reactModule.useContext(chatCardEmphasisContextModule)
 	local var2 = reactModule.useMemo(function()
 		return {}
 	end, {})
+	local var3 = reactModule.useContext(chatCardEmphasisPositionContextModule)
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref), p1 (ref), var2 (ref), p2 (ref)
+		-- upvalues: var1 (ref), p1 (ref), var2 (ref), p2 (ref), var3 (ref)
 		if var1 == nil or p1 == nil then
 			return nil
 		end
-		var1.register(var2, p1, p2 or 0)
+		var1.register(var2, p1, p2 or 0, var3)
 		
 		return function()
 			-- upvalues: var1 (copy), var2 (copy)
 			var1.unregister(var2)
 		end
-	end, { var1, var2, p1, p2 })
+	end, {
+		var1,
+		var2,
+		p1,
+		p2,
+		var3
+	})
 	
 	return if var1 == nil then nil else signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var1 (ref), var2 (ref)

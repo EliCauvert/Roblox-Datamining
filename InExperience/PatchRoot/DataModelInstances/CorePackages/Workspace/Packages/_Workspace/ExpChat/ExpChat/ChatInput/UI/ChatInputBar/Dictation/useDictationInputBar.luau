@@ -13,6 +13,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagExpChatLongPressContinuousDictation = sharedFlagsModule.FFlagExpChatLongPressContinuousDictation
 local fFlagExpChatContinuousDictation = sharedFlagsModule.FFlagExpChatContinuousDictation or fFlagExpChatLongPressContinuousDictation
 local fFlagExpChatDictationVoiceTypingModeSetting = sharedFlagsModule.FFlagExpChatDictationVoiceTypingModeSetting
+local fFlagExpChatDictationContinuousSafetyReminder = sharedFlagsModule.FFlagExpChatDictationContinuousSafetyReminder
 local fFlagEnableRetryForLinkingProtocolFetch = sharedFlagsModule.FFlagEnableRetryForLinkingProtocolFetch
 local fIntLinkingProtocolFetchRetries = sharedFlagsModule.FIntLinkingProtocolFetchRetries
 local fIntLinkingProtocolFetchTimeoutMS = sharedFlagsModule.FIntLinkingProtocolFetchTimeoutMS
@@ -40,6 +41,7 @@ local useDictationEligibilityModule = require(script.Parent.useDictationEligibil
 local useIsLocalUserUnder13Module = require(script.Parent.useIsLocalUserUnder13)
 local useLongPressModule = require(script.Parent.Parent.useLongPress)
 local u13PolicyToastStorageModule = require(script.Parent.U13PolicyToastStorage)
+local dictationSafetyReminderModule = require(script.Parent.DictationSafetyReminder)
 local permissionStatus = require(script.Parent.requestMicPermission).PermissionStatus
 local dictationState = parentModule.DictationState
 local dictationErrorReason = parentModule.DictationErrorReason
@@ -61,7 +63,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatDictationFTUXModule (ref), useDictationTelemetryModule (ref), expChatDictationMicToastAnalytics (ref), useDictationEligibilityModule (ref), useIsLocalUserUnder13Module (ref), u13PolicyToastStorageModule (ref), useAsync (ref), linkingResumeOnDataModelThread (ref), fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default (ref), settingsRoute (ref), fIntLinkingProtocolFetchTimeoutMS (ref), localizationModule (ref), expChatDictationNoMicAccessToastBodyKeyIndex (ref), getFFlagTextChatEnableUniverseChatTabs (ref), getMessagesStoreModule (ref), dictationErrorReason (ref), dictationAnalyticsModule (ref), setUIBloxToast (ref), useTranscribedSamplesModule (ref), dictationModeModule (ref), fFlagExpChatDictationU13PolicyToastModule (ref), permissionStatus (ref), useDictation (ref), signalsReactModule (ref), dictationState (ref), fFlagExpChatLongPressContinuousDictation (ref), fFlagExpChatContinuousDictation (ref), fFlagExpChatDictationVoiceTypingModeSetting (ref), getDictationModeSettingStoreModule (ref), useDictationFTUXModule (ref), useLongPressModule (ref)
+	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatDictationFTUXModule (ref), useDictationTelemetryModule (ref), expChatDictationMicToastAnalytics (ref), useDictationEligibilityModule (ref), useIsLocalUserUnder13Module (ref), u13PolicyToastStorageModule (ref), useAsync (ref), linkingResumeOnDataModelThread (ref), fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default (ref), settingsRoute (ref), fIntLinkingProtocolFetchTimeoutMS (ref), localizationModule (ref), expChatDictationNoMicAccessToastBodyKeyIndex (ref), getFFlagTextChatEnableUniverseChatTabs (ref), getMessagesStoreModule (ref), dictationErrorReason (ref), dictationAnalyticsModule (ref), setUIBloxToast (ref), useTranscribedSamplesModule (ref), dictationModeModule (ref), fFlagExpChatDictationContinuousSafetyReminder (ref), dictationSafetyReminderModule (ref), fFlagExpChatDictationU13PolicyToastModule (ref), permissionStatus (ref), useDictation (ref), signalsReactModule (ref), dictationState (ref), fFlagExpChatLongPressContinuousDictation (ref), fFlagExpChatContinuousDictation (ref), fFlagExpChatDictationVoiceTypingModeSetting (ref), getDictationModeSettingStoreModule (ref), useDictationFTUXModule (ref), useLongPressModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = foundationModule.Hooks.useCursor({
 		radius = UDim.new(0, var1.Radius.Circle),
@@ -87,7 +89,7 @@ return function(p1)
 		if not linkingResumeOnDataModelThread then
 			return false
 		elseif not fFlagEnableRetryForLinkingProtocolFetch then
-			var14, var67 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
+			var14, var68 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
 			
 			return var14 and var15 == true
 		end
@@ -231,7 +233,7 @@ return function(p1)
 	local var31 = reactModule.useRef(false)
 	local var32 = useDictation({
 		onTranscription = reactModule.useCallback(function(p2, p3)
-			-- upvalues: dictationModeModule (copy), var29 (ref), var28 (ref), var25 (ref), var7 (ref), p1 (ref), dictationAnalyticsModule (copy), var3 (ref)
+			-- upvalues: dictationModeModule (copy), var29 (ref), var28 (ref), var25 (ref), var7 (ref), fFlagExpChatDictationContinuousSafetyReminder (copy), dictationSafetyReminderModule (copy), p1 (ref), dictationAnalyticsModule (copy), var3 (ref)
 			if p3 == dictationModeModule.Continuous then
 				if var29.current ~= nil then
 					var28.commit(var29.current)
@@ -240,6 +242,9 @@ return function(p1)
 				var7.logTranscription(p2, p3, var33)
 				
 				if var33 then
+					if fFlagExpChatDictationContinuousSafetyReminder then
+						dictationSafetyReminderModule.trackContinuousSend(p2)
+					end
 					p1.onSendRecordingTap({
 						mode = dictationAnalyticsModule.Modes.Continuous,
 						outcome = dictationAnalyticsModule.Outcomes.Full,

@@ -11,7 +11,6 @@ local enums = foundationModule.Enums
 local layoutModeModule = require(script.Parent.Parent.Enums.LayoutMode)
 local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 local fFlagUserTileShowShimmerWhenLoadingModule = require(userTile.Flags.FFlagUserTileShowShimmerWhenLoading)
-local fFlagUserTileTextTCIndicator = require(parent.SharedFlags).FFlagUserTileTextTCIndicator
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
 local fFlagUserTileShowBadges = require(parent.SharedFlags).FFlagUserTileShowBadges
 local fFlagEnableMobileGameJoinCard = require(parent.SharedFlags).FFlagEnableMobileGameJoinCard
@@ -20,7 +19,7 @@ local fFlagUserTileTitleStackAddExtraInfo = require(parent.SharedFlags).FFlagUse
 local fFlagUserTileUnfilteredChatIndicator = require(parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
 
 return function(p1)
-	-- upvalues: reactModule (ref), controlState (ref), view (ref), layoutModeModule (ref), enums (ref), avatarPileModule (ref), avatarModule (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), titleStackModule (ref), fFlagUserTileShowBadges (ref), fFlagUserTileAddContextualInfoIcon (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagEnableMobileGameJoinCard (ref), fFlagUserTileTextTCIndicator (ref), fFlagUserTileUnfilteredChatIndicator (ref), fFlagEnableBlackbirdCheck (ref), fFlagUserTileTitleStackAddExtraInfo (ref)
+	-- upvalues: reactModule (ref), controlState (ref), view (ref), layoutModeModule (ref), enums (ref), avatarPileModule (ref), avatarModule (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), titleStackModule (ref), fFlagUserTileShowBadges (ref), fFlagUserTileAddContextualInfoIcon (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagEnableMobileGameJoinCard (ref), fFlagUserTileUnfilteredChatIndicator (ref), fFlagEnableBlackbirdCheck (ref), fFlagUserTileTitleStackAddExtraInfo (ref)
 	local var1, var2 = reactModule.useState(false)
 	local var3 = p1.onActivated ~= nil
 	
@@ -85,8 +84,8 @@ return function(p1)
 			isSubtitleLoading = if fFlagUserTileShowShimmerWhenLoadingModule then p1.isSubtitleLoading else nil,
 			isContextualInfoLoading = if fFlagUserTileShowShimmerWhenLoadingModule then p1.isContextualInfoLoading else nil,
 			customTextTruncation = p1.customTextTruncation,
-			isTrustedConnection = if fFlagUserTileTextTCIndicator then p1.isTrustedConnection else nil,
-			trustedConnectionIndicatorEnabled = if fFlagUserTileTextTCIndicator then p1.trustedConnectionIndicatorEnabled else nil,
+			isTrustedConnection = p1.isTrustedConnection,
+			trustedConnectionIndicatorEnabled = p1.trustedConnectionIndicatorEnabled,
 			shouldShowUnfilteredChatIndicator = if fFlagUserTileUnfilteredChatIndicator then p1.shouldShowUnfilteredChatIndicator else nil,
 			isRobloxSubscriber = if fFlagEnableBlackbirdCheck then p1.isRobloxSubscriber else nil,
 			extraInfo = p1.extraInfo,

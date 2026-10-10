@@ -28,7 +28,6 @@ local useTokens = foundationModule.Hooks.useTokens
 local useSignalState = signalsReactModule.useSignalState
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXCatalogOffersAutoOpenFTUXSheet = avatarExperienceFlagsModule.FFlagAXCatalogOffersAutoOpenFTUXSheet
-local AXSendImpressionsForCatalogOffersBanner = game:DefineFastFlag("AXSendImpressionsForCatalogOffersBanner", false)
 local fFlagAXOfferBannerImpressionOnlyOnStartup = avatarExperienceFlagsModule.FFlagAXOfferBannerImpressionOnlyOnStartup
 local fFlagAXUpdateOffersEndsUIWithBadge = avatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge
 
@@ -39,7 +38,7 @@ local function blendShiftFillForOpaqueGuiObject(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: useAXCatalogStoreContextModule (ref), useNetworking (ref), useTokens (ref), reactModule (ref), useLocalization (ref), catalogOffersBannerAppStorageModule (ref), getMarketplaceOffersBannerOfferDisplayId (ref), useSignalState (ref), fFlagAXCatalogOffersAutoOpenFTUXSheet (ref), useCatalogOffersBannerDismissHydrationModule (ref), useCatalogOffersBannerOffersFetchModule (ref), getMarketplaceOffersBannerOfferDisplayTitle (ref), AXSendImpressionsForCatalogOffersBanner (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (ref), catalogOffersBannerImpressionsStoreModule (ref), sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), unifiedLoggingElementNameEnums (ref), httpService (ref), catalogOffersBannerOfferModalsModule (ref), fFlagAXUpdateOffersEndsUIWithBadge (ref), blendShiftFillForOpaqueGuiObject (ref)
+	-- upvalues: useAXCatalogStoreContextModule (ref), useNetworking (ref), useTokens (ref), reactModule (ref), useLocalization (ref), catalogOffersBannerAppStorageModule (ref), getMarketplaceOffersBannerOfferDisplayId (ref), useSignalState (ref), fFlagAXCatalogOffersAutoOpenFTUXSheet (ref), useCatalogOffersBannerDismissHydrationModule (ref), useCatalogOffersBannerOffersFetchModule (ref), getMarketplaceOffersBannerOfferDisplayTitle (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (ref), catalogOffersBannerImpressionsStoreModule (ref), sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), unifiedLoggingElementNameEnums (ref), httpService (ref), catalogOffersBannerOfferModalsModule (ref), fFlagAXUpdateOffersEndsUIWithBadge (ref), blendShiftFillForOpaqueGuiObject (ref)
 	local catalogOffersBannerStore = useAXCatalogStoreContextModule().catalogOffersBannerStore
 	local var1 = useNetworking()
 	local var2 = useTokens()
@@ -103,21 +102,19 @@ return function(p1)
 			onBannerVisibleChanged(var18 ~= nil and not var17)
 		end
 	end, { var17, var18, p1.onBannerVisibleChanged })
+	reactModule.useEffect(function()
+		-- upvalues: var17 (ref), var3 (ref), var18 (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (copy), catalogOffersBannerImpressionsStoreModule (copy), sendUnifiedEventLog (copy), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), unifiedLoggingElementNameEnums (copy), httpService (copy)
+		if not var17 and var3 and var18 and (not fFlagAXOfferBannerImpressionOnlyOnStartup or var3.offerId and not catalogOffersBannerImpressionsStoreModule.hasSeenOfferId(var3.offerId)) then
+			catalogOffersBannerImpressionsStoreModule.addOfferId(var3.offerId)
+			sendUnifiedEventLog({
+				action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_IMPRESSION,
+				surface = unifiedLoggingSurface.CATALOG,
+				elementName = unifiedLoggingElementNameEnums.CATALOG_OFFERS_BANNER,
+				elementMetadata = httpService:JSONEncode({ offerId = var3.offerId })
+			})
+		end
+	end, { var17, var3, var18 })
 	
-	if AXSendImpressionsForCatalogOffersBanner then
-		reactModule.useEffect(function()
-			-- upvalues: var17 (ref), var3 (ref), var18 (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (copy), catalogOffersBannerImpressionsStoreModule (copy), sendUnifiedEventLog (copy), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), unifiedLoggingElementNameEnums (copy), httpService (copy)
-			if not var17 and var3 and var18 and (not fFlagAXOfferBannerImpressionOnlyOnStartup or var3.offerId and not catalogOffersBannerImpressionsStoreModule.hasSeenOfferId(var3.offerId)) then
-				catalogOffersBannerImpressionsStoreModule.addOfferId(var3.offerId)
-				sendUnifiedEventLog({
-					action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_IMPRESSION,
-					surface = unifiedLoggingSurface.CATALOG,
-					elementName = unifiedLoggingElementNameEnums.CATALOG_OFFERS_BANNER,
-					elementMetadata = httpService:JSONEncode({ offerId = var3.offerId })
-				})
-			end
-		end, { var17, var3, var18 })
-	end
 	if var17 or var16 == nil or (var3 == nil or var18 == nil) then
 		return { status = "hidden" }
 	end

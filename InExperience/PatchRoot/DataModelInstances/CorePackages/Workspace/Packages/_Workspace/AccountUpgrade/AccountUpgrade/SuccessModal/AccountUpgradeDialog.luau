@@ -6,13 +6,14 @@ local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
 local foundationModule = require(parent.Foundation)
 local dialog = foundationModule.Dialog
 local view = foundationModule.View
+local text = foundationModule.Text
 local icon = foundationModule.Icon
 local dialogSize = foundationModule.Enums.DialogSize
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 
 return function(p1)
-	-- upvalues: foundationModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), reactModule (ref), dialog (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), dialogSize (ref)
+	-- upvalues: foundationModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), reactModule (ref), dialog (ref), view (ref), text (ref), icon (ref), iconName (ref), iconSize (ref), dialogSize (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = useFocusRoot({
 		isAutoFocusRoot = true,
@@ -22,6 +23,21 @@ return function(p1)
 	local testId = p1.testId or "account-upgrade-dialog"
 	local var3 = if p1.title then reactModule.createElement(dialog.Title, { text = p1.title }) else nil
 	
+	if p1.subtitle then
+		var3 = reactModule.createElement(view, {
+			tag = "col gap-xsmall size-full-0 auto-y",
+			LayoutOrder = 1,
+			testId = `{testId}--header`
+		}, {
+			Title = var3,
+			Subtitle = reactModule.createElement(text, {
+				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
+				LayoutOrder = 2,
+				Text = p1.subtitle,
+				testId = `{testId}--subtitle`
+			})
+		})
+	end
 	if p1.onCloseActivated then
 		local size400 = var1.Size.Size_400
 		var3 = reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = 1 }, {

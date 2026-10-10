@@ -1,5 +1,5 @@
-﻿local _ = require(script.Parent.Parent.Types)
-local unpackContentModule = require(script.Parent.Parent.ContentKinds.unpackContent)
+﻿local unpackContentModule = require(script.Parent.Parent.ContentKinds.unpackContent)
+local _ = require(script.Parent.projectMessageEnvelope)
 
 local function _(p1, p2)
 	local author = p1.author

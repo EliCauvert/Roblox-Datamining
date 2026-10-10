@@ -13,12 +13,13 @@ return {
 	AppChatVisible = telemetryModule.new({
 		name = "appChatVisible",
 		description = "",
-		lastUpdated = { 2026, 1, 27 },
+		lastUpdated = { 2026, 10, 7 },
 		backendsList = {
 			namedCounterConfigurationAndFormat("AppChat.Navigation.Visible", function(p1)
 				return {
 					isChatEnabled = p1.isChatEnabled,
-					isChatLoading = p1.isChatLoading
+					isChatLoading = p1.isChatLoading,
+					isInConversation = p1.isInConversation
 				}
 			end),
 			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)

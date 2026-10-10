@@ -6,5 +6,6 @@ local _ = require(parent.DataHydration.MomentsStoreTypes)
 local _ = require(parent.MomentsTypes)
 local _ = require(moments.Components.VerticalPager)
 local _ = require(moments.Enums.SignalActionType)
+local _ = require(moments.Enums.NavigationDestinationType)
 
 return {}

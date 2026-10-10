@@ -11,7 +11,6 @@ local fFlagProfilePlatformEnableCurrencyTransfer = sharedFlagsModule.FFlagProfil
 local fFlagProfilePlatformEnableTradeItemsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
 local fFlagProfilePlatformAddTC = sharedFlagsModule.FFlagProfilePlatformAddTC
 local fFlagFixTFLinksVRGatingModule = require(profilePlatform.Flags.FFlagFixTFLinksVRGating)
-local fFlagProfilePlatformEnableUnlockChatModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableUnlockChat)
 local fFlagProfilePlatformEnableUserFollowModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableUserFollow)
 local fFlagFriendsCallingClientGateDEV = sharedFlagsModule.FFlagFriendsCallingClientGate_DEV
 local fFlagJoinabilityCTARefactor = sharedFlagsModule.FFlagJoinabilityCTARefactor
@@ -28,7 +27,8 @@ local list = {
 	enumsModule.ProfileActions.PendingFriendRequest,
 	enumsModule.ProfileActions.QrCode, enumsModule.ProfileActions.Report,
 	enumsModule.ProfileActions.ShareProfile, enumsModule.ProfileActions.Unfriend,
-	enumsModule.ProfileActions.RemoveTrustedConnection
+	enumsModule.ProfileActions.RemoveTrustedConnection,
+	enumsModule.ProfileActions.UnlockChat
 }
 
 if fFlagFriendsCallingClientGateDEV then
@@ -36,9 +36,6 @@ if fFlagFriendsCallingClientGateDEV then
 end
 if fFlagJoinabilityCTARefactor then
 	table.insert(list, enumsModule.ProfileActions.PlayExperience)
-end
-if fFlagProfilePlatformEnableUnlockChatModule then
-	table.insert(list, enumsModule.ProfileActions.UnlockChat)
 end
 if fFlagProfilePlatformEnableEditAppearanceMenuModule then
 	table.insert(list, enumsModule.ProfileActions.EditAppearance)

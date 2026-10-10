@@ -19,7 +19,7 @@ local function TextElementWrapper(p1)
 	local var1 = if typeof(p1.textStyle) == "table" then p1.textStyle else {}
 	
 	return reactModule.createElement(view, {
-		tag = dashModule.join({ ["size-0-0 auto-xy"] = true }, if typeof(p1.viewTags) == "string" then { [p1.viewTags] = true } else p1.viewTags or {}),
+		tag = dashModule.join({ ["size-full-0 auto-y"] = true }, if typeof(p1.viewTags) == "string" then { [p1.viewTags] = true } else p1.viewTags or {}),
 		LayoutOrder = p1.LayoutOrder
 	}, {
 		SelectableText = reactModule.createElement("TextBox", {
@@ -35,8 +35,8 @@ local function TextElementWrapper(p1)
 			TextSize = p1.fontStyle and p1.fontStyle.FontSize,
 			TextColor3 = var1.Color3,
 			TextTransparency = var1.Transparency,
-			Size = UDim2.fromScale(0, 0),
-			AutomaticSize = Enum.AutomaticSize.XY,
+			Size = UDim2.fromScale(1, 0),
+			AutomaticSize = Enum.AutomaticSize.Y,
 			TextXAlignment = Enum.TextXAlignment.Left
 		})
 	})

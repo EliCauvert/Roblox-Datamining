@@ -10,9 +10,12 @@ local useJoinExperienceModule = require(script.Parent.useJoinExperience)
 local useJoinCtaImpressionModule = require(script.Parent.useJoinCtaImpression)
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
 local fFlagMomentsFixRecommendationImpressionLifecycleModule = require(moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
+local navigationDestinationTypeModule = require(moments.Enums.NavigationDestinationType)
+local fFlagMomentsNavigationEventModule = require(moments.Flags.FFlagMomentsNavigationEvent)
+local fFlagMomentsPlayEventModule = require(moments.Flags.FFlagMomentsPlayEvent)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useJoinExperienceModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), useJoinCtaImpressionModule (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), reactModule (ref), button (ref), foundationModule (ref)
+	-- upvalues: useJoinExperienceModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), useJoinCtaImpressionModule (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), reactModule (ref), button (ref), foundationModule (ref), fFlagMomentsNavigationEventModule (ref), navigationDestinationTypeModule (ref), fFlagMomentsPlayEventModule (ref)
 	local var1 = useJoinExperienceModule()
 	local var2 = useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)
 	useJoinCtaImpressionModule(p1.isDisabled == true, p1.reportsImpression == true)
@@ -27,11 +30,8 @@ return reactModule.memo(function(p1)
 		isDisabled = if p1.isDisabled ~= true then var2 else true,
 		testId = p1.testId,
 		onActivated = function()
-			-- upvalues: fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var3 (write), var1 (ref), context (ref)
-			if fFlagMomentsFixRecommendationImpressionLifecycleModule and var3 ~= nil then
-				var3.flushView()
-			end
-			var1(context)
+			-- upvalues: fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var3 (write), fFlagMomentsNavigationEventModule (copy), navigationDestinationTypeModule (copy), var1 (ref), context (ref), fFlagMomentsPlayEventModule (copy)
+			var1(context, nil, if fFlagMomentsPlayEventModule then if fFlagMomentsFixRecommendationImpressionLifecycleModule and var3 ~= nil then var3.flushView(if fFlagMomentsNavigationEventModule then navigationDestinationTypeModule.ExperienceJoin else nil) else nil else nil)
 		end
 	})
 end)

@@ -20,12 +20,17 @@ local _ = require(script.Parent.InstantStatCard)
 local _ = require(script.Parent.AnalyticsOverviewView)
 local metricValueRoundsToZeroModule = require(buildExperience.Analytics.metricValueRoundsToZero)
 local scaleValueToUnitModule = require(buildExperience.Analytics.scaleValueToUnit)
+local t = {}
+
+for i, v in analyticsMetricModule.OverviewMetrics do
+	table.insert(t, v.id)
+end
 local noDataPlaceholderModule = require(buildExperience.Components.Analytics.noDataPlaceholder)
 
 return function(p1, p2, p3, p4, p5)
-	-- upvalues: localizationService (ref), useMetricMetadataModule (ref), analyticsMetricModule (ref), useOverviewStatsModule (ref), useInstantStatsModule (ref), analyticsKeysModule (ref), analyticsWindowModule (ref), useLocalization (ref), scaleValueToUnitModule (ref), dataStatus (ref), metricValueRoundsToZeroModule (ref), analyticsUnitModule (ref), reactModule (ref), iconName (ref), numberLocalization (ref), noDataPlaceholderModule (ref)
+	-- upvalues: localizationService (ref), useMetricMetadataModule (ref), t (ref), useOverviewStatsModule (ref), useInstantStatsModule (ref), analyticsKeysModule (ref), analyticsWindowModule (ref), analyticsMetricModule (ref), useLocalization (ref), scaleValueToUnitModule (ref), dataStatus (ref), metricValueRoundsToZeroModule (ref), analyticsUnitModule (ref), reactModule (ref), iconName (ref), numberLocalization (ref), noDataPlaceholderModule (ref)
 	local robloxLocaleId = localizationService.RobloxLocaleId
-	local var1 = useMetricMetadataModule(analyticsMetricModule.OverviewMetrics)
+	local var1 = useMetricMetadataModule(t)
 	local var2 = useOverviewStatsModule(p1, p2, var1.latestByMetric)
 	local var3 = useInstantStatsModule(p1)
 	local cloned = table.clone({
@@ -53,7 +58,7 @@ return function(p1, p2, p3, p4, p5)
 		return var4[p6.id]
 	end
 	
-	local t = {}
+	local t_1 = {}
 	
 	for i_1, v_1 in analyticsMetricModule.OverviewMetrics do
 		local id = var2[v_1.id]
@@ -61,7 +66,7 @@ return function(p1, p2, p3, p4, p5)
 		local var6 = if var1.status ~= dataStatus.NotReady then var1.status == dataStatus.Ready and ((var1.latestByMetric ~= nil and var1.latestByMetric[v_1.id] ~= nil) and id.status == dataStatus.NotReady) else true
 		local var7 = if id.priorValue ~= nil then nil else scaleValueToUnitModule(id.priorValue, v_1.unit)
 		local var8 = if var7 ~= nil then not metricValueRoundsToZeroModule(var7, v_1.unit, nil, robloxLocaleId) else true
-		t[i_1] = {
+		t_1[i_1] = {
 			title = var4[v_1.id],
 			statValue = var5,
 			statUnit = v_1.unit,
@@ -125,17 +130,17 @@ return function(p1, p2, p3, p4, p5)
 		players,
 		likes
 	})
-	local t_1 = {}
+	local t_2 = {}
 	
 	for i_2, v_2 in analyticsWindowModule.Windows do
-		t_1[i_2] = { id = v_2.id, label = var4[v_2.id] }
+		t_2[i_2] = { id = v_2.id, label = var4[v_2.id] }
 	end
 	return {
 		overviewTitle = var4.overviewTitle,
 		keyStatsTitle = var4.keyStatsTitle,
 		instantStats = var9,
-		statsCards = t,
-		windows = t_1,
+		statsCards = t_1,
+		windows = t_2,
 		sheet = if not (p4 == nil or analyticsMetricModule.MetricById[p4] == nil) then {
 			metricId = p4,
 			universeId = p1,

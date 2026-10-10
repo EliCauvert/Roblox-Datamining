@@ -4,27 +4,17 @@ local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local APIUtilModule = require(parent.util.APIUtil)
-local getFFlagUGCValidateEmotesBonesAllowedModule = require(parent.flags.getFFlagUGCValidateEmotesBonesAllowed)
-local getFFlagUGCValidateEmotesBoneUserVerificationModule = require(parent.flags.getFFlagUGCValidateEmotesBoneUserVerification)
-local getFFlagUGCValidateAnimBonesSupportModule = require(parent.flags.getFFlagUGCValidateAnimBonesSupport)
 local t = {
-	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION }
-}
-
-if getFFlagUGCValidateAnimBonesSupportModule() then
-	table.insert(t.categories, validationEnumsModule.UploadCategory.ANIMATION)
-end
-t.requiredData = { validationEnumsModule.SharedDataMember.consumerConfig }
-t.conditionalData = { validationEnumsModule.SharedDataMember.curveAnimBoneData }
-
-function t.fflag()
-	-- upvalues: getFFlagUGCValidateEmotesBonesAllowedModule (ref), getFFlagUGCValidateAnimBonesSupportModule (ref)
-	return getFFlagUGCValidateEmotesBonesAllowedModule() or getFFlagUGCValidateAnimBonesSupportModule()
-end
-
-t.expectedFailures = {}
-t.prereqTests = {
-	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+	categories = {
+		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		validationEnumsModule.UploadCategory.ANIMATION
+	},
+	requiredData = { validationEnumsModule.SharedDataMember.consumerConfig },
+	conditionalData = { validationEnumsModule.SharedDataMember.curveAnimBoneData },
+	expectedFailures = {},
+	prereqTests = {
+		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+	}
 }
 
 local function checkTrustedCreatorPermission()
@@ -46,8 +36,7 @@ local function checkTrustedCreatorPermission()
 end
 
 function t.run(p1, p2)
-	-- upvalues: getFFlagUGCValidateEmotesBoneUserVerificationModule (ref), validationEnumsModule (ref), errorSourceStringsModule (ref), checkTrustedCreatorPermission (ref)
-	if not getFFlagUGCValidateEmotesBoneUserVerificationModule() then return end
+	-- upvalues: validationEnumsModule (ref), errorSourceStringsModule (ref), checkTrustedCreatorPermission (ref)
 	local validationEnv = p2.consumerConfig.validationEnv
 	
 	if validationEnv == validationEnumsModule.ValidationEnv.IEC then

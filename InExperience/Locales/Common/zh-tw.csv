@@ -109,7 +109,6 @@ Authentication.SignUp.Action.Create,建立
 Authentication.SignUp.Action.CreateAccountSentenceCase,建立帳號
 Authentication.SignUp.Action.ExitModalLeave,離開
 Authentication.SignUp.Action.RespawnNow,立即重生
-Authentication.SignUp.Action.StartPlay,開始遊玩
 Authentication.SignUp.Button.OKCaptialized,確定
 Authentication.SignUp.Button.RetryLogIn,重試登入
 Authentication.SignUp.Description.AccountAlreadyLinked,你的 {platformAccountName} 帳號已與 Roblox 帳號綁定。請試著重新登入。
@@ -720,6 +719,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,類別*
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,其他
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,選擇類別
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,購買問題
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,建議
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,最多 {MAX} 個字元
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,詳細資訊*
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,取消選擇
@@ -727,6 +727,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,請提供�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,請描述遺失的物品，以及最後一次看到該物品的時間。若帳號遭到駭客入侵，請提供你的 Roblox 客服票證編號，以及任何相關的詳細資訊。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,請在此描述你的請求或問題。請盡可能提供詳細資訊，以利我們瞭解情況。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,請告訴我們你嘗試購買的商品、購買時間以及總價值（例如 500 Robux／$4.99），並附上你看到的任何錯誤訊息。
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,分享你希望新增或改善的內容，以及這麼做如何使遊戲變得更好。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,想檢舉濫用嗎？
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>改為提交檢舉。</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,選擇
@@ -1252,6 +1253,19 @@ Corescripts.AvatarContextMenu.FriendRequestPending,好友邀請待處理
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,已封鎖使用者
 Corescripts.AvatarContextMenu.Wave,揮手
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,持續遊玩
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Roblox 精選
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,首頁其他
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,首頁推薦
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,平台廣告
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,搜尋廣告
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,贊助廣告
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,往下捲動
 Feature.Accessibility.Action.ScrollUp,往上捲動

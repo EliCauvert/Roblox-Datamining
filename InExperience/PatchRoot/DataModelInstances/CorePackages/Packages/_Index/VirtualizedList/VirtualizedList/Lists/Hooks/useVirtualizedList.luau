@@ -43,6 +43,8 @@ return function(p4)
 		if current == nil then
 			return
 		end
+		var4(current.AbsoluteWindowSize.Y)
+		var8(current.CanvasPosition.Y)
 		local var9 = current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 			-- upvalues: var4 (copy), current (ref)
 			var4(current.AbsoluteWindowSize.Y)

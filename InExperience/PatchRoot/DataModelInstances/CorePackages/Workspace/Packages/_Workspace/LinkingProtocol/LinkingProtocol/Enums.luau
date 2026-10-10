@@ -1,1 +1,4 @@
-﻿return { SettingsRoute = require(script.SettingsRoute) }
+﻿return {
+	DeepLinkSource = require(script.DeepLinkSource),
+	SettingsRoute = require(script.SettingsRoute)
+}

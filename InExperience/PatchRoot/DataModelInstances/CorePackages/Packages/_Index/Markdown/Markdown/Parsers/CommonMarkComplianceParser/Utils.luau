@@ -18,7 +18,7 @@ local t_1 = {
 		return if p1.name == "TEXT" then string.find(p1.text, "\n", 0, true) ~= nil else true
 	end,
 	getTokenNameFromCharAndLength = function(p1, p2)
-		return if p1 == "`" then "INLINE_CODE" elseif p2 == 2 then if p1 == "*" then "BOLD_2" else "ITALIC_2" elseif p1 == "*" then "BOLD" elseif p1 == "~" then "STRIKE" else "ITALIC"
+		return if p1 == "`" then "INLINE_CODE" elseif p1 == "~" then "STRIKE" elseif p2 == 2 then if p1 == "*" then "BOLD_2" else "ITALIC_2" elseif p1 == "*" then "BOLD" else "ITALIC"
 	end,
 	canDelimitersMatch = function(p1, p2)
 		return if p1.runLength == 0 or p2.runLength == 0 then false elseif if p1.canOpen then p1.canClose else p2.canOpen and p2.canClose then p1.runLength % 3 == 0 and p2.runLength % 3 == 0 or (p1.runLength + p2.runLength) % 3 ~= 0 else true

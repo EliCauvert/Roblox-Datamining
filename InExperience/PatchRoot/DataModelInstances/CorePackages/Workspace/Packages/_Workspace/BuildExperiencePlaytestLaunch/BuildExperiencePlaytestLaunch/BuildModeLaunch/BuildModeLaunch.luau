@@ -20,14 +20,18 @@ function t.new()
 		cachedResult = nil,
 		cachedSelectedTheme = nil,
 		cachedChatSessionId = nil,
-		cachedChatPlaceId = nil
+		cachedChatPlaceId = nil,
+		cachedTeamTestPlaceId = nil
 	}, t)
 end
 
-function t:set(p1, p2)
+function t:set(p1, p2, p3)
 	-- upvalues: fFlagBuildExperienceLibrary (ref), notificationService (ref), memStorageService (ref), httpService (ref)
 	local t = { hasBuildMode = true }
 	
+	if p3 then
+		t.teamTestPlaceId = p2
+	end
 	if fFlagBuildExperienceLibrary then
 		local var1
 		local selectedTheme = notificationService.SelectedTheme
@@ -54,6 +58,7 @@ function t:hasBuildMode()
 		self.cachedChatSessionId = nil
 		self.cachedChatPlaceId = nil
 	end
+	self.cachedTeamTestPlaceId = nil
 	local buildExperienceLaunchDataItem = memStorageService:GetItem("BuildExperienceLaunchData")
 	
 	if buildExperienceLaunchDataItem == "" then
@@ -71,6 +76,9 @@ function t:hasBuildMode()
 	memStorageService:SetItem("BuildExperienceLaunchData", "")
 	self.cachedResult = status.hasBuildMode == true
 	
+	if self.cachedResult and type(status.teamTestPlaceId) == "number" then
+		self.cachedTeamTestPlaceId = status.teamTestPlaceId
+	end
 	if fFlagBuildExperienceLibrary and self.cachedResult then
 		local var1
 		local selectedTheme = status.selectedTheme
@@ -102,6 +110,12 @@ function t:getChatSessionId(p1)
 	self:hasBuildMode()
 	
 	return if self.cachedChatPlaceId == p1 then self.cachedChatSessionId else nil
+end
+
+function t:getTeamTestPlaceId()
+	self:hasBuildMode()
+	
+	return self.cachedTeamTestPlaceId
 end
 
 return t

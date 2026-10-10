@@ -15,6 +15,7 @@ local sharedFlags = dependenciesModule.SharedFlags
 local useLocalization = dependenciesModule.Hooks.useLocalization
 local useSelector = dependenciesModule.Hooks.useSelector
 local fFlagSquadsPresenceStoreMigration = require(parent.SquadsCore.Flags).FFlagSquadsPresenceStoreMigration
+local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local var1 = if fFlagSquadsPresenceStoreMigration then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
 local var2 = if fFlagSquadsPresenceStoreMigration then require(parent.DataHydration).Presence.PresenceEnums.PresenceType else nil
 local useParticipant = crossExperienceVoiceModule.Hooks.useParticipant
@@ -43,7 +44,7 @@ local fFlagEnableBlackbirdCheck = sharedFlags.FFlagEnableBlackbirdCheck
 local useIsRobloxSubscriber = userProfilesModule.Hooks.useIsRobloxSubscriber
 
 return function(p1)
-	-- upvalues: useLocalization (ref), useTokens (ref), useAnimatedTransparency (ref), partyVoiceActivityIndicatorAnimationMs (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), userProfilesModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), react (ref), fFlagSquadsPresenceStoreMigration (ref), var1 (ref), useSelector (ref), var2 (ref), presenceType (ref), useLocalUserId (ref), getFFlagEnableCrossExpVoice (ref), useIsVoiceConnected (ref), useIsMicPermissionsError (ref), useParticipant (ref), useIsVoiceConnecting (ref), useIsActiveParticipant (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsUserPartyVoiceEligible (ref), useIsCurrentSquadPartyVoiceEligible (ref), useIsParticipantMutedLocally (ref), useIsParticipantMuted (ref), useIsParticipantInOtherAudioContext (ref), fFlagEnablePartyVoiceChangersInLua (ref), crossExperienceVoiceModule (ref), partyVoiceActivityIndicatorDebounceMs (ref), squadUserPartyStatusModule (ref), foundation (ref), iconSize (ref), builderIconsModule (ref), useSquadUserDropdownMenuButtonsModule (ref), imageSetLabel (ref)
+	-- upvalues: useLocalization (ref), useTokens (ref), useAnimatedTransparency (ref), partyVoiceActivityIndicatorAnimationMs (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), userProfilesModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), react (ref), fFlagSquadsPresenceStoreMigration (ref), var1 (ref), useSelector (ref), var2 (ref), presenceType (ref), useLocalUserId (ref), getFFlagEnableCrossExpVoice (ref), useIsVoiceConnected (ref), useIsMicPermissionsError (ref), useParticipant (ref), useIsVoiceConnecting (ref), useIsActiveParticipant (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsUserPartyVoiceEligible (ref), useIsCurrentSquadPartyVoiceEligible (ref), useIsParticipantMutedLocally (ref), useIsParticipantMuted (ref), useIsParticipantInOtherAudioContext (ref), fFlagEnablePartyVoiceChangersInLua (ref), crossExperienceVoiceModule (ref), partyVoiceActivityIndicatorDebounceMs (ref), squadUserPartyStatusModule (ref), foundation (ref), iconSize (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), builderIconsModule (ref), useSquadUserDropdownMenuButtonsModule (ref), imageSetLabel (ref)
 	local var3, onlinePresenceText
 	local var4 = useLocalization({
 		connectingText = "Feature.Squads.Label.Connecting",
@@ -61,6 +62,7 @@ return function(p1)
 	})
 	local var10 = if var9.data then userProfilesModule.Selectors.getCombinedNameFromId(var9.data, p1.user.userId) else ""
 	local var11 = getStandardSizeAvatarHeadShotRbxthumb(tostring(p1.user.userId))
+	local userId = `--social-squad-lobby-user-card-{p0.user.userId}`
 	local var12 = if fFlagSquadsPresenceStoreMigration then var1(tostring(p1.user.userId)) else useSelector(react.useCallback(function(p2)
 		-- upvalues: p1 (ref)
 		return p2.Squad.Presence.byUserId[tostring(p1.user.userId)]
@@ -134,26 +136,35 @@ return function(p1)
 		var4.noResponse, var4.invitedText, var4.connectingText
 	})
 	local var31 = react.useMemo(function()
-		-- upvalues: p1 (ref), squadUserPartyStatusModule (copy), react (copy), foundation (copy), iconSize (copy), var5 (ref), var3 (ref), var20 (write), var13 (ref)
+		-- upvalues: p1 (ref), squadUserPartyStatusModule (copy), react (copy), foundation (copy), iconSize (copy), var5 (ref), fFlagSquadsEnableFoundationTestIdsModule (copy), userId (ref), var3 (ref), var20 (write), var13 (ref)
 		return if p1.user.partyStatus == squadUserPartyStatusModule.Invited then react.createElement(foundation.View, { tag = "auto-xy" }, {
 			LoadingIcon = react.createElement(foundation.Loading, {
 				LayoutOrder = 1,
 				size = iconSize.Small,
-				Padding = var5.Padding.XSmall
+				Padding = var5.Padding.XSmall,
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then `{userId}--loading` else nil
 			})
 		}) elseif p1.user.partyStatus == squadUserPartyStatusModule.NoResponse then nil elseif var3 or var20 then react.createElement(foundation.View, { tag = "auto-xy" }, {
 			LoadingIcon = react.createElement(foundation.Loading, {
 				LayoutOrder = 1,
 				size = iconSize.Small,
-				Padding = var5.Padding.XSmall
+				Padding = var5.Padding.XSmall,
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then `{userId}--loading` else nil
 			})
 		}) elseif var13 then react.createElement(foundation.Icon, {
 			LayoutOrder = 1,
 			name = "icons/common/play",
 			size = iconSize.Small,
-			style = var5.Color.Content.Emphasis
+			style = var5.Color.Content.Emphasis,
+			testId = if fFlagSquadsEnableFoundationTestIdsModule then `{userId}--in-game-icon` else nil
 		}) else nil
-	end, { p1.user and p1.user.partyStatus, var3, var20, var13 })
+	end, {
+		p1.user and p1.user.partyStatus,
+		var3,
+		var20,
+		var13,
+		userId
+	})
 	
 	return react.createElement(foundation.View, {
 		LayoutOrder = p1.layoutOrder,
@@ -166,7 +177,8 @@ return function(p1)
 			if p1.onActivated then
 				p1.onActivated(tostring(p1.user.userId))
 			end
-		end, { p1.onActivated, p1.user.userId }) else nil
+		end, { p1.onActivated, p1.user.userId }) else nil,
+		testId = if fFlagSquadsEnableFoundationTestIdsModule then userId else nil
 	}, {
 		AvatarImage = react.createElement(imageSetLabel, {
 			ZIndex = 0,
@@ -224,7 +236,7 @@ return function(p1)
 				PaddingTop = UDim.new(0, var5.Padding.Medium)
 			}),
 			Name = react.useMemo(function()
-				-- upvalues: var10 (write), react (copy), var5 (ref), p1 (ref), foundation (copy), iconSize (copy), var21 (write), var19 (write), var17 (write), var18 (write), fFlagEnablePartyVoiceChangersInLua (copy), var22 (write), builderIconsModule (copy), fFlagEnableBlackbirdCheck (copy), var8 (ref)
+				-- upvalues: var10 (write), react (copy), var5 (ref), p1 (ref), foundation (copy), iconSize (copy), fFlagSquadsEnableFoundationTestIdsModule (copy), userId (ref), var21 (write), var19 (write), var17 (write), var18 (write), fFlagEnablePartyVoiceChangersInLua (copy), var22 (write), builderIconsModule (copy), fFlagEnableBlackbirdCheck (copy), var8 (ref)
 				return if var10 == "" then nil else react.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
@@ -241,37 +253,43 @@ return function(p1)
 						LayoutOrder = 1,
 						name = "icons/status/unavailable_small",
 						size = iconSize.Small,
-						style = var5.Color.Extended.Red.Red_800
+						style = var5.Color.Extended.Red.Red_800,
+						testId = if fFlagSquadsEnableFoundationTestIdsModule then `{userId}--blocked-icon` else nil
 					}) else nil,
 					MutedLocallyIcon = if var21 then react.createElement(foundation.Icon, {
 						LayoutOrder = 2,
 						name = "icons/controls/voice/microphone_off_small_dark",
 						size = iconSize.Small,
-						style = var5.Color.Extended.Red.Red_800
+						style = var5.Color.Extended.Red.Red_800,
+						testId = if fFlagSquadsEnableFoundationTestIdsModule then `{userId}--muted-locally-icon` else nil
 					}) else nil,
 					MutedIcon = if var19 then react.createElement(foundation.Icon, {
 						LayoutOrder = 3,
 						name = "icons/controls/microphoneMute_small",
 						size = iconSize.Small,
-						style = var5.Color.Content.Emphasis
+						style = var5.Color.Content.Emphasis,
+						testId = if fFlagSquadsEnableFoundationTestIdsModule then `{userId}--muted-icon` else nil
 					}) else nil,
 					NotVoiceParticipantIcon = if var17 then react.createElement(foundation.Icon, {
 						LayoutOrder = 4,
 						name = "icons/controls/headphoneDeafen_small",
 						size = iconSize.Small,
-						style = var5.Color.Content.Emphasis
+						style = var5.Color.Content.Emphasis,
+						testId = if fFlagSquadsEnableFoundationTestIdsModule then `{userId}--not-voice-participant-icon` else nil
 					}) else nil,
 					NotEligibleVoiceParticipant = if var18 then react.createElement(foundation.Icon, {
 						LayoutOrder = 5,
 						name = "icons/controls/headphoneDeafen_small",
 						size = iconSize.Small,
-						style = var5.Color.System.Warning
+						style = var5.Color.System.Warning,
+						testId = if fFlagSquadsEnableFoundationTestIdsModule then `{userId}--not-eligible-voice-participant-icon` else nil
 					}) else nil,
 					VoiceChangerActiveIcon = if fFlagEnablePartyVoiceChangersInLua and var22 then react.createElement(foundation.Icon, {
 						LayoutOrder = 6,
 						size = iconSize.Small,
 						name = builderIconsModule.Icon.DiamondSimplified,
-						style = var5.Color.Content.Emphasis
+						style = var5.Color.Content.Emphasis,
+						testId = if fFlagSquadsEnableFoundationTestIdsModule then `{userId}--voice-changer-icon` else nil
 					}) else nil,
 					NameTextLabel = if not fFlagEnableBlackbirdCheck then react.createElement(foundation.Text, {
 						TextWrapped = false,
@@ -283,7 +301,8 @@ return function(p1)
 						Text = var10,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextYAlignment = Enum.TextYAlignment.Center,
-						TextTruncate = Enum.TextTruncate.AtEnd
+						TextTruncate = Enum.TextTruncate.AtEnd,
+						testId = if fFlagSquadsEnableFoundationTestIdsModule then `{userId}--name` else nil
 					}, {
 						UIFlexItem = react.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill })
 					}) else nil,
@@ -310,7 +329,8 @@ return function(p1)
 							Text = var10,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextYAlignment = Enum.TextYAlignment.Center,
-							TextTruncate = Enum.TextTruncate.AtEnd
+							TextTruncate = Enum.TextTruncate.AtEnd,
+							testId = if fFlagSquadsEnableFoundationTestIdsModule then `{userId}--name` else nil
 						}, {
 							UIFlexItem = react.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink })
 						}),
@@ -318,17 +338,18 @@ return function(p1)
 							LayoutOrder = 2,
 							size = iconSize.Small,
 							name = foundation.Enums.IconName.RobloxPlus,
-							style = var5.Color.Content.Emphasis
+							style = var5.Color.Content.Emphasis,
+							testId = if fFlagSquadsEnableFoundationTestIdsModule then `{userId}--subscription-badge` else nil
 						}) else nil
 					}) else nil
 				})
 			end, {
 				var10, var19, var21, p1.isBlocked, var5, var17, var18,
 				if fFlagEnablePartyVoiceChangersInLua then var22 else nil,
-				if fFlagEnableBlackbirdCheck then var8 else nil
+				if fFlagEnableBlackbirdCheck then var8 else nil, userId
 			}),
 			Presence = if not p1.isBlocked then react.useMemo(function()
-				-- upvalues: react (copy), var5 (ref), var31 (ref), foundation (copy), var30 (ref)
+				-- upvalues: react (copy), var5 (ref), var31 (ref), foundation (copy), var30 (ref), fFlagSquadsEnableFoundationTestIdsModule (copy), userId (ref)
 				return react.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
@@ -352,14 +373,15 @@ return function(p1)
 						Text = var30,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextYAlignment = Enum.TextYAlignment.Center,
-						TextTruncate = Enum.TextTruncate.AtEnd
+						TextTruncate = Enum.TextTruncate.AtEnd,
+						testId = if fFlagSquadsEnableFoundationTestIdsModule then `{userId}--presence` else nil
 					}, {
 						UIFlexItem = react.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill })
 					})
 				})
 			end, {
 				var3, var20, var13, var4.connectingText, onlinePresenceText, var5, var31,
-				var30
+				var30, userId
 			}) else nil
 		}),
 		ActiveBorder = react.createElement("Frame", {

@@ -1,4 +1,6 @@
-﻿local parent = script:FindFirstAncestor("Squads").Parent
+﻿local squads = script:FindFirstAncestor("Squads")
+local parent = squads.Parent
+local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local squadExternalContractProviderModule = require(parent.SquadsCore.SquadExternalContractProvider)
@@ -18,7 +20,7 @@ local squadExternalContractContext = squadExternalContractProviderModule.SquadEx
 local updateScheduledSquad = require(parent.SquadsCore.NetworkRequests).updateScheduledSquad
 
 return function(p1)
-	-- upvalues: reactModule (ref), squadExternalContractContext (ref), useDispatch (ref), useLocalUserId (ref), useStore (ref), useLocalization (ref), squadPromptType (ref), updateScheduledSquad (ref), eventNamesModule (ref), squadPromptResponse (ref), createScheduledSquad (ref), sheet (ref), text (ref), foundationModule (ref), view (ref)
+	-- upvalues: reactModule (ref), squadExternalContractContext (ref), useDispatch (ref), useLocalUserId (ref), useStore (ref), useLocalization (ref), squadPromptType (ref), updateScheduledSquad (ref), eventNamesModule (ref), squadPromptResponse (ref), createScheduledSquad (ref), sheet (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), text (ref), foundationModule (ref), view (ref)
 	local var1
 	local var2 = reactModule.useContext(squadExternalContractContext)
 	local var3 = useDispatch()
@@ -36,7 +38,7 @@ return function(p1)
 	})
 	local useState = reactModule.useState
 	local var7 = if p1.scheduledSquad and p1.scheduledSquad.startTime then p1.scheduledSquad.startTime else nil
-	useState, var9 = useState(var7)
+	useState, var11 = useState(var7)
 	local var8, var9 = reactModule.useState(false)
 	local var10, var11 = reactModule.useState(if p1.scheduledSquad then p1.scheduledSquad.title else "")
 	local var12, var13 = reactModule.useState(false)
@@ -157,14 +159,16 @@ return function(p1)
 	local t = {
 		preferCenterSheet = true,
 		onClose = p1.onClose,
-		isOpen = p1.isOpen
+		isOpen = p1.isOpen,
+		testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-scheduled-party-sheet" else nil
 	}
 	local t_1 = {
 		Header = reactModule.createElement(sheet.Header, {}, {
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-wrap text-heading-medium text-align-x-left",
-				Text = var6.scheduleAPartyText
+				Text = var6.scheduleAPartyText,
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-scheduled-party-sheet--title" else nil
 			})
 		}),
 		Content = reactModule.createElement(sheet.Content, {}, {
@@ -178,7 +182,8 @@ return function(p1)
 				onChanged = var18,
 				selectableDateRange = { endDate = var20(), startDate = currentDateTime },
 				variant = foundationModule.Enums.DateTimePickerVariant.SingleWithTime,
-				width = UDim.new(1, 0)
+				width = UDim.new(1, 0),
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-scheduled-party-sheet--start-time-picker" else nil
 			})
 		})
 	}
@@ -207,13 +212,15 @@ return function(p1)
 	t_6.text = var6.saveText
 	t_6.variant = foundationModule.Enums.ButtonVariant.Emphasis
 	t_6.width = UDim.new(1, 0)
+	t_6.testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-scheduled-party-sheet--save-button" else nil
 	t_5.ConfirmButton = createElement_3(button, t_6)
 	t_5.CancelButton = reactModule.createElement(foundationModule.Button, {
 		LayoutOrder = 2,
 		onActivated = var21,
 		text = var6.cancelText,
 		variant = foundationModule.Enums.ButtonVariant.Standard,
-		width = UDim.new(1, 0)
+		width = UDim.new(1, 0),
+		testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-scheduled-party-sheet--cancel-button" else nil
 	})
 	t_3.ActionList = createElement_2(view, t_4, t_5)
 	t_1.Action = createElement_1(actions, t_2, t_3)

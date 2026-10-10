@@ -39,7 +39,6 @@ local playerPermissionsModule = require(coreGuiService.RobloxGui.Modules.PlayerP
 local scriptProfilerEngineFeature = game:GetEngineFeature("ScriptProfiler")
 local devConsoleRequestOrchestratorTab2 = game:DefineFastFlag("DevConsoleRequestOrchestratorTab2", false)
 local devConsoleAdminSeesDevTabs = game:DefineFastFlag("DevConsoleAdminSeesDevTabs", false)
-local devConsoleRefreshVoiceAvailabilityOnReopen = game:DefineFastFlag("DevConsoleRefreshVoiceAvailabilityOnReopen", false)
 local default = require(coreGuiService.RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 local var1 = false
 local t = {
@@ -273,9 +272,13 @@ function t_4:Start()
 end
 
 function t_4:ToggleVisibility()
-	-- upvalues: var2 (ref)
+	-- upvalues: getFFlagVoiceDebugConsoleV2Module (ref), var2 (ref)
 	if not self.init then
-		var2:Start()
+		if getFFlagVoiceDebugConsoleV2Module() then
+			self:Start()
+		else
+			var2:Start()
+		end
 	end
 	self:SetVisibility(not self.store:getState().DisplayOptions.isVisible)
 end
@@ -299,12 +302,16 @@ function t_4.SetServerStatsConnection(_, p1)
 end
 
 function t_4:SetVisibility(p1)
-	-- upvalues: var2 (ref), devConsoleRefreshVoiceAvailabilityOnReopen (ref), setDevConsoleVisibilityModule (ref)
+	-- upvalues: getFFlagVoiceDebugConsoleV2Module (ref), var2 (ref), setDevConsoleVisibilityModule (ref)
 	if type(p1) == "boolean" then
-		if not self.init and p1 then
+		if self.init or not p1 then
+			if getFFlagVoiceDebugConsoleV2Module() and p1 then
+				self:refreshVoiceDevConsoleAvailability()
+			end
+		elseif getFFlagVoiceDebugConsoleV2Module() then
+			self:Start()
+		else
 			var2:Start()
-		elseif devConsoleRefreshVoiceAvailabilityOnReopen and p1 then
-			self:refreshVoiceDevConsoleAvailability()
 		end
 		self:SetServerStatsConnection(p1)
 		self.store:dispatch(setDevConsoleVisibilityModule(p1))
@@ -323,4 +330,7 @@ starterGuiService:RegisterSetCore("DevConsoleVisible", function(p1)
 	var2:SetVisibility(p1)
 end)
 
+if getFFlagVoiceDebugConsoleV2Module() then
+	var2.Klass = t_4
+end
 return var2

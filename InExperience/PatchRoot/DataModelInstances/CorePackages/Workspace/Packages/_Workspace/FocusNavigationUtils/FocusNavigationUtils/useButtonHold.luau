@@ -2,6 +2,8 @@
 local parent = focusNavigationUtils.Parent
 local argCheckModule = require(parent.ArgCheck)
 local buttonHoldStateEnumModule = require(focusNavigationUtils.ButtonHoldStateEnum)
+local buttonHoldCompletedSignalModule = require(focusNavigationUtils.ButtonHoldCompletedSignal)
+local fFlagEnableFocusNavTelemetry = require(parent.SharedFlags).FFlagEnableFocusNavTelemetry
 local inputHandlersModule = require(parent.InputHandlers)
 local reactModule = require(parent.React)
 
@@ -27,7 +29,7 @@ local function useFakeCancelHoldAfterBlur(p1, p2, p3)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: argCheckModule (ref), reactModule (ref), buttonHoldStateEnumModule (ref), inputHandlersModule (ref), useFakeCancelHoldAfterBlur (ref)
+	-- upvalues: argCheckModule (ref), reactModule (ref), buttonHoldStateEnumModule (ref), fFlagEnableFocusNavTelemetry (ref), buttonHoldCompletedSignalModule (ref), inputHandlersModule (ref), useFakeCancelHoldAfterBlur (ref)
 	argCheckModule.assert(p1 >= 0, "signalHoldIntentSeconds must be greater than or equal to 0")
 	argCheckModule.assert(p2 > 0, "signalHoldCompleteSeconds must be greater than 0")
 	argCheckModule.assert(p1 < p2, "signalHoldIntentSeconds should be less than signalHoldCompleteSeconds")
@@ -35,12 +37,13 @@ return function(p1, p2, p3)
 	local var3 = reactModule.useRef(nil)
 	local var4, var5 = reactModule.useBinding(0)
 	local var6, var7 = reactModule.useState(nil)
-	local var8 = reactModule.useCallback(function()
+	local var8 = if fFlagEnableFocusNavTelemetry then reactModule.useRef(nil) else nil
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: var3 (ref), var2 (ref), buttonHoldStateEnumModule (copy)
 		var3.current = tick()
 		var2(buttonHoldStateEnumModule.JUST_PRESSED)
 	end, {})
-	local var9 = reactModule.useCallback(function(_)
+	local var10 = reactModule.useCallback(function(_)
 		-- upvalues: argCheckModule (copy), var3 (ref), var5 (ref), var4 (ref), p1 (ref), var2 (ref), buttonHoldStateEnumModule (copy)
 		local currentTime = tick()
 		argCheckModule.assert(var3.current ~= nil, "startTime.current should not be nil")
@@ -53,49 +56,62 @@ return function(p1, p2, p3)
 			var2(buttonHoldStateEnumModule.HOLDING)
 		end
 	end, { var4, p1 })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), p2 (ref), var3 (ref), var2 (ref), buttonHoldStateEnumModule (copy)
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), p2 (ref), var3 (ref), var2 (ref), buttonHoldStateEnumModule (copy), fFlagEnableFocusNavTelemetry (copy), var8 (write), buttonHoldCompletedSignalModule (copy)
 		var5(p2)
 		var3.current = nil
 		var2(buttonHoldStateEnumModule.COMPLETED)
+		
+		if fFlagEnableFocusNavTelemetry and var8 and var8.current then
+			local current = var8.current
+			buttonHoldCompletedSignalModule:fire(current.eventName, current.keyCode, current.userInputType)
+		end
 	end, { p2 })
-	local var11 = reactModule.useCallback(function()
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var5 (ref), var3 (ref), var2 (ref), buttonHoldStateEnumModule (copy)
 		var5(0)
 		var3.current = nil
 		var2(buttonHoldStateEnumModule.NOT_HELD)
 	end, {})
-	local var12 = reactModule.useCallback(inputHandlersModule.handleInput({
+	local var13 = reactModule.useCallback(inputHandlersModule.handleInput({
 		hold = {
 			durationSeconds = p2,
-			onStep = var9,
-			onComplete = var10,
+			onStep = var10,
+			onComplete = var11,
 			allowReleaseAfterHold = p3
 		},
-		onPress = var8,
-		onRelease = var11
+		onPress = var9,
+		onRelease = var12
 	}), {
-		var11,
-		var9,
+		var12,
 		var10,
+		var11,
 		p2,
 		p3
 	})
-	local var13 = reactModule.useCallback(function(p4)
-		-- upvalues: var7 (ref), var12 (ref)
+	local var14 = reactModule.useCallback(function(p4)
+		-- upvalues: var7 (ref), fFlagEnableFocusNavTelemetry (copy), var8 (write), var13 (ref)
 		var7(p4.targetInstance)
-		var12(p4)
-	end, { var12 })
-	useFakeCancelHoldAfterBlur(var6, var12, var11)
+		
+		if fFlagEnableFocusNavTelemetry and var8 and p4.eventName then
+			var8.current = {
+				eventName = p4.eventName,
+				keyCode = if p4.eventData then p4.eventData.KeyCode else nil,
+				userInputType = if p4.eventData then p4.eventData.UserInputType else nil
+			}
+		end
+		var13(p4)
+	end, { var13 })
+	useFakeCancelHoldAfterBlur(var6, var13, var12)
 	
 	return {
-		eventHandler = var13,
+		eventHandler = var14,
 		holdState = var1,
 		holdTime = var4,
 		holdProgress = var4:map(function(p4)
 			-- upvalues: p2 (ref)
 			return p4 / p2
 		end),
-		cancelHold = var11
+		cancelHold = var12
 	}
 end

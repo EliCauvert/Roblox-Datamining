@@ -4,7 +4,7 @@ local momentsCommonModule = require(parent.MomentsCommon)
 local _ = require(parent.MomentsTypes)
 local fFlagMomentsImpressionDestinationUniverseIdModule = require(moments.Flags.FFlagMomentsImpressionDestinationUniverseId)
 
-return function(p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: momentsCommonModule (ref), fFlagMomentsImpressionDestinationUniverseIdModule (ref)
 	local recommendationMetadata = p1.recommendationMetadata
 	local feedItemId = recommendationMetadata.feedItemId
@@ -25,6 +25,9 @@ return function(p1, p2)
 	
 	if fFlagMomentsImpressionDestinationUniverseIdModule and universeId ~= nil and universeId > 0 then
 		t.destinationUniverseId = tostring(universeId)
+	end
+	if p3 ~= nil then
+		t.viewId = p3
 	end
 	return t
 end

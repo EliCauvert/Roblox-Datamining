@@ -110,7 +110,6 @@ Authentication.SignUp.Action.Create,作成
 Authentication.SignUp.Action.CreateAccountSentenceCase,アカウントを作成
 Authentication.SignUp.Action.ExitModalLeave,退出
 Authentication.SignUp.Action.RespawnNow,今すぐリスポーン
-Authentication.SignUp.Action.StartPlay,プレイ開始
 Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,ログインをやり直す
 Authentication.SignUp.Description.AccountAlreadyLinked,あなたのプロフィール（{platformAccountName}）は、すでにRobloxアカウントにリンク済みです。もう一度ログインしてみてください。
@@ -721,6 +720,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,カテゴリ*
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,カテゴリを選択
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,購入に関する問題
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,ご提案
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,最大{MAX}文字
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,詳細*
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,選択解除
@@ -728,6 +728,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,ゲーム�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,不足しているものと、最後にそれを見た時期を説明してください。アカウントがハッキングされた場合は、Roblox CSチケット番号と関連する詳細も書き添えてください。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,リクエストまたは問題をこちらに記入してください。状況を把握するため、できるだけ詳しく説明してください。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,購入しようとしたもの、購入しようとした日時、合計金額（例：500 Robux / 4.99ドル）をお知らせください。表示されたエラーメッセージがあれば、それも含めてください。
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,追加または改善してほしい点と、それがゲームをより良くする理由をお聞かせください。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,規約違反を報告しますか？
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>代わりに報告を送信してください。</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,選択
@@ -1253,6 +1254,19 @@ Corescripts.AvatarContextMenu.FriendRequestPending,友達リクエスト中
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,ブロック済みの人
 Corescripts.AvatarContextMenu.Wave,手を振って挨拶
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,プレイを続ける
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,テレポート
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Robloxの注目事項
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,ホーム以外
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,ホームでのおすすめ
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,ポータル広告
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,広告をサーチ
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,スポンサー広告
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,下スクロール
 Feature.Accessibility.Action.ScrollUp,上スクロール
@@ -3174,7 +3188,7 @@ Feature.FaceChat.Subtitle.UnsupportedDevice,お持ちのカメラを使用して
 Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,カメラをオフにすると、パフォーマンスが向上する可能性があります。
 Feature.FaceChat.Subtitle.VideoUnsupported,Robloxがあなたのアバターを動かすカメラを使用できません。
 Feature.Favorites.Label.Favorite,
-Feature.FlyoutSidePanel.Action.ContinuePlaying,プレイを続ける
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,プロフィール、コンテンツ、設定が新しい場所に移動しました。
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b>は移動しました
 Feature.Friends.Action.AcceptFriend,
@@ -3416,7 +3430,7 @@ Feature.GameJoin.Label.PlayTogether,一緒にプレイできます
 Feature.GameJoin.Label.PlayTogetherSoon,もうすぐ一緒にプレイできるようになります
 Feature.GamePage.Action.BackToTop,トップに戻る
 Feature.GamePage.Label.Ad,
-Feature.GamePage.Label.Sponsored,スポンサー広告
+Feature.GamePage.Label.Sponsored,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,このバーチャル空間は、年齢確認の状態によって利用できません。
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,ゲストはこのバーチャル空間に参加できません。
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,このバーチャル空間に行くには購入が必要です。

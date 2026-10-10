@@ -441,9 +441,10 @@ return reactModule.memo(function(p1)
 	local transparencyValue = p1.transparencyValue or 0
 	local maximumCharacterLimit = p1.maximumCharacterLimit
 	local var6 = fFlagExpChatEnableFriendsTab and (not canLocalUserChat and p1.disabledOverlay ~= nil)
+	local pillStrokeStyle = p1.pillStrokeStyle
 	local var7 = reactModule.useMemo(function()
-		-- upvalues: canLocalUserChat (ref), transparencyValue (ref), reactIsModule (copy)
-		if canLocalUserChat then
+		-- upvalues: canLocalUserChat (ref), pillStrokeStyle (ref), transparencyValue (ref), reactIsModule (copy)
+		if canLocalUserChat or pillStrokeStyle ~= nil then
 			return transparencyValue
 		end
 		local var8 = transparencyValue
@@ -457,13 +458,24 @@ return reactModule.memo(function(p1)
 			end)
 		end
 		return var8 * 0.5 + 0.5
-	end, { canLocalUserChat, transparencyValue })
+	end, { canLocalUserChat, transparencyValue, pillStrokeStyle })
 	local var8 = reactModule.useMemo(function()
 		-- upvalues: deriveBackgroundStyle (copy), var2 (ref), var7 (ref)
 		return deriveBackgroundStyle(var2, 0.2, var7)
 	end, { var2, var7 })
 	local var9 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), var7 (ref), reactIsModule (copy)
+		-- upvalues: pillStrokeStyle (ref), transparencyValue (ref), reactIsModule (copy), var1 (ref), var7 (ref)
+		if pillStrokeStyle then
+			local t = { Color = pillStrokeStyle.Color3 }
+			local transparency = pillStrokeStyle.Transparency or 0
+			local var10 = transparencyValue
+			t.Transparency = if reactIsModule.isBinding(var10) then var10:map(function(p2)
+				-- upvalues: transparency (ref)
+				return transparency + p2 * (1 - transparency)
+			end) else transparency + var10 * (1 - transparency)
+			
+			return t
+		end
 		local t = { Color = var1.Color.Stroke.Default.Color3 }
 		local transparency = var1.Color.Stroke.Default.Transparency
 		t.Transparency = if reactIsModule.isBinding(var7) then var7:map(function(p2)
@@ -472,7 +484,7 @@ return reactModule.memo(function(p1)
 		end) else transparency + var7 * (1 - transparency)
 		
 		return t
-	end, { var1, var7 })
+	end, { var1, var7, pillStrokeStyle, transparencyValue })
 	local var10 = reactModule.useMemo(function()
 		-- upvalues: deriveTransparency (copy), transparencyValue (ref)
 		return deriveTransparency(0, transparencyValue)

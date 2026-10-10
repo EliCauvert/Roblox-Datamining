@@ -121,6 +121,18 @@ function t_1:split(p2, p3)
 	return props, nil
 end
 
+function t_1:trimStart()
+	-- upvalues: join (ref)
+	local text = self.props.Text
+	
+	if text == nil then
+		return self
+	end
+	local var1 = text:gsub("^%s+", "")
+	
+	return if var1 == "" then nil elseif var1 == text then self else self:_clone(join(self.props, { Text = var1 }))
+end
+
 function t_1:render(p2, p3)
 	-- upvalues: escape (ref), dashModule (ref), reactModule (ref), join (ref)
 	return reactModule.createElement(self.Element, self.mapProps(join(self.props, {

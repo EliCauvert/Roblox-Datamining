@@ -37,10 +37,9 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local fFlagEnableAEGIS2CommsFAEUpsell = sharedFlagsModule.FFlagEnableAEGIS2CommsFAEUpsell
 local AEGISPhase2ShowImageOnFAEOverlay = game:DefineFastFlag("AEGISPhase2ShowImageOnFAEOverlay", false)
 local forceAegisPhase2Modal = game:DefineFastFlag("ForceAegisPhase2Modal", false)
-local fFlagTFWithActionsCheck = require(parent.SharedFlags).FFlagTFWithActionsCheck
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useSocialUpsellOverlayControllerModule (ref), useLocalization (ref), fFlagAddFriendsPageFAEUpsell (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), fFlagTFWithActionsCheck (ref), reactModule (ref), forceAegisPhase2Modal (ref), upsellEntrySurfaceTypeModule (ref), upsellComponentModule (ref), fFlagMakeVPCFAECheckMoreGeneric (ref), fFlagAddFriendsPageUpdateAmpRules (ref), socialUpsellTypeModule (ref), openAmpWizardContainer (ref), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (ref), accessResponseEnum (ref), fStringCoreContentAmpNameSpace (ref), startFacialAgeEstimationModule (ref), fFlagEnableCountdownBadgeModule (ref), fIntCommsFAELockTimestampModule (ref), upsellOverlayModule (ref), createCommonOverlayPropsModule (ref), var2 (write), AEGISPhase2ShowImageOnFAEOverlay (ref), var1 (ref)
+	-- upvalues: useDispatch (ref), useSocialUpsellOverlayControllerModule (ref), useLocalization (ref), fFlagAddFriendsPageFAEUpsell (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), reactModule (ref), forceAegisPhase2Modal (ref), upsellEntrySurfaceTypeModule (ref), upsellComponentModule (ref), fFlagMakeVPCFAECheckMoreGeneric (ref), fFlagAddFriendsPageUpdateAmpRules (ref), socialUpsellTypeModule (ref), openAmpWizardContainer (ref), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (ref), accessResponseEnum (ref), fStringCoreContentAmpNameSpace (ref), startFacialAgeEstimationModule (ref), fFlagEnableCountdownBadgeModule (ref), fIntCommsFAELockTimestampModule (ref), upsellOverlayModule (ref), createCommonOverlayPropsModule (ref), var2 (write), AEGISPhase2ShowImageOnFAEOverlay (ref), var1 (ref)
 	p1 = p1 or {}
 	local var3 = useDispatch()
 	local var4 = useSocialUpsellOverlayControllerModule(p1.isInExperience)
@@ -53,24 +52,24 @@ return function(p1)
 		YouNeedAnAgeCheckToUseChatThisMakesChatSafer = "Feature.FAE.Label.YouNeedAnAgeCheckToUseChatThisMakesChatSafer",
 		Continue = "Feature.FAE.Action.Continue",
 		ThisHelpsYouToChatSafelyItOnlyTakesAMoment = "Feature.FAE.Label.ThisHelpsYouToChatSafelyItOnlyTakesAMoment",
+		LetsCheckYourAge = "Feature.FAE.Label.LetsCheckYourAge",
+		ToAddTrustedFriendDoAgeCheck = "Feature.FAE.Label.ModalBodyTFUnlock",
 		ChatWithFriends = if fFlagAddFriendsPageFAEUpsell then "Feature.FAE.Label.ChatWithFriends" else nil,
 		GetASecureAgeCheckToUnlockChatAndAddTrustedFriends = if fFlagAddFriendsPageFAEUpsell then "Feature.FAE.Label.GetASecureAgeCheckToUnlockChatAndAddTrustedFriends" else nil,
 		Unlock = if fFlagAddFriendsPageFAEUpsell then "Feature.FAE.Action.Unlock" else nil,
 		ThisAllowsYouToChatSafelyItOnlyTakesAMoment = if fFlagEnableAEGIS2CommsFAEUpsell then "Feature.FAE.Label.ThisAllowsYouToChatSafelyItOnlyTakesAMoment" else nil,
-		UnlockChat = if fFlagEnableAEGIS2CommsFAEUpsell then "Feature.FAE.Action.UnlockChat" else nil,
-		LetsCheckYourAge = if fFlagTFWithActionsCheck then "Feature.FAE.Label.LetsCheckYourAge" else nil,
-		ToAddTrustedFriendDoAgeCheck = if fFlagTFWithActionsCheck then "Feature.FAE.Label.ModalBodyTFUnlock" else nil
+		UnlockChat = if fFlagEnableAEGIS2CommsFAEUpsell then "Feature.FAE.Action.UnlockChat" else nil
 	})
 	local var6 = reactModule.useRef(false)
 	local var7, var8 = reactModule.useMemo(function()
-		-- upvalues: fFlagEnableAEGIS2CommsFAEUpsell (copy), forceAegisPhase2Modal (copy), p1 (ref), var5 (ref), upsellEntrySurfaceTypeModule (copy), upsellComponentModule (copy), fFlagAddFriendsPageFAEUpsell (copy), fFlagTFWithActionsCheck (copy)
+		-- upvalues: fFlagEnableAEGIS2CommsFAEUpsell (copy), forceAegisPhase2Modal (copy), p1 (ref), var5 (ref), upsellEntrySurfaceTypeModule (copy), upsellComponentModule (copy), fFlagAddFriendsPageFAEUpsell (copy)
 		if fFlagEnableAEGIS2CommsFAEUpsell and (forceAegisPhase2Modal or p1.isPhase2) then
 			return var5.LetsCheckYourAgeSoYouCanUseChat, var5.ThisHelpsYouToChatSafelyItOnlyTakesAMoment
 		elseif p1.upsellEntrySurface == upsellEntrySurfaceTypeModule.Homepage and p1.upsellEntryComponent == upsellComponentModule.Modal or p1.upsellEntrySurface == upsellEntrySurfaceTypeModule.NotifPush then
 			return var5.YourSafetyMattersLetsCheckYourAge, var5.YouNeedAnAgeCheckToUseChatThisMakesChatSafer
 		elseif fFlagAddFriendsPageFAEUpsell and p1.upsellEntrySurface == upsellEntrySurfaceTypeModule.AddFriendsPage then
 			return var5.ChatWithFriends, var5.GetASecureAgeCheckToUnlockChatAndAddTrustedFriends
-		elseif fFlagTFWithActionsCheck and (p1.upsellEntrySurface == upsellEntrySurfaceTypeModule.TrustedFriends or p1.upsellEntrySurface == upsellEntrySurfaceTypeModule.TrustedFriendsInExperience) then
+		elseif p1.upsellEntrySurface == upsellEntrySurfaceTypeModule.TrustedFriends or p1.upsellEntrySurface == upsellEntrySurfaceTypeModule.TrustedFriendsInExperience then
 			return var5.LetsCheckYourAge, var5.ToAddTrustedFriendDoAgeCheck
 		end
 		return var5.LetsCheckYourAgeSoYouCanUseChat, var5.ModalBodyInAppV3

@@ -114,16 +114,16 @@ return function(p1)
 			end
 		end
 	end, { var21 })
+	
+	local function _()
+		-- upvalues: var1 (copy), userInputService (copy)
+		return var1.getIsChatFocused() and not var1.getIsTabBarFocused() or userInputService:GetFocusedTextBox() ~= nil
+	end
+	
 	reactModule.useEffect(function()
-		-- upvalues: fFlagExpChatTabShortcutNav (copy), var1 (copy), userInputService (copy), createEffect (copy), p1 (ref), fFlagExpChatUseChannelTabsStore (copy), var9 (ref), var32 (ref), expChatTabNavFocusPollDelayFrames (copy), runService (copy), expChatTabNavFocusPollFrames (copy), var27 (write)
+		-- upvalues: fFlagExpChatTabShortcutNav (copy), createEffect (copy), var1 (copy), p1 (ref), fFlagExpChatUseChannelTabsStore (copy), var9 (ref), var32 (ref), expChatTabNavFocusPollDelayFrames (copy), runService (copy), expChatTabNavFocusPollFrames (copy), userInputService (copy), var27 (write)
 		if fFlagExpChatTabShortcutNav then
 			local var35 = false
-			
-			local function _()
-				-- upvalues: var1 (copy), userInputService (copy)
-				return var1.getIsChatFocused() and not var1.getIsTabBarFocused() or userInputService:GetFocusedTextBox() ~= nil
-			end
-			
 			local var36 = createEffect(function(p2)
 				-- upvalues: var1 (copy), p1 (copy), fFlagExpChatUseChannelTabsStore (copy), var9 (copy), var32 (copy), var35 (write), expChatTabNavFocusPollDelayFrames (copy), runService (copy), expChatTabNavFocusPollFrames (copy), userInputService (copy), var27 (copy)
 				local tabNavFocusRequestTime = var1.getTabNavFocusRequestTime(p2)
@@ -183,8 +183,13 @@ return function(p1)
 		end
 	end, { var32, p1.allChannelTabs })
 	reactModule.useEffect(function()
-		-- upvalues: fFlagExpChatTabShortcutNav (copy), var26 (write), var25 (ref), var18 (ref), var27 (write), p1 (ref)
+		-- upvalues: fFlagExpChatTabShortcutNav (copy), var26 (write), var1 (copy), userInputService (copy), var27 (write), var25 (ref), var18 (ref), p1 (ref)
 		if not fFlagExpChatTabShortcutNav or var26 == nil then return end
+		if var1.getIsChatFocused() and not var1.getIsTabBarFocused() or userInputService:GetFocusedTextBox() ~= nil then
+			var27(nil)
+			
+			return
+		end
 		local var37 = var25.current[var26]
 		
 		if var37 then

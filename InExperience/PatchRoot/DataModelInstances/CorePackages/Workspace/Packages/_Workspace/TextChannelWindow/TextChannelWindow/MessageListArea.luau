@@ -4,11 +4,13 @@ local foundationModule = require(parent.Foundation)
 local _ = require(parent.Signals)
 local chatUIPrimitivesModule = require(parent.ChatUIPrimitives)
 local textChannelWindowAnalyticsModule = require(script.Parent.TextChannelWindowAnalytics)
+local useTranslationToggleAvailableModule = require(script.Parent.useTranslationToggleAvailable)
 local useInExperienceLocalization = require(parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
+local fFlagTCWTranslationSupport = chatUIPrimitivesModule.Flags.FFlagTCWTranslationSupport
 local messageLayoutContainer = chatUIPrimitivesModule.MessageLayoutContainer
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), useInExperienceLocalization (ref), reactModule (ref), textChannelWindowAnalyticsModule (ref), messageLayoutContainer (ref)
+	-- upvalues: foundationModule (ref), useInExperienceLocalization (ref), fFlagTCWTranslationSupport (ref), useTranslationToggleAvailableModule (ref), reactModule (ref), textChannelWindowAnalyticsModule (ref), messageLayoutContainer (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = useInExperienceLocalization()
 	
@@ -41,7 +43,9 @@ return reactModule.memo(function(p1)
 			return textChannelWindowAnalyticsModule.createOnScrollCallback(p1.windowName)
 		end, { p1.windowName }),
 		selectableRows = p1.selectableRows,
-		selectionCursor = p1.selectionCursor
+		selectionCursor = p1.selectionCursor,
+		isTranslationSettingEnabled = if fFlagTCWTranslationSupport then useTranslationToggleAvailableModule() else nil,
+		onLatestUsernameChanged = p1.onLatestUsernameChanged
 	}) else reactModule.createElement(foundationModule.Empty, {
 		icon = { name = "icons/status/oof_xlarge" },
 		text = var2("CoreScripts.TextChat.InputBar.Hint.ChatUnavailable")

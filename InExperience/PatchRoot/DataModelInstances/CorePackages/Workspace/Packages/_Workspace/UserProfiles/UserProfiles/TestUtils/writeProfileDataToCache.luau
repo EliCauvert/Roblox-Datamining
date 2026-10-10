@@ -16,6 +16,7 @@ return function(p1, p2, p3)
 				userProfiles = {
 					{
 						__typename = "UserProfile",
+						platformProfileId = "",
 						id = i,
 						names = cryoModule.Dictionary.join({
 							__typename = "Names",

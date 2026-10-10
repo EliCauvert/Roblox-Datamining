@@ -93,7 +93,6 @@ Authentication.SignUp.Action.Create,क्रिएट करें
 Authentication.SignUp.Action.CreateAccountSentenceCase,अकाउंट बनाएँ
 Authentication.SignUp.Action.ExitModalLeave,छोड़ें
 Authentication.SignUp.Action.RespawnNow,अभी रीस्पॉन करें
-Authentication.SignUp.Action.StartPlay,खेलना शुरू करें
 Authentication.SignUp.Button.OKCaptialized,ठीक है
 Authentication.SignUp.Button.RetryLogIn,फिर से लॉग इन करने की कोशिश करें
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} पर मौजूद आपका अकाउंट पहले से ही Roblox अकाउंट से लिंक किया हुआ है. दोबारा लॉग इन करने की कोशिश करें.
@@ -703,6 +702,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,कैटगरी
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,अन्य
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,कोई कैटगरी चुनें
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,खरीदारी से जुड़ी समस्या
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,सुझाव
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,ज़्यादा से ज़्यादा {MAX} कैरेक्टर
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,जानकारी *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,चुने गए का निशान हटाएँ
@@ -710,6 +710,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"समस�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"बताएँ कि क्या गायब है और आपने उसे आखिरी बार कब देखा था. अगर आपका अकाउंट हैक कर लिया गया था, तो कृपया अपना Roblox CS टिकट नंबर और कोई भी संबंधित जानकारी शामिल करें."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,अपनी रिक्वेस्ट या समस्या की जानकारी यहाँ दें. स्थिति को समझने में हमारी मदद करने के लिए ज़्यादा से ज़्यादा जानकारी दें.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"हमें बताएँ कि आपने क्या खरीदने की कोशिश की, यह कब हुआ और कुल कीमत क्या थी (जैसे कि 500 Robux / $4.99). आपको दिख रहा कोई भी गड़बड़ी मैसेज शामिल करें."
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,यह शेयर करें कि आपको क्या जोड़ने या बेहतर बनाने का मन है और यह भी कि ऐसा करने से गेम कैसे बेहतर बनेगा.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,दुर्व्यवहार की रिपोर्ट करने की कोशिश की जा रही है?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>इसके बजाय रिपोर्ट सबमिट करें.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,चुनें
@@ -1234,6 +1235,19 @@ Corescripts.AvatarContextMenu.FriendRequestPending,फ़्रेंड रि�
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,ब्लॉक किया गया व्यक्ति
 Corescripts.AvatarContextMenu.Wave,वेव करें
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,खेलना जारी रखें
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,टेलीपोर्ट करें
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Roblox ने फ़ीचर किया है
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,होम पेज पर अन्य
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,होम पेज का सुझाव
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,पोर्टल ऐड्स
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,ऐड्स सर्च करें
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,स्पॉन्सर्ड ऐड
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,नीचे स्क्रोल करें
 Feature.Accessibility.Action.ScrollUp,ऊपर स्क्रोल करें
@@ -3155,7 +3169,7 @@ Feature.FaceChat.Subtitle.UnsupportedDevice,"आपका हार्डवे�
 Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,कैमरा बंद करने से एक्सपीरिएंस की परफ़ॉर्मेंस बेहतर हो सकती है.
 Feature.FaceChat.Subtitle.VideoUnsupported,"Roblox आपके अवतार को ऐनिमेट करने के लिए, आपके कैमरे का इस्तेमाल नहीं कर पा रहा है."
 Feature.Favorites.Label.Favorite,
-Feature.FlyoutSidePanel.Action.ContinuePlaying,खेलना जारी रखें
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,"आपकी प्रोफ़ाइल, कॉन्टेंट और सेटिंग नई जगह चली गई हैं."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> को मूव कर दिया गया है
 Feature.Friends.Action.AcceptFriend,

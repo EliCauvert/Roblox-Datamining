@@ -15,7 +15,8 @@ local reactFiberLaneModule = require(script.Parent.ReactFiberLane)
 local _ = require(script.Parent.ReactFiberHostConfig)
 local _ = require(script.Parent.ReactFiberOffscreenComponent)
 local invariant = require(parent.Shared).invariant
-local enableProfilerTimer = require(parent.Shared).ReactFeatureFlags.enableProfilerTimer
+local reactFeatureFlags = require(parent.Shared).ReactFeatureFlags
+local enableProfilerTimer = reactFeatureFlags.enableProfilerTimer
 local reactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
 local noFlags = reactFiberFlagsModule.NoFlags
 local placement = reactFiberFlagsModule.Placement
@@ -142,7 +143,7 @@ local function resolveLazyComponentTag(p1)
 end
 
 local function createWorkInProgress(p1, p2)
-	-- upvalues: createFiber (ref), dEV (ref), noFlags (ref), enableProfilerTimer (ref), staticMask (ref), indeterminateComponent (ref), functionComponent (ref), simpleMemoComponent (ref), resolveFunctionForHotReloading (ref), classComponent (ref), resolveClassForHotReloading (ref), forwardRef (ref), resolveForwardRefForHotReloading (ref)
+	-- upvalues: createFiber (ref), dEV (ref), reactFeatureFlags (ref), noFlags (ref), enableProfilerTimer (ref), staticMask (ref), indeterminateComponent (ref), functionComponent (ref), simpleMemoComponent (ref), resolveFunctionForHotReloading (ref), classComponent (ref), resolveClassForHotReloading (ref), forwardRef (ref), resolveForwardRefForHotReloading (ref)
 	local alternate = p1.alternate
 	
 	if alternate == nil then
@@ -159,10 +160,18 @@ local function createWorkInProgress(p1, p2)
 	else
 		alternate.pendingProps = p2
 		alternate.type = p1.type
-		alternate.flags = noFlags
-		alternate.subtreeFlags = noFlags
-		alternate.deletions = nil
 		
+		if reactFeatureFlags.enableWorkLoopTrims then
+			alternate.subtreeFlags = noFlags
+			
+			if alternate.deletions ~= nil then
+				alternate.deletions = nil
+			end
+		else
+			alternate.flags = noFlags
+			alternate.subtreeFlags = noFlags
+			alternate.deletions = nil
+		end
 		if enableProfilerTimer then
 			alternate.actualDuration = 0
 			alternate.actualStartTime = -1
@@ -171,24 +180,56 @@ local function createWorkInProgress(p1, p2)
 	alternate.flags = bit32.band(p1.flags, staticMask)
 	alternate.childLanes = p1.childLanes
 	alternate.lanes = p1.lanes
-	alternate.child = p1.child
-	alternate.memoizedProps = p1.memoizedProps
-	alternate.memoizedState = p1.memoizedState
-	alternate.updateQueue = p1.updateQueue
-	local dependencies = p1.dependencies
 	
-	if dependencies == nil then
-		alternate.dependencies = nil
+	if reactFeatureFlags.enableWorkLoopTrims then
+		if p1.child ~= nil or alternate.child ~= nil then
+			alternate.child = p1.child
+		end
+		alternate.memoizedProps = p1.memoizedProps
+		
+		if p1.memoizedState ~= nil or alternate.memoizedState ~= nil then
+			alternate.memoizedState = p1.memoizedState
+		end
+		if p1.updateQueue ~= nil or alternate.updateQueue ~= nil then
+			alternate.updateQueue = p1.updateQueue
+		end
+		local dependencies = p1.dependencies
+		
+		if dependencies ~= nil then
+			alternate.dependencies = {
+				lanes = dependencies.lanes,
+				firstContext = dependencies.firstContext
+			}
+		elseif alternate.dependencies ~= nil then
+			alternate.dependencies = nil
+		end
+		if p1.sibling ~= nil or alternate.sibling ~= nil then
+			alternate.sibling = p1.sibling
+		end
+		alternate.index = p1.index
+		
+		if p1.ref ~= nil or alternate.ref ~= nil then
+			alternate.ref = p1.ref
+		end
 	else
-		alternate.dependencies = {
-			lanes = dependencies.lanes,
-			firstContext = dependencies.firstContext
-		}
+		alternate.child = p1.child
+		alternate.memoizedProps = p1.memoizedProps
+		alternate.memoizedState = p1.memoizedState
+		alternate.updateQueue = p1.updateQueue
+		local dependencies = p1.dependencies
+		
+		if dependencies == nil then
+			alternate.dependencies = nil
+		else
+			alternate.dependencies = {
+				lanes = dependencies.lanes,
+				firstContext = dependencies.firstContext
+			}
+		end
+		alternate.sibling = p1.sibling
+		alternate.index = p1.index
+		alternate.ref = p1.ref
 	end
-	alternate.sibling = p1.sibling
-	alternate.index = p1.index
-	alternate.ref = p1.ref
-	
 	if enableProfilerTimer then
 		alternate.selfBaseDuration = p1.selfBaseDuration
 		alternate.treeBaseDuration = p1.treeBaseDuration

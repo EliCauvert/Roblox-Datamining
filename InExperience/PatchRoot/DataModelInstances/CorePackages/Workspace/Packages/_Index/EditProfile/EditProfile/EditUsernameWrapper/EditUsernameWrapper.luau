@@ -1,6 +1,7 @@
 ﻿local editProfile = script:FindFirstAncestor("EditProfile")
 local httpService = game:GetService("HttpService")
 local parent = editProfile.Parent
+local fFlagUserProfilePlatformProfile = require(parent.SharedFlags).FFlagUserProfilePlatformProfile
 local reactModule = require(parent.React)
 local roactNavigationModule = require(parent.RoactNavigation)
 local javascriptHybrid = require(editProfile.Common.Constants).JavascriptHybrid
@@ -14,10 +15,10 @@ local eventNames = analyticsModule.EventNames
 local useAnalytics = analyticsModule.useAnalytics
 
 return roactNavigationModule.withNavigation(function(p1)
-	-- upvalues: useLocalUserId (ref), userProfilesModule (ref), useLocalization (ref), textKeysModule (ref), useAnalytics (ref), javascriptHybrid (ref), eventNames (ref), reactModule (ref), urlBuilder (ref), httpService (ref)
+	-- upvalues: useLocalUserId (ref), userProfilesModule (ref), fFlagUserProfilePlatformProfile (ref), useLocalization (ref), textKeysModule (ref), useAnalytics (ref), javascriptHybrid (ref), eventNames (ref), reactModule (ref), urlBuilder (ref), httpService (ref)
 	local var1 = userProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = { useLocalUserId() },
-		query = userProfilesModule.Queries.userProfilesAllNamesByUserIds
+		query = if fFlagUserProfilePlatformProfile then userProfilesModule.Queries.userProfilesBasicNamesByUserIds else userProfilesModule.Queries.userProfilesAllNamesByUserIds
 	})
 	local var2 = useLocalization({ updated = textKeysModule.UsernameUpdated })
 	local var3 = useAnalytics()

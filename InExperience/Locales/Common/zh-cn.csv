@@ -93,7 +93,6 @@ Authentication.SignUp.Action.Create,创建
 Authentication.SignUp.Action.CreateAccountSentenceCase,创建帐户
 Authentication.SignUp.Action.ExitModalLeave,离开
 Authentication.SignUp.Action.RespawnNow,立即重生
-Authentication.SignUp.Action.StartPlay,开始游玩
 Authentication.SignUp.Button.OKCaptialized,好的
 Authentication.SignUp.Button.RetryLogIn,重试登录
 Authentication.SignUp.Description.AccountAlreadyLinked,你在 {platformAccountName} 上的帐户已与一个 Roblox 帐户关联。请尝试重新登录。
@@ -707,6 +706,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,类别 *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,其他
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,选择一个类别
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,购买问题
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,建议
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,最多 {MAX} 个字符
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,详情 *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,取消选择
@@ -714,6 +714,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,请提供�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,请描述缺失的内容以及你最后一次看到该内容的时间。如果你的帐户受到入侵，请提供你的 Roblox 客户支持票单编号以及任何相关详细信息。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,在此处描述你的请求或问题。请尽可能详细地提供信息，以帮助我们了解情况。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,请告诉我们你尝试购买的内容、发生的时间以及总价值（例如 500 Robux/4.99 美元）。请提供你看到的任何错误消息。
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,分享你希望添加或改进的内容，以及这会如何让游戏体验更好。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,想举报滥用？
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>改为提交举报。</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,选择
@@ -1237,6 +1238,19 @@ Corescripts.AvatarContextMenu.FriendRequestPending,好友邀请待处理
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,已屏蔽用户
 Corescripts.AvatarContextMenu.Wave,招手
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,持续游玩
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,传送
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Roblox 精选
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,首页其他
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,首页推荐
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,传送门广告
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,搜索广告
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,赞助广告
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,向下滚动
 Feature.Accessibility.Action.ScrollUp,向上滚动

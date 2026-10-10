@@ -13,7 +13,6 @@ local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local useTokens = foundationModule.Hooks.useTokens
 local appPage = robloxAppEnumsModule.AppPage
 local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
-local fFlagDesktopGameJoinCardUIImprovements = sharedFlagsModule.FFlagDesktopGameJoinCardUIImprovements
 local analyticsConstantsModule = require(gameJoinCard.Analytics.AnalyticsConstants)
 local gameJoinCardButtonAction = analyticsConstantsModule.GameJoinCardButtonAction
 local viewProfileSourceValues = analyticsConstantsModule.viewProfileSourceValues
@@ -22,7 +21,7 @@ local _ = require(script.Parent.Types)
 local getTelemetryFieldsModule = require(script.Parent.getTelemetryFields)
 
 local function ViewProfileLink(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), controlState (ref), view (ref), fFlagDesktopGameJoinCardUIImprovements (ref), stateLayerAffordance (ref), text (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), controlState (ref), view (ref), stateLayerAffordance (ref), text (ref)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState(false)
 	
@@ -31,17 +30,17 @@ local function ViewProfileLink(p1)
 		tag = "row align-x-center align-y-center",
 		Size = UDim2.new(1, 0, 0, var1.Size.Size_600),
 		onActivated = p1.onActivated,
-		onStateChanged = if fFlagDesktopGameJoinCardUIImprovements then reactModule.useCallback(function(p2)
+		onStateChanged = reactModule.useCallback(function(p2)
 			-- upvalues: var3 (ref), controlState (copy)
 			var3(p2 == controlState.Hover)
-		end, {}) else nil,
+		end, {}),
 		stateLayer = { affordance = stateLayerAffordance.None },
 		LayoutOrder = p1.LayoutOrder
 	}, {
 		Label = reactModule.createElement(text, {
+			RichText = true,
 			tag = "auto-xy text-title-medium text-align-x-center content-emphasis",
-			Text = if fFlagDesktopGameJoinCardUIImprovements and var2 then `<u>{p1.text}</u>` else p1.text,
-			RichText = fFlagDesktopGameJoinCardUIImprovements
+			Text = if var2 then `<u>{p1.text}</u>` else p1.text
 		})
 	})
 end

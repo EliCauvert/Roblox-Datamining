@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("UserProfilePlatformProfile3", false)
+﻿return game:DefineFastFlag("UserProfilePlatformProfile6", false)

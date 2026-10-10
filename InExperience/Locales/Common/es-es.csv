@@ -110,7 +110,6 @@ Authentication.SignUp.Action.Create,Crear
 Authentication.SignUp.Action.CreateAccountSentenceCase,Crear cuenta
 Authentication.SignUp.Action.ExitModalLeave,Salir
 Authentication.SignUp.Action.RespawnNow,Reaparecer ahora
-Authentication.SignUp.Action.StartPlay,Comenzar a jugar
 Authentication.SignUp.Button.OKCaptialized,Aceptar
 Authentication.SignUp.Button.RetryLogIn,Volver a iniciar sesión
 Authentication.SignUp.Description.AccountAlreadyLinked,Tu cuenta {platformAccountName} ya está vinculada a una cuenta de Roblox. Intenta iniciar sesión de nuevo.
@@ -722,6 +721,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Categoría *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,Otro
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Selecciona una categoría
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Problema con la compra
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,Sugerencia
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Hasta {MAX} caracteres
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Detalles *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Anular selección
@@ -729,6 +729,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Incluye cu
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Describe lo que falta y cuándo lo viste por última vez. Si tu cuenta fue hackeada, incluye tu número de ticket de CS de Roblox y cualquier detalle relevante."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Describe tu solicitud o problema aquí. Proporciona la mayor cantidad de detalles posible para ayudarnos a entender la situación.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Cuéntanos qué intentaste comprar, cuándo sucedió y el valor total (por ejemplo, 500 Robux / $4.99). Incluye cualquier mensaje de error que hayas visto."
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,Comparte lo que te gustaría que se agregara o mejorara y por qué eso haría que el juego fuera mejor.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,¿Intentas denunciar un abuso?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Mejor envía un informe.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Elegir
@@ -1254,6 +1255,19 @@ Corescripts.AvatarContextMenu.FriendRequestPending,Solicitud de amistad pendient
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,Persona bloqueada
 Corescripts.AvatarContextMenu.Wave,Saludar
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Continuar a jugar
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Teletransporte
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Destacado por Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Otro Inicio
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Recomendación de Inicio
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Anuncios de portal
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Buscar anuncios
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Anuncios patrocinados
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Ir hacia abajo
 Feature.Accessibility.Action.ScrollUp,Ir hacia arriba

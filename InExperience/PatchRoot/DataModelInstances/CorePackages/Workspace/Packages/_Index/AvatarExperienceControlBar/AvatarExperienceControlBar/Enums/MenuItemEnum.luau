@@ -28,7 +28,6 @@
 		ProfilePhoto = "ProfilePhoto"
 	},
 	Photobooth = {
-		Photobooth = "Photobooth",
 		Animations = "PhotoboothAnimations",
 		Scenes = "PhotoboothScenes",
 		Screenshot = "PhotoboothScreenshot"

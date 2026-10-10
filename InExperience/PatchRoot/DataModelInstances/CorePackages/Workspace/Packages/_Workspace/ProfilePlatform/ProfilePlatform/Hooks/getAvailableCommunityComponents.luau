@@ -6,20 +6,19 @@ local getSupportedActionsForProfileTypeModule = require(profilePlatform.Hooks.ge
 local fFlagAddSocialLinksToCommunityProfile = require(parent.SharedFlags).FFlagAddSocialLinksToCommunityProfile
 local fFlagAddCommunityLockedToCommunityProfile = require(parent.SharedFlags).FFlagAddCommunityLockedToCommunityProfile
 local fFlagAddEventsToCommunityProfileModule = require(profilePlatform.Flags.FFlagAddEventsToCommunityProfile)
-local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 local fFlagGroupAnnouncementsSdui = require(parent.SharedFlags).FFlagGroupAnnouncementsSdui
 
 return function()
-	-- upvalues: enumsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), getSupportedActionsForProfileTypeModule (ref), fFlagAddSocialLinksToCommunityProfile (ref), fFlagAddCommunityLockedToCommunityProfile (ref), fFlagAddEventsToCommunityProfileModule (ref), fFlagGroupAnnouncementsSdui (ref)
+	-- upvalues: enumsModule (ref), getSupportedActionsForProfileTypeModule (ref), fFlagAddSocialLinksToCommunityProfile (ref), fFlagAddCommunityLockedToCommunityProfile (ref), fFlagAddEventsToCommunityProfileModule (ref), fFlagGroupAnnouncementsSdui (ref)
 	local list = {
 		{
 			component = enumsModule.Components.CommunityProfileHeader
 		},
 		{ component = enumsModule.Components.About },
 		{
+			isActionsV2Supported = true,
 			component = enumsModule.Components.Actions,
-			supportedActions = if fFlagProfilePlatformCTAsRefactorModule then getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.Community) else nil,
-			isActionsV2Supported = if fFlagProfilePlatformCTAsRefactorModule then true else nil
+			supportedActions = getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.Community)
 		},
 		{ component = enumsModule.Components.Experiences },
 		{ component = enumsModule.Components.Store },

@@ -31,6 +31,7 @@ local fFlagEnablePurchasePayloadForDevProductPurchaseModule = require(purchasePr
 local productPurchaseSurface = require(parent.PurchasePromptLite).Enums.ProductPurchaseSurface
 local t = {
 	[productPurchaseSurface.EDP] = "ExperienceDetailPage",
+	[productPurchaseSurface.EDPPreview] = if require(parent.SharedFlags).FFlagEnableEdpPreviewPurchaseSurface then "ExperienceDetailPagePreview" else nil,
 	[productPurchaseSurface.HomePageGameItemShop] = "HomePageGameItemShop",
 	[productPurchaseSurface.SearchPageGameItemShop] = if require(parent.SharedFlags).FFlagEnableSearchGameItemOwnershipUpdate then "SearchPageGameItemShop" else nil
 }

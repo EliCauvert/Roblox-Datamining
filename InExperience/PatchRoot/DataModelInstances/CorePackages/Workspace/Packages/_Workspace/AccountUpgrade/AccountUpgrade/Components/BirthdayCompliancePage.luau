@@ -1,11 +1,16 @@
-﻿local accountUpgrade = script:FindFirstAncestor("AccountUpgrade")
+﻿local appStorageService = game:GetService("AppStorageService")
+local accountUpgrade = script:FindFirstAncestor("AccountUpgrade")
 local parent = accountUpgrade.Parent
 local reactModule = require(parent.React)
 local fullscreenPageWithSafeArea = require(parent.AppBlox).FullscreenPageWithSafeArea
 local authCommonModule = require(parent.AuthCommon)
 local authBackgroundContainer = authCommonModule.Components.AuthBackgroundContainer
 local isLoggedOutUserId = authCommonModule.Utils.isLoggedOutUserId
+local updateLoginEntryData = authCommonModule.Utils.updateLoginEntryData
+local user = authCommonModule.Thunks.User
+local authLocalStorageKeys = authCommonModule.Enums.AuthLocalStorageKeys
 local logoutReasonNames = authCommonModule.Enums.LogoutReasonNames
+local fFlagAccountUpgradeHideAccountOnSignOutModule = require(accountUpgrade.Flags.FFlagAccountUpgradeHideAccountOnSignOut)
 local accountUpgradeAppShellFlowModule = require(accountUpgrade.AppShell.AccountUpgradeAppShellFlow)
 local accountUpgradeFlowModule = require(accountUpgrade.AccountUpgradeFlow)
 local accountUpgradePageModule = require(accountUpgrade.MobilePage.AccountUpgradePage)
@@ -25,7 +30,7 @@ local function renderLandingArt()
 end
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useRoactService (ref), roactServiceTagsModule (ref), useSelector (ref), reactModule (ref), logoutReasonNames (ref), useStore (ref), isLoggedOutUserId (ref), fFlagAccountUpgradeFullPageOnPhoneModule (ref), useMobilePageModule (ref), accountUpgradePageModule (ref), oAuth (ref), fullscreenPageWithSafeArea (ref), renderLandingArt (ref), accountUpgradeAppShellFlowModule (ref)
+	-- upvalues: useDispatch (ref), useRoactService (ref), roactServiceTagsModule (ref), useSelector (ref), reactModule (ref), useStore (ref), fFlagAccountUpgradeHideAccountOnSignOutModule (ref), user (ref), logoutReasonNames (ref), updateLoginEntryData (ref), appStorageService (ref), authLocalStorageKeys (ref), isLoggedOutUserId (ref), fFlagAccountUpgradeFullPageOnPhoneModule (ref), useMobilePageModule (ref), accountUpgradePageModule (ref), oAuth (ref), fullscreenPageWithSafeArea (ref), renderLandingArt (ref), accountUpgradeAppShellFlowModule (ref)
 	local var1 = useDispatch()
 	local var2 = useRoactService(roactServiceTagsModule.RoactNetworking)
 	local var3 = useRoactService(roactServiceTagsModule.AppGuiService)
@@ -44,34 +49,51 @@ return function(p1)
 		-- upvalues: var1 (ref), refreshUserAccessAfterUpgrade (ref), var2 (ref)
 		var1(refreshUserAccessAfterUpgrade(var2))
 	end, { var1, refreshUserAccessAfterUpgrade, var2 })
+	local var7 = useStore()
 	local logoutThunk = p1.LogoutThunk
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: logoutThunk (ref), var1 (ref), var2 (ref), var3 (ref), logoutReasonNames (copy)
+	local var8 = reactModule.useMemo(function()
+		-- upvalues: logoutThunk (ref), var7 (ref), fFlagAccountUpgradeHideAccountOnSignOutModule (copy), user (copy), var1 (ref), var2 (ref), var3 (ref), logoutReasonNames (copy), updateLoginEntryData (copy), appStorageService (copy), authLocalStorageKeys (copy)
 		return if logoutThunk == nil then nil else function()
-			-- upvalues: var1 (copy), logoutThunk (copy), var2 (copy), var3 (copy), logoutReasonNames (copy)
+			-- upvalues: var7 (copy), fFlagAccountUpgradeHideAccountOnSignOutModule (copy), user (copy), var1 (copy), logoutThunk (copy), var2 (copy), var3 (copy), logoutReasonNames (copy), updateLoginEntryData (copy), appStorageService (copy), authLocalStorageKeys (copy)
+			local localUserId = var7:getState().LocalUserId
+			local var9 = if fFlagAccountUpgradeHideAccountOnSignOutModule then user.fromLocalStorage().username else nil
 			var1(logoutThunk(var2, var3, logoutReasonNames.Moderation))
+			
+			if fFlagAccountUpgradeHideAccountOnSignOutModule then
+				updateLoginEntryData(tostring(localUserId), { showInAccountPicker = false })
+				
+				if appStorageService:GetItem(authLocalStorageKeys.CredentialValue) == var9 then
+					appStorageService:SetItem(authLocalStorageKeys.CredentialValue, "")
+					appStorageService:Flush()
+				end
+			end
 		end
-	end, { var1, logoutThunk, var2, var3 })
-	local var8 = useStore()
+	end, {
+		var1,
+		logoutThunk,
+		var2,
+		var3,
+		var7
+	})
 	local setDarkThemeOverride = p1.setDarkThemeOverride
 	local clearThemeOverride = p1.clearThemeOverride
 	reactModule.useEffect(function()
-		-- upvalues: setDarkThemeOverride (ref), clearThemeOverride (ref), isLoggedOutUserId (copy), var8 (ref)
+		-- upvalues: setDarkThemeOverride (ref), clearThemeOverride (ref), isLoggedOutUserId (copy), var7 (ref)
 		if setDarkThemeOverride then
 			setDarkThemeOverride()
 		end
 		return function()
-			-- upvalues: clearThemeOverride (copy), isLoggedOutUserId (copy), var8 (copy)
-			if clearThemeOverride and not isLoggedOutUserId(var8:getState().LocalUserId) then
+			-- upvalues: clearThemeOverride (copy), isLoggedOutUserId (copy), var7 (copy)
+			if clearThemeOverride and not isLoggedOutUserId(var7:getState().LocalUserId) then
 				clearThemeOverride()
 			end
 		end
-	end, { var8, setDarkThemeOverride, clearThemeOverride })
+	end, { var7, setDarkThemeOverride, clearThemeOverride })
 	
 	return if if fFlagAccountUpgradeFullPageOnPhoneModule then useMobilePageModule() else nil then reactModule.createElement(accountUpgradePageModule, {
 		flow = oAuth,
 		currentUsername = var4,
-		onSignOut = var7,
+		onSignOut = var8,
 		onComplete = var6,
 		onUnrecoverableFailure = var5
 	}) else reactModule.createElement(fullscreenPageWithSafeArea, {
@@ -82,7 +104,7 @@ return function(p1)
 			hasBackdrop = true,
 			flow = oAuth,
 			currentUsername = var4,
-			onSignOut = var7,
+			onSignOut = var8,
 			onComplete = var6,
 			onUnrecoverableFailure = var5
 		})

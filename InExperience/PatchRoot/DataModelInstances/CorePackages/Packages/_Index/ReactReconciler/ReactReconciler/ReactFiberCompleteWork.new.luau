@@ -46,6 +46,7 @@ local profileMode = reactTypeOfModeModule.ProfileMode
 local reactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
 local ref = reactFiberFlagsModule.Ref
 local update = reactFiberFlagsModule.Update
+local hostUpdate = reactFiberFlagsModule.HostUpdate
 local callback = reactFiberFlagsModule.Callback
 local passive = reactFiberFlagsModule.Passive
 local deletion = reactFiberFlagsModule.Deletion
@@ -171,14 +172,23 @@ if supportsMutation then
 	local var2 = function(_, _) end
 	
 	updateHostComponent = function(p5, p6, p7, p8, p9)
-		-- upvalues: getHostContext (ref), prepareUpdate (ref), update (ref)
+		-- upvalues: getHostContext (ref), prepareUpdate (ref), reactFeatureFlags (ref), hostUpdate (ref), update (ref)
 		local memoizedProps = p5.memoizedProps
 		
 		if memoizedProps == p8 then return end
 		local var3 = prepareUpdate(p6.stateNode, p7, memoizedProps, p8, p9, getHostContext())
-		p6.updateQueue = var3
 		
+		if not reactFeatureFlags.enableWorkLoopTrims then
+			p6.updateQueue = var3
+		elseif var3 ~= nil or p6.updateQueue ~= nil then
+			p6.updateQueue = var3
+		end
 		if var3 then
+			if reactFeatureFlags.enableCommitTraversalTrims then
+				p6.flags = bit32.bor(p6.flags, hostUpdate)
+				
+				return
+			end
 			p6.flags = bit32.bor(p6.flags, update)
 		end
 	end
@@ -281,7 +291,7 @@ end
 
 return {
 	completeWork = function(p6, p7, p8)
-		-- upvalues: indeterminateComponent (ref), lazyComponent (ref), simpleMemoComponent (ref), functionComponent (ref), forwardRef (ref), fragment (ref), mode (ref), contextConsumer (ref), memoComponent (ref), bubbleProperties (ref), classComponent (ref), isContextProvider (ref), popContext (ref), hostRoot (ref), popHostContainer (ref), popTopLevelContextObject (ref), resetWorkInProgressVersions (ref), popHydrationState (ref), update (ref), snapshot (ref), var2 (write), hostComponent (ref), popHostContext (ref), getRootHostContainer (ref), updateHostComponent (write), ref (ref), invariant (ref), getHostContext (ref), prepareToHydrateHostInstance (ref), createInstance (ref), var1 (write), finalizeInitialChildren (ref), hostText (ref), updateHostText (write), prepareToHydrateHostTextInstance (ref), createTextInstance (ref), profiler (ref), callback (ref), passive (ref), performedWork (ref), noFlags (ref), layoutMask (ref), deletion (ref), passiveMask (ref), suspenseComponent (ref), popSuspenseContext (ref), enableSuspenseServerRenderer (ref), prepareToHydrateHostSuspenseInstance (ref), enableSchedulerTracing (ref), markSpawnedWork (ref), offscreenLane (ref), enableProfilerTimer (ref), profileMode (ref), noMode (ref), resetHydrationState (ref), didCapture (ref), transferActualDuration (ref), blockingMode (ref), hasSuspenseContext (ref), suspenseStackCursor (ref), invisibleParentSuspenseContext (ref), renderDidSuspend (ref), renderDidSuspendDelayIfPossible (ref), supportsPersistence (ref), supportsMutation (ref), enableSuspenseCallback (ref), hostPortal (ref), preparePortalMount (ref), contextProvider (ref), popProvider (ref), incompleteClassComponent (ref), suspenseListComponent (ref), fundamentalComponent (ref), scopeComponent (ref), block (ref), offscreenComponent (ref), legacyHiddenComponent (ref), popRenderLanes (ref), includesSomeLane (ref), unknownModule_4 (ref), concurrentMode (ref)
+		-- upvalues: indeterminateComponent (ref), lazyComponent (ref), simpleMemoComponent (ref), functionComponent (ref), forwardRef (ref), fragment (ref), mode (ref), contextConsumer (ref), memoComponent (ref), bubbleProperties (ref), classComponent (ref), isContextProvider (ref), popContext (ref), hostRoot (ref), popHostContainer (ref), popTopLevelContextObject (ref), resetWorkInProgressVersions (ref), popHydrationState (ref), update (ref), snapshot (ref), var2 (write), hostComponent (ref), popHostContext (ref), getRootHostContainer (ref), updateHostComponent (write), ref (ref), invariant (ref), getHostContext (ref), prepareToHydrateHostInstance (ref), createInstance (ref), var1 (write), finalizeInitialChildren (ref), hostText (ref), updateHostText (write), prepareToHydrateHostTextInstance (ref), createTextInstance (ref), profiler (ref), callback (ref), passive (ref), performedWork (ref), noFlags (ref), reactFeatureFlags (ref), layoutMask (ref), deletion (ref), hostUpdate (ref), passiveMask (ref), suspenseComponent (ref), popSuspenseContext (ref), enableSuspenseServerRenderer (ref), prepareToHydrateHostSuspenseInstance (ref), enableSchedulerTracing (ref), markSpawnedWork (ref), offscreenLane (ref), enableProfilerTimer (ref), profileMode (ref), noMode (ref), resetHydrationState (ref), didCapture (ref), transferActualDuration (ref), blockingMode (ref), hasSuspenseContext (ref), suspenseStackCursor (ref), invisibleParentSuspenseContext (ref), renderDidSuspend (ref), renderDidSuspendDelayIfPossible (ref), supportsPersistence (ref), supportsMutation (ref), enableSuspenseCallback (ref), hostPortal (ref), preparePortalMount (ref), contextProvider (ref), popProvider (ref), incompleteClassComponent (ref), suspenseListComponent (ref), fundamentalComponent (ref), scopeComponent (ref), block (ref), offscreenComponent (ref), legacyHiddenComponent (ref), popRenderLanes (ref), includesSomeLane (ref), unknownModule_4 (ref), concurrentMode (ref)
 		local var6
 		local pendingProps = p7.pendingProps
 		
@@ -384,7 +394,11 @@ return {
 				if bit32.band(flags, performedWork) ~= noFlags or bit32.band(subtreeFlags, performedWork) ~= noFlags then
 					var15 = bit32.bor(var15, var12)
 				end
-				if bit32.band(flags, bit32.bor(layoutMask, deletion)) ~= noFlags or bit32.band(subtreeFlags, bit32.bor(layoutMask, deletion)) ~= noFlags then
+				if reactFeatureFlags.enableCommitTraversalTrims then
+					if bit32.band(flags, bit32.bor(layoutMask, deletion, hostUpdate)) ~= noFlags or bit32.band(subtreeFlags, bit32.bor(layoutMask, deletion, hostUpdate)) ~= noFlags then
+						var15 = bit32.bor(var15, var13)
+					end
+				elseif bit32.band(flags, bit32.bor(layoutMask, deletion)) ~= noFlags or bit32.band(subtreeFlags, bit32.bor(layoutMask, deletion)) ~= noFlags then
 					var15 = bit32.bor(var15, var13)
 				end
 				if bit32.band(flags, passiveMask) ~= noFlags or bit32.band(subtreeFlags, passiveMask) ~= noFlags then

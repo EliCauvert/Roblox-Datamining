@@ -1,12 +1,15 @@
-﻿local signalsModule = require(script:FindFirstAncestor("DataHydration").Parent.Signals)
+﻿local parent = script:FindFirstAncestor("DataHydration").Parent
+local sharedFlagsModule = require(parent.SharedFlags)
+local signalsModule = require(parent.Signals)
 local _ = require(script.Parent.Parent.types)
+local fFlagBuildExperiencePromptFailureTelemetry = sharedFlagsModule.FFlagBuildExperiencePromptFailureTelemetry
 
 return {
 	createSendPrompt = function(p1)
-		-- upvalues: signalsModule (ref)
+		-- upvalues: signalsModule (ref), fFlagBuildExperiencePromptFailureTelemetry (ref)
 		return {
 			sendPrompt = function(p2)
-				-- upvalues: p1 (ref), signalsModule (copy)
+				-- upvalues: p1 (ref), signalsModule (copy), fFlagBuildExperiencePromptFailureTelemetry (copy)
 				local var1 = p1.incrementAssistantTurnSequence()
 				local var2, var3 = signalsModule.createSignal(nil)
 				local var4, var5 = signalsModule.createSignal(nil)
@@ -42,32 +45,36 @@ return {
 				end
 				
 				local function start()
-					-- upvalues: var6 (write), var9 (write), fireCompleted (ref), p1 (copy), var5 (ref), p2 (ref), var10 (write), var3 (ref), var11 (write), var12 (write), signalsModule (copy), var8 (write)
+					-- upvalues: var6 (write), var9 (write), fireCompleted (ref), p1 (copy), var5 (ref), fFlagBuildExperiencePromptFailureTelemetry (copy), p2 (ref), var10 (write), var3 (ref), var11 (write), var12 (write), signalsModule (copy), var8 (write)
 					if var6 then
 						return
 					end
 					var6 = true
 					task.spawn(function()
-						-- upvalues: var9 (copy), fireCompleted (copy), p1 (copy), var5 (copy), p2 (copy), var10 (copy), var3 (copy), var11 (copy), var12 (copy), signalsModule (copy), var8 (copy)
+						-- upvalues: var9 (copy), fireCompleted (copy), p1 (copy), var5 (copy), fFlagBuildExperiencePromptFailureTelemetry (copy), p2 (copy), var10 (copy), var3 (copy), var11 (copy), var12 (copy), signalsModule (copy), var8 (copy)
 						if var9 then
 							fireCompleted(nil)
 							
 							return
 						end
-						local var13, var14 = p1.ensureInitialized()
+						local var13, var14, var15 = p1.ensureInitialized()
 						
 						if not var13 then
-							var5({ stage = "initialize", errorCode = var14 })
+							var5({
+								stage = "initialize",
+								errorCode = var14,
+								requestFailure = if fFlagBuildExperiencePromptFailureTelemetry then var15 else nil
+							})
 							fireCompleted(nil)
 							
 							return
 						end
 						local _ = nil
 						local _ = nil
-						local var15, var16 = p1.ensureCasSession()
+						local var16, var17 = p1.ensureCasSession()
 						
-						if var15 == nil then
-							var5(var16 or { stage = "session_new" })
+						if var16 == nil then
+							var5(var17 or { stage = "session_new" })
 							fireCompleted(nil)
 							
 							return
@@ -76,18 +83,18 @@ return {
 							
 							return
 						end
-						var15 = p1.sessionPrompt({
-							sessionId = var15,
+						var16 = p1.sessionPrompt({
+							sessionId = var16,
 							prompt = p2.prompt,
 							_meta = p2.promptMeta
 						})
-						var10 = var15
-						var3(var15)
+						var10 = var16
+						var3(var16)
 						
 						if var9 then
-							var15.cancel()
+							var16.cancel()
 						end
-						var11 = p1.startPollingTurnFromHistory(var15, var15, {
+						var11 = p1.startPollingTurnFromHistory(var16, var16, {
 							rtnIdleFallbackSeconds = p2.rtnIdleFallbackSeconds,
 							rtnSequenceGapFallbackSeconds = p2.rtnSequenceGapFallbackSeconds,
 							pollMinIntervalSeconds = p2.pollMinIntervalSeconds,
@@ -96,15 +103,15 @@ return {
 							onDroppedChatMessage = p2.onDroppedChatMessage
 						})
 						var12 = signalsModule.createEffect(function(p3)
-							-- upvalues: var15 (ref), p2 (copy), var8 (copy), fireCompleted (copy)
-							local var17 = var15.state(p3)
+							-- upvalues: var16 (ref), p2 (copy), var8 (copy), fireCompleted (copy)
+							local var18 = var16.state(p3)
 							
-							if p2.onReceived ~= nil and not var8 and (var17.status == "streaming" or var17.status == "succeeded") then
+							if p2.onReceived ~= nil and not var8 and (var18.status == "streaming" or var18.status == "succeeded") then
 								var8 = true
-								p2.onReceived(var15.getTurnId())
+								p2.onReceived(var16.getTurnId())
 							end
-							if var17.isDone then
-								fireCompleted(var15.state(false))
+							if var18.isDone then
+								fireCompleted(var16.state(false))
 							end
 						end)
 					end)

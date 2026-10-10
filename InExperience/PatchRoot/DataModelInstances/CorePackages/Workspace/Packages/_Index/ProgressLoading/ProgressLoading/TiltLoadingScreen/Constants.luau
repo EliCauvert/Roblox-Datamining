@@ -13,7 +13,6 @@
 		cascade = 0.6,
 		chromeFadeIn = 0.3,
 		closeDur = 0.5,
-		endPause = 0.4,
 		enterExitHold = 1,
 		wobbleAngle = 2.5,
 		wobbleSpeed = 1

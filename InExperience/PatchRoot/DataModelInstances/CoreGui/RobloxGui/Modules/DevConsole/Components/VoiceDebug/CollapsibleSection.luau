@@ -19,7 +19,7 @@ function collapsibleSection.init(p1)
 end
 
 function collapsibleSection.render(p1)
-	-- upvalues: roactModule (ref), bannerButtonModule (ref), cellLabelModule (ref), mainRowPadding (ref)
+	-- upvalues: roactModule (ref), mainRowPadding (ref), bannerButtonModule (ref), cellLabelModule (ref)
 	local expanded = p1.state.expanded
 	
 	return roactModule.createElement("Frame", {
@@ -28,7 +28,10 @@ function collapsibleSection.render(p1)
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = p1.props.layoutOrder
 	}, {
-		UIListLayout = roactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
+		UIListLayout = roactModule.createElement("UIListLayout", {
+			SortOrder = Enum.SortOrder.LayoutOrder,
+			Padding = UDim.new(0, mainRowPadding)
+		}),
 		Header = roactModule.createElement(bannerButtonModule, {
 			isExpandable = true,
 			layoutOrder = 1,

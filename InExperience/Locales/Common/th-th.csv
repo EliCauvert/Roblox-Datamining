@@ -93,7 +93,6 @@ Authentication.SignUp.Action.Create,สร้าง
 Authentication.SignUp.Action.CreateAccountSentenceCase,สร้างบัญชี
 Authentication.SignUp.Action.ExitModalLeave,ออก
 Authentication.SignUp.Action.RespawnNow,เกิดใหม่ตอนนี้เลย
-Authentication.SignUp.Action.StartPlay,เริ่มเล่น
 Authentication.SignUp.Button.OKCaptialized,ตกลง
 Authentication.SignUp.Button.RetryLogIn,ลองเข้าสู่ระบบอีกครั้ง
 Authentication.SignUp.Description.AccountAlreadyLinked,บัญชีสำหรับ {platformAccountName} ของคุณเชื่อมโยงกับบัญชี Roblox อยู่แล้ว โปรดลองลงชื่อเข้าใช้อีกครั้ง
@@ -704,6 +703,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,หมวดหม
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,อื่นๆ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,เลือกหมวดหมู่
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,ปัญหาในการซื้อ
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,ข้อเสนอแนะ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,ความยาวสูงสุด {MAX} อักขระ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,รายละเอียด *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,ยกเลิกการเลือก
@@ -711,6 +711,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,ระบ�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,อธิบายว่ามีอะไรไม่ครบและคุณเห็นครั้งสุดท้ายเมื่อใด หากบัญชีของคุณถูกแฮ็ก โปรดระบุหมายเลขตั๋ว Roblox CS ของคุณและรายละเอียดที่เกี่ยวข้อง
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,อธิบายคำขอหรือปัญหาของคุณที่นี่ โปรดระบุรายละเอียดให้มากที่สุดเพื่อช่วยให้เราเข้าใจสถานการณ์
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,ระบุว่าคุณพยายามซื้ออะไร เวลาเกิดเหตุการณ์ และมูลค่ารวม (เช่น 500 Robux / $4.99) รวมถึงข้อความแสดงข้อผิดพลาดที่คุณเห็น
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,แชร์ว่าคุณอยากให้เพิ่มหรือปรับปรุงอะไร และสิ่งนั้นจะช่วยให้เกมดีขึ้นได้อย่างไร
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,พยายามรายงานการกระทำผิดอยู่ใช่ไหม?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>ส่งรายงานแทน</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,เลือก
@@ -1236,6 +1237,19 @@ Corescripts.AvatarContextMenu.FriendRequestPending,คำขอเป็นเ�
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,ผู้ใช้ที่ถูกบล็อค
 Corescripts.AvatarContextMenu.Wave,ทักทาย
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,แผนภูมิ
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,เทเลพอร์ต
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,แนะนำโดย Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,อื่นๆ ในหน้าหลัก
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,การแนะนำในหน้าหลัก
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,พอร์ทัลโฆษณา
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,โฆษณาผ่านผลการค้นหา
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,โฆษณาที่ได้รับการสนับสนุน
 Feature.AbuseReportDialog.Label.GeneralError,มีบางอย่างผิดปกติ กรุณาลองใหม่อีกครั้ง
 Feature.Accessibility.Action.ScrollDown,เลื่อนลง
 Feature.Accessibility.Action.ScrollUp,เลื่อนขึ้น

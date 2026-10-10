@@ -1,4 +1,5 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
+﻿local guiService = game:GetService("GuiService")
+local momentsCommon = script:FindFirstAncestor("MomentsCommon")
 local reactionSizeModule = require(momentsCommon.Enums.ReactionSize)
 local reactionTypeModule = require(momentsCommon.Enums.ReactionType)
 local t = {
@@ -22,6 +23,11 @@ local t_2 = {
 	[reactionSizeModule.Medium] = 32,
 	[reactionSizeModule.Large] = 48
 }
+local momentsUpdateReactionIllustrationQuality = game:DefineFastFlag("MomentsUpdateReactionIllustrationQuality", false)
+
+local function _(p1)
+	return if p1 > 2.5 then "@3x" elseif p1 > 1.5 then "@2x" else ""
+end
 
 return {
 	getAssetKey = function(value)
@@ -39,12 +45,21 @@ return {
 		-- upvalues: t_2 (ref)
 		return t_2[p1]
 	end,
-	getStaticImageUri = function(p1, p2)
-		-- upvalues: t (ref), t_1 (ref)
-		local var1 = t[p1]
-		local var2 = t_1[p2]
+	getStaticImageUri = function(p1, p2, p3)
+		-- upvalues: t (ref), t_1 (ref), momentsUpdateReactionIllustrationQuality (ref), guiService (ref)
+		local var1
+		local var2 = t[p1]
+		local var3 = t_1[p2]
 		
-		return if var1 == nil or var2 == nil then nil else `rbxasset://textures/ui/Moments/Reactions/{var1}-{var2}.png`
+		if var2 == nil or var3 == nil then
+			return nil
+		elseif momentsUpdateReactionIllustrationQuality then
+			local var4 = p3 or guiService:GetResolutionScale()
+			var1 = if var4 > 2.5 then "@3x" elseif var4 > 1.5 then "@2x" else ""
+		else
+			var1 = ""
+		end
+		return `rbxasset://textures/ui/Moments/Reactions/{var2}-{var3}{var1}.png`
 	end,
 	getStickerImageUri = function(p1)
 		-- upvalues: t (ref)

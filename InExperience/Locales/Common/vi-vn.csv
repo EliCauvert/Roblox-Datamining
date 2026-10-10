@@ -110,7 +110,6 @@ Authentication.SignUp.Action.Create,Tạo
 Authentication.SignUp.Action.CreateAccountSentenceCase,Tạo tài khoản
 Authentication.SignUp.Action.ExitModalLeave,Thoát
 Authentication.SignUp.Action.RespawnNow,Hồi sinh ngay
-Authentication.SignUp.Action.StartPlay,Bắt đầu chơi
 Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Thử đăng nhập lại
 Authentication.SignUp.Description.AccountAlreadyLinked,Tài khoản dùng cho {platformAccountName} đã được liên kết với một tài khoản Roblox. Vui lòng thử đăng nhập lại.
@@ -721,6 +720,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Danh mục *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,Khác
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Chọn một danh mục
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Vấn đề với việc mua hàng
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,Đề xuất
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Tối đa {MAX} ký tự
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Chi tiết *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Bỏ chọn
@@ -728,6 +728,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Hãy cung 
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Hãy mô tả vật phẩm bị mất và lần cuối bạn nhìn thấy vật phẩm là khi nào. Nếu tài khoản của bạn bị hack, vui lòng cho biết mã biên bản CS của Roblox và mọi chi tiết liên quan."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Vui lòng mô tả yêu cầu hoặc sự cố bạn gặp tại đây. Hãy chia sẻ thật cụ thể để giúp chúng tôi hiểu rõ tình hình.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Hãy cho chúng tôi biết khi đó bạn muốn mua gì, sự cố xảy ra khi nào và tổng giá trị (ví dụ: 500 Robux hoặc 4,99 USD). Vui lòng gửi kèm thông báo lỗi mà bạn gặp (nếu có)."
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,"Chia sẻ những điều bạn muốn bổ sung hoặc cải thiện, và lý do tại sao điều đó sẽ giúp trò chơi trở nên hay hơn."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Bạn muốn báo cáo vi phạm?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Vậy hãy gửi báo cáo.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Chọn
@@ -1253,6 +1254,19 @@ Corescripts.AvatarContextMenu.FriendRequestPending,Yêu Cầu Kết Bạn Đang 
 Corescripts.AvatarContextMenu.Friends,Bạn Bè
 Corescripts.AvatarContextMenu.PlayerBlocked,Đã Chặn Một Người
 Corescripts.AvatarContextMenu.Wave,Sóng
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,Biểu Đồ
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Tiếp Tục Chơi
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Dịch chuyển
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Được Roblox đề xuất
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Trang Chủ Khác
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Đề Xuất Trang Chủ
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Quảng Cáo Trên Cổng Thông Tin
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Quảng Cáo Tìm Kiếm
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Quảng Cáo Được Tài Trợ
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Cuộn xuống
 Feature.Accessibility.Action.ScrollUp,Cuộn lên
@@ -4860,7 +4874,7 @@ InGame.Chat.Response.EmotesNotSupported,Bạn không thể sử dụng Biểu C�
 InGame.Chat.Response.EmotesTemporarilyUnavailable,Bạn hiện không sử dụng được Biểu Cảm.
 InGame.Chat.Response.EmotesWrongAvatarType,Chỉ avatar R15 mới sử dụng được Biểu Cảm.
 InGame.CommonUI.Badge.Popup.LearnMoreLink,
-InGame.CommonUI.Button.KeepPlaying,Tiếp Tục Chơi
+InGame.CommonUI.Button.KeepPlaying,
 InGame.CommonUI.Button.Ok,
 InGame.CommonUI.Button.Retry,
 InGame.CommonUI.Label.Custom,

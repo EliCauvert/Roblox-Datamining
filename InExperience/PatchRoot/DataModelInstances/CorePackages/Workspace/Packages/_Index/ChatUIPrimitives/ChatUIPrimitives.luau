@@ -2,6 +2,7 @@
 
 return {
 	ChatInputBarView = require(script.Components.ChatInputBar.ChatInputBarView),
+	chatTabNavigationSignal = require(script.chatTabNavigationSignal),
 	["jest.config"] = script["jest.config"],
 	["jest.bench.config"] = script["jest.bench.config"],
 	MessageLayoutContainer = require(script.Components.MessageLayoutContainer.MessageLayoutContainer),
@@ -27,6 +28,8 @@ return {
 	},
 	Flags = {
 		FFlagExpChatAddressFrame0Flash = require(script.Flags.FFlagExpChatAddressFrame0Flash),
-		FFlagExpChatPerfTrackerTabName = require(script.Flags.FFlagExpChatPerfTrackerTabName)
+		FFlagExpChatExpressionTrayReducedMotion = require(script.Flags.FFlagExpChatExpressionTrayReducedMotion),
+		FFlagExpChatPerfTrackerTabName = require(script.Flags.FFlagExpChatPerfTrackerTabName),
+		FFlagTCWTranslationSupport = require(script.Flags.FFlagTCWTranslationSupport)
 	}
 }

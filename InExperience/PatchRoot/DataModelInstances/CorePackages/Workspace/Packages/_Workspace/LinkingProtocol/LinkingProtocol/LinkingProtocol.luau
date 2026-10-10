@@ -5,14 +5,24 @@ local promiseModule = require(parent.Promise)
 local getFFlagEnableToSwitchToSettingsAppWithRouteLuaModule = require(script.Parent.Flags.getFFlagEnableToSwitchToSettingsAppWithRouteLua)
 local getFFlagEnableAdConsentAttributionModule = require(script.Parent.Flags.getFFlagEnableAdConsentAttribution)
 local _ = require(script.Parent.LinkingProtocolTypes)
+local deepLinkSourceModule = require(script.Parent.Enums.DeepLinkSource)
 local _ = require(script.Parent.Enums.SettingsRoute)
 local linkingService = require(parent.MockableProxyServices).LinkingService
 local t = {}
 t.__index = t
+t.DeepLinkSource = deepLinkSourceModule
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({ isListeningForURLs = false, urlConnection = nil }, t)
+local function getEngineFeature(p1)
+	return game:GetEngineFeature(p1)
+end
+
+function t.new(p1)
+	-- upvalues: getEngineFeature (ref), t (ref)
+	return setmetatable({
+		isListeningForURLs = false,
+		urlConnection = nil,
+		_getEngineFeature = p1 or getEngineFeature
+	}, t)
 end
 
 function t.registerURL(_, p1)
@@ -34,6 +44,22 @@ end
 function t.detectURL(_, p1)
 	-- upvalues: linkingService (ref)
 	linkingService:DetectUrl(p1)
+end
+
+function t:isInternalDlicEnabled()
+	return self._getEngineFeature("EnableDLICInternalIngressSeeding")
+end
+
+function t.createInternalDlic(_, p1, p2)
+	-- upvalues: linkingService (ref)
+	local var1 = linkingService:CreateInternalDlic(p1, p2)
+	
+	return if var1 == nil or var1 == "" then nil else var1
+end
+
+function t.detectDeeplinkIntent(_, p1)
+	-- upvalues: linkingService (ref)
+	linkingService:DetectDlic(p1)
 end
 
 function t.adConsentResolved(_, p1)

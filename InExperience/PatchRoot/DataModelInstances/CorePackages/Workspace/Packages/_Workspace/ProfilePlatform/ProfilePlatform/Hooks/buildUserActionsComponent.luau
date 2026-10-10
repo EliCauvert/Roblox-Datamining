@@ -8,33 +8,34 @@ local getSupportedActionsForProfileTypeModule = require(profilePlatform.Hooks.ge
 local fFlagProfilePlatformEnableVRModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableVR)
 local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
 local fFlagProfilePlatformEnableTradeItemsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
-local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 
-local function filterSupportedActions(p1)
-	-- upvalues: fFlagProfilePlatformCTAsRefactorModule (ref), getSupportedActionsForProfileTypeModule (ref), enumsModule (ref), cryoModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), fFlagProfilePlatformEnableTradeItemsModule (ref)
-	return cryoModule.List.filter(if fFlagProfilePlatformCTAsRefactorModule then getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.User) else cryoModule.Dictionary.values(enumsModule.ProfileActions), function(p2)
+local function _(p1)
+	-- upvalues: getSupportedActionsForProfileTypeModule (ref), enumsModule (ref), cryoModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), fFlagProfilePlatformEnableTradeItemsModule (ref)
+	return cryoModule.List.filter(getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.User), function(p2)
 		-- upvalues: enumsModule (copy), p1 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), fFlagProfilePlatformEnableTradeItemsModule (copy)
 		return if p2 == enumsModule.ProfileActions.QrCode then p1 and p1.isProfileQrCodeEnabled elseif p2 == enumsModule.ProfileActions.EditProfile then p1 and p1.areWebViewsSupported elseif fFlagProfilePlatformEnableCurrencyTransfer and p2 == enumsModule.ProfileActions.CurrencyTransfer then p1 and p1.canRenderTransferInProfile elseif fFlagProfilePlatformEnableTradeItemsModule and p2 == enumsModule.ProfileActions.TradeItems then p1 and p1.areWebViewsSupported elseif p2 == enumsModule.ProfileActions.Chat then p1 and p1.canSeeChatTab ~= false else true
 	end)
 end
 
 return function(p1, p2)
-	-- upvalues: socialCommonModule (ref), enumsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), fFlagProfilePlatformEnableVRModule (ref), filterSupportedActions (ref), getSupportedActionsForProfileTypeModule (ref)
+	-- upvalues: socialCommonModule (ref), enumsModule (ref), fFlagProfilePlatformEnableVRModule (ref), getSupportedActionsForProfileTypeModule (ref), cryoModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), fFlagProfilePlatformEnableTradeItemsModule (ref)
 	local var1 = if p1 == socialCommonModule.Enums.ContextualInfoTypes.OffNetworkFriendRequest then enumsModule.ContextualTypes.OffNetworkFriendRequest else nil
-	local var2 = if fFlagProfilePlatformCTAsRefactorModule and p2 and p2.isSelfView then true else nil
-	local var3 = if fFlagProfilePlatformCTAsRefactorModule then true else nil
+	local var2 = if p2 and p2.isSelfView then true else nil
 	
 	return if fFlagProfilePlatformEnableVRModule then {
+		isActionsV2Supported = true,
 		component = enumsModule.Components.Actions,
 		context = var1,
-		supportedActions = filterSupportedActions(p2),
-		excludeContextualActions = var2,
-		isActionsV2Supported = var3
+		supportedActions = cryoModule.List.filter(getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.User), function(p3)
+			-- upvalues: enumsModule (copy), p2 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), fFlagProfilePlatformEnableTradeItemsModule (copy)
+			return if p3 == enumsModule.ProfileActions.QrCode then p2 and p2.isProfileQrCodeEnabled elseif p3 == enumsModule.ProfileActions.EditProfile then p2 and p2.areWebViewsSupported elseif fFlagProfilePlatformEnableCurrencyTransfer and p3 == enumsModule.ProfileActions.CurrencyTransfer then p2 and p2.canRenderTransferInProfile elseif fFlagProfilePlatformEnableTradeItemsModule and p3 == enumsModule.ProfileActions.TradeItems then p2 and p2.areWebViewsSupported elseif p3 == enumsModule.ProfileActions.Chat then p2 and p2.canSeeChatTab ~= false else true
+		end),
+		excludeContextualActions = var2
 	} else {
+		isActionsV2Supported = true,
 		component = enumsModule.Components.Actions,
 		context = var1,
-		supportedActions = if fFlagProfilePlatformCTAsRefactorModule then getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.User) else nil,
-		excludeContextualActions = var2,
-		isActionsV2Supported = var3
+		supportedActions = getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.User),
+		excludeContextualActions = var2
 	}
 end

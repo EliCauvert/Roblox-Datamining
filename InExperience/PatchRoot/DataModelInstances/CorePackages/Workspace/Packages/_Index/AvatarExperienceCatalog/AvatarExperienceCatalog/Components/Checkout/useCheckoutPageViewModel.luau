@@ -59,7 +59,6 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
 local fFlagAXFixMISUpsellDiscountSummary = sharedFlagsModule.FFlagAXFixMISUpsellDiscountSummary
-local AXEnsureOfferBannerRefetchMIS = game:DefineFastFlag("AXEnsureOfferBannerRefetchMIS", false)
 local fFlagAXMISWithOffers = avatarExperienceFlagsModule.FFlagAXMISWithOffers
 local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
 local fFlagAXEnableExpiredUserLookCheckout = avatarExperienceFlagsModule.FFlagAXEnableExpiredUserLookCheckout
@@ -209,7 +208,7 @@ local var8 = function(p1, p2)
 end
 
 return function(p3)
-	-- upvalues: parent (ref), useAXCatalogStoreContextModule (ref), useNavigation (ref), useAvatarRoute (ref), useNetworking (ref), useDispatch (ref), fFlagAXMISWithOffers (ref), useSaveOptionsStoredValuesModule (ref), useSignalState (ref), fFlagAXMISWithBlackbird (ref), reactModule (ref), useSelector (ref), selectTryOnItems (ref), tutilsModule (ref), selectTryOnBodyColor3s (ref), selectTryOnBodyScales (ref), selectTryOnBodyPartColorRangeIds (ref), selectTryOnLookId (ref), fFlagAXCatalogMakeupSupport (ref), var1 (write), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), var2 (write), var3 (write), selectAvatarSceneLooks (ref), selectItemInfoForTryOnItems (ref), selectShouldTryOnWithoutEquippedItems (ref), selectLocalUserId (ref), selectUserRobux (ref), var4 (ref), useLocalization (ref), localizationRoactContext (ref), useAppPolicy (ref), useNavigationFocus (ref), fFlagAXEnableExpiredUserLookCheckout (ref), robloxEventReceiver (ref), notificationService (ref), avatarScreen (ref), getRobloxSubscriptionProducts (ref), mutedError (ref), useOffersCartPricingCalculationsForCartItemsModule (ref), cryoModule (ref), constants (ref), fFlagAXBackgroundsEquipTryOnCounters (ref), reportBackgroundUserActionCounter (ref), unifiedEventLogEnums (ref), sendUnifiedEventForDeferredAction (ref), cartIdService (ref), fFlagAXDurablesForMIS (ref), setSelectedTimedOptionModule (ref), var8 (ref), fIntBlackbirdUpsellMinPriceForDiscountInclusive (ref), fIntBlackbirdUpsellMaxPriceForDiscountInclusive (ref), toastType (ref), setCurrentToastMessage (ref), getTryOnItemsContainsOnlyMakeupTypesModule (ref), fFlagAXMISSaveWearFix (ref), saveAsMakeupLookThunkModule (ref), saveAsAvatarThunkModule (ref), getTryOnItemReducerKey (ref), fFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup (ref), avatarLastEquippedStateStore (ref), getEquippableAssetsFromTryOnItemsModule (ref), purchaseItemsSuccessThunkModule (ref), discountTypeEnum (ref), fFlagAXFixMISUpsellDiscountSummary (ref), closeCentralOverlay (ref), promiseModule (ref), avatarScreenProperties (ref), sendUnifiedEventsForMultiItemShopping (ref), getUnifiedEventsForMIS (ref), purchaseItemsModule (ref), mapPurchaseItemsResponseModule (ref), AXEnsureOfferBannerRefetchMIS (ref), getIsInsufficientRobuxError (ref)
+	-- upvalues: parent (ref), useAXCatalogStoreContextModule (ref), useNavigation (ref), useAvatarRoute (ref), useNetworking (ref), useDispatch (ref), fFlagAXMISWithOffers (ref), useSaveOptionsStoredValuesModule (ref), useSignalState (ref), fFlagAXMISWithBlackbird (ref), reactModule (ref), useSelector (ref), selectTryOnItems (ref), tutilsModule (ref), selectTryOnBodyColor3s (ref), selectTryOnBodyScales (ref), selectTryOnBodyPartColorRangeIds (ref), selectTryOnLookId (ref), fFlagAXCatalogMakeupSupport (ref), var1 (write), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), var2 (write), var3 (write), selectAvatarSceneLooks (ref), selectItemInfoForTryOnItems (ref), selectShouldTryOnWithoutEquippedItems (ref), selectLocalUserId (ref), selectUserRobux (ref), var4 (ref), useLocalization (ref), localizationRoactContext (ref), useAppPolicy (ref), useNavigationFocus (ref), fFlagAXEnableExpiredUserLookCheckout (ref), robloxEventReceiver (ref), notificationService (ref), avatarScreen (ref), getRobloxSubscriptionProducts (ref), mutedError (ref), useOffersCartPricingCalculationsForCartItemsModule (ref), cryoModule (ref), constants (ref), fFlagAXBackgroundsEquipTryOnCounters (ref), reportBackgroundUserActionCounter (ref), unifiedEventLogEnums (ref), sendUnifiedEventForDeferredAction (ref), cartIdService (ref), fFlagAXDurablesForMIS (ref), setSelectedTimedOptionModule (ref), var8 (ref), fIntBlackbirdUpsellMinPriceForDiscountInclusive (ref), fIntBlackbirdUpsellMaxPriceForDiscountInclusive (ref), toastType (ref), setCurrentToastMessage (ref), getTryOnItemsContainsOnlyMakeupTypesModule (ref), fFlagAXMISSaveWearFix (ref), saveAsMakeupLookThunkModule (ref), saveAsAvatarThunkModule (ref), getTryOnItemReducerKey (ref), fFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup (ref), avatarLastEquippedStateStore (ref), getEquippableAssetsFromTryOnItemsModule (ref), purchaseItemsSuccessThunkModule (ref), discountTypeEnum (ref), fFlagAXFixMISUpsellDiscountSummary (ref), closeCentralOverlay (ref), promiseModule (ref), avatarScreenProperties (ref), sendUnifiedEventsForMultiItemShopping (ref), getUnifiedEventsForMIS (ref), purchaseItemsModule (ref), mapPurchaseItemsResponseModule (ref), getIsInsufficientRobuxError (ref)
 	local purchasePromptLiteModule = require(parent.PurchasePromptLite)
 	local shoppingCartStore = useAXCatalogStoreContextModule().shoppingCartStore
 	local var10 = useNavigation()
@@ -233,10 +232,10 @@ return function(p3)
 	end
 	local useState = reactModule.useState
 	local var25 = if fFlagAXMISWithOffers and var14 then var14.getWearAfterPurchase() else true
-	useState, var68 = useState(var25)
+	useState, var67 = useState(var25)
 	local useState_1 = reactModule.useState
 	local var26 = if fFlagAXMISWithOffers and var14 then var14.getAddToAvatars() else false
-	useState_1, var69 = useState_1(var26)
+	useState_1, var68 = useState_1(var26)
 	local var27, var28 = reactModule.useState(false)
 	local var29 = nil
 	local var30 = nil
@@ -696,7 +695,7 @@ return function(p3)
 		var55.current = true
 	end, { var10 })
 	local var78 = reactModule.useCallback(function()
-		-- upvalues: var28 (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), var45 (ref), var41 (ref), var42 (ref), var43 (ref), var44 (ref), var11 (ref), avatarScreenProperties (copy), sendUnifiedEventsForMultiItemShopping (copy), getUnifiedEventsForMIS (copy), var15 (ref), var37 (ref), unifiedEventLogEnums (copy), mutedError (copy), purchaseItemsModule (copy), var12 (ref), var48 (ref), var70 (ref), mapPurchaseItemsResponseModule (copy), var74 (ref), tutilsModule (copy), AXEnsureOfferBannerRefetchMIS (copy), purchasePromptLiteModule (ref), p3 (ref), getIsInsufficientRobuxError (copy), var76 (ref), var10 (ref), avatarScreen (copy), var51 (ref)
+		-- upvalues: var28 (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), var45 (ref), var41 (ref), var42 (ref), var43 (ref), var44 (ref), var11 (ref), avatarScreenProperties (copy), sendUnifiedEventsForMultiItemShopping (copy), getUnifiedEventsForMIS (copy), var15 (ref), var37 (ref), unifiedEventLogEnums (copy), mutedError (copy), purchaseItemsModule (copy), var12 (ref), var48 (ref), var70 (ref), mapPurchaseItemsResponseModule (copy), var74 (ref), tutilsModule (copy), purchasePromptLiteModule (ref), p3 (ref), getIsInsufficientRobuxError (copy), var76 (ref), var10 (ref), avatarScreen (copy), var51 (ref)
 		var28(true)
 		
 		if fFlagAXMISEnableMultiShoppingUnifiedEvents and not pcall(function()
@@ -731,13 +730,11 @@ return function(p3)
 			makeupLookId = if fFlagAXMISEnableMultiShoppingUnifiedEvents then var42 else nil,
 			lineItems = var70()
 		}):andThen(function(p6)
-			-- upvalues: mapPurchaseItemsResponseModule (copy), var74 (copy), tutilsModule (copy), var37 (copy), AXEnsureOfferBannerRefetchMIS (copy), purchasePromptLiteModule (copy), p3 (copy)
+			-- upvalues: mapPurchaseItemsResponseModule (copy), var74 (copy), tutilsModule (copy), var37 (copy), purchasePromptLiteModule (copy), p3 (copy)
 			if p6.isJSONValid and p6.responseCode == 200 then
 				var74(mapPurchaseItemsResponseModule(p6.responseBody), tutilsModule.deepCopy(var37))
+				purchasePromptLiteModule.Events.firePurchaseCompleted()
 				
-				if AXEnsureOfferBannerRefetchMIS then
-					purchasePromptLiteModule.Events.firePurchaseCompleted()
-				end
 				if p3.fetchUserRobux then
 					p3.fetchUserRobux()
 				end
@@ -766,7 +763,7 @@ return function(p3)
 		if fFlagAXMISEnableMultiShoppingUnifiedEvents then var43 else nil,
 		if fFlagAXMISEnableMultiShoppingUnifiedEvents then var44 else nil,
 		if fFlagAXMISEnableMultiShoppingUnifiedEvents then var11 else nil,
-		if AXEnsureOfferBannerRefetchMIS then purchasePromptLiteModule.Events.firePurchaseCompleted else nil
+		purchasePromptLiteModule.Events.firePurchaseCompleted
 	})
 	
 	return {

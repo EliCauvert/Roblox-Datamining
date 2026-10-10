@@ -1,6 +1,7 @@
 ﻿local localizationService = game:GetService("LocalizationService")
 local squads = script:FindFirstAncestor("Squads")
 local parent = squads.Parent
+local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local cryoModule = require(parent.Cryo)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
@@ -31,7 +32,7 @@ local scheduledSquadActionEnumModule = require(squads.Enums.ScheduledSquadAction
 local scheduledSquadActionSourceEnumModule = require(squads.Enums.ScheduledSquadActionSourceEnum)
 
 return function(p1)
-	-- upvalues: useLocalUserId (ref), useNavigation (ref), useTokens (ref), useStore (ref), reactModule (ref), squadExternalContractContext (ref), useCurrentSquadId (ref), useLocalization (ref), getSubscribedScheduledSquads (ref), squadPromptType (ref), cryoModule (ref), view (ref), eventNamesModule (ref), scheduledSquadActionEnumModule (ref), scheduledSquadActionSourceEnumModule (ref), text (ref), localizationService (ref), avatarGroup (ref), avatarGroupType (ref), inputSize (ref), button (ref), unsubscribeFromScheduledSquad (ref), subscribeToScheduledSquad (ref), buttonVariant (ref), sheet (ref), loading (ref)
+	-- upvalues: useLocalUserId (ref), useNavigation (ref), useTokens (ref), useStore (ref), reactModule (ref), squadExternalContractContext (ref), useCurrentSquadId (ref), useLocalization (ref), getSubscribedScheduledSquads (ref), squadPromptType (ref), cryoModule (ref), view (ref), eventNamesModule (ref), scheduledSquadActionEnumModule (ref), scheduledSquadActionSourceEnumModule (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), text (ref), localizationService (ref), avatarGroup (ref), avatarGroupType (ref), inputSize (ref), button (ref), unsubscribeFromScheduledSquad (ref), subscribeToScheduledSquad (ref), buttonVariant (ref), sheet (ref), loading (ref)
 	local var1 = useLocalUserId()
 	local var2 = useNavigation()
 	local var3 = useTokens()
@@ -86,19 +87,23 @@ return function(p1)
 		preferCenterSheet = true,
 		onClose = var12,
 		isOpen = p1.isOpen,
-		snapPoints = { 0.4, 0.7 }
+		snapPoints = { 0.4, 0.7 },
+		testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-scheduled-parties-list-sheet" else nil
 	}, {
 		Header = reactModule.createElement(sheet.Header, {}, {
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-wrap text-heading-medium text-align-x-left",
-				Text = var7.upcomingPartiesText
+				Text = var7.upcomingPartiesText,
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-scheduled-parties-list-sheet--title" else nil
 			})
 		}),
 		Content = reactModule.createElement(sheet.Content, {}, {
-			Loading = if var8 then reactModule.createElement(loading, {}) else nil,
+			Loading = if var8 then reactModule.createElement(loading, {
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-scheduled-parties-list-sheet--loading" else nil
+			}) else nil,
 			ScheduledSquadsList = if var8 or #cryoModule.Dictionary.keys(var10) <= 0 then nil else reactModule.createElement(view, { tag = "auto-y size-full-0 col gap-xsmall" }, unpack(reactModule.useMemo(function()
-				-- upvalues: var10 (ref), var1 (ref), cryoModule (copy), reactModule (copy), view (copy), var12 (ref), var2 (ref), var5 (ref), eventNamesModule (copy), scheduledSquadActionEnumModule (copy), scheduledSquadActionSourceEnumModule (copy), var6 (ref), text (copy), var7 (ref), localizationService (copy), avatarGroup (copy), var3 (ref), avatarGroupType (copy), inputSize (copy), button (copy), var4 (ref), squadPromptType (copy), unsubscribeFromScheduledSquad (copy), var11 (ref), var13 (ref), subscribeToScheduledSquad (copy), buttonVariant (copy)
+				-- upvalues: var10 (ref), var1 (ref), cryoModule (copy), reactModule (copy), view (copy), var12 (ref), var2 (ref), var5 (ref), eventNamesModule (copy), scheduledSquadActionEnumModule (copy), scheduledSquadActionSourceEnumModule (copy), var6 (ref), fFlagSquadsEnableFoundationTestIdsModule (copy), text (copy), var7 (ref), localizationService (copy), avatarGroup (copy), var3 (ref), avatarGroupType (copy), inputSize (copy), button (copy), var4 (ref), squadPromptType (copy), unsubscribeFromScheduledSquad (copy), var11 (ref), var13 (ref), subscribeToScheduledSquad (copy), buttonVariant (copy)
 				local t = {}
 				
 				for i, v in var10 do
@@ -111,6 +116,7 @@ return function(p1)
 						return tostring(p2) == tostring(var1)
 					end) ~= nil
 					local dateTime = DateTime.fromIsoDate(v.startTime)
+					local scheduledGroupUpId = `--social-squad-scheduled-parties-list-sheet--item-{v.scheduledGroupUpId}`
 					table.insert(t, reactModule.createElement(view, {
 						tag = "size-full-0 auto-y col gap-xsmall radius-large padding-y-small padding-x-medium",
 						LayoutOrder = #t + 1,
@@ -126,17 +132,20 @@ return function(p1)
 								squadId = var6,
 								squadLocation = var5.squadLocation
 							})
-						end
+						end,
+						testId = if fFlagSquadsEnableFoundationTestIdsModule then scheduledGroupUpId else nil
 					}, {
 						TitleText = reactModule.createElement(text, {
 							LayoutOrder = 1,
 							tag = "size-full-0 auto-y text-title-large text-align-x-left text-truncate-end",
-							Text = var7.scheduledPartyText
+							Text = var7.scheduledPartyText,
+							testId = if fFlagSquadsEnableFoundationTestIdsModule then `{scheduledGroupUpId}--title` else nil
 						}),
 						DateTimeText = reactModule.createElement(text, {
 							LayoutOrder = 2,
 							tag = "size-full-0 auto-y text-body-medium text-align-x-left text-truncate-end",
-							Text = if dateTime then dateTime:FormatLocalTime("LLL", localizationService.RobloxLocaleId) else ""
+							Text = if dateTime then dateTime:FormatLocalTime("LLL", localizationService.RobloxLocaleId) else "",
+							testId = if fFlagSquadsEnableFoundationTestIdsModule then `{scheduledGroupUpId}--date-time` else nil
 						}),
 						SubscribedContainer = reactModule.createElement(view, {
 							LayoutOrder = 3,
@@ -151,16 +160,19 @@ return function(p1)
 									Transparency = var3.Color.Shift.Shift_200.Transparency
 								},
 								type = avatarGroupType.Stacked,
-								size = inputSize.XSmall
+								size = inputSize.XSmall,
+								testId = if fFlagSquadsEnableFoundationTestIdsModule then `{scheduledGroupUpId}--avatar-group` else nil
 							}),
 							NumberSubscribed = reactModule.createElement(text, {
 								LayoutOrder = 2,
 								tag = "size-full-0 auto-y text-caption-medium text-align-x-left",
-								Text = `{var7.goingText}`
+								Text = `{var7.goingText}`,
+								testId = if fFlagSquadsEnableFoundationTestIdsModule then `{scheduledGroupUpId}--going-label` else nil
 							})
 						}),
 						ActionButton = reactModule.createElement(button, {
 							LayoutOrder = 4,
+							testId = if fFlagSquadsEnableFoundationTestIdsModule then `{scheduledGroupUpId}--action-button` else nil,
 							onActivated = function()
 								-- upvalues: var14 (ref), var12 (copy), var5 (copy), var4 (copy), v (ref), squadPromptType (copy), var16 (ref), unsubscribeFromScheduledSquad (copy), cryoModule (copy), var1 (copy), var11 (copy), var10 (copy), i (ref), var13 (copy), subscribeToScheduledSquad (copy), eventNamesModule (copy), scheduledSquadActionEnumModule (copy), scheduledSquadActionSourceEnumModule (copy), var6 (copy)
 								if var14 then
@@ -207,7 +219,8 @@ return function(p1)
 			end, { var10, var12, var13 }))),
 			NoUpcomingScheduledSquads = if var8 or #cryoModule.Dictionary.keys(var10) ~= 0 then nil else reactModule.createElement(text, {
 				tag = "size-full-0 auto-y text-label-medium text-align-x-left",
-				Text = var7.noScheduledSquadsText
+				Text = var7.noScheduledSquadsText,
+				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-scheduled-parties-list-sheet--empty-label" else nil
 			})
 		})
 	})

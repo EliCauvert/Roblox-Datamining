@@ -13,28 +13,26 @@ local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfi
 local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
 local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
 local socialChipCountsRowContainer = require(profilePlatform.Components.UserProfileHeader.SocialChipCountsRow).SocialChipCountsRowContainer
-local profileActionBarModule = require(profilePlatform.Components.ProfileActionBar)
 local CTARowModule = require(profilePlatform.Components.CTARow)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableFontStylisticAlternativesOnSocialScreens = sharedFlagsModule.FFlagEnableFontStylisticAlternativesOnSocialScreens
 local fFlagEnableSocialTabsPage = sharedFlagsModule.FFlagEnableSocialTabsPage
-local var1 = if require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor) then CTARowModule else profileActionBarModule
 
 return function(p1)
-	-- upvalues: useTokens (ref), useProfileWrapperContextModule (ref), useProfileFormFactorModule (ref), enumsModule (ref), useProfileJsonComponentModule (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), constantsModule (ref), reactModule (ref), view (ref), userTile (ref), layoutMode (ref), var1 (ref), horizontalPageMargin (ref), socialChipCountsRowContainer (ref), fFlagEnableSocialTabsPage (ref)
-	local var2 = useTokens()
+	-- upvalues: useTokens (ref), useProfileWrapperContextModule (ref), useProfileFormFactorModule (ref), enumsModule (ref), useProfileJsonComponentModule (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), constantsModule (ref), reactModule (ref), view (ref), userTile (ref), layoutMode (ref), CTARowModule (ref), horizontalPageMargin (ref), socialChipCountsRowContainer (ref), fFlagEnableSocialTabsPage (ref)
+	local var1 = useTokens()
 	local profileId = useProfileWrapperContextModule().profileId
-	local var3 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
+	local var2 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
 	local userProfileHeader = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader) or {}
 	local names = userProfileHeader.names or {}
 	local username = names.username or ""
-	local var4 = if var3 then 128 else constantsModule.AVATAR_HEADSHOT_HEIGHT
+	local var3 = if var2 then 128 else constantsModule.AVATAR_HEADSHOT_HEIGHT
 	
 	return reactModule.createElement(view, {
 		tag = {
 			["col size-full-0 auto-y"] = true,
-			["gap-xxlarge"] = var3,
-			["gap-large"] = not var3
+			["gap-xxlarge"] = var2,
+			["gap-large"] = not var2
 		},
 		LayoutOrder = p1.layoutOrder
 	}, {
@@ -46,14 +44,14 @@ return function(p1)
 		}, {
 			Row = reactModule.createElement(view, {
 				tag = {
-					["row align-y-center gap-medium size-full-0 auto-y"] = var3,
-					["col gap-medium size-full-0 auto-y"] = not var3
+					["row align-y-center gap-medium size-full-0 auto-y"] = var2,
+					["col gap-medium size-full-0 auto-y"] = not var2
 				}
 			}, {
 				Identity = reactModule.createElement(view, {
 					LayoutOrder = 1,
-					tag = { grow = var3, ["size-full-0"] = not var3 },
-					Size = if var3 then UDim2.fromOffset(0, var4) else UDim2.new(1, 0, 0, var4)
+					tag = { grow = var2, ["size-full-0"] = not var2 },
+					Size = if var2 then UDim2.fromOffset(0, var3) else UDim2.new(1, 0, 0, var3)
 				}, {
 					UserTile = reactModule.createElement(userTile, {
 						userPresenceType = nil,
@@ -64,18 +62,18 @@ return function(p1)
 						isVerified = userProfileHeader.isVerified,
 						isRobloxAdmin = userProfileHeader.isRobloxAdmin,
 						layoutMode = layoutMode.wide,
-						titleStyle = if var3 then var2.Typography.HeadingLarge else var2.Typography.HeadingSmall,
-						subtitleStyle = if var3 then var2.Typography.BodyLarge else var2.Typography.BodyMedium
+						titleStyle = if var2 then var1.Typography.HeadingLarge else var1.Typography.HeadingSmall,
+						subtitleStyle = if var2 then var1.Typography.BodyLarge else var1.Typography.BodyMedium
 					})
 				}),
 				Actions = reactModule.createElement(view, {
 					LayoutOrder = 2,
 					tag = {
-						["grow auto-y"] = var3,
-						["size-full-0 auto-y"] = not var3
+						["grow auto-y"] = var2,
+						["size-full-0 auto-y"] = not var2
 					}
 				}, {
-					Actions = reactModule.createElement(var1, { layoutOrder = 1 })
+					Actions = reactModule.createElement(CTARowModule, { layoutOrder = 1 })
 				})
 			})
 		}),

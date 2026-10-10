@@ -21,7 +21,7 @@ local function structureKeyOf(p1)
 			table.insert(t, var1)
 		end
 	end
-	return tostring(p1.message.author ~= nil and p1.groupPosition.isFirst) .. "|" .. table.concat(t, ",")
+	return tostring(p1.message.author ~= nil and p1.groupPosition.isFirst) .. "|" .. table.concat(t, ",") .. (if p1.message.deliveryState ~= nil then "" else "|" .. p1.message.deliveryState)
 end
 
 return function(p2)
@@ -55,7 +55,8 @@ return function(p2)
 		end
 		return {
 			hasIdentity = var4.message.author ~= nil and var4.groupPosition.isFirst,
-			contents = t
+			contents = t,
+			deliveryState = var4.message.deliveryState
 		}
 	end, { p2, var2 })
 	
@@ -76,6 +77,7 @@ return function(p2)
 				}
 			end
 		end, { p2 }),
-		contents = var3.contents
+		contents = var3.contents,
+		deliveryState = var3.deliveryState
 	}
 end

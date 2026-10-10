@@ -5,7 +5,14 @@ local getCreationFlowStoreModule = require(momentsCreation.Stores.GetCreationFlo
 
 return function(value)
 	-- upvalues: getCreationFlowStoreModule (ref), momentsCommonModule (ref)
-	getCreationFlowStoreModule(false).clearEdits(value)
+	local var1 = getCreationFlowStoreModule(false)
+	local TTSAudio = var1.getTTSAudio(false)
+	
+	if TTSAudio ~= nil then
+		TTSAudio.destroy()
+		var1.setTTSAudio(nil)
+	end
+	var1.clearEdits(value)
 	local funnelTypes = momentsCommonModule.Analytics.FunnelEventNames.FunnelTypes
 	local sessionManager = momentsCommonModule.Analytics.SessionManager
 	sessionManager.endSession(funnelTypes.CreationFlow)

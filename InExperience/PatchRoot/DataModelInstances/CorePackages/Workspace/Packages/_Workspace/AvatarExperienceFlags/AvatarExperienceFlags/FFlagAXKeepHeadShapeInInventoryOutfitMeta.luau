@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXKeepHeadShapeInInventoryOutfitMeta", false) and (require(script.Parent.FFlagParseHeadShapeFromAPIResponse) and require(script.Parent.FFlagHeadRefinementFacialAnimationToggle))

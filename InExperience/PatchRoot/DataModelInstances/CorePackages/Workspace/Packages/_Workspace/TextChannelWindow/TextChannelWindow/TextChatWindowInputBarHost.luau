@@ -16,12 +16,14 @@ local fFlagExpChatTextChannelWindowThemeByBackgroundModule = require(script.Pare
 local fFlagExpChatComposerFigmaParity = require(parent.SharedFlags).FFlagExpChatComposerFigmaParity
 local fFlagExpChatTextChannelWindowExpressionTrayModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowExpressionTray)
 local fFlagExpChatTextChannelWindowFocusNavModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFocusNav)
+local fFlagDebugExpChatTextChannelWindowStaticExpressionsModule = require(script.Parent.Flags.FFlagDebugExpChatTextChannelWindowStaticExpressions)
+local getDebugExpressionCatalogModule = require(script.Parent.TextChannelWindowExpressionTray.getDebugExpressionCatalog)
 local sendExpressionModule = require(script.Parent.TextChannelWindowExpressionTray.sendExpression)
 local chatInputBarView = chatUIPrimitivesModule.ChatInputBarView
 local useFocusInputBar = chatUIPrimitivesModule.Hooks.useFocusInputBar
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), guiService (ref), useCanSendToChannel (ref), useInExperienceLocalization (ref), reactModule (ref), messageWriterContextModule (ref), getFFlagExpChatUseChatMuteStoreModule (ref), runVirtualChatCommandsModule (ref), messageModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), textChannelWindowAnalyticsModule (ref), loggerModule (ref), useFocusInputBar (ref), sendExpressionModule (ref), fFlagExpChatTextChannelWindowExpressionTrayModule (ref), fFlagExpChatComposerFigmaParity (ref), fFlagExpChatTextChannelWindowFocusNavModule (ref), chatInputBarView (ref), fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref)
+	-- upvalues: foundationModule (ref), guiService (ref), useCanSendToChannel (ref), useInExperienceLocalization (ref), reactModule (ref), messageWriterContextModule (ref), getFFlagExpChatUseChatMuteStoreModule (ref), runVirtualChatCommandsModule (ref), messageModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), textChannelWindowAnalyticsModule (ref), loggerModule (ref), useFocusInputBar (ref), sendExpressionModule (ref), fFlagExpChatTextChannelWindowExpressionTrayModule (ref), fFlagExpChatComposerFigmaParity (ref), fFlagDebugExpChatTextChannelWindowStaticExpressionsModule (ref), getDebugExpressionCatalogModule (ref), fFlagExpChatTextChannelWindowFocusNavModule (ref), chatInputBarView (ref), fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref)
 	local targetChannel = p1.targetChannel
 	local var1 = foundationModule.Hooks.useTokens()
 	local guiService_1 = p1.guiService or guiService
@@ -117,6 +119,7 @@ return reactModule.memo(function(p1)
 				-- upvalues: sendExpressionModule (copy), targetChannel (ref)
 				return sendExpressionModule(p2, targetChannel)
 			end, { targetChannel }),
+			fetchExpressionItems = if fFlagDebugExpChatTextChannelWindowStaticExpressionsModule then getDebugExpressionCatalogModule else nil,
 			canLocalUserChat = var8,
 			canSend = var2 and targetChannel ~= nil,
 			onKeyboardActivated = var9.focus,

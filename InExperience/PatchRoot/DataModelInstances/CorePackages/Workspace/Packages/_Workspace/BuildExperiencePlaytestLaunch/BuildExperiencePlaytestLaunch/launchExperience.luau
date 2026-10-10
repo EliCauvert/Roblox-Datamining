@@ -1,6 +1,7 @@
 ﻿local parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagBuildExperienceLibrary = sharedFlagsModule.FFlagBuildExperienceLibrary
+local fFlagConnectionRelaunchBuildPlaytest = sharedFlagsModule.FFlagConnectionRelaunchBuildPlaytest
 local fFlagDeferInExperienceRbxmDownload = sharedFlagsModule.FFlagDeferInExperienceRbxmDownload
 local fFlagEnableDeferredAssetManagerService = sharedFlagsModule.FFlagEnableDeferredAssetManagerService
 local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
@@ -11,8 +12,8 @@ local buildModeLaunchModule = require(script.Parent.BuildModeLaunch)
 local debug = creatorAgentChatModule.debug
 
 return function(p1, p2, p3, p4)
-	-- upvalues: buildModeLaunchModule (ref), gameParams (ref), fFlagBuildExperienceLibrary (ref), parent (ref), fFlagDeferInExperienceRbxmDownload (ref), fFlagEnableDeferredAssetManagerService (ref), debug (ref), experienceService (ref)
-	buildModeLaunchModule:set(if p4 ~= nil then nil else p4.sessionId, p1)
+	-- upvalues: buildModeLaunchModule (ref), fFlagConnectionRelaunchBuildPlaytest (ref), gameParams (ref), fFlagBuildExperienceLibrary (ref), parent (ref), fFlagDeferInExperienceRbxmDownload (ref), fFlagEnableDeferredAssetManagerService (ref), debug (ref), experienceService (ref)
+	buildModeLaunchModule:set(if p4 ~= nil then nil else p4.sessionId, p1, if fFlagConnectionRelaunchBuildPlaytest then p3 else nil)
 	local var1 = gameParams.fromPlaceId(p1, p3)
 	
 	if fFlagBuildExperienceLibrary then

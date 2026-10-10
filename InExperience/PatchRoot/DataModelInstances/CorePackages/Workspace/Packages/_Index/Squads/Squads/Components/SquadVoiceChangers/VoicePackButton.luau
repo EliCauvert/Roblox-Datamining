@@ -1,4 +1,5 @@
 ﻿local squads = script:FindFirstAncestor("Squads")
+local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local foundationModule = require(squads.Parent.Foundation)
 local dependenciesModule = require(squads.dependencies)
 local react = dependenciesModule.React
@@ -12,9 +13,14 @@ local t = {
 	onActivated = function() end
 }
 
+local function _(p1)
+	return string.lower(string.gsub(p1, "%s+", "-"))
+end
+
 return function(p1)
-	-- upvalues: cryo (ref), t (ref), useTokens (ref), react (ref), foundationModule (ref)
+	-- upvalues: cryo (ref), t (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), useTokens (ref), react (ref), foundationModule (ref)
 	local var1 = cryo.Dictionary.join(t, p1)
+	local var2 = if fFlagSquadsEnableFoundationTestIdsModule then var1.testId or `--social-squad-voice-changers--voice-pack-{string.lower(string.gsub(var5.voicePackName, "%s+", "-"))}` else nil
 	local size = useTokens().Size
 	local size1000 = size.Size_1000
 	local size600 = size.Size_600
@@ -23,12 +29,14 @@ return function(p1)
 	return react.createElement(foundationModule.View, {
 		tag = "size-full-0 auto-y radius-medium row align-x-left align-y-center gap-large padding-x-large padding-y-xsmall",
 		LayoutOrder = var1.LayoutOrder,
-		onActivated = var1.onActivated
+		onActivated = var1.onActivated,
+		testId = var2
 	}, {
 		Label = react.createElement(foundationModule.Text, {
 			tag = "auto-xy fill text-align-x-left text-label-medium content-emphasis text-truncate-end text-no-wrap",
 			LayoutOrder = 1,
-			Text = var1.voicePackName
+			Text = var1.voicePackName,
+			testId = if var2 then `{var2}--label` else nil
 		}),
 		RadioButtonContainer = react.createElement(foundationModule.View, {
 			tag = "auto-x row align-x-right align-y-center",
@@ -38,12 +46,14 @@ return function(p1)
 			DefaultIcon = react.createElement(foundationModule.Image, {
 				tag = "bg-action-subtle content-emphasis anchor-center-center position-center-center",
 				Image = "component_assets/circle_24_stroke_1",
-				Size = UDim2.new(0, size600, 0, size600)
+				Size = UDim2.new(0, size600, 0, size600),
+				testId = if var2 then `{var2}--radio` else nil
 			}, {
 				SelectedIcon = var1.isSelected and react.createElement(foundationModule.Image, {
 					tag = "bg-action-subtle content-emphasis anchor-center-center position-center-center",
 					Image = "component_assets/circle_16",
-					Size = UDim2.new(0, size400, 0, size400)
+					Size = UDim2.new(0, size400, 0, size400),
+					testId = if var2 then `{var2}--radio-selected` else nil
 				})
 			})
 		})

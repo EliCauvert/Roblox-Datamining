@@ -10,6 +10,7 @@ local inlineItemFrameModule = require(script.Parent.Inline.InlineItemFrame)
 local messageInlineItemModule = require(script.Parent.Inline.MessageInlineItem)
 local timestampItemModule = require(script.Parent.TimestampItem)
 local groupMessagesModule = require(script.Parent.groupMessages)
+local projectMessageEnvelopeModule = require(script.Parent.projectMessageEnvelope)
 local useMessageListLayoutModule = require(script.Parent.useMessageListLayout)
 local usePropSignalModule = require(chatUIPrimitives.Hooks.usePropSignal)
 local _ = require(script.Parent.Parent.Types)
@@ -55,25 +56,44 @@ local var4 = viewRecyclerModule.createRecyclableView(function(p1)
 end)
 
 return function(p1)
-	-- upvalues: usePropSignalModule (ref), reactModule (ref), signalsModule (ref), groupMessagesModule (ref), signalsReactModule (ref), var3 (ref), var1 (ref), var4 (ref), var2 (ref), getRowKey (ref), useMessageListLayoutModule (ref), viewRecyclerModule (ref), t (ref)
-	local getMessages = p1.getMessages
-	local var5 = usePropSignalModule(p1.maxGroupSize)
-	local var6 = usePropSignalModule(p1.maxGroupGapMs)
-	local var7 = usePropSignalModule(p1.groupingEnabled)
-	local var8 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), getMessages (ref), var7 (ref), groupMessagesModule (copy), var5 (ref), var6 (ref)
+	-- upvalues: reactModule (ref), signalsModule (ref), projectMessageEnvelopeModule (ref), usePropSignalModule (ref), groupMessagesModule (ref), signalsReactModule (ref), var3 (ref), var1 (ref), var4 (ref), var2 (ref), getRowKey (ref), useMessageListLayoutModule (ref), viewRecyclerModule (ref), t (ref)
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), p1 (ref), projectMessageEnvelopeModule (copy)
 		local t = {}
 		
 		return signalsModule.createComputed(function(p2)
-			-- upvalues: getMessages (copy), var7 (copy), groupMessagesModule (copy), t (write), var5 (copy), var6 (copy)
-			local var9 = getMessages(p2)
-			local var10 = if var7(p2) == false then groupMessagesModule.ungroupedRows(var9, t) else groupMessagesModule.groupMessages(var9, var5(p2), var6(p2), t)
-			t = var10
+			-- upvalues: p1 (copy), t (write), projectMessageEnvelopeModule (copy)
+			local t_1 = {}
+			local t_2 = {}
 			
-			return var10
+			for i, v in p1.getMessageEnvelopes(p2) do
+				local stableId = t[v.stableId]
+				local var6 = if stableId == nil or stableId.source ~= v then projectMessageEnvelopeModule(v) else stableId.rendered
+				t_1[v.stableId] = { source = v, rendered = var6 }
+				table.insert(t_2, var6)
+			end
+			t = t_1
+			
+			return t_2
 		end)
-	end, { getMessages, var5, var6, var7 }))
-	local var9 = reactModule.useCallback(function(p2)
+	end, { p1.getMessageEnvelopes })
+	local var6 = usePropSignalModule(p1.maxGroupSize)
+	local var7 = usePropSignalModule(p1.maxGroupGapMs)
+	local var8 = usePropSignalModule(p1.groupingEnabled)
+	local var9 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var5 (ref), var8 (ref), groupMessagesModule (copy), var6 (ref), var7 (ref)
+		local t = {}
+		
+		return signalsModule.createComputed(function(p2)
+			-- upvalues: var5 (copy), var8 (copy), groupMessagesModule (copy), t (write), var6 (copy), var7 (copy)
+			local var10 = var5(p2)
+			local var11 = if var8(p2) == false then groupMessagesModule.ungroupedRows(var10, t) else groupMessagesModule.groupMessages(var10, var6(p2), var7(p2), t)
+			t = var11
+			
+			return var11
+		end)
+	end, { var5, var6, var7, var8 }))
+	local var10 = reactModule.useCallback(function(p2)
 		-- upvalues: p1 (ref), var3 (copy), var1 (copy), var4 (copy), var2 (copy)
 		if p2.kind == "message" then
 			if p1.displayMode == "bubble" then
@@ -90,25 +110,25 @@ return function(p1)
 			end
 			error("Invalid display mode: " .. p8.displayMode)
 		end
-		error("Invalid row kind: " .. p10.kind)
+		error("Invalid row kind: " .. p11.kind)
 	end, { p1.displayMode })
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), getRowKey (copy)
-		return { items = var8, getItemKey = getRowKey }
-	end, { var8 })
-	local var11 = useMessageListLayoutModule()
+	local var11 = reactModule.useMemo(function()
+		-- upvalues: var9 (ref), getRowKey (copy)
+		return { items = var9, getItemKey = getRowKey }
+	end, { var9 })
+	local var12 = useMessageListLayoutModule()
 	
 	return {
 		listProps = reactModule.useMemo(function()
-			-- upvalues: viewRecyclerModule (copy), t (copy), var10 (ref), var11 (ref), var9 (ref)
+			-- upvalues: viewRecyclerModule (copy), t (copy), var11 (ref), var12 (ref), var10 (ref)
 			local cloned = table.clone(viewRecyclerModule.ChatPreset.create())
 			cloned.scrollingFrameProps = t
-			cloned.data = var10
-			cloned.layout = var11
+			cloned.data = var11
+			cloned.layout = var12
 			cloned.axis = viewRecyclerModule.Axis.Y
-			cloned.itemType = var9
+			cloned.itemType = var10
 			
 			return cloned
-		end, { var10, var11, var9 })
+		end, { var11, var12, var10 })
 	}
 end

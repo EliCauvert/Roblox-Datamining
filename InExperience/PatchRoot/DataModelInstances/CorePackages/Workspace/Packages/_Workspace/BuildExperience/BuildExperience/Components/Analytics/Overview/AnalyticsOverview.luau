@@ -9,17 +9,20 @@ return function(p1)
 	-- upvalues: reactModule (ref), analyticsWindowModule (ref), useAnalyticsOverviewViewModelModule (ref), analyticsOverviewViewModule (ref)
 	local var1, var2 = reactModule.useState(p1.initialWindowId or analyticsWindowModule.DEFAULT_WINDOW_ID)
 	local var3, var4 = reactModule.useState(nil)
-	local var5 = useAnalyticsOverviewViewModelModule(p1.universeId, analyticsWindowModule.WindowById[var1] or analyticsWindowModule.LastWeek, p1.initialMetricId or "UniqueUsersWithPlaySessions", var3, var4)
+	local var5 = analyticsWindowModule.WindowById[var1] or analyticsWindowModule.LastWeek
+	local var6 = useAnalyticsOverviewViewModelModule(p1.universeId, var5, p1.initialMetricId or "UniqueUsersWithPlaySessions", var3, var4)
 	
 	return reactModule.createElement(analyticsOverviewViewModule, {
-		overviewTitle = var5.overviewTitle,
-		keyStatsTitle = var5.keyStatsTitle,
-		instantStats = var5.instantStats,
-		statsCards = var5.statsCards,
-		windows = var5.windows,
+		overviewTitle = var6.overviewTitle,
+		keyStatsTitle = var6.keyStatsTitle,
+		instantStats = var6.instantStats,
+		statsCards = var6.statsCards,
+		windows = var6.windows,
 		selectedWindowId = var1,
 		onWindowSelected = var2,
-		sheet = var5.sheet,
+		universeId = p1.universeId,
+		window = var5,
+		sheet = var6.sheet,
 		onSheetClose = reactModule.useCallback(function()
 			-- upvalues: var4 (ref)
 			var4(nil)

@@ -11,6 +11,7 @@ local usePreferredInput = responsiveModule.usePreferredInput
 local useIsSpatial = responsiveModule.useIsSpatial
 local useVariableItemWidthScrollHandlersModule = require(variableItemWidthCarousel.useVariableItemWidthScrollHandlers)
 local fFlagLuaAppEnableVRCarouselScrolling = require(parent.SharedFlags).FFlagLuaAppEnableVRCarouselScrolling
+local fFlagSduiOptionSelectorHeaderComponent = require(parent.SharedFlags).FFlagSduiOptionSelectorHeaderComponent
 
 local function _(p1, p2, p3, p4)
 	-- upvalues: responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref)
@@ -24,7 +25,7 @@ local function _(p1, p2, p3, p4)
 end
 
 function VariableItemWidthCarousel(p1, p2)
-	-- upvalues: useDesignTokens (ref), useLastInput (ref), usePreferredInput (ref), useIsSpatial (ref), fFlagLuaAppEnableVRCarouselScrolling (ref), responsiveModule (ref), reactModule (ref), useVariableItemWidthScrollHandlersModule (ref), collectionHeader (ref), carouselScrollButtons (ref)
+	-- upvalues: useDesignTokens (ref), useLastInput (ref), usePreferredInput (ref), useIsSpatial (ref), fFlagLuaAppEnableVRCarouselScrolling (ref), responsiveModule (ref), reactModule (ref), useVariableItemWidthScrollHandlersModule (ref), fFlagSduiOptionSelectorHeaderComponent (ref), collectionHeader (ref), carouselScrollButtons (ref)
 	local var1 = useDesignTokens()
 	local var2 = useLastInput()
 	local var3 = usePreferredInput()
@@ -49,8 +50,8 @@ function VariableItemWidthCarousel(p1, p2)
 			scrollButtonsEnabled = if var3 == responsiveModule.Input.Directional then fFlagLuaAppEnableVRCarouselScrolling and var7 else true
 		end
 	end
-	local var8
-	local var9 = reactModule.useMemo(function()
+	local createElement_1
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: items (ref), renderItem (ref)
 		local t = {}
 		
@@ -59,17 +60,17 @@ function VariableItemWidthCarousel(p1, p2)
 		end
 		return t
 	end, { items, renderItem })
-	local var10, var11, var12, var13, var14 = useVariableItemWidthScrollHandlersModule(items, itemPadding, calculateItemWidth, scrollingFrameRef, p1.scrollSpeed)
-	local var15 = reactModule.useCallback(function(p3)
-		-- upvalues: var14 (ref), p1 (ref)
-		var14()
+	local var9, var10, var11, var12, var13 = useVariableItemWidthScrollHandlersModule(items, itemPadding, calculateItemWidth, scrollingFrameRef, p1.scrollSpeed)
+	local var14 = reactModule.useCallback(function(p3)
+		-- upvalues: var13 (ref), p1 (ref)
+		var13()
 		
 		if p1.onCanvasPositionChanged and p3 then
 			p1.onCanvasPositionChanged(p3.CanvasPosition)
 		end
-	end, { var14, p1.onCanvasPositionChanged })
+	end, { var13, p1.onCanvasPositionChanged })
 	local createElement = reactModule.createElement
-	local var16 = "Frame"
+	local var15 = "Frame"
 	local t = {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
@@ -88,13 +89,15 @@ function VariableItemWidthCarousel(p1, p2)
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, if var6 then p1.headerContentPadding or var1.Size.Size_400 else 0)
+			Padding = UDim.new(0, if var6 or fFlagSduiOptionSelectorHeaderComponent and p1.headerComponent ~= nil then p1.headerContentPadding or var1.Size.Size_400 else 0)
 		})
 	}
 	
-	if var6 then
-		var8 = reactModule.createElement
-		var8 = var8(collectionHeader, {
+	if fFlagSduiOptionSelectorHeaderComponent and p1.headerComponent then
+		createElement_1 = p1.headerComponent
+	elseif var6 then
+		createElement_1 = reactModule.createElement
+		createElement_1 = createElement_1(collectionHeader, {
 			LayoutOrder = 1,
 			title = p1.title,
 			subtitle = p1.subtitle,
@@ -107,9 +110,9 @@ function VariableItemWidthCarousel(p1, p2)
 			buttonText = p1.headerButtonText
 		})
 	else
-		var8 = nil
+		createElement_1 = nil
 	end
-	t_1.Header = var8
+	t_1.Header = createElement_1
 	t_1.ContentFrame = reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
@@ -127,8 +130,8 @@ function VariableItemWidthCarousel(p1, p2)
 			Size = UDim2.new(1, 0, 0, itemHeight),
 			ZIndex = 1,
 			ref = scrollingFrameRef,
-			[reactModule.Change.AbsoluteSize] = var14,
-			[reactModule.Change.CanvasPosition] = var15
+			[reactModule.Change.AbsoluteSize] = var13,
+			[reactModule.Change.CanvasPosition] = var14
 		}, {
 			reactModule.createElement(reactModule.Fragment, nil, {
 				reactModule.createElement("UIListLayout", {
@@ -138,7 +141,7 @@ function VariableItemWidthCarousel(p1, p2)
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					VerticalAlignment = Enum.VerticalAlignment.Center
 				}),
-				reactModule.createElement(reactModule.Fragment, nil, var9)
+				reactModule.createElement(reactModule.Fragment, nil, var8)
 			})
 		}),
 		ScrollButtons = if scrollButtonsEnabled then reactModule.createElement(carouselScrollButtons, {
@@ -147,14 +150,14 @@ function VariableItemWidthCarousel(p1, p2)
 			Position = UDim2.new(0.5, 0, 0, 0),
 			Size = UDim2.new(1, 2 * sideMargin, 0, itemHeight),
 			buttonOffsetFromEdge = var1.Size.Size_200,
-			handleScrollLeft = var10,
-			handleScrollRight = var11,
-			leftScrollingEnabled = var12,
-			rightScrollingEnabled = var13
+			handleScrollLeft = var9,
+			handleScrollRight = var10,
+			leftScrollingEnabled = var11,
+			rightScrollingEnabled = var12
 		}) else nil
 	})
 	
-	return createElement(var16, t, t_1)
+	return createElement(var15, t, t_1)
 end
 
 return reactModule.forwardRef(VariableItemWidthCarousel)

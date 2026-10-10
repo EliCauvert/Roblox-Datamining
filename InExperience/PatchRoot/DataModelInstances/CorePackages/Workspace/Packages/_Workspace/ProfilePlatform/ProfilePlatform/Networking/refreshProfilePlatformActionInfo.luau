@@ -3,16 +3,15 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local getProfilePlatformModule = require(profilePlatform.Networking.getProfilePlatform)
 local _ = require(profilePlatform.Types.Component)
 local fFlagProfilePlatformAddCurrentlyPlayingModule = require(profilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
-local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 local fFlagProfilePlatformRefreshActionsRespectPoliciesModule = require(profilePlatform.Flags.FFlagProfilePlatformRefreshActionsRespectPolicies)
 
 function GetProfilePlatform(p1, p2)
-	-- upvalues: fFlagProfilePlatformRefreshActionsRespectPoliciesModule (ref), enumsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), getProfilePlatformModule (ref)
+	-- upvalues: fFlagProfilePlatformRefreshActionsRespectPoliciesModule (ref), enumsModule (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), getProfilePlatformModule (ref)
 	local list = {
 		{ component = enumsModule.Components.UserProfileHeader },
 		if fFlagProfilePlatformRefreshActionsRespectPoliciesModule and p2 ~= nil then p2 else {
-			component = enumsModule.Components.Actions,
-			isActionsV2Supported = if fFlagProfilePlatformCTAsRefactorModule then true else nil
+			isActionsV2Supported = true,
+			component = enumsModule.Components.Actions
 		}
 	}
 	

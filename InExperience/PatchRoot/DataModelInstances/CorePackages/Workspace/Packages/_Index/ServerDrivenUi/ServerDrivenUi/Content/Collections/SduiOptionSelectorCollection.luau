@@ -9,11 +9,12 @@ local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiPlaceholderWrapper = require(parent.SduiSharedContent).SduiPlaceholderWrapper
 local sduiVariableItemWidthCarouselModule = require(serverDrivenUi.Content.Collections.SduiVariableItemWidthCarousel)
 local fFlagSduiOptionImpressionsEventName = require(parent.SharedFlags).FFlagSduiOptionImpressionsEventName
+local fFlagSduiOptionSelectorHeaderComponent = require(parent.SharedFlags).FFlagSduiOptionSelectorHeaderComponent
 local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 local luaAppNilCheckOptionItemConfigs = game:DefineFastFlag("LuaAppNilCheckOptionItemConfigs", false)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), sduiErrorType (ref), sduiComponentType (ref), fFlagSduiChartsSortDetailGenreFilter (ref), luaAppNilCheckOptionItemConfigs (ref), cryoModule (ref), sduiVariableItemWidthCarouselModule (ref), fFlagSduiOptionImpressionsEventName (ref), sduiPlaceholderWrapper (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), sduiErrorType (ref), sduiComponentType (ref), fFlagSduiChartsSortDetailGenreFilter (ref), luaAppNilCheckOptionItemConfigs (ref), cryoModule (ref), sduiVariableItemWidthCarouselModule (ref), fFlagSduiOptionImpressionsEventName (ref), fFlagSduiOptionSelectorHeaderComponent (ref), sduiPlaceholderWrapper (ref)
 	local sduiContext = p1.sduiContext
 	local paddingBetweenOptionSelectorAndCollection = p1.paddingBetweenOptionSelectorAndCollection or useTokens().Size.Size_400
 	local var1, var2 = reactModule.useState(nil)
@@ -126,6 +127,7 @@ return reactModule.memo(function(p1)
 			itemHeight = p1.itemHeight,
 			itemPadding = p1.itemPadding,
 			scrollButtonsEnabled = p1.scrollButtonsEnabled,
+			headerComponent = if fFlagSduiOptionSelectorHeaderComponent then p1.headerComponent else nil,
 			title = p1.title
 		}),
 		Collection = reactModule.createElement(sduiPlaceholderWrapper, {

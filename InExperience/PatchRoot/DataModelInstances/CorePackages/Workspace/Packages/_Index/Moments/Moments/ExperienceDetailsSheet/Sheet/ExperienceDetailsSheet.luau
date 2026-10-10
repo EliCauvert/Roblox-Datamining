@@ -9,12 +9,15 @@ local useHideTabBarWhileOpenModule = require(script.Parent.useHideTabBarWhileOpe
 local useJoinExperienceModule = require(moments.ExperienceDetailsSheet.Join.useJoinExperience)
 local fFlagMomentsFixRecommendationImpressionLifecycleModule = require(moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
 local fFlagMomentsTabsBehindModalScrimModule = require(moments.Flags.FFlagMomentsTabsBehindModalScrim)
+local fFlagMomentsNavigationEventModule = require(moments.Flags.FFlagMomentsNavigationEvent)
+local fFlagMomentsPlayEventModule = require(moments.Flags.FFlagMomentsPlayEvent)
+local navigationDestinationTypeModule = require(moments.Enums.NavigationDestinationType)
 local analytics = momentsCommonModule.Analytics
 local eventNames = analytics.EventNames
 local fireAnalyticsEvent = analytics.fireAnalyticsEvent
 
 return reactModule.memo(function()
-	-- upvalues: getExperienceDetailsSheetStoreModule (ref), useSignalState (ref), useJoinExperienceModule (ref), fFlagMomentsTabsBehindModalScrimModule (ref), useHideTabBarWhileOpenModule (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), analytics (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), inExperienceDetailsPromptContainerModule (ref)
+	-- upvalues: getExperienceDetailsSheetStoreModule (ref), useSignalState (ref), useJoinExperienceModule (ref), fFlagMomentsTabsBehindModalScrimModule (ref), useHideTabBarWhileOpenModule (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), analytics (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), fFlagMomentsNavigationEventModule (ref), navigationDestinationTypeModule (ref), fFlagMomentsPlayEventModule (ref), inExperienceDetailsPromptContainerModule (ref)
 	local var1 = getExperienceDetailsSheetStoreModule(false)
 	local var2 = useSignalState(var1.getIsOpen)
 	local var3 = useSignalState(var1.getContext)
@@ -44,12 +47,9 @@ return reactModule.memo(function()
 		universeId = tostring(var3.universeId),
 		onClose = var1.close,
 		onJoin = reactModule.useCallback(function(p1)
-			-- upvalues: var3 (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var4 (ref), var1 (ref)
+			-- upvalues: var3 (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), fFlagMomentsNavigationEventModule (copy), navigationDestinationTypeModule (copy), var4 (ref), fFlagMomentsPlayEventModule (copy), var1 (ref)
 			if var3 then
-				if fFlagMomentsFixRecommendationImpressionLifecycleModule and var3.onBeforeJoin ~= nil then
-					var3.onBeforeJoin()
-				end
-				var4(var3, p1)
+				var4(var3, p1, if fFlagMomentsPlayEventModule then if fFlagMomentsFixRecommendationImpressionLifecycleModule and var3.onBeforeJoin ~= nil then var3.onBeforeJoin(if fFlagMomentsNavigationEventModule then navigationDestinationTypeModule.ExperienceJoin else nil) else nil else nil)
 			end
 			var1.close()
 		end, { var4, var3, var1.close })

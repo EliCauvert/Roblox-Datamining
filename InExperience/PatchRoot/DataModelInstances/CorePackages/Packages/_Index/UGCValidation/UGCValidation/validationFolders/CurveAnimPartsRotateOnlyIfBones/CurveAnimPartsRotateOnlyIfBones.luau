@@ -5,7 +5,6 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local curveAnimationHierarchyUtilsModule = require(parent.util.CurveAnimationHierarchyUtils)
 local curveAnimBoneHierarchyUtilsModule = require(parent.util.CurveAnimBoneHierarchyUtils)
 local curveAnimTranslationUtilsModule = require(parent.util.CurveAnimTranslationUtils)
-local getFFlagUGCValidateEmotesBonesAllowedModule = require(parent.flags.getFFlagUGCValidateEmotesBonesAllowed)
 local getFFlagUGCValidateAnimPartsRotationOnlyModule = require(parent.flags.getFFlagUGCValidateAnimPartsRotationOnly)
 local getFFlagUGCValidateAnimTranslationThresholdModule = require(parent.flags.getFFlagUGCValidateAnimTranslationThreshold)
 local UGCValidateBodyPartTranslationMaxDistanceHundredths = game:DefineFastInt("UGCValidateBodyPartTranslationMaxDistanceHundredths", 100)
@@ -24,11 +23,6 @@ if getFFlagUGCValidateAnimPartsRotationOnlyModule() then
 else
 	t.conditionalData = { validationEnumsModule.SharedDataMember.curveAnimBoneData }
 end
-function t.fflag()
-	-- upvalues: getFFlagUGCValidateEmotesBonesAllowedModule (ref), getFFlagUGCValidateAnimPartsRotationOnlyModule (ref)
-	return getFFlagUGCValidateEmotesBonesAllowedModule() or getFFlagUGCValidateAnimPartsRotationOnlyModule()
-end
-
 t.expectedFailures = {}
 t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable

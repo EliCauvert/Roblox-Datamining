@@ -1,4 +1,5 @@
-﻿local t = {}
+﻿local getFFlagVoiceDebugConsoleV2Module = require(script.Parent.Components.VoiceDebug.GetFFlagVoiceDebugConsoleV2)
+local t = {}
 t.__index = t
 
 function t.new(p1)
@@ -85,39 +86,59 @@ function t:getData()
 	return self._data
 end
 
+if getFFlagVoiceDebugConsoleV2Module() then
+	function t:clone()
+		-- upvalues: t (ref)
+		local var5 = t.new(self._maxSize)
+		local t_1 = {}
+		
+		for i, v in self._data do
+			t_1[i] = { entry = v.entry }
+		end
+		for i_1, v_1 in self._data do
+			if v_1._next then
+				t_1[i_1]._next = t_1[i_1 % self._maxSize + 1]
+			end
+		end
+		var5._data = t_1
+		var5._backIndex = self._backIndex
+		
+		return var5
+	end
+end
 function t:at(p2)
 	assert(p2, "Cannot index CircularBuffer with nil")
-	local var5 = (self:getFrontIndex() + p2 - 2) % self._maxSize + 1
+	local var6 = (self:getFrontIndex() + p2 - 2) % self._maxSize + 1
 	
-	return if self._data[var5] then self._data[var5].entry else nil
+	return if self._data[var6] then self._data[var6].entry else nil
 end
 
 function t:reverseAt(p2)
-	local var5 = (self._backIndex - p2) % self._maxSize + 1
+	local var6 = (self._backIndex - p2) % self._maxSize + 1
 	
-	return if self._data[var5] then self._data[var5].entry else nil
+	return if self._data[var6] then self._data[var6].entry else nil
 end
 
 function t:push_back(p2)
 	local backIndex = self._backIndex
-	local var5 = self._backIndex + 1
+	local var6 = self._backIndex + 1
 	
-	if self._maxSize < var5 then
-		var5 = 1
+	if self._maxSize < var6 then
+		var6 = 1
 	end
-	local var6 = self._data[var5]
-	self._data[var5] = { entry = p2 }
+	local var7 = self._data[var6]
+	self._data[var6] = { entry = p2 }
 	
 	if backIndex > 0 then
-		self._data[backIndex]._next = self._data[var5]
+		self._data[backIndex]._next = self._data[var6]
 		
-		if var6 then
-			var6._next = nil
+		if var7 then
+			var7._next = nil
 		end
 	end
-	self._backIndex = var5
+	self._backIndex = var6
 	
-	return var6 and var6.entry
+	return var7 and var7.entry
 end
 
 return t

@@ -11,7 +11,7 @@ local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local profileTypes = enumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.UnlockChat] = if require(profilePlatform.Flags.FFlagProfilePlatformEnableUnlockChat) then function(p1)
+	[enumsModule.ProfileActions.UnlockChat] = function(p1)
 		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref), eventNamesModule (ref), startFacialAgeEstimation (ref), socialUpsellType (ref), upsellEntrySurfaceType (ref)
 		return {
 			variant = buttonVariant.Emphasis,
@@ -24,5 +24,5 @@ return {
 				end
 			}
 		}
-	end else nil
+	end
 }

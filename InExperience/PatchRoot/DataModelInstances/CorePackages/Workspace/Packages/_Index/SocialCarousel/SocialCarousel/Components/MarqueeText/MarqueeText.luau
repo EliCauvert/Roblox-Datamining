@@ -47,7 +47,7 @@ return function(p1)
 		var14.current = false
 		var12(0)
 		var10(false)
-	end, { p1.text, var3, var4 })
+	end, { p1.text, var3, var4, p1.runId })
 	local var19 = reactModule.useCallback(function(p2)
 		-- upvalues: var17 (ref), marqueeTextMotionModule (copy), var11 (ref), var13 (ref), var15 (ref), var2 (ref), var3 (ref), var14 (ref), var12 (ref), var10 (ref), p1 (ref)
 		if not var17 then return end

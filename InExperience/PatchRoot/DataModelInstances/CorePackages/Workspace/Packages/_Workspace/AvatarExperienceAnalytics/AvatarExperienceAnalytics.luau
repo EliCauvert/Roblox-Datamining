@@ -16,6 +16,7 @@
 	UnifiedEventLogConstants = require(script.UnifiedEventLogConstants),
 	UnifiedEventLogEnums = require(script.UnifiedEventLogEnums),
 	useUnifiedEventImpressionsReporter = require(script.useUnifiedEventImpressionsReporter),
+	useRequestImpressionsOnTagAdded = require(script.useRequestImpressionsOnTagAdded),
 	useUnifiedEventTagging = require(script.useUnifiedEventTagging),
 	TagBasedImpressionsDetector = require(script.TagBasedImpressionsDetector),
 	AvatarExperienceImpressionsDetector = require(script.AvatarExperienceImpressionsDetector),
