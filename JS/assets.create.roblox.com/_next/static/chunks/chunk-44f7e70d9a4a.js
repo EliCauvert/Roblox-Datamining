@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "428ec1e4-acc6-d704-e2ed-c00245d03802")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "2056735d-ee5e-cb80-6b91-a8256786e283")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -688,7 +688,7 @@
         y = e.i(917852),
         v = e.i(576069),
         g = e.i(663563);
-    let A = "".concat("https://assets.create.roblox.com/509481769d176d0b09fc72f8748a5c2c53774a17/assets", "/home/publish_eligibility_banner.webp"),
+    let A = "".concat("https://assets.create.roblox.com/eb3ad3460982c977b774de367f55aa527dc2c248/assets", "/home/publish_eligibility_banner.webp"),
         T = (0, l.withTranslation)(e => {
             var T;
             let {
@@ -2323,21 +2323,22 @@
     var t = e.i(157310),
         a = e.i(814975),
         n = e.i(605050);
-    e.s(["useCreatorEligibility", 0, function() {
+    let r = ["creatorEligibility"];
+    e.s(["creatorEligibilityQueryKeyPrefix", 0, r, "useCreatorEligibility", 0, function() {
         let {
             overrideUserId: e,
-            isReady: r = !0,
-            refetchInterval: s = !1
+            isReady: s = !0,
+            refetchInterval: i = !1
         } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, {
-            user: i
-        } = (0, a.useAuthentication)(), l = null == i ? void 0 : i.id, o = null != e ? e : l;
+            user: l
+        } = (0, a.useAuthentication)(), o = null == l ? void 0 : l.id, u = null != e ? e : o;
         return (0, t.useQuery)({
-            queryKey: ["creatorEligibility", null != o ? o : null],
+            queryKey: [...r, null != u ? u : null],
             queryFn: async () => n.default.coreContentGetCreatorEligibility({
-                userId: o
+                userId: u
             }),
-            enabled: r && !!o,
-            refetchInterval: s,
+            enabled: s && !!u,
+            refetchInterval: i,
             refetchIntervalInBackground: !0
         })
     }])
@@ -2967,5 +2968,5 @@
     d.displayName = "TextArea", e.s(["TextArea", 0, d])
 }]);
 
-//# debugId=428ec1e4-acc6-d704-e2ed-c00245d03802
-//# sourceMappingURL=1og15hfh9ryj_.js.map
+//# debugId=2056735d-ee5e-cb80-6b91-a8256786e283
+//# sourceMappingURL=0ryq5ah0j50cu.js.map

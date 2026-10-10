@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "0f65b1b3-0a5d-a867-4fcb-1462c604da6b")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "21f3d50f-984c-ce6d-8e6d-0cb480bfe412")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 428993, e => {
@@ -26,15 +26,10 @@
         }),
         a = (0, t.defineFlag)({
             namespace: "creator-business",
-            name: "creatorWalletsAnalyticsPreview",
-            defaultValue: !1
-        }),
-        o = (0, t.defineFlag)({
-            namespace: "creator-business",
             name: "newTransactionsFlag",
             defaultValue: !1
         });
-    e.s(["creatorWalletsAnalyticsPreview", 0, a, "enableVirtualTransactionsTab", 0, n, "isRevenueShareAgreementsEnabled", 0, r, "newCreatorWallets", 0, i, "newTransactionsFlag", 0, o])
+    e.s(["enableVirtualTransactionsTab", 0, n, "isRevenueShareAgreementsEnabled", 0, r, "newCreatorWallets", 0, i, "newTransactionsFlag", 0, a])
 }, 92174, e => {
     "use strict";
     var t = e.i(157700);
@@ -71,8 +66,13 @@
             namespace: "financial-platform",
             name: "taxFormDeliveryConsentRolloutPercentage",
             defaultValue: 100
+        }),
+        o = (0, t.defineFlag)({
+            namespace: "financial-platform",
+            name: "devexFinancialPolicyRolloutPercentage",
+            defaultValue: 0
         });
-    e.s(["isTaxDocumentationOpenToDevexEligible", 0, n, "isTaxFormDeliveryConsentEnabled", 0, i, "showOct20ShutoffBanner", 0, r, "taxFormDeliveryConsentRolloutPercentage", 0, a])
+    e.s(["devexFinancialPolicyRolloutPercentage", 0, o, "isTaxDocumentationOpenToDevexEligible", 0, n, "isTaxFormDeliveryConsentEnabled", 0, i, "showOct20ShutoffBanner", 0, r, "taxFormDeliveryConsentRolloutPercentage", 0, a])
 }, 887317, e => {
     "use strict";
     var t = e.i(677753),
@@ -1793,5 +1793,5 @@
     }])
 }]);
 
-//# debugId=0f65b1b3-0a5d-a867-4fcb-1462c604da6b
-//# sourceMappingURL=0w5d3op86jdqh.js.map
+//# debugId=21f3d50f-984c-ce6d-8e6d-0cb480bfe412
+//# sourceMappingURL=2nc2n60139xc8.js.map
